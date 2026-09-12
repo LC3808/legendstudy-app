@@ -70,11 +70,11 @@
   `codex/day-3-data-model-v01` in the official development checkout.
 - Read representative public source posts for modern options, legacy 가형/나형,
   calendar/academic-year differences and audio/script/landing-page attachments.
-- Designed eight tables with versioned nullable taxonomy mappings, raw labels,
+- Initial pre-review baseline (superseded by remediation below): designed eight tables with versioned nullable taxonomy mappings, raw labels,
   resource provenance/composite FK, source-link-first access and stable ingestion keys.
 - Added draft migration, offline parser/structural checker and future read-only
   inspection SQL; documented grants/RLS, indexes, cascade boundaries and review cases.
-- pglast 8.4 accepted 67 migration statements, two PL/pgSQL bodies and eight
+- Initial pre-review validation (historical only): pglast 8.4 accepted 67 migration statements, two PL/pgSQL bodies and eight
   inspection SELECTs; structural checks and diff checks passed. Five offline
   injected safety regressions were detected; credential-pattern scan found no matches.
   No SQL executed.
@@ -82,3 +82,26 @@
   No Flutter or platform/dependency changes, and no Supabase project/backend applied.
 - Local commit only; push/merge/application require later authorization. ChatGPT
   review followed by Claude RLS/FK/idempotency review is recommended before execution.
+
+## 2026-09-12 — Day 3 review fix
+
+- Applied owner-provided corrections following Claude verdict C against
+  `413b58849b1d395815a5090102aa2aa26c8f8b04`, on the same Day 3 branch.
+- Fixed source/slug identity, generated date sorting, soft merge, persistent
+  quarantine, mapping states, column exposure, taxonomy/content visibility and
+  profile/recent upsert contracts. Removed premature indexes/extension dependency.
+- Current inventory supersedes the historical baseline above: 68 statements,
+  9 tables/RLS tables, 15 policies, 9 non-constraint indexes, 7 triggers, 2 functions.
+  Fourteen SELECT-only review queries prepared, not executed.
+- Strengthened AST/grant/FK/function/trigger/index checks and checked-in mutation
+  regressions. Five tests pass, including 31 unsafe schema, two contract and three
+  inspection mutation cases. SQL/PLpgSQL grammar checks and diff whitespace check pass.
+- S-9 deliberately uses a verified-row ingestion contract, not a protection trigger.
+  Deferred URL UNIQUE pending evidence; notifications stay v1.0 with later schema.
+- Updated database/ingestion/status/decisions/architecture/product scope and README.
+  Complete Claude S-number mapping is unavailable in the supplied directive;
+  known S-7/S-8/S-9/S-12 decisions are documented without inventing the rest.
+- Owner confirms LegendStudy Supabase is not created/linked. No DB commands,
+  SQL execution, source import, SDK/UI work, remote push, merge or other project access.
+  Runtime validation remains explicitly pending. Follow-up commit preserves the
+  reviewed baseline; no amend.

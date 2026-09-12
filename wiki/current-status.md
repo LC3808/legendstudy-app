@@ -90,7 +90,7 @@ Last reviewed: 2026-09-12
 - `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
   360×640 display at 2× text scaling, config default/provider override).
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- Supabase remains uncreated/unverified by this task; Day 3 draft schema exists but is not deployed. No production ingestion exists.
+- The owner confirms Supabase is not created or linked; Day 3 draft schema exists but is not deployed. No production ingestion exists.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -146,31 +146,31 @@ Last reviewed: 2026-09-12
   final launcher icon and store registration remain manual follow-up work.
 
 
-## Day 3 design / verification (2026-09-12)
+## Day 3 review remediation / verification (2026-09-12)
 
-- Branch: `codex/day-3-data-model-v01`, based on updated main in
-  `~/development/legendstudy-app`; origin verified as the LegendStudy repository.
-- Draft: `supabase/migrations/20260912000100_initial_content_schema.sql`.
-- Eight proposed tables: source_posts, exams, subjects, exam_subjects, resources,
-  profiles, bookmarks, recent_views. No ingestion_runs or v2 feature tables.
-- Versioned/raw taxonomy, calendar versus academic year, same-exam resource FK,
-  source-link-first URLs, stable ingestion keys and user-owned upsert rules documented.
-- Four active public content tables, backend-only provenance, own-row personal
-  policies; explicit grants and RLS on all eight tables. 15 policies, 11 additional
-  indexes, two invoker clock functions and seven triggers in the draft.
-- Three source-grounded cases documented: recent 2026 May exam, legacy math 가형/나형,
-  English audio + script; separate calendar/academic-year example also verified
-  against source page text. No attachment binaries downloaded or validated.
-- Offline pglast 8.4 / PostgreSQL 18.4 parser accepted 67 migration statements and
-  two PL/pgSQL function bodies; 8 future SELECT-only inspection statements parsed.
-  Checked-in structural checker passes; five injected safety regressions were all
-  detected (RLS/owner omission, client content write, weakened FK, content cascade).
-  Credential-pattern scan found no matches. No SQL statements/function bodies executed.
-- `git diff --check` passes. Flutter/platform/brand/dependency files unchanged;
-  Flutter tests/builds not rerun for this SQL/documentation-only task.
-- RLS runtime, actual FK/trigger behavior, PostgREST upserts, extension availability
-  and query plans remain untested until separately approved DB validation.
-- No Supabase CLI application/reset/push, DB connection, project creation/linking,
-  remote Git push or merge. No keys, credentials, auth provider or storage setup.
-- Review guidance and future validation/rollback considerations are in
-  `supabase/README.md` and `wiki/database.md`. No design-task blocker.
+- Official checkout: `~/development/legendstudy-app`; origin LegendStudy verified.
+  Same branch `codex/day-3-data-model-v01`; review baseline
+  `413b58849b1d395815a5090102aa2aa26c8f8b04`. New follow-up commit, no amend.
+- Local schema/documentation/checker remediation complete. **LegendStudy Supabase
+  project not created/linked; DB unapplied; zero SQL execution**, local or remote.
+- Draft has 9 tables (existing eight + ingestion_quarantine), RLS on all 9,
+  15 policies, 9 non-constraint indexes, 7 triggers and 2 invoker functions.
+- Mandatory external source ID, deterministic immutable slug, generated sort_date,
+  duplicate soft-merge pointer, unmappable/optional verified confidence, restricted
+  column SELECT, taxonomy-independent content visibility and upsert grants updated.
+- Removed pg_trgm/GIN and broad filters index. Notification product scope remains
+  v1.0; its schema follows in a later v1.0 milestone. No data/taxonomy imported.
+- pglast 8.4 / PostgreSQL 18.4 grammar parses 68 migration statements, both PL/pgSQL
+  bodies and 14 future SELECT-only inspections. Checker and five regression test
+  methods pass (31 unsafe schema mutations, two contract and three inspection
+  mutations rejected; harmless AST formatting/reordering accepted).
+- Verified mapping protection is an ingestion contract, not a service_role-blocking
+  trigger. URL uniqueness remains deferred; ambiguous duplicate URLs are quarantined.
+- `git diff --check` passes. No credentials added; Flutter/platform/dependency/brand
+  files unchanged. Flutter tests/builds not rerun for schema/docs/checker-only edits.
+- Catalog resolution, generated-column behavior, RLS/ACLs, PostgREST upserts,
+  trigger/FK behavior and performance remain untested pending a separately authorized
+  LegendStudy project and explicit project-ref verification. No other project accessed.
+- No remote Git push or merge, no Supabase CLI/connection/create/link/reset/push.
+  No implementation blocker for this draft; independent re-review/runtime acceptance
+  remain later gates. See database.md, ingestion.md and supabase/README.md.

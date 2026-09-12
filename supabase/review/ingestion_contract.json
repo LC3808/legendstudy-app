@@ -1,0 +1,13 @@
+{
+  "source_conflict_target": [
+    "source",
+    "external_post_id"
+  ],
+  "slug_template": "legendstudy-{external_post_id}-{source_exam_key}",
+  "slug_mutable_after_assignment": false,
+  "automated_update_excluded_mapping_statuses": [
+    "verified"
+  ],
+  "duplicate_exam_normalized_url_action": "ingestion_quarantine",
+  "verified_update_workflow_required_before_ingestion": true
+}

@@ -78,3 +78,38 @@ Keep one recent_views row per `(user_id, exam_id)`, upserting the server timesta
 analytics event history is separate future scope. Day 3 produces a draft migration
 and offline static review only. No SQL application, project creation, remote push
 or merge is authorized by this design task.
+
+## 2026-09-12 — Day 3 independent-review remediation
+
+Claude's reported verdict was C (important corrections needed). Preserve the
+existing entity architecture and raw evidence; add a backend quarantine queue.
+
+1. LegendStudy's mandatory external post ID with source is the canonical ingestion
+   identity. URL is provenance/location, never a fallback conflict key.
+2. Assign `legendstudy-{external_post_id}-{source_exam_key}` once. main or stable
+   semantic keys identify source exams; never title, taxonomy or display position.
+3. Taxonomy activity does not control source-content publication. Publish reviewed
+   exams/occurrences/resources independently; inactive master joins fall back to raw labels.
+4. Source-link-first remains. Attachment identity must be deterministic; same-exam
+   normalized URL collisions go to quarantine. URL UNIQUE is deferred for lack of
+   evidence about legitimate reuse. Provenance corrections preserve resource UUIDs.
+5. Notifications remain v1.0 product scope, with specific schema deferred to a later
+   v1.0 milestone. No speculative profile arrays.
+6. pg_trgm and the broad active_filters index are deferred until measured need.
+   Stored sort_date is an exam-date sorting proxy, not a historical fact.
+7. Verified mappings are immutable to automated ingestion **by contract**. S-9 is
+   partially applied: no override GUC or service-role protection trigger in v0.1.
+   The checker requires the contract and document rule. Before actual ingestion,
+   assess a separate enforcement migration/management workflow; runtime protection
+   against arbitrary service_role writes is not claimed.
+8. ingestion_quarantine persists ambiguous evidence privately, including failures
+   whose normalized transaction rolled back. Only trusted backend CRUD; no app API.
+9. Duplicate exams remain inactive with merged_into_exam_id; trusted transactional
+   merges validate cycles and personal conflicts. No automatic personal migration.
+10. Profile id UPDATE enables key-preserving upsert; recent UPDATE grants only its
+    two conflict keys and the trigger stamps time. Both need actual API tests.
+
+The supplied directive identifies S-7/S-8 (taxonomy), S-9 (verified protection) and
+S-12 (profile upsert). It does not supply Claude's complete S-1–S-15 numbered review;
+other numbers cannot be reliably assigned. Coverage is recorded by directive topic
+rather than fabricating review IDs. Independent re-review has not been performed.

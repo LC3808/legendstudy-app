@@ -89,10 +89,10 @@ and [go_router](https://pub.dev/packages/go_router/versions/17.0.0).
 Data Model v0.1 and a draft migration now exist locally; no SQL was executed and
 no Supabase project was created or linked. `wiki/database.md` is the canonical
 entity/RLS/index specification; `wiki/ingestion.md` defines source identity,
-reprocessing and uncertainty. Database state remains unverified, not deployed.
+reprocessing and uncertainty. The owner confirms the LegendStudy project is not created/linked; the draft is unapplied.
 
 The proposed read path is public active exams → subject occurrences → resource
-links. Original post diagnostics stay backend-only in source_posts. Content writes
+links. Original post diagnostics and quarantine stay backend-only in source_posts and ingestion_quarantine. Content writes
 belong to trusted ingestion; user profile/bookmark/recent-view writes use a user
 session with RLS. Service-role credentials never enter the client.
 
@@ -106,9 +106,28 @@ mapping/date values. Fetch paginated exams separately from their resource lists.
 Auth-user ownership is independent of optional profiles. RecentViewsRepository
 should upsert `(user_id, exam_id)` and honor server timestamps; bookmark saves use
 insert-on-conflict-do-nothing semantics. Hidden exam joins become unavailable
-items that owners can still remove. Details and cursor null-year behavior are
+items that owners can still remove. Details and sort_date + id cursor NULL-tail behavior are
 specified in the database document.
 
 No Flutter files, dependencies, runtime behavior, signing, branding or platform
 identifiers changed in Day 3; actual repository/data-source implementation follows
 review and a separately authorized schema application.
+
+### Day 3 review: future repository/API contracts
+
+- Explicit column projections from database.md are mandatory, including nested
+  projections. Do not SELECT *; internal diagnostics are not client-granted.
+- Use left joins for optional taxonomy detail and raw_subject_label fallback.
+  Inactive taxonomy does not hide active exam occurrences or scoped resources.
+- Profile POST merge-upsert supplies id, display_name and grade_level only, conflict
+  target id. Owner RLS guards old/new rows; id UPDATE permits the unchanged key.
+- Recent POST merge-upsert supplies only user_id/exam_id with that conflict target;
+  omit id/viewed_at. The invoker trigger supplies viewed_at. API behavior is a
+  future actual-PostgREST test gate, not verified by the offline parser.
+- Feed uses generated sort_date DESC NULLS LAST + id DESC. Missing actual dates
+  remain unknown; sort_date is only a sorting proxy. Parameterized ILIKE starts
+  without pg_trgm; measure before adding a search index.
+- Stable source identity, slug, verified-row exclusion, persistent quarantine and
+  duplicate soft merge belong to trusted ingestion contracts, not Flutter.
+- Push notifications remain v1.0, with device tokens/preferences/delivery schema
+  designed in a later v1.0 milestone. No interest-subject array or SDK added now.

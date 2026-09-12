@@ -42,3 +42,12 @@ These may be promoted into v1.0 only by an explicit product decision recorded in
 ## UX principle
 
 Study material access should not require login unless the operation is inherently personal (save/sync/profile/etc.).
+
+## Day 3 schema boundary
+
+Push notifications remain in v1.0 product scope: new material and major exam
+schedule notifications. Data Model v0.1 covers content + basic personalization
+only. Device push tokens, notification preferences and delivery backend are
+intentionally deferred to a later **v1.0 implementation milestone**, not v1.1/v2.
+No profiles.interest_subjects array is added; any future subject preference uses
+an explicitly designed normalized relation.
