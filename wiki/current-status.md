@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — implementation kickoff / Flutter scaffold ready**
+**Phase 1 — Day 1 Flutter scaffold implemented and verified locally**
 
 ## Verified state
 
@@ -19,10 +19,10 @@ Last reviewed: 2026-09-12
 - `legendstudy.com` remains accessible as the source site and currently exposes 1,673 archive items
 - Representative 2020-era posts confirm older content patterns with multiple resources per post, including problem PDFs, answer/explanation PDFs, listening MP3, listening scripts, and grade-cut material
 - Historical naming differs materially from newer curricula (for example, legacy mathematics `가형/나형`), so ingestion must preserve raw labels and support taxonomy versioning/uncertainty
-- Flutter application scaffold has not yet been created
+- Flutter application scaffold implemented for iOS and Android with a Korean four-tab shell
 - Supabase project/schema for LegendStudy has not yet been created or verified
 - No production ingestion pipeline exists yet
-- No app build exists yet
+- Static analysis and all 4 baseline tests pass; Android debug APK and iOS simulator builds pass
 
 ## Operating model
 
@@ -52,13 +52,12 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Codex creates the Flutter scaffold and baseline folder architecture
-2. Establish package/bundle identifiers before platform-specific signing or OAuth setup
-3. Add baseline navigation, theme/design tokens, environment configuration pattern, linting, and smoke tests
-4. Define normalized data model v0.1 from representative current + legacy content patterns
-5. Prepare Supabase schema/migrations for direct user execution
-6. Build ingestion prototype and validate against representative posts across multiple years
-7. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation; these remain unverified where current tooling could not conclusively inspect them
+1. Review the Day 1 scaffold changes before merging the implementation branch.
+2. Confirm final app identifiers before signing, OAuth, or store registration.
+3. Define normalized data model v0.1 from representative current + legacy content.
+4. Prepare Supabase schema/migrations for direct user execution in a separate issue.
+5. Build ingestion prototype and validate representative posts across multiple years.
+6. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
 
 ## Known open questions
 
@@ -67,4 +66,44 @@ Last reviewed: 2026-09-12
 - Exact content taxonomy needed to represent historical posts consistently
 - PDF/audio storage strategy: source-link preservation vs selective mirroring
 - AdMob/IAP timing for v1.0
-- Final state-management package choice for the scaffold
+- Launcher icon replacement when original brand assets are supplied
+
+## Day 1 implementation details
+
+- Flutter 3.32.0 stable / Dart 3.8.0 actually used; dependencies locked.
+- Riverpod 3.3.2 for dependency/state composition; go_router 17.0.0 for routing.
+- Feature presentation folders, shared widgets, core configuration/theme, app composition.
+  Real domain/data layers are deferred until business logic and data access exist.
+- Home `/home`, Browse `/browse`, Saved `/saved`, Profile `/profile` are placeholders.
+- Orange accents with white/light surfaces, Korean Material localization, scalable text.
+- Android application ID/namespace and iOS bundle ID: temporary `dev.legendstudy.scaffold`.
+  Dart package: `legendstudy_app`. No production identity is confirmed.
+- No iOS development team or Android release signing configuration committed.
+- Public `APP_ENV` via Dart defines; local config ignored; no backend secrets required.
+- `flutter analyze`: passed with no findings.
+- `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
+  360×640 display at 2× text scaling, config default/provider override).
+- `flutter doctor -v`: all installed toolchains reported healthy.
+- Supabase remains uncreated/unverified; no schema or production ingestion changes.
+
+## Platform verification (2026-09-12)
+
+- `flutter build apk --debug`: passed; `build/app/outputs/flutter-apk/app-debug.apk`.
+  First build installed Flutter-required Android NDK 26.3.11579264; build took 626s.
+- `flutter build ios --simulator --debug`: passed; `build/ios/iphonesimulator/Runner.app`.
+- Installed and launched `dev.legendstudy.scaffold` using `xcrun simctl install/launch`
+  on iPhone 17 Pro simulator / iOS 26.5. Screenshot visually verified the Korean
+  home page, orange CTA, and four-tab shell. No device signing was needed.
+- `git diff --check`: passed; credential-pattern scan found no matches; ignore
+  rules checked for local config, `.env`, Android signing properties and Apple keys.
+- Initial sandbox restrictions on Git/SDK/simulator access were resolved through
+  approved scoped tool execution; no remaining build environment blocker.
+
+## Remaining manual / release work
+
+- Review and push/merge the local implementation branch; no remote publication yet.
+- Confirm production identifiers; configure signing only after confirmation.
+- Provide original brand assets and replace generated Flutter launcher icons.
+- Android device/emulator launch and signed physical iOS/release builds were not
+  tested; perform those checks before distribution. Neither release readiness nor
+  a deployed backend is implied by this scaffold.

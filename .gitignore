@@ -30,3 +30,12 @@ ios/Runner/GoogleService-Info.plist
 # Misc credentials
 *service-account*.json
 *credentials*.json
+
+# Local public configuration; do not put server secrets in client defines.
+config/*.json
+!config/*.example.json
+.flutter-plugins
+.flutter-plugins-dependencies
+*.pem
+*.key
+android/key.properties
