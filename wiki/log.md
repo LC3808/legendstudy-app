@@ -33,3 +33,10 @@
 - Updated README, current status, architecture, and design system. Secret-pattern
   scan and ignore checks passed. No Supabase schema, backend keys, or production
   signing configuration added. Original launcher branding remains follow-up work.
+- Pushed branch `codex/issue-1-flutter-scaffold` to GitHub and opened PR #2.
+- ChatGPT review checked routing, Riverpod composition, theme/config setup, test coverage,
+  secret handling, temporary platform identifiers, and wiki consistency; no blocking issue found.
+- PR #2 was marked ready and squash-merged into `main` as commit
+  `873f4e1e0d131bb81dfa63766ff51966764ddd42`; Issue #1 closed through the PR.
+- Post-merge `wiki/current-status.md` was corrected so the canonical status no longer
+  claims the implementation branch is local/unpublished.
