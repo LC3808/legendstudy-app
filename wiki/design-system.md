@@ -40,3 +40,18 @@ Use the existing LegendStudy identity as the basis for app branding. Preserve or
 - Maintain sufficient text/background contrast.
 - Do not rely on color alone to communicate state.
 - Ensure touch targets and typography are appropriate for student mobile use.
+
+## Day 1 implementation
+
+`lib/core/theme/app_theme.dart` implements the working tokens above in a reusable
+Material 3 light theme. Orange buttons use dark text; selected navigation uses
+the soft orange indicator with a dark icon and visible labels. Main backgrounds
+stay white, with warm navigation surfaces. Spacing: 24 logical pixels; accent
+container radius: 20. Buttons have at least 48 logical-pixel minimum dimensions.
+
+Placeholder content scrolls and is constrained to 600 logical pixels on wide
+screens. Korean Material localization is enabled with platform fonts. A widget
+test checks every tab at 360 × 640 and 2× text scaling for layout exceptions.
+This is baseline coverage, not a full accessibility audit. Launcher icons are
+unmodified Flutter placeholders; original LegendStudy logo assets are not in the
+repository and should be supplied before production icon work.

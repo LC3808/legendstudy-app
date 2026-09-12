@@ -15,3 +15,21 @@
 - Froze the existing `wiki/product-scope.md` as the initial v1.0 implementation scope.
 - Advanced project status from Phase 0 to **Phase 1 — implementation kickoff / Flutter scaffold ready**.
 - Sitemap/RSS/robots/direct attachment mechanics remain implementation-time verification items where current inspection was inconclusive.
+
+### Issue #1 — Day 1 Flutter scaffold
+
+- Implemented native iOS/Android Flutter shell with Korean Home, Browse, Saved,
+  and My Page destinations; feature-oriented presentation and documented future
+  domain/data boundaries.
+- Chose Riverpod 3.3.2 and go_router 17.0.0 with lifecycle-managed router and
+  independent tab branches; added orange/light theme tokens and public config pattern.
+- Used Flutter 3.32.0 / Dart 3.8.0. Temporary platform identity is
+  `dev.legendstudy.scaffold`; production identity and signing remain owner decisions.
+- Added strict analyzer settings and 4 passing tests for startup/navigation,
+  direct routes/recovery, 2× text scaling on a small display, and configuration.
+- `flutter analyze`, `flutter test`, Android debug APK and iOS simulator build passed.
+  Installed and launched on iPhone 17 Pro / iOS 26.5 simulator; home shell verified visually.
+- First Android build installed NDK 26.3.11579264. No unresolved build blocker.
+- Updated README, current status, architecture, and design system. Secret-pattern
+  scan and ignore checks passed. No Supabase schema, backend keys, or production
+  signing configuration added. Original launcher branding remains follow-up work.
