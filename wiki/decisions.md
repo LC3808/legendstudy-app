@@ -45,3 +45,98 @@ This decision replaces Day 1's temporary identity and is independent of Muselry.
 It does not imply Apple/Google registration, signing or OAuth configuration.
 If platform registration reports a conflict, report it to the owner and keep the
 choice unresolved rather than silently inventing another production identifier.
+
+
+## 2026-09-12 — Content normalization and source evidence
+
+Separate private source_posts from public content_items. One source post may
+contain multiple content items; exam-type items optionally have shared-ID exams
+metadata and raw subject occurrences. All content types may have resource links. Preserve raw labels and source provenance after normalization;
+unknown values remain NULL rather than forced into modern taxonomy. Curated
+subjects are versioned; historical variants require their own reviewed mappings.
+Calendar year and academic/CSAT year are distinct fields.
+
+## 2026-09-12 — Content access and personal data
+
+Public active content is readable without login; published descendants must also
+have a visible parent content item and subject occurrence when scoped. Mobile clients cannot write content
+or source metadata. Personal profiles/bookmarks/recent views are auth-user-owned
+under RLS. Auth-user removal cascades only personal data; content deletion is
+restricted and normal unpublishing is an explicit inactive state.
+
+## 2026-09-12 — Resource locations and ingestion identity
+
+Preserve source URLs first; landing pages are not assumed to be direct file URLs.
+No bulk mirroring or Supabase Storage setup in v0.1. Future mirrors must preserve
+original provenance. Persist stable ingestion keys independent of display order,
+normalized labels and mutable link queries. Ambiguous reconciliation requires
+review; unique constraints alone do not make parsing idempotent.
+
+## 2026-09-12 — Recent views and draft execution boundary
+
+Keep one recent_views row per `(user_id, content_item_id)`, upserting the server timestamp;
+analytics event history is separate future scope. Day 3 produces a draft migration
+and offline static review only. No SQL application, project creation, remote push
+or merge is authorized by this design task.
+
+## 2026-09-12 — Day 3 independent-review remediation
+
+Claude's reported verdict was C (important corrections needed). Preserve the
+existing entity architecture and raw evidence; add a backend quarantine queue.
+
+1. LegendStudy's mandatory external post ID with source is the canonical ingestion
+   identity. URL is provenance/location, never a fallback conflict key.
+2. Assign `legendstudy-{external_post_id}-{source_content_key}` once (key moved to content_items). main or stable
+   semantic keys identify source exams; never title, taxonomy or display position.
+3. Taxonomy activity does not control source-content publication. Publish reviewed
+   exams/occurrences/resources independently; inactive master joins fall back to raw labels.
+4. Source-link-first remains. Attachment identity must be deterministic; same-content
+   normalized URL collisions go to quarantine. URL UNIQUE is deferred for lack of
+   evidence about legitimate reuse. Provenance corrections preserve resource UUIDs.
+5. Notifications remain v1.0 product scope, with specific schema deferred to a later
+   v1.0 milestone. No speculative profile arrays.
+6. pg_trgm and the broad active_filters index are deferred until measured need.
+   Stored sort_date is an exam-date sorting proxy, not a historical fact.
+7. Verified mappings are immutable to automated ingestion **by contract**. S-9 is
+   partially applied: no override GUC or service-role protection trigger in v0.1.
+   The checker requires the contract and document rule. Before actual ingestion,
+   assess a separate enforcement migration/management workflow; runtime protection
+   against arbitrary service_role writes is not claimed.
+8. ingestion_quarantine persists ambiguous evidence privately, including failures
+   whose normalized transaction rolled back. Only trusted backend CRUD; no app API.
+9. Duplicate content remains inactive with merged_into_content_item_id; trusted transactional
+   merges validate cycles and personal conflicts. No automatic personal migration.
+10. Profile id UPDATE enables key-preserving upsert; recent UPDATE grants only its
+    two conflict keys and the trigger stamps time. Both need actual API tests.
+
+The supplied directive identifies S-7/S-8 (taxonomy), S-9 (verified protection) and
+S-12 (profile upsert). It does not supply Claude's complete S-1–S-15 numbered review;
+other numbers cannot be reliably assigned. Coverage is recorded by directive topic
+rather than fabricating review IDs. Independent re-review has not been performed.
+
+## 2026-09-12 — General public content layer (supersedes exam-centric draft)
+
+LegendStudy app uses a general public content layer (`content_items`).
+`source_posts` is ingestion/provenance-only, and `exams` is specialized metadata
+for exam-type content. Bookmarks and recent views target content_items, not exams.
+
+- Move common source identity, slug/title, original URL, publication and soft-merge
+  pointer to content_items. Keep one authoritative parent is_active; remove exams'
+  duplicate identity/publication columns. Assigned slug values remain stable.
+- Use exams.content_item_id as shared PK. A generated constant exam discriminator
+  with composite FK enforces exam-type specialization. Occurrences reference that
+  shared key; resource occurrence/content composite FK preserves same-exam integrity
+  with no redundant exam_id. Non-exam PDFs and attachment-free columns are valid.
+- Home is latest **known source** publication/modification (greatest of timestamps),
+  not ingestion time. No reliable modified time means publication fallback without
+  a synthetic bump. Exam sort_date remains separate historical-date sorting proxy.
+- Source classification is a reviewed ingestion step. Ambiguity persists privately
+  in quarantine; new resources/modified title never manufacture a new content ID.
+- Unified title/summary search covers university/year wording. Actual multi-year
+  essay evidence makes a universal single admission_year unsafe. Defer extra common
+  university/year fields and separate essay metadata until typed filtering is needed;
+  retain raw evidence. No university taxonomy/master now.
+- Native content cards/details may open original articles externally. Full article
+  bodies are deferred; normal app browsing never scrapes HTML or wraps the website.
+- Keep the initial migration filename because it is unapplied. Preserve the prior
+  review-fix commit and add a separate local follow-up; no push or DB application.

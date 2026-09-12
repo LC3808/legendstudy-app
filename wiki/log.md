@@ -62,3 +62,83 @@
 - PR #4 was squash-merged into `main` as commit
   `5699af00c34d5101483f9f2750d2474ecd9aa686`; Issue #3 closed through the PR.
 - Post-merge `wiki/current-status.md` was updated so canonical status matches the merged state.
+
+
+### Day 3 — Data Model v0.1 and Supabase SQL draft
+
+- Re-read canonical documents, verified origin/clean state, updated main and created
+  `codex/day-3-data-model-v01` in the official development checkout.
+- Read representative public source posts for modern options, legacy 가형/나형,
+  calendar/academic-year differences and audio/script/landing-page attachments.
+- Initial pre-review baseline (superseded by remediation below): designed eight tables with versioned nullable taxonomy mappings, raw labels,
+  resource provenance/composite FK, source-link-first access and stable ingestion keys.
+- Added draft migration, offline parser/structural checker and future read-only
+  inspection SQL; documented grants/RLS, indexes, cascade boundaries and review cases.
+- Initial pre-review validation (historical only): pglast 8.4 accepted 67 migration statements, two PL/pgSQL bodies and eight
+  inspection SELECTs; structural checks and diff checks passed. Five offline
+  injected safety regressions were detected; credential-pattern scan found no matches.
+  No SQL executed.
+- Updated database, ingestion, current-status, decisions and architecture wiki.
+  No Flutter or platform/dependency changes, and no Supabase project/backend applied.
+- Local commit only; push/merge/application require later authorization. ChatGPT
+  review followed by Claude RLS/FK/idempotency review is recommended before execution.
+
+## 2026-09-12 — Day 3 review fix
+
+- Applied owner-provided corrections following Claude verdict C against
+  `413b58849b1d395815a5090102aa2aa26c8f8b04`, on the same Day 3 branch.
+- Fixed source/slug identity, generated date sorting, soft merge, persistent
+  quarantine, mapping states, column exposure, taxonomy/content visibility and
+  profile/recent upsert contracts. Removed premature indexes/extension dependency.
+- Review-fix inventory at that commit (superseded by unified model below): 68 statements,
+  9 tables/RLS tables, 15 policies, 9 non-constraint indexes, 7 triggers, 2 functions.
+  Fourteen SELECT-only review queries prepared, not executed.
+- Strengthened AST/grant/FK/function/trigger/index checks and checked-in mutation
+  regressions. Five tests pass, including 31 unsafe schema, two contract and three
+  inspection mutation cases. SQL/PLpgSQL grammar checks and diff whitespace check pass.
+- S-9 deliberately uses a verified-row ingestion contract, not a protection trigger.
+  Deferred URL UNIQUE pending evidence; notifications stay v1.0 with later schema.
+- Updated database/ingestion/status/decisions/architecture/product scope and README.
+  Complete Claude S-number mapping is unavailable in the supplied directive;
+  known S-7/S-8/S-9/S-12 decisions are documented without inventing the rest.
+- Owner confirms LegendStudy Supabase is not created/linked. No DB commands,
+  SQL execution, source import, SDK/UI work, remote push, merge or other project access.
+  Runtime validation remains explicitly pending. Follow-up commit preserves the
+  reviewed baseline; no amend.
+
+## 2026-09-12 — Unified content model before deployment
+
+- Applied follow-up scope after review-fix commit 9a45b08, same Day 3 branch.
+  Revised the existing unapplied initial migration; no new migration or amend.
+- Added content_items for native search/Home/category/detail; moved common source
+  identity, slug/publication and merge state there. Exam extension uses shared PK
+  and enforced type discriminator. General resources, Saved and Recent target content.
+- Preserved versioned/raw taxonomy, same-content scope FK, owner RLS, column grants,
+  verified ingestion contract, quarantine and source-link-first behavior.
+- Home is source publication/update chronology; modified posts preserve parent IDs
+  and upsert resources. Private classification/quarantine precedes publication.
+- Read representative study collection (991), admissions column (927), university
+  essays (1612/1610) and exam pages; documented five cases, no binary downloads/imports.
+- Final draft: 74 statements, 10 RLS tables, 16 policies, 10 non-constraint indexes,
+  8 triggers, 2 functions. Fifteen future SELECT-only inspections, never executed.
+- Six offline regression methods pass: 45 schema, four personal target/policy, two
+  contract and three inspection mutations rejected. SQL/PLpgSQL parser and diff
+  whitespace checks pass. No credential-pattern matches in changed files.
+- Updated database/ingestion/architecture/product scope/status/decisions/README.
+  Supabase still not created/linked/applied. No SQL/DB commands, Flutter feature,
+  SDK, import, remote push or merge. Actual runtime acceptance remains pending.
+
+## 2026-09-13 — Final checker hardening
+
+- Applied the supplied Claude Final Delta Review verdict B (minor corrections before
+  merge) against b28c003 on the same Day 3 branch. Migration SQL is unchanged.
+- Added independent AST checks for slug/URL required global uniqueness, default-private
+  publication, generated-date input ranges and critical domain/order constraints.
+- Added 52 scalar mutation cases; all 14 test methods pass (106 negative cases total),
+  including formatting/comment and equivalent single-column UNIQUE acceptance.
+- Prepared orphan active exam SELECT-only inspection (16 inspection statements total)
+  and three conditional generated-column fallback notes. No fallback applied.
+- SQL/PLpgSQL parsing, checker and git diff --check pass. Updated README/status/database
+  minimally; no schema, Flutter, ingestion implementation or architecture changes.
+- No Supabase project/link/DB connection/SQL execution, remote push or merge. New
+  follow-up commit, no amend. Actual target runtime acceptance remains pending.

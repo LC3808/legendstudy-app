@@ -1,10 +1,10 @@
 # Current Status
 
-Last reviewed: 2026-09-12
+Last reviewed: 2026-09-13
 
 ## Phase
 
-**Phase 1 — Day 2 production identity and brand baseline merged to main**
+**Phase 1 — Day 3 unified content model and review fixes drafted locally, not applied**
 
 ## Verified state
 
@@ -23,7 +23,8 @@ Last reviewed: 2026-09-12
 - Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
 - Day 2 production identity/brand baseline is merged to `main` via PR #4
 - Day 2 squash merge commit: `5699af00c34d5101483f9f2750d2474ecd9aa686`
-- Supabase project/schema for LegendStudy has not yet been created or verified
+- Schema designed locally; no Supabase project/migration has been applied by this task.
+  The owner confirms the LegendStudy project is not created/linked; no remote DB queried.
 - No production ingestion pipeline exists yet
 - Day 2 static analysis and all 4 existing tests passed; Android debug APK and iOS simulator builds passed with the approved identity
 
@@ -55,8 +56,9 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Define normalized data model v0.1 from representative current + legacy content.
-2. Prepare Supabase schema/migrations for direct user execution in a separate task.
+1. Review the unified Day 3 content hierarchy/RLS/idempotency and shared exam-key design; local commit only.
+2. Resolve model/open questions and obtain explicit owner approval before any SQL execution.
+   User applies only to a verified separate LegendStudy Supabase project in a later task.
 3. Build ingestion prototype and validate representative posts across multiple years.
 4. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
 5. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
@@ -66,8 +68,8 @@ Last reviewed: 2026-09-12
 
 - Apple/Google registration availability and signing setup for the approved identity
 - Supabase project creation timing and environment naming
-- Exact content taxonomy needed to represent historical posts consistently
-- PDF/audio storage strategy: source-link preservation vs selective mirroring
+- Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
+- Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
 - Launcher icon replacement when original brand assets are supplied
 
@@ -88,7 +90,7 @@ Last reviewed: 2026-09-12
 - `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
   360×640 display at 2× text scaling, config default/provider override).
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- Supabase remains uncreated/unverified; no schema or production ingestion changes.
+- The owner confirms Supabase is not created or linked; Day 3 draft schema exists but is not deployed. No production ingestion exists.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -142,3 +144,55 @@ Last reviewed: 2026-09-12
 - No new features, Supabase project/schema, OAuth, AdMob, IAP or store registration.
 - No implementation/build blocker. Apple signing, Google/Apple/Kakao OAuth,
   final launcher icon and store registration remain manual follow-up work.
+
+
+## Day 3 unified model / verification (2026-09-12)
+
+- Same official checkout/branch: `~/development/legendstudy-app`,
+  `codex/day-3-data-model-v01`; LegendStudy origin verified. Prior review fix
+  `9a45b08d80585b23f17c87dd40d693fbae849258` remains intact; separate follow-up commit.
+- **Supabase project not created/linked, DB unapplied, zero SQL execution** locally
+  or remotely. Existing initial migration revised; no second migration or data import.
+- Ten tables/RLS tables, 16 policies, 10 non-constraint indexes, 8 triggers and
+  2 invoker functions; 74 migration statements. Public content_items now owns
+  identity/routes/publication, resources and personal references support all types.
+- Exams shared content_item_id PK + generated type discriminator/composite FK;
+  occurrence/resource same-content FK chain retains cross-exam protection. No
+  duplicate exam publication flag/source identity. Parent inactivity hides children.
+- Home uses latest known source publication/modification, not ingestion timestamps;
+  unified search returns parent cards, exam filters join only when needed.
+- Source examples checked: recent/historical exams, English practice PDF, historical
+  admissions column and university essay PDFs. Only page text/links inspected.
+- At the unified-model commit, pglast 8.4 / PostgreSQL 18.4 grammar passed SQL +
+  two PL/pgSQL bodies. Fifteen
+  SELECT-only inspection statements parsed, none executed. Six regression methods
+  pass, including 45 schema mutations, four personal-target/policy mutations, two
+  contract mutations and three inspection mutations; harmless reordering accepted.
+- `git diff --check` passes; no credential-pattern matches. Flutter/platform/UI/
+  dependencies unchanged; Flutter tests/builds not rerun for schema/docs/checker work.
+- RLS/runtime/catalog/ACL/trigger/PostgREST/performance acceptance remains pending
+  separately authorized LegendStudy setup and explicit project-ref verification.
+  Verified mapping protection remains by ingestion contract, not a DB override.
+- Notifications stay v1.0 with later schema. Article bodies/university metadata/full
+  text search remain deferred; source/title/summary evidence supports initial search.
+- No implementation blocker for this draft. No Supabase CLI/DB connection, unrelated
+  project access, remote Git push or merge. Independent re-review remains future work.
+
+## Day 3 final checker hardening (2026-09-13)
+
+- Owner-supplied Claude Final Delta Review verdict: **B. minor corrections before
+  merge**. Strengthened the offline gate on the same Day 3 branch against b28c003;
+  independent re-review of this follow-up remains pending.
+- Migration SQL byte-for-byte unchanged; schema counts remain 10 tables, 16 policies,
+  10 non-constraint indexes, 8 triggers, 2 functions and 74 migration statements.
+- Slug NOT NULL/global UNIQUE/regex, source URL collision guard, four default-private
+  publication flags, date/numeric ranges and critical enum/order CHECKs are locked.
+- Checker and 14 test methods pass: 106 unsafe mutations rejected, including 52 new
+  scalar cases. Benign formatting/comments and equivalent UNIQUE structure pass.
+  Sixteen future SELECT-only inspection statements parsed, not executed.
+- README adds three generated-column fallback options only after observed target
+  failure; orphan active exam inspection added without changing schema enforcement.
+- git diff --check passes. Supabase still not created/linked, DB unapplied, SQL/DB
+  execution absent. No Flutter edits, remote push, merge or other-project access.
+- No checker/schema mismatch or blocker found. Next: user push and commit/PR #5
+  final review, then separately authorized LegendStudy project/runtime work.

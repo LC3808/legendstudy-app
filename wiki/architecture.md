@@ -82,3 +82,56 @@ safe place for secrets. No backend keys are currently used or needed.
 
 Package references: [Riverpod](https://pub.dev/packages/flutter_riverpod/versions/3.3.2)
 and [go_router](https://pub.dev/packages/go_router/versions/17.0.0).
+
+
+## Day 3 unified data boundary — proposal, not integrated
+
+The owner confirms LegendStudy Supabase is not created/linked; all schema SQL is
+unapplied. database.md defines entities/security; ingestion.md defines source
+classification, reprocessing and quarantine. No Flutter/SDK integration exists.
+
+The app's public primary entity is **content_items**. source_posts is backend-only
+provenance/ingestion metadata. exams is an optional exam-type extension with shared
+content_item_id PK. General resources attach to content_items; scoped exam resources
+use the occurrence/content composite FK. Saved and Recent target all content types.
+
+### Repository and API boundaries
+
+- ContentRepository returns ContentSummary/ContentDetail cards and bounded parent
+  pages for Home, search and categories. DTOs use explicit nullable fields and the
+  exact SELECT projections in database.md, including nested projections; no `*`.
+- Search applies content type/title/summary/published-date criteria on parents.
+  Explicit year/grade/exam-type/subject filters use the optional exam/occurrence
+  relations and intentionally narrow results to exams. Parent paging precedes
+  resource expansion; use EXISTS or filtered relations to avoid duplicated cards.
+- Home recent updates uses generated feed_updated_at = greatest(source publication,
+  source modification), DESC NULLS LAST + id DESC. Local ingestion/update time never
+  drives this feed. Source update time unknown means publication fallback, or NULL
+  when both unknown. Exam-only chronology separately uses sort_date/content_item_id.
+- ExamRepository loads specialized calendar/academic-year/grade/type metadata by
+  content_item_id. Optional taxonomy joins use left joins/raw-label fallback;
+  inactive taxonomy never suppresses actual active content. Parent is_active is
+  authoritative; exams has no second publication flag.
+- Saved/Recent repositories use `(user_id, content_item_id)` for every type.
+  Bookmark inserts ignore duplicates. Recent POST merge-upsert payload contains
+  only those two keys, omitting id/viewed_at; trigger supplies time. Hidden content
+  becomes an unavailable item that its owner may still remove.
+- Profile POST upsert remains id/display_name/grade_level only. Owner RLS guards
+  old/new rows; unchanged id assignment is permitted. All API behavior is pending
+  actual PostgREST/runtime tests after separately authorized application.
+
+### Native screen routing
+
+Future content routes resolve a stable content slug (e.g. `/content/:slug`) to a
+native summary/detail shell. This is a contract, not a new implemented go_router
+route. Type determines optional detail data: exams load exam metadata and subject
+resources; study/essay items load general resources; columns/admissions can display
+a native title/summary/source action with no exam or attachment. Resource controls
+use known file/landing-page metadata. Opening the original externally is permitted;
+a WebView wrapper and runtime scraping are not the app architecture. A future
+native article body requires separate storage/rendering design.
+
+Content IDs/slugs survive source modifications and soft merges. Backend-only
+classification, source keys, diagnostic notes and quarantine do not enter public
+DTOs. No university master, article service, search engine, semantic classifier or
+notification infrastructure is added. Notifications remain a later v1.0 milestone.

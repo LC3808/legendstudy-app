@@ -1,0 +1,21 @@
+{
+  "source_conflict_target": [
+    "source",
+    "external_post_id"
+  ],
+  "slug_template": "legendstudy-{external_post_id}-{source_content_key}",
+  "slug_mutable_after_assignment": false,
+  "content_conflict_target": [
+    "source_post_id",
+    "source_content_key"
+  ],
+  "publication_owner": "content_items",
+  "personal_target": "content_items",
+  "uncertain_classification_action": "ingestion_quarantine",
+  "home_feed_basis": "latest_known_source_publication_or_update",
+  "automated_update_excluded_mapping_statuses": [
+    "verified"
+  ],
+  "duplicate_content_normalized_url_action": "ingestion_quarantine",
+  "verified_update_workflow_required_before_ingestion": true
+}
