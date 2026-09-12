@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — Day 1 Flutter scaffold implemented and verified locally**
+**Phase 1 — Day 1 Flutter scaffold merged to main**
 
 ## Verified state
 
@@ -19,10 +19,11 @@ Last reviewed: 2026-09-12
 - `legendstudy.com` remains accessible as the source site and currently exposes 1,673 archive items
 - Representative 2020-era posts confirm older content patterns with multiple resources per post, including problem PDFs, answer/explanation PDFs, listening MP3, listening scripts, and grade-cut material
 - Historical naming differs materially from newer curricula (for example, legacy mathematics `가형/나형`), so ingestion must preserve raw labels and support taxonomy versioning/uncertainty
-- Flutter application scaffold implemented for iOS and Android with a Korean four-tab shell
+- Flutter application scaffold is merged to `main` via PR #2
+- Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
 - Supabase project/schema for LegendStudy has not yet been created or verified
 - No production ingestion pipeline exists yet
-- Static analysis and all 4 baseline tests pass; Android debug APK and iOS simulator builds pass
+- Static analysis and all 4 baseline tests passed; Android debug APK and iOS simulator builds passed on the implementation branch before merge
 
 ## Operating model
 
@@ -44,20 +45,20 @@ Last reviewed: 2026-09-12
 
 - Flutter mobile app for iOS and Android
 - Supabase planned for auth, normalized content data, bookmarks/history/profile sync, and backend support
-- Router-based navigation
-- Explicit state-management choice during scaffold implementation
+- Router-based navigation using `go_router`
+- Riverpod for dependency/state composition
 - Feature-oriented code organization with presentation/domain/data separation where it adds value
 - No Supabase credentials or production secrets committed to Git
-- Initial UI must establish LegendStudy brand tokens and reusable design primitives before feature proliferation
+- Initial UI establishes LegendStudy brand tokens and reusable design primitives before feature proliferation
 
 ## Immediate next steps
 
-1. Review the Day 1 scaffold changes before merging the implementation branch.
-2. Confirm final app identifiers before signing, OAuth, or store registration.
-3. Define normalized data model v0.1 from representative current + legacy content.
-4. Prepare Supabase schema/migrations for direct user execution in a separate issue.
-5. Build ingestion prototype and validate representative posts across multiple years.
-6. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
+1. Confirm final app identifiers before signing, OAuth, or store registration.
+2. Define normalized data model v0.1 from representative current + legacy content.
+3. Prepare Supabase schema/migrations for direct user execution in a separate issue.
+4. Build ingestion prototype and validate representative posts across multiple years.
+5. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
+6. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
 
 ## Known open questions
 
@@ -99,11 +100,16 @@ Last reviewed: 2026-09-12
 - Initial sandbox restrictions on Git/SDK/simulator access were resolved through
   approved scoped tool execution; no remaining build environment blocker.
 
+## Review / merge status
+
+- PR #2 was reviewed against routing, Riverpod setup, theme/configuration, secret handling, tests, and wiki consistency.
+- No blocking defect was found for the Day 1 scaffold.
+- PR #2 was squash-merged into `main` on 2026-09-12.
+- No GitHub Actions workflow is configured yet; merge verification relies on the recorded local analyze/test/build results plus repository review.
+
 ## Remaining manual / release work
 
-- Review and push/merge the local implementation branch; no remote publication yet.
 - Confirm production identifiers; configure signing only after confirmation.
 - Provide original brand assets and replace generated Flutter launcher icons.
-- Android device/emulator launch and signed physical iOS/release builds were not
-  tested; perform those checks before distribution. Neither release readiness nor
-  a deployed backend is implied by this scaffold.
+- Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
+- Neither release readiness nor a deployed backend is implied by this scaffold.
