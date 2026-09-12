@@ -90,7 +90,7 @@
 - Fixed source/slug identity, generated date sorting, soft merge, persistent
   quarantine, mapping states, column exposure, taxonomy/content visibility and
   profile/recent upsert contracts. Removed premature indexes/extension dependency.
-- Current inventory supersedes the historical baseline above: 68 statements,
+- Review-fix inventory at that commit (superseded by unified model below): 68 statements,
   9 tables/RLS tables, 15 policies, 9 non-constraint indexes, 7 triggers, 2 functions.
   Fourteen SELECT-only review queries prepared, not executed.
 - Strengthened AST/grant/FK/function/trigger/index checks and checked-in mutation
@@ -105,3 +105,25 @@
   SQL execution, source import, SDK/UI work, remote push, merge or other project access.
   Runtime validation remains explicitly pending. Follow-up commit preserves the
   reviewed baseline; no amend.
+
+## 2026-09-12 — Unified content model before deployment
+
+- Applied follow-up scope after review-fix commit 9a45b08, same Day 3 branch.
+  Revised the existing unapplied initial migration; no new migration or amend.
+- Added content_items for native search/Home/category/detail; moved common source
+  identity, slug/publication and merge state there. Exam extension uses shared PK
+  and enforced type discriminator. General resources, Saved and Recent target content.
+- Preserved versioned/raw taxonomy, same-content scope FK, owner RLS, column grants,
+  verified ingestion contract, quarantine and source-link-first behavior.
+- Home is source publication/update chronology; modified posts preserve parent IDs
+  and upsert resources. Private classification/quarantine precedes publication.
+- Read representative study collection (991), admissions column (927), university
+  essays (1612/1610) and exam pages; documented five cases, no binary downloads/imports.
+- Final draft: 74 statements, 10 RLS tables, 16 policies, 10 non-constraint indexes,
+  8 triggers, 2 functions. Fifteen future SELECT-only inspections, never executed.
+- Six offline regression methods pass: 45 schema, four personal target/policy, two
+  contract and three inspection mutations rejected. SQL/PLpgSQL parser and diff
+  whitespace checks pass. No credential-pattern matches in changed files.
+- Updated database/ingestion/architecture/product scope/status/decisions/README.
+  Supabase still not created/linked/applied. No SQL/DB commands, Flutter feature,
+  SDK, import, remote push or merge. Actual runtime acceptance remains pending.

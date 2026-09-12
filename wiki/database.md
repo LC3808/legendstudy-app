@@ -1,438 +1,414 @@
-# Database — Data Model v0.1
+# Database — Data Model v0.1 / Unified Content
 
-## Status and boundary
+## Status and execution boundary
 
-**DRAFT ONLY. Schema designed locally; no Supabase project/migration has been applied.**
-No SQL in this proposal was executed, including against a local database. The owner confirms the LegendStudy Supabase project has not been created or linked;
-repository files are not evidence of deployment.
-The user applies SQL only after review and explicit approval in a later task.
+**DRAFT ONLY, NOT DEPLOYED.** The owner confirms the LegendStudy Supabase project
+has not been created or linked. No local/remote SQL or PL/pgSQL was executed; no
+DB connection, project lookup, import, seed or SDK integration was performed.
+Only the existing `supabase/migrations/20260912000100_initial_content_schema.sql`
+is revised. This is a forward migration for an empty application schema, not a
+replay-safe script. A DRAFT comment does not prevent future CLI execution.
+Application requires a later explicit authorization and LegendStudy project-ref
+verification. Never use another project's database/configuration.
 
-Draft: `supabase/migrations/20260912000100_initial_content_schema.sql`.
-This is a forward-only proposal for an empty LegendStudy application schema, not
-an idempotent setup script. No Flutter/Supabase SDK integration or seed data.
+The previous exam-centric draft is superseded **before deployment**. Search,
+Home, Saved and Recent target content_items. Source posts stay private provenance;
+exams only extends exam-type content. No production data needs conversion now.
 
-## Source evidence and modeling consequences
-
-Representative source pages were read on 2026-09-12, not exhaustively crawled:
-
-| Source | Observation | Model consequence |
-| --- | --- | --- |
-| [2026 May high-school grade 3](https://legendstudy.com/1705) | Multiple math options, paired problem/solution PDFs, Box-hosted English listening, grade-cut images | One exam → multiple subject occurrences → multiple resources; format and purpose are separate |
-| [2025 September / 2026 academic-year assessment](https://legendstudy.com/1686) | Title explicitly distinguishes calendar and academic years; exam date September 3, 2025 | `year=2025`, `academic_year=2026`; publication time is separate from exam date |
-| [2019 September grade 2](https://legendstudy.com/1415) | Separate math 가형/나형 labels, English audio and script links; a social-science heading contains inconsistent subject names | Preserve original labels; conflicting evidence requires review, not forced mapping |
-
-The requested “2026 September” is an example, not a verified record. Case A below
-uses the inspected 2026 May exam. No future/unobserved exam or missing attachment
-is invented. File labels/links were observed; binary MIME, byte size, playback,
-permanent URL stability and exhaustive resource counts were not verified.
-
-## Entity relationships
+## Entity relationships and same-content integrity
 
 ```mermaid
 erDiagram
-    SOURCE_POSTS ||--o{ EXAMS : primary_source
-    SOURCE_POSTS ||--o{ RESOURCES : provenance
+    SOURCE_POSTS ||--o{ CONTENT_ITEMS : originates
+    SOURCE_POSTS ||--o{ RESOURCES : attachment_provenance
     SOURCE_POSTS o|--o{ INGESTION_QUARANTINE : review_queue
-    EXAMS o|--o{ EXAMS : merged_into
+    CONTENT_ITEMS o|--o{ CONTENT_ITEMS : merged_into
+    CONTENT_ITEMS ||--o| EXAMS : optional_exam_extension
+    CONTENT_ITEMS ||--o{ RESOURCES : contains
     EXAMS ||--o{ EXAM_SUBJECTS : contains
-    SUBJECTS o|--o{ SUBJECTS : parent
+    SUBJECTS o|--o{ SUBJECTS : versioned_parent
     SUBJECTS o|--o{ EXAM_SUBJECTS : optional_mapping
-    EXAMS ||--o{ RESOURCES : contains
     EXAM_SUBJECTS o|--o{ RESOURCES : optional_scope
     AUTH_USERS ||--o| PROFILES : owns
     AUTH_USERS ||--o{ BOOKMARKS : owns
     AUTH_USERS ||--o{ RECENT_VIEWS : owns
-    EXAMS ||--o{ BOOKMARKS : saved
-    EXAMS ||--o{ RECENT_VIEWS : viewed
+    CONTENT_ITEMS ||--o{ BOOKMARKS : saved
+    CONTENT_ITEMS ||--o{ RECENT_VIEWS : viewed
 ```
 
-Personal data references `auth.users` directly; a missing/deleted optional profile
-does not prevent bookmarks or recent views. Auth users are supplied by Supabase,
-not created by this migration.
+`exams.content_item_id` is its **shared primary key**, not a second UUID. It gives
+one content item zero or one exam extension. A stored generated `exams.content_type`
+constant `'exam'`, plus composite FK `(content_item_id, content_type)` referencing
+`content_items(id, content_type)`, prevents an exam extension for a column/study/
+essay item and prevents changing a parent's type while the extension remains.
+The discriminator is an integrity mechanism, not another editable taxonomy.
 
-A post can yield zero, one, or many exams; **no unique FK on `exams.source_post_id`**.
-Each exam has one primary source and resources can cite another source post.
-There is no automatic cross-post exam deduplication: trusted ingestion reconciles
-an additional source to an existing exam when evidence is sufficient. A separate
-exam/source association table is deferred until multi-source exam-level metadata
-needs it. No `exam.pdf_url` shortcut.
+`exam_subjects.content_item_id` directly references `exams(content_item_id)`.
+`resources.content_item_id` references the common parent. Optional scoped FK
+`resources(exam_subject_id, content_item_id)` →
+`exam_subjects(id, content_item_id)` preserves the prior cross-exam protection.
+An occurrence cannot belong to non-exam content; a resource cannot borrow another
+content's occurrence. No redundant exam_id or copied parent ID is needed. Unscoped
+resources have NULL exam_subject_id and work for **any** content type. All content
+FKs DELETE RESTRICT and UPDATE NO ACTION; only auth-user deletions cascade.
 
-## Tables, columns and integrity
+## Tables and identity
 
-All application primary keys are UUID. Except `profiles.id` (the auth UUID),
-new IDs default to `gen_random_uuid()`. User IDs are never copied from another
-project. `created_at`/`updated_at` use `timestamptz`; six mutable tables share a
-schema-qualified `set_updated_at` trigger. Bookmarks only have `created_at`;
-recent views only need server-stamped `viewed_at`.
+### source_posts — backend ingestion/provenance only
 
-### source_posts — backend-only source identity
+UUID id; required source, external_post_id, url, title; optional category,
+source_published_at/source_updated_at, raw_excerpt, object raw_metadata,
+SHA-256 content_hash, parser_version, last_crawled_at; source_status
+unknown/available/missing/error; local created_at/updated_at.
 
-- `source`, required `external_post_id`, provenance/location `url`, exact `title`, `category`.
-- `source_published_at` and `source_updated_at` describe the website; local
-  `created_at`/`updated_at` describe ingestion, avoiding the ambiguous duplicate
-  `updated_at` proposed in the task outline.
-- Minimal `raw_excerpt`, object `raw_metadata`, optional SHA-256 `content_hash`,
-  `parser_version`, `last_crawled_at`, and `source_status` (unknown/available/missing/error).
-- `UNIQUE(source, external_post_id)` and `UNIQUE(url)`. The sole canonical ingestion conflict target is `(source, external_post_id)`.
-  LegendStudy numeric post IDs are mandatory. URL uniqueness is only a collision guard;
-  URL changes UPDATE the same source row. Missing IDs/conflicts go to quarantine.
-  Other sources without IDs require a later identity migration, never a URL fallback.
-- Raw metadata is private: observation labels, parser diagnostics and original URL,
-  never credentials, session tokens, student data or full HTML by default.
+For LegendStudy, numeric post IDs are mandatory. The sole source conflict target
+is `(source, external_post_id)`; UNIQUE(url) is a collision guard, not identity.
+Verified location changes UPDATE the same source row. Missing IDs/conflicting
+identity are quarantined, never resolved by a URL fallback. Supporting ID-less
+sources would require a later reviewed migration. No client API exposes this table.
 
-### exams — a normalized exam/session
+### content_items — public content, routes and publication
 
-- Required `source_post_id`, stable `source_exam_key`, `slug`, `title`.
-- Nullable `year` (calendar year), `academic_year` (source-labelled academic/CSAT
-  year), `exam_month` (nominal session), `exam_date` (actual date), `exam_round`.
-  `exam_month` need not equal the actual date's month: exams can be postponed.
-  If calendar year and date are both known, a CHECK enforces agreement.
-- Nullable integer `grade_level` in 1/2/3; unknown/other uses NULL plus
-  `raw_grade_label`. Grade 3 includes source-designated exams also taken by graduates.
-- Nullable `exam_type` with TEXT + CHECK: `school_assessment`, `national_mock`,
-  `evaluation_mock`, `csat`, `preliminary`, `other`; always retain `raw_exam_type`.
-  “전국연합학력평가” can map to national_mock after review; “학력평가” alone is not
-  enough to distinguish institution/type. `other` means known out-of-list type;
-  NULL means unknown. Preserve disagreement in `normalization_note`.
-- Nullable `curriculum_version`, `published_at`; publication is not an exam date
-  and is not an ingestion timestamp. Do not infer curriculum solely from a year.
-- `UNIQUE(source_post_id, source_exam_key)` makes multiple exams per post possible;
-  slug is a unique display route, not the ingestion conflict target. All content starts inactive.
-- First slug assignment is deterministic: `legendstudy-{external_post_id}-{source_exam_key}`.
-  Single-exam posts use `main`, e.g. `legendstudy-1705-main`. Multiple exams use stable
-  semantic ASCII keys such as `grade1`, `grade2`, `grade3`, `morning`, `afternoon`.
-  The key CHECK is `^[a-z0-9]+(-[a-z0-9]+)*$`. No positional numbering, display-order,
-  title romanization or taxonomy-derived key. Preserve the assigned slug on every rerun.
-- `sort_date` is a stored generated **sorting proxy**, not historical evidence:
-  actual `exam_date`, else first day of known year/month, else January 1 of known
-  year, else NULL. `pg_catalog.make_date` only uses current-row values. UUID only
-  breaks ties; publication/ingestion time is not substituted for an exam date.
-- Nullable `merged_into_exam_id` references exams with DELETE RESTRICT. The CHECK
-  forbids self-merge and an active duplicate. Canonical rows have no pointer;
-  duplicates stay inactive with a pointer. Trusted merge code must reject longer
-  cycles and resolve canonical roots. No personal migration trigger or hard delete.
-  See the transactional reconciliation contract in `wiki/ingestion.md`.
+UUID id; required source_post_id (RESTRICT), source_content_key, slug, content_type,
+title, source_url; optional summary, published_at, source_updated_at, thumbnail_url;
+stored generated feed_updated_at; is_active defaults false; optional
+merged_into_content_item_id (self FK RESTRICT); local created_at/updated_at.
 
-### subjects — curated versioned taxonomy
+- UNIQUE(source_post_id, source_content_key) permits several semantic items per post.
+  Single content uses `main`; multiple items use stable source-based keys such as
+  grade3, morning, essay-2019. Never array positions, display order, title hashes or
+  mutable taxonomy. source_content_key matches `^[a-z0-9]+(-[a-z0-9]+)*$`.
+- First slug is `legendstudy-{external_post_id}-{source_content_key}`. It is unique,
+  ASCII lowercase/hyphen and immutable to automated reprocessing. Former exam keys
+  migrate conceptually to the common key; `legendstudy-1705-main` stays unchanged.
+  No remaining exams.source_exam_key, slug, title or source_post_id.
+- Canonical types: `exam`, `study_material`, `education_column`, `university_essay`,
+  `admissions_info`, `other`. national_mock/csat etc. belong only in exams.exam_type.
+  New canonical types need a reviewed CHECK migration, not restructuring all children.
+- `source_url` is the public original-post link; source_posts need not be joined.
+  It is a curated public projection synchronized atomically with verified source
+  location changes. Attachment resources retain their own source URL/provenance.
+- `summary` is a short reviewed public description, not copied full article HTML.
+  Thumbnail is optional and only populated from verified safe source evidence.
+  Classification diagnostics/raw category evidence remain in private raw_metadata
+  keyed by source_content_key or quarantine, not extra public classification fields.
+- **is_active is the sole parent publication flag.** Exams has no duplicate flag.
+  Before publishing an exam item, trusted ingestion requires its reviewed extension;
+  the DB relationship deliberately remains 1:0..1, so publication completeness is
+  an ingestion validation gate, not a cross-table CHECK.
+- Merge state moved from exams to this common parent as merged_into_content_item_id.
+  CHECK forbids self-merge and active duplicates; canonical items have no pointer.
+  Trusted logic validates compatible types and longer cycles, reconciles personal
+  conflicts and retains inactive duplicate rows. No automatic migration/delete trigger.
 
-- `code`, `name`, optional `category`, required `taxonomy_version`, optional
-  `curriculum_version`, optional `parent_id`, `sort_order`, `is_active`.
-- Unique `(taxonomy_version, code)`. `(id, taxonomy_version)` supports composite
-  foreign keys that prevent cross-version mappings/parents.
-- `taxonomy_version` is our classification release, not automatically an official
-  curriculum name. Treat an accepted taxonomy release as immutable; corrections
-  that change meaning create a new version and explicit remapping.
-- `parent_id` is an optional display/filter grouping. Self-parent is forbidden;
-  longer cycles require trusted taxonomy validation before writes. Public reads
-  depend on the subject's own activity; deactivating a category is not an implicit
-  subtree operation. Ingestion must explicitly deactivate descendants if desired.
+### exams — specialized metadata
 
-Comparison: putting every observed label into the master causes duplicate/false
-modern categories; raw-only labels cannot support cross-exam filtering. Chosen
-hybrid: keep every observed label on `exam_subjects`; add historical master terms
-only after review. 가형/나형 remain distinct and are never silently treated as
-modern electives. A reviewed historical taxonomy may later introduce dedicated
-codes. No taxonomy seeds or unverified curriculum assignments in this draft.
+Shared content_item_id PK; generated type discriminator; optional calendar year,
+academic_year, nominal exam_month, actual exam_date, generated sort_date,
+grade_level, raw_grade_label, exam_type, raw_exam_type, exam_round,
+curriculum_version, normalization_note; created_at/updated_at.
 
-### exam_subjects — a source occurrence, not just a join key
+Years are 1900..2200; month 1..12; grade 1/2/3 or NULL with raw evidence. Unknown
+values are never guessed. Grade 3 may include source-designated exams taken by
+graduates. year is the actual calendar year; academic_year is source-labelled
+school/CSAT year. If year and exam_date both exist, their years must agree.
+Nominal session month may differ from the actual date after postponement.
 
-- `exam_id`, stable `source_subject_key`, nullable `raw_subject_label` (NULL when
-  the source has none), optional `subject_id` + `taxonomy_version`.
-- Composite mapping FK uses MATCH FULL: both mapping columns NULL or both valid.
-- `mapping_status` unmapped/unmappable/provisional/verified, confidence 0..1, `mapping_note`,
-  `mapping_rule_version`, `display_order`, `is_active`.
-- Unmapped/unmappable require NULL subject, taxonomy version and confidence.
-  Unmappable means a human reviewed it but the current taxonomy cannot safely represent it.
-  Provisional requires a valid mapping pair and confidence; verified requires a valid
-  pair but confidence is optional. Confidence is evidence, not calibrated probability.
-- `verified_at` is required only for verified mappings and NULL in other states;
-  unmappable review context/time can be recorded in the private quarantine resolution.
-  No verified_by/auth reviewer coupling is introduced. Mapping diagnostics and review
-  timestamps are private. Automated ingestion cannot update verified rows by contract;
-  this migration does not enforce that restriction against service_role with a trigger.
-- Unique `(exam_id, source_subject_key)` rather than `(exam_id, subject_id)`:
-  two legacy occurrences must not collapse just because both map to a broad category
-  or both have NULL mappings. Do not duplicate normalized subject code here; join
-  the master to avoid code/ID drift. Unmapped active rows may still display raw labels.
+exam_type uses TEXT + CHECK: school_assessment, national_mock, evaluation_mock,
+csat, preliminary, other. NULL means unknown; other means known out-of-list.
+Preserve raw wording and uncertainty; do not infer curriculum solely from year.
 
-### resources — attachments and navigable resource links
+Stored sort_date is an **exam-list sorting proxy**, not historical evidence:
+exam_date → first day of known year/month → January 1 of known year → NULL.
+It uses current-row values and immutable pg_catalog.make_date. It is separate from
+Home's source publication/update clock. UUID only breaks ties.
 
-- Required `exam_id`, provenance `source_post_id`, stable `source_resource_key`,
-  `title`, observed `source_url`; optional original `source_label`.
-- Optional `exam_subject_id`; composite FK `(exam_subject_id, exam_id)` guarantees
-  a scoped resource belongs to the same exam. NULL means exam-wide (e.g. a combined
-  grade-cut sheet), not “missing foreign key”. Same file shared by several subjects
-  is exam-wide in v0.1; do not duplicate binaries or invent one preferred subject.
-- TEXT + CHECK `resource_type`: question/answer/explanation/answer_explanation/
-  listening_audio/listening_script/grade_cut/reference/other. Purpose does not
-  imply a PDF: grade cuts may be images and listening can be a landing page.
-- `source_url` preserves original href; `link_kind` file/landing_page/unknown;
-  optional `file_url` only for a verified direct binary endpoint, **not a mirror**.
-- Nullable MIME, extension, exact byte size; no made-up byte count from rounded
-  website size text. Raw displayed size belongs in source metadata.
-- `link_status` unchecked/available/broken/restricted, `last_checked_at`,
-  `display_order`, `is_active`. A transient failed probe does not hard-delete data.
-- Unique `(exam_id, source_post_id, source_resource_key)`; stable key does not use
-  source ordering, title, mutable signed URL query or normalized taxonomy. Use stable
-  original attachment identity; missing/ambiguous identity is quarantined. The same
-  exam + normalized source URL collision is quarantined; no URL UNIQUE constraint
-  is added without source evidence. Provenance corrections reconcile the existing
-  resource UUID explicitly instead of blindly inserting with a new conflict key.
+### subjects / exam_subjects — preserve historical taxonomy
 
-PostgreSQL ENUM would require type migrations on new values; TEXT + named/table
-CHECKs keep v0.1 readable and extendable with reviewed constraint changes.
-Do not accept arbitrary unvalidated type strings or expand “other” silently.
+Subjects: UUID id, code (lowercase/underscore), name, optional category,
+required taxonomy_version, optional curriculum_version/parent_id, is_active,
+sort_order >= 0, timestamps. UNIQUE(taxonomy_version, code) and UNIQUE(id,
+taxonomy_version). Parent/version composite FK prevents cross-version parentage;
+self-parent CHECK plus trusted longer-cycle validation. Released meaning is
+immutable; semantic changes require reviewed releases, not silent remapping.
 
-Mirroring is deferred: later add a resource-location/storage table, leaving original
-source URLs immutable as provenance. No bucket, storage policy, `is_mirrored`,
-redundant `is_external`, or mandatory file-copy assumption is added now. URL CHECKs
-use case-insensitive `~*` HTTP(S) shape checks, **not an SSRF defense**; trusted link fetching requires a
-allowed-host/redirect/resolved-IP validation, rejecting private/link-local destinations before implementation.
+Occurrences: UUID id, content_item_id FK to exams, source_subject_key,
+nullable subject_id/raw_subject_label/taxonomy_version, mapping_status,
+confidence 0..1, private note/rule version/verified_at, display_order >= 0,
+is_active false, timestamps. UNIQUE(content_item_id, source_subject_key), not
+subject_id: separate raw occurrences cannot collapse into one broad mapping.
+UNIQUE(id, content_item_id) supports resource scope integrity. Mapping composite
+FK uses MATCH FULL, so subject_id/version are either both NULL or both valid.
+
+| State | Mapping pair | Confidence | verified_at |
+| --- | --- | --- | --- |
+| unmapped | both NULL | NULL | NULL |
+| unmappable (human reviewed, current taxonomy insufficient) | both NULL | NULL | NULL |
+| provisional | valid pair | required | NULL |
+| verified | valid pair | optional | required |
+
+Human unmappable review context/time belongs in quarantine resolution. No
+verified_by/auth reviewer coupling. Confidence is evidence, not calibrated
+probability. Automated ingestion cannot update an existing verified occurrence
+**by contract**; service_role is not blocked by a special trigger. Before actual
+ingestion, review an enforcement migration/management workflow. See ingestion.md.
+
+Historical 가형/나형 remain raw labels, never silently modern electives. Inactive
+taxonomy hides only its master row. Active occurrences/resources remain available
+with raw-label fallback; clients must use optional left joins, not inner joins.
+
+### resources — attachments for every content type
+
+UUID id; mandatory content_item_id and provenance source_post_id; stable
+source_resource_key; nullable exam_subject_id; resource_type, title, optional
+source_label; source_url; link_kind file/landing_page/unknown; optional verified
+file_url, mime_type, extension, exact nonnegative size; link_status
+unchecked/available/broken/restricted, last_checked_at; display_order, is_active,
+timestamps. The public column list below excludes internal diagnostics.
+
+Purposes remain question, answer, explanation, answer_explanation, listening_audio,
+listening_script, grade_cut, reference, other. Purpose does not imply binary format.
+A Box link can be an audio landing page; do not invent direct MP3 endpoints/MIME.
+NULL scope is content-wide and also supports non-exam PDFs. No mirrors/buckets now.
+
+UNIQUE(content_item_id, source_post_id, source_resource_key). Original attachment
+identity must be deterministic, independent of title/order/signed query. Distinct
+identities colliding on same content + normalized source URL go to quarantine;
+no URL UNIQUE without evidence that legitimate reuse is impossible. Provenance
+correction reconciles the same UUID explicitly. Case-insensitive HTTP(S) CHECKs
+on source/file/thumbnail URLs are shape checks only; future fetching validates
+allowed hosts, redirect hops and resolved IPs, rejecting private/link-local targets.
 
 ### profiles / bookmarks / recent_views
 
-- Profiles: auth UUID `id`, optional display name (trimmed length 1..80), optional
-  grade 1/2/3, timestamps. No email, birthday, school, real name, phone or auth trigger.
-  Create the profile explicitly on first edit; auth account creation is unaffected.
-- Bookmarks: UUID `id`, auth `user_id`, `exam_id`, server `created_at`, unique
-  `(user_id, exam_id)`. Insert/delete semantics; use ON CONFLICT DO NOTHING for
-  repeated saves. Do not use a merge-upsert that requires bookmark UPDATE rights.
-- Recent views: UUID `id`, auth `user_id`, `exam_id`, `viewed_at`, same unique pair.
-  Upsert updates one row's latest timestamp rather than adding analytics events.
-  The trigger always uses server time and rejects actual changes to the identity
-  pair. UPDATE grants include unchanged conflict-key columns for PostgREST upsert
-  compatibility. UUID `id` and bookmark timestamp cannot be supplied/rewritten by clients.
-- Profiles POST merge-upsert uses exactly `id`, `display_name`, `grade_level`,
-  conflict target `id`. INSERT and UPDATE privileges include these columns. The
-  owner USING/WITH CHECK permits setting the same id but rejects another user's id.
-- Recent views POST merge-upsert sends only `user_id`, `exam_id`, conflict target
-  `(user_id, exam_id)`. UPDATE grants contain only those keys; omit `id`/`viewed_at`
-  entirely. The trigger supplies time. Do not use PUT (all-column payload contract).
-  Verify both API upserts against the actual PostgREST release after authorized deployment.
-- Deleting a profile removes only that profile. Deleting an auth user cascades to
-  all three personal tables. All content/provenance FKs and content references
-  from personal rows use RESTRICT: unpublishing is the normal content operation.
+Profiles unchanged: auth UUID id PK with DELETE CASCADE, optional display_name
+(trimmed 1..80 characters), grade_level, timestamps. No email/school/interest array,
+auth trigger or mandatory profile. Client creates/edits explicitly.
 
-### ingestion_quarantine — persistent backend review queue
+Bookmarks/recent views: UUID id, auth user_id (DELETE CASCADE), mandatory
+content_item_id (DELETE RESTRICT), UNIQUE(user_id, content_item_id). They target
+all types, including columns without exams/resources. Bookmark created_at is
+server default; recent viewed_at is always trigger-stamped. The trigger rejects
+actual user/content key changes, allows unchanged keys, and keeps the row UUID.
 
-UUID id, optional source_post_id FK with DELETE RESTRICT, nonempty kind, object
-payload (default `{}`), status open/resolved/ignored (default open), optional note,
-created_at and resolved_at. Open requires NULL resolved_at; resolved/ignored require
-resolution time. Unknown-source failures may omit the source FK. Store bounded,
-non-sensitive evidence. No client grants/policies, no clock trigger; service_role
-CRUD only. Reconciliation and resolution are explicit trusted operations.
+Profile POST merge-upsert sends id/display_name/grade_level with conflict target id.
+INSERT/UPDATE grants include id so unchanged-key upsert is allowed; USING and WITH
+CHECK enforce ownership. Recent POST merge-upsert sends **only** user_id and
+content_item_id with that conflict target; omit id/viewed_at. UPDATE grants only
+those keys. Bookmark repeated saves use ignore-duplicates, not merge-update.
+Do not use all-column PUT or personal timestamps supplied by clients. Verify the
+actual PostgREST release later. Profile deletion affects only the optional profile;
+auth-user deletion cascades all personal rows. Hidden content leaves owner-readable,
+owner-deletable personal rows with an unavailable content join.
 
-## RLS / grants
+### ingestion_quarantine — backend review queue
 
-RLS controls rows; column GRANT controls disclosure. All **9 tables** enable RLS.
-PUBLIC/anon/authenticated defaults are explicitly revoked before grants. There are
-**15 policies, 9 non-constraint indexes, 7 triggers and 2 functions** (68 statements).
+UUID id, nullable source_post_id FK RESTRICT, nonempty kind, object payload default
+{}, status open/resolved/ignored default open, note, created_at, resolved_at. Open
+requires NULL resolution time; resolved/ignored require one. No client grant/policy
+or update trigger. Classification/segmentation/resource conflicts are persisted
+with bounded non-sensitive evidence. Failed batches record quarantine separately
+so the evidence survives rollback. No full HTML, tokens or personal student data.
 
-| Table | anon/authenticated SELECT rows | Client writes |
+## RLS and exact public projections
+
+All **10 tables** enable RLS; explicit REVOKE precedes grants. **16 policies,
+10 non-constraint indexes, 8 triggers, 2 functions; 74 migration statements.**
+
+| Table | Public SELECT rows | Client writes |
 | --- | --- | --- |
 | source_posts, ingestion_quarantine | none | none |
-| exams | active exams | none |
-| subjects | active taxonomy rows | none |
-| exam_subjects | active occurrence + active parent exam | none |
-| resources | active resource + active exam + active same-exam occurrence if scoped | none |
-| profiles | authenticated owner only | own INSERT/UPDATE/DELETE |
-| bookmarks | authenticated owner only | own INSERT/DELETE |
-| recent_views | authenticated owner only | own INSERT/UPDATE/DELETE |
+| content_items | active | none |
+| exams | active parent content | none |
+| subjects | own active master row | none |
+| exam_subjects | own active + active content parent | none |
+| resources | own active + active content + active same-content occurrence if scoped | none |
+| profiles | authenticated owner | own INSERT/UPDATE/DELETE |
+| bookmarks | authenticated owner | own INSERT/DELETE |
+| recent_views | authenticated owner | own INSERT/UPDATE/DELETE |
 
-Taxonomy activity **does not control source-content publication**. Inactive mapped
-subjects hide only the master row, never active occurrences or resources. Use left
-joins and raw_subject_label fallback; an inner join would incorrectly remove content.
-Resources → occurrences → exams policy dependencies never traverse taxonomy subjects.
+Personal INSERT and recent UPDATE additionally require active content. Policies
+qualify parent keys explicitly. Occurrence FK already ensures exam specialization;
+resource visibility never joins taxonomy. Dependency direction is resources →
+occurrences → content_items, exams → content_items; no recursive policy cycle.
 
-The complete public SELECT column lists are:
+RLS controls rows; column grants control disclosure. service_role has CRUD on all
+tables and is expected to BYPASSRLS, while constraints/triggers still apply. Its
+credential never enters Flutter. Two invoker clock functions have empty search_path
+and direct EXECUTE revoked from PUBLIC/anon/authenticated. Actual inherited/default
+ACL and trigger behavior are future validation, not inferred from these files.
+
+Public SELECT columns (explicit nested projections, **never wildcard SELECT**):
 
 | Table | Columns |
 | --- | --- |
-| exams | id, slug, title, year, academic_year, exam_month, exam_date, sort_date, grade_level, exam_type, exam_round, curriculum_version, published_at, is_active |
+| content_items | id, slug, content_type, title, summary, source_url, published_at, source_updated_at, feed_updated_at, thumbnail_url, is_active |
+| exams | content_item_id, content_type, year, academic_year, exam_month, exam_date, sort_date, grade_level, exam_type, exam_round, curriculum_version |
 | subjects | id, code, name, category, taxonomy_version, curriculum_version, parent_id, sort_order, is_active |
-| exam_subjects | id, exam_id, subject_id, raw_subject_label, taxonomy_version, mapping_status, display_order, is_active |
-| resources | id, exam_id, exam_subject_id, resource_type, title, source_label, source_url, link_kind, file_url, mime_type, file_extension, file_size, display_order, is_active |
+| exam_subjects | id, content_item_id, subject_id, raw_subject_label, taxonomy_version, mapping_status, display_order, is_active |
+| resources | id, content_item_id, exam_subject_id, resource_type, title, source_label, source_url, link_kind, file_url, mime_type, file_extension, file_size, display_order, is_active |
 
-`is_active` is intentionally public: invoker policy subqueries need SELECT on
-parent publication flags. Internal source keys/FKs, diagnostics, review/link-check
-status and internal timestamps are excluded. Source URLs remain public product
-links. Clients must request explicit projections, never SELECT * or nested wildcards.
-Inherited role/default ACL behavior still requires target-server verification.
+`is_active` is intentionally public for invoker policy subqueries. The fixed exam
+content_type is also public so PostgREST can join the composite discriminator FK. Source keys,
+merge pointer, raw normalization notes, classification evidence, link-check status
+and internal timestamps are hidden. Source URL/summary are safe public projections.
 
-Personal UPDATE checks old USING and new WITH CHECK ownership. Personal INSERT and
-recent UPDATE additionally require an active exam. Owners may read/delete their
-old rows for hidden exams, but joined content is unavailable. All content/provenance
-FK deletes RESTRICT; auth-user references alone CASCADE. FK updates use NO ACTION
-(or reviewed RESTRICT), never CASCADE.
+## Indexes and query boundaries
 
-service_role has explicit CRUD on all nine tables and is expected to BYPASSRLS;
-constraints/triggers still apply. Never expose its credentials. Both trigger
-functions are SECURITY INVOKER with empty search_path and direct EXECUTE revoked
-from PUBLIC/anon/authenticated. No SECURITY DEFINER helpers or bypass views.
-
-## Query-led indexes and pagination
-
-Nine non-constraint btree indexes:
-
-| Index | Columns / purpose |
+| Non-constraint index | Definition |
 | --- | --- |
-| exams_active_feed | sort_date DESC NULLS LAST, id DESC; WHERE is_active |
-| subjects_parent | parent_id, taxonomy_version; referencing parent FK/traversal |
-| exam_subjects_mapping | subject_id, taxonomy_version; referencing mapping FK/lookups |
-| resources_subject_exam | exam_subject_id, exam_id; same-exam FK/scope |
-| resources_source_post | source_post_id; provenance/reprocessing |
-| bookmarks_owner_recency | user_id, created_at DESC, id DESC |
-| bookmarks_exam | exam_id; referencing FK |
-| recent_views_owner_recency | user_id, viewed_at DESC, id DESC |
-| recent_views_exam | exam_id; referencing FK |
+| content_items_active_feed | `content_items (feed_updated_at desc nulls last, id desc) where is_active` |
+| exams_date_sort | `exams (sort_date desc nulls last, content_item_id desc)` |
+| subjects_parent | `subjects (parent_id, taxonomy_version)` |
+| exam_subjects_mapping | `exam_subjects (subject_id, taxonomy_version)` |
+| resources_subject_content | `resources (exam_subject_id, content_item_id)` |
+| resources_source_post | `resources (source_post_id)` |
+| bookmarks_owner_recency | `bookmarks (user_id, created_at desc, id desc)` |
+| bookmarks_content | `bookmarks (content_item_id)` |
+| recent_views_owner_recency | `recent_views (user_id, viewed_at desc, id desc)` |
+| recent_views_content | `recent_views (content_item_id)` |
 
-The subjects(id, taxonomy_version) UNIQUE index is on the **referenced** table;
-it does not index referencing exam_subjects rows. The mapping index replaces the
-old subject/exam index, not an additional duplicate index. Existing unique indexes
-cover exams' source prefix, occurrence/resource exam prefixes and personal keys.
-Rare trusted merge/quarantine FK checks may scan initially; measure before adding indexes.
+All ten are btree. Exam sort has no partial activity predicate because publication
+belongs to content_items. The exam shared PK supports parent lookup. Existing
+unique prefixes cover source→content, content→occurrences/resources and owner
+keys. The mapping index is on the referencing table; subjects' referenced UNIQUE
+cannot replace it. Rare merge/quarantine lookups initially scan. No pg_trgm,
+extensions schema, broad filters index, vector/search service or speculative indexes.
 
-No extensions schema creation, pg_trgm, GIN title index or active_filters index in
-this initial draft. Start with parameterized ILIKE; escape wildcard characters when
-literal search is intended. After real import, separately authorized EXPLAIN
-(ANALYZE, BUFFERS) can justify a new migration. No performance claims from parsing.
+**Unified search returns content_items cards.** Parameterized ILIKE over title and
+optional summary; bounded tokens can each match title OR summary (AND between
+tokens). Literal search escapes LIKE wildcards. Do not interpolate user SQL.
+Content filters: type and published date. Exam filters: calendar/academic year,
+grade, exam type and subject through exams/exam_subjects EXISTS/inner filtering
+only when explicitly requested. These filters intentionally narrow results to
+exam content. Fetch a single page of parents before optional details/resources;
+avoid fan-out joins that duplicate cards or produce incorrect limits.
 
-Feed ordering is sort_date DESC NULLS LAST, id DESC. For a non-NULL cursor (d,i),
-next rows satisfy `sort_date < d OR (sort_date = d AND id < i) OR sort_date IS NULL`.
-For a NULL-date cursor, next rows satisfy `sort_date IS NULL AND id < i`.
-Combine cursor predicates with all original filters; use bound parameters and
-bounded pages. UUID is only a deterministic tiebreaker. Personal cursors use
-server timestamp + id; deduplicate on refresh because recent items can move.
-Fetch resource details separately from paginated exams to avoid join multiplication.
+Examples: `2026 5월 고3` matches an exam parent's title/summary (explicit year/grade
+filters use metadata); `연세대 논술` matches an essay parent; source-backed admissions
+and study-material titles are searchable with no exam join. No promise of Korean
+morphology or semantic search. Measure after import before any search-index migration.
 
-## Representative mapping cases (illustrative, not seed inserts)
+**Home “recent updates” means latest known original-source publication/modification.**
+`feed_updated_at = greatest(published_at, source_updated_at)` is generated: one NULL
+uses the known timestamp, both NULL stays NULL, an older modification timestamp
+cannot move the feed behind publication. Local created_at/updated_at and crawl time
+never drive Home. Reprocessing the same input must not bump feed position. If the
+source has no reliable modification time, changed resources still update in place
+but Home retains the publication fallback; never invent a source update timestamp.
+This is not a feed of latest app ingestion events. All types share one active-parent
+query ordered feed_updated_at DESC NULLS LAST, id DESC.
 
-Example IDs (`E-A`, `S-A`, etc.) below are documentation aliases, not SQL UUIDs.
-Normalized values are design proposals requiring ingestion review; original labels
-and observed links are evidence. Unless explicitly observed, dates, MIME, size,
-curriculum and direct file endpoints stay NULL.
+For non-NULL cursor (t,i): `feed_updated_at < t OR (feed_updated_at = t AND id < i)
+OR feed_updated_at IS NULL`; for NULL: `feed_updated_at IS NULL AND id < i`.
+Use identical original filters, bound parameters and bounded pages. Exam lists
+instead order sort_date DESC NULLS LAST, content_item_id DESC with the same null-tail
+rule. UUID is only a tiebreaker. Content corrections and recent-view writes can
+move rows; deduplicate/refresh rather than promise snapshot pagination.
 
-### Case A — recent 2026 exam
+## Five representative cases — observed pages, proposed mappings, no seed
 
-Source [post 1705](https://legendstudy.com/1705): 2026 May grade-3 assessment.
-`source_posts`: source=legendstudy, external_post_id=1705, canonical URL above.
-`exams E-A`: source_exam_key=`main`, slug=`legendstudy-1705-main`, year=2026,
-academic_year=2026 (explicit source heading), exam_month=5, exam_date=2026-05-07,
-grade_level=3, exam_type=national_mock, raw_exam_type=전국연합학력평가.
-Math labels such as 수학(기하), 수학(미적), 수학(확통) become separate occurrences;
-each can own a question and answer_explanation resource. Unknown curriculum or
-mapping stays NULL. Grade-cut image resources may be exam-wide until scope is reviewed.
+Pages were read on 2026-09-12. Only visible text/link evidence was inspected, not
+attachment bytes, MIME, exact size, playback, timestamps or exhaustive archive
+coverage. Content types below are reviewed modeling proposals, not source labels
+or existing DB rows. Unknown facts remain NULL.
 
-### Case B — legacy math 가형 / 나형
+### A — recent exam
 
-Source [post 1415](https://legendstudy.com/1415): year=2019, academic_year=2019,
-exam_month=9, exam_date=2019-09-04, grade_level=2. The source wording supports
-national_mock, subject to parser review. Two occurrences `S-GA`, `S-NA` retain
-`raw_subject_label=수학 가형` and `수학 나형`, with distinct persisted source keys,
-`subject_id=NULL`, `taxonomy_version=NULL`, `mapping_status=unmapped`,
-`mapping_confidence=NULL`. Each has separate question/answer_explanation resources.
-Later reviewed historical mappings can be attached without changing occurrence or
-resource IDs. Never replace these labels with modern math electives.
+[Post 1705](https://legendstudy.com/1705) describes the 2026 May grade-3 assessment
+with subject PDFs, listening and grade-cut material. Source 1705 → content
+`main`, slug `legendstudy-1705-main`, type exam → shared-ID exam extension →
+occurrences/resources. Calendar year 2026, nominal month 5, observed exam date
+2026-05-07; retain raw type/grade evidence. Source publication clock stays separate.
+[Post 1686](https://legendstudy.com/1686) separately illustrates calendar 2025 versus
+academic 2026; never place “2026학년도” into calendar year merely from the title.
 
-### Case C — English audio and listening script
+### B — historical math plus English audio/script
 
-The same [post 1415](https://legendstudy.com/1415) has English question,
-answer/explanation, audio and script entries. They share one English occurrence
-on the existing exam; Case C does not create a duplicate exam/source post.
-`listening_audio` preserves the observed Box href, `link_kind=landing_page`,
-`file_url=NULL`, `mime_type=NULL`, `link_status=unchecked`. A separately observed
-script resource has `resource_type=listening_script`, its original attachment href
-and label; its extension may be recorded as source-labelled pdf, not verified MIME.
-Playback and byte-level link checks remain pending.
+[Post 1415](https://legendstudy.com/1415): one exam content for 2019 September grade 2.
+Keep separate raw 가형/나형 occurrences, initially unmapped with NULL subject/version/
+confidence. English audio/script attach to its English occurrence; a Box href is
+landing_page until direct bytes are verified. This does not create extra exam or
+content rows merely for additional attachments. Historical labels survive remapping.
 
-### Extra date and cardinality checks
+### C — general study PDF, no exam row
 
-[Post 1686](https://legendstudy.com/1686) yields year=2025, academic_year=2026,
-exam_month=9, exam_date=2025-09-03. “2026학년도” must not enter calendar year.
-A future verified multi-exam post uses two stable source_exam_key values under one
-source_post_id; unique slug and source keys prevent duplicate reprocessing. A
-resource scoped to a different exam's occurrence fails the composite FK.
+[Post 991](https://legendstudy.com/991) provides a multi-year English question-type
+practice collection with a linked PDF. Model as study_material, key main, one
+content parent and an unscoped reference resource. It aggregates several exams;
+forcing one exam year/session would be misleading. No invented vocabulary PDF.
 
-## Static review and future validation gates
+### D — education/admissions column, no required exam or resource
 
-Day 3 validation is parser-only and manual structural review, **not a DB test**.
-`pglast` parses SQL and PL/pgSQL without executing it. The checked-in
-`supabase/review/check_schema_draft.py` verifies table/RLS/policy inventory,
-content write grants, owner checks, FK shape and absence of seed inserts.
-It cannot validate catalog resolution, permissions, RLS behavior, query plans,
-PostgREST upsert behavior or real constraint enforcement. These remain unverified.
+[Post 927](https://legendstudy.com/927) discusses admissions strategy for the 2017
+cycle. Model as education_column with title, short reviewed summary, original-post
+URL and known publication time only. A native card/detail can open the original
+externally; no stored full article body or fabricated download is required.
+This is historical content, not current admissions advice. Factual admissions news
+can use admissions_info after classification review.
 
-After explicit authorization in a separate task, reviewers should test:
+### E — university essay, no exam extension
 
-| Scenario | Required outcome |
-| --- | --- |
-| anon active/inactive content, inactive exam with active resource | only active visible hierarchy returns |
-| inactive mapped subject vs unmapped occurrence | active occurrences/resources remain visible; inactive master hidden, raw label fallback |
-| anon/authenticated source_posts/quarantine read and content writes (including TRUNCATE) | denied by grants, no mutation |
-| user A versus B SELECT/UPDATE/DELETE personal rows | B's rows invisible/unchanged; own writes confirmed via RETURNING |
-| null auth.uid(), forged INSERT owner, changing owner | denied; no rows created/transferred |
-| save/view hidden exam vs existing personal row after hide | new save/view denied; own old row readable/deletable |
-| repeat bookmark, repeat recent upsert | one row per pair; latest server viewed_at; unchanged UUID |
-| recent upsert through PostgREST | unchanged keys accepted; actual key changes and forged timestamp prevented |
-| same post repeated / reordered / normalized again | stable IDs and counts; new type/URL does not duplicate attachment |
-| resource/subject cross-exam or cross-taxonomy | rejected by composite FK; no orphan content |
-| auth-user delete vs profile delete vs source/exam delete | personal cascade / only profile / RESTRICT respectively |
-| missing date/month/grade/mapping | accepted with raw evidence, not guessed normalization |
-| reviewed taxonomy hierarchy | no cycles and explicit publication of intended nodes |
-| generated-column catalog compatibility, trigger execution, table/column/default role grants | resolve in target Supabase environment before acceptance |
+[Post 1612](https://legendstudy.com/1612) has Yonsei 2023-admission-cycle essay problem
+and explanation PDFs (conducted in 2022). Model university_essay → unscoped resources;
+preserve admission-year wording in title/summary, not exams.year. [Post 1610](https://legendstudy.com/1610)
+contains two admission years, showing why one speculative university/year pair is
+not enough for every post.
 
-See `supabase/README.md` for prerequisites, read-only future inspection, and
-rollback considerations. No DB results or deployment success are claimed.
+Comparison: nullable university_name/admission_year fields on every content row
+would be simple but sparse and cannot represent multi-year collections safely.
+A later university_essay_metadata relation can handle typed/multiple-year needs,
+but current filters only need source-backed university/year title/summary search.
+Choose neither extra columns nor extra table now; preserve candidate metadata in
+private evidence. Semantic year-specific content splitting is allowed when source
+blocks and independent card needs justify it, never by array position. No university
+master, department database or admissions prediction schema.
 
-## Deferred extensions / open questions
+## Reprocessing, soft merge and deferred scope
 
-- `ingestion_runs`: defer table; structured file reports initially record run_id,
-  parser version, counts, failures and timing. Decide persistence with the parser.
-- Broader historical taxonomy releases, cross-post exam reconciliation, subject
-  hierarchy cycle enforcement, resource multi-subject assignments and row-retention
-  policy require real backfill evidence. Non-exam 논술 material can remain in source_posts
-  until its separate normalization scope is defined; do not force every post into exams.
-- Default all content inactive until source/provenance and links are reviewed.
-  Publication thresholds, dead-link grace period and raw metadata size budget remain
-  operator decisions. Do not delete or unpublish on one fetch failure.
-- Notifications remain in v1.0 product scope but notification-specific schema is
-  intentionally deferred to a later v1.0 implementation milestone: device tokens,
-  preferences and delivery backend. No profiles.interest_subjects array; introduce
-  a normalized preference relation later if needed.
-- Storage mirrors, search service/morphology, analytics, community, school database,
-  ads/IAP and other expansion entities are intentionally absent from this draft.
+See ingestion.md for detection → classification → parent upsert → type parser →
+validation/quarantine → publication. New answers/grade cuts update the same parent
+and existing resource identities. Source deletion/broken links use reviewed soft
+states, never automatic hard delete. Content merges reconcile all personal content
+references; retain inactive duplicate content and its extension/provenance.
 
-## Technical references
+Notifications remain v1.0 product scope; device tokens/preferences/delivery schema
+are deferred to a later v1.0 milestone. No profile interest arrays. No article-body
+schema, storage mirrors, ingestion_runs table, seed taxonomy or Flutter changes.
+Initial runs emit bounded private reports; unresolved issues persist in quarantine.
 
-- [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security):
-  explicit grants/roles, USING + WITH CHECK, authenticated ownership and service-role boundary.
-- [PostgreSQL constraints](https://www.postgresql.org/docs/current/ddl-constraints.html):
-  unique/FK/CHECK and composite foreign-key null behavior.
-- [PostgreSQL 17 generated columns](https://www.postgresql.org/docs/17/ddl-generated-columns.html):
-  stored expressions require immutable functions and current-row inputs.
-- PostgreSQL 17 catalog source: [make_date entry](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.dat)
-  uses the [pg_proc.h default immutable volatility](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.h).
-  This supports the draft expression; target-version/catalog behavior is not tested.
-- [PostgREST upsert and on_conflict](https://docs.postgrest.org/en/stable/references/api/tables_views.html#upsert):
-  POST merge-upsert uses supplied columns and an explicit unique conflict target.
-  The narrow recent payload omits viewed_at; the trigger stamps it. Actual generated
-  API SQL/privileges remain a deployment acceptance test, not a parser guarantee.
+## Offline validation and future authorized runtime acceptance
 
-## Additional remediation acceptance tests (future authorized DB only)
+The checked-in checker parses SQL and PL/pgSQL, compares policy/index/trigger ASTs,
+exact client grants, shared PK/type discriminator, same-content FK chain, source
+identity, mapping CHECKs and immutable verified ingestion contract. Mutation tests
+reject parent visibility bypasses, exam-only personal targets, cross-content scope
+weakening and feed clock changes. SELECT-only inspection SQL is parsed, never run.
 
-Test all sort_date fallback/null branches and cursor transitions; PostgreSQL must
-accept the generated expression and forbid direct writes. Verify profile POST
-upsert twice, recent POST upsert twice with key-only payload, forbidden direct
-viewed_at/id writes, forged owner changes, SELECT * denial and explicit projection
-success (including nested left joins under both client roles). Verify unmappable,
-provisional missing confidence, verified NULL confidence with review time, and
-cross-version mapping constraints. Verify self/active merge rejection, longer-cycle
-backend rejection and conflict-safe personal reconciliation. Verify quarantine
-object/status/timestamp constraints and zero client exposure. Inspect function
-EXECUTE ACLs, trigger firing, auth.users REFERENCES and service-role behavior.
+**PASS means offline grammar/structure only.** It does not prove catalog resolution,
+RLS, actual Supabase ACLs, PostgREST, trigger execution, FK enforcement or performance.
+The future approved LegendStudy deployment must test:
 
-The checker compares policy/index/trigger ASTs and exact grant sets, checks FK
-update/delete rules and the verified ingestion contract. Mutation regressions test
-that unsafe variations fail. PASS is only offline grammar/structure: PostgreSQL
-catalog, RLS, PostgREST, Supabase grants, trigger runtime and performance remain
-unverified. All inspection SQL is SELECT-only and has **not** been executed.
+1. All six content types; active/inactive parent against every child and client role;
+   column-only projections/nested joins versus forbidden SELECT * and private tables.
+2. Exam extension only on type exam, shared PK uniqueness, non-exam unscoped PDFs,
+   cross-content occurrence/resource rejection and type-change FK rejection.
+3. Inactive taxonomy leaves raw occurrences/scoped resources visible; composite
+   version mapping and unmappable/provisional/verified confidence/time constraints.
+4. User A/B ownership, null auth, profile upsert, bookmark ignore-duplicates and
+   recent key-only upsert for columns/study/essay/exams; forbidden owner/key/time edits.
+5. Generated feed/date/discriminator compatibility, both-NULL/one-NULL/older update
+   clocks and cursor transitions; same-input reprocessing must not bump Home.
+6. Same/modified source, added answers, signed URL changes, partial failures,
+   concurrent workers, verified exclusion, classification/type corrections,
+   durable quarantine and conflict-safe soft merges with no cycles.
+7. Catalog/role/default ACLs, auth.users REFERENCES, service_role BYPASSRLS,
+   function EXECUTE, all triggers/FKs, schema cache and measured query plans.
+
+Technical basis: [GREATEST null semantics](https://www.postgresql.org/docs/17/functions-conditional.html#FUNCTIONS-GREATEST-LEAST),
+[PostgreSQL 17 generated columns](https://www.postgresql.org/docs/17/ddl-generated-columns.html),
+[make_date catalog entry](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.dat)
+and [immutable catalog default](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.h).
+PostgREST's [POST upsert/on_conflict contract](https://docs.postgrest.org/en/stable/references/api/tables_views.html#upsert)
+informs narrow payloads; actual server behavior remains untested. Target server
+version is unknown because the project does not exist. See supabase/README.md.

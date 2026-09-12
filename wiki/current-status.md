@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — Day 3 Data Model v0.1 and draft SQL designed locally, not applied**
+**Phase 1 — Day 3 unified content model and review fixes drafted locally, not applied**
 
 ## Verified state
 
@@ -24,7 +24,7 @@ Last reviewed: 2026-09-12
 - Day 2 production identity/brand baseline is merged to `main` via PR #4
 - Day 2 squash merge commit: `5699af00c34d5101483f9f2750d2474ecd9aa686`
 - Schema designed locally; no Supabase project/migration has been applied by this task.
-  Existing remote project/schema state has not been queried or verified.
+  The owner confirms the LegendStudy project is not created/linked; no remote DB queried.
 - No production ingestion pipeline exists yet
 - Day 2 static analysis and all 4 existing tests passed; Android debug APK and iOS simulator builds passed with the approved identity
 
@@ -56,7 +56,7 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Review Day 3 schema/RLS/idempotency (ChatGPT first, Claude recommended); local commit only.
+1. Review the unified Day 3 content hierarchy/RLS/idempotency and shared exam-key design; local commit only.
 2. Resolve model/open questions and obtain explicit owner approval before any SQL execution.
    User applies only to a verified separate LegendStudy Supabase project in a later task.
 3. Build ingestion prototype and validate representative posts across multiple years.
@@ -146,31 +146,33 @@ Last reviewed: 2026-09-12
   final launcher icon and store registration remain manual follow-up work.
 
 
-## Day 3 review remediation / verification (2026-09-12)
+## Day 3 unified model / verification (2026-09-12)
 
-- Official checkout: `~/development/legendstudy-app`; origin LegendStudy verified.
-  Same branch `codex/day-3-data-model-v01`; review baseline
-  `413b58849b1d395815a5090102aa2aa26c8f8b04`. New follow-up commit, no amend.
-- Local schema/documentation/checker remediation complete. **LegendStudy Supabase
-  project not created/linked; DB unapplied; zero SQL execution**, local or remote.
-- Draft has 9 tables (existing eight + ingestion_quarantine), RLS on all 9,
-  15 policies, 9 non-constraint indexes, 7 triggers and 2 invoker functions.
-- Mandatory external source ID, deterministic immutable slug, generated sort_date,
-  duplicate soft-merge pointer, unmappable/optional verified confidence, restricted
-  column SELECT, taxonomy-independent content visibility and upsert grants updated.
-- Removed pg_trgm/GIN and broad filters index. Notification product scope remains
-  v1.0; its schema follows in a later v1.0 milestone. No data/taxonomy imported.
-- pglast 8.4 / PostgreSQL 18.4 grammar parses 68 migration statements, both PL/pgSQL
-  bodies and 14 future SELECT-only inspections. Checker and five regression test
-  methods pass (31 unsafe schema mutations, two contract and three inspection
-  mutations rejected; harmless AST formatting/reordering accepted).
-- Verified mapping protection is an ingestion contract, not a service_role-blocking
-  trigger. URL uniqueness remains deferred; ambiguous duplicate URLs are quarantined.
-- `git diff --check` passes. No credentials added; Flutter/platform/dependency/brand
-  files unchanged. Flutter tests/builds not rerun for schema/docs/checker-only edits.
-- Catalog resolution, generated-column behavior, RLS/ACLs, PostgREST upserts,
-  trigger/FK behavior and performance remain untested pending a separately authorized
-  LegendStudy project and explicit project-ref verification. No other project accessed.
-- No remote Git push or merge, no Supabase CLI/connection/create/link/reset/push.
-  No implementation blocker for this draft; independent re-review/runtime acceptance
-  remain later gates. See database.md, ingestion.md and supabase/README.md.
+- Same official checkout/branch: `~/development/legendstudy-app`,
+  `codex/day-3-data-model-v01`; LegendStudy origin verified. Prior review fix
+  `9a45b08d80585b23f17c87dd40d693fbae849258` remains intact; separate follow-up commit.
+- **Supabase project not created/linked, DB unapplied, zero SQL execution** locally
+  or remotely. Existing initial migration revised; no second migration or data import.
+- Ten tables/RLS tables, 16 policies, 10 non-constraint indexes, 8 triggers and
+  2 invoker functions; 74 migration statements. Public content_items now owns
+  identity/routes/publication, resources and personal references support all types.
+- Exams shared content_item_id PK + generated type discriminator/composite FK;
+  occurrence/resource same-content FK chain retains cross-exam protection. No
+  duplicate exam publication flag/source identity. Parent inactivity hides children.
+- Home uses latest known source publication/modification, not ingestion timestamps;
+  unified search returns parent cards, exam filters join only when needed.
+- Source examples checked: recent/historical exams, English practice PDF, historical
+  admissions column and university essay PDFs. Only page text/links inspected.
+- pglast 8.4 / PostgreSQL 18.4 grammar: SQL + two PL/pgSQL bodies pass. Fifteen
+  SELECT-only inspection statements parsed, none executed. Six regression methods
+  pass, including 45 schema mutations, four personal-target/policy mutations, two
+  contract mutations and three inspection mutations; harmless reordering accepted.
+- `git diff --check` passes; no credential-pattern matches. Flutter/platform/UI/
+  dependencies unchanged; Flutter tests/builds not rerun for schema/docs/checker work.
+- RLS/runtime/catalog/ACL/trigger/PostgREST/performance acceptance remains pending
+  separately authorized LegendStudy setup and explicit project-ref verification.
+  Verified mapping protection remains by ingestion contract, not a DB override.
+- Notifications stay v1.0 with later schema. Article bodies/university metadata/full
+  text search remain deferred; source/title/summary evidence supports initial search.
+- No implementation blocker for this draft. No Supabase CLI/DB connection, unrelated
+  project access, remote Git push or merge. Independent re-review remains future work.

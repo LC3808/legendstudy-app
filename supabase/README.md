@@ -50,9 +50,9 @@ body or SQL statement is executed by this checker.
 
 ## Expected future result (not observed)
 
-Nine empty application tables, two invoker trigger functions, seven update/clock
-triggers, RLS on all nine tables, 15 policies, 9 non-constraint indexes, and the
-listed explicit table/column grants. All content defaults inactive. No taxonomy
+Ten empty application tables, two invoker trigger functions, eight update/clock
+triggers, RLS on all ten tables, 16 policies, 10 non-constraint indexes, and the
+listed explicit table/column grants. All parent content defaults inactive; exams inherits parent publication. No taxonomy
 seed, profiles auth trigger, ingestion job, storage bucket or Flutter integration.
 
 ## Rollback / repair notes for later review
@@ -63,8 +63,8 @@ retry, resolve schema/catalog conflicts and reconcile migration history.
 
 After a successful future commit, prefer a reviewed forward correction. Destructive
 rollback is only acceptable for an explicitly confirmed disposable empty setup:
-remove dependent personal/quarantine/resources/occurrence tables before exams/subjects/source
-posts (including the self-referencing exam merge FK), then remove the two functions after their triggers are gone. Never drop
+remove dependent personal/quarantine/resources/occurrence tables before exams/subjects/content_items/source
+posts (including the self-referencing content merge FK), then remove the two functions after their triggers are gone. Never drop
 auth.users/auth schema or any shared extension. Never use broad DROP CASCADE
 to bypass unknown dependencies. Data-bearing rollback requires backup and explicit
 user approval; no rollback SQL is automatically run or provided as an easy default.
@@ -72,14 +72,15 @@ user approval; no rollback SQL is automatically run or provided as an easy defau
 ## Review remediation verification
 
 The owner confirms the LegendStudy project is **not created or linked**. The
-current draft parses as 68 statements, 9 RLS tables, 15 policies, 9 non-constraint
-indexes, 7 triggers and 2 invoker functions. The inspection file contains 14
-SELECT-only statements; none were executed. Five offline test methods include
-31 unsafe schema mutations, two ingestion-contract mutations and three inspection
-mutation cases, plus acceptance of harmless formatting/boolean operand reordering.
+current draft parses as 74 statements, 10 RLS tables, 16 policies, 10 non-constraint
+indexes, 8 triggers and 2 invoker functions. The inspection file contains 15
+SELECT-only statements; none were executed. Six offline test methods include
+45 unsafe schema mutations, four personal-target/policy mutations, two ingestion-contract
+mutations and three inspection mutation cases, plus acceptance of harmless formatting/boolean operand reordering.
 
 The checker compares policy/index/trigger ASTs, exact column grants, FK actions,
-function settings/revokes, generated expression and verified ingestion contract.
+function settings/revokes, shared exam PK/type FK, same-content scope integrity,
+source feed expression and verified ingestion contract.
 Its explicit identifier contracts must be reviewed when the design changes.
 It is not a SQL equivalence engine. PASS does not validate PostgreSQL catalog,
 RLS runtime, PostgREST, Supabase grants, trigger runtime or performance.
@@ -89,3 +90,16 @@ posts and persistent quarantine have zero client grants/policies. Taxonomy maste
 inactivity must not suppress raw occurrences/resources. Source-link-first remains;
 notification schema follows in a later **v1.0** milestone. No import, seed, Flutter
 feature or Supabase SDK changes are included.
+
+## Unified content review boundary
+
+content_items is the public search/Home/Saved/Recent parent. Private source_posts
+never becomes an app API. Exams has a shared content_item_id primary key and an
+exam-only generated discriminator FK; public children depend on active content.
+No duplicate exam flag/source/title/slug. General resources support non-exam PDFs.
+Home uses known original-source publication/update time, never crawl/DB-update time.
+See database.md for exact projections, all five source cases and null-tail cursors.
+
+Before future application, verify generated columns in the actual server version,
+exam-type/shared-key/composite FKs, all-type personal upserts and inactive-parent
+RLS with explicit projections. No runtime behavior is established by parser PASS.

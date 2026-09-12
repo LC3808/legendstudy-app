@@ -1,194 +1,180 @@
-# Ingestion Strategy — Data Model v0.1
+# Ingestion Strategy — Unified Content v0.1
 
-## Status
+## Status and source boundary
 
-Design only. No crawler, ingestion writes, SQL execution, deployed schema or
-Supabase project creation occurred in Day 3. `wiki/database.md` is the canonical
-model; the draft migration is not a deployed database. Website reading for design
-was limited to representative public pages, not a backfill or file download.
+Design only: no crawler/backfill, ingestion writes, SQL execution or Supabase
+project creation/linking. The owner confirms the LegendStudy project does not
+exist yet. database.md and the unexecuted initial migration define the draft.
+The app uses normalized data during normal browsing, never live source HTML scraping.
 
-## Source observations
+Representative pages read on 2026-09-12: [exam 1705](https://legendstudy.com/1705),
+[historical exam 1415](https://legendstudy.com/1415), [practice collection 991](https://legendstudy.com/991),
+[admissions column 927](https://legendstudy.com/927), [Yonsei essay 1612](https://legendstudy.com/1612)
+and [multi-year essay 1610](https://legendstudy.com/1610). These show why not every
+post is one exam. Actual links/text were inspected, not attachment bytes, MIME,
+playback or archive completeness. The old 1,673 count is a dated observation,
+not a hard-coded import boundary. Revalidate sitemap/RSS/robots before implementation.
 
-Day 1 recorded an archive count of 1,673 and mixed exam/논술 content; that count
-is a dated observation, not a hard-coded ingestion boundary or completeness claim.
-Day 3 read [post 1705](https://legendstudy.com/1705),
-[post 1686](https://legendstudy.com/1686), and
-[post 1415](https://legendstudy.com/1415). They demonstrate modern elective labels,
-calendar/academic-year differences, historical math variants, and audio/script
-links. Attachment bytes, redirects, MIME, URL permanence and archive completeness
-remain unverified. Source-heading errors are possible; never infer taxonomy from
-a single inconsistent heading when filenames disagree.
+## Detection → classification → publication
 
-## Flow and table mapping
+1. Detect new/modified source posts using reliable source timestamps plus meaningful
+   content hash; last_crawled_at records observation only. A timestamp alone may
+   miss edits, so bounded periodic reconciliation remains necessary.
+2. Upsert source_posts on `(source, external_post_id)` with private raw evidence,
+   source title/location, source publication/update timestamps and crawl status.
+   Mandatory LegendStudy numeric post ID; no canonical-URL identity fallback.
+3. Classify source blocks into stable content items. Types are exam, study_material,
+   education_column, university_essay, admissions_info, other. Exam subtypes belong
+   only to exams.exam_type. Uncertain category/segmentation creates durable
+   quarantine; it is not silently published as other. Keep raw category, proposed
+   type, parser/rule version and rationale in private raw_metadata keyed by content key.
+4. Upsert content_items on `(source_post_id, source_content_key)`, preserving UUID
+   and slug. Map reviewed public title/summary/source_url and known source times;
+   thumbnails are optional. Source_posts itself never becomes the public search API.
+5. Run the type parser: exam → shared-ID exams + occurrences/resources; study_material
+   or university_essay → general resources, no exam extension; columns/admissions
+   → parent alone is valid, optional observed resources. No full article requirement.
+6. Validate complete parent/child batch, FK/type consistency, public-safe fields,
+   stable attachment identities, mapping exclusions and classification evidence.
+   Persist ambiguity in quarantine; publish only accepted items via content_items.is_active.
+   An exam item must have its reviewed exam extension before publishing. Subject
+   and resource flags remain independent child controls; taxonomy activity does not
+   determine occurrence/resource publication.
 
-`legendstudy.com → trusted parser/review → normalized tables → native app`
+These are future implementation contracts, not an implemented ingestion service.
+Trusted credentials stay server-side and never come from another application.
 
-| Parsed signal | Destination |
-| --- | --- |
-| Stable post ID, canonical URL, source title/category/timestamps | source_posts |
-| Fetch outcome, normalized content hash, parser version, uncertainty | private source_posts metadata + persistent ingestion_quarantine + run report |
-| Exam/session blocks and reviewed date/type/grade metadata | exams (possibly several per post) |
-| Curated taxonomy releases | subjects, managed separately from arbitrary scrape labels |
-| Subject occurrences, original labels and proposed mappings | exam_subjects |
-| Attachment/link occurrences, purpose, raw label, scope and original href | resources |
-| Optional personal profile/save/view action | profiles/bookmarks/recent_views via authenticated client later; never crawler |
+## Identity and reruns
 
-Only trusted ingestion may write content; it can use a service-role context later.
-Keys stay server-side. Public app reads never scrape source HTML. Do not borrow
-another application's project, schema, OAuth configuration or credentials.
+- source_posts uses `ON CONFLICT (source, external_post_id)` only. URL is location/
+  provenance; update the same row after verified redirect/alias evidence. URL UNIQUE
+  detects collisions, not an alternate upsert identity. Missing IDs can quarantine
+  without a source FK; future ID-less source support needs a separate migration.
+- Single content key is main. Multi-content keys represent stable source semantics,
+  e.g. grade3, morning, essay-2019. They match `^[a-z0-9]+(-[a-z0-9]+)*$` and never
+  derive from array index, display order, title hash or mutable taxonomy. Record
+  segmentation evidence and explicitly reconcile splits/merges.
+- First slug is `legendstudy-{external_post_id}-{source_content_key}` and never
+  changes on automatic rerun. The previous exam key becomes the common content key;
+  existing assigned route values are preserved, e.g. legendstudy-1705-main.
+- Exam upsert target is content_item_id (shared PK), obtained from the parent.
+  Do not send generated content_type or sort_date. No independent exam id/source key.
+- Occurrences use `(content_item_id, source_subject_key)`. Persist verified original
+  occurrence identifiers or an evidence-backed assigned key; duplicate/NULL taxonomy
+  mappings must not collapse distinct raw labels.
+- Resources use `(content_item_id, source_post_id, source_resource_key)`. Stable
+  original attachment identity (e.g. verified provider file ID) must be deterministic
+  across reruns; no title/order/signed-query keys. Ambiguous identity is quarantined,
+  not assigned a fresh random key. Optional scope points to an occurrence of the
+  same content and therefore the same exam; non-exam attachments leave scope NULL.
+- A changed provenance source_post_id is explicitly reconciled to the same resource
+  UUID after review; blindly upserting a new conflict tuple would create duplicates.
+- Distinct resource identities with same content + normalized source URL go to
+  quarantine. Normalization uses verified provider rules for scheme/host/ephemeral
+  query fields, never strips unknown meaningful query data. Original source_url
+  remains as observed. No content/URL UNIQUE until legitimate reuse is understood.
 
-## Source identity and stable keys
+## Modified posts, clocks and soft states
 
-1. LegendStudy requires source=`legendstudy` and the numeric post path as nonempty
-   external_post_id text. The sole canonical conflict target is
-   `ON CONFLICT (source, external_post_id)`. Missing ID is a quarantine failure,
-   never a URL fallback. URL is provenance/location; a verified URL change updates
-   the same row. URL uniqueness only detects collisions. Aliases require evidence.
-2. First slug assignment: `legendstudy-{external_post_id}-{source_exam_key}`.
-   A single exam uses `main` (`legendstudy-1705-main`). Multiple exams use semantic
-   stable keys such as `grade1`, `grade2`, `grade3`, `morning`, `afternoon`.
-   Keys match `^[a-z0-9]+(-[a-z0-9]+)*$`. No positional numbers, display order,
-   title/romanization, normalized taxonomy or mutable metadata. Persist segmentation
-   evidence; uncertain segmentation goes to quarantine. Never change an assigned slug.
-3. Match subject occurrences by established source identifiers or persist an
-   allocated source_subject_key with evidence. Identical/NULL mappings must not
-   collapse separate raw occurrences. Reorder/remapping preserves keys and UUIDs.
-4. source_resource_key deterministically represents stable original attachment
-   identity within its source post (e.g. verified provider file ID). It does not
-   depend on title, display order or signed URL query. If no stable attachment
-   identity can be established, persist a quarantine case for human reconciliation;
-   do not silently allocate a fresh random key on each run.
-5. Upsert exams on `(source_post_id, source_exam_key)`, occurrences on
-   `(exam_id, source_subject_key)`, resources on
-   `(exam_id, source_post_id, source_resource_key)`. Preserve slugs and UUIDs.
-   Provenance correction explicitly reconciles the same resource UUID and checks
-   conflicts before changing source_post_id; a blind upsert would duplicate it.
-6. Before resource writes, compare same-exam normalized source URLs against existing
-   and proposed rows. A distinct identity collision goes to ingestion_quarantine.
-   Keep original href unchanged; normalization uses verified provider-specific
-   identity rules (scheme/host casing, known ephemeral query fields), never drops
-   arbitrary meaningful query data. Identical existing identity is a normal rerun.
-   No `(exam_id, source_url)` UNIQUE is imposed without evidence that URL reuse is
-   impossible. Serialize workers for the same exam as well as source when resources
-   can originate in different posts; otherwise this application check races.
+A later answer/explanation or grade-cut attachment on an existing exam post updates
+the same source and content item and adds/upserts its resource. It does not create
+a new content item just because title/hash/resource count changed. The same rule
+covers updated columns, additional essay PDFs and revised study collections.
+Known modification time is synchronized to the corresponding content projection;
+feed_updated_at derives from the later known source publication/modification time.
 
-An exam can collect resources from secondary posts, each retaining provenance.
-Cross-post exam matching is explicit and evidence-based; do not globally equate
-same year/month/grade because source naming can be wrong and several sessions may
-exist. Initial ingestion needs a reconciliation manifest in private metadata; the
-unique keys alone cannot make a nondeterministic parser idempotent.
+Home is source-time-based, not app-ingestion-time-based. Do not write generated
+feed_updated_at or substitute now()/last_crawled_at/local updated_at as a source
+modification time. With no reliable source update timestamp, preserve publication
+fallback; the contents can change without an artificial Home bump. Missing both
+source times means a NULL-tail card. Preserve exact timestamp precision/timezone
+only when source evidence supports it; avoid inferring it from a search snippet.
 
-## Raw evidence and uncertainty
+Prepare a complete batch and commit source success metadata, parent public
+projections and accepted children atomically. Lock/serialize same-source workers;
+when secondary sources attach to shared content, also serialize on the content
+in deterministic order to prevent duplicate-normalized-URL races. Persist success
+hash/parser version only after the accepted batch succeeds. An unchanged hash is
+skippable only if parser/classification/mapping versions and pending review state
+also permit skipping. Do not bump source feed time just because parsing reran.
 
-- Store every observed subject label in `raw_subject_label`, every attachment label
-  in `source_label`; never substitute a normalized code for source text. If a label
-  is absent, use NULL, not invented “unknown” source text. Source-level raw date,
-  grade, year, size strings and parser evidence live in raw_metadata.
-- Separate calendar `year` from source `academic_year`; a publication date is not
-  an exam date. Preserve the nominal `exam_month` even if an exam was postponed to
-  another month; `exam_date` is nullable until an actual date is supported.
-- `raw_exam_type`, `raw_grade_label`, `curriculum_version` and normalization notes
-  preserve meaning/uncertainty. Unknown normalized type/grade/date remain NULL.
-  Bound-check values; hold conflicting year/date for review rather than changing
-  the source evidence to satisfy constraints.
-- Unknown subject → NULL subject and taxonomy version, unmapped status, NULL
-  confidence, note explaining why. Proposed mapping → provisional status with
-  version, confidence and rule version. A reviewer can mark verified with verified_at;
-  confidence is optional then. No automatic confidence threshold. Human-reviewed
-  unmappable means NULL subject/version/confidence, with review context in quarantine.
-  verified_at is reserved for verified state. Raw labels remain after confirmation.
-- Historical 가형/나형 can later map to reviewed historical master entries; do not
-  map them to present-day electives just to fill a foreign key. Taxonomy releases
-  and their hierarchies need a separate review (including cycle checks).
-- Public exam/subject/resource labels contain only publishable material; diagnostic notes are private.
-  Private run errors stay in source_posts or restricted reports. Do not collect
-  comments, account information, cookies, bearer tokens or full HTML by default.
-- For unverified rows, a changed source label updates evidence with a diagnostic note/report
-  of the change; full revision/event history is deferred, not silently promised.
+Partial fetch/parse never interprets omitted resources as deletions or advances
+success metadata. Source deletion/link failure sets source_status/link_status and
+queues review. Reviewed unpublication sets content_items.is_active=false; all
+children become invisible through parent RLS. A single missing/broken response
+never hard-deletes or automatically unpublishes established content. Individual
+resources/occurrences can be hidden separately. Do not re-publish a merged duplicate.
 
-## URLs, checks and publication
+Type reclassification of an existing item is trusted reconciliation on the same
+identity, not a new row. The exam discriminator FK blocks changing type while its
+extension exists. Stop and quarantine incompatible existing children; a later
+reviewed transaction handles conversion, scope cleanup and republishing. No blind
+cascade, automatic extension deletion or user-reference loss. Preserve before/after
+evidence; complete revision/event history is a later requirement.
 
-Preserve every original `source_url` exactly as observed. A Box share link is a
-landing-page resource; it is not a direct audio URL merely because its label says
-MP3. `file_url` remains NULL until independently verified. No file-size/MIME guess
-from rounded labels. No downloads/mirroring/Storage buckets are part of Day 3.
+## Raw taxonomy and public evidence
 
-Before any future network fetcher, validate allowed hosts, redirects and resolved
-IP ranges, including every redirect hop and private/link-local destinations, to prevent
-server-side URL abuse. Case-insensitive HTTP(S) DB URL CHECKs only validate shape.
-Do not strip attachment query parameters from stored source_url or put expiring
-signed credentials into durable public metadata. Report links requiring such
-credentials and decide a stable source-link strategy separately.
+Retain raw_subject_label/source_label exactly, NULL if absent, not fabricated text.
+Raw date/year/grade/type, displayed size, curriculum uncertainty and classification
+notes remain private evidence. Distinguish calendar year/academic year/nominal month;
+bound-check known values rather than inventing facts to satisfy CHECKs.
 
-All four public content tables default inactive. For each post, prepare/review a
-complete normalized batch and commit its upserts atomically in the future trusted
-pipeline, locking the source row or otherwise serializing same-post workers.
-Update content_hash/parser_version only after that normalized transaction succeeds.
-Hash changes are based on meaningful normalized source content, excluding transient
-ads/timestamps; identical hash is skippable only when parser and mapping versions
-are unchanged and there is no pending reprocessing/review need.
-
-Publish reviewed exams, source occurrences and resources independently of taxonomy
-activation. An inactive taxonomy row never hides an active occurrence/resource;
-the app uses a left join and raw-label fallback. A broken
-link or temporary source error updates source_status/link_status and a report;
-it must not immediately delete/deactivate all previously good material. Missing
-items are reconciled only after a successful complete parse. Partial fetch/parse
-must not advance success metadata or treat omitted attachments as deletions.
-
-## Reporting and future validation
-
-No ingestion_runs table in v0.1. The initial parser should emit a restricted
-structured run report (run ID, parser/mapping version, start/end, processed,
-inserted, updated, skipped, failed counts, bounded non-sensitive error summaries).
-Source-level status/hash/version are persisted; durable run history can be added
-when operations require it.
-
-Before backfill implementation, revalidate sitemap/RSS/robots, archive pagination,
-attachment behavior, older curricula, duplicate/redirect handling, bounded retries
-and missing-source grace periods. Test same input twice, reordered subjects/files,
-corrected raw labels, changed taxonomy, signed-query changes, partial failure,
-concurrent workers, multi-exam posts and secondary source reconciliation. Expected
-result is stable identities and no accidental deletion/duplication, not merely
-passing a unique constraint. Representative mappings are in `wiki/database.md`.
-
-## Verified mapping invariant and persistent review
+Unmapped/unmappable have NULL subject/version/confidence; provisional needs a valid
+mapping and confidence; verified permits NULL confidence but requires verified_at.
+Human unmappable rationale/time belongs in quarantine resolution. Historical
+가형/나형 are never automatically modern electives. Released taxonomy meaning and
+hierarchy require separate review/cycle checks. Inactive taxonomy master details
+may disappear from a left join, but raw active occurrences and PDFs remain visible.
 
 Automated ingestion MUST NOT update any existing exam_subjects row whose mapping_status is verified.
 
-This excludes the entire existing row from automatic upsert/update, including raw
-label, mapping pair, confidence, rule/note, verified_at and publication fields.
-New conflicting evidence creates a quarantine item; a later human workflow decides
-changes. Future code must lock/recheck the stored status within its transaction,
-not trust an earlier read that can race with verification. No service_role override
-GUC/protection trigger is added now. Before implementing a verified update path,
-review a separate enforcement migration and management workflow. The checked-in
-`supabase/review/ingestion_contract.json` and checker require this rule and its
-schema fields; they do not prove that a future ingestion implementation obeys it.
+This excludes the entire verified row, including raw label, mapping, confidence,
+notes, verified_at and publication fields. Conflicting new evidence is quarantined.
+Lock/recheck status within the transaction to avoid races with human verification.
+No service_role override GUC/protection trigger is added now. Before implementing
+an update path, review separate DB enforcement/management workflow. The checker
+requires this document rule and ingestion_contract.json; it cannot prove a future
+parser obeys them. Re-review of human unmappable decisions should also be explicit.
 
-Quarantine is durable: persist a bounded JSON object with kind, source_post_id when
-known, status=open, note and created_at. If the normalized batch rolls back, record
-the failure in a separate trusted transaction so evidence is not rolled back with
-it. Store no tokens, cookies, private student data or unbounded HTML. Human review
-marks resolved/ignored with resolved_at and rationale; retry only after resolution
-or an explicit reprocessing decision. No public API or client policy exists.
+## URL fetch gate and durable quarantine
 
-## Trusted duplicate exam soft merge (future implementation)
+Preserve original source links; a Box share page is not proven MP3 bytes. file_url,
+MIME/byte size stay NULL unless verified. No mirroring/Storage/downloads in Day 3.
+Case-insensitive HTTP(S) CHECKs cover shape and reject non-HTTP schemes, not SSRF.
+Before future fetching, validate allowlisted hosts, every redirect and resolved IP,
+reject private/link-local destinations and defend against resolution changes.
+Do not persist expiring secrets/cookies/bearer tokens in public URLs or metadata.
 
-1. Lock relevant exams/personal rows in deterministic order and serialize competing
-   merges/writes. Resolve canonical root; reject self-reference and all longer cycles.
-2. Reconcile bookmarks by owner/canonical exam with conflict-safe insert/do-nothing.
-   Reconcile recent rows explicitly; use a documented server-time merge stamp in
-   v0.1 (the clock trigger will stamp now, so it cannot preserve an old maximum time).
-   If preserving original view time is required, design a separate reviewed workflow
-   before implementing merge. Do not UPDATE recent_views.exam_id: its trigger forbids it.
-3. After successful canonical inserts, remove only the corresponding duplicate
-   personal rows, then mark duplicate inactive and set merged_into_exam_id. Commit
-   atomically; retain the duplicate exam and its provenance. No automatic hard delete.
-4. Reconcile any content-resource movement explicitly with same-exam composite FKs
-   and attachment collision review. Never assume a merge pointer reassigns children.
+Quarantine stores bounded JSON objects with kind, source_post_id if known,
+status=open, note and created_at. When a normalized transaction fails, persist the
+case in a separate trusted transaction so rollback cannot erase evidence. Human
+resolution marks resolved/ignored with resolved_at and rationale; retry on explicit
+reprocessing or resolved evidence. No app grants/policies. File-based run reports
+record parser versions/counts/timing/errors; no ingestion_runs table yet.
 
-Reprocessing tests must cover immutable slug, post URL changes, semantic multi-exam
-keys, missing IDs, verified-row protection, duplicate normalized URL quarantine,
-provenance correction, parallel workers, merge conflicts/cycles and taxonomy
-inactivity without lost PDFs. No ingestion code or DB execution is included here.
+## Trusted content soft merge
+
+Merge is common to all content types; the old merged_into_exam_id moves to
+content_items.merged_into_content_item_id. Determine compatible canonical content,
+lock/serialize competing merges/writes, resolve roots and reject all cycles. The
+DB rejects self-reference and active duplicates, not arbitrary long cycles.
+
+Reconcile bookmarks by user/canonical content with insert/do-nothing. Reconcile
+recent rows by user/content using the existing server-time merge stamp (the clock
+trigger stamps now; it cannot preserve an old maximum viewed_at). If original view
+time retention is required, design a separate reviewed workflow before implementing
+merge. Never UPDATE a recent row's content_item_id: the trigger forbids key changes.
+After successful canonical inserts remove only the reconciled duplicate personal
+rows, set duplicate inactive and record pointer, atomically. Retain the duplicate
+content and provenance; scope/resource movement requires explicit same-content FK
+reconciliation, not a pointer side effect or automatic hard delete.
+
+## Future ingestion acceptance
+
+Test same input twice, corrected titles, new answer/grade-cut files, reordered
+attachments, signed query changes, known/unknown source update time, unknown type,
+multiple semantic items, type correction, historical mapping, verified-row races,
+secondary provenance, partial failures, concurrent workers and merge cycles. Expect
+stable parents/slugs/resource identities, durable quarantine and no accidental
+content loss. Test column/study/essay ingestion without exam rows and native
+search/save/recent contracts on all types. No implementation/runtime claim here.
