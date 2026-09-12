@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Phase 1 — Day 3 unified content model and review fixes drafted locally, not applied**
+**Day 3 deployed and runtime verification recorded — next: Day 4 Flutter ↔ Supabase integration**
 
 ## Verified state
 
@@ -23,8 +23,10 @@ Last reviewed: 2026-09-13
 - Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
 - Day 2 production identity/brand baseline is merged to `main` via PR #4
 - Day 2 squash merge commit: `5699af00c34d5101483f9f2750d2474ecd9aa686`
-- Schema designed locally; no Supabase project/migration has been applied by this task.
-  The owner confirms the LegendStudy project is not created/linked; no remote DB queried.
+- Day 3 merged to main: `c16350c0a60fe1c6281234a7c2056cf02b54d9ad` (verified locally).
+- Dedicated LegendStudy Supabase project created and initial migration applied.
+  Deployment/runtime facts below come from the owner's post-deployment report;
+  this documentation task did not reconnect to the database or repeat the tests.
 - No production ingestion pipeline exists yet
 - Day 2 static analysis and all 4 existing tests passed; Android debug APK and iOS simulator builds passed with the approved identity
 
@@ -47,27 +49,27 @@ Last reviewed: 2026-09-13
 ## Implementation baseline for first scaffold
 
 - Flutter mobile app for iOS and Android
-- Supabase planned for auth, normalized content data, bookmarks/history/profile sync, and backend support
+- Dedicated Supabase backend deployed; Flutter initialization/repositories remain Day 4 work
 - Router-based navigation using `go_router`
 - Riverpod for dependency/state composition
 - Feature-oriented code organization with presentation/domain/data separation where it adds value
 - No Supabase credentials or production secrets committed to Git
 - Initial UI establishes LegendStudy brand tokens and reusable design primitives before feature proliferation
 
-## Immediate next steps
+## Immediate next steps — Day 4
 
-1. Review the unified Day 3 content hierarchy/RLS/idempotency and shared exam-key design; local commit only.
-2. Resolve model/open questions and obtain explicit owner approval before any SQL execution.
-   User applies only to a verified separate LegendStudy Supabase project in a later task.
-3. Build ingestion prototype and validate representative posts across multiple years.
-4. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
-5. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
-6. Register the approved application identifier with Apple/Google and configure signing/OAuth in later platform-integration tasks.
+1. Introduce supabase_flutter and configure the dedicated project URL/publishable key.
+2. Initialize Supabase; implement ContentRepository and Home/Search public reads
+   with explicit column projections and anonymous access.
+3. Establish Auth sessions and profiles/bookmarks/recent_views repositories.
+4. Test the Flutter client against LegendStudy; never include service_role/secret keys.
+5. Follow with the ingestion prototype and source validation; production ingestion,
+   signing/OAuth/store registration and original brand assets remain separate work.
 
 ## Known open questions
 
 - Apple/Google registration availability and signing setup for the approved identity
-- Supabase project creation timing and environment naming
+- Flutter environment configuration and future backend environment separation
 - Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
 - Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
@@ -90,7 +92,7 @@ Last reviewed: 2026-09-13
 - `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
   360×640 display at 2× text scaling, config default/provider override).
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- The owner confirms Supabase is not created or linked; Day 3 draft schema exists but is not deployed. No production ingestion exists.
+- Supabase initial schema is applied; Flutter remains unconnected and production ingestion does not exist.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -146,7 +148,7 @@ Last reviewed: 2026-09-13
   final launcher icon and store registration remain manual follow-up work.
 
 
-## Day 3 unified model / verification (2026-09-12)
+## Historical pre-deployment: Day 3 unified model (2026-09-12)
 
 - Same official checkout/branch: `~/development/legendstudy-app`,
   `codex/day-3-data-model-v01`; LegendStudy origin verified. Prior review fix
@@ -178,7 +180,7 @@ Last reviewed: 2026-09-13
 - No implementation blocker for this draft. No Supabase CLI/DB connection, unrelated
   project access, remote Git push or merge. Independent re-review remains future work.
 
-## Day 3 final checker hardening (2026-09-13)
+## Historical pre-deployment: final checker hardening (2026-09-13)
 
 - Owner-supplied Claude Final Delta Review verdict: **B. minor corrections before
   merge**. Strengthened the offline gate on the same Day 3 branch against b28c003;
@@ -196,3 +198,51 @@ Last reviewed: 2026-09-13
   execution absent. No Flutter edits, remote push, merge or other-project access.
 - No checker/schema mismatch or blocker found. Next: user push and commit/PR #5
   final review, then separately authorized LegendStudy project/runtime work.
+
+## Current deployment and runtime verification (recorded 2026-09-13)
+
+Evidence: owner-provided post-deployment results, not a new DB inspection by Codex.
+Earlier pre-deployment entries above are historical and superseded by this record.
+
+| Item | Recorded state |
+| --- | --- |
+| Project | LegendStudy, completely separate from Muselry |
+| Project Ref | stlhijzpjfgwwdgunlsd |
+| Region | ap-northeast-2 (Seoul) |
+| PostgreSQL | 17.6 |
+| Applied migration | supabase/migrations/20260912000100_initial_content_schema.sql |
+| Application result | Success. No rows returned |
+| Inventory | 10 tables, 16 policies, 10 non-constraint indexes, 8 triggers, 2 trigger functions |
+| RLS | enabled on all 10 tables; FORCE RLS false |
+| Cleanup | all 10 application tables have 0 rows after runtime fixtures were removed |
+
+Prerequisites confirmed: auth.users/auth.uid(), anon/authenticated/service_role,
+service_role BYPASSRLS, deployer REFERENCES on auth.users, and no application-table
+or set_updated_at/set_viewed_at collisions before application.
+
+Generated feed_updated_at, exams.content_type discriminator and sort_date were
+created/calculated successfully on PostgreSQL 17.6; no fallback is needed.
+Anon REST reads active content; direct inactive-slug lookup returns []. Source_posts
+and ingestion_quarantine return HTTP 401 permission denied for anon; authenticated
+SELECT privilege is absent. Anon profiles access also returns HTTP 401.
+
+Two test users obtained real JWTs by password grant. Both created their own
+profiles; A reads A and B cannot read A (empty result). A creates/reads a bookmark;
+B cannot read it and spoofing A's user_id returns HTTP 403 RLS violation. Recent
+views isolate A/B; repeated (user_id, content_item_id) upsert preserves row ID,
+creates no duplicate and advances viewed_at, confirming the PostgREST/clock path.
+
+Taxonomy/content visibility remains structurally correct: the reported inactive
+master is hidden while SQL policies retain active raw occurrence/resource visibility.
+The report does not provide a distinct REST/JWT trace for the full taxonomy case;
+do not upgrade that structural result to exhaustive client-path behavioral coverage.
+SQL Editor SET ROLE is not authoritative RLS evidence; use actual REST/JWT clients.
+
+Zero-row cleanup covers source_posts, content_items, exams, subjects, exam_subjects,
+resources, profiles, bookmarks, recent_views and ingestion_quarantine. Auth test users
+A/B may be retained for later Auth/OAuth tests; their deletion is not claimed.
+No passwords, JWTs or API keys are stored here.
+
+The applied initial migration is immutable, including its historical DRAFT comments.
+All future DB changes require a new migration. Flutter is not connected yet;
+Day 4 integration and remaining scenario coverage in database.md follow next.

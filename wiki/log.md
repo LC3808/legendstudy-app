@@ -142,3 +142,26 @@
   minimally; no schema, Flutter, ingestion implementation or architecture changes.
 - No Supabase project/link/DB connection/SQL execution, remote push or merge. New
   follow-up commit, no amend. Actual target runtime acceptance remains pending.
+
+## 2026-09-13 — Supabase deployment and runtime results recorded
+
+- Day 3 main merge verified locally at c16350c0a60fe1c6281234a7c2056cf02b54d9ad.
+  Owner reports initial migration applied: Success. No rows returned.
+- Dedicated LegendStudy project stlhijzpjfgwwdgunlsd, ap-northeast-2 (Seoul), PG 17.6;
+  prerequisites passed, separate from Muselry. Inventory: 10 tables, 16 policies,
+  10 non-constraint indexes, 8 triggers, 2 functions; RLS enabled, FORCE RLS false.
+- Generated feed/date/type columns created/calculated successfully; no fallback.
+  Anon REST active reads/inactive [] and private-table permission denials passed.
+- Real password-grant JWT users A/B: profiles ownership, bookmarks isolation,
+  HTTP 403 spoof rejection, recent isolation and ID-preserving timestamp upsert
+  passed. Anon profiles denied HTTP 401. No credentials retained in documentation.
+- Taxonomy/content policy separation retained structurally; SQL Editor SET ROLE
+  rejected as authoritative client-path proof. Full taxonomy REST trace not supplied.
+- Owner confirms fixture cleanup: all 10 application tables 0 rows. Two Auth test
+  users may remain for future tests; user deletion is not claimed.
+- Updated deployment docs on codex/day-3-post-deployment-docs, including the stale
+  ingestion status paragraph. Initial migration unchanged; future changes require
+  new migrations. Docs task performed no SQL/DB operations, push or merge.
+- Documentation validation: git diff --check and the offline schema checker pass;
+  initial migration verified byte-identical to the Day 3 main merge. No SQL executed.
+- Next: Day 4 Flutter ↔ Supabase connection; Flutter remains unconnected now.

@@ -3,9 +3,9 @@
 ## Baseline direction
 
 Planned client: Flutter mobile app for iOS and Android.
-Planned backend: Supabase for authentication, normalized app data, personalization, and server-side support where appropriate.
+Backend: dedicated LegendStudy Supabase is deployed for normalized data and Auth; Flutter integration remains Day 4 work.
 
-The Flutter shell is implemented below; Supabase remains planned and unconfigured. Always verify `wiki/current-status.md` and the repository.
+The Flutter shell is implemented below; the backend schema is applied but Flutter is not connected. Always verify `wiki/current-status.md` and the repository.
 
 ## High-level components
 
@@ -34,7 +34,7 @@ The app should consume structured records rather than parse the website during n
 
 ## Environments
 
-The owner-approved production app identifier is `com.legendstudy.app` on Android and iOS. Backend environments, signing, OAuth and store registration remain unconfigured; all remain independent of Muselry.
+The owner-approved production app identifier is `com.legendstudy.app` on Android and iOS. The dedicated backend is LegendStudy (`stlhijzpjfgwwdgunlsd`, Seoul ap-northeast-2, PostgreSQL 17.6), separate from Muselry. Flutter backend configuration, signing, OAuth and store registration remain pending.
 
 ## Implemented Day 1 scaffold (2026-09-12)
 
@@ -55,8 +55,9 @@ The owner-approved production app identifier is `com.legendstudy.app` on Android
   unknown paths offer a home recovery action. Router disposal is provider-owned.
 - Package versions were resolved against the installed SDK, rather than upgrading
   the user's global Flutter installation. Commit `pubspec.lock` with changes.
-- Korean Material localization enabled. No WebView, network source scraping,
-  Supabase dependency/schema, authentication, or production feature logic exists.
+- Korean Material localization enabled. At the Day 1 scaffold stage, no WebView,
+  network source scraping, Supabase dependency/schema, authentication, or production
+  feature logic existed. See the deployed Day 3 backend boundary below.
 
 ### Development environment and identity
 
@@ -84,10 +85,11 @@ Package references: [Riverpod](https://pub.dev/packages/flutter_riverpod/version
 and [go_router](https://pub.dev/packages/go_router/versions/17.0.0).
 
 
-## Day 3 unified data boundary — proposal, not integrated
+## Day 3 unified data boundary — deployed backend, Flutter not integrated
 
-The owner confirms LegendStudy Supabase is not created/linked; all schema SQL is
-unapplied. database.md defines entities/security; ingestion.md defines source
+The owner reports the dedicated Supabase initial schema applied and REST/JWT
+runtime tests completed for the cases in database.md. Supabase is the deployed
+backend source of truth; all 10 application tables are empty after fixture cleanup. database.md defines entities/security; ingestion.md defines source
 classification, reprocessing and quarantine. No Flutter/SDK integration exists.
 
 The app's public primary entity is **content_items**. source_posts is backend-only
@@ -117,8 +119,8 @@ use the occurrence/content composite FK. Saved and Recent target all content typ
   only those two keys, omitting id/viewed_at; trigger supplies time. Hidden content
   becomes an unavailable item that its owner may still remove.
 - Profile POST upsert remains id/display_name/grade_level only. Owner RLS guards
-  old/new rows; unchanged id assignment is permitted. All API behavior is pending
-  actual PostgREST/runtime tests after separately authorized application.
+  old/new rows; unchanged id assignment is permitted. Reported REST/JWT profile ownership and recent upsert tests passed. Additional
+  profile conflict-upsert cases and Flutter integration remain to be tested.
 
 ### Native screen routing
 
@@ -135,3 +137,13 @@ Content IDs/slugs survive source modifications and soft merges. Backend-only
 classification, source keys, diagnostic notes and quarantine do not enter public
 DTOs. No university master, article service, search engine, semantic classifier or
 notification infrastructure is added. Notifications remain a later v1.0 milestone.
+
+### Post-deployment boundary
+
+Deployment facts are owner-reported; this docs task did not reconnect to Supabase.
+RLS client-path validation uses real REST/JWT, not SQL Editor SET ROLE. Preserve
+the applied initial migration; future DB changes require new migrations. Day 4
+adds supabase_flutter, URL/publishable-key configuration, initialization, public
+ContentRepository reads with explicit projections, Auth sessions and personal
+repositories. No service_role/secret key may enter Flutter. No such code is added
+by this documentation update.
