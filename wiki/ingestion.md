@@ -1,65 +1,141 @@
-# Ingestion Strategy
+# Ingestion Strategy — Data Model v0.1
 
-## Goal
+## Status
 
-Convert legacy and new content from `legendstudy.com` into stable, structured records for native app search, filtering, detail pages, and resource access.
+Design only. No crawler, ingestion writes, SQL execution, deployed schema or
+Supabase project creation occurred in Day 3. `wiki/database.md` is the canonical
+model; the draft migration is not a deployed database. Website reading for design
+was limited to representative public pages, not a backfill or file download.
 
-## Design principle
+## Source observations
 
-Do not scrape/parse the website during normal app browsing.
+Day 1 recorded an archive count of 1,673 and mixed exam/논술 content; that count
+is a dated observation, not a hard-coded ingestion boundary or completeness claim.
+Day 3 read [post 1705](https://legendstudy.com/1705),
+[post 1686](https://legendstudy.com/1686), and
+[post 1415](https://legendstudy.com/1415). They demonstrate modern elective labels,
+calendar/academic-year differences, historical math variants, and audio/script
+links. Attachment bytes, redirects, MIME, URL permanence and archive completeness
+remain unverified. Source-heading errors are possible; never infer taxonomy from
+a single inconsistent heading when filenames disagree.
 
-Preferred flow:
+## Flow and table mapping
 
-`legendstudy.com` → ingestion process → normalized database → app
+`legendstudy.com → trusted parser/review → normalized tables → native app`
 
-## Verified source observations — 2026-09-12
+| Parsed signal | Destination |
+| --- | --- |
+| Stable post ID, canonical URL, source title/category/timestamps | source_posts |
+| Fetch outcome, normalized content hash, parser version, uncertainty | private source_posts metadata + file-based run report |
+| Exam/session blocks and reviewed date/type/grade metadata | exams (possibly several per post) |
+| Curated taxonomy releases | subjects, managed separately from arbitrary scrape labels |
+| Subject occurrences, original labels and proposed mappings | exam_subjects |
+| Attachment/link occurrences, purpose, raw label, scope and original href | resources |
+| Optional personal profile/save/view action | profiles/bookmarks/recent_views via authenticated client later; never crawler |
 
-- The site currently exposes 1,673 items in the overall archive.
-- The home/archive listing includes high-school mock exams, CSAT-related material, and university essay/논술 material.
-- Exam posts commonly contain multiple downloadable resources inside a single post, including problem PDFs, answer/explanation PDFs, English listening MP3 files, and grade-cut images/information.
-- Naming varies by year and subject. Examples include separate Korean language options, mathematics options, social studies subjects, science subjects, and integrated subjects.
-- Recent and older posts share the same broad concept but are not guaranteed to use identical filename/title conventions.
-- Website access is intentionally public without mandatory login, which should be preserved in the app experience where possible.
+Only trusted ingestion may write content; it can use a service-role context later.
+Keys stay server-side. Public app reads never scrape source HTML. Do not borrow
+another application's project, schema, OAuth configuration or credentials.
 
-These observations support a normalized resource model rather than a one-post-one-file model.
+## Source identity and stable keys
 
-## Initial backfill
+1. For current numeric post URLs use source=`legendstudy`, external_post_id equal
+   to the numeric path as text. Preserve the observed URL in raw_metadata; store a
+   canonical `https://legendstudy.com/<id>` URL for identity after redirect verification.
+   Canonicalization must not discard an unknown meaningful path/query. A Tistory
+   alias only resolves to the same post after evidence, not host-name guessing.
+2. Upsert source_posts by `(source, external_post_id)` when known; fallback to the
+   unique canonical URL when absent. Resolve existing rows with either key first.
+   If keys identify different rows, quarantine the conflict; do not overwrite one.
+3. Give a single confirmed exam block a persisted `source_exam_key` (e.g. `main`).
+   For multiple blocks allocate stable keys once and save the segmentation mapping
+   in minimal raw_metadata. Never recompute keys from list position or normalized
+   year/grade/title. A split/merge needs explicit reconciliation, not delete/reinsert.
+4. Match a subject occurrence by an established stable source identifier, or persist
+   an allocated `source_subject_key` alongside source-label/attachment evidence.
+   Unmapped or identically normalized subjects still have distinct keys. Preserve
+   keys through remapping and reorder; ambiguous renamed/split occurrences require
+   review rather than guessing equivalence.
+5. For a resource prefer a verified provider attachment/file ID. Otherwise allocate
+   and persist a `source_resource_key` with minimal matching evidence. Exact repeated
+   href + label within a confirmed scope can identify an existing occurrence; a
+   hash of a mutable signed URL is not a durable identity. If a link changes and
+   identity cannot be proven, hold for review instead of auto-creating duplicates.
+6. Upsert on `(source_post_id, source_exam_key)`, `(exam_id, source_subject_key)`,
+   and `(exam_id, source_post_id, source_resource_key)` respectively. UUIDs, slugs,
+   user bookmark references and already-reviewed mappings survive reprocessing.
 
-1. Discover historical posts through available sitemap/category/archive/index mechanisms.
-2. Fetch individual posts.
-3. Parse title, publication metadata, grade/exam/year/month/subject signals, and attachment/resource links.
-4. Normalize into structured entities.
-5. Preserve source URL and source identifiers for traceability.
-6. Upsert idempotently.
-7. Generate an ingestion report for parse failures and ambiguous records.
+An exam can collect resources from secondary posts, each retaining provenance.
+Cross-post exam matching is explicit and evidence-based; do not globally equate
+same year/month/grade because source naming can be wrong and several sessions may
+exist. Initial ingestion needs a reconciliation manifest in private metadata; the
+unique keys alone cannot make a nondeterministic parser idempotent.
 
-## Incremental ingestion
+## Raw evidence and uncertainty
 
-RSS or another lightweight feed may be used for new-post detection if verified reliable, but individual post content remains the source for detailed resource extraction.
+- Store every observed subject label in `raw_subject_label`, every attachment label
+  in `source_label`; never substitute a normalized code for source text. If a label
+  is absent, use NULL, not invented “unknown” source text. Source-level raw date,
+  grade, year, size strings and parser evidence live in raw_metadata.
+- Separate calendar `year` from source `academic_year`; a publication date is not
+  an exam date. Preserve the nominal `exam_month` even if an exam was postponed to
+  another month; `exam_date` is nullable until an actual date is supported.
+- `raw_exam_type`, `raw_grade_label`, `curriculum_version` and normalization notes
+  preserve meaning/uncertainty. Unknown normalized type/grade/date remain NULL.
+  Bound-check values; hold conflicting year/date for review rather than changing
+  the source evidence to satisfy constraints.
+- Unknown subject → NULL subject and taxonomy version, unmapped status, NULL
+  confidence, note explaining why. Proposed mapping → provisional status with
+  version, confidence and rule version. A reviewer can mark verified; no automatic
+  confidence threshold is defined in v0.1. Raw labels remain after confirmation.
+- Historical 가형/나형 can later map to reviewed historical master entries; do not
+  map them to present-day electives just to fill a foreign key. Taxonomy releases
+  and their hierarchies need a separate review (including cycle checks).
+- Public exam/subject/resource labels and notes contain only publishable material.
+  Private run errors stay in source_posts or restricted reports. Do not collect
+  comments, account information, cookies, bearer tokens or full HTML by default.
+- A changed source label updates current evidence with a diagnostic note/report
+  of the change; full revision/event history is deferred, not silently promised.
 
-## Parser implications
+## URLs, checks and publication
 
-The parser must support multiple resources per post and should separate at least:
-- problem
-- answer / explanation
-- listening audio
-- grade-cut / score information
-- other supporting documents
+Preserve every original `source_url` exactly as observed. A Box share link is a
+landing-page resource; it is not a direct audio URL merely because its label says
+MP3. `file_url` remains NULL until independently verified. No file-size/MIME guess
+from rounded labels. No downloads/mirroring/Storage buckets are part of Day 3.
 
-It should also preserve the raw resource label/file name because legacy naming conventions are useful for debugging and later taxonomy improvements.
+Before any future network fetcher, validate allowed hosts, redirects and resolved
+IP ranges to prevent server-side URL abuse. DB URL CHECKs only validate shape.
+Do not strip attachment query parameters from stored source_url or put expiring
+signed credentials into durable public metadata. Report links requiring such
+credentials and decide a stable source-link strategy separately.
 
-## Remaining re-validation before parser implementation
+All four public content tables default inactive. For each post, prepare/review a
+complete normalized batch and commit its upserts atomically in the future trusted
+pipeline, locking the source row or otherwise serializing same-post workers.
+Update content_hash/parser_version only after that normalized transaction succeeds.
+Hash changes are based on meaningful normalized source content, excluding transient
+ads/timestamps; identical hash is skippable only when parser and mapping versions
+are unchanged and there is no pending reprocessing/review need.
 
-Verify:
-- sitemap availability and completeness
-- RSS/feed behavior
-- category/archive pagination mechanics
-- representative much-older post HTML patterns
-- direct PDF/audio attachment URL behavior
-- robots/usage constraints
-- duplicate/redirect behavior
-- exam naming conventions across a broad year range
+Publish only the reviewed exam, subject mapping and resource hierarchy. A broken
+link or temporary source error updates source_status/link_status and a report;
+it must not immediately delete/deactivate all previously good material. Missing
+items are reconciled only after a successful complete parse. Partial fetch/parse
+must not advance success metadata or treat omitted attachments as deletions.
 
-## Data-quality rule
+## Reporting and future validation
 
-Parser uncertainty must be recorded instead of silently inventing metadata. Raw source fields/source URLs should remain available for diagnosis.
+No ingestion_runs table in v0.1. The initial parser should emit a restricted
+structured run report (run ID, parser/mapping version, start/end, processed,
+inserted, updated, skipped, failed counts, bounded non-sensitive error summaries).
+Source-level status/hash/version are persisted; durable run history can be added
+when operations require it.
+
+Before backfill implementation, revalidate sitemap/RSS/robots, archive pagination,
+attachment behavior, older curricula, duplicate/redirect handling, bounded retries
+and missing-source grace periods. Test same input twice, reordered subjects/files,
+corrected raw labels, changed taxonomy, signed-query changes, partial failure,
+concurrent workers, multi-exam posts and secondary source reconciliation. Expected
+result is stable identities and no accidental deletion/duplication, not merely
+passing a unique constraint. Representative mappings are in `wiki/database.md`.

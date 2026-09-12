@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — Day 2 production identity and brand baseline merged to main**
+**Phase 1 — Day 3 Data Model v0.1 and draft SQL designed locally, not applied**
 
 ## Verified state
 
@@ -23,7 +23,8 @@ Last reviewed: 2026-09-12
 - Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
 - Day 2 production identity/brand baseline is merged to `main` via PR #4
 - Day 2 squash merge commit: `5699af00c34d5101483f9f2750d2474ecd9aa686`
-- Supabase project/schema for LegendStudy has not yet been created or verified
+- Schema designed locally; no Supabase project/migration has been applied by this task.
+  Existing remote project/schema state has not been queried or verified.
 - No production ingestion pipeline exists yet
 - Day 2 static analysis and all 4 existing tests passed; Android debug APK and iOS simulator builds passed with the approved identity
 
@@ -55,8 +56,9 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Define normalized data model v0.1 from representative current + legacy content.
-2. Prepare Supabase schema/migrations for direct user execution in a separate task.
+1. Review Day 3 schema/RLS/idempotency (ChatGPT first, Claude recommended); local commit only.
+2. Resolve model/open questions and obtain explicit owner approval before any SQL execution.
+   User applies only to a verified separate LegendStudy Supabase project in a later task.
 3. Build ingestion prototype and validate representative posts across multiple years.
 4. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
 5. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
@@ -66,8 +68,8 @@ Last reviewed: 2026-09-12
 
 - Apple/Google registration availability and signing setup for the approved identity
 - Supabase project creation timing and environment naming
-- Exact content taxonomy needed to represent historical posts consistently
-- PDF/audio storage strategy: source-link preservation vs selective mirroring
+- Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
+- Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
 - Launcher icon replacement when original brand assets are supplied
 
@@ -88,7 +90,7 @@ Last reviewed: 2026-09-12
 - `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
   360×640 display at 2× text scaling, config default/provider override).
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- Supabase remains uncreated/unverified; no schema or production ingestion changes.
+- Supabase remains uncreated/unverified by this task; Day 3 draft schema exists but is not deployed. No production ingestion exists.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -142,3 +144,33 @@ Last reviewed: 2026-09-12
 - No new features, Supabase project/schema, OAuth, AdMob, IAP or store registration.
 - No implementation/build blocker. Apple signing, Google/Apple/Kakao OAuth,
   final launcher icon and store registration remain manual follow-up work.
+
+
+## Day 3 design / verification (2026-09-12)
+
+- Branch: `codex/day-3-data-model-v01`, based on updated main in
+  `~/development/legendstudy-app`; origin verified as the LegendStudy repository.
+- Draft: `supabase/migrations/20260912000100_initial_content_schema.sql`.
+- Eight proposed tables: source_posts, exams, subjects, exam_subjects, resources,
+  profiles, bookmarks, recent_views. No ingestion_runs or v2 feature tables.
+- Versioned/raw taxonomy, calendar versus academic year, same-exam resource FK,
+  source-link-first URLs, stable ingestion keys and user-owned upsert rules documented.
+- Four active public content tables, backend-only provenance, own-row personal
+  policies; explicit grants and RLS on all eight tables. 15 policies, 11 additional
+  indexes, two invoker clock functions and seven triggers in the draft.
+- Three source-grounded cases documented: recent 2026 May exam, legacy math 가형/나형,
+  English audio + script; separate calendar/academic-year example also verified
+  against source page text. No attachment binaries downloaded or validated.
+- Offline pglast 8.4 / PostgreSQL 18.4 parser accepted 67 migration statements and
+  two PL/pgSQL function bodies; 8 future SELECT-only inspection statements parsed.
+  Checked-in structural checker passes; five injected safety regressions were all
+  detected (RLS/owner omission, client content write, weakened FK, content cascade).
+  Credential-pattern scan found no matches. No SQL statements/function bodies executed.
+- `git diff --check` passes. Flutter/platform/brand/dependency files unchanged;
+  Flutter tests/builds not rerun for this SQL/documentation-only task.
+- RLS runtime, actual FK/trigger behavior, PostgREST upserts, extension availability
+  and query plans remain untested until separately approved DB validation.
+- No Supabase CLI application/reset/push, DB connection, project creation/linking,
+  remote Git push or merge. No keys, credentials, auth provider or storage setup.
+- Review guidance and future validation/rollback considerations are in
+  `supabase/README.md` and `wiki/database.md`. No design-task blocker.

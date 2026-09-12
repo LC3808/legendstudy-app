@@ -62,3 +62,23 @@
 - PR #4 was squash-merged into `main` as commit
   `5699af00c34d5101483f9f2750d2474ecd9aa686`; Issue #3 closed through the PR.
 - Post-merge `wiki/current-status.md` was updated so canonical status matches the merged state.
+
+
+### Day 3 — Data Model v0.1 and Supabase SQL draft
+
+- Re-read canonical documents, verified origin/clean state, updated main and created
+  `codex/day-3-data-model-v01` in the official development checkout.
+- Read representative public source posts for modern options, legacy 가형/나형,
+  calendar/academic-year differences and audio/script/landing-page attachments.
+- Designed eight tables with versioned nullable taxonomy mappings, raw labels,
+  resource provenance/composite FK, source-link-first access and stable ingestion keys.
+- Added draft migration, offline parser/structural checker and future read-only
+  inspection SQL; documented grants/RLS, indexes, cascade boundaries and review cases.
+- pglast 8.4 accepted 67 migration statements, two PL/pgSQL bodies and eight
+  inspection SELECTs; structural checks and diff checks passed. Five offline
+  injected safety regressions were detected; credential-pattern scan found no matches.
+  No SQL executed.
+- Updated database, ingestion, current-status, decisions and architecture wiki.
+  No Flutter or platform/dependency changes, and no Supabase project/backend applied.
+- Local commit only; push/merge/application require later authorization. ChatGPT
+  review followed by Claude RLS/FK/idempotency review is recommended before execution.

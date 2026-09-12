@@ -82,3 +82,33 @@ safe place for secrets. No backend keys are currently used or needed.
 
 Package references: [Riverpod](https://pub.dev/packages/flutter_riverpod/versions/3.3.2)
 and [go_router](https://pub.dev/packages/go_router/versions/17.0.0).
+
+
+## Day 3 data boundary — proposal, not integrated
+
+Data Model v0.1 and a draft migration now exist locally; no SQL was executed and
+no Supabase project was created or linked. `wiki/database.md` is the canonical
+entity/RLS/index specification; `wiki/ingestion.md` defines source identity,
+reprocessing and uncertainty. Database state remains unverified, not deployed.
+
+The proposed read path is public active exams → subject occurrences → resource
+links. Original post diagnostics stay backend-only in source_posts. Content writes
+belong to trusted ingestion; user profile/bookmark/recent-view writes use a user
+session with RLS. Service-role credentials never enter the client.
+
+Future pure-Dart domain objects may be ExamSummary/ExamDetail, ExamSubject,
+SubjectMapping and StudyResource; data DTOs may use matching `*Dto` names with
+explicit nullable/raw fields. This is naming guidance, not implemented code.
+Repositories should expose filters and bounded keyset pages, not Supabase query
+builders or source HTML. The data layer maps PostgREST rows and distinguishes
+landing-page links from verified direct binaries; the domain preserves unknown
+mapping/date values. Fetch paginated exams separately from their resource lists.
+Auth-user ownership is independent of optional profiles. RecentViewsRepository
+should upsert `(user_id, exam_id)` and honor server timestamps; bookmark saves use
+insert-on-conflict-do-nothing semantics. Hidden exam joins become unavailable
+items that owners can still remove. Details and cursor null-year behavior are
+specified in the database document.
+
+No Flutter files, dependencies, runtime behavior, signing, branding or platform
+identifiers changed in Day 3; actual repository/data-source implementation follows
+review and a separately authorized schema application.
