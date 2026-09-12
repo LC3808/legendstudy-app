@@ -34,7 +34,7 @@ The app should consume structured records rather than parse the website during n
 
 ## Environments
 
-Production environment and identity are not finalized. The explicit development-only baseline is documented below and remains independent of Muselry.
+The owner-approved production app identifier is `com.legendstudy.app` on Android and iOS. Backend environments, signing, OAuth and store registration remain unconfigured; all remain independent of Muselry.
 
 ## Implemented Day 1 scaffold (2026-09-12)
 
@@ -60,12 +60,19 @@ Production environment and identity are not finalized. The explicit development-
 
 ### Development environment and identity
 
-Both platform app identifiers use temporary `dev.legendstudy.scaffold`;
-iOS test target uses `dev.legendstudy.scaffold.RunnerTests`. Android Kotlin
-namespace matches its application ID. No production ownership is implied.
-Dart package name is `legendstudy_app`. Final identifiers require owner confirmation
-before platform signing/OAuth/store registration. No Apple team is committed;
-Android release signing must be configured explicitly before distribution.
+As of Day 2, Android application ID, namespace and Kotlin package are
+`com.legendstudy.app`. The Kotlin activity is under
+`android/app/src/main/kotlin/com/legendstudy/app/MainActivity.kt`.
+iOS Runner uses `com.legendstudy.app` for Debug, Release and Profile; RunnerTests
+uses the distinct test-only bundle `com.legendstudy.app.RunnerTests` in all three
+configurations. Dart package remains `legendstudy_app`. Android and iOS display
+`레전드스터디`.
+
+The owner approved this production identity; Apple/Google registration and
+availability have not been checked or claimed. No Apple team, certificate or
+provisioning profile is configured; Android release signing remains unconfigured.
+Brand source conventions live in `assets/brand/README.md`; no original logos
+are present and the Flutter launcher icons remain unchanged.
 
 `AppConfig.fromEnvironment` reads public `APP_ENV` (default `development`) through
 `appConfigProvider`; this is a configuration extension point, not a working

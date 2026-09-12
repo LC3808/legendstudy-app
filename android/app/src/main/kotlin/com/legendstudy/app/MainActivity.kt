@@ -1,4 +1,4 @@
-package dev.legendstudy.scaffold
+package com.legendstudy.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -40,3 +40,20 @@
   `873f4e1e0d131bb81dfa63766ff51966764ddd42`; Issue #1 closed through the PR.
 - Post-merge `wiki/current-status.md` was corrected so the canonical status no longer
   claims the implementation branch is local/unpublished.
+
+### Issue #3 — Day 2 production identity and brand baseline
+
+- Updated Android applicationId/namespace/Kotlin package and iOS Runner bundle
+  identifiers to owner-approved `com.legendstudy.app`; moved MainActivity under
+  `com/legendstudy/app/`. RunnerTests uses `com.legendstudy.app.RunnerTests`.
+- Both platforms now display `레전드스터디`; Dart package remains `legendstudy_app`.
+- Established `assets/brand/` and `source/` with original-asset conventions; no
+  original logos are present, so Flutter launcher icons and palette remain unchanged.
+- Updated README and current-status, decisions, design-system, architecture wiki.
+- Flutter 3.32.0 / Dart 3.8.0: pub get, analysis, 4 tests, Android debug build,
+  iOS simulator build and diff checks passed. Verified new identity/display names
+  directly in APK metadata and built iOS Info.plist, plus all Xcode configurations.
+- Old identifier remains only in historical Day 1 wiki entries. No secrets,
+  signing/team, OAuth, backend or feature changes. Store registration not attempted.
+- Worked in `~/development/legendstudy-app` on `codex/day-2-production-identity`;
+  local commit only, with push/merge pending review.

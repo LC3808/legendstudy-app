@@ -55,3 +55,16 @@ test checks every tab at 360 × 640 and 2× text scaling for layout exceptions.
 This is baseline coverage, not a full accessibility audit. Launcher icons are
 unmodified Flutter placeholders; original LegendStudy logo assets are not in the
 repository and should be supplied before production icon work.
+
+## Day 2 brand asset baseline
+
+`assets/brand/` is the canonical location for original owner-supplied brand assets.
+Expected files are `legendstudy-logo.png`, `legendstudy-logo-horizontal.png`, and
+`legendstudy-symbol.png`; `assets/brand/source/` preserves original design files.
+These are filename conventions, not a claim that logo binaries are available.
+See `assets/brand/README.md` for preservation and provenance rules.
+
+No original logo files are present in the repository as of this work. No logo is
+fabricated or redrawn, and generated Flutter launcher icons remain unchanged
+until real source assets arrive. The existing palette and orange-accent usage
+remain unchanged. Both platform app display names are `레전드스터디`.

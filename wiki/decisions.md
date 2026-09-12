@@ -33,3 +33,15 @@ The app should consume normalized structured data. `legendstudy.com` content sho
 ## 2026-09-12 — Login philosophy
 
 Public study-resource access should not require login where possible. Login is primarily for personalization and synchronization.
+
+## 2026-09-12 — Production application identity
+
+Owner-approved in Day 2 / issue #3: use `com.legendstudy.app` for both Android
+applicationId/namespace and the iOS Runner bundle identifier. Dart package remains
+`legendstudy_app`; both platforms display `레전드스터디`. The iOS test-only bundle
+uses `com.legendstudy.app.RunnerTests` to remain distinct from the app target.
+
+This decision replaces Day 1's temporary identity and is independent of Muselry.
+It does not imply Apple/Google registration, signing or OAuth configuration.
+If platform registration reports a conflict, report it to the owner and keep the
+choice unresolved rather than silently inventing another production identifier.

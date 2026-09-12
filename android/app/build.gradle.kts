@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.legendstudy.scaffold"
+    namespace = "com.legendstudy.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,8 +20,8 @@ android {
     }
 
     defaultConfig {
-        // Development-only identity; confirm production ID before signing or OAuth.
-        applicationId = "dev.legendstudy.scaffold"
+        // Owner-approved production identity; signing and store setup are separate.
+        applicationId = "com.legendstudy.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
