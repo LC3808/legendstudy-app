@@ -55,5 +55,10 @@
   directly in APK metadata and built iOS Info.plist, plus all Xcode configurations.
 - Old identifier remains only in historical Day 1 wiki entries. No secrets,
   signing/team, OAuth, backend or feature changes. Store registration not attempted.
-- Worked in `~/development/legendstudy-app` on `codex/day-2-production-identity`;
-  local commit only, with push/merge pending review.
+- Worked in `~/development/legendstudy-app` on `codex/day-2-production-identity`.
+- Pushed commit `017630067c97578008b9f93359af0caef018ede2` and opened PR #4.
+- ChatGPT review found no blocking issue in platform identity, display-name, brand-source,
+  secret/signing boundary, or wiki changes.
+- PR #4 was squash-merged into `main` as commit
+  `5699af00c34d5101483f9f2750d2474ecd9aa686`; Issue #3 closed through the PR.
+- Post-merge `wiki/current-status.md` was updated so canonical status matches the merged state.
