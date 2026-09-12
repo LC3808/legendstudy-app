@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — Day 2 production identity and brand baseline verified locally**
+**Phase 1 — Day 2 production identity and brand baseline merged to main**
 
 ## Verified state
 
@@ -21,9 +21,11 @@ Last reviewed: 2026-09-12
 - Historical naming differs materially from newer curricula (for example, legacy mathematics `가형/나형`), so ingestion must preserve raw labels and support taxonomy versioning/uncertainty
 - Flutter application scaffold is merged to `main` via PR #2
 - Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
+- Day 2 production identity/brand baseline is merged to `main` via PR #4
+- Day 2 squash merge commit: `5699af00c34d5101483f9f2750d2474ecd9aa686`
 - Supabase project/schema for LegendStudy has not yet been created or verified
 - No production ingestion pipeline exists yet
-- Day 2 static analysis and all 4 existing tests pass; Android debug APK and iOS simulator builds pass with the approved identity.
+- Day 2 static analysis and all 4 existing tests passed; Android debug APK and iOS simulator builds passed with the approved identity
 
 ## Operating model
 
@@ -53,12 +55,12 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Review the local Day 2 identity/brand commit; push and merge remain pending.
-2. Define normalized data model v0.1 from representative current + legacy content.
-3. Prepare Supabase schema/migrations for direct user execution in a separate issue.
-4. Build ingestion prototype and validate representative posts across multiple years.
-5. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
-6. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
+1. Define normalized data model v0.1 from representative current + legacy content.
+2. Prepare Supabase schema/migrations for direct user execution in a separate task.
+3. Build ingestion prototype and validate representative posts across multiple years.
+4. Re-check sitemap/RSS/robots/direct attachment behavior during ingestion implementation.
+5. Add original LegendStudy brand assets and replace placeholder launcher icons when the assets are committed to the repository.
+6. Register the approved application identifier with Apple/Google and configure signing/OAuth in later platform-integration tasks.
 
 ## Known open questions
 
@@ -106,6 +108,9 @@ Last reviewed: 2026-09-12
 - PR #2 was reviewed against routing, Riverpod setup, theme/configuration, secret handling, tests, and wiki consistency.
 - No blocking defect was found for the Day 1 scaffold.
 - PR #2 was squash-merged into `main` on 2026-09-12.
+- PR #4 was reviewed against Android/iOS identity configuration, display names, brand-asset conventions, secret/signing boundaries, and wiki consistency.
+- No blocking defect was found for the Day 2 identity/brand baseline.
+- PR #4 was squash-merged into `main` on 2026-09-12.
 - No GitHub Actions workflow is configured yet; merge verification relies on the recorded local analyze/test/build results plus repository review.
 
 ## Remaining manual / release work
@@ -119,8 +124,7 @@ Last reviewed: 2026-09-12
 ## Day 2 verification (2026-09-12)
 
 - Official working checkout: `~/development/legendstudy-app`; origin verified as
-  `https://github.com/LC3808/legendstudy-app.git`. Based on updated `main`, working
-  branch `codex/day-2-production-identity`. Local commit only; no push or merge.
+  `https://github.com/LC3808/legendstudy-app.git`.
 - Flutter 3.32.0 / Dart 3.8.0 used; `flutter pub get` and `flutter analyze` pass;
   `flutter test --reporter expanded`: all 4 tests pass.
 - `flutter build apk --debug` and `flutter build ios --simulator --debug`: pass.
