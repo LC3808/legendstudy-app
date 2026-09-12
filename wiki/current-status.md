@@ -4,7 +4,7 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 1 — Day 1 Flutter scaffold merged to main**
+**Phase 1 — Day 2 production identity and brand baseline verified locally**
 
 ## Verified state
 
@@ -23,7 +23,7 @@ Last reviewed: 2026-09-12
 - Day 1 squash merge commit: `873f4e1e0d131bb81dfa63766ff51966764ddd42`
 - Supabase project/schema for LegendStudy has not yet been created or verified
 - No production ingestion pipeline exists yet
-- Static analysis and all 4 baseline tests passed; Android debug APK and iOS simulator builds passed on the implementation branch before merge
+- Day 2 static analysis and all 4 existing tests pass; Android debug APK and iOS simulator builds pass with the approved identity.
 
 ## Operating model
 
@@ -53,7 +53,7 @@ Last reviewed: 2026-09-12
 
 ## Immediate next steps
 
-1. Confirm final app identifiers before signing, OAuth, or store registration.
+1. Review the local Day 2 identity/brand commit; push and merge remain pending.
 2. Define normalized data model v0.1 from representative current + legacy content.
 3. Prepare Supabase schema/migrations for direct user execution in a separate issue.
 4. Build ingestion prototype and validate representative posts across multiple years.
@@ -62,14 +62,14 @@ Last reviewed: 2026-09-12
 
 ## Known open questions
 
-- Final Flutter package/application identifiers
+- Apple/Google registration availability and signing setup for the approved identity
 - Supabase project creation timing and environment naming
 - Exact content taxonomy needed to represent historical posts consistently
 - PDF/audio storage strategy: source-link preservation vs selective mirroring
 - AdMob/IAP timing for v1.0
 - Launcher icon replacement when original brand assets are supplied
 
-## Day 1 implementation details
+## Application implementation details
 
 - Flutter 3.32.0 stable / Dart 3.8.0 actually used; dependencies locked.
 - Riverpod 3.3.2 for dependency/state composition; go_router 17.0.0 for routing.
@@ -77,8 +77,9 @@ Last reviewed: 2026-09-12
   Real domain/data layers are deferred until business logic and data access exist.
 - Home `/home`, Browse `/browse`, Saved `/saved`, Profile `/profile` are placeholders.
 - Orange accents with white/light surfaces, Korean Material localization, scalable text.
-- Android application ID/namespace and iOS bundle ID: temporary `dev.legendstudy.scaffold`.
-  Dart package: `legendstudy_app`. No production identity is confirmed.
+- Owner-approved Android application ID/namespace/Kotlin package and iOS Runner bundle ID:
+  `com.legendstudy.app`. iOS RunnerTests uses `com.legendstudy.app.RunnerTests`.
+  Dart package remains `legendstudy_app`; Android/iOS display name is `레전드스터디`.
 - No iOS development team or Android release signing configuration committed.
 - Public `APP_ENV` via Dart defines; local config ignored; no backend secrets required.
 - `flutter analyze`: passed with no findings.
@@ -87,7 +88,7 @@ Last reviewed: 2026-09-12
 - `flutter doctor -v`: all installed toolchains reported healthy.
 - Supabase remains uncreated/unverified; no schema or production ingestion changes.
 
-## Platform verification (2026-09-12)
+## Historical Day 1 platform verification (2026-09-12)
 
 - `flutter build apk --debug`: passed; `build/app/outputs/flutter-apk/app-debug.apk`.
   First build installed Flutter-required Android NDK 26.3.11579264; build took 626s.
@@ -109,7 +110,31 @@ Last reviewed: 2026-09-12
 
 ## Remaining manual / release work
 
-- Confirm production identifiers; configure signing only after confirmation.
+- Register the approved identifier with Apple/Google and configure signing in a separate task.
+  Registration availability has not been checked or claimed; no conflict was reported by local builds.
 - Provide original brand assets and replace generated Flutter launcher icons.
 - Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
 - Neither release readiness nor a deployed backend is implied by this scaffold.
+
+## Day 2 verification (2026-09-12)
+
+- Official working checkout: `~/development/legendstudy-app`; origin verified as
+  `https://github.com/LC3808/legendstudy-app.git`. Based on updated `main`, working
+  branch `codex/day-2-production-identity`. Local commit only; no push or merge.
+- Flutter 3.32.0 / Dart 3.8.0 used; `flutter pub get` and `flutter analyze` pass;
+  `flutter test --reporter expanded`: all 4 tests pass.
+- `flutter build apk --debug` and `flutter build ios --simulator --debug`: pass.
+- APK metadata verifies package `com.legendstudy.app`, launch activity
+  `com.legendstudy.app.MainActivity`, and application label `레전드스터디`.
+- Built iOS `Runner.app/Info.plist` verifies `CFBundleIdentifier=com.legendstudy.app`
+  and `CFBundleDisplayName=레전드스터디`. All Runner and RunnerTests configurations
+  inspected directly in the Xcode project (Debug, Release, Profile).
+- Repository source scan finds the old identifier only in historical Day 1
+  current-status/log entries; none in active platform/runtime configuration.
+- `git diff --check` passes. No secrets, signing material or development team added.
+- `assets/brand/README.md` defines expected originals and `assets/brand/source/`
+  is retained for unmodified source files. No original logo binaries are available;
+  existing Flutter launcher icons and all UI palette tokens remain unchanged.
+- No new features, Supabase project/schema, OAuth, AdMob, IAP or store registration.
+- No implementation/build blocker. Apple signing, Google/Apple/Kakao OAuth,
+  final launcher icon and store registration remain manual follow-up work.

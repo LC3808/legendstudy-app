@@ -42,13 +42,15 @@ application IDs. Local JSON and `.env` files are ignored. Dart defines are
 extractable from client binaries: never include server secrets, service-role
 keys, OAuth secrets, or signing material, even in ignored client config files.
 
-Temporary Android application ID / namespace and iOS bundle ID:
-`dev.legendstudy.scaffold`. Dart package: `legendstudy_app`. These values are
-only for development and are not an approved production identity. Obtain final
-identifiers before signing, OAuth, store registration, or distribution. iOS
-has no committed development team; Android release signing is unconfigured.
-Generated Flutter launcher icons remain placeholders until original brand
-assets are available.
+Owner-approved Android application ID / namespace and iOS bundle ID:
+`com.legendstudy.app`. Dart package remains `legendstudy_app`; the separate iOS
+test bundle is `com.legendstudy.app.RunnerTests`. Both platforms display
+`레전드스터디`. Signing, OAuth and store registration are still unconfigured;
+this identity decision does not establish registration or availability in stores.
+
+Original brand assets belong in `assets/brand/` (see its README). No original
+logo files are present yet, so generated Flutter launcher icons remain unchanged.
+No guessed or redrawn logo has been introduced.
 
 See [architecture](wiki/architecture.md), [design system](wiki/design-system.md),
 and [current status](wiki/current-status.md) for implementation boundaries and

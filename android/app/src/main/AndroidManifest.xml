@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="레전드스터디 개발"
+        android:label="레전드스터디"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
