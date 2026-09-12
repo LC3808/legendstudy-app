@@ -4,15 +4,18 @@ Last reviewed: 2026-09-12
 
 ## Phase
 
-**Phase 0 / Day 0 — repository and canonical wiki initialization**
+**Phase 0 complete / pre-implementation validation**
 
 ## Verified state
 
 - GitHub repository exists: `LC3808/legendstudy-app`
 - Visibility: Public during early development for multi-agent development convenience
 - Default branch: `main`
-- Repository was initialized on 2026-09-12
-- `AGENTS.md`, `CLAUDE.md`, and canonical `wiki/` seed are being established
+- Repository initialized on 2026-09-12
+- `AGENTS.md`, `CLAUDE.md`, `.gitignore`, and canonical repository-local `wiki/` seed exist
+- Canonical reading order has been verified: `AGENTS.md` → `wiki/index.md` → `wiki/current-status.md`
+- Initial `legendstudy.com` structure was re-checked on 2026-09-12
+- The site currently exposes 1,673 archive items and representative exam posts contain multiple resources per post (PDFs, MP3, grade-cut material)
 - Flutter application scaffold has not yet been created
 - Supabase project/schema for LegendStudy has not yet been created or verified
 - No production ingestion pipeline exists yet
@@ -32,16 +35,16 @@ Last reviewed: 2026-09-12
 - Simple WebView implementation is prohibited
 - Actual code/DB/Git state must be cross-checked against wiki before decisions
 - `legendstudy.com` remains the existing content source
+- Normal app browsing should consume normalized structured data, not scrape the website at runtime
 
 ## Immediate next steps
 
-1. Finish Day 0 seed files
-2. Re-verify `legendstudy.com` structure, content taxonomy, attachment patterns, RSS/sitemap availability, and ingestion constraints
-3. Confirm v1.0 scope
-4. Define initial normalized data model
-5. Create Flutter scaffold and baseline architecture
-6. Prepare Supabase schema/migrations for user execution
-7. Build ingestion prototype
+1. Complete deeper ingestion re-validation: sitemap/RSS/archive mechanics, older post variants, direct attachment behavior, robots constraints
+2. Freeze the v1.0 scope after final review
+3. Define normalized data model v0.1 from representative content patterns
+4. Create Flutter scaffold and baseline architecture
+5. Prepare Supabase schema/migrations for direct user execution
+6. Build ingestion prototype and validate against representative posts
 
 ## Known open questions
 
