@@ -95,3 +95,13 @@ join pg_catalog.pg_namespace n on n.oid = c.relnamespace
 where n.nspname = 'public' and c.relname in ('content_items','exams','exam_subjects','resources','bookmarks','recent_views')
   and a.attnum > 0 and not a.attisdropped
 order by c.relname, a.attnum;
+
+-- Publish gate: expect zero rows. FK enforces child -> parent, not the reverse.
+-- Active exam parents without their extension are error candidates for review.
+-- Read only with an authorized owner/backend role; not executed in this task.
+select c.id, c.slug
+from public.content_items c
+where c.is_active and c.content_type = 'exam'
+  and not exists (
+      select 1 from public.exams e where e.content_item_id = c.id
+  );

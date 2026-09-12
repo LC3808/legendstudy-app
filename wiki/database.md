@@ -412,3 +412,16 @@ and [immutable catalog default](https://raw.githubusercontent.com/postgres/postg
 PostgREST's [POST upsert/on_conflict contract](https://docs.postgrest.org/en/stable/references/api/tables_views.html#upsert)
 informs narrow payloads; actual server behavior remains untested. Target server
 version is unknown because the project does not exist. See supabase/README.md.
+
+### Final checker hardening — schema unchanged (2026-09-13)
+
+The offline gate now locks slug/global URL uniqueness, required values, all four
+publication DEFAULT false flags, date-input ranges and reviewed domain/order CHECKs.
+The existing migration remains unchanged. Runtime fallback options are documented
+in supabase/README.md and require an observed target failure plus separate review.
+
+The final query in initial_content_schema_checks.sql reports active content_items
+with content_type=exam and no exams extension. Expected result is zero rows during
+future authorized pre-publication inspection. It detects missing reverse existence;
+it adds no DB constraint/trigger and was not executed. Inspection now has 16
+SELECT statements; parser PASS still does not establish actual runtime correctness.

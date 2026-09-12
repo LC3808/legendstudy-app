@@ -89,6 +89,124 @@ class OfflineCheckerTests(unittest.TestCase):
                     c.check(self.sql.replace(f'c.id = {table}.content_item_id and c.is_active',
                                             f'c.id = {table}.content_item_id or c.is_active', 1))
 
+    def mutate_column(self, table, column, mutate):
+        """Edit only in-memory ASTs; never touch or execute the migration file."""
+        parsed = c.pglast.parse_sql(self.sql)
+        relation = next(r.stmt for r in parsed if isinstance(r.stmt, c.ast.CreateStmt)
+                        and r.stmt.relation.relname == table)
+        definition = next(x for x in relation.tableElts if isinstance(x, c.ast.ColumnDef)
+                          and x.colname == column)
+        mutate(definition, relation)
+        return '-- DRAFT ONLY: in-memory mutation fixture\n' + c.RawStream()(parsed)
+
+    def remove_constraint(self, table, column, kind):
+        def mutate(definition, relation):
+            original = definition.constraints
+            definition.constraints = tuple(x for x in original if x.contype != kind)
+            self.assertLess(len(definition.constraints), len(original))
+        return self.mutate_column(table, column, mutate)
+
+    def replace_check(self, table, column, expr):
+        def mutate(definition, relation):
+            checks = [x for x in definition.constraints if x.contype == c.enums.ConstrType.CONSTR_CHECK]
+            self.assertEqual(len(checks), 1)
+            checks[0].raw_expr = c.expression(expr)
+        return self.mutate_column(table, column, mutate)
+
+    def test_slug_invariants_independently(self):
+        for label, sql in (
+            ('NOT NULL removal', self.remove_constraint('content_items', 'slug', c.enums.ConstrType.CONSTR_NOTNULL)),
+            ('UNIQUE removal', self.remove_constraint('content_items', 'slug', c.enums.ConstrType.CONSTR_UNIQUE)),
+            ('regex weakening', self.replace_check('content_items', 'slug', "btrim(slug) <> ''")),
+        ):
+            with self.subTest(label=label), self.assertRaisesRegex(ValueError, 'content_items.slug'):
+                c.check(sql)
+
+    def test_source_url_collision_guard(self):
+        for label, sql in (
+            ('NOT NULL removal', self.remove_constraint('source_posts', 'url', c.enums.ConstrType.CONSTR_NOTNULL)),
+            ('UNIQUE removal', self.remove_constraint('source_posts', 'url', c.enums.ConstrType.CONSTR_UNIQUE)),
+            ('shape weakening', self.replace_check('source_posts', 'url', "btrim(url) <> ''")),
+        ):
+            with self.subTest(label=label), self.assertRaisesRegex(ValueError, 'source_posts.url'):
+                c.check(sql)
+
+    def test_publication_defaults_each_layer(self):
+        for table in ('content_items', 'subjects', 'exam_subjects', 'resources'):
+            def make_public(definition, relation):
+                default = next(x for x in definition.constraints if x.contype == c.enums.ConstrType.CONSTR_DEFAULT)
+                default.raw_expr = c.expression('true')
+            cases = (
+                ('true default', self.mutate_column(table, 'is_active', make_public)),
+                ('missing default', self.remove_constraint(table, 'is_active', c.enums.ConstrType.CONSTR_DEFAULT)),
+                ('nullable', self.remove_constraint(table, 'is_active', c.enums.ConstrType.CONSTR_NOTNULL)),
+            )
+            for label, sql in cases:
+                with self.subTest(table=table, label=label), self.assertRaisesRegex(ValueError, table + '.is_active'):
+                    c.check(sql)
+
+    def test_generated_input_and_numeric_ranges(self):
+        for table, column, weakened in (
+            ('exams', 'year', 'year between 0 and 2200'),
+            ('exams', 'academic_year', 'academic_year between 0 and 2200'),
+            ('exams', 'exam_month', 'exam_month between 0 and 12'),
+            ('exams', 'grade_level', 'grade_level in (0, 1, 2, 3)'),
+            ('exam_subjects', 'mapping_confidence', 'mapping_confidence between -1 and 1'),
+        ):
+            for label, sql in (
+                ('weakened', self.replace_check(table, column, weakened)),
+                ('removed', self.remove_constraint(table, column, c.enums.ConstrType.CONSTR_CHECK)),
+            ):
+                with self.subTest(table=table, column=column, label=label), self.assertRaisesRegex(ValueError, table + '.' + column):
+                    c.check(sql)
+
+    def test_domain_checks_reject_widening_and_removal(self):
+        # Independent inventory of critical enum columns, not generated from checker constants.
+        for table, column in (
+            ('source_posts', 'source_status'), ('content_items', 'content_type'),
+            ('exams', 'exam_type'), ('exam_subjects', 'mapping_status'),
+            ('resources', 'resource_type'), ('resources', 'link_kind'),
+            ('resources', 'link_status'), ('ingestion_quarantine', 'status'),
+        ):
+            def widen(definition, relation):
+                rule = next(x for x in definition.constraints if x.contype == c.enums.ConstrType.CONSTR_CHECK)
+                self.assertEqual(rule.raw_expr.kind, c.enums.A_Expr_Kind.AEXPR_IN)
+                rule.raw_expr.rexpr += (c.ast.A_Const(val=c.ast.String(sval='unreviewed_value')),)
+            for label, sql in (
+                ('extra enum value', self.mutate_column(table, column, widen)),
+                ('removed', self.remove_constraint(table, column, c.enums.ConstrType.CONSTR_CHECK)),
+            ):
+                with self.subTest(table=table, column=column, label=label), self.assertRaisesRegex(ValueError, table + '.' + column):
+                    c.check(sql)
+
+    def test_display_orders_nonnegative(self):
+        for table, column in (('subjects', 'sort_order'), ('exam_subjects', 'display_order'), ('resources', 'display_order')):
+            for label, sql in (
+                ('negative allowed', self.replace_check(table, column, column + ' >= -1')),
+                ('removed', self.remove_constraint(table, column, c.enums.ConstrType.CONSTR_CHECK)),
+            ):
+                with self.subTest(table=table, column=column, label=label), self.assertRaisesRegex(ValueError, table + '.' + column):
+                    c.check(sql)
+
+    def test_global_uniqueness_not_composite(self):
+        for table, column, extra in (('content_items', 'slug', 'source_post_id'), ('source_posts', 'url', 'source')):
+            def move_unique(definition, relation):
+                definition.constraints = tuple(x for x in definition.constraints if x.contype != c.enums.ConstrType.CONSTR_UNIQUE)
+                relation.tableElts += (c.statement(f'create table x (constraint unique_fixture unique ({column}))').tableElts[0],)
+            c.check(self.mutate_column(table, column, move_unique))
+            def make_composite(definition, relation):
+                move_unique(definition, relation)
+                relation.tableElts[-1].keys += (c.ast.String(sval=extra),)
+            with self.subTest(table=table), self.assertRaisesRegex(ValueError, 'Global UNIQUE'):
+                c.check(self.mutate_column(table, column, make_composite))
+
+    def test_scalar_formatting_and_comments(self):
+        sql = self.sql.replace('not null unique check', 'NOT /* harmless */ NULL\n UNIQUE CHECK')
+        sql = sql.replace('default false', 'DEFAULT /* reviewed */ ( false )')
+        sql = sql.replace('year between 1900 and 2200', 'year BETWEEN /* bound */ 1900 AND 2200')
+        sql = sql.replace('display_order >= 0', '( display_order >= 0 )')
+        c.check(sql)
+
     def test_contract_mutations(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -108,7 +226,12 @@ class OfflineCheckerTests(unittest.TestCase):
                 c.check_contract(root)
 
     def test_inspection(self):
-        self.assertEqual(c.check_inspection((c.ROOT/'supabase/review/initial_content_schema_checks.sql').read_text()), 15)
+        self.assertEqual(c.check_inspection((c.ROOT/'supabase/review/initial_content_schema_checks.sql').read_text()), 16)
+        inspection = c.pglast.parse_sql((c.ROOT/'supabase/review/initial_content_schema_checks.sql').read_text())
+        expected_orphans = c.statement("""select c.id, c.slug from public.content_items c
+            where c.is_active and c.content_type = 'exam'
+            and not exists (select 1 from public.exams e where e.content_item_id = c.id)""")
+        self.assertEqual(c.norm(inspection[-1].stmt), c.norm(expected_orphans))
         for sql in ('delete from public.exams', 'select * into x from public.exams',
                     'with x as (delete from public.exams returning *) select * from x'):
             with self.subTest(sql=sql), self.assertRaises(ValueError):

@@ -127,3 +127,18 @@
 - Updated database/ingestion/architecture/product scope/status/decisions/README.
   Supabase still not created/linked/applied. No SQL/DB commands, Flutter feature,
   SDK, import, remote push or merge. Actual runtime acceptance remains pending.
+
+## 2026-09-13 — Final checker hardening
+
+- Applied the supplied Claude Final Delta Review verdict B (minor corrections before
+  merge) against b28c003 on the same Day 3 branch. Migration SQL is unchanged.
+- Added independent AST checks for slug/URL required global uniqueness, default-private
+  publication, generated-date input ranges and critical domain/order constraints.
+- Added 52 scalar mutation cases; all 14 test methods pass (106 negative cases total),
+  including formatting/comment and equivalent single-column UNIQUE acceptance.
+- Prepared orphan active exam SELECT-only inspection (16 inspection statements total)
+  and three conditional generated-column fallback notes. No fallback applied.
+- SQL/PLpgSQL parsing, checker and git diff --check pass. Updated README/status/database
+  minimally; no schema, Flutter, ingestion implementation or architecture changes.
+- No Supabase project/link/DB connection/SQL execution, remote push or merge. New
+  follow-up commit, no amend. Actual target runtime acceptance remains pending.

@@ -3,7 +3,10 @@
 
 Expected contracts are independent of the migration. AST comparison ignores source
 locations and AND/OR operand order, but deliberately requires reviewed identifiers.
-It is not a general SQL equivalence prover or a catalog/permissions test.
+Default-private publication, globally unique slugs/URLs and reviewed domain CHECKs
+are explicit contracts, not a general SQL equivalence proof. PASS does not establish
+catalog/Supabase compatibility, RLS/PostgREST/trigger/generated-column runtime,
+performance or ingestion implementation correctness.
 """
 import json
 from pathlib import Path
@@ -36,6 +39,27 @@ INDEXES = {
     'recent_views_owner_recency': 'recent_views (user_id, viewed_at desc, id desc)',
     'recent_views_content': 'recent_views (content_item_id)',
 }
+# Independently reviewed scalar contracts; never derived from the migration.
+PUBLICATION_TABLES = ('content_items', 'subjects', 'exam_subjects', 'resources')
+DOMAIN_CHECKS = {
+    ('content_items', 'slug'): "slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'",
+    ('source_posts', 'source_status'): "source_status in ('unknown', 'available', 'missing', 'error')",
+    ('exams', 'year'): 'year between 1900 and 2200',
+    ('exams', 'academic_year'): 'academic_year between 1900 and 2200',
+    ('exams', 'exam_month'): 'exam_month between 1 and 12',
+    ('exams', 'grade_level'): 'grade_level in (1, 2, 3)',
+    ('exams', 'exam_type'): "exam_type in ('school_assessment', 'national_mock', 'evaluation_mock', 'csat', 'preliminary', 'other')",
+    ('exam_subjects', 'mapping_status'): "mapping_status in ('unmapped', 'unmappable', 'provisional', 'verified')",
+    ('exam_subjects', 'mapping_confidence'): 'mapping_confidence between 0 and 1',
+    ('resources', 'resource_type'): "resource_type in ('question', 'answer', 'explanation', 'answer_explanation', 'listening_audio', 'listening_script', 'grade_cut', 'reference', 'other')",
+    ('resources', 'link_kind'): "link_kind in ('file', 'landing_page', 'unknown')",
+    ('resources', 'link_status'): "link_status in ('unchecked', 'available', 'broken', 'restricted')",
+    ('ingestion_quarantine', 'status'): "status in ('open', 'resolved', 'ignored')",
+    ('exam_subjects', 'display_order'): 'display_order >= 0',
+    ('resources', 'display_order'): 'display_order >= 0',
+    ('subjects', 'sort_order'): 'sort_order >= 0',
+}
+
 CONTRACT = {
     'source_conflict_target': ['source', 'external_post_id'],
     'slug_template': 'legendstudy-{external_post_id}-{source_content_key}',
@@ -108,6 +132,31 @@ def constraints(table):
             yield element
         elif isinstance(element, ast.ColumnDef):
             yield from element.constraints or ()
+
+
+def check_scalar_contracts(tables, columns):
+    for table, column in (('content_items', 'slug'), ('source_posts', 'url')):
+        rules = columns[table][column].constraints or ()
+        require(any(c.contype == enums.ConstrType.CONSTR_NOTNULL for c in rules),
+                f'NOT NULL required: {table}.{column}')
+        # Inline UNIQUE has no key list; table UNIQUE must cover this column alone.
+        # A composite key or partial index is not global single-column uniqueness.
+        inline_unique = any(c.contype == enums.ConstrType.CONSTR_UNIQUE and not c.keys for c in rules)
+        table_unique = any(isinstance(c, ast.Constraint) and c.contype == enums.ConstrType.CONSTR_UNIQUE
+                           and [k.sval for k in c.keys or ()] == [column] for c in tables[table].tableElts)
+        require(inline_unique or table_unique, f'Global UNIQUE required: {table}.{column}')
+    for table in PUBLICATION_TABLES:
+        rules = columns[table]['is_active'].constraints or ()
+        require(any(c.contype == enums.ConstrType.CONSTR_NOTNULL for c in rules),
+                f'Publication NOT NULL required: {table}.is_active')
+        defaults = [c for c in rules if c.contype == enums.ConstrType.CONSTR_DEFAULT]
+        require(len(defaults) == 1 and norm(defaults[0].raw_expr) == norm(expression('false')),
+                f'Publication DEFAULT false required: {table}.is_active')
+    for (table, column), expected in DOMAIN_CHECKS.items():
+        require(any(c.contype == enums.ConstrType.CONSTR_CHECK
+                    and norm(c.raw_expr) == norm(expression(expected))
+                    for c in columns[table][column].constraints or ()),
+                f'Domain CHECK required: {table}.{column}')
 
 
 def check_contract(root=ROOT):
@@ -249,6 +298,7 @@ def check(sql):
                 and c.pktable.relname == target and [x.sval for x in c.fk_attrs] == cols.split()
                 and [x.sval for x in c.pk_attrs] == ref.split() and c.fk_matchtype == match, f'Composite FK: {name}')
     columns = {t: {c.colname: c for c in n.tableElts if isinstance(c, ast.ColumnDef)} for t, n in tables.items()}
+    check_scalar_contracts(tables, columns)
     require(any(c.contype == enums.ConstrType.CONSTR_NOTNULL for c in columns['source_posts']['external_post_id'].constraints),
             'external_post_id must be NOT NULL')
     # Exact inline FK inventory catches omitted or redirected ownership/provenance FKs.
@@ -315,7 +365,7 @@ def check(sql):
         ('resources', 'file_url', "file_url is null or file_url ~* '^https?://[^/[:space:]]+'"),
     ):
         require(any(c.contype == enums.ConstrType.CONSTR_CHECK and norm(c.raw_expr) == norm(expression(expr))
-                    for c in columns[table][column].constraints), f'Column CHECK: {table}.{column}')
+                    for c in columns[table][column].constraints or ()), f'Column CHECK: {table}.{column}')
     generated = statement('''create table public.example (sort_date date generated always as (
         case when exam_date is not null then exam_date
         when year is not null and exam_month is not null then pg_catalog.make_date(year, exam_month, 1)
@@ -379,4 +429,5 @@ if __name__ == '__main__':
     count = check_inspection((ROOT / 'supabase/review/initial_content_schema_checks.sql').read_text())
     print(f'Future inspection SQL: {count} SELECT statements parsed, NOT executed')
     print('PASS: offline syntax/structure only; no SQL executed or DB contacted.')
-    print('NOT verified: catalog, RLS runtime, PostgREST, Supabase grants, trigger runtime, performance.')
+    print('NOT verified: catalog/Supabase compatibility, RLS/PostgREST/trigger/generated-column runtime,')
+    print('              performance or ingestion implementation correctness.')

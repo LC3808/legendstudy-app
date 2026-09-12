@@ -73,17 +73,20 @@ user approval; no rollback SQL is automatically run or provided as an easy defau
 
 The owner confirms the LegendStudy project is **not created or linked**. The
 current draft parses as 74 statements, 10 RLS tables, 16 policies, 10 non-constraint
-indexes, 8 triggers and 2 invoker functions. The inspection file contains 15
-SELECT-only statements; none were executed. Six offline test methods include
-45 unsafe schema mutations, four personal-target/policy mutations, two ingestion-contract
-mutations and three inspection mutation cases, plus acceptance of harmless formatting/boolean operand reordering.
+indexes, 8 triggers and 2 invoker functions. The inspection file contains 16
+SELECT-only statements; none were executed. Fourteen offline test methods include
+106 rejected mutation cases (54 existing + 52 scalar-invariant additions), plus
+acceptance of harmless formatting/comments, boolean reordering and equivalent
+single-column table UNIQUE constraints.
 
 The checker compares policy/index/trigger ASTs, exact column grants, FK actions,
 function settings/revokes, shared exam PK/type FK, same-content scope integrity,
 source feed expression and verified ingestion contract.
 Its explicit identifier contracts must be reviewed when the design changes.
+PASS means offline syntax, reviewed structural invariants and regression protection.
 It is not a SQL equivalence engine. PASS does not validate PostgreSQL catalog,
-RLS runtime, PostgREST, Supabase grants, trigger runtime or performance.
+Supabase compatibility, RLS/PostgREST/trigger/generated-column runtime, performance
+or ingestion implementation correctness.
 
 Public clients must use the explicit projections in wiki/database.md. Source
 posts and persistent quarantine have zero client grants/policies. Taxonomy master
@@ -103,3 +106,46 @@ See database.md for exact projections, all five source cases and null-tail curso
 Before future application, verify generated columns in the actual server version,
 exam-type/shared-key/composite FKs, all-type personal upserts and inactive-parent
 RLS with explicit projections. No runtime behavior is established by parser PASS.
+
+## Final checker hardening (2026-09-13)
+
+The migration is byte-for-byte unchanged from b28c003. The checker independently
+requires content_items.slug NOT NULL, global UNIQUE and lowercase/hyphen regex;
+source_posts.url NOT NULL, global UNIQUE and HTTP(S) shape. URL uniqueness remains
+only a collision guard; canonical source identity is (source, external_post_id).
+
+Default-private publication is a reviewed security/operating invariant:
+content_items, subjects, exam_subjects and resources require is_active NOT NULL
+DEFAULT false. True/missing defaults and nullable changes fail independently.
+The checker also locks exam year/academic_year 1900..2200, month 1..12, grade 1/2/3,
+confidence 0..1, source/content/exam/mapping/resource/link/quarantine domain lists
+and nonnegative occurrence/resource display_order and taxonomy sort_order.
+These are normalized AST contracts, not raw SQL string/grep checks. Not every
+possible CHECK equivalence or runtime behavior is proved.
+
+The final SELECT-only inspection detects active exam-type content without an
+exams extension. Expect zero rows before publication acceptance; returned rows
+need review. Run under an authorized owner/backend role in a future task. This
+checks the reverse existence condition that the child-to-parent FK cannot enforce.
+
+## Generated-column fallbacks — only after an observed target failure
+
+Do not preemptively change the migration or loosen the checker. If the separately
+authorized LegendStudy target rejects a generated definition, record the exact
+error/server version and review the replacement, checker and behavioral tests
+as a separate change before retrying. No failure or fallback has been exercised now.
+
+- exams.content_type: ordinary `content_type text not null default 'exam'` with
+  `CHECK (content_type = 'exam')` can replace the generated constant, retaining the
+  existing shared PK and composite type FK. Explicit NULL/non-exam writes must fail.
+- feed_updated_at: first consider a stored generated CASE preserving GREATEST's
+  NULL semantics: published NULL → source_updated_at; source_updated_at NULL →
+  published_at; otherwise choose the later value (both NULL remains NULL). If
+  generated columns themselves are unsupported, review an ordinary column maintained
+  atomically by trusted backend with the same source-time semantics, never now().
+- exams.sort_date: consider ordinary nullable `sort_date date` maintained by trusted
+  ingestion with the existing exam_date → known year/month day 1 → known year
+  January 1 → NULL rule. Retain numeric range CHECKs and test every fallback path.
+
+All three are contingency designs, not changes to the current schema or evidence
+of target Supabase compatibility. Runtime acceptance still belongs to a later task.

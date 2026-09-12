@@ -1,6 +1,6 @@
 # Current Status
 
-Last reviewed: 2026-09-12
+Last reviewed: 2026-09-13
 
 ## Phase
 
@@ -163,7 +163,8 @@ Last reviewed: 2026-09-12
   unified search returns parent cards, exam filters join only when needed.
 - Source examples checked: recent/historical exams, English practice PDF, historical
   admissions column and university essay PDFs. Only page text/links inspected.
-- pglast 8.4 / PostgreSQL 18.4 grammar: SQL + two PL/pgSQL bodies pass. Fifteen
+- At the unified-model commit, pglast 8.4 / PostgreSQL 18.4 grammar passed SQL +
+  two PL/pgSQL bodies. Fifteen
   SELECT-only inspection statements parsed, none executed. Six regression methods
   pass, including 45 schema mutations, four personal-target/policy mutations, two
   contract mutations and three inspection mutations; harmless reordering accepted.
@@ -176,3 +177,22 @@ Last reviewed: 2026-09-12
   text search remain deferred; source/title/summary evidence supports initial search.
 - No implementation blocker for this draft. No Supabase CLI/DB connection, unrelated
   project access, remote Git push or merge. Independent re-review remains future work.
+
+## Day 3 final checker hardening (2026-09-13)
+
+- Owner-supplied Claude Final Delta Review verdict: **B. minor corrections before
+  merge**. Strengthened the offline gate on the same Day 3 branch against b28c003;
+  independent re-review of this follow-up remains pending.
+- Migration SQL byte-for-byte unchanged; schema counts remain 10 tables, 16 policies,
+  10 non-constraint indexes, 8 triggers, 2 functions and 74 migration statements.
+- Slug NOT NULL/global UNIQUE/regex, source URL collision guard, four default-private
+  publication flags, date/numeric ranges and critical enum/order CHECKs are locked.
+- Checker and 14 test methods pass: 106 unsafe mutations rejected, including 52 new
+  scalar cases. Benign formatting/comments and equivalent UNIQUE structure pass.
+  Sixteen future SELECT-only inspection statements parsed, not executed.
+- README adds three generated-column fallback options only after observed target
+  failure; orphan active exam inspection added without changing schema enforcement.
+- git diff --check passes. Supabase still not created/linked, DB unapplied, SQL/DB
+  execution absent. No Flutter edits, remote push, merge or other-project access.
+- No checker/schema mismatch or blocker found. Next: user push and commit/PR #5
+  final review, then separately authorized LegendStudy project/runtime work.
