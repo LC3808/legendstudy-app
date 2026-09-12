@@ -1,0 +1,32 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+.pub/
+build/
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# macOS
+.DS_Store
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
+
+# Firebase / platform secret configs if introduced
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Misc credentials
+*service-account*.json
+*credentials*.json
