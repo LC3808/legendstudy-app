@@ -2,9 +2,13 @@
 
 Owner-supplied canonical originals, received 2026-09-13 on codex/day-5-ui-shell:
 
-- `source/legendstudy_app_icon_source.png` (72×72): launcher icon canonical source.
-- `source/legendstudy_square_logo_source.png` (150×150): square website logo.
-- `source/legendstudy_wordmark_source.png` (1100×156): original website banner.
+- `source/legendstudy_app_icon_source.png` (72×72): legacy “study” favicon asset;
+  NOT the launcher canonical source. Its historical filename is retained.
+- `source/legendstudy_square_logo_source.png` (150×150): official core symbol and
+  square brand reference. The orange memo/document + pencil symbol at the top is
+  the canonical design reference for future iOS/Android launcher icons.
+- `source/legendstudy_wordmark_source.png` (1100×156): official wordmark reference
+  in the original website banner.
 
 Source bytes are preserved without alteration. SHA-256:
 
@@ -30,6 +34,12 @@ width and aspect ratio. Only this derived asset is in the runtime Flutter bundle
 General-purpose icons and Text widgets must not impersonate the official logo.
 Body typography and existing orange theme tokens remain unchanged.
 
-Platform launcher icons remain Flutter placeholders. The supplied 72×72 icon is
-the canonical source, but a higher-resolution official original is required before
-producing a satisfactory 1024×1024 iOS icon. Do not invent detail by redrawing it.
+Platform launcher icons remain Flutter placeholders. Do not enlarge the low-resolution
+square reference into a final launcher icon. High-resolution production/restoration
+of its memo/document + pencil symbol is a separate future brand task; no launcher
+replacement or restoration is performed in Day 5. The legacy favicon is not its basis.
+
+The current Home wordmark size, spacing and overall hierarchy are provisional.
+Future refinement should consider a smaller wordmark, better continuity between
+header and first section, clearer divider/outline and text contrast, and stronger
+section separation while continuing to avoid excessive orange.

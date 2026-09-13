@@ -71,7 +71,7 @@ Last reviewed: 2026-09-13
 - Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
 - Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
-- Launcher icon replacement after a higher-resolution official icon is supplied (current canonical icon: 72×72)
+- Launcher icon production/restoration from the official memo/document + pencil symbol in the square brand reference; legacy 72×72 favicon is not the canonical basis
 
 ## Application implementation details
 
@@ -123,7 +123,7 @@ Last reviewed: 2026-09-13
 
 - Register the approved identifier with Apple/Google and configure signing in a separate task.
   Registration availability has not been checked or claimed; no conflict was reported by local builds.
-- Replace generated Flutter launcher icons after receiving a higher-resolution version of the supplied canonical 72×72 icon.
+- Produce/restore a high-resolution version of the square reference’s memo/document + pencil symbol in a future brand task before replacing Flutter launcher icons. Do not enlarge the low-resolution reference into a final icon.
 - Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
 - Release readiness is not implied by the scaffold or Day 4-A foundation.
 
@@ -379,9 +379,11 @@ integration code; see Day 4-A below for the current client verification boundary
   It uses generated/legendstudy_wordmark_header.png, an exact 312×55 crop of
   the supplied banner, at up to 280 logical pixels wide with header semantics.
   System fonts, orange palette, navigation/layout and Supabase code are unchanged.
-- Launcher canonical source is registered (72×72). Platform replacement deferred
-  until a higher-resolution official original is available; existing launcher
-  placeholders are not approved artwork. No fabricated/upscaled replacement.
+- Corrected launcher design basis: the orange memo/document + pencil symbol at
+  the top of legendstudy_square_logo_source.png. The 72×72 “study” image is a
+  legacy favicon, not a launcher canonical source. High-resolution production/
+  restoration is deferred to a later brand task; no low-resolution enlargement
+  into final launcher art. Platform placeholders remain unchanged.
 - flutter analyze PASS; all 24 tests PASS, including image/header semantics and
   360×640/2× text regression. Android debug and iOS simulator builds PASS using
   the external owner-managed configuration. iPhone 17 Pro / iOS 26.5 installed,
@@ -390,3 +392,18 @@ integration code; see Day 4-A below for the current client verification boundary
   and exact-key scans, git diff --check PASS. No DB/SQL/migration or new services.
   Prior actual Supabase smoke remains valid evidence; not rerun for this asset edit.
 - Follow-up local commit on codex/day-5-ui-shell; 56ecec5 preserved. No push/merge.
+
+
+## Day 5 — Brand asset role correction (2026-09-13)
+
+- Owner clarified the square reference's memo/document + pencil symbol as the
+  official core symbol and future launcher design basis. The 72×72 “study” image
+  is a legacy favicon only; source filenames, bytes and Home derivative unchanged.
+- Home wordmark size/spacing and UI hierarchy are provisional. Future refinement:
+  smaller wordmark consideration, header/first-section continuity, clearer outline/
+  divider and text contrast, stronger section separation without excessive orange.
+- Documentation-only follow-up after 9abbb08. No UI/function/navigation/Supabase,
+  launcher or DB changes. High-resolution symbol production/restoration deferred.
+- git diff --check PASS; changed-file scope and preserved asset bytes verified.
+  Flutter tests/builds not rerun because no implementation or build inputs changed.
+  Prior brand implementation validation remains recorded above. No push/merge.

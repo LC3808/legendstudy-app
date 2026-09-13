@@ -255,10 +255,24 @@
 - Added the owner's three canonical originals unchanged with hashes/provenance.
   Replaced Home's temporary book icon/Text lockup with the official Korean wordmark
   crop; maintained system typography, orange theme and existing navigation/data.
-- Registered the 72×72 launcher canonical source. Platform launcher replacement
-  awaits a higher-resolution official original; current Flutter icons remain.
+- Initially classified the 72×72 image as the launcher canonical source; the
+  owner corrected that classification in the subsequent asset-role entry below.
+  Platform launcher icons remained Flutter placeholders.
 - analyze PASS, 24 tests PASS, Android debug/iOS simulator builds PASS. Configured
   iPhone 17 Pro Home screenshot inspected. Source hashes, exact crop pixels,
   packaged Android asset and diff/security checks PASS. Existing Supabase code and
   migration unchanged; no SQL, OAuth, school/meal/timer service, AdMob or IAP work.
 - Local follow-up commit only, preserving 56ecec5; no push or merge.
+
+
+## 2026-09-13 — Correct official symbol and legacy favicon roles
+
+- Corrected assets/brand/README.md, design-system and active status/architecture:
+  square logo's orange memo/document + pencil is the official core symbol and
+  future launcher design reference; 72×72 “study” is a legacy favicon only.
+- Launcher replacement and high-resolution production/restoration remain future
+  brand work. Do not enlarge the low-resolution square image into final launcher art.
+- Home remains unchanged; size/spacing/hierarchy and contrast refinements recorded
+  as provisional future UI work. Source/generated image bytes and all code unchanged.
+- Documentation-only follow-up after 9abbb08; diff/scope checks PASS. Flutter tests
+  and builds not rerun. No DB/Supabase changes, push or merge.

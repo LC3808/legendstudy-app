@@ -90,9 +90,13 @@ coverage, not a full screen-reader or WCAG certification.
 
 Canonical owner-supplied sources (preserved byte-for-byte):
 
-- `assets/brand/source/legendstudy_app_icon_source.png` — launcher canonical, 72×72.
-- `assets/brand/source/legendstudy_square_logo_source.png` — square logo, 150×150.
-- `assets/brand/source/legendstudy_wordmark_source.png` — website banner, 1100×156.
+- `assets/brand/source/legendstudy_app_icon_source.png` — legacy “study” favicon,
+  72×72; NOT a launcher canonical source. Historical filename retained.
+- `assets/brand/source/legendstudy_square_logo_source.png` — official core symbol
+  and square brand reference, 150×150. Its top orange memo/document + pencil symbol
+  is the canonical design basis for future iOS/Android launcher icons.
+- `assets/brand/source/legendstudy_wordmark_source.png` — official wordmark
+  reference / website banner, 1100×156.
 
 Never use a general-purpose/Material icon as the official brand. Never recreate
 its wordmark with a Text widget. Derived assets must come exclusively from these
@@ -103,6 +107,16 @@ width is at most 280 logical pixels with preserved aspect ratio and an accessibl
 header label. The existing orange brand family and system UI typography remain.
 See assets/brand/README.md for source hashes and exact reproduction instructions.
 
-Platform launcher replacement is deferred: the official icon is only 72×72;
-obtain a higher-resolution official original before generating the 1024×1024 iOS
-marketing icon. Current platform icons are placeholders, not approved brand art.
+Platform launcher replacement remains deferred. Do not enlarge the low-resolution
+square image into a final launcher icon. High-resolution production/restoration of
+the memo/document + pencil symbol is a future brand task, not Day 5 implementation.
+The legacy favicon is not the design basis. Current platform icons are placeholders.
+
+### Provisional Home styling / later UI refinement
+
+The current official wordmark image remains applied, but its size, spacing and
+whole-screen hierarchy are not a final approved design. Later refinement should
+consider reducing wordmark size, improving continuity between the header and first
+section, strengthening divider/outline and text contrast, and clearer section
+separation. Continue to avoid excessive orange. No UI redesign accompanies this
+asset-role correction.

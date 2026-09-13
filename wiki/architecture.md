@@ -73,8 +73,10 @@ The owner approved this production identity; Apple/Google registration and
 availability have not been checked or claimed. No Apple team, certificate or
 provisioning profile is configured; Android release signing remains unconfigured.
 Official brand sources and derivative provenance live in `assets/brand/README.md`.
-Home uses the supplied wordmark crop. Launcher icons await a higher-resolution
-official original; current Flutter launcher icons remain placeholders.
+Home uses the supplied wordmark crop. Future launcher icons use the square brand
+reference’s orange memo/document + pencil symbol, not the legacy 72×72 favicon.
+High-resolution symbol production/restoration is deferred; current Flutter
+launcher icons remain placeholders.
 
 `AppConfig.fromEnvironment` reads public `APP_ENV` (default `development`) through
 `appConfigProvider`; this is a configuration extension point, not a working
