@@ -1,19 +1,51 @@
 # Database — Data Model v0.1 / Unified Content
 
-## Status and execution boundary
+## Deployment status and evidence boundary
 
-**DRAFT ONLY, NOT DEPLOYED.** The owner confirms the LegendStudy Supabase project
-has not been created or linked. No local/remote SQL or PL/pgSQL was executed; no
-DB connection, project lookup, import, seed or SDK integration was performed.
-Only the existing `supabase/migrations/20260912000100_initial_content_schema.sql`
-is revised. This is a forward migration for an empty application schema, not a
-replay-safe script. A DRAFT comment does not prevent future CLI execution.
-Application requires a later explicit authorization and LegendStudy project-ref
-verification. Never use another project's database/configuration.
+**INITIAL MIGRATION APPLIED.** The owner's post-deployment report confirms dedicated
+project LegendStudy, ref `stlhijzpjfgwwdgunlsd`, ap-northeast-2 (Seoul), PostgreSQL
+17.6. Day 3 main merge is `c16350c0a60fe1c6281234a7c2056cf02b54d9ad`.
+Application of `supabase/migrations/20260912000100_initial_content_schema.sql`
+returned `Success. No rows returned`. Inventory: 10 tables, 16 policies,
+10 non-constraint indexes, 8 triggers, 2 trigger functions. All tables enable RLS;
+FORCE RLS is false. After fixture cleanup, all 10 application tables have zero rows.
 
-The previous exam-centric draft is superseded **before deployment**. Search,
-Home, Saved and Recent target content_items. Source posts stay private provenance;
-exams only extends exam-type content. No production data needs conversion now.
+This documentation task records the supplied results; it did not query Supabase,
+execute SQL or reproduce the runtime tests. Static verification and the specific
+runtime evidence below are separate. Flutter/SDK connection and ingestion remain
+unimplemented. Auth test users A/B may remain for future Auth/OAuth tests.
+
+**Do not edit the applied initial migration.** Preserve its historical DRAFT
+comments and bytes; they describe its authoring phase, not current deployment.
+Future schema changes must use new migration files. Do not replay the initial SQL.
+Search/Home/Saved/Recent use content_items; source_posts stays private provenance
+and exams is specialized metadata, as defined below.
+
+## Reported Supabase runtime results (recorded 2026-09-13)
+
+| Check | Owner-reported result |
+| --- | --- |
+| Prerequisites | PG 17.6; auth.users/auth.uid(); anon/authenticated/service_role; service_role BYPASSRLS; deployer auth.users REFERENCES; no prior app table/clock function conflicts |
+| Generated columns | feed_updated_at GREATEST calculation, constant exam discriminator/composite structure, and sort_date calculation pass; no fallback required |
+| Anon REST content | active read succeeds; direct inactive slug read returns [] |
+| Backend-only access | source_posts/quarantine return HTTP 401 permission denied to anon; authenticated has no SELECT privilege |
+| Profiles via real JWT | A/B each create own profile, A reads own, B reads A as [] |
+| Bookmarks via real JWT | A creates/reads own, B reads A as []; B forging A user_id gets HTTP 403 and bookmarks RLS violation |
+| Recent views via real JWT | A creates/reads own, B sees []; repeated unique-pair upsert keeps ID, no duplicate, viewed_at advances |
+| Anon personal access | profiles returns HTTP 401 permission denied |
+| Cleanup | source_posts/content_items/exams/subjects/exam_subjects/resources/profiles/bookmarks/recent_views/ingestion_quarantine each 0 rows |
+
+Runtime clients used the actual /rest/v1 path, a publishable key for anonymous
+requests, and password-grant JWTs for two test users. The clock inventory includes
+both trigger functions; the supplied behavioral detail specifically demonstrates
+set_viewed_at through recent upsert, not every possible set_updated_at scenario.
+
+Taxonomy evidence is narrower: inactive master plus active occurrence/resource
+fixtures were used, and the SQL policy structure preserves raw-content visibility
+independently of taxonomy. The owner reports master hiding; no separate full
+REST/JWT result trace for this scenario is supplied. SQL Editor SET ROLE sessions
+are not accepted as authoritative client-path RLS tests. Keep full taxonomy client
+coverage as a Day 4 follow-up, without calling the established policy invalid.
 
 ## Entity relationships and same-content integrity
 
@@ -196,8 +228,8 @@ INSERT/UPDATE grants include id so unchanged-key upsert is allowed; USING and WI
 CHECK enforce ownership. Recent POST merge-upsert sends **only** user_id and
 content_item_id with that conflict target; omit id/viewed_at. UPDATE grants only
 those keys. Bookmark repeated saves use ignore-duplicates, not merge-update.
-Do not use all-column PUT or personal timestamps supplied by clients. Verify the
-actual PostgREST release later. Profile deletion affects only the optional profile;
+Do not use all-column PUT or personal timestamps supplied by clients. Recent upsert has passed the reported REST/JWT test; verify additional
+profile conflict-upsert and key/timestamp denial cases during client integration. Profile deletion affects only the optional profile;
 auth-user deletion cascades all personal rows. Hidden content leaves owner-readable,
 owner-deletable personal rows with an unavailable content join.
 
@@ -235,8 +267,8 @@ occurrences → content_items, exams → content_items; no recursive policy cycl
 RLS controls rows; column grants control disclosure. service_role has CRUD on all
 tables and is expected to BYPASSRLS, while constraints/triggers still apply. Its
 credential never enters Flutter. Two invoker clock functions have empty search_path
-and direct EXECUTE revoked from PUBLIC/anon/authenticated. Actual inherited/default
-ACL and trigger behavior are future validation, not inferred from these files.
+and direct EXECUTE revoked from PUBLIC/anon/authenticated. The reported runtime checks above establish specific permissions and clock behavior;
+complete inherited/default ACL and all trigger-case coverage are not inferred from files.
 
 Public SELECT columns (explicit nested projections, **never wildcard SELECT**):
 
@@ -377,17 +409,19 @@ are deferred to a later v1.0 milestone. No profile interest arrays. No article-b
 schema, storage mirrors, ingestion_runs table, seed taxonomy or Flutter changes.
 Initial runs emit bounded private reports; unresolved issues persist in quarantine.
 
-## Offline validation and future authorized runtime acceptance
+## Static verification and remaining runtime coverage
 
 The checked-in checker parses SQL and PL/pgSQL, compares policy/index/trigger ASTs,
 exact client grants, shared PK/type discriminator, same-content FK chain, source
 identity, mapping CHECKs and immutable verified ingestion contract. Mutation tests
 reject parent visibility bypasses, exam-only personal targets, cross-content scope
-weakening and feed clock changes. SELECT-only inspection SQL is parsed, never run.
+weakening and feed clock changes. The offline checker only parses inspection SQL; this does not claim every checked-in
+inspection query was executed in the separate owner-run deployment tests.
 
 **PASS means offline grammar/structure only.** It does not prove catalog resolution,
 RLS, actual Supabase ACLs, PostgREST, trigger execution, FK enforcement or performance.
-The future approved LegendStudy deployment must test:
+The reported results above cover part of the original acceptance matrix. Retain
+this matrix for Day 4 and later changes; unreported cases are not marked passed:
 
 1. All six content types; active/inactive parent against every child and client role;
    column-only projections/nested joins versus forbidden SELECT * and private tables.
@@ -410,8 +444,8 @@ Technical basis: [GREATEST null semantics](https://www.postgresql.org/docs/17/fu
 [make_date catalog entry](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.dat)
 and [immutable catalog default](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/include/catalog/pg_proc.h).
 PostgREST's [POST upsert/on_conflict contract](https://docs.postgrest.org/en/stable/references/api/tables_views.html#upsert)
-informs narrow payloads; actual server behavior remains untested. Target server
-version is unknown because the project does not exist. See supabase/README.md.
+informs narrow payloads. The reported target is PostgreSQL 17.6 and recent upsert
+has passed REST/JWT verification. Additional cases remain above. See supabase/README.md.
 
 ### Final checker hardening — schema unchanged (2026-09-13)
 
@@ -423,5 +457,6 @@ in supabase/README.md and require an observed target failure plus separate revie
 The final query in initial_content_schema_checks.sql reports active content_items
 with content_type=exam and no exams extension. Expected result is zero rows during
 future authorized pre-publication inspection. It detects missing reverse existence;
-it adds no DB constraint/trigger and was not executed. Inspection now has 16
+it adds no DB constraint/trigger. The report does not state whether this exact query
+was run; empty post-cleanup tables do not prove earlier publication completeness. Inspection has 16
 SELECT statements; parser PASS still does not establish actual runtime correctness.

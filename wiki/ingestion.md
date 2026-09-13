@@ -2,10 +2,12 @@
 
 ## Status and source boundary
 
-Design only: no crawler/backfill, ingestion writes, SQL execution or Supabase
-project creation/linking. The owner confirms the LegendStudy project does not
-exist yet. database.md and the unexecuted initial migration define the draft.
-The app uses normalized data during normal browsing, never live source HTML scraping.
+The ingestion pipeline remains design-only: no production crawler/backfill or
+Flutter runtime scraping. The owner reports the dedicated LegendStudy initial
+schema applied and runtime fixtures cleaned up (all 10 application tables empty).
+See current-status.md/database.md for deployment evidence; this docs task did not
+connect to the DB. Preserve the applied initial migration; future DB changes use
+new migration files. The contracts below still await ingestion implementation.
 
 Representative pages read on 2026-09-12: [exam 1705](https://legendstudy.com/1705),
 [historical exam 1415](https://legendstudy.com/1415), [practice collection 991](https://legendstudy.com/991),

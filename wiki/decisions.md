@@ -72,7 +72,7 @@ original provenance. Persist stable ingestion keys independent of display order,
 normalized labels and mutable link queries. Ambiguous reconciliation requires
 review; unique constraints alone do not make parsing idempotent.
 
-## 2026-09-12 — Recent views and draft execution boundary
+## 2026-09-12 — Recent views and historical design-task boundary
 
 Keep one recent_views row per `(user_id, content_item_id)`, upserting the server timestamp;
 analytics event history is separate future scope. Day 3 produces a draft migration
@@ -107,12 +107,14 @@ existing entity architecture and raw evidence; add a backend quarantine queue.
 9. Duplicate content remains inactive with merged_into_content_item_id; trusted transactional
    merges validate cycles and personal conflicts. No automatic personal migration.
 10. Profile id UPDATE enables key-preserving upsert; recent UPDATE grants only its
-    two conflict keys and the trigger stamps time. Both need actual API tests.
+    two conflict keys and the trigger stamps time. Runtime coverage is tracked in
+    database.md; the post-deployment recent upsert test now passes.
 
 The supplied directive identifies S-7/S-8 (taxonomy), S-9 (verified protection) and
 S-12 (profile upsert). It does not supply Claude's complete S-1–S-15 numbered review;
 other numbers cannot be reliably assigned. Coverage is recorded by directive topic
-rather than fabricating review IDs. Independent re-review has not been performed.
+rather than fabricating review IDs. At this remediation stage, independent
+re-review had not yet been performed.
 
 ## 2026-09-12 — General public content layer (supersedes exam-centric draft)
 
@@ -138,5 +140,25 @@ for exam-type content. Bookmarks and recent views target content_items, not exam
   retain raw evidence. No university taxonomy/master now.
 - Native content cards/details may open original articles externally. Full article
   bodies are deferred; normal app browsing never scrapes HTML or wraps the website.
-- Keep the initial migration filename because it is unapplied. Preserve the prior
-  review-fix commit and add a separate local follow-up; no push or DB application.
+- During pre-deployment design, the initial file was revised in place. This is
+  superseded by the applied-migration immutability decision below.
+
+## 2026-09-13 — Dedicated deployed backend and evidence policy
+
+LegendStudy uses its own Supabase project, separate from Muselry. The project name,
+ref `stlhijzpjfgwwdgunlsd`, region and verified-at-report server version may be
+recorded in canonical docs as target identifiers; they are not credentials.
+Never store test-user passwords, access/refresh JWTs, service-role or secret keys.
+Reconfirm the intended target for future DB operations rather than borrowing any
+other application's environment.
+
+Applied migration artifacts are immutable, including historical comments. Future
+DB changes must be new migration files; a successful deployment is not permission
+to replay or rewrite the initial artifact. Generated fallback notes are contingency
+options only and require a reviewed new migration if ever needed.
+
+Validate client-path RLS with actual PostgREST REST requests and real anonymous or
+user JWT contexts. SQL Editor SET ROLE is not authoritative client-path evidence
+for this project because editor session behavior may differ. Distinguish owner-
+reported runtime results, structural policy review and tests directly performed
+by an agent; never promote a structural check into unreported behavioral coverage.
