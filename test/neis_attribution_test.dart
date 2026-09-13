@@ -56,86 +56,59 @@ void main() {
 
   for (final scale in [1.0, 2.0]) {
     for (final state in ['none', 'data', 'empty']) {
-      testWidgets('Home $state attribution shares action row at ${scale}x', (
-        tester,
-      ) async {
-        viewport(tester, scale);
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              schoolSelectionProvider.overrideWith(
-                () => FixedSchool(state == 'none' ? null : schoolA),
-              ),
-              todayMealsProvider.overrideWith(
-                (ref) async => state == 'data' ? [meal] : [],
-              ),
-            ],
-            child: host(const HomeMealCard()),
-          ),
-        );
-        await tester.pumpAndSettle();
-        expect(
-          find.text(
-            state == 'none'
-                ? '학교를 설정하면 오늘 급식을 볼 수 있어요.'
-                : state == 'empty'
-                ? '오늘 등록된 급식 정보가 없어요.'
-                : '오늘의 급식',
-          ),
-          findsOneWidget,
-        );
-        final settings = tester.getRect(
-          find.widgetWithText(TextButton, '학교 설정'),
-        );
-        final rowHeight = tester
-            .getSize(
-              find
-                  .ancestor(
-                    of: find.widgetWithText(TextButton, '학교 설정'),
-                    matching: find.byType(Row),
-                  )
-                  .first,
-            )
-            .height;
-        if (state == 'none') {
-          expect(find.byType(NeisAttribution), findsNothing);
-        } else {
-          final source = tester.getRect(
-            find.widgetWithText(TextButton, '출처: NEIS'),
+      testWidgets(
+        'Home $state school title shares action row without attribution at ${scale}x',
+        (tester) async {
+          viewport(tester, scale);
+          await tester.pumpWidget(
+            ProviderScope(
+              overrides: [
+                schoolSelectionProvider.overrideWith(
+                  () => FixedSchool(state == 'none' ? null : schoolA),
+                ),
+                todayMealsProvider.overrideWith(
+                  (ref) async => state == 'data' ? [meal] : [],
+                ),
+              ],
+              child: host(const HomeMealCard()),
+            ),
           );
-          expect(source.center.dy, closeTo(settings.center.dy, 0.1));
-          expect(source.left, greaterThanOrEqualTo(settings.right));
-          await verifyDialog(tester, '출처: NEIS');
-        }
-        expect(tester.takeException(), isNull);
-        // Measure the previous footer at the identical card content width.
-        await tester.pumpWidget(
-          host(
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                key: const Key('old-footer'),
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextButton(onPressed: () {}, child: const Text('학교 설정')),
-                  if (state != 'none')
-                    const Text(
-                      '출처: 교육부·시도교육청 / NEIS',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                ],
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              state == 'none'
+                  ? '학교를 설정하면 오늘 급식을 볼 수 있어요.'
+                  : state == 'empty'
+                  ? '오늘 등록된 급식 정보가 없어요.'
+                  : '오늘의 급식',
+            ),
+            findsOneWidget,
+          );
+          final settings = tester.getRect(
+            find.widgetWithText(TextButton, '학교 설정'),
+          );
+          expect(settings.width, greaterThanOrEqualTo(48));
+          expect(settings.height, greaterThanOrEqualTo(48));
+          final row = find
+              .ancestor(
+                of: find.widgetWithText(TextButton, '학교 설정'),
+                matching: find.byType(Row),
+              )
+              .first;
+          expect(
+            find.descendant(
+              of: row,
+              matching: find.text(
+                state == 'none' ? '우리 학교 · 오늘 급식' : schoolA.name,
               ),
             ),
-          ),
-        );
-        await tester.pumpAndSettle();
-        final oldHeight = tester
-            .getSize(find.byKey(const Key('old-footer')))
-            .height;
-        expect(rowHeight, lessThanOrEqualTo(oldHeight));
-        // ignore: avoid_print
-        print('Footer $state ${scale}x: $oldHeight -> $rowHeight logical px');
-      });
+            findsOneWidget,
+          );
+          expect(find.byType(NeisAttribution), findsNothing);
+          expect(find.textContaining('NEIS'), findsNothing);
+          expect(tester.takeException(), isNull);
+        },
+      );
     }
     testWidgets('School footer compact accessible dialog at ${scale}x', (
       tester,

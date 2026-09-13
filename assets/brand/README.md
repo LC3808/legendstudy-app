@@ -16,20 +16,20 @@ Source bytes are preserved without alteration. SHA-256:
 - `legendstudy_square_logo_source.png`: `353e35d3429d1a94a77ca45c15f7d8ddf911cb05ccb94bb228aa541c1803e583`
 - `legendstudy_wordmark_source.png`: `697023da6d49db39bca6a232b3b539f4904ca95277181a4e766fa1061d81ac62`
 
-`generated/legendstudy_wordmark_header.png` is a lossless 312×55 crop of the
-wordmark source: Pillow crop box `(718, 64, 1030, 119)` (left/top inclusive,
-right/bottom exclusive). It retains the Korean “레전드스터디 닷컴” artwork;
-the URL, separate ornament and horizontal rules outside the crop are omitted.
+`generated/legendstudy_wordmark_header.png` is a lossless 216×55 crop of the
+wordmark source: Pillow crop box `(718, 64, 934, 119)` (left/top inclusive,
+right/bottom exclusive). It retains the Korean “레전드스터디” artwork;
+the 닷컴 suffix, URL, separate ornament and horizontal rules outside the crop are omitted.
 No redrawing, recoloring or replacement typography. Reproduce with Pillow:
 
 ```python
 from PIL import Image
 Image.open('assets/brand/source/legendstudy_wordmark_source.png').crop(
-    (718, 64, 1030, 119)
+    (718, 64, 934, 119)
 ).save('assets/brand/generated/legendstudy_wordmark_header.png')
 ```
 
-Home renders the crop at up to 210 logical pixels wide, respecting available
+Home renders the crop at up to 180 logical pixels wide, respecting available
 width and aspect ratio. Only this derived asset is in the runtime Flutter bundle.
 General-purpose icons and Text widgets must not impersonate the official logo.
 Body typography and existing orange theme tokens remain unchanged.

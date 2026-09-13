@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 
 class ShellPage extends StatelessWidget {
-  const ShellPage({required this.children, super.key});
+  const ShellPage({
+    required this.children,
+    this.padding = const EdgeInsets.all(AppTokens.pagePadding),
+    super.key,
+  });
+  final EdgeInsetsGeometry padding;
   final List<Widget> children;
   @override
   Widget build(BuildContext context) => Material(
@@ -12,7 +17,7 @@ class ShellPage extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 640),
           child: Padding(
-            padding: const EdgeInsets.all(AppTokens.pagePadding),
+            padding: padding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: children,
@@ -36,7 +41,7 @@ class AppHeader extends StatelessWidget {
   final bool branded;
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: AppTokens.sectionGap),
+    padding: EdgeInsets.only(bottom: branded ? 8 : AppTokens.sectionGap),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,7 +51,7 @@ class AppHeader extends StatelessWidget {
           child: branded
               ? Image.asset(
                   'assets/brand/generated/legendstudy_wordmark_header.png',
-                  width: 210,
+                  width: 180,
                   fit: BoxFit.contain,
                   excludeFromSemantics: true,
                 )
@@ -177,5 +182,51 @@ class ErrorState extends StatelessWidget {
       Semantics(liveRegion: true, child: Text(message)),
       TextButton(onPressed: onRetry, child: const Text('다시 시도')),
     ],
+  );
+}
+
+/// Compact daily card: action shares the heading's 48px row; body stays below.
+class DailyUtilityCard extends StatelessWidget {
+  const DailyUtilityCard({
+    required this.title,
+    required this.action,
+    required this.body,
+    super.key,
+  });
+  final String title;
+  final Widget action, body;
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    decoration: BoxDecoration(
+      color: AppTokens.surfaceWarm,
+      border: Border.all(color: AppTokens.cardBorder),
+      borderRadius: BorderRadius.circular(AppTokens.cardRadius),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LayoutBuilder(
+          builder: (context, constraints) => Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              const SizedBox(width: 8),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: constraints.maxWidth * .45,
+                ),
+                child: action,
+              ),
+            ],
+          ),
+        ),
+        body,
+      ],
+    ),
   );
 }

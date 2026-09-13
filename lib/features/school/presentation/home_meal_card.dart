@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../school_providers.dart';
-import 'neis_attribution.dart';
 
 class HomeMealCard extends ConsumerWidget {
   const HomeMealCard({super.key});
@@ -54,44 +52,16 @@ class HomeMealCard extends ConsumerWidget {
                   ),
           );
     }
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTokens.surfaceWarm,
-        border: Border.all(color: AppTokens.cardBorder),
-        borderRadius: BorderRadius.circular(AppTokens.cardRadius),
+    return DailyUtilityCard(
+      title: title,
+      action: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+        ),
+        onPressed: () => context.push('/my/school'),
+        child: const Text('학교 설정'),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 8),
-          body,
-          Row(
-            children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                    ),
-                    onPressed: () => context.push('/my/school'),
-                    child: const Text('학교 설정'),
-                  ),
-                ),
-              ),
-              if (!school.isLoading && school.value != null)
-                const Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: NeisAttribution(),
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
+      body: body,
     );
   }
 }

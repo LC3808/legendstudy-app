@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 7 runtime closeout in progress; owner reports JWT/proxy/guest PASS, compact attribution UI verified**
+**Day 7 Home refinement verified; D-Day persistence requires storage approval. Runtime closeout remains in progress.**
 
 ## Verified state
 
@@ -574,7 +574,7 @@ integration code; see Day 4-A below for the current client verification boundary
   scans PASS; applied migration bytes unchanged; git diff --check PASS.
 
 
-## Day 7 compact NEIS attribution UI
+## Day 7 compact NEIS attribution UI (historical; Home superseded below)
 
 - Home retains the existing attribution visibility condition: no school means
   no attribution. For a selected school, secondary 12sp 출처: NEIS shares the
@@ -589,3 +589,20 @@ integration code; see Day 4-A below for the current client verification boundary
 - UI only: no proxy/key/repository/storage/schema/policy/parsing/meal-state/cache/
   date change. No runtime-gate completion claim. Existing CLI .temp metadata is
   left untouched and excluded from the refinement commit. git diff --check PASS.
+
+
+## Home follow-up — session-only D-Day
+
+- Official 레전드스터디-only crop applied; canonical source unchanged. School and
+  study actions share title rows; Home attribution removed. School footer/dialog retained.
+- One D-Day supports date/label, replacement and clearing in memory; editor clearly
+  states exit resets and no account save. Auth identity changes clear selection.
+  Korean calendar days avoid UTC drift; expired dates display 지난 일정.
+- Read-only production REST projection returned 42703 for target_date/target_label;
+  repository schema also lacks the contract. Permanent storage requires DB approval.
+  No production SQL/writes or applied-migration changes. Next: prepare storage proposal
+  and STOP before applying; authenticated D-Day persistence is not implemented.
+- Analyze and 93 Flutter tests PASS; Android debug/iOS simulator build results are
+  recorded in the task log. 360×640 / 1× and 2× covers school unset/data/empty,
+  D-Day unset/set/clear, study action and school attribution. Large text scrolls.
+- Existing CLI supabase/.temp metadata remains untracked and excluded. No push/PR/merge.

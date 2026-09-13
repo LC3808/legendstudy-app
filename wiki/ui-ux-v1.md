@@ -184,3 +184,12 @@ Day 6 exam metadata/resources가 필요하면 database.md와 실제 schema를 �
   주장하지 않는다. 상태 기반 차단은 별도 contract 결정이 필요하다.
 - 모든 비동기 영역은 loading/empty/data/error/retry. 별도 feature 확장, DB 변경,
   가짜 runtime 자료, 자동 로그인, bookmark UI 및 PDF viewer는 이번 범위가 아니다.
+
+
+### Day 7 Home follow-up override
+
+Home logo is now the 180px official 레전드스터디-only crop. D-Day/date-label settings
+are session-only with an explicit reset notice; permanent storage awaits approval.
+School name and 학교 설정 share a row; source attribution appears only on school
+setup. Study title and 학습으로 이동 share a row. Existing data/empty handling,
+48px targets and system body fonts remain. See design-system.md for spacing.

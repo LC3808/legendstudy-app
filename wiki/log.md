@@ -373,3 +373,27 @@
   when unset; reduced by 18px/40px for selected-school data/empty in layout tests.
 - UI-only refinement; data/API/storage/state logic unchanged. diff --check PASS.
   Existing untracked supabase/.temp/ excluded. No push, PR or merge.
+
+
+## 2026-09-13 — Home daily dashboard follow-up
+
+- Preserved compact-attribution commit; official wordmark derivative now crops
+  레전드스터디 only (216×55, x=718..933/y=64..118), renders at 180px. Originals unchanged.
+- School/study actions share heading rows; no Home attribution. Compact school
+  footer/dialog retained. Cards retain 48px actions and reduce vertical padding
+  from 16px to 8px; header/inter-section spacing is tightened without font changes.
+- One session-only D-Day supports date/label/settings/clear; exit reset and no
+  account save are disclosed. Korean midnight, leap/year boundaries, expired
+  states and identity isolation tested. Production target fields absent (42703);
+  no permanent persistence or production SQL/data write performed.
+- Analyze PASS; 93 Flutter tests PASS including existing NEIS/School tests and
+  360×640 at 1×/2×. At 1×, study body bottom is y=539 (unset), 535 (meal fixture),
+  514 (empty), above NavigationBar at y=560. This is current extent, not a claimed
+  before/after pixel reduction. Longer real menus and 2× text require scrolling.
+- Android debug and iOS simulator builds PASS. Configured iOS app Home, D-Day
+  reset notice and calendar inspected; /tmp/legendstudy-home-refined.png captured.
+  Guest school selection resets on app restart as before. No authenticated
+  persistence/runtime-gate completion is claimed.
+- Credential-pattern scan and git diff --check PASS; applied migrations and
+  canonical brand source bytes unchanged. CLI .temp remains untracked/excluded.
+  No push, PR or merge.

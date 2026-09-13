@@ -104,8 +104,8 @@ Never use a general-purpose/Material icon as the official brand. Never recreate
 its wordmark with a Text widget. Derived assets must come exclusively from these
 canonical sources; preserve source files and record crop/resize provenance.
 Home uses `assets/brand/generated/legendstudy_wordmark_header.png`, the unchanged
-Korean artwork cropped from the banner (box 718,64,1030,119; 312×55). Its display
-width is at most 210 logical pixels with preserved aspect ratio and an accessible
+Korean artwork cropped from the banner (box 718,64,934,119; 216×55). Its display
+width is at most 180 logical pixels with preserved aspect ratio and an accessible
 header label. The existing orange brand family and system UI typography remain.
 See assets/brand/README.md for source hashes and exact reproduction instructions.
 
@@ -129,15 +129,15 @@ asset-role correction.
 Current tokens supersede the historical Day 5 values: pagePadding 20, sectionGap 24,
 divider #E5E5E5, distinct cardBorder #DCDCDC for cards/search surfaces. cardRadius 16,
 chipRadius 24 and smallGap 8 unchanged. SectionHeader uses its own 15sp/w700 role,
-top 24/bottom 8; ContentCard titles retain 17sp/w600. Home official wordmark is 210
-logical pixels wide, without the introductory subtitle. Artwork bytes unchanged.
+top 24/bottom 8; ContentCard titles retain 17sp/w600. Home official wordmark was 210
+logical pixels wide at Day 6, without the introductory subtitle. Artwork bytes unchanged.
 Loading spinners are centered to avoid stretching under list width constraints.
 Material NavigationBar remains: all four tabs have outlined/filled icon pairs;
 Materials uses article_outlined/article. Labels use selected w700 vs normal w400,
 with a restrained #FFE3B0 indicator. System body fonts remain unchanged.
 
 
-## Day 7 compact NEIS attribution
+## Day 7 compact NEIS attribution (superseded on Home)
 
 Home places 출처: NEIS at the right of the existing school-setting action row,
 using 12sp secondary text and no separate source block/spacer. Preserve attribution
@@ -146,3 +146,19 @@ visibility only with a selected school. School setup footer uses the short label
 Both are TextButtons with >=48×48 touch targets, system text scaling and a short
 native source dialog. Longer scaled labels may wrap within the shared action row;
 never shrink text scaling or clip the explanation to fit. No new card/section.
+
+
+## Day 7 Home follow-up
+
+Home now renders only the official 레전드스터디 artwork (without 닷컴), at 180px
+maximum width. Source bytes are unchanged; see assets/brand/README.md provenance.
+Home top inset 12px, branded header bottom 8px; utility cards use horizontal 16px /
+vertical 8px padding. School name/학교 설정 and 나의 공부 시간/학습으로 이동 share
+heading rows. Actions retain minimum 48px targets and wrap at large text scale.
+Home has no source attribution. School setup alone retains its compact meta
+attribution and native information dialog. Quick/find and study headings use
+8px top / 4px bottom spacing; other screens keep existing section tokens.
+D-Day settings accept one date and label (trimmed, 1–80 Unicode code points).
+The editor explicitly says settings reset on app exit and are not account-saved.
+Dates count Korean calendar days: future D-n, today D-DAY, past 지난 일정.
+No database write/persistence is implemented pending a separate storage approval.

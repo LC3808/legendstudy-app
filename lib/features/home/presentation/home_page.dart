@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
+import 'day_target_card.dart';
 import '../../school/presentation/home_meal_card.dart';
 import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
@@ -12,14 +13,21 @@ class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) => ShellPage(
+    padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
     children: [
       const AppHeader(title: '레전드스터디', branded: true),
-      const CompactUtilityCard(title: 'D-DAY', body: '목표 일정과 함께 하루를 준비해요.'),
-      const SizedBox(height: 12),
+      const DayTargetCard(),
+      const SizedBox(height: 8),
       const HomeMealCard(),
-      const SizedBox(height: AppTokens.sectionGap),
+      const SizedBox(height: 8),
       SearchEntry(onTap: () => context.go('/materials')),
-      const SectionHeader('빠르게 찾기'),
+      Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 4),
+        child: Semantics(
+          header: true,
+          child: const Text('빠르게 찾기', style: AppTokens.sectionTitle),
+        ),
+      ),
       Wrap(
         spacing: 8,
         runSpacing: 4,
@@ -41,10 +49,16 @@ class HomePage extends ConsumerWidget {
             ),
         ],
       ),
-      const SectionHeader('오늘의 공부'),
-      CompactUtilityCard(
+      Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 4),
+        child: Semantics(
+          header: true,
+          child: const Text('오늘의 공부', style: AppTokens.sectionTitle),
+        ),
+      ),
+      DailyUtilityCard(
         title: '나의 공부 시간',
-        body: '오늘 공부 기록이 아직 없어요.',
+        body: const Text('오늘 공부 기록이 아직 없어요.'),
         action: TextButton(
           onPressed: () => context.go('/study'),
           child: const Text('학습으로 이동'),
