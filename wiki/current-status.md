@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8 design / DB contract pending Product Owner approval.**
+**Day 7 = COMPLETE. Day 8 design approved / final migration prepared; production application pending.**
 
 Product Owner accepted the final runtime results. Repository/code and Wiki were
 checked before this documentation closeout. Live deployment/JWT/Flutter results
@@ -61,23 +61,27 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Android debug and iOS simulator builds PASS; latest owner Flutter persistence
   runtime smoke PASS. Credential scan and git diff --check PASS at implementation.
 - This closeout changes documents only; Flutter tests/builds and production tests
-  were not rerun. No Flutter, DB/schema/migration, secret or Auth-user changes.
+  were not rerun. Day 7 validation is historical. The current package adds an unapplied migration;
+  no Flutter, production, secret or Auth-user changes.
 
-## Next: Day 8 Study — design pending approval, not implemented
+## Next: Day 8 Study — migration ready, not deployed or implemented
 
 [Study v1](study-v1.md) defines 8-A timer/state/guest/auth/Home/seven-day behavior,
 8-B platform-aware focus, 8-C mock countdown/notifications and 8-D later scoring.
 [Storage proposal](day-8-study-storage-proposal.md) includes reviewable SQL,
-preflight/catalog/rollback and real JWT acceptance plan outside migrations.
+preflight/catalog/rollback and real JWT acceptance plan. New migration:
+20260914000100_study_sessions.sql; not yet applied. Copy-ready SQL is in the
+[migration package](day-8-study-migration-package.md).
 
-Recommended v1: durable local active timer, immutable terminal cloud sessions with
+Approved v1: durable local active timer, immutable completed cloud sessions with
 validated active intervals; no live cross-device timer or automatic guest upload.
 Study shell and Home summary remain static; this task changes design/proposal only.
 Android DND requires policy access and own-rule lifecycle validation; iOS has manual
 Focus guidance, not a promised automatic global toggle. Focus preference stays local.
 
-Owner approval is required for the storage/time/aggregation contract and stage split.
-Then promote a new migration, Owner applies it, run real JWT acceptance, and implement
+Owner approved the contract; cancelled sessions remain local, with no cloud status
+column. The bounded KST-window SELECT contract adds no aggregate RPC.
+Next Owner preflight/application/catalog checks, then real JWT acceptance and
 8-A. No production call/deployment, Flutter implementation, push, PR or merge in this
 step. Static validation details are in the proposal; Day 8 is not COMPLETE.
 

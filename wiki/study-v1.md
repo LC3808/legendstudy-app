@@ -1,7 +1,7 @@
 # Day 8 Study v1 — architecture and UI contract proposal
 
-Reviewed: 2026-09-14. **Day 8 design / DB contract pending Product Owner approval.**
-Day 7 remains COMPLETE. This document proposes behavior; no Study feature, package,
+Reviewed: 2026-09-14. **Design approved; final migration package prepared; production application pending.**
+Day 7 remains COMPLETE. This document defines approved behavior; no Study feature, package,
 native permission, DB object or production deployment was implemented in this task.
 Claude UI/UX review can refine presentation within these proposed data boundaries.
 
@@ -40,7 +40,7 @@ design system before reviewing source and all three applied migration files.
 | A: cloud running row with accumulated time/running_since/status | Another device can discover an active session | Pause writes need offline queue/order/versioning; concurrent devices need conflict ownership; guest needs another mechanism; timestamp alone cannot reconstruct pause distribution |
 | B: durable local execution, terminal immutable cloud snapshots | Same local timer for guest/auth; no network dependency while studying; atomic local end/outbox | Active session is device-bound; uninstall/device loss can lose unsynced work; no live handoff across devices |
 
-Choose B for v1. Cloud receives terminal records (completed or cancelled), never
+Choose B for v1. Cloud receives completed records only, never
 running/paused heartbeats. One active session across both modes per device. Different
 devices may run independently; completed history syncs, live timers do not.
 Do not advertise backup before upload acknowledgement. This is self-reported study
@@ -86,8 +86,8 @@ callback for session durability.
 7. Proposed product bounds: 24 hours total session span including pauses, at most
    256 active intervals, mock plan 1 minute–12 hours. Auto-finalize at the 24-hour
    boundary (on next execution if suspended), clipping the open interval. At interval
-   limit ask to finish before another resume. These are v1 product/storage limits,
-   not OS constraints or official exam limits; Owner approval required.
+   limit ask to finish before another resume. These are approved v1 product/storage limits,
+   not OS constraints or official exam limits.
 8. End freezes elapsed once, atomically stores terminal payload + outbox, removes
    active draft, then attempts upload. Failed upload never restarts the timer or
    discards time. New session may start after local commit while retry remains queued.
@@ -123,8 +123,8 @@ Proposed interfaces (not implemented):
 - StudySessionController: start / pause / resume / finish / cancel / recover.
 - StudyLocalStore: atomic draft + history + outbox transactions, scoped internally.
 - StudyRepository: fetchCurrentSessions(window, cursor), saveCompletedSession(payload),
-  deleteCurrentSession(id). The name saveCompletedSession covers terminal snapshots,
-  including cancelled status; callers never send owner/created_at/duration counters.
+  deleteCurrentSession(id). The name saveCompletedSession covers completed snapshots,
+  excluding cancelled work; callers never send owner/created_at/duration counters.
 - StudySummaryProvider: one shared pure interval aggregator for Home and Study.
 - StudySyncCoordinator: owner-scoped retry and merge, generation/request guards.
 
@@ -146,7 +146,8 @@ not cloud-saved. Delete removes only that owner row and cancels its queued retry
 it cannot resurrect; deletion UI is optional later, contract supports cleanup.
 
 Fetch on login, app foreground and successful upload; paginate the whole requested
-window (started_at, id cursor), never silently truncate at REST default row limit.
+window (started_at, id cursor), with a 2,000-record bound and explicit overflow
+error as defined in the final storage contract; never publish partial totals.
 Cloud cache/error must be distinguishable from actual zero history. Epoch guards
 apply to fetch, upload, deletion and aggregate completion, not only one provider.
 
@@ -157,7 +158,7 @@ Home retains “나의 공부 시간 / 학습으로 이동”, 48px action and c
 minute: “오늘 1분 미만 공부했어요.” Use completed records only for Home/summary;
 running duration belongs to the central Study timer, with optional “공부 중” meta
 and no second clock. Local pending completed work is included once with sync status.
-Cancelled sessions stay in history as “취소됨”, excluded from totals; regular 공부
+Cancelled sessions may stay only in local history as “취소됨”, excluded from totals; regular 공부
 종료 means completed, not cancelled. Explicit discard requires confirmation.
 
 v1 date grouping is Asia/Seoul (KST), matching Day 7 meals; travel does not silently
@@ -193,8 +194,7 @@ limit even if callback resumes late. 제출 completes early and freezes used tim
 it does not submit answers or score. 종료 offers “기록 저장” (completed) or “취소”
 (cancelled, excluded). Zero-active submission yields no completed record. Finished
 UI shows used/planned time and completion, with no score/grade claim. A local finish
-reason (submit/limit/manual/cancel) can drive wording; cloud v1 needs only mode and
-completed/cancelled, not redundant submitted booleans.
+reason (submit/limit/manual/cancel) can drive wording; cloud v1 stores only completed records, without status or submitted booleans.
 
 Actual exams PK is **exams.content_item_id**, not exams.id. exam_subjects.id is the
 occurrence PK with content_item_id FK and unique(id, content_item_id). v1 custom
@@ -317,9 +317,9 @@ and real JWT steps. Future tests must cover:
   simulator builds plus physical-device lifecycle acceptance. Existing Day 7 tests
   and profile/school/D-Day contracts remain intact. None rerun as Study acceptance now.
 
-Owner decisions: approve B/local durability and no live handoff; immutable terminal
-payload; cancelled exclusion; KST/overlap-union summary; 24h/256interval and1min–12h
-bounds; Android gated8-B/iOS manual guidance; 8-C optional notification permission.
-After approval: promote proposal to a new dated migration, Owner preflight/apply/
-postflight, real JWT acceptance and then 8-A implementation. **STOP before deployment
-or Study implementation. Day 8 is not COMPLETE.**
+Owner approved B/local durability, cancelled exclusion with no cloud cancellation,
+KST/overlap-union summary, 24h/256interval and1min–12h bounds, Android capability
+constraints/iOS manual guidance and local Focus preferences. Final migration is
+prepared. Next: Owner preflight/apply/postflight, real JWT acceptance, then8-A
+implementation. **STOP before production execution or Flutter implementation here.
+Day8 is not COMPLETE.**

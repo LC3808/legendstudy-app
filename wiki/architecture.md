@@ -306,6 +306,11 @@ session-derived ownership, idempotent UUID insertion and stale-account guards.
 Shared interval aggregation feeds Study and the compact Home summary. Profiles,
 school, D-Day, content and existing auth contracts remain unchanged.
 
-No timer persistence/native Focus/scoring code has been added. Product Owner approval,
-owner migration and actual JWT validation precede 8-A implementation. Platform focus
+No timer persistence/native Focus/scoring code has been added. Product Owner design approval is recorded;
+owner application and actual JWT validation still precede 8-A implementation. Platform focus
 and mock notifications are separate capability gates; Day 7 remains COMPLETE.
+
+Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
+column or cloud cancellations. New migration is NOT DEPLOYED. The copy-ready
+[package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
+are ready; no aggregate RPC, existing table edits or Flutter implementation added.

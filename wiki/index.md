@@ -32,5 +32,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [D-Day storage — applied and runtime verified](day-7-dday-storage-proposal.md)
 
-- [Study v1 — Day 8 design and UI contract, approval pending](study-v1.md)
-- [Day 8 Study storage — SQL proposal, not deployed](day-8-study-storage-proposal.md)
+- [Study v1 — Day 8 approved design and UI contract](study-v1.md)
+- [Day 8 Study storage — final migration, not deployed](day-8-study-storage-proposal.md)
+
+- [Day 8 Study migration — copy-ready Owner SQL package](day-8-study-migration-package.md)

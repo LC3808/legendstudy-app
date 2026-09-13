@@ -548,3 +548,21 @@ Flutter persistence smoke: PASS
   migration bytes, Wiki links, added credential-pattern scan and git diff --check.
   Parser uses PG 18.4 grammar; production PG 17.6 execution compatibility remains
   an owner deployment gate. Flutter tests/builds and live checks were not rerun.
+
+
+## 2026-09-14 — Day 8 approved storage migration package
+
+- Owner approved local running/paused state, completed cloud records, KST split/union
+  totals, limits and platform boundaries. Removed cloud cancellation/status column.
+- Added 20260914000100_study_sessions.sql: 11 columns, generated duration from validated
+  active intervals,6 CHECKs,owner policies and narrow grants,one query index.
+- Prepared read-only preflight/catalog,copy-ready SQL package,rollback and actual A/B
+  JWT acceptance plan. Summary SELECT bounded to KST window and2,000 rows with explicit
+  overflow; no aggregate RPC or lifetime-history download.
+- Existing applied migrations and Flutter/Day7 contracts unchanged. No production
+  request/SQL,fixture/Auth changes,push,PR or merge. Day7 COMPLETE; Day8 production
+  application and actual JWT acceptance remain pending before implementation.
+- Offline checker and2 tests (11 forbidden-contract mutations) PASS; SQL/PLpgSQL,
+  immutable migration hashes,package/source equality,links,credential-pattern and
+  diff checks PASS. ParserPG18.4; actualPG17/JWT execution not performed. Flutter
+  tests/builds not rerun because implementation is unchanged.

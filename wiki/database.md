@@ -512,8 +512,12 @@ migration change was made. See day-7-dday-storage-proposal.md for runtime marker
 ## Day 8 Study — proposal only, NOT DEPLOYED
 
 [Study storage proposal](day-8-study-storage-proposal.md) proposes a new owner-only
-study_sessions table and pure interval-validation helper. SQL remains outside
-supabase/migrations until approval. No Study table is claimed deployed; no production
+study_sessions table and pure interval-validation helper. New migration 20260914000100_study_sessions.sql is prepared, not applied. No Study table is claimed deployed; no production
 catalog query or SQL execution occurred in this design task. Applied Day 7 profile
 contracts, migrations and data remain unchanged. See the proposal for complete
 columns, PK/FK, CHECK, index, RLS/grants, validation, JWT acceptance and rollback.
+
+Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
+column or cloud cancellations. New migration is NOT DEPLOYED. The copy-ready
+[package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
+are ready; no aggregate RPC, existing table edits or Flutter implementation added.

@@ -1,30 +1,31 @@
-# Day 8 Study storage — proposal, NOT DEPLOYED
+# Day 8 Study storage — final migration package, NOT DEPLOYED
 
-Reviewed:2026-09-14. **Pending Product Owner approval.**
-Canonical behavior/UI: [Study v1](study-v1.md). SQL is intentionally outside the
-migration discovery directory. No current migrations, profiles, Auth users or
-production objects were changed. No live production/schema assumption is inferred
-from having this file. Owner-run preflight remains required.
+Reviewed: 2026-09-14. **Product Owner design approval received; production application pending.**
+Canonical behavior/UI: [Study v1](study-v1.md). Completed sessions only are stored
+in cloud. Cancellation remains local, excluded from totals. No cloud status column.
+No production calls, Flutter changes or edits to the three previously applied migrations.
 
 ## Exact artifacts and execution order
 
-1. Review [proposal SQL](../supabase/proposals/study_sessions.sql).
-   Suggested future migration: `20260914000100_study_sessions.sql`; reconfirm a free
-   chronological timestamp on approval. Promote identical reviewed SQL into a new
-   migration only at that stage; never edit the three applied migrations.
-2. Owner opens **LegendStudy / stlhijzpjfgwwdgunlsd** SQL Editor and runs
-   [read-only preflight](../supabase/verification/study_sessions_preflight.sql).
-   Proposed objects must be absent; auth roles/users/uid function must exist.
-   If any object conflicts or schema differs, STOP and review, do not replay/drop it.
-   Save profile count/digest, columns, constraints, policies and grants privately.
-3. After approval only, execute the entire proposal file as one BEGIN…COMMIT block.
-   No IF NOT EXISTS hides a mismatch. It does not seed data or modify profiles.
-4. Run [postflight catalog SQL](../supabase/verification/study_sessions_catalog.sql)
-   and repeat preflight profile metadata queries. Expected: one new table, generated
-   duration, 7 named CHECKs, PK/FK, one non-PK index, 3 owner policies, RLS enabled,
-   immutable invoker helper, zero rows, all Day 7 profile evidence unchanged.
-5. Actual authenticated REST acceptance follows; SQL Editor SET ROLE is not proof.
-   Deploying successfully is not client acceptance and not Day 8 COMPLETE.
+Use [copy-ready migration package](day-8-study-migration-package.md): each execution
+step contains one complete SQL block, copied verbatim from its checked-in SQL file.
+
+1. Owner confirms **LegendStudy / stlhijzpjfgwwdgunlsd** in Dashboard SQL Editor.
+2. Run [preflight](../supabase/verification/study_sessions_preflight.sql). Both new
+   objects must be absent; roles/auth.users/auth.uid present; CREATE/REFERENCES true;
+   two generated-expression primitives immutable (`i`). Save profile count/digest
+   and existing metadata. Conflict, unexpected privilege or schema: STOP and review.
+3. Execute [20260914000100_study_sessions.sql](../supabase/migrations/20260914000100_study_sessions.sql)
+   as one block. [Proposal mirror](../supabase/proposals/study_sessions.sql) is identical;
+   do not execute both. No replay-safe IF NOT EXISTS conceals conflicts.
+4. Run [catalog verification](../supabase/verification/study_sessions_catalog.sql).
+   Expected: 11 columns, 6 named CHECKs, PK + auth.users FK, one non-PK index,
+   3 owner policies, RLS on/FORCE off, immutable invoker helper, zero initial rows.
+   authenticated: SELECT/DELETE/id INSERT/helper EXECUTE true; UPDATE and INSERT
+   owner/duration/created false. anon: all checked access false. Compare protected
+   table metadata and profile count/digest with preflight, under the same UTC setting.
+5. Run real JWT/REST acceptance below after successful catalog verification. SQL
+   Editor SET ROLE is not substitute evidence. Application alone is not Day 8 COMPLETE.
 
 ## Table and interval contract
 
@@ -33,7 +34,6 @@ from having this file. Owner-run preflight remains required.
 | id | UUID primary key, generated once by device and retained through retries |
 | user_id | UUID NOT NULL DEFAULT auth.uid(), FK auth.users(id) ON DELETE CASCADE |
 | mode | text study or mock_exam |
-| status | text completed or cancelled; no cloud active status |
 | title | nullable trimmed text1..80characters; required for mock |
 | subject | nullable trimmed display text1..40characters; no guessed taxonomy FK |
 | planned_duration_seconds | NULL for study; integer60..43200 required for mock |
@@ -44,8 +44,8 @@ from having this file. Owner-run preflight remains required.
 
 No updated_at because accepted records are immutable for clients. No duplicated
 submitted flag, running_since, event log, Focus preferences or scoring data.
-Empty segments allowed only for cancelled zero-duration records; completed requires
-at least1second. Pause gaps allowed, overlap/out-of-order/negative/fractional/outside
+All stored sessions require at least 1 second; empty/zero-duration intervals cannot
+produce a stored completed record. Pause gaps allowed, overlap/out-of-order/negative/fractional/outside
 span rejected. Mock active time cannot exceed its plan. Finite past dates accepted;
 no current_date/now CHECK that becomes invalid as time passes. Timestamps are
 client anchors, not server-attested study evidence. Day totals use raw intervals,
@@ -54,22 +54,22 @@ not rounded duration_seconds. No profile row prerequisite: user FK is auth.users
 Text trimming follows the existing profile convention: ASCII space/tab/newline/
 carriage-return/form-feed/vertical-tab. Client normalizes whitespace and checks
 Unicode scalar length matching PostgreSQL char_length, not UTF-16 code units.
-The bounds are proposed product decisions, not official examination requirements.
+The bounds are approved product decisions, not official examination requirements.
 
-CHECKs: study_sessions_mode, status, time_bounds, title, subject, mode_fields, duration.
+CHECKs: study_sessions_mode, time_bounds, title, subject, mode_fields, duration.
 The immutable helper also raises CHECK-violation SQLSTATE23514 for malformed
-interval arrays or span. Catalog expectation is **7 named CHECKs**, plus generated
+interval arrays or span. Catalog expectation is **6 named CHECKs**, plus generated
 duration NOT NULL and PK/FK. The helper uses
 no table access; SECURITY INVOKER, empty search_path and bounded traversal.
 
 Index `(user_id, started_at DESC, id DESC)` supports owner/window history and keyset
-pagination. No unnecessary mode/status index at v1 volume. The24h span bounds query
+pagination. No unnecessary mode index at v1 volume. The24h span bounds query
 lookback without requiring an ended_at index. Analyze plans after realistic volume.
 
 ## Privilege and idempotency contract
 
 - anon/PUBLIC: no table privileges, no helper execution, no public history endpoint.
-- authenticated: SELECT/DELETE with owner RLS; column INSERT only for id, mode, status,
+- authenticated: SELECT/DELETE with owner RLS; column INSERT only for id, mode,
   title, subject, plan, start, end, segments. user_id defaults to current JWT. No explicit
   owner/duration/created_at INSERT, UPDATE grant or UPDATE policy.
 - service_role: existing backend-only model, CRUD; never shipped to Flutter.
@@ -90,26 +90,26 @@ Profile editing, school pair and D-Day pair code/policies/grants remain byte-for
 unchanged. Study performs no profiles INSERT/UPDATE/DELETE. Acceptance compares Day 7
 fields/catalog before/after, and retains Auth users after fixture cleanup.
 
-## Actual JWT/REST acceptance plan (after approval/deployment)
+## Actual JWT/REST acceptance plan (after owner deployment)
 
 Use existing owner-confirmed A/B accounts with passwords through local getpass and
 local public config. Do not print response bodies, JWT, headers/passwords/keys. No
 service-role client or SQL SET ROLE substitute. Write a dedicated opt-in verifier
 at implementation time with named assertions, safe status/count diagnostics, and
 finally-cleanup of only run-owned random session UUIDs registered before dispatch.
-No verifier or production mutations were executed during this proposal task.
+A plan is prepared; a live verifier is not implemented or executed in this package task.
 
 1. Confirm project, login A/B, current identities and existing profile snapshots
    without logging values. Do not require all Study history empty or touch old rows.
 2. A INSERT study completed interval example[[0, 60000],[120000, 180000]]; SELECT
    owner row and require duration_seconds120 and exact bounds/fields, not just HTTP200.
-3. A INSERT cancelled zero, normal study with NULLplan and custom mock with plan60,
+3. A INSERT normal study with NULL plan and custom mock with plan 60,
    active<=60000ms; no exams/profile row required. All expected returned values checked.
 4. Boundary accepts:1second completed, 24h span, 256 valid intervals, title80, subject40,
    mock60 and43200, finite historical timestamps, consecutive touching intervals.
-5. Reject: invalid mode/status;empty/whitespace/overlong required title;study plan;
+5. Reject: invalid mode;empty/whitespace/overlong required title;study plan;
    mock missing title/plan, plan59/43201;negative/reversed/nonfinite dates, span>24h;
-   completedzero;mock exact active milliseconds beyond plan, including subsecond excess.
+   completed zero;mock exact active milliseconds beyond plan, including subsecond excess.
 6. Reject arrays:null/object/257entries, nonpair, string/nullnumber, fractional/negative
    offset, zero/reversed interval, overlap/out-of-order, outside span. Require DB error
    and absence of the attempted UUID, not only an HTTP failure. Huge payload behavior
@@ -143,16 +143,64 @@ existing migrations and Auth users remain. Re-enable only compatible clients aft
 rollback; keep schema-version-incompatible outbox pending for review, never silently
 throw it away. Nothing has been applied now, so no rollback should run now.
 
+## Aggregate query / repository contract
+
+No aggregate RPC is added in v1. Home and Study share one `fetchCurrentStudyWindow`
+result for today plus the previous six **KST** dates. Server SELECT is owner-scoped,
+window-bounded and keyset-paginated; no lifetime-history download. Take one fixed
+window anchor per fetch; next midnight/foreground invalidates it.
+
+- Let S = first KST midnight and E = midnight following the last day, converted to
+  UTC instants. Fetch `started_at >= S - 24 hours AND started_at < E AND ended_at > S`.
+  The 24-hour CHECK makes this complete for all potentially overlapping sessions.
+- Projection: id, mode, started_at, ended_at, active_segments, duration_seconds.
+  Owner derives from current SDK session; apply explicit user_id filter plus RLS.
+  Order started_at DESC, id DESC. Next cursor is `started_at < cursorStart OR
+  (started_at = cursorStart AND id < cursorId)`, in addition to original bounds.
+- Page size 100; maximum 2,000 records per window plus one overflow sentinel.
+  Stop at 20 full pages and request one sentinel row; if present, return explicit
+  summary-limit error, retain last complete cached summary, never show partial sum
+  as complete or zero. No automatic infinite retry. This is a client resource guard,
+  not a new DB record quota. Frequent overflow or poor device performance triggers
+  separately reviewed server aggregation; do not silently loosen to lifetime fetch.
+- Convert offsets to instants using integer millisecond arithmetic; clip to [S,E).
+  Deduplicate local/server UUIDs, union active intervals across sessions/devices,
+  then split the union at each KST midnight. Sum milliseconds and floor only for
+  display. Seven returned date entries include zero days. Mode-filtered union is
+  separate; overlapping mode totals are not a stacked/additive total.
+- Example: active23:50–23:55 and00:05–00:20 gives5min on day1 and15min on day2.
+  A second device recording00:10–00:15 must not increase day2 above15min.
+- Current-owner locally completed unsynced records merge into the same UUID/interval
+  set. Running/paused/cancelled records do not enter summary. Retry uses fixed UUID;
+  no separate local+server addition. Account epoch guards cover the whole fetch.
+- This bounded SELECT design suits v1; history browsing can separately page records
+  without accumulating all past pages in the summary provider. Concurrent late
+  uploads are reconciled on refresh; no transactional multi-page snapshot is promised.
+
+Timestamptz preserves instants; KST is an explicit display/grouping timezone, not
+canonical wall-clock text. Generated columns derive rather than accept a supplied
+value ([PostgreSQL17 generated columns](https://www.postgresql.org/docs/17/ddl-generated-columns.html)).
+Elapsed subtraction then EXTRACT(epoch FROM interval) uses immutable operations,
+confirmed against the [PG17 catalog](https://github.com/postgres/postgres/blob/REL_17_STABLE/src/include/catalog/pg_proc.dat)
+and checked by preflight; do not replace it with timezone-sensitive timestamp extraction.
+[Datetime semantics](https://www.postgresql.org/docs/17/functions-datetime.html) and
+[RLS semantics](https://www.postgresql.org/docs/17/ddl-rowsecurity.html) underpin the contract.
+
 ## Static validation evidence
 
-- PASS: all four proposal/verification SQL files parse; helper PL/pgSQL body parses.
-- Parser: pglast 8.4, matching repository review requirements, PostgreSQL 18.4 grammar.
-  Production is owner-reported PG 17.6: this is not execution/compatibility proof.
-- PASS: offline scope assertions for one new table, 12 columns, 7 named CHECKs,
-  3 owner policies, narrow INSERT contract and absence of profile mutations.
-- PASS: all three applied migrations byte-identical to starting commit.
-- PASS: changed Wiki local links resolve, git diff --check, no credential-shaped
-  added values. No Flutter/native/config/test implementation changed.
-- Flutter tests/builds, PostgreSQL execution, real JWT and device lifecycle tests NOT
-  RUN for this documentation/proposal task. Production preflight/catalog/JWT and
-  full timer runtime remain future approval gates.
+- PASS: migration/proposal byte equality; SQL and PL/pgSQL grammar; pre/postflight
+  restricted to read-only SELECT/transaction/session-setting statements.
+- PASS: offline scope checks for 11 columns,6 CHECKs,3 owner policies,narrow grants,
+  interval/generated-duration guards and unchanged hashes of all3 applied migrations.
+- PASS: 2 checker tests,including11 rejected contract mutations (overlap/boundary,
+  limits,UPDATE grants,owner policy,definer escalation,status and protected-table drift).
+- PASS: copy-ready SQL blocks equal source files; Wiki local links; credential-shaped
+  added-value scan; git diff --check. No Flutter/native implementation changed.
+- Parser: repository-pinned pglast8.4 (PG18.4 grammar). PG17 documentation/catalog
+  reviewed; actual PG17 execution and live A/B JWT acceptance NOT RUN. Local PostgreSQL
+  server was not available. Static checks do not replace deployment acceptance.
+- Reproduce with Python environment containing supabase/review/requirements.txt:
+  `python supabase/review/check_study_storage.py` and
+  `python -m unittest discover -s supabase/review -p test_check_study_storage.py -v`.
+- Flutter tests/builds not rerun: no Flutter change. Day7 COMPLETE preserved; Day8
+  remains pending Owner application and real JWT validation,then implementation.
