@@ -68,7 +68,11 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: AppTokens.divider),
+            borderSide: const BorderSide(color: AppTokens.cardBorder),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppTokens.cardBorder, width: 2),
           ),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           suffixIcon: controller.text.isEmpty

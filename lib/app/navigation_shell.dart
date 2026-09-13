@@ -18,7 +18,11 @@ class NavigationShell extends StatelessWidget {
           selectedIcon: Icon(Icons.home),
           label: '홈',
         ),
-        NavigationDestination(icon: Icon(Icons.search), label: '자료'),
+        NavigationDestination(
+          icon: Icon(Icons.article_outlined),
+          selectedIcon: Icon(Icons.article),
+          label: '자료',
+        ),
         NavigationDestination(
           icon: Icon(Icons.timer_outlined),
           selectedIcon: Icon(Icons.timer),

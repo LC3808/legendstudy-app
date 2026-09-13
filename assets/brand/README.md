@@ -29,7 +29,7 @@ Image.open('assets/brand/source/legendstudy_wordmark_source.png').crop(
 ).save('assets/brand/generated/legendstudy_wordmark_header.png')
 ```
 
-Home renders the crop at up to 280 logical pixels wide, respecting available
+Home renders the crop at up to 210 logical pixels wide, respecting available
 width and aspect ratio. Only this derived asset is in the runtime Flutter bundle.
 General-purpose icons and Text widgets must not impersonate the official logo.
 Body typography and existing orange theme tokens remain unchanged.

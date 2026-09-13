@@ -287,3 +287,15 @@
 - P0 validation: flutter analyze PASS; 26 unit/widget tests PASS; git diff --check
   PASS. UI tests cover navigation, submit/clear, tab/detail return state, type/date
   cards and 360×640/2× scaling. No push/merge; P1 refinement follows.
+
+
+## 2026-09-13 — Day 6 entry P1 hierarchy / completion
+
+- Applied smaller spacing/wordmark, separate divider/card borders, section typography,
+  centered spinner and consistent selected NavigationBar icons/label weight.
+  Recorded canonical UI/token refinements and deferred feature boundaries.
+- Final analyze PASS; 26 tests PASS; Android debug and iOS simulator builds PASS.
+  Home→Materials visual check on iPhone 17 Pro / iOS 26.5 passed. Diff/security and
+  unchanged router/backend/config/assets/dependency checks PASS. No DB/SQL work.
+- Two local refinement commits on codex/day-6-materials-search from main 7e241e8.
+  Ready for scoped Day 6 actual features; no blocker, push or merge.

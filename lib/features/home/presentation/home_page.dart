@@ -11,11 +11,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => ShellPage(
     children: [
-      const AppHeader(
-        title: '레전드스터디',
-        subtitle: '오늘의 공부, 여기서 시작해요',
-        branded: true,
-      ),
+      const AppHeader(title: '레전드스터디', branded: true),
       const CompactUtilityCard(title: 'D-DAY', body: '목표 일정과 함께 하루를 준비해요.'),
       const SizedBox(height: 12),
       CompactUtilityCard(

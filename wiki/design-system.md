@@ -15,7 +15,9 @@ Use the established LegendStudy orange family as the primary accent. Initial wor
 - Surface Warm: `#FFFDF9`
 - Text Primary: `#202124`
 - Text Secondary: `#666666`
-- Divider: `#EEEEEE`
+- Divider: `#E5E5E5`
+- Card/search border: `#DCDCDC`
+- Navigation indicator: `#FFE3B0`
 
 These values are starting tokens and may be refined after visual testing against the source logo assets.
 
@@ -103,7 +105,7 @@ its wordmark with a Text widget. Derived assets must come exclusively from these
 canonical sources; preserve source files and record crop/resize provenance.
 Home uses `assets/brand/generated/legendstudy_wordmark_header.png`, the unchanged
 Korean artwork cropped from the banner (box 718,64,1030,119; 312×55). Its display
-width is at most 280 logical pixels with preserved aspect ratio and an accessible
+width is at most 210 logical pixels with preserved aspect ratio and an accessible
 header label. The existing orange brand family and system UI typography remain.
 See assets/brand/README.md for source hashes and exact reproduction instructions.
 
@@ -120,3 +122,16 @@ consider reducing wordmark size, improving continuity between the header and fir
 section, strengthening divider/outline and text contrast, and clearer section
 separation. Continue to avoid excessive orange. No UI redesign accompanies this
 asset-role correction.
+
+
+## Day 6 entry — shell hierarchy refinement
+
+Current tokens supersede the historical Day 5 values: pagePadding 20, sectionGap 24,
+divider #E5E5E5, distinct cardBorder #DCDCDC for cards/search surfaces. cardRadius 16,
+chipRadius 24 and smallGap 8 unchanged. SectionHeader uses its own 15sp/w700 role,
+top 24/bottom 8; ContentCard titles retain 17sp/w600. Home official wordmark is 210
+logical pixels wide, without the introductory subtitle. Artwork bytes unchanged.
+Loading spinners are centered to avoid stretching under list width constraints.
+Material NavigationBar remains: all four tabs have outlined/filled icon pairs;
+Materials uses article_outlined/article. Labels use selected w700 vs normal w400,
+with a restrained #FFE3B0 indicator. System body fonts remain unchanged.

@@ -20,7 +20,7 @@ class ContentResults extends StatelessWidget {
     skipLoadingOnRefresh: false,
     loading: () => const Padding(
       padding: EdgeInsets.all(16),
-      child: CircularProgressIndicator(),
+      child: Center(child: CircularProgressIndicator()),
     ),
     error: (error, _) => ErrorState(
       message: error is BackendUnavailable

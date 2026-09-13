@@ -91,12 +91,12 @@ Auth 상태는 loading/error도 처리하며 토큰이나 사용자 식별자를
 ## 6. 공통 시각 규칙
 
 Primary #FFAC14, Dark #E99500, Soft #FFF3DC, Background #FFFFFF,
-Surface Warm #FFFDF9, Text #202124, Secondary #666666, Divider #EEEEEE.
+Surface Warm #FFFDF9, Text #202124, Secondary #666666, Divider #E5E5E5, Card Border #DCDCDC, Navigation Indicator #FFE3B0.
 Orange는 주요 CTA와 선택 상태 등에 제한하고 화면 전체를 채우지 않는다.
 각 탭의 역할에 맞는 header를 사용한다. 모든 탭에 동일한 generic AppBar를 강제하지 않는다.
 중첩 화면은 명확한 뒤로가기 AppBar를 제공한다.
 
-Day 5 tokens: page padding 24, section gap 28, small gap 8, card radius 16,
+Day 6 entry tokens: page padding 20, section gap 24, small gap 8, card radius 16,
 chip radius 24 logical px. title 24/22, subtitle 17, body 16/14, meta 12.
 버튼/탭의 기본 Material semantics와 최소 48px 터치 영역을 유지하고 header semantics,
 타이머 설명, 오류/empty 알림을 제공한다. 큰 글자는 줄바꿈/스크롤로 수용한다.
@@ -144,3 +144,17 @@ clear는 입력과 submitted query/results를 함께 초기화한다. 탭 상태
 타입은 모의고사/학습자료/논술/입시정보/교육칼럼/기타로 표시한다. 게시일 우선,
 없으면 feedUpdatedAt의 업데이트 날짜를 사용한다. 가짜 시험 metadata/bookmark 슬롯은 없다.
 카드 padding 14, 간격 10. 별도 “자료 살펴보기” CTA 없이 카드 전체가 상세로 이동한다.
+
+
+## Day 6 진입 — P1 hierarchy refinement 및 보류 범위
+
+Home 공식 wordmark width 210, 소개 subtitle 제거. SectionHeader 15sp/w700,
+padding 위 24/아래 8. 카드·검색 외곽선은 divider와 분리한 cardBorder를 사용한다.
+loading spinner는 Center로 감싼다. 하단 탭은 4개 모두 outline/filled icon 쌍,
+선택 label w700/기본 w400, indicator #FFE3B0의 Material NavigationBar를 유지한다.
+
+D-Day/Today Study/Recent Views/MY 전체 재설계, 실제 Saved/bookmark UI, 후원 상세
+route/IAP, timer/NEIS/OAuth/Ads/ingestion/DB 변경은 보류한다. MY 후원 카드의
+prominence를 높이지 않으며 향후 결제 기능 시 ListTile 전환을 검토할 수 있다.
+Day 6 exam metadata/resources가 필요하면 database.md와 실제 schema를 먼저
+확인하고 별도 변경 필요성을 보고한다. 이번 작업은 UI 진입 기반만 정리한다.

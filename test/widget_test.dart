@@ -11,7 +11,7 @@ void main() {
   ) async {
     await tester.pumpWidget(const ProviderScope(child: LegendStudyApp()));
     await tester.pumpAndSettle();
-    expect(find.text('오늘의 공부, 여기서 시작해요'), findsOneWidget);
+    expect(find.text('D-DAY'), findsOneWidget);
     expect(find.byType(NavigationDestination), findsNWidgets(4));
 
     await tester.ensureVisible(find.text('모의고사, 논술, 학습자료 검색'));
@@ -26,7 +26,7 @@ void main() {
     for (final entry in {
       '학습': '공부 타이머',
       'MY': '나의 학습 공간',
-      '홈': '오늘의 공부, 여기서 시작해요',
+      '홈': 'D-DAY',
     }.entries) {
       await tester.tap(find.text(entry.key));
       await tester.pumpAndSettle();
@@ -58,7 +58,7 @@ void main() {
     expect(find.text('페이지를 찾을 수 없어요'), findsOneWidget);
     await tester.tap(find.text('홈으로 가기'));
     await tester.pumpAndSettle();
-    expect(find.text('오늘의 공부, 여기서 시작해요'), findsOneWidget);
+    expect(find.text('D-DAY'), findsOneWidget);
   });
 
   testWidgets('small display supports large text without overflow', (

@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 5 UI shell implemented locally against approved UI/UX v1.1; validation below**
+**Day 5 review refinements complete locally; ready for scoped Day 6 Materials/Search/Detail work**
 
 ## Verified state
 
@@ -58,11 +58,12 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Review Day 5 UI shell against wiki/ui-ux-v1.md; local commit only, no push/merge.
-2. Implement later Auth/NEIS/persistence/ads/IAP milestones only within their agreed
-   scope. Day 8 introduces real timer behavior; Day 5 provides no timer logic.
-3. Obtain detailed Claude screen artwork if needed; this branch follows the owner's
-   approved v1.1 directive and does not invent an unavailable original document.
+1. Continue scoped Day 6 Materials/Search/Content Detail work on
+   codex/day-6-materials-search using the refined UI baseline below.
+2. Before adding exam metadata/resources, verify database.md and actual schema;
+   report any separate contract change required. No DB fields may be invented.
+3. Keep deferred D-Day/Study/MY redesign, Saved/bookmark, timer, NEIS, OAuth,
+   Ads/IAP and ingestion work in their assigned milestones. No push/merge here.
 
 ## Known open questions
 
@@ -89,7 +90,7 @@ Last reviewed: 2026-09-13
 - APP_ENV/SUPABASE_URL/SUPABASE_PUBLISHABLE_KEY via Dart defines; local config
   ignored; only public client config, never backend secrets.
 - `flutter analyze`: passed with no findings.
-- `flutter test`: 24 passed, including routing/large-text/configuration,
+- `flutter test`: 26 passed, including routing/large-text/configuration,
   repository/Auth/UI states and six Day 5 navigation/semantics tests; actual iOS
   Supabase integration smoke also passed on the new shell.
 - `flutter doctor -v`: all installed toolchains reported healthy.
@@ -421,3 +422,27 @@ integration code; see Day 4-A below for the current client verification boundary
 - P0 validation: flutter analyze PASS; 26 unit/widget tests PASS; git diff --check
   PASS. UI tests cover navigation, submit/clear, tab/detail return state, type/date
   cards and 360×640/2× scaling. No push/merge; P1 refinement follows.
+
+
+## Day 6 entry — P1 hierarchy and final validation (2026-09-13)
+
+- pagePadding 20, sectionGap 24, divider #E5E5E5 and separate cardBorder #DCDCDC.
+  SectionHeader 15sp/w700 with top 24/bottom 8; card/chip radii and smallGap retained.
+- Official Home wordmark width 210, subtitle removed; centered loading spinner.
+  All NavigationBar tabs have outlined/filled icon pairs and selected label weight;
+  indicator #FFE3B0. Materials article icons replace the identical search glyph.
+- Deferred: D-Day/Today Study/Recent Views/MY redesign, Saved/bookmark, support
+  route/IAP, timer/NEIS/OAuth/Ads/ingestion/DB. MY support prominence unchanged;
+  future ListTile presentation can accompany its real feature milestone.
+- Final flutter analyze PASS; all 26 tests PASS. Home entry/submit/clear, branch
+  state/detail-back, detail without NavigationBar, four labels/MY Saved and
+  360×640/2× text coverage pass. Android debug/iOS simulator builds PASS with
+  owner-managed external config. iPhone 17 Pro / iOS 26.5 Home and Materials
+  inspected; search surface navigation and selected tab confirmed visually.
+- git diff --check and credential scan PASS. Router bytes, domain/data contracts,
+  Supabase/config, source/generated artwork and dependencies unchanged from baseline.
+  No SQL or new backend features; actual Supabase smoke not rerun for UI refinement.
+  Integration test entry label updated to the new UI without changing its contract.
+- No blocker or pending owner decision for this refinement. Day 6 actual feature
+  development can start within its separately defined contract; it is not claimed
+  implemented here. Two local commits, no push/merge.

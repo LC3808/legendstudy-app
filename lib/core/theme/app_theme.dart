@@ -8,9 +8,15 @@ abstract final class AppTokens {
   static const surfaceWarm = Color(0xFFFFFDF9);
   static const textPrimary = Color(0xFF202124);
   static const textSecondary = Color(0xFF666666);
-  static const divider = Color(0xFFEEEEEE);
-  static const pagePadding = 24.0;
-  static const sectionGap = 28.0;
+  static const divider = Color(0xFFE5E5E5);
+  static const cardBorder = Color(0xFFDCDCDC);
+  static const navigationIndicator = Color(0xFFFFE3B0);
+  static const sectionTitle = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w700,
+  );
+  static const pagePadding = 20.0;
+  static const sectionGap = 24.0;
   static const smallGap = 8.0;
   static const cardRadius = 16.0;
   static const chipRadius = 24.0;
@@ -57,9 +63,18 @@ abstract final class AppTheme {
         bodyMedium: TextStyle(fontSize: 14, height: 1.5),
         labelMedium: TextStyle(fontSize: 12, color: AppTokens.textSecondary),
       ),
-      navigationBarTheme: const NavigationBarThemeData(
+      navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppTokens.surfaceWarm,
-        indicatorColor: AppTokens.primarySoft,
+        indicatorColor: AppTokens.navigationIndicator,
+        labelTextStyle: WidgetStateProperty.resolveWith(
+          (states) => TextStyle(
+            fontSize: 12,
+            color: AppTokens.textPrimary,
+            fontWeight: states.contains(WidgetState.selected)
+                ? FontWeight.w700
+                : FontWeight.w400,
+          ),
+        ),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       ),
       textButtonTheme: TextButtonThemeData(

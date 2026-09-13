@@ -33,7 +33,7 @@ class ContentCard extends StatelessWidget {
       color: AppTokens.background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppTokens.cardRadius),
-        side: const BorderSide(color: AppTokens.divider),
+        side: const BorderSide(color: AppTokens.cardBorder),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(AppTokens.cardRadius),

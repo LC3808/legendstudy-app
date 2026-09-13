@@ -46,7 +46,7 @@ class AppHeader extends StatelessWidget {
           child: branded
               ? Image.asset(
                   'assets/brand/generated/legendstudy_wordmark_header.png',
-                  width: 280,
+                  width: 210,
                   fit: BoxFit.contain,
                   excludeFromSemantics: true,
                 )
@@ -66,10 +66,10 @@ class SectionHeader extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: AppTokens.sectionGap, bottom: 12),
+    padding: const EdgeInsets.only(top: AppTokens.sectionGap, bottom: 8),
     child: Semantics(
       header: true,
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+      child: Text(title, style: AppTokens.sectionTitle),
     ),
   );
 }
@@ -88,7 +88,7 @@ class CompactUtilityCard extends StatelessWidget {
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       color: AppTokens.surfaceWarm,
-      border: Border.all(color: AppTokens.divider),
+      border: Border.all(color: AppTokens.cardBorder),
       borderRadius: BorderRadius.circular(AppTokens.cardRadius),
     ),
     child: Column(
@@ -111,7 +111,7 @@ class SearchEntry extends StatelessWidget {
     color: AppTokens.background,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
-      side: const BorderSide(color: AppTokens.divider),
+      side: const BorderSide(color: AppTokens.cardBorder),
     ),
     child: InkWell(
       onTap: onTap,
