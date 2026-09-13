@@ -12,8 +12,8 @@ FORCE RLS is false. After fixture cleanup, all 10 application tables have zero r
 
 This documentation task records the supplied results; it did not query Supabase,
 execute SQL or reproduce the runtime tests. Static verification and the specific
-runtime evidence below are separate. Flutter/SDK connection and ingestion remain
-unimplemented. Auth test users A/B may remain for future Auth/OAuth tests.
+runtime evidence below are separate. Day 4-A adds Flutter connection/repository
+code; its live smoke status is in current-status.md. Ingestion remains unimplemented. Auth test users A/B may remain for future Auth/OAuth tests.
 
 **Do not edit the applied initial migration.** Preserve its historical DRAFT
 comments and bytes; they describe its authoring phase, not current deployment.

@@ -22,15 +22,15 @@ Wiki is not authoritative when contradicted by verified runtime/code/database st
 
 ## 3. Agent roles
 
-### Codex — main coder
-- Primary implementation agent.
-- Owns feature coding, refactoring, tests, and implementation-level fixes.
+### Codex — main coder + implementation lead
+- Primary implementation agent for Flutter, data, repositories, state and integration.
+- Owns implementation, tests/builds and implementation of Claude UI specifications.
 - Should prefer small, reviewable changes over broad speculative rewrites.
 
-### Claude — support coder / code reviewer
-- Supports implementation when needed.
-- Reviews Codex changes when requested or when risk is high.
-- Focuses on correctness, regression risk, architecture consistency, and alternative solutions.
+### Claude — UI/UX lead + support coder / code reviewer
+- Leads app-wide UI/UX design, information architecture and screen hierarchy.
+- Owns interaction flows and design-system refinement.
+- Reviews Codex UI implementation; provides code review/support when needed.
 
 ### ChatGPT — planning / architecture / review
 - Owns product planning, requirements clarification, architecture review, DB/API design review, task decomposition, QA strategy, and cross-agent coordination.

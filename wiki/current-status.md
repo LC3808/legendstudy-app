@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 3 deployed and runtime verification recorded — next: Day 4 Flutter ↔ Supabase integration**
+**Day 4-A foundation and actual LegendStudy Flutter smoke verified; ready for review/merge**
 
 ## Verified state
 
@@ -32,8 +32,8 @@ Last reviewed: 2026-09-13
 
 ## Operating model
 
-- Codex: main coder
-- Claude: support coder / code reviewer
+- Codex: main coder + implementation lead
+- Claude: UI/UX lead + support coder / code reviewer
 - ChatGPT: planning, architecture, specification, review
 - Manus: execution, Git/build/deployment support; direct Supabase work only when specifically useful
 - User: product owner and default direct executor of Supabase SQL/migrations
@@ -49,22 +49,21 @@ Last reviewed: 2026-09-13
 ## Implementation baseline for first scaffold
 
 - Flutter mobile app for iOS and Android
-- Dedicated Supabase backend deployed; Flutter initialization/repositories remain Day 4 work
+- Dedicated Supabase backend deployed; Flutter initialization/repositories implemented in Day 4-A
 - Router-based navigation using `go_router`
 - Riverpod for dependency/state composition
 - Feature-oriented code organization with presentation/domain/data separation where it adds value
 - No Supabase credentials or production secrets committed to Git
 - Initial UI establishes LegendStudy brand tokens and reusable design primitives before feature proliferation
 
-## Immediate next steps — Day 4
+## Immediate next steps
 
-1. Introduce supabase_flutter and configure the dedicated project URL/publishable key.
-2. Initialize Supabase; implement ContentRepository and Home/Search public reads
-   with explicit column projections and anonymous access.
-3. Establish Auth sessions and profiles/bookmarks/recent_views repositories.
-4. Test the Flutter client against LegendStudy; never include service_role/secret keys.
-5. Follow with the ingestion prototype and source validation; production ingestion,
-   signing/OAuth/store registration and original brand assets remain separate work.
+1. Review/merge Day 4-A after owner confirmation; no push/merge performed here.
+2. After merge, Day 5 implements the approved Claude UI/UX v1.1 starting with
+   홈 · 자료 · 학습 · MY shell. Its planned canonical specification is
+   wiki/ui-ux-v1.md; this task does not create or implement that design.
+3. Later: login UI/OAuth, ingestion and source validation, signing/store registration
+   and original brand assets within separately agreed scopes.
 
 ## Known open questions
 
@@ -80,19 +79,22 @@ Last reviewed: 2026-09-13
 - Flutter 3.32.0 stable / Dart 3.8.0 actually used; dependencies locked.
 - Riverpod 3.3.2 for dependency/state composition; go_router 17.0.0 for routing.
 - Feature presentation folders, shared widgets, core configuration/theme, app composition.
-  Real domain/data layers are deferred until business logic and data access exist.
-- Home `/home`, Browse `/browse`, Saved `/saved`, Profile `/profile` are placeholders.
+  Day 4-A adds minimal content/personal domain/data and Riverpod composition.
+- Home `/home` and Browse `/browse` show repository-backed states; Saved `/saved`
+  and Profile `/profile` retain placeholders. Navigation/theme are unchanged.
 - Orange accents with white/light surfaces, Korean Material localization, scalable text.
 - Owner-approved Android application ID/namespace/Kotlin package and iOS Runner bundle ID:
   `com.legendstudy.app`. iOS RunnerTests uses `com.legendstudy.app.RunnerTests`.
   Dart package remains `legendstudy_app`; Android/iOS display name is `레전드스터디`.
 - No iOS development team or Android release signing configuration committed.
-- Public `APP_ENV` via Dart defines; local config ignored; no backend secrets required.
+- APP_ENV/SUPABASE_URL/SUPABASE_PUBLISHABLE_KEY via Dart defines; local config
+  ignored; only public client config, never backend secrets.
 - `flutter analyze`: passed with no findings.
-- `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
-  360×640 display at 2× text scaling, config default/provider override).
+- `flutter test`: 18 passed, including routing/large-text/configuration and
+  repository/Auth/UI state tests; one separate actual iOS integration smoke passed.
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- Supabase initial schema is applied; Flutter remains unconnected and production ingestion does not exist.
+- Supabase initial schema is applied; actual Flutter initialization and public
+  reads are verified in the final smoke below. No ingestion exists.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -123,7 +125,7 @@ Last reviewed: 2026-09-13
   Registration availability has not been checked or claimed; no conflict was reported by local builds.
 - Provide original brand assets and replace generated Flutter launcher icons.
 - Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
-- Neither release readiness nor a deployed backend is implied by this scaffold.
+- Release readiness is not implied by the scaffold or Day 4-A foundation.
 
 ## Day 2 verification (2026-09-12)
 
@@ -244,5 +246,94 @@ A/B may be retained for later Auth/OAuth tests; their deletion is not claimed.
 No passwords, JWTs or API keys are stored here.
 
 The applied initial migration is immutable, including its historical DRAFT comments.
-All future DB changes require a new migration. Flutter is not connected yet;
-Day 4 integration and remaining scenario coverage in database.md follow next.
+All future DB changes require a new migration. The Day 3 record predates Flutter
+integration code; see Day 4-A below for the current client verification boundary.
+
+## Day 4-A integration foundation (2026-09-13)
+
+- Started from post-deployment main merge 5af7905 on codex/day-4-supabase-foundation.
+- supabase_flutter 2.15.4 resolved on Flutter 3.32.0/Dart 3.8.0; existing Riverpod
+  3.3.2/go_router 17.0.0 remain locked. http 1.6.0 + SDK integration_test for tests.
+- Binding/config validation → awaited Supabase.initialize → injected client → runApp.
+  Missing/invalid config gives a clear error state; no production data fallback.
+- ContentRepository: exact 11-column projection, active filter, feed DESC NULLS LAST
+  then id DESC, bounded token search, nullable slug result and valid empty lists.
+- AuthStatus stream exposes signed-out/authenticated identity, with SDK errors as
+  AsyncError. Personal reads signed out return null/[]/false; writes reject with
+  SignedOutException before network. Interfaces derive owner from current session.
+- Profiles upsert only id/display_name/grade_level; bookmarks ignore duplicates;
+  recent touch sends only user_id/content_item_id. List reads are capped at 100.
+- Home/Browse show loading/empty/error/data and search input without navigation,
+  brand or card redesign. Saved/Profile UI and login/OAuth remain future work.
+- At the initial implementation commit no local public key was available, so
+  actual initialization/read was pending; the final smoke below closes that gap. Opt-in integration_test/supabase_smoke_test.dart is ready;
+  existing Day 3 runtime results remain owner-reported, not re-run by Flutter tests.
+- DB schema, migrations and ingestion unchanged; no Supabase SQL, push or merge.
+
+### Day 4-A validation
+
+- flutter pub get / flutter analyze: PASS, no analysis findings.
+- flutter test: 18 PASS (4 existing + 14 new), including mock HTTP projection,
+  search escaping, personal payload/ownership guard, auth event, UI state/retry.
+- Android debug APK and iOS simulator debug builds: PASS without defines.
+  NDK pinned to 27.0.12077973 for the added native plugins; CocoaPods integration
+  and lockfile committed. No signing identity or release secret introduced.
+- iPhone 17 Pro / iOS 26.5: installed and launched com.legendstudy.app; screenshot
+  inspected, both missing config fields shown, existing four-tab shell intact.
+- At initial implementation, configured smoke was NOT RUN due to missing local
+  public config. Superseded by the successful final smoke below.
+- git diff --check, credential-pattern scan and ignored config/signing checks: PASS.
+  No server keys, real JWTs or passwords found; service_role mentions in docs/SQL
+  are role names/security policy, not credentials. Unit sessions are synthetic.
+- Initial migration byte-identical to Day 3; SHA-256
+  2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b.
+- Local commit only; no push/merge. Next: local smoke and Claude UI/UX v1 → Codex UI.
+
+## Day 4-A final actual Supabase smoke (2026-09-13)
+
+- Base implementation commit: 033ec667b20b0bf3e0fa47a8ece335d2a0af79e2.
+  Same codex/day-4-supabase-foundation branch; initial worktree verified clean.
+- Actual Supabase.initialize PASS on iPhone 17 Pro / iOS 26.5. Dedicated target
+  stlhijzpjfgwwdgunlsd.supabase.co; public key injected from a temporary local
+  define file, never source, fixture, Wiki, logs or Git.
+- Actual ContentRepository GET /rest/v1/content_items PASS, 0 rows as expected.
+  Read-only transport verifies the dedicated host/path/method and HTTP 200 for
+  three requests (direct repository, Home, Browse search); no headers/tokens logged.
+- Home and Browse: loading → empty PASS. Browse uses submitted search text to
+  exercise the real repository; empty query correctly shows its input prompt.
+  Transport gating makes loading observable; all responses come from the real DB.
+- Auth signedOut PASS with an active provider subscription, matching UI usage.
+  Initial test harness awaited an unobserved provider and timed out; keeping its
+  subscription fixed the harness. Production Auth implementation is unchanged.
+- Signed-out profile/bookmark/recent reads return null/[]/false; all tested writes
+  raise SignedOutException without any network request or crash. No automatic login.
+- No SQL, inserts, schema/migration changes or UI/UX implementation. Only public
+  read requests were sent. This smoke does not re-query all ten tables or verify
+  OAuth providers; the owner's ten-table zero-row baseline is preserved by no writes.
+  No school/meal/timer database is introduced.
+
+- Final regression: flutter pub get/analyze PASS; 18 unit/widget tests PASS;
+  one actual iOS integration smoke PASS. Android debug and iOS simulator debug
+  builds PASS. Configured normal app installed/launched separately; Home empty
+  screenshot visually checked with no settings/network error.
+- git diff --check, credential-pattern scan, exact supplied-key scan and local
+  config ignore checks PASS. Initial migration byte-identical; only integration
+  test and these two Wiki documents changed. No credentials committed.
+- No remaining blocker; local follow-up commit only, no push/merge.
+
+## 2026-09-13 — Reverification with owner-managed external config
+
+- Re-ran on codex/day-4-supabase-foundation from clean 5dcded2 using
+  --dart-define-from-file=/Users/woojinchang/legendstudy-local.json.
+  The owner-managed file remains outside the repository and was not modified;
+  its credential value is not copied into these documents, tests or Git.
+- Actual iPhone 17 Pro / iOS 26.5 smoke PASS: Supabase initialization, dedicated
+  project content GET x3 HTTP 200, content_items [], Home/Browse loading → empty,
+  auth signedOut; personal reads empty and writes SignedOutException without network.
+- Full regression PASS: pub get, analyze, 18 unit/widget tests, one actual iOS
+  integration test, Android debug build and iOS simulator debug build. Both builds
+  used the same external configuration. git diff --check PASS.
+- Credential-pattern and exact external-key scans PASS for repository candidates;
+  local-config ignore checks PASS. Initial migration remains byte-identical.
+  No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
+- Documentation-only follow-up local commit; no push/merge. No blocker.

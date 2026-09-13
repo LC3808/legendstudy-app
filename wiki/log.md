@@ -165,3 +165,65 @@
 - Documentation validation: git diff --check and the offline schema checker pass;
   initial migration verified byte-identical to the Day 3 main merge. No SQL executed.
 - Next: Day 4 Flutter ↔ Supabase connection; Flutter remains unconnected now.
+
+## 2026-09-13 — Day 4-A Flutter–Supabase foundation
+
+- Started from post-deployment main 5af7905 on codex/day-4-supabase-foundation.
+- Added SDK-compatible supabase_flutter 2.15.4, explicit public config validation,
+  awaited initialization and injectable client/Auth/repository providers. Existing
+  Riverpod/go_router versions preserved; test-only http/integration_test added.
+- Content uses exact public projection, source-time feed ordering, bounded escaped
+  title/summary search and nullable slug reads. Personal repositories enforce current
+  session ownership and narrow profile/bookmark/recent payload contracts.
+- Home/Browse display minimal loading/empty/error/data/search; no UI redesign,
+  login/OAuth, ingestion, DB schema or migration change. Signed-out personal calls
+  are safe (empty reads, typed rejected writes without network).
+- AGENTS/CLAUDE and Wiki align Claude UI/UX leadership with Codex implementation.
+- pub get/analyze and 18 tests (14 new): PASS. Android/iOS simulator debug builds
+  PASS; Android NDK 27 required by native plugins. CocoaPods configuration added.
+- Installed/launched iPhone 17 Pro iOS 26.5; config-missing screen visually verified.
+  Real LegendStudy init/read smoke NOT RUN: no local publishable key/config supplied.
+  Opt-in read-only integration test prepared; no test login or fixture creation.
+- diff check, credential scan, local-config/signing ignore checks and initial
+  migration byte comparison: PASS. No Supabase SQL, remote push or merge performed.
+- Next: local configured smoke, then Claude UI/UX v1 specs → Codex UI implementation.
+
+## 2026-09-13 — Day 4-A final actual Flutter smoke
+
+- Continued from clean 033ec66 on codex/day-4-supabase-foundation.
+- Expanded the opt-in iOS test to observe actual Home/Browse loading-to-empty,
+  active Auth subscription and all signed-out personal repository read/write paths.
+- Real Supabase initialization PASS; dedicated LegendStudy content GET x3 HTTP 200,
+  empty content_items as expected; Home/Browse empty and Auth signedOut PASS.
+- Fixed test-harness subscription lifetime after a timeout; no production code fix
+  was needed. Read-only host/path/method guard prevents DB writes; transport logs
+  only status/count. Local public key never enters source/fixtures/Wiki/logs/Git.
+- No SQL/schema/migration, data insert, OAuth test, UI redesign, push or merge.
+- Next after Day 4-A merge: Day 5 approved Claude UI/UX v1.1, planned canonical
+  wiki/ui-ux-v1.md; start with 홈 · 자료 · 학습 · MY shell in a separate task.
+
+- Final regression: flutter pub get/analyze PASS; 18 unit/widget tests PASS;
+  one actual iOS integration smoke PASS. Android debug and iOS simulator debug
+  builds PASS. Configured normal app installed/launched separately; Home empty
+  screenshot visually checked with no settings/network error.
+- git diff --check, credential-pattern scan, exact supplied-key scan and local
+  config ignore checks PASS. Initial migration byte-identical; only integration
+  test and these two Wiki documents changed. No credentials committed.
+- No remaining blocker; local follow-up commit only, no push/merge.
+
+## 2026-09-13 — Reverification with owner-managed external config
+
+- Re-ran on codex/day-4-supabase-foundation from clean 5dcded2 using
+  --dart-define-from-file=/Users/woojinchang/legendstudy-local.json.
+  The owner-managed file remains outside the repository and was not modified;
+  its credential value is not copied into these documents, tests or Git.
+- Actual iPhone 17 Pro / iOS 26.5 smoke PASS: Supabase initialization, dedicated
+  project content GET x3 HTTP 200, content_items [], Home/Browse loading → empty,
+  auth signedOut; personal reads empty and writes SignedOutException without network.
+- Full regression PASS: pub get, analyze, 18 unit/widget tests, one actual iOS
+  integration test, Android debug build and iOS simulator debug build. Both builds
+  used the same external configuration. git diff --check PASS.
+- Credential-pattern and exact external-key scans PASS for repository candidates;
+  local-config ignore checks PASS. Initial migration remains byte-identical.
+  No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
+- Documentation-only follow-up local commit; no push/merge. No blocker.
