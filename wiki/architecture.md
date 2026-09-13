@@ -271,3 +271,26 @@ are labelled external links with availability explicitly unconfirmed; no downloa
 or available badge is shown. Guaranteed disabling of known broken/restricted links needs
 a separately reviewed public eligibility/status contract or trusted publication rule.
 This is an unresolved link-health capability, not a Day 6 schema change.
+
+
+## Day 7 School / NEIS
+
+Profile reads include the owner-only NEIS identifier pair. updateSchoolSelection
+uses a session-derived id and pair-only upsert; ordinary profile editing omits the
+pair. No caller-supplied owner id, new policy, schema edit or auth UI is introduced.
+SchoolSelection watches Auth and rebuilds without displaying previous-owner data;
+late save completion is discarded after auth changes. Public school search state
+contains no account identifiers. Guests keep only process-memory selection.
+
+SchoolRepository returns pure Dart School/Meal entities. NeisSchoolRepository is a
+Flutter adapter to the dedicated LegendStudy Edge Function, not a client containing
+NEIS credentials. The prepared function permits only school search, identifier
+lookup and one-date meal reads with bounded inputs/projections/timeouts. No DB or
+Auth admin client. Deployment/key setup/live acceptance remain pending; see
+wiki/day-7-neis.md. Sample-only access is never silently used by the real app.
+
+Home's local meal region consumes school/date-dependent Riverpod state; other Home
+content remains independent. Korea date comes from UTC+9 and is checked every 30s.
+Same selected school/date reuses the provider result; selection/date changes or
+explicit retry refresh. Auth change invalidates school/meal state. Existing
+StatefulShellRoute topology and Day 6 contracts are unchanged.

@@ -1,6 +1,16 @@
-# Day 7 school persistence proposal — DIRECTION APPROVED / MIGRATION PREPARED / NOT APPLIED
+# Day 7 school persistence — OWNER REPORTS DEPLOYED / CLIENT ACCEPTANCE PENDING
 
-## Stop and evidence
+## Current deployment evidence
+
+On 2026-09-13 the owner reported successful production execution of the exact
+prepared migration and verified text/nullable columns, validated CHECK, authenticated
+column privileges, no anon access, four unchanged owner policies and zero profiles/
+partial pairs/non-null school rows. Owner lifted the implementation STOP. Codex did
+not execute production SQL. The historical preflight/proposal below records the
+pre-deployment decision; current implementation and remaining JWT/NEIS acceptance
+are in current-status.md, database.md and day-7-neis.md.
+
+## Historical stop and evidence
 
 The owner's Day 7 Sections 3/22 require stopping feature implementation when school
 persistence needs a schema change. The deployed initial profiles definition and
@@ -57,7 +67,7 @@ from pg_policies where schemaname = 'public' and tablename = 'profiles';
 
 Owner approved the two-column direction. Prepared file:
 `supabase/migrations/20260913000100_profile_school_selection.sql`.
-It has NOT been applied. The block below is byte-identical to the migration file.
+The owner now reports it applied; the block remains byte-identical to the migration file.
 Explicit ADD fails on drift rather than silently skipping incompatible columns.
 
 Official sample rechecked: 진접고등학교 returned office J10 and school 7530932.
@@ -152,7 +162,7 @@ notify pgrst, 'reload schema';
 commit;
 ```
 
-## Resume gate
+## Historical resume gate (superseded by owner deployment report above)
 
 The storage direction is approved, and the executable migration is now prepared.
 The owner applies it to LegendStudy and returns before/after validation results.

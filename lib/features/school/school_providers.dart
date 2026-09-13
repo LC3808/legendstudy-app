@@ -1,0 +1,94 @@
+import 'dart:async';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
+import '../../core/config/app_config.dart';
+import '../../core/supabase/supabase_providers.dart';
+import '../personal/personal_providers.dart';
+import 'data/neis_school_repository.dart';
+import 'domain/school.dart';
+
+final schoolRepositoryProvider = Provider<SchoolRepository>((ref) {
+  final client = http.Client();
+  ref.onDispose(client.close);
+  return NeisSchoolRepository(client, ref.watch(appConfigProvider));
+});
+final schoolSearchProvider = FutureProvider.autoDispose
+    .family<List<School>, String>(
+      (ref, query) => ref.watch(schoolRepositoryProvider).search(query),
+    );
+
+final schoolSelectionProvider = AsyncNotifierProvider<SchoolSelection, School?>(
+  SchoolSelection.new,
+);
+
+class SchoolSelection extends AsyncNotifier<School?> {
+  int _generation = 0;
+  @override
+  Future<School?> build() async {
+    _generation++;
+    final auth = ref.watch(authStateProvider);
+    // Watching the AsyncValue clears previous-user state even while auth is loading.
+    if (auth.isLoading) return null;
+    if (auth.hasError) throw const SchoolServiceException();
+    if (auth.value?.isAuthenticated != true) return null;
+    final repository = ref.watch(schoolRepositoryProvider);
+    final profile = await ref
+        .watch(profileRepositoryProvider)
+        .fetchCurrentProfile();
+    if (profile?.neisOfficeCode == null || profile?.neisSchoolCode == null) {
+      return null;
+    }
+    final school = await repository.find(
+      profile!.neisOfficeCode!,
+      profile.neisSchoolCode!,
+    );
+    if (school == null) throw const SchoolServiceException();
+    return school;
+  }
+
+  Future<bool> select(School? school) async {
+    final auth = ref.read(authStateProvider);
+    if (auth.isLoading || auth.hasError || state.isLoading) {
+      throw const SchoolServiceException();
+    }
+    final owner = auth.value?.userId;
+    final generation = _generation;
+    if (owner != null) {
+      await ref
+          .read(profileRepositoryProvider)
+          .updateSchoolSelection(
+            officeCode: school?.officeCode,
+            schoolCode: school?.schoolCode,
+          );
+    }
+    if (!ref.mounted ||
+        generation != _generation ||
+        ref.read(authStateProvider).value?.userId != owner) {
+      return false;
+    }
+    state = AsyncData(school);
+    // Dependents invalidate through the selection change.
+    return true;
+  }
+}
+
+// Polling only the date: no network on each tick. Handles resume after midnight too.
+final koreanTodayProvider = StreamProvider<String>((ref) async* {
+  yield koreanDate(DateTime.now());
+  yield* Stream.periodic(
+    const Duration(seconds: 30),
+    (_) => koreanDate(DateTime.now()),
+  ).distinct();
+});
+final todayMealsProvider = FutureProvider<List<Meal>>((ref) async {
+  final selection = ref.watch(schoolSelectionProvider);
+  if (selection.isLoading) return [];
+  if (selection.hasError) throw const SchoolServiceException();
+  final school = selection.value;
+  if (school == null) return [];
+  final repository = ref.watch(schoolRepositoryProvider);
+  final clock = ref.watch(koreanTodayProvider);
+  final date = clock.value ?? await ref.watch(koreanTodayProvider.future);
+  if (date == null) throw const SchoolServiceException();
+  return repository.meals(school, date);
+});

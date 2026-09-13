@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 7 school-storage direction approved; migration prepared, awaiting owner deployment/validation**
+**Day 7 school/meal implementation prepared; owner reports DB deployment, live proxy/JWT acceptance pending**
 
 ## Verified state
 
@@ -58,12 +58,14 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Review Day 6 local implementation on codex/day-6-materials-search before any
-   owner-authorized push/PR/merge. Day 7 can use this native detail/resource baseline.
-2. Resolve a future public link-health eligibility/status contract if guaranteed
-   broken/restricted-link disabling is required; private link_status is unavailable.
-3. Native PDF viewing and later Auth/Saved/timer/NEIS/Ads/IAP/ingestion remain their
-   own milestones. No DB or migration change is included in Day 6.
+1. Complete Day 7 real JWT A/B storage/isolation acceptance using owner-provided
+   external test-account config; no account credentials have been provided for this run.
+2. Owner reviews/deploys the prepared NEIS Edge Function with NEIS_API_KEY stored
+   server-side, then verifies real guest/authenticated Flutter school and meal reads.
+   Do not ship an app-bundled NEIS key or treat sample responses as production access.
+3. Confirm Day 7 acceptance before declaring Day 8 ready. OAuth, timer, public
+   resource link_status eligibility and PDF viewer remain separate milestones.
+4. Local commits only; no push, PR or merge is authorized.
 
 ## Known open questions
 
@@ -528,3 +530,44 @@ integration code; see Day 4-A below for the current client verification boundary
   production SQL/write, push, PR or merge. database.md does not claim deployment.
 - Resume Day 7 after owner deployment and verification results; NEIS client-key
   exposure/meal API gates still require review before implementation proceeds.
+
+
+## Day 7 School / NEIS resumed implementation (2026-09-13)
+
+- Started at 7601b4e on codex/day-7-school-neis. Owner reports production school
+  migration applied and validated: nullable TEXT pair/CHECK/grants/owner policies,
+  zero partial pairs and zero profile rows. Storage STOP lifted by owner. See
+  database.md for the reported deployment versus unperformed client verification.
+- Profile model/read projection extended; separate session-owned school pair
+  save/clear omits name/grade, while existing profile upsert omits school fields.
+- Pure Dart School/Meal and small repository; Flutter calls only dedicated
+  /functions/v1/neis. Official NEIS terms Article 7 prohibit sharing/publication
+  of issued keys, so NEIS_API_KEY exists only in the prepared server-side function.
+  No fallback to limited unauthenticated samples in the production app.
+- /my/school keeps its nested route and one AppBar title. Submit search, up to
+  100 results with refinement notice, school type/address, selected state, immediate
+  authenticated save and retry. Guests select in memory; permanent-save action
+  explains login requirement. No OAuth or automatic application login added.
+- Home meal card: no-school/loading/data/empty/error+retry; source attribution,
+  maximum two menu lines. br variants/newlines normalized, allergy/source text
+  preserved. Korea UTC+9 calendar date, provider-level reuse, school/date changes
+  invalidate; date checked every 30 seconds (no network per tick). Auth changes
+  clear owner state and late writes cannot restore a previous user's selection.
+- Validation: analyze PASS; 77 Flutter tests PASS (56 retained/adapted + 21 new),
+  including storage payload preservation, guest flows, school search, meal states,
+  A/B in-memory state isolation, date changes, 360×640/2× and prior Day 6 regression.
+  Deno typecheck and 9 proxy tests PASS. Android debug/iOS simulator builds PASS.
+  Normal configured iOS app launched; Home no-school and /my/school/back navigation
+  verified. This is not a successful live NEIS search/save UI smoke.
+- Actual official unauthenticated samples: 진접고등학교 J10/7530932; 20260911
+  one lunch row; 20260913 INFO-200 (normal empty). These confirm response contracts,
+  not keyed access, proxy deployment or populated live Flutter behavior.
+- Pending: existing A/B credentials and issued NEIS key were not provided; proxy
+  not deployed. tool/verify_school_jwt.py prepared but NOT executed. No production
+  application writes/fixtures, auth users created/deleted, SQL or migration edits.
+  Full live acceptance and Day 8 readiness are NOT claimed. See day-7-neis.md.
+- Known Day 6 private resource link_status limitation unchanged. No schema, timer,
+  OAuth, AdMob, IAP, ingestion, push, PR or merge.
+
+- Final repository checks: credential-pattern and exact external publishable-key
+  scans PASS; applied migration bytes unchanged; git diff --check PASS.

@@ -2,6 +2,12 @@
 
 ## Deployment status and evidence boundary
 
+**Day 7 school migration also applied, per Product Owner report (2026-09-13).**
+20260913000100_profile_school_selection.sql adds the owner-only nullable NEIS pair,
+validated CHECK and authenticated column grants. See the profiles contract below.
+New school JWT/REST acceptance remains pending; Codex did not execute production SQL.
+
+
 **INITIAL MIGRATION APPLIED.** The owner's post-deployment report confirms dedicated
 project LegendStudy, ref `stlhijzpjfgwwdgunlsd`, ap-northeast-2 (Seoul), PostgreSQL
 17.6. Day 3 main merge is `c16350c0a60fe1c6281234a7c2056cf02b54d9ad`.
@@ -213,9 +219,26 @@ allowed hosts, redirect hops and resolved IPs, rejecting private/link-local targ
 
 ### profiles / bookmarks / recent_views
 
-Profiles unchanged: auth UUID id PK with DELETE CASCADE, optional display_name
-(trimmed 1..80 characters), grade_level, timestamps. No email/school/interest array,
-auth trigger or mandatory profile. Client creates/edits explicitly.
+Profiles: auth UUID id PK with DELETE CASCADE, optional display_name
+(trimmed 1..80 characters), grade_level, timestamps. Day 7 adds nullable TEXT
+neis_office_code / neis_school_code to the personal (owner-only, not anon public)
+contract. Both NULL or both non-NULL; profiles_neis_school_pair also rejects empty,
+untrimmed and >32-character values. No email/interest array, auth trigger or
+mandatory profile. Client creates/edits explicitly.
+
+Deployment evidence (2026-09-13): Product Owner reports successfully applying
+20260913000100_profile_school_selection.sql in production and verifying text/
+nullable columns, validated CHECK, authenticated SELECT/INSERT/UPDATE, no anon
+privileges, unchanged four owner policies, zero partial pairs and zero profiles/
+non-null school rows. This is an owner-reported deployment, distinct from the
+migration file's earlier preparation. Codex did not execute SQL or inspect the
+production catalogue. Actual new school REST/JWT acceptance remains pending.
+
+The Profile read projection is id,display_name,grade_level,neis_office_code,
+neis_school_code. updateSchoolSelection upserts only session-derived id and the
+two school fields (both explicit NULL for clear), preserving name/grade. Ordinary
+profile upsert below omits school fields and preserves them. New field INSERT/
+UPDATE column grants extend authenticated only; existing RLS is reused.
 
 Bookmarks/recent views: UUID id, auth user_id (DELETE CASCADE), mandatory
 content_item_id (DELETE RESTRICT), UNIQUE(user_id, content_item_id). They target

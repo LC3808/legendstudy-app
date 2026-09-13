@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
+import '../../school/presentation/home_meal_card.dart';
 import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
 
@@ -15,14 +16,7 @@ class HomePage extends ConsumerWidget {
       const AppHeader(title: '레전드스터디', branded: true),
       const CompactUtilityCard(title: 'D-DAY', body: '목표 일정과 함께 하루를 준비해요.'),
       const SizedBox(height: 12),
-      CompactUtilityCard(
-        title: '우리 학교 · 오늘 급식',
-        body: '학교를 설정하면 오늘 급식을 볼 수 있어요.',
-        action: TextButton(
-          onPressed: () => context.push('/my/school'),
-          child: const Text('학교 설정'),
-        ),
-      ),
+      const HomeMealCard(),
       const SizedBox(height: AppTokens.sectionGap),
       SearchEntry(onTap: () => context.go('/materials')),
       const SectionHeader('빠르게 찾기'),

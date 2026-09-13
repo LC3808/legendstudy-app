@@ -20,10 +20,33 @@ class SupabaseProfileRepository extends _PersonalRepository
     if (owner == null) return null;
     final row = await client!
         .from('profiles')
-        .select('id,display_name,grade_level')
+        .select('id,display_name,grade_level,neis_office_code,neis_school_code')
         .eq('id', owner)
         .maybeSingle();
     return row == null ? null : UserProfile.fromJson(row);
+  }
+
+  @override
+  Future<void> updateSchoolSelection({
+    String? officeCode,
+    String? schoolCode,
+  }) async {
+    final owner = requireUser();
+    if ((officeCode == null) != (schoolCode == null)) {
+      throw const FormatException('Both school identifiers are required.');
+    }
+    for (final code in [officeCode, schoolCode]) {
+      if (code != null &&
+          (code.trim() != code || code.isEmpty || code.length > 32)) {
+        throw const FormatException('Invalid school identifier.');
+      }
+    }
+    // Omit name/grade so school-only upserts preserve existing profile fields.
+    await client!.from('profiles').upsert({
+      'id': owner,
+      'neis_office_code': officeCode,
+      'neis_school_code': schoolCode,
+    }, onConflict: 'id');
   }
 
   @override

@@ -10,6 +10,7 @@ import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
+import 'package:legendstudy_app/features/content/presentation/content_results.dart';
 import 'package:legendstudy_app/features/content/domain/content_item.dart';
 import 'package:legendstudy_app/features/content/domain/content_repository.dart';
 import 'package:legendstudy_app/features/content/data/supabase_content_repository.dart';
@@ -328,7 +329,13 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byType(ContentResults),
+        matching: find.byType(CircularProgressIndicator),
+      ),
+      findsOneWidget,
+    );
     pending.completeError(Exception('internal-test-detail'));
     await tester.pumpAndSettle();
     expect(find.text('자료를 불러오지 못했어요. 다시 시도해 주세요.'), findsOneWidget);

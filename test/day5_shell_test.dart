@@ -217,8 +217,8 @@ void main() {
     await tester.tap(find.text('학교 설정'));
     await tester.pumpAndSettle();
     expect(container.read(routerProvider).canPop(), isTrue);
-    expect(find.text('우리 학교 찾기'), findsOneWidget);
-    expect(find.byType(TextField), findsNothing);
+    expect(find.text('학교 설정'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
     expect(find.text('로그인 / 시작하기'), findsNothing);
   });
   testWidgets('Study idle and headers expose accessible semantics', (

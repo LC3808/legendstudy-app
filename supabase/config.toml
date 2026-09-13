@@ -1,0 +1,4 @@
+# Guest school/meal reads require a public endpoint. Publishable keys are not JWTs.
+# Deploy only to the dedicated LegendStudy project after owner review.
+[functions.neis]
+verify_jwt = false

@@ -341,3 +341,23 @@
   checker/14 tests PASS; diff/secret scan PASS. Initial migration and Flutter intact.
 - No DB application or production writes. Owner deployment/REST/JWT verification
   pending before Day 7 implementation. Local commit only; no push/PR/merge.
+
+
+## 2026-09-13 — Day 7 School / NEIS resumed implementation
+
+- Owner reports school-storage migration deployed/validated; updated database and
+  current status, keeping applied migration bytes unchanged. No Codex production SQL.
+- Added Profile pair save/clear, school domain/repository, MY submit-search/selection,
+  guest session selection and Home meal states. Auth-change/late-write isolation,
+  Korea date rollover, source attribution and menu normalization included.
+- NEIS official terms forbid issued-key disclosure: prepared a public read-only
+  bounded Edge Function; key stays server-side, not in Flutter. Not deployed.
+- Analyze/77 Flutter tests/Deno check/9 proxy tests/Android/iOS builds PASS.
+  Actual simulator Home → school → back verified. Official sample school, dated
+  meal and INFO-200 reads confirmed; production keyed/proxy smoke not claimed.
+- Actual JWT A/B tests pending external account credentials; reusable safe harness
+  prepared. No production fixture writes or auth-user creation/deletion this run.
+  Live Day 7 acceptance pending; no Day 8 completion/readiness claim, push/PR/merge.
+
+- Final repository checks: credential-pattern and exact external publishable-key
+  scans PASS; applied migration bytes unchanged; git diff --check PASS.
