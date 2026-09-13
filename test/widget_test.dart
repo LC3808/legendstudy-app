@@ -14,8 +14,8 @@ void main() {
     expect(find.text('오늘의 공부, 여기서 시작해요'), findsOneWidget);
     expect(find.byType(NavigationDestination), findsNWidgets(4));
 
-    await tester.ensureVisible(find.text('자료 둘러보기'));
-    await tester.tap(find.text('자료 둘러보기'));
+    await tester.ensureVisible(find.text('모의고사, 논술, 학습자료 검색'));
+    await tester.tap(find.text('모의고사, 논술, 학습자료 검색'));
     await tester.pumpAndSettle();
     expect(find.text('나에게 필요한 학습 자료'), findsOneWidget);
     expect(

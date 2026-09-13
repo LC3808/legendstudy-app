@@ -111,8 +111,8 @@ void main() {
     expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
     expect(find.textContaining('SUPABASE_URL'), findsNothing);
 
-    await tester.ensureVisible(find.text('자료 둘러보기'));
-    await tester.tap(find.text('자료 둘러보기'));
+    await tester.ensureVisible(find.text('모의고사, 논술, 학습자료 검색'));
+    await tester.tap(find.text('모의고사, 논술, 학습자료 검색'));
     await tester.pumpAndSettle();
     expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
     transport.gate = Completer<void>();

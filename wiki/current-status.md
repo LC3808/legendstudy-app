@@ -407,3 +407,17 @@ integration code; see Day 4-A below for the current client verification boundary
 - git diff --check PASS; changed-file scope and preserved asset bytes verified.
   Flutter tests/builds not rerun because no implementation or build inputs changed.
   Prior brand implementation validation remains recorded above. No push/merge.
+
+
+## Day 6 entry — P0 UI refinement (2026-09-13)
+
+- Started clean main at 7e241e8, verified equal to freshly fetched origin/main.
+  New branch codex/day-6-materials-search; Day 5 review verdict supplied by owner:
+  B. READY AFTER MINOR UI FIX. No routing or backend contract changes.
+- Home search surface and Materials keyboard-submit/clear UI refined; IME-aware
+  200-character input limit retained. No automatic search or forced branch focus.
+- Cards use neutral type badges, bounded title/summary and optional real date row;
+  fake CTA removed. Exam metadata/resources remain later Day 6 contract work.
+- P0 validation: flutter analyze PASS; 26 unit/widget tests PASS; git diff --check
+  PASS. UI tests cover navigation, submit/clear, tab/detail return state, type/date
+  cards and 360×640/2× scaling. No push/merge; P1 refinement follows.

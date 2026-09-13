@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../../../core/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
@@ -44,17 +46,43 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
       TextField(
         controller: controller,
         textInputAction: TextInputAction.search,
-        maxLength: 200,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(
+            200,
+            maxLengthEnforcement:
+                MaxLengthEnforcement.truncateAfterCompositionEnds,
+          ),
+        ],
         onSubmitted: (_) => search(),
         onChanged: (value) {
-          if (value.trim().isEmpty) setState(() => query = '');
+          setState(() {
+            if (value.trim().isEmpty) query = '';
+          });
         },
-        decoration: const InputDecoration(
-          labelText: '검색어',
-          hintText: '예: 영어 모의고사',
+        decoration: InputDecoration(
+          hintText: '모의고사, 논술, 학습자료 검색',
+          prefixIcon: const Icon(Icons.search),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppTokens.divider),
+          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          suffixIcon: controller.text.isEmpty
+              ? null
+              : IconButton(
+                  tooltip: '검색어 지우기',
+                  icon: const Icon(Icons.clear),
+                  onPressed: () => setState(() {
+                    controller.clear();
+                    query = '';
+                  }),
+                ),
         ),
       ),
-      TextButton(onPressed: search, child: const Text('검색')),
       const SectionHeader('자료 모아보기'),
       Wrap(
         spacing: 8,

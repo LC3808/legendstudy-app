@@ -129,3 +129,18 @@ semantics, 작은 화면/큰 글씨를 검사한다. analyze/test 및 Android/iO
 Home 브랜드는 공식 원본에서 파생한 이미지로만 표시한다. 일반 Material icon과
 Text 조합으로 로고를 재현하지 않는다. 원본 3개와 crop 규격은 design-system.md 및
 assets/brand/README.md를 따른다. 본문 시스템 폰트와 기존 orange 계열은 유지한다.
+
+
+## Day 6 진입 — P0 검색과 카드 refinement
+
+Home 검색 진입은 “모의고사, 논술, 학습자료 검색” read-only tappable surface다.
+별도 “어떤 자료를 찾고 있나요?” 제목은 제거한다. 기본 높이 56, radius 12,
+가로 padding 16이며 큰 글씨에서는 높이가 늘어날 수 있다. /materials로 이동한다.
+Materials는 같은 hint의 실제 입력창으로 keyboard submit만 검색하며 자동 검색은 없다.
+별도 검색 버튼/label/counter는 제거한다. IME 조합 완료 후 200자 제한을 유지하고
+clear는 입력과 submitted query/results를 함께 초기화한다. 탭 상태는 유지한다.
+자동 focus는 강제하지 않는다(기존 branch 진입/복귀 focus 동작 유지).
+카드는 neutral 타입 badge → 2줄 제목 → 실제 날짜 보조행(있을 때만) → 최대 2줄 요약.
+타입은 모의고사/학습자료/논술/입시정보/교육칼럼/기타로 표시한다. 게시일 우선,
+없으면 feedUpdatedAt의 업데이트 날짜를 사용한다. 가짜 시험 metadata/bookmark 슬롯은 없다.
+카드 padding 14, 간격 10. 별도 “자료 살펴보기” CTA 없이 카드 전체가 상세로 이동한다.

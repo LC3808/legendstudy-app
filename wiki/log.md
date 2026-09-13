@@ -276,3 +276,14 @@
   as provisional future UI work. Source/generated image bytes and all code unchanged.
 - Documentation-only follow-up after 9abbb08; diff/scope checks PASS. Flutter tests
   and builds not rerun. No DB/Supabase changes, push or merge.
+
+
+## 2026-09-13 — Day 6 entry P0 search/cards
+
+- Verified clean main/origin at 7e241e8; created codex/day-6-materials-search.
+- Refined Home search entry, Materials submit/clear and IME-aware 200-character
+  limit. Compact content cards add neutral type badges and real date metadata.
+  Preserved routing, projections, Auth/personal repositories and DB contracts.
+- P0 validation: flutter analyze PASS; 26 unit/widget tests PASS; git diff --check
+  PASS. UI tests cover navigation, submit/clear, tab/detail return state, type/date
+  cards and 360×640/2× scaling. No push/merge; P1 refinement follows.

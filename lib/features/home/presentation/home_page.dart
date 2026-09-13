@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
 import '../../content/presentation/content_results.dart';
@@ -25,7 +26,7 @@ class HomePage extends ConsumerWidget {
           child: const Text('학교 설정'),
         ),
       ),
-      const SectionHeader('어떤 자료를 찾고 있나요?'),
+      const SizedBox(height: AppTokens.sectionGap),
       SearchEntry(onTap: () => context.go('/materials')),
       const SectionHeader('빠르게 찾기'),
       Wrap(

@@ -107,14 +107,34 @@ class SearchEntry extends StatelessWidget {
   const SearchEntry({required this.onTap, super.key});
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) => OutlinedButton.icon(
-    onPressed: onTap,
-    style: OutlinedButton.styleFrom(
-      minimumSize: const Size(48, 56),
-      alignment: Alignment.centerLeft,
+  Widget build(BuildContext context) => Material(
+    color: AppTokens.background,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+      side: const BorderSide(color: AppTokens.divider),
     ),
-    icon: const Icon(Icons.search),
-    label: const Text('자료 둘러보기'),
+    child: InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 56),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            children: [
+              Icon(Icons.search, color: AppTokens.textSecondary),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  '모의고사, 논술, 학습자료 검색',
+                  style: TextStyle(color: AppTokens.textSecondary),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
   );
 }
 
