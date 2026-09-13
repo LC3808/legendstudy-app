@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/app/legendstudy_app.dart';
+import 'package:legendstudy_app/core/theme/app_theme.dart';
+import 'package:legendstudy_app/features/home/presentation/day_target_card.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/home/day_target_providers.dart';
@@ -71,6 +73,89 @@ void main() {
     },
   );
   for (final scale in [1.0, 2.0]) {
+    testWidgets(
+      'D-Day hierarchy long label and all badge widths at ${scale}x',
+      (tester) async {
+        tester.view.physicalSize = const Size(360, 640);
+        tester.view.devicePixelRatio = 1;
+        tester.platformDispatcher.textScaleFactorTestValue = scale;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+        final container = ProviderContainer(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus(null)),
+            ),
+            dayTargetClockProvider.overrideWith((ref) => Stream.value(now)),
+          ],
+        );
+        addTearDown(container.dispose);
+        await tester.pumpWidget(
+          UncontrolledProviderScope(
+            container: container,
+            child: MaterialApp(
+              theme: AppTheme.light,
+              home: const Scaffold(
+                body: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: DayTargetCard(),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final originalHeight = tester
+            .getSize(find.byType(DayTargetCard))
+            .height;
+        for (final days in [0, 1, 23, 999, 7300, -1]) {
+          final target = DayTarget(
+            date: now.add(Duration(days: days)),
+            label: '아주 긴 중간고사 일정 이름과 메모를 끝까지 입력한 경우',
+          );
+          container.read(dayTargetProvider.notifier).setTarget(target);
+          await tester.pumpAndSettle();
+          final status = days < 0
+              ? '지난 일정'
+              : days == 0
+              ? 'D-DAY'
+              : 'D-$days';
+          final nameRect = tester.getRect(find.text(target.label));
+          final statusRect = tester.getRect(find.text(status));
+          final settingsRect = tester.getRect(
+            find.widgetWithText(TextButton, '설정'),
+          );
+          expect(nameRect.center.dy, closeTo(statusRect.center.dy, .1));
+          expect(statusRect.center.dy, closeTo(settingsRect.center.dy, .1));
+          expect(nameRect.right, lessThan(statusRect.left));
+          expect(statusRect.right, lessThan(settingsRect.left));
+          expect(settingsRect.height, greaterThanOrEqualTo(48));
+          expect(settingsRect.width, greaterThanOrEqualTo(48));
+          expect(
+            tester.getTopLeft(find.text(target.formattedDate)).dy,
+            greaterThanOrEqualTo(settingsRect.bottom),
+          );
+          expect(
+            tester.widget<Text>(find.text(target.label)).overflow,
+            TextOverflow.ellipsis,
+          );
+          final style = tester.widget<Text>(find.text(status)).style!;
+          expect(
+            style.color,
+            days < 0 ? AppTokens.textSecondary : AppTokens.textPrimary,
+          );
+          if (days >= 0) expect(style.fontWeight, FontWeight.w800);
+          expect(
+            tester.getSize(find.byType(DayTargetCard)).height,
+            lessThanOrEqualTo(originalHeight),
+          );
+          expect(tester.takeException(), isNull, reason: 'day offset $days');
+        }
+      },
+    );
+  }
+  for (final scale in [1.0, 2.0]) {
     for (final state in ['none', 'data', 'empty']) {
       testWidgets('Home $state and D-Day editor at 360x640 / ${scale}x', (
         tester,
@@ -125,7 +210,8 @@ void main() {
         await tester.tap(find.text('적용'));
         await tester.pumpAndSettle();
         expect(find.text('수능'), findsOneWidget);
-        expect(find.text('D-DAY · 2026.09.13'), findsOneWidget);
+        expect(find.text('D-DAY'), findsOneWidget);
+        expect(find.text('2026.09.13'), findsOneWidget);
         expect(tester.takeException(), isNull);
         await tester.tap(find.widgetWithText(TextButton, '설정'));
         await tester.pumpAndSettle();

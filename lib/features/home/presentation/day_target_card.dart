@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../day_target_providers.dart';
@@ -13,7 +14,11 @@ class DayTargetCard extends ConsumerWidget {
     final now = ref.watch(dayTargetClockProvider).value ?? DateTime.now();
     return DailyUtilityCard(
       title: target?.label ?? 'D-DAY',
+      heading: target == null ? null : _TargetHeading(target: target, now: now),
       action: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+        ),
         onPressed: () async {
           final owner = ref.read(authStateProvider).value?.userId;
           final selection = await showDialog<_TargetSelection>(
@@ -26,7 +31,70 @@ class DayTargetCard extends ConsumerWidget {
         },
         child: const Text('설정'),
       ),
-      body: Text(target?.description(now) ?? '목표 날짜를 설정해 주세요.'),
+      body: Text(
+        target?.formattedDate ?? '목표 날짜를 설정해 주세요.',
+        style: target == null
+            ? null
+            : Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppTokens.textSecondary),
+      ),
+    );
+  }
+}
+
+class _TargetHeading extends StatelessWidget {
+  const _TargetHeading({required this.target, required this.now});
+  final DayTarget target;
+  final DateTime now;
+
+  @override
+  Widget build(BuildContext context) {
+    final days = target.daysFrom(now);
+    final expired = days < 0;
+    final label = expired
+        ? '지난 일정'
+        : days == 0
+        ? 'D-DAY'
+        : 'D-$days';
+    return Row(
+      children: [
+        Flexible(
+          child: Text(
+            target.label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+        const SizedBox(width: 4),
+        if (expired)
+          Text(
+            label,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: AppTokens.textSecondary),
+          )
+        else
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppTokens.primarySoft,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              child: Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 16,
+                  letterSpacing: 0,
+                  fontWeight: FontWeight.w800,
+                  color: AppTokens.textPrimary,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

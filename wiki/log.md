@@ -410,3 +410,17 @@
 - No production SQL/schema/data change. Proposal deliberately stays outside applied
   migrations pending approval. STOP before application; session UI is not persistent.
   No push, PR or merge. Existing untracked CLI metadata excluded.
+
+
+## 2026-09-13 — D-Day information hierarchy
+
+- Schedule name and countdown now share the first row with settings at the right.
+  Long names ellipsize; countdown and >=48px settings target take priority.
+- Active countdown uses primarySoft pill, textPrimary 16sp/w800 with zero tracking;
+  no orange-on-white small text or red warning color. Exact date is secondary on
+  the second row. Expired targets use plain secondary 지난 일정, without a pill.
+- 360×640 at 1×/2× verified for long labels and D-DAY/D-1/D-23/D-999/D-7300/expired;
+  header alignment, full countdown, date position, targets and no increased card
+  height verified. Analyze PASS, all 95 Flutter tests PASS, diff check PASS.
+- UI only; session storage, calendar rules and pending DB approval remain unchanged.
+  Platform builds not repeated for this typography-only change. No push/PR/merge.

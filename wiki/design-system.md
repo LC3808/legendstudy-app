@@ -162,3 +162,17 @@ D-Day settings accept one date and label (trimmed, 1–80 Unicode code points).
 The editor explicitly says settings reset on app exit and are not account-saved.
 Dates count Korean calendar days: future D-n, today D-DAY, past 지난 일정.
 No database write/persistence is implemented pending a separate storage approval.
+
+
+## D-Day information hierarchy refinement
+
+- Schedule name and countdown now share the first row with settings at the right.
+  Long names ellipsize; countdown and >=48px settings target take priority.
+- Active countdown uses primarySoft pill, textPrimary 16sp/w800 with zero tracking;
+  no orange-on-white small text or red warning color. Exact date is secondary on
+  the second row. Expired targets use plain secondary 지난 일정, without a pill.
+- 360×640 at 1×/2× verified for long labels and D-DAY/D-1/D-23/D-999/D-7300/expired;
+  header alignment, full countdown, date position, targets and no increased card
+  height verified. Analyze PASS, all 95 Flutter tests PASS, diff check PASS.
+- UI only; session storage, calendar rules and pending DB approval remain unchanged.
+  Platform builds not repeated for this typography-only change. No push/PR/merge.

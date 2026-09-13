@@ -191,9 +191,11 @@ class DailyUtilityCard extends StatelessWidget {
     required this.title,
     required this.action,
     required this.body,
+    this.heading,
     super.key,
   });
   final String title;
+  final Widget? heading;
   final Widget action, body;
   @override
   Widget build(BuildContext context) => Container(
@@ -210,10 +212,9 @@ class DailyUtilityCard extends StatelessWidget {
           builder: (context, constraints) => Row(
             children: [
               Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
+                child:
+                    heading ??
+                    Text(title, style: Theme.of(context).textTheme.titleMedium),
               ),
               const SizedBox(width: 8),
               ConstrainedBox(
