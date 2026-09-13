@@ -129,8 +129,20 @@ void main() {
 
     await mount(tester);
     expect(
-      tester.getSemantics(find.text('레전드스터디')).hasFlag(SemanticsFlag.isHeader),
+      tester
+          .getSemantics(find.bySemanticsLabel('레전드스터디'))
+          .hasFlag(SemanticsFlag.isHeader),
       isTrue,
+    );
+    expect(find.text('레전드스터디'), findsNothing);
+    expect(find.byIcon(Icons.auto_stories_outlined), findsNothing);
+    expect(
+      tester.widget<Image>(find.byType(Image)).image,
+      isA<AssetImage>().having(
+        (image) => image.assetName,
+        'official derived asset',
+        'assets/brand/generated/legendstudy_wordmark_header.png',
+      ),
     );
     await tab(tester, 2);
     expect(find.bySemanticsLabel('공부 타이머, 대기 상태, 0시간 0분 0초'), findsOneWidget);

@@ -40,18 +40,17 @@ class AppHeader extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (branded)
-          const Padding(
-            padding: EdgeInsets.only(bottom: 12),
-            child: Icon(
-              Icons.auto_stories_outlined,
-              color: AppTokens.primaryDark,
-              size: 28,
-            ),
-          ),
         Semantics(
           header: true,
-          child: Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          label: branded ? title : null,
+          child: branded
+              ? Image.asset(
+                  'assets/brand/generated/legendstudy_wordmark_header.png',
+                  width: 280,
+                  fit: BoxFit.contain,
+                  excludeFromSemantics: true,
+                )
+              : Text(title, style: Theme.of(context).textTheme.headlineSmall),
         ),
         if (subtitle != null) ...[
           const SizedBox(height: 8),

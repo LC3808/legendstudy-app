@@ -72,8 +72,9 @@ configurations. Dart package remains `legendstudy_app`. Android and iOS display
 The owner approved this production identity; Apple/Google registration and
 availability have not been checked or claimed. No Apple team, certificate or
 provisioning profile is configured; Android release signing remains unconfigured.
-Brand source conventions live in `assets/brand/README.md`; no original logos
-are present and the Flutter launcher icons remain unchanged.
+Official brand sources and derivative provenance live in `assets/brand/README.md`.
+Home uses the supplied wordmark crop. Launcher icons await a higher-resolution
+official original; current Flutter launcher icons remain placeholders.
 
 `AppConfig.fromEnvironment` reads public `APP_ENV` (default `development`) through
 `appConfigProvider`; this is a configuration extension point, not a working

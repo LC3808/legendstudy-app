@@ -122,3 +122,10 @@ study DB, OAuth, AdMob/IAP, notification backend, ingestion/import.
 Home 실제 provider empty, Materials 검색, Study idle, signedOut MY, header/timer
 semantics, 작은 화면/큰 글씨를 검사한다. analyze/test 및 Android/iOS build 필수.
 실제 DB empty는 성공이며 schema나 fixture를 변경해서 화면을 채우지 않는다.
+
+
+## Day 5 브랜드 교정
+
+Home 브랜드는 공식 원본에서 파생한 이미지로만 표시한다. 일반 Material icon과
+Text 조합으로 로고를 재현하지 않는다. 원본 3개와 crop 규격은 design-system.md 및
+assets/brand/README.md를 따른다. 본문 시스템 폰트와 기존 orange 계열은 유지한다.

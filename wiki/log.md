@@ -248,3 +248,17 @@
   school/meal DB, timer runtime, OAuth, ads/IAP, import or ingestion.
 - No separate Claude original supplied: canonical document explicitly identifies
   its approved-directive provenance. Local commit only; no push/merge; no blocker.
+
+
+## 2026-09-13 — Day 5 official brand assets
+
+- Added the owner's three canonical originals unchanged with hashes/provenance.
+  Replaced Home's temporary book icon/Text lockup with the official Korean wordmark
+  crop; maintained system typography, orange theme and existing navigation/data.
+- Registered the 72×72 launcher canonical source. Platform launcher replacement
+  awaits a higher-resolution official original; current Flutter icons remain.
+- analyze PASS, 24 tests PASS, Android debug/iOS simulator builds PASS. Configured
+  iPhone 17 Pro Home screenshot inspected. Source hashes, exact crop pixels,
+  packaged Android asset and diff/security checks PASS. Existing Supabase code and
+  migration unchanged; no SQL, OAuth, school/meal/timer service, AdMob or IAP work.
+- Local follow-up commit only, preserving 56ecec5; no push or merge.

@@ -71,7 +71,7 @@ Last reviewed: 2026-09-13
 - Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
 - Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
-- Launcher icon replacement when original brand assets are supplied
+- Launcher icon replacement after a higher-resolution official icon is supplied (current canonical icon: 72×72)
 
 ## Application implementation details
 
@@ -123,7 +123,7 @@ Last reviewed: 2026-09-13
 
 - Register the approved identifier with Apple/Google and configure signing in a separate task.
   Registration availability has not been checked or claimed; no conflict was reported by local builds.
-- Provide original brand assets and replace generated Flutter launcher icons.
+- Replace generated Flutter launcher icons after receiving a higher-resolution version of the supplied canonical 72×72 icon.
 - Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
 - Release readiness is not implied by the scaffold or Day 4-A foundation.
 
@@ -368,3 +368,25 @@ integration code; see Day 4-A below for the current client verification boundary
   official spec records the user's approved v1.1 directive without claiming a copy
   of an unavailable original. No implementation blocker; detailed art can follow.
 - Local commit only; no push or merge.
+
+
+## Day 5 — Official brand correction (2026-09-13)
+
+- Owner supplied three canonical PNG originals under assets/brand/source/:
+  legendstudy_app_icon_source.png, legendstudy_square_logo_source.png and
+  legendstudy_wordmark_source.png. Bytes preserved; SHA-256 in assets/brand/README.md.
+- Home no longer renders the temporary Material book icon or Text wordmark.
+  It uses generated/legendstudy_wordmark_header.png, an exact 312×55 crop of
+  the supplied banner, at up to 280 logical pixels wide with header semantics.
+  System fonts, orange palette, navigation/layout and Supabase code are unchanged.
+- Launcher canonical source is registered (72×72). Platform replacement deferred
+  until a higher-resolution official original is available; existing launcher
+  placeholders are not approved artwork. No fabricated/upscaled replacement.
+- flutter analyze PASS; all 24 tests PASS, including image/header semantics and
+  360×640/2× text regression. Android debug and iOS simulator builds PASS using
+  the external owner-managed configuration. iPhone 17 Pro / iOS 26.5 installed,
+  launched and Home screenshot visually checked with the official wordmark.
+- Source hashes/crop pixel identity, Android asset packaging, credential-pattern
+  and exact-key scans, git diff --check PASS. No DB/SQL/migration or new services.
+  Prior actual Supabase smoke remains valid evidence; not rerun for this asset edit.
+- Follow-up local commit on codex/day-5-ui-shell; 56ecec5 preserved. No push/merge.
