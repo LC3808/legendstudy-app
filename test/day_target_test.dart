@@ -57,18 +57,20 @@ void main() {
       final subscription = container.listen(dayTargetProvider, (_, _) {});
       auth.add(const AuthStatus(null));
       await Future<void>.delayed(Duration.zero);
-      container
+      await container.read(dayTargetProvider.future);
+      await container
           .read(dayTargetProvider.notifier)
           .setTarget(DayTarget(date: now, label: '시험'));
-      expect(container.read(dayTargetProvider)?.label, '시험');
+      expect(container.read(dayTargetProvider).value?.label, '시험');
       auth.add(const AuthStatus('A'));
       await Future<void>.delayed(Duration.zero);
-      expect(container.read(dayTargetProvider), isNull);
+      await container.read(dayTargetProvider.future);
+      expect(container.read(dayTargetProvider).value, isNull);
       subscription.close();
       container.dispose();
       await auth.close();
       final fresh = ProviderContainer();
-      expect(fresh.read(dayTargetProvider), isNull);
+      expect(await fresh.read(dayTargetProvider.future), isNull);
       fresh.dispose();
     },
   );
@@ -114,7 +116,7 @@ void main() {
             date: now.add(Duration(days: days)),
             label: '아주 긴 중간고사 일정 이름과 메모를 끝까지 입력한 경우',
           );
-          container.read(dayTargetProvider.notifier).setTarget(target);
+          await container.read(dayTargetProvider.notifier).setTarget(target);
           await tester.pumpAndSettle();
           final status = days < 0
               ? '지난 일정'
@@ -217,7 +219,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text('해제'));
         await tester.pumpAndSettle();
-        expect(container.read(dayTargetProvider), isNull);
+        expect(container.read(dayTargetProvider).value, isNull);
         await tester.ensureVisible(study);
         expect(tester.takeException(), isNull);
       });

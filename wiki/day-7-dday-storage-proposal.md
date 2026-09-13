@@ -1,4 +1,4 @@
-# D-Day storage — owner reports applied / JWT verification pending
+# D-Day storage — applied / JWT accepted / Flutter runtime pending
 
 Home UI through 058c3e6 is owner-approved. The owner requested the final migration
 stage; production execution remains owner-only. No deployment approval is inferred
@@ -241,3 +241,41 @@ Dedicated tool/verify_day_target_jwt.py is prepared with hidden interactive pass
 entry or an external account JSON. Uses owner-specified A/B @legendstudy.com accounts,
 refuses preexisting profiles and cleans only its fixtures; no Auth users deleted.
 Actual execution and persistence runtime remain pending, not PASS.
+
+
+## Current acceptance and Flutter implementation
+
+Owner reports D-Day JWT/REST acceptance PASS, fixture cleanup PASS, Auth users
+retained. DB STOP and JWT implementation gate are released. The dedicated Flutter
+repository/provider/editor are implemented and tested; actual authenticated Flutter
+runtime verification is still pending, not PASS.
+
+### Execute actual iOS Flutter smoke locally
+
+```bash
+cd /Users/woojinchang/development/legendstudy-app && python3 -B tool/run_day_target_flutter_smoke.py /Users/woojinchang/legendstudy-local.json
+```
+
+Booted simulator default: AEC17AF7-4950-4B41-9520-45A60BB7C918; use --device UUID
+if needed. A/B passwords are hidden getpass input. Optional --accounts points to
+an existing repository-external JSON with TEST_A_EMAIL/TEST_A_PASSWORD and B fields.
+Passwords are transferred once over an unpredictable loopback URL; not written to
+files, Dart defines, source or compiled app. Runner suppresses raw process output
+and emits only allowlisted stage markers; do not infer PASS from process exit alone.
+
+This is real Flutter/SDK/Supabase integration, with test-only programmatic password
+login (no new production password-login UI). It exercises actual Home editor save,
+edit and clear; rebuilds the app ProviderContainer against the same live session
+and checks restoration; logs A out and mounts B's real session to check isolation;
+compares profile name/grade/NEIS fields and cleans only its created profile.
+This proves state reconstruction if it passes, not OS process-restart refresh-token
+persistence. Normal product OAuth runtime remains a separate gate.
+
+Both profiles must be absent before writes. If either exists the test refuses to
+alter it. Auth users are never created/deleted. Finally cleanup handles normal test
+failures; forced process termination/network outage can leave a fixture. Require
+fixture_cleanup PASS and auth_users_retained PASS before declaring completion.
+If cleanup is unconfirmed, inspect/clean only the known test profile before rerun.
+
+Offline: 107 Flutter tests PASS, analyze PASS, Android/iOS builds PASS; 13 Python
+runner/verifier tests PASS. Actual Flutter smoke: NOT RUN pending local credentials.

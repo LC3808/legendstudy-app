@@ -494,3 +494,14 @@ invalid_pairs=0; all supplied preflight/migration/catalog queries executed by ow
 Codex did not execute SQL. Finite past dates remain allowed; paired NULLs clear the
 value. Authenticated column grants extend existing profile ownership RLS.
 Actual D-Day JWT/REST and authenticated Flutter persistence are still pending.
+
+
+### D-Day JWT acceptance and Flutter repository
+
+Owner reports complete D-Day JWT/REST acceptance PASS and fixture cleanup PASS;
+Auth users retained. Production migration and RLS are now accepted for client use.
+Flutter SupabaseDayTargetRepository sends only id,target_date,target_label on save,
+only target_date/target_label NULL on clear PATCH, and never deletes profiles.
+Existing profile/school payloads are unchanged; mock-transport payload preservation
+and owner live JWT acceptance are distinct evidence. Actual authenticated Flutter
+persistence smoke remains pending. No further schema/migration change was made.

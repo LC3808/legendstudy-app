@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 7 Home refinement verified; D-Day persistence requires storage approval. Runtime closeout remains in progress.**
+**Day 7 D-Day Flutter persistence implemented; actual authenticated Flutter smoke pending. Day 7 COMPLETE not claimed.**
 
 ## Verified state
 
@@ -681,3 +681,31 @@ integration code; see Day 4-A below for the current client verification boundary
 - Exact production failure cause remains unconfirmed without rerun diagnostics.
   No production request/SQL/user change performed in this debugging task. Flutter
   persistence remains gated on real JWT acceptance. No push, PR or merge.
+
+
+## D-Day persistence implementation (current)
+
+- Owner reports production migration, complete D-Day JWT/REST acceptance and
+  fixture cleanup PASS; Auth users retained. This supersedes earlier pending-JWT
+  checkpoints. Codex did not apply SQL or repeat the owner's live acceptance.
+- Dedicated DayTargetRepository derives current session identity. Save sends only
+  id/target_date/target_label; clear PATCH sends only NULL target pair and retains
+  profile row. Representation validates saved/cleared values. Existing profile and
+  NEIS payloads remain unchanged. Calendar date serialized without UTC conversion.
+- Authenticated initial/login fetch, save/edit/clear and failure-state preservation
+  implemented. Guest remains memory-only and is never auto-uploaded on login.
+  Identity generation guards discard late saves; Riverpod invalidates stale fetches.
+  Loading/error UI hides previous-account values. Same-user token refresh is not
+  treated as account replacement. Concurrent saves rejected.
+- Existing approved Home hierarchy retained. Dialog stays open with a short failure
+  message when save/clear fails; persisted provider value remains unchanged. Auth
+  dialog says account-saved; guest retains the app-exit reset notice.
+- Analyze PASS, 107 Flutter tests PASS (95 retained/adapted + 12 persistence tests),
+  13 Python offline verifier/runner tests PASS, Android debug/iOS simulator builds
+  PASS, credential scan and diff check PASS. No migration or school code change.
+- Actual Flutter authenticated persistence smoke NOT RUN: requires owner-local
+  passwords. Prepared integration_test/day_target_persistence_smoke_test.dart and
+  tool/run_day_target_flutter_smoke.py; command/coverage in D-Day storage document.
+  No test profile created by Codex this turn. Day 7 COMPLETE / Day 8 readiness
+  remain pending the actual smoke and remaining Day 7 runtime gates.
+- No push/PR/merge. Existing supabase/.temp CLI metadata remains excluded.

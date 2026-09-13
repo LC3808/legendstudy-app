@@ -474,3 +474,18 @@
 - Exact production failure cause remains unconfirmed without rerun diagnostics.
   No production request/SQL/user change performed in this debugging task. Flutter
   persistence remains gated on real JWT acceptance. No push, PR or merge.
+
+
+## 2026-09-13 — D-Day Flutter persistence implementation
+
+- Owner confirms D-Day JWT/REST acceptance and cleanup PASS after production migration.
+- Added dedicated narrow-payload repository and authenticated asynchronous target
+  controller, failure-preserving editor, guest-only memory state and stale identity
+  response guards. Approved pill/date layout and 48px actions retained.
+- Analyze, 107 Flutter tests, 13 Python tests, Android debug/iOS simulator builds,
+  credentials and diff checks PASS. Production/schema/migrations unchanged.
+- Prepared opt-in real Flutter test using hidden local password input and one-shot
+  loopback handoff; credentials never embedded in defines/artifacts or logged.
+  Authenticated Flutter runtime NOT RUN without owner credentials. No fixtures
+  created this turn; prior JWT cleanup PASS is owner-reported. No COMPLETE claim.
+- Local feature commit only; no push, PR or merge. Existing CLI .temp excluded.
