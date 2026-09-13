@@ -1,11 +1,11 @@
-# Day 7 school persistence proposal — NOT APPROVED / NOT APPLIED
+# Day 7 school persistence proposal — DIRECTION APPROVED / MIGRATION PREPARED / NOT APPLIED
 
 ## Stop and evidence
 
 The owner's Day 7 Sections 3/22 require stopping feature implementation when school
 persistence needs a schema change. The deployed initial profiles definition and
 current client contract contain id/display_name/grade_level/timestamps only.
-Only the immutable initial migration exists in this checkout. A read-only request
+At the STOP checkpoint, only the immutable initial migration existed in this checkout. A read-only request
 for proposed neis_office_code/neis_school_code returned HTTP 400 / PostgreSQL 42703
 (undefined column) on the dedicated LegendStudy project. No SQL was executed.
 
@@ -53,11 +53,18 @@ select policyname, roles, cmd, qual, with_check
 from pg_policies where schemaname = 'public' and tablename = 'profiles';
 ```
 
-## Proposed new migration SQL — approval required, not executed
+## Final prepared migration — owner execution only
 
-After approval, record this as a NEW timestamped migration. This document is not a
-migration file and does not claim deployment. Explicit ADD fails on drift instead
-of IF NOT EXISTS masking an incompatible prior change.
+Owner approved the two-column direction. Prepared file:
+`supabase/migrations/20260913000100_profile_school_selection.sql`.
+It has NOT been applied. The block below is byte-identical to the migration file.
+Explicit ADD fails on drift rather than silently skipping incompatible columns.
+
+Official sample rechecked: 진접고등학교 returned office J10 and school 7530932.
+Those are examples, not a guarantee of a universal pattern. No code-format regex
+is imposed. Maximum 32 characters is an application defensive bound, NOT a claimed
+NEIS specification. Values must be nonempty with no leading/trailing ASCII whitespace;
+the pair is either fully NULL or fully present. School existence is not DB-validated.
 
 ```sql
 begin;
@@ -66,13 +73,18 @@ alter table public.profiles
   add column neis_office_code text,
   add column neis_school_code text,
   add constraint profiles_neis_school_pair check (
-    (neis_office_code is null and neis_school_code is null)
-    or (
-      neis_office_code is not null and neis_school_code is not null
-      and neis_office_code = btrim(neis_office_code)
-      and neis_school_code = btrim(neis_school_code)
-      and char_length(neis_office_code) between 1 and 32
-      and char_length(neis_school_code) between 1 and 32
+    (neis_office_code is null) = (neis_school_code is null)
+    and (
+      neis_office_code is null or (
+        neis_office_code = btrim(neis_office_code, E' \t\n\r\f\013')
+        and char_length(neis_office_code) between 1 and 32
+      )
+    )
+    and (
+      neis_school_code is null or (
+        neis_school_code = btrim(neis_school_code, E' \t\n\r\f\013')
+        and char_length(neis_school_code) between 1 and 32
+      )
     )
   );
 
@@ -83,6 +95,14 @@ grant insert (neis_office_code, neis_school_code),
 notify pgrst, 'reload schema';
 commit;
 ```
+
+## Existing row comparison
+
+Run `supabase/review/profile_school_before.sql` before application and retain the
+count/fingerprint. After application, run `supabase/review/profile_school_after.sql`
+and compare the same original-column fingerprint. Prevent concurrent profile writes
+while comparing. This avoids printing raw profile data; no baseline means no claim
+of proven row preservation. New fields should be NULL immediately after migration.
 
 ## RLS and compatibility
 
@@ -98,36 +118,10 @@ A future clear sets both fields NULL; deleting the entire profile is not school 
 
 ## Owner validation after application — not executed here
 
-```sql
-select column_name, data_type, is_nullable
-from information_schema.columns
-where table_schema = 'public' and table_name = 'profiles'
-  and column_name in ('neis_office_code', 'neis_school_code');
--- Expect two nullable text columns.
-
-select convalidated, pg_get_constraintdef(oid)
-from pg_constraint
-where conrelid = 'public.profiles'::regclass
-  and conname = 'profiles_neis_school_pair';
--- Expect one validated pair constraint.
-
-select role_name, column_name,
-  has_column_privilege(role_name, 'public.profiles', column_name, 'SELECT') as can_read,
-  has_column_privilege(role_name, 'public.profiles', column_name, 'INSERT') as can_insert,
-  has_column_privilege(role_name, 'public.profiles', column_name, 'UPDATE') as can_update
-from (values ('anon'), ('authenticated')) as r(role_name)
-cross join (values ('neis_office_code'), ('neis_school_code')) as c(column_name);
--- anon: false/false/false; authenticated: true/true/true (RLS still applies).
-
-select relrowsecurity from pg_class where oid = 'public.profiles'::regclass;
-select policyname, roles, cmd, qual, with_check
-from pg_policies where schemaname = 'public' and tablename = 'profiles';
--- RLS true and original owner policies unchanged.
-
-select count(*) as partial_pairs from public.profiles
-where (neis_office_code is null) <> (neis_school_code is null);
--- Expect zero.
-```
+Exact queries: `supabase/review/profile_school_after.sql`. Checks cover two nullable
+TEXT columns/defaults, validated CHECK, existing/new column privileges for anon,
+authenticated and service_role, unchanged owner RLS, zero partial pairs, original
+row count/fingerprint and initially NULL school values. SQL parsing is not execution.
 
 Separately authorize owner-run REST/JWT behavioral checks; catalogue privileges or
 SQL SET ROLE alone do not prove RLS. No production fixture writes are authorized here:
@@ -160,9 +154,21 @@ commit;
 
 ## Resume gate
 
-Owner reviews/approves this proposal, applies a new migration, and returns deployment
-and validation results. Verify those before implementing authenticated persistence.
-If the owner instead authorizes guest-only school/meal work first, explicitly scope
-it separately. No Day 7 feature code, production SQL/write, key embedding or new
-migration file has been created by this proposal task. Day 6 link_status remains
-unchanged. Day 7 is not complete; do not describe Day 8 as unconditionally ready.
+The storage direction is approved, and the executable migration is now prepared.
+The owner applies it to LegendStudy and returns before/after validation results.
+Verify deployment before implementing authenticated persistence. The new file's
+existence does not imply deployment. Flutter implementation remains stopped; NEIS
+key exposure and meal API verification remain subsequent gates. No production SQL,
+write, push, PR or merge was performed. Initial migration and database.md unchanged.
+
+
+## Static verification of prepared files
+
+`python supabase/review/check_school_storage.py` with review/requirements.txt:
+pglast 8.4 (PostgreSQL 18.4 grammar) parses the migration and SELECT-only verification
+scripts, checks nullable columns/CHECK/column grants and transaction scope, ensures
+owner SQL byte identity and the immutable initial hash, and rejects five unsafe
+mutations. Existing initial-schema checker and its 14 tests also pass. No PostgreSQL
+execution or production catalogue/JWT behavior is claimed; target remains PG17.6.
+Flutter code and dependencies are unchanged; builds/tests were not rerun for SQL-only
+preparation. git diff --check and credential scanning pass.

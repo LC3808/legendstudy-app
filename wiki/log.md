@@ -328,3 +328,16 @@
   confirmed identifier names only; production key/meal review still pending.
 - Documentation-only local commit; diff check PASS. Existing code/schema untouched,
   tests/builds not rerun. No Supabase write, push, PR or merge; approval required.
+
+
+## 2026-09-13 — Prepare approved school storage migration
+
+- Preserved 4078017; added new profile_school_selection migration and read-only
+  before/after verification SQL. Nullable code pair + value CHECK, authenticated
+  column INSERT/UPDATE only; existing owner RLS/profile contract unchanged.
+- Official NEIS sample reconfirmed code examples; no invented code regex. Proposal
+  updated to approved direction / prepared / NOT APPLIED with exact owner SQL.
+- pglast syntax and new AST gate PASS; five unsafe mutations rejected; existing
+  checker/14 tests PASS; diff/secret scan PASS. Initial migration and Flutter intact.
+- No DB application or production writes. Owner deployment/REST/JWT verification
+  pending before Day 7 implementation. Local commit only; no push/PR/merge.

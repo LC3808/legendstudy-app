@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 6 complete locally; Day 7 implementation stopped pending school-storage contract approval**
+**Day 7 school-storage direction approved; migration prepared, awaiting owner deployment/validation**
 
 ## Verified state
 
@@ -506,3 +506,25 @@ integration code; see Day 4-A below for the current client verification boundary
   remains unchanged; this documentation-only task does not rerun Flutter builds.
 - Next: owner review/approval and verified application, or explicit guest-only scope.
   Day 7 incomplete; Day 8 readiness is not claimed.
+
+
+## Day 7 school migration preparation (2026-09-13)
+
+- Owner approved profiles school identifier storage. Separate commit after 4078017;
+  production application remains owner-only and has NOT occurred in this task.
+- Added 20260913000100_profile_school_selection.sql: nullable TEXT pair, validated
+  profiles_neis_school_pair CHECK (NULL equivalence, trimmed/nonempty 1..32 values),
+  authenticated INSERT/UPDATE on those columns only. No policy/table-level/anon
+  grant or service-role change. No row DML/backfill. Existing profile payload valid.
+- Official schoolInfo sample rechecked: J10 / 7530932. No fixed-format regex; 32 is
+  a defensive app limit, not a claimed NEIS code-length specification.
+- Owner scripts: profile_school_before.sql and profile_school_after.sql. Compare
+  original-column fingerprint/row count before/after without concurrent writes;
+  inspect types/nullability/CHECK/ACL/RLS. REST/JWT behavior remains separately pending.
+- pglast 8.4 / PostgreSQL 18.4 grammar PASS (target is PG17.6; no runtime execution).
+  New AST scope/check/grant gate and five unsafe mutations PASS. Existing checker
+  and 14 tests PASS. Owner SQL block identical to migration. diff/security PASS.
+- Initial migration SHA-256 unchanged; Flutter code/dependencies unchanged. No
+  production SQL/write, push, PR or merge. database.md does not claim deployment.
+- Resume Day 7 after owner deployment and verification results; NEIS client-key
+  exposure/meal API gates still require review before implementation proceeds.
