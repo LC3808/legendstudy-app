@@ -10,6 +10,8 @@ Day 4-A content/domain owns ContentItem and ContentRepository; content/data maps
 explicit public projections. personal/domain and personal/data own profile, bookmark
 and recent-view contracts/implementations. Providers inject dependencies and expose
 content AsyncValue states. AuthStatus contains user identity only, never JWTs.
-Home/Browse consume those boundaries; Saved/Profile presentation is still deferred.
+Home/Materials consume those boundaries. Day 5 adds Study idle UI and an Auth-aware
+MY shell, reuses Saved under MY and reserves root navigation for material detail.
+School, timer persistence, OAuth, ads and purchases remain unconnected.
 Shared UI lives in `lib/shared/widgets`; application composition in `lib/app`;
 configuration and design tokens in `lib/core`.

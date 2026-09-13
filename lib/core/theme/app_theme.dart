@@ -9,7 +9,12 @@ abstract final class AppTokens {
   static const textPrimary = Color(0xFF202124);
   static const textSecondary = Color(0xFF666666);
   static const divider = Color(0xFFEEEEEE);
-  static const spacing = 24.0;
+  static const pagePadding = 24.0;
+  static const sectionGap = 28.0;
+  static const smallGap = 8.0;
+  static const cardRadius = 16.0;
+  static const chipRadius = 24.0;
+  static const spacing = pagePadding;
   static const radius = 20.0;
 }
 
@@ -39,10 +44,35 @@ abstract final class AppTheme {
         surfaceTintColor: Colors.transparent,
         centerTitle: false,
       ),
+      dividerTheme: const DividerThemeData(color: AppTokens.divider, space: 1),
+      textTheme: const TextTheme(
+        headlineSmall: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+          color: AppTokens.textPrimary,
+        ),
+        titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+        titleMedium: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+        bodyLarge: TextStyle(fontSize: 16, height: 1.5),
+        bodyMedium: TextStyle(fontSize: 14, height: 1.5),
+        labelMedium: TextStyle(fontSize: 12, color: AppTokens.textSecondary),
+      ),
       navigationBarTheme: const NavigationBarThemeData(
         backgroundColor: AppTokens.surfaceWarm,
         indicatorColor: AppTokens.primarySoft,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppTokens.textPrimary,
+          minimumSize: const Size(48, 48),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppTokens.textPrimary,
+          minimumSize: const Size(48, 48),
+        ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(minimumSize: const Size(48, 48)),

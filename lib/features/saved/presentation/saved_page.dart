@@ -7,7 +7,7 @@ class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PlaceholderPage(
     title: '다시 보고 싶은 자료를 한곳에',
-    description: '자료 저장 기능을 준비하고 있어요. 나만의 학습 자료를 모아 보세요.',
+    description: '로그인하면 저장한 자료를 한곳에서 모아 볼 수 있어요.',
     icon: Icons.bookmark_border,
   );
 }

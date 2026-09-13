@@ -1,0 +1,181 @@
+import 'dart:ui' show SemanticsFlag;
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:legendstudy_app/app/legendstudy_app.dart';
+import 'package:legendstudy_app/app/router.dart';
+import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'package:legendstudy_app/features/content/content_providers.dart';
+import 'package:legendstudy_app/features/content/domain/content_item.dart';
+import 'package:legendstudy_app/features/content/domain/content_repository.dart';
+
+const item = ContentItem(
+  id: 'one',
+  slug: 'sample',
+  contentType: 'study_material',
+  title: '테스트 자료',
+  sourceUrl: 'https://legendstudy.com/1',
+  isActive: true,
+);
+
+class ShellContent implements ContentRepository {
+  @override
+  Future<List<ContentItem>> fetchRecentContent({int limit = 30}) async => [];
+  @override
+  Future<List<ContentItem>> searchContent(
+    String query, {
+    int limit = 30,
+  }) async => [item];
+  @override
+  Future<ContentItem?> fetchContentBySlug(String slug) async =>
+      slug == 'sample' ? item : null;
+}
+
+void main() {
+  Future<ProviderContainer> mount(WidgetTester tester, {String? user}) async {
+    final container = ProviderContainer(
+      overrides: [
+        contentRepositoryProvider.overrideWithValue(ShellContent()),
+        authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
+      ],
+    );
+    addTearDown(container.dispose);
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const LegendStudyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    return container;
+  }
+
+  Future<void> tab(WidgetTester tester, int index) async {
+    await tester.tap(find.byType(NavigationDestination).at(index));
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('four destinations and MY saved route retain branch stacks', (
+    tester,
+  ) async {
+    final container = await mount(tester);
+    expect(
+      tester
+          .widgetList<NavigationDestination>(find.byType(NavigationDestination))
+          .map((w) => w.label),
+      ['홈', '자료', '학습', 'MY'],
+    );
+    expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
+    await tab(tester, 3);
+    expect(find.text('로그인 / 시작하기'), findsOneWidget);
+    await tester.ensureVisible(find.text('저장한 자료'));
+    await tester.tap(find.text('저장한 자료'));
+    await tester.pumpAndSettle();
+    expect(container.read(routerProvider).canPop(), isTrue);
+    expect(find.text('다시 보고 싶은 자료를 한곳에'), findsOneWidget);
+    await tab(tester, 2);
+    await tab(tester, 3);
+    expect(find.text('다시 보고 싶은 자료를 한곳에'), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(find.text('나의 학습 공간'), findsOneWidget);
+  });
+  testWidgets(
+    'materials search state survives tabs and detail pushes above shell',
+    (tester) async {
+      final container = await mount(tester);
+      await tab(tester, 1);
+      await tester.enterText(find.byType(TextField), '영어');
+      await tester.testTextInput.receiveAction(TextInputAction.search);
+      await tester.pumpAndSettle();
+      expect(find.text('테스트 자료'), findsOneWidget);
+      await tab(tester, 2);
+      await tab(tester, 1);
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '영어',
+      );
+      await tester.ensureVisible(find.text('테스트 자료'));
+      await tester.tap(find.text('테스트 자료'));
+      await tester.pumpAndSettle();
+      expect(container.read(routerProvider).canPop(), isTrue);
+      expect(find.text('자료 상세'), findsOneWidget);
+      expect(find.byType(NavigationBar), findsNothing);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(find.byType(NavigationBar), findsOneWidget);
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '영어',
+      );
+    },
+  );
+  testWidgets('guest can enter school shell without saving or login', (
+    tester,
+  ) async {
+    final container = await mount(tester);
+    await tester.ensureVisible(find.text('학교 설정'));
+    await tester.tap(find.text('학교 설정'));
+    await tester.pumpAndSettle();
+    expect(container.read(routerProvider).canPop(), isTrue);
+    expect(find.text('우리 학교 찾기'), findsOneWidget);
+    expect(find.byType(TextField), findsNothing);
+    expect(find.text('로그인 / 시작하기'), findsNothing);
+  });
+  testWidgets('Study idle and headers expose accessible semantics', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+
+    await mount(tester);
+    expect(
+      tester.getSemantics(find.text('레전드스터디')).hasFlag(SemanticsFlag.isHeader),
+      isTrue,
+    );
+    await tab(tester, 2);
+    expect(find.bySemanticsLabel('공부 타이머, 대기 상태, 0시간 0분 0초'), findsOneWidget);
+    expect(
+      tester
+          .widget<FilledButton>(find.widgetWithText(FilledButton, '공부 시작'))
+          .onPressed,
+      isNull,
+    );
+    semantics.dispose();
+  });
+  testWidgets('MY recognizes authenticated state without exposing identity', (
+    tester,
+  ) async {
+    await mount(tester, user: 'test-owner-id');
+    await tab(tester, 3);
+    expect(find.text('나의 계정'), findsOneWidget);
+    expect(find.text('로그인 / 시작하기'), findsNothing);
+    expect(find.textContaining('test-owner-id'), findsNothing);
+  });
+  testWidgets('legacy and new deep routes resolve into correct branches', (
+    tester,
+  ) async {
+    final container = await mount(tester);
+    final router = container.read(routerProvider);
+    for (final entry in {
+      '/browse': 1,
+      '/saved': 3,
+      '/profile': 3,
+      '/study': 2,
+      '/my/school': 3,
+    }.entries) {
+      router.go(entry.key);
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
+        entry.value,
+      );
+      expect(tester.takeException(), isNull);
+    }
+    router.go('/materials?q=논술');
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      '논술',
+    );
+  });
+}

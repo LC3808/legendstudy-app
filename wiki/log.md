@@ -227,3 +227,24 @@
   local-config ignore checks PASS. Initial migration remains byte-identical.
   No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
 - Documentation-only follow-up local commit; no push/merge. No blocker.
+
+## 2026-09-13 — Day 5 UI shell and official v1.1 specification
+
+- Verified main merge 20ae5bf and started codex/day-5-ui-shell. Added canonical
+  ui-ux-v1.md from the owner's approved directive, registered UI reading order and
+  updated product scope/decisions: school/NEIS/timer/history/social Auth/ad support
+  are v1 goals but remain outside Day 5 backend implementation.
+- Four stateful branches 홈/자료/학습/MY. Preserved Saved code under /my/saved,
+  added school/recent shells, legacy redirects and root native material detail shell.
+- Home section skeleton retains actual recent updates; Materials retains repository
+  search. Study is idle-only, MY observes Auth. No fake ads, records, meal or purchase.
+- Refined spacing/type/radius/divider tokens and shared header/card/state widgets;
+  page-local Material boundaries keep ink effects scoped through nested navigation.
+- pub get/analyze PASS; all 24 tests PASS, six new shell/state/semantics cases.
+  Android/iOS builds PASS. iPhone 17 Pro visual checks: all tabs and MY Saved.
+  Existing real Supabase smoke also PASS (3 GETs, HTTP 200, empty, signedOut).
+- diff/security/ignore checks PASS; exact local key absent from Git candidates.
+  Migration, repository data implementations and dependencies unchanged. No SQL,
+  school/meal DB, timer runtime, OAuth, ads/IAP, import or ingestion.
+- No separate Claude original supplied: canonical document explicitly identifies
+  its approved-directive provenance. Local commit only; no push/merge; no blocker.

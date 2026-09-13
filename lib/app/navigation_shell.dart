@@ -7,7 +7,6 @@ class NavigationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('레전드스터디')),
     body: SafeArea(child: shell),
     bottomNavigationBar: NavigationBar(
       selectedIndex: shell.currentIndex,
@@ -19,16 +18,16 @@ class NavigationShell extends StatelessWidget {
           selectedIcon: Icon(Icons.home),
           label: '홈',
         ),
-        NavigationDestination(icon: Icon(Icons.search), label: '자료 찾기'),
+        NavigationDestination(icon: Icon(Icons.search), label: '자료'),
         NavigationDestination(
-          icon: Icon(Icons.bookmark_border),
-          selectedIcon: Icon(Icons.bookmark),
-          label: '저장',
+          icon: Icon(Icons.timer_outlined),
+          selectedIcon: Icon(Icons.timer),
+          label: '학습',
         ),
         NavigationDestination(
           icon: Icon(Icons.person_outline),
           selectedIcon: Icon(Icons.person),
-          label: '마이페이지',
+          label: 'MY',
         ),
       ],
     ),

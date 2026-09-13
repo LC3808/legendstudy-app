@@ -68,3 +68,18 @@ No original logo files are present in the repository as of this work. No logo is
 fabricated or redrawn, and generated Flutter launcher icons remain unchanged
 until real source assets arrive. The existing palette and orange-accent usage
 remain unchanged. Both platform app display names are `레전드스터디`.
+
+## Day 5 UI/UX v1.1 implementation
+
+Read ui-ux-v1.md before UI changes. Palette unchanged. AppTokens now distinguish
+pagePadding 24, sectionGap 28, smallGap 8, cardRadius 16, chipRadius 24; existing
+spacing/radius aliases remain compatible. Text roles: headline 24, title 22,
+subtitle 17, body 16/14, meta 12; dividers use #EEEEEE.
+Per-tab headers replace the generic shell AppBar. Each ShellPage owns its Material
+surface/scroll scope, so ink effects remain within its navigator page. Nested
+screens retain back AppBars. No new logo, asset, animation or fake ad slot.
+
+Text/outlined action labels use Text Primary on white for readable contrast;
+orange remains a fill/selection/accent. Day 5 visual checks cover all four tabs
+and nested Saved; 2× text-scale regression passes. This is basic UI/accessibility
+coverage, not a full screen-reader or WCAG certification.

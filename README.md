@@ -30,8 +30,9 @@ flutter build apk --debug
 flutter build ios --simulator --debug
 ```
 
-The app opens a Korean Home / Browse / Saved / My Page shell. Home and Browse
-consume public Supabase content; Saved/Profile screens remain placeholders.
+The app opens 홈 / 자료 / 학습 / MY. Home and Materials consume public Supabase
+content; Study is idle UI and MY owns saved/school/recent shells. Read
+[UI/UX v1.1](wiki/ui-ux-v1.md) before UI implementation.
 Public reads require no login. Local configuration for backend access:
 
 ```sh

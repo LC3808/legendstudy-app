@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../domain/content_item.dart';
+import '../../../shared/widgets/shell_widgets.dart';
+import 'content_card.dart';
 
 class ContentResults extends StatelessWidget {
   const ContentResults({
@@ -20,39 +22,19 @@ class ContentResults extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: CircularProgressIndicator(),
     ),
-    error: (error, _) => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          error is BackendUnavailable
-              ? error.message
-              : error is FormatException
-              ? error.message
-              : '자료를 불러오지 못했어요. 다시 시도해 주세요.',
-        ),
-        TextButton(onPressed: onRetry, child: const Text('다시 시도')),
-      ],
+    error: (error, _) => ErrorState(
+      message: error is BackendUnavailable
+          ? error.message
+          : error is FormatException
+          ? error.message
+          : '자료를 불러오지 못했어요. 다시 시도해 주세요.',
+      onRetry: onRetry,
     ),
     data: (items) => items.isEmpty
-        ? Text(emptyMessage)
+        ? EmptyState(emptyMessage)
         : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              for (final item in items)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.title,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      if (item.summary != null) Text(item.summary!),
-                    ],
-                  ),
-                ),
-            ],
+            children: [for (final item in items) ContentCard(item)],
           ),
   );
 }

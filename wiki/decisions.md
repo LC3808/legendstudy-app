@@ -172,3 +172,20 @@ builds, including implementation of Claude's specifications. ChatGPT retains
 planning/architecture/specification/review/coordination; Manus operations support;
 the owner retains final product/scope decisions and default SQL execution.
 Day 4-A establishes minimal data states only; no final screen/card design is adopted.
+
+## 2026-09-13 — Approved UI/UX v1.1 product decisions
+
+- Four bottom destinations: Home / Materials / Study / MY. Saved moves under MY.
+- Stored personalization requires authentication, including school/grade settings,
+  bookmarks/recent views, study history/totals, personal notifications/account settings.
+- School search/selection remains guest-accessible; school persistence requires login.
+- Guest timer execution may be allowed; durable study history requires authentication.
+- Social-login-only: Kakao / Google / Apple / Naver. Facebook, X and email/password
+  signup are excluded from v1.
+- Free-with-ads + ₩4,900 one-time support purchase removes ads permanently. This is
+  neither a subscription nor a core-feature unlock. No interstitial ads in v1;
+  protect PDF/timer/login/school flows and important CTAs from ads.
+- School settings, NEIS meals and study timer/history are promoted into v1 product
+  scope; implementation is staged and their backend is outside Day 5.
+- wiki/ui-ux-v1.md is the canonical UI implementation specification, normalized
+  from the owner's approved Day 5 directive; see its provenance statement.
