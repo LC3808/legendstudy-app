@@ -397,3 +397,16 @@
 - Credential-pattern scan and git diff --check PASS; applied migrations and
   canonical brand source bytes unchanged. CLI .temp remains untracked/excluded.
   No push, PR or merge.
+
+
+## 2026-09-13 — D-Day storage proposal / STOP
+
+- Prepared supabase/proposals/profile_day_target.sql and
+  day-7-dday-storage-proposal.md: nullable target_date/target_label pair, finite
+  date, trimmed 1–80-char label and authenticated column grants. Existing RLS,
+  anon restrictions, profile/school payload contracts and migration bytes preserved.
+- Proposal execution SQL (5 statements), verification queries and rollback parse
+  successfully with pglast; embedded SQL identical. Diff/credential scan PASS.
+- No production SQL/schema/data change. Proposal deliberately stays outside applied
+  migrations pending approval. STOP before application; session UI is not persistent.
+  No push, PR or merge. Existing untracked CLI metadata excluded.

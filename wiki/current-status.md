@@ -600,9 +600,20 @@ integration code; see Day 4-A below for the current client verification boundary
   Korean calendar days avoid UTC drift; expired dates display 지난 일정.
 - Read-only production REST projection returned 42703 for target_date/target_label;
   repository schema also lacks the contract. Permanent storage requires DB approval.
-  No production SQL/writes or applied-migration changes. Next: prepare storage proposal
-  and STOP before applying; authenticated D-Day persistence is not implemented.
+  No production SQL/writes or applied-migration changes. Storage proposal prepared in
+  [day-7-dday-storage-proposal.md](day-7-dday-storage-proposal.md); STOP before applying; authenticated D-Day persistence is not implemented.
 - Analyze and 93 Flutter tests PASS; Android debug/iOS simulator build results are
   recorded in the task log. 360×640 / 1× and 2× covers school unset/data/empty,
   D-Day unset/set/clear, study action and school attribution. Large text scrolls.
 - Existing CLI supabase/.temp metadata remains untracked and excluded. No push/PR/merge.
+
+
+## D-Day storage approval gate
+
+- Proposed executable SQL: supabase/proposals/profile_day_target.sql (outside
+  migration deployment path). Nullable date/text pair, finite date, trimmed 1–80
+  character label; authenticated column INSERT/UPDATE, existing ownership RLS.
+- Proposal includes validation queries, existing-row comparison, JWT acceptance,
+  fixture cleanup and rollback. SQL parser and embedded-file equality PASS.
+- Production applied: NO. Existing migrations unchanged. Await Product Owner
+  approval/application results before implementing authenticated persistence.

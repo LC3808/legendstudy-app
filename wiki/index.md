@@ -29,3 +29,5 @@ This directory is the canonical long-term development knowledge base for LegendS
 ## Canonical-source rule
 
 There must be only one canonical `current-status.md` for the repository. Notion, chats, external documents, Claude notes, Manus reports, and ChatGPT plans may support the project, but they do not replace this repository-local wiki.
+
+- [D-Day storage proposal — approval required](day-7-dday-storage-proposal.md)
