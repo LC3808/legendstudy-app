@@ -210,3 +210,20 @@
   config ignore checks PASS. Initial migration byte-identical; only integration
   test and these two Wiki documents changed. No credentials committed.
 - No remaining blocker; local follow-up commit only, no push/merge.
+
+## 2026-09-13 — Reverification with owner-managed external config
+
+- Re-ran on codex/day-4-supabase-foundation from clean 5dcded2 using
+  --dart-define-from-file=/Users/woojinchang/legendstudy-local.json.
+  The owner-managed file remains outside the repository and was not modified;
+  its credential value is not copied into these documents, tests or Git.
+- Actual iPhone 17 Pro / iOS 26.5 smoke PASS: Supabase initialization, dedicated
+  project content GET x3 HTTP 200, content_items [], Home/Browse loading → empty,
+  auth signedOut; personal reads empty and writes SignedOutException without network.
+- Full regression PASS: pub get, analyze, 18 unit/widget tests, one actual iOS
+  integration test, Android debug build and iOS simulator debug build. Both builds
+  used the same external configuration. git diff --check PASS.
+- Credential-pattern and exact external-key scans PASS for repository candidates;
+  local-config ignore checks PASS. Initial migration remains byte-identical.
+  No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
+- Documentation-only follow-up local commit; no push/merge. No blocker.
