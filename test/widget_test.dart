@@ -14,6 +14,7 @@ void main() {
     expect(find.text('오늘의 공부, 여기서 시작해요'), findsOneWidget);
     expect(find.byType(NavigationDestination), findsNWidgets(4));
 
+    await tester.ensureVisible(find.text('자료 둘러보기'));
     await tester.tap(find.text('자료 둘러보기'));
     await tester.pumpAndSettle();
     expect(find.text('나에게 필요한 학습 자료'), findsOneWidget);
@@ -23,8 +24,8 @@ void main() {
     );
 
     for (final entry in {
-      '저장': '다시 보고 싶은 자료를 한곳에',
-      '마이페이지': '나의 학습 공간',
+      '학습': '공부 타이머',
+      'MY': '나의 학습 공간',
       '홈': '오늘의 공부, 여기서 시작해요',
     }.entries) {
       await tester.tap(find.text(entry.key));
@@ -50,7 +51,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(
       tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
-      2,
+      3,
     );
     router.go('/missing');
     await tester.pumpAndSettle();
@@ -71,7 +72,7 @@ void main() {
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await tester.pumpWidget(const ProviderScope(child: LegendStudyApp()));
     await tester.pumpAndSettle();
-    for (final label in ['자료 찾기', '저장', '마이페이지', '홈']) {
+    for (final label in ['자료', '학습', 'MY', '홈']) {
       await tester.tap(find.text(label));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);

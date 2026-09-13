@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 4-A foundation and actual LegendStudy Flutter smoke verified; ready for review/merge**
+**Day 5 UI shell implemented locally against approved UI/UX v1.1; validation below**
 
 ## Verified state
 
@@ -15,7 +15,7 @@ Last reviewed: 2026-09-13
 - `AGENTS.md`, `CLAUDE.md`, `.gitignore`, and canonical repository-local `wiki/` seed exist
 - Canonical reading order re-verified from repository contents: `AGENTS.md` → `wiki/index.md` → `wiki/current-status.md`
 - Role split is current and consistent across the operating documents
-- v1.0 scope is frozen for initial implementation; community, NEIS meals, advanced badges/recommendations, and early-admission acceptance prediction remain post-v1.0 unless explicitly promoted
+- v1 scope now includes school/NEIS meals, timer/history, social auth and one-time ad removal per approved UI/UX v1.1. Community, advanced badges/AI recommendations, friends/ranking and admission prediction remain post-v1.
 - `legendstudy.com` remains accessible as the source site and currently exposes 1,673 archive items
 - Representative 2020-era posts confirm older content patterns with multiple resources per post, including problem PDFs, answer/explanation PDFs, listening MP3, listening scripts, and grade-cut material
 - Historical naming differs materially from newer curricula (for example, legacy mathematics `가형/나형`), so ingestion must preserve raw labels and support taxonomy versioning/uncertainty
@@ -58,12 +58,11 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Review/merge Day 4-A after owner confirmation; no push/merge performed here.
-2. After merge, Day 5 implements the approved Claude UI/UX v1.1 starting with
-   홈 · 자료 · 학습 · MY shell. Its planned canonical specification is
-   wiki/ui-ux-v1.md; this task does not create or implement that design.
-3. Later: login UI/OAuth, ingestion and source validation, signing/store registration
-   and original brand assets within separately agreed scopes.
+1. Review Day 5 UI shell against wiki/ui-ux-v1.md; local commit only, no push/merge.
+2. Implement later Auth/NEIS/persistence/ads/IAP milestones only within their agreed
+   scope. Day 8 introduces real timer behavior; Day 5 provides no timer logic.
+3. Obtain detailed Claude screen artwork if needed; this branch follows the owner's
+   approved v1.1 directive and does not invent an unavailable original document.
 
 ## Known open questions
 
@@ -72,7 +71,7 @@ Last reviewed: 2026-09-13
 - Curated historical taxonomy releases, reconciliation keys and publication/review thresholds
 - Source-link-first adopted; any selective mirroring and retention policies require later review
 - AdMob/IAP timing for v1.0
-- Launcher icon replacement when original brand assets are supplied
+- Launcher icon production/restoration from the official memo/document + pencil symbol in the square brand reference; legacy 72×72 favicon is not the canonical basis
 
 ## Application implementation details
 
@@ -80,8 +79,8 @@ Last reviewed: 2026-09-13
 - Riverpod 3.3.2 for dependency/state composition; go_router 17.0.0 for routing.
 - Feature presentation folders, shared widgets, core configuration/theme, app composition.
   Day 4-A adds minimal content/personal domain/data and Riverpod composition.
-- Home `/home` and Browse `/browse` show repository-backed states; Saved `/saved`
-  and Profile `/profile` retain placeholders. Navigation/theme are unchanged.
+- Home /home and Materials /materials retain repository-backed states. Study
+  /study is idle UI; MY /my has saved/school/recent child shells. See ui-ux-v1.md.
 - Orange accents with white/light surfaces, Korean Material localization, scalable text.
 - Owner-approved Android application ID/namespace/Kotlin package and iOS Runner bundle ID:
   `com.legendstudy.app`. iOS RunnerTests uses `com.legendstudy.app.RunnerTests`.
@@ -90,8 +89,9 @@ Last reviewed: 2026-09-13
 - APP_ENV/SUPABASE_URL/SUPABASE_PUBLISHABLE_KEY via Dart defines; local config
   ignored; only public client config, never backend secrets.
 - `flutter analyze`: passed with no findings.
-- `flutter test`: 18 passed, including routing/large-text/configuration and
-  repository/Auth/UI state tests; one separate actual iOS integration smoke passed.
+- `flutter test`: 24 passed, including routing/large-text/configuration,
+  repository/Auth/UI states and six Day 5 navigation/semantics tests; actual iOS
+  Supabase integration smoke also passed on the new shell.
 - `flutter doctor -v`: all installed toolchains reported healthy.
 - Supabase initial schema is applied; actual Flutter initialization and public
   reads are verified in the final smoke below. No ingestion exists.
@@ -123,7 +123,7 @@ Last reviewed: 2026-09-13
 
 - Register the approved identifier with Apple/Google and configure signing in a separate task.
   Registration availability has not been checked or claimed; no conflict was reported by local builds.
-- Provide original brand assets and replace generated Flutter launcher icons.
+- Produce/restore a high-resolution version of the square reference’s memo/document + pencil symbol in a future brand task before replacing Flutter launcher icons. Do not enlarge the low-resolution reference into a final icon.
 - Android device/emulator launch and signed physical iOS/release builds were not tested; perform those checks before distribution.
 - Release readiness is not implied by the scaffold or Day 4-A foundation.
 
@@ -337,3 +337,73 @@ integration code; see Day 4-A below for the current client verification boundary
   local-config ignore checks PASS. Initial migration remains byte-identical.
   No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
 - Documentation-only follow-up local commit; no push/merge. No blocker.
+
+## Day 5 — UI shell (2026-09-13)
+
+- Verified clean main at Day 4-A merge 20ae5bf; branch codex/day-5-ui-shell.
+- Added canonical ui-ux-v1.md from the approved owner directive; registered reading
+  order; updated product scope, durable decisions, architecture and design tokens.
+- Bottom tabs 홈 / 자료 / 학습 / MY; Saved reused at /my/saved, school/recent child
+  screens, root material detail shell and legacy redirects. Tab stacks are retained.
+- Home section skeleton keeps real recentContentProvider; Materials keeps real
+  search. Empty backend is normal. Study is idle, MY auth-aware; no fake study/meal
+  data, ads or payment. All existing data repositories remain unchanged.
+- No DB/schema/migration/SQL, OAuth, NEIS, timer runtime, Ads/IAP or ingestion.
+
+### Day 5 validation
+
+- flutter pub get/analyze PASS; 24 unit/widget tests PASS (18 retained + 6 new).
+  Includes exact bottom labels, MY Saved and stack/back behavior, persistent search,
+  root detail push, legacy/new routes, guest school entry, Auth variants and semantics.
+  Existing 360×640 / 2× text-scale coverage remains passing across all four tabs.
+- Android debug and iOS simulator debug builds PASS. iPhone 17 Pro / iOS 26.5
+  launched with owner-managed external public config; Home/Materials/Study/MY and
+  MY→Saved visually inspected. No credential is recorded in code or these docs.
+- Actual Supabase read-only smoke PASS: dedicated content GET x3 HTTP 200, [];
+  Home/Materials loading→empty, signedOut and guarded personal operations unchanged.
+- git diff --check, credential-pattern/exact-key scans and ignore checks PASS.
+  Initial migration byte-identical; data repository implementations and dependencies
+  unchanged. No SQL, writes, OAuth, NEIS, ads/IAP, timer runtime or ingestion.
+- Source boundary: no separate Claude full-text design file was supplied; the
+  official spec records the user's approved v1.1 directive without claiming a copy
+  of an unavailable original. No implementation blocker; detailed art can follow.
+- Local commit only; no push or merge.
+
+
+## Day 5 — Official brand correction (2026-09-13)
+
+- Owner supplied three canonical PNG originals under assets/brand/source/:
+  legendstudy_app_icon_source.png, legendstudy_square_logo_source.png and
+  legendstudy_wordmark_source.png. Bytes preserved; SHA-256 in assets/brand/README.md.
+- Home no longer renders the temporary Material book icon or Text wordmark.
+  It uses generated/legendstudy_wordmark_header.png, an exact 312×55 crop of
+  the supplied banner, at up to 280 logical pixels wide with header semantics.
+  System fonts, orange palette, navigation/layout and Supabase code are unchanged.
+- Corrected launcher design basis: the orange memo/document + pencil symbol at
+  the top of legendstudy_square_logo_source.png. The 72×72 “study” image is a
+  legacy favicon, not a launcher canonical source. High-resolution production/
+  restoration is deferred to a later brand task; no low-resolution enlargement
+  into final launcher art. Platform placeholders remain unchanged.
+- flutter analyze PASS; all 24 tests PASS, including image/header semantics and
+  360×640/2× text regression. Android debug and iOS simulator builds PASS using
+  the external owner-managed configuration. iPhone 17 Pro / iOS 26.5 installed,
+  launched and Home screenshot visually checked with the official wordmark.
+- Source hashes/crop pixel identity, Android asset packaging, credential-pattern
+  and exact-key scans, git diff --check PASS. No DB/SQL/migration or new services.
+  Prior actual Supabase smoke remains valid evidence; not rerun for this asset edit.
+- Follow-up local commit on codex/day-5-ui-shell; 56ecec5 preserved. No push/merge.
+
+
+## Day 5 — Brand asset role correction (2026-09-13)
+
+- Owner clarified the square reference's memo/document + pencil symbol as the
+  official core symbol and future launcher design basis. The 72×72 “study” image
+  is a legacy favicon only; source filenames, bytes and Home derivative unchanged.
+- Home wordmark size/spacing and UI hierarchy are provisional. Future refinement:
+  smaller wordmark consideration, header/first-section continuity, clearer outline/
+  divider and text contrast, stronger section separation without excessive orange.
+- Documentation-only follow-up after 9abbb08. No UI/function/navigation/Supabase,
+  launcher or DB changes. High-resolution symbol production/restoration deferred.
+- git diff --check PASS; changed-file scope and preserved asset bytes verified.
+  Flutter tests/builds not rerun because no implementation or build inputs changed.
+  Prior brand implementation validation remains recorded above. No push/merge.

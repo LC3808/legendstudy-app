@@ -298,6 +298,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
+    await tester.ensureVisible(find.text('자료 둘러보기'));
     await tester.tap(find.text('자료 둘러보기'));
     await tester.pumpAndSettle();
     expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
@@ -329,6 +330,7 @@ void main() {
     expect(find.text('자료를 불러오지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
     expect(find.textContaining('internal-test-detail'), findsNothing);
     fake.response = Future.value([ContentItem.fromJson(sample)]);
+    await tester.ensureVisible(find.text('다시 시도'));
     await tester.tap(find.text('다시 시도'));
     await tester.pumpAndSettle();
     expect(find.text('학습 안내'), findsOneWidget);

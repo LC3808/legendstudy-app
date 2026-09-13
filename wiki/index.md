@@ -7,8 +7,9 @@ This directory is the canonical long-term development knowledge base for LegendS
 1. `../AGENTS.md`
 2. `index.md`
 3. `current-status.md`
-4. Task-specific documents below
-5. Actual code, Git state, and DB/Supabase state
+4. For UI implementation: product-scope.md → architecture.md → database.md → design-system.md → ui-ux-v1.md
+5. Other task-specific documents as applicable
+6. Actual code, Git state, and DB/Supabase state
 
 ## Documents
 
@@ -18,6 +19,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `architecture.md` — app/system architecture
 - `database.md` — data model and Supabase policy
 - `ingestion.md` — legendstudy.com ingestion strategy
+- `ui-ux-v1.md` — approved UI/UX v1.1 canonical implementation specification; required before UI changes
 - `design-system.md` — visual identity and UI design tokens
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log

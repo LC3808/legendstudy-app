@@ -17,7 +17,13 @@
 - Google login
 - Apple login
 - Kakao login
+- Naver login
+- Social-login-only; no Facebook, X or email/password signup in v1
 - My page
+- School and grade settings (persistence requires login)
+- NEIS school meals
+- Study timer: guest temporary execution allowed, durable history requires login
+- Study-time history and accumulated time for authenticated users
 - Cross-device sync for personalized data when logged in
 
 ### Notifications
@@ -25,16 +31,18 @@
 - Major exam schedule notifications
 
 ### Monetization foundation
-- AdMob-compatible architecture
-- Architecture must not block a later one-time ad-removal/support purchase
+- Free app with ads; no interstitial ads in v1
+- ₩4,900 one-time “커피 한 잔 후원” permanently removes ads
+- Not a subscription and not a core-feature unlock
+- No ads in PDF viewing, timer execution, login, school setup or between important CTAs
 
 ## Explicitly not required for initial v1.0
 
 - Community / free-talk board
-- Meal-photo board
-- NEIS school meal integration
+- Meal-photo/community
 - Advanced badge/achievement system
-- Personalized recommendation engine
+- Friends/ranking
+- AI/personalized recommendation engine
 - Early-admission acceptance prediction service
 
 These may be promoted into v1.0 only by an explicit product decision recorded in `decisions.md`.
@@ -61,3 +69,11 @@ required in this schema milestone. The app does not scrape HTML during normal us
 or become a WebView clone. Home “recent updates” means known source publication/
 modification time, not app ingestion time. No recommendation engine, university
 master or additional social functionality is introduced by this clarification.
+
+## Day 5 scope update
+
+The owner explicitly promoted school settings, NEIS meals, timer/history, social
+Auth and the ad-removal support purchase into v1. See ui-ux-v1.md for the approved
+policy and guest/auth boundary. This does not authorize backend implementation in
+Day 5: only Home/Materials/Study/MY navigation and UI skeletons, with existing
+ContentRepository reads retained. Saved is under MY, not a bottom tab.

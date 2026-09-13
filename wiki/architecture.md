@@ -72,8 +72,11 @@ configurations. Dart package remains `legendstudy_app`. Android and iOS display
 The owner approved this production identity; Apple/Google registration and
 availability have not been checked or claimed. No Apple team, certificate or
 provisioning profile is configured; Android release signing remains unconfigured.
-Brand source conventions live in `assets/brand/README.md`; no original logos
-are present and the Flutter launcher icons remain unchanged.
+Official brand sources and derivative provenance live in `assets/brand/README.md`.
+Home uses the supplied wordmark crop. Future launcher icons use the square brand
+reference’s orange memo/document + pencil symbol, not the legacy 72×72 favicon.
+High-resolution symbol production/restoration is deferred; current Flutter
+launcher icons remain placeholders.
 
 `AppConfig.fromEnvironment` reads public `APP_ENV` (default `development`) through
 `appConfigProvider`; this is a configuration extension point, not a working
@@ -196,3 +199,21 @@ backend smoke is opt-in via local public config; unit tests use fake repositorie
 and mock HTTP with synthetic sessions, never a real password/JWT. No service_role
 or secret key belongs in Flutter; publishable keys are public, extractable client
 values whose access is constrained by RLS/grants.
+
+## Day 5 UI shell
+
+Canonical UI specification: ui-ux-v1.md. StatefulShellRoute.indexedStack is retained
+with /home, /materials, /study and /my branches. MY owns saved/school/recent child
+routes; root /materials/:slug pushes above the bottom shell, preserving the parent
+stack for back navigation. Legacy /browse, /saved, /profile redirect to their new
+locations. Search input/branch state survives tab switches; query parameter q is a
+keyword entry point. Category chips do not imply taxonomy filtering.
+
+Home orders branded header, non-date D-Day prompt, school/meal placeholder, search,
+quick keywords, study summary, actual recent content and recent-view placeholder.
+Materials reuses the existing ContentRepository; detail is a read-only title/summary
+shell with the existing slug repository method. Domain/data/grants are unchanged.
+Study is idle UI only; MY observes authStateProvider and leaves persistence/OAuth/
+school/support purchase unconnected. Saved presentation is reused under /my/saved.
+No school/meal/timer schema, API, ads SDK, IAP, notifications or ingestion is added.
+Shared layout/header/state/card widgets use the existing theme with refined tokens.

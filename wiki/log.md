@@ -227,3 +227,52 @@
   local-config ignore checks PASS. Initial migration remains byte-identical.
   No app/test code, DB/schema/migration/SQL, imports or UI changes in this rerun.
 - Documentation-only follow-up local commit; no push/merge. No blocker.
+
+## 2026-09-13 — Day 5 UI shell and official v1.1 specification
+
+- Verified main merge 20ae5bf and started codex/day-5-ui-shell. Added canonical
+  ui-ux-v1.md from the owner's approved directive, registered UI reading order and
+  updated product scope/decisions: school/NEIS/timer/history/social Auth/ad support
+  are v1 goals but remain outside Day 5 backend implementation.
+- Four stateful branches 홈/자료/학습/MY. Preserved Saved code under /my/saved,
+  added school/recent shells, legacy redirects and root native material detail shell.
+- Home section skeleton retains actual recent updates; Materials retains repository
+  search. Study is idle-only, MY observes Auth. No fake ads, records, meal or purchase.
+- Refined spacing/type/radius/divider tokens and shared header/card/state widgets;
+  page-local Material boundaries keep ink effects scoped through nested navigation.
+- pub get/analyze PASS; all 24 tests PASS, six new shell/state/semantics cases.
+  Android/iOS builds PASS. iPhone 17 Pro visual checks: all tabs and MY Saved.
+  Existing real Supabase smoke also PASS (3 GETs, HTTP 200, empty, signedOut).
+- diff/security/ignore checks PASS; exact local key absent from Git candidates.
+  Migration, repository data implementations and dependencies unchanged. No SQL,
+  school/meal DB, timer runtime, OAuth, ads/IAP, import or ingestion.
+- No separate Claude original supplied: canonical document explicitly identifies
+  its approved-directive provenance. Local commit only; no push/merge; no blocker.
+
+
+## 2026-09-13 — Day 5 official brand assets
+
+- Added the owner's three canonical originals unchanged with hashes/provenance.
+  Replaced Home's temporary book icon/Text lockup with the official Korean wordmark
+  crop; maintained system typography, orange theme and existing navigation/data.
+- Initially classified the 72×72 image as the launcher canonical source; the
+  owner corrected that classification in the subsequent asset-role entry below.
+  Platform launcher icons remained Flutter placeholders.
+- analyze PASS, 24 tests PASS, Android debug/iOS simulator builds PASS. Configured
+  iPhone 17 Pro Home screenshot inspected. Source hashes, exact crop pixels,
+  packaged Android asset and diff/security checks PASS. Existing Supabase code and
+  migration unchanged; no SQL, OAuth, school/meal/timer service, AdMob or IAP work.
+- Local follow-up commit only, preserving 56ecec5; no push or merge.
+
+
+## 2026-09-13 — Correct official symbol and legacy favicon roles
+
+- Corrected assets/brand/README.md, design-system and active status/architecture:
+  square logo's orange memo/document + pencil is the official core symbol and
+  future launcher design reference; 72×72 “study” is a legacy favicon only.
+- Launcher replacement and high-resolution production/restoration remain future
+  brand work. Do not enlarge the low-resolution square image into final launcher art.
+- Home remains unchanged; size/spacing/hierarchy and contrast refinements recorded
+  as provisional future UI work. Source/generated image bytes and all code unchanged.
+- Documentation-only follow-up after 9abbb08; diff/scope checks PASS. Flutter tests
+  and builds not rerun. No DB/Supabase changes, push or merge.
