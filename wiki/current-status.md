@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 6 Materials/Search/native Detail implemented locally; validation and link-health limitation below**
+**Day 6 complete locally; Day 7 implementation stopped pending school-storage contract approval**
 
 ## Verified state
 
@@ -488,3 +488,21 @@ integration code; see Day 4-A below for the current client verification boundary
   AdMob or IAP changes. No push, PR creation or merge.
 - Ready for Day 7 scope planning/review; native PDF viewing and populated-data/runtime
   file access remain future verification. Link-health limitation must remain explicit.
+
+
+## Day 7 preflight — stopped before feature implementation (2026-09-13)
+
+- Started from clean 30cdcb47 on new codex/day-7-school-neis. Day 6 history retained.
+- profiles has no school storage contract. Initial migration/client verified;
+  public read of proposed columns returned HTTP 400/42703 on LegendStudy.
+  Owner Day 7 STOP conditions 2/3 apply: no code assumes new DB fields.
+- See day-7-school-storage-proposal.md: two nullable NEIS identifier columns on
+  profiles, pair CHECK, restricted column grants, unchanged owner RLS; exact
+  proposed SQL, validation, compatibility and rollback. NOT APPROVED/APPLIED.
+- Only official schoolInfo sample identity fields checked (one public sample row).
+  NEIS client-key exposure/meal API review and full smoke remain pending.
+- No School/Meal implementation, guest persistence or authenticated save. No SQL,
+  production write, migration file, push, PR or merge. Day 6 tests/build evidence
+  remains unchanged; this documentation-only task does not rerun Flutter builds.
+- Next: owner review/approval and verified application, or explicit guest-only scope.
+  Day 7 incomplete; Day 8 readiness is not claimed.

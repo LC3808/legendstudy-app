@@ -317,3 +317,14 @@
   calls. Normal simulator Home→exam filter and tab-return state visually checked.
 - diff/security/exact-key/immutable schema checks PASS. One local feature commit;
   no push, PR or merge. Day 7 can build on this baseline with the documented limits.
+
+
+## 2026-09-13 — Day 7 storage contract preflight / proposal only
+
+- Branched from 30cdcb47; profiles has no school fields. Read-only proposed-column
+  probe returned 42703. Stopped feature work per owner's STOP 2/3.
+- Added school storage proposal with exact new SQL, owner RLS impact, validation
+  and rollback. No migration file or SQL execution. Official NEIS school sample
+  confirmed identifier names only; production key/meal review still pending.
+- Documentation-only local commit; diff check PASS. Existing code/schema untouched,
+  tests/builds not rerun. No Supabase write, push, PR or merge; approval required.

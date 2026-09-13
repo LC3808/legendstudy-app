@@ -18,6 +18,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `product-scope.md` — v1.0 and later scope
 - `architecture.md` — app/system architecture
 - `database.md` — data model and Supabase policy
+- `day-7-school-storage-proposal.md` — unapproved school persistence SQL/RLS/validation/rollback proposal; not deployed
 - `ingestion.md` — legendstudy.com ingestion strategy
 - `ui-ux-v1.md` — approved UI/UX v1.1 canonical implementation specification; required before UI changes
 - `design-system.md` — visual identity and UI design tokens
