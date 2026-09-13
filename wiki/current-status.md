@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 5 review refinements complete locally; ready for scoped Day 6 Materials/Search/Detail work**
+**Day 6 Materials/Search/native Detail implemented locally; validation and link-health limitation below**
 
 ## Verified state
 
@@ -58,12 +58,12 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Continue scoped Day 6 Materials/Search/Content Detail work on
-   codex/day-6-materials-search using the refined UI baseline below.
-2. Before adding exam metadata/resources, verify database.md and actual schema;
-   report any separate contract change required. No DB fields may be invented.
-3. Keep deferred D-Day/Study/MY redesign, Saved/bookmark, timer, NEIS, OAuth,
-   Ads/IAP and ingestion work in their assigned milestones. No push/merge here.
+1. Review Day 6 local implementation on codex/day-6-materials-search before any
+   owner-authorized push/PR/merge. Day 7 can use this native detail/resource baseline.
+2. Resolve a future public link-health eligibility/status contract if guaranteed
+   broken/restricted-link disabling is required; private link_status is unavailable.
+3. Native PDF viewing and later Auth/Saved/timer/NEIS/Ads/IAP/ingestion remain their
+   own milestones. No DB or migration change is included in Day 6.
 
 ## Known open questions
 
@@ -90,7 +90,7 @@ Last reviewed: 2026-09-13
 - APP_ENV/SUPABASE_URL/SUPABASE_PUBLISHABLE_KEY via Dart defines; local config
   ignored; only public client config, never backend secrets.
 - `flutter analyze`: passed with no findings.
-- `flutter test`: 26 passed, including routing/large-text/configuration,
+- `flutter test`: 56 passed, including routing/large-text/configuration,
   repository/Auth/UI states and six Day 5 navigation/semantics tests; actual iOS
   Supabase integration smoke also passed on the new shell.
 - `flutter doctor -v`: all installed toolchains reported healthy.
@@ -446,3 +446,45 @@ integration code; see Day 4-A below for the current client verification boundary
 - No blocker or pending owner decision for this refinement. Day 6 actual feature
   development can start within its separately defined contract; it is not claimed
   implemented here. Two local commits, no push/merge.
+
+
+## Day 6 Materials/Search/Detail implementation (2026-09-13)
+
+- Continued clean codex/day-6-materials-search from 027ba1d, preserving refinement
+  commits 5a3b27d/027ba1d and official main baseline 7e241e8. Feature commit separate.
+- Actual public projections of content_items, exams, exam_subjects, subjects and
+  resources returned HTTP 200/0 rows on the dedicated LegendStudy project before
+  implementation. Actual names are file_extension/file_size, not proposed aliases.
+- Type-only, keyword-only and combined search with independent type clearing;
+  Home shortcuts use real types. Existing query guards, public projection and
+  ordering retained. Four tabs, root detail, MY nesting and redirects retained.
+- Pure Dart ExamMetadata/ContentResource and small ExamRepository/ResourceRepository
+  boundaries. Exam list batched; resources paged in display_order/id ASC. Optional
+  left joins preserve mapped → raw historical → general subject fallback.
+- Native detail shows a single title, type, real metadata/summary/source clocks,
+  resources and external source/resource actions. Async loading/empty/error/retry;
+  no resources is normal, including columns. No fake production content.
+- url_launcher 6.3.2 changed from transitive to direct dependency only. HTTP(S)
+  externalApplication open, landing_page source first, otherwise verified file URL
+  then source. Launch false/exception produces safe feedback; remote success not claimed.
+- Known contract limit: private link_status prevents broken/restricted discrimination.
+  UI says availability unconfirmed. Guaranteed health-based disabling needs a separate
+  public eligibility/publication contract; no schema/grant change was attempted.
+- Final analyze PASS; 56 unit/widget tests PASS (26 retained/adapted + 30 new),
+  covering type/keyword/filter state, search guards, exam nulls/year distinction,
+  left fallback, resource paging/URL policy, detail states/retries, direct back,
+  root detail without tabs, return state, 360×640/2× text and external opener outcomes.
+- Android debug and iOS simulator builds PASS using owner-managed external config.
+  iPhone 17 Pro / iOS 26.5 normal app installed/launched; Home exam shortcut,
+  type-only empty result and type retention across Study/Materials visually checked.
+- Actual Flutter Supabase smoke PASS: eight public GETs HTTP 200, all empty as
+  expected (recent/Home/search/type/combined/slug/exam/resource left projection).
+  Initialization, Home/Materials loading→empty, signedOut and personal guards PASS.
+  No INSERT/UPDATE/DELETE/SQL or login. Five-table projection preflight also PASS.
+  This proves empty-query compatibility, not populated production join/file behavior.
+- diff/security/ignore and exact external-key scans PASS. Initial migration and all
+  Supabase SQL/schema files unchanged. Auth/personal/config and artwork unchanged.
+  No fixture ingestion, WebView, native PDF viewer, bookmark UI, OAuth, NEIS, timer,
+  AdMob or IAP changes. No push, PR creation or merge.
+- Ready for Day 7 scope planning/review; native PDF viewing and populated-data/runtime
+  file access remain future verification. Link-health limitation must remain explicit.

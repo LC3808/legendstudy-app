@@ -10,6 +10,8 @@ import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/content/data/supabase_content_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:legendstudy_app/features/exams/data/supabase_exam_repository.dart';
+import 'package:legendstudy_app/features/resources/data/supabase_resource_repository.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -130,9 +132,29 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(transport.requestCount, 3);
     expect(transport.statuses, everyElement(200));
+    final content = SupabaseContentRepository(client);
+    expect(await content.searchContent('', contentType: 'exam'), isEmpty);
+    expect(await content.searchContent('영어', contentType: 'exam'), isEmpty);
+    expect(
+      await content.fetchContentBySlug('legendstudy-day6-smoke-missing'),
+      isNull,
+    );
+    // A syntactically valid missing ID allows SELECT-only coverage on the empty DB.
+    const absentId = '00000000-0000-0000-0000-000000000000';
+    expect(
+      await SupabaseExamRepository(client).fetchForContentIds([absentId]),
+      isEmpty,
+    );
+    expect(
+      await SupabaseResourceRepository(client).fetchForContent(absentId),
+      isEmpty,
+    );
+    expect(transport.requestCount, 8);
+    expect(transport.statuses, everyElement(200));
     debugPrint(
-      'SMOKE PASS: initialization; dedicated content GET x3 HTTP 200; '
-      '0 rows; Home/Browse loading to empty; signedOut; personal calls no network.',
+      'DAY6 SMOKE PASS: initialization; dedicated public GET x8 HTTP 200; '
+      'content search/type/combined/slug and exam/resource left projection empty; '
+      'Home/Materials loading to empty; signedOut; personal calls no network.',
     );
     await tester.pumpWidget(const SizedBox.shrink());
   });
@@ -148,7 +170,11 @@ class _ReadOnlyTransport extends http.BaseClient {
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     if (request.method != 'GET' ||
         request.url.host != 'stlhijzpjfgwwdgunlsd.supabase.co' ||
-        request.url.path != '/rest/v1/content_items') {
+        !{
+          '/rest/v1/content_items',
+          '/rest/v1/exams',
+          '/rest/v1/resources',
+        }.contains(request.url.path)) {
       throw StateError('Smoke transport rejected a non-public-read request.');
     }
     requestCount++;

@@ -299,3 +299,21 @@
   unchanged router/backend/config/assets/dependency checks PASS. No DB/SQL work.
 - Two local refinement commits on codex/day-6-materials-search from main 7e241e8.
   Ready for scoped Day 6 actual features; no blocker, push or merge.
+
+
+## 2026-09-13 — Day 6 Materials/Search/native resource detail
+
+- From clean 027ba1d on codex/day-6-materials-search, added real content-type filters,
+  batched exam metadata, native single-title detail and resource/subject left fallback.
+  All existing query guards and routing topology retained; no schema/migration work.
+- Actual projections verified on five public tables (HTTP 200/0 rows). Used existing
+  file_extension/file_size; link_status is private, so no availability claim or
+  broken/restricted classification. A future eligibility contract is needed for that.
+- url_launcher already locked at 6.3.2 promoted to direct dependency for external
+  HTTP(S) actions; no WebView/PDF renderer or fake runtime data. Source/file priority
+  and OS launch failure feedback tested; live files unavailable in the empty DB.
+- analyze PASS, 56 tests PASS, Android debug/iOS simulator builds PASS. Real Flutter
+  read-only smoke: eight GETs HTTP 200/empty, initialized/signedOut, safe personal
+  calls. Normal simulator Home→exam filter and tab-return state visually checked.
+- diff/security/exact-key/immutable schema checks PASS. One local feature commit;
+  no push, PR or merge. Day 7 can build on this baseline with the documented limits.

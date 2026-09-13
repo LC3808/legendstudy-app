@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../domain/content_item.dart';
 import '../domain/content_repository.dart';
+import '../domain/content_types.dart';
 
 class SupabaseContentRepository implements ContentRepository {
   SupabaseContentRepository(this.client);
@@ -31,20 +32,25 @@ class SupabaseContentRepository implements ContentRepository {
   Future<List<ContentItem>> searchContent(
     String query, {
     int limit = 30,
+    String? contentType,
   }) async {
     _limit(limit);
     final text = query.trim();
-    if (text.isEmpty) return [];
+    if (contentType != null && !contentTypeLabels.containsKey(contentType)) {
+      throw const FormatException('지원하지 않는 자료 유형이에요.');
+    }
+    if (text.isEmpty && contentType == null) return [];
     // PostgREST interprets * as a LIKE wildcard even inside quoted strings.
     if (text.length > 200 || text.contains('*')) {
       throw const FormatException('검색어는 200자 이내로 입력하고 * 문자는 제외해 주세요.');
     }
-    final tokens = text.split(RegExp(r'\s+'));
+    final tokens = text.isEmpty ? <String>[] : text.split(RegExp(r'\s+'));
     if (tokens.length > 8) throw const FormatException('검색어는 8단어 이내로 입력해 주세요.');
     var request = client
         .from('content_items')
         .select(projection)
         .eq('is_active', true);
+    if (contentType != null) request = request.eq('content_type', contentType);
     for (final token in tokens) {
       final literal = token
           .replaceAll(r'\', r'\\')

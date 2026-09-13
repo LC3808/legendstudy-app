@@ -69,10 +69,12 @@ D-Day는 실제 수능 날짜를 하드코딩하지 않는다. Day 5는 목표 �
 ### 자료
 
 search-centric header, 검색 입력, 카테고리 영역, 검색 결과를 제공한다.
-Day 5 카테고리 chip은 키워드 검색 진입점이며 실제 taxonomy filter가 아니다.
+Day 6 카테고리 chip은 실제 content_type 필터다. 검색어와 독립적으로 선택/해제하며
+모의고사·학습자료·논술·입시정보·교육칼럼과 전체를 제공한다.
 기존 제목/요약 검색과 explicit public projection을 유지한다.
 고급 시험 필터, 대학 metadata, subject taxonomy filter는 후속 범위다.
-상세는 제목/요약·loading/empty/error native 골격까지만 제공한다. PDF viewer는 후속 구현.
+상세는 단일 제목·실제 시험 metadata·요약·출처/날짜·resource 목록·외부 열기를 제공한다.
+Native PDF viewer는 후속 구현이다.
 
 ### 학습
 
@@ -158,3 +160,27 @@ route/IAP, timer/NEIS/OAuth/Ads/ingestion/DB 변경은 보류한다. MY 후원 �
 prominence를 높이지 않으며 향후 결제 기능 시 ListTile 전환을 검토할 수 있다.
 Day 6 exam metadata/resources가 필요하면 database.md와 실제 schema를 먼저
 확인하고 별도 변경 필요성을 보고한다. 이번 작업은 UI 진입 기반만 정리한다.
+
+
+## Day 6 실제 Materials / Search / Detail
+
+- Home 4개 shortcut: 모의고사(exam), 학습자료(study_material), 논술(university_essay),
+  입시정보(admissions_info). 검색어 치환 없이 Materials type 조건으로 이동한다.
+- Materials는 가로 스크롤 filter chip. 선택만 하면 해당 유형 목록, submit한 검색어가
+  있으면 keyword+type 조건. 전체 선택/선택 chip 해제는 type만 제거한다. 입력 clear는
+  query/results를 초기화하되 선택한 type은 유지하여 type-only 결과를 보여준다.
+  탭 전환/상세 복귀에서 query와 type을 보존한다. 학년/연월 filter는 추가하지 않는다.
+- Exam 카드의 보조행은 실제 고등학교 학년·월·calendar year·시험종류만 조합하고
+  NULL은 생략한다. academic_year는 calendar year로 대체하지 않는다. 일반 카드의
+  날짜 행은 유지한다. Detail은 학년도·실제 시험일·회차·교육과정도 있을 때만 표시한다.
+- Detail은 back AppBar + badge + 제목 한 번 + 조건부 metadata/summary/source/resource.
+  직접 진입해 back stack이 없으면 Materials로 돌아간다. root detail에는 하단 탭이 없다.
+- Resource는 실제 title/source_label 우선, 용도는 한글 표시. active mapped subject name
+  → historical raw label → 일반 자료 순서이며 taxonomy 누락으로 첨부를 숨기지 않는다.
+  첨부 0건은 정상이며 column/article에는 큰 empty panel을 만들지 않는다.
+- 원문/첨부는 시스템 외부 열기. landing_page는 source_url, 그 외 verified file_url 우선,
+  없으면 source_url. 실패 시 안전한 재시도 안내. 공개 contract에 link_status가 없어
+  broken/restricted를 분류할 수 없으므로 가용성 미확인 안내를 표시하고 성공 상태를
+  주장하지 않는다. 상태 기반 차단은 별도 contract 결정이 필요하다.
+- 모든 비동기 영역은 loading/empty/data/error/retry. 별도 feature 확장, DB 변경,
+  가짜 runtime 자료, 자동 로그인, bookmark UI 및 PDF viewer는 이번 범위가 아니다.

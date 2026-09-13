@@ -4,6 +4,7 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../domain/content_item.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import 'content_card.dart';
+import '../../exams/exam_providers.dart';
 
 class ContentResults extends StatelessWidget {
   const ContentResults({
@@ -30,11 +31,39 @@ class ContentResults extends StatelessWidget {
           : '자료를 불러오지 못했어요. 다시 시도해 주세요.',
       onRetry: onRetry,
     ),
-    data: (items) => items.isEmpty
-        ? EmptyState(emptyMessage)
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [for (final item in items) ContentCard(item)],
-          ),
+    data: (items) =>
+        items.isEmpty ? EmptyState(emptyMessage) : _ContentList(items),
   );
+}
+
+class _ContentList extends ConsumerWidget {
+  const _ContentList(this.items);
+  final List<ContentItem> items;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ids = items
+        .where((item) => item.contentType == 'exam')
+        .map((item) => item.id)
+        .join(',');
+    final state = ids.isEmpty ? null : ref.watch(examMetadataProvider(ids));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (state?.isLoading ?? false)
+          const Padding(
+            padding: EdgeInsets.all(8),
+            child: Center(
+              child: CircularProgressIndicator(semanticsLabel: '시험 정보 불러오는 중'),
+            ),
+          ),
+        if (state?.hasError ?? false)
+          ErrorState(
+            message: '시험 정보를 불러오지 못했어요.',
+            onRetry: () => ref.invalidate(examMetadataProvider(ids)),
+          ),
+        for (final item in items)
+          ContentCard(item, exam: state?.asData?.value[item.id]),
+      ],
+    );
+  }
 }

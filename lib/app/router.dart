@@ -43,6 +43,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/materials',
                 builder: (context, state) => MaterialsPage(
                   initialQuery: state.uri.queryParameters['q'] ?? '',
+                  initialType: state.uri.queryParameters['type'],
                 ),
               ),
             ],

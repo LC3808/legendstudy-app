@@ -27,6 +27,7 @@ class ShellContent implements ContentRepository {
   Future<List<ContentItem>> searchContent(
     String query, {
     int limit = 30,
+    String? contentType,
   }) async {
     queries.add(query);
     return [item];
@@ -109,7 +110,8 @@ void main() {
       await tester.tap(find.text('테스트 자료'));
       await tester.pumpAndSettle();
       expect(container.read(routerProvider).canPop(), isTrue);
-      expect(find.text('자료 상세'), findsOneWidget);
+      expect(find.text('테스트 자료'), findsOneWidget);
+      expect(find.text('자료 상세'), findsNothing);
       expect(find.byType(NavigationBar), findsNothing);
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
@@ -192,7 +194,10 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(find.text(entry.value), findsOneWidget);
-        expect(find.text('게시 2026.09.13'), findsOneWidget);
+        expect(
+          find.text('게시 2026.09.13'),
+          entry.key == 'exam' ? findsNothing : findsOneWidget,
+        );
         expect(find.text('자료 살펴보기'), findsNothing);
         expect(tester.takeException(), isNull);
       }

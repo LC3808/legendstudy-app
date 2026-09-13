@@ -4,10 +4,12 @@ import '../../../core/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
+import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
 
 class MaterialsPage extends ConsumerStatefulWidget {
-  const MaterialsPage({this.initialQuery = '', super.key});
+  const MaterialsPage({this.initialQuery = '', this.initialType, super.key});
+  final String? initialType;
   final String initialQuery;
   @override
   ConsumerState<MaterialsPage> createState() => _MaterialsPageState();
@@ -16,18 +18,25 @@ class MaterialsPage extends ConsumerStatefulWidget {
 class _MaterialsPageState extends ConsumerState<MaterialsPage> {
   final controller = TextEditingController();
   String query = '';
+  String? contentType;
+  String? validType(String? value) =>
+      contentTypeLabels.containsKey(value) ? value : null;
+  ContentFilter get filter => (query: query, contentType: contentType);
   @override
   void initState() {
     super.initState();
     query = widget.initialQuery;
+    contentType = validType(widget.initialType);
     controller.text = query;
   }
 
   @override
   void didUpdateWidget(covariant MaterialsPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.initialQuery != oldWidget.initialQuery) {
+    if (widget.initialQuery != oldWidget.initialQuery ||
+        widget.initialType != oldWidget.initialType) {
       query = widget.initialQuery;
+      contentType = validType(widget.initialType);
       controller.text = query;
     }
   }
@@ -88,27 +97,36 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
         ),
       ),
       const SectionHeader('자료 모아보기'),
-      Wrap(
-        spacing: 8,
-        children: [
-          for (final label in ['기출문제', '영어', '논술', '학습 자료'])
-            QuickFilterChip(
-              label,
-              onTap: () {
-                controller.text = label;
-                search();
-              },
-            ),
-        ],
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (final entry in <String?, String>{
+              null: '전체',
+              ...contentTypeLabels,
+            }.entries)
+              if (entry.key != 'other')
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: FilterChip(
+                    label: Text(entry.value),
+                    selected: contentType == entry.key,
+                    onSelected: (selected) => setState(
+                      () => contentType = selected ? entry.key : null,
+                    ),
+                  ),
+                ),
+          ],
+        ),
       ),
       const SectionHeader('검색 결과'),
-      if (query.isEmpty)
+      if (query.isEmpty && contentType == null)
         const Text('검색어를 입력해 주세요.')
       else
         ContentResults(
-          state: ref.watch(contentSearchProvider(query)),
+          state: ref.watch(filteredContentProvider(filter)),
           emptyMessage: '검색 결과가 없어요.',
-          onRetry: () => ref.invalidate(contentSearchProvider(query)),
+          onRetry: () => ref.invalidate(filteredContentProvider(filter)),
         ),
     ],
   );

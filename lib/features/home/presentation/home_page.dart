@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
+import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
 
 class HomePage extends ConsumerWidget {
@@ -29,13 +30,18 @@ class HomePage extends ConsumerWidget {
         spacing: 8,
         runSpacing: 4,
         children: [
-          for (final label in ['기출문제', '영어', '논술', '학습 자료'])
+          for (final type in [
+            'exam',
+            'study_material',
+            'university_essay',
+            'admissions_info',
+          ])
             QuickFilterChip(
-              label,
+              contentTypeLabels[type]!,
               onTap: () => context.go(
                 Uri(
                   path: '/materials',
-                  queryParameters: {'q': label},
+                  queryParameters: {'type': type},
                 ).toString(),
               ),
             ),

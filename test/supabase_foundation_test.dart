@@ -36,7 +36,11 @@ class FakeContentRepository implements ContentRepository {
   @override
   Future<List<ContentItem>> fetchRecentContent({int limit = 30}) => response;
   @override
-  Future<List<ContentItem>> searchContent(String query, {int limit = 30}) {
+  Future<List<ContentItem>> searchContent(
+    String query, {
+    int limit = 30,
+    String? contentType,
+  }) {
     lastQuery = query;
     return response;
   }

@@ -32,8 +32,20 @@ class _UnavailableContentRepository implements ContentRepository {
   Future<List<ContentItem>> searchContent(
     String query, {
     int limit = 30,
+    String? contentType,
   }) async => throw BackendUnavailable(message);
   @override
   Future<ContentItem?> fetchContentBySlug(String slug) async =>
       throw BackendUnavailable(message);
 }
+
+typedef ContentFilter = ({String query, String? contentType});
+final filteredContentProvider = FutureProvider.autoDispose
+    .family<List<ContentItem>, ContentFilter>(
+      (ref, filter) => filter.contentType == null
+          ? ref.watch(contentSearchProvider(filter.query).future)
+          : ref
+                .watch(contentRepositoryProvider)
+                .searchContent(filter.query, contentType: filter.contentType),
+      retry: (_, _) => null,
+    );

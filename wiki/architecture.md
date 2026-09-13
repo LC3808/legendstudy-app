@@ -217,3 +217,57 @@ Study is idle UI only; MY observes authStateProvider and leaves persistence/OAut
 school/support purchase unconnected. Saved presentation is reused under /my/saved.
 No school/meal/timer schema, API, ads SDK, IAP, notifications or ingestion is added.
 Shared layout/header/state/card widgets use the existing theme with refined tokens.
+
+
+## Day 6 Materials / Search / native Detail
+
+Parent ContentRepository keeps fetchRecentContent, searchContent and fetchContentBySlug.
+searchContent gains optional contentType: an allowlisted type applies an explicit eq
+predicate. Empty keyword with a type lists that type; keyword plus type combines both.
+No keyword/type returns empty (the UI prompts for a query or filter). Existing 200-char,
+8-token, asterisk rejection, literal LIKE escaping, 11-column projection, active flag,
+feed_updated_at DESC NULLS LAST/id DESC and 1..100 bounds remain intact. Materials
+retains a submitted query and independent type state across tabs/detail-back. Query
+entry stays submit-based; typing is not an automatic network search. Home shortcuts
+use the type query parameter; path/navigator/legacy redirect topology is unchanged.
+Directly opened detail with no back stack returns to Materials via its back action.
+
+ExamRepository fetches a bounded batch (up to 100 parent IDs) from the exact public
+exams projection. The list batches exam metadata once per parent page; non-exam
+parents do not trigger exam requests. Pure Dart ExamMetadata preserves separate
+calendar year and academic year; presentation omits NULLs and never infers fields
+from title, sort_date or historical taxonomy. The detail displays academic year,
+actual exam date, round and curriculum only when present. Missing metadata creates
+no empty line. Per-region loading/error/retry does not replace the parent content.
+
+ResourceRepository reads the exact public resources fields, including actual names
+file_extension and file_size. Explicit left embeds through resources_subject_same_content
+and exam_subjects_versioned_mapping fetch only granted occurrence/subject fields.
+No inner join or active-taxonomy predicate filters the resource result. Grouping
+preserves each occurrence ID, using active mapped name → raw_subject_label → 일반 자료.
+General resources are a separate group. display_order ASC/id ASC gives deterministic
+order; 100-row pages are fetched until the scoped resource list is complete. Concurrent
+changes are not claimed to provide snapshot pagination.
+
+Detail stays /materials/:slug on the root navigator with no bottom NavigationBar.
+One native title follows a neutral type badge; metadata, summary, actual source/time
+information, resources and 원문 보기 are rendered as applicable. Missing parent is
+자료를 찾을 수 없어요. Zero attachments is normal; columns avoid a large empty panel.
+No stored article body, PDF renderer, WebView, ingestion, bookmarks or personal writes.
+
+ExternalLinkButton uses an injected opener backed by url_launcher externalApplication.
+url_launcher 6.3.2 was already locked transitively; it is now a direct dependency,
+without package version/native plugin changes. Only HTTP(S) URLs with host and without
+userinfo/control characters are opened. landing_page always uses source_url;
+otherwise verified-by-ingestion file_url is preferred, then source_url. No filename,
+MIME or direct URL is guessed. False/exception launch results show a retryable safe
+message; OS acceptance is not proof of a working remote file. Native PDF viewing is
+left for its dedicated milestone.
+
+**Existing contract limitation:** resources.link_status and last_checked_at are private;
+RLS does not exclude broken/restricted rows by status. This client cannot identify or
+claim their health, and does not select those columns or change grants. Resource actions
+are labelled external links with availability explicitly unconfirmed; no download-success
+or available badge is shown. Guaranteed disabling of known broken/restricted links needs
+a separately reviewed public eligibility/status contract or trusted publication rule.
+This is an unresolved link-health capability, not a Day 6 schema change.
