@@ -1,10 +1,10 @@
 # Current Status
 
-Last reviewed: 2026-09-13
+Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Next stage: Day 8 Study.**
+**Day 7 = COMPLETE. Day 8 design / DB contract pending Product Owner approval.**
 
 Product Owner accepted the final runtime results. Repository/code and Wiki were
 checked before this documentation closeout. Live deployment/JWT/Flutter results
@@ -63,20 +63,23 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - This closeout changes documents only; Flutter tests/builds and production tests
   were not rerun. No Flutter, DB/schema/migration, secret or Auth-user changes.
 
-## Next: Day 8 Study — planned, not implemented
+## Next: Day 8 Study — design pending approval, not implemented
 
-The current Study page remains an idle timer/empty-history shell. Start the next
-stage with a scoped implementation plan and storage/platform capability review:
+[Study v1](study-v1.md) defines 8-A timer/state/guest/auth/Home/seven-day behavior,
+8-B platform-aware focus, 8-C mock countdown/notifications and 8-D later scoring.
+[Storage proposal](day-8-study-storage-proposal.md) includes reviewable SQL,
+preflight/catalog/rollback and real JWT acceptance plan outside migrations.
 
-- General study timer.
-- Today's cumulative study time, study history and recent seven days.
-- Focus / Do Not Disturb integration, subject to actual iOS/Android capabilities
-  and user-granted permissions; do not promise unsupported system control.
-- Mock-exam mode.
-- Subsequent design for automatic grading, scores and grade-level results.
+Recommended v1: durable local active timer, immutable terminal cloud sessions with
+validated active intervals; no live cross-device timer or automatic guest upload.
+Study shell and Home summary remain static; this task changes design/proposal only.
+Android DND requires policy access and own-rule lifecycle validation; iOS has manual
+Focus guidance, not a promised automatic global toggle. Focus preference stays local.
 
-Any new production storage follows the existing owner-review/application process.
-Day 8 has not started in this documentation task.
+Owner approval is required for the storage/time/aggregation contract and stage split.
+Then promote a new migration, Owner applies it, run real JWT acceptance, and implement
+8-A. No production call/deployment, Flutter implementation, push, PR or merge in this
+step. Static validation details are in the proposal; Day 8 is not COMPLETE.
 
 ## Long-term backlog — preserved for later planning
 

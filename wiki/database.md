@@ -5,7 +5,7 @@
 **Day 7 school migration also applied, per Product Owner report (2026-09-13).**
 20260913000100_profile_school_selection.sql adds the owner-only nullable NEIS pair,
 validated CHECK and authenticated column grants. See the profiles contract below.
-New school JWT/REST acceptance remains pending; Codex did not execute production SQL.
+School JWT/REST acceptance PASS is owner-reported in the Day 7 closeout; Codex did not execute production SQL.
 
 
 **INITIAL MIGRATION APPLIED.** The owner's post-deployment report confirms dedicated
@@ -507,3 +507,13 @@ and owner live JWT acceptance are distinct evidence. Owner confirms actual Flutt
 save/container-restore/edit/clear, account isolation, profile/school preservation and
 fixture cleanup PASS; Auth users retained. Day 7 COMPLETE. No further schema or
 migration change was made. See day-7-dday-storage-proposal.md for runtime markers.
+
+
+## Day 8 Study — proposal only, NOT DEPLOYED
+
+[Study storage proposal](day-8-study-storage-proposal.md) proposes a new owner-only
+study_sessions table and pure interval-validation helper. SQL remains outside
+supabase/migrations until approval. No Study table is claimed deployed; no production
+catalog query or SQL execution occurred in this design task. Applied Day 7 profile
+contracts, migrations and data remain unchanged. See the proposal for complete
+columns, PK/FK, CHECK, index, RLS/grants, validation, JWT acceptance and rollback.

@@ -31,3 +31,6 @@ This directory is the canonical long-term development knowledge base for LegendS
 There must be only one canonical `current-status.md` for the repository. Notion, chats, external documents, Claude notes, Manus reports, and ChatGPT plans may support the project, but they do not replace this repository-local wiki.
 
 - [D-Day storage — applied and runtime verified](day-7-dday-storage-proposal.md)
+
+- [Study v1 — Day 8 design and UI contract, approval pending](study-v1.md)
+- [Day 8 Study storage — SQL proposal, not deployed](day-8-study-storage-proposal.md)

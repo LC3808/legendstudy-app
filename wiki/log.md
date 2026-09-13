@@ -528,3 +528,23 @@ Flutter persistence smoke: PASS
 - Reconciled stale pending status in current-status and related Wiki references.
   Documents only; no Flutter/DB/production/migration/Auth change. Markdown link,
   unchanged SQL-block and diff checks PASS; tests/builds not rerun. No push/PR/merge.
+
+
+## 2026-09-14 — Day 8 Study architecture / DB contract proposal
+
+- Inspected local Day 7-complete checkout, Wiki, Study/Home/Auth code and all applied
+  migrations. Study remains disabled idle shell; no existing Study storage contract.
+- Proposed durable local running state plus immutable terminal cloud intervals,
+  clock/lifecycle/recovery, guest/account isolation, idempotent retries, Home and KST
+  seven-day totals. Documented concrete UI states for Claude review.
+- Included mock countdown/scoring extension boundaries and official Android/iOS
+  capability research. Device-local focus preference; no iOS global toggle promise.
+- Added SQL proposal, read-only preflight/catalog and destructive rollback reference,
+  with owner JWT/REST acceptance plan. No applied migration edits or production calls.
+- Day 7 remains COMPLETE; Day 8 design / DB contract pending Product Owner approval.
+  No Flutter/native/DB deployment, Study implementation, push, PR or merge. Existing
+  untracked supabase/.temp/ remains excluded. Static checks recorded in proposal.
+- Static validation PASS: SQL and PL/pgSQL parser, proposal scope, unchanged applied
+  migration bytes, Wiki links, added credential-pattern scan and git diff --check.
+  Parser uses PG 18.4 grammar; production PG 17.6 execution compatibility remains
+  an owner deployment gate. Flutter tests/builds and live checks were not rerun.

@@ -284,13 +284,28 @@ contains no account identifiers. Guests keep only process-memory selection.
 
 SchoolRepository returns pure Dart School/Meal entities. NeisSchoolRepository is a
 Flutter adapter to the dedicated LegendStudy Edge Function, not a client containing
-NEIS credentials. The prepared function permits only school search, identifier
+NEIS credentials. The deployed function permits only school search, identifier
 lookup and one-date meal reads with bounded inputs/projections/timeouts. No DB or
-Auth admin client. Deployment/key setup/live acceptance remain pending; see
-wiki/day-7-neis.md. Sample-only access is never silently used by the real app.
+Auth admin client. Deployment/key setup and owner-reported live acceptance are
+complete; see day-7-neis.md. Sample-only access is never silently used by the real app.
 
 Home's local meal region consumes school/date-dependent Riverpod state; other Home
 content remains independent. Korea date comes from UTC+9 and is checked every 30s.
 Same selected school/date reuses the provider result; selection/date changes or
 explicit retry refresh. Auth change invalidates school/meal state. Existing
 StatefulShellRoute topology and Day 6 contracts are unchanged.
+
+
+## Day 8 Study architecture — proposed, not implemented
+
+Canonical proposal: [Study v1](study-v1.md) and [storage](day-8-study-storage-proposal.md).
+StudyController owns one device-local active timer independently of navigation;
+StudyClock provides continuous elapsed time; transactional local draft/history/outbox
+survives restart. Cloud stores immutable terminal interval snapshots only, with
+session-derived ownership, idempotent UUID insertion and stale-account guards.
+Shared interval aggregation feeds Study and the compact Home summary. Profiles,
+school, D-Day, content and existing auth contracts remain unchanged.
+
+No timer persistence/native Focus/scoring code has been added. Product Owner approval,
+owner migration and actual JWT validation precede 8-A implementation. Platform focus
+and mock notifications are separate capability gates; Day 7 remains COMPLETE.
