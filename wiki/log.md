@@ -440,3 +440,37 @@
   catalog checks → actual JWT/REST pair and other-field preservation acceptance.
   Home remains session-only until authenticated repository work is approved and verified.
   No production SQL/data mutation, push, PR or merge. Existing CLI .temp excluded.
+
+
+## 2026-09-13 — Owner D-Day migration application report
+
+- Owner confirms production D-Day migration and pre/post checks completed:
+  profile_rows 0→0, digest unchanged, populated_targets=invalid_pairs=0.
+  DB preparation STOP released. No SQL executed by Codex.
+- Dedicated tool/verify_day_target_jwt.py prepared. Uses actual login JWTs,
+  narrow save/clear payloads and owner-only fixture cleanup; no service credentials.
+  Hidden terminal password entry supported. Python syntax/diff checks PASS.
+- Awaiting external credentials or owner execution result. D-Day JWT acceptance,
+  Flutter persistence and runtime smoke are NOT yet verified. Flutter remains
+  session-only; no feature commit, push, PR or merge at this checkpoint.
+
+
+## 2026-09-13 — D-Day JWT preflight diagnostics fix
+
+- Owner independently confirmed A/B login and empty profile reads plus migrated
+  target fields, validated CHECK and grants. Do not infer a DB/account defect from
+  the old generic preflight failure message.
+- Verifier now reports A/B login status, profile read status/count, named identity/
+  shape/empty checks, safe HTTP/JSON/TLS/timeout failure codes; unknown acceptance
+  failures retain source-line identifiers. No response bodies, tokens or headers printed.
+- Input/returned email case and surrounding whitespace normalized while retaining
+  pinned account identity. User UUID/token shape validated. Entire SELECT/filter
+  query encoded together; A and B empty checks no longer short-circuit silently.
+- --preflight-only performs authentication and reads, with no profile mutations.
+  Full mode retains cleanup of only this run's registered profiles and auth-user retention.
+- 12 offline regression tests PASS, including healthy preflight, malformed responses,
+  TLS/status diagnostics, non-disclosure, existing-row refusal and uncertain-write
+  cleanup. Python syntax, credential scan, unchanged migrations and diff check PASS.
+- Exact production failure cause remains unconfirmed without rerun diagnostics.
+  No production request/SQL/user change performed in this debugging task. Flutter
+  persistence remains gated on real JWT acceptance. No push, PR or merge.

@@ -483,3 +483,14 @@ future authorized pre-publication inspection. It detects missing reverse existen
 it adds no DB constraint/trigger. The report does not state whether this exact query
 was run; empty post-cleanup tables do not prove earlier publication completeness. Inspection has 16
 SELECT statements; parser PASS still does not establish actual runtime correctness.
+
+
+### D-Day target migration — owner-applied, JWT verification pending
+
+Owner reports production application of 20260913000200_profile_day_target.sql:
+nullable target_date DATE / target_label TEXT and profiles_target_pair CHECK.
+Pre/post profile_rows=0, unchanged existing-profile digest, populated_targets=0,
+invalid_pairs=0; all supplied preflight/migration/catalog queries executed by owner.
+Codex did not execute SQL. Finite past dates remain allowed; paired NULLs clear the
+value. Authenticated column grants extend existing profile ownership RLS.
+Actual D-Day JWT/REST and authenticated Flutter persistence are still pending.

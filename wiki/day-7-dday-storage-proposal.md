@@ -1,4 +1,4 @@
-# D-Day storage — final migration prepared / NOT APPLIED
+# D-Day storage — owner reports applied / JWT verification pending
 
 Home UI through 058c3e6 is owner-approved. The owner requested the final migration
 stage; production execution remains owner-only. No deployment approval is inferred
@@ -229,3 +229,15 @@ PASS. Static checks are not production execution or JWT/RLS acceptance evidence.
 
 References: [PostgreSQL CHECK semantics](https://www.postgresql.org/docs/17/ddl-constraints.html),
 [PostgREST REST/upsert](https://docs.postgrest.org/en/v14/references/api/tables_views.html).
+
+
+## Owner application report / implementation gate released
+
+Owner confirms production execution of the final migration and all supplied
+pre/post queries: two nullable date/text fields, pair CHECK, profile_rows 0→0,
+unchanged digest, populated_targets=0 and invalid_pairs=0. Codex did not apply SQL.
+The DB STOP is released; next gate is actual JWT/REST PASS before Flutter changes.
+Dedicated tool/verify_day_target_jwt.py is prepared with hidden interactive password
+entry or an external account JSON. Uses owner-specified A/B @legendstudy.com accounts,
+refuses preexisting profiles and cleans only its fixtures; no Auth users deleted.
+Actual execution and persistence runtime remain pending, not PASS.
