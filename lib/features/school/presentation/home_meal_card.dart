@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../school_providers.dart';
+import 'neis_attribution.dart';
 
 class HomeMealCard extends ConsumerWidget {
   const HomeMealCard({super.key});
@@ -66,12 +67,29 @@ class HomeMealCard extends ConsumerWidget {
           Text(title, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           body,
-          TextButton(
-            onPressed: () => context.push('/my/school'),
-            child: const Text('학교 설정'),
+          Row(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                    ),
+                    onPressed: () => context.push('/my/school'),
+                    child: const Text('학교 설정'),
+                  ),
+                ),
+              ),
+              if (!school.isLoading && school.value != null)
+                const Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: NeisAttribution(),
+                  ),
+                ),
+            ],
           ),
-          if (!school.isLoading && school.value != null)
-            const Text('출처: 교육부·시도교육청 / NEIS', style: TextStyle(fontSize: 12)),
         ],
       ),
     );

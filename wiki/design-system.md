@@ -135,3 +135,14 @@ Loading spinners are centered to avoid stretching under list width constraints.
 Material NavigationBar remains: all four tabs have outlined/filled icon pairs;
 Materials uses article_outlined/article. Labels use selected w700 vs normal w400,
 with a restrained #FFE3B0 indicator. System body fonts remain unchanged.
+
+
+## Day 7 compact NEIS attribution
+
+Home places 출처: NEIS at the right of the existing school-setting action row,
+using 12sp secondary text and no separate source block/spacer. Preserve attribution
+visibility only with a selected school. School setup footer uses the short label
+출처: 교육부·시도교육청 NEIS in a natural secondary position without extra padding.
+Both are TextButtons with >=48×48 touch targets, system text scaling and a short
+native source dialog. Longer scaled labels may wrap within the shared action row;
+never shrink text scaling or clip the explanation to fit. No new card/section.

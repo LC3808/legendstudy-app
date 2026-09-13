@@ -4,6 +4,7 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
+import '../../school/presentation/neis_attribution.dart';
 
 class SchoolPage extends ConsumerStatefulWidget {
   const SchoolPage({super.key});
@@ -159,8 +160,10 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             ),
           ),
         ],
-        const SizedBox(height: 16),
-        const Text('학교·급식 정보 출처: 교육부·시도교육청 / 나이스 교육정보 개방 포털'),
+        const Align(
+          alignment: Alignment.centerRight,
+          child: NeisAttribution(label: '출처: 교육부·시도교육청 NEIS'),
+        ),
       ],
     );
   }

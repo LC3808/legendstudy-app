@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 7 school/meal implementation prepared; owner reports DB deployment, live proxy/JWT acceptance pending**
+**Day 7 runtime closeout in progress; owner reports JWT/proxy/guest PASS, compact attribution UI verified**
 
 ## Verified state
 
@@ -58,14 +58,15 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Complete Day 7 real JWT A/B storage/isolation acceptance using owner-provided
-   external test-account config; no account credentials have been provided for this run.
-2. Owner reviews/deploys the prepared NEIS Edge Function with NEIS_API_KEY stored
-   server-side, then verifies real guest/authenticated Flutter school and meal reads.
-   Do not ship an app-bundled NEIS key or treat sample responses as production access.
-3. Confirm Day 7 acceptance before declaring Day 8 ready. OAuth, timer, public
-   resource link_status eligibility and PDF viewer remain separate milestones.
-4. Local commits only; no push, PR or merge is authorized.
+1. Finish the remaining Day 7 runtime gate. Owner has reported actual JWT/RLS
+   storage and fixture cleanup PASS, server secret registration, neis deployment,
+   deployed school/meal/empty smoke and Flutter guest search/selection/Home empty PASS.
+   These are owner-reported results, not newly rerun during attribution refinement.
+2. Distinguish authenticated Flutter persistence verification from the completed
+   REST/JWT harness before declaring the full gate complete. Resolve local CLI
+   metadata cleanup separately; do not commit supabase/.temp/.
+3. OAuth, timer, public resource link_status eligibility and PDF viewer remain
+   separate milestones. Local commits only; no push, PR or merge authorized.
 
 ## Known open questions
 
@@ -571,3 +572,20 @@ integration code; see Day 4-A below for the current client verification boundary
 
 - Final repository checks: credential-pattern and exact external publishable-key
   scans PASS; applied migration bytes unchanged; git diff --check PASS.
+
+
+## Day 7 compact NEIS attribution UI
+
+- Home retains the existing attribution visibility condition: no school means
+  no attribution. For a selected school, secondary 12sp 출처: NEIS shares the
+  school-setting action row on the right. No extra block or vertical spacer.
+- School setup uses right-aligned 출처: 교육부·시도교육청 NEIS without the old
+  16px spacer/long body copy. Both source buttons keep >=48×48 touch bounds and
+  open a short dismissible native source dialog. No external navigation required.
+- Analyze PASS; 85 Flutter tests PASS including all existing NEIS/School tests and
+  eight layout/dialog cases. At 360×640, footer/card height is unchanged for no
+  school; data/empty decreases 18 logical px at 1× and 40 at 2× in widget tests.
+  Minimum touch bounds, same-row placement and dialog open/close pass at both scales.
+- UI only: no proxy/key/repository/storage/schema/policy/parsing/meal-state/cache/
+  date change. No runtime-gate completion claim. Existing CLI .temp metadata is
+  left untouched and excluded from the refinement commit. git diff --check PASS.

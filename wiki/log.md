@@ -361,3 +361,15 @@
 
 - Final repository checks: credential-pattern and exact external publishable-key
   scans PASS; applied migration bytes unchanged; git diff --check PASS.
+
+
+## 2026-09-13 — Compact NEIS attribution UI
+
+- Moved Home source to the right of the school action in the same row; original
+  no-school visibility retained. School footer now uses short secondary/meta copy.
+- Shared >=48×48 source button opens a concise native explanation with close action.
+- Analyze and 85 Flutter tests PASS; 360×640 at 1×/2× covers Home no-school/data/
+  empty, school setup, touch bounds and dialog. Existing card height unchanged
+  when unset; reduced by 18px/40px for selected-school data/empty in layout tests.
+- UI-only refinement; data/API/storage/state logic unchanged. diff --check PASS.
+  Existing untracked supabase/.temp/ excluded. No push, PR or merge.
