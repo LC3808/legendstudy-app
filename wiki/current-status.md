@@ -631,3 +631,19 @@ integration code; see Day 4-A below for the current client verification boundary
   height verified. Analyze PASS, all 95 Flutter tests PASS, diff check PASS.
 - UI only; session storage, calendar rules and pending DB approval remain unchanged.
   Platform builds not repeated for this typography-only change. No push/PR/merge.
+
+
+## D-Day final migration prepared — NOT APPLIED
+
+- Owner approved Home UI and requested the migration stage. Added new migration
+  20260913000200_profile_day_target.sql; neither existing migration was modified.
+  Historical proposal retained, final execution/validation/rollback SQL and dedicated
+  save/clear contract documented in day-7-dday-storage-proposal.md.
+- Nullable finite date + trimmed 1–80-character label pair; authenticated column
+  grants only, existing ownership RLS reused. No current_date-dependent CHECK.
+- Migration/preflight/catalog/rollback parser PASS; embedded file identity, original
+  migration bytes, credential scan and diff check PASS. No Flutter code change.
+- Production applied: NO. Next: owner preflight → owner SQL Editor execution →
+  catalog checks → actual JWT/REST pair and other-field preservation acceptance.
+  Home remains session-only until authenticated repository work is approved and verified.
+  No production SQL/data mutation, push, PR or merge. Existing CLI .temp excluded.
