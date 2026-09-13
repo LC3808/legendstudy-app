@@ -1,12 +1,30 @@
-# D-Day storage — applied / JWT accepted / Flutter runtime pending
+# D-Day storage — production applied / JWT and Flutter runtime PASS
 
-Home UI through 058c3e6 is owner-approved. The owner requested the final migration
-stage; production execution remains owner-only. No deployment approval is inferred
-from a prepared file. No SQL or production data changes were made by Codex.
+## Final acceptance (2026-09-13)
 
-2026-09-13 read-only REST evidence from the proposal stage: target_date/target_label
-projection returned 42703. Re-run the preflight below immediately before applying.
-Project: LegendStudy / stlhijzpjfgwwdgunlsd only. The Home editor remains session-only.
+Product Owner reports production migration, D-Day JWT/REST acceptance and actual
+Flutter persistence smoke PASS. Day 7 is COMPLETE; next stage is Day 8 Study.
+Repository acceptance code and reported markers were compared in this documentation
+closeout; no production verification was rerun or SQL executed by Codex.
+Authenticated persistence is implemented; guests remain session-memory only.
+Historical SQL/preflight/rollback below are retained for reference, not instructions
+to reapply an already-applied migration. Project: stlhijzpjfgwwdgunlsd only.
+
+```text
+DDAY_RUNTIME PASS login_preflight
+DDAY_RUNTIME PASS home_save
+DDAY_RUNTIME PASS container_restore
+DDAY_RUNTIME PASS home_edit
+DDAY_RUNTIME PASS account_switch
+DDAY_RUNTIME PASS home_clear
+DDAY_RUNTIME PASS profile_school_preserved
+DDAY_RUNTIME PASS fixture_cleanup
+DDAY_RUNTIME PASS auth_users_retained
+Flutter persistence smoke: PASS
+```
+
+Save / container restore / edit / clear, account isolation and profile/school field
+preservation passed. Test profile cleanup passed; Auth users were retained.
 
 Final migration: `supabase/migrations/20260913000200_profile_day_target.sql`.
 The original `supabase/proposals/profile_day_target.sql` is retained as historical
@@ -28,11 +46,11 @@ Existing initial and school migrations remain byte-identical.
   No new policy, no anon grant, no service_role change.
 - Existing `id,display_name,grade_level` upserts and NEIS pair updates omit these
   columns and remain valid. School update must preserve D-Day and vice versa.
-  Future D-Day repository must PATCH only the pair (or conflict upsert restricted
-  to supplied columns), never null omitted profile/school fields accidentally.
-- Guest has no database persistence. Authenticated persistence is NOT yet coded.
+  The D-Day repository sends only target fields (plus id for save), never omitted
+  profile/school fields as NULL.
+- Guest has no database persistence. Authenticated persistence is implemented and runtime-verified.
 
-## Dedicated repository contract — design only, not implemented
+## Dedicated repository contract — implemented and verified
 
 - `fetchCurrentTarget() -> DayTarget?`: no caller-supplied user ID. Signed out returns
   null. Signed in SELECT only id,target_date,target_label WHERE id=current auth user.
@@ -51,7 +69,7 @@ Existing initial and school migrations remain byte-identical.
 - Existing profile upsert includes only id,display_name,grade_level; school upsert
   includes only id,neis_office_code,neis_school_code. Keep these payloads unchanged.
   The updated_at trigger may advance on client writes; business fields must not.
-- No RPC/new RLS/service role required. No Flutter persistence code changes now.
+- No RPC/new RLS/service role required. Implementation lives under lib/features/home/.
 
 ## Migration SQL — one transaction, owner execution only
 
@@ -164,7 +182,7 @@ select count(*) as profile_rows,
 from public.profiles p;
 ```
 
-## Actual JWT / REST acceptance — not yet run
+## Actual JWT / REST acceptance — PASS (owner-reported procedure)
 
 Use owner-controlled A/B users, passwords entered locally without shell history.
 Obtain each access token through POST /auth/v1/token?grant_type=password with the
@@ -200,7 +218,7 @@ corresponding owner's JWT, only for profiles confirmed absent before this run.
 Verify own GET returns []; retain Auth users. Do not reuse tool/verify_school_jwt.py
 as D-Day evidence: it tests the school contract only. SQL Editor SET ROLE is not
 an alternative to these real JWT/REST checks. Flutter authenticated persistence
-remains unimplemented and must be separately verified after migration acceptance.
+is implemented; its separate runtime acceptance is recorded in the final results above.
 
 ## Rollback — owner only, after rollback approval
 
@@ -236,11 +254,11 @@ References: [PostgreSQL CHECK semantics](https://www.postgresql.org/docs/17/ddl-
 Owner confirms production execution of the final migration and all supplied
 pre/post queries: two nullable date/text fields, pair CHECK, profile_rows 0→0,
 unchanged digest, populated_targets=0 and invalid_pairs=0. Codex did not apply SQL.
-The DB STOP is released; next gate is actual JWT/REST PASS before Flutter changes.
+The DB STOP was released; subsequent JWT/REST and Flutter runtime gates have passed.
 Dedicated tool/verify_day_target_jwt.py is prepared with hidden interactive password
 entry or an external account JSON. Uses owner-specified A/B @legendstudy.com accounts,
 refuses preexisting profiles and cleans only its fixtures; no Auth users deleted.
-Actual execution and persistence runtime remain pending, not PASS.
+Actual JWT/REST acceptance and Flutter persistence runtime subsequently passed.
 
 
 ## Current acceptance and Flutter implementation
@@ -248,7 +266,7 @@ Actual execution and persistence runtime remain pending, not PASS.
 Owner reports D-Day JWT/REST acceptance PASS, fixture cleanup PASS, Auth users
 retained. DB STOP and JWT implementation gate are released. The dedicated Flutter
 repository/provider/editor are implemented and tested; actual authenticated Flutter
-runtime verification is still pending, not PASS.
+runtime verification PASS is confirmed by the final owner-provided markers above.
 
 ### Execute actual iOS Flutter smoke locally
 
@@ -268,7 +286,7 @@ login (no new production password-login UI). It exercises actual Home editor sav
 edit and clear; rebuilds the app ProviderContainer against the same live session
 and checks restoration; logs A out and mounts B's real session to check isolation;
 compares profile name/grade/NEIS fields and cleans only its created profile.
-This proves state reconstruction if it passes, not OS process-restart refresh-token
+The reported PASS proves state reconstruction, not OS process-restart refresh-token
 persistence. Normal product OAuth runtime remains a separate gate.
 
 Both profiles must be absent before writes. If either exists the test refuses to
@@ -278,4 +296,4 @@ fixture_cleanup PASS and auth_users_retained PASS before declaring completion.
 If cleanup is unconfirmed, inspect/clean only the known test profile before rerun.
 
 Offline: 107 Flutter tests PASS, analyze PASS, Android/iOS builds PASS; 13 Python
-runner/verifier tests PASS. Actual Flutter smoke: NOT RUN pending local credentials.
+runner/verifier tests PASS. Actual Flutter smoke: PASS (owner-run final report).

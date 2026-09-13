@@ -489,3 +489,42 @@
   Authenticated Flutter runtime NOT RUN without owner credentials. No fixtures
   created this turn; prior JWT cleanup PASS is owner-reported. No COMPLETE claim.
 - Local feature commit only; no push, PR or merge. Existing CLI .temp excluded.
+
+
+## 2026-09-13 — Day 7 final runtime closeout / COMPLETE
+
+- Checked actual codex/day-7-school-neis checkout, feature code, acceptance markers
+  and current Wiki before editing. Product Owner supplied final real Flutter smoke
+  PASS; results recorded as owner-run evidence, not rerun by Codex in this docs task.
+- Day 7 School + NEIS Meals COMPLETE: production school migration and real JWT/RLS
+  storage/ownership checks accepted; server-only NEIS secret, deployed proxy search/
+  meal/empty and Flutter guest search/selection/Home empty runtime PASS.
+- Home UI refinement COMPLETE. D-Day production migration, JWT/REST acceptance and
+  actual Flutter persistence runtime PASS: save, container restore, edit, clear,
+  account switch isolation and profile/school field preservation.
+- Fixture cleanup PASS; Auth users retained. Restore evidence is ProviderContainer
+  reconstruction, not an assertion of OS process restart or OAuth runtime testing.
+
+```text
+DDAY_RUNTIME PASS login_preflight
+DDAY_RUNTIME PASS home_save
+DDAY_RUNTIME PASS container_restore
+DDAY_RUNTIME PASS home_edit
+DDAY_RUNTIME PASS account_switch
+DDAY_RUNTIME PASS home_clear
+DDAY_RUNTIME PASS profile_school_preserved
+DDAY_RUNTIME PASS fixture_cleanup
+DDAY_RUNTIME PASS auth_users_retained
+Flutter persistence smoke: PASS
+```
+
+- Day 7 = COMPLETE; next stage = Day 8 Study. Planned: general timer, today's total /
+  study history / recent seven days, platform-capability-aware focus/DND integration,
+  mock-exam mode, then automatic-grading/score/grade feature design. No Day 8 code yet.
+- Preserved long-term backlog: Admissions Engine / 수시 prediction, university
+  official calculation rules, admissions data collection/normalization, official
+  service-page maintenance, Privacy/Terms/Support/Account deletion and potential
+  prediction web service. Routine detail was not added to decisions.md.
+- Reconciled stale pending status in current-status and related Wiki references.
+  Documents only; no Flutter/DB/production/migration/Auth change. Markdown link,
+  unchanged SQL-block and diff checks PASS; tests/builds not rerun. No push/PR/merge.

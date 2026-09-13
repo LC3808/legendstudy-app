@@ -19,7 +19,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `architecture.md` — app/system architecture
 - `database.md` — data model and Supabase policy
 - `day-7-school-storage-proposal.md` — school persistence migration, owner deployment report and validation/rollback reference
-- `day-7-neis.md` — server-key policy, prepared proxy deployment and pending live acceptance
+- `day-7-neis.md` — server-key policy, deployed proxy and completed runtime acceptance
 - `ingestion.md` — legendstudy.com ingestion strategy
 - `ui-ux-v1.md` — approved UI/UX v1.1 canonical implementation specification; required before UI changes
 - `design-system.md` — visual identity and UI design tokens
@@ -30,4 +30,4 @@ This directory is the canonical long-term development knowledge base for LegendS
 
 There must be only one canonical `current-status.md` for the repository. Notion, chats, external documents, Claude notes, Manus reports, and ChatGPT plans may support the project, but they do not replace this repository-local wiki.
 
-- [D-Day storage proposal — approval required](day-7-dday-storage-proposal.md)
+- [D-Day storage — applied and runtime verified](day-7-dday-storage-proposal.md)

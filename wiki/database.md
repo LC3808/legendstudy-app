@@ -485,7 +485,7 @@ was run; empty post-cleanup tables do not prove earlier publication completeness
 SELECT statements; parser PASS still does not establish actual runtime correctness.
 
 
-### D-Day target migration — owner-applied, JWT verification pending
+### D-Day target migration — owner-applied, JWT and Flutter runtime PASS
 
 Owner reports production application of 20260913000200_profile_day_target.sql:
 nullable target_date DATE / target_label TEXT and profiles_target_pair CHECK.
@@ -493,7 +493,7 @@ Pre/post profile_rows=0, unchanged existing-profile digest, populated_targets=0,
 invalid_pairs=0; all supplied preflight/migration/catalog queries executed by owner.
 Codex did not execute SQL. Finite past dates remain allowed; paired NULLs clear the
 value. Authenticated column grants extend existing profile ownership RLS.
-Actual D-Day JWT/REST and authenticated Flutter persistence are still pending.
+Owner confirms actual D-Day JWT/REST and authenticated Flutter persistence runtime PASS.
 
 
 ### D-Day JWT acceptance and Flutter repository
@@ -503,5 +503,7 @@ Auth users retained. Production migration and RLS are now accepted for client us
 Flutter SupabaseDayTargetRepository sends only id,target_date,target_label on save,
 only target_date/target_label NULL on clear PATCH, and never deletes profiles.
 Existing profile/school payloads are unchanged; mock-transport payload preservation
-and owner live JWT acceptance are distinct evidence. Actual authenticated Flutter
-persistence smoke remains pending. No further schema/migration change was made.
+and owner live JWT acceptance are distinct evidence. Owner confirms actual Flutter
+save/container-restore/edit/clear, account isolation, profile/school preservation and
+fixture cleanup PASS; Auth users retained. Day 7 COMPLETE. No further schema or
+migration change was made. See day-7-dday-storage-proposal.md for runtime markers.
