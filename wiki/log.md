@@ -187,3 +187,26 @@
 - diff check, credential scan, local-config/signing ignore checks and initial
   migration byte comparison: PASS. No Supabase SQL, remote push or merge performed.
 - Next: local configured smoke, then Claude UI/UX v1 specs → Codex UI implementation.
+
+## 2026-09-13 — Day 4-A final actual Flutter smoke
+
+- Continued from clean 033ec66 on codex/day-4-supabase-foundation.
+- Expanded the opt-in iOS test to observe actual Home/Browse loading-to-empty,
+  active Auth subscription and all signed-out personal repository read/write paths.
+- Real Supabase initialization PASS; dedicated LegendStudy content GET x3 HTTP 200,
+  empty content_items as expected; Home/Browse empty and Auth signedOut PASS.
+- Fixed test-harness subscription lifetime after a timeout; no production code fix
+  was needed. Read-only host/path/method guard prevents DB writes; transport logs
+  only status/count. Local public key never enters source/fixtures/Wiki/logs/Git.
+- No SQL/schema/migration, data insert, OAuth test, UI redesign, push or merge.
+- Next after Day 4-A merge: Day 5 approved Claude UI/UX v1.1, planned canonical
+  wiki/ui-ux-v1.md; start with 홈 · 자료 · 학습 · MY shell in a separate task.
+
+- Final regression: flutter pub get/analyze PASS; 18 unit/widget tests PASS;
+  one actual iOS integration smoke PASS. Android debug and iOS simulator debug
+  builds PASS. Configured normal app installed/launched separately; Home empty
+  screenshot visually checked with no settings/network error.
+- git diff --check, credential-pattern scan, exact supplied-key scan and local
+  config ignore checks PASS. Initial migration byte-identical; only integration
+  test and these two Wiki documents changed. No credentials committed.
+- No remaining blocker; local follow-up commit only, no push/merge.

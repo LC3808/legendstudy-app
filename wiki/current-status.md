@@ -4,7 +4,7 @@ Last reviewed: 2026-09-13
 
 ## Phase
 
-**Day 4-A Flutter–Supabase foundation implemented locally; real connection smoke awaits local publishable-key injection**
+**Day 4-A foundation and actual LegendStudy Flutter smoke verified; ready for review/merge**
 
 ## Verified state
 
@@ -58,9 +58,10 @@ Last reviewed: 2026-09-13
 
 ## Immediate next steps
 
-1. Inject the dedicated public client config locally and run the opt-in Flutter
-   connection smoke; expected content_items result is [] without fixture creation.
-2. Claude UI/UX v1 design → Codex implementation in a separate UI task.
+1. Review/merge Day 4-A after owner confirmation; no push/merge performed here.
+2. After merge, Day 5 implements the approved Claude UI/UX v1.1 starting with
+   홈 · 자료 · 학습 · MY shell. Its planned canonical specification is
+   wiki/ui-ux-v1.md; this task does not create or implement that design.
 3. Later: login UI/OAuth, ingestion and source validation, signing/store registration
    and original brand assets within separately agreed scopes.
 
@@ -89,11 +90,11 @@ Last reviewed: 2026-09-13
 - APP_ENV/SUPABASE_URL/SUPABASE_PUBLISHABLE_KEY via Dart defines; local config
   ignored; only public client config, never backend secrets.
 - `flutter analyze`: passed with no findings.
-- `flutter test`: 4 passed (startup/all tabs, direct route/error recovery,
-  360×640 display at 2× text scaling, config default/provider override).
+- `flutter test`: 18 passed, including routing/large-text/configuration and
+  repository/Auth/UI state tests; one separate actual iOS integration smoke passed.
 - `flutter doctor -v`: all installed toolchains reported healthy.
-- Supabase initial schema is applied; Flutter connection code is implemented, but
-  live Flutter access is not yet verified without local config. No ingestion exists.
+- Supabase initial schema is applied; actual Flutter initialization and public
+  reads are verified in the final smoke below. No ingestion exists.
 
 ## Historical Day 1 platform verification (2026-09-12)
 
@@ -264,8 +265,8 @@ integration code; see Day 4-A below for the current client verification boundary
   recent touch sends only user_id/content_item_id. List reads are capped at 100.
 - Home/Browse show loading/empty/error/data and search input without navigation,
   brand or card redesign. Saved/Profile UI and login/OAuth remain future work.
-- No local public key was available. Actual Supabase.initialize and remote []
-  result are not claimed. Opt-in integration_test/supabase_smoke_test.dart is ready;
+- At the initial implementation commit no local public key was available, so
+  actual initialization/read was pending; the final smoke below closes that gap. Opt-in integration_test/supabase_smoke_test.dart is ready;
   existing Day 3 runtime results remain owner-reported, not re-run by Flutter tests.
 - DB schema, migrations and ingestion unchanged; no Supabase SQL, push or merge.
 
@@ -279,11 +280,43 @@ integration code; see Day 4-A below for the current client verification boundary
   and lockfile committed. No signing identity or release secret introduced.
 - iPhone 17 Pro / iOS 26.5: installed and launched com.legendstudy.app; screenshot
   inspected, both missing config fields shown, existing four-tab shell intact.
-- Actual configured initialization/content_items [] smoke: NOT RUN, local publishable
-  key/config unavailable. This is the only remaining connection-verification blocker.
+- At initial implementation, configured smoke was NOT RUN due to missing local
+  public config. Superseded by the successful final smoke below.
 - git diff --check, credential-pattern scan and ignored config/signing checks: PASS.
   No server keys, real JWTs or passwords found; service_role mentions in docs/SQL
   are role names/security policy, not credentials. Unit sessions are synthetic.
 - Initial migration byte-identical to Day 3; SHA-256
   2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b.
 - Local commit only; no push/merge. Next: local smoke and Claude UI/UX v1 → Codex UI.
+
+## Day 4-A final actual Supabase smoke (2026-09-13)
+
+- Base implementation commit: 033ec667b20b0bf3e0fa47a8ece335d2a0af79e2.
+  Same codex/day-4-supabase-foundation branch; initial worktree verified clean.
+- Actual Supabase.initialize PASS on iPhone 17 Pro / iOS 26.5. Dedicated target
+  stlhijzpjfgwwdgunlsd.supabase.co; public key injected from a temporary local
+  define file, never source, fixture, Wiki, logs or Git.
+- Actual ContentRepository GET /rest/v1/content_items PASS, 0 rows as expected.
+  Read-only transport verifies the dedicated host/path/method and HTTP 200 for
+  three requests (direct repository, Home, Browse search); no headers/tokens logged.
+- Home and Browse: loading → empty PASS. Browse uses submitted search text to
+  exercise the real repository; empty query correctly shows its input prompt.
+  Transport gating makes loading observable; all responses come from the real DB.
+- Auth signedOut PASS with an active provider subscription, matching UI usage.
+  Initial test harness awaited an unobserved provider and timed out; keeping its
+  subscription fixed the harness. Production Auth implementation is unchanged.
+- Signed-out profile/bookmark/recent reads return null/[]/false; all tested writes
+  raise SignedOutException without any network request or crash. No automatic login.
+- No SQL, inserts, schema/migration changes or UI/UX implementation. Only public
+  read requests were sent. This smoke does not re-query all ten tables or verify
+  OAuth providers; the owner's ten-table zero-row baseline is preserved by no writes.
+  No school/meal/timer database is introduced.
+
+- Final regression: flutter pub get/analyze PASS; 18 unit/widget tests PASS;
+  one actual iOS integration smoke PASS. Android debug and iOS simulator debug
+  builds PASS. Configured normal app installed/launched separately; Home empty
+  screenshot visually checked with no settings/network error.
+- git diff --check, credential-pattern scan, exact supplied-key scan and local
+  config ignore checks PASS. Initial migration byte-identical; only integration
+  test and these two Wiki documents changed. No credentials committed.
+- No remaining blocker; local follow-up commit only, no push/merge.
