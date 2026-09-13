@@ -165,3 +165,25 @@
 - Documentation validation: git diff --check and the offline schema checker pass;
   initial migration verified byte-identical to the Day 3 main merge. No SQL executed.
 - Next: Day 4 Flutter ↔ Supabase connection; Flutter remains unconnected now.
+
+## 2026-09-13 — Day 4-A Flutter–Supabase foundation
+
+- Started from post-deployment main 5af7905 on codex/day-4-supabase-foundation.
+- Added SDK-compatible supabase_flutter 2.15.4, explicit public config validation,
+  awaited initialization and injectable client/Auth/repository providers. Existing
+  Riverpod/go_router versions preserved; test-only http/integration_test added.
+- Content uses exact public projection, source-time feed ordering, bounded escaped
+  title/summary search and nullable slug reads. Personal repositories enforce current
+  session ownership and narrow profile/bookmark/recent payload contracts.
+- Home/Browse display minimal loading/empty/error/data/search; no UI redesign,
+  login/OAuth, ingestion, DB schema or migration change. Signed-out personal calls
+  are safe (empty reads, typed rejected writes without network).
+- AGENTS/CLAUDE and Wiki align Claude UI/UX leadership with Codex implementation.
+- pub get/analyze and 18 tests (14 new): PASS. Android/iOS simulator debug builds
+  PASS; Android NDK 27 required by native plugins. CocoaPods configuration added.
+- Installed/launched iPhone 17 Pro iOS 26.5; config-missing screen visually verified.
+  Real LegendStudy init/read smoke NOT RUN: no local publishable key/config supplied.
+  Opt-in read-only integration test prepared; no test login or fixture creation.
+- diff check, credential scan, local-config/signing ignore checks and initial
+  migration byte comparison: PASS. No Supabase SQL, remote push or merge performed.
+- Next: local configured smoke, then Claude UI/UX v1 specs → Codex UI implementation.

@@ -6,7 +6,10 @@ has real behavior, and `data/` for implementations, DTOs and remote/local source
 Presentation may depend on domain; data implements domain contracts. Domain must
 not import Flutter or backend SDKs. Compose implementations through Riverpod.
 
-The Day 1 shell has no data or business rules; empty repositories and speculative
-models are intentionally deferred until content requirements are verified.
+Day 4-A content/domain owns ContentItem and ContentRepository; content/data maps
+explicit public projections. personal/domain and personal/data own profile, bookmark
+and recent-view contracts/implementations. Providers inject dependencies and expose
+content AsyncValue states. AuthStatus contains user identity only, never JWTs.
+Home/Browse consume those boundaries; Saved/Profile presentation is still deferred.
 Shared UI lives in `lib/shared/widgets`; application composition in `lib/app`;
 configuration and design tokens in `lib/core`.

@@ -16,8 +16,8 @@ The repository-local `wiki/` directory is the official long-term development kno
 
 ## 2026-09-12 — Agent role split
 
-- Codex: main coder
-- Claude: support coder / code reviewer
+- Codex: main coder + implementation lead (updated Day 4-A)
+- Claude: UI/UX lead + support coder / code reviewer (updated Day 4-A)
 - ChatGPT: planning, architecture, specification, review
 - Manus: execution, Git/build/deployment support; Supabase direct work only when specifically useful
 - User: final product decisions and default direct executor of Supabase SQL/migrations
@@ -162,3 +162,13 @@ user JWT contexts. SQL Editor SET ROLE is not authoritative client-path evidence
 for this project because editor session behavior may differ. Distinguish owner-
 reported runtime results, structural policy review and tests directly performed
 by an agent; never promote a structural check into unreported behavioral coverage.
+
+## 2026-09-13 — UI/UX and implementation ownership
+
+Claude leads app-wide information architecture, screen hierarchy, interaction flow
+and design-system refinement, and reviews Codex UI implementation. Codex remains
+the implementation lead for Flutter/data/state/repositories/integration, tests and
+builds, including implementation of Claude's specifications. ChatGPT retains
+planning/architecture/specification/review/coordination; Manus operations support;
+the owner retains final product/scope decisions and default SQL execution.
+Day 4-A establishes minimal data states only; no final screen/card design is adopted.

@@ -3,9 +3,9 @@
 ## Baseline direction
 
 Planned client: Flutter mobile app for iOS and Android.
-Backend: dedicated LegendStudy Supabase is deployed for normalized data and Auth; Flutter integration remains Day 4 work.
+Backend: dedicated LegendStudy Supabase is deployed for normalized data and Auth; Flutter integration foundation is implemented; live connection verification requires local config.
 
-The Flutter shell is implemented below; the backend schema is applied but Flutter is not connected. Always verify `wiki/current-status.md` and the repository.
+The Flutter shell is implemented below; the backend schema is applied and Flutter connection code is present. Always verify `wiki/current-status.md` and the repository.
 
 ## High-level components
 
@@ -34,7 +34,7 @@ The app should consume structured records rather than parse the website during n
 
 ## Environments
 
-The owner-approved production app identifier is `com.legendstudy.app` on Android and iOS. The dedicated backend is LegendStudy (`stlhijzpjfgwwdgunlsd`, Seoul ap-northeast-2, PostgreSQL 17.6), separate from Muselry. Flutter backend configuration, signing, OAuth and store registration remain pending.
+The owner-approved production app identifier is `com.legendstudy.app` on Android and iOS. The dedicated backend is LegendStudy (`stlhijzpjfgwwdgunlsd`, Seoul ap-northeast-2, PostgreSQL 17.6), separate from Muselry. Flutter local public configuration, signing, OAuth and store registration remain pending.
 
 ## Implemented Day 1 scaffold (2026-09-12)
 
@@ -79,18 +79,18 @@ are present and the Flutter launcher icons remain unchanged.
 `appConfigProvider`; this is a configuration extension point, not a working
 backend/flavor switch. Use `--dart-define-from-file=config/development.json` from
 the committed example. Local configs are ignored; client defines are never a
-safe place for secrets. No backend keys are currently used or needed.
+safe place for secrets. Day 4-A extends this configuration as described below.
 
 Package references: [Riverpod](https://pub.dev/packages/flutter_riverpod/versions/3.3.2)
 and [go_router](https://pub.dev/packages/go_router/versions/17.0.0).
 
 
-## Day 3 unified data boundary — deployed backend, Flutter not integrated
+## Day 3 unified data boundary — backend contracts
 
 The owner reports the dedicated Supabase initial schema applied and REST/JWT
 runtime tests completed for the cases in database.md. Supabase is the deployed
 backend source of truth; all 10 application tables are empty after fixture cleanup. database.md defines entities/security; ingestion.md defines source
-classification, reprocessing and quarantine. No Flutter/SDK integration exists.
+classification, reprocessing and quarantine. Day 4-A implements the client foundation below.
 
 The app's public primary entity is **content_items**. source_posts is backend-only
 provenance/ingestion metadata. exams is an optional exam-type extension with shared
@@ -140,10 +140,59 @@ notification infrastructure is added. Notifications remain a later v1.0 mileston
 
 ### Post-deployment boundary
 
-Deployment facts are owner-reported; this docs task did not reconnect to Supabase.
-RLS client-path validation uses real REST/JWT, not SQL Editor SET ROLE. Preserve
-the applied initial migration; future DB changes require new migrations. Day 4
-adds supabase_flutter, URL/publishable-key configuration, initialization, public
-ContentRepository reads with explicit projections, Auth sessions and personal
-repositories. No service_role/secret key may enter Flutter. No such code is added
-by this documentation update.
+Day 3 deployment facts are owner-reported. RLS client validation uses REST/JWT;
+SQL Editor SET ROLE is not authoritative. Initial migration bytes are immutable;
+future DB changes require new migration files. Day 4-A executes no SQL.
+
+## Day 4-A Flutter integration and UI handoff
+
+`main` initializes Flutter binding, validates AppConfig, awaits Supabase.initialize
+and injects the client into ProviderScope. Supabase.instance is accessed only at
+that composition root. appConfigProvider, supabaseClientProvider and repositories
+are independently overrideable. Config accepts only the dedicated HTTPS project
+URL and a publishable key, supplied via compile-time defines. Missing settings and
+startup errors render explicit safe states, including in production; no fake data
+or dummy backend is installed. No keys or raw SDK errors are logged by app code.
+
+`content/domain` defines the public 11-field ContentItem and repository interface.
+`content/data` is the SDK implementation. Home recentContentProvider and Browse
+contentSearchProvider expose AsyncValue<List<ContentItem>>: loading, empty, data,
+error, with explicit retry; screens never query Supabase directly. Search submits
+on button/keyboard action, trims empty input and clears visible results when input
+is cleared. Up to 8 tokens/200 characters, each title OR summary, AND between tokens;
+LIKE literal escapes and PostgREST quoted values prevent grammar injection. Asterisk
+is rejected because of its wildcard alias. Limits are 1..100; default 30. Feed sort
+is feed_updated_at DESC NULLS LAST/id DESC. Slug lookup returns null when invisible.
+No nested resource/detail UI, advanced filter, taxonomy or pagination UI yet.
+
+`authStateProvider` maps SDK initial/session events into AuthStatus(userId), with
+isAuthenticated distinguishing signed-out from authenticated. Raw tokens are never
+part of UI state. AsyncError represents subscription failure. This foundation adds
+no login UI, automatic test-user login, social providers or anonymous Auth users.
+
+Personal interfaces/implementations are injected by profileRepositoryProvider,
+bookmarkRepositoryProvider and recentViewRepositoryProvider. Each call derives the
+owner from the current SDK session; no user ID parameter or cached owner. Signed-out
+reads return null/[]/false, writes throw SignedOutException before network. Consumers
+must handle that outcome and AsyncError. Queries explicitly filter owner and select
+only needed columns. Profile writes use id/display_name/grade_level and conflict id;
+bookmark saves use ignore-duplicates on the user/content pair; recent merge-upserts
+send only that pair, never id/viewed_at. Personal lists sort by server time/id and
+are bounded to 100; pagination and joined content hydration are future work. Hidden
+content entries retain contentItemId for later unavailable-item UI/deletion.
+
+Claude's UI contract: content loading/empty/data/error; Auth signed-out/authenticated
+plus async loading/error; bookmark isBookmarked supplies saved/unsaved and caller
+tracks mutation loading/error; recent repository supplies list/empty. In future
+personal UI, observe Auth changes and invalidate per-user state, discard results
+from a prior user and clear on sign-out. No personal screen cache is introduced now.
+Claude leads UI/UX; Codex implements its specs. Existing tabs, brand and typography
+remain intact; Home/Browse add only data-state widgets/input.
+
+Android main manifest declares INTERNET; NDK 27.0.12077973 satisfies native plugin
+requirements. CocoaPods files integrate native plugins.
+Package versions and build/connection evidence live in current-status.md. Real
+backend smoke is opt-in via local public config; unit tests use fake repositories
+and mock HTTP with synthetic sessions, never a real password/JWT. No service_role
+or secret key belongs in Flutter; publishable keys are public, extractable client
+values whose access is constrained by RLS/grants.

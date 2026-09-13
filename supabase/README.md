@@ -7,7 +7,8 @@ Dedicated project: **LegendStudy**, ref `stlhijzpjfgwwdgunlsd`, Seoul
 `ap-northeast-2`, PostgreSQL **17.6**; separate from Muselry.
 
 This documentation records owner-provided runtime evidence, not new database
-queries by the documentation agent. Flutter remains unconnected. Do not execute
+queries by the documentation agent. Day 4-A now supplies Flutter connection code;
+see wiki/current-status.md for its separate live smoke verification status. Do not execute
 SQL or deployment commands as part of this docs task. The applied initial migration
 is immutable, including its historical DRAFT comments; future DB changes require
 new migration files. Do not replay the initial migration.
@@ -160,6 +161,6 @@ checker merely to accommodate a failure.
   January 1 → NULL rule. Retain numeric range CHECKs and test every fallback path.
 
 All three remain unused contingency designs. They do not change the deployed
-schema. Next is Day 4 Flutter integration: supabase_flutter, URL/publishable key,
-initialization, explicit-projection anonymous ContentRepository reads and session/
-personal repositories. Never put service_role credentials in Flutter.
+schema. Day 4-A implements supabase_flutter, URL/publishable-key injection,
+initialization, explicit-projection ContentRepository reads and session/personal
+repositories; configured live smoke is tracked in wiki/current-status.md. Never put service_role credentials in Flutter.

@@ -8,7 +8,8 @@ plugins {
 android {
     namespace = "com.legendstudy.app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // Required by the Supabase transitive native plugins.
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
