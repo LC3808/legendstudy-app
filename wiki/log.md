@@ -720,3 +720,18 @@ Flutter persistence smoke: PASS
 - No production request/application/fixture, Flutter scoring, scraping or real key import.
   Day8-D1 migration package prepared / Owner approval pending; Day8-D NOT COMPLETE.
   Day8-B/8-C physical gates pending. No Push/PR/Merge.
+
+
+## 2026-09-14 — Day 8-D1 current-version submission guard
+
+- Owner confirmed scoring migration remains unapplied. Updated that migration's new
+  submission path and INSERT guard to require current published key/cutoff; scope
+  matching unchanged. Existing same-ID/same-request retries retain historical results.
+- Added key/cutoff v1 -> v2 regressions proving stale new submissions reject, current
+  versions succeed and prior snapshots/scores/grades remain unchanged. Original19 +2
+  local groups and37 vectors PASS; static grammar/credential/package/diff checks PASS.
+- Native PostgreSQL17.6 independent READ COMMITTED sessions:7 concurrency groups PASS,
+  covering actual lock waits, current switches in both orders, idempotency, competing
+  current uniqueness and publication/edit races. Private cluster and fixtures removed.
+- Migration/package/proposal/acceptance and related Wiki synchronized. No production
+  SQL, Flutter implementation, real key input, Push/PR/Merge. Owner final review pending.

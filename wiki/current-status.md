@@ -179,6 +179,10 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Preflight/Postflight/guarded rollback are full SQL blocks. Local PostgreSQL17.5
   synthetic validation and static checks PASS; no production SQL/JWT/REST executed.
   Profile/school/D-Day preserved in local fixtures; no production fixtures created.
+- Pre-production review correction: NEW attempts require current published key and
+  optional compatible current cutoff; identical historical retries retain old versions.
+  Migration/package/proposal/acceptance synchronized. 21 PostgreSQL local groups,
+  37 vectors and seven native PostgreSQL17.6 concurrency groups PASS.
 - Shared synthetic scoring vectors prepared for future Dart parity. Flutter scoring,
   ingestion and real key publication are not implemented/performed.
 - Next: Owner reviews/approves package -> Owner production application -> actual JWT/RPC

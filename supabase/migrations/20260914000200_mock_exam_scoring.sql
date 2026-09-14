@@ -359,11 +359,11 @@ begin
   end if;
   perform 1 from public.answer_key_versions k join public.exam_subjects es on es.id=k.exam_subject_id
     join public.content_items c on c.id=k.content_item_id
-    where k.id=new.answer_key_version_id and k.status='published' and es.is_active and c.is_active
+    where k.id=new.answer_key_version_id and k.status='published' and k.is_current and es.is_active and c.is_active
     for share of k,es,c;
   if not found then raise exception 'KEY_UNAVAILABLE' using errcode='23514'; end if;
   if new.grade_cutoff_version_id is not null then
-    perform 1 from public.grade_cutoff_versions where id=new.grade_cutoff_version_id and status='published' for share;
+    perform 1 from public.grade_cutoff_versions where id=new.grade_cutoff_version_id and status='published' and is_current for share;
     if not found then raise exception 'CUTOFF_UNAVAILABLE' using errcode='23514'; end if;
   end if;
   if new.study_session_id is not null then
@@ -468,18 +468,21 @@ begin
     if prior.user_id <> owner_id then raise exception 'ATTEMPT_CONFLICT' using errcode='23505'; end if;
     normalized := public.scoring_normalize_answers(p_answers,prior.question_count);
   else
-    select * into k from public.answer_key_versions where id=p_answer_key_version_id and status='published' for share;
+    -- New submissions require the current published key; the lock serializes demotion.
+    select * into k from public.answer_key_versions
+      where id=p_answer_key_version_id and status='published' and is_current for share;
     if not found then raise exception 'KEY_UNAVAILABLE' using errcode='23514'; end if;
     normalized := public.scoring_normalize_answers(p_answers,k.question_count);
   end if;
   request := jsonb_build_object('study_session_id',p_study_session_id,'key',p_answer_key_version_id,
     'cutoff',p_grade_cutoff_version_id,'engine',p_scoring_version,'answers',normalized);
+  -- Existing identical retries keep their original key/cutoff, even after a current switch.
   if prior.id is not null then
     if prior.request_payload <> request then raise exception 'ATTEMPT_CONFLICT' using errcode='23505'; end if;
     return public.fetch_own_mock_attempt(prior.id);
   end if;
   if p_grade_cutoff_version_id is not null then
-    select * into g from public.grade_cutoff_versions where id=p_grade_cutoff_version_id and status='published'
+    select * into g from public.grade_cutoff_versions where id=p_grade_cutoff_version_id and status='published' and is_current
       and exam_subject_id=k.exam_subject_id and paper_variant=k.paper_variant and max_score=k.max_score for share;
     if not found then raise exception 'CUTOFF_UNAVAILABLE' using errcode='23514'; end if;
   end if;

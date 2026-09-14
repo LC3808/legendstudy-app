@@ -562,3 +562,9 @@ columns/RLS/grants, content/resources and prior migrations are unchanged.
 Local PostgreSQL17.5 application/pre/post/rollback and synthetic scoring/RLS simulation
 PASS. Production (reported17.6) application and real JWT/RPC remain pending. No production
 request, source import or Flutter scoring implementation. Day8-D NOT COMPLETE.
+
+Day8-D1 pre-production current-version correction: new scoring submissions require
+current published key and optional compatible current cutoff, including INSERT guard.
+Existing identical attempt retries and stored snapshots/version references remain
+unchanged after current switches. Package is still NOT APPLIED; local regression and
+native PostgreSQL17.6 independent-session concurrency checks PASS.

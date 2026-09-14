@@ -13,6 +13,10 @@ SET NULL(study_session_id), zero new rows, all previous row and metadata digests
 (except explicitly excluded additive Study unique). Catalog checks are not real JWT proof.
 For large future datasets schedule the all-row baseline hashes outside busy periods.
 
+New submissions require current published key and optional compatible current cutoff.
+Existing identical attempt retries retain historical versions and results. The migration
+is still not applied; use this corrected package for Owner review.
+
 ## 1. Preflight — read only
 
 Source: [mock_exam_scoring_preflight.sql](../supabase/verification/mock_exam_scoring_preflight.sql)
@@ -441,11 +445,11 @@ begin
   end if;
   perform 1 from public.answer_key_versions k join public.exam_subjects es on es.id=k.exam_subject_id
     join public.content_items c on c.id=k.content_item_id
-    where k.id=new.answer_key_version_id and k.status='published' and es.is_active and c.is_active
+    where k.id=new.answer_key_version_id and k.status='published' and k.is_current and es.is_active and c.is_active
     for share of k,es,c;
   if not found then raise exception 'KEY_UNAVAILABLE' using errcode='23514'; end if;
   if new.grade_cutoff_version_id is not null then
-    perform 1 from public.grade_cutoff_versions where id=new.grade_cutoff_version_id and status='published' for share;
+    perform 1 from public.grade_cutoff_versions where id=new.grade_cutoff_version_id and status='published' and is_current for share;
     if not found then raise exception 'CUTOFF_UNAVAILABLE' using errcode='23514'; end if;
   end if;
   if new.study_session_id is not null then
@@ -550,18 +554,21 @@ begin
     if prior.user_id <> owner_id then raise exception 'ATTEMPT_CONFLICT' using errcode='23505'; end if;
     normalized := public.scoring_normalize_answers(p_answers,prior.question_count);
   else
-    select * into k from public.answer_key_versions where id=p_answer_key_version_id and status='published' for share;
+    -- New submissions require the current published key; the lock serializes demotion.
+    select * into k from public.answer_key_versions
+      where id=p_answer_key_version_id and status='published' and is_current for share;
     if not found then raise exception 'KEY_UNAVAILABLE' using errcode='23514'; end if;
     normalized := public.scoring_normalize_answers(p_answers,k.question_count);
   end if;
   request := jsonb_build_object('study_session_id',p_study_session_id,'key',p_answer_key_version_id,
     'cutoff',p_grade_cutoff_version_id,'engine',p_scoring_version,'answers',normalized);
+  -- Existing identical retries keep their original key/cutoff, even after a current switch.
   if prior.id is not null then
     if prior.request_payload <> request then raise exception 'ATTEMPT_CONFLICT' using errcode='23505'; end if;
     return public.fetch_own_mock_attempt(prior.id);
   end if;
   if p_grade_cutoff_version_id is not null then
-    select * into g from public.grade_cutoff_versions where id=p_grade_cutoff_version_id and status='published'
+    select * into g from public.grade_cutoff_versions where id=p_grade_cutoff_version_id and status='published' and is_current
       and exam_subject_id=k.exam_subject_id and paper_variant=k.paper_variant and max_score=k.max_score for share;
     if not found then raise exception 'CUTOFF_UNAVAILABLE' using errcode='23514'; end if;
   end if;
@@ -807,5 +814,20 @@ PGLITE_MODULE=/tmp/legendstudy-scoring-pg/node_modules/@electric-sql/pglite/dist
 
 Use the existing `supabase/review/requirements.txt` (pglast8.4) in a local Python venv,
 then `python supabase/review/check_scoring_storage.py` for grammar/scope/package checks.
-The local role simulation is not real Auth/JWT acceptance. Parallel sessions, REST/RPC
-schema cache, real source verification and future Dart engine parity remain separate gates.
+The local role simulation is not real Auth/JWT acceptance. The existing 19 regression
+groups plus two current-version groups PASS (21); all 37 scoring vectors PASS.
+
+Native concurrency reproduction on this macOS arm64 host (test dependencies outside repo):
+
+```sh
+npm install --prefix /tmp/legendstudy-scoring-native --ignore-scripts @embedded-postgres/darwin-arm64@17.6.0-beta.15 pg@8.16.3
+(cd /tmp/legendstudy-scoring-native/node_modules/@embedded-postgres/darwin-arm64 && node scripts/hydrate-symlinks.js)
+SCORING_PG_BIN=/tmp/legendstudy-scoring-native/node_modules/@embedded-postgres/darwin-arm64/native/bin SCORING_PG_MODULE=/tmp/legendstudy-scoring-native/node_modules/pg/lib/index.js node tool/test_scoring_concurrency.mjs
+```
+
+The runner creates/removes its own private /tmp cluster, disables TCP, and accepts no
+production DSN. PostgreSQL17.6 independent READ COMMITTED sessions: seven groups PASS,
+including overlapping retry, both key/cutoff switch orders, competing current versions
+and publication/edit races. It observes pg_blocking_pids before releasing the competing
+transaction, rather than inferring concurrency from elapsed time. Real REST/RPC schema
+cache, source verification and future Dart engine parity remain separate gates.

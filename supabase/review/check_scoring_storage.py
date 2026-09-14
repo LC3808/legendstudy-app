@@ -35,6 +35,10 @@ def check(sql):
     assert "'unavailable','estimated','confirmed'" in sql
     assert 'auth.uid()' in sql and 'pg_advisory_xact_lock' in sql
     assert 'for share' in sql and 'draft_revision=draft_revision+1' in sql
+    assert "where id=p_answer_key_version_id and status='published' and is_current for share" in sql
+    assert "where id=p_grade_cutoff_version_id and status='published' and is_current" in sql
+    assert "k.status='published' and k.is_current" in sql
+    assert "where id=new.grade_cutoff_version_id and status='published' and is_current" in sql
     assert 'grant execute on function public.submit_mock_attempt(uuid,uuid,uuid,uuid,text,jsonb) to authenticated;' in sql
     for name in ['scoring_question_guard','scoring_publication_guard','scoring_attempt_guard','scoring_answer_guard','scoring_attempt_consistency']:
         assert f'revoke all on function public.{name}() from public,anon,authenticated,service_role;' in sql
@@ -59,7 +63,7 @@ def main():
     # Value signatures only; documentation words/role identifiers are not credentials.
     files=[MIGRATION,*[ROOT/f'supabase/verification/mock_exam_scoring_{n}.sql' for n in ['preflight','postflight','rollback']],
         ROOT/'wiki/day-8-scoring-migration-package.md',ROOT/'wiki/day-8-scoring-storage-proposal.md',
-        ROOT/'tool/test_scoring_storage.mjs',ROOT/'supabase/review/mock_scoring_vectors.json']
+        ROOT/'tool/test_scoring_storage.mjs',ROOT/'tool/test_scoring_concurrency.mjs',ROOT/'supabase/review/mock_scoring_vectors.json']
     patterns=[r'sb_(?:secret|publishable)_[A-Za-z0-9_-]{16,}',r'eyJ[A-Za-z0-9_-]{16,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+',r'-----BEGIN (?:RSA |EC )?PRIVATE KEY-----']
     for f in files:
         assert not any(re.search(p,f.read_text()) for p in patterns),f'credential signature: {f.name}'

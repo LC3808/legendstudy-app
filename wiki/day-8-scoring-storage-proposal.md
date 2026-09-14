@@ -42,9 +42,10 @@ operator review must exclude credential-bearing URLs and verify complete officia
 No raw private ingestion evidence is exposed through public column grants.
 
 Published answers/points/scope/source/evidence cannot change or be deleted. Correction
-creates a new version. Superseded means published with is_current=false; still usable
-by pinned clients. Withdrawn versions reject new submission but existing results and
-identical retries remain readable. A partial UNIQUE permits at most one current version
+creates a new version. Superseded means published with is_current=false. New submissions
+require status=published AND is_current=true for both key and any selected cutoff.
+Non-current/withdrawn versions remain valid references for historical results and identical
+existing-attempt retries, but cannot create a new attempt. A partial UNIQUE permits at most one current version
 per occurrence/variant; version switch demotes old current and promotes new in one
 backend transaction. Conflicts fail atomically, never choose an arbitrary version.
 
@@ -60,9 +61,13 @@ Any paper not wholly representable stays timer_only; no partial score rescaling.
 
 Question edits bump the draft parent revision. This forces row-version conflicts with
 concurrent publication even at repeatable-read isolation; released children reject edits.
-Submission locks pinned key/cutoff and active parent rows against withdrawal during scoring.
-Partial current indexes protect concurrent current selection. Real multi-connection race
-acceptance is still required; the in-memory local runner serializes operations.
+Submission locks current published key/cutoff and active parent rows through commit.
+If submission obtains the lock first, demotion waits for submission commit. If the
+current switch wins, the waiting new request rechecks current and rejects the stale UUID.
+Existing attempts return through the idempotency path before current-version checks.
+Partial current indexes prevent simultaneous current promotions. Independent native
+PostgreSQL17.6 READ COMMITTED sessions verified both lock orders, retries and publication
+races; PGlite alone is not that concurrency evidence.
 
 content_digest is server SHA256 of UTF-8 PostgreSQL JSONB text containing immutable
 header evidence (excluding operational status/current/revision/create/publish fields) and
@@ -98,8 +103,10 @@ p_grade_cutoff_version_id, p_scoring_version, p_answers)`:
 1. Requires auth.uid(); no arbitrary user_id/score/grade/time arguments.
 2. Serializes same UUID with transaction advisory lock. Same owner/id/normalized input
    returns prior immutable result; different payload or foreign owner returns conflict.
-3. Requires engine mcq5-v1 and published complete pinned key. Optional cutoff must match
-   occurrence/variant/max_score and be published. Superseded is usable, withdrawn is not.
+3. For a NEW attempt: engine mcq5-v1, complete key with status=published AND
+   is_current=true. Optional cutoff must also be current/published and match
+   occurrence/variant/max_score. The INSERT guard repeats these requirements.
+   Existing identical retries do not revalidate current/publication status.
 4. Input is <=100 objects, each exactly {question_number,choice}; choice NULL or integer
    1..5. Missing questions normalize to blank. Unknown fields/numbers, duplicates, string
    numbers/fractions/unsupported input reject. Client scores cannot be smuggled in.
@@ -183,16 +190,21 @@ Production acceptance after Owner deploy (actual A/B JWT, never SET ROLE evidenc
 3. A POST `/rest/v1/rpc/submit_mock_attempt` with six named p_* arguments above, own
    optionally linked completed mock Study, mixed right/wrong/blank answers. Compare actual
    stored rows/each awarded point and result, not HTTP alone. Test no-cutoff grade NULL,
-   applicable boundaries and independent cutoff compatibility.
+   applicable boundaries and independent cutoff compatibility. Initial current key/cutoff
+   v1 must successfully create an attempt; retain the exact response and request.
 4. Reject malformed/duplicate/unsupported answers, unknown engine/key, unpublished key,
    foreign cutoff/variant/session and any raw_score/user_id/grade extra RPC parameter.
    Direct INSERT/UPDATE also denied. Fresh keys must be complete before publication.
 5. B GET/DELETE A attempt: empty/no effect; B reads no A answers, cannot attach A Study.
    Re-read A intact. Same-id retry identical; changed input conflict. Run concurrent retry
    and publish/edit races with separate local database connections before release.
-6. Version2 publish does not rewrite version1 result. Withdrawn key rejects new attempts
-   while old owned results and identical retry work. Use approved real content updates,
-   not destructive production edits solely to run a test.
+6. Switch key v1 -> v2: a NEW attempt using published/non-current v1 rejects; current
+   v2 succeeds. Same old attempt ID + identical v1 request returns unchanged score,
+   snapshots and pinned versions. Repeat independently for cutoff v1 -> v2 with a
+   current key: non-current cutoff rejects new attempt, current cutoff succeeds, old
+   retry preserves its original cutoff/grade. Changed-payload retry still conflicts.
+   Withdrawn versions also reject new attempts while historical reads/retries survive.
+   Use approved real content changes, not destructive production edits solely for testing.
 7. Delete run-created linked Study as A: attempt survives with NULL link, owner/answers/
    scores unchanged; identical retry works. Delete run-created attempt: answers cascade,
    unrelated Study/profile untouched. Delete only UUIDs registered by this run.
@@ -207,9 +219,18 @@ migrations, then new migration/pre/post; validates rollback/reapply, mixed scori
 publication and immutability, role-simulated isolation, generated values, malformed inputs,
 version pinning, Study unlink, preservation and shared vectors. Safe in-memory synthetic
 fixtures disappear when the database closes. Production is reported PG17.6; this is a
-same-major local engine, not Supabase/PostgREST/JWT or multi-process concurrency evidence.
+same-major local engine, not Supabase/PostgREST/JWT evidence. The original 19 groups
+plus two key/cutoff-current regression groups PASS (21 total); all 37 vectors PASS.
+`tool/test_scoring_concurrency.mjs` additionally creates a private native PostgreSQL17.6
+cluster with TCP disabled and independent connections. Seven groups PASS: overlapping
+idempotent retries, key and cutoff switches in both lock orders, competing current
+promotions and question/publication races in both orders. Cluster/fixtures removed after
+execution. It accepts no production DSN; real Supabase JWT/RPC remains a separate gate.
 
 No production application, real JWT/RPC, Dart parity, scoring UI or real key ingestion
 performed. Day8-D1 migration package prepared / Owner approval pending. After approval,
 Owner executes the package; actual JWT acceptance precedes Flutter scoring implementation.
+A key/cutoff becoming non-current before the first cloud submit now rejects the pending
+result; future clients retain the local result and require explicit recovery. Never
+automatically replace pinned versions or rewrite scores to make a retry succeed.
 Day8-B/8-C physical-device gates remain pending. No Push/PR/Merge.

@@ -107,8 +107,10 @@ current selection; never silently rewrite old attempt82 ->85. Old results retain
 original versions and show that a correction exists when known. Explicit regrading
 is later work; no automatic UPDATE of immutable attempts or silent cutoff upgrade.
 A cutoff-only correction also creates a new version; historic missing grade stays
-missing. Withdrawn key forbids new server submission until an explicit recovery
-choice; existing results remain readable with a review warning.
+missing. NEW server submissions require current published key and optional cutoff;
+non-current or withdrawn pinned versions require explicit recovery. Existing identical
+attempt retries and historical results keep their original versions, score and snapshots.
+No automatic upgrade/regrade is permitted when a locally pinned version becomes stale.
 
 Pure Dart domain service (proposed, no implementation) accepts typed QuestionSet,
 UserAnswers, nullable GradeRule and supported ScoringVersion. It returns totalPossible,

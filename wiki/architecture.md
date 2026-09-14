@@ -371,3 +371,9 @@ Future local draft locks at logical timeUp, commits time/result outbox together 
 uploads linked Study before attempt; owner epochs prevent stale-account writes.
 Attempts never double-count Study aggregate time. Current migration is local-tested,
 not production-applied. Owner approval/application/JWT acceptance precede scoring UI.
+
+Day8-D1 pre-production current-version correction: new scoring submissions require
+current published key and optional compatible current cutoff, including INSERT guard.
+Existing identical attempt retries and stored snapshots/version references remain
+unchanged after current switches. Package is still NOT APPLIED; local regression and
+native PostgreSQL17.6 independent-session concurrency checks PASS.

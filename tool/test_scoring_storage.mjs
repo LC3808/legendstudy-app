@@ -137,9 +137,29 @@ try {
  pass('shared_synthetic_vectors');
  const v2=uuid(13);await draft(v2,2);
  await db.query('insert into public.exam_questions select $1,question_number,answer_type,correct_answer,points from public.exam_questions where answer_key_version_id=$2',[v2,key]);
+ await db.query('update public.exam_questions set correct_answer=2 where answer_key_version_id=$1 and question_number=1',[v2]);
  await reject(()=>publish(v2),['23505']);
  await db.query('update public.answer_key_versions set is_current=false where id=$1',[key]);await publish(v2);
- assert.equal((await requestA(()=>rpc())).rows[0].result.raw_score,2);
+ await reject(()=>requestA(()=>rpc(uuid(17),null,key,cutoff)),['23514']);
+ const v2Result=(await requestA(()=>rpc(uuid(17),null,v2,cutoff))).rows[0].result;
+ assert.equal(v2Result.raw_score,0);assert.equal(v2Result.answer_key_version_id,v2);
+ assert.deepEqual((await requestA(()=>rpc())).rows[0].result,result);
+ pass('current_key_new_submission_stale_rejection_original_retry');
+ const cutoff2=uuid(18);
+ await db.query(`insert into public.grade_cutoff_versions(id,exam_subject_id,content_item_id,paper_variant,version,basis,certainty,max_score,minimum_scores,source_name,source_url,source_digest,fetched_at)
+ select $1,exam_subject_id,content_item_id,paper_variant,2,basis,certainty,max_score,array[9,8,7,6,5,4,2,1,0]::smallint[],source_name,source_url,source_digest,fetched_at from public.grade_cutoff_versions where id=$2`,[cutoff2,cutoff]);
+ await db.exec('begin');
+ await db.query('update public.grade_cutoff_versions set is_current=false where id=$1',[cutoff]);
+ await db.query("update public.grade_cutoff_versions set status='published',is_current=true,verified_at=statement_timestamp() where id=$1",[cutoff2]);
+ await db.exec('commit');
+ await reject(()=>requestA(()=>rpc(uuid(19),null,v2,cutoff)),['23514']);
+ const cutoff2Result=(await requestA(()=>rpc(uuid(19),null,v2,cutoff2,[{question_number:1,choice:2}]))).rows[0].result;
+ assert.equal(cutoff2Result.raw_score,2);assert.equal(cutoff2Result.grade,7);
+ assert.equal(cutoff2Result.grade_cutoff_version_id,cutoff2);
+ assert.deepEqual((await requestA(()=>rpc())).rows[0].result,result);
+ assert.deepEqual((await requestA(()=>rpc(uuid(17),null,v2,cutoff))).rows[0].result,v2Result);
+ assert.equal((await db.query('select count(*)::int as n from public.mock_exam_attempts where id=$1',[uuid(19)])).rows[0].n,1);
+ pass('current_cutoff_new_submission_stale_rejection_original_retry');
  await db.query("update public.answer_key_versions set status='withdrawn' where id=$1",[key]);
  assert.equal((await requestA(()=>rpc())).rows[0].result.raw_score,2);
  await reject(()=>requestA(()=>rpc(uuid(14),null,key)),['23514']);
@@ -156,7 +176,7 @@ try {
  // Scope checks: complete second variant must never accept common cutoffs.
  const other=uuid(15);await draft(other,1,'other');
  await db.query('insert into public.exam_questions select $1,question_number,answer_type,correct_answer,points from public.exam_questions where answer_key_version_id=$2',[other,key]);await publish(other);
- await reject(()=>requestA(()=>rpc(uuid(16),null,other,cutoff)),['23514']);
+ await reject(()=>requestA(()=>rpc(uuid(16),null,other,cutoff2)),['23514']);
  await db.query('update public.content_items set is_active=false where id=$1',[content]);
  assert.equal((await role('anon',null,()=>db.query('select id from public.answer_key_versions'))).rows.length,0);
  await reject(()=>requestA(()=>rpc(uuid(16),null,other,null)),['23514']);
