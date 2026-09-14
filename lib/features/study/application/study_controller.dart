@@ -32,6 +32,48 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       ? TimerPhase.ending
       : draft?.phase ?? TimerPhase.idle;
   StudyDraft? draft;
+  bool mockSelected = false;
+  bool _mockSubmitting = false;
+  int get viewGeneration => _epoch;
+  MockSetup? mockSetup;
+  StudyRecord? lastMock;
+  MockPhase get mockPhase => draft?.mock != null
+      ? _mockSubmitting
+            ? MockPhase.submitting
+            : draft!.frozen
+            ? MockPhase.timeUp
+            : draft!.phase == TimerPhase.running
+            ? MockPhase.running
+            : MockPhase.paused
+      : lastMock != null
+      ? MockPhase.completed
+      : mockSetup == null
+      ? MockPhase.setup
+      : MockPhase.ready;
+  int get remainingMs =>
+      ((draft?.mock ?? mockSetup)?.plannedSeconds ?? 0) * 1000 - elapsedMs;
+  String? get focusSession =>
+      recovery || draft?.frozen == true ? null : draft?.id;
+  bool selectMock(bool value) {
+    if (draft != null || busy) {
+      message = '현재 세션을 종료하거나 취소한 뒤 모드를 변경해 주세요.';
+      _notify();
+      return false;
+    }
+    mockSelected = value;
+    message = null;
+    _notify();
+    return true;
+  }
+
+  void configureMock(MockSetup? setup) {
+    if (draft != null || busy) return;
+    setup?.validate();
+    mockSetup = setup;
+    lastMock = null;
+    _notify();
+  }
+
   List<StudyRecord> records = [];
   bool recovery = false;
   int nowMs = DateTime.now().millisecondsSinceEpoch,
@@ -42,7 +84,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
   int _epoch = 0;
   bool _alive = true, _loaded = false, _tickInFlight = false;
   final Set<String> _syncing = {};
-  Map<String, dynamic> _doc = {'version': 1, 'owners': <String, dynamic>{}};
+  Map<String, dynamic> _doc = {'version': 2, 'owners': <String, dynamic>{}};
   Future<void> _queue = Future.value();
   Timer? _timer;
   int get elapsedMs => draft?.activeMs(offset) ?? 0;
@@ -50,7 +92,9 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       studyWeek(records, nowMs, draft: recovery ? null : draft, offset: offset);
   bool get summaryComplete => ready && !historyError && !historyLimit;
   bool get canResume =>
-      draft != null && draft!.segments.length < studyMaxSegments;
+      draft != null &&
+      draft!.segments.length < studyMaxSegments &&
+      !draft!.frozen;
   String get storageLabel => switch (savePhase) {
     SavePhase.local => '이 기기에 저장됨',
     SavePhase.saved => '저장됨',
@@ -71,7 +115,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
 
   void _notify() {
     if (!_alive) return;
-    if (ticking && draft != null && !recovery) {
+    if (ticking && draft != null && !recovery && !draft!.frozen) {
       _timer ??= Timer.periodic(
         const Duration(seconds: 1),
         (_) => unawaited(tick()),
@@ -105,6 +149,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     List<StudyRecord> rows,
   ) async {
     final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
+    copy['version'] = 2;
     (copy['owners'] as Map)[owner] = {
       'draft': d?.toJson(),
       'records': rows.map((r) => r.toJson()).toList(),
@@ -140,12 +185,31 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       savePhase = SavePhase.idle;
       message = null;
       lastCompletedMs = 0;
+      lastMock = null;
+      mockSetup = null;
+      _mockSubmitting = false;
       _notify();
       unawaited(
         _serial(() async {
           try {
             if (!_loaded) {
               _doc = await store.read();
+              if (![1, 2].contains(_doc['version']) || _doc['owners'] is! Map) {
+                throw const FormatException('Unsupported local study state');
+              }
+              // Validate every owner before atomically upgrading; never discard old outbox.
+              for (final owner in (_doc['owners'] as Map).keys.cast<String>()) {
+                final raw = _space(owner)['draft'];
+                if (raw != null) {
+                  StudyDraft.fromJson(Map<String, dynamic>.from(raw as Map));
+                }
+                _local(owner);
+              }
+              if (_doc['version'] == 1) {
+                final upgraded = {..._doc, 'version': 2};
+                await store.write(upgraded);
+                _doc = upgraded;
+              }
               _loaded = true;
             }
             final now = await clock.read();
@@ -164,12 +228,28 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
                   : (previousDraft == null
                         ? leavingDraft.checkpoint
                         : previousOffset);
-              final row = leavingDraft.finish(end);
-              final rows = _local(previousOwner);
-              if (row != null && !rows.any((r) => r.id == row.id)) {
-                rows.add(row);
+              if (leavingDraft.mock != null) {
+                await _write(
+                  previousOwner,
+                  leavingDraft.freeze(
+                    end,
+                    leavingDraft.activeMs(end) >=
+                            leavingDraft.mock!.plannedSeconds * 1000
+                        ? 'planElapsed'
+                        : end >= studyMaxSpan
+                        ? 'wallLimit'
+                        : 'accountChanged',
+                  ),
+                  _local(previousOwner),
+                );
+              } else {
+                final row = leavingDraft.finish(end);
+                final rows = _local(previousOwner);
+                if (row != null && !rows.any((r) => r.id == row.id)) {
+                  rows.add(row);
+                }
+                await _write(previousOwner, null, rows);
               }
-              await _write(previousOwner, null, rows);
             }
             if (e != _epoch) return;
             nowMs = now.utcMs;
@@ -179,7 +259,8 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
                 ? null
                 : StudyDraft.fromJson(Map<String, dynamic>.from(raw as Map));
             if (draft != null) {
-              recovery = !draft!.continuous(now);
+              recovery = !draft!.frozen && !draft!.continuous(now);
+              mockSelected = draft!.mock != null;
               offset = recovery ? draft!.checkpoint : draft!.offset(now);
             }
             ready = true;
@@ -187,8 +268,14 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
                 ? SavePhase.pendingSync
                 : SavePhase.idle;
             _notify();
-            if (draft != null && !recovery && offset >= studyMaxSpan) {
-              await _finish();
+            if (draft != null && !recovery) {
+              if (draft!.mock != null &&
+                  draft!.exhausted(offset) &&
+                  !draft!.frozen) {
+                await _freezeMock();
+              } else if (draft!.mock == null && offset >= studyMaxSpan) {
+                await _finish();
+              }
             }
             unawaited(sync());
           } catch (_) {
@@ -213,14 +300,18 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       final oldDay = koreanDay(nowMs);
       nowMs = now.utcMs;
       final d = draft;
-      if (d != null && !recovery) {
+      if (d != null && !recovery && !d.frozen) {
         if (!d.continuous(now)) {
           recovery = true;
           offset = d.checkpoint;
         } else {
           offset = d.offset(now);
         }
-        if (!recovery && offset >= studyMaxSpan) {
+        if (!recovery && d.mock != null && d.exhausted(offset)) {
+          await _command((_) async {
+            if (draft == d) await _freezeMock();
+          });
+        } else if (!recovery && offset >= studyMaxSpan) {
           await end(automatic: true);
         } else if (!recovery && offset - d.checkpoint >= 30000) {
           await _serial(() async {
@@ -262,19 +353,30 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     } finally {
       if (e == _epoch) {
         busy = false;
+        _mockSubmitting = false;
         _notify();
       }
     }
   }
 
-  Future<void> start() => _command((now) async {
+  Future<void> startMock() async {
+    final setup = mockSetup;
+    if (setup == null) return;
+    setup.validate();
+    await _start(setup);
+  }
+
+  Future<void> start() => _start(null);
+  Future<void> _start(MockSetup? mock) => _command((now) async {
     if (draft != null) return;
-    final d = StudyDraft.start(now);
+    final d = StudyDraft.start(now, mock: mock);
     final e = _epoch;
     final owner = _owner;
     await _write(owner, d, _local(owner));
     if (e != _epoch) return;
     draft = d;
+    mockSelected = mock != null;
+    lastMock = null;
     offset = 0;
     nowMs = now.utcMs;
     lastCompletedMs = 0;
@@ -282,7 +384,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     // Future focus integration runs after durable start; no permission dependency here.
   });
   Future<void> pause() => _command((now) async {
-    if (draft?.phase != TimerPhase.running) return;
+    if (draft?.phase != TimerPhase.running || draft!.frozen) return;
     await _transition(now, TimerPhase.paused);
   });
   Future<void> resume() => _command((now) async {
@@ -298,6 +400,10 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     }
     offset = d.offset(now);
     nowMs = now.utcMs;
+    if (d.mock != null && d.exhausted(offset)) {
+      await _freezeMock();
+      return;
+    }
     if (offset >= studyMaxSpan) {
       await _finish();
       return;
@@ -310,15 +416,45 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
 
   Future<void> end({bool automatic = false}) => _command((now) async {
     if (draft == null) return;
-    if (!draft!.continuous(now)) {
+    if (!draft!.frozen && !draft!.continuous(now)) {
       recovery = true;
       offset = draft!.checkpoint;
       return;
     }
     offset = draft!.offset(now);
     nowMs = now.utcMs;
+    if (draft!.mock != null) {
+      if (automatic) {
+        await _freezeMock();
+        return;
+      }
+      _mockSubmitting = true;
+      await _freezeMock(reason: 'submit');
+    }
     await _finish();
     if (automatic) message = '24시간이 지나 자동으로 종료했어요.';
+  });
+  Future<void> _freezeMock({String? reason}) async {
+    final d = draft;
+    if (d == null || d.mock == null || d.frozen) return;
+    final e = _epoch;
+    final frozen = d.freeze(
+      offset,
+      reason ??
+          (d.activeMs(offset) >= d.mock!.plannedSeconds * 1000
+              ? 'planElapsed'
+              : 'wallLimit'),
+    );
+    // Freeze memory too on disk failure, so retry cannot add extra active time.
+    draft = frozen;
+    offset = frozen.checkpoint;
+    _notify();
+    await _write(_owner, frozen, _local(_owner));
+    if (e != _epoch) return;
+  }
+
+  Future<void> discardMock() => _command((_) async {
+    if (draft?.mock != null) await _finish(discard: true);
   });
   Future<void> _finish({bool discard = false}) async {
     final d = draft;
@@ -332,6 +468,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     draft = null;
     recovery = false;
     lastCompletedMs = row?.activeMs ?? 0;
+    lastMock = row?.mode == 'mock_exam' ? row : null;
     records = _merge(rows, records);
     savePhase = row == null
         ? SavePhase.idle
@@ -347,7 +484,15 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     busy = true;
     final e = _epoch;
     try {
-      await _serial(() => _finish(discard: !keep));
+      await _serial(() async {
+        if (e != _epoch) return;
+        if (keep && draft?.mock != null) {
+          await _freezeMock(reason: 'recovery');
+          recovery = false;
+        } else {
+          await _finish(discard: !keep);
+        }
+      });
     } catch (_) {
       if (e == _epoch) {
         message = '기기 저장을 완료하지 못했어요.';
@@ -356,6 +501,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     } finally {
       if (e == _epoch) {
         busy = false;
+        _mockSubmitting = false;
         _notify();
       }
     }

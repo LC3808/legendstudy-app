@@ -1,9 +1,11 @@
 # Day 8-C — Mock Exam v1 design
 
-Reviewed: 2026-09-14. **DESIGN COMPLETE; implementation and runtime acceptance pending.**
+Reviewed: 2026-09-14. **IMPLEMENTED / runtime validation pending; NOT COMPLETE.**
 Day 8-A remains COMPLETE; Day 8-B is implemented with physical acceptance pending.
 Day 8 overall is NOT COMPLETE. This document supersedes earlier mock auto-completion
-wording in Study v1. No Flutter/native code or production/schema change in this task.
+wording in Study v1. Implementation below adds Flutter/native behavior; no production
+schema or migration change. Design sections remain the contract, with implementation
+details and evidence explicitly distinguished below.
 
 ## Entry and setup
 
@@ -240,3 +242,82 @@ No blocking Product Owner decision for design. Defaults chosen here: pause allow
 subject optional, integer-minute custom limit, best-effort optional alerts, Focus
 release at frozen timeUp. Guaranteed audible/exact alerts or strict no-pause practice
 would be a later scope decision, not a silent promise in v1.
+
+
+## Day 8-C implementation and evidence — 2026-09-14
+
+- `study_models.dart`: separate MockPhase and validated MockSetup; shared StudyDraft
+  has optional mock metadata and frozen reason/checkpoint. General TimerPhase enum
+  unchanged. Stored frozen draft uses paused interval core + explicit frozen reason;
+  presentation exposes timeUp, never resumable. Mock finish maps mode/title/subject/
+  plan to existing StudyRecord. Duration is never sent to Supabase.
+- `study_controller.dart`: single execution slot, configure/start mock, bounded active
+  countdown, pause/resume, freeze then explicit end, short/discard exclusion. General
+  end behavior preserved. Local-write failure keeps frozen memory for retry; disk
+  failure cannot promise durability across process death. Auth epoch/request binding
+  reused; departing mock stays frozen in original namespace without completion/upload.
+- `study_local.dart`: recognizes envelope1/2. Controller validates all owners before
+  atomic v1->v2 upgrade; file path stays study-state-v1.json for continuity. Existing
+  records/outbox/UUIDs retained. Mock metadata is the discriminator; no second store.
+  Notification schedule identity derives from session UUID + open-segment offset;
+  serialized replace/cancel is the revision mechanism, not a new cloud field.
+- `mock_exam_panel.dart` + Study page: compact mode switch, optional subject candidates,
+  presets/custom, inline DB-compatible code-point validation, tabular dark countdown,
+  confirmation/discard and compact used-time result. Buttons >=48px; large text stacks.
+  Presets are practice values, not an official exam timetable. No answers or grading.
+- `study_providers.dart`: existing Focus session observer excludes frozen/recovery;
+  native owned-rule reader excludes frozen drafts. Start/permission flow reused;
+  pause/resume do not reactivate. End/timeUp cleanup remains best effort on execution.
+- `MockNotificationController`: optional adapter isolated from timer, serialized
+  schedule/cancel. Pause/submit/account change cancel; foreground timeUp cancels.
+  If already background when plan expires, retain the pending alert until foreground
+  reconciliation so an inexact alarm is not cancelled before delivery. No cloud action.
+- Android MockNotificationBridge/receiver: ordinary POST_NOTIFICATIONS, inexact
+  elapsed-realtime AlarmManager, non-exported receiver checks run-owned current draft
+  before generic notification. No exact-alarm permission/service. Reboot/force-stop
+  scheduling is recovered only on app re-entry, not via a boot receiver.
+- iOS AppDelegate: optional UserNotifications authorization and single replaceable
+  local request. Generic notification tap opens the app; it does not deep-link to an
+  old owner's exam or auto-submit. Current owner's Study tab restores the draft.
+  No automatic system Focus toggle, critical alert or guaranteed audible delivery.
+
+Verification:
+
+- flutter analyze PASS; flutter test177 PASS (156 retained +21 new mock tests).
+- Final Android debug and iOS simulator builds PASS. git diff --check, local Wiki
+  links and actual publishable-key/secret/JWT scan PASS; migrations/proposals unchanged.
+- New tests cover setup80/40 Unicode bounds,1/720-minute limits, both mode locks,
+  pause/background/late expiry, exact ended_at, running/paused/frozen restore,
+  recovery,24h/256/<1s guards, local-write retry, Auth pending/switch/stale isolation,
+  KST union, Focus failure/cleanup, alert scheduling/cancellation,360×640/2× UI and
+  running confirmation dialog cancellation/expiry. These mocks are not OS delivery evidence.
+- Python runner2 offline tests/syntax PASS, including Mock marker allowlist and no
+  passwords in Flutter arguments/output. Dedicated integration smoke uses the existing
+  one-shot loopback/getpass runner with --mock; no secret fixture/config committed.
+- iOS simulator Guest real native clock/storage PASS, stages:
+
+```text
+MOCK_FLUTTER PASS guest_start
+MOCK_FLUTTER PASS guest_pause_resume
+MOCK_FLUTTER PASS guest_running_restore
+MOCK_FLUTTER PASS guest_time_up
+MOCK_FLUTTER PASS guest_end_local
+MOCK_FLUTTER PASS guest_home_restore
+MOCK_FLUTTER PASS fixture_cleanup
+```
+
+The one-minute countdown actually elapsed; frozen state was reconstructed before
+confirmation. Original local snapshot restored; this Guest run made no production
+fixture. It does not prove physical lock/kill/reboot or real notification delivery.
+Actual A/B Mock cloud acceptance is pending Owner output from:
+
+```sh
+cd /Users/woojinchang/development/legendstudy-app && python3 tool/run_study_flutter_smoke.py /Users/woojinchang/legendstudy-local.json --mock
+```
+
+The runner verifies saved row mode/title/plan/generated duration/segments, restored
+aggregate, account isolation, simulated offline retry and unchanged profile/school/
+D-Day snapshots; cleanup deletes only this run's UUIDs and retains Auth A/B. Existing
+Study rows stop its preflight, never get deleted arbitrarily. No runtime PASS is
+claimed until actual output is received. Physical validation remains required for
+Day8-C COMPLETE. Day8-D answers/scoring are neither implemented nor authorized here.

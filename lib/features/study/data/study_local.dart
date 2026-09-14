@@ -33,7 +33,7 @@ class NativeStudyLocalStore implements StudyLocalStore {
     final raw = await studyChannel.invokeMethod<String>('read');
     if (raw == null) return {'version': 1, 'owners': <String, dynamic>{}};
     final doc = jsonDecode(raw) as Map<String, dynamic>;
-    if (doc['version'] != 1 || doc['owners'] is! Map) {
+    if (![1, 2].contains(doc['version']) || doc['owners'] is! Map) {
       throw const FormatException('Unsupported study storage');
     }
     return doc;

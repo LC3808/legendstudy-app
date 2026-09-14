@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:fullBackupContent="@xml/focus_backup_rules"
         android:dataExtractionRules="@xml/focus_data_extraction_rules"
@@ -38,6 +39,7 @@
             <meta-data android:name="android.service.zen.automatic.ruleType" android:value="레전드스터디 공부" />
             <meta-data android:name="android.service.zen.automatic.ruleInstanceLimit" android:value="1" />
         </activity>
+        <receiver android:name=".MockReminderReceiver" android:exported="false" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

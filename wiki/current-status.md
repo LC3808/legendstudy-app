@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam design COMPLETE; implementation pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implemented; runtime validation pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -127,23 +127,41 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   can leave our rule until app re-entry; a24h lease deadline is checked on execution,
   not enforced by an OS alarm. Physical restart/override/backup checks remain open.
 - **Day 8-B is not COMPLETE.** Next: physical-device Focus acceptance and lifecycle
-  hardening if needed. 8-C design reuses FocusService; mock timer/UI and notification implementation
-  have not started. Scoring remains out of scope. Day8 overall is not COMPLETE.
+  hardening if needed. 8-C now reuses FocusService for the mock timer; notification implementation is
+  present. Scoring remains out of scope. Day8 overall is not COMPLETE.
 - Official API references and full behavior/evidence: [Study v1](study-v1.md).
 
-## Day 8-C Mock Exam — design complete, not implemented
+## Day 8-C Mock Exam — implemented / runtime validation pending
 
-- [Mock Exam v1 contract](day-8-mock-exam.md): compact mode switch, presets/custom,
-  separate mock state, monotonic countdown, allowed pause, durable timeUp and explicit
-  confirmation before completion. Guest local/auth outbox reuse; KST combined totals.
-- Existing production mock_exam contract is sufficient; no DB migration required.
-  Local schema evolution and native Focus reader adaptation are implementation work.
-- Best-effort optional notification; Focus release on frozen timeUp/end; background
-  delivery/owned-rule cleanup limitations require physical tests, not assumed PASS.
-- Next: implement 8-C from the documented contract and complete pending 8-B physical
-  acceptance. No answers/scoring/grades. Day 8-C runtime and Day8 overall not COMPLETE.
-- This task changed documents only; no production calls, Flutter/native changes,
-  push, PR or merge. Existing implementation test results above were not rerun.
+- Compact study/mock switch, one active timer; title/optional subject, four presets
+  and custom1–720 minutes. Separate MockPhase over shared clock/interval infrastructure.
+- Countdown is monotonic active time; pause excluded, background/lock not an implicit
+  pause. TimeUp freezes exact logical end, releases owned Focus on execution and
+  awaits explicit confirmation. Early-submit dialog continues running time.
+- Local envelope v2 preserves v1 general drafts/history/outbox; frozen mock restore
+  needs no clock extrapolation. Unknown continuity uses checkpoint recovery. Account
+  changes hide old state and freeze old-owner mock without automatically uploading.
+- Guest local/auth immutable narrow INSERT and existing retry; generated duration,
+  profile/school/D-Day fields and production schema/migrations unchanged. KST Home/
+  seven-day totals include mock intervals once, including frozen local overlay.
+- Optional native local notification: Android inexact AlarmManager + ordinary
+  notification permission, iOS UserNotifications. No new dependency, exact-alarm
+  permission, server push or DND bypass. Denial/failure never blocks the timer.
+- Analyze PASS;177 Flutter tests PASS (156 prior +21 mock), including small/large-text
+  UI, expiry/dialog races, recovery, owner isolation, pending/retry, Focus/notification.
+  Python smoke runner2 offline tests and syntax PASS. Final build results recorded
+  in the implementation section of [Mock contract](day-8-mock-exam.md).
+- Actual iOS simulator Guest PASS: setup/start, pause/resume, running restore, real
+  one-minute timeUp, frozen restore before confirmation, local completion, Home
+  aggregate and original local snapshot restoration. No production writes in that run.
+- Actual Mock A/B cloud save/read-back/restore/isolation/retry and profile preservation
+  await Owner-run `tool/run_study_flutter_smoke.py PUBLIC_CONFIG --mock` results.
+  Prior Study JWT and8-A acceptance remain PASS, not substitute Mock runtime evidence.
+- Android/iPhone physical background/lock/notification/Focus/kill/reboot remain pending.
+  Inexact notifications can be delayed; rule cleanup after process kill is not guaranteed.
+  Day8-C NOT COMPLETE; Day8 overall NOT COMPLETE. No8-D answer/scoring implementation.
+- Next: complete A/B simulator runtime and physical gates;8-D implementation needs
+  separate authorization. No DB/schema changes, Push, PR or Merge.
 
 ## Long-term backlog — preserved for later planning
 

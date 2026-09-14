@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import Darwin
+import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -11,6 +12,35 @@ import Darwin
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
     if let controller = window?.rootViewController as? FlutterViewController {
+      let notification = FlutterMethodChannel(name: "com.legendstudy.app/mock-notification", binaryMessenger: controller.binaryMessenger)
+      notification.setMethodCallHandler { call, result in
+        let center = UNUserNotificationCenter.current()
+        let identifier = "legendstudy.mock.end"
+        switch call.method {
+        case "request":
+          center.requestAuthorization(options: [.alert, .sound]) { allowed, _ in
+            DispatchQueue.main.async { result(allowed) }
+          }
+        case "replace":
+          center.removePendingNotificationRequests(withIdentifiers: [identifier])
+          center.removeDeliveredNotifications(withIdentifiers: [identifier])
+          guard let args = call.arguments as? [String: Any], let session = args["session"] as? String,
+                let ms = args["remainingMs"] as? NSNumber, ms.doubleValue > 0 else { result(nil); return }
+          let content = UNMutableNotificationContent()
+          content.title = "레전드스터디"
+          content.body = "모의고사 시간이 종료됐어요."
+          content.sound = .default
+          content.userInfo = ["studySession": session]
+          let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, min(43200, ms.doubleValue / 1000)), repeats: false)
+          center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)) { error in
+            DispatchQueue.main.async {
+              if error != nil { result(FlutterError(code: "MOCK_ALERT", message: "Reminder unavailable", details: nil)) }
+              else { result(nil) }
+            }
+          }
+        default: result(FlutterMethodNotImplemented)
+        }
+      }
       // iOS supports manual Focus guidance, not automatic system Focus activation.
       let focus = FlutterMethodChannel(name: "com.legendstudy.app/focus", binaryMessenger: controller.binaryMessenger)
       focus.setMethodCallHandler { call, result in

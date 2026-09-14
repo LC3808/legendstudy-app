@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'mock_exam_panel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
@@ -13,12 +14,49 @@ class StudyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final study = ref.watch(studyControllerProvider);
     final focus = ref.watch(studyFocusProvider);
+    final generation = study.viewGeneration;
     return ListenableBuilder(
       listenable: focus,
       builder: (context, _) => ShellPage(
         children: [
           const AppHeader(title: '학습'),
-          StudyTimerDisplay(study: study),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Row(
+              children: [
+                for (final entry in [(false, '공부 타이머'), (true, '모의고사')])
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: study.mockSelected == entry.$1
+                            ? AppTokens.primarySoft
+                            : null,
+                      ),
+                      onPressed: () => study.selectMock(entry.$1),
+                      child: Text(entry.$2, textAlign: TextAlign.center),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          if (study.mockSelected)
+            MockExamPanel(
+              key: ValueKey(study.viewGeneration),
+              study: study,
+              notifications: ref.watch(mockNotificationProvider),
+              startBusy: focus.busy,
+              start: () => focus.start(
+                startTimer: () async {
+                  if (context.mounted && study.viewGeneration == generation) {
+                    await study.startMock();
+                  }
+                },
+                currentSession: () => study.focusSession,
+                choose: (capability) => chooseStudyFocus(context, capability),
+              ),
+            )
+          else
+            StudyTimerDisplay(study: study),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Text(
@@ -27,15 +65,16 @@ class StudyPage extends ConsumerWidget {
               style: const TextStyle(color: AppTokens.textSecondary),
             ),
           ),
-          StudyTimerControls(
-            study: study,
-            startBusy: focus.busy,
-            startAction: () => focus.start(
-              startTimer: study.start,
-              currentSession: () => study.draft?.id,
-              choose: (capability) => chooseStudyFocus(context, capability),
+          if (!study.mockSelected)
+            StudyTimerControls(
+              study: study,
+              startBusy: focus.busy,
+              startAction: () => focus.start(
+                startTimer: study.start,
+                currentSession: () => study.draft?.id,
+                choose: (capability) => chooseStudyFocus(context, capability),
+              ),
             ),
-          ),
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
@@ -52,7 +91,7 @@ class StudyPage extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 8),
               child: Semantics(liveRegion: true, child: Text(study.message!)),
             ),
-          if (study.lastCompletedMs > 0)
+          if (!study.mockSelected && study.lastCompletedMs > 0)
             Padding(
               padding: const EdgeInsets.only(top: 12),
               child: Text('${studyDuration(study.lastCompletedMs)} 공부했어요'),

@@ -20,8 +20,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('public_config')
     parser.add_argument('--accounts')
+    parser.add_argument('--mock', action='store_true', help='Run Day 8-C Mock Exam acceptance')
     parser.add_argument('--device', default='AEC17AF7-4950-4B41-9520-45A60BB7C918')
     args = parser.parse_args()
+    marker = 'MOCK_FLUTTER' if args.mock else 'STUDY_FLUTTER'
     config = external_json(args.public_config)
     if config.get('SUPABASE_URL', '').rstrip('/') != HOST:
         raise ValueError('Wrong project')
@@ -62,17 +64,19 @@ def main():
     print('Launching simulator test; only safe stage markers are displayed.', flush=True)
     seen = set()
     try:
-        process = subprocess.Popen([str(flutter), 'test', 'integration_test/study_core_smoke_test.dart',
+        process = subprocess.Popen([str(flutter), 'test', 'integration_test/mock_exam_smoke_test.dart' if args.mock else 'integration_test/study_core_smoke_test.dart',
             '-d', args.device, '--dart-define=SMOKE_CONFIG_URL=http://127.0.0.1:' + str(server.server_port) + route],
             cwd=repo, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
         for line in process.stdout:
-            for status, stage in re.findall(r'STUDY_FLUTTER (PASS|FAIL) ([a-z_]+)', line):
+            for status, stage in re.findall(marker + r' (PASS|FAIL) ([a-z_]+)', line):
                 allowed = {'guest_start','guest_pause_resume','guest_running_restore','guest_end_local','guest_home_restore','login_preflight','auth_save','auth_restore_home','account_isolation','pending_sync','pending_retry','profile_preserved','fixture_cleanup','auth_users_retained'}
+                if args.mock: allowed.add('guest_time_up')
                 if stage in allowed and (status, stage) not in seen:
-                    print(f'STUDY_FLUTTER {status} {stage}', flush=True)
+                    print(f'{marker} {status} {stage}', flush=True)
                     seen.add((status, stage))
         code = process.wait()
         required = {'guest_start','guest_pause_resume','guest_running_restore','guest_end_local','guest_home_restore','login_preflight','auth_save','auth_restore_home','account_isolation','pending_sync','pending_retry','profile_preserved','fixture_cleanup','auth_users_retained'}
+        if args.mock: required.add('guest_time_up')
         ok = code == 0 and all(('PASS', s) in seen for s in required) and not any(s == 'FAIL' for s, _ in seen)
         print('Flutter persistence smoke: ' + ('PASS' if ok else 'NOT VERIFIED / FAIL'), flush=True)
         if ('PASS','fixture_cleanup') not in seen:

@@ -656,3 +656,19 @@ Flutter persistence smoke: PASS
   remains pending; Day8 overall NOT COMPLETE. No scoring/answer schema or UI.
 - Documentation links/scope and git diff --check PASS; no code tests/builds rerun
   for this documentation-only task. No Push, PR, Merge or production changes.
+
+
+## 2026-09-14 — Day 8-C Mock Exam implementation
+
+- Implemented compact mode switch/setup/presets/custom countdown, separate mock state,
+  durable timeUp awaiting confirmation, early submit and shared local/outbox/aggregate.
+- Upgraded local envelope v1->v2 preserving prior work; account-switch mock freezes
+  without auto-upload. Existing Focus reuse and optional native local notifications;
+  no schema/migration, answers/scoring/grades or new runtime dependency.
+- Analyze and177 Flutter tests PASS; Python runner2 tests/syntax PASS; final Android
+  debug/iOS simulator builds and diff/credential/scope checks PASS. Real iOS Guest
+  setup/pause/resume/running restore/one-minute timeUp/frozen restore/confirm/local
+  result/Home/fixture cleanup PASS. Auth Mock smoke awaits Owner getpass execution.
+- Physical Android/iPhone background/lock/Focus/notification/kill/reboot pending;
+  Day8-C implemented / runtime validation pending, NOT COMPLETE. Day8 overall NOT
+  COMPLETE;8-D implementation not started. No Push, PR or Merge.

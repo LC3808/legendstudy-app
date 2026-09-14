@@ -5,6 +5,52 @@ const studyMaxSegments = 256;
 
 enum TimerPhase { idle, running, paused, ending, recoveryRequired }
 
+enum MockPhase { setup, ready, running, paused, timeUp, submitting, completed }
+
+class MockSetup {
+  const MockSetup(
+    this.title,
+    this.subject,
+    this.plannedSeconds, {
+    this.notify = false,
+  });
+  final String title;
+  final String? subject;
+  final int plannedSeconds;
+  final bool notify;
+  static const presets = {'국어': 80, '수학': 100, '영어': 70, '탐구': 30};
+  void validate() {
+    if (title.isEmpty ||
+        title != title.trim() ||
+        title.runes.length > 80 ||
+        (subject != null &&
+            (subject!.isEmpty ||
+                subject != subject!.trim() ||
+                subject!.runes.length > 40)) ||
+        plannedSeconds < 60 ||
+        plannedSeconds > 43200) {
+      throw const FormatException('Invalid mock setup');
+    }
+  }
+
+  Map<String, dynamic> toJson() => {
+    'title': title,
+    'subject': subject,
+    'planned': plannedSeconds,
+    'notify': notify,
+  };
+  factory MockSetup.fromJson(Map<String, dynamic> j) {
+    final setup = MockSetup(
+      j['title'] as String,
+      j['subject'] as String?,
+      j['planned'] as int,
+      notify: j['notify'] == true,
+    );
+    setup.validate();
+    return setup;
+  }
+}
+
 enum SavePhase { idle, saving, local, saved, pendingSync, error }
 
 class ClockReading {
@@ -120,13 +166,48 @@ class StudyDraft {
     required this.checkpoint,
     required this.segments,
     this.openStart,
+    this.mock,
+    this.frozenReason,
   });
   final String id, boot;
   final int startedMs, anchorElapsed, checkpoint;
   final TimerPhase phase;
   final List<ActiveSegment> segments;
   final int? openStart;
-  factory StudyDraft.start(ClockReading now) => StudyDraft(
+  final MockSetup? mock;
+  final String? frozenReason;
+  bool get frozen => frozenReason != null;
+  int boundedOffset(int value) {
+    if (frozen) return checkpoint;
+    var end = value.clamp(0, studyMaxSpan);
+    if (mock != null && openStart != null) {
+      final used = segments.fold(0, (n, s) => n + s.end - s.start);
+      end = min(end, openStart! + max(0, mock!.plannedSeconds * 1000 - used));
+    }
+    return end;
+  }
+
+  bool exhausted(int value) =>
+      mock != null &&
+      (value >= studyMaxSpan || activeMs(value) >= mock!.plannedSeconds * 1000);
+  StudyDraft freeze(int value, String reason) {
+    if (frozen) return this;
+    final end = boundedOffset(value);
+    return StudyDraft(
+      id: id,
+      startedMs: startedMs,
+      anchorElapsed: anchorElapsed,
+      boot: boot,
+      phase: TimerPhase.paused,
+      checkpoint: end,
+      segments: activeAt(end),
+      mock: mock,
+      frozenReason: reason,
+    );
+  }
+
+  factory StudyDraft.start(ClockReading now, {MockSetup? mock}) => StudyDraft(
+    mock: mock,
     id: newStudyId(),
     startedMs: now.utcMs,
     anchorElapsed: now.elapsedMs,
@@ -141,19 +222,21 @@ class StudyDraft {
       boot == now.boot &&
       now.elapsedMs >= anchorElapsed + checkpoint &&
       ((now.utcMs - startedMs) - (now.elapsedMs - anchorElapsed)).abs() < 5000;
-  int offset(ClockReading now) =>
-      (now.elapsedMs - anchorElapsed).clamp(0, studyMaxSpan);
+  int offset(ClockReading now) => boundedOffset(now.elapsedMs - anchorElapsed);
   List<ActiveSegment> activeAt(int offset) => [
     ...segments,
-    if (openStart != null && offset > openStart!)
-      ActiveSegment(openStart!, offset),
+    if (openStart != null && boundedOffset(offset) > openStart!)
+      ActiveSegment(openStart!, boundedOffset(offset)),
   ];
   int activeMs(int offset) =>
       activeAt(offset).fold(0, (n, s) => n + s.end - s.start);
   StudyDraft at(int offset, {TimerPhase? next}) {
+    if (frozen) return this;
+    offset = boundedOffset(offset);
     final target = next ?? phase;
     final closing = phase == TimerPhase.running && target != TimerPhase.running;
     return StudyDraft(
+      mock: mock,
       id: id,
       startedMs: startedMs,
       anchorElapsed: anchorElapsed,
@@ -170,11 +253,17 @@ class StudyDraft {
       : StudyRecord(
           id: id,
           startedMs: startedMs,
-          endedMs: startedMs + offset,
+          endedMs: startedMs + boundedOffset(offset),
+          mode: mock == null ? 'study' : 'mock_exam',
+          title: mock?.title,
+          subject: mock?.subject,
+          plannedSeconds: mock?.plannedSeconds,
           segments: activeAt(offset),
         );
   Map<String, dynamic> toJson() => {
     'id': id,
+    'mock': mock?.toJson(),
+    'frozen': frozenReason,
     'started': startedMs,
     'anchor': anchorElapsed,
     'boot': boot,
@@ -185,6 +274,10 @@ class StudyDraft {
   };
   factory StudyDraft.fromJson(Map<String, dynamic> j) {
     final d = StudyDraft(
+      mock: j['mock'] == null
+          ? null
+          : MockSetup.fromJson(Map<String, dynamic>.from(j['mock'] as Map)),
+      frozenReason: j['frozen'] as String?,
       id: j['id'] as String,
       startedMs: j['started'] as int,
       anchorElapsed: j['anchor'] as int,
@@ -204,6 +297,18 @@ class StudyDraft {
         (d.phase == TimerPhase.running) != (d.openStart != null)) {
       throw const FormatException('Invalid draft');
     }
+    if (d.frozen &&
+        (d.mock == null ||
+            d.phase != TimerPhase.paused ||
+            ![
+              'planElapsed',
+              'wallLimit',
+              'accountChanged',
+              'recovery',
+              'submit',
+            ].contains(d.frozenReason))) {
+      throw const FormatException('Invalid frozen draft');
+    }
     var last = 0;
     for (final s in d.segments) {
       if (s.start < last || s.end <= s.start || s.end > d.checkpoint) {
@@ -214,6 +319,12 @@ class StudyDraft {
     if (d.openStart != null &&
         (d.openStart! < last || d.openStart! > d.checkpoint)) {
       throw const FormatException('Invalid draft start');
+    }
+    if (d.mock != null &&
+        d.segments.fold(0, (n, s) => n + s.end - s.start) +
+                (d.openStart == null ? 0 : d.checkpoint - d.openStart!) >
+            d.mock!.plannedSeconds * 1000) {
+      throw const FormatException('Invalid mock duration');
     }
     return d;
   }

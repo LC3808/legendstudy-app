@@ -56,7 +56,7 @@ class StudyFocusBridge(private val activity: Activity, messenger: BinaryMessenge
         val owners = JSONObject(file.readText()).getJSONObject("owners")
         for (owner in owners.keys()) {
             val draft = owners.getJSONObject(owner).optJSONObject("draft") ?: continue
-            if (draft.optString("id") == session && draft.optString("phase") in listOf("running", "paused")) return draft
+            if (draft.optString("id") == session && draft.optString("phase") in listOf("running", "paused") && draft.isNull("frozen")) return draft
         }
         return null
     }

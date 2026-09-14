@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'notifications/mock_notification.dart';
 import 'focus/focus_service.dart';
 import 'focus/study_focus_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,10 @@ import '../../core/supabase/supabase_providers.dart';
 import 'data/study_local.dart';
 import 'data/study_repository.dart';
 import 'application/study_controller.dart';
+
+final mockNotificationProvider = Provider<MockNotificationService>(
+  (ref) => NativeMockNotificationService(),
+);
 
 final focusServiceProvider = Provider<FocusService>(
   (ref) => NativeFocusService(),
@@ -47,10 +52,15 @@ final studyControllerProvider =
       );
       final focus = ref.watch(studyFocusProvider);
       void observeFocus() => focus.observe(
-        session: controller.recovery ? null : controller.draft?.id,
+        session: controller.focusSession,
         ready: controller.ready,
       );
       controller.addListener(observeFocus);
+      final notifications = MockNotificationController(
+        controller,
+        ref.watch(mockNotificationProvider),
+      );
+      ref.onDispose(notifications.dispose);
       ref.listen(studyRefreshProvider, (_, next) {
         if (next.hasValue) unawaited(controller.tick());
       });

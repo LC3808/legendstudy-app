@@ -182,10 +182,10 @@ value derives from milliseconds, not rounded daily/session labels (rounding can
 cause at most small display differences). Bars have text equivalents, no chart-only
 information. 23:50–00:20 with pause23:55–00:05 yields5min firstday+15min nextday.
 
-## Mock exam and scoring boundary — Day 8-C design complete
+## Mock exam and scoring boundary — Day 8-C implemented, runtime pending
 
 The detailed v1 contract is [Day 8-C Mock Exam](day-8-mock-exam.md).
-Implementation/runtime acceptance is pending. Study switches compactly between
+Implementation is present; runtime acceptance remains pending. Study switches compactly between
 공부 타이머 and 모의고사, with one active session across modes. Mock has separate
 setup/ready/running/paused/timeUp/submitting/completed presentation states.
 
@@ -317,12 +317,12 @@ limitation, not a reason to globally turn off user DND or hide the risk.
   existing user/other-rule preservation, manual overrides, process-kill/restart and
   backup/transfer behavior remain unverified. iPhone physical guidance flow also pending.
 - **Day 8-B implemented, NOT COMPLETE.** Day 8-A remains COMPLETE; Day8 overall not
-  COMPLETE. 8-C design can reuse the interface; do not treat physical Focus acceptance
-  as passed or implement mock UI/notifications/scoring in this task.
+  COMPLETE. 8-C implementation reuses the interface; physical Focus acceptance is still
+  pending. See the Mock implementation evidence; scoring remains excluded.
 
-## Completion notifications (8-C design)
+## Completion notifications (8-C implementation)
 
-Best-effort local time-up alerts are included in the planned 8-C scope; permission
+Best-effort local time-up alerts are implemented in 8-C; permission
 is optional and denial never blocks countdown. No server push, exact-delivery or
 DND-bypass promise. UUID/revision scheduling, pause/end/account cancellation and
 restore reconciliation are specified in [Mock Exam v1](day-8-mock-exam.md#focus-and-local-notification).
@@ -445,4 +445,16 @@ Day 8-B now implements Android capability-based DND/focus, first-use choices
 feature failure must not block timer start. iOS will not claim automatic system Focus
 toggling. Distinguish platform capabilities using official APIs as specified in the
 Focus section above. That Day 8-A closeout introduced no Focus code. Day 8-B implementation and pending
-physical-device gate are recorded above; mock UI/notifications/scoring remain future.
+physical-device gate are recorded above. Mock UI/notifications are now implemented
+in8-C; their runtime gates are separate and scoring remains future.
+
+
+## Day 8-C current implementation
+
+Mock Exam implementation/evidence is recorded in [Day 8-C](day-8-mock-exam.md#day-8-c-implementation-and-evidence--2026-09-14).
+177 Flutter tests and analyze PASS; actual iOS Guest one-minute expiry/confirmation/
+restore/Home/cleanup PASS. Mock Auth cloud smoke awaits Owner input; physical
+background/lock/Focus/notification/kill/reboot remain pending. Day8-C NOT COMPLETE.
+Version2 local draft metadata reuses the general interval core and immutable Study
+repository/outbox; production schema/profile/NEIS/D-Day are unchanged. Native optional
+alerts are best effort; no exact delivery or automatic iOS Focus claim.

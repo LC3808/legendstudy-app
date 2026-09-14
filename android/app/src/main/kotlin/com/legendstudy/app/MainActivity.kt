@@ -10,12 +10,18 @@ import java.io.File
 import java.util.UUID
 
 class MainActivity : FlutterActivity() {
+    private var mockNotifications: MockNotificationBridge? = null
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        mockNotifications?.permissionResult(requestCode)
+    }
     companion object {
         // Without boot metadata, continuity is proven only within this process.
         private val processClockIdentity = "process:" + UUID.randomUUID().toString()
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        mockNotifications = MockNotificationBridge(this, flutterEngine.dartExecutor.binaryMessenger)
         StudyFocusBridge(this, flutterEngine.dartExecutor.binaryMessenger)
         val store = AtomicFile(File(filesDir, "study-state-v1.json"))
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/study")
