@@ -1,7 +1,7 @@
 # Day 8 Study v1 — approved contract and core implementation
 
 Reviewed: 2026-09-14. **Production migration and full A/B JWT acceptance PASS (Owner-reported).
-Day 8-A core implemented; automated/iOS guest runtime verified; A/B Flutter runtime pending.**
+Day 8-A Study Core = COMPLETE; Flutter Guest/authenticated runtime PASS (Owner-reported).**
 Day 7 remains COMPLETE; Day 8 overall is not COMPLETE.
 [Claude review](day-8-study-ui-review.md) preserves the original and separates Owner overrides.
 
@@ -28,7 +28,7 @@ design system before reviewing source and all three applied migration files.
 
 | Stage | Scope | Gate |
 |---|---|---|
-| 8-A first | General start/pause/resume/end, durable local session, completed cloud history, today/seven days, Home summary | Approve contract, owner migration, actual JWT acceptance, then implementation |
+| 8-A first | General start/pause/resume/end, durable local session, completed cloud history, today/seven days, Home summary | COMPLETE: migration/postflight, real JWT and Flutter runtime accepted |
 | 8-B | Optional focus environment and device-local preference | Native capability and restoration prototype; never blocks 8-A |
 | 8-C | Preset/custom mock countdown, pause/resume/end/submit, local completion notification | Separate UI/platform acceptance after 8-A |
 | 8-D later | Answer entry, scoring, results, grade provenance and explanations | Separate content/attempt design; no answer/cutoff table now |
@@ -330,17 +330,51 @@ is not shown as zero. Overflow has no numeric total. Local retention is not capp
 large-history compaction/SQLite migration and deletions UI are later work. The repository
 DELETE is available for owned records/testing; no history-delete UI exists in8-A.
 
-Validation: analyze PASS,134 Flutter tests PASS,Android debug/iOS simulator build
-PASS,18 Study Python offline tests PASS,syntax/credential scan/diff checks PASS.
-iOS guest native smoke PASS: start,pause,resume,end,running-controller reconstruction,
-local completion restoration,Home and original-file cleanup. Auth A/B Flutter smoke
-is pending Owner execution of `tool/run_study_flutter_smoke.py` using getpass; do not
-substitute the Owner-reported full JWT verifier PASS for this Flutter evidence.
-Runner checks cloud save/read-back,controller reconstruction,Home,B isolation,simulated
-write failure/pending/retry,read-only profile snapshots,UUID cleanup and retained Auth.
-It stops on existing A/B Study rows; it never deletes pre-existing user records.
+Validation at implementation: analyze PASS,134 Flutter tests PASS,Android debug/iOS
+simulator builds PASS,18 Study Python offline tests PASS,syntax/credential scan/diff
+checks PASS. These checks were not rerun for this documentation-only closeout.
 
-Remaining runtime limits: physical Android/iOS lock/background/process-kill/reboot,
-actual OS process-restart Auth restoration and A/B Flutter results not yet verified.
-No focus permissions, mock exam UI, notifications, scoring or grade behavior shipped.
-8-B planning may proceed; full8-A runtime closeout awaits those recorded checks.
+## Day 8-A runtime acceptance — COMPLETE
+
+Owner reports the following full real Flutter smoke result. Stage names match
+`integration_test/study_core_smoke_test.dart` and the safe-output runner
+`tool/run_study_flutter_smoke.py`; no credential or raw response is recorded here.
+
+```text
+STUDY_FLUTTER PASS guest_start
+STUDY_FLUTTER PASS guest_pause_resume
+STUDY_FLUTTER PASS guest_running_restore
+STUDY_FLUTTER PASS guest_end_local
+STUDY_FLUTTER PASS guest_home_restore
+STUDY_FLUTTER PASS login_preflight
+STUDY_FLUTTER PASS auth_save
+STUDY_FLUTTER PASS auth_restore_home
+STUDY_FLUTTER PASS account_isolation
+STUDY_FLUTTER PASS pending_sync
+STUDY_FLUTTER PASS pending_retry
+STUDY_FLUTTER PASS profile_preserved
+STUDY_FLUTTER PASS fixture_cleanup
+STUDY_FLUTTER PASS auth_users_retained
+Flutter persistence smoke: PASS
+```
+
+Production Study migration is Owner-applied; Postflight and full real JWT acceptance
+PASS. Flutter Guest and authenticated runtime PASS, including cloud save/read-back,
+restored Home aggregate, account isolation, simulated pending sync and successful
+retry. Read-only before/after profile snapshots cover display_name,grade_level,
+NEIS school pair and D-Day pair: preservation PASS. Run-owned fixture cleanup and
+local snapshot restoration PASS; Auth users retained. No production mutation was
+performed in this documentation-only closeout.
+
+**Day 8-A Study Core = COMPLETE. Next: Day 8-B Focus / DND. Day 8 overall is not COMPLETE.**
+Restore evidence is provider/controller reconstruction with real native storage;
+physical Android/iOS lock/background/process-kill/reboot and actual OS process-restart
+Auth restoration remain platform follow-up acceptance, not claims of this smoke.
+These limits do not reopen the Owner-accepted Day 8-A milestone.
+
+Day 8-B will implement Android capability-based DND/focus, first-use choices
+`항상 사용 / 이번만 / 사용 안 함`, and device-local preference. Permission denial or
+feature failure must not block timer start. iOS will not claim automatic system Focus
+toggling. Distinguish platform capabilities using official APIs as specified in the
+Focus section above. No focus permissions, mock UI, notifications, scoring or grade
+behavior are introduced by this closeout.

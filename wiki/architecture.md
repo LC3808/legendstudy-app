@@ -321,6 +321,11 @@ sentinel and explicit overflow. Controller generation and request-bound Auth con
 protect owner isolation; idempotent UUID read-back confirms saves.
 
 Migration/postflight and full real JWT acceptance are Owner-reported PASS. New Flutter
-core has automated and iOS guest native verification; A/B Flutter runtime is pending.
+core automated checks and Guest/authenticated Flutter runtime are PASS. Owner accepts
+Day 8-A = COMPLETE, including cloud save/restore, Home aggregate, isolation, pending
+retry, profile/school/D-Day preservation and fixture cleanup. Runtime evidence uses
+provider reconstruction; physical lifecycle/OS restart checks remain follow-up.
 No migrations,profiles,NEIS,D-Day or content contract changed. Focus/mock/notification
-capability gates remain separate; Day8 is not COMPLETE.
+capability gates remain separate. Next: Day 8-B Focus / DND, with device-local
+preference and official platform capabilities; failure/denial never blocks the timer.
+iOS does not automatically toggle system Focus. Day8 overall is not COMPLETE.

@@ -520,9 +520,10 @@ columns, PK/FK, CHECK, index, RLS/grants, validation, JWT acceptance and rollbac
 Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
 column or cloud cancellations. Migration deployment is now Owner-reported PASS. The copy-ready
 [package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
-are ready; no aggregate RPC, existing table edits or Flutter implementation added.
+are ready; no aggregate RPC or existing table edits. Flutter Study Core now consumes
+this contract; acceptance is recorded below.
 
-## Production migration accepted / JWT verifier ready (2026-09-14)
+## Production migration and runtime acceptance (2026-09-14)
 
 Product Owner reports migration and postflight PASS: columns, constraints, index,
 RLS, owner SELECT/INSERT/DELETE, grants, immutable helper, profile preservation and
@@ -533,5 +534,9 @@ user_id/duration_seconds/created_at false. Anon checked privileges all false;
 service_role normal; existing public RLS/constraint baseline unchanged.
 This is Owner-run evidence, not a migration or live test executed by Codex.
 
-Actual Study JWT/REST acceptance is pending. Existing migration files are unchanged;
-verifier preparation does not itself prove live client ownership enforcement.
+Owner subsequently confirms full actual Study JWT/REST acceptance PASS and Flutter
+Guest/authenticated persistence smoke PASS. Cloud save/restore, Home aggregate, account
+isolation, pending sync/retry and profile/school/D-Day preservation PASS; fixture
+cleanup PASS, Auth users retained. Day 8-A = COMPLETE; Day 8 overall is not COMPLETE.
+Existing migration files remain unchanged. This documentation closeout performed no
+DB/production request. See study-v1.md for safe runtime stages and restoration limits.

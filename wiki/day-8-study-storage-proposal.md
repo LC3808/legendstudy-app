@@ -287,5 +287,8 @@ Owner explicitly confirms all real A/B JWT acceptance stages PASS after the gene
 column rejection fix, including fixture cleanup and Auth retention. Earlier pending
 checkpoints above are historical. No production schema change or repeat acceptance
 mutation was performed by the Flutter implementation task. Study core now uses this
-immutable contract. Flutter guest native runtime is PASS; A/B Flutter save/restore/
-isolation/pending verification remains separately pending. See current-status.md.
+immutable contract. Owner now reports full Flutter Guest/authenticated runtime PASS:
+cloud save/restore, Home aggregate, account isolation, pending sync/retry, profile/
+school/D-Day preservation, fixture cleanup and Auth retention. Day 8-A = COMPLETE;
+next is Day 8-B Focus / DND. Day 8 overall is not COMPLETE. Safe runtime markers and
+evidence limits are recorded in study-v1.md; no schema/production change in this closeout.

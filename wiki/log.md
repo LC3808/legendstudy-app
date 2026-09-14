@@ -607,3 +607,19 @@ Flutter persistence smoke: PASS
   Focus,mock UI,notification/scoring implementation. Day8 overall not COMPLETE.
 - Existing migrations/profile/school/D-Day preserved. No push,PR or merge. Existing
   untracked Claude outputs source and Supabase CLI temp metadata remain excluded.
+
+
+## 2026-09-14 — Day 8-A runtime closeout: COMPLETE
+
+- Owner reports all14 STUDY_FLUTTER stages and final Flutter persistence smoke PASS;
+  checked against the repository runner/integration test. Guest and authenticated
+  flows, cloud save/restore, Home aggregate, account isolation and pending sync/retry
+  PASS. Profile/school/D-Day preservation and fixture cleanup PASS; Auth users retained.
+- Production Study migration applied, Postflight and full real JWT acceptance PASS.
+  **Day 8-A Study Core = COMPLETE. Day 8 overall is not COMPLETE.** Earlier pending
+  entries are historical. Physical lifecycle/OS restart checks remain follow-up.
+- Next: Day 8-B Focus / DND using official platform capabilities. Android first-use
+  항상 사용 / 이번만 / 사용 안 함; preference device-local. Permission denial or failure
+  never blocks Study start; iOS does not claim automatic system Focus toggling.
+- Docs-only closeout; diff/scope checks PASS. Prior implementation tests/builds retained,
+  not rerun. No Flutter/DB/production changes, Push, PR or Merge.

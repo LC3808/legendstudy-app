@@ -4,11 +4,13 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core implemented; automated and iOS guest runtime verified. A/B Flutter runtime pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Next: Day 8-B Focus / DND. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
-owner-confirmed. Day 8-A checks actually run in this implementation are listed separately. Earlier implementation checkpoints remain
+owner-confirmed. The final Day 8-A Flutter Guest/authenticated runtime PASS is
+also Owner-reported and matches the checked-in smoke stages. Prior implementation
+checks are retained below; tests and production calls were not rerun in this docs-only closeout. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
 ## Repository and product baseline
@@ -74,7 +76,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Claude review preserved verbatim in [UI review](day-8-study-ui-review.md), with
   Owner-approved overrides appended separately. Current contract: [Study v1](study-v1.md).
 
-## Day 8-A validation and next gate
+## Day 8-A accepted validation
 
 - Flutter analyze PASS; 134 Flutter tests PASS (107 existing retained/adapted plus27
   Study tests), including 360×640/2×, monotonic recovery, 24h/256 guards, guest/auth,
@@ -85,20 +87,32 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   completed local save, reconstructed state + Home summary and original local-file
   restoration. This proves real native I/O/clock with provider reconstruction, not
   OS process-kill/reboot or physical-device screen-lock acceptance.
-- Full production Study JWT acceptance PASS is Owner-reported. This is separate
-  from the new Flutter persistence runtime. A/B Flutter cloud save/restore, isolation,
-  pending retry and profile preservation remain **PENDING** until the opt-in runner
-  results arrive. No production request/schema/fixture/Auth mutation by this task.
-- Run `python3 tool/run_study_flutter_smoke.py /Users/woojinchang/legendstudy-local.json`
-  from the repository in a local interactive terminal. Hidden passwords are sent to
-  the simulator over a one-use loopback endpoint, never in files/defines/logs. Existing
-  A/B Study history causes STOP; cleanup targets run-owned UUIDs only and restores
-  the original local snapshot. Auth accounts are retained.
+- Production Study migration `20260914000100_study_sessions.sql` applied by Owner;
+  Postflight PASS and full real A/B Study JWT acceptance PASS.
+- Final Owner-run Flutter persistence smoke: **PASS**. Guest start/pause/resume,
+  running restore, local completion and Home restore PASS. Auth login, cloud save,
+  restored Home aggregate, A/B account isolation and pending sync/retry PASS.
+- Profile/name/grade, NEIS school pair and D-Day field preservation PASS; fixture
+  cleanup PASS and Auth users retained. These results match
+  `integration_test/study_core_smoke_test.dart` and `tool/run_study_flutter_smoke.py`.
+  Full safe stage markers are preserved in [Study v1](study-v1.md).
 - 18 Study Python verifier/runner offline tests and Python syntax PASS. Credential
-  scan and git diff --check PASS. Existing migrations are unchanged.
-- Finish A/B Flutter runtime and physical lifecycle acceptance before claiming full
-  Study persistence/platform verification. 8-B focus capability planning may proceed;
-  actual DND integration remains a separate task. Day 8 overall is not COMPLETE.
+  scan and git diff --check PASS at implementation. Existing migrations unchanged.
+  This closeout edits documentation only and verifies its diff; no test rerun,
+  production request, Flutter change or Auth-user change.
+- Owner accepts **Day 8-A = COMPLETE**. Physical Android/iOS lock, process-kill,
+  reboot and OS process-restart Auth restoration remain platform follow-up checks;
+  the smoke proves provider reconstruction, not those untested lifecycle cases.
+
+## Next: Day 8-B Focus / DND
+
+- Android DND/focus integration, with first-use choices: `항상 사용 / 이번만 / 사용 안 함`.
+- Preference is device-local; one-time selection does not become a persistent preference.
+- Permission denial or capability failure must never prevent the Study timer starting.
+- Separate platform capabilities using official APIs. iOS must not offer or claim
+  automatic system Focus toggling; provide supported guidance instead.
+- Native capability, consent and restoration behavior are the next implementation
+  scope. No Focus/DND code is added in this closeout. Day 8 overall is not COMPLETE.
 
 ## Long-term backlog — preserved for later planning
 
