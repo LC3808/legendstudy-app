@@ -14,6 +14,17 @@ checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
+## Day 8-D2 runtime handoff
+
+- A/B Flutter scoring runner is prepared: `tool/run_mock_scoring_flutter_smoke.py`.
+  It uses real native entry/controller/storage and authenticated RPC/read-back;
+  [D2 execution details](day-8-d2-answer-scoring.md#a-b-native-flutter-scoring-runner-prepared-owner-execution-pending).
+- 9 runner offline safety tests, existing45 JWT offline tests, full228 Flutter tests,
+  analyze and iOS simulator integration-target build PASS. Actual A/B Flutter
+  scoring runtime is still pending Owner execution; D1 PASS is not substituted.
+- Controlled fixture cleanup retains the approved three-trigger, single-transaction,
+  run-UUID-only contract. No production request/schema change during preparation.
+
 ## Repository and product baseline
 
 - Working checkout: ~/development/legendstudy-app; branch: codex/day-7-school-neis.

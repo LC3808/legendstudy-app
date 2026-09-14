@@ -115,3 +115,56 @@ SCORING_FLUTTER PASS guest_submit_raw_score
 SCORING_FLUTTER PASS guest_result_restore
 SCORING_FLUTTER PASS local_fixture_cleanup
 ```
+
+## A/B native Flutter scoring runner (prepared; Owner execution pending)
+
+`tool/run_mock_scoring_flutter_smoke.py` launches
+`integration_test/mock_scoring_auth_smoke_test.dart` on the iOS simulator. This is
+separate from the D1 Python/JWT acceptance: Flutter signs A/B in with the Supabase
+SDK and exercises the production StudyController, AnswerEntryPage, native atomic
+store, SupabaseStudyRepository and SupabaseScoringRepository/RPC/read-back.
+
+Run with the existing external scoring verifier Python environment:
+
+```sh
+cd /Users/woojinchang/development/legendstudy-app && /private/tmp/legendstudy-scoring-verifier-venv/bin/python -B tool/run_mock_scoring_flutter_smoke.py /Users/woojinchang/legendstudy-local.json
+```
+
+A/B passwords and the LegendStudy DB password use hidden terminal input. The
+non-secret Session pooler hostname is the same Dashboard Connect hostname used for
+D1 (blank selects the pinned direct host). No administrator credential reaches
+Flutter. A one-use random loopback URL delivers public config and account inputs
+in memory; only that temporary URL is a Dart define. Output forwards exact allowed
+stage markers, never Flutter raw output, raw HTTP bodies or credentials.
+`--preflight-only` checks login/admin baseline without creating fixtures;
+`--device <simulator UUID>` selects another booted iOS simulator.
+
+Coverage: real availability/preparation, multiple answers/change/unanswered,
+pause lock/resume, native controller reconstruction, authenticated submission,
+server score/snapshot and canonical read-back, result reconstruction compared to
+a fresh server fetch, account switch and B RPC/answer isolation. A controlled
+key/cutoff current switch then tests the identical historical attempt retry,
+exactly one server attempt, and rejection of a new stale attempt with answers
+retained and no result/fake success. No local fake scoring repository is used.
+The entry page is mounted directly with the real controller/repositories; this
+runner does not claim tab navigation, OAuth UI, OS-kill restoration or cross-device
+history acceptance. During running, the stable identifier is the Study draft ID;
+the scoring attempt ID is allocated durably at submission and retained for
+restore/retry. No new pre-submission attempt-ID contract is introduced.
+
+The D1 administrator fixture lifecycle is reused separately from Flutter. Every
+Study/attempt UUID is registered and collision-checked **before** native repository
+writes (maximum two each); checkpoints reconcile lost acknowledgements. The native
+process/app is stopped before cleanup. Cleanup reuses the single transaction,
+locks, exact run scopes/counts/digests, three specifically approved USER triggers,
+FK cascades, full trigger restoration and public baseline comparison. All registered
+Study owners are checked under lock. No production schema change or normal
+published-data deletion permission is added. Native local storage is backed up in
+memory and restored in the test's finally block. A failed/missing stage or missing
+local cleanup prevents overall PASS; administrator cleanup still runs on failure.
+
+Preparation validation: 9 runner offline tests and all45 existing JWT offline tests
+PASS (private PostgreSQL, not production JWT evidence); full228 Flutter tests,
+flutter analyze and iOS simulator integration-target build PASS. Python syntax,
+credential scan and git diff checks PASS. Actual A/B Flutter run remains pending;
+Day8-D2 and Day8 overall are not marked COMPLETE.

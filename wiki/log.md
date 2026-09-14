@@ -782,3 +782,16 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Actual public availability-empty Flutter read PASS; analyze/diff checks PASS.
 - No DB/schema/migration change or production fixtures. Day8-D2 implemented/runtime
   validation pending; Day8 overall not COMPLETE. D3 requires separate approval.
+
+## 2026-09-14 — Day 8-D2 A/B Flutter smoke runner prepared
+
+- Added opt-in native Flutter SDK login/AnswerEntry/RPC/result-restore smoke with
+  hidden inputs and one-shot loopback delivery, separate from D1 acceptance.
+- Tests real scoring/read-back, pause/draft restore, account switch, historical
+  same-ID retry after current switch, and stale submission answer preservation.
+- Reuses D1 UUID-scoped transactional fixture cleanup; checks every registered
+  Study owner, restores the three approved USER triggers and verifies baseline.
+- 9 runner offline tests plus45 existing JWT tests, full228 Flutter tests,
+  analyze and iOS simulator integration-target build PASS. Syntax/credential/diff
+  checks PASS. No production calls, schema changes or Flutter feature changes.
+- Owner actual A/B execution remains pending. No Push/PR/Merge; Day8-D2 is not COMPLETE.

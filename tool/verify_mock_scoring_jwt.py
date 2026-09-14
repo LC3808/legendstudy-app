@@ -229,7 +229,7 @@ class AdminFixtures:
             for row in self.db.execute('select id::text,user_id::text,answer_key_version_id::text from public.mock_exam_attempts where id=any(%s::uuid[])', (sorted(self.attempts),)):
                 require(row[0] in self.attempts and row[1] == self.owners['A']
                         and row[2] in self.scopes()['answer_key_versions'], 'ATTEMPT_SCOPE')
-            for row in self.db.execute('select user_id::text from public.study_sessions where id=%s', (self.ids['study'],)):
+            for row in self.db.execute('select user_id::text from public.study_sessions where id=any(%s::uuid[])', (self.scopes()['study_sessions'],)):
                 require(row[0] == self.owners['A'], 'STUDY_SCOPE')
             # Every DELETE below is constrained to this in-memory run registry.
             for table, name in TRIGGERS.items():
