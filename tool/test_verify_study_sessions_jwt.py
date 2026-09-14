@@ -5,7 +5,7 @@ import json
 import unittest
 import urllib.parse
 from unittest.mock import patch
-from verify_study_sessions_jwt import Verifier, Response, EMAILS, base_payload, instant, Transport, NoRedirect
+from verify_study_sessions_jwt import Verifier, Response, EMAILS, base_payload, instant, Transport, NoRedirect, DIRECT_INSERT_REJECTIONS, Failure
 
 CONFIG = {'SUPABASE_URL':'https://stlhijzpjfgwwdgunlsd.supabase.co',
           'SUPABASE_PUBLISHABLE_KEY':'sb_'+'publishable_'+'offline'}
@@ -61,7 +61,9 @@ class Fake:
                 return Response(200,[row])
             return Response(200,[])
         assert method == 'POST'
-        if {'user_id','duration_seconds','created_at'} & data.keys():
+        if 'duration_seconds' in data:
+            return Response(400,{'code':'428C9'})
+        if {'user_id','created_at'} & data.keys():
             return Response(403,{'code':'42501'})
         try:
             span = (instant(data['ended_at'])-instant(data['started_at'])).total_seconds()*1000
@@ -195,6 +197,59 @@ class VerifierTests(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as out:
             good=Verifier(CONFIG,call).run({'A':'offline','B':'offline'})
         self.assertFalse(good);self.assertIn('IDENTITIES_NOT_DISTINCT',out.getvalue())
+
+    def test_direct_insert_exact_rejection_pairs(self):
+        for field in ('duration_seconds', 'user_id', 'created_at'):
+            for status, code in [(400,'428C9'), (403,'42501'), (400,'42501'),
+                                 (403,'428C9'), (400,'23514'), (400,'PGRST204'),
+                                 (400,'unknown'), (500,'428C9'), (201,'428C9')]:
+                with self.subTest(field=field,status=status,code=code):
+                    fake=Fake()
+                    def call(method,path,data,token,prefer):
+                        if method=='POST' and path=='/rest/v1/study_sessions':
+                            return Response(status,{'code':code,'message':SECRET})
+                        return fake(method,path,data,token,prefer)
+                    v=Verifier(CONFIG,call)
+                    v.sessions={x:{'id':IDS[x],'token':'token-'+x} for x in IDS}
+                    payload=base_payload(**{field:999})
+                    if (status,code) in DIRECT_INSERT_REJECTIONS[field]:
+                        v.reject(payload,expected=DIRECT_INSERT_REJECTIONS[field])
+                    else:
+                        with self.assertRaisesRegex(Failure,'EXPECTED_REJECTION'):
+                            v.reject(payload,expected=DIRECT_INSERT_REJECTIONS[field])
+
+    def test_generated_code_not_accepted_for_unrelated_validation(self):
+        fake=Fake()
+        def call(method,path,data,token,prefer):
+            if method=='POST': return Response(400,{'code':'428C9'})
+            return fake(method,path,data,token,prefer)
+        v=Verifier(CONFIG,call)
+        v.sessions={x:{'id':IDS[x],'token':'token-'+x} for x in IDS}
+        with self.assertRaisesRegex(Failure,'EXPECTED_REJECTION'):
+            v.reject(base_payload(mode='invalid'))
+
+    def test_allowed_rejection_still_checks_row_absence(self):
+        fake=Fake()
+        def call(method,path,data,token,prefer):
+            if method=='POST':
+                fake.rows[data['id']]={'id':data['id'],'user_id':IDS['A']}
+                return Response(400,{'code':'428C9'})
+            return fake(method,path,data,token,prefer)
+        v=Verifier(CONFIG,call)
+        v.sessions={x:{'id':IDS[x],'token':'token-'+x} for x in IDS}
+        with self.assertRaisesRegex(Failure,'REJECTED_ROW_EXISTS'):
+            v.reject(base_payload(duration_seconds=999),expected=DIRECT_INSERT_REJECTIONS['duration_seconds'])
+
+    def test_legacy_generated_privilege_rejection_full_run(self):
+        fake=Fake()
+        def call(method,path,data,token,prefer):
+            if method=='POST' and path=='/rest/v1/study_sessions' and 'duration_seconds' in data:
+                return Response(403,{'code':'42501'})
+            return fake(method,path,data,token,prefer)
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            good=Verifier(CONFIG,call).run({'A':'offline','B':'offline'})
+        self.assertTrue(good,out.getvalue())
+        self.assertEqual(fake.rows,{})
 
     def test_transport_count_and_non_json_status(self):
         class Raw:

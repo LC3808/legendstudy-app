@@ -254,3 +254,29 @@ count/redirect handling. These use fake transport; actual Study JWT acceptance i
 remains separate coverage; this verifier does not claim to test Flutter aggregation.
 Credential-pattern scan,diff checks and unchanged migration/Flutter scope PASS.
 No live production request,fixture creation,Flutter/DND/mock UI,push,PR or merge here.
+
+## Generated-column rejection correction (2026-09-14)
+
+Owner runtime: login_preflight,normal_study,mock_exam,interval_validation PASS.
+Direct duration_seconds INSERT returned HTTP400/428C9; the old verifier expected
+only403/42501 and stopped. Cleanup,A/B baseline restoration,profile/school/D-Day
+preservation and retained Auth users all PASS (Owner-reported). Full acceptance
+still pending; later stages were not reached in that run.
+
+The duration_seconds test now accepts exactly (400,428C9) generated_always or
+(403,42501) insufficient_privilege. user_id and created_at are ordinary defaulted
+columns,not generated columns: their tests accept only (403,42501),including B
+attempting A ownership. Their actual runtime responses were not in the supplied
+trace and remain to be verified on rerun. No blanket400 allowance; unrelated
+validation still requires400/23514. Every accepted rejection still requires row
+absence through both identities. Cleanup logic is unchanged.
+
+References: [PostgreSQL error codes](https://www.postgresql.org/docs/16/errcodes-appendix.html)
+and [PostgREST error mapping](https://docs.postgrest.org/en/v14/references/errors.html).
+These document428C9/42501 semantics and authenticated42501→403; they are not a
+claim of an additional production request by Codex.
+
+17 offline tests PASS,including exact field/status/code matrix,unrelated-error
+rejection,absent-row enforcement and both generated-rejection paths through full
+cleanup. Syntax,credential-pattern and diff checks PASS. No migration/schema,
+production,Auth-user or Flutter change; no push/PR/merge.

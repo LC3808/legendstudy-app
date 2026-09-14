@@ -579,3 +579,13 @@ Flutter persistence smoke: PASS
 - Python syntax,13 offline tests,credential-pattern scan,unchanged migration/Flutter
   scope and diff checks PASS. Actual JWT acceptance NOT RUN. No fixtures or production
   request this task; no Flutter/DND/mock UI,push,PR or merge. Day8 remains incomplete.
+
+
+## 2026-09-14 — Study generated rejection verifier fix
+
+- Owner observed normal400/428C9 on direct generated duration INSERT after initial
+  runtime stages passed; cleanup/baseline/profile preservation/Auth retention PASS.
+- Restricted duration-only expected pairs to400/428C9 or403/42501. Ordinary user_id /
+  created_at remain403/42501 only; no blanket400 pass or cleanup changes.
+-17 offline tests,Python syntax,credential scan,diff and unchanged schema checks PASS.
+  Full live acceptance awaits rerun. No production/Flutter/migration/push/PR/merge.

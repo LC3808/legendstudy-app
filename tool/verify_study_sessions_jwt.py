@@ -24,6 +24,15 @@ FIELDS = 'id,user_id,mode,title,subject,planned_duration_seconds,started_at,ende
 SAFE_DB_CODES = {'23514', '42501', '23502', '23505', '22007', '22008', '22003', '428C9', 'PGRST204'}
 
 
+# Exact HTTP/SQLSTATE pairs, scoped to each deliberately forbidden INSERT field.
+# Generated-value checking may precede column privilege checking in PostgreSQL.
+DIRECT_INSERT_REJECTIONS = {
+    'duration_seconds': frozenset({(400, '428C9'), (403, '42501')}),
+    'user_id': frozenset({(403, '42501')}),
+    'created_at': frozenset({(403, '42501')}),
+}
+
+
 @dataclass
 class Response:
     status: int
@@ -199,11 +208,11 @@ class Verifier:
         self.check_row(label, data, rows[0], duration)
         return rows[0]
 
-    def reject(self, data, label='A', expected='23514'):
+    def reject(self, data, label='A', expected=((400, '23514'),)):
         data = {'id': self.allocate(), **data}
         response = self.call('POST', '/rest/v1/study_sessions', data, label, 'return=representation')
-        require(response.status == (403 if expected == '42501' else 400)
-                and isinstance(response.body, dict) and response.body.get('code') == expected, 'EXPECTED_REJECTION')
+        require(isinstance(response.body, dict)
+                and (response.status, response.body.get('code')) in expected, 'EXPECTED_REJECTION')
         for who in EMAILS:
             require(self.read(who, data['id']).body == [], 'REJECTED_ROW_EXISTS')
 
@@ -242,7 +251,7 @@ class Verifier:
         for field, value in [('duration_seconds', 999), ('user_id', self.sessions['A']['id']),
                              ('created_at', '2026-09-14T00:00:00Z')]:
             self.stage = 'generated_duration_' + field
-            self.reject(base_payload(**{field:value}), expected='42501')
+            self.reject(base_payload(**{field:value}), expected=DIRECT_INSERT_REJECTIONS[field])
         self.passed('generated_duration')
         self.stage = 'mode_validation'
         for index, changes in enumerate([{'mode':'invalid'}, {'planned_duration_seconds':60},
@@ -266,7 +275,7 @@ class Verifier:
         require(self.read('B', original['id']).body == [], 'B_CAN_READ_A')
         response = self.delete('B', original['id'])
         require(response.status == 200 and response.body == [], 'B_DELETE_RESULT')
-        self.reject(base_payload(user_id=self.sessions['A']['id']),label='B',expected='42501')
+        self.reject(base_payload(user_id=self.sessions['A']['id']),label='B',expected=DIRECT_INSERT_REJECTIONS['user_id'])
         require(self.read('A', original['id']).body == [original], 'A_ROW_CHANGED')
         self.passed(self.stage)
         self.stage = 'update_denied'

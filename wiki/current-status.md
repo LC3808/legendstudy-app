@@ -109,3 +109,11 @@ These are future planning items, not implemented or approved production deployme
   Day 7 COMPLETE is a development milestone, not general release readiness.
 - No credentials committed. Existing source attribution on school setup, system
   body typography, public browsing and optional-login principles remain in force.
+
+## Latest Study JWT checkpoint
+
+Owner-run login,normal study,mock and interval validation PASS. Generated-column
+INSERT correctly returned400/428C9; verifier allowlist corrected for that field
+only. Cleanup,A/B baseline and existing profile fields/auth users PASS. user_id /
+created_at retain403/42501-only acceptance; later stages and full acceptance await
+rerun.17 offline verifier tests PASS; no schema or production change in this fix.
