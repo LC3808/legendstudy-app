@@ -2,7 +2,7 @@
 
 Reviewed: 2026-09-14. **Day 8-D1 COMPLETE. Day 8 overall NOT COMPLETE.**
 Production migration/Postflight and actual A/B JWT/RPC acceptance are Owner-reported PASS.
-No scoring Flutter implementation, real key import or scraping.
+D2 Flutter answer/raw-score implementation is present; runtime validation remains pending. No real key import or scraping.
 [Executable SQL package](day-8-scoring-migration-package.md) preserves the applied SQL.
 Day 8-C implementation and Guest/Auth runtime remain PASS; its physical gate stays
 open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal.md).
@@ -246,3 +246,11 @@ existing data preservation and Auth user retention all PASS.
 Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
 Flutter scoring/Dart parity and real source ingestion are not verified by this result.
 This is Owner-run production evidence; this documentation closeout made no DB requests.
+
+## Day 8-D2 implementation
+
+See [Answer Entry + Raw Score](day-8-d2-answer-scoring.md) for the implemented repository,
+answer lock/local draft, Guest engine, trusted Auth RPC, idempotent retry, raw score/review
+and test evidence.37 shared vectors PASS. Native Guest synthetic smoke PASS; actual A/B
+Flutter scoring remains pending. Day8-D2 and Day8 overall are not COMPLETE; D3 needs
+separate approval. Earlier D1 evidence does not claim D2 runtime acceptance.

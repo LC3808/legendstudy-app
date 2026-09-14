@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); next is Day 8-D2 Flutter Answer Entry + Raw Score; Flutter scoring not started. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Flutter Answer Entry + Raw Score implemented / runtime validation pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -183,8 +183,8 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   optional compatible current cutoff; identical historical retries retain old versions.
   Migration/package/proposal/acceptance synchronized. 21 PostgreSQL local groups,
   37 vectors and seven native PostgreSQL17.6 concurrency groups PASS.
-- Shared synthetic scoring vectors prepared for future Dart parity. Flutter scoring,
-  ingestion and real key publication are not implemented/performed.
+- D1 shared synthetic scoring vectors now pass the D2 Dart parity suite. Real source
+  ingestion/publication is not performed; D2 runtime scope is recorded below.
 - Owner reports production migration/Postflight PASS: five scoring RLS tables, six
   policies, 12 functions, seven triggers, constraints/indexes/grants/view and synthetic
   engine PASS; scoring rows=0 and prior public row-count/digest baseline preserved.
@@ -196,10 +196,26 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   restored, scoring baseline restored, existing data preserved and Auth users retained:
   PASS. [Full runtime evidence](day-8-scoring-jwt-acceptance.md).
 - **Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
-  Flutter scoring remains unimplemented. This closeout changes documentation only;
-  the runtime evidence was supplied by the Owner, not rerun by Codex.
+  The D1 runtime evidence was supplied by the Owner; the subsequent D2 implementation
+  and its distinct runtime gate are recorded below.
 - Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
   gates remain pending. No Push, PR or Merge.
+
+## Day 8-D2 Answer Entry + Raw Score — implemented / runtime validation pending
+
+- Typed availability/questions and existing timer-only fallback; no fake bundled paper.
+  Root answer page, five-choice marking/groups/grid, pause/timeUp lock and explicit
+  submission. Running state never contains correct answers. Raw score/review is post-submit.
+- Native v3 atomic draft + Study/scoring outbox retains answers, fixed attempt ID and
+  owner isolation. Guest local pure Dart scoring; Auth exact RPC + verified read-back.
+  Failures preserve pending work, stale criteria require explicit recovery, no auto-upload.
+- 228 Flutter tests PASS; 37/37 shared vectors PASS; Android debug/iOS simulator builds
+  PASS. iOS test-only Guest native answer/restore/submit/result and local cleanup PASS.
+  Actual public availability-empty Flutter read PASS; no production fixture created.
+  Analyze/diff checks PASS. [Implementation and evidence](day-8-d2-answer-scoring.md).
+- Actual A/B populated Flutter RPC/runtime remains pending. No production fixtures or
+  schema/migration changes. Day8-D2 NOT COMPLETE; Day8 overall NOT COMPLETE.
+- Next: controlled A/B runtime validation. Day8-D3 requires separate approval.
 
 ## Long-term backlog — preserved for later planning
 

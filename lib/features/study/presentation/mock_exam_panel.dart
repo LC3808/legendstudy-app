@@ -4,6 +4,8 @@ import '../application/study_controller.dart';
 import '../domain/study_models.dart';
 import '../notifications/mock_notification.dart';
 import 'study_page.dart';
+import '../scoring/scoring_pages.dart';
+import '../scoring/scoring_repository.dart';
 
 class MockExamPanel extends StatefulWidget {
   const MockExamPanel({
@@ -28,9 +30,14 @@ class _MockExamPanelState extends State<MockExamPanel> {
   String preset = '영어';
   bool alert = false, notificationBusy = false, starting = false;
   String? error, alertMessage;
+  List<ScoringPaper> papers = [];
+  int? selectedPaper;
+  bool preparing = false;
+  int selectionEpoch = 0;
   @override
   void initState() {
     super.initState();
+    loadPapers();
     final setup = widget.study.mockSetup;
     title.text = setup?.title ?? '영어 실전 모의고사';
     subject.text = setup?.subject ?? '영어';
@@ -39,6 +46,25 @@ class _MockExamPanelState extends State<MockExamPanel> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) refreshSetup();
     });
+  }
+
+  Future<void> loadPapers({bool reset = false}) async {
+    try {
+      if (reset) await widget.study.configureScoring(null);
+      final list = await widget.study.scoringRepository
+          ?.call()
+          .availablePapers();
+      if (mounted) {
+        setState(() {
+          papers = list ?? [];
+          if (reset) selectedPaper = null;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => alertMessage = '채점 목록을 불러오지 못했어요. 타이머는 사용할 수 있어요.');
+      }
+    }
   }
 
   @override
@@ -88,13 +114,24 @@ class _MockExamPanelState extends State<MockExamPanel> {
     widget.study.configureMock(setup);
     setState(() => starting = true);
     try {
-      await widget.start();
+      if (selectedPaper != null && selectedPaper != -1) {
+        await widget.study.configureScoring(
+          papers[selectedPaper!].availability,
+        );
+      }
+      if (mounted) await widget.start();
+    } catch (_) {
+      if (mounted) setState(() => error = '채점 기준을 확인하지 못했어요. 시험을 다시 선택해 주세요.');
     } finally {
       if (mounted) setState(() => starting = false);
     }
   }
 
   Future<void> confirm({bool discard = false}) async {
+    if (!discard && widget.study.draft?.answers != null) {
+      await confirmScoringSubmit(context, widget.study);
+      return;
+    }
     final id = widget.study.draft?.id;
     final yes = await showDialog<bool>(
       context: context,
@@ -146,6 +183,56 @@ class _MockExamPanelState extends State<MockExamPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          if (study.scoringRepository != null)
+            TextButton(
+              onPressed: preparing || starting
+                  ? null
+                  : () => loadPapers(reset: true),
+              child: const Text('시험 목록 새로고침'),
+            ),
+          if (papers.isNotEmpty)
+            DropdownButtonFormField<int>(
+              value: selectedPaper ?? -1,
+              isExpanded: true,
+              decoration: const InputDecoration(labelText: '채점할 시험'),
+              items: [
+                const DropdownMenuItem(value: -1, child: Text('타이머만 사용')),
+                for (var i = 0; i < papers.length; i++)
+                  DropdownMenuItem(
+                    value: i,
+                    child: Text(
+                      '${papers[i].title} · ${papers[i].availability.paperVariant}',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+              ],
+              onChanged: preparing
+                  ? null
+                  : (value) async {
+                      final request = ++selectionEpoch;
+                      setState(() => preparing = true);
+                      try {
+                        await study.configureScoring(
+                          value == -1 ? null : papers[value!].availability,
+                        );
+                        if (mounted && request == selectionEpoch) {
+                          setState(() {
+                            selectedPaper = value;
+                            if (value != -1) title.text = papers[value!].title;
+                          });
+                        }
+                      } catch (_) {
+                        if (mounted) {
+                          setState(
+                            () => error = '채점 기준을 확인하지 못했어요. 다시 선택해 주세요.',
+                          );
+                        }
+                      } finally {
+                        if (mounted) setState(() => preparing = false);
+                      }
+                    },
+            ),
           TextField(
             key: const Key('mock-title'),
             controller: title,
@@ -239,7 +326,11 @@ class _MockExamPanelState extends State<MockExamPanel> {
           if (error != null) Semantics(liveRegion: true, child: Text(error!)),
           FilledButton(
             onPressed:
-                study.authReady && !starting && !widget.startBusy && !study.busy
+                study.authReady &&
+                    !preparing &&
+                    !starting &&
+                    !widget.startBusy &&
+                    !study.busy
                 ? start
                 : null,
             child: const Text('시험 시작'),
@@ -294,6 +385,17 @@ class _MockExamPanelState extends State<MockExamPanel> {
           textAlign: TextAlign.center,
           style: const TextStyle(color: AppTokens.textSecondary),
         ),
+        if (d.answers != null)
+          OutlinedButton(
+            onPressed: () => Navigator.of(context, rootNavigator: true).push(
+              MaterialPageRoute<void>(
+                builder: (_) => AnswerEntryPage(study: study),
+              ),
+            ),
+            child: Text(
+              '답안 입력 · ${d.answers!.answered} / ${d.answers!.answers.length}',
+            ),
+          ),
         const SizedBox(height: 12),
         if (!d.frozen)
           FilledButton(

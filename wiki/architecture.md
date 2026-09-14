@@ -357,10 +357,9 @@ implemented, not COMPLETE. No DB/Focus cloud field or 8-C UI/notifications added
 and [full executable SQL package](day-8-scoring-migration-package.md) describe the
 Owner-applied, runtime-accepted Day 8-D1 storage contract.
 Existing8-C Guest/Auth runtime PASS remains distinct from pending physical-device gates.
-No Flutter scoring engine/UI exists yet. Future Guest pure Dart engine uses per-item
-points and pinned versions; authenticated RPC server scoring has Owner-reported
-actual A/B JWT/RPC acceptance PASS.
-Shared synthetic vectors define the parity gate; Dart parity is still unimplemented.
+D2 now implements Guest pure Dart scoring and answer/raw-score UI with pinned versions.
+Authenticated RPC server scoring has Owner-reported D1 JWT acceptance PASS; D2 populated
+Flutter acceptance remains pending. Dart parity passes all37 shared synthetic vectors.
 
 Occurrence/variant identity is explicit. Key and cutoff versions have independent
 publication lifecycles; same scope/total required. Public invoker availability is derived,
@@ -391,3 +390,18 @@ existing data preservation and Auth user retention all PASS.
 Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
 Flutter scoring/Dart parity and real source ingestion are not verified by this result.
 This is Owner-run production evidence; this documentation closeout made no DB requests.
+
+## Day 8-D2 implementation boundary
+
+Typed models and SupabaseScoringRepository separate answer-entry projections from
+post-submission solutions. StudyController owns one atomic native v3 document, preserving
+v1/v2 owners and Study records while adding answer drafts and scoring outbox/results.
+Six-field Auth RPC payloads use request-bound sessions, fixed IDs and fetch-own validation;
+Guest reads solutions only after submission and scores locally. Epoch guards isolate
+accounts. Stale criteria never cause automatic version replacement.
+
+Root answer/result routes keep controls clear of the bottom shell. Prior results are
+hidden while a session is active; post-submit review alone exposes solutions. Cross-device
+result history and deletion UI remain follow-up work; existing server FK semantics stand.
+Full contract/evidence: [D2](day-8-d2-answer-scoring.md). Implemented/runtime pending, not
+COMPLETE. No database/schema/migration or production fixture mutation.

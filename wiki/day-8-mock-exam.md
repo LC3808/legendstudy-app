@@ -347,3 +347,10 @@ acceptance. Those physical-device checks remain pending. **Day 8-C final COMPLET
 is on hold until physical verification. Day 8 overall is not COMPLETE.**
 Day 8-D Scoring starts only after separate Product Owner approval; no answers,
 scoring, grade or schema implementation is included in this documentation closeout.
+
+## Subsequent Day 8-D2 extension
+
+[D2](day-8-d2-answer-scoring.md) now adds optional answer entry/raw-score flow when a
+current scoring package exists. The original timer-only path remains. Paused/timeUp
+answers are locked; submission persists an immutable attempt separately from Study.
+D2 is implemented/runtime pending; this does not close the physical8-C gate.

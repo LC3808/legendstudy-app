@@ -32,7 +32,7 @@ design system before reviewing source and all three applied migration files.
 | 8-A first | General start/pause/resume/end, durable local session, completed cloud history, today/seven days, Home summary | COMPLETE: migration/postflight, real JWT and Flutter runtime accepted |
 | 8-B | Optional focus environment and device-local preference | Native capability and restoration prototype; never blocks 8-A |
 | 8-C | Preset/custom mock countdown, pause/resume/end/submit, local completion notification | Separate UI/platform acceptance after 8-A |
-| 8-D later | Answer entry, scoring, results, grade provenance and explanations | Separate content/attempt design; no answer/cutoff table now |
+| 8-D | Answer entry, scoring, results and later grade analysis | D1 storage COMPLETE; D2 implemented/runtime pending; D3 separate approval |
 
 ## Storage choice: B approved
 
@@ -462,3 +462,13 @@ on hold. Day8-D Scoring requires separate Product Owner approval.
 Version2 local draft metadata reuses the general interval core and immutable Study
 repository/outbox; production schema/profile/NEIS/D-Day are unchanged. Native optional
 alerts are best effort; no exact delivery or automatic iOS Focus claim.
+
+## Day 8-D2 answer/scoring extension
+
+[Implementation contract](day-8-d2-answer-scoring.md): v3 local envelope preserves v1/v2
+owners and Study outbox, adds answer draft and separate scoring results. Completion
+atomically commits Study record and fixed-ID scoring outbox; Auth uploads Study before
+linked RPC. No profile/School/D-Day writes. Timer-only works with empty scoring data.
+Pause/timeUp/recovery/submission lock marking. Guest scoring is local; no login upload.
+Shared vectors37/37 and full228 Flutter tests PASS; native synthetic Guest smoke PASS.
+Populated A/B Flutter RPC and physical lifecycle gates remain pending; not COMPLETE.

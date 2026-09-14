@@ -1,4 +1,5 @@
 import 'dart:math';
+import '../scoring/scoring_models.dart';
 
 const studyMaxSpan = 86400000;
 const studyMaxSegments = 256;
@@ -168,7 +169,9 @@ class StudyDraft {
     this.openStart,
     this.mock,
     this.frozenReason,
+    this.answers,
   });
+  final AnswerDraft? answers;
   final String id, boot;
   final int startedMs, anchorElapsed, checkpoint;
   final TimerPhase phase;
@@ -202,12 +205,18 @@ class StudyDraft {
       checkpoint: end,
       segments: activeAt(end),
       mock: mock,
+      answers: answers,
       frozenReason: reason,
     );
   }
 
-  factory StudyDraft.start(ClockReading now, {MockSetup? mock}) => StudyDraft(
+  factory StudyDraft.start(
+    ClockReading now, {
+    MockSetup? mock,
+    AnswerDraft? answers,
+  }) => StudyDraft(
     mock: mock,
+    answers: answers,
     id: newStudyId(),
     startedMs: now.utcMs,
     anchorElapsed: now.elapsedMs,
@@ -237,6 +246,7 @@ class StudyDraft {
     final closing = phase == TimerPhase.running && target != TimerPhase.running;
     return StudyDraft(
       mock: mock,
+      answers: answers,
       id: id,
       startedMs: startedMs,
       anchorElapsed: anchorElapsed,
@@ -247,6 +257,9 @@ class StudyDraft {
       openStart: target == TimerPhase.running ? (openStart ?? offset) : null,
     );
   }
+
+  StudyDraft withAnswers(AnswerDraft value) =>
+      StudyDraft.fromJson({...toJson(), 'answers': value.toJson()});
 
   StudyRecord? finish(int offset) => activeMs(offset) < 1000
       ? null
@@ -262,6 +275,7 @@ class StudyDraft {
         );
   Map<String, dynamic> toJson() => {
     'id': id,
+    'answers': answers?.toJson(),
     'mock': mock?.toJson(),
     'frozen': frozenReason,
     'started': startedMs,
@@ -274,6 +288,11 @@ class StudyDraft {
   };
   factory StudyDraft.fromJson(Map<String, dynamic> j) {
     final d = StudyDraft(
+      answers: j['answers'] == null
+          ? null
+          : AnswerDraft.fromJson(
+              Map<String, dynamic>.from(j['answers'] as Map),
+            ),
       mock: j['mock'] == null
           ? null
           : MockSetup.fromJson(Map<String, dynamic>.from(j['mock'] as Map)),
@@ -289,6 +308,9 @@ class StudyDraft {
           .map((s) => ActiveSegment(s[0] as int, s[1] as int))
           .toList(),
     );
+    if (d.answers != null && d.mock == null) {
+      throw const FormatException('Scoring requires mock');
+    }
     if (![TimerPhase.running, TimerPhase.paused].contains(d.phase) ||
         d.checkpoint < 0 ||
         d.checkpoint > studyMaxSpan ||

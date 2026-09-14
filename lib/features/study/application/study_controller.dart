@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import '../domain/study_models.dart';
+import '../scoring/scoring_models.dart';
+import '../scoring/scoring_repository.dart';
 import '../data/study_local.dart';
 import '../data/study_repository.dart';
 
@@ -11,6 +13,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     this.store,
     this.repository, {
     this.ticking = true,
+    this.scoringRepository,
   }) {
     WidgetsBinding.instance.addObserver(this);
   }
@@ -18,6 +21,11 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
   final StudyLocalStore store;
   final StudyRepository Function() repository;
   final bool ticking;
+  final ScoringRepository Function()? scoringRepository;
+  AnswerDraft? scoringSetup;
+  List<ScoringAttempt> attempts = [];
+  bool scoringBusy = false;
+  bool get guest => _identity == null;
   bool ready = false,
       busy = false,
       historyError = false,
@@ -84,7 +92,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
   int _epoch = 0;
   bool _alive = true, _loaded = false, _tickInFlight = false;
   final Set<String> _syncing = {};
-  Map<String, dynamic> _doc = {'version': 2, 'owners': <String, dynamic>{}};
+  Map<String, dynamic> _doc = {'version': 3, 'owners': <String, dynamic>{}};
   Future<void> _queue = Future.value();
   Timer? _timer;
   int get elapsedMs => draft?.activeMs(offset) ?? 0;
@@ -146,11 +154,14 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
   Future<void> _write(
     String owner,
     StudyDraft? d,
-    List<StudyRecord> rows,
-  ) async {
+    List<StudyRecord> rows, {
+    List<ScoringAttempt>? scores,
+  }) async {
     final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
-    copy['version'] = 2;
+    copy['version'] = 3;
     (copy['owners'] as Map)[owner] = {
+      ..._space(owner),
+      if (scores != null) 'attempts': scores.map((a) => a.toJson()).toList(),
       'draft': d?.toJson(),
       'records': rows.map((r) => r.toJson()).toList(),
     };
@@ -186,6 +197,9 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       message = null;
       lastCompletedMs = 0;
       lastMock = null;
+      scoringSetup = null;
+      attempts = [];
+      scoringBusy = false;
       mockSetup = null;
       _mockSubmitting = false;
       _notify();
@@ -194,7 +208,8 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
           try {
             if (!_loaded) {
               _doc = await store.read();
-              if (![1, 2].contains(_doc['version']) || _doc['owners'] is! Map) {
+              if (![1, 2, 3].contains(_doc['version']) ||
+                  _doc['owners'] is! Map) {
                 throw const FormatException('Unsupported local study state');
               }
               // Validate every owner before atomically upgrading; never discard old outbox.
@@ -204,9 +219,10 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
                   StudyDraft.fromJson(Map<String, dynamic>.from(raw as Map));
                 }
                 _local(owner);
+                _scores(owner);
               }
-              if (_doc['version'] == 1) {
-                final upgraded = {..._doc, 'version': 2};
+              if (_doc['version'] != 3) {
+                final upgraded = {..._doc, 'version': 3};
                 await store.write(upgraded);
                 _doc = upgraded;
               }
@@ -254,6 +270,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
             if (e != _epoch) return;
             nowMs = now.utcMs;
             records = _local(_owner);
+            attempts = _scores(_owner);
             final raw = _space(_owner)['draft'];
             draft = raw == null
                 ? null
@@ -369,7 +386,11 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
   Future<void> start() => _start(null);
   Future<void> _start(MockSetup? mock) => _command((now) async {
     if (draft != null) return;
-    final d = StudyDraft.start(now, mock: mock);
+    final d = StudyDraft.start(
+      now,
+      mock: mock,
+      answers: mock == null ? null : scoringSetup,
+    );
     final e = _epoch;
     final owner = _owner;
     await _write(owner, d, _local(owner));
@@ -463,9 +484,22 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     final row = discard ? null : d.finish(offset);
     final rows = _local(owner);
     if (row != null && !rows.any((r) => r.id == row.id)) rows.add(row);
-    await _write(owner, null, rows);
+    final scores = _scores(owner);
+    if (!discard && d.answers != null) {
+      scores.add(
+        ScoringAttempt(
+          id: newStudyId(),
+          title: d.mock!.title,
+          draft: d.answers!,
+          studyId: row?.id,
+        ),
+      );
+    }
+    await _write(owner, null, rows, scores: scores);
     if (e != _epoch) return;
     draft = null;
+    attempts = scores;
+    scoringSetup = null;
     recovery = false;
     lastCompletedMs = row?.activeMs ?? 0;
     lastMock = row?.mode == 'mock_exam' ? row : null;
@@ -513,10 +547,14 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
         for (final r in local) r.id: r,
       }.values.toList();
   Future<void> sync() async {
-    if (!ready || !authReady || _identity == null || !_alive) return;
+    if (!ready || !authReady || !_alive) return;
     final owner = _owner, e = _epoch;
     if (!_syncing.add(owner)) return;
     try {
+      if (_identity == null) {
+        await _syncScores(owner, e);
+        return;
+      }
       final repo = repository();
       if (repo.owner != owner) throw const StudyStorageError();
       final pending = _local(owner).where((r) => !r.synced).toList();
@@ -537,6 +575,7 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
           );
         });
       }
+      await _syncScores(owner, e);
       final fetched = await repo.fetchWindow(nowMs);
       if (e != _epoch || !_alive) return;
       records = _merge(_local(owner), fetched);
@@ -563,6 +602,101 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     } finally {
       _syncing.remove(owner);
       if (e == _epoch) _notify();
+    }
+  }
+
+  List<ScoringAttempt> _scores(String owner) =>
+      ((_space(owner)['attempts'] as List?) ?? [])
+          .map(
+            (a) => ScoringAttempt.fromJson(Map<String, dynamic>.from(a as Map)),
+          )
+          .toList();
+
+  Future<void> configureScoring(MockScoringAvailability? a) async {
+    if (draft != null || busy) return;
+    final e = _epoch;
+    if (a == null) {
+      scoringSetup = null;
+      _notify();
+      return;
+    }
+    final repo = scoringRepository?.call();
+    if (repo == null) return;
+    final prepared = await repo.prepare(a);
+    if (e == _epoch && draft == null) {
+      scoringSetup = prepared;
+      _notify();
+    }
+  }
+
+  Future<void> selectAnswer(int number, int? choice) => _command((now) async {
+    final d = draft;
+    if (d?.answers == null || d!.frozen || d.phase != TimerPhase.running) {
+      return;
+    }
+    if (!d.continuous(now)) {
+      recovery = true;
+      return;
+    }
+    offset = d.offset(now);
+    if (d.exhausted(offset)) {
+      await _freezeMock();
+      return;
+    }
+    final next = d.at(offset).withAnswers(d.answers!.select(number, choice));
+    final e = _epoch;
+    await _write(_owner, next, _local(_owner));
+    if (e == _epoch) draft = next;
+  });
+
+  Future<void> _syncScores(String owner, int e) async {
+    if (scoringRepository == null || e != _epoch || !_alive) return;
+    final repo = scoringRepository!();
+    if ((repo.owner ?? 'guest') != owner) return;
+    scoringBusy = true;
+    _notify();
+    try {
+      for (final attempt in _scores(
+        owner,
+      ).where((a) => a.outcome == ScoringOutcome.pending)) {
+        if (e != _epoch || !_alive) return;
+        if (repo.owner != null &&
+            attempt.studyId != null &&
+            !_local(owner).any((r) => r.id == attempt.studyId && r.synced)) {
+          return;
+        }
+        ScoringAttempt updated;
+        try {
+          updated = attempt.completed(await repo.submit(attempt));
+        } on ScoringStale {
+          updated = attempt.stale();
+        } catch (_) {
+          if (e == _epoch) message = '채점하지 못했어요. 답안은 보관되어 있어요. 다시 시도해 주세요.';
+          return;
+        }
+        if (e != _epoch || !_alive) return;
+        await _serial(() async {
+          if (e != _epoch) return;
+          final scores = _scores(
+            owner,
+          ).map((a) => a.id == updated.id ? updated : a).toList();
+          final raw = _space(owner)['draft'];
+          await _write(
+            owner,
+            raw == null
+                ? null
+                : StudyDraft.fromJson(Map<String, dynamic>.from(raw as Map)),
+            _local(owner),
+            scores: scores,
+          );
+          if (e == _epoch) attempts = scores;
+        });
+      }
+    } finally {
+      if (e == _epoch) {
+        scoringBusy = false;
+        _notify();
+      }
     }
   }
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'scoring/scoring_repository.dart';
 import 'notifications/mock_notification.dart';
 import 'focus/focus_service.dart';
 import 'focus/study_focus_controller.dart';
@@ -40,6 +41,12 @@ final studyRepositoryFactoryProvider = Provider<StudyRepository Function()>((
       transport = ref.watch(studyHttpProvider);
   return () => SupabaseStudyRepository.bind(client, config, transport);
 });
+final scoringRepositoryProvider = Provider<ScoringRepository Function()>((ref) {
+  final client = ref.watch(supabaseClientProvider),
+      config = ref.watch(appConfigProvider),
+      transport = ref.watch(studyHttpProvider);
+  return () => SupabaseScoringRepository.bind(client, config, transport);
+});
 final studyRefreshProvider = StreamProvider.autoDispose<int>(
   (ref) => Stream.periodic(const Duration(seconds: 30), (n) => n),
 );
@@ -49,6 +56,7 @@ final studyControllerProvider =
         ref.watch(studyClockProvider),
         ref.watch(studyLocalStoreProvider),
         ref.watch(studyRepositoryFactoryProvider),
+        scoringRepository: ref.watch(scoringRepositoryProvider),
       );
       final focus = ref.watch(studyFocusProvider);
       void observeFocus() => focus.observe(

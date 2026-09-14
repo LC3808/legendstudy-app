@@ -330,7 +330,7 @@ void main() {
       c.dispose();
       c = StudyController(clock, store, () => repo, ticking: false);
       await mount();
-      expect(store.value['version'], 2);
+      expect(store.value['version'], 3);
       expect(jsonEncode(store.value['owners']), jsonEncode(old['owners']));
       c.dispose();
       store.value = {'version': 99, 'owners': <String, dynamic>{}};

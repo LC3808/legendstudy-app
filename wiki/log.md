@@ -768,3 +768,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Updated current status, scoring contract/architecture/database, execution package,
   acceptance evidence and index. Documentation-only closeout; no test/runtime rerun,
   code/DB changes, Push/PR/Merge. Day 8-D2 implementation has not started.
+
+## 2026-09-14 — Day 8-D2 Answer Entry + Raw Score implementation
+
+- Added typed availability/answer-only questions, v3 atomic answer drafts and scoring
+  outbox, Guest mcq5-v1 and Auth fixed-payload RPC/read-back. Owner epochs, pause/timeUp
+  locks, pending/stale recovery and separate result review preserve existing contracts.
+- Added compact five-choice/group/grid answer UI and raw score/review. Timer-only remains
+  with empty production data; correct answers are withheld until submission.
+- Full228 Flutter tests and37 shared vectors PASS. Android debug/iOS simulator builds
+  PASS. Native iOS synthetic Guest answer/pause/restore/submit/result and local file
+  cleanup PASS. Real A/B Flutter scoring remains pending; D1 acceptance is separate.
+- Actual public availability-empty Flutter read PASS; analyze/diff checks PASS.
+- No DB/schema/migration change or production fixtures. Day8-D2 implemented/runtime
+  validation pending; Day8 overall not COMPLETE. D3 requires separate approval.

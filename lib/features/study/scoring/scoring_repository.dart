@@ -1,0 +1,236 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/config/app_config.dart';
+import 'scoring_models.dart';
+
+class ScoringFailure implements Exception {
+  const ScoringFailure();
+}
+
+class ScoringStale implements Exception {
+  const ScoringStale();
+}
+
+class ScoringPaper {
+  const ScoringPaper(this.availability, this.title);
+  final MockScoringAvailability availability;
+  final String title;
+}
+
+abstract interface class ScoringRepository {
+  String? get owner;
+  Future<List<ScoringPaper>> availablePapers();
+  Future<AnswerDraft> prepare(MockScoringAvailability availability);
+  Future<ScoreResult> submit(ScoringAttempt attempt);
+}
+
+class SupabaseScoringRepository implements ScoringRepository {
+  SupabaseScoringRepository(
+    this.config,
+    this.transport, {
+    this.owner,
+    String? token,
+  }) : _token = token;
+  factory SupabaseScoringRepository.bind(
+    SupabaseClient? client,
+    AppConfig config,
+    http.Client transport,
+  ) {
+    final session = client?.auth.currentSession;
+    return SupabaseScoringRepository(
+      config,
+      transport,
+      owner: session?.user.id,
+      token: session?.accessToken,
+    );
+  }
+  final AppConfig config;
+  final http.Client transport;
+  @override
+  final String? owner;
+  final String? _token;
+  Future<dynamic> _request(
+    String path, {
+    Map<String, String>? query,
+    Map<String, dynamic>? body,
+  }) async {
+    if (config.validationErrors.isNotEmpty) throw const ScoringFailure();
+    final uri = Uri.parse(
+      '${config.supabaseUrl.replaceFirst(RegExp(r'/$'), '')}/rest/v1/$path',
+    ).replace(queryParameters: query);
+    final request = http.Request(body == null ? 'GET' : 'POST', uri)
+      ..followRedirects = false;
+    request.headers.addAll({
+      'apikey': config.supabasePublishableKey,
+      'Content-Type': 'application/json',
+      if (_token != null) 'Authorization': 'Bearer $_token',
+    });
+    if (body != null) request.body = jsonEncode(body);
+    final response = await http.Response.fromStream(
+      await transport.send(request).timeout(const Duration(seconds: 20)),
+    ).timeout(const Duration(seconds: 20));
+    final decoded = jsonDecode(response.body);
+    if (response.statusCode != 200) {
+      if (response.statusCode == 400 &&
+          decoded is Map &&
+          decoded['code'] == '23514' &&
+          [
+            'KEY_UNAVAILABLE',
+            'CUTOFF_UNAVAILABLE',
+          ].contains(decoded['message'])) {
+        throw const ScoringStale();
+      }
+      throw const ScoringFailure();
+    }
+    return decoded;
+  }
+
+  Future<List<Map<String, dynamic>>> _rows(
+    String path,
+    Map<String, String> query,
+  ) async => ((await _request(path, query: query)) as List)
+      .map((v) => Map<String, dynamic>.from(v as Map))
+      .toList();
+  Future<void> _current(MockScoringAvailability a) async {
+    final rows = await _rows('mock_exam_scoring_availability', {
+      'select': '*',
+      'exam_subject_id': 'eq.${a.examSubjectId}',
+      'paper_variant': 'eq.${a.paperVariant}',
+      'limit': '2',
+    });
+    if (rows.length != 1 ||
+        rows.single['answer_key_version_id'] != a.answerKeyVersionId ||
+        rows.single['grade_cutoff_version_id'] != a.gradeCutoffVersionId ||
+        rows.single['availability'] != 'scoring_available') {
+      throw const ScoringStale();
+    }
+  }
+
+  @override
+  Future<List<ScoringPaper>> availablePapers() async {
+    final rows = await _rows('mock_exam_scoring_availability', {
+      'select': '*',
+      'availability': 'eq.scoring_available',
+      'order': 'exam_subject_id,paper_variant',
+      'limit': '100',
+    });
+    if (rows.isEmpty) return [];
+    final ids = rows.map((r) => r['exam_subject_id'] as String).toSet();
+    final titles = await _rows('exam_subjects', {
+      'select': 'id,exams(content_items(title))',
+      'id': 'in.(${ids.join(',')})',
+      'limit': '100',
+    });
+    final names = <String, String>{};
+    for (final row in titles) {
+      final title = (row['exams'] as Map?)?['content_items'];
+      if (title is Map && title['title'] is String) {
+        names[row['id'] as String] = title['title'] as String;
+      }
+    }
+    return rows.map((r) {
+      final a = MockScoringAvailability.fromJson(r);
+      return ScoringPaper(a, names[a.examSubjectId] ?? '모의고사');
+    }).toList();
+  }
+
+  @override
+  Future<AnswerDraft> prepare(MockScoringAvailability a) async {
+    await _current(a);
+    final rows = await _rows('exam_questions', {
+      'select': 'question_number,answer_type,points',
+      'answer_key_version_id': 'eq.${a.answerKeyVersionId}',
+      'order': 'question_number',
+      'limit': '101',
+    });
+    return AnswerDraft(a, rows.map(AnswerEntryQuestion.fromJson).toList());
+  }
+
+  @override
+  Future<ScoreResult> submit(ScoringAttempt attempt) async {
+    final a = attempt.draft.availability;
+    if (owner == null) {
+      await _current(a);
+      final questions = await _rows('exam_questions', {
+        'select': 'question_number,correct_answer,points',
+        'answer_key_version_id': 'eq.${a.answerKeyVersionId}',
+        'order': 'question_number',
+        'limit': '101',
+      });
+      List<int>? cutoffs;
+      var certainty = 'unavailable';
+      if (a.gradeCutoffVersionId != null) {
+        final rows = await _rows('grade_cutoff_versions', {
+          'select': 'minimum_scores,certainty',
+          'id': 'eq.${a.gradeCutoffVersionId}',
+          'limit': '2',
+        });
+        scoringCheck(rows.length == 1);
+        cutoffs = (rows.single['minimum_scores'] as List).cast<int>();
+        certainty = rows.single['certainty'] as String;
+      }
+      final score = scoreMcq5(
+        questions
+            .map(
+              (q) => [
+                q['question_number'] as int,
+                q['correct_answer'] as int,
+                q['points'] as int,
+              ],
+            )
+            .toList(),
+        attempt.draft.answers,
+        minimumScores: cutoffs,
+        certainty: certainty,
+      );
+      scoringCheck(
+        score.maxScore == a.maxScore && score.answers.length == a.questionCount,
+      );
+      return score;
+    }
+    // Do not pre-check current here: historical idempotent retry must reach RPC.
+    final submitted = Map<String, dynamic>.from(
+      await _request('rpc/submit_mock_attempt', body: attempt.payload()) as Map,
+    );
+    final fetched = Map<String, dynamic>.from(
+      await _request(
+            'rpc/fetch_own_mock_attempt',
+            body: {'p_attempt_id': attempt.id},
+          )
+          as Map,
+    );
+    final first = _validate(submitted, attempt),
+        confirmed = _validate(fetched, attempt);
+    scoringCheck(jsonEncode(first.toJson()) == jsonEncode(confirmed.toJson()));
+    return confirmed;
+  }
+
+  ScoreResult _validate(Map<String, dynamic> row, ScoringAttempt attempt) {
+    final a = attempt.draft.availability;
+    scoringCheck(
+      row['id'] == attempt.id &&
+          row['user_id'] == owner &&
+          row['answer_key_version_id'] == a.answerKeyVersionId &&
+          row['grade_cutoff_version_id'] == a.gradeCutoffVersionId &&
+          row['exam_subject_id'] == a.examSubjectId &&
+          row['paper_variant'] == a.paperVariant &&
+          row['scoring_version'] == a.scoringVersion &&
+          (row['study_session_id'] == attempt.studyId ||
+              row['study_session_id'] == null),
+    );
+    final score = ScoreResult.fromJson(row);
+    scoringCheck(
+      score.answers.length == a.questionCount && score.maxScore == a.maxScore,
+    );
+    for (var i = 0; i < score.answers.length; i++) {
+      final raw = (row['answers'] as List)[i] as Map;
+      scoringCheck(
+        raw['attempt_id'] == attempt.id &&
+            raw['answer_key_version_id'] == a.answerKeyVersionId &&
+            score.answers[i].submitted == attempt.draft.answers[i],
+      );
+    }
+    return score;
+  }
+}

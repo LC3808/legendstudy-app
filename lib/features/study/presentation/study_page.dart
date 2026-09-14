@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'mock_exam_panel.dart';
+import '../scoring/scoring_pages.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
@@ -111,6 +112,7 @@ class StudyPage extends ConsumerWidget {
               onPressed: () => study.sync(),
               child: const Text('기록 다시 확인'),
             ),
+          if (study.mockSelected) ScoringHistory(study: study),
           const SectionHeader('최근 7일'),
           StudyWeekSummary(study: study),
         ],
