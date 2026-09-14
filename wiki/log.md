@@ -795,3 +795,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   analyze and iOS simulator integration-target build PASS. Syntax/credential/diff
   checks PASS. No production calls, schema changes or Flutter feature changes.
 - Owner actual A/B execution remains pending. No Push/PR/Merge; Day8-D2 is not COMPLETE.
+
+## 2026-09-14 — Day 8-D2 COMPLETE
+
+- Owner reports actual A/B Flutter scoring smoke PASS: login/preparation, answer
+  entry, pause/resume, draft restore, server RPC/raw result, server-confirmed result
+  restore, account isolation, retry/idempotency and stale-version handling.
+- Existing native synthetic Guest runtime PASS retained. Pause/timeUp mutation policy
+  PASS combines runtime pause verification with existing automated timeUp lock tests.
+- Local fixture cleanup, run UUID scope/cleanup, cleanup trigger restoration, scoring
+  baseline restoration, existing data preservation and Auth user retention all PASS.
+- **Day 8-D2 Answer Entry + Raw Score = COMPLETE. Next: Day 8-D3 Grade + Result UX.**
+  Day8 overall NOT COMPLETE; Day8-B/8-C physical-device gates remain pending.
+- Documentation-only closeout based on Owner evidence; no runtime/test rerun, Flutter
+  or DB change, Push/PR/Merge. Documentation diff checked.

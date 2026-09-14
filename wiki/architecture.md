@@ -358,8 +358,8 @@ and [full executable SQL package](day-8-scoring-migration-package.md) describe t
 Owner-applied, runtime-accepted Day 8-D1 storage contract.
 Existing8-C Guest/Auth runtime PASS remains distinct from pending physical-device gates.
 D2 now implements Guest pure Dart scoring and answer/raw-score UI with pinned versions.
-Authenticated RPC server scoring has Owner-reported D1 JWT acceptance PASS; D2 populated
-Flutter acceptance remains pending. Dart parity passes all37 shared synthetic vectors.
+Authenticated RPC server scoring has Owner-reported D1 JWT acceptance PASS and
+separate D2 populated A/B Flutter acceptance PASS. Dart parity passes all37 shared synthetic vectors.
 
 Occurrence/variant identity is explicit. Key and cutoff versions have independent
 publication lifecycles; same scope/total required. Public invoker availability is derived,
@@ -368,10 +368,10 @@ atomic attempt/answer inserts reject client-supplied scores and partial result w
 Study time and scored results are independent: Study deletion clears only its FK link;
 attempt deletion cascades answers. Profile/school/D-Day are outside scorer writes.
 
-Future local draft locks at logical timeUp, commits time/result outbox together and
+The local draft locks at logical timeUp, commits time/result outbox together and
 uploads linked Study before attempt; owner epochs prevent stale-account writes.
 Attempts never double-count Study aggregate time. Production migration, Postflight
-and actual A/B JWT/RPC acceptance are Owner-reported PASS; Flutter scoring remains next.
+and actual A/B JWT/RPC acceptance are Owner-reported PASS; D2 Flutter scoring also passed.
 
 Day8-D1 pre-production current-version correction: new scoring submissions require
 current published key and optional compatible current cutoff, including INSERT guard.
@@ -403,5 +403,9 @@ accounts. Stale criteria never cause automatic version replacement.
 Root answer/result routes keep controls clear of the bottom shell. Prior results are
 hidden while a session is active; post-submit review alone exposes solutions. Cross-device
 result history and deletion UI remain follow-up work; existing server FK semantics stand.
-Full contract/evidence: [D2](day-8-d2-answer-scoring.md). Implemented/runtime pending, not
-COMPLETE. No database/schema/migration or production fixture mutation.
+Full contract/evidence: [D2](day-8-d2-answer-scoring.md). **Day8-D2 COMPLETE:** Guest
+and Owner-run A/B Flutter entry, locks, draft/result restore, trusted scoring, owner
+isolation, retry and stale handling PASS. Approved temporary fixtures were cleaned;
+trigger state, scoring baseline and existing data preservation PASS. No schema change.
+Next: Day8-D3 Grade + Result UX. Day8 overall is not COMPLETE; 8-B/8-C physical gates
+remain pending.

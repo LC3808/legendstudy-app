@@ -48,4 +48,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [Day 8-D1 Scoring — actual JWT acceptance PASS and fixture cleanup](day-8-scoring-jwt-acceptance.md)
 
-- [Day 8-D2 Answer Entry + Raw Score — implemented/runtime pending](day-8-d2-answer-scoring.md)
+- [Day 8-D2 Answer Entry + Raw Score — COMPLETE, Guest/Auth Flutter PASS](day-8-d2-answer-scoring.md)

@@ -1,8 +1,8 @@
 # Mock Exam Scoring v1 — Day 8-D architecture proposal
 
-Reviewed: 2026-09-14. **Day 8-D1 COMPLETE. Day 8 overall NOT COMPLETE.**
+Reviewed: 2026-09-14. **Day 8-D1 and Day 8-D2 COMPLETE. Day 8 overall NOT COMPLETE.**
 Production migration/Postflight and actual A/B JWT/RPC acceptance are Owner-reported PASS.
-D2 Flutter answer/raw-score implementation is present; runtime validation remains pending. No real key import or scraping.
+D2 Flutter answer/raw-score Guest and actual A/B runtime PASS; next is Day 8-D3 Grade + Result UX. No real key import or scraping.
 [Executable SQL package](day-8-scoring-migration-package.md) preserves the applied SQL.
 Day 8-C implementation and Guest/Auth runtime remain PASS; its physical gate stays
 open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal.md).
@@ -216,7 +216,7 @@ parser, bulk import, automatic answer collection or real seed dataset in this ta
 - **8-D1 COMPLETE:** production storage/trust contract, publication validators/RPC,
   grants, read projections, Postflight and actual A/B JWT acceptance PASS. Owner-approved
   temporary synthetic fixtures were used and cleaned; this is not real source ingestion.
-- **8-D2:** pure Dart engine + cross-engine fixtures, Guest/Auth answer entry, draft
+- **8-D2 COMPLETE:** pure Dart engine + cross-engine fixtures, Guest/Auth answer entry, draft
   migration/lock/submit/outbox/version handling; points and raw-score result first.
 - **8-D3:** compatible grade rules, result/source/wrong/unanswered UX, actual runtime
   and privacy/deletion validation. Physical8-B/8-C gates remain independent.
@@ -230,7 +230,7 @@ Numeric-answer coverage and post-timeUp transcription remain separate later scop
 server scoring and invoker availability view. [Final storage contract](day-8-scoring-storage-proposal.md)
 is authoritative for SQL names and validation. Local PostgreSQL17.5 synthetic validation
 PASS; actual JWT/RPC has subsequently passed in the Owner run. No real source
-ingestion or Dart engine parity claim. Next is Day 8-D2 Flutter Answer Entry + Raw Score;
+ingestion claim. D2 Dart parity and Flutter acceptance are recorded below. Next is Day 8-D3 Grade + Result UX;
 Day8 overall NOT COMPLETE; no Push/PR/Merge.
 
 ## Accepted Day 8-D1 runtime evidence
@@ -251,6 +251,11 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 
 See [Answer Entry + Raw Score](day-8-d2-answer-scoring.md) for the implemented repository,
 answer lock/local draft, Guest engine, trusted Auth RPC, idempotent retry, raw score/review
-and test evidence.37 shared vectors PASS. Native Guest synthetic smoke PASS; actual A/B
-Flutter scoring remains pending. Day8-D2 and Day8 overall are not COMPLETE; D3 needs
-separate approval. Earlier D1 evidence does not claim D2 runtime acceptance.
+and test evidence.37 shared vectors PASS. Native Guest synthetic smoke PASS; Owner
+reports actual A/B Flutter answer entry, pause/resume, draft restore, server scoring,
+raw result/read-back/restore, account isolation, retry/idempotency and stale-version
+handling PASS. Pause/timeUp mutation policy PASS includes existing automated timeUp
+lock tests. Fixture cleanup, trigger restoration, scoring baseline restoration,
+existing data preservation and Auth retention PASS. **Day8-D2 = COMPLETE. Next:
+Day 8-D3 Grade + Result UX.** Day8 overall is not COMPLETE; physical8-B/8-C gates
+remain pending. D1 evidence remains separate from this actual Flutter acceptance.

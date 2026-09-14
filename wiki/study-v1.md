@@ -32,7 +32,7 @@ design system before reviewing source and all three applied migration files.
 | 8-A first | General start/pause/resume/end, durable local session, completed cloud history, today/seven days, Home summary | COMPLETE: migration/postflight, real JWT and Flutter runtime accepted |
 | 8-B | Optional focus environment and device-local preference | Native capability and restoration prototype; never blocks 8-A |
 | 8-C | Preset/custom mock countdown, pause/resume/end/submit, local completion notification | Separate UI/platform acceptance after 8-A |
-| 8-D | Answer entry, scoring, results and later grade analysis | D1 storage COMPLETE; D2 implemented/runtime pending; D3 separate approval |
+| 8-D | Answer entry, scoring, results and later grade analysis | D1 storage and D2 Answer Entry + Raw Score COMPLETE; next D3 Grade + Result UX |
 
 ## Storage choice: B approved
 
@@ -458,7 +458,7 @@ restore/Home/cleanup PASS. Owner now reports full Guest/Auth persistence smoke P
 cloud save/restore, account isolation, pending/retry, Home aggregate, profile/school/
 D-Day preservation, fixture cleanup and Auth users retained. Physical background/
 lock/Focus/local notification/kill/reboot remain pending; Day8-C final COMPLETE is
-on hold. Day8-D Scoring requires separate Product Owner approval.
+on hold. D1/D2 scoring acceptance is recorded below; D3 is the next scope.
 Version2 local draft metadata reuses the general interval core and immutable Study
 repository/outbox; production schema/profile/NEIS/D-Day are unchanged. Native optional
 alerts are best effort; no exact delivery or automatic iOS Focus claim.
@@ -471,4 +471,11 @@ atomically commits Study record and fixed-ID scoring outbox; Auth uploads Study 
 linked RPC. No profile/School/D-Day writes. Timer-only works with empty scoring data.
 Pause/timeUp/recovery/submission lock marking. Guest scoring is local; no login upload.
 Shared vectors37/37 and full228 Flutter tests PASS; native synthetic Guest smoke PASS.
-Populated A/B Flutter RPC and physical lifecycle gates remain pending; not COMPLETE.
+Owner reports actual A/B Flutter answer entry, pause/resume, draft restore, server
+RPC/raw result and result restore, account isolation, exact retry/idempotency and
+stale-version handling PASS. Pause/timeUp mutation policy PASS includes automated
+timeUp lock coverage. Local and production fixture cleanup, trigger restoration,
+scoring baseline restoration, existing data preservation and Auth retention PASS.
+**Day 8-D2 = COMPLETE. Next: Day 8-D3 Grade + Result UX.** Day8 overall is not
+COMPLETE; physical8-B/8-C lifecycle validation remains pending. Full safe runtime
+markers and evidence limits are recorded in the implementation contract above.

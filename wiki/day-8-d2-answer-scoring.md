@@ -1,6 +1,6 @@
 # Day 8-D2 — Answer Entry + Raw Score
 
-**Implemented / runtime validation pending. Day 8-D2 is NOT COMPLETE.**
+**Day 8-D2 Answer Entry + Raw Score = COMPLETE. Guest runtime and Owner-reported actual A/B Flutter scoring smoke PASS.**
 Day 8-D1 remains COMPLETE. Day 8 overall is not COMPLETE. No schema/migration change.
 
 ## Availability and trust boundary
@@ -89,9 +89,9 @@ wrong/blank and mixed points. Guest result storage is device-local; no RPC/cloud
   whole local file. This uses synthetic injected repositories, not published fixtures.
 - Actual LegendStudy public availability read from Flutter:0 rows PASS (read-only).
   This is not populated scoring evidence and created no production fixture.
-- Actual populated A/B Flutter scoring RPC, remote result restoration and account
-  switching with controlled production fixtures remain **pending**. D1 Python JWT
-  acceptance is separate evidence and does not substitute for this Flutter gate.
+- Owner reports actual populated A/B Flutter scoring RPC, server-confirmed result
+  restoration and account switching with controlled production fixtures **PASS**.
+  This is independent Flutter evidence, separate from D1 Python JWT acceptance.
 - Physical background/lock/kill/reboot remains a separate device gate. Native smoke
   reconstructs controllers against real platform storage/clock, not OS process kill.
 
@@ -99,10 +99,12 @@ Smoke entry: integration_test/mock_scoring_smoke_test.dart. Run with flutter tes
 an iOS simulator. Optional SCORING_LIVE_EMPTY_SMOKE=true plus the external public
 Dart-define file performs a read-only real availability-empty check. It creates no
 production fixture; the synthetic Guest branch always restores the original local file.
-No production mutations, trigger changes, fixture publication, Push/PR/Merge.
+That Guest-only smoke makes no production mutations or fixture publication. The
+Owner-run A/B smoke below uses approved temporary fixtures and verified cleanup.
+This documentation closeout makes no production changes, Push/PR/Merge.
 
-Next: complete controlled A/B Flutter runtime before declaring D2 COMPLETE. Day8-D3
-requires separate scope approval; do not start grade interpretation/analysis yet.
+Next: Day 8-D3 Grade + Result UX. This closeout does not start D3 implementation.
+Day8 overall remains NOT COMPLETE; 8-B/8-C physical-device validation remains pending.
 
 Native smoke markers:
 
@@ -116,7 +118,7 @@ SCORING_FLUTTER PASS guest_result_restore
 SCORING_FLUTTER PASS local_fixture_cleanup
 ```
 
-## A/B native Flutter scoring runner (prepared; Owner execution pending)
+## A/B native Flutter scoring runner (Owner runtime PASS)
 
 `tool/run_mock_scoring_flutter_smoke.py` launches
 `integration_test/mock_scoring_auth_smoke_test.dart` on the iOS simulator. This is
@@ -166,5 +168,42 @@ local cleanup prevents overall PASS; administrator cleanup still runs on failure
 Preparation validation: 9 runner offline tests and all45 existing JWT offline tests
 PASS (private PostgreSQL, not production JWT evidence); full228 Flutter tests,
 flutter analyze and iOS simulator integration-target build PASS. Python syntax,
-credential scan and git diff checks PASS. Actual A/B Flutter run remains pending;
-Day8-D2 and Day8 overall are not marked COMPLETE.
+credential scan and git diff checks PASS. Owner subsequently completed the actual
+A/B Flutter run below. Day8-D2 is COMPLETE; Day8 overall is NOT COMPLETE.
+
+## Accepted Day 8-D2 runtime evidence — COMPLETE
+
+Owner reports the following actual A/B Flutter results. Existing synthetic Guest
+native runtime PASS is retained above; it is not represented as production Guest
+scoring. Pause/timeUp mutation policy PASS combines the actual pause/resume smoke
+with the existing Guest/Auth automated frozen/timeUp mutation tests. No physical
+background/lock/Focus/local-notification/kill/reboot acceptance is implied.
+
+```text
+D2_FLUTTER PASS login_preflight
+D2_FLUTTER PASS auth_scoring_start
+D2_FLUTTER PASS answer_entry
+D2_FLUTTER PASS pause_resume
+D2_FLUTTER PASS draft_restore
+D2_FLUTTER PASS auth_submit
+D2_FLUTTER PASS auth_result
+D2_FLUTTER PASS auth_restore
+D2_FLUTTER PASS account_isolation
+D2_FLUTTER PASS retry
+D2_FLUTTER PASS stale_version
+D2_FLUTTER PASS local_fixture_cleanup
+D2_FLUTTER PASS fixture_scope_verified
+D2_FLUTTER PASS fixture_cleanup
+D2_FLUTTER PASS cleanup_triggers_restored
+D2_FLUTTER PASS scoring_baseline_restored
+D2_FLUTTER PASS existing_data_preserved
+D2_FLUTTER PASS auth_users_retained
+Flutter scoring smoke: PASS
+```
+
+Answer entry/change/unanswered, draft restoration, authenticated server RPC and raw
+score/result read-back, result restoration, account isolation, exact retry/idempotency
+after current switch and stale new-submission rejection all PASS. Answers remain
+preserved on stale rejection, with no fake success. Local/run fixture cleanup,
+trigger restoration, scoring baseline restoration and existing public-data preservation
+PASS; Auth A/B users are retained. Next: **Day 8-D3 Grade + Result UX**.

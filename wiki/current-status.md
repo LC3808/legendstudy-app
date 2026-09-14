@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Flutter Answer Entry + Raw Score implemented / runtime validation pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -14,16 +14,18 @@ checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
-## Day 8-D2 runtime handoff
+## Day 8-D2 runtime acceptance — COMPLETE
 
-- A/B Flutter scoring runner is prepared: `tool/run_mock_scoring_flutter_smoke.py`.
+- Owner completed the A/B Flutter scoring runner: `tool/run_mock_scoring_flutter_smoke.py`.
   It uses real native entry/controller/storage and authenticated RPC/read-back;
-  [D2 execution details](day-8-d2-answer-scoring.md#a-b-native-flutter-scoring-runner-prepared-owner-execution-pending).
+  [D2 execution details](day-8-d2-answer-scoring.md#a-b-native-flutter-scoring-runner-owner-runtime-pass).
 - 9 runner offline safety tests, existing45 JWT offline tests, full228 Flutter tests,
   analyze and iOS simulator integration-target build PASS. Actual A/B Flutter
-  scoring runtime is still pending Owner execution; D1 PASS is not substituted.
+  scoring runtime now PASS independently of D1 JWT acceptance. Next: Day 8-D3 Grade + Result UX.
 - Controlled fixture cleanup retains the approved three-trigger, single-transaction,
-  run-UUID-only contract. No production request/schema change during preparation.
+  run-UUID-only contract. Owner reports fixture cleanup, trigger restoration, scoring
+  baseline restoration, existing data preservation and Auth-user retention PASS.
+  This documentation closeout makes no production request or schema change.
 
 ## Repository and product baseline
 
@@ -172,10 +174,9 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   This verifies simulator/provider restoration, not physical kill/reboot acceptance.
 - Android/iPhone physical background/lock/notification/Focus/kill/reboot remain pending.
   Inexact notifications can be delayed; rule cleanup after process kill is not guaranteed.
-  Day8-C NOT COMPLETE; Day8 overall NOT COMPLETE. No8-D answer/scoring implementation.
+  Day8-C NOT COMPLETE; Day8 overall NOT COMPLETE. D2 scoring acceptance is recorded below.
 - Next: complete physical-device gates. Day 8-C final COMPLETE remains on hold;
-  Day 8-D architecture is now proposed below; scoring implementation still requires
-  separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
+  Day 8-D1/D2 are complete below; Day 8-D3 Grade + Result UX is the next scope. No DB/schema changes, Push, PR or Merge.
 
 ## Day 8-D1 Scoring Storage / Validation Contract — COMPLETE
 
@@ -212,7 +213,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
   gates remain pending. No Push, PR or Merge.
 
-## Day 8-D2 Answer Entry + Raw Score — implemented / runtime validation pending
+## Day 8-D2 Answer Entry + Raw Score — COMPLETE
 
 - Typed availability/questions and existing timer-only fallback; no fake bundled paper.
   Root answer page, five-choice marking/groups/grid, pause/timeUp lock and explicit
@@ -224,9 +225,14 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   PASS. iOS test-only Guest native answer/restore/submit/result and local cleanup PASS.
   Actual public availability-empty Flutter read PASS; no production fixture created.
   Analyze/diff checks PASS. [Implementation and evidence](day-8-d2-answer-scoring.md).
-- Actual A/B populated Flutter RPC/runtime remains pending. No production fixtures or
-  schema/migration changes. Day8-D2 NOT COMPLETE; Day8 overall NOT COMPLETE.
-- Next: controlled A/B runtime validation. Day8-D3 requires separate approval.
+- Owner reports actual A/B Flutter runtime PASS: answer entry, pause/resume, draft
+  restore, server RPC scoring/raw result, server-confirmed result restore, account
+  isolation, same-ID retry/idempotency and stale-version handling.
+- Pause/timeUp mutation policy PASS: runtime pause coverage plus existing automated
+  timeUp lock tests. Local/production fixture scope and cleanup, trigger restoration,
+  scoring baseline restoration, existing data preservation and Auth retention PASS.
+- **Day 8-D2 = COMPLETE. Next: Day 8-D3 Grade + Result UX.** D3 implementation is not
+  started by this closeout. Day8 overall is NOT COMPLETE; 8-B/8-C physical gates remain pending.
 
 ## Long-term backlog — preserved for later planning
 
