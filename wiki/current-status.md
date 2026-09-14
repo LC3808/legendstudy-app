@@ -4,12 +4,11 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8 production migration PASS; actual Study JWT acceptance pending.**
+**Day 7 = COMPLETE. Day 8-A Study Core implemented; automated and iOS guest runtime verified. A/B Flutter runtime pending. Day 8 overall is not COMPLETE.**
 
-Product Owner accepted the final runtime results. Repository/code and Wiki were
-checked before this documentation closeout. Live deployment/JWT/Flutter results
-below are owner-reported and match the checked-in acceptance tools; they were not
-rerun in this documentation-only task. Earlier implementation checkpoints remain
+Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
+Day 8 production migration and full real A/B Study JWT acceptance are also
+owner-confirmed. Day 8-A checks actually run in this implementation are listed separately. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
 ## Repository and product baseline
@@ -52,40 +51,54 @@ runtime acceptance. These limits do not reopen the owner-accepted Day 7 scope.
 Full runtime markers and test procedure: [D-Day storage](day-7-dday-storage-proposal.md).
 School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 
-## Validation baseline
+## Day 8-A Study Core
 
-- Flutter analyze PASS; 107 Flutter tests PASS (existing 95 retained/adapted plus
-  12 persistence tests), including 360×640 and 2× text scale.
-- 13 Python verifier/runner offline tests PASS; NEIS Deno typecheck and 9 proxy
-  tests PASS at the recorded feature checkpoint.
-- Android debug and iOS simulator builds PASS; latest owner Flutter persistence
-  runtime smoke PASS. Credential scan and git diff --check PASS at implementation.
-- This closeout changes documents only; Flutter tests/builds and production tests
-  were not rerun. Day 7 validation is historical. The Study migration is now Owner-applied;
-  no Flutter, production, secret or Auth-user changes.
+- General stopwatch: start/pause/resume/end; separate execution/save state. No general
+  target-duration input, DND/Focus control, mock UI/route, scoring or notifications.
+- One native atomic JSON file stores versioned per-owner draft/history/outbox;
+  Android elapsedRealtime and iOS mach_continuous_time drive elapsed arithmetic.
+  The ticker only refreshes display. Same-boot restore checks clock continuity;
+  uncertain/reboot gaps require retaining the last checkpoint or discarding.
+- Guest completions persist on this device with `이 기기에 저장됨`; no login required
+  and no guest-to-cloud upload. Auth completions use immutable narrow study_sessions
+  INSERT and verified read-back; `저장됨` only after acknowledgement. Failed writes
+  retain the local record as `동기화 대기` with retry. Old-account state is cleared
+  immediately; request identity and async generations protect account boundaries.
+- Home and Study share KST interval-union totals, including active local overlay,
+  study + mock history, midnight split, pause exclusion and seven zero-filled dates.
+  Cloud reads use bounded keyset pagination, 2,000 + sentinel; overflow never presents
+  partial totals as complete. Initial history failure is distinct from empty.
+- Timer is primary, today total is flat, controls precede compact seven-day text.
+  48px targets, tabular figures, textPrimary and narrow/large-text vertical controls.
+  Day 7 Home layout, profiles/school/D-Day and database contracts are unchanged.
+- Claude review preserved verbatim in [UI review](day-8-study-ui-review.md), with
+  Owner-approved overrides appended separately. Current contract: [Study v1](study-v1.md).
 
-## Next: Day 8 Study — JWT verifier ready, Flutter not implemented
+## Day 8-A validation and next gate
 
-[Study v1](study-v1.md) defines 8-A timer/state/guest/auth/Home/seven-day behavior,
-8-B platform-aware focus, 8-C mock countdown/notifications and 8-D later scoring.
-[Storage proposal](day-8-study-storage-proposal.md) includes reviewable SQL,
-preflight/catalog/rollback and real JWT acceptance plan. New migration:
-20260914000100_study_sessions.sql; Owner-applied with postflight PASS. Copy-ready SQL is in the
-[migration package](day-8-study-migration-package.md).
-
-Approved v1: durable local active timer, immutable completed cloud sessions with
-validated active intervals; no live cross-device timer or automatic guest upload.
-Study shell and Home summary remain static; this task changes design/proposal only.
-Android DND requires policy access and own-rule lifecycle validation; iOS has manual
-Focus guidance, not a promised automatic global toggle. Focus preference stays local.
-
-Owner approved the contract; cancelled sessions remain local, with no cloud status
-column. The bounded KST-window SELECT contract adds no aggregate RPC.
-Next Owner runs tool/verify_study_sessions_jwt.py with hidden A/B passwords;
-actual JWT PASS is required before 8-A Flutter implementation. No production call/deployment, Flutter implementation, push, PR or merge in this
-step. Global study_rows=0 and profile preservation are Owner-reported; verifier checks
-A/B-visible exact counts,cleanup and retained Auth users. Python syntax and13 offline
-tests PASS; no live JWT request this turn. Day 8 is not COMPLETE.
+- Flutter analyze PASS; 134 Flutter tests PASS (107 existing retained/adapted plus27
+  Study tests), including 360×640/2×, monotonic recovery, 24h/256 guards, guest/auth,
+  pending retry, account switch during disk/network work, KST union and pagination.
+- Android debug and iOS simulator builds PASS. Android SDK XML-version warning is
+  non-fatal; Android physical-device runtime has not been verified.
+- iOS simulator guest runtime PASS: start, pause/resume, running-controller restore,
+  completed local save, reconstructed state + Home summary and original local-file
+  restoration. This proves real native I/O/clock with provider reconstruction, not
+  OS process-kill/reboot or physical-device screen-lock acceptance.
+- Full production Study JWT acceptance PASS is Owner-reported. This is separate
+  from the new Flutter persistence runtime. A/B Flutter cloud save/restore, isolation,
+  pending retry and profile preservation remain **PENDING** until the opt-in runner
+  results arrive. No production request/schema/fixture/Auth mutation by this task.
+- Run `python3 tool/run_study_flutter_smoke.py /Users/woojinchang/legendstudy-local.json`
+  from the repository in a local interactive terminal. Hidden passwords are sent to
+  the simulator over a one-use loopback endpoint, never in files/defines/logs. Existing
+  A/B Study history causes STOP; cleanup targets run-owned UUIDs only and restores
+  the original local snapshot. Auth accounts are retained.
+- 18 Study Python verifier/runner offline tests and Python syntax PASS. Credential
+  scan and git diff --check PASS. Existing migrations are unchanged.
+- Finish A/B Flutter runtime and physical lifecycle acceptance before claiming full
+  Study persistence/platform verification. 8-B focus capability planning may proceed;
+  actual DND integration remains a separate task. Day 8 overall is not COMPLETE.
 
 ## Long-term backlog — preserved for later planning
 
@@ -109,11 +122,3 @@ These are future planning items, not implemented or approved production deployme
   Day 7 COMPLETE is a development milestone, not general release readiness.
 - No credentials committed. Existing source attribution on school setup, system
   body typography, public browsing and optional-login principles remain in force.
-
-## Latest Study JWT checkpoint
-
-Owner-run login,normal study,mock and interval validation PASS. Generated-column
-INSERT correctly returned400/428C9; verifier allowlist corrected for that field
-only. Cleanup,A/B baseline and existing profile fields/auth users PASS. user_id /
-created_at retain403/42501-only acceptance; later stages and full acceptance await
-rerun.17 offline verifier tests PASS; no schema or production change in this fix.

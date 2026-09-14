@@ -1,11 +1,11 @@
-# Day 8 Study v1 — architecture and UI contract proposal
+# Day 8 Study v1 — approved contract and core implementation
 
-Reviewed: 2026-09-14. **Design approved; production migration/postflight PASS; actual JWT acceptance pending.**
-Day 7 remains COMPLETE. This document defines approved behavior; no Study feature, package,
-native permission, DB object or production deployment was implemented in this task.
-Claude UI/UX review can refine presentation within these proposed data boundaries.
+Reviewed: 2026-09-14. **Production migration and full A/B JWT acceptance PASS (Owner-reported).
+Day 8-A core implemented; automated/iOS guest runtime verified; A/B Flutter runtime pending.**
+Day 7 remains COMPLETE; Day 8 overall is not COMPLETE.
+[Claude review](day-8-study-ui-review.md) preserves the original and separates Owner overrides.
 
-## Verified starting point
+## Historical design starting point (superseded by implementation below)
 
 Local branch codex/day-7-school-neis, starting commit
 05a055310c321e06d9e87f3b4612e3c88c21d89a (historical inspection point, not permanent HEAD).
@@ -33,7 +33,7 @@ design system before reviewing source and all three applied migration files.
 | 8-C | Preset/custom mock countdown, pause/resume/end/submit, local completion notification | Separate UI/platform acceptance after 8-A |
 | 8-D later | Answer entry, scoring, results, grade provenance and explanations | Separate content/attempt design; no answer/cutoff table now |
 
-## Storage choice: B recommended
+## Storage choice: B approved
 
 | Choice | Benefit | Cost / failure boundary |
 |---|---|---|
@@ -50,8 +50,10 @@ an internally valid interval list.
 
 ## Local clock, state and durable transitions
 
-Use an injected StudyClock and a transactional local store (SQLite recommended;
-package/version selection is implementation work). Store schema version, fixed
+Use an injected StudyClock and atomic local store. The initial design recommended
+SQLite; 8-A uses native atomic file replacement to commit the single draft/history/
+outbox document without adding a database dependency. Serialized writes cover all
+owners. This is an intentional implementation choice, not volatile preferences. Store schema version, fixed
 session UUID, immutable owner namespace, mode/title/subject/plan, UTC start anchor,
 monotonic anchor and recovery metadata, state, closed active intervals, open interval
 start, last durable checkpoint, final payload and outbox status. No JWT in this store.
@@ -78,8 +80,7 @@ callback for session durability.
    can be established. Paused restart remains paused.
 6. Adapter must prove monotonic continuity across process restart (public per-boot
    source + platform recovery metadata). A serialized Dart Stopwatch/Swift Instant
-   is not a portable restart clock. Reboot, unsupported continuity, corrupt draft,
-   negative delta or inconsistent wall/monotonic anchors enters recoveryRequired.
+   is not a portable restart clock. Reboot, unsupported continuity, negative delta or inconsistent wall/monotonic anchors enters recoveryRequired.
    Show last verified duration: “시간 기록을 확인해 주세요”; retain up to last
    checkpoint or discard, with explicit choice. Never auto-credit uncertain gap.
    Choosing retain closes the session at that checkpoint before a new one starts.
@@ -105,7 +106,7 @@ arithmetic; OS suspension does not promise callback execution.
 ## Guest, account ownership and cloud repository
 
 Guest namespace is installation-local and durable across process restarts, with
-local history and today's total. Label “이 기기에 저장”; uninstall loses it. It has
+local history and today's total. Label “이 기기에 저장됨”; uninstall loses it. It has
 no cloud persistence and is not Supabase anonymous Auth. Guest records never auto-upload
 when login occurs. Cloud accounts and guest storage are separate namespaces.
 
@@ -118,15 +119,14 @@ B ownership. Guest active work closes into guest history on login, never into A.
 Auth loading/error is not equivalent to a deliberate logout: block new cloud commands
 and show resolving/error state without misclassifying a known owner's draft as guest.
 
-Proposed interfaces (not implemented):
+Implemented 8-A interfaces (controller also coordinates summary and sync):
 
-- StudySessionController: start / pause / resume / finish / cancel / recover.
-- StudyLocalStore: atomic draft + history + outbox transactions, scoped internally.
-- StudyRepository: fetchCurrentSessions(window, cursor), saveCompletedSession(payload),
-  deleteCurrentSession(id). The name saveCompletedSession covers completed snapshots,
-  excluding cancelled work; callers never send owner/created_at/duration counters.
-- StudySummaryProvider: one shared pure interval aggregator for Home and Study.
-- StudySyncCoordinator: owner-scoped retry and merge, generation/request guards.
+- StudyController: start / pause / resume / end / recover / sync; owner epoch and
+  serialized local mutations, separate TimerPhase and SavePhase.
+- StudyLocalStore: native read/write of atomic versioned draft/history/outbox document.
+- StudyRepository: insertCompleted / fetchWindow / deleteOwn. Current-session owner
+  is captured in the repository; immutable INSERT has no UPDATE API.
+- studyWeek: pure union/split function used by Home and Study through one controller.
 
 Before every network dispatch ensure draft owner still equals current SDK user.
 Supabase INSERT omits user_id, deriving it via DEFAULT auth.uid(); caller cannot
@@ -155,9 +155,9 @@ apply to fetch, upload, deletion and aggregate completion, not only one provider
 
 Home retains “나의 공부 시간 / 학습으로 이동”, 48px action and compact row. Empty:
 “오늘 공부 기록이 아직 없어요.” Recorded: “오늘 1시간 42분 공부했어요.” Under one
-minute: “오늘 1분 미만 공부했어요.” Use completed records only for Home/summary;
-running duration belongs to the central Study timer, with optional “공부 중” meta
-and no second clock. Local pending completed work is included once with sync status.
+minute: “오늘 1분 미만 공부했어요.” Include completed records and the current draft
+active portion in both Home and Study totals (Owner override). Home keeps a summary,
+not a duplicate seconds clock. Local pending completed work is included once with sync status.
 Cancelled sessions may stay only in local history as “취소됨”, excluded from totals; regular 공부
 종료 means completed, not cancelled. Explicit discard requires confirmation.
 
@@ -292,34 +292,55 @@ pending meta. Fetch failure preserves available cache with retry. Starting anoth
 timer is not blocked by unrelated history network errors. Home retains approved
 row hierarchy; no new large focus/permission section above the timer.
 
-## Acceptance plan and approval gate
+## Day 8-A implementation and verification (2026-09-14)
 
-See [storage proposal](day-8-study-storage-proposal.md) for exact SQL/catalog/rollback
-and real JWT steps. Future tests must cover:
+Implementation files: `features/study/domain/study_models.dart`,
+`data/study_local.dart`, `data/study_repository.dart`,
+`application/study_controller.dart`, `study_providers.dart` and `presentation/study_page.dart`.
+Home only changes its existing summary body. Native bridge is in MainActivity/AppDelegate.
+Four presentation widgets cover page/flat summary, timer, controls and seven days.
+No dependency, schema/migration, profile, NEIS, D-Day or route additions.
 
-- Pure fake-clock: pause gaps, delayed callback, midnight, 7 zero days, overlapping
-  devices and mode filters, fractional rounding, limit clipping, under1second,
-  clock reversal/timezone shift, reboot/unproven continuity and256interval boundary.
-- Durable store: crash before/after each atomic transition, corrupt/versioned draft,
-  paused/running restart, end+outbox exactly once, failed disk write, offline/retry,
-  duplicate/uncertain network success, local/server UUID merge and deletion retry.
-- Auth: guest survives restart, no login import, A restore, logout/account switch,
-  auth resolution/error, stale fetch/save, identity change between check and send,
-  A pending queue inaccessible to B, token renewal without losing ownership.
-- Widget: every state above at 360×640 and 2×, 48px actions, tabular figures, keyboard,
-  screen reader, Home unset/recorded/running/pending/error and7-day zero/history.
-- Real JWT: owner SELECT/INSERT/DELETE, forbidden column/UPDATE and cross-user
-  denial, malformed segments/date/title/plan, retry idempotency and fixture cleanup.
-- Real Android/iOS: screen lock, background, kill/restart, offline end/restore/sync,
-  A/B isolation, Home refresh. 8-B access denial/revocation/user DND changes and
-  crash cleanup; 8-C notification denial/reboot/pause rescheduling in separate gates.
-- Implementation gate: flutter analyze/test, git diff --check, Android debug/iOS
-  simulator builds plus physical-device lifecycle acceptance. Existing Day 7 tests
-  and profile/school/D-Day contracts remain intact. None rerun as Study acceptance now.
+Local storage is Application Support on iOS (atomic write, protection until first
+unlock) and app files on Android (AtomicFile). Draft + completed outbox are one atomic
+commit. Namespaces are guest or current-user UUID; tokens/passwords are never stored.
+The single file is an app-internal serialization format, not an encryption claim.
+Corrupt/unsupported file or malformed draft reports local read error and blocks new
+starts without overwriting the file; repair/export UI remains follow-up. Clock
+uncertainty has explicit keep-last-checkpoint/discard actions. No unverified gap credit.
 
-Owner approved B/local durability, cancelled exclusion with no cloud cancellation,
-KST/overlap-union summary, 24h/256interval and1min–12h bounds, Android capability
-constraints/iOS manual guidance and local Focus preferences. Final migration is
-Owner-applied with postflight PASS. Next: real JWT acceptance, then8-A
-implementation. **STOP before production execution or Flutter implementation here.
-Day8 is not COMPLETE.**
+Android elapsedRealtime + boot count and iOS mach_continuous_time + boot metadata
+check same-boot elapsed continuity and wall/monotonic drift. If boot metadata is
+unavailable, a per-process nonce keeps same-process timing functional and forces
+confirmation across process restart; it never claims cross-restart continuity.
+Android BOOT_COUNT is available from API24 ([official reference](https://developer.android.com/reference/android/provider/Settings.Global#BOOT_COUNT)). Start/pause/resume/end
+are durable; running checkpoints every30s. Idle date refresh every30s while mounted;
+foreground triggers clock/history refresh. Background callbacks are best effort;
+24h cap finalizes at the boundary on the next execution. 257th active interval is
+prevented, under1s is not uploaded. Known draft can pause/end while Auth resolves;
+new starts cannot accidentally assume guest ownership.
+
+Completed cloud writes contain id,mode,title,subject,planned_duration_seconds,
+started_at,ended_at,active_segments only. UUID retries use ignore-duplicates + full
+payload read-back, never UPDATE. Bound request token prevents A→B dispatch reassignment.
+Expired token leaves pending work for retry after a valid session. On account change,
+old draft closes into its original local namespace; guest is never auto-uploaded.
+Cached totals are labelled stale on refresh failure; initial unreadable cloud history
+is not shown as zero. Overflow has no numeric total. Local retention is not capped;
+large-history compaction/SQLite migration and deletions UI are later work. The repository
+DELETE is available for owned records/testing; no history-delete UI exists in8-A.
+
+Validation: analyze PASS,134 Flutter tests PASS,Android debug/iOS simulator build
+PASS,18 Study Python offline tests PASS,syntax/credential scan/diff checks PASS.
+iOS guest native smoke PASS: start,pause,resume,end,running-controller reconstruction,
+local completion restoration,Home and original-file cleanup. Auth A/B Flutter smoke
+is pending Owner execution of `tool/run_study_flutter_smoke.py` using getpass; do not
+substitute the Owner-reported full JWT verifier PASS for this Flutter evidence.
+Runner checks cloud save/read-back,controller reconstruction,Home,B isolation,simulated
+write failure/pending/retry,read-only profile snapshots,UUID cleanup and retained Auth.
+It stops on existing A/B Study rows; it never deletes pre-existing user records.
+
+Remaining runtime limits: physical Android/iOS lock/background/process-kill/reboot,
+actual OS process-restart Auth restoration and A/B Flutter results not yet verified.
+No focus permissions, mock exam UI, notifications, scoring or grade behavior shipped.
+8-B planning may proceed; full8-A runtime closeout awaits those recorded checks.

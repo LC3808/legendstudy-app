@@ -5,6 +5,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
 import 'day_target_card.dart';
+import '../../study/study_providers.dart';
 import '../../school/presentation/home_meal_card.dart';
 import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
@@ -58,7 +59,7 @@ class HomePage extends ConsumerWidget {
       ),
       DailyUtilityCard(
         title: '나의 공부 시간',
-        body: const Text('오늘 공부 기록이 아직 없어요.'),
+        body: Text(ref.watch(studyControllerProvider).summary),
         action: TextButton(
           onPressed: () => context.go('/study'),
           child: const Text('학습으로 이동'),

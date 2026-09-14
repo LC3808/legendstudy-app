@@ -24,7 +24,7 @@ void main() {
     );
 
     for (final entry in {
-      '학습': '공부 타이머',
+      '학습': '00:00:00',
       'MY': '나의 학습 공간',
       '홈': 'D-DAY',
     }.entries) {

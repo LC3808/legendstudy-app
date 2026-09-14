@@ -589,3 +589,21 @@ Flutter persistence smoke: PASS
   created_at remain403/42501 only; no blanket400 pass or cleanup changes.
 -17 offline tests,Python syntax,credential scan,diff and unchanged schema checks PASS.
   Full live acceptance awaits rerun. No production/Flutter/migration/push/PR/merge.
+
+
+## 2026-09-14 — Day 8-A Study Core implementation
+
+- Start: codex/day-7-school-neis at b7086cf (historical baseline only). Owner confirms
+  full Study production JWT acceptance PASS; no new schema/production deployment.
+- Added local monotonic stopwatch,atomic per-owner draft/history/outbox,immutable
+  cloud repository,pending retry,KST interval-union seven-day/current overlay and Home.
+  Timer-first UI,48px controls,tabular figures and narrow/large-text layout. Claude
+  source review preserved verbatim; Owner overrides explicitly appended.
+- Analyze,134 Flutter tests,Android debug/iOS simulator builds,18 Study Python tests,
+  syntax,credential scan,diff checks PASS. iOS guest native start/pause/resume/end,
+  running-state reconstruction,local history/Home and original snapshot restoration PASS.
+- A/B Flutter runtime is awaiting hidden-password Owner runner; not marked PASS.
+  Physical-device lifecycle/process-kill acceptance remains outstanding. No DND,
+  Focus,mock UI,notification/scoring implementation. Day8 overall not COMPLETE.
+- Existing migrations/profile/school/D-Day preserved. No push,PR or merge. Existing
+  untracked Claude outputs source and Supabase CLI temp metadata remain excluded.

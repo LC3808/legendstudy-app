@@ -249,7 +249,7 @@ void main() {
       tester
           .widget<FilledButton>(find.widgetWithText(FilledButton, '공부 시작'))
           .onPressed,
-      isNull,
+      isNotNull,
     );
     semantics.dispose();
   });

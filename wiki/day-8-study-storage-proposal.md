@@ -1,6 +1,6 @@
-# Day 8 Study storage — deployed, JWT acceptance pending
+# Day 8 Study storage — deployed and JWT accepted
 
-Reviewed: 2026-09-14. **Production migration/postflight PASS (Owner-reported); JWT acceptance pending.**
+Reviewed: 2026-09-14. **Production migration/postflight and full A/B JWT acceptance PASS (Owner-reported).**
 Canonical behavior/UI: [Study v1](study-v1.md). Completed sessions only are stored
 in cloud. Cancellation remains local, excluded from totals. No cloud status column.
 No production calls, Flutter changes or edits to the three previously applied migrations.
@@ -97,7 +97,7 @@ local public config. Do not print response bodies, JWT, headers/passwords/keys. 
 service-role client or SQL SET ROLE substitute. Write a dedicated opt-in verifier
 at implementation time with named assertions, safe status/count diagnostics, and
 finally-cleanup of only run-owned random session UUIDs registered before dispatch.
-Dedicated verifier is now prepared; actual execution is pending. See the latest
+Dedicated verifier has completed full Owner-run acceptance. See the latest
 production/JWT section below for the final narrower execution scope and safety rules.
 
 1. Confirm project, login A/B, current identities and existing profile snapshots
@@ -280,3 +280,12 @@ claim of an additional production request by Codex.
 rejection,absent-row enforcement and both generated-rejection paths through full
 cleanup. Syntax,credential-pattern and diff checks PASS. No migration/schema,
 production,Auth-user or Flutter change; no push/PR/merge.
+
+## Full JWT acceptance accepted / Flutter implementation (2026-09-14)
+
+Owner explicitly confirms all real A/B JWT acceptance stages PASS after the generated
+column rejection fix, including fixture cleanup and Auth retention. Earlier pending
+checkpoints above are historical. No production schema change or repeat acceptance
+mutation was performed by the Flutter implementation task. Study core now uses this
+immutable contract. Flutter guest native runtime is PASS; A/B Flutter save/restore/
+isolation/pending verification remains separately pending. See current-status.md.

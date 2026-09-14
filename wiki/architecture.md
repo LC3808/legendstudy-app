@@ -296,7 +296,7 @@ explicit retry refresh. Auth change invalidates school/meal state. Existing
 StatefulShellRoute topology and Day 6 contracts are unchanged.
 
 
-## Day 8 Study architecture — proposed, not implemented
+## Day 8-A Study Core — implemented
 
 Canonical proposal: [Study v1](study-v1.md) and [storage](day-8-study-storage-proposal.md).
 StudyController owns one device-local active timer independently of navigation;
@@ -306,11 +306,21 @@ session-derived ownership, idempotent UUID insertion and stale-account guards.
 Shared interval aggregation feeds Study and the compact Home summary. Profiles,
 school, D-Day, content and existing auth contracts remain unchanged.
 
-No timer persistence/native Focus/scoring code has been added. Product Owner design approval is recorded;
-owner application and actual JWT validation still precede 8-A implementation. Platform focus
-and mock notifications are separate capability gates; Day 7 remains COMPLETE.
+8-A implements StudyClock/StudyLocalStore with a native atomic JSON document in app
+storage: Android AtomicFile + elapsedRealtime/boot count; iOS atomic Data write +
+mach_continuous_time/boot metadata. Serialized draft/outbox commits use no new DB
+package. This replaces the earlier SQLite recommendation for the single-writer v1
+snapshot. History growth/compaction and physical-device crash/lock acceptance remain
+follow-up. Uncertain clock requires confirmation; malformed local state is preserved
+with an error rather than overwritten.
 
-Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
-column or cloud cancellations. Migration is Owner-applied; actual Study JWT acceptance is pending. The copy-ready
-[package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
-are ready; no aggregate RPC, existing table edits or Flutter implementation added.
+Native bridge contains clock and local file I/O only, no DND/Focus behavior. General
+stopwatch has no planned duration. Shared KST union includes running active overlay,
+study/mock completed history and zero days. Bounded cloud pagination enforces2000+
+sentinel and explicit overflow. Controller generation and request-bound Auth context
+protect owner isolation; idempotent UUID read-back confirms saves.
+
+Migration/postflight and full real JWT acceptance are Owner-reported PASS. New Flutter
+core has automated and iOS guest native verification; A/B Flutter runtime is pending.
+No migrations,profiles,NEIS,D-Day or content contract changed. Focus/mock/notification
+capability gates remain separate; Day8 is not COMPLETE.
