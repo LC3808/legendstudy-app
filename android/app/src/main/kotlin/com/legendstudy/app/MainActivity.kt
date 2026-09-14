@@ -16,6 +16,7 @@ class MainActivity : FlutterActivity() {
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        StudyFocusBridge(this, flutterEngine.dartExecutor.binaryMessenger)
         val store = AtomicFile(File(filesDir, "study-state-v1.json"))
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/study")
             .setMethodCallHandler { call, result ->

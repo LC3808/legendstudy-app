@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'focus/focus_service.dart';
+import 'focus/study_focus_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +10,14 @@ import 'data/study_local.dart';
 import 'data/study_repository.dart';
 import 'application/study_controller.dart';
 
+final focusServiceProvider = Provider<FocusService>(
+  (ref) => NativeFocusService(),
+);
+final studyFocusProvider = Provider<StudyFocusController>((ref) {
+  final focus = StudyFocusController(ref.watch(focusServiceProvider));
+  ref.onDispose(focus.dispose);
+  return focus;
+});
 final studyClockProvider = Provider<StudyClock>((ref) => NativeStudyClock());
 final studyLocalStoreProvider = Provider<StudyLocalStore>(
   (ref) => NativeStudyLocalStore(),
@@ -35,6 +45,12 @@ final studyControllerProvider =
         ref.watch(studyLocalStoreProvider),
         ref.watch(studyRepositoryFactoryProvider),
       );
+      final focus = ref.watch(studyFocusProvider);
+      void observeFocus() => focus.observe(
+        session: controller.recovery ? null : controller.draft?.id,
+        ready: controller.ready,
+      );
+      controller.addListener(observeFocus);
       ref.listen(studyRefreshProvider, (_, next) {
         if (next.hasValue) unawaited(controller.tick());
       });

@@ -326,6 +326,26 @@ Day 8-A = COMPLETE, including cloud save/restore, Home aggregate, isolation, pen
 retry, profile/school/D-Day preservation and fixture cleanup. Runtime evidence uses
 provider reconstruction; physical lifecycle/OS restart checks remain follow-up.
 No migrations,profiles,NEIS,D-Day or content contract changed. Focus/mock/notification
-capability gates remain separate. Next: Day 8-B Focus / DND, with device-local
+capability gates remain separate. Day 8-B Focus / DND is implemented below, with device-local
 preference and official platform capabilities; failure/denial never blocks the timer.
 iOS does not automatically toggle system Focus. Day8 overall is not COMPLETE.
+
+## Day 8-B Focus integration
+
+NativeFocusService and StudyFocusController live under features/study/focus. A provider
+listener observes existing timer draft/readiness/recovery without changing clock,
+active intervals, local Study schema or cloud repository. First-start UI selects
+Focus intent, commits Study, then attempts native integration with bounded calls.
+Permission settings never form a blocking future for timer creation.
+
+Android StudyFocusBridge uses API29+ explicit owned rules, configuration Activity and
+ACCESS_NOTIFICATION_POLICY; no global filter/policy mutation. Persisted activation
+lease is reconciled on session change/resume, preserved on pause. Revoked access keeps
+cleanup metadata. Older Android uses manual guidance. iOS bridge stores a local,
+backup-excluded preference and returns guide-only/unsupported activation. The Focus
+preference is independent of Auth and excluded from Android backup/device transfer.
+
+An app kill may leave the owned rule until app re-entry; no background expiry service
+or force-stop cleanup guarantee. Simulator and unit results do not close physical
+DND acceptance. See Study v1 for official sources and remaining checks. Day 8-B is
+implemented, not COMPLETE. No DB/Focus cloud field or 8-C UI/notifications added.

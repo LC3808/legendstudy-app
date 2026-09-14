@@ -11,6 +11,35 @@ import Darwin
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
     if let controller = window?.rootViewController as? FlutterViewController {
+      // iOS supports manual Focus guidance, not automatic system Focus activation.
+      let focus = FlutterMethodChannel(name: "com.legendstudy.app/focus", binaryMessenger: controller.binaryMessenger)
+      focus.setMethodCallHandler { call, result in
+        do {
+          switch call.method {
+          case "status": result(["capability": "guideOnly", "permission": false])
+          case "readPreference", "writePreference":
+            let support = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            var folder = support.appendingPathComponent("StudyFocusLocal", isDirectory: true)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            var flags = URLResourceValues()
+            flags.isExcludedFromBackup = true
+            try folder.setResourceValues(flags)
+            let file = folder.appendingPathComponent("preference.txt")
+            if call.method == "readPreference" {
+              result(FileManager.default.fileExists(atPath: file.path) ? try String(contentsOf: file, encoding: .utf8) : "ask")
+            } else {
+              guard let value = call.arguments as? String, ["ask", "always", "disabled"].contains(value), let data = value.data(using: .utf8) else {
+                result(FlutterError(code: "FOCUS_INPUT", message: "Invalid focus preference", details: nil)); return
+              }
+              try data.write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+              result(nil)
+            }
+          case "activate": result("unsupported")
+          case "requestPermission", "reconcile": result(nil)
+          default: result(FlutterMethodNotImplemented)
+          }
+        } catch { result(FlutterError(code: "FOCUS_UNAVAILABLE", message: "Focus unavailable", details: nil)) }
+      }
       let channel = FlutterMethodChannel(name: "com.legendstudy.app/study", binaryMessenger: controller.binaryMessenger)
       channel.setMethodCallHandler { call, result in
         do {

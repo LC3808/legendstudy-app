@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <application
+        android:fullBackupContent="@xml/focus_backup_rules"
+        android:dataExtractionRules="@xml/focus_data_extraction_rules"
         android:label="레전드스터디"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -25,6 +28,15 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".StudyFocusSettingsActivity" android:exported="true"
+            android:theme="@android:style/Theme.Material.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.app.action.AUTOMATIC_ZEN_RULE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.service.zen.automatic.ruleType" android:value="레전드스터디 공부" />
+            <meta-data android:name="android.service.zen.automatic.ruleInstanceLimit" android:value="1" />
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

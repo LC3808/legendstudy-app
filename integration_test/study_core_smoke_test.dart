@@ -123,6 +123,10 @@ void main() {
       await tester.ensureVisible(find.text(name).last);
       await tester.tap(find.text(name).last);
       await tester.pumpAndSettle();
+      if (name == '공부 시작' && find.text('안내 건너뛰고 시작').evaluate().isNotEmpty) {
+        await tester.tap(find.text('안내 건너뛰고 시작'));
+        await tester.pumpAndSettle();
+      }
     }
 
     Future<void> studyForTwoSeconds() async {

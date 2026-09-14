@@ -3,6 +3,7 @@
 Reviewed: 2026-09-14. **Production migration and full A/B JWT acceptance PASS (Owner-reported).
 Day 8-A Study Core = COMPLETE; Flutter Guest/authenticated runtime PASS (Owner-reported).**
 Day 7 remains COMPLETE; Day 8 overall is not COMPLETE.
+Day 8-B implementation and its pending physical-device gate are recorded in the Focus section.
 [Claude review](day-8-study-ui-review.md) preserves the original and separates Owner overrides.
 
 ## Historical design starting point (superseded by implementation below)
@@ -210,38 +211,113 @@ and applicable cohort/subject/score scale; predictions cannot masquerade as fina
 Wrong-answer links resolve existing resources by occurrence. No scoring schemas,
 answers, cutoffs or ingestion added to the present proposal.
 
-## Focus capability and preference (8-B, not implemented)
+## Day 8-B Focus / DND — implemented, physical-device acceptance pending
 
-Android: request Notification Policy Access contextually, open system policy-access
-settings, then recheck isNotificationPolicyAccessGranted. OS/user denial must still
-start the timer. Own AutomaticZenRule only; end/pause/cancel releases our rule,
-resume rechecks consent/access. Do not restore an old global snapshot over changes
-made by the user or another rule. On restart reconcile a stale own rule; rule expiry
-and process-kill cleanup need physical-device proof before automatic integration ships.
-Older API behavior requires a separate adapter; until safe own-rule lifecycle is
-verified, offer manual settings guidance, not a global toggle fallback.
-([NotificationManager](https://developer.android.com/reference/android/app/NotificationManager))
+Current local Android compile/target SDK35, minSDK21 (FlutterExtension used by
+app/build.gradle.kts). No SDK target downgrade, private API or third-party DND package.
 
-Android15 targetAPI35+ cannot globally turn DND off or replace global policy;
-legacy setters affect an implicit rule and system combines policies. Therefore
-ending our session cannot promise global DND is off. ([Android15 DND changes](https://developer.android.com/about/versions/15/behavior-changes-15#dnd-changes))
+| Platform | Implemented capability | Evidence boundary |
+|---|---|---|
+| Android API29+ | Notification Policy Access + app-owned AutomaticZenRule condition | Build and mocked/JVM logic tests; actual DND physical-device test pending |
+| Android API21–28 | Manual quick-settings guidance; stopwatch works | No global-filter fallback or deprecated provider-service implementation |
+| iOS | Optional Control Center / Settings > Focus guidance | Simulator guide/preference/timer PASS; physical iPhone flow pending |
+| Other/unavailable bridge | Unsupported; timer starts without Focus | Failure paths covered by Flutter tests |
 
-Apple's documented Focus Filters let an already activated Focus change app behavior;
-they are not Focus activation controls. This design therefore treats general
-third-party automatic global Focus/DND toggling as unsupported, not parity with
-Android. iOS offers concise Control Center/manual Focus guidance; no private API,
-settings deep-link guess or imitation “enabled” status. User-configured Shortcuts
-can be investigated separately, not advertised as automatic app control.
-([Apple Focus filters](https://developer.apple.com/documentation/AppIntents/defining-your-app-s-focus-filter))
+Android's [NotificationManager API](https://developer.android.com/reference/android/app/NotificationManager)
+provides ownership-scoped rule operations and policy-access checks. Condition updates
+can be overridden by user actions; a successful request does not prove global DND.
+[Android15 behavior](https://developer.android.com/about/versions/15/behavior-changes-15#dnd-changes)
+requires target35+ apps to avoid changing global DND state/policy. This app never calls
+global setInterruptionFilter/setNotificationPolicy or restores a global snapshot.
+[AutomaticZenRule](https://developer.android.com/reference/android/app/AutomaticZenRule)
+allows a null service owner with a configuration Activity for the API29 condition
+approach. StudyFocusSettingsActivity supplies that declared, exported information
+surface. Only ACCESS_NOTIFICATION_POLICY is added; no notification listener/content
+reading, telemetry, exact-alarm or background service permission.
 
-Device-local preference: ask / always / never; “이번만” is ephemeral consent and
-leaves ask for next session. Always is a preference, never proof of OS permission.
-No profile column or cross-device sync. Expose reset in Study settings. On capable
-Android first use offers 항상 자동 적용 / 이번만 / 사용 안 함 with a clear settings
-handoff; do not repeat-denial-loop. iOS does not offer unsupported automatic choices:
-use “집중 모드 설정 안내” / “안내하지 않음”, with timer continuing either way.
-Account changes release our active focus rule; another account never inherits a
-running rule. Preference remains device-level and explicitly editable.
+The one stored rule ID must match our configuration Activity and condition URI;
+NotificationManager also checks ownership. It uses INTERRUPTION_FILTER_PRIORITY with
+inherited priority policy, leaves user-disabled rules disabled, and sends STATE_TRUE
+once per consented session. No repeated activation on pause/resume or background.
+End, discard/recovery, account switch or expired/missing draft sends STATE_FALSE only
+for an activation lease recorded by this app. The rule itself is retained for next
+use; user overrides remain authoritative. UI says 연동 요청, never guarantees all
+notifications are blocked or global DND is off afterward.
+
+### Local preference, start and permission flow
+
+`ask / always / disabled` are device preference values. Android first start asks
+`집중 모드를 사용할까요?` with `항상 사용 / 이번만 / 사용하지 않음`.
+Once is not persisted; always attempts on subsequent starts. Disabled bypasses Focus.
+A small `집중 설정` action changes the next-start choice. No large Focus card.
+
+After selection, the Study timer is durably committed **before** any OS settings
+handoff. Focus activation then verifies the same durable draft UUID. Local timer
+failure creates no Focus activation. Focus failure/denial/unsupported/timeout cannot
+undo or prevent a successful Study start. Closing the first-choice dialog skips
+Focus and starts the timer. Native operations have bounded waits; no wait for the
+user to return from system settings, and duplicate start taps are guarded.
+
+Explicit always/once with missing access opens the official
+[Notification Policy settings](https://developer.android.com/reference/android/provider/Settings#ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS).
+On return, access is rechecked once and activation is limited to that same session.
+Denial never loops the permission screen. Later automatic always attempts with no
+access show a short message; explicit `알림 권한 설정` remains in settings. Revocation
+retains any owed cleanup metadata for a later permitted retry and never stops Study.
+Account switches discard pending permission activation but keep the device preference.
+
+Android uses study-focus-v1 SharedPreferences (preference, owned rule ID and lease).
+The file is excluded from cloud backup and device transfer through the two supported
+[Android backup rule formats](https://developer.android.com/identity/data/autobackup).
+iOS uses an atomic Application Support/StudyFocusLocal/preference.txt file with
+[isExcludedFromBackup](https://developer.apple.com/documentation/foundation/urlresourcevalues/isexcludedfrombackup).
+No Focus fields enter Supabase, profiles, Study cloud payloads or analytics.
+
+### iOS capability
+
+Apple [Focus filters](https://developer.apple.com/documentation/appintents/defining-your-app-s-focus-filter)
+change app behavior for the current system Focus; they are not a public general
+system-Focus activation API. Implementation therefore offers manual guidance only,
+with no automatic toggle, false active label or private Settings URL. First-start
+choices are 안내 건너뛰고 시작 / 다시 안내하지 않고 시작. Both start Study. The small
+settings action can restore guidance. There is no Android-style always-auto choice.
+
+### Lifecycle and next-mode reuse
+
+**Latest Owner policy overrides the earlier design:** pause/resume keep Focus;
+only terminal session changes release the app's activation. Timer accounting code
+is unchanged. study_providers observes draft identity/readiness/recovery and feeds
+StudyFocusController; focus exceptions never flow into StudyController transitions.
+FocusService isolates native capability/request/reconcile methods. 8-C can call the
+same start coordinator and session observer rather than build another DND adapter.
+
+The native activation lease includes session UUID and a24h wall deadline. Restart
+reconciles it with a verified local running/paused draft; unknown/recovery/missing
+or other-account draft requests owned deactivation. **No alarm/foreground service
+runs after process kill. A stale rule may remain until app re-entry, even beyond the
+deadline.** No claim of automatic force-stop/reboot cleanup. The settings UI asks users
+to check device DND after force-closing. This is a physical-device acceptance/release
+limitation, not a reason to globally turn off user DND or hide the risk.
+
+### Validation and remaining gate
+
+- Analyze PASS;156 Flutter tests PASS (134 preserved +22 Focus cases): preference,
+  denial/grant/revocation/failure, no repeated settings, stale return/activation,
+  pause/resume/end/account/recovery, iOS no activation,360×640/2× and48px targets.
+- Android JVM2 lease-policy tests PASS; these test decisions, not OS permission or
+  effective DND. Android debug and iOS simulator builds PASS. Diff/credential/scope
+  checks PASS; no schema/migration changes.
+- iOS simulator native smoke PASS: guide_skip_timer_start, no_system_activation,
+  device_preference_restore, local_cleanup. Original local Study/preference restored.
+- Existing Day 8-A Guest native smoke rerun PASS with the iOS guide: start/pause/resume,
+  running restore, local completion, Home and original snapshot cleanup. No Auth/DB mutation.
+- No Android device or configured emulator available. Android physical first-start,
+  all choices, permission request/denial/revocation, real priority DND, pause/resume/end,
+  existing user/other-rule preservation, manual overrides, process-kill/restart and
+  backup/transfer behavior remain unverified. iPhone physical guidance flow also pending.
+- **Day 8-B implemented, NOT COMPLETE.** Day 8-A remains COMPLETE; Day8 overall not
+  COMPLETE. 8-C design can reuse the interface; do not treat physical Focus acceptance
+  as passed or implement mock UI/notifications/scoring in this task.
 
 ## Completion notifications (8-C)
 
@@ -372,9 +448,9 @@ physical Android/iOS lock/background/process-kill/reboot and actual OS process-r
 Auth restoration remain platform follow-up acceptance, not claims of this smoke.
 These limits do not reopen the Owner-accepted Day 8-A milestone.
 
-Day 8-B will implement Android capability-based DND/focus, first-use choices
+Day 8-B now implements Android capability-based DND/focus, first-use choices
 `항상 사용 / 이번만 / 사용 안 함`, and device-local preference. Permission denial or
 feature failure must not block timer start. iOS will not claim automatic system Focus
 toggling. Distinguish platform capabilities using official APIs as specified in the
-Focus section above. No focus permissions, mock UI, notifications, scoring or grade
-behavior are introduced by this closeout.
+Focus section above. That Day 8-A closeout introduced no Focus code. Day 8-B implementation and pending
+physical-device gate are recorded above; mock UI/notifications/scoring remain future.

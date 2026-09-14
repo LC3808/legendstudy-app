@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../study_providers.dart';
+import '../focus/focus_ui.dart';
 import '../application/study_controller.dart';
 import '../domain/study_models.dart';
 
@@ -11,47 +12,70 @@ class StudyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final study = ref.watch(studyControllerProvider);
-    return ShellPage(
-      children: [
-        const AppHeader(title: '학습'),
-        StudyTimerDisplay(study: study),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Text(
-            study.summary,
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: AppTokens.textSecondary),
-          ),
-        ),
-        StudyTimerControls(study: study),
-        if (study.message != null)
+    final focus = ref.watch(studyFocusProvider);
+    return ListenableBuilder(
+      listenable: focus,
+      builder: (context, _) => ShellPage(
+        children: [
+          const AppHeader(title: '학습'),
+          StudyTimerDisplay(study: study),
           Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Semantics(liveRegion: true, child: Text(study.message!)),
-          ),
-        if (study.lastCompletedMs > 0)
-          Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Text('${studyDuration(study.lastCompletedMs)} 공부했어요'),
-          ),
-        if (study.storageLabel.isNotEmpty)
-          Semantics(
-            liveRegion: true,
+            padding: const EdgeInsets.symmetric(vertical: 12),
             child: Text(
-              study.storageLabel,
+              study.summary,
+              textAlign: TextAlign.center,
               style: const TextStyle(color: AppTokens.textSecondary),
             ),
           ),
-        if (study.savePhase == SavePhase.pendingSync ||
-            study.historyError ||
-            study.historyLimit)
-          TextButton(
-            onPressed: () => study.sync(),
-            child: const Text('기록 다시 확인'),
+          StudyTimerControls(
+            study: study,
+            startBusy: focus.busy,
+            startAction: () => focus.start(
+              startTimer: study.start,
+              currentSession: () => study.draft?.id,
+              choose: (capability) => chooseStudyFocus(context, capability),
+            ),
           ),
-        const SectionHeader('최근 7일'),
-        StudyWeekSummary(study: study),
-      ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: focus.busy
+                  ? null
+                  : () => showStudyFocusSettings(context, focus),
+              child: const Text('집중 설정'),
+            ),
+          ),
+          if (focus.message != null)
+            Semantics(liveRegion: true, child: Text(focus.message!)),
+          if (study.message != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Semantics(liveRegion: true, child: Text(study.message!)),
+            ),
+          if (study.lastCompletedMs > 0)
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Text('${studyDuration(study.lastCompletedMs)} 공부했어요'),
+            ),
+          if (study.storageLabel.isNotEmpty)
+            Semantics(
+              liveRegion: true,
+              child: Text(
+                study.storageLabel,
+                style: const TextStyle(color: AppTokens.textSecondary),
+              ),
+            ),
+          if (study.savePhase == SavePhase.pendingSync ||
+              study.historyError ||
+              study.historyLimit)
+            TextButton(
+              onPressed: () => study.sync(),
+              child: const Text('기록 다시 확인'),
+            ),
+          const SectionHeader('최근 7일'),
+          StudyWeekSummary(study: study),
+        ],
+      ),
     );
   }
 }
@@ -106,7 +130,14 @@ class StudyTimerDisplay extends StatelessWidget {
 }
 
 class StudyTimerControls extends StatelessWidget {
-  const StudyTimerControls({super.key, required this.study});
+  const StudyTimerControls({
+    super.key,
+    required this.study,
+    this.startAction,
+    this.startBusy = false,
+  });
+  final VoidCallback? startAction;
+  final bool startBusy;
   final StudyController study;
   @override
   Widget build(BuildContext context) {
@@ -137,7 +168,9 @@ class StudyTimerControls extends StatelessWidget {
     final buttons = study.draft == null
         ? <Widget>[
             FilledButton(
-              onPressed: allowed ? () => study.start() : null,
+              onPressed: allowed && !startBusy
+                  ? startAction ?? () => study.start()
+                  : null,
               child: const Text('공부 시작'),
             ),
           ]

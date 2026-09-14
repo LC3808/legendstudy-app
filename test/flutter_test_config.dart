@@ -21,5 +21,16 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
           throw MissingPluginException();
         },
       );
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+        const MethodChannel('com.legendstudy.app/focus'),
+        (call) async {
+          if (call.method == 'status') {
+            return {'capability': 'unsupported', 'permission': false};
+          }
+          if (call.method == 'readPreference') return 'ask';
+          return null;
+        },
+      );
   await testMain();
 }

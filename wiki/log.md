@@ -623,3 +623,22 @@ Flutter persistence smoke: PASS
   never blocks Study start; iOS does not claim automatic system Focus toggling.
 - Docs-only closeout; diff/scope checks PASS. Prior implementation tests/builds retained,
   not rerun. No Flutter/DB/production changes, Push, PR or Merge.
+
+
+## 2026-09-14 — Day 8-B Focus / DND implementation
+
+- Start: codex/day-7-school-neis at3c211fe (historical baseline). Reviewed local
+  timer/native storage and official Android/Apple API behavior; target/compile35.
+- Added capability-based Focus service/controller and compact first-start/settings
+  UI. Android API29+ owns explicit Zen rule; previous Android/iOS manual guide.
+  Device preference ask/always/disabled; once ephemeral; backup exclusions. Timer
+  commits before permission handoff, all Focus failure paths allow Study start.
+- Latest policy: pause/resume keep Focus; end/recovery/account switch reconcile only
+  the app's activation. No global DND overwrite, notification reading or cloud fields.
+- Analyze,156 Flutter tests,2 Android JVM lease tests,Android debug/iOS simulator
+  builds PASS. iOS native guide/timer/preference/cleanup smoke PASS; diff/security/scope
+  checks PASS. Existing Day 8-A134 tests preserved; DB/migrations unchanged.
+- Physical Android DND/user-state/permission/kill/restart and iPhone guide unverified;
+  no connected Android device or AVD. Owned rule can outlive app kill until re-entry;
+  deadline is not a scheduled OS expiry. Day 8-B NOT COMPLETE; Day8 overall NOT COMPLETE.
+- No DND bypass or third-party runtime/DND package (JUnit is test-only), mock UI, notifications, scoring, Push, PR or Merge.

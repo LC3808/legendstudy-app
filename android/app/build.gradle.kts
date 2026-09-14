@@ -41,3 +41,6 @@ android {
 flutter {
     source = "../.."
 }
+
+// JVM tests cover owned activation lease decisions; OS DND still needs a device.
+dependencies { testImplementation("junit:junit:4.12") }

@@ -4,13 +4,14 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Next: Day 8-B Focus / DND. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
 owner-confirmed. The final Day 8-A Flutter Guest/authenticated runtime PASS is
 also Owner-reported and matches the checked-in smoke stages. Prior implementation
-checks are retained below; tests and production calls were not rerun in this docs-only closeout. Earlier implementation checkpoints remain
+checks are retained below. Day 8-B implementation checks are listed separately;
+no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
 ## Repository and product baseline
@@ -104,15 +105,31 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   reboot and OS process-restart Auth restoration remain platform follow-up checks;
   the smoke proves provider reconstruction, not those untested lifecycle cases.
 
-## Next: Day 8-B Focus / DND
+## Day 8-B Focus / DND — implemented, NOT COMPLETE
 
-- Android DND/focus integration, with first-use choices: `항상 사용 / 이번만 / 사용 안 함`.
-- Preference is device-local; one-time selection does not become a persistent preference.
-- Permission denial or capability failure must never prevent the Study timer starting.
-- Separate platform capabilities using official APIs. iOS must not offer or claim
-  automatic system Focus toggling; provide supported guidance instead.
-- Native capability, consent and restoration behavior are the next implementation
-  scope. No Focus/DND code is added in this closeout. Day 8 overall is not COMPLETE.
+- Android compile/target35: API29+ owned AutomaticZenRule + policy access; API21–28
+  manual guidance. No global DND/filter/policy writes. Only app-recorded activation
+  is released at end/recovery/account change; pause/resume/background preserve it.
+- Device preference ask/always/disabled, once not persisted. First Android choices:
+  항상 사용 / 이번만 / 사용하지 않음. Small 집중 설정 action; permission-denial retries
+  do not repeatedly force system settings. Timer commits before settings handoff;
+  exceptions, denial, unavailable APIs and missing settings never block Study start.
+- iOS optional manual Focus guide; no automatic activation claim/private settings
+  URL. Focus preferences are local and excluded from OS backup/transfer as applicable.
+  No cloud profile/Study fields, notification content access or telemetry added.
+- Analyze PASS;156 Flutter tests PASS including134 prior tests and22 Focus tests.
+  Android JVM lease tests2 PASS; Android debug/iOS simulator builds PASS.
+  iOS native guide/skip/start, no automatic activation, preference restore and local
+  cleanup PASS. Existing Day 8-A Guest native flow/Home/restore/cleanup rerun PASS.
+  These are simulator/logic results, not physical DND acceptance.
+- No Android device/emulator available. Physical Android choices/permission/actual
+  DND/user-state preservation/revocation and iPhone guidance are pending. Process kill
+  can leave our rule until app re-entry; a24h lease deadline is checked on execution,
+  not enforced by an OS alarm. Physical restart/override/backup checks remain open.
+- **Day 8-B is not COMPLETE.** Next: physical-device Focus acceptance and lifecycle
+  hardening if needed. 8-C planning may reuse FocusService, but no mock timer/UI,
+  notification or scoring work has started. Day8 overall is not COMPLETE.
+- Official API references and full behavior/evidence: [Study v1](study-v1.md).
 
 ## Long-term backlog — preserved for later planning
 
