@@ -490,6 +490,11 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
         ScoringAttempt(
           id: newStudyId(),
           title: d.mock!.title,
+          subject: d.mock!.subject,
+          completedAt: DateTime.fromMillisecondsSinceEpoch(
+            d.startedMs + d.boundedOffset(offset),
+            isUtc: true,
+          ),
           draft: d.answers!,
           studyId: row?.id,
         ),

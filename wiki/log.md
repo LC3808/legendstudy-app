@@ -809,3 +809,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Day8 overall NOT COMPLETE; Day8-B/8-C physical-device gates remain pending.
 - Documentation-only closeout based on Owner evidence; no runtime/test rerun, Flutter
   or DB change, Push/PR/Merge. Documentation diff checked.
+
+
+## 2026-09-14 — Day 8-D3 Grade + Result UX implementation
+
+- Added source-validated confirmed/estimated/unavailable labels, primary raw score,
+  separate incorrect/blank summary and jumps, accessible answer review, source dialog
+  with safe external links and Study/Home navigation. No score/grade hardcoding.
+- Preserve pinned key/cutoff provenance in native results; optional subject/date fields
+  support future history. Legacy source-less caches retained without invented grade
+  basis. Auth remains server-canonical; no current-version automatic regrade.
+- 242 Flutter tests, analyze, Android debug/iOS simulator builds PASS. Native synthetic
+  Guest three-grade-state/source/review/historical-restore and original-file cleanup PASS.
+- Updated scoring/Study/architecture/index/status/D3 Wiki; corrected superseded paused
+  marking and unimplemented-engine wording. Entitlement/Free/Basic/Pro remains planning.
+- D3 implemented, NOT COMPLETE: actual A/B production runtime remains Owner-gated by
+  this request's production-data-input prohibition. No production fixture, DB/schema/
+  RPC/migration change, Push/PR/Merge. B/C physical acceptance remains pending.

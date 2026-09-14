@@ -38,8 +38,7 @@ Public availability uses a bounded manifest projection (IDs, display context,
 variant, key/version/hash, question count/total, supported engine and optional
 cutoff version). Fetch full pinned package before scoring start; verify hash,
 questions and points. Missing package offers timer-only explicitly, never a fake key.
-Cache permits Guest/offline practice with source/version visible. Cache uncertainty
-is labelled; no claim of freshly verified publication status while offline.
+Completed Guest results and provenance restore offline. First scoring still requires published key/cutoff reads; a pre-downloaded offline exam package is not implemented. No claim of freshly verified publication status while offline.
 
 Paper variant is required even when value is reviewed `common`: booklet odd/even,
 elective combination, curriculum and numbering must match the actual source.
@@ -113,7 +112,7 @@ non-current or withdrawn pinned versions require explicit recovery. Existing ide
 attempt retries and historical results keep their original versions, score and snapshots.
 No automatic upgrade/regrade is permitted when a locally pinned version becomes stale.
 
-Pure Dart domain service (proposed, no implementation) accepts typed QuestionSet,
+Implemented pure Dart domain service (Day 8-D2) accepts typed QuestionSet,
 UserAnswers, nullable GradeRule and supported ScoringVersion. It returns totalPossible,
 rawScore, correctCount, answered-incorrect numbers, unanswered numbers, nullable grade,
 gradeStatus unavailable/estimated/confirmed, pinned versions and per-question outcome.
@@ -136,12 +135,9 @@ performance. Keys are downloaded public data, never bundled/hardcoded in Flutter
 
 Study mode switch remains compact. Scoring adds exam/occurrence/variant selection
 and an availability badge before start; timer-only custom setup remains unchanged.
-Pin the package before starting scoring. Mark answers during running, also paused
-because v1 is practice; show compact countdown and `마킹 n/N`.
+Pin the package before starting scoring. Mark answers only during running; paused/recovery/timeUp/submitted states lock marking (D2 accepted policy); show compact countdown and `마킹 n/N`.
 
-Use question-number grid plus **five-question page** (next/previous five, jump to
-unanswered). Each current question offers1–5 and clear; no45-row unbounded answer
-form. Selection is visible with text/check semantics, not only color. At360×640 and
+The implemented D2 entry uses a question-number grid and scrollable rows grouped by five. Each question offers1–5 and tapping the selected choice clears it. Grid actions jump to the target row. Selection is visible with text/check semantics, not only color. At360×640 and
 2×, wrap choices while keeping>=48px targets; scroll the page without shrinking type.
 Announcements identify question and selected answer, not every countdown tick.
 Autosave local draft on each edit; serialize taps, preserve ordered answers and show
@@ -259,3 +255,12 @@ lock tests. Fixture cleanup, trigger restoration, scoring baseline restoration,
 existing data preservation and Auth retention PASS. **Day8-D2 = COMPLETE. Next:
 Day 8-D3 Grade + Result UX.** Day8 overall is not COMPLETE; physical8-B/8-C gates
 remain pending. D1 evidence remains separate from this actual Flutter acceptance.
+
+
+## Day 8-D3 implementation
+
+[Grade + Result UX](day-8-d3-grade-result.md) defines shared Guest/Auth labels,
+source snapshots, review semantics and runtime evidence limits. Confirmed requires
+raw_absolute/confirmed provenance; estimates always say 예상. Source-less D2 caches
+retain their stored values but do not acquire invented provenance or a displayed
+confirmed grade. No current-cutoff regrading, DB/RPC change or production fixture input.

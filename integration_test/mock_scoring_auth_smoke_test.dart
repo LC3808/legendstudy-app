@@ -2,6 +2,7 @@
 // Only fixture registration/lifecycle uses the runner's private loopback bridge.
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:http/http.dart' as http;
@@ -158,9 +159,11 @@ void main() {
         );
         expect(c!.historyError, false);
         await t.pumpWidget(
-          MaterialApp(
-            theme: AppTheme.light,
-            home: AnswerEntryPage(study: c!),
+          ProviderScope(
+            child: MaterialApp(
+              theme: AppTheme.light,
+              home: AnswerEntryPage(study: c!),
+            ),
           ),
         );
         await t.pumpAndSettle();
@@ -245,6 +248,11 @@ void main() {
       final score = attempt.result!;
       expect(score.grade, 8);
       expect(score.gradeStatus, 'confirmed');
+      expect(score.gradeLabel, '8등급');
+      expect(score.gradeExplanation, '확정 등급 기준');
+      expect(score.keySource, isNotNull);
+      expect(score.cutoffSource!.basis, 'raw_absolute');
+      expect(find.text('8등급'), findsOneWidget);
       expect(score.rawScore, 2);
       expect(score.maxScore, 9);
       expect(score.correctCount, 1);
@@ -255,6 +263,14 @@ void main() {
         jsonEncode(score.toJson()),
       );
       expect(find.text('2 / 9점'), findsOneWidget);
+      final sourceAction = find.text('정답·등급 기준 출처');
+      await t.ensureVisible(sourceAction);
+      await t.tap(sourceAction);
+      await t.pumpAndSettle();
+      expect(find.text('정답 기준: ${score.keySource!.name}'), findsOneWidget);
+      expect(find.text('등급 기준: ${score.cutoffSource!.name}'), findsOneWidget);
+      await t.tap(find.text('닫기'));
+      await t.pumpAndSettle();
       mark(stage);
       stage = 'auth_restore';
       await mount(clients[0]);
@@ -277,6 +293,7 @@ void main() {
       expect(c!.attempts, isEmpty);
       expect(c!.draft, isNull);
       expect(find.text('2 / 9점'), findsNothing);
+      expect(find.text('8등급'), findsNothing);
       expect(
         await current.rpc<dynamic>(
           'fetch_own_mock_attempt',
@@ -327,6 +344,7 @@ void main() {
         isNull,
       );
       expect(find.text('2 / 9점'), findsNothing);
+      expect(find.text('8등급'), findsNothing);
       mark(stage);
     } catch (_) {
       // Never let test-framework failures serialize credentials or raw responses.

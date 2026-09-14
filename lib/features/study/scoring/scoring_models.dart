@@ -172,6 +172,45 @@ class AnswerReview {
   }
 }
 
+/// Immutable provenance from the attempt's pinned published version.
+class ScoringSource {
+  ScoringSource.fromJson(Map<String, dynamic> j)
+    : version = j['version'] as int,
+      name = j['source_name'] as String,
+      url = j['source_url'] as String,
+      verifiedAt = DateTime.parse(j['verified_at'] as String).toUtc(),
+      basis = j['basis'] as String?,
+      certainty = j['certainty'] as String? {
+    final uri = Uri.tryParse(url);
+    scoringCheck(
+      version > 0 &&
+          name.trim().isNotEmpty &&
+          name.runes.length <= 200 &&
+          !RegExp(r'[\x00-\x1f\x7f]').hasMatch(name) &&
+          !RegExp(r'[\x00-\x20\x7f]').hasMatch(url) &&
+          uri != null &&
+          ['http', 'https'].contains(uri.scheme) &&
+          uri.host.isNotEmpty &&
+          uri.userInfo.isEmpty &&
+          ((basis == null && certainty == null) ||
+              (basis == 'raw_absolute' && certainty == 'confirmed') ||
+              (basis == 'raw_estimate' && certainty == 'estimated')),
+    );
+  }
+  final int version;
+  final String name, url;
+  final DateTime verifiedAt;
+  final String? basis, certainty;
+  Map<String, dynamic> toJson() => {
+    'version': version,
+    'source_name': name,
+    'source_url': url,
+    'verified_at': verifiedAt.toIso8601String(),
+    if (basis != null) 'basis': basis,
+    if (certainty != null) 'certainty': certainty,
+  };
+}
+
 class ScoreResult {
   ScoreResult(
     this.rawScore,
@@ -179,6 +218,9 @@ class ScoreResult {
     List<AnswerReview> answers, {
     this.grade,
     this.gradeStatus = 'unavailable',
+    this.keySource,
+    this.cutoffSource,
+    this.submittedAt,
   }) : answers = List.unmodifiable(answers) {
     scoringCheck(
       answers.isNotEmpty &&
@@ -193,12 +235,45 @@ class ScoreResult {
       scoringCheck(answers[i].number == i + 1);
     }
     scoringCheck(
-      ['unavailable', 'confirmed', 'estimated'].contains(gradeStatus) &&
+      (cutoffSource == null || cutoffSource!.certainty == gradeStatus) &&
+          ['unavailable', 'confirmed', 'estimated'].contains(gradeStatus) &&
           (gradeStatus == 'unavailable'
               ? grade == null
               : grade != null && grade! >= 1 && grade! <= 9),
     );
   }
+  final ScoringSource? keySource, cutoffSource;
+  final DateTime? submittedAt;
+  bool get hasGradeBasis =>
+      cutoffSource != null && cutoffSource!.certainty == gradeStatus;
+  String get gradeLabel => gradeStatus == 'unavailable' || !hasGradeBasis
+      ? '등급 정보 준비 중'
+      : gradeStatus == 'estimated'
+      ? '예상 $grade등급'
+      : '$grade등급';
+  String? get gradeExplanation => !hasGradeBasis
+      ? null
+      : gradeStatus == 'estimated'
+      ? '예상 등급컷 기준'
+      : '확정 등급 기준';
+  ScoreResult withSources(ScoringSource key, ScoringSource? cutoff) {
+    scoringCheck(
+      cutoff == null
+          ? gradeStatus == 'unavailable'
+          : cutoff.certainty == gradeStatus,
+    );
+    return ScoreResult(
+      rawScore,
+      maxScore,
+      answers,
+      grade: grade,
+      gradeStatus: gradeStatus,
+      keySource: key,
+      cutoffSource: cutoff,
+      submittedAt: submittedAt,
+    );
+  }
+
   final int rawScore, maxScore;
   final int? grade;
   final String gradeStatus;
@@ -211,6 +286,9 @@ class ScoreResult {
   List<int> get unanswered =>
       answers.where((a) => a.submitted == null).map((a) => a.number).toList();
   Map<String, dynamic> toJson() => {
+    if (keySource != null) 'key_source': keySource!.toJson(),
+    if (cutoffSource != null) 'cutoff_source': cutoffSource!.toJson(),
+    if (submittedAt != null) 'submitted_at': submittedAt!.toIso8601String(),
     'raw_score': rawScore,
     'max_score': maxScore,
     'correct_count': correctCount,
@@ -233,9 +311,23 @@ class ScoreResult {
           .toList(),
       grade: j['grade'] as int?,
       gradeStatus: j['grade_status'] as String,
+      keySource: j['key_source'] == null
+          ? null
+          : ScoringSource.fromJson(
+              Map<String, dynamic>.from(j['key_source'] as Map),
+            ),
+      cutoffSource: j['cutoff_source'] == null
+          ? null
+          : ScoringSource.fromJson(
+              Map<String, dynamic>.from(j['cutoff_source'] as Map),
+            ),
+      submittedAt: j['submitted_at'] == null
+          ? null
+          : DateTime.parse(j['submitted_at'] as String).toUtc(),
     );
     scoringCheck(
-      j['correct_count'] == r.correctCount &&
+      (r.cutoffSource == null || r.cutoffSource!.certainty == r.gradeStatus) &&
+          j['correct_count'] == r.correctCount &&
           j['question_count'] == r.answers.length &&
           j['unanswered_count'] == r.unanswered.length,
     );
@@ -304,11 +396,14 @@ class ScoringAttempt {
     required this.title,
     required this.draft,
     this.studyId,
+    this.subject,
+    this.completedAt,
     this.result,
     this.outcome = ScoringOutcome.pending,
   });
   final String id, title;
-  final String? studyId;
+  final String? studyId, subject;
+  final DateTime? completedAt;
   final AnswerDraft draft;
   final ScoreResult? result;
   final ScoringOutcome outcome;
@@ -328,6 +423,8 @@ class ScoringAttempt {
     title: title,
     draft: draft,
     studyId: studyId,
+    subject: subject,
+    completedAt: completedAt,
     result: score,
     outcome: ScoringOutcome.complete,
   );
@@ -336,12 +433,16 @@ class ScoringAttempt {
     title: title,
     draft: draft,
     studyId: studyId,
+    subject: subject,
+    completedAt: completedAt,
     outcome: ScoringOutcome.stale,
   );
   Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,
     'study': studyId,
+    if (subject != null) 'subject': subject,
+    if (completedAt != null) 'completed_at': completedAt!.toIso8601String(),
     'draft': draft.toJson(),
     'result': result?.toJson(),
     'outcome': outcome.name,
@@ -351,6 +452,10 @@ class ScoringAttempt {
       id: j['id'] as String,
       title: j['title'] as String,
       studyId: j['study'] as String?,
+      subject: j['subject'] as String?,
+      completedAt: j['completed_at'] == null
+          ? null
+          : DateTime.parse(j['completed_at'] as String).toUtc(),
       draft: AnswerDraft.fromJson(Map<String, dynamic>.from(j['draft'] as Map)),
       result: j['result'] == null
           ? null

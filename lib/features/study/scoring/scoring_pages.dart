@@ -3,6 +3,7 @@ import '../../../core/theme/app_theme.dart';
 import '../application/study_controller.dart';
 import '../domain/study_models.dart';
 import 'scoring_models.dart';
+import 'scoring_result_view.dart';
 
 Future<void> confirmScoringSubmit(
   BuildContext context,
@@ -287,7 +288,7 @@ class ScoringAttemptView extends StatelessWidget {
                 ? '채점 기준이 업데이트되었어요. 답안과 시험 기록은 보관되어 있어요. 새 시험을 선택해 다시 응시할 수 있어요.'
                 : study.scoringBusy
                 ? '채점 중'
-                : '채점 재시도 필요',
+                : '채점 결과를 불러오지 못했어요.',
           ),
           Text('답안 ${a.draft.answered} / ${a.draft.answers.length}'),
           ExpansionTile(
@@ -307,45 +308,7 @@ class ScoringAttemptView extends StatelessWidget {
         ],
       );
     }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(a.title, style: Theme.of(context).textTheme.titleMedium),
-        Semantics(
-          label: '원점수 ${score.rawScore}점, 만점 ${score.maxScore}점',
-          child: Text(
-            '${score.rawScore} / ${score.maxScore}점',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-        ),
-        Text('정답 ${score.correctCount} / ${score.answers.length}'),
-        Text('오답: ${score.wrong.isEmpty ? '없음' : score.wrong.join(' · ')}'),
-        Text(
-          '미응답: ${score.unanswered.isEmpty ? '없음' : score.unanswered.join(' · ')}',
-        ),
-        Text(
-          study.guest ? '이 기기에 저장됨' : '서버에서 채점한 결과',
-          style: const TextStyle(color: AppTokens.textSecondary),
-        ),
-        const SizedBox(height: 12),
-        const Text('답안 확인'),
-        for (final r in score.answers)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Semantics(
-              label:
-                  '${r.number}번, 내 답 ${r.submitted ?? '미응답'}, 정답 ${r.correct}, ${r.points}점, ${r.isCorrect ? '정답' : '오답'}',
-              child: Text(
-                '${r.number}번 · 내 답 ${r.submitted ?? '—'} · 정답 ${r.correct} · ${r.points}점 · ${r.isCorrect
-                    ? '정답'
-                    : r.submitted == null
-                    ? '미응답'
-                    : '오답'}',
-              ),
-            ),
-          ),
-      ],
-    );
+    return ScoringResultView(attempt: a, guest: study.guest);
   }
 }
 

@@ -409,3 +409,28 @@ isolation, retry and stale handling PASS. Approved temporary fixtures were clean
 trigger state, scoring baseline and existing data preservation PASS. No schema change.
 Next: Day8-D3 Grade + Result UX. Day8 overall is not COMPLETE; 8-B/8-C physical gates
 remain pending.
+
+
+## Day 8-D3 Grade + Result UX
+
+ScoringSource is a validated immutable projection of key_source/cutoff_source. Auth
+submit and fetch-own results must agree including provenance; Guest reads the exact
+pinned key/cutoff via existing public grants after submission. UI never recomputes
+a grade or substitutes current versions. Optional v3 JSON fields preserve old caches;
+missing historic provenance stays missing. ScoringResultView shares presentation for
+both trust paths and opens safe HTTP(S) sources through ExternalLinkButton.
+Attempt subject/completedAt plus result submittedAt, grade/status/counts and existing
+identity/score/title fields support a future history projection. Auth server submission
+time and local logical completion time remain distinct; legacy missing values are not
+inferred. Full cloud history, deletion and regrading are not implemented in D3.
+See [D3 contract and evidence](day-8-d3-grade-result.md).
+
+### Future monetization / entitlement direction (not implemented)
+
+Owner-requested planning candidates: Free recent 5–10 results/basic trends; Basic full
+history, unlimited record viewing, subject graphs, accumulated analysis and possible
+ad removal; future Pro weak-question/type analysis, AI study reports and premium
+admissions prediction. Exact pricing/limits and interaction with the earlier one-time
+ad-removal policy need a separate product decision. No subscription or payment scope
+is enabled here. Future access belongs in an Entitlement layer, not scattered isPro
+widget conditions. A free viewing limit must never delete attempts beyond that limit.

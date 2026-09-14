@@ -158,17 +158,28 @@ class SupabaseScoringRepository implements ScoringRepository {
         'order': 'question_number',
         'limit': '101',
       });
+      final keys = await _rows('answer_key_versions', {
+        'select': 'version,source_name,source_url,verified_at',
+        'id': 'eq.${a.answerKeyVersionId}',
+        'limit': '2',
+      });
+      scoringCheck(keys.length == 1);
+      final keySource = ScoringSource.fromJson(keys.single);
+      scoringCheck(keySource.version == a.answerKeyVersion);
+      ScoringSource? cutoffSource;
       List<int>? cutoffs;
       var certainty = 'unavailable';
       if (a.gradeCutoffVersionId != null) {
         final rows = await _rows('grade_cutoff_versions', {
-          'select': 'minimum_scores,certainty',
+          'select':
+              'minimum_scores,certainty,basis,version,source_name,source_url,verified_at',
           'id': 'eq.${a.gradeCutoffVersionId}',
           'limit': '2',
         });
         scoringCheck(rows.length == 1);
         cutoffs = (rows.single['minimum_scores'] as List).cast<int>();
         certainty = rows.single['certainty'] as String;
+        cutoffSource = ScoringSource.fromJson(rows.single);
       }
       final score = scoreMcq5(
         questions
@@ -187,7 +198,7 @@ class SupabaseScoringRepository implements ScoringRepository {
       scoringCheck(
         score.maxScore == a.maxScore && score.answers.length == a.questionCount,
       );
-      return score;
+      return score.withSources(keySource, cutoffSource);
     }
     // Do not pre-check current here: historical idempotent retry must reach RPC.
     final submitted = Map<String, dynamic>.from(
@@ -220,6 +231,13 @@ class SupabaseScoringRepository implements ScoringRepository {
               row['study_session_id'] == null),
     );
     final score = ScoreResult.fromJson(row);
+    scoringCheck(
+      score.keySource != null &&
+          score.keySource!.version == a.answerKeyVersion &&
+          (a.gradeCutoffVersionId == null
+              ? score.gradeStatus == 'unavailable' && score.cutoffSource == null
+              : score.cutoffSource != null && score.hasGradeBasis),
+    );
     scoringCheck(
       score.answers.length == a.questionCount && score.maxScore == a.maxScore,
     );

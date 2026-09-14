@@ -340,6 +340,12 @@ void main() {
           return http.Response(
             jsonEncode({
               ...score.toJson(),
+              'key_source': {
+                'version': 1,
+                'source_name': 'Synthetic key',
+                'source_url': 'https://example.com/key',
+                'verified_at': '2026-09-14T00:00:00Z',
+              },
               'id': a.id,
               'user_id': 'A',
               'exam_subject_id': 'occurrence',
@@ -388,6 +394,19 @@ void main() {
         config,
         MockClient((r) async {
           calls.add(r);
+          if (r.url.path.endsWith('answer_key_versions')) {
+            return http.Response(
+              jsonEncode([
+                {
+                  'version': 1,
+                  'source_name': 'Synthetic key',
+                  'source_url': 'https://example.com/key',
+                  'verified_at': '2026-09-14T00:00:00Z',
+                },
+              ]),
+              200,
+            );
+          }
           if (r.url.path.endsWith('mock_exam_scoring_availability')) {
             return http.Response(jsonEncode([availability().toJson()]), 200);
           }

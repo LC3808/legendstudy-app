@@ -447,7 +447,7 @@ feature failure must not block timer start. iOS will not claim automatic system 
 toggling. Distinguish platform capabilities using official APIs as specified in the
 Focus section above. That Day 8-A closeout introduced no Focus code. Day 8-B implementation and pending
 physical-device gate are recorded above. Mock UI/notifications are now implemented
-in8-C; their runtime gates are separate and scoring remains future.
+in8-C; their runtime gates are separate and D2 scoring is now complete; see the D3 extension below.
 
 
 ## Day 8-C current implementation
@@ -479,3 +479,15 @@ scoring baseline restoration, existing data preservation and Auth retention PASS
 **Day 8-D2 = COMPLETE. Next: Day 8-D3 Grade + Result UX.** Day8 overall is not
 COMPLETE; physical8-B/8-C lifecycle validation remains pending. Full safe runtime
 markers and evidence limits are recorded in the implementation contract above.
+
+
+## Day 8-D3 grade/result extension
+
+See [D3](day-8-d3-grade-result.md). Shared results display raw/max first, then verified
+confirmed/estimated/unavailable text, separate incorrect/unanswered totals and jump
+links, accessible answer review and secondary source details. The v3 envelope accepts
+additive optional provenance, local completion date and subject fields; old records,
+owner isolation and Study/scoring outboxes are retained. Auth submitted_at and source
+come from RPC/read-back; Guest stores pinned source with its Dart result. No recompute
+on restoration, no automatic upload or retention limit. D3 final acceptance remains
+pending real A/B runtime; physical B/C gates remain independent.

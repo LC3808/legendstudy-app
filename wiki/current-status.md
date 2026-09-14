@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX implemented; local checks and Guest native runtime PASS, actual A/B runtime pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -13,6 +13,23 @@ also Owner-reported and matches the checked-in smoke stages. Prior implementatio
 checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
+
+## Day 8-D3 Grade + Result UX — implemented, NOT COMPLETE
+
+- Shared confirmed/estimated/unavailable text with validated source basis, raw score
+  hierarchy, correct/wrong/unanswered summary and accessible answer-review jump links.
+- Auth preserves RPC/fetch-own provenance and submission date; Guest preserves pinned
+  source with its Dart result. Native v3 optional fields keep old records and outboxes.
+  Source-less D2 caches keep scores/answers but do not display an unverified grade.
+- 242 Flutter tests (228 retained +14 D3), analyze, Android debug and iOS simulator
+  builds PASS. Native synthetic Guest all-three-status/source/review/historic-restore/
+  whole-file cleanup PASS. See [D3 evidence](day-8-d3-grade-result.md).
+- Actual D3 A/B and production version/fixture/trigger/baseline runtime NOT RUN. This
+  request forbids production scoring data input; the prepared Owner runner requires
+  separate authorization. Existing D2 runtime PASS does not close this D3 gate.
+- DB/schema/migrations/RPC unchanged; no production request, Push, PR or Merge.
+  Full history/deletion/subscriptions excluded; Entitlement planning in architecture.md.
+- Next: Owner-authorized D3 A/B runtime acceptance. B/C physical gates stay pending.
 
 ## Day 8-D2 runtime acceptance — COMPLETE
 
