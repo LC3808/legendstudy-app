@@ -704,3 +704,19 @@ Flutter persistence smoke: PASS
 - Doc links/scope/diff checks PASS. No SQL syntax/runtime or scoring test PASS claimed;
   these await executable8-D1 package. Day8-D NOT COMPLETE;8-B/8-C physical gates pending.
   No Push, PR or Merge.
+
+
+## 2026-09-14 — Day 8-D1 Scoring storage package
+
+- Recorded Owner-approved MCQ-first and grade labels; replaced proposed Study cascade
+  with owner-safe SET NULL(study_session_id). Attempts/answers survive Study deletion.
+- Added new scoring migration: five tables, independent cutoff versions, 12 functions,
+  trusted scoring RPC, immutable publication/results, derived public availability and RLS.
+- Prepared full Preflight/Postflight/empty-only rollback SQL and JWT/RPC acceptance plan.
+  Updated scoring contract, architecture, database, current status and index.
+- Static SQL/scope/old-migration hashes/package parity/credential checks PASS. In-memory
+  PostgreSQL17.5 synthetic tests PASS, including grade vectors, role isolation, Study
+  unlink/retry, field preservation and rollback. This is not real JWT/REST evidence.
+- No production request/application/fixture, Flutter scoring, scraping or real key import.
+  Day8-D1 migration package prepared / Owner approval pending; Day8-D NOT COMPLETE.
+  Day8-B/8-C physical gates pending. No Push/PR/Merge.

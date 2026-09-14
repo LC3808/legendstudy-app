@@ -1,7 +1,8 @@
 # Mock Exam Scoring v1 — Day 8-D architecture proposal
 
-Reviewed: 2026-09-14. **Design/proposal only. Day 8-D NOT COMPLETE.**
-No scoring Flutter implementation, migration application, key import or scraping.
+Reviewed: 2026-09-14. **8-D1 migration package prepared / Owner approval pending. Day 8-D NOT COMPLETE.**
+No scoring Flutter implementation, production migration application, key import or scraping.
+[Executable SQL package](day-8-scoring-migration-package.md) is prepared for review.
 Day 8-C implementation and Guest/Auth runtime remain PASS; its physical gate stays
 open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal.md).
 
@@ -49,7 +50,7 @@ No partial math paper may masquerade as a full exam score.
 
 ## Questions, scoring and grades
 
-v1 recommendation: **single-choice 1–5 only**, with per-question integer points.
+Owner-approved v1: **single-choice 1–5 only**, with per-question integer points.
 Every question in a published package must be supported and accounted for. Numeric
 short answers, multiple accepted answers/all-credit corrections and essays require
 an explicit later typed model/engine revision. Do not drop those questions, guess a
@@ -71,7 +72,7 @@ Out-of-contract papers remain timer-only rather than being coerced.
 
 | Paper | Accurate v1 output | Grade meaning |
 |---|---|---|
-| English / Korean history with fully verified MCQ key and applicable official absolute rule | Exact raw score; deterministic grade from that rule | `2등급 · 공식 절대평가 기준` (confirmed rule), not an official issued score report |
+| English / Korean history with fully verified MCQ key and applicable official absolute rule | Exact raw score; deterministic grade from that rule | `2등급` (confirmed applicable rule; basis in source details), not an official issued score report |
 | Korean with fully supported matching common/elective/variant key | Exact raw score; optional compatible raw-score estimate | `예상 2등급 · 원점수 기준`; never inferred official standard score/percentile |
 | Mathematics with numeric questions | Timer-only in MCQ-first v1 | No partial-score grade; numeric support is a separate expansion |
 | Social/science inquiry or other MCQ papers | Exact raw score where key complete; optional reviewed compatible estimate | Relative-grade estimate only; absent cutoff -> raw score only |
@@ -91,7 +92,7 @@ or certify any actual exam key/cutoff values. Exact yearly absolute bands must b
 verified from the applicable official attachment before publication.
 
 Absolute rules use the **same versioned grade-cutoff model** as estimates, scoped to
-the exact key/cohort/variant. Nine grade thresholds, explicit score basis and source;
+the exact occurrence/cohort/variant/max score, independently of a key revision. Nine grade thresholds, explicit score basis and source;
 no hardcoded subject-name branching or universal yearless thresholds in Flutter.
 Only raw_absolute + confirmed and raw_estimate + estimated are supported in v1.
 Official standard-score tables may be retained in private review evidence but cannot
@@ -112,7 +113,7 @@ choice; existing results remain readable with a review warning.
 Pure Dart domain service (proposed, no implementation) accepts typed QuestionSet,
 UserAnswers, nullable GradeRule and supported ScoringVersion. It returns totalPossible,
 rawScore, correctCount, answered-incorrect numbers, unanswered numbers, nullable grade,
-gradeStatus none/estimated/confirmed, pinned versions and per-question outcome.
+gradeStatus unavailable/estimated/confirmed, pinned versions and per-question outcome.
 No network, widget, clock, current-date lookup or global mutable key in the engine.
 Validation errors are distinct from a0 score. Example **synthetic test**, not a real
 key: points[2,3,4], answers correct/wrong/blank -> raw2, total9, correct1, wrong[2],
@@ -181,8 +182,9 @@ A's pending answer snapshot using B's token. Logout clears visible score/answers
 stale callbacks immediately; history restoration queries only current owner.
 
 Attempt and Study represent different records; attempt does not add aggregate time.
-Proposed deletion: owner may delete an attempt without deleting Study time; deleting
-a linked Study session cascades its attempt/answers and future UI must warn accordingly.
+Owner-approved deletion: deleting an attempt cascades its answers and preserves Study
+time. Deleting linked Study time sets only study_session_id to NULL; attempt and answers
+survive. Composite owner FK and narrow unlink trigger enforce this independence.
 Auth-account deletion cascades personal records. No profile/NEIS/D-Day writes.
 Answers/scores are private learning data: no public leaderboard, answer telemetry or
 raw-response logging. Future Privacy/Account-deletion policy must disclose local/cloud
@@ -217,11 +219,15 @@ parser, bulk import, automatic answer collection or real seed dataset in this ta
 - **8-D3:** compatible grade rules, result/source/wrong/unanswered UX, actual runtime
   and privacy/deletion validation. Physical8-B/8-C gates remain independent.
 
-Owner approval requested before8-D1 final migration: MCQ-only launch (math timer-only
-where short answers exist), raw-estimate vs official-absolute grade labels, and linked
-Study deletion cascading attempts. Recommendations above are the proposed defaults,
-not silently recorded as approved product decisions. Numeric-answer coverage and
-post-timeUp transcription are explicit later scope decisions.
-Architecture/storage proposal is ready for review. Production deployment and Flutter
-scoring implementation are **not ready to execute now**; require approved8-D1 package
-and verified content. Day8-D NOT COMPLETE; no Push/PR/Merge.
+Owner approved MCQ-first (unsupported full papers remain timer-only), grade labels
+confirmed `2등급` / estimated `예상 2등급` / unavailable `등급 정보 준비 중`, and independent
+Study/result deletion. SQL package approval and production execution are still pending.
+Numeric-answer coverage and post-timeUp transcription remain separate later scope.
+
+8-D1 now includes five tables, independent cutoff families, twelve functions, trusted
+server scoring and invoker availability view. [Final storage contract](day-8-scoring-storage-proposal.md)
+is authoritative for SQL names and validation. Local PostgreSQL17.5 synthetic validation
+PASS; no real JWT/RPC, real source ingestion or Dart engine parity claim.
+Owner may review the full executable package now. Production application remains
+Owner-executed after approval; actual JWT acceptance and reviewed content precede
+Flutter scoring. Day8-D NOT COMPLETE; no Push/PR/Merge.

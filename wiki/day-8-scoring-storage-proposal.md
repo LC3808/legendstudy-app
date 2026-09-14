@@ -1,299 +1,215 @@
-# Day 8-D — Scoring storage / migration proposal
+# Day 8-D1 — Scoring storage / validation contract
 
-Status: **PROPOSAL ONLY / NOT APPLIED**. Reviewed2026-09-14.
-This is a concrete relational/transaction contract, not copy-ready production SQL.
-No new file in supabase/migrations and no applied migration edited. The approved
-proposal will become a separate executable8-D1 migration with full function bodies,
-preflight/postflight/rollback SQL and offline PostgreSQL tests before Owner execution.
-Product/UX rationale: [Scoring v1](mock-exam-scoring-v1.md).
+**Migration package prepared / Owner approval pending. NOT APPLIED.**
+Owner approved MCQ-first, confirmed/estimated/unavailable grade meanings, and independent
+Study/result deletion. This contract supersedes the Day 8-D proposed Study-delete cascade
+and key-owned cutoff family. Day 8-D is NOT COMPLETE. No Flutter scoring implementation.
 
-## Baseline and parent integrity
+## Execution package and baseline
 
-Actual initial migration: exams PK content_item_id; exam_subjects PK id,
-UNIQUE(id,content_item_id), FK content_item_id -> exams; resources composite
-(exam_subject_id,content_item_id) -> exam_subjects. Scoring's canonical parent is the
-**occurrence**, not subjects taxonomy, free-text Study subject or resource UUID.
-New key header uses that same composite FK ON DELETE RESTRICT. No copied exam table.
+[Complete SQL package](day-8-scoring-migration-package.md) contains byte-identical
+Preflight, migration, Postflight and guarded rollback blocks.
+Migration: `supabase/migrations/20260914000200_mock_exam_scoring.sql`.
+The four previously applied migration files are unchanged (hash checked).
+Production Study/Postflight/JWT and 8-C runtime results remain Owner-reported;
+this task made no production connection or request.
 
-Current Study has id PK, user_id default auth.uid() -> auth.users ON DELETE CASCADE,
-mode study/mock_exam, immutable client INSERT/SELECT/DELETE, generated duration.
-New proposal adds only UNIQUE(id,user_id) to support an owner-safe composite FK;
-no new Study column or change to duration/RLS/grants. This additive index and new
-scoring objects still require a future approved migration. Profiles/NEIS/D-Day,
-content/exams/resources and applied migrations remain unchanged.
+Five tables remain appropriate: public immutable definitions and private user answers
+are separate; header/question completeness requires a header relation; cutoff version
+has its own lifecycle; attempt is the owner/idempotency/result record. Nine grade bands
+fit one constrained array, avoiding a sixth table solely for nine fixed row positions.
 
-## Five proposed tables
+## Final schema
 
-All identifiers UUID unless stated. All instants finite timestamptz in UTC; no KST
-wall-clock strings. KST stays display/Study aggregate logic. Names below are proposed,
-not existing production columns. Text bounds are product limits; use trimmed values.
+| Table | Identity / integrity |
+|---|---|
+| answer_key_versions | UUID PK; occurrence/content composite FK to exam_subjects(id,content_item_id), RESTRICT; family UNIQUE(occurrence,variant,version); draft/published/withdrawn + is_current; question_count 1..100, max_score 1..1000 |
+| exam_questions | PK(key_version,question_number); question_number 1..100; answer_type=multiple_choice; correct_answer 1..5; points 1..100; key RESTRICT |
+| grade_cutoff_versions | Independent occurrence/content composite FK; family UNIQUE(occurrence,variant,version); max_score and exactly nine ordered thresholds; own publication/version/source lifecycle |
+| mock_exam_attempts | Client UUID for idempotency; server auth.uid owner; key and optional cutoff composite scope FKs; immutable calculated totals/counts/grade; optional Study link |
+| mock_exam_answers | PK(attempt,question_number); same-key composite FKs to attempt/question; submitted_answer NULL or 1..5; server snapshots; stored generated is_correct/awarded_points |
 
-### 1. answer_key_versions
+No new exam copy. Canonical parent is exam_subjects.id; exams itself uses
+content_item_id as its PK. The same-content parent FK preserves existing resources'
+cross-exam pattern. Attempt scope is (occurrence, paper_variant, max_score), constrained
+against BOTH the pinned key and optional cutoff, not inferred from Study title.
 
-| Column | Type/nullability | Constraint/meaning |
-|---|---|---|
-| id | uuid PK | generated UUID |
-| exam_subject_id, content_item_id | uuid NOT NULL | composite FK -> exam_subjects(id,content_item_id), DELETE RESTRICT |
-| paper_variant | text NOT NULL | trimmed1..80; reviewed stable booklet/elective code, never inferred |
-| version | integer NOT NULL | >0; UNIQUE(exam_subject_id,paper_variant,version) |
-| status | text NOT NULL | draft/published/withdrawn |
-| is_current | boolean NOT NULL default false | implies status=published; partial UNIQUE(exam_subject_id,paper_variant) WHERE is_current |
-| question_count | smallint NOT NULL | 1..100 |
-| total_points | integer NOT NULL | 1..1000; must equal sum of child points at publication |
-| source_name, source_url | text NOT NULL | name1..200, URL1..2048 HTTP(S), no credential/userinfo; operator-verified origin |
-| source_digest | text NOT NULL | 64 lowercase hex SHA256 of source artifact |
-| points_source_name, points_source_url, points_source_digest | text nullable triple | all NULL or all present, same limits; required when points come from a separate document |
-| content_digest | text NULL until published | SHA256 of canonical typed question payload/header scope; server computes |
-| fetched_at, created_at | timestamptz NOT NULL | observation and server create time respectively |
-| verified_at, published_at | timestamptz NULL | required for published/withdrawn; verified<=published |
-| corrected_at, correction_note | timestamptz/text NULL | both NULL or both present; note1..1000; source correction timestamp, not every new version |
+Source name/URL/SHA256/fetched_at/verified_at/version are required for publication.
+Separate points source is an all-null/all-present triple. Optional correction timestamp
+and note form a pair. Finite timestamps, trimmed bounded text and HTTP(S) URL without
+userinfo/whitespace are checked. URL validation cannot certify source authenticity:
+operator review must exclude credential-bearing URLs and verify complete official evidence.
+No raw private ingestion evidence is exposed through public column grants.
 
-Publish requires complete question set, validated scope/source and content hash.
-Immutable after first published_at: parent/variant/version/questions/points/source/
-hash/verification evidence. Only status/current may change via trusted publication
-workflow. Current switch locks the family and atomically demotes old current before
-promoting new. Superseded keys remain published but not current; withdrawn has no
-new-public access. No deletion of any once-published header/questions. No mutable
-`updated_at` substitute for answer version.
+Published answers/points/scope/source/evidence cannot change or be deleted. Correction
+creates a new version. Superseded means published with is_current=false; still usable
+by pinned clients. Withdrawn versions reject new submission but existing results and
+identical retries remain readable. A partial UNIQUE permits at most one current version
+per occurrence/variant; version switch demotes old current and promotes new in one
+backend transaction. Conflicts fail atomically, never choose an arbitrary version.
 
-### 2. exam_questions
+## Publication and completeness
 
-| Column | Type/nullability | Constraint/meaning |
-|---|---|---|
-| answer_key_version_id | uuid NOT NULL | FK header ON DELETE RESTRICT |
-| question_number | smallint NOT NULL | 1..100; composite PK(answer_key_version_id,question_number) |
-| question_type | text NOT NULL | v1 CHECK='single_choice' |
-| correct_choice | smallint NOT NULL | 1..5 |
-| points | smallint NOT NULL | 1..100, actual item points |
+Service-role/backend DML starts with draft headers only. After reviewed questions are
+loaded, update verified_at/status='published'/is_current=true in a transaction.
+No callable public publish RPC or client write grant exists. Publication trigger checks
+active occurrence/content, contiguous 1..N, exact count and sum(points)=max_score.
+Unsupported question types cannot be stored; omitted unsupported items cannot be inferred
+from SQL alone, so complete-paper human review is a mandatory publication prerequisite.
+Any paper not wholly representable stays timer_only; no partial score rescaling.
 
-Numbering must exactly equal1..header.question_count on publication. No independent
-mutable question identity shared across key versions; small versioned row sets avoid
-an extra question-bank abstraction. Future numeric/multiple-answer types require
-explicit typed columns/constraints/engine version, not arbitrary JSON answers.
+Question edits bump the draft parent revision. This forces row-version conflicts with
+concurrent publication even at repeatable-read isolation; released children reject edits.
+Submission locks pinned key/cutoff and active parent rows against withdrawal during scoring.
+Partial current indexes protect concurrent current selection. Real multi-connection race
+acceptance is still required; the in-memory local runner serializes operations.
 
-### 3. grade_cutoff_versions
+content_digest is server SHA256 of UTF-8 PostgreSQL JSONB text containing immutable
+header evidence (excluding operational status/current/revision/create/publish fields) and
+ordered question triples or cutoff array. It is an opaque server package fingerprint,
+not a promise that Dart jsonEncode produces identical bytes. Future clients pin the digest
+and validate typed completeness; cross-language scoring parity uses numeric test vectors.
 
-| Column | Type/nullability | Constraint/meaning |
-|---|---|---|
-| id | uuid PK | generated UUID |
-| answer_key_version_id | uuid NOT NULL | FK header ON DELETE RESTRICT; exact paper/cohort/total scope |
-| version | integer NOT NULL | >0; UNIQUE(answer_key_version_id,version) |
-| status, is_current | text/boolean NOT NULL | draft/published/withdrawn; current implies published; partial UNIQUE(key_id) WHERE is_current |
-| basis | text NOT NULL | raw_absolute or raw_estimate |
-| certainty | text NOT NULL | confirmed or estimated; CHECK matches basis as below |
-| minimum_scores | smallint[] NOT NULL | exactly9 non-NULL integer thresholds, array lower bound1 |
-| source_name, source_url, source_digest | text NOT NULL | same shape/limits as key provenance |
-| content_digest | text NULL until published | server-computed canonical grade-package SHA256 |
-| fetched_at, created_at | timestamptz NOT NULL | observation/server time |
-| verified_at, published_at | timestamptz NULL | required for published/withdrawn |
-| corrected_at, correction_note | nullable pair | same correction semantics/limits as keys |
+## Grade contract
 
-One ordered array stores the nine grade rows to avoid a sixth table. Index1 is
-minimum raw score for grade1, through index9 for grade9. Pure immutable array helper
-CHECK: one dimension/lower1/length9/noNULL/nonnegative/strictly descending/last0.
-Publication additionally checks every threshold<=key.total_points and9 full bands.
-Grade = smallest grade whose minimum <= rawScore; intervals include lower endpoint.
-No division/rounding/percentile approximation. Grade0 invalid; scores0..total covered.
+Publication status and grade certainty are separate columns. Supported basis/meaning:
+- raw_absolute + confirmed: applicable officially verified absolute rule; UI `2등급`.
+- raw_estimate + estimated: compatible raw estimate; UI `예상 2등급`.
+- no selected cutoff: grade NULL, grade_status=unavailable; UI `등급 정보 준비 중`.
 
-CHECK (basis='raw_absolute' AND certainty='confirmed') OR
-(basis='raw_estimate' AND certainty='estimated'). This v1 projection cannot store a
-standard-score threshold as if it were raw. Confirmed source data requiring unknown
-score transformations stays private review evidence, not a usable confirmed grade.
-Absolute rules are explicitly verified for this exam/subject/year. One current rule
-per key; selecting competing estimates requires operator review, not random source
-priority. Published values/source immutable, same correction/withdrawal protocol.
-Also UNIQUE(id,answer_key_version_id) for attempt's same-key FK.
+minimum_scores is smallint[9], one-dimensional with lower bound 1. Array index IS grade
+1..9; duplicates/missing grade positions are impossible. Values must be non-NULL,
+strictly descending, between 0 and max_score, last value 0. Minimum includes boundary;
+choose first grade whose threshold <= raw score. Unsupported degenerate/duplicate bands
+stay unavailable pending a separate contract, not silently normalized.
+Standard-score tables cannot enter this raw-score storage. No raw-score reconstruction
+of official Korean/math standard scores/percentiles/grades. English/history also need
+reviewed year/occurrence-specific data; no hardcoded universal bands. Independent cutoff
+versions can be reused across corrected keys of exactly matching scope/total, reducing
+unnecessary duplication without creating an unversioned global rule.
 
-### 4. mock_exam_attempts
+## Trusted writes / reads
 
-| Column | Type/nullability | Constraint/meaning |
-|---|---|---|
-| id | uuid PK | client-generated idempotency token validated by submission RPC |
-| user_id | uuid NOT NULL | RPC derives auth.uid(); FK auth.users ON DELETE CASCADE |
-| study_session_id | uuid NULL | composite FK(study_session_id,user_id) -> study_sessions(id,user_id), MATCH SIMPLE, ON DELETE CASCADE |
-| answer_key_version_id | uuid NOT NULL | FK key ON DELETE RESTRICT |
-| grade_cutoff_version_id | uuid NULL | composite FK(cutoff_id,key_id) -> grade_cutoff_versions(id,answer_key_version_id), DELETE RESTRICT |
-| scoring_version | text NOT NULL | initial allowlist mcq5-v1; computed via versioned server engine dispatch |
-| submitted_at | timestamptz NOT NULL | server receipt time; not proof of real timed completion |
-| raw_score, total_possible | integer NOT NULL | 0<=raw<=total; total1..1000; server-derived |
-| question_count, correct_count, unanswered_count | smallint NOT NULL | question1..100; counts>=0; correct+unanswered<=question |
-| grade | smallint NULL | 1..9 when present |
-| grade_status | text NOT NULL | none/estimated/confirmed |
-| request_digest | text NOT NULL | server SHA256 of normalized input incl pinned versions/session/answers |
+12 functions: five pure invoker helpers (text, URL, cutoff shape, answer normalization,
+MCQ engine), five trigger functions, two authenticated RPCs.
 
-CHECK grade NULL iff grade_status=none iff cutoff_id NULL. If present, grade status
-must equal the referenced cutoff certainty (transaction validator, not a cross-table
-CHECK). All fields immutable after insertion. UNIQUE(study_session_id) allows multiple
-NULLs and one result per linked Study session. UNIQUE(id,answer_key_version_id) for
-answer FK. Linked session must be same owner's mode=mock_exam (write trigger/RPC
-check under lock). Null link permitted for <1s time with no Study record; it does not
-create artificial time. Study subject/title cannot prove an exam identity; the pinned
-key selected at setup is the authoritative scoring scope, not anti-cheat evidence.
+`submit_mock_attempt(p_attempt_id, p_study_session_id, p_answer_key_version_id,
+p_grade_cutoff_version_id, p_scoring_version, p_answers)`:
+1. Requires auth.uid(); no arbitrary user_id/score/grade/time arguments.
+2. Serializes same UUID with transaction advisory lock. Same owner/id/normalized input
+   returns prior immutable result; different payload or foreign owner returns conflict.
+3. Requires engine mcq5-v1 and published complete pinned key. Optional cutoff must match
+   occurrence/variant/max_score and be published. Superseded is usable, withdrawn is not.
+4. Input is <=100 objects, each exactly {question_number,choice}; choice NULL or integer
+   1..5. Missing questions normalize to blank. Unknown fields/numbers, duplicates, string
+   numbers/fractions/unsupported input reject. Client scores cannot be smuggled in.
+5. Recomputes points/grade, INSERTs attempt and all answer rows in one transaction.
+6. Returns calculated result/answers and safe provenance via fetch_own_mock_attempt.
 
-### 5. mock_exam_answers
+`fetch_own_mock_attempt(p_attempt_id)` checks owner first, returns NULL if not owned.
+It permits private historic review after public withdrawal without making the old key
+public. It excludes internal request_payload. Same-id retries work even after linked
+Study deletion: original normalized request is retained privately for comparison.
 
-| Column | Type/nullability | Constraint/meaning |
-|---|---|---|
-| attempt_id, question_number | uuid/smallint NOT NULL | composite PK; question1..100 |
-| answer_key_version_id | uuid NOT NULL | (attempt_id,key_id) FK -> attempts(id,key_id) DELETE CASCADE; (key_id,question_number) FK -> exam_questions DELETE RESTRICT |
-| submitted_choice | smallint NULL | NULL=unanswered; otherwise1..5 |
-| correct_choice_snapshot | smallint NOT NULL | 1..5; copied only by trusted scorer |
-| points_snapshot | smallint NOT NULL | 1..100; copied only by trusted scorer |
-| is_correct | boolean GENERATED STORED | coalesce(submitted_choice=correct_choice_snapshot,false) |
-| awarded_points | integer GENERATED STORED | CASE WHEN matching THEN points_snapshot ELSE0 END |
+Deferred constraints independently check complete answer snapshots, calculated totals,
+counts, grade and normalized request. A partial trusted result insert fails at commit.
+Generated correctness/points cannot be supplied as arbitrary client values. Direct
+attempt UPDATE and independent answer UPDATE/DELETE fail; delete whole attempt instead.
 
-Persist one answer row per question, including unanswered, atomically with attempt.
-Snapshots allow private result review even after public key withdrawal. Server-only
-insert validates snapshots against the pinned immutable key. Clients cannot send
-snapshots/correctness/awarded values. Deferred attempt-total validator checks answer
-count, all question numbers, sum awarded/raw, sum points/total and counts at commit.
-It also compares correct-choice/points snapshots against key rows and grade against
-the pinned threshold function. Cascade deletion skips this aggregate check only
-when the parent attempt no longer exists. This prevents partial or independently
-inconsistent result rows. No generic response
-JSON engine; RPC may transport a bounded list of typed question_number/choice pairs.
+Pure functions IMMUTABLE/SECURITY INVOKER; fetch STABLE and submit/trigger functions
+VOLATILE. All fixed search_path=''; all table/function references schema-qualified.
+Definer routines are owned by the trusted migration executor (normally postgres), not
+app roles. Their elevated capability is intentionally limited to reviewed fixed bodies,
+no dynamic SQL and explicit owner checks; no new login/BYPASSRLS role is introduced.
+PUBLIC/anon/authenticated/service_role default function EXECUTE is explicitly revoked.
+Only submit/fetch granted to authenticated; three CHECK helpers granted to content backend.
+This is not a claim that the postgres function owner itself has reduced global privileges.
 
-## Checks that require transactions/triggers
+## Study delete and field preservation
 
-PostgreSQL CHECK cannot enforce child sums/publication completeness via table reads.
-Executable8-D1 must include actual functions/triggers, not claim a prose rule is DB
-integrity. Required:
+Add only `study_sessions_id_owner UNIQUE(id,user_id)` to existing Study.
+Composite FK (study_session_id,user_id) references (id,user_id), with
+**ON DELETE SET NULL (study_session_id)**. user_id remains NOT NULL and unchanged.
+This PostgreSQL17-supported column-specific action preserves owner identity:
+[PostgreSQL CREATE TABLE](https://www.postgresql.org/docs/17/sql-createtable.html).
+Attempt trigger permits only this unlink after the referenced row is gone; all score
+fields remain immutable. Attempt deletion cascades answers, never Study; Study deletion
+retains attempt and answers. Auth account deletion cascades private records.
+One non-NULL Study link per attempt result (UNIQUE) avoids duplicate linked submissions.
+Owner/mode=mock_exam is checked under lock; NULL link is allowed and adds no study time.
+Profiles, names/grades, NEIS, D-Day, content/resources and existing Study permissions,
+duration and RLS are untouched. Request payload retains original Study UUID for retry,
+but it is no longer a live relation after deletion and contains no auth token/credential.
 
-1. Immutable pure threshold-shape function (IMMUTABLE, SECURITY INVOKER, fixed empty
-   search_path). Checks array shape/order only, never queries another table.
-2. Header publication guard locks parent/family and validates contiguous questions,
-   count/sum/hash, provenance, supported type and active existing exam/occurrence.
-   Published-child edits/deletes and published-header content changes are rejected,
-   including trusted ordinary DML. Deferred triggers prevent publish/edit races.
-3. Cutoff publication guard checks same key, score-scale limits and all9 bands;
-   immutable-after-publication guard applies even to a superseded/withdrawn row.
-4. Attempt insert guard checks session owner/mode, exact key/cutoff compatibility and
-   lifecycle at submission. Deferred answer/header-total guard rejects partial data.
-5. Completed attempt/answer UPDATE rejected; only approved owner DELETE path allowed.
-   Child deletion happens via whole-attempt cascade, not a public single-answer DELETE.
+## Availability, RLS and indexes
 
-RPC/publication functions that write are VOLATILE. Any SECURITY DEFINER routine must
-use fixed search_path='', qualified object names, no dynamic SQL, explicit auth.uid()
-checks, exact output projection and narrowly audited owner privileges. Revoke default
-PUBLIC EXECUTE before granting. No service-role token in Flutter or SQL examples.
+`mock_exam_scoring_availability` is a security_invoker view over existing public
+occurrences/current published keys and compatible current cutoffs. No stored availability
+boolean. It returns timer_only for an active occurrence without current key, or
+scoring_available per variant, plus nullable cutoff and grade_status. Clients filter by
+occurrence, paginate selection, and use keyset owner history (submitted_at,id), not
+unbounded history downloads. Full key fetch is bounded by <=100 questions.
 
-## Submission and reads (proposed interfaces)
+Five tables RLS enabled, six policies. Public SELECT uses explicit safe columns and
+active parent/publication checks. Questions inherit parent visibility. Cutoffs are public
+independent reviewed data, not dependent on whether an exact key version still exists.
+Auth owner SELECT/DELETE attempts, SELECT answers; no direct INSERT/UPDATE. Anon has no
+personal table privileges. Backend content DML is trigger-guarded; existing service_role
+contracts are unchanged. No client grants on quarantine, no new ingestion/crawler.
 
-- Public bounded SELECT manifest of current published key packages for active
-  occurrence/content; exact selected version fetch of published key/questions/cutoff.
-  All submitted typed payloads capped at100 entries; no arbitrary query/SQL fragments.
-- `submit_mock_attempt(attempt_id, study_session_id?, answer_key_version_id,
-  grade_cutoff_version_id?, scoring_version, answers)` authenticated-only atomic RPC.
-  Derive user, validate engine/key/status and reject unknown/duplicate numbers or
-  out-of-range choices. Missing listed question becomes explicit NULL row. Caller
-  supplied score/grade/owner/time/result fields are forbidden, not ignored.
-- Lock versions against withdrawal during recomputation. Superseded published pinned
-  versions remain valid; no silent upgrade. A withdrawn pinned package returns safe
-  KEY_WITHDRAWN/CUTOFF_WITHDRAWN, retaining local result/time and requiring explicit
-  review/recovery. Old identical retry of an already committed attempt returns that
-  same immutable result even after withdrawal; do idempotency lookup first.
-- Retry: same owner+id+canonical request digest returns prior result; different
-  payload/id collision fails. Server also compares canonical typed request fields,
-  not client-supplied hash. Concurrent insert converges through UUID uniqueness and
-  transaction retry; no UPDATE result on conflict. Cross-owner IDs return a generic
-  conflict/not-found response without row details. Different id on same session fails.
-- `fetch_own_mock_attempt(id)` derives owner first; returns own result/answers and
-  narrowly selected source/version metadata even if public parent/key is hidden.
-  It never grants public access to withdrawn keys. History SELECT is owner-only,
-  bounded keyset(submitted_at,id), detail query max100 answers.
+Five explicit scoring indexes: key current, cutoff current, owner history, attempt key
+reference, non-NULL cutoff reference. PK/UNIQUE indexes support numbering/families/scope
+FKs and Study links; one additive Study composite UNIQUE. No GIN/leaderboard index.
 
-No scoring availability boolean is added to exams; it is derived from reviewed
-published packages and app engine support. No user data in public projections.
-Public key access is deliberate for offline/Guest practice, not an exam security flaw
-we pretend to prevent. Running UI hides answers; backend secrecy is not promised.
+## Guest, parity and acceptance
 
-## RLS, grants and indexes
+Guest remains planned pure Dart local engine; no cloud attempt or auto-upload on login.
+Auth saves through server RPC; future outbox preserves original owner/version and retries.
+`supabase/review/mock_scoring_vectors.json` contains 37 explicitly synthetic vectors,
+including mixed points/blank, threshold neighbours, confirmed/estimated/unavailable.
+Local PostgreSQL engine consumes them now; future Dart must consume exactly this file
+and match every expected output before Flutter scoring is enabled. Dart parity is NOT
+implemented or PASS yet. Pure output is wrapped with pinned key/cutoff/engine versions
+by the RPC/repository; engine never chooses a newer version itself.
 
-ENABLE RLS on all five new tables; REVOKE ALL from PUBLIC/anon/authenticated before
-explicit grants. Default deny. Existing table policies/service_role grants unchanged.
+Production acceptance after Owner deploy (actual A/B JWT, never SET ROLE evidence):
+1. Owner approves a small real reviewed content package separately. If none exists,
+   STOP content-dependent acceptance; do not publish fake keys/cutoffs into production.
+   Draft/publication checks use isolated local synthetic data, or separately authorized
+   draft fixtures that can be deleted before publication. Published data is immutable.
+2. Log in A/B with local getpass, verify distinct IDs and capture own attempt/Study and
+   profile baselines. No password/token/key/raw error response logging. Anon GET must
+   hide drafts/inactive keys and expose published question/points/source and cutoff basis.
+3. A POST `/rest/v1/rpc/submit_mock_attempt` with six named p_* arguments above, own
+   optionally linked completed mock Study, mixed right/wrong/blank answers. Compare actual
+   stored rows/each awarded point and result, not HTTP alone. Test no-cutoff grade NULL,
+   applicable boundaries and independent cutoff compatibility.
+4. Reject malformed/duplicate/unsupported answers, unknown engine/key, unpublished key,
+   foreign cutoff/variant/session and any raw_score/user_id/grade extra RPC parameter.
+   Direct INSERT/UPDATE also denied. Fresh keys must be complete before publication.
+5. B GET/DELETE A attempt: empty/no effect; B reads no A answers, cannot attach A Study.
+   Re-read A intact. Same-id retry identical; changed input conflict. Run concurrent retry
+   and publish/edit races with separate local database connections before release.
+6. Version2 publish does not rewrite version1 result. Withdrawn key rejects new attempts
+   while old owned results and identical retry work. Use approved real content updates,
+   not destructive production edits solely to run a test.
+7. Delete run-created linked Study as A: attempt survives with NULL link, owner/answers/
+   scores unchanged; identical retry works. Delete run-created attempt: answers cascade,
+   unrelated Study/profile untouched. Delete only UUIDs registered by this run.
+8. Restore own attempt/Study baselines, profile/school/D-Day digests unchanged; keep Auth
+   users. Never purge unrelated/published content. No production fixtures created now.
 
-| Relation/function | anon | authenticated | trusted publisher/scorer |
-|---|---|---|---|
-| key headers/questions/cutoffs | SELECT explicit public columns, published + active occurrence/content only; questions/cutoffs also require a published parent key | same | reviewed publish path, no direct client writes |
-| attempts | none | owner SELECT/DELETE only | RPC derives owner, server-computed INSERT |
-| answers | none | SELECT only via EXISTS own attempt | atomic insert; cascade deletion only |
-| submit/fetch-own RPC | no EXECUTE | EXECUTE with explicit session check | limited function owner privileges |
-| publication routines | none | none | backend-only; no app role grant |
-| quarantine/raw evidence | none | none | existing backend-only contract |
+## Validation / remaining gates
 
-Public column lists include version, scope, question/points and safe provenance;
-exclude internal reviewer notes/raw evidence. Attempts RLS uses auth.uid()=user_id;
-answers RLS uses EXISTS attempt with matching key and owner. No recursive policy
-from attempts back into answers. Public key policy depends only on existing public
-occurrence/content, never on private attempts; special own-result metadata retrieval
-uses the narrow owner RPC. No new profile grants, no anon personal data access.
+SQL grammar/scope/unchanged migration hashes/package-copy consistency/credential
+signature scan: automated checker. Local PostgreSQL17.5 (PGlite0.3.14) applies all prior
+migrations, then new migration/pre/post; validates rollback/reapply, mixed scoring,
+publication and immutability, role-simulated isolation, generated values, malformed inputs,
+version pinning, Study unlink, preservation and shared vectors. Safe in-memory synthetic
+fixtures disappear when the database closes. Production is reported PG17.6; this is a
+same-major local engine, not Supabase/PostgREST/JWT or multi-process concurrency evidence.
 
-Indexes beyond PK/UNIQUE:
-- attempts(user_id,submitted_at DESC,id DESC): owner history page.
-- attempts(answer_key_version_id) and attempts(grade_cutoff_version_id) WHERE NOT NULL:
-  FK/reference checks and correction-impact lookup; do not expose that lookup publicly.
-- Unique indexes already cover key family/current, questions by version/number,
-  cutoff by key/current, answers by attempt/number. Add answers(key_id,question_number)
-  only if FK maintenance plans demonstrate need; immutable key rows aren't deleted.
-- Study UNIQUE(id,user_id) supports the owner-safe FK; redundant to id for uniqueness
-  but required for the composite reference. No GIN/JSON/full-text/score leaderboard index.
-
-## Migration, rollback and acceptance gate
-
-New executable migration is required for five tables, functions/triggers/RPC,
-policies/grants/indexes and the additive Study unique constraint. Timestamp follows
-existing naming convention when8-D1 package is prepared. **No runnable migration
-filename assigned or production DDL executed in this design task.**
-
-Preflight read-only plan: catalog-check exact existing PK/FK/RLS/grants and absence
-of proposed object names; baseline counts/digests for profiles/content/Study and
-all existing contract checks. Do not assume DB equals Git; current production facts
-are Owner reports. No service-role credentials printed. Empty content is not a
-scoring-ready dataset. Owner reviews migration/rollback before applying it.
-
-Postflight: five table columns/constraints/function properties, RLS/grants, published
-visibility, expected indexes and unchanged existing row digests. Test validators
-inside disposable local PostgreSQL transactions first; no malformed production keys.
-
-Rollback plan (future exact SQL accompanies final object names):
-1. Disable new scoring client entry/worker first; retain 8-C timer-only behavior.
-2. If any attempts exist, obtain approved export/retention plan before dropping
-   personal data; preferably withdraw current packages and leave immutable history.
-3. For empty/test-only migration rollback: revoke new RPC access; drop submit/read/
-   publication entry points, drop their triggers before dependent trigger functions,
-   then answers -> attempts -> cutoffs ->
-   questions -> key headers; drop helper and only the new Study composite unique.
-4. Use explicit objects, no DROP CASCADE against existing schema. Leave quarantine,
-   all existing Study rows, profiles, content/resources and applied migrations intact.
-   Never rewrite applied migration history to pretend rollback was not needed.
-
-Offline/engine fixtures: full correct/incorrect/blank, mixed points, malformed/duplicate/
-missing questions, invalid choices/types, wrong total,80/40 display labels, withdrawn/
-corrected versions, stale engine, no cutoff, estimated/confirmed, every threshold±1,
-maximum/zero score. Dart and server must agree byte-for-byte on normalized outcomes.
-
-Real A/B JWT acceptance after Owner deployment and authorized small reviewed fixture:
-- Guest reads published active packages only; draft/withdrawn/raw evidence denied;
-  inactive content/occurrence hides package; own old result remains readable.
-- A submits -> recomputed result and every answer row verified, not just HTTP200;
-  spoofed score/grade/user fields and direct INSERT/UPDATE denied.
-- Foreign exam/variant/cutoff/question/session-owner/mode rejects; immutable mutation
-  rejects; incomplete answer transaction rolls back; identical concurrent retry
-  returns one result, changed-payload retry fails.
-- B cannot SELECT/DELETE A attempt/answers or submit linked to A Study session.
-- Key/cutoff correction leaves A old score/version unchanged; withdrawn cached
-  submission fails safely. No automatic key or grade upgrade.
-- Owner attempt deletion cascades answers but preserves Study; linked Study deletion
-  cascades attempt/answers only as documented. Auth users retained during testing.
-- Run-owned fixture cleanup/baseline restoration and profile/NEIS/D-Day preservation.
-  SQL Editor SET ROLE is not real JWT ownership evidence.
-
-Flutter later tests: Guest no upload, Auth dependency-order pending/retry, local
-v2 migration, stale owner callbacks, timeUp answer-lock races/dialog cancellation,
-KST aggregate not doubled,360×640/2× input/results/semantics, actual simulator and
-physical lifecycle gates. No tests for an unimplemented scoring engine claimed now.
-
-Static validation now: local schema/code/proposal naming cross-check, relation/delete/
-trust consistency, document links and git diff --check; prior migrations unchanged.
-SQL syntax/runtime/RLS tests **NOT RUN** because executable SQL and scoring code are
-not part of this task. This is ready for Owner design review, not SQL Editor paste.
+No production application, real JWT/RPC, Dart parity, scoring UI or real key ingestion
+performed. Day8-D1 migration package prepared / Owner approval pending. After approval,
+Owner executes the package; actual JWT acceptance precedes Flutter scoring implementation.
+Day8-B/8-C physical-device gates remain pending. No Push/PR/Merge.

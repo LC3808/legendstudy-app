@@ -351,21 +351,23 @@ DND acceptance. See Study v1 for official sources and remaining checks. Day 8-B 
 implemented, not COMPLETE. No DB/Focus cloud field or 8-C UI/notifications added.
 
 
-## Day 8-D Scoring architecture — proposal only
+## Day 8-D1 Scoring storage / validation contract
 
-[Scoring v1](mock-exam-scoring-v1.md) separates timer availability from reviewed key
-availability. Existing8-C Guest/Auth runtime is PASS with physical gates pending.
-No scoring engine or UI exists yet. Proposed pure Dart typed engine computes actual
-per-item points using pinned immutable key/cutoff/algorithm versions. Auth server RPC
-recomputes rather than trusting submitted scores; Guest previews/results stay local.
+[Scoring UX](mock-exam-scoring-v1.md), [storage contract](day-8-scoring-storage-proposal.md)
+and [full executable SQL package](day-8-scoring-migration-package.md) are prepared.
+Existing8-C Guest/Auth runtime PASS remains distinct from pending physical-device gates.
+No Flutter scoring engine/UI exists yet. Future Guest pure Dart engine uses per-item
+points and pinned versions; authenticated RPC already has a local-tested server scorer.
+Shared synthetic vectors define the parity gate; Dart parity is still unimplemented.
 
-Scoring setup binds the actual exam occurrence + paper variant, never free-text
-Study subject. Local answer draft locks at logical timeUp; explicit submission commits
-Study time and attempt outbox together. Linked Study upload precedes attempt upload;
-owner epochs prevent stale response/account leakage. Attempts do not add study time.
-History remains reproducible after key correction; relative raw estimates are never
-presented as official standard scores/percentiles/grades. Same-version synthetic
-Dart/server conformance fixtures and source review are8-D1/2 implementation gates.
+Occurrence/variant identity is explicit. Key and cutoff versions have independent
+publication lifecycles; same scope/total required. Public invoker availability is derived,
+not a stored flag. Server owner checks, immutable results, exact idempotency payloads and
+atomic attempt/answer inserts reject client-supplied scores and partial result writes.
+Study time and scored results are independent: Study deletion clears only its FK link;
+attempt deletion cascades answers. Profile/school/D-Day are outside scorer writes.
 
-Five-table DB/publication/RLS contract: [storage proposal](day-8-scoring-storage-proposal.md).
-No production/schema/Flutter change here; future deployment remains Owner-executed.
+Future local draft locks at logical timeUp, commits time/result outbox together and
+uploads linked Study before attempt; owner epochs prevent stale-account writes.
+Attempts never double-count Study aggregate time. Current migration is local-tested,
+not production-applied. Owner approval/application/JWT acceptance precede scoring UI.

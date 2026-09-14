@@ -166,23 +166,23 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   Day 8-D architecture is now proposed below; scoring implementation still requires
   separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
 
-## Day 8-D Scoring — architecture/storage proposal only
+## Day 8-D1 Scoring — migration package prepared / Owner approval pending
 
-- [Scoring v1](mock-exam-scoring-v1.md) and [storage proposal](day-8-scoring-storage-proposal.md)
-  prepared against actual exam occurrence/composite FK, Study and ingestion contracts.
-  No production query/application, scoring code, new applied migration or key import.
-- Timer-only remains independent of complete reviewed key availability. Proposed
-  MCQ1–5 first; unsupported numeric/multiple-answer papers remain timer-only.
-  Pure Dart local scoring + authenticated server recomputation; per-item actual points.
-- Five proposed tables: key versions, questions, cutoff versions, attempts and answers.
-  Immutable versions/results; raw estimates clearly separated from official absolute
-  rules; no standard-score/percentile reconstruction from raw score.
-- Guest local/no auto-upload; private Auth owner records/outbox, source review and
-  existing quarantine. Detailed PK/FK/CHECK/grant/trigger/index/rollback/acceptance
-  contract is a proposal, not executable SQL or deployed schema.
-- Owner review needed for MCQ-only launch, grade semantics and linked Study-delete
-  cascade. Next8-D1: approved executable migration/package and Owner deployment/JWT;
-  then8-D2 answer entry/raw scoring and8-D3 grades/result UX. Verified content required.
+- Owner approved MCQ-first, confirmed/estimated/unavailable labels, and independent
+  Study/result deletion. Unsupported papers stay timer-only; no partial-score scaling.
+- [Full executable package](day-8-scoring-migration-package.md) and
+  [final storage contract](day-8-scoring-storage-proposal.md) prepared. New migration:
+  `20260914000200_mock_exam_scoring.sql`; four existing migrations unchanged.
+- Five tables, independent key/cutoff versions, 12 functions, server-recomputed immutable
+  results/answers, owner RLS and security-invoker availability projection. Study deletion
+  SET NULLs only the optional link; attempt/answers survive. Attempt deletion is separate.
+- Preflight/Postflight/guarded rollback are full SQL blocks. Local PostgreSQL17.5
+  synthetic validation and static checks PASS; no production SQL/JWT/REST executed.
+  Profile/school/D-Day preserved in local fixtures; no production fixtures created.
+- Shared synthetic scoring vectors prepared for future Dart parity. Flutter scoring,
+  ingestion and real key publication are not implemented/performed.
+- Next: Owner reviews/approves package -> Owner production application -> actual JWT/RPC
+  acceptance with separately approved real content -> approved8-D2 Flutter scoring work.
 - Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
   gates remain pending. No Push, PR or Merge.
 

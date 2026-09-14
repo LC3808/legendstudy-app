@@ -542,21 +542,23 @@ Existing migration files remain unchanged. This documentation closeout performed
 DB/production request. See study-v1.md for safe runtime stages and restoration limits.
 
 
-## Day 8-D Scoring — proposed, NOT deployed
+## Day 8-D1 Scoring — package prepared, NOT deployed
 
-See [storage proposal](day-8-scoring-storage-proposal.md) for five proposed tables:
-answer_key_versions, exam_questions, grade_cutoff_versions, mock_exam_attempts and
-mock_exam_answers. Canonical parent is exam_subjects.id with same-content composite
-FK to existing exam_subjects(id,content_item_id), not an invented exams.id. A reviewed
-paper variant distinguishes booklets/electives without duplicating exam parents.
+[Full SQL package](day-8-scoring-migration-package.md) and [storage contract](day-8-scoring-storage-proposal.md)
+provide five new tables: answer_key_versions, exam_questions, grade_cutoff_versions,
+mock_exam_attempts, mock_exam_answers. Canonical occurrence/content composite FK reuses
+exam_subjects(id,content_item_id); no copied exams or content identity.
 
-Published key/cutoff versions and completed attempts are immutable; public access
-only to reviewed published active packages. Answers/results are owner-only. Proposed
-server submission RPC recomputes raw score/grade and inserts result/answers atomically;
-Guest uses the same versioned domain contract locally. No client score trust.
+Cutoff versions are independent of key revisions but must match attempt occurrence,
+variant and max score. Published definitions are immutable; server RPC derives owner,
+answers/points/raw score/grade. Personal records are owner-only. Standard-score cutoffs
+cannot be misapplied to raw scores. Grade status: unavailable/estimated/confirmed.
 
-A future new migration is required, including Study UNIQUE(id,user_id) for owner-safe
-optional linkage. No Study columns/RLS/grants or existing profile/content contracts
-change in this task; no executable migration or production deployment is claimed.
-Full constraints/publication triggers, read grants, indexes, rollback and JWT plan
-are in the proposal. Day8-D NOT COMPLETE; Owner review precedes8-D1 SQL preparation.
+Only additive change to existing tables: study_sessions_id_owner UNIQUE(id,user_id).
+Study FK uses ON DELETE SET NULL(study_session_id); owner remains intact and results
+survive. Attempt deletion cascades answers only. Existing profiles/NEIS/D-Day, Study
+columns/RLS/grants, content/resources and prior migrations are unchanged.
+
+Local PostgreSQL17.5 application/pre/post/rollback and synthetic scoring/RLS simulation
+PASS. Production (reported17.6) application and real JWT/RPC remain pending. No production
+request, source import or Flutter scoring implementation. Day8-D NOT COMPLETE.

@@ -1,0 +1,1355 @@
+{
+  "description": "Synthetic conformance fixtures only; NOT real exam keys or official grade thresholds.",
+  "scoring_version": "mcq5-v1",
+  "vectors": [
+    {
+      "name": "confirmed_0",
+      "questions": [
+        [
+          1,
+          1,
+          100
+        ]
+      ],
+      "answers": [
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 0,
+        "max_score": 100,
+        "grade": 9,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_19",
+      "questions": [
+        [
+          1,
+          1,
+          19
+        ],
+        [
+          2,
+          2,
+          81
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 19,
+        "max_score": 100,
+        "grade": 9,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_20",
+      "questions": [
+        [
+          1,
+          1,
+          20
+        ],
+        [
+          2,
+          2,
+          80
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 20,
+        "max_score": 100,
+        "grade": 8,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_29",
+      "questions": [
+        [
+          1,
+          1,
+          29
+        ],
+        [
+          2,
+          2,
+          71
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 29,
+        "max_score": 100,
+        "grade": 8,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_30",
+      "questions": [
+        [
+          1,
+          1,
+          30
+        ],
+        [
+          2,
+          2,
+          70
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 30,
+        "max_score": 100,
+        "grade": 7,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_39",
+      "questions": [
+        [
+          1,
+          1,
+          39
+        ],
+        [
+          2,
+          2,
+          61
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 39,
+        "max_score": 100,
+        "grade": 7,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_40",
+      "questions": [
+        [
+          1,
+          1,
+          40
+        ],
+        [
+          2,
+          2,
+          60
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 40,
+        "max_score": 100,
+        "grade": 6,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_49",
+      "questions": [
+        [
+          1,
+          1,
+          49
+        ],
+        [
+          2,
+          2,
+          51
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 49,
+        "max_score": 100,
+        "grade": 6,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_50",
+      "questions": [
+        [
+          1,
+          1,
+          50
+        ],
+        [
+          2,
+          2,
+          50
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 50,
+        "max_score": 100,
+        "grade": 5,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_59",
+      "questions": [
+        [
+          1,
+          1,
+          59
+        ],
+        [
+          2,
+          2,
+          41
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 59,
+        "max_score": 100,
+        "grade": 5,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_60",
+      "questions": [
+        [
+          1,
+          1,
+          60
+        ],
+        [
+          2,
+          2,
+          40
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 60,
+        "max_score": 100,
+        "grade": 4,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_69",
+      "questions": [
+        [
+          1,
+          1,
+          69
+        ],
+        [
+          2,
+          2,
+          31
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 69,
+        "max_score": 100,
+        "grade": 4,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_70",
+      "questions": [
+        [
+          1,
+          1,
+          70
+        ],
+        [
+          2,
+          2,
+          30
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 70,
+        "max_score": 100,
+        "grade": 3,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_79",
+      "questions": [
+        [
+          1,
+          1,
+          79
+        ],
+        [
+          2,
+          2,
+          21
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 79,
+        "max_score": 100,
+        "grade": 3,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_80",
+      "questions": [
+        [
+          1,
+          1,
+          80
+        ],
+        [
+          2,
+          2,
+          20
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 80,
+        "max_score": 100,
+        "grade": 2,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_89",
+      "questions": [
+        [
+          1,
+          1,
+          89
+        ],
+        [
+          2,
+          2,
+          11
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 89,
+        "max_score": 100,
+        "grade": 2,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_90",
+      "questions": [
+        [
+          1,
+          1,
+          90
+        ],
+        [
+          2,
+          2,
+          10
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 90,
+        "max_score": 100,
+        "grade": 1,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "confirmed_100",
+      "questions": [
+        [
+          1,
+          1,
+          100
+        ]
+      ],
+      "answers": [
+        1
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "confirmed",
+      "expected": {
+        "raw_score": 100,
+        "max_score": 100,
+        "grade": 1,
+        "grade_status": "confirmed"
+      }
+    },
+    {
+      "name": "estimated_0",
+      "questions": [
+        [
+          1,
+          1,
+          100
+        ]
+      ],
+      "answers": [
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 0,
+        "max_score": 100,
+        "grade": 9,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_19",
+      "questions": [
+        [
+          1,
+          1,
+          19
+        ],
+        [
+          2,
+          2,
+          81
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 19,
+        "max_score": 100,
+        "grade": 9,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_20",
+      "questions": [
+        [
+          1,
+          1,
+          20
+        ],
+        [
+          2,
+          2,
+          80
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 20,
+        "max_score": 100,
+        "grade": 8,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_29",
+      "questions": [
+        [
+          1,
+          1,
+          29
+        ],
+        [
+          2,
+          2,
+          71
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 29,
+        "max_score": 100,
+        "grade": 8,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_30",
+      "questions": [
+        [
+          1,
+          1,
+          30
+        ],
+        [
+          2,
+          2,
+          70
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 30,
+        "max_score": 100,
+        "grade": 7,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_39",
+      "questions": [
+        [
+          1,
+          1,
+          39
+        ],
+        [
+          2,
+          2,
+          61
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 39,
+        "max_score": 100,
+        "grade": 7,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_40",
+      "questions": [
+        [
+          1,
+          1,
+          40
+        ],
+        [
+          2,
+          2,
+          60
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 40,
+        "max_score": 100,
+        "grade": 6,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_49",
+      "questions": [
+        [
+          1,
+          1,
+          49
+        ],
+        [
+          2,
+          2,
+          51
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 49,
+        "max_score": 100,
+        "grade": 6,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_50",
+      "questions": [
+        [
+          1,
+          1,
+          50
+        ],
+        [
+          2,
+          2,
+          50
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 50,
+        "max_score": 100,
+        "grade": 5,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_59",
+      "questions": [
+        [
+          1,
+          1,
+          59
+        ],
+        [
+          2,
+          2,
+          41
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 59,
+        "max_score": 100,
+        "grade": 5,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_60",
+      "questions": [
+        [
+          1,
+          1,
+          60
+        ],
+        [
+          2,
+          2,
+          40
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 60,
+        "max_score": 100,
+        "grade": 4,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_69",
+      "questions": [
+        [
+          1,
+          1,
+          69
+        ],
+        [
+          2,
+          2,
+          31
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 69,
+        "max_score": 100,
+        "grade": 4,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_70",
+      "questions": [
+        [
+          1,
+          1,
+          70
+        ],
+        [
+          2,
+          2,
+          30
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 70,
+        "max_score": 100,
+        "grade": 3,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_79",
+      "questions": [
+        [
+          1,
+          1,
+          79
+        ],
+        [
+          2,
+          2,
+          21
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 79,
+        "max_score": 100,
+        "grade": 3,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_80",
+      "questions": [
+        [
+          1,
+          1,
+          80
+        ],
+        [
+          2,
+          2,
+          20
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 80,
+        "max_score": 100,
+        "grade": 2,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_89",
+      "questions": [
+        [
+          1,
+          1,
+          89
+        ],
+        [
+          2,
+          2,
+          11
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 89,
+        "max_score": 100,
+        "grade": 2,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_90",
+      "questions": [
+        [
+          1,
+          1,
+          90
+        ],
+        [
+          2,
+          2,
+          10
+        ]
+      ],
+      "answers": [
+        1,
+        null
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 90,
+        "max_score": 100,
+        "grade": 1,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "estimated_100",
+      "questions": [
+        [
+          1,
+          1,
+          100
+        ]
+      ],
+      "answers": [
+        1
+      ],
+      "minimum_scores": [
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        20,
+        0
+      ],
+      "certainty": "estimated",
+      "expected": {
+        "raw_score": 100,
+        "max_score": 100,
+        "grade": 1,
+        "grade_status": "estimated"
+      }
+    },
+    {
+      "name": "mixed_points_blank",
+      "questions": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          3
+        ],
+        [
+          3,
+          3,
+          4
+        ]
+      ],
+      "answers": [
+        1,
+        5,
+        null
+      ],
+      "minimum_scores": null,
+      "certainty": "unavailable",
+      "expected": {
+        "raw_score": 2,
+        "max_score": 9,
+        "correct_count": 1,
+        "unanswered_count": 1,
+        "incorrect_questions": [
+          2
+        ],
+        "unanswered_questions": [
+          3
+        ],
+        "grade": null,
+        "grade_status": "unavailable"
+      }
+    }
+  ]
+}
