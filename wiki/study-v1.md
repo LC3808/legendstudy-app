@@ -182,10 +182,11 @@ value derives from milliseconds, not rounded daily/session labels (rounding can
 cause at most small display differences). Bars have text equivalents, no chart-only
 information. 23:50–00:20 with pause23:55–00:05 yields5min firstday+15min nextday.
 
-## Mock exam and scoring boundary — Day 8-C implemented, runtime pending
+## Mock exam and scoring boundary — Day 8-C runtime PASS, physical checks pending
 
 The detailed v1 contract is [Day 8-C Mock Exam](day-8-mock-exam.md).
-Implementation is present; runtime acceptance remains pending. Study switches compactly between
+Implementation is complete; Guest/Auth Flutter runtime PASS is Owner-reported.
+Physical-device acceptance remains pending. Study switches compactly between
 공부 타이머 and 모의고사, with one active session across modes. Mock has separate
 setup/ready/running/paused/timeUp/submitting/completed presentation states.
 
@@ -453,8 +454,11 @@ in8-C; their runtime gates are separate and scoring remains future.
 
 Mock Exam implementation/evidence is recorded in [Day 8-C](day-8-mock-exam.md#day-8-c-implementation-and-evidence--2026-09-14).
 177 Flutter tests and analyze PASS; actual iOS Guest one-minute expiry/confirmation/
-restore/Home/cleanup PASS. Mock Auth cloud smoke awaits Owner input; physical
-background/lock/Focus/notification/kill/reboot remain pending. Day8-C NOT COMPLETE.
+restore/Home/cleanup PASS. Owner now reports full Guest/Auth persistence smoke PASS:
+cloud save/restore, account isolation, pending/retry, Home aggregate, profile/school/
+D-Day preservation, fixture cleanup and Auth users retained. Physical background/
+lock/Focus/local notification/kill/reboot remain pending; Day8-C final COMPLETE is
+on hold. Day8-D Scoring requires separate Product Owner approval.
 Version2 local draft metadata reuses the general interval core and immutable Study
 repository/outbox; production schema/profile/NEIS/D-Day are unchanged. Native optional
 alerts are best effort; no exact delivery or automatic iOS Focus claim.

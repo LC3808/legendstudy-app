@@ -672,3 +672,17 @@ Flutter persistence smoke: PASS
 - Physical Android/iPhone background/lock/Focus/notification/kill/reboot pending;
   Day8-C implemented / runtime validation pending, NOT COMPLETE. Day8 overall NOT
   COMPLETE;8-D implementation not started. No Push, PR or Merge.
+
+
+## 2026-09-14 — Day 8-C Flutter runtime acceptance recorded
+
+- Owner reports full Mock Flutter persistence smoke PASS: Guest/Auth runtime,
+  cloud save/restore, Home aggregate, account isolation and pending sync/retry.
+- Profile/school/D-Day preservation, fixture cleanup and Auth users retained PASS.
+  Full safe stage output preserved in day-8-mock-exam.md; prior pending entry above
+  describes the implementation checkpoint, not the current runtime state.
+- Day8-C implementation complete; final COMPLETE remains on hold for physical
+  background/lock/Focus/local notification/kill/reboot. Day8 overall NOT COMPLETE.
+  Day8-D Scoring requires separate Owner approval.
+- Documentation only; diff/scope checks PASS. No tests/builds rerun, code/DB/production
+  changes, Push, PR or Merge.

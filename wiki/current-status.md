@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implemented; runtime validation pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -131,7 +131,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   present. Scoring remains out of scope. Day8 overall is not COMPLETE.
 - Official API references and full behavior/evidence: [Study v1](study-v1.md).
 
-## Day 8-C Mock Exam — implemented / runtime validation pending
+## Day 8-C Mock Exam — implementation complete / physical-device acceptance pending
 
 - Compact study/mock switch, one active timer; title/optional subject, four presets
   and custom1–720 minutes. Separate MockPhase over shared clock/interval infrastructure.
@@ -154,14 +154,16 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Actual iOS simulator Guest PASS: setup/start, pause/resume, running restore, real
   one-minute timeUp, frozen restore before confirmation, local completion, Home
   aggregate and original local snapshot restoration. No production writes in that run.
-- Actual Mock A/B cloud save/read-back/restore/isolation/retry and profile preservation
-  await Owner-run `tool/run_study_flutter_smoke.py PUBLIC_CONFIG --mock` results.
-  Prior Study JWT and8-A acceptance remain PASS, not substitute Mock runtime evidence.
+- Owner reports full actual Mock Flutter persistence smoke PASS: Guest and Auth,
+  cloud save/restore, account isolation, pending sync/retry and Home aggregate PASS.
+  Profile/school/D-Day preservation, fixture cleanup and Auth users retained PASS.
+  Full safe stage markers are recorded in [Mock contract](day-8-mock-exam.md).
+  This verifies simulator/provider restoration, not physical kill/reboot acceptance.
 - Android/iPhone physical background/lock/notification/Focus/kill/reboot remain pending.
   Inexact notifications can be delayed; rule cleanup after process kill is not guaranteed.
   Day8-C NOT COMPLETE; Day8 overall NOT COMPLETE. No8-D answer/scoring implementation.
-- Next: complete A/B simulator runtime and physical gates;8-D implementation needs
-  separate authorization. No DB/schema changes, Push, PR or Merge.
+- Next: complete physical-device gates. Day 8-C final COMPLETE remains on hold;
+  Day 8-D Scoring starts only after separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
 
 ## Long-term backlog — preserved for later planning
 

@@ -1,6 +1,6 @@
 # Day 8-C — Mock Exam v1 design
 
-Reviewed: 2026-09-14. **IMPLEMENTED / runtime validation pending; NOT COMPLETE.**
+Reviewed: 2026-09-14. **Implementation complete; Guest/Auth Flutter runtime PASS; physical-device checks pending. Final COMPLETE on hold.**
 Day 8-A remains COMPLETE; Day 8-B is implemented with physical acceptance pending.
 Day 8 overall is NOT COMPLETE. This document supersedes earlier mock auto-completion
 wording in Study v1. Implementation below adds Flutter/native behavior; no production
@@ -235,9 +235,9 @@ future work. No speculative fields/tables or answer UI are created now.
    tap/cancel, Focus/manual guide, owned rule vs user's DND override, submit and restore.
    Document actual delivery/cleanup limitations; simulator tests do not close these.
 
-Design-only checks now: production migration/code alignment, doc links, stale wording,
-doc-only diff and whitespace. No new runtime results claimed. Day 8-C implementation
-can start from this contract; physical Focus gate remains independent and open.
+At the design checkpoint, checks covered production migration/code alignment, links
+and documentation diff only. Implementation and subsequent runtime evidence are
+recorded below; physical Focus acceptance remains open.
 No blocking Product Owner decision for design. Defaults chosen here: pause allowed,
 subject optional, integer-minute custom limit, best-effort optional alerts, Focus
 release at frozen timeUp. Guaranteed audible/exact alerts or strict no-pause practice
@@ -309,15 +309,41 @@ MOCK_FLUTTER PASS fixture_cleanup
 The one-minute countdown actually elapsed; frozen state was reconstructed before
 confirmation. Original local snapshot restored; this Guest run made no production
 fixture. It does not prove physical lock/kill/reboot or real notification delivery.
-Actual A/B Mock cloud acceptance is pending Owner output from:
+## Owner-reported Guest/Auth Flutter runtime acceptance
 
-```sh
-cd /Users/woojinchang/development/legendstudy-app && python3 tool/run_study_flutter_smoke.py /Users/woojinchang/legendstudy-local.json --mock
+Product Owner supplied the following final output after running the dedicated Mock
+smoke. Stage names match `integration_test/mock_exam_smoke_test.dart` and the
+`--mock` runner. This documentation update does not rerun tests or production requests.
+
+```text
+MOCK_FLUTTER PASS guest_start
+MOCK_FLUTTER PASS guest_pause_resume
+MOCK_FLUTTER PASS guest_running_restore
+MOCK_FLUTTER PASS guest_time_up
+MOCK_FLUTTER PASS guest_end_local
+MOCK_FLUTTER PASS guest_home_restore
+MOCK_FLUTTER PASS login_preflight
+MOCK_FLUTTER PASS auth_save
+MOCK_FLUTTER PASS auth_restore_home
+MOCK_FLUTTER PASS account_isolation
+MOCK_FLUTTER PASS pending_sync
+MOCK_FLUTTER PASS pending_retry
+MOCK_FLUTTER PASS profile_preserved
+MOCK_FLUTTER PASS fixture_cleanup
+MOCK_FLUTTER PASS auth_users_retained
+Flutter persistence smoke: PASS
 ```
 
-The runner verifies saved row mode/title/plan/generated duration/segments, restored
-aggregate, account isolation, simulated offline retry and unchanged profile/school/
-D-Day snapshots; cleanup deletes only this run's UUIDs and retains Auth A/B. Existing
-Study rows stop its preflight, never get deleted arbitrarily. No runtime PASS is
-claimed until actual output is received. Physical validation remains required for
-Day8-C COMPLETE. Day8-D answers/scoring are neither implemented nor authorized here.
+Day 8-C implementation complete. Guest/Auth runtime, cloud save/read-back/restore,
+Home aggregate, account isolation and pending sync/retry PASS. The runner checks
+saved mode/title/plan/generated duration/segments and unchanged profile/school/D-Day
+snapshots. Fixture cleanup PASS: only run-owned Study UUIDs deleted and original
+local snapshot restored; Auth A/B users retained. Existing Study rows stop preflight
+rather than being deleted arbitrarily.
+
+Restoration evidence is simulator/provider reconstruction with actual native storage
+and real JWT/REST, not physical background/lock/Focus/local notification/kill/reboot
+acceptance. Those physical-device checks remain pending. **Day 8-C final COMPLETE
+is on hold until physical verification. Day 8 overall is not COMPLETE.**
+Day 8-D Scoring starts only after separate Product Owner approval; no answers,
+scoring, grade or schema implementation is included in this documentation closeout.
