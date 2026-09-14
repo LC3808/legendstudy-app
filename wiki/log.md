@@ -566,3 +566,16 @@ Flutter persistence smoke: PASS
   immutable migration hashes,package/source equality,links,credential-pattern and
   diff checks PASS. ParserPG18.4; actualPG17/JWT execution not performed. Flutter
   tests/builds not rerun because implementation is unchanged.
+
+
+## 2026-09-14 — Study production accepted / JWT verifier prepared
+
+- Owner confirms migration/postflight PASS,study/profile rows0,empty profile digest,
+  interval example true,expected grants and unchanged existing RLS/constraints.
+- Added dedicated getpass-based Study JWT verifier and preflight-only mode; existing
+  A/B Study rows STOP. Narrow random-ID cleanup includes uncertain INSERTs,profile
+  snapshots remain read-only,Auth users retained. Explicit A/B count scope; global
+  zero remains Owner-reported until independent global post-run count.
+- Python syntax,13 offline tests,credential-pattern scan,unchanged migration/Flutter
+  scope and diff checks PASS. Actual JWT acceptance NOT RUN. No fixtures or production
+  request this task; no Flutter/DND/mock UI,push,PR or merge. Day8 remains incomplete.

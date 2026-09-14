@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8 design approved / final migration prepared; production application pending.**
+**Day 7 = COMPLETE. Day 8 production migration PASS; actual Study JWT acceptance pending.**
 
 Product Owner accepted the final runtime results. Repository/code and Wiki were
 checked before this documentation closeout. Live deployment/JWT/Flutter results
@@ -61,16 +61,16 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Android debug and iOS simulator builds PASS; latest owner Flutter persistence
   runtime smoke PASS. Credential scan and git diff --check PASS at implementation.
 - This closeout changes documents only; Flutter tests/builds and production tests
-  were not rerun. Day 7 validation is historical. The current package adds an unapplied migration;
+  were not rerun. Day 7 validation is historical. The Study migration is now Owner-applied;
   no Flutter, production, secret or Auth-user changes.
 
-## Next: Day 8 Study — migration ready, not deployed or implemented
+## Next: Day 8 Study — JWT verifier ready, Flutter not implemented
 
 [Study v1](study-v1.md) defines 8-A timer/state/guest/auth/Home/seven-day behavior,
 8-B platform-aware focus, 8-C mock countdown/notifications and 8-D later scoring.
 [Storage proposal](day-8-study-storage-proposal.md) includes reviewable SQL,
 preflight/catalog/rollback and real JWT acceptance plan. New migration:
-20260914000100_study_sessions.sql; not yet applied. Copy-ready SQL is in the
+20260914000100_study_sessions.sql; Owner-applied with postflight PASS. Copy-ready SQL is in the
 [migration package](day-8-study-migration-package.md).
 
 Approved v1: durable local active timer, immutable completed cloud sessions with
@@ -81,9 +81,11 @@ Focus guidance, not a promised automatic global toggle. Focus preference stays l
 
 Owner approved the contract; cancelled sessions remain local, with no cloud status
 column. The bounded KST-window SELECT contract adds no aggregate RPC.
-Next Owner preflight/application/catalog checks, then real JWT acceptance and
-8-A. No production call/deployment, Flutter implementation, push, PR or merge in this
-step. Static validation details are in the proposal; Day 8 is not COMPLETE.
+Next Owner runs tool/verify_study_sessions_jwt.py with hidden A/B passwords;
+actual JWT PASS is required before 8-A Flutter implementation. No production call/deployment, Flutter implementation, push, PR or merge in this
+step. Global study_rows=0 and profile preservation are Owner-reported; verifier checks
+A/B-visible exact counts,cleanup and retained Auth users. Python syntax and13 offline
+tests PASS; no live JWT request this turn. Day 8 is not COMPLETE.
 
 ## Long-term backlog — preserved for later planning
 

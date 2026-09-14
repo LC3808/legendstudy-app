@@ -311,6 +311,6 @@ owner application and actual JWT validation still precede 8-A implementation. Pl
 and mock notifications are separate capability gates; Day 7 remains COMPLETE.
 
 Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
-column or cloud cancellations. New migration is NOT DEPLOYED. The copy-ready
+column or cloud cancellations. Migration is Owner-applied; actual Study JWT acceptance is pending. The copy-ready
 [package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
 are ready; no aggregate RPC, existing table edits or Flutter implementation added.

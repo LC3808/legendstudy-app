@@ -1,6 +1,6 @@
 # Day 8 Study v1 — architecture and UI contract proposal
 
-Reviewed: 2026-09-14. **Design approved; final migration package prepared; production application pending.**
+Reviewed: 2026-09-14. **Design approved; production migration/postflight PASS; actual JWT acceptance pending.**
 Day 7 remains COMPLETE. This document defines approved behavior; no Study feature, package,
 native permission, DB object or production deployment was implemented in this task.
 Claude UI/UX review can refine presentation within these proposed data boundaries.
@@ -320,6 +320,6 @@ and real JWT steps. Future tests must cover:
 Owner approved B/local durability, cancelled exclusion with no cloud cancellation,
 KST/overlap-union summary, 24h/256interval and1min–12h bounds, Android capability
 constraints/iOS manual guidance and local Focus preferences. Final migration is
-prepared. Next: Owner preflight/apply/postflight, real JWT acceptance, then8-A
+Owner-applied with postflight PASS. Next: real JWT acceptance, then8-A
 implementation. **STOP before production execution or Flutter implementation here.
 Day8 is not COMPLETE.**

@@ -1,6 +1,6 @@
 # Day 8 Study — Product Owner 실행 패키지
 
-설계 승인 완료. **Production 미적용.** 대상은 LegendStudy / `stlhijzpjfgwwdgunlsd`입니다.
+**Production 적용 및 postflight PASS — Product Owner 보고.** 아래 SQL은 적용된 패키지 기록이며 재실행하지 않습니다. 대상은 LegendStudy / `stlhijzpjfgwwdgunlsd`입니다.
 아래 각 단계는 파일 전체와 동일한 단일 SQL 블록입니다. Dashboard 프로젝트를
 확인하고 1번 결과가 예상과 일치할 때만 2번, 그 다음 3번을 실행합니다.
 4번 rollback은 데이터 손실을 수반하므로 필요할 때 별도 판단 후에만 실행합니다.

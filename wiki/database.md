@@ -509,15 +509,29 @@ fixture cleanup PASS; Auth users retained. Day 7 COMPLETE. No further schema or
 migration change was made. See day-7-dday-storage-proposal.md for runtime markers.
 
 
-## Day 8 Study — proposal only, NOT DEPLOYED
+## Day 8 Study — historical proposal / deployment recorded below
 
 [Study storage proposal](day-8-study-storage-proposal.md) proposes a new owner-only
-study_sessions table and pure interval-validation helper. New migration 20260914000100_study_sessions.sql is prepared, not applied. No Study table is claimed deployed; no production
-catalog query or SQL execution occurred in this design task. Applied Day 7 profile
+study_sessions table and pure interval-validation helper. Migration 20260914000100_study_sessions.sql is now Owner-applied; see evidence below. The initial design task made no production request; Owner subsequently applied
+and verified the migration as recorded below. Applied Day 7 profile
 contracts, migrations and data remain unchanged. See the proposal for complete
 columns, PK/FK, CHECK, index, RLS/grants, validation, JWT acceptance and rollback.
 
 Day 8 storage finalization: Owner-approved completed-only cloud contract; no status
-column or cloud cancellations. New migration is NOT DEPLOYED. The copy-ready
+column or cloud cancellations. Migration deployment is now Owner-reported PASS. The copy-ready
 [package](day-8-study-migration-package.md) and bounded KST-window SELECT contract
 are ready; no aggregate RPC, existing table edits or Flutter implementation added.
+
+## Production migration accepted / JWT verifier ready (2026-09-14)
+
+Product Owner reports migration and postflight PASS: columns, constraints, index,
+RLS, owner SELECT/INSERT/DELETE, grants, immutable helper, profile preservation and
+interval calculation. study_rows=0; profile_rows=0;
+profile_digest=d41d8cd98f00b204e9800998ecf8427e; interval_example_pass=true.
+Authenticated SELECT/DELETE/id INSERT/helper EXECUTE true; UPDATE and INSERT of
+user_id/duration_seconds/created_at false. Anon checked privileges all false;
+service_role normal; existing public RLS/constraint baseline unchanged.
+This is Owner-run evidence, not a migration or live test executed by Codex.
+
+Actual Study JWT/REST acceptance is pending. Existing migration files are unchanged;
+verifier preparation does not itself prove live client ownership enforcement.
