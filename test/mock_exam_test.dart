@@ -48,7 +48,7 @@ void main() {
   test(
     'setup Unicode limits, optional subject, preset and custom boundaries',
     () {
-      expect(MockSetup.presets.values, [80, 100, 70, 30]);
+      expect(MockSetup.presets.values, [80, 100, 70, 45, 30, 30]);
       for (final sec in [60, 43200]) {
         MockSetup('😀' * 80, '영' * 40, sec).validate();
       }

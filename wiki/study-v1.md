@@ -191,7 +191,7 @@ Physical-device acceptance remains pending. Study switches compactly between
 setup/ready/running/paused/timeUp/submitting/completed presentation states.
 
 Use existing mode=mock_exam, required title (80 code points) and plan (60–43200s),
-optional subject (40). Presets 국어80/수학100/영어70/탐구30 minutes are practice
+optional subject (40). Presets 국어80(default)/수학100/영어70/영어45(듣기 제외)/한국사30/탐구30 minutes are practice
 conveniences, not an official timetable. Custom integer minutes1–720; freeze metadata
 at start. Countdown uses active intervals and monotonic anchors; pause is allowed.
 
@@ -491,3 +491,13 @@ owner isolation and Study/scoring outboxes are retained. Auth submitted_at and s
 come from RPC/read-back; Guest stores pinned source with its Dart result. No recompute
 on restoration, no automatic upload or retention limit. D3 final acceptance remains
 pending real A/B runtime; physical B/C gates remain independent.
+
+## 2026-09-14 Study/Home polish and iPhone physical subset
+
+[UI changes and visual review](study-home-ui-polish.md) preserve all timer/KST,
+Focus, notification, persistence, Auth/Guest and scoring contracts. Recent seven-day
+presentation is descending; aggregation remains unchanged. Owner reports iPhone
+profile launch/start, background/lock, pause, timeUp, local notification and full
+kill/relaunch restore PASS. Earlier blanket iOS pending statements are superseded
+for these specific checks. Focus guidance, reboot and Android physical acceptance
+remain pending; Day8-B/C and overall Day8 are not declared COMPLETE.

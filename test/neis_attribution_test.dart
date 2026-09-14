@@ -57,7 +57,7 @@ void main() {
   for (final scale in [1.0, 2.0]) {
     for (final state in ['none', 'data', 'empty']) {
       testWidgets(
-        'Home $state school title shares action row without attribution at ${scale}x',
+        'Home $state school title keeps accessible action without attribution at ${scale}x',
         (tester) async {
           viewport(tester, scale);
           await tester.pumpWidget(
@@ -92,7 +92,7 @@ void main() {
           final row = find
               .ancestor(
                 of: find.widgetWithText(TextButton, '학교 설정'),
-                matching: find.byType(Row),
+                matching: find.byType(scale == 1.0 ? Row : Column),
               )
               .first;
           expect(

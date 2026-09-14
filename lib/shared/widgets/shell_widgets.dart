@@ -192,9 +192,11 @@ class DailyUtilityCard extends StatelessWidget {
     required this.action,
     required this.body,
     this.heading,
+    this.wrapHeader = false,
     super.key,
   });
   final String title;
+  final bool wrapHeader;
   final Widget? heading;
   final Widget action, body;
   @override
@@ -209,22 +211,38 @@ class DailyUtilityCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         LayoutBuilder(
-          builder: (context, constraints) => Row(
-            children: [
-              Expanded(
-                child:
+          builder: (context, constraints) =>
+              wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
                     heading ??
-                    Text(title, style: Theme.of(context).textTheme.titleMedium),
-              ),
-              const SizedBox(width: 8),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth * .45,
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                    Align(alignment: Alignment.centerRight, child: action),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child:
+                          heading ??
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                    ),
+                    const SizedBox(width: 8),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: constraints.maxWidth * .45,
+                      ),
+                      child: action,
+                    ),
+                  ],
                 ),
-                child: action,
-              ),
-            ],
-          ),
         ),
         body,
       ],

@@ -4,6 +4,7 @@ import '../application/study_controller.dart';
 import '../domain/study_models.dart';
 import '../notifications/mock_notification.dart';
 import 'study_page.dart';
+import 'pause_resume_button.dart';
 import '../scoring/scoring_pages.dart';
 import '../scoring/scoring_repository.dart';
 
@@ -26,8 +27,8 @@ class MockExamPanel extends StatefulWidget {
 class _MockExamPanelState extends State<MockExamPanel> {
   final title = TextEditingController();
   final subject = TextEditingController();
-  final minutes = TextEditingController(text: '70');
-  String preset = '영어';
+  final minutes = TextEditingController(text: '80');
+  String preset = '국어';
   bool alert = false, notificationBusy = false, starting = false;
   String? error, alertMessage;
   List<ScoringPaper> papers = [];
@@ -39,14 +40,24 @@ class _MockExamPanelState extends State<MockExamPanel> {
     super.initState();
     loadPapers();
     final setup = widget.study.mockSetup;
-    title.text = setup?.title ?? '영어 실전 모의고사';
-    subject.text = setup?.subject ?? '영어';
-    minutes.text = '${(setup?.plannedSeconds ?? 4200) ~/ 60}';
+    title.text = setup?.title ?? '국어 실전 모의고사';
+    subject.text = setup == null ? '국어' : setup.subject ?? '';
+    minutes.text = '${(setup?.plannedSeconds ?? 4800) ~/ 60}';
+    if (setup != null) {
+      preset = MockSetup.presets.keys.firstWhere(
+        (key) =>
+            presetSubject(key) == setup.subject &&
+            MockSetup.presets[key]! * 60 == setup.plannedSeconds,
+        orElse: () => '사용자 지정',
+      );
+    }
     alert = setup?.notify ?? false;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) refreshSetup();
     });
   }
+
+  String presetSubject(String key) => key == '영어 듣기 제외' ? '영어' : key;
 
   Future<void> loadPapers({bool reset = false}) async {
     try {
@@ -86,7 +97,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
       return null;
     }
     if (n == null || n < 1 || n > 720) {
-      error = '제한시간은 1~720분으로 입력해 주세요.';
+      error = '시험 시간은 1~720분으로 입력해 주세요.';
       return null;
     }
     error = null;
@@ -261,12 +272,21 @@ class _MockExamPanelState extends State<MockExamPanel> {
           DropdownButtonFormField<String>(
             value: preset,
             isExpanded: true,
-            decoration: const InputDecoration(labelText: '제한시간'),
+            isDense: false,
+            itemHeight: null,
+            decoration: const InputDecoration(labelText: '시험 시간'),
             items: [
               for (final entry in MockSetup.presets.entries)
                 DropdownMenuItem(
                   value: entry.key,
-                  child: Text('${entry.key} ${entry.value}분'),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      entry.key == '영어 듣기 제외'
+                          ? '영어 45분 · 듣기 제외'
+                          : '${entry.key} ${entry.value}분',
+                    ),
+                  ),
                 ),
               const DropdownMenuItem(value: '사용자 지정', child: Text('사용자 지정')),
             ],
@@ -278,7 +298,9 @@ class _MockExamPanelState extends State<MockExamPanel> {
                 if (title.text == '$previous 실전 모의고사') {
                   title.text = '$value 실전 모의고사';
                 }
-                if (subject.text == previous) subject.text = value;
+                if (subject.text == presetSubject(previous)) {
+                  subject.text = presetSubject(value);
+                }
               }
             }),
           ),
@@ -288,7 +310,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
               controller: minutes,
               onChanged: (_) => refreshSetup(),
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: '제한시간 (1~720분)'),
+              decoration: const InputDecoration(labelText: '시험 시간 (1~720분)'),
             ),
           CheckboxListTile(
             contentPadding: EdgeInsets.zero,
@@ -381,7 +403,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
           child: Text(label, textAlign: TextAlign.center),
         ),
         Text(
-          '응시 ${studyDuration(study.elapsedMs)} / 제한 ${d.mock!.plannedSeconds ~/ 60}분',
+          '응시 ${studyDuration(study.elapsedMs)} / 시험 시간 ${d.mock!.plannedSeconds ~/ 60}분',
           textAlign: TextAlign.center,
           style: const TextStyle(color: AppTokens.textSecondary),
         ),
@@ -398,7 +420,8 @@ class _MockExamPanelState extends State<MockExamPanel> {
           ),
         const SizedBox(height: 12),
         if (!d.frozen)
-          FilledButton(
+          PauseResumeButton(
+            running: d.phase == TimerPhase.running,
             onPressed: study.busy
                 ? null
                 : d.phase == TimerPhase.running
@@ -406,7 +429,6 @@ class _MockExamPanelState extends State<MockExamPanel> {
                 : study.canResume
                 ? study.resume
                 : null,
-            child: Text(d.phase == TimerPhase.running ? '일시정지' : '계속하기'),
           ),
         if (!d.frozen && !study.canResume && d.phase == TimerPhase.paused)
           const Text('구간 한도에 도달했어요. 이번 시험을 종료해 주세요.'),

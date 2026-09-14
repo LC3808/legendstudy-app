@@ -111,7 +111,13 @@ void main() {
         await tester.ensureVisible(find.text('일시정지'));
         await tester.tap(find.text('일시정지'));
         await tester.pumpAndSettle();
-        expect(find.widgetWithText(FilledButton, '계속하기'), findsOneWidget);
+        expect(
+          find.ancestor(
+            of: find.text('계속하기'),
+            matching: find.byWidgetPredicate((w) => w is FilledButton),
+          ),
+          findsOneWidget,
+        );
         await tester.tap(find.text('계속하기'));
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.text('종료'));

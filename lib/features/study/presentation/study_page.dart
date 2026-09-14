@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'mock_exam_panel.dart';
+import 'pause_resume_button.dart';
 import '../scoring/scoring_pages.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_theme.dart';
@@ -27,14 +28,39 @@ class StudyPage extends ConsumerWidget {
               children: [
                 for (final entry in [(false, '공부 타이머'), (true, '모의고사')])
                   Expanded(
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: study.mockSelected == entry.$1
-                            ? AppTokens.primarySoft
-                            : null,
+                    child: Semantics(
+                      selected: study.mockSelected == entry.$1,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: const Size(48, 56),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 12,
+                          ),
+                          side: BorderSide(
+                            color: study.mockSelected == entry.$1
+                                ? AppTokens.textPrimary
+                                : AppTokens.cardBorder,
+                            width: study.mockSelected == entry.$1 ? 2 : 1,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          backgroundColor: study.mockSelected == entry.$1
+                              ? AppTokens.primarySoft
+                              : null,
+                        ),
+                        onPressed: () => study.selectMock(entry.$1),
+                        child: Text(
+                          entry.$2,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: study.mockSelected == entry.$1
+                                ? FontWeight.w700
+                                : FontWeight.w400,
+                          ),
+                        ),
                       ),
-                      onPressed: () => study.selectMock(entry.$1),
-                      child: Text(entry.$2, textAlign: TextAlign.center),
                     ),
                   ),
               ],
@@ -216,7 +242,8 @@ class StudyTimerControls extends StatelessWidget {
             ),
           ]
         : <Widget>[
-            FilledButton(
+            PauseResumeButton(
+              running: study.draft!.phase == TimerPhase.running,
               onPressed: !allowed
                   ? null
                   : study.draft!.phase == TimerPhase.running
@@ -224,9 +251,6 @@ class StudyTimerControls extends StatelessWidget {
                   : study.canResume
                   ? () => study.resume()
                   : null,
-              child: Text(
-                study.draft!.phase == TimerPhase.running ? '일시정지' : '계속하기',
-              ),
             ),
             OutlinedButton(
               onPressed: allowed ? () => study.end() : null,
@@ -276,7 +300,7 @@ class StudyWeekSummary extends StatelessWidget {
     final days = study.week;
     return Column(
       children: [
-        for (var i = 0; i < 7; i++)
+        for (var i = 6; i >= 0; i--)
           Builder(
             builder: (context) {
               final date = first.add(Duration(days: i));
@@ -286,19 +310,26 @@ class StudyWeekSummary extends StatelessWidget {
                 child: ExcludeSemantics(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceBetween,
-                      spacing: 16,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          label,
-                          style: TextStyle(
-                            fontWeight: i == 6
-                                ? FontWeight.w700
-                                : FontWeight.w400,
+                        Flexible(
+                          child: Text(
+                            label,
+                            style: TextStyle(
+                              fontWeight: i == 6
+                                  ? FontWeight.w700
+                                  : FontWeight.w400,
+                            ),
                           ),
                         ),
-                        Text(studyDuration(days[i])),
+                        const SizedBox(width: 16),
+                        Flexible(
+                          child: Text(
+                            studyDuration(days[i]),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
                       ],
                     ),
                   ),

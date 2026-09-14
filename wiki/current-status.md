@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX implemented; local checks and Guest native runtime PASS, actual A/B runtime pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; Owner-reported iOS lifecycle subset PASS, Focus guidance and remaining physical checks pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; Owner-reported iPhone timeUp/notification/kill-restore PASS, remaining physical checks pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX implemented; local checks and Guest native runtime PASS, actual A/B runtime pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -13,6 +13,22 @@ also Owner-reported and matches the checked-in smoke stages. Prior implementatio
 checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
+
+## Study/Home UI polish and iPhone acceptance update
+
+- Meal expand/collapse, full lunch/dinner, descending seven-day rows, distinct
+  pause/resume and selected mode styles implemented. Mock defaults to 국어80;
+  영어45 · 듣기 제외 and 한국사30 added in exam order; UI says 시험 시간.
+- Owner-reported iPhone profile launch, Study start, background/lock continuation,
+  pause, mock timeUp, local notification and complete kill/relaunch restore PASS.
+- Focus guidance is still pending; Android physical and reboot/remaining lifecycle
+  checks remain open. These reports supersede blanket iOS-pending wording in older
+  checkpoints below, without marking B/C or Day8 COMPLETE.
+- Analyze, all257 Flutter tests,14 rendered polish tests, Android debug and iOS
+  simulator builds PASS. Actual iPhone12 Pro Max profile UI harness at1×/2× PASS;
+  22 screenshots reviewed separately from Owner-reported lifecycle results.
+- [Polish scope and UI evidence](study-home-ui-polish.md). D3 A/B runtime issues
+  remain separate. No DB/schema/migration/RPC changes or Push/PR/Merge.
 
 ## Day 8-D3 Grade + Result UX — implemented, NOT COMPLETE
 

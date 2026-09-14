@@ -826,3 +826,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - D3 implemented, NOT COMPLETE: actual A/B production runtime remains Owner-gated by
   this request's production-data-input prohibition. No production fixture, DB/schema/
   RPC/migration change, Push/PR/Merge. B/C physical acceptance remains pending.
+
+## 2026-09-14 — Study/Home UI polish
+
+- Added explicit meal expansion with complete lunch/dinner menus and responsive
+  long school header; newest-first study rows; icon/style-distinct pause/resume;
+  outlined selected modes; Korean default, English45 without listening and history30;
+  ordered presets and consistent 시험 시간 copy.
+- Owner-reported iPhone profile/start, background/lock, pause, mock timeUp,
+  notification and kill/relaunch restoration PASS. Focus guide, Android physical,
+  reboot and remaining acceptance stay pending; B/C/Day8 not marked COMPLETE.
+- Analyze, all257 Flutter tests,14 render cases, Android debug/iOS simulator builds
+  and diff check PASS. Real iPhone12 Pro Max profile UI at1×/2× PASS;22 final
+  screenshots reviewed. Test-only native viewport/touch mismatch corrected.
+  Normal profile app reinstalled without uninstalling and launched after UI tests.
+  Details: study-home-ui-polish.md. D3 runtime runner
+  work remains separate; DB/schema/migration/RPC untouched; no Push/PR/Merge.

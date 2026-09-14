@@ -22,6 +22,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `day-7-neis.md` — server-key policy, deployed proxy and completed runtime acceptance
 - `ingestion.md` — legendstudy.com ingestion strategy
 - `ui-ux-v1.md` — approved UI/UX v1.1 canonical implementation specification; required before UI changes
+- `study-home-ui-polish.md` — Study/Home polish, visual review and iPhone physical acceptance subset
 - `design-system.md` — visual identity and UI design tokens
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log

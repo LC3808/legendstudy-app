@@ -118,7 +118,7 @@ void main() {
       await press('사용자 지정');
       await tester.enterText(find.byKey(const Key('mock-minutes')), '721');
       await press('시험 시작');
-      expect(find.text('제한시간은 1~720분으로 입력해 주세요.'), findsOneWidget);
+      expect(find.text('시험 시간은 1~720분으로 입력해 주세요.'), findsOneWidget);
       await tester.enterText(find.byKey(const Key('mock-minutes')), '1');
       await press('시험 종료 알림');
       expect(find.text('알림 없이도 시험을 시작할 수 있어요.'), findsOneWidget);

@@ -19,7 +19,14 @@ class MockSetup {
   final String? subject;
   final int plannedSeconds;
   final bool notify;
-  static const presets = {'국어': 80, '수학': 100, '영어': 70, '탐구': 30};
+  static const presets = {
+    '국어': 80,
+    '수학': 100,
+    '영어': 70,
+    '영어 듣기 제외': 45,
+    '한국사': 30,
+    '탐구': 30,
+  };
   void validate() {
     if (title.isEmpty ||
         title != title.trim() ||

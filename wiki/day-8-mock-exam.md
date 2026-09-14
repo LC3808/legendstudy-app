@@ -1,6 +1,6 @@
 # Day 8-C — Mock Exam v1 design
 
-Reviewed: 2026-09-14. **Implementation complete; Guest/Auth Flutter runtime PASS; physical-device checks pending. Final COMPLETE on hold.**
+Reviewed: 2026-09-14. **Implementation complete; Guest/Auth Flutter runtime PASS; Owner-reported iPhone lifecycle/timeUp/notification subset PASS; remaining physical checks pending. Final COMPLETE on hold.**
 Day 8-A remains COMPLETE; Day 8-B is implemented with physical acceptance pending.
 Day 8 overall is NOT COMPLETE. This document supersedes earlier mock auto-completion
 wording in Study v1. Implementation below adds Flutter/native behavior; no production
@@ -28,13 +28,15 @@ No silent truncation. Show inline errors and retain input. Subject is a free lab
 | korean | 국어 | 80 |
 | mathematics | 수학 | 100 |
 | english | 영어 | 70 |
+| english_without_listening | 영어 · 듣기 제외 | 45 |
+| korean_history | 한국사 | 30 |
 | inquiry | 탐구 | 30 |
 | custom | 사용자 지정 | 1–720, integer minutes |
 
 These are practice conveniences, not an official CSAT timetable. Each preset has a
 stable local id, display label, suggested subject and durationSeconds. Copy values
 into setup; preserve a manually edited title/subject. Default title may be
-`영어 실전 모의고사`, editable before start. A preset does not identify an exam in DB.
+`국어 실전 모의고사` (default80 minutes), editable before start. A preset does not identify an exam in DB.
 Custom input validates 1–720 minutes (DB 60–43200 seconds); shortcuts emphasize
 normal exam lengths. Lock title, subject and plan after start. No timetable table.
 
@@ -354,3 +356,12 @@ scoring, grade or schema implementation is included in this documentation closeo
 current scoring package exists. The original timer-only path remains. Paused/timeUp
 answers are locked; submission persists an immutable attempt separately from Study.
 D2 is implemented/runtime pending; this does not close the physical8-C gate.
+
+## 2026-09-14 iPhone / UI update
+
+Owner reports profile launch, general start, background/lock time continuation,
+pause holds, mock timeUp, local notification and complete kill/relaunch restore PASS.
+These are physical iOS results and supersede earlier blanket pending statements
+for those exact checks. Focus guidance, reboot, Android physical and remaining gates
+stay pending. New UI scope and separate presentation evidence:
+[Study/Home polish](study-home-ui-polish.md). No change to timer/scoring contracts.
