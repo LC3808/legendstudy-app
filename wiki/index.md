@@ -42,6 +42,8 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 8-C Mock Exam — Guest/Auth runtime PASS / physical checks pending](day-8-mock-exam.md)
 
 - [Day 8-D Mock Exam scoring — architecture proposal](mock-exam-scoring-v1.md)
-- [Day 8-D1 Scoring storage — final contract, NOT applied](day-8-scoring-storage-proposal.md)
+- [Day 8-D1 Scoring storage — deployed contract, JWT pending](day-8-scoring-storage-proposal.md)
 
-- [Day 8-D1 Scoring — complete SQL execution package, approval pending](day-8-scoring-migration-package.md)
+- [Day 8-D1 Scoring — applied SQL execution package](day-8-scoring-migration-package.md)
+
+- [Day 8-D1 Scoring — JWT verifier and approved fixture cleanup](day-8-scoring-jwt-acceptance.md)

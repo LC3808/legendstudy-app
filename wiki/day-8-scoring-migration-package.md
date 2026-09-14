@@ -1,9 +1,9 @@
 # Day 8-D1 — Scoring migration execution package
 
-**PREPARED / OWNER APPROVAL PENDING / NOT APPLIED.**
+**PRODUCTION APPLIED / POSTFLIGHT PASS (Owner-reported); JWT/RPC acceptance pending.**
 Target: LegendStudy / `stlhijzpjfgwwdgunlsd` only. Codex has not contacted production.
-Each section is a full, standalone SQL block identical to its linked file. Review now;
-execute only after Owner approval, one block at a time: Preflight -> migration -> Postflight.
+Each section preserves the full SQL block identical to its linked file as deployment
+reference. Owner reports Preflight -> migration -> Postflight completed; do not replay.
 Stop on any unexpected catalog/baseline result. Do not run rollback as a normal step.
 
 [Final contract, expected grants, publication, parity and JWT acceptance](day-8-scoring-storage-proposal.md).
@@ -14,8 +14,8 @@ SET NULL(study_session_id), zero new rows, all previous row and metadata digests
 For large future datasets schedule the all-row baseline hashes outside busy periods.
 
 New submissions require current published key and optional compatible current cutoff.
-Existing identical attempt retries retain historical versions and results. The migration
-is still not applied; use this corrected package for Owner review.
+Existing identical attempt retries retain historical versions and results. The Owner reports
+this corrected migration applied. Next: the separately approved JWT acceptance verifier.
 
 ## 1. Preflight — read only
 

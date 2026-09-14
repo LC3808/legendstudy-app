@@ -735,3 +735,18 @@ Flutter persistence smoke: PASS
   current uniqueness and publication/edit races. Private cluster and fixtures removed.
 - Migration/package/proposal/acceptance and related Wiki synchronized. No production
   SQL, Flutter implementation, real key input, Push/PR/Merge. Owner final review pending.
+
+## 2026-09-14 — Day 8-D1 JWT verifier preparation
+
+- Recorded Owner-reported scoring migration/Postflight PASS; five empty scoring tables,
+  catalog/engine checks and prior public baseline preservation confirmed by Owner.
+- Added actual A/B REST/RPC verifier with hidden inputs, external pinned driver,
+  project/admin identity checks and optional read-only preflight. Runtime remains pending.
+- Implemented the explicitly approved run-UUID-only cleanup: three named USER triggers
+  in one transaction, locks, count/digest/scope checks, FK cascade retained, trigger
+  restoration and baseline comparison before commit. No ordinary deletion contract change.
+- 45 Python offline tests PASS (16 new scoring tests plus29 existing JWT tests),
+  including native PostgreSQL full flow, cleanup rollback and safety failures. Syntax,
+  credential scan, unchanged migration hashes, SQL package parity and diff checks PASS;
+  these are not real JWT evidence. No production connection/fixture/schema operation,
+  migration or Flutter change, Push/PR/Merge.

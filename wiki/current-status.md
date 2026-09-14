@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D Scoring architecture/storage proposal prepared; implementation not started. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring production migration/Postflight Owner-confirmed PASS; JWT/RPC verifier prepared, production acceptance pending; Flutter scoring not started. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -166,7 +166,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   Day 8-D architecture is now proposed below; scoring implementation still requires
   separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
 
-## Day 8-D1 Scoring — migration package prepared / Owner approval pending
+## Day 8-D1 Scoring — production applied / JWT acceptance pending
 
 - Owner approved MCQ-first, confirmed/estimated/unavailable labels, and independent
   Study/result deletion. Unsupported papers stay timer-only; no partial-score scaling.
@@ -185,8 +185,16 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   37 vectors and seven native PostgreSQL17.6 concurrency groups PASS.
 - Shared synthetic scoring vectors prepared for future Dart parity. Flutter scoring,
   ingestion and real key publication are not implemented/performed.
-- Next: Owner reviews/approves package -> Owner production application -> actual JWT/RPC
-  acceptance with separately approved real content -> approved8-D2 Flutter scoring work.
+- Owner reports production migration/Postflight PASS: five scoring RLS tables, six
+  policies, 12 functions, seven triggers, constraints/indexes/grants/view and synthetic
+  engine PASS; scoring rows=0 and prior public row-count/digest baseline preserved.
+- A/B JWT + RPC verifier prepared: `tool/verify_mock_scoring_jwt.py`, with hidden
+  password input, project-pinned administrator connection, UUID-scoped fixtures and
+  the separately approved three-USER-trigger transactional cleanup. Runtime acceptance
+  is **pending**, not inferred from offline role simulations. Procedure/limits:
+  [Scoring JWT acceptance](day-8-scoring-jwt-acceptance.md).
+- Next: Owner runs verifier -> review actual acceptance/cleanup output -> separately
+  approved8-D2 Flutter scoring work. This preparation made no production requests.
 - Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
   gates remain pending. No Push, PR or Merge.
 

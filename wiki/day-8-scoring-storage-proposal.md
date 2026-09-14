@@ -1,6 +1,6 @@
 # Day 8-D1 — Scoring storage / validation contract
 
-**Migration package prepared / Owner approval pending. NOT APPLIED.**
+**Production migration and Postflight: Owner-reported PASS. Actual JWT/RPC acceptance pending.**
 Owner approved MCQ-first, confirmed/estimated/unavailable grade meanings, and independent
 Study/result deletion. This contract supersedes the Day 8-D proposed Study-delete cascade
 and key-owned cutoff family. Day 8-D is NOT COMPLETE. No Flutter scoring implementation.
@@ -180,10 +180,10 @@ implemented or PASS yet. Pure output is wrapped with pinned key/cutoff/engine ve
 by the RPC/repository; engine never chooses a newer version itself.
 
 Production acceptance after Owner deploy (actual A/B JWT, never SET ROLE evidence):
-1. Owner approves a small real reviewed content package separately. If none exists,
-   STOP content-dependent acceptance; do not publish fake keys/cutoffs into production.
-   Draft/publication checks use isolated local synthetic data, or separately authorized
-   draft fixtures that can be deleted before publication. Published data is immutable.
+1. Owner explicitly approved temporary synthetic fixture publication for this verifier
+   only, plus narrowly scoped transactional cleanup of its UUIDs. See
+   [executable procedure](day-8-scoring-jwt-acceptance.md). Ordinary published data
+   remains immutable; this is not an application deletion capability.
 2. Log in A/B with local getpass, verify distinct IDs and capture own attempt/Study and
    profile baselines. No password/token/key/raw error response logging. Anon GET must
    hide drafts/inactive keys and expose published question/points/source and cutoff basis.
@@ -204,12 +204,13 @@ Production acceptance after Owner deploy (actual A/B JWT, never SET ROLE evidenc
    current key: non-current cutoff rejects new attempt, current cutoff succeeds, old
    retry preserves its original cutoff/grade. Changed-payload retry still conflicts.
    Withdrawn versions also reject new attempts while historical reads/retries survive.
-   Use approved real content changes, not destructive production edits solely for testing.
+   Use only this run's synthetic key/cutoff versions; never change existing content.
 7. Delete run-created linked Study as A: attempt survives with NULL link, owner/answers/
    scores unchanged; identical retry works. Delete run-created attempt: answers cascade,
    unrelated Study/profile untouched. Delete only UUIDs registered by this run.
 8. Restore own attempt/Study baselines, profile/school/D-Day digests unchanged; keep Auth
-   users. Never purge unrelated/published content. No production fixtures created now.
+   users. Never purge unrelated content. The three-trigger cleanup exception applies
+   exclusively to published fixture UUIDs registered by this verifier.
 
 ## Validation / remaining gates
 
@@ -227,9 +228,11 @@ idempotent retries, key and cutoff switches in both lock orders, competing curre
 promotions and question/publication races in both orders. Cluster/fixtures removed after
 execution. It accepts no production DSN; real Supabase JWT/RPC remains a separate gate.
 
-No production application, real JWT/RPC, Dart parity, scoring UI or real key ingestion
-performed. Day8-D1 migration package prepared / Owner approval pending. After approval,
-Owner executes the package; actual JWT acceptance precedes Flutter scoring implementation.
+Owner reports production application/Postflight PASS: five scoring tables empty,
+constraints/indexes/RLS/grants/view/functions/triggers and synthetic engine verified;
+prior row-count/digest baseline preserved. Actual JWT/RPC remains pending. The verifier
+is prepared and offline-tested; Codex has not connected to production. No Dart parity,
+scoring UI or real key ingestion. Actual JWT acceptance precedes Flutter implementation.
 A key/cutoff becoming non-current before the first cloud submit now rejects the pending
 result; future clients retain the local result and require explicit recovery. Never
 automatically replace pinned versions or rewrite scores to make a retry succeed.
