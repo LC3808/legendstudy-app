@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam design COMPLETE; implementation pending. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -127,9 +127,23 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   can leave our rule until app re-entry; a24h lease deadline is checked on execution,
   not enforced by an OS alarm. Physical restart/override/backup checks remain open.
 - **Day 8-B is not COMPLETE.** Next: physical-device Focus acceptance and lifecycle
-  hardening if needed. 8-C planning may reuse FocusService, but no mock timer/UI,
-  notification or scoring work has started. Day8 overall is not COMPLETE.
+  hardening if needed. 8-C design reuses FocusService; mock timer/UI and notification implementation
+  have not started. Scoring remains out of scope. Day8 overall is not COMPLETE.
 - Official API references and full behavior/evidence: [Study v1](study-v1.md).
+
+## Day 8-C Mock Exam — design complete, not implemented
+
+- [Mock Exam v1 contract](day-8-mock-exam.md): compact mode switch, presets/custom,
+  separate mock state, monotonic countdown, allowed pause, durable timeUp and explicit
+  confirmation before completion. Guest local/auth outbox reuse; KST combined totals.
+- Existing production mock_exam contract is sufficient; no DB migration required.
+  Local schema evolution and native Focus reader adaptation are implementation work.
+- Best-effort optional notification; Focus release on frozen timeUp/end; background
+  delivery/owned-rule cleanup limitations require physical tests, not assumed PASS.
+- Next: implement 8-C from the documented contract and complete pending 8-B physical
+  acceptance. No answers/scoring/grades. Day 8-C runtime and Day8 overall not COMPLETE.
+- This task changed documents only; no production calls, Flutter/native changes,
+  push, PR or merge. Existing implementation test results above were not rerun.
 
 ## Long-term backlog — preserved for later planning
 

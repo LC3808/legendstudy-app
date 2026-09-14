@@ -84,13 +84,14 @@ callback for session durability.
    is not a portable restart clock. Reboot, unsupported continuity, negative delta or inconsistent wall/monotonic anchors enters recoveryRequired.
    Show last verified duration: “시간 기록을 확인해 주세요”; retain up to last
    checkpoint or discard, with explicit choice. Never auto-credit uncertain gap.
-   Choosing retain closes the session at that checkpoint before a new one starts.
+   Choosing retain closes general Study at that checkpoint; mock freezes there for
+   explicit completion confirmation before a new session for that owner.
 7. Proposed product bounds: 24 hours total session span including pauses, at most
-   256 active intervals, mock plan 1 minute–12 hours. Auto-finalize at the 24-hour
+   256 active intervals, mock plan 1 minute–12 hours. General Study auto-finalizes at the 24-hour
    boundary (on next execution if suspended), clipping the open interval. At interval
    limit ask to finish before another resume. These are approved v1 product/storage limits,
    not OS constraints or official exam limits.
-8. End freezes elapsed once, atomically stores terminal payload + outbox, removes
+8. General Study end freezes elapsed once, atomically stores terminal payload + outbox, removes
    active draft, then attempts upload. Failed upload never restarts the timer or
    discards time. New session may start after local commit while retry remains queued.
    Under-one-second records are discarded locally; cancelled records may be zero.
@@ -181,35 +182,35 @@ value derives from milliseconds, not rounded daily/session labels (rounding can
 cause at most small display differences). Bars have text equivalents, no chart-only
 information. 23:50–00:20 with pause23:55–00:05 yields5min firstday+15min nextday.
 
-## Mock exam and scoring boundary
+## Mock exam and scoring boundary — Day 8-C design complete
 
-Reuse mode=mock_exam; require title and planned_duration_seconds; optional subject
-is a display label, not a taxonomy FK. Presets Korean80/math100/English70 minutes
-are proposed editable conveniences, not a verified official exam schedule. Custom
-name/subject/limit supported. Keep mode/plan fixed once running; switching requires
-finish/cancel confirmation. Local presets can later become versioned catalog data.
+The detailed v1 contract is [Day 8-C Mock Exam](day-8-mock-exam.md).
+Implementation/runtime acceptance is pending. Study switches compactly between
+공부 타이머 and 모의고사, with one active session across modes. Mock has separate
+setup/ready/running/paused/timeUp/submitting/completed presentation states.
 
-Countdown = max(0, planMs-activeMs); explicit pause is permitted in this practice
-mode, background/lock is not a pause. At zero close active interval exactly at the
-limit even if callback resumes late. 제출 completes early and freezes used time;
-it does not submit answers or score. 종료 offers “기록 저장” (completed) or “취소”
-(cancelled, excluded). Zero-active submission yields no completed record. Finished
-UI shows used/planned time and completion, with no score/grade claim. A local finish
-reason (submit/limit/manual/cancel) can drive wording; cloud v1 stores only completed records, without status or submitted booleans.
+Use existing mode=mock_exam, required title (80 code points) and plan (60–43200s),
+optional subject (40). Presets 국어80/수학100/영어70/탐구30 minutes are practice
+conveniences, not an official timetable. Custom integer minutes1–720; freeze metadata
+at start. Countdown uses active intervals and monotonic anchors; pause is allowed.
 
-Actual exams PK is **exams.content_item_id**, not exams.id. exam_subjects.id is the
-occurrence PK with content_item_id FK and unique(id, content_item_id). v1 custom
-sessions deliberately have no exam FK. Later mock_exam_attempts can reference a
-study session and optional exam_content_item_id + exam_subject_id with a composite
-same-exam FK. Decide deletion/version semantics in that migration; do not guess an
-exam_id field now. Content resources are attachments, not structured answer keys.
+At the plan limit, freeze intervals and ended_at exactly, persist **timeUp**, and
+require 시험 종료 confirmation. **No automatic completion/cloud submission at zero.**
+Early submit confirms 시험을 종료할까요?; a running countdown continues in the dialog.
+Confirmation atomically creates the immutable local record/outbox; cloud failure
+retains 동기화 대기. Guest stays local. TimeUp, 24h boundary and account switch must
+not call general Study auto-finalization. Preserve a frozen owner-bound confirmation
+record instead. Existing generated duration and profile/school/D-Day contracts stay.
 
-Future exam_questions/key versions, points, mock_exam_answers, immutable scoring
-results and grade_cutoffs must be separate. Results pin question/key/scoring-rule
-versions. Cutoffs need expected/final status, official/source URL, publication/version
-and applicable cohort/subject/score scale; predictions cannot masquerade as final.
-Wrong-answer links resolve existing resources by occurrence. No scoring schemas,
-answers, cutoffs or ingestion added to the present proposal.
+Home combines study/mock active intervals using KST union; frozen local contribution
+is replaced by the completed UUID without duplication. Reuse Focus; pause retains it,
+frozen timeUp/submit/discard requests owned-state release. Native lifecycle limitations
+remain physical-device gates. Best-effort local notification is in 8-C implementation
+scope; permission and precise delivery are not required to run the countdown.
+
+8-D may add versioned attempts/answers/scoring with exams.content_item_id and matching
+exam_subjects.id, never an invented exams.id. No answers, scoring, grades, cutoffs,
+wrong-answer notebook, resources linkage or new DB fields are implemented in 8-C.
 
 ## Day 8-B Focus / DND — implemented, physical-device acceptance pending
 
@@ -319,24 +320,14 @@ limitation, not a reason to globally turn off user DND or hide the risk.
   COMPLETE. 8-C design can reuse the interface; do not treat physical Focus acceptance
   as passed or implement mock UI/notifications/scoring in this task.
 
-## Completion notifications (8-C)
+## Completion notifications (8-C design)
 
-Local scheduled notification is recommended for mock time-up outside the app, not
-required for 8-A stopwatch and not server push. Ask contextually; denied permission
-means timer remains correct but no promised background alert. Schedule by session
-UUID/revision, cancel on pause/end/account switch and reschedule on resume. Reconcile
-on restart/reboot; stale callbacks cannot finish a different session. OS force-stop,
-revoked permission, Focus and delivery delays prevent guaranteed audible exact time.
-
-Android exact alarms need capability/permission checks; select SCHEDULE_EXACT_ALARM
-only after 8-C delivery requirements review, do not casually assume USE_EXACT_ALARM
-eligibility. Reboot requires scheduling recovery. No alarm runs the timer counter.
-([Android alarm scheduling](https://developer.android.com/develop/background-work/services/alarms))
-Apple UserNotifications can deliver scheduled local notifications while app is not
-running, with authorization and system presentation constraints. No background Dart
-loop or critical-alert entitlement assumption.
-([Apple local scheduling](https://developer.apple.com/documentation/UserNotifications/scheduling-a-notification-locally-from-your-app),
-[notification authorization](https://developer.apple.com/documentation/usernotifications/asking-permission-to-use-notifications))
+Best-effort local time-up alerts are included in the planned 8-C scope; permission
+is optional and denial never blocks countdown. No server push, exact-delivery or
+DND-bypass promise. UUID/revision scheduling, pause/end/account cancellation and
+restore reconciliation are specified in [Mock Exam v1](day-8-mock-exam.md#focus-and-local-notification).
+Android exact-alarm special access is not required in v1. Notification delivery is
+not a timer source or cloud-submit trigger. Physical validation remains pending.
 
 ## UI/UX review specification
 
@@ -360,6 +351,7 @@ changes; avoid reading every second. Mock expiration announcement once only.
 | authenticated | current-owner restored totals, unobtrusive sync/error | Loading/error is not empty; no old-account flash |
 | mock idle | preset/custom name, subject, limit; 시험 시작 | Validate fields; keyboard-safe scroll; no scoring controls |
 | mock running | remaining countdown, used/planned secondary; pause/end/submit | Submit confirm if early; background continues; mode fixed |
+| mock timeUp | 시험 시간이 끝났어요; 시험 종료 confirmation | Frozen logical end; no completed record/upload until confirmed |
 | mock finished | 종료/제출 완료, used/planned; 다시 시작 | Not a score; exactly-once local finalization and retryable cloud sync |
 | recoveryRequired | last verified duration and 간격 확인 안내 | Retain checkpoint or discard; no unverified time credit |
 

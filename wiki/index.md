@@ -38,3 +38,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 8 Study migration — copy-ready Owner SQL package](day-8-study-migration-package.md)
 
 - [Day 8 Claude Study UI review and Owner overrides](day-8-study-ui-review.md)
+
+- [Day 8-C Mock Exam — design complete / implementation pending](day-8-mock-exam.md)

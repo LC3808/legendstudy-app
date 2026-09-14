@@ -642,3 +642,17 @@ Flutter persistence smoke: PASS
   no connected Android device or AVD. Owned rule can outlive app kill until re-entry;
   deadline is not a scheduled OS expiry. Day 8-B NOT COMPLETE; Day8 overall NOT COMPLETE.
 - No DND bypass or third-party runtime/DND package (JUnit is test-only), mock UI, notifications, scoring, Push, PR or Merge.
+
+
+## 2026-09-14 — Day 8-C Mock Exam design
+
+- Reviewed current Study model/controller/repository, native Focus draft recognition
+  and deployed migration contract; no new production verification or DB changes.
+- Designed compact entry/setup, presets/custom, separate mock states, monotonic active
+  countdown and explicit timeUp confirmation; corrected earlier auto-completion wording.
+- Defined local v1 migration preservation, guest/auth isolation/outbox, KST aggregate,
+  Focus cleanup, optional best-effort notification and physical/runtime test gates.
+- Day 8-C DESIGN COMPLETE only; implementation pending. Day8-B physical acceptance
+  remains pending; Day8 overall NOT COMPLETE. No scoring/answer schema or UI.
+- Documentation links/scope and git diff --check PASS; no code tests/builds rerun
+  for this documentation-only task. No Push, PR, Merge or production changes.
