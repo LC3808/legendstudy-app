@@ -349,3 +349,23 @@ An app kill may leave the owned rule until app re-entry; no background expiry se
 or force-stop cleanup guarantee. Simulator and unit results do not close physical
 DND acceptance. See Study v1 for official sources and remaining checks. Day 8-B is
 implemented, not COMPLETE. No DB/Focus cloud field or 8-C UI/notifications added.
+
+
+## Day 8-D Scoring architecture — proposal only
+
+[Scoring v1](mock-exam-scoring-v1.md) separates timer availability from reviewed key
+availability. Existing8-C Guest/Auth runtime is PASS with physical gates pending.
+No scoring engine or UI exists yet. Proposed pure Dart typed engine computes actual
+per-item points using pinned immutable key/cutoff/algorithm versions. Auth server RPC
+recomputes rather than trusting submitted scores; Guest previews/results stay local.
+
+Scoring setup binds the actual exam occurrence + paper variant, never free-text
+Study subject. Local answer draft locks at logical timeUp; explicit submission commits
+Study time and attempt outbox together. Linked Study upload precedes attempt upload;
+owner epochs prevent stale response/account leakage. Attempts do not add study time.
+History remains reproducible after key correction; relative raw estimates are never
+presented as official standard scores/percentiles/grades. Same-version synthetic
+Dart/server conformance fixtures and source review are8-D1/2 implementation gates.
+
+Five-table DB/publication/RLS contract: [storage proposal](day-8-scoring-storage-proposal.md).
+No production/schema/Flutter change here; future deployment remains Owner-executed.

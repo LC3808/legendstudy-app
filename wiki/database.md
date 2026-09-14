@@ -540,3 +540,23 @@ isolation, pending sync/retry and profile/school/D-Day preservation PASS; fixtur
 cleanup PASS, Auth users retained. Day 8-A = COMPLETE; Day 8 overall is not COMPLETE.
 Existing migration files remain unchanged. This documentation closeout performed no
 DB/production request. See study-v1.md for safe runtime stages and restoration limits.
+
+
+## Day 8-D Scoring — proposed, NOT deployed
+
+See [storage proposal](day-8-scoring-storage-proposal.md) for five proposed tables:
+answer_key_versions, exam_questions, grade_cutoff_versions, mock_exam_attempts and
+mock_exam_answers. Canonical parent is exam_subjects.id with same-content composite
+FK to existing exam_subjects(id,content_item_id), not an invented exams.id. A reviewed
+paper variant distinguishes booklets/electives without duplicating exam parents.
+
+Published key/cutoff versions and completed attempts are immutable; public access
+only to reviewed published active packages. Answers/results are owner-only. Proposed
+server submission RPC recomputes raw score/grade and inserts result/answers atomically;
+Guest uses the same versioned domain contract locally. No client score trust.
+
+A future new migration is required, including Study UNIQUE(id,user_id) for owner-safe
+optional linkage. No Study columns/RLS/grants or existing profile/content contracts
+change in this task; no executable migration or production deployment is claimed.
+Full constraints/publication triggers, read grants, indexes, rollback and JWT plan
+are in the proposal. Day8-D NOT COMPLETE; Owner review precedes8-D1 SQL preparation.

@@ -39,4 +39,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [Day 8 Claude Study UI review and Owner overrides](day-8-study-ui-review.md)
 
-- [Day 8-C Mock Exam — implemented / runtime validation pending](day-8-mock-exam.md)
+- [Day 8-C Mock Exam — Guest/Auth runtime PASS / physical checks pending](day-8-mock-exam.md)
+
+- [Day 8-D Mock Exam scoring — architecture proposal](mock-exam-scoring-v1.md)
+- [Day 8-D Scoring storage — migration proposal, NOT applied](day-8-scoring-storage-proposal.md)

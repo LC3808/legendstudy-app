@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D Scoring architecture/storage proposal prepared; implementation not started. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -163,7 +163,28 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   Inexact notifications can be delayed; rule cleanup after process kill is not guaranteed.
   Day8-C NOT COMPLETE; Day8 overall NOT COMPLETE. No8-D answer/scoring implementation.
 - Next: complete physical-device gates. Day 8-C final COMPLETE remains on hold;
-  Day 8-D Scoring starts only after separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
+  Day 8-D architecture is now proposed below; scoring implementation still requires
+  separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
+
+## Day 8-D Scoring — architecture/storage proposal only
+
+- [Scoring v1](mock-exam-scoring-v1.md) and [storage proposal](day-8-scoring-storage-proposal.md)
+  prepared against actual exam occurrence/composite FK, Study and ingestion contracts.
+  No production query/application, scoring code, new applied migration or key import.
+- Timer-only remains independent of complete reviewed key availability. Proposed
+  MCQ1–5 first; unsupported numeric/multiple-answer papers remain timer-only.
+  Pure Dart local scoring + authenticated server recomputation; per-item actual points.
+- Five proposed tables: key versions, questions, cutoff versions, attempts and answers.
+  Immutable versions/results; raw estimates clearly separated from official absolute
+  rules; no standard-score/percentile reconstruction from raw score.
+- Guest local/no auto-upload; private Auth owner records/outbox, source review and
+  existing quarantine. Detailed PK/FK/CHECK/grant/trigger/index/rollback/acceptance
+  contract is a proposal, not executable SQL or deployed schema.
+- Owner review needed for MCQ-only launch, grade semantics and linked Study-delete
+  cascade. Next8-D1: approved executable migration/package and Owner deployment/JWT;
+  then8-D2 answer entry/raw scoring and8-D3 grades/result UX. Verified content required.
+- Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
+  gates remain pending. No Push, PR or Merge.
 
 ## Long-term backlog — preserved for later planning
 

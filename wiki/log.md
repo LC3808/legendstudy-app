@@ -686,3 +686,21 @@ Flutter persistence smoke: PASS
   Day8-D Scoring requires separate Owner approval.
 - Documentation only; diff/scope checks PASS. No tests/builds rerun, code/DB/production
   changes, Push, PR or Merge.
+
+
+## 2026-09-14 — Day 8-D Scoring architecture/storage proposal
+
+- Cross-checked actual exams.content_item_id, occurrence same-content FK, resources,
+  Study immutable storage and private quarantine. Reviewed official scoring/subject
+  references; no scraping, key ingestion, production query or data import.
+- Proposed timer-only independence; complete MCQ keys first, per-item points,
+  version-pinned Dart preview/server recomputation and owner-private immutable attempts.
+  Raw-score estimates distinguished from official absolute-rule grades.
+- Added five-table migration proposal with publication/aggregate guards, FK/grants,
+  indexes, deletion/rollback and real JWT/engine/UI acceptance plan. No executable
+  migration, scoring Flutter implementation or applied-schema change.
+- Owner review needed for launch question types, grade labels and Study-delete cascade;
+  8-D1 data/storage ->8-D2 entry/raw score ->8-D3 grade/results recommended.
+- Doc links/scope/diff checks PASS. No SQL syntax/runtime or scoring test PASS claimed;
+  these await executable8-D1 package. Day8-D NOT COMPLETE;8-B/8-C physical gates pending.
+  No Push, PR or Merge.
