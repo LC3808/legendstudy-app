@@ -542,7 +542,7 @@ Existing migration files remain unchanged. This documentation closeout performed
 DB/production request. See study-v1.md for safe runtime stages and restoration limits.
 
 
-## Day 8-D1 Scoring — production applied, JWT acceptance pending
+## Day 8-D1 Scoring — COMPLETE
 
 [Full SQL package](day-8-scoring-migration-package.md) and [storage contract](day-8-scoring-storage-proposal.md)
 provide five new tables: answer_key_versions, exam_questions, grade_cutoff_versions,
@@ -561,8 +561,9 @@ columns/RLS/grants, content/resources and prior migrations are unchanged.
 
 Local PostgreSQL17.5 application/pre/post/rollback and synthetic scoring/RLS simulation
 PASS. Owner reports production migration/Postflight PASS and scoring tables empty;
-prior public baseline preserved. Real JWT/RPC remains pending. No Codex production
-request, source import or Flutter scoring implementation. Day8-D NOT COMPLETE.
+prior public baseline preserved. Actual A/B JWT/RPC is now Owner-reported PASS.
+No Codex production request, source import or Flutter scoring implementation.
+Day8-D1 COMPLETE; Day8 overall NOT COMPLETE.
 
 Day8-D1 pre-production current-version correction: new scoring submissions require
 current published key and optional compatible current cutoff, including INSERT guard.
@@ -571,3 +572,15 @@ unchanged after current switches. Corrected package is Owner-reported APPLIED; l
 regression and native PostgreSQL17.6 independent-session concurrency checks PASS.
 The verifier-only three-trigger cleanup exception is documented in
 [JWT acceptance](day-8-scoring-jwt-acceptance.md); normal publication immutability is unchanged.
+
+Owner reports actual A/B JWT/RPC acceptance PASS: server-side scoring, own result
+and snapshots, direct score/grade forgery denial, owner isolation, idempotent retry,
+current version switch and stale key/cutoff rejection, invalid inputs, Study deletion
+retaining attempts/answers with a NULL link, and owner attempt deletion/cascade.
+Fixture scope/cleanup, cleanup trigger restoration, scoring baseline restoration,
+existing data preservation and Auth user retention all PASS.
+
+**Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
+Flutter scoring/Dart parity and real source ingestion are not verified by this result.
+This is Owner-run production evidence; this documentation closeout made no DB requests.

@@ -354,10 +354,12 @@ implemented, not COMPLETE. No DB/Focus cloud field or 8-C UI/notifications added
 ## Day 8-D1 Scoring storage / validation contract
 
 [Scoring UX](mock-exam-scoring-v1.md), [storage contract](day-8-scoring-storage-proposal.md)
-and [full executable SQL package](day-8-scoring-migration-package.md) are prepared.
+and [full executable SQL package](day-8-scoring-migration-package.md) describe the
+Owner-applied, runtime-accepted Day 8-D1 storage contract.
 Existing8-C Guest/Auth runtime PASS remains distinct from pending physical-device gates.
 No Flutter scoring engine/UI exists yet. Future Guest pure Dart engine uses per-item
-points and pinned versions; authenticated RPC already has a local-tested server scorer.
+points and pinned versions; authenticated RPC server scoring has Owner-reported
+actual A/B JWT/RPC acceptance PASS.
 Shared synthetic vectors define the parity gate; Dart parity is still unimplemented.
 
 Occurrence/variant identity is explicit. Key and cutoff versions have independent
@@ -369,11 +371,23 @@ attempt deletion cascades answers. Profile/school/D-Day are outside scorer write
 
 Future local draft locks at logical timeUp, commits time/result outbox together and
 uploads linked Study before attempt; owner epochs prevent stale-account writes.
-Attempts never double-count Study aggregate time. Current migration is local-tested,
-not production-applied. Owner approval/application/JWT acceptance precede scoring UI.
+Attempts never double-count Study aggregate time. Production migration, Postflight
+and actual A/B JWT/RPC acceptance are Owner-reported PASS; Flutter scoring remains next.
 
 Day8-D1 pre-production current-version correction: new scoring submissions require
 current published key and optional compatible current cutoff, including INSERT guard.
 Existing identical attempt retries and stored snapshots/version references remain
-unchanged after current switches. Package is still NOT APPLIED; local regression and
-native PostgreSQL17.6 independent-session concurrency checks PASS.
+unchanged after current switches. Applied package and actual current-version/retry
+acceptance PASS are Owner-reported; prior local concurrency evidence remains separate.
+
+Owner reports actual A/B JWT/RPC acceptance PASS: server-side scoring, own result
+and snapshots, direct score/grade forgery denial, owner isolation, idempotent retry,
+current version switch and stale key/cutoff rejection, invalid inputs, Study deletion
+retaining attempts/answers with a NULL link, and owner attempt deletion/cascade.
+Fixture scope/cleanup, cleanup trigger restoration, scoring baseline restoration,
+existing data preservation and Auth user retention all PASS.
+
+**Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
+Flutter scoring/Dart parity and real source ingestion are not verified by this result.
+This is Owner-run production evidence; this documentation closeout made no DB requests.

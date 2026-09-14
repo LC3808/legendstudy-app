@@ -750,3 +750,21 @@ Flutter persistence smoke: PASS
   credential scan, unchanged migration hashes, SQL package parity and diff checks PASS;
   these are not real JWT evidence. No production connection/fixture/schema operation,
   migration or Flutter change, Push/PR/Merge.
+
+## 2026-09-14 — Day 8-D1 COMPLETE
+
+Owner reports actual A/B JWT/RPC acceptance PASS: server-side scoring, own result
+and snapshots, direct score/grade forgery denial, owner isolation, idempotent retry,
+current version switch and stale key/cutoff rejection, invalid inputs, Study deletion
+retaining attempts/answers with a NULL link, and owner attempt deletion/cascade.
+Fixture scope/cleanup, cleanup trigger restoration, scoring baseline restoration,
+existing data preservation and Auth user retention all PASS.
+
+**Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
+Flutter scoring/Dart parity and real source ingestion are not verified by this result.
+This is Owner-run production evidence; this documentation closeout made no DB requests.
+
+- Updated current status, scoring contract/architecture/database, execution package,
+  acceptance evidence and index. Documentation-only closeout; no test/runtime rerun,
+  code/DB changes, Push/PR/Merge. Day 8-D2 implementation has not started.

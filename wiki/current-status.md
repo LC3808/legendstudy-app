@@ -4,7 +4,7 @@ Last reviewed: 2026-09-14
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring production migration/Postflight Owner-confirmed PASS; JWT/RPC verifier prepared, production acceptance pending; Flutter scoring not started. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; physical-device acceptance pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; physical-device acceptance pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); next is Day 8-D2 Flutter Answer Entry + Raw Score; Flutter scoring not started. Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -166,7 +166,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   Day 8-D architecture is now proposed below; scoring implementation still requires
   separate Product Owner approval. No DB/schema changes, Push, PR or Merge.
 
-## Day 8-D1 Scoring — production applied / JWT acceptance pending
+## Day 8-D1 Scoring Storage / Validation Contract — COMPLETE
 
 - Owner approved MCQ-first, confirmed/estimated/unavailable labels, and independent
   Study/result deletion. Unsupported papers stay timer-only; no partial-score scaling.
@@ -177,8 +177,8 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   results/answers, owner RLS and security-invoker availability projection. Study deletion
   SET NULLs only the optional link; attempt/answers survive. Attempt deletion is separate.
 - Preflight/Postflight/guarded rollback are full SQL blocks. Local PostgreSQL17.5
-  synthetic validation and static checks PASS; no production SQL/JWT/REST executed.
-  Profile/school/D-Day preserved in local fixtures; no production fixtures created.
+  synthetic validation and static checks PASS. Those earlier local checks are distinct
+  from the subsequent Owner-run production acceptance recorded below.
 - Pre-production review correction: NEW attempts require current published key and
   optional compatible current cutoff; identical historical retries retain old versions.
   Migration/package/proposal/acceptance synchronized. 21 PostgreSQL local groups,
@@ -188,13 +188,16 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Owner reports production migration/Postflight PASS: five scoring RLS tables, six
   policies, 12 functions, seven triggers, constraints/indexes/grants/view and synthetic
   engine PASS; scoring rows=0 and prior public row-count/digest baseline preserved.
-- A/B JWT + RPC verifier prepared: `tool/verify_mock_scoring_jwt.py`, with hidden
-  password input, project-pinned administrator connection, UUID-scoped fixtures and
-  the separately approved three-USER-trigger transactional cleanup. Runtime acceptance
-  is **pending**, not inferred from offline role simulations. Procedure/limits:
-  [Scoring JWT acceptance](day-8-scoring-jwt-acceptance.md).
-- Next: Owner runs verifier -> review actual acceptance/cleanup output -> separately
-  approved8-D2 Flutter scoring work. This preparation made no production requests.
+- Owner reports full actual A/B JWT/RPC acceptance PASS: server-side scoring,
+  direct score/grade forgery denied, own snapshots, owner isolation, idempotent retry,
+  current version switch, stale key/cutoff rejection and invalid input rejection PASS.
+- Study deletion retains attempt/answers and clears only the link; owner attempt
+  deletion cascades answers: PASS. Fixture scope/cleanup, three cleanup triggers
+  restored, scoring baseline restored, existing data preserved and Auth users retained:
+  PASS. [Full runtime evidence](day-8-scoring-jwt-acceptance.md).
+- **Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+  Flutter scoring remains unimplemented. This closeout changes documentation only;
+  the runtime evidence was supplied by the Owner, not rerun by Codex.
 - Day8-D NOT COMPLETE. Day8-B/8-C physical background/lock/Focus/notification/kill/reboot
   gates remain pending. No Push, PR or Merge.
 

@@ -1,8 +1,9 @@
 # Mock Exam Scoring v1 — Day 8-D architecture proposal
 
-Reviewed: 2026-09-14. **8-D1 migration package prepared / Owner approval pending. Day 8-D NOT COMPLETE.**
-No scoring Flutter implementation, production migration application, key import or scraping.
-[Executable SQL package](day-8-scoring-migration-package.md) is prepared for review.
+Reviewed: 2026-09-14. **Day 8-D1 COMPLETE. Day 8 overall NOT COMPLETE.**
+Production migration/Postflight and actual A/B JWT/RPC acceptance are Owner-reported PASS.
+No scoring Flutter implementation, real key import or scraping.
+[Executable SQL package](day-8-scoring-migration-package.md) preserves the applied SQL.
 Day 8-C implementation and Guest/Auth runtime remain PASS; its physical gate stays
 open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal.md).
 
@@ -10,8 +11,8 @@ open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal
 
 The checked-in initial migration defines exams.content_item_id as shared PK;
 exam_subjects.id is an occurrence, with UNIQUE(id, content_item_id). Resources use
-that same-content composite FK. There is no exams.id and no current question/key/
-cutoff/attempt table. An answer PDF or grade_cut resource is not a machine-readable
+that same-content composite FK. There is no exams.id; the applied scoring migration
+now provides the question/key/cutoff/attempt tables. An answer PDF or grade_cut resource is not a machine-readable
 verified scoring key. Ingestion is design-only, with private ingestion_quarantine.
 Production Study migration/JWT and8-C runtime evidence are Owner-reported; no fresh
 production query was performed for this proposal.
@@ -212,10 +213,9 @@ parser, bulk import, automatic answer collection or real seed dataset in this ta
 
 ## Delivery and decisions
 
-- **8-D1:** approve storage/trust contract; prepare executable migration, publication
-  validators/RPC/grants, read projections, rollback and actual A/B JWT acceptance.
-  Owner applies production SQL. A small independently reviewed official paper is a
-  separately authorized content prerequisite; empty tables cannot demonstrate scoring.
+- **8-D1 COMPLETE:** production storage/trust contract, publication validators/RPC,
+  grants, read projections, Postflight and actual A/B JWT acceptance PASS. Owner-approved
+  temporary synthetic fixtures were used and cleaned; this is not real source ingestion.
 - **8-D2:** pure Dart engine + cross-engine fixtures, Guest/Auth answer entry, draft
   migration/lock/submit/outbox/version handling; points and raw-score result first.
 - **8-D3:** compatible grade rules, result/source/wrong/unanswered UX, actual runtime
@@ -223,13 +223,26 @@ parser, bulk import, automatic answer collection or real seed dataset in this ta
 
 Owner approved MCQ-first (unsupported full papers remain timer-only), grade labels
 confirmed `2등급` / estimated `예상 2등급` / unavailable `등급 정보 준비 중`, and independent
-Study/result deletion. SQL package approval and production execution are still pending.
+Study/result deletion. Production execution and actual JWT/RPC acceptance are complete.
 Numeric-answer coverage and post-timeUp transcription remain separate later scope.
 
 8-D1 now includes five tables, independent cutoff families, twelve functions, trusted
 server scoring and invoker availability view. [Final storage contract](day-8-scoring-storage-proposal.md)
 is authoritative for SQL names and validation. Local PostgreSQL17.5 synthetic validation
-PASS; no real JWT/RPC, real source ingestion or Dart engine parity claim.
-Owner may review the full executable package now. Production application remains
-Owner-executed after approval; actual JWT acceptance and reviewed content precede
-Flutter scoring. Day8-D NOT COMPLETE; no Push/PR/Merge.
+PASS; actual JWT/RPC has subsequently passed in the Owner run. No real source
+ingestion or Dart engine parity claim. Next is Day 8-D2 Flutter Answer Entry + Raw Score;
+Day8 overall NOT COMPLETE; no Push/PR/Merge.
+
+## Accepted Day 8-D1 runtime evidence
+
+Owner reports actual A/B JWT/RPC acceptance PASS: server-side scoring, own result
+and snapshots, direct score/grade forgery denial, owner isolation, idempotent retry,
+current version switch and stale key/cutoff rejection, invalid inputs, Study deletion
+retaining attempts/answers with a NULL link, and owner attempt deletion/cascade.
+Fixture scope/cleanup, cleanup trigger restoration, scoring baseline restoration,
+existing data preservation and Auth user retention all PASS.
+
+**Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
+Flutter scoring/Dart parity and real source ingestion are not verified by this result.
+This is Owner-run production evidence; this documentation closeout made no DB requests.

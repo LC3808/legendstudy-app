@@ -1,7 +1,7 @@
 # Day 8-D1 — actual JWT/RPC acceptance verifier
 
-Production migration/Postflight is **Owner-reported PASS**. Real scoring JWT/RPC
-acceptance is **pending**. This tool preparation performed no production requests.
+Production migration/Postflight and actual A/B scoring JWT/RPC acceptance are
+**Owner-reported PASS. Day 8-D1 = COMPLETE.** Codex did not execute this production run.
 
 ## Owner execution
 
@@ -101,3 +101,38 @@ this preparation; migration files remain unchanged. Production acceptance must p
 all stages including fixture_scope_verified, fixture_cleanup, cleanup_triggers_restored,
 scoring_baseline_restored, existing_data_preserved, auth_users_retained and acceptance.
 No Flutter scoring, production schema change, Push, PR or Merge.
+
+## Owner-reported production result — 2026-09-14
+
+Owner reports actual A/B JWT/RPC acceptance PASS: server-side scoring, own result
+and snapshots, direct score/grade forgery denial, owner isolation, idempotent retry,
+current version switch and stale key/cutoff rejection, invalid inputs, Study deletion
+retaining attempts/answers with a NULL link, and owner attempt deletion/cascade.
+Fixture scope/cleanup, cleanup trigger restoration, scoring baseline restoration,
+existing data preservation and Auth user retention all PASS.
+
+**Day 8-D1 = COMPLETE. Next: Day 8-D2 Flutter Answer Entry + Raw Score.**
+Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
+Flutter scoring/Dart parity and real source ingestion are not verified by this result.
+This is Owner-run production evidence; this documentation closeout made no DB requests.
+
+```text
+SCORING_RUNTIME PASS login_preflight
+SCORING_RUNTIME PASS publish_fixture
+SCORING_RUNTIME PASS valid_submit
+SCORING_RUNTIME PASS fetch_own
+SCORING_RUNTIME PASS direct_forgery_denied
+SCORING_RUNTIME PASS ownership_isolation
+SCORING_RUNTIME PASS idempotent_retry
+SCORING_RUNTIME PASS current_version
+SCORING_RUNTIME PASS invalid_inputs
+SCORING_RUNTIME PASS study_delete_semantics
+SCORING_RUNTIME PASS owner_delete
+SCORING_RUNTIME PASS fixture_scope_verified
+SCORING_RUNTIME PASS fixture_cleanup
+SCORING_RUNTIME PASS cleanup_triggers_restored
+SCORING_RUNTIME PASS scoring_baseline_restored
+SCORING_RUNTIME PASS existing_data_preserved
+SCORING_RUNTIME PASS auth_users_retained
+SCORING_RUNTIME PASS acceptance
+```

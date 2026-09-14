@@ -1,6 +1,6 @@
 # Day 8-D1 — Scoring migration execution package
 
-**PRODUCTION APPLIED / POSTFLIGHT PASS (Owner-reported); JWT/RPC acceptance pending.**
+**Day 8-D1 COMPLETE: production applied / Postflight / actual JWT/RPC PASS (Owner-reported).**
 Target: LegendStudy / `stlhijzpjfgwwdgunlsd` only. Codex has not contacted production.
 Each section preserves the full SQL block identical to its linked file as deployment
 reference. Owner reports Preflight -> migration -> Postflight completed; do not replay.
@@ -15,7 +15,8 @@ For large future datasets schedule the all-row baseline hashes outside busy peri
 
 New submissions require current published key and optional compatible current cutoff.
 Existing identical attempt retries retain historical versions and results. The Owner reports
-this corrected migration applied. Next: the separately approved JWT acceptance verifier.
+this corrected migration applied and actual JWT/RPC acceptance PASS. Next: Day 8-D2
+Flutter Answer Entry + Raw Score. Day 8 overall remains incomplete.
 
 ## 1. Preflight — read only
 
@@ -79,7 +80,7 @@ where n.nspname='public' and c.relname in ('source_posts','content_items','exams
 commit;
 ```
 
-## 2. Production migration — full SQL, NOT YET APPLIED
+## 2. Production migration — full applied SQL reference
 
 Source: [20260914000200_mock_exam_scoring.sql](../supabase/migrations/20260914000200_mock_exam_scoring.sql)
 
