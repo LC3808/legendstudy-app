@@ -677,3 +677,32 @@ python3 tool/ingest_legendstudy.py --pilot c --out build/pilot-c
 
 Taxonomy mapping is on by default from Day 9-B2; `--no-taxonomy` restores the
 Day 9-B planning behaviour.
+
+---
+
+# Day 9-B3 — Pilot C apply writer (2026-09-15)
+
+Owner-verified before this work: live network smoke PASS (5/5), live Pilot C
+dry-run PASS (23 posts, 0 parse errors, 363 provisional occurrences, 739
+resources, 23 publish candidates, 0 blocking quarantine), Preflight 1–9 PASS on
+PostgreSQL 17.6, and the subjects taxonomy v1 seed **applied** (23 rows).
+Production baseline is now `subjects = 23` with every other content table at 0.
+
+- `tool/ingestion/apply.py` implements the write path that Day 9-B2 left out.
+  `assert_apply_allowed` no longer refuses unconditionally: it refuses a wrong
+  project ref first, then a missing Owner approval, then a plan that did not
+  come from `--source network`.
+- **One transaction for all 23 posts**, with the inserted counts compared to the
+  expectation before COMMIT; quarantine commits separately afterwards so a
+  rollback cannot erase the evidence. Reasoning is in
+  [day-9-pilot-c-package.md](day-9-pilot-c-package.md) §5.
+- **INSERT-only.** The writer emits no `UPDATE` and no `DELETE`; a test asserts
+  it. Existing rows, manual corrections, activated rows and `verified` mappings
+  are therefore safe by construction, and a partial pilot state fails closed
+  instead of being repaired by an upsert.
+- **Deterministic `uuid5` ids** for every row, including quarantine, so a second
+  run is a no-op and advisory rows cannot accumulate.
+- DB password is `getpass` only; the session pooler host comes from
+  `config/development.json`, `--db-host`, or a prompt. No credential reaches the
+  repository, the wiki, an artifact or stdout.
+- 134 offline tests PASS (106 → 134). **Not applied to production.**

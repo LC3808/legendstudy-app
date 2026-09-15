@@ -374,6 +374,47 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   See [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md) and
   [day-9-pilot-c-package.md](day-9-pilot-c-package.md).
 
+## Day 9-B3 Pilot C apply writer — implemented, NOT applied
+
+Owner-completed verification, recorded as fact:
+
+- Live network smoke PASS: 5/5 posts, requests 6, retries 0, failures 0.
+- Live Pilot C dry-run PASS: 23 posts, 0 parse errors, 23 content_items,
+  23 exams, 363 exam_subjects (all provisional; 203 at 0.95, 160 at 1.0),
+  23 subjects referenced, 739 resources (question 360, answer_explanation 356,
+  listening_audio 23), providers kakaocdn 716 / box 23, link_kinds unknown 716 /
+  landing_page 23, 23 publish candidates, 23 advisory quarantine,
+  0 blocking, 0 missing sources, 0 merge candidates. Offline/live post diff PASS.
+- Production Preflight 1–9 PASS on PostgreSQL 17.6: all six content tables 0,
+  0 verified occurrences, 0 post-id and 0 slug collisions, required constraints
+  present, RLS SELECT-only for anon/authenticated, private column grants intact.
+- **Subjects taxonomy v1 seed APPLIED to production**: 23 rows, 23 active,
+  23 unique codes, 23 unique ids, names/category/sort_order verified.
+- Current production baseline: `subjects = 23`; source_posts, content_items,
+  exams, exam_subjects, resources, ingestion_quarantine all 0.
+
+Writer status:
+
+- `tool/ingestion/apply.py` implements the Pilot C write path. One transaction
+  for all 23 posts with counts verified before COMMIT; quarantine in its own
+  transaction afterwards. INSERT-only — no UPDATE, no DELETE. Deterministic
+  uuid5 ids make a second run a no-op and keep quarantine from accumulating.
+- Gates, in order: exact project ref (checked before any password or
+  connection), Owner approval, `--source network`, `--pilot c`, scope,
+  collisions, write-shape and signing-material invariants, live preflight
+  (subjects v1 = 23, mapped subject ids present, 0 verified occurrences, pilot
+  wholly absent or wholly present), inserted-count match.
+- Expected delta: source_posts +23, content_items +23, exams +23,
+  exam_subjects +363, resources +739, ingestion_quarantine +23. No subject
+  INSERT — the taxonomy is already seeded.
+- 134 offline tests PASS with an in-memory database double; no production
+  fixture was written.
+- **`Production pilot apply 준비: YES`** — the command is in
+  [day-9-pilot-c-package.md](day-9-pilot-c-package.md) §5. Claude has not run
+  it; execution is a separate Owner decision.
+- Publication remains separately gated on the 9-C `link_kind='unknown'`
+  open-target rule.
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.

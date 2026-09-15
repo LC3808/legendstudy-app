@@ -8,6 +8,7 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+from collections import Counter
 import sys
 import tempfile
 import unittest
@@ -33,6 +34,11 @@ from ingestion.pipeline import next_state, run  # noqa: E402
 from ingestion.subjects import (  # noqa: E402
     ALIASES, BY_CODE, DEFERRED_HISTORICAL, GRADE_SCOPED, SUBJECTS_V1,
     TAXONOMY_VERSION, map_subject, subject_id,
+)
+from ingestion.apply import (  # noqa: E402
+    EXPECTED_SUBJECT_COUNT, ApplyAborted, apply_pilot, apply_quarantine,
+    assert_no_signing_material, assert_write_shape, postflight, preflight, resolve,
+    row_id,
 )
 from ingestion.writer import (  # noqa: E402
     PILOT_C, ApplyRefused, ScopeViolation, assert_apply_allowed, assert_in_scope,
@@ -623,12 +629,22 @@ class SampleAndArtifactTests(unittest.TestCase):
 
 
 class ApplyGateTests(unittest.TestCase):
-    def test_every_path_refuses(self):
-        for ref, approved in ((None, False), ('other', True),
-                              ('stlhijzpjfgwwdgunlsd', False),
-                              ('stlhijzpjfgwwdgunlsd', True)):
+    def test_wrong_project_missing_approval_and_sample_source_all_refuse(self):
+        for ref, approved, live in ((None, False, True), ('other', True, True),
+                                    ('muselry', True, True),
+                                    ('stlhijzpjfgwwdgunlsd', False, True),
+                                    ('stlhijzpjfgwwdgunlsd', True, False)):
             with self.assertRaises(ApplyRefused):
-                assert_apply_allowed(ref, approved)
+                assert_apply_allowed(ref, approved, live)
+
+    def test_project_ref_is_checked_before_anything_else(self):
+        with self.assertRaises(ApplyRefused) as ctx:
+            assert_apply_allowed('muselry-ref', False, False)
+        self.assertIn('is not the LegendStudy project', str(ctx.exception))
+
+    def test_all_gates_satisfied_returns(self):
+        self.assertIsNone(
+            assert_apply_allowed('stlhijzpjfgwwdgunlsd', True, True))
 
     def test_wrong_project_is_named_in_the_refusal(self):
         with self.assertRaises(ApplyRefused) as ctx:
@@ -934,6 +950,374 @@ class RequestHeaderTests(unittest.TestCase):
         budgeted = PoliteFetcher(delay=0, max_requests=0)
         with self.assertRaises(FetchError):
             budgeted.get('https://legendstudy.com/sitemap.xml', accept=ACCEPT_XML)
+
+
+
+
+class FakeDb:
+    """In-memory stand-in for the production database.
+
+    Only the statement shapes the writer actually issues are recognised;
+    anything else raises, so a future query change fails loudly here instead of
+    silently returning the wrong answer. No production database is contacted.
+    """
+
+    UNIQUE = {
+        'source_posts': (('source', 'external_post_id'),),
+        'content_items': (('source_post_id', 'source_content_key'), ('slug',)),
+        'exams': (),
+        'exam_subjects': (('content_item_id', 'source_subject_key'),),
+        'resources': (('content_item_id', 'source_post_id', 'source_resource_key'),),
+        'ingestion_quarantine': (),
+    }
+    PK = {'source_posts': 'id', 'content_items': 'id', 'exams': 'content_item_id',
+          'exam_subjects': 'id', 'resources': 'id', 'ingestion_quarantine': 'id'}
+
+    def __init__(self, subjects=None, fail_on=None):
+        self.tables = {name: {} for name in self.PK}
+        self.subjects = {s.id: s for s in (subjects if subjects is not None else SUBJECTS_V1)}
+        self.log: list[str] = []
+        self.pending: dict | None = None
+        self.fail_on = fail_on
+        self.committed = 0
+
+    # -- transaction
+    def begin(self):
+        self.log.append('BEGIN')
+        self.pending = {name: dict(rows) for name, rows in self.tables.items()}
+
+    def commit(self):
+        self.log.append('COMMIT')
+        if self.pending is not None:
+            self.tables = self.pending
+            self.pending = None
+        self.committed += 1
+
+    def rollback(self):
+        self.log.append('ROLLBACK')
+        self.pending = None
+
+    @property
+    def _live(self):
+        return self.pending if self.pending is not None else self.tables
+
+    # -- execute
+    def execute(self, statement, params=()):
+        text = ' '.join(statement.split())
+        if text.lower().startswith(('update ', 'delete ')):
+            raise AssertionError(f'writer must never issue: {text[:60]}')
+        if text.startswith('insert into public.'):
+            return self._insert(text, params)
+        return self._select(text, params)
+
+    def _insert(self, text, params):
+        table = text.split('insert into public.', 1)[1].split(' ', 1)[0]
+        columns = [c.strip() for c in
+                   text.split('(', 1)[1].split(')', 1)[0].split(',')]
+        row = dict(zip(columns, params))
+        self.log.append(f'INSERT {table}')
+        if self.fail_on == table:
+            raise RuntimeError(f'simulated failure inserting {table}')
+        rows = self._live[table]
+        key = row[self.PK[table]]
+        if key in rows:
+            return []
+        for unique in self.UNIQUE[table]:
+            signature = tuple(row.get(c) for c in unique)
+            if any(tuple(existing.get(c) for c in unique) == signature
+                   for existing in rows.values()):
+                return []
+        rows[key] = row
+        return [(1,)]
+
+    def _select(self, text, params):
+        live = self._live
+        if 'from public.subjects where taxonomy_version' in text and 'id::text' in text:
+            wanted = set(params[1])
+            return [(sid,) for sid in self.subjects if sid in wanted]
+        if 'count(*) from public.subjects where taxonomy_version' in text:
+            return [(len(self.subjects),)]
+        if 'from public.source_posts where source' in text:
+            wanted = set(params[1])
+            return [(sum(1 for r in live['source_posts'].values()
+                         if r['source'] == params[0] and r['external_post_id'] in wanted),)]
+        if 'from public.content_items where slug = any' in text:
+            wanted = set(params[0])
+            return [(sum(1 for r in live['content_items'].values()
+                         if r['slug'] in wanted),)]
+        if 'from public.exam_subjects where mapping_status = %s and content_item_id' in text:
+            wanted = set(params[1])
+            return [(sum(1 for r in live['exam_subjects'].values()
+                         if r['mapping_status'] == params[0]
+                         and r['content_item_id'] in wanted),)]
+        if "where mapping_status = 'verified'" in text:
+            return [(sum(1 for r in live['exam_subjects'].values()
+                         if r['mapping_status'] == 'verified'),)]
+        if 'ilike' in text and 'public.resources' in text:
+            signed = sum(
+                1 for r in live['resources'].values()
+                if any(t in (r.get('source_url') or '')
+                       for t in ('credential=', 'signature=', 'expires=')))
+            return [(signed,)]
+        if 'where is_active' in text:
+            table = text.split('from public.', 1)[1].split(' ', 1)[0]
+            return [(sum(1 for r in live[table].values() if r.get('is_active')),)]
+        if text.startswith('select count(*) from public.'):
+            table = text.split('from public.', 1)[1].strip()
+            if table == 'subjects':
+                return [(len(self.subjects),)]
+            return [(len(live[table]),)]
+        raise AssertionError(f'FakeDb does not recognise: {text[:90]}')
+
+
+class ApplyWriterTests(unittest.TestCase):
+    SAMPLES = Path(__file__).resolve().parent / 'ingestion/samples'
+
+    @classmethod
+    def setUpClass(cls):
+        posts = SampleSource(cls.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        result = run(posts, CRAWLED_AT, map_subjects=True)
+        cls.plans = [p for p in result.plans if p.exam and p.exam['year'] >= 2025]
+        cls.quarantine = [c for c in result.quarantine
+                          if c.external_post_id in {p.external_post_id for p in cls.plans}]
+
+    def resolved(self):
+        return [resolve(plan) for plan in self.plans]
+
+    def expected(self):
+        return expected_rows(self.plans)
+
+    # -- identity
+    def test_row_ids_are_deterministic(self):
+        first, second = self.resolved(), self.resolved()
+        self.assertEqual([p.source_post['id'] for p in first],
+                         [p.source_post['id'] for p in second])
+        self.assertEqual([r['id'] for p in first for r in p.resources],
+                         [r['id'] for p in second for r in p.resources])
+
+    def test_row_ids_are_unique_within_the_pilot(self):
+        posts = self.resolved()
+        for label, ids in (
+            ('source_posts', [p.source_post['id'] for p in posts]),
+            ('content_items', [p.content_item['id'] for p in posts]),
+            ('exam_subjects', [o['id'] for p in posts for o in p.occurrences]),
+            ('resources', [r['id'] for p in posts for r in p.resources]),
+            ('quarantine', [q['id'] for p in posts for q in p.quarantine]),
+        ):
+            self.assertEqual(len(ids), len(set(ids)), label)
+
+    def test_exam_shares_the_content_item_primary_key(self):
+        for post in self.resolved():
+            self.assertEqual(post.exam['content_item_id'], post.content_item['id'])
+
+    def test_planning_only_fields_are_never_sent(self):
+        post = self.resolved()[0]
+        for key in ('subject_code', 'mapping_reason', 'historical'):
+            self.assertNotIn(key, post.occurrences[0])
+        for key in ('provider', 'occurrence_subject_key', 'source_post_external_id',
+                    'raw_kind_label'):
+            self.assertNotIn(key, post.resources[0])
+        for key in ('sort_date', 'content_type'):
+            self.assertNotIn(key, post.exam)
+        self.assertNotIn('feed_updated_at', post.content_item)
+
+    # -- invariants
+    def test_no_signed_url_is_ever_persisted(self):
+        posts = self.resolved()
+        assert_no_signing_material(posts)
+        posts[0].resources[0]['source_url'] += '?credential=abc&signature=x'
+        with self.assertRaises(ApplyAborted):
+            assert_no_signing_material(posts)
+
+    def test_active_row_is_refused(self):
+        posts = self.resolved()
+        posts[0].content_item['is_active'] = True
+        with self.assertRaises(ApplyAborted):
+            assert_write_shape(posts)
+
+    def test_verified_mapping_is_refused(self):
+        posts = self.resolved()
+        posts[0].occurrences[0]['mapping_status'] = 'verified'
+        with self.assertRaises(ApplyAborted):
+            assert_write_shape(posts)
+
+    def test_claiming_a_verified_file_is_refused(self):
+        posts = self.resolved()
+        posts[0].resources[0]['file_url'] = 'https://example.com/a.pdf'
+        with self.assertRaises(ApplyAborted):
+            assert_write_shape(posts)
+
+    def test_box_listening_resources_are_landing_pages(self):
+        listening = [r for p in self.resolved() for r in p.resources
+                     if r['resource_type'] == 'listening_audio']
+        self.assertEqual(len(listening), 23)
+        for row in listening:
+            self.assertEqual(row['link_kind'], 'landing_page')
+            self.assertIn('box.com', row['source_url'])
+            self.assertIsNotNone(row['exam_subject_id'])
+
+    def test_kakaocdn_resources_stay_unknown_and_unchecked(self):
+        rows = [r for p in self.resolved() for r in p.resources
+                if 'kakaocdn' in r['source_url']]
+        self.assertEqual(len(rows), 716)
+        for row in rows:
+            self.assertEqual((row['link_kind'], row['link_status']), ('unknown', 'unchecked'))
+            self.assertIsNone(row['file_url'])
+
+class ApplyTransactionTests(unittest.TestCase):
+    SAMPLES = Path(__file__).resolve().parent / 'ingestion/samples'
+
+    @classmethod
+    def setUpClass(cls):
+        posts = SampleSource(cls.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        result = run(posts, CRAWLED_AT, map_subjects=True)
+        cls.plans = [p for p in result.plans if p.exam and p.exam['year'] >= 2025]
+
+    def setUp(self):
+        self.posts = [resolve(plan) for plan in self.plans]
+        self.expected = expected_rows(self.plans)
+
+    def apply_all(self, db):
+        preflight(db, self.posts, 0)
+        inserted = apply_pilot(db, self.posts, self.expected)
+        quarantined = apply_quarantine(db, self.posts)
+        return inserted, quarantined
+
+    def test_expected_pilot_rows(self):
+        self.assertEqual(self.expected, {
+            'source_posts': 23, 'content_items': 23, 'exams': 23,
+            'exam_subjects': 363, 'resources': 739})
+
+    def test_full_apply_produces_the_expected_delta(self):
+        db = FakeDb()
+        inserted, quarantined = self.apply_all(db)
+        self.assertEqual(inserted, self.expected)
+        self.assertEqual(quarantined, 23)
+        counts = postflight(db)
+        self.assertEqual(counts['source_posts'], 23)
+        self.assertEqual(counts['content_items'], 23)
+        self.assertEqual(counts['exams'], 23)
+        self.assertEqual(counts['subjects'], EXPECTED_SUBJECT_COUNT)
+        self.assertEqual(counts['exam_subjects'], 363)
+        self.assertEqual(counts['resources'], 739)
+        self.assertEqual(counts['ingestion_quarantine'], 23)
+        for key in ('active_content_items', 'active_exam_subjects', 'active_resources',
+                    'verified_exam_subjects', 'signed_resource_urls'):
+            self.assertEqual(counts[key], 0, key)
+
+    def test_resource_type_breakdown(self):
+        rows = [r for p in self.posts for r in p.resources]
+        self.assertEqual(Counter(r['resource_type'] for r in rows),
+                         Counter({'question': 360, 'answer_explanation': 356,
+                                  'listening_audio': 23}))
+
+    def test_every_occurrence_is_provisional_against_taxonomy_v1(self):
+        rows = [o for p in self.posts for o in p.occurrences]
+        self.assertEqual(len(rows), 363)
+        self.assertEqual({o['mapping_status'] for o in rows}, {'provisional'})
+        self.assertEqual({o['taxonomy_version'] for o in rows}, {TAXONOMY_VERSION})
+        self.assertEqual(Counter(o['mapping_confidence'] for o in rows),
+                         Counter({0.95: 203, 1.0: 160}))
+        self.assertTrue(all(o['raw_subject_label'] and o['source_subject_key'] for o in rows))
+        self.assertTrue(all(o['verified_at'] is None for o in rows))
+
+    def test_insert_order_follows_the_foreign_keys(self):
+        db = FakeDb()
+        self.apply_all(db)
+        order = [line.split(' ', 1)[1] for line in db.log if line.startswith('INSERT ')]
+        first_seen = []
+        for table in order:
+            if table not in first_seen:
+                first_seen.append(table)
+        self.assertEqual(first_seen, ['source_posts', 'content_items', 'exams',
+                                      'exam_subjects', 'resources',
+                                      'ingestion_quarantine'])
+
+    def test_quarantine_commits_in_its_own_transaction(self):
+        db = FakeDb()
+        self.apply_all(db)
+        self.assertEqual(db.committed, 2)
+        commit_positions = [i for i, line in enumerate(db.log) if line == 'COMMIT']
+        first_quarantine = db.log.index('INSERT ingestion_quarantine')
+        self.assertLess(commit_positions[0], first_quarantine)
+
+    def test_second_apply_is_a_no_op(self):
+        db = FakeDb()
+        self.apply_all(db)
+        checks = preflight(db, self.posts, 0)
+        self.assertTrue(checks.already_applied)
+        self.assertEqual(checks.existing_posts, 23)
+        again = apply_pilot(db, self.posts, {k: 0 for k in self.expected})
+        self.assertEqual(again, {k: 0 for k in self.expected})
+        self.assertEqual(postflight(db)['resources'], 739)
+
+    def test_quarantine_is_idempotent(self):
+        db = FakeDb()
+        self.apply_all(db)
+        self.assertEqual(apply_quarantine(db, self.posts), 0)
+        self.assertEqual(postflight(db)['ingestion_quarantine'], 23)
+
+    def test_count_mismatch_rolls_the_whole_pilot_back(self):
+        db = FakeDb()
+        wrong = dict(self.expected, resources=999)
+        with self.assertRaises(ApplyAborted):
+            apply_pilot(db, self.posts, wrong)
+        self.assertEqual(db.log[-1], 'ROLLBACK')
+        self.assertEqual(postflight(db)['source_posts'], 0)
+        self.assertEqual(postflight(db)['resources'], 0)
+
+    def test_a_failure_mid_write_leaves_nothing_behind(self):
+        db = FakeDb(fail_on='resources')
+        with self.assertRaises(RuntimeError):
+            apply_pilot(db, self.posts, self.expected)
+        self.assertEqual(db.log[-1], 'ROLLBACK')
+        counts = postflight(db)
+        for table in ('source_posts', 'content_items', 'exams', 'exam_subjects',
+                      'resources'):
+            self.assertEqual(counts[table], 0, table)
+
+    def test_missing_taxonomy_refuses_before_any_write(self):
+        db = FakeDb(subjects=SUBJECTS_V1[:5])
+        with self.assertRaises(ApplyAborted) as ctx:
+            preflight(db, self.posts, 0)
+        self.assertIn('subjects_taxonomy_v1.sql', str(ctx.exception))
+        self.assertNotIn('BEGIN', db.log)
+
+    def test_blocking_quarantine_refuses(self):
+        db = FakeDb()
+        with self.assertRaises(ApplyAborted) as ctx:
+            preflight(db, self.posts, 1)
+        self.assertIn('blocking quarantine', str(ctx.exception))
+
+    def test_partial_pilot_state_fails_closed(self):
+        db = FakeDb()
+        subset = self.posts[:5]
+        preflight(db, subset, 0)
+        apply_pilot(db, subset, expected_rows(self.plans[:5]))
+        with self.assertRaises(ApplyAborted) as ctx:
+            preflight(db, self.posts, 0)
+        self.assertIn('partial pilot state', str(ctx.exception))
+
+    def test_existing_verified_mapping_refuses(self):
+        db = FakeDb()
+        self.apply_all(db)
+        target = next(iter(db.tables['exam_subjects'].values()))
+        target['mapping_status'] = 'verified'
+        with self.assertRaises(ApplyAborted) as ctx:
+            preflight(db, self.posts, 0)
+        self.assertIn('verified', str(ctx.exception))
+
+    def test_writer_never_issues_update_or_delete(self):
+        db = FakeDb()
+        self.apply_all(db)
+        postflight(db)
+        self.assertTrue(all(not line.startswith(('UPDATE', 'DELETE')) for line in db.log))
+
+    def test_subjects_table_is_never_written(self):
+        db = FakeDb()
+        self.apply_all(db)
+        self.assertNotIn('INSERT subjects', db.log)
+        self.assertEqual(len(db.subjects), EXPECTED_SUBJECT_COUNT)
 
 
 if __name__ == '__main__':

@@ -5,8 +5,11 @@
     python3 tool/ingest_legendstudy.py --source network     # live dry-run
     python3 tool/ingest_legendstudy.py --network-smoke 3    # structure check
 
-`--apply` exists so the gate is testable. It always refuses in Day 9-B.
-No credential, cookie or signed query is written to any artifact.
+`--apply` writes the approved Pilot C to production and is refused unless the
+project ref matches LegendStudy exactly, Owner approval is given and the plan
+came from a live dry-run. The DB password is hidden terminal input and is never
+written to the repository, the wiki, an artifact or stdout. No credential,
+cookie or signed query is written to any artifact.
 """
 from __future__ import annotations
 
@@ -27,7 +30,15 @@ from ingestion.crawler import (  # noqa: E402
 )
 from ingestion.pipeline import DryRunResult, load_state, next_state, run  # noqa: E402
 from ingestion.normalizer import ADVISORY, BLOCKING  # noqa: E402
-from ingestion.writer import ApplyRefused, assert_apply_allowed, plan_statements  # noqa: E402
+from ingestion.apply import (  # noqa: E402
+    ApplyAborted, PsycopgSession, apply_pilot, apply_quarantine, postflight,
+    preflight, resolve,
+)
+from ingestion.writer import (  # noqa: E402
+    LEGENDSTUDY_PROJECT_REF, PILOT_C, ApplyRefused, ScopeViolation,
+    assert_apply_allowed, assert_in_scope, assert_no_collisions, expected_rows,
+    plan_statements,
+)
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_SAMPLES = (REPO / 'tool/ingestion/samples/day9b_exam_posts.jsonl',)
@@ -170,6 +181,125 @@ def write_artifacts(result: DryRunResult, out: Path, crawled_at: str) -> list[Pa
     return written
 
 
+def validated_db_host(host: str) -> str:
+    """Only this project's direct host or a Supabase session pooler is accepted."""
+    import re
+    direct = f'db.{LEGENDSTUDY_PROJECT_REF}.supabase.co'
+    pooler = re.fullmatch(r'aws-[0-9]+-[a-z0-9-]+\.pooler\.supabase\.com', host or '')
+    if host != direct and pooler is None:
+        raise SystemExit(f'refusing: {host!r} is not this project\'s database host')
+    return host
+
+
+def db_settings(args) -> dict:
+    """Project-pinned connection. The password is hidden terminal input only.
+
+    Nothing here is written to the repository, the wiki, stdout or an artifact,
+    and no caller-supplied libpq options are accepted.
+    """
+    import getpass
+
+    host = args.db_host
+    if not host and args.config and Path(args.config).exists():
+        try:
+            host = json.loads(Path(args.config).read_text(encoding='utf-8')).get(
+                'SUPABASE_SESSION_POOLER_HOST')
+        except (OSError, ValueError):
+            host = None
+    if not host:
+        host = input('Supabase session pooler host (blank = direct DB) > ').strip()
+    direct = f'db.{LEGENDSTUDY_PROJECT_REF}.supabase.co'
+    host = validated_db_host(host or direct)
+    password = getpass.getpass('LegendStudy DB password > ')
+    if not password:
+        raise SystemExit('refusing: empty database password')
+    return dict(
+        host=host, port=5432, dbname='postgres',
+        user='postgres' if host == direct else f'postgres.{LEGENDSTUDY_PROJECT_REF}',
+        password=password, sslmode='require', connect_timeout=15,
+        application_name='legendstudy_pilot_c_apply',
+        options='-c statement_timeout=120000 -c lock_timeout=10000',
+    )
+
+
+def _open_session(args):
+    try:
+        return PsycopgSession.connect(db_settings(args))
+    except ImportError:
+        raise SystemExit(
+            'psycopg is required for this command: '
+            'python3 -m pip install -r tool/requirements-scoring-verifier.txt')
+
+
+def cmd_apply(args, result) -> int:
+    """Pilot C production apply. Every gate must pass before a row is sent."""
+    try:
+        assert_apply_allowed(args.project_ref, args.i_have_owner_approval,
+                             live_source=(args.source == 'network'))
+    except ApplyRefused as exc:
+        print(f'APPLY {exc}', flush=True)
+        return 3
+    if args.pilot != 'c':
+        print('APPLY refusing: --apply is bounded to --pilot c', flush=True)
+        return 3
+
+    try:
+        assert_in_scope(result.plans, PILOT_C)
+        assert_no_collisions(result.plans)
+    except ScopeViolation as exc:
+        print(f'APPLY refusing: {exc}', flush=True)
+        return 3
+
+    expected = expected_rows(result.plans)
+    blocking = len({c.external_post_id for c in result.quarantine if c.kind in BLOCKING})
+    posts = [resolve(plan) for plan in result.plans]
+
+    print('\nAPPLY plan:', json.dumps(expected), flush=True)
+    print(f'APPLY quarantine rows: {sum(len(p.quarantine) for p in posts)} '
+          f'(blocking posts {blocking})', flush=True)
+
+    session = _open_session(args)
+    try:
+        checks = preflight(session, posts, blocking)
+        print(f'APPLY preflight: subjects_v1={checks.subjects_v1} '
+              f'existing_posts={checks.existing_posts} existing_slugs={checks.existing_slugs} '
+              f'verified={checks.verified_occurrences}', flush=True)
+        if checks.already_applied:
+            print('APPLY already applied: every pilot post and slug is present; '
+                  'nothing to do.', flush=True)
+            print(json.dumps(postflight(session), indent=2), flush=True)
+            return 0
+
+        def progress(table, inserted, planned):
+            print(f'APPLY   {table}: inserted {inserted}/{planned}', flush=True)
+
+        inserted = apply_pilot(session, posts, expected, on_progress=progress)
+        print('APPLY committed:', json.dumps(inserted), flush=True)
+        quarantined = apply_quarantine(session, posts)
+        print(f'APPLY quarantine committed: {quarantined}', flush=True)
+        print('\nAPPLY postflight:', flush=True)
+        print(json.dumps(postflight(session), indent=2), flush=True)
+    except (ApplyAborted, Exception) as exc:  # noqa: B014 - report, never leak params
+        print(f'APPLY ABORTED ({type(exc).__name__}): {exc}', flush=True)
+        return 4
+    finally:
+        session.close()
+    return 0
+
+
+def cmd_postflight(args) -> int:
+    """Read-only verification of an applied pilot."""
+    if args.project_ref != LEGENDSTUDY_PROJECT_REF:
+        print(f'refusing: project ref {args.project_ref!r} is not LegendStudy', flush=True)
+        return 3
+    session = _open_session(args)
+    try:
+        print(json.dumps(postflight(session), indent=2))
+    finally:
+        session.close()
+    return 0
+
+
 def cmd_emit_seed(path: Path) -> int:
     """Render the taxonomy seed SQL. Writes a file; never touches a database."""
     from ingestion.subjects import CURRICULUM_VERSION, SUBJECTS_V1, TAXONOMY_VERSION
@@ -308,11 +438,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument('--survey', type=Path, default=None,
                     help='title-parsing coverage over the pipe-delimited survey index')
     ap.add_argument('--apply', action='store_true',
-                    help='refused in Day 9-B; the gate is kept testable')
+                    help='write the pilot to production; every gate must be satisfied')
     ap.add_argument('--project-ref', default=None)
     ap.add_argument('--i-have-owner-approval', action='store_true')
+    ap.add_argument('--db-host', default=None,
+                    help='Supabase session pooler host; falls back to config, then prompt')
+    ap.add_argument('--config', type=Path, default=REPO / 'config/development.json',
+                    help='local public config; never holds a password')
+    ap.add_argument('--postflight', action='store_true',
+                    help='read-only verification of an applied pilot, then exit')
     args = ap.parse_args(argv)
 
+    if args.postflight:
+        return cmd_postflight(args)
     if args.network_smoke is not None:
         return cmd_smoke(args.network_smoke, args.delay)
     if args.survey is not None:
@@ -377,13 +515,6 @@ def main(argv: list[str] | None = None) -> int:
         result.changed = [i for i in result.changed if i in keep]
         result.unchanged = [i for i in result.unchanged if i in keep]
 
-    if args.apply:
-        try:
-            assert_apply_allowed(args.project_ref, args.i_have_owner_approval)
-        except ApplyRefused as exc:
-            print(f'APPLY {exc}')
-            return 3
-
     written = write_artifacts(result, args.out, crawled_at)
     if args.write_state and args.state:
         args.state.parent.mkdir(parents=True, exist_ok=True)
@@ -398,6 +529,9 @@ def main(argv: list[str] | None = None) -> int:
             print(f'  {path.relative_to(REPO)}')
         except ValueError:
             print(f'  {path}')
+
+    if args.apply:
+        return cmd_apply(args, result)
     return 0
 
 

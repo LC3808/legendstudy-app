@@ -148,28 +148,95 @@ select code, name, category, taxonomy_version, is_active, sort_order
 from public.subjects where taxonomy_version = 'v1' order by sort_order;
 ```
 
-## 5. Ingestion apply — NOT YET AUTHORISED
+## 5. Ingestion apply — IMPLEMENTED (Day 9-B3), not yet executed
 
-`tool/ingestion/writer.py` has no write path. `assert_apply_allowed` refuses on
-every argument combination, naming a wrong project ref first so a Muselry
-mistake is refused before anything else is considered.
+`tool/ingestion/apply.py` now carries the write path. It is reached only when
+every gate in `assert_apply_allowed` and `assert_in_scope` passes.
 
-Before a future apply task may implement the write, the guards that already
-exist must be wired to it. They are implemented and tested now:
+### Owner verification already completed
 
-| guard | function |
+| step | result |
 |---|---|
-| bounded scope | `assert_in_scope(plans, PILOT_C)` — refuses a year outside 2025–2026, a non-`exam` content type, a post that is not a publish candidate, any `is_active=true` row, and any `verified` mapping |
-| collision abort | `assert_no_collisions(plans)` — duplicate upsert key at any of the five levels |
-| expected rows | `expected_rows(plans)` — the table above, compared against postflight |
-| explicit flag | `--apply` plus `--project-ref` plus `--i-have-owner-approval` |
-| dry-run first | `--apply` runs the full plan before the gate is consulted |
-| no hard delete | the writer has no DELETE path at all |
+| Live network smoke | PASS, 5/5, requests 6, retries 0, failures 0 |
+| Live Pilot C dry-run | PASS — 23 posts, 0 parse errors, 363 occurrences all provisional, 739 resources, 23 publish candidates, 0 blocking quarantine |
+| Preflight 1–9 | PASS on PostgreSQL 17.6; all six content tables 0, 0 verified occurrences, 0 post-id and 0 slug collisions, constraints/RLS/grants as applied |
+| Subjects taxonomy v1 seed | APPLIED — 23 rows, 23 active, 23 unique codes, 23 unique ids |
 
-Write order, parents before children, one transaction per post:
+Current production baseline: `subjects = 23`, every other content table `0`.
+
+### Design decisions taken against the schema
+
+- **One transaction for all 23 posts, not one per post.** The earlier draft of
+  this document suggested per-post transactions. For a bounded pilot that is
+  the weaker choice: a failure at post 15 would commit 14 posts, the expected
+  delta below would then fail against a partial database, and rollback would
+  have to discover which posts landed. 1,148 rows is trivial for one
+  transaction, and the inserted counts are compared to the expectation
+  **inside** the transaction, before COMMIT. Per-post transactions remain the
+  right shape for a long unattended crawl; this is not one.
+- **Quarantine commits separately, after the pilot commits.** `ingestion.md`
+  requires that a rollback of the normalized transaction cannot erase the
+  evidence.
+- **Deterministic ids.** Every id is `uuid5` over its canonical identity
+  (`source_post:legendstudy:<id>`, `content_item:<slug>`,
+  `exam_subject:<content_id>:<subject_key>`,
+  `resource:<content_id>:<post_id>:<resource_key>`,
+  `quarantine:<kind>:<post_id>`). A re-run produces the same ids, so
+  `ON CONFLICT DO NOTHING` degenerates to a no-op, advisory quarantine rows
+  cannot accumulate, and rollback can name an exact id set. `exams` reuses the
+  content item id, which is its shared primary key. No schema change: all five
+  ids are ordinary insertable columns.
+- **INSERT-only, fail closed.** No `UPDATE` and no `DELETE` is issued
+  anywhere — a test asserts the writer never emits either. A row that already
+  exists is never rewritten, so a manual correction, an activated row and a
+  `verified` mapping are all structurally safe. A *partial* pilot state stops
+  the run rather than being "repaired" by an upsert.
+
+### Runtime gates, in order
+
+1. project ref equals `stlhijzpjfgwwdgunlsd` exactly — checked **before** a
+   password is requested or a connection opened, so a Muselry run cannot reach
+   the database;
+2. `--i-have-owner-approval`;
+3. `--source network`, so the plan comes from a live dry-run of the current
+   site rather than a committed sample;
+4. `--pilot c`;
+5. `assert_in_scope` — year 2025–2026, `exam` only, publish candidates only, no
+   `is_active=true` row, no `verified` mapping;
+6. `assert_no_collisions` — duplicate upsert key at any of the five levels;
+7. `assert_write_shape` and `assert_no_signing_material` — publication and
+   mapping invariants, and no `credential=` / `signature=` / `expires=` in any
+   stored locator;
+8. live preflight — `subjects` v1 = 23, every mapped `subject_id` present in
+   the v1 taxonomy, 0 verified occurrences on these content items, and the
+   pilot either wholly absent (apply) or wholly present (no-op);
+9. inserted counts equal the expectation, or the transaction rolls back.
+
+### Write order
+
 `source_posts` → `content_items` → `exams` → `exam_subjects` → `resources`,
-using the conflict targets in `day-9-ingestion.md`. Quarantine cases are
-persisted in a **separate** transaction so a rollback cannot erase the evidence.
+then `ingestion_quarantine` in its own transaction. Conflict targets are the
+schema's own uniqueness; no new identity was invented.
+
+### The command
+
+```
+cd ~/development/legendstudy-app && python3 tool/ingest_legendstudy.py \
+  --source network --pilot c --out build/pilot-c-apply \
+  --apply --project-ref stlhijzpjfgwwdgunlsd --i-have-owner-approval
+```
+
+Requires `psycopg` (`python3 -m pip install -r tool/requirements-scoring-verifier.txt`).
+The session pooler host is read from `config/development.json`
+(`SUPABASE_SESSION_POOLER_HOST`), else `--db-host`, else prompted. The database
+password is hidden terminal input and is never written to the repository, the
+wiki, an artifact, stdout or shell history.
+
+Read-only verification on its own:
+
+```
+python3 tool/ingest_legendstudy.py --postflight --project-ref stlhijzpjfgwwdgunlsd
+```
 
 ## 6. Postflight (read-only SQL)
 
@@ -294,6 +361,10 @@ delete from public.source_posts where id in (select id from pilot_posts);
 commit;
 ```
 
+Because every id is deterministic, the same set can also be named directly by
+`uuid5` without depending on `external_post_id` lookup; the query above is kept
+because it is what the Owner can read and verify at a glance.
+
 The `subjects` seed is **not** rolled back by this: taxonomy rows are a
 released master, not pilot content, and removing them would break any mapping
 that survived. If the taxonomy itself must be withdrawn, that is its own
@@ -304,7 +375,8 @@ apply and rollback.
 
 ## What is still refused
 
-- `--apply` — no write path exists; the gate refuses on every argument.
+- Executing `--apply` — the write path exists as of Day 9-B3 but has **not**
+  been run against production; that is a separate Owner decision.
 - Any migration or schema change — the pilot needs none.
 - Supabase Storage mirroring — Owner deferred it pending a rights decision.
 - The ~1,400 legacy posts — deferred.

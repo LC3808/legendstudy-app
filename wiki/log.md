@@ -1049,3 +1049,32 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   credential, signature or expiry values. No production write, seed, migration,
   Flutter/Search change, apply, push, PR or merge.
 - 106 ingestion tests, py_compile, credential scan and `git diff --check` PASS.
+
+## 2026-09-15 — Day 9-B3 Pilot C apply writer
+
+- Recorded Owner-completed verification as fact: live network smoke PASS (5/5),
+  live Pilot C dry-run PASS (23 posts / 363 provisional occurrences / 739
+  resources / 0 blocking), Production Preflight 1–9 PASS on PostgreSQL 17.6,
+  and the subjects taxonomy v1 seed applied (23 rows). Production baseline is
+  now subjects = 23 with every other content table at 0.
+- Implemented tool/ingestion/apply.py, the write path Day 9-B2 deliberately
+  omitted. assert_apply_allowed now refuses a wrong project ref first, then a
+  missing Owner approval, then a plan that did not come from --source network.
+- Chose one transaction for all 23 posts over the earlier per-post suggestion,
+  and documented why: a mid-run failure would otherwise commit a partial pilot,
+  break the expected-delta postflight and complicate rollback. Inserted counts
+  are compared to the expectation inside the transaction before COMMIT.
+  Quarantine commits separately afterwards, per ingestion.md.
+- INSERT-only writer: no UPDATE, no DELETE anywhere, asserted by test. Partial
+  pilot state fails closed rather than being repaired by an upsert, so manual
+  corrections, activated rows and verified mappings are safe by construction.
+- Deterministic uuid5 ids for source_posts, content_items, exam_subjects,
+  resources and quarantine (exams reuse the content item id). A second run is a
+  no-op and advisory quarantine rows cannot accumulate.
+- DB password via getpass only; pooler host from config/development.json,
+  --db-host or a prompt. No credential in repo, wiki, artifact, stdout.
+- Added --postflight for read-only verification.
+- 134 offline tests PASS (106 → 134) using an in-memory database double that
+  refuses any UPDATE/DELETE and rejects unrecognised queries. No production
+  fixture written. py_compile, credential scan and git diff --check PASS.
+- NOT APPLIED to production. Execution is a separate Owner decision.

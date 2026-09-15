@@ -26,17 +26,24 @@ class ApplyRefused(RuntimeError):
     pass
 
 
-def assert_apply_allowed(project_ref: str | None, confirmed: bool) -> None:
-    """Never returns. Day 9-B has no Owner authorisation to write."""
+def assert_apply_allowed(project_ref: str | None, confirmed: bool,
+                         live_source: bool = False) -> None:
+    """Refuse unless every gate is satisfied. Order matters.
+
+    The project ref is checked first and by exact equality, so a run aimed at
+    Muselry — or at anything that is not LegendStudy — is refused before a
+    connection is opened, a password is requested or a row is considered.
+    """
     if project_ref != LEGENDSTUDY_PROJECT_REF:
         raise ApplyRefused(
             f'refusing: target project ref {project_ref!r} is not the LegendStudy '
             f'project {LEGENDSTUDY_PROJECT_REF!r}')
     if not confirmed:
         raise ApplyRefused('refusing: --i-have-owner-approval was not given')
-    raise ApplyRefused(
-        'refusing: Day 9-B is dry-run only. Production apply requires a separate '
-        'Owner-approved task; see wiki/day-9-ingestion.md "Production gate".')
+    if not live_source:
+        raise ApplyRefused(
+            'refusing: apply requires --source network so the plan comes from a live '
+            'dry-run of the current site, not a committed sample')
 
 
 def plan_statements(plan: PlannedPost) -> list[str]:
