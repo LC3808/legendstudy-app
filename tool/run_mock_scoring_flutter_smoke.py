@@ -17,7 +17,7 @@ from pathlib import Path
 
 import psycopg
 from verify_mock_scoring_jwt import (Acceptance, AdminFixtures, EMAILS, REF,
-    admin_settings, require, uuid_value)
+    admin_settings, admin_host_from_config, require, uuid_value)
 
 STAGES = frozenset('login_preflight auth_scoring_start answer_entry pause_resume draft_restore auth_submit auth_result auth_restore account_isolation retry stale_version local_fixture_cleanup'.split())
 CLEANUP = frozenset('fixture_scope_verified fixture_cleanup cleanup_triggers_restored scoring_baseline_restored existing_data_preserved auth_users_retained'.split())
@@ -194,8 +194,8 @@ def main():
             warnings.simplefilter('error', getpass.GetPassWarning)
             for label, email in EMAILS.items():
                 passwords[label] = getpass.getpass(f'Password for {label} ({email}) > ')
-            host = input('Supabase Connect Session pooler host (blank = direct DB) > ').strip()
-            settings = admin_settings(host or 'db.' + REF + '.supabase.co',
+            host = admin_host_from_config(raw)
+            settings = admin_settings(host,
                                       getpass.getpass('LegendStudy DB password > '))
         app.login(passwords)
         db = psycopg.connect(**settings)

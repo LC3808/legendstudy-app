@@ -423,6 +423,8 @@ Attempt subject/completedAt plus result submittedAt, grade/status/counts and exi
 identity/score/title fields support a future history projection. Auth server submission
 time and local logical completion time remain distinct; legacy missing values are not
 inferred. Full cloud history, deletion and regrading are not implemented in D3.
+Day8-D3 acceptance is COMPLETE: Owner-reported actual A/B Flutter and full
+cleanup/retention PASS on2026-09-15. This closeout changes no schema or RPC.
 See [D3 contract and evidence](day-8-d3-grade-result.md).
 
 ### Future monetization / entitlement direction (not implemented)

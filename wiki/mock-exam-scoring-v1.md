@@ -1,8 +1,8 @@
 # Mock Exam Scoring v1 — Day 8-D architecture proposal
 
-Reviewed: 2026-09-14. **Day 8-D1 and Day 8-D2 COMPLETE. Day 8 overall NOT COMPLETE.**
+Reviewed: 2026-09-15. **Day 8-D1, Day 8-D2 and Day 8-D3 COMPLETE. Day 8 overall NOT COMPLETE.**
 Production migration/Postflight and actual A/B JWT/RPC acceptance are Owner-reported PASS.
-D2 Flutter answer/raw-score Guest and actual A/B runtime PASS; next is Day 8-D3 Grade + Result UX. No real key import or scraping.
+D2 answer/raw-score and D3 grade/result actual A/B Flutter runtime PASS (Owner-reported). No real key import or scraping.
 [Executable SQL package](day-8-scoring-migration-package.md) preserves the applied SQL.
 Day 8-C implementation and Guest/Auth runtime remain PASS; its physical gate stays
 open. Storage details: [Day 8-D storage proposal](day-8-scoring-storage-proposal.md).
@@ -257,10 +257,13 @@ Day 8-D3 Grade + Result UX.** Day8 overall is not COMPLETE; physical8-B/8-C gate
 remain pending. D1 evidence remains separate from this actual Flutter acceptance.
 
 
-## Day 8-D3 implementation
+## Day 8-D3 — COMPLETE
 
 [Grade + Result UX](day-8-d3-grade-result.md) defines shared Guest/Auth labels,
 source snapshots, review semantics and runtime evidence limits. Confirmed requires
 raw_absolute/confirmed provenance; estimates always say 예상. Source-less D2 caches
 retain their stored values but do not acquire invented provenance or a displayed
-confirmed grade. No current-cutoff regrading, DB/RPC change or production fixture input.
+confirmed grade. No current-cutoff regrading or DB/RPC change. Owner reports actual
+A/B grade/source/restore/history/retry/isolation/navigation and all run-fixture cleanup,
+trigger/baseline/data/Auth retention PASS on2026-09-15. D3 COMPLETE; Day8 overall
+remains NOT COMPLETE due to remaining physical-device gates.

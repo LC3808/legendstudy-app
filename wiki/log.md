@@ -827,6 +827,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   this request's production-data-input prohibition. No production fixture, DB/schema/
   RPC/migration change, Push/PR/Merge. B/C physical acceptance remains pending.
 
+
+## 2026-09-14 — Day 8-D3 A/B Flutter smoke runner prepared
+
+- Added dedicated hidden-input, allowlisted-output D3 runner/native integration test
+  for three grade modes, summary/review/provenance, restore/history, v1/v2 reproducibility,
+  account isolation, exact retry, legacy fallback and actual Study/Home navigation.
+- Reuses D1 transactional cleanup unchanged; every extra definition UUID is preflighted,
+  each native Study/attempt UUID is registered before dispatch, maximum three each.
+  Three approved cleanup triggers, owner/digest/baseline/Auth-retention guards retained.
+- 11 new runner safety tests /65 combined Python offline tests PASS; actual-router
+  offline widget test, full243 Flutter tests, analyze and iOS simulator integration-target build PASS.
+- No feature code, schema/migration/RPC or production request/fixture operation.
+  Owner execution remains pending; D3/Day8 NOT COMPLETE. No Push/PR/Merge.
+
 ## 2026-09-14 — Study/Home UI polish
 
 - Added explicit meal expansion with complete lunch/dinner menus and responsive
@@ -842,3 +856,47 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Normal profile app reinstalled without uninstalling and launched after UI tests.
   Details: study-home-ui-polish.md. D3 runtime runner
   work remains separate; DB/schema/migration/RPC untouched; no Push/PR/Merge.
+
+## 2026-09-15 — D3 runner safe diagnostics; Owner execution pending
+
+- Verified local HEAD88c4a60 / codex/day-7-school-neis and preserved existing D3
+  untracked runner/integration/tests and four Wiki edits. No new commit.
+- Owner's two-line runner FAIL lacks recoverable stage/exception evidence; exact
+  prior root cause remains unknown. Reproduced generic-error hiding offline and
+  added allowlisted stage/type/status/code/exit diagnostics, prefixed native markers,
+  explicit missing stages, bridge and finalizer failure reporting.
+- Today's missing temporary venv and shutdown simulator restored/prepared; these
+  current observations do not establish yesterday's failure cause.
+- Python syntax/credential/diff checks PASS; D3 offline20 and existing D1/D2 scoring25
+  PASS on local PostgreSQL17. Integration analyze and15 relevant Flutter tests PASS.
+- D1 UUID-scoped transactional cleanup unchanged; no production request or actual
+  credential execution. STOP for Owner getpass run. D3 NOT COMPLETE; iPhone physical
+  subset PASS and UI polish preserved. No schema/RPC, Push/PR/Merge or feature edits.
+
+## 2026-09-15 — Optional external pooler host
+
+- Added one shared host loader reused by D1 verifier and D2/D3 runners. External
+  SUPABASE_SESSION_POOLER_HOST skips host prompt; absence retains prior prompt;
+  invalid values fail closed. Existing host validation and project pin preserved.
+- A/B/DB getpass unchanged. External JSON not edited; no host duplication in config,
+  password storage or Keychain implementation. Future Keychain scope recorded as TODO.
+- Offline49 tests, Python syntax, credential scan and diff checks PASS. No production
+  execution/DB/schema/RPC, feature or cleanup changes; D3 acceptance still pending.
+
+## 2026-09-15 — Day 8-D3 COMPLETE / verifier wrapper
+
+- Owner reports all13 A/B application stages, local cleanup, six fixture/trigger/
+  baseline/data/Auth retention stages and final Flutter grade result smoke PASS.
+  D3 COMPLETE; D1/D2 COMPLETE retained; Day8 overall not declared COMPLETE.
+- Flutter exit0; extra app_stop exit3 reproduced for an absent simulator process,
+  consistent with already-exited test app. Preserve acceptance; raw original stderr
+  unavailable, so do not generalize every termination3 into success.
+- Later system-Python missing psycopg is an environment error, not D3 regression.
+  Added executable shell wrapper: reuse external venv, explicit --setup to stable
+  user directory with pinned dependency. No global pip/vendor or credential logs.
+  Existing external pooler-host loader and all getpass prompts retained.
+- Six new offline wrapper tests, shell/Python syntax, credential and diff checks PASS.
+  Prior49 Python and15 Flutter checks retained; no accepted production runtime rerun.
+- Current-status/D3/scoring/Study/architecture/index updated. iPhone physical subset
+  and UI polish PASS preserved; Focus details/reboot/Android physical still pending.
+  No production DB/schema/RPC or app feature changes; no Push/PR/Merge.

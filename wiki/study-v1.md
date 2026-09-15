@@ -489,8 +489,9 @@ links, accessible answer review and secondary source details. The v3 envelope ac
 additive optional provenance, local completion date and subject fields; old records,
 owner isolation and Study/scoring outboxes are retained. Auth submitted_at and source
 come from RPC/read-back; Guest stores pinned source with its Dart result. No recompute
-on restoration, no automatic upload or retention limit. D3 final acceptance remains
-pending real A/B runtime; physical B/C gates remain independent.
+on restoration, no automatic upload or retention limit. D3 is COMPLETE following
+Owner-reported actual A/B Flutter runtime and all cleanup/trigger/baseline/data/Auth
+retention PASS on2026-09-15. Physical B/C gates remain independent.
 
 ## 2026-09-14 Study/Home polish and iPhone physical subset
 

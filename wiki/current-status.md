@@ -1,10 +1,10 @@
 # Current Status
 
-Last reviewed: 2026-09-14
+Last reviewed: 2026-09-15
 
 ## Phase
 
-**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; Owner-reported iOS lifecycle subset PASS, Focus guidance and remaining physical checks pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; Owner-reported iPhone timeUp/notification/kill-restore PASS, remaining physical checks pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX implemented; local checks and Guest native runtime PASS, actual A/B runtime pending. Day 8 overall is not COMPLETE.**
+**Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; Owner-reported iOS lifecycle subset PASS, Focus guidance and remaining physical checks pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; Owner-reported iPhone timeUp/notification/kill-restore PASS, remaining physical checks pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX = COMPLETE (Owner-reported actual A/B Flutter runtime and full cleanup/retention PASS). Day 8 overall is not COMPLETE.**
 
 Product Owner accepted the final runtime results. Day 7 live deployment/JWT/Flutter results below are owner-reported.
 Day 8 production migration and full real A/B Study JWT acceptance are also
@@ -30,22 +30,37 @@ in [log.md](log.md); this page describes the current state rather than historica
 - [Polish scope and UI evidence](study-home-ui-polish.md). D3 A/B runtime issues
   remain separate. No DB/schema/migration/RPC changes or Push/PR/Merge.
 
-## Day 8-D3 Grade + Result UX — implemented, NOT COMPLETE
+## Day 8-D3 Grade + Result UX — COMPLETE
 
-- Shared confirmed/estimated/unavailable text with validated source basis, raw score
-  hierarchy, correct/wrong/unanswered summary and accessible answer-review jump links.
-- Auth preserves RPC/fetch-own provenance and submission date; Guest preserves pinned
-  source with its Dart result. Native v3 optional fields keep old records and outboxes.
-  Source-less D2 caches keep scores/answers but do not display an unverified grade.
-- 242 Flutter tests (228 retained +14 D3), analyze, Android debug and iOS simulator
-  builds PASS. Native synthetic Guest all-three-status/source/review/historic-restore/
-  whole-file cleanup PASS. See [D3 evidence](day-8-d3-grade-result.md).
-- Actual D3 A/B and production version/fixture/trigger/baseline runtime NOT RUN. This
-  request forbids production scoring data input; the prepared Owner runner requires
-  separate authorization. Existing D2 runtime PASS does not close this D3 gate.
-- DB/schema/migrations/RPC unchanged; no production request, Push, PR or Merge.
-  Full history/deletion/subscriptions excluded; Entitlement planning in architecture.md.
-- Next: Owner-authorized D3 A/B runtime acceptance. B/C physical gates stay pending.
+- Owner reports actual A/B Flutter runtime PASS: login, confirmed/estimated/unavailable
+  grades, summary, answer review, provenance, native restore, historical-version
+  semantics, exact retry, account isolation, legacy fallback and Study/Home navigation.
+- Local fixture cleanup and run-UUID scope, production fixture cleanup, three-trigger
+  restoration, scoring baseline, existing-data preservation and Auth retention PASS.
+  Final `Flutter grade result smoke: PASS`; Flutter subprocess exit0.
+- Extra simulator termination exit3 is consistent with an already-stopped process:
+  independently reproduced with an absent diagnostic bundle. It is not the Flutter
+  test exit code and does not reopen accepted D3 results. See [evidence](day-8-d3-grade-result.md).
+- D1/D2/D3 COMPLETE. Day8 overall remains NOT COMPLETE. Existing iPhone physical
+  subset and UI polish PASS retained; iOS Focus details, reboot and Android physical
+  DND/notification/restore remain open.
+- Short Owner command: `./tool/run_mock_grade_flutter_smoke.sh /path/to/local-config.json`.
+  Wrapper reuses a dedicated external venv; `--setup` explicitly creates the stable
+  user venv if needed. System Python missing psycopg is an environment issue, not
+  an acceptance failure. External pooler-host auto-load and password getpass retained.
+- This closeout makes no production request/schema/RPC or Flutter feature change.
+
+## Local verifier configuration — 2026-09-15
+
+- D1 verifier and D2/D3 Flutter runners share `admin_host_from_config` in the existing
+  scoring verifier module. Optional external `SUPABASE_SESSION_POOLER_HOST` skips
+  only the host prompt; absent key retains interactive host/direct-DB fallback.
+  Invalid present values fail closed without printing the value.
+- A/B and DB passwords remain getpass-only. No local config edit, credential storage,
+  production call, schema/RPC change or D3 acceptance claim. Offline49 tests,
+  Python syntax/credential scan/diff checks PASS.
+- TODO (separate future scope): evaluate macOS Keychain retrieval for
+  TEST_A_PASSWORD, TEST_B_PASSWORD and DB password; not implemented now.
 
 ## Day 8-D2 runtime acceptance — COMPLETE
 

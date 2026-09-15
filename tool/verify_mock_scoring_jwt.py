@@ -46,11 +46,29 @@ def uuid_value(value):
     return str(uuid.UUID(str(value)))
 
 
-def admin_settings(host, password):
-    """Construct a project-pinned connection. No caller-supplied libpq options."""
+def validated_admin_host(host):
     direct = 'db.' + REF + '.supabase.co'
+    require(isinstance(host, str), 'ADMIN_HOST')
     pooler = re.fullmatch(r'aws-[0-9]+-[a-z0-9-]+\.pooler\.supabase\.com', host)
     require(host == direct or pooler is not None, 'ADMIN_HOST')
+    return host
+
+
+def admin_host_from_config(config):
+    """Optional external host only; passwords always remain hidden terminal input."""
+    key = 'SUPABASE_SESSION_POOLER_HOST'
+    if key in config:
+        host = config[key]
+        require(isinstance(host, str) and bool(host.strip()), 'ADMIN_HOST')
+        return validated_admin_host(host.strip())
+    host = input('Supabase Connect Session pooler host (blank = direct DB) > ').strip()
+    return validated_admin_host(host or 'db.' + REF + '.supabase.co')
+
+
+def admin_settings(host, password):
+    """Construct a project-pinned connection. No caller-supplied libpq options."""
+    host = validated_admin_host(host)
+    direct = 'db.' + REF + '.supabase.co'
     require(bool(password), 'ADMIN_PASSWORD')
     return dict(host=host, port=5432, dbname='postgres',
                 user='postgres' if host == direct else 'postgres.' + REF,
@@ -480,14 +498,15 @@ def main():
         require(sys.stdin.isatty(),'INTERACTIVE_REQUIRED')
         path=args.public_config.resolve()
         require(not path.is_relative_to(Path(__file__).resolve().parents[1]),'EXTERNAL_CONFIG_REQUIRED')
-        app=Acceptance(json.loads(path.read_text()))
+        raw=json.loads(path.read_text())
+        app=Acceptance(raw)
         print('Target: LegendStudy / '+REF,flush=True)
         with warnings.catch_warnings():
             warnings.simplefilter('error',getpass.GetPassWarning)
             for who,email in EMAILS.items():
                 passwords[who]=getpass.getpass(f'Password for {who} ({email}) > ')
-            host=input('Supabase Connect Session pooler host (blank = direct DB) > ').strip()
-            settings=admin_settings(host or 'db.'+REF+'.supabase.co',getpass.getpass('LegendStudy DB password > '))
+            host=admin_host_from_config(raw)
+            settings=admin_settings(host,getpass.getpass('LegendStudy DB password > '))
         app.login(passwords)
         passwords.clear()
         app.stage='admin_preflight'; app.last=None
