@@ -230,7 +230,7 @@ void main() {
       expect(ContentResource.fromJson(json).displayTitle, '문제');
     },
   );
-  test('resource URL choice respects landing-page and safe HTTP boundary', () {
+  test('resource URL choice respects link kind and safe HTTP boundary', () {
     final json = resourceJson();
     expect(
       ContentResource.fromJson(json).openUri.toString(),
@@ -243,9 +243,47 @@ void main() {
     );
     json['link_kind'] = 'unknown';
     json['file_url'] = null;
+    expect(ContentResource.fromJson(json).openUri, isNull);
     expect(
-      ContentResource.fromJson(json).openUri.toString(),
+      resolveResourceOpenUri(
+        ContentResource.fromJson(json),
+        'https://legendstudy.com/post',
+      ).toString(),
+      'https://legendstudy.com/post',
+    );
+    json['link_kind'] = 'landing_page';
+    expect(
+      resolveResourceOpenUri(
+        ContentResource.fromJson(json),
+        'https://legendstudy.com/post',
+      ).toString(),
       'https://example.org/page',
+    );
+    json['link_kind'] = 'file';
+    json['file_url'] = null;
+    expect(
+      resolveResourceOpenUri(
+        ContentResource.fromJson(json),
+        'https://legendstudy.com/post',
+      ),
+      isNull,
+    );
+    expect(resourceTypeLabels['question'], '문제');
+    expect(resourceTypeLabels['answer_explanation'], '정답·해설');
+    expect(resourceTypeLabels['listening_audio'], '영어 듣기');
+    json['link_kind'] = 'unknown';
+    expect(
+      resolveResourceOpenUri(ContentResource.fromJson(json), 'javascript:bad'),
+      isNull,
+    );
+    json['link_kind'] = 'file';
+    json['file_url'] = 'javascript:bad';
+    expect(
+      resolveResourceOpenUri(
+        ContentResource.fromJson(json),
+        'https://legendstudy.com/post',
+      ),
+      isNull,
     );
     json['source_url'] = 'javascript:alert(1)';
     expect(ContentResource.fromJson(json).openUri, isNull);

@@ -19,7 +19,7 @@ const resourceTypeLabels = {
   'answer': '정답',
   'explanation': '해설',
   'answer_explanation': '정답·해설',
-  'listening_audio': '듣기',
+  'listening_audio': '영어 듣기',
   'listening_script': '듣기 대본',
   'grade_cut': '등급컷',
   'reference': '참고자료',
@@ -62,7 +62,9 @@ class ContentResource {
   // Link health is NOT exposed by the public grant; no availability claim is made.
   Uri? get openUri => linkKind == 'landing_page'
       ? publicWebUri(sourceUrl)
-      : publicWebUri(fileUrl) ?? publicWebUri(sourceUrl);
+      : linkKind == 'file'
+      ? publicWebUri(fileUrl)
+      : null;
   factory ContentResource.fromJson(Map<String, dynamic> json) {
     final occurrence = json['occurrence'] as Map<String, dynamic>?;
     final subject = occurrence?['subject'] as Map<String, dynamic>?;
@@ -92,4 +94,13 @@ class ContentResource {
       groupLabel: label,
     );
   }
+}
+
+Uri? resolveResourceOpenUri(ContentResource resource, String contentSourceUrl) {
+  return switch (resource.linkKind) {
+    'unknown' => publicWebUri(contentSourceUrl),
+    'landing_page' => publicWebUri(resource.sourceUrl),
+    'file' => publicWebUri(resource.fileUrl),
+    _ => null,
+  };
 }

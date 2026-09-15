@@ -1,5 +1,17 @@
 # Development Log
 
+## 2026-09-15 — Day 9-C1 Resource Detail + Safe Open Target
+
+- Reused the existing search → content-detail route and resource repository.
+- Added deterministic resource target resolution: unknown resources open only the
+  parent LegendStudy source, landing pages open their own source URL, and files
+  require a valid `file_url`; no source URL fallback is used for unknown/file.
+- Detail resource presentation keeps occurrence-scoped subject grouping, adds the
+  approved Korean labels and concise original-page guidance for unknown resources.
+- Relevant tests and analyzer pass. No bookmark/recent/MY, DB, ingestion,
+  publication or Production mutation. Day 9-C1 is implemented; Day 9-C remains
+  incomplete.
+
 ## 2026-09-12
 
 - Created public GitHub repository `LC3808/legendstudy-app`.

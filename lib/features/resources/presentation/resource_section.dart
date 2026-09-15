@@ -9,10 +9,12 @@ import '../resource_providers.dart';
 class ResourceSection extends ConsumerWidget {
   const ResourceSection({
     required this.contentItemId,
+    required this.contentSourceUrl,
     required this.isArticle,
     super.key,
   });
   final String contentItemId;
+  final String contentSourceUrl;
   final bool isArticle;
   @override
   Widget build(BuildContext context, WidgetRef ref) => ref
@@ -70,12 +72,23 @@ class ResourceSection extends ConsumerWidget {
                           if (item.sourceLabel?.trim().isNotEmpty == true &&
                               item.sourceLabel != item.displayTitle)
                             Text(item.sourceLabel!),
-                          if (item.openUri == null)
+                          if (resolveResourceOpenUri(item, contentSourceUrl) ==
+                              null)
                             const Text('열 수 있는 링크가 없어요.')
                           else
-                            ExternalLinkButton(
-                              uri: item.openUri,
-                              label: '외부 링크 열기',
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (item.linkKind == 'unknown')
+                                  const Text('원본 자료 페이지에서 열립니다.'),
+                                ExternalLinkButton(
+                                  uri: resolveResourceOpenUri(
+                                    item,
+                                    contentSourceUrl,
+                                  ),
+                                  label: '외부 링크 열기',
+                                ),
+                              ],
                             ),
                         ],
                       ),

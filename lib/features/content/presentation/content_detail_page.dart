@@ -82,6 +82,7 @@ class ContentDetailPage extends ConsumerWidget {
                         const SizedBox(height: 16),
                         ResourceSection(
                           contentItemId: item.id,
+                          contentSourceUrl: item.sourceUrl,
                           isArticle: [
                             'education_column',
                             'admissions_info',

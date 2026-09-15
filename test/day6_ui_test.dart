@@ -40,16 +40,20 @@ ContentResource resource({
   String id = 'r',
   String? occurrence,
   String group = '일반 자료',
+  String resourceType = 'question',
+  String linkKind = 'file',
+  String sourceUrl = 'https://example.org/page',
+  String? fileUrl = 'https://example.org/file.pdf',
 }) => ContentResource(
   id: id,
   contentItemId: 'parent',
   examSubjectId: occurrence,
   groupLabel: group,
-  resourceType: 'question',
+  resourceType: resourceType,
   title: '첨부 $id',
-  sourceUrl: 'https://example.org/page',
-  fileUrl: 'https://example.org/file.pdf',
-  linkKind: 'file',
+  sourceUrl: sourceUrl,
+  fileUrl: fileUrl,
+  linkKind: linkKind,
 );
 
 class Parents implements ContentRepository {
@@ -91,10 +95,12 @@ void main() {
   late Parents parents;
   late Exams exams;
   late Resources resources;
+  Uri? opened;
   setUp(() {
     parents = Parents();
     exams = Exams();
     resources = Resources();
+    opened = null;
   });
   Future<ProviderContainer> mount(
     WidgetTester tester, {
@@ -108,7 +114,10 @@ void main() {
         ),
         examRepositoryProvider.overrideWithValue(exams),
         resourceRepositoryProvider.overrideWithValue(resources),
-        externalOpenerProvider.overrideWithValue((_) async => true),
+        externalOpenerProvider.overrideWithValue((uri) async {
+          opened = uri;
+          return true;
+        }),
       ],
     );
     addTearDown(container.dispose);
@@ -310,6 +319,46 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('일반 자료'), findsOneWidget);
     expect(find.text('외부 링크 열기'), findsOneWidget);
+  });
+  testWidgets(
+    'unknown resources open the parent source, not the resource URL',
+    (tester) async {
+      resources.result = () async => [
+        resource(
+          linkKind: 'unknown',
+          sourceUrl: 'https://blog.kakaocdn.net/unsigned.pdf',
+          fileUrl: null,
+        ),
+      ];
+      await mount(tester, route: '/materials/fixture');
+      await tester.pumpAndSettle();
+      expect(find.text('원본 자료 페이지에서 열립니다.'), findsOneWidget);
+      await tester.ensureVisible(find.text('외부 링크 열기'));
+      await tester.tap(find.text('외부 링크 열기'));
+      await tester.pumpAndSettle();
+      expect(opened.toString(), 'https://legendstudy.com/1');
+      expect(opened.toString(), isNot(contains('kakaocdn')));
+    },
+  );
+  testWidgets('landing listening resources open their own landing page', (
+    tester,
+  ) async {
+    resources.result = () async => [
+      resource(
+        resourceType: 'listening_audio',
+        linkKind: 'landing_page',
+        sourceUrl: 'https://app.box.com/s/english-audio',
+        fileUrl: null,
+        group: '영어',
+      ),
+    ];
+    await mount(tester, route: '/materials/fixture');
+    await tester.pumpAndSettle();
+    expect(find.text('영어 듣기'), findsOneWidget);
+    await tester.ensureVisible(find.text('외부 링크 열기'));
+    await tester.tap(find.text('외부 링크 열기'));
+    await tester.pumpAndSettle();
+    expect(opened.toString(), 'https://app.box.com/s/english-audio');
   });
   testWidgets(
     'article with zero resources has source action without large empty card',

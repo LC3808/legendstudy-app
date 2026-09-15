@@ -422,6 +422,23 @@ stays that way until (a) 9-C routes `link_kind='unknown'` resources to the
 content item's `source_url`, and (b) the Owner approves the activation step
 separately. Ingestion success is not publication.
 
+## Day 9-C1 Resource Detail + Safe Open Target — IMPLEMENTED
+
+- Existing search → detail navigation now renders resources by occurrence/subject
+  using the existing bounded `content_item_id` resource query. Canonical subject
+  names remain preferred, with raw-label fallback.
+- Open targets are deterministic: `unknown` uses the parent `ContentItem.sourceUrl`,
+  `landing_page` uses the resource URL, and `file` uses only a valid `file_url`.
+  Unsafe or missing targets do not launch. External opening remains native
+  `LaunchMode.externalApplication` with a safe failure message.
+- Resource labels include `문제`, `정답·해설`, and `영어 듣기`; unknown resources
+  show the short original-page guidance. No bookmark/recent/MY change.
+- Relevant 32 tests and `flutter analyze` pass. Android/iOS build validation and
+  full regression are tracked separately in this closeout. No DB, Production,
+  publication, ingestion, or schema change.
+- **Day 9-C1 is implemented. Day 9-C overall is NOT COMPLETE.** C2 may start
+  after this C1 closeout; C2 owns bookmark/recent views.
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.
