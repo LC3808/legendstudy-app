@@ -334,6 +334,38 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   policy blocks legendstudy.com from both shells. It must be run once on a
   machine with egress before any apply.
 
+## Day 9-B2 Taxonomy + Pilot package — prepared, NOT applied
+
+- Owner decisions recorded: modern attachment access option **(a)** (searchable
+  metadata in production; the original legendstudy.com post is the read path,
+  opened externally, WebView still forbidden, no Storage mirror); Production
+  Pilot **C** (2025–2026, all grades) approved; `subjects` seeded before the
+  pilot; the ~1,400 legacy posts deferred.
+- Canonical subject taxonomy **v1 = 23 subjects**, not 36. 국어/수학 선택과목 are
+  paper variants under their 영역; the nine 사탐 and eight 과탐 details stay
+  distinct; 사회/과학/사회탐구/과학탐구 are grade-1 spellings of 통합사회/통합과학.
+  Deterministic ids `uuid5(ns, "v1:<code>")`, `taxonomy_version='v1'`,
+  `curriculum_version` NULL, `parent_id` NULL, grouping by public `category`.
+  **No schema change and no migration** — one data seed.
+- Pilot C mapping: **363 / 363 occurrences provisional, 0 unmapped, 0 ambiguous**
+  (160 exact, 203 documented alias). All 23 subjects used. `verified` is never
+  produced by automated ingestion.
+- Expected pilot rows: subjects +23, source_posts +23, content_items +23,
+  exams +23, exam_subjects +363, resources +716, quarantine +23 (advisory).
+- Apply package prepared: preflight / network smoke / live dry-run / seed /
+  apply / postflight / publication / rollback. Guards implemented and tested;
+  `--apply` still refuses every argument combination.
+- `Production pilot 적용 준비:` **package YES, execution NO.** Package steps 1–4
+  are Owner-executable; the ingestion writer has no write path yet.
+- Publication precondition: 9-C must route `link_kind='unknown'` resources to
+  the content item's `source_url`. `content_items.source_url`, `link_kind` and
+  `LaunchMode.externalApplication` already exist, so no schema, projection or
+  repository change is needed — only the open-target rule.
+- 91 offline tests PASS. No production write, migration, schema change,
+  Supabase call, push, PR or merge.
+  See [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md) and
+  [day-9-pilot-c-package.md](day-9-pilot-c-package.md).
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.

@@ -56,3 +56,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 9-A Search / Explore — COMPLETE / validation environment](day-9-search-explore.md)
 
 - [Day 9-B Ingestion — survey, pipeline, dry-run; production gate open](day-9-ingestion.md)
+
+- [Subjects taxonomy v1 — canonical subjects and raw-label mapping](day-9-subjects-taxonomy.md)
+
+- [Day 9-B2 Pilot C — production apply package, not executed](day-9-pilot-c-package.md)

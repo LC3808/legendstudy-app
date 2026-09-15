@@ -596,3 +596,81 @@ copy is committed at `tool/ingestion/samples/dryrun-2026-09-15/`:
 `day9b_exam_posts.jsonl` (38 posts, 1,205 attachments) are the extracted
 records the offline dry-run and tests run against. They hold metadata only —
 no page HTML, no article body text, no attachment bytes, no signed query.
+
+---
+
+# Day 9-B2 — taxonomy + pilot package (2026-09-15)
+
+Owner decisions applied: modern attachment access option **(a)**; Production
+Pilot **C** approved; `subjects` seeded before the pilot; legacy deferred.
+
+- Canonical taxonomy v1 designed and seeded as a package —
+  [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md). 36 raw tokens
+  resolve to **23** canonical subjects, not 36. Deterministic ids
+  (`uuid5(ns, "v1:<code>")`), `taxonomy_version='v1'`, no schema change.
+- Pilot C mapping dry-run: **363 / 363 occurrences provisional, 0 unmapped,
+  0 ambiguous, 0 taxonomy gaps** (160 exact, 203 documented alias). All 23
+  subjects are used, so the seed has no dead row. `verified` is never produced
+  by automated ingestion.
+- Apply package with preflight / smoke / live dry-run / seed / apply / postflight
+  / publication / rollback — [day-9-pilot-c-package.md](day-9-pilot-c-package.md).
+- Apply guards implemented and tested (`assert_in_scope`, `assert_no_collisions`,
+  `expected_rows`, `PILOT_C`); `assert_apply_allowed` still refuses every
+  argument combination. **No production write was performed.**
+
+## Production gate — updated
+
+The Day 9-B BLOCKER is resolved as a policy, not as code: option (a) keeps the
+unsigned kakaocdn path as identity only and sends the reader to the original
+post. The remaining precondition moved from "which option" to one concrete UI
+rule, and it is now the publication gate rather than the ingestion gate.
+
+`Production pilot 적용 준비:` **package YES, execution NO.**
+
+- Steps 1–4 of the package (preflight, network smoke, live dry-run, subjects
+  seed) are executable by the Owner today.
+- Step 5, the ingestion apply, still has **no write path in code** — that is the
+  Codex handoff.
+- Publication stays gated on the 9-C open-target rule below.
+
+## 9-C contract — original post fallback
+
+`content_items.source_url` already holds the post URL, is already in
+`SupabaseContentRepository.projection`, and is already exposed as
+`ContentItem.sourceUrl`. `lib/core/links/external_link.dart` already opens with
+`LaunchMode.externalApplication`, so the WebView-free requirement is met by
+existing code. **No schema, projection or repository change is required.**
+
+One presentation rule must change before resources are published:
+`ContentResource.openUri` falls back to `source_url` whenever `link_kind` is not
+`landing_page`, so all 716 pilot resources — every one `link_kind='unknown'`
+with an unsigned kakaocdn locator — would open a 403. 9-C routes
+`link_kind='unknown'` to the content item's `source_url` instead. `link_kind` is
+already in `SupabaseResourceRepository.projection`, so the rule is data-driven:
+
+| `link_kind` | open target |
+|---|---|
+| `file` (legacy cfile, unsigned and stable) | the resource URL |
+| `landing_page` (Box, Drive) | the resource URL |
+| `unknown` (modern kakaocdn, signed) | the **original post** |
+
+The existing caveat copy — "외부 사이트에서 열립니다. 링크의 현재 이용 가능
+여부는 확인되지 않았어요." — stays accurate and needs no change.
+
+## Day 9-B2 artifacts
+
+`tool/ingestion/samples/dryrun-2026-09-15/` is the Day 9-B evidence and is left
+exactly as it was committed — occurrences there are `unmapped`, because the
+taxonomy did not exist yet. Reproduce it with `--no-taxonomy`.
+
+`tool/ingestion/samples/pilot-c-2026-09-15/` is the Day 9-B2 evidence: the
+approved Pilot C scope with taxonomy v1 applied. Its `dryrun-posts.csv` carries
+two extra columns, `subject_codes` and `mapping_status`, and is the
+authoritative post-id list for the package's preflight queries. Reproduce with:
+
+```
+python3 tool/ingest_legendstudy.py --pilot c --out build/pilot-c
+```
+
+Taxonomy mapping is on by default from Day 9-B2; `--no-taxonomy` restores the
+Day 9-B planning behaviour.

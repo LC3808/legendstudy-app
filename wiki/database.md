@@ -163,6 +163,13 @@ Home's source publication/update clock. UUID only breaks ties.
 
 ### subjects / exam_subjects — preserve historical taxonomy
 
+Taxonomy v1 (`taxonomy_version='v1'`, 23 subjects) is designed and packaged in
+[day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md); it is a data seed, not
+a schema change, and is **not applied**. Subject ids are deterministic
+(`uuid5(uuid5(URL,'https://legendstudy.com/taxonomy'), '<version>:<code>')`), so
+`subjects.id` is supplied explicitly rather than defaulted. Automated ingestion
+plans occurrences as `provisional` only and never writes `verified`.
+
 Subjects: UUID id, code (lowercase/underscore), name, optional category,
 required taxonomy_version, optional curriculum_version/parent_id, is_active,
 sort_order >= 0, timestamps. UNIQUE(taxonomy_version, code) and UNIQUE(id,

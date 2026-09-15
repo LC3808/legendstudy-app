@@ -13,6 +13,7 @@ import re
 from . import MAPPING_RULE_VERSION, PARSER_VERSION, SOURCE
 from .models import PlannedPost, QuarantineCase, RawPost
 from .parser import parse_title, split_resource_kind, split_subject
+from .subjects import TAXONOMY_VERSION, map_subject, subject_id
 from .taxonomy import (
     ACADEMIC_YEAR_TRUSTED, CATEGORY_CONTENT_TYPE, EXAM_SUBCATEGORY,
     GRADE_SPACE, clean,
@@ -36,6 +37,7 @@ KINDS = (
     'resource_url_expiring',
     'merge_candidate_exam',
     'source_missing',
+    'subject_taxonomy_gap',
 )
 # Advisory cases: a known, uniform property of the source, not a per-post
 # ambiguity. They are still recorded for review but must not make one post look
@@ -148,6 +150,28 @@ def _exam_row(facts: dict, cases: list[QuarantineCase], post_id: str) -> dict | 
     }
 
 
+def _apply_taxonomy(occurrences: list[dict], grade_level: int | None,
+                    post_id: str, cases: list[QuarantineCase]) -> None:
+    """Attach a provisional taxonomy mapping. Never produces `verified`."""
+    for occ in occurrences:
+        mapping = map_subject(occ['source_subject_key'], grade_level)
+        occ['mapping_reason'] = mapping.reason
+        if mapping.status != 'provisional':
+            if mapping.reason == 'no rule for this raw label':
+                cases.append(QuarantineCase(
+                    'subject_taxonomy_gap', post_id,
+                    'Raw subject label has no taxonomy rule; occurrence stays unmapped.',
+                    {'raw_subject_label': occ['source_subject_key']}))
+            continue
+        occ['subject_id'] = subject_id(mapping.code)
+        occ['subject_code'] = mapping.code
+        occ['taxonomy_version'] = TAXONOMY_VERSION
+        occ['mapping_status'] = 'provisional'
+        occ['mapping_confidence'] = mapping.confidence
+        occ['mapping_note'] = '; '.join(
+            x for x in (occ.get('mapping_note'), mapping.note) if x) or None
+
+
 def _resource_rows(post: RawPost, is_exam: bool,
                    cases: list[QuarantineCase]) -> tuple[list[dict], list[dict]]:
     occurrences: dict[str, dict] = {}
@@ -247,7 +271,7 @@ def _resource_rows(post: RawPost, is_exam: bool,
     return list(occurrences.values()), resources
 
 
-def normalize(post: RawPost, crawled_at: str) -> PlannedPost:
+def normalize(post: RawPost, crawled_at: str, map_subjects: bool = False) -> PlannedPost:
     cases: list[QuarantineCase] = []
     content_type, cls_case = classify(post.category)
     if cls_case:
@@ -259,6 +283,9 @@ def normalize(post: RawPost, crawled_at: str) -> PlannedPost:
     is_exam = content_type == 'exam'
     exam = _exam_row(facts, cases, post.external_post_id) if is_exam else None
     occurrences, resources = _resource_rows(post, is_exam, cases)
+    if map_subjects and occurrences:
+        _apply_taxonomy(occurrences, (exam or {}).get('grade_level'),
+                        post.external_post_id, cases)
 
     source_post = {
         'source': SOURCE,

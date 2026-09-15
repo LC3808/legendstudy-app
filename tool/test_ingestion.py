@@ -25,7 +25,14 @@ from ingestion.parser import (  # noqa: E402
     parse_title, split_resource_kind, split_subject, strip_query,
 )
 from ingestion.pipeline import next_state, run  # noqa: E402
-from ingestion.writer import ApplyRefused, assert_apply_allowed  # noqa: E402
+from ingestion.subjects import (  # noqa: E402
+    ALIASES, BY_CODE, DEFERRED_HISTORICAL, GRADE_SCOPED, SUBJECTS_V1,
+    TAXONOMY_VERSION, map_subject, subject_id,
+)
+from ingestion.writer import (  # noqa: E402
+    PILOT_C, ApplyRefused, ScopeViolation, assert_apply_allowed, assert_in_scope,
+    assert_no_collisions, expected_rows,
+)
 
 CRAWLED_AT = '2026-09-15T02:00:00+00:00'
 SIGNED = ('https://blog.kakaocdn.net/dna/cXNYPE/dJMcadW9IkW/AAAA/'
@@ -519,6 +526,203 @@ class ApplyGateTests(unittest.TestCase):
         with self.assertRaises(ApplyRefused) as ctx:
             assert_apply_allowed('muselry-project-ref', True)
         self.assertIn('stlhijzpjfgwwdgunlsd', str(ctx.exception))
+
+
+
+
+class TaxonomyTests(unittest.TestCase):
+    def test_row_shape_matches_the_subjects_check_constraints(self):
+        for s in SUBJECTS_V1:
+            self.assertRegex(s.code, r'^[a-z0-9]+(_[a-z0-9]+)*$', s.code)
+            self.assertTrue(s.name.strip(), s.code)
+            self.assertGreaterEqual(s.sort_order, 0)
+            self.assertTrue(TAXONOMY_VERSION.strip())
+
+    def test_codes_ids_names_and_sort_orders_are_unique(self):
+        for attr in ('code', 'name', 'sort_order'):
+            values = [getattr(s, attr) for s in SUBJECTS_V1]
+            self.assertEqual(len(values), len(set(values)), attr)
+        self.assertEqual(len({s.id for s in SUBJECTS_V1}), len(SUBJECTS_V1))
+
+    def test_subject_id_is_deterministic_and_version_scoped(self):
+        self.assertEqual(subject_id('korean'), subject_id('korean'))
+        self.assertNotEqual(subject_id('korean'), subject_id('math'))
+        self.assertNotEqual(subject_id('korean', 'v1'), subject_id('korean', 'v2'))
+        self.assertEqual(subject_id('korean'), '9ae14424-dad0-593c-bf7e-96dca10e719f')
+
+    def test_every_alias_target_exists(self):
+        for raw, (code, _c, _n) in ALIASES.items():
+            self.assertIn(code, BY_CODE, raw)
+        for raw, per_grade in GRADE_SCOPED.items():
+            for code, _c, _n in per_grade.values():
+                self.assertIn(code, BY_CODE, raw)
+
+    def test_selection_subjects_resolve_to_their_area(self):
+        for raw in ('국어(화작)', '국어(언매)', '국어(공통)'):
+            self.assertEqual(map_subject(raw, 3).code, 'korean', raw)
+        for raw in ('수학(확통)', '수학(미적)', '수학(기하)', '수학(공통)'):
+            self.assertEqual(map_subject(raw, 3).code, 'math', raw)
+
+    def test_social_and_science_details_stay_distinct(self):
+        pairs = {'생활과윤리': 'life_ethics', '윤리와사상': 'ethics_thought',
+                 '한국지리': 'korean_geography', '세계지리': 'world_geography',
+                 '동아시아사': 'east_asian_history', '세계사': 'world_history',
+                 '경제': 'economics', '정치와법': 'politics_law',
+                 '사회문화': 'society_culture', '물리학1': 'physics_1',
+                 '물리학2': 'physics_2', '화학1': 'chemistry_1',
+                 '생명과학2': 'life_science_2', '지구과학1': 'earth_science_1'}
+        for raw, code in pairs.items():
+            self.assertEqual(map_subject(raw, 3).code, code, raw)
+        self.assertEqual(len({map_subject(r, 3).code for r in pairs}), len(set(pairs.values())))
+
+    def test_grade_scoped_tokens_need_a_grade(self):
+        self.assertEqual(map_subject('사회', 1).code, 'integrated_social')
+        self.assertEqual(map_subject('과학탐구', 1).code, 'integrated_science')
+        self.assertEqual(map_subject('물리학', 2).code, 'physics_1')
+        for raw in ('사회', '물리학'):
+            self.assertIsNone(map_subject(raw, None).code, raw)
+            self.assertEqual(map_subject(raw, None).status, 'unmapped')
+        self.assertIsNone(map_subject('물리학', 3).code)
+
+    def test_historical_labels_are_deferred_not_mapped(self):
+        for raw in DEFERRED_HISTORICAL:
+            mapping = map_subject(raw, 3)
+            self.assertEqual(mapping.status, 'unmapped', raw)
+            self.assertIsNone(mapping.code, raw)
+            self.assertIn('historical', mapping.reason)
+
+    def test_unknown_label_is_never_forced(self):
+        mapping = map_subject('수학(미정)', 3)
+        self.assertEqual(mapping.status, 'unmapped')
+        self.assertEqual(mapping.reason, 'no rule for this raw label')
+
+    def test_automated_mapping_never_produces_verified(self):
+        for raw in list(ALIASES) + list(GRADE_SCOPED) + ['알수없는과목']:
+            for grade in (None, 1, 2, 3):
+                self.assertNotEqual(map_subject(raw, grade).status, 'verified')
+
+
+class TaxonomyIngestionTests(unittest.TestCase):
+    def plan(self, raw_names, grade_title='→ [2026년 5월 시행] 2026년 5월 고3 모의고사'):
+        return normalize(raw(title=grade_title,
+                             attachments=[att(f'k/{i}', n) for i, n in enumerate(raw_names)]),
+                         CRAWLED_AT, map_subjects=True)
+
+    def test_default_is_still_unmapped(self):
+        plan = normalize(raw(attachments=[att('a/b', '국어 문제.pdf')]), CRAWLED_AT)
+        self.assertEqual(plan.occurrences[0]['mapping_status'], 'unmapped')
+        self.assertIsNone(plan.occurrences[0]['subject_id'])
+
+    def test_provisional_row_satisfies_the_mapping_state_check(self):
+        occ = self.plan(['국어 문제.pdf']).occurrences[0]
+        self.assertEqual(occ['mapping_status'], 'provisional')
+        self.assertIsNotNone(occ['subject_id'])
+        self.assertEqual(occ['taxonomy_version'], TAXONOMY_VERSION)
+        self.assertIsNotNone(occ['mapping_confidence'])
+        self.assertIsNone(occ['verified_at'])
+        self.assertGreaterEqual(occ['mapping_confidence'], 0)
+        self.assertLessEqual(occ['mapping_confidence'], 1)
+
+    def test_raw_label_and_source_key_survive_mapping(self):
+        occ = self.plan(['2026년 5월 고3_국어(언매) 정답,해설.pdf']).occurrences[0]
+        self.assertEqual(occ['source_subject_key'], '국어(언매)')
+        self.assertEqual(occ['raw_subject_label'], '국어(언매)')
+        self.assertEqual(occ['subject_code'], 'korean')
+
+    def test_two_electives_stay_two_occurrences_under_one_subject(self):
+        plan = self.plan(['국어(화작) 문제.pdf', '국어(언매) 문제.pdf'])
+        self.assertEqual(len(plan.occurrences), 2)
+        self.assertEqual({o['subject_code'] for o in plan.occurrences}, {'korean'})
+        self.assertEqual(len({o['source_subject_key'] for o in plan.occurrences}), 2)
+
+    def test_unmappable_label_records_a_taxonomy_gap(self):
+        plan = self.plan(['국어 문제.pdf', '알수없는것 문제.pdf'])
+        self.assertIn('resource_subject_unknown', {c.kind for c in plan.quarantine})
+
+    def test_grade_context_comes_from_the_parsed_exam(self):
+        plan = self.plan(['사회 문제.pdf'], '→ 2026년 3월 고1 모의고사')
+        self.assertEqual(plan.occurrences[0]['subject_code'], 'integrated_social')
+
+    def test_mapping_is_deterministic_across_runs(self):
+        a, b = self.plan(['국어 문제.pdf', '물리학1 문제.pdf']), self.plan(['국어 문제.pdf', '물리학1 문제.pdf'])
+        self.assertEqual([o['subject_id'] for o in a.occurrences],
+                         [o['subject_id'] for o in b.occurrences])
+
+
+class PilotScopeTests(unittest.TestCase):
+    SAMPLES = Path(__file__).resolve().parent / 'ingestion/samples'
+
+    def pilot(self):
+        posts = SampleSource(self.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        result = run(posts, CRAWLED_AT, map_subjects=True)
+        return result, [p for p in result.plans if p.exam and p.exam['year'] >= 2025]
+
+    def test_pilot_c_mapping_coverage_is_total(self):
+        _result, pilot = self.pilot()
+        occurrences = [o for p in pilot for o in p.occurrences]
+        self.assertEqual(len(occurrences), 363)
+        self.assertEqual({o['mapping_status'] for o in occurrences}, {'provisional'})
+        self.assertEqual(len({o['subject_code'] for o in occurrences}), len(SUBJECTS_V1))
+
+    def test_pilot_c_expected_row_counts(self):
+        _result, pilot = self.pilot()
+        self.assertEqual(expected_rows(pilot), {
+            'source_posts': 23, 'content_items': 23, 'exams': 23,
+            'exam_subjects': 363, 'resources': 716})
+
+    def test_pilot_c_passes_the_scope_and_collision_guards(self):
+        _result, pilot = self.pilot()
+        assert_in_scope(pilot, PILOT_C)
+        assert_no_collisions(pilot)
+
+    def test_out_of_scope_year_is_refused(self):
+        result, _pilot = self.pilot()
+        with self.assertRaises(ScopeViolation):
+            assert_in_scope(result.plans, PILOT_C)
+
+    def test_active_row_is_refused(self):
+        _result, pilot = self.pilot()
+        pilot[0].content_item['is_active'] = True
+        try:
+            with self.assertRaises(ScopeViolation):
+                assert_in_scope(pilot, PILOT_C)
+        finally:
+            pilot[0].content_item['is_active'] = False
+
+    def test_verified_mapping_is_refused(self):
+        _result, pilot = self.pilot()
+        pilot[0].occurrences[0]['mapping_status'] = 'verified'
+        with self.assertRaises(ScopeViolation):
+            assert_in_scope(pilot, PILOT_C)
+
+    def test_duplicate_upsert_key_is_refused(self):
+        _result, pilot = self.pilot()
+        with self.assertRaises(ScopeViolation):
+            assert_no_collisions(pilot + [pilot[0]])
+
+
+class SeedPackageTests(unittest.TestCase):
+    SEED = Path(__file__).resolve().parent.parent / 'supabase/seed/subjects_taxonomy_v1.sql'
+
+    def test_seed_file_is_current_and_idempotent_by_construction(self):
+        from ingest_legendstudy import cmd_emit_seed
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / 'seed.sql'
+            cmd_emit_seed(out)
+            self.assertEqual(out.read_text(encoding='utf-8'),
+                             self.SEED.read_text(encoding='utf-8'),
+                             'committed seed is stale; re-run --emit-subjects-seed')
+            body = out.read_text(encoding='utf-8')
+        self.assertIn('on conflict (taxonomy_version, code) do nothing', body)
+        self.assertNotIn('update', body.lower().replace('updated_at', ''))
+        self.assertNotIn('delete', body.lower())
+        for s in SUBJECTS_V1:
+            self.assertIn(s.id, body, s.code)
+            self.assertIn(f"'{s.code}'", body)
+
+    def test_seed_declares_every_row_active_and_parentless(self):
+        body = self.SEED.read_text(encoding='utf-8')
+        self.assertEqual(body.count(', null, true, '), len(SUBJECTS_V1))
 
 
 if __name__ == '__main__':

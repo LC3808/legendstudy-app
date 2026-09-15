@@ -7,6 +7,8 @@ is not the LegendStudy project.
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from .models import PlannedPost
 
 LEGENDSTUDY_PROJECT_REF = 'stlhijzpjfgwwdgunlsd'
@@ -56,3 +58,81 @@ def plan_statements(plan: PlannedPost) -> list[str]:
         out.append(f"upsert resources {UPSERT_ORDER[4][1]} -> {res['source_resource_key']} "
                    f"type {res['resource_type']} link_kind {res['link_kind']}")
     return out
+
+
+@dataclass(frozen=True)
+class PilotScope:
+    """A bounded, named apply scope. Nothing outside it may be written."""
+    name: str
+    min_year: int
+    max_year: int
+    content_types: frozenset
+
+
+PILOT_C = PilotScope('pilot-c-2025-2026', 2025, 2026, frozenset({'exam'}))
+
+
+class ScopeViolation(RuntimeError):
+    pass
+
+
+def expected_rows(plans: list[PlannedPost]) -> dict:
+    """Row counts an apply of these plans must produce, for pre/postflight diff."""
+    return {
+        'source_posts': len(plans),
+        'content_items': sum(1 for p in plans if p.content_item),
+        'exams': sum(1 for p in plans if p.exam),
+        'exam_subjects': sum(len(p.occurrences) for p in plans),
+        'resources': sum(len(p.resources) for p in plans),
+    }
+
+
+def assert_in_scope(plans: list[PlannedPost], scope: PilotScope) -> None:
+    """Refuse an apply set that reaches outside the approved pilot.
+
+    Checked before any write would be attempted: a scope slip is the one
+    mistake that a transaction cannot undo for the Owner afterwards.
+    """
+    for plan in plans:
+        if plan.content_item is None:
+            raise ScopeViolation(f'{plan.external_post_id}: no content item')
+        content_type = plan.content_item['content_type']
+        if content_type not in scope.content_types:
+            raise ScopeViolation(
+                f'{plan.external_post_id}: content_type {content_type!r} outside {scope.name}')
+        if plan.exam is None:
+            raise ScopeViolation(f'{plan.external_post_id}: exam extension missing')
+        year = plan.exam['year']
+        if not scope.min_year <= year <= scope.max_year:
+            raise ScopeViolation(
+                f'{plan.external_post_id}: year {year} outside {scope.name} '
+                f'({scope.min_year}-{scope.max_year})')
+        if not plan.publishable:
+            raise ScopeViolation(
+                f'{plan.external_post_id}: not a publish candidate ({plan.confidence})')
+        for occurrence in plan.occurrences:
+            if occurrence['mapping_status'] == 'verified':
+                raise ScopeViolation(
+                    f'{plan.external_post_id}: automated ingestion must never write a '
+                    f'verified mapping ({occurrence["source_subject_key"]})')
+        for row in (plan.content_item, *plan.occurrences, *plan.resources):
+            if row.get('is_active'):
+                raise ScopeViolation(
+                    f'{plan.external_post_id}: ingestion must plan is_active=false')
+
+
+def assert_no_collisions(plans: list[PlannedPost]) -> None:
+    """Every upsert key must be unique within the apply set."""
+    for label, keys in (
+        ('source_posts', [p.external_post_id for p in plans]),
+        ('content_items', [(p.external_post_id, p.content_item['source_content_key'])
+                           for p in plans if p.content_item]),
+        ('slug', [p.content_item['slug'] for p in plans if p.content_item]),
+        ('exam_subjects', [(p.external_post_id, o['source_subject_key'])
+                           for p in plans for o in p.occurrences]),
+        ('resources', [(p.external_post_id, r['source_post_external_id'],
+                        r['source_resource_key'])
+                       for p in plans for r in p.resources]),
+    ):
+        if len(keys) != len(set(keys)):
+            raise ScopeViolation(f'{label}: duplicate upsert key within the apply set')

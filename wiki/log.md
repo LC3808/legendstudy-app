@@ -982,3 +982,35 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   `Production pilot 적용 준비: NO`, pending one Owner decision on modern
   attachment access. Recommended pilot: 2025–2026 exam posts, 23 posts /
   23 exams / 363 exam_subjects / 716 resources, all publishable, zero quarantine.
+
+## 2026-09-15 — Day 9-B2 subjects taxonomy v1 + Pilot C apply package
+
+- Owner decisions recorded: modern attachment option (a) with the original post
+  as the read path, Pilot C approved, subjects seeded first, legacy deferred.
+- Designed canonical taxonomy v1: 36 raw tokens → 23 subjects. Decision basis
+  documented from existing contract, not preference — the schema separates
+  taxonomy from occurrence, Day 9-A's 과목 filter is flat with no parent
+  expansion, and the measured grade distribution shows which tokens are
+  spellings rather than subjects. 국어/수학 선택과목 map to their 영역 with the
+  raw label preserved; 사탐/과탐 details stay distinct.
+- Deterministic subject ids via uuid5 over "<taxonomy_version>:<code>", so a
+  re-seed produces identical rows. taxonomy_version 'v1'; curriculum_version and
+  parent_id left NULL with reasons recorded; grouping by the public `category`.
+- Pilot C mapping dry-run: 363/363 provisional, 0 unmapped, 0 ambiguous,
+  160 exact + 203 documented alias, all 23 subjects used.
+- Seed emitted to supabase/seed/subjects_taxonomy_v1.sql via a CLI flag and
+  asserted byte-identical by the test suite. INSERT … ON CONFLICT DO NOTHING
+  only: no UPDATE, no DELETE, so a released row can never be edited by it.
+- Added --pilot c / --no-taxonomy / --emit-subjects-seed to the CLI, and apply
+  guards assert_in_scope / assert_no_collisions / expected_rows with PILOT_C.
+  assert_apply_allowed still refuses every argument combination.
+- Found that ContentResource.openUri falls back to source_url for
+  link_kind='unknown', so all 716 pilot resources would open a 403. Recorded as
+  the publication precondition and the 9-C contract; content_items.source_url,
+  link_kind and LaunchMode.externalApplication already exist, so no schema,
+  projection or repository change is needed.
+- Prepared the full apply package (preflight/smoke/live dry-run/seed/apply/
+  postflight/publication/rollback) with measured expected row counts.
+- 91 offline tests PASS (65 → 91). No production write, migration, schema
+  change, Supabase call, push, PR or merge. Package steps 1-4 are
+  Owner-executable; the ingestion writer still has no write path.

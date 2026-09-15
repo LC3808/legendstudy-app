@@ -25,13 +25,21 @@ class DryRunResult:
         by_conf = Counter(p.confidence for p in self.plans)
         kinds = Counter(c.kind for c in self.quarantine)
         resources = [r for p in self.plans for r in p.resources]
+        occurrences = [o for p in self.plans for o in p.occurrences]
+        mapping = Counter(o['mapping_status'] for o in occurrences)
+        confidence = Counter(str(o['mapping_confidence']) for o in occurrences
+                             if o['mapping_confidence'] is not None)
         return {
             'posts_parsed': len(self.plans),
             'parse_errors': len(self.parse_errors),
             'content_items': sum(1 for p in self.plans if p.content_item),
             'content_types': dict(sorted(by_type.items())),
             'exams': sum(1 for p in self.plans if p.exam),
-            'exam_subjects': sum(len(p.occurrences) for p in self.plans),
+            'exam_subjects': len(occurrences),
+            'exam_subject_mapping': dict(sorted(mapping.items())),
+            'exam_subject_confidence': dict(sorted(confidence.items())),
+            'subjects_referenced': len({o['subject_id'] for o in occurrences
+                                        if o.get('subject_id')}),
             'resources': len(resources),
             'resource_types': dict(sorted(Counter(r['resource_type'] for r in resources).items())),
             'link_kinds': dict(sorted(Counter(r['link_kind'] for r in resources).items())),
@@ -56,14 +64,15 @@ def load_state(path: Path | None) -> dict:
     return {}
 
 
-def run(posts: list[RawPost], crawled_at: str, previous: dict | None = None) -> DryRunResult:
+def run(posts: list[RawPost], crawled_at: str, previous: dict | None = None,
+        map_subjects: bool = False) -> DryRunResult:
     previous = previous or {}
     result = DryRunResult()
     by_identity: dict[tuple, list[str]] = defaultdict(list)
 
     for post in posts:
         try:
-            plan = normalize(post, crawled_at)
+            plan = normalize(post, crawled_at, map_subjects=map_subjects)
         except Exception as exc:  # parser invariant failure: never silent
             result.parse_errors.append({
                 'external_post_id': post.external_post_id,
