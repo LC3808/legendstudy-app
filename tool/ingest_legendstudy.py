@@ -14,6 +14,7 @@ import argparse
 import csv
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -21,7 +22,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from ingestion import PARSER_VERSION  # noqa: E402
 from ingestion.crawler import (  # noqa: E402
-    DEFAULT_DELAY_SECONDS, FetchError, NetworkSource, PoliteFetcher, SampleSource,
+    DEFAULT_DELAY_SECONDS, DEFAULT_MAX_RETRIES, DEFAULT_TIMEOUT_SECONDS,
+    FetchError, NetworkSource, PoliteFetcher, SampleSource,
 )
 from ingestion.pipeline import DryRunResult, load_state, next_state, run  # noqa: E402
 from ingestion.normalizer import ADVISORY, BLOCKING  # noqa: E402
@@ -29,10 +31,58 @@ from ingestion.writer import ApplyRefused, assert_apply_allowed, plan_statements
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_SAMPLES = (REPO / 'tool/ingestion/samples/day9b_exam_posts.jsonl',)
+PILOT_C_POST_IDS = (
+    1709, 1708, 1707, 1706, 1705, 1704, 1703, 1702, 1700, 1695, 1694, 1693,
+    1686, 1685, 1684, 1668, 1667, 1666, 1665, 1664, 1663, 1662, 1661,
+)
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec='seconds')
+
+
+def _report_retry(request_label: str, attempt: int, reason: str) -> None:
+    target = (f'post={request_label}' if request_label.isdigit()
+              else f'target={request_label}')
+    detail = (f'status={reason.removeprefix("HTTP ")}'
+              if reason.startswith('HTTP ') else f'kind={reason}')
+    print(f'INGEST retry {target} attempt={attempt} {detail}', flush=True)
+
+
+def _network_post_ids(ids: list[int], pilot: str | None,
+                      limit: int | None) -> list[int]:
+    if pilot == 'c':
+        available = set(ids)
+        missing = [post_id for post_id in PILOT_C_POST_IDS if post_id not in available]
+        if missing:
+            raise ValueError(f'pilot c sitemap is missing {len(missing)} approved posts')
+        selected = list(PILOT_C_POST_IDS)
+    else:
+        selected = ids
+    return selected[:limit] if limit is not None else selected
+
+
+def _fetch_network_posts(source: NetworkSource, ids: list[int]) -> tuple[list, int]:
+    posts = []
+    failures = 0
+    total = len(ids)
+    for index, post_id in enumerate(ids, start=1):
+        started = time.monotonic()
+        print(f'INGEST fetch {index}/{total} post={post_id}', flush=True)
+        try:
+            post = source.post(post_id)
+        except FetchError as exc:
+            failures += 1
+            print(f'INGEST error {index}/{total} post={post_id} '
+                  f'kind={exc.reason.replace(" ", "_")} '
+                  f'transient={str(exc.transient).lower()} '
+                  f'elapsed={time.monotonic() - started:.1f}s', flush=True)
+            continue
+        posts.append(post)
+        print(f'INGEST done {index}/{total} post={post_id} '
+              f'elapsed={time.monotonic() - started:.1f}s '
+              f'attachments={len(post.attachments)}', flush=True)
+    return posts, failures
 
 
 def write_artifacts(result: DryRunResult, out: Path, crawled_at: str) -> list[Path]:
@@ -202,7 +252,11 @@ def cmd_survey(path: Path) -> int:
 
 
 def cmd_smoke(count: int, delay: float) -> int:
-    fetcher = PoliteFetcher(delay=delay, max_requests=count + 1)
+    fetcher = PoliteFetcher(
+        delay=delay,
+        max_requests=(count + 1) * (DEFAULT_MAX_RETRIES + 1),
+        on_retry=_report_retry,
+    )
     source = NetworkSource(fetcher)
     try:
         ids = source.post_ids()
@@ -268,20 +322,42 @@ def main(argv: list[str] | None = None) -> int:
 
     crawled_at = _now()
     if args.source == 'network':
+        anticipated = (min(args.limit, len(PILOT_C_POST_IDS))
+                       if args.pilot == 'c' and args.limit is not None
+                       else len(PILOT_C_POST_IDS) if args.pilot == 'c'
+                       else args.limit)
+        request_budget = ((anticipated + 1) * (DEFAULT_MAX_RETRIES + 1)
+                          if anticipated is not None else None)
         fetcher = PoliteFetcher(delay=args.delay,
-                               max_requests=(args.limit + 1) if args.limit else None)
+                               max_requests=request_budget,
+                               on_retry=_report_retry)
         source = NetworkSource(fetcher)
+        sitemap_started = time.monotonic()
+        print('INGEST fetch target=sitemap', flush=True)
         try:
             ids = source.post_ids()
         except FetchError as exc:
-            print(f'cannot enumerate sitemap: {exc}')
+            print(f'INGEST error target=sitemap '
+                  f'kind={exc.reason.replace(" ", "_")} '
+                  f'transient={str(exc.transient).lower()} '
+                  f'elapsed={time.monotonic() - sitemap_started:.1f}s', flush=True)
             return 2
-        posts = []
-        for post_id in ids[: args.limit or len(ids)]:
-            try:
-                posts.append(source.post(post_id))
-            except FetchError as exc:
-                print(f'skip {post_id}: {exc}')
+        print(f'INGEST done target=sitemap elapsed={time.monotonic() - sitemap_started:.1f}s '
+              f'posts={len(ids)}', flush=True)
+        try:
+            selected_ids = _network_post_ids(ids, args.pilot, args.limit)
+        except ValueError as exc:
+            print(f'INGEST error target=pilot kind={str(exc).replace(" ", "_")}', flush=True)
+            return 2
+        budget_text = str(request_budget) if request_budget is not None else 'unbounded'
+        print(f'INGEST network targets={len(selected_ids)} timeout={DEFAULT_TIMEOUT_SECONDS}s '
+              f'retries={DEFAULT_MAX_RETRIES} delay={args.delay:g}s '
+              f'request_budget={budget_text}', flush=True)
+        posts, failures = _fetch_network_posts(source, selected_ids)
+        if args.pilot == 'c' and failures:
+            print(f'INGEST error target=pilot kind=incomplete_fetch failures={failures}',
+                  flush=True)
+            return 2
     else:
         paths = args.sample or list(DEFAULT_SAMPLES)
         posts = []

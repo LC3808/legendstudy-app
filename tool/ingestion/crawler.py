@@ -18,6 +18,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 from urllib.parse import urlsplit
 
 from . import SITE_ORIGIN
@@ -77,11 +78,13 @@ class PoliteFetcher:
     def __init__(self, delay: float = DEFAULT_DELAY_SECONDS,
                  timeout: int = DEFAULT_TIMEOUT_SECONDS,
                  max_retries: int = DEFAULT_MAX_RETRIES,
-                 max_requests: int | None = None) -> None:
+                 max_requests: int | None = None,
+                 on_retry: Callable[[str, int, str], None] | None = None) -> None:
         self.delay = delay
         self.timeout = timeout
         self.max_retries = max_retries
         self.max_requests = max_requests
+        self.on_retry = on_retry
         self.stats = FetchStats()
         self._last = 0.0
 
@@ -91,15 +94,16 @@ class PoliteFetcher:
             time.sleep(self.delay - gap)
         self._last = time.monotonic()
 
-    def get(self, url: str, accept: str = ACCEPT_HTML) -> str:
+    def get(self, url: str, accept: str = ACCEPT_HTML,
+            request_label: str = 'request') -> str:
         path = urlsplit(url).path or '/'
         if not robots_allows(path):
             raise FetchError(url, 'blocked by robots.txt', transient=False)
-        if self.max_requests is not None and self.stats.requests >= self.max_requests:
-            raise FetchError(url, 'run request budget exhausted', transient=False)
 
         attempt = 0
         while True:
+            if self.max_requests is not None and self.stats.requests >= self.max_requests:
+                raise FetchError(url, 'run request budget exhausted', transient=False)
             self._wait()
             self.stats.requests += 1
             req = urllib.request.Request(url, headers={
@@ -116,15 +120,19 @@ class PoliteFetcher:
                 return body.decode('utf-8', errors='replace')
             except urllib.error.HTTPError as exc:
                 transient = exc.code in (408, 425, 429, 500, 502, 503, 504)
+                reason = f'HTTP {exc.code}'
                 if not transient or attempt >= self.max_retries:
                     self.stats.failures += 1
-                    raise FetchError(url, f'HTTP {exc.code}', transient) from exc
+                    raise FetchError(url, reason, transient) from exc
             except (urllib.error.URLError, TimeoutError, OSError) as exc:
+                reason = type(exc).__name__
                 if attempt >= self.max_retries:
                     self.stats.failures += 1
-                    raise FetchError(url, f'{type(exc).__name__}', True) from exc
+                    raise FetchError(url, reason, True) from exc
             attempt += 1
             self.stats.retries += 1
+            if self.on_retry is not None:
+                self.on_retry(request_label, attempt + 1, reason)
             time.sleep(self.delay * (2 ** attempt))
 
 
@@ -151,10 +159,11 @@ class NetworkSource:
 
     def post_ids(self) -> list[int]:
         return sitemap_post_ids(
-            self.fetcher.get(f'{SITE_ORIGIN}/sitemap.xml', accept=ACCEPT_XML))
+            self.fetcher.get(f'{SITE_ORIGIN}/sitemap.xml', accept=ACCEPT_XML,
+                             request_label='sitemap'))
 
     def post(self, post_id: int) -> RawPost:
-        html = self.fetcher.get(f'{SITE_ORIGIN}/{post_id}')
+        html = self.fetcher.get(f'{SITE_ORIGIN}/{post_id}', request_label=str(post_id))
         return parse_html(str(post_id), html)
 
 

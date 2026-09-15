@@ -1014,3 +1014,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - 91 offline tests PASS (65 → 91). No production write, migration, schema
   change, Supabase call, push, PR or merge. Package steps 1-4 are
   Owner-executable; the ingestion writer still has no write path.
+
+## 2026-09-15 — Day 9-B2 live dry-run progress and scope fix
+
+- Diagnosed `--source network --pilot c`: it fetched all 1,673 sitemap posts and
+  only then filtered normalized results, so a healthy fast run could remain silent
+  for about 42 minutes; repeated 20-second timeouts could extend much further.
+- Network Pilot C now selects the approved 23 ids before fetching and fails closed
+  if an approved id is absent or a post cannot be fetched. Serial crawling, robots
+  rules and the 1.5-second polite interval are unchanged.
+- Added flushed sitemap/post fetch/done output and retry diagnostics containing
+  only post id, attempt, HTTP status or safe error kind. The 72-request budget
+  permits the sitemap and 23 posts their initial request plus two bounded retries.
+- Owner-reported Mac network smoke retained as PASS: 1,673 ids, posts 1709–1705
+  parsed 5/5, 6 requests, 0 retries, 0 failures.
+- 103 ingestion tests, py_compile, credential scan and diff check PASS. No live
+  dry-run, production write, seed, migration, Flutter change, push, PR or merge.

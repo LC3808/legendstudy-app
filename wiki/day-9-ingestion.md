@@ -400,16 +400,18 @@ from the category path.
 
 ### Network smoke
 
-`--network-smoke` is implemented and reports cleanly, but **could not be
-executed in this session**: outbound access to `legendstudy.com` is denied by
-the environment's egress policy from both available shells (`curl` returns
-`403 from proxy after CONNECT`; the CLI reports
-`SMOKE FAIL sitemap: … URLError` without crashing). The site survey above was
-therefore performed through the approved browser surface, and every structural
-fact in this document comes from a real page read, not from the crawler code.
+Owner-reported Mac network smoke PASS: sitemap returned 1,673 post ids with
+newest `[1709, 1708, 1707]`; posts 1709–1705 all parsed, ending `5/5`, 6 requests,
+0 retries and 0 failures. This closes the crawler network-access prerequisite.
 
-The network smoke must be run once on a machine with egress before any
-production apply — see the Codex handoff.
+The Pilot C live dry-run selects the package's authoritative 23 ids immediately
+after reading the sitemap. It no longer downloads the complete 1,673-post archive
+before applying the 2025–2026 filter. Progress is flushed before and after every
+post request; retry output contains only post id, attempt and HTTP status or safe
+error kind. Fetches remain serial with the 1.5-second polite interval, 20-second
+request timeout and at most two retries. The run budget is 72 requests: sitemap
+plus 23 posts, each with all three allowed attempts. A missing or failed Pilot C
+post stops the run without producing a partial pilot artifact.
 
 ## Day 9-A search compatibility
 

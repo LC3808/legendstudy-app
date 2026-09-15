@@ -5,6 +5,8 @@ page structure; no full page HTML and no article body text is stored.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import sys
 import tempfile
@@ -35,6 +37,9 @@ from ingestion.subjects import (  # noqa: E402
 from ingestion.writer import (  # noqa: E402
     PILOT_C, ApplyRefused, ScopeViolation, assert_apply_allowed, assert_in_scope,
     assert_no_collisions, expected_rows,
+)
+from ingest_legendstudy import (  # noqa: E402
+    PILOT_C_POST_IDS, _fetch_network_posts, _network_post_ids, _report_retry,
 )
 
 CRAWLED_AT = '2026-09-15T02:00:00+00:00'
@@ -471,6 +476,22 @@ class CrawlerTests(unittest.TestCase):
         with self.assertRaises(FetchError):
             fetcher.get('https://legendstudy.com/1705')
 
+    def test_request_budget_also_bounds_retry_attempts(self):
+        fetcher = PoliteFetcher(delay=0, max_retries=2, max_requests=2)
+        calls = []
+
+        def timeout(req, timeout=None):
+            calls.append(req.full_url)
+            raise TimeoutError()
+
+        with unittest.mock.patch('urllib.request.urlopen', timeout), \
+                unittest.mock.patch('time.sleep'):
+            with self.assertRaises(FetchError) as ctx:
+                fetcher.get('https://legendstudy.com/1705')
+        self.assertEqual(ctx.exception.reason, 'run request budget exhausted')
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(fetcher.stats.requests, 2)
+
     def test_sitemap_extraction_is_ordered_and_deduplicated(self):
         xml = ('<loc>https://legendstudy.com/12</loc>'
                '<loc>https://legendstudy.com/1709</loc>'
@@ -478,6 +499,66 @@ class CrawlerTests(unittest.TestCase):
                '<loc>https://legendstudy.com/12</loc>'
                '<loc>https://legendstudy.com/notice/5</loc>')
         self.assertEqual(sitemap_post_ids(xml), [1709, 12])
+
+    def test_timeout_and_retries_are_bounded_and_reported(self):
+        retries = []
+        timeouts = []
+        fetcher = PoliteFetcher(delay=0, timeout=7, max_retries=2,
+                                on_retry=lambda *event: retries.append(event))
+
+        def timeout(req, timeout=None):
+            timeouts.append(timeout)
+            raise TimeoutError()
+
+        with unittest.mock.patch('urllib.request.urlopen', timeout), \
+                unittest.mock.patch('time.sleep'):
+            with self.assertRaises(FetchError) as ctx:
+                fetcher.get('https://legendstudy.com/1705', request_label='1705')
+        self.assertEqual(ctx.exception.reason, 'TimeoutError')
+        self.assertEqual(timeouts, [7, 7, 7])
+        self.assertEqual(retries, [
+            ('1705', 2, 'TimeoutError'),
+            ('1705', 3, 'TimeoutError'),
+        ])
+        self.assertEqual(fetcher.stats.requests, 3)
+        self.assertEqual(fetcher.stats.retries, 2)
+        self.assertEqual(fetcher.stats.failures, 1)
+
+    def test_pilot_network_selection_is_the_approved_23_posts(self):
+        sitemap_ids = [9999, *PILOT_C_POST_IDS, 1]
+        self.assertEqual(_network_post_ids(sitemap_ids, 'c', None),
+                         list(PILOT_C_POST_IDS))
+        self.assertEqual(_network_post_ids(sitemap_ids, 'c', 2), [1709, 1708])
+
+    def test_pilot_network_selection_fails_if_an_approved_post_is_missing(self):
+        with self.assertRaisesRegex(ValueError, 'missing 1 approved posts'):
+            _network_post_ids(list(PILOT_C_POST_IDS[:-1]), 'c', None)
+
+    def test_network_progress_is_flushed_without_urls_or_response_bodies(self):
+        class Source:
+            def post(self, post_id):
+                return raw(post_id=str(post_id), attachments=[
+                    att(f'key/{post_id}', '국어 문제.pdf'),
+                ])
+
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            posts, failures = _fetch_network_posts(Source(), [1709, 1708])
+        text = output.getvalue()
+        self.assertEqual(len(posts), 2)
+        self.assertEqual(failures, 0)
+        self.assertIn('INGEST fetch 1/2 post=1709', text)
+        self.assertIn('INGEST done 2/2 post=1708', text)
+        self.assertIn('attachments=1', text)
+        self.assertNotIn('https://', text)
+        self.assertNotIn('credential=', text)
+
+    def test_retry_diagnostic_contains_only_safe_request_context(self):
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            _report_retry('1705', 2, 'HTTP 503')
+        self.assertEqual(output.getvalue(),
+                         'INGEST retry post=1705 attempt=2 status=503\n')
 
 
 class SampleAndArtifactTests(unittest.TestCase):

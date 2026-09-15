@@ -87,10 +87,10 @@ The post-id list in 1e/1f is the pilot scope and is reproduced from
 `build/pilot-c/dryrun-posts.csv`; regenerate it from the live dry-run in step 3
 before running these queries, because step 3 is the authoritative scope.
 
-## 2. Live network smoke — run on the Owner's Mac
+## 2. Live network smoke — Owner Mac PASS
 
-Claude's shells cannot reach legendstudy.com (egress policy), so this has never
-been executed. It must pass before anything is applied.
+Owner-reported result: sitemap 1,673 ids, newest `[1709, 1708, 1707]`; posts
+1709–1705 PASS; final `5/5`, requests 6, retries 0, failures 0.
 
 ```
 cd ~/development/legendstudy-app && python3 tool/ingest_legendstudy.py --network-smoke 5
@@ -108,6 +108,12 @@ attachments on an exam post means the site changed — **do not apply.**
 cd ~/development/legendstudy-app && python3 tool/ingest_legendstudy.py \
   --source network --pilot c --out build/pilot-c-live
 ```
+
+The command fetches only the authoritative 23 ids listed above. It prints and
+flushes sitemap and per-post fetch/done progress, including safe retry diagnostics,
+so the current post remains visible during a timeout. One request has a 20-second
+timeout and at most two retries; crawling stays serial at the 1.5-second minimum
+interval. The 72-request run budget includes the maximum retry allowance.
 
 Then diff against the committed offline artifact:
 

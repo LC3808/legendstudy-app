@@ -330,9 +330,8 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - **No production write, migration, schema change, push, PR or merge.**
   `Production pilot 적용 준비: NO` — pending one Owner decision on how modern
   attachments are opened. See [day-9-ingestion.md](day-9-ingestion.md).
-- Network smoke is implemented but could not run here: this environment's egress
-  policy blocks legendstudy.com from both shells. It must be run once on a
-  machine with egress before any apply.
+- Owner-reported Mac network smoke PASS: sitemap 1,673 ids and newest posts
+  1709–1705 all parsed (5/5, 6 requests, 0 retries, 0 failures).
 
 ## Day 9-B2 Taxonomy + Pilot package — prepared, NOT applied
 
@@ -361,7 +360,12 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   the content item's `source_url`. `content_items.source_url`, `link_kind` and
   `LaunchMode.externalApplication` already exist, so no schema, projection or
   repository change is needed — only the open-target rule.
-- 91 offline tests PASS. No production write, migration, schema change,
+- Pilot C live dry-run now selects its authoritative 23 post ids before fetching,
+  instead of crawling all 1,673 sitemap ids and filtering afterwards. Sitemap and
+  per-post fetch/done/retry diagnostics flush immediately; each request remains
+  serial with a 20s timeout, two retries and the 1.5s polite interval. The bounded
+  72-request budget includes all allowed retries; an incomplete pilot fails closed.
+- 103 offline tests PASS. No production write, migration, schema change,
   Supabase call, push, PR or merge.
   See [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md) and
   [day-9-pilot-c-package.md](day-9-pilot-c-package.md).
