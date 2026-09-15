@@ -439,6 +439,27 @@ separately. Ingestion success is not publication.
 - **Day 9-C1 is implemented. Day 9-C overall is NOT COMPLETE.** C2 may start
   after this C1 closeout; C2 owns bookmark/recent views.
 
+## Day 9-C2 Bookmark + Recent Views — IMPLEMENTED
+
+- Content detail now uses the existing auth-derived personal repositories and a
+  keyed bookmark controller. Authenticated users can save/unsave the parent
+  `content_items.id`; the control distinguishes loading, saved, unsaved,
+  mutation and failure, blocks rapid duplicate taps, and rolls back failed
+  mutations with a concise Korean message.
+- Guests see a login-required explanation and perform no personal cloud write.
+  Auth changes rebuild the keyed state so account A's bookmark cannot remain
+  visible for account B or after logout.
+- A resolved detail entry touches `recent_views` once per page lifecycle using
+  `content_items.id`; rebuild/provider changes do not repeat it, while a fresh
+  detail entry does. Missing/failed detail does not touch; recent-write failure
+  never hides content. Existing repository server timestamp/auth contracts are
+  unchanged.
+- Added focused C2 tests for bookmark mutation/race/guest/A-B behavior and
+  recent lifecycle/rebuild/failure/re-entry behavior. No DB/schema/RLS/RPC,
+  production mutation, publication, C3 list screen, or MY redesign.
+- **Day 9-C2 is implemented. Day 9-C overall is NOT COMPLETE.** Next scope is
+  C3 or a separately approved UI integration task.
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.

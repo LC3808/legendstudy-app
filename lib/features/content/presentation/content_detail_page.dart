@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../../core/supabase/supabase_providers.dart';
 import '../../exams/exam_providers.dart';
 import '../../exams/presentation/exam_labels.dart';
 import '../../resources/domain/content_resource.dart';
 import '../../resources/presentation/resource_section.dart';
+import '../../personal/bookmark_providers.dart';
+import '../../personal/personal_providers.dart';
 import '../content_providers.dart';
 import '../domain/content_item.dart';
 import 'content_type_badge.dart';
@@ -18,11 +21,49 @@ final contentDetailProvider = FutureProvider.autoDispose
       retry: (_, _) => null,
     );
 
-class ContentDetailPage extends ConsumerWidget {
+class ContentDetailPage extends ConsumerStatefulWidget {
   const ContentDetailPage({required this.slug, super.key});
   final String slug;
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
+  ConsumerState<ContentDetailPage> createState() => _ContentDetailPageState();
+}
+
+class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
+  String? _recentOwner;
+  bool _recentFailureShown = false;
+
+  @override
+  void initState() {
+    super.initState();
+    ref.listenManual(contentDetailProvider(widget.slug), (_, next) {
+      final item = next.asData?.value;
+      if (item != null) _recordRecent(item.id);
+    });
+    ref.listenManual(authStateProvider, (_, _) {
+      final item = ref.read(contentDetailProvider(widget.slug)).asData?.value;
+      if (item != null) _recordRecent(item.id);
+    });
+  }
+
+  Future<void> _recordRecent(String contentItemId) async {
+    final owner = ref.read(authStateProvider).value?.userId;
+    if (owner == null || owner == _recentOwner) return;
+    _recentOwner = owner;
+    try {
+      await ref.read(recentViewRepositoryProvider).touchRecentView(contentItemId);
+    } catch (_) {
+      if (mounted && !_recentFailureShown) {
+        _recentFailureShown = true;
+        // A recent view is auxiliary; never replace the resolved detail.
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       leading: BackButton(
         onPressed: () {
@@ -38,20 +79,26 @@ class ContentDetailPage extends ConsumerWidget {
     body: ShellPage(
       children: [
         ref
-            .watch(contentDetailProvider(slug))
+            .watch(contentDetailProvider(widget.slug))
             .when(
               skipLoadingOnRefresh: false,
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (_, _) => ErrorState(
                 message: '자료를 불러오지 못했어요.',
-                onRetry: () => ref.invalidate(contentDetailProvider(slug)),
+                onRetry: () => ref.invalidate(contentDetailProvider(widget.slug)),
               ),
               data: (item) => item == null
                   ? const EmptyState('자료를 찾을 수 없어요.')
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        ContentTypeBadge(item.contentType),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(child: ContentTypeBadge(item.contentType)),
+                            _BookmarkControl(contentItemId: item.id),
+                          ],
+                        ),
                         const SizedBox(height: 8),
                         Semantics(
                           header: true,
@@ -94,6 +141,53 @@ class ContentDetailPage extends ConsumerWidget {
       ],
     ),
   );
+}
+
+class _BookmarkControl extends ConsumerWidget {
+  const _BookmarkControl({required this.contentItemId});
+  final String contentItemId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authStateProvider);
+    if (auth.isLoading) {
+      return const SizedBox(width: 48, height: 48, child: Center(child: CircularProgressIndicator(strokeWidth: 2)));
+    }
+    if (auth.hasError) return const SizedBox.shrink();
+    final authenticated = auth.value?.isAuthenticated == true;
+    final state = ref.watch(bookmarkStateProvider(contentItemId));
+    final controller = ref.read(bookmarkStateProvider(contentItemId).notifier);
+    final busy = state.isMutating || state.phase == BookmarkPhase.loading;
+    return Semantics(
+      button: true,
+      label: authenticated ? (state.isSaved ? '저장됨' : '자료 저장') : '자료 저장, 로그인 필요',
+      child: SizedBox(
+        height: 48,
+        child: TextButton.icon(
+          onPressed: busy
+              ? null
+              : () async {
+                  if (!authenticated) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('자료를 저장하려면 로그인이 필요해요.')),
+                    );
+                    return;
+                  }
+                  final before = state;
+                  await controller.toggle();
+                  if (context.mounted && before.phase != BookmarkPhase.mutating) {
+                    final after = ref.read(bookmarkStateProvider(contentItemId));
+                    if (after.message != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(after.message!)));
+                    }
+                  }
+                },
+          icon: Icon(state.isSaved ? Icons.bookmark : Icons.bookmark_border),
+          label: Text(state.isSaved ? '저장됨' : '저장'),
+        ),
+      ),
+    );
+  }
 }
 
 class _ExamDetails extends ConsumerWidget {

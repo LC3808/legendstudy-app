@@ -1118,3 +1118,8 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   py_compile, credential scan and git diff --check PASS.
 - Day 9-B3 Pilot C Production ingestion COMPLETE. PUBLICATION NOT DONE: all rows
   remain is_active=false pending the 9-C open-target rule and Owner approval.
+- 2026-09-15: Day 9-C2 implemented. Connected content detail to existing
+  auth-derived bookmark/recent repositories with keyed bookmark state, guest
+  no-write behavior, account isolation, one-touch-per-entry recent lifecycle,
+  and non-blocking failure UX. Focused C2 tests pass; no production or DB
+  changes. Day 9-C remains incomplete.
