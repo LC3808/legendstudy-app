@@ -102,7 +102,7 @@ def write_artifacts(result: DryRunResult, out: Path, crawled_at: str) -> list[Pa
 
     path = out / 'dryrun-posts.csv'
     with path.open('w', newline='', encoding='utf-8') as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator='\n')
         w.writerow(['external_post_id', 'source_url', 'raw_title', 'content_type', 'slug',
                     'calendar_year', 'academic_year', 'exam_month', 'grade_level',
                     'exam_type', 'subjects', 'subject_codes', 'mapping_status',
@@ -128,7 +128,7 @@ def write_artifacts(result: DryRunResult, out: Path, crawled_at: str) -> list[Pa
 
     path = out / 'dryrun-quarantine.csv'
     with path.open('w', newline='', encoding='utf-8') as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator='\n')
         w.writerow(['kind', 'blocking', 'external_post_id', 'note', 'payload'])
         for c in result.quarantine:
             w.writerow([c.kind, 'yes' if c.kind in BLOCKING else 'no',

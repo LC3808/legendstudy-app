@@ -371,6 +371,30 @@ class NormalizeTests(unittest.TestCase):
         self.assertEqual(plan.resources[0]['link_kind'], 'landing_page')
         self.assertEqual(plan.resources[0]['resource_type'], 'listening_audio')
 
+    def test_box_listening_action_suffix_maps_type_subject_and_extension(self):
+        label = '2026년 6월 고2_ 영어 듣기파일.mp3 (실시간/다운로드)'
+        plan = self.plan(attachments=[
+            RawAttachment('box', 'box:abc', label, BOX, False)])
+        resource = plan.resources[0]
+        self.assertEqual(resource['resource_type'], 'listening_audio')
+        self.assertEqual(resource['occurrence_subject_key'], '영어')
+        self.assertEqual(resource['file_extension'], 'mp3')
+        self.assertEqual(resource['title'], label)
+        self.assertEqual(resource['link_kind'], 'landing_page')
+        self.assertFalse({'resource_kind_unknown', 'resource_subject_unknown',
+                          'resource_url_expiring'} & {c.kind for c in plan.quarantine})
+
+    def test_expiration_advisory_is_kakaocdn_specific(self):
+        box = RawAttachment('box', 'box:abc', '영어 듣기파일.mp3', BOX, False)
+        other = RawAttachment('other', 'other:abc', '영어 듣기파일.mp3',
+                              'https://example.com/audio', False)
+        for attachment in (box, other):
+            plan = self.plan(attachments=[attachment])
+            self.assertNotIn('resource_url_expiring',
+                             {c.kind for c in plan.quarantine})
+        kakao = self.plan(attachments=[att('a/b', '영어 듣기파일.mp3')])
+        self.assertIn('resource_url_expiring', {c.kind for c in kakao.quarantine})
+
     def test_advisory_case_does_not_lower_parse_confidence(self):
         plan = self.plan(attachments=[att('a/b', '국어 문제.pdf')])
         self.assertTrue({c.kind for c in plan.quarantine} <= ADVISORY)
@@ -752,7 +776,27 @@ class PilotScopeTests(unittest.TestCase):
         _result, pilot = self.pilot()
         self.assertEqual(expected_rows(pilot), {
             'source_posts': 23, 'content_items': 23, 'exams': 23,
-            'exam_subjects': 363, 'resources': 716})
+            'exam_subjects': 363, 'resources': 739})
+
+    def test_pilot_c_box_resources_are_one_english_audio_per_post(self):
+        result, pilot = self.pilot()
+        boxes = [[r for r in plan.resources if r['provider'] == 'box']
+                 for plan in pilot]
+        self.assertTrue(all(len(rows) == 1 for rows in boxes))
+        self.assertTrue(all(rows[0]['resource_type'] == 'listening_audio'
+                            and rows[0]['occurrence_subject_key'] == '영어'
+                            and rows[0]['link_kind'] == 'landing_page'
+                            for rows in boxes))
+        keys = [rows[0]['source_resource_key'] for rows in boxes]
+        urls = [rows[0]['source_url'] for rows in boxes]
+        self.assertEqual(len(set(keys)), 23)
+        self.assertTrue(all(key.startswith('box:') for key in keys))
+        self.assertTrue(all(url.startswith('https://app.box.com/s/')
+                            and '?' not in url and '#' not in url for url in urls))
+        self.assertEqual(result.counts()['providers']['box'], 23)
+        self.assertEqual(result.counts()['resource_types']['listening_audio'], 23)
+        self.assertEqual({c.kind for p in pilot for c in p.quarantine},
+                         {'resource_url_expiring'})
 
     def test_pilot_c_passes_the_scope_and_collision_guards(self):
         _result, pilot = self.pilot()

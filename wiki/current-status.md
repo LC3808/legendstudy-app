@@ -349,8 +349,12 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - Pilot C mapping: **363 / 363 occurrences provisional, 0 unmapped, 0 ambiguous**
   (160 exact, 203 documented alias). All 23 subjects used. `verified` is never
   produced by automated ingestion.
-- Expected pilot rows: subjects +23, source_posts +23, content_items +23,
-  exams +23, exam_subjects +363, resources +716, quarantine +23 (advisory).
+- Owner live evidence confirms one Box link per Pilot C post. All 23 are English
+  listening landing pages and normalize as `listening_audio` on the existing
+  English occurrence. Expected rows: subjects +23, source_posts +23,
+  content_items +23, exams +23, exam_subjects +363, resources +739
+  (360 question, 356 answer/explanation, 23 listening audio), quarantine +23
+  (`resource_url_expiring` for kakaocdn only; advisory).
 - Apply package prepared: preflight / network smoke / live dry-run / seed /
   apply / postflight / publication / rollback. Guards implemented and tested;
   `--apply` still refuses every argument combination.
@@ -365,7 +369,7 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   per-post fetch/done/retry diagnostics flush immediately; each request remains
   serial with a 20s timeout, two retries and the 1.5s polite interval. The bounded
   72-request budget includes all allowed retries; an incomplete pilot fails closed.
-- 103 offline tests PASS. No production write, migration, schema change,
+- 106 offline tests PASS. No production write, migration, schema change,
   Supabase call, push, PR or merge.
   See [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md) and
   [day-9-pilot-c-package.md](day-9-pilot-c-package.md).

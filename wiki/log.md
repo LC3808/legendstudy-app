@@ -1030,3 +1030,22 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   parsed 5/5, 6 requests, 0 retries, 0 failures.
 - 103 ingestion tests, py_compile, credential scan and diff check PASS. No live
   dry-run, production write, seed, migration, Flutter change, push, PR or merge.
+
+## 2026-09-15 — Day 9-B2 Pilot C Box listening classification
+
+- Owner live dry-run confirmed 23 Box landing pages, exactly one stable share id
+  per Pilot C post. Source labels identify English listening files; two posts also
+  repeat the same share URL on an answer-PDF anchor, and provider-key dedup retains
+  the first listening anchor observed by the parser.
+- Classification now ignores only the Box UI suffix `(실시간/다운로드)` variants,
+  yielding `listening_audio`, English occurrence linkage and `mp3` where present.
+  Raw source labels remain unchanged. The existing schema already supports the type.
+- Expiration advisory counting is explicitly kakaocdn-only. Box stays
+  `landing_page` and receives no signed-URL advisory.
+- Pilot expectation updated to 23 posts / 363 occurrences / 739 resources:
+  360 question, 356 answer/explanation and 23 listening audio. Quarantine is 23
+  kakaocdn expiration advisories, zero blocking; all 23 remain publish candidates.
+- Offline Pilot C source/evidence updated with stable Box identities and no query,
+  credential, signature or expiry values. No production write, seed, migration,
+  Flutter/Search change, apply, push, PR or merge.
+- 106 ingestion tests, py_compile, credential scan and `git diff --check` PASS.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T06:15:59+00:00",
+  "generated_at": "2026-09-15T09:34:11+00:00",
   "parser_version": "legendstudy-parser/0.1.0",
   "counts": {
     "posts_parsed": 23,
@@ -18,15 +18,18 @@
       "1.0": 160
     },
     "subjects_referenced": 23,
-    "resources": 716,
+    "resources": 739,
     "resource_types": {
       "answer_explanation": 356,
+      "listening_audio": 23,
       "question": 360
     },
     "link_kinds": {
+      "landing_page": 23,
       "unknown": 716
     },
     "providers": {
+      "box": 23,
       "kakaocdn": 716
     },
     "confidence": {

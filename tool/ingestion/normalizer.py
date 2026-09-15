@@ -54,6 +54,9 @@ BLOCKING = frozenset({
 
 TITLE_LEAD = re.compile(r'^[\s→▶◆\-–—>]+')
 EXT = re.compile(r'\.([A-Za-z0-9]{2,5})$')
+BOX_ACTION_SUFFIX = re.compile(
+    r'\s*\(\s*실시간(?:\s*듣기)?\s*/\s*(?:다운로드|다운)\s*\)\s*$'
+)
 
 
 def display_title(raw: str) -> str:
@@ -192,7 +195,9 @@ def _resource_rows(post: RawPost, is_exam: bool,
             continue
         seen_keys.add(att.resource_key)
 
-        left, resource_type, raw_kind = split_resource_kind(att.display_name)
+        classification_name = (clean(BOX_ACTION_SUFFIX.sub('', att.display_name))
+                               if att.provider == 'box' else att.display_name)
+        left, resource_type, raw_kind = split_resource_kind(classification_name)
         if resource_type is None:
             cases.append(QuarantineCase('resource_kind_unknown', post.external_post_id,
                                         'Filename tail is not a known resource kind.',
@@ -229,15 +234,17 @@ def _resource_rows(post: RawPost, is_exam: bool,
             link_kind = 'landing_page'
         elif att.provider == 'cfile':
             link_kind = 'file'
-        else:
+        elif att.provider == 'kakaocdn':
             # Verified 2026-09-15: the unsigned blog.kakaocdn.net path and an
             # expired signature both fail to load. The observed href carries a
             # site-wide rolling credential/expires/signature that must not be
             # stored, so the stored locator is not a proven direct file.
             link_kind = 'unknown'
             expiring += 1
+        else:
+            link_kind = 'unknown'
 
-        ext_match = EXT.search(att.display_name)
+        ext_match = EXT.search(classification_name)
         resources.append({
             'source_post_external_id': post.external_post_id,
             'source_resource_key': att.resource_key,

@@ -513,14 +513,14 @@ estimated.
 |---|---|---|---|---|---|---|
 | A. 2026 고3 only | 4 | 4 | 93 | 177 | 0 | 4 / 4 |
 | B. 2026, all grades | 8 | 8 | 117 | 224 | 0 | 8 / 8 |
-| **C. 2025–2026, all grades (recommended)** | **23** | **23** | **363** | **716** | **0** | **23 / 23** |
+| **C. 2025–2026, all grades (recommended)** | **23** | **23** | **363** | **739** | **23 advisory** | **23 / 23** |
 | D. 2024–2026 (the whole dry-run set) | 38 | 38 | 609 | 1,205 | 3 | 35 / 38 |
 
 Plus 23 `source_posts` rows for scope C.
 
 **C is recommended.** It is 100 % publishable with zero quarantine, covers the
 two most recent school years including the 2026학년도 수능 and the 2027학년도 6월
-모의평가 — the material students actually use — and 716 resources is small
+모의평가 — the material students actually use — and 739 resources is small
 enough for the Owner to spot-check by hand. A and B are safe but too thin to
 exercise search ranking; D adds three typo cases and 2024 material without
 improving the product much.
@@ -645,8 +645,9 @@ existing code. **No schema, projection or repository change is required.**
 
 One presentation rule must change before resources are published:
 `ContentResource.openUri` falls back to `source_url` whenever `link_kind` is not
-`landing_page`, so all 716 pilot resources — every one `link_kind='unknown'`
-with an unsigned kakaocdn locator — would open a 403. 9-C routes
+`landing_page`, so the 716 `link_kind='unknown'` kakaocdn resources with an
+unsigned locator would open a 403. The 23 Box resources are stable landing pages,
+classified as English `listening_audio`, and already use the correct open path. 9-C routes
 `link_kind='unknown'` to the content item's `source_url` instead. `link_kind` is
 already in `SupabaseResourceRepository.projection`, so the rule is data-driven:
 

@@ -22,7 +22,7 @@ Measured from the dry-run, not estimated.
 | `content_items` | **+23** | all `exam`, `is_active=false` |
 | `exams` | **+23** | shared PK with `content_items` |
 | `exam_subjects` | **+363** | all `provisional`, `is_active=false` |
-| `resources` | **+716** | 360 `question` + 356 `answer_explanation`, `is_active=false` |
+| `resources` | **+739** | 360 `question` + 356 `answer_explanation` + 23 `listening_audio`, `is_active=false` |
 | `ingestion_quarantine` | **+23** | advisory `resource_url_expiring`, one per post |
 
 If the live dry-run in step 3 differs from these numbers, **stop and update the
@@ -231,12 +231,15 @@ Before `is_active=true` may be set on `resources`, one UI change is required,
 and it is the concrete form of the Owner's option (a):
 
 > `ContentResource.openUri` currently falls back to `source_url` when
-> `link_kind` is not `landing_page`. Every modern pilot resource has
-> `link_kind='unknown'` and an unsigned kakaocdn locator, so today that button
-> would open a 403 for all 716 rows. 9-C must route `link_kind='unknown'` to
+> `link_kind` is not `landing_page`. The 716 kakaocdn pilot resources have
+> `link_kind='unknown'` and an unsigned locator, so today that button would
+> open a 403 for those rows. 9-C must route `link_kind='unknown'` to
 > the **content item's** `source_url` — the original legendstudy.com post —
 > opened with the existing `ExternalLinkButton` /
 > `LaunchMode.externalApplication` path.
+
+The other 23 resources are stable Box landing pages classified as English
+`listening_audio`; the existing `landing_page` open path is already correct.
 
 `link_kind` is already in `SupabaseResourceRepository.projection`, and
 `content_items.source_url` is already in `SupabaseContentRepository.projection`

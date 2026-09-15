@@ -217,6 +217,14 @@ def parse_record(record: dict) -> RawPost:
                           else f'https://t1.daumcdn.net/cfile/tistory/{key}'),
             had_signed_query=(provider == 'kakaocdn'),
         ))
+    for share_id, label in record.get('bx', []):
+        attachments.append(RawAttachment(
+            provider='box',
+            resource_key=f'box:{share_id}',
+            display_name=clean(label),
+            unsigned_url=f'https://app.box.com/s/{share_id}',
+            had_signed_query=False,
+        ))
     return RawPost(
         external_post_id=str(record['i']),
         url=canonical_post_url(record['i']),
