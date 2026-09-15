@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-09-15T05:51:28+00:00",
+  "parser_version": "legendstudy-parser/0.1.0",
+  "counts": {
+    "posts_parsed": 38,
+    "parse_errors": 0,
+    "content_items": 38,
+    "content_types": {
+      "exam": 38
+    },
+    "exams": 38,
+    "exam_subjects": 609,
+    "resources": 1205,
+    "resource_types": {
+      "answer_explanation": 594,
+      "listening_script": 10,
+      "question": 601
+    },
+    "link_kinds": {
+      "unknown": 1205
+    },
+    "providers": {
+      "kakaocdn": 1205
+    },
+    "confidence": {
+      "high": 35,
+      "medium": 3
+    },
+    "publish_candidates": 35,
+    "quarantine_cases": 41,
+    "quarantine_posts": 38,
+    "quarantine_blocking_posts": 0,
+    "quarantine_kinds": {
+      "resource_subject_unknown": 3,
+      "resource_url_expiring": 38
+    },
+    "changed": 38,
+    "unchanged": 0,
+    "missing_sources": 0,
+    "merge_candidates": 0
+  },
+  "merge_candidates": [],
+  "parse_errors": []
+}

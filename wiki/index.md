@@ -54,3 +54,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 8-D3 Grade + Result UX — COMPLETE, actual A/B Flutter PASS](day-8-d3-grade-result.md)
 
 - [Day 9-A Search / Explore — COMPLETE / validation environment](day-9-search-explore.md)
+
+- [Day 9-B Ingestion — survey, pipeline, dry-run; production gate open](day-9-ingestion.md)

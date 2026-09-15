@@ -302,6 +302,38 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
 - **Day 8-D2 = COMPLETE. Next: Day 8-D3 Grade + Result UX.** D3 implementation is not
   started by this closeout. Day8 overall is NOT COMPLETE; 8-B/8-C physical gates remain pending.
 
+## Day 9-B Ingestion — pipeline + dry-run COMPLETE, production write NOT approved
+
+- legendstudy.com surveyed 2026-09-15: sitemap lists **1,673 numeric posts**
+  (id 2–1709, id 1520 is 404). 227 posts in the modern range 1481–1709 were read
+  in full; 81 of them are exam posts carrying 2,620 Tistory attachments, 134 are
+  논술, 4 are columns with no attachment. All attachment extensions are `pdf`.
+- Two attachment generations, with a sharp boundary near id 1481/1475.
+  **Modern `blog.kakaocdn.net` locators require a site-wide rolling signature
+  (`expires` 2026-10-01 00:00 KST) — the unsigned path and an expired signature
+  both fail.** Legacy `t1.daumcdn.net/cfile/tistory/{ID}` locators are unsigned
+  and stable. The signed query is never stored; the stable Tistory file identity
+  (`kage@{s1}/{s2}`) is used as `source_resource_key`.
+- Pipeline implemented under `tool/ingestion/` with CLI `tool/ingest_legendstudy.py`
+  (dry-run by default; `--apply` always refuses and names the LegendStudy project
+  ref before anything else). Standard library only, no new dependency.
+- Offline dry-run over 38 real exam posts / 1,205 real attachments:
+  38 content_items, 38 exams, 609 exam_subjects, 1,205 resources,
+  **0 parse errors, 0 blocking quarantine, 35/38 publish candidates**, and
+  **zero violations** against the applied initial content schema. Re-running
+  against the state file gives `changed=0, unchanged=38` and a byte-identical
+  posts CSV. The only three failures are typos on the source site.
+- Title-parsing coverage over all 227 modern posts: **81/81 exam-category posts
+  yield a complete exam identity** (year, month, grade, type).
+- `national_mock` never takes the source `N학년도` label — the site writes the
+  calendar year there. `academic_year` is trusted only for 수능/모의평가.
+- **No production write, migration, schema change, push, PR or merge.**
+  `Production pilot 적용 준비: NO` — pending one Owner decision on how modern
+  attachments are opened. See [day-9-ingestion.md](day-9-ingestion.md).
+- Network smoke is implemented but could not run here: this environment's egress
+  policy blocks legendstudy.com from both shells. It must be run once on a
+  machine with egress before any apply.
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.

@@ -950,3 +950,35 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Day9-A COMPLETE for Search/Explore scope; Wiki status/index/architecture updated.
   Next:9-B real-content ingestion under its own request;9-C/9-D remain open.
   No product feature, DB/schema/RPC/dependency changes or push/PR/merge.
+
+## 2026-09-15 — Day 9-B legendstudy.com ingestion (survey, pipeline, dry-run)
+
+- Surveyed the live site: sitemap lists 1,673 numeric posts; 227 modern posts
+  (id 1481–1709) read in full, plus stratified legacy probes down to id 50.
+  robots.txt allows post paths and the sitemap; `Crawl-delay` targets bingbot only.
+- Found two attachment generations with a sharp boundary near id 1481/1475.
+  Modern kakaocdn locators require a site-wide rolling signature expiring
+  2026-10-01 00:00 KST; the unsigned path and an expired signature both fail to
+  load. Legacy cfile locators are unsigned and stable. Signed query is never
+  stored; `kage@{s1}/{s2}` is the stable resource identity.
+- Confirmed the site writes the calendar year as `N학년도` on 교육청 학평 posts
+  (post 1705 body vs its own title), so `academic_year` is trusted only for
+  수능/모의평가. Organisation evidence is self-contradictory (body 경기도교육청 vs
+  tag 인천광역시교육청) and is not populated.
+- Implemented `tool/ingestion/` (models, taxonomy, parser, normalizer, crawler,
+  pipeline, writer) and `tool/ingest_legendstudy.py`. Dry-run by default;
+  `--apply` refuses and names the LegendStudy project ref first. Stdlib only.
+- Dry-run over 38 real exam posts / 1,205 real attachments: 0 parse errors,
+  0 blocking quarantine, 35/38 publish candidates, zero schema violations,
+  byte-identical re-run. The only three failures are source-site typos.
+  Title coverage over all 227 modern posts: 81/81 exam posts fully identified.
+- Added a subject word-boundary rule after the source typo `생화활과윤리` was
+  being read as the historical subject `윤리`.
+- 65 offline tests PASS; py_compile, credential scan and `git diff --check` PASS.
+  Pre-existing `psycopg`-dependent tool tests still fail for that reason alone.
+- Network smoke implemented but not executed: this environment's egress policy
+  blocks legendstudy.com from both shells. Must run once with egress before apply.
+- No production write, migration, schema change, Supabase call, push, PR or merge.
+  `Production pilot 적용 준비: NO`, pending one Owner decision on modern
+  attachment access. Recommended pilot: 2025–2026 exam posts, 23 posts /
+  23 exams / 363 exam_subjects / 716 resources, all publishable, zero quarantine.

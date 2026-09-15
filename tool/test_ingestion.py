@@ -1,0 +1,525 @@
+"""Offline tests for the legendstudy.com ingestion pipeline.
+
+No network. Fixtures keep only the minimum markup that reproduces the real
+page structure; no full page HTML and no article body text is stored.
+"""
+from __future__ import annotations
+
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from ingestion.crawler import (  # noqa: E402
+    FetchError, PoliteFetcher, SampleSource, robots_allows, sitemap_post_ids,
+)
+from ingestion.models import RawAttachment, RawPost  # noqa: E402
+from ingestion.normalizer import (  # noqa: E402
+    ADVISORY, BLOCKING, classify, content_hash, display_title, normalize,
+)
+from ingestion.parser import (  # noqa: E402
+    canonical_post_url, classify_attachment, normalize_post_url, parse_html,
+    parse_title, split_resource_kind, split_subject, strip_query,
+)
+from ingestion.pipeline import next_state, run  # noqa: E402
+from ingestion.writer import ApplyRefused, assert_apply_allowed  # noqa: E402
+
+CRAWLED_AT = '2026-09-15T02:00:00+00:00'
+SIGNED = ('https://blog.kakaocdn.net/dna/cXNYPE/dJMcadW9IkW/AAAA/'
+          '%EA%B5%AD%EC%96%B4.pdf?credential=abc&expires=1790780399'
+          '&allow_ip=&allow_referer=&signature=xyz%3D&attach=1&knm=tfile.pdf')
+UNSIGNED = 'https://blog.kakaocdn.net/dna/cXNYPE/dJMcadW9IkW/AAAA/%EA%B5%AD%EC%96%B4.pdf'
+CFILE = 'https://t1.daumcdn.net/cfile/tistory/99B09A3E5FBF493422'
+BOX = 'https://app.box.com/s/bo9z2i1qjqu4qn4ttddsrbh58ygslh1s'
+
+MODERN_HTML = f"""<html><head>
+<meta property="og:title" content="&rarr; [2026년 5월 시행] 2026년 5월 고3 모의고사 - 문제, 답">
+<meta property="article:published_time" content="2026-07-24T13:54:57+09:00">
+<meta property="article:modified_time" content="2026-07-24T13:54:57+09:00">
+</head><body>
+<a href="/category/%E2%97%86%EF%BB%BF%20%22%EA%B3%A03%22%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EA%B3%B5%EA%B0%84%20/3%ED%95%99%EB%85%84%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC%20%EC%A0%84%EA%B3%BC%EB%AA%A9%20%EC%9E%90%EB%A3%8C">cat</a>
+<div class="tt_article_useless_p_margin contents_style">
+<figure class="fileblock"><a href="{SIGNED}">
+  <div class="image"></div>
+  <div class="desc"><div class="filename"><span class="name">2026년 5월 고3_국어(언매) 정답,해설.pdf</span></div>
+  <div class="size">0.30MB</div></div></a></figure>
+<p><a href="{BOX}" target="_blank">2026년 5월 고3_영어 듣기파일.mp3(실시간/다운로드)</a></p>
+</div></body></html>"""
+
+LEGACY_HTML = """<html><head>
+<meta property="og:title" content="&#9654; 2019 고2 9월 모의고사 한국사, 사회탐구">
+<meta property="article:published_time" content="2020-11-30T10:37:06+09:00">
+</head><body>
+<a href="/category/%22%EA%B3%A02%22%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EA%B3%B5%EA%B0%84/2%ED%95%99%EB%85%84%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC%20%EC%A0%84%EA%B3%BC%EB%AA%A9%20%EC%9E%90%EB%A3%8C">c</a>
+<div class="tt_article_useless_p_margin contents_style">
+<a href="https://t1.daumcdn.net/cfile/tistory/99B09A3E5FBF493422">2019학년도 9월 고2 모의고사 - 한국사 문제.pdf</a>
+<a href="https://t1.daumcdn.net/cfile/tistory/997D304E5FBF493426">2019학년도 9월 고2 모의고사 - 한국사 정답,해설.pdf</a>
+</div></body></html>"""
+
+
+def raw(post_id='1705', title='→ [2026년 5월 시행] 2026년 5월 고3 모의고사',
+        category='◆ "고3"을 위한 공간 /3학년 모의고사 전과목 자료', attachments=()):
+    return RawPost(external_post_id=post_id, url=canonical_post_url(post_id),
+                   title=title, category=category,
+                   published_at='2026-07-24T13:54:57+09:00',
+                   updated_at='2026-07-24T13:54:57+09:00', attachments=tuple(attachments))
+
+
+def att(key, name, provider='kakaocdn', url=UNSIGNED, signed=True):
+    return RawAttachment(provider, key, name, url, signed)
+
+
+class UrlIdentityTests(unittest.TestCase):
+    def test_signing_query_is_stripped_and_flagged(self):
+        url, signed = strip_query(SIGNED)
+        self.assertEqual(url, UNSIGNED)
+        self.assertTrue(signed)
+        for token in ('credential', 'signature', 'expires'):
+            self.assertNotIn(token, url)
+
+    def test_unsigned_url_reports_no_signing_query(self):
+        self.assertEqual(strip_query(CFILE), (CFILE, False))
+
+    def test_post_url_normalisation_is_generation_independent(self):
+        for value in ('https://legendstudy.com/1705', 'https://legendstudy.com/1705/',
+                      'https://legendstudy.com/m/1705', 'https://coroico.tistory.com/1705',
+                      'https://www.legendstudy.com/1705/'):
+            self.assertEqual(normalize_post_url(value), 'https://legendstudy.com/1705')
+
+    def test_non_post_urls_are_rejected(self):
+        self.assertIsNone(normalize_post_url('https://legendstudy.com/category/x'))
+        self.assertIsNone(normalize_post_url('https://example.com/1705'))
+
+    def test_provider_identity_is_stable_across_signature_rotation(self):
+        first = classify_attachment(SIGNED, 'a.pdf', None)
+        rotated = classify_attachment(SIGNED.replace('expires=1790780399', 'expires=1799999999')
+                                      .replace('signature=xyz%3D', 'signature=other%3D'),
+                                      'a.pdf', None)
+        self.assertEqual(first.resource_key, rotated.resource_key)
+        self.assertEqual(first.unsigned_url, rotated.unsigned_url)
+
+    def test_each_provider_is_recognised(self):
+        self.assertEqual(classify_attachment(SIGNED, 'a', None).provider, 'kakaocdn')
+        self.assertEqual(classify_attachment(CFILE, 'a', None).provider, 'cfile')
+        box = classify_attachment(BOX, 'a', None)
+        self.assertEqual((box.provider, box.resource_key),
+                         ('box', 'box:bo9z2i1qjqu4qn4ttddsrbh58ygslh1s'))
+        self.assertIsNone(classify_attachment('https://legendstudy.com/1664', 'a', None))
+
+
+class TitleParsingTests(unittest.TestCase):
+    def test_administered_prefix_supplies_calendar_year(self):
+        f = parse_title('→ [2026년 5월 시행] 2026년 5월 고3 모의고사', '')
+        self.assertEqual((f['calendar_year'], f['administered_month'], f['nominal_month']),
+                         (2026, 5, 5))
+        self.assertEqual((f['grade_level'], f['exam_type']), (3, 'national_mock'))
+
+    def test_postponed_sitting_keeps_nominal_and_administered_month(self):
+        f = parse_title('→ (2023년 5월 시행) 2023년 4월 고3 모의고사 기출', '')
+        self.assertEqual(f['administered_month'], 5)
+        self.assertEqual(f['nominal_month'], 4)
+
+    def test_evaluation_mock_academic_year_is_read(self):
+        f = parse_title('→ [2026년 6월 시행] 2027학년도 6월 모의평가', '')
+        self.assertEqual((f['calendar_year'], f['academic_year']), (2026, 2027))
+        self.assertEqual(f['exam_type'], 'evaluation_mock')
+
+    def test_csat_is_not_read_as_generic_mock(self):
+        f = parse_title('→[2025년 11월 시행] 2026학년도 수능 기출', '')
+        self.assertEqual(f['exam_type'], 'csat')
+        self.assertEqual((f['calendar_year'], f['academic_year']), (2025, 2026))
+
+    def test_grade_falls_back_to_category(self):
+        f = parse_title('→ 2026년 6월 모의고사 기출',
+                        '◆﻿ "고2"를 위한 공간 /2학년 모의고사 전과목 자료')
+        self.assertEqual(f['grade_level'], 2)
+
+    def test_short_academic_year_label(self):
+        self.assertEqual(parse_title('25학년도 9월 모평', '')['academic_year'], 2025)
+
+    def test_academic_year_is_not_read_as_calendar_year(self):
+        f = parse_title('→ 2023학년도 연세대 논술 기출', '')
+        self.assertIsNone(f['calendar_year'])
+        self.assertEqual(f['academic_year'], 2023)
+
+    def test_grade_and_score_numbers_are_not_months_or_years(self):
+        f = parse_title('▶ 1등급 3점짜리 문제만 모은 자료', '')
+        self.assertIsNone(f['calendar_year'])
+        self.assertIsNone(f['nominal_month'])
+        self.assertIsNone(f['grade_level'])
+
+
+class FilenameParsingTests(unittest.TestCase):
+    def test_combined_answer_explanation_beats_either_half(self):
+        self.assertEqual(split_resource_kind('x 정답,해설.pdf')[1], 'answer_explanation')
+        self.assertEqual(split_resource_kind('x 정답해설.pdf')[1], 'answer_explanation')
+        self.assertEqual(split_resource_kind('x 정답.pdf')[1], 'answer')
+        self.assertEqual(split_resource_kind('x 해설.pdf')[1], 'explanation')
+
+    def test_listening_kinds(self):
+        self.assertEqual(split_resource_kind('x 듣기대본.pdf')[1], 'listening_script')
+        self.assertEqual(split_resource_kind('x 듣기파일.mp3')[1], 'listening_audio')
+
+    def test_unknown_kind_returns_none(self):
+        self.assertIsNone(split_resource_kind('참고자료.zip')[1])
+
+    def test_subject_substring_false_positives(self):
+        pairs = {
+            '한국사 문제.pdf': ('한국사', False),
+            '한국지리 문제.pdf': ('한국지리', False),
+            '한국근현대사 문제.pdf': ('한국근현대사', True),
+            '세계사 문제.pdf': ('세계사', False),
+            '세계지리 문제.pdf': ('세계지리', False),
+            '사회문화 문제.pdf': ('사회문화', False),
+            '통합사회 문제.pdf': ('통합사회', False),
+            '과학탐구 문제.pdf': ('과학탐구', False),
+        }
+        for name, expected in pairs.items():
+            left, _kind, _raw = split_resource_kind(name)
+            self.assertEqual(split_subject(left), expected, name)
+
+    def test_group_prefixes_are_stripped(self):
+        for name in ('2026년 5월 고3_과_물리학1 문제.pdf',
+                     '2024년 10월 과탐_물리학1 문제.pdf',
+                     '2012년 10월_고3 모의고사_과학탐구_ 물리학1 문제.pdf'):
+            left, _kind, _raw = split_resource_kind(name)
+            self.assertEqual(split_subject(left)[0], '물리학1', name)
+
+    def test_elective_is_part_of_the_subject_label(self):
+        left, _k, _r = split_resource_kind('2026년 5월 고3_국어(언매) 정답,해설.pdf')
+        self.assertEqual(split_subject(left)[0], '국어(언매)')
+
+    def test_historical_electives_are_flagged_not_modernised(self):
+        left, _k, _r = split_resource_kind('2019학년도 9월 고2 - 수학 가형 정답,해설.pdf')
+        self.assertEqual(split_subject(left), ('수학 가형', True))
+
+    def test_source_typo_does_not_silently_map(self):
+        for name in ('2025학년도 수능_수학(미정) 정답,해설.pdf',
+                     '2024년 10월 사탐_사회문화1 문제.pdf'):
+            left, _k, _r = split_resource_kind(name)
+            self.assertEqual(split_subject(left), (None, False), name)
+
+    def test_a_token_inside_a_longer_hangul_word_is_not_a_subject(self):
+        # Source typo '생화활과윤리' ends with the historical subject '윤리'.
+        left, _k, _r = split_resource_kind('2025학년도 6월 s_생화활과윤리 정답,해설.pdf')
+        self.assertEqual(split_subject(left), (None, False))
+
+    def test_boundary_rule_still_accepts_real_separators(self):
+        for name, expected in (('2025년 10월 고1_과학 문제.pdf', '과학'),
+                               ('2019학년도 9월 고2 모의고사 - 한국사 문제.pdf', '한국사'),
+                               ('2012년 10월_고3_사회탐구_ 한국지리 문제.pdf', '한국지리'),
+                               ('통합사회 문제.pdf', '통합사회')):
+            left, _k, _r = split_resource_kind(name)
+            self.assertEqual(split_subject(left)[0], expected, name)
+
+
+class HtmlParsingTests(unittest.TestCase):
+    def test_modern_post(self):
+        post = parse_html('1705', MODERN_HTML)
+        self.assertEqual(post.url, 'https://legendstudy.com/1705')
+        self.assertIn('2026년 5월 고3 모의고사', post.title)
+        self.assertIn('3학년 모의고사 전과목 자료', post.category)
+        self.assertEqual(len(post.attachments), 2)
+        first = post.attachments[0]
+        self.assertEqual(first.resource_key, 'cXNYPE/dJMcadW9IkW')
+        self.assertEqual(first.display_name, '2026년 5월 고3_국어(언매) 정답,해설.pdf')
+        self.assertEqual(first.unsigned_url, UNSIGNED)
+        self.assertTrue(first.had_signed_query)
+        self.assertEqual(post.attachments[1].provider, 'box')
+
+    def test_legacy_post_uses_anchor_text_and_unsigned_cfile_path(self):
+        post = parse_html('1450', LEGACY_HTML)
+        self.assertEqual(len(post.attachments), 2)
+        self.assertEqual(post.attachments[0].provider, 'cfile')
+        self.assertEqual(post.attachments[0].resource_key, '99B09A3E5FBF493422')
+        self.assertFalse(post.attachments[0].had_signed_query)
+        self.assertTrue(post.attachments[0].display_name.endswith('한국사 문제.pdf'))
+
+    def test_repeat_parse_is_deterministic(self):
+        a, b = parse_html('1705', MODERN_HTML), parse_html('1705', MODERN_HTML)
+        self.assertEqual(a, b)
+        self.assertEqual(content_hash(a), content_hash(b))
+
+
+class ClassificationTests(unittest.TestCase):
+    def test_known_categories(self):
+        cases = {
+            '◆ "고3"을 위한 공간 /3학년 모의고사 전과목 자료': 'exam',
+            '◆ "고1"을 위한 공간/08~25년  국영수 문제': 'exam',
+            '◆ 논술 기출 자료/연세대, 고려대': 'university_essay',
+            '교육 입시 관련 소식': 'education_column',
+            '수업 자료실': 'study_material',
+            '◆ 적성고사, 면접 자료': 'study_material',
+        }
+        for category, expected in cases.items():
+            self.assertEqual(classify(category)[0], expected, category)
+
+    def test_missing_and_unknown_categories_quarantine(self):
+        self.assertEqual(classify(None), (None, 'classification_missing_category'))
+        self.assertEqual(classify('완전히 새로운 카테고리')[1], 'classification_unknown_category')
+
+    def test_grade_space_without_exam_subcategory_is_not_an_exam(self):
+        self.assertEqual(classify('◆ "고3"을 위한 공간 /독서 추천')[0], 'study_material')
+
+    def test_display_title_drops_decorative_lead(self):
+        self.assertEqual(display_title('→ [2026년] 자료'), '[2026년] 자료')
+        self.assertEqual(display_title('▶ 2020 고2'), '2020 고2')
+
+
+class NormalizeTests(unittest.TestCase):
+    def plan(self, **kw):
+        return normalize(raw(**kw), CRAWLED_AT)
+
+    def test_exam_plan_shape(self):
+        plan = self.plan(attachments=[
+            att('a/b', '2026년 5월 고3_국어(언매) 문제.pdf'),
+            att('a/c', '2026년 5월 고3_국어(언매) 정답,해설.pdf'),
+            att('a/d', '2026년 5월 고3_영어 문제.pdf'),
+        ])
+        self.assertEqual(plan.content_item['slug'], 'legendstudy-1705-main')
+        self.assertEqual(plan.content_item['content_type'], 'exam')
+        self.assertFalse(plan.content_item['is_active'])
+        self.assertEqual(plan.exam['year'], 2026)
+        self.assertEqual(plan.exam['exam_month'], 5)
+        self.assertEqual(plan.exam['grade_level'], 3)
+        self.assertEqual(plan.exam['exam_type'], 'national_mock')
+        self.assertEqual([o['source_subject_key'] for o in plan.occurrences],
+                         ['국어(언매)', '영어'])
+        self.assertEqual([o['display_order'] for o in plan.occurrences], [0, 1])
+        self.assertEqual(plan.confidence, 'high')
+        self.assertTrue(plan.publishable)
+
+    def test_generated_columns_are_never_produced(self):
+        plan = self.plan(attachments=[att('a/b', '국어 문제.pdf')])
+        self.assertNotIn('sort_date', plan.exam)
+        self.assertNotIn('content_type', plan.exam)
+        self.assertNotIn('feed_updated_at', plan.content_item)
+
+    def test_occurrences_start_unmapped_and_satisfy_the_mapping_check(self):
+        plan = self.plan(attachments=[att('a/b', '국어 문제.pdf')])
+        occ = plan.occurrences[0]
+        self.assertEqual(occ['mapping_status'], 'unmapped')
+        for field in ('subject_id', 'taxonomy_version', 'mapping_confidence', 'verified_at'):
+            self.assertIsNone(occ[field], field)
+
+    def test_national_mock_never_takes_the_source_academic_label(self):
+        plan = normalize(raw(title='→ [2026년 7월 시행] 2026학년도 7월 고3 모의고사 기출'),
+                         CRAWLED_AT)
+        self.assertIsNone(plan.exam['academic_year'])
+        self.assertIn('not trusted', plan.exam['normalization_note'])
+
+    def test_evaluation_mock_keeps_the_academic_year(self):
+        plan = normalize(raw(title='→ [2026년 6월 시행] 2027학년도 6월 모의평가'), CRAWLED_AT)
+        self.assertEqual(plan.exam['academic_year'], 2027)
+
+    def test_impossible_academic_year_is_quarantined(self):
+        plan = normalize(raw(title='→ [2026년 6월 시행] 2019학년도 6월 모의평가'), CRAWLED_AT)
+        self.assertIn('exam_academic_year_conflict', {c.kind for c in plan.quarantine})
+        self.assertIsNone(plan.exam['academic_year'])
+
+    def test_postponed_sitting_is_noted_not_dropped(self):
+        plan = normalize(raw(title='→ (2023년 5월 시행) 2023년 4월 고3 모의고사'), CRAWLED_AT)
+        self.assertEqual(plan.exam['exam_month'], 4)
+        self.assertIn('administered month 5', plan.exam['normalization_note'])
+
+    def test_missing_exam_field_blocks_publication(self):
+        plan = normalize(raw(title='→ 고3 모의고사 자료'), CRAWLED_AT)
+        self.assertIsNone(plan.exam)
+        self.assertEqual(plan.confidence, 'low')
+        self.assertFalse(plan.publishable)
+        self.assertTrue({'exam_year_unknown', 'exam_month_unknown'}
+                        <= {c.kind for c in plan.quarantine})
+
+    def test_signed_provider_is_never_marked_a_proven_file(self):
+        plan = self.plan(attachments=[att('a/b', '국어 문제.pdf')])
+        res = plan.resources[0]
+        self.assertEqual(res['link_kind'], 'unknown')
+        self.assertEqual(res['link_status'], 'unchecked')
+        self.assertIsNone(res['file_url'])
+        self.assertIsNone(res['file_size'])
+        self.assertIsNone(res['mime_type'])
+        self.assertNotIn('credential', res['source_url'])
+        self.assertIn('resource_url_expiring', {c.kind for c in plan.quarantine})
+
+    def test_unsigned_legacy_provider_is_a_file_link(self):
+        plan = self.plan(attachments=[
+            RawAttachment('cfile', 'HEX1', '국어 문제.pdf', CFILE, False)])
+        self.assertEqual(plan.resources[0]['link_kind'], 'file')
+        self.assertNotIn('resource_url_expiring', {c.kind for c in plan.quarantine})
+
+    def test_landing_page_provider(self):
+        plan = self.plan(attachments=[
+            RawAttachment('box', 'box:abc', '영어 듣기파일.mp3', BOX, False)])
+        self.assertEqual(plan.resources[0]['link_kind'], 'landing_page')
+        self.assertEqual(plan.resources[0]['resource_type'], 'listening_audio')
+
+    def test_advisory_case_does_not_lower_parse_confidence(self):
+        plan = self.plan(attachments=[att('a/b', '국어 문제.pdf')])
+        self.assertTrue({c.kind for c in plan.quarantine} <= ADVISORY)
+        self.assertEqual(plan.confidence, 'high')
+
+    def test_duplicate_provider_identity_is_quarantined_once(self):
+        plan = self.plan(attachments=[att('a/b', '국어 문제.pdf'), att('a/b', '국어 문제.pdf')])
+        self.assertEqual(len(plan.resources), 1)
+        self.assertIn('resource_identity_duplicate', {c.kind for c in plan.quarantine})
+        self.assertTrue(BLOCKING & {c.kind for c in plan.quarantine})
+        self.assertFalse(plan.publishable)
+
+    def test_missing_provider_identity_is_quarantined(self):
+        plan = self.plan(attachments=[att('', '국어 문제.pdf')])
+        self.assertEqual(plan.resources, [])
+        self.assertIn('resource_identity_missing', {c.kind for c in plan.quarantine})
+
+    def test_unknown_subject_keeps_the_resource_but_scopes_it_to_no_occurrence(self):
+        plan = self.plan(attachments=[att('a/b', '수학(미정) 정답,해설.pdf')])
+        self.assertEqual(plan.occurrences, [])
+        self.assertIsNone(plan.resources[0]['occurrence_subject_key'])
+        self.assertIn('resource_subject_unknown', {c.kind for c in plan.quarantine})
+
+    def test_non_exam_content_creates_no_occurrence(self):
+        plan = normalize(raw(title='→ 연세대] 2023학년도 수시 논술 기출',
+                             category='◆ 논술 기출 자료/연세대, 고려대',
+                             attachments=[att('a/b', '2023학년도 연세대 논술_수학 문제.pdf')]),
+                         CRAWLED_AT)
+        self.assertEqual(plan.content_item['content_type'], 'university_essay')
+        self.assertIsNone(plan.exam)
+        self.assertEqual(plan.occurrences, [])
+        self.assertIsNone(plan.resources[0]['occurrence_subject_key'])
+
+    def test_no_attachment_is_recorded(self):
+        plan = normalize(raw(title='▶ 2026년 모의고사 일정', category='교육 입시 관련 소식'),
+                         CRAWLED_AT)
+        self.assertEqual(plan.content_item['content_type'], 'education_column')
+        self.assertIn('attachment_none', {c.kind for c in plan.quarantine})
+
+
+class ChangeAndDuplicateTests(unittest.TestCase):
+    def test_identical_input_is_idempotent(self):
+        posts = [raw(attachments=[att('a/b', '국어 문제.pdf')])]
+        first = run(posts, CRAWLED_AT)
+        state = next_state(first)
+        second = run(posts, CRAWLED_AT, state)
+        self.assertEqual(second.unchanged, ['1705'])
+        self.assertEqual(second.changed, [])
+        self.assertEqual(first.counts()['resources'], second.counts()['resources'])
+
+    def test_a_new_answer_file_marks_the_post_changed(self):
+        base = [raw(attachments=[att('a/b', '국어 문제.pdf')])]
+        state = next_state(run(base, CRAWLED_AT))
+        grown = [raw(attachments=[att('a/b', '국어 문제.pdf'),
+                                  att('a/c', '국어 정답,해설.pdf')])]
+        self.assertEqual(run(grown, CRAWLED_AT, state).changed, ['1705'])
+
+    def test_reordered_attachments_do_not_change_the_digest(self):
+        one = raw(attachments=[att('a/b', '국어 문제.pdf'), att('a/c', '영어 문제.pdf')])
+        two = raw(attachments=[att('a/c', '영어 문제.pdf'), att('a/b', '국어 문제.pdf')])
+        self.assertEqual(content_hash(one), content_hash(two))
+
+    def test_a_corrected_title_marks_the_post_changed(self):
+        state = next_state(run([raw()], CRAWLED_AT))
+        result = run([raw(title='→ [2026년 5월 시행] 2026년 5월 고3 학력평가')], CRAWLED_AT, state)
+        self.assertEqual(result.changed, ['1705'])
+
+    def test_two_posts_for_one_exam_identity_become_a_merge_candidate(self):
+        result = run([raw(post_id='1705'), raw(post_id='1706')], CRAWLED_AT)
+        self.assertEqual(len(result.merge_candidates), 1)
+        self.assertEqual(result.merge_candidates[0]['external_post_ids'], ['1705', '1706'])
+
+    def test_a_vanished_source_is_flagged_never_deleted(self):
+        result = run([], CRAWLED_AT, {'1705': 'deadbeef'})
+        self.assertEqual(result.missing, ['1705'])
+        self.assertIn('source_missing', {c.kind for c in result.quarantine})
+        self.assertEqual(result.plans, [])
+
+    def test_parser_failure_is_reported_not_swallowed(self):
+        broken = RawPost('x', 'https://legendstudy.com/x', 'title', None, None, None,
+                         attachments=(None,))  # type: ignore[arg-type]
+        result = run([broken], CRAWLED_AT)
+        self.assertEqual(len(result.parse_errors), 1)
+        self.assertEqual(result.plans, [])
+
+
+class CrawlerTests(unittest.TestCase):
+    def test_robots_disallows_are_honoured(self):
+        self.assertTrue(robots_allows('/1705'))
+        self.assertTrue(robots_allows('/sitemap.xml'))
+        for path in ('/search', '/m/search', '/guestbook', '/manage', '/owner', '/admin'):
+            self.assertFalse(robots_allows(path), path)
+
+    def test_fetcher_refuses_disallowed_paths_without_a_request(self):
+        fetcher = PoliteFetcher(delay=0)
+        with self.assertRaises(FetchError) as ctx:
+            fetcher.get('https://legendstudy.com/search?q=x')
+        self.assertFalse(ctx.exception.transient)
+        self.assertEqual(fetcher.stats.requests, 0)
+
+    def test_request_budget_is_enforced(self):
+        fetcher = PoliteFetcher(delay=0, max_requests=0)
+        with self.assertRaises(FetchError):
+            fetcher.get('https://legendstudy.com/1705')
+
+    def test_sitemap_extraction_is_ordered_and_deduplicated(self):
+        xml = ('<loc>https://legendstudy.com/12</loc>'
+               '<loc>https://legendstudy.com/1709</loc>'
+               '<loc>https://legendstudy.com/category/x</loc>'
+               '<loc>https://legendstudy.com/12</loc>'
+               '<loc>https://legendstudy.com/notice/5</loc>')
+        self.assertEqual(sitemap_post_ids(xml), [1709, 12])
+
+
+class SampleAndArtifactTests(unittest.TestCase):
+    SAMPLES = Path(__file__).resolve().parent / 'ingestion/samples'
+
+    def test_committed_samples_parse(self):
+        posts = SampleSource(self.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        self.assertGreaterEqual(len(posts), 30)
+        self.assertTrue(all(p.attachments for p in posts))
+        result = run(posts, CRAWLED_AT)
+        self.assertEqual(result.parse_errors, [])
+        self.assertEqual(result.counts()['content_types'], {'exam': len(posts)})
+
+    def test_committed_samples_are_deterministic(self):
+        posts = SampleSource(self.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        first, second = run(posts, CRAWLED_AT), run(posts, CRAWLED_AT)
+        self.assertEqual(first.counts(), second.counts())
+
+    def test_samples_contain_no_signing_material(self):
+        for path in self.SAMPLES.glob('*.jsonl'):
+            text = path.read_text(encoding='utf-8')
+            for token in ('credential=', 'signature=', 'expires=', 'Bearer ',
+                          'service_role', 'apikey'):
+                self.assertNotIn(token, text, f'{path.name} contains {token}')
+
+    def test_artifacts_never_carry_a_signed_url(self):
+        from ingest_legendstudy import write_artifacts
+        posts = [raw(attachments=[att('a/b', '국어 문제.pdf')])]
+        with tempfile.TemporaryDirectory() as tmp:
+            written = write_artifacts(run(posts, CRAWLED_AT), Path(tmp), CRAWLED_AT)
+            self.assertTrue(written)
+            for path in written:
+                body = path.read_text(encoding='utf-8')
+                for token in ('credential=', 'signature=', 'expires='):
+                    self.assertNotIn(token, body, f'{path.name} contains {token}')
+            summary = json.loads((Path(tmp) / 'dryrun-summary.json').read_text())
+            self.assertIn('counts', summary)
+
+
+class ApplyGateTests(unittest.TestCase):
+    def test_every_path_refuses(self):
+        for ref, approved in ((None, False), ('other', True),
+                              ('stlhijzpjfgwwdgunlsd', False),
+                              ('stlhijzpjfgwwdgunlsd', True)):
+            with self.assertRaises(ApplyRefused):
+                assert_apply_allowed(ref, approved)
+
+    def test_wrong_project_is_named_in_the_refusal(self):
+        with self.assertRaises(ApplyRefused) as ctx:
+            assert_apply_allowed('muselry-project-ref', True)
+        self.assertIn('stlhijzpjfgwwdgunlsd', str(ctx.exception))
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

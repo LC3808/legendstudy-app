@@ -2,8 +2,13 @@
 
 ## Status and source boundary
 
-The ingestion pipeline remains design-only: no production crawler/backfill or
-Flutter runtime scraping. The owner reports the dedicated LegendStudy initial
+Day 9-B implemented this strategy as `tool/ingestion/` with a dry-run-only CLI
+and recorded the measured site survey in [day-9-ingestion.md](day-9-ingestion.md).
+The contracts below are unchanged and were followed rather than re-invented; the
+one material addition is that modern `blog.kakaocdn.net` attachment locators
+carry a site-wide expiring signature, so only the unsigned path is stored and it
+is recorded as identity, not as a proven download link. No production crawler,
+backfill or Flutter runtime scraping exists. The owner reports the dedicated LegendStudy initial
 schema applied and runtime fixtures cleaned up (all 10 application tables empty).
 See current-status.md/database.md for deployment evidence; this docs task did not
 connect to the DB. Preserve the applied initial migration; future DB changes use
