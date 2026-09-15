@@ -24,8 +24,18 @@ from . import SITE_ORIGIN
 from .models import RawPost
 from .parser import parse_html, parse_record
 
-USER_AGENT = ('LegendStudyIngest/0.1 (+https://legendstudy.com; '
-              'owner-operated content migration; contact via site owner)')
+# Conventional single-comment crawler UA. The earlier value carried extra
+# free text and semicolons inside the comment; Tistory's edge answered 406 to
+# it. Keep the shape "<name>/<version> (+<url>)".
+USER_AGENT = 'LegendStudyIngest/0.1 (+https://legendstudy.com)'
+# Accept must name the type the resource is actually served as and still end in
+# a wildcard. sitemap.xml is served as text/xml, which the previous header
+# (text/html, application/xhtml+xml, application/xml — no text/xml, no */*)
+# did not cover, so strict content negotiation rejected the request.
+ACCEPT_HTML = ('text/html,application/xhtml+xml,application/xml;q=0.9,'
+               'text/xml;q=0.9,*/*;q=0.8')
+ACCEPT_XML = ('application/xml,text/xml,application/rss+xml;q=0.9,'
+              'application/xhtml+xml;q=0.8,text/html;q=0.7,*/*;q=0.5')
 DEFAULT_DELAY_SECONDS = 1.5
 DEFAULT_TIMEOUT_SECONDS = 20
 DEFAULT_MAX_RETRIES = 2
@@ -81,7 +91,7 @@ class PoliteFetcher:
             time.sleep(self.delay - gap)
         self._last = time.monotonic()
 
-    def get(self, url: str) -> str:
+    def get(self, url: str, accept: str = ACCEPT_HTML) -> str:
         path = urlsplit(url).path or '/'
         if not robots_allows(path):
             raise FetchError(url, 'blocked by robots.txt', transient=False)
@@ -94,8 +104,10 @@ class PoliteFetcher:
             self.stats.requests += 1
             req = urllib.request.Request(url, headers={
                 'User-Agent': USER_AGENT,
-                'Accept': 'text/html,application/xhtml+xml,application/xml',
+                'Accept': accept,
                 'Accept-Language': 'ko,en;q=0.8',
+                # urllib does not decompress, so never invite a gzip body.
+                'Accept-Encoding': 'identity',
             })
             try:
                 with urllib.request.urlopen(req, timeout=self.timeout) as resp:
@@ -138,7 +150,8 @@ class NetworkSource:
         self.fetcher = fetcher
 
     def post_ids(self) -> list[int]:
-        return sitemap_post_ids(self.fetcher.get(f'{SITE_ORIGIN}/sitemap.xml'))
+        return sitemap_post_ids(
+            self.fetcher.get(f'{SITE_ORIGIN}/sitemap.xml', accept=ACCEPT_XML))
 
     def post(self, post_id: int) -> RawPost:
         html = self.fetcher.get(f'{SITE_ORIGIN}/{post_id}')

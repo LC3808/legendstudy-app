@@ -9,12 +9,15 @@ import json
 import sys
 import tempfile
 import unittest
+import unittest.mock
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from ingestion.crawler import (  # noqa: E402
-    FetchError, PoliteFetcher, SampleSource, robots_allows, sitemap_post_ids,
+    ACCEPT_HTML, ACCEPT_XML, USER_AGENT, FetchError, NetworkSource,
+    PoliteFetcher, SampleSource, robots_allows, sitemap_post_ids,
 )
 from ingestion.models import RawAttachment, RawPost  # noqa: E402
 from ingestion.normalizer import (  # noqa: E402
@@ -723,6 +726,89 @@ class SeedPackageTests(unittest.TestCase):
     def test_seed_declares_every_row_active_and_parentless(self):
         body = self.SEED.read_text(encoding='utf-8')
         self.assertEqual(body.count(', null, true, '), len(SUBJECTS_V1))
+
+
+
+
+class RequestHeaderTests(unittest.TestCase):
+    """The live smoke returned HTTP 406 for sitemap.xml. These pin the fix."""
+
+    def capture(self, fetch):
+        seen = {}
+
+        class FakeResponse:
+            def __enter__(self_inner):
+                return self_inner
+
+            def __exit__(self_inner, *exc):
+                return False
+
+            def read(self_inner):
+                return b'<urlset></urlset>'
+
+        def fake_urlopen(req, timeout=None):
+            seen['url'] = req.full_url
+            seen['headers'] = {k.lower(): v for k, v in req.header_items()}
+            return FakeResponse()
+
+        with unittest.mock.patch('urllib.request.urlopen', fake_urlopen):
+            fetch()
+        return seen
+
+    def test_user_agent_is_a_single_comment_crawler_token(self):
+        self.assertEqual(USER_AGENT, 'LegendStudyIngest/0.1 (+https://legendstudy.com)')
+        self.assertNotIn(';', USER_AGENT)
+        self.assertEqual(USER_AGENT.count('('), 1)
+        self.assertEqual(USER_AGENT.count(')'), 1)
+        self.assertRegex(USER_AGENT, r'^[\w.-]+/[\d.]+ \(\+https://[^\s()]+\)$')
+
+    def test_accept_headers_cover_the_served_type_and_end_in_a_wildcard(self):
+        for accept in (ACCEPT_HTML, ACCEPT_XML):
+            self.assertIn('text/xml', accept)
+            self.assertIn('application/xml', accept)
+            self.assertIn('text/html', accept)
+            self.assertIn('*/*', accept)
+        # the sitemap header must prefer XML over HTML
+        self.assertLess(ACCEPT_XML.index('application/xml'), ACCEPT_XML.index('text/html'))
+        self.assertLess(ACCEPT_HTML.index('text/html'), ACCEPT_HTML.index('*/*'))
+
+    def test_sitemap_request_sends_the_xml_accept_header(self):
+        fetcher = PoliteFetcher(delay=0)
+        seen = self.capture(lambda: NetworkSource(fetcher).post_ids())
+        self.assertTrue(seen['url'].endswith('/sitemap.xml'))
+        self.assertEqual(seen['headers']['accept'], ACCEPT_XML)
+        self.assertEqual(seen['headers']['user-agent'], USER_AGENT)
+        self.assertEqual(seen['headers']['accept-encoding'], 'identity')
+        self.assertEqual(seen['headers']['accept-language'], 'ko,en;q=0.8')
+
+    def test_post_request_sends_the_html_accept_header(self):
+        fetcher = PoliteFetcher(delay=0)
+        seen = self.capture(lambda: fetcher.get('https://legendstudy.com/1705'))
+        self.assertEqual(seen['headers']['accept'], ACCEPT_HTML)
+        self.assertEqual(seen['headers']['user-agent'], USER_AGENT)
+
+    def test_406_is_reported_as_non_transient_and_not_retried(self):
+        fetcher = PoliteFetcher(delay=0, max_retries=3)
+
+        def fake_urlopen(req, timeout=None):
+            raise urllib.error.HTTPError(req.full_url, 406, 'Not Acceptable', {}, None)
+
+        with unittest.mock.patch('urllib.request.urlopen', fake_urlopen):
+            with self.assertRaises(FetchError) as ctx:
+                fetcher.get('https://legendstudy.com/sitemap.xml', accept=ACCEPT_XML)
+        self.assertIn('HTTP 406', str(ctx.exception))
+        self.assertFalse(ctx.exception.transient)
+        self.assertEqual(fetcher.stats.requests, 1)
+        self.assertEqual(fetcher.stats.retries, 0)
+
+    def test_header_change_did_not_weaken_robots_or_the_budget(self):
+        fetcher = PoliteFetcher(delay=0)
+        with self.assertRaises(FetchError):
+            fetcher.get('https://legendstudy.com/search?q=x', accept=ACCEPT_XML)
+        self.assertEqual(fetcher.stats.requests, 0)
+        budgeted = PoliteFetcher(delay=0, max_requests=0)
+        with self.assertRaises(FetchError):
+            budgeted.get('https://legendstudy.com/sitemap.xml', accept=ACCEPT_XML)
 
 
 if __name__ == '__main__':
