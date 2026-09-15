@@ -14,10 +14,10 @@ void main() {
     expect(find.text('D-DAY'), findsOneWidget);
     expect(find.byType(NavigationDestination), findsNWidgets(4));
 
-    await tester.ensureVisible(find.text('모의고사, 논술, 학습자료 검색'));
-    await tester.tap(find.text('모의고사, 논술, 학습자료 검색'));
+    await tester.ensureVisible(find.byTooltip('자료 검색'));
+    await tester.tap(find.byTooltip('자료 검색'));
     await tester.pumpAndSettle();
-    expect(find.text('나에게 필요한 학습 자료'), findsOneWidget);
+    expect(find.text('자료 찾기'), findsOneWidget);
     expect(
       tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
       1,

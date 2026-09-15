@@ -584,3 +584,20 @@ existing data preservation and Auth user retention all PASS.
 Day 8 overall is not COMPLETE; Day 8-B/8-C physical-device gates remain pending.
 Flutter scoring/Dart parity and real source ingestion are not verified by this result.
 This is Owner-run production evidence; this documentation closeout made no DB requests.
+
+
+## Day 9-A read-only search verification — 2026-09-15
+
+Anonymous HEAD/count returned0 visible rows on content_items, exams, subjects,
+exam_subjects and resources. Private/hidden rows were not inspected; D3's accepted
+baseline-preservation report remains their latest evidence. No data/schema/RPC or
+migration changes. Actual Supabase SDK public search smoke PASS on empty data.
+
+PostgREST treats the inverse exams_content_type composite FK as a to-many relation,
+so parent-side related sort returned PGRST118. Search instead starts at exams and
+uses sort_date/content_item_id, then extension-less parents in feed/id order.
+Empty embeds attempted wildcard columns (42501); all joins now select explicit
+public fields. Counted out-of-range pages return 416/PGRST103; a separate offset 0,
+limit 0 count handles the cross-stream boundary. Subject+kind joins use the exact
+resources_subject_same_content FK. Existing policies/indexes and column grants
+remain unchanged; see [search contract](day-9-search-explore.md).

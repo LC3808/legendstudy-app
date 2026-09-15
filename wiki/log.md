@@ -900,3 +900,29 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Current-status/D3/scoring/Study/architecture/index updated. iPhone physical subset
   and UI polish PASS preserved; Focus details/reboot/Android physical still pending.
   No production DB/schema/RPC or app feature changes; no Push/PR/Merge.
+
+
+## 2026-09-15 — Day 9-A Search / Explore implementation
+
+- Started from local 3519073 on codex/day-7-school-neis with no tracked changes;
+  preserved existing untracked directories. Day 8 accepted results remain intact.
+- Added typed search/filter/result/facet contracts, public Supabase repository,
+  Riverpod controller, metadata/subject/resource queries, parent aggregation and
+  bounded pagination. Home passes q to Materials; native detail identity retained.
+- Read-only public counts each 0 for content/exam/subject/occurrence/resource tables.
+  Verified PGRST118 inverse relation ordering and 42501 empty-embed projection
+  constraints, then implemented explicit exam-first/public-field reads. Verified
+  PGRST103 counted offset edge and fixed cross-stream paging with separate count.
+  Actual SDK read-only search/facets/later-page smoke PASS; no production writes.
+- Analyze PASS; full 306 tests PASS, one network opt-in skipped in default regression
+  and separately PASS. 29 render/handoff tests PASS, 52 desktop Flutter PNGs generated,
+  representative 360×640/428×926 at 1×/2× reviewed across required states. Filter
+  contrast/density refined; long titles/subjects wrap. Android debug build PASS.
+- iOS simulator build blocked before compilation: xcrun/xcodebuild exit 69 requires
+  Owner acceptance of the Xcode license. Profile/device execution and native
+  keyboard/screenshots cannot be verified yet. Owner notified; no license accepted
+  by the agent. Prior Day 8 iPhone PASS is not relabelled as new-UI validation.
+- Diff and credential checks PASS. Day 9-A implemented but NOT COMPLETE pending
+  iOS closeout. Day 9-B can plan against stable identities/contracts; no ingestion
+  authorized or performed. Wiki status/search/architecture/database/index updated.
+  No DB/schema/migration/RPC, push/PR/merge or Study/scoring feature changes.

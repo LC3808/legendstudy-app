@@ -21,7 +21,7 @@ class HomePage extends ConsumerWidget {
       const SizedBox(height: 8),
       const HomeMealCard(),
       const SizedBox(height: 8),
-      SearchEntry(onTap: () => context.go('/materials')),
+      const _HomeSearch(),
       Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 4),
         child: Semantics(
@@ -73,5 +73,46 @@ class HomePage extends ConsumerWidget {
       const SectionHeader('최근 본 자료'),
       const EmptyState('최근 본 자료를 로그인 후 모아 볼 수 있어요.'),
     ],
+  );
+}
+
+class _HomeSearch extends StatefulWidget {
+  const _HomeSearch();
+  @override
+  State<_HomeSearch> createState() => _HomeSearchState();
+}
+
+class _HomeSearchState extends State<_HomeSearch> {
+  final input = TextEditingController();
+  void submit() {
+    FocusScope.of(context).unfocus();
+    context.go(
+      Uri(path: '/materials', queryParameters: {'q': input.text}).toString(),
+    );
+  }
+
+  @override
+  void dispose() {
+    input.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    controller: input,
+    maxLength: 200,
+    textInputAction: TextInputAction.search,
+    onSubmitted: (_) => submit(),
+    decoration: InputDecoration(
+      hintText: '모의고사, 과목, 연도 검색',
+      hintMaxLines: 2,
+      counterText: '',
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      suffixIcon: IconButton(
+        tooltip: '자료 검색',
+        onPressed: submit,
+        icon: const Icon(Icons.search),
+      ),
+    ),
   );
 }

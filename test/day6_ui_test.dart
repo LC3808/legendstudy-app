@@ -1,3 +1,5 @@
+import 'support/search_fake.dart';
+import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -101,6 +103,9 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         contentRepositoryProvider.overrideWithValue(parents),
+        searchRepositoryProvider.overrideWithValue(
+          LegacySearchFake(parents, exam: exam),
+        ),
         examRepositoryProvider.overrideWithValue(exams),
         resourceRepositoryProvider.overrideWithValue(resources),
         externalOpenerProvider.overrideWithValue((_) async => true),

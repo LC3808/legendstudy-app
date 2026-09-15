@@ -14,6 +14,22 @@ checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
+## Day 9-A Search / Explore — implemented, iOS validation pending
+
+- Materials now provides metadata search, dynamic filters, grouped attachments,
+  bounded pagination, explicit empty/error/retry states and Home query handoff.
+  Public repository/controller/UI layers and test-only fixtures are separate.
+- Read-only public counts: content_items/exams/subjects/exam_subjects/resources
+  each 0 on 2026-09-15. Real Supabase SDK search/filters/later-page contract PASS.
+  No production fixtures, ingestion, DB/schema/RPC/migration or personal writes.
+- Desktop Flutter screenshots reviewed at 360×640/428×926 and 1×/2×. Analyze,
+  full 306 tests (one opt-in network test skipped),29 render/handoff tests, separate
+  real-SDK public read-only smoke, Android debug and diff/credential checks PASS.
+  iOS simulator/profile/native review blocked by
+  Xcode's unaccepted license; Owner review/acceptance requested. Day 9-A is not yet
+  COMPLETE. Prior Day 8 iPhone PASS and remaining physical edges remain unchanged.
+- [Search design, API constraints and Day 9-B/C handoff](day-9-search-explore.md).
+
 ## Study/Home UI polish and iPhone acceptance update
 
 - Meal expand/collapse, full lunch/dinner, descending seven-day rows, distinct

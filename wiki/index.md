@@ -52,3 +52,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 8-D2 Answer Entry + Raw Score — COMPLETE, Guest/Auth Flutter PASS](day-8-d2-answer-scoring.md)
 
 - [Day 8-D3 Grade + Result UX — COMPLETE, actual A/B Flutter PASS](day-8-d3-grade-result.md)
+
+- [Day 9-A Search / Explore — implementation and verification](day-9-search-explore.md)

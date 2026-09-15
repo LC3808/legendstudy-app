@@ -1,3 +1,5 @@
+import 'support/search_fake.dart';
+import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'dart:ui' show SemanticsFlag;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,6 +49,9 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         contentRepositoryProvider.overrideWithValue(content ?? ShellContent()),
+        searchRepositoryProvider.overrideWithValue(
+          LegacySearchFake(content ?? ShellContent()),
+        ),
         authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
       ],
     );
@@ -127,7 +132,7 @@ void main() {
   ) async {
     final content = ShellContent();
     await mount(tester, content: content);
-    final entry = find.text('모의고사, 논술, 학습자료 검색');
+    final entry = find.byTooltip('자료 검색');
     await tester.ensureVisible(entry);
     await tester.tap(entry);
     await tester.pumpAndSettle();
@@ -145,12 +150,12 @@ void main() {
       tester.widget<TextField>(find.byType(TextField)).controller!.text,
       isEmpty,
     );
-    expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
+    expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
     expect(find.text('테스트 자료'), findsNothing);
     expect(find.byTooltip('검색어 지우기'), findsNothing);
     await tab(tester, 2);
     await tab(tester, 1);
-    expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
+    expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
     expect(content.queries, ['영어']);
   });
 

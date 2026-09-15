@@ -1,3 +1,5 @@
+import 'support/search_fake.dart';
+import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -182,7 +184,10 @@ void main() {
     expect(await container.read(recentContentProvider.future), isEmpty);
     final fake = FakeContentRepository();
     final injected = ProviderContainer(
-      overrides: [contentRepositoryProvider.overrideWithValue(fake)],
+      overrides: [
+        contentRepositoryProvider.overrideWithValue(fake),
+        searchRepositoryProvider.overrideWithValue(LegacySearchFake(fake)),
+      ],
     );
     addTearDown(injected.dispose);
     expect(await injected.read(recentContentProvider.future), isEmpty);
@@ -297,24 +302,28 @@ void main() {
     final fake = FakeContentRepository();
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [contentRepositoryProvider.overrideWithValue(fake)],
+        overrides: [
+          contentRepositoryProvider.overrideWithValue(fake),
+          searchRepositoryProvider.overrideWithValue(LegacySearchFake(fake)),
+        ],
         child: const LegendStudyApp(),
       ),
     );
     await tester.pumpAndSettle();
     expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
-    await tester.ensureVisible(find.text('모의고사, 논술, 학습자료 검색'));
-    await tester.tap(find.text('모의고사, 논술, 학습자료 검색'));
+    await tester.ensureVisible(find.byTooltip('자료 검색'));
+    await tester.tap(find.byTooltip('자료 검색'));
     await tester.pumpAndSettle();
-    expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
+    expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
     await tester.enterText(find.byType(TextField), '영어');
     await tester.testTextInput.receiveAction(TextInputAction.search);
     await tester.pumpAndSettle();
     expect(fake.lastQuery, '영어');
-    expect(find.text('검색 결과가 없어요.'), findsOneWidget);
+    expect(find.text('조건에 맞는 자료가 없어요.'), findsOneWidget);
     await tester.enterText(find.byType(TextField), '');
+    await tester.pump(const Duration(milliseconds: 400));
     await tester.pumpAndSettle();
-    expect(find.text('검색어를 입력해 주세요.'), findsOneWidget);
+    expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
   });
   testWidgets('Home distinguishes loading, data, failure and retry', (
     tester,
@@ -324,7 +333,10 @@ void main() {
     fake.response = pending.future;
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [contentRepositoryProvider.overrideWithValue(fake)],
+        overrides: [
+          contentRepositoryProvider.overrideWithValue(fake),
+          searchRepositoryProvider.overrideWithValue(LegacySearchFake(fake)),
+        ],
         child: const LegendStudyApp(),
       ),
     );

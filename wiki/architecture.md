@@ -436,3 +436,19 @@ admissions prediction. Exact pricing/limits and interaction with the earlier one
 ad-removal policy need a separate product decision. No subscription or payment scope
 is enabled here. Future access belongs in an Entitlement layer, not scattered isPro
 widget conditions. A free viewing limit must never delete attempts beyond that limit.
+
+
+## Day 9-A search / explore
+
+Materials SearchQuery/SearchFilters → SearchController (Riverpod) → SearchRepository
+→ SupabaseSearchRepository. Home passes q to the same Materials route; no separate
+Home search backend. ContentRepository remains the feed/detail contract.
+Search reads exams in canonical sort_date order, then extension-less content in
+feed order, with bounded parent paging and batched occurrence/resource enrichment.
+The inverse composite FK cannot provide to-one parent-side related sorting in the
+current PostgREST API (PGRST118 verified); no schema workaround was deployed.
+Search item parent IDs remain bookmark/recent targets; scoped resource IDs remain
+available for 9-C. Explicit public projections, guest access and RLS are preserved.
+See [Day 9 search](day-9-search-explore.md) for paging/count edges, dynamic facets,
+UI evidence, environment gate and later ingestion/download boundaries. This
+supersedes Day6 submit-only Materials behavior; earlier checkpoints are historical.
