@@ -926,3 +926,27 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   iOS closeout. Day 9-B can plan against stable identities/contracts; no ingestion
   authorized or performed. Wiki status/search/architecture/database/index updated.
   No DB/schema/migration/RPC, push/PR/merge or Study/scoring feature changes.
+
+
+## 2026-09-15 — Day 9-A iOS validation / COMPLETE
+
+- Owner resolved Xcode license gate. New Xcode27 rejects iOS12 and the default
+  simulator architecture combination. Preserved repository targets/Podfile; used
+  an external iOS15/arm64/ONLY_ACTIVE_ARCH validation xcconfig. Simulator and
+  signed profile builds PASS under those conditions; plain/default build remains
+  a separately documented release-toolchain issue requiring Owner policy review.
+- iPhone17 Pro simulator iOS26.5,402×874 logical portrait:14 native screen scenarios
+  (seven at1×/2×) and Home query handoff PASS.26 OS screenshots captured; representative
+  hierarchy, spacing, long text, zero/one/many, loading/error/filter states reviewed.
+- Added compositor wait/actual-width filenames and real keyboard inset assertion.
+  Assertion exposed hardware-keyboard simulation; after switching to software
+  keyboard,1×/2× inset and Korean OS screenshot checks PASS. Restored original
+  keyboard setting. No focus-only screenshot counted as keyboard acceptance.
+- Analyze and29 targeted widget tests PASS; prior full306 regression, public SDK
+  smoke and Android debug PASS retained. Main simulator app restored without
+  clearing its container; actual public Materials empty state verified in native UI.
+  Profile build is not a physical profile launch; no
+  physical phone was connected. Prior Day8 iPhone acceptance remains unchanged.
+- Day9-A COMPLETE for Search/Explore scope; Wiki status/index/architecture updated.
+  Next:9-B real-content ingestion under its own request;9-C/9-D remain open.
+  No product feature, DB/schema/RPC/dependency changes or push/PR/merge.

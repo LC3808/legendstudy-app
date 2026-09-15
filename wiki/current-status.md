@@ -14,7 +14,7 @@ checks are retained below. Day 8-B implementation checks are listed separately;
 no production calls or DB changes were made for Focus. Earlier implementation checkpoints remain
 in [log.md](log.md); this page describes the current state rather than historical gates.
 
-## Day 9-A Search / Explore — implemented, iOS validation pending
+## Day 9-A Search / Explore — COMPLETE
 
 - Materials now provides metadata search, dynamic filters, grouped attachments,
   bounded pagination, explicit empty/error/retry states and Home query handoff.
@@ -25,9 +25,13 @@ in [log.md](log.md); this page describes the current state rather than historica
 - Desktop Flutter screenshots reviewed at 360×640/428×926 and 1×/2×. Analyze,
   full 306 tests (one opt-in network test skipped),29 render/handoff tests, separate
   real-SDK public read-only smoke, Android debug and diff/credential checks PASS.
-  iOS simulator/profile/native review blocked by
-  Xcode's unaccepted license; Owner review/acceptance requested. Day 9-A is not yet
-  COMPLETE. Prior Day 8 iPhone PASS and remaining physical edges remain unchanged.
+  iOS simulator native 1×/2× review and real software-keyboard inset checks PASS.
+  Simulator/profile builds PASS using external Xcode27 iOS15/arm64 overrides;
+  default iOS12 project settings were preserved. This is not a default-build or
+  release-compatibility claim; minimum-iOS/toolchain policy needs separate review.
+- 26 OS-level native screenshots reviewed; normal simulator app restored. No
+  physical iPhone connected in this follow-up; prior Day8 physical PASS preserved.
+  Day9-B real ingestion and9-C/9-D remain separate. No production writes.
 - [Search design, API constraints and Day 9-B/C handoff](day-9-search-explore.md).
 
 ## Study/Home UI polish and iPhone acceptance update

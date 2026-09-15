@@ -452,3 +452,13 @@ available for 9-C. Explicit public projections, guest access and RLS are preserv
 See [Day 9 search](day-9-search-explore.md) for paging/count edges, dynamic facets,
 UI evidence, environment gate and later ingestion/download boundaries. This
 supersedes Day6 submit-only Materials behavior; earlier checkpoints are historical.
+
+
+### Day 9-A native validation closeout
+
+Search/Explore scoped acceptance is COMPLETE: simulator1×/2× native renders,
+software keyboard and Home handoff PASS; simulator/profile builds use an external
+Xcode27 iOS15/arm64 validation configuration. Repository iOS12 support settings
+remain unchanged. Default-build/release toolchain reconciliation needs a separate
+Owner decision; no deployment-target policy was silently changed. Physical new-UI
+and real-content quality checks remain9-D. See day-9-search-explore.md.

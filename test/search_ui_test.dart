@@ -81,6 +81,10 @@ void main() {
           tester,
         ) async {
           if (nativeCapture != null && size.width == 360) return;
+          if (const bool.fromEnvironment('SEARCH_KEYBOARD_ONLY') &&
+              scenario != 'keyboard') {
+            return;
+          }
           if (nativeCapture == null) {
             tester.view.physicalSize = size;
             tester.view.devicePixelRatio = 1;
@@ -187,8 +191,25 @@ void main() {
             await tester.enterText(find.byType(TextField), '고3');
             await tester.pump(const Duration(milliseconds: 400));
             await tester.pump();
+            if (nativeCapture != null) {
+              await tester.tap(find.byType(TextField));
+              await SystemChannels.textInput.invokeMethod<void>(
+                'TextInput.show',
+              );
+              await Future<void>.delayed(const Duration(milliseconds: 700));
+              await tester.pump();
+              expect(
+                tester.view.viewInsets.bottom,
+                greaterThan(0),
+                reason: 'Native software keyboard must actually be visible',
+              );
+            }
           }
-          final name = '${size.width.toInt()}-${scale.toInt()}x-$scenario';
+          final width = nativeCapture == null
+              ? size.width.toInt()
+              : (tester.view.physicalSize.width / tester.view.devicePixelRatio)
+                    .round();
+          final name = '$width-${scale.toInt()}x-$scenario';
           await capture(tester, name);
           if (scenario != 'keyboard') {
             final target = switch (scenario) {

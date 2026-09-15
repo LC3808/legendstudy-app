@@ -1,7 +1,8 @@
 # Day 9-A — Search / Explore
 
-Status: implementation and available checks PASS; iOS native checks are blocked
-by the current Xcode license gate. Day 9-A is not yet declared COMPLETE.
+Status: **Day 9-A COMPLETE** — Search / Explore implementation and scoped
+validation PASS. Xcode 27 validation overrides and remaining release/device gates
+are explicitly documented below; this is not Day 9-B/C/D completion.
 
 ## Baseline and boundaries
 
@@ -163,14 +164,28 @@ adding download/viewer behavior. See database.md and ingestion.md.
   Android debug build PASS; git diff/credential checks PASS.
 - Native harness also overrides Study controller with in-memory storage/clock,
   so Home handoff cannot restore or mutate the Owner's native Study session.
-- iOS simulator/profile/native screenshots currently blocked: Xcode reports its
-  license agreement is not accepted. Owner must review/accept it personally.
-  Prior accepted iPhone Day 8 evidence is preserved; it does not validate this UI.
+- Owner accepted the Xcode license. iPhone 17 Pro simulator / iOS 26.5 native
+  search scenarios and Home handoff PASS; 402×874 logical pixels, 1206×2622 PNGs.
+  1×/2× zero/one/many/long-title/long-subject/loading/error/filters/keyboard reviewed.
+  Authoritative OS-level captures: ignored build/search-system/402-*.png (26 files).
+- Initial native input tests did not prove keyboard display. Added a real inset>0
+  assertion and explicit native show request. It correctly failed with Device Hub's
+  simulated hardware keyboard, then both 1×/2× passed with software keyboard enabled.
+  Korean OS keyboard screenshots confirm the input stays visible. Hardware-keyboard
+  setting was restored afterward. Earlier focus-only captures are not keyboard PASS.
+- Native screenshots wait for compositor presentation; filenames use actual logical
+  width. Optional SEARCH_SYSTEM_CAPTURE emits a safe capture marker and pauses2s
+  for host simctl capture. SEARCH_KEYBOARD_ONLY narrows environmental rechecks.
+  Default native suite requires Device Hub → Device → Keyboard → Simulate Hardware
+  Keyboard OFF, so keyboard absence fails instead of producing a false success.
+- iOS simulator and signed profile builds PASS with the external override below.
+  No physical iPhone was connected: profile build is not physical profile launch.
+  Day 8 physical acceptance remains unchanged; populated-data/device validation is9-D.
 
 ## DB gate / next work
 
-- BLOCKER: none for the current search implementation. Environment blocker above
-  prevents required iOS closeout; Day 9-A COMPLETE awaits that validation.
+- BLOCKER: none for scoped Day 9-A. Release-toolchain decision below and actual
+  populated-content/device checks remain separately tracked.
 - SHOULD (after real9-B data): profile ILIKE/join/count query plans and facet usage;
   propose a public search/facet projection or indexes only with measured need and
   separate Owner approval. Review offset concurrency and preview density on real
@@ -180,3 +195,34 @@ adding download/viewer behavior. See database.md and ingestion.md.
 - 9-B can prepare ingestion against stable content/occurrence/resource identities;
   preserve raw labels, calendar/academic distinction and existing publication gates.
   This document authorizes no production ingestion or schema change.
+
+
+## Xcode 27 validation environment / release boundary
+
+Xcode 27.0 (27A266a) rejects the repository's existing iOS12 deployment target
+(minimum accepted by this toolchain:15). Its default simulator architecture also
+conflicted with the installed Flutter engine. No repository deployment target,
+Podfile, plugin, minimum-supported-OS policy or dependency was changed.
+
+The successful **validation builds** used this repository-external file:
+`/private/tmp/legendstudy-day9-xcode27.xcconfig`:
+
+```xcconfig
+IPHONEOS_DEPLOYMENT_TARGET = 15.0
+ARCHS = arm64
+ONLY_ACTIVE_ARCH = YES
+```
+
+Set `XCODE_XCCONFIG_FILE` to that path for the simulator/profile build and Flutter
+integration drive command. This produces arm64 validation artifacts targeting15;
+it does **not** prove a default-settings Xcode27 build, Intel simulator build,
+iOS12 compatibility, or release readiness. The plain build's original failure is
+retained as evidence, not relabelled PASS. Temporary configuration contains no keys.
+
+SHOULD before release: Owner decides supported minimum iOS/toolchain, then a
+separate build-configuration change makes default builds reproducible. Day9-A
+search runtime was verified without silently deciding that product policy.
+Normal configured simulator app was rebuilt/reinstalled and launched after the
+memory fixture harness; no uninstall/container reset was used. Actual Materials
+empty state was verified through native UI (normal-app-empty.png), in addition to
+the26 fixture-matrix OS captures. Physical phone validation awaits9-D.
