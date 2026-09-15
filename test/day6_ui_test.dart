@@ -73,6 +73,8 @@ class Parents implements ContentRepository {
 
   @override
   Future<ContentItem?> fetchContentBySlug(String slug) => detail();
+  @override
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids) async => [];
 }
 
 class Exams implements ExamRepository {

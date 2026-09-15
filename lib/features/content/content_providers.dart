@@ -37,6 +37,9 @@ class _UnavailableContentRepository implements ContentRepository {
   @override
   Future<ContentItem?> fetchContentBySlug(String slug) async =>
       throw BackendUnavailable(message);
+  @override
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids) async =>
+      throw BackendUnavailable(message);
 }
 
 typedef ContentFilter = ({String query, String? contentType});

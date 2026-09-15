@@ -1,0 +1,38 @@
+# Day 9-C3 — Saved / Recent UI + MY Integration
+
+Status: **implemented / local validation PASS**. Day 9-C is complete for the
+scoped C1-C3 material flow; publication itself remains unexecuted.
+
+## Personal lists
+
+- `/my/saved` and `/my/recent` retain their existing routes and now render
+  authenticated personal data with loading, empty, error, and retry states.
+- Bookmark and recent rows preserve repository server ordering, then hydrate
+  `content_item_id` values through the public `content_items` projection.
+  Supabase uses one bounded `id IN (...)` query per list (maximum 100 rows); the
+  personal row order is restored client-side.
+- Missing, inactive, or deleted content is safely omitted. No private or
+  inactive fetch path, cached private content, or schema/RLS bypass exists.
+- Guest entry shows a login-required state and performs no personal or content
+  cloud request. Auth changes rebuild the provider and discard prior-account
+  state.
+- List cards navigate to the existing detail route. Returning from detail
+  invalidates the relevant list, reflecting bookmark and recent changes without
+  global synchronization state.
+
+## Home and accessibility
+
+Home's existing `최근 본 자료` placeholder now uses the same small recent-list
+widget. Cards retain the LegendStudy visual language, provide a minimum 48px
+interactive surface, wrap long titles, and were checked at 360×640 and 2× text.
+
+## Publication readiness
+
+The scoped A–Q checklist is PASS for search/detail, resource grouping and safe
+targets, C2 bookmark/recent behavior, Saved/Recent lists, MY routes, search
+back-state, accessibility, inactive Pilot C public exposure, and no DB/schema/
+RLS change. Therefore **PUBLICATION READY = YES** for this implementation gate.
+This is readiness only: Pilot C remains inactive and no publication or
+production mutation was performed. Default Xcode 27/iOS12 compatibility remains
+a separate release-toolchain decision; documented iOS15/arm64 simulator
+validation passes.

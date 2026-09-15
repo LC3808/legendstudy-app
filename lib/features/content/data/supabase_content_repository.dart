@@ -77,4 +77,18 @@ class SupabaseContentRepository implements ContentRepository {
         .maybeSingle();
     return row == null ? null : ContentItem.fromJson(row);
   }
+
+  @override
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids) async {
+    if (ids.isEmpty) return [];
+    if (ids.length > 100) {
+      throw ArgumentError.value(ids.length, 'ids', '1..100');
+    }
+    final rows = await client
+        .from('content_items')
+        .select(projection)
+        .eq('is_active', true)
+        .inFilter('id', ids);
+    return rows.map(ContentItem.fromJson).toList();
+  }
 }

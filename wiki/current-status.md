@@ -436,8 +436,8 @@ separately. Ingestion success is not publication.
 - Relevant 32 tests and `flutter analyze` pass. Android/iOS build validation and
   full regression are tracked separately in this closeout. No DB, Production,
   publication, ingestion, or schema change.
-- **Day 9-C1 is implemented. Day 9-C overall is NOT COMPLETE.** C2 may start
-  after this C1 closeout; C2 owns bookmark/recent views.
+- **Day 9-C1 was implemented at its checkpoint.** C2 owns bookmark/recent views;
+  the current C3 closeout below is authoritative for the full Day 9-C status.
 
 ## Day 9-C2 Bookmark + Recent Views — IMPLEMENTED
 
@@ -457,8 +457,33 @@ separately. Ingestion success is not publication.
 - Added focused C2 tests for bookmark mutation/race/guest/A-B behavior and
   recent lifecycle/rebuild/failure/re-entry behavior. No DB/schema/RLS/RPC,
   production mutation, publication, C3 list screen, or MY redesign.
-- **Day 9-C2 is implemented. Day 9-C overall is NOT COMPLETE.** Next scope is
-  C3 or a separately approved UI integration task.
+- **Day 9-C2 was implemented at its checkpoint.** C3 below completes the
+  Saved/Recent UI integration and is authoritative for the full Day 9-C status.
+
+## Day 9-C3 Saved / Recent UI + MY Integration — COMPLETE
+
+- `/my/saved` and `/my/recent` now use authenticated personal repositories with
+  loading, empty, error/retry and guest-login states. Existing routes and MY
+  navigation are preserved; cards open the existing content detail route.
+- Personal rows hydrate through the explicit public `content_items` projection
+  using one bounded `id IN (...)` batch query (up to 100 IDs), restoring the
+  repository's server order. Missing/inactive/deleted content is omitted and
+  never fetched through a private or inactive path.
+- Returning from detail invalidates the relevant list, so bookmark changes and
+  recent server timestamp updates appear on re-entry without global state.
+  Home's existing recent placeholder now uses the same small recent-list widget;
+  no Home redesign or Meal Card v2 was made.
+- C3 focused tests cover saved/recent ordering and batch hydration, guest no
+  request, inactive/missing exclusion, 360×640/2× long-title layout and retry;
+  existing C1/C2 and navigation regressions remain passing.
+- Publication readiness checklist A–Q is PASS for the scoped gate, so
+  **PUBLICATION READY = YES**. This is not publication: all Pilot C content
+  remains inactive, no production mutation was performed, and publication still
+  requires the separate Owner activation decision. Default iOS12/Xcode27
+  compatibility remains a release-toolchain follow-up; documented iOS15/arm64
+  simulator validation passes.
+- **Day 9-C1/C2/C3 are complete. Day 9-C is COMPLETE.** Next: Owner review and
+  explicit publication decision, or separate release-toolchain work.
 
 ## Long-term backlog — preserved for later planning
 

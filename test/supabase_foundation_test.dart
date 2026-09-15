@@ -50,6 +50,8 @@ class FakeContentRepository implements ContentRepository {
 
   @override
   Future<ContentItem?> fetchContentBySlug(String slug) async => null;
+  @override
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids) async => [];
 }
 
 void main() {

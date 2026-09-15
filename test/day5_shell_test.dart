@@ -38,6 +38,8 @@ class ShellContent implements ContentRepository {
   @override
   Future<ContentItem?> fetchContentBySlug(String slug) async =>
       slug == 'sample' ? item : null;
+  @override
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids) async => [];
 }
 
 void main() {
@@ -88,10 +90,10 @@ void main() {
     await tester.tap(find.text('저장한 자료'));
     await tester.pumpAndSettle();
     expect(container.read(routerProvider).canPop(), isTrue);
-    expect(find.text('다시 보고 싶은 자료를 한곳에'), findsOneWidget);
+    expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tab(tester, 2);
     await tab(tester, 3);
-    expect(find.text('다시 보고 싶은 자료를 한곳에'), findsOneWidget);
+    expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
     expect(find.text('나의 학습 공간'), findsOneWidget);

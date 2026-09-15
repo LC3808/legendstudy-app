@@ -9,6 +9,8 @@ import '../../study/study_providers.dart';
 import '../../school/presentation/home_meal_card.dart';
 import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
+import '../../personal/personal_list_providers.dart';
+import '../../personal/presentation/personal_material_list.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -71,7 +73,7 @@ class HomePage extends ConsumerWidget {
         onRetry: () => ref.invalidate(recentContentProvider),
       ),
       const SectionHeader('최근 본 자료'),
-      const EmptyState('최근 본 자료를 로그인 후 모아 볼 수 있어요.'),
+      const PersonalMaterialList(kind: PersonalListKind.recentViews),
     ],
   );
 }

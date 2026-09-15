@@ -4,13 +4,13 @@ import 'package:go_router/go_router.dart';
 import '../features/home/presentation/home_page.dart';
 import '../features/materials/presentation/materials_page.dart';
 import '../features/saved/presentation/saved_page.dart';
+import '../features/saved/presentation/recent_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
 import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
 import '../shared/widgets/nested_page.dart';
-import '../shared/widgets/shell_widgets.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
@@ -74,12 +74,8 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                   GoRoute(
                     path: 'recent',
-                    builder: (_, _) => const NestedPage(
-                      title: '최근 본 자료',
-                      child: ShellPage(
-                        children: [EmptyState('로그인하면 최근 본 자료를 모아 볼 수 있어요.')],
-                      ),
-                    ),
+                    builder: (_, _) =>
+                        const NestedPage(title: '최근 본 자료', child: RecentPage()),
                   ),
                 ],
               ),

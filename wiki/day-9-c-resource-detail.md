@@ -33,3 +33,6 @@ suppresses platform/raw URL details on failure.
   empty resources, long content, 2× text, and 360×640 layout.
 - No bookmark, recent-view, MY, DB, ingestion, publication, or Production data
   change is part of C1.
+
+Follow-up integrations are documented in [C2 personal state](day-9-c-personal-state.md)
+and [C3 personal lists](day-9-c-personal-lists.md).

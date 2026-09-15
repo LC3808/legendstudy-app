@@ -38,3 +38,5 @@ add/delete, duplicate-tap protection, guest no-write, A/B isolation, one-time
 recent recording across rebuild, recent failure visibility, and fresh-entry
 recording. Full Flutter regression and platform-build results are recorded in
 `wiki/current-status.md` after the closeout.
+
+C3 completes the list integration in [day-9-c-personal-lists.md](day-9-c-personal-lists.md).

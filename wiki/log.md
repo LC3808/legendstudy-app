@@ -1,5 +1,16 @@
 # Development Log
 
+## 2026-09-15 — Day 9-C3 Saved / Recent UI + MY Integration
+
+- Replaced Saved and Recent placeholders with authenticated personal lists,
+  existing MY routes, detail navigation, retry/error/empty states, and Home's
+  small recent section. Hydration uses a bounded public content batch query and
+  omits inactive/missing content safely.
+- Added C3 list, guest safety, ordering, batch, long-title/2× layout and retry
+  tests. Full Flutter regression, analyzer, Android debug and documented iOS
+  simulator validation passed. No production mutation, publication, or DB/RLS
+  change. Publication readiness is YES; actual publication remains unexecuted.
+
 ## 2026-09-15 — Day 9-C1 Resource Detail + Safe Open Target
 
 - Reused the existing search → content-detail route and resource repository.

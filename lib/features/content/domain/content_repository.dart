@@ -8,4 +8,5 @@ abstract interface class ContentRepository {
     String? contentType,
   });
   Future<ContentItem?> fetchContentBySlug(String slug);
+  Future<List<ContentItem>> fetchContentByIds(List<String> ids);
 }
