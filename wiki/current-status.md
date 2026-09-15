@@ -374,46 +374,53 @@ School/proxy acceptance: [Day 7 NEIS](day-7-neis.md).
   See [day-9-subjects-taxonomy.md](day-9-subjects-taxonomy.md) and
   [day-9-pilot-c-package.md](day-9-pilot-c-package.md).
 
-## Day 9-B3 Pilot C apply writer — implemented, NOT applied
+## Day 9-B3 Pilot C Production ingestion — **COMPLETE**. Publication NOT done.
 
-Owner-completed verification, recorded as fact:
+Owner applied Pilot C to the LegendStudy production project. Real content now
+exists in production for the first time, and all of it is inactive.
 
-- Live network smoke PASS: 5/5 posts, requests 6, retries 0, failures 0.
-- Live Pilot C dry-run PASS: 23 posts, 0 parse errors, 23 content_items,
-  23 exams, 363 exam_subjects (all provisional; 203 at 0.95, 160 at 1.0),
-  23 subjects referenced, 739 resources (question 360, answer_explanation 356,
-  listening_audio 23), providers kakaocdn 716 / box 23, link_kinds unknown 716 /
-  landing_page 23, 23 publish candidates, 23 advisory quarantine,
-  0 blocking, 0 missing sources, 0 merge candidates. Offline/live post diff PASS.
-- Production Preflight 1–9 PASS on PostgreSQL 17.6: all six content tables 0,
-  0 verified occurrences, 0 post-id and 0 slug collisions, required constraints
-  present, RLS SELECT-only for anon/authenticated, private column grants intact.
-- **Subjects taxonomy v1 seed APPLIED to production**: 23 rows, 23 active,
-  23 unique codes, 23 unique ids, names/category/sort_order verified.
-- Current production baseline: `subjects = 23`; source_posts, content_items,
-  exams, exam_subjects, resources, ingestion_quarantine all 0.
+Apply output — every table hit its expected count exactly:
 
-Writer status:
+| table | inserted |
+|---|---|
+| source_posts | 23 / 23 |
+| content_items | 23 / 23 |
+| exams | 23 / 23 |
+| exam_subjects | 363 / 363 |
+| resources | 739 / 739 |
 
-- `tool/ingestion/apply.py` implements the Pilot C write path. One transaction
-  for all 23 posts with counts verified before COMMIT; quarantine in its own
-  transaction afterwards. INSERT-only — no UPDATE, no DELETE. Deterministic
-  uuid5 ids make a second run a no-op and keep quarantine from accumulating.
-- Gates, in order: exact project ref (checked before any password or
-  connection), Owner approval, `--source network`, `--pilot c`, scope,
-  collisions, write-shape and signing-material invariants, live preflight
-  (subjects v1 = 23, mapped subject ids present, 0 verified occurrences, pilot
-  wholly absent or wholly present), inserted-count match.
-- Expected delta: source_posts +23, content_items +23, exams +23,
-  exam_subjects +363, resources +739, ingestion_quarantine +23. No subject
-  INSERT — the taxonomy is already seeded.
-- 134 offline tests PASS with an in-memory database double; no production
-  fixture was written.
-- **`Production pilot apply 준비: YES`** — the command is in
-  [day-9-pilot-c-package.md](day-9-pilot-c-package.md) §5. Claude has not run
-  it; execution is a separate Owner decision.
-- Publication remains separately gated on the 9-C `link_kind='unknown'`
-  open-target rule.
+Canonical transaction COMMIT, then the quarantine transaction COMMIT (23 rows).
+
+Owner manual postflight, verified in the Supabase SQL editor:
+
+- counts: subjects 23, source_posts 23, content_items 23, exams 23,
+  exam_subjects 363, resources 739, ingestion_quarantine 23
+- **active_content_items 0, active_exam_subjects 0, active_resources 0**
+- mapping: provisional 363, verified 0; canonical subjects 23, occurrences 363,
+  confidence 1.00 × 160, confidence 0.95 × 203
+- resources: question 360, answer_explanation 356, listening_audio 23
+- links: signed_url_rows **0**, unknown 716, landing_page 23,
+  unknown_without_file_url 716
+- integrity: duplicate source_posts / slugs / exam_subjects / resources all 0;
+  orphan exam_subjects 0, orphan resources 0
+- anon role RLS: public_content_items 0, public_exams 0, public_exam_subjects 0,
+  public_resources 0, public_subjects 23
+
+So the applied rows are invisible to the public client, exactly as intended.
+
+Known issue, already fixed: immediately after COMMIT the **CLI postflight**
+raised `ProgrammingError: only '%s', '%b', '%t' are allowed as placeholders,
+got '%c'`. The cause was a read-only query only — a literal `'%credential=%'`
+LIKE pattern inside a parameterised statement, which psycopg parsed as the
+placeholder `%c`. No write path was involved, nothing was re-applied, and the
+Owner's manual postflight above is the authoritative verification. The query is
+now parameterised and the adapter passes `None` for parameterless statements;
+141 offline tests cover it.
+
+**PUBLICATION HAS NOT HAPPENED.** Every content row is `is_active=false` and
+stays that way until (a) 9-C routes `link_kind='unknown'` resources to the
+content item's `source_url`, and (b) the Owner approves the activation step
+separately. Ingestion success is not publication.
 
 ## Long-term backlog — preserved for later planning
 

@@ -36,7 +36,8 @@ from ingestion.subjects import (  # noqa: E402
     TAXONOMY_VERSION, map_subject, subject_id,
 )
 from ingestion.apply import (  # noqa: E402
-    EXPECTED_SUBJECT_COUNT, ApplyAborted, apply_pilot, apply_quarantine,
+    EXPECTED_SUBJECT_COUNT, SIGNED_URL_PATTERNS, ApplyAborted, PsycopgSession,
+    apply_pilot, apply_quarantine,
     assert_no_signing_material, assert_write_shape, postflight, preflight, resolve,
     row_id,
 )
@@ -1053,11 +1054,10 @@ class FakeDb:
         if "where mapping_status = 'verified'" in text:
             return [(sum(1 for r in live['exam_subjects'].values()
                          if r['mapping_status'] == 'verified'),)]
-        if 'ilike' in text and 'public.resources' in text:
-            signed = sum(
-                1 for r in live['resources'].values()
-                if any(t in (r.get('source_url') or '')
-                       for t in ('credential=', 'signature=', 'expires=')))
+        if 'ilike any' in text and 'public.resources' in text:
+            tokens = [p.strip('%') for p in params[0]]
+            signed = sum(1 for r in live['resources'].values()
+                         if any(t in (r.get('source_url') or '') for t in tokens))
             return [(signed,)]
         if 'where is_active' in text:
             table = text.split('from public.', 1)[1].split(' ', 1)[0]
@@ -1318,6 +1318,137 @@ class ApplyTransactionTests(unittest.TestCase):
         self.apply_all(db)
         self.assertNotIn('INSERT subjects', db.log)
         self.assertEqual(len(db.subjects), EXPECTED_SUBJECT_COUNT)
+
+
+
+
+class PlaceholderStrictSession(FakeDb):
+    """FakeDb that enforces psycopg 3's placeholder rule.
+
+    psycopg only scans a statement for placeholders when parameters are
+    supplied, and then accepts only %s, %b, %t and the %% escape. The live
+    postflight failed with "only '%s', '%b', '%t' are allowed as placeholders,
+    got '%c'" because a literal '%credential=%' sat inside the SQL of a
+    parameterised call. This double reproduces that rule offline.
+    """
+
+    class ProgrammingError(RuntimeError):
+        pass
+
+    def execute(self, statement, params=()):
+        if params:
+            index = 0
+            while True:
+                index = statement.find('%', index)
+                if index < 0:
+                    break
+                marker = statement[index + 1:index + 2]
+                if marker not in ('s', 'b', 't', '%'):
+                    raise self.ProgrammingError(
+                        f"only '%s', '%b', '%t' are allowed as placeholders, "
+                        f"got '%{marker}'")
+                index += 2
+        return super().execute(statement, params)
+
+
+class PostflightPlaceholderTests(unittest.TestCase):
+    """Regression for the live Pilot C postflight ProgrammingError."""
+
+    SAMPLES = Path(__file__).resolve().parent / 'ingestion/samples'
+
+    @classmethod
+    def setUpClass(cls):
+        posts = SampleSource(cls.SAMPLES / 'day9b_exam_posts.jsonl').posts()
+        result = run(posts, CRAWLED_AT, map_subjects=True)
+        cls.plans = [p for p in result.plans if p.exam and p.exam['year'] >= 2025]
+
+    def test_the_double_reproduces_the_original_failure(self):
+        db = PlaceholderStrictSession()
+        legacy = ("select count(*) from public.resources where source_url ilike "
+                  "'%credential=%' or source_url ilike '%signature=%'")
+        with self.assertRaises(PlaceholderStrictSession.ProgrammingError) as ctx:
+            db.execute(legacy, ('anything',))
+        self.assertIn("got '%c'", str(ctx.exception))
+
+    def test_postflight_survives_the_placeholder_rule(self):
+        db = PlaceholderStrictSession()
+        counts = postflight(db)
+        self.assertEqual(counts['signed_resource_urls'], 0)
+        self.assertEqual(counts['subjects'], EXPECTED_SUBJECT_COUNT)
+
+    def test_whole_apply_and_postflight_survive_the_placeholder_rule(self):
+        db = PlaceholderStrictSession()
+        posts = [resolve(plan) for plan in self.plans]
+        preflight(db, posts, 0)
+        apply_pilot(db, posts, expected_rows(self.plans))
+        apply_quarantine(db, posts)
+        counts = postflight(db)
+        self.assertEqual(counts['resources'], 739)
+        self.assertEqual(counts['signed_resource_urls'], 0)
+
+    def test_signed_url_patterns_are_parameters_not_literals(self):
+        self.assertEqual(SIGNED_URL_PATTERNS,
+                         ['%credential=%', '%signature=%', '%expires=%'])
+        captured = {}
+
+        class Session(FakeDb):
+            def execute(self_inner, statement, params=()):
+                if 'ilike' in statement:
+                    captured['statement'] = statement
+                    captured['params'] = params
+                return super().execute(statement, params)
+
+        postflight(Session())
+        self.assertNotIn('credential', captured['statement'])
+        self.assertIn('ilike any(%s)', captured['statement'])
+        self.assertEqual(captured['params'], (SIGNED_URL_PATTERNS,))
+
+    def test_the_writer_refuses_a_signed_locator_through_the_full_path(self):
+        db = PlaceholderStrictSession()
+        posts = [resolve(plan) for plan in self.plans]
+        posts[0].resources[0]['source_url'] += '?credential=x&signature=y'
+        with self.assertRaises(ApplyAborted):
+            apply_pilot(db, posts, expected_rows(self.plans))
+        self.assertEqual(postflight(db)['resources'], 0)
+
+    def test_postflight_still_detects_a_signed_locator_already_in_the_table(self):
+        # The writer cannot create one, so inject directly: this proves the
+        # parameterised query still finds what the literal one used to find.
+        db = FakeDb()
+        db.tables['resources']['r1'] = {
+            'id': 'r1', 'source_url': 'https://x/a.pdf?credential=abc&signature=z',
+            'is_active': False}
+        db.tables['resources']['r2'] = {
+            'id': 'r2', 'source_url': 'https://x/b.pdf', 'is_active': False}
+        self.assertEqual(postflight(db)['signed_resource_urls'], 1)
+
+    def test_parameterless_statements_pass_none_to_psycopg(self):
+        seen = []
+
+        class Cursor:
+            description = (('count',),)
+
+            def __enter__(self_inner):
+                return self_inner
+
+            def __exit__(self_inner, *exc):
+                return False
+
+            def execute(self_inner, statement, params):
+                seen.append((statement, params))
+
+            def fetchall(self_inner):
+                return [(0,)]
+
+        class Connection:
+            def cursor(self_inner):
+                return Cursor()
+
+        session = PsycopgSession(Connection())
+        session.execute('select count(*) from public.resources')
+        session.execute('select %s', ('x',))
+        self.assertIsNone(seen[0][1], 'parameterless statement must pass None')
+        self.assertEqual(seen[1][1], ('x',))
 
 
 if __name__ == '__main__':

@@ -148,7 +148,7 @@ select code, name, category, taxonomy_version, is_active, sort_order
 from public.subjects where taxonomy_version = 'v1' order by sort_order;
 ```
 
-## 5. Ingestion apply — IMPLEMENTED (Day 9-B3), not yet executed
+## 5. Ingestion apply — **APPLIED to production (Day 9-B3)**
 
 `tool/ingestion/apply.py` now carries the write path. It is reached only when
 every gate in `assert_apply_allowed` and `assert_in_scope` passes.
@@ -238,7 +238,40 @@ Read-only verification on its own:
 python3 tool/ingest_legendstudy.py --postflight --project-ref stlhijzpjfgwwdgunlsd
 ```
 
-## 6. Postflight (read-only SQL)
+## 5b. Applied result
+
+Owner ran the command below against `stlhijzpjfgwwdgunlsd`. Inserted counts:
+source_posts 23/23, content_items 23/23, exams 23/23, exam_subjects 363/363,
+resources 739/739. Canonical transaction COMMIT, quarantine transaction COMMIT
+(23 rows). Every count matched the expectation table above, so the in-transaction
+count check passed and the pilot committed as one unit.
+
+The CLI postflight that ran straight afterwards raised
+`ProgrammingError: only '%s', '%b', '%t' are allowed as placeholders, got '%c'`.
+That was a **read-only** query defect: the signed-URL check carried a literal
+`'%credential=%'` LIKE pattern inside a parameterised statement, and psycopg
+read `%c` as a placeholder. No write path was involved and nothing was
+re-applied. The query now passes its patterns as a parameter
+(`source_url ilike any(%s)`) and the adapter sends `None` for parameterless
+statements, so no literal `%` can ever be parsed again.
+
+## 6. Postflight (read-only SQL) — Owner result recorded
+
+Owner ran this manually and it is the authoritative verification of the apply:
+
+| check | result |
+|---|---|
+| counts | subjects 23, source_posts 23, content_items 23, exams 23, exam_subjects 363, resources 739, ingestion_quarantine 23 |
+| active rows | content_items 0, exam_subjects 0, resources 0 |
+| mapping | provisional 363, verified 0 |
+| confidence | 1.00 × 160, 0.95 × 203, canonical subjects 23 |
+| resources | question 360, answer_explanation 356, listening_audio 23 |
+| links | signed_url_rows 0, unknown 716, landing_page 23, unknown_without_file_url 716 |
+| duplicates | source_posts 0, slugs 0, exam_subjects 0, resources 0 |
+| orphans | exam_subjects 0, resources 0 |
+| anon RLS | content_items 0, exams 0, exam_subjects 0, resources 0, subjects 23 |
+
+
 
 ```sql
 -- 6a. Deltas must equal the expectation table exactly.
@@ -375,8 +408,8 @@ apply and rollback.
 
 ## What is still refused
 
-- Executing `--apply` — the write path exists as of Day 9-B3 but has **not**
-  been run against production; that is a separate Owner decision.
+- Re-running `--apply` — the pilot is applied; a second run is a no-op by
+  design, but there is no reason to run one.
 - Any migration or schema change — the pilot needs none.
 - Supabase Storage mirroring — Owner deferred it pending a rights decision.
 - The ~1,400 legacy posts — deferred.

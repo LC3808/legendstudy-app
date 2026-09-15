@@ -706,3 +706,22 @@ Production baseline is now `subjects = 23` with every other content table at 0.
   `config/development.json`, `--db-host`, or a prompt. No credential reaches the
   repository, the wiki, an artifact or stdout.
 - 134 offline tests PASS (106 → 134). **Not applied to production.**
+
+## Day 9-B3 closeout — Pilot C is in production
+
+Owner applied Pilot C on 2026-09-15: 23 source posts, 23 content items,
+23 exams, 363 exam subjects, 739 resources and 23 advisory quarantine rows,
+every count matching the expectation, committed as one canonical transaction
+plus a separate quarantine transaction. Owner manual postflight confirmed
+0 active rows, 0 verified mappings, 0 signed URLs, 0 duplicates, 0 orphans and
+0 rows visible to the anon role. Details in
+[day-9-pilot-c-package.md](day-9-pilot-c-package.md) §5b–6.
+
+The CLI postflight failed immediately after COMMIT with
+`ProgrammingError … got '%c'` — a read-only query only, caused by a literal
+`'%credential=%'` LIKE pattern inside a parameterised statement. Fixed by
+passing the patterns as a parameter and by sending `None` for parameterless
+statements. No write path was affected and nothing was re-applied.
+
+**Publication has not happened.** All content is `is_active=false`, pending the
+9-C `link_kind='unknown'` open-target rule and a separate Owner approval.

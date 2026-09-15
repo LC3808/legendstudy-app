@@ -1078,3 +1078,31 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   refuses any UPDATE/DELETE and rejects unrecognised queries. No production
   fixture written. py_compile, credential scan and git diff --check PASS.
 - NOT APPLIED to production. Execution is a separate Owner decision.
+
+## 2026-09-15 — Day 9-B3 Pilot C applied to production; postflight query fixed
+
+- Owner applied Pilot C to the LegendStudy production project. Inserted:
+  source_posts 23/23, content_items 23/23, exams 23/23, exam_subjects 363/363,
+  resources 739/739. Canonical transaction COMMIT, quarantine COMMIT (23 rows).
+  Every count matched the expectation, so the in-transaction check passed.
+- Owner manual postflight PASS: subjects 23, source_posts 23, content_items 23,
+  exams 23, exam_subjects 363, resources 739, quarantine 23; active rows 0/0/0;
+  provisional 363, verified 0; question 360, answer_explanation 356,
+  listening_audio 23; signed_url_rows 0, unknown 716, landing_page 23,
+  unknown_without_file_url 716; duplicates 0, orphans 0; anon RLS shows 0 content
+  rows and 23 subjects. Content is in production and entirely inactive.
+- CLI postflight raised ProgrammingError "only '%s', '%b', '%t' are allowed as
+  placeholders, got '%c'" right after COMMIT. Cause: the signed-URL check kept a
+  literal '%credential=%' LIKE pattern inside a parameterised statement, and
+  psycopg parses placeholders whenever parameters are supplied. Read-only query
+  only; no write path involved and no re-apply.
+- Fix: the patterns are now a parameter (source_url ilike any(%s)), and
+  PsycopgSession passes None rather than an empty tuple for parameterless
+  statements so no literal % is ever parsed. Apply writer and ingestion logic
+  unchanged.
+- Added a PlaceholderStrictSession test double that reproduces psycopg's rule
+  offline; it first proves it catches the original statement, then runs the
+  whole apply plus postflight through it. 141 offline tests PASS (134 -> 141).
+  py_compile, credential scan and git diff --check PASS.
+- Day 9-B3 Pilot C Production ingestion COMPLETE. PUBLICATION NOT DONE: all rows
+  remain is_active=false pending the 9-C open-target rule and Owner approval.

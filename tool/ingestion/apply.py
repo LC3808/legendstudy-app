@@ -92,6 +92,7 @@ RESOURCE_COLUMNS = (
 QUARANTINE_COLUMNS = ('id', 'source_post_id', 'kind', 'payload', 'status', 'note')
 
 SIGNING_TOKENS = ('credential=', 'signature=', 'expires=')
+SIGNED_URL_PATTERNS = [f'%{token}%' for token in SIGNING_TOKENS]
 
 
 @dataclass
@@ -382,9 +383,12 @@ def postflight(session: DbSession) -> dict:
         'select count(*) from public.resources where is_active')[0][0]
     counts['verified_exam_subjects'] = session.execute(
         "select count(*) from public.exam_subjects where mapping_status = 'verified'")[0][0]
+    # The LIKE patterns are parameters, not literals. psycopg scans a statement
+    # for placeholders whenever parameters are passed, so a literal '%credential='
+    # inside the SQL was read as the placeholder '%c' and raised ProgrammingError.
     counts['signed_resource_urls'] = session.execute(
-        "select count(*) from public.resources where source_url ilike '%credential=%' "
-        "or source_url ilike '%signature=%' or source_url ilike '%expires=%'")[0][0]
+        'select count(*) from public.resources where source_url ilike any(%s)',
+        (SIGNED_URL_PATTERNS,))[0][0]
     return counts
 
 
@@ -401,7 +405,10 @@ class PsycopgSession:
 
     def execute(self, statement: str, params: Sequence = ()) -> list[tuple]:
         with self.connection.cursor() as cursor:
-            cursor.execute(statement, tuple(params))
+            # psycopg only parses placeholders when parameters are supplied.
+            # Passing None for a parameterless statement keeps any literal '%'
+            # in the SQL from being read as a placeholder.
+            cursor.execute(statement, tuple(params) if params else None)
             if cursor.description is None:
                 return []
             return list(cursor.fetchall())
