@@ -26,6 +26,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `design-system.md` — visual identity and UI design tokens
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log
+- `roadmap-essay-lab.md` — planned Essay Lab priority and October 2026 roadmap
 
 - [Day 10-A Flutter 3.47.3 official toolchain migration — COMPLETE](current-status.md#day-10-a--flutter-3473-official-toolchain-migration--complete)
 
@@ -67,3 +68,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 9-C2 Bookmark + Recent Views](day-9-c-personal-state.md)
 - [Day 9-C3 Saved / Recent UI + MY Integration](day-9-c-personal-lists.md)
 - [Day 9-D1 Pilot C publication package — implemented; publication COMPLETE](day-9-d1-publication-package.md)
+
+- [Essay Lab Product Roadmap — PLANNED, target 2026-10 Beta](roadmap-essay-lab.md)

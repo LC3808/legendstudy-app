@@ -1207,3 +1207,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Recorded Pilot C publication as Product-Owner-confirmed COMPLETE and added
   the Home v2, Subject Alias and MY inquiry/suggestion backlog. No production
   data, RLS, ingestion or publication mutation was performed by this task.
+
+## 2026-09-16 — Essay Lab roadmap priority
+
+- Recorded Essay Lab as the next major product priority, ahead of Academic
+  Profile, grade analysis and Admission Simulator, with a target of October
+  2026 Beta/initial service. The roadmap defines a Web-primary authoring
+  experience, shared Mobile/Web/Supabase identity and data, typed-answer MVP,
+  structured question-level evaluation packages, and an initial 5–10 university
+  content inventory focused on the latest 2–3 years.
+- Recorded the account-level initial three free evaluations, server-side credit
+  reservation/settlement, abuse-rate limiting posture, cumulative My Essay
+  Pattern and growth history, package-based monetization direction, and later
+  coach/university analysis. No code, schema, AI evaluation, billing, RLS or
+  Production change was made.

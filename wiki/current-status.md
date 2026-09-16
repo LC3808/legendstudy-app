@@ -2,6 +2,23 @@
 
 Last reviewed: 2026-09-16
 
+## Essay Lab product roadmap — PLANNED
+
+- Product priority is now AI essay feedback (Essay Lab) ahead of grade
+  analysis and admission prediction. Target: **2026-10 Beta or initial public
+  service**.
+- The planned service combines the existing Mobile App, a Web-primary long-form
+  authoring surface, and the shared Supabase backend. Initial scope is typed
+  answers, structured question-level evaluation packages, approximately 5–10
+  universities and the latest 2–3 years of available material.
+- The initial business model is account-level server-side free credits for the
+  first three evaluations, followed by credit/package purchase consideration.
+  Accumulated “My Essay Pattern” data and growth history are core retention and
+  conversion value; free results must not be intentionally degraded.
+- Academic Profile and Admission Simulator are explicitly **LATER**. No Essay
+  Lab code, schema, AI evaluation, credit, payment or Production work is
+  implemented by this roadmap entry. See [Essay Lab roadmap](roadmap-essay-lab.md).
+
 ## Day 10-A — Flutter 3.47.3 official toolchain migration — COMPLETE
 
 - Official repository baseline is now Flutter **3.47.3** / Dart **3.13.3** from
