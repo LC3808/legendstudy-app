@@ -205,63 +205,82 @@ class DailyUtilityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
-      color: accentColor == null ? AppTokens.surfaceWarm : null,
-      gradient: accentColor == null
-          ? null
-          : LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [accentColor!, accentColor!, AppTokens.surfaceWarm],
-              stops: const [0, .012, .012],
-            ),
+      color: AppTokens.surfaceWarm,
       border: Border.all(color: AppTokens.cardBorder),
       borderRadius: BorderRadius.circular(AppTokens.cardRadius),
     ),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(AppTokens.cardRadius - 1),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(accentColor == null ? 16 : 13, 8, 16, 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            LayoutBuilder(
-              builder: (context, constraints) =>
-                  wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        heading ??
-                            Text(
-                              title,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                        Align(alignment: Alignment.centerRight, child: action),
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        Expanded(
-                          child:
-                              heading ??
+      child: CustomPaint(
+        painter: accentColor == null ? null : _AccentBarPainter(accentColor!),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(accentColor == null ? 16 : 13, 8, 16, 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) =>
+                    wrapHeader &&
+                        MediaQuery.textScalerOf(context).scale(1) >= 1.5
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          heading ??
                               Text(
                                 title,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
-                        ),
-                        const SizedBox(width: 8),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: constraints.maxWidth * .45,
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: action,
                           ),
-                          child: action,
-                        ),
-                      ],
-                    ),
-            ),
-            body,
-          ],
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                            child:
+                                heading ??
+                                Text(
+                                  title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium,
+                                ),
+                          ),
+                          const SizedBox(width: 8),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: constraints.maxWidth * .45,
+                            ),
+                            child: action,
+                          ),
+                        ],
+                      ),
+              ),
+              body,
+            ],
+          ),
         ),
       ),
     ),
   );
+}
+
+class _AccentBarPainter extends CustomPainter {
+  const _AccentBarPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, 4, size.height),
+      Paint()..color = color,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_AccentBarPainter oldDelegate) =>
+      oldDelegate.color != color;
 }
