@@ -2,6 +2,22 @@
 
 Last reviewed: 2026-09-16
 
+## Day 10-C — Legacy Subject Alias minimum foundation
+
+- Implemented an offline deterministic alias resolver that preserves every raw
+  subject label and separates `SAFE_ALIAS`, `REVIEW_REQUIRED`,
+  `HISTORICAL_DISTINCT` and `UNKNOWN` outcomes. No DB migration or historical
+  ingestion was run.
+- Search accepts observed full-name numeric/formatting aliases through the
+  released canonical subject lookup; filters remain bounded to the 23 canonical
+  subjects. Physics and life-science display names may show a short legacy name
+  in parentheses.
+- `물리1`, `생물1/2`, 가형/나형, 국사 and other historical labels remain held or
+  distinct until year/curriculum review. See [Legacy Subject Alias](legacy-subject-aliases.md).
+- Python ingestion tests (146) and targeted Flutter search/UI tests (52) pass;
+  Flutter 3.47.3 analyze is clean. The roughly 1,400-post legacy ingestion is
+  explicitly deferred so Essay Lab inventory can proceed next.
+
 ## Day 10-B — Home Polish v2
 
 - Implemented KST-based today/tomorrow meal display with 17:00 dinner and

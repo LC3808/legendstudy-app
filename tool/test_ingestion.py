@@ -33,7 +33,9 @@ from ingestion.parser import (  # noqa: E402
 from ingestion.pipeline import next_state, run  # noqa: E402
 from ingestion.subjects import (  # noqa: E402
     ALIASES, BY_CODE, DEFERRED_HISTORICAL, GRADE_SCOPED, SUBJECTS_V1,
-    TAXONOMY_VERSION, map_subject, subject_id,
+    HISTORICAL_DISTINCT, REVIEW_REQUIRED, SAFE_ALIAS, TAXONOMY_VERSION,
+    UNKNOWN_ALIAS, map_subject, normalize_subject_token, resolve_legacy_subject,
+    subject_id,
 )
 from ingestion.apply import (  # noqa: E402
     EXPECTED_SUBJECT_COUNT, SIGNED_URL_PATTERNS, ApplyAborted, PsycopgSession,
@@ -725,6 +727,43 @@ class TaxonomyTests(unittest.TestCase):
         for raw in list(ALIASES) + list(GRADE_SCOPED) + ['알수없는과목']:
             for grade in (None, 1, 2, 3):
                 self.assertNotEqual(map_subject(raw, grade).status, 'verified')
+
+    def test_legacy_resolver_folds_formatting_without_overwriting_raw_label(self):
+        result = resolve_legacy_subject(' 물리학 Ⅰ ')
+        self.assertEqual(result.status, SAFE_ALIAS)
+        self.assertEqual(result.canonical_code, 'physics_1')
+        self.assertEqual(result.raw_label, ' 물리학 Ⅰ ')
+        self.assertEqual(normalize_subject_token('사회 · 문화'), '사회문화')
+
+    def test_legacy_resolver_accepts_observed_full_name_numeric_aliases(self):
+        for raw, code in {
+            '물리학1': 'physics_1', '화학2': 'chemistry_2',
+            '생명과학1': 'life_science_1', '지구과학2': 'earth_science_2',
+        }.items():
+            result = resolve_legacy_subject(raw)
+            self.assertEqual((result.status, result.canonical_code),
+                             (SAFE_ALIAS, code), raw)
+
+    def test_ambiguous_legacy_aliases_require_review(self):
+        for raw in ('물리1', '물리2', '생물', '생물1', '생물2'):
+            result = resolve_legacy_subject(raw)
+            self.assertEqual(result.status, REVIEW_REQUIRED, raw)
+            self.assertIsNone(result.canonical_code, raw)
+
+    def test_historical_distinct_labels_never_map_to_modern_v1(self):
+        for raw in ('수학 가형', '수학 나형', '국사', '한국근현대사',
+                    '법과사회', '법과정치', '경제지리', '윤리'):
+            result = resolve_legacy_subject(raw)
+            self.assertEqual(result.status, HISTORICAL_DISTINCT, raw)
+            self.assertIsNone(result.canonical_code, raw)
+
+    def test_unknown_and_context_hook_are_deterministic(self):
+        first = resolve_legacy_subject('알수없는과목', year=2012,
+                                       curriculum_version='legacy', grade_level=3)
+        second = resolve_legacy_subject('알수없는과목', year=2012,
+                                        curriculum_version='legacy', grade_level=3)
+        self.assertEqual(first, second)
+        self.assertEqual(first.status, UNKNOWN_ALIAS)
 
 
 class TaxonomyIngestionTests(unittest.TestCase):

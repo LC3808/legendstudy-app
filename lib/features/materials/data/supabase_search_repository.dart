@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../content/data/supabase_content_repository.dart';
 import '../../exams/data/supabase_exam_repository.dart';
 import '../../resources/data/supabase_resource_repository.dart';
@@ -37,11 +39,12 @@ class SupabaseSearchRepository implements SearchRepository {
     // Resolve exact public taxonomy names, including historical versions, without
     // loading the entire subject catalogue or depending on facet-page coverage.
     for (final word in terms.words) {
+      final subjectLookup = canonicalSubjectSearchName(word) ?? word;
       final matches = await client
           .from('subjects')
           .select('id')
           .eq('is_active', true)
-          .ilike('name', literal(word))
+          .ilike('name', literal(subjectLookup))
           .limit(101);
       if (matches.length > 100) throw const FormatException('과목 조건을 좁혀 주세요.');
       if (matches.isEmpty) {
@@ -151,8 +154,8 @@ class SupabaseSearchRepository implements SearchRepository {
       }
       // Counting an out-of-range page produces PGRST103. Count separately at
       // offset zero only when crossing into the general-content stream.
-      final examCount =
-          (await examRequest.limit(0).count(CountOption.exact)).count;
+      final examCount = (await examRequest.limit(0).count(CountOption.exact))
+          .count;
       final start = (offset - examCount).clamp(0, maxOffset);
       final generalRows = await general
           .order('feed_updated_at', ascending: false, nullsFirst: false)

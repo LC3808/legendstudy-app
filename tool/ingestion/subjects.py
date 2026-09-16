@@ -24,6 +24,8 @@ keeps a future hierarchical v2 free without re-releasing v1 meaning.
 from __future__ import annotations
 
 import uuid
+import re
+import unicodedata
 from dataclasses import dataclass
 
 TAXONOMY_VERSION = 'v1'
@@ -157,6 +159,104 @@ DEFERRED_HISTORICAL = frozenset({
     '국사', '한국근현대사', '법과사회', '법과정치', '경제지리', '윤리',
     '물리1', '물리2', '생물1', '생물2',
 })
+
+# Day 10-C legacy vocabulary. These statuses are intentionally separate from
+# the ingestion mapping status: a search/display alias may be useful without
+# authorizing an automated occurrence mapping.
+SAFE_ALIAS = 'SAFE_ALIAS'
+REVIEW_REQUIRED = 'REVIEW_REQUIRED'
+HISTORICAL_DISTINCT = 'HISTORICAL_DISTINCT'
+UNKNOWN_ALIAS = 'UNKNOWN'
+
+_SUBJECT_FORMAT_RE = re.compile(r'\s+')
+_ROMAN_NUMERALS = str.maketrans({'Ⅰ': '1', 'Ⅱ': '2'})
+
+
+def normalize_subject_token(raw_token: str | None) -> str:
+    """Fold formatting only; never infer a curriculum meaning."""
+    if not raw_token:
+        return ''
+    value = unicodedata.normalize('NFC', raw_token).strip().translate(_ROMAN_NUMERALS)
+    value = _SUBJECT_FORMAT_RE.sub('', value)
+    return value.replace('·', '')
+
+
+@dataclass(frozen=True)
+class LegacySubjectResolution:
+    raw_label: str
+    normalized_label: str
+    status: str
+    canonical_code: str | None = None
+    canonical_name: str | None = None
+    reason: str = ''
+
+
+# Formatting-equivalent forms and observed full-name source spellings are safe
+# aliases. The raw label is still retained by the occurrence writer.
+_SAFE_ALIAS_CODES: dict[str, str] = {
+    '물리학1': 'physics_1', '물리학2': 'physics_2',
+    '화학1': 'chemistry_1', '화학2': 'chemistry_2',
+    '생명과학1': 'life_science_1', '생명과학2': 'life_science_2',
+    '지구과학1': 'earth_science_1', '지구과학2': 'earth_science_2',
+    '생활과윤리': 'life_ethics', '윤리와사상': 'ethics_thought',
+    '정치와법': 'politics_law', '사회문화': 'society_culture',
+}
+
+# These labels are observed or explicitly called out by the historical survey,
+# but are not safe modern-v1 mappings. They remain searchable as raw text until
+# a reviewed historical release supplies curriculum/year context.
+_REVIEW_REQUIRED_LABELS = frozenset({
+    '물리1', '물리2', '생물', '생물1', '생물2',
+})
+
+_HISTORICAL_DISTINCT_LABELS = frozenset({
+    '수학가형', '수학나형', '국사', '한국근현대사', '법과사회',
+    '법과정치', '경제지리', '윤리',
+})
+
+
+def resolve_legacy_subject(
+    raw_token: str,
+    *,
+    year: int | None = None,
+    curriculum_version: str | None = None,
+    grade_level: int | None = None,
+) -> LegacySubjectResolution:
+    """Resolve an alias for review/search without creating a verified mapping.
+
+    ``year``, ``curriculum_version`` and ``grade_level`` are deliberately
+    accepted now so a later historical release can make context-aware decisions
+    without changing this API. They do not promote an ambiguous token today.
+    """
+    normalized = normalize_subject_token(raw_token)
+    if normalized in _HISTORICAL_DISTINCT_LABELS:
+        return LegacySubjectResolution(
+            raw_token, normalized, HISTORICAL_DISTINCT,
+            reason='historical curriculum identity must remain distinct',
+        )
+    if normalized in _REVIEW_REQUIRED_LABELS:
+        return LegacySubjectResolution(
+            raw_token, normalized, REVIEW_REQUIRED,
+            reason='legacy label requires reviewed year/curriculum evidence',
+        )
+    code = _SAFE_ALIAS_CODES.get(normalized)
+    if code is None:
+        # Canonical names are safe too, but use the same normalized lookup so
+        # spaces, interpuncts and Roman/Arabic numerals are formatting only.
+        code = next(
+            (subject.code for subject in SUBJECTS_V1
+             if normalize_subject_token(subject.name) == normalized),
+            None,
+        )
+    if code is None:
+        return LegacySubjectResolution(
+            raw_token, normalized, UNKNOWN_ALIAS,
+            reason='no released alias rule',
+        )
+    return LegacySubjectResolution(
+        raw_token, normalized, SAFE_ALIAS, code, BY_CODE[code].name,
+        reason='canonical spelling or documented formatting/source alias',
+    )
 
 
 @dataclass(frozen=True)

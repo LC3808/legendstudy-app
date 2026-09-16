@@ -1234,3 +1234,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   335 passed, one opt-in read-only network test skipped. Analyze, Android debug
   build and iOS simulator build/run pass. iPhone Profile build passed but
   CoreDevice launch automation timed out before physical Home interaction.
+
+## 2026-09-16 — Day 10-C Legacy Subject Alias minimum foundation
+
+- Added an offline alias resolver that keeps raw labels unchanged and separates
+  safe formatting/source aliases from review-required and historically distinct
+  labels. No historical archive ingestion or Supabase migration was executed.
+- Added canonical-only search alias lookup and bounded physics/life-science
+  display aliases. Python 146-test ingestion suite, targeted Flutter search/UI
+  tests and analyze pass. Legacy ingestion remains deferred for curriculum
+  review and the next Essay Lab inventory.

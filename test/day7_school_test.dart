@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,7 @@ import 'package:legendstudy_app/features/personal/personal_providers.dart';
 import 'package:legendstudy_app/features/school/data/neis_school_repository.dart';
 import 'package:legendstudy_app/features/school/domain/school.dart';
 import 'package:legendstudy_app/features/school/school_providers.dart';
+
 import 'day5_shell_test.dart' show ShellContent;
 
 const schoolA = School(
@@ -210,6 +212,9 @@ void main() {
           (ref) => clock ?? Stream.value('20260911'),
         ),
         tomorrowMealsProvider.overrideWith((ref) async => []),
+        koreanMealClockProvider.overrideWithValue(
+          DateTime(2026, 9, 11, 16, 59),
+        ),
         mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
       ],
     );

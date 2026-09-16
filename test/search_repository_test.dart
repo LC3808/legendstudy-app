@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -42,6 +43,14 @@ void main() {
       expect(const SearchFilters().isEmpty, isTrue);
     },
   );
+  test('subject aliases remain bounded to canonical search/display names', () {
+    expect(canonicalSubjectSearchName('물리학1'), '물리학Ⅰ');
+    expect(canonicalSubjectSearchName(' 생명과학 Ⅱ '), '생명과학Ⅱ');
+    expect(canonicalSubjectSearchName('생물1'), isNull);
+    expect(displaySubjectName('물리학Ⅰ'), '물리학Ⅰ (물리Ⅰ)');
+    expect(displaySubjectName('생명과학Ⅱ'), '생명과학Ⅱ (생물Ⅱ)');
+    expect(displaySubjectName('국어'), '국어');
+  });
   late List<Uri> calls;
   late SupabaseClient client;
   late SupabaseSearchRepository repository;
@@ -198,6 +207,11 @@ void main() {
       expect(q.containsKey('content.or'), isFalse);
     },
   );
+  test('observed full-name numeric alias queries canonical subject', () async {
+    await repository.search(SearchQuery('물리학1'));
+    final subject = calls.firstWhere((u) => u.path.endsWith('/subjects'));
+    expect(subject.queryParameters['name'], 'ilike.물리학Ⅰ');
+  });
   test('keyword literals cannot inject PostgREST filter syntax', () async {
     // Lookup can return no match without disclosing or interpolating raw SQL.
     expect(SupabaseSearchRepository.literal(r'a%_\b'), r'a\%\_\\b');

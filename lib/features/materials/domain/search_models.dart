@@ -17,6 +17,41 @@ String normalizeSearch(String text) => text
     .replaceAllMapped(RegExp(r'(\d)\s+(월|년)'), (m) => '${m[1]}${m[2]}')
     .replaceAll(RegExp(r'\s+'), ' ');
 
+/// Canonical filter names stay bounded to the released taxonomy. These
+/// search-only aliases help users find a canonical subject without creating a
+/// new chip or changing ingestion mapping semantics.
+String? canonicalSubjectSearchName(String value) {
+  final folded = value
+      .trim()
+      .replaceAll(RegExp(r'\s+'), '')
+      .replaceAll('·', '')
+      .replaceAll('Ⅰ', '1')
+      .replaceAll('Ⅱ', '2');
+  const aliases = {
+    '물리학1': '물리학Ⅰ',
+    '물리학2': '물리학Ⅱ',
+    '화학1': '화학Ⅰ',
+    '화학2': '화학Ⅱ',
+    '생명과학1': '생명과학Ⅰ',
+    '생명과학2': '생명과학Ⅱ',
+    '지구과학1': '지구과학Ⅰ',
+    '지구과학2': '지구과학Ⅱ',
+    '생활과윤리': '생활과 윤리',
+    '윤리와사상': '윤리와 사상',
+    '정치와법': '정치와 법',
+    '사회문화': '사회·문화',
+  };
+  return aliases[folded];
+}
+
+String displaySubjectName(String canonicalName) => switch (canonicalName) {
+  '물리학Ⅰ' => '물리학Ⅰ (물리Ⅰ)',
+  '물리학Ⅱ' => '물리학Ⅱ (물리Ⅱ)',
+  '생명과학Ⅰ' => '생명과학Ⅰ (생물Ⅰ)',
+  '생명과학Ⅱ' => '생명과학Ⅱ (생물Ⅱ)',
+  _ => canonicalName,
+};
+
 class SearchFilters {
   const SearchFilters({
     this.grade,
@@ -156,10 +191,11 @@ class ResourceSearchItem {
           ResourceGroup(
             examSubjectId: occurrence['id'] as String,
             subjectId: occurrence['subject_id'] as String?,
-            name:
-                (occurrence['subject']?['name'] as String?) ??
-                (occurrence['raw_subject_label'] as String?) ??
-                '과목 미분류',
+            name: displaySubjectName(
+              (occurrence['subject']?['name'] as String?) ??
+                  (occurrence['raw_subject_label'] as String?) ??
+                  '과목 미분류',
+            ),
             resources: attachments
                 .where((r) => r.examSubjectId == occurrence['id'])
                 .toList(),

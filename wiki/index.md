@@ -72,3 +72,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [Essay Lab Product Roadmap — PLANNED, target 2026-10 Beta](roadmap-essay-lab.md)
 - [Day 10-B Home Polish v2 — implemented; device launch follow-up](day-10-b-home-polish.md)
+- [Day 10-C Legacy Subject Alias — minimum foundation implemented](legacy-subject-aliases.md)

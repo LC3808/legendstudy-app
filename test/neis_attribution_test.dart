@@ -7,6 +7,7 @@ import 'package:legendstudy_app/features/school/domain/school.dart';
 import 'package:legendstudy_app/features/school/presentation/home_meal_card.dart';
 import 'package:legendstudy_app/features/school/presentation/neis_attribution.dart';
 import 'package:legendstudy_app/features/school/school_providers.dart';
+
 import 'day7_school_test.dart' show schoolA, meal;
 
 class FixedSchool extends SchoolSelection {
@@ -70,6 +71,9 @@ void main() {
                   (ref) async => state == 'data' ? [meal] : [],
                 ),
                 tomorrowMealsProvider.overrideWith((ref) async => []),
+                koreanMealClockProvider.overrideWithValue(
+                  DateTime(2026, 9, 11, 16, 59),
+                ),
                 mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
               ],
               child: host(const HomeMealCard()),
