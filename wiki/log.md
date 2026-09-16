@@ -1244,3 +1244,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   display aliases. Python 146-test ingestion suite, targeted Flutter search/UI
   tests and analyze pass. Legacy ingestion remains deferred for curriculum
   review and the next Essay Lab inventory.
+
+## 2026-09-16 — Day 11 Account & Personal Foundation + Feedback Operations
+
+- Audited Auth, settings, profile, school, bookmarks and recent views. Added
+  email/password and OAuth entry UI, logout, foreground-only meaningful recent
+  view tracking with a 10-second threshold, and owner-scoped recent deletion.
+- Added feedback form/diagnostic contract and a non-applied Supabase draft for
+  feedback, server-managed admin authorization and notification outbox. Admin
+  inbox/email delivery and real OAuth/Production acceptance remain pending
+  Owner configuration. No Production, secret, email or Muselry change.

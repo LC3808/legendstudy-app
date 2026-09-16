@@ -16,4 +16,6 @@ abstract interface class BookmarkRepository {
 abstract interface class RecentViewRepository {
   Future<List<PersonalContentEntry>> fetchOwnRecentViews({int limit = 100});
   Future<void> touchRecentView(String contentItemId);
+  Future<void> deleteRecentView(String contentItemId);
+  Future<void> deleteAllRecentViews();
 }

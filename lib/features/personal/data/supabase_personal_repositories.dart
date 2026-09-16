@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../core/supabase/supabase_providers.dart';
 import '../domain/personal_models.dart';
 import '../domain/personal_repositories.dart';
@@ -146,5 +147,21 @@ class SupabaseRecentViewRepository extends _PersonalRepository
       'user_id': owner,
       'content_item_id': contentItemId,
     }, onConflict: 'user_id,content_item_id');
+  }
+
+  @override
+  Future<void> deleteRecentView(String contentItemId) async {
+    final owner = requireUser();
+    await client!
+        .from('recent_views')
+        .delete()
+        .eq('user_id', owner)
+        .eq('content_item_id', contentItemId);
+  }
+
+  @override
+  Future<void> deleteAllRecentViews() async {
+    final owner = requireUser();
+    await client!.from('recent_views').delete().eq('user_id', owner);
   }
 }

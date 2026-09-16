@@ -45,6 +45,12 @@ class ListRecentRepository implements RecentViewRepository {
 
   @override
   Future<void> touchRecentView(String contentItemId) async {}
+
+  @override
+  Future<void> deleteRecentView(String contentItemId) async {}
+
+  @override
+  Future<void> deleteAllRecentViews() async {}
 }
 
 class BatchContentRepository implements ContentRepository {

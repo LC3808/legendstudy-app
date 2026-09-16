@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 
@@ -27,13 +29,23 @@ class ProfilePage extends ConsumerWidget {
             action: state.isAuthenticated
                 ? null
                 : FilledButton(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('소셜 로그인은 곧 이용할 수 있어요.')),
-                    ),
+                    onPressed: () => context.push('/auth'),
                     child: const Text('로그인 / 시작하기'),
                   ),
           ),
         ),
+        if (auth.value?.isAuthenticated == true)
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () async {
+                final client = ref.read(supabaseClientProvider);
+                if (client == null) return;
+                await client.auth.signOut(scope: SignOutScope.local);
+              },
+              child: const Text('로그아웃'),
+            ),
+          ),
         const SectionHeader('나의 설정'),
         ListTile(
           contentPadding: EdgeInsets.zero,
@@ -62,6 +74,12 @@ class ProfilePage extends ConsumerWidget {
           title: const Text('최근 본 자료'),
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.push('/my/recent'),
+        ),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: const Text('문의·건의사항'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.push('/my/feedback'),
         ),
         const Divider(),
         const SectionHeader('레전드스터디와 함께'),

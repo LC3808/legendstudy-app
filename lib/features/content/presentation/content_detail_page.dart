@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../../core/supabase/supabase_providers.dart';
@@ -10,6 +13,7 @@ import '../../resources/domain/content_resource.dart';
 import '../../resources/presentation/resource_section.dart';
 import '../../personal/bookmark_providers.dart';
 import '../../personal/personal_providers.dart';
+import '../../personal/domain/recent_view_tracking.dart';
 import '../content_providers.dart';
 import '../domain/content_item.dart';
 import 'content_type_badge.dart';
@@ -28,36 +32,105 @@ class ContentDetailPage extends ConsumerStatefulWidget {
   ConsumerState<ContentDetailPage> createState() => _ContentDetailPageState();
 }
 
-class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
+class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
+    with WidgetsBindingObserver {
   String? _recentOwner;
+  String? _recentContentId;
+  ForegroundRecentViewTracker? _recentTracker;
+  Timer? _recentTimer;
   bool _recentFailureShown = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     ref.listenManual(contentDetailProvider(widget.slug), (_, next) {
       final item = next.asData?.value;
-      if (item != null) _recordRecent(item.id);
+      if (item != null) _startRecent(item.id);
     });
     ref.listenManual(authStateProvider, (_, _) {
       final item = ref.read(contentDetailProvider(widget.slug)).asData?.value;
-      if (item != null) _recordRecent(item.id);
+      if (item != null) _startRecent(item.id);
     });
   }
 
-  Future<void> _recordRecent(String contentItemId) async {
+  @override
+  void dispose() {
+    _recentTimer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final tracker = _recentTracker;
+    if (tracker == null) return;
+    tracker.lifecycle(state, DateTime.now());
+    if (state == AppLifecycleState.resumed) {
+      _scheduleRecentCheck();
+    } else {
+      _recentTimer?.cancel();
+    }
+  }
+
+  void _startRecent(String contentItemId) {
     final owner = ref.read(authStateProvider).value?.userId;
-    if (owner == null || owner == _recentOwner) return;
+    if (owner == null) return;
+    if (_recentOwner == owner && _recentContentId == contentItemId) return;
     _recentOwner = owner;
+    _recentContentId = contentItemId;
+    _recentTracker = ForegroundRecentViewTracker()..start(DateTime.now());
+    _scheduleRecentCheck();
+  }
+
+  void _scheduleRecentCheck() {
+    _recentTimer?.cancel();
+    final tracker = _recentTracker;
+    if (tracker == null || tracker.qualified) return;
+    final remaining = meaningfulRecentViewThreshold - tracker.foregroundDwell;
+    _recentTimer = Timer(
+      remaining.isNegative || remaining == Duration.zero
+          ? const Duration(milliseconds: 1)
+          : remaining,
+      () {
+        if (!mounted || _recentTracker == null) return;
+        if (_recentTracker!.thresholdReached()) {
+          _recordQualifiedRecent();
+        } else {
+          _scheduleRecentCheck();
+        }
+      },
+    );
+  }
+
+  void _markMeaningfulRecent() {
+    final tracker = _recentTracker;
+    if (tracker != null && tracker.markMeaningful(DateTime.now())) {
+      _recordQualifiedRecent();
+    }
+  }
+
+  void _recordQualifiedRecent() {
+    final contentId = _recentContentId;
+    final owner = _recentOwner;
+    if (contentId == null || owner == null || _recentTracker == null) return;
+    if (ref.read(authStateProvider).value?.userId != owner) return;
+    _recentTimer?.cancel();
+    _recentTracker = null;
+    _recordRecent(contentId, owner);
+  }
+
+  Future<void> _recordRecent(String contentItemId, String owner) async {
     try {
-      await ref.read(recentViewRepositoryProvider).touchRecentView(contentItemId);
+      await ref
+          .read(recentViewRepositoryProvider)
+          .touchRecentView(contentItemId);
     } catch (_) {
       if (mounted && !_recentFailureShown) {
         _recentFailureShown = true;
         // A recent view is auxiliary; never replace the resolved detail.
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')),
-        );
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
       }
     }
   }
@@ -85,7 +158,8 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (_, _) => ErrorState(
                 message: '자료를 불러오지 못했어요.',
-                onRetry: () => ref.invalidate(contentDetailProvider(widget.slug)),
+                onRetry: () =>
+                    ref.invalidate(contentDetailProvider(widget.slug)),
               ),
               data: (item) => item == null
                   ? const EmptyState('자료를 찾을 수 없어요.')
@@ -96,7 +170,10 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(child: ContentTypeBadge(item.contentType)),
-                            _BookmarkControl(contentItemId: item.id),
+                            _BookmarkControl(
+                              contentItemId: item.id,
+                              onMeaningfulAction: _markMeaningfulRecent,
+                            ),
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -124,6 +201,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
                           child: ExternalLinkButton(
                             uri: publicWebUri(item.sourceUrl),
                             label: '원문 보기',
+                            onOpenAttempted: _markMeaningfulRecent,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -134,6 +212,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
                             'education_column',
                             'admissions_info',
                           ].contains(item.contentType),
+                          onMeaningfulAction: _markMeaningfulRecent,
                         ),
                       ],
                     ),
@@ -144,14 +223,22 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage> {
 }
 
 class _BookmarkControl extends ConsumerWidget {
-  const _BookmarkControl({required this.contentItemId});
+  const _BookmarkControl({
+    required this.contentItemId,
+    this.onMeaningfulAction,
+  });
   final String contentItemId;
+  final VoidCallback? onMeaningfulAction;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     if (auth.isLoading) {
-      return const SizedBox(width: 48, height: 48, child: Center(child: CircularProgressIndicator(strokeWidth: 2)));
+      return const SizedBox(
+        width: 48,
+        height: 48,
+        child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      );
     }
     if (auth.hasError) return const SizedBox.shrink();
     final authenticated = auth.value?.isAuthenticated == true;
@@ -160,7 +247,9 @@ class _BookmarkControl extends ConsumerWidget {
     final busy = state.isMutating || state.phase == BookmarkPhase.loading;
     return Semantics(
       button: true,
-      label: authenticated ? (state.isSaved ? '저장됨' : '자료 저장') : '자료 저장, 로그인 필요',
+      label: authenticated
+          ? (state.isSaved ? '저장됨' : '자료 저장')
+          : '자료 저장, 로그인 필요',
       child: SizedBox(
         height: 48,
         child: TextButton.icon(
@@ -174,11 +263,20 @@ class _BookmarkControl extends ConsumerWidget {
                     return;
                   }
                   final before = state;
+                  final wasSaved = state.isSaved;
                   await controller.toggle();
-                  if (context.mounted && before.phase != BookmarkPhase.mutating) {
-                    final after = ref.read(bookmarkStateProvider(contentItemId));
+                  if (context.mounted &&
+                      before.phase != BookmarkPhase.mutating) {
+                    final after = ref.read(
+                      bookmarkStateProvider(contentItemId),
+                    );
+                    if (!wasSaved && after.isSaved) {
+                      onMeaningfulAction?.call();
+                    }
                     if (after.message != null) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(after.message!)));
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(after.message!)));
                     }
                   }
                 },

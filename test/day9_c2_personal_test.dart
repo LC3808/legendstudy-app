@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,6 +60,12 @@ class FakeRecentRepository implements RecentViewRepository {
     touches++;
     if (fail) throw StateError('test failure');
   }
+
+  @override
+  Future<void> deleteRecentView(String _) async {}
+
+  @override
+  Future<void> deleteAllRecentViews() async {}
 }
 
 class FakeContentRepository implements ContentRepository {
@@ -100,50 +107,38 @@ ProviderContainer containerFor({
 );
 
 void main() {
-  test(
-    'authenticated saved and unsaved state, add/delete, duplicate tap protection',
-    () async {
-      final repo = FakeBookmarkRepository(gate: Completer<void>());
-      final container = containerFor(
-        auth: const AuthStatus('a'),
-        bookmarks: repo,
-      );
-      addTearDown(container.dispose);
-      final sub = container.listen(
-        bookmarkStateProvider('content-1'),
-        (_, _) {},
-      );
-      addTearDown(sub.close);
-      container.read(bookmarkStateProvider('content-1'));
-      await container.read(authStateProvider.future);
-      await Future<void>.delayed(const Duration(milliseconds: 10));
-      final controller = container.read(
-        bookmarkStateProvider('content-1').notifier,
-      );
-      final first = controller.toggle();
-      await container.read(authStateProvider.future);
-      await Future<void>.delayed(const Duration(milliseconds: 10));
-      expect(repo.adds, 1);
-      expect(
-        container.read(bookmarkStateProvider('content-1')).phase,
-        BookmarkPhase.mutating,
-      );
-      final second = controller.toggle();
-      expect(repo.adds, 1);
-      (repo.gate!).complete();
-      await Future.wait([first, second]);
-      expect(
-        container.read(bookmarkStateProvider('content-1')).isSaved,
-        isTrue,
-      );
-      await controller.toggle();
-      expect(repo.deletes, 1);
-      expect(
-        container.read(bookmarkStateProvider('content-1')).isSaved,
-        isFalse,
-      );
-    },
-  );
+  test('authenticated saved and unsaved state, add/delete, duplicate tap protection', () async {
+    final repo = FakeBookmarkRepository(gate: Completer<void>());
+    final container = containerFor(
+      auth: const AuthStatus('a'),
+      bookmarks: repo,
+    );
+    addTearDown(container.dispose);
+    final sub = container.listen(bookmarkStateProvider('content-1'), (_, _) {});
+    addTearDown(sub.close);
+    container.read(bookmarkStateProvider('content-1'));
+    await container.read(authStateProvider.future);
+    await Future<void>.delayed(const Duration(milliseconds: 10));
+    final controller = container.read(
+      bookmarkStateProvider('content-1').notifier,
+    );
+    final first = controller.toggle();
+    await container.read(authStateProvider.future);
+    await Future<void>.delayed(const Duration(milliseconds: 10));
+    expect(repo.adds, 1);
+    expect(
+      container.read(bookmarkStateProvider('content-1')).phase,
+      BookmarkPhase.mutating,
+    );
+    final second = controller.toggle();
+    expect(repo.adds, 1);
+    (repo.gate!).complete();
+    await Future.wait([first, second]);
+    expect(container.read(bookmarkStateProvider('content-1')).isSaved, isTrue);
+    await controller.toggle();
+    expect(repo.deletes, 1);
+    expect(container.read(bookmarkStateProvider('content-1')).isSaved, isFalse);
+  });
 
   test(
     'guest bookmark does not call repository and auth A/B state is isolated',
@@ -207,8 +202,8 @@ void main() {
       await tester.pump();
       await tester.pump();
       expect(find.text('긴 자료 제목'), findsOneWidget);
-      expect(recent.touches, 1);
-      await tester.pump();
+      expect(recent.touches, 0);
+      await tester.pump(const Duration(seconds: 10));
       expect(recent.touches, 1);
     },
   );
@@ -238,12 +233,14 @@ void main() {
       await tester.pump();
       await tester.pump();
       expect(find.text('긴 자료 제목'), findsOneWidget);
-      expect(recent.touches, 1);
+      expect(recent.touches, 0);
       recent.fail = false;
       await pumpPage('item-1-reentry');
       await tester.pump();
       await tester.pump();
-      expect(recent.touches, 2);
+      expect(recent.touches, 0);
+      await tester.pump(const Duration(seconds: 10));
+      expect(recent.touches, 1);
     },
   );
 }

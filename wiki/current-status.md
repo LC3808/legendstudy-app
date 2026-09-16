@@ -2,6 +2,23 @@
 
 Last reviewed: 2026-09-16
 
+## Day 11 — Account & Personal Foundation + Feedback Operations
+
+- Added a minimal Auth screen using the existing Supabase SDK: email/password
+  signup/login, Google/Apple/Kakao OAuth entry points, logout and owner-profile
+  upsert attempt. Provider dashboard/redirect acceptance remains pending.
+- Recent views now use foreground-only meaningful tracking: 10 seconds or an
+  explicit resource/original open attempt or successful bookmark. Background
+  time is excluded, rebuilds do not write, and MY supports owner-scoped
+  individual/all deletion with confirmation.
+- Added guest-capable feedback form with bounded title/body, category and safe
+  diagnostic metadata. Draft DB/RLS/admin/outbox package is in
+  `supabase/drafts/20260916000100_feedback_operations.sql`; it is **not applied**.
+- Admin inbox and email delivery are not complete until Owner applies the draft,
+  assigns server-managed admin users and configures a server-side provider.
+  No Production mutation, secret, email or Muselry change occurred. See
+  [Day 11 account/personal/feedback](day-11-account-personal-feedback.md).
+
 ## Day 10-C — Legacy Subject Alias minimum foundation
 
 - Implemented an offline deterministic alias resolver that preserves every raw

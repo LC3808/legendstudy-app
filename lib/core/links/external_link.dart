@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../features/resources/domain/content_resource.dart';
 
 typedef ExternalOpener = Future<bool> Function(Uri uri);
@@ -10,9 +11,15 @@ final externalOpenerProvider = Provider<ExternalOpener>(
 );
 
 class ExternalLinkButton extends ConsumerStatefulWidget {
-  const ExternalLinkButton({required this.uri, required this.label, super.key});
+  const ExternalLinkButton({
+    required this.uri,
+    required this.label,
+    this.onOpenAttempted,
+    super.key,
+  });
   final Uri? uri;
   final String label;
+  final VoidCallback? onOpenAttempted;
   @override
   ConsumerState<ExternalLinkButton> createState() => _ExternalLinkButtonState();
 }
@@ -23,6 +30,7 @@ class _ExternalLinkButtonState extends ConsumerState<ExternalLinkButton> {
     final uri = publicWebUri(widget.uri?.toString());
     if (uri == null || opening) return;
     setState(() => opening = true);
+    widget.onOpenAttempted?.call();
     var success = false;
     try {
       success = await ref.read(externalOpenerProvider)(uri);

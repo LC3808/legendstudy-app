@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
@@ -11,11 +12,13 @@ class ResourceSection extends ConsumerWidget {
     required this.contentItemId,
     required this.contentSourceUrl,
     required this.isArticle,
+    this.onMeaningfulAction,
     super.key,
   });
   final String contentItemId;
   final String contentSourceUrl;
   final bool isArticle;
+  final VoidCallback? onMeaningfulAction;
   @override
   Widget build(BuildContext context, WidgetRef ref) => ref
       .watch(contentResourcesProvider(contentItemId))
@@ -87,6 +90,7 @@ class ResourceSection extends ConsumerWidget {
                                     contentSourceUrl,
                                   ),
                                   label: '외부 링크 열기',
+                                  onOpenAttempted: onMeaningfulAction,
                                 ),
                               ],
                             ),

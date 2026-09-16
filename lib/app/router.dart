@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../features/home/presentation/home_page.dart';
 import '../features/materials/presentation/materials_page.dart';
 import '../features/saved/presentation/saved_page.dart';
@@ -10,6 +11,8 @@ import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
 import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
+import '../features/feedback/presentation/feedback_page.dart';
+import '../features/auth/presentation/auth_page.dart';
 import '../shared/widgets/nested_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -26,6 +29,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/browse', redirect: (_, _) => '/materials'),
       GoRoute(path: '/saved', redirect: (_, _) => '/my/saved'),
       GoRoute(path: '/profile', redirect: (_, _) => '/my'),
+      GoRoute(
+        path: '/auth',
+        builder: (_, _) =>
+            const NestedPage(title: '로그인 / 시작하기', child: AuthPage()),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => NavigationShell(shell: shell),
         branches: [
@@ -76,6 +84,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: 'recent',
                     builder: (_, _) =>
                         const NestedPage(title: '최근 본 자료', child: RecentPage()),
+                  ),
+                  GoRoute(
+                    path: 'feedback',
+                    builder: (_, _) => const NestedPage(
+                      title: '문의·건의사항',
+                      child: FeedbackPage(),
+                    ),
                   ),
                 ],
               ),
