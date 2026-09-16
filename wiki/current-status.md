@@ -2,6 +2,22 @@
 
 Last reviewed: 2026-09-15
 
+## Day 9-D1 — Pilot C publication package
+
+- Publication package implemented in `tool/publish_pilot_c.py` with offline
+  contract tests. It resolves only the exact 23-post Pilot C chain and uses one
+  fail-closed transaction: `content_items → exam_subjects → resources`.
+- Preflight requires the recorded production baseline, exact scope counts,
+  zero signed URLs/duplicates/orphans/blocking quarantine, and 0/0/0 active
+  rows. Exact 23/363/739 is an idempotent read-only no-op; partial active state
+  fails closed. Rollback is soft deactivation only and was not executed.
+- Anon public-projection/RLS and post-publication Search acceptance queries are
+  prepared. No Production `is_active` update, INSERT, DELETE, rollback,
+  migration, RLS change, or Flutter change was made. **Publication NOT EXECUTED.**
+- Next action after separate Owner approval: run the read-only preflight, inspect
+  PASS, then decide whether to run the guarded publication command in
+  [Day 9-D1 package](day-9-d1-publication-package.md).
+
 ## Phase
 
 **Day 7 = COMPLETE. Day 8-A Study Core = COMPLETE. Day 8-B Focus / DND implemented; Owner-reported iOS lifecycle subset PASS, Focus guidance and remaining physical checks pending. Day 8-C Mock Exam implementation complete; Guest/Auth Flutter runtime PASS; Owner-reported iPhone timeUp/notification/kill-restore PASS, remaining physical checks pending. Day 8-D1 Scoring Storage / Validation Contract = COMPLETE (Owner-reported production/Postflight and actual A/B JWT/RPC PASS); Day 8-D2 Answer Entry + Raw Score = COMPLETE (Guest runtime and Owner-reported actual A/B Flutter scoring PASS). Day 8-D3 Grade + Result UX = COMPLETE (Owner-reported actual A/B Flutter runtime and full cleanup/retention PASS). Day 8 overall is not COMPLETE.**

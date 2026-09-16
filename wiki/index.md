@@ -64,3 +64,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 9-C1 Resource Detail + Safe Open Target](day-9-c-resource-detail.md)
 - [Day 9-C2 Bookmark + Recent Views](day-9-c-personal-state.md)
 - [Day 9-C3 Saved / Recent UI + MY Integration](day-9-c-personal-lists.md)
+- [Day 9-D1 Pilot C publication package — implemented, not executed](day-9-d1-publication-package.md)

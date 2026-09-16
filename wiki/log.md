@@ -1134,3 +1134,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   no-write behavior, account isolation, one-touch-per-entry recent lifecycle,
   and non-blocking failure UX. Focused C2 tests pass; no production or DB
   changes. Day 9-C remains incomplete.
+
+## 2026-09-16 — Day 9-D1 Pilot C publication package
+
+- Confirmed branch `codex/day-7-school-neis`, HEAD `6338f3e`, and preserved the
+  four pre-existing untracked directories. Implemented the dedicated,
+  fail-closed `tool/publish_pilot_c.py` package for the exact 23-post Pilot C
+  chain. It performs read-only baseline/scope preflight and, only with separate
+  Owner approval, one transaction of exact `is_active=false → true` updates in
+  content → occurrence → resource order with affected-row verification.
+- Added idempotent all-zero / already-published / partial-state semantics,
+  guarded soft rollback SQL (no DELETE), anon public-projection acceptance SQL,
+  and credential-safe host/password handling. No production connection or SQL
+  mutation was executed; no migration, RLS, Flutter, push, PR or merge.
+- Added offline publication contract tests covering project/approval gates,
+  baseline and scope mismatches, exact counts, mutation shape, rollback,
+  idempotency and transaction rollback. Python compile, tests and diff check
+  PASS. See [D1 package](day-9-d1-publication-package.md).
