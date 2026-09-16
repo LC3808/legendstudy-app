@@ -11,11 +11,13 @@ class ContentResults extends StatelessWidget {
     required this.state,
     required this.onRetry,
     this.emptyMessage = '아직 등록된 자료가 없어요.',
+    this.maxItems,
     super.key,
   });
   final AsyncValue<List<ContentItem>> state;
   final VoidCallback onRetry;
   final String emptyMessage;
+  final int? maxItems;
   @override
   Widget build(BuildContext context) => state.when(
     skipLoadingOnRefresh: false,
@@ -31,8 +33,10 @@ class ContentResults extends StatelessWidget {
           : '자료를 불러오지 못했어요. 다시 시도해 주세요.',
       onRetry: onRetry,
     ),
-    data: (items) =>
-        items.isEmpty ? EmptyState(emptyMessage) : _ContentList(items),
+    data: (items) {
+      final visible = maxItems == null ? items : items.take(maxItems!).toList();
+      return visible.isEmpty ? EmptyState(emptyMessage) : _ContentList(visible);
+    },
   );
 }
 

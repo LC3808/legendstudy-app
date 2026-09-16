@@ -1221,3 +1221,16 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Pattern and growth history, package-based monetization direction, and later
   coach/university analysis. No code, schema, AI evaluation, billing, RLS or
   Production change was made.
+
+## 2026-09-16 — Day 10-B Home Polish v2
+
+- Implemented KST today/tomorrow meal presentation with 17:00 dinner/tomorrow
+  priority, date/17:00 boundary scheduling and resume re-evaluation. Existing
+  NEIS and meal contracts remain compatible; no Production read/write was used.
+- Bounded Home recent updates and recent views to six records, collapsed to two
+  by default with independent six-item expansion. Preserved Materials/MY full
+  list semantics, guest safety and account-isolation generation guards.
+- Added Day 10-B policy/widget coverage and passed the full Flutter suite:
+  335 passed, one opt-in read-only network test skipped. Analyze, Android debug
+  build and iOS simulator build/run pass. iPhone Profile build passed but
+  CoreDevice launch automation timed out before physical Home interaction.

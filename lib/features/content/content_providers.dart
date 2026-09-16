@@ -16,6 +16,10 @@ final recentContentProvider = FutureProvider<List<ContentItem>>(
   (ref) => ref.watch(contentRepositoryProvider).fetchRecentContent(),
   retry: (_, _) => null,
 );
+final homeRecentContentProvider = FutureProvider<List<ContentItem>>(
+  (ref) => ref.watch(contentRepositoryProvider).fetchRecentContent(limit: 6),
+  retry: (_, _) => null,
+);
 final contentSearchProvider = FutureProvider.autoDispose
     .family<List<ContentItem>, String>((ref, query) {
       if (query.trim().isEmpty) return Future.value([]);

@@ -68,14 +68,56 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       const SectionHeader('최근 업데이트'),
-      ContentResults(
-        state: ref.watch(recentContentProvider),
-        onRetry: () => ref.invalidate(recentContentProvider),
-      ),
+      const HomeRecentUpdates(),
       const SectionHeader('최근 본 자료'),
-      const PersonalMaterialList(kind: PersonalListKind.recentViews),
+      const PersonalMaterialList(
+        kind: PersonalListKind.recentViews,
+        homeMode: true,
+      ),
     ],
   );
+}
+
+class HomeRecentUpdates extends ConsumerStatefulWidget {
+  const HomeRecentUpdates({super.key});
+
+  @override
+  ConsumerState<HomeRecentUpdates> createState() => _HomeRecentUpdatesState();
+}
+
+class _HomeRecentUpdatesState extends ConsumerState<HomeRecentUpdates> {
+  bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(homeRecentContentProvider);
+    final visibleState = state.whenData(
+      (items) => items.take(expanded ? 6 : 2).toList(),
+    );
+    final count = state.asData?.value.length ?? 0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ContentResults(
+          state: visibleState,
+          onRetry: () => ref.invalidate(homeRecentContentProvider),
+        ),
+        if (count > 2)
+          Semantics(
+            button: true,
+            label: expanded ? '최근 업데이트 접기' : '최근 업데이트 더보기',
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: () => setState(() => expanded = !expanded),
+                icon: Icon(expanded ? Icons.expand_less : Icons.expand_more),
+                label: Text(expanded ? '접기' : '더보기'),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
 }
 
 class _HomeSearch extends StatefulWidget {

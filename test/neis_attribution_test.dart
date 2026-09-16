@@ -69,6 +69,8 @@ void main() {
                 todayMealsProvider.overrideWith(
                   (ref) async => state == 'data' ? [meal] : [],
                 ),
+                tomorrowMealsProvider.overrideWith((ref) async => []),
+                mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
               ],
               child: host(const HomeMealCard()),
             ),

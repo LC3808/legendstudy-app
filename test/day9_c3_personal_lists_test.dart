@@ -36,9 +36,11 @@ class ListRecentRepository implements RecentViewRepository {
   final List<PersonalContentEntry> entries;
   int reads = 0;
   @override
-  Future<List<PersonalContentEntry>> fetchOwnRecentViews() async {
+  Future<List<PersonalContentEntry>> fetchOwnRecentViews({
+    int limit = 100,
+  }) async {
     reads++;
-    return entries;
+    return entries.take(limit).toList();
   }
 
   @override

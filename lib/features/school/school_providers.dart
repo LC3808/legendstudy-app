@@ -72,14 +72,17 @@ class SchoolSelection extends AsyncNotifier<School?> {
   }
 }
 
-// Polling only the date: no network on each tick. Handles resume after midnight too.
-final koreanTodayProvider = StreamProvider<String>((ref) async* {
-  yield koreanDate(DateTime.now());
-  yield* Stream.periodic(
-    const Duration(seconds: 30),
-    (_) => koreanDate(DateTime.now()),
-  ).distinct();
-});
+// HomeMealCard invalidates this value at the next meaningful KST boundary and
+// on app resume. Keeping the clock as a plain provider makes the boundary
+// timer lifecycle-owned by the widget that displays it.
+final koreanMealClockProvider = Provider<DateTime>((ref) => DateTime.now());
+final mealBoundaryRefreshEnabledProvider = Provider<bool>((ref) => true);
+
+// Kept as a date-only compatibility provider for existing consumers/tests.
+final koreanTodayProvider = StreamProvider.autoDispose<String>(
+  (ref) => Stream.value(koreanDate(DateTime.now())),
+);
+
 final todayMealsProvider = FutureProvider<List<Meal>>((ref) async {
   final selection = ref.watch(schoolSelectionProvider);
   if (selection.isLoading) return [];
@@ -91,4 +94,15 @@ final todayMealsProvider = FutureProvider<List<Meal>>((ref) async {
   final date = clock.value ?? await ref.watch(koreanTodayProvider.future);
   if (date == null) throw const SchoolServiceException();
   return repository.meals(school, date);
+});
+
+final tomorrowMealsProvider = FutureProvider<List<Meal>>((ref) async {
+  final selection = ref.watch(schoolSelectionProvider);
+  if (selection.isLoading) return [];
+  if (selection.hasError) throw const SchoolServiceException();
+  final school = selection.value;
+  if (school == null) return [];
+  final repository = ref.watch(schoolRepositoryProvider);
+  final instant = ref.watch(koreanMealClockProvider);
+  return repository.meals(school, koreanDateOffset(instant, 1));
 });

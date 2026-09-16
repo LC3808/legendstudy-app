@@ -31,12 +31,25 @@ class PersonalMaterialListPage extends ConsumerWidget {
   }
 }
 
-class PersonalMaterialList extends ConsumerWidget {
-  const PersonalMaterialList({required this.kind, super.key});
+class PersonalMaterialList extends ConsumerStatefulWidget {
+  const PersonalMaterialList({
+    required this.kind,
+    this.homeMode = false,
+    super.key,
+  });
   final PersonalListKind kind;
+  final bool homeMode;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PersonalMaterialList> createState() =>
+      _PersonalMaterialListState();
+}
+
+class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
+  bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
     if (auth.isLoading) {
       // Keep the shell settleable while the auth stream has not emitted yet.
@@ -51,7 +64,9 @@ class PersonalMaterialList extends ConsumerWidget {
     if (auth.value?.isAuthenticated != true) {
       return const EmptyState('로그인하면 이 기능을 이용할 수 있어요.');
     }
-    final state = ref.watch(personalMaterialListProvider(kind));
+    final state = widget.homeMode
+        ? ref.watch(homeRecentMaterialListProvider)
+        : ref.watch(personalMaterialListProvider(widget.kind));
     return state.when(
       skipLoadingOnRefresh: false,
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -59,29 +74,52 @@ class PersonalMaterialList extends ConsumerWidget {
         message: error is BackendUnavailable
             ? error.message
             : '자료 목록을 불러오지 못했어요. 다시 시도해 주세요.',
-        onRetry: () => ref.invalidate(personalMaterialListProvider(kind)),
+        onRetry: () => widget.homeMode
+            ? ref.invalidate(homeRecentMaterialListProvider)
+            : ref.invalidate(personalMaterialListProvider(widget.kind)),
       ),
       data: (items) => items.isEmpty
           ? EmptyState(
-              kind == PersonalListKind.bookmarks
+              widget.kind == PersonalListKind.bookmarks
                   ? '저장한 자료가 아직 없어요.'
                   : '최근 본 자료가 아직 없어요.',
             )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (final material in items)
-                  _PersonalMaterialCard(material: material, kind: kind),
-              ],
-            ),
+          : _list(context, items),
+    );
+  }
+
+  Widget _list(BuildContext context, List<PersonalMaterial> items) {
+    final visible = widget.homeMode
+        ? items.take(expanded ? 6 : 2).toList()
+        : items;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (final material in visible)
+          _PersonalMaterialCard(
+            material: material,
+            kind: widget.kind,
+            homeMode: widget.homeMode,
+          ),
+        if (widget.homeMode && items.length > 2)
+          _HomeExpandControl(
+            expanded: expanded,
+            onTap: () => setState(() => expanded = !expanded),
+          ),
+      ],
     );
   }
 }
 
 class _PersonalMaterialCard extends ConsumerWidget {
-  const _PersonalMaterialCard({required this.material, required this.kind});
+  const _PersonalMaterialCard({
+    required this.material,
+    required this.kind,
+    this.homeMode = false,
+  });
   final PersonalMaterial material;
   final PersonalListKind kind;
+  final bool homeMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -102,7 +140,11 @@ class _PersonalMaterialCard extends ConsumerWidget {
                 '/materials/${Uri.encodeComponent(item.slug)}',
               );
               if (context.mounted) {
-                ref.invalidate(personalMaterialListProvider(kind));
+                if (homeMode) {
+                  ref.invalidate(homeRecentMaterialListProvider);
+                } else {
+                  ref.invalidate(personalMaterialListProvider(kind));
+                }
               }
             },
             child: ConstrainedBox(
@@ -139,4 +181,24 @@ class _PersonalMaterialCard extends ConsumerWidget {
       ),
     );
   }
+}
+
+class _HomeExpandControl extends StatelessWidget {
+  const _HomeExpandControl({required this.expanded, required this.onTap});
+  final bool expanded;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    label: expanded ? '최근 본 자료 접기' : '최근 본 자료 더보기',
+    child: Align(
+      alignment: Alignment.centerRight,
+      child: TextButton.icon(
+        onPressed: onTap,
+        icon: Icon(expanded ? Icons.expand_less : Icons.expand_more),
+        label: Text(expanded ? '접기' : '더보기'),
+      ),
+    ),
+  );
 }

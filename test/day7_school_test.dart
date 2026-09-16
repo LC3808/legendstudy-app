@@ -209,6 +209,8 @@ void main() {
         koreanTodayProvider.overrideWith(
           (ref) => clock ?? Stream.value('20260911'),
         ),
+        tomorrowMealsProvider.overrideWith((ref) async => []),
+        mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
       ],
     );
     addTearDown(c.dispose);

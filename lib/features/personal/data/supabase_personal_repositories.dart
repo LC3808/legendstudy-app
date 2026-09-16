@@ -122,7 +122,9 @@ class SupabaseRecentViewRepository extends _PersonalRepository
     implements RecentViewRepository {
   SupabaseRecentViewRepository(super.client);
   @override
-  Future<List<PersonalContentEntry>> fetchOwnRecentViews() async {
+  Future<List<PersonalContentEntry>> fetchOwnRecentViews({
+    int limit = 100,
+  }) async {
     final owner = userId;
     if (owner == null) return [];
     final rows = await client!
@@ -131,7 +133,7 @@ class SupabaseRecentViewRepository extends _PersonalRepository
         .eq('user_id', owner)
         .order('viewed_at', ascending: false)
         .order('id', ascending: false)
-        .limit(100);
+        .limit(limit);
     return rows
         .map((row) => PersonalContentEntry.fromJson(row, 'viewed_at'))
         .toList();

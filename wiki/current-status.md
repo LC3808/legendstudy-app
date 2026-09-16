@@ -2,6 +2,18 @@
 
 Last reviewed: 2026-09-16
 
+## Day 10-B — Home Polish v2
+
+- Implemented KST-based today/tomorrow meal display with 17:00 dinner and
+  tomorrow priority, boundary/resume refresh, and no empty tomorrow section.
+- Home recent updates and recent views are now bounded to six records, show two
+  by default, and independently expand/collapse to six. Full Materials/MY
+  semantics and guest/auth account isolation remain unchanged.
+- Full tests (335 passed, one opt-in read-only network skip), analyze, Android
+  debug build and iOS simulator build/run pass. iPhone Profile built, but
+  CoreDevice automated launch timed out before interactive Home verification.
+- Details and remaining device follow-up: [Day 10-B Home Polish](day-10-b-home-polish.md).
+
 ## Essay Lab product roadmap — PLANNED
 
 - Product priority is now AI essay feedback (Essay Lab) ahead of grade

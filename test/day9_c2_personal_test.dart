@@ -51,7 +51,9 @@ class FakeRecentRepository implements RecentViewRepository {
   int touches = 0;
   bool fail = false;
   @override
-  Future<List<PersonalContentEntry>> fetchOwnRecentViews() async => [];
+  Future<List<PersonalContentEntry>> fetchOwnRecentViews({
+    int limit = 100,
+  }) async => [];
   @override
   Future<void> touchRecentView(String _) async {
     touches++;
