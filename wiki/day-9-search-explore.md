@@ -1,8 +1,9 @@
 # Day 9-A — Search / Explore
 
 Status: **Day 9-A COMPLETE** — Search / Explore implementation and scoped
-validation PASS. Xcode 27 validation overrides and remaining release/device gates
-are explicitly documented below; this is not Day 9-B/C/D completion.
+validation PASS. The former Xcode 27 external validation override has been
+replaced by the repository's official iOS 15/arm64 settings; this is not Day
+9-B/C/D completion.
 
 ## Baseline and boundaries
 
@@ -199,12 +200,13 @@ adding download/viewer behavior. See database.md and ingestion.md.
 
 ## Xcode 27 validation environment / release boundary
 
-Xcode 27.0 (27A266a) rejects the repository's existing iOS12 deployment target
-(minimum accepted by this toolchain:15). Its default simulator architecture also
-conflicted with the installed Flutter engine. No repository deployment target,
-Podfile, plugin, minimum-supported-OS policy or dependency was changed.
+Xcode 27.0 (27A266a) rejected the repository's former iOS12 deployment target
+(minimum accepted by this toolchain:15). The installed Flutter engine also
+requires the Apple Silicon simulator architecture used below. This was resolved
+in-repository on 2026-09-16: Podfile and Runner configurations use iOS15, Pods
+are pinned to iOS15 in `post_install`, and Runner uses arm64.
 
-The successful **validation builds** used this repository-external file:
+The historical successful **validation builds** used this repository-external file:
 `/private/tmp/legendstudy-day9-xcode27.xcconfig`:
 
 ```xcconfig
@@ -213,15 +215,13 @@ ARCHS = arm64
 ONLY_ACTIVE_ARCH = YES
 ```
 
-Set `XCODE_XCCONFIG_FILE` to that path for the simulator/profile build and Flutter
-integration drive command. This produces arm64 validation artifacts targeting15;
-it does **not** prove a default-settings Xcode27 build, Intel simulator build,
-iOS12 compatibility, or release readiness. The plain build's original failure is
-retained as evidence, not relabelled PASS. Temporary configuration contains no keys.
+That file is no longer needed for normal builds. The repository-native settings
+produce the same arm64/iOS15 simulator target without `XCODE_XCCONFIG_FILE`.
+The old plain-build failure is retained as historical evidence only.
 
-SHOULD before release: Owner decides supported minimum iOS/toolchain, then a
-separate build-configuration change makes default builds reproducible. Day9-A
-search runtime was verified without silently deciding that product policy.
+The supported minimum iOS/toolchain decision is now recorded as iOS15/Xcode27;
+default builds are reproducible under the checked-in configuration. Release
+signing and device runtime remain separate acceptance claims.
 Normal configured simulator app was rebuilt/reinstalled and launched after the
 memory fixture harness; no uninstall/container reset was used. Actual Materials
 empty state was verified through native UI (normal-app-empty.png), in addition to

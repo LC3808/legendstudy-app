@@ -1151,3 +1151,22 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   baseline and scope mismatches, exact counts, mutation shape, rollback,
   idempotency and transaction rollback. Python compile, tests and diff check
   PASS. See [D1 package](day-9-d1-publication-package.md).
+
+## 2026-09-16 — iOS 15 deployment target closeout
+
+- Confirmed branch `codex/day-7-school-neis`, HEAD `a44710a`, and preserved the
+  four pre-existing untracked directories. Changed the official iOS minimum from
+  12.0 to 15.0 in `ios/Podfile` and all Runner Debug/Profile/Release project
+  configurations. Added a Podfile post-install override so every generated Pods
+  target also uses 15.0; `pod install` regenerated `Podfile.lock` checksum and
+  the Pods project.
+- The first default Xcode27 simulator build passed deployment-target checks but
+  exposed the separate Flutter engine arm64/x86_64 mismatch. Added repository
+  native `ARCHS = arm64` to Runner configurations, replacing the need for the
+  historical external iOS15/arm64 xcconfig. Default simulator build PASS.
+- `flutter pub get`, `flutter analyze`, full Flutter tests (316 passed, 1
+  read-only network skip), `pod install`, and `git diff --check` PASS. Connected
+  iPhone `00008101-001C39E02E61001E` built, installed and launched Runner; device
+  process inspection confirmed Runner. Flutter runner interruption after launch
+  prevents a full interactive runtime PASS claim. No DB/publication/feature logic
+  or Android changes.

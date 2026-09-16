@@ -457,8 +457,7 @@ supersedes Day6 submit-only Materials behavior; earlier checkpoints are historic
 ### Day 9-A native validation closeout
 
 Search/Explore scoped acceptance is COMPLETE: simulator1×/2× native renders,
-software keyboard and Home handoff PASS; simulator/profile builds use an external
-Xcode27 iOS15/arm64 validation configuration. Repository iOS12 support settings
-remain unchanged. Default-build/release toolchain reconciliation needs a separate
-Owner decision; no deployment-target policy was silently changed. Physical new-UI
-and real-content quality checks remain9-D. See day-9-search-explore.md.
+software keyboard and Home handoff PASS. Since the 2026-09-16 iOS closeout,
+repository-native Xcode27 settings use iOS15 and arm64; the former external
+validation xcconfig is no longer required. Release signing and physical new-UI
+quality checks remain separate. See day-9-search-explore.md.

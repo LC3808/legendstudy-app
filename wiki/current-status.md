@@ -1,6 +1,25 @@
 # Current Status
 
-Last reviewed: 2026-09-15
+Last reviewed: 2026-09-16
+
+## iOS deployment target closeout — 2026-09-16
+
+- Official iOS minimum deployment target is now **15.0** in `ios/Podfile` and
+  all Runner Debug/Profile/Release project configurations. Podfile
+  `post_install` also pins every generated Pods target to 15.0, covering plugin
+  podspecs that still declare iOS 12.0.
+- Xcode 27 default simulator build initially exposed a separate Flutter engine
+  architecture mismatch; Runner configurations now use repository-native
+  `ARCHS = arm64`, matching the Apple Silicon Flutter engine. No external
+  xcconfig is required. Default `flutter build ios --simulator --no-codesign`
+  PASS.
+- `flutter pub get`, `pod install`, `flutter analyze`, and full Flutter tests
+  PASS (316 passed, 1 read-only network test skipped). The connected iPhone
+  `00008101-001C39E02E61001E` built, installed and launched Runner; device
+  process inspection confirmed Runner processes. The resident runner was
+  interrupted after launch, so this is not a full interactive runtime claim.
+- No Flutter feature logic, Android configuration, DB, publication data, RLS,
+  push, PR or merge changed.
 
 ## Day 9-D1 — Pilot C publication package
 
@@ -43,8 +62,8 @@ in [log.md](log.md); this page describes the current state rather than historica
   real-SDK public read-only smoke, Android debug and diff/credential checks PASS.
   iOS simulator native 1×/2× review and real software-keyboard inset checks PASS.
   Simulator/profile builds PASS using external Xcode27 iOS15/arm64 overrides;
-  default iOS12 project settings were preserved. This is not a default-build or
-  release-compatibility claim; minimum-iOS/toolchain policy needs separate review.
+  official iOS15/arm64 project settings are now repository-native; the external
+  validation override is no longer required. This is not a release-signing claim.
 - 26 OS-level native screenshots reviewed; normal simulator app restored. No
   physical iPhone connected in this follow-up; prior Day8 physical PASS preserved.
   Day9-B real ingestion and9-C/9-D remain separate. No production writes.
@@ -495,9 +514,9 @@ separately. Ingestion success is not publication.
 - Publication readiness checklist A–Q is PASS for the scoped gate, so
   **PUBLICATION READY = YES**. This is not publication: all Pilot C content
   remains inactive, no production mutation was performed, and publication still
-  requires the separate Owner activation decision. Default iOS12/Xcode27
-  compatibility remains a release-toolchain follow-up; documented iOS15/arm64
-  simulator validation passes.
+  requires the separate Owner activation decision. Official iOS15/Xcode27
+  compatibility is now configured in-repository and default simulator validation
+  passes.
 - **Day 9-C1/C2/C3 are complete. Day 9-C is COMPLETE.** Next: Owner review and
   explicit publication decision, or separate release-toolchain work.
 

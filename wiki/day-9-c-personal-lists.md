@@ -33,6 +33,5 @@ targets, C2 bookmark/recent behavior, Saved/Recent lists, MY routes, search
 back-state, accessibility, inactive Pilot C public exposure, and no DB/schema/
 RLS change. Therefore **PUBLICATION READY = YES** for this implementation gate.
 This is readiness only: Pilot C remains inactive and no publication or
-production mutation was performed. Default Xcode 27/iOS12 compatibility remains
-a separate release-toolchain decision; documented iOS15/arm64 simulator
-validation passes.
+production mutation was performed. Official Xcode 27/iOS15/arm64 compatibility
+is configured in-repository; default simulator validation passes.
