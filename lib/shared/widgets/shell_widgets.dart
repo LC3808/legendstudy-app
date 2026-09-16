@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/theme/app_theme.dart';
 
 class ShellPage extends StatelessWidget {
@@ -193,59 +194,74 @@ class DailyUtilityCard extends StatelessWidget {
     required this.body,
     this.heading,
     this.wrapHeader = false,
+    this.accentColor,
     super.key,
   });
   final String title;
   final bool wrapHeader;
   final Widget? heading;
   final Widget action, body;
+  final Color? accentColor;
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     decoration: BoxDecoration(
-      color: AppTokens.surfaceWarm,
+      color: accentColor == null ? AppTokens.surfaceWarm : null,
+      gradient: accentColor == null
+          ? null
+          : LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [accentColor!, accentColor!, AppTokens.surfaceWarm],
+              stops: const [0, .012, .012],
+            ),
       border: Border.all(color: AppTokens.cardBorder),
       borderRadius: BorderRadius.circular(AppTokens.cardRadius),
     ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LayoutBuilder(
-          builder: (context, constraints) =>
-              wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    heading ??
-                        Text(
-                          title,
-                          style: Theme.of(context).textTheme.titleMedium,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(AppTokens.cardRadius - 1),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(accentColor == null ? 16 : 13, 8, 16, 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) =>
+                  wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        heading ??
+                            Text(
+                              title,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                        Align(alignment: Alignment.centerRight, child: action),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        Expanded(
+                          child:
+                              heading ??
+                              Text(
+                                title,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
                         ),
-                    Align(alignment: Alignment.centerRight, child: action),
-                  ],
-                )
-              : Row(
-                  children: [
-                    Expanded(
-                      child:
-                          heading ??
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.titleMedium,
+                        const SizedBox(width: 8),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth * .45,
                           ),
+                          child: action,
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: constraints.maxWidth * .45,
-                      ),
-                      child: action,
-                    ),
-                  ],
-                ),
+            ),
+            body,
+          ],
         ),
-        body,
-      ],
+      ),
     ),
   );
 }

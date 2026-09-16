@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +11,7 @@ import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/home/day_target_providers.dart';
 import 'package:legendstudy_app/features/home/domain/day_target.dart';
 import 'package:legendstudy_app/features/school/school_providers.dart';
+
 import 'neis_attribution_test.dart' show FixedSchool;
 import 'day7_school_test.dart' show schoolA, meal;
 
@@ -193,6 +195,21 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
+        expect(find.text('오늘의 공부'), findsNothing);
+        if (state == 'none') {
+          final sectionLabels = [
+            'D-DAY',
+            '나의 공부 시간',
+            '우리 학교 · 오늘 급식',
+            '자료 검색',
+            '최근 업데이트',
+            '최근 본 자료',
+          ];
+          final tops = sectionLabels
+              .map((label) => tester.getTopLeft(find.text(label)).dy)
+              .toList();
+          expect(tops, orderedEquals([...tops]..sort()));
+        }
         expect(find.text('D-DAY'), findsOneWidget);
         expect(find.textContaining('NEIS'), findsNothing);
         final study = find.widgetWithText(TextButton, '학습으로 이동');

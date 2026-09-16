@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
@@ -46,6 +47,7 @@ class DayTargetCard extends ConsumerWidget {
               },
         child: const Text('설정'),
       ),
+      accentColor: AppTokens.homeDdayAccent,
       body: state.isLoading
           ? const Text('일정을 불러오는 중이에요.')
           : state.hasError
@@ -57,9 +59,8 @@ class DayTargetCard extends ConsumerWidget {
               target?.formattedDate ?? '목표 날짜를 설정해 주세요.',
               style: target == null
                   ? null
-                  : Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppTokens.textSecondary,
-                    ),
+                  : Theme.of(context).textTheme.bodySmall
+                        ?.copyWith(color: AppTokens.textSecondary),
             ),
     );
   }
@@ -93,9 +94,8 @@ class _TargetHeading extends StatelessWidget {
         if (expired)
           Text(
             label,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: AppTokens.textSecondary),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: AppTokens.textSecondary),
           )
         else
           DecoratedBox(

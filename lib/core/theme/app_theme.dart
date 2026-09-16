@@ -11,6 +11,13 @@ abstract final class AppTokens {
   static const divider = Color(0xFFE5E5E5);
   static const cardBorder = Color(0xFFDCDCDC);
   static const navigationIndicator = Color(0xFFFFE3B0);
+  // Home section identities: accents only, never full-card fills.
+  static const homeDdayAccent = primaryDark;
+  static const homeStudyAccent = Color(0xFF5145A6);
+  static const homeMealAccent = Color(0xFF2F855A);
+  static const homeSearchAccent = Color(0xFF2563A8);
+  static const homeUpdatesAccent = Color(0xFFB7791F);
+  static const homeRecentAccent = Color(0xFF6B46C1);
   static const sectionTitle = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w700,

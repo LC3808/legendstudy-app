@@ -2,6 +2,21 @@
 
 Last reviewed: 2026-09-16
 
+## Day 12 — Home Information Architecture & Visual Hierarchy
+
+- Home order is now D-Day → 나의 공부 시간 → 우리학교 급식 → 자료 검색 →
+  최근 업데이트 → 최근 본 자료.
+- Removed the duplicate `오늘의 공부` heading. Populated Study state emphasizes
+  today’s duration; empty state remains concise and existing data contracts are
+  unchanged.
+- Added restrained semantic Home accents in `AppTokens`: orange D-Day, indigo
+  Study, green Meal, blue Search, amber Updates and violet Recent. Cards remain
+  neutral with a soft accent band; no database, provider or navigation behavior
+  changed.
+- Focused and full Flutter tests, analyze, Android debug build, iOS simulator
+  build and physical iPhone Profile launch passed. See [Day 12 Home visual
+  hierarchy](day-12-home-visual-hierarchy.md).
+
 ## Day 11 — Account & Personal Foundation + Feedback Operations
 
 - Added a minimal Auth screen using the existing Supabase SDK: email/password

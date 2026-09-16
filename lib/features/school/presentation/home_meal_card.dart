@@ -1,7 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/theme/app_theme.dart';
+
 import 'package:go_router/go_router.dart';
+
 import '../../../shared/widgets/shell_widgets.dart';
 import '../school_providers.dart';
 import '../domain/school.dart';
@@ -124,6 +129,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
         onPressed: () => context.push('/my/school'),
         child: const Text('학교 설정'),
       ),
+      accentColor: AppTokens.homeMealAccent,
       body: body,
     );
   }

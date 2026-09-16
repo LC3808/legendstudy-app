@@ -7,6 +7,7 @@ import 'package:legendstudy_app/features/study/application/study_controller.dart
 import 'package:legendstudy_app/features/study/presentation/study_page.dart';
 import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
+
 import 'day5_shell_test.dart' show ShellContent;
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
 
@@ -42,7 +43,8 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        expect(find.text('오늘 1시간 42분 공부했어요.'), findsOneWidget);
+        expect(find.text('1시간 42분'), findsOneWidget);
+        expect(find.text('오늘 공부'), findsOneWidget);
         expect(find.text('01:42:00'), findsNothing);
         await tester.ensureVisible(find.text('학습으로 이동'));
         expect(

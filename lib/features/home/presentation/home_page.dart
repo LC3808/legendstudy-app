@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
 import 'day_target_card.dart';
 import '../../study/study_providers.dart';
+import '../../study/domain/study_models.dart';
 import '../../school/presentation/home_meal_card.dart';
 import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
@@ -21,16 +23,17 @@ class HomePage extends ConsumerWidget {
       const AppHeader(title: '레전드스터디', branded: true),
       const DayTargetCard(),
       const SizedBox(height: 8),
-      const HomeMealCard(),
+      _HomeStudyCard(),
       const SizedBox(height: 8),
-      const _HomeSearch(),
-      Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 4),
-        child: Semantics(
-          header: true,
-          child: const Text('빠르게 찾기', style: AppTokens.sectionTitle),
-        ),
+      const HomeMealCard(),
+      const SizedBox(height: 16),
+      const _HomeSection(
+        title: '자료 검색',
+        icon: Icons.search,
+        accent: AppTokens.homeSearchAccent,
+        child: _HomeSearch(),
       ),
+      const SizedBox(height: 8),
       Wrap(
         spacing: 8,
         runSpacing: 4,
@@ -52,28 +55,95 @@ class HomePage extends ConsumerWidget {
             ),
         ],
       ),
+      const _HomeSection(
+        title: '최근 업데이트',
+        icon: Icons.new_releases_outlined,
+        accent: AppTokens.homeUpdatesAccent,
+        child: HomeRecentUpdates(),
+      ),
+      const _HomeSection(
+        title: '최근 본 자료',
+        icon: Icons.history,
+        accent: AppTokens.homeRecentAccent,
+        child: PersonalMaterialList(
+          kind: PersonalListKind.recentViews,
+          homeMode: true,
+        ),
+      ),
+    ],
+  );
+}
+
+class _HomeStudyCard extends ConsumerWidget {
+  const _HomeStudyCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final study = ref.watch(studyControllerProvider);
+    final hasToday =
+        study.ready &&
+        !study.historyError &&
+        !study.historyLimit &&
+        study.week.last > 0;
+    final body = hasToday
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                studyDuration(study.week.last),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: const Color(0xFF5145A6),
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 2),
+              const Text('오늘 공부'),
+            ],
+          )
+        : Text(study.summary);
+    return DailyUtilityCard(
+      title: '나의 공부 시간',
+      accentColor: AppTokens.homeStudyAccent,
+      body: body,
+      action: TextButton(
+        onPressed: () => context.go('/study'),
+        child: const Text('학습으로 이동'),
+      ),
+    );
+  }
+}
+
+class _HomeSection extends StatelessWidget {
+  const _HomeSection({
+    required this.title,
+    required this.icon,
+    required this.accent,
+    required this.child,
+  });
+
+  final String title;
+  final IconData icon;
+  final Color accent;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
       Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 4),
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
         child: Semantics(
           header: true,
-          child: const Text('오늘의 공부', style: AppTokens.sectionTitle),
+          child: Row(
+            children: [
+              Icon(icon, size: 20, color: accent),
+              const SizedBox(width: 8),
+              Text(title, style: AppTokens.sectionTitle),
+            ],
+          ),
         ),
       ),
-      DailyUtilityCard(
-        title: '나의 공부 시간',
-        body: Text(ref.watch(studyControllerProvider).summary),
-        action: TextButton(
-          onPressed: () => context.go('/study'),
-          child: const Text('학습으로 이동'),
-        ),
-      ),
-      const SectionHeader('최근 업데이트'),
-      const HomeRecentUpdates(),
-      const SectionHeader('최근 본 자료'),
-      const PersonalMaterialList(
-        kind: PersonalListKind.recentViews,
-        homeMode: true,
-      ),
+      child,
     ],
   );
 }

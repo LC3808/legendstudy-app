@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-16 — Day 12 Home Information Architecture & Visual Hierarchy
+
+- Reordered Home to D-Day, Study, Meal, Search, Recent Updates and Recent Views;
+  removed the duplicate `오늘의 공부` heading and emphasized populated Study
+  duration without adding unsupported metrics.
+- Added centralized semantic section accents with neutral surfaces and preserved
+  Meal, Search, Recent, D-Day, Auth, Feedback and personal-state behavior.
+- Focused/full Flutter tests, analyze, Android debug, iOS simulator and physical
+  iPhone Profile launch passed. No Production or Supabase mutation.
+
 ## 2026-09-15 — Day 9-C3 Saved / Recent UI + MY Integration
 
 - Replaced Saved and Recent placeholders with authenticated personal lists,
