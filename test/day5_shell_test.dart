@@ -1,6 +1,5 @@
 import 'support/search_fake.dart';
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
-import 'dart:ui' show SemanticsFlag;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -237,7 +236,7 @@ void main() {
     expect(
       tester
           .getSemantics(find.bySemanticsLabel('레전드스터디'))
-          .hasFlag(SemanticsFlag.isHeader),
+          .flagsCollection.isHeader,
       isTrue,
     );
     expect(find.text('레전드스터디'), findsNothing);

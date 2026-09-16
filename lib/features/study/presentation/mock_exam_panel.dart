@@ -203,7 +203,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
             ),
           if (papers.isNotEmpty)
             DropdownButtonFormField<int>(
-              value: selectedPaper ?? -1,
+              initialValue: selectedPaper ?? -1,
               isExpanded: true,
               decoration: const InputDecoration(labelText: '채점할 시험'),
               items: [
@@ -270,7 +270,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
             ],
           ),
           DropdownButtonFormField<String>(
-            value: preset,
+            initialValue: preset,
             isExpanded: true,
             isDense: false,
             itemHeight: null,

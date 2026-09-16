@@ -38,7 +38,9 @@ The owner-approved production app identifier is `com.legendstudy.app` on Android
 
 ## Implemented Day 1 scaffold (2026-09-12)
 
-- Flutter 3.32.0 / Dart 3.8.0, iOS + Android native Flutter hosts at repository root.
+- Official baseline: Flutter 3.47.3 / Dart 3.13.3, with the prior Flutter
+  3.32.0 / Dart 3.8.0 SDK preserved separately for rollback/reference. iOS +
+  Android native Flutter hosts remain at repository root.
 - `lib/app`: application composition, router lifecycle and navigation shell.
 - `lib/features/{home,browse,saved,profile}/presentation`: independent placeholder pages.
 - `lib/core/config`: typed, overrideable public environment provider.
@@ -55,6 +57,11 @@ The owner-approved production app identifier is `com.legendstudy.app` on Android
   unknown paths offer a home recovery action. Router disposal is provider-owned.
 - Package versions were resolved against the installed SDK, rather than upgrading
   the user's global Flutter installation. Commit `pubspec.lock` with changes.
+- Android toolchain validation uses Gradle 8.14, AGP 8.11.1, Kotlin 2.2.20 and
+  NDK 28.2.13676358. iOS retains CocoaPods plus Flutter 3.47's generated Swift
+  Package Manager integration; the custom lifecycle uses
+  `FlutterImplicitEngineDelegate` and `FlutterSceneDelegate` for the UIScene
+  contract.
 - Korean Material localization enabled. At the Day 1 scaffold stage, no WebView,
   network source scraping, Supabase dependency/schema, authentication, or production
   feature logic existed. See the deployed Day 3 backend boundary below.
@@ -192,7 +199,7 @@ from a prior user and clear on sign-out. No personal screen cache is introduced 
 Claude leads UI/UX; Codex implements its specs. Existing tabs, brand and typography
 remain intact; Home/Browse add only data-state widgets/input.
 
-Android main manifest declares INTERNET; NDK 27.0.12077973 satisfies native plugin
+Android main manifest declares INTERNET; NDK 28.2.13676358 satisfies native plugin
 requirements. CocoaPods files integrate native plugins.
 Package versions and build/connection evidence live in current-status.md. Real
 backend smoke is opt-in via local public config; unit tests use fake repositories

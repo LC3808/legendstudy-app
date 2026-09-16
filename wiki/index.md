@@ -27,6 +27,8 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log
 
+- [Day 10-A Flutter 3.47.3 official toolchain migration — COMPLETE](current-status.md#day-10-a--flutter-3473-official-toolchain-migration--complete)
+
 ## Canonical-source rule
 
 There must be only one canonical `current-status.md` for the repository. Notion, chats, external documents, Claude notes, Manus reports, and ChatGPT plans may support the project, but they do not replace this repository-local wiki.
@@ -64,4 +66,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 9-C1 Resource Detail + Safe Open Target](day-9-c-resource-detail.md)
 - [Day 9-C2 Bookmark + Recent Views](day-9-c-personal-state.md)
 - [Day 9-C3 Saved / Recent UI + MY Integration](day-9-c-personal-lists.md)
-- [Day 9-D1 Pilot C publication package — implemented, not executed](day-9-d1-publication-package.md)
+- [Day 9-D1 Pilot C publication package — implemented; publication COMPLETE](day-9-d1-publication-package.md)

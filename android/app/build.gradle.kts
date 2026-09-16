@@ -9,7 +9,7 @@ android {
     namespace = "com.legendstudy.app"
     compileSdk = flutter.compileSdkVersion
     // Required by the Supabase transitive native plugins.
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

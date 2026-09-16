@@ -1,12 +1,14 @@
 # Day 9-D1 — Pilot C publication package
 
-Status: **implemented, offline/read-only verified; Production publication NOT EXECUTED.**
+Status: **package implemented and offline/read-only verified; Pilot C Production publication COMPLETE by Product Owner.**
 
 The package is `tool/publish_pilot_c.py` with offline contract coverage in
 `tool/test_publish_pilot_c.py`. It is separate from the ingestion INSERT writer.
 The default CLI path performs read-only preflight; `--publish` additionally
 requires `--i-have-owner-approval` and the exact project ref
-`stlhijzpjfgwwdgunlsd`. No command was run against Supabase in D1.
+`stlhijzpjfgwwdgunlsd`. No command was run against Supabase by the D1
+implementation task; the later Product Owner execution is recorded in
+`wiki/current-status.md`.
 
 ## Scope and gates
 
@@ -78,7 +80,6 @@ cd ~/development/legendstudy-app && python3 tool/publish_pilot_c.py \
   --project-ref stlhijzpjfgwwdgunlsd --publish --i-have-owner-approval
 ```
 
-Do not run this command during D1. First run the default read-only command with
-the same project ref and inspect its PASS; the Owner must also confirm the
-current production project and baseline independently. No migration or RLS
-change is required. Flutter code is unchanged.
+The command above is retained as the historical guarded execution command;
+publication has since been completed by the Product Owner. No migration or RLS
+change was required. Flutter code is unchanged.

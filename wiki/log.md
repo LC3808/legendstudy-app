@@ -1186,3 +1186,24 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - No repository iOS/toolchain setting was changed. Required next step is
   upgrading to a Flutter SDK containing
   the iOS 26 physical-device fix, then rerunning device Profile before Debug.
+
+## 2026-09-16 — Day 10-A Flutter 3.47.3 official toolchain migration
+
+- Adopted the separately installed Flutter 3.47.3 / Dart 3.13.3 SDK as the
+  repository baseline while preserving the original Flutter 3.32.0 SDK. Pub
+  constraints were raised without direct package upgrades; the lockfile records
+  the required transitive resolution changes. Analyzer is clean and the test
+  baseline remains 316 passed with one opt-in read-only network skip.
+- Completed the minimum Android toolchain migration: Gradle 8.14, AGP 8.11.1,
+  Kotlin 2.2.20 and NDK 28.2.13676358. Normal dependency validation and
+  `flutter build apk --debug` pass. Flutter's `android.builtInKotlin=false` and
+  `android.newDsl=false` migration properties are retained.
+- Accepted Flutter 3.47 iOS Swift Package Manager generated integration while
+  retaining CocoaPods. Migrated the custom AppDelegate to
+  `FlutterImplicitEngineDelegate`, added the Flutter UIScene manifest, and
+  retained iOS 15 / arm64. Simulator build/run and Home render pass; the
+  previously verified 3.47.3 iPhone Profile launch has no DartInit SIGABRT.
+  Device Debug remains pending CoreDevice availability.
+- Recorded Pilot C publication as Product-Owner-confirmed COMPLETE and added
+  the Home v2, Subject Alias and MY inquiry/suggestion backlog. No production
+  data, RLS, ingestion or publication mutation was performed by this task.

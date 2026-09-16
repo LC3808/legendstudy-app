@@ -1,3 +1,6 @@
+// The public `token` parameter is intentionally copied to a private field.
+// ignore_for_file: prefer_initializing_formals
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';

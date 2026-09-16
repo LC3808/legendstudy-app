@@ -2,6 +2,58 @@
 
 Last reviewed: 2026-09-16
 
+## Day 10-A — Flutter 3.47.3 official toolchain migration — COMPLETE
+
+- Official repository baseline is now Flutter **3.47.3** / Dart **3.13.3** from
+  `/Users/woojinchang/development/flutter-3.47`. The original
+  `/Users/woojinchang/development/flutter` Flutter 3.32.0 / Dart 3.8.0 SDK is
+  preserved unchanged as rollback/reference tooling.
+- `pubspec.yaml` now requires Dart `^3.13.3` and Flutter `>=3.47.3`; direct
+  package constraints were not upgraded. `pubspec.lock` contains the 15
+  transitive/SDK resolution changes required by Dart 3.13.3. Analyze is clean
+  and the full test baseline remains 316 passed with one opt-in read-only
+  network test skipped.
+- Android dependency validation passes normally with Gradle 8.14, AGP 8.11.1,
+  Kotlin 2.2.20 and NDK 28.2.13676358. Flutter's required
+  `android.builtInKotlin=false` and `android.newDsl=false` properties are
+  retained. `flutter build apk --debug` passes without a skip flag.
+- iOS minimum 15.0 and `ARCHS = arm64` remain repository-native. Flutter 3.47
+  Swift Package Manager generated integration is accepted while CocoaPods is
+  retained for the existing plugin setup. The custom AppDelegate was migrated
+  to `FlutterImplicitEngineDelegate` and the Flutter `UIScene` manifest was
+  added. Simulator build/run passes and the Home screen rendered normally.
+  The previously verified Flutter 3.47.3 iPhone Profile launch also passes;
+  Debug recheck remains dependent on the CoreDevice becoming available.
+- No Production DB/publication/is_active/RLS/ingestion change was made. No
+  Flutter product feature was added.
+
+## Confirmed Pilot C publication — COMPLETE
+
+- The Product Owner confirms Pilot C publication was executed after the D1
+  package: subjects 23/23 active, content_items 23/23, exam_subjects 363/363,
+  and resources 739/739 active. Resource breakdown remains question 360,
+  answer_explanation 356 and listening_audio 23.
+- Owner-confirmed anon RLS counts are public_content_items 23, public_exams 23,
+  public_exam_subjects 363, public_resources 739 and public_subjects 23.
+  Publication rollback was not executed. The older D1 package note saying
+  publication was not executed is historical and superseded by this section.
+
+## Backlog / TODO recorded during Day 10-A
+
+- Home Meal Card v2: today/tomorrow data, the 17:00 KST dinner boundary,
+  conditional lunch/dinner rows, date-boundary refresh, and independent
+  expand/collapse behavior.
+- Home recent updates and recent views: show two by default, expand to at most
+  six, preserve descending order, hide More at two or fewer, and use a shared
+  independent expandable-section interaction. Full recent history remains in
+  Materials or MY respectively.
+- MY 문의·건의사항: inquiry/bug report/feature suggestion/other categories,
+  title and body, server-derived authenticated identity, minimal diagnostics,
+  and a privacy-sensitive backend/RLS design.
+- Legacy Subject Alias: preserve `raw_subject_label`, separate canonical
+  taxonomy from searchable aliases, and define mappings for legacy subjects
+  before historical ingestion.
+
 ## iOS deployment target closeout — 2026-09-16
 
 - Official iOS minimum deployment target is now **15.0** in `ios/Podfile` and
@@ -46,12 +98,11 @@ Last reviewed: 2026-09-16
   zero signed URLs/duplicates/orphans/blocking quarantine, and 0/0/0 active
   rows. Exact 23/363/739 is an idempotent read-only no-op; partial active state
   fails closed. Rollback is soft deactivation only and was not executed.
-- Anon public-projection/RLS and post-publication Search acceptance queries are
-  prepared. No Production `is_active` update, INSERT, DELETE, rollback,
-  migration, RLS change, or Flutter change was made. **Publication NOT EXECUTED.**
-- Next action after separate Owner approval: run the read-only preflight, inspect
-  PASS, then decide whether to run the guarded publication command in
-  [Day 9-D1 package](day-9-d1-publication-package.md).
+- Anon public-projection/RLS and post-publication Search acceptance queries were
+  prepared. The package itself made no Production mutation; the later
+  Product-Owner publication result is recorded in the current authoritative
+  section above. See the [Day 9-D1 package](day-9-d1-publication-package.md)
+  for the guarded transaction and rollback contract.
 
 ## Phase
 

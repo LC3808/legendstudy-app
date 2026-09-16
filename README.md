@@ -14,12 +14,13 @@ This repository is the canonical source for the LegendStudy native app and its i
 
 ## Development
 
-Verified toolchain: Flutter **3.32.0**, Dart **3.8.0**. Use the committed
+Verified toolchain: Flutter **3.47.3**, Dart **3.13.3**. The original Flutter
+3.32.0 / Dart 3.8.0 SDK remains preserved separately for rollback/reference. Use the committed
 `pubspec.lock` for reproducible package versions.
 The [official Supabase Flutter package](https://pub.dev/packages/supabase_flutter)
 was checked; pub resolved 2.15.4 as compatible with this SDK (latest stable 2.17.2
 at implementation time). Existing Riverpod/go_router versions were preserved.
-Android native plugins require NDK 27.0.12077973 (pinned in app/build.gradle.kts).
+Android native plugins require NDK 28.2.13676358 (pinned in app/build.gradle.kts).
 
 ```sh
 flutter pub get
