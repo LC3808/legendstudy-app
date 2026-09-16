@@ -2,6 +2,21 @@
 
 Last reviewed: 2026-09-16
 
+## Day 11-B1 — Feedback production security review package
+
+- Reviewed the Day 11 feedback draft and created the hardened,
+  source-controlled candidate `supabase/migrations/20260917000100_feedback_operations.sql`.
+  Flutter now omits `user_id`; the database derives authenticated ownership
+  from `auth.uid()`. Client status/outbox/admin membership mutation is denied.
+- Added offline SQL contract tests and documented the threat model, RLS
+  matrix, worker boundary, rollback/disable plan and open account-deletion
+  retention decision in `day-11-b-feedback-production.md`.
+- Production migration/RLS apply, admin assignment, secrets, email worker,
+  email delivery and Admin Inbox remain **NOT PERFORMED / NOT DEPLOYED**.
+  Gemini handoff files are staged outside the repository at
+  `/tmp/legendstudy-feedback-security-review/`. See the B1 document for the
+  required Owner acceptance sequence.
+
 ## Day 12 — Home Information Architecture & Visual Hierarchy
 
 - Home order is now D-Day → 나의 공부 시간 → 우리학교 급식 → 자료 검색 →

@@ -1264,3 +1264,14 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   feedback, server-managed admin authorization and notification outbox. Admin
   inbox/email delivery and real OAuth/Production acceptance remain pending
   Owner configuration. No Production, secret, email or Muselry change.
+
+## 2026-09-17 — Day 11-B1 Feedback production security review
+
+- Audited the Day 11 feedback draft and created a separate reviewed migration
+  candidate with server-derived owner identity, deny-by-default admin/outbox
+  access, explicit grants, empty `search_path` for definer functions, bounded
+  outbox retries and duplicate-job protection.
+- Added offline SQL contract tests and Gemini handoff artifacts under
+  `/tmp/legendstudy-feedback-security-review/`. Updated Flutter to omit
+  client-supplied `user_id`. Production apply, admin assignment, secrets,
+  email worker and Admin Inbox were not performed.

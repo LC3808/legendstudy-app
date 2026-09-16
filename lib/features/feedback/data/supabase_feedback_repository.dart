@@ -13,9 +13,7 @@ class SupabaseFeedbackRepository implements FeedbackRepository {
     if (backend == null) {
       throw const BackendUnavailable('문의 서버가 준비되지 않았어요.');
     }
-    final userId = backend.auth.currentUser?.id;
     await backend.from('feedback_submissions').insert({
-      if (userId != null) 'user_id': userId,
       'category': draft.category.value,
       'title': draft.title.trim(),
       'body': draft.body.trim(),
