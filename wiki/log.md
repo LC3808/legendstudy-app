@@ -1170,3 +1170,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   process inspection confirmed Runner. Flutter runner interruption after launch
   prevents a full interactive runtime PASS claim. No DB/publication/feature logic
   or Android changes.
+
+## 2026-09-16 — iPhone native startup SIGABRT diagnosis
+
+- Reproduced the current HEAD (`f83d248`) on iPhone
+  `00008101-001C39E02E61001E` (iOS 26.6.1): Debug and Profile both abort
+  before `main.dart` in `Dart_Initialize → DartVM::Create`.
+- The startup stack matches Flutter issue #175469's iOS 26 physical-device
+  failure, whose report identifies `Unable to flip between RX and RW memory
+  protection on pages`. The older ptrace/debug-tooling message is not present
+  in the new verbose logs and cannot explain the identical Profile failure.
+- Clean simulator Debug build/run PASS; the LegendStudy Home screen was
+  captured on the iOS simulator. Device Home/Pilot-material rendering remains
+  unverified because the engine aborts before Flutter UI startup.
+- No repository iOS/toolchain setting was changed. Required next step is
+  upgrading to a Flutter SDK containing
+  the iOS 26 physical-device fix, then rerunning device Profile before Debug.

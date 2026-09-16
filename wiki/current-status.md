@@ -21,6 +21,22 @@ Last reviewed: 2026-09-16
 - No Flutter feature logic, Android configuration, DB, publication data, RLS,
   push, PR or merge changed.
 
+## iPhone native startup diagnosis — 2026-09-16
+
+- On Flutter 3.32.0/Dart 3.8.0 with Xcode 27 and iOS 26.6.1, both device
+  `flutter run` Debug and Profile reproduce the same pre-`main.dart` abort in
+  `Dart_Initialize`/`DartVM::Create`; no Flutter UI is rendered on the iPhone.
+- The startup stack matches the known iOS 26 physical-device Flutter 3.32
+  failure, whose upstream report identifies the RX/RW memory-protection
+  assertion. Simulator Debug runs normally, so this is a Flutter
+  engine/toolchain and iOS 26 device compatibility issue, not a feature/runtime
+  or RLS issue.
+- Repository iOS settings remain unchanged by this diagnosis. `ARCHS = arm64`
+  is valid for both the device and Apple-Silicon simulator engine slices and is
+  not the cause. Use a Flutter SDK version with the iOS 26 physical-device fix
+  for device Debug/Profile validation; the current SDK is suitable for the
+  verified simulator path only. No production or publication data changed.
+
 ## Day 9-D1 — Pilot C publication package
 
 - Publication package implemented in `tool/publish_pilot_c.py` with offline
