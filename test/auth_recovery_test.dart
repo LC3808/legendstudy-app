@@ -255,35 +255,48 @@ void main() {
   });
 
   group('recovery event routing', () {
-    /// The app router only reports a configuration once its delegate has built,
-    /// so these tests mount it the way the app does. Mounting also proves the
-    /// route actually builds rather than merely being recorded as a location.
-    /// Starting on /auth keeps the tab shell and its repositories out of scope.
+    /// Mounts the router exactly as LegendStudyApp does: watched through a
+    /// Consumer. This matters beyond fidelity. ProviderContainer.read opens a
+    /// subscription and closes it again, which leaves routerProvider with no
+    /// listener; Riverpod then deactivates that provider's own listen on
+    /// authStateProvider, and no auth event would ever reach the router. Only a
+    /// watched routerProvider reproduces the app's runtime.
     Future<GoRouter> mountAppRouter(
       WidgetTester tester,
-      ProviderContainer container,
-    ) async {
-      final router = container.read(routerProvider);
-      router.go('/auth');
+      ProviderContainer container, {
+      String at = '/auth',
+    }) async {
+      late GoRouter router;
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: MaterialApp.router(routerConfig: router),
+          child: Consumer(
+            builder: (context, ref, _) {
+              router = ref.watch(routerProvider);
+              return MaterialApp.router(routerConfig: router);
+            },
+          ),
         ),
       );
       await tester.pumpAndSettle();
+      router.go(at);
+      await tester.pumpAndSettle();
       return router;
+    }
+
+    ProviderContainer recoveryContainer(StreamController<AuthStatus> auth) {
+      final container = ProviderContainer(
+        overrides: [authStateProvider.overrideWith((ref) => auth.stream)],
+      );
+      addTearDown(container.dispose);
+      return container;
     }
 
     testWidgets('a passwordRecovery status routes to the new password screen',
         (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
-      final container = ProviderContainer(
-        overrides: [authStateProvider.overrideWith((ref) => auth.stream)],
-      );
-      addTearDown(container.dispose);
-      final router = await mountAppRouter(tester, container);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
 
       auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
       await tester.pumpAndSettle();
@@ -307,11 +320,62 @@ void main() {
       final container = ProviderContainer();
       addTearDown(container.dispose);
       final router = await mountAppRouter(tester, container);
+
       for (final path in ['/auth', '/auth/recovery', '/auth/new-password']) {
         router.go(path);
         await tester.pumpAndSettle();
         expect(router.routerDelegate.currentConfiguration.uri.path, path);
       }
+    });
+
+    testWidgets('other auth events do not open the recovery screen',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
+
+      for (final event in [
+        AuthChangeEvent.signedIn,
+        AuthChangeEvent.tokenRefreshed,
+        AuthChangeEvent.userUpdated,
+      ]) {
+        auth.add(AuthStatus('user-a', event: event));
+        await tester.pumpAndSettle();
+        expect(
+          router.routerDelegate.currentConfiguration.uri.path,
+          '/auth',
+          reason: '$event must not open the recovery screen',
+        );
+      }
+    });
+
+    testWidgets('recovery navigates once and does not trap the router',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
+
+      auth.add(
+        const AuthStatus('user-a', event: AuthChangeEvent.passwordRecovery),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        '/auth/new-password',
+      );
+
+      // A later ordinary event must not re-navigate, and leaving the screen
+      // must not be bounced back by a standing redirect.
+      auth.add(
+        const AuthStatus('user-a', event: AuthChangeEvent.tokenRefreshed),
+      );
+      await tester.pumpAndSettle();
+      router.go('/auth/recovery');
+      await tester.pumpAndSettle();
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        '/auth/recovery',
+      );
     });
   });
 

@@ -144,11 +144,20 @@ final routerProvider = Provider<GoRouter>((ref) {
   // A recovery link opens a session whose event is passwordRecovery. Routing on
   // the event keeps it distinct from an ordinary sign-in, and the token itself
   // is never read, logged or placed in a route.
+  //
+  // fireImmediately covers the deep-link race: if the recovery session is
+  // already the current auth state when this provider is built, a listener that
+  // only reacts to later changes would never see it.
+  //
+  // This subscription is only delivered while routerProvider itself has a
+  // listener. LegendStudyApp watches it (ref.watch), which is what keeps it
+  // alive; reading the router with ProviderContainer.read closes that
+  // subscription immediately and silently stops recovery navigation.
   ref.listen<AsyncValue<AuthStatus>>(authStateProvider, (_, next) {
     if (next.value?.isPasswordRecovery ?? false) {
       router.go('/auth/new-password');
     }
-  });
+  }, fireImmediately: true);
   ref.onDispose(router.dispose);
   return router;
 });
