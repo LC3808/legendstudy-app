@@ -60,6 +60,45 @@ class FeedbackVerifierOfflineTests(unittest.TestCase):
         self.assertIn("OWN_RESOLVE", insert_source)
         self.assertNotIn('self.ids["ANON"]', source)
 
+    def test_authenticated_request_sites_explicitly_carry_a_label(self):
+        source = Path(verifier.__file__).read_text()
+        required = (
+            r'self\.call\("GET", f"/rest/v1/\{TABLE\}\?\{query\}", label=auth_label\)',
+            r'data=\{"status": "resolved"\},\n            label="A",',
+            r'"/rest/v1/admin_users",\n            data=\{"user_id": self\.sessions\["A"\]\["id"\]\},\n            label="A",',
+            r'"/rest/v1/feedback_notifications\?select=id",\n            label="A",',
+            r'"/rest/v1/feedback_notifications",\n            data=\{"feedback_id": self\.ids\["A"\]\},\n            label="A",',
+        )
+        for pattern in required:
+            self.assertRegex(source, pattern)
+
+    def test_call_keyword_label_always_maps_to_bearer_token(self):
+        class RecordingTransport:
+            def __init__(self):
+                self.calls = []
+
+            def __call__(self, method, path, data=None, token=None, prefer=None):
+                self.calls.append((method, path, data, token, prefer))
+                return verifier.Response(200, [])
+
+        transport = RecordingTransport()
+        app = verifier.Verifier(
+            {"SUPABASE_URL": verifier.HOST, "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_offline"},
+            transport=transport,
+            run_id="abc123",
+        )
+        app.sessions["A"] = {"id": "00000000-0000-0000-0000-000000000001", "token": "A-token"}
+        requests = (
+            ("GET", "/rest/v1/feedback_submissions", None, None),
+            ("PATCH", "/rest/v1/feedback_submissions", {"status": "resolved"}, "return=representation"),
+            ("POST", "/rest/v1/admin_users", {"user_id": app.sessions["A"]["id"]}, None),
+            ("GET", "/rest/v1/feedback_notifications?select=id", None, None),
+            ("POST", "/rest/v1/feedback_notifications", {"feedback_id": "00000000-0000-0000-0000-000000000002"}, None),
+        )
+        for method, path, data, prefer in requests:
+            app.call(method, path, data=data, label="A", prefer=prefer)
+        self.assertEqual([call[3] for call in transport.calls], ["A-token"] * len(requests))
+
 
 if __name__ == "__main__":
     unittest.main()

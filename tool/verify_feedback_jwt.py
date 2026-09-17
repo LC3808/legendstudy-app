@@ -165,7 +165,11 @@ class Verifier:
         for label in ("A", "B"):
             email, password = emails[label], passwords[label]
             require(bool(email.strip()) and bool(password), f"{label}_CREDENTIAL_MISSING")
-            response = self.call("POST", AUTH_PATH, {"email": email, "password": password})
+            response = self.call(
+                "POST",
+                AUTH_PATH,
+                data={"email": email, "password": password},
+            )
             require(response.status == 200 and isinstance(response.body, dict), f"{label}_LOGIN_RESULT")
             user = response.body.get("user")
             token = response.body.get("access_token")
@@ -188,9 +192,9 @@ class Verifier:
         response = self.call(
             "POST",
             f"/rest/v1/{TABLE}",
-            payload,
-            auth_label,
-            "return=minimal",
+            data=payload,
+            label=auth_label,
+            prefer="return=minimal",
         )
         require(response.status == 201 and response.body in (None, []), f"{label}_INSERT")
         if not auth_label:
@@ -199,7 +203,7 @@ class Verifier:
 
         title = payload["title"]
         query = urllib.parse.urlencode({"select": "id,user_id,status,title", "title": "eq." + title})
-        reread = self.call("GET", f"/rest/v1/{TABLE}?{query}", auth_label)
+        reread = self.call("GET", f"/rest/v1/{TABLE}?{query}", label=auth_label)
         require(reread.status in (200, 206) and isinstance(reread.body, list) and len(reread.body) == 1, f"{label}_OWN_RESOLVE")
         row = reread.body[0]
         require(isinstance(row, dict), f"{label}_ROW_SHAPE")
@@ -231,22 +235,42 @@ class Verifier:
         self.report("a_cross_user_select_denied_or_empty", response)
 
         path = f"/rest/v1/{TABLE}?id=eq.{self.ids['A']}"
-        response = self.call("PATCH", path, {"status": "resolved"}, "A", "return=representation")
+        response = self.call(
+            "PATCH",
+            path,
+            data={"status": "resolved"},
+            label="A",
+            prefer="return=representation",
+        )
         self.deny_or_empty(response, "A_STATUS_UPDATE_ALLOWED")
         reread = self.select("A", self.ids["A"])
         require(reread.status in (200, 206) and isinstance(reread.body, list) and len(reread.body) == 1, "A_STATUS_REREAD")
         require(reread.body[0].get("status") == "new", "A_STATUS_CHANGED")
         self.report("a_own_status_update_denied_and_reread_new", response, reread_status="new")
 
-        response = self.call("POST", "/rest/v1/admin_users", {"user_id": self.sessions["A"]["id"]}, "A")
+        response = self.call(
+            "POST",
+            "/rest/v1/admin_users",
+            data={"user_id": self.sessions["A"]["id"]},
+            label="A",
+        )
         self.deny_or_empty(response, "A_ADMIN_INSERT_ALLOWED")
         self.report("a_admin_users_insert_denied", response)
 
-        response = self.call("GET", "/rest/v1/feedback_notifications?select=id", None, "A")
+        response = self.call(
+            "GET",
+            "/rest/v1/feedback_notifications?select=id",
+            label="A",
+        )
         self.deny_or_empty(response, "A_OUTBOX_SELECT_ALLOWED")
         self.report("a_outbox_select_denied", response)
 
-        response = self.call("POST", "/rest/v1/feedback_notifications", {"feedback_id": self.ids["A"]}, "A")
+        response = self.call(
+            "POST",
+            "/rest/v1/feedback_notifications",
+            data={"feedback_id": self.ids["A"]},
+            label="A",
+        )
         self.deny_or_empty(response, "A_OUTBOX_INSERT_ALLOWED")
         self.report("a_outbox_insert_denied", response)
 
