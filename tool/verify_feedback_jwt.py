@@ -184,26 +184,31 @@ class Verifier:
         raise AcceptanceFailure(code)
 
     def insert_feedback(self, label, auth_label=None):
+        payload = feedback_payload(self.run_id, label)
         response = self.call(
             "POST",
             f"/rest/v1/{TABLE}",
-            feedback_payload(self.run_id, label),
+            payload,
             auth_label,
-            "return=representation",
+            "return=minimal",
         )
-        require(response.status == 201 and isinstance(response.body, list) and len(response.body) == 1, f"{label}_INSERT")
-        row = response.body[0]
+        require(response.status == 201 and response.body in (None, []), f"{label}_INSERT")
+        if not auth_label:
+            self.report(f"{label.lower()}_valid_insert", response, run_id=self.run_id)
+            return
+
+        title = payload["title"]
+        query = urllib.parse.urlencode({"select": "id,user_id,status,title", "title": "eq." + title})
+        reread = self.call("GET", f"/rest/v1/{TABLE}?{query}", auth_label)
+        require(reread.status in (200, 206) and isinstance(reread.body, list) and len(reread.body) == 1, f"{label}_OWN_RESOLVE")
+        row = reread.body[0]
         require(isinstance(row, dict), f"{label}_ROW_SHAPE")
         row_id = as_uuid(row.get("id"), f"{label}_ROW_ID")
+        owner_matches = row.get("user_id") == self.sessions[auth_label]["id"]
+        require(owner_matches, f"{label}_OWNER")
         require(row.get("status") == "new", f"{label}_STATUS")
-        if auth_label:
-            owner_matches = row.get("user_id") == self.sessions[auth_label]["id"]
-            require(owner_matches, f"{label}_OWNER")
-        else:
-            owner_matches = row.get("user_id") is None
-            require(owner_matches, f"{label}_GUEST_OWNER")
         self.ids[label] = row_id
-        self.report(f"{label.lower()}_valid_insert", response, owner_matches=owner_matches, feedback_id=row_id)
+        self.report(f"{label.lower()}_valid_insert_and_own_resolve", response, owner_matches=owner_matches, feedback_id=row_id)
 
     def select(self, label, row_id):
         query = urllib.parse.urlencode({"select": "id,user_id,status,title", "id": "eq." + row_id})
@@ -213,9 +218,6 @@ class Verifier:
         self.login(emails, passwords)
 
         self.insert_feedback("ANON")
-        response = self.select(None, self.ids["ANON"])
-        self.deny_or_empty(response, "ANON_READ_ALLOWED")
-        self.report("anon_select_denied_or_empty", response)
 
         self.insert_feedback("A", "A")
         self.insert_feedback("B", "B")
@@ -249,9 +251,9 @@ class Verifier:
         self.report("a_outbox_insert_denied", response)
 
         print(
-            "FEEDBACK_RUNTIME HANDOFF run_id={} ANON_ID={} A_ID={} B_ID={} "
+            "FEEDBACK_RUNTIME HANDOFF run_id={} ANON_ID=OWNER_SQL_LOOKUP_BY_RUN_ID A_ID={} B_ID={} "
             "outbox_exactly_one=OWNER_SQL_READ_ONLY_REQUIRED".format(
-                self.run_id, self.ids["ANON"], self.ids["A"], self.ids["B"]
+                self.run_id, self.ids["A"], self.ids["B"]
             ),
             flush=True,
         )

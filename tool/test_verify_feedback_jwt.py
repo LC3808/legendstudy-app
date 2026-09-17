@@ -40,10 +40,25 @@ class FeedbackVerifierOfflineTests(unittest.TestCase):
         source = Path(verifier.__file__).read_text()
         self.assertIn("--run-production-acceptance", source)
         self.assertIn("getpass.getpass", source)
+        self.assertIn('"return=minimal"', source)
+        self.assertIn("OWN_RESOLVE", source)
         self.assertIn("A_STATUS_CHANGED", source)
+        self.assertIn("ANON_ID=OWNER_SQL_LOOKUP_BY_RUN_ID", source)
         self.assertIn("outbox_exactly_one=OWNER_SQL_READ_ONLY_REQUIRED", source)
         self.assertIn("SUPABASE_SERVICE_ROLE_KEY", source)
         self.assertNotIn("DELETE", source)
+
+    def test_write_only_insert_does_not_expect_representation_or_anon_id(self):
+        source = Path(verifier.__file__).read_text()
+        insert_start = source.index("    def insert_feedback")
+        select_start = source.index("    def select", insert_start)
+        insert_source = source[insert_start:select_start]
+        self.assertIn('"return=minimal"', insert_source)
+        self.assertNotIn('"return=representation"', insert_source)
+        self.assertIn("if not auth_label:", insert_source)
+        self.assertIn("return", insert_source)
+        self.assertIn("OWN_RESOLVE", insert_source)
+        self.assertNotIn('self.ids["ANON"]', source)
 
 
 if __name__ == "__main__":
