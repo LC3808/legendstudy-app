@@ -2,6 +2,18 @@
 
 Last reviewed: 2026-09-17
 
+## Day 11-B3 — Production Admin Inbox — IMPLEMENTED / E2E PENDING
+
+- Added the MY admin menu, guarded Admin Inbox list/detail routes, server-derived
+  `is_feedback_admin()` access state, newest-first bounded listing, status
+  filters, diagnostics and forward-only status management.
+- Production feedback DB/RLS and Admin JWT acceptance remain verified. This
+  task made no Production API call or mutation. Controlled user submission →
+  Admin Inbox → 확인중 → 처리완료 E2E is pending Owner acceptance.
+- Email Worker/provider/secrets and reverse status transitions remain pending;
+  account-deletion retention/anonymization is still an Owner decision. See
+  [Day 11-B3 Admin Inbox](day-11-b3-admin-inbox.md).
+
 ## Day 11-B1 — Feedback Production security closeout — COMPLETE
 
 - Owner applied `supabase/migrations/20260917000100_feedback_operations.sql`;
@@ -13,7 +25,8 @@ Last reviewed: 2026-09-17
 - Owner removed all five TEST feedback rows from the failed/successful runs;
   remaining TEST feedback/outbox rows are 0/0. Feedback JWT/RLS acceptance is
   **COMPLETE**. The earlier “not applied” B1 state is historical/superseded.
-- Admin bootstrap, Admin Inbox live connection, email worker/provider,
+- Admin bootstrap and Admin JWT acceptance are complete. Admin Inbox UI is now
+  implemented, while Production E2E remains pending. Email worker/provider,
   secrets, admin email, test email and push remain **NOT DONE**. Open policy
   decisions are account-deletion retention/anonymization and reverse status
   transitions. See [Day 11-B1 closeout](day-11-b-feedback-production.md).

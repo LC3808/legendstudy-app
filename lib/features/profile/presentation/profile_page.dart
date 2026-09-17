@@ -5,12 +5,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../feedback/feedback_providers.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
+    final admin = ref.watch(adminAccessProvider);
+    final currentUserId = auth.value?.userId;
+    final showAdminMenu = currentUserId != null &&
+        admin.value?.userId == currentUserId &&
+        admin.value?.isAdmin == true;
     return ShellPage(
       children: [
         const AppHeader(title: 'MY', subtitle: '나의 학습 공간'),
@@ -81,6 +87,18 @@ class ProfilePage extends ConsumerWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.push('/my/feedback'),
         ),
+        if (showAdminMenu) ...[
+          const Divider(),
+          const SectionHeader('관리자'),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.inbox_outlined),
+            title: const Text('문의 관리'),
+            subtitle: const Text('접수된 문의를 확인하고 상태를 관리해요.'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/my/admin/feedback'),
+          ),
+        ],
         const Divider(),
         const SectionHeader('레전드스터디와 함께'),
         const CompactUtilityCard(

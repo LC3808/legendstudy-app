@@ -12,6 +12,7 @@ import '../features/content/presentation/content_detail_page.dart';
 import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
+import '../features/feedback/presentation/admin_feedback_page.dart';
 import '../features/auth/presentation/auth_page.dart';
 import '../shared/widgets/nested_page.dart';
 
@@ -91,6 +92,24 @@ final routerProvider = Provider<GoRouter>((ref) {
                       title: '문의·건의사항',
                       child: FeedbackPage(),
                     ),
+                  ),
+                  GoRoute(
+                    path: 'admin/feedback',
+                    builder: (_, _) => const NestedPage(
+                      title: '문의 관리',
+                      child: AdminFeedbackPage(),
+                    ),
+                    routes: [
+                      GoRoute(
+                        path: ':id',
+                        builder: (_, state) => NestedPage(
+                          title: '문의 상세',
+                          child: AdminFeedbackDetailPage(
+                            id: state.pathParameters['id']!,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

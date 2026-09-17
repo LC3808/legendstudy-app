@@ -1288,3 +1288,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Production Verified and B1 is COMPLETE. Admin bootstrap, Inbox, worker,
   provider secrets, email and push remain undone; retention and reverse-status
   policies remain open.
+
+## 2026-09-17 — Day 11-B3 Admin Inbox
+
+- Implemented the server-authorized MY Admin Inbox list/detail flow with a
+  bounded newest-first query, status filters, diagnostic metadata and
+  forward-only status actions. Guest and normal-user routes are denied while
+  Production RLS remains the data boundary.
+- Admin bootstrap and Admin JWT acceptance were already Owner-confirmed;
+  controlled Production Admin Inbox E2E remains pending. No Production API,
+  feedback mutation, email worker, provider secret or admin change was made.
