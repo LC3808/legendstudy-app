@@ -33,14 +33,22 @@ const _bySubstring = <String, String>{
   'unable to validate email': '이메일 형식을 확인해 주세요.',
 };
 
+/// Substring keys are matched longest first so a specific phrase wins over a
+/// shorter one contained inside it: 'new password should be different from the
+/// old password' must resolve to the same-password copy, not the weak-password
+/// copy behind the shorter 'password should be'. Sorting removes any dependency
+/// on map insertion order.
+final _substringKeysLongestFirst = _bySubstring.keys.toList()
+  ..sort((a, b) => b.length.compareTo(a.length));
+
 /// Never returns raw SDK text, a token, a URL or a status code.
 String authErrorMessage(Object? error) {
   if (error is! AuthException) return genericAuthFailure;
   final code = error.code?.toLowerCase();
   if (code != null && _byCode.containsKey(code)) return _byCode[code]!;
   final message = error.message.toLowerCase();
-  for (final entry in _bySubstring.entries) {
-    if (message.contains(entry.key)) return entry.value;
+  for (final key in _substringKeysLongestFirst) {
+    if (message.contains(key)) return _bySubstring[key]!;
   }
   return genericAuthFailure;
 }

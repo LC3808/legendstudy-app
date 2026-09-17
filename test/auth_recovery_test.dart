@@ -255,17 +255,38 @@ void main() {
   });
 
   group('recovery event routing', () {
-    test('a passwordRecovery status routes to the new password screen', () async {
+    /// The app router only reports a configuration once its delegate has built,
+    /// so these tests mount it the way the app does. Mounting also proves the
+    /// route actually builds rather than merely being recorded as a location.
+    /// Starting on /auth keeps the tab shell and its repositories out of scope.
+    Future<GoRouter> mountAppRouter(
+      WidgetTester tester,
+      ProviderContainer container,
+    ) async {
+      final router = container.read(routerProvider);
+      router.go('/auth');
+      await tester.pumpWidget(
+        UncontrolledProviderScope(
+          container: container,
+          child: MaterialApp.router(routerConfig: router),
+        ),
+      );
+      await tester.pumpAndSettle();
+      return router;
+    }
+
+    testWidgets('a passwordRecovery status routes to the new password screen',
+        (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
       final container = ProviderContainer(
         overrides: [authStateProvider.overrideWith((ref) => auth.stream)],
       );
       addTearDown(container.dispose);
-      final router = container.read(routerProvider);
+      final router = await mountAppRouter(tester, container);
 
       auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
-      await Future<void>.delayed(Duration.zero);
+      await tester.pumpAndSettle();
       expect(
         router.routerDelegate.currentConfiguration.uri.path,
         isNot('/auth/new-password'),
@@ -275,17 +296,20 @@ void main() {
       auth.add(
         const AuthStatus('user-a', event: AuthChangeEvent.passwordRecovery),
       );
-      await Future<void>.delayed(Duration.zero);
-      expect(router.routerDelegate.currentConfiguration.uri.path,
-          '/auth/new-password');
+      await tester.pumpAndSettle();
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        '/auth/new-password',
+      );
     });
 
-    test('recovery routes exist and are reachable', () {
+    testWidgets('recovery routes exist and are reachable', (tester) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
-      final router = container.read(routerProvider);
+      final router = await mountAppRouter(tester, container);
       for (final path in ['/auth', '/auth/recovery', '/auth/new-password']) {
         router.go(path);
+        await tester.pumpAndSettle();
         expect(router.routerDelegate.currentConfiguration.uri.path, path);
       }
     });
