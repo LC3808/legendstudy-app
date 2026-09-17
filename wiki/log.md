@@ -1298,3 +1298,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Admin bootstrap and Admin JWT acceptance were already Owner-confirmed;
   controlled Production Admin Inbox E2E remains pending. No Production API,
   feedback mutation, email worker, provider secret or admin change was made.
+
+## 2026-09-17 — Day 11-B3 final follow-up
+
+- Owner confirmed physical Production E2E on a new iPhone running iOS 26.4.2:
+  feedback submit, Admin Inbox list/detail, diagnostics and
+  `new → reviewing → resolved` all passed.
+- Fixed successful password-login navigation by waiting for the matching auth
+  identity before returning to the prior route, with `/my` fallback when no
+  route can be popped. Authenticated MY school/grade copy now differs from
+  guest guidance. No Production mutation or email work was performed.

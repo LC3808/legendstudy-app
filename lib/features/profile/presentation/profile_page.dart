@@ -14,7 +14,9 @@ class ProfilePage extends ConsumerWidget {
     final auth = ref.watch(authStateProvider);
     final admin = ref.watch(adminAccessProvider);
     final currentUserId = auth.value?.userId;
-    final showAdminMenu = currentUserId != null &&
+    final isAuthenticated = auth.value?.isAuthenticated == true;
+    final showAdminMenu =
+        currentUserId != null &&
         admin.value?.userId == currentUserId &&
         admin.value?.isAdmin == true;
     return ShellPage(
@@ -57,14 +59,18 @@ class ProfilePage extends ConsumerWidget {
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.school_outlined),
           title: const Text('학교 설정'),
-          subtitle: const Text('학교 저장은 로그인 후 가능해요'),
+          subtitle: Text(
+            isAuthenticated ? '학교와 급식 설정을 관리해요' : '학교 저장은 로그인 후 가능해요',
+          ),
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.push('/my/school'),
         ),
-        const ListTile(
+        ListTile(
           contentPadding: EdgeInsets.zero,
-          title: Text('학년 설정'),
-          subtitle: Text('로그인 후 학년을 저장할 수 있어요'),
+          title: const Text('학년 설정'),
+          subtitle: Text(
+            isAuthenticated ? '학년을 저장하고 학습을 맞춤 설정해요' : '로그인 후 학년을 저장할 수 있어요',
+          ),
           enabled: false,
         ),
         const Divider(),

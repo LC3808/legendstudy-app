@@ -14,7 +14,9 @@ class AdminAccess {
   final bool isAdmin;
 }
 
-final adminAccessProvider = FutureProvider.autoDispose<AdminAccess>((ref) async {
+final adminAccessProvider = FutureProvider.autoDispose<AdminAccess>((
+  ref,
+) async {
   final auth = ref.watch(authStateProvider);
   if (auth.isLoading) return const AdminAccess(userId: null, isAdmin: false);
   if (auth.hasError) throw const BackendUnavailable('계정 상태를 확인하지 못했어요.');
@@ -31,7 +33,9 @@ final adminFeedbackListProvider = FutureProvider.autoDispose
     .family<List<FeedbackSubmission>, FeedbackStatus?>((ref, status) async {
       final access = await ref.watch(adminAccessProvider.future);
       if (!access.isAdmin) throw const SignedOutException();
-      return ref.read(feedbackRepositoryProvider).fetchAdminFeedback(status: status);
+      return ref
+          .read(feedbackRepositoryProvider)
+          .fetchAdminFeedback(status: status);
     });
 
 final adminFeedbackDetailProvider = FutureProvider.autoDispose

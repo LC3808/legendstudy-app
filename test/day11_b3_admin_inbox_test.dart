@@ -130,7 +130,9 @@ void main() {
     expect(find.text('문의 관리'), findsOneWidget);
   });
 
-  testWidgets('direct admin page denies normal users before list access', (tester) async {
+  testWidgets('direct admin page denies normal users before list access', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       testApp(
         child: const AdminFeedbackPage(),
@@ -147,9 +149,13 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          authStateProvider.overrideWith((ref) => Stream.value(const AuthStatus('admin'))),
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(const AuthStatus('admin')),
+          ),
           adminAccessProvider.overrideWith((ref) => pending.future),
-          feedbackRepositoryProvider.overrideWithValue(FakeFeedbackRepository([])),
+          feedbackRepositoryProvider.overrideWithValue(
+            FakeFeedbackRepository([]),
+          ),
         ],
         child: const MaterialApp(home: AdminFeedbackPage()),
       ),
@@ -161,34 +167,48 @@ void main() {
     expect(find.text('접수된 문의가 없습니다.'), findsOneWidget);
   });
 
-  testWidgets('admin list shows newest-first rows with status and category labels', (tester) async {
-    final rows = [
-      feedback(id: 'new', title: '최신 문의', category: FeedbackCategory.bug),
-      feedback(id: 'old', title: '이전 제안', category: FeedbackCategory.suggestion, status: FeedbackStatus.reviewing),
-    ];
-    await tester.pumpWidget(
-      testApp(
-        child: const AdminFeedbackPage(),
-        auth: const AuthStatus('admin'),
-        admin: const AdminAccess(userId: 'admin', isAdmin: true),
-        rows: rows,
-      ),
-    );
-    await tester.pumpAndSettle();
-    final newestTitle = find.byWidgetPredicate(
-      (widget) => widget is Text && widget.data?.startsWith('최신 문의\n') == true,
-    );
-    final olderTitle = find.byWidgetPredicate(
-      (widget) => widget is Text && widget.data?.startsWith('이전 제안\n') == true,
-    );
-    expect(newestTitle, findsOneWidget);
-    expect(find.text('오류 신고'), findsOneWidget);
-    expect(find.text('확인중'), findsNWidgets(2));
-    expect(tester.getTopLeft(newestTitle).dy,
-        lessThan(tester.getTopLeft(olderTitle).dy));
-  });
+  testWidgets(
+    'admin list shows newest-first rows with status and category labels',
+    (tester) async {
+      final rows = [
+        feedback(id: 'new', title: '최신 문의', category: FeedbackCategory.bug),
+        feedback(
+          id: 'old',
+          title: '이전 제안',
+          category: FeedbackCategory.suggestion,
+          status: FeedbackStatus.reviewing,
+        ),
+      ];
+      await tester.pumpWidget(
+        testApp(
+          child: const AdminFeedbackPage(),
+          auth: const AuthStatus('admin'),
+          admin: const AdminAccess(userId: 'admin', isAdmin: true),
+          rows: rows,
+        ),
+      );
+      await tester.pumpAndSettle();
+      final newestTitle = find.byWidgetPredicate(
+        (widget) =>
+            widget is Text && widget.data?.startsWith('최신 문의\n') == true,
+      );
+      final olderTitle = find.byWidgetPredicate(
+        (widget) =>
+            widget is Text && widget.data?.startsWith('이전 제안\n') == true,
+      );
+      expect(newestTitle, findsOneWidget);
+      expect(find.text('오류 신고'), findsOneWidget);
+      expect(find.text('확인중'), findsNWidgets(2));
+      expect(
+        tester.getTopLeft(newestTitle).dy,
+        lessThan(tester.getTopLeft(olderTitle).dy),
+      );
+    },
+  );
 
-  testWidgets('admin detail shows content and diagnostic metadata', (tester) async {
+  testWidgets('admin detail shows content and diagnostic metadata', (
+    tester,
+  ) async {
     final row = feedback(
       id: 'detail',
       title: '긴 제목 ' * 20,
@@ -213,7 +233,9 @@ void main() {
     }
   });
 
-  testWidgets('admin status workflow exposes only forward actions', (tester) async {
+  testWidgets('admin status workflow exposes only forward actions', (
+    tester,
+  ) async {
     final row = feedback(id: 'workflow');
     await tester.pumpWidget(
       testApp(

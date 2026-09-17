@@ -1,6 +1,6 @@
 # Day 11-B3 — Admin Inbox
 
-Status: implementation complete; Production E2E pending.
+Status: COMPLETE; Production E2E PASS.
 
 ## Scope
 
@@ -19,12 +19,15 @@ Status: implementation complete; Production E2E pending.
 ## Production state
 
 Production feedback migration, Guest/Auth JWT/RLS acceptance, admin bootstrap
-and Admin JWT acceptance are complete. No Production mutation or E2E Admin
-Inbox flow was performed by this implementation task.
+and Admin JWT acceptance are complete. Owner-confirmed physical E2E on a new
+iPhone running iOS 26.4.2 passed: feedback submission, Admin Inbox list/detail,
+diagnostics, `new → reviewing → resolved`, and list/detail synchronization.
 
-Production E2E remains pending: a controlled user submission should be checked
-in Admin Inbox, moved to 확인중, then 처리완료. The verifier does not create,
-update or delete Production fixtures.
+The login follow-up now waits for the matching authenticated identity before
+leaving the login page, then returns to the prior route or falls back to `/my`
+when there is no route to pop. No arbitrary delay is used.
+
+This follow-up made no Production mutation.
 
 ## Deliberately pending
 
@@ -37,5 +40,6 @@ update or delete Production fixtures.
 
 ## Validation
 
-Focused Admin Inbox widget/contract tests and `flutter analyze` pass. Full
-Flutter tests and platform builds are recorded in the task closeout report.
+Focused auth/school/Admin Inbox regression tests and `flutter analyze` pass.
+Full Flutter tests and Android/iOS simulator builds pass; physical iPhone E2E
+is Owner-confirmed as above.

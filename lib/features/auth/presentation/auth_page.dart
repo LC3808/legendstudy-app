@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
@@ -47,11 +48,19 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           _message('가입하고 로그인했어요.');
         }
       } else {
-        await client.auth.signInWithPassword(
+        final response = await client.auth.signInWithPassword(
           email: _email.text.trim(),
           password: _password.text,
         );
         await _ensureProfile();
+        await _waitForAuthenticatedState(response.user?.id);
+        if (mounted) {
+          if (context.canPop()) {
+            context.pop();
+          } else {
+            context.go('/my');
+          }
+        }
         _message('로그인했어요.');
       }
     } on AuthException catch (error) {
@@ -83,6 +92,16 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       await ref.read(profileRepositoryProvider).upsertCurrentProfile();
     } catch (_) {
       // Auth success remains valid; profile retry can happen on settings use.
+    }
+  }
+
+  Future<void> _waitForAuthenticatedState(String? expectedUserId) async {
+    if (expectedUserId == null) throw StateError('Missing authenticated user');
+    final current = ref.read(authStateProvider).value?.userId;
+    if (current == expectedUserId) return;
+    final state = await ref.read(authStateProvider.future);
+    if (state.userId != expectedUserId) {
+      throw StateError('Auth state did not settle for the signed-in user');
     }
   }
 

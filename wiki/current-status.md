@@ -2,14 +2,43 @@
 
 Last reviewed: 2026-09-17
 
-## Day 11-B3 — Production Admin Inbox — IMPLEMENTED / E2E PENDING
+## Day 11-B3 final follow-up — COMPLETE
+
+- Owner-confirmed physical Production E2E on a new iPhone (iOS 26.4.2): user
+  feedback submission, Admin Inbox list/detail, diagnostics and
+  `new → reviewing → resolved` synchronization all passed.
+- Fixed the login UX bug where successful password authentication left the
+  login route visible. Navigation now waits for the matching authenticated
+  identity, returns to the prior route, and falls back to `/my` only when the
+  route cannot be popped. Authenticated MY school/grade copy is no longer
+  guest-only wording.
+- Email Worker remains NOT IMPLEMENTED. Account-switch isolation and the
+  previously verified Production DB/RLS contract remain unchanged.
+
+## Next backlog — Day 13
+
+- **Day 13-A User Type & Home Personalization:** add 고등학생, N수생, 학부모,
+  교사/강사, 기타 as recommendation preferences only; add MY home settings,
+  cloud-persisted visibility for D-Day, study time, next timetable, school
+  meal, search, updates and recent views. Do not use user type to block meal
+  or timetable features.
+- **Day 13-B NEIS timetable:** school/grade/class, next school-day timetable,
+  Home summary and MY detail, weekend/holiday/vacation/data-empty handling and
+  Home ON/OFF. Implementation is deferred.
+- **LEGENDSTUDY APP-WIDE UI/UX POLISH:** after core functionality, improve the
+  shared design system across Login, Home, Materials, Study, MY, Feedback and
+  Admin (surface hierarchy, elevation, typography, spacing, semantic colors,
+  icons, buttons, chips, states, motion and consistency). Avoid screen-by-
+  screen temporary polishing.
+
+## Day 11-B3 — Production Admin Inbox — COMPLETE / E2E PASS
 
 - Added the MY admin menu, guarded Admin Inbox list/detail routes, server-derived
   `is_feedback_admin()` access state, newest-first bounded listing, status
   filters, diagnostics and forward-only status management.
 - Production feedback DB/RLS and Admin JWT acceptance remain verified. This
   task made no Production API call or mutation. Controlled user submission →
-  Admin Inbox → 확인중 → 처리완료 E2E is pending Owner acceptance.
+  Admin Inbox → 확인중 → 처리완료 E2E is Owner-confirmed PASS.
 - Email Worker/provider/secrets and reverse status transitions remain pending;
   account-deletion retention/anonymization is still an Owner decision. See
   [Day 11-B3 Admin Inbox](day-11-b3-admin-inbox.md).
@@ -25,8 +54,8 @@ Last reviewed: 2026-09-17
 - Owner removed all five TEST feedback rows from the failed/successful runs;
   remaining TEST feedback/outbox rows are 0/0. Feedback JWT/RLS acceptance is
   **COMPLETE**. The earlier “not applied” B1 state is historical/superseded.
-- Admin bootstrap and Admin JWT acceptance are complete. Admin Inbox UI is now
-  implemented, while Production E2E remains pending. Email worker/provider,
+- Admin bootstrap and Admin JWT acceptance are complete. Admin Inbox UI and
+  Production E2E are complete. Email worker/provider,
   secrets, admin email, test email and push remain **NOT DONE**. Open policy
   decisions are account-deletion retention/anonymization and reverse status
   transitions. See [Day 11-B1 closeout](day-11-b-feedback-production.md).
