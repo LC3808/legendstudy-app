@@ -14,6 +14,9 @@ import '../features/profile/presentation/school_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
 import '../features/auth/presentation/auth_page.dart';
+import '../features/auth/presentation/new_password_page.dart';
+import '../features/auth/presentation/password_recovery_page.dart';
+import '../core/supabase/supabase_providers.dart';
 import '../shared/widgets/nested_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -34,6 +37,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/auth',
         builder: (_, _) =>
             const NestedPage(title: '로그인 / 시작하기', child: AuthPage()),
+      ),
+      GoRoute(
+        path: '/auth/recovery',
+        builder: (_, _) =>
+            const NestedPage(title: '비밀번호 재설정', child: PasswordRecoveryPage()),
+      ),
+      GoRoute(
+        path: '/auth/new-password',
+        builder: (_, _) =>
+            const NestedPage(title: '새 비밀번호 설정', child: NewPasswordPage()),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => NavigationShell(shell: shell),
@@ -128,6 +141,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ),
   );
+  // A recovery link opens a session whose event is passwordRecovery. Routing on
+  // the event keeps it distinct from an ordinary sign-in, and the token itself
+  // is never read, logged or placed in a route.
+  ref.listen<AsyncValue<AuthStatus>>(authStateProvider, (_, next) {
+    if (next.value?.isPasswordRecovery ?? false) {
+      router.go('/auth/new-password');
+    }
+  });
   ref.onDispose(router.dispose);
   return router;
 });

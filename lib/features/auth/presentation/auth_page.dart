@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
+import '../auth_errors.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -63,10 +64,9 @@ class _AuthPageState extends ConsumerState<AuthPage> {
         }
         _message('로그인했어요.');
       }
-    } on AuthException catch (error) {
-      _message(error.message.isEmpty ? '인증에 실패했어요.' : error.message);
-    } catch (_) {
-      _message('인증에 실패했어요. 잠시 후 다시 시도해 주세요.');
+    } catch (error) {
+      // Raw SDK English never reaches the user.
+      _message(authErrorMessage(error));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -136,6 +136,11 @@ class _AuthPageState extends ConsumerState<AuthPage> {
         onPressed: _busy ? null : () => setState(() => _signUp = !_signUp),
         child: Text(_signUp ? '이미 계정이 있어요' : '처음 시작하시나요? 회원가입'),
       ),
+      if (!_signUp)
+        TextButton(
+          onPressed: _busy ? null : () => context.push('/auth/recovery'),
+          child: const Text('비밀번호를 잊으셨나요?'),
+        ),
       const Divider(height: 28),
       const Text('소셜 로그인은 Supabase provider와 redirect 설정이 필요해요.'),
       OutlinedButton.icon(

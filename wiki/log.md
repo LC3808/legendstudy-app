@@ -1328,3 +1328,31 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - No Production migration/deploy, Cron, secret, DNS, Resend API call or email
   was performed. Python static contract checks pass; `pytest` and `deno` are
   unavailable locally. B4-C controlled email E2E remains pending.
+
+## 2026-09-17 — Auth recovery foundation
+
+- Added the forgot-password entry on login, `/auth/recovery` and
+  `/auth/new-password`, reusing NestedPage/ShellPage/AppTokens rather than a new
+  design system.
+- Introduced `AuthRecoveryService` over `resetPasswordForEmail` and `updateUser`
+  so the screens are testable with an in-memory double and no network call is
+  reachable from a widget test.
+- `AuthStatus` now carries the `AuthChangeEvent` and exposes `isPasswordRecovery`;
+  the router routes only that event to the new-password screen. The recovery
+  token is never read, logged or placed in a route. `/auth/new-password` renders
+  no form without a session, because `updateUser` requires one.
+- Centralized Korean auth error mapping keyed on `AuthException.code` first and
+  message substrings second, with a safe fallback. Raw SDK English, tokens, URLs
+  and status codes never reach the user; the reported `Invalid login credentials`
+  is now mapped.
+- Recovery success copy is identical whether or not the address has an account,
+  so the screen does not disclose registration.
+- Client password rules kept minimal (length 8, fields match); the project's real
+  policy is not readable here, so the server rejection is surfaced instead.
+- Redirect URL is configurable via `SUPABASE_RECOVERY_REDIRECT` and defaults to
+  empty, so the SDK falls back to the Site URL. No LegendStudy recovery URI was
+  invented and the OAuth callback was not reused.
+- 15 focused tests added in test/auth_recovery_test.dart. NOT RUN in this
+  environment: no Flutter SDK is reachable from the session, so analyze and test
+  are pending on the Owner's machine.
+- No production Supabase change, no redirect registration, no recovery email.

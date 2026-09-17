@@ -743,6 +743,26 @@ separately. Ingestion success is not publication.
 - **Day 9-C1/C2/C3 are complete. Day 9-C is COMPLETE.** Next: Owner review and
   explicit publication decision, or separate release-toolchain work.
 
+## Auth recovery foundation — implemented, production config pending
+
+- Login now offers "비밀번호를 잊으셨나요?"; `/auth/recovery` requests a reset and
+  `/auth/new-password` sets one, both reusing the existing shell widgets and tokens.
+- `resetPasswordForEmail` / `updateUser` sit behind an `AuthRecoveryService` seam,
+  so widget tests use an in-memory double and cannot reach the network.
+- `AuthStatus` now carries the `AuthChangeEvent`; the router routes only a
+  `passwordRecovery` event to the new-password screen, never an ordinary sign-in.
+  The recovery token is never read, logged or routed.
+- Centralized Korean error mapping: the reported `Invalid login credentials` now
+  renders as "이메일 또는 비밀번호가 올바르지 않습니다."; unknown errors use a safe
+  fallback and no raw SDK text, token or URL is shown.
+- Success copy does not disclose whether an address is registered.
+- **No production mutation**: no Supabase dashboard change, no redirect URL
+  registered, no recovery email sent. `SUPABASE_RECOVERY_REDIRECT` is empty, so no
+  recovery URI was invented.
+- `flutter analyze` / `flutter test` could not run in the session environment
+  (no Flutter SDK reachable); the Owner must run them. See
+  [auth-recovery.md](auth-recovery.md) for the pending list.
+
 ## Long-term backlog — preserved for later planning
 
 - Admissions Engine / 수시 합격예측.
