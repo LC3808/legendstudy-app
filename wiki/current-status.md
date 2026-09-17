@@ -26,6 +26,17 @@ Last reviewed: 2026-09-17
   [Day 11-B4 Feedback Email](day-11-b4-feedback-email.md).
 - B4-B worker implementation and B4-C controlled email E2E remain pending.
 
+## Day 11-B4-B — Feedback Email Worker — IMPLEMENTED / NOT DEPLOYED
+
+- Added the migration candidate for atomic claim/lease/retry state and
+  service-role-only claim/finalize/reclaim RPCs, plus a secret-gated Deno Edge
+  Function with provider-neutral adapter and Resend implementation.
+- Added offline Deno test source and Python SQL/source contract tests. `pytest`
+  and `deno` are unavailable in this environment; direct contract invocation,
+  Python compile, credential scan and diff check pass.
+- No Production migration, Edge Function deploy, secret, Cron, DNS, Resend
+  API call or email was performed. B4-C controlled email E2E remains pending.
+
 ## Next backlog — Day 13
 
 - **Day 13-A User Type & Home Personalization:** add 고등학생, N수생, 학부모,

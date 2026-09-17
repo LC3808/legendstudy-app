@@ -1,7 +1,7 @@
 # Day 11-B4-A — Feedback Email Notification Design
 
-Status: DESIGN COMPLETE; no Worker deployed, no secret configured, no email
-sent and no Production mutation performed.
+Status: B4-A DESIGN COMPLETE; B4-B IMPLEMENTED / NOT DEPLOYED. No secret is
+configured, no email was sent and no Production mutation was performed.
 
 ## Current Production contract
 
@@ -76,7 +76,7 @@ service-role SELECT followed by UPDATE: two invocations could read the same
 pending row. Reusing `failed` as a working state would also make operations
 ambiguous.
 
-B4-B should prepare a small migration candidate adding `processing` to the
+B4-B migration candidate adds `processing` to the
 status constraint, `next_attempt_at timestamptz`, `claimed_at timestamptz`, and
 server-generated `claim_token uuid`, plus a partial index for claimable rows.
 It should add narrowly scoped `SECURITY DEFINER` claim/finalize functions with
@@ -130,21 +130,42 @@ The insert transaction never calls Resend. Provider outage leaves feedback
 available and the job pending/failed for retry; the app keeps showing the
 successful feedback receipt message.
 
+## B4-B implementation result
+
+Implemented locally in `supabase/functions/process-feedback-notifications/`:
+
+- secret-gated POST handler with configuration validation before claim;
+- service-role Supabase adapter for claim, feedback-by-ID, finalize and lease
+  reclaim RPCs;
+- provider-neutral `EmailProvider` plus plain-text Resend adapter;
+- stable `feedback-email/<feedback_id>` idempotency key, bounded batch 10,
+  allowlisted error classification and redacted operational logs;
+- Deno offline test source plus Python SQL/source contract tests.
+
+The source is **not deployed**. Deno tests could not be executed in this
+environment because the `deno` binary is unavailable; the static contract
+tests and Python compile checks pass.
+
+## Deployment and rollback package
+
+Deployment order for B4-Candidate review: independently review/apply the
+migration, verify domain and secrets out-of-band, inspect pending count
+read-only, deploy the function with scheduler blocked, run local/staging tests,
+then create the one-minute scheduler and enable it. Never put a service-role
+key in scheduler headers.
+
+Safe disable: stop/unschedule the scheduler and block the invocation secret;
+feedback insert and Admin Inbox remain active. Do not drop tables or delete
+outbox rows as rollback. A migration rollback is non-trivial after rows enter
+`processing`; first drain/disable the worker and reconcile claims, then use a
+separately reviewed backward migration only if data/state can be preserved.
+
 ## B4-B implementation contract
 
-1. Add the smallest reviewed claim/lease/retry migration and service-role-only
-   claim/finalize functions.
-2. Implement `process-feedback-notifications` with method/invocation-secret
-   validation, bounded batch, provider-neutral `EmailProvider` interface and
-   Resend adapter.
-3. Claim, send with `feedback-email/<feedback_id>`, finalize by claim token,
-   and classify errors without payload leakage.
-4. Add fake-provider tests for success, temporary/permanent failure,
-   backoff/max attempts, lease recovery, concurrent claims, duplicate
-   invocation, escaping, missing secrets and invalid recipient configuration.
-5. Gate deployment on SQL/Deno tests, credential scan, Owner migration/domain/
-   secret review and a read-only pending-count check. Deploy disabled or
-   scheduler-blocked before enabling it.
+The next owner review must cover SQL function ownership/grants, claim lease
+duration, three-attempt worker policy versus the database ceiling of eight,
+Resend domain/configuration, Deno tests, pending-row handling and the absence
+of a public client invocation path.
 
 ## B4-C and security
 
