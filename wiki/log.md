@@ -1356,3 +1356,21 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   environment: no Flutter SDK is reachable from the session, so analyze and test
   are pending on the Owner's machine.
 - No production Supabase change, no redirect registration, no recovery email.
+
+## 2026-09-17 — Final closeout: Auth Recovery + Feedback Email Worker
+
+- Recorded Auth Recovery as **COMPLETE / CODE VERIFIED** after Owner-confirmed
+  official Flutter 3.47.3 validation: focused 19/19 PASS, full suite 368 PASS
+  with one existing opt-in skip, and analyze clean. Production Recovery E2E
+  remains pending redirect configuration, real email, deep/app link, password
+  reset and iOS physical acceptance.
+- Recorded B4-A complete and B4-B **IMPLEMENTED / REVIEWED / PRODUCTION
+  DEPLOYED** based on Owner-confirmed migration/function/secrets/postflight and
+  wrong-secret 403 acceptance. Deno 2.9.6 runtime tests are 5/5 and type-check
+  passes.
+- Feedback Email Delivery E2E remains pending: Cron is disabled, no successful
+  worker invocation or received admin email is verified. The first prerequisite
+  is a real receiving `LEGENDSTUDY_ADMIN_EMAIL` mailbox; an Auth account alone
+  does not imply mailbox delivery. Existing backlog priority is P0 delivery E2E,
+  P1 recovery E2E, P2 OAuth/privacy, P3 Day 13-A, P4 Day 13-B, P5 v1 gap audit,
+  P6 app-wide UI polish. Essay Lab roadmap is unchanged.

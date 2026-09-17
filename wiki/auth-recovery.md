@@ -1,8 +1,9 @@
 # Auth Recovery Foundation
 
-Status: **IMPLEMENTED (application code) / PRODUCTION CONFIG PENDING.**
-No Supabase dashboard setting was changed, no redirect URL was registered and
-no recovery email was sent.
+Status: **COMPLETE / CODE VERIFIED; PRODUCTION RECOVERY E2E PENDING.**
+The application foundation is verified. The redirect URL, real recovery email,
+deep/app link, password reset and physical-device acceptance remain Owner-side
+Production gates.
 
 ## What exists now
 
@@ -85,14 +86,17 @@ tokens, URLs and status codes never reach the user. The reported
 
 ## Validation status
 
-`flutter analyze` and `flutter test` could **not** be executed in the session
-environment: only the repository folder is mounted and it carries no Flutter
-SDK, and the Owner's macOS SDK cannot run there. Static structure and a
-credential scan were checked instead. The Owner must run:
+Owner verification on official Flutter 3.47.3 completed:
 
 ```
-/Users/woojinchang/development/flutter-3.47/bin/flutter analyze
 /Users/woojinchang/development/flutter-3.47/bin/flutter test test/auth_recovery_test.dart
+# 19 tests PASS
+/Users/woojinchang/development/flutter-3.47/bin/flutter test
+# 368 PASS, 1 existing opt-in test skipped
+/Users/woojinchang/development/flutter-3.47/bin/flutter analyze
+# No issues found
 ```
 
-Until those pass, treat this commit as code-complete but unverified.
+Production recovery E2E is intentionally still pending; no redirect registration,
+recovery email receipt, password change or physical-device recovery acceptance
+is claimed here.

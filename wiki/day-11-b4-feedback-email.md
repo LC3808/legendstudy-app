@@ -1,7 +1,7 @@
 # Day 11-B4-A — Feedback Email Notification Design
 
-Status: B4-A DESIGN COMPLETE; B4-B IMPLEMENTED / NOT DEPLOYED. No secret is
-configured, no email was sent and no Production mutation was performed.
+Status: B4-A DESIGN COMPLETE; B4-B IMPLEMENTED / REVIEWED / PRODUCTION
+DEPLOYED. **Email Delivery E2E remains PENDING and Cron is NOT ENABLED.**
 
 ## Current Production contract
 
@@ -142,9 +142,18 @@ Implemented locally in `supabase/functions/process-feedback-notifications/`:
   allowlisted error classification and redacted operational logs;
 - Deno offline test source plus Python SQL/source contract tests.
 
-The source is **not deployed**. Deno tests could not be executed in this
-environment because the `deno` binary is unavailable; the static contract
-tests and Python compile checks pass.
+Owner-confirmed Production deployment and postflight are complete. Deno 2.9.6
+runtime tests pass 5/5 and `deno check` passes. This does not claim a successful
+worker delivery or received email.
+
+## Delivery E2E pending
+
+Cron remains disabled and no successful worker invocation or received admin
+email has been verified. The first operational prerequisite is replacing
+`LEGENDSTUDY_ADMIN_EMAIL` with a real receiving mailbox; an Auth account does
+not create a mailbox. Then inspect the existing `[TEST]` pending fixture,
+perform one controlled invocation, verify receipt plus `sent`/`sent_at`, clean
+up the fixture by explicit ID, and enable Cron only after that evidence.
 
 ## Deployment and rollback package
 

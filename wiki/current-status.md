@@ -2,6 +2,51 @@
 
 Last reviewed: 2026-09-17
 
+## 2026-09-17 Final closeout — Auth Recovery + Feedback Email
+
+### Auth Recovery — COMPLETE / CODE VERIFIED
+
+- The forgot-password entry, `resetPasswordForEmail` foundation,
+  configurable `SUPABASE_RECOVERY_REDIRECT`, password-recovery event routing,
+  `/auth/new-password`, `updateUser(password)`, recovery-session guard and
+  duplicate-submit guard are implemented.
+- UX is account-enumeration safe and maps raw Auth errors, including invalid
+  credentials and same-password/weak-password cases, to Korean messages.
+  Recovery tokens, passwords and JWTs are never logged.
+- Final routing hardening preserved specific same-password error matching,
+  mounted the router with `ref.watch` in tests, and enabled
+  `fireImmediately` to cover an already-current recovery event.
+- Owner verification: focused `test/auth_recovery_test.dart` 19/19 PASS;
+  full Flutter suite 368 PASS with one existing opt-in test skipped; Flutter
+  analyze reports no issues.
+- Production Recovery E2E remains PENDING: choose/register the redirect URI,
+  receive a real recovery email, verify deep/app link, set a new password,
+  sign in again, and complete iOS physical acceptance.
+
+### Feedback Email Worker — DEPLOYED / DELIVERY E2E PENDING
+
+- B4-A is COMPLETE. B4-B is IMPLEMENTED, REVIEWED and Production DEPLOYED:
+  Resend sender domain is verified, the worker migration is applied, the Edge
+  Function is deployed, and required Secrets are configured.
+- Owner-confirmed safeguards include wrong-secret Production acceptance
+  (`403 forbidden`), Deno 2.9.6 runtime tests 5/5, `deno check`, postflight,
+  service-role-only RPCs, and verified claim/lease/retry/token semantics.
+- Feedback Email Delivery E2E is NOT COMPLETE. Cron is NOT ENABLED, a
+  successful worker invocation has not yet been performed, and receipt of the
+  admin email has not yet been verified.
+- Before the controlled invocation, choose a real receiving mailbox and
+  replace `LEGENDSTUDY_ADMIN_EMAIL`; an Auth account address does not imply a
+  working mailbox. Then inspect the existing pending `[TEST]` fixture, invoke
+  once, verify `sent`/`sent_at` and receipt, clean up explicitly, and only then
+  enable Cron.
+
+### Closeout priority
+
+P0 Feedback Email Delivery E2E → P1 Auth Recovery Production E2E → P2 OAuth
+completion and account deletion/privacy lifecycle → P3 Day 13-A User Type &
+Home Personalization → P4 Day 13-B NEIS Timetable → P5 v1 Gap Audit → P6
+app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
+
 ## Day 11-B3 final follow-up — COMPLETE
 
 - Owner-confirmed physical Production E2E on a new iPhone (iOS 26.4.2): user
@@ -12,8 +57,9 @@ Last reviewed: 2026-09-17
   identity, returns to the prior route, and falls back to `/my` only when the
   route cannot be popped. Authenticated MY school/grade copy is no longer
   guest-only wording.
-- Email Worker remains NOT IMPLEMENTED. Account-switch isolation and the
-  previously verified Production DB/RLS contract remain unchanged.
+- At this earlier B3 follow-up snapshot, the Email Worker remained not
+  implemented; account-switch isolation and the previously verified
+  Production DB/RLS contract remain unchanged.
 
 ## Day 11-B4-A — Feedback Email architecture — DESIGN COMPLETE
 
@@ -21,21 +67,22 @@ Last reviewed: 2026-09-17
   adapter. The current outbox was audited; safe concurrent processing needs a
   small future claim/lease/retry migration because it has no processing state
   or atomic claim token.
-- B4-A is design only. No Edge Function deploy, Resend account/DNS, secret,
-  email or Production DB mutation was performed. See
+- At the B4-A design stage, no Edge Function deploy, Resend account/DNS,
+  secret, email or Production DB mutation was performed. See
   [Day 11-B4 Feedback Email](day-11-b4-feedback-email.md).
-- B4-B worker implementation and B4-C controlled email E2E remain pending.
+- B4-B is now deployed and reviewed; only controlled delivery E2E and Cron
+  enablement remain pending.
 
-## Day 11-B4-B — Feedback Email Worker — IMPLEMENTED / NOT DEPLOYED
+## Day 11-B4-B — Feedback Email Worker — IMPLEMENTED / REVIEWED / PRODUCTION DEPLOYED
 
-- Added the migration candidate for atomic claim/lease/retry state and
-  service-role-only claim/finalize/reclaim RPCs, plus a secret-gated Deno Edge
-  Function with provider-neutral adapter and Resend implementation.
-- Added offline Deno test source and Python SQL/source contract tests. `pytest`
-  and `deno` are unavailable in this environment; direct contract invocation,
-  Python compile, credential scan and diff check pass.
-- No Production migration, Edge Function deploy, secret, Cron, DNS, Resend
-  API call or email was performed. B4-C controlled email E2E remains pending.
+- The migration, service-role-only claim/finalize/reclaim RPCs, secret-gated
+  Deno Edge Function, provider-neutral adapter and Resend implementation are
+  Owner-confirmed Production deployed/configured.
+- Deno 2.9.6 runtime tests pass 5/5 and `deno check` passes. Wrong-secret
+  Production acceptance returns `403 forbidden`; postflight and RPC privilege
+  checks pass.
+- Email Delivery E2E remains pending. Cron is disabled, no successful worker
+  invocation or received admin email is verified, and B4-C is not complete.
 
 ## Next backlog — Day 13
 
@@ -61,8 +108,9 @@ Last reviewed: 2026-09-17
 - Production feedback DB/RLS and Admin JWT acceptance remain verified. This
   task made no Production API call or mutation. Controlled user submission →
   Admin Inbox → 확인중 → 처리완료 E2E is Owner-confirmed PASS.
-- Email Worker/provider/secrets and reverse status transitions remain pending;
-  account-deletion retention/anonymization is still an Owner decision. See
+- At the earlier B1 snapshot, Email Worker/provider/secrets and reverse status
+  transitions remained pending; account-deletion retention/anonymization is
+  still an Owner decision. See
   [Day 11-B3 Admin Inbox](day-11-b3-admin-inbox.md).
 
 ## Day 11-B1 — Feedback Production security closeout — COMPLETE
