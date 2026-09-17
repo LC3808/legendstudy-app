@@ -1,21 +1,22 @@
 # Current Status
 
-Last reviewed: 2026-09-16
+Last reviewed: 2026-09-17
 
-## Day 11-B1 — Feedback production security review package
+## Day 11-B1 — Feedback Production security closeout — COMPLETE
 
-- Reviewed the Day 11 feedback draft and created the hardened,
-  source-controlled candidate `supabase/migrations/20260917000100_feedback_operations.sql`.
-  Flutter now omits `user_id`; the database derives authenticated ownership
-  from `auth.uid()`. Client status/outbox/admin membership mutation is denied.
-- Added offline SQL contract tests and documented the threat model, RLS
-  matrix, worker boundary, rollback/disable plan and open account-deletion
-  retention decision in `day-11-b-feedback-production.md`.
-- Production migration/RLS apply, admin assignment, secrets, email worker,
-  email delivery and Admin Inbox remain **NOT PERFORMED / NOT DEPLOYED**.
-  Gemini handoff files are staged outside the repository at
-  `/tmp/legendstudy-feedback-security-review/`. See the B1 document for the
-  required Owner acceptance sequence.
+- Owner applied `supabase/migrations/20260917000100_feedback_operations.sql`;
+  all three feedback tables have RLS enabled and the expected grants/functions
+  were verified. Production DB/RLS security is **PRODUCTION VERIFIED**.
+- Final real JWT/RLS run `4060f61751ae` passed anon insert, A/B insert and own
+  resolution, owner derivation, cross-user denial, status immutability for a
+  normal user, admin/outbox denial and exactly-one pending email outbox row.
+- Owner removed all five TEST feedback rows from the failed/successful runs;
+  remaining TEST feedback/outbox rows are 0/0. Feedback JWT/RLS acceptance is
+  **COMPLETE**. The earlier “not applied” B1 state is historical/superseded.
+- Admin bootstrap, Admin Inbox live connection, email worker/provider,
+  secrets, admin email, test email and push remain **NOT DONE**. Open policy
+  decisions are account-deletion retention/anonymization and reverse status
+  transitions. See [Day 11-B1 closeout](day-11-b-feedback-production.md).
 
 ## Day 12 — Home Information Architecture & Visual Hierarchy
 
@@ -42,11 +43,10 @@ Last reviewed: 2026-09-16
   time is excluded, rebuilds do not write, and MY supports owner-scoped
   individual/all deletion with confirmation.
 - Added guest-capable feedback form with bounded title/body, category and safe
-  diagnostic metadata. Draft DB/RLS/admin/outbox package is in
-  `supabase/drafts/20260916000100_feedback_operations.sql`; it is **not applied**.
-- Admin inbox and email delivery are not complete until Owner applies the draft,
-  assigns server-managed admin users and configures a server-side provider.
-  No Production mutation, secret, email or Muselry change occurred. See
+  diagnostic metadata. The original draft remains historical; the reviewed
+  migration is now Production-applied and JWT/RLS-verified.
+- Admin Inbox and email delivery remain incomplete pending admin assignment and
+  server-side provider implementation. See
   [Day 11 account/personal/feedback](day-11-account-personal-feedback.md).
 
 ## Day 10-C — Legacy Subject Alias minimum foundation

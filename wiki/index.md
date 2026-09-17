@@ -74,5 +74,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 10-B Home Polish v2 — implemented; device launch follow-up](day-10-b-home-polish.md)
 - [Day 10-C Legacy Subject Alias — minimum foundation implemented](legacy-subject-aliases.md)
 - [Day 11 Account, Personal and Feedback Operations — foundation / Production pending](day-11-account-personal-feedback.md)
-- [Day 11-B1 Feedback production security package — review complete / Production not applied](day-11-b-feedback-production.md)
+- [Day 11-B1 Feedback production security closeout — COMPLETE / Production verified](day-11-b-feedback-production.md)
 - [Day 12 Home visual hierarchy — implemented](day-12-home-visual-hierarchy.md)

@@ -1,7 +1,11 @@
 # Day 11 — Account, Personal and Feedback Operations
 
-Status: **implementation foundation complete; Production feedback package not
-applied.**
+Status: **implementation foundation complete; historical Production-pending
+state superseded by Day 11-B1 Production verification.**
+
+Day 11-B1 records the Owner-applied migration, final JWT/RLS acceptance and
+fixture cleanup. This document retains the original Day 11 implementation
+context; Admin Inbox and email delivery remain incomplete.
 
 Day 11 reuses the existing Supabase Auth/profile/bookmark/recent architecture.
 No Production migration, RLS change, secret configuration, email delivery or
@@ -24,7 +28,7 @@ data mutation was executed.
 | Meaningful recent views | IMPLEMENTED | foreground-only 10-second tracker and meaningful actions |
 | Recent individual/all delete | IMPLEMENTED | owner-scoped repository methods and MY confirmation UI |
 | Feedback form | IMPLEMENTED | categories, title/body validation, diagnostics and duplicate-submit guard |
-| Feedback DB/RLS | READY | draft SQL only; not applied |
+| Feedback DB/RLS | SUPERSEDED | Production-applied and JWT/RLS verified in Day 11-B1 |
 | Admin role/inbox | PARTIAL/BLOCKED | server-managed `admin_users` design in draft; no Production inbox until applied |
 | Email notification | NOT READY / CONFIG PENDING | outbox contract drafted; Edge Function/provider not implemented |
 
@@ -88,8 +92,8 @@ app version/build, platform, OS version and locale. It never collects tokens,
 keys, passwords, device identifiers or precise location. Payloads are bounded
 to title 120 and body 5000 characters; submit is disabled while in flight.
 
-The draft package in
-`supabase/drafts/20260916000100_feedback_operations.sql` defines:
+The reviewed package in
+`supabase/migrations/20260917000100_feedback_operations.sql` defines:
 
 - `feedback_submissions` with server-default `new` status and optional owner;
 - `admin_users`, managed only by Owner/service role;
@@ -99,7 +103,8 @@ The draft package in
 - an insert trigger that enqueues notification state without making email part
   of the feedback transaction.
 
-The draft is deliberately outside `supabase/migrations/` and was not applied.
+The original draft remains outside `supabase/migrations/` as historical
+material; the reviewed migration was applied and accepted in Day 11-B1.
 Feedback persistence is the source of truth; email failure must never roll back
 the user submission.
 

@@ -1275,3 +1275,16 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   `/tmp/legendstudy-feedback-security-review/`. Updated Flutter to omit
   client-supplied `user_id`. Production apply, admin assignment, secrets,
   email worker and Admin Inbox were not performed.
+
+## 2026-09-17 — Day 11-B1 Feedback Production JWT/RLS closeout
+
+- Product Owner applied the reviewed feedback migration and confirmed RLS,
+  grants, function security and trigger presence in Production.
+- Final real JWT/RLS acceptance run `4060f61751ae` passed anon insert, A/B
+  owner derivation and own reads, cross-user denial, normal-user status
+  immutability, admin/outbox denial and exactly-one pending outbox per row.
+- The Owner removed five TEST feedback rows from failed/successful runs;
+  remaining TEST feedback/outbox rows are 0/0. Feedback DB/RLS is now
+  Production Verified and B1 is COMPLETE. Admin bootstrap, Inbox, worker,
+  provider secrets, email and push remain undone; retention and reverse-status
+  policies remain open.
