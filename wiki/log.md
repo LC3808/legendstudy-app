@@ -1308,3 +1308,14 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   identity before returning to the prior route, with `/my` fallback when no
   route can be popped. Authenticated MY school/grade copy now differs from
   guest guidance. No Production mutation or email work was performed.
+
+## 2026-09-17 — Day 11-B4-A Feedback Email architecture
+
+- Audited the Production-verified feedback outbox and documented a
+  provider-neutral Supabase Edge Function design with Resend as the recommended
+  adapter, scheduler-only invocation, protected server configuration,
+  idempotency, bounded retry and logging rules.
+- Determined that safe concurrent claims require a small future migration for
+  processing/lease/retry state. No migration, function, secret, DNS, provider
+  account, Production mutation or email was performed; B4-B implementation and
+  B4-C E2E remain pending.

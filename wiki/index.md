@@ -76,4 +76,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 11 Account, Personal and Feedback Operations — foundation / Production pending](day-11-account-personal-feedback.md)
 - [Day 11-B1 Feedback production security closeout — COMPLETE / Production verified](day-11-b-feedback-production.md)
 - [Day 11-B3 Admin Inbox — implemented; Production E2E pending](day-11-b3-admin-inbox.md)
+- [Day 11-B4-A Feedback Email architecture — design complete](day-11-b4-feedback-email.md)
 - [Day 12 Home visual hierarchy — implemented](day-12-home-visual-hierarchy.md)

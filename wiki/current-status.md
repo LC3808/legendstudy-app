@@ -15,6 +15,17 @@ Last reviewed: 2026-09-17
 - Email Worker remains NOT IMPLEMENTED. Account-switch isolation and the
   previously verified Production DB/RLS contract remain unchanged.
 
+## Day 11-B4-A — Feedback Email architecture — DESIGN COMPLETE
+
+- Recommended provider is Resend behind a provider-neutral Edge Function
+  adapter. The current outbox was audited; safe concurrent processing needs a
+  small future claim/lease/retry migration because it has no processing state
+  or atomic claim token.
+- B4-A is design only. No Edge Function deploy, Resend account/DNS, secret,
+  email or Production DB mutation was performed. See
+  [Day 11-B4 Feedback Email](day-11-b4-feedback-email.md).
+- B4-B worker implementation and B4-C controlled email E2E remain pending.
+
 ## Next backlog — Day 13
 
 - **Day 13-A User Type & Home Personalization:** add 고등학생, N수생, 학부모,
