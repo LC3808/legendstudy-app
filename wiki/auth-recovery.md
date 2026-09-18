@@ -61,11 +61,22 @@ needs its own `login-callback` filter.
 ### A link that cannot be used
 
 gotrue reports an expired, already-used or wrong-device link as an **error on
-the auth state stream**, not as an event, so it used to be silent. The router
-now filters those failures (`isRecoveryLinkFailure`) and opens
-`/auth/recovery?reason=link`, which shows "재설정 링크를 사용할 수 없어요. 다시
-요청해 주세요." Other auth failures are left alone so they cannot hijack
-navigation. Only `reason=link` travels in the route — never a token or address.
+the auth state stream**, not as an event, so it used to be silent.
+
+That error must not become the provider's error. Riverpod 3 retries a failed
+provider automatically (first backoff 200ms, doubling) and a rebuild here only
+re-subscribes to the same SDK stream, so the retry cannot recover; meanwhile
+`triggerRetry` reports `AsyncLoading(retrying: true)` rather than an error, so a
+listener's `onError` never runs, and every widget reading the provider would
+lose the user id because a link expired. `withAuthFailures` therefore carries
+the failure as a value beside the last known identity, and `authStateProvider`
+sets `retry: (_, _) => null`.
+
+The router reads that carried failure, filters it with `isRecoveryLinkFailure`
+and opens `/auth/recovery?reason=link`, which shows "재설정 링크를 사용할 수
+없어요. 다시 요청해 주세요." Other auth failures are ignored there so they cannot
+hijack navigation. Only `reason=link` travels in the route — never a token or
+address.
 
 ### Cold start needs no recovery intent state
 

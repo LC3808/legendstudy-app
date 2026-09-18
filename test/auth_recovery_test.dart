@@ -327,9 +327,16 @@ void main() {
       return router;
     }
 
+    /// The override wraps the fake stream in withAuthFailures, exactly as the
+    /// real provider wraps the SDK stream, so `auth.addError` exercises the
+    /// production path rather than a test-only shortcut.
     ProviderContainer recoveryContainer(StreamController<AuthStatus> auth) {
       final container = ProviderContainer(
-        overrides: [authStateProvider.overrideWith((ref) => auth.stream)],
+        overrides: [
+          authStateProvider.overrideWith(
+            (ref) => withAuthFailures(auth.stream),
+          ),
+        ],
       );
       addTearDown(container.dispose);
       return container;
@@ -438,6 +445,30 @@ void main() {
       expect(find.text(recoveryLinkUnusableMessage), findsOneWidget);
       expect(find.textContaining('expired'), findsNothing);
       expect(find.textContaining('token'), findsNothing);
+    });
+
+    testWidgets('a failure keeps the identity and never retries',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final container = recoveryContainer(auth);
+      await mountAppRouter(tester, container);
+
+      auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
+      await tester.pumpAndSettle();
+      auth.addError(authError('x', code: 'invalid_credentials'));
+      await tester.pumpAndSettle();
+
+      final status = container.read(authStateProvider);
+      expect(
+        status.hasError,
+        isFalse,
+        reason: 'an auth failure must not fail the identity provider, which '
+            'would also start Riverpod\'s retry timer',
+      );
+      expect(status.value?.userId, 'user-a');
+      expect(status.value?.failure, isNotNull);
+      expect(status.value?.isPasswordRecovery, isFalse);
     });
 
     testWidgets('an unrelated auth failure does not hijack navigation',

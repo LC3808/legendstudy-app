@@ -163,18 +163,22 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref.listen<AsyncValue<AuthStatus>>(
     authStateProvider,
     (_, next) {
-      if (next.value?.isPasswordRecovery ?? false) {
+      final status = next.value;
+      if (status == null) return;
+      if (status.isPasswordRecovery) {
         router.go('/auth/new-password');
+        return;
+      }
+      // A link that expired, was already used, or was opened on another device
+      // reaches us as a failure carried on the status (withAuthFailures), not
+      // as an event. Without this the user is left wherever they were with no
+      // explanation. Every other failure is ignored here so an unrelated auth
+      // error cannot hijack navigation.
+      if (isRecoveryLinkFailure(status.failure)) {
+        router.go('/auth/recovery?reason=link');
       }
     },
     fireImmediately: true,
-    // A link that expired, was already used, or was opened on another device
-    // arrives as an error on the auth stream rather than an event. Without this
-    // the user is left wherever they were with no explanation. Other auth
-    // failures are left alone so an unrelated error cannot hijack navigation.
-    onError: (error, _) {
-      if (isRecoveryLinkFailure(error)) router.go('/auth/recovery?reason=link');
-    },
   );
   ref.onDispose(router.dispose);
   return router;
