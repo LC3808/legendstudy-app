@@ -189,22 +189,26 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
   CoreDevice automated launch timed out before interactive Home verification.
 - Details and remaining device follow-up: [Day 10-B Home Polish](day-10-b-home-polish.md).
 
-## Essay Lab product roadmap — PLANNED
+## Essay Lab / LS LAB product roadmap — PLANNED
 
-- Product priority is now AI essay feedback (Essay Lab) ahead of grade
-  analysis and admission prediction. Target: **2026-10 Beta or initial public
-  service**.
-- The planned service combines the existing Mobile App, a Web-primary long-form
-  authoring surface, and the shared Supabase backend. Initial scope is typed
-  answers, structured question-level evaluation packages, approximately 5–10
-  universities and the latest 2–3 years of available material.
-- The initial business model is account-level server-side free credits for the
-  first three evaluations, followed by credit/package purchase consideration.
-  Accumulated “My Essay Pattern” data and growth history are core retention and
-  conversion value; free results must not be intentionally degraded.
-- Academic Profile and Admission Simulator are explicitly **LATER**. No Essay
-  Lab code, schema, AI evaluation, credit, payment or Production work is
-  implemented by this roadmap entry. See [Essay Lab roadmap](roadmap-essay-lab.md).
+- Before university inventory, survey nationwide all 2027학년도 수시 논술
+  실시 대학 from official sources.
+- First wave: broad Seoul coverage plus representative non-Seoul universities
+  with materially different formats; exact count follows the survey.
+- Inventory the latest three years where available, marking missing official
+  materials explicitly and never filling them with guesses.
+- Keep `long_essay` and `short_response` as separate initial tracks and do not
+  force one evaluation contract across them.
+- Working title is **LS LAB**; formal service name and domain are **TBD**.
+  Essay Lab is Web-primary, with the App focused on discovery, results,
+  notifications and simple records/connections.
+- Manus work proceeds as Phase 0 nationwide survey, Phase 1 first-wave
+  selection/material inventory, and Phase 2 LS LAB Web MVP foundation.
+- The first approximately three evaluations remain the free-credit direction;
+  My Essay Pattern and cumulative growth data remain important. Pricing is
+  undecided. No Essay Lab code, schema, AI evaluation, credit, payment or
+  Production work is implemented by this roadmap entry. See [Essay Lab
+  roadmap](roadmap-essay-lab.md).
 
 ## Day 10-A — Flutter 3.47.3 official toolchain migration — COMPLETE
 

@@ -1374,3 +1374,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   does not imply mailbox delivery. Existing backlog priority is P0 delivery E2E,
   P1 recovery E2E, P2 OAuth/privacy, P3 Day 13-A, P4 Day 13-B, P5 v1 gap audit,
   P6 app-wide UI polish. Essay Lab roadmap is unchanged.
+
+## 2026-09-18 — Essay Lab / LS LAB roadmap update
+
+- Superseded the former approximately 5–10 university and latest 2–3 year
+  starting scope. A nationwide survey of all 2027학년도 수시 논술 실시
+  대학, grounded in official admissions materials, is now the prerequisite
+  for university selection and content inventory.
+- First-wave selection now prioritizes broad Seoul coverage and adds
+  representative non-Seoul formats such as 부산대 and 경북대 only after their
+  actual 2027 formats are researched. The latest three years of official
+  materials are inventoried where available; missing items are recorded, not
+  guessed.
+- Added separate `long_essay` and `short_response` tracks, Web-primary LS LAB
+  direction, domain/name TBD status, and Manus Phase 0 survey → Phase 1
+  inventory/selection → Phase 2 Web MVP foundation. Documentation only; no
+  code, Production, DB, Web project or domain mutation.
