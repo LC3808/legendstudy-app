@@ -1,7 +1,12 @@
-scope,year,grade,exam_family,exam_month,subject,resource_type,status,row_count,evidence
-production,2020-2026,all,all,all,all,exams,UNVERIFIED,,Production SELECT could not run: exact Supabase endpoint returned 401 without Owner credentials
-production,2020-2026,all,all,all,all,exam_subjects,UNVERIFIED,,Production SELECT could not run: exact Supabase endpoint returned 401 without Owner credentials
-production,2020-2026,all,all,all,all,resources,UNVERIFIED,,Production SELECT could not run: exact Supabase endpoint returned 401 without Owner credentials
-candidate,2024,1-3,exam rows,3/5/6/7/9/10/11,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,15,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv
-candidate,2025,1-3,exam rows,3/5/6/7/9/10/11,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,15,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv
-candidate,2026,1-3,exam rows,3/5/6/7/10,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,8,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv
+scope,year,grade,exam_family,exam_month,subject,resource_type,status,row_count,exam_subjects,resources,evidence
+production,2020,all,all,all,all,exams,PRESENT_ZERO,0,0,0,Owner SQL postflight
+production,2021,all,all,all,all,exams,PRESENT_ZERO,0,0,0,Owner SQL postflight
+production,2022,all,all,all,all,exams,PRESENT_ZERO,0,0,0,Owner SQL postflight
+production,2023,all,all,all,all,exams,PRESENT_ZERO,0,0,0,Owner SQL postflight
+production,2024,all,all,all,all,exams,PRESENT_ZERO,0,0,0,Owner SQL postflight
+production,2025,all,all,all,all,exams,PRESENT,15,246,507,Owner SQL postflight
+production,2026,all,all,all,all,exams,PRESENT_CURRENT_YEAR,8,117,232,Owner SQL postflight
+production,total,all,all,all,all,exams,PRESENT,23,363,739,Owner SQL postflight
+candidate,2024,1-3,exam rows,3/5/6/7/9/10/11,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,15,,,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv
+candidate,2025,1-3,exam rows,3/5/6/7/9/10/11,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,15,,,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv
+candidate,2026,1-3,exam rows,3/5/6/7/10,raw labels,question|answer_explanation|listening_script,CANDIDATE_READY,8,,,tool/ingestion/samples/dryrun-2026-09-15/dryrun-posts.csv

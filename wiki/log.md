@@ -1463,9 +1463,12 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Audited the applied schema semantics and repository ingestion artifacts for
   2020–current without crawling or writing data. The committed candidate set
   covers 2024–2026: 38 exams, 609 occurrences and 1,205 resources.
-- Production SELECT could not be authenticated; the exact endpoint returned
-  401 without an Owner credential. Coverage and missingness are therefore
-  marked UNVERIFIED/REVIEW_REQUIRED, not guessed from historical Wiki notes.
+- Owner SQL postflight verified 2020–current Production coverage: 23 exams,
+  363 occurrences and 739 resources; 2025 has 15 exams, 2026 has 8, and
+  2020–2024 have zero rows. Current-year future/unpublished rows are not
+  classified as missing.
+- Owner also found 23 open `resource_url_expiring` quarantine rows mapped to
+  the historical scope; no 1:1 relation to exams is assumed.
 - Added read-only coverage CSVs, missing matrix, inventory report and Codex
-  handoff under `reports/historical-exam/`. Phase 1 ingestion is blocked until
-  the Owner supplies the Production postflight result.
+  handoff under `reports/historical-exam/`. Phase 1-A is now ready for
+  deterministic-key reconciliation; publication remains gated.

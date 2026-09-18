@@ -1,6 +1,6 @@
 # Historical Exam Expansion — Phase 1-A Inventory
 
-Status: **PARTIAL / Production read-only query blocked**
+Status: **PRODUCTION COVERAGE VERIFIED / Phase 1-A reconciliation ready**
 
 ## Scope and year semantics
 
@@ -30,17 +30,34 @@ advisory expiring-URL quarantine records, and 3 have subject ambiguity.
 No committed candidate source was found for 2020–2023. This is a source
 inventory gap, not a Production missing assertion.
 
-## Production status
+## Production status — Owner SELECT postflight
 
-The exact Production REST endpoint was reachable but returned
-`401 UNAUTHORIZED_MISSING_API_KEY`. No publishable key, database password or
-service-role credential is present in the repository/environment. Therefore
-the Production counts for `exams`, `exam_subjects` and `resources` are
-**UNVERIFIED**, and the missing matrix intentionally uses
-`REVIEW_REQUIRED` rather than `MISSING`.
+Owner-confirmed Production coverage is:
 
-Owner must run the read-only SQL in the handoff with a Production credential
-and return its result before this inventory can become ingestion-ready.
+| year | exams | exam_subjects | resources | interpretation |
+|---|---:|---:|---:|---|
+| 2020 | 0 | 0 | 0 | confirmed absent; discovery required |
+| 2021 | 0 | 0 | 0 | confirmed absent; discovery required |
+| 2022 | 0 | 0 | 0 | confirmed absent; discovery required |
+| 2023 | 0 | 0 | 0 | confirmed absent; discovery required |
+| 2024 | 0 | 0 | 0 | confirmed absent; reconcile candidate first |
+| 2025 | 15 | 246 | 507 | existing Production coverage |
+| 2026 | 8 | 117 | 232 | current-year partial coverage; future rows not missing |
+| total | 23 | 363 | 739 | canonical Production total |
+
+2025 structure is 고1/고2 March, June, September, October national mocks;
+고3 March, May, July, October national mocks, June/September evaluation
+mocks and November CSAT. 2026 currently contains 고1/고2 March and June, and
+고3 March, May, June and July. Future/unpublished 2026 exams are not classified
+as missing.
+
+Production quarantine contains 23 open `resource_url_expiring` rows mapped to
+2020–current exams. The 23 quarantine rows are not assumed to be a 1:1 match
+with the 23 exams.
+
+The 2024 candidate has 15 exams, but `15 candidate - 0 Production` is only an
+inferred reconciliation gap. It is not a confirmed 2024 missing count until
+deterministic keys are compared.
 
 ## Pipeline and safety audit
 
@@ -62,3 +79,17 @@ large historical publication. Home uses source `feed_updated_at` derived from
 `published_at`/`source_updated_at`, not ingestion time; bulk historical
 publication must not rewrite that clock. Recent views are user-action based
 and independent of ingestion.
+
+## Phase 1 execution order
+
+1. **1-A:** reconcile existing 2024 candidate, Batch A 고3 then Batch B 고1/고2.
+2. **1-B:** discover and ingest 2023.
+3. **1-C:** discover and ingest 2022.
+4. **1-D:** discover and ingest 2021.
+5. **1-E:** discover and ingest 2020.
+6. **1-F:** reconcile 2025/2026 candidate against Production.
+
+Every batch is gated by deterministic-key reconciliation, duplicate protection,
+quarantine review, the 23 `resource_url_expiring` analysis, URL durability,
+raw-label preservation, historical taxonomy review, source-time
+`feed_updated_at`, batch validation and post-publication search acceptance.

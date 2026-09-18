@@ -2,18 +2,21 @@
 
 Last reviewed: 2026-09-18
 
-## 2026-09-18 Historical Exam Expansion Phase 1-A — PARTIAL / DB query pending
+## 2026-09-18 Historical Exam Expansion Phase 1-A — PRODUCTION COVERAGE VERIFIED
 
 - Repository inventory is complete for the committed 2024–2026 candidate dry
   run: 38 exams, 609 exam-subject occurrences and 1,205 resources. No
   candidate source for 2020–2023 was found in the inspected repository.
-- Production coverage was not inferred from stale Wiki reports. The exact
-  Supabase REST endpoint returned 401 without an Owner credential, so exams,
-  exam_subjects and resources remain **UNVERIFIED** for 2020–current.
-- Read-only inventory artifacts and a Codex handoff are in
-  `reports/historical-exam/`. Phase 1 ingestion is not ready until the Owner
-  supplies the SELECT-only Production postflight results. No crawling,
-  publication, migration or Production mutation was performed.
+- Owner SQL postflight verified Production totals of 23 exams, 363
+  exam_subjects and 739 resources: 2025 has 15 exams and 2026 has 8; 2020–
+  2024 have zero rows. Current-year future/unpublished 2026 combinations are
+  not classified as missing.
+- Production has 23 open `resource_url_expiring` quarantine rows mapped to
+  2020–current exams; no 1:1 relation to the 23 exams is assumed.
+- Phase 1-A is ready for deterministic-key reconciliation of the 2024
+  candidate, not for publication. Ingestion order is 2024 → 2023 → 2022 →
+  2021 → 2020, followed by 2025/2026 reconciliation. No historical
+  publication or Production mutation has occurred.
 
 ## 2026-09-18 LS LAB Production Web architecture — APPROVED / DOCUMENTED
 

@@ -1,11 +1,23 @@
 # Codex Handoff — Historical Exam Phase 1
 
-Status: **NOT READY — blocked on Production read-only coverage query**
+Status: **READY FOR PHASE 1-A RECONCILIATION — publication still gated**
 
 ## 1. Current Production coverage
 
-Unknown. The required SELECT-only query could not be authenticated. Do not
-use the historical Wiki's old cleanup or Pilot C reports as current coverage.
+Owner SELECT postflight verified 23 exams, 363 exam_subjects and 739 resources:
+
+| year | exams | exam_subjects | resources |
+|---|---:|---:|---:|
+| 2020 | 0 | 0 | 0 |
+| 2021 | 0 | 0 | 0 |
+| 2022 | 0 | 0 | 0 |
+| 2023 | 0 | 0 | 0 |
+| 2024 | 0 | 0 | 0 |
+| 2025 | 15 | 246 | 507 |
+| 2026 | 8 | 117 | 232 |
+
+Production has 23 open `resource_url_expiring` quarantine rows mapped to
+2020–current exams. They are not assumed to be one row per exam.
 
 ## 2. Exact source locations
 
@@ -17,10 +29,10 @@ use the historical Wiki's old cleanup or Pilot C reports as current coverage.
 
 ## 3. External discovery needed
 
-After Production counts are known, discover only gaps for 2020–2023 and any
-2024–current missing family/grade/resource combinations. Do not mass crawl or
-download before a bounded batch is approved. Preserve raw source labels and
-separate calendar year from academic year.
+Phase 1 order is 1-A 2024 candidate reconciliation (고3, then 고1/고2),
+1-B 2023, 1-C 2022, 1-D 2021, 1-E 2020, and 1-F 2025/2026 reconciliation.
+Do not mass crawl or download before a bounded batch is approved. Preserve raw
+source labels and separate calendar year from academic year.
 
 ## 4. Risks and contracts
 
@@ -35,11 +47,13 @@ separate calendar year from academic year.
 
 ## 5. Recommended first ingestion batch
 
-After the SELECT postflight, start with one year × grade × exam-family batch.
-Recommended first candidate is 2024 grade 3 national/evaluation mock data,
-because it is represented in the existing dry-run and exercises mixed exam
-families, subject aliases and answer/explanation resources. Validate and
-quarantine the batch before any publication. Do not ingest all years at once.
+Start with one year × grade × exam-family batch. The first candidate is 2024
+grade 3 national/evaluation mock data, because it is represented in the
+existing dry-run and exercises mixed exam families, subject aliases and
+answer/explanation resources. Validate and quarantine the batch before any
+publication. Do not ingest all years at once. The 2024 candidate count of 15
+versus Production count 0 is an inferred gap only; deterministic-key
+reconciliation must establish exact overlap, missing and duplicate outcomes.
 
 ## 6. Validation SQL — read-only
 
@@ -99,3 +113,13 @@ Historical rows must not flood Home Recent Updates. The current source-time
 timestamps are preserved and ingestion time is not substituted. Search should
 be benchmarked as the dataset grows; Recent Views needs no historical-ingestion
 change.
+
+## 9. Phase 1-A hard gates
+
+- deterministic-key reconciliation before any insert/publish;
+- duplicate protection across source, content, exam subject and resource keys;
+- analysis and resolution policy for the 23 `resource_url_expiring` rows;
+- durable URL contract and no reliance on expiring query strings;
+- raw subject label preservation and historical taxonomy review;
+- source-time `feed_updated_at`; never use ingestion time for Home updates;
+- bounded batch validation and post-publication search acceptance.

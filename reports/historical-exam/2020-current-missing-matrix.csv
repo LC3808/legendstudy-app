@@ -1,8 +1,8 @@
 year,grade,exam_family,exam_month,subject,resource_type,status,priority,rationale
-2020,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
-2021,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
-2022,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
-2023,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
-2024,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified
-2025,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified
-2026,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified
+2020,1-3,all,all,all,all,MISSING,P1,Production has zero rows; source discovery required
+2021,1-3,all,all,all,all,MISSING,P1,Production has zero rows; source discovery required
+2022,1-3,all,all,all,all,MISSING,P1,Production has zero rows; source discovery required
+2023,1-3,all,all,all,all,MISSING,P1,Production has zero rows; source discovery required
+2024,1-3,all,all,all,all,MISSING,P0,Production has zero rows; reconcile existing candidate first
+2025,1-3,all,all,all,all,PRESENT,,15 Production exams; verify deterministic-key/resource parity
+2026,1-3,all,all,all,all,PRESENT_CURRENT_YEAR,,8 Production exams; do not infer future/unpublished gaps
