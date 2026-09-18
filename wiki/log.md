@@ -1457,3 +1457,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Phase 2 is Next.js Web Foundation Migration. No code, repository creation,
   Supabase schema/Auth, AI, payment, domain, deployment or Production change
   was made.
+
+## 2026-09-18 — Historical Exam Expansion Phase 1-A inventory
+
+- Audited the applied schema semantics and repository ingestion artifacts for
+  2020–current without crawling or writing data. The committed candidate set
+  covers 2024–2026: 38 exams, 609 occurrences and 1,205 resources.
+- Production SELECT could not be authenticated; the exact endpoint returned
+  401 without an Owner credential. Coverage and missingness are therefore
+  marked UNVERIFIED/REVIEW_REQUIRED, not guessed from historical Wiki notes.
+- Added read-only coverage CSVs, missing matrix, inventory report and Codex
+  handoff under `reports/historical-exam/`. Phase 1 ingestion is blocked until
+  the Owner supplies the Production postflight result.

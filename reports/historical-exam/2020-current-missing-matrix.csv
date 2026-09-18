@@ -1,0 +1,8 @@
+year,grade,exam_family,exam_month,subject,resource_type,status,priority,rationale
+2020,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
+2021,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
+2022,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
+2023,1-3,all,all,all,all,REVIEW_REQUIRED,,Production coverage unavailable; do not infer missingness
+2024,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified
+2025,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified
+2026,1-3,all,all,all,all,REVIEW_REQUIRED,,Candidate source exists but Production publication is unverified

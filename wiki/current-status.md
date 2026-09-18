@@ -2,6 +2,19 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 Historical Exam Expansion Phase 1-A — PARTIAL / DB query pending
+
+- Repository inventory is complete for the committed 2024–2026 candidate dry
+  run: 38 exams, 609 exam-subject occurrences and 1,205 resources. No
+  candidate source for 2020–2023 was found in the inspected repository.
+- Production coverage was not inferred from stale Wiki reports. The exact
+  Supabase REST endpoint returned 401 without an Owner credential, so exams,
+  exam_subjects and resources remain **UNVERIFIED** for 2020–current.
+- Read-only inventory artifacts and a Codex handoff are in
+  `reports/historical-exam/`. Phase 1 ingestion is not ready until the Owner
+  supplies the SELECT-only Production postflight results. No crawling,
+  publication, migration or Production mutation was performed.
+
 ## 2026-09-18 LS LAB Production Web architecture — APPROVED / DOCUMENTED
 
 - Manus Phase 0/1 research is complete: 42 unique universities and 53 2027
