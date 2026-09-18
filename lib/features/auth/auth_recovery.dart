@@ -51,3 +51,15 @@ bool isPlausibleEmail(String value) => _emailPattern.hasMatch(value.trim());
 /// Minimum the client enforces. Supabase owns the real policy, and its
 /// rejection is surfaced through [authErrorMessage] rather than duplicated here.
 const minimumPasswordLength = 8;
+
+/// The recovery redirect the iOS and Android manifests are configured for.
+///
+/// A custom scheme equal to the bundle id / application id: it needs no domain,
+/// no hosting and no store-side verification, which matters because
+/// legendstudy.com is served by Tistory and cannot host an Apple AASA or an
+/// Android assetlinks file.
+///
+/// It is deliberately NOT applied automatically. The Owner must register it in
+/// the Supabase redirect allow-list and pass it at build time:
+/// `--dart-define=SUPABASE_RECOVERY_REDIRECT=com.legendstudy.app://auth-recovery`.
+const recoveryDeepLink = 'com.legendstudy.app://auth-recovery';

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,8 +40,8 @@ class FakeRecoveryService implements AuthRecoveryService {
   }
 }
 
-AuthException authError(String message, {String? code}) =>
-    AuthException(message, code: code);
+AuthException authError(String message, {String? code, String? statusCode}) =>
+    AuthException(message, code: code, statusCode: statusCode);
 
 void main() {
   /// A real GoRouter, because the screens navigate on success and on back.
@@ -239,6 +240,46 @@ void main() {
           contains('만료'));
     });
 
+    test('error_code arriving as statusCode is still mapped', () {
+      // A link callback reports error=access_denied&error_code=otp_expired,
+      // which gotrue turns into code=access_denied, statusCode=otp_expired.
+      expect(
+        authErrorMessage(
+          authError(
+            'Email link is invalid or has expired',
+            code: 'access_denied',
+            statusCode: 'otp_expired',
+          ),
+        ),
+        contains('만료'),
+      );
+    });
+
+    test('recovery link failures are told apart from ordinary failures', () {
+      expect(
+        isRecoveryLinkFailure(
+          authError('x', code: 'access_denied', statusCode: 'otp_expired'),
+        ),
+        isTrue,
+      );
+      expect(
+        isRecoveryLinkFailure(authError('x', code: 'flow_state_expired')),
+        isTrue,
+      );
+      expect(
+        isRecoveryLinkFailure(
+          authError('Code verifier could not be found in local storage.'),
+        ),
+        isTrue,
+        reason: 'a link opened on a device that did not request it',
+      );
+      expect(
+        isRecoveryLinkFailure(authError('x', code: 'invalid_credentials')),
+        isFalse,
+      );
+      expect(isRecoveryLinkFailure(StateError('x')), isFalse);
+    });
+
     test('unknown errors use the safe fallback and leak nothing', () {
       for (final error in <Object>[
         authError('pq: duplicate key value violates unique constraint "x"'),
@@ -264,7 +305,7 @@ void main() {
     Future<GoRouter> mountAppRouter(
       WidgetTester tester,
       ProviderContainer container, {
-      String at = '/auth',
+      String? at = '/auth',
     }) async {
       late GoRouter router;
       await tester.pumpWidget(
@@ -279,8 +320,10 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      router.go(at);
-      await tester.pumpAndSettle();
+      if (at != null) {
+        router.go(at);
+        await tester.pumpAndSettle();
+      }
       return router;
     }
 
@@ -349,6 +392,65 @@ void main() {
       }
     });
 
+    testWidgets('a recovery state that is already current is not missed',
+        (tester) async {
+      // Cold start: gotrue replays the last auth state to a new subscriber, so
+      // the event can precede the router. fireImmediately must still catch it.
+      final container = ProviderContainer(
+        overrides: [
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(
+              const AuthStatus(
+                'user-a',
+                event: AuthChangeEvent.passwordRecovery,
+              ),
+            ),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+      final router = await mountAppRouter(tester, container, at: null);
+      await tester.pumpAndSettle();
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        '/auth/new-password',
+      );
+    });
+
+    testWidgets('an unusable recovery link explains itself in Korean',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
+
+      auth.addError(
+        authError(
+          'Email link is invalid or has expired',
+          code: 'access_denied',
+          statusCode: 'otp_expired',
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        '/auth/recovery',
+      );
+      expect(find.text(recoveryLinkUnusableMessage), findsOneWidget);
+      expect(find.textContaining('expired'), findsNothing);
+      expect(find.textContaining('token'), findsNothing);
+    });
+
+    testWidgets('an unrelated auth failure does not hijack navigation',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
+
+      auth.addError(authError('x', code: 'invalid_credentials'));
+      await tester.pumpAndSettle();
+      expect(router.routerDelegate.currentConfiguration.uri.path, '/auth');
+    });
+
     testWidgets('recovery navigates once and does not trap the router',
         (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();
@@ -376,6 +478,33 @@ void main() {
         router.routerDelegate.currentConfiguration.uri.path,
         '/auth/recovery',
       );
+    });
+  });
+
+  group('deep link configuration', () {
+    final link = Uri.parse(recoveryDeepLink);
+
+    test('the recovery link uses a scheme this app can own', () {
+      // Reverse-DNS scheme equal to the bundle id / application id: no domain,
+      // no hosting, no store verification, and no collision with another app.
+      expect(link.scheme, 'com.legendstudy.app');
+      expect(link.host, isNotEmpty);
+      expect(link.hasQuery, isFalse, reason: 'no token or address in the URL');
+    });
+
+    test('iOS registers the recovery URL scheme', () {
+      final plist = File('ios/Runner/Info.plist').readAsStringSync();
+      expect(plist, contains('<key>CFBundleURLSchemes</key>'));
+      expect(plist, contains('<string>${link.scheme}</string>'));
+    });
+
+    test('Android registers the recovery deep link', () {
+      final manifest = File(
+        'android/app/src/main/AndroidManifest.xml',
+      ).readAsStringSync();
+      expect(manifest, contains('android:scheme="${link.scheme}"'));
+      expect(manifest, contains('android:host="${link.host}"'));
+      expect(manifest, contains('android.intent.category.BROWSABLE'));
     });
   });
 

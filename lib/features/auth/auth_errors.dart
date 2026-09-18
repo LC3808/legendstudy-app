@@ -7,6 +7,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// the message; anything unrecognised becomes the safe generic fallback.
 const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.';
 
+/// Shown when a recovery link cannot be exchanged for a session. Deliberately
+/// broader than "expired": the same failure covers a link that was already
+/// used and one opened on a device that did not request it.
+const recoveryLinkUnusableMessage = '재설정 링크를 사용할 수 없어요. 다시 요청해 주세요.';
+
 const _byCode = <String, String>{
   'invalid_credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
   'email_not_confirmed': '이메일 인증이 아직 완료되지 않았어요. 받은 편지함을 확인해 주세요.',
@@ -41,11 +46,43 @@ const _bySubstring = <String, String>{
 final _substringKeysLongestFirst = _bySubstring.keys.toList()
   ..sort((a, b) => b.length.compareTo(a.length));
 
+/// Codes gotrue reports when a recovery link cannot be exchanged for a session.
+///
+/// A link opened from the email lands on `redirect_to` either with `code` (the
+/// PKCE auth code) or with `error`/`error_code`. getSessionFromUrl turns the
+/// latter into an AuthException whose `code` is `error` and whose `statusCode`
+/// is `error_code`, so both fields are checked.
+const _linkFailureCodes = <String>{
+  'access_denied',
+  'otp_expired',
+  'flow_state_expired',
+  'flow_state_not_found',
+  'bad_code_verifier',
+};
+
+/// True when the failure is "this link cannot be used", not "the request
+/// failed". The PKCE verifier is stored by the install that asked for the
+/// reset, so a link opened elsewhere fails here too.
+bool isRecoveryLinkFailure(Object? error) {
+  if (error is! AuthException) return false;
+  if (_linkFailureCodes.contains(error.code?.toLowerCase()) ||
+      _linkFailureCodes.contains(error.statusCode?.toLowerCase())) {
+    return true;
+  }
+  final message = error.message.toLowerCase();
+  return message.contains('code verifier') ||
+      message.contains('no code detected');
+}
+
 /// Never returns raw SDK text, a token, a URL or a status code.
 String authErrorMessage(Object? error) {
   if (error is! AuthException) return genericAuthFailure;
   final code = error.code?.toLowerCase();
   if (code != null && _byCode.containsKey(code)) return _byCode[code]!;
+  // error_code arrives as statusCode on link callbacks, where code holds the
+  // coarser `error` value, so the specific one is consulted as well.
+  final status = error.statusCode?.toLowerCase();
+  if (status != null && _byCode.containsKey(status)) return _byCode[status]!;
   final message = error.message.toLowerCase();
   for (final key in _substringKeysLongestFirst) {
     if (message.contains(key)) return _bySubstring[key]!;

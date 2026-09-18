@@ -45,6 +45,23 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Password recovery deep link. A reverse-DNS custom scheme equal to the
+	     bundle identifier: no domain, hosting or Apple entitlement is required,
+	     and the scheme cannot collide with another app's. See
+	     wiki/auth-recovery.md. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.legendstudy.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.legendstudy.app</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

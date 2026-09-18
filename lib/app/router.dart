@@ -13,6 +13,7 @@ import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
+import '../features/auth/auth_errors.dart';
 import '../features/auth/presentation/auth_page.dart';
 import '../features/auth/presentation/new_password_page.dart';
 import '../features/auth/presentation/password_recovery_page.dart';
@@ -40,8 +41,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/auth/recovery',
-        builder: (_, _) =>
-            const NestedPage(title: '비밀번호 재설정', child: PasswordRecoveryPage()),
+        // reason=link marks "the link could not be used"; no token, code or
+        // address is ever carried in the route.
+        builder: (_, state) => NestedPage(
+          title: '비밀번호 재설정',
+          child: PasswordRecoveryPage(
+            linkFailed: state.uri.queryParameters['reason'] == 'link',
+          ),
+        ),
       ),
       GoRoute(
         path: '/auth/new-password',
@@ -153,11 +160,22 @@ final routerProvider = Provider<GoRouter>((ref) {
   // listener. LegendStudyApp watches it (ref.watch), which is what keeps it
   // alive; reading the router with ProviderContainer.read closes that
   // subscription immediately and silently stops recovery navigation.
-  ref.listen<AsyncValue<AuthStatus>>(authStateProvider, (_, next) {
-    if (next.value?.isPasswordRecovery ?? false) {
-      router.go('/auth/new-password');
-    }
-  }, fireImmediately: true);
+  ref.listen<AsyncValue<AuthStatus>>(
+    authStateProvider,
+    (_, next) {
+      if (next.value?.isPasswordRecovery ?? false) {
+        router.go('/auth/new-password');
+      }
+    },
+    fireImmediately: true,
+    // A link that expired, was already used, or was opened on another device
+    // arrives as an error on the auth stream rather than an event. Without this
+    // the user is left wherever they were with no explanation. Other auth
+    // failures are left alone so an unrelated error cannot hijack navigation.
+    onError: (error, _) {
+      if (isRecoveryLinkFailure(error)) router.go('/auth/recovery?reason=link');
+    },
+  );
   ref.onDispose(router.dispose);
   return router;
 });

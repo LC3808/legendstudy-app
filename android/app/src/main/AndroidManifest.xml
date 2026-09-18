@@ -29,6 +29,15 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!-- Password recovery deep link. A custom scheme equal to the
+                 application id needs no domain verification and cannot collide
+                 with another app's. See wiki/auth-recovery.md. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="com.legendstudy.app" android:host="auth-recovery"/>
+            </intent-filter>
         </activity>
         <activity android:name=".StudyFocusSettingsActivity" android:exported="true"
             android:theme="@android:style/Theme.Material.Light.Dialog.Alert">

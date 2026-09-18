@@ -10,7 +10,11 @@ import '../auth_recovery.dart';
 /// Starts password recovery. The success copy is identical whether or not the
 /// address has an account, so the screen never discloses who is registered.
 class PasswordRecoveryPage extends ConsumerStatefulWidget {
-  const PasswordRecoveryPage({super.key});
+  const PasswordRecoveryPage({super.key, this.linkFailed = false});
+
+  /// Set when the screen was opened because a recovery link could not be used.
+  final bool linkFailed;
+
   @override
   ConsumerState<PasswordRecoveryPage> createState() =>
       _PasswordRecoveryPageState();
@@ -20,6 +24,12 @@ class _PasswordRecoveryPageState extends ConsumerState<PasswordRecoveryPage> {
   final _email = TextEditingController();
   bool _busy = false, _sent = false;
   String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.linkFailed) _error = recoveryLinkUnusableMessage;
+  }
 
   @override
   void dispose() {

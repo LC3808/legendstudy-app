@@ -1390,3 +1390,18 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   direction, domain/name TBD status, and Manus Phase 0 survey → Phase 1
   inventory/selection → Phase 2 Web MVP foundation. Documentation only; no
   code, Production, DB, Web project or domain mutation.
+
+## 2026-09-18 — Auth recovery production readiness
+
+- Audited the recovery flow end to end against the real SDK contract
+  (supabase_flutter 2.15.4 / gotrue 2.25.0, PKCE by default) rather than the
+  wiki, and found that no deep link was registered on either platform, so the
+  recovery email could never have opened the app.
+- Registered `com.legendstudy.app://auth-recovery` in `Info.plist` and
+  `AndroidManifest.xml`, declared it once as `recoveryDeepLink`, and recorded
+  why a custom scheme beats a universal link while legendstudy.com is on
+  Tistory (both `.well-known` files 404 and cannot be hosted there).
+- Gave an unusable recovery link a Korean explanation instead of silence, and
+  taught the error mapper to read `error_code` when it arrives as `statusCode`.
+- Focused tests 19 → 27. No Production mutation: no Dashboard change, no
+  redirect registration, no recovery email, no Auth user, no DB write.

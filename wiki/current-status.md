@@ -1,6 +1,34 @@
 # Current Status
 
-Last reviewed: 2026-09-17
+Last reviewed: 2026-09-18
+
+## 2026-09-18 Auth Recovery — PRODUCTION READINESS PREPARED
+
+Code state: **CODE VERIFIED / PRODUCTION READINESS PREPARED. PRODUCTION
+RECOVERY E2E still PENDING** — no redirect was registered and no recovery email
+was ever sent.
+
+- Blocking gap found and closed: neither platform registered any deep link, so
+  a recovery email could not have opened the app at all. iOS now declares the
+  `com.legendstudy.app` URL scheme and Android a BROWSABLE intent-filter for
+  `com.legendstudy.app://auth-recovery`, declared once as `recoveryDeepLink`.
+- Custom scheme over a universal link because `legendstudy.com` is Tistory:
+  `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json`
+  both return 404 and cannot be hosted, so recovery would otherwise be blocked
+  on the undecided LS LAB domain. The scheme matches the OAuth callback the app
+  already used.
+- An expired, already-used or wrong-device link arrives as a stream error, not
+  an event, and used to be silent; it now opens `/auth/recovery?reason=link`
+  with Korean copy. Unrelated auth failures cannot hijack navigation.
+- Cold start needs no recovery-intent state: `onAuthStateChange` is a
+  BehaviorSubject and the SDK starts its deep-link observer inside
+  `Supabase.initialize`, so `fireImmediately` already covers it.
+- Focused tests 19 → 27, including regression guards that fail if the platform
+  deep-link registration is ever dropped. **Mac revalidation required.**
+- Owner actions before E2E: a mailbox that actually receives mail, registering
+  the redirect URL in Supabase, and confirming the Site URL. PKCE also requires
+  the link to be opened on the install that requested it. See
+  `Claude outputs/legendstudy-auth-recovery-production-readiness.md`.
 
 ## 2026-09-17 Final closeout — Auth Recovery + Feedback Email
 

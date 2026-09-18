@@ -1,9 +1,10 @@
 # Auth Recovery Foundation
 
-Status: **COMPLETE / CODE VERIFIED; PRODUCTION RECOVERY E2E PENDING.**
-The application foundation is verified. The redirect URL, real recovery email,
-deep/app link, password reset and physical-device acceptance remain Owner-side
-Production gates.
+Status: **CODE VERIFIED / PRODUCTION READINESS PREPARED; PRODUCTION RECOVERY
+E2E PENDING.** The application foundation is verified and the deep link the
+recovery email must open is now registered on both platforms. Registering the
+redirect URL in Supabase, a real recovery email, and physical-device acceptance
+remain Owner-side Production gates. No recovery email has ever been sent.
 
 ## What exists now
 
@@ -29,14 +30,53 @@ are reused.
 - Both sit behind `AuthRecoveryService`, so widget tests drive the screens with
   an in-memory double and no network call is reachable from a test.
 
-### Redirect URL — deliberately not invented
+### Redirect URL and deep link
 
 `AppConfig.recoveryRedirectUrl` comes from the `SUPABASE_RECOVERY_REDIRECT`
 define and defaults to empty. `recoveryRedirectTo` returns null when empty, so
-the SDK falls back to the project's Site URL. **No LegendStudy recovery URI
-scheme or host was decided or hard-coded here.** The existing OAuth callback
-`com.legendstudy.app://login-callback` was left alone and not reused for
-recovery, because that is a product decision the Owner has not made.
+the SDK falls back to the project's Site URL.
+
+The recovery link the platforms are configured for is
+`com.legendstudy.app://auth-recovery`, declared once as `recoveryDeepLink` in
+`lib/features/auth/auth_recovery.dart`:
+
+| platform | registration |
+|---|---|
+| iOS | `CFBundleURLTypes` in `ios/Runner/Info.plist`, scheme `com.legendstudy.app` |
+| Android | VIEW/BROWSABLE intent-filter in `AndroidManifest.xml`, `host="auth-recovery"` |
+
+A custom scheme, not a universal link, because `legendstudy.com` is served by
+Tistory: `/.well-known/apple-app-site-association` and
+`/.well-known/assetlinks.json` both return 404 and cannot be hosted there, so a
+universal link would block recovery on an undecided domain. The scheme equals
+the bundle id / application id and matches the OAuth callback the app already
+uses (`com.legendstudy.app://login-callback`), so nothing new was invented.
+
+The value is **not** applied automatically. The Owner registers it in the
+Supabase redirect allow-list and passes
+`--dart-define=SUPABASE_RECOVERY_REDIRECT=com.legendstudy.app://auth-recovery`.
+Android's filter is scoped to the `auth-recovery` host, so enabling OAuth later
+needs its own `login-callback` filter.
+
+### A link that cannot be used
+
+gotrue reports an expired, already-used or wrong-device link as an **error on
+the auth state stream**, not as an event, so it used to be silent. The router
+now filters those failures (`isRecoveryLinkFailure`) and opens
+`/auth/recovery?reason=link`, which shows "재설정 링크를 사용할 수 없어요. 다시
+요청해 주세요." Other auth failures are left alone so they cannot hijack
+navigation. Only `reason=link` travels in the route — never a token or address.
+
+### Cold start needs no recovery intent state
+
+`onAuthStateChange` is a `BehaviorSubject`, so a new subscriber is replayed the
+last auth state, and `supabase_flutter` starts its deep-link observer inside
+`Supabase.initialize` (before `runApp`). Combined with
+`ref.listen(..., fireImmediately: true)`, a recovery event raised before the
+router exists is still seen. No persistent recovery-intent state was added.
+Known limit: a BehaviorSubject replays only the newest event, so an event
+emitted immediately after `passwordRecovery` could mask it; not reproduced, and
+intent state is the fix if it ever is.
 
 ### Recovery session is not an ordinary session
 
@@ -73,16 +113,19 @@ tokens, URLs and status codes never reach the user. The reported
 
 ## PENDING — Owner / production
 
-1. **Production recovery redirect URL configuration** — decide the LegendStudy
-   recovery URI (scheme/host or a universal link), register it in the Supabase
-   dashboard's redirect allow-list, and pass it as `SUPABASE_RECOVERY_REDIRECT`.
-2. **Real recovery email end-to-end** — never exercised; no email was sent.
-3. **Universal / app link acceptance on a physical device** — the app has no
-   `app_links` wiring of its own; `supabase_flutter` handles the deep link, and
-   that path is unverified.
-4. **OAuth completion** — Google / Apple / Kakao remain unconfigured.
-5. **Account deletion** — out of scope, not started.
-6. **Flutter validation on the Owner's machine** — see below.
+1. **Supabase redirect allow-list** — register
+   `com.legendstudy.app://auth-recovery`, and confirm the project Site URL,
+   which is where an unmatched redirect (and any desktop user) lands.
+2. **A mailbox that actually receives mail** — an Auth user's address is not
+   proof of a mailbox. PKCE also requires the link to be opened on the same
+   install that requested it.
+3. **Real recovery email end-to-end** — never exercised; no email was sent.
+4. **Deep-link acceptance on a physical device** — the registration exists now
+   but has not been exercised on hardware.
+5. **OAuth completion** — Google / Apple / Kakao remain unconfigured, and
+   Android needs a `login-callback` intent-filter of its own.
+6. **Account deletion / privacy lifecycle** — not implemented.
+7. **Flutter validation on the Owner's machine** — see below.
 
 ## Validation status
 
@@ -100,3 +143,8 @@ Owner verification on official Flutter 3.47.3 completed:
 Production recovery E2E is intentionally still pending; no redirect registration,
 recovery email receipt, password change or physical-device recovery acceptance
 is claimed here.
+
+The 2026-09-18 readiness pass (deep-link registration, unusable-link UX, 27
+focused tests) is **not** revalidated on the Owner's machine yet — see
+`Claude outputs/legendstudy-auth-recovery-production-readiness.md` for the full
+prerequisite matrix and handoff order.
