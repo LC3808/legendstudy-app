@@ -1438,3 +1438,22 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Audited further Home personalization: profile/schema, cloud persistence and
   Guest/Auth merge policy would be required, so no local-only preference was
   introduced; defer the implementation plan to Day 13-A.
+
+## 2026-09-18 — LS LAB Production Web architecture decision
+
+- Recorded the Owner-approved canonical Production direction: separate Next.js
+  App Router + TypeScript Web architecture in the `LC3808/legendstudy-lab-web`
+  repository candidate; the Manus React/Vite/Express/tRPC foundation remains
+  mock/prototype and the Flutter repository remains Mobile-only.
+- Recorded Phase 0/1 research outputs as research status, not Production
+  ingestion approval: 42 universities, 53 recruitment rows, 42/42 source
+  audits, 188 historical source records, 330 official Quick Link candidates,
+  188 component records, and separate 42-row rights/use and evaluation-
+  readiness registers.
+- Defined public metadata/provenance/official Quick Links versus private
+  source-derived, evaluation and user data boundaries; recorded taxonomy,
+  server-side evaluation job lifecycle, server-authoritative credit direction,
+  and official-versus-derived labeling.
+- Phase 2 is Next.js Web Foundation Migration. No code, repository creation,
+  Supabase schema/Auth, AI, payment, domain, deployment or Production change
+  was made.

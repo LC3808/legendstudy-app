@@ -2,6 +2,30 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 LS LAB Production Web architecture — APPROVED / DOCUMENTED
+
+- Manus Phase 0/1 research is complete: 42 unique universities and 53 2027
+  recruitment-unit rows (Seoul 27, non-Seoul 26), with 39 official-confirmed
+  and 14 official-partial rows; 42/42 source audits; historical source
+  metadata for 2024–2026 (59/62/67, 188 total); 330 official Quick Link
+  candidates; 188 component availability records; 42 rights/use records; 42
+  evaluation-readiness records; and a 13-sheet workbook. These figures do not
+  authorize Production ingestion.
+- Canonical Production direction is **Next.js App Router + TypeScript** in a
+  separate `LC3808/legendstudy-lab-web` repository candidate. The current
+  React/Vite/Express/tRPC Manus foundation remains mock/prototype only;
+  `LC3808/legendstudy-app` remains Flutter Mobile-only.
+- Public Web exposes metadata, provenance and official Quick Links. Normalized
+  source-derived assets, evaluation assets and user-private data stay behind
+  server/private boundaries. Official source, LS LAB-derived, model-derived
+  and human-reviewed material must remain distinct.
+- Shared Supabase Auth is the direction, not an implementation: LS LAB schema
+  and RLS must be isolated from Mobile data. No Production Supabase/Auth/DB,
+  live AI, payment, domain or public deployment changes are approved here.
+- Phase 2 is Next.js Web Foundation Migration. Evaluation jobs and
+  server-authoritative credits remain conceptual contracts pending separate
+  implementation design.
+
 ## 2026-09-18 Day 11-B4-C — COMPLETE / Production delivery E2E + Cron
 
 - Feedback Email Delivery Production E2E is **COMPLETE**. Owner confirmed

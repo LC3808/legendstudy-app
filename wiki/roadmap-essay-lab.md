@@ -1,6 +1,6 @@
 # LegendStudy Product Roadmap — Essay Lab / LS LAB
 
-Status: **PLANNED**  
+Status: **RESEARCH COMPLETE / PHASE 2 PLANNED**
 Target: **2026-10 Beta or initial public service**
 
 This document records a product priority change. It is a roadmap, not an
@@ -13,7 +13,10 @@ is assumed before the nationwide survey.
 
 ## 1. Product direction
 
-LegendStudy is planned as one service with three connected surfaces:
+LegendStudy is planned as one service with three connected surfaces. The
+Owner-provided context is that the existing service has operated for roughly
+13 years and averages 20,000+ daily visits/pageviews; this is business context,
+not an independently audited analytics metric.
 
 1. LegendStudy Mobile App
 2. LegendStudy Web App (working title: **LS LAB**)
@@ -222,11 +225,84 @@ The Web is the primary Essay Lab environment. Web capabilities include:
 Mobile capabilities focus on discovery, result review, notifications and
 simple record/connection flows. Long-form writing remains Web-primary.
 
-The Web stack is **not decided** until editor, rich text, charts, SEO, public
-admissions content, university comparison and payment requirements are
-reviewed. The formal service name and domain remain TBD.
+The formal service name and domain remain TBD. The production Web architecture
+decision is recorded below; the existing Manus React/Vite/Express/tRPC build
+remains a mock foundation and is not a Production architecture commitment.
 
-## 10. Commercial direction
+## 10. Production Web architecture decision
+
+Status: **APPROVED / DOCUMENTATION ONLY**.
+
+The canonical Production direction for **LS LAB by LegendStudy** is:
+
+- separate Next.js Web repository, App Router and TypeScript;
+- public catalog pages with SEO, SSR/SSG, metadata and structured data;
+- authenticated private workspace with server-only evaluation boundaries;
+- shared Supabase Auth identity with clearly isolated LS LAB schema/RLS;
+- server-side AI execution that can later move to a background worker/queue;
+- future streaming and Web credit/payment integration.
+
+The canonical repository candidate is `LC3808/legendstudy-lab-web`. The
+existing `LC3808/legendstudy-app` remains Flutter Mobile-only. The projects are
+not merged into a monorepo. Repository creation and implementation are a
+separate Phase 2 task.
+
+### Public and private data boundary
+
+The minimum four-layer boundary is:
+
+1. `PUBLIC_METADATA`: university, campus, year, track, exam metadata,
+   provenance and official Quick Links.
+2. `PRIVATE_SOURCE_DERIVED_ASSET`: normalized question/passage structure,
+   official-intent extraction, source page/hash and review notes.
+3. `PRIVATE_EVALUATION_ASSET`: LS LAB rubrics, answer elements, scoring logic,
+   benchmarks, prompts, calibration and evaluator versions.
+4. `USER_PRIVATE_DATA`: student answers, revisions, evaluations, history and
+   My Essay Pattern.
+
+LS LAB does not mirror or re-distribute official exam originals by default.
+Public Web links users from university/year/track metadata to the university's
+official source or download Quick Link. Source provenance is shown clearly.
+Private source-derived and evaluation assets must not be shipped in a public
+browser bundle.
+
+Official and derived material must remain distinguishable as
+`OFFICIAL_SOURCE`, `LSLAB_DERIVED`, `MODEL_DERIVED` and `HUMAN_REVIEWED`.
+LS LAB learning scores or criterion statuses must not be represented as
+official university scores unless a mapping has been independently validated.
+Rights/use risk, source readiness and evaluation readiness remain separate
+registers; private architecture is not a way to evade rights restrictions.
+
+### Evaluation, jobs and credits
+
+Candidate question-level taxonomy is `long_essay_document_analysis`,
+`structured_short_response`, `math_proof`, `science_response` and
+`mixed_aat_structured_response`. Final taxonomy follows question-package QA;
+special-format universities such as 부산대 and 경북대 are not forced into a
+generic long-essay prompt.
+
+An MVP evaluation may run through a Next.js server endpoint, but the product
+contract is job-oriented: `CREATED → CREDIT_RESERVED → PROCESSING →
+COMPLETED`, with `PROCESSING → FAILED` and safe credit release/restore.
+The credit contract is server-authoritative `CHECK → RESERVE → EVALUATE →
+SETTLE`; the initial free-use direction is not hard-coded as a client counter.
+
+### Prototype reuse and non-goals
+
+Manus foundation assets that may be reused include IA, UI concepts, route flow,
+TypeScript types, research metadata, fixtures, design tokens, Essay Workspace,
+Evaluation Result and My Essay Pattern UX. Its Express backend, tRPC contract,
+mock Auth, localStorage-only persistence and mock evaluator are not Production
+contracts.
+
+Phase 2 is **Next.js Web Foundation Migration**: separate repository candidate,
+App Router shell, public metadata catalog, official Quick Link UX,
+synthetic/mock workspace and evaluation, My Essay Pattern mock, and public /
+private server boundaries. Production Supabase integration/Auth, DB migration,
+live AI, payment, real student data, domain purchase and public deployment are
+explicitly prohibited until separate approval.
+
+## 11. Commercial direction
 
 The initial model should prefer credit/packages over subscription or unlimited
 plans:
@@ -241,7 +317,7 @@ initial direction for the October MVP; selling digital credits inside the
 mobile apps requires separate Apple/Google policy review. A Web-purchase / App-
 review model may be considered.
 
-## 11. Manus phases and milestones
+## 12. Manus phases and milestones
 
 Target: **October 2026 Beta or initial service release**.
 
@@ -250,11 +326,11 @@ Planned sequence:
 1. Stabilize current LegendStudy.
 2. Home Polish v2.
 3. Minimum legacy subject-alias design.
-4. **Manus Phase 0 — nationwide survey:** identify all 2027학년도 수시
-   논술 실시 대학 nationwide from official sources.
-5. **Manus Phase 1 — first-wave selection and inventory:** select Seoul
-   universities broadly plus representative non-Seoul formats, then inventory
-   the latest three years of official materials.
+4. **Manus Phase 0 — nationwide survey: COMPLETE:** identified all
+   2027학년도 수시 논술 실시 대학 nationwide from official sources.
+5. **Manus Phase 1 — first-wave selection and inventory: COMPLETE:** audited
+   Seoul universities broadly plus representative non-Seoul formats and
+   inventoried the latest three years of official materials where available.
 6. Define the taxonomy, data model and track-specific evaluation contracts from
    the researched formats.
 7. Build an AI evaluation proof of concept and benchmark it by track.
@@ -270,7 +346,27 @@ Academic Profile (school grades, subject grades/credits, mock exams and trend
 charts) and Admission Simulator are explicitly **LATER**, after Essay Lab.
 Any reuse of Selty assets requires a legacy-system audit before implementation.
 
-## 12. Non-goals for this roadmap entry
+## 13. Historical Exam Expansion — LegendStudy App
+
+The separate LegendStudy App materials expansion proceeds in stages:
+
+1. Phase 1: 2020 to present.
+2. Phase 2: 2015 to 2019.
+3. Phase 3: 2010 to 2014.
+
+Each phase follows `inventory → mapping → quarantine → validation →
+publication`. Legacy subject aliases and historical taxonomy are preserved.
+The full 2010-present range is not ingested in one batch.
+
+## 14. Home canonical order
+
+The canonical Home order is D-Day → 나의 공부 시간 → 급식 → 자료 검색 →
+최근 본 자료 → 최근 업데이트. Recent views are behavior-based personal
+information and therefore precede the global new-content feed. Home
+personalization is not implemented as a temporary local-only preference; user
+type, Home visibility and cloud persistence belong together in Day 13-A.
+
+## 15. Non-goals for this roadmap entry
 
 This entry does not implement Flutter UI, Web UI, database tables, RLS,
 entitlements, AI prompts/evaluation, billing, OCR, ingestion or Production
