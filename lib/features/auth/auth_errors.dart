@@ -23,6 +23,13 @@ const _byCode = <String, String>{
   'validation_failed': '입력한 정보를 다시 확인해 주세요.',
   'user_already_exists': '이미 가입된 이메일이에요. 로그인해 주세요.',
   'session_not_found': '로그인 정보가 만료되었어요. 다시 시도해 주세요.',
+  // A provider consent screen that was cancelled or refused comes back as
+  // error=access_denied. An expired recovery link carries the same coarse
+  // value, which is why the specific error_code is consulted first below.
+  'access_denied': '로그인이 취소되었어요.',
+  // The provider is not switched on for this Supabase project yet. Reported as
+  // a user-facing limit, never as a configuration hint.
+  'provider_disabled': '지금은 이 방법으로 로그인할 수 없어요. 다른 방법을 사용해 주세요.',
 };
 
 const _bySubstring = <String, String>{
@@ -52,8 +59,10 @@ final _substringKeysLongestFirst = _bySubstring.keys.toList()
 /// PKCE auth code) or with `error`/`error_code`. getSessionFromUrl turns the
 /// latter into an AuthException whose `code` is `error` and whose `statusCode`
 /// is `error_code`, so both fields are checked.
+///
+/// The coarse `access_denied` is deliberately absent: a cancelled social login
+/// reports it too, and that must not send anyone to the recovery screen.
 const _linkFailureCodes = <String>{
-  'access_denied',
   'otp_expired',
   'flow_state_expired',
   'flow_state_not_found',
@@ -77,12 +86,13 @@ bool isRecoveryLinkFailure(Object? error) {
 /// Never returns raw SDK text, a token, a URL or a status code.
 String authErrorMessage(Object? error) {
   if (error is! AuthException) return genericAuthFailure;
-  final code = error.code?.toLowerCase();
-  if (code != null && _byCode.containsKey(code)) return _byCode[code]!;
-  // error_code arrives as statusCode on link callbacks, where code holds the
-  // coarser `error` value, so the specific one is consulted as well.
+  // On a link or OAuth callback the specific value arrives as error_code, which
+  // the SDK stores in statusCode, while code holds the coarse `error`. The
+  // specific one therefore wins; an HTTP status such as '400' simply misses.
   final status = error.statusCode?.toLowerCase();
   if (status != null && _byCode.containsKey(status)) return _byCode[status]!;
+  final code = error.code?.toLowerCase();
+  if (code != null && _byCode.containsKey(code)) return _byCode[code]!;
   final message = error.message.toLowerCase();
   for (final key in _substringKeysLongestFirst) {
     if (message.contains(key)) return _bySubstring[key]!;

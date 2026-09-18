@@ -2,6 +2,38 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 P2-A Social login — OAUTH CODE FOUNDATION READY
+
+**GOOGLE / APPLE / KAKAO PRODUCTION E2E: PENDING.** No provider console,
+Supabase Dashboard or Auth user was touched.
+
+- Blocking gap closed: Android had no `login-callback` intent-filter, so a
+  provider callback could not reach the app at all. iOS needed nothing — its
+  scheme entry covers both callback hosts.
+- Callbacks are now separated by host on one scheme: social login uses
+  `com.legendstudy.app://login-callback` (declared as `oauthCallbackUrl`),
+  recovery keeps `auth-recovery`.
+- `signInWithOAuth` returns only "the provider page opened", which the old code
+  ignored: a `false` result left every sign-in button disabled with no message.
+  The busy flag is now always released and the outcome reported in Korean.
+- Social login had no return policy; a successful session left the user sitting
+  on the login screen. AuthPage now owns one policy for both password and
+  social sign-in: leave `/auth` (pop, else `/my`), and only when still on
+  `/auth`, so the two paths cannot fight. A cold-start callback needs no
+  navigation and gets none.
+- Cross-feature bug fixed: `access_denied` alone was treated as a recovery link
+  failure, so cancelling a social login could open password recovery. The
+  specific `error_code` is now consulted first and only specific codes count as
+  link failures.
+- An OAuth seam (`oauthServiceProvider`) makes the flow testable without a
+  browser: `test/auth_oauth_test.dart`, 16 tests, including manifest regression
+  guards. **Mac validation required.**
+- Account linking: v1 relies on Supabase automatic linking and adds no manual
+  linking UI. The exact server-side linking rules are UNVERIFIED and must be
+  measured during E2E — same email does not automatically mean same account,
+  and Kakao may return no email while Apple may return a private relay address.
+  See `Claude outputs/legendstudy-p2a-oauth-readiness.md`.
+
 ## 2026-09-18 Historical Exam Expansion Phase 1-A — PRODUCTION COVERAGE VERIFIED
 
 - Repository inventory is complete for the committed 2024–2026 candidate dry

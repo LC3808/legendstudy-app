@@ -7,6 +7,7 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../auth_errors.dart';
+import '../auth_oauth.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -73,17 +74,51 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   }
 
   Future<void> _oauth(OAuthProvider provider) async {
-    final client = ref.read(supabaseClientProvider);
-    if (client == null || _busy) return;
+    if (_busy) return; // one flow at a time, across all three providers
+    final service = ref.read(oauthServiceProvider);
+    if (service == null) {
+      _message('지금은 소셜 로그인을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
     setState(() => _busy = true);
     try {
-      await client.auth.signInWithOAuth(
-        provider,
-        redirectTo: 'com.legendstudy.app://login-callback',
-      );
-    } catch (_) {
-      _message('소셜 로그인을 시작하지 못했어요. provider 설정을 확인해 주세요.');
+      // The result only says the provider page opened. The session, if any,
+      // arrives later on the auth stream and is handled by _onAuthStatus.
+      final opened = await service.startSignIn(provider);
+      if (!opened) {
+        _message('소셜 로그인 화면을 열지 못했어요. provider 설정을 확인해 주세요.');
+      }
+    } catch (error) {
+      _message(authErrorMessage(error));
+    } finally {
+      // Always released: the user may come straight back by cancelling, and a
+      // stuck busy flag would disable every sign-in button on this screen.
       if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  /// Single return policy for this screen, whichever way the user signed in.
+  ///
+  /// A cancelled or failed provider callback arrives here as a carried failure
+  /// rather than an event, so it is reported in Korean instead of silence. A
+  /// cold-start callback has no login screen to leave, and needs none: the app
+  /// simply starts signed in.
+  void _onAuthStatus(AuthStatus? status) {
+    if (status == null || !mounted) return;
+    final failure = status.failure;
+    if (failure != null) {
+      _message(authErrorMessage(failure));
+      return;
+    }
+    // Recovery owns its own destination; leaving the login screen is not it.
+    if (!status.isAuthenticated || status.isPasswordRecovery) return;
+    final router = GoRouter.maybeOf(context);
+    if (router == null) return;
+    if (router.routerDelegate.currentConfiguration.uri.path != '/auth') return;
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go('/my');
     }
   }
 
@@ -113,51 +148,57 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   }
 
   @override
-  Widget build(BuildContext context) => ShellPage(
-    children: [
-      SectionHeader(_signUp ? '회원가입' : '로그인'),
-      TextField(
-        controller: _email,
-        keyboardType: TextInputType.emailAddress,
-        decoration: const InputDecoration(labelText: '이메일'),
-      ),
-      const SizedBox(height: 12),
-      TextField(
-        controller: _password,
-        obscureText: true,
-        decoration: const InputDecoration(labelText: '비밀번호'),
-      ),
-      const SizedBox(height: 16),
-      FilledButton(
-        onPressed: _busy ? null : _passwordAuth,
-        child: Text(_signUp ? '이메일로 회원가입' : '이메일로 로그인'),
-      ),
-      TextButton(
-        onPressed: _busy ? null : () => setState(() => _signUp = !_signUp),
-        child: Text(_signUp ? '이미 계정이 있어요' : '처음 시작하시나요? 회원가입'),
-      ),
-      if (!_signUp)
-        TextButton(
-          onPressed: _busy ? null : () => context.push('/auth/recovery'),
-          child: const Text('비밀번호를 잊으셨나요?'),
+  Widget build(BuildContext context) {
+    ref.listen<AsyncValue<AuthStatus>>(
+      authStateProvider,
+      (_, next) => _onAuthStatus(next.value),
+    );
+    return ShellPage(
+      children: [
+        SectionHeader(_signUp ? '회원가입' : '로그인'),
+        TextField(
+          controller: _email,
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(labelText: '이메일'),
         ),
-      const Divider(height: 28),
-      const Text('소셜 로그인은 Supabase provider와 redirect 설정이 필요해요.'),
-      OutlinedButton.icon(
-        onPressed: _busy ? null : () => _oauth(OAuthProvider.google),
-        icon: const Icon(Icons.account_circle_outlined),
-        label: const Text('Google로 계속하기'),
-      ),
-      OutlinedButton.icon(
-        onPressed: _busy ? null : () => _oauth(OAuthProvider.apple),
-        icon: const Icon(Icons.apple),
-        label: const Text('Apple로 계속하기'),
-      ),
-      OutlinedButton.icon(
-        onPressed: _busy ? null : () => _oauth(OAuthProvider.kakao),
-        icon: const Icon(Icons.chat_bubble_outline),
-        label: const Text('Kakao로 계속하기'),
-      ),
-    ],
-  );
+        const SizedBox(height: 12),
+        TextField(
+          controller: _password,
+          obscureText: true,
+          decoration: const InputDecoration(labelText: '비밀번호'),
+        ),
+        const SizedBox(height: 16),
+        FilledButton(
+          onPressed: _busy ? null : _passwordAuth,
+          child: Text(_signUp ? '이메일로 회원가입' : '이메일로 로그인'),
+        ),
+        TextButton(
+          onPressed: _busy ? null : () => setState(() => _signUp = !_signUp),
+          child: Text(_signUp ? '이미 계정이 있어요' : '처음 시작하시나요? 회원가입'),
+        ),
+        if (!_signUp)
+          TextButton(
+            onPressed: _busy ? null : () => context.push('/auth/recovery'),
+            child: const Text('비밀번호를 잊으셨나요?'),
+          ),
+        const Divider(height: 28),
+        const Text('소셜 로그인은 Supabase provider와 redirect 설정이 필요해요.'),
+        OutlinedButton.icon(
+          onPressed: _busy ? null : () => _oauth(OAuthProvider.google),
+          icon: const Icon(Icons.account_circle_outlined),
+          label: const Text('Google로 계속하기'),
+        ),
+        OutlinedButton.icon(
+          onPressed: _busy ? null : () => _oauth(OAuthProvider.apple),
+          icon: const Icon(Icons.apple),
+          label: const Text('Apple로 계속하기'),
+        ),
+        OutlinedButton.icon(
+          onPressed: _busy ? null : () => _oauth(OAuthProvider.kakao),
+          icon: const Icon(Icons.chat_bubble_outline),
+          label: const Text('Kakao로 계속하기'),
+        ),
+      ],
+    );
+  }
 }

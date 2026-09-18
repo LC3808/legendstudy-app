@@ -1472,3 +1472,18 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Added read-only coverage CSVs, missing matrix, inventory report and Codex
   handoff under `reports/historical-exam/`. Phase 1-A is now ready for
   deterministic-key reconciliation; publication remains gated.
+
+## 2026-09-18 — P2-A social login foundation
+
+- Audited the Google/Apple/Kakao buttons against the real SDK contract and
+  found four code gaps behind the "provider not configured" verdict: no Android
+  callback filter, an ignored `signInWithOAuth` false result that left the
+  screen permanently disabled, no return policy after a successful callback,
+  and no seam to test any of it.
+- Registered `com.legendstudy.app://login-callback` on Android (iOS already
+  matches by scheme), constant-ised the callback, added an OAuth service seam,
+  and gave password and social sign-in one shared return policy.
+- Stopped a cancelled social login (`access_denied`) from being read as a
+  recovery link failure by preferring the specific `error_code`.
+- New `test/auth_oauth_test.dart` (16). No Production mutation: no Supabase,
+  Google, Apple or Kakao console change, no Auth user, no DB write.
