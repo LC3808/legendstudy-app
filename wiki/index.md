@@ -80,3 +80,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 12 Home visual hierarchy — implemented](day-12-home-visual-hierarchy.md)
 
 - [Auth Recovery — code verified; Production E2E pending](auth-recovery.md)
+- [Account Deletion & Privacy — foundation implemented; Production deletion pending](account-deletion-privacy.md)

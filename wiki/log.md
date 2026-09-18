@@ -1487,3 +1487,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   recovery link failure by preferring the specific `error_code`.
 - New `test/auth_oauth_test.dart` (16). No Production mutation: no Supabase,
   Google, Apple or Kakao console change, no Auth user, no DB write.
+
+## 2026-09-18 — P2-B account deletion and privacy foundation
+
+- Inventoried every `auth.users` reference in the applied migrations rather
+  than assuming cascade: seven tables, six cascading and feedback detaching,
+  which means deleting the auth user is the whole deletion and no migration is
+  required.
+- Added a server-authoritative delete-account Edge Function candidate (caller
+  from the token, body ignored, admin refused, idempotent, nothing logged) with
+  Deno tests, and a fail-closed Flutter foundation: seam, two-step confirmation
+  screen, MY entry, route, Korean failure copy and local study purge.
+- Recorded the Apple and Google Play deletion requirements from their official
+  pages, including the two gaps LegendStudy still has: the web deletion-request
+  URL and Sign in with Apple token revocation.
+- No Production mutation: nothing deployed, no Auth Admin call, no account
+  deleted, no DB or RLS change.

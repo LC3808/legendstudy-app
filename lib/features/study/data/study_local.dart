@@ -13,6 +13,20 @@ abstract interface class StudyLocalStore {
 
 const studyChannel = MethodChannel('com.legendstudy.app/study');
 
+/// Removes one owner's local study space, for account deletion.
+///
+/// Drafts, records and scoring attempts live on the device under an owner key,
+/// so a server-side account deletion would otherwise leave that person's work
+/// readable on this phone. Other owners and the rest of the document are left
+/// exactly as they were, and an owner with nothing stored is a no-op.
+Future<void> purgeStudyOwner(StudyLocalStore store, String userId) async {
+  final document = await store.read();
+  final owners = document['owners'];
+  if (owners is! Map || !owners.containsKey(userId)) return;
+  owners.remove(userId);
+  await store.write(document);
+}
+
 class NativeStudyClock implements StudyClock {
   @override
   Future<ClockReading> read() async {

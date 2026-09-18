@@ -2,6 +2,35 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 P2-B Account deletion — FOUNDATION IMPLEMENTED (fail-closed)
+
+**PRODUCTION ACCOUNT DELETION: PENDING.** Nothing was deployed and no account
+was deleted. **PRIVACY LIFECYCLE: DESIGNED.**
+
+- The schema already supports deletion: every user-owned table cascades from
+  `auth.users` and `feedback_submissions.user_id` is `on delete set null`, so
+  feedback is anonymised rather than destroyed and the Email Worker keeps
+  working. **No migration is needed and none was written.**
+- Deletion is server-authoritative. A candidate Edge Function
+  (`supabase/functions/delete-account/`, not deployed) resolves the caller from
+  the bearer token, ignores the body so no client can name a target, refuses
+  admin members with 403, and answers the same way on a repeat so retries are
+  safe. Widening RLS with client DELETE grants was rejected.
+- The app ships the screen behind `ACCOUNT_DELETION_ENABLED`, off by default:
+  the entry exists, states what is deleted and what is only detached, requires
+  an acknowledgement plus a final dialog, and when unconfigured says the
+  feature is not ready. No build shows a fake success, and a failed deletion
+  neither signs out nor claims anything.
+- Local study data is owner-keyed on the device; `purgeStudyOwner` removes only
+  the departing owner's space, which is the same mechanism that keeps account
+  switching clean.
+- 14 Flutter tests, 9 Deno tests. **Mac validation required.**
+- Store policy read from the official pages: Apple requires in-app initiation
+  and Sign in with Apple token revocation (an open gap for Apple OAuth); Google
+  Play additionally requires a web deletion-request URL, which LegendStudy does
+  not have because the domain question is undecided. See
+  `wiki/account-deletion-privacy.md`.
+
 ## 2026-09-18 P2-A Social login — OAUTH CODE FOUNDATION READY
 
 **GOOGLE / APPLE / KAKAO PRODUCTION E2E: PENDING.** No provider console,

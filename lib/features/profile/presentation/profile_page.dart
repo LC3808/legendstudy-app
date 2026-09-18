@@ -105,6 +105,14 @@ class ProfilePage extends ConsumerWidget {
             onTap: () => context.push('/my/admin/feedback'),
           ),
         ],
+        if (isAuthenticated)
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('회원탈퇴'),
+            subtitle: const Text('계정과 내 기록을 삭제해요'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/my/delete-account'),
+          ),
         const Divider(),
         const SectionHeader('레전드스터디와 함께'),
         const CompactUtilityCard(

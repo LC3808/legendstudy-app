@@ -15,6 +15,7 @@ import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
 import '../features/auth/auth_errors.dart';
 import '../features/auth/presentation/auth_page.dart';
+import '../features/auth/presentation/delete_account_page.dart';
 import '../features/auth/presentation/new_password_page.dart';
 import '../features/auth/presentation/password_recovery_page.dart';
 import '../core/supabase/supabase_providers.dart';
@@ -105,6 +106,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: 'recent',
                     builder: (_, _) =>
                         const NestedPage(title: '최근 본 자료', child: RecentPage()),
+                  ),
+                  GoRoute(
+                    path: 'delete-account',
+                    builder: (_, _) => const NestedPage(
+                      title: '회원탈퇴',
+                      child: DeleteAccountPage(),
+                    ),
                   ),
                   GoRoute(
                     path: 'feedback',

@@ -7,6 +7,7 @@ class AppConfig {
     this.supabaseUrl = '',
     this.supabasePublishableKey = '',
     this.recoveryRedirectUrl = '',
+    this.accountDeletionEnabled = false,
   });
   factory AppConfig.fromEnvironment() => const AppConfig(
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
@@ -16,6 +17,10 @@ class AppConfig {
     // The production recovery redirect is a pending Owner configuration, so no
     // URL is invented here. See wiki/auth-recovery.md.
     recoveryRedirectUrl: String.fromEnvironment('SUPABASE_RECOVERY_REDIRECT'),
+    // Off until the delete-account function is reviewed and deployed. A build
+    // without it tells the user the feature is not ready instead of failing
+    // with a transport error.
+    accountDeletionEnabled: bool.fromEnvironment('ACCOUNT_DELETION_ENABLED'),
   );
   final String environment;
   final String supabaseUrl;
@@ -23,6 +28,10 @@ class AppConfig {
 
   /// Empty until the Owner registers a redirect URL in the Supabase dashboard.
   final String recoveryRedirectUrl;
+
+  /// False until the deletion endpoint is deployed; see
+  /// wiki/account-deletion-privacy.md.
+  final bool accountDeletionEnabled;
 
   /// Null when unconfigured, so the SDK falls back to the project Site URL.
   String? get recoveryRedirectTo =>
