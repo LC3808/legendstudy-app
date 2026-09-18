@@ -56,12 +56,6 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       const _HomeSection(
-        title: '최근 업데이트',
-        icon: Icons.new_releases_outlined,
-        accent: AppTokens.homeUpdatesAccent,
-        child: HomeRecentUpdates(),
-      ),
-      const _HomeSection(
         title: '최근 본 자료',
         icon: Icons.history,
         accent: AppTokens.homeRecentAccent,
@@ -69,6 +63,12 @@ class HomePage extends ConsumerWidget {
           kind: PersonalListKind.recentViews,
           homeMode: true,
         ),
+      ),
+      const _HomeSection(
+        title: '최근 업데이트',
+        icon: Icons.new_releases_outlined,
+        accent: AppTokens.homeUpdatesAccent,
+        child: HomeRecentUpdates(),
       ),
     ],
   );

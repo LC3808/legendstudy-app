@@ -202,13 +202,17 @@ void main() {
             '나의 공부 시간',
             '우리 학교 · 오늘 급식',
             '자료 검색',
-            '최근 업데이트',
             '최근 본 자료',
+            '최근 업데이트',
           ];
           final tops = sectionLabels
               .map((label) => tester.getTopLeft(find.text(label)).dy)
               .toList();
           expect(tops, orderedEquals([...tops]..sort()));
+          expect(
+            tester.getTopLeft(find.text('최근 본 자료')).dy,
+            lessThan(tester.getTopLeft(find.text('최근 업데이트')).dy),
+          );
         }
         expect(find.text('D-DAY'), findsOneWidget);
         expect(find.textContaining('NEIS'), findsNothing);

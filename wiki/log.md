@@ -1426,3 +1426,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   LegendStudy function endpoint and Vault-held invocation header. No
   service-role key is used, no duplicate job exists, and no second test email
   was sent.
+
+## 2026-09-18 — Home content priority adjustment
+
+- Reordered only the Home sections after 자료 검색: 최근 본 자료 now precedes
+  최근 업데이트 to prioritize the user's personal re-entry history over the
+  global content feed.
+- Preserved both sections' existing loading/empty behavior and 2→6
+  expand/collapse behavior. No provider, navigation, database or Production
+  behavior changed.
+- Audited further Home personalization: profile/schema, cloud persistence and
+  Guest/Auth merge policy would be required, so no local-only preference was
+  introduced; defer the implementation plan to Day 13-A.

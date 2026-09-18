@@ -8,10 +8,12 @@ Status: **implemented; local validation complete**.
 2. 나의 공부 시간 — current learning activity
 3. 우리학교 급식 — school-life information
 4. 자료 검색 — material discovery and quick filters
-5. 최근 업데이트 — new material discovery
-6. 최근 본 자료 — personal re-entry history
+5. 최근 본 자료 — personal re-entry history
+6. 최근 업데이트 — new material discovery
 
-This preserves the existing providers, navigation and data-fetching semantics.
+Recent views now precede the global update feed because they reflect the user's
+own exploration history. This preserves the existing providers, navigation and
+data-fetching semantics.
 No feature, database, Supabase, publication or personal-state contract changed.
 
 ## Visual identity

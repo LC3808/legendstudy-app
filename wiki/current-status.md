@@ -182,7 +182,11 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
 ## Day 12 — Home Information Architecture & Visual Hierarchy
 
 - Home order is now D-Day → 나의 공부 시간 → 우리학교 급식 → 자료 검색 →
-  최근 업데이트 → 최근 본 자료.
+  최근 본 자료 → 최근 업데이트.
+- Recent views remain the existing owner-scoped, cloud-backed personal list and
+  precede the global update feed; no local-only preference was added. Further
+  personalization that requires profile/schema, Guest/Auth merge, cloud
+  persistence policy or Day 13-A user types is deferred to that work.
 - Removed the duplicate `오늘의 공부` heading. Populated Study state emphasizes
   today’s duration; empty state remains concise and existing data contracts are
   unchanged.
