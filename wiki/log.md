@@ -1405,3 +1405,24 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   taught the error mapper to read `error_code` when it arrives as `statusCode`.
 - Focused tests 19 → 27. No Production mutation: no Dashboard change, no
   redirect registration, no recovery email, no Auth user, no DB write.
+
+## 2026-09-18 — Day 11-B4-C Feedback Email Production Delivery E2E
+
+- Owner confirmed the operational Gmail mailbox received the Production email
+  from `feedback@legendstudy.com`; sender, subject, Korean content, metadata
+  and Feedback ID passed acceptance. Resend delivery is Production-verified.
+- The exact Owner-confirmed fixture was processed once:
+  `claimed=1, sent=1, failed=0`. DB postflight passed with `sent`,
+  `attempt_count=1`, non-null `sent_at`, cleared claim fields and no error.
+- Deleted only the exact fixture by ID after acceptance; cascade removed its
+  notification. Target feedback/notification counts are 0, remaining TEST
+  feedback/outbox counts are 0, and actionable outbox count is 0.
+- Rotated only `FEEDBACK_WORKER_SECRET` because the old raw value was
+  unavailable; stored the rotated value in Vault without recording it in Git
+  or Wiki. `LEGENDSTUDY_ADMIN_EMAIL` now uses the Owner-controlled operational
+  Gmail mailbox; `LEGENDSTUDY_EMAIL_FROM` remains `feedback@legendstudy.com`.
+- Enabled exactly one active `pg_cron` + `pg_net` job,
+  `legendstudy_feedback_notification_worker`, on `* * * * *` with the exact
+  LegendStudy function endpoint and Vault-held invocation header. No
+  service-role key is used, no duplicate job exists, and no second test email
+  was sent.

@@ -2,6 +2,32 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 Day 11-B4-C — COMPLETE / Production delivery E2E + Cron
+
+- Feedback Email Delivery Production E2E is **COMPLETE**. Owner confirmed
+  receipt in the operational Gmail mailbox with the verified sender,
+  subject, Korean content, metadata and Feedback ID. Resend delivery is
+  Production-verified.
+- The Owner-confirmed test fixture was processed exactly once:
+  `claimed=1, sent=1, failed=0`; DB postflight showed `sent`,
+  `attempt_count=1`, non-null `sent_at`, cleared claim fields and no error.
+- The exact fixture and cascaded notification were then deleted by ID.
+  Target feedback/notification counts are 0; remaining TEST feedback/outbox
+  counts are 0; actionable outbox count is 0.
+- Recipient configuration now points to the Owner-controlled operational
+  Gmail mailbox. The admin Auth identity and notification mailbox remain
+  separate. Sender remains `feedback@legendstudy.com`.
+- `FEEDBACK_WORKER_SECRET` was rotated once because its previous raw value was
+  unavailable; no other secret was changed. The rotated value is stored in
+  Supabase Vault for scheduling and is not recorded here.
+- Cron is **ENABLED**: one active `pg_cron` job named
+  `legendstudy_feedback_notification_worker`, schedule `* * * * *`, exact
+  LegendStudy worker endpoint, POST via `pg_net`, Vault-held
+  `x-feedback-worker-secret`, no service-role key, no duplicate job.
+- No second test fixture was created and no additional worker invocation was
+  made. Follow-up is natural scheduler monitoring; do not send another test
+  email solely for scheduler acceptance.
+
 ## 2026-09-18 Auth Recovery — PRODUCTION READINESS PREPARED
 
 Code state: **CODE VERIFIED / PRODUCTION READINESS PREPARED. PRODUCTION
@@ -30,7 +56,7 @@ was ever sent.
   the link to be opened on the install that requested it. See
   `Claude outputs/legendstudy-auth-recovery-production-readiness.md`.
 
-## 2026-09-17 Final closeout — Auth Recovery + Feedback Email
+## 2026-09-17 Final closeout — Auth Recovery + Feedback Email (historical baseline)
 
 ### Auth Recovery — COMPLETE / CODE VERIFIED
 
@@ -51,7 +77,7 @@ was ever sent.
   receive a real recovery email, verify deep/app link, set a new password,
   sign in again, and complete iOS physical acceptance.
 
-### Feedback Email Worker — DEPLOYED / DELIVERY E2E PENDING
+### Feedback Email Worker — DEPLOYED / DELIVERY E2E PENDING (superseded by B4-C above)
 
 - B4-A is COMPLETE. B4-B is IMPLEMENTED, REVIEWED and Production DEPLOYED:
   Resend sender domain is verified, the worker migration is applied, the Edge
@@ -59,20 +85,15 @@ was ever sent.
 - Owner-confirmed safeguards include wrong-secret Production acceptance
   (`403 forbidden`), Deno 2.9.6 runtime tests 5/5, `deno check`, postflight,
   service-role-only RPCs, and verified claim/lease/retry/token semantics.
-- Feedback Email Delivery E2E is NOT COMPLETE. Cron is NOT ENABLED, a
-  successful worker invocation has not yet been performed, and receipt of the
-  admin email has not yet been verified.
-- Before the controlled invocation, choose a real receiving mailbox and
-  replace `LEGENDSTUDY_ADMIN_EMAIL`; an Auth account address does not imply a
-  working mailbox. Then inspect the existing pending `[TEST]` fixture, invoke
-  once, verify `sent`/`sent_at` and receipt, clean up explicitly, and only then
-  enable Cron.
+- Historical snapshot superseded by B4-C: at that time Feedback Email
+  Delivery E2E was NOT COMPLETE, Cron was NOT ENABLED, and no successful
+  worker invocation or mailbox receipt had been verified.
 
 ### Closeout priority
 
-P0 Feedback Email Delivery E2E → P1 Auth Recovery Production E2E → P2 OAuth
-completion and account deletion/privacy lifecycle → P3 Day 13-A User Type &
-Home Personalization → P4 Day 13-B NEIS Timetable → P5 v1 Gap Audit → P6
+P0 Auth Recovery Production E2E → P1 OAuth completion and account
+deletion/privacy lifecycle → P2 Day 13-A User Type & Home Personalization → P3
+Day 13-B NEIS Timetable → P4 v1 Gap Audit → P5
 app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
 
 ## Day 11-B3 final follow-up — COMPLETE
@@ -98,10 +119,10 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
 - At the B4-A design stage, no Edge Function deploy, Resend account/DNS,
   secret, email or Production DB mutation was performed. See
   [Day 11-B4 Feedback Email](day-11-b4-feedback-email.md).
-- B4-B is now deployed and reviewed; only controlled delivery E2E and Cron
-  enablement remain pending.
+- Historical B4-A snapshot: B4-B was deployed and reviewed while controlled
+  delivery E2E and Cron enablement remained pending; B4-C is now complete.
 
-## Day 11-B4-B — Feedback Email Worker — IMPLEMENTED / REVIEWED / PRODUCTION DEPLOYED
+## Day 11-B4-B — Feedback Email Worker — IMPLEMENTED / REVIEWED / PRODUCTION DEPLOYED (historical baseline)
 
 - The migration, service-role-only claim/finalize/reclaim RPCs, secret-gated
   Deno Edge Function, provider-neutral adapter and Resend implementation are
@@ -109,8 +130,8 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
 - Deno 2.9.6 runtime tests pass 5/5 and `deno check` passes. Wrong-secret
   Production acceptance returns `403 forbidden`; postflight and RPC privilege
   checks pass.
-- Email Delivery E2E remains pending. Cron is disabled, no successful worker
-  invocation or received admin email is verified, and B4-C is not complete.
+- Historical B4-B snapshot: Email Delivery E2E was pending and Cron was
+  disabled. B4-C is complete in the closeout section above.
 
 ## Next backlog — Day 13
 

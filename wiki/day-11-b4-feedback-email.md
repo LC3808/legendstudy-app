@@ -1,7 +1,7 @@
 # Day 11-B4-A — Feedback Email Notification Design
 
 Status: B4-A DESIGN COMPLETE; B4-B IMPLEMENTED / REVIEWED / PRODUCTION
-DEPLOYED. **Email Delivery E2E remains PENDING and Cron is NOT ENABLED.**
+DEPLOYED; B4-C **COMPLETE / PRODUCTION DELIVERY E2E PASS / CRON ENABLED**.
 
 ## Current Production contract
 
@@ -143,17 +143,36 @@ Implemented locally in `supabase/functions/process-feedback-notifications/`:
 - Deno offline test source plus Python SQL/source contract tests.
 
 Owner-confirmed Production deployment and postflight are complete. Deno 2.9.6
-runtime tests pass 5/5 and `deno check` passes. This does not claim a successful
-worker delivery or received email.
+runtime tests pass 5/5 and `deno check` passes. The following B4-C closeout
+records the subsequently verified worker delivery and received email.
 
-## Delivery E2E pending
+## B4-C closeout — COMPLETE
 
-Cron remains disabled and no successful worker invocation or received admin
-email has been verified. The first operational prerequisite is replacing
-`LEGENDSTUDY_ADMIN_EMAIL` with a real receiving mailbox; an Auth account does
-not create a mailbox. Then inspect the existing `[TEST]` pending fixture,
-perform one controlled invocation, verify receipt plus `sent`/`sent_at`, clean
-up the fixture by explicit ID, and enable Cron only after that evidence.
+- Owner confirmed the operational Gmail mailbox received the email from
+  `feedback@legendstudy.com` with the expected subject, Korean content,
+  metadata and Feedback ID. Resend Production delivery is verified.
+- The Owner-confirmed fixture was processed exactly once with worker summary
+  `claimed=1, sent=1, failed=0`. Read-only DB postflight showed `sent`,
+  `attempt_count=1`, non-null `sent_at`, cleared claim fields and no error.
+- The exact feedback ID was deleted after Owner acceptance. Its cascaded
+  notification was also confirmed deleted. Target counts, remaining TEST
+  feedback/outbox counts and actionable outbox count are all zero.
+- `FEEDBACK_WORKER_SECRET` was rotated once because its old raw value was not
+  available. The rotated value is stored in Supabase Vault for the scheduler;
+  no secret value is recorded in this Wiki. `LEGENDSTUDY_ADMIN_EMAIL` points
+  to the Owner-controlled operational Gmail mailbox; the Auth admin identity
+  remains a separate role. `LEGENDSTUDY_EMAIL_FROM` remains
+  `feedback@legendstudy.com`.
+- Cron is enabled with exactly one active job named
+  `legendstudy_feedback_notification_worker`, schedule `* * * * *`, and the
+  exact project endpoint
+  `https://stlhijzpjfgwwdgunlsd.supabase.co/functions/v1/process-feedback-notifications`.
+  It uses `pg_cron` + `pg_net`, POST, the Vault-held
+  `x-feedback-worker-secret`, and no service-role key. Duplicate-name and
+  worker-job counts are both one.
+- No second test fixture was created and no additional worker invocation was
+  made. Scheduler follow-up should use natural future feedback rather than a
+  second forced test email.
 
 ## Deployment and rollback package
 
@@ -176,11 +195,11 @@ duration, three-attempt worker policy versus the database ceiling of eight,
 Resend domain/configuration, Deno tests, pending-row handling and the absence
 of a public client invocation path.
 
-## B4-C and security
+## B4-C and security — verified
 
-B4-C should use exactly one `[TEST] Feedback Email E2E <run-id>` fixture,
-verify persistence, one outbox row, claim, one received email, `sent` and
-`sent_at`, then perform explicit-ID cleanup by policy. B4-A sends nothing.
+B4-C used exactly one Owner-confirmed test fixture, verified persistence, one
+outbox row, one claim, one received email, `sent` and `sent_at`, then performed
+explicit-ID cleanup by policy. B4-C is complete.
 
 Public invocation is scheduler-secret protected; forged jobs/recipients are
 impossible because the request supplies neither; duplicate sends use atomic
