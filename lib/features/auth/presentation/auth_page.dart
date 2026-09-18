@@ -99,19 +99,32 @@ class _AuthPageState extends ConsumerState<AuthPage> {
 
   /// Single return policy for this screen, whichever way the user signed in.
   ///
-  /// A cancelled or failed provider callback arrives here as a carried failure
-  /// rather than an event, so it is reported in Korean instead of silence. A
-  /// cold-start callback has no login screen to leave, and needs none: the app
-  /// simply starts signed in.
+  /// Scope is deliberately narrow, because this is the only screen allowed to
+  /// act on an ordinary sign-in:
+  ///
+  /// * only `signedIn` moves anyone. `tokenRefreshed` and `userUpdated` are
+  ///   housekeeping on a session the user already had, and must not navigate.
+  /// * only while this screen is the current route, so a cold-start callback —
+  ///   where the app simply starts signed in somewhere else — is left alone,
+  ///   and so is the password path if it pops first.
+  /// * never on recovery: `/auth/new-password` is the router's to open.
+  ///
+  /// A cancelled or failed provider callback arrives as a carried failure
+  /// rather than an event, so it is reported in Korean instead of silence.
   void _onAuthStatus(AuthStatus? status) {
     if (status == null || !mounted) return;
     final failure = status.failure;
     if (failure != null) {
-      _message(authErrorMessage(failure));
+      // An unusable recovery link is explained by the recovery screen the
+      // router is already opening; saying it twice would be noise.
+      if (!isRecoveryLinkFailure(failure)) _message(authErrorMessage(failure));
       return;
     }
-    // Recovery owns its own destination; leaving the login screen is not it.
-    if (!status.isAuthenticated || status.isPasswordRecovery) return;
+    if (!status.isAuthenticated ||
+        status.event != AuthChangeEvent.signedIn ||
+        status.isPasswordRecovery) {
+      return;
+    }
     final router = GoRouter.maybeOf(context);
     if (router == null) return;
     if (router.routerDelegate.currentConfiguration.uri.path != '/auth') return;

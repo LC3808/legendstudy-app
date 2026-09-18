@@ -198,6 +198,29 @@ void main() {
       );
     });
 
+    testWidgets('housekeeping events leave the login screen alone',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      await mountLogin(
+        tester,
+        service: FakeOAuthService(),
+        auth: auth.stream,
+      );
+      for (final event in [
+        AuthChangeEvent.tokenRefreshed,
+        AuthChangeEvent.userUpdated,
+      ]) {
+        auth.add(AuthStatus('user-a', event: event));
+        await tester.pumpAndSettle();
+        expect(
+          currentPath(),
+          '/auth',
+          reason: '$event is not a sign-in and must not close this screen',
+        );
+      }
+    });
+
     testWidgets('a recovery session does not hijack the login return',
         (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();

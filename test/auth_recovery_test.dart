@@ -378,14 +378,14 @@ void main() {
       }
     });
 
-    testWidgets('other auth events do not open the recovery screen',
-        (tester) async {
+    testWidgets('housekeeping events navigate nowhere at all', (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
       final router = await mountAppRouter(tester, recoveryContainer(auth));
 
+      // A session the user already had is refreshed or its user record is
+      // updated: nothing about that is a navigation.
       for (final event in [
-        AuthChangeEvent.signedIn,
         AuthChangeEvent.tokenRefreshed,
         AuthChangeEvent.userUpdated,
       ]) {
@@ -394,9 +394,41 @@ void main() {
         expect(
           router.routerDelegate.currentConfiguration.uri.path,
           '/auth',
-          reason: '$event must not open the recovery screen',
+          reason: '$event must move no one',
         );
       }
+    });
+
+    testWidgets('an ordinary sign-in never reaches a recovery screen',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      final router = await mountAppRouter(tester, recoveryContainer(auth));
+
+      auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
+      await tester.pumpAndSettle();
+      // Leaving the login screen after a successful sign-in belongs to
+      // AuthPage and is asserted in auth_oauth_test.dart. What the router
+      // guarantees is narrower and is what matters here: no recovery screen.
+      expect(
+        router.routerDelegate.currentConfiguration.uri.path,
+        isNot(anyOf('/auth/new-password', '/auth/recovery')),
+        reason: 'signedIn must not open a recovery screen',
+      );
+    });
+
+    testWidgets('an authenticated cold start is not pulled to /my',
+        (tester) async {
+      final auth = StreamController<AuthStatus>.broadcast();
+      addTearDown(auth.close);
+      // A social or recovery callback can start the app anywhere. Without a
+      // login screen on display there is nothing to leave.
+      final router = await mountAppRouter(tester, recoveryContainer(auth),
+          at: '/home');
+
+      auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
+      await tester.pumpAndSettle();
+      expect(router.routerDelegate.currentConfiguration.uri.path, '/home');
     });
 
     testWidgets('a recovery state that is already current is not missed',

@@ -18,9 +18,11 @@ Supabase Dashboard or Auth user was touched.
   The busy flag is now always released and the outcome reported in Korean.
 - Social login had no return policy; a successful session left the user sitting
   on the login screen. AuthPage now owns one policy for both password and
-  social sign-in: leave `/auth` (pop, else `/my`), and only when still on
-  `/auth`, so the two paths cannot fight. A cold-start callback needs no
-  navigation and gets none.
+  social sign-in: leave `/auth` (pop, else `/my`), only on a `signedIn` event
+  and only while still on `/auth`, so the two paths cannot fight,
+  `tokenRefreshed`/`userUpdated` move no one, and a cold-start callback that
+  starts elsewhere is left where it is. The router keeps a narrower job:
+  recovery routes only.
 - Cross-feature bug fixed: `access_denied` alone was treated as a recovery link
   failure, so cancelling a social login could open password recovery. The
   specific `error_code` is now consulted first and only specific codes count as
