@@ -371,3 +371,40 @@ type, Home visibility and cloud persistence belong together in Day 13-A.
 This entry does not implement Flutter UI, Web UI, database tables, RLS,
 entitlements, AI prompts/evaluation, billing, OCR, ingestion or Production
 changes. Those require separate approved design and implementation tasks.
+
+## 16. 2026-09-18 product decisions — essay-centric model and Core-first depth
+
+Recorded here so the roadmap and `current-status.md` do not drift. Detail and
+current state live in [current-status.md](current-status.md).
+
+- **Essay-centric, not 전형-centric.** A university's administrative 전형명
+  (논술우수자전형, 논술전형, 논술일반전형 …) is provenance metadata. To a
+  student the product is **ESSAY (논술)**. Canonical hierarchy: University →
+  Essay → Essay Track → QuestionSet → Question.
+- **Track candidates:** HUMANITIES, BUSINESS_ECONOMICS, NATURAL_ENGINEERING,
+  MEDICAL_PHARMACY, ARTS_SPORTS, UNKNOWN.
+- **Four separate axes.** Track ≠ problem format ≠ answer format ≠ input mode.
+  They are modelled independently and must not be merged.
+- **Core-first depth.** CORE / NEXT / CATALOG_ONLY / UNDECIDED. Deep AI
+  evaluation begins with roughly 10–15 Core universities instead of covering
+  all 42 shallowly; the full 42-university catalog is preserved regardless.
+  Core membership is a Product Owner decision only.
+- **Reference University #1 sequence** (after Core is fixed): recent approved
+  years → Track → QuestionSet → Question → problem/answer/input format →
+  공식 출제의도 → 공식 해설 → 공식 채점기준 → 대학 제공 우수·합격자 답안 →
+  private Gold Evaluation Package → evaluator benchmark.
+- **Gold Evaluation Package is private.** It never enters the Public Catalog,
+  and 우수·합격자 답안 are evaluation references, not sentence-level answers.
+- **Multimodal is staged.** `answer_format` and `input_mode` are distinct;
+  input modes are TEXT_EDITOR, HANDWRITTEN_IMAGE, TEXT_AND_IMAGE, SHORT_TEXT,
+  UNKNOWN. Handwritten maths/science flows through 촬영 → quality gate →
+  ordered multi-page upload → Vision interpretation → structured answer, with
+  image provenance kept and OCR never the sole source of truth. A PC↔Mobile QR
+  upload session is short-lived, attempt-scoped and single-purpose, and carries
+  no user id, JWT, service-role key or permanent token. Current implementation
+  is NONE; V1 is text-first.
+- **LS LAB for Schools** (institutional credits, per-student assignment,
+  teacher/admin management, usage monitoring) follows B2C, with Education
+  Office / institutional expansion beyond it. Not implemented.
+- **Status on 2026-09-18: Core selection is HOLD until the Owner review next
+  week.** Sections 1–15 above are unchanged by this entry.

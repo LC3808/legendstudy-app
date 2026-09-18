@@ -1503,3 +1503,23 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   URL and Sign in with Apple token revocation.
 - No Production mutation: nothing deployed, no Auth Admin call, no account
   deleted, no DB or RLS change.
+
+## 2026-09-18 — end-of-day product decision closeout
+
+- Auth: account deletion and social-login foundations were verified on the
+  Owner's Mac (focused 63 PASS, full 412 PASS with one existing skip, analyze
+  PASS, delete-account Deno 9/9). Foundations are READY; Production OAuth E2E
+  and Production deletion E2E both remain PENDING, as does Apple Sign in with
+  Apple token revocation.
+- Historical: Phase 1-A1 (2024 reconciliation) was interrupted by quota
+  exhaustion and is marked INTERRUPTED / RECHECK REQUIRED; its trailing figures
+  are preliminary and were not promoted. Gemini's "publication architecture
+  ready" verdict was recorded as an architecture judgement only.
+- LS LAB: recorded the essay-centric product model (전형명 becomes provenance;
+  University → Essay → Track → QuestionSet → Question), the four separate axes,
+  Core-first depth with Owner-only Core selection, the multimodal
+  `answer_format`/`input_mode` split with a staged rollout, and the Public
+  Catalog figures with structural QA PASS / publication CONDITIONAL.
+- The decisive new state: **Core University selection is HOLD until the Owner
+  review next week**, together with the list of work that does not start before
+  it. Documentation only — no code, no Production mutation.

@@ -2,6 +2,76 @@
 
 Last reviewed: 2026-09-18
 
+## 2026-09-18 LS LAB Core University selection — HOLD UNTIL OWNER REVIEW
+
+**CORE UNIVERSITY SELECTION: HOLD.** The Owner has explicitly deferred the
+CORE / NEXT / CATALOG_ONLY decision to next week's review. Nothing below is to
+be decided by an agent in the meantime.
+
+On hold until that review: Core selection; CORE/NEXT/CATALOG_ONLY assignment;
+semantic verification of the 15 candidates; QuestionSet confirmation; Question
+confirmation. **Gold Evaluation Package: NOT STARTED. AI evaluator: NOT
+STARTED.** The 42-university Public Catalog is **PRESERVED** either way.
+
+- **Essay-centric product model (decision).** LS LAB is not organised around a
+  university's administrative 전형명. 논술우수자전형 / 논술전형 / 논술일반전형
+  are all simply **ESSAY (논술)** to a student; the official name is kept as
+  provenance metadata only. Canonical hierarchy: University → Essay → Essay
+  Track → QuestionSet → Question. Track candidates: HUMANITIES,
+  BUSINESS_ECONOMICS, NATURAL_ENGINEERING, MEDICAL_PHARMACY, ARTS_SPORTS,
+  UNKNOWN. **Track, problem format, answer format and input mode are four
+  separate axes and must never be collapsed into one another.**
+- **Core-first depth (decision).** Service depth is CORE / NEXT / CATALOG_ONLY
+  / UNDECIDED. Deep AI evaluation starts with roughly 10–15 Core candidates
+  rather than all 42 shallowly. **Only the Product Owner selects Core** — no
+  automatic score or model decides it. Every candidate is currently UNDECIDED /
+  PENDING / OWNER_REVIEW_REQUIRED.
+- **Owner-verified data principle.** For Core universities the 계열 relations
+  (인문 / 상경 / 자연·공학 / 의예·약학 / 예체능), which 계열 actually share one
+  paper, and the 장문 / 단문 / 약술 / 수리 / 과학 problem and answer types are
+  settled by Owner verification, not by automatic projection. Verification
+  stages (AUTO_DISCOVERED → RESEARCH_VERIFIED → OWNER_REVIEW_REQUIRED →
+  OWNER_VERIFIED → GOLD_PACKAGE_READY → EVALUATOR_VALIDATED) are a concept
+  only; no Production schema implements them.
+- **Public Catalog (Phase 3-A.1 / 3-A.2).** 42 universities, 53 source
+  administrative rows, 50 essay offerings, 101 essay tracks, 330 Quick Links.
+  Structural QA **PASS**; publication readiness **CONDITIONAL**. Automatic
+  EssayTrack projection is **not authoritative** before Owner review. Full
+  42-university semantic perfection is **not** a launch gate, and the full
+  semantic cleanup is not being done now.
+- **Multimodal.** `answer_format` and `input_mode` stay separate. Future input
+  modes: TEXT_EDITOR, HANDWRITTEN_IMAGE, TEXT_AND_IMAGE, SHORT_TEXT, UNKNOWN.
+  Maths/science essays are headed for 종이 풀이 → 촬영 → quality gate → ordered
+  multi-page upload → Vision interpretation → structured answer → evaluator,
+  with original image provenance retained and **OCR text never the sole source
+  of truth**. A future PC↔Mobile handoff uses a short-lived, attempt-scoped,
+  single-purpose QR upload session that never carries a user id, JWT,
+  service-role key or permanent token. **Current implementation: NONE.** V1 is
+  text-first; multimodal is a staged rollout.
+- **Gold Evaluation Package** (official intent, required reasoning, evaluation
+  elements, official criteria, approved reference-answer elements, deduction
+  elements, evaluator configuration) is a **private** asset and must never
+  enter the Public Catalog. University 우수/합격자 답안 are structured as
+  evaluation references, never as sentence-level correct answers.
+- **Core strategy artifacts** prepared by Manus
+  (`core-university-candidate-evidence.csv`, `official-source-inventory.csv`,
+  `university-verification-template.csv`, `owner-decisions-template.csv`,
+  `ls-lab-core-university-owner-review.xlsx` and its report) are **Owner review
+  planning artifacts, not a Production DB and not Core assignment authority**.
+- **Not this week:** additional university research, 42-university semantic
+  cleanup, automatic Core ranking, Gold Package creation, AI evaluator content
+  build. LS LAB university content classification is HOLD.
+- **Next week resume order:** review 15 candidates → Owner decides
+  CORE/NEXT/CATALOG_ONLY/HOLD → fix the Core set → pick Reference University #1
+  → Owner inspects that university's recent official material → confirm tracks
+  and paper sharing → QuestionSet → Question → Gold Evaluation Package v0.1 →
+  AI evaluator benchmark. **Nothing from step 5 onward starts before the Owner
+  review.**
+- LS LAB for Schools (institutional credit purchase, per-student assignment,
+  teacher/admin management, usage monitoring) stays a long-term direction
+  after B2C, with Education Office / institutional expansion beyond it. Not
+  implemented.
+
 ## 2026-09-18 P2-B Account deletion — FOUNDATION IMPLEMENTED (fail-closed)
 
 **PRODUCTION ACCOUNT DELETION: PENDING.** Nothing was deployed and no account
@@ -24,7 +94,9 @@ was deleted. **PRIVACY LIFECYCLE: DESIGNED.**
 - Local study data is owner-keyed on the device; `purgeStudyOwner` removes only
   the departing owner's space, which is the same mechanism that keeps account
   switching clean.
-- 14 Flutter tests, 9 Deno tests. **Mac validation required.**
+- 14 Flutter tests, 9 Deno tests. **Mac verified 2026-09-18:** focused
+  Auth/Deletion 63 PASS, full Flutter 412 PASS with one existing skip, analyze
+  PASS, `deno test` for delete-account 9/9 PASS.
 - Store policy read from the official pages: Apple requires in-app initiation
   and Sign in with Apple token revocation (an open gap for Apple OAuth); Google
   Play additionally requires a web deletion-request URL, which LegendStudy does
@@ -58,7 +130,7 @@ Supabase Dashboard or Auth user was touched.
   link failures.
 - An OAuth seam (`oauthServiceProvider`) makes the flow testable without a
   browser: `test/auth_oauth_test.dart`, 16 tests, including manifest regression
-  guards. **Mac validation required.**
+  guards. **Mac verified 2026-09-18** in the same run as the deletion gate.
 - Account linking: v1 relies on Supabase automatic linking and adds no manual
   linking UI. The exact server-side linking rules are UNVERIFIED and must be
   measured during E2E — same email does not automatically mean same account,
@@ -76,6 +148,17 @@ Supabase Dashboard or Auth user was touched.
   not classified as missing.
 - Production has 23 open `resource_url_expiring` quarantine rows mapped to
   2020–current exams; no 1:1 relation to the 23 exams is assumed.
+- **Phase 1-A1 (2024 reconciliation) is INTERRUPTED — RECHECK REQUIRED.** The
+  Codex run stopped on quota exhaustion. Its last figures (38 exams, 609
+  occurrences, 1,228 resources; 2024 candidate 15 exams, grade 3 → 7) are
+  **preliminary only** and must not be promoted to VERIFIED or COMPLETE. After
+  a Codex reset the reconciliation restarts from the beginning.
+- Gemini independent review returned **CODEX 2024 PUBLICATION ARCHITECTURE
+  READY: YES**, which is an architecture verdict only — it does not make any
+  data publication-ready. The hard gates stand: deterministic keys,
+  `is_active=false` on initial ingestion, duplicate protection, quarantine,
+  URL durability, raw labels, taxonomy, source-time `feed_updated_at`, and
+  preflight/postflight. Historical ingestion and publication stay separate.
 - Phase 1-A is ready for deterministic-key reconciliation of the 2024
   candidate, not for publication. Ingestion order is 2024 → 2023 → 2022 →
   2021 → 2020, followed by 2025/2026 reconciliation. No historical
@@ -153,7 +236,7 @@ was ever sent.
   BehaviorSubject and the SDK starts its deep-link observer inside
   `Supabase.initialize`, so `fireImmediately` already covers it.
 - Focused tests 19 → 27, including regression guards that fail if the platform
-  deep-link registration is ever dropped. **Mac revalidation required.**
+  deep-link registration is ever dropped. **Mac verified 2026-09-18.**
 - Owner actions before E2E: a mailbox that actually receives mail, registering
   the redirect URL in Supabase, and confirming the Site URL. PKCE also requires
   the link to be opened on the install that requested it. See
