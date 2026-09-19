@@ -46,6 +46,9 @@
 - Early-admission acceptance prediction service
 
 These may be promoted into v1.0 only by an explicit product decision recorded in `decisions.md`.
+The long-term shape of the achievement system and the admission-prediction
+service is recorded in [roadmap-academic-analytics.md](roadmap-academic-analytics.md);
+that roadmap does not promote either into v1.0.
 
 ## UX principle
 

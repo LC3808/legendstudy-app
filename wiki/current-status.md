@@ -1,6 +1,30 @@
 # Current Status
 
-Last reviewed: 2026-09-18
+Last reviewed: 2026-09-19
+
+## 2026-09-19 Academic Analytics → Achievement → Admissions Engine — PLANNED
+
+Documentation only; nothing was implemented and no Production change was made.
+
+- Study and Mock Exam are now recorded as the first data sources of a longer
+  chain: Subject Study Tracking → Academic Record → Academic Analytics →
+  Achievement Engine, with Academic Profile → Target University/Department →
+  Admissions Engine alongside. Sequence P1–P7 is a data dependency, not a forced
+  release order.
+- The badge idea returns as an **Achievement Engine** based on real learning
+  behaviour and confirmed growth, with behaviour-based and growth-based
+  achievements separated. Prediction-style badges are forbidden, and Achievement
+  and Admissions stay separate systems.
+- Binding boundaries: study time is not a direct admission-probability
+  predictor; correlation is not stated as causation; a score gap is not an
+  admission probability; LS LAB essay results are never summed onto the
+  모의고사/내신 score scale.
+- Status: Study core and Mock Exam/scoring are existing implementations.
+  Academic Record, manual score entry, Subject Study Tracking, Academic
+  Analytics, Achievement Engine, Target University/Department, Admissions Engine
+  and admission prediction are all **NOT IMPLEMENTED**.
+- Detail: [roadmap-academic-analytics.md](roadmap-academic-analytics.md);
+  durable rules in [decisions.md](decisions.md). v1.0 scope is unchanged.
 
 ## 2026-09-18 LS LAB Core University selection — HOLD UNTIL OWNER REVIEW
 

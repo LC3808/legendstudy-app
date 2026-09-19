@@ -189,3 +189,40 @@ Day 4-A establishes minimal data states only; no final screen/card design is ado
   scope; implementation is staged and their backend is outside Day 5.
 - wiki/ui-ux-v1.md is the canonical UI implementation specification, normalized
   from the owner's approved Day 5 directive; see its provenance statement.
+
+## 2026-09-19 — Study analytics, achievement and admissions are three separate layers
+
+Study and Mock Exam are the first data sources of a longer chain, not standalone
+features: Study → Subject Study Tracking → Academic Record → Academic Analytics
+→ Achievement Engine, and Academic Profile → Target University/Department →
+Admissions Engine. The boundaries are binding:
+
+- Study time belongs to learning diagnosis; score change belongs to Academic
+  Analytics; admission probability belongs to the Admissions Engine and is
+  computed only from 내신, 모의고사 성적, 대학별 반영 규칙, 모집단위, 수능최저,
+  과거 입결 and official 전형 data.
+- **Study time is never a direct predictor of admission probability.** A
+  structure such as "100시간 공부 → 합격확률 +10%" is rejected.
+- Correlation between study time and score change is expressed as correlation,
+  trend or observed change — never as causation.
+- A score gap against a target is not an admission probability.
+- LS LAB 논술 evaluation results are never summed onto the same score scale as
+  모의고사/내신; each domain stays independent and is combined only as context in
+  the Academic Profile.
+
+## 2026-09-19 — Achievements record behaviour and confirmed growth, never prediction
+
+The badge idea returns as an Achievement Engine driven by real learning
+behaviour and confirmed growth, not by logins, ads or arbitrary activity.
+Behaviour-based and growth-based achievements are modelled separately, and study
+volume alone never earns a growth-based achievement.
+
+**Prediction-style badges are forbidden** — nothing of the shape "서울대 합격
+가능", "합격 유력" or "상향지원 성공". The Achievement Engine and the Admissions
+Engine stay separate systems: an achievement is never an input to an admission
+estimate, and an admission estimate is never surfaced as a badge.
+
+Both this and the entry above are roadmap decisions. They do **not** promote the
+advanced achievement system or the early-admission prediction service into v1.0;
+`product-scope.md` still excludes both. See
+[roadmap-academic-analytics.md](roadmap-academic-analytics.md).

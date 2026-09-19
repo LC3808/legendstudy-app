@@ -1523,3 +1523,22 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - The decisive new state: **Core University selection is HOLD until the Owner
   review next week**, together with the list of work that does not start before
   it. Documentation only — no code, no Production mutation.
+
+## 2026-09-19 — Academic Analytics and Achievement roadmap recorded
+
+- Product decision: Study and Mock Exam are not standalone features but the
+  first data sources of Subject Study Tracking → Academic Record → Academic
+  Analytics → Achievement Engine, with Academic Profile → Target
+  University/Department → Admissions Engine alongside.
+- The earlier badge/achievement idea was reinstated as an Achievement Engine
+  based on learning behaviour and confirmed growth, with the two kinds modelled
+  separately, prediction-style badges forbidden, and the Achievement and
+  Admissions engines kept apart.
+- Recorded the binding boundaries — study time is not an admission-probability
+  predictor, correlation is not causation, a score gap is not an admission
+  probability, and LS LAB essay results never share a score scale with
+  모의고사/내신.
+- New `wiki/roadmap-academic-analytics.md`, two durable entries in
+  `decisions.md`, a PLANNED entry in `current-status.md`, an index link and a
+  cross-reference from `product-scope.md`. v1.0 scope unchanged. Documentation
+  only; no code, no schema, no Production mutation.
