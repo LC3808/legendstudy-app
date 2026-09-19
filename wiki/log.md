@@ -1584,11 +1584,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 ## 2026-09-20 — Historical Phase 1-A2 Owner preflight evidence reviewed
 
 - Owner SELECT reconfirmed 23/363/739, no 2024 exams, and 23 open expiration
-  cases for 2025/2026. Final empty result is specifically absence of content
-  attached to seven grade-3 source identities; bare sources/eight other
-  candidates/global guards remain unverified.
-- Added compact layer/gate report and a SELECT-only 15-candidate LEFT JOIN
-  probe. A1 remains COMPLETE; A2 full preflight incomplete pending evidence;
-  publication NOT READY. Conditional 38/609/1,228 is arithmetic only.
+  cases for 2025/2026. The initial final empty result covered only seven
+  grade-3 content parents. Follow-up 15-row LEFT JOIN probe now confirms all
+  source/content IDs NULL and zero child/provenance/exact foreign URL/slug
+  conflicts for all candidates. This closes A2 structural preflight in scope.
+- Updated existing report/handoff and current status; A1 remains COMPLETE,
+  A2 structural preflight COMPLETE, publication NOT READY. No duplicate log
+  entry. Earlier A1 CSVs remain snapshots, with current scoped evidence in A2.
+- Next is semantic/quarantine/file validation: provisional mapping, three
+  ambiguous files and ten grade-3 quarantine cases remain unresolved; keep
+  is_active=false and require final Owner approval. No automatic semantic fix.
 - Offline tests 150 PASS, including historical CSV/key regression; diff check
-  PASS. No Production mutation, application/ingestion behavior change or push.
+  PASS. Production mutation 0; no publication SQL, behavior changes or push.

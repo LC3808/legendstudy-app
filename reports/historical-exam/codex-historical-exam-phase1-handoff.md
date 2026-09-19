@@ -1,7 +1,8 @@
 # Historical Phase 1 handoff — revalidated 2026-09-20
 
 **Phase 1-A1 inventory/reconciliation/bounded dry-run: COMPLETE.**
-**2024 PUBLICATION READY: NO. Production exact-key status: UNVERIFIED.**
+**Phase 1-A2 structural preflight COMPLETE (Owner probe scope).**
+**2024 PUBLICATION READY: NO. No observed candidate natural-key/provenance overlap.**
 Starting HEAD `6474b4e`. This supersedes the interrupted September 18 run;
 its temporary output was neither available nor accepted as evidence.
 
@@ -18,28 +19,31 @@ its temporary output was neither available nor accepted as evidence.
 - Owner Production baseline: 2020–2024 0/0/0; 2025 15/246/507;
   2026 8/117/232; total 23/363/739. 23 open expiration cases are not assumed
   to map one-to-one to exams. Future/unpublished 2026 sessions are not missing.
-- Aggregate counts alone do not establish MATCH/INSERT/UPDATE/NOOP/CONFLICT.
-  Source/partial-content collisions remain UNVERIFIED pending row-level evidence.
+- Subsequent Owner 15-row probe found no candidate source/content/provenance
+  overlap and zero exact canonical foreign URL/slug conflicts. This is scoped
+  natural-key evidence, not semantic/file verification or publication approval.
 
 ## Phase 1-A2 evidence update — 2026-09-20
 
-Owner has executed `2024-validation.sql`: baseline 23/363/739 reconfirmed,
-2024 exams absent. Final empty result only rules out content attached to the
-seven grade-3 source identities, not bare sources/eight other candidates/global
-collision guards. See [A2 report](2024-production-preflight.md). Full exact-key
-preflight remains INCOMPLETE / UNVERIFIED; publication remains NO.
+Owner executed both SELECT packages. Baseline remains 23/363/739 with no 2024
+exams. The first final empty query covered only seven grade-3 content parents.
+The later `2024-preflight-probe.sql` returned all 15 candidates: source/content
+IDs NULL; all occurrence/resource/content-key/provenance and exact foreign
+canonical URL/slug conflict counts zero. **A2 structural preflight COMPLETE**
+within that scope. See [A2 report](2024-production-preflight.md) for all fields,
+parent-absence reasoning, exact-string limits and independent publication gates.
+The earlier A1 CSV UNVERIFIED fields remain historical snapshot evidence.
 
-## Exact next step — preflight only
+## Exact next step — semantic/quarantine/file validation only
 
-Owner runs `2024-preflight-probe.sql` on LegendStudy project
-`stlhijzpjfgwwdgunlsd` and provides all 15 credential-free rows, plus relevant
-first-four-SELECT outputs from `2024-validation.sql` if existing rows are found.
-The SQL is SELECT-only and was NOT executed here. Compare natural keys using
-`2024-candidate-keys.csv`, resolving Production parent IDs through their keys;
-never assume candidate UUIDs equal Production UUIDs. Also check source URL and
-content slug guards. Stop on unexpected mappings, partial rows or collisions.
-Do not request or paste passwords/JWTs/keys. Use a secure local snapshot outside
-Git for any expanded DB export.
+Owner confirms meaning or HOLD for the three ambiguous files (1618/1646/1649).
+Review raw subject pairings and actual linked-file/type/availability evidence in
+an explicitly bounded follow-up. All 10 grade-3 candidate quarantine cases remain
+unresolved; mappings provisional; initial rows inactive. No semantic decision is
+automatically inferred from the clean identity probe. No publication approval.
+Recheck structural preflight and exact write-manifest guards before any future
+separately authorized write; preserve existing 2025/2026 data. No credentials or
+raw signed URLs in reports, no downloads/mirroring/viewer implementation here.
 
 ## Future controlled procedure — separate authorization/task
 

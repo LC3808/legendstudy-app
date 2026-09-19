@@ -209,19 +209,22 @@ Supabase Dashboard or Auth user was touched.
 - Owner Production baseline preserved: 2020–2024 zero; 2025 15/246/507,
   2026 8/117/232; total 23/363/739. No inference about future/unpublished 2026
   sessions. Production's 23 open expiration rows are not assumed 1:1 with exams.
-- **Production exact-key status UNVERIFIED; 2024 PUBLICATION READY: NO.**
-  Aggregate zero does not exclude partial sources/content or cross-year key
-  collisions. Owner SELECT evidence, ambiguous subject/pair review, URL durability
-  and a separately reviewed 2024 apply scope remain gates.
-- Validation: existing ingestion 146 PASS plus 4 historical report/semantic
-  regression tests PASS; CSV checks and static/credential checks PASS.
-- Phase 1-A2: Owner executed the SELECT-only validation and reconfirmed
-  Production 23/363/739 with no 2024 exams. The final empty SELECT proves no
-  content items attached to the seven grade-3 source identities; it does not
-  exclude bare sources, the other eight candidates, or global slug/URL conflicts.
-  **A2 full exact-key preflight INCOMPLETE / UNVERIFIED**; A1 stays COMPLETE.
-- Next: Owner provides all 15 rows from `reports/historical-exam/2024-preflight-probe.sql`.
-  See [A2 evidence and gates](../reports/historical-exam/2024-production-preflight.md)
+- **Phase 1-A2 structural preflight COMPLETE (Owner 15-row probe scope).**
+  Owner reconfirmed Production 23/363/739, no 2024 exams, and subsequently
+  reported all 15 source/content IDs NULL with zero child/provenance and exact
+  foreign canonical URL/slug conflicts. Natural-key overlap absent within that
+  scope; semantic duplicates, URL aliases/file bytes and unrelated UUID PK
+  collisions are not proven absent. A1 remains COMPLETE.
+- **2024 PUBLICATION READY: NO.** Semantic review, provisional subject mapping,
+  ambiguous files (생화활과윤리 / 사회문화1 / 수학(미정)), all 10 grade-3 candidate
+  quarantine cases and actual file availability remain unresolved. Keep inactive
+  candidates; final Owner publication approval is still required.
+- Validation rerun: 150 ingestion/historical tests PASS (including CSV/key
+  regression); diff check PASS. No Production mutation or publication SQL.
+- Next: **semantic/quarantine/file validation**, beginning with Owner meaning
+  review of posts 1618/1646/1649; no automatic remap or publication. Refresh
+  structural preflight before a future authorized write. See
+  [A2 evidence and gates](../reports/historical-exam/2024-production-preflight.md)
   and [historical handoff](../reports/historical-exam/codex-historical-exam-phase1-handoff.md).
 - Future In-App PDF Viewer Pilot remains separate: recent three years' grade-3
   June/September evaluation mocks and CSAT. No download/mirror/viewer work here.

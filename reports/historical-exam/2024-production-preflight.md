@@ -1,8 +1,9 @@
 # Phase 1-A2 — Production preflight reconciliation
 
-2026-09-20; starting HEAD `78f8144`, branch `codex/day-7-school-neis`.
+2026-09-20; initial review HEAD `78f8144`; Owner-probe closeout starting HEAD
+`74c7872`, branch `codex/day-7-school-neis`.
 Initial tracked tree clean; existing four untracked directories preserved.
-**Evidence review recorded; full exact-key preflight INCOMPLETE / UNVERIFIED.**
+**Phase 1-A2 structural preflight COMPLETE within the Owner probe scope.**
 Phase 1-A1 remains COMPLETE. **2024 PUBLICATION READY: NO.**
 
 ## Owner evidence, not a new Codex DB inspection
@@ -45,28 +46,61 @@ source or deterministic collision anywhere'. It does NOT prove:
 
 No credential or signed locator is needed to close these gaps.
 
+## Owner 15-candidate probe closeout
+
+Owner subsequently executed `2024-preflight-probe.sql` in Production SQL Editor
+and explicitly reported all 15 rows for post IDs:
+1614, 1615, 1616, 1617, 1618, 1619, 1620, 1621, 1634, 1635, 1636,
+1646, 1647, 1648, 1649. These exactly match the probe and candidate manifest.
+For EVERY row, Owner reported:
+
+| Probe field | Value |
+|---|---|
+| existing_source_id | NULL |
+| existing_content_id | NULL |
+| existing_occurrences | 0 |
+| existing_resources | 0 |
+| all_content_keys_on_source | 0 |
+| resources_using_source_provenance | 0 |
+| foreign_identity_url_conflicts | 0 |
+| foreign_identity_slug_conflicts | 0 |
+
+This is Owner-reported evidence, not a new Codex DB query or raw export.
+The preceding seven-post empty query retains its narrower meaning; the NEW
+15-row LEFT JOIN probe closes the bare-source/remaining-eight/global-guard gaps.
+
 ## Layer-by-layer evidence
 
 | Layer | Candidate count | Exact Production overlap | Status |
 |---|---:|---|---|
-| source_posts | 15 | unknown, including the seven bare-source possibilities | UNVERIFIED |
-| content_items | 15 | 0 for seven grade-3 source parents; remaining eight unknown | PARTIAL / UNVERIFIED overall |
-| exams | 15 | 0 descendants under those seven parents; all 2024-year exams absent; other candidate keys under wrong years not excluded | PARTIAL / UNVERIFIED exact overall |
-| exam_occurrences (exam_subjects) | 246 | 0 under seven absent parents (151 local candidate occurrences); remaining 95 unknown | PARTIAL / UNVERIFIED overall |
-| resources | 489 | 0 under seven absent parents (299 local resources); remaining 190 and cross-parent provenance unknown | PARTIAL / UNVERIFIED overall |
+| source_posts | 15 | 0 for (legendstudy, candidate external_post_id) | PASS — Owner probe |
+| content_items | 15 | 0 for resolved source identity + main; no other content on these absent sources | PASS — parent absence |
+| exams | 15 | 0 under these absent content parents | PASS — parent absence |
+| exam_occurrences (exam_subjects) | 246 | 0 compound-key overlaps under these absent parents | PASS — parent absence |
+| resources | 489 | 0 compound-key overlaps under these absent parents; no provenance via those sources | PASS — parent absence |
 
-Local compound-key collisions and merge candidates remain zero. Production
-MATCH / CANDIDATE_ONLY / INSERT / UPDATE / NOOP / CONFLICT per full layer are
-not assigned from aggregates. Repeated resource keys under different content
-parents are not automatically a compound-key collision or semantic equality.
-Candidate CSV production_key_status remains UNVERIFIED to avoid overstating the
-full-layer result; this report records the narrower newly established absence.
+Child zero counts with NULL parent IDs are consequences of parent absence, not
+independent scans for matching resource keys anywhere in Production. Required FK
+contracts mean those exact natural-key children cannot exist without the parents.
+Foreign URL guards compare EXACT canonical `https://legendstudy.com/<post>`
+strings; slug guards compare EXACT `legendstudy-<post>-main` strings across
+identities. Both returned zero for all candidates. No URL-alias/redirect/byte-level
+file-duplicate/global semantic equivalence check is implied. Deterministic UUID
+PK collisions against unrelated identities are not tested by this probe either;
+future writer/preflight must fail closed on any such conflict.
+
+Local compound-key collisions and merge candidates remain zero. Within the
+probe's natural-key and exact URL/slug scope: candidates are CANDIDATE_ONLY,
+MATCH=0 and observed CONFLICT=0. Production-only content elsewhere is outside
+this candidate probe, not zero. No insertion or publication is authorized.
+The Phase 1-A1 CSVs retain their original UNVERIFIED snapshot fields; this dated
+A2 report supersedes them for current probe-scoped Production overlap status.
 
 ## Publication gates
 
 | Gate | Status | Evidence / remaining condition |
 |---|---|---|
-| 1 deterministic identity collision | UNVERIFIED | local checks PASS; seven content parents absent; bare sources, other eight and global guards outstanding |
+| 1 deterministic identity collision | PASS (probe scope) | all 15 natural source/content/provenance identities absent; exact canonical URL/slug guards zero; not semantic/file/UUID-global verification |
 | 2 semantic mapping | HOLD | exam/file meaning and semantic duplicate review incomplete; metadata is not linked-file verification |
 | 3 quarantine resolution | HOLD | grade-3 candidate 7 expiration + 3 subject-unknown cases unresolved; separate from Production 23 |
 | 4 URL/file availability | UNVERIFIED | unsigned identity locators, NULL file_url, unknown/unchecked; no payload inspected |
@@ -83,20 +117,30 @@ future effects cannot be guaranteed by these SELECT summaries: all collisions
 must fail closed, with exact before/after snapshots and a reviewed 2024 scope.
 Current Pilot C scope is not authorization to write 2024 rows.
 
-## Exact next action
+## Exact next action — semantic/quarantine/file validation, NOT publication
 
-Owner runs `2024-preflight-probe.sql` and supplies all 15 result rows. It uses
-LEFT JOINs so bare sources and absent content remain visible; it also checks
-canonical source-URL and global slug guards, including other source identities,
-and cross-parent resource provenance. No URL response bodies or secrets selected.
+Owner reviews the raw resource evidence for 1618 (생화활과윤리), 1646
+(사회문화1), 1649 (수학(미정)) and records confirmed meaning or continued HOLD.
+Do not infer corrected subject labels. Use `2024-grade3-subject-pairing.csv`
+for the 141 observed question/answer pairs, 7 question-only and 3 review-required
+occurrences, and `2024-grade3-batch.csv` for exact resource identities/labels.
 
-If any source/content/provenance row exists, provide the relevant first four
-SELECT outputs from `2024-validation.sql` for natural-key/value comparison;
-do not repair/update it. A clean probe can establish key absence, but semantic,
-file, quarantine and approval gates still remain. No publication command now.
+Next separately scoped work should record per-resource source evidence, actual
+availability, file/type/subject agreement and quarantine disposition. Current
+299 grade-3 resources have no verified downloadable file targets. No case is
+closed by identity absence: 7 expiration + 3 subject-unknown cases remain open
+in the candidate plan (not new Production rows). Keep provisional mappings,
+NULL/unscoped ambiguous files and is_active=false until the relevant decisions.
+Owner final publication approval is still absent. No automatic remapping,
+publication SQL, active-state change, downloads/mirrors or link replacement now.
+
+Before a future authorized write, refresh time-sensitive preflight and validate
+the exact write manifest/PK guards and preservation snapshots; this result is
+not a perpetual guarantee that Production cannot change. Existing 2025/2026
+rows must never be updated, merged, replaced or re-parented by the new batch.
 Viewer/Mock Exam priority remains recent grade-3 materials; metadata expansion
-and Viewer migration are separate. No mirror/Storage/outbound-link/viewer/rights
-work performed.
+and Viewer migration are separate. This closeout stops before Owner semantic
+judgement or any Production mutation is required.
 
 ## Validation and scope
 
@@ -106,5 +150,5 @@ SELECT probes were statically inspected against repository column contracts;
 not executed by Codex, and no new live DB/schema claim is made.
 Production mutation **0**; no push. No parser, candidate fixture or app changes.
 
-HISTORICAL PHASE 1-A2 PREFLIGHT COMPLETE: NO
+HISTORICAL PHASE 1-A2 PREFLIGHT COMPLETE: YES
 2024 PUBLICATION READY: NO
