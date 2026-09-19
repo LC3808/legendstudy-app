@@ -1580,3 +1580,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   checks PASS. Production exact keys remain UNVERIFIED; added unexecuted Owner
   SELECT pre/post evidence and controlled-batch handoff. Inventory/dry run COMPLETE;
   publication NOT READY. No Production mutation, PDF download, Storage or push.
+
+## 2026-09-20 — Historical Phase 1-A2 Owner preflight evidence reviewed
+
+- Owner SELECT reconfirmed 23/363/739, no 2024 exams, and 23 open expiration
+  cases for 2025/2026. Final empty result is specifically absence of content
+  attached to seven grade-3 source identities; bare sources/eight other
+  candidates/global guards remain unverified.
+- Added compact layer/gate report and a SELECT-only 15-candidate LEFT JOIN
+  probe. A1 remains COMPLETE; A2 full preflight incomplete pending evidence;
+  publication NOT READY. Conditional 38/609/1,228 is arithmetic only.
+- Offline tests 150 PASS, including historical CSV/key regression; diff check
+  PASS. No Production mutation, application/ingestion behavior change or push.

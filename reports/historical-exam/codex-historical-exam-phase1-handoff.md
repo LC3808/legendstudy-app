@@ -21,10 +21,19 @@ its temporary output was neither available nor accepted as evidence.
 - Aggregate counts alone do not establish MATCH/INSERT/UPDATE/NOOP/CONFLICT.
   Source/partial-content collisions remain UNVERIFIED pending row-level evidence.
 
+## Phase 1-A2 evidence update — 2026-09-20
+
+Owner has executed `2024-validation.sql`: baseline 23/363/739 reconfirmed,
+2024 exams absent. Final empty result only rules out content attached to the
+seven grade-3 source identities, not bare sources/eight other candidates/global
+collision guards. See [A2 report](2024-production-preflight.md). Full exact-key
+preflight remains INCOMPLETE / UNVERIFIED; publication remains NO.
+
 ## Exact next step — preflight only
 
-Owner runs `2024-validation.sql` on LegendStudy project
-`stlhijzpjfgwwdgunlsd` and provides the credential-free row-level results.
+Owner runs `2024-preflight-probe.sql` on LegendStudy project
+`stlhijzpjfgwwdgunlsd` and provides all 15 credential-free rows, plus relevant
+first-four-SELECT outputs from `2024-validation.sql` if existing rows are found.
 The SQL is SELECT-only and was NOT executed here. Compare natural keys using
 `2024-candidate-keys.csv`, resolving Production parent IDs through their keys;
 never assume candidate UUIDs equal Production UUIDs. Also check source URL and
@@ -85,4 +94,5 @@ No PDF download, mirror, upload, viewer or migration has been implemented.
 - `2024-candidate-reconciliation.csv`, `2024-candidate-keys.csv`: 2024 facts/keys.
 - `2024-grade3-dry-run.md`, `2024-grade3-batch.csv`: reviewable dry-run rows.
 - `2024-grade3-subject-pairing.csv`: raw-key material pairing, not readiness.
-- `2024-validation.sql`: Owner pre/post SELECT evidence, unexecuted.
+- `2024-validation.sql`: executed by Owner; only summarized results supplied.
+- `2024-production-preflight.md`, `2024-preflight-probe.sql`: A2 limits and next evidence.

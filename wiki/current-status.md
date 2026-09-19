@@ -215,8 +215,14 @@ Supabase Dashboard or Auth user was touched.
   and a separately reviewed 2024 apply scope remain gates.
 - Validation: existing ingestion 146 PASS plus 4 historical report/semantic
   regression tests PASS; CSV checks and static/credential checks PASS.
-- Next: Owner runs the SELECT-only `reports/historical-exam/2024-validation.sql`
-  before any publication planning. See [historical handoff](../reports/historical-exam/codex-historical-exam-phase1-handoff.md).
+- Phase 1-A2: Owner executed the SELECT-only validation and reconfirmed
+  Production 23/363/739 with no 2024 exams. The final empty SELECT proves no
+  content items attached to the seven grade-3 source identities; it does not
+  exclude bare sources, the other eight candidates, or global slug/URL conflicts.
+  **A2 full exact-key preflight INCOMPLETE / UNVERIFIED**; A1 stays COMPLETE.
+- Next: Owner provides all 15 rows from `reports/historical-exam/2024-preflight-probe.sql`.
+  See [A2 evidence and gates](../reports/historical-exam/2024-production-preflight.md)
+  and [historical handoff](../reports/historical-exam/codex-historical-exam-phase1-handoff.md).
 - Future In-App PDF Viewer Pilot remains separate: recent three years' grade-3
   June/September evaluation mocks and CSAT. No download/mirror/viewer work here.
   Production mutation **0**. No ingestion, activation, migration or push.
