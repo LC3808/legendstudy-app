@@ -1,0 +1,16 @@
+year,grade,exam_family,month,source,external_post_id,source_content_key,subject_count,resource_count,candidate_status,mapping_status,production_key_status,feed_updated_at
+2024,1,national_mock,3,legendstudy,1616,main,6,13,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-03-28
+2024,1,national_mock,6,legendstudy,1620,main,6,13,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-06-15
+2024,1,national_mock,9,legendstudy,1636,main,6,12,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-09-08
+2024,1,national_mock,10,legendstudy,1648,main,6,13,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-11-07
+2024,2,national_mock,3,legendstudy,1615,main,17,35,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-03-28
+2024,2,national_mock,6,legendstudy,1619,main,17,35,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-06-15
+2024,2,national_mock,9,legendstudy,1635,main,19,34,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-09-08
+2024,2,national_mock,10,legendstudy,1647,main,18,35,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-11-07
+2024,3,national_mock,3,legendstudy,1614,main,17,34,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-03-28
+2024,3,national_mock,5,legendstudy,1617,main,21,43,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-05-09
+2024,3,evaluation_mock,6,legendstudy,1618,main,21,43,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-06-15
+2024,3,national_mock,7,legendstudy,1621,main,21,42,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-07-24
+2024,3,evaluation_mock,9,legendstudy,1634,main,26,46,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-09-07
+2024,3,national_mock,10,legendstudy,1646,main,21,42,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-10-18
+2024,3,csat,11,legendstudy,1649,main,24,49,INACTIVE_REVIEW_REQUIRED,provisional,UNVERIFIED,2024-11-16

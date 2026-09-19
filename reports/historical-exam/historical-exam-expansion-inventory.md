@@ -1,6 +1,12 @@
 # Historical Exam Expansion — Phase 1-A Inventory
 
-Status: **PRODUCTION COVERAGE VERIFIED / Phase 1-A reconciliation ready**
+Status: **PRODUCTION COVERAGE VERIFIED / Phase 1-A1 inventory and dry-run COMPLETE**
+
+2026-09-20 update: the candidate table below describes the original dated
+1,205-resource snapshot. Revalidated current sample is 38/609/1,228 after 23
+Box additions in 2025/2026. See [2024 reconciliation](2024-reconciliation.md).
+2024 is directly verified as 15/246/489 locally; Production exact-key evidence
+remains UNVERIFIED and publication is NOT READY. No Production mutation.
 
 ## Scope and year semantics
 
@@ -55,9 +61,9 @@ Production quarantine contains 23 open `resource_url_expiring` rows mapped to
 2020–current exams. The 23 quarantine rows are not assumed to be a 1:1 match
 with the 23 exams.
 
-The 2024 candidate has 15 exams, but `15 candidate - 0 Production` is only an
-inferred reconciliation gap. It is not a confirmed 2024 missing count until
-deterministic keys are compared.
+The 2024 candidate is now directly recounted as 15 local exams. The Owner
+exam-scope zero remains valid, but source/partial-content absence and exact
+Production-key action counts remain UNVERIFIED until row-level keys are compared.
 
 ## Pipeline and safety audit
 

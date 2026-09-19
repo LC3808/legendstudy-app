@@ -1565,3 +1565,18 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   `decisions.md`, a PLANNED entry in `current-status.md`, an index link and
   cross-references from `product-scope.md` and `architecture.md`. v1.0 scope
   unchanged. Documentation only; no code, no schema, no Production mutation.
+
+## 2026-09-20 — Historical Phase 1-A1 resumed and inventory closed
+
+- Revalidated from starting HEAD `6474b4e`; interrupted temporary work was not
+  treated as evidence. Historical/current parser × fixture replay explains all
+  23 additional Box resources from `bf89548`; original 1,205 rows unchanged.
+- Current 38/609/1,228; 2024 15/246/489; grade 3 7/151/299. Wrote exact drift,
+  natural-key, candidate, resource and raw-subject-pairing CSVs and dry-run reports.
+- All candidate keys unique, no merge candidates, inactive rows, source-clock
+  determinism and raw-label safety verified. Three ambiguous grade-3 files remain
+  unscoped; 7 candidate URL expiration advisories remain. No publication claim.
+- Ingestion 146 PASS + 4 historical regression tests PASS; CSV/static/credential
+  checks PASS. Production exact keys remain UNVERIFIED; added unexecuted Owner
+  SELECT pre/post evidence and controlled-batch handoff. Inventory/dry run COMPLETE;
+  publication NOT READY. No Production mutation, PDF download, Storage or push.

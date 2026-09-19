@@ -1,0 +1,781 @@
+table,external_post_id,natural_key,production_key_status
+source_posts,1616,"[""legendstudy"", ""1616""]",UNVERIFIED
+content_items,1616,"[""legendstudy"", ""1616"", ""main""]",UNVERIFIED
+exams,1616,"[""legendstudy"", ""1616"", ""main""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""과학""]",UNVERIFIED
+exam_subjects,1616,"[""legendstudy"", ""1616"", ""main"", ""사회""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""5jrOG/btsGcqQQbRc""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""zgHhr/btsF9eY9wEu""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""BfRe8/btsF9NfIY4e""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""mEo0I/btsGaZ0P276""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""bp0pfA/btsGax4zuvI""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""bWEicy/btsF9dTuDEe""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""ckMcwE/btsGaEvMseY""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""FtUk3/btsGaYnlpPM""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""cJbN2D/btsGbcy5Kk9""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""bwF2ke/btsGadZtNqG""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""bfj3bq/btsGabtSVtJ""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""0vqYq/btsF9zWlMnK""]",UNVERIFIED
+resources,1616,"[""legendstudy"", ""1616"", ""main"", ""legendstudy"", ""1616"", ""H0TJF/btsGawLnfW1""]",UNVERIFIED
+source_posts,1620,"[""legendstudy"", ""1620""]",UNVERIFIED
+content_items,1620,"[""legendstudy"", ""1620"", ""main""]",UNVERIFIED
+exams,1620,"[""legendstudy"", ""1620"", ""main""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""과학""]",UNVERIFIED
+exam_subjects,1620,"[""legendstudy"", ""1620"", ""main"", ""사회""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""cehZci/btsHZJQiQCG""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""lpUef/btsHZLAEEkf""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""zr86F/btsH1OB9hxO""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""bnw5z7/btsH0x2wkvt""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""dzGNgI/btsH0XT7wYA""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""xC5sy/btsH1Fk0jH2""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""brz01W/btsH0ME9rjM""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""4d8NO/btsH0CvTEOe""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""nOO7K/btsH0mfJXjZ""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""plKDU/btsH0p4DYId""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""cXJlIy/btsH0ytBfOA""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""5lkTM/btsH0afDirm""]",UNVERIFIED
+resources,1620,"[""legendstudy"", ""1620"", ""main"", ""legendstudy"", ""1620"", ""caPqgf/btsHZTZBr0b""]",UNVERIFIED
+source_posts,1636,"[""legendstudy"", ""1636""]",UNVERIFIED
+content_items,1636,"[""legendstudy"", ""1636"", ""main""]",UNVERIFIED
+exams,1636,"[""legendstudy"", ""1636"", ""main""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""통합과학""]",UNVERIFIED
+exam_subjects,1636,"[""legendstudy"", ""1636"", ""main"", ""통합사회""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""bf2BHf/btsJBqBLtQu""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""bHNTvS/btsJvUgKvBY""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""kBEBz/btsJt88Xte2""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""DzlXu/btsJtGY4J0U""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""HyWTO/btsJuYRKJzP""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""mDdhB/btsJt9NgPtJ""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""I13Dp/btsJwfrqUB3""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""dGUH29/btsJuHCGD8b""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""bsWjal/btsJuHvVGiz""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""bFkpcS/btsJuhR5Ebv""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""nCMBe/btsJwfdTzmW""]",UNVERIFIED
+resources,1636,"[""legendstudy"", ""1636"", ""main"", ""legendstudy"", ""1636"", ""btS6kf/btsJt1aV2fb""]",UNVERIFIED
+source_posts,1648,"[""legendstudy"", ""1648""]",UNVERIFIED
+content_items,1648,"[""legendstudy"", ""1648"", ""main""]",UNVERIFIED
+exams,1648,"[""legendstudy"", ""1648"", ""main""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""과학""]",UNVERIFIED
+exam_subjects,1648,"[""legendstudy"", ""1648"", ""main"", ""사회""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""AtEgB/btsJ81VHej9""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""ZJlpF/btsJ8UhXO6v""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""lxpw9/btsKbhvtCyz""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""m0su1/btsKaxy43SO""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""c5D0tw/btsJ890wH6B""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""nzCmA/btsJ9w8ITmG""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""c1tY5G/btsJ95JOgjP""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""dQGpZd/btsKblYYCHU""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""djtHgH/btsKa9qV7hN""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""Pp8Q6/btsJ9oXqCiY""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""qahsd/btsJ9LEP9Sz""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""Ea4UD/btsKbfYKghm""]",UNVERIFIED
+resources,1648,"[""legendstudy"", ""1648"", ""main"", ""legendstudy"", ""1648"", ""dgi4ob/btsKayLtCoy""]",UNVERIFIED
+source_posts,1615,"[""legendstudy"", ""1615""]",UNVERIFIED
+content_items,1615,"[""legendstudy"", ""1615"", ""main""]",UNVERIFIED
+exams,1615,"[""legendstudy"", ""1615"", ""main""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""물리학""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""생명과학""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""지구과학""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""화학""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1615,"[""legendstudy"", ""1615"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""VStVz/btsGbUYY0fZ""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""ehJC7u/btsF9BGy3x0""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bQI7wc/btsF9D5sFWD""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""Hbxn0/btsGaC5QA54""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bDxIhT/btsF9E4muBh""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""b7pO05/btsGavZ0LDB""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""DJ6pZ/btsGbXnO8fD""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""coMarC/btsGbHr1HdW""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""u1KQo/btsGbbGT29E""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""rTp4h/btsGaXB13hZ""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""rJw8o/btsGbbmCfA2""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""cKzNEg/btsGbUxXTG2""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""skbwi/btsGbTltq7A""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""2x2uV/btsF9M17yjv""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""Jsw7U/btsGawR6P96""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bhFXS8/btsGaEvLYTE""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""TbYDg/btsF9EpLqoq""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""oZi3s/btsF9HNohiu""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""caCIAI/btsGbR81DLe""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bq3p0E/btsF91rgu8A""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""dgdNTb/btsGbQ98Jic""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""cs1sz7/btsF9B0Tlmh""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bCLOZA/btsGcJo9FKq""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""mycfq/btsF9HGB09w""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bEjEdL/btsGbStlQg5""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""Pvp6s/btsF9OeCgta""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bRWUTF/btsGcHrk6GR""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""tDyA3/btsGazVCJr1""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""Xxj1a/btsGcs8YH6E""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""8pLWl/btsF9L3exEk""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""mJA14/btsF9yXtE7b""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""B716I/btsF9FB17um""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bwYifH/btsF89ctVvj""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""bdRerS/btsGbF12GSg""]",UNVERIFIED
+resources,1615,"[""legendstudy"", ""1615"", ""main"", ""legendstudy"", ""1615"", ""mZMsM/btsGadLXIem""]",UNVERIFIED
+source_posts,1619,"[""legendstudy"", ""1619""]",UNVERIFIED
+content_items,1619,"[""legendstudy"", ""1619"", ""main""]",UNVERIFIED
+exams,1619,"[""legendstudy"", ""1619"", ""main""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""한국지리""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""물리학""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""생명과학""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""지구과학""]",UNVERIFIED
+exam_subjects,1619,"[""legendstudy"", ""1619"", ""main"", ""화학""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""dLuyOd/btsHZ5S2qAz""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""beLKLD/btsH1OhPVS5""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""3mwBD/btsH1DtXzbC""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""QFZXI/btsHZL8ppcC""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""tABao/btsHZ74nPXO""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""6Rwvr/btsHZTyxfxa""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""bTAGwH/btsHZtAc4sQ""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""buLHk1/btsHZXgzK4J""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""caexjB/btsH1CV7A47""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""b0VfiF/btsH0212e7M""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""cR5JH2/btsH1Feeha0""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""dmqT8l/btsHZW2XDV9""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""bunItF/btsHZJivnpJ""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""bdlB0M/btsH0pcvr6r""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""0Uu8e/btsH004ff4o""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""OZ8hA/btsH1m0bWNs""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""cqtqx7/btsH0afC0Gq""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""m3gpv/btsHZ8vsT1z""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""cVYprH/btsH0N48UIB""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""uEKAc/btsH0ckaR7m""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""QocEm/btsH0kPWjOg""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""bkHepp/btsHZL8ptmP""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""oBSdu/btsHZ6RVAAV""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""BKuBV/btsH0nMuJ8T""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""uVlNs/btsH0ikhUS0""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""cCMQKD/btsH1pbwCTL""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""brLuzI/btsH1oKtzFO""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""bN4IbI/btsHZJivrES""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""k2YVC/btsHZyBqjQQ""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""b7b2ir/btsHZU5jeuG""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""T2esm/btsHZvSej1e""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""dt8UZ9/btsH0PaOp7X""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""cm7azs/btsHZsBh7my""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""FAjyv/btsH1l1f10v""]",UNVERIFIED
+resources,1619,"[""legendstudy"", ""1619"", ""main"", ""legendstudy"", ""1619"", ""7wxjn/btsHZJ3Uplf""]",UNVERIFIED
+source_posts,1635,"[""legendstudy"", ""1635""]",UNVERIFIED
+content_items,1635,"[""legendstudy"", ""1635"", ""main""]",UNVERIFIED
+exams,1635,"[""legendstudy"", ""1635"", ""main""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""생명과학""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""지구과학""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1635,"[""legendstudy"", ""1635"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""ewpsRK/btsJur7WSwq""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""EaTsl/btsJt7a6i8k""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""ctTcQT/btsJwcIeYTQ""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""OgIFZ/btsJvVteEk9""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dyrNCh/btsJt6wtrgt""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""cPWLXl/btsJwcBtcrL""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""uMn3b/btsJuTW84hR""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dXUXiG/btsJvP7BmE6""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""u6tyH/btsJuseKnyH""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""cJ2HaC/btsJvq71ieZ""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""deZu1Y/btsJvq71ihA""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dkmXNS/btsJuFx84bU""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""bv9A1u/btsJuwg8KJK""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""bZWsPD/btsJwfkE42j""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""RHTtw/btsJvovCrIo""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""xH0M2/btsJuqOMC2o""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""bolZvk/btsJuE64vl8""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""bzEzkU/btsJutY1n86""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""RU6nC/btsJvsx2ihZ""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dfVDiH/btsJwbvQtOc""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""caEYT9/btsJt8VphsV""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""cd82ZI/btsJv8Tq1c4""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""6Pg8H/btsJt2uaY6H""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""zmr2K/btsJvb4nfoX""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""KbQdP/btsJuf01h54""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""lEGlF/btsJt121Mhn""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""bzW4Yl/btsJwaX0qog""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""XeImZ/btsJtGdEG07""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""UbZrw/btsJwd8dCra""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""1HAbA/btsJugeApOu""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dj9uL9/btsJuZpC7rh""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""dCvio9/btsJvvBypTV""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""biaRyn/btsJu9ZM5Wv""]",UNVERIFIED
+resources,1635,"[""legendstudy"", ""1635"", ""main"", ""legendstudy"", ""1635"", ""KYXpe/btsJt3zLgNJ""]",UNVERIFIED
+source_posts,1647,"[""legendstudy"", ""1647""]",UNVERIFIED
+content_items,1647,"[""legendstudy"", ""1647"", ""main""]",UNVERIFIED
+exams,1647,"[""legendstudy"", ""1647"", ""main""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""물리학""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1647,"[""legendstudy"", ""1647"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""swN9R/btsJ93kWMB3""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bt2Iqx/btsKbmcu5kj""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""cny8zX/btsKaySfS0l""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""b22xCM/btsJ9MKuSsS""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""kYXJe/btsJ93rIcRy""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""I4jMq/btsKacPGiWO""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""byvmtD/btsKa5IROc3""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bM0Cz9/btsJ94c2VEN""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bGOrB2/btsKa8yLLiC""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""euwNo9/btsJ8UI1sk5""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""beMrgt/btsKa6HIUtn""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bb8wYu/btsKaLcLm6m""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""dTNpeA/btsKa7UbcDw""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bFB0ie/btsJ9sZPqu6""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""DejRV/btsKblScDFl""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""XCL4R/btsKapON3rp""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bvv59V/btsKaM3ORqI""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""ckGdo1/btsJ9K60GdF""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""CpekR/btsJ87n3Zr7""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bHqpNq/btsJ9OBDpbt""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""Mogum/btsKbldzOgP""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""biPotS/btsKbiVsuLB""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""cKyrmd/btsKaydC2eF""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""TUGK5/btsKahJ0E5v""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""T2UIS/btsKaxZ6JNP""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""F7GFa/btsJ9syJyNC""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""chcbEd/btsKbiOIc7t""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""w5Wdi/btsJ9On0T4j""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""SSFgV/btsJ92sLVM7""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""efNTVg/btsKa529ogR""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""c29lSR/btsKbgi2dF1""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""cfWnEu/btsJ920EejA""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""Rn1d3/btsKav84bN3""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""IqKf4/btsJ95JN5kQ""]",UNVERIFIED
+resources,1647,"[""legendstudy"", ""1647"", ""main"", ""legendstudy"", ""1647"", ""bduM8X/btsJ96aTkkj""]",UNVERIFIED
+source_posts,1614,"[""legendstudy"", ""1614""]",UNVERIFIED
+content_items,1614,"[""legendstudy"", ""1614"", ""main""]",UNVERIFIED
+exams,1614,"[""legendstudy"", ""1614"", ""main""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1614,"[""legendstudy"", ""1614"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""rWdDN/btsF9EpIVCS""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""mXkyj/btsGcM0oYxN""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""D2DR1/btsGbWJdiND""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""6jgH2/btsGcqDgS2e""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""b4emNO/btsGbaVu4sT""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""brAhew/btsF9CSV4zW""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""bzu9kd/btsGbHFv0f3""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""csC1Zg/btsGcpRTEBk""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""dxzOep/btsGadFa4Y1""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""O9J42/btsGbH6CCTx""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""9OfAh/btsF89jfYEx""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""cNKQdI/btsGaXBZy08""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""buYMT3/btsGaX2YnaN""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""BAi9M/btsGbTThNvM""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""bmfTQQ/btsGcs8WSX0""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""tekAh/btsGaD4Fa3L""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""L4Iaq/btsGbSNCrj6""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""TeF1O/btsGbTlryX9""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""urip2/btsGbFt9RCm""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""nwLOH/btsGcMsyzuJ""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""tD3z1/btsGcf2RJMC""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""bfe9bH/btsF9dFTnwG""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""0tevc/btsF9wSL036""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""y2Lxn/btsF9GVdjwh""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""9D1Xt/btsGaEbqDfB""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""bGboxS/btsGaCSdrIk""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""TCkvL/btsGaxjb5A1""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""bvx42u/btsF9EpIZ30""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""by3QVT/btsF92XZ3yH""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""wQDLr/btsGcOjBS4m""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""btFhgA/btsF9C6wzdO""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""3Mojq/btsGcPbKotW""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""yOyZf/btsF9xjTlVc""]",UNVERIFIED
+resources,1614,"[""legendstudy"", ""1614"", ""main"", ""legendstudy"", ""1614"", ""F0SJk/btsGbHFv3Hi""]",UNVERIFIED
+source_posts,1617,"[""legendstudy"", ""1617""]",UNVERIFIED
+content_items,1617,"[""legendstudy"", ""1617"", ""main""]",UNVERIFIED
+exams,1617,"[""legendstudy"", ""1617"", ""main""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""화학2""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1617,"[""legendstudy"", ""1617"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bUQZGg/btsHjVXtCAI""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bxSlDI/btsHlGkFKS4""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""baABAB/btsHlxBvjjl""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cYLqbK/btsHl8gVSBo""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""xhPDJ/btsHjvLuePJ""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""1Ughi/btsHk0KIxhf""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""oc9qD/btsHknl7RgR""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""1gcmn/btsHjZ6CZa1""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""zHnDX/btsHi5e9IAs""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""SQy7B/btsHkkv9Y9y""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cfBHsA/btsHl46F9kM""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""b1MNhV/btsHjZeuacv""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""udnBQ/btsHjvLufjo""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""PuXAY/btsHk2BKNSS""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cRZc1k/btsHkYe4pOY""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""yGWek/btsHlFswFjm""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""sehd5/btsHkYzmQu1""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bPcmGV/btsHjUK2GUn""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""k2RZx/btsHlcdjGOm""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""ZQQcb/btsHjdYzUgk""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""sXAtb/btsHjtz6Vdq""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""lgaQO/btsHiGfEcoq""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""XVZde/btsHl2VkZx2""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cVvWQ9/btsHlvKsE6i""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cLZEdH/btsHkiLS6Nf""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""csqbb6/btsHjwDBjzr""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""buxBmi/btsHigathxY""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""MOl9h/btsHitnjbnQ""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""dU3NuM/btsHldwxfxJ""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bWbkTg/btsHicFRt9o""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""btrsHb/btsHlty4ukW""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bRe3RW/btsHkYlPps5""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cl70oG/btsHkf2HhEG""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cndXL4/btsHie4OZH4""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cwVPsF/btsHkZSzVMn""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""ogVlH/btsHlsUuxkb""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""CETsP/btsHirpvA3d""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cJFoqL/btsHkMeSTEZ""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""T0XdR/btsHi3IqLHh""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""yIXSr/btsHkkv90fk""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""bkXRFb/btsHlGdS42p""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""DFk6P/btsHk4zzhTC""]",UNVERIFIED
+resources,1617,"[""legendstudy"", ""1617"", ""main"", ""legendstudy"", ""1617"", ""cqyqjp/btsHjXubZVT""]",UNVERIFIED
+source_posts,1618,"[""legendstudy"", ""1618""]",UNVERIFIED
+content_items,1618,"[""legendstudy"", ""1618"", ""main""]",UNVERIFIED
+exams,1618,"[""legendstudy"", ""1618"", ""main""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""한국지리""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1618,"[""legendstudy"", ""1618"", ""main"", ""화학2""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""BxJom/btsHZSTVam8""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""ZQ4gQ/btsH0uLupDW""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""cyiIBb/btsH1meM4jp""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""T3B5m/btsH0vRdiDm""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""ozpt7/btsHZUqFEoL""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bvRsno/btsHZ8WmPDM""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""cxtbna/btsH0UXl0KM""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""HAV3w/btsHZ65r1am""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bVCfwT/btsHZVwmQxz""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""dDizfb/btsH01WpdRP""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bfFdJU/btsH0vKp6Co""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""nR1yk/btsH0L7kKqU""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""75w8C/btsH0jXK5uv""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""blwDJ9/btsHZtGWSf5""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""xKFaQ/btsH0uY1ANJ""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bnFT44/btsH0beuXoe""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""7hOKZ/btsH1DtW933""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""ljLVf/btsH1nLyOWU""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""cq4FxY/btsH1NDdIWS""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bgoqRh/btsH0oLqbDp""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""eLB3CS/btsH1E0HaHy""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""b3tg3Z/btsHZL1HZD1""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""dEPVXc/btsH0CWW4u4""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""uI4D6/btsH1aySDfG""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bFvu8w/btsH1lUuh4t""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""GNPLQ/btsHZ9OxByu""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bmtFM6/btsH1NDdIZf""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bor6ez/btsH1Lek336""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""p8B3P/btsH1CV7iyH""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""beHOUL/btsH1FZBVhV""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bzUcbb/btsH1hYZbyI""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""bWPeoJ/btsH0vjouMP""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""cuxhL0/btsH0j4xbdg""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""PsgD0/btsH0wCy31B""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""HDcic/btsH0YlachK""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""XMzeB/btsH1gZ3oKJ""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""C7SEN/btsH1oDF0al""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""s9LsQ/btsHZ9HMB0v""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""m3ga5/btsH0zTrkmj""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""o2VQZ/btsH0l8YW9X""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""vBSWO/btsH1ENaQ8C""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""cdXu4J/btsHZ8IZaXM""]",UNVERIFIED
+resources,1618,"[""legendstudy"", ""1618"", ""main"", ""legendstudy"", ""1618"", ""ezgsuo/btsH09msuR4""]",UNVERIFIED
+source_posts,1621,"[""legendstudy"", ""1621""]",UNVERIFIED
+content_items,1621,"[""legendstudy"", ""1621"", ""main""]",UNVERIFIED
+exams,1621,"[""legendstudy"", ""1621"", ""main""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""화학2""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1621,"[""legendstudy"", ""1621"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""cPDzp2/btsIKAxwxmG""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""cnSiOv/btsIIZLV3B7""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bIBBLu/btsILf7mz3m""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""PdJg7/btsIJYezF63""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""AQZRc/btsIKB4iALE""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""cdjYkW/btsIKFlaQtg""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bzwZDw/btsIN0POOvw""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bq1HKi/btsILSDVNzH""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""b7zuBM/btsILq1ZbNM""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""cGf763/btsILU9Bi9B""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""ptxMo/btsIKVOW98m""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""5jSpP/btsILQ7bB8t""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""be91Wv/btsILHbsD5q""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""sleej/btsILU2QlCx""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""FElMy/btsIKM5FRj6""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bbhgIb/btsILjomrRJ""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""DKAY9/btsIKA5lAZV""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""NjT3s/btsILs6y6cD""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""mGcrB/btsIK0o3ya5""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bx7VLZ/btsILkOkHzt""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""PzJkA/btsII1psg0e""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""kHXqh/btsIIYTMNBR""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bL2rZU/btsILiXhLq4""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bN7xUX/btsILUhsWJP""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""sAsxF/btsILUhsX9D""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""nuVwt/btsIKJOECQQ""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""dupAhm/btsIIX8pFBa""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bx0wFu/btsIJ97QJnk""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""7MlLb/btsIK5Kygt0""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bAlTj7/btsIKDnr9YK""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bhbVaG/btsIKL6LnAy""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bdN8im/btsIKSEHVR2""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bWK4Zp/btsILkgvDE8""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""O2bh7/btsIL9r2RGj""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""dP1pk0/btsIJFsFFr4""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""l7wDn/btsILhxj1e5""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""AH0i6/btsIJIQAsxt""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""YMK4P/btsIJXGJHKT""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bbqis1/btsIJZYN4Vd""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""bIKyBY/btsIIX1Cljy""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""ctjmDm/btsILkANWJk""]",UNVERIFIED
+resources,1621,"[""legendstudy"", ""1621"", ""main"", ""legendstudy"", ""1621"", ""uBtkh/btsIMadoXXF""]",UNVERIFIED
+source_posts,1634,"[""legendstudy"", ""1634""]",UNVERIFIED
+content_items,1634,"[""legendstudy"", ""1634"", ""main""]",UNVERIFIED
+exams,1634,"[""legendstudy"", ""1634"", ""main""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""국어(화작)""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""국어(언매)""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""수학(기하)""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""수학(미적)""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""수학(확통)""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""화학2""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1634,"[""legendstudy"", ""1634"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""nwTBf/btsJt2gzHTA""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bE2taB/btsJvYwJBqM""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bCaloP/btsJuA4CJpx""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bZ7DdO/btsJvobllII""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bBwcjj/btsJvnpWHqr""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""VToXH/btsJwdG85OB""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bSDFHw/btsJt5RUwKi""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""JJsXj/btsJue8TFqZ""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""cE88ij/btsJvuo5zo9""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""HJTaF/btsJusFROqS""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""YxsOj/btsJvwNZRYE""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""l3F97/btsJurtmwwH""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""b4y4yE/btsJt5K92bZ""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bkDbQO/btsJvwgb3p5""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""cjIajc/btsJv95Rn0B""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""cnlQhe/btsJuwuF84g""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""u7iBe/btsJvxzoGQo""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""G4jae/btsJvREjQOK""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""lv5Pp/btsJt7hSnM1""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bEYPSA/btsJt9sZvwP""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""FH9HC/btsJu8T6s9S""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bEt6wS/btsJtENLvHV""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bJlbBC/btsJuRLPaMS""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""AyX34/btsJvtp90uE""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bqI2C4/btsJutEKXjm""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""Nmtrz/btsJvq1hvNe""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""BvG1g/btsJvaK9DHf""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""ztWFd/btsJt3sYUuV""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""QR0Cp/btsJuxtB7kC""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bLpGJi/btsJweF3nm2""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""quHIE/btsJvdA7NMk""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bZBz6l/btsJvfZ3XSw""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""L5aup/btsJvqNLR2D""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bWEFTS/btsJuDUAPKQ""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""kCvIH/btsJuHCGmxJ""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""R4Qvk/btsJt9T4Jzb""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bbMNCE/btsJuVgtakH""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""687OT/btsJt1onCXX""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""behOeG/btsJuFx8FDk""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""K3kVq/btsJvydXmf4""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bVq4GR/btsJv8y7pOx""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""L8WfW/btsJux1oQJN""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""CapOb/btsJu8GBhV1""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""qx4wj/btsJuXrN0Fz""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""vQ7bf/btsJt9fnFyb""]",UNVERIFIED
+resources,1634,"[""legendstudy"", ""1634"", ""main"", ""legendstudy"", ""1634"", ""bsmdtW/btsJusTjLKA""]",UNVERIFIED
+source_posts,1646,"[""legendstudy"", ""1646""]",UNVERIFIED
+content_items,1646,"[""legendstudy"", ""1646"", ""main""]",UNVERIFIED
+exams,1646,"[""legendstudy"", ""1646"", ""main""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""국어""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""수학""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""화학2""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1646,"[""legendstudy"", ""1646"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""CxoJc/btsKaQylXpx""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bic0wX/btsKa2ZDkRV""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cN82Z9/btsJ9vhEb1I""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bdPAMv/btsKaQrDfmq""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bm7qn2/btsJ9rfxZKU""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cU2lZK/btsKaeNyndS""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bd60h4/btsJ8UPN3TW""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""Ump3m/btsJ94jSqMQ""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""q3quS/btsJ91tUApJ""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""kQ6rT/btsJ89sEIqK""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bVePtm/btsJ9M4RDME""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""QAcOX/btsKagqN0HR""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""MKBYq/btsJ9v24CtR""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""by63iN/btsJ81aitxZ""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""O2CtN/btsJ87VQJbH""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""KdXjU/btsKaiWq7dM""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cbA4fP/btsKaqNKnwf""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cU6cB2/btsKbigRz72""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cUCVas/btsKawmApp8""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cwEjRg/btsJ9opvESO""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bKizT2/btsKac3iwZa""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""Mmwws/btsKbiVskH4""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""z2Pip/btsKbf5uVxb""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""FMF94/btsJ87uO9Fd""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""byliSp/btsKbgchHpS""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""cb0ZgC/btsJ9OhjYgq""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""ncu7o/btsJ9mSRZwi""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""YFmXN/btsKa6VhYgF""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""7aEK8/btsKa1sSaH4""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""CjUv0/btsKajnvhDE""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""wipxg/btsJ9mrcOVG""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""quxME/btsJ9M4RJnC""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""36Wdg/btsKaMisglQ""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""UmQKx/btsKaxeLQSu""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""AAcQR/btsKbfj7LYR""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""pABFX/btsJ90BK8xd""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bwUeYM/btsKazp7aIL""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""NYlmo/btsKaKEVL62""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bdfOmd/btsJ9Mqdbx5""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bhmv6H/btsJ9OuMyvF""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""bT0hiz/btsJ8V81Grk""]",UNVERIFIED
+resources,1646,"[""legendstudy"", ""1646"", ""main"", ""legendstudy"", ""1646"", ""EJvqB/btsJ9owlIiP""]",UNVERIFIED
+source_posts,1649,"[""legendstudy"", ""1649""]",UNVERIFIED
+content_items,1649,"[""legendstudy"", ""1649"", ""main""]",UNVERIFIED
+exams,1649,"[""legendstudy"", ""1649"", ""main""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""국어(언매)""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""국어(화작)""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""수학(기하)""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""수학(미적)""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""수학(확통)""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""영어""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""한국사""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""물리학1""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""물리학2""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""생명과학1""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""생명과학2""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""지구과학1""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""지구과학2""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""화학1""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""화학2""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""경제""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""동아시아사""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""사회문화""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""생활과윤리""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""세계사""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""세계지리""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""윤리와사상""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""정치와법""]",UNVERIFIED
+exam_subjects,1649,"[""legendstudy"", ""1649"", ""main"", ""한국지리""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bh29HU/btsKMOlWUeA""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bzjtLB/btsKMNAzruz""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""9DPjM/btsKLezqrq4""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bk6pNu/btsKMbWv9pc""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""SQBK4/btsKL8ZLKZo""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""HTFE1/btsKLwNnzSr""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""I8IGi/btsKMogN720""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""k5ifh/btsKLgjH8o5""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""UTlai/btsKLbpjLnc""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""qjyx0/btsKKFYApem""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""c6bbYO/btsKMi8TtcV""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bz8ltN/btsKLp1TVcH""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""AXcKJ/btsKKNPLDwx""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""cuD7pi/btsKKx0LYDw""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bhxH0R/btsKMG2BOEn""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""BZ3ov/btsKMM2LcR4""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""cDpWpR/btsKL2FnDIT""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""RbAht/btsKMMn8fSP""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""siqQi/btsKLxMhimA""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""0nAwu/btsKMhozyCW""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""cWACzi/btsKLu9NMuY""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""mgWya/btsKKxsS3LE""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""sg0XY/btsKLjm8132""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""b0ohhx/btsKMNAzvqb""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""QUaNX/btsKMEqj8nv""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""JFIK7/btsKLy5t0pK""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""c6OuMJ/btsKMIlOzqy""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""MOzf9/btsKMNAzwlH""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""lg7ca/btsKL0gqTQ4""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bkTFWX/btsKLeTLCl7""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""8EQez/btsKLwmgH8X""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""5GeJV/btsKLZPpgsw""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""JZMOp/btsKKpoaKxB""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""Olm5y/btsKMDroL7H""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""ccfzYJ/btsKLs5pS7T""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""cm9w74/btsKL9j4KHu""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""OUyae/btsKK4jxQjY""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bnrOEh/btsKKGpHXsj""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bWLqzo/btsKMonz0fO""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""cqiSxD/btsKLpgu8lF""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""DPuiP/btsKKNbcBPZ""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bTEWnL/btsKKwnaUyn""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""XHjRK/btsKKFdbRVd""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""ehIe1V/btsKL4wlm9d""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""c1jr2m/btsKKqACLxL""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""dMZfEK/btsKMc10oCy""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""UdKPd/btsKK3LIDVP""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""K5Oui/btsKLws3Ydg""]",UNVERIFIED
+resources,1649,"[""legendstudy"", ""1649"", ""main"", ""legendstudy"", ""1649"", ""bWjRiA/btsKKHa4ab2""]",UNVERIFIED

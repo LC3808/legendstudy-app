@@ -1,6 +1,6 @@
 # Current Status
 
-Last reviewed: 2026-09-19
+Last reviewed: 2026-09-20
 
 ## 2026-09-19 Monetization & In-App Learning strategy — PLANNED
 
@@ -192,32 +192,34 @@ Supabase Dashboard or Auth user was touched.
   and Kakao may return no email while Apple may return a private relay address.
   See `Claude outputs/legendstudy-p2a-oauth-readiness.md`.
 
-## 2026-09-18 Historical Exam Expansion Phase 1-A — PRODUCTION COVERAGE VERIFIED
+## 2026-09-20 Historical Phase 1-A1 — INVENTORY / BOUNDED DRY RUN COMPLETE
 
-- Repository inventory is complete for the committed 2024–2026 candidate dry
-  run: 38 exams, 609 exam-subject occurrences and 1,205 resources. No
-  candidate source for 2020–2023 was found in the inspected repository.
-- Owner SQL postflight verified Production totals of 23 exams, 363
-  exam_subjects and 739 resources: 2025 has 15 exams and 2026 has 8; 2020–
-  2024 have zero rows. Current-year future/unpublished 2026 combinations are
-  not classified as missing.
-- Production has 23 open `resource_url_expiring` quarantine rows mapped to
-  2020–current exams; no 1:1 relation to the 23 exams is assumed.
-- **Phase 1-A1 (2024 reconciliation) is INTERRUPTED — RECHECK REQUIRED.** The
-  Codex run stopped on quota exhaustion. Its last figures (38 exams, 609
-  occurrences, 1,228 resources; 2024 candidate 15 exams, grade 3 → 7) are
-  **preliminary only** and must not be promoted to VERIFIED or COMPLETE. After
-  a Codex reset the reconciliation restarts from the beginning.
-- Gemini independent review returned **CODEX 2024 PUBLICATION ARCHITECTURE
-  READY: YES**, which is an architecture verdict only — it does not make any
-  data publication-ready. The hard gates stand: deterministic keys,
-  `is_active=false` on initial ingestion, duplicate protection, quarantine,
-  URL durability, raw labels, taxonomy, source-time `feed_updated_at`, and
-  preflight/postflight. Historical ingestion and publication stay separate.
-- Phase 1-A is ready for deterministic-key reconciliation of the 2024
-  candidate, not for publication. Ingestion order is 2024 → 2023 → 2022 →
-  2021 → 2020, followed by 2025/2026 reconciliation. No historical
-  publication or Production mutation has occurred.
+- Rechecked from current repository after the interrupted September 18 run.
+  Current sample: **38 exams / 609 occurrences / 1,228 resources**. Historical
+  1,205-resource report is a dated snapshot. Replayed original/current parsers
+  and samples: `bf89548` added 23 explicit Box fixture entries plus parser and
+  classification support; original 1,205 resource projections are unchanged.
+  The added keys/URLs are distinct and source-backed; live payloads unverified.
+- 2024 directly recounted: **15 exams / 246 occurrences / 489 resources**;
+  grades 1/2/3 = 4/4/7. Grade-3 reference batch: **7 / 151 / 299**, inactive,
+  provisional mappings; 7 expiration advisories and 3 unscoped-resource cases.
+- Natural-key/locator collision and merge checks pass. Full resolved semantics
+  are unchanged by 2026/2030 crawl timestamps; feed dates stay source-time 2024.
+  Raw labels retained; no unsafe signing queries or automatic activation.
+- Owner Production baseline preserved: 2020–2024 zero; 2025 15/246/507,
+  2026 8/117/232; total 23/363/739. No inference about future/unpublished 2026
+  sessions. Production's 23 open expiration rows are not assumed 1:1 with exams.
+- **Production exact-key status UNVERIFIED; 2024 PUBLICATION READY: NO.**
+  Aggregate zero does not exclude partial sources/content or cross-year key
+  collisions. Owner SELECT evidence, ambiguous subject/pair review, URL durability
+  and a separately reviewed 2024 apply scope remain gates.
+- Validation: existing ingestion 146 PASS plus 4 historical report/semantic
+  regression tests PASS; CSV checks and static/credential checks PASS.
+- Next: Owner runs the SELECT-only `reports/historical-exam/2024-validation.sql`
+  before any publication planning. See [historical handoff](../reports/historical-exam/codex-historical-exam-phase1-handoff.md).
+- Future In-App PDF Viewer Pilot remains separate: recent three years' grade-3
+  June/September evaluation mocks and CSAT. No download/mirror/viewer work here.
+  Production mutation **0**. No ingestion, activation, migration or push.
 
 ## 2026-09-18 LS LAB Production Web architecture — APPROVED / DOCUMENTED
 
