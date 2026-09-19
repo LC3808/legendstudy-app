@@ -278,6 +278,9 @@ promote Community into v1.0; `product-scope.md` still excludes it. See
 
 ## 2026-09-20 — In-App Exam learning loop and authority boundaries
 
+Refinement below supersedes only mandatory Viewer ordering and the combined
+implementation hold; the following original safety decision is retained.
+
 In-App Exam V1 is FIND → VIEW → START ATTEMPT → SOLVE → AUTOSAVE → SUBMIT →
 SERVER SCORE → RESULT → ACADEMIC RECORD. Basic history/Record are required;
 deep Analytics and AI subjective scoring remain later/separate. Whole-PDF eager
@@ -293,3 +296,24 @@ undecided. Rights gate media storage/access; metadata coverage is independent of
 Viewer coverage. Existing Study pause and Guest preview remain unchanged.
 Detailed requirements and open prerequisites have one owner:
 [architecture-in-app-exam.md](architecture-in-app-exam.md). No implementation approval.
+
+## 2026-09-20 — Paper-first / answer-first Exam Engine refinement
+
+Primary mobile value is SOLVE → ANSWER → SUBMIT → SCORE → GRADE → RECORD →
+ANALYZE → IMPROVE. Users can select an exam and create an Attempt after solving
+on paper without ever opening a Viewer. Viewer is an independent resource-access
+convenience layer; its failure cannot block answers/scoring/records. Optional
+Tablet Viewer flow remains supported in direction. This supersedes mandatory
+FIND → VIEW ordering above, not atomic persistence, revision/recovery, single
+execution ownership, idempotency, immutable submissions or pinned server scoring.
+
+Separate rights-gated resource delivery/mirroring from exam identities, validated
+answer/scoring/grade data and Academic Record. PDF Storage/mirrors remain HOLD;
+engine contracts may advance independently. No new data-use approval is implied.
+User Academic History, not PDF collection, is the retention asset: Exam → Score
+→ Grade → Subject Performance → Historical Trend → Weakness → Study Strategy.
+V1 provides records/basic comparison; advanced/AI strategy remains later.
+Monetization centres on repeat scoring, longitudinal records/comparisons and
+personalized analysis, not file ownership. Free/basic access remains meaningful;
+prices, FREE/BASIC/ADVANCED/MAX entitlements and quotas remain undecided.
+[Canonical architecture](architecture-in-app-exam.md) owns separate track gates.

@@ -83,13 +83,18 @@ Ingestion and public activation are separate decisions. No mutation SQL is
 provided or executed in this task. Production mutation = 0; no credentials,
 Auth/Storage/Edge/Cron changes, live downloads, publication, or push.
 
-## Viewer direction (future only)
+## Pilot product refinement — independent engine and Viewer tracks
 
-Recent three years' grade-3 June/September evaluation mocks and CSAT are the
-future In-App PDF Viewer Pilot candidate. The 2024 inventory covers reference
-posts 1618/1634/1649. Identity/type data is usable for planning; availability,
-rights, durable binary targets and approved storage architecture remain gates.
-No PDF download, mirror, upload, viewer or migration has been implemented.
+Recent three years' grade-3 June/September evaluation mocks and CSAT remain the
+Pilot; 2024 reference posts are 1618/1634/1649. Core success is validated Exam
+identity → Answer entry → Submission → Server scoring → Grade → Academic Record,
+not perfect rendering of every PDF. Paper-first users need no Viewer to attempt.
+Semantic/key/subject/cutoff gates remain binding for the engine. URL/file cases
+remain unresolved, but inability to deliver PDFs alone is not an answer-only
+engine blocker. Rights still gate mirrors/Storage/access; no quarantine resolution
+or publication is implied. Viewer memory/rights/availability acceptance is separate.
+See [canonical architecture](../../wiki/architecture-in-app-exam.md). No download,
+mirror, Storage or Viewer implementation has occurred.
 
 ## Evidence files
 

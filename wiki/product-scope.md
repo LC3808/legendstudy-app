@@ -86,9 +86,11 @@ ContentRepository reads retained. Saved is under MY, not a bottom tab.
 
 ## Integrated In-App Exam V1 boundary
 
-The [In-App Exam gate](architecture-in-app-exam.md) defines the grade-3 recent
-three-year June/September evaluation mock and CSAT pilot: viewer → attempt →
-server score → basic Academic Record. This is a feature-V1 contract, not a claim
-that every roadmap feature is in the initial app release. Basic Record/history
-are required for that loop; deep Analytics, AI subjective scoring, full offline
-and realtime multi-device execution are excluded. Implementation is gated.
+[Canonical In-App Exam architecture](architecture-in-app-exam.md) refines the
+previous viewer → attempt ordering. Primary mobile is paper-first/answer-first:
+exam selection → Attempt → OMR/answers → unanswered review → submit → server
+score → raw score/basic grade/cutoff → Academic Record → history/basic comparison.
+Viewer is optional and failures cannot block this engine. Optional Tablet viewing
+remains a separate route. This feature-V1 contract does not promote all roadmaps
+into the initial app release. Deep Analytics/AI strategy remains V2+; original
+rights/storage restrictions stand and integrated engine readiness is CONDITIONAL.

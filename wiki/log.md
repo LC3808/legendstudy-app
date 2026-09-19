@@ -1609,3 +1609,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Recorded durable decisions, matrix and seven start prerequisites. Implementation
   HOLD. Markdown links/consistency/diff checks PASS; only Wiki files changed.
   Production mutation 0; no migrations, Storage, downloads, payment or push.
+
+## 2026-09-20 — Paper-first / answer-first Exam product refinement
+
+- Refined the existing canonical gate, preserving original decision history and
+  safety contracts. Mobile users can solve on paper and enter answers without
+  Viewer; optional Tablet viewing remains independent.
+- Separated Engine CONDITIONAL (dataset/scoring/lifecycle/Record dependencies)
+  from Viewer CONDITIONAL and rights-gated PDF Storage/mirror HOLD. Core Pilot
+  acceptance is identity→answers→server score/grade→Academic Record.
+- Recorded V1 basic history/comparison, USER ACADEMIC HISTORY retention and
+  personalized paid-value boundary. Advanced Analytics/AI strategy remains later;
+  quotas/prices unchanged. Updated existing Wiki/roadmap/handoff, no new roadmap.
+- Internal links, documentation consistency and diff checks PASS. Documentation
+  only; no code, schema, Production mutation, downloads, payment or push.

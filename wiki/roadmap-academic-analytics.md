@@ -204,3 +204,12 @@ change. Those each require their own approved design and implementation task.
 Record and score history for its V1 closed loop; that foundation is still NOT
 IMPLEMENTED. Deep Analytics and study-time/score/admissions analysis stay V2+;
 the roadmap dependency chain above is preserved.
+
+## Paper-first retention refinement
+
+Academic Record → Analytics → Study Strategy remains the long-term value chain.
+V1 now explicitly includes basic historical score comparison after paper-first
+answer submission, without requiring Viewer access. USER ACADEMIC HISTORY is the
+retention asset; advanced weakness/AI strategy/admission predictions remain later,
+not features implemented by this decision. Existing separate scales and
+correlation-versus-causation boundaries remain in force.

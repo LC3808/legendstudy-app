@@ -476,8 +476,10 @@ quality checks remain separate. See day-9-search-explore.md.
 
 ## In-App Exam pre-implementation gate
 
-[In-App Exam architecture](architecture-in-app-exam.md) owns the new integrated V1
-loop and RED TEAM hard blockers. Implementation start is HOLD pending its seven
-gates. Existing Study pause/Guest preview behavior is unchanged; new Exam V1
-requires uninterrupted timing and server-final scoring. Basic Academic Record
-is V1-required, deep Analytics V2+. No viewer engine or new schema selected.
+[Canonical In-App Exam architecture](architecture-in-app-exam.md) now refines the
+original Viewer-first model to paper-first / answer-first. Viewer/resource delivery
+is an independent convenience track; exact exam selection, answers, server score,
+grade and Academic Record must operate without it. Existing atomic/clock/scoring
+safety stays intact. Engine CONDITIONAL on its own data/Record/lifecycle contracts;
+Viewer CONDITIONAL independently; PDF Storage/mirror HOLD pending rights.
+Existing Study pause/Guest preview is unchanged. No new schema/code implemented.

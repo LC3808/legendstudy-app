@@ -2,29 +2,74 @@
 
 Recorded 2026-09-20 from the Owner-provided RED TEAM synthesis. Architecture
 policy only, not a claim of an independently rerun review or implementation.
-**IMPLEMENTATION START: HOLD.** Existing Study/scoring acceptance is preserved.
+**EXAM ENGINE: CONDITIONAL. VIEWER: independent CONDITIONAL track.
+PDF MIRROR / STORAGE: HOLD.** Existing Study/scoring acceptance is preserved.
 This document owns the new integrated In-App Exam contract; linked documents
 remain authoritative for their existing implementations and product roadmaps.
 
-## V1 closed learning loop and pilot
+## Product refinement — paper-first / answer-first
 
-**FIND → VIEW → START ATTEMPT → SOLVE → AUTOSAVE → SUBMIT → SERVER SCORE
-→ RESULT → ACADEMIC RECORD**
+This 2026-09-20 refinement supersedes the mandatory FIND → VIEW → START ATTEMPT
+ordering and the combined seven-gate implementation hold recorded in `79af28a`.
+It preserves the original safety/scoring contracts; it does not erase that decision.
 
-The product is taking an exam, preserving answers, obtaining server scoring and
-accumulating a learning record inside the app. A PDF renderer alone is insufficient.
-Pilot: recent three years, grade 3, June/September evaluation mocks and CSAT.
-Exact years/resources must be frozen after source validation; unpublished future
-sessions are not missing. Common sections and major electives are candidate
-support, conditional on deterministic question/variant mapping.
+Product value loop: **SOLVE → ANSWER → SUBMIT → SCORE → GRADE → RECORD →
+ANALYZE → IMPROVE**. The paid value is personalized learning after the exam,
+not ownership of a collection of question PDFs. Users may already have printed
+papers, school/academy handouts or legitimately obtained official files.
 
-V1 requires PDF viewing, objective-choice answer entry/OMR UX, exam timer,
-local autosave, crash/re-entry recovery, submission, server raw score/basic result,
-attempt history, Academic Record persistence and basic score-history retrieval.
-Non-MCQ questions present in real papers must be explicitly unsupported or
-separately approved; never silently claim a whole-paper score for partial coverage.
-Historical semantic validation and PDF/audio redistribution/storage rights remain
-hard dependencies. Metadata coverage is independent of viewer coverage.
+Primary smartphone flow: search material → permitted original/download/print
+access → solve on paper → select the exact exam in LegendStudy → create Attempt
+→ OMR/answer entry/autosave → unanswered review → submit → server score → raw
+score/grade → Academic Record → basic history/comparison. Long-term analytics
+and study strategy extend this flow; advanced/AI analysis is not a V1 promise.
+Users with papers can enter directly at exam selection without any resource action.
+**Attempt creation never requires opening a Viewer or owning a mirrored PDF.**
+Viewer failure cannot block answer entry, scoring or recording.
+
+PAPER-FIRST / ANSWER-FIRST / ANALYTICS-CENTERED describes the product direction.
+Simultaneous PDF+OMR manipulation on a phone is not V1's defining value.
+Optional tablet flow remains Exam → Viewer → Answer UI → Submission, using the
+same independent Exam Engine and durable state; closing/failing Viewer cannot
+terminate the Attempt.
+
+## Resource layer versus Exam Engine
+
+| Resource access / convenience layer | Exam Engine |
+|---|---|
+| metadata, source, permitted official/original URL, external/open/download actions | exam/question identities, answer schema, selected subjects |
+| preview, individual-question reference, optional tablet viewing | scoring key/version, grade/cutoff data, attempt, answers, submission |
+| optional future mirror only after rights approval | server score, Academic Record, basic comparison; future analytics |
+
+Viewer is a RESOURCE ACCESS / CONVENIENCE LAYER, not CORE EXAM ENGINE.
+Keep basic search/access/original links/basic Viewer as free-value candidates;
+Viewer is not the primary paywall. PDF rights/mirroring/storage uncertainty does
+not by itself block independent Exam Engine development. This does NOT authorize
+use of unvalidated answer keys, ambiguous mappings or improperly sourced data.
+Original Historical rights policy remains intact; mirrors and PDF Storage HOLD.
+
+## V1 core and grade-3 pilot
+
+V1 core: (1) exam selection, (2) Attempt creation, (3) objective OMR/answer entry,
+(4) unanswered review, (5) submission, (6) server scoring, (7) raw score,
+(8) basic grade/cutoff display, (9) Academic Record persistence,
+(10) previous-result retrieval, (11) basic score-change comparison.
+Confirmed/estimated/unavailable grade semantics remain explicit: missing cutoffs
+must show unavailable, not invented grades. Compare like-for-like subjects,
+versions and score scales; basic trends are not cross-paper equivalence claims.
+
+Pilot stays recent three years' grade-3 June/September evaluation mocks and CSAT.
+Success criterion: **Exam identity → Answer entry → Submission → Server scoring
+→ Grade → Academic Record**, without mandatory Viewer. Exact dataset/year freeze,
+common/major-elective coverage, deterministic mapping and scoring validation
+remain required. Non-MCQ portions need explicitly scoped support or exclusion;
+never present a partial supported score as a whole-paper score. Viewer quality
+and media rights are separate acceptance tracks, not the Pilot's engine criterion.
+
+Paper-first answer-entry after solving must not invent a timed exam start/duration
+or retroactive server anchor. A future in-app timed execution, when offered,
+retains the uninterrupted timer contract below. Specify mode and provenance in
+Attempt/Record design; elapsed answer-entry time is not study/solve time.
 
 ## Existing evidence versus new requirements
 
@@ -37,7 +82,7 @@ hard dependencies. Metadata coverage is independent of viewer coverage.
 
 Current Mock supports pause/resume and Guest Dart scoring. Those accepted
 behaviors remain untouched. The new integrated Exam V1 contract below is stricter:
-no exam pause and server-authoritative final score. Guest local preview must not
+no pause for an in-app timed exam and server-authoritative final score. Guest local preview must not
 be presented as a final server score or durable Academic Record. Auth/start and
 Guest promotion policy must be settled before implementing that new path.
 
@@ -96,7 +141,7 @@ require explicit reconciliation or recovery-required state; do not grant time or
 invent elapsed duration. Resolve offline-start eligibility and server-anchor
 protocol before implementation. This is integrity engineering, not full anti-cheat.
 
-New Exam V1 continues through calls, notifications, lock, background and app exit;
+When in-app timed execution is used, it continues through calls, notifications, lock, background and app exit;
 no pause and no automatic extension. Audio/UI interruptions do not pause time.
 At time-up, atomically freeze answers/submission intent; if disconnected, retain
 pending submission and retry safely on reconnection. Server deadline validation
@@ -151,7 +196,7 @@ coercing historical aliases or ambiguous subject files.
 
 ## Listening audio gate
 
-Do not rely exclusively on after-start streaming. Before an audio-required pilot,
+Do not rely exclusively on after-start streaming. Before an audio-required in-app listening session,
 design authorized preflight availability, download/cache eligibility, enough local
 capacity, media readiness, playback position/recovery and background/interruption
 behavior. Avoid starting a listening-dependent exam with unavailable audio; if a
@@ -159,11 +204,13 @@ mid-exam failure occurs, preserve answers and timer and present an explicit
 recovery/incomplete status. No silent full-exam success or audio-less substitution.
 A listening-excluded practice mode, if separately offered, must be labeled as such.
 Audio rights are as binding as PDF rights; no current download/mirror approval.
+Paper-first users who solved with external audio may still enter answers; audio
+playback availability is not a dependency of their answer-only Attempt.
 
 ## Academic Record, entitlement and cost
 
 V1 REQUIRED: attempt history, raw score, basic result, Academic Record foundation
-and basic score-history retrieval. Academic Record is currently NOT IMPLEMENTED;
+and basic score-history retrieval/comparison. Academic Record is currently NOT IMPLEMENTED;
 existing immutable mock results are inputs, not proof of a unified record layer.
 Design an idempotent submission/result-to-record link so retries do not duplicate
 history. A record write failure after scoring must remain recoverable without
@@ -192,41 +239,56 @@ invalidation; rights precede caching/mirroring decisions. No unlimited AI promis
 
 ## Architecture matrix and exclusions
 
-GO means accepted direction, not permission to start implementation/publication.
+GO means supported architectural direction/reusable foundation, not deployment
+approval. PDF rendering or storage status cannot alone veto the engine track.
 
-| Area | Decision | Condition |
+| Area | Decision | Current-code evidence / independent condition |
 |---|---|---|
-| Question mapping / server scoring | GO | deterministic variant mapping; validated dataset; server authority |
-| PDF viewer | CONDITIONAL | rights decision + physical memory benchmark; engine open |
-| Attempt lifecycle | CONDITIONAL | atomic recovery, timer, ownership and idempotency validation |
-| Basic Academic Record | CONDITIONAL, V1 REQUIRED | durable idempotent link/history design; not implemented |
-| Advanced Analytics | DEFERRED V2 | separate research/implementation |
-| AI subjective/essay scoring | DEFERRED V2+ | separate LS LAB/cost/validation workstream |
-| Realtime cross-device attempt sync | DEFERRED | one execution owner in V1 |
-| Monetization implementation | DEFERRED / separate workstream | pricing/payment not required together |
-| Entitlement-compatible boundary | REQUIRED NOW | reserve/settle/release and retry semantics |
+| Existing answer entry / server scoring | GO as reusable foundation | D2/D3 implementation and actual submit_mock_attempt / fetch_own_mock_attempt path; no new deployment |
+| Paper-first integrated Exam Engine | CONDITIONAL | exact validated exam/key/subject/cutoff package, post-solve mode semantics and durable Record linkage pending |
+| Attempt lifecycle | CONDITIONAL | atomic store exists; new ownership/mode/retry and crash contract review pending |
+| Basic Academic Record / comparison | CONDITIONAL, V1 REQUIRED | mock_exam_attempts / mock_exam_answers exist; unified Record/history linkage remains NOT IMPLEMENTED |
+| PDF Viewer | CONDITIONAL, independent track | rights + memory benchmark; engine/library open |
+| PDF mirror / Storage | HOLD | explicit rights/storage decision still required |
+| Advanced Analytics / strategy | DEFERRED V2+ | separate validation and implementation |
+| AI subjective scoring | DEFERRED V2+ | separate LS LAB workstream |
+| Realtime cross-device attempt sync | DEFERRED | one active execution owner |
+| Monetization implementation | separate / DEFERRED | quota/price/payment undecided |
+| Entitlement-compatible boundary | REQUIRED NOW in design | CHECK → RESERVE → EXECUTE/SCORE → SETTLE; no implementation here |
 
-Also excluded from V1 core: advanced percentile prediction, full offline mode,
-admissions prediction, sophisticated anti-cheat and unlimited AI analysis.
-Existing rights-gated access, metadata-only expansion and independent LS LAB
-architecture remain unchanged; [monetization roadmap](roadmap-monetization-and-in-app-learning.md)
-retains strategy ownership.
+Evidence is repository code/migrations and prior Owner runtime records, not a
+new live DB inspection. No academic-record table/feature is claimed from existing
+mock result tables. Engine development can proceed independently of PDF rights
+once its own contracts/data gates are approved; **full integrated implementation
+readiness is currently NO**, for those engine dependencies, not for absent Viewer.
 
-## IN-APP EXAM PRE-IMPLEMENTATION GATE
+V1 still excludes AI essay/subjective scoring, advanced percentile prediction,
+full offline mode, deep Analytics, admissions prediction, sophisticated anti-cheat,
+realtime multi-device sync and unlimited AI analysis. Local offline answer safety
+is required even though a full offline product is not.
 
-All seven require review evidence before Codex begins integrated implementation.
-This document specifies direction; recording a contract is not validating it.
+## IN-APP EXAM PRE-IMPLEMENTATION GATE — separated tracks
 
-| Gate | Current state / required evidence |
+This refines the original seven-gate list, not the safety requirements.
+
+| Track / gate | State and evidence needed |
 |---|---|
-| 1 PDF rights/storage decision | OPEN: Owner resource-specific permitted access/storage decision |
-| 2 Viewer memory benchmark strategy | strategy above recorded; device corpus/budgets/harness review pending; engine selection requires benchmark results |
-| 3 Attempt persistence contract | direction recorded; envelope migration, autosave failure budget and crash/recovery test plan pending |
-| 4 Timer contract | direction recorded; server anchor, reboot/offline/deadline and interruption protocol pending |
-| 5 Submission idempotency contract | existing RPC baseline; new execution ownership and entitlement/result-record retry contract pending |
-| 6 Scoring provenance/version contract | existing pinned-version baseline; mixed-paper mappings and stale in-flight recovery review pending |
-| 7 Grade-3 pilot dataset validation | HOLD: Historical semantic/quarantine/file gates unresolved; A2 identity preflight alone insufficient |
+| Engine: persistence | atomic foundation exists; mode/envelope migrations, autosave/recovery and Record transaction/outbox review pending |
+| Engine: timed execution | existing monotonic foundation; server anchor/reboot/deadline design pending only for in-app timed mode; no fabricated timing for post-solve entry |
+| Engine: submission | idempotent RPC foundation; device ownership, immutable snapshot and entitlement/Record retry contract review pending |
+| Engine: scoring provenance | pinned key/cutoff/engine foundation; common/elective identity and stale-version policy review pending |
+| Engine: grade-3 dataset | HOLD pending semantic/answer-key/subject/cutoff validation; A2 identity absence alone insufficient |
+| Viewer: rights/storage | independent HOLD for mirrors/storage and resource-specific access decisions; not prerequisite to answer-only engine |
+| Viewer: memory | independent CONDITIONAL; benchmark corpus/budgets/devices before engine selection |
 
-Hard blockers remain whole-PDF eager rendering, client-only final scoring,
-wall-clock-only timing, silent historical regrading, non-atomic acknowledged saves
-and enabling access/mirroring without rights authorization. Production mutation=0.
+Historical URL-expiration cases stay unresolved until appropriate file/access
+review; they need not block validated answer-only metadata/scoring solely because
+PDF delivery is unavailable. Subject-unknown cases DO block those affected scoring
+mappings until reviewed. No quarantine resolution or production publication occurs
+by writing this refinement.
+
+Hard blockers preserved: client-only final score, non-atomic acknowledged save,
+non-idempotent submission, silent historical regrading and guessed subject identity.
+Whole-PDF eager rendering remains a Viewer hard blocker; wall-clock-only timing
+remains a timed-execution hard blocker. Rights gates continue to govern media
+access/mirroring. Production mutation=0.

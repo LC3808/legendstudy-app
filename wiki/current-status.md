@@ -2,19 +2,22 @@
 
 Last reviewed: 2026-09-20
 
-## 2026-09-20 In-App Exam — ARCHITECTURE GATE RECORDED / IMPLEMENTATION HOLD
+## 2026-09-20 In-App Exam — PAPER-FIRST MODEL / ENGINE CONDITIONAL
 
-- Owner RED TEAM synthesis recorded in [canonical gate](architecture-in-app-exam.md):
-  grade-3 recent-three-year pilot and FIND → VIEW → ATTEMPT → SERVER SCORE →
-  RESULT → ACADEMIC RECORD, with atomic saves, bounded lazy rendering, uninterrupted
-  reconciled timer, immutable submission/provenance and entitlement boundary.
-- Basic Academic Record/history are V1-required but not implemented; deep
-  Analytics is V2+. Existing Study/Mock pause and Guest preview remain unchanged.
-- Seven prerequisites remain open/review-dependent: rights, viewer benchmark,
-  persistence, timer, idempotency, scoring provenance and validated pilot data.
-  Historical A2 structural preflight is complete but semantic/file gates remain.
-- Documentation only; no code, DB, Storage, PDF downloads, payment or Production
-  mutation. No viewer library selected and no implementation started.
+- [Canonical architecture](architecture-in-app-exam.md) refines the Viewer-first
+  order: solve on paper → exam selection/Attempt → answers → server score/grade
+  → Academic Record → basic history/comparison. Viewer opening is not required;
+  Viewer failure cannot block the engine. Optional Tablet route remains.
+- Existing answer entry/scoring is a reusable GO foundation. Integrated Engine
+  CONDITIONAL on validated keys/subjects/dataset and Record/lifecycle contracts;
+  full implementation readiness NO for these dependencies, not PDF availability.
+- Viewer CONDITIONAL on its separate benchmark/rights track; PDF mirror/Storage
+  HOLD. Historical semantic/scoring validation and rights gates remain intact.
+- Atomic persistence/revision/recovery, single execution owner, immutable answers,
+  idempotency, versioned server scoring and entitlement design are preserved.
+  Basic Record/comparison is V1; Advanced Analytics/AI strategy V2+.
+- Monetization/retention centre on user academic history and personalized value;
+  price/quota/tier decisions remain open. Documentation only, Production mutation 0.
 
 ## 2026-09-19 Monetization & In-App Learning strategy — PLANNED
 

@@ -110,7 +110,8 @@ Premium value is 풀이 → 채점 → 기록 → 분석 → 개인화된 학습
 
 ## 10. Mock Exam premium funnel
 
-Candidate journey: free viewer → exam mode → answer entry → auto scoring →
+Earlier candidate journey (Viewer-first ordering superseded by the paper-first
+refinement below): free viewer → exam mode → answer entry → auto scoring →
 원점수/등급 → 문항·영역 분석 → Academic Record → 성적 변화 → Academic
 Analytics. This chain is the primary conversion candidate.
 
@@ -231,8 +232,9 @@ more intelligence, deeper analysis, AI evaluation and longitudinal data value.
 
 **Historical expansion** prioritises metadata coverage; viewer Storage migration
 is a separate later step, gated on the rights decision in §3. Candidate order:
-Historical 2024 reconciliation → 최근 3개년 고3 viewer pilot → Mock Exam
-integration → viewer usage/cost measurement → coverage expansion.
+Historical 2024 reconciliation → independent answer-first Exam Engine validation;
+in parallel, rights-gated 고3 viewer pilot → viewer usage/cost measurement →
+viewer coverage expansion. This refines the earlier viewer-before-exam sequence.
 
 **Daily content sync** (Blog → App, incremental plus Owner manual sync) connects
 as: metadata ingestion → validation → viewer mirror eligibility → optional
@@ -291,3 +293,22 @@ Basic Academic Record/history are V1-required; Advanced Analytics is V2. Payment
 implementation remains separate, while an entitlement-compatible reserve/settle
 boundary is required in design now. Rights, metadata/viewer separation and
 undecided free quotas/tier pricing above are unchanged. No implementation started.
+
+## Paper-first / answer-first product refinement
+
+The prior RED TEAM gates remain safety requirements, but PDF delivery is not an
+Exam Engine dependency. Primary mobile: obtain/print a permitted paper externally,
+solve, select exam, enter answers, submit, receive server score/grade, record and
+compare. Viewer is for preview/reference/original access/download convenience or
+optional Tablet use, not the primary mobile paywall. Viewer failure cannot stop
+answers/scoring/history. No mirrors or downloads were implemented here.
+
+FREE candidates: search, basic resource access, original/download access, basic
+Viewer and bounded Premium Trial. Paid value candidates: repeated automatic
+scoring, grade/long-term records, exam comparisons, subject/area/weakness analysis,
+study-strategy generation and advanced Analytics. Prices and tier/quota contracts
+remain undecided; no new free-count promise. Basic Record/comparison is V1;
+AI/deep strategy is later. Retention asset is USER ACADEMIC HISTORY, not PDF
+collection: Exam → Score → Grade → Subject Performance → Historical Trend →
+Weakness → Study Strategy. [Architecture](architecture-in-app-exam.md) separates
+Viewer CONDITIONAL, mirror/Storage HOLD and independent Engine CONDITIONAL gates.
