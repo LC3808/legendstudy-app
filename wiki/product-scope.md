@@ -83,3 +83,12 @@ Auth and the ad-removal support purchase into v1. See ui-ux-v1.md for the approv
 policy and guest/auth boundary. This does not authorize backend implementation in
 Day 5: only Home/Materials/Study/MY navigation and UI skeletons, with existing
 ContentRepository reads retained. Saved is under MY, not a bottom tab.
+
+## Integrated In-App Exam V1 boundary
+
+The [In-App Exam gate](architecture-in-app-exam.md) defines the grade-3 recent
+three-year June/September evaluation mock and CSAT pilot: viewer → attempt →
+server score → basic Academic Record. This is a feature-V1 contract, not a claim
+that every roadmap feature is in the initial app release. Basic Record/history
+are required for that loop; deep Analytics, AI subjective scoring, full offline
+and realtime multi-device execution are excluded. Implementation is gated.

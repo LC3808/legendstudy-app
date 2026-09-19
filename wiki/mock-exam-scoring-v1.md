@@ -267,3 +267,10 @@ confirmed grade. No current-cutoff regrading or DB/RPC change. Owner reports act
 A/B grade/source/restore/history/retry/isolation/navigation and all run-fixture cleanup,
 trigger/baseline/data/Auth retention PASS on2026-09-15. D3 COMPLETE; Day8 overall
 remains NOT COMPLETE due to remaining physical-device gates.
+
+## New integrated In-App Exam boundary
+
+[In-App Exam architecture](architecture-in-app-exam.md) preserves existing pinned
+key/cutoff/engine provenance and actual submit_mock_attempt RPC authority. Its
+new V1 final result must be server-scored; existing Guest Dart preview remains
+a separate local experience. No implementation or accepted D1–D3 result changed.

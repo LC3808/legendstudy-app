@@ -197,3 +197,10 @@ This document is a roadmap record. It does not mean any of the above was built.
 No Flutter code, DB migration, Supabase schema, RLS, RPC, AI, admissions
 calculation, university data collection, UI, charts, score input or Study schema
 change. Those each require their own approved design and implementation task.
+
+## In-App Exam V1 dependency
+
+[In-App Exam architecture](architecture-in-app-exam.md) requires a basic Academic
+Record and score history for its V1 closed loop; that foundation is still NOT
+IMPLEMENTED. Deep Analytics and study-time/score/admissions analysis stay V2+;
+the roadmap dependency chain above is preserved.

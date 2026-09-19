@@ -502,3 +502,10 @@ profile launch/start, background/lock, pause, timeUp, local notification and ful
 kill/relaunch restore PASS. Earlier blanket iOS pending statements are superseded
 for these specific checks. Focus guidance, reboot and Android physical acceptance
 remain pending; Day8-B/C and overall Day8 are not declared COMPLETE.
+
+## New integrated Exam policy boundary
+
+[In-App Exam architecture](architecture-in-app-exam.md) specifies a future
+uninterrupted exam timer with server anchor/reconciliation and an extended atomic
+attempt envelope. Existing Study/Mock pause and monotonic recovery contracts
+here remain implemented and unchanged. New requirements are not runtime PASS.

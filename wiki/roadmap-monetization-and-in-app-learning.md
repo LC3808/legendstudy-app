@@ -283,3 +283,11 @@ Function, payment, IAP, RevenueCat, AdMob, AI, subscription, credit, resource
 migration or PDF download. No price and no product line-up is final. Related
 roadmaps: [roadmap-academic-analytics.md](roadmap-academic-analytics.md),
 [roadmap-essay-lab.md](roadmap-essay-lab.md).
+
+## In-App Exam RED TEAM gate
+
+Detailed implementation prerequisites live in [architecture-in-app-exam.md](architecture-in-app-exam.md).
+Basic Academic Record/history are V1-required; Advanced Analytics is V2. Payment
+implementation remains separate, while an entitlement-compatible reserve/settle
+boundary is required in design now. Rights, metadata/viewer separation and
+undecided free quotas/tier pricing above are unchanged. No implementation started.

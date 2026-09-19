@@ -275,3 +275,21 @@ personal-information exposure, image safety and an operator workflow are
 designed together with the posting feature, never afterwards. This does not
 promote Community into v1.0; `product-scope.md` still excludes it. See
 [roadmap-monetization-and-in-app-learning.md](roadmap-monetization-and-in-app-learning.md).
+
+## 2026-09-20 — In-App Exam learning loop and authority boundaries
+
+In-App Exam V1 is FIND → VIEW → START ATTEMPT → SOLVE → AUTOSAVE → SUBMIT →
+SERVER SCORE → RESULT → ACADEMIC RECORD. Basic history/Record are required;
+deep Analytics and AI subjective scoring remain later/separate. Whole-PDF eager
+rendering and client-only authoritative scoring are unacceptable architecture.
+Use bounded lazy rendering, atomic answer preservation, continuous elapsed timing
+with server reconciliation, one active device/session owner, immutable submitted
+answers and pinned scoring provenance. Retakes create new attempts; corrections
+must be auditable revisions, never silent current-key reinterpretation.
+
+Design entitlement compatibility now (CHECK → RESERVE → EXECUTE/SCORE → SETTLE;
+definitive failure releases/refunds); payment/tier quotas remain separate and
+undecided. Rights gate media storage/access; metadata coverage is independent of
+Viewer coverage. Existing Study pause and Guest preview remain unchanged.
+Detailed requirements and open prerequisites have one owner:
+[architecture-in-app-exam.md](architecture-in-app-exam.md). No implementation approval.

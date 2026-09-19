@@ -1596,3 +1596,16 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   is_active=false and require final Owner approval. No automatic semantic fix.
 - Offline tests 150 PASS, including historical CSV/key regression; diff check
   PASS. Production mutation 0; no publication SQL, behavior changes or push.
+
+## 2026-09-20 — In-App Exam RED TEAM architecture gate recorded
+
+- Added one canonical pre-implementation contract and cross-linked existing
+  architecture, product, Study/scoring and monetization/analytics roadmaps.
+- Recorded V1 loop/pilot, atomic persistence, continuous timer/server anchors,
+  device ownership, immutable submissions/scoring provenance, lazy-render memory
+  gate and separate rights/audio gates. Basic Record is V1, deep Analytics V2+.
+- Preserved current Guest preview/Study pause and accepted scoring contracts;
+  actual server entry point is submit_mock_attempt, not calculate_mock_score.
+- Recorded durable decisions, matrix and seven start prerequisites. Implementation
+  HOLD. Markdown links/consistency/diff checks PASS; only Wiki files changed.
+  Production mutation 0; no migrations, Storage, downloads, payment or push.

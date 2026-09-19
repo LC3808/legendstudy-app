@@ -2,6 +2,20 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 In-App Exam — ARCHITECTURE GATE RECORDED / IMPLEMENTATION HOLD
+
+- Owner RED TEAM synthesis recorded in [canonical gate](architecture-in-app-exam.md):
+  grade-3 recent-three-year pilot and FIND → VIEW → ATTEMPT → SERVER SCORE →
+  RESULT → ACADEMIC RECORD, with atomic saves, bounded lazy rendering, uninterrupted
+  reconciled timer, immutable submission/provenance and entitlement boundary.
+- Basic Academic Record/history are V1-required but not implemented; deep
+  Analytics is V2+. Existing Study/Mock pause and Guest preview remain unchanged.
+- Seven prerequisites remain open/review-dependent: rights, viewer benchmark,
+  persistence, timer, idempotency, scoring provenance and validated pilot data.
+  Historical A2 structural preflight is complete but semantic/file gates remain.
+- Documentation only; no code, DB, Storage, PDF downloads, payment or Production
+  mutation. No viewer library selected and no implementation started.
+
 ## 2026-09-19 Monetization & In-App Learning strategy — PLANNED
 
 Documentation only; nothing implemented, no price or product final, no

@@ -473,3 +473,11 @@ software keyboard and Home handoff PASS. Since the 2026-09-16 iOS closeout,
 repository-native Xcode27 settings use iOS15 and arm64; the former external
 validation xcconfig is no longer required. Release signing and physical new-UI
 quality checks remain separate. See day-9-search-explore.md.
+
+## In-App Exam pre-implementation gate
+
+[In-App Exam architecture](architecture-in-app-exam.md) owns the new integrated V1
+loop and RED TEAM hard blockers. Implementation start is HOLD pending its seven
+gates. Existing Study pause/Guest preview behavior is unchanged; new Exam V1
+requires uninterrupted timing and server-final scoring. Basic Academic Record
+is V1-required, deep Analytics V2+. No viewer engine or new schema selected.
