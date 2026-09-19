@@ -2,6 +2,37 @@
 
 Last reviewed: 2026-09-19
 
+## 2026-09-19 Monetization & In-App Learning strategy — PLANNED
+
+Documentation only; nothing implemented, no price or product final, no
+Production change, and no feature promoted into v1.0.
+
+- Web and App are separate products: Web keeps search acquisition, the public
+  archive and AdSense; the App carries FIND → VIEW → SOLVE → SCORE → RECORD →
+  ANALYZE → IMPROVE. Features are now designed with their user value, app
+  advantage, retention and monetization roles stated.
+- Core study material moves toward in-app viewing, piloted on roughly three
+  years × 고3 6월/9월 평가원 + 수능 by view demand. **Metadata coverage and
+  viewer coverage are explicitly separate**, with the original source page as a
+  permanent fallback. Any mirrored copy remains gated on the rights decision
+  deferred in `day-9-ingestion.md`; the 2026-09-12 no-bulk-mirroring rule stands.
+- Premium sells analysis, AI and continuity — not basic access. Candidate tiers
+  FREE / BASIC / ADVANCED / MAX (superseding the Free/Basic/Pro sketch), an
+  approximately three-use free trial as direction only, and subscription +
+  credits for AI-heavy features, with MAX explicitly not "unlimited AI". The
+  ₩4,900 one-time ad-removal purchase stays a separate product role.
+- **Community is back on the map as PLANNED**, role FREE / RETENTION, starting
+  with 학교 급식 자랑 (Meal-linked) and 잡담. It is not a launch blocker and not
+  an early paywall centre; reporting, blocking, moderation, spam handling,
+  personal-information and image safety plus an operator workflow are designed
+  with the posting feature.
+- Status: outbound resource open is the existing behaviour. In-app viewer,
+  Storage mirror, viewer cache, viewer ↔ Mock Exam integration, free analysis
+  trial, subscription, credit system, LS LAB subscription integration and
+  Community are all **NOT IMPLEMENTED**; the tiers are **product concept only**.
+- Detail: [roadmap-monetization-and-in-app-learning.md](roadmap-monetization-and-in-app-learning.md);
+  durable rules in [decisions.md](decisions.md).
+
 ## 2026-09-19 Academic Analytics → Achievement → Admissions Engine — PLANNED
 
 Documentation only; nothing was implemented and no Production change was made.

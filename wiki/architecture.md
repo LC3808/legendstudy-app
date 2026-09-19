@@ -443,6 +443,11 @@ admissions prediction. Exact pricing/limits and interaction with the earlier one
 ad-removal policy need a separate product decision. No subscription or payment scope
 is enabled here. Future access belongs in an Entitlement layer, not scattered isPro
 widget conditions. A free viewing limit must never delete attempts beyond that limit.
+The 2026-09-19 strategy record supersedes the Free/Basic/Pro naming with FREE /
+BASIC / ADVANCED / MAX and adds a subscription-plus-credits direction for
+AI-heavy features; see
+[roadmap-monetization-and-in-app-learning.md](roadmap-monetization-and-in-app-learning.md).
+The Entitlement-layer rule and the free-viewing-limit rule above are unchanged.
 
 
 ## Day 9-A search / explore

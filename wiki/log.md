@@ -1542,3 +1542,26 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   `decisions.md`, a PLANNED entry in `current-status.md`, an index link and a
   cross-reference from `product-scope.md`. v1.0 scope unchanged. Documentation
   only; no code, no schema, no Production mutation.
+
+## 2026-09-19 — Monetization and in-app learning strategy recorded
+
+- Product decision: Web and App take different roles, and features are now
+  evaluated on user value, app advantage, retention and monetization together.
+- Recorded the in-app PDF viewer direction with a recent-three-years 고3 pilot,
+  the separation of metadata coverage from viewer coverage, the permanent
+  source-page fallback, and the storage/cache measurements that must precede any
+  expansion. Noted explicitly that a mirrored copy is still blocked by the
+  deferred rights decision from Day 9, so the strategy does not override the
+  2026-09-12 no-bulk-mirroring rule.
+- Recorded that premium sells analysis, AI and continuity rather than basic
+  access: FREE / BASIC / ADVANCED / MAX as concept, an approximately three-use
+  free trial as direction, subscription + credits for AI-heavy features, MAX not
+  equal to unlimited AI, and the ₩4,900 ad-removal purchase kept as a separate
+  product role.
+- Reinstated **Community** on the product map as PLANNED with a FREE / RETENTION
+  role — 학교 급식 자랑 and 잡담 first, moderation and safety designed with the
+  posting feature, and explicitly not a launch blocker.
+- New `wiki/roadmap-monetization-and-in-app-learning.md`, five durable entries in
+  `decisions.md`, a PLANNED entry in `current-status.md`, an index link and
+  cross-references from `product-scope.md` and `architecture.md`. v1.0 scope
+  unchanged. Documentation only; no code, no schema, no Production mutation.

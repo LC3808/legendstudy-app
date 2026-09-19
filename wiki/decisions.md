@@ -226,3 +226,52 @@ Both this and the entry above are roadmap decisions. They do **not** promote the
 advanced achievement system or the early-admission prediction service into v1.0;
 `product-scope.md` still excludes both. See
 [roadmap-academic-analytics.md](roadmap-academic-analytics.md).
+
+## 2026-09-19 — Web and App are different products
+
+The App is not a second skin over the same content. Web keeps search
+acquisition, the public archive and AdSense; the App carries the learning
+workflow — FIND → VIEW → SOLVE → SCORE → RECORD → ANALYZE → IMPROVE. Every new
+feature is designed with its role on four axes stated: user value, app
+advantage, retention and monetization.
+
+## 2026-09-19 — Premium sells intelligence, not basic access
+
+Public educational material and the basic in-app viewer are not the centre of
+the paywall; free users must be able to search and read well enough to see the
+app's value. Paid value is analysis, AI evaluation and longitudinal data
+continuity. The basic experience is never degraded to force conversion.
+
+Candidate tiers FREE / BASIC / ADVANCED / MAX supersede the earlier
+Free/Basic/Pro sketch as working vocabulary; the Entitlement-layer rule in
+`architecture.md` still applies. The ₩4,900 one-time ad-removal purchase and a
+premium subscription remain separate product roles.
+
+## 2026-09-19 — Metadata coverage and viewer coverage are separate
+
+Historical metadata may expand far beyond what the in-app viewer serves.
+Resources outside viewer coverage fall back to the original LegendStudy source
+page, and a primary viewer path never removes that fallback. Storage cost is
+therefore not a reason to slow metadata expansion. Any mirrored copy still
+depends on the deferred rights decision recorded in `day-9-ingestion.md`, and
+the no-bulk-mirroring rule of 2026-09-12 stands until that decision is made.
+
+## 2026-09-19 — AI-heavy features may combine subscription and credits
+
+Features with a real marginal inference cost (LS LAB essay evaluation,
+handwritten math Vision, multimodal evaluation) are entitled by a subscription
+plus usage credits. MAX is not defined as unlimited AI. Quotas and prices are
+set after cost measurement.
+
+## 2026-09-19 — Community is a free retention feature, not a launch blocker
+
+Community stays on the long-term product map as PLANNED, with the role FREE /
+RETENTION, and is not the centre of the early paywall. Initial candidates are
+학교 급식 자랑 (linked to the Meal feature) and 잡담; 공부 인증, 모의고사 후기 and
+학습 팁 are later candidates. Single-user learning value — viewer, Mock Exam,
+Academic Record — ships first. Because the users are students, reporting,
+blocking, moderation, spam and banned-word handling, prevention of
+personal-information exposure, image safety and an operator workflow are
+designed together with the posting feature, never afterwards. This does not
+promote Community into v1.0; `product-scope.md` still excludes it. See
+[roadmap-monetization-and-in-app-learning.md](roadmap-monetization-and-in-app-learning.md).

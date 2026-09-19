@@ -72,6 +72,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [Essay Lab / LS LAB Product Roadmap — research complete; Phase 2 Web architecture recorded](roadmap-essay-lab.md)
 - [Academic Analytics → Achievement → Admissions Engine Roadmap — PLANNED, not implemented](roadmap-academic-analytics.md)
+- [Monetization & In-App Learning Strategy — PLANNED, not implemented](roadmap-monetization-and-in-app-learning.md)
 - [Day 10-B Home Polish v2 — implemented; device launch follow-up](day-10-b-home-polish.md)
 - [Day 10-C Legacy Subject Alias — minimum foundation implemented](legacy-subject-aliases.md)
 - [Day 11 Account, Personal and Feedback Operations — foundation / Production pending](day-11-account-personal-feedback.md)

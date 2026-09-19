@@ -49,6 +49,9 @@ These may be promoted into v1.0 only by an explicit product decision recorded in
 The long-term shape of the achievement system and the admission-prediction
 service is recorded in [roadmap-academic-analytics.md](roadmap-academic-analytics.md);
 that roadmap does not promote either into v1.0.
+The long-term shape of Community, the in-app viewer and paid tiers is recorded in
+[roadmap-monetization-and-in-app-learning.md](roadmap-monetization-and-in-app-learning.md);
+that roadmap does not promote Community into v1.0 either.
 
 ## UX principle
 
