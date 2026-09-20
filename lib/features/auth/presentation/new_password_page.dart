@@ -33,6 +33,9 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
 
   Future<void> _submit() async {
     if (_busy) return; // duplicate tap guard
+    final auth = ref.read(authStateProvider);
+    final owner = auth.value?.userId;
+    if (auth.isLoading || auth.hasError || owner == null) return;
     final service = ref.read(authRecoveryServiceProvider);
     if (service == null) {
       setState(() => _error = '지금은 변경할 수 없어요. 잠시 후 다시 시도해 주세요.');
@@ -52,12 +55,18 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
     });
     try {
       await service.updatePassword(_password.text);
-      if (!mounted) return;
+      if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
+      _password.clear();
+      _confirm.clear();
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('비밀번호를 변경했어요.')));
       context.go('/my');
     } catch (error) {
-      if (mounted) setState(() => _error = authErrorMessage(error));
+      if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        setState(() => _error = authErrorMessage(error));
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -65,7 +74,15 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = ref.watch(authStateProvider).value;
+    ref.listen(authStateProvider, (previous, next) {
+      if (previous?.value?.userId != next.value?.userId) {
+        _password.clear();
+        _confirm.clear();
+        setState(() => _error = null);
+      }
+    });
+    final status = ref.watch(authStateProvider);
+    final auth = status.isLoading || status.hasError ? null : status.value;
     if (auth == null || !auth.isAuthenticated) {
       return ShellPage(
         children: [

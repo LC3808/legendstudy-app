@@ -42,6 +42,11 @@ final routerProvider = Provider<GoRouter>((ref) {
             const NestedPage(title: '로그인 / 시작하기', child: AuthPage()),
       ),
       GoRoute(
+        path: '/auth/support',
+        builder: (_, _) =>
+            const NestedPage(title: '문의·건의사항', child: FeedbackPage()),
+      ),
+      GoRoute(
         path: '/auth/recovery',
         // reason=link marks "the link could not be used"; no token, code or
         // address is ever carried in the route.

@@ -1741,3 +1741,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   (HTTP 200), /lab/ → / is HTTP 308, verified read-only. LAB app code unchanged.
 - Production mutation 0; no schema/ingestion/provider changes. Production/device
   acceptance and existing release gates remain. One local commit, no push.
+
+
+## 2026-09-20 — Auth/account lifecycle code completion
+
+- Reused existing email/signup/OAuth/recovery/account architecture. Added signup
+  redirect config, conditional duplicate-account copy, email-forgotten guidance,
+  safe policy links and Guest support/back navigation. No email lookup API.
+- Fail closed on expired/malformed initial SDK sessions; password updates clear
+  fields and suppress stale owner completion. Dedicated auth.users identity
+  retained; no LAB code/session handoff or Materials feature changes.
+- Full 501 PASS / 1 existing skip; new SDK 5/UI 3 PASS, native iOS 3 PASS;
+  360×640/2×/keyboard renders reviewed. Analyze, Android debug/iOS simulator,
+  credential scan and diff checks PASS. Normal simulator app restored/launched.
+- Canonical Auth/core status separates code/local evidence from unverified
+  Production configuration/E2E and Owner gates. Apple revoke/deletion HOLD kept.
+  Production mutation 0. One scoped local commit; no push.

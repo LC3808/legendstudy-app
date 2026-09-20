@@ -4,7 +4,90 @@ Status: **CODE VERIFIED / PRODUCTION READINESS PREPARED; PRODUCTION RECOVERY
 E2E PENDING.** The application foundation is verified and the deep link the
 recovery email must open is now registered on both platforms. Registering the
 redirect URL in Supabase, a real recovery email, and physical-device acceptance
-remain Owner-side Production gates. No recovery email has ever been sent.
+remain Owner-side Production gates. This task did not send a Production recovery email; prior mailbox acceptance is not assumed.
+
+
+## Account lifecycle completion review — 2026-09-20
+
+**CODE READY; PRODUCTION CONFIGURATION UNVERIFIED; PRODUCTION E2E PENDING;
+OWNER ACTION REQUIRED.** Existing email/OAuth/recovery/profile/logout/deletion
+architecture is reused. No account lookup API, new identity store, LAB code,
+Production configuration or mutation was introduced.
+
+- Signup retains email/password/confirmation, validation, busy guard and safe
+  copy. The actual SDK response's session presence determines immediate sign-in
+  versus conditional email-verification guidance; client flags do not guess the
+  server Confirm Email policy. Duplicate-account copy avoids confirming identity.
+- `SUPABASE_SIGNUP_REDIRECT` now centrally supplies signup `emailRedirectTo`.
+  Empty preserves SDK/Supabase Site URL fallback; it does **not** establish app
+  verification return. Owner should configure the existing native callback
+  `com.legendstudy.app://login-callback` and allow-list it in the dedicated project.
+- Recovery remains `SUPABASE_RECOVERY_REDIRECT`, expected
+  `com.legendstudy.app://auth-recovery`, separately allow-listed. Both callback
+  registrations already exist on Android/iOS. These are build defines, not
+  dynamically loaded secrets. No actual deployment/config was changed.
+- PKCE link exchange requires the initiating installation's verifier. A link on
+  another device/reinstall is not promised to work. Expired/reused/malformed
+  links use safe error classification and re-request guidance. Router tests cover
+  warm events and initial replay; the previously documented cold-start event
+  replay race still requires real email/device acceptance.
+- SDK initial events can contain expired persisted sessions before refresh.
+  Expired/malformed/missing-expiry sessions now expose Guest identity until a
+  valid SDK session arrives. This event guard is not a new token validator or
+  expiry scheduler; refresh remains SDK-owned. Existing transient stream-error
+  handling and server authorization remain unchanged.
+- New-password submit requires current identity; owner changes clear fields and
+  suppress stale completion/navigation. Duplicate submissions remain blocked.
+  The existing authenticated-session update contract is retained (not restricted
+  to a recovery event); success retains the SDK session and opens MY.
+- “가입한 이메일을 잊으셨나요?” gives original-provider guidance and reuses Guest
+  feedback at `/auth/support`, returning to Auth with Back. No email address is
+  looked up. Auth shows policy links only for configured safe web URLs; missing
+  URLs remain hidden. No placeholder URL was added.
+- Canonical identity remains the dedicated LegendStudy `auth.users.id`, used by
+  profiles and personal data. Future LAB must use that same project/identity;
+  actual LAB auth configuration has not been inspected. No token/cookie/session
+  handoff or shared WebView was added. Account linking/duplicate identities need
+  Owner acceptance, not email-based client merging.
+
+### Readiness and Owner acceptance
+
+| Area | Code/local evidence | Production configured | Production E2E | Owner action |
+|---|---|---|---|---|
+| Email login/signup | Existing UX + SDK response tests | Not inspected | Pending | Confirm Email/SMTP policy, real mailbox and return |
+| Email verification | Configurable signup redirect | Not inspected | Pending | Allow-list callback and supply build define |
+| Recovery | Existing callback/UI + failure tests | Not inspected | Pending | Allow-list recovery, same-install cold/warm/expired/reused links |
+| Session/logout/isolation | SDK with in-memory persistence + A→Guest→B regressions | Not inspected | Pending | Kill/relaunch, refresh failure, A/B device acceptance |
+| Google/Kakao | Existing callback and visibility flags | Not inspected; flags default off | Pending | Console, official button assets/style, cancel/success/device QA |
+| Apple | Existing foundation; default off | Not inspected | Pending / HOLD | Token revoke/deletion contract before enabling |
+| Account deletion | Client ready + server candidate; regression retained | Deployment unverified, flag default off | Pending / HOLD | Deployment/config, Play web request URL, Apple revoke |
+| Policy URLs | Central safe URL path, missing links hidden | Actual values unverified | Pending | Approved privacy/terms URLs |
+| LAB account | Same-project/identity architecture compatible | LAB not inspected | Pending | Verify common project and linking policy separately |
+
+Local SDK tests use synthetic unsigned sessions, mocked HTTP and in-memory
+persistence. They do not prove physical storage survival, Production refresh,
+mail delivery, provider configuration or server account deletion. Existing
+Materials guest access, login return without auto-save, bookmark owner isolation,
+grade/profile preservation and deletion cleanup contracts remain regression gates.
+
+
+### Local validation — 2026-09-20
+
+- Full Flutter suite **501 PASS / 1 existing skip** (baseline 493 + 8 new).
+  New SDK tests **5 PASS**, new UI tests **3 PASS**; existing auth focused run
+  **68 PASS**. Materials login-return/bookmark/account isolation and account
+  deletion/profile regressions remain in the full suite.
+- iOS simulator offline Auth journey **3 PASS**, native 1×/2× help and real
+  keyboard screenshots reviewed. Separate 360×640 render **3 PASS**; 2× dialog
+  content scrolls while close/contact actions stay reachable. No overflow.
+- `flutter analyze`: no issues. Android debug and iOS simulator builds PASS;
+  normal simulator app reinstalled/launched after the fixture runner.
+- Credential signature scan + Auth log-call inspection and `git diff --check`
+  PASS. No passwords/tokens/raw callbacks logged. Synthetic fixtures only.
+- Native evidence: `/private/tmp/legendstudy-auth-native/`; 360×640 evidence:
+  `/private/tmp/legendstudy-core-ui/auth-help*.png` (local, not committed).
+- Production mutation **0**. Production email, OAuth, device persistence and
+  deletion acceptance are **not** claimed by these local tests.
 
 ## What exists now
 

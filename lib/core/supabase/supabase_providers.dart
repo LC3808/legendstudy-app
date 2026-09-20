@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../config/app_config.dart';
 
 class BackendUnavailable implements Exception {
@@ -61,6 +62,20 @@ Stream<AuthStatus> withAuthFailures(Stream<AuthStatus> source) {
   );
 }
 
+/// A persisted expired session is not a signed-in UI identity while the SDK
+/// refreshes it. Tokens stay SDK-owned; invalid local payloads fail closed.
+AuthStatus authStatusFromSdk(AuthState event) {
+  final session = event.session;
+  try {
+    if (session == null || session.expiresAt == null || session.isExpired) {
+      return AuthStatus(null, event: event.event);
+    }
+    return AuthStatus(session.user.id, event: event.event);
+  } catch (_) {
+    return AuthStatus(null, event: event.event);
+  }
+}
+
 final authStateProvider = StreamProvider<AuthStatus>(
   (ref) {
     final client = ref.watch(supabaseClientProvider);
@@ -68,9 +83,7 @@ final authStateProvider = StreamProvider<AuthStatus>(
     // onAuthStateChange supplies the SDK initial session event and later
     // changes; failures on it become values (see withAuthFailures).
     return withAuthFailures(
-      client.auth.onAuthStateChange.map(
-        (event) => AuthStatus(event.session?.user.id, event: event.event),
-      ),
+      client.auth.onAuthStateChange.map(authStatusFromSdk),
     );
   },
   // Rebuilding this provider re-subscribes to the same SDK stream, so a retry

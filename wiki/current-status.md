@@ -2,6 +2,25 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Auth/account lifecycle — CODE READY / PRODUCTION ACCEPTANCE PENDING
+
+- Existing Auth reused. Signup verification redirect is centrally configurable;
+  missing config retains Site URL fallback. Added email-forgotten guidance and
+  existing support navigation with Back; safe configured policy links only.
+- Expired/malformed SDK initial sessions now remain Guest until valid refresh.
+  New-password owner changes clear fields and discard stale completion; no
+  account lookup, identity database, LAB session sharing or Materials feature change.
+- Full **501 PASS / 1 existing skip**, SDK **5 PASS**, UI **3 PASS**, native iOS
+  offline journey **3 PASS**; 360×640/2× and real keyboard renders reviewed.
+  Analyze, Android debug/iOS simulator builds, credential and diff checks PASS.
+- Production config/E2E unverified. Owner gates: signup/recovery redirect and
+  mailbox/device tests, OAuth console/identity acceptance, actual policy URLs,
+  deletion deployment/flag/Play web URL; Apple revoke remains HOLD.
+- Session restore evidence uses real SDK with in-memory storage/mock HTTP; no
+  physical-device or Production persistence claim. Account identity remains
+  dedicated `auth.users.id`; LAB's real auth configuration was not inspected.
+- Production mutation **0**. [Canonical Auth evidence and Owner matrix](auth-recovery.md#account-lifecycle-completion-review--2026-09-20).
+
 ## 2026-09-20 Materials inline bookmark — IMPLEMENTED / LOCAL VALIDATION PASS
 
 - Search results now expose 48px save/unsave controls with selected semantics,

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/supabase/supabase_providers.dart';
+import '../../core/config/app_config.dart';
 
 /// Session material stays inside the SDK; UI receives only completion state.
 abstract class EmailAuthService {
@@ -10,7 +11,8 @@ abstract class EmailAuthService {
 }
 
 class SupabaseEmailAuthService implements EmailAuthService {
-  const SupabaseEmailAuthService(this.client);
+  const SupabaseEmailAuthService(this.client, {this.signupRedirectTo});
+  final String? signupRedirectTo;
   final SupabaseClient client;
   @override
   Future<void> login(String email, String password) async {
@@ -25,14 +27,23 @@ class SupabaseEmailAuthService implements EmailAuthService {
 
   @override
   Future<bool> signUp(String email, String password) async {
-    final result = await client.auth.signUp(email: email, password: password);
+    final result = await client.auth.signUp(
+      email: email,
+      password: password,
+      emailRedirectTo: signupRedirectTo,
+    );
     return result.session != null;
   }
 }
 
 final emailAuthServiceProvider = Provider<EmailAuthService?>((ref) {
   final client = ref.watch(supabaseClientProvider);
-  return client == null ? null : SupabaseEmailAuthService(client);
+  return client == null
+      ? null
+      : SupabaseEmailAuthService(
+          client,
+          signupRedirectTo: ref.watch(appConfigProvider).signupRedirectTo,
+        );
 });
 final localLogoutProvider = Provider<Future<void> Function()?>((ref) {
   final client = ref.watch(supabaseClientProvider);

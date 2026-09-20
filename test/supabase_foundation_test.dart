@@ -1,7 +1,10 @@
 import 'support/search_fake.dart';
+
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
+
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -82,7 +85,9 @@ void main() {
   Future<void> signInFixture() => client.auth.setInitialSession(
     jsonEncode({
       // Nonfunctional synthetic strings; no real JWT, password or remote login.
-      'access_token': 'unit-test-token', 'refresh_token': 'unit-test-refresh',
+      'access_token':
+          '${base64Url.encode(utf8.encode(jsonEncode({'alg': 'none'}))).replaceAll('=', '')}.${base64Url.encode(utf8.encode(jsonEncode({'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + 3600}))).replaceAll('=', '')}.',
+      'refresh_token': 'unit-test-refresh',
       'token_type': 'bearer', 'expires_in': 3600,
       'user': {
         'id': 'owner-a',
@@ -231,9 +236,8 @@ void main() {
     'personal payloads use current identity and exact DB write contracts',
     () async {
       await signInFixture();
-      await SupabaseProfileRepository(
-        client,
-      ).upsertCurrentProfile(displayName: '학생', gradeLevel: 3);
+      await SupabaseProfileRepository(client)
+          .upsertCurrentProfile(displayName: '학생', gradeLevel: 3);
       expect(jsonDecode(requests.last.body), {
         'id': 'owner-a',
         'display_name': '학생',

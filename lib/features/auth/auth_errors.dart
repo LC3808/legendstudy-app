@@ -16,7 +16,7 @@ const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 �
 const recoveryLinkUnusableMessage = '재설정 링크를 사용할 수 없어요. 다시 요청해 주세요.';
 
 const _byCode = <String, String>{
-  'email_exists': '이미 가입된 이메일이에요. 로그인하거나 비밀번호를 재설정해 주세요.',
+  'email_exists': '가입 정보를 확인해 주세요. 기존 계정이 있다면 로그인하거나 비밀번호를 재설정해 주세요.',
   'oauth_provider_not_supported': '현재 이 로그인 방식을 사용할 수 없습니다.',
   'unexpected_failure': '로그인을 완료하지 못했어요. 잠시 후 다시 시도해 주세요.',
   'bad_oauth_callback': '로그인을 완료하지 못했어요. 로그인 화면에서 다시 시도해 주세요.',
@@ -29,7 +29,7 @@ const _byCode = <String, String>{
   'weak_password': '비밀번호가 너무 단순해요. 더 긴 비밀번호를 사용해 주세요.',
   'same_password': '이전과 다른 비밀번호를 입력해 주세요.',
   'validation_failed': '입력한 정보를 다시 확인해 주세요.',
-  'user_already_exists': '이미 가입된 이메일이에요. 로그인해 주세요.',
+  'user_already_exists': '가입 정보를 확인해 주세요. 기존 계정이 있다면 로그인하거나 비밀번호를 재설정해 주세요.',
   'session_not_found': '로그인 정보가 만료되었어요. 다시 시도해 주세요.',
   // A provider consent screen that was cancelled or refused comes back as
   // error=access_denied. An expired recovery link carries the same coarse

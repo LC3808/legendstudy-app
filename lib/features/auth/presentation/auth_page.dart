@@ -10,6 +10,7 @@ import '../auth_errors.dart';
 import '../auth_oauth.dart';
 import '../auth_email.dart';
 import '../auth_recovery.dart';
+import 'auth_support_links.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -280,6 +281,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                 onPressed: _busy ? null : () => context.push('/auth/recovery'),
                 child: const Text('비밀번호를 잊으셨나요?'),
               ),
+            AuthSupportLinks(enabled: !_busy),
             if (providers.isNotEmpty) ...[
               const Divider(height: 32),
               const Text('다른 방법으로 로그인'),

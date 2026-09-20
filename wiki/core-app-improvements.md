@@ -1,5 +1,16 @@
 # Core App improvements — 2026-09-20
 
+## Account lifecycle follow-up — 2026-09-20
+
+Existing Auth reused: configurable signup verification return, safe duplicate
+account copy, email-forgotten support/back navigation, fail-closed policy links,
+expired initial-session guard and owner-safe password completion. Detailed
+code/config/E2E/Owner matrix: [Auth lifecycle](auth-recovery.md#account-lifecycle-completion-review--2026-09-20).
+Email/recovery code readiness is distinct from Production acceptance. Google,
+Apple and Kakao remain explicit flag-controlled; Apple revoke and deletion gates
+remain HOLD. LAB is identity-compatible by design, not verified shared login.
+No Production mutation, new identity database or Materials feature change.
+
 ## Scope and evidence
 
 Materials is an independent free core product: search → discover → external
