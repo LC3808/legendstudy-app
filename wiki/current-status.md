@@ -2,6 +2,20 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Product/platform canonicalization — DOCUMENTED ONLY
+
+- [Product family/B2B](product-architecture.md) and [App/Web boundary](product-platform-boundaries.md)
+  are canonical. LAB = multi-service Web Intelligence / Deep Work Platform;
+  Essay is one module. Teacher/School and Portfolio are future roadmaps only.
+- One auth.users identity/canonical dataset and one Analytics engine for B2C
+  and batch/cohort B2B; scoped organizational authorization remains unimplemented.
+  Evidence-based teacher drafts require review; security is requirements/targets,
+  not a verified infrastructure or marketing claim.
+- Priority: Auth Production → App/Web boundary → LAB authenticated IA/UX →
+  Core release → Academic Record/Analytics → Essay → Teacher/School.
+- Existing Auth release gates unchanged. Current app LAB copy remains essay-oriented;
+  later copy/IA alignment needed. No code, DB, Production or B2B implementation.
+
 ## 2026-09-20 Auth/account lifecycle — CODE READY / PRODUCTION ACCEPTANCE PENDING
 
 - Existing Auth reused. Signup verification redirect is centrally configurable;
@@ -215,7 +229,7 @@ semantic verification of the 15 candidates; QuestionSet confirmation; Question
 confirmation. **Gold Evaluation Package: NOT STARTED. AI evaluator: NOT
 STARTED.** The 42-university Public Catalog is **PRESERVED** either way.
 
-- **Essay-centric product model (decision).** LS LAB is not organised around a
+- **Essay-module product model (decision).** The LAB Essay module is not organised around a
   university's administrative 전형명. 논술우수자전형 / 논술전형 / 논술일반전형
   are all simply **ESSAY (논술)** to a student; the official name is kept as
   provenance metadata only. Canonical hierarchy: University → Essay → Essay
@@ -440,7 +454,7 @@ was ever sent.
 - Custom scheme over a universal link because `legendstudy.com` is Tistory:
   `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json`
   both return 404 and cannot be hosted, so recovery would otherwise be blocked
-  on the undecided LS LAB domain. The scheme matches the OAuth callback the app
+  on a domain with separately verified association-file support. The scheme matches the OAuth callback the app
   already used.
 - An expired, already-used or wrong-device link arrives as a stream error, not
   an event, and used to be silent; it now opens `/auth/recovery?reason=link`
@@ -651,7 +665,7 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
   materials explicitly and never filling them with guesses.
 - Keep `long_essay` and `short_response` as separate initial tracks and do not
   force one evaluation contract across them.
-- Working title is **LS LAB**; formal service name and domain are **TBD**.
+- LegendStudy LAB is multi-service; canonical domain is **lab.legendstudy.com**.
   Essay Lab is Web-primary, with the App focused on discovery, results,
   notifications and simple records/connections.
 - Manus work proceeds as Phase 0 nationwide survey, Phase 1 first-wave

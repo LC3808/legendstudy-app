@@ -1757,3 +1757,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Canonical Auth/core status separates code/local evidence from unverified
   Production configuration/E2E and Owner gates. Apple revoke/deletion HOLD kept.
   Production mutation 0. One scoped local commit; no push.
+
+
+## 2026-09-20 — Long-term product/platform/B2B canonicalization
+
+- Recorded App/LAB/Teacher/School family and App quick-action vs Web deep-work
+  boundary in two canonical documents, linked from index/status/architecture.
+- LAB multi-service definition supersedes essay-only/essay-first wording; Essay,
+  Analytics and monetization roadmaps keep their domain constraints. Current app
+  copy is explicitly unchanged and awaits a separate alignment task.
+- Recorded canonical identity/data, shared B2C/B2B analytics, evidence-only teacher
+  drafts, future tenant/RBAC/Portfolio, security targets, public IA and domain
+  candidates. Current Auth/Core gates preserved; Teacher/School not implemented.
+- Documentation-only link/scope checks and git diff --check PASS. No Flutter
+  tests/builds rerun; no code/schema/Production/DNS changes, mutation 0. No push.

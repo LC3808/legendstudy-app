@@ -11,6 +11,12 @@ This directory is the canonical long-term development knowledge base for LegendS
 5. Other task-specific documents as applicable
 6. Actual code, Git state, and DB/Supabase state
 
+## Product/platform canonical entry points
+
+- [Product family and B2B architecture](product-architecture.md) — App/LAB/Teacher/School, shared data/engine, future access/security, priority
+- [App/Web platform boundaries](product-platform-boundaries.md) — quick action vs deep work, public IA, domain strategy
+- Essay and Analytics roadmaps below retain module-specific detail; they do not redefine the product family.
+
 ## Documents
 
 - `core-app-improvements.md` — Materials/account improvements, evidence and Owner release gates
@@ -28,7 +34,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `design-system.md` — visual identity and UI design tokens
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log
-- `roadmap-essay-lab.md` — planned Essay Lab / LS LAB research-first roadmap
+- `roadmap-essay-lab.md` — Essay service-module research-first roadmap
 - `day-10-b-home-polish.md` — Home meal and expandable recent sections
 
 - [Day 10-A Flutter 3.47.3 official toolchain migration — COMPLETE](current-status.md#day-10-a--flutter-3473-official-toolchain-migration--complete)
@@ -72,7 +78,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Day 9-C3 Saved / Recent UI + MY Integration](day-9-c-personal-lists.md)
 - [Day 9-D1 Pilot C publication package — implemented; publication COMPLETE](day-9-d1-publication-package.md)
 
-- [Essay Lab / LS LAB Product Roadmap — research complete; Phase 2 Web architecture recorded](roadmap-essay-lab.md)
+- [LAB Essay Service Module Roadmap — research complete; Phase 2 Web architecture recorded](roadmap-essay-lab.md)
 - [Academic Analytics → Achievement → Admissions Engine Roadmap — PLANNED, not implemented](roadmap-academic-analytics.md)
 - [Monetization & In-App Learning Strategy — PLANNED, not implemented](roadmap-monetization-and-in-app-learning.md)
 - [Day 10-B Home Polish v2 — implemented; device launch follow-up](day-10-b-home-polish.md)

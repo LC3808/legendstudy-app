@@ -1,5 +1,15 @@
 # Monetization & In-App Learning Strategy
 
+## Platform clarification — 2026-09-20
+
+[Product architecture](product-architecture.md) and [platform boundaries](product-platform-boundaries.md)
+now govern product family and delivery order. LAB is the multi-service deep-work
+Web platform, not only Essay. Below, legendstudy.com means the public archive;
+LAB is a separate Web surface for deep analysis/creation/management. App retains
+quick actions, habit and notifications. Tier/credit examples remain undecided
+planning and do not authorize payments or Teacher/School implementation.
+
+
 Recorded 2026-09-19 from a Product Owner decision. **Documentation only.**
 Nothing here is implemented, no price or product is final, and nothing here
 promotes an excluded feature into v1.0 — `product-scope.md` governs that.

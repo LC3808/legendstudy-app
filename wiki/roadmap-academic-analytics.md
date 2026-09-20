@@ -1,5 +1,16 @@
 # Academic Analytics → Achievement → Admissions Engine Roadmap
 
+## Platform and B2B clarification — 2026-09-20
+
+LAB is a multi-service Web Intelligence / Deep Work Platform; Essay is one module.
+App shows quick results/actions; LAB owns deep analysis. Student and school
+analytics reuse one canonical academic model/engine: 1 student versus a batch
+of N students plus cohort aggregation. B2B access and orchestration are future
+work, not a second scoring engine. See [product architecture](product-architecture.md)
+and [platform boundaries](product-platform-boundaries.md). Existing separate-score
+scales, provenance and correlation-versus-causation constraints remain intact.
+
+
 Recorded 2026-09-19 from a Product Owner decision. **Documentation only.**
 Nothing described here is implemented, and nothing here promotes a feature into
 v1.0 — `product-scope.md` still excludes the advanced achievement system and the
@@ -21,7 +32,7 @@ Study  →  Subject Study Tracking  →  Mock Exam / Academic Record
                                             Target University / Department
                                                        ↓
                                               Admissions Engine
-LS LAB (논술 학습·첨삭)  →  Achievement Engine, and → Academic Profile as context
+LAB Essay module (논술 학습·첨삭)  →  Achievement Engine, and → Academic Profile as context
 ```
 
 Each arrow is a data dependency, not a release gate.
@@ -149,7 +160,7 @@ Future Admissions Engine data candidates, none of which are collected today:
 LS LAB 논술 기록 joins the Academic Profile as learning context and feeds the
 Achievement Engine. **Essay evaluation results and 모의고사/내신 scores are never
 summed onto one score scale.** Each domain stays independent and is combined only
-as context inside the Academic Profile. LS LAB's own roadmap is
+as context inside the Academic Profile. The Essay module's roadmap is
 [roadmap-essay-lab.md](roadmap-essay-lab.md).
 
 ## 12. Visualisation roadmap

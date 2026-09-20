@@ -2,14 +2,16 @@
 
 ## Current delivery priority — 2026-09-20
 
-Independent free Materials discovery/access/bookmark/revisit and Core release
-quality come first, followed by Daily Sync foundation. The older target lists
-below are not implementation claims. Viewer, advanced Exam Engine, Analytics,
-subscription/credit, Achievement and Community are outside this delivery.
-Email/password already exists in code; the older social-only target below is
-not current runtime behavior. Google/Apple/Kakao now require explicit release
-flags; Naver remains unimplemented. Policy URLs and Production auth acceptance
-remain Owner gates. See [Core implementation](core-app-improvements.md).
+Current cross-product priority is Auth Production completion → App/Web boundary
+→ LAB authenticated IA/UX → Core release readiness → Academic Record/Analytics
+→ Essay service → Teacher/School B2B. Canonical direction and scope limits live in
+[product architecture](product-architecture.md) and [platform boundaries](product-platform-boundaries.md).
+Materials remains independent and free; Guest access and existing Core quality
+must be preserved. Daily Sync stays a backlog contract, not newly authorized work.
+Older targets below are historical, not implementation claims or an override of
+this order. Email/password exists; social-only is superseded, provider flags and
+Production acceptance remain gates. Viewer, payments, Achievement, Community
+and B2B implementation are not authorized by this documentation update.
 
 ## v1.0 target
 

@@ -1,5 +1,13 @@
 # Core App improvements — 2026-09-20
 
+## Product definition clarification — 2026-09-20
+
+Current essay-oriented LAB entry copy below describes actual app behavior, not
+LAB's full product identity. [Product architecture](product-architecture.md)
+defines LAB as multi-service Web Intelligence / Deep Work; Essay is one module.
+Copy/authenticated IA alignment is a future task; no app code changed here.
+
+
 ## Account lifecycle follow-up — 2026-09-20
 
 Existing Auth reused: configurable signup verification return, safe duplicate

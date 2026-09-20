@@ -1,7 +1,7 @@
-# LegendStudy Product Roadmap — Essay Lab / LS LAB
+# LegendStudy LAB — Essay Service Module Roadmap
 
 Status: **RESEARCH COMPLETE / DEEP INTEGRATION PLANNED; PUBLIC APP ENTRY IMPLEMENTED**
-Target: **2026-10 Beta or initial public service**
+Historical target: **2026-10 Beta**, not a renewed release commitment.
 
 This document records a product priority change. It is a roadmap, not an
 implementation claim. No Essay Lab code, schema, AI evaluation, payment
@@ -32,22 +32,18 @@ not an independently audited analytics metric.
 2. LegendStudy Web App (working title: **LS LAB**)
 3. Shared Supabase backend
 
-The formal service name and domain are **TBD**. `ls-lab.com` is already in use;
-domain selection is not a blocker for Web MVP work, which may use localhost,
-temporary development URLs or previews.
+The service is **LegendStudy LAB**, canonical `https://lab.legendstudy.com/`.
+Earlier domain candidates are historical; no additional purchase is decided.
 
-LS LAB should be a Web service shell that can later expand to Essay Lab,
-grade analysis, Academic Profile and admission prediction. Essay Lab remains
-the first product area; grade analysis and admission prediction are later.
-The App and Web may share Auth, profiles, essay submissions, evaluations,
-usage/credits, bookmarks/recent data and later academic-profile data. Essay
-authoring and detailed analysis are Web-primary.
-
-The priority after current product stabilization is AI essay feedback (Essay
-Lab), ahead of grade analysis and admission prediction. The timing is driven
-by the 2026 admissions calendar and the concentration of university essay
-exams after the November CSAT. Academic Profile and Admission Simulator remain
-later initiatives.
+LegendStudy LAB is the multi-service Web Intelligence / Deep Work Platform;
+Essay is one module alongside Academic Analytics and other future services.
+[Product architecture](product-architecture.md) owns the family and current
+cross-product priority; [platform boundaries](product-platform-boundaries.md)
+owns App/Web allocation. This document owns Essay research/evaluation details.
+The earlier essay-before-analytics ordering is superseded by Auth → platform
+boundary → LAB authenticated IA/UX → Core release → Academic Record/Analytics
+→ Essay → Teacher/School. Shared canonical identity/data is required, but actual
+cross-product integration remains unverified and must not be assumed.
 
 ## 2. Research prerequisite and nationwide inventory
 
@@ -354,8 +350,9 @@ Planned sequence:
 12. Closed Beta.
 13. October Beta/initial public release.
 
-Academic Profile (school grades, subject grades/credits, mock exams and trend
-charts) and Admission Simulator are explicitly **LATER**, after Essay Lab.
+The milestone list above is the historical Essay-module plan, not current
+cross-product ordering. Academic Record/Analytics now precedes Essay service;
+Admission Simulator remains a separately gated candidate.
 Any reuse of Selty assets requires a legacy-system audit before implementation.
 
 ## 13. Historical Exam Expansion — LegendStudy App
@@ -389,7 +386,7 @@ changes. Those require separate approved design and implementation tasks.
 Recorded here so the roadmap and `current-status.md` do not drift. Detail and
 current state live in [current-status.md](current-status.md).
 
-- **Essay-centric, not 전형-centric.** A university's administrative 전형명
+- **Within the Essay module: essay-centric, not 전형-centric.** A university's administrative 전형명
   (논술우수자전형, 논술전형, 논술일반전형 …) is provenance metadata. To a
   student the product is **ESSAY (논술)**. Canonical hierarchy: University →
   Essay → Essay Track → QuestionSet → Question.
@@ -419,4 +416,4 @@ current state live in [current-status.md](current-status.md).
   teacher/admin management, usage monitoring) follows B2C, with Education
   Office / institutional expansion beyond it. Not implemented.
 - **Status on 2026-09-18: Core selection is HOLD until the Owner review next
-  week.** Sections 1–15 above are unchanged by this entry.
+  week.** This historical entry does not override the 2026-09-20 product/platform decision.

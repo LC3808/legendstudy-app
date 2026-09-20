@@ -1,5 +1,15 @@
 # Architecture
 
+## Long-term product/platform boundary — 2026-09-20
+
+[Product architecture](product-architecture.md) owns the App/LAB/Teacher/School
+family, shared identity/Analytics engine and future organization/security rules.
+[Platform boundaries](product-platform-boundaries.md) owns App quick-action versus
+Web deep-work allocation, public IA and domain strategy. These are approved
+planning constraints, not implemented infrastructure. Historical implementation
+milestones below remain evidence at their recorded dates.
+
+
 ## Core release increment — 2026-09-20
 
 [Core App improvements](core-app-improvements.md) reuse existing Materials query,
