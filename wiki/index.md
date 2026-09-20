@@ -13,6 +13,8 @@ This directory is the canonical long-term development knowledge base for LegendS
 
 ## Documents
 
+- `core-app-improvements.md` — Materials/account improvements, evidence and Owner release gates
+
 - `current-status.md` — current implementation status, blockers, next actions
 - `overview.md` — product purpose and project boundaries
 - `product-scope.md` — v1.0 and later scope

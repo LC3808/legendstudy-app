@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -131,6 +132,34 @@ void main() {
       await repository.updateSchoolSelection();
       expect(rows['owner-a']!['display_name'], '학생');
       expect(rows['owner-a']!['grade_level'], 2);
+    },
+  );
+  test(
+    'grade-only and login upserts preserve existing name, grade and school',
+    () async {
+      await session('owner-a');
+      await repository.upsertCurrentProfile(displayName: '학생', gradeLevel: 2);
+      await repository.updateSchoolSelection(
+        officeCode: 'J10',
+        schoolCode: '7530932',
+      );
+      await repository.upsertCurrentProfile(gradeLevel: 3);
+      expect(jsonDecode(requests.last.body), {
+        'id': 'owner-a',
+        'grade_level': 3,
+      });
+      await repository.upsertCurrentProfile();
+      expect(jsonDecode(requests.last.body), {'id': 'owner-a'});
+      final saved = await repository.fetchCurrentProfile();
+      expect(saved!.displayName, '학생');
+      expect(saved.gradeLevel, 3);
+      expect(saved.neisSchoolCode, '7530932');
+      final count = requests.length;
+      await expectLater(
+        repository.upsertCurrentProfile(gradeLevel: 4),
+        throwsFormatException,
+      );
+      expect(requests.length, count);
     },
   );
   test('profile editing omits and preserves school pair', () async {

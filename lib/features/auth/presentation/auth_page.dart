@@ -50,19 +50,11 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           _message('가입하고 로그인했어요.');
         }
       } else {
-        final response = await client.auth.signInWithPassword(
+        await client.auth.signInWithPassword(
           email: _email.text.trim(),
           password: _password.text,
         );
         await _ensureProfile();
-        await _waitForAuthenticatedState(response.user?.id);
-        if (mounted) {
-          if (context.canPop()) {
-            context.pop();
-          } else {
-            context.go('/my');
-          }
-        }
         _message('로그인했어요.');
       }
     } catch (error) {
@@ -86,7 +78,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       // arrives later on the auth stream and is handled by _onAuthStatus.
       final opened = await service.startSignIn(provider);
       if (!opened) {
-        _message('소셜 로그인 화면을 열지 못했어요. provider 설정을 확인해 주세요.');
+        _message('소셜 로그인 화면을 열지 못했어요. 잠시 후 다시 시도해 주세요.');
       }
     } catch (error) {
       _message(authErrorMessage(error));
@@ -127,7 +119,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
     final router = GoRouter.maybeOf(context);
     if (router == null) return;
-    if (router.routerDelegate.currentConfiguration.uri.path != '/auth') return;
+    // Imperative push keeps the branch URI; the visible route owns the return.
+    if (ModalRoute.of(context)?.isCurrent != true) return;
     if (context.canPop()) {
       context.pop();
     } else {
@@ -140,16 +133,6 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       await ref.read(profileRepositoryProvider).upsertCurrentProfile();
     } catch (_) {
       // Auth success remains valid; profile retry can happen on settings use.
-    }
-  }
-
-  Future<void> _waitForAuthenticatedState(String? expectedUserId) async {
-    if (expectedUserId == null) throw StateError('Missing authenticated user');
-    final current = ref.read(authStateProvider).value?.userId;
-    if (current == expectedUserId) return;
-    final state = await ref.read(authStateProvider.future);
-    if (state.userId != expectedUserId) {
-      throw StateError('Auth state did not settle for the signed-in user');
     }
   }
 
@@ -195,22 +178,31 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             child: const Text('비밀번호를 잊으셨나요?'),
           ),
         const Divider(height: 28),
-        const Text('소셜 로그인은 Supabase provider와 redirect 설정이 필요해요.'),
-        OutlinedButton.icon(
-          onPressed: _busy ? null : () => _oauth(OAuthProvider.google),
-          icon: const Icon(Icons.account_circle_outlined),
-          label: const Text('Google로 계속하기'),
-        ),
-        OutlinedButton.icon(
-          onPressed: _busy ? null : () => _oauth(OAuthProvider.apple),
-          icon: const Icon(Icons.apple),
-          label: const Text('Apple로 계속하기'),
-        ),
-        OutlinedButton.icon(
-          onPressed: _busy ? null : () => _oauth(OAuthProvider.kakao),
-          icon: const Icon(Icons.chat_bubble_outline),
-          label: const Text('Kakao로 계속하기'),
-        ),
+
+        if (ref
+            .watch(availableOAuthProvidersProvider)
+            .contains(OAuthProvider.google))
+          OutlinedButton.icon(
+            onPressed: _busy ? null : () => _oauth(OAuthProvider.google),
+            icon: const Icon(Icons.account_circle_outlined),
+            label: const Text('Google로 계속하기'),
+          ),
+        if (ref
+            .watch(availableOAuthProvidersProvider)
+            .contains(OAuthProvider.apple))
+          OutlinedButton.icon(
+            onPressed: _busy ? null : () => _oauth(OAuthProvider.apple),
+            icon: const Icon(Icons.apple),
+            label: const Text('Apple로 계속하기'),
+          ),
+        if (ref
+            .watch(availableOAuthProvidersProvider)
+            .contains(OAuthProvider.kakao))
+          OutlinedButton.icon(
+            onPressed: _busy ? null : () => _oauth(OAuthProvider.kakao),
+            icon: const Icon(Icons.chat_bubble_outline),
+            label: const Text('Kakao로 계속하기'),
+          ),
       ],
     );
   }

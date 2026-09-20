@@ -129,8 +129,9 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
       if (mounted && !_recentFailureShown) {
         _recentFailureShown = true;
         // A recent view is auxiliary; never replace the resolved detail.
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
       }
     }
   }
@@ -257,9 +258,8 @@ class _BookmarkControl extends ConsumerWidget {
               ? null
               : () async {
                   if (!authenticated) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('자료를 저장하려면 로그인이 필요해요.')),
-                    );
+                    await context.push('/auth');
+                    // Return to this detail; never replay a save across account changes.
                     return;
                   }
                   final before = state;

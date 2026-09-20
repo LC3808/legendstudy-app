@@ -47,58 +47,72 @@ class ResourceSection extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SectionHeader('첨부 자료'),
-              const Text('외부 사이트에서 열립니다. 링크의 현재 이용 가능 여부는 확인되지 않았어요.'),
-              for (final group in groups.values) ...[
-                SectionHeader(group.first.groupLabel),
-                for (final item in group)
-                  Card(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    elevation: 0,
-                    color: AppTokens.background,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppTokens.cardRadius),
-                      side: const BorderSide(color: AppTokens.cardBorder),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.displayTitle,
-                            style: Theme.of(context).textTheme.titleMedium,
+              const Text('과목별로 문제·정답·해설·듣기 자료를 확인하세요.'),
+              for (final group in groups.values)
+                ExpansionTile(
+                  key: PageStorageKey(
+                    '$contentItemId:${group.first.examSubjectId ?? 'general'}',
+                  ),
+                  initiallyExpanded: items.length <= 8,
+                  title: Text(group.first.groupLabel),
+                  subtitle: Text(
+                    '${group.length}개 · ${group.map((r) => resourceTypeLabels[r.resourceType] ?? '기타').toSet().join(' · ')}',
+                  ),
+                  children: [
+                    for (final item in group)
+                      Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        elevation: 0,
+                        color: AppTokens.background,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppTokens.cardRadius,
                           ),
-                          Text(
-                            resourceTypeLabels[item.resourceType] ?? '기타',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          if (item.sourceLabel?.trim().isNotEmpty == true &&
-                              item.sourceLabel != item.displayTitle)
-                            Text(item.sourceLabel!),
-                          if (resolveResourceOpenUri(item, contentSourceUrl) ==
-                              null)
-                            const Text('열 수 있는 링크가 없어요.')
-                          else
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (item.linkKind == 'unknown')
-                                  const Text('원본 자료 페이지에서 열립니다.'),
-                                ExternalLinkButton(
-                                  uri: resolveResourceOpenUri(
+                          side: const BorderSide(color: AppTokens.cardBorder),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item.displayTitle,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                resourceTypeLabels[item.resourceType] ?? '기타',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              if (item.sourceLabel?.trim().isNotEmpty == true &&
+                                  item.sourceLabel != item.displayTitle)
+                                Text(item.sourceLabel!),
+                              if (resolveResourceOpenUri(
                                     item,
                                     contentSourceUrl,
-                                  ),
-                                  label: '외부 링크 열기',
-                                  onOpenAttempted: onMeaningfulAction,
+                                  ) ==
+                                  null)
+                                const Text('열 수 있는 링크가 없어요.')
+                              else
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(resourceOpenDescription(item)),
+                                    ExternalLinkButton(
+                                      uri: resolveResourceOpenUri(
+                                        item,
+                                        contentSourceUrl,
+                                      ),
+                                      label: resourceOpenLabel(item),
+                                      onOpenAttempted: onMeaningfulAction,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                        ],
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-              ],
+                  ],
+                ),
             ],
           );
         },

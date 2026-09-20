@@ -1,5 +1,16 @@
 # Product Scope
 
+## Current delivery priority — 2026-09-20
+
+Independent free Materials discovery/access/bookmark/revisit and Core release
+quality come first, followed by Daily Sync foundation. The older target lists
+below are not implementation claims. Viewer, advanced Exam Engine, Analytics,
+subscription/credit, Achievement and Community are outside this delivery.
+Email/password already exists in code; the older social-only target below is
+not current runtime behavior. Google/Apple/Kakao now require explicit release
+flags; Naver remains unimplemented. Policy URLs and Production auth acceptance
+remain Owner gates. See [Core implementation](core-app-improvements.md).
+
 ## v1.0 target
 
 ### Core content experience

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/supabase/supabase_providers.dart';
+import '../../core/config/app_config.dart';
 
 /// Where a social provider returns after consent.
 ///
@@ -42,3 +43,13 @@ const supportedOAuthProviders = <OAuthProvider>[
   OAuthProvider.apple,
   OAuthProvider.kakao,
 ];
+
+// A deployment declaration, not automatic provider discovery.
+final availableOAuthProvidersProvider = Provider<List<OAuthProvider>>((ref) {
+  final config = ref.watch(appConfigProvider);
+  return [
+    if (config.googleOAuthEnabled) OAuthProvider.google,
+    if (config.appleOAuthEnabled) OAuthProvider.apple,
+    if (config.kakaoOAuthEnabled) OAuthProvider.kakao,
+  ];
+});

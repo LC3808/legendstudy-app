@@ -20,6 +20,12 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let info = FlutterMethodChannel(name: "com.legendstudy.app/info", binaryMessenger: binaryMessenger)
+    info.setMethodCallHandler { call, result in
+      guard call.method == "version" else { result(FlutterMethodNotImplemented); return }
+      result(["version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
+              "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""])
+    }
     let notification = FlutterMethodChannel(name: "com.legendstudy.app/mock-notification", binaryMessenger: binaryMessenger)
     notification.setMethodCallHandler { call, result in
       let center = UNUserNotificationCenter.current()

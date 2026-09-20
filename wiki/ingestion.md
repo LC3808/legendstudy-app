@@ -185,3 +185,41 @@ secondary provenance, partial failures, concurrent workers and merge cycles. Exp
 stable parents/slugs/resource identities, durable quarantine and no accidental
 content loss. Test column/study/essay ingestion without exam rows and native
 search/save/recent contracts on all types. No implementation/runtime claim here.
+
+
+## Daily Sync minimum contract — 2026-09-20
+
+REQUIREMENTS ONLY; no new crawler, state format, scheduler, cron, notifications
+or Production execution implemented in this Core App task.
+
+Reuse current polite crawler/parser/normalizer and pipeline. Existing
+`pipeline.run` compares content hashes, retains missing sources for review,
+flags merge candidates, and `next_state` preserves prior entries. Normalizer
+separates source publication time from crawl time. These are foundations, not
+proof that Daily Sync is operational.
+
+Minimum next increment:
+
+- Discover newly observed external post IDs and recheck known posts within a
+  bounded request budget. Identify meaningful normalized metadata/resource changes,
+  including distinct question, answer, explanation and audio additions. Ignore
+  attachment ordering and volatile signed-query changes for notification identity.
+- Deduplicate on stable source/content/resource identity. Keep publication time,
+  source update time when known, crawl time and accepted publication time separate;
+  never label a re-crawl as a newly published article.
+- Persist an inspectable run manifest: run ID, start/end, scope, prior baseline,
+  counts and typed changes, safe failures, quarantine and approval status.
+  Track last successful sync separately; advance only after a complete validated
+  run, never merely because a partial run emitted `next_state`.
+- Partial/temporary source failures retain last good published materials. Missing
+  or unavailable origin never automatically deletes/unpublishes prior content.
+- Owner inspects candidates/diffs/quarantine; only validated approved candidates
+  reach publication. Existing identity/semantic/rights/availability gates remain.
+- App shows additions by their real type (e.g. new explanation on an existing
+  exam), not duplicate whole articles. Any optional new-material notification
+  links to that material, respects permission/preferences and deduplicates events.
+  On failure, preserve usable cached/current material; do not claim an empty
+  library or send success notifications. Expose freshness when trustworthy.
+
+Implementation, manifest storage and notification delivery are a later task;
+no Production automation is authorized here. Historical A2 gates are untouched.

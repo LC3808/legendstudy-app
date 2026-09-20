@@ -56,10 +56,13 @@ class SupabaseProfileRepository extends _PersonalRepository
     int? gradeLevel,
   }) async {
     final owner = requireUser();
+    if (gradeLevel != null && ![1, 2, 3].contains(gradeLevel)) {
+      throw const FormatException('Unsupported grade.');
+    }
     await client!.from('profiles').upsert({
       'id': owner,
-      'display_name': displayName,
-      'grade_level': gradeLevel,
+      if (displayName != null) 'display_name': displayName,
+      if (gradeLevel != null) 'grade_level': gradeLevel,
     }, onConflict: 'id');
   }
 }

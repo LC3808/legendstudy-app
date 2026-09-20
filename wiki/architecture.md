@@ -1,5 +1,15 @@
 # Architecture
 
+## Core release increment — 2026-09-20
+
+[Core App improvements](core-app-improvements.md) reuse existing Materials query,
+resource destination, personal repository and RLS contracts. Grade writes are
+sparse; auth return uses visible-route ownership. Confirmed server deletion and
+local post-delete cleanup have separate page states. Native package metadata is
+read through `com.legendstudy.app/info`; policy/provider availability uses
+compile-time AppConfig seams. No schema, RPC, Viewer or ingestion change.
+Daily Sync remains a [minimum contract](ingestion.md#daily-sync-minimum-contract--2026-09-20), not a scheduled service.
+
 ## Baseline direction
 
 Planned client: Flutter mobile app for iOS and Android.

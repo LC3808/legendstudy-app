@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
+import '../../../core/config/app_config.dart';
+import '../../../core/config/app_information.dart';
+import '../../../core/links/external_link.dart';
+import '../../resources/domain/content_resource.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../feedback/feedback_providers.dart';
 
@@ -12,6 +16,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
+    final config = ref.watch(appConfigProvider);
     final admin = ref.watch(adminAccessProvider);
     final currentUserId = auth.value?.userId;
     final isAuthenticated = auth.value?.isAuthenticated == true;
@@ -71,7 +76,8 @@ class ProfilePage extends ConsumerWidget {
           subtitle: Text(
             isAuthenticated ? '학년을 저장하고 학습을 맞춤 설정해요' : '로그인 후 학년을 저장할 수 있어요',
           ),
-          enabled: false,
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.push('/my/grade'),
         ),
         const Divider(),
         const SectionHeader('나의 자료'),
@@ -114,20 +120,43 @@ class ProfilePage extends ConsumerWidget {
             onTap: () => context.push('/my/delete-account'),
           ),
         const Divider(),
-        const SectionHeader('레전드스터디와 함께'),
-        const CompactUtilityCard(
-          title: '커피 한 잔 후원',
-          body: '₩4,900 한 번의 후원으로 광고를 영구 제거해요. 후원 기능은 곧 만나요.',
-        ),
+        const SectionHeader('앱 정보 · 정책'),
         ListTile(
           contentPadding: EdgeInsets.zero,
           title: const Text('앱 정보'),
           onTap: () => showAboutDialog(
             context: context,
             applicationName: '레전드스터디',
-            applicationVersion: '0.1.0',
+            children: [
+              Consumer(
+                builder: (context, ref, _) => ref
+                    .watch(appVersionProvider)
+                    .when(
+                      data: (v) => Text('버전 $v'),
+                      loading: () => const Text('버전 확인 중…'),
+                      error: (_, _) => TextButton(
+                        onPressed: () => ref.invalidate(appVersionProvider),
+                        child: const Text('버전 다시 확인'),
+                      ),
+                    ),
+              ),
+            ],
           ),
         ),
+        for (final policy in [
+          ('개인정보처리방침', config.privacyUrl),
+          ('이용약관', config.termsUrl),
+        ])
+          publicWebUri(policy.$2) == null
+              ? ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(policy.$1),
+                  subtitle: const Text('준비 중 · 문의·건의사항으로 연락해 주세요.'),
+                )
+              : ExternalLinkButton(
+                  uri: publicWebUri(policy.$2),
+                  label: policy.$1,
+                ),
       ],
     );
   }

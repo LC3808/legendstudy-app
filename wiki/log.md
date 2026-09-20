@@ -1623,3 +1623,23 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   quotas/prices unchanged. Updated existing Wiki/roadmap/handoff, no new roadmap.
 - Internal links, documentation consistency and diff checks PASS. Documentation
   only; no code, schema, Production mutation, downloads, payment or push.
+
+
+## 2026-09-20 — Core Materials and account UX improvements
+
+- Split month/type filters without query changes; added empty-state actions,
+  occurrence-preserving resource collapse and truthful external destination CTAs.
+  Guest bookmark now returns from login to detail without auto-saving.
+- Added grade settings via existing sparse profile path, native version/build,
+  policy URL seams and opt-in provider visibility. Separate successful server
+  deletion from retryable local cleanup/sign-out; no deployment/enable changes.
+- Search-row bookmark HOLD pending bulk/optimistic state contract. Daily Sync
+  requirements only; LS LAB MY external-link placement recommendation only.
+- Flutter 3.47: full tests 423 PASS / 1 existing skip, Core render 8 PASS,
+  search render 29 PASS, analyze PASS, Android debug/iOS simulator build PASS,
+  diff check PASS. Reviewed small-screen/2× widget renders; no physical or
+  Production E2E claim. Existing native toolchain deprecation warnings remain.
+- Core implementation complete; release waits for real policies, provider and
+  recovery/deletion gates, and device acceptance. Production mutation 0;
+  Historical A2, existing untracked artifacts and earlier iPhone results preserved.
+  No push. Details: core-app-improvements.md.

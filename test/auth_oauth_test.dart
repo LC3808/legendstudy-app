@@ -62,10 +62,12 @@ void main() {
       ProviderScope(
         overrides: [
           oauthServiceProvider.overrideWithValue(service),
+          availableOAuthProvidersProvider.overrideWithValue(
+            supportedOAuthProviders,
+          ),
           authStateProvider.overrideWith(
-            (ref) => withAuthFailures(
-              auth ?? Stream.value(const AuthStatus(null)),
-            ),
+            (ref) =>
+                withAuthFailures(auth ?? Stream.value(const AuthStatus(null))),
           ),
         ],
         child: MaterialApp.router(routerConfig: router),
@@ -74,8 +76,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  String currentPath() =>
-      router.routerDelegate.currentConfiguration.uri.path;
+  String currentPath() => router.routerDelegate.currentConfiguration.uri.path;
 
   group('provider actions', () {
     for (final (label, provider) in const [
@@ -113,15 +114,14 @@ void main() {
       await tester.pump(); // busy, provider page opening
       await tester.tap(find.text('Kakao로 계속하기'), warnIfMissed: false);
       await tester.pumpAndSettle();
-      expect(
-        service.started,
-        [OAuthProvider.google],
-        reason: 'two providers must not run at once',
-      );
+      expect(service.started, [
+        OAuthProvider.google,
+      ], reason: 'two providers must not run at once');
     });
 
-    testWidgets('the buttons are usable again after the flow starts',
-        (tester) async {
+    testWidgets('the buttons are usable again after the flow starts', (
+      tester,
+    ) async {
       final service = FakeOAuthService();
       await mountLogin(tester, service: service);
       await tester.tap(find.text('Google로 계속하기'));
@@ -133,8 +133,9 @@ void main() {
       expect(service.started, [OAuthProvider.google, OAuthProvider.kakao]);
     });
 
-    testWidgets('a provider page that will not open says so in Korean',
-        (tester) async {
+    testWidgets('a provider page that will not open says so in Korean', (
+      tester,
+    ) async {
       await mountLogin(tester, service: FakeOAuthService(opened: false));
       await tester.tap(find.text('Google로 계속하기'));
       await tester.pumpAndSettle();
@@ -154,8 +155,9 @@ void main() {
       expect(find.textContaining('provider is not enabled'), findsNothing);
     });
 
-    testWidgets('an unconfigured backend does not crash the screen',
-        (tester) async {
+    testWidgets('an unconfigured backend does not crash the screen', (
+      tester,
+    ) async {
       await mountLogin(tester, service: null);
       await tester.tap(find.text('Google로 계속하기'));
       await tester.pumpAndSettle();
@@ -168,26 +170,19 @@ void main() {
     testWidgets('a signed-in session leaves the login screen', (tester) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
-      await mountLogin(
-        tester,
-        service: FakeOAuthService(),
-        auth: auth.stream,
-      );
+      await mountLogin(tester, service: FakeOAuthService(), auth: auth.stream);
       expect(currentPath(), '/auth');
       auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
       await tester.pumpAndSettle();
       expect(currentPath(), '/my');
     });
 
-    testWidgets('a cancelled consent screen is explained, not silent',
-        (tester) async {
+    testWidgets('a cancelled consent screen is explained, not silent', (
+      tester,
+    ) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
-      await mountLogin(
-        tester,
-        service: FakeOAuthService(),
-        auth: auth.stream,
-      );
+      await mountLogin(tester, service: FakeOAuthService(), auth: auth.stream);
       auth.addError(authError('Access denied', code: 'access_denied'));
       await tester.pumpAndSettle();
       expect(find.text('로그인이 취소되었어요.'), findsOneWidget);
@@ -198,15 +193,12 @@ void main() {
       );
     });
 
-    testWidgets('housekeeping events leave the login screen alone',
-        (tester) async {
+    testWidgets('housekeeping events leave the login screen alone', (
+      tester,
+    ) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
-      await mountLogin(
-        tester,
-        service: FakeOAuthService(),
-        auth: auth.stream,
-      );
+      await mountLogin(tester, service: FakeOAuthService(), auth: auth.stream);
       for (final event in [
         AuthChangeEvent.tokenRefreshed,
         AuthChangeEvent.userUpdated,
@@ -221,15 +213,12 @@ void main() {
       }
     });
 
-    testWidgets('a recovery session does not hijack the login return',
-        (tester) async {
+    testWidgets('a recovery session does not hijack the login return', (
+      tester,
+    ) async {
       final auth = StreamController<AuthStatus>.broadcast();
       addTearDown(auth.close);
-      await mountLogin(
-        tester,
-        service: FakeOAuthService(),
-        auth: auth.stream,
-      );
+      await mountLogin(tester, service: FakeOAuthService(), auth: auth.stream);
       auth.add(
         const AuthStatus('user-a', event: AuthChangeEvent.passwordRecovery),
       );

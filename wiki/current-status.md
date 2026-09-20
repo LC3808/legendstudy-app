@@ -2,6 +2,23 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Core App — CODE IMPLEMENTED / OWNER RELEASE GATES OPEN
+
+- Current priority: independent free Materials journey → Core release quality →
+  Daily Sync foundation. Analytics/BM/advanced Engine are deferred directions.
+- Split month/type filters, actionable empty states, collapsible resource groups,
+  truthful external CTAs, Guest login return, grade settings, native app version,
+  policy URL seams and explicit OAuth availability implemented.
+- Confirmed server deletion is separate from retryable device cleanup/logout.
+  Sparse profile writes preserve existing name/grade/school information.
+- Full Flutter suite 423 PASS / 1 existing skip; Production E2E not performed.
+  Owner policy/provider/recovery/deletion/device gates remain; RELEASE READY NO.
+- Inline result bookmarks HOLD; Daily Sync is a documented contract, LS LAB
+  placement only. No ingestion/Production changes; prior physical results and
+  Historical A2 gates remain unchanged.
+- Details: [core-app-improvements.md](core-app-improvements.md). Older dated
+  sections below retain historical context, not the active priority ordering.
+
 ## 2026-09-20 In-App Exam — PAPER-FIRST MODEL / ENGINE CONDITIONAL
 
 - [Canonical architecture](architecture-in-app-exam.md) refines the Viewer-first

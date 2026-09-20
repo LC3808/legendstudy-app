@@ -21,6 +21,20 @@ class MainActivity : FlutterActivity() {
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/info")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "version") { result.notImplemented() } else {
+                    try {
+                        @Suppress("DEPRECATION")
+                        val info = packageManager.getPackageInfo(packageName, 0)
+                        val build = if (android.os.Build.VERSION.SDK_INT >= 28) info.longVersionCode else {
+                            @Suppress("DEPRECATION")
+                            info.versionCode.toLong()
+                        }
+                        result.success(mapOf("version" to info.versionName, "build" to build.toString()))
+                    } catch (_: Exception) { result.error("unavailable", "App information unavailable", null) }
+                }
+            }
         mockNotifications = MockNotificationBridge(this, flutterEngine.dartExecutor.binaryMessenger)
         StudyFocusBridge(this, flutterEngine.dartExecutor.binaryMessenger)
         val store = AtomicFile(File(filesDir, "study-state-v1.json"))

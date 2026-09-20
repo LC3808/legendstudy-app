@@ -104,3 +104,17 @@ Uri? resolveResourceOpenUri(ContentResource resource, String contentSourceUrl) {
     _ => null,
   };
 }
+
+String resourceOpenLabel(ContentResource resource) {
+  if (resource.linkKind == 'unknown') return '원문에서 보기';
+  final kind = resourceTypeLabels[resource.resourceType] ?? '자료';
+  return resource.linkKind == 'landing_page' ? '$kind 자료 페이지 보기' : '$kind 보기';
+}
+
+String resourceOpenDescription(ContentResource resource) =>
+    switch (resource.linkKind) {
+      'unknown' => '원본 게시글에서 해당 자료를 찾아 주세요.',
+      'landing_page' => '외부 자료 페이지에서 열립니다.',
+      'file' => '자료 파일을 외부 앱에서 엽니다.',
+      _ => '열 수 있는 링크가 없어요.',
+    };

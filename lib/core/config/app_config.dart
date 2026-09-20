@@ -8,6 +8,11 @@ class AppConfig {
     this.supabasePublishableKey = '',
     this.recoveryRedirectUrl = '',
     this.accountDeletionEnabled = false,
+    this.privacyUrl = '',
+    this.termsUrl = '',
+    this.googleOAuthEnabled = false,
+    this.appleOAuthEnabled = false,
+    this.kakaoOAuthEnabled = false,
   });
   factory AppConfig.fromEnvironment() => const AppConfig(
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
@@ -21,7 +26,14 @@ class AppConfig {
     // without it tells the user the feature is not ready instead of failing
     // with a transport error.
     accountDeletionEnabled: bool.fromEnvironment('ACCOUNT_DELETION_ENABLED'),
+    privacyUrl: String.fromEnvironment('PRIVACY_POLICY_URL'),
+    termsUrl: String.fromEnvironment('TERMS_URL'),
+    googleOAuthEnabled: bool.fromEnvironment('GOOGLE_OAUTH_ENABLED'),
+    appleOAuthEnabled: bool.fromEnvironment('APPLE_OAUTH_ENABLED'),
+    kakaoOAuthEnabled: bool.fromEnvironment('KAKAO_OAUTH_ENABLED'),
   );
+  final String privacyUrl, termsUrl;
+  final bool googleOAuthEnabled, appleOAuthEnabled, kakaoOAuthEnabled;
   final String environment;
   final String supabaseUrl;
   final String supabasePublishableKey;

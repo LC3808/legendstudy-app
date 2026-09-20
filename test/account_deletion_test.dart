@@ -31,12 +31,16 @@ class FakeDeletionService implements AccountDeletionService {
 class MemoryStudyStore implements StudyLocalStore {
   MemoryStudyStore(this.document);
   Map<String, dynamic> document;
+  bool failWrite = false;
 
   @override
   Future<Map<String, dynamic>> read() async => document;
 
   @override
-  Future<void> write(Map<String, dynamic> next) async => document = next;
+  Future<void> write(Map<String, dynamic> next) async {
+    if (failWrite) throw StateError('local disk failure');
+    document = next;
+  }
 }
 
 Map<String, dynamic> studyDoc() => {
@@ -56,6 +60,7 @@ void main() {
     WidgetTester tester, {
     AccountDeletionService? service,
     AuthStatus auth = const AuthStatus('user-a'),
+    Future<void> Function()? logout,
   }) async {
     store = MemoryStudyStore(studyDoc());
     router = GoRouter(
@@ -84,6 +89,8 @@ void main() {
       ProviderScope(
         overrides: [
           accountDeletionServiceProvider.overrideWithValue(service),
+          if (logout != null)
+            postDeleteSignOutProvider.overrideWithValue(logout),
           studyLocalStoreProvider.overrideWithValue(store),
           authStateProvider.overrideWith((ref) => Stream.value(auth)),
         ],
@@ -93,8 +100,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  String currentPath() =>
-      router.routerDelegate.currentConfiguration.uri.path;
+  String currentPath() => router.routerDelegate.currentConfiguration.uri.path;
 
   Future<void> agreeAndDelete(
     WidgetTester tester, {
@@ -111,8 +117,9 @@ void main() {
   }
 
   group('entry conditions', () {
-    testWidgets('a guest is asked to sign in, not offered deletion',
-        (tester) async {
+    testWidgets('a guest is asked to sign in, not offered deletion', (
+      tester,
+    ) async {
       await mountPage(
         tester,
         service: FakeDeletionService(),
@@ -122,8 +129,9 @@ void main() {
       expect(find.widgetWithText(FilledButton, '회원탈퇴'), findsNothing);
     });
 
-    testWidgets('an unconfigured endpoint says so and cannot be run',
-        (tester) async {
+    testWidgets('an unconfigured endpoint says so and cannot be run', (
+      tester,
+    ) async {
       await mountPage(tester, service: null);
       await tester.tap(find.text('위 내용을 이해했어요'));
       await tester.pumpAndSettle();
@@ -134,8 +142,9 @@ void main() {
       expect(button.onPressed, isNull, reason: 'fail closed, never a fake run');
     });
 
-    testWidgets('what is deleted is spelled out before anything happens',
-        (tester) async {
+    testWidgets('what is deleted is spelled out before anything happens', (
+      tester,
+    ) async {
       await mountPage(tester, service: FakeDeletionService());
       for (final item in deletedItems) {
         expect(find.text('· $item'), findsOneWidget);
@@ -155,8 +164,9 @@ void main() {
       expect(service.calls, 0);
     });
 
-    testWidgets('the deletion button is dead until the box is ticked',
-        (tester) async {
+    testWidgets('the deletion button is dead until the box is ticked', (
+      tester,
+    ) async {
       await mountPage(tester, service: FakeDeletionService());
       final button = tester.widget<FilledButton>(
         find.widgetWithText(FilledButton, '회원탈퇴'),
@@ -193,20 +203,73 @@ void main() {
   });
 
   group('outcome', () {
-    testWidgets('a completed deletion clears this device and leaves',
-        (tester) async {
+    testWidgets('a completed deletion clears this device and leaves', (
+      tester,
+    ) async {
       await mountPage(tester, service: FakeDeletionService());
       await agreeAndDelete(tester);
       expect(currentPath(), '/home');
       final owners = store.document['owners'] as Map;
       expect(owners.containsKey('user-a'), isFalse);
-      expect(
-        owners.keys.toSet(),
-        {'user-b', 'guest'},
-        reason: 'another account on this device must not be touched',
-      );
+      expect(owners.keys.toSet(), {
+        'user-b',
+        'guest',
+      }, reason: 'another account on this device must not be touched');
     });
 
+    testWidgets(
+      'server success survives local failure; retry never deletes twice',
+      (tester) async {
+        final service = FakeDeletionService();
+        var logouts = 0;
+        await mountPage(
+          tester,
+          service: service,
+          logout: () async {
+            logouts++;
+          },
+        );
+        store.failWrite = true;
+        await agreeAndDelete(tester);
+        expect(service.calls, 1);
+        expect(
+          logouts,
+          1,
+          reason: 'logout still attempted when disk cleanup failed',
+        );
+        expect(find.text('계정 삭제 완료'), findsOneWidget);
+        expect(find.textContaining('계정 삭제는 완료됐어요.'), findsOneWidget);
+        expect(find.widgetWithText(FilledButton, '회원탈퇴'), findsNothing);
+        store.failWrite = false;
+        await tester.tap(find.text('기기 정보 정리 다시 시도'));
+        await tester.pumpAndSettle();
+        expect(currentPath(), '/home');
+        expect(service.calls, 1);
+        expect(logouts, 1);
+        expect((store.document['owners'] as Map).containsKey('user-b'), isTrue);
+      },
+    );
+    testWidgets(
+      'logout failure retries logout without another server request',
+      (tester) async {
+        final service = FakeDeletionService();
+        var attempts = 0;
+        await mountPage(
+          tester,
+          service: service,
+          logout: () async {
+            if (++attempts == 1) throw StateError('logout failed');
+          },
+        );
+        await agreeAndDelete(tester);
+        expect(find.text('계정 삭제 완료'), findsOneWidget);
+        await tester.tap(find.text('기기 정보 정리 다시 시도'));
+        await tester.pumpAndSettle();
+        expect(service.calls, 1);
+        expect(attempts, 2);
+        expect(currentPath(), '/home');
+      },
+    );
     testWidgets('a refused deletion never claims success', (tester) async {
       final service = FakeDeletionService(
         error: const AccountDeletionException('admin_blocked'),

@@ -7,6 +7,7 @@ import '../features/materials/presentation/materials_page.dart';
 import '../features/saved/presentation/saved_page.dart';
 import '../features/saved/presentation/recent_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/profile/presentation/grade_page.dart';
 import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
 import '../features/study/presentation/study_page.dart';
@@ -98,6 +99,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                         const NestedPage(title: '저장한 자료', child: SavedPage()),
                   ),
                   GoRoute(
+                    path: 'grade',
+                    builder: (_, _) =>
+                        const NestedPage(title: '학년 설정', child: GradePage()),
+                  ),
+                  GoRoute(
                     path: 'school',
                     builder: (_, _) =>
                         const NestedPage(title: '학교 설정', child: SchoolPage()),
@@ -168,26 +174,22 @@ final routerProvider = Provider<GoRouter>((ref) {
   // listener. LegendStudyApp watches it (ref.watch), which is what keeps it
   // alive; reading the router with ProviderContainer.read closes that
   // subscription immediately and silently stops recovery navigation.
-  ref.listen<AsyncValue<AuthStatus>>(
-    authStateProvider,
-    (_, next) {
-      final status = next.value;
-      if (status == null) return;
-      if (status.isPasswordRecovery) {
-        router.go('/auth/new-password');
-        return;
-      }
-      // A link that expired, was already used, or was opened on another device
-      // reaches us as a failure carried on the status (withAuthFailures), not
-      // as an event. Without this the user is left wherever they were with no
-      // explanation. Every other failure is ignored here so an unrelated auth
-      // error cannot hijack navigation.
-      if (isRecoveryLinkFailure(status.failure)) {
-        router.go('/auth/recovery?reason=link');
-      }
-    },
-    fireImmediately: true,
-  );
+  ref.listen<AsyncValue<AuthStatus>>(authStateProvider, (_, next) {
+    final status = next.value;
+    if (status == null) return;
+    if (status.isPasswordRecovery) {
+      router.go('/auth/new-password');
+      return;
+    }
+    // A link that expired, was already used, or was opened on another device
+    // reaches us as a failure carried on the status (withAuthFailures), not
+    // as an event. Without this the user is left wherever they were with no
+    // explanation. Every other failure is ignored here so an unrelated auth
+    // error cannot hijack navigation.
+    if (isRecoveryLinkFailure(status.failure)) {
+      router.go('/auth/recovery?reason=link');
+    }
+  }, fireImmediately: true);
   ref.onDispose(router.dispose);
   return router;
 });

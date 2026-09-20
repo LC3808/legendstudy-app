@@ -15,8 +15,7 @@ class AccountDeletionException implements Exception {
   final String code;
 }
 
-const accountDeletionGenericFailure =
-    '탈퇴를 처리하지 못했어요. 잠시 후 다시 시도하거나 문의해 주세요.';
+const accountDeletionGenericFailure = '탈퇴를 처리하지 못했어요. 잠시 후 다시 시도하거나 문의해 주세요.';
 
 const _byCode = <String, String>{
   'unauthorized': '로그인 정보가 만료되었어요. 다시 로그인한 뒤 시도해 주세요.',
@@ -87,4 +86,12 @@ final accountDeletionServiceProvider = Provider<AccountDeletionService?>((ref) {
   if (client == null) return null;
   if (!ref.watch(appConfigProvider).accountDeletionEnabled) return null;
   return SupabaseAccountDeletionService(client);
+});
+
+// Injectable local post-delete step; never issues a server deletion.
+final postDeleteSignOutProvider = Provider<Future<void> Function()>((ref) {
+  final client = ref.watch(supabaseClientProvider);
+  return () async {
+    await client?.auth.signOut(scope: SignOutScope.local);
+  };
 });

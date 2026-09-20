@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/app_theme.dart';
@@ -21,9 +20,7 @@ const deletedItems = <String>[
   '공부 기록과 모의고사 채점 기록',
   '이 기기에 저장된 내 공부 기록',
 ];
-const anonymizedItems = <String>[
-  '보내주신 문의·건의사항은 내용만 남고 계정 연결이 끊어져요',
-];
+const anonymizedItems = <String>['보내주신 문의·건의사항은 내용만 남고 계정 연결이 끊어져요'];
 
 class DeleteAccountPage extends ConsumerStatefulWidget {
   const DeleteAccountPage({super.key});
@@ -32,7 +29,9 @@ class DeleteAccountPage extends ConsumerStatefulWidget {
 }
 
 class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
-  bool _understood = false, _busy = false;
+  bool _understood = false, _busy = false, _serverDeleted = false;
+  bool _localCleaned = false, _signedOut = false;
+  String? _deletedOwner;
   String? _error;
 
   Future<bool> _confirm() async {
@@ -57,12 +56,14 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
   }
 
   Future<void> _delete() async {
-    if (_busy) return; // duplicate tap guard
+    if (_busy || _serverDeleted) return; // never resend a confirmed deletion
     final service = ref.read(accountDeletionServiceProvider);
     if (service == null) {
-      setState(() => _error = accountDeletionMessage(
-        const AccountDeletionException('unavailable'),
-      ));
+      setState(
+        () => _error = accountDeletionMessage(
+          const AccountDeletionException('unavailable'),
+        ),
+      );
       return;
     }
     if (!await _confirm() || !mounted) return;
@@ -73,25 +74,60 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
     });
     try {
       await service.deleteAccount();
-      // Only past this point is the account actually gone, so only now is any
-      // local trace removed and the session ended.
-      if (userId != null) {
-        await purgeStudyOwner(ref.read(studyLocalStoreProvider), userId);
+      _serverDeleted = true;
+      _deletedOwner = userId;
+      await _finishLocalCleanup();
+    } catch (error) {
+      // Only a failed server request reaches here. Raw server text is hidden.
+      if (mounted) setState(() => _error = accountDeletionMessage(error));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _finishLocalCleanup() async {
+    if (!_serverDeleted) return;
+    if (mounted) {
+      setState(() {
+        _busy = true;
+        _error = null;
+      });
+    }
+    if (!_localCleaned) {
+      try {
+        if (_deletedOwner != null) {
+          await purgeStudyOwner(
+            ref.read(studyLocalStoreProvider),
+            _deletedOwner!,
+          );
+        }
+        _localCleaned = true;
+      } catch (_) {
+        /* Retry only this device's cleanup, never the server delete. */
       }
-      await ref.read(supabaseClientProvider)?.auth.signOut(
-        scope: SignOutScope.local,
-      );
-      if (!mounted) return;
+    }
+    if (!_signedOut) {
+      try {
+        // Do not sign out a different user who signed in while deletion ran.
+        if (ref.read(authStateProvider).value?.userId == _deletedOwner) {
+          await ref.read(postDeleteSignOutProvider)();
+        }
+        _signedOut = true;
+      } catch (_) {
+        /* Still try logout even if local file cleanup failed. */
+      }
+    }
+    if (!mounted) return;
+    if (_localCleaned && _signedOut) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('탈퇴가 완료되었어요. 그동안 이용해 주셔서 고맙습니다.')),
       );
       context.go('/home');
-    } catch (error) {
-      // The account may still exist, so nothing is signed out and no success
-      // is claimed. Raw server text never reaches the user.
-      if (mounted) setState(() => _error = accountDeletionMessage(error));
-    } finally {
-      if (mounted) setState(() => _busy = false);
+    } else {
+      setState(() {
+        _busy = false;
+        _error = '계정 삭제는 완료됐어요. 이 기기의 기록 또는 로그인 정보 정리가 남아 있어요.';
+      });
     }
   }
 
@@ -100,6 +136,19 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
     final authenticated =
         ref.watch(authStateProvider).value?.isAuthenticated ?? false;
     final available = ref.watch(accountDeletionServiceProvider) != null;
+    if (_serverDeleted) {
+      return ShellPage(
+        children: [
+          const SectionHeader('계정 삭제 완료'),
+          Text(_error ?? '이 기기의 정보를 정리하고 있어요.'),
+          FilledButton(
+            onPressed: _busy ? null : _finishLocalCleanup,
+            child: Text(_busy ? '정리 중…' : '기기 정보 정리 다시 시도'),
+          ),
+          const Text('계정을 다시 삭제하지 않아요. 정리가 계속 실패하면 문의해 주세요.'),
+        ],
+      );
+    }
     return ShellPage(
       children: [
         const SectionHeader('회원탈퇴'),
@@ -116,8 +165,10 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
           const Text('삭제되는 것', style: TextStyle(fontWeight: FontWeight.w600)),
           for (final item in deletedItems) Text('· $item'),
           const SizedBox(height: 12),
-          const Text('남지만 연결이 끊어지는 것',
-              style: TextStyle(fontWeight: FontWeight.w600)),
+          const Text(
+            '남지만 연결이 끊어지는 것',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
           for (final item in anonymizedItems) Text('· $item'),
           const SizedBox(height: 12),
           const Text(

@@ -1,6 +1,9 @@
 import 'support/search_fake.dart';
+
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
+
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -320,7 +323,7 @@ void main() {
     await tester.tap(find.text('다시 시도'));
     await tester.pumpAndSettle();
     expect(find.text('일반 자료'), findsOneWidget);
-    expect(find.text('외부 링크 열기'), findsOneWidget);
+    expect(find.text('문제 보기'), findsOneWidget);
   });
   testWidgets(
     'unknown resources open the parent source, not the resource URL',
@@ -334,9 +337,9 @@ void main() {
       ];
       await mount(tester, route: '/materials/fixture');
       await tester.pumpAndSettle();
-      expect(find.text('원본 자료 페이지에서 열립니다.'), findsOneWidget);
-      await tester.ensureVisible(find.text('외부 링크 열기'));
-      await tester.tap(find.text('외부 링크 열기'));
+      expect(find.text('원본 게시글에서 해당 자료를 찾아 주세요.'), findsOneWidget);
+      await tester.ensureVisible(find.text('원문에서 보기'));
+      await tester.tap(find.text('원문에서 보기'));
       await tester.pumpAndSettle();
       expect(opened.toString(), 'https://legendstudy.com/1');
       expect(opened.toString(), isNot(contains('kakaocdn')));
@@ -357,8 +360,8 @@ void main() {
     await mount(tester, route: '/materials/fixture');
     await tester.pumpAndSettle();
     expect(find.text('영어 듣기'), findsOneWidget);
-    await tester.ensureVisible(find.text('외부 링크 열기'));
-    await tester.tap(find.text('외부 링크 열기'));
+    await tester.ensureVisible(find.text('영어 듣기 자료 페이지 보기'));
+    await tester.tap(find.text('영어 듣기 자료 페이지 보기'));
     await tester.pumpAndSettle();
     expect(opened.toString(), 'https://app.box.com/s/english-audio');
   });

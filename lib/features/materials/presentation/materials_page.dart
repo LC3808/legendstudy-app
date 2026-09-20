@@ -251,46 +251,29 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
               ),
             ),
             filterChip(
-              filters.month == null && filters.examType == null
-                  ? '시험'
-                  : [
-                      if (filters.month != null) '${filters.month}월',
-                      if (filters.examType != null)
-                        examTypeLabels[filters.examType]!,
-                    ].join(' · '),
-              filters.month != null || filters.examType != null,
-              () async {
-                await choose(
-                  '시험 · 시행 월 / 종류',
-                  {
-                    for (final m in facets.months) 'month:$m': '$m월',
-                    for (final t in facets.examTypes)
-                      'type:$t': examTypeLabels[t] ?? '기타 시험',
-                  },
-                  filters.month != null
-                      ? 'month:${filters.month}'
-                      : filters.examType == null
-                      ? null
-                      : 'type:${filters.examType}',
-                  (v) {
-                    if (v == null) {
-                      setState(
-                        () => filters = SearchFilters(
-                          grade: filters.grade,
-                          year: filters.year,
-                          subjectId: filters.subjectId,
-                          contentType: filters.contentType,
-                        ),
-                      );
-                      search();
-                    } else if ((v as String).startsWith('month:')) {
-                      change('month', int.parse(v.substring(6)));
-                    } else {
-                      change('examType', v.substring(5));
-                    }
-                  },
-                );
-              },
+              filters.month == null ? '시행 월' : '${filters.month}월',
+              filters.month != null,
+              () => choose(
+                '시행 월',
+                {for (final m in facets.months) m: '$m월'},
+                filters.month,
+                (v) => change('month', v),
+              ),
+            ),
+            filterChip(
+              filters.examType == null
+                  ? '시험 종류'
+                  : examTypeLabels[filters.examType] ?? '기타 시험',
+              filters.examType != null,
+              () => choose(
+                '시험 종류',
+                {
+                  for (final t in facets.examTypes)
+                    t: examTypeLabels[t] ?? '기타 시험',
+                },
+                filters.examType,
+                (v) => change('examType', v),
+              ),
             ),
             filterChip(
               selectedSubject?.name ?? '과목',
@@ -368,8 +351,38 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
             ),
           if (state.phase == SearchPhase.empty)
             const EmptyState('아직 등록된 자료가 없어요.'),
-          if (state.phase == SearchPhase.noResults)
+          if (state.phase == SearchPhase.noResults) ...[
             const EmptyState('조건에 맞는 자료가 없어요.'),
+            Wrap(
+              spacing: 8,
+              children: [
+                if (input.text.isNotEmpty)
+                  TextButton(
+                    onPressed: () {
+                      input.clear();
+                      search();
+                    },
+                    child: const Text('검색어 지우기'),
+                  ),
+                if (!filters.isEmpty)
+                  TextButton(
+                    onPressed: () {
+                      setState(() => filters = const SearchFilters());
+                      search();
+                    },
+                    child: const Text('선택 조건 해제'),
+                  ),
+                TextButton(
+                  onPressed: () {
+                    input.clear();
+                    setState(() => filters = const SearchFilters());
+                    search();
+                  },
+                  child: const Text('자료 전체 보기'),
+                ),
+              ],
+            ),
+          ],
           if (state.phase == SearchPhase.error)
             ErrorState(
               message: '자료를 불러오지 못했어요. 다시 시도하거나 검색 조건을 좁혀 주세요.',

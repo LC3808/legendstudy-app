@@ -17,6 +17,7 @@ class PersonalMaterialListPage extends ConsumerWidget {
     final auth = ref.watch(authStateProvider);
     return ShellPage(
       children: [
+        const Text('저장한 자료는 북마크 목록이며 다운로드 파일이 아니에요.'),
         auth.when(
           loading: () =>
               const LinearProgressIndicator(semanticsLabel: '계정 상태 확인'),
@@ -26,7 +27,15 @@ class PersonalMaterialListPage extends ConsumerWidget {
           ),
           data: (status) => status.isAuthenticated
               ? PersonalMaterialList(kind: kind)
-              : const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
+              : Column(
+                  children: [
+                    const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
+                    FilledButton(
+                      onPressed: () => context.push('/auth'),
+                      child: const Text('로그인'),
+                    ),
+                  ],
+                ),
         ),
       ],
     );
@@ -64,7 +73,15 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       );
     }
     if (auth.value?.isAuthenticated != true) {
-      return const EmptyState('로그인하면 이 기능을 이용할 수 있어요.');
+      return Column(
+        children: [
+          const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
+          FilledButton(
+            onPressed: () => context.push('/auth'),
+            child: const Text('로그인'),
+          ),
+        ],
+      );
     }
     final state = widget.homeMode
         ? ref.watch(homeRecentMaterialListProvider)
@@ -81,10 +98,18 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
             : ref.invalidate(personalMaterialListProvider(widget.kind)),
       ),
       data: (items) => items.isEmpty
-          ? EmptyState(
-              widget.kind == PersonalListKind.bookmarks
-                  ? '저장한 자료가 아직 없어요.'
-                  : '최근 본 자료가 아직 없어요.',
+          ? Column(
+              children: [
+                EmptyState(
+                  widget.kind == PersonalListKind.bookmarks
+                      ? '저장한 자료가 아직 없어요.'
+                      : '최근 본 자료가 아직 없어요.',
+                ),
+                TextButton(
+                  onPressed: () => context.go('/materials'),
+                  child: const Text('자료 찾기'),
+                ),
+              ],
             )
           : _list(context, items),
     );
@@ -133,8 +158,9 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       if (mounted) ref.invalidate(personalMaterialListProvider(widget.kind));
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
     }
   }
 
@@ -162,8 +188,9 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       if (mounted) ref.invalidate(personalMaterialListProvider(widget.kind));
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(this.context)
-          .showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
+      ScaffoldMessenger.of(
+        this.context,
+      ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
     }
   }
 }
