@@ -10,6 +10,7 @@ import '../../../core/config/app_information.dart';
 import '../../../core/links/external_link.dart';
 import '../../resources/domain/content_resource.dart';
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../../shared/widgets/legendstudy_lab_entry.dart';
 import '../../feedback/feedback_providers.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -87,6 +88,8 @@ class ProfilePage extends ConsumerWidget {
           onTap: () => context.push('/my/recent'),
         ),
         const Divider(),
+        const SectionHeader('서비스'),
+        const LegendStudyLabEntry(),
         const SectionHeader('설정 · 지원'),
         ListTile(
           contentPadding: EdgeInsets.zero,

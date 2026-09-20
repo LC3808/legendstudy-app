@@ -1707,3 +1707,18 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   semantics. Public metadata limits, bookmark HOLD and real destination/device
   Owner acceptance documented. Credential/diff checks PASS. Production mutation 0;
   no viewer/mirror, backend/ingestion/Historical/Auth/Study/brand changes or push.
+
+
+## 2026-09-20 — LegendStudy LAB Production app entry
+
+- Added one canonical HTTPS root and a shared small Home/MY service card;
+  reused external-browser launcher with busy/error/retry behavior. Guest/account
+  access is identical, with no credentials or personal data in the URL.
+- Full 482 PASS / 1 existing skip, focused 10 PASS, native iOS rendering plus
+  real Safari launch/return PASS; 360×640/1×/2× reviewed. Analyze, Android debug,
+  iOS simulator, credential scan and diff check PASS.
+- Public root 308 → `/lab/` 200 observed; root retained as app source of truth.
+  Web repo corrected to LC3808/legendstudy-lab. Shared auth/payment/entitlement/
+  record sync remain unimplemented; no WebView or Materials/Auth/Study changes.
+- Physical-device browser acceptance remains Owner follow-up; existing release
+  gates preserved. Production mutation 0, no web/Cloudflare/backend edits or push.

@@ -84,10 +84,9 @@ This task performed no Production E2E, Supabase access, mutation or deployment.
 
 Daily Sync minimum contract is in [ingestion.md](ingestion.md#daily-sync-minimum-contract--2026-09-20).
 No scheduler or Production automation was implemented.
-LS LAB initial placement recommendation: MY service link, external web launch,
-only after Owner supplies the published URL. Promote to a small Home card once
-public utility is demonstrated. No placeholder link, web edits, shared auth,
-token handoff, payment or result sync is implemented.
+The supplied Production LAB URL now has small Home/MY external entries; see
+[LAB production entry](#legendstudy-lab-production-entry--2026-09-20). No web edits,
+shared auth, token handoff, payment or result sync is implemented.
 
 
 ## Core Account/Auth UX — 2026-09-20
@@ -200,8 +199,8 @@ release gates close. No previous Study/iPhone or D3 runtime result is downgraded
 Next candidates only, no implementation: (1) Production Auth/Account/policy Owner
 acceptance, (2) Release QA/store preparation after those gates, (3) Materials
 external delivery improvements after rights review, (4) Daily Sync against the
-existing ingestion contract, (5) LS LAB entry only after a real web deployment
-URL. Analytics/BM remain deferred.
+existing ingestion contract. The formerly deferred LAB external entry is now
+implemented below; deeper integration remains deferred with Analytics/BM.
 
 
 ## Materials delivery increment — 2026-09-20
@@ -232,3 +231,42 @@ builds PASS. Actual renders reviewed; external opener/lifecycle are test doubles
 not website/file or real browser-return E2E. Native keyboard/safe-area scroll
 adjustment is bounded and the selected row remains visible. Owner real-device
 external destination acceptance remains; RELEASE READY NO. Mutation 0, no push.
+
+
+## LegendStudy LAB production entry — 2026-09-20
+
+- Public canonical URL: `https://lab.legendstudy.com` in
+  `lib/core/links/service_links.dart`; exact HTTPS root validation rejects other
+  hosts, paths, query/fragment and credential-bearing entries. No dynamic URL,
+  auth token, profile or tracking parameters are appended.
+- `LegendStudyLabEntry` reuses `CompactUtilityCard` and `ExternalLinkButton`.
+  Home places it after recent updates; MY puts it in 서비스 after personal lists.
+  Guest and account use identical public access without login gating.
+- Copy: **논술 준비, LegendStudy LAB** / **논술 준비를 위한 LAB을 웹에서 살펴보세요.** /
+  **LAB 살펴보기** with external-link icon. Introduction/discovery only, no promise
+  of active AI correction, current university problem inventory or payments.
+- Existing externalApplication launcher owns OS browser choice, catches raw
+  exceptions, displays safe inline failure and allows retry; busy disables repeat
+  submission. Returning does not navigate, save data or hand off app sessions.
+- Web repo `LC3808/legendstudy-lab` remains separate. Shared auth, payment,
+  entitlement and study/essay record sync **NOT IMPLEMENTED**; **WebView NOT USED**.
+  Materials resolver, Auth, Study, brand/native identity and backend unchanged.
+
+Validation: full Flutter **482 PASS / 1 existing skip**, LAB focused **10 PASS**,
+analyze, Android debug/iOS simulator build, credential scan and diff check PASS.
+360×640 at 1×/2× Guest/account Home/MY renders reviewed; minimum CTA height 48.
+iOS simulator native matrix passed (10 checks), real public Safari launch and
+app return additionally checked. Render evidence is local under
+`/private/tmp/legendstudy-core-ui/lab-*.png` and
+`/private/tmp/legendstudy-lab-native/`; not repository assets. No dark theme exists.
+The live-browser integration test is opt-in (`LAB_LIVE_BROWSER=true`); the
+operator/host returns to the app within 12 seconds after `LAB_BROWSER_OPEN`.
+The test asserts resumed lifecycle; browser content is separately inspected. Other tests
+use opener/account doubles, never Production auth. This is not real-account E2E.
+Read-only HTTP verified root 308 → `/lab/` 200; the app URL remains the root.
+
+Owner follow-up: physical Android/iPhone browser/back acceptance and independent
+LAB web availability/content management. No app config, shared auth or payment
+setup is required for this entry. Existing policy URLs, Auth/recovery/deletion
+acceptance and store gates still block release. **RELEASE READY NO**.
+Production mutation 0; no Cloudflare/DNS, web repo, DB, Storage or Edge changes.

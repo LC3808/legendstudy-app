@@ -2,6 +2,22 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 LegendStudy LAB app entry — IMPLEMENTED / LOCAL VALIDATION PASS
+
+- Canonical public root `https://lab.legendstudy.com`, one app URL definition;
+  small shared Home card after recent updates and MY service entry, available
+  to Guest/account alike. External browser only, safe retry/busy handling.
+- Web is a separate service (`LC3808/legendstudy-lab`). Shared auth, session/profile
+  handoff, payment/entitlement and record sync NOT IMPLEMENTED; WebView NOT USED.
+- Full **482 PASS / 1 existing skip**, LAB focused **10 PASS**, analyze PASS;
+  Android debug/iOS simulator builds PASS. Native iOS Home/MY 1×/2× renders and
+  actual Safari launch/app return verified; 360×640 widget renders reviewed.
+  Android physical-browser acceptance remains Owner follow-up, not claimed PASS.
+- Public root currently redirects to `/lab/` and returns HTTP 200; app still
+  launches the canonical root. Introductory copy makes no active AI/payment claim.
+- Existing Auth/policy/deletion release gates remain: **RELEASE READY NO**.
+  Production mutation 0. Details: [Core improvements](core-app-improvements.md#legendstudy-lab-production-entry--2026-09-20).
+
 ## 2026-09-20 Materials delivery — IMPLEMENTED / LOCAL VALIDATION PASS
 
 - Independent free Materials access: centralized file/page/original/unavailable

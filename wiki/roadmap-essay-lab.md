@@ -1,6 +1,6 @@
 # LegendStudy Product Roadmap — Essay Lab / LS LAB
 
-Status: **RESEARCH COMPLETE / PHASE 2 PLANNED**
+Status: **RESEARCH COMPLETE / DEEP INTEGRATION PLANNED; PUBLIC APP ENTRY IMPLEMENTED**
 Target: **2026-10 Beta or initial public service**
 
 This document records a product priority change. It is a roadmap, not an
@@ -10,6 +10,16 @@ integration or Production change is included in this entry.
 The previous initial scope of approximately 5–10 universities and the latest
 2–3 years is superseded by the research-first rules below. No university count
 is assumed before the nationwide survey.
+
+## Current app integration — 2026-09-20
+
+Owner-supplied public Web: `https://lab.legendstudy.com`; separate actual Web
+repository **LC3808/legendstudy-lab** (supersedes the earlier repository candidate).
+Flutter Home/MY now provide a shared external-browser entry for Guest/account.
+The public site is an introduction/foundation; app copy promises discovery only.
+Shared auth, payments/entitlements and record sync remain **NOT IMPLEMENTED**;
+**WebView NOT USED**. Future architecture below is a direction, not deployed app
+integration. See [implementation/evidence](core-app-improvements.md#legendstudy-lab-production-entry--2026-09-20).
 
 ## 1. Product direction
 
@@ -225,7 +235,8 @@ The Web is the primary Essay Lab environment. Web capabilities include:
 Mobile capabilities focus on discovery, result review, notifications and
 simple record/connection flows. Long-form writing remains Web-primary.
 
-The formal service name and domain remain TBD. The production Web architecture
+The public service is LegendStudy LAB at `https://lab.legendstudy.com`.
+The production Web architecture
 decision is recorded below; the existing Manus React/Vite/Express/tRPC build
 remains a mock foundation and is not a Production architecture commitment.
 
@@ -242,10 +253,11 @@ The canonical Production direction for **LS LAB by LegendStudy** is:
 - server-side AI execution that can later move to a background worker/queue;
 - future streaming and Web credit/payment integration.
 
-The canonical repository candidate is `LC3808/legendstudy-lab-web`. The
+The earlier repository candidate was `LC3808/legendstudy-lab-web`; the actual
+Owner-confirmed Web repository is `LC3808/legendstudy-lab`. The
 existing `LC3808/legendstudy-app` remains Flutter Mobile-only. The projects are
-not merged into a monorepo. Repository creation and implementation are a
-separate Phase 2 task.
+not merged into a monorepo. Deeper Web capabilities remain a separate task;
+the app integration above only opens its public entry.
 
 ### Public and private data boundary
 
