@@ -2,6 +2,25 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Core Account/Auth — LOCAL UX TESTED / RELEASE GATES OPEN
+
+- Email login/signup validation, confirmation, show/hide, autofill and duplicate
+  request guards implemented; neutral recovery request copy and password controls.
+- MY account/email, school/grade, saved/recent, support/policies and account
+  management grouped; local logout busy/error handling added. Guest return still
+  has no automatic save. A→Guest→B saved/recent isolation regression PASS.
+- Unavailable deletion explains status with a feedback route; in-flight back
+  blocked. Server deletion/local cleanup retry distinction preserved.
+- Full Flutter **446 PASS / 1 existing skip**, focused **35 PASS**, analyze PASS;
+  Android debug/iOS simulator build PASS. 360×640/2× form renders and Android
+  login/OS keyboard reviewed; iOS install/launch/Home PASS. Production E2E pending.
+- Provider flags remain off by default. Functional OAuth code tested; official
+  social-button design HOLD. Policy URL paths ready, actual URLs Owner-required.
+  Recovery email, provider/device callbacks, deletion deploy/flag/E2E/web URL and
+  lifecycle decisions remain release gates. AUTH UX COMPLETE NO; RELEASE READY NO.
+- Brand assets/native IDs and Historical work untouched; Production mutation 0.
+  Canonical detail/matrix: [core-app-improvements.md](core-app-improvements.md).
+
 ## 2026-09-20 LegendStudy+ — BRAND IDENTITY COMPLETE
 
 - Official display name 레전드스터디+ / LegendStudy+ retained; technical IDs,
@@ -32,7 +51,8 @@ Last reviewed: 2026-09-20
   policy URL seams and explicit OAuth availability implemented.
 - Confirmed server deletion is separate from retryable device cleanup/logout.
   Sparse profile writes preserve existing name/grade/school information.
-- Full Flutter suite 423 PASS / 1 existing skip; Production E2E not performed.
+- Earlier Core pass: 423 PASS / 1 existing skip; latest Account pass above supersedes
+  the suite count. Production E2E not performed in these UI tasks.
   Owner policy/provider/recovery/deletion/device gates remain; RELEASE READY NO.
 - Inline result bookmarks HOLD; Daily Sync is a documented contract, LS LAB
   placement only. No ingestion/Production changes; prior physical results and

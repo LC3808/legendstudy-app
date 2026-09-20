@@ -63,13 +63,12 @@ class _PasswordRecoveryPageState extends ConsumerState<PasswordRecoveryPage> {
   }
 
   @override
-  Widget build(BuildContext context) => ShellPage(
-    children: _sent ? _sentView(context) : _formView(context),
-  );
+  Widget build(BuildContext context) =>
+      ShellPage(children: _sent ? _sentView(context) : _formView(context));
 
   List<Widget> _sentView(BuildContext context) => [
     const SectionHeader('비밀번호 재설정'),
-    const Text('비밀번호 재설정 안내를 확인해 주세요.'),
+    const Text('입력한 이메일로 비밀번호 재설정 안내를 요청했습니다.'),
     const SizedBox(height: 8),
     const Text(
       '입력한 주소로 가입된 계정이 있다면 재설정 메일이 발송돼요. 메일이 보이지 않으면 스팸함도 확인해 주세요.',
@@ -90,6 +89,8 @@ class _PasswordRecoveryPageState extends ConsumerState<PasswordRecoveryPage> {
       controller: _email,
       keyboardType: TextInputType.emailAddress,
       autocorrect: false,
+      autofillHints: const [AutofillHints.email],
+      textInputAction: TextInputAction.done,
       enabled: !_busy,
       decoration: const InputDecoration(labelText: '이메일'),
       onSubmitted: (_) => _submit(),
@@ -98,7 +99,10 @@ class _PasswordRecoveryPageState extends ConsumerState<PasswordRecoveryPage> {
       const SizedBox(height: 12),
       Semantics(
         liveRegion: true,
-        child: Text(_error!, style: const TextStyle(color: AppTokens.textPrimary)),
+        child: Text(
+          _error!,
+          style: const TextStyle(color: AppTokens.textPrimary),
+        ),
       ),
     ],
     const SizedBox(height: 20),

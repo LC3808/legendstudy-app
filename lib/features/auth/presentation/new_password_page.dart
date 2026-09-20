@@ -21,7 +21,7 @@ class NewPasswordPage extends ConsumerStatefulWidget {
 class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
   final _password = TextEditingController();
   final _confirm = TextEditingController();
-  bool _busy = false;
+  bool _busy = false, _visible = false;
   String? _error;
 
   @override
@@ -53,9 +53,8 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
     try {
       await service.updatePassword(_password.text);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('비밀번호를 변경했어요.')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('비밀번호를 변경했어요.')));
       context.go('/my');
     } catch (error) {
       if (mounted) setState(() => _error = authErrorMessage(error));
@@ -92,15 +91,36 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
         const SizedBox(height: 16),
         TextField(
           controller: _password,
-          obscureText: true,
+          obscureText: !_visible,
+          autocorrect: false,
+          enableSuggestions: false,
+          autofillHints: const [AutofillHints.newPassword],
           enabled: !_busy,
-          decoration: const InputDecoration(labelText: '새 비밀번호'),
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            labelText: '새 비밀번호',
+            suffixIcon: IconButton(
+              tooltip: _visible ? '비밀번호 숨기기' : '비밀번호 보기',
+              onPressed: _busy
+                  ? null
+                  : () => setState(() => _visible = !_visible),
+              icon: Icon(
+                _visible
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         TextField(
           controller: _confirm,
-          obscureText: true,
+          obscureText: !_visible,
+          autocorrect: false,
+          enableSuggestions: false,
+          autofillHints: const [AutofillHints.newPassword],
           enabled: !_busy,
+          textInputAction: TextInputAction.done,
           decoration: const InputDecoration(labelText: '새 비밀번호 확인'),
           onSubmitted: (_) => _submit(),
         ),
@@ -108,8 +128,10 @@ class _NewPasswordPageState extends ConsumerState<NewPasswordPage> {
           const SizedBox(height: 12),
           Semantics(
             liveRegion: true,
-            child: Text(_error!,
-                style: const TextStyle(color: AppTokens.textPrimary)),
+            child: Text(
+              _error!,
+              style: const TextStyle(color: AppTokens.textPrimary),
+            ),
           ),
         ],
         const SizedBox(height: 20),

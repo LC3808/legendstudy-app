@@ -55,8 +55,8 @@ uses (`com.legendstudy.app://login-callback`), so nothing new was invented.
 The value is **not** applied automatically. The Owner registers it in the
 Supabase redirect allow-list and passes
 `--dart-define=SUPABASE_RECOVERY_REDIRECT=com.legendstudy.app://auth-recovery`.
-Android's filter is scoped to the `auth-recovery` host, so enabling OAuth later
-needs its own `login-callback` filter.
+Android has distinct `auth-recovery` and `login-callback` host filters; both
+registrations are covered by local tests. Provider console enablement is separate.
 
 ### A link that cannot be used
 
@@ -102,7 +102,8 @@ itself is never read, logged or placed in a route — only the event is observed
 ## Account enumeration
 
 The request screen shows one success message regardless of whether the address
-has an account: "비밀번호 재설정 안내를 확인해 주세요." Supabase answers
+has an account: "입력한 이메일로 비밀번호 재설정 안내를 요청했습니다." This
+asserts the request, not delivery. Supabase answers
 `resetPasswordForEmail` the same way in both cases, so the UI does not need —
 and does not have — a "가입되지 않은 이메일" branch.
 
@@ -133,10 +134,13 @@ tokens, URLs and status codes never reach the user. The reported
 3. **Real recovery email end-to-end** — never exercised; no email was sent.
 4. **Deep-link acceptance on a physical device** — the registration exists now
    but has not been exercised on hardware.
-5. **OAuth completion** — Google / Apple / Kakao remain unconfigured, and
-   Android needs a `login-callback` intent-filter of its own.
-6. **Account deletion / privacy lifecycle** — not implemented.
-7. **Flutter validation on the Owner's machine** — see below.
+5. **OAuth completion** — functional code/flags and both native callback paths
+   exist; actual provider console/physical cold/warm acceptance and official
+   button design remain open. Console state was not remotely queried.
+6. **Account deletion / privacy lifecycle** — client/server candidate exists;
+   deploy, enablement, lifecycle decisions and E2E remain Owner gates. See
+   [account-deletion-privacy.md](account-deletion-privacy.md).
+7. **Current local Flutter validation** — see below; separate from mailbox E2E.
 
 ## Validation status
 
@@ -155,7 +159,9 @@ Production recovery E2E is intentionally still pending; no redirect registration
 recovery email receipt, password change or physical-device recovery acceptance
 is claimed here.
 
-The 2026-09-18 readiness pass (deep-link registration, unusable-link UX, 27
-focused tests) is **not** revalidated on the Owner's machine yet — see
-`Claude outputs/legendstudy-auth-recovery-production-readiness.md` for the full
-prerequisite matrix and handoff order.
+The 2026-09-20 Core Account pass revalidated recovery/auth routing in the full
+446 PASS / 1 skip suite; analyze and Android/iOS simulator builds PASS. Neutral
+request copy, autofill/next-done and new-password show/hide were added. 360×640/2×
+recovery/new-password renders with keyboard insets PASS. Older verification
+counts above are historical. Real email and physical cold/warm acceptance remain
+pending; current release matrix is in [core-app-improvements.md](core-app-improvements.md).

@@ -121,7 +121,7 @@ void main() {
       await tester.tap(find.text('재설정 메일 보내기'));
       await tester.pumpAndSettle();
       expect(service.sentEmails, ['lc@example.com']);
-      expect(find.text('비밀번호 재설정 안내를 확인해 주세요.'), findsOneWidget);
+      expect(find.text('입력한 이메일로 비밀번호 재설정 안내를 요청했습니다.'), findsOneWidget);
       expect(find.textContaining('가입되지 않은'), findsNothing);
       expect(find.textContaining('존재하지 않'), findsNothing);
     });
@@ -150,7 +150,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.'), findsOneWidget);
       expect(find.textContaining('rate limit'), findsNothing);
-      expect(find.text('비밀번호 재설정 안내를 확인해 주세요.'), findsNothing);
+      expect(find.text('입력한 이메일로 비밀번호 재설정 안내를 요청했습니다.'), findsNothing);
     });
   });
 

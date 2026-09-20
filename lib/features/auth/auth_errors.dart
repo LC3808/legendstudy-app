@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Maps Supabase auth failures to user-facing Korean.
@@ -13,6 +16,11 @@ const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 �
 const recoveryLinkUnusableMessage = '재설정 링크를 사용할 수 없어요. 다시 요청해 주세요.';
 
 const _byCode = <String, String>{
+  'email_exists': '이미 가입된 이메일이에요. 로그인하거나 비밀번호를 재설정해 주세요.',
+  'oauth_provider_not_supported': '현재 이 로그인 방식을 사용할 수 없습니다.',
+  'unexpected_failure': '로그인을 완료하지 못했어요. 잠시 후 다시 시도해 주세요.',
+  'bad_oauth_callback': '로그인을 완료하지 못했어요. 로그인 화면에서 다시 시도해 주세요.',
+  'bad_oauth_state': '로그인 요청이 만료됐어요. 다시 시도해 주세요.',
   'invalid_credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
   'email_not_confirmed': '이메일 인증이 아직 완료되지 않았어요. 받은 편지함을 확인해 주세요.',
   'over_email_send_rate_limit': '요청이 너무 잦아요. 잠시 후 다시 시도해 주세요.',
@@ -85,6 +93,11 @@ bool isRecoveryLinkFailure(Object? error) {
 
 /// Never returns raw SDK text, a token, a URL or a status code.
 String authErrorMessage(Object? error) {
+  if (error is SocketException ||
+      error is TimeoutException ||
+      error is AuthRetryableFetchException) {
+    return '인터넷 연결을 확인한 뒤 다시 시도해 주세요.';
+  }
   if (error is! AuthException) return genericAuthFailure;
   // On a link or OAuth callback the specific value arrives as error_code, which
   // the SDK stores in statusCode, while code holds the coarse `error`. The

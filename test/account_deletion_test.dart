@@ -133,13 +133,9 @@ void main() {
       tester,
     ) async {
       await mountPage(tester, service: null);
-      await tester.tap(find.text('위 내용을 이해했어요'));
-      await tester.pumpAndSettle();
-      expect(find.textContaining('아직 준비 중'), findsOneWidget);
-      final button = tester.widget<FilledButton>(
-        find.widgetWithText(FilledButton, '회원탈퇴'),
-      );
-      expect(button.onPressed, isNull, reason: 'fail closed, never a fake run');
+      expect(find.textContaining('현재 앱에서 회원탈퇴를 처리할 수 없어요'), findsOneWidget);
+      expect(find.widgetWithText(FilledButton, '회원탈퇴'), findsNothing);
+      expect(find.text('문의·건의사항'), findsOneWidget);
     });
 
     testWidgets('what is deleted is spelled out before anything happens', (
@@ -193,6 +189,10 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('탈퇴하기'));
       await tester.pump(); // in flight
+      expect(tester.widget<PopScope>(find.byType(PopScope)).canPop, isFalse);
+      await tester.binding.handlePopRoute();
+      await tester.pump();
+      expect(currentPath(), '/my/delete-account');
       await tester.tap(
         find.widgetWithText(FilledButton, '처리 중'),
         warnIfMissed: false,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../auth/auth_email.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/config/app_config.dart';
@@ -17,6 +18,7 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     final config = ref.watch(appConfigProvider);
+    final email = ref.watch(currentAccountEmailProvider);
     final admin = ref.watch(adminAccessProvider);
     final currentUserId = auth.value?.userId;
     final isAuthenticated = auth.value?.isAuthenticated == true;
@@ -37,7 +39,10 @@ class ProfilePage extends ConsumerWidget {
           data: (state) => CompactUtilityCard(
             title: state.isAuthenticated ? '나의 계정' : '공부의 흐름을 이어가요',
             body: state.isAuthenticated
-                ? '내 자료와 학습 기록을 한곳에서 관리해요.'
+                ? [
+                    if (email != null) email,
+                    '내 자료와 학습 기록을 한곳에서 관리해요.',
+                  ].join('\n')
                 : '로그인하면 자료와 공부 기록을 저장할 수 있어요.',
             action: state.isAuthenticated
                 ? null
@@ -47,19 +52,7 @@ class ProfilePage extends ConsumerWidget {
                   ),
           ),
         ),
-        if (auth.value?.isAuthenticated == true)
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () async {
-                final client = ref.read(supabaseClientProvider);
-                if (client == null) return;
-                await client.auth.signOut(scope: SignOutScope.local);
-              },
-              child: const Text('로그아웃'),
-            ),
-          ),
-        const SectionHeader('나의 설정'),
+        const SectionHeader('내 정보'),
         ListTile(
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.school_outlined),
@@ -74,7 +67,7 @@ class ProfilePage extends ConsumerWidget {
           contentPadding: EdgeInsets.zero,
           title: const Text('학년 설정'),
           subtitle: Text(
-            isAuthenticated ? '학년을 저장하고 학습을 맞춤 설정해요' : '로그인 후 학년을 저장할 수 있어요',
+            isAuthenticated ? '현재 학년을 저장하고 관리해요' : '로그인 후 학년을 저장할 수 있어요',
           ),
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.push('/my/grade'),
@@ -93,6 +86,8 @@ class ProfilePage extends ConsumerWidget {
           trailing: const Icon(Icons.chevron_right),
           onTap: () => context.push('/my/recent'),
         ),
+        const Divider(),
+        const SectionHeader('설정 · 지원'),
         ListTile(
           contentPadding: EdgeInsets.zero,
           title: const Text('문의·건의사항'),
@@ -111,14 +106,6 @@ class ProfilePage extends ConsumerWidget {
             onTap: () => context.push('/my/admin/feedback'),
           ),
         ],
-        if (isAuthenticated)
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('회원탈퇴'),
-            subtitle: const Text('계정과 내 기록을 삭제해요'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => context.push('/my/delete-account'),
-          ),
         const Divider(),
         const SectionHeader('앱 정보 · 정책'),
         ListTile(
@@ -157,7 +144,63 @@ class ProfilePage extends ConsumerWidget {
                   uri: publicWebUri(policy.$2),
                   label: policy.$1,
                 ),
+        if (isAuthenticated) ...[
+          const Divider(),
+          const SectionHeader('계정 관리'),
+          const _LogoutButton(),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('회원탈퇴'),
+            subtitle: const Text('계정과 내 기록을 삭제해요'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/my/delete-account'),
+          ),
+        ],
       ],
     );
   }
+}
+
+class _LogoutButton extends ConsumerStatefulWidget {
+  const _LogoutButton();
+  @override
+  ConsumerState<_LogoutButton> createState() => _LogoutButtonState();
+}
+
+class _LogoutButtonState extends ConsumerState<_LogoutButton> {
+  bool busy = false;
+  String? error;
+  Future<void> logout() async {
+    if (busy) return;
+    final action = ref.read(localLogoutProvider);
+    if (action == null) {
+      setState(() => error = '지금은 로그아웃할 수 없어요. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await action();
+      // SDK auth event changes this page to Guest and invalidates owner providers.
+    } catch (_) {
+      if (mounted) setState(() => error = '로그아웃하지 못했어요. 다시 시도해 주세요.');
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text('이 기기에서 로그아웃해요. 저장한 자료와 계정은 삭제되지 않아요.'),
+      if (error != null) Semantics(liveRegion: true, child: Text(error!)),
+      TextButton(
+        onPressed: busy ? null : logout,
+        child: Text(busy ? '로그아웃 중…' : '로그아웃'),
+      ),
+    ],
+  );
 }

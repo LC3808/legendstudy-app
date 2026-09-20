@@ -3,7 +3,7 @@
 Status:
 - **ACCOUNT DELETION FOUNDATION: IMPLEMENTED (client + server candidate), fail-closed**
 - **PRODUCTION ACCOUNT DELETION: PENDING** — the function is not deployed and no
-  account has been deleted
+  account has been deleted by these tasks
 - **PRIVACY LIFECYCLE: DESIGNED**
 
 No Production mutation was made: no Dashboard change, no deploy, no Auth Admin
@@ -86,8 +86,9 @@ window is small and one-directional:
 
 - **Server succeeded, app cleanup failed** — the account is gone; the device may
   still hold that owner's local study document. The next sign-in as a different
-  user cannot read it (state is owner-keyed), and a repeated deletion attempt
-  returns `deleted` and purges again.
+  user cannot read it (state is owner-keyed). The page shows server completion;
+  retry runs only unfinished local cleanup/sign-out, never another deletion.
+  This state is page-local, not a durable restart cleanup queue.
 - **Server failed** — nothing is signed out, nothing local is purged, no success
   is claimed, and the user can retry.
 - No `DELETION_REQUESTED`/`DELETING` state machine was built: a single cascading
@@ -166,9 +167,17 @@ this is built, and no LS LAB schema exists yet.
 | Route `/my/delete-account` | `lib/app/router.dart` | IMPLEMENTED |
 | Local purge | `lib/features/study/data/study_local.dart` | IMPLEMENTED |
 | Edge Function | `supabase/functions/delete-account/` | CANDIDATE, not deployed |
-| Flutter tests | `test/account_deletion_test.dart` | 14 |
+| Flutter tests | `test/account_deletion_test.dart` | 16 PASS |
 | Deno tests | `supabase/functions/delete-account/handler_test.ts` | 9 |
 | Migration | — | not needed |
 
-With the flag off the button is present but inert and the screen says the
-feature is not ready. No build ever shows a fake success.
+With the flag off MY retains the entry; its screen explains unavailability and
+links to the existing feedback route. There is no disabled destructive CTA and
+no fake success. This support fallback does not satisfy the release deletion gate.
+
+2026-09-20: busy operations block back navigation; tests cover duplicate taps,
+back while busy, server success/local failure retry with one server call, and
+other-owner preservation. Full suite 446 PASS / 1 skip; analyze and Android/iOS
+simulator builds PASS. Code candidate YES, last documented deployment NO (not
+remotely queried in this task), config default OFF, Production E2E NO. Web deletion
+request URL, Apple revocation and retention decisions remain Owner release gates.

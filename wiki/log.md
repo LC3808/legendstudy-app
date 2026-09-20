@@ -1672,3 +1672,21 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Pixel launcher can ellipsize label visually; full accessibility/name preserved.
 - Replaced current Brand HOLD status with COMPLETE (brand scope only). Owner review
   and push remain. Production mutation 0; no new Flutter dependency or push.
+
+
+## 2026-09-20 — Core Account/Auth UX and release readiness
+
+- Added validated email/signup forms, confirmation/show-hide/autofill, safe error
+  mapping and request guards; preserved existing SDK/service/navigation contracts.
+  Recovery now reports a request without claiming delivery/account existence.
+- Organized MY/account support, guarded local logout and unavailable deletion
+  entry, blocked back during deletion. Server/local retry and Guest no-auto-save
+  return preserved; A→Guest→B saved/recent regression added.
+- Full suite 446 PASS / 1 skip, account/render/deletion focused 35 PASS, analyze
+  PASS, Android debug/iOS simulator builds PASS. Reviewed 360×640/2×/keyboard
+  renders, actual Android login/keyboard and iOS launch/Home. Credential/diff
+  checks PASS; no brand/native/dependency/ingestion changes.
+- Recorded separate code/local/Production/Owner matrix and corrected stale
+  recovery/deletion Wiki statements. Official social-button design HOLD; real
+  policies, auth/recovery/deletion E2E and deletion lifecycle/store gates remain.
+  Full AUTH UX COMPLETE NO; RELEASE READY NO. Production mutation 0; no push.

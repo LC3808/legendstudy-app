@@ -20,7 +20,7 @@ const accountDeletionGenericFailure = '탈퇴를 처리하지 못했어요. 잠�
 const _byCode = <String, String>{
   'unauthorized': '로그인 정보가 만료되었어요. 다시 로그인한 뒤 시도해 주세요.',
   'admin_blocked': '관리자 계정은 앱에서 탈퇴할 수 없어요. 운영 담당자에게 문의해 주세요.',
-  'unavailable': '회원탈퇴는 아직 준비 중이에요. 준비되면 알려 드릴게요.',
+  'unavailable': '현재 앱에서 회원탈퇴를 처리할 수 없어요. 문의·건의사항으로 연락해 주세요.',
 };
 
 /// Never returns server text, a status code or a schema detail.

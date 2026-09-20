@@ -8,6 +8,8 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../auth_errors.dart';
 import '../auth_oauth.dart';
+import '../auth_email.dart';
+import '../auth_recovery.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -18,48 +20,58 @@ class AuthPage extends ConsumerStatefulWidget {
 class _AuthPageState extends ConsumerState<AuthPage> {
   final _email = TextEditingController();
   final _password = TextEditingController();
-  bool _signUp = false, _busy = false;
+  final _confirm = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  bool _signUp = false, _busy = false, _visible = false;
+  String? _error, _notice;
 
   @override
   void dispose() {
+    _confirm.dispose();
     _email.dispose();
     _password.dispose();
     super.dispose();
   }
 
   Future<void> _passwordAuth() async {
-    final client = ref.read(supabaseClientProvider);
-    if (client == null ||
-        _email.text.trim().isEmpty ||
-        _password.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('이메일과 비밀번호를 입력해 주세요.')));
+    if (_busy) return;
+    if (!_form.currentState!.validate()) return;
+    final service = ref.read(emailAuthServiceProvider);
+    if (service == null) {
+      setState(() => _error = '현재 로그인할 수 없어요. 잠시 후 다시 시도해 주세요.');
       return;
     }
-    setState(() => _busy = true);
+    final profile = ref.read(profileRepositoryProvider);
+    final signingUp = _signUp;
+    FocusScope.of(context).unfocus();
+    setState(() {
+      _busy = true;
+      _error = null;
+      _notice = null;
+    });
     try {
-      if (_signUp) {
-        final response = await client.auth.signUp(
-          email: _email.text.trim(),
-          password: _password.text,
-        );
-        if (response.session == null) {
-          _message('가입 안내가 이메일로 전송되었어요. 이메일 확인 후 로그인해 주세요.');
-        } else {
-          await _ensureProfile();
-          _message('가입하고 로그인했어요.');
+      final authenticated = signingUp
+          ? await service.signUp(_email.text.trim(), _password.text)
+          : await service
+                .login(_email.text.trim(), _password.text)
+                .then((_) => true);
+      if (authenticated) {
+        try {
+          await profile.upsertCurrentProfile();
+        } catch (_) {
+          /* Settings can retry. */
         }
-      } else {
-        await client.auth.signInWithPassword(
-          email: _email.text.trim(),
-          password: _password.text,
-        );
-        await _ensureProfile();
-        _message('로그인했어요.');
+      } else if (mounted) {
+        setState(() {
+          _notice = '가입을 요청했어요. 이메일 인증이 필요한 경우 받은 편지함과 스팸함을 확인한 뒤 로그인해 주세요.';
+          _signUp = false;
+          _password.clear();
+          _confirm.clear();
+          _form.currentState?.reset();
+        });
       }
     } catch (error) {
-      // Raw SDK English never reaches the user.
-      _message(authErrorMessage(error));
+      if (mounted) setState(() => _error = authErrorMessage(error));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -67,6 +79,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
 
   Future<void> _oauth(OAuthProvider provider) async {
     if (_busy) return; // one flow at a time, across all three providers
+    if (!ref.read(availableOAuthProvidersProvider).contains(provider)) {
+      _message('현재 이 로그인 방식을 사용할 수 없습니다.');
+      return;
+    }
     final service = ref.read(oauthServiceProvider);
     if (service == null) {
       _message('지금은 소셜 로그인을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.');
@@ -128,14 +144,6 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
   }
 
-  Future<void> _ensureProfile() async {
-    try {
-      await ref.read(profileRepositoryProvider).upsertCurrentProfile();
-    } catch (_) {
-      // Auth success remains valid; profile retry can happen on settings use.
-    }
-  }
-
   void _message(String message) {
     if (mounted) {
       ScaffoldMessenger.of(context)
@@ -149,61 +157,152 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       authStateProvider,
       (_, next) => _onAuthStatus(next.value),
     );
-    return ShellPage(
-      children: [
-        SectionHeader(_signUp ? '회원가입' : '로그인'),
-        TextField(
-          controller: _email,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(labelText: '이메일'),
+    final providers = ref.watch(availableOAuthProvidersProvider);
+    return Form(
+      key: _form,
+      child: AutofillGroup(
+        child: ShellPage(
+          children: [
+            const AppHeader(title: '레전드스터디+'),
+            const Text('자료를 저장하고 학습 기록을 이어가세요'),
+            SectionHeader(_signUp ? '회원가입' : '로그인'),
+            TextFormField(
+              controller: _email,
+              enabled: !_busy,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              autocorrect: false,
+              textInputAction: TextInputAction.next,
+              decoration: const InputDecoration(
+                labelText: '이메일',
+                errorMaxLines: 3,
+              ),
+              validator: (value) =>
+                  isPlausibleEmail(value ?? '') ? null : '이메일 형식을 확인해 주세요.',
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _password,
+              enabled: !_busy,
+              obscureText: !_visible,
+              autocorrect: false,
+              enableSuggestions: false,
+              autofillHints: [
+                _signUp ? AutofillHints.newPassword : AutofillHints.password,
+              ],
+              textInputAction: _signUp
+                  ? TextInputAction.next
+                  : TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: '비밀번호',
+                errorMaxLines: 3,
+                helperMaxLines: 3,
+                helperText: _signUp
+                    ? '비밀번호는 $minimumPasswordLength자 이상 입력해 주세요.'
+                    : null,
+                suffixIcon: IconButton(
+                  tooltip: _visible ? '비밀번호 숨기기' : '비밀번호 보기',
+                  onPressed: _busy
+                      ? null
+                      : () => setState(() => _visible = !_visible),
+                  icon: Icon(
+                    _visible
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                  ),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) return '비밀번호를 입력해 주세요.';
+                if (_signUp && value.length < minimumPasswordLength) {
+                  return '비밀번호는 $minimumPasswordLength자 이상으로 입력해 주세요.';
+                }
+                return null;
+              },
+              onFieldSubmitted: (_) {
+                if (!_signUp) _passwordAuth();
+              },
+            ),
+            if (_signUp) ...[
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _confirm,
+                enabled: !_busy,
+                obscureText: !_visible,
+                autocorrect: false,
+                enableSuggestions: false,
+                autofillHints: const [AutofillHints.newPassword],
+                textInputAction: TextInputAction.done,
+                decoration: const InputDecoration(
+                  labelText: '비밀번호 확인',
+                  errorMaxLines: 3,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '비밀번호를 한 번 더 입력해 주세요.';
+                  }
+                  return value == _password.text ? null : '두 비밀번호가 서로 달라요.';
+                },
+                onFieldSubmitted: (_) => _passwordAuth(),
+              ),
+            ],
+            if (_error != null || _notice != null) ...[
+              const SizedBox(height: 12),
+              Semantics(liveRegion: true, child: Text(_error ?? _notice!)),
+            ],
+            const SizedBox(height: 20),
+            FilledButton(
+              onPressed: _busy ? null : _passwordAuth,
+              child: Text(
+                _busy
+                    ? '처리 중…'
+                    : _signUp
+                    ? '회원가입'
+                    : '로그인',
+              ),
+            ),
+            TextButton(
+              onPressed: _busy
+                  ? null
+                  : () => setState(() {
+                      _signUp = !_signUp;
+                      _error = null;
+                      _notice = null;
+                      _password.clear();
+                      _confirm.clear();
+                      _visible = false;
+                      _form.currentState?.reset();
+                    }),
+              child: Text(_signUp ? '로그인으로 돌아가기' : '처음이신가요? 회원가입'),
+            ),
+            if (!_signUp)
+              TextButton(
+                onPressed: _busy ? null : () => context.push('/auth/recovery'),
+                child: const Text('비밀번호를 잊으셨나요?'),
+              ),
+            if (providers.isNotEmpty) ...[
+              const Divider(height: 32),
+              const Text('다른 방법으로 로그인'),
+              const SizedBox(height: 12),
+              // Text-only fallback; official provider artwork/release review pending.
+              for (final provider in providers)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: OutlinedButton(
+                    onPressed: _busy ? null : () => _oauth(provider),
+                    child: Text(
+                      '${switch (provider) {
+                        OAuthProvider.google => 'Google',
+                        OAuthProvider.apple => 'Apple',
+                        _ => 'Kakao',
+                      }}로 계속하기',
+                    ),
+                  ),
+                ),
+            ],
+          ],
         ),
-        const SizedBox(height: 12),
-        TextField(
-          controller: _password,
-          obscureText: true,
-          decoration: const InputDecoration(labelText: '비밀번호'),
-        ),
-        const SizedBox(height: 16),
-        FilledButton(
-          onPressed: _busy ? null : _passwordAuth,
-          child: Text(_signUp ? '이메일로 회원가입' : '이메일로 로그인'),
-        ),
-        TextButton(
-          onPressed: _busy ? null : () => setState(() => _signUp = !_signUp),
-          child: Text(_signUp ? '이미 계정이 있어요' : '처음 시작하시나요? 회원가입'),
-        ),
-        if (!_signUp)
-          TextButton(
-            onPressed: _busy ? null : () => context.push('/auth/recovery'),
-            child: const Text('비밀번호를 잊으셨나요?'),
-          ),
-        const Divider(height: 28),
-
-        if (ref
-            .watch(availableOAuthProvidersProvider)
-            .contains(OAuthProvider.google))
-          OutlinedButton.icon(
-            onPressed: _busy ? null : () => _oauth(OAuthProvider.google),
-            icon: const Icon(Icons.account_circle_outlined),
-            label: const Text('Google로 계속하기'),
-          ),
-        if (ref
-            .watch(availableOAuthProvidersProvider)
-            .contains(OAuthProvider.apple))
-          OutlinedButton.icon(
-            onPressed: _busy ? null : () => _oauth(OAuthProvider.apple),
-            icon: const Icon(Icons.apple),
-            label: const Text('Apple로 계속하기'),
-          ),
-        if (ref
-            .watch(availableOAuthProvidersProvider)
-            .contains(OAuthProvider.kakao))
-          OutlinedButton.icon(
-            onPressed: _busy ? null : () => _oauth(OAuthProvider.kakao),
-            icon: const Icon(Icons.chat_bubble_outline),
-            label: const Text('Kakao로 계속하기'),
-          ),
-      ],
+      ),
     );
   }
 }

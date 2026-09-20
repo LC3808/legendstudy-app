@@ -132,7 +132,10 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      PopScope(canPop: !_busy, child: _content(context));
+
+  Widget _content(BuildContext context) {
     final authenticated =
         ref.watch(authStateProvider).value?.isAuthenticated ?? false;
     final available = ref.watch(accountDeletionServiceProvider) != null;
@@ -146,6 +149,22 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
             child: Text(_busy ? '정리 중…' : '기기 정보 정리 다시 시도'),
           ),
           const Text('계정을 다시 삭제하지 않아요. 정리가 계속 실패하면 문의해 주세요.'),
+        ],
+      );
+    }
+    if (authenticated && !available) {
+      return ShellPage(
+        children: [
+          const SectionHeader('회원탈퇴'),
+          Text(
+            accountDeletionMessage(
+              const AccountDeletionException('unavailable'),
+            ),
+          ),
+          TextButton(
+            onPressed: () => context.push('/my/feedback'),
+            child: const Text('문의·건의사항'),
+          ),
         ],
       );
     }
