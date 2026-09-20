@@ -1,7 +1,7 @@
 # Day 9-C2 — Bookmark + Recent Views
 
-Status: **implemented / local validation PASS**. Day 9-C overall remains
-incomplete; C3 and MY/Saved/Recent list integration are not part of this task.
+Status: **implemented / local validation PASS**. This record describes C2;
+C3 is now implemented separately. Recent semantics below reflect the later v2 contract.
 
 ## Contract
 
@@ -19,12 +19,14 @@ incomplete; C3 and MY/Saved/Recent list integration are not part of this task.
   unsaved, mutation, and failure states. Authenticated mutations call only the
   existing add/delete methods; duplicate saves remain idempotent at the
   repository contract and rapid taps are serialized/ignored while mutating.
-- Guest taps show a concise login-required message without calling a personal
-  repository write.
-- A resolved, active detail item records one recent view per detail lifecycle.
-  Rebuilds and provider/theme/text-scale changes do not repeat it; leaving and
-  re-entering creates a new event. The recent repository supplies the auth
-  identity and server-side `viewed_at`; the client sends neither.
+- Guest save pushes login and returns to the same detail without automatically
+  saving. No personal repository write occurs until an authenticated explicit save.
+- A resolved, active detail qualifies at most once per owner/detail lifecycle:
+  10 foreground seconds OR external resource/original open attempt OR successful
+  save. A quick revisit alone does not record. Even a failed launch is intent,
+  not proof of PDF reading; external browser dwell is not counted. Rebuilds do
+  not repeat the write. The repository supplies owner and server `viewed_at`;
+  the UI supplies neither. See [v2 contract](day-11-account-personal-feedback.md#meaningful-recent-views-v2).
 - Missing/error detail results never record a view. Recent-write failure is
   non-blocking and leaves the detail visible.
 - The keyed bookmark provider watches auth identity, reloads on account

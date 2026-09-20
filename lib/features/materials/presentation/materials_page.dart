@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/domain/content_types.dart';
@@ -109,6 +111,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
     Object? selected,
     void Function(Object?) onSelected,
   ) async {
+    FocusScope.of(context).unfocus();
     final result = await showModalBottomSheet<({Object? value})>(
       context: context,
       isScrollControlled: true,
@@ -415,9 +418,10 @@ class SearchResultTile extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     children: [
       InkWell(
-        onTap: () => context.push(
-          '/materials/${Uri.encodeComponent(item.content.slug)}',
-        ),
+        onTap: () {
+          FocusScope.of(context).unfocus();
+          context.push('/materials/${Uri.encodeComponent(item.content.slug)}');
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(

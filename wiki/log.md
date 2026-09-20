@@ -1690,3 +1690,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   recovery/deletion Wiki statements. Official social-button design HOLD; real
   policies, auth/recovery/deletion E2E and deletion lifecycle/store gates remain.
   Full AUTH UX COMPLETE NO; RELEASE READY NO. Production mutation 0; no push.
+
+
+## 2026-09-20 — Materials delivery resolver and return UX
+
+- Centralized delivery URI/CTA/fallback decisions using existing public metadata;
+  no suffix inference or official/rights claim. Invalid/missing/transient direct
+  targets use parent source; valid direct/landing actions keep original fallback.
+- Resource-local launch errors/retry and host-only destination display; keyboard
+  unfocus requests at filter/detail/open boundaries. Grouping/collapse retained.
+- Full 472 PASS / 1 existing skip, focused 64 + 2 PASS, native iOS offline journey
+  2 PASS (1×/2×), analyze and Android debug/iOS simulator builds PASS. Reviewed
+  360×640 and native renders. Return preserves query/filter/pages/selected row;
+  assertion handles measured OS keyboard/safe-area adjustment without hiding reset.
+- Corrected stale recent-view documentation to existing intent/10-second dwell
+  semantics. Public metadata limits, bookmark HOLD and real destination/device
+  Owner acceptance documented. Credential/diff checks PASS. Production mutation 0;
+  no viewer/mirror, backend/ingestion/Historical/Auth/Study/brand changes or push.

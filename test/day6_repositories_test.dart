@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -57,9 +58,8 @@ void main() {
     test(
       'parent type filter with query "$query" preserves projection and order',
       () async {
-        await SupabaseContentRepository(
-          client,
-        ).searchContent(query, contentType: 'exam');
+        await SupabaseContentRepository(client)
+            .searchContent(query, contentType: 'exam');
         final p = requests.single.url.queryParameters;
         expect(p['content_type'], 'eq.exam');
         expect(p['is_active'], 'eq.true');
@@ -116,9 +116,8 @@ void main() {
         'exam_type': 'evaluation_mock',
       },
     ];
-    final result = await SupabaseExamRepository(
-      client,
-    ).fetchForContentIds(['a', 'b']);
+    final result = await SupabaseExamRepository(client)
+        .fetchForContentIds(['a', 'b']);
     expect(result['a']!.academicYear, 2027);
     expect(requests.single.url.path, '/rest/v1/exams');
     expect(
@@ -168,9 +167,8 @@ void main() {
           occurrence: {'raw_subject_label': '수학 가형', 'subject': null},
         ),
       ];
-      final result = await SupabaseResourceRepository(
-        client,
-      ).fetchForContent('parent-1');
+      final result = await SupabaseResourceRepository(client)
+          .fetchForContent('parent-1');
       final p = requests.single.url.queryParameters;
       expect(p['select'], SupabaseResourceRepository.projection);
       expect(p['select'], contains('file_extension,file_size'));
@@ -189,9 +187,8 @@ void main() {
       100,
       (i) => {...resourceJson(), 'id': 'resource-$i', 'display_order': i},
     );
-    final result = await SupabaseResourceRepository(
-      client,
-    ).fetchForContent('parent-1');
+    final result = await SupabaseResourceRepository(client)
+        .fetchForContent('parent-1');
     expect(result, hasLength(100));
     expect(requests, hasLength(2));
     expect(requests[1].url.queryParameters['offset'], '100');
@@ -265,8 +262,8 @@ void main() {
       resolveResourceOpenUri(
         ContentResource.fromJson(json),
         'https://legendstudy.com/post',
-      ),
-      isNull,
+      ).toString(),
+      'https://legendstudy.com/post',
     );
     expect(resourceTypeLabels['question'], '문제');
     expect(resourceTypeLabels['answer_explanation'], '정답·해설');
@@ -282,8 +279,8 @@ void main() {
       resolveResourceOpenUri(
         ContentResource.fromJson(json),
         'https://legendstudy.com/post',
-      ),
-      isNull,
+      ).toString(),
+      'https://legendstudy.com/post',
     );
     json['source_url'] = 'javascript:alert(1)';
     expect(ContentResource.fromJson(json).openUri, isNull);

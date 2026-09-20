@@ -2,6 +2,24 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Materials delivery — IMPLEMENTED / LOCAL VALIDATION PASS
+
+- Independent free Materials access: centralized file/page/original/unavailable
+  action, purpose CTA + destination host, conservative uncertain-link fallback.
+  Direct/landing cards also offer original source; launch errors stay inline.
+- Existing occurrence grouping/collapse, search/filter/loaded pages and return
+  state preserved. Recent means intent/foreground dwell, not proven PDF reading.
+  Search-row bookmark HOLD; no viewer/mirror/rights or ingestion changes.
+- Full **472 PASS / 1 existing skip**, focused **64 + 2 PASS**, analyze PASS;
+  Android debug/iOS simulator builds PASS. iOS native offline journey **2 PASS**
+  at 1×/2× and 360×640 widget renders reviewed. Keyboard/OS safe-area adjustment
+  allowed; selected row remains visible after return with no repeated query.
+- Metadata lacks public health/expiry/auth flags; no official-source inference.
+  No fresh Production schema/API or real website/file/browser-return E2E check.
+  Owner destination/device acceptance and existing Auth/policy/deletion release
+  gates remain. Scoped delivery COMPLETE YES; RELEASE READY NO. Mutation 0.
+- Canonical audit/evidence: [resource delivery](day-9-c-resource-detail.md).
+
 ## 2026-09-20 Core Account/Auth — LOCAL UX TESTED / RELEASE GATES OPEN
 
 - Email login/signup validation, confirmation, show/hide, autofill and duplicate

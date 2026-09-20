@@ -20,7 +20,8 @@ This task performed no Production E2E, Supabase access, mutation or deployment.
 - CTA follows actual destination: file → type-specific 보기; landing page →
   type-specific 자료 페이지 보기; unknown → 원문에서 보기 with parent-source fallback.
   Explanations describe external access, never availability or rights guarantees.
-  No viewer, download, mirror or destination-resolution change.
+  The later delivery increment below centralizes fallback decisions; no viewer,
+  download or mirror was added.
 - Guest bookmark pushes login, then successful sign-in returns to original
   detail. It does not auto-save; user taps save after returning. The visible
   auth route owns return navigation (GoRouter push retains the branch URI).
@@ -201,3 +202,33 @@ acceptance, (2) Release QA/store preparation after those gates, (3) Materials
 external delivery improvements after rights review, (4) Daily Sync against the
 existing ingestion contract, (5) LS LAB entry only after a real web deployment
 URL. Analytics/BM remain deferred.
+
+
+## Materials delivery increment — 2026-09-20
+
+Materials remains an independent free core product. Starting state `85e3c27`,
+tracked clean; no Auth/Study/brand/ingestion/backend changes in this increment.
+
+- Existing URI-only logic and independent CTA copy are replaced by one typed
+  delivery action: explicit file / landing page / parent source / unavailable.
+  Missing, invalid or uncertain direct targets now have safe original fallback.
+  No suffix-only file inference, official-source guess or rights promotion.
+- Direct/landing cards retain purpose CTAs, show host only and offer original
+  fallback even after a successful OS launch. Errors stay local to their action.
+- Existing occurrence grouping/collapse and search/filter/pagination state kept;
+  filter/detail/external actions dismiss keyboard. Return needs no repeat search.
+- Public API cannot guarantee health, expiry or hidden auth requirements.
+  Query-bearing files conservatively use original source, including benign
+  queries. No HTTP availability claim, network file probe or auth bypass.
+- Recent intent/dwell semantics clarified; list bookmark remains HOLD because
+  per-item lookup is N+1 and the bounded saved list is not a full membership set.
+- [Canonical delivery audit/contract](day-9-c-resource-detail.md) separates public
+  fields, internal health metadata, rights, navigation and future sync boundaries.
+  Existing Auth/policy/deletion release gates above are unchanged.
+
+Validation: full **472 PASS / 1 existing skip**, focused **64 + 2 PASS**, iOS
+simulator offline journey **2 PASS** (1×/2×), analyze and Android debug/iOS simulator
+builds PASS. Actual renders reviewed; external opener/lifecycle are test doubles,
+not website/file or real browser-return E2E. Native keyboard/safe-area scroll
+adjustment is bounded and the selected row remains visible. Owner real-device
+external destination acceptance remains; RELEASE READY NO. Mutation 0, no push.

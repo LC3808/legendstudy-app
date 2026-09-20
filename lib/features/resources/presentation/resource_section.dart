@@ -86,27 +86,14 @@ class ResourceSection extends ConsumerWidget {
                               if (item.sourceLabel?.trim().isNotEmpty == true &&
                                   item.sourceLabel != item.displayTitle)
                                 Text(item.sourceLabel!),
-                              if (resolveResourceOpenUri(
-                                    item,
-                                    contentSourceUrl,
-                                  ) ==
-                                  null)
-                                const Text('열 수 있는 링크가 없어요.')
-                              else
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(resourceOpenDescription(item)),
-                                    ExternalLinkButton(
-                                      uri: resolveResourceOpenUri(
-                                        item,
-                                        contentSourceUrl,
-                                      ),
-                                      label: resourceOpenLabel(item),
-                                      onOpenAttempted: onMeaningfulAction,
-                                    ),
-                                  ],
+                              _ResourceDeliveryActions(
+                                key: ValueKey(item.id),
+                                delivery: resolveResourceDelivery(
+                                  item,
+                                  contentSourceUrl,
                                 ),
+                                onOpenAttempted: onMeaningfulAction,
+                              ),
                             ],
                           ),
                         ),
@@ -117,4 +104,36 @@ class ResourceSection extends ConsumerWidget {
           );
         },
       );
+}
+
+class _ResourceDeliveryActions extends StatelessWidget {
+  const _ResourceDeliveryActions({
+    required this.delivery,
+    this.onOpenAttempted,
+    super.key,
+  });
+  final ResourceDelivery delivery;
+  final VoidCallback? onOpenAttempted;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(delivery.description),
+      if (delivery.uri != null) ...[
+        // Display the host only: paths/queries can carry transient credentials.
+        Text('이동할 사이트: ${delivery.uri!.host}'),
+        ExternalLinkButton(
+          uri: delivery.uri,
+          label: delivery.label,
+          onOpenAttempted: onOpenAttempted,
+        ),
+      ],
+      if (delivery.sourceFallback != null)
+        ExternalLinkButton(
+          uri: delivery.sourceFallback,
+          label: '원문에서 찾기',
+          onOpenAttempted: onOpenAttempted,
+        ),
+    ],
+  );
 }

@@ -337,7 +337,7 @@ void main() {
       ];
       await mount(tester, route: '/materials/fixture');
       await tester.pumpAndSettle();
-      expect(find.text('원본 게시글에서 해당 자료를 찾아 주세요.'), findsOneWidget);
+      expect(find.text('직접 열 수 있는 자료 링크를 확인할 수 없어 원본 게시글로 이동해요.'), findsOneWidget);
       await tester.ensureVisible(find.text('원문에서 보기'));
       await tester.tap(find.text('원문에서 보기'));
       await tester.pumpAndSettle();

@@ -25,11 +25,21 @@ class ExternalLinkButton extends ConsumerStatefulWidget {
 }
 
 class _ExternalLinkButtonState extends ConsumerState<ExternalLinkButton> {
-  bool opening = false;
+  bool opening = false, failed = false;
+  @override
+  void didUpdateWidget(covariant ExternalLinkButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.uri != widget.uri) failed = false;
+  }
+
   Future<void> open() async {
     final uri = publicWebUri(widget.uri?.toString());
     if (uri == null || opening) return;
-    setState(() => opening = true);
+    FocusScope.of(context).unfocus();
+    setState(() {
+      opening = true;
+      failed = false;
+    });
     widget.onOpenAttempted?.call();
     var success = false;
     try {
@@ -38,26 +48,35 @@ class _ExternalLinkButtonState extends ConsumerState<ExternalLinkButton> {
       // Do not surface raw platform errors or URL query tokens.
     }
     if (!mounted) return;
-    setState(() => opening = false);
-    if (!success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('외부 링크를 열지 못했어요. 다시 시도해 주세요.')),
-      );
-    }
+    setState(() {
+      opening = false;
+      failed = widget.uri == uri && !success;
+    });
   }
 
   @override
-  Widget build(BuildContext context) => TextButton.icon(
-    onPressed: opening || publicWebUri(widget.uri?.toString()) == null
-        ? null
-        : open,
-    icon: opening
-        ? const SizedBox(
-            width: 18,
-            height: 18,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          )
-        : const Icon(Icons.open_in_new),
-    label: Text(widget.label),
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      TextButton.icon(
+        onPressed: opening || publicWebUri(widget.uri?.toString()) == null
+            ? null
+            : open,
+        icon: opening
+            ? const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.open_in_new),
+        label: Text(widget.label),
+      ),
+      if (failed)
+        Semantics(
+          liveRegion: true,
+          child: const Text('외부 링크를 열지 못했어요. 다시 시도해 주세요.'),
+        ),
+    ],
   );
 }
