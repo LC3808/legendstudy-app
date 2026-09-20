@@ -58,6 +58,12 @@ class AppHeader extends StatelessWidget {
                 )
               : Text(title, style: Theme.of(context).textTheme.headlineSmall),
         ),
+        if (branded) ...[
+          const SizedBox(height: 4),
+          ExcludeSemantics(
+            child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+          ),
+        ],
         if (subtitle != null) ...[
           const SizedBox(height: 8),
           Text(subtitle!, style: Theme.of(context).textTheme.bodyMedium),

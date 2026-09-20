@@ -43,7 +43,7 @@ import UserNotifications
               let ms = args["remainingMs"] as? NSNumber,
               ms.doubleValue > 0 else { result(nil); return }
         let content = UNMutableNotificationContent()
-        content.title = "레전드스터디"
+        content.title = "레전드스터디+"
         content.body = "모의고사 시간이 종료됐어요."
         content.sound = .default
         content.userInfo = ["studySession": session]

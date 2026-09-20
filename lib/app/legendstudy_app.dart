@@ -9,7 +9,7 @@ class LegendStudyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp.router(
-    title: '레전드스터디',
+    title: '레전드스터디+',
     debugShowCheckedModeBanner: false,
     theme: AppTheme.light,
     locale: const Locale('ko'),

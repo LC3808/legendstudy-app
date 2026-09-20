@@ -43,3 +43,38 @@ The current Home wordmark size, spacing and overall hierarchy are provisional.
 Future refinement should consider a smaller wordmark, better continuity between
 header and first section, clearer divider/outline and text contrast, and stronger
 section separation while continuing to avoid excessive orange.
+
+## 2026-09-20 LegendStudy+ display identity / launcher HOLD
+
+- Official user-facing name: **레전드스터디+**; English: **LegendStudy+**.
+  Android/iOS display names, Flutter app title, About, notifications and Focus
+  labels updated. Native version/build remains dynamic.
+- Home keeps the unchanged original wordmark artwork with a separate product-name
+  caption. The caption is text, not a redrawn logo; screen readers announce the
+  product name once. Auth flow/layout is unchanged.
+- Canonical source directory remains `assets/brand/source/`; original hashes and
+  generated wordmark are unchanged. Repository and all-branch asset history checked.
+  The 72×72 favicon is explicitly NOT the launcher source (79fd09a correction).
+  The 150×150 square is a reference with additional text, not a production-size
+  isolated launcher icon. No suitable high-resolution launcher original found.
+- **OWNER ICON SOURCE REQUIRED**: supply the original high-resolution launcher
+  artwork (1024×1024 or vector) and, if available, adaptive foreground/background.
+  No upscaling, crop, recoloring, AI generation or reconstruction performed.
+- Launcher application HOLD on both platforms: existing Flutter mipmaps/AppIcon
+  remain. Android has no adaptive foreground/background resource; safe-zone review
+  is pending the real source. iOS existing 1024 placeholder has no alpha, but this
+  does not establish acceptance of the future Owner asset.
+- Splash audit: Android pre-12 white launch background; iOS centered 1×1 transparent
+  LaunchImage on white. Android 12+ can still show the placeholder launcher icon.
+  No launch asset changes, animation, artificial delay or network splash added.
+- Technical identifiers unchanged: `com.legendstudy.app`, `legendstudy_app`,
+  existing Supabase identifiers, deep links and OAuth callbacks.
+- Validation: full existing Flutter suite 423 PASS / 1 existing skip; new brand
+  render suite 4 PASS across 360×640 and 428×926 at 1×/2× (Home/Auth/MY/About).
+  Analyze PASS; Android debug and iOS simulator builds PASS. APK and built Info.plist
+  confirm display name and unchanged package/bundle ID. iPhone 16 Pro / iOS 18.6
+  simulator launch and Home render inspected. Android physical launch not tested.
+  Large About title wraps at 2× without overflow; no font shrinking.
+- Brand string audit, original-asset hash/technical-ID checks, credential-pattern
+  scan and diff check PASS. Production mutation 0; full brand readiness remains NO
+  until the Owner launcher source is supplied and native icon/splash review passes.

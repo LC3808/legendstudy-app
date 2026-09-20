@@ -1643,3 +1643,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   recovery/deletion gates, and device acceptance. Production mutation 0;
   Historical A2, existing untracked artifacts and earlier iPhone results preserved.
   No push. Details: core-app-improvements.md.
+
+
+## 2026-09-20 — LegendStudy+ display identity / launcher source HOLD
+
+- Updated native display names, Flutter/About/Home and native notification/Focus
+  copy to 레전드스터디+; technical identifiers and dynamic app version unchanged.
+- Audited Owner sources and Git history: legacy favicon and low-resolution square
+  reference are not a production launcher source. No icon/splash assets changed;
+  Owner high-resolution original required. Preserved source hashes and wordmark.
+- Existing suite 423 PASS / 1 skip; brand render 4 PASS (360×640/428×926, 1×/2×),
+  analyze PASS, Android debug/iOS simulator builds PASS, APK/plist labels verified,
+  iPhone simulator launch/Home review PASS, diff/credential checks PASS.
+- Display work committed independently; full brand identity remains incomplete.
+  Production mutation 0; no push, no Historical A2 or other feature changes.

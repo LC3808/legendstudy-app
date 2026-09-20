@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ShellPage(
     padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
     children: [
-      const AppHeader(title: '레전드스터디', branded: true),
+      const AppHeader(title: '레전드스터디+', branded: true),
       const DayTargetCard(),
       const SizedBox(height: 8),
       _HomeStudyCard(),

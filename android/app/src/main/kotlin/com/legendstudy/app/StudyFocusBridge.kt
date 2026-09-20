@@ -76,7 +76,7 @@ class StudyFocusBridge(private val activity: Activity, messenger: BinaryMessenge
         if (System.currentTimeMillis() >= expires) return "inactive"
         var id = ownedRuleId()
         if (id == null) {
-            val rule = AutomaticZenRule("레전드스터디 공부", null, config, condition, null,
+            val rule = AutomaticZenRule("레전드스터디+ 공부", null, config, condition, null,
                 NotificationManager.INTERRUPTION_FILTER_PRIORITY, true)
             id = manager.addAutomaticZenRule(rule) ?: return "failed"
             if (!prefs.edit().putString("rule", id).commit()) {

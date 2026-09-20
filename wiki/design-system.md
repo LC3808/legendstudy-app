@@ -1,5 +1,15 @@
 # Design System
 
+## Current display identity — 2026-09-20
+
+Official display name is **레전드스터디+** (English **LegendStudy+**), separate from
+unchanged technical identifiers. Native labels and in-app text are applied;
+original Home artwork is preserved with a separate product-name caption.
+Launcher replacement remains HOLD: available 72×72 favicon is not the canonical
+launcher design and 150×150 square is only a reference. No approved high-resolution
+launcher source found. See [brand asset record](../assets/brand/README.md) for audit,
+validation and Owner source requirement. Historical entries below are preserved.
+
 ## Brand source
 
 LegendStudy should preserve the visual continuity of the existing `legendstudy.com` brand and the legacy logo assets supplied by the product owner.

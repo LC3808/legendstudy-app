@@ -5,7 +5,7 @@
     <application
         android:fullBackupContent="@xml/focus_backup_rules"
         android:dataExtractionRules="@xml/focus_data_extraction_rules"
-        android:label="레전드스터디"
+        android:label="레전드스터디+"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -53,7 +53,7 @@
                 <action android:name="android.app.action.AUTOMATIC_ZEN_RULE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="android.service.zen.automatic.ruleType" android:value="레전드스터디 공부" />
+            <meta-data android:name="android.service.zen.automatic.ruleType" android:value="레전드스터디+ 공부" />
             <meta-data android:name="android.service.zen.automatic.ruleInstanceLimit" android:value="1" />
         </activity>
         <receiver android:name=".MockReminderReceiver" android:exported="false" />

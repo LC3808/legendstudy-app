@@ -62,7 +62,7 @@ class AppConfig {
         uri.hasQuery ||
         uri.hasFragment ||
         (uri.path.isNotEmpty && uri.path != '/')) {
-      errors.add('LegendStudy 전용 HTTPS Supabase URL을 설정해 주세요.');
+      errors.add('레전드스터디+ 전용 HTTPS Supabase URL을 설정해 주세요.');
     }
     if (supabasePublishableKey.isEmpty) {
       errors.add('SUPABASE_PUBLISHABLE_KEY 설정이 필요합니다.');

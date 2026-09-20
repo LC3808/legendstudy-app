@@ -126,7 +126,7 @@ class ProfilePage extends ConsumerWidget {
           title: const Text('앱 정보'),
           onTap: () => showAboutDialog(
             context: context,
-            applicationName: '레전드스터디',
+            applicationName: '레전드스터디+',
             children: [
               Consumer(
                 builder: (context, ref, _) => ref

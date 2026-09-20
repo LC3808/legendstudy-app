@@ -2,6 +2,18 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 LegendStudy+ — DISPLAY APPLIED / LAUNCHER HOLD
+
+- Official name 레전드스터디+ / LegendStudy+. Android/iOS display names and
+  in-app brand copy applied; technical identifiers, OAuth and dynamic version
+  unchanged. Existing Home artwork preserved with separate product-name text.
+- Owner historical assets found, but no production-resolution launcher original.
+  72×72 is legacy favicon; 150×150 is square reference. OWNER ICON SOURCE REQUIRED.
+  Launcher/splash assets unchanged; both-platform brand readiness NO.
+- Existing suite 423 PASS / 1 skip; new brand render 4 PASS, analyze/builds PASS.
+  Small-screen 1×/2× and iPhone simulator Home render inspected. No Production
+  mutation. See [brand record](../assets/brand/README.md). Prior work gates unchanged.
+
 ## 2026-09-20 Core App — CODE IMPLEMENTED / OWNER RELEASE GATES OPEN
 
 - Current priority: independent free Materials journey → Core release quality →

@@ -77,7 +77,7 @@ class MockReminderReceiver : BroadcastReceiver() {
             if (Build.VERSION.SDK_INT >= 26) manager.createNotificationChannel(NotificationChannel("mock-end", "모의고사 종료", NotificationManager.IMPORTANCE_DEFAULT))
             val launch = PendingIntent.getActivity(context, 807, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             val builder = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(context, "mock-end") else Notification.Builder(context)
-            manager.notify(807, builder.setSmallIcon(android.R.drawable.ic_dialog_info).setContentTitle("레전드스터디")
+            manager.notify(807, builder.setSmallIcon(android.R.drawable.ic_dialog_info).setContentTitle("레전드스터디+")
                 .setContentText("모의고사 시간이 종료됐어요.").setContentIntent(launch).setAutoCancel(true).build())
         } catch (_: Exception) { /* Best effort; no payloads or credentials logged. */ }
     }

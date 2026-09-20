@@ -235,11 +235,11 @@ void main() {
     await mount(tester);
     expect(
       tester
-          .getSemantics(find.bySemanticsLabel('레전드스터디'))
+          .getSemantics(find.bySemanticsLabel('레전드스터디+'))
           .flagsCollection.isHeader,
       isTrue,
     );
-    expect(find.text('레전드스터디'), findsNothing);
+    expect(find.text('레전드스터디+'), findsOneWidget);
     expect(find.byIcon(Icons.auto_stories_outlined), findsNothing);
     expect(
       tester.widget<Image>(find.byType(Image)).image,
