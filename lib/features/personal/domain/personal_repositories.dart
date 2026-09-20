@@ -11,6 +11,9 @@ abstract interface class BookmarkRepository {
   Future<void> addBookmark(String contentItemId);
   Future<void> deleteBookmark(String contentItemId);
   Future<bool> isBookmarked(String contentItemId);
+
+  /// At most 100 distinct content IDs; result contains only saved IDs.
+  Future<Set<String>> fetchBookmarkedIds(List<String> contentItemIds);
 }
 
 abstract interface class RecentViewRepository {

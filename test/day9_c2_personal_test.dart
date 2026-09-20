@@ -21,6 +21,12 @@ class FakeBookmarkRepository implements BookmarkRepository {
   @override
   Future<List<PersonalContentEntry>> fetchOwnBookmarks() async => [];
   @override
+  Future<Set<String>> fetchBookmarkedIds(List<String> ids) async {
+    reads++;
+    return saved ? ids.toSet() : {};
+  }
+
+  @override
   Future<bool> isBookmarked(String _) async {
     reads++;
     return saved;
@@ -177,6 +183,41 @@ void main() {
       await b.read(authStateProvider.future);
       await Future<void>.delayed(const Duration(milliseconds: 10));
       expect(b.read(bookmarkStateProvider('content-1')).isSaved, isFalse);
+    },
+  );
+
+  testWidgets(
+    'optimistic duplicate detail tap does not record recent before server success',
+    (tester) async {
+      final recent = FakeRecentRepository();
+      final bookmarks = FakeBookmarkRepository(gate: Completer<void>())
+        ..failNext = true;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('a')),
+            ),
+            contentDetailProvider('item-1').overrideWith((ref) async => item()),
+            bookmarkRepositoryProvider.overrideWithValue(bookmarks),
+            recentViewRepositoryProvider.overrideWithValue(recent),
+          ],
+          child: const MaterialApp(home: ContentDetailPage(slug: 'item-1')),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final save = find.widgetWithText(TextButton, '저장');
+      await tester.ensureVisible(save);
+      await tester.tap(save);
+      await tester.tap(save);
+      await tester.pump();
+      expect(bookmarks.adds, 1);
+      expect(recent.touches, 0);
+      bookmarks.gate!.complete();
+      await tester.pumpAndSettle();
+      expect(recent.touches, 0);
+      expect(find.widgetWithText(TextButton, '저장'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
     },
   );
 

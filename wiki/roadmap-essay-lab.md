@@ -13,7 +13,7 @@ is assumed before the nationwide survey.
 
 ## Current app integration — 2026-09-20
 
-Owner-supplied public Web: `https://lab.legendstudy.com`; separate actual Web
+Owner-supplied public Web: `https://lab.legendstudy.com/`; separate actual Web
 repository **LC3808/legendstudy-lab** (supersedes the earlier repository candidate).
 Flutter Home/MY now provide a shared external-browser entry for Guest/account.
 The public site is an introduction/foundation; app copy promises discovery only.
@@ -235,7 +235,7 @@ The Web is the primary Essay Lab environment. Web capabilities include:
 Mobile capabilities focus on discovery, result review, notifications and
 simple record/connection flows. Long-form writing remains Web-primary.
 
-The public service is LegendStudy LAB at `https://lab.legendstudy.com`.
+The public service is LegendStudy LAB at `https://lab.legendstudy.com/`.
 The production Web architecture
 decision is recorded below; the existing Manus React/Vite/Express/tRPC build
 remains a mock foundation and is not a Production architecture commitment.

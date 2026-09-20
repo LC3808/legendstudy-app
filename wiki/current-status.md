@@ -2,9 +2,27 @@
 
 Last reviewed: 2026-09-20
 
+## 2026-09-20 Materials inline bookmark — IMPLEMENTED / LOCAL VALIDATION PASS
+
+- Search results now expose 48px save/unsave controls with selected semantics,
+  optimistic state, per-item busy guard and safe failure rollback. Tile navigation
+  stays separate. Guest prompt pushes existing Auth and returns without auto-save.
+- Detail/list share one owner-scoped store using existing bookmark writes/RLS.
+  Membership reads coalesce into ID batches of at most 100, not N+1 or a truncated
+  saved-list shortcut. Pagination loads only unseen IDs; account changes discard
+  old state/responses. Same-owner token refresh preserves in-flight operations.
+- Full **493 PASS / 1 existing skip**, new focused **11 PASS**, native iOS local
+  journey **2 PASS**, analyze and Android debug/iOS simulator builds PASS.
+  360×640 and iOS 1×/2× long-title/rollback renders reviewed. Credential/diff PASS.
+- Query, six filters, pagination and scroll retained across login cancel/success;
+  list↔detail saved state verified. No Production account/write test claimed.
+  No schema, delivery resolver, Auth-provider, ingestion or LAB app-code changes.
+- Details: [personal state](day-9-c-personal-state.md#materials-inline-bookmark--2026-09-20).
+  Existing Auth/policy/deletion gates remain; **RELEASE READY NO**. Mutation 0.
+
 ## 2026-09-20 LegendStudy LAB app entry — IMPLEMENTED / LOCAL VALIDATION PASS
 
-- Canonical public root `https://lab.legendstudy.com`, one app URL definition;
+- Canonical public root `https://lab.legendstudy.com/`, one app URL definition;
   small shared Home card after recent updates and MY service entry, available
   to Guest/account alike. External browser only, safe retry/busy handling.
 - Web is a separate service (`LC3808/legendstudy-lab`). Shared auth, session/profile
@@ -13,8 +31,8 @@ Last reviewed: 2026-09-20
   Android debug/iOS simulator builds PASS. Native iOS Home/MY 1×/2× renders and
   actual Safari launch/app return verified; 360×640 widget renders reviewed.
   Android physical-browser acceptance remains Owner follow-up, not claimed PASS.
-- Public root currently redirects to `/lab/` and returns HTTP 200; app still
-  launches the canonical root. Introductory copy makes no active AI/payment claim.
+- Corrected canonical: `/` returns HTTP 200; `/lab/` redirects to `/` with
+  HTTP 308 (read-only verified). App already launches the root. Introductory copy makes no active AI/payment claim.
 - Existing Auth/policy/deletion release gates remain: **RELEASE READY NO**.
   Production mutation 0. Details: [Core improvements](core-app-improvements.md#legendstudy-lab-production-entry--2026-09-20).
 
@@ -25,7 +43,8 @@ Last reviewed: 2026-09-20
   Direct/landing cards also offer original source; launch errors stay inline.
 - Existing occurrence grouping/collapse, search/filter/loaded pages and return
   state preserved. Recent means intent/foreground dwell, not proven PDF reading.
-  Search-row bookmark HOLD; no viewer/mirror/rights or ingestion changes.
+  Search-row bookmark HOLD resolved by the inline increment above; no
+  viewer/mirror/rights or ingestion changes.
 - Full **472 PASS / 1 existing skip**, focused **64 + 2 PASS**, analyze PASS;
   Android debug/iOS simulator builds PASS. iOS native offline journey **2 PASS**
   at 1×/2× and 360×640 widget renders reviewed. Keyboard/OS safe-area adjustment

@@ -12,6 +12,7 @@ import '../../exams/presentation/exam_labels.dart';
 import '../../resources/domain/content_resource.dart';
 import '../application/search_controller.dart';
 import '../domain/search_models.dart';
+import '../../personal/presentation/inline_bookmark_button.dart';
 
 class MaterialsPage extends ConsumerStatefulWidget {
   const MaterialsPage({this.initialQuery = '', this.initialType, super.key});
@@ -391,7 +392,8 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
               message: '자료를 불러오지 못했어요. 다시 시도하거나 검색 조건을 좁혀 주세요.',
               onRetry: controller.retry,
             ),
-          for (final item in state.items) SearchResultTile(item: item),
+          for (final item in state.items)
+            SearchResultTile(key: ValueKey(item.content.id), item: item),
           if (state.moreFailed)
             const Text('다음 자료를 불러오지 못했어요. 조건을 좁히거나 다시 시도해 주세요.'),
           if (state.nextOffset != null)
@@ -427,12 +429,19 @@ class SearchResultTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                contentTypeLabels[item.content.contentType] ?? '자료',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: AppTokens.textSecondary,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      contentTypeLabels[item.content.contentType] ?? '자료',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppTokens.textSecondary,
+                      ),
+                    ),
+                  ),
+                  InlineBookmarkButton(contentItemId: item.content.id),
+                ],
               ),
               const SizedBox(height: 4),
               Text(

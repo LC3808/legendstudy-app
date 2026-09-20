@@ -17,8 +17,9 @@ scoped C1-C3 material flow; publication itself remains unexecuted.
   cloud request. Auth changes rebuild the provider and discard prior-account
   state.
 - List cards navigate to the existing detail route. Returning from detail
-  invalidates the relevant list, reflecting bookmark and recent changes without
-  global synchronization state.
+  invalidates the relevant list, reflecting bookmark and recent changes.
+  The later inline/detail shared bookmark store also invalidates the saved list
+  on a successful mutation. No realtime/cross-device synchronization was added.
 
 ## Home and accessibility
 

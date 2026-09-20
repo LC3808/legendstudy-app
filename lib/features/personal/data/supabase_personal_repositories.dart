@@ -109,6 +109,23 @@ class SupabaseBookmarkRepository extends _PersonalRepository
   }
 
   @override
+  Future<Set<String>> fetchBookmarkedIds(List<String> contentItemIds) async {
+    final ids = contentItemIds.toSet().toList();
+    if (ids.length > 100) {
+      throw ArgumentError('Bookmark batch exceeds 100 IDs.');
+    }
+    final owner = userId;
+    if (owner == null || ids.isEmpty) return {};
+    final rows = await client!
+        .from('bookmarks')
+        .select('content_item_id')
+        .eq('user_id', owner)
+        .inFilter('content_item_id', ids)
+        .limit(100);
+    return rows.map((row) => row['content_item_id'] as String).toSet();
+  }
+
+  @override
   Future<bool> isBookmarked(String contentItemId) async {
     final owner = userId;
     if (owner == null) return false;

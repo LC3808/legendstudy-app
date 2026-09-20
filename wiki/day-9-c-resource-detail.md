@@ -94,9 +94,11 @@ foreground 10 seconds OR resource/original open attempt OR successful bookmark.
 Even a failed launcher attempt qualifies intent. Guest performs no recent write.
 See [current recent contract](day-11-account-personal-feedback.md#meaningful-recent-views-v2).
 
-Search-row bookmark remains HOLD: existing per-content state creates N+1 reads;
-fetchOwnBookmarks is capped at 100, so treating it as the complete saved set would
-be wrong. No bulk lookup/optimistic-state redesign in this delivery increment.
+Search-row bookmark HOLD from the delivery increment is now resolved separately:
+[inline bookmark](day-9-c-personal-state.md#materials-inline-bookmark--2026-09-20)
+uses bounded ID-filtered membership queries and one list/detail optimistic store.
+The recent-100 saved list is never treated as the complete saved membership set.
+Delivery resolution and recent-view rules are unchanged.
 
 Rights and delivery remain independent; externalFile is not OWNED/LICENSED/OPEN.
 Future sync can replace URLs or deactivate resources through existing refresh

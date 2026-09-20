@@ -28,6 +28,8 @@ class ListBookmarkRepository implements BookmarkRepository {
   @override
   Future<void> deleteBookmark(String contentItemId) async {}
   @override
+  Future<Set<String>> fetchBookmarkedIds(List<String> ids) async => {};
+  @override
   Future<bool> isBookmarked(String contentItemId) async => false;
 }
 

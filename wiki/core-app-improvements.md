@@ -27,9 +27,9 @@ This task performed no Production E2E, Supabase access, mutation or deployment.
   auth route owns return navigation (GoRouter push retains the branch URI).
   Saved/recent empty states provide login or Materials navigation; saved items
   are explicitly bookmarks, not downloaded files.
-- Inline search-row bookmark is HOLD: current state reads are per-content.
-  Adding one per result creates N+1 reads and needs a bulk/optimistic/rollback
-  contract. Existing detail bookmark and duplicate-request protection remain.
+- Inline search-row bookmark HOLD is resolved: list/detail now share owner-scoped
+  optimistic state with rollback and bounded membership batches. See the
+  [personal-state increment](day-9-c-personal-state.md#materials-inline-bookmark--2026-09-20).
 - MY grade page supports existing 고1/고2/고3, load/save/retry and stale account
   response guards. Existing repository/RLS path is reused; sparse upsert omits
   absent name/grade, preventing login or grade-only updates from erasing fields.
@@ -219,8 +219,8 @@ tracked clean; no Auth/Study/brand/ingestion/backend changes in this increment.
 - Public API cannot guarantee health, expiry or hidden auth requirements.
   Query-bearing files conservatively use original source, including benign
   queries. No HTTP availability claim, network file probe or auth bypass.
-- Recent intent/dwell semantics clarified; list bookmark remains HOLD because
-  per-item lookup is N+1 and the bounded saved list is not a full membership set.
+- Recent intent/dwell semantics clarified. The subsequent inline bookmark
+  increment resolves N+1 with ID-filtered batches, not the bounded saved list.
 - [Canonical delivery audit/contract](day-9-c-resource-detail.md) separates public
   fields, internal health metadata, rights, navigation and future sync boundaries.
   Existing Auth/policy/deletion release gates above are unchanged.
@@ -235,7 +235,7 @@ external destination acceptance remains; RELEASE READY NO. Mutation 0, no push.
 
 ## LegendStudy LAB production entry — 2026-09-20
 
-- Public canonical URL: `https://lab.legendstudy.com` in
+- Public canonical URL: `https://lab.legendstudy.com/` in
   `lib/core/links/service_links.dart`; exact HTTPS root validation rejects other
   hosts, paths, query/fragment and credential-bearing entries. No dynamic URL,
   auth token, profile or tracking parameters are appended.
@@ -263,10 +263,28 @@ The live-browser integration test is opt-in (`LAB_LIVE_BROWSER=true`); the
 operator/host returns to the app within 12 seconds after `LAB_BROWSER_OPEN`.
 The test asserts resumed lifecycle; browser content is separately inspected. Other tests
 use opener/account doubles, never Production auth. This is not real-account E2E.
-Read-only HTTP verified root 308 → `/lab/` 200; the app URL remains the root.
+Canonical correction, rechecked read-only: `/` is HTTP 200; `/lab/` returns
+HTTP 308 to `https://lab.legendstudy.com/`. This supersedes the earlier opposite
+direction note. The app already uses the equivalent root URL; LAB code unchanged.
 
 Owner follow-up: physical Android/iPhone browser/back acceptance and independent
 LAB web availability/content management. No app config, shared auth or payment
 setup is required for this entry. Existing policy URLs, Auth/recovery/deletion
 acceptance and store gates still block release. **RELEASE READY NO**.
 Production mutation 0; no Cloudflare/DNS, web repo, DB, Storage or Edge changes.
+
+
+## Materials inline bookmark — 2026-09-20
+
+The earlier HOLD is closed by the [shared bookmark contract](day-9-c-personal-state.md#materials-inline-bookmark--2026-09-20).
+Search rows save/unsave without navigating, using optimistic filled/outline icons,
+48px targets and accessible busy/selected/retry labels. Errors rollback locally;
+search and other rows remain usable. Guest receives a login prompt and returns
+to the mounted search route without automatic save or repeated search.
+
+Full **493 PASS / 1 existing skip**, new focused **11 PASS**, native iOS fixture
+journey **2 PASS**, analyze, Android debug and iOS simulator builds PASS.
+All six filters/query/pages/scroll, Guest cancel/sign-in, A→Guest→B, detail/list,
+rollback and bounded lookup behavior tested. 360×640/1×/2× renders reviewed.
+Credential/diff checks PASS. Actual Production bookmark E2E was not run; mutation 0.
+No delivery/rights/Viewer/ingestion/LAB behavior changes. Release gates unchanged.

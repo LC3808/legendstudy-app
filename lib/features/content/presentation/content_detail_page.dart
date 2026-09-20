@@ -262,15 +262,17 @@ class _BookmarkControl extends ConsumerWidget {
                     // Return to this detail; never replay a save across account changes.
                     return;
                   }
+                  final owner = auth.value?.userId;
                   final before = state;
                   final wasSaved = state.isSaved;
                   await controller.toggle();
                   if (context.mounted &&
+                      ref.read(authStateProvider).value?.userId == owner &&
                       before.phase != BookmarkPhase.mutating) {
                     final after = ref.read(
                       bookmarkStateProvider(contentItemId),
                     );
-                    if (!wasSaved && after.isSaved) {
+                    if (!wasSaved && after.phase == BookmarkPhase.saved) {
                       onMeaningfulAction?.call();
                     }
                     if (after.message != null) {

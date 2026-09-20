@@ -1717,8 +1717,27 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Full 482 PASS / 1 existing skip, focused 10 PASS, native iOS rendering plus
   real Safari launch/return PASS; 360×640/1×/2× reviewed. Analyze, Android debug,
   iOS simulator, credential scan and diff check PASS.
-- Public root 308 → `/lab/` 200 observed; root retained as app source of truth.
+- App root retained as URL source of truth. The initial redirect-direction note
+  is superseded by the verified canonical correction in the inline entry below.
   Web repo corrected to LC3808/legendstudy-lab. Shared auth/payment/entitlement/
   record sync remain unimplemented; no WebView or Materials/Auth/Study changes.
 - Physical-device browser acceptance remains Owner follow-up; existing release
   gates preserved. Production mutation 0, no web/Cloudflare/backend edits or push.
+
+
+## 2026-09-20 — Materials search inline bookmark
+
+- Closed search-row HOLD with one shared list/detail owner store and bounded
+  membership reads (max 100 IDs/query, no per-row read or recent-100 shortcut).
+  Optimistic save/unsave, per-ID duplicate guard, safe rollback and read retry;
+  stale account IO discarded and same-owner token refresh preserves mutation.
+- Guest dialog/Auth push returns without auto-save; real-router checks preserve
+  query, all six filters, loaded pages and scroll. List/detail consistency and
+  A→Guest→B tested. Existing writes/RLS and Materials delivery/recent rules kept.
+- Full 493 PASS / 1 existing skip, new focused 11 PASS, native iOS fixture journey
+  2 PASS; 360×640/1×/2× long-title/rollback renders reviewed. Analyze, Android debug,
+  iOS simulator, credential scan and diff check PASS.
+- Corrected LAB canonical documentation: https://lab.legendstudy.com/ is root
+  (HTTP 200), /lab/ → / is HTTP 308, verified read-only. LAB app code unchanged.
+- Production mutation 0; no schema/ingestion/provider changes. Production/device
+  acceptance and existing release gates remain. One local commit, no push.
