@@ -5,10 +5,13 @@
 Official display name is **레전드스터디+** (English **LegendStudy+**), separate from
 unchanged technical identifiers. Native labels and in-app text are applied;
 original Home artwork is preserved with a separate product-name caption.
-Launcher replacement remains HOLD: available 72×72 favicon is not the canonical
-launcher design and 150×150 square is only a reference. No approved high-resolution
-launcher source found. See [brand asset record](../assets/brand/README.md) for audit,
-validation and Owner source requirement. Historical entries below are preserved.
+Launcher completion now uses Owner `assets/brand/source/legendstudy_app_iocon_1024.png`
+(1024×1024 PNG), preserving source bytes. Legacy reference assets are not inputs.
+Android/iOS launcher, splash and Home runtime review PASS. Android circle is
+verified on emulator; squircle by offline mask check. Android safe-zone padding
+and iOS opaque RGB exports are documented in the
+[brand asset record](../assets/brand/README.md). No design or technical ID changes.
+Historical entries below are preserved.
 
 ## Brand source
 

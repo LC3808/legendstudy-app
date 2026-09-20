@@ -2,17 +2,26 @@
 
 Last reviewed: 2026-09-20
 
-## 2026-09-20 LegendStudy+ — DISPLAY APPLIED / LAUNCHER HOLD
+## 2026-09-20 LegendStudy+ — BRAND IDENTITY COMPLETE
 
-- Official name 레전드스터디+ / LegendStudy+. Android/iOS display names and
-  in-app brand copy applied; technical identifiers, OAuth and dynamic version
-  unchanged. Existing Home artwork preserved with separate product-name text.
-- Owner historical assets found, but no production-resolution launcher original.
-  72×72 is legacy favicon; 150×150 is square reference. OWNER ICON SOURCE REQUIRED.
-  Launcher/splash assets unchanged; both-platform brand readiness NO.
-- Existing suite 423 PASS / 1 skip; new brand render 4 PASS, analyze/builds PASS.
-  Small-screen 1×/2× and iPhone simulator Home render inspected. No Production
-  mutation. See [brand record](../assets/brand/README.md). Prior work gates unchanged.
+- Official display name 레전드스터디+ / LegendStudy+ retained; technical IDs,
+  OAuth/deep links, native version and all in-app code unchanged.
+- Owner 1024×1024 PNG `assets/brand/source/legendstudy_app_iocon_1024.png`
+  confirmed as sole launcher source; source hash preserved. Earlier source HOLD
+  resolved. Legacy/reference images retained and not used for launcher export.
+- Android five densities + API26 adaptive resource; 60dp full-source image within
+  108dp canvas, centered padding only. Circle/squircle mark containment PASS.
+- iOS all existing iPhone/iPad/App Store sizes exported, fully opaque RGB;
+  1024 RGB pixels match original exactly. Contents.json unchanged.
+- Analyze PASS; full Flutter suite 427 PASS / 1 existing skip (includes four
+  brand layout cases); Android debug and iOS simulator builds PASS.
+- iPhone simulator launcher/name, white launch and Home PASS; Pixel 5/API36
+  emulator circle launcher, official-icon splash and Home PASS. Squircle verified
+  by offline mask render/safe-zone check. Brand focused renders 4 PASS.
+- Both-platform brand ready; Owner review/push remains. Pixel app-drawer text
+  may be ellipsized by the OS; full installed/accessibility label is correct.
+- No Production mutation. See [brand record](../assets/brand/README.md).
+  Core release/Owner gates remain separate from this brand task.
 
 ## 2026-09-20 Core App — CODE IMPLEMENTED / OWNER RELEASE GATES OPEN
 

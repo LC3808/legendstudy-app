@@ -1657,3 +1657,18 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   iPhone simulator launch/Home review PASS, diff/credential checks PASS.
 - Display work committed independently; full brand identity remains incomplete.
   Production mutation 0; no push, no Historical A2 or other feature changes.
+
+
+## 2026-09-20 — Official LegendStudy+ launcher icon completion
+
+- Confirmed Owner 1024×1024 PNG as sole canonical launcher source; preserved
+  original bytes, existing low-resolution references and in-app display branding.
+- Exported Android density icons/adaptive resource with centered safe-zone canvas
+  padding only, and complete opaque iOS AppIcon set; no design or identifier change.
+- Export/pixel/alpha/safe-zone check PASS; analyze PASS; full tests 427 PASS/1 skip;
+  focused brand renders 4 PASS; Android debug and iOS simulator builds PASS.
+- Actual Pixel 5/API36 circle launcher/name, cold splash and Home PASS; squircle
+  offline mask PASS. iPhone 16 Pro/iOS18.6 launcher, white launch and Home PASS.
+  Pixel launcher can ellipsize label visually; full accessibility/name preserved.
+- Replaced current Brand HOLD status with COMPLETE (brand scope only). Owner review
+  and push remain. Production mutation 0; no new Flutter dependency or push.
