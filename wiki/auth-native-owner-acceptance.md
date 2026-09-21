@@ -6,6 +6,16 @@ Google/Kakao/Apple OAuth and header/session lifecycle PASS on 2026-09-21.
 This is Web-only evidence, not App native or cross-platform identity evidence.
 LAB repository/console configuration was not changed or independently inspected.
 
+## Owner iPhone Profile evidence — 2026-09-21
+
+EMAIL_AUTH_APP_PRODUCTION_E2E: PASS (Owner report).
+APP_SESSION_RESTORE: PASS (Owner profile terminate/relaunch report).
+MY school/grade configured value DEVICE E2E: PASS.
+These supersede earlier pending entries for these checks only. Signup/recovery
+edge cases not separately reported here; Google/Kakao/Apple App E2E, App/LAB shared
+identity and A/B isolation remain unverified. Next provider stage: Google, one at a
+time. Latest meal/Settings UI changes require their own Owner recheck.
+
 ## Implemented paths
 
 | Provider | iOS | Android | Gate |
@@ -188,7 +198,7 @@ UI polish; revisit in a final UI/UX pass after functional acceptance.
 
 | App provider | Code ready | Console ready | Device E2E | Shared identity E2E |
 |---|---|---|---|---|
-| Email | YES | NOT VERIFIED for App redirects/policy | NOT VERIFIED | NOT VERIFIED |
+| Email | YES | App signup/recovery redirects/policy not fully verified | PASS (Owner login) | NOT VERIFIED |
 | Google | YES | NOT VERIFIED for native clients | NOT VERIFIED | NOT VERIFIED |
 | Kakao browser/deep-link | YES | NOT VERIFIED for App return/consent | NOT VERIFIED | NOT VERIFIED |
 | Apple native iOS / browser Android | YES | NOT VERIFIED for device signing/audiences | NOT VERIFIED | NOT VERIFIED |
@@ -210,8 +220,8 @@ is needed merely to try an existing email/password login.
 
 Identity evidence comes from Dashboard Authentication → Users → user detail →
 Identities and the debug-only comparison tool above. Same email is insufficient.
-No real UUID is recorded. APP_SESSION_RESTORE and APP_OWNER_ISOLATION remain
-**NOT VERIFIED for Production devices**, despite existing local regression PASS.
+No real UUID is recorded. APP_SESSION_RESTORE is Owner-reported PASS on iPhone Profile. APP_OWNER_ISOLATION
+remains NOT VERIFIED for Production devices despite local regression PASS.
 
 ### Independent operational gates
 

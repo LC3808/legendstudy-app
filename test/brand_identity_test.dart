@@ -14,7 +14,7 @@ import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/home/presentation/home_page.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
-import 'package:legendstudy_app/features/profile/presentation/profile_page.dart';
+import 'package:legendstudy_app/features/profile/presentation/settings_page.dart';
 
 import 'day5_shell_test.dart' show ShellContent;
 
@@ -103,7 +103,7 @@ void main() {
         await capture('home');
         await mount(const AuthPage());
         await capture('auth');
-        await mount(const ProfilePage());
+        await mount(const SettingsPage());
         await capture('my');
         await tester.ensureVisible(find.text('앱 정보'));
         await tester.tap(find.text('앱 정보'));

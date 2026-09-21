@@ -19,29 +19,29 @@ Meal meal(String date, String type) =>
 
 void main() {
   group('Meal Today/Tomorrow KST policy', () {
-    test('before 17:00 keeps today primary and tomorrow expandable', () {
+    test('before 14:00 keeps lunch primary and today detail', () {
       final plan = mealDisplayPlan(
-        now: DateTime.utc(2026, 9, 16, 7, 59), // 16:59 KST
+        now: DateTime.utc(2026, 9, 16, 4, 59), // 13:59 KST
         today: [meal('20260916', '중식')],
         tomorrow: [meal('20260917', '중식')],
       );
       expect(plan.primaryIsTomorrow, isFalse);
       expect(plan.primary.single.date, '20260916');
-      expect(plan.secondary.single.date, '20260917');
+      expect(plan.secondary.single.date, '20260916');
     });
 
-    test('17:00 without dinner promotes tomorrow', () {
+    test('14:00 without dinner promotes tomorrow', () {
       final plan = mealDisplayPlan(
-        now: DateTime.utc(2026, 9, 16, 8), // 17:00 KST
+        now: DateTime.utc(2026, 9, 16, 5), // 14:00 KST
         today: [meal('20260916', '중식')],
         tomorrow: [meal('20260917', '중식')],
       );
       expect(plan.primaryIsTomorrow, isTrue);
       expect(plan.primary.single.date, '20260917');
-      expect(plan.secondary, isEmpty);
+      expect(plan.secondary.single.date, '20260917');
     });
 
-    test('after 17:00 keeps dinner primary and tomorrow secondary', () {
+    test('before 19:00 keeps dinner primary and today detail', () {
       final plan = mealDisplayPlan(
         now: DateTime.utc(2026, 9, 16, 9),
         today: [meal('20260916', '중식'), meal('20260916', '석식')],
@@ -51,7 +51,7 @@ void main() {
       expect(plan.secondary, hasLength(2));
     });
 
-    test('after 17:00 with no dinner and no tomorrow is empty', () {
+    test('after 14:00 with no dinner and no tomorrow is empty', () {
       final plan = mealDisplayPlan(
         now: DateTime.utc(2026, 9, 16, 9),
         today: [meal('20260916', '중식')],

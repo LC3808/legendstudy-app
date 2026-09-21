@@ -379,3 +379,27 @@ apps can only be launched…”) after disconnecting Flutter tooling is not evid
 of a session-restore defect. APP_SESSION_RESTORE remains NOT VERIFIED. Perform
 terminate/relaunch Owner acceptance with iPhone profile/release; do not fix the
 Flutter debug launch restriction in app Auth code.
+
+## Owner Profile UX follow-up — 2026-09-21
+
+Owner reports Email App login, session restore and MY school/grade actual values
+PASS on iPhone Profile. Preserve this device evidence; earlier Debug launch warning
+was not a session bug. Social Auth/shared identity/isolation remain separate gates.
+
+Home LAB promotional entry and its trailing gap removed; MY LAB entry, URL/opening
+foundation and architecture retained. MY gear (tooltip/semantics 설정, ≥48px) pushes
+/my/settings in the existing MY navigator. Settings groups account/service/policies/
+account management; reuses dynamic appVersionProvider, safe configured policy links,
+logout busy/error behavior and existing deletion route. Deletion has destructive
+styling; Guest Settings hides account destructive actions after logout. No second
+shell or new auth/session implementation. POLICY/ACCOUNT_DELETION readiness stays NO.
+
+Scoped audit: P0 meal time/data interpretation fixed; P1 hidden tomorrow load errors
+and missing Settings entry fixed. Home/Materials/Saved/Login retain existing safe
+states and navigation; no new P0 observed. Remaining P1 release gate: final Owner
+policy URLs and deletion deployment/revoke. P2: Materials filter selection semantics,
+long saved titles and final physical spacing/accessibility pass, not a new redesign.
+Settings and meal detail use SafeArea/scroll; 2× long-email/menu raster reviewed.
+School/grade providers and Auth modules were not modified in this follow-up.
+New meal and Settings UI await Owner physical confirmation; prior accepted Auth
+and MY values are not downgraded. No Production mutations, console or signing edits.

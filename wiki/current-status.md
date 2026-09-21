@@ -2,6 +2,25 @@
 
 Last reviewed: 2026-09-21
 
+## 2026-09-21 iPhone Profile Owner acceptance and UX follow-up
+
+- **Owner-reported Production/device PASS:** Email App Auth, App session restore,
+  MY configured school and grade. These supersede the earlier pending statements
+  below for those exact checks. No claim for social login or shared identity E2E.
+- Fixed meal root cause: previous code/test contract kept all today's meals until
+  17:00 and never ended dinner. Home now excludes breakfast; before 14:00 lunch,
+  14:00–18:59 dinner if present else tomorrow, from 19:00 tomorrow lunch then dinner.
+  KST 14/19/midnight timer, resume/revisit re-evaluate raw data; tomorrow loading/error
+  no longer masquerades as empty. Tap opens dated full meal detail including breakfast.
+- Home LAB banner removed only; MY LAB entry and external-link foundation preserved.
+  MY gear → Settings → back; app version/policies/logout/deletion reused there,
+  configured school/grade unchanged. Deletion/policy Production readiness still NO.
+- Local full **545 PASS / 1 existing skip**, meal/Settings policy focused **31 PASS**,
+  analyze, Android debug/iOS simulator builds PASS. 360/428px 1×/2× meal detail and
+  360px/2× Settings raster reviewed. New UX physical acceptance remains Owner action.
+- [Root cause, policy and evidence](day-10-b-home-polish.md#owner-profile-follow-up--2026-09-21).
+  Existing iOS edits preserved. Production mutation 0; no Auth implementation change.
+
 ## 2026-09-21 Toolchain maintenance — VERIFIED
 
 - Canonical SDK is now **Flutter 3.47.5 stable / Dart 3.13.4**, at the existing

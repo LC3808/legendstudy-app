@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +14,11 @@ import 'package:legendstudy_app/features/study/application/study_controller.dart
 import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/presentation/study_page.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
+
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
+
 import 'package:legendstudy_app/features/study/focus/focus_service.dart';
+
 import 'study_focus_test.dart' show TestFocusService;
 import 'mock_exam_test.dart' show TestAlerts;
 
@@ -69,9 +73,9 @@ void main() {
       await icons.load();
       final loader = FontLoader('PolishPreview')
         ..addFont(
-          File(
-            '/System/Library/Fonts/AppleSDGothicNeo.ttc',
-          ).readAsBytes().then((b) => ByteData.sublistView(b)),
+          File('/System/Library/Fonts/AppleSDGothicNeo.ttc')
+              .readAsBytes()
+              .then((b) => ByteData.sublistView(b)),
         );
       await loader.load();
     }
@@ -81,9 +85,8 @@ void main() {
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(
-          context,
-        ).copyWith(textScaler: TextScaler.linear(previewScale)),
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: TextScaler.linear(previewScale)),
         child: child!,
       ),
       theme: render
@@ -194,17 +197,22 @@ void main() {
                       onPressed: () {},
                       child: const Text('학교 설정'),
                     ),
-                    body: MealSummary(meals: meals),
+                    body: MealSummary(
+                      meals: meals,
+                      now: DateTime.utc(2026, 9, 14, 3),
+                    ),
                   ),
                 ),
               ),
             ),
           );
-          expect(find.text('펼치기'), findsOneWidget);
-          final preview = tester.widget<Text>(find.textContaining('중식:'));
+          expect(find.text('오늘 중식'), findsOneWidget);
+          final preview = tester.widget<Text>(
+            find.text(meals.first.menuItems.join(' · ')),
+          );
           expect(preview.maxLines, 2);
           await capture(tester, 'meal-collapsed-$dinner-$tag');
-          await tester.tap(find.text('펼치기'));
+          await tester.tap(find.text('오늘 중식'));
           await tester.pumpAndSettle();
           expect(find.text('중식'), findsOneWidget);
           expect(find.text('석식'), dinner ? findsOneWidget : findsNothing);
@@ -217,10 +225,9 @@ void main() {
             find.text(meals.last.menuItems.join('\n')),
           );
           await capture(tester, 'meal-bottom-$dinner-$tag');
-          await tester.ensureVisible(find.text('접기'));
-          await tester.tap(find.text('접기'));
+          await tester.pageBack();
           await tester.pumpAndSettle();
-          expect(find.text('펼치기'), findsOneWidget);
+          expect(find.text('오늘 중식'), findsOneWidget);
         });
       }
       testWidgets('states presets ordering and descending week $tag', (

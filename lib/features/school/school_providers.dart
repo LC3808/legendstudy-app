@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+
 import '../../core/config/app_config.dart';
 import '../../core/supabase/supabase_providers.dart';
 import '../personal/personal_providers.dart';
@@ -75,12 +77,15 @@ class SchoolSelection extends AsyncNotifier<School?> {
 // HomeMealCard invalidates this value at the next meaningful KST boundary and
 // on app resume. Keeping the clock as a plain provider makes the boundary
 // timer lifecycle-owned by the widget that displays it.
-final koreanMealClockProvider = Provider<DateTime>((ref) => DateTime.now());
+final mealNowProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+final koreanMealClockProvider = Provider<DateTime>(
+  (ref) => ref.watch(mealNowProvider)(),
+);
 final mealBoundaryRefreshEnabledProvider = Provider<bool>((ref) => true);
 
 // Kept as a date-only compatibility provider for existing consumers/tests.
 final koreanTodayProvider = StreamProvider.autoDispose<String>(
-  (ref) => Stream.value(koreanDate(DateTime.now())),
+  (ref) => Stream.value(koreanDate(ref.watch(koreanMealClockProvider))),
 );
 
 final todayMealsProvider = FutureProvider<List<Meal>>((ref) async {

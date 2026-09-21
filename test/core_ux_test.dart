@@ -16,7 +16,7 @@ import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/materials/presentation/materials_page.dart';
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'package:legendstudy_app/features/profile/presentation/grade_page.dart';
-import 'package:legendstudy_app/features/profile/presentation/profile_page.dart';
+import 'package:legendstudy_app/features/profile/presentation/settings_page.dart';
 import 'package:legendstudy_app/features/personal/personal_providers.dart';
 import 'package:legendstudy_app/features/personal/domain/personal_models.dart';
 import 'package:legendstudy_app/features/personal/domain/personal_repositories.dart';
@@ -223,7 +223,7 @@ void main() {
             appConfigProvider.overrideWithValue(const AppConfig()),
             appVersionProvider.overrideWith((ref) async => '2.4.1 (37)'),
           ],
-          child: app(const ProfilePage()),
+          child: app(const SettingsPage()),
         ),
       );
       await tester.pumpAndSettle();

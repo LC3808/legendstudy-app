@@ -98,6 +98,12 @@ void main() {
             ),
           );
           await tester.pumpAndSettle();
+          if (home) {
+            expect(find.byType(LegendStudyLabEntry), findsNothing);
+            expect(opened, isEmpty);
+            await tester.pumpWidget(const SizedBox());
+            return;
+          }
           expect(find.byType(LegendStudyLabEntry), findsOneWidget);
           await tester.ensureVisible(find.byType(LegendStudyLabEntry));
           await tester.pumpAndSettle();

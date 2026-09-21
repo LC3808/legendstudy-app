@@ -13,6 +13,7 @@ import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'package:legendstudy_app/features/auth/presentation/password_recovery_page.dart';
 import 'package:legendstudy_app/features/auth/presentation/new_password_page.dart';
 import 'package:legendstudy_app/features/profile/presentation/profile_page.dart';
+import 'package:legendstudy_app/features/profile/presentation/settings_page.dart';
 
 import 'core_ux_test.dart' as preview;
 
@@ -39,6 +40,7 @@ void main() {
     'recovery',
     'new-password',
     'my',
+    'settings',
   ]) {
     testWidgets('account 360x640 2x $scenario keyboard and long text', (
       tester,
@@ -53,6 +55,7 @@ void main() {
         'recovery' => const PasswordRecoveryPage(linkFailed: true),
         'new-password' => const NewPasswordPage(),
         'my' => const ProfilePage(),
+        'settings' => const SettingsPage(),
         _ => const AuthPage(),
       };
       await tester.pumpWidget(
@@ -60,7 +63,7 @@ void main() {
           overrides: [
             authStateProvider.overrideWith(
               (ref) => Stream.value(
-                scenario == 'my' || scenario == 'new-password'
+                scenario == 'my' || scenario == 'settings' || scenario == 'new-password'
                     ? const AuthStatus('a')
                     : const AuthStatus(null),
               ),
@@ -120,7 +123,7 @@ void main() {
       }
       await preview.capture(tester, 'account-$scenario-2x');
       await nativeCapture?.call('account-$scenario-2x');
-      if (scenario != 'my' && scenario != 'social') {
+      if (scenario != 'my' && scenario != 'settings' && scenario != 'social') {
         await tester.ensureVisible(find.byType(TextField).first);
         await tester.enterText(
           find.byType(TextField).first,

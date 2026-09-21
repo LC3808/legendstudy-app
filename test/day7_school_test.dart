@@ -213,7 +213,7 @@ void main() {
         ),
         tomorrowMealsProvider.overrideWith((ref) async => []),
         koreanMealClockProvider.overrideWithValue(
-          DateTime(2026, 9, 11, 16, 59),
+          DateTime.utc(2026, 9, 11, 3),
         ),
         mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
       ],
@@ -291,7 +291,7 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       repo.pendingMeals!.complete([]);
       await tester.pumpAndSettle();
-      expect(find.text('오늘 등록된 급식 정보가 없어요.'), findsOneWidget);
+      expect(find.text('등록된 중식·석식 정보가 없어요.'), findsOneWidget);
       repo.pendingMeals = null;
       repo.failMeals = true;
       c.invalidate(todayMealsProvider);

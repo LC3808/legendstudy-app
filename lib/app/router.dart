@@ -7,6 +7,7 @@ import '../features/materials/presentation/materials_page.dart';
 import '../features/saved/presentation/saved_page.dart';
 import '../features/saved/presentation/recent_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/profile/presentation/settings_page.dart';
 import '../features/profile/presentation/grade_page.dart';
 import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
@@ -108,6 +109,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/my',
                 builder: (context, state) => const ProfilePage(),
                 routes: [
+                  GoRoute(
+                    path: 'settings',
+                    builder: (_, _) =>
+                        const NestedPage(title: '설정', child: SettingsPage()),
+                  ),
                   GoRoute(
                     path: 'saved',
                     builder: (_, _) =>

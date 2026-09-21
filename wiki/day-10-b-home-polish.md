@@ -1,9 +1,9 @@
 # Day 10-B — Home Polish v2
 
-Status: **implemented; local/static/widget validation PASS; physical iPhone
-interactive validation blocked by CoreDevice launch timeout.**
+Status: original Day 10 evidence below is historical. Current meal policy and
+Owner acceptance follow-up are recorded at the end of this document.
 
-## Scope
+## Historical scope (superseded meal policy below)
 
 Home now supports:
 
@@ -54,3 +54,51 @@ expansion does not issue another request. Full exploration remains in 자료
 - iPhone Profile build: PASS, but Xcode/CoreDevice automated install/launch
   timed out before interactive Home verification. No Production data was
   changed.
+
+## Owner Profile follow-up — 2026-09-21
+
+Owner iPhone Profile reports Email App Auth/session restore/MY school/MY grade PASS.
+Owner also reproduced lunch-only today menu after 14:00. Actual source confirmed:
+mealDisplayPlan used 17:00, selected all today meals beforehand, and retained dinner
+indefinitely afterward. Timer only handled 17:00/midnight. This was a policy bug,
+not a failed school save or inferred timezone/network problem. Older 17:00 tests
+encoded that policy and therefore did not detect the 14:00 requirement.
+
+Trace: profiles NEIS pair → schoolSelectionProvider → SchoolRepository.find;
+NeisSchoolRepository.meals queries exact school/date; proxy forwards MLSV_YMD,
+returns MMEAL_SC_NM and DDISH_NM without Home time filtering. Client verifies
+school/date and parses menu line breaks. Neither inspected repository nor proxy
+has a persistent meal cache; Riverpod retains raw today/tomorrow results. Production
+proxy was not changed/redeployed. No upstream meal data or breakfast was deleted.
+
+Canonical Home policy (supersedes earlier 17:00 rules):
+
+| KST | Home selection |
+|---|---|
+| 00:00–13:59 | Today's lunch |
+| 14:00–18:59 | Today's dinner when available, otherwise tomorrow |
+| 19:00 onward | Tomorrow, even if today's dinner remains in raw data |
+| Tomorrow priority | Lunch → dinner → explicit no lunch/dinner state |
+
+Breakfast never becomes Home representative, including 07:59/08:00 or a tomorrow
+breakfast-only response. Missing eligible today meal falls forward to tomorrow;
+never pretend expired lunch/dinner is current. Tap preview (also empty preview)
+opens selected-date detail with real breakfast/lunch/dinner only, full untruncated
+menus and a second date action to inspect today's food after Home moves forward.
+Date heading is explicit; no empty cards for absent meal types.
+
+Pure policy and nextMealBoundary operate on UTC instants converted to KST.
+mealNowProvider is the sole injectable now source. Both query dates derive from
+koreanMealClockProvider. Boundary timer handles 14:00/19:00/midnight; resume and
+Home TickerMode reactivation refresh clock/date/raw requests. Selection is recomputed
+from raw responses, not a cached preview. Both async responses must resolve;
+load failure is retryable rather than disguised as an empty menu.
+
+Validation: four school combinations at 07:59/08:00/13:59/14:00/18:59/19:00;
+Owner lunch-only 14:00 regression; tomorrow lunch/dinner/breakfast-only/empty;
+UTC/KST dates, boundary timer, midnight requests, resume and Home revisit;
+tomorrow loading/error; full breakfast detail and today access; Settings navigation.
+Focused new tests 31 PASS. Full 545 PASS / 1 existing skip; analyze and Android
+debug/iOS simulator builds PASS. Existing long-menu 360/428px 1×/2× renders now
+verify preview → detail → back (old expansion expectations intentionally updated).
+These are local fixture tests, not new Production NEIS/device E2E.

@@ -7,10 +7,6 @@ import '../../personal/personal_providers.dart';
 import '../../school/school_providers.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
-import '../../../core/config/app_config.dart';
-import '../../../core/config/app_information.dart';
-import '../../../core/links/external_link.dart';
-import '../../resources/domain/content_resource.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../../shared/widgets/legendstudy_lab_entry.dart';
 import '../../feedback/feedback_providers.dart';
@@ -20,18 +16,29 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
-    final config = ref.watch(appConfigProvider);
     final email = ref.watch(currentAccountEmailProvider);
     final admin = ref.watch(adminAccessProvider);
     final currentUserId = auth.value?.userId;
-    final isAuthenticated = auth.value?.isAuthenticated == true;
     final showAdminMenu =
         currentUserId != null &&
         admin.value?.userId == currentUserId &&
         admin.value?.isAdmin == true;
     return ShellPage(
       children: [
-        const AppHeader(title: 'MY', subtitle: '나의 학습 공간'),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: AppHeader(title: 'MY', subtitle: '나의 학습 공간'),
+            ),
+            IconButton(
+              tooltip: '설정',
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              onPressed: () => context.push('/my/settings'),
+              icon: const Icon(Icons.settings_outlined),
+            ),
+          ],
+        ),
         auth.when(
           loading: () =>
               const LinearProgressIndicator(semanticsLabel: '계정 상태 확인'),
@@ -116,103 +123,9 @@ class ProfilePage extends ConsumerWidget {
             onTap: () => context.push('/my/admin/feedback'),
           ),
         ],
-        const Divider(),
-        const SectionHeader('앱 정보 · 정책'),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          title: const Text('앱 정보'),
-          onTap: () => showAboutDialog(
-            context: context,
-            applicationName: '레전드스터디+',
-            children: [
-              Consumer(
-                builder: (context, ref, _) => ref
-                    .watch(appVersionProvider)
-                    .when(
-                      data: (v) => Text('버전 $v'),
-                      loading: () => const Text('버전 확인 중…'),
-                      error: (_, _) => TextButton(
-                        onPressed: () => ref.invalidate(appVersionProvider),
-                        child: const Text('버전 다시 확인'),
-                      ),
-                    ),
-              ),
-            ],
-          ),
-        ),
-        for (final policy in [
-          ('개인정보처리방침', config.privacyUrl),
-          ('이용약관', config.termsUrl),
-        ])
-          publicWebUri(policy.$2) == null
-              ? ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(policy.$1),
-                  subtitle: const Text('준비 중 · 문의·건의사항으로 연락해 주세요.'),
-                )
-              : ExternalLinkButton(
-                  uri: publicWebUri(policy.$2),
-                  label: policy.$1,
-                ),
-        if (isAuthenticated) ...[
-          const Divider(),
-          const SectionHeader('계정 관리'),
-          const _LogoutButton(),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('회원탈퇴'),
-            subtitle: const Text('계정과 내 기록을 삭제해요'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => context.push('/my/delete-account'),
-          ),
-        ],
       ],
     );
   }
-}
-
-class _LogoutButton extends ConsumerStatefulWidget {
-  const _LogoutButton();
-  @override
-  ConsumerState<_LogoutButton> createState() => _LogoutButtonState();
-}
-
-class _LogoutButtonState extends ConsumerState<_LogoutButton> {
-  bool busy = false;
-  String? error;
-  Future<void> logout() async {
-    if (busy) return;
-    final action = ref.read(localLogoutProvider);
-    if (action == null) {
-      setState(() => error = '지금은 로그아웃할 수 없어요. 잠시 후 다시 시도해 주세요.');
-      return;
-    }
-    setState(() {
-      busy = true;
-      error = null;
-    });
-    try {
-      await action();
-      // SDK auth event changes this page to Guest and invalidates owner providers.
-    } catch (_) {
-      if (mounted) setState(() => error = '로그아웃하지 못했어요. 다시 시도해 주세요.');
-    } finally {
-      if (mounted) setState(() => busy = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text('이 기기에서 로그아웃해요. 저장한 자료와 계정은 삭제되지 않아요.'),
-      if (error != null) Semantics(liveRegion: true, child: Text(error!)),
-      TextButton(
-        onPressed: busy ? null : logout,
-        child: Text(busy ? '로그아웃 중…' : '로그아웃'),
-      ),
-    ],
-  );
 }
 
 class _ProfileSetting extends StatelessWidget {

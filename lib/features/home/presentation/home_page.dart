@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
-import '../../../shared/widgets/legendstudy_lab_entry.dart';
 import '../../content/content_providers.dart';
 import 'day_target_card.dart';
 import '../../study/study_providers.dart';
@@ -71,8 +70,6 @@ class HomePage extends ConsumerWidget {
         accent: AppTokens.homeUpdatesAccent,
         child: HomeRecentUpdates(),
       ),
-      const SizedBox(height: 16),
-      const LegendStudyLabEntry(),
     ],
   );
 }

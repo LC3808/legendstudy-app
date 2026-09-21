@@ -19,7 +19,7 @@ import 'package:legendstudy_app/features/personal/presentation/personal_material
 import 'package:legendstudy_app/features/content/content_providers.dart';
 
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
-import 'package:legendstudy_app/features/profile/presentation/profile_page.dart';
+import 'package:legendstudy_app/features/profile/presentation/settings_page.dart';
 
 class EmailFake implements EmailAuthService {
   int logins = 0, signups = 0;
@@ -256,7 +256,7 @@ void main() {
             events.add(const AuthStatus(null));
           }),
         ],
-        child: const MaterialApp(home: Scaffold(body: ProfilePage())),
+        child: const MaterialApp(home: Scaffold(body: SettingsPage())),
       ),
     );
     await tester.pumpAndSettle();
@@ -274,7 +274,7 @@ void main() {
     expect(calls, 2);
     pending.complete();
     await tester.pumpAndSettle();
-    expect(find.text('로그인 / 시작하기'), findsOneWidget);
+    expect(find.text('로그인하지 않은 상태예요.'), findsOneWidget);
     expect(find.text('회원탈퇴'), findsNothing);
   });
   testWidgets('a provider disabled after render cannot start', (tester) async {

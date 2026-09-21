@@ -72,7 +72,7 @@ void main() {
                 ),
                 tomorrowMealsProvider.overrideWith((ref) async => []),
                 koreanMealClockProvider.overrideWithValue(
-                  DateTime(2026, 9, 11, 16, 59),
+                  DateTime.utc(2026, 9, 11, 3),
                 ),
                 mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
               ],
@@ -85,8 +85,8 @@ void main() {
               state == 'none'
                   ? '학교를 설정하면 오늘 급식을 볼 수 있어요.'
                   : state == 'empty'
-                  ? '오늘 등록된 급식 정보가 없어요.'
-                  : '오늘의 급식',
+                  ? '등록된 중식·석식 정보가 없어요.'
+                  : '오늘 중식',
             ),
             findsOneWidget,
           );

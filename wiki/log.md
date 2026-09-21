@@ -1819,3 +1819,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   helper 3 checks and MY 2× render PASS, credential/diff checks PASS. First iOS
   cache-download failure resolved after SDK completion/rebuild. Owner native files
   hash-preserved; actual physical profile/session E2E pending. Production mutation 0.
+
+## 2026-09-21 — Owner Profile acceptance / meal progression / MY Settings
+
+- Recorded Owner Email login/session restore/MY school/grade device PASS; preserved
+  social/shared-identity and deletion/policy release gates.
+- Replaced actual 17:00/all-meals policy with KST 14:00/19:00 lunch/dinner Home
+  selection; breakfast stays in full dated detail. Fixed tomorrow async states and
+  added boundary/resume/revisit/midnight tests. No NEIS backend mutation.
+- Removed Home LAB banner only; MY gear routes to Settings with existing version,
+  policies/logout/deletion. Auth and canonical school/grade implementations retained.
+- Full 545 PASS / 1 existing skip; new focused 31 PASS, analyze/builds and raster
+  checks PASS. Owner iOS edits preserved. New UX physical recheck pending; no push.

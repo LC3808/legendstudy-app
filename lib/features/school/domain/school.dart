@@ -46,12 +46,11 @@ class MealDisplayPlan {
     required this.secondary,
     required this.primaryIsTomorrow,
   });
-
   final List<Meal> primary;
+  // Full raw meals for the selected date, including breakfast, for detail only.
   final List<Meal> secondary;
   final bool primaryIsTomorrow;
-
-  bool get isEmpty => primary.isEmpty && secondary.isEmpty;
+  bool get isEmpty => primary.isEmpty;
   bool get canExpand => secondary.isNotEmpty;
 }
 
@@ -60,34 +59,41 @@ MealDisplayPlan mealDisplayPlan({
   required List<Meal> today,
   required List<Meal> tomorrow,
 }) {
-  final afterDinner = koreanLocalTime(now).hour >= 17;
-  final dinner = today.where((meal) => meal.mealType == '석식').toList();
-
-  if (!afterDinner) {
-    if (today.isNotEmpty) {
-      return MealDisplayPlan(
-        primary: today,
-        secondary: tomorrow,
-        primaryIsTomorrow: false,
-      );
-    }
+  final hour = koreanLocalTime(now).hour;
+  Meal? first(List<Meal> meals, String type) =>
+      meals.where((m) => m.mealType == type).firstOrNull;
+  final current = hour < 14
+      ? first(today, '중식')
+      : hour < 19
+      ? first(today, '석식')
+      : null;
+  if (current != null) {
     return MealDisplayPlan(
-      primary: tomorrow,
-      secondary: const [],
-      primaryIsTomorrow: tomorrow.isNotEmpty,
-    );
-  }
-
-  if (dinner.isNotEmpty) {
-    return MealDisplayPlan(
-      primary: dinner,
-      secondary: tomorrow,
+      primary: [current],
+      secondary: today,
       primaryIsTomorrow: false,
     );
   }
+  final next = first(tomorrow, '중식') ?? first(tomorrow, '석식');
   return MealDisplayPlan(
-    primary: tomorrow,
-    secondary: const [],
-    primaryIsTomorrow: tomorrow.isNotEmpty,
+    primary: next == null ? [] : [next],
+    secondary: tomorrow,
+    primaryIsTomorrow: true,
   );
+}
+
+// UTC instant for the next meaningful Korean-local policy/date boundary.
+DateTime nextMealBoundary(DateTime now) {
+  final kst = koreanLocalTime(now);
+  final hour = kst.hour < 14
+      ? 14
+      : kst.hour < 19
+      ? 19
+      : 24;
+  return DateTime.utc(
+    kst.year,
+    kst.month,
+    kst.day,
+    hour,
+  ).subtract(const Duration(hours: 9));
 }
