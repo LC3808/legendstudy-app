@@ -128,7 +128,8 @@ For each Email / Google / Kakao / Apple:
    merge accounts or change production data; investigate app association/linking.
 
 This proves equality only for the tested pair. Same email across different
-providers does not imply linking; test that separately against actual settings.
+providers does not imply linking. Cross-provider linking is a future Product/Security
+decision, outside this acceptance; no linking/unlinking UI or automatic merge is implemented.
 Do not publish real IDs in screenshots, code, fixtures, Wiki or command arguments.
 
 ## Physical acceptance checklist
@@ -179,3 +180,69 @@ No broad SDK/toolchain upgrade; crypto was already transitive, now direct.
   work; 360×640 is widget-render evidence, not a physical-device claim.
 - Provider token tests use actual Supabase SDK with mock HTTP/synthetic tokens;
   session restore uses SDK with in-memory persistence, not a kill/reboot proof.
+
+## Sequential Owner acceptance and release gates
+
+Auth UI is **Foundation Complete** against current local evidence. Do not repeat
+UI polish; revisit in a final UI/UX pass after functional acceptance.
+
+| App provider | Code ready | Console ready | Device E2E | Shared identity E2E |
+|---|---|---|---|---|
+| Email | YES | NOT VERIFIED for App redirects/policy | NOT VERIFIED | NOT VERIFIED |
+| Google | YES | NOT VERIFIED for native clients | NOT VERIFIED | NOT VERIFIED |
+| Kakao browser/deep-link | YES | NOT VERIFIED for App return/consent | NOT VERIFIED | NOT VERIFIED |
+| Apple native iOS / browser Android | YES | NOT VERIFIED for device signing/audiences | NOT VERIFIED | NOT VERIFIED |
+
+Proceed one stage at a time: **Email → Google → Kakao → Apple → App/LAB identity
+comparison → session restore → A/B isolation**. Record a provider PASS before
+starting the next provider. Diagnose a failure within that provider; do not change
+all consoles together. Local SDK/mock tests do not close any Device E2E gate.
+Same-provider/same-account identity comparisons may be recorded after each login;
+close the overall shared-identity gate only after all four pairs are checked.
+
+First Owner action: on the intended physical device, open App login and use an
+existing LAB **email/password** account. Enter credentials only in the App.
+Confirm return to Home and authenticated MY; report platform and PASS/FAIL plus
+safe visible error text only. Do not send passwords, tokens or user IDs. This
+initial login check alone does not close signup/verification/recovery acceptance;
+continue those Email checks above before moving to Google. No new console change
+is needed merely to try an existing email/password login.
+
+Identity evidence comes from Dashboard Authentication → Users → user detail →
+Identities and the debug-only comparison tool above. Same email is insufficient.
+No real UUID is recorded. APP_SESSION_RESTORE and APP_OWNER_ISOLATION remain
+**NOT VERIFIED for Production devices**, despite existing local regression PASS.
+
+### Independent operational gates
+
+- Account deletion: client foundation/server candidate exist. Production deployment,
+  enable flag and E2E remain unverified; Play web deletion-request URL pending.
+  Apple authorization revoke remains OPEN even after social login passes.
+- Privacy/Terms/Support/deletion guidance: final URLs and content require Owner
+  review specifically covering LegendStudy+ App. A LAB route or temporary document
+  is not final App policy approval. POLICY_PRODUCTION_READY and STORE_RELEASE_READY
+  remain NO until these and the other release gates close.
+- Apple: Owner reports App ID com.legendstudy.app, Services ID com.legendstudy.lab,
+  Sign in with Apple key created and Web E2E PASS. Key creation does not establish
+  client-secret JWT creation/expiry. JWT creation date: **not supplied/unverified**;
+  renewal required, expiry/renewal date to be recorded by Owner as nonsecret metadata.
+  Never record JWT/.p8 values. Future operations checklist/reminder may track renewal;
+  no reminder is scheduled here. Native login does not close Web secret renewal.
+- Google: screenshot-exposed client-secret rotation remains OPEN. Owner rotates
+  safely and rechecks both Web/App; no secret is copied into this repository.
+- Kakao: reuse the existing LegendStudy Kakao application. account_email required;
+  nickname/profile_image unused. Key roles below are descriptions, not actual values.
+
+| Kakao credential type | Role | Exposure rule |
+|---|---|---|
+| REST API key | Existing Supabase-hosted OAuth client identifier | Client identifier, not client secret; kept in existing server configuration, not added to App |
+| Native app key | Native SDK platform identifier | Client-distributed identifier; unused by current App browser path |
+| JavaScript key | Browser SDK identifier | Client-distributed identifier; not used by this Flutter flow |
+| Client secret | Server OAuth credential | Secret; never ship in App, source, logs or Wiki |
+| Admin key | Privileged API credential | Secret; not used by App Auth |
+
+After App Auth E2E: **account deletion → final policy/support URLs → release
+readiness → Academic Record/Analytics**. Verified App/LAB shared canonical identity
+is a prerequisite before Analytics implementation. App quick input/OMR/actions and
+LAB history/comparisons/deep analysis must use the same canonical data source;
+no Analytics, linking or surrounding feature implementation is part of this task.

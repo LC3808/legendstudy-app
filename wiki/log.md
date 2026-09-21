@@ -1787,3 +1787,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   E2E. Owner setup preserves Web client IDs/callbacks. Apple revoke/renewal,
   Google credential rotation and provider brand review remain OPEN.
 - Production mutation 0; schema/deployment/payment changes 0; no push.
+
+## 2026-09-21 — Auth acceptance sequencing and release-gate clarification
+
+- Cross-checked native/browser Auth code and platform callbacks at 46d0165;
+  retained existing implementation and local 508 PASS / 1 skip evidence.
+- Documented independent Code/Console/Device/Shared identity stages, Email-first
+  Owner sequence, deferred linking, final App-policy review and credential operations.
+- Production device restore/isolation/identity remain unverified; no new runtime
+  PASS claimed. Documentation-only diff/credential checks passed. No Production
+  mutation, provider-console change or push.

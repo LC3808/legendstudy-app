@@ -22,6 +22,13 @@ Last reviewed: 2026-09-21
 - Owner gates: real client IDs/signing/provisioning, Google/Kakao/Apple E2E,
   identity match, physical restore/isolation; custom provider label/typography
   brand review. Apple revoke/secret renewal and Google secret rotation OPEN.
+- Acceptance now tracks Code → Console → Device → Shared identity independently.
+  Next Owner stage: Email App E2E, then Google, Kakao, Apple, identity, restore,
+  isolation; each stage passes before moving on. UI Foundation Complete; no further
+  polish in this phase. App physical restore/isolation remain NOT VERIFIED.
+- Deletion deployment/flag/Play URL, final App-reviewed policy/support URLs and
+  operational credential gates remain open. Cross-provider linking is deferred;
+  shared identity acceptance is required before Analytics implementation.
 - [Exact setup and E2E checklist](auth-native-owner-acceptance.md). No LAB edits,
   console changes, schema/deployment or Production mutation. RELEASE READY NO.
 
