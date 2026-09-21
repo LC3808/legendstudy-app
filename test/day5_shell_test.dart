@@ -264,7 +264,7 @@ void main() {
   ) async {
     await mount(tester, user: 'test-owner-id');
     await tab(tester, 3);
-    expect(find.text('나의 계정'), findsOneWidget);
+    expect(find.text('로그인 계정'), findsOneWidget);
     expect(find.text('로그인 / 시작하기'), findsNothing);
     expect(find.textContaining('test-owner-id'), findsNothing);
   });

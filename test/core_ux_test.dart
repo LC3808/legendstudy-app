@@ -161,6 +161,15 @@ void main() {
             .selected,
         isTrue,
       );
+      final profileContainer = ProviderScope.containerOf(
+        tester.element(find.byType(GradePage)),
+      );
+      final profileSubscription = profileContainer.listen(
+        currentProfileProvider,
+        (_, _) {},
+      );
+      addTearDown(profileSubscription.close);
+      await profileContainer.read(currentProfileProvider.future);
       await tester.tap(find.text('고3'));
       repo.fail = true;
       await tester.tap(find.text('학년 저장'));
@@ -170,6 +179,11 @@ void main() {
       await tester.tap(find.text('학년 저장'));
       await tester.pumpAndSettle();
       expect(repo.value.gradeLevel, 3);
+      expect(
+        (await profileContainer.read(currentProfileProvider.future))
+            ?.gradeLevel,
+        3,
+      );
       expect(repo.value.displayName, '학생');
     },
   );

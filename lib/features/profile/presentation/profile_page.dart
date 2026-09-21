@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../auth/auth_email.dart';
+import '../../personal/personal_providers.dart';
+import '../../school/school_providers.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/config/app_config.dart';
@@ -38,7 +40,7 @@ class ProfilePage extends ConsumerWidget {
             onRetry: () => ref.invalidate(authStateProvider),
           ),
           data: (state) => CompactUtilityCard(
-            title: state.isAuthenticated ? '나의 계정' : '공부의 흐름을 이어가요',
+            title: state.isAuthenticated ? '로그인 계정' : '공부의 흐름을 이어가요',
             body: state.isAuthenticated
                 ? [
                     if (email != null) email,
@@ -54,24 +56,29 @@ class ProfilePage extends ConsumerWidget {
           ),
         ),
         const SectionHeader('내 정보'),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.school_outlined),
-          title: const Text('학교 설정'),
-          subtitle: Text(
-            isAuthenticated ? '학교와 급식 설정을 관리해요' : '학교 저장은 로그인 후 가능해요',
-          ),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.push('/my/school'),
+        _ProfileSetting(
+          label: '학교',
+          value: ref.watch(schoolSelectionProvider).whenData((s) => s?.name),
+          authLoading: auth.isLoading,
+          authError: auth.hasError,
+          onRetry: () => auth.hasError
+              ? ref.invalidate(authStateProvider)
+              : ref.invalidate(schoolSelectionProvider),
+          onEdit: () => context.push('/my/school'),
         ),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          title: const Text('학년 설정'),
-          subtitle: Text(
-            isAuthenticated ? '현재 학년을 저장하고 관리해요' : '로그인 후 학년을 저장할 수 있어요',
-          ),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.push('/my/grade'),
+        _ProfileSetting(
+          label: '학년',
+          value: ref
+              .watch(currentProfileProvider)
+              .whenData(
+                (p) => p?.gradeLevel == null ? null : '고등학교 ${p!.gradeLevel}학년',
+              ),
+          authLoading: auth.isLoading,
+          authError: auth.hasError,
+          onRetry: () => auth.hasError
+              ? ref.invalidate(authStateProvider)
+              : ref.invalidate(currentProfileProvider),
+          onEdit: () => context.push('/my/grade'),
         ),
         const Divider(),
         const SectionHeader('나의 자료'),
@@ -206,4 +213,74 @@ class _LogoutButtonState extends ConsumerState<_LogoutButton> {
       ),
     ],
   );
+}
+
+class _ProfileSetting extends StatelessWidget {
+  const _ProfileSetting({
+    required this.label,
+    required this.value,
+    required this.authLoading,
+    required this.authError,
+    required this.onRetry,
+    required this.onEdit,
+  });
+  final String label;
+  final AsyncValue<String?> value;
+  final bool authLoading, authError;
+  final VoidCallback onRetry, onEdit;
+
+  @override
+  Widget build(BuildContext context) {
+    final loading = authLoading || value.isLoading;
+    final failed = authError || value.hasError;
+    final configured = value.value != null;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: Theme.of(context).textTheme.titleSmall),
+          if (loading) ...[
+            const SizedBox(height: 8),
+            LinearProgressIndicator(semanticsLabel: '$label 불러오는 중'),
+          ] else
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    failed
+                        ? '$label 정보를 불러오지 못했어요.'
+                        : value.value ??
+                              (label == '학교' ? '학교를 설정해 주세요' : '학년을 설정해 주세요'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Semantics(
+                  label:
+                      '$label ${failed
+                          ? '다시 시도'
+                          : configured
+                          ? '변경'
+                          : '설정'}',
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: const Size(48, 48),
+                    ),
+                    onPressed: failed ? onRetry : onEdit,
+                    child: Text(
+                      failed
+                          ? '재시도'
+                          : configured
+                          ? '변경'
+                          : '설정',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
 }

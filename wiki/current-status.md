@@ -2,6 +2,18 @@
 
 Last reviewed: 2026-09-21
 
+## 2026-09-21 MY school/grade display — FIXED / LOCAL VALIDATION PASS
+
+- MY static setup copy hid configured values. It now reads canonical school/profile
+  providers and separates label/value/설정 or 변경; loading and retryable failure
+  are distinct from unset. Grade save invalidates the MY read provider.
+- Full 513 PASS / 1 existing skip; analyze, Android debug/iOS simulator builds PASS.
+  360×640/2× MY raster checked. [Root cause and core UI audit](core-app-improvements.md#my-configured-state-and-core-mobile-audit--2026-09-21).
+- OAuth/session code unchanged. iOS disconnected Debug home-screen relaunch warning
+  is not a restore failure; profile/release physical session E2E remains NOT VERIFIED.
+- Existing Owner iOS native configuration edits preserved outside this change.
+  No Production mutation or push. Policy release gate and audit P2 follow-ups remain.
+
 ## 2026-09-21 App Auth/native/shared-account — CODE READY / APP PRODUCTION E2E PENDING
 
 - Google native Android/iOS and Apple native iOS ID-token exchange now use the

@@ -329,3 +329,53 @@ All six filters/query/pages/scroll, Guest cancel/sign-in, A→Guest→B, detail/
 rollback and bounded lookup behavior tested. 360×640/1×/2× renders reviewed.
 Credential/diff checks PASS. Actual Production bookmark E2E was not run; mutation 0.
 No delivery/rights/Viewer/ingestion/LAB behavior changes. Release gates unchanged.
+
+## MY configured state and core mobile audit — 2026-09-21
+
+Root cause: ProfilePage rendered static school/grade setup labels and explanatory
+copy, without subscribing to saved values. This was a display/read-path omission,
+not evidence of lost Production data. School already restores through
+schoolSelectionProvider: profiles.neis_office_code/neis_school_code → NEIS lookup
+→ School.name. Authenticated selection writes only those profile columns; Guest
+selection is memory-only. Grade uses existing UserProfile.gradeLevel (1/2/3),
+profiles.grade_level and sparse profile upsert, not local preferences.
+
+MY now renders Label / Current value / Action. Unset shows 설정; set shows actual
+school name or 고등학교 N학년 and 변경. Loading suppresses unset/value/action;
+errors offer retry instead of claiming unset. School reuses its existing provider.
+A new owner-watching currentProfileProvider reads the existing repository, rejects
+owner mismatch and reloads after successful grade save. No parallel local cache,
+new taxonomy, schema or Auth/session change. On a fresh app container, existing
+SDK Auth restoration triggers canonical profile/NEIS reads; device E2E remains open.
+
+Local evidence: new state tests cover school/grade set/unset/loading/error at
+360×640/2×, school selection, grade invalidation, logout/login and fake-repository
+fresh-container restore. Existing grade widget test verifies save invalidates the
+MY read provider. Full suite 513 PASS / 1 existing skip; analyze and both Android
+debug/iOS simulator builds PASS. MY raster reviewed with actual theme and Korean
+font; no overflow. This is local evidence, not Production session persistence.
+
+### Core screen audit (code review; no broad redesign)
+
+| Screen | Findings / follow-up |
+|---|---|
+| Home | Existing typed data states, section accents and scrollable shell; selected study metric uses w800 intentionally. No new P0 found. P2: review overall section density in a later device UX pass, not another redesign now. |
+| Materials search | Search hint, clear tooltip, wrapped filters, loading/error/empty and retry are distinct; keyboard submit dismisses focus. P2: filter ActionChip shows visual check/background but does not explicitly expose selected semantics; improve screen-reader selection feedback later. |
+| Saved | Guest login and empty → 자료 찾기 escape path; owner-scoped loading/error/retry. Saved copy explicitly distinguishes downloads. P2: 3-line ellipsis hides long titles at 2×; detail remains accessible, assess title readability later. |
+| MY | Fixed P1: real configured school/grade were hidden by static setup copy. Labels/values/actions separated; progress/error distinct, ≥48px CTA, wrapped value in Expanded. No session implementation changed. |
+| Login | Existing primary email CTA, gated aligned social buttons, autofill/show-password, busy/error and protected return retained. No new P0 from review; real provider/device E2E still independent. |
+| Signup | Existing confirmation/validation and session-dependent verification guidance retained; scrollable form and error wrapping. No new defect established. |
+| Recovery | Separate request/reset flows, safe error and scrollable inputs retained; real mail/cold/warm acceptance remains pending. |
+| Settings (within MY) | No separate screen needed. App version asynchronous; unavailable policies explicit. P1 release gate: Owner-approved App policy/support/deletion URLs still need final verification. P2: NestedPage itself lacks bottom SafeArea unlike tab shell; check bottom gesture inset on nested forms during final physical UX pass before changing shared layout. |
+
+P0: none newly demonstrated in this scoped review. P1 MY display fixed; policy
+finalization remains Owner work. P2 items above are audit follow-ups, not proven
+runtime failures. Existing typography/spacing and navigation hierarchy retained;
+no new global font/bold/card rules. Auth prior keyboard/render evidence is retained;
+this task adds MY raster evidence, not new physical renders for every audited screen.
+
+Owner-observed iOS debug home-screen launch warning (“In iOS 14+, debug mode Flutter
+apps can only be launched…”) after disconnecting Flutter tooling is not evidence
+of a session-restore defect. APP_SESSION_RESTORE remains NOT VERIFIED. Perform
+terminate/relaunch Owner acceptance with iPhone profile/release; do not fix the
+Flutter debug launch restriction in app Auth code.

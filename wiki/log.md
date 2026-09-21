@@ -1797,3 +1797,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Production device restore/isolation/identity remain unverified; no new runtime
   PASS claimed. Documentation-only diff/credential checks passed. No Production
   mutation, provider-console change or push.
+
+## 2026-09-21 — MY school/grade configured value fix and mobile audit
+
+- Fixed static setup copy masking canonical school/grade values; explicit loading,
+  unset, configured and retryable error, owner-scoped grade read/save invalidation.
+- Added MY state/restore tests and updated grade save/label regression; full suite
+  513 PASS / 1 existing skip, analyze/builds PASS, 360px/2× MY raster reviewed.
+- Recorded scoped Home/Materials/Saved/MY/Auth/Settings audit and deferred P2 items.
+  Debug iOS relaunch restriction is not session failure; profile/release E2E pending.
+- Existing iOS local edits preserved; Auth flows and Production unchanged; no push.

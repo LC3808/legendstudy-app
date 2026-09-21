@@ -74,6 +74,7 @@ class _GradePageState extends ConsumerState<GradePage> {
           ref.read(authStateProvider).value?.userId != id) {
         return;
       }
+      ref.invalidate(currentProfileProvider);
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('학년을 저장했어요.')));
     } catch (_) {
