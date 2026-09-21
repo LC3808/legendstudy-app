@@ -1807,3 +1807,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Recorded scoped Home/Materials/Saved/MY/Auth/Settings audit and deferred P2 items.
   Debug iOS relaunch restriction is not session failure; profile/release E2E pending.
 - Existing iOS local edits preserved; Auth flows and Production unchanged; no push.
+
+## 2026-09-21 — Project Flutter patch and constrained dependency maintenance
+
+- Upgraded dedicated stable SDK 3.47.3/Dart 3.13.3 → 3.47.5/Dart 3.13.4; preserved
+  old SDK/global PATH. Added version-checked project helper and exact profile guidance.
+- Retained ten preferences/URL-launcher updates; deferred Auth/router/state major
+  migrations and SPM cleanup. SDK automatic broad pub upgrade was corrected before
+  final verification. No app/UI or signing edits; MY fix remains a separate commit.
+- Final full 513 PASS / 1 existing skip, analyze, Android debug/iOS simulator PASS;
+  helper 3 checks and MY 2× render PASS, credential/diff checks PASS. First iOS
+  cache-download failure resolved after SDK completion/rebuild. Owner native files
+  hash-preserved; actual physical profile/session E2E pending. Production mutation 0.

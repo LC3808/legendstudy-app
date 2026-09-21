@@ -1,0 +1,18 @@
+#!/bin/sh
+# Project-only SDK selection; never falls back to the caller's PATH.
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+sdk_dir=${LEGENDSTUDY_FLUTTER_SDK:-"$HOME/development/flutter-3.47"}
+if [ ! -x "$sdk_dir/bin/flutter" ]; then
+  echo 'LegendStudy Flutter SDK missing. See README Development; set LEGENDSTUDY_FLUTTER_SDK to the verified SDK.' >&2
+  exit 2
+fi
+"$sdk_dir/bin/flutter" --version --machine | python3 -c '
+import json, sys
+v = json.load(sys.stdin)
+if v.get("frameworkVersion") != "3.47.5" or v.get("channel") != "stable":
+    sys.exit("LegendStudy requires verified Flutter 3.47.5 stable. See README; PATH fallback is disabled.")
+'
+export PATH="$sdk_dir/bin:$PATH"
+cd "$repo_dir"
+exec "$sdk_dir/bin/flutter" "$@"

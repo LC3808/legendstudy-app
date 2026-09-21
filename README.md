@@ -14,22 +14,39 @@ This repository is the canonical source for the LegendStudy native app and its i
 
 ## Development
 
-Verified toolchain: Flutter **3.47.3**, Dart **3.13.3**. The original Flutter
-3.32.0 / Dart 3.8.0 SDK remains preserved separately for rollback/reference. Use the committed
-`pubspec.lock` for reproducible package versions.
-The [official Supabase Flutter package](https://pub.dev/packages/supabase_flutter)
-was checked; pub resolved 2.15.4 as compatible with this SDK (latest stable 2.17.2
-at implementation time). Existing Riverpod/go_router versions were preserved.
-Android native plugins require NDK 28.2.13676358 (pinned in app/build.gradle.kts).
+Verified toolchain: Flutter **3.47.5 stable**, Dart **3.13.4**.
+Canonical local SDK: `/Users/woojinchang/development/flutter-3.47` (directory name
+retained after patch upgrade). Use `./tool/flutterw` to avoid PATH's old Flutter
+3.32.0 / Dart 3.8.0. The wrapper requires Python 3 for SDK metadata validation,
+checks the exact verified stable version and never falls back to global Flutter.
+Other machines may set `LEGENDSTUDY_FLUTTER_SDK` to the same verified SDK version.
+No global shell configuration or old SDK is changed. IDE SDK selection must point
+to this directory separately. Keep the committed `pubspec.lock`.
+See [toolchain audit and deferred migrations](wiki/flutter-toolchain.md).
+Android plugins require NDK 28.2.13676358; no signing changes are made here.
 
 ```sh
-flutter pub get
-flutter analyze
-flutter test
-flutter run -d <device-id>
-flutter build apk --debug
-flutter build ios --simulator --debug
+./tool/flutterw pub get
+./tool/flutterw analyze
+./tool/flutterw test
+./tool/flutterw run
+./tool/flutterw build apk --debug
+./tool/flutterw build ios --simulator
 ```
+
+For Owner iPhone profile acceptance, connect/unlock the physical iPhone first:
+
+```sh
+cd /Users/woojinchang/development/legendstudy-app
+./tool/flutterw run --profile --dart-define-from-file=/Users/woojinchang/legendstudy-local.json
+```
+
+Select the actual physical iPhone if prompted; do not select the simulator for
+profile mode. No physical device was connected at this audit, so no device ID is
+invented. The existing external config path was verified without printing its
+contents; provider enablement/E2E is not inferred from its existence. Xcode Owner
+signing remains intact. Disconnected Debug home-screen relaunch restrictions do
+not test session restore; profile/release terminate/relaunch E2E remains pending.
 
 The app opens 홈 / 자료 / 학습 / MY. Home and Materials consume public Supabase
 content; Study is idle UI and MY owns saved/school/recent shells. Read

@@ -42,3 +42,6 @@ android/key.properties
 
 # Owner-specific native OAuth public configuration
 ios/Flutter/Auth.local.xcconfig
+
+# Kotlin incremental compiler cache
+android/.kotlin/

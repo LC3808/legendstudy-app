@@ -2,6 +2,21 @@
 
 Last reviewed: 2026-09-21
 
+## 2026-09-21 Toolchain maintenance — VERIFIED
+
+- Canonical SDK is now **Flutter 3.47.5 stable / Dart 3.13.4**, at the existing
+  flutter-3.47 path. Use `./tool/flutterw`; old PATH Flutter 3.32 and global shell
+  settings are preserved. [Baseline, dependency decisions and migrations](flutter-toolchain.md).
+- Ten preferences/URL-launcher compatible updates retained in pubspec.lock;
+  constraints unchanged. Supabase/app_links, Riverpod/router migrations deferred.
+  CocoaPods-to-SPM-only cleanup and coordinated Gradle/AGP/Kotlin upgrades deferred.
+- Final intended graph: analyze PASS, **513 PASS / 1 existing skip**, Android debug
+  and iOS simulator builds PASS; MY 360px/2× render retained. No new UI rewrite.
+- SDK automatic broad pub upgrade was caught and removed before final regression;
+  only the ten reviewed updates remain. Owner iOS edits byte-preserved/uncommitted.
+- Profile/release physical E2E NOT VERIFIED; exact config command in README.
+  No schema, Production mutation or push. MY fix/audit below remains current.
+
 ## 2026-09-21 MY school/grade display — FIXED / LOCAL VALIDATION PASS
 
 - MY static setup copy hid configured values. It now reads canonical school/profile
