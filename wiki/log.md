@@ -1771,3 +1771,19 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   candidates. Current Auth/Core gates preserved; Teacher/School not implemented.
 - Documentation-only link/scope checks and git diff --check PASS. No Flutter
   tests/builds rerun; no code/schema/Production/DNS changes, mutation 0. No push.
+
+
+## 2026-09-21 — App Auth UI/native providers/shared-account readiness
+
+- Added Google Android/iOS and Apple iOS native ID-token adapters; existing
+  Supabase identity/events/persistence retained. Kakao/Android Apple browser flow
+  preserved, Kakao email-only scope. No LAB or external console changes.
+- Local provider marks, common button geometry, Account copy, direct Home return;
+  original protected destination/no-auto-save contract retained. Added opt-in
+  debug GET-only identity comparison without UUID output/storage.
+- Full 508 PASS / 1 skip; new seam 7 PASS, native iOS offline UI 9 PASS, widget
+  360×640/2× render 6 PASS. Analyze, Android/iOS builds, credential/diff PASS.
+- Recorded Owner-reported LAB Web PASS separately from unverified App/shared-ID
+  E2E. Owner setup preserves Web client IDs/callbacks. Apple revoke/renewal,
+  Google credential rotation and provider brand review remain OPEN.
+- Production mutation 0; schema/deployment/payment changes 0; no push.

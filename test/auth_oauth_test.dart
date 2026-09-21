@@ -52,7 +52,7 @@ void main() {
           builder: (_, _) => const Scaffold(body: AuthPage()),
         ),
         GoRoute(
-          path: '/my',
+          path: '/home',
           builder: (_, _) => const Scaffold(body: Text('MY')),
         ),
         GoRoute(
@@ -178,7 +178,7 @@ void main() {
       expect(currentPath(), '/auth');
       auth.add(const AuthStatus('user-a', event: AuthChangeEvent.signedIn));
       await tester.pumpAndSettle();
-      expect(currentPath(), '/my');
+      expect(currentPath(), '/home');
     });
 
     testWidgets('a cancelled consent screen is explained, not silent', (

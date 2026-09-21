@@ -16,6 +16,7 @@ import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
 import '../features/auth/auth_errors.dart';
 import '../features/auth/presentation/auth_page.dart';
+import '../features/auth/presentation/owner_auth_check_page.dart';
 import '../features/auth/presentation/delete_account_page.dart';
 import '../features/auth/presentation/new_password_page.dart';
 import '../features/auth/presentation/password_recovery_page.dart';
@@ -25,8 +26,17 @@ import '../shared/widgets/nested_page.dart';
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
     navigatorKey: GlobalKey<NavigatorState>(),
-    initialLocation: '/home',
+    initialLocation:
+        ownerAuthCheckEnabled &&
+            const bool.fromEnvironment('OWNER_AUTH_CHECK_START')
+        ? '/auth/owner-check'
+        : '/home',
     routes: [
+      if (ownerAuthCheckEnabled)
+        GoRoute(
+          path: '/auth/owner-check',
+          builder: (_, _) => const OwnerAuthCheckPage(),
+        ),
       GoRoute(
         path: '/materials/:slug',
         builder: (_, state) =>

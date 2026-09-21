@@ -22,6 +22,13 @@ import UserNotifications
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
     let info = FlutterMethodChannel(name: "com.legendstudy.app/info", binaryMessenger: binaryMessenger)
     info.setMethodCallHandler { call, result in
+      if call.method == "googleSchemeReady" {
+        guard let client = call.arguments as? String else { result(false); return }
+        let expected = client.split(separator: ".").reversed().joined(separator: ".")
+        let types = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String: Any]] ?? []
+        let schemes = types.flatMap { $0["CFBundleURLSchemes"] as? [String] ?? [] }
+        result(schemes.contains(expected)); return
+      }
       guard call.method == "version" else { result(FlutterMethodNotImplemented); return }
       result(["version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
               "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""])

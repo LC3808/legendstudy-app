@@ -1,5 +1,14 @@
 # Account Deletion & Privacy Lifecycle
 
+## Native Apple gate — 2026-09-21
+
+App iOS Apple native sign-in integration does not close account-deletion release
+requirements. APPLE_ACCOUNT_DELETION_REVOKE remains OPEN; client deletion and server
+candidate do not prove authorization/token revocation. No deployment or actual
+account deletion was executed. Apple Web secret renewal and Owner-reported Google
+credential rotation also remain OPEN; see [acceptance checklist](auth-native-owner-acceptance.md).
+
+
 Status:
 - **ACCOUNT DELETION FOUNDATION: IMPLEMENTED (client + server candidate), fail-closed**
 - **PRODUCTION ACCOUNT DELETION: PENDING** — the function is not deployed and no

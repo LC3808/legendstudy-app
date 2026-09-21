@@ -96,8 +96,9 @@ Widget app(Widget child, {double scale = 1}) => MaterialApp(
 void main() {
   setUpAll(() async {
     if (const bool.fromEnvironment('CORE_RENDER')) {
-      await (FontLoader('MaterialIcons')
-        ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
+      await (FontLoader(
+        'MaterialIcons',
+      )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
       final file = File('/System/Library/Fonts/AppleSDGothicNeo.ttc');
       if (file.existsSync()) {
         await (FontLoader(
@@ -181,7 +182,10 @@ void main() {
       final enabled = ProviderContainer(
         overrides: [
           appConfigProvider.overrideWithValue(
-            const AppConfig(googleOAuthEnabled: true),
+            const AppConfig(
+              googleOAuthEnabled: true,
+              googleServerClientId: 'fixture-public-client',
+            ),
           ),
         ],
       );

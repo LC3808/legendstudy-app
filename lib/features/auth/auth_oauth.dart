@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/config/app_config.dart';
+import 'native_auth.dart';
 
 /// Where a social provider returns after consent.
 ///
@@ -15,41 +17,93 @@ const oauthCallbackUrl = 'com.legendstudy.app://login-callback';
 
 /// Starting an OAuth flow, behind a seam.
 ///
-/// `signInWithOAuth` opens a browser, so a widget test can never call it. The
-/// returned bool is only "the provider page opened", not an authenticated
-/// session: the session arrives later through `onAuthStateChange`.
+/// Browser paths return launch success; native paths exchange an ID token first.
+/// UI navigation always follows Supabase auth events, never this bool alone.
+/// Widget tests replace the service and do not invoke native or browser auth.
 abstract class OAuthService {
   Future<bool> startSignIn(OAuthProvider provider);
 }
 
 class SupabaseOAuthService implements OAuthService {
-  const SupabaseOAuthService(this._client);
+  SupabaseOAuthService(
+    this._client, {
+    required this.native,
+    required this.platform,
+  });
   final SupabaseClient _client;
+  final NativeIdentityProvider native;
+  final TargetPlatform platform;
+  bool _busy = false;
 
   @override
-  Future<bool> startSignIn(OAuthProvider provider) =>
-      _client.auth.signInWithOAuth(provider, redirectTo: oauthCallbackUrl);
+  Future<bool> startSignIn(OAuthProvider provider) async {
+    if (_busy) return false;
+    _busy = true;
+    final startingOwner = _client.auth.currentUser?.id;
+    try {
+      if (provider == OAuthProvider.google ||
+          (provider == OAuthProvider.apple && platform == TargetPlatform.iOS)) {
+        final identity = provider == OAuthProvider.google
+            ? await native.google()
+            : await native.apple();
+        if (_client.auth.currentUser?.id != startingOwner) {
+          throw const NativeAuthCancelled();
+        }
+        final response = await _client.auth.signInWithIdToken(
+          provider: provider,
+          idToken: identity.token,
+          nonce: identity.nonce,
+        );
+        if (response.session == null) {
+          throw const AuthException(
+            'Missing session',
+            code: 'session_not_found',
+          );
+        }
+        return true;
+      }
+      // Kakao keeps the approved browser/PKCE path; Android Apple also retains
+      // its browser path. No native Kakao token-to-identity assumptions.
+      return await _client.auth.signInWithOAuth(
+        provider,
+        redirectTo: oauthCallbackUrl,
+        scopes: provider == OAuthProvider.kakao ? 'account_email' : null,
+      );
+    } finally {
+      _busy = false;
+    }
+  }
 }
 
 /// Null until Supabase is initialized, exactly like the recovery seam.
 final oauthServiceProvider = Provider<OAuthService?>((ref) {
   final client = ref.watch(supabaseClientProvider);
-  return client == null ? null : SupabaseOAuthService(client);
+  return client == null
+      ? null
+      : SupabaseOAuthService(
+          client,
+          native: DeviceIdentityProvider(ref.watch(appConfigProvider)),
+          platform: defaultTargetPlatform,
+        );
 });
 
 /// Providers offered on the login screen, in display order.
 const supportedOAuthProviders = <OAuthProvider>[
   OAuthProvider.google,
-  OAuthProvider.apple,
   OAuthProvider.kakao,
+  OAuthProvider.apple,
 ];
 
 // A deployment declaration, not automatic provider discovery.
 final availableOAuthProvidersProvider = Provider<List<OAuthProvider>>((ref) {
   final config = ref.watch(appConfigProvider);
   return [
-    if (config.googleOAuthEnabled) OAuthProvider.google,
-    if (config.appleOAuthEnabled) OAuthProvider.apple,
+    if (config.googleOAuthEnabled &&
+        config.googleServerClientId.isNotEmpty &&
+        (defaultTargetPlatform != TargetPlatform.iOS ||
+            config.googleIosClientId.isNotEmpty))
+      OAuthProvider.google,
     if (config.kakaoOAuthEnabled) OAuthProvider.kakao,
+    if (config.appleOAuthEnabled) OAuthProvider.apple,
   ];
 });

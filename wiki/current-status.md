@@ -1,6 +1,29 @@
 # Current Status
 
-Last reviewed: 2026-09-20
+Last reviewed: 2026-09-21
+
+## 2026-09-21 App Auth/native/shared-account — CODE READY / APP PRODUCTION E2E PENDING
+
+- Google native Android/iOS and Apple native iOS ID-token exchange now use the
+  existing Supabase session/events. Kakao and Android Apple keep browser PKCE;
+  Kakao requests account_email only. Native Kakao SDK is NOT implemented.
+- Local official-source Google/Kakao marks and SDK Apple mark replace text-only
+  buttons; shared 52px minimum geometry, responsive scaling, global UI busy guard.
+  Direct login → Home; protected login → original route without automatic save.
+- Owner-reported LAB Web Auth (Email/verification/recovery/Google/Kakao/Apple/
+  session) PASS on 2026-09-21 is preserved. App provider/device E2E and App↔LAB
+  user-ID equality remain NOT VERIFIED; shared account is not shared session.
+- Debug opt-in Owner checker performs GET-only identity comparison, outputs only
+  match status, clears input and is absent in profile/release. No UUIDs recorded.
+- Full **508 PASS / 1 existing skip**, new native/shared tests **7 PASS**, iOS
+  offline rendered journey **9 PASS**, analyze PASS. 360×640/2× plus real iPhone
+  simulator keyboard/social/recovery renders reviewed; no observed overflow.
+  Android debug/iOS simulator builds PASS; credential/diff checks PASS.
+- Owner gates: real client IDs/signing/provisioning, Google/Kakao/Apple E2E,
+  identity match, physical restore/isolation; custom provider label/typography
+  brand review. Apple revoke/secret renewal and Google secret rotation OPEN.
+- [Exact setup and E2E checklist](auth-native-owner-acceptance.md). No LAB edits,
+  console changes, schema/deployment or Production mutation. RELEASE READY NO.
 
 ## 2026-09-20 Product/platform canonicalization — DOCUMENTED ONLY
 

@@ -26,8 +26,10 @@ The native App must not become a WebView wrapper.
 
 ## Current implementation boundary
 
-App Home/MY open the public LAB root externally; shared Auth/session handoff,
-record sync and payment are not implemented. LAB is a separate repository.
+App Home/MY open the public LAB root externally. App and LAB target the same
+canonical Supabase identity; Owner reports LAB Web Auth PASS (2026-09-21), while
+App↔LAB identity equality still needs [Owner acceptance](auth-native-owner-acceptance.md).
+Session handoff, record sync and payment are not implemented or implied. LAB is a separate repository.
 The current app entry still uses essay-oriented introductory copy; this is a
 known future copy/IA alignment item, not the canonical definition of LAB.
 No app/Web code or deployed copy changes are made in this documentation task.

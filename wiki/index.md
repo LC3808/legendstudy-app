@@ -19,6 +19,8 @@ This directory is the canonical long-term development knowledge base for LegendS
 
 ## Documents
 
+- [App native Auth and shared-account Owner acceptance](auth-native-owner-acceptance.md) — platform paths, console coexistence, debug comparison and physical checklist
+
 - `core-app-improvements.md` — Materials/account improvements, evidence and Owner release gates
 
 - `current-status.md` — current implementation status, blockers, next actions

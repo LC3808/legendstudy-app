@@ -36,7 +36,8 @@ future caches/derived results must retain provenance and invalidation rules.
 
 Same identity does not mean shared browser cookies, automatic SSO or unrestricted
 access. [Auth](auth-recovery.md) records current code/config/E2E limits; LAB's
-actual auth configuration is unverified. No session/token handoff is authorized.
+Web Auth E2E is now Owner-reported PASS (2026-09-21); App↔LAB identity equality
+still needs verification. No session/token handoff is authorized.
 
 Student Analytics: 1 user → Academic Analytics Engine.
 School Analytics: N students → **same engine and canonical academic model** →

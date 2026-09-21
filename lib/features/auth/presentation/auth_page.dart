@@ -7,10 +7,12 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../auth_errors.dart';
+import '../native_auth.dart';
 import '../auth_oauth.dart';
 import '../auth_email.dart';
 import '../auth_recovery.dart';
 import 'auth_support_links.dart';
+import 'provider_button.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -91,12 +93,14 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
     setState(() => _busy = true);
     try {
-      // The result only says the provider page opened. The session, if any,
-      // arrives later on the auth stream and is handled by _onAuthStatus.
+      // Browser success only means opened; native success includes token exchange.
+      // Both navigate only through the Supabase event handled by _onAuthStatus.
       final opened = await service.startSignIn(provider);
       if (!opened) {
         _message('소셜 로그인 화면을 열지 못했어요. 잠시 후 다시 시도해 주세요.');
       }
+    } on NativeAuthCancelled {
+      _message('로그인을 취소했어요.');
     } catch (error) {
       _message(authErrorMessage(error));
     } finally {
@@ -141,7 +145,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     if (context.canPop()) {
       context.pop();
     } else {
-      context.go('/my');
+      context.go('/home');
     }
   }
 
@@ -166,6 +170,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           children: [
             const AppHeader(title: '레전드스터디+'),
             const Text('자료를 저장하고 학습 기록을 이어가세요'),
+            const SizedBox(height: 4),
+            const Text('LegendStudy Account', style: TextStyle(fontSize: 13)),
             SectionHeader(_signUp ? '회원가입' : '로그인'),
             TextFormField(
               controller: _email,
@@ -286,19 +292,12 @@ class _AuthPageState extends ConsumerState<AuthPage> {
               const Divider(height: 32),
               const Text('다른 방법으로 로그인'),
               const SizedBox(height: 12),
-              // Text-only fallback; official provider artwork/release review pending.
               for (final provider in providers)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
-                  child: OutlinedButton(
+                  child: ProviderButton(
+                    provider: provider,
                     onPressed: _busy ? null : () => _oauth(provider),
-                    child: Text(
-                      '${switch (provider) {
-                        OAuthProvider.google => 'Google',
-                        OAuthProvider.apple => 'Apple',
-                        _ => 'Kakao',
-                      }}로 계속하기',
-                    ),
                   ),
                 ),
             ],

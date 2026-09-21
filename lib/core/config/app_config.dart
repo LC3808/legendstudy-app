@@ -8,6 +8,8 @@ class AppConfig {
     this.supabasePublishableKey = '',
     this.recoveryRedirectUrl = '',
     this.signupRedirectUrl = '',
+    this.googleServerClientId = '',
+    this.googleIosClientId = '',
     this.accountDeletionEnabled = false,
     this.privacyUrl = '',
     this.termsUrl = '',
@@ -24,6 +26,8 @@ class AppConfig {
     // URL is invented here. See wiki/auth-recovery.md.
     recoveryRedirectUrl: String.fromEnvironment('SUPABASE_RECOVERY_REDIRECT'),
     signupRedirectUrl: String.fromEnvironment('SUPABASE_SIGNUP_REDIRECT'),
+    googleServerClientId: String.fromEnvironment('GOOGLE_SERVER_CLIENT_ID'),
+    googleIosClientId: String.fromEnvironment('GOOGLE_IOS_CLIENT_ID'),
     // Off until the delete-account function is reviewed and deployed. A build
     // without it tells the user the feature is not ready instead of failing
     // with a transport error.
@@ -45,6 +49,9 @@ class AppConfig {
 
   /// Optional Owner-registered email verification redirect; empty uses Site URL.
   final String signupRedirectUrl;
+  // Public OAuth identifiers only; never client secrets.
+  final String googleServerClientId;
+  final String googleIosClientId;
   String? get signupRedirectTo =>
       signupRedirectUrl.isEmpty ? null : signupRedirectUrl;
 

@@ -1,5 +1,27 @@
 # Auth Recovery Foundation
 
+## App native/shared-account follow-up — 2026-09-21
+
+Google now uses the native SDK on Android/iOS; iOS Apple uses native ID-token
+exchange; Kakao and Android Apple retain browser OAuth. Official-source local
+marks, common social-button geometry and LegendStudy Account copy replace the
+text-only fallback. Direct login returns Home; protected return stays intact.
+Google flag additionally requires public client config; missing iOS scheme fails
+safely before SDK launch. Native credentials never enter UI state or logs.
+
+Owner reports LAB Web Email/verification/recovery/Google/Kakao/Apple/session E2E
+PASS on 2026-09-21. That supersedes earlier LAB-unverified context only for those
+reported Web flows, not App native or shared identity. Same account does not mean
+shared session. Opt-in debug-only GET comparison checks SDK/server/expected owner
+without displaying/storing IDs. Profile/release never exposes the checker.
+
+[Native setup and Owner E2E checklist](auth-native-owner-acceptance.md) is the
+operational reference. Preserve working LAB config. Apple revoke/secret renewal
+and Google exposed-secret rotation remain OPEN. Actual App provider login,
+physical restore and cross-platform identity are NOT VERIFIED. Current provider
+button labels/typography still need brand review; no store approval is claimed.
+
+
 Status: **CODE VERIFIED / PRODUCTION READINESS PREPARED; PRODUCTION RECOVERY
 E2E PENDING.** The application foundation is verified and the deep link the
 recovery email must open is now registered on both platforms. Registering the

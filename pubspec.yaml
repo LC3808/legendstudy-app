@@ -17,6 +17,9 @@ dependencies:
   supabase_flutter: ^2.15.4
   url_launcher: ^6.3.2
   http: ^1.6.0
+  google_sign_in: ^7.2.0
+  sign_in_with_apple: ^8.2.0
+  crypto: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +32,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/brand/generated/legendstudy_wordmark_header.png
+    - assets/auth/google.png
+    - assets/auth/kakao.png

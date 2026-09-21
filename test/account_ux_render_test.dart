@@ -16,6 +16,8 @@ import 'package:legendstudy_app/features/profile/presentation/profile_page.dart'
 
 import 'core_ux_test.dart' as preview;
 
+Future<void> Function(String)? nativeCapture;
+
 void main() {
   setUpAll(() async {
     if (const bool.fromEnvironment('CORE_RENDER')) {
@@ -41,10 +43,12 @@ void main() {
     testWidgets('account 360x640 2x $scenario keyboard and long text', (
       tester,
     ) async {
-      tester.view.physicalSize = const Size(360, 640);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+      if (nativeCapture == null) {
+        tester.view.physicalSize = const Size(360, 640);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+      }
       final page = switch (scenario) {
         'recovery' => const PasswordRecoveryPage(linkFailed: true),
         'new-password' => const NewPasswordPage(),
@@ -100,26 +104,44 @@ void main() {
         await tester.pumpAndSettle();
       }
       if (scenario == 'social') {
+        await tester.runAsync(() async {
+          final context = tester.element(find.byType(AuthPage));
+          await precacheImage(
+            const AssetImage('assets/auth/google.png'),
+            context,
+          );
+          await precacheImage(
+            const AssetImage('assets/auth/kakao.png'),
+            context,
+          );
+        });
         await tester.ensureVisible(find.text('Kakao로 계속하기'));
         await tester.pumpAndSettle();
       }
       await preview.capture(tester, 'account-$scenario-2x');
+      await nativeCapture?.call('account-$scenario-2x');
       if (scenario != 'my' && scenario != 'social') {
         await tester.ensureVisible(find.byType(TextField).first);
         await tester.enterText(
           find.byType(TextField).first,
           'very.long.student.email.for.wrapping@example.test',
         );
-        tester.view.viewInsets = const FakeViewPadding(bottom: 260);
-        addTearDown(tester.view.resetViewInsets);
+        if (nativeCapture == null) {
+          tester.view.viewInsets = const FakeViewPadding(bottom: 260);
+          addTearDown(tester.view.resetViewInsets);
+        }
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.byType(FilledButton).first);
         await tester.pumpAndSettle();
         expect(
           tester.getRect(find.byType(FilledButton).first).bottom,
-          lessThanOrEqualTo(380),
+          lessThanOrEqualTo(
+            (tester.view.physicalSize.height - tester.view.viewInsets.bottom) /
+                tester.view.devicePixelRatio,
+          ),
         );
         await preview.capture(tester, 'account-$scenario-keyboard-2x');
+        await nativeCapture?.call('account-$scenario-keyboard-2x');
       }
       await tester.pumpWidget(const SizedBox());
     });
