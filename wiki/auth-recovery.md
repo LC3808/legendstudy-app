@@ -15,10 +15,17 @@ reported Web flows, not App native or shared identity. Same account does not mea
 shared session. Opt-in debug-only GET comparison checks SDK/server/expected owner
 without displaying/storing IDs. Profile/release never exposes the checker.
 
+Owner iPhone Profile later confirmed `EMAIL_AUTH_APP_PRODUCTION_E2E: PASS` and
+`APP_SESSION_RESTORE: PASS` after terminate/relaunch. These results supersede the
+generic pending login/restore statements below for those checks only. App signup,
+verification and recovery mailbox/device E2E remain unverified; Google/Kakao/Apple
+App login and every LAB/App identity comparison remain unverified.
+
 [Native setup and Owner E2E checklist](auth-native-owner-acceptance.md) is the
 operational reference. Preserve working LAB config. Apple revoke/secret renewal
-and Google exposed-secret rotation remain OPEN. Actual App provider login,
-physical restore and cross-platform identity are NOT VERIFIED. Current provider
+and Google exposed-secret rotation remain OPEN. Actual Google/Kakao/Apple App
+provider login and cross-platform identity are NOT VERIFIED; App Email login and
+Profile session restore are PASS. Current provider
 button labels/typography still need brand review; no store approval is claimed.
 
 

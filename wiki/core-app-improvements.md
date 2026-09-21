@@ -17,8 +17,9 @@ without displaying/storing IDs. Profile/release never exposes the checker.
 
 [Native setup and Owner E2E checklist](auth-native-owner-acceptance.md) is the
 operational reference. Preserve working LAB config. Apple revoke/secret renewal
-and Google exposed-secret rotation remain OPEN. Actual App provider login,
-physical restore and cross-platform identity are NOT VERIFIED. Current provider
+and Google exposed-secret rotation remain OPEN. App Email login and Profile session
+restore are PASS; Google/Kakao/Apple App login and cross-platform identity remain
+NOT VERIFIED. Current provider
 button labels/typography still need brand review; no store approval is claimed.
 
 
@@ -376,9 +377,8 @@ this task adds MY raster evidence, not new physical renders for every audited sc
 
 Owner-observed iOS debug home-screen launch warning (“In iOS 14+, debug mode Flutter
 apps can only be launched…”) after disconnecting Flutter tooling is not evidence
-of a session-restore defect. APP_SESSION_RESTORE remains NOT VERIFIED. Perform
-terminate/relaunch Owner acceptance with iPhone profile/release; do not fix the
-Flutter debug launch restriction in app Auth code.
+of a session-restore defect. Owner later verified `APP_SESSION_RESTORE: PASS` on
+iPhone Profile after terminate/relaunch; the Debug tooling warning is not a failure.
 
 ## Owner Profile UX follow-up — 2026-09-21
 
@@ -401,5 +401,7 @@ policy URLs and deletion deployment/revoke. P2: Materials filter selection seman
 long saved titles and final physical spacing/accessibility pass, not a new redesign.
 Settings and meal detail use SafeArea/scroll; 2× long-email/menu raster reviewed.
 School/grade providers and Auth modules were not modified in this follow-up.
-New meal and Settings UI await Owner physical confirmation; prior accepted Auth
-and MY values are not downgraded. No Production mutations, console or signing edits.
+Owner confirmed the meal progression and MY Settings UI on iPhone:
+`MEAL_TIME_AWARE_DEVICE_E2E: PASS`, `MY_SETTINGS_DEVICE_E2E: PASS`. Policy and
+account deletion production readiness remain NO. No Production mutations, console
+or signing edits.

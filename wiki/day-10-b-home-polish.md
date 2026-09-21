@@ -3,6 +3,10 @@
 Status: original Day 10 evidence below is historical. Current meal policy and
 Owner acceptance follow-up are recorded at the end of this document.
 
+Current meal contract and device acceptance: see [2026-09-21 Owner Profile
+follow-up](#owner-profile-follow-up--2026-09-21). The original 17:00 policy below
+is retained as historical evidence only.
+
 ## Historical scope (superseded meal policy below)
 
 Home now supports:
@@ -102,3 +106,9 @@ Focused new tests 31 PASS. Full 545 PASS / 1 existing skip; analyze and Android
 debug/iOS simulator builds PASS. Existing long-menu 360/428px 1×/2× renders now
 verify preview → detail → back (old expansion expectations intentionally updated).
 These are local fixture tests, not new Production NEIS/device E2E.
+
+Owner subsequently confirmed the updated meal Home/detail experience on iPhone:
+`MEAL_TIME_AWARE_DEVICE_E2E: PASS`. The Home LAB promotional banner is removed;
+LAB itself remains available through MY. MY Settings gear/IA was also checked on
+iPhone: `MY_SETTINGS_DEVICE_E2E: PASS`. These UX checks do not close any release
+gate for deletion, policies or store submission.

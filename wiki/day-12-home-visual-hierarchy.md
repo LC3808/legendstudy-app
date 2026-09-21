@@ -10,7 +10,7 @@ Status: **implemented; local validation complete**.
 4. 자료 검색 — material discovery and quick filters
 5. 최근 본 자료 — personal re-entry history
 6. 최근 업데이트 — new material discovery
-7. LegendStudy LAB — small external service card (2026-09-20 increment)
+7. LegendStudy LAB — small external service card (removed 2026-09-21)
 
 Recent views now precede the global update feed because they reflect the user's
 own exploration history. This preserves the existing providers, navigation and
@@ -45,7 +45,9 @@ data was invented.
 
 ## Preserved behavior and accessibility
 
-- Meal today/tomorrow, 17:00 KST priority, midnight refresh and expansion remain.
+- Meal policy is now the 14:00/19:00 KST lunch/dinner progression documented in
+  [Day 10-B](day-10-b-home-polish.md#owner-profile-follow-up--2026-09-21); breakfast
+  is excluded from Home and full-day meals remain available in detail.
 - Recent Updates and Recent Views remain independently collapsed to two and
   expandable to six.
 - Search, D-Day, Study navigation and detail routes remain unchanged.
@@ -59,7 +61,7 @@ data was invented.
 
 - Focused Home/D-Day/Study/Meal files passed sequentially.
 - Full Flutter suite: 341 passed, one opt-in read-only network skip.
-- Flutter 3.47.3 analyze: clean.
+- Flutter 3.47.5 / Dart 3.13.4 analyze: clean (current toolchain).
 - Android debug build: pass without dependency-validation skip.
 - iOS simulator build: pass without external xcconfig.
 - iOS simulator Home screenshot: `/tmp/legendstudy-day12-home.png`.

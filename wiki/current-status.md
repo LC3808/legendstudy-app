@@ -2,6 +2,65 @@
 
 Last reviewed: 2026-09-21
 
+## 2026-09-21 End-of-day canonical checkpoint
+
+### Implementation and toolchain
+
+- Starting checkpoint: branch `codex/day-7-school-neis`, HEAD `2fea4f2`
+  (`fix: align meal preview and MY settings with device feedback`). Today's
+  related implementation commits are `3199b25` (MY configured school/grade),
+  `683915d` (Flutter/dependency maintenance), and `2fea4f2` (meal progression,
+  Home LAB banner removal, MY Settings). Existing uncommitted iOS Owner edits and
+  local artifacts are preserved; this checkpoint changes documentation only.
+- Canonical development toolchain: Flutter **3.47.5 stable**, Dart **3.13.4**,
+  SDK `/Users/woojinchang/development/flutter-3.47`, invoked through
+  `./tool/flutterw`. The old shell PATH still selects Flutter 3.32.0 / Dart
+  3.8.0 first; Owner global PATH was not changed.
+- Ten safe dependency updates; no major migration. Supabase/app_links,
+  Riverpod/go_router, lint major updates and iOS CocoaPods-to-SPM migration are
+  deferred. Existing CocoaPods integration was retained to preserve working builds.
+
+### Latest verified implementation and Owner E2E
+
+- Latest automated results: `flutter analyze` PASS; `flutter test` **545 PASS / 1
+  existing skip**; iOS simulator and Android debug builds PASS; credential/secret
+  scan and `git diff --check` PASS. These supersede the earlier 508/513 test counts.
+- Owner iPhone Profile E2E: `EMAIL_AUTH_APP_PRODUCTION_E2E: PASS`,
+  `APP_SESSION_RESTORE: PASS`, `MY_SCHOOL_CONFIGURED_VALUE_DEVICE_E2E: PASS`,
+  `MY_GRADE_CONFIGURED_VALUE_DEVICE_E2E: PASS`, and
+  `MY_SETTINGS_DEVICE_E2E: PASS`. Existing LAB email/password account login,
+  Home return and authenticated MY state were confirmed. LAB/App `auth.users.id`
+  equality was not checked. The disconnected Debug home-screen relaunch message
+  is a Flutter Debug tooling limitation, not a restore failure.
+- Meal Home policy is KST-aware: breakfast excluded; 00:00–13:59 today's lunch;
+  14:00–18:59 today's dinner when available, otherwise tomorrow; 19:00 onward
+  tomorrow lunch first. Detail retains all meals served that date. Boundary,
+  resume, revisit and raw-data reevaluation are covered. Owner iPhone result:
+  `MEAL_TIME_AWARE_DEVICE_E2E: PASS`.
+- `HOME_LAB_BANNER_REMOVED: YES` (Home promotion only; LAB remains available in
+  MY). MY gear opens Settings; account operations, app info and legal links live
+  there. `MY_SETTINGS_DEVICE_E2E: PASS`.
+
+### Auth and release gates
+
+- LAB Web production E2E remains PASS for Email, Google, Kakao, Apple and lifecycle.
+- App Email production E2E is PASS. Google, Kakao and Apple App production E2E
+  are **NOT VERIFIED**. Architecture targets one shared `auth.users.id`; actual
+  LAB/App identity comparison is **NOT VERIFIED** for Email or social providers.
+  This is Shared Account, not Shared Session.
+- `APPLE_ACCOUNT_DELETION_REVOKE`, `APPLE_SECRET_RENEWAL_GATE`, and
+  `GOOGLE_CREDENTIAL_ROTATION` remain OPEN. `ACCOUNT_DELETION_PRODUCTION_READY: NO`,
+  `POLICY_PRODUCTION_READY: NO`, `STORE_RELEASE_READY: NO`.
+- Next Owner sequence: Apple Native Login on iPhone → verify the same Apple
+  identity in LAB/App → Google App login/identity → Kakao App login/identity →
+  compare Email LAB/App identity → A/logout/B owner isolation. Close providers one
+  at a time. See [Auth acceptance](auth-native-owner-acceptance.md).
+- Remaining P2 polish candidates: filter selection semantics, long titles, nested
+  screen bottom spacing/accessibility and one final mobile UI/UX pass after feature
+  work. UI foundation is sufficient; avoid repeated polish before then.
+- No code, database, Supabase, OAuth console, native configuration, dependency or
+  production environment was changed in this documentation checkpoint. No push.
+
 ## 2026-09-21 iPhone Profile Owner acceptance and UX follow-up
 
 - **Owner-reported Production/device PASS:** Email App Auth, App session restore,
@@ -17,7 +76,7 @@ Last reviewed: 2026-09-21
   configured school/grade unchanged. Deletion/policy Production readiness still NO.
 - Local full **545 PASS / 1 existing skip**, meal/Settings policy focused **31 PASS**,
   analyze, Android debug/iOS simulator builds PASS. 360/428px 1×/2× meal detail and
-  360px/2× Settings raster reviewed. New UX physical acceptance remains Owner action.
+  360px/2× Settings raster reviewed. Owner confirmed meal and Settings UX on iPhone.
 - [Root cause, policy and evidence](day-10-b-home-polish.md#owner-profile-follow-up--2026-09-21).
   Existing iOS edits preserved. Production mutation 0; no Auth implementation change.
 
@@ -44,11 +103,11 @@ Last reviewed: 2026-09-21
 - Full 513 PASS / 1 existing skip; analyze, Android debug/iOS simulator builds PASS.
   360×640/2× MY raster checked. [Root cause and core UI audit](core-app-improvements.md#my-configured-state-and-core-mobile-audit--2026-09-21).
 - OAuth/session code unchanged. iOS disconnected Debug home-screen relaunch warning
-  is not a restore failure; profile/release physical session E2E remains NOT VERIFIED.
+  is not a restore failure; Owner iPhone Profile session restore is PASS.
 - Existing Owner iOS native configuration edits preserved outside this change.
   No Production mutation or push. Policy release gate and audit P2 follow-ups remain.
 
-## 2026-09-21 App Auth/native/shared-account — CODE READY / APP PRODUCTION E2E PENDING
+## 2026-09-21 App Auth/native/shared-account — CODE READY / SOCIAL + IDENTITY E2E PENDING
 
 - Google native Android/iOS and Apple native iOS ID-token exchange now use the
   existing Supabase session/events. Kakao and Android Apple keep browser PKCE;
@@ -57,8 +116,9 @@ Last reviewed: 2026-09-21
   buttons; shared 52px minimum geometry, responsive scaling, global UI busy guard.
   Direct login → Home; protected login → original route without automatic save.
 - Owner-reported LAB Web Auth (Email/verification/recovery/Google/Kakao/Apple/
-  session) PASS on 2026-09-21 is preserved. App provider/device E2E and App↔LAB
-  user-ID equality remain NOT VERIFIED; shared account is not shared session.
+  session) PASS on 2026-09-21 is preserved. App Email login/session restore PASS;
+  Google/Kakao/Apple App E2E and App↔LAB user-ID equality remain NOT VERIFIED.
+  Shared account is not shared session.
 - Debug opt-in Owner checker performs GET-only identity comparison, outputs only
   match status, clears input and is absent in profile/release. No UUIDs recorded.
 - Full **508 PASS / 1 existing skip**, new native/shared tests **7 PASS**, iOS
@@ -66,12 +126,12 @@ Last reviewed: 2026-09-21
   simulator keyboard/social/recovery renders reviewed; no observed overflow.
   Android debug/iOS simulator builds PASS; credential/diff checks PASS.
 - Owner gates: real client IDs/signing/provisioning, Google/Kakao/Apple E2E,
-  identity match, physical restore/isolation; custom provider label/typography
+  identity match, physical A/B isolation; custom provider label/typography
   brand review. Apple revoke/secret renewal and Google secret rotation OPEN.
 - Acceptance now tracks Code → Console → Device → Shared identity independently.
-  Next Owner stage: Email App E2E, then Google, Kakao, Apple, identity, restore,
-  isolation; each stage passes before moving on. UI Foundation Complete; no further
-  polish in this phase. App physical restore/isolation remain NOT VERIFIED.
+  Email App login and session restore are PASS. Next Owner stage: Apple Native Login
+  on iPhone, Apple shared identity, Google, Kakao, Email identity, then A/B isolation.
+  UI Foundation Complete; no repetitive polish in this phase.
 - Deletion deployment/flag/Play URL, final App-reviewed policy/support URLs and
   operational credential gates remain open. Cross-provider linking is deferred;
   shared identity acceptance is required before Analytics implementation.
@@ -721,7 +781,11 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
 
 ## Day 10-B — Home Polish v2
 
-- Implemented KST-based today/tomorrow meal display with 17:00 dinner and
+Historical implementation snapshot; the meal policy and Owner evidence below have
+been superseded by the [2026-09-21 checkpoint](#2026-09-21-end-of-day-canonical-checkpoint)
+and [current meal contract](day-10-b-home-polish.md#owner-profile-follow-up--2026-09-21).
+
+- Originally implemented KST-based today/tomorrow meal display with 17:00 dinner and
   tomorrow priority, boundary/resume refresh, and no empty tomorrow section.
 - Home recent updates and recent views are now bounded to six records, show two
   by default, and independently expand/collapse to six. Full Materials/MY
@@ -753,6 +817,9 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
   roadmap](roadmap-essay-lab.md).
 
 ## Day 10-A — Flutter 3.47.3 official toolchain migration — COMPLETE
+
+Historical toolchain milestone; current canonical SDK/helper and deferred native
+migration decisions are documented in [flutter-toolchain.md](flutter-toolchain.md).
 
 - Official repository baseline is now Flutter **3.47.3** / Dart **3.13.3** from
   `/Users/woojinchang/development/flutter-3.47`. The original
@@ -788,9 +855,9 @@ app-wide UI/UX polish. Essay Lab remains on its existing roadmap.
   Publication rollback was not executed. The older D1 package note saying
   publication was not executed is historical and superseded by this section.
 
-## Backlog / TODO recorded during Day 10-A
+## Backlog / TODO recorded during Day 10-A (historical snapshot)
 
-- Home Meal Card v2: today/tomorrow data, the 17:00 KST dinner boundary,
+- Home Meal Card v2 (superseded): today/tomorrow data, the 17:00 KST dinner boundary,
   conditional lunch/dinner rows, date-boundary refresh, and independent
   expand/collapse behavior.
 - Home recent updates and recent views: show two by default, expand to at most

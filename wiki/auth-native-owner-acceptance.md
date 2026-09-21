@@ -8,13 +8,15 @@ LAB repository/console configuration was not changed or independently inspected.
 
 ## Owner iPhone Profile evidence — 2026-09-21
 
-EMAIL_AUTH_APP_PRODUCTION_E2E: PASS (Owner report).
-APP_SESSION_RESTORE: PASS (Owner profile terminate/relaunch report).
-MY school/grade configured value DEVICE E2E: PASS.
-These supersede earlier pending entries for these checks only. Signup/recovery
-edge cases not separately reported here; Google/Kakao/Apple App E2E, App/LAB shared
-identity and A/B isolation remain unverified. Next provider stage: Google, one at a
-time. Latest meal/Settings UI changes require their own Owner recheck.
+`EMAIL_AUTH_APP_PRODUCTION_E2E: PASS`; existing LAB email/password login returned
+to Home and authenticated MY. `APP_SESSION_RESTORE: PASS` after terminating and
+relaunching the iPhone Profile build. Configured school and grade actual-value
+checks PASS. Latest meal progression and MY Settings UX also passed on Owner iPhone.
+The earlier iOS Debug relaunch message (“In iOS 14+, debug mode Flutter apps can
+only be launched…”) is a Flutter Debug tooling limitation, not a session failure.
+Signup/recovery edge cases were not separately reported. Google/Kakao/Apple App
+E2E, actual App/LAB `auth.users.id` equality, and A/B owner isolation remain
+unverified. Next provider stage: Apple Native Login on iPhone.
 
 ## Implemented paths
 
@@ -198,25 +200,23 @@ UI polish; revisit in a final UI/UX pass after functional acceptance.
 
 | App provider | Code ready | Console ready | Device E2E | Shared identity E2E |
 |---|---|---|---|---|
-| Email | YES | App signup/recovery redirects/policy not fully verified | PASS (Owner login) | NOT VERIFIED |
+| Email | YES | App signup/recovery redirects/policy not fully verified | PASS (Owner login + session restore) | NOT VERIFIED |
 | Google | YES | NOT VERIFIED for native clients | NOT VERIFIED | NOT VERIFIED |
 | Kakao browser/deep-link | YES | NOT VERIFIED for App return/consent | NOT VERIFIED | NOT VERIFIED |
 | Apple native iOS / browser Android | YES | NOT VERIFIED for device signing/audiences | NOT VERIFIED | NOT VERIFIED |
 
-Proceed one stage at a time: **Email → Google → Kakao → Apple → App/LAB identity
-comparison → session restore → A/B isolation**. Record a provider PASS before
-starting the next provider. Diagnose a failure within that provider; do not change
-all consoles together. Local SDK/mock tests do not close any Device E2E gate.
-Same-provider/same-account identity comparisons may be recorded after each login;
-close the overall shared-identity gate only after all four pairs are checked.
+Proceed one stage at a time: **Apple Native Login on iPhone → Apple LAB/App identity
+comparison → Google App login/identity → Kakao App login/identity → Email LAB/App
+identity comparison → A/B isolation**. App Email login and restore already PASS;
+the actual Email identity comparison does not. Record each provider outcome before
+starting the next. Diagnose a failure within that provider; do not change all
+consoles together. Local SDK/mock tests do not close any Device E2E gate. Close
+overall Shared Identity only after all four provider pairs are checked.
 
-First Owner action: on the intended physical device, open App login and use an
-existing LAB **email/password** account. Enter credentials only in the App.
-Confirm return to Home and authenticated MY; report platform and PASS/FAIL plus
-safe visible error text only. Do not send passwords, tokens or user IDs. This
-initial login check alone does not close signup/verification/recovery acceptance;
-continue those Email checks above before moving to Google. No new console change
-is needed merely to try an existing email/password login.
+First Owner action: on iPhone, use **Apple Native Login**, then confirm the same
+Apple identity in LAB and App with the debug-only comparison procedure above.
+Never send passwords, tokens or user IDs. No console change is implied by this
+sequence; preserve existing working LAB configuration.
 
 Identity evidence comes from Dashboard Authentication → Users → user detail →
 Identities and the debug-only comparison tool above. Same email is insufficient.

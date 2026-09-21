@@ -1831,3 +1831,17 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   policies/logout/deletion. Auth and canonical school/grade implementations retained.
 - Full 545 PASS / 1 existing skip; new focused 31 PASS, analyze/builds and raster
   checks PASS. Owner iOS edits preserved. New UX physical recheck pending; no push.
+
+## 2026-09-21 — Owner EOD wiki checkpoint
+
+- Reconciled current status with today's implementation commits and Owner iPhone
+  Profile results: Email App login/session restore, configured MY school/grade,
+  time-aware meal UX, Home LAB banner removal and MY Settings all recorded at the
+  evidence level reported. LAB/App `auth.users.id` comparison remains unverified.
+- Canonical toolchain is Flutter 3.47.5 stable / Dart 3.13.4 via `./tool/flutterw`;
+  latest automated suite is 545 PASS / 1 existing skip. Superseded 3.47.3 and meal
+  17:00 claims remain only as historical context where clearly labeled.
+- Preserved release gates OPEN and set next Owner sequence to Apple Native Login →
+  shared identity → Google → Kakao → Email identity → A/B isolation. Updated Auth,
+  meal, platform-boundary and toolchain references. Documentation only; no runtime,
+  DB, console, native configuration or production changes; no push.

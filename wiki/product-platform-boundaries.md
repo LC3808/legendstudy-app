@@ -28,7 +28,9 @@ The native App must not become a WebView wrapper.
 
 App Home/MY open the public LAB root externally. App and LAB target the same
 canonical Supabase identity; Owner reports LAB Web Auth PASS (2026-09-21), while
-App↔LAB identity equality still needs [Owner acceptance](auth-native-owner-acceptance.md).
+App Email login and session restore also passed Owner iPhone Profile E2E. Actual
+App↔LAB `auth.users.id` equality remains unverified and is tracked in
+[Owner acceptance](auth-native-owner-acceptance.md).
 Session handoff, record sync and payment are not implemented or implied. LAB is a separate repository.
 The current app entry still uses essay-oriented introductory copy; this is a
 known future copy/IA alignment item, not the canonical definition of LAB.

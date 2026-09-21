@@ -41,7 +41,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `roadmap-essay-lab.md` — Essay service-module research-first roadmap
 - `day-10-b-home-polish.md` — Home meal and expandable recent sections
 
-- [Day 10-A Flutter 3.47.3 official toolchain migration — COMPLETE](current-status.md#day-10-a--flutter-3473-official-toolchain-migration--complete)
+- [Current canonical checkpoint: Flutter 3.47.5 / Dart 3.13.4 and Owner E2E](current-status.md#2026-09-21-end-of-day-canonical-checkpoint)
 
 ## Canonical-source rule
 

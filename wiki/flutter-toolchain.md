@@ -85,10 +85,10 @@ the app directory and finish all cache operations before starting project comman
 
 MY school/grade root cause and P0/P1/P2 audit remain in
 [Core App improvements](core-app-improvements.md#my-configured-state-and-core-mobile-audit--2026-09-21).
-Debug home-screen relaunch warning is not session failure. Profile/release Owner
-restore E2E remains NOT VERIFIED. Physical iPhone was not connected (only iPhone
-16 Pro simulator listed), so no fabricated device ID. Exact profile command using
-verified external config path is in README; choose the connected physical iPhone.
+At this toolchain task's close, physical Profile acceptance had not yet been
+reported. Owner subsequently confirmed App session restore PASS on iPhone Profile;
+the disconnected Debug home-screen relaunch warning is a tooling constraint, not
+a restore failure. See the current checkpoint for latest acceptance status.
 
 Sources: [Flutter 3.47.5](https://github.com/flutter/flutter/releases/tag/3.47.5),
 [upstream patch notes](https://github.com/flutter/flutter/blob/3.47.5/CHANGELOG.md),
