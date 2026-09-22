@@ -77,7 +77,12 @@ class SupabaseOAuthService implements OAuthService {
       return await _client.auth.signInWithOAuth(
         provider,
         redirectTo: oauthCallbackUrl,
-        scopes: provider == OAuthProvider.kakao ? 'account_email' : null,
+        // `scopes` appends to the Auth server's Kakao defaults (including
+        // profile scopes). Singular OAuth `scope` replaces the final parameter
+        // via the SDK's official queryParams passthrough. Keep email only.
+        queryParams: provider == OAuthProvider.kakao
+            ? const {'scope': 'account_email'}
+            : null,
       );
     } catch (error) {
       // Native SDK errors are diagnosed before mapping in DeviceIdentityProvider.

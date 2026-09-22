@@ -1,12 +1,79 @@
 # App Native Auth and Shared Account — Owner Acceptance
 
-Reviewed 2026-09-21. **CODE/LOCAL EVIDENCE ≠ PRODUCTION E2E.**
+Reviewed 2026-09-22. **CODE/LOCAL EVIDENCE ≠ PRODUCTION E2E.**
 Owner reports LAB email signup/verification/login/logout, recovery,
 Google/Kakao/Apple OAuth and header/session lifecycle PASS on 2026-09-21.
 This is Web-only evidence, not App native or cross-platform identity evidence.
 LAB repository/console configuration was not changed or independently inspected.
 
-## Apple failure diagnosis — 2026-09-22 (current)
+## Kakao KOE205 scope correction — 2026-09-22 (current)
+
+Owner now reports **Apple and Google App Production E2E PASS**; preserve these
+results alongside Email/session restore PASS. This supersedes earlier Apple-blocked
+and Google-pending statements below. No new shared-identity comparison or platform-
+specific expansion is inferred. Their code/configuration was not changed here.
+Kakao App Production E2E remains **NOT VERIFIED** after the correction.
+
+Owner inspected the actual Kakao authorization scope:
+`account_email profile_image profile_nickname account_email`.
+Kakao consent has account_email required, nickname/image disabled. Requesting those
+disabled profile scopes causes the reported KOE205. Do not enable them to compensate.
+
+### Actual source trace and correction
+
+- Locked client: **supabase_flutter 2.15.4 / gotrue 2.25.0**, inspected installed
+  source, not an assumption based on latest docs. SupabaseAuth.signInWithOAuth
+  forwards scopes/queryParams to getOAuthSignInUrl. GoTrueClient._getUrlForProvider
+  serializes `scopes` and merges queryParams; it has **no Kakao default-scope list**.
+- Defaults come from the **Supabase Auth server** NewKakaoProvider: account_email,
+  profile_image, profile_nickname. It appends comma-separated `scopes` without
+  deduplication. Thus the App's extra account_email produces the observed duplicate.
+- Corrected only Kakao's call to the official SDK API:
+  `queryParams: {'scope': 'account_email'}`; omit the additive `scopes` argument.
+  Singular `scope` is the provider OAuth parameter, not the GoTrue additive option.
+- Auth GetExternalProviderRedirectURL removes `scopes`/provider and passes remaining
+  allowed query parameters through oauth2.SetAuthURLParam. `scope` is not in its
+  reserved parameter list. oauth2.Config.AuthCodeURL sets default scopes first,
+  then applies options using url.Values.Set, replacing that value rather than adding.
+  State, redirect/callback, PKCE and browser launch remain SDK/server managed.
+- Built-in OAuthProviderConfiguration has no Kakao scope/default-scope field;
+  NewKakaoProvider hardcodes this list. No supported built-in provider configuration
+  override was found in the inspected source. Custom OAuth/OIDC configuration is
+  a different facility and was not introduced. No Dashboard mutation is required
+  by this per-request SDK change.
+
+Server source inspected at revision
+`64cfdf22e15278eb7f4e7be541156e1cf94f4431`:
+[defaults](https://github.com/supabase/auth/blob/64cfdf22e15278eb7f4e7be541156e1cf94f4431/internal/api/provider/kakao.go),
+[query forwarding](https://github.com/supabase/auth/blob/64cfdf22e15278eb7f4e7be541156e1cf94f4431/internal/api/external.go),
+[reserved parameters](https://github.com/supabase/auth/blob/64cfdf22e15278eb7f4e7be541156e1cf94f4431/internal/api/custom_oauth_admin.go),
+[provider configuration](https://github.com/supabase/auth/blob/64cfdf22e15278eb7f4e7be541156e1cf94f4431/internal/conf/configuration.go).
+[Official Flutter API](https://supabase.com/docs/reference/dart/auth-signinwithoauth)
+and [Go OAuth2 option ordering](https://github.com/golang/oauth2/blob/master/oauth2.go).
+Hosted Production Auth revision was not queried; the inspected upstream source
+explains Owner's observed URL but is not claimed to be an identified deployed SHA.
+
+### Evidence boundary and Owner action
+
+Local validation: focused Kakao/native 13 PASS; full 558 PASS/1 existing skip;
+analyze, Android debug/iOS simulator builds, secret/diff checks PASS.
+
+Tests invoke the actual App SupabaseOAuthService → installed Flutter/GoTrue SDK →
+intercepted url_launcher platform boundary. They verify /auth/v1/authorize carries
+one `scope=account_email`, no `scopes`, no nickname/image, preserved redirect and
+PKCE; Android Apple has no Kakao override. These are **real SDK URL-generation seam
+tests, not a live Kakao redirect or successful login**. Production was not contacted.
+
+Owner: rebuild using existing local configuration, retry Kakao, and inspect only
+the final Kakao `scope` value. Expected: exactly account_email, once. Confirm App
+return/session separately. Do not paste the full authorization URL (it may carry
+state/challenges or identifiers). If hosted Auth does not honor singular scope,
+stop and report to Supabase support with sanitized scope evidence; seek a supported
+server correction rather than enabling extra consent, inventing custom OAuth or
+switching to Kakao Native SDK in this task. LAB repository and provider policy remain
+unchanged. Apple revoke/renewal and Google rotation gates stay OPEN.
+
+## Apple failure diagnosis — 2026-09-22 (historical; Owner now reports PASS)
 
 Owner's new iPhone `enjoi your life :)`, iOS 26.4.2, launches Profile successfully.
 With APPLE_OAUTH_ENABLED=true the Apple button appears, but the attempt ends in

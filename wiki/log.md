@@ -1866,3 +1866,16 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   scan and diff check PASS. 360/428px 1×/2× raster reviewed; Home route/tabs preserved.
   New physical compact/inline check remains Owner action; prior Email/restore/MY/
   meal-policy acceptance preserved. Owner iOS edits retained; Production mutation 0.
+
+## 2026-09-22 — Kakao KOE205 email-only scope correction
+
+- Owner final authorization URL proved disabled profile scopes and duplicate email.
+  Locked Flutter/GoTrue source forwards scopes unchanged; Auth server Kakao defaults
+  append the extra email. Official queryParams singular scope now overrides to email
+  only. No consent expansion, native SDK migration or provider configuration change.
+- Added actual SDK browser URL seam tests on both platform service paths, including
+  PKCE/callback and Android Apple non-regression. Focused 13 PASS, full 558/1 skip,
+  analyze and Android/iOS builds PASS; secret/diff checks PASS.
+- Owner Apple/Google App Production E2E PASS supersedes older pending/block records;
+  Email/session and native edits preserved. Kakao final hosted redirect/login still
+  requires Owner acceptance. Production mutation 0; no push.

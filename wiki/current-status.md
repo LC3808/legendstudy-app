@@ -2,6 +2,23 @@
 
 Last reviewed: 2026-09-22
 
+## 2026-09-22 Kakao scope correction / Owner Auth update
+
+- Owner reports **Apple and Google App Production E2E PASS**. These supersede
+  earlier Apple-blocked/Google-pending records below; Email/session restore PASS
+  retained. Shared identity and operational release gates are not newly closed.
+- Owner's final Kakao URL included disabled nickname/image scopes and duplicate
+  account_email, causing KOE205. Source trace: server hardcoded defaults plus
+  additive `scopes`; Flutter SDK itself adds no Kakao defaults.
+- Kakao alone now uses official SDK `queryParams: {'scope': 'account_email'}`.
+  Consent stays email-only; no provider console/native SDK/custom OAuth change.
+  [Source evidence and Owner recheck](auth-native-owner-acceptance.md#kakao-koe205-scope-correction--2026-09-22-current).
+- Full **558 PASS / 1 existing skip**; analyze, Android debug/iOS simulator builds,
+  secret signature scan and diff check PASS. Owner iOS edits preserved.
+- URL-generation seam passes on iOS/Android, retaining PKCE/callback and excluding
+  profile scopes/duplicate email. Hosted final redirect and Kakao App E2E remain
+  **NOT VERIFIED**; Owner retry required. Production mutation 0; no push.
+
 ## 2026-09-22 Home compact cards and inline meals — local verification complete
 
 - D-Day/Study/Meal share 4px vertical card padding (was 8), 6px card gaps (was 8)
@@ -23,7 +40,7 @@ Last reviewed: 2026-09-22
   content titles remain outside scope. No new physical-device or Apple E2E claim.
   Existing Owner iOS configuration changes preserved; Production mutation 0.
 
-## 2026-09-22 Apple native failure — diagnosis required
+## 2026-09-22 Apple native failure — historical diagnosis (Owner now reports PASS)
 
 - Owner iPhone Profile Apple attempt ends in generic failure. **App Apple E2E is
   BLOCKED / DIAGNOSIS REQUIRED**; actual failure stage/root cause not yet known.
