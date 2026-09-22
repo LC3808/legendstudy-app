@@ -77,6 +77,13 @@ class SupabaseOAuthService implements OAuthService {
       return await _client.auth.signInWithOAuth(
         provider,
         redirectTo: oauthCallbackUrl,
+        // iOS platformDefault presents SFSafariViewController. That sheet is
+        // not dismissed by Supabase's signedIn event, hiding authenticated Home.
+        // Let the browser hand the custom scheme back to the app without a sheet.
+        authScreenLaunchMode:
+            provider == OAuthProvider.kakao && platform == TargetPlatform.iOS
+            ? LaunchMode.externalApplication
+            : LaunchMode.platformDefault,
         // `scopes` appends to the Auth server's Kakao defaults (including
         // profile scopes). Singular OAuth `scope` replaces the final parameter
         // via the SDK's official queryParams passthrough. Keep email only.

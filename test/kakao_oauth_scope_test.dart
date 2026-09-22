@@ -13,11 +13,13 @@ void main() {
       'Kakao SDK browser URL uses email-only override on $platform',
       () async {
         final urls = <Uri>[];
+        final safariViews = <bool>[];
         const channel = MethodChannel('plugins.flutter.io/url_launcher');
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
             .setMockMethodCallHandler(channel, (call) async {
               if (call.method == 'launch') {
                 urls.add(Uri.parse((call.arguments as Map)['url'] as String));
+                safariViews.add((call.arguments as Map)['useSafariVC'] as bool);
               }
               return true;
             });
@@ -43,6 +45,7 @@ void main() {
           platform: platform,
         );
         expect(await service.startSignIn(OAuthProvider.kakao), isTrue);
+        expect(safariViews.single, platform != TargetPlatform.iOS);
         final url = urls.single;
         expect(url.path, '/auth/v1/authorize');
         expect(url.queryParameters['provider'], 'kakao');
@@ -60,6 +63,7 @@ void main() {
         if (platform == TargetPlatform.android) {
           expect(await service.startSignIn(OAuthProvider.apple), isTrue);
           expect(urls.last.queryParameters['provider'], 'apple');
+          expect(safariViews.last, isTrue);
           expect(urls.last.queryParameters.containsKey('scope'), isFalse);
           expect(urls.last.queryParameters.containsKey('scopes'), isFalse);
         }

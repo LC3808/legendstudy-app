@@ -1879,3 +1879,15 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Owner Apple/Google App Production E2E PASS supersedes older pending/block records;
   Email/session and native edits preserved. Kakao final hosted redirect/login still
   requires Owner acceptance. Production mutation 0; no push.
+
+## 2026-09-22 — Kakao iOS browser presentation handoff
+
+- Owner Kakao authorization/scope/exchange/session PASS; Safari X required to reveal
+  authenticated App. Traced iOS platformDefault to Safari view controller without
+  auth-success dismissal. Kakao iOS alone now launches externalApplication.
+- Built plist app/Google schemes verified; Owner native edits unchanged. Simulator
+  direct links resolve to OS Open prompt; post-confirmation completion not verified.
+  app_links/UIScene warning not assumed causal. Diagnostic/Owner procedure recorded.
+- Full 558/1 skip, analyze and Android/iOS builds PASS, secret/diff checks PASS.
+  Owner Apple/Google shared identity PASS preserved; Kakao final device handoff still
+  pending. No Production/config mutation, dependency change or push.

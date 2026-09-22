@@ -6,7 +6,98 @@ Google/Kakao/Apple OAuth and header/session lifecycle PASS on 2026-09-21.
 This is Web-only evidence, not App native or cross-platform identity evidence.
 LAB repository/console configuration was not changed or independently inspected.
 
-## Kakao KOE205 scope correction — 2026-09-22 (current)
+## Kakao iOS browser handoff — 2026-09-22 (current)
+
+Owner reports Kakao authorization, email-only scope, Supabase callback/exchange and
+session creation **PASS**. After manually closing browser X, App is authenticated.
+Scope/consent/redirect allow-list therefore remain unchanged. Kakao automatic iOS
+handoff is **BLOCKED pending corrected Profile acceptance**; overall E2E NOT VERIFIED.
+Owner also confirms **APPLE_LAB_APP_SHARED_IDENTITY: PASS** and
+**GOOGLE_LAB_APP_SHARED_IDENTITY: PASS** in addition to their App login PASS.
+Email/session restore PASS retained; no inferred Kakao/Email identity result.
+
+### Failure layer and minimal correction
+
+Inspected locked supabase_flutter 2.15.4, app_links 6.4.1, url_launcher_ios 6.4.2.
+The App omitted authScreenLaunchMode, so Supabase passed platformDefault to
+url_launcher. For HTTPS, iOS URLLauncherIOS.launchUrl selects inApp=true and
+presents **SFSafariViewController**, not ASWebAuthenticationSession.
+URLLaunchSession closes on its user-finish callback or explicit close call.
+Supabase _onAuthStateChange persists sessions; it does not close this browser.
+App AuthPage signedIn handling returns Home/protected destination underneath it.
+Thus a received callback/session and a browser still covering Home can coexist.
+This source-confirmed missing browser-dismiss integration explains the reported
+X-to-reveal-authenticated-App symptom. No evidence of a broken scope/exchange or
+missing scheme; the exact physical callback timing was not independently captured.
+
+Minimal correction: **Kakao + iOS only** uses the SDK's
+`authScreenLaunchMode: LaunchMode.externalApplication`. The system browser hands
+back the existing custom scheme; no in-app Safari sheet remains to require X.
+This does not close a system Safari tab, suppress OS consent prompts, implement
+custom OAuth, or claim a native Kakao SDK. Android mode and native Apple/Google,
+Email, recovery and scope=account_email remain unchanged. Owner must confirm the
+complete handoff on the actual Profile device; local launch-mode tests do not prove it.
+[Official launch-mode behavior](https://pub.dev/packages/url_launcher#browser-vs-in-app-handling).
+
+### Native registration and lifecycle audit
+
+- Source CFBundleURLTypes contains com.legendstudy.app and the existing Google
+  build-setting placeholder in one schemes array. Both hosts use the same scheme;
+  host is not a CFBundleURLSchemes registration unit. No evidence requires splitting
+  dictionaries. Info.plist/project.pbxproj were byte-preserved, not staged.
+- Auth.local.xcconfig exists with GOOGLE_REVERSED_CLIENT_ID. The **final built**
+  build/ios/iphonesimulator/Runner.app/Info.plist has exactly one app custom scheme,
+  one expanded reversed Google scheme and no unresolved placeholder. Values from
+  local configuration are not printed or copied into documentation.
+- Final built plist retains UIApplicationSceneManifest/FlutterSceneDelegate,
+  single scene. AppDelegate registers plugins via didInitializeImplicitFlutterEngine.
+- app_links 6.4.1 uses legacy application(open:options:) → handleLink → initial/stream
+  events. Supabase consumes uriLinkStream and exchanges recognized callback params;
+  GoRouter does not perform token exchange. Bare callback URIs contain no code/token
+  and are not a complete authentication/recovery test.
+- app_links and UIScene participate in transport, but the deprecation warning alone
+  does not establish this failure. Owner's successful session already establishes a
+  functioning callback path for that attempt. No speculative plugin upgrade or scene
+  rewrite. Future cold/warm device coverage remains required.
+  [Flutter lifecycle guidance](https://docs.flutter.dev/release/breaking-changes/uiscenedelegate).
+
+### Direct-open diagnostic procedure and actual limits
+
+After building/installing on a **booted** simulator, with no live credentials:
+
+```sh
+xcrun simctl openurl booted 'com.legendstudy.app://login-callback'
+xcrun simctl openurl booted 'com.legendstudy.app://auth-recovery'
+```
+
+Run each separately; accept the expected iOS Open confirmation and check the App
+comes forward. Repeat after terminating the App (cold) and while it is already
+running/backgrounded (warm). For a physical device use the installed Profile build
+and tap each token-free link from a local test document; verify the same behavior.
+Bare recovery URL only tests transport, not password reset; do not add real tokens
+or codes to shell history/test documents. Full recovery email cold/warm E2E is separate.
+
+Actual local attempt: iPhone 17 Pro simulator iOS 26.5, final simulator build installed.
+login-callback from stopped state and auth-recovery after explicit App launch both
+returned simctl success and showed the **LegendStudy+ Open confirmation**. Screenshots
+/private/tmp/ls-login-cold.png and /private/tmp/ls-recovery-open.png were reviewed.
+Registration/OS resolution is verified, **post-confirmation direct-open completion is
+NOT VERIFIED**. Computer-use could not bind Simulator (Invalid app), so the dialog
+was not clicked; no cold/warm app_links or physical Profile PASS is inferred.
+
+If direct links cannot resolve, investigate installed plist/registration. If they
+resolve/open but OAuth fails, inspect browser dismissal and callback transport/events
+separately; an authenticated App hidden behind Safari is not missing session creation.
+Owner next: new Profile build → Kakao → confirm automatic App foreground, Home/MY
+without closing X. Preserve OS-required confirmation behavior; record actual outcome.
+
+Validation: full **558 PASS / 1 existing skip**, analyze, iOS simulator/Android debug
+builds PASS. SDK launcher seam now checks iOS useSafariVC=false and unchanged Android
+mode/Apple browser behavior, scope and PKCE. Existing callback-host registration,
+signedIn→Home, recovery separation and native Auth regressions PASS. Secret/diff scan
+PASS. No Production request/mutation, console/allow-list edit or new dependency.
+
+## Kakao KOE205 scope correction — 2026-09-22 (scope now Owner-verified)
 
 Owner now reports **Apple and Google App Production E2E PASS**; preserve these
 results alongside Email/session restore PASS. This supersedes earlier Apple-blocked

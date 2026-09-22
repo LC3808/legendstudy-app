@@ -2,6 +2,27 @@
 
 Last reviewed: 2026-09-22
 
+## 2026-09-22 Kakao iOS browser handoff — fix ready, device acceptance pending
+
+- Owner: Kakao authorization/email-only scope/Supabase exchange/session creation
+  PASS; browser X reveals authenticated App. Overall Kakao App E2E remains NOT
+  VERIFIED until automatic handoff passes. Existing scope/consent/allow-list unchanged.
+- Source trace identifies iOS platformDefault HTTPS as SFSafariViewController, with
+  no auth-success dismissal integration. Kakao iOS alone now uses official SDK
+  externalApplication; no sheet remains over Home. Actual new device result pending.
+- Built plist custom/Google schemes expanded correctly. Existing Owner Info.plist/
+  project.pbxproj edits byte-preserved. app_links 6.4.1/UIScene warning not treated
+  as proof of failure; no native configuration or plugin change.
+- Simulator token-free direct links resolve to LegendStudy+ OS Open confirmation;
+  completion beyond confirmation NOT VERIFIED (Simulator UI binding unavailable).
+  [Source audit, diagnostic procedure and evidence limits](auth-native-owner-acceptance.md#kakao-ios-browser-handoff--2026-09-22-current).
+- Full 558 PASS/1 existing skip; analyze, iOS simulator/Android debug builds and
+  secret/diff checks PASS. Email/Apple/Google/recovery regressions retained.
+- Owner Apple and Google **LAB/App shared identity PASS** now recorded alongside
+  their Production login PASS; Email/session restore PASS preserved. Apple revoke/
+  renewal, Google rotation and other independent release gates remain OPEN.
+  Production mutation 0; no push.
+
 ## 2026-09-22 Kakao scope correction / Owner Auth update
 
 - Owner reports **Apple and Google App Production E2E PASS**. These supersede
