@@ -174,23 +174,35 @@ void main() {
             child: child!,
           ),
           home: Scaffold(
-            body: MealSummary(
-              now: at(19),
-              meals: [m('20260921', '석식')],
-              tomorrowMeals: tomorrow,
+            body: SingleChildScrollView(
+              child: MealSummary(
+                now: at(19),
+                meals: [m('20260921', '석식')],
+                tomorrowMeals: tomorrow,
+              ),
             ),
           ),
         ),
       );
+      final semantics = t.ensureSemantics();
+
+      expect(find.bySemanticsLabel(RegExp('급식 상세 펼치기')), findsOneWidget);
       expect(find.textContaining('조식'), findsNothing);
       await t.tap(find.text('내일 중식'));
       await t.pumpAndSettle();
+      expect(find.bySemanticsLabel(RegExp('급식 상세 접기')), findsOneWidget);
+      expect(find.byType(BackButton), findsNothing);
       expect(find.text('조식'), findsOneWidget);
       expect(find.text('중식'), findsOneWidget);
       expect(find.text('석식'), findsOneWidget);
       await t.tap(find.text('9월 21일 급식 보기'));
       await t.pumpAndSettle();
       expect(find.text('20260921 석식 메뉴'), findsOneWidget);
+      await t.tap(find.text('오늘 급식'));
+      await t.pumpAndSettle();
+      expect(find.text('내일 중식'), findsOneWidget);
+      expect(find.text('20260921 석식 메뉴'), findsNothing);
+      semantics.dispose();
       expect(t.takeException(), isNull);
     },
   );

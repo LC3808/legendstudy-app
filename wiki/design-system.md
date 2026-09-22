@@ -189,3 +189,11 @@ No database write/persistence is implemented pending a separate storage approval
   height verified. Analyze PASS, all 95 Flutter tests PASS, diff check PASS.
 - UI only; session storage, calendar rules and pending DB approval remain unchanged.
   Platform builds not repeated for this typography-only change. No push/PR/merge.
+
+## Home compact cards — 2026-09-22
+
+DailyUtilityCard alone uses homeCardBorder #C8C3BB and shared vertical padding 4px;
+Home daily-card gaps 6px. Existing neutral/warm palette, typography and >=48px
+interactive targets remain. Optional header action reserves no space when absent.
+Global content/search cardBorder remains #DCDCDC. Scaled content grows naturally;
+inline meal expands in the Home scroll, with expanded semantics and chevron state.

@@ -2,6 +2,27 @@
 
 Last reviewed: 2026-09-22
 
+## 2026-09-22 Home compact cards and inline meals — local verification complete
+
+- D-Day/Study/Meal share 4px vertical card padding (was 8), 6px card gaps (was 8)
+  and a clearer warm-neutral border. Content-driven height and minimum 48px
+  actions retained. Configured school has no Home setup CTA, including semantics;
+  only resolved unset school offers setup. MY school/grade behavior unchanged.
+- Meal tap expands/collapses **inside Home**, with chevron and expanded semantics.
+  Selected day's actual breakfast/lunch/dinner and today/tomorrow switch are inline;
+  collapsed preview remains two lines and excludes breakfast. Unused imperative
+  detail page removed after verifying no other references/deep-link route.
+- Pure KST 14/19/midnight selection, raw queries, resume/revisit refresh unchanged.
+  Prior Owner meal-policy PASS is preserved; **new compact/inline device review
+  remains Owner action**. Bottom tabs and Home route remain during expansion.
+- Full **556 PASS / 1 existing skip**; analyze, Android debug/iOS simulator builds,
+  credential signature/log inspection and diff checks PASS. 360×640/428×926,
+  1×/2× actual Flutter raster reviewed, including long menus and scroll to last
+  meal. Four new Home route/render tests; 18 final Home/Study render tests PASS.
+- No new P0/P1 found in this scoped render review. Prior P2 filter semantics/long
+  content titles remain outside scope. No new physical-device or Apple E2E claim.
+  Existing Owner iOS configuration changes preserved; Production mutation 0.
+
 ## 2026-09-22 Apple native failure — diagnosis required
 
 - Owner iPhone Profile Apple attempt ends in generic failure. **App Apple E2E is

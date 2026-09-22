@@ -22,9 +22,9 @@ class HomePage extends ConsumerWidget {
     children: [
       const AppHeader(title: '레전드스터디+', branded: true),
       const DayTargetCard(),
-      const SizedBox(height: 8),
+      const SizedBox(height: AppTokens.homeCardGap),
       _HomeStudyCard(),
-      const SizedBox(height: 8),
+      const SizedBox(height: AppTokens.homeCardGap),
       const HomeMealCard(),
       const SizedBox(height: 16),
       const _HomeSection(

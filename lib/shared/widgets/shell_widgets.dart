@@ -196,7 +196,7 @@ class ErrorState extends StatelessWidget {
 class DailyUtilityCard extends StatelessWidget {
   const DailyUtilityCard({
     required this.title,
-    required this.action,
+    this.action,
     required this.body,
     this.heading,
     this.wrapHeader = false,
@@ -206,13 +206,14 @@ class DailyUtilityCard extends StatelessWidget {
   final String title;
   final bool wrapHeader;
   final Widget? heading;
-  final Widget action, body;
+  final Widget? action;
+  final Widget body;
   final Color? accentColor;
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       color: AppTokens.surfaceWarm,
-      border: Border.all(color: AppTokens.cardBorder),
+      border: Border.all(color: AppTokens.homeCardBorder),
       borderRadius: BorderRadius.circular(AppTokens.cardRadius),
     ),
     child: ClipRRect(
@@ -220,14 +221,24 @@ class DailyUtilityCard extends StatelessWidget {
       child: CustomPaint(
         painter: accentColor == null ? null : _AccentBarPainter(accentColor!),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(accentColor == null ? 16 : 13, 8, 16, 8),
+          padding: EdgeInsets.fromLTRB(
+            accentColor == null ? 16 : 13,
+            AppTokens.homeCardVerticalPadding,
+            16,
+            AppTokens.homeCardVerticalPadding,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LayoutBuilder(
-                builder: (context, constraints) =>
-                    wrapHeader &&
-                        MediaQuery.textScalerOf(context).scale(1) >= 1.5
+                builder: (context, constraints) => action == null
+                    ? heading ??
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )
+                    : wrapHeader &&
+                          MediaQuery.textScalerOf(context).scale(1) >= 1.5
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -238,7 +249,7 @@ class DailyUtilityCard extends StatelessWidget {
                               ),
                           Align(
                             alignment: Alignment.centerRight,
-                            child: action,
+                            child: action!,
                           ),
                         ],
                       )
@@ -259,7 +270,7 @@ class DailyUtilityCard extends StatelessWidget {
                             constraints: BoxConstraints(
                               maxWidth: constraints.maxWidth * .45,
                             ),
-                            child: action,
+                            child: action!,
                           ),
                         ],
                       ),

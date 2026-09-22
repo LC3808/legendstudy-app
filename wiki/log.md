@@ -1855,3 +1855,14 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Recorded reproduction and preserved Web/native identifier distinction, existing
   Email/restore/MY acceptance and Owner iOS edits. Apple E2E BLOCKED pending safe
   Owner reproduction; no Production mutation or push.
+
+## 2026-09-22 — Home compact cards / inline meal details
+
+- Reduced shared daily-card vertical padding/gaps and strengthened warm-neutral
+  border. Configured school setup CTA/semantics removed; unset CTA retained.
+- Replaced sole Home meal detail-page navigation with inline expand/collapse,
+  selected-day breakfast/lunch/dinner and date switch. KST policy/refresh unchanged.
+- Full 556 PASS/1 existing skip; analyze, Android debug/iOS simulator builds, secret
+  scan and diff check PASS. 360/428px 1×/2× raster reviewed; Home route/tabs preserved.
+  New physical compact/inline check remains Owner action; prior Email/restore/MY/
+  meal-policy acceptance preserved. Owner iOS edits retained; Production mutation 0.

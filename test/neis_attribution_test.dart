@@ -90,26 +90,18 @@ void main() {
             ),
             findsOneWidget,
           );
-          final settings = tester.getRect(
-            find.widgetWithText(TextButton, '학교 설정'),
-          );
-          expect(settings.width, greaterThanOrEqualTo(48));
-          expect(settings.height, greaterThanOrEqualTo(48));
-          final row = find
-              .ancestor(
-                of: find.widgetWithText(TextButton, '학교 설정'),
-                matching: find.byType(scale == 1.0 ? Row : Column),
-              )
-              .first;
-          expect(
-            find.descendant(
-              of: row,
-              matching: find.text(
-                state == 'none' ? '우리 학교 · 오늘 급식' : schoolA.name,
-              ),
-            ),
-            findsOneWidget,
-          );
+          if (state == 'none') {
+            final settings = tester.getRect(
+              find.widgetWithText(TextButton, '학교 설정'),
+            );
+            expect(settings.width, greaterThanOrEqualTo(48));
+            expect(settings.height, greaterThanOrEqualTo(48));
+          } else {
+            final semantics = tester.ensureSemantics();
+            expect(find.text('학교 설정'), findsNothing);
+            expect(find.bySemanticsLabel('학교 설정'), findsNothing);
+            semantics.dispose();
+          }
           expect(find.byType(NeisAttribution), findsNothing);
           expect(find.textContaining('NEIS'), findsNothing);
           expect(tester.takeException(), isNull);

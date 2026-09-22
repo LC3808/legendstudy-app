@@ -69,3 +69,14 @@ data was invented.
 - `git diff --check`: pass.
 
 No Production mutation or Day 11 feedback draft deployment was performed.
+
+## Owner compact follow-up — 2026-09-22
+
+Daily cards share homeCardVerticalPadding=4, homeCardGap=6 and homeCardBorder=#C8C3BB.
+Unrelated card borders remain unchanged. No fixed card heights; action touch targets
+remain >=48px. Configured meal school header has no redundant setup action or empty
+reserved action row; unset-school setup and MY school change remain available.
+Meal label/date/preview is one compact tap area; inline expansion and date switching
+replace Home detail navigation. See current [meal interaction](day-10-b-home-polish.md#home-inline-follow-up--2026-09-22).
+Full 556/1, analyze and Android/iOS builds PASS; 360/428px 1×/2× Flutter raster reviewed.
+New iPhone compact/inline review remains Owner action; no Auth/provider UX redesign.

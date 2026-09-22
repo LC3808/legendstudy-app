@@ -193,10 +193,6 @@ void main() {
                   child: DailyUtilityCard(
                     wrapHeader: true,
                     title: '레전드스터디국제과학인문융합고등학교',
-                    action: TextButton(
-                      onPressed: () {},
-                      child: const Text('학교 설정'),
-                    ),
                     body: MealSummary(
                       meals: meals,
                       now: DateTime.utc(2026, 9, 14, 3),
@@ -224,8 +220,10 @@ void main() {
           await tester.ensureVisible(
             find.text(meals.last.menuItems.join('\n')),
           );
+          await tester.pumpAndSettle();
           await capture(tester, 'meal-bottom-$dinner-$tag');
-          await tester.pageBack();
+          await tester.ensureVisible(find.text('오늘 급식'));
+          await tester.tap(find.text('오늘 급식'));
           await tester.pumpAndSettle();
           expect(find.text('오늘 중식'), findsOneWidget);
         });

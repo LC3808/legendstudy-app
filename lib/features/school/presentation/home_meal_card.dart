@@ -130,21 +130,23 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
     return DailyUtilityCard(
       wrapHeader: true,
       title: title,
-      action: TextButton(
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-        ),
-        onPressed: () => context.push('/my/school'),
-        child: const Text('학교 설정'),
-      ),
+      action: !school.isLoading && !school.hasError && school.value == null
+          ? TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+              ),
+              onPressed: () => context.push('/my/school'),
+              child: const Text('학교 설정'),
+            )
+          : null,
       accentColor: AppTokens.homeMealAccent,
       body: body,
     );
   }
 }
 
-/// One time-selected Home meal; full menus live on a date-specific detail page.
-class MealSummary extends StatelessWidget {
+/// Time-selected preview and full dated menus stay inside the Home scroll.
+class MealSummary extends StatefulWidget {
   const MealSummary({
     super.key,
     required this.meals,
@@ -153,117 +155,103 @@ class MealSummary extends StatelessWidget {
   });
   final List<Meal> meals, tomorrowMeals;
   final DateTime now;
+  @override
+  State<MealSummary> createState() => _MealSummaryState();
+}
 
+class _MealSummaryState extends State<MealSummary> {
+  bool expanded = false;
+  bool? selectedTomorrow;
   @override
   Widget build(BuildContext context) {
     final plan = mealDisplayPlan(
-      now: now,
-      today: meals,
-      tomorrow: tomorrowMeals,
+      now: widget.now,
+      today: widget.meals,
+      tomorrow: widget.tomorrowMeals,
     );
-    final date = koreanDateOffset(now, plan.primaryIsTomorrow ? 1 : 0);
-    final label =
-        '${plan.primaryIsTomorrow ? '내일' : '오늘'} ${plan.isEmpty ? '급식' : plan.primary.first.mealType}';
-    return Semantics(
-      button: true,
-      label: '$label 전체 급식 보기',
-      child: InkWell(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (_) => MealDetailsPage(
-              today: meals,
-              tomorrow: tomorrowMeals,
-              todayDate: koreanDate(now),
-              tomorrowDate: koreanDateOffset(now, 1),
-              initiallyTomorrow: plan.primaryIsTomorrow,
-            ),
-          ),
-        ),
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: 48),
-                child: Row(
+    final tomorrow = expanded
+        ? selectedTomorrow ?? plan.primaryIsTomorrow
+        : plan.primaryIsTomorrow;
+    final date = koreanDateOffset(widget.now, tomorrow ? 1 : 0);
+    final label = expanded
+        ? '${tomorrow ? '내일' : '오늘'} 급식'
+        : '${tomorrow ? '내일' : '오늘'} ${plan.isEmpty ? '급식' : plan.primary.first.mealType}';
+    final meals = tomorrow ? widget.tomorrowMeals : widget.meals;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Semantics(
+          button: true,
+          expanded: expanded,
+          label: expanded ? '급식 상세 접기' : '급식 상세 펼치기',
+          child: InkWell(
+            onTap: () => setState(() {
+              expanded = !expanded;
+              if (expanded) selectedTomorrow = plan.primaryIsTomorrow;
+            }),
+            borderRadius: BorderRadius.circular(8),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 48),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Expanded(
-                      child: Text(
-                        label,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            label,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                        Icon(expanded ? Icons.expand_less : Icons.expand_more),
+                      ],
                     ),
-                    const Icon(Icons.chevron_right),
+                    Text(mealDateLabel(date)),
+                    if (!expanded) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        plan.isEmpty
+                            ? '등록된 중식·석식 정보가 없어요.'
+                            : plan.primary.first.menuItems.join(' · '),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ],
                 ),
               ),
-              Text(mealDateLabel(date)),
-              const SizedBox(height: 8),
-              Text(
-                plan.isEmpty
-                    ? '등록된 중식·석식 정보가 없어요.'
-                    : plan.primary.first.menuItems.join(' · '),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        if (expanded) ...[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: () => setState(() => selectedTomorrow = !tomorrow),
+              child: Text(
+                '${mealDateLabel(koreanDateOffset(widget.now, tomorrow ? 0 : 1))} 급식 보기',
+              ),
+            ),
+          ),
+          if (meals.isEmpty) const Text('등록된 급식 정보가 없어요.'),
+          for (final type in ['조식', '중식', '석식'])
+            for (final meal in meals.where((m) => m.mealType == type)) ...[
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 4),
+                child: Text(
+                  type,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              Text(meal.menuItems.join('\n')),
+            ],
+        ],
+      ],
     );
   }
 }
 
 String mealDateLabel(String date) =>
     '${int.parse(date.substring(4, 6))}월 ${int.parse(date.substring(6, 8))}일';
-
-class MealDetailsPage extends StatefulWidget {
-  const MealDetailsPage({
-    super.key,
-    required this.today,
-    required this.tomorrow,
-    required this.todayDate,
-    required this.tomorrowDate,
-    required this.initiallyTomorrow,
-  });
-  final List<Meal> today, tomorrow;
-  final String todayDate, tomorrowDate;
-  final bool initiallyTomorrow;
-  @override
-  State<MealDetailsPage> createState() => _MealDetailsPageState();
-}
-
-class _MealDetailsPageState extends State<MealDetailsPage> {
-  late bool tomorrow = widget.initiallyTomorrow;
-  @override
-  Widget build(BuildContext context) {
-    final meals = tomorrow ? widget.tomorrow : widget.today;
-    return Scaffold(
-      appBar: AppBar(title: const Text('급식 상세')),
-      body: SafeArea(
-        child: ShellPage(
-          children: [
-            Text(
-              mealDateLabel(tomorrow ? widget.tomorrowDate : widget.todayDate),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            TextButton(
-              onPressed: () => setState(() => tomorrow = !tomorrow),
-              child: Text(
-                '${mealDateLabel(tomorrow ? widget.todayDate : widget.tomorrowDate)} 급식 보기',
-              ),
-            ),
-            if (meals.isEmpty) const Text('등록된 급식 정보가 없어요.'),
-            for (final type in ['조식', '중식', '석식'])
-              for (final meal in meals.where((m) => m.mealType == type)) ...[
-                SectionHeader(type),
-                Text(meal.menuItems.join('\n')),
-              ],
-          ],
-        ),
-      ),
-    );
-  }
-}

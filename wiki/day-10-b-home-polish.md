@@ -3,7 +3,10 @@
 Status: original Day 10 evidence below is historical. Current meal policy and
 Owner acceptance follow-up are recorded at the end of this document.
 
-Current meal contract and device acceptance: see [2026-09-21 Owner Profile
+Current interaction: Home inline expansion (2026-09-22 below) supersedes the
+2026-09-21 standalone detail navigation. Meal time policy is unchanged.
+
+Meal policy and previous device acceptance: see [2026-09-21 Owner Profile
 follow-up](#owner-profile-follow-up--2026-09-21). The original 17:00 policy below
 is retained as historical evidence only.
 
@@ -112,3 +115,34 @@ Owner subsequently confirmed the updated meal Home/detail experience on iPhone:
 LAB itself remains available through MY. MY Settings gear/IA was also checked on
 iPhone: `MY_SETTINGS_DEVICE_E2E: PASS`. These UX checks do not close any release
 gate for deletion, policies or store submission.
+
+## Home inline follow-up — 2026-09-22
+
+Owner requests Home expansion rather than a new detail route. MealSummary now owns
+only ephemeral expanded/date-selection state; canonical school/raw meal providers
+and pure time selection remain unchanged. Tapping preview opens actual meals of
+that date in-place. Chevron/header tap collapses; date action switches today/tomorrow
+inside expanded content. Re-expansion starts at the current policy-selected date.
+Breakfast remains excluded from preview but available expanded; absent types produce
+no section, empty day has explicit copy. Boundary/school identity key resets the
+summary so stale selected-date UI does not outlive clock changes.
+
+Removed MealDetailsPage only after lib/test search confirmed Home was its only
+caller and there was no registered/deep-link route. Home route and navigation tabs
+remain. Configured school loses setup button/semantics; loading/error do not flash
+an unset-school action. Resolved unset still exposes a >=48px setup CTA.
+
+Shared DailyUtilityCard now allows absent action without a reserved action row.
+Vertical padding 8→4, Home daily-card gaps 8→6, warm border #C8C3BB; global content
+card border unchanged. Meal heading/date/preview form one >=48px tap area, eliminating
+the former padded 48px label row plus separate date spacing. Menus remain scrollable
+and untruncated when expanded. No fixed height or text-scale clamp.
+
+Evidence: full 556 PASS/1 existing skip; analyze, Android debug/iOS simulator builds,
+secret signature/log inspection and diff check PASS. Four full-Home route/tab tests
+at 360×640/428×926 and 1×/2×; existing meal matrix/boundary/cache, loading/error and
+Settings tests retained. Long meal raster reviewed including last menu; Home raster
+shows stronger borders, compact heading gap and retained tabs. Examples generated
+under build/polish and /private/tmp/legendstudy-core-ui (ignored/local only).
+No actual new iPhone render/Apple login was run. Owner to review compact cards and
+inline interaction on the new Profile device; earlier meal policy device PASS remains.
