@@ -1,6 +1,17 @@
 # Current Status
 
-Last reviewed: 2026-09-21
+Last reviewed: 2026-09-22
+
+## 2026-09-22 Apple native failure — diagnosis required
+
+- Owner iPhone Profile Apple attempt ends in generic failure. **App Apple E2E is
+  BLOCKED / DIAGNOSIS REQUIRED**; actual failure stage/root cause not yet known.
+- Added opt-in, non-Release, allowlisted Apple stage diagnostics and 7 native tests
+  (native suite 11 PASS). No speculative Auth/provider/signing fix. Existing Owner
+  native edits preserved. [Owner reproduction and interpretation](auth-native-owner-acceptance.md#apple-failure-diagnosis--2026-09-22-current).
+- Email App/session restore/MY school/grade device PASS and LAB Web Apple PASS remain
+  valid. Apple/shared identity E2E and operational gates remain open. Production
+  mutation 0; no push.
 
 ## 2026-09-21 End-of-day canonical checkpoint
 

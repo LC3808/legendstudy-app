@@ -6,6 +6,70 @@ Google/Kakao/Apple OAuth and header/session lifecycle PASS on 2026-09-21.
 This is Web-only evidence, not App native or cross-platform identity evidence.
 LAB repository/console configuration was not changed or independently inspected.
 
+## Apple failure diagnosis — 2026-09-22 (current)
+
+Owner's new iPhone `enjoi your life :)`, iOS 26.4.2, launches Profile successfully.
+With APPLE_OAUTH_ENABLED=true the Apple button appears, but the attempt ends in
+safe generic failure copy. **App Apple E2E: BLOCKED / DIAGNOSIS REQUIRED**, not PASS.
+Actual exception/failure stage has not been supplied; root cause is NOT DETERMINED.
+Earlier code-ready judgments and LAB Apple Web PASS do not establish native success.
+
+Inspected chain: DeviceIdentityProvider.apple → email-only native credential →
+nonempty identityToken → Supabase signInWithIdToken(apple, token, raw nonce) →
+SDK saves session/emits signedIn → AuthPage returns Home or protected destination.
+A fresh 32-byte nonce is SHA-256 hashed for Apple; the original goes to Supabase.
+Authorization code is not required by this ID-token exchange and is not stored.
+Runner bundle ID is com.legendstudy.app; all configurations reference the existing
+Apple entitlement. Owner reports automatic signing, Copacabana Co., managed profile
+and capability present. This does not prove the installed binary's entitlements or
+Production provider audiences. Owner pbxproj/Info.plist edits were byte-preserved.
+
+The native SDK maps non-cancel Apple authorization errors to unexpected_failure;
+its mapped UI text differs from the reported generic fallback. That is insufficient
+to identify the failing layer: other platform and Supabase errors can fall back to
+that generic message. No nonce, signing, callback or provider workaround was made.
+Google/Kakao/Email/recovery/session behavior is unchanged.
+
+Opt-in `APPLE_AUTH_DIAGNOSTICS=true` enables only Apple stage records in Debug/Profile;
+Release always suppresses them. Default builds are silent. Records contain fixed
+stage/provider/kind and SDK-enum/allowlisted error code only. No exception message,
+response, arbitrary platform code, token, nonce, authorization code, key or UUID.
+Stages: nativeCredential, identityToken, supabaseExchange, session. A session complete
+record means SDK exchange returned a session, not a device navigation/restore proof.
+Unknown codes deliberately remain unknown; do not copy raw errors to compensate.
+
+Owner reproduction (local public config is read by Flutter, never printed):
+
+```sh
+./tool/flutterw run --profile -d 'enjoi your life :)' \
+  --dart-define-from-file=/Users/woojinchang/legendstudy-local.json \
+  --dart-define=APPLE_OAUTH_ENABLED=true \
+  --dart-define=APPLE_AUTH_DIAGNOSTICS=true
+```
+
+Run from the repository with that iPhone connected/unlocked. Attempt Apple once,
+then share **only APPLE_AUTH lines**, plus whether Home/authenticated MY appeared.
+Do not share a full device log. Remove the diagnostic define from normal builds.
+
+- nativeCredential error: investigate native authorization/signing on the installed
+  device; cancel is not a configuration failure.
+- identityToken error: credential returned without usable token.
+- supabaseExchange error: inspect the safe code and Owner's provider settings
+  read-only; code alone may not uniquely prove audience/nonce/root cause.
+- session complete but no Home: investigate event/route locally next; do not change
+  provider console settings on this evidence.
+
+[Supabase Apple documentation](https://supabase.com/docs/guides/auth/social-login/auth-apple)
+rechecked 2026-09-22: native audiences must be in Apple Client IDs; the working Web
+Services ID **com.legendstudy.lab stays first**, native **com.legendstudy.app** is
+also allowed. This is a configuration requirement, **not an observed mismatch**.
+Owner must verify before any change; no Dashboard or LAB mutation occurred.
+Revoke, secret renewal, Google rotation and shared-identity gates remain OPEN.
+
+Local native tests: 11 PASS, including nonce/hash/freshness, cancellation, missing
+ID token, actual SDK mock exchange/error/missing session/retry, duplicate and stale
+owner protection, opt-in/redaction. No actual Apple account was used.
+
 ## Owner iPhone Profile evidence — 2026-09-21
 
 `EMAIL_AUTH_APP_PRODUCTION_E2E: PASS`; existing LAB email/password login returned

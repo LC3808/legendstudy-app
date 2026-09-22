@@ -1845,3 +1845,13 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   shared identity → Google → Kakao → Email identity → A/B isolation. Updated Auth,
   meal, platform-boundary and toolchain references. Documentation only; no runtime,
   DB, console, native configuration or production changes; no push.
+
+## 2026-09-22 — Apple native safe failure diagnosis
+
+- Owner reported generic Apple failure on new iPhone Profile; stage/root cause
+  unknown. Reviewed native nonce/token → Supabase session → auth-event return.
+- Added explicit Profile/debug opt-in stage/allowlisted-code diagnostics and native
+  seam tests (11 PASS). No token/raw error/UUID output or guessed configuration fix.
+- Recorded reproduction and preserved Web/native identifier distinction, existing
+  Email/restore/MY acceptance and Owner iOS edits. Apple E2E BLOCKED pending safe
+  Owner reproduction; no Production mutation or push.

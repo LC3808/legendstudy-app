@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/config/app_config.dart';
 import 'native_auth.dart';
+import 'apple_auth_diagnostics.dart';
 
 /// Where a social provider returns after consent.
 ///
@@ -29,16 +30,21 @@ class SupabaseOAuthService implements OAuthService {
     this._client, {
     required this.native,
     required this.platform,
+    this.appleDiagnostics = const AppleAuthDiagnostics(),
   });
   final SupabaseClient _client;
   final NativeIdentityProvider native;
   final TargetPlatform platform;
+  final AppleAuthDiagnostics appleDiagnostics;
   bool _busy = false;
 
   @override
   Future<bool> startSignIn(OAuthProvider provider) async {
     if (_busy) return false;
     _busy = true;
+    final nativeApple =
+        provider == OAuthProvider.apple && platform == TargetPlatform.iOS;
+    var appleStage = AppleAuthStage.nativeCredential;
     final startingOwner = _client.auth.currentUser?.id;
     try {
       if (provider == OAuthProvider.google ||
@@ -49,17 +55,21 @@ class SupabaseOAuthService implements OAuthService {
         if (_client.auth.currentUser?.id != startingOwner) {
           throw const NativeAuthCancelled();
         }
+        appleStage = AppleAuthStage.supabaseExchange;
+        if (nativeApple) appleDiagnostics.report(appleStage);
         final response = await _client.auth.signInWithIdToken(
           provider: provider,
           idToken: identity.token,
           nonce: identity.nonce,
         );
+        appleStage = AppleAuthStage.session;
         if (response.session == null) {
           throw const AuthException(
             'Missing session',
             code: 'session_not_found',
           );
         }
+        if (nativeApple) appleDiagnostics.report(appleStage, complete: true);
         return true;
       }
       // Kakao keeps the approved browser/PKCE path; Android Apple also retains
@@ -69,6 +79,12 @@ class SupabaseOAuthService implements OAuthService {
         redirectTo: oauthCallbackUrl,
         scopes: provider == OAuthProvider.kakao ? 'account_email' : null,
       );
+    } catch (error) {
+      // Native SDK errors are diagnosed before mapping in DeviceIdentityProvider.
+      if (nativeApple && appleStage != AppleAuthStage.nativeCredential) {
+        appleDiagnostics.report(appleStage, error: error);
+      }
+      rethrow;
     } finally {
       _busy = false;
     }

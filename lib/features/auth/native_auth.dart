@@ -9,6 +9,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
+import 'apple_auth_diagnostics.dart';
 
 String _rawNonce() => base64UrlEncode(
   List<int>.generate(32, (_) => Random.secure().nextInt(256)),
@@ -31,7 +32,15 @@ abstract class NativeIdentityProvider {
 }
 
 class DeviceIdentityProvider implements NativeIdentityProvider {
-  DeviceIdentityProvider(this.config);
+  DeviceIdentityProvider(
+    this.config, {
+    this.appleCredentialRequest,
+    this.appleDiagnostics = const AppleAuthDiagnostics(),
+  });
+  // Test seam takes only the hashed challenge; the default remains Apple's SDK.
+  final Future<AuthorizationCredentialAppleID> Function(String hashedNonce)?
+  appleCredentialRequest;
+  final AppleAuthDiagnostics appleDiagnostics;
   final AppConfig config;
   // google_sign_in requires exactly one initialize per process. Its nonce is
   // initialization-scoped, not an argument to authenticate. Never reinitialize.
@@ -91,11 +100,18 @@ class DeviceIdentityProvider implements NativeIdentityProvider {
   @override
   Future<NativeIdentityToken> apple() async {
     final nonce = _rawNonce();
+    var stage = AppleAuthStage.nativeCredential;
+    appleDiagnostics.report(stage);
     try {
-      final credential = await SignInWithApple.getAppleIDCredential(
-        scopes: [AppleIDAuthorizationScopes.email],
-        nonce: sha256.convert(utf8.encode(nonce)).toString(),
-      );
+      final hash = sha256.convert(utf8.encode(nonce)).toString();
+      final credential = appleCredentialRequest != null
+          ? await appleCredentialRequest!(hash)
+          : await SignInWithApple.getAppleIDCredential(
+              scopes: [AppleIDAuthorizationScopes.email],
+              nonce: hash,
+            );
+      appleDiagnostics.report(stage, complete: true);
+      stage = AppleAuthStage.identityToken;
       final token = credential.identityToken;
       if (token == null || token.isEmpty) {
         throw const AuthException(
@@ -103,12 +119,17 @@ class DeviceIdentityProvider implements NativeIdentityProvider {
           code: 'session_not_found',
         );
       }
+      appleDiagnostics.report(stage, complete: true);
       return NativeIdentityToken(token, nonce);
     } on SignInWithAppleAuthorizationException catch (error) {
+      appleDiagnostics.report(stage, error: error);
       if (error.code == AuthorizationErrorCode.canceled) {
         throw const NativeAuthCancelled();
       }
       throw const AuthException('Unavailable', code: 'unexpected_failure');
+    } catch (error) {
+      appleDiagnostics.report(stage, error: error);
+      rethrow;
     }
   }
 }

@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:crypto/crypto.dart';
+import 'package:flutter/services.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:legendstudy_app/core/config/app_config.dart';
+import 'package:legendstudy_app/features/auth/apple_auth_diagnostics.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -32,6 +37,144 @@ class FakeIdentity extends NativeIdentityProvider {
 }
 
 void main() {
+  test('Apple fresh nonce is hashed for native and raw for exchange', () async {
+    final hashes = <String>[];
+    final provider = DeviceIdentityProvider(
+      const AppConfig(),
+      appleCredentialRequest: (hash) async {
+        hashes.add(hash);
+        return const AuthorizationCredentialAppleID(
+          authorizationCode: 'unused-fixture-code',
+          userIdentifier: null,
+          givenName: null,
+          familyName: null,
+          email: null,
+          state: null,
+          identityToken: 'fixture-token',
+        );
+      },
+    );
+    final a = await provider.apple();
+    final b = await provider.apple();
+    expect(a.token, 'fixture-token');
+    expect(a.nonce, isNot(b.nonce));
+    expect(hashes, [
+      for (final x in [a, b]) sha256.convert(utf8.encode(x.nonce!)).toString(),
+    ]);
+  });
+  for (final token in <String?>[null, '']) {
+    test('Apple rejects missing identity token ($token)', () async {
+      final lines = <String>[];
+      final provider = DeviceIdentityProvider(
+        const AppConfig(),
+        appleDiagnostics: AppleAuthDiagnostics(enabled: true, sink: lines.add),
+        appleCredentialRequest: (_) async => AuthorizationCredentialAppleID(
+          authorizationCode: 'unused-fixture-code',
+          userIdentifier: null,
+          givenName: null,
+          familyName: null,
+          email: null,
+          state: null,
+          identityToken: token,
+        ),
+      );
+      await expectLater(provider.apple(), throwsA(isA<AuthException>()));
+      expect(lines.last, contains('stage=identityToken'));
+      expect(lines.last, contains('code=session_not_found'));
+      expect(lines.join(), isNot(contains('unused-fixture-code')));
+    });
+  }
+  test('Apple SDK cancellation is safely classified before mapping', () async {
+    final lines = <String>[];
+    final provider = DeviceIdentityProvider(
+      const AppConfig(),
+      appleDiagnostics: AppleAuthDiagnostics(enabled: true, sink: lines.add),
+      appleCredentialRequest: (_) async =>
+          throw const SignInWithAppleAuthorizationException(
+            code: AuthorizationErrorCode.canceled,
+            message: 'private-fixture-description',
+          ),
+    );
+    await expectLater(provider.apple(), throwsA(isA<NativeAuthCancelled>()));
+    expect(lines.last, contains('code=canceled'));
+    expect(lines.join(), isNot(contains('private-fixture')));
+  });
+  test(
+    'Apple diagnostics are off by default and never print uncontrolled values',
+    () {
+      final lines = <String>[];
+      AppleAuthDiagnostics(sink: lines.add)
+          .report(AppleAuthStage.nativeCredential);
+      expect(lines, isEmpty);
+      final d = AppleAuthDiagnostics(enabled: true, sink: lines.add);
+      d.report(
+        AppleAuthStage.supabaseExchange,
+        error: const AuthException(
+          'private-fixture',
+          code: 'private-fixture',
+          statusCode: 'private-fixture',
+        ),
+      );
+      d.report(
+        AppleAuthStage.nativeCredential,
+        error: PlatformException(
+          code: 'private-fixture',
+          message: 'private-fixture',
+          details: 'private-fixture',
+        ),
+      );
+      expect(lines.length, 2);
+      expect(lines.join(), isNot(contains('private-fixture')));
+      expect(lines.every((s) => s.endsWith('code=unknown')), isTrue);
+    },
+  );
+  for (final missingSession in [false, true]) {
+    test(
+      'Apple exchange ${missingSession ? 'missing session' : 'error'} safe diagnostic and retry',
+      () async {
+        var requests = 0;
+        final lines = <String>[];
+        final client = SupabaseClient(
+          'https://example.test',
+          'test-only',
+          authOptions: const AuthClientOptions(autoRefreshToken: false),
+          httpClient: MockClient((r) async {
+            requests++;
+            return http.Response(
+              requests > 1
+                  ? jsonEncode(fixtureSession())
+                  : missingSession
+                  ? '{}'
+                  : jsonEncode({'code': 'bad_jwt', 'msg': 'private-fixture'}),
+              requests > 1 || missingSession ? 200 : 400,
+              headers: {'content-type': 'application/json'},
+            );
+          }),
+        );
+        addTearDown(client.dispose);
+        final service = SupabaseOAuthService(
+          client,
+          native: FakeIdentity(),
+          platform: TargetPlatform.iOS,
+          appleDiagnostics: AppleAuthDiagnostics(
+            enabled: true,
+            sink: lines.add,
+          ),
+        );
+        await expectLater(
+          service.startSignIn(OAuthProvider.apple),
+          throwsA(isA<AuthException>()),
+        );
+        expect(lines.last, contains('stage=supabaseExchange'));
+        expect(lines.join(), isNot(contains('private-fixture')));
+        expect(await service.startSignIn(OAuthProvider.apple), isTrue);
+        expect(lines.last, contains('stage=session'));
+        expect(lines.last, contains('kind=complete'));
+        expect(requests, 2);
+      },
+    );
+  }
+
   for (final provider in [OAuthProvider.google, OAuthProvider.apple]) {
     test(
       '$provider native token exchanges into SDK canonical identity',
