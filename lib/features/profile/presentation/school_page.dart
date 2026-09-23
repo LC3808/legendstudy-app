@@ -1,5 +1,8 @@
+import 'grade_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
@@ -117,6 +120,11 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
                 ),
             ],
           ),
+        ],
+        if (auth.value?.isAuthenticated == true) ...[
+          GradePage(key: ValueKey(auth.value?.userId)),
+          const Divider(),
+          const SectionHeader('학교'),
         ],
         if (_query.isNotEmpty) ...[
           const SectionHeader('검색 결과'),

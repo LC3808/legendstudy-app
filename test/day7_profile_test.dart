@@ -68,6 +68,28 @@ void main() {
     });
     expect(requests.single.url.queryParameters['on_conflict'], 'id');
   });
+  test('optional grade clear and nickname-only edits preserve other profile fields', () async {
+    await session('owner-a');
+    await repository.upsertCurrentProfile(displayName: '내닉네임', gradeLevel: 3);
+    await repository.updateSchoolSelection(
+      officeCode: 'J10',
+      schoolCode: '7530932',
+    );
+    await repository.upsertCurrentProfile(clearGrade: true);
+    expect(jsonDecode(requests.last.body), {
+      'id': 'owner-a',
+      'grade_level': null,
+    });
+    await repository.upsertCurrentProfile(displayName: '새닉네임');
+    expect(jsonDecode(requests.last.body), {
+      'id': 'owner-a',
+      'display_name': '새닉네임',
+    });
+    expect(rows['owner-a']!['neis_school_code'], '7530932');
+    expect(rows['owner-a']!['grade_level'], isNull);
+    final profile = await repository.fetchCurrentProfile();
+    expect(profile!.displayName, '새닉네임');
+  });
   test('school pair saves and fetch selects both fields', () async {
     await session('owner-a');
     await repository.updateSchoolSelection(

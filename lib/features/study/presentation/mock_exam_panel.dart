@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../application/study_controller.dart';
 import '../domain/study_models.dart';
@@ -29,6 +30,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
   final subject = TextEditingController();
   final minutes = TextEditingController(text: '80');
   String preset = '국어';
+  bool includeInStudyTotal = true;
   bool alert = false, notificationBusy = false, starting = false;
   String? error, alertMessage;
   List<ScoringPaper> papers = [];
@@ -52,6 +54,8 @@ class _MockExamPanelState extends State<MockExamPanel> {
       );
     }
     alert = setup?.notify ?? false;
+    includeInStudyTotal =
+        setup?.includeInStudyTotal ?? widget.study.includeMockDefault;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) refreshSetup();
     });
@@ -106,6 +110,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
       subject.text.trim().isEmpty ? null : subject.text.trim(),
       n * 60,
       notify: alert,
+      includeInStudyTotal: includeInStudyTotal,
     );
   }
 
@@ -184,7 +189,10 @@ class _MockExamPanelState extends State<MockExamPanel> {
           Text(result.title!, style: Theme.of(context).textTheme.titleMedium),
           Text('${seconds ~/ 60}분 ${seconds % 60}초 응시했어요.'),
           TextButton(
-            onPressed: () => study.configureMock(null),
+            onPressed: () {
+              setState(() => includeInStudyTotal = study.includeMockDefault);
+              study.configureMock(null);
+            },
             child: const Text('새 모의고사'),
           ),
         ],
@@ -194,6 +202,18 @@ class _MockExamPanelState extends State<MockExamPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('공부시간에 포함'),
+            subtitle: const Text('이번 시험에만 적용해요'),
+            value: includeInStudyTotal,
+            onChanged: starting
+                ? null
+                : (value) {
+                    setState(() => includeInStudyTotal = value);
+                    refreshSetup();
+                  },
+          ),
           if (study.scoringRepository != null)
             TextButton(
               onPressed: preparing || starting

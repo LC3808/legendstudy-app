@@ -1,3 +1,6 @@
+import 'learning_info_row.dart';
+import '../../study/study_providers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +38,41 @@ class SettingsPage extends ConsumerWidget {
             )
           else
             Text(isAuthenticated ? email ?? '로그인됨' : '로그인하지 않은 상태예요.'),
-          const SectionHeader('서비스'),
+          const SectionHeader('프로필'),
+          if (isAuthenticated)
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('닉네임'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.push('/my/edit'),
+            ),
+          const SectionHeader('학습 정보'),
+          const LearningInfoRow(),
+          Consumer(
+            builder: (context, ref, _) {
+              final study = ref.watch(studyControllerProvider);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('모의고사 응시시간을 공부시간에 포함'),
+                    subtitle: const Text('이 기기의 기본값 · 시험마다 변경할 수 있어요'),
+                    value: study.includeMockDefault,
+                    onChanged: study.ready && !study.preferenceBusy
+                        ? study.setIncludeMockDefault
+                        : null,
+                  ),
+                  if (study.preferenceError != null)
+                    Semantics(
+                      liveRegion: true,
+                      child: Text(study.preferenceError!),
+                    ),
+                ],
+              );
+            },
+          ),
+          const SectionHeader('서비스 정보'),
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('문의·건의사항'),
@@ -122,6 +159,28 @@ class _LogoutButtonState extends ConsumerState<_LogoutButton> {
       error = null;
     });
     try {
+      final owner = ref.read(authStateProvider).value?.userId;
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('로그아웃하시겠습니까?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('로그아웃'),
+            ),
+          ],
+        ),
+      );
+      if (!mounted ||
+          confirmed != true ||
+          ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
       await action();
       // SDK auth event changes this page to Guest and invalidates owner providers.
     } catch (_) {

@@ -6,13 +6,13 @@ import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 
 void main() {
-  testWidgets('boots and navigates through all four destinations', (
+  testWidgets('boots and navigates through all five destinations', (
     tester,
   ) async {
     await tester.pumpWidget(const ProviderScope(child: LegendStudyApp()));
     await tester.pumpAndSettle();
     expect(find.text('D-DAY'), findsOneWidget);
-    expect(find.byType(NavigationDestination), findsNWidgets(4));
+    expect(find.byType(NavigationDestination), findsNWidgets(5));
 
     await tester.ensureVisible(find.byTooltip('자료 검색'));
     await tester.tap(find.byTooltip('자료 검색'));
@@ -25,7 +25,8 @@ void main() {
 
     for (final entry in {
       '학습': '00:00:00',
-      'MY': '나의 학습 공간',
+      'LAB': 'LAB 살펴보기',
+      'MY': '학교·학년',
       '홈': 'D-DAY',
     }.entries) {
       await tester.tap(find.text(entry.key));
@@ -51,7 +52,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(
       tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
-      3,
+      4,
     );
     router.go('/missing');
     await tester.pumpAndSettle();
@@ -72,7 +73,7 @@ void main() {
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await tester.pumpWidget(const ProviderScope(child: LegendStudyApp()));
     await tester.pumpAndSettle();
-    for (final label in ['자료', '학습', 'MY', '홈']) {
+    for (final label in ['자료', '학습', 'LAB', 'MY', '홈']) {
       await tester.tap(find.text(label));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);

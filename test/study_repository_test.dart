@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -56,38 +57,80 @@ void main() {
   });
   tearDown(() => client.dispose());
   test(
-    'narrow immutable POST and confirmation preserve request identity through switch',
+    'excluded mock payload/readback and missing migration fail safely',
     () async {
-      final requests = <http.Request>[];
-      final r = record('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa');
+      final now = DateTime.utc(2026, 9, 23).millisecondsSinceEpoch;
+      final r = StudyRecord(
+        id: 'mock',
+        startedMs: now,
+        endedMs: now + 120000,
+        segments: [const ActiveSegment(0, 120000)],
+        mode: 'mock_exam',
+        title: '시험',
+        plannedSeconds: 4800,
+        includeInStudyTotal: false,
+      );
       final transport = MockClient((req) async {
-        requests.add(req);
+        if (req.method == 'POST') {
+          expect(jsonDecode(req.body)['include_in_study_total'], false);
+        }
         return http.Response(
           jsonEncode([row(r)]),
           req.method == 'POST' ? 201 : 200,
+          headers: {'content-type': 'application/json; charset=utf-8'},
         );
       });
-      final repo = SupabaseStudyRepository.bind(client, config, transport);
-      await login(client, '22222222-2222-4222-8222-222222222222', 'offline-b');
-      await repo.insertCompleted(r);
-      expect(jsonDecode(requests.first.body), r.payload());
-      expect(jsonDecode(requests.first.body).keys, isNot(contains('user_id')));
-      expect(
-        jsonDecode(requests.first.body).keys,
-        isNot(contains('duration_seconds')),
+      await SupabaseStudyRepository.bind(
+        client,
+        config,
+        transport,
+      ).insertCompleted(r);
+      final restored = await SupabaseStudyRepository.bind(
+        client,
+        config,
+        transport,
+      ).fetchWindow(now);
+      expect(restored.single.includeInStudyTotal, false);
+      expect(restored.single.activeMs, 120000);
+      final old = MockClient(
+        (_) async => http.Response('{"code":"PGRST204"}', 400),
       );
-      expect(
-        requests.every((r) => r.url.path == '/rest/v1/study_sessions'),
-        isTrue,
+      await expectLater(
+        SupabaseStudyRepository.bind(client, config, old).insertCompleted(r),
+        throwsA(isA<StudyStorageError>()),
       );
-      expect(
-        requests.every((r) => r.headers['Authorization'] == 'Bearer offline-a'),
-        isTrue,
-      );
-      expect(requests.first.headers['Prefer'], contains('ignore-duplicates'));
-      expect(requests.every((r) => r.method != 'PATCH'), isTrue);
     },
   );
+  test('narrow immutable POST and confirmation preserve request identity through switch', () async {
+    final requests = <http.Request>[];
+    final r = record('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa');
+    final transport = MockClient((req) async {
+      requests.add(req);
+      return http.Response(
+        jsonEncode([row(r)]),
+        req.method == 'POST' ? 201 : 200,
+      );
+    });
+    final repo = SupabaseStudyRepository.bind(client, config, transport);
+    await login(client, '22222222-2222-4222-8222-222222222222', 'offline-b');
+    await repo.insertCompleted(r);
+    expect(jsonDecode(requests.first.body), r.payload());
+    expect(jsonDecode(requests.first.body).keys, isNot(contains('user_id')));
+    expect(
+      jsonDecode(requests.first.body).keys,
+      isNot(contains('duration_seconds')),
+    );
+    expect(
+      requests.every((r) => r.url.path == '/rest/v1/study_sessions'),
+      isTrue,
+    );
+    expect(
+      requests.every((r) => r.headers['Authorization'] == 'Bearer offline-a'),
+      isTrue,
+    );
+    expect(requests.first.headers['Prefer'], contains('ignore-duplicates'));
+    expect(requests.every((r) => r.method != 'PATCH'), isTrue);
+  });
   test(
     'duplicate retry verifies whole row and mismatch is not success',
     () async {

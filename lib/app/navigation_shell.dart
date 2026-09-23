@@ -29,6 +29,11 @@ class NavigationShell extends StatelessWidget {
           label: '학습',
         ),
         NavigationDestination(
+          icon: Icon(Icons.insights_outlined),
+          selectedIcon: Icon(Icons.insights),
+          label: 'LAB',
+        ),
+        NavigationDestination(
           icon: Icon(Icons.person_outline),
           selectedIcon: Icon(Icons.person),
           label: 'MY',

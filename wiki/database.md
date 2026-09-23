@@ -608,3 +608,40 @@ public fields. Counted out-of-range pages return 416/PGRST103; a separate offset
 limit 0 count handles the cross-stream boundary. Subject+kind joins use the exact
 resources_subject_same_content FK. Existing policies/indexes and column grants
 remain unchanged; see [search contract](day-9-search-explore.md).
+
+## 2026-09-23 study inclusion additive migration — NOT APPLIED
+
+20260923000100_study_total_inclusion.sql adds study_sessions.include_in_study_total
+BOOLEAN NOT NULL DEFAULT TRUE; legacy records/totals remain included. CHECK requires
+ordinary study rows to stay included; mock rows may opt out. Only authenticated
+INSERT column grant is extended; owner SELECT/INSERT/DELETE RLS, auth.uid default,
+immutable records, foreign keys and scoring RPC remain unchanged. No new profile
+schema/RLS: display_name is optional own nickname; grade clear uses existing NULL.
+
+Owner action before release: review/apply migration in the correct LegendStudy
+project, then inspect with SELECT-only checks below. No automatic deployment.
+
+```sql
+select column_name, data_type, is_nullable, column_default
+from information_schema.columns
+where table_schema='public' and table_name='study_sessions'
+and column_name='include_in_study_total';
+select conname, pg_get_constraintdef(oid)
+from pg_constraint where conrelid='public.study_sessions'::regclass
+and conname='study_sessions_timer_included';
+select has_column_privilege('authenticated','public.study_sessions',
+'include_in_study_total','INSERT') as can_insert_choice;
+select policyname, cmd, qual, with_check from pg_policies
+where schemaname='public' and tablename='study_sessions';
+select count(*) filter (where include_in_study_total is null) as invalid_nulls,
+count(*) filter (where mode='study' and not include_in_study_total) as invalid_timer
+from public.study_sessions;
+```
+
+Then Owner A/B acceptance: included/excluded completed mock, restore from server on
+another device, retry idempotency, B cannot read/delete A, unchanged scoring link.
+Until applied: SELECT * decodes legacy missing flag as true; true POST omits new
+field; false POST retains flag and fails to pending-sync rather than losing choice.
+Default preference remains local per-owner, not a profiles column. No production
+catalogue/query was accessed during implementation. Rollback requires client rollback
+and assessment of excluded rows; dropping the column loses choices, not raw exam time.

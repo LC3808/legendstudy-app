@@ -509,3 +509,15 @@ remain pending; Day8-B/C and overall Day8 are not declared COMPLETE.
 uninterrupted exam timer with server anchor/reconciliation and an extended atomic
 attempt envelope. Existing Study/Mock pause and monotonic recovery contracts
 here remain implemented and unchanged. New requirements are not runtime PASS.
+
+## 2026-09-23 inclusion policy and IA
+
+The previous all-mode union now includes all study records and only mock records
+whose include_in_study_total is true (missing legacy flag means true). The same
+filter applies to a live draft. Raw duration/mode/segments never change or disappear
+when excluded. KST union still avoids overlapping-device double counting; no
+independent Home/MY calculation. Timer alone renders seven-day history; Mock renders
+exam/scoring history. Owner-scoped local default ON, Settings toggle, setup override
+for this exam, draft/record restore and immutable server flag after Owner migration.
+No repeated start modal. Existing one-active-draft guard retained. Preferences do
+not sync cross-device; per-record flags do. See database deployment gate.

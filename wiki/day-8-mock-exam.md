@@ -365,3 +365,14 @@ These are physical iOS results and supersede earlier blanket pending statements
 for those exact checks. Focus guidance, reboot, Android physical and remaining gates
 stay pending. New UI scope and separate presentation evidence:
 [Study/Home polish](study-home-ui-polish.md). No change to timer/scoring contracts.
+
+## 2026-09-23 UX responsibility and inclusion
+
+Mock tab no longer repeats study totals/seven-day history. Existing D2 answer entry,
+D3 server grade/result/review/history are retained. Timer-only setup remains valid
+when no published scoring paper exists. Setup includes a per-exam study-total switch,
+initialized from owner-scoped device preference (default ON); it does not rewrite
+that preference. Draft carries the choice through pause/kill/restore/timeUp/end;
+completed raw duration is always stored for non-discarded exams. Cloud exclusion
+requires Owner migration 20260923000100. No fabricated analysis results/CTA: actual
+advanced LAB data linkage and manual score entry remain future scope.

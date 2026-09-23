@@ -46,10 +46,11 @@ profile mode. No physical device was connected at this audit, so no device ID is
 invented. The existing external config path was verified without printing its
 contents; provider enablement/E2E is not inferred from its existence. Xcode Owner
 signing remains intact. Disconnected Debug home-screen relaunch restrictions do
-not test session restore; profile/release terminate/relaunch E2E remains pending.
+not test session restore; Owner iPhone Profile session restore E2E has since passed; new UI acceptance is separate.
 
-The app opens 홈 / 자료 / 학습 / MY. Home and Materials consume public Supabase
-content; Study is idle UI and MY owns saved/school/recent shells. Read
+The app opens 홈 / 자료 / 학습 / LAB / MY. Materials remain guest-accessible;
+Study supports timers and mock exam scoring; LAB opens the existing Web service;
+MY holds the user profile, learning information and saved/recent materials. Read
 [UI/UX v1.1](wiki/ui-ux-v1.md) before UI implementation.
 Public reads require no login. Local configuration for backend access:
 

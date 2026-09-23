@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
+
 import '../domain/study_models.dart';
 import '../scoring/scoring_models.dart';
 import '../scoring/scoring_repository.dart';
@@ -80,6 +82,38 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     mockSetup = setup;
     lastMock = null;
     _notify();
+  }
+
+  // Owner-scoped device preference, serialized with the existing atomic store.
+  bool includeMockDefault = true;
+  bool preferenceBusy = false;
+  String? preferenceError;
+  Future<void> setIncludeMockDefault(bool value) async {
+    if (!ready || preferenceBusy) return;
+    final epoch = _epoch, owner = _owner;
+    preferenceBusy = true;
+    preferenceError = null;
+    _notify();
+    try {
+      await _serial(() async {
+        if (epoch != _epoch) return;
+        final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
+        (copy['owners'] as Map)[owner] = {
+          ..._space(owner),
+          'include_mock_default': value,
+        };
+        await store.write(copy);
+        _doc = copy;
+        if (epoch == _epoch) includeMockDefault = value;
+      });
+    } catch (_) {
+      if (epoch == _epoch) preferenceError = '학습 설정을 저장하지 못했어요. 다시 시도해 주세요.';
+    } finally {
+      if (epoch == _epoch) {
+        preferenceBusy = false;
+        _notify();
+      }
+    }
   }
 
   List<StudyRecord> records = [];
@@ -185,6 +219,9 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
       _identity = user;
       _owner = user ?? 'guest';
       ready = false;
+      includeMockDefault = true;
+      preferenceBusy = false;
+      preferenceError = null;
       records = [];
       draft = null;
       offset = 0;
@@ -270,6 +307,8 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
             if (e != _epoch) return;
             nowMs = now.utcMs;
             records = _local(_owner);
+            includeMockDefault =
+                _space(_owner)['include_mock_default'] != false;
             attempts = _scores(_owner);
             final raw = _space(_owner)['draft'];
             draft = raw == null
@@ -567,9 +606,9 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
         if (e != _epoch || !_alive) return;
         await repo.insertCompleted(row);
         await _serial(() async {
-          final rows = _local(
-            owner,
-          ).map((r) => r.id == row.id ? r.acknowledged() : r).toList();
+          final rows = _local(owner)
+              .map((r) => r.id == row.id ? r.acknowledged() : r)
+              .toList();
           final raw = _space(owner)['draft'];
           await _write(
             owner,
@@ -682,9 +721,9 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
         if (e != _epoch || !_alive) return;
         await _serial(() async {
           if (e != _epoch) return;
-          final scores = _scores(
-            owner,
-          ).map((a) => a.id == updated.id ? updated : a).toList();
+          final scores = _scores(owner)
+              .map((a) => a.id == updated.id ? updated : a)
+              .toList();
           final raw = _space(owner)['draft'];
           await _write(
             owner,

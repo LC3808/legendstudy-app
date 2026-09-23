@@ -85,6 +85,7 @@ class Profiles implements ProfileRepository {
   Future<void> upsertCurrentProfile({
     String? displayName,
     int? gradeLevel,
+    bool clearGrade = false,
   }) async {}
   @override
   Future<void> updateSchoolSelection({
@@ -212,9 +213,7 @@ void main() {
           (ref) => clock ?? Stream.value('20260911'),
         ),
         tomorrowMealsProvider.overrideWith((ref) async => []),
-        koreanMealClockProvider.overrideWithValue(
-          DateTime.utc(2026, 9, 11, 3),
-        ),
+        koreanMealClockProvider.overrideWithValue(DateTime.utc(2026, 9, 11, 3)),
         mealBoundaryRefreshEnabledProvider.overrideWithValue(false),
       ],
     );
@@ -243,7 +242,7 @@ void main() {
       final c = await mount(tester, repo, profiles: profile);
       await tester.tap(find.text('학교 설정'));
       await tester.pumpAndSettle();
-      expect(find.text('학교 설정'), findsOneWidget);
+      expect(find.text('학교·학년 설정'), findsOneWidget);
       await tester.enterText(find.byType(TextField), '테스트');
       await tester.pumpAndSettle();
       expect(repo.searches, 0);

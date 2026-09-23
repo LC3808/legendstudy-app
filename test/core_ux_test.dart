@@ -50,6 +50,7 @@ class ProfileFake implements ProfileRepository {
   Future<void> upsertCurrentProfile({
     String? displayName,
     int? gradeLevel,
+    bool clearGrade = false,
   }) async {
     writes++;
     if (fail) throw StateError('offline');
@@ -157,7 +158,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         tester
-            .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '고2'))
+            .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '2학년'))
             .selected,
         isTrue,
       );
@@ -170,7 +171,7 @@ void main() {
       );
       addTearDown(profileSubscription.close);
       await profileContainer.read(currentProfileProvider.future);
-      await tester.tap(find.text('고3'));
+      await tester.tap(find.text('3학년'));
       repo.fail = true;
       await tester.tap(find.text('학년 저장'));
       await tester.pumpAndSettle();

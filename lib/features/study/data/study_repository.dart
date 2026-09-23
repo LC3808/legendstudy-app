@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../core/config/app_config.dart';
 import '../domain/study_models.dart';
 
@@ -48,8 +50,7 @@ class SupabaseStudyRepository implements StudyRepository {
   final String _token;
   final AppConfig config;
   final http.Client httpClient;
-  static const projection =
-      'id,user_id,mode,title,subject,planned_duration_seconds,started_at,ended_at,active_segments,duration_seconds,created_at';
+  static const projection = '*';
   Future<List<Map<String, dynamic>>> _request(
     String method,
     Map<String, String> query, {
@@ -126,9 +127,9 @@ class SupabaseStudyRepository implements StudyRepository {
       }
       if (rows.length < 100) break;
       // Preserve PostgreSQL microseconds in pagination, even though aggregates use ms.
-      cursorStarted = DateTime.parse(
-        rows.last['started_at'] as String,
-      ).toUtc().toIso8601String();
+      cursorStarted = DateTime.parse(rows.last['started_at'] as String)
+          .toUtc()
+          .toIso8601String();
       cursorId = result.last.id;
     }
     return result;

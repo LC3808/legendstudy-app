@@ -37,6 +37,7 @@ class PersistedProfile extends ProfileFake {
   Future<void> upsertCurrentProfile({
     String? displayName,
     int? gradeLevel,
+    bool clearGrade = false,
   }) async {
     value = UserProfile(
       id: value.id,
@@ -116,18 +117,17 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 50));
       if (mode == 'set') {
-        expect(find.text(schoolA.name), findsOneWidget);
-        expect(find.text('고등학교 3학년'), findsOneWidget);
-        expect(find.text('변경'), findsNWidgets(2));
+        expect(find.text('${schoolA.name} · 3학년'), findsOneWidget);
+        expect(find.text('변경'), findsOneWidget);
       } else if (mode == 'unset') {
         expect(find.text('학교를 설정해 주세요'), findsOneWidget);
-        expect(find.text('학년을 설정해 주세요'), findsOneWidget);
-        expect(find.text('설정'), findsNWidgets(2));
+        expect(find.text('학년을 설정해 주세요'), findsNothing);
+        expect(find.text('설정'), findsOneWidget);
       } else {
         expect(find.text('학교를 설정해 주세요'), findsNothing);
         expect(find.text('학년을 설정해 주세요'), findsNothing);
         expect(find.text('설정'), findsNothing);
-        if (mode == 'error') expect(find.text('재시도'), findsNWidgets(2));
+        if (mode == 'error') expect(find.text('재시도'), findsOneWidget);
         if (mode == 'loading') {
           expect(find.byType(LinearProgressIndicator), findsNWidgets(2));
         }

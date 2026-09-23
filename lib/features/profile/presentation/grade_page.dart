@@ -15,7 +15,7 @@ class GradePage extends ConsumerStatefulWidget {
 class _GradePageState extends ConsumerState<GradePage> {
   int? selected;
   String? owner, error;
-  bool loading = true, saving = false;
+  bool loading = true, saving = false, loadFailed = false;
   int generation = 0;
   @override
   void initState() {
@@ -39,6 +39,7 @@ class _GradePageState extends ConsumerState<GradePage> {
     final request = ++generation;
     setState(() {
       loading = true;
+      loadFailed = false;
       saving = false;
       error = null;
       selected = null;
@@ -51,7 +52,10 @@ class _GradePageState extends ConsumerState<GradePage> {
       setState(() => selected = profile?.gradeLevel);
     } catch (_) {
       if (mounted && request == generation) {
-        setState(() => error = '학년을 불러오지 못했어요. 다시 시도해 주세요.');
+        setState(() {
+          loadFailed = true;
+          error = '학년을 불러오지 못했어요. 다시 시도해 주세요.';
+        });
       }
     }
     if (mounted && request == generation) setState(() => loading = false);
@@ -59,7 +63,7 @@ class _GradePageState extends ConsumerState<GradePage> {
 
   Future<void> save() async {
     final id = ref.read(authStateProvider).value?.userId;
-    if (saving || selected == null || id == null || id != owner) return;
+    if (saving || id == null || id != owner) return;
     final request = generation;
     setState(() {
       saving = true;
@@ -68,7 +72,10 @@ class _GradePageState extends ConsumerState<GradePage> {
     try {
       await ref
           .read(profileRepositoryProvider)
-          .upsertCurrentProfile(gradeLevel: selected);
+          .upsertCurrentProfile(
+            gradeLevel: selected,
+            clearGrade: selected == null,
+          );
       if (!mounted ||
           request != generation ||
           ref.read(authStateProvider).value?.userId != id) {
@@ -107,18 +114,19 @@ class _GradePageState extends ConsumerState<GradePage> {
         ],
       );
     }
-    return ShellPage(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text('현재 학년을 선택해 주세요.'),
+        const Text('학년 (선택)'),
         if (loading)
           const CircularProgressIndicator()
         else ...[
           Wrap(
             spacing: 8,
             children: [
-              for (final grade in [1, 2, 3])
+              for (final grade in [null, 1, 2, 3])
                 ChoiceChip(
-                  label: Text('고$grade'),
+                  label: Text(grade == null ? '설정 안 함' : '$grade학년'),
                   selected: selected == grade,
                   onSelected: saving
                       ? null
@@ -134,7 +142,7 @@ class _GradePageState extends ConsumerState<GradePage> {
             ),
           ],
           FilledButton(
-            onPressed: saving || selected == null ? null : save,
+            onPressed: saving || loadFailed ? null : save,
             child: Text(saving ? '저장 중…' : '학년 저장'),
           ),
         ],

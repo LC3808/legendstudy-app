@@ -54,15 +54,24 @@ class SupabaseProfileRepository extends _PersonalRepository
   Future<void> upsertCurrentProfile({
     String? displayName,
     int? gradeLevel,
+    bool clearGrade = false,
   }) async {
     final owner = requireUser();
+    if (displayName != null &&
+        (displayName.trim() != displayName ||
+            displayName.isEmpty ||
+            displayName.runes.length > 80 ||
+            displayName.contains(RegExp(r'[\x00-\x1f\x7f]')))) {
+      throw const FormatException('Invalid nickname.');
+    }
     if (gradeLevel != null && ![1, 2, 3].contains(gradeLevel)) {
       throw const FormatException('Unsupported grade.');
     }
     await client!.from('profiles').upsert({
       'id': owner,
       if (displayName != null) 'display_name': displayName,
-      if (gradeLevel != null) 'grade_level': gradeLevel,
+      if (gradeLevel != null || clearGrade)
+        'grade_level': clearGrade ? null : gradeLevel,
     }, onConflict: 'id');
   }
 }

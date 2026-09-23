@@ -263,6 +263,14 @@ void main() {
     await tester.ensureVisible(find.text('로그아웃'));
     await tester.tap(find.text('로그아웃'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('취소'));
+    await tester.pumpAndSettle();
+    expect(calls, 0);
+    await tester.tap(find.text('로그아웃'));
+    await tester.pumpAndSettle();
+    expect(calls, 0);
+    await tester.tap(find.widgetWithText(TextButton, '로그아웃').last);
+    await tester.pumpAndSettle();
     expect(find.text('로그아웃하지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
     fail = false;
     final callback = tester
@@ -270,6 +278,10 @@ void main() {
         .onPressed!;
     callback();
     callback();
+    await tester.pump();
+    await tester.pumpAndSettle();
+    expect(calls, 1);
+    await tester.tap(find.widgetWithText(TextButton, '로그아웃').last);
     await tester.pump();
     expect(calls, 2);
     pending.complete();

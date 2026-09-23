@@ -1,5 +1,58 @@
 # Current Status
 
+## 2026-09-23 — Mobile IA / MY / Profile / Learning (current)
+
+- IMPLEMENTED: five independent tabs 홈/자료/학습/LAB/MY; LAB external-service Hub;
+  compact own nickname/default avatar; no MY email/LAB duplication; combined
+  school/optional-grade display/editor; grouped Settings and logout confirmation.
+- Reuses profiles.display_name and existing school/grade columns/RLS. No social
+  metadata import, new Profile identity, public profile query, or avatar upload.
+- Timer alone shows study summary/seven-day history; existing Mock answers/scoring/
+  grade/result/history remain implemented. No fake analysis or manual-score feature.
+- Owner-scoped device default (ON), per-exam inclusion override and draft/record
+  restore implemented. Common KST aggregate filters excluded exams without deleting
+  raw time/attempts. Default preference cross-device sync is not implemented.
+- OWNER DB ACTION REQUIRED: apply/review additive migration
+  20260923000100_study_total_inclusion.sql before release. Not applied by Codex.
+  Default included writes remain compatible; excluded uploads stay pending until
+  migration, preserving their choice. PUSH_RECOMMENDED: NO until migration/acceptance.
+- Validation: Flutter 3.47.5 stable / Dart 3.13.4; analyze PASS; full **589 PASS /
+  1 existing skip** (previous 558/1, +31 tests). Android debug/iOS simulator PASS.
+  24 render cases: MY/Settings/school/profile/LAB/mock at 360×640 and 428×926, 1×/2×;
+  selected PNGs visually reviewed, keyboard CTA accessibility tested. No overflow.
+  iPhone 17 Pro simulator launch/Home five-tab rendering verified without credentials.
+  New MOBILE_UI_OWNER_E2E: NOT VERIFIED; prior physical Auth/restore/meal/MY PASS retained.
+- SQL pglast grammar and additive grant/RLS/default/legacy-row compatibility review
+  PASS; not live DB/RLS acceptance. Secret patterns, local config/signing exclusions,
+  GitHub source-readiness audit and diff check PASS. No dedicated repository secret
+  audit executable exists; tracked-source/ignore checks were performed directly.
+- Owner iOS project/plist bytes preserved. No Auth/meal policy/provider configuration
+  change, Production mutation, dependency/SDK upgrade or push.
+- Details and ordered Owner checklist: [Core App handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23).
+
+
+## 2026-09-23 — Owner Production Auth checkpoint
+
+Owner reports App and LAB Email / Apple / Google / Kakao Production E2E PASS.
+Apple Native App + LAB shared identity PASS; Web Services ID and Native App ID
+coexist in the provider and native ID-token exchange passes. Google Native App
+and LAB/App shared identity PASS. Kakao LAB/App shared identity NOT VERIFIED:
+login success alone does not establish equal canonical auth.users.id.
+
+LAB now uses Kakao OIDC + Supabase signInWithIdToken, with OIDC ON,
+account_email required, profile_nickname/profile_image OFF. Cloudflare Pages
+Functions performs token exchange. Owner confirms Production PASS after LAB
+commit b4360b7: workerd rejected redirect:"error" before dispatch; redirect:"manual"
+plus application rejection of 3xx resolves it. This is historical LAB evidence,
+not this App repository's HEAD. No LAB code or provider settings changed here.
+
+Earlier Kakao handoff pending statements are historical and superseded by this
+Owner acceptance. Existing Email/session restore/MY school/grade device PASS
+remain valid. Apple deletion revoke / secret renewal, Google credential rotation,
+account deletion, policy and Store readiness gates remain OPEN; login acceptance
+is not Store release acceptance.
+
+
 Last reviewed: 2026-09-22
 
 ## 2026-09-22 Kakao iOS browser handoff — fix ready, device acceptance pending

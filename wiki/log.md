@@ -1891,3 +1891,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
 - Full 558/1 skip, analyze and Android/iOS builds PASS, secret/diff checks PASS.
   Owner Apple/Google shared identity PASS preserved; Kakao final device handoff still
   pending. No Production/config mutation, dependency change or push.
+
+## 2026-09-23 — Owner Auth checkpoint and Mobile IA
+
+- Owner App/LAB Email/Apple/Google/Kakao login PASS recorded; Apple/Google shared
+  identity PASS, Kakao cross-platform equality NOT VERIFIED. LAB workerd redirect
+  fix b4360b7 is a historical reference, not this repo HEAD. Release gates stay OPEN.
+- Added LAB fifth tab, compact own-profile MY, combined optional school/grade and
+  grouped Settings/logout confirmation; old paths retained. Profile schema/RLS reused.
+- Timer history separated from Mock workflow. Owner-local default and per-exam
+  study-time inclusion preserved through draft/record/cloud payload and common KST
+  aggregates; raw records never discarded for exclusion. Additive migration local
+  only; Owner application + A/B server acceptance required before release/push.
+- Full 589 PASS/1 existing skip; analyze and Android/iOS builds PASS. 24 small/large
+  viewport 1×/2× renders PASS, selected rasters inspected; iPhone simulator native
+  Home/five tabs verified. Owner new UI device E2E remains open. SQL grammar/review,
+  credential/ignore audit and diff PASS. Owner iOS edits retained byte-for-byte.
+- No Production mutation, Auth redesign, meal change, package update or push.

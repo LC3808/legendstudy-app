@@ -1,5 +1,27 @@
 # App Native Auth and Shared Account — Owner Acceptance
 
+## 2026-09-23 — Owner Production Auth checkpoint
+
+Owner reports App and LAB Email / Apple / Google / Kakao Production E2E PASS.
+Apple Native App + LAB shared identity PASS; Web Services ID and Native App ID
+coexist in the provider and native ID-token exchange passes. Google Native App
+and LAB/App shared identity PASS. Kakao LAB/App shared identity NOT VERIFIED:
+login success alone does not establish equal canonical auth.users.id.
+
+LAB now uses Kakao OIDC + Supabase signInWithIdToken, with OIDC ON,
+account_email required, profile_nickname/profile_image OFF. Cloudflare Pages
+Functions performs token exchange. Owner confirms Production PASS after LAB
+commit b4360b7: workerd rejected redirect:"error" before dispatch; redirect:"manual"
+plus application rejection of 3xx resolves it. This is historical LAB evidence,
+not this App repository's HEAD. No LAB code or provider settings changed here.
+
+Earlier Kakao handoff pending statements are historical and superseded by this
+Owner acceptance. Existing Email/session restore/MY school/grade device PASS
+remain valid. Apple deletion revoke / secret renewal, Google credential rotation,
+account deletion, policy and Store readiness gates remain OPEN; login acceptance
+is not Store release acceptance.
+
+
 Reviewed 2026-09-22. **CODE/LOCAL EVIDENCE ≠ PRODUCTION E2E.**
 Owner reports LAB email signup/verification/login/logout, recovery,
 Google/Kakao/Apple OAuth and header/session lifecycle PASS on 2026-09-21.

@@ -65,3 +65,12 @@ domain purchase or new live endpoint is authorized by this document.
 Module launches, authenticated IA and linking behavior need separate product and
 security acceptance. The priority order is maintained only in
 [product architecture](product-architecture.md#delivery-priority-and-remaining-decisions).
+
+## 2026-09-23 App IA boundary
+
+Learning owns timer/exam execution, answers/scoring/basic result. LAB tab is a native
+service hub for existing external Web entry; advanced analysis remains LAB scope.
+Future Community reuses auth-owned LegendStudy nickname/avatar; school/grade are
+private personalization until explicit policy. No social profile import, shared
+session transport, new public profile SELECT, or Community implementation here.
+LAB Web Account/logout-confirmation/mobile cleanup is a separate repository task.

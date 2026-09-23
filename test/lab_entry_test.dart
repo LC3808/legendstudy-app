@@ -11,7 +11,7 @@ import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/auth/auth_email.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/home/presentation/home_page.dart';
-import 'package:legendstudy_app/features/profile/presentation/profile_page.dart';
+import 'package:legendstudy_app/features/lab/lab_page.dart';
 import 'package:legendstudy_app/features/study/application/study_controller.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
 import 'package:legendstudy_app/shared/widgets/legendstudy_lab_entry.dart';
@@ -58,7 +58,7 @@ void main() {
     for (final authenticated in [false, true]) {
       for (final scale in [1.0, 2.0]) {
         final name =
-            'lab-${home ? 'home' : 'my'}-${authenticated ? 'account' : 'guest'}-${scale.toInt()}x';
+            'lab-${home ? 'home' : 'lab'}-${authenticated ? 'account' : 'guest'}-${scale.toInt()}x';
         testWidgets('$name 360x640 accessible external entry', (tester) async {
           if (nativeCapture == null) {
             tester.view.physicalSize = const Size(360, 640);
@@ -92,7 +92,7 @@ void main() {
                 }),
               ],
               child: preview.app(
-                home ? const HomePage() : const ProfilePage(),
+                home ? const HomePage() : const LabPage(),
                 scale: scale,
               ),
             ),
@@ -116,7 +116,7 @@ void main() {
           await tester.tap(find.text('LAB 살펴보기'));
           await tester.pumpAndSettle();
           expect(opened.map((u) => u.toString()), [legendStudyLabUrl]);
-          expect(find.byType(home ? HomePage : ProfilePage), findsOneWidget);
+          expect(find.byType(home ? HomePage : LabPage), findsOneWidget);
           expect(tester.takeException(), isNull);
           await tester.pumpWidget(const SizedBox());
         });

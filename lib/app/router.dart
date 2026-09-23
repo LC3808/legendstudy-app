@@ -1,3 +1,6 @@
+import '../features/lab/lab_page.dart';
+import '../features/profile/presentation/profile_edit_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +11,6 @@ import '../features/saved/presentation/saved_page.dart';
 import '../features/saved/presentation/recent_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/profile/presentation/settings_page.dart';
-import '../features/profile/presentation/grade_page.dart';
 import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
 import '../features/study/presentation/study_page.dart';
@@ -106,9 +108,24 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
+                path: '/lab',
+                builder: (context, state) => const LabPage(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
                 path: '/my',
                 builder: (context, state) => const ProfilePage(),
                 routes: [
+                  GoRoute(
+                    path: 'edit',
+                    builder: (context, state) => const NestedPage(
+                      title: '프로필 편집',
+                      child: ProfileEditPage(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'settings',
                     builder: (_, _) =>
@@ -121,13 +138,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                   GoRoute(
                     path: 'grade',
-                    builder: (_, _) =>
-                        const NestedPage(title: '학년 설정', child: GradePage()),
+                    redirect: (context, state) => '/my/school',
                   ),
                   GoRoute(
                     path: 'school',
-                    builder: (_, _) =>
-                        const NestedPage(title: '학교 설정', child: SchoolPage()),
+                    builder: (_, _) => const NestedPage(
+                      title: '학교·학년 설정',
+                      child: SchoolPage(),
+                    ),
                   ),
                   GoRoute(
                     path: 'recent',

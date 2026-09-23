@@ -1,4 +1,5 @@
 import 'support/search_fake.dart';
+
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -72,7 +73,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('four destinations and MY saved route retain branch stacks', (
+  testWidgets('five destinations and MY saved route retain branch stacks', (
     tester,
   ) async {
     final container = await mount(tester);
@@ -80,10 +81,10 @@ void main() {
       tester
           .widgetList<NavigationDestination>(find.byType(NavigationDestination))
           .map((w) => w.label),
-      ['홈', '자료', '학습', 'MY'],
+      ['홈', '자료', '학습', 'LAB', 'MY'],
     );
     expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
-    await tab(tester, 3);
+    await tab(tester, 4);
     expect(find.text('로그인 / 시작하기'), findsOneWidget);
     await tester.ensureVisible(find.text('저장한 자료'));
     await tester.tap(find.text('저장한 자료'));
@@ -91,11 +92,11 @@ void main() {
     expect(container.read(routerProvider).canPop(), isTrue);
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tab(tester, 2);
-    await tab(tester, 3);
+    await tab(tester, 4);
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    expect(find.text('나의 학습 공간'), findsOneWidget);
+    expect(find.text('학교·학년'), findsOneWidget);
   });
   testWidgets(
     'materials search state survives tabs and detail pushes above shell',
@@ -187,8 +188,7 @@ void main() {
                     slug: 'fixture',
                     contentType: entry.key,
                     title: '길이가 긴 자료 제목으로 화면 너비와 큰 글씨 줄바꿈을 확인합니다',
-                    summary:
-                        '실제 사용자 데이터가 아닌 위젯 테스트 전용 긴 요약 문장입니다. 여러 줄을 넘겨 표시를 검증합니다.',
+                    summary: '실제 사용자 데이터가 아닌 위젯 테스트 전용 긴 요약 문장입니다. 여러 줄을 넘겨 표시를 검증합니다.',
                     publishedAt: DateTime.utc(2026, 9, 13),
                     sourceUrl: 'https://legendstudy.com/1',
                     isActive: true,
@@ -223,7 +223,7 @@ void main() {
     await tester.tap(find.text('학교 설정'));
     await tester.pumpAndSettle();
     expect(container.read(routerProvider).canPop(), isTrue);
-    expect(find.text('학교 설정'), findsOneWidget);
+    expect(find.text('학교·학년 설정'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.text('로그인 / 시작하기'), findsNothing);
   });
@@ -236,7 +236,8 @@ void main() {
     expect(
       tester
           .getSemantics(find.bySemanticsLabel('레전드스터디+'))
-          .flagsCollection.isHeader,
+          .flagsCollection
+          .isHeader,
       isTrue,
     );
     expect(find.text('레전드스터디+'), findsOneWidget);
@@ -263,8 +264,8 @@ void main() {
     tester,
   ) async {
     await mount(tester, user: 'test-owner-id');
-    await tab(tester, 3);
-    expect(find.text('로그인 계정'), findsOneWidget);
+    await tab(tester, 4);
+    expect(find.text('로그인 계정'), findsNothing);
     expect(find.text('로그인 / 시작하기'), findsNothing);
     expect(find.textContaining('test-owner-id'), findsNothing);
   });
@@ -275,10 +276,12 @@ void main() {
     final router = container.read(routerProvider);
     for (final entry in {
       '/browse': 1,
-      '/saved': 3,
-      '/profile': 3,
+      '/saved': 4,
+      '/profile': 4,
       '/study': 2,
-      '/my/school': 3,
+      '/my/school': 4,
+      '/my/grade': 4,
+      '/lab': 3,
     }.entries) {
       router.go(entry.key);
       await tester.pumpAndSettle();

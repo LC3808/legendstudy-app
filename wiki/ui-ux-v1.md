@@ -9,7 +9,7 @@ Claude는 UI/UX 리드, Codex는 구현 담당이다. 미명시 세부 배치는
 
 ## 1. 정보 구조
 
-하단 탐색은 **홈 | 자료 | 학습 | MY**, 네 개의 독립적인 navigation stack이다.
+하단 탐색은 **홈 | 자료 | 학습 | LAB | MY**, 다섯 개의 독립적인 navigation stack이다.
 저장한 자료는 하단 탭이 아니며 MY 하위에서 진입한다.
 탭 전환 시 각 stack과 검색/스크롤 상태를 유지한다. 탭 재선택은 루트로 돌아갈 수 있다.
 자료 상세는 root navigator로 shell 위에 push하고 뒤로 가면 기존 자료 상태로 복귀한다.
@@ -19,10 +19,11 @@ Claude는 UI/UX 리드, Codex는 구현 담당이다. 미명시 세부 배치는
 | 홈 | /home | 오늘의 공부와 자료 진입 |
 | 자료 | /materials | 검색과 자료 탐색 |
 | 학습 | /study | 공부 타이머와 기록 |
-| MY | /my | 계정·개인 자료·설정 |
+| LAB | /lab | 기존 LAB 웹 서비스의 native Hub; session 전달 없음 |
+| MY | /my | 자체 프로필·학교/학년·학습 현황·개인 자료 |
 | 저장한 자료 | /my/saved | MY 하위 개인 자료 |
 | 최근 본 자료 | /my/recent | MY 하위 개인 열람 기록 |
-| 학교 설정 | /my/school | 비회원도 접근 가능, 저장은 로그인 필요 |
+| 학교·학년 설정 | /my/school | 비회원도 접근 가능, 저장은 로그인 필요 |
 | 자료 상세 | /materials/:slug | shell 위의 native 상세 골격 |
 
 기존 /browse, /saved, /profile은 각각 /materials, /my/saved, /my로 호환 redirect한다.
@@ -37,7 +38,7 @@ Claude는 UI/UX 리드, Codex는 구현 담당이다. 미명시 세부 배치는
 학교 탐색과 학교 정보의 영구 저장은 별개다. 타이머 실행과 영구 기록 저장도 별개다.
 게스트 실행 기록을 영구 저장한 것처럼 표시하지 않는다.
 
-## 3. 계정 정책
+## 3. 계정 정책 (아래 Day 5 원안은 역사적 기록; 현행은 Auth canonical 문서)
 
 Social-login-only: **Kakao / Google / Apple / Naver**.
 v1 제외: Facebook, X, email/password signup.
@@ -152,7 +153,7 @@ clear는 입력과 submitted query/results를 함께 초기화한다. 탭 상태
 
 Home 공식 wordmark width 210, 소개 subtitle 제거. SectionHeader 15sp/w700,
 padding 위 24/아래 8. 카드·검색 외곽선은 divider와 분리한 cardBorder를 사용한다.
-loading spinner는 Center로 감싼다. 하단 탭은 4개 모두 outline/filled icon 쌍,
+loading spinner는 Center로 감싼다. 하단 탭은 5개 모두 outline/filled icon 쌍,
 선택 label w700/기본 w400, indicator #FFE3B0의 Material NavigationBar를 유지한다.
 
 D-Day/Today Study/Recent Views/MY 전체 재설계, 실제 Saved/bookmark UI, 후원 상세
@@ -193,3 +194,16 @@ are session-only with an explicit reset notice; permanent storage awaits approva
 School name and 학교 설정 share a row; source attribution appears only on school
 setup. Study title and 학습으로 이동 share a row. Existing data/empty handling,
 48px targets and system body fonts remain. See design-system.md for spacing.
+
+## 2026-09-23 Mobile IA override
+
+Owner confirmed five tabs, compact profile MY, sectioned Settings. /my/grade now
+redirects to /my/school; /my/edit edits optional LegendStudy nickname. Existing
+materials root-detail and protected-login return routes remain unchanged. LAB uses
+canonical HTTPS external entry only, no token/session parameters. Advanced analysis
+and unverified service pages are hidden, not fake ready cards.
+School/grade share one screen and summary; independent sparse saves allow school
+without grade and grade clear without losing school/name. MY has no account-email
+banner or LAB duplicate. Account email belongs to Settings; profile avatar is the
+existing default person icon. Logout requires confirmation, cancel/dismiss is inert.
+See [implementation and future handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23).

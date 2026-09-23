@@ -3,7 +3,11 @@ import 'personal_models.dart';
 abstract interface class ProfileRepository {
   Future<UserProfile?> fetchCurrentProfile();
   Future<void> updateSchoolSelection({String? officeCode, String? schoolCode});
-  Future<void> upsertCurrentProfile({String? displayName, int? gradeLevel});
+  Future<void> upsertCurrentProfile({
+    String? displayName,
+    int? gradeLevel,
+    bool clearGrade = false,
+  });
 }
 
 abstract interface class BookmarkRepository {

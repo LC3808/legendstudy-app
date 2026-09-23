@@ -72,7 +72,7 @@ The owner-approved production app identifier is `com.legendstudy.app` on Android
 - Riverpod (`flutter_riverpod` 3.3.2 locked) supplies testable dependency injection
   and a path to asynchronous feature state without code generation. Navigation
   state is owned only by the router, not duplicated in a tab-index provider.
-- `go_router` 17.0.0 locked uses `StatefulShellRoute.indexedStack` for four independent
+- `go_router` 17.0.0 locked uses `StatefulShellRoute.indexedStack` for five independent
   branch stacks: `/home`, `/browse`, `/saved`, `/profile`. `/` redirects home and
   unknown paths offer a home recovery action. Router disposal is provider-owned.
 - Package versions were resolved against the installed SDK, rather than upgrading
@@ -503,3 +503,15 @@ grade and Academic Record must operate without it. Existing atomic/clock/scoring
 safety stays intact. Engine CONDITIONAL on its own data/Record/lifecycle contracts;
 Viewer CONDITIONAL independently; PDF Storage/mirror HOLD pending rights.
 Existing Study pause/Guest preview is unchanged. No new schema/code implemented.
+
+## Mobile IA / learning boundary — 2026-09-23
+
+Five indexed branches: /home, /materials, /study, /lab, /my. LAB Hub reuses the
+allowlisted external entry; App and Web have shared account, independent sessions.
+Own profiles.display_name is the optional nickname, never copied from social
+metadata. Existing owner-only RLS and profile school/grade fields remain unchanged.
+Home/Learning/MY consume StudyController.week/summary (KST interval union).
+MockSetup → draft → completed StudyRecord preserves include_in_study_total;
+excluded exams remain separate mode=mock_exam raw segments, attempts and results.
+Default preference is device-local per existing owner namespace, not cross-device.
+Per-attempt choice is cloud-persisted after the additive migration is Owner-applied.

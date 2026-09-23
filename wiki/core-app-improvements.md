@@ -405,3 +405,66 @@ Owner confirmed the meal progression and MY Settings UI on iPhone:
 `MEAL_TIME_AWARE_DEVICE_E2E: PASS`, `MY_SETTINGS_DEVICE_E2E: PASS`. Policy and
 account deletion production readiness remain NO. No Production mutations, console
 or signing edits.
+
+## Mobile IA, Profile and Learning — 2026-09-23
+
+IMPLEMENTED: 홈/자료/학습/LAB/MY independent tab stacks; old deep paths preserved,
+/my/grade redirects to integrated school/grade. LAB links only the current public
+service root; no unverified analysis/AI service routes or fake results. MY removes
+email banner and LAB entry; compact nickname/default avatar, single school·grade
+row, common learning summary and saved/recent entries. Settings groups account,
+profile, learning, service/policies, destructive account management. Logout dialog
+requires explicit confirmation and owner consistency; cancel/dismiss sends no call.
+
+Profile uses existing nullable display_name (trimmed 1–80 code points, no controls),
+explicitly entered, optional at signup. Nonunique; no social metadata import or
+new identity/table/RLS. Existing school/name/grade sparse writes retained; grade
+clear is explicit NULL, omitted grade preserves it. School and optional grade are
+edited on one screen with independent save feedback (no false atomic-save claim).
+Nickname persists in existing owner profile; default avatar only, upload NOT
+IMPLEMENTED. Profile field/grade load failures cannot be saved as empty defaults.
+
+Learning keeps study summary/history exclusively in Timer; Mock retains current
+setup/countdown/answer entry/server scoring/grade/basic result/history. Existing
+single active draft prevents timer/mock simultaneous runs. No manual score-entry
+feature or new LAB advanced-analysis integration was invented. Exam-specific
+include toggle snapshots into draft/completion, survives restarts, and never
+changes the default preference. Default ON preserves previous totals. Settings
+preference is owner-isolated local atomic storage (Guest separate), not cross-device.
+Home/Learning/MY share existing KST union aggregation, now filtering excluded mocks.
+Raw exam segments and scoring attempts are retained whether included or excluded.
+
+DEPLOYMENT GATE: 20260923000100_study_total_inclusion.sql is local only. Until Owner
+application, default included writes remain compatible; excluded cloud writes fail
+safely into the existing pending-sync outbox, not silently converted to included.
+Do not release the exclusion feature before migration + A/B cloud acceptance.
+
+OWNER E2E REQUIRED: five tabs → LAB → MY → school/grade summary/editor → Settings
+→ cancel/confirm logout → Timer → Mock → inclusion toggle. Repeat restart/owner
+switch and confirm Home totals. New mobile UI device E2E NOT VERIFIED. Prior Owner
+Email/Apple/Google/Kakao App and LAB login, session restore and school/grade acceptance
+remain PASS; Kakao cross-platform identical user is NOT VERIFIED.
+
+Future handoff (NOT IMPLEMENTED): Community uses this same auth-owned nickname and
+future avatar only; email/provider private; school/grade publication undecided.
+Decide Unicode normalization, case/uniqueness, reserved names/change/reuse policy
+before Community posting. Add a minimal public projection/RPC with reviewed RLS,
+never public SELECT of full profiles. Boards/comments/report/block/moderation later.
+Avatar upload/storage and avatar_url schema remain separate work; no dead upload UI.
+LAB Web separately: simplify Account, remove internal identity/session prose, group
+user account info, add logout confirmation, responsive QA, review temporary safe
+Kakao diagnostic verbosity. Do not change LAB in this App task.
+Mock Phase 2: build on existing answers/scoring/attempts; remaining work is manual
+score entry/product paper selection and real LAB data linkage, not reimplementing D2/D3.
+Apple revoke/renewal, Google rotation, account deletion/policy/Store gates stay OPEN.
+
+Validation closeout: 589 PASS/1 existing skip, analyze, Android debug and iOS simulator
+builds PASS on canonical Flutter 3.47.5/Dart 3.13.4. 24 render cases across 360×640 /
+428×926 and 1×/2× pass; reviewed MY/Settings/school/Mock/LAB raster images under
+/private/tmp/legendstudy-core-ui (ephemeral local evidence, not repository assets).
+iPhone 17 Pro simulator native Home/five tabs screenshot reviewed at
+/private/tmp/ls-ia-simulator-home.png. No new physical-device acceptance claim.
+Large text intentionally wraps and scrolls; no clipped CTA/overflow detected.
+Secret pattern and GitHub ignore/artifact audit PASS (manual local checks, no
+existing audit executable found). SQL grammar/static RLS review PASS; live migration
+and server acceptance NOT RUN. Owner native file hashes unchanged. Production 0.

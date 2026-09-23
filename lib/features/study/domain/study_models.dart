@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import '../scoring/scoring_models.dart';
 
 const studyMaxSpan = 86400000;
@@ -14,11 +15,13 @@ class MockSetup {
     this.subject,
     this.plannedSeconds, {
     this.notify = false,
+    this.includeInStudyTotal = true,
   });
   final String title;
   final String? subject;
   final int plannedSeconds;
   final bool notify;
+  final bool includeInStudyTotal;
   static const presets = {
     '국어': 80,
     '수학': 100,
@@ -46,6 +49,7 @@ class MockSetup {
     'subject': subject,
     'planned': plannedSeconds,
     'notify': notify,
+    'include_in_study_total': includeInStudyTotal,
   };
   factory MockSetup.fromJson(Map<String, dynamic> j) {
     final setup = MockSetup(
@@ -53,6 +57,7 @@ class MockSetup {
       j['subject'] as String?,
       j['planned'] as int,
       notify: j['notify'] == true,
+      includeInStudyTotal: (j['include_in_study_total'] as bool?) ?? true,
     );
     setup.validate();
     return setup;
@@ -84,6 +89,7 @@ class StudyRecord {
     this.subject,
     this.plannedSeconds,
     this.synced = false,
+    this.includeInStudyTotal = true,
   }) : segments = List.unmodifiable(segments) {
     validate();
   }
@@ -93,6 +99,7 @@ class StudyRecord {
   final String? title, subject;
   final int? plannedSeconds;
   final bool synced;
+  final bool includeInStudyTotal;
   int get activeMs => segments.fold(0, (n, s) => n + s.end - s.start);
   void validate() {
     if (endedMs < startedMs ||
@@ -117,7 +124,7 @@ class StudyRecord {
         throw const FormatException('Invalid study label');
       }
     }
-    if ((mode == 'study' && plannedSeconds != null) ||
+    if ((mode == 'study' && (plannedSeconds != null || !includeInStudyTotal)) ||
         (mode == 'mock_exam' &&
             (title == null ||
                 plannedSeconds == null ||
@@ -131,6 +138,7 @@ class StudyRecord {
   Map<String, dynamic> payload() => {
     'id': id,
     'mode': mode,
+    if (!includeInStudyTotal) 'include_in_study_total': false,
     'title': title,
     'subject': subject,
     'planned_duration_seconds': plannedSeconds,
@@ -148,14 +156,14 @@ class StudyRecord {
   factory StudyRecord.fromJson(Map<String, dynamic> json) => StudyRecord(
     id: json['id'] as String,
     mode: json['mode'] as String,
-    startedMs: DateTime.parse(
-      json['started_at'] as String,
-    ).millisecondsSinceEpoch,
+    startedMs: DateTime.parse(json['started_at'] as String)
+        .millisecondsSinceEpoch,
     endedMs: DateTime.parse(json['ended_at'] as String).millisecondsSinceEpoch,
     title: json['title'] as String?,
     subject: json['subject'] as String?,
     plannedSeconds: json['planned_duration_seconds'] as int?,
     synced: json['synced'] == true,
+    includeInStudyTotal: (json['include_in_study_total'] as bool?) ?? true,
     segments: (json['active_segments'] as List)
         .map((s) => ActiveSegment(s[0] as int, s[1] as int))
         .toList(),
@@ -278,6 +286,7 @@ class StudyDraft {
           title: mock?.title,
           subject: mock?.subject,
           plannedSeconds: mock?.plannedSeconds,
+          includeInStudyTotal: mock?.includeInStudyTotal ?? true,
           segments: activeAt(offset),
         );
   Map<String, dynamic> toJson() => {
@@ -390,6 +399,7 @@ List<int> studyWeek(
   final first = koreanDay(nowMs).subtract(const Duration(days: 6));
   final intervals = <ActiveSegment>[];
   for (final record in {for (final r in records) r.id: r}.values) {
+    if (record.mode == 'mock_exam' && !record.includeInStudyTotal) continue;
     intervals.addAll(
       record.segments.map(
         (s) =>
@@ -398,6 +408,7 @@ List<int> studyWeek(
     );
   }
   if (draft != null &&
+      (draft.mock?.includeInStudyTotal ?? true) &&
       offset != null &&
       !records.any((r) => r.id == draft.id)) {
     intervals.addAll(
