@@ -90,6 +90,7 @@ class ProfilePage extends ConsumerWidget {
                 ),
         ),
         const LearningInfoRow(),
+        const Divider(height: 24),
         const SectionHeader('학습'),
         Consumer(
           builder: (context, ref, _) {
@@ -106,7 +107,7 @@ class ProfilePage extends ConsumerWidget {
                         onPressed: () => context.push('/my/trends'),
                         child: const Text('공부 추이 보기'),
                       ),
-                      FilledButton(
+                      OutlinedButton(
                         onPressed: () {
                           study.selectMock(false);
                           context.go('/study');
@@ -134,6 +135,7 @@ class ProfilePage extends ConsumerWidget {
             );
           },
         ),
+        const Divider(height: 24),
         const SectionHeader('성적'),
         const MyScoreSummary(),
         const Divider(),

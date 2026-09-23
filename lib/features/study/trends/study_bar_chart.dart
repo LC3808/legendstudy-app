@@ -4,37 +4,58 @@ import 'package:flutter/material.dart';
 
 import '../domain/study_models.dart';
 
-// A 60-minute minimum axis keeps a one-minute session from filling the chart.
 double studyChartCeiling(List<int> totals) =>
-    math.max(3600000, totals.fold<int>(0, math.max)).toDouble();
-double studyBarHeight(int duration, double ceiling) => 160 * duration / ceiling;
+    totals.fold<int>(0, math.max).toDouble();
+double studyBarHeight(int duration, double ceiling) =>
+    ceiling <= 0 ? 0 : 160 * duration / ceiling;
 
-class StudyBarChart extends StatelessWidget {
-  const StudyBarChart({super.key, required this.labels, required this.totals});
+class StudyBarChart extends StatefulWidget {
+  const StudyBarChart({
+    super.key,
+    required this.labels,
+    required this.totals,
+    this.descriptions,
+  });
   final List<String> labels;
   final List<int> totals;
+  final List<String>? descriptions;
+  @override
+  State<StudyBarChart> createState() => _StudyBarChartState();
+}
+
+class _StudyBarChartState extends State<StudyBarChart> {
+  int? selected;
+  @override
+  void didUpdateWidget(StudyBarChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.labels.length != widget.labels.length ||
+        oldWidget.descriptions?.join() != widget.descriptions?.join()) {
+      selected = null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ceiling = studyChartCeiling(totals);
-    final scale = MediaQuery.textScalerOf(context).scale(1);
+    final ceiling = studyChartCeiling(widget.totals);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('공부시간 · 최대 눈금 ${studyDuration(ceiling.toInt())}'),
+        Text('최대 ${studyDuration(ceiling.toInt())}'),
         const SizedBox(height: 8),
-        // Scroll rather than overlap labels; logical order always stays oldest first.
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            textDirection: TextDirection.ltr,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (var i = 0; i < totals.length; i++)
-                Semantics(
-                  label: '${labels[i]}, ${studyDuration(totals[i])}',
+        Row(
+          textDirection: TextDirection.ltr,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var i = 0; i < widget.totals.length; i++)
+              Expanded(
+                child: Semantics(
+                  label:
+                      '${widget.descriptions?[i] ?? widget.labels[i]}, ${studyDuration(widget.totals[i])}',
+                  button: true,
+                  selected: selected == i,
                   child: ExcludeSemantics(
-                    child: SizedBox(
-                      width: 68 * scale,
+                    child: InkWell(
+                      onTap: () => setState(() => selected = i),
                       child: Column(
                         children: [
                           SizedBox(
@@ -43,9 +64,12 @@ class StudyBarChart extends StatelessWidget {
                               alignment: Alignment.bottomCenter,
                               child: SizedBox(
                                 key: ValueKey('study-bar-$i'),
-                                width: 24,
-                                height: studyBarHeight(totals[i], ceiling),
-                                child: totals[i] == 0
+                                width: 20,
+                                height: studyBarHeight(
+                                  widget.totals[i],
+                                  ceiling,
+                                ),
+                                child: widget.totals[i] == 0
                                     ? null
                                     : DecoratedBox(
                                         decoration: BoxDecoration(
@@ -63,21 +87,25 @@ class StudyBarChart extends StatelessWidget {
                           ),
                           const Divider(height: 1),
                           const SizedBox(height: 6),
-                          Text(labels[i], textAlign: TextAlign.center),
                           Text(
-                            studyDuration(totals[i]),
+                            widget.labels[i],
                             textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
-        const SizedBox(height: 8),
-        const Text('오래된 기간 → 최근 기간 · 좌우로 넘겨 확인하세요.'),
+        if (selected != null) ...[
+          const SizedBox(height: 8),
+          Text(
+            '${widget.descriptions?[selected!] ?? widget.labels[selected!]} · ${studyDuration(widget.totals[selected!])}',
+          ),
+        ],
       ],
     );
   }

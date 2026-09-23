@@ -89,8 +89,14 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
                 ),
                 const Text('현재 기간은 진행 중이에요.'),
                 const SizedBox(height: 16),
+                Text(
+                  '${dates.first.month}.${dates.first.day} ~ ${day.month}.${day.day}',
+                ),
                 StudyBarChart(
-                  labels: dates.map(_label).toList(),
+                  labels: trendLabels(period, dates),
+                  descriptions: dates
+                      .map((d) => '${d.year}.${d.month}.${d.day}')
+                      .toList(),
                   totals: totals,
                 ),
                 if (max == 0) const Text('아직 공부 기록이 없어요.'),
@@ -105,11 +111,4 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
       ],
     );
   }
-
-  String _label(DateTime d) => switch (period) {
-    TrendPeriod.daily => '${d.month}/${d.day}',
-    TrendPeriod.weekly =>
-      '${d.month}/${d.day}–${d.add(const Duration(days: 6)).month}/${d.add(const Duration(days: 6)).day}',
-    TrendPeriod.monthly => '${d.year}.${d.month}',
-  };
 }

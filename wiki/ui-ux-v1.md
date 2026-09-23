@@ -207,3 +207,16 @@ without grade and grade clear without losing school/name. MY has no account-emai
 banner or LAB duplicate. Account email belongs to Settings; profile avatar is the
 private own photo with default person-icon fallback. Logout requires confirmation, cancel/dismiss is inert.
 See [implementation and future handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23).
+
+
+### Second final Owner correction — current edit/visual conventions
+
+Save success→previous screen once, failure→stay with error; Profile photo partial
+failure must not close the editor. School search results directly follow input;
+selection is a visible edit draft, final Save commits school + optional grade.
+MY Profile/Study/Scores/Materials separated by subtle dividers, not nested cards;
+Trend and Timer both use outlined theme buttons. Settings: Profile edit, Basic
+information, optional Study settings; logout action has no account-management
+heading, followed by policy/info then deletion. LAB internal-grade/Mock details
+are independent. Study chart is7-day/8-week/6-month one-screen dynamic-max, zero
+unpainted, oldest left/newest right. See study-v1 for labels/comparison rules.

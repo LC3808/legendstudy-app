@@ -102,7 +102,8 @@ void main() {
       container.read(routerProvider).routeInformationProvider.value.uri.path,
       '/lab/scores',
     );
-    expect(find.text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'), findsOneWidget);
+    expect(find.text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'), findsNothing);
+    expect(find.text('모의고사 분석'), findsOneWidget);
   });
   testWidgets('five destinations and MY saved route retain branch stacks', (
     tester,

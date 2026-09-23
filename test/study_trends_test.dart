@@ -50,7 +50,7 @@ void main() {
       ]),
       [7200000],
     );
-    expect(trendDates(TrendPeriod.daily, day).length, 14);
+    expect(trendDates(TrendPeriod.daily, day).length, 7);
     expect(
       trendDates(TrendPeriod.weekly, day).every((d) => d.weekday == 1),
       true,

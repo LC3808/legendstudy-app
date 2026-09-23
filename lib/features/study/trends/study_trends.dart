@@ -31,7 +31,7 @@ final trendRemoteProvider = FutureProvider.autoDispose
 DateTime monday(DateTime day) => day.subtract(Duration(days: day.weekday - 1));
 List<DateTime> trendDates(TrendPeriod period, DateTime day) => switch (period) {
   TrendPeriod.daily => [
-    for (var i = 13; i >= 0; i--) day.subtract(Duration(days: i)),
+    for (var i = 6; i >= 0; i--) day.subtract(Duration(days: i)),
   ],
   TrendPeriod.weekly => [
     for (var i = 7; i >= 0; i--) monday(day).subtract(Duration(days: i * 7)),
@@ -107,3 +107,23 @@ String trendComment(
     },
   );
 }
+
+List<String> trendLabels(TrendPeriod period, List<DateTime> dates) => [
+  for (var i = 0; i < dates.length; i++)
+    switch (period) {
+      TrendPeriod.daily => const [
+        '월',
+        '화',
+        '수',
+        '목',
+        '금',
+        '토',
+        '일',
+      ][dates[i].weekday - 1],
+      TrendPeriod.weekly =>
+        i == 0 || dates[i].month != dates[i - 1].month
+            ? '${dates[i].month}월'
+            : '',
+      TrendPeriod.monthly => '${dates[i].month}월',
+    },
+];

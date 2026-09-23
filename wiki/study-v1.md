@@ -526,7 +526,7 @@ not sync cross-device; per-record flags do. See database deployment gate.
 ## MY Study Trends — 2026-09-23
 
 /my/trends reuses studyBuckets, the same KST interval-union implementation behind
-studyWeek, including the live draft and opt-in Mock durations. Charts: 14 days,
+studyWeek, including the live draft and opt-in Mock durations. Charts: 7 days,
 8 Monday weeks, 6 calendar months. Read query is owner-bound and date-filtered;
 100-row pages, 2000-record cap; exceeding cap shows retry/error, never partial totals.
 Completed-period deterministic comparisons and data-sufficiency rules are in
@@ -537,8 +537,17 @@ basic study-time trend only, not LAB academic inference or AI learning strategy.
 
 ## Study chart device correction — 2026-09-23
 
-StudyBarChart uses vertical duration-proportional bars, oldest to newest left→right
-for daily/weekly/monthly. Zero has no painted bar. Axis max=max(selected durations,
-60 minutes), preventing a one-minute record filling the chart. Horizontal scroll
-preserves readable date labels at 360px/2×. Same canonical aggregates/comments;
-no alternative MY calculation or mock-inclusion policy change.
+StudyBarChart uses vertical duration-proportional bars, oldest→newest left→right.
+Current Owner policy supersedes d7008bd's minimum60min/scrolling presentation:
+- Daily: recent seven days ending today; weekday labels in actual chronological
+  order (not forced Monday-start). Period subtitle shows start/end dates.
+- Weekly: recent eight Monday-start weeks, month label only at first slot/month
+  boundary. Monthly: six months with month-only labels.
+- All slots fit available width using Expanded; no horizontal chart scrolling.
+- Maximum=max(displayed durations); positive maximum fills160px. Other heights
+  are160*duration/max; zero maximum yields allzero heights without division.
+- Selecting a slot reveals its date and duration; semantic labels retain dates.
+Completed-period comment calculations are unchanged. Daily chart includes today;
+comment explicitly compares completed periods excluding today/live draft. No
+previous-period navigation was added; eight-week/six-month summaries remain.
+No alternative MY calculation or mock-inclusion policy change.

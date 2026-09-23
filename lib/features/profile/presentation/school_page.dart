@@ -25,31 +25,45 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
     super.dispose();
   }
 
-  Future<void> _select(School? school) async {
+  School? _draft;
+  bool _edited = false, _completed = false;
+  String? _owner;
+
+  void _choose(School? school) {
+    setState(() {
+      _draft = school;
+      _edited = true;
+    });
+  }
+
+  Future<bool> _saveSchool() async {
+    if (!_edited) return true;
+    final applied = await ref
+        .read(schoolSelectionProvider.notifier)
+        .select(_draft);
+    if (!mounted || !applied) return false;
+    _edited = false;
+    return true;
+  }
+
+  void _finish() {
+    if (_completed || !mounted) return;
+    _completed = true;
+    if (ModalRoute.of(context)?.isCurrent == true) {
+      Navigator.of(context).maybePop();
+    }
+  }
+
+  Future<void> _saveGuest() async {
+    if (_saving || _completed) return;
     setState(() => _saving = true);
     try {
-      final applied = await ref
-          .read(schoolSelectionProvider.notifier)
-          .select(school);
-      if (!mounted || !applied) return;
-      final signedIn =
-          ref.read(authStateProvider).value?.isAuthenticated == true;
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(
-              signedIn ? '학교 설정을 저장했어요.' : '이번 실행 동안 선택한 학교의 급식을 볼 수 있어요.',
-            ),
-          ),
-        );
+      if (await _saveSchool()) _finish();
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            const SnackBar(content: Text('학교 설정을 변경하지 못했어요. 다시 시도해 주세요.')),
-          );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('학교 설정을 변경하지 못했어요. 다시 시도해 주세요.')),
+        );
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -60,7 +74,15 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
     final selection = ref.watch(schoolSelectionProvider);
-    final school = selection.isLoading || selection.hasError
+    if (_owner != auth.value?.userId) {
+      _owner = auth.value?.userId;
+      _saving = false;
+      _edited = false;
+      _completed = false;
+    }
+    final school = _edited
+        ? _draft
+        : selection.isLoading || selection.hasError
         ? null
         : selection.value;
     final results = ref.watch(schoolSearchProvider(_query));
@@ -68,6 +90,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
       children: [
         TextField(
           controller: _input,
+          enabled: !_saving,
           maxLength: 100,
           textInputAction: TextInputAction.search,
           decoration: const InputDecoration(
@@ -82,50 +105,6 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             setState(() => _query = value.trim());
           },
         ),
-        const SizedBox(height: 16),
-        if (auth.value?.isAuthenticated != true)
-          const Text('비회원 선택은 이번 앱 실행 동안만 유지돼요.')
-        else
-          const Text('학교를 선택하면 내 계정에 저장돼요.'),
-        if (selection.isLoading || _saving)
-          const Center(child: CircularProgressIndicator()),
-        if (selection.hasError)
-          ErrorState(
-            message: '저장한 학교를 불러오지 못했어요.',
-            onRetry: () => ref.invalidate(schoolSelectionProvider),
-          ),
-        if (school != null) ...[
-          const SectionHeader('선택한 학교'),
-          Text(school.name),
-          Text(
-            [
-              school.schoolType,
-              school.address,
-            ].where((s) => s.isNotEmpty).join(' · '),
-          ),
-          Wrap(
-            children: [
-              TextButton(
-                onPressed: _saving ? null : () => _select(null),
-                child: const Text('선택 해제'),
-              ),
-              if (auth.value?.isAuthenticated != true)
-                TextButton(
-                  onPressed: () => ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      const SnackBar(content: Text('로그인하면 학교 설정을 저장할 수 있어요.')),
-                    ),
-                  child: const Text('학교 설정 저장'),
-                ),
-            ],
-          ),
-        ],
-        if (auth.value?.isAuthenticated == true) ...[
-          GradePage(key: ValueKey(auth.value?.userId)),
-          const Divider(),
-          const SectionHeader('학교'),
-        ],
         if (_query.isNotEmpty) ...[
           const SectionHeader('검색 결과'),
           results.when(
@@ -162,12 +141,67 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
                             auth.isLoading ||
                             auth.hasError
                         ? null
-                        : () => _select(result),
+                        : () => _choose(result),
                   ),
               ],
             ),
           ),
         ],
+        const SizedBox(height: 16),
+        if (auth.value?.isAuthenticated != true)
+          const Text('비회원 선택은 이번 앱 실행 동안만 유지돼요.')
+        else
+          const Text('학교·학년을 확인한 뒤 저장해 주세요.'),
+        if (selection.isLoading || _saving)
+          const Center(child: CircularProgressIndicator()),
+        if (selection.hasError)
+          ErrorState(
+            message: '저장한 학교를 불러오지 못했어요.',
+            onRetry: () => ref.invalidate(schoolSelectionProvider),
+          ),
+        if (school != null) ...[
+          const SectionHeader('선택한 학교'),
+          Text(school.name),
+          Text(
+            [
+              school.schoolType,
+              school.address,
+            ].where((s) => s.isNotEmpty).join(' · '),
+          ),
+          Wrap(
+            children: [
+              TextButton(
+                onPressed: _saving ? null : () => _choose(null),
+                child: const Text('선택 해제'),
+              ),
+              if (auth.value?.isAuthenticated != true)
+                TextButton(
+                  onPressed: () => ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(content: Text('로그인하면 학교 설정을 저장할 수 있어요.')),
+                    ),
+                  child: const Text('학교 설정 저장'),
+                ),
+            ],
+          ),
+        ],
+        if (auth.value?.isAuthenticated == true) ...[
+          GradePage(
+            key: ValueKey(auth.value?.userId),
+            enabled: !selection.isLoading && !selection.hasError && !_completed,
+            beforeSave: _saveSchool,
+            onSavingChanged: (value) => setState(() => _saving = value),
+            onSaved: _finish,
+          ),
+        ],
+        if (auth.value?.isAuthenticated != true)
+          FilledButton(
+            onPressed: _saving || selection.isLoading || selection.hasError
+                ? null
+                : _saveGuest,
+            child: const Text('저장'),
+          ),
         const Align(
           alignment: Alignment.centerRight,
           child: NeisAttribution(label: '출처: 교육부·시도교육청 NEIS'),

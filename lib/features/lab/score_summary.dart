@@ -73,9 +73,14 @@ class ScoreOverviewPage extends ConsumerWidget {
           },
           child: const Text('모의고사로 가기'),
         ),
-        const SectionHeader('내신'),
-        const Text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'),
       ],
     );
   }
+}
+
+class SchoolScorePage extends StatelessWidget {
+  const SchoolScorePage({super.key});
+  @override
+  Widget build(BuildContext context) =>
+      const ShellPage(children: [Text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.')]);
 }

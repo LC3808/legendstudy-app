@@ -135,6 +135,11 @@ void main() {
             expect(find.text('내신 성적 분석'), findsOneWidget);
             expect(find.text('저장한 자료'), findsOneWidget);
             final trend = t.getTopLeft(find.text('공부 추이 보기'));
+            expect(
+              find.widgetWithText(OutlinedButton, '공부하러 가기'),
+              findsOneWidget,
+            );
+            expect(find.byType(Divider), findsWidgets);
             final timer = t.getTopLeft(find.text('공부하러 가기'));
             expect(
               trend.dy < timer.dy ||
@@ -154,9 +159,10 @@ void main() {
           if (screen == 'settings') {
             expect(find.text('프로필 수정'), findsOneWidget);
             expect(find.text('기본 정보'), findsOneWidget);
+            expect(find.text('계정 관리'), findsNothing);
             expect(find.widgetWithText(OutlinedButton, '로그아웃'), findsOneWidget);
             expect(
-              t.getTopLeft(find.text('계정 관리')).dy,
+              t.getTopLeft(find.text('로그아웃')).dy,
               lessThan(t.getTopLeft(find.text('약관 및 개인정보')).dy),
             );
             expect(
@@ -169,7 +175,29 @@ void main() {
               await t.tap(find.text(label));
               await t.pumpAndSettle();
               expect(t.takeException(), isNull);
+              await preview.capture(
+                t,
+                'ia-$screen-${size.width.toInt()}-${scale.toInt()}x-$label',
+              );
               final chart = t.widget<StudyBarChart>(find.byType(StudyBarChart));
+              expect(
+                t
+                    .widgetList<SingleChildScrollView>(
+                      find.byType(SingleChildScrollView),
+                    )
+                    .every((w) => w.scrollDirection == Axis.vertical),
+                true,
+              );
+              final first = t.getTopLeft(
+                find.byKey(const ValueKey('study-bar-0')),
+              );
+              final last = t.getBottomRight(
+                find.byKey(ValueKey('study-bar-${chart.totals.length - 1}')),
+              );
+              expect(first.dx, greaterThanOrEqualTo(0));
+              expect(last.dx, lessThanOrEqualTo(size.width));
+              expect(first.dx, lessThan(last.dx));
+              if (label == '일별') expect(chart.totals.length, 7);
               if (screen == 'trend') {
                 expect(chart.totals.every((n) => n == 0), true);
               }

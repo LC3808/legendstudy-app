@@ -121,7 +121,7 @@ void main() {
         expect(studyBarHeight(7200000, ceiling), 160);
         expect(studyBarHeight(3600000, ceiling), 80);
         expect(studyBarHeight(1800000, ceiling), 40);
-        expect(studyBarHeight(60000, studyChartCeiling([60000])), lessThan(3));
+        expect(studyBarHeight(60000, studyChartCeiling([60000])), 160);
       },
     );
   }

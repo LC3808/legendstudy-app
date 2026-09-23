@@ -116,9 +116,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => const LabPage(),
                 routes: [
                   GoRoute(
+                    path: 'school-scores',
+                    builder: (_, _) => const NestedPage(
+                      title: '내신 분석',
+                      child: SchoolScorePage(),
+                    ),
+                  ),
+                  GoRoute(
                     path: 'scores',
                     builder: (_, _) => const NestedPage(
-                      title: '성적 분석',
+                      title: '모의고사 분석',
                       child: ScoreOverviewPage(),
                     ),
                   ),

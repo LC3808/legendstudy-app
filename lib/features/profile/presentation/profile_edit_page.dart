@@ -16,7 +16,7 @@ class ProfileEditPage extends ConsumerStatefulWidget {
 
 class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
   final name = TextEditingController();
-  bool busy = false;
+  bool busy = false, photoBusy = false, photoFailed = false, completed = false;
   String? error;
   String? hydratedOwner;
   @override
@@ -27,7 +27,14 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
 
   Future<void> save() async {
     final owner = ref.read(authStateProvider).value?.userId;
-    if (busy || owner == null || owner != hydratedOwner) return;
+    if (busy ||
+        photoBusy ||
+        photoFailed ||
+        completed ||
+        owner == null ||
+        owner != hydratedOwner) {
+      return;
+    }
     final value = name.text.trim();
     if (value.isEmpty ||
         value.runes.length > 80 ||
@@ -49,6 +56,10 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
       ref.invalidate(currentProfileProvider);
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('닉네임을 저장했어요.')));
+      completed = true;
+      if (ModalRoute.of(context)?.isCurrent == true) {
+        Navigator.of(context).maybePop();
+      }
     } catch (_) {
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
         setState(() => error = '저장하지 못했어요. 다시 시도해 주세요.');
@@ -85,12 +96,21 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
     if (hydratedOwner != owner) {
       hydratedOwner = owner;
       busy = false;
+      photoBusy = false;
+      photoFailed = false;
+      completed = false;
       name.text = profile.value?.displayName ?? '';
       error = null;
     }
     return ShellPage(
       children: [
-        ProfileAvatar(key: ValueKey(owner)),
+        ProfileAvatar(
+          key: ValueKey(owner),
+          enabled: !busy,
+          onBusyChanged: (value) => setState(() => photoBusy = value),
+          onResult: (success) => setState(() => photoFailed = !success),
+        ),
+        if (photoFailed) const Text('사진 변경을 완료한 뒤 저장해 주세요. 사진 변경을 다시 시도해 주세요.'),
         const SizedBox(height: 16),
         TextField(
           controller: name,
@@ -105,7 +125,9 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
         ),
         if (error != null) Semantics(liveRegion: true, child: Text(error!)),
         FilledButton(
-          onPressed: busy ? null : save,
+          onPressed: busy || photoBusy || photoFailed || completed
+              ? null
+              : save,
           child: Text(busy ? '저장 중…' : '저장'),
         ),
       ],

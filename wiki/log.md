@@ -1945,3 +1945,28 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   tracked local-config/signing/build-artifact audit, ignore checks and diff PASS.
 - Owner iOS files remain unstaged; no dependency/schema/Storage migration change.
   Local commit only; push NO, Production mutation0, new Owner UI E2E NOT VERIFIED.
+
+
+## 2026-09-23 — Second final Owner device UX corrections
+
+- Baseline d7008bd reviewed; existing Owner iOS changes/untracked files preserved.
+- Profile Save waits for success then returns once; pending/failed photo blocks
+  partial exit. School search results moved below input; candidate is an edit
+  draft, unified Save persists school and optional grade before returning. Failures
+  remain retryable, including school-success/grade-failure; no DB transaction added.
+- MY grouping uses subtle dividers and two outlined study CTAs. Dynamic chart max
+  replaces the prior minimum60min policy; seven weekdays/eight weeks/six months
+  fit one screen, oldest→newest, zero unpainted. Compact theme labels pass2×.
+- LAB Mock detail no longer includes internal grades; old /lab/scores retained,
+  independent /lab/school-scores honestly reports unsupported backend. Settings
+  account-management heading removed; logout confirmation/order retained.
+- Meal Owner iPhone E2E PASS recorded. Meal, Auth HOME/safe return, provider flows,
+  Storage/RLS and inclusion policy unchanged; Community safety gates retained.
+- Full657 PASS/1 existing skip; final focused save/profile23 PASS; analyze PASS;
+  47 responsive/render cases PASS, selected daily/weekly/monthly/MY PNGs inspected.
+  Existing avatar/delete Deno11 PASS. Build/security verification recorded in
+  current-status and policy audit. No new migration/dependency/Production mutation.
+- Owner recheck: login/Home → MY → Profile Save/back → school search/selection/
+  optional grade Save/back → trends7day/weekly/monthly → LAB independent details
+  → Settings/logout cancel/confirm → Meal sanity. New UI Owner E2E NOT VERIFIED.
+  Local commit only, push NO.

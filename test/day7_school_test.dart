@@ -251,14 +251,17 @@ void main() {
       expect(find.text(schoolB.name), findsOneWidget);
       await tester.tap(find.text(schoolA.name));
       await tester.pumpAndSettle();
-      expect(c.read(schoolSelectionProvider).value?.identity, schoolA.identity);
+      expect(c.read(schoolSelectionProvider).value, isNull);
+      expect(find.text(schoolA.name), findsNWidgets(2));
       expect(profile.writes, 0);
       await tester.ensureVisible(find.text('학교 설정 저장'));
       await tester.tap(find.text('학교 설정 저장'));
       await tester.pumpAndSettle();
       expect(find.text('로그인하면 학교 설정을 저장할 수 있어요.'), findsOneWidget);
-      await tester.tap(find.byType(BackButton));
+      await tester.ensureVisible(find.text('저장'));
+      await tester.tap(find.text('저장'));
       await tester.pumpAndSettle();
+      expect(c.read(schoolSelectionProvider).value?.identity, schoolA.identity);
       expect(find.text('D-DAY'), findsOneWidget);
       expect(find.textContaining('쌀밥'), findsOneWidget);
       expect(

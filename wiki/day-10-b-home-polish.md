@@ -149,3 +149,8 @@ shows stronger borders, compact heading gap and retained tabs. Examples generate
 under build/polish and /private/tmp/legendstudy-core-ui (ignored/local only).
 No actual new iPhone render/Apple login was run. Owner to review compact cards and
 inline interaction on the new Profile device; earlier meal policy device PASS remains.
+
+
+Owner iPhone second review after d7008bd: MEAL_OWNER_E2E PASS, including current
+seven-day fallback/time/Home-expanded behavior. Subsequent edit/chart/LAB UX work
+leaves meal implementation unchanged; regression suite retained.

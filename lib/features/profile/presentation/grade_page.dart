@@ -7,7 +7,17 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 
 class GradePage extends ConsumerStatefulWidget {
-  const GradePage({super.key});
+  const GradePage({
+    super.key,
+    this.beforeSave,
+    this.onSaved,
+    this.onSavingChanged,
+    this.enabled = true,
+  });
+  final Future<bool> Function()? beforeSave;
+  final VoidCallback? onSaved;
+  final ValueChanged<bool>? onSavingChanged;
+  final bool enabled;
   @override
   ConsumerState<GradePage> createState() => _GradePageState();
 }
@@ -63,13 +73,20 @@ class _GradePageState extends ConsumerState<GradePage> {
 
   Future<void> save() async {
     final id = ref.read(authStateProvider).value?.userId;
-    if (saving || id == null || id != owner) return;
+    if (saving || !widget.enabled || id == null || id != owner) return;
     final request = generation;
     setState(() {
       saving = true;
       error = null;
     });
+    widget.onSavingChanged?.call(true);
     try {
+      if (widget.beforeSave != null && !await widget.beforeSave!()) return;
+      if (!mounted ||
+          request != generation ||
+          ref.read(authStateProvider).value?.userId != id) {
+        return;
+      }
       await ref
           .read(profileRepositoryProvider)
           .upsertCurrentProfile(
@@ -84,12 +101,20 @@ class _GradePageState extends ConsumerState<GradePage> {
       ref.invalidate(currentProfileProvider);
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('학년을 저장했어요.')));
+      widget.onSaved?.call();
     } catch (_) {
       if (mounted && request == generation) {
-        setState(() => error = '학년을 저장하지 못했어요. 다시 시도해 주세요.');
+        setState(
+          () => error = widget.beforeSave == null
+              ? '학년을 저장하지 못했어요. 다시 시도해 주세요.'
+              : '학교·학년을 저장하지 못했어요. 다시 시도해 주세요.',
+        );
       }
     } finally {
-      if (mounted && request == generation) setState(() => saving = false);
+      if (mounted && request == generation) {
+        setState(() => saving = false);
+        widget.onSavingChanged?.call(false);
+      }
     }
   }
 
@@ -128,7 +153,7 @@ class _GradePageState extends ConsumerState<GradePage> {
                 ChoiceChip(
                   label: Text(grade == null ? '설정 안 함' : '$grade학년'),
                   selected: selected == grade,
-                  onSelected: saving
+                  onSelected: saving || !widget.enabled
                       ? null
                       : (_) => setState(() => selected = grade),
                 ),
@@ -142,8 +167,14 @@ class _GradePageState extends ConsumerState<GradePage> {
             ),
           ],
           FilledButton(
-            onPressed: saving || loadFailed ? null : save,
-            child: Text(saving ? '저장 중…' : '학년 저장'),
+            onPressed: saving || loadFailed || !widget.enabled ? null : save,
+            child: Text(
+              saving
+                  ? '저장 중…'
+                  : widget.beforeSave == null
+                  ? '학년 저장'
+                  : '저장',
+            ),
           ),
         ],
       ],

@@ -478,7 +478,7 @@ open existing Timer and /my/trends. An already active Mock retains the existing
 single-session guard rather than creating a concurrent Timer.
 
 Study Trends use common KST interval union (Home/Timer/MY same inclusion rules),
-14 daily / 8 Monday-start weekly / 6 calendar-month bars. Six-month bounded query,
+7 daily / 8 Monday-start weekly / 6 calendar-month bars. Six-month bounded query,
 100-row keyset pages, 2000-row cap fails visibly instead of silently truncating.
 Local unsynced records merge by ID; overlapping time is unioned, excluded mock
 raw records remain intact. Active draft contributes to chart/current summary,
@@ -548,7 +548,7 @@ Photo default-off compile gate removed following Owner private Storage SQL PASS;
 no RLS/schema change. New photo device acceptance remains NOT VERIFIED.
 Default signedIn destination HOME, protected stack return explicit; provider SDKs
 unchanged. Vertical study bars use chronological X/time-height Y, zero=0 and a
-60-minute minimum scale. Trend CTA precedes Timer. Mock summary requests 성적,
+dynamic actual-maximum scale (supersedes the earlier60-minute minimum). Trend CTA precedes Timer. Mock summary requests 성적,
 not implementation-specific answers. LAB has three independent primary entries.
 Settings: Account / Profile edit / Basic school-grade / Study settings / Logout
 outlined confirmation / Terms-privacy-info / destructive deletion. Login has one
@@ -558,3 +558,30 @@ full selected-date meals retained. See [policy audit](mobile-policy-audit.md).
 Owner recheck: login→Home → MY photo choose/replace/remove → Trend daily/weekly/
 monthly, zero and proportional bars → MY score copy → LAB three entries → Settings
 and logout cancel/confirm → Home next meal. No artificial Production records needed.
+
+
+## Owner second final review — after d7008bd
+
+Current editing convention: Save success returns to previous screen once; pending
+or failed saves stay. Applies to Profile nickname and School/Grade. Photo has its
+existing separate immediate Storage operation; pending/failed photo blocks editor
+Save until a successful retry/removal, preventing misleading partial-save exit.
+School candidates update only the local edit draft immediately; Save commits
+school then optional grade using existing sparse APIs. A school success followed
+by grade failure is not atomic: stay with error, preserve selected values, retry
+remaining grade; do not pop or claim total success. No new transaction/schema.
+Guest school selection remains session-only and commits on Save.
+
+Search input→results→selected school→optional grade→Save. MY sections use compact
+dividers, both CTAs outlined (Trend before Timer). Chart has seven weekday slots,
+eight weekly slots with month-boundary labels, six monthly slots, no horizontal
+scroll. Max is actual visible maximum; allzero is safe. Comments unchanged.
+LAB /lab/scores is backward-compatible Mock-only detail; /lab/school-scores is
+independent honest unsupported internal-grade detail, with no cross-domain tabs.
+Settings has no account-management heading; previous Profile edit/basic-info,
+outlined-confirmed logout→policy/info→destructive deletion ordering remains.
+Owner MEAL_OWNER_E2E PASS recorded; no meal/provider/Storage/RLS/backend changes.
+
+Validation and Owner checklist: [current policy audit](mobile-policy-audit.md).
+New UI Owner acceptance NOT VERIFIED. Existing Auth/Home landing/photo ownership,
+Community safety, account deletion/policy/Store gates remain unchanged.

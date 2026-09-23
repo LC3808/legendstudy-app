@@ -1,6 +1,6 @@
 # Current Status
 
-## 2026-09-23 — Owner device final UX corrections (current)
+## 2026-09-23 — Owner device second final UX corrections (current)
 
 - Photo unavailable root cause: a default-false App compile-time gate, not a
   bucket probe or RLS failure. Removed that stale gate; authenticated own-object
@@ -16,14 +16,23 @@
   after today's eligible meal expires. Breakfast excluded from Home, retained in
   full selected-date detail; 14/19 KST, resume and date-boundary refresh retained.
 - Vertical study bars: oldest left, newest right, proportional height, zero is
-  zero; minimum 60-minute axis. MY Trend CTA first; mock empty copy simplified.
-  LAB has independent internal-grade/mock/essay entries; unsupported internal
-  grades remain honestly unavailable. Settings and login copy follow Owner review.
+  zero; dynamic actual maximum (all-zero safe). Seven daily weekday slots, eight
+  compact weeks and six months fit one screen without horizontal scrolling.
+  MY uses section dividers and two outlined CTAs, Trend first.
+  LAB entries and detail routes are independent: /lab/school-scores and existing
+  /lab/scores. Unsupported internal grades remain honestly unavailable.
+- Profile and school/grade Save await successful persistence then pop once; errors
+  stay in place. Photo pending/failure blocks partial profile save. School search
+  results sit directly under input; selected school is a draft until Save, followed
+  by optional grade. Partial school success/grade failure stays open for retry.
+- Settings keeps Profile edit / Basic information / Study settings; no account
+  management heading above outlined logout, then policy/info and deletion.
+- MEAL_OWNER_E2E: PASS (Owner iPhone acceptance after d7008bd). Meal code unchanged.
 - Owner study inclusion migration APPLIED PASS: total_sessions=0,
   excluded_sessions=0, invalid_non_mock_exclusions=0. No new DB/Storage migration.
-- Validation: Flutter 3.47.5 / Dart 3.13.4; 647 PASS / 1 existing skip;
+- Validation: Flutter 3.47.5 / Dart 3.13.4; 657 PASS / 1 existing skip;
   analyze, Android debug and iOS simulator builds PASS. Detailed render/security
-  results and policy evidence: [final policy audit](mobile-policy-audit.md).
+  results (47 render cases) and policy evidence: [final policy audit](mobile-policy-audit.md).
 - New MOBILE_UI_OWNER_E2E: NOT VERIFIED. Existing Owner Auth/session acceptance
   retained; policy/deletion/Store, Apple revoke/renewal and Google rotation OPEN.
   Production mutation 0; push NO. Owner iOS modifications preserved.

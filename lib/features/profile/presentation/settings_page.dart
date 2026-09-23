@@ -80,10 +80,7 @@ class SettingsPage extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.push('/my/feedback'),
           ),
-          if (isAuthenticated) ...[
-            const SectionHeader('계정 관리'),
-            const _LogoutButton(),
-          ],
+          if (isAuthenticated) ...[const _LogoutButton()],
           const SectionHeader('약관 및 개인정보'),
           ListTile(
             contentPadding: EdgeInsets.zero,

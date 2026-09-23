@@ -152,7 +152,15 @@ final avatarPickerProvider = Provider<AvatarPicker>(
 );
 
 class ProfileAvatar extends ConsumerStatefulWidget {
-  const ProfileAvatar({super.key});
+  const ProfileAvatar({
+    super.key,
+    this.enabled = true,
+    this.onBusyChanged,
+    this.onResult,
+  });
+  final bool enabled;
+  final ValueChanged<bool>? onBusyChanged;
+  final ValueChanged<bool>? onResult;
   @override
   ConsumerState<ProfileAvatar> createState() => _ProfileAvatarState();
 }
@@ -160,7 +168,7 @@ class ProfileAvatar extends ConsumerStatefulWidget {
 class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
   bool busy = false;
   Future<void> change() async {
-    if (busy) return;
+    if (busy || !widget.enabled) return;
     final owner = ref.read(authStateProvider).value?.userId;
     final repository = ref.read(avatarRepositoryProvider);
     if (owner == null) return;
@@ -195,6 +203,7 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
     setState(() {
       busy = true;
     });
+    widget.onBusyChanged?.call(true);
     try {
       if (action == 'pick') {
         final png = await ref.read(avatarPickerProvider).pick();
@@ -208,12 +217,14 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
         await repository.remove();
       }
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        widget.onResult?.call(true);
         ref.invalidate(avatarProvider);
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('프로필 사진을 변경했어요.')));
       }
     } catch (_) {
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        widget.onResult?.call(false);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('사진을 변경하지 못했어요. 사진 접근 권한과 연결을 확인한 뒤 다시 시도해 주세요.'),
@@ -221,7 +232,10 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
         );
       }
     } finally {
-      if (mounted) setState(() => busy = false);
+      if (mounted) {
+        setState(() => busy = false);
+        widget.onBusyChanged?.call(false);
+      }
     }
   }
 
@@ -235,7 +249,7 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
       children: [
         IconButton(
           tooltip: '프로필 사진 변경',
-          onPressed: busy || owner == null ? null : change,
+          onPressed: !widget.enabled || busy || owner == null ? null : change,
           constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
           icon: CircleAvatar(
             backgroundImage: bytes == null ? null : MemoryImage(bytes),
