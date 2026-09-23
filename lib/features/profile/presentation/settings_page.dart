@@ -42,12 +42,13 @@ class SettingsPage extends ConsumerWidget {
           if (isAuthenticated)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('닉네임'),
+              title: const Text('프로필 수정'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () => context.push('/my/edit'),
             ),
-          const SectionHeader('학습 정보'),
+          const SectionHeader('기본 정보'),
           const LearningInfoRow(),
+          const SectionHeader('학습 설정'),
           Consumer(
             builder: (context, ref, _) {
               final study = ref.watch(studyControllerProvider);
@@ -79,6 +80,11 @@ class SettingsPage extends ConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.push('/my/feedback'),
           ),
+          if (isAuthenticated) ...[
+            const SectionHeader('계정 관리'),
+            const _LogoutButton(),
+          ],
+          const SectionHeader('약관 및 개인정보'),
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('앱 정보'),
@@ -101,8 +107,6 @@ class SettingsPage extends ConsumerWidget {
               ],
             ),
           ),
-          const Divider(),
-          const SectionHeader('약관 및 개인정보'),
           for (final policy in [
             ('개인정보처리방침', config.privacyUrl),
             ('이용약관', config.termsUrl),
@@ -119,8 +123,7 @@ class SettingsPage extends ConsumerWidget {
                   ),
           if (isAuthenticated) ...[
             const Divider(),
-            const SectionHeader('계정 관리'),
-            const _LogoutButton(),
+            const SectionHeader('회원 탈퇴'),
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
@@ -192,11 +195,10 @@ class _LogoutButtonState extends ConsumerState<_LogoutButton> {
 
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text('이 기기에서 로그아웃해요. 저장한 자료와 계정은 삭제되지 않아요.'),
       if (error != null) Semantics(liveRegion: true, child: Text(error!)),
-      TextButton(
+      OutlinedButton(
         onPressed: busy ? null : logout,
         child: Text(busy ? '로그아웃 중…' : '로그아웃'),
       ),

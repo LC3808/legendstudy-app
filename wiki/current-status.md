@@ -1,35 +1,32 @@
 # Current Status
 
-## 2026-09-23 — MY dashboard / Study Trends / LAB refinement (current)
+## 2026-09-23 — Owner device final UX corrections (current)
 
-- Preserves first IA (five tabs, combined school/grade, logout confirmation,
-  nickname, Timer/Mock separation and inclusion preference). MY configured
-  nickname no longer repeats edit CTA; Settings remains the editor.
-- IMPLEMENTED: MY Timer/Trend CTAs; KST daily/weekly/monthly study bars and
-  deterministic completed-period comparison; shared interval-union inclusion
-  aggregate; bounded owner-filtered history query, section-local loading/error.
-- MY scores use existing device-known completed scoring results and preserve
-  estimated/unavailable grade labels. Native LAB score overview and existing
-  public Essay Web entry; no invented internal-grade entry or advanced analysis.
-- Photo CODE IMPLEMENTED / OWNER STORAGE ACTION REQUIRED: private one-object
-  owner avatar, gallery/replace/remove, metadata-stripped PNG, default-off
-  PROFILE_PHOTO_ENABLED. No social image import/public URL/profile RLS expansion.
-  Candidate Storage migration and deletion cleanup are not deployed/applied.
-- Owner reports 20260923000100_study_total_inclusion.sql APPLIED PASS:
-  total_sessions=0, excluded_sessions=0, invalid_non_mock_exclusions=0.
-  This confirms that migration report, not new A/B populated-record acceptance.
-- Target university/major, admissions/eligibility/bands, essay target schools and
-  Community activities remain FUTURE; no placeholder counts or fake analysis.
-- New MOBILE_UI_OWNER_E2E / photo Storage A/B E2E: NOT VERIFIED. Prior Owner
-  Auth/session/school/grade/meal PASS retained. Account deletion/policy/Store and
-  Apple revoke/renewal/Google rotation gates stay open.
-- Validation: Flutter 3.47.5 / Dart 3.13.4; analyze PASS; full **628 PASS /
-  1 existing skip** (589/1 baseline); 40 viewport/render cases PASS; Android debug
-  and iOS simulator builds PASS. Avatar/delete candidate Deno 11 PASS and type check
-  PASS. SQL grammar/static ownership review PASS, live Storage RLS NOT VERIFIED.
-  Secret pattern/GitHub source-readiness/ignore audit and diff check PASS.
-- Validation results and Owner sequence: [Core App refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23).
-  Production mutation 0; no push. Existing Owner native edits preserved.
+- Photo unavailable root cause: a default-false App compile-time gate, not a
+  bucket probe or RLS failure. Removed that stale gate; authenticated own-object
+  pick/replace/delete uses existing private repository and ownership protection.
+- PROFILE_AVATAR_STORAGE: OWNER APPLIED; PROFILE_AVATAR_RLS: VERIFIED by Owner SQL.
+  Private profile-avatars, PNG, 1MiB, exact auth.uid()/avatar.png, four owner-only
+  operations. App photo upload/replacement/deletion device E2E NOT VERIFIED.
+  Server account-deletion deployment remains a separate OPEN release gate.
+- Default new login lands HOME; trusted in-app protected navigation explicitly
+  requests stack return. Arbitrary returnTo URLs are not accepted. Provider flows
+  and session restore unchanged.
+- Meals now find the first lunch/dinner date within D..D+6, D being the next day
+  after today's eligible meal expires. Breakfast excluded from Home, retained in
+  full selected-date detail; 14/19 KST, resume and date-boundary refresh retained.
+- Vertical study bars: oldest left, newest right, proportional height, zero is
+  zero; minimum 60-minute axis. MY Trend CTA first; mock empty copy simplified.
+  LAB has independent internal-grade/mock/essay entries; unsupported internal
+  grades remain honestly unavailable. Settings and login copy follow Owner review.
+- Owner study inclusion migration APPLIED PASS: total_sessions=0,
+  excluded_sessions=0, invalid_non_mock_exclusions=0. No new DB/Storage migration.
+- Validation: Flutter 3.47.5 / Dart 3.13.4; 647 PASS / 1 existing skip;
+  analyze, Android debug and iOS simulator builds PASS. Detailed render/security
+  results and policy evidence: [final policy audit](mobile-policy-audit.md).
+- New MOBILE_UI_OWNER_E2E: NOT VERIFIED. Existing Owner Auth/session acceptance
+  retained; policy/deletion/Store, Apple revoke/renewal and Google rotation OPEN.
+  Production mutation 0; push NO. Owner iOS modifications preserved.
 
 ## 2026-09-23 — Owner Production Auth checkpoint
 

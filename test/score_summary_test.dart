@@ -7,7 +7,7 @@ import 'support/grade_fixture.dart';
 void main() {
   test(
     'empty score is not invented',
-    () => expect(mockScoreSummary([]), contains('확인된 성적이 없어요')),
+    () => expect(mockScoreSummary([]), contains('성적을 입력해 주세요.')),
   );
   for (final status in ['confirmed', 'estimated', 'unavailable']) {
     test('real raw score and grade provenance $status retained', () {

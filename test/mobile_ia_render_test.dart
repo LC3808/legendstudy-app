@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
+
 import 'package:legendstudy_app/features/study/domain/study_models.dart';
 
 import 'package:legendstudy_app/features/study/trends/study_trend_page.dart';
@@ -132,15 +134,57 @@ void main() {
             expect(find.text('공부 추이 보기'), findsOneWidget);
             expect(find.text('내신 성적 분석'), findsOneWidget);
             expect(find.text('저장한 자료'), findsOneWidget);
+            final trend = t.getTopLeft(find.text('공부 추이 보기'));
+            final timer = t.getTopLeft(find.text('공부하러 가기'));
+            expect(
+              trend.dy < timer.dy ||
+                  (trend.dy == timer.dy && trend.dx < timer.dx),
+              true,
+            );
           }
           if (screen == 'my-unset') {
             expect(find.text('프로필 설정'), findsOneWidget);
+          }
+          if (screen == 'lab') {
+            expect(find.text('내신 분석'), findsOneWidget);
+            expect(find.text('모의고사 분석'), findsOneWidget);
+            expect(find.text('논술 준비'), findsOneWidget);
+            expect(find.text('성적 분석'), findsNothing);
+          }
+          if (screen == 'settings') {
+            expect(find.text('프로필 수정'), findsOneWidget);
+            expect(find.text('기본 정보'), findsOneWidget);
+            expect(find.widgetWithText(OutlinedButton, '로그아웃'), findsOneWidget);
+            expect(
+              t.getTopLeft(find.text('계정 관리')).dy,
+              lessThan(t.getTopLeft(find.text('약관 및 개인정보')).dy),
+            );
+            expect(
+              t.getTopLeft(find.text('약관 및 개인정보')).dy,
+              lessThan(t.getTopLeft(find.text('회원 탈퇴')).dy),
+            );
           }
           if (screen.startsWith('trend')) {
             for (final label in ['주별', '월별', '일별']) {
               await t.tap(find.text(label));
               await t.pumpAndSettle();
               expect(t.takeException(), isNull);
+              final chart = t.widget<StudyBarChart>(find.byType(StudyBarChart));
+              if (screen == 'trend') {
+                expect(chart.totals.every((n) => n == 0), true);
+              }
+              for (var i = 0; i < chart.totals.length; i++) {
+                final bar = t.widget<SizedBox>(
+                  find.byKey(ValueKey('study-bar-$i')),
+                );
+                expect(
+                  bar.height,
+                  studyBarHeight(
+                    chart.totals[i],
+                    studyChartCeiling(chart.totals),
+                  ),
+                );
+              }
             }
           }
           await preview.capture(

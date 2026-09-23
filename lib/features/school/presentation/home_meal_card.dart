@@ -57,6 +57,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
       ref.invalidate(koreanTodayProvider);
       ref.invalidate(todayMealsProvider);
       ref.invalidate(tomorrowMealsProvider);
+      ref.invalidate(nextHomeMealsProvider);
       _scheduleBoundaryRefresh();
     }
   }
@@ -75,6 +76,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
         ref.invalidate(koreanTodayProvider);
         ref.invalidate(todayMealsProvider);
         ref.invalidate(tomorrowMealsProvider);
+        ref.invalidate(nextHomeMealsProvider);
         setState(_scheduleBoundaryRefresh);
       },
     );
@@ -107,7 +109,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
       title = school.value!.name;
       final clock = ref.watch(koreanMealClockProvider);
       final today = ref.watch(todayMealsProvider);
-      final tomorrow = ref.watch(tomorrowMealsProvider);
+      final tomorrow = ref.watch(nextHomeMealsProvider);
       final loading = today.isLoading || tomorrow.isLoading;
       final failed = today.hasError || tomorrow.hasError;
       body = loading
@@ -118,6 +120,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
               onRetry: () {
                 ref.invalidate(todayMealsProvider);
                 ref.invalidate(tomorrowMealsProvider);
+                ref.invalidate(nextHomeMealsProvider);
               },
             )
           : MealSummary(
@@ -172,10 +175,18 @@ class _MealSummaryState extends State<MealSummary> {
     final tomorrow = expanded
         ? selectedTomorrow ?? plan.primaryIsTomorrow
         : plan.primaryIsTomorrow;
-    final date = koreanDateOffset(widget.now, tomorrow ? 1 : 0);
+    final nextDate =
+        widget.tomorrowMeals.firstOrNull?.date ??
+        koreanDateOffset(widget.now, 1);
+    final date = tomorrow ? nextDate : koreanDateOffset(widget.now, 0);
+    final dayLabel = !tomorrow
+        ? '오늘'
+        : nextDate == koreanDateOffset(widget.now, 1)
+        ? '내일'
+        : '다음';
     final label = expanded
-        ? '${tomorrow ? '내일' : '오늘'} 급식'
-        : '${tomorrow ? '내일' : '오늘'} ${plan.isEmpty ? '급식' : plan.primary.first.mealType}';
+        ? '$dayLabel 급식'
+        : '$dayLabel ${plan.isEmpty ? '급식' : plan.primary.first.mealType}';
     final meals = tomorrow ? widget.tomorrowMeals : widget.meals;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -213,7 +224,7 @@ class _MealSummaryState extends State<MealSummary> {
                       const SizedBox(height: 4),
                       Text(
                         plan.isEmpty
-                            ? '등록된 중식·석식 정보가 없어요.'
+                            ? '예정된 급식이 없어요.'
                             : plan.primary.first.menuItems.join(' · '),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -231,7 +242,7 @@ class _MealSummaryState extends State<MealSummary> {
             child: TextButton(
               onPressed: () => setState(() => selectedTomorrow = !tomorrow),
               child: Text(
-                '${mealDateLabel(koreanDateOffset(widget.now, tomorrow ? 0 : 1))} 급식 보기',
+                '${mealDateLabel(tomorrow ? koreanDateOffset(widget.now, 0) : nextDate)} 급식 보기',
               ),
             ),
           ),

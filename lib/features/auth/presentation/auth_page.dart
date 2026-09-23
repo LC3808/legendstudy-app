@@ -15,7 +15,8 @@ import 'auth_support_links.dart';
 import 'provider_button.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
-  const AuthPage({super.key});
+  const AuthPage({super.key, this.returnToPrevious = false});
+  final bool returnToPrevious;
   @override
   ConsumerState<AuthPage> createState() => _AuthPageState();
 }
@@ -142,7 +143,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     if (router == null) return;
     // Imperative push keeps the branch URI; the visible route owns the return.
     if (ModalRoute.of(context)?.isCurrent != true) return;
-    if (context.canPop()) {
+    if (widget.returnToPrevious && context.canPop()) {
       context.pop();
     } else {
       context.go('/home');
@@ -168,10 +169,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       child: AutofillGroup(
         child: ShellPage(
           children: [
-            const AppHeader(title: '레전드스터디+'),
-            const Text('자료를 저장하고 학습 기록을 이어가세요'),
-            const SizedBox(height: 4),
-            const Text('LegendStudy Account', style: TextStyle(fontSize: 13)),
+            const Text('나의 학습 기록을 이어가세요.'),
             SectionHeader(_signUp ? '회원가입' : '로그인'),
             TextFormField(
               controller: _email,

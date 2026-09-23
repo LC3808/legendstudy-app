@@ -71,6 +71,7 @@ void main() {
                   (ref) async => state == 'data' ? [meal] : [],
                 ),
                 tomorrowMealsProvider.overrideWith((ref) async => []),
+                nextHomeMealsProvider.overrideWith((ref) async => []),
                 koreanMealClockProvider.overrideWithValue(
                   DateTime.utc(2026, 9, 11, 3),
                 ),
@@ -85,7 +86,7 @@ void main() {
               state == 'none'
                   ? '학교를 설정하면 오늘 급식을 볼 수 있어요.'
                   : state == 'empty'
-                  ? '등록된 중식·석식 정보가 없어요.'
+                  ? '예정된 급식이 없어요.'
                   : '오늘 중식',
             ),
             findsOneWidget,

@@ -15,18 +15,18 @@ reported Web flows, not App native or shared identity. Same account does not mea
 shared session. Opt-in debug-only GET comparison checks SDK/server/expected owner
 without displaying/storing IDs. Profile/release never exposes the checker.
 
-Owner iPhone Profile later confirmed `EMAIL_AUTH_APP_PRODUCTION_E2E: PASS` and
-`APP_SESSION_RESTORE: PASS` after terminate/relaunch. These results supersede the
-generic pending login/restore statements below for those checks only. App signup,
-verification and recovery mailbox/device E2E remain unverified; Google/Kakao/Apple
-App login and every LAB/App identity comparison remain unverified.
+Owner current checkpoint: App and LAB Email/Apple/Google/Kakao login PASS;
+App Profile-build session restore PASS; Apple/Google LAB/App shared identity PASS.
+Kakao shared identity NOT VERIFIED. App recovery mailbox/device matrix is not
+inferred from login success. Earlier 2026-09-20 pending tables below are historical.
+See [current status](current-status.md) and [native acceptance](auth-native-owner-acceptance.md).
 
-[Native setup and Owner E2E checklist](auth-native-owner-acceptance.md) is the
-operational reference. Preserve working LAB config. Apple revoke/secret renewal
-and Google exposed-secret rotation remain OPEN. Actual Google/Kakao/Apple App
-provider login and cross-platform identity are NOT VERIFIED; App Email login and
-Profile session restore are PASS. Current provider
-button labels/typography still need brand review; no store approval is claimed.
+2026-09-23 routing correction: direct login always goes Home. Protected callers
+use internal extra=true to request a safe existing navigation-stack return. An
+arbitrary returnTo query is not interpreted. All providers use the same signedIn
+handler; initialSession/restore is not a new-login navigation event. Login helper
+copy is now one sentence, without LegendStudy Account duplication.
+Apple revoke/renewal, Google rotation and account-deletion release gates stay OPEN.
 
 
 Status: **CODE VERIFIED / PRODUCTION READINESS PREPARED; PRODUCTION RECOVERY

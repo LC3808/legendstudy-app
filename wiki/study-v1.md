@@ -533,3 +533,12 @@ Completed-period deterministic comparisons and data-sufficiency rules are in
 [Core App refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23).
 The inclusion migration is Owner-applied (zero existing rows reported). This is
 basic study-time trend only, not LAB academic inference or AI learning strategy.
+
+
+## Study chart device correction — 2026-09-23
+
+StudyBarChart uses vertical duration-proportional bars, oldest to newest left→right
+for daily/weekly/monthly. Zero has no painted bar. Axis max=max(selected durations,
+60 minutes), preventing a one-minute record filling the chart. Horizontal scroll
+preserves readable date labels at 360px/2×. Same canonical aggregates/comments;
+no alternative MY calculation or mock-inclusion policy change.

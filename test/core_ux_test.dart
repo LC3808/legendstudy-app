@@ -268,7 +268,8 @@ void main() {
           ),
           GoRoute(
             path: '/auth',
-            builder: (_, _) => const Scaffold(body: AuthPage()),
+            builder: (_, state) =>
+                Scaffold(body: AuthPage(returnToPrevious: state.extra == true)),
           ),
         ],
       );

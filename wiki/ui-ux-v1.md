@@ -199,11 +199,11 @@ setup. Study title and 학습으로 이동 share a row. Existing data/empty hand
 
 Owner confirmed five tabs, compact profile MY, sectioned Settings. /my/grade now
 redirects to /my/school; /my/edit edits optional LegendStudy nickname. Existing
-materials root-detail and protected-login return routes remain unchanged. LAB uses
-canonical HTTPS external entry only, no token/session parameters. Advanced analysis
+materials root-detail and protected-login return routes remain unchanged. LAB uses independent 내신 분석 / 모의고사 분석 / 논술 준비 entries; mock overview
+is native, Essay uses canonical external HTTPS without token/session parameters. Advanced analysis
 and unverified service pages are hidden, not fake ready cards.
 School/grade share one screen and summary; independent sparse saves allow school
 without grade and grade clear without losing school/name. MY has no account-email
 banner or LAB duplicate. Account email belongs to Settings; profile avatar is the
-existing default person icon. Logout requires confirmation, cancel/dismiss is inert.
+private own photo with default person-icon fallback. Logout requires confirmation, cancel/dismiss is inert.
 See [implementation and future handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23).

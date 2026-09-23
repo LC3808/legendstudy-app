@@ -11,7 +11,6 @@ class AppConfig {
     this.googleServerClientId = '',
     this.googleIosClientId = '',
     this.accountDeletionEnabled = false,
-    this.profilePhotoEnabled = false,
     this.privacyUrl = '',
     this.termsUrl = '',
     this.googleOAuthEnabled = false,
@@ -33,7 +32,6 @@ class AppConfig {
     // without it tells the user the feature is not ready instead of failing
     // with a transport error.
     accountDeletionEnabled: bool.fromEnvironment('ACCOUNT_DELETION_ENABLED'),
-    profilePhotoEnabled: bool.fromEnvironment('PROFILE_PHOTO_ENABLED'),
     privacyUrl: String.fromEnvironment('PRIVACY_POLICY_URL'),
     termsUrl: String.fromEnvironment('TERMS_URL'),
     googleOAuthEnabled: bool.fromEnvironment('GOOGLE_OAUTH_ENABLED'),
@@ -60,9 +58,6 @@ class AppConfig {
   /// False until the deletion endpoint is deployed; see
   /// wiki/account-deletion-privacy.md.
   final bool accountDeletionEnabled;
-
-  /// Owner applies the private Storage policy before enabling photo writes.
-  final bool profilePhotoEnabled;
 
   /// Null when unconfigured, so the SDK falls back to the project Site URL.
   String? get recoveryRedirectTo =>

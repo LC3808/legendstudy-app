@@ -5,6 +5,7 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../study_providers.dart';
 import '../domain/study_models.dart';
 import 'study_trends.dart';
+import 'study_bar_chart.dart';
 
 class StudyTrendPage extends ConsumerStatefulWidget {
   const StudyTrendPage({super.key});
@@ -88,34 +89,10 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
                 ),
                 const Text('현재 기간은 진행 중이에요.'),
                 const SizedBox(height: 16),
-                // Horizontal bars preserve readable labels and 2x text without chart dependency.
-                for (var i = 0; i < dates.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Semantics(
-                      label: '${_label(dates[i])}, ${studyDuration(totals[i])}',
-                      child: ExcludeSemantics(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(
-                              spacing: 12,
-                              children: [
-                                Text(_label(dates[i])),
-                                Text(studyDuration(totals[i])),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            LinearProgressIndicator(
-                              value: max == 0 ? 0 : totals[i] / max,
-                              minHeight: 12,
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                StudyBarChart(
+                  labels: dates.map(_label).toList(),
+                  totals: totals,
+                ),
                 if (max == 0) const Text('아직 공부 기록이 없어요.'),
                 const Divider(),
                 Text(trendComment(records, day, period)),

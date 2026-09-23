@@ -111,3 +111,26 @@ final tomorrowMealsProvider = FutureProvider<List<Meal>>((ref) async {
   final instant = ref.watch(koreanMealClockProvider);
   return repository.meals(school, koreanDateOffset(instant, 1));
 });
+
+final nextHomeMealsProvider = FutureProvider<List<Meal>>((ref) async {
+  final school = ref.watch(schoolSelectionProvider).value;
+  final now = ref.watch(koreanMealClockProvider);
+  final repository = ref.watch(schoolRepositoryProvider);
+  final today = await ref.watch(todayMealsProvider.future);
+  final tomorrow = await ref.watch(tomorrowMealsProvider.future);
+  if (school == null ||
+      !mealDisplayPlan(
+        now: now,
+        today: today,
+        tomorrow: tomorrow,
+      ).primaryIsTomorrow) {
+    return tomorrow;
+  }
+  final base = now.add(const Duration(days: 1));
+  return nextAvailableHomeMeals(base, (date) {
+    if (!ref.mounted) throw const SchoolServiceException();
+    return date == koreanDateOffset(now, 1)
+        ? Future.value(tomorrow)
+        : repository.meals(school, date);
+  });
+}, retry: (_, _) => null);

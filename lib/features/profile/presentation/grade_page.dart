@@ -108,7 +108,7 @@ class _GradePageState extends ConsumerState<GradePage> {
         children: [
           const Text('학년을 저장하려면 로그인이 필요해요.'),
           FilledButton(
-            onPressed: () => context.push('/auth'),
+            onPressed: () => context.push('/auth', extra: true),
             child: const Text('로그인'),
           ),
         ],

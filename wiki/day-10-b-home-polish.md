@@ -83,19 +83,22 @@ Canonical Home policy (supersedes earlier 17:00 rules):
 | KST | Home selection |
 |---|---|
 | 00:00–13:59 | Today's lunch |
-| 14:00–18:59 | Today's dinner when available, otherwise tomorrow |
-| 19:00 onward | Tomorrow, even if today's dinner remains in raw data |
-| Tomorrow priority | Lunch → dinner → explicit no lunch/dinner state |
+| 14:00–18:59 | Today's dinner when available, otherwise next available day |
+| 19:00 onward | Next available day, even if today's dinner remains in raw data |
+| Forward priority | First lunch/dinner date within next day D through D+6 |
 
 Breakfast never becomes Home representative, including 07:59/08:00 or a tomorrow
-breakfast-only response. Missing eligible today meal falls forward to tomorrow;
+breakfast-only response. Missing eligible today meal searches next day D through D+6; breakfast-only dates
+are skipped, lunch precedes dinner. No date found means 예정된 급식이 없어요.
+Network failure stays an error, never a holiday. This 2026-09-23 correction adds
+the previously missing traversal to the former today/tomorrow implementation;
 never pretend expired lunch/dinner is current. Tap preview (also empty preview)
 opens selected-date detail with real breakfast/lunch/dinner only, full untruncated
 menus and a second date action to inspect today's food after Home moves forward.
 Date heading is explicit; no empty cards for absent meal types.
 
 Pure policy and nextMealBoundary operate on UTC instants converted to KST.
-mealNowProvider is the sole injectable now source. Both query dates derive from
+mealNowProvider is the sole injectable now source. All candidate query dates derive from
 koreanMealClockProvider. Boundary timer handles 14:00/19:00/midnight; resume and
 Home TickerMode reactivation refresh clock/date/raw requests. Selection is recomputed
 from raw responses, not a cached preview. Both async responses must resolve;

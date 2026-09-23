@@ -79,8 +79,7 @@ final avatarRepositoryProvider = Provider<AvatarRepository?>((ref) {
   final config = ref.watch(appConfigProvider);
   final owner = ref.watch(authStateProvider).value?.userId;
   final session = ref.watch(supabaseClientProvider)?.auth.currentSession;
-  if (!config.profilePhotoEnabled ||
-      owner == null ||
+  if (owner == null ||
       session == null ||
       session.user.id != owner ||
       session.isExpired) {

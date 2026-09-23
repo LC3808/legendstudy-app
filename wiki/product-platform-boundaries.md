@@ -89,3 +89,17 @@ a future public image projection/delivery and public nickname API require separa
 privacy/RLS design, never public SELECT of all profiles. Email/provider stay private;
 school/grade disclosure is undecided. Boards/comments/likes/report/block/moderation
 remain FUTURE. LAB Web UI logout/account simplification remains a separate repo task.
+
+
+## Community safety release gate — future, not implemented
+
+Community must ship user block, post report, comment report, filtering/moderation,
+operator response workflow, developer/support contact and Community terms/policy
+together. Block must exclude the blocked author's posts and comments from the
+blocker's feed/query; a block-list screen alone does not pass acceptance.
+Future user_blocks contract: blocker_user_id, blocked_user_id, created_at;
+unique pair, no self-block, owner-only read/create/remove RLS. No table created now.
+Future MY activities: authored/commented/liked posts and blocked-user management;
+remain hidden until backend exists. Nickname/avatar only for public identity;
+email/provider private, school/grade publication remains undecided. These are
+product release requirements, not a claim of App Store approval.

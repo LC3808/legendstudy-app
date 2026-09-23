@@ -422,7 +422,7 @@ new identity/table/RLS. Existing school/name/grade sparse writes retained; grade
 clear is explicit NULL, omitted grade preserves it. School and optional grade are
 edited on one screen with independent save feedback (no false atomic-save claim).
 Nickname persists in existing owner profile. First increment used a default
-avatar; the second refinement below adds gated private photo upload. Profile field/grade load failures cannot be saved as empty defaults.
+avatar; the second refinement below adds private photo upload (stale App gate removed after Owner Storage acceptance). Profile field/grade load failures cannot be saved as empty defaults.
 
 Learning keeps study summary/history exclusively in Timer; Mock retains current
 setup/countdown/answer entry/server scoring/grade/basic result/history. Existing
@@ -508,7 +508,7 @@ See [private Storage Owner procedure](database.md#private-profile-avatar--owner-
 Classification:
 - IMPLEMENTED (local code): conditional Profile CTA, study CTAs/Trend/chart/comments,
   Mock score summary/overview, private photo edit/service, existing Essay Web entry.
-- FOUNDATION: photo Production availability (migration + deletion rollout/E2E),
+- FOUNDATION: photo device E2E and account-deletion rollout (Storage now Owner applied),
   internal-grade summary slot with honest unsupported state, private own avatar as
   future Community identity. No public Profile query.
 - FUTURE: internal-grade input/analysis, target universities/majors/admissions,
@@ -517,7 +517,7 @@ Classification:
 
 Owner device sequence after review: MY profile/CTA → study Timer → Trend daily /
 weekly / monthly → score empty/actual results → LAB score / essay → five tabs →
-Settings. Then **after** private Storage/action gate: avatar choose/upload → MY &
+Settings. Storage is now Owner applied; verify avatar choose/upload → MY &
 Settings immediate image → restart → replace → remove/default → A/Guest/B isolation.
 Use naturally occurring records; no fake Production scores/study rows required.
 New device E2E NOT VERIFIED. Prior Owner Auth/session/meal acceptance is preserved.
@@ -540,3 +540,21 @@ Android KGP future-version advisory remain non-failing existing tooling follow-u
 Final simulator install/launch and settled Home/five-tab screenshot were verified
 on iPhone 17 Pro simulator (`/private/tmp/ls-refine-simulator.png`). This is a
 credential-free local launch, not Owner iPhone/profile/photo Production E2E.
+
+
+## Owner device final corrections — 2026-09-23
+
+Photo default-off compile gate removed following Owner private Storage SQL PASS;
+no RLS/schema change. New photo device acceptance remains NOT VERIFIED.
+Default signedIn destination HOME, protected stack return explicit; provider SDKs
+unchanged. Vertical study bars use chronological X/time-height Y, zero=0 and a
+60-minute minimum scale. Trend CTA precedes Timer. Mock summary requests 성적,
+not implementation-specific answers. LAB has three independent primary entries.
+Settings: Account / Profile edit / Basic school-grade / Study settings / Logout
+outlined confirmation / Terms-privacy-info / destructive deletion. Login has one
+helper sentence. Meal next available search bounded to seven candidate dates;
+full selected-date meals retained. See [policy audit](mobile-policy-audit.md).
+
+Owner recheck: login→Home → MY photo choose/replace/remove → Trend daily/weekly/
+monthly, zero and proportional bars → MY score copy → LAB three entries → Settings
+and logout cancel/confirm → Home next meal. No artificial Production records needed.

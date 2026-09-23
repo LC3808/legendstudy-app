@@ -56,7 +56,7 @@ void main() {
       );
       await t.pump();
       await t.pump(const Duration(milliseconds: 20));
-      expect(find.text('등록된 중식·석식 정보가 없어요.'), findsNothing);
+      expect(find.text('예정된 급식이 없어요.'), findsNothing);
       expect(find.text('오늘 중식'), findsNothing);
       if (failure) {
         expect(find.text('급식 정보를 불러오지 못했어요.'), findsOneWidget);

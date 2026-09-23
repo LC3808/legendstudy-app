@@ -290,7 +290,7 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       repo.pendingMeals!.complete([]);
       await tester.pumpAndSettle();
-      expect(find.text('등록된 중식·석식 정보가 없어요.'), findsOneWidget);
+      expect(find.text('예정된 급식이 없어요.'), findsOneWidget);
       repo.pendingMeals = null;
       repo.failMeals = true;
       c.invalidate(todayMealsProvider);

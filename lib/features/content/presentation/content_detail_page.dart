@@ -258,7 +258,7 @@ class _BookmarkControl extends ConsumerWidget {
               ? null
               : () async {
                   if (!authenticated) {
-                    await context.push('/auth');
+                    await context.push('/auth', extra: true);
                     // Return to this detail; never replay a save across account changes.
                     return;
                   }

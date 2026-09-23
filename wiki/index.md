@@ -11,6 +11,8 @@ This directory is the canonical long-term development knowledge base for LegendS
 5. Other task-specific documents as applicable
 6. Actual code, Git state, and DB/Supabase state
 
+- [Owner device Wiki-to-code policy audit](mobile-policy-audit.md) — current evidence and open gates.
+
 ## Product/platform canonical entry points
 
 - [Product family and B2B architecture](product-architecture.md) — App/LAB/Teacher/School, shared data/engine, future access/security, priority

@@ -39,7 +39,7 @@ class _InlineBookmarkButtonState extends ConsumerState<InlineBookmarkButton> {
             ],
           ),
         );
-        if (login == true && mounted) await context.push('/auth');
+        if (login == true && mounted) await context.push('/auth', extra: true);
         // Preserve the mounted search route; never auto-save after login.
       } finally {
         if (mounted) setState(() => routing = false);

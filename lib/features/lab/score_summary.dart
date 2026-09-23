@@ -20,7 +20,7 @@ String mockScoreSummary(List<ScoringAttempt> attempts) {
                 a.result!.submittedAt ?? a.completedAt ?? DateTime(1970),
               ),
         );
-  if (rows.isEmpty) return '확인된 성적이 없어요. 모의고사에서 답안을 입력해 주세요.';
+  if (rows.isEmpty) return '성적을 입력해 주세요.';
   final a = rows.first, r = rows.first.result!;
   return '${a.subject ?? a.title} · ${r.rawScore}/${r.maxScore}점 · ${r.gradeLabel}';
 }

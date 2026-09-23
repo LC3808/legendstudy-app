@@ -53,8 +53,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/profile', redirect: (_, _) => '/my'),
       GoRoute(
         path: '/auth',
-        builder: (_, _) =>
-            const NestedPage(title: '로그인 / 시작하기', child: AuthPage()),
+        builder: (_, state) => NestedPage(
+          title: '로그인 / 시작하기',
+          child: AuthPage(returnToPrevious: state.extra == true),
+        ),
       ),
       GoRoute(
         path: '/auth/support',

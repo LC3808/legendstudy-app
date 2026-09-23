@@ -97,3 +97,20 @@ DateTime nextMealBoundary(DateTime now) {
     hour,
   ).subtract(const Duration(hours: 9));
 }
+
+/// D through D+6 only. Breakfast remains available in detail, never a preview.
+Future<List<Meal>> nextAvailableHomeMeals(
+  DateTime base,
+  Future<List<Meal>> Function(String date) fetch,
+) async {
+  for (var offset = 0; offset < 7; offset++) {
+    final date = koreanDateOffset(base, offset);
+    final meals = await fetch(date);
+    if (meals.any(
+      (m) => m.date == date && (m.mealType == '중식' || m.mealType == '석식'),
+    )) {
+      return meals.where((m) => m.date == date).toList();
+    }
+  }
+  return [];
+}

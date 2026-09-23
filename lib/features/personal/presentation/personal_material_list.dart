@@ -31,7 +31,7 @@ class PersonalMaterialListPage extends ConsumerWidget {
                   children: [
                     const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
                     FilledButton(
-                      onPressed: () => context.push('/auth'),
+                      onPressed: () => context.push('/auth', extra: true),
                       child: const Text('로그인'),
                     ),
                   ],
@@ -77,7 +77,7 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
         children: [
           const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
           FilledButton(
-            onPressed: () => context.push('/auth'),
+            onPressed: () => context.push('/auth', extra: true),
             child: const Text('로그인'),
           ),
         ],

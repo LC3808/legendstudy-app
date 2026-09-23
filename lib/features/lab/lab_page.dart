@@ -10,10 +10,14 @@ class LabPage extends StatelessWidget {
   Widget build(BuildContext context) => ShellPage(
     children: [
       const AppHeader(title: 'LAB'),
-      const SectionHeader('성적 분석'),
+      const ListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text('내신 분석'),
+        subtitle: Text('내신 성적 입력과 분석은 아직 지원하지 않아요.'),
+      ),
       ListTile(
         contentPadding: EdgeInsets.zero,
-        title: const Text('모의고사 성적'),
+        title: const Text('모의고사 분석'),
         subtitle: const Text('확인한 채점 결과와 등급 기준'),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => context.push('/lab/scores'),

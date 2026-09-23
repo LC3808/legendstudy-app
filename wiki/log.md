@@ -1925,3 +1925,23 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   40 responsive renders PASS with selected rasters reviewed. Deno 11 PASS + type
   check, SQL grammar/ownership review, secret/ignore/readiness and diff checks PASS.
   Owner iOS edits retained separately; new device/photo E2E NOT VERIFIED. Push NO.
+
+
+## 2026-09-23 — Owner device final UX corrections
+
+- Removed stale default-false App photo gate after Owner private bucket/RLS SQL
+  acceptance; no production write or RLS change. Device upload E2E still pending.
+- New-login default HOME separated from explicit protected stack return; unchanged
+  Email/native/browser provider foundation and restore. Simplified login copy.
+- Seven-day next-meal traversal now skips empty/breakfast-only dates, preserves
+  KST14/19 policy, full selected-date detail and boundary/resume invalidation.
+- Vertical proportional chronological study chart (zero unpainted, minimum60min
+  axis), Trend-first MY CTA, score copy, independent LAB entries and Settings IA.
+- Wiki/code audit:14 PASS,4 GAP_FIXED,4 GAP_OPEN,1 STALE_WIKI corrected. Community
+  block/report/moderation/support release coupling documented, no backend created.
+- Flutter3.47.5/Dart3.13.4:647 PASS/1 existing skip, analyze PASS; Android debug and
+  iOS simulator PASS. Mobile IA40 render cases plus account7 render cases PASS;
+  selected PNGs inspected. Avatar/delete Deno11 PASS. Secret signature scan,
+  tracked local-config/signing/build-artifact audit, ignore checks and diff PASS.
+- Owner iOS files remain unstaged; no dependency/schema/Storage migration change.
+  Local commit only; push NO, Production mutation0, new Owner UI E2E NOT VERIFIED.

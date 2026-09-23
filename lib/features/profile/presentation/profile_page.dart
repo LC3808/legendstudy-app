@@ -102,16 +102,16 @@ class ProfilePage extends ConsumerWidget {
                 LayoutBuilder(
                   builder: (context, box) {
                     final buttons = [
+                      OutlinedButton(
+                        onPressed: () => context.push('/my/trends'),
+                        child: const Text('공부 추이 보기'),
+                      ),
                       FilledButton(
                         onPressed: () {
                           study.selectMock(false);
                           context.go('/study');
                         },
                         child: const Text('공부하러 가기'),
-                      ),
-                      OutlinedButton(
-                        onPressed: () => context.push('/my/trends'),
-                        child: const Text('공부 추이 보기'),
                       ),
                     ];
                     if (box.maxWidth < 320 ||

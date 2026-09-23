@@ -274,7 +274,7 @@ void main() {
     expect(find.text('로그아웃하지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
     fail = false;
     final callback = tester
-        .widget<TextButton>(find.widgetWithText(TextButton, '로그아웃'))
+        .widget<OutlinedButton>(find.widgetWithText(OutlinedButton, '로그아웃'))
         .onPressed!;
     callback();
     callback();

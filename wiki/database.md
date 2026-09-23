@@ -647,10 +647,11 @@ Default preference remains local per-owner, not a profiles column. No production
 catalogue/query was accessed during implementation. Rollback requires client rollback
 and assessment of excluded rows; dropping the column loses choices, not raw exam time.
 
-## Private Profile avatar — OWNER ACTION REQUIRED
+<a id="private-profile-avatar--owner-action-required"></a>
+## Private Profile avatar — Owner applied
 
-Candidate: `supabase/migrations/20260923000200_private_profile_avatars.sql`.
-NOT APPLIED by Codex. Private `profile-avatars` bucket; one canonical object
+Migration: `supabase/migrations/20260923000200_private_profile_avatars.sql`.
+Owner reports applied and SQL-verified on 2026-09-23; NOT applied by Codex. Private `profile-avatars` bucket; one canonical object
 `<auth.uid()>/avatar.png`, PNG only, 1MiB. No profiles column is needed: this
 stable owner path is the equivalent avatar reference, with no public/signed URL
 persisted. SELECT/INSERT/UPDATE/DELETE require exact own path, authenticated only.
@@ -658,24 +659,21 @@ UPDATE checks old and new names. No public profile RLS or school/email disclosur
 New bucket insert deliberately fails on an unexpected existing bucket rather than
 overwriting its configuration. Existing profile/study rows are untouched.
 
-Owner rollout (correct LegendStudy project only):
-1. Review/run the complete migration file in SQL Editor. Before running, inspect
-   existing `storage.objects` policies for broad permissive grants: PostgreSQL
-   permissive policies OR together; repository policy alone cannot prove live RLS.
-2. Verify the read-only queries below. Do not enable app photo writes yet.
-3. Review/deploy the existing delete-account candidate separately, including new
-   `avatar-cleanup.ts`, with server `PROFILE_PHOTO_ENABLED=true` after bucket exists.
-   It removes the exact own object through Storage API before auth deletion; errors
-   prevent user deletion, retries are safe. If auth deletion fails afterward the
-   photo may already be removed. Apple revoke/account-deletion E2E gates stay OPEN.
-   Codex did not deploy/change secrets. Do not enable App account deletion merely
-   because this helper exists. Coordinate photo enablement with deletion/retention.
-4. Rebuild App with public `--dart-define=PROFILE_PHOTO_ENABLED=true` only after
-   policy + deletion/retention rollout is accepted. Default false needs no bucket.
-5. Owner natural photo A/B E2E: choose/replace/remove/restart, A can access only
-   A exact object; B and Guest cannot read/update/delete it; nested/arbitrary paths
-   rejected. Do not record UUIDs, image bytes, tokens or signed URLs in Wiki/logs.
+Owner acceptance / remaining rollout (correct LegendStudy project only):
+1. Bucket and four owner-only policies: Owner applied / SQL verification PASS.
+   Do not rerun the creation migration. This is Owner evidence, not a new Codex
+   production query or completed cross-account upload E2E.
+2. App no longer requires PROFILE_PHOTO_ENABLED. Its stale default-false value
+   caused the device's unavailable message despite deployed Storage. Auth/session
+   and exact-path checks remain. Storage failures still fail safely.
+3. Server delete-account candidate remains separately undeployed/unverified:
+   avatar-cleanup.ts and its server-only PROFILE_PHOTO_ENABLED switch need Owner
+   deployment/retention review. Apple revoke/account-deletion gates remain OPEN.
+   Do not enable account deletion merely because the helper or bucket exists.
+4. Owner photo E2E: choose/replace/remove/restart; A can access only A's exact
+   object, B/Guest cannot. Do not record UUIDs, photos, tokens or signed URLs.
 
+Read-only SQL used for Owner validation (no need to recreate Storage):
 ```sql
 select id, public, file_size_limit, allowed_mime_types
 from storage.buckets where id='profile-avatars';
@@ -685,7 +683,7 @@ from pg_policies where schemaname='storage' and tablename='objects';
 
 Expected bucket: public=false, 1048576, {image/png}. Policies require matching
 bucket + exact auth.uid path for all four operations. Static SQL/RLS review is not
-live A/B acceptance. Rollback: disable App photo flag first; keep private data until
+live A/B acceptance. Rollback: ship a client disabling photo writes first; keep private data until
 retention decision. Delete objects through Storage API before removing bucket; do
 not SQL-delete storage.objects metadata. After empty bucket cleanup, remove only
 avatar_owner_read/insert/update/delete policies and this bucket. No profile field
