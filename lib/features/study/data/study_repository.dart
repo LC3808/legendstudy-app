@@ -21,8 +21,12 @@ abstract interface class StudyRepository {
   Future<void> deleteOwn(String id);
 }
 
+abstract interface class StudyRangeRepository {
+  Future<List<StudyRecord>> fetchRange(int startMs, int endMs);
+}
+
 /// Request-scoped identity/token: later SDK account switches cannot reassign a draft.
-class SupabaseStudyRepository implements StudyRepository {
+class SupabaseStudyRepository implements StudyRepository, StudyRangeRepository {
   SupabaseStudyRepository._(
     this.owner,
     this._token,
@@ -95,6 +99,14 @@ class SupabaseStudyRepository implements StudyRepository {
       koreanDay(nowMs).subtract(const Duration(days: 6)),
     );
     final end = dayStartMs(koreanDay(nowMs).add(const Duration(days: 1)));
+    return fetchRange(start, end);
+  }
+
+  @override
+  Future<List<StudyRecord>> fetchRange(int start, int end) async {
+    if (end <= start || end - start > 366 * studyMaxSpan) {
+      throw const StudyStorageError();
+    }
     String iso(int ms) =>
         DateTime.fromMillisecondsSinceEpoch(ms, isUtc: true).toIso8601String();
     final result = <StudyRecord>[];

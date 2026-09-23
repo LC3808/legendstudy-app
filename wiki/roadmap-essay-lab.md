@@ -417,3 +417,14 @@ current state live in [current-status.md](current-status.md).
   Office / institutional expansion beyond it. Not implemented.
 - **Status on 2026-09-18: Core selection is HOLD until the Owner review next
   week.** This historical entry does not override the 2026-09-20 product/platform decision.
+
+## 2026-09-23 App entry and future preparation data
+
+App LAB labels the existing safe public Web entry 논술 준비. Existing LAB public
+coverage/university content is reused; no new university/essay schema. Read-only
+LAB repository inspection found public information and product foundations, not a
+verified persistent personal target/answer/evaluation API for this App. No App
+session/token passes through URL and no WebView is added. Target universities are
+future Essay domain data (university, questions, authored answers, evaluation
+history, preparation status), not Profile fields. MY essay counts/summary stay
+hidden until real data and an App/Web contract exist. LAB repo unchanged.

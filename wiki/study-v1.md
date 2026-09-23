@@ -521,3 +521,15 @@ exam/scoring history. Owner-scoped local default ON, Settings toggle, setup over
 for this exam, draft/record restore and immutable server flag after Owner migration.
 No repeated start modal. Existing one-active-draft guard retained. Preferences do
 not sync cross-device; per-record flags do. See database deployment gate.
+
+
+## MY Study Trends — 2026-09-23
+
+/my/trends reuses studyBuckets, the same KST interval-union implementation behind
+studyWeek, including the live draft and opt-in Mock durations. Charts: 14 days,
+8 Monday weeks, 6 calendar months. Read query is owner-bound and date-filtered;
+100-row pages, 2000-record cap; exceeding cap shows retry/error, never partial totals.
+Completed-period deterministic comparisons and data-sufficiency rules are in
+[Core App refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23).
+The inclusion migration is Owner-applied (zero existing rows reported). This is
+basic study-time trend only, not LAB academic inference or AI learning strategy.

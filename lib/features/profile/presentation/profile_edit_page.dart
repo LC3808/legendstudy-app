@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../avatar.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
@@ -87,10 +90,7 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
     }
     return ShellPage(
       children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: CircleAvatar(child: Icon(Icons.person_outline)),
-        ),
+        ProfileAvatar(key: ValueKey(owner)),
         const SizedBox(height: 16),
         TextField(
           controller: name,

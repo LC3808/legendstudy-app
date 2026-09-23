@@ -1,5 +1,7 @@
 import 'support/search_fake.dart';
 
+import 'package:legendstudy_app/features/study/trends/study_trend_page.dart';
+
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,6 +75,35 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('MY study CTAs and score entry use canonical branches', (
+    tester,
+  ) async {
+    final container = await mount(tester);
+    await tab(tester, 4);
+    await tester.ensureVisible(find.text('공부 추이 보기'));
+    await tester.tap(find.text('공부 추이 보기'));
+    await tester.pumpAndSettle();
+    expect(find.byType(StudyTrendPage), findsOneWidget);
+    expect(container.read(routerProvider).canPop(), isTrue);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('공부하러 가기'));
+    await tester.tap(find.text('공부하러 가기'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(routerProvider).routeInformationProvider.value.uri.path,
+      '/study',
+    );
+    await tab(tester, 4);
+    await tester.ensureVisible(find.text('모의고사 성적 분석'));
+    await tester.tap(find.text('모의고사 성적 분석'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(routerProvider).routeInformationProvider.value.uri.path,
+      '/lab/scores',
+    );
+    expect(find.text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'), findsOneWidget);
+  });
   testWidgets('five destinations and MY saved route retain branch stacks', (
     tester,
   ) async {

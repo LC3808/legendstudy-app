@@ -224,3 +224,20 @@ answer submission, without requiring Viewer access. USER ACADEMIC HISTORY is the
 retention asset; advanced weakness/AI strategy/admission predictions remain later,
 not features implemented by this decision. Existing separate scales and
 correlation-versus-causation boundaries remain in force.
+
+## 2026-09-23 MY / App LAB / Web contract (FUTURE unless stated)
+
+MY = compact summary; App LAB = service/analysis overview; LAB Web = detailed
+charts/reports. Implemented now: device-known Mock raw score + qualified grade,
+existing result provenance/history under App /lab/scores; no new academic backend.
+Internal school grades currently have no input/persistence in this App. Show an
+honest unavailable state, not a fake input CTA. No native/remote advanced analysis
+route contract is assumed from LAB's Web foundation screens.
+
+Target university/major/recruitment-unit and multiple prioritized targets belong
+to LAB score-analysis domain, not Profile. Admission conditions and special-route
+eligibility need official versioned taxonomy, year, historical admission data and
+student inputs. Do not create ad hoc enums. Future MY may show a summary only once
+real data exists. Assess 4–5 evidence-based bands later, never fabricate a numeric
+probability. University targets, eligibility, model/calculation and Web reports
+remain FUTURE; no schema or results created by this refinement.

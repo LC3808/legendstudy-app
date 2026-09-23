@@ -1,35 +1,35 @@
 # Current Status
 
-## 2026-09-23 — Mobile IA / MY / Profile / Learning (current)
+## 2026-09-23 — MY dashboard / Study Trends / LAB refinement (current)
 
-- IMPLEMENTED: five independent tabs 홈/자료/학습/LAB/MY; LAB external-service Hub;
-  compact own nickname/default avatar; no MY email/LAB duplication; combined
-  school/optional-grade display/editor; grouped Settings and logout confirmation.
-- Reuses profiles.display_name and existing school/grade columns/RLS. No social
-  metadata import, new Profile identity, public profile query, or avatar upload.
-- Timer alone shows study summary/seven-day history; existing Mock answers/scoring/
-  grade/result/history remain implemented. No fake analysis or manual-score feature.
-- Owner-scoped device default (ON), per-exam inclusion override and draft/record
-  restore implemented. Common KST aggregate filters excluded exams without deleting
-  raw time/attempts. Default preference cross-device sync is not implemented.
-- OWNER DB ACTION REQUIRED: apply/review additive migration
-  20260923000100_study_total_inclusion.sql before release. Not applied by Codex.
-  Default included writes remain compatible; excluded uploads stay pending until
-  migration, preserving their choice. PUSH_RECOMMENDED: NO until migration/acceptance.
-- Validation: Flutter 3.47.5 stable / Dart 3.13.4; analyze PASS; full **589 PASS /
-  1 existing skip** (previous 558/1, +31 tests). Android debug/iOS simulator PASS.
-  24 render cases: MY/Settings/school/profile/LAB/mock at 360×640 and 428×926, 1×/2×;
-  selected PNGs visually reviewed, keyboard CTA accessibility tested. No overflow.
-  iPhone 17 Pro simulator launch/Home five-tab rendering verified without credentials.
-  New MOBILE_UI_OWNER_E2E: NOT VERIFIED; prior physical Auth/restore/meal/MY PASS retained.
-- SQL pglast grammar and additive grant/RLS/default/legacy-row compatibility review
-  PASS; not live DB/RLS acceptance. Secret patterns, local config/signing exclusions,
-  GitHub source-readiness audit and diff check PASS. No dedicated repository secret
-  audit executable exists; tracked-source/ignore checks were performed directly.
-- Owner iOS project/plist bytes preserved. No Auth/meal policy/provider configuration
-  change, Production mutation, dependency/SDK upgrade or push.
-- Details and ordered Owner checklist: [Core App handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23).
-
+- Preserves first IA (five tabs, combined school/grade, logout confirmation,
+  nickname, Timer/Mock separation and inclusion preference). MY configured
+  nickname no longer repeats edit CTA; Settings remains the editor.
+- IMPLEMENTED: MY Timer/Trend CTAs; KST daily/weekly/monthly study bars and
+  deterministic completed-period comparison; shared interval-union inclusion
+  aggregate; bounded owner-filtered history query, section-local loading/error.
+- MY scores use existing device-known completed scoring results and preserve
+  estimated/unavailable grade labels. Native LAB score overview and existing
+  public Essay Web entry; no invented internal-grade entry or advanced analysis.
+- Photo CODE IMPLEMENTED / OWNER STORAGE ACTION REQUIRED: private one-object
+  owner avatar, gallery/replace/remove, metadata-stripped PNG, default-off
+  PROFILE_PHOTO_ENABLED. No social image import/public URL/profile RLS expansion.
+  Candidate Storage migration and deletion cleanup are not deployed/applied.
+- Owner reports 20260923000100_study_total_inclusion.sql APPLIED PASS:
+  total_sessions=0, excluded_sessions=0, invalid_non_mock_exclusions=0.
+  This confirms that migration report, not new A/B populated-record acceptance.
+- Target university/major, admissions/eligibility/bands, essay target schools and
+  Community activities remain FUTURE; no placeholder counts or fake analysis.
+- New MOBILE_UI_OWNER_E2E / photo Storage A/B E2E: NOT VERIFIED. Prior Owner
+  Auth/session/school/grade/meal PASS retained. Account deletion/policy/Store and
+  Apple revoke/renewal/Google rotation gates stay open.
+- Validation: Flutter 3.47.5 / Dart 3.13.4; analyze PASS; full **628 PASS /
+  1 existing skip** (589/1 baseline); 40 viewport/render cases PASS; Android debug
+  and iOS simulator builds PASS. Avatar/delete candidate Deno 11 PASS and type check
+  PASS. SQL grammar/static ownership review PASS, live Storage RLS NOT VERIFIED.
+  Secret pattern/GitHub source-readiness/ignore audit and diff check PASS.
+- Validation results and Owner sequence: [Core App refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23).
+  Production mutation 0; no push. Existing Owner native edits preserved.
 
 ## 2026-09-23 — Owner Production Auth checkpoint
 

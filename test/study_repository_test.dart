@@ -57,6 +57,28 @@ void main() {
   });
   tearDown(() => client.dispose());
   test(
+    'trend range is bounded and queries owner with overlap lookback',
+    () async {
+      final start = DateTime.utc(2026, 4).millisecondsSinceEpoch;
+      final end = DateTime.utc(2026, 9, 24).millisecondsSinceEpoch;
+      var calls = 0;
+      final transport = MockClient((req) async {
+        calls++;
+        expect(req.url.queryParameters['user_id'], 'eq.$owner');
+        expect(req.url.queryParameters['and'], contains('2026-03-31'));
+        expect(req.url.queryParameters['and'], contains('2026-09-24'));
+        return http.Response('[]', 200);
+      });
+      final repo = SupabaseStudyRepository.bind(client, config, transport);
+      expect(await repo.fetchRange(start, end), isEmpty);
+      await expectLater(
+        repo.fetchRange(start, start + 367 * studyMaxSpan),
+        throwsA(isA<StudyStorageError>()),
+      );
+      expect(calls, 1);
+    },
+  );
+  test(
     'excluded mock payload/readback and missing migration fail safely',
     () async {
       final now = DateTime.utc(2026, 9, 23).millisecondsSinceEpoch;

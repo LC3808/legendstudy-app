@@ -395,8 +395,29 @@ List<int> studyWeek(
   StudyDraft? draft,
   int? offset,
 }) {
-  final days = List<int>.filled(7, 0);
   final first = koreanDay(nowMs).subtract(const Duration(days: 6));
+  return studyBuckets(
+    records,
+    [
+      for (var i = 0; i < 7; i++)
+        (
+          dayStartMs(first.add(Duration(days: i))),
+          dayStartMs(first.add(Duration(days: i + 1))),
+        ),
+    ],
+    draft: draft,
+    offset: offset,
+  );
+}
+
+/// Shared KST interval union for Home, Timer, MY and arbitrary trend buckets.
+List<int> studyBuckets(
+  List<StudyRecord> records,
+  List<(int, int)> bounds, {
+  StudyDraft? draft,
+  int? offset,
+}) {
+  final days = List<int>.filled(bounds.length, 0);
   final intervals = <ActiveSegment>[];
   for (final record in {for (final r in records) r.id: r}.values) {
     if (record.mode == 'mock_exam' && !record.includeInStudyTotal) continue;
@@ -432,9 +453,8 @@ List<int> studyWeek(
       union.add(ActiveSegment(last.start, max(last.end, s.end)));
     }
   }
-  for (var i = 0; i < 7; i++) {
-    final start = dayStartMs(first.add(Duration(days: i))),
-        end = start + studyMaxSpan;
+  for (var i = 0; i < bounds.length; i++) {
+    final (start, end) = bounds[i];
     for (final s in union) {
       days[i] += max(0, min(end, s.end) - max(start, s.start));
     }

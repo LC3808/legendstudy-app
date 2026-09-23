@@ -421,8 +421,8 @@ explicitly entered, optional at signup. Nonunique; no social metadata import or
 new identity/table/RLS. Existing school/name/grade sparse writes retained; grade
 clear is explicit NULL, omitted grade preserves it. School and optional grade are
 edited on one screen with independent save feedback (no false atomic-save claim).
-Nickname persists in existing owner profile; default avatar only, upload NOT
-IMPLEMENTED. Profile field/grade load failures cannot be saved as empty defaults.
+Nickname persists in existing owner profile. First increment used a default
+avatar; the second refinement below adds gated private photo upload. Profile field/grade load failures cannot be saved as empty defaults.
 
 Learning keeps study summary/history exclusively in Timer; Mock retains current
 setup/countdown/answer entry/server scoring/grade/basic result/history. Existing
@@ -434,10 +434,8 @@ preference is owner-isolated local atomic storage (Guest separate), not cross-de
 Home/Learning/MY share existing KST union aggregation, now filtering excluded mocks.
 Raw exam segments and scoring attempts are retained whether included or excluded.
 
-DEPLOYMENT GATE: 20260923000100_study_total_inclusion.sql is local only. Until Owner
-application, default included writes remain compatible; excluded cloud writes fail
-safely into the existing pending-sync outbox, not silently converted to included.
-Do not release the exclusion feature before migration + A/B cloud acceptance.
+Owner reports 20260923000100_study_total_inclusion.sql applied PASS with zero
+existing/excluded/invalid rows. Populated A/B cloud acceptance remains separate.
 
 OWNER E2E REQUIRED: five tabs → LAB → MY → school/grade summary/editor → Settings
 → cancel/confirm logout → Timer → Mock → inclusion toggle. Repeat restart/owner
@@ -450,7 +448,8 @@ future avatar only; email/provider private; school/grade publication undecided.
 Decide Unicode normalization, case/uniqueness, reserved names/change/reuse policy
 before Community posting. Add a minimal public projection/RPC with reviewed RLS,
 never public SELECT of full profiles. Boards/comments/report/block/moderation later.
-Avatar upload/storage and avatar_url schema remain separate work; no dead upload UI.
+Avatar upload is now gated code in the second refinement below; public Community
+profile and image access still require separate privacy/RLS design.
 LAB Web separately: simplify Account, remove internal identity/session prose, group
 user account info, add logout confirmation, responsive QA, review temporary safe
 Kakao diagnostic verbosity. Do not change LAB in this App task.
@@ -468,3 +467,76 @@ Large text intentionally wraps and scrolls; no clipped CTA/overflow detected.
 Secret pattern and GitHub ignore/artifact audit PASS (manual local checks, no
 existing audit executable found). SQL grammar/static RLS review PASS; live migration
 and server acceptance NOT RUN. Owner native file hashes unchanged. Production 0.
+
+
+## MY dashboard, Study Trends and LAB refinement — 2026-09-23
+
+IMPLEMENTED: configured nickname hides MY edit text; missing nickname shows
+프로필 설정. Avatar tap and Settings → 프로필 edit the same private own photo.
+No school/grade/avatar requirement is added to profile completion. Two study CTAs
+open existing Timer and /my/trends. An already active Mock retains the existing
+single-session guard rather than creating a concurrent Timer.
+
+Study Trends use common KST interval union (Home/Timer/MY same inclusion rules),
+14 daily / 8 Monday-start weekly / 6 calendar-month bars. Six-month bounded query,
+100-row keyset pages, 2000-row cap fails visibly instead of silently truncating.
+Local unsynced records merge by ID; overlapping time is unioned, excluded mock
+raw records remain intact. Active draft contributes to chart/current summary,
+not completed-period comments. Ten-percent stability threshold, minimum three
+active calendar days across the comparison, zero-baseline nonpercentage message.
+Compare completed 7 days, completed 2 weeks, or last full calendar month against
+the previous matching period. Calendar months compare total time, not daily rate.
+No AI or inferred grades. Error/retry remains within the detail, not whole MY.
+
+MY 성적 is separate from 나의 자료. Existing device-known completed Mock attempts
+supply raw/max/grade label; no invented trend from one score. /lab/scores exposes
+existing result/history with provenance. New-device cross-device attempt discovery
+is not implemented; only already known attempt IDs refresh. Internal school-grade
+input/backend does not exist, so its row explicitly says unsupported (no dead
+성적 입력 CTA). LAB separates score overview and public 논술 준비 entry; no
+unverified authenticated Web route or token forwarding. No WebView.
+
+Photo: image_picker gallery only, 512px bound, PNG re-encode strips EXIF, 1MiB max.
+Android recovered picker result is discarded before a fresh selection: it is never
+uploaded automatically under a possibly different owner. Captured Storage headers
+bind each operation to the selecting account; late responses cannot paint another
+owner. Refresh removes old MemoryImage bytes after replace/delete. Load failures
+are retryable and not silently treated as missing images. iOS library usage copy
+is the only new Info.plist setting; existing Owner native changes are not staged.
+See [private Storage Owner procedure](database.md#private-profile-avatar--owner-action-required).
+
+Classification:
+- IMPLEMENTED (local code): conditional Profile CTA, study CTAs/Trend/chart/comments,
+  Mock score summary/overview, private photo edit/service, existing Essay Web entry.
+- FOUNDATION: photo Production availability (migration + deletion rollout/E2E),
+  internal-grade summary slot with honest unsupported state, private own avatar as
+  future Community identity. No public Profile query.
+- FUTURE: internal-grade input/analysis, target universities/majors/admissions,
+  probability bands, essay target schools/history, Community activity queries,
+  full cross-device score discovery and detailed LAB Web reports.
+
+Owner device sequence after review: MY profile/CTA → study Timer → Trend daily /
+weekly / monthly → score empty/actual results → LAB score / essay → five tabs →
+Settings. Then **after** private Storage/action gate: avatar choose/upload → MY &
+Settings immediate image → restart → replace → remove/default → A/Guest/B isolation.
+Use naturally occurring records; no fake Production scores/study rows required.
+New device E2E NOT VERIFIED. Prior Owner Auth/session/meal acceptance is preserved.
+
+
+Second-refinement validation: Flutter 3.47.5 / Dart 3.13.4; full 628 PASS / 1 existing
+skip, analyze PASS, iOS simulator + Android debug builds PASS. 40 renders cover
+MY configured/unset, Settings, Profile keyboard, school, LAB, Mock, Trends empty/data
+and scores at 360×640/428×926 × 1×/2×. Selected actual PNGs visually inspected,
+no overflow; 2× CTAs stack. Photo tests cover private owner paths, pick/replace/
+remove, upload/permission failures, stale picker and A→Guest→B late-load protection.
+Deno deletion candidate 11 PASS + index type check. SQL pglast grammar and manual
+private-policy/compatibility review PASS; live Storage/A/B E2E not performed.
+Secret patterns + ignore/staged-artifact GitHub readiness reviewed (no dedicated
+repo scanner executable); diff check PASS. No Production mutation or push.
+image_picker is the only new direct dependency (official Flutter plugin, no existing
+package upgrades); no chart/crop package. iOS CocoaPods migration advisory and
+Android KGP future-version advisory remain non-failing existing tooling follow-ups.
+
+Final simulator install/launch and settled Home/five-tab screenshot were verified
+on iPhone 17 Pro simulator (`/private/tmp/ls-refine-simulator.png`). This is a
+credential-free local launch, not Owner iPhone/profile/photo Production E2E.

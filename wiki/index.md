@@ -99,3 +99,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [In-App Exam architecture — paper-first engine / independent Viewer gates](architecture-in-app-exam.md)
 
 - [Mobile IA / Profile / Learning handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23)
+
+- [MY dashboard / Study Trends / private avatar refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23)

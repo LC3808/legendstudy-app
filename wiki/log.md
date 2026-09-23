@@ -1908,3 +1908,20 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Home/five tabs verified. Owner new UI device E2E remains open. SQL grammar/review,
   credential/ignore audit and diff PASS. Owner iOS edits retained byte-for-byte.
 - No Production mutation, Auth redesign, meal change, package update or push.
+
+
+## 2026-09-23 — MY dashboard / Study Trends / LAB second refinement
+
+- Owner study-total inclusion migration application PASS recorded (all three
+  reported counts zero). Prior Auth/session/meal acceptance and first IA preserved.
+- Conditional Profile CTA, gated own private avatar pick/replace/remove, study
+  actions and KST daily/weekly/monthly bars with deterministic comments implemented.
+  Shared interval union and bounded owner query; no separate MY time calculation.
+- Real device-known Mock summary/result entry added to MY/LAB; internal grades,
+  admissions, essay targets and Community remain honest foundation/future contracts.
+- New private Storage candidate and account-deletion cleanup prepared only; no
+  Production apply/deploy. Owner policy/retention/deletion review precedes photo ON.
+- 628 Flutter PASS / 1 existing skip; analyze, Android debug, iOS simulator PASS;
+  40 responsive renders PASS with selected rasters reviewed. Deno 11 PASS + type
+  check, SQL grammar/ownership review, secret/ignore/readiness and diff checks PASS.
+  Owner iOS edits retained separately; new device/photo E2E NOT VERIFIED. Push NO.

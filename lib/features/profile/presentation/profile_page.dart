@@ -1,3 +1,6 @@
+import '../../lab/score_summary.dart';
+import '../avatar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -54,7 +57,10 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   data: (p) => Row(
                     children: [
-                      const CircleAvatar(child: Icon(Icons.person_outline)),
+                      SizedBox(
+                        width: 72,
+                        child: ProfileAvatar(key: ValueKey(currentUserId)),
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
@@ -64,10 +70,11 @@ class ProfilePage extends ConsumerWidget {
                               p?.displayName ?? '닉네임 설정',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            TextButton(
-                              onPressed: () => context.push('/my/edit'),
-                              child: const Text('프로필 편집'),
-                            ),
+                            if (p?.displayName?.trim().isNotEmpty != true)
+                              TextButton(
+                                onPressed: () => context.push('/my/edit'),
+                                child: const Text('프로필 설정'),
+                              ),
                           ],
                         ),
                       ),
@@ -85,13 +92,50 @@ class ProfilePage extends ConsumerWidget {
         const LearningInfoRow(),
         const SectionHeader('학습'),
         Consumer(
-          builder: (context, ref, _) => ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(ref.watch(studyControllerProvider).summary),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => context.go('/study'),
-          ),
+          builder: (context, ref, _) {
+            final study = ref.watch(studyControllerProvider);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(study.summary),
+                const SizedBox(height: 8),
+                LayoutBuilder(
+                  builder: (context, box) {
+                    final buttons = [
+                      FilledButton(
+                        onPressed: () {
+                          study.selectMock(false);
+                          context.go('/study');
+                        },
+                        child: const Text('공부하러 가기'),
+                      ),
+                      OutlinedButton(
+                        onPressed: () => context.push('/my/trends'),
+                        child: const Text('공부 추이 보기'),
+                      ),
+                    ];
+                    if (box.maxWidth < 320 ||
+                        MediaQuery.textScalerOf(context).scale(1) > 1.3) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: buttons,
+                      );
+                    }
+                    return Row(
+                      children: [
+                        Expanded(child: buttons[0]),
+                        const SizedBox(width: 8),
+                        Expanded(child: buttons[1]),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         ),
+        const SectionHeader('성적'),
+        const MyScoreSummary(),
         const Divider(),
         const SectionHeader('나의 자료'),
         ListTile(

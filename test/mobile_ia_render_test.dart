@@ -1,5 +1,11 @@
 import 'dart:io';
 
+import 'package:legendstudy_app/features/study/domain/study_models.dart';
+
+import 'package:legendstudy_app/features/study/trends/study_trend_page.dart';
+import 'package:legendstudy_app/features/study/trends/study_trends.dart';
+import 'package:legendstudy_app/features/lab/score_summary.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,11 +44,15 @@ void main() {
     for (final scale in [1.0, 2.0]) {
       for (final screen in [
         'my',
+        'my-unset',
         'settings',
         'school',
         'profile',
         'lab',
         'mock',
+        'trend',
+        'trend-data',
+        'scores',
       ]) {
         testWidgets('mobile IA $screen ${size.width} $scale', (t) async {
           t.view.physicalSize = size;
@@ -52,7 +62,7 @@ void main() {
           final repo = preview.ProfileFake()
             ..value = UserProfile(
               id: 'a',
-              displayName: '아주긴나만의레전드스터디닉네임',
+              displayName: screen == 'my-unset' ? null : '아주긴나만의레전드스터디닉네임',
               gradeLevel: 3,
               neisOfficeCode: schoolA.officeCode,
               neisSchoolCode: schoolA.schoolCode,
@@ -67,16 +77,42 @@ void main() {
           await study.settled;
           if (screen == 'mock') study.selectMock(true);
           final page = switch (screen) {
-            'my' => const ProfilePage(),
+            'my' || 'my-unset' => const ProfilePage(),
             'settings' => const SettingsPage(),
             'school' => const SchoolPage(),
             'profile' => const ProfileEditPage(),
             'lab' => const LabPage(),
+            'trend' || 'trend-data' => const StudyTrendPage(),
+            'scores' => const ScoreOverviewPage(),
             _ => const StudyPage(),
           };
           await t.pumpWidget(
             ProviderScope(
               overrides: [
+                trendRemoteProvider.overrideWith(
+                  (ref, bounds) async => screen != 'trend-data'
+                      ? []
+                      : [
+                          for (var i = 0; i < 14; i++)
+                            StudyRecord(
+                              id: 'fixture-$i',
+                              startedMs:
+                                  dayStartMs(
+                                    koreanDay(study.nowMs)
+                                        .subtract(Duration(days: i)),
+                                  ) +
+                                  3600000,
+                              endedMs:
+                                  dayStartMs(
+                                    koreanDay(study.nowMs)
+                                        .subtract(Duration(days: i)),
+                                  ) +
+                                  3600000 +
+                                  (i + 1) * 60000,
+                              segments: [ActiveSegment(0, (i + 1) * 60000)],
+                            ),
+                        ],
+                ),
                 authStateProvider.overrideWith(
                   (ref) => Stream.value(const AuthStatus('a')),
                 ),
@@ -89,6 +125,24 @@ void main() {
           );
           await t.pumpAndSettle();
           expect(t.takeException(), isNull);
+          if (screen == 'my') {
+            expect(find.text('프로필 편집'), findsNothing);
+            expect(find.text('프로필 설정'), findsNothing);
+            expect(find.text('공부하러 가기'), findsOneWidget);
+            expect(find.text('공부 추이 보기'), findsOneWidget);
+            expect(find.text('내신 성적 분석'), findsOneWidget);
+            expect(find.text('저장한 자료'), findsOneWidget);
+          }
+          if (screen == 'my-unset') {
+            expect(find.text('프로필 설정'), findsOneWidget);
+          }
+          if (screen.startsWith('trend')) {
+            for (final label in ['주별', '월별', '일별']) {
+              await t.tap(find.text(label));
+              await t.pumpAndSettle();
+              expect(t.takeException(), isNull);
+            }
+          }
           await preview.capture(
             t,
             'ia-$screen-${size.width.toInt()}-${scale.toInt()}x',

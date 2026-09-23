@@ -190,3 +190,14 @@ other-owner preservation. Full suite 446 PASS / 1 skip; analyze and Android/iOS
 simulator builds PASS. Code candidate YES, last documented deployment NO (not
 remotely queried in this task), config default OFF, Production E2E NO. Web deletion
 request URL, Apple revocation and retention decisions remain Owner release gates.
+
+## Private avatar dependency — 2026-09-23 candidate
+
+Photo rollout adds one private Storage object per owner. New candidate cleanup
+removes it via Storage API before auth deletion; storage failure aborts deletion,
+already absent object remains idempotent. Server PROFILE_PHOTO_ENABLED stays off
+until bucket + reviewed rollout. An auth deletion failure may follow successful
+photo cleanup, so retry can find no photo. Auth lookup errors are not proof that
+a user is already deleted. No deployment or real deletion performed in this task.
+Owner rollout and rollback: [Database](database.md#private-profile-avatar--owner-action-required).
+ACCOUNT_DELETION_PRODUCTION_READY remains NO, including Apple revoke gate.

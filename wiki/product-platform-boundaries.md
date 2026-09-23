@@ -74,3 +74,18 @@ Future Community reuses auth-owned LegendStudy nickname/avatar; school/grade are
 private personalization until explicit policy. No social profile import, shared
 session transport, new public profile SELECT, or Community implementation here.
 LAB Web Account/logout-confirmation/mobile cleanup is a separate repository task.
+
+## 2026-09-23 dashboard refinements and future Community
+
+MY summarizes; App LAB offers score/essay overview; Web LAB holds future detailed
+analysis/reports. Basic deterministic Study Trends belong to App personal learning,
+not an AI/admission model. Existing Auth/shared account and independent sessions stay.
+
+Future MY Community query contract: owner-scoped own posts count/list, distinct
+commented posts count/list, liked posts count/list with pagination and deleted/
+blocked-content handling. No backend, counters or inactive menus are created now.
+Author identity is own LegendStudy nickname + avatar. Current avatar is private;
+a future public image projection/delivery and public nickname API require separate
+privacy/RLS design, never public SELECT of all profiles. Email/provider stay private;
+school/grade disclosure is undecided. Boards/comments/likes/report/block/moderation
+remain FUTURE. LAB Web UI logout/account simplification remains a separate repo task.

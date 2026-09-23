@@ -1,4 +1,5 @@
 // CANDIDATE — not deployed. Wiring only; the reviewable logic is handler.ts.
+import { deleteAvatarBeforeAccount } from "./avatar-cleanup.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { type AccountDeletionAdmin, createHandler } from "./handler.ts";
 
@@ -32,11 +33,24 @@ export const createSupabaseAdmin = (
       return data !== null;
     },
     async deleteUser(userId) {
-      const { error } = await client.auth.admin.deleteUser(userId);
-      if (!error) return true;
-      // Already gone is success: the endpoint is idempotent by contract.
-      const { data } = await client.auth.admin.getUserById(userId);
-      return data?.user == null;
+      const deleteAccount = async () => {
+        const { error } = await client.auth.admin.deleteUser(userId);
+        if (!error) return true;
+        // Already gone is success: the endpoint is idempotent by contract.
+        const { data, error: lookupError } = await client.auth.admin
+          .getUserById(userId);
+        return lookupError?.code === "user_not_found" ||
+          (!lookupError && data?.user == null);
+      };
+      // Off until the private bucket is applied and reviewed with deletion E2E.
+      if (Deno.env.get("PROFILE_PHOTO_ENABLED") !== "true") {
+        return deleteAccount();
+      }
+      return deleteAvatarBeforeAccount(
+        userId,
+        (paths) => client.storage.from("profile-avatars").remove(paths),
+        deleteAccount,
+      );
     },
   };
 };

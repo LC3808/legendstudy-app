@@ -609,7 +609,7 @@ limit 0 count handles the cross-stream boundary. Subject+kind joins use the exac
 resources_subject_same_content FK. Existing policies/indexes and column grants
 remain unchanged; see [search contract](day-9-search-explore.md).
 
-## 2026-09-23 study inclusion additive migration — NOT APPLIED
+## 2026-09-23 study inclusion additive migration — OWNER APPLIED PASS
 
 20260923000100_study_total_inclusion.sql adds study_sessions.include_in_study_total
 BOOLEAN NOT NULL DEFAULT TRUE; legacy records/totals remain included. CHECK requires
@@ -618,8 +618,9 @@ INSERT column grant is extended; owner SELECT/INSERT/DELETE RLS, auth.uid defaul
 immutable records, foreign keys and scoring RPC remain unchanged. No new profile
 schema/RLS: display_name is optional own nickname; grade clear uses existing NULL.
 
-Owner action before release: review/apply migration in the correct LegendStudy
-project, then inspect with SELECT-only checks below. No automatic deployment.
+Owner reports application PASS: total_sessions=0, excluded_sessions=0,
+invalid_non_mock_exclusions=0. Codex did not apply it. The SELECT-only checks below
+remain reference checks; populated A/B device acceptance is separate.
 
 ```sql
 select column_name, data_type, is_nullable, column_default
@@ -645,3 +646,52 @@ field; false POST retains flag and fails to pending-sync rather than losing choi
 Default preference remains local per-owner, not a profiles column. No production
 catalogue/query was accessed during implementation. Rollback requires client rollback
 and assessment of excluded rows; dropping the column loses choices, not raw exam time.
+
+## Private Profile avatar — OWNER ACTION REQUIRED
+
+Candidate: `supabase/migrations/20260923000200_private_profile_avatars.sql`.
+NOT APPLIED by Codex. Private `profile-avatars` bucket; one canonical object
+`<auth.uid()>/avatar.png`, PNG only, 1MiB. No profiles column is needed: this
+stable owner path is the equivalent avatar reference, with no public/signed URL
+persisted. SELECT/INSERT/UPDATE/DELETE require exact own path, authenticated only.
+UPDATE checks old and new names. No public profile RLS or school/email disclosure.
+New bucket insert deliberately fails on an unexpected existing bucket rather than
+overwriting its configuration. Existing profile/study rows are untouched.
+
+Owner rollout (correct LegendStudy project only):
+1. Review/run the complete migration file in SQL Editor. Before running, inspect
+   existing `storage.objects` policies for broad permissive grants: PostgreSQL
+   permissive policies OR together; repository policy alone cannot prove live RLS.
+2. Verify the read-only queries below. Do not enable app photo writes yet.
+3. Review/deploy the existing delete-account candidate separately, including new
+   `avatar-cleanup.ts`, with server `PROFILE_PHOTO_ENABLED=true` after bucket exists.
+   It removes the exact own object through Storage API before auth deletion; errors
+   prevent user deletion, retries are safe. If auth deletion fails afterward the
+   photo may already be removed. Apple revoke/account-deletion E2E gates stay OPEN.
+   Codex did not deploy/change secrets. Do not enable App account deletion merely
+   because this helper exists. Coordinate photo enablement with deletion/retention.
+4. Rebuild App with public `--dart-define=PROFILE_PHOTO_ENABLED=true` only after
+   policy + deletion/retention rollout is accepted. Default false needs no bucket.
+5. Owner natural photo A/B E2E: choose/replace/remove/restart, A can access only
+   A exact object; B and Guest cannot read/update/delete it; nested/arbitrary paths
+   rejected. Do not record UUIDs, image bytes, tokens or signed URLs in Wiki/logs.
+
+```sql
+select id, public, file_size_limit, allowed_mime_types
+from storage.buckets where id='profile-avatars';
+select policyname, roles, cmd, qual, with_check
+from pg_policies where schemaname='storage' and tablename='objects';
+```
+
+Expected bucket: public=false, 1048576, {image/png}. Policies require matching
+bucket + exact auth.uid path for all four operations. Static SQL/RLS review is not
+live A/B acceptance. Rollback: disable App photo flag first; keep private data until
+retention decision. Delete objects through Storage API before removing bucket; do
+not SQL-delete storage.objects metadata. After empty bucket cleanup, remove only
+avatar_owner_read/insert/update/delete policies and this bucket. No profile field
+rollback needed. Migration does not delete existing user data.
+
+Implementation references: [Flutter image_picker](https://pub.dev/packages/image_picker)
+(iOS photo-library usage description, Android lost result contract),
+[Storage access control](https://supabase.com/docs/guides/storage/security/access-control),
+[private downloads](https://supabase.com/docs/guides/storage/serving/downloads).

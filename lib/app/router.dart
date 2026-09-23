@@ -1,3 +1,5 @@
+import '../features/study/trends/study_trend_page.dart';
+import '../features/lab/score_summary.dart';
 import '../features/lab/lab_page.dart';
 import '../features/profile/presentation/profile_edit_page.dart';
 
@@ -110,6 +112,15 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/lab',
                 builder: (context, state) => const LabPage(),
+                routes: [
+                  GoRoute(
+                    path: 'scores',
+                    builder: (_, _) => const NestedPage(
+                      title: '성적 분석',
+                      child: ScoreOverviewPage(),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -119,6 +130,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/my',
                 builder: (context, state) => const ProfilePage(),
                 routes: [
+                  GoRoute(
+                    path: 'trends',
+                    builder: (_, _) => const NestedPage(
+                      title: '공부 추이',
+                      child: StudyTrendPage(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'edit',
                     builder: (context, state) => const NestedPage(
