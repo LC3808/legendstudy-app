@@ -130,6 +130,31 @@ happened; it does not forecast.
 
 Long term, MY can present these as a learning growth record / portfolio.
 
+### MY surface handoff — FOUNDATION, 2026-09-23 Owner decision
+
+Repository inspection: no Achievement model/repository/provider/table or award
+persistence exists. Materials ContentTypeBadge is unrelated. The examples above
+remain future design examples, NOT a production catalogue. This task adds no
+award, migration or active empty collection menu. Collection implementation needs
+a separately approved catalogue and authoritative evidence/persistence contract.
+
+Future collection entry: MY → 배지함. Render actual earned name/condition/date
+only if supported by authoritative data; no speculative locked catalogue. Profile
+may show one earned badge linked to that collection. **PROVISIONAL** display policy:
+latest earned one, with stable tie-break by award identifier. No representative
+selection editor; policy can be replaced without data migration. No badge visual
+until genuine earned records exist.
+
+Persistence contract for later design: owner-scoped awards, idempotent user +
+achievement identity uniqueness, versioned criterion/evidence. Existing records
+can qualify through idempotent calculation, without inventing historical earned
+dates. No large backfill or schema in this task. Study-time conditions must reuse
+canonical aggregate eligibility (exclude Mock include_in_study_total=false);
+Mock participation uses separate attempt evidence. Growth needs confirmed score
+change, never duration. Study Level/rank has no approved separate taxonomy and
+remains FUTURE; admissions remains a separate engine. Community is not required
+for achievements and its safety release gates remain unchanged.
+
 ## 10. Admissions Engine and its boundary
 
 The existing long-term backlog item (수시 지원 분석 / 합격예측) connects at the

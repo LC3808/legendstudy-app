@@ -199,5 +199,5 @@ already absent object remains idempotent. Server PROFILE_PHOTO_ENABLED stays off
 until bucket + reviewed rollout. An auth deletion failure may follow successful
 photo cleanup, so retry can find no photo. Auth lookup errors are not proof that
 a user is already deleted. No deployment or real deletion performed in this task.
-Owner rollout and rollback: [Database](database.md#private-profile-avatar--owner-action-required).
+Owner rollout and rollback: [Database](database.md#private-profile-avatar--owner-applied).
 ACCOUNT_DELETION_PRODUCTION_READY remains NO, including Apple revoke gate.

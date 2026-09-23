@@ -503,7 +503,7 @@ bind each operation to the selecting account; late responses cannot paint anothe
 owner. Refresh removes old MemoryImage bytes after replace/delete. Load failures
 are retryable and not silently treated as missing images. iOS library usage copy
 is the only new Info.plist setting; existing Owner native changes are not staged.
-See [private Storage Owner procedure](database.md#private-profile-avatar--owner-action-required).
+See [private Storage Owner procedure](database.md#private-profile-avatar--owner-applied).
 
 Classification:
 - IMPLEMENTED (local code): conditional Profile CTA, study CTAs/Trend/chart/comments,
@@ -585,3 +585,25 @@ Owner MEAL_OWNER_E2E PASS recorded; no meal/provider/Storage/RLS/backend changes
 Validation and Owner checklist: [current policy audit](mobile-policy-audit.md).
 New UI Owner acceptance NOT VERIFIED. Existing Auth/Home landing/photo ownership,
 Community safety, account deletion/policy/Store gates remain unchanged.
+
+## Owner handoff correction — 2026-09-23 (after bcb15dd)
+
+Logout: capture router/provider container before awaiting signOut. The signedOut
+event may dispose the button before the future completes; route HOME only after
+success and only if the owner is now guest or unchanged. Failure stays Settings;
+confirmation cancel never calls signOut. Existing auth/return policy unchanged.
+
+Avatar root cause reproduced locally: old handler invalidated the provider then
+announced success without waiting for its replacement read. A delayed first read
+produced success while no image was available. New handler awaits fresh private
+download, checks bytes against the completed write (null after delete), waits a
+frame, rechecks owner, then reports success. `storage_client`2.6.0's official
+`download(queryParams:)` provides a fresh cacheNonce; exact object path/auth/RLS
+remain unchanged. This protects same-path HTTP cache; Production cache staleness
+or INSERT failure was not independently proven. No public/signed avatar URL.
+Delayed read/mismatch and private transport tests distinguish write completion
+from visible state readiness. Owner first-upload/replace/delete E2E still required.
+
+Settings removes the duplicate deletion heading. Shared section primitive is
+documented in [design system](design-system.md). Badge UI is intentionally absent
+until real catalogue/award contracts exist; [roadmap §9](roadmap-academic-analytics.md#9-achievement--badge-engine).

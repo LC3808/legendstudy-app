@@ -5,13 +5,33 @@ This directory is the canonical long-term development knowledge base for LegendS
 ## Read order
 
 1. `../AGENTS.md`
-2. `index.md`
-3. `current-status.md`
-4. For UI implementation: product-scope.md → architecture.md → database.md → design-system.md → ui-ux-v1.md
-5. Other task-specific documents as applicable
-6. Actual code, Git state, and DB/Supabase state
+2. This Task Routing Map
+3. [Current Status](current-status.md)
+4. [Durable decisions](decisions.md)
+5. [Product scope](product-scope.md)
+6. Required task-domain documents below, then actual code/runtime/tests.
 
-- [Owner device Wiki-to-code policy audit](mobile-policy-audit.md) — current evidence and open gates.
+Search all Wiki with Korean/English aliases before proposing a new concept.
+Newest explicit Owner decisions supersede historical scope; record exact scope,
+not an inferred promotion of a whole roadmap. Current is not historical evidence.
+
+## Task Routing Map
+
+| Task / aliases | Required canonical reading |
+|---|---|
+| AUTH / 로그인 / logout / account / Kakao | [Decisions — login philosophy](decisions.md#2026-09-12--login-philosophy), [native acceptance](auth-native-owner-acceptance.md), [recovery](auth-recovery.md), [deletion/privacy](account-deletion-privacy.md), [current account UX](core-app-improvements.md) |
+| STUDY / TIMER / 공부 추이 | [Study v1 and current chart overrides](study-v1.md), [Study UI and Owner overrides](day-8-study-ui-review.md), [Study storage](day-8-study-storage-proposal.md), [current UI convention](ui-ux-v1.md) |
+| MOCK EXAM / SCORING / 모의고사 | [Mock Exam](day-8-mock-exam.md), [scoring](mock-exam-scoring-v1.md), [answer/scoring](day-8-d2-answer-scoring.md), [grade result](day-8-d3-grade-result.md), [scoring storage](day-8-scoring-storage-proposal.md) |
+| ACHIEVEMENT / BADGE / 배지 / Level | [Achievement decision](decisions.md#2026-09-19--achievements-record-behaviour-and-confirmed-growth-never-prediction), [Achievement / Badge Engine](roadmap-academic-analytics.md#9-achievement--badge-engine), [current product scope](product-scope.md) |
+| MEAL / SCHOOL / NEIS / 급식 다음 제공일 | [NEIS](day-7-neis.md), [current time/fallback/Home expanded policy](day-10-b-home-polish.md), [school storage](day-7-school-storage-proposal.md), [school/profile UX](core-app-improvements.md) |
+| MY / PROFILE / SETTINGS / 프로필 | [UI conventions](ui-ux-v1.md), [design system](design-system.md), [database/private avatar](database.md), [current profile/account UX](core-app-improvements.md), [personal ownership](day-9-c-personal-state.md) |
+| LAB / ACADEMIC ANALYTICS | [platform boundaries](product-platform-boundaries.md), [product architecture](product-architecture.md), [academic roadmap](roadmap-academic-analytics.md), [Essay roadmap](roadmap-essay-lab.md), [App LAB details](core-app-improvements.md) |
+| MATERIALS / 자료 | [search](day-9-search-explore.md), [resources](day-9-c-resource-detail.md), [personal state](day-9-c-personal-state.md), [saved/recent](day-9-c-personal-lists.md) |
+| COMMUNITY / 커뮤니티 | [monetization/learning roadmap](roadmap-monetization-and-in-app-learning.md), [Community decision](decisions.md#2026-09-19--community-is-a-free-retention-feature-not-a-launch-blocker), [Profile privacy and safety gates](product-platform-boundaries.md), [private profile](database.md) |
+
+[Policy/code evidence audit](mobile-policy-audit.md) distinguishes gaps from
+implemented/local-tested/Owner-verified claims. Existing document directory below
+is preserved; historical checkpoints are accessed only when evidence is needed.
 
 ## Product/platform canonical entry points
 
@@ -43,7 +63,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `roadmap-essay-lab.md` — Essay service-module research-first roadmap
 - `day-10-b-home-polish.md` — Home meal and expandable recent sections
 
-- [Current canonical checkpoint: Flutter 3.47.5 / Dart 3.13.4 and Owner E2E](current-status.md#2026-09-21-end-of-day-canonical-checkpoint)
+- [Historical checkpoint: Flutter 3.47.5 / Dart 3.13.4 and Owner E2E](history/status-checkpoints.md#2026-09-21-end-of-day-canonical-checkpoint)
 
 ## Canonical-source rule
 

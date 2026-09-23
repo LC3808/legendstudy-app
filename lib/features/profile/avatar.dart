@@ -30,7 +30,12 @@ class StorageAvatarRepository implements AvatarRepository {
   @override
   Future<Uint8List?> load() async {
     try {
-      return await api.download(path);
+      return await api.download(
+        path,
+        queryParams: {
+          'cacheNonce': DateTime.now().microsecondsSinceEpoch.toString(),
+        },
+      );
     } on StorageException catch (e) {
       // download() uses noResolveJson: even an error body may remain encoded.
       Object? code = e.error;
@@ -205,6 +210,7 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
     });
     widget.onBusyChanged?.call(true);
     try {
+      Uint8List? expected;
       if (action == 'pick') {
         final png = await ref.read(avatarPickerProvider).pick();
         if (!mounted ||
@@ -212,13 +218,25 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
             png == null) {
           return;
         }
+        expected = png;
         await repository.save(png);
       } else {
         await repository.remove();
       }
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        // A completed PUT alone does not establish a visible, refreshed avatar.
+        final loaded = await ref.refresh(avatarProvider.future);
+        if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
+          return;
+        }
+        if (!listEquals(loaded, expected)) {
+          throw const FormatException('Avatar verification failed');
+        }
+        await WidgetsBinding.instance.endOfFrame;
+        if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
+          return;
+        }
         widget.onResult?.call(true);
-        ref.invalidate(avatarProvider);
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('프로필 사진을 변경했어요.')));
       }

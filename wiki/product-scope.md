@@ -107,3 +107,13 @@ Viewer is optional and failures cannot block this engine. Optional Tablet viewin
 remains a separate route. This feature-V1 contract does not promote all roadmaps
 into the initial app release. Deep Analytics/AI strategy remains V2+; original
 rights/storage restrictions stand and integrated engine readiness is CONDITIONAL.
+
+## Owner MY Achievement surface amendment — 2026-09-23
+
+MY collection access and a compact earned-achievement visual are accepted product
+directions. FOUNDATION only in this release: data/UX contract in
+[Achievement Engine](roadmap-academic-analytics.md#9-achievement--badge-engine).
+No catalogue, award persistence, collection UI or Level system is implemented.
+Advanced badge/achievement engine remains outside the initial required release;
+roadmap examples are not approved production awards. No migration is required by
+this documentation foundation.

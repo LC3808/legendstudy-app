@@ -196,6 +196,7 @@ void main() {
         requests.first.url.path,
         contains('/object/profile-avatars/owner-a/avatar.png'),
       );
+      expect(requests.first.url.queryParameters['cacheNonce'], isNotEmpty);
       expect(requests[1].headers['x-upsert'], 'true');
       expect(jsonDecode(requests.last.body)['prefixes'], [
         'owner-a/avatar.png',

@@ -1,3 +1,6 @@
+import 'package:legendstudy_app/features/home/presentation/home_page.dart';
+import 'package:legendstudy_app/features/materials/presentation/materials_page.dart';
+
 import 'dart:io';
 
 import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
@@ -45,6 +48,9 @@ void main() {
   for (final size in [const Size(360, 640), const Size(428, 926)]) {
     for (final scale in [1.0, 2.0]) {
       for (final screen in [
+        'home',
+        'materials',
+        'timer',
         'my',
         'my-unset',
         'settings',
@@ -80,6 +86,8 @@ void main() {
           if (screen == 'mock') study.selectMock(true);
           final page = switch (screen) {
             'my' || 'my-unset' => const ProfilePage(),
+            'home' => const HomePage(),
+            'materials' => const MaterialsPage(),
             'settings' => const SettingsPage(),
             'school' => const SchoolPage(),
             'profile' => const ProfileEditPage(),

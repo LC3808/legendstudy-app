@@ -27,12 +27,7 @@ class HomePage extends ConsumerWidget {
       const SizedBox(height: AppTokens.homeCardGap),
       const HomeMealCard(),
       const SizedBox(height: 16),
-      const _HomeSection(
-        title: '자료 검색',
-        icon: Icons.search,
-        accent: AppTokens.homeSearchAccent,
-        child: _HomeSearch(),
-      ),
+      const _HomeSection(title: '자료 검색', child: _HomeSearch()),
       const SizedBox(height: 8),
       Wrap(
         spacing: 8,
@@ -57,19 +52,12 @@ class HomePage extends ConsumerWidget {
       ),
       const _HomeSection(
         title: '최근 본 자료',
-        icon: Icons.history,
-        accent: AppTokens.homeRecentAccent,
         child: PersonalMaterialList(
           kind: PersonalListKind.recentViews,
           homeMode: true,
         ),
       ),
-      const _HomeSection(
-        title: '최근 업데이트',
-        icon: Icons.new_releases_outlined,
-        accent: AppTokens.homeUpdatesAccent,
-        child: HomeRecentUpdates(),
-      ),
+      const _HomeSection(title: '최근 업데이트', child: HomeRecentUpdates()),
     ],
   );
 }
@@ -114,35 +102,17 @@ class _HomeStudyCard extends ConsumerWidget {
 }
 
 class _HomeSection extends StatelessWidget {
-  const _HomeSection({
-    required this.title,
-    required this.icon,
-    required this.accent,
-    required this.child,
-  });
+  const _HomeSection({required this.title, required this.child});
 
   final String title;
-  final IconData icon;
-  final Color accent;
   final Widget child;
 
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
-        child: Semantics(
-          header: true,
-          child: Row(
-            children: [
-              Icon(icon, size: 20, color: accent),
-              const SizedBox(width: 8),
-              Text(title, style: AppTokens.sectionTitle),
-            ],
-          ),
-        ),
-      ),
+      const SectionDivider(),
+      SectionHeader(title, emphasized: true),
       child,
     ],
   );

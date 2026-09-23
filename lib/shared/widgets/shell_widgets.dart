@@ -73,17 +73,50 @@ class AppHeader extends StatelessWidget {
   );
 }
 
-class SectionHeader extends StatelessWidget {
-  const SectionHeader(this.title, {super.key});
-  final String title;
+class SectionDivider extends StatelessWidget {
+  const SectionDivider({super.key});
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: AppTokens.sectionGap, bottom: 8),
-    child: Semantics(
-      header: true,
-      child: Text(title, style: AppTokens.sectionTitle),
-    ),
+  Widget build(BuildContext context) => Divider(
+    height: 20,
+    thickness: 1.5,
+    color: Theme.of(context).colorScheme.outline,
   );
+}
+
+class SectionHeader extends StatelessWidget {
+  const SectionHeader(this.title, {super.key, this.emphasized = false});
+  final String title;
+  final bool emphasized;
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: EdgeInsets.only(
+        top: emphasized ? 16 : AppTokens.sectionGap,
+        bottom: 8,
+      ),
+      child: Semantics(
+        header: true,
+        child: Container(
+          padding: emphasized
+              ? const EdgeInsets.symmetric(horizontal: 10, vertical: 8)
+              : null,
+          decoration: emphasized
+              ? BoxDecoration(
+                  color: scheme.surfaceContainerLow,
+                  border: Border(
+                    left: BorderSide(color: scheme.onSurface, width: 3),
+                  ),
+                )
+              : null,
+          child: Text(
+            title,
+            style: AppTokens.sectionTitle.copyWith(color: scheme.onSurface),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class CompactUtilityCard extends StatelessWidget {

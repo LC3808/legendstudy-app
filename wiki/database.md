@@ -647,7 +647,7 @@ Default preference remains local per-owner, not a profiles column. No production
 catalogue/query was accessed during implementation. Rollback requires client rollback
 and assessment of excluded rows; dropping the column loses choices, not raw exam time.
 
-<a id="private-profile-avatar--owner-action-required"></a>
+<a id="private-profile-avatar--owner-applied"></a>
 ## Private Profile avatar — Owner applied
 
 Migration: `supabase/migrations/20260923000200_private_profile_avatars.sql`.

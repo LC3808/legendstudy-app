@@ -317,3 +317,20 @@ Monetization centres on repeat scoring, longitudinal records/comparisons and
 personalized analysis, not file ownership. Free/basic access remains meaningful;
 prices, FREE/BASIC/ADVANCED/MAX entitlements and quotas remain undecided.
 [Canonical architecture](architecture-in-app-exam.md) owns separate track gates.
+
+## 2026-09-23 — Owner device corrections and MY Achievement surface
+
+Logout confirmation success returns HOME; failure stays Settings. Save success
+returns to the previous edit caller. Photo success requires completed Storage
+write and verified refreshed bytes/UI, including first upload, replace and remove.
+All five main screen families share the section heading/divider primitive; avoid
+heavy nested cards. Settings has one destructive deletion action, no duplicate
+heading.
+
+Owner now requests MY access to earned achievements and a compact profile badge.
+This promotes the **surface direction**, not the Advanced Achievement Engine or
+its catalogue into v1. Existing [Achievement philosophy](#2026-09-19--achievements-record-behaviour-and-confirmed-growth-never-prediction)
+and [roadmap §9](roadmap-academic-analytics.md#9-achievement--badge-engine) remain
+canonical. No catalogue/model/persistence exists in the current App migrations;
+this task records FOUNDATION and exposes no fake awards/collection. Study Level
+has no approved taxonomy and remains FUTURE.

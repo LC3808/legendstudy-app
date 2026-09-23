@@ -15,10 +15,24 @@ Before changing code, database schema, ingestion, build configuration, or produc
 1. `AGENTS.md`
 2. `wiki/index.md`
 3. `wiki/current-status.md`
-4. Relevant task-specific wiki documents
-5. Actual repository code, Git state, and current DB/Supabase state
+4. `wiki/decisions.md`
+5. `wiki/product-scope.md`
+6. All required documents in `wiki/index.md` Task Routing Map for the task domains
+7. Actual repository code, Git state, and current DB/Supabase state
 
 Wiki is not authoritative when contradicted by verified runtime/code/database state. If a mismatch is found, verify the actual state and update the wiki.
+
+Before planning a feature/UX, search the entire Wiki for the same concept (including
+Korean/English aliases). Reuse existing Owner decisions, rather than re-planning.
+Search Wiki before asking the Owner to resend past conversations. If evidence
+conflicts: verify code/runtime; implement missing valid Owner policy, correct stale
+Wiki, or record an unresolved GAP. Never infer Production deployment from files.
+Use this restore protocol at START, reference decisions DURING implementation,
+and at END link new Owner decisions to their existing canonical decisions.
+Keep current-status concise/current, log chronological, feature docs detailed.
+Validate links and task routing as part of handoff, not merely "Wiki updated".
+Run `python3 tool/check_wiki_handoff.py`; keep current-status under its 12 KB
+restore budget, preserving historical evidence before moving it.
 
 ## 3. Agent roles
 

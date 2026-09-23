@@ -190,6 +190,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
     return ShellPage(
       children: [
         const AppHeader(title: '자료 찾기'),
+        const SectionHeader('검색·필터', emphasized: true),
         TextField(
           controller: input,
           textInputAction: TextInputAction.search,
@@ -339,7 +340,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
               label: const Text('필터 초기화'),
             ),
           ),
-        const SectionHeader('검색 결과'),
+        const SectionHeader('검색 결과', emphasized: true),
         const Text(
           '최신 시험순 · 첨부 종류는 등록 정보 기준',
           style: TextStyle(fontSize: 12, color: AppTokens.textSecondary),

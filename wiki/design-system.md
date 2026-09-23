@@ -197,3 +197,13 @@ Home daily-card gaps 6px. Existing neutral/warm palette, typography and >=48px
 interactive targets remain. Optional header action reserves no space when absent.
 Global content/search cardBorder remains #DCDCDC. Scaled content grows naturally;
 inline meal expands in the Home scroll, with expanded semantics and chevron state.
+
+## Shared section hierarchy — Owner refinement 2026-09-23
+
+`SectionHeader(emphasized: true)` uses theme surfaceContainerLow, onSurface
+heading/left rule and compact padding. `SectionDivider` uses theme outline at
+1.5 logical pixels. Shape, heading and spacing supplement color. Home sections
+after meals, Materials search/filter/results, Learning history/panel boundary,
+MY and Settings reuse these primitives. No per-screen orange/shadow/card stack.
+Auth form hierarchy remains unchanged. Widget/render matrix covers360×640 and
+428×926 at1×/2×; physical acceptance remains Owner work.

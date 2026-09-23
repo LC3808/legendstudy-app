@@ -1970,3 +1970,21 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   optional grade Save/back → trends7day/weekly/monthly → LAB independent details
   → Settings/logout cancel/confirm → Meal sanity. New UI Owner E2E NOT VERIFIED.
   Local commit only, push NO.
+
+## 2026-09-23 — Owner fixes and Wiki handoff recovery (after bcb15dd)
+
+- Restore protocol/task routing/current-state separation used for this task.
+  Prior105206B current checkpoint history preserved with feature references and
+  [historical evidence](history/status-checkpoints.md); current holds latest facts.
+- Fix logout HOME after async signOut/disposal, await avatar verified reload before
+  success, single deletion action, shared section hierarchy in five screen families.
+- Badge remains documented foundation: no approved catalogue/award persistence,
+  no fake menu or Level. Existing Achievement philosophy retained.
+- [Focused policy/handoff evidence](mobile-policy-audit.md#owner-fixes--handoff-recovery--after-bcb15dd);
+  [photo/account contract](core-app-improvements.md#owner-handoff-correction--2026-09-23-after-bcb15dd).
+- Validation: Flutter673 PASS/1 existing skip; analyze PASS; iOS simulator and
+  Android debug PASS;59 render cases/selected PNG inspection; Deno11 PASS.
+  Secret/source-ignore/diff and Wiki302 internal links/four handoff routes PASS.
+  Initial render command used a nonexistent filename; corrected full render run
+  passed. No test was deleted/disabled. No Production mutation or push.
+  Local commit contains this entry; identify it from git log, not a pinned HEAD.

@@ -80,3 +80,41 @@ school search/result/selection/optional grade Save→back → Trend-first CTA �
 weekday slots, weekly/monthly compact labels and proportional zero-safe bars → MY
 score copy → LAB internal-grade-only/Mock-only/Essay → Settings and logout cancel/
 confirm → existing Meal sanity. MOBILE_UI_OWNER_E2E NOT VERIFIED.
+
+## Owner fixes + handoff recovery — after bcb15dd
+
+This task's focused conflict audit (counts apply to these six rows only):
+
+| POLICY | WIKI STATUS | CODE EVIDENCE | TEST EVIDENCE | OWNER LATEST DECISION / ACTUAL STATUS | ACTION |
+|---|---|---|---|---|---|
+| Achievement surface | Advanced Engine FUTURE; roadmap examples not catalogue | no award model/repository/table; ContentTypeBadge unrelated | handoff checker finds decisions/roadmap/scope; no invented award test | MY access direction approved; GAP_OPEN for real collection | FOUNDATION in existing roadmap §9; no menu/award/Level/migration; catalogue needs separate Owner decision |
+| Meal | Seven-date/time/expanded policy, Owner PASS | unchanged school policy/provider/Home card | meal_owner_policy_test.dart, meal_fallback_test.dart | PASS | Preserve Owner E2E and code |
+| Profile first-write success | private Storage Owner applied, App acceptance pending | avatar.dart previously invalidated without awaiting reload | owner_handoff_fixes_test.dart reproduces premature success; delayed/mismatched read; avatar_test.dart replace/delete/private query | GAP_FIXED locally; device NOT VERIFIED | Await fresh read, byte match and frame; cacheNonce via current SDK; no RLS change or speculative INSERT diagnosis |
+| Logout HOME | confirmation existed, Settings stayed | settings_page.dart captures router before signedOut can dispose button | owner_handoff_fixes_test.dart cancel/failure/disposal-before-completion | GAP_FIXED | HOME after successful action, owner guard preserved |
+| Global section hierarchy / single deletion action | previous subtle lines insufficient per Owner | shared SectionHeader/SectionDivider; five screen families; one deletion action | mobile_ia_render_test.dart expanded Home/Materials/Timer matrix plus existing MY/Settings | GAP_FIXED | Shared themed surface/rule/header; no layout policy changes |
+| Wiki restore | index directory weak routing; current105206B mixes history | AGENTS/index/current + historical evidence; no app behavior dependency | tool/check_wiki_handoff.py, original175 paragraphs all found after normalized link comparison | STALE_WIKI corrected | Current/History/Feature roles, four route self-tests, five broken old anchors repaired |
+
+Counts: PASS1; GAP_FIXED3; GAP_OPEN1 (Achievement catalogue/implementation future);
+STALE_WIKI1 corrected. The earlier four release gates remain open; no claim that
+this focused audit exhausts all release gates. Production was not queried/mutated.
+
+Handoff self-test: “배지함” routes to decisions → roadmap §9 → scope; “급식 다음
+제공일” routes NEIS → Home bounded fallback; “카카오 로그인” routes Auth acceptance
+→ recovery/deletion/decisions; “공부 추이” routes Study v1/UI/storage and current
+Owner overrides. All required files and anchors are checked by the read-only tool.
+
+Historical preservation: all175 original current-status paragraphs remain in
+feature evidence or history (normalizing relocated Markdown links only). Three
+exact duplicate paragraphs reference Auth evidence. History is excluded from the
+mandatory restore path; no chronology was appended wholesale to log.
+
+Owner order: logout→HOME; login→HOME; empty-avatar first upload→replace→delete;
+MY/Home/Materials/Learning/Settings sections; one deletion action. No Badge
+Production test requested because collection/award backend is not implemented.
+MOBILE_UI_OWNER_E2E: NOT VERIFIED.
+
+Closeout validation: Flutter673 PASS/1 existing skip, analyze PASS, iOS simulator
+and Android debug PASS,59 render cases at both requested sizes/scales, selected
+five-screen PNGs inspected, Deno11 PASS. Signature/ignore/source audit PASS;
+Wiki302 internal links and four routing self-tests PASS. Original Owner iOS
+files verified unchanged by SHA1; no DB/Storage/schema/native config edits.

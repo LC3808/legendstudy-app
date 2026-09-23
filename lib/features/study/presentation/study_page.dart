@@ -69,6 +69,7 @@ class StudyPage extends ConsumerWidget {
               ],
             ),
           ),
+          const SectionDivider(),
           if (study.mockSelected)
             MockExamPanel(
               key: ValueKey(study.viewGeneration),
@@ -144,7 +145,7 @@ class StudyPage extends ConsumerWidget {
             ),
           if (study.mockSelected) ScoringHistory(study: study),
           if (!study.mockSelected) ...[
-            const SectionHeader('최근 7일'),
+            const SectionHeader('최근 7일', emphasized: true),
             StudyWeekSummary(study: study),
           ],
         ],

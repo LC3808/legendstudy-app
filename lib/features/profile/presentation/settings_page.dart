@@ -28,7 +28,7 @@ class SettingsPage extends ConsumerWidget {
     return SafeArea(
       child: ShellPage(
         children: [
-          const SectionHeader('계정'),
+          const SectionHeader('계정', emphasized: true),
           if (auth.isLoading)
             const LinearProgressIndicator(semanticsLabel: '계정 확인 중')
           else if (auth.hasError)
@@ -38,7 +38,7 @@ class SettingsPage extends ConsumerWidget {
             )
           else
             Text(isAuthenticated ? email ?? '로그인됨' : '로그인하지 않은 상태예요.'),
-          const SectionHeader('프로필'),
+          const SectionHeader('프로필', emphasized: true),
           if (isAuthenticated)
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -46,9 +46,9 @@ class SettingsPage extends ConsumerWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => context.push('/my/edit'),
             ),
-          const SectionHeader('기본 정보'),
+          const SectionHeader('기본 정보', emphasized: true),
           const LearningInfoRow(),
-          const SectionHeader('학습 설정'),
+          const SectionHeader('학습 설정', emphasized: true),
           Consumer(
             builder: (context, ref, _) {
               final study = ref.watch(studyControllerProvider);
@@ -73,7 +73,7 @@ class SettingsPage extends ConsumerWidget {
               );
             },
           ),
-          const SectionHeader('서비스 정보'),
+          const SectionHeader('서비스 정보', emphasized: true),
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('문의·건의사항'),
@@ -81,7 +81,7 @@ class SettingsPage extends ConsumerWidget {
             onTap: () => context.push('/my/feedback'),
           ),
           if (isAuthenticated) ...[const _LogoutButton()],
-          const SectionHeader('약관 및 개인정보'),
+          const SectionHeader('약관 및 개인정보', emphasized: true),
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('앱 정보'),
@@ -120,11 +120,10 @@ class SettingsPage extends ConsumerWidget {
                   ),
           if (isAuthenticated) ...[
             const Divider(),
-            const SectionHeader('회원 탈퇴'),
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                '회원탈퇴',
+                '회원 탈퇴',
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
               subtitle: const Text('계정과 내 기록을 삭제해요'),
@@ -181,8 +180,12 @@ class _LogoutButtonState extends ConsumerState<_LogoutButton> {
           ref.read(authStateProvider).value?.userId != owner) {
         return;
       }
+      final router = GoRouter.maybeOf(context);
+      final container = ProviderScope.containerOf(context, listen: false);
       await action();
-      // SDK auth event changes this page to Guest and invalidates owner providers.
+      // signedOut may dispose this button before the Future completes.
+      final currentOwner = container.read(authStateProvider).value?.userId;
+      if (currentOwner == null || currentOwner == owner) router?.go('/home');
     } catch (_) {
       if (mounted) setState(() => error = '로그아웃하지 못했어요. 다시 시도해 주세요.');
     } finally {

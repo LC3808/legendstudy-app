@@ -91,7 +91,7 @@ class ProfilePage extends ConsumerWidget {
         ),
         const LearningInfoRow(),
         const Divider(height: 24),
-        const SectionHeader('학습'),
+        const SectionHeader('학습', emphasized: true),
         Consumer(
           builder: (context, ref, _) {
             final study = ref.watch(studyControllerProvider);
@@ -136,10 +136,10 @@ class ProfilePage extends ConsumerWidget {
           },
         ),
         const Divider(height: 24),
-        const SectionHeader('성적'),
+        const SectionHeader('성적', emphasized: true),
         const MyScoreSummary(),
         const Divider(),
-        const SectionHeader('나의 자료'),
+        const SectionHeader('나의 자료', emphasized: true),
         ListTile(
           contentPadding: EdgeInsets.zero,
           title: const Text('저장한 자료'),
@@ -155,7 +155,7 @@ class ProfilePage extends ConsumerWidget {
         const Divider(),
         if (showAdminMenu) ...[
           const Divider(),
-          const SectionHeader('관리자'),
+          const SectionHeader('관리자', emphasized: true),
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const Icon(Icons.inbox_outlined),
