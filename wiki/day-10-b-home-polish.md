@@ -211,3 +211,11 @@ changes, or expanded eager background search. Failed request is not a holiday.
 Evidence: meal_owner_policy_test/meal_fallback_test unchanged time assertions;
 device_followup_three_test covers provided-date bounds/order/no-today chip and
 trailing-control geometry at360/428,1×/2×.
+
+## End-of-day Meal UI acceptance — 2026-09-24
+
+Owner MEAL_UI: PASS. Actual provided-day chips only, bounded previous/next/possible
+third context, date+weekday, selected background without checkmark, trailing school
+and explicit expand/collapse accepted. Earlier pending visual acceptance above is
+historical. Existing breakfast exclusion/time/D..D+6 preview and lazy expanded
+bounds stay unchanged; no new implementation/network/Production verification here.

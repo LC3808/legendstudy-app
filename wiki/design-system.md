@@ -293,7 +293,7 @@ Mean label/line position, bars, values, aggregation and comments are unchanged.
 
 ## UI V2 Owner device closeout — 2026-09-24
 
-UI_V2: OWNER DEVICE PASS (Owner-reported). Home/global/Learning/LAB/MY/Settings
+UI_V2: OWNER DEVICE PASS (Owner-reported). Home/Materials/global/Learning/LAB/MY/Settings
 surfaces, Study chart/average and Meal UI accepted. Approved border/shadow are
 frozen; this closeout does not change any surface token or component.
 Final small corrections: Materials four metadata filters and six category chips;
@@ -301,3 +301,11 @@ Study `이번 주   총 … · 일 최대 …`, removing only the dot after 이�
 Total remains bold/primary, maximum secondary; mean annotation/line and chart
 geometry remain Owner-approved and unchanged. Earlier surface/header evidence
 above is historical; this latest copy supersedes the two-dot header.
+
+End-of-day confirmation: global depth is accepted, without excessive floating.
+Brand #FFA300; peach prohibited; Cool Gray page; white major surfaces with
+1px #C4CCD7 and the already-approved shadow. Major/Nested/Inline hierarchy stays.
+Future Wiki maintenance only: move historical design evidence into history while
+keeping current canonical policy discoverable and links intact. No refactor or
+historical deletion in this closeout. UI acceptance does not close feature/data,
+Mock catalogue, analytics or Production release gates.

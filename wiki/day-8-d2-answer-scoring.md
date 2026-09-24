@@ -322,3 +322,20 @@ actual-option grouping, single/multi variants, free title/start/manual save,
 restart/write-failure/owner-race isolation, no scoring outbox and include true/false.
 Fixtures are test-only; no Production exam/subject/key inserted. Existing scoring
 and grade suites preserve pinned/owner/idempotency/answer-safety regressions.
+
+## End-of-day foundation and Phase2 gaps — 2026-09-24
+
+MOCK: FOUNDATION / PHASE2 OPEN. UI V2 Owner acceptance is not Mock product
+completion. Official uses actual canonical exam/subject/variant and published,
+current verified key with existing pinned-version/owner/idempotency/stale/answer
+safety. Free uses user title, duration, optional subject and local manual score;
+no verified scoring or automatic official/admissions analytics inclusion.
+
+OPEN / FUTURE: full official exam catalogue; complete year/grade/month browsing;
+full answer-key catalogue; official selection UX completion; Free Practice custom-
+time UX polish; free subject-level score structure; cross-device result history.
+Existing custom duration and optional subject are implemented foundations, not
+proof these later UX/data gaps are complete. No new keys, taxonomy or schema.
+Mock Phase2 NOT STARTED today; resume only at Owner request. Next default priority
+is [offline Daily Sync Phase1](daily-sync-phase-1-deterministic-delta-package.md),
+not automatic Mock expansion or Daily Sync Phase2.

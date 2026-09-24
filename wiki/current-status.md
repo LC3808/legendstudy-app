@@ -41,14 +41,15 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 - Storage SQL acceptance is not App photo E2E. Owner reports first-photo false
   success on baseline; corrected photo/new UI device acceptance remains pending.
 - Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS (Owner follow-up2).
-- UI_V2: OWNER DEVICE PASS. Home/global/Learning/LAB/MY/Settings surfaces,
+- UI_V2: OWNER DEVICE PASS. Home/Materials/global/Learning/LAB/MY/Settings surfaces,
   Study chart/average and Meal UI accepted by Owner. Border/shadow frozen.
 - Final Materials filter exposure and week separator corrections locally validated;
   these two small changes have no separate new device-run claim. Other release gates remain.
 
 ## Local automated validation
 
-Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
+Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest App validation
+from UI closeout (not rerun for the Wiki-only end-of-day task):
 758 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
 builds PASS. Responsive/render suites120 PASS (including non-render assertions),
 360×640/428×926 at1×/2×, Home/Timer/Mock/MY, official/free selection and expanded Meal PNGs inspected;
@@ -111,26 +112,35 @@ validation above is from the subsequent global surface UI task; the strategy its
 
 ## Current work and next actions
 
-UI V2 Owner acceptance recorded; final Materials filter/separator corrections
-complete locally. No further surface styling work authorized.
-[Study future comparison](study-v1.md#future-study-analytics--planned) is PLANNED
-descriptive study/score co-movement, no causal claims or engine.
-[Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
-recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
-Admissions prediction/bands/automatic qualification remain an open research gate,
-not permanently rejected. [Manus registry](research-registry.md) records five report
-names and source provenance; the synthesis and Phase1 package are now SOURCE
-ACQUIRED. Individual A–D full reports have not been inspected here. Daily Sync
-Phase1 is ready for subsequent offline implementation, not implemented. Compliance P0
-evidence audit pending. No new analysis/notification/Badge/backend implementation.
-Owner next: review local closeout/push decision. Materials exposes four metadata
-filters and six category chips; Study keeps only the total-to-maximum dot. Mock/LAB and domain implementations unchanged in this polish. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
-owns schema/agency/duration audit and scope. Full key catalogue, timer-only official
-browser, authoritative duration/agency metadata, cross-device result/manual-score
-history and advanced analysis remain gaps. No new backend/keys or Production E2E.
-Local commit only, PUSH NO; preserve Owner iOS and existing untracked files.
-Next implementation follows Owner review and release gates, not automatic roadmap
-expansion. No Production secrets or UUIDs in docs.
+End-of-day2026-09-24: UI_V2 OWNER DEVICE PASS; final small filter/separator
+corrections locally validated. No further surface styling work authorized.
+Materials: search → grade/year/month/subject → 전체/수능/모의고사/논술/학습자료/입시정보;
+initial5 + explicit more, education columns remain discoverable. Study final copy:
+이번 주   총 N분 · 일 최대 N분; approved average placement retained.
+
+Mock is FOUNDATION, not complete: supported-key official exam/subject/variant
+selection + safe verified scoring; separate local free title/time/manual score.
+[Phase2 gaps](day-8-d2-answer-scoring.md#end-of-day-foundation-and-phase2-gaps--2026-09-24):
+full official/year-grade-month/key catalogue, official selection completion,
+free custom-time polish/subject-score structure and cross-device result history.
+Existing safe scoring is not a claim of full catalogue coverage.
+
+Next session priority (no implementation starts in this closeout):
+1. Daily Sync Phase1 deterministic source/delta core, offline/dry-run only;
+   no Production write/migration/scheduler/cron/publication. Phase2 Owner-gated.
+2. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
+3. Longitudinal architecture review when Score/Application/Outcome design starts;
+   first read the canonical strategy, preserve history/context/provenance/privacy.
+
+MY Snapshot / Mobile LAB actionable analysis / Web LAB deep analysis allocation
+stays canonical; advanced engines PLANNED. Community FUTURE/release-gated;
+Achievement FOUNDATION/FUTURE without catalogue/persistence; Notification Center
+PLANNED without backend or fake alerts. Existing release gates remain OPEN.
+Research synthesis and Phase1 package are SOURCE ACQUIRED in this repository;
+individual A–D full reports have not been separately inspected here.
+Future Wiki maintenance: separate historical design evidence from current design
+policy, preserving links; no such refactor today. Local commit only, PUSH NO;
+Owner iOS/untracked files retained. No automatic roadmap/Phase2 expansion.
 
 ## Handoff
 

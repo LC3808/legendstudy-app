@@ -2123,3 +2123,44 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
 - [Materials contract](day-9-search-explore.md#ui-v2-final-mobile-filter-exposure--2026-09-24),
   [design acceptance](design-system.md#ui-v2-owner-device-closeout--2026-09-24),
   [Study copy](study-v1.md#ui-v2-owner-device-closeout--2026-09-24).
+
+## 2026-09-24 — End-of-day canonical handoff
+
+App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,
+not a permanent HEAD definition. Git-verified same-day sequence:
+410df98 v2 →03eebea validation →bcaa79e device follow-up →8620afe analytics layers
+→a29a4fd link correction →6d50e82 Home/Study/selection →b463201 Manus import
+→60e60b1 dual Mock →37b0fe3 Home/Study polish →3552c7e longitudinal strategy
+→45dee7f global surfaces →320c7fa UI device closeout.
+
+UI_V2 OWNER DEVICE PASS: Home/Materials/Learning/LAB/MY/Settings surfaces,
+Study chart/average and Meal UI; frozen border/shadow. Final Materials/separator
+corrections have local automated evidence. Last App validation758PASS/1skip,
+analyze/builds PASS,120 render/contract cases; not rerun for Wiki-only closeout.
+[Design](design-system.md#ui-v2-owner-device-closeout--2026-09-24),
+[Materials](day-9-search-explore.md#ui-v2-final-mobile-filter-exposure--2026-09-24),
+[Study](study-v1.md#ui-v2-owner-device-closeout--2026-09-24),
+[Meal](day-10-b-home-polish.md#end-of-day-meal-ui-acceptance--2026-09-24) own details.
+
+[Longitudinal strategy](longitudinal-learning-admissions-data-strategy.md) remains
+HIGH/CANONICAL/PLANNED, not implemented cohort/consulting/prediction. All sample,
+provenance/privacy/correlation/evidence gates remain. [Current status](current-status.md)
+retains Owner Phase0/PilotC23/23/23/363/739, integrity0 and quarantine23 advisory.
+[Imported Phase1](daily-sync-phase-1-deterministic-delta-package.md) is READY,
+offline/dry-run, NOT IMPLEMENTED; Phase2 Owner-gated. [Mock](day-8-d2-answer-scoring.md#end-of-day-foundation-and-phase2-gaps--2026-09-24)
+remains foundation with explicit Phase2 gaps. Advanced LAB, Community, Achievement
+and notifications retain planned/future gates, not promoted by UI PASS.
+
+Next session: Daily Sync Phase1; Mock Phase2 only on Owner resumption; strategy
+review before future Score/Application/Outcome DB work. Neither phase started.
+Design-history refactoring deferred. No code/DB/Production mutation; local Wiki
+commit only/PUSH NO; Owner files preserved.
+
+Handoff self-test routes A–E (link/section/content assertions):
+- A PASS: Daily Sync 시작하자 → index Daily Sync → Phase1 package (offline only).
+- B PASS: 모의고사 완성하자 → index Mock → current foundation + Phase2 gaps.
+- C PASS: 공부시간과 성적을 분석하자 → strategy personal analytics/correlation guardrail.
+- D PASS: 합격 데이터를 모으자 → strategy Application/Outcome lifecycle + privacy gates.
+- E PASS: UI 다시 수정하자 → design v2 + latest Owner Device PASS/frozen surfaces.
+Internal links/task routing, diff check and secret scan PASS. UI PASS is not App
+Production release PASS; recovery/deletion/policy/Store/Community gates remain.
