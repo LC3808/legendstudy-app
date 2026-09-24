@@ -125,12 +125,10 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('6월'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('시험 종류'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('평가원 모의평가'));
+      await tester.tap(find.widgetWithText(FilterChip, '수능'));
       await tester.pumpAndSettle();
       expect(repo.calls.last.filters.month, 6);
-      expect(repo.calls.last.filters.examType, 'evaluation_mock');
+      expect(repo.calls.last.filters.examType, 'csat');
       await tester.enterText(find.byType(TextField), '없는검색어');
       await tester.pump(const Duration(milliseconds: 400));
       await tester.pumpAndSettle();

@@ -178,6 +178,23 @@ void main() {
           );
           await tester.pump();
           await tester.pump(const Duration(milliseconds: 400));
+          expect(find.widgetWithText(ActionChip, '시험 종류'), findsNothing);
+          expect(find.widgetWithText(FilterChip, '교육칼럼'), findsNothing);
+          expect(
+            tester.widgetList<FilterChip>(find.byType(FilterChip))
+                .map((chip) => (chip.label as Text).data).toList(),
+            ['전체', '수능', '모의고사', '논술', '학습자료', '입시정보'],
+          );
+          if (scale == 1.0) {
+            final chips = find.byType(ActionChip);
+            expect(tester.getTopLeft(chips.first).dy,
+                tester.getTopLeft(chips.last).dy);
+          }
+          if (scenario != 'filters') {
+            expect(tester.widgetList<ActionChip>(find.byType(ActionChip))
+                .map((chip) => (chip.label as Text).data).toList(),
+                ['학년', '연도', '시행 월', '과목']);
+          }
           if (scenario == 'filters') {
             await choose(tester, '학년', '고3');
             await choose(tester, '연도', '2026년');
@@ -247,6 +264,36 @@ void main() {
       }
     }
   }
+  testWidgets('hidden column remains discoverable; CSAT uses existing filter', (tester) async {
+    final repo = FakeSearchRepository(items: [
+      ResourceSearchItem(content: const ContentItem(
+        id: 'column', slug: 'column', contentType: 'education_column',
+        title: '진로 교육칼럼', sourceUrl: 'https://example.org/column', isActive: true,
+      ), groups: const []),
+    ]);
+    await tester.pumpWidget(ProviderScope(
+      overrides: [searchRepositoryProvider.overrideWithValue(repo)],
+      child: MaterialApp(theme: AppTheme.light, home: const Scaffold(body: MaterialsPage())),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.text('진로 교육칼럼'), findsOneWidget);
+    expect(repo.calls.last.isBrowse, isTrue);
+    await tester.enterText(find.byType(TextField), '진로');
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pumpAndSettle();
+    expect(find.text('진로 교육칼럼'), findsOneWidget);
+    expect(repo.calls.last.text, '진로');
+    expect(repo.calls.last.filters.contentType, isNull);
+    await tester.tap(find.widgetWithText(FilterChip, '수능'));
+    await tester.pumpAndSettle();
+    expect(repo.calls.last.filters.examType, 'csat');
+    expect(repo.calls.last.filters.contentType, 'exam');
+    expect(repo.calls.last.text, '진로');
+    await tester.tap(find.widgetWithText(FilterChip, '전체'));
+    await tester.pumpAndSettle();
+    expect(repo.calls.last.filters.isEmpty, isTrue);
+    expect(find.text('진로 교육칼럼'), findsOneWidget);
+  });
   testWidgets('Owner five results then explicit more renders ten', (
     tester,
   ) async {

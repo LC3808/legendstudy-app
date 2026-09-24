@@ -270,3 +270,16 @@ Mock controls remain flat and unchanged; no extra enclosing card was introduced.
 No functional LAB/Mock/Auth/Meal/provider/storage/scoring/Daily Sync change.
 Owner's approved Home shadow and mean placement remain constraints; global UI
 MOBILE_UI_OWNER_E2E stays NOT VERIFIED until the next device review.
+
+## UI V2 device acceptance and small closeout — 2026-09-24
+
+Owner reports PASS: HOME_SURFACE, GLOBAL_SURFACE, LEARNING_SURFACE, LAB_SURFACE,
+MY_SURFACE, SETTINGS_SURFACE, STUDY_CHART, STUDY_AVERAGE, MEAL_UI. UI_V2: OWNER
+DEVICE PASS. Earlier NOT VERIFIED entries are historical for those accepted UI
+areas; unrelated Auth/privacy/release gates are not closed by this acceptance.
+Materials removes only 시험 종류 picker/교육칼럼 chip and exposes existing CSAT
+filter. Study removes week-to-total dot only. search_ui_test checks category order,
+column discovery/CSAT reset/initial5; existing core/bookmark journeys use retained
+controls. device_followup_three_test checks one metric dot, total emphasis and
+unchanged mean geometry at360/428px1×/2×. Shared surfaces and no-touch domains
+are unchanged. Small corrections have automated evidence, not a claimed new device run.

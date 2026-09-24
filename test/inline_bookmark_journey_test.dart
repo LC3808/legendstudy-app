@@ -140,7 +140,7 @@ void main() {
         await choose('학년', '고3');
         await choose('연도', '2026년');
         await choose('시행 월', '9월');
-        await choose('시험 종류', '평가원 모의평가');
+        expect(find.widgetWithText(ActionChip, '시험 종류'), findsNothing);
         await choose('과목', '국어');
         await tester.ensureVisible(find.widgetWithText(FilterChip, '모의고사'));
         await tester.tap(find.widgetWithText(FilterChip, '모의고사'));
@@ -174,7 +174,7 @@ void main() {
               query.filters.subjectId,
               query.filters.contentType,
             ],
-            [3, 2026, 9, 'evaluation_mock', 'korean', 'exam'],
+            [3, 2026, 9, null, 'korean', 'exam'],
           );
           expect(search.calls.length, requests);
           expect(c.read(searchControllerProvider).items, hasLength(4));

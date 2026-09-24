@@ -621,3 +621,12 @@ maximum secondary ink, with neutral separators and responsive wrapping. This is
 presentation only: existing recent7day period, max/zero/proportional bars and exact
 approved average annotation/line geometry are unchanged. See
 [shared surface contract](design-system.md#global-surface-final-override--2026-09-24).
+
+### UI V2 Owner device closeout — 2026-09-24
+
+Owner STUDY_CHART and STUDY_AVERAGE: PASS. Final header is
+`이번 주   총 … · 일 최대 …`: no dot after 이번 주; exactly one neutral dot
+between total and maximum. Total stays primary/bold; maximum secondary. Responsive
+360/428px at1×/2× remains required. This supersedes the preceding two-dot copy
+only; mean label/dashed line placement, chart geometry and all calculations stay
+unchanged. No Mock or study storage/analytics change.

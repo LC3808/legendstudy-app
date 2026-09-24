@@ -438,7 +438,9 @@ void main() {
           expect(totalText.style!.fontWeight, FontWeight.w700);
           expect(totalText.style!.color, AppTokens.textPrimary);
           expect(maxText.style!.color, AppTokens.textSecondary);
-          expect(find.text('·'), findsNWidgets(2));
+          expect(find.text('·'), findsOneWidget);
+          final header = t.widget<Wrap>(find.ancestor(of: find.text('이번 주'), matching: find.byType(Wrap)).first);
+          expect(header.children[1], isA<Text>()); // Total follows week without a dot.
           final ratio = studyChartCeiling(totals) == 0
               ? 0
               : studyChartAverage(totals) / studyChartCeiling(totals);

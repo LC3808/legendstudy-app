@@ -98,9 +98,15 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
         grade: field == 'grade' ? value as int? : filters.grade,
         year: field == 'year' ? value as int? : filters.year,
         month: field == 'month' ? value as int? : filters.month,
-        examType: field == 'examType' ? value as String? : filters.examType,
+        examType: field == 'type'
+            ? (value == 'csat' ? 'csat' : null)
+            : field == 'examType'
+            ? value as String?
+            : filters.examType,
         subjectId: field == 'subject' ? value as String? : filters.subjectId,
-        contentType: field == 'type' ? value as String? : filters.contentType,
+        contentType: field == 'type'
+            ? (value == 'csat' ? 'exam' : value as String?)
+            : filters.contentType,
       ),
     );
     search();
@@ -158,7 +164,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
   }
 
   Widget filterChip(String label, bool selected, VoidCallback onTap) => Padding(
-    padding: const EdgeInsets.only(right: 8, bottom: 4),
+    padding: const EdgeInsets.only(right: 4, bottom: 4),
     child: ActionChip(
       label: Text(label),
       avatar: Icon(
@@ -166,8 +172,8 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
         size: 18,
         color: AppTokens.textPrimary,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-      labelPadding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 2),
       backgroundColor: selected ? AppTokens.primarySoft : AppTokens.surface,
       onPressed: onTap,
       materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -270,21 +276,6 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
                     ),
                   ),
                   filterChip(
-                    filters.examType == null
-                        ? '시험 종류'
-                        : examTypeLabels[filters.examType] ?? '기타 시험',
-                    filters.examType != null,
-                    () => choose(
-                      '시험 종류',
-                      {
-                        for (final t in facets.examTypes)
-                          t: examTypeLabels[t] ?? '기타 시험',
-                      },
-                      filters.examType,
-                      (v) => change('examType', v),
-                    ),
-                  ),
-                  filterChip(
                     selectedSubject?.name ?? '과목',
                     filters.subjectId != null,
                     () => choose(
@@ -317,14 +308,22 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
                   children: [
                     for (final entry in <String?, String>{
                       null: '전체',
-                      ...contentTypeLabels,
+                      'csat': '수능',
+                      'exam': contentTypeLabels['exam']!,
+                      'university_essay':
+                          contentTypeLabels['university_essay']!,
+                      'study_material': contentTypeLabels['study_material']!,
+                      'admissions_info': contentTypeLabels['admissions_info']!,
                     }.entries)
                       if (entry.key != 'other')
                         Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: FilterChip(
                             label: Text(entry.value),
-                            selected: filters.contentType == entry.key,
+                            selected: entry.key == 'csat'
+                                ? filters.examType == 'csat'
+                                : filters.contentType == entry.key &&
+                                      filters.examType == null,
                             onSelected: (selected) =>
                                 change('type', selected ? entry.key : null),
                           ),

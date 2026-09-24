@@ -2107,3 +2107,19 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
   multi-hour summary inspected. New Owner UI E2E NOT VERIFIED; local only, no push.
 - Canonical [surface override](design-system.md#global-surface-final-override--2026-09-24)
   and [audit](mobile-policy-audit.md#global-surface-final-audit--2026-09-24).
+
+## 2026-09-24 — UI V2 device closeout
+
+- Owner accepts Home/global/Learning/LAB/MY/Settings surfaces, Study chart/average
+  and Meal UI. UI_V2 OWNER DEVICE PASS; border/shadow frozen.
+- Materials removes exam-type picker/education-column chip; four metadata filters
+  fit one row at1× and wrap at2×. Six category chips include existing CSAT filter;
+  query/taxonomy/column discovery and initial5/load-more preserved.
+- Study drops only week-to-total dot; total/max styling and mean geometry preserved.
+- Analyze,758 Flutter PASS/1 existing skip, iOS simulator/Android debug PASS;
+ 120 render/contract cases PASS at360/428px1×/2×. Wiki routing/diff checks PASS.
+  Small corrections locally validated; no new device-run claim or Production mutation.
+  Local commit only, PUSH NO; Owner files preserved.
+- [Materials contract](day-9-search-explore.md#ui-v2-final-mobile-filter-exposure--2026-09-24),
+  [design acceptance](design-system.md#ui-v2-owner-device-closeout--2026-09-24),
+  [Study copy](study-v1.md#ui-v2-owner-device-closeout--2026-09-24).

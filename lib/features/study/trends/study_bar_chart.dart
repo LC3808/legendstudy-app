@@ -70,13 +70,11 @@ class _StudyBarChartState extends State<StudyBarChart> {
           children: [
             if (widget.dailyDetails) ...[
               const Text('이번 주'),
-              _SummaryMetric(
-                child: Text(
-                  '총 ${studyDuration(total)}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: AppTokens.textPrimary,
-                  ),
+              Text(
+                '총 ${studyDuration(total)}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: AppTokens.textPrimary,
                 ),
               ),
               _SummaryMetric(

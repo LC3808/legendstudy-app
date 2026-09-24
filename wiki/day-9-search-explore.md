@@ -240,3 +240,18 @@ contracts unchanged. Remove 검색·필터 title and helper copy (actual Korean:
 
 Initial/load-more pageSize5 supersedes10. Sentinel6, offset step5. Existing explicit
 load-more, exact parent-boundary counts, facet/attachment/query semantics unchanged.
+
+## UI V2 final mobile filter exposure — 2026-09-24
+
+Row1 search; row2 학년 / 연도 / 시행 월 / 과목; row3 전체 / 수능 / 모의고사 /
+논술 / 학습자료 / 입시정보. Existing responsive wrapping and category scrolling
+remain for narrow widths/large text. Remove 시험 종류 picker and 교육칼럼 chip only.
+Canonical taxonomy, metadata, keyword matching and repository query code remain
+unchanged. 수능 exposes existing examType=csat with contentType=exam; 모의고사
+retains the existing broad exam content filter (no new exclusion/classification).
+Changing category clears its previous exam-type selection. 전체 imposes neither
+category nor exam-type restriction; existing grade/year/month/subject filters remain.
+Education columns remain searchable/in 전체 and existing initialType routes work.
+Initial5 and explicit load-more preserved. Owner accepted global surfaces; no
+border/shadow changes in this closeout. search_ui_test covers order, hidden chips,
+column discovery, CSAT mapping and reset; repository regression remains required.

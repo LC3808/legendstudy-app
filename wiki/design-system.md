@@ -290,3 +290,14 @@ Existing flat Mock controls remain untouched by this surface-only change. Brand
 Daily Study header is `이번 주 · 총 … · 일 최대 …`: total bold primary ink,
 maximum secondary ink, neutral separators. Natural wrapping at360px/2× is required.
 Mean label/line position, bars, values, aggregation and comments are unchanged.
+
+## UI V2 Owner device closeout — 2026-09-24
+
+UI_V2: OWNER DEVICE PASS (Owner-reported). Home/global/Learning/LAB/MY/Settings
+surfaces, Study chart/average and Meal UI accepted. Approved border/shadow are
+frozen; this closeout does not change any surface token or component.
+Final small corrections: Materials four metadata filters and six category chips;
+Study `이번 주   총 … · 일 최대 …`, removing only the dot after 이번 주.
+Total remains bold/primary, maximum secondary; mean annotation/line and chart
+geometry remain Owner-approved and unchanged. Earlier surface/header evidence
+above is historical; this latest copy supersedes the two-dot header.
