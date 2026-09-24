@@ -361,3 +361,15 @@ MY score is a snapshot with LAB detail CTA; push preserves MY/LAB caller context
 is canonical Owner direction. [Research](research-registry.md) is evidence, not
 Owner approval: retain future admission bands behind explicit research gate, not
 permanent deletion or implementation approval. Existing Achievement philosophy stays.
+
+## 2026-09-24 — Owner device follow-up 2
+
+Keep existing v2/analytics allocation. Compact own/Guest greeting + planned neutral
+notification slot; D-Day name/date metadata and primary D-n; study label/value row;
+Meal actual trailing school and chronological expanded date chips, no policy change.
+Daily seven-slot chart adds actual durations and mean reference; shared included-time
+aggregation stays canonical. Canonical scoring setup selects actual exam then its
+subject/variant; independent timer practice is explicitly separate. Successful-state
+repository-refresh control removed, entry loading/error retry retained. MY comments
+only confirmed structured result facts. Materials5/load-more and MY→LAB→Back are
+Owner PASS; preserve. New changes require device acceptance, no new admission claim.

@@ -185,3 +185,26 @@ Owner review: Home greeting + semantic icons + Meal school alignment → Materia
 then explicit more10 → Timer7day chart/detail → Mock subject at large text → MY
 snapshot→each LAB detail→Back MY → LAB→each detail→Back LAB. New mobile UI device
 acceptance NOT VERIFIED. Internal-grade backend remains unavailable; no fake input.
+
+## Owner device follow-up2 — 2026-09-24
+
+| POLICY | WIKI / OWNER LATEST | CODE + TEST EVIDENCE | ACTUAL / ACTION |
+|---|---|---|---|
+| Compact Home / planned bell | smaller own+Guest header, visible slot | HomeGreeting; design_v2_test owner/guest/font/non-action; mobile_ia_render_test | GAP_FIXED; planned no alerts/count/backend |
+| D-Day metadata / study row | name·date + Settings, D-n; label+duration | DayTargetCard, HomePage; day_target_test + mobile_ia_render_test11minute fixture | GAP_FIXED; long metadata3line bound and2× wrap tested |
+| Meal trailing school/date chips | latest Owner presentation, existing time/data | MealSummary; home_compact_test edge geometry; meal_fallback_test chronological selected chips/full date | GAP_FIXED UI; policy/providers unchanged |
+| Daily values + average | actual7day totals, mean neutral dashed | StudyBarChart/StudyWeekSummary/StudyTrendPage; device_followup_two_test zeros/one/mixed/equal/hours and2width×2scale | GAP_FIXED; zero/dynamicmax and inclusion retained |
+| Mock context / refresh | actual supported subject selection, audit reset control | ScoringRepository joins exam_subject metadata; MockExamPanel automatic load/error retry; device_followup_two_test, existing scoring suites | GAP_FIXED supported-key path; full catalogue remains PARTIAL |
+| MY structured comment / Back | Owner MY→LAB→Back PASS | score_summary.dart actual completed answers; score_summary_test, navigation/UI tests | PASS; no admission/growth inference |
+| Materials5/more / Meal policy | Owner PASS | unchanged content/search and meal providers; full regression suite | PASS; no unrelated edits |
+| Full exam-key catalogue/cross-device analysis | existing limited scoring foundation | bounded100 available-key query, local known result history | GAP_OPEN; no key publication/import or fake results |
+| Requested product-operations synthesis | requested filename absent | filename search; existing research-registry.md provenance | GAP_OPEN documentation source; no claim original reports inspected |
+
+Fresh validation:719 Flutter PASS/1 existing skip, analyze and both native debug
+builds PASS;85 responsive/render-suite tests PASS plus23 new contract/chart cases
+(in full suite). Selected1×/2× PNGs inspected; Timer duration typography adjusted
+so0분 stays together at360px/2×. Signature scan423 text files0hits, source/ignore,
+Wiki10route/internal links and diff PASS. Owner iOS raw SHA1 values match task-start
+snapshot; untracked files preserved. No DB/Storage/Deno changes or Production mutation.
+New MOBILE_UI_OWNER_E2E remains NOT VERIFIED. Canonical workflow details in
+[Mock handoff](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24).

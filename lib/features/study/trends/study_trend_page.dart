@@ -93,6 +93,7 @@ class _StudyTrendPageState extends ConsumerState<StudyTrendPage> {
                   '${dates.first.month}.${dates.first.day} ~ ${day.month}.${day.day}',
                 ),
                 StudyBarChart(
+                  dailyDetails: period == TrendPeriod.daily,
                   labels: trendLabels(period, dates),
                   descriptions: dates
                       .map((d) => '${d.year}.${d.month}.${d.day}')

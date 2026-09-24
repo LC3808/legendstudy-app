@@ -2023,3 +2023,15 @@ Created `design-system-v2-proposed.md` (PROPOSED): code-grounded diagnosis, Pale
 - Wiki359 links/9 routing checks PASS; secret/source-ignore/diff PASS. Deno unchanged.
   No DB/Storage/Production changes, no push. Owner iOS hashes unchanged. Device UI
   review pending; see [policy audit](mobile-policy-audit.md).
+
+## 2026-09-24 — Owner device follow-up2
+
+Starting a29a4fd; compact Home/metadata/meal chips,7day value+mean reference, actual
+exam→subject scoring setup with error retry, factual MY snapshot. Materials and
+meal-selection implementation untouched.719 Flutter PASS/1skip, analyze, iOSsim,
+Androiddebug,85 responsive/render-suite tests, signatures/source-ignore/Wiki/diff
+PASS. Local commit only/PUSH NO/Production0; new Owner UI acceptance pending.
+[Home](day-10-b-home-polish.md), [Study](study-v1.md),
+[Mock workflow audit](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24),
+[policy evidence](mobile-policy-audit.md). Missing requested research synthesis
+recorded in existing [registry](research-registry.md); no invented source review.

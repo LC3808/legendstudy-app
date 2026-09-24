@@ -48,3 +48,10 @@ claim policy, followed by a separate Owner decision. No permanent product reject
 Next research review obtains original report locators/versions and maps concrete
 recommendations to adopted/open/deferred decisions. Do not invent missing report
 content or ask Owner to recreate past chat before searching this registry.
+
+
+Owner follow-up2 requested `research-2026-09-24-product-operations-synthesis.md`.
+Repository/workspace filename searches found no such document. Do not invent it or
+claim original A–D reports reviewed. This registry + architecture/roadmap decisions
+are the available canonical handoff; original synthesis/locators remain a documentation
+GAP. Current personal-probability and automatic-eligibility prohibition is preserved.

@@ -20,8 +20,12 @@ Deep Navy / Cool Neutral, white grouped surfaces and plain section headings.
 Guest MY exposes Login and hides private dashboard modules. Materials pages contain
 5 items with explicit load-more after Owner device follow-up; Settings logout follows
 service/policy groups. Home has an own-nickname greeting and small daily semantic
-icons. Meal label/school share a header; Timer recent7days uses the shared chart.
-MY score snapshots push LAB details and preserve caller Back context.
+icons. Greeting uses compact16px hierarchy and a noninteractive planned bell slot.
+D-Day name/date metadata sits above D-n; study label/value share a wrapping row.
+Meal school is trailing; expanded date chips remain chronological. Timer/Trend
+recent7days share actual-duration labels and a neutral dashed mean reference.
+Mock scoring setup selects real exam then subject/variant; independent timer practice
+has no key/result. MY confirmed correct-count snapshots push LAB and preserve Back.
 [Canonical design](design-system.md) maps the approved proposal to implementation.
 
 ## Owner verified
@@ -33,16 +37,19 @@ MY score snapshots push LAB details and preserve caller Back context.
   date within7 candidates D..D+6, expanded full-date meals. Keep implementation.
 - Storage SQL acceptance is not App photo E2E. Owner reports first-photo false
   success on baseline; corrected photo/new UI device acceptance remains pending.
+- Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS (Owner follow-up2).
 - New MOBILE_UI_OWNER_E2E: NOT VERIFIED. Build/test PASS is not Production E2E.
 
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
-695 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
-builds PASS;71 render cases (360×640/428×926,1×/2×), selected Home/Materials/
-Learning/LAB/MY/Settings/Guest PNGs inspected. Deno deletion tests last passed11
-in the prior task; no Deno changes in this follow-up. Secret signatures, source/ignore readiness,
-diff and Wiki link/routing checks PASS. No physical-device claim.
+719 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
+builds PASS. Responsive/render suites85 PASS (including non-render assertions),
+360×640/428×926 at1×/2×, Home/Timer/Mock/MY and expanded Meal PNGs inspected;
+new chart geometry/key-context tests additionally cover boundaries and2×. Deno
+unchanged; previous11 PASS, not rerun in this Flutter-only follow-up. Secret
+signatures423 text files/0hits, source-ignore readiness, diff and10 Wiki task-routing
+checks PASS. No new physical-device or Production catalogue verification claim.
 
 ## Production DB/Storage applied
 
@@ -71,7 +78,7 @@ No current task DB/Storage mutation, migration application or function deploymen
 
 ## Current work and next actions
 
-Design System v2 and device follow-up implemented; latest UI Owner review pending.
+Owner device follow-up2 implemented; new UI Owner review pending.
 [Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
 recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
 Admissions prediction/bands/automatic qualification remain an open research gate,
@@ -79,8 +86,12 @@ not permanently rejected. [Manus registry](research-registry.md) records five re
 names and supplied findings; original reports/dates/locators not inspected.
 Daily Sync research complete per Owner, implementation pending. Compliance P0
 evidence audit pending. No new analysis/notification/Badge/backend implementation.
-Owner next: Home greeting/accents/Meal heading → Materials5/more10 → Timer chart →
-Mock input at larger text → MY snapshot/LAB/Back → LAB detail/Back.
+Owner next: compact Home/D-Day/study row → expanded Meal date chips → daily time
+labels/average → Mock exam/subject (only where real published keys exist) → MY
+snapshot/LAB/Back. [Mock workflow audit](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24)
+is canonical for exam→subject→key→answer→result; full key catalogue, timer-only exam
+browser and cross-device result history remain gaps. Requested research synthesis
+filename is absent; registry records the provenance gap without invented content.
 Local commit only, PUSH NO; preserve Owner iOS and existing untracked files.
 Next implementation follows Owner review and release gates, not automatic roadmap
 expansion. No Production secrets or UUIDs in docs.

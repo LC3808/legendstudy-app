@@ -25,6 +25,26 @@ String mockScoreSummary(List<ScoringAttempt> attempts) {
   return '${a.subject ?? a.title} · ${r.rawScore}/${r.maxScore}점 · ${r.gradeLabel}';
 }
 
+/// Bounded snapshot of confirmed results, not cross-exam growth inference.
+String mockScoreComment(List<ScoringAttempt> attempts) {
+  final rows =
+      attempts
+          .where(
+            (a) => a.outcome == ScoringOutcome.complete && a.result != null,
+          )
+          .toList()
+        ..sort(
+          (a, b) => (b.result!.submittedAt ?? b.completedAt ?? DateTime(1970))
+              .compareTo(
+                a.result!.submittedAt ?? a.completedAt ?? DateTime(1970),
+              ),
+        );
+  if (rows.isEmpty) return '분석할 성적이 아직 부족해요.';
+  final result = rows.first.result!;
+  final correct = result.answers.where((a) => a.isCorrect).length;
+  return '최근 결과는 ${result.answers.length}문항 중 $correct문항 정답이에요.';
+}
+
 class MyScoreSummary extends ConsumerWidget {
   const MyScoreSummary({super.key});
   @override
@@ -49,6 +69,11 @@ class MyScoreSummary extends ConsumerWidget {
             !study.ready ? '성적을 확인하고 있어요.' : mockScoreSummary(study.attempts),
           ),
         ),
+        if (study.ready)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(mockScoreComment(study.attempts)),
+          ),
         LsListRow(
           title: 'LAB 상세 분석',
           key: const Key('my-mock-lab'),

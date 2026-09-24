@@ -132,13 +132,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(
-      tester
-          .widget<TextField>(find.byKey(const Key('mock-subject')))
-          .controller!
-          .text,
-      isEmpty,
-    );
+    expect(find.byKey(const ValueKey('mock-subject-')), findsOneWidget);
     expect(
       tester
           .widget<TextField>(find.byKey(const Key('mock-minutes')))
@@ -309,7 +303,7 @@ void main() {
           expect(c.mockSetup!.plannedSeconds, 4800);
           expect(find.text('시험 시간'), findsOneWidget);
           await capture(tester, 'mock-setup-$tag');
-          final dropdown = find.byType(DropdownButtonFormField<String>);
+          final dropdown = find.byKey(const Key('mock-duration'));
           final labels = tester.widget<DropdownButtonFormField<String>>(
             dropdown,
           );

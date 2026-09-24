@@ -35,6 +35,8 @@ class _MockExamPanelState extends State<MockExamPanel> {
   String? error, alertMessage;
   List<ScoringPaper> papers = [];
   int? selectedPaper;
+  String? selectedExam;
+  bool papersLoading = true, papersFailed = false;
   bool preparing = false;
   int selectionEpoch = 0;
   @override
@@ -63,21 +65,77 @@ class _MockExamPanelState extends State<MockExamPanel> {
 
   String presetSubject(String key) => key == '영어 듣기 제외' ? '영어' : key;
 
-  Future<void> loadPapers({bool reset = false}) async {
+  Future<void> loadPapers() async {
+    if (mounted) {
+      setState(() {
+        papersLoading = true;
+        papersFailed = false;
+      });
+    }
     try {
-      if (reset) await widget.study.configureScoring(null);
       final list = await widget.study.scoringRepository
           ?.call()
           .availablePapers();
       if (mounted) {
         setState(() {
           papers = list ?? [];
-          if (reset) selectedPaper = null;
+          papersLoading = false;
         });
       }
     } catch (_) {
       if (mounted) {
-        setState(() => alertMessage = '채점 목록을 불러오지 못했어요. 타이머는 사용할 수 있어요.');
+        setState(() {
+          papersFailed = true;
+          papersLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> chooseExam(String value) async {
+    if (preparing || starting) return;
+    setState(() => preparing = true);
+    await widget.study.configureScoring(null);
+    if (!mounted) return;
+    setState(() {
+      selectedExam = value == 'timer-only' ? null : value;
+      selectedPaper = null;
+      preparing = false;
+      error = null;
+      if (selectedExam == null) {
+        subject.text = presetSubject(preset) == '사용자 지정'
+            ? ''
+            : presetSubject(preset);
+        title.text = '개인 모의고사 연습';
+      }
+    });
+    refreshSetup();
+  }
+
+  Future<void> choosePaper(int? value) async {
+    if (preparing || starting || value == null) return;
+    final request = ++selectionEpoch;
+    setState(() {
+      preparing = true;
+      selectedPaper = null;
+      error = null;
+    });
+    try {
+      await widget.study.configureScoring(null);
+      await widget.study.configureScoring(papers[value].availability);
+      if (mounted && request == selectionEpoch) {
+        setState(() {
+          selectedPaper = value;
+          title.text = papers[value].title;
+          subject.text = papers[value].subjectLabel ?? '과목 정보 없음';
+        });
+        refreshSetup();
+      }
+    } catch (_) {
+      if (mounted) setState(() => error = '정답 데이터를 확인하지 못했어요. 과목을 다시 선택해 주세요.');
+    } finally {
+      if (mounted && request == selectionEpoch) {
+        setState(() => preparing = false);
       }
     }
   }
@@ -123,17 +181,23 @@ class _MockExamPanelState extends State<MockExamPanel> {
   }
 
   Future<void> start() async {
-    if (starting) return;
+    if (starting ||
+        preparing ||
+        selectedExam != null && selectedPaper == null) {
+      return;
+    }
     final setup = readSetup();
     setState(() {});
     if (setup == null) return;
     widget.study.configureMock(setup);
     setState(() => starting = true);
     try {
-      if (selectedPaper != null && selectedPaper != -1) {
+      if (selectedExam != null && selectedPaper != null) {
         await widget.study.configureScoring(
           papers[selectedPaper!].availability,
         );
+      } else {
+        await widget.study.configureScoring(null);
       }
       if (mounted) await widget.start();
     } catch (_) {
@@ -214,86 +278,105 @@ class _MockExamPanelState extends State<MockExamPanel> {
                     refreshSetup();
                   },
           ),
-          if (study.scoringRepository != null)
+          if (papersLoading)
+            const LinearProgressIndicator(semanticsLabel: '시험 불러오는 중'),
+          if (papersFailed) ...[
+            const Text('시험을 불러오지 못했어요. 타이머는 사용할 수 있어요.'),
             TextButton(
-              onPressed: preparing || starting
-                  ? null
-                  : () => loadPapers(reset: true),
-              child: const Text('시험 목록 새로고침'),
+              onPressed: papersLoading ? null : loadPapers,
+              child: const Text('다시 시도'),
             ),
-          if (papers.isNotEmpty)
-            DropdownButtonFormField<int>(
-              initialValue: selectedPaper ?? -1,
+          ] else if (!papersLoading && papers.isEmpty)
+            const Text('정답 데이터 없음 · 타이머만 사용할 수 있어요.'),
+          if (papers.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              key: const Key('mock-exam'),
+              initialValue: selectedExam ?? 'timer-only',
               isExpanded: true,
-              decoration: const InputDecoration(labelText: '채점할 시험'),
+              isDense: false,
+              itemHeight: null,
+              decoration: const InputDecoration(labelText: '시험 선택'),
               items: [
-                const DropdownMenuItem(value: -1, child: Text('타이머만 사용')),
-                for (var i = 0; i < papers.length; i++)
+                const DropdownMenuItem(
+                  value: 'timer-only',
+                  child: Text('타이머만 사용'),
+                ),
+                for (final id in papers.map((p) => p.examIdentity).toSet())
                   DropdownMenuItem(
-                    value: i,
+                    value: id,
                     child: Text(
-                      '${papers[i].title} · ${papers[i].availability.paperVariant}',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                      papers.firstWhere((p) => p.examIdentity == id).title,
                     ),
                   ),
               ],
-              onChanged: preparing
+              onChanged: preparing || starting
                   ? null
-                  : (value) async {
-                      final request = ++selectionEpoch;
-                      setState(() => preparing = true);
-                      try {
-                        await study.configureScoring(
-                          value == -1 ? null : papers[value!].availability,
-                        );
-                        if (mounted && request == selectionEpoch) {
-                          setState(() {
-                            selectedPaper = value;
-                            if (value != -1) title.text = papers[value!].title;
-                          });
-                        }
-                      } catch (_) {
-                        if (mounted) {
-                          setState(
-                            () => error = '채점 기준을 확인하지 못했어요. 다시 선택해 주세요.',
-                          );
-                        }
-                      } finally {
-                        if (mounted) setState(() => preparing = false);
-                      }
+                  : (v) {
+                      if (v != null) chooseExam(v);
+                    },
+            ),
+          ],
+          const SizedBox(height: 16),
+          if (selectedExam == null)
+            TextField(
+              key: const Key('mock-title'),
+              controller: title,
+              decoration: const InputDecoration(labelText: '연습 이름'),
+              onChanged: (_) => refreshSetup(),
+            ),
+          const SizedBox(height: 16),
+          if (selectedExam != null)
+            DropdownButtonFormField<int>(
+              key: ValueKey('mock-paper-$selectedExam'),
+              initialValue: selectedPaper,
+              isExpanded: true,
+              isDense: false,
+              itemHeight: null,
+              decoration: const InputDecoration(labelText: '과목 선택'),
+              items: [
+                for (var i = 0; i < papers.length; i++)
+                  if (papers[i].examIdentity == selectedExam)
+                    DropdownMenuItem(
+                      value: i,
+                      child: Text(
+                        '${papers[i].subjectLabel ?? '과목 정보 없음'} · ${papers[i].availability.paperVariant}',
+                      ),
+                    ),
+              ],
+              onChanged: preparing || starting ? null : choosePaper,
+            )
+          else
+            DropdownButtonFormField<String>(
+              key: ValueKey('mock-subject-${subject.text}'),
+              initialValue: subject.text.isEmpty ? '' : subject.text,
+              isExpanded: true,
+              isDense: false,
+              itemHeight: null,
+              decoration: const InputDecoration(labelText: '과목'),
+              items: [
+                const DropdownMenuItem(value: '', child: Text('설정 안 함')),
+                for (final name in {
+                  '국어',
+                  '수학',
+                  '영어',
+                  '한국사',
+                  '탐구',
+                  '기타',
+                  if (subject.text.isNotEmpty) subject.text,
+                })
+                  DropdownMenuItem(value: name, child: Text(name)),
+              ],
+              onChanged: starting
+                  ? null
+                  : (v) {
+                      setState(() => subject.text = v ?? '');
+                      refreshSetup();
                     },
             ),
           const SizedBox(height: 16),
-          TextField(
-            key: const Key('mock-title'),
-            controller: title,
-            decoration: const InputDecoration(labelText: '시험명 (최대 80자)'),
-            onChanged: (_) => refreshSetup(),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            key: const Key('mock-subject'),
-            controller: subject,
-            onChanged: (_) => refreshSetup(),
-            decoration: const InputDecoration(labelText: '과목 (선택)'),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 6,
-            children: [
-              for (final name in ['국어', '수학', '영어', '한국사', '탐구', '기타'])
-                ActionChip(
-                  label: Text(name),
-                  onPressed: () {
-                    setState(() => subject.text = name);
-                    refreshSetup();
-                  },
-                ),
-            ],
-          ),
-          const SizedBox(height: 16),
           DropdownButtonFormField<String>(
+            key: const Key('mock-duration'),
             initialValue: preset,
             isExpanded: true,
             isDense: false,
@@ -319,10 +402,11 @@ class _MockExamPanelState extends State<MockExamPanel> {
               preset = value!;
               if (MockSetup.presets.containsKey(value)) {
                 minutes.text = '${MockSetup.presets[value]}';
-                if (title.text == '$previous 실전 모의고사') {
+                if (selectedExam == null && title.text == '$previous 실전 모의고사') {
                   title.text = '$value 실전 모의고사';
                 }
-                if (subject.text == presetSubject(previous)) {
+                if (selectedExam == null &&
+                    subject.text == presetSubject(previous)) {
                   subject.text = presetSubject(value);
                 }
               }
@@ -373,6 +457,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
           FilledButton(
             onPressed:
                 study.authReady &&
+                    (selectedExam == null || selectedPaper != null) &&
                     !preparing &&
                     !starting &&
                     !widget.startBusy &&

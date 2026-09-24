@@ -207,3 +207,50 @@ after current switch and stale new-submission rejection all PASS. Answers remain
 preserved on stale rejection, with no fake success. Local/run fixture cleanup,
 trigger restoration, scoring baseline restoration and existing public-data preservation
 PASS; Auth A/B users are retained. Next: **Day 8-D3 Grade + Result UX**.
+
+## Current exam selection and scoring handoff — 2026-09-24
+
+This current contract supersedes the older free-text/flat-paper setup presentation.
+The historical D2 Owner fixture acceptance above remains historical evidence, not
+proof that every public Production exam has a verified key.
+
+| Stage | Actual code/schema evidence | Status / boundary |
+|---|---|---|
+| Exam | `exams.content_item_id` PK → content_items title; initial_content_schema migration | IMPLEMENTED, not a separate exams.id |
+| Subject | exam_subjects.id/content_item_id; versioned subject_id + taxonomy_version FK; raw_subject_label fallback | IMPLEMENTED; UI groups ScoringPaper by exam content identity, then selects that exam's subject/variant |
+| Resource | resources.exam_subject_id/content_item_id composite FK, resource_type | IMPLEMENTED PDFs/links; resource availability does not imply machine-readable answer keys |
+| Key | answer_key_versions + exam_questions; published/current/verified source/version/digest contract in scoring migration and availability view | IMPLEMENTED contract; broad real exam key catalogue/import is MISSING |
+| Selection | SupabaseScoringRepository.availablePapers joins same exam_subject IDs to normalized subject/title | IMPLEMENTED for scoring_available rows only, bounded100; no fabricated exams/subjects; incomplete metadata fails closed |
+| Preparation | prepare checks current key/cutoff version and question count/points/type; no correct answers in running AnswerDraft | IMPLEMENTED; original mcq5-v1 safety contract unchanged |
+| Answers/attempt | StudyController scoringSetup→draft.answers→ScoringAttempt; local durable draft, frozen/time-up guards | IMPLEMENTED; selected context is fixed for scoring; pending request blocks start/duplicate selection |
+| Score | authenticated submit_mock_attempt + fetch_own_mock_attempt; guest local engine only with verified published key | IMPLEMENTED, idempotency/owner/pinned version validated; stale keys fail, never AI/generated key |
+| Result | mock_exam_attempts/mock_exam_answers, raw/correct/unanswered + sourced grade if available | IMPLEMENTED; grade cutoff absence is distinct from answer-key absence |
+| MY | latest completed recorded result + deterministic correct-count comment; missing result explicit | IMPLEMENTED local known-history snapshot, no comparable-trend or admissions claim |
+| Mobile LAB | /lab/scores: native history/result/provenance + next exam action | PARTIAL actionable analysis; aggregate strategy/cross-device history and Web deep reports FUTURE |
+
+Refresh audit:
+- Purpose: old “시험 목록 새로고침” called loadPapers(reset:true), cleared scoring
+  context and queried repository availability again. It did not refresh exam PDFs,
+  fetch new ingestion content, or calculate results.
+- Source: mock_exam_scoring_availability → exam_subjects → exams/content_items and
+  subjects. Existing query includes scoring_available only, limit100.
+- When required/value: initial entry needs data; a failed network request needs
+  retry. A permanent successful-state reset button exposed implementation detail.
+- Decision: automatic entry load + “다시 시도” on failure. Empty success says
+  “정답 데이터 없음 · 타이머만 사용할 수 있어요.” Full public catalogue including
+  timer-only exams and pagination/data publication remains an explicit GAP.
+
+Canonical path: 시험 선택 → 해당 시험의 과목/variant → published-key preparation →
+시험 시작 → 답안 입력 → 제출/검증된 채점 → 실제 결과 → MY → Mobile LAB.
+Title and subject are not editable in this path; duration preset cannot overwrite
+canonical subject. A separate “타이머만 사용” practice retains editable **연습 이름**
+and the existing timer subject presets (not falsely presented as an official exam
+catalogue). No free-text subject field remains. This practice has no linked key,
+no auto score and no fabricated result. Existing MCQ1–5 only; math short answers,
+full catalogue browsing, large-volume pagination, cross-device full scoring-history
+query and detailed trend/strategy are not completed by this UI correction.
+
+Tests: device_followup_two_test (metadata join/fail-closed, exam-filtered subjects,
+2x layout, pinned subject unaffected by duration); existing mock_scoring_test,
+mock_scoring_ui_test, grade_result_test protect key/owner/result contracts. Production
+DB was not queried or mutated in this task. No new migration or key publication.

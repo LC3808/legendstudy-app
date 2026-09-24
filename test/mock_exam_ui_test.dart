@@ -8,6 +8,7 @@ import 'package:legendstudy_app/features/study/focus/focus_service.dart';
 import 'package:legendstudy_app/features/study/focus/study_focus_controller.dart';
 import 'package:legendstudy_app/features/study/presentation/study_page.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
+
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
 import 'study_focus_test.dart' show TestFocusService;
 import 'mock_exam_test.dart' show TestAlerts;
@@ -107,11 +108,13 @@ void main() {
       await press('시험 시작');
       expect(find.text('시험명은 1~80자로 입력해 주세요.'), findsOneWidget);
       await tester.enterText(find.byKey(const Key('mock-title')), '가' * 80);
-      await tester.enterText(find.byKey(const Key('mock-subject')), '나' * 41);
-      await press('시험 시작');
-      expect(find.text('과목은 40자 이내로 입력해 주세요.'), findsOneWidget);
-      await tester.enterText(find.byKey(const Key('mock-subject')), '영어');
-      final dropdown = find.byType(DropdownButtonFormField<String>);
+      final subject = find.byKey(const ValueKey('mock-subject-국어'));
+      await tester.ensureVisible(subject);
+      await tester.tap(subject);
+      await tester.pumpAndSettle();
+      await press('영어');
+      expect(c.mockSetup!.subject, '영어');
+      final dropdown = find.byKey(const Key('mock-duration'));
       await tester.ensureVisible(dropdown);
       await tester.tap(dropdown);
       await tester.pumpAndSettle();

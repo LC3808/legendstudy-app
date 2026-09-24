@@ -104,6 +104,10 @@ void main() {
             t.getTopLeft(find.text('오늘 중식')).dx,
             lessThan(t.getTopLeft(find.text(schoolA.name)).dx),
           );
+          expect(
+            t.getBottomRight(find.text(schoolA.name)).dx,
+            closeTo(t.getBottomRight(find.byType(MealSummary)).dx, 1),
+          );
           expect(find.byType(NavigationBar), findsOneWidget);
           await preview.capture(t, 'home-compact-${size.width.toInt()}-$scale');
           await t.ensureVisible(find.byType(MealSummary));

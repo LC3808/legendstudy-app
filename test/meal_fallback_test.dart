@@ -117,7 +117,19 @@ void main() {
       await t.pump();
       expect(find.text('20260928 조식 메뉴'), findsOneWidget);
       expect(find.text('20260928 석식 메뉴'), findsOneWidget);
-      await t.tap(find.text('9월 25일 급식 보기'));
+      expect(
+        t
+            .widgetList<ChoiceChip>(find.byType(ChoiceChip))
+            .map((w) => (w.label as Text).data),
+        ['9월 25일 급식', '9월 28일 급식'],
+      );
+      expect(
+        t
+            .widgetList<ChoiceChip>(find.byType(ChoiceChip))
+            .map((w) => w.selected),
+        [false, true],
+      );
+      await t.tap(find.text('9월 25일 급식'));
       await t.pump();
       expect(find.text('20260925 중식 메뉴'), findsOneWidget);
     },

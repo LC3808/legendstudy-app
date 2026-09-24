@@ -82,8 +82,9 @@ void main() {
               neisOfficeCode: schoolA.officeCode,
               neisSchoolCode: schoolA.schoolCode,
             );
+          final clock = TestClock();
           final study = StudyController(
-            TestClock(),
+            clock,
             TestStore(),
             () => TestRepo('a'),
             ticking: false,
@@ -91,6 +92,11 @@ void main() {
           study.identity(null, resolved: true);
           await study.settled;
           if (screen == 'mock') study.selectMock(true);
+          if (screen == 'home') {
+            await study.start();
+            clock.advance(11 * 60000);
+            await study.end();
+          }
           final page = switch (screen) {
             'my' || 'my-unset' || 'guest-my' => const ProfilePage(),
             'home' => const HomePage(),
@@ -190,6 +196,19 @@ void main() {
               expect(find.text('저장한 자료'), findsNothing);
             }
           }
+          if (screen == 'home') {
+            expect(find.text('오늘 공부'), findsOneWidget);
+            expect(find.text('11분'), findsOneWidget);
+            final labelRect = t.getRect(find.text('오늘 공부'));
+            final valueRect = t.getRect(find.text('11분'));
+            // Row alignment centers the smaller label; large fonts may wrap.
+            expect(
+              labelRect.right <= valueRect.left ||
+                  labelRect.bottom <= valueRect.top,
+              isTrue,
+            );
+            expect(find.text('학습으로 이동'), findsOneWidget);
+          }
           if (screen == 'my-unset') {
             expect(find.text('프로필 설정'), findsOneWidget);
           }
@@ -284,17 +303,12 @@ void main() {
             );
           }
           if (screen == 'mock') {
-            final subject = find.byKey(const Key('mock-subject'));
-            expect(find.text('과목 (선택, 최대 40자)'), findsNothing);
-            expect(find.text('과목 (선택)'), findsOneWidget);
-            expect(
-              t.getTopLeft(subject).dy -
-                  t.getBottomLeft(find.byKey(const Key('mock-title'))).dy,
-              greaterThanOrEqualTo(16),
-            );
+            final subject = find.byKey(const ValueKey('mock-subject-국어'));
             await t.ensureVisible(subject);
             await t.tap(subject);
-            await t.enterText(subject, '수학');
+            await t.pumpAndSettle();
+            expect(find.text('과목'), findsWidgets);
+            await t.tap(find.text('수학').last);
             await t.pumpAndSettle();
             expect(t.takeException(), isNull);
             await preview.capture(

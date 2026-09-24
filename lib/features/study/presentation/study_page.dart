@@ -318,6 +318,7 @@ class StudyWeekSummary extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         StudyBarChart(
+          dailyDetails: true,
           labels: trendLabels(TrendPeriod.daily, dates),
           descriptions: dates
               .map((d) => '${d.year}.${d.month}.${d.day}')

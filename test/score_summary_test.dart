@@ -6,6 +6,10 @@ import 'support/grade_fixture.dart';
 
 void main() {
   test(
+    'missing snapshot has no invented trend',
+    () => expect(mockScoreComment([]), '분석할 성적이 아직 부족해요.'),
+  );
+  test(
     'empty score is not invented',
     () => expect(mockScoreSummary([]), contains('성적을 입력해 주세요.')),
   );
@@ -25,6 +29,10 @@ void main() {
         contains('${result.rawScore}/${result.maxScore}점'),
       );
       expect(mockScoreSummary([attempt]), contains(result.gradeLabel));
+      expect(
+        mockScoreComment([attempt]),
+        '최근 결과는 100문항 중 ${result.answers.where((a) => a.isCorrect).length}문항 정답이에요.',
+      );
     });
   }
 }

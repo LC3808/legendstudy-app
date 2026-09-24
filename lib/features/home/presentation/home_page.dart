@@ -64,7 +64,7 @@ class HomePage extends ConsumerWidget {
 }
 
 /// Trailing slot is reserved for a real notification entry once delivery exists.
-/// No disabled bell or invented unread count is shown in the meantime.
+/// A non-interactive planned icon carries no unread count or delivery claim.
 class HomeGreeting extends ConsumerWidget {
   const HomeGreeting({super.key, this.notificationEntry});
   final Widget? notificationEntry;
@@ -76,20 +76,42 @@ class HomeGreeting extends ConsumerWidget {
     final name = owner != null && profile?.id == owner
         ? profile?.displayName?.trim()
         : null;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: AppHeader(
-            title: name?.isNotEmpty == true
-                ? '$name님, 반가워요'
-                : owner != null
-                ? '오늘도 반가워요'
-                : '오늘도 공부를 시작해 볼까요?',
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppTokens.space12),
+      child: Row(
+        children: [
+          Expanded(
+            child: Semantics(
+              header: true,
+              child: Text(
+                name?.isNotEmpty == true
+                    ? '$name님, 반가워요'
+                    : owner != null
+                    ? '오늘도 반가워요'
+                    : '오늘도 공부를 시작해 볼까요?',
+                style: AppTokens.cardTitle,
+              ),
+            ),
           ),
-        ),
-        if (notificationEntry != null) notificationEntry!,
-      ],
+          notificationEntry ??
+              Tooltip(
+                message: '알림 센터 준비 중',
+                child: Semantics(
+                  label: '알림 센터 준비 중',
+                  child: ExcludeSemantics(
+                    child: SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: Icon(
+                        Icons.notifications_outlined,
+                        color: AppTokens.textSecondary,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+        ],
+      ),
     );
   }
 }
@@ -106,12 +128,12 @@ class _HomeStudyCard extends ConsumerWidget {
         !study.historyLimit &&
         study.week.last > 0;
     final body = hasToday
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        ? Wrap(
+            spacing: 12,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
+              const Text('오늘 공부', style: AppTokens.secondary),
               Text(studyDuration(study.week.last), style: AppTokens.hero),
-              const SizedBox(height: 2),
-              const Text('오늘 공부'),
             ],
           )
         : Text(study.summary);

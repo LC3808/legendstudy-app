@@ -19,7 +19,14 @@ class DayTargetCard extends ConsumerWidget {
       title: target?.label ?? 'D-DAY',
       icon: Icons.event_outlined,
       accentColor: AppTokens.primaryInk,
-      heading: target == null ? null : _TargetHeading(target: target, now: now),
+      heading: target == null
+          ? null
+          : Text(
+              '${target.label} · ${target.formattedDate}',
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: AppTokens.secondary,
+            ),
       action: TextButton(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -56,13 +63,9 @@ class DayTargetCard extends ConsumerWidget {
               onPressed: () => ref.invalidate(dayTargetProvider),
               child: const Text('일정을 불러오지 못했어요. 다시 시도'),
             )
-          : Text(
-              target?.formattedDate ?? '목표 날짜를 설정해 주세요.',
-              style: target == null
-                  ? null
-                  : Theme.of(context).textTheme.bodySmall
-                        ?.copyWith(color: AppTokens.textSecondary),
-            ),
+          : target == null
+          ? const Text('목표 날짜를 설정해 주세요.')
+          : _TargetHeading(target: target, now: now),
     );
   }
 }
@@ -84,13 +87,6 @@ class _TargetHeading extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          target.label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppTokens.cardTitle,
-        ),
-        const SizedBox(height: AppTokens.space4),
         Text(
           label,
           style: expired

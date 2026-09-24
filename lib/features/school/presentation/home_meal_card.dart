@@ -215,6 +215,7 @@ class _MealSummaryState extends State<MealSummary> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Icon(
                           Icons.restaurant_outlined,
@@ -228,17 +229,21 @@ class _MealSummaryState extends State<MealSummary> {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
+                        Icon(expanded ? Icons.expand_less : Icons.expand_more),
                         if (widget.schoolName != null) ...[
                           const SizedBox(width: 8),
                           Flexible(
-                            child: Text(
-                              widget.schoolName!,
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(color: AppTokens.textSecondary),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                widget.schoolName!,
+                                textAlign: TextAlign.right,
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: AppTokens.textSecondary),
+                              ),
                             ),
                           ),
                         ],
-                        Icon(expanded ? Icons.expand_less : Icons.expand_more),
                       ],
                     ),
                     Text(mealDateLabel(date)),
@@ -259,14 +264,21 @@ class _MealSummaryState extends State<MealSummary> {
           ),
         ),
         if (expanded) ...[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton(
-              onPressed: () => setState(() => selectedTomorrow = !tomorrow),
-              child: Text(
-                '${mealDateLabel(tomorrow ? koreanDateOffset(widget.now, 0) : nextDate)} 급식 보기',
-              ),
-            ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final option in [
+                (false, koreanDateOffset(widget.now, 0)),
+                (true, nextDate),
+              ])
+                ChoiceChip(
+                  label: Text('${mealDateLabel(option.$2)} 급식'),
+                  selected: tomorrow == option.$1,
+                  onSelected: (_) =>
+                      setState(() => selectedTomorrow = option.$1),
+                ),
+            ],
           ),
           if (meals.isEmpty) const Text('등록된 급식 정보가 없어요.'),
           for (final type in ['조식', '중식', '석식'])

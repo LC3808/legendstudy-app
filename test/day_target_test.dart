@@ -123,7 +123,9 @@ void main() {
               : days == 0
               ? 'D-DAY'
               : 'D-$days';
-          final nameRect = tester.getRect(find.text(target.label));
+          final nameRect = tester.getRect(
+            find.text('${target.label} · ${target.formattedDate}'),
+          );
           final statusRect = tester.getRect(find.text(status));
           final settingsRect = tester.getRect(
             find.widgetWithText(TextButton, '설정'),
@@ -134,28 +136,16 @@ void main() {
             lessThanOrEqualTo(tester.getRect(find.byType(DayTargetCard)).right),
           );
           expect(nameRect.right, lessThan(settingsRect.left));
-          expect(statusRect.right, lessThan(settingsRect.left));
+
           expect(settingsRect.height, greaterThanOrEqualTo(48));
           expect(settingsRect.width, greaterThanOrEqualTo(48));
-          expect(
-            tester.getTopLeft(find.text(target.formattedDate)).dy,
-            greaterThanOrEqualTo(settingsRect.bottom),
-          );
-          expect(
-            tester.widget<Text>(find.text(target.label)).overflow,
-            TextOverflow.ellipsis,
-          );
           final style = tester.widget<Text>(find.text(status)).style!;
           expect(
             style.color,
             days < 0 ? AppTokens.textSecondary : AppTokens.primaryInk,
           );
           if (days >= 0) expect(style.fontWeight, FontWeight.w800);
-          expect(
-            tester.getBottomRight(find.text(target.formattedDate)).dy -
-                nameRect.top,
-            lessThan(360),
-          );
+          expect(statusRect.bottom - nameRect.top, lessThan(360));
           expect(tester.takeException(), isNull, reason: 'day offset $days');
         }
       },
@@ -236,9 +226,9 @@ void main() {
         await tester.enterText(find.byType(TextFormField), '수능');
         await tester.tap(find.text('적용'));
         await tester.pumpAndSettle();
-        expect(find.text('수능'), findsOneWidget);
+        expect(find.text('수능 · 2026.09.13'), findsOneWidget);
         expect(find.text('D-DAY'), findsOneWidget);
-        expect(find.text('2026.09.13'), findsOneWidget);
+
         expect(tester.takeException(), isNull);
         await tester.tap(find.widgetWithText(TextButton, '설정'));
         await tester.pumpAndSettle();

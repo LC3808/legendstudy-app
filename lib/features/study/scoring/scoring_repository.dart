@@ -2,8 +2,10 @@
 // ignore_for_file: prefer_initializing_formals
 
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../core/config/app_config.dart';
 import 'scoring_models.dart';
 
@@ -16,9 +18,16 @@ class ScoringStale implements Exception {
 }
 
 class ScoringPaper {
-  const ScoringPaper(this.availability, this.title);
+  const ScoringPaper(
+    this.availability,
+    this.title, {
+    this.examId,
+    this.subjectLabel,
+  });
   final MockScoringAvailability availability;
   final String title;
+  final String? examId, subjectLabel;
+  String get examIdentity => examId ?? availability.examSubjectId;
 }
 
 abstract interface class ScoringRepository {
@@ -121,20 +130,32 @@ class SupabaseScoringRepository implements ScoringRepository {
     if (rows.isEmpty) return [];
     final ids = rows.map((r) => r['exam_subject_id'] as String).toSet();
     final titles = await _rows('exam_subjects', {
-      'select': 'id,exams(content_items(title))',
+      'select': 'id,content_item_id,raw_subject_label,subjects(name),exams(content_items(title))',
       'id': 'in.(${ids.join(',')})',
       'limit': '100',
     });
-    final names = <String, String>{};
-    for (final row in titles) {
-      final title = (row['exams'] as Map?)?['content_items'];
-      if (title is Map && title['title'] is String) {
-        names[row['id'] as String] = title['title'] as String;
-      }
-    }
+    final metadata = {for (final row in titles) row['id'] as String: row};
     return rows.map((r) {
       final a = MockScoringAvailability.fromJson(r);
-      return ScoringPaper(a, names[a.examSubjectId] ?? '모의고사');
+      final row = metadata[a.examSubjectId];
+      final parent = (row?['exams'] as Map?)?['content_items'];
+      final title = parent is Map ? parent['title'] : null;
+      final subject = row?['subjects'] as Map?;
+      final label = subject?['name'] ?? row?['raw_subject_label'];
+      // Display context is joined by identity, never guessed from exam title.
+      if (row?['content_item_id'] is! String ||
+          title is! String ||
+          title.trim().isEmpty ||
+          label is! String ||
+          label.trim().isEmpty) {
+        throw const ScoringFailure();
+      }
+      return ScoringPaper(
+        a,
+        title,
+        examId: row!['content_item_id'] as String,
+        subjectLabel: label,
+      );
     }).toList();
   }
 
@@ -174,8 +195,7 @@ class SupabaseScoringRepository implements ScoringRepository {
       var certainty = 'unavailable';
       if (a.gradeCutoffVersionId != null) {
         final rows = await _rows('grade_cutoff_versions', {
-          'select':
-              'minimum_scores,certainty,basis,version,source_name,source_url,verified_at',
+          'select': 'minimum_scores,certainty,basis,version,source_name,source_url,verified_at',
           'id': 'eq.${a.gradeCutoffVersionId}',
           'limit': '2',
         });
@@ -209,10 +229,9 @@ class SupabaseScoringRepository implements ScoringRepository {
     );
     final fetched = Map<String, dynamic>.from(
       await _request(
-            'rpc/fetch_own_mock_attempt',
-            body: {'p_attempt_id': attempt.id},
-          )
-          as Map,
+        'rpc/fetch_own_mock_attempt',
+        body: {'p_attempt_id': attempt.id},
+      ) as Map,
     );
     final first = _validate(submitted, attempt),
         confirmed = _validate(fetched, attempt);

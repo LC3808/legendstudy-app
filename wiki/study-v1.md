@@ -561,3 +561,17 @@ Oldest→newest, weekdays, actualmax, zerozero; incomplete history stays unavail
 자세히 보기 pushes existing /my/trends and preserves Timer return. Trend comment
 calculation unchanged. Mock optional subject label drops limit copy, keeps40rune
 validation and adds field/chip separation for floating labels at2x.
+
+## Owner follow-up 2 chart — 2026-09-24
+
+Daily seven-slot chart (Timer and Trend daily) now shows weekday + actual duration,
+including0분 with zero painted height. Shared StudyBarChart renders a neutral dashed
+reference at sum(displayed seven canonical totals)/7, label “평균 …”. Dynamic actual
+max and160px ratio remain; allzero mean is baseline, no division byzero. Totals still
+use canonical KST/included-Mock policy; no independent network/aggregation layer.
+One day, mixed zeros, max1min, multiple hours and equal days tested at both widths
+and scales. Weekly/monthly labels and completed-period deterministic comments are
+unchanged. The average line describes displayed days including today, while the
+existing trend comment explicitly describes completed comparison periods.
+Mock subject free-text presentation above is superseded by
+[current exam/subject selection](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24).

@@ -46,6 +46,7 @@ def main():
         'BADGE': ('ACHIEVEMENT / BADGE', ['decisions.md#2026-09-19--achievements', 'roadmap-academic-analytics.md#9-achievement--badge-engine', 'product-scope.md']),
         'MEAL': ('MEAL / SCHOOL', ['day-7-neis.md', 'day-10-b-home-polish.md', 'day-7-school-storage-proposal.md']),
         'AUTH': ('AUTH /', ['decisions.md', 'auth-native-owner-acceptance.md', 'auth-recovery.md', 'account-deletion-privacy.md']),
+        'MOCK': ('MOCK EXAM / SCORING', ['day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24', 'mock-exam-scoring-v1.md', 'day-8-scoring-storage-proposal.md']),
         'STUDY': ('STUDY / TIMER', ['study-v1.md', 'day-8-study-ui-review.md', 'day-8-study-storage-proposal.md']),
     }
     for name, (alias, docs) in required.items():

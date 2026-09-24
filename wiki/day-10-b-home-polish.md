@@ -165,3 +165,19 @@ Neutral daily cards add small semantic icons (D-Day orange, Study blue, Meal gre
 Configured MealSummary puts selected meal label left and school secondary right,
 wrapping within bounded columns for long text. Date/menu below; no policy/provider
 changes. Prior Owner Meal PASS retained; new visual acceptance pending.
+
+## Owner follow-up 2 — 2026-09-24
+
+Greeting hierarchy is cardTitle16 instead of page-title24, for own nickname and
+Guest alike. Visible48px notification icon slot has “알림 센터 준비 중” semantics;
+non-actionable, no fake alerts/count/backend (Notification Center PLANNED).
+D-Day metadata is name · existing YYYY.MM.DD alongside Settings, D-n below as
+primary. Long metadata bounded3 lines/ellipsis with full semantic text. Study
+summary is 오늘 공부 + emphasized duration in a wrapping semantic row; original
+학습으로 이동 remains. Meal label left, school neutral at actual trailing edge.
+Expanded date ChoiceChips are chronological today/next-available date, selected
+semantic fill. Uses exactly existing data/selection state; no provider,7day search,
+14/19KST, breakfast/detail/cache changes. Home compact tests assert alignment;
+meal_fallback_test asserts chip order/selection and dated full menu.
+Owner reports Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS;
+new follow-up visuals still require Owner device review.

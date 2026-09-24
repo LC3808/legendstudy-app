@@ -46,7 +46,10 @@ void main() {
         await t.pumpAndSettle();
         expect(find.text(state.$4), findsOneWidget);
         expect(find.byType(Image), findsNothing);
-        expect(find.byIcon(Icons.notifications_outlined), findsNothing);
+        expect(find.byIcon(Icons.notifications_outlined), findsOneWidget);
+        expect(t.widget<Text>(find.text(state.$4)).style!.fontSize, 16);
+        expect(find.byType(IconButton), findsNothing);
+        expect(find.byTooltip('알림 센터 준비 중'), findsOneWidget);
         expect(find.text('레전드스터디+'), findsNothing);
       },
     );

@@ -195,7 +195,7 @@ void main() {
       expect(find.text('조식'), findsOneWidget);
       expect(find.text('중식'), findsOneWidget);
       expect(find.text('석식'), findsOneWidget);
-      await t.tap(find.text('9월 21일 급식 보기'));
+      await t.tap(find.text('9월 21일 급식'));
       await t.pumpAndSettle();
       expect(find.text('20260921 석식 메뉴'), findsOneWidget);
       await t.tap(find.text('오늘 급식'));

@@ -620,3 +620,13 @@ No new returnTo URL parsing, duplicate screen or history mutation. Auth routes s
 Home reads owner-matching LegendStudy nickname with generic authenticated/Guest
 fallback, not email/provider metadata. No fake notification entry. Timer seven-day
 chart reuses canonical week totals and shared Trend chart; study data untouched.
+
+## Owner follow-up 2 MY snapshot — 2026-09-24
+
+MY retains 3–5second orientation: latest actual recorded raw/grade summary, plus
+“최근 결과는 N문항 중 M문항 정답이에요.” from completed ScoreResult.answers.
+No result→“분석할 성적이 아직 부족해요.” No comparison across incomparable papers,
+LLM, study-time→grade inference or admissions claim. Each snapshot keeps LAB 상세
+분석 via push; Owner confirms MY→detail→Back PASS. LAB caller/direct links preserve
+existing context tests. More sophisticated comparable-series trend/strategy is
+PARTIAL/FUTURE, not fabricated in MY. Internal-grade backend remains unavailable.
