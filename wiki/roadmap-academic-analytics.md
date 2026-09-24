@@ -291,3 +291,17 @@ Current implemented subset clarifies historical “NOT IMPLEMENTED” tables abo
 basic KST study trends and device-known Mock result snapshots/history exist; full
 Academic Record/advanced analytics/admissions remain future. Study time, Achievement,
 essay score and admissions boundaries remain unchanged.
+
+## Longitudinal strategy linkage — 2026-09-24
+
+[High-priority canonical data strategy](longitudinal-learning-admissions-data-strategy.md)
+connects this roadmap to Application/Outcome history, personal/cohort analysis and
+consulting. Consult its [preservation review](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review),
+[cohort gate](longitudinal-learning-admissions-data-strategy.md#cohort-analytics-and-minimum-cohort)
+and [prediction gate](longitudinal-learning-admissions-data-strategy.md#admissions-evidence-and-prediction-gate).
+Existing correlation, separate score scales, Achievement philosophy and Admissions
+research gates remain. Study time/badges are not direct admission predictors.
+Earlier manual-score Academic Record direction does not authorize merging local
+Free Practice scores into official analytics; preserve the latest Official/Free
+provenance boundary. Catalogue/input-completion award examples remain unapproved
+candidates, not production badges. New architecture PLANNED, not implemented.

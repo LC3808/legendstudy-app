@@ -322,3 +322,14 @@ AI/deep strategy is later. Retention asset is USER ACADEMIC HISTORY, not PDF
 collection: Exam → Score → Grade → Subject Performance → Historical Trend →
 Weakness → Study Strategy. [Architecture](architecture-in-app-exam.md) separates
 Viewer CONDITIONAL, mirror/Storage HOLD and independent Engine CONDITIONAL gates.
+
+## Longitudinal business strategy linkage — 2026-09-24
+
+[Canonical data flywheel](longitudinal-learning-admissions-data-strategy.md)
+links existing Web acquisition to App records, personal/cohort value, LAB and
+future consulting. [Marketing/lifecycle](longitudinal-learning-admissions-data-strategy.md#acquisition-and-marketing-strategy)
+and [monetization/incentive boundary](longitudinal-learning-admissions-data-strategy.md#monetization-and-incentive-boundary)
+own these new strategic details. Raw student-data sale is not the default business
+model; existing meaningful free access and undecided pricing/entitlements remain.
+Academic raw data is not automatically available for advertising/model training.
+No payment, ads, campaign, reward, telemetry or data sharing starts from this entry.

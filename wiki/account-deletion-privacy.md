@@ -201,3 +201,18 @@ photo cleanup, so retry can find no photo. Auth lookup errors are not proof that
 a user is already deleted. No deployment or real deletion performed in this task.
 Owner rollout and rollback: [Database](database.md#private-profile-avatar--owner-applied).
 ACCOUNT_DELETION_PRODUCTION_READY remains NO, including Apple revoke gate.
+
+## Longitudinal analytics privacy review — 2026-09-24
+
+[Canonical data strategy — Privacy and user rights](longitudinal-learning-admissions-data-strategy.md#privacy-and-user-rights)
+adds future operational/analytics separation, purpose boundaries, minor/student
+review, cohort suppression, retention/deletion and model-training gates.
+Preserving history does not authorize indefinite retention. Pseudonymization is
+not automatic anonymization or exemption from user rights. Historical cascade/
+ANONYMIZED_ANALYTICS descriptions above do not settle future derived-data cleanup.
+Inventory operational, pseudonymous and derived records before rollout; review
+correction/deletion propagation, vendors, exports and least-privilege access.
+[External/B2B sharing](longitudinal-learning-admissions-data-strategy.md#external-sharing-and-b2b-boundary)
+needs separate Privacy/Legal/Governance review. No legal conclusion, consent model,
+retention period or new processing authorization is decided here. Existing account
+deletion/Apple revoke/Store gates remain OPEN; no code or Production mutation.

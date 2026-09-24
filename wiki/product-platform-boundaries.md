@@ -114,3 +114,13 @@ MY uses push navigation so Back returns MY; LAB caller returns LAB; direct neste
 links retain canonical LAB parent. No arbitrary return URL or session transport.
 Earlier blanket shared-identity-unverified statements are historical: Apple/Google
 Owner PASS, Kakao equality NOT VERIFIED; current Auth acceptance remains authoritative.
+
+## Longitudinal data allocation — 2026-09-24
+
+[Canonical longitudinal strategy](longitudinal-learning-admissions-data-strategy.md#comparison-ux-and-three-layer-allocation)
+provides the future data basis for MY Snapshot/position, Mobile LAB actionable
+cohort comparisons/bounded simulation, and Web LAB deep multi-cohort/provenance/
+reports. Keep the three layers over shared canonical data, not duplicate records.
+[External/B2B boundary](longitudinal-learning-admissions-data-strategy.md#external-sharing-and-b2b-boundary)
+requires separate Privacy/Legal/Governance review; neither a school membership nor
+this strategy grants access to raw student records. No feature implementation.

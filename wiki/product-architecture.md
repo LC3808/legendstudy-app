@@ -165,3 +165,13 @@ MY snapshot/Mobile LAB history. Local user-entered practice scores are separate
 personal records, not confirmed academic data or automatic admissions input.
 Three-layer allocation above and future research gates remain unchanged. Daily
 Sync implementation, analytics/essay/notification expansion are not part of this task.
+
+## Longitudinal strategy reference — 2026-09-24
+
+[Longitudinal Learning and Admissions Data Strategy](longitudinal-learning-admissions-data-strategy.md)
+is HIGH / CANONICAL PRODUCT STRATEGY over future Product/Database/Study/Score/
+Mock/LAB/Admissions/Essay/Marketing/B2B design. It connects learning, performance,
+planning, applications and outcomes while preserving this product family, shared
+identity, three-layer allocation and access boundaries. Follow its event/time/
+context/provenance review before new schemas; no engine, data collection or B2B
+implementation is authorized. Owner-approved direction, PLANNED architecture.

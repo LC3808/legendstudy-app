@@ -128,3 +128,12 @@ notification delivery are not newly implemented or approved by this UI task.
 Owner, implementation pending; original report evidence remains unavailable here.
 Admission probability/bands/automatic eligibility/AI judgment are research-gated,
 not permanently removed. Compliance P0 evidence audit remains pending.
+
+## Longitudinal strategy scope — 2026-09-24
+
+[Longitudinal Learning and Admissions Data Strategy](longitudinal-learning-admissions-data-strategy.md)
+is an Owner-adopted HIGH / CANONICAL PRODUCT STRATEGY, not a v1 feature promotion.
+Data preservation/context/provenance must inform future designs now; full personal
+history, Application/Outcome, cohort, consulting and predictive models advance by
+their separate scope/data/privacy/statistical/evidence gates. Existing excluded
+features and meaningful Guest/free access remain. This update implements nothing.

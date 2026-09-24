@@ -97,6 +97,15 @@ and [source reconciliation](research-registry.md#owner-provided-manus-exports--s
 - Achievement catalogue and authoritative award persistence absent. Owner promotes
   MY achievement access direction only; foundation scope in [roadmap §9](roadmap-academic-analytics.md#9-achievement--badge-engine).
 
+## Longitudinal data strategy
+
+[Canonical strategy](longitudinal-learning-admissions-data-strategy.md): HIGH /
+CANONICAL PRODUCT STRATEGY; PLANNED ARCHITECTURE. APPLICATION_OUTCOME_DATA: PLANNED.
+COHORT_ANALYTICS: FUTURE — DATA/PRIVACY/STATISTICAL GATED.
+PREDICTIVE_ADMISSIONS: FUTURE — MODEL/EVIDENCE GATED. Strategy/handoff documentation
+complete; no new code, data collection, schema or engine. Latest automated App
+validation above is the prior UI task's evidence, not rerun by this Wiki-only task.
+
 ## Current work and next actions
 
 Owner final UI-only polish implemented locally; new UI Owner review pending.

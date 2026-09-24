@@ -2079,3 +2079,19 @@ PASS at360/428px1×/2× (includes contract assertions). Home/expanded Meal/mean 
 reviewed; iOS simulator and Android debug builds PASS. Secret/source-ignore audit,
 417 internal links/10 task routes and diff check PASS.
 Owner iOS/untracked preserved; physical acceptance NOT VERIFIED.
+
+## 2026-09-24 — Longitudinal strategy canonicalization
+
+Owner adopts [longitudinal data strategy](longitudinal-learning-admissions-data-strategy.md)
+as upper-level Product/Data/Marketing/Business direction. Four event layers,
+cohort/provenance/privacy/prediction gates and lifecycle marketing/consulting/B2B
+boundaries documented; existing decisions linked, no feature promotion. Index
+routes domain and Korean task aliases to the strategy; handoff A–F exercises
+preserve correlation, sample, outcome, onboarding and sharing boundaries.
+Wiki-only task starting37b0fe3; result commit discoverable through Git history.
+No code/schema/migration/Production mutation; Owner files preserved; PUSH NO.
+Validation: Wiki internal links480/10 existing routes PASS; all21 requested
+strategy aliases and5 inbound integration links PASS; handoff A–F index→section→
+guardrail assertions PASS. Current-status9218bytes stays under12KB. Prior Flutter
+754PASS/1skip and builds remain prior-task evidence; not rerun for documentation.
+Secret signature scan430 text reads/0 flagged files and final diff checks PASS.

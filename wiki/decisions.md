@@ -402,3 +402,16 @@ Existing brand/Meal/Study contracts remain; [design](design-system.md#owner-fina
 and [Study](study-v1.md#owner-final-ui-polish--2026-09-24) own details. Future
 study/score relationship analysis is descriptive PLANNED work, never automatic
 causation; no Mock/LAB/Daily Sync/backend expansion is authorized by this pass.
+
+## 2026-09-24 — Longitudinal learning and admissions data strategy
+
+Owner adopts [Longitudinal Learning and Admissions Data Strategy](longitudinal-learning-admissions-data-strategy.md)
+as HIGH / CANONICAL PRODUCT STRATEGY for Product/Data/Marketing/Business design.
+Learning→performance→planning→application→outcome→analytics→guidance is the long-term
+loop; preserve event time, academic context and provenance within purpose/retention/
+rights boundaries. Existing three-layer UX, Achievement and Official/Free separation
+remain. Cohort requires sufficient samples plus Privacy/Statistical review; predictions
+remain MODEL/EVIDENCE GATED. Raw individual-data sale is not the default business.
+This refines the 2026-09-19 analysis/retention decisions and final Study comparison
+direction; it does not implement engines, fix catalogue/thresholds or authorize
+new collection, use, sharing, payment, schemas or deployment.
