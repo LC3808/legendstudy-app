@@ -2006,3 +2006,20 @@ Created `design-system-v2-proposed.md` (PROPOSED): code-grounded diagnosis, Pale
   Deno unchanged (prior11 PASS). No DB/Storage/dependency or Production changes.
 - Owner iOS files and unrelated untracked directories preserved. Local commits only,
   PUSH NO. New UI device review pending; prior Owner Auth/Meal acceptance preserved.
+
+
+## 2026-09-24 — V2 device follow-up and analytics canonicalization
+
+- Start03eebea; code commitbcaa79e: own-profile Home greeting, optional notification
+  slot without fake entry, small daily accents, Meal header pairing, Materials5,
+  shared Timer7day chart, Mock label/spacing, MY snapshot/push caller Back.
+- Owner-approved [three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+  and [Manus research registry](research-registry.md): five report titles and supplied
+  findings, original reports/dates/locators unavailable; predictions research-gated.
+- Analyze PASS; Flutter695 PASS/1 existing skip;71 responsive renders PASS with
+  selected PNG inspection, Home4 rerun after test-font-only correction. iOS simulator
+  and Android debug PASS. Old UI expectations updated, no test removed/disabled;
+  new5→10 test fixture corrected from9 to10 genuine distinct fixture records.
+- Wiki356 links/9 routing checks PASS; secret/source-ignore/diff PASS. Deno unchanged.
+  No DB/Storage/Production changes, no push. Owner iOS hashes unchanged. Device UI
+  review pending; see [policy audit](mobile-policy-audit.md).

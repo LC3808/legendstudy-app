@@ -139,3 +139,20 @@ and authenticated IA; first Teacher/School pilot and responsible data controller
 processor roles; permissions/retention/consent and export policy; evidence and AI
 quality gates; budget, packaging and capacity; optional domains. No pricing,
 launch date, institutional contract or domain purchase is approved here.
+
+## Academic Analytics three-layer allocation — 2026-09-24
+
+Owner-approved product boundary, not approval to implement all candidates:
+
+| Layer | Role | Scope / candidates |
+|---|---|---|
+| MY Snapshot | 상태를 본다 — quick current state | Recent recorded score, short deterministic comment, missing input guidance, Mobile LAB detail CTA. No complex simulations, large graphs or acceptance probability |
+| Mobile LAB | 무엇을 해야 할지 판단한다 — Actionable Analysis / Strategy | Internal grades, mock scores/trends/strengths, target university/major, official admissions discovery, 수능최저/교과 formula checkers, special-admission official requirements, selection finder, mobile simulation, essay preparation |
+| Web LAB | 깊게 분석하고 작업한다 — Deep Analysis / Workbench | Multi-year scores/complex graphs, university/department and scenario comparisons, converted scores, detailed admissions with provenance, reports, long-form essay writing/AI evaluation/history |
+
+This refines earlier “App quick / LAB Web deep” allocation: Mobile LAB is an
+analysis/action layer, not merely a Web link hub. Existing native mock detail and
+Essay external entry remain; unsupported candidates stay hidden/unavailable.
+Same canonical account/data, independent sessions, no token handoff or WebView.
+Admissions claims remain [research-gated](research-registry.md); the future4–5band
+Owner concept is retained, not approved for this implementation.

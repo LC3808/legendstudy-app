@@ -154,3 +154,14 @@ inline interaction on the new Profile device; earlier meal policy device PASS re
 Owner iPhone second review after d7008bd: MEAL_OWNER_E2E PASS, including current
 seven-day fallback/time/Home-expanded behavior. Subsequent edit/chart/LAB UX work
 leaves meal implementation unchanged; regression suite retained.
+
+## V2 device follow-up — 2026-09-24
+
+Home greeting uses canonical owner-matching LegendStudy displayName, no social
+metadata/email fallback; guest copy and generic authenticated fallback. Existing
+brand assets preserved but Home wordmark/caption removed. Optional header trailing
+slot prepares future notifications with no visible fake bell/count or backend.
+Neutral daily cards add small semantic icons (D-Day orange, Study blue, Meal green).
+Configured MealSummary puts selected meal label left and school secondary right,
+wrapping within bounded columns for long text. Date/menu below; no policy/provider
+changes. Prior Owner Meal PASS retained; new visual acceptance pending.

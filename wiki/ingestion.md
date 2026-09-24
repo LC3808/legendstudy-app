@@ -223,3 +223,10 @@ Minimum next increment:
 
 Implementation, manifest storage and notification delivery are a later task;
 no Production automation is authorized here. Historical A2 gates are untouched.
+
+## Research checkpoint — 2026-09-24
+
+Owner reports Daily Content Sync Production Architecture research complete;
+implementation remains pending. [Manus registry](research-registry.md) records
+provenance gaps (original report/date/locator unavailable). Existing minimum contract
+above stands; no scheduler, ingestion writes or deployment is authorized here.

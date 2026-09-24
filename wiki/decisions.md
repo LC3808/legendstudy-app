@@ -345,3 +345,19 @@ above destructive deletion. Materials initial/load-more pages are10; existing
 explicit load-more and query semantics stay unchanged. This supersedes the prior
 2026-09-23 strip/outlined-MY-CTA/logout-order styling only. Feature/data contracts
 remain; no Badge/backend/auth redesign. [Approved mapping](design-system-v2-proposed.md).
+
+## 2026-09-24 — Device follow-up and analytics layer allocation
+
+Owner refines v2: personalized own-nickname Home greeting (safe guest/fallback copy),
+no Home wordmark/duplicate brand text; neutral cards with small D-Day orange,
+Study blue/navy, Meal green semantic icons. Meal type and school share header,
+existing selection unchanged. Notification trailing slot only, no fake bell/count.
+Materials initial/load-more5 supersedes10, same query/pagination. Timer seven-day
+chart reuses canonical included-time totals/Trend chart: oldest→newest, weekdays,
+actualmax and zero bars. Mock subject label is optional-only; validation retained.
+MY score is a snapshot with LAB detail CTA; push preserves MY/LAB caller context.
+
+[Three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+is canonical Owner direction. [Research](research-registry.md) is evidence, not
+Owner approval: retain future admission bands behind explicit research gate, not
+permanent deletion or implementation approval. Existing Achievement philosophy stays.

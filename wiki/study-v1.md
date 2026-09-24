@@ -551,3 +551,13 @@ Completed-period comment calculations are unchanged. Daily chart includes today;
 comment explicitly compares completed periods excluding today/live draft. No
 previous-period navigation was added; eight-week/six-month summaries remain.
 No alternative MY calculation or mock-inclusion policy change.
+
+## Timer recent-seven-day presentation — 2026-09-24
+
+Owner replaces descending date/time rows with existing StudyBarChart + trendDates/
+trendLabels. Totals remain StudyController.week→studyWeek→studyBuckets, including
+only eligible Mock time and live draft under existing rules. No extra fetch/aggregate.
+Oldest→newest, weekdays, actualmax, zerozero; incomplete history stays unavailable.
+자세히 보기 pushes existing /my/trends and preserves Timer return. Trend comment
+calculation unchanged. Mock optional subject label drops limit copy, keeps40rune
+validation and adds field/chip separation for floating labels at2x.

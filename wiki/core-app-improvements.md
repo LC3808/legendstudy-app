@@ -607,3 +607,16 @@ from visible state readiness. Owner first-upload/replace/delete E2E still requir
 Settings removes the duplicate deletion heading. Shared section primitive is
 documented in [design system](design-system.md). Badge UI is intentionally absent
 until real catalogue/award contracts exist; [roadmap §9](roadmap-academic-analytics.md#9-achievement--badge-engine).
+
+## V2 device follow-up — 2026-09-24
+
+MY score rows are snapshots (내신 / 모의고사), followed by per-domain LAB 상세 분석.
+Mock summary remains actual latest completed recorded score/grade; missing records
+say 성적을 입력해 주세요. Internal-grade input/backend still unavailable and honestly
+labelled. No invented grade trend or AI inference. Both native detail routes use
+GoRouter push from MY; Back returns MY. LAB push and direct nested links return LAB.
+No new returnTo URL parsing, duplicate screen or history mutation. Auth routes stay.
+
+Home reads owner-matching LegendStudy nickname with generic authenticated/Guest
+fallback, not email/provider metadata. No fake notification entry. Timer seven-day
+chart reuses canonical week totals and shared Trend chart; study data untouched.

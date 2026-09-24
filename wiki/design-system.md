@@ -233,3 +233,11 @@ after meals, Materials search/filter/results, Learning history/panel boundary,
 MY and Settings reuse these primitives. No per-screen orange/shadow/card stack.
 Auth form hierarchy remains unchanged. Widget/render matrix covers360×640 and
 428×926 at1×/2×; physical acceptance remains Owner work.
+
+## Latest device follow-up — 2026-09-24
+
+Neutral v2 surfaces stay. Small semantic icon accents distinguish Home D-Day
+orange / Study blue / Meal green, never full-card color or school red. Home uses
+own nickname greeting or safe fallback, not wordmark/brand caption. Materials5
+supersedes10. MY score modules are compact snapshots + LAB CTA with caller Back.
+Timer recent7days reuses StudyBarChart. No new notification/badge/analytics backend.

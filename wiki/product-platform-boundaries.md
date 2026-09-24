@@ -103,3 +103,14 @@ Future MY activities: authored/commented/liked posts and blocked-user management
 remain hidden until backend exists. Nickname/avatar only for public identity;
 email/provider private, school/grade publication remains undecided. These are
 product release requirements, not a claim of App Store approval.
+
+## Current three-layer refinement — 2026-09-24
+
+[Owner three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+supersedes treating all analysis as Web-only. MY snapshots lead to existing Mobile
+LAB internal-grade/mock detail; Web remains deep work. Native App LAB has independent
+3entries; MY no longer opens the public LAB root. Essay uses the safe external root.
+MY uses push navigation so Back returns MY; LAB caller returns LAB; direct nested
+links retain canonical LAB parent. No arbitrary return URL or session transport.
+Earlier blanket shared-identity-unverified statements are historical: Apple/Google
+Owner PASS, Kakao equality NOT VERIFIED; current Auth acceptance remains authoritative.

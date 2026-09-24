@@ -154,3 +154,34 @@ Signature scan/source-ignore readiness/diff PASS. No Deno changes; prior11 PASS
 is historical, not a rerun. Owner iOS file hashes match the task-start snapshot.
 Android build warns about future Kotlin plugin support; no toolchain upgrade was
 introduced. DEVICE REVIEW PENDING; no Production mutation or push.
+
+## V2 device follow-up and analytics handoff — 2026-09-24
+
+| POLICY | PREVIOUS STATE | CODE / TEST EVIDENCE | ACTUAL STATUS |
+|---|---|---|---|
+| Home own identity | static image/name | HomeGreeting; design_v2_test owner/mismatch/guest; mobile_ia_render_test | IMPLEMENTED; no notification backend/count; optional trailing slot only |
+| Small daily accents / Meal header | neutral titles / school above meal | DailyUtilityCard icon roles, MealSummary school right; home_compact_test geometry/full menus | IMPLEMENTED; time/fallback providers unchanged |
+| Materials5 then10 | pages10 | pageSize5; search_repository_test sentinel6/offset5/boundary; search_ui_test explicit more | IMPLEMENTED |
+| Timer recent7days | descending rows | StudyWeekSummary→StudyBarChart, study.week; study_home_polish_test/render | IMPLEMENTED; included-time calculation untouched |
+| Mock optional subject | length copy/touching fields | label+spacing only; render focused input360/428 at1x/2x | IMPLEMENTED;40rune validation retained |
+| MY snapshot / caller Back | service row context.go replaced caller | score_summary.dart push; day5_shell_test MY/LAB/direct route matrix | GAP_FIXED; native school backend remains absent |
+| Analytics research | old two-platform emphasis, report evidence missing | architecture/roadmap/research registry; handoff checker9 routes | CANONICAL DIRECTION; report originals NOT INSPECTED, predictions RESEARCH-GATED |
+
+No full advanced-analysis/notification/Badge/Community/backend added. Original report
+metadata/content gaps remain open rather than fabricated. Existing Auth/Meal/Storage
+Owner acceptance preserved; new mobile UI Owner E2E NOT VERIFIED.
+
+
+Closeout evidence: Flutter695 PASS/1 existing opt-in skip; analyze PASS; iOS simulator
+and Android debug PASS;71 responsive render cases at360×640/428×926,1x/2x, selected
+Home/Meal/Timer chart/Mock focused field/MY/LAB PNGs inspected. Test-only Home font
+correction rerun4 PASS. Local PNGs `/private/tmp/legendstudy-core-ui/` (not tracked).
+Secret signatures422 text files/0 hits, source-ignore readiness and diff PASS;
+Wiki356 links and9 routes PASS. No Deno changes or Production queries/mutations.
+Owner iOS files match start hashes. Android existing Kotlin future-support warning
+remains; no SDK/dependency/native configuration change in this task.
+
+Owner review: Home greeting + semantic icons + Meal school alignment → Materials5
+then explicit more10 → Timer7day chart/detail → Mock subject at large text → MY
+snapshot→each LAB detail→Back MY → LAB→each detail→Back LAB. New mobile UI device
+acceptance NOT VERIFIED. Internal-grade backend remains unavailable; no fake input.

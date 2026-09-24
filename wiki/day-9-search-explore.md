@@ -235,3 +235,8 @@ queries request one sentinel beyond10, nextOffset advances10. Existing explicit
 contracts unchanged. Remove 검색·필터 title and helper copy (actual Korean:
 최신 시험순 · 첨부 종류는 등록 정보 기준). Result cards and inputs use
 [Design System v2](design-system-v2-proposed.md); no query ranking redesign.
+
+## Latest Owner page-size override — 2026-09-24 follow-up
+
+Initial/load-more pageSize5 supersedes10. Sentinel6, offset step5. Existing explicit
+load-more, exact parent-boundary counts, facet/attachment/query semantics unchanged.

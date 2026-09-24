@@ -266,3 +266,28 @@ student inputs. Do not create ad hoc enums. Future MY may show a summary only on
 real data exists. Assess 4–5 evidence-based bands later, never fabricate a numeric
 probability. University targets, eligibility, model/calculation and Web reports
 remain FUTURE; no schema or results created by this refinement.
+
+## Research Boundary — 2026-09-24
+
+[Manus research registry](research-registry.md) distinguishes report existence,
+Owner-transmitted findings and unavailable original evidence. [Three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+is Owner-approved; candidate checkers are not thereby implemented.
+
+Potential evidence-backed P0: 수능최저 checking, quantitative school formula
+reproduction, dates/counts/factors, special-admission official requirements/documents,
+historical public comparisons. Future rule/calculation provenance fields: source,
+academic year, document version, effective date, source locator, verification state.
+No schema is introduced by this contract.
+
+OPEN PRODUCT RESEARCH GATE: preserve the existing4–5band target-university concept,
+but official public data alone cannot substantiate individualized probability or
+안정/소신/위험 judgments on the supplied research summary. Prediction, automatic
+special-route qualification and AI admission judgment are RESEARCH-GATED / NOT
+APPROVED FOR CURRENT IMPLEMENTATION. Need adequate individual-level datasets,
+calibration, hold-out validation, bias review, provenance and claim policy before
+separate Owner approval. This is not permanent rejection of the idea.
+
+Current implemented subset clarifies historical “NOT IMPLEMENTED” tables above:
+basic KST study trends and device-known Mock result snapshots/history exist; full
+Academic Record/advanced analytics/admissions remain future. Study time, Achievement,
+essay score and admissions boundaries remain unchanged.

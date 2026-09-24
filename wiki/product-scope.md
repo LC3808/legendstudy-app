@@ -117,3 +117,14 @@ No catalogue, award persistence, collection UI or Level system is implemented.
 Advanced badge/achievement engine remains outside the initial required release;
 roadmap examples are not approved production awards. No migration is required by
 this documentation foundation.
+
+## Analytics layer and research scope — 2026-09-24
+
+[Three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+is approved direction: MY snapshot / Mobile LAB actionable analysis / Web LAB deep
+work. Candidate checkers, simulations, advanced analytics, admissions judgments and
+notification delivery are not newly implemented or approved by this UI task.
+[Research registry](research-registry.md) records Daily Sync research complete per
+Owner, implementation pending; original report evidence remains unavailable here.
+Admission probability/bands/automatic eligibility/AI judgment are research-gated,
+not permanently removed. Compliance P0 evidence audit remains pending.

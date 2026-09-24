@@ -38,6 +38,11 @@ def main():
     index = (WIKI / 'index.md').read_text()
     routing = index.split('## Task Routing Map', 1)[-1].split('## Product/platform', 1)[0]
     required = {
+        'ADMISSIONS': ('ADMISSIONS DATA / ANALYTICS', ['roadmap-academic-analytics.md', 'research-registry.md', 'decisions.md']),
+        'DAILY_SYNC': ('DAILY SYNC / INGESTION', ['ingestion.md', 'day-9-ingestion.md', 'research-registry.md']),
+        'RELEASE': ('COMPLIANCE / RELEASE', ['account-deletion-privacy.md', 'current-status.md', 'research-registry.md']),
+        'STRATEGY': ('PRODUCT STRATEGY', ['product-architecture.md', 'product-scope.md', 'research-registry.md']),
+        'COMMUNITY': ('COMMUNITY /', ['product-platform-boundaries.md', 'database.md', 'research-registry.md']),
         'BADGE': ('ACHIEVEMENT / BADGE', ['decisions.md#2026-09-19--achievements', 'roadmap-academic-analytics.md#9-achievement--badge-engine', 'product-scope.md']),
         'MEAL': ('MEAL / SCHOOL', ['day-7-neis.md', 'day-10-b-home-polish.md', 'day-7-school-storage-proposal.md']),
         'AUTH': ('AUTH /', ['decisions.md', 'auth-native-owner-acceptance.md', 'auth-recovery.md', 'account-deletion-privacy.md']),

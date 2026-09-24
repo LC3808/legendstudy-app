@@ -18,7 +18,10 @@ trusted explicit protected return preserved. Owner corrections now add logout HO
 verified avatar read-after-write. Owner-approved Design System v2 now uses Orange /
 Deep Navy / Cool Neutral, white grouped surfaces and plain section headings.
 Guest MY exposes Login and hides private dashboard modules. Materials pages contain
-10 items with explicit load-more; Settings logout follows service/policy groups.
+5 items with explicit load-more after Owner device follow-up; Settings logout follows
+service/policy groups. Home has an own-nickname greeting and small daily semantic
+icons. Meal label/school share a header; Timer recent7days uses the shared chart.
+MY score snapshots push LAB details and preserve caller Back context.
 [Canonical design](design-system.md) maps the approved proposal to implementation.
 
 ## Owner verified
@@ -35,10 +38,10 @@ Guest MY exposes Login and hides private dashboard modules. Materials pages cont
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
-685 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
-builds PASS;67 render cases (360×640/428×926,1×/2×), selected Home/Materials/
+695 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
+builds PASS;71 render cases (360×640/428×926,1×/2×), selected Home/Materials/
 Learning/LAB/MY/Settings/Guest PNGs inspected. Deno deletion tests last passed11
-in the prior task; no Deno changes in v2. Secret signatures, source/ignore readiness,
+in the prior task; no Deno changes in this follow-up. Secret signatures, source/ignore readiness,
 diff and Wiki link/routing checks PASS. No physical-device claim.
 
 ## Production DB/Storage applied
@@ -68,12 +71,16 @@ No current task DB/Storage mutation, migration application or function deploymen
 
 ## Current work and next actions
 
-Design System v2 approved scope implemented and locally verified. Original proposal
-is retained with implementation/deferred mapping; historical peach-strip styling is
-superseded. No Auth, Meal, photo Storage, Timer/Mock/Trend data-contract changes.
-Owner reviews Home → Materials/search/load-more → Learning → LAB → authenticated
-MY → Guest MY Login → Settings/policy/logout. Check both normal and larger text.
-Device visual acceptance remains NOT VERIFIED. Existing Achievement scope unchanged.
+Design System v2 and device follow-up implemented; latest UI Owner review pending.
+[Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
+Admissions prediction/bands/automatic qualification remain an open research gate,
+not permanently rejected. [Manus registry](research-registry.md) records five report
+names and supplied findings; original reports/dates/locators not inspected.
+Daily Sync research complete per Owner, implementation pending. Compliance P0
+evidence audit pending. No new analysis/notification/Badge/backend implementation.
+Owner next: Home greeting/accents/Meal heading → Materials5/more10 → Timer chart →
+Mock input at larger text → MY snapshot/LAB/Back → LAB detail/Back.
 Local commit only, PUSH NO; preserve Owner iOS and existing untracked files.
 Next implementation follows Owner review and release gates, not automatic roadmap
 expansion. No Production secrets or UUIDs in docs.
