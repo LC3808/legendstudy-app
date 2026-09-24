@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// Owner-approved Palette A. Functional color roles, never per-screen accents.
+/// Owner-confirmed icon brand #FFA300 with neutral selection surfaces. Functional color roles, never per-screen accents.
 abstract final class AppTokens {
-  static const primary = Color(0xFFFB8C00);
-  static const primaryDark = Color(0xFFE67E00);
-  static const primarySoft = Color(0xFFFFF1E0);
-  static const brand = Color(0xFFFFAC14);
+  static const primary = Color(0xFFFFA300);
+  static const primaryDark = Color(0xFF9A5800);
+  static const primarySoft = Color(0xFFE6E9EE);
+  static const brand = Color(0xFFFFA300);
   static const background = Color(0xFFF4F6F8);
   static const surface = Color(0xFFFFFFFF);
   static const surfaceWarm = surface; // Compatibility alias for existing cards.
@@ -91,6 +91,7 @@ abstract final class AppTheme {
           onSecondary: AppTokens.surface,
           secondaryContainer: AppTokens.primarySoft,
           onSecondaryContainer: AppTokens.textPrimary,
+          surfaceTint: Colors.transparent,
           surface: AppTokens.surface,
           onSurface: AppTokens.textPrimary,
           surfaceContainerLowest: AppTokens.surface,

@@ -111,9 +111,9 @@ void main() {
           ),
         ),
       );
-      expect(find.text('다음 중식'), findsOneWidget);
+      expect(find.text('다음 급식'), findsOneWidget);
       expect(find.text('9월 28일'), findsOneWidget);
-      await t.tap(find.text('다음 중식'));
+      await t.tap(find.byKey(const Key('meal-expand')));
       await t.pump();
       expect(find.text('20260928 조식 메뉴'), findsOneWidget);
       expect(find.text('20260928 석식 메뉴'), findsOneWidget);
@@ -121,7 +121,7 @@ void main() {
         t
             .widgetList<ChoiceChip>(find.byType(ChoiceChip))
             .map((w) => (w.label as Text).data),
-        ['9월 25일 급식', '9월 28일 급식'],
+        ['9월 25일(금)', '9월 28일(월)'],
       );
       expect(
         t
@@ -129,7 +129,7 @@ void main() {
             .map((w) => w.selected),
         [false, true],
       );
-      await t.tap(find.text('9월 25일 급식'));
+      await t.tap(find.text('9월 25일(금)'));
       await t.pump();
       expect(find.text('20260925 중식 메뉴'), findsOneWidget);
     },

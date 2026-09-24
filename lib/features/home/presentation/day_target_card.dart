@@ -18,7 +18,7 @@ class DayTargetCard extends ConsumerWidget {
     return DailyUtilityCard(
       title: target?.label ?? 'D-DAY',
       icon: Icons.event_outlined,
-      accentColor: AppTokens.primaryInk,
+      accentColor: AppTokens.primary,
       heading: target == null
           ? null
           : Text(

@@ -590,3 +590,10 @@ PRODUCTION_MUTATION:0. MOBILE_UI_OWNER_E2E: NOT VERIFIED.
 - Future/deferred: dark mode, new motion choreography, extra component wrappers,
   badges and any new analysis. Native widget animations unchanged. Catalogue and
   production auth/provider/DB/Storage configuration are outside this task.
+
+## Superseding Owner brand decision — follow-up 3
+
+This historical approved proposal remains evidence. Its #FB8C00/#FFF1E0 palette
+values are superseded by [current brand](design-system.md#owner-follow-up-3--confirmed-brand):
+#FFA300 brand, neutral selected surfaces, peach UI prohibited. Layout/neutral
+surface principles remain; no reintroduction of colored card strips.

@@ -57,7 +57,7 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 20));
       expect(find.text('예정된 급식이 없어요.'), findsNothing);
-      expect(find.text('오늘 중식'), findsNothing);
+      expect(find.text('오늘 급식'), findsNothing);
       if (failure) {
         expect(find.text('급식 정보를 불러오지 못했어요.'), findsOneWidget);
       } else {
@@ -143,17 +143,17 @@ void main() {
         ),
       );
       await t.pumpAndSettle();
-      expect(find.text('오늘 중식'), findsOneWidget);
+      expect(find.text('오늘 급식'), findsOneWidget);
       now = at(14);
       await t.pump(const Duration(minutes: 1));
       await t.pumpAndSettle();
-      expect(find.text('내일 중식'), findsOneWidget);
+      expect(find.text('다음 급식'), findsOneWidget);
       expect(find.text('9월 22일'), findsOneWidget);
       now = at(24);
       t.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
       t.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
       await t.pumpAndSettle();
-      expect(find.text('오늘 중식'), findsOneWidget);
+      expect(find.text('오늘 급식'), findsOneWidget);
       expect(repo.queries, containsAll(['20260921', '20260922', '20260923']));
       expect(find.text('9월 22일'), findsOneWidget);
       await t.pumpWidget(const SizedBox());
@@ -188,19 +188,19 @@ void main() {
 
       expect(find.bySemanticsLabel(RegExp('급식 상세 펼치기')), findsOneWidget);
       expect(find.textContaining('조식'), findsNothing);
-      await t.tap(find.text('내일 중식'));
+      await t.tap(find.byKey(const Key('meal-expand')));
       await t.pumpAndSettle();
       expect(find.bySemanticsLabel(RegExp('급식 상세 접기')), findsOneWidget);
       expect(find.byType(BackButton), findsNothing);
       expect(find.text('조식'), findsOneWidget);
       expect(find.text('중식'), findsOneWidget);
       expect(find.text('석식'), findsOneWidget);
-      await t.tap(find.text('9월 21일 급식'));
+      await t.tap(find.text('9월 21일(월)'));
       await t.pumpAndSettle();
       expect(find.text('20260921 석식 메뉴'), findsOneWidget);
-      await t.tap(find.text('오늘 급식'));
+      await t.tap(find.byKey(const Key('meal-expand')));
       await t.pumpAndSettle();
-      expect(find.text('내일 중식'), findsOneWidget);
+      expect(find.text('다음 급식'), findsOneWidget);
       expect(find.text('20260921 석식 메뉴'), findsNothing);
       semantics.dispose();
       expect(t.takeException(), isNull);
@@ -240,11 +240,11 @@ void main() {
       now = at(19);
       active.value = true;
       await t.pumpAndSettle();
-      expect(find.text('내일 중식'), findsOneWidget);
+      expect(find.text('다음 급식'), findsOneWidget);
       now = at(24);
       await t.pump(const Duration(hours: 5));
       await t.pumpAndSettle();
-      expect(find.text('오늘 중식'), findsOneWidget);
+      expect(find.text('오늘 급식'), findsOneWidget);
       expect(find.text('9월 22일'), findsOneWidget);
       expect(repo.queries, contains('20260923'));
       await t.pumpWidget(const SizedBox());

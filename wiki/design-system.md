@@ -2,13 +2,13 @@
 
 ## Current canonical system — v2 (Owner approved 2026-09-24)
 
-Owner approved Palette A, Materials10 + existing load-more, Settings-bottom logout,
+Owner approved Palette A (brand refined below), Materials5 + existing load-more, Settings-bottom logout,
 no peach strips and a visible Guest login CTA. The detailed approved design and
 implementation mapping live in [v2 specification](design-system-v2-proposed.md).
 This file is the canonical entry point; v2 overrides conflicting historical color,
 section, D-Day and spacing paragraphs below. Original brand assets stay unchanged.
 
-- Page #F4F6F8; grouped/content surfaces #FFFFFF; primary #FB8C00; navy #1B2A4A.
+- Page #F4F6F8; grouped/content surfaces #FFFFFF; primary #FFA300; navy #1B2A4A.
 - SectionHeader is a plain semantic18sp title; no emphasized variant/left rule.
 - LsCard: white/shadowSm/radius14, no border. LsListRow:48px target/chevron.
   SettingsGroup: small neutral label + related white rows. No nested cards.
@@ -241,3 +241,17 @@ orange / Study blue / Meal green, never full-card color or school red. Home uses
 own nickname greeting or safe fallback, not wordmark/brand caption. Materials5
 supersedes10. MY score modules are compact snapshots + LAB CTA with caller Back.
 Timer recent7days reuses StudyBarChart. No new notification/badge/analytics backend.
+
+## Owner follow-up 3 — confirmed brand
+
+Canonical primary/brand **#FFA300**, from Owner's app-icon source confirmation.
+#FB8C00 was the prior v2 working accent and is superseded, not the current brand.
+PEACH_UI: PROHIBITED BY OWNER. primarySoft compatibility token is now neutral
+#E6E9EE; navigation/chip/scoring selection surfaces are cool neutral. White cards
+and #F4F6F8 page remain; no full peach/orange page/card, no thick semantic strip.
+Buttons use #FFA300 with #1B2A4A text; contrast is tested against WCAG4.5:1.
+White on brand fails4.5:1 and is not used. Small white-background active text keeps
+contrast-safe ink, not raw brand orange. Brand assets/provider-brand colors remain.
+Home D-Day small icon uses brand; Study blue and Meal green icons remain semantic.
+Mock selectors use reduced vertical padding and content-driven height, preserving
+48px interaction target and2× wrapping. No clipped fixed-height selectors.

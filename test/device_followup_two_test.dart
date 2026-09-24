@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
-import 'package:legendstudy_app/features/study/domain/study_models.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_repository.dart';
 import 'package:legendstudy_app/features/study/scoring/scoring_models.dart';
 import 'package:legendstudy_app/features/study/presentation/mock_exam_panel.dart';
@@ -34,6 +33,10 @@ class Papers extends FakeScoring {
           item.$1 == 'exam-a' ? '2026학년도 모의고사' : '다른 시험',
           examId: item.$1,
           subjectLabel: item.$2,
+          year: 2026,
+          grade: 3,
+          month: item.$1 == 'exam-a' ? 6 : 9,
+          subjectCode: {'국어': 'korean', '영어': 'english', '수학': 'math'}[item.$2],
         ),
     ];
   }
@@ -101,7 +104,7 @@ void main() {
           for (var i = 0; i < 7; i++) {
             expect(
               t.widget<Text>(find.byKey(ValueKey('study-value-$i'))).data,
-              studyDuration(totals[i]),
+              studyBarDuration(totals[i]),
             );
             expect(
               t.getSize(find.byKey(ValueKey('study-bar-$i'))).height,
@@ -137,7 +140,7 @@ void main() {
             }
             expect(
               request.url.queryParameters['select'],
-              contains('subjects(name)'),
+              contains('subjects(name,code,category)'),
             );
             return http.Response(
               jsonEncode(
@@ -150,6 +153,10 @@ void main() {
                           'raw_subject_label': 'raw',
                           'subjects': {'name': '국어'},
                           'exams': {
+                            'exam_type': 'evaluation_mock',
+                            'year': 2026,
+                            'grade_level': 3,
+                            'exam_month': 6,
                             'content_items': {'title': '실제 시험'},
                           },
                         },
@@ -216,16 +223,20 @@ void main() {
       }
 
       expect(find.text('시험 목록 새로고침'), findsNothing);
+      await tap(find.text('공식 기출'));
       expect(find.text('다시 시도'), findsOneWidget);
       papers.unavailable = false;
       await tap(find.text('다시 시도'));
       expect(find.text('다시 시도'), findsNothing);
-      await tap(find.byKey(const Key('mock-exam')));
-      await tap(find.text('2026학년도 모의고사').last);
+      await tap(find.byKey(const ValueKey('official-year-null')));
+      await tap(find.text('2026년').last);
+      await tap(find.byKey(const ValueKey('official-grade-null')));
+      await tap(find.text('고3').last);
+      await tap(find.byKey(const ValueKey('official-month-null')));
+      await tap(find.text('6월').last);
       expect(find.byKey(const Key('mock-title')), findsNothing);
-      await tap(find.byKey(const ValueKey('mock-paper-exam-a')));
-      expect(find.text('수학 · common'), findsNothing);
-      await tap(find.text('영어 · common').last);
+      expect(find.text('수학'), findsNothing);
+      await tap(find.text('영어').last);
       expect(c.mockSetup!.title, '2026학년도 모의고사');
       expect(c.mockSetup!.subject, '영어');
       expect(papers.prepared.single, 'exam-a-영어');

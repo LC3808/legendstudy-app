@@ -105,7 +105,7 @@ void main() {
 
       await press('모의고사');
       await tester.enterText(find.byKey(const Key('mock-title')), '');
-      await press('시험 시작');
+      await press('연습 시작');
       expect(find.text('시험명은 1~80자로 입력해 주세요.'), findsOneWidget);
       await tester.enterText(find.byKey(const Key('mock-title')), '가' * 80);
       final subject = find.byKey(const ValueKey('mock-subject-국어'));
@@ -120,12 +120,12 @@ void main() {
       await tester.pumpAndSettle();
       await press('사용자 지정');
       await tester.enterText(find.byKey(const Key('mock-minutes')), '721');
-      await press('시험 시작');
+      await press('연습 시작');
       expect(find.text('시험 시간은 1~720분으로 입력해 주세요.'), findsOneWidget);
       await tester.enterText(find.byKey(const Key('mock-minutes')), '1');
       await press('시험 종료 알림');
       expect(find.text('알림 없이도 시험을 시작할 수 있어요.'), findsOneWidget);
-      await press('시험 시작');
+      await press('연습 시작');
       expect(c.mockPhase, MockPhase.running);
       expect(find.text('00:01:00'), findsOneWidget);
       expect(tester.takeException(), isNull);

@@ -373,3 +373,23 @@ subject/variant; independent timer practice is explicitly separate. Successful-s
 repository-refresh control removed, entry loading/error retry retained. MY comments
 only confirmed structured result facts. Materials5/load-more and MY→LAB→Back are
 Owner PASS; preserve. New changes require device acceptance, no new admission claim.
+
+## 2026-09-24 — Owner device follow-up 3
+
+Owner confirms icon-derived **#FFA300** as Brand Primary. Earlier #FB8C00 and
+peach selected surfaces are superseded; **PEACH UI PROHIBITED BY OWNER**. Keep
+white/cool-gray/navy surfaces, small D-Day brand/Study blue/Meal green icons.
+Meal expansion has an explicit trailing control; chips represent actual provided
+meal dates only, at most three, date+weekday. Existing14/19KST and next7day preview
+contracts remain. Expanded-only bounded context is detailed in Home policy.
+Daily study mean is annotated beside its neutral dashed line, outside the bars;
+“이번 주” is presentation copy for the existing recent7day window, not a new
+Monday-based aggregation. Dynamic scale/zero/time inclusion/comments stay.
+
+Mock has two purposes: **Official Past Exam Practice** uses canonical exam,
+subject/variant and published verified key; **Free Practice** uses user title,
+time and optional manual score. Manual scores are personal practice only, never
+verified results or MY/LAB/admissions inputs. No new taxonomy, fake key or invented
+official duration. Full key catalogue and analytics stay gaps. Implementation
+scope and storage boundary: [Mock contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes).
+Daily Sync Phase1 is explicitly outside this task.

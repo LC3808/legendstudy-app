@@ -198,13 +198,13 @@ void main() {
               ),
             ),
           );
-          expect(find.text('오늘 중식'), findsOneWidget);
+          expect(find.text('오늘 급식'), findsOneWidget);
           final preview = tester.widget<Text>(
-            find.text(meals.first.menuItems.join(' · ')),
+            find.text('중식 · ${meals.first.menuItems.join(' · ')}'),
           );
           expect(preview.maxLines, 2);
           await capture(tester, 'meal-collapsed-$dinner-$tag');
-          await tester.tap(find.text('오늘 중식'));
+          await tester.tap(find.byKey(const Key('meal-expand')));
           await tester.pumpAndSettle();
           expect(find.text('중식'), findsOneWidget);
           expect(find.text('석식'), dinner ? findsOneWidget : findsNothing);
@@ -219,9 +219,9 @@ void main() {
           await tester.pumpAndSettle();
           await capture(tester, 'meal-bottom-$dinner-$tag');
           await tester.ensureVisible(find.text('오늘 급식'));
-          await tester.tap(find.text('오늘 급식'));
+          await tester.tap(find.byKey(const Key('meal-expand')));
           await tester.pumpAndSettle();
-          expect(find.text('오늘 중식'), findsOneWidget);
+          expect(find.text('오늘 급식'), findsOneWidget);
         });
       }
       testWidgets(
@@ -327,7 +327,7 @@ void main() {
               .toList();
           expect(positions, orderedEquals([...positions]..sort()));
           await press('영어 45분 · 듣기 제외');
-          await press('시험 시작');
+          await press('연습 시작');
           expect(c.draft!.mock!.subject, '영어');
           expect(c.draft!.mock!.plannedSeconds, 2700);
           clock.advance(2700000);

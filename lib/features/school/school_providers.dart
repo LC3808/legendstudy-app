@@ -88,17 +88,28 @@ final koreanTodayProvider = StreamProvider.autoDispose<String>(
   (ref) => Stream.value(koreanDate(ref.watch(koreanMealClockProvider))),
 );
 
+// Shared dated response cache for preview and expanded context. Clock/school
+// changes invalidate positive and empty responses together.
+final datedMealsProvider = FutureProvider.family<List<Meal>, String>((
+  ref,
+  date,
+) {
+  final school = ref.watch(schoolSelectionProvider).value;
+  ref.watch(koreanMealClockProvider);
+  if (school == null) return Future.value([]);
+  return ref.watch(schoolRepositoryProvider).meals(school, date);
+}, retry: (_, _) => null);
+
 final todayMealsProvider = FutureProvider<List<Meal>>((ref) async {
   final selection = ref.watch(schoolSelectionProvider);
   if (selection.isLoading) return [];
   if (selection.hasError) throw const SchoolServiceException();
   final school = selection.value;
   if (school == null) return [];
-  final repository = ref.watch(schoolRepositoryProvider);
   final clock = ref.watch(koreanTodayProvider);
   final date = clock.value ?? await ref.watch(koreanTodayProvider.future);
   if (date == null) throw const SchoolServiceException();
-  return repository.meals(school, date);
+  return ref.watch(schoolRepositoryProvider).meals(school, date);
 });
 
 final tomorrowMealsProvider = FutureProvider<List<Meal>>((ref) async {
@@ -107,15 +118,15 @@ final tomorrowMealsProvider = FutureProvider<List<Meal>>((ref) async {
   if (selection.hasError) throw const SchoolServiceException();
   final school = selection.value;
   if (school == null) return [];
-  final repository = ref.watch(schoolRepositoryProvider);
   final instant = ref.watch(koreanMealClockProvider);
-  return repository.meals(school, koreanDateOffset(instant, 1));
+  return ref
+      .watch(schoolRepositoryProvider)
+      .meals(school, koreanDateOffset(instant, 1));
 });
 
 final nextHomeMealsProvider = FutureProvider<List<Meal>>((ref) async {
   final school = ref.watch(schoolSelectionProvider).value;
   final now = ref.watch(koreanMealClockProvider);
-  final repository = ref.watch(schoolRepositoryProvider);
   final today = await ref.watch(todayMealsProvider.future);
   final tomorrow = await ref.watch(tomorrowMealsProvider.future);
   if (school == null ||
@@ -131,6 +142,48 @@ final nextHomeMealsProvider = FutureProvider<List<Meal>>((ref) async {
     if (!ref.mounted) throw const SchoolServiceException();
     return date == koreanDateOffset(now, 1)
         ? Future.value(tomorrow)
-        : repository.meals(school, date);
+        : ref.watch(datedMealsProvider(date).future);
   });
 }, retry: (_, _) => null);
+
+// Expanded-only context. Seven dates each side; never changes Home fallback.
+final mealContextProvider = FutureProvider<List<Meal>>((ref) async {
+  final school = ref.watch(schoolSelectionProvider).value;
+  final now = ref.watch(koreanMealClockProvider);
+  final today = await ref.watch(todayMealsProvider.future);
+  final next = await ref.watch(nextHomeMealsProvider.future);
+  final tomorrow = await ref.watch(tomorrowMealsProvider.future);
+  if (school == null) return [];
+  return mealContextDates(now, today, (date) async {
+    if (!ref.mounted) throw const SchoolServiceException();
+    if (next.isNotEmpty && next.first.date == date) return next;
+    if (date == koreanDateOffset(now, 1)) return tomorrow;
+    return ref.watch(datedMealsProvider(date).future);
+  }, preferredNext: next.firstOrNull?.date);
+}, retry: (_, _) => null);
+
+Future<List<Meal>> mealContextDates(
+  DateTime now,
+  List<Meal> today,
+  Future<List<Meal>> Function(String) fetch, {
+  String? preferredNext,
+}) async {
+  final result = <Meal>[...today];
+  if (today.isEmpty) {
+    for (var i = 1; i <= 7; i++) {
+      final date = koreanDateOffset(now, -i);
+      final meals = (await fetch(date)).where((m) => m.date == date).toList();
+      if (meals.isNotEmpty) {
+        result.addAll(meals);
+        break;
+      }
+    }
+  }
+  for (var i = 1; i <= 7 && result.map((m) => m.date).toSet().length < 3; i++) {
+    final date = koreanDateOffset(now, i);
+    if (preferredNext != null && date.compareTo(preferredNext) < 0) continue;
+    result.addAll((await fetch(date)).where((m) => m.date == date));
+  }
+  result.sort((a, b) => a.date.compareTo(b.date));
+  return result;
+}

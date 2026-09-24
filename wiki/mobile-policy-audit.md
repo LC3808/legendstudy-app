@@ -208,3 +208,32 @@ Wiki10route/internal links and diff PASS. Owner iOS raw SHA1 values match task-s
 snapshot; untracked files preserved. No DB/Storage/Deno changes or Production mutation.
 New MOBILE_UI_OWNER_E2E remains NOT VERIFIED. Canonical workflow details in
 [Mock handoff](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24).
+
+## Owner device follow-up3
+
+| POLICY | CODE / TEST EVIDENCE | STATUS |
+|---|---|---|
+| Brand #FFA300, no peach | AppTokens neutral selections; design_v2_test + followup3 contrast | GAP_FIXED |
+| Provided-day Meal chips/trailing control | MealSummary/mealContextDates; followup3 bounds/order/render + existing meal suites | GAP_FIXED; expanded-only bounded reads, preview policy unchanged |
+| Average annotation outside bars | StudyBarChart measured gutter + dotted mean; followup3 geometry/allzero/hours/2× | GAP_FIXED |
+| Dual practice/official hierarchy | OfficialMockSelector + ScoringPaper metadata join; followup2/3 | GAP_FIXED supported-key path; full catalogue GAP_OPEN |
+| Free manual result isolation | StudyController separate free_practices; followup3 restore/failure/owner race/inclusion | IMPLEMENTED local only; cross-device score GAP_OPEN |
+| Published/current verified scoring | Existing prepare/submit unchanged; scoring/grade suites | PASS automated; no new Production keys/acceptance |
+| MY/LAB/Materials/Auth/Profile | Existing full regression suite, no domain changes | Existing Owner PASS preserved; new UI NOT VERIFIED |
+
+Taxonomy/agency/duration/full-key limitations are in the [Mock audit](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes).
+Production0, schema/migration/RLS/Storage0, Daily Sync Phase1 NOT STARTED by this task.
+Owner review: Home accents/collapsed→expanded Meal/actual provided chips → Timer
+average/daily values → official year/grade/month/subject (if keys available) → free
+practice completion/manual score → MY/LAB/Back. Do not create fake Production keys.
+
+Follow-up3 closeout:753 Flutter PASS/1 existing opt-in skip, analyze PASS;
+iOS simulator --no-codesign and Android debug builds PASS.85 existing responsive
+suite cases +34 followup3 contract/render cases PASS (119 total, includes non-render
+assertions),360×640/428×926 at1×/2×. Representative provided-day Meal, official/free
+selectors and average/multi-hour charts visually inspected; no peach or overlapping
+mean annotation. Brand/navy contrast7.10:1; brand/white2.00:1 is not used for text.
+Deno unchanged/not rerun. Wiki410 links/10 routes PASS, current under12KB. Source
+signature/ignore audit and diff checks PASS; Owner iOS raw hashes preserved.
+New mobile UI Owner E2E NOT VERIFIED. Existing CocoaPods/Kotlin upgrade advisories
+remain tooling follow-ups; no unrelated package/SDK/native migration performed.

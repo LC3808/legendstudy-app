@@ -10,6 +10,9 @@ double studyChartCeiling(List<int> totals) =>
 double studyBarHeight(int duration, double ceiling) =>
     ceiling <= 0 ? 0 : 160 * duration / ceiling;
 
+String studyBarDuration(int duration) =>
+    duration >= 3600000 ? '${duration ~/ 60000}분' : studyDuration(duration);
+
 double studyChartAverage(List<int> totals) =>
     totals.isEmpty ? 0 : totals.fold<int>(0, (a, b) => a + b) / totals.length;
 
@@ -44,93 +47,113 @@ class _StudyBarChartState extends State<StudyBarChart> {
   Widget build(BuildContext context) {
     final ceiling = studyChartCeiling(widget.totals);
     final average = studyChartAverage(widget.totals);
+    final annotationWidth = widget.dailyDetails ? 60.0 : 0.0;
+    final averageText = '평균\n${studyDuration(average.round())}';
+    final measure = TextPainter(
+      text: TextSpan(
+        text: averageText,
+        style: DefaultTextStyle.of(context).style.merge(AppTokens.caption),
+      ),
+      textDirection: Directionality.of(context),
+      textScaler: MediaQuery.textScalerOf(context),
+    )..layout(maxWidth: annotationWidth > 4 ? annotationWidth - 4 : 80);
+    final annotationHeight = widget.dailyDetails ? measure.height + 6 : 0.0;
+    measure.dispose();
+    final meanY = 160.0 * (1 - (ceiling <= 0 ? 0.0 : average / ceiling));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Wrap(
           spacing: 12,
           children: [
+            if (widget.dailyDetails) const Text('이번 주'),
             Text('최대 ${studyDuration(ceiling.toInt())}'),
-            if (widget.dailyDetails)
-              Text(
-                '평균 ${studyDuration(average.round())}',
-                style: AppTokens.secondary,
-              ),
           ],
         ),
         const SizedBox(height: 8),
         Stack(
           children: [
-            Row(
-              textDirection: TextDirection.ltr,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var i = 0; i < widget.totals.length; i++)
-                  Expanded(
-                    child: Semantics(
-                      label:
-                          '${widget.descriptions?[i] ?? widget.labels[i]}, ${studyDuration(widget.totals[i])}',
-                      button: true,
-                      selected: selected == i,
-                      child: ExcludeSemantics(
-                        child: InkWell(
-                          onTap: () => setState(() => selected = i),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 160,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: SizedBox(
-                                    key: ValueKey('study-bar-$i'),
-                                    width: 20,
-                                    height: studyBarHeight(
-                                      widget.totals[i],
-                                      ceiling,
-                                    ),
-                                    child: widget.totals[i] == 0
-                                        ? null
-                                        : DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              borderRadius:
-                                                  const BorderRadius.vertical(
-                                                    top: Radius.circular(3),
-                                                  ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: annotationHeight,
+                left: annotationWidth,
+              ),
+              child: Row(
+                textDirection: TextDirection.ltr,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var i = 0; i < widget.totals.length; i++)
+                    Expanded(
+                      child: Semantics(
+                        label:
+                            '${widget.descriptions?[i] ?? widget.labels[i]}, ${studyDuration(widget.totals[i])}',
+                        button: true,
+                        selected: selected == i,
+                        child: ExcludeSemantics(
+                          child: InkWell(
+                            onTap: () => setState(() => selected = i),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 160,
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: SizedBox(
+                                      key: ValueKey('study-bar-$i'),
+                                      width: 20,
+                                      height: studyBarHeight(
+                                        widget.totals[i],
+                                        ceiling,
+                                      ),
+                                      child: widget.totals[i] == 0
+                                          ? null
+                                          : DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                borderRadius:
+                                                    const BorderRadius.vertical(
+                                                      top: Radius.circular(3),
+                                                    ),
+                                              ),
                                             ),
-                                          ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Divider(height: 1),
-                              const SizedBox(height: 6),
-                              Text(
-                                widget.labels[i],
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              if (widget.dailyDetails)
+                                const Divider(height: 1),
+                                const SizedBox(height: 6),
                                 Text(
-                                  studyDuration(widget.totals[i]),
-                                  key: ValueKey('study-value-$i'),
+                                  widget.labels[i],
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.labelSmall,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium,
                                 ),
-                            ],
+                                if (widget.dailyDetails)
+                                  Text(
+                                    studyBarDuration(widget.totals[i]),
+                                    key: ValueKey('study-value-$i'),
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.copyWith(fontSize: 10),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
             if (widget.dailyDetails)
               Positioned(
-                left: 0,
+                left: annotationWidth,
                 right: 0,
-                top: 0,
+                top: annotationHeight,
                 height: 160,
                 child: IgnorePointer(
                   child: CustomPaint(
@@ -138,6 +161,19 @@ class _StudyBarChartState extends State<StudyBarChart> {
                     painter: StudyAverageLine(
                       ceiling <= 0 ? 0 : average / ceiling,
                     ),
+                  ),
+                ),
+              ),
+            if (widget.dailyDetails)
+              Positioned(
+                left: 0,
+                top: meanY,
+                width: annotationWidth,
+                child: IgnorePointer(
+                  child: Container(
+                    key: const Key('study-average-label'),
+                    padding: const EdgeInsets.only(right: 4, bottom: 3),
+                    child: Text(averageText, style: AppTokens.caption),
                   ),
                 ),
               ),

@@ -156,3 +156,12 @@ Essay external entry remain; unsupported candidates stay hidden/unavailable.
 Same canonical account/data, independent sessions, no token handoff or WebView.
 Admissions claims remain [research-gated](research-registry.md); the future4–5band
 Owner concept is retained, not approved for this implementation.
+
+## Mock provenance boundary — Owner follow-up 3
+
+[Official vs Free practice](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+refines execution only. Published-key official results remain eligible for existing
+MY snapshot/Mobile LAB history. Local user-entered practice scores are separate
+personal records, not confirmed academic data or automatic admissions input.
+Three-layer allocation above and future research gates remain unchanged. Daily
+Sync implementation, analytics/essay/notification expansion are not part of this task.

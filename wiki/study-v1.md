@@ -575,3 +575,17 @@ unchanged. The average line describes displayed days including today, while the
 existing trend comment explicitly describes completed comparison periods.
 Mock subject free-text presentation above is superseded by
 [current exam/subject selection](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24).
+
+## Owner follow-up 3 — average annotation
+
+Daily header: 이번 주 + 최대N분/시간. This still describes recent7days ending today;
+existing period subtitle/weekday sequence remains, not a Monday-start change.
+Neutral mean label sits above its dotted reference in a dedicated left gutter;
+text scale is measured, so it cannot cover bars or the value/weekday axis. Bar
+height160×duration/max unchanged; zero/allzero safe. Under-bar multi-hour values
+use total minutes for compact readability, with full hours/minutes retained in
+semantics, header and selected detail.2× values wrap rather than truncate.
+Weekly/monthly periods, deterministic comments and KST inclusion union unchanged.
+Official/free Mock execution shares the existing duration/inclusion engine;
+[dual mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+keeps manual practice scores outside confirmed academic results.

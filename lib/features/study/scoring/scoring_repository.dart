@@ -23,10 +23,31 @@ class ScoringPaper {
     this.title, {
     this.examId,
     this.subjectLabel,
+    this.year,
+    this.grade,
+    this.month,
+    this.examType,
+    this.subjectCode,
+    this.subjectCategory,
+    this.subjectId,
+    this.taxonomyVersion,
   });
   final MockScoringAvailability availability;
   final String title;
   final String? examId, subjectLabel;
+  final int? year, grade, month;
+  final String? examType,
+      subjectCode,
+      subjectCategory,
+      subjectId,
+      taxonomyVersion;
+  String get group => switch (subjectCode) {
+    'korean' => '국어',
+    'math' => '수학',
+    'english' => '영어',
+    'korean_history' => '한국사',
+    _ => ['사회탐구', '과학탐구', '통합'].contains(subjectCategory) ? '탐구' : '기타',
+  };
   String get examIdentity => examId ?? availability.examSubjectId;
 }
 
@@ -130,33 +151,47 @@ class SupabaseScoringRepository implements ScoringRepository {
     if (rows.isEmpty) return [];
     final ids = rows.map((r) => r['exam_subject_id'] as String).toSet();
     final titles = await _rows('exam_subjects', {
-      'select': 'id,content_item_id,raw_subject_label,subjects(name),exams(content_items(title))',
+      'select': 'id,content_item_id,raw_subject_label,subject_id,taxonomy_version,subjects(name,code,category),exams(year,grade_level,exam_month,exam_type,content_items(title))',
       'id': 'in.(${ids.join(',')})',
       'limit': '100',
     });
     final metadata = {for (final row in titles) row['id'] as String: row};
-    return rows.map((r) {
-      final a = MockScoringAvailability.fromJson(r);
-      final row = metadata[a.examSubjectId];
-      final parent = (row?['exams'] as Map?)?['content_items'];
-      final title = parent is Map ? parent['title'] : null;
-      final subject = row?['subjects'] as Map?;
-      final label = subject?['name'] ?? row?['raw_subject_label'];
-      // Display context is joined by identity, never guessed from exam title.
-      if (row?['content_item_id'] is! String ||
-          title is! String ||
-          title.trim().isEmpty ||
-          label is! String ||
-          label.trim().isEmpty) {
-        throw const ScoringFailure();
-      }
-      return ScoringPaper(
-        a,
-        title,
-        examId: row!['content_item_id'] as String,
-        subjectLabel: label,
-      );
-    }).toList();
+    return rows
+        .map((r) {
+          final a = MockScoringAvailability.fromJson(r);
+          final row = metadata[a.examSubjectId];
+          final parent = (row?['exams'] as Map?)?['content_items'];
+          final title = parent is Map ? parent['title'] : null;
+          final subject = row?['subjects'] as Map?;
+          final label = subject?['name'] ?? row?['raw_subject_label'];
+          // Display context is joined by identity, never guessed from exam title.
+          if (row?['content_item_id'] is! String ||
+              title is! String ||
+              title.trim().isEmpty ||
+              label is! String ||
+              label.trim().isEmpty) {
+            throw const ScoringFailure();
+          }
+          return ScoringPaper(
+            a,
+            title,
+            examId: row!['content_item_id'] as String,
+            subjectLabel: label,
+            year: (row['exams'] as Map?)?['year'] as int?,
+            grade: (row['exams'] as Map?)?['grade_level'] as int?,
+            month: (row['exams'] as Map?)?['exam_month'] as int?,
+            examType: (row['exams'] as Map?)?['exam_type'] as String?,
+            subjectCode: subject?['code'] as String?,
+            subjectCategory: subject?['category'] as String?,
+            subjectId: row['subject_id'] as String?,
+            taxonomyVersion: row['taxonomy_version'] as String?,
+          );
+        })
+        .where(
+          (p) =>
+              ['national_mock', 'evaluation_mock', 'csat'].contains(p.examType),
+        )
+        .toList();
   }
 
   @override

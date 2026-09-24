@@ -376,3 +376,12 @@ that preference. Draft carries the choice through pause/kill/restore/timeUp/end;
 completed raw duration is always stored for non-discarded exams. Cloud exclusion
 requires Owner migration 20260923000100. No fabricated analysis results/CTA: actual
 advanced LAB data linkage and manual score entry remain future scope.
+
+## Current two-mode UX — Owner follow-up 3
+
+Earlier single custom/scoring chooser is superseded by explicit 공식 기출 / 자유 연습.
+The current [dual-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+owns selector/model/safety/storage scope. Timer/pause/time-up/notification/inclusion
+and owner-scoped recovery contracts above remain unchanged. “연습 시작” is free-mode
+action; “시험 시작” requires a prepared official paper. No key is silently attached
+to user-entered title. No new official timetable or title-derived taxonomy.

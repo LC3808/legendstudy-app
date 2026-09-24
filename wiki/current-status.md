@@ -22,10 +22,12 @@ Guest MY exposes Login and hides private dashboard modules. Materials pages cont
 service/policy groups. Home has an own-nickname greeting and small daily semantic
 icons. Greeting uses compact16px hierarchy and a noninteractive planned bell slot.
 D-Day name/date metadata sits above D-n; study label/value share a wrapping row.
-Meal school is trailing; expanded date chips remain chronological. Timer/Trend
-recent7days share actual-duration labels and a neutral dashed mean reference.
-Mock scoring setup selects real exam then subject/variant; independent timer practice
-has no key/result. MY confirmed correct-count snapshots push LAB and preserve Back.
+Brand accent is now Owner-confirmed #FFA300; no peach selections. Meal's explicit
+trailing control opens up to3 actual provided-day chips, lazily bounded past/future
+context; preview14/19KST/7day policy unchanged. Timer/Trend daily mean annotation
+sits outside proportional bars. Mock has official year/grade/month→actual subject/
+variant/key and separate free title/time/manual-score practice. Free scores are
+local personal records, excluded from official MY/LAB/admissions. MY confirmed correct-count snapshots push LAB and preserve Back.
 [Canonical design](design-system.md) maps the approved proposal to implementation.
 
 ## Owner verified
@@ -43,12 +45,12 @@ has no key/result. MY confirmed correct-count snapshots push LAB and preserve Ba
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
-719 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
-builds PASS. Responsive/render suites85 PASS (including non-render assertions),
-360×640/428×926 at1×/2×, Home/Timer/Mock/MY and expanded Meal PNGs inspected;
-new chart geometry/key-context tests additionally cover boundaries and2×. Deno
+753 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
+builds PASS. Responsive/render suites119 PASS (including non-render assertions),
+360×640/428×926 at1×/2×, Home/Timer/Mock/MY, official/free selection and expanded Meal PNGs inspected;
+new34 contract/render cases cover mean geometry, provided-day bounds, dual selection and local manual-score isolation. Deno
 unchanged; previous11 PASS, not rerun in this Flutter-only follow-up. Secret
-signatures423 text files/0hits, source-ignore readiness, diff and10 Wiki task-routing
+signature scan/0hits, source-ignore readiness, diff and10 Wiki task-routing
 checks PASS. No new physical-device or Production catalogue verification claim.
 
 ## Production DB/Storage applied
@@ -74,7 +76,7 @@ This is Owner-reported evidence, not a DB query performed by Codex.
 **PHASE_1 READY FOR CODEX — OFFLINE / DRY-RUN ONLY; NOT IMPLEMENTED.**
 [Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
 [research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
-verbatim with verified hashes. Current task imports Wiki only; implementation does
+verbatim with verified hashes. That import checkpoint changed Wiki only; implementation does
 not start from instructions embedded in the package. **PHASE_2 NOT STARTED /
 OWNER GATED**. No scheduler, publication, DB/Storage/schema change or Production
 mutation. [Ingestion routing](ingestion.md#daily-sync-current-handoff--2026-09-24)
@@ -95,7 +97,7 @@ and [source reconciliation](research-registry.md#owner-provided-manus-exports--s
 
 ## Current work and next actions
 
-Owner device follow-up2 implemented; new UI Owner review pending.
+Owner device follow-up3 implemented locally; new UI Owner review pending.
 [Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
 recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
 Admissions prediction/bands/automatic qualification remain an open research gate,
@@ -104,12 +106,12 @@ names and source provenance; the synthesis and Phase1 package are now SOURCE
 ACQUIRED. Individual A–D full reports have not been inspected here. Daily Sync
 Phase1 is ready for subsequent offline implementation, not implemented. Compliance P0
 evidence audit pending. No new analysis/notification/Badge/backend implementation.
-Owner next: compact Home/D-Day/study row → expanded Meal date chips → daily time
-labels/average → Mock exam/subject (only where real published keys exist) → MY
-snapshot/LAB/Back. [Mock workflow audit](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24)
-is canonical for exam→subject→key→answer→result; full key catalogue, timer-only exam
-browser and cross-device result history remain gaps. The former missing-synthesis/
-package blocker is resolved by hash-verified Owner exports; latest App/UI/Mock records and automated validation above are preserved.
+Owner next: brand/daily accents → expanded Meal actual provided dates → daily mean
+annotation → official selection with existing verified keys → free practice/manual
+score → MY/LAB/Back. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+owns schema/agency/duration audit and scope. Full key catalogue, timer-only official
+browser, authoritative duration/agency metadata, cross-device result/manual-score
+history and advanced analysis remain gaps. No new backend/keys or Production E2E.
 Local commit only, PUSH NO; preserve Owner iOS and existing untracked files.
 Next implementation follows Owner review and release gates, not automatic roadmap
 expansion. No Production secrets or UUIDs in docs.

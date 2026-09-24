@@ -116,6 +116,39 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     }
   }
 
+  // Separate local-only personal results. Never added to ScoringAttempt or RPCs.
+  List<Map<String, dynamic>> get freePractices => !ready
+      ? []
+      : ((_space(_owner)['free_practices'] as List?) ?? [])
+            .map((v) => Map<String, dynamic>.from(v as Map))
+            .toList();
+  Future<bool> savePracticeScore(String id, double score) async {
+    if (!ready || !score.isFinite || score < 0 || score > 1000) return false;
+    final epoch = _epoch, owner = _owner;
+    var saved = false;
+    try {
+      await _serial(() async {
+        if (epoch != _epoch) return;
+        final rows = freePractices;
+        final index = rows.indexWhere((v) => v['id'] == id);
+        if (index < 0) return;
+        rows[index] = {...rows[index], 'manual_score': score};
+        final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
+        (copy['owners'] as Map)[owner] = {
+          ..._space(owner),
+          'free_practices': rows,
+        };
+        await store.write(copy);
+        _doc = copy;
+        saved = epoch == _epoch;
+      });
+    } catch (_) {
+      /* Keep the previous result; caller shows retry. */
+    }
+    if (epoch == _epoch) _notify();
+    return saved;
+  }
+
   List<StudyRecord> records = [];
   bool recovery = false;
   int nowMs = DateTime.now().millisecondsSinceEpoch,
@@ -190,11 +223,13 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
     StudyDraft? d,
     List<StudyRecord> rows, {
     List<ScoringAttempt>? scores,
+    List<Map<String, dynamic>>? practice,
   }) async {
     final copy = jsonDecode(jsonEncode(_doc)) as Map<String, dynamic>;
     copy['version'] = 3;
     (copy['owners'] as Map)[owner] = {
       ..._space(owner),
+      if (practice != null) 'free_practices': practice,
       if (scores != null) 'attempts': scores.map((a) => a.toJson()).toList(),
       'draft': d?.toJson(),
       'records': rows.map((r) => r.toJson()).toList(),
@@ -539,7 +574,14 @@ class StudyController extends ChangeNotifier with WidgetsBindingObserver {
         ),
       );
     }
-    await _write(owner, null, rows, scores: scores);
+    final practice = freePractices;
+    if (row != null &&
+        d.mock != null &&
+        d.answers == null &&
+        !practice.any((p) => p['id'] == row.id)) {
+      practice.add({...row.toJson(), 'manual_score': null});
+    }
+    await _write(owner, null, rows, scores: scores, practice: practice);
     if (e != _epoch) return;
     draft = null;
     attempts = scores;

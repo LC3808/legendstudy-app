@@ -181,3 +181,33 @@ semantic fill. Uses exactly existing data/selection state; no provider,7day sear
 meal_fallback_test asserts chip order/selection and dated full menu.
 Owner reports Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS;
 new follow-up visuals still require Owner device review.
+
+## Owner follow-up 3 — actual provided-day navigation
+
+Home preview selection remains mealDisplayPlan and nextAvailableHomeMeals:
+no breakfast preview,14/19KST transitions and next base D..D+6 unchanged. Owner
+prior Meal PASS retained; new chip/control UI requires device review.
+
+Header uses 오늘 급식 / 다음 급식 / expanded past selection 지난 급식, with meal
+type retained in collapsed menu. School stays trailing. Explicit >=48px chevron
+sits on the date row below school with8px separation. Neither school nor entire
+card is a dropdown/expand target. Supersedes earlier header-tap interaction.
+
+Expanded chips are only dates containing actual returned Meal rows; maximum3,
+chronological, e.g.9월23일(수), no repeated 급식. Empty today creates no chip.
+Existing API audit: proxy supports one validated calendar date per request; no
+range endpoint. Minimal read-only extension is lazy on expansion: nearest previous
+provided date within today-1..today-7 only when today is empty, then future dates
+through today+7, stopping at three dates. Prefer the preview's actual next date,
+then following date if inside that same bound. Today present→today+future dates.
+No out-of-bound promise of previous/following during long holidays; fewer than3
+is truthful. Breakfast-only dates may appear in detail, never as Home preview.
+
+Today/next results are reused; additional dated positive/empty responses use shared
+Riverpod cache keyed by date and dependent on school/KST clock. Resume/boundary
+invalidates context; retry clears failed dated cache. Expanded loading/error/retry
+is isolated from an already valid preview. No holiday API, fake meals, server/DB
+changes, or expanded eager background search. Failed request is not a holiday.
+Evidence: meal_owner_policy_test/meal_fallback_test unchanged time assertions;
+device_followup_three_test covers provided-date bounds/order/no-today chip and
+trailing-control geometry at360/428,1×/2×.

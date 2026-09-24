@@ -254,3 +254,71 @@ Tests: device_followup_two_test (metadata join/fail-closed, exam-filtered subjec
 2x layout, pinned subject unaffected by duration); existing mock_scoring_test,
 mock_scoring_ui_test, grade_result_test protect key/owner/result contracts. Production
 DB was not queried or mutated in this task. No new migration or key publication.
+
+## Owner follow-up 3 — dual practice modes
+
+**IMPLEMENTED locally; new Owner device E2E NOT VERIFIED.** Historical D2/D3
+Production fixture acceptance does not prove broad real answer-key availability.
+
+### Actual schema/taxonomy audit
+
+- exams shared content_item_id has year, grade_level, exam_month, exam_type;
+  no separate agency or trusted duration column. Known official types used:
+  national_mock (교육청), evaluation_mock (평가원), csat. Unknown/other types are
+  not promoted into official practice by parsing their titles.
+- subjects v1 has code/name/category/version and23 seeded subjects (common,
+  integrated,social,science). Occurrences retain subject_id/taxonomy_version and
+  raw label. No seeded foreign-language/vocational expansion in this task.
+- UI 국어/수학/영어/한국사 is derived from actual canonical codes; actual
+  social/science/integrated category→탐구; remaining actual rows→기타.
+  This is presentation grouping, not a replacement taxonomy or invented subjects.
+- Paper variants come from published-key availability rows, not hardcoded elective
+  examples. Canonical raw occurrence and key paper_variant remain distinct.
+
+### A — Official Past Exam Practice
+
+Explicit mode, year→grade→month progressive selection. Multiple actual exams in
+that cohort add a title selector; a single exam resolves without another dropdown.
+Absent metadata is shown as unknown, never guessed. Only groups actually present
+for the selected exam appear; Wrap prevents horizontal crowding. A one-option
+subject resolves directly; multiple real subject/variant options get a compact
+picker. Parent change clears child selection and prepared key.
+
+SupabaseScoringRepository joins scoring availability→exam_subjects→subjects/exams/
+content_items. Existing bounded100 scoring_available query remains; known official
+exam_type filter adds classification. This is **supported-key catalogue**, not
+full exam browsing. Empty/error is explicit; free timer remains usable. Missing
+keys/unsupported numeric math are not advertised as automatically scorable.
+Agency field and authoritative exam-duration metadata GAP: keep existing practice
+presets/custom duration, do not invent official time or agency from title.
+
+Preparation/start still checks published/current key and cutoff; draft pins actual
+occurrence/variant/version; no answers leaked before submission. Existing Guest
+verified local engine and authenticated RPC, owner isolation, stale rejection and
+idempotent result read-back unchanged. Official result→existing MY Snapshot/LAB
+only. No new strategy, admission, full key import or cross-device history engine.
+
+### B — Free Practice
+
+User title1–80runes, optional subject, existing preset/custom1–720minute duration.
+No official exam/date/subject/key selectors, no auto scoring or ScoringAttempt.
+Completion reuses immutable StudyRecord elapsed/segments/inclusion, and atomically
+adds a separate local owner-space `free_practices` entry keyed by study UUID.
+Manual score finite0..1000 is user-entered, not normalized/verified/graded. Editable
+from completion or 자유 연습 기록; write failure retains old score and retry UI.
+
+Persistence: additive optional field in existing v3 native atomic document,
+serialized through StudyController; missing legacy field means empty. No SQL,
+migration, StudyRecord server payload change or scoring RPC. Duplicate completion
+is UUID-idempotent; same-device restart restores history, account switch isolates
+it, existing owner purge removes it. No retroactive classification of old records.
+Guest follows existing local Study lifecycle, not new login forcing.
+Manual score stays out of `attempts`, MY score summaries, Mobile LAB and admissions;
+raw time still follows include_in_study_total in canonical aggregation. Personal
+score cross-device sync and full official catalogue remain **GAP_OPEN**.
+
+Tests: device_followup_three_test covers real-metadata fixture selection/reset,
+actual-option grouping, single/multi variants, free title/start/manual save,
+restart/write-failure/owner-race isolation, no scoring outbox and include true/false.
+Fixtures are test-only; no Production exam/subject/key inserted. Existing scoring
+and grade suites preserve pinned/owner/idempotency/answer-safety regressions.

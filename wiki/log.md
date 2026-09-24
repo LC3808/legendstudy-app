@@ -2051,3 +2051,17 @@ Validation:399 inline Wiki links/anchors +15 reference links PASS;10 existing
 routing checks and handoffA–D PASS; both imported SHA256 values match. Secret
 signature/source-ignore scan and diff check PASS. Flutter tests/builds not rerun
 for this Wiki-only task. Latest App validation remains unchanged.
+
+## 2026-09-24 — Owner device follow-up3
+
+Start b463201. Owner icon brand#FFA300/no peach; actual provided-day Meal context
+and trailing control; measured neutral mean annotation; official year/grade/month/
+subject/variant selection vs free title/time/manual score. Separate local owner
+practice records, no scoring/admissions mixing. [Mock contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes),
+[Home](day-10-b-home-polish.md#owner-follow-up-3--actual-provided-day-navigation),
+[Study](study-v1.md#owner-follow-up-3--average-annotation), [design](design-system.md#owner-follow-up-3--confirmed-brand).
+753 Flutter PASS/1 existing skip; analyze PASS;119 responsive/contract suite cases
+PASS with representative1×/2× PNG inspection. iOSsim/Androiddebug builds and final
+source/Wiki validation recorded in the policy audit. No new Production queries,
+DB/Storage/migration/key publication; Daily Sync Phase1 not started. Local commit
+only, PUSH NO; Owner iOS/untracked preserved, new UI device acceptance pending.

@@ -307,7 +307,7 @@ void main() {
             await t.ensureVisible(subject);
             await t.tap(subject);
             await t.pumpAndSettle();
-            expect(find.text('과목'), findsWidgets);
+            expect(find.text('과목 (선택)'), findsWidgets);
             await t.tap(find.text('수학').last);
             await t.pumpAndSettle();
             expect(t.takeException(), isNull);

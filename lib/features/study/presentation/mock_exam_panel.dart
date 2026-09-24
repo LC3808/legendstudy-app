@@ -6,6 +6,8 @@ import '../domain/study_models.dart';
 import '../notifications/mock_notification.dart';
 import 'study_page.dart';
 import 'pause_resume_button.dart';
+import 'official_mock_selector.dart';
+import 'free_practice_results.dart';
 import '../scoring/scoring_pages.dart';
 import '../scoring/scoring_repository.dart';
 
@@ -30,6 +32,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
   final subject = TextEditingController();
   final minutes = TextEditingController(text: '80');
   String preset = '국어';
+  bool official = false;
   bool includeInStudyTotal = true;
   bool alert = false, notificationBusy = false, starting = false;
   String? error, alertMessage;
@@ -181,9 +184,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
   }
 
   Future<void> start() async {
-    if (starting ||
-        preparing ||
-        selectedExam != null && selectedPaper == null) {
+    if (starting || preparing || official && selectedPaper == null) {
       return;
     }
     final setup = readSetup();
@@ -252,6 +253,17 @@ class _MockExamPanelState extends State<MockExamPanel> {
         children: [
           Text(result.title!, style: Theme.of(context).textTheme.titleMedium),
           Text('${seconds ~/ 60}분 ${seconds % 60}초 응시했어요.'),
+          if (study.freePractices.any((p) => p['id'] == result.id)) ...[
+            const Text('자유 연습 · 직접 점수 입력'),
+            OutlinedButton(
+              onPressed: () => FreePracticeResults(study: study).edit(
+                context,
+                study.freePractices.firstWhere((p) => p['id'] == result.id),
+              ),
+              child: const Text('점수 입력'),
+            ),
+          ],
+          FreePracticeResults(study: study),
           TextButton(
             onPressed: () {
               setState(() => includeInStudyTotal = study.includeMockDefault);
@@ -266,6 +278,22 @@ class _MockExamPanelState extends State<MockExamPanel> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Wrap(
+            spacing: 8,
+            children: [
+              for (final mode in [(true, '공식 기출'), (false, '자유 연습')])
+                ChoiceChip(
+                  label: Text(mode.$2),
+                  selected: official == mode.$1,
+                  onSelected: preparing || starting
+                      ? null
+                      : (_) async {
+                          setState(() => official = mode.$1);
+                          await chooseExam('timer-only');
+                        },
+                ),
+            ],
+          ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('공부시간에 포함'),
@@ -278,82 +306,45 @@ class _MockExamPanelState extends State<MockExamPanel> {
                     refreshSetup();
                   },
           ),
-          if (papersLoading)
+          if (official && papersLoading)
             const LinearProgressIndicator(semanticsLabel: '시험 불러오는 중'),
-          if (papersFailed) ...[
+          if (official && papersFailed) ...[
             const Text('시험을 불러오지 못했어요. 타이머는 사용할 수 있어요.'),
             TextButton(
               onPressed: papersLoading ? null : loadPapers,
               child: const Text('다시 시도'),
             ),
-          ] else if (!papersLoading && papers.isEmpty)
+          ] else if (official && !papersLoading && papers.isEmpty)
             const Text('정답 데이터 없음 · 타이머만 사용할 수 있어요.'),
-          if (papers.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              key: const Key('mock-exam'),
-              initialValue: selectedExam ?? 'timer-only',
-              isExpanded: true,
-              isDense: false,
-              itemHeight: null,
-              decoration: const InputDecoration(labelText: '시험 선택'),
-              items: [
-                const DropdownMenuItem(
-                  value: 'timer-only',
-                  child: Text('타이머만 사용'),
-                ),
-                for (final id in papers.map((p) => p.examIdentity).toSet())
-                  DropdownMenuItem(
-                    value: id,
-                    child: Text(
-                      papers.firstWhere((p) => p.examIdentity == id).title,
-                    ),
-                  ),
-              ],
-              onChanged: preparing || starting
-                  ? null
-                  : (v) {
-                      if (v != null) chooseExam(v);
-                    },
+          if (official && papers.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            OfficialMockSelector(
+              papers: papers,
+              busy: preparing || starting,
+              selectedPaper: selectedPaper,
+              onExam: chooseExam,
+              onPaper: choosePaper,
             ),
           ],
-          const SizedBox(height: 16),
-          if (selectedExam == null)
+          const SizedBox(height: 12),
+          if (!official) ...[
             TextField(
               key: const Key('mock-title'),
               controller: title,
-              decoration: const InputDecoration(labelText: '연습 이름'),
+              decoration: const InputDecoration(labelText: '연습 제목'),
               onChanged: (_) => refreshSetup(),
             ),
-          const SizedBox(height: 16),
-          if (selectedExam != null)
-            DropdownButtonFormField<int>(
-              key: ValueKey('mock-paper-$selectedExam'),
-              initialValue: selectedPaper,
-              isExpanded: true,
-              isDense: false,
-              itemHeight: null,
-              decoration: const InputDecoration(labelText: '과목 선택'),
-              items: [
-                for (var i = 0; i < papers.length; i++)
-                  if (papers[i].examIdentity == selectedExam)
-                    DropdownMenuItem(
-                      value: i,
-                      child: Text(
-                        '${papers[i].subjectLabel ?? '과목 정보 없음'} · ${papers[i].availability.paperVariant}',
-                      ),
-                    ),
-              ],
-              onChanged: preparing || starting ? null : choosePaper,
-            )
-          else
+            const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               key: ValueKey('mock-subject-${subject.text}'),
               initialValue: subject.text.isEmpty ? '' : subject.text,
               isExpanded: true,
-              isDense: false,
+              isDense: true,
               itemHeight: null,
-              decoration: const InputDecoration(labelText: '과목'),
+              decoration: const InputDecoration(
+                labelText: '과목 (선택)',
+                contentPadding: EdgeInsets.all(12),
+              ),
               items: [
                 const DropdownMenuItem(value: '', child: Text('설정 안 함')),
                 for (final name in {
@@ -374,20 +365,24 @@ class _MockExamPanelState extends State<MockExamPanel> {
                       refreshSetup();
                     },
             ),
-          const SizedBox(height: 16),
+          ],
+          const SizedBox(height: 12),
           DropdownButtonFormField<String>(
             key: const Key('mock-duration'),
             initialValue: preset,
             isExpanded: true,
-            isDense: false,
+            isDense: true,
             itemHeight: null,
-            decoration: const InputDecoration(labelText: '시험 시간'),
+            decoration: const InputDecoration(
+              labelText: '시험 시간',
+              contentPadding: EdgeInsets.all(12),
+            ),
             items: [
               for (final entry in MockSetup.presets.entries)
                 DropdownMenuItem(
                   value: entry.key,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
                       entry.key == '영어 듣기 제외'
                           ? '영어 45분 · 듣기 제외'
@@ -457,15 +452,16 @@ class _MockExamPanelState extends State<MockExamPanel> {
           FilledButton(
             onPressed:
                 study.authReady &&
-                    (selectedExam == null || selectedPaper != null) &&
+                    (!official || selectedPaper != null) &&
                     !preparing &&
                     !starting &&
                     !widget.startBusy &&
                     !study.busy
                 ? start
                 : null,
-            child: const Text('시험 시작'),
+            child: Text(official ? '시험 시작' : '연습 시작'),
           ),
+          if (!official) FreePracticeResults(study: study),
         ],
       );
     }
