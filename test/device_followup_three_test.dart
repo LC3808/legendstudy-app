@@ -433,6 +433,12 @@ void main() {
             ),
             findsOneWidget,
           );
+          final totalText = t.widget<Text>(find.text('총 ${studyDuration(totals.fold<int>(0, (sum, value) => sum + value))}'));
+          final maxText = t.widget<Text>(find.text('일 최대 ${studyDuration(studyChartCeiling(totals).toInt())}'));
+          expect(totalText.style!.fontWeight, FontWeight.w700);
+          expect(totalText.style!.color, AppTokens.textPrimary);
+          expect(maxText.style!.color, AppTokens.textSecondary);
+          expect(find.text('·'), findsNWidgets(2));
           final ratio = studyChartCeiling(totals) == 0
               ? 0
               : studyChartAverage(totals) / studyChartCeiling(totals);

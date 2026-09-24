@@ -18,7 +18,7 @@ import 'neis_attribution_test.dart' show FixedSchool;
 import 'day7_school_test.dart' show schoolA;
 
 void main() {
-  testWidgets('Home daily surface is opt-in, not a global card change', (
+  testWidgets('Home daily and other major groups share the approved shadow', (
     t,
   ) async {
     await t.pumpWidget(
@@ -32,17 +32,20 @@ void main() {
       ),
     );
     final cards = t.widgetList<LsCard>(find.byType(LsCard)).toList();
-    expect(cards.map((card) => card.dailySurface), [false, true]);
+    expect(cards.map((card) => card.level), [
+      LsSurfaceLevel.major,
+      LsSurfaceLevel.major,
+    ]);
     final surfaces = t
         .widgetList<Container>(find.byType(Container))
         .where((c) => c.decoration is BoxDecoration)
         .map((c) => c.decoration! as BoxDecoration)
         .toList();
-    expect(surfaces[0].border, isNull);
-    expect(surfaces[0].boxShadow, AppTokens.shadowSm);
+    expect(surfaces[0].border, Border.all(color: AppTokens.majorSurfaceBorder));
+    expect(surfaces[0].boxShadow, AppTokens.majorSurfaceShadow);
     expect(surfaces[1].color, AppTokens.surface);
-    expect(surfaces[1].border, Border.all(color: AppTokens.dailyCardBorder));
-    expect(surfaces[1].boxShadow, AppTokens.dailyCardShadow);
+    expect(surfaces[1].border, Border.all(color: AppTokens.majorSurfaceBorder));
+    expect(surfaces[1].boxShadow, AppTokens.majorSurfaceShadow);
   });
   setUpAll(() async {
     if (const bool.fromEnvironment('CORE_RENDER')) {

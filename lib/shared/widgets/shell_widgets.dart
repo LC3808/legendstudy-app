@@ -93,32 +93,40 @@ class SectionHeader extends StatelessWidget {
   );
 }
 
+enum LsSurfaceLevel { major, nested }
+
 class LsCard extends StatelessWidget {
   const LsCard({
     required this.child,
-    this.dailySurface = false,
+    this.level = LsSurfaceLevel.major,
     this.padding = const EdgeInsets.all(AppTokens.space16),
     super.key,
   });
   final Widget child;
-  final bool dailySurface;
+  final LsSurfaceLevel level;
   final EdgeInsetsGeometry padding;
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: AppTokens.surface,
-      borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-      border: dailySurface
-          ? Border.all(color: AppTokens.dailyCardBorder)
-          : null,
-      boxShadow: dailySurface ? AppTokens.dailyCardShadow : AppTokens.shadowSm,
-    ),
-    child: Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-      child: Padding(padding: padding, child: child),
-    ),
-  );
+  Widget build(BuildContext context) {
+    // A child group must never repeat the parent's elevation.
+    final major =
+        level == LsSurfaceLevel.major &&
+        context.findAncestorWidgetOfExactType<LsCard>() == null;
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTokens.surface,
+        borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+        border: Border.all(
+          color: major ? AppTokens.majorSurfaceBorder : AppTokens.cardBorder,
+        ),
+        boxShadow: major ? AppTokens.majorSurfaceShadow : null,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+        child: Padding(padding: padding, child: child),
+      ),
+    );
+  }
 }
 
 class LsListRow extends StatelessWidget {
@@ -330,7 +338,6 @@ class DailyUtilityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LsCard(
-    dailySurface: true,
     padding: const EdgeInsets.symmetric(
       horizontal: AppTokens.space16,
       vertical: AppTokens.space8,

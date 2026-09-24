@@ -250,3 +250,23 @@ remain tooling follow-ups; no unrelated package/SDK/native migration performed.
 
 Mock/LAB/Auth/Meal providers/persistence/Daily Sync/schema remain unchanged.
 Automated evidence is not new Owner device acceptance; fresh UI E2E NOT VERIFIED.
+
+## Global surface final audit — 2026-09-24
+
+The preceding Home-only opt-in surface policy is superseded, not an active gap.
+
+| Policy | Code / test evidence | Status |
+|---|---|---|
+| Major groups across six screens | LsCard major default; mobile_ia_render_test per-card assertions | GAP_FIXED |
+| Existing Home shadow unchanged | global_surface_test literal offset/blur/color assertion | PASS |
+| No nested/item shadow multiplication | ancestor suppression + explicit nested Materials/ContentCard; global_surface_test | PASS |
+| Inline controls stay flat | existing rows/controls; Settings contract test | PASS |
+| Total primary / max secondary / neutral dot | StudyBarChart summary only; device_followup_three_test | GAP_FIXED |
+| Approved average placement preserved | existing mean-label/line geometry and responsive tests | PASS |
+
+Materials search/filter is one major surface; repeated results stay light. Timer
+and chart, LAB service entries, MY groups and Settings groups share the primitive.
+Mock controls remain flat and unchanged; no extra enclosing card was introduced.
+No functional LAB/Mock/Auth/Meal/provider/storage/scoring/Daily Sync change.
+Owner's approved Home shadow and mean placement remain constraints; global UI
+MOBILE_UI_OWNER_E2E stays NOT VERIFIED until the next device review.

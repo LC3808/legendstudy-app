@@ -190,154 +190,163 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
     return ShellPage(
       children: [
         const AppHeader(title: '자료 찾기'),
-        TextField(
-          controller: input,
-          textInputAction: TextInputAction.search,
-          inputFormatters: [
-            LengthLimitingTextInputFormatter(
-              200,
-              maxLengthEnforcement:
-                  MaxLengthEnforcement.truncateAfterCompositionEnds,
-            ),
-          ],
-          onSubmitted: (_) {
-            FocusScope.of(context).unfocus();
-            search();
-          },
-          onChanged: (_) {
-            setState(() {});
-            debounce?.cancel();
-            if (!input.value.composing.isValid ||
-                input.value.composing.isCollapsed) {
-              debounce = Timer(const Duration(milliseconds: 350), search);
-            }
-          },
-          decoration: InputDecoration(
-            hintText: '모의고사, 과목, 연도 검색',
-            hintMaxLines: 2,
-            errorText: validation,
-            errorMaxLines: 4,
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: input.text.isEmpty
-                ? null
-                : IconButton(
-                    tooltip: '검색어 지우기',
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      input.clear();
-                      search();
-                    },
-                  ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        Wrap(
-          children: [
-            filterChip(
-              filters.grade == null ? '학년' : '고${filters.grade}',
-              filters.grade != null,
-              () => choose(
-                '학년',
-                {1: '고1', 2: '고2', 3: '고3'},
-                filters.grade,
-                (v) => change('grade', v),
-              ),
-            ),
-            filterChip(
-              filters.year == null ? '연도' : '${filters.year}년',
-              filters.year != null,
-              () => choose(
-                '연도 · 시행 연도',
-                {for (final y in facets.years) y: '$y년'},
-                filters.year,
-                (v) => change('year', v),
-              ),
-            ),
-            filterChip(
-              filters.month == null ? '시행 월' : '${filters.month}월',
-              filters.month != null,
-              () => choose(
-                '시행 월',
-                {for (final m in facets.months) m: '$m월'},
-                filters.month,
-                (v) => change('month', v),
-              ),
-            ),
-            filterChip(
-              filters.examType == null
-                  ? '시험 종류'
-                  : examTypeLabels[filters.examType] ?? '기타 시험',
-              filters.examType != null,
-              () => choose(
-                '시험 종류',
-                {
-                  for (final t in facets.examTypes)
-                    t: examTypeLabels[t] ?? '기타 시험',
-                },
-                filters.examType,
-                (v) => change('examType', v),
-              ),
-            ),
-            filterChip(
-              selectedSubject?.name ?? '과목',
-              filters.subjectId != null,
-              () => choose(
-                '과목',
-                {for (final s in facets.subjects) s.id: s.name},
-                filters.subjectId,
-                (v) => change('subject', v),
-              ),
-            ),
-          ],
-        ),
-        if (facetsLoading)
-          const Text(
-            '필터를 불러오는 중…',
-            style: TextStyle(color: AppTokens.textSecondary),
-          ),
-        if (facetsFailed)
-          TextButton(
-            onPressed: () => loadFacets(more: facets.nextOffset != null),
-            child: const Text('필터 다시 불러오기'),
-          ),
-        if (facets.nextOffset != null && !facetsLoading)
-          TextButton(
-            onPressed: () => loadFacets(more: true),
-            child: const Text('필터 목록 더 보기'),
-          ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
+        LsCard(
+          key: const Key('materials-search-surface'),
+          padding: const EdgeInsets.all(AppTokens.space12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (final entry in <String?, String>{
-                null: '전체',
-                ...contentTypeLabels,
-              }.entries)
-                if (entry.key != 'other')
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilterChip(
-                      label: Text(entry.value),
-                      selected: filters.contentType == entry.key,
-                      onSelected: (selected) =>
-                          change('type', selected ? entry.key : null),
+              TextField(
+                controller: input,
+                textInputAction: TextInputAction.search,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(
+                    200,
+                    maxLengthEnforcement:
+                        MaxLengthEnforcement.truncateAfterCompositionEnds,
+                  ),
+                ],
+                onSubmitted: (_) {
+                  FocusScope.of(context).unfocus();
+                  search();
+                },
+                onChanged: (_) {
+                  setState(() {});
+                  debounce?.cancel();
+                  if (!input.value.composing.isValid ||
+                      input.value.composing.isCollapsed) {
+                    debounce = Timer(const Duration(milliseconds: 350), search);
+                  }
+                },
+                decoration: InputDecoration(
+                  hintText: '모의고사, 과목, 연도 검색',
+                  hintMaxLines: 2,
+                  errorText: validation,
+                  errorMaxLines: 4,
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: input.text.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: '검색어 지우기',
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            input.clear();
+                            search();
+                          },
+                        ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                children: [
+                  filterChip(
+                    filters.grade == null ? '학년' : '고${filters.grade}',
+                    filters.grade != null,
+                    () => choose(
+                      '학년',
+                      {1: '고1', 2: '고2', 3: '고3'},
+                      filters.grade,
+                      (v) => change('grade', v),
                     ),
                   ),
+                  filterChip(
+                    filters.year == null ? '연도' : '${filters.year}년',
+                    filters.year != null,
+                    () => choose(
+                      '연도 · 시행 연도',
+                      {for (final y in facets.years) y: '$y년'},
+                      filters.year,
+                      (v) => change('year', v),
+                    ),
+                  ),
+                  filterChip(
+                    filters.month == null ? '시행 월' : '${filters.month}월',
+                    filters.month != null,
+                    () => choose(
+                      '시행 월',
+                      {for (final m in facets.months) m: '$m월'},
+                      filters.month,
+                      (v) => change('month', v),
+                    ),
+                  ),
+                  filterChip(
+                    filters.examType == null
+                        ? '시험 종류'
+                        : examTypeLabels[filters.examType] ?? '기타 시험',
+                    filters.examType != null,
+                    () => choose(
+                      '시험 종류',
+                      {
+                        for (final t in facets.examTypes)
+                          t: examTypeLabels[t] ?? '기타 시험',
+                      },
+                      filters.examType,
+                      (v) => change('examType', v),
+                    ),
+                  ),
+                  filterChip(
+                    selectedSubject?.name ?? '과목',
+                    filters.subjectId != null,
+                    () => choose(
+                      '과목',
+                      {for (final s in facets.subjects) s.id: s.name},
+                      filters.subjectId,
+                      (v) => change('subject', v),
+                    ),
+                  ),
+                ],
+              ),
+              if (facetsLoading)
+                const Text(
+                  '필터를 불러오는 중…',
+                  style: TextStyle(color: AppTokens.textSecondary),
+                ),
+              if (facetsFailed)
+                TextButton(
+                  onPressed: () => loadFacets(more: facets.nextOffset != null),
+                  child: const Text('필터 다시 불러오기'),
+                ),
+              if (facets.nextOffset != null && !facetsLoading)
+                TextButton(
+                  onPressed: () => loadFacets(more: true),
+                  child: const Text('필터 목록 더 보기'),
+                ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (final entry in <String?, String>{
+                      null: '전체',
+                      ...contentTypeLabels,
+                    }.entries)
+                      if (entry.key != 'other')
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: FilterChip(
+                            label: Text(entry.value),
+                            selected: filters.contentType == entry.key,
+                            onSelected: (selected) =>
+                                change('type', selected ? entry.key : null),
+                          ),
+                        ),
+                  ],
+                ),
+              ),
+              if (!filters.isEmpty)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      setState(() => filters = const SearchFilters());
+                      search();
+                    },
+                    icon: const Icon(Icons.restart_alt),
+                    label: const Text('필터 초기화'),
+                  ),
+                ),
             ],
           ),
         ),
-        if (!filters.isEmpty)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: () {
-                setState(() => filters = const SearchFilters());
-                search();
-              },
-              icon: const Icon(Icons.restart_alt),
-              label: const Text('필터 초기화'),
-            ),
-          ),
         const SectionHeader('검색 결과'),
         const SizedBox(height: 8),
         if (validation == null) ...[
@@ -415,6 +424,7 @@ class SearchResultTile extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: AppTokens.space8),
     child: LsCard(
+      level: LsSurfaceLevel.nested,
       padding: EdgeInsets.zero,
       child: InkWell(
         onTap: () {

@@ -613,3 +613,11 @@ more study caused higher scores, invent forecasts or claim causal effects.
 Potential wording is descriptive (both series rose during a comparable period),
 subject to adequate comparable data and later analysis design. No analytics
 engine, new query/provider, Mock scoring or LAB change in this polish.
+
+### Global surface summary typography — 2026-09-24
+
+Daily header uses `이번 주 · 총 … · 일 최대 …`. Total is bold primary ink,
+maximum secondary ink, with neutral separators and responsive wrapping. This is
+presentation only: existing recent7day period, max/zero/proportional bars and exact
+approved average annotation/line geometry are unchanged. See
+[shared surface contract](design-system.md#global-surface-final-override--2026-09-24).

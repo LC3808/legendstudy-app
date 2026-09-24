@@ -415,3 +415,12 @@ remain MODEL/EVIDENCE GATED. Raw individual-data sale is not the default busines
 This refines the 2026-09-19 analysis/retention decisions and final Study comparison
 direction; it does not implement engines, fix catalogue/thresholds or authorize
 new collection, use, sharing, payment, schemas or deployment.
+
+## 2026-09-24 — Global major surfaces with fixed approved depth
+
+Owner extends approved Home white/border/shadow to major groups across Home,
+Materials, Learning, LAB, MY and Settings. Border may strengthen; Home shadow must
+remain exactly unchanged. Nested items stay flat and inline controls keep existing
+interaction. [Design system](design-system.md#global-surface-final-override--2026-09-24)
+owns tokens and hierarchy. Study total is primary, daily maximum secondary with
+neutral separators; approved mean position and all domain behavior remain fixed.

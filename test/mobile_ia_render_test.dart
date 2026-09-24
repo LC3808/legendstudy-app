@@ -1,3 +1,4 @@
+import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 
 import 'support/search_fake.dart';
@@ -153,7 +154,25 @@ void main() {
           );
           await t.pumpAndSettle();
           expect(t.takeException(), isNull);
+          // Shared surface audit on every responsive fixture, including offscreen groups.
+          for (final element in find.byType(LsCard).evaluate()) {
+            final card = element.widget as LsCard;
+            final container = element.findRenderObject();
+            expect(container, isNotNull);
+            final decorated = find.descendant(of: find.byWidget(card), matching: find.byType(Container)).first;
+            final surface = t.widget<Container>(decorated).decoration! as BoxDecoration;
+            final major = card.level == LsSurfaceLevel.major &&
+                element.findAncestorWidgetOfExactType<LsCard>() == null;
+            expect(surface.color, AppTokens.surface);
+            expect(surface.border, Border.all(color: major ? AppTokens.majorSurfaceBorder : AppTokens.cardBorder));
+            expect(surface.boxShadow, major ? AppTokens.majorSurfaceShadow : isNull);
+          }
           if (screen == 'materials') {
+            expect(find.byKey(const Key('materials-search-surface')), findsOneWidget);
+            for (final tile in find.byType(SearchResultTile).evaluate()) {
+              final card = t.widget<LsCard>(find.descendant(of: find.byWidget(tile.widget), matching: find.byType(LsCard)));
+              expect(card.level, LsSurfaceLevel.nested);
+            }
             expect(find.text('검색·필터'), findsNothing);
             expect(find.text('최신 시험순 · 첨부 종류는 등록 정보 기준'), findsNothing);
             await t.ensureVisible(find.byType(SearchResultTile).first);

@@ -142,7 +142,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
             );
     }
     if (school.value != null && !school.isLoading && !school.hasError) {
-      return LsCard(dailySurface: true, child: body);
+      return LsCard(child: body);
     }
     return DailyUtilityCard(
       icon: Icons.restaurant_outlined,

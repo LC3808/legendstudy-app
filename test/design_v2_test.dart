@@ -125,7 +125,7 @@ void main() {
           t.widget<Container>(find.byType(Container)).decoration!
               as BoxDecoration;
       expect(surface.color, AppTokens.surface);
-      expect(surface.border, isNull);
+      expect(surface.border, Border.all(color: AppTokens.majorSurfaceBorder));
       expect(
         find.byWidgetPredicate(
           (w) => w is Semantics && w.properties.header == true,

@@ -10,7 +10,7 @@ section, D-Day and spacing paragraphs below. Original brand assets stay unchange
 
 - Page #F4F6F8; grouped/content surfaces #FFFFFF; primary #FFA300; navy #1B2A4A.
 - SectionHeader is a plain semantic18sp title; no emphasized variant/left rule.
-- LsCard: white/shadowSm/radius14, no border by default; Home daily opt-in below. LsListRow:48px target/chevron.
+- LsCard: white/radius14, majorSurfaceBorder + fixed majorSurfaceShadow; nested groups/items are flat. LsListRow:48px target/chevron.
   SettingsGroup: small neutral label + related white rows. No nested cards.
 - Orange fill uses navy text. Small selected/nav text uses contrast-safe orange
   ink #A94B00; destructive text #B42332. These derived text roles pass4.5:1;
@@ -258,6 +258,8 @@ Mock selectors use reduced vertical padding and content-driven height, preservin
 
 ## Owner final UI polish — 2026-09-24
 
+Historical Home-only surface scope below is superseded by the global override.
+
 Home D-Day, Study and Meal alone opt into `LsCard.dailySurface`: white,
 1px cool-neutral dailyCardBorder #D5DBE3, navy5% shadow offset(0,2)/blur4,
 radius14. Other cards retain v2 defaults; no strips/peach/elevation growth.
@@ -267,3 +269,24 @@ neutral selected fill and selected semantics. No date/provider/policy changes.
 Daily Study summary uses a wrapping “이번 주 / 총 … / 일 최대 …”; the neutral
 mean caption sits directly above the dashed line's left start, with white backing
 for readability across bars. See [Study policy](study-v1.md#owner-final-ui-polish--2026-09-24).
+
+## Global surface final override — 2026-09-24
+
+Owner keeps the approved Home shadow exactly: navy #0D1B2A4A (5%), offset(0,2),
+blur4, spread0. No shadow strengthening. Major white surfaces now use a slightly
+stronger cool-neutral 1px #C4CCD7 border and radius14 across all six tabs/settings.
+Shared `LsCard` defaults to major; a descendant LsCard automatically drops shadow.
+`LsSurfaceLevel.nested` explicitly marks individual Materials/content results.
+
+| Level | Usage | Treatment |
+|---|---|---|
+| Major | Home daily; Materials search/filter group; Timer/chart; LAB services; MY groups; Settings groups | White, major border, fixed approved shadow |
+| Nested/item | Content/search results and cards inside major groups | Light #E6E9EE border, no shadow |
+| Inline | Rows, chips, buttons, inputs, bottom navigation | Existing interaction/selection; no major shadow |
+
+Do not wrap every row, duplicate nested shadows or invent per-screen colors.
+Existing flat Mock controls remain untouched by this surface-only change. Brand
+#FFA300, no peach, and small D-Day brand/Study blue/Meal green icons stay unchanged.
+Daily Study header is `이번 주 · 총 … · 일 최대 …`: total bold primary ink,
+maximum secondary ink, neutral separators. Natural wrapping at360px/2× is required.
+Mean label/line position, bars, values, aggregation and comments are unchanged.

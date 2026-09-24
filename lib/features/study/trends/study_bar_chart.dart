@@ -64,13 +64,29 @@ class _StudyBarChartState extends State<StudyBarChart> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Wrap(
-          spacing: 12,
+          spacing: 8,
+          runSpacing: 4,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            if (widget.dailyDetails) const Text('이번 주'),
-            if (widget.dailyDetails) Text('총 ${studyDuration(total)}'),
-            Text(
-              '${widget.dailyDetails ? '일 최대' : '최대'} ${studyDuration(ceiling.toInt())}',
-            ),
+            if (widget.dailyDetails) ...[
+              const Text('이번 주'),
+              _SummaryMetric(
+                child: Text(
+                  '총 ${studyDuration(total)}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: AppTokens.textPrimary,
+                  ),
+                ),
+              ),
+              _SummaryMetric(
+                child: Text(
+                  '일 최대 ${studyDuration(ceiling.toInt())}',
+                  style: const TextStyle(color: AppTokens.textSecondary),
+                ),
+              ),
+            ] else
+              Text('최대 ${studyDuration(ceiling.toInt())}'),
           ],
         ),
         const SizedBox(height: 8),
@@ -188,6 +204,23 @@ class _StudyBarChartState extends State<StudyBarChart> {
       ],
     );
   }
+}
+
+/// Keep each neutral separator attached to its metric when the summary wraps.
+class _SummaryMetric extends StatelessWidget {
+  const _SummaryMetric({required this.child});
+  final Widget child;
+  @override
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const ExcludeSemantics(
+        child: Text('·', style: TextStyle(color: AppTokens.textSecondary)),
+      ),
+      const SizedBox(width: 8),
+      Flexible(child: child),
+    ],
+  );
 }
 
 /// Reference only: zero average lies on the baseline, never creates a bar.

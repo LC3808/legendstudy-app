@@ -28,6 +28,7 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: AppTokens.space8),
     child: LsCard(
+      level: LsSurfaceLevel.nested,
       padding: EdgeInsets.zero,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppTokens.cardRadius),

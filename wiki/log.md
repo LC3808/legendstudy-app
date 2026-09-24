@@ -2095,3 +2095,15 @@ strategy aliases and5 inbound integration links PASS; handoff A–F index→sect
 guardrail assertions PASS. Current-status9218bytes stays under12KB. Prior Flutter
 754PASS/1skip and builds remain prior-task evidence; not rerun for documentation.
 Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
+
+## 2026-09-24 — Global surface final polish
+
+- Extended fixed Owner-approved Home shadow to shared major surfaces; stronger
+  neutral border, nested/results flat; Materials search/filter grouped once.
+- Daily summary total primary, daily max secondary with neutral dots; approved
+  mean-line geometry/domain behavior unchanged. No Mock/LAB feature/Daily Sync/DB change.
+- Analyze,757 Flutter PASS/1 existing skip, iOS simulator/Android debug PASS;
+  render/contract suites120 PASS at360×640/428×926,1×/2×. Six major screens and
+  multi-hour summary inspected. New Owner UI E2E NOT VERIFIED; local only, no push.
+- Canonical [surface override](design-system.md#global-surface-final-override--2026-09-24)
+  and [audit](mobile-policy-audit.md#global-surface-final-audit--2026-09-24).

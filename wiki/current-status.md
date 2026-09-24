@@ -24,7 +24,7 @@ icons. Greeting uses compact16px hierarchy and a noninteractive planned bell slo
 D-Day name/date metadata sits above D-n; study label/value share a wrapping row.
 Brand accent is now Owner-confirmed #FFA300; no peach selections. Meal's explicit
 trailing control opens up to3 actual provided-day chips, lazily bounded past/future
-context; preview14/19KST/7day policy unchanged. Home daily cards have an opt-in white border/subtle shadow; Meal selection has
+context; preview14/19KST/7day policy unchanged. All major groups share a white surface, stronger cool-neutral border and the unchanged approved Home shadow; nested/items remain flat; Meal selection has
 no checkmark. Timer/Trend daily summary shows displayed7day total + daily max,
 with the neutral mean caption directly above its dashed line. Mock has official year/grade/month→actual subject/
 variant/key and separate free title/time/manual-score practice. Free scores are
@@ -41,15 +41,16 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 - Storage SQL acceptance is not App photo E2E. Owner reports first-photo false
   success on baseline; corrected photo/new UI device acceptance remains pending.
 - Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS (Owner follow-up2).
+- Owner approves existing Home shadow and Study mean placement; both preserved.
 - New MOBILE_UI_OWNER_E2E: NOT VERIFIED. Build/test PASS is not Production E2E.
 
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
-754 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
+757 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
 builds PASS. Responsive/render suites120 PASS (including non-render assertions),
 360×640/428×926 at1×/2×, Home/Timer/Mock/MY, official/free selection and expanded Meal PNGs inspected;
-Daily-surface isolation and updated mean/total/chip assertions pass alongside
+Global major/nested/inline surface contracts and mean/total/chip assertions pass alongside
 existing provided-day/Mock isolation tests. Deno
 unchanged; previous11 PASS, not rerun in this Flutter-only follow-up. Secret
 signature scan/0hits, source-ignore readiness, diff and10 Wiki task-routing
@@ -104,11 +105,11 @@ CANONICAL PRODUCT STRATEGY; PLANNED ARCHITECTURE. APPLICATION_OUTCOME_DATA: PLAN
 COHORT_ANALYTICS: FUTURE — DATA/PRIVACY/STATISTICAL GATED.
 PREDICTIVE_ADMISSIONS: FUTURE — MODEL/EVIDENCE GATED. Strategy/handoff documentation
 complete; no new code, data collection, schema or engine. Latest automated App
-validation above is the prior UI task's evidence, not rerun by this Wiki-only task.
+validation above is from the subsequent global surface UI task; the strategy itself adds no implementation.
 
 ## Current work and next actions
 
-Owner final UI-only polish implemented locally; new UI Owner review pending.
+Owner global surface final polish implemented locally; new UI Owner review pending.
 [Study future comparison](study-v1.md#future-study-analytics--planned) is PLANNED
 descriptive study/score co-movement, no causal claims or engine.
 [Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
@@ -119,8 +120,8 @@ names and source provenance; the synthesis and Phase1 package are now SOURCE
 ACQUIRED. Individual A–D full reports have not been inspected here. Daily Sync
 Phase1 is ready for subsequent offline implementation, not implemented. Compliance P0
 evidence audit pending. No new analysis/notification/Badge/backend implementation.
-Owner next: Home daily surface → check-free Meal selected date → daily total/max
-and mean-line annotation. Mock/LAB and domain implementations unchanged in this polish. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+Owner next: Home → Materials → Learning → LAB → MY → Settings major surface/border review,
+then daily total/max hierarchy and unchanged mean-line annotation. Mock/LAB and domain implementations unchanged in this polish. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
 owns schema/agency/duration audit and scope. Full key catalogue, timer-only official
 browser, authoritative duration/agency metadata, cross-device result/manual-score
 history and advanced analysis remain gaps. No new backend/keys or Production E2E.
