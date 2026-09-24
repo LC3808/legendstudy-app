@@ -107,7 +107,7 @@ void main() {
             ProviderScope(
               overrides: [
                 searchRepositoryProvider.overrideWithValue(
-                  FakeSearchRepository()..pageSize = 10,
+                  FakeSearchRepository()..pageSize = 5,
                 ),
                 trendRemoteProvider.overrideWith(
                   (ref, bounds) async => screen != 'trend-data'
@@ -167,7 +167,7 @@ void main() {
             expect(find.text('프로필 설정'), findsNothing);
             expect(find.text('공부하러 가기'), findsOneWidget);
             expect(find.text('공부 추이 보기'), findsOneWidget);
-            expect(find.text('내신 성적 분석'), findsOneWidget);
+            expect(find.text('내신'), findsOneWidget);
             expect(find.text('저장한 자료'), findsOneWidget);
             final trend = t.getTopLeft(find.text('공부 추이 보기'));
             expect(find.widgetWithText(LsListRow, '공부하러 가기'), findsOneWidget);
@@ -268,6 +268,38 @@ void main() {
             await preview.capture(
               t,
               'ia-settings-bottom-${size.width.toInt()}-${scale.toInt()}x',
+            );
+          }
+          if (screen == 'timer') {
+            await t.ensureVisible(find.byType(StudyBarChart));
+            await t.pumpAndSettle();
+            final chart = t.widget<StudyBarChart>(find.byType(StudyBarChart));
+            expect(chart.totals, study.week);
+            expect(chart.labels.length, 7);
+            expect(chart.descriptions!.first, '2026.9.8');
+            expect(chart.descriptions!.last, '2026.9.14');
+            await preview.capture(
+              t,
+              'ia-timer-chart-${size.width.toInt()}-${scale.toInt()}x',
+            );
+          }
+          if (screen == 'mock') {
+            final subject = find.byKey(const Key('mock-subject'));
+            expect(find.text('과목 (선택, 최대 40자)'), findsNothing);
+            expect(find.text('과목 (선택)'), findsOneWidget);
+            expect(
+              t.getTopLeft(subject).dy -
+                  t.getBottomLeft(find.byKey(const Key('mock-title'))).dy,
+              greaterThanOrEqualTo(16),
+            );
+            await t.ensureVisible(subject);
+            await t.tap(subject);
+            await t.enterText(subject, '수학');
+            await t.pumpAndSettle();
+            expect(t.takeException(), isNull);
+            await preview.capture(
+              t,
+              'ia-mock-subject-${size.width.toInt()}-${scale.toInt()}x',
             );
           }
           if (screen == 'profile') {

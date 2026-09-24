@@ -1,9 +1,14 @@
+import 'package:legendstudy_app/features/content/domain/content_item.dart';
+
 import 'study_core_test.dart' show TestClock, TestStore, TestRepo;
+
 import 'package:legendstudy_app/features/study/application/study_controller.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +20,7 @@ import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'package:legendstudy_app/features/materials/domain/search_models.dart';
 import 'package:legendstudy_app/features/materials/presentation/materials_page.dart';
+
 import 'support/search_fake.dart';
 
 const render = bool.fromEnvironment('SEARCH_RENDER');
@@ -32,9 +38,8 @@ Future<void> capture(WidgetTester tester, String name) async {
     final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
     final folder = Directory('build/search-review')
       ..createSync(recursive: true);
-    File(
-      '${folder.path}/$name.png',
-    ).writeAsBytesSync(bytes!.buffer.asUint8List());
+    File('${folder.path}/$name.png')
+        .writeAsBytesSync(bytes!.buffer.asUint8List());
     image.dispose();
   });
 }
@@ -48,9 +53,9 @@ void main() {
         'MaterialIcons',
       )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
       await (FontLoader('SearchPreview')..addFont(
-            File(
-              '/System/Library/Fonts/AppleSDGothicNeo.ttc',
-            ).readAsBytes().then((b) => ByteData.sublistView(b)),
+            File('/System/Library/Fonts/AppleSDGothicNeo.ttc')
+                .readAsBytes()
+                .then((b) => ByteData.sublistView(b)),
           ))
           .load();
     }
@@ -139,9 +144,8 @@ void main() {
                         )
                       : AppTheme.light,
                   builder: (context, child) => MediaQuery(
-                    data: MediaQuery.of(
-                      context,
-                    ).copyWith(textScaler: TextScaler.linear(scale)),
+                    data: MediaQuery.of(context)
+                        .copyWith(textScaler: TextScaler.linear(scale)),
                     child: child!,
                   ),
                   home: Scaffold(
@@ -243,6 +247,43 @@ void main() {
       }
     }
   }
+  testWidgets('Owner five results then explicit more renders ten', (
+    tester,
+  ) async {
+    final repo = FakeSearchRepository(
+      items: [
+        ...searchFixtures(),
+        ResourceSearchItem(
+          content: const ContentItem(
+            id: 'extra',
+            slug: 'extra',
+            contentType: 'study_material',
+            title: '추가 자료',
+            sourceUrl: 'https://example.org/extra',
+            isActive: true,
+          ),
+          groups: const [],
+        ),
+      ],
+    )..pageSize = 5;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [searchRepositoryProvider.overrideWithValue(repo)],
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(body: MaterialsPage()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(SearchResultTile), findsNWidgets(5));
+    final more = find.text('자료 더 보기');
+    await tester.ensureVisible(more);
+    await tester.tap(more);
+    await tester.pumpAndSettle();
+    expect(find.byType(SearchResultTile), findsNWidgets(10));
+    expect(tester.takeException(), isNull);
+  });
   testWidgets('Home query handoff, debounce, no results and clear browse', (
     tester,
   ) async {

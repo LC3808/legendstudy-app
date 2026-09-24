@@ -298,13 +298,31 @@ class DailyUtilityCard extends StatelessWidget {
     required this.body,
     this.heading,
     this.wrapHeader = false,
+    this.accentColor,
+    this.icon,
     super.key,
   });
   final String title;
   final bool wrapHeader;
+  final Color? accentColor;
+  final IconData? icon;
   final Widget? heading;
   final Widget? action;
   final Widget body;
+  Widget _heading(BuildContext context) {
+    final text =
+        heading ?? Text(title, style: Theme.of(context).textTheme.titleMedium);
+    return icon == null
+        ? text
+        : Row(
+            children: [
+              Icon(icon, size: 20, color: accentColor),
+              const SizedBox(width: 8),
+              Expanded(child: text),
+            ],
+          );
+  }
+
   @override
   Widget build(BuildContext context) => LsCard(
     padding: const EdgeInsets.symmetric(
@@ -316,30 +334,18 @@ class DailyUtilityCard extends StatelessWidget {
       children: [
         LayoutBuilder(
           builder: (context, constraints) => action == null
-              ? heading ??
-                    Text(title, style: Theme.of(context).textTheme.titleMedium)
+              ? _heading(context)
               : wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    heading ??
-                        Text(
-                          title,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
+                    _heading(context),
                     Align(alignment: Alignment.centerRight, child: action!),
                   ],
                 )
               : Row(
                   children: [
-                    Expanded(
-                      child:
-                          heading ??
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                    ),
+                    Expanded(child: _heading(context)),
                     const SizedBox(width: 8),
                     ConstrainedBox(
                       constraints: BoxConstraints(

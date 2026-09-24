@@ -1,3 +1,6 @@
+import 'package:legendstudy_app/features/home/presentation/home_page.dart';
+import 'package:legendstudy_app/features/personal/personal_providers.dart';
+import 'package:legendstudy_app/features/personal/domain/personal_models.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +18,39 @@ double contrast(Color a, Color b) {
 }
 
 void main() {
+  for (final state in [
+    ('a', 'a', '나의닉네임', '나의닉네임님, 반가워요'),
+    ('a', 'b', '이전사용자', '오늘도 반가워요'),
+    ('a', 'a', '', '오늘도 반가워요'),
+    (null, 'a', '이전사용자', '오늘도 공부를 시작해 볼까요?'),
+  ]) {
+    testWidgets(
+      'Home greeting canonical owner ${state.$1}/${state.$2}/${state.$3}',
+      (t) async {
+        await t.pumpWidget(
+          ProviderScope(
+            overrides: [
+              authStateProvider.overrideWith(
+                (ref) => Stream.value(AuthStatus(state.$1)),
+              ),
+              currentProfileProvider.overrideWith(
+                (ref) async => UserProfile(id: state.$2, displayName: state.$3),
+              ),
+            ],
+            child: MaterialApp(
+              theme: AppTheme.light,
+              home: const Scaffold(body: HomeGreeting()),
+            ),
+          ),
+        );
+        await t.pumpAndSettle();
+        expect(find.text(state.$4), findsOneWidget);
+        expect(find.byType(Image), findsNothing);
+        expect(find.byIcon(Icons.notifications_outlined), findsNothing);
+        expect(find.text('레전드스터디+'), findsNothing);
+      },
+    );
+  }
   test('v2 text/action roles preserve readable contrast', () {
     for (final pair in [
       (AppTokens.textPrimary, AppTokens.background),

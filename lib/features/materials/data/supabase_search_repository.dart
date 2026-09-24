@@ -10,7 +10,7 @@ import '../domain/search_models.dart';
 class SupabaseSearchRepository implements SearchRepository {
   SupabaseSearchRepository(this.client);
   final SupabaseClient client;
-  static const pageSize = 10;
+  static const pageSize = 5;
   static const facetPageSize = 100;
   static const maxOffset = 10000;
   static const occurrenceProjection =

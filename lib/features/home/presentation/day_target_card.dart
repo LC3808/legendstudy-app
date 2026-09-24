@@ -17,6 +17,8 @@ class DayTargetCard extends ConsumerWidget {
     final now = ref.watch(dayTargetClockProvider).value ?? DateTime.now();
     return DailyUtilityCard(
       title: target?.label ?? 'D-DAY',
+      icon: Icons.event_outlined,
+      accentColor: AppTokens.primaryInk,
       heading: target == null ? null : _TargetHeading(target: target, now: now),
       action: TextButton(
         style: TextButton.styleFrom(

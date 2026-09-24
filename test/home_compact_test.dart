@@ -79,6 +79,11 @@ void main() {
                   localizationsDelegates: GlobalMaterialLocalizations.delegates,
                   routerConfig: router,
                   theme: AppTheme.light.copyWith(
+                    chipTheme: AppTheme.light.chipTheme.copyWith(
+                      labelStyle: AppTheme.light.chipTheme.labelStyle?.copyWith(
+                        fontFamily: 'CorePreview',
+                      ),
+                    ),
                     textTheme: AppTheme.light.textTheme.apply(
                       fontFamily: 'CorePreview',
                     ),
@@ -93,19 +98,12 @@ void main() {
             ),
           );
           await t.pumpAndSettle();
-          if (const bool.fromEnvironment('CORE_RENDER')) {
-            await t.runAsync(
-              () => precacheImage(
-                const AssetImage(
-                  'assets/brand/generated/legendstudy_wordmark_header.png',
-                ),
-                t.element(find.byType(MealSummary)),
-              ),
-            );
-            await t.pumpAndSettle();
-          }
-          expect(find.byType(DailyUtilityCard), findsNWidgets(3));
+          expect(find.byType(DailyUtilityCard), findsNWidgets(2));
           expect(find.text('학교 설정'), findsNothing);
+          expect(
+            t.getTopLeft(find.text('오늘 중식')).dx,
+            lessThan(t.getTopLeft(find.text(schoolA.name)).dx),
+          );
           expect(find.byType(NavigationBar), findsOneWidget);
           await preview.capture(t, 'home-compact-${size.width.toInt()}-$scale');
           await t.ensureVisible(find.byType(MealSummary));

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/supabase/supabase_providers.dart';
+import '../../personal/personal_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/content_providers.dart';
 import 'day_target_card.dart';
@@ -20,7 +22,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ShellPage(
     padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
     children: [
-      const AppHeader(title: '레전드스터디+', branded: true),
+      const HomeGreeting(),
       const DayTargetCard(),
       const SizedBox(height: AppTokens.homeCardGap),
       _HomeStudyCard(),
@@ -61,6 +63,37 @@ class HomePage extends ConsumerWidget {
   );
 }
 
+/// Trailing slot is reserved for a real notification entry once delivery exists.
+/// No disabled bell or invented unread count is shown in the meantime.
+class HomeGreeting extends ConsumerWidget {
+  const HomeGreeting({super.key, this.notificationEntry});
+  final Widget? notificationEntry;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authStateProvider);
+    final profile = ref.watch(currentProfileProvider).asData?.value;
+    final owner = auth.asData?.value.userId;
+    final name = owner != null && profile?.id == owner
+        ? profile?.displayName?.trim()
+        : null;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: AppHeader(
+            title: name?.isNotEmpty == true
+                ? '$name님, 반가워요'
+                : owner != null
+                ? '오늘도 반가워요'
+                : '오늘도 공부를 시작해 볼까요?',
+          ),
+        ),
+        if (notificationEntry != null) notificationEntry!,
+      ],
+    );
+  }
+}
+
 class _HomeStudyCard extends ConsumerWidget {
   const _HomeStudyCard();
 
@@ -84,6 +117,8 @@ class _HomeStudyCard extends ConsumerWidget {
         : Text(study.summary);
     return DailyUtilityCard(
       title: '나의 공부 시간',
+      accentColor: AppTokens.info,
+      icon: Icons.timer_outlined,
       body: body,
       action: TextButton(
         onPressed: () => context.go('/study'),
@@ -102,10 +137,7 @@ class _HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      SectionHeader(title),
-      child,
-    ],
+    children: [SectionHeader(title), child],
   );
 }
 

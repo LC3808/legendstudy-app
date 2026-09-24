@@ -99,7 +99,8 @@ void main() {
         }
 
         await mount(const HomePage());
-        expect(find.text('레전드스터디+'), findsOneWidget);
+        expect(find.text('레전드스터디+'), findsNothing);
+        expect(find.text('오늘도 공부를 시작해 볼까요?'), findsOneWidget);
         await capture('home');
         await mount(const AuthPage());
         await capture('auth');

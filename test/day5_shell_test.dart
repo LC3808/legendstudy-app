@@ -95,16 +95,64 @@ void main() {
       '/study',
     );
     await tab(tester, 4);
-    await tester.ensureVisible(find.text('모의고사 성적 분석'));
-    await tester.tap(find.text('모의고사 성적 분석'));
+    await tester.ensureVisible(find.byKey(const Key('my-mock-lab')));
+    await tester.tap(find.byKey(const Key('my-mock-lab')));
     await tester.pumpAndSettle();
-    expect(
-      container.read(routerProvider).routeInformationProvider.value.uri.path,
-      '/lab/scores',
-    );
     expect(find.text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'), findsNothing);
     expect(find.text('모의고사 분석'), findsOneWidget);
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
+      4,
+    );
+    expect(find.text('MY'), findsWidgets);
   });
+  for (final detail in [
+    ('내신 분석', '/lab/school-scores'),
+    ('모의고사 분석', '/lab/scores'),
+  ]) {
+    testWidgets('LAB ${detail.$1} and direct link return to LAB', (
+      tester,
+    ) async {
+      final c = await mount(tester);
+      await tab(tester, 3);
+      await tester.tap(find.text(detail.$1));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
+        3,
+      );
+      expect(find.text('논술 준비'), findsOneWidget);
+      c.read(routerProvider).go(detail.$2);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(find.text('논술 준비'), findsOneWidget);
+    });
+    testWidgets('MY ${detail.$1} Back returns MY', (tester) async {
+      await mount(tester, user: 'a');
+      await tab(tester, 4);
+      final entry = find.byKey(
+        Key(
+          detail.$2.endsWith('school-scores') ? 'my-school-lab' : 'my-mock-lab',
+        ),
+      );
+      await tester.ensureVisible(entry);
+      await tester.tap(entry);
+      await tester.pumpAndSettle();
+      expect(find.text(detail.$1), findsOneWidget);
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
+        4,
+      );
+      expect(find.byKey(const Key('my-mock-lab')), findsOneWidget);
+    });
+  }
   testWidgets('five destinations and MY saved route retain branch stacks', (
     tester,
   ) async {
@@ -267,21 +315,14 @@ void main() {
     await mount(tester);
     expect(
       tester
-          .getSemantics(find.bySemanticsLabel('레전드스터디+'))
+          .getSemantics(find.bySemanticsLabel('오늘도 공부를 시작해 볼까요?'))
           .flagsCollection
           .isHeader,
       isTrue,
     );
-    expect(find.text('레전드스터디+'), findsOneWidget);
+    expect(find.text('오늘도 공부를 시작해 볼까요?'), findsOneWidget);
     expect(find.byIcon(Icons.auto_stories_outlined), findsNothing);
-    expect(
-      tester.widget<Image>(find.byType(Image)).image,
-      isA<AssetImage>().having(
-        (image) => image.assetName,
-        'official derived asset',
-        'assets/brand/generated/legendstudy_wordmark_header.png',
-      ),
-    );
+    expect(find.byType(Image), findsNothing);
     await tab(tester, 2);
     expect(find.bySemanticsLabel('공부 타이머, 대기 상태, 0시간 0분 0초'), findsOneWidget);
     expect(

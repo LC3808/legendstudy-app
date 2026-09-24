@@ -1,3 +1,5 @@
+import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
+
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -228,128 +230,120 @@ void main() {
           expect(find.text('오늘 중식'), findsOneWidget);
         });
       }
-      testWidgets('states presets ordering and descending week $tag', (
-        tester,
-      ) async {
-        viewport(tester);
-        final clock = TestClock();
-        final c = StudyController(
-          clock,
-          TestStore(),
-          () => TestRepo('A'),
-          ticking: false,
-        );
-        c.identity(null, resolved: true);
-        await c.settled;
-        final container = ProviderContainer(
-          overrides: [
-            studyControllerProvider.overrideWith((ref) => c),
-            focusServiceProvider.overrideWithValue(
-              TestFocusService()..capability = FocusCapability.unsupported,
-            ),
-            mockNotificationProvider.overrideWithValue(TestAlerts()),
-          ],
-        );
-        addTearDown(container.dispose);
-        await tester.pumpWidget(
-          UncontrolledProviderScope(
-            container: container,
-            child: shell(const StudyPage()),
-          ),
-        );
-        await tester.pumpAndSettle();
-        Future<void> press(String label) async {
-          final f = find.text(label).last;
-          await tester.ensureVisible(f);
-          await tester.tap(f);
-          await tester.pumpAndSettle();
-        }
-
-        final segment = find.widgetWithText(OutlinedButton, '공부 타이머');
-        expect(tester.getSize(segment).height, greaterThanOrEqualTo(48));
-        final selected = tester
-            .widget<OutlinedButton>(segment)
-            .style!
-            .side!
-            .resolve({})!;
-        expect(selected.width, 2);
-        final dates = tester
-            .widgetList<Text>(
-              find.descendant(
-                of: find.byType(StudyWeekSummary),
-                matching: find.byType(Text),
+      testWidgets(
+        'states presets ordering and ascending seven-day chart $tag',
+        (tester) async {
+          viewport(tester);
+          final clock = TestClock();
+          final c = StudyController(
+            clock,
+            TestStore(),
+            () => TestRepo('A'),
+            ticking: false,
+          );
+          c.identity(null, resolved: true);
+          await c.settled;
+          final container = ProviderContainer(
+            overrides: [
+              studyControllerProvider.overrideWith((ref) => c),
+              focusServiceProvider.overrideWithValue(
+                TestFocusService()..capability = FocusCapability.unsupported,
               ),
-            )
-            .map((t) => t.data)
-            .where((t) => t != null && t.startsWith('9.'))
-            .toList();
-        expect(dates, [
-          '9.14 오늘',
-          '9.13',
-          '9.12',
-          '9.11',
-          '9.10',
-          '9.9',
-          '9.8',
-        ]);
-        await press('공부 시작');
-        expect(
-          find.ancestor(
-            of: find.text('일시정지'),
-            matching: find.byWidgetPredicate((w) => w is OutlinedButton),
-          ),
-          findsOneWidget,
-        );
-        expect(find.byIcon(Icons.pause), findsOneWidget);
-        await capture(tester, 'running-$tag');
-        await press('일시정지');
-        expect(
-          find.ancestor(
-            of: find.text('계속하기'),
-            matching: find.byWidgetPredicate((w) => w is FilledButton),
-          ),
-          findsOneWidget,
-        );
-        expect(find.byIcon(Icons.play_arrow), findsOneWidget);
-        await capture(tester, 'paused-$tag');
-        await press('종료');
-        await press('모의고사');
-        expect(c.mockSetup!.subject, '국어');
-        expect(c.mockSetup!.plannedSeconds, 4800);
-        expect(find.text('시험 시간'), findsOneWidget);
-        await capture(tester, 'mock-setup-$tag');
-        final dropdown = find.byType(DropdownButtonFormField<String>);
-        final labels = tester.widget<DropdownButtonFormField<String>>(dropdown);
-        // Open the actual menu to check display order, duration and long labels.
-        expect(labels, isNotNull);
-        await tester.ensureVisible(dropdown);
-        await tester.tap(dropdown);
-        await tester.pumpAndSettle();
-        await capture(tester, 'preset-menu-$tag');
-        final choices = [
-          '국어 80분',
-          '수학 100분',
-          '영어 70분',
-          '영어 45분 · 듣기 제외',
-          '한국사 30분',
-          '탐구 30분',
-          '사용자 지정',
-        ];
-        final positions = choices
-            .map((t) => tester.getTopLeft(find.text(t).last).dy)
-            .toList();
-        expect(positions, orderedEquals([...positions]..sort()));
-        await press('영어 45분 · 듣기 제외');
-        await press('시험 시작');
-        expect(c.draft!.mock!.subject, '영어');
-        expect(c.draft!.mock!.plannedSeconds, 2700);
-        clock.advance(2700000);
-        await c.tick();
-        await tester.pumpAndSettle();
-        expect(find.text('시험 시간이 끝났어요.'), findsOneWidget);
-        await capture(tester, 'timeUp-$tag');
-        expect(MockSetup.presets.values, [80, 100, 70, 45, 30, 30]);
-      });
+              mockNotificationProvider.overrideWithValue(TestAlerts()),
+            ],
+          );
+          addTearDown(container.dispose);
+          await tester.pumpWidget(
+            UncontrolledProviderScope(
+              container: container,
+              child: shell(const StudyPage()),
+            ),
+          );
+          await tester.pumpAndSettle();
+          Future<void> press(String label) async {
+            final f = find.text(label).last;
+            await tester.ensureVisible(f);
+            await tester.tap(f);
+            await tester.pumpAndSettle();
+          }
+
+          final segment = find.widgetWithText(OutlinedButton, '공부 타이머');
+          expect(tester.getSize(segment).height, greaterThanOrEqualTo(48));
+          final selected = tester
+              .widget<OutlinedButton>(segment)
+              .style!
+              .side!
+              .resolve({})!;
+          expect(selected.width, 2);
+          final chart = tester.widget<StudyBarChart>(
+            find.byType(StudyBarChart),
+          );
+          expect(chart.labels, ['화', '수', '목', '금', '토', '일', '월']);
+          expect(chart.descriptions, [
+            for (var d = 8; d <= 14; d++) '2026.9.$d',
+          ]);
+          expect(chart.totals, c.week);
+          await press('공부 시작');
+          expect(
+            find.ancestor(
+              of: find.text('일시정지'),
+              matching: find.byWidgetPredicate((w) => w is OutlinedButton),
+            ),
+            findsOneWidget,
+          );
+          expect(find.byIcon(Icons.pause), findsOneWidget);
+          await capture(tester, 'running-$tag');
+          await press('일시정지');
+          expect(
+            find.ancestor(
+              of: find.text('계속하기'),
+              matching: find.byWidgetPredicate((w) => w is FilledButton),
+            ),
+            findsOneWidget,
+          );
+          expect(find.byIcon(Icons.play_arrow), findsOneWidget);
+          await capture(tester, 'paused-$tag');
+          await press('종료');
+          await press('모의고사');
+          expect(c.mockSetup!.subject, '국어');
+          expect(c.mockSetup!.plannedSeconds, 4800);
+          expect(find.text('시험 시간'), findsOneWidget);
+          await capture(tester, 'mock-setup-$tag');
+          final dropdown = find.byType(DropdownButtonFormField<String>);
+          final labels = tester.widget<DropdownButtonFormField<String>>(
+            dropdown,
+          );
+          // Open the actual menu to check display order, duration and long labels.
+          expect(labels, isNotNull);
+          await tester.ensureVisible(dropdown);
+          await tester.tap(dropdown);
+          await tester.pumpAndSettle();
+          await capture(tester, 'preset-menu-$tag');
+          final choices = [
+            '국어 80분',
+            '수학 100분',
+            '영어 70분',
+            '영어 45분 · 듣기 제외',
+            '한국사 30분',
+            '탐구 30분',
+            '사용자 지정',
+          ];
+          final positions = choices
+              .map((t) => tester.getTopLeft(find.text(t).last).dy)
+              .toList();
+          expect(positions, orderedEquals([...positions]..sort()));
+          await press('영어 45분 · 듣기 제외');
+          await press('시험 시작');
+          expect(c.draft!.mock!.subject, '영어');
+          expect(c.draft!.mock!.plannedSeconds, 2700);
+          clock.advance(2700000);
+          await c.tick();
+          await tester.pumpAndSettle();
+          expect(find.text('시험 시간이 끝났어요.'), findsOneWidget);
+          await capture(tester, 'timeUp-$tag');
+          expect(MockSetup.presets.values, [80, 100, 70, 45, 30, 30]);
+        },
+      );
     }
   }
 }

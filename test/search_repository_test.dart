@@ -144,7 +144,7 @@ void main() {
     test('public bounded query: ${entry.key}', () async {
       await repository.search(SearchQuery('', filters: entry.value));
       final q = calls.single.queryParameters;
-      expect(q['limit'], '11');
+      expect(q['limit'], '6');
       expect(q['offset'], '0');
       expect(
         q['order'],
@@ -249,13 +249,37 @@ void main() {
       expect(result.items.single.sortDate, DateTime(2026, 9, 1));
     },
   );
-  test('parent pagination is 10 plus sentinel with stable order', () async {
+  test('first five then next five preserves ten unique parents', () async {
+    examRows = List.generate(12, exam);
+    final first = await repository.search(SearchQuery('모의고사'));
+    final second = await repository.search(
+      SearchQuery('모의고사'),
+      offset: first.nextOffset!,
+    );
+    expect(first.items.length, 5);
+    expect(second.items.length, 5);
+    expect(second.nextOffset, 10);
+    expect(
+      {
+        ...first.items.map((i) => i.content.id),
+        ...second.items.map((i) => i.content.id),
+      }.length,
+      10,
+    );
+    expect(
+      calls
+          .where((u) => u.path.endsWith('/exams'))
+          .map((u) => u.queryParameters['offset']),
+      ['0', '5'],
+    );
+  });
+  test('parent pagination is 5 plus sentinel with stable order', () async {
     examRows = List.generate(49, exam);
-    final page = await repository.search(SearchQuery('모의고사'), offset: 10);
-    expect(page.items.length, 10);
-    expect(page.nextOffset, 20);
-    expect(calls.first.queryParameters['offset'], '10');
-    expect(calls.first.queryParameters['limit'], '11');
+    final page = await repository.search(SearchQuery('모의고사'), offset: 5);
+    expect(page.items.length, 5);
+    expect(page.nextOffset, 10);
+    expect(calls.first.queryParameters['offset'], '5');
+    expect(calls.first.queryParameters['limit'], '6');
     expect(
       calls
           .where((u) => u.path.endsWith('resources'))
@@ -295,13 +319,13 @@ void main() {
   test(
     'exam-to-general boundary uses exact count and no duplicate parents',
     () async {
-      examRows = List.generate(9, exam);
+      examRows = List.generate(4, exam);
       generalRows = [
         for (final n in [30, 31, 32])
           {...parent(n), 'exam': <Map<String, dynamic>>[]},
       ];
       final first = await repository.search(SearchQuery(''));
-      expect(first.items.length, 10);
+      expect(first.items.length, 5);
       expect(first.items.last.content.id, 'c30');
       final second = await repository.search(
         SearchQuery(''),
@@ -314,7 +338,7 @@ void main() {
           ...first.items.map((i) => i.content.id),
           ...second.items.map((i) => i.content.id),
         }.length,
-        12,
+        7,
       );
     },
   );

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../../core/theme/app_theme.dart';
 import '../school_providers.dart';
 import '../domain/school.dart';
 
@@ -124,12 +124,18 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
             )
           : MealSummary(
               key: ValueKey('${school.value!.identity}/$clock'),
+              schoolName: school.value!.name,
               meals: today.value ?? const [],
               tomorrowMeals: tomorrow.value ?? const [],
               now: clock,
             );
     }
+    if (school.value != null && !school.isLoading && !school.hasError) {
+      return LsCard(child: body);
+    }
     return DailyUtilityCard(
+      icon: Icons.restaurant_outlined,
+      accentColor: AppTokens.success,
       wrapHeader: true,
       title: title,
       action: !school.isLoading && !school.hasError && school.value == null
@@ -151,10 +157,12 @@ class MealSummary extends StatefulWidget {
   const MealSummary({
     super.key,
     required this.meals,
+    this.schoolName,
     this.tomorrowMeals = const [],
     required this.now,
   });
   final List<Meal> meals, tomorrowMeals;
+  final String? schoolName;
   final DateTime now;
   @override
   State<MealSummary> createState() => _MealSummaryState();
@@ -208,12 +216,28 @@ class _MealSummaryState extends State<MealSummary> {
                   children: [
                     Row(
                       children: [
+                        const Icon(
+                          Icons.restaurant_outlined,
+                          size: 20,
+                          color: AppTokens.success,
+                        ),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             label,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
+                        if (widget.schoolName != null) ...[
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              widget.schoolName!,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppTokens.textSecondary),
+                            ),
+                          ),
+                        ],
                         Icon(expanded ? Icons.expand_less : Icons.expand_more),
                       ],
                     ),

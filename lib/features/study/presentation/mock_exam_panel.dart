@@ -264,18 +264,21 @@ class _MockExamPanelState extends State<MockExamPanel> {
                       }
                     },
             ),
+          const SizedBox(height: 16),
           TextField(
             key: const Key('mock-title'),
             controller: title,
             decoration: const InputDecoration(labelText: '시험명 (최대 80자)'),
             onChanged: (_) => refreshSetup(),
           ),
+          const SizedBox(height: 16),
           TextField(
             key: const Key('mock-subject'),
             controller: subject,
             onChanged: (_) => refreshSetup(),
-            decoration: const InputDecoration(labelText: '과목 (선택, 최대 40자)'),
+            decoration: const InputDecoration(labelText: '과목 (선택)'),
           ),
+          const SizedBox(height: 12),
           Wrap(
             spacing: 6,
             children: [
@@ -289,6 +292,7 @@ class _MockExamPanelState extends State<MockExamPanel> {
                 ),
             ],
           ),
+          const SizedBox(height: 16),
           DropdownButtonFormField<String>(
             initialValue: preset,
             isExpanded: true,

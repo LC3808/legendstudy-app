@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../trends/study_bar_chart.dart';
+import '../trends/study_trends.dart';
 
 import 'mock_exam_panel.dart';
 import 'pause_resume_button.dart';
@@ -309,47 +313,25 @@ class StudyWeekSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!study.summaryComplete) return const Text('전체 기록 확인 후 일주일 합계를 표시해요.');
-    final first = koreanDay(study.nowMs).subtract(const Duration(days: 6));
-    final days = study.week;
+    final dates = trendDates(TrendPeriod.daily, koreanDay(study.nowMs));
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        for (var i = 6; i >= 0; i--)
-          Builder(
-            builder: (context) {
-              final date = first.add(Duration(days: i));
-              final label = '${date.month}.${date.day}${i == 6 ? ' 오늘' : ''}';
-              return Semantics(
-                label: '$label, 공부시간 ${studyDuration(days[i])}',
-                child: ExcludeSemantics(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            label,
-                            style: TextStyle(
-                              fontWeight: i == 6
-                                  ? FontWeight.w700
-                                  : FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Flexible(
-                          child: Text(
-                            studyDuration(days[i]),
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+        StudyBarChart(
+          labels: trendLabels(TrendPeriod.daily, dates),
+          descriptions: dates
+              .map((d) => '${d.year}.${d.month}.${d.day}')
+              .toList(),
+          totals: study.week,
+        ),
+        if (study.week.every((n) => n == 0)) const Text('아직 공부 기록이 없어요.'),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () => context.push('/my/trends'),
+            child: const Text('자세히 보기'),
           ),
+        ),
       ],
     );
   }

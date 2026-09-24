@@ -34,17 +34,25 @@ class MyScoreSummary extends ConsumerWidget {
       children: [
         const ListTile(
           contentPadding: EdgeInsets.zero,
-          title: Text('내신 성적 분석'),
+          title: Text('내신'),
           subtitle: Text('내신 성적 입력은 아직 지원하지 않아요.'),
+        ),
+        LsListRow(
+          title: 'LAB 상세 분석',
+          key: const Key('my-school-lab'),
+          onTap: () => context.push('/lab/school-scores'),
         ),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          title: const Text('모의고사 성적 분석'),
+          title: const Text('모의고사'),
           subtitle: Text(
             !study.ready ? '성적을 확인하고 있어요.' : mockScoreSummary(study.attempts),
           ),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.go('/lab/scores'),
+        ),
+        LsListRow(
+          title: 'LAB 상세 분석',
+          key: const Key('my-mock-lab'),
+          onTap: () => context.push('/lab/scores'),
         ),
       ],
     );
