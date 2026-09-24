@@ -4,8 +4,9 @@ Recorded2026-09-24 from Owner's “V2 Device Follow-up + Academic Analytics Laye
 Canonicalization” handoff. Manus research is evidence/recommendation, not an
 Owner-approved product decision. Repository Wiki owns adopted decisions; external
 reports never replace it. Research completion dates, report URLs/IDs, authorship
-versions and original attachments were not supplied. **Original reports NOT
-INSPECTED**; this register preserves only Owner-transmitted titles/findings.
+versions and original attachments were not supplied at that initial checkpoint.
+**Individual Research A–D full reports NOT INSPECTED** here. The later Owner-provided
+synthesis and Phase1 exports are SOURCE ACQUIRED, as recorded below.
 No independent legal, statistical or competitive verification is claimed.
 
 ## Report inventory and provenance
@@ -50,8 +51,49 @@ recommendations to adopted/open/deferred decisions. Do not invent missing report
 content or ask Owner to recreate past chat before searching this registry.
 
 
-Owner follow-up2 requested `research-2026-09-24-product-operations-synthesis.md`.
-Repository/workspace filename searches found no such document. Do not invent it or
-claim original A–D reports reviewed. This registry + architecture/roadmap decisions
-are the available canonical handoff; original synthesis/locators remain a documentation
-GAP. Current personal-probability and automatic-eligibility prohibition is preserved.
+## Owner-provided Manus exports — SOURCE ACQUIRED
+
+Owner supplied two actual Markdown exports2026-09-24. SHA256 matched the Manus
+reported values before import; canonical files are byte-for-byte copies, including
+references, Files to read/change/not-touch, fixture package and acceptance criteria.
+
+| Source | Canonical file | SHA256 | Status |
+|---|---|---|---|
+| Research A–D Product and Operations Consolidation3.md | [Research synthesis](research-2026-09-24-product-operations-synthesis.md) | `d41725fd78c041922087474cbda4018f75cab476e0b79ef8195b2ebb7054609b` | SOURCE ACQUIRED |
+| Daily Sync Phase 1 — Deterministic Source and Delta Core2.md | [Phase1 package](daily-sync-phase-1-deterministic-delta-package.md) | `2b4fe9e40b8fdc333e5ed85ee5900267da4f91c18638bb92e7217301203cba57` | SOURCE ACQUIRED |
+
+Owner-reported Manus branch: `manus/wiki-research-consolidation-20260924`;
+package commit: `607ba1731965ee5d394a71d8abd0b32fcf89928f`; consolidation commit:
+`1096cbd11d941860e5af372532b48f9bf9aac7eb`. Those Git objects were not available
+locally; this import verifies export bytes against Owner-supplied Manus hashes,
+not independent Git-object provenance. No cherry-pick or whole-Wiki replacement.
+The prior missing-synthesis/package blocker is resolved. Individual report URLs,
+versions and full A–D evidence remain separate, not falsely marked reviewed.
+
+### Reconciliation and precedence
+
+- Imported research is evidence/recommendation, not an instruction to implement
+  its code, run its SQL, create Cron or reopen settled Owner decisions.
+- The synthesis's Owner-decisions list includes approving three-layer analytics.
+  That allocation is already approved in current Codex
+  [architecture](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
+  and [decisions](decisions.md). It is not reopened by this historical export.
+- Design Systemv2, Owner follow-up2, MY structured snapshot, current Mock workflow
+  and719 Flutter PASS/1skip evidence remain canonical. Research general statements
+  about absent analytics do not erase those implemented bounded surfaces.
+- The Phase1 package§11 permits future offline implementation within its boundary;
+  the latest Owner request limits **this task to Wiki import**. Phase1 remains NOT
+  IMPLEMENTED. Phase2 stays NOT STARTED/OWNER GATED; runtime recommendations are not
+  approved deployment work.
+- Historical empty/inactive PilotC wording is preserved as historical evidence;
+  [current Owner baseline](current-status.md#daily-sync-status) is PUBLISHED_COMPLETE.
+  Quarantine23 expected advisory rows must not be automatically deleted.
+
+### Import handoff self-test
+
+| Request | Evidence route | Result |
+|---|---|---|
+| A: 사이트에 새 글 올렸는데 앱에 안 보여 | index Daily Sync → ingestion current handoff → Phase1 package → synthesis → current-status | PASS; identifies offline source/delta work, not automatic publication |
+| B: Pilot C가 아직 inactive야? | ingestion current handoff → current-status Daily Sync | PASS; Owner PUBLISHED_COMPLETE, older inactive records historical |
+| C: quarantine 23개 지워도 돼? | ingestion current handoff → Phase1§2 | PASS; EXPECTED advisory, automatic deletion prohibited |
+| D: Daily Sync 바로 Cron 걸자 | ingestion current handoff → Phase1§10/§11 → synthesis phase plan | PASS; Phase1 offline only, Phase2+ Owner gates, no scheduler authorization |

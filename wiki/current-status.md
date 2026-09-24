@@ -63,6 +63,23 @@ exact auth.uid()/avatar.png, SELECT/INSERT/UPDATE/DELETE owner-only SQL PASS.
 Feedback/admin/email-worker prior Production acceptance: [operations](day-11-account-personal-feedback.md).
 No current task DB/Storage mutation, migration application or function deployment.
 
+## Daily Sync status
+
+Owner Production aggregate verification2026-09-24: **PHASE_0 PASS /
+PILOT_C PUBLISHED_COMPLETE**. source_posts23; active content_items23; exams23;
+active exam_subjects363; active resources739; reported integrity checks all0.
+Quarantine23 = EXPECTED advisory evidence; automatic deletion prohibited.
+This is Owner-reported evidence, not a DB query performed by Codex.
+
+**PHASE_1 READY FOR CODEX — OFFLINE / DRY-RUN ONLY; NOT IMPLEMENTED.**
+[Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
+[research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
+verbatim with verified hashes. Current task imports Wiki only; implementation does
+not start from instructions embedded in the package. **PHASE_2 NOT STARTED /
+OWNER GATED**. No scheduler, publication, DB/Storage/schema change or Production
+mutation. [Ingestion routing](ingestion.md#daily-sync-current-handoff--2026-09-24)
+and [source reconciliation](research-registry.md#owner-provided-manus-exports--source-acquired).
+
 ## Open release gates
 
 - Account deletion deployed/configured/E2E + avatar cleanup/retention review;
@@ -83,15 +100,16 @@ Owner device follow-up2 implemented; new UI Owner review pending.
 recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
 Admissions prediction/bands/automatic qualification remain an open research gate,
 not permanently rejected. [Manus registry](research-registry.md) records five report
-names and supplied findings; original reports/dates/locators not inspected.
-Daily Sync research complete per Owner, implementation pending. Compliance P0
+names and source provenance; the synthesis and Phase1 package are now SOURCE
+ACQUIRED. Individual A–D full reports have not been inspected here. Daily Sync
+Phase1 is ready for subsequent offline implementation, not implemented. Compliance P0
 evidence audit pending. No new analysis/notification/Badge/backend implementation.
 Owner next: compact Home/D-Day/study row → expanded Meal date chips → daily time
 labels/average → Mock exam/subject (only where real published keys exist) → MY
 snapshot/LAB/Back. [Mock workflow audit](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24)
 is canonical for exam→subject→key→answer→result; full key catalogue, timer-only exam
-browser and cross-device result history remain gaps. Requested research synthesis
-filename is absent; registry records the provenance gap without invented content.
+browser and cross-device result history remain gaps. The former missing-synthesis/
+package blocker is resolved by hash-verified Owner exports; latest App/UI/Mock records and automated validation above are preserved.
 Local commit only, PUSH NO; preserve Owner iOS and existing untracked files.
 Next implementation follows Owner review and release gates, not automatic roadmap
 expansion. No Production secrets or UUIDs in docs.

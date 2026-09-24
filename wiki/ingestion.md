@@ -1,6 +1,30 @@
 # Ingestion Strategy — Unified Content v0.1
 
-## Status and source boundary
+## Daily Sync current handoff — 2026-09-24
+
+“사이트에 새 글 올렸는데 앱에 안 보여” → read the
+[Phase 1 package](daily-sync-phase-1-deterministic-delta-package.md), then its
+[Research synthesis](research-2026-09-24-product-operations-synthesis.md) and
+[Current Status](current-status.md#daily-sync-status). Daily Sync is not operational:
+a new source post does not imply automatic App publication.
+
+Current Owner-verified Phase0 baseline: PASS / PUBLISHED_COMPLETE (2026-09-24).
+source_posts23; active content_items23; exams23; active exam_subjects363;
+active resources739; all reported integrity checks0. Quarantine23 is EXPECTED
+resource_url_expiring advisory evidence, not a failed publication or cleanup list.
+**No automatic quarantine deletion.** Kakao signature rotation-only is UNCHANGED,
+not MODIFIED; package§2/§5 own the exact evidence/classification contract.
+
+Phase1: READY FOR CODEX, OFFLINE / DRY-RUN ONLY, NOT IMPLEMENTED. This import task
+does not execute its implementation instructions or SQL. Phase2: NOT STARTED /
+OWNER GATED. No DB connection/write, migration, staging/review queue, scheduler,
+Cron, Edge Function, publication, activation/deactivation or attachment downloads.
+The existing identity/source-time/publication rules below are unchanged. The
+historical empty/inactive/prepublication passages below and in the Day9 packages
+are dated design/acceptance evidence, not the current Production baseline.
+[Import provenance and precedence](research-registry.md#owner-provided-manus-exports--source-acquired).
+
+## Historical status and source boundary
 
 Day 9-B implemented this strategy as `tool/ingestion/` with a dry-run-only CLI
 and recorded the measured site survey in [day-9-ingestion.md](day-9-ingestion.md).
@@ -224,9 +248,9 @@ Minimum next increment:
 Implementation, manifest storage and notification delivery are a later task;
 no Production automation is authorized here. Historical A2 gates are untouched.
 
-## Research checkpoint — 2026-09-24
+## Earlier research checkpoint — 2026-09-24
 
 Owner reports Daily Content Sync Production Architecture research complete;
 implementation remains pending. [Manus registry](research-registry.md) records
-provenance gaps (original report/date/locator unavailable). Existing minimum contract
+earlier provenance gaps; synthesis/package acquisition is now recorded above. Existing minimum contract
 above stands; no scheduler, ingestion writes or deployment is authorized here.

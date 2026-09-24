@@ -2035,3 +2035,19 @@ PASS. Local commit only/PUSH NO/Production0; new Owner UI acceptance pending.
 [Mock workflow audit](day-8-d2-answer-scoring.md#current-exam-selection-and-scoring-handoff--2026-09-24),
 [policy evidence](mobile-policy-audit.md). Missing requested research synthesis
 recorded in existing [registry](research-registry.md); no invented source review.
+
+## 2026-09-24 — Manus canonical Wiki import
+
+Imported Owner-provided synthesis/Phase1 Markdown byte-for-byte; both reported
+SHA256 values matched. Source Git objects unavailable, so no cherry-pick/provenance
+claim beyond matched exports. Reconciled index→ingestion→package→synthesis→current
+routing; preserved latest Codex App/Mock/three-layer decisions and719/1 test evidence.
+Owner Phase0 PUBLISHED_COMPLETE and quarantine23 advisory baseline recorded;
+Phase1 READY FOR CODEX/offline, NOT IMPLEMENTED; Phase2 NOT STARTED/OWNER GATED.
+[Registry](research-registry.md#owner-provided-manus-exports--source-acquired) owns
+hashes, precedence and four handoff self-tests. Wiki-only local commit, PUSH NO,
+Production0; no Flutter/ingestion code or DB/scheduler/publication work.
+Validation:399 inline Wiki links/anchors +15 reference links PASS;10 existing
+routing checks and handoffA–D PASS; both imported SHA256 values match. Secret
+signature/source-ignore scan and diff check PASS. Flutter tests/builds not rerun
+for this Wiki-only task. Latest App validation remains unchanged.
