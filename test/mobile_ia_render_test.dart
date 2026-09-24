@@ -1,3 +1,8 @@
+import 'package:legendstudy_app/features/materials/application/search_controller.dart';
+
+import 'support/search_fake.dart';
+
+import 'package:legendstudy_app/shared/widgets/shell_widgets.dart';
 import 'package:legendstudy_app/features/home/presentation/home_page.dart';
 import 'package:legendstudy_app/features/materials/presentation/materials_page.dart';
 
@@ -51,6 +56,8 @@ void main() {
         'home',
         'materials',
         'timer',
+        'guest-my',
+        'guest-settings',
         'my',
         'my-unset',
         'settings',
@@ -85,10 +92,10 @@ void main() {
           await study.settled;
           if (screen == 'mock') study.selectMock(true);
           final page = switch (screen) {
-            'my' || 'my-unset' => const ProfilePage(),
+            'my' || 'my-unset' || 'guest-my' => const ProfilePage(),
             'home' => const HomePage(),
             'materials' => const MaterialsPage(),
-            'settings' => const SettingsPage(),
+            'settings' || 'guest-settings' => const SettingsPage(),
             'school' => const SchoolPage(),
             'profile' => const ProfileEditPage(),
             'lab' => const LabPage(),
@@ -99,6 +106,9 @@ void main() {
           await t.pumpWidget(
             ProviderScope(
               overrides: [
+                searchRepositoryProvider.overrideWithValue(
+                  FakeSearchRepository()..pageSize = 10,
+                ),
                 trendRemoteProvider.overrideWith(
                   (ref, bounds) async => screen != 'trend-data'
                       ? []
@@ -124,7 +134,9 @@ void main() {
                         ],
                 ),
                 authStateProvider.overrideWith(
-                  (ref) => Stream.value(const AuthStatus('a')),
+                  (ref) => Stream.value(
+                    AuthStatus(screen.startsWith('guest-') ? null : 'a'),
+                  ),
                 ),
                 profileRepositoryProvider.overrideWithValue(repo),
                 schoolRepositoryProvider.overrideWithValue(Schools()),
@@ -135,6 +147,21 @@ void main() {
           );
           await t.pumpAndSettle();
           expect(t.takeException(), isNull);
+          if (screen == 'materials') {
+            expect(find.text('검색·필터'), findsNothing);
+            expect(find.text('최신 시험순 · 첨부 종류는 등록 정보 기준'), findsNothing);
+            await t.ensureVisible(find.byType(SearchResultTile).first);
+            await t.pumpAndSettle();
+            await preview.capture(
+              t,
+              'ia-material-results-${size.width.toInt()}-${scale.toInt()}x',
+            );
+            await t.drag(
+              find.byType(SingleChildScrollView).first,
+              const Offset(0, 2000),
+            );
+            await t.pumpAndSettle();
+          }
           if (screen == 'my') {
             expect(find.text('프로필 편집'), findsNothing);
             expect(find.text('프로필 설정'), findsNothing);
@@ -143,10 +170,7 @@ void main() {
             expect(find.text('내신 성적 분석'), findsOneWidget);
             expect(find.text('저장한 자료'), findsOneWidget);
             final trend = t.getTopLeft(find.text('공부 추이 보기'));
-            expect(
-              find.widgetWithText(OutlinedButton, '공부하러 가기'),
-              findsOneWidget,
-            );
+            expect(find.widgetWithText(LsListRow, '공부하러 가기'), findsOneWidget);
             expect(find.byType(Divider), findsWidgets);
             final timer = t.getTopLeft(find.text('공부하러 가기'));
             expect(
@@ -154,6 +178,17 @@ void main() {
                   (trend.dy == timer.dy && trend.dx < timer.dx),
               true,
             );
+          }
+          if (screen.startsWith('guest-')) {
+            expect(find.widgetWithText(FilledButton, '로그인'), findsOneWidget);
+            expect(
+              t.getBottomRight(find.widgetWithText(FilledButton, '로그인')).dy,
+              lessThanOrEqualTo(size.height),
+            );
+            if (screen == 'guest-my') {
+              expect(find.text('공부 추이 보기'), findsNothing);
+              expect(find.text('저장한 자료'), findsNothing);
+            }
           }
           if (screen == 'my-unset') {
             expect(find.text('프로필 설정'), findsOneWidget);
@@ -171,7 +206,7 @@ void main() {
             expect(find.widgetWithText(OutlinedButton, '로그아웃'), findsOneWidget);
             expect(
               t.getTopLeft(find.text('로그아웃')).dy,
-              lessThan(t.getTopLeft(find.text('약관 및 개인정보')).dy),
+              greaterThan(t.getTopLeft(find.text('약관 및 개인정보')).dy),
             );
             expect(
               t.getTopLeft(find.text('약관 및 개인정보')).dy,
@@ -227,6 +262,14 @@ void main() {
             t,
             'ia-$screen-${size.width.toInt()}-${scale.toInt()}x',
           );
+          if (screen == 'settings') {
+            await t.ensureVisible(find.text('회원 탈퇴'));
+            await t.pumpAndSettle();
+            await preview.capture(
+              t,
+              'ia-settings-bottom-${size.width.toInt()}-${scale.toInt()}x',
+            );
+          }
           if (screen == 'profile') {
             await t.showKeyboard(find.byType(TextField));
             await t.pump();

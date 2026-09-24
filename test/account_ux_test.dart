@@ -286,7 +286,7 @@ void main() {
     expect(calls, 2);
     pending.complete();
     await tester.pumpAndSettle();
-    expect(find.text('로그인하지 않은 상태예요.'), findsOneWidget);
+    expect(find.widgetWithText(FilledButton, '로그인'), findsOneWidget);
     expect(find.text('회원탈퇴'), findsNothing);
   });
   testWidgets('a provider disabled after render cannot start', (tester) async {

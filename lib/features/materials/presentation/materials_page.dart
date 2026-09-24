@@ -158,7 +158,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
   }
 
   Widget filterChip(String label, bool selected, VoidCallback onTap) => Padding(
-    padding: const EdgeInsets.only(right: 6, bottom: 4),
+    padding: const EdgeInsets.only(right: 8, bottom: 4),
     child: ActionChip(
       label: Text(label),
       avatar: Icon(
@@ -166,9 +166,9 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
         size: 18,
         color: AppTokens.textPrimary,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       labelPadding: const EdgeInsets.symmetric(horizontal: 4),
-      backgroundColor: selected ? AppTokens.primarySoft : Colors.white,
+      backgroundColor: selected ? AppTokens.primarySoft : AppTokens.surface,
       onPressed: onTap,
       materialTapTargetSize: MaterialTapTargetSize.padded,
     ),
@@ -190,7 +190,6 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
     return ShellPage(
       children: [
         const AppHeader(title: '자료 찾기'),
-        const SectionHeader('검색·필터', emphasized: true),
         TextField(
           controller: input,
           textInputAction: TextInputAction.search,
@@ -219,7 +218,6 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
             errorText: validation,
             errorMaxLines: 4,
             prefixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             suffixIcon: input.text.isEmpty
                 ? null
                 : IconButton(
@@ -340,11 +338,7 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
               label: const Text('필터 초기화'),
             ),
           ),
-        const SectionHeader('검색 결과', emphasized: true),
-        const Text(
-          '최신 시험순 · 첨부 종류는 등록 정보 기준',
-          style: TextStyle(fontSize: 12, color: AppTokens.textSecondary),
-        ),
+        const SectionHeader('검색 결과'),
         const SizedBox(height: 8),
         if (validation == null) ...[
           if (state.phase == SearchPhase.loading)
@@ -418,15 +412,17 @@ class SearchResultTile extends StatelessWidget {
   const SearchResultTile({required this.item, super.key});
   final ResourceSearchItem item;
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      InkWell(
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: AppTokens.space8),
+    child: LsCard(
+      padding: EdgeInsets.zero,
+      child: InkWell(
         onTap: () {
           FocusScope.of(context).unfocus();
           context.push('/materials/${Uri.encodeComponent(item.content.slug)}');
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.all(AppTokens.space12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -447,6 +443,8 @@ class SearchResultTile extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 item.content.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               if (item.exam != null && examSummary(item.exam!).isNotEmpty)
@@ -489,7 +487,6 @@ class SearchResultTile extends StatelessWidget {
           ),
         ),
       ),
-      const Divider(height: 1),
-    ],
+    ),
   );
 }

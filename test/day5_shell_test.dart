@@ -78,7 +78,7 @@ void main() {
   testWidgets('MY study CTAs and score entry use canonical branches', (
     tester,
   ) async {
-    final container = await mount(tester);
+    final container = await mount(tester, user: 'a');
     await tab(tester, 4);
     await tester.ensureVisible(find.text('공부 추이 보기'));
     await tester.tap(find.text('공부 추이 보기'));
@@ -117,9 +117,9 @@ void main() {
     );
     expect(find.text('아직 등록된 자료가 없어요.'), findsOneWidget);
     await tab(tester, 4);
-    expect(find.text('로그인 / 시작하기'), findsOneWidget);
-    await tester.ensureVisible(find.text('저장한 자료'));
-    await tester.tap(find.text('저장한 자료'));
+    expect(find.text('로그인'), findsOneWidget);
+    expect(find.text('저장한 자료'), findsNothing);
+    container.read(routerProvider).go('/my/saved');
     await tester.pumpAndSettle();
     expect(container.read(routerProvider).canPop(), isTrue);
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
@@ -128,7 +128,7 @@ void main() {
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    expect(find.text('학교·학년'), findsOneWidget);
+    expect(find.widgetWithText(FilledButton, '로그인'), findsOneWidget);
   });
   testWidgets(
     'materials search state survives tabs and detail pushes above shell',
@@ -257,7 +257,7 @@ void main() {
     expect(container.read(routerProvider).canPop(), isTrue);
     expect(find.text('학교·학년 설정'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
-    expect(find.text('로그인 / 시작하기'), findsNothing);
+    expect(find.text('로그인'), findsNothing);
   });
   testWidgets('Study idle and headers expose accessible semantics', (
     tester,
@@ -298,7 +298,7 @@ void main() {
     await mount(tester, user: 'test-owner-id');
     await tab(tester, 4);
     expect(find.text('로그인 계정'), findsNothing);
-    expect(find.text('로그인 / 시작하기'), findsNothing);
+    expect(find.text('로그인'), findsNothing);
     expect(find.textContaining('test-owner-id'), findsNothing);
   });
   testWidgets('legacy and new deep routes resolve into correct branches', (

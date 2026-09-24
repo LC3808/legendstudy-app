@@ -73,50 +73,121 @@ class AppHeader extends StatelessWidget {
   );
 }
 
-class SectionDivider extends StatelessWidget {
-  const SectionDivider({super.key});
+/// A semantic section title; surface grouping carries the visual boundary.
+class SectionHeader extends StatelessWidget {
+  const SectionHeader(this.title, {super.key});
+  final String title;
   @override
-  Widget build(BuildContext context) => Divider(
-    height: 20,
-    thickness: 1.5,
-    color: Theme.of(context).colorScheme.outline,
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(
+      top: AppTokens.sectionGap,
+      bottom: AppTokens.space12,
+    ),
+    child: Semantics(
+      header: true,
+      child: Text(
+        title,
+        style: AppTokens.sectionTitle.copyWith(color: AppTokens.textPrimary),
+      ),
+    ),
   );
 }
 
-class SectionHeader extends StatelessWidget {
-  const SectionHeader(this.title, {super.key, this.emphasized = false});
-  final String title;
-  final bool emphasized;
+class LsCard extends StatelessWidget {
+  const LsCard({
+    required this.child,
+    this.padding = const EdgeInsets.all(AppTokens.space16),
+    super.key,
+  });
+  final Widget child;
+  final EdgeInsetsGeometry padding;
   @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Padding(
-      padding: EdgeInsets.only(
-        top: emphasized ? 16 : AppTokens.sectionGap,
-        bottom: 8,
-      ),
-      child: Semantics(
-        header: true,
-        child: Container(
-          padding: emphasized
-              ? const EdgeInsets.symmetric(horizontal: 10, vertical: 8)
-              : null,
-          decoration: emphasized
-              ? BoxDecoration(
-                  color: scheme.surfaceContainerLow,
-                  border: Border(
-                    left: BorderSide(color: scheme.onSurface, width: 3),
-                  ),
-                )
-              : null,
-          child: Text(
-            title,
-            style: AppTokens.sectionTitle.copyWith(color: scheme.onSurface),
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      color: AppTokens.surface,
+      borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+      boxShadow: AppTokens.shadowSm,
+    ),
+    child: Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+      child: Padding(padding: padding, child: child),
+    ),
+  );
+}
+
+class LsListRow extends StatelessWidget {
+  const LsListRow({
+    required this.title,
+    required this.onTap,
+    this.subtitle,
+    this.icon,
+    super.key,
+  });
+  final String title;
+  final String? subtitle;
+  final IconData? icon;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) => ListTile(
+    contentPadding: EdgeInsets.zero,
+    leading: icon == null ? null : Icon(icon, size: AppTokens.iconDense),
+    title: Text(title),
+    subtitle: subtitle == null ? null : Text(subtitle!),
+    trailing: const Icon(Icons.chevron_right, size: AppTokens.iconDense),
+    onTap: onTap,
+  );
+}
+
+class SettingsGroup extends StatelessWidget {
+  const SettingsGroup({required this.title, required this.children, super.key});
+  final String title;
+  final List<Widget> children;
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: AppTokens.space20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: AppTokens.space8),
+          child: Semantics(
+            header: true,
+            child: Text(title, style: AppTokens.caption),
           ),
         ),
-      ),
-    );
-  }
+        LsCard(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppTokens.space16,
+            vertical: AppTokens.space8,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (var i = 0; i < children.length; i++) ...[
+                if (i > 0) const Divider(),
+                children[i],
+              ],
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class GuestAccountPrompt extends StatelessWidget {
+  const GuestAccountPrompt({required this.onLogin, super.key});
+  final VoidCallback onLogin;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      const Text('학습 기록과 저장한 자료를 계정에 연결해 관리하세요.'),
+      const SizedBox(height: AppTokens.space16),
+      FilledButton(onPressed: onLogin, child: const Text('로그인')),
+    ],
+  );
 }
 
 class CompactUtilityCard extends StatelessWidget {
@@ -129,13 +200,7 @@ class CompactUtilityCard extends StatelessWidget {
   final String title, body;
   final Widget? action;
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: AppTokens.surfaceWarm,
-      border: Border.all(color: AppTokens.cardBorder),
-      borderRadius: BorderRadius.circular(AppTokens.cardRadius),
-    ),
+  Widget build(BuildContext context) => LsCard(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -153,14 +218,14 @@ class SearchEntry extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) => Material(
-    color: AppTokens.background,
+    color: AppTokens.surface,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppTokens.radiusSm),
       side: const BorderSide(color: AppTokens.cardBorder),
     ),
     child: InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppTokens.radiusSm),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 56),
         child: const Padding(
@@ -233,7 +298,6 @@ class DailyUtilityCard extends StatelessWidget {
     required this.body,
     this.heading,
     this.wrapHeader = false,
-    this.accentColor,
     super.key,
   });
   final String title;
@@ -241,96 +305,53 @@ class DailyUtilityCard extends StatelessWidget {
   final Widget? heading;
   final Widget? action;
   final Widget body;
-  final Color? accentColor;
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: AppTokens.surfaceWarm,
-      border: Border.all(color: AppTokens.homeCardBorder),
-      borderRadius: BorderRadius.circular(AppTokens.cardRadius),
+  Widget build(BuildContext context) => LsCard(
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppTokens.space16,
+      vertical: AppTokens.space8,
     ),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(AppTokens.cardRadius - 1),
-      child: CustomPaint(
-        painter: accentColor == null ? null : _AccentBarPainter(accentColor!),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-            accentColor == null ? 16 : 13,
-            AppTokens.homeCardVerticalPadding,
-            16,
-            AppTokens.homeCardVerticalPadding,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              LayoutBuilder(
-                builder: (context, constraints) => action == null
-                    ? heading ??
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LayoutBuilder(
+          builder: (context, constraints) => action == null
+              ? heading ??
+                    Text(title, style: Theme.of(context).textTheme.titleMedium)
+              : wrapHeader && MediaQuery.textScalerOf(context).scale(1) >= 1.5
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    heading ??
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                    Align(alignment: Alignment.centerRight, child: action!),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child:
+                          heading ??
                           Text(
                             title,
                             style: Theme.of(context).textTheme.titleMedium,
-                          )
-                    : wrapHeader &&
-                          MediaQuery.textScalerOf(context).scale(1) >= 1.5
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          heading ??
-                              Text(
-                                title,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: action!,
                           ),
-                        ],
-                      )
-                    : Row(
-                        children: [
-                          Expanded(
-                            child:
-                                heading ??
-                                Text(
-                                  title,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium,
-                                ),
-                          ),
-                          const SizedBox(width: 8),
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth: constraints.maxWidth * .45,
-                            ),
-                            child: action!,
-                          ),
-                        ],
+                    ),
+                    const SizedBox(width: 8),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: constraints.maxWidth * .45,
                       ),
-              ),
-              body,
-            ],
-          ),
+                      child: action!,
+                    ),
+                  ],
+                ),
         ),
-      ),
+        body,
+      ],
     ),
   );
-}
-
-class _AccentBarPainter extends CustomPainter {
-  const _AccentBarPainter(this.color);
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, 4, size.height),
-      Paint()..color = color,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_AccentBarPainter oldDelegate) =>
-      oldDelegate.color != color;
 }

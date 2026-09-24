@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/theme/app_theme.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -142,7 +141,6 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
               child: const Text('학교 설정'),
             )
           : null,
-      accentColor: AppTokens.homeMealAccent,
       body: body,
     );
   }

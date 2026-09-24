@@ -69,7 +69,7 @@ class StudyPage extends ConsumerWidget {
               ],
             ),
           ),
-          const SectionDivider(),
+          const SizedBox(height: AppTokens.space12),
           if (study.mockSelected)
             MockExamPanel(
               key: ValueKey(study.viewGeneration),
@@ -87,24 +87,30 @@ class StudyPage extends ConsumerWidget {
               ),
             )
           else
-            StudyTimerDisplay(study: study),
-          if (!study.mockSelected)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                study.summary,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: AppTokens.textSecondary),
-              ),
-            ),
-          if (!study.mockSelected)
-            StudyTimerControls(
-              study: study,
-              startBusy: focus.busy,
-              startAction: () => focus.start(
-                startTimer: study.start,
-                currentSession: () => study.draft?.id,
-                choose: (capability) => chooseStudyFocus(context, capability),
+            LsCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  StudyTimerDisplay(study: study),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      study.summary,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: AppTokens.textSecondary),
+                    ),
+                  ),
+                  StudyTimerControls(
+                    study: study,
+                    startBusy: focus.busy,
+                    startAction: () => focus.start(
+                      startTimer: study.start,
+                      currentSession: () => study.draft?.id,
+                      choose: (capability) =>
+                          chooseStudyFocus(context, capability),
+                    ),
+                  ),
+                ],
               ),
             ),
           Align(
@@ -145,8 +151,8 @@ class StudyPage extends ConsumerWidget {
             ),
           if (study.mockSelected) ScoringHistory(study: study),
           if (!study.mockSelected) ...[
-            const SectionHeader('최근 7일', emphasized: true),
-            StudyWeekSummary(study: study),
+            const SectionHeader('최근 7일'),
+            LsCard(child: StudyWeekSummary(study: study)),
           ],
         ],
       ),

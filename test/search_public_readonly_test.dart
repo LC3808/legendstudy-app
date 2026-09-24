@@ -47,7 +47,7 @@ void main() {
             ),
           ),
         );
-        await repo.search(SearchQuery(''), offset: 24);
+        await repo.search(SearchQuery(''), offset: 10);
         await repo.facets();
         await repo.facets(offset: 100);
         // ignore: avoid_print

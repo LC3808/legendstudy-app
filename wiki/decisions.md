@@ -334,3 +334,14 @@ and [roadmap §9](roadmap-academic-analytics.md#9-achievement--badge-engine) rem
 canonical. No catalogue/model/persistence exists in the current App migrations;
 this task records FOUNDATION and exposes no fake awards/collection. Study Level
 has no approved taxonomy and remains FUTURE.
+
+## 2026-09-24 — Design System v2 approved scope
+
+Owner selects Claude Palette A (orange/navy/cool neutral); white grouped surfaces
+on cool page, no peach title strips, shared typography/components. MY Study CTAs
+become navigation rows, preserving Trend→Timer order. Guest MY clearly offers
+Login and hides private modules. Settings logout moves below policy/info, directly
+above destructive deletion. Materials initial/load-more pages are10; existing
+explicit load-more and query semantics stay unchanged. This supersedes the prior
+2026-09-23 strip/outlined-MY-CTA/logout-order styling only. Feature/data contracts
+remain; no Badge/backend/auth redesign. [Approved mapping](design-system-v2-proposed.md).

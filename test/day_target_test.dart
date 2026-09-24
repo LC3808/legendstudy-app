@@ -110,9 +110,7 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        final originalHeight = tester
-            .getSize(find.byType(DayTargetCard))
-            .height;
+
         for (final days in [0, 1, 23, 999, 7300, -1]) {
           final target = DayTarget(
             date: now.add(Duration(days: days)),
@@ -130,9 +128,12 @@ void main() {
           final settingsRect = tester.getRect(
             find.widgetWithText(TextButton, '설정'),
           );
-          expect(nameRect.center.dy, closeTo(statusRect.center.dy, .1));
-          expect(statusRect.center.dy, closeTo(settingsRect.center.dy, .1));
-          expect(nameRect.right, lessThan(statusRect.left));
+          expect(nameRect.bottom, lessThanOrEqualTo(statusRect.top));
+          expect(
+            statusRect.right,
+            lessThanOrEqualTo(tester.getRect(find.byType(DayTargetCard)).right),
+          );
+          expect(nameRect.right, lessThan(settingsRect.left));
           expect(statusRect.right, lessThan(settingsRect.left));
           expect(settingsRect.height, greaterThanOrEqualTo(48));
           expect(settingsRect.width, greaterThanOrEqualTo(48));
@@ -147,12 +148,13 @@ void main() {
           final style = tester.widget<Text>(find.text(status)).style!;
           expect(
             style.color,
-            days < 0 ? AppTokens.textSecondary : AppTokens.textPrimary,
+            days < 0 ? AppTokens.textSecondary : AppTokens.primaryInk,
           );
           if (days >= 0) expect(style.fontWeight, FontWeight.w800);
           expect(
-            tester.getSize(find.byType(DayTargetCard)).height,
-            lessThanOrEqualTo(originalHeight),
+            tester.getBottomRight(find.text(target.formattedDate)).dy -
+                nameRect.top,
+            lessThan(360),
           );
           expect(tester.takeException(), isNull, reason: 'day offset $days');
         }

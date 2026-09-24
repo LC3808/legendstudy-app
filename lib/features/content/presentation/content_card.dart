@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../core/theme/app_theme.dart';
+import '../../../shared/widgets/shell_widgets.dart';
 import '../domain/content_item.dart';
 import '../../exams/domain/exam_metadata.dart';
 import '../../exams/presentation/exam_labels.dart';
@@ -24,21 +26,15 @@ class ContentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: Card(
-      margin: EdgeInsets.zero,
-      elevation: 0,
-      color: AppTokens.background,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppTokens.cardRadius),
-        side: const BorderSide(color: AppTokens.cardBorder),
-      ),
+    padding: const EdgeInsets.only(bottom: AppTokens.space8),
+    child: LsCard(
+      padding: EdgeInsets.zero,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppTokens.cardRadius),
         onTap: () =>
             context.push('/materials/${Uri.encodeComponent(item.slug)}'),
         child: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(AppTokens.space16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

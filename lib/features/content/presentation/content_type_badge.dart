@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../core/theme/app_theme.dart';
 import '../domain/content_types.dart';
 
 class ContentTypeBadge extends StatelessWidget {
@@ -10,7 +12,7 @@ class ContentTypeBadge extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
+        color: AppTokens.background,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(

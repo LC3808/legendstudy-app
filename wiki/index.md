@@ -19,12 +19,13 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 | Task / aliases | Required canonical reading |
 |---|---|
+| DESIGN / HOME / UI v2 | [Current design system](design-system.md), [v2 approved specification](design-system-v2-proposed.md), [UI conventions](ui-ux-v1.md), [Home policy](day-10-b-home-polish.md) |
 | AUTH / 로그인 / logout / account / Kakao | [Decisions — login philosophy](decisions.md#2026-09-12--login-philosophy), [native acceptance](auth-native-owner-acceptance.md), [recovery](auth-recovery.md), [deletion/privacy](account-deletion-privacy.md), [current account UX](core-app-improvements.md) |
 | STUDY / TIMER / 공부 추이 | [Study v1 and current chart overrides](study-v1.md), [Study UI and Owner overrides](day-8-study-ui-review.md), [Study storage](day-8-study-storage-proposal.md), [current UI convention](ui-ux-v1.md) |
 | MOCK EXAM / SCORING / 모의고사 | [Mock Exam](day-8-mock-exam.md), [scoring](mock-exam-scoring-v1.md), [answer/scoring](day-8-d2-answer-scoring.md), [grade result](day-8-d3-grade-result.md), [scoring storage](day-8-scoring-storage-proposal.md) |
 | ACHIEVEMENT / BADGE / 배지 / Level | [Achievement decision](decisions.md#2026-09-19--achievements-record-behaviour-and-confirmed-growth-never-prediction), [Achievement / Badge Engine](roadmap-academic-analytics.md#9-achievement--badge-engine), [current product scope](product-scope.md) |
 | MEAL / SCHOOL / NEIS / 급식 다음 제공일 | [NEIS](day-7-neis.md), [current time/fallback/Home expanded policy](day-10-b-home-polish.md), [school storage](day-7-school-storage-proposal.md), [school/profile UX](core-app-improvements.md) |
-| MY / PROFILE / SETTINGS / 프로필 | [UI conventions](ui-ux-v1.md), [design system](design-system.md), [database/private avatar](database.md), [current profile/account UX](core-app-improvements.md), [personal ownership](day-9-c-personal-state.md) |
+| MY / PROFILE / SETTINGS / 프로필 | [UI conventions](ui-ux-v1.md), [design system](design-system.md), [database/private avatar](database.md), [current profile/account UX](core-app-improvements.md), [personal ownership](day-9-c-personal-state.md), [Design System v2 — IMPLEMENTED](design-system-v2-proposed.md) |
 | LAB / ACADEMIC ANALYTICS | [platform boundaries](product-platform-boundaries.md), [product architecture](product-architecture.md), [academic roadmap](roadmap-academic-analytics.md), [Essay roadmap](roadmap-essay-lab.md), [App LAB details](core-app-improvements.md) |
 | MATERIALS / 자료 | [search](day-9-search-explore.md), [resources](day-9-c-resource-detail.md), [personal state](day-9-c-personal-state.md), [saved/recent](day-9-c-personal-lists.md) |
 | COMMUNITY / 커뮤니티 | [monetization/learning roadmap](roadmap-monetization-and-in-app-learning.md), [Community decision](decisions.md#2026-09-19--community-is-a-free-retention-feature-not-a-launch-blocker), [Profile privacy and safety gates](product-platform-boundaries.md), [private profile](database.md) |
@@ -58,6 +59,7 @@ is preserved; historical checkpoints are accessed only when evidence is needed.
 - `ui-ux-v1.md` — approved UI/UX v1.1 canonical implementation specification; required before UI changes
 - `study-home-ui-polish.md` — Study/Home polish, visual review and iPhone physical acceptance subset
 - `design-system.md` — visual identity and UI design tokens
+- [Design System v2 — IMPLEMENTED](design-system-v2-proposed.md) — Owner-approved Palette A, implemented UI mapping and device-review gate
 - `decisions.md` — durable product/architecture decisions
 - `log.md` — chronological development log
 - `roadmap-essay-lab.md` — Essay service-module research-first roadmap

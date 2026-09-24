@@ -26,7 +26,7 @@ void main() {
     for (final entry in {
       '학습': '00:00:00',
       'LAB': 'LAB 살펴보기',
-      'MY': '학교·학년',
+      'MY': '로그인',
       '홈': 'D-DAY',
     }.entries) {
       await tester.tap(find.text(entry.key));

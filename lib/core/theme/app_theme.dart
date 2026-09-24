@@ -1,37 +1,79 @@
 import 'package:flutter/material.dart';
 
+/// Owner-approved Palette A. Functional color roles, never per-screen accents.
 abstract final class AppTokens {
-  static const primary = Color(0xFFFFAC14);
-  static const primaryDark = Color(0xFFE99500);
-  static const primarySoft = Color(0xFFFFF3DC);
-  static const background = Color(0xFFFFFFFF);
-  static const surfaceWarm = Color(0xFFFFFDF9);
-  static const textPrimary = Color(0xFF202124);
-  static const textSecondary = Color(0xFF666666);
-  static const divider = Color(0xFFE5E5E5);
-  static const cardBorder = Color(0xFFDCDCDC);
-  static const homeCardBorder = Color(0xFFC8C3BB);
-  static const homeCardVerticalPadding = 4.0;
-  static const homeCardGap = 6.0;
-  static const navigationIndicator = Color(0xFFFFE3B0);
-  // Home section identities: accents only, never full-card fills.
-  static const homeDdayAccent = primaryDark;
-  static const homeStudyAccent = Color(0xFF5145A6);
-  static const homeMealAccent = Color(0xFF2F855A);
-  static const homeSearchAccent = Color(0xFF2563A8);
-  static const homeUpdatesAccent = Color(0xFFB7791F);
-  static const homeRecentAccent = Color(0xFF6B46C1);
-  static const sectionTitle = TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.w700,
+  static const primary = Color(0xFFFB8C00);
+  static const primaryDark = Color(0xFFE67E00);
+  static const primarySoft = Color(0xFFFFF1E0);
+  static const brand = Color(0xFFFFAC14);
+  static const background = Color(0xFFF4F6F8);
+  static const surface = Color(0xFFFFFFFF);
+  static const surfaceWarm = surface; // Compatibility alias for existing cards.
+  static const textPrimary = Color(0xFF1B2A4A);
+  static const textSecondary = Color(0xFF5B6472);
+  static const textTertiary = Color(0xFF8A93A3);
+  // Palette orange is a fill, not small text on white. Accessible ink variants.
+  static const primaryInk = Color(0xFFA94B00);
+  static const dangerInk = Color(0xFFB42332);
+  static const info = Color(0xFF2563A8);
+  static const success = Color(0xFF1F9D57);
+  static const warning = Color(0xFFE8A400);
+  static const danger = Color(0xFFE5484D);
+  static const disabled = Color(0xFFC2C7D0);
+  static const divider = Color(0xFFEDF0F3);
+  static const cardBorder = Color(0xFFE6E9EE);
+  static const homeCardVerticalPadding = space8;
+  static const homeCardGap = space8;
+  static const navigationIndicator = primarySoft;
+  static const space2 = 2.0, space4 = 4.0, space8 = 8.0, space12 = 12.0;
+  static const space16 = 16.0, space20 = 20.0, space24 = 24.0, space32 = 32.0;
+  static const radiusSm = 10.0,
+      radiusMd = 14.0,
+      radiusLg = 20.0,
+      radiusPill = 999.0;
+  static const iconSize = 24.0, iconDense = 20.0, iconNav = 22.0;
+  static const pageTitle = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w800,
+    height: 1.25,
   );
-  static const pagePadding = 20.0;
-  static const sectionGap = 24.0;
-  static const smallGap = 8.0;
-  static const cardRadius = 16.0;
-  static const chipRadius = 24.0;
-  static const spacing = pagePadding;
-  static const radius = 20.0;
+  static const hero = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.w800,
+    height: 1.15,
+  );
+  static const sectionTitle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    height: 1.3,
+  );
+  static const cardTitle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    height: 1.35,
+  );
+  static const body = TextStyle(fontSize: 15, height: 1.5);
+  static const secondary = TextStyle(
+    fontSize: 14,
+    height: 1.5,
+    color: textSecondary,
+  );
+  static const caption = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    height: 1.4,
+    color: textSecondary,
+  );
+  static const button = TextStyle(fontSize: 15, fontWeight: FontWeight.w700);
+  static const shadowSm = [
+    BoxShadow(color: Color(0x0F141E32), offset: Offset(0, 1), blurRadius: 2),
+  ];
+  static const shadowMd = [
+    BoxShadow(color: Color(0x1A141E32), offset: Offset(0, 4), blurRadius: 12),
+  ];
+  static const pagePadding = space20, sectionGap = space24, smallGap = space8;
+  static const cardRadius = radiusMd, chipRadius = radiusPill;
+  static const spacing = pagePadding, radius = radiusLg;
 }
 
 abstract final class AppTheme {
@@ -45,11 +87,25 @@ abstract final class AppTheme {
           onPrimary: AppTokens.textPrimary,
           primaryContainer: AppTokens.primarySoft,
           onPrimaryContainer: AppTokens.textPrimary,
-          surface: AppTokens.background,
+          secondary: AppTokens.primaryInk,
+          onSecondary: AppTokens.surface,
+          secondaryContainer: AppTokens.primarySoft,
+          onSecondaryContainer: AppTokens.textPrimary,
+          surface: AppTokens.surface,
           onSurface: AppTokens.textPrimary,
+          surfaceContainerLowest: AppTokens.surface,
+          surfaceContainerLow: AppTokens.background,
+          surfaceContainer: AppTokens.background,
+          surfaceContainerHigh: AppTokens.divider,
+          surfaceContainerHighest: AppTokens.cardBorder,
           onSurfaceVariant: AppTokens.textSecondary,
-          outlineVariant: AppTokens.divider,
+          outline: AppTokens.textSecondary,
+          outlineVariant: AppTokens.cardBorder,
+          error: AppTokens.dangerInk,
         );
+    final shape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+    );
     return ThemeData(
       useMaterial3: true,
       colorScheme: scheme,
@@ -60,29 +116,88 @@ abstract final class AppTheme {
         surfaceTintColor: Colors.transparent,
         centerTitle: false,
       ),
+      iconTheme: const IconThemeData(
+        size: AppTokens.iconSize,
+        color: AppTokens.textSecondary,
+      ),
       dividerTheme: const DividerThemeData(color: AppTokens.divider, space: 1),
-      textTheme: const TextTheme(
-        headlineSmall: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          color: AppTokens.textPrimary,
+      cardTheme: CardThemeData(
+        color: AppTokens.surface,
+        surfaceTintColor: Colors.transparent,
+        elevation: 1,
+        shadowColor: const Color(0x0F141E32),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTokens.radiusMd),
         ),
-        titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(fontSize: 16, height: 1.5),
-        bodyMedium: TextStyle(fontSize: 14, height: 1.5),
-        labelMedium: TextStyle(fontSize: 12, color: AppTokens.textSecondary),
+      ),
+      listTileTheme: const ListTileThemeData(
+        minVerticalPadding: 8,
+        minTileHeight: 48,
+        iconColor: AppTokens.textSecondary,
+      ),
+      textTheme:
+          const TextTheme(
+            headlineSmall: AppTokens.pageTitle,
+            titleLarge: AppTokens.sectionTitle,
+            titleMedium: AppTokens.cardTitle,
+            bodyLarge: AppTokens.body,
+            bodyMedium: AppTokens.body,
+            bodySmall: AppTokens.secondary,
+            labelMedium: AppTokens.caption,
+            labelLarge: AppTokens.button,
+          ).apply(
+            bodyColor: AppTokens.textPrimary,
+            displayColor: AppTokens.textPrimary,
+          ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppTokens.surface,
+        contentPadding: const EdgeInsets.all(AppTokens.space16),
+        hintStyle: AppTokens.secondary,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+          borderSide: const BorderSide(color: AppTokens.cardBorder),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+          borderSide: const BorderSide(color: AppTokens.cardBorder),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+          borderSide: const BorderSide(color: AppTokens.primaryInk, width: 2),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: AppTokens.surface,
+        selectedColor: AppTokens.primarySoft,
+        checkmarkColor: AppTokens.primaryInk,
+        labelStyle: AppTokens.secondary.copyWith(color: AppTokens.textPrimary),
+        side: const BorderSide(color: AppTokens.cardBorder),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppTokens.surfaceWarm,
+        backgroundColor: AppTokens.surface,
         indicatorColor: AppTokens.navigationIndicator,
+        iconTheme: WidgetStateProperty.resolveWith(
+          (s) => IconThemeData(
+            size: AppTokens.iconNav,
+            color: s.contains(WidgetState.selected)
+                ? AppTokens.primaryInk
+                : AppTokens.textSecondary,
+          ),
+        ),
         labelTextStyle: WidgetStateProperty.resolveWith(
-          (states) => TextStyle(
+          (s) => TextStyle(
             fontSize: 12,
-            color: AppTokens.textPrimary,
-            fontWeight: states.contains(WidgetState.selected)
+            color: s.contains(WidgetState.selected)
+                ? AppTokens.primaryInk
+                : AppTokens.textSecondary,
+            fontWeight: s.contains(WidgetState.selected)
                 ? FontWeight.w700
-                : FontWeight.w400,
+                : FontWeight.w500,
           ),
         ),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
@@ -97,10 +212,15 @@ abstract final class AppTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: AppTokens.textPrimary,
           minimumSize: const Size(48, 48),
+          side: const BorderSide(color: AppTokens.cardBorder),
+          shape: shape,
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(minimumSize: const Size(48, 48)),
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(48, 48),
+          shape: shape,
+        ),
       ),
     );
   }

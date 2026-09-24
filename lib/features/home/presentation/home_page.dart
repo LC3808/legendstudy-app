@@ -26,7 +26,6 @@ class HomePage extends ConsumerWidget {
       _HomeStudyCard(),
       const SizedBox(height: AppTokens.homeCardGap),
       const HomeMealCard(),
-      const SizedBox(height: 16),
       const _HomeSection(title: '자료 검색', child: _HomeSearch()),
       const SizedBox(height: 8),
       Wrap(
@@ -77,13 +76,7 @@ class _HomeStudyCard extends ConsumerWidget {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                studyDuration(study.week.last),
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: const Color(0xFF5145A6),
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
+              Text(studyDuration(study.week.last), style: AppTokens.hero),
               const SizedBox(height: 2),
               const Text('오늘 공부'),
             ],
@@ -91,7 +84,6 @@ class _HomeStudyCard extends ConsumerWidget {
         : Text(study.summary);
     return DailyUtilityCard(
       title: '나의 공부 시간',
-      accentColor: AppTokens.homeStudyAccent,
       body: body,
       action: TextButton(
         onPressed: () => context.go('/study'),
@@ -111,8 +103,7 @@ class _HomeSection extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const SectionDivider(),
-      SectionHeader(title, emphasized: true),
+      SectionHeader(title),
       child,
     ],
   );
@@ -191,7 +182,11 @@ class _HomeSearchState extends State<_HomeSearch> {
       hintText: '모의고사, 과목, 연도 검색',
       hintMaxLines: 2,
       counterText: '',
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      isDense: true,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppTokens.space16,
+        vertical: AppTokens.space12,
+      ),
       suffixIcon: IconButton(
         tooltip: '자료 검색',
         onPressed: submit,

@@ -47,7 +47,6 @@ class DayTargetCard extends ConsumerWidget {
               },
         child: const Text('설정'),
       ),
-      accentColor: AppTokens.homeDdayAccent,
       body: state.isLoading
           ? const Text('일정을 불러오는 중이에요.')
           : state.hasError
@@ -80,42 +79,22 @@ class _TargetHeading extends StatelessWidget {
         : days == 0
         ? 'D-DAY'
         : 'D-$days';
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Flexible(
-          child: Text(
-            target.label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+        Text(
+          target.label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: AppTokens.cardTitle,
         ),
-        const SizedBox(width: 4),
-        if (expired)
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodySmall
-                ?.copyWith(color: AppTokens.textSecondary),
-          )
-        else
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: AppTokens.primarySoft,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 16,
-                  letterSpacing: 0,
-                  fontWeight: FontWeight.w800,
-                  color: AppTokens.textPrimary,
-                ),
-              ),
-            ),
-          ),
+        const SizedBox(height: AppTokens.space4),
+        Text(
+          label,
+          style: expired
+              ? AppTokens.secondary
+              : AppTokens.hero.copyWith(color: AppTokens.primaryInk),
+        ),
       ],
     );
   }

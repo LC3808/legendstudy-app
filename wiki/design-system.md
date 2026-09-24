@@ -1,5 +1,31 @@
 # Design System
 
+## Current canonical system — v2 (Owner approved 2026-09-24)
+
+Owner approved Palette A, Materials10 + existing load-more, Settings-bottom logout,
+no peach strips and a visible Guest login CTA. The detailed approved design and
+implementation mapping live in [v2 specification](design-system-v2-proposed.md).
+This file is the canonical entry point; v2 overrides conflicting historical color,
+section, D-Day and spacing paragraphs below. Original brand assets stay unchanged.
+
+- Page #F4F6F8; grouped/content surfaces #FFFFFF; primary #FB8C00; navy #1B2A4A.
+- SectionHeader is a plain semantic18sp title; no emphasized variant/left rule.
+- LsCard: white/shadowSm/radius14, no border. LsListRow:48px target/chevron.
+  SettingsGroup: small neutral label + related white rows. No nested cards.
+- Orange fill uses navy text. Small selected/nav text uses contrast-safe orange
+  ink #A94B00; destructive text #B42332. These derived text roles pass4.5:1;
+  raw tertiary/danger/orange palette values are not used as small white-bg text.
+- Filled/outlined/text buttons remain Flutter components themed centrally;
+  ShellPage, AppHeader, SearchEntry, QuickFilterChip, EmptyState/ErrorState retained.
+  Home/full search share InputDecorationTheme; Home has compact padding.
+- Settings logout follows policy/info, directly above single destructive deletion.
+  Guest MY/Settings have visible Login; MY private modules are hidden for Guest.
+- Existing provider-button official brand colors are intentionally independent
+  (Google/Kakao/Apple guidelines), not rewritten as app accent tokens.
+- Functional contracts and light-only scope unchanged. Device acceptance pending.
+
+## Historical design evidence (superseded styling; brand provenance retained)
+
 ## Current display identity — 2026-09-20
 
 Official display name is **레전드스터디+** (English **LegendStudy+**), separate from
