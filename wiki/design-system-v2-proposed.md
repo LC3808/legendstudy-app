@@ -271,7 +271,7 @@ LegendStudy+
 ┌ D-Day ──────────────┐  (hero number, white card)
 │ 수능까지  D-212      설정 >
 ├ 오늘 공부  02:14:00 ─┤  학습으로 이동 >
-├ 오늘 급식 ───────────┤  (school set) / "학교를 설정하면…" 
+├ 오늘 급식 ───────────┤  (school set) / "학교를 설정하면…"
 └──────────────────────┘
 자료 검색
 [ 🔍 모의고사, 논술, 학습자료 검색 ]        (compact, tap → Materials)
@@ -590,4 +590,3 @@ PRODUCTION_MUTATION:0. MOBILE_UI_OWNER_E2E: NOT VERIFIED.
 - Future/deferred: dark mode, new motion choreography, extra component wrappers,
   badges and any new analysis. Native widget animations unchanged. Catalogue and
   production auth/provider/DB/Storage configuration are outside this task.
-

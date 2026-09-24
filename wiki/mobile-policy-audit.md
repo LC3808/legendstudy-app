@@ -118,3 +118,39 @@ and Android debug PASS,59 render cases at both requested sizes/scales, selected
 five-screen PNGs inspected, Deno11 PASS. Signature/ignore/source audit PASS;
 Wiki302 internal links and four routing self-tests PASS. Original Owner iOS
 files verified unchanged by SHA1; no DB/Storage/schema/native config edits.
+
+## Design System v2 — Owner approved 2026-09-24
+
+These visual decisions supersede the previous peach-strip and outlined-MY-CTA
+policies, not their functional boundaries.
+
+| POLICY | WIKI STATUS | CODE EVIDENCE | TEST EVIDENCE | ACTUAL STATUS | ACTION |
+|---|---|---|---|---|---|
+| Palette A / cool page + white surface | Owner approval supersedes proposal-pending | app_theme.dart, shell_widgets.dart | design_v2_test.dart contrast/surface/semantics, mobile_ia_render_test.dart | IMPLEMENTED | Orange fill + navy text; accessible orange/danger text roles |
+| No peach strips, common sections | prior emphasized guidance historical | SectionHeader plain, LsCard/LsListRow/SettingsGroup | seven-family render matrix and both Guest routes | GAP_FIXED | No emphasized API or Home multi-accent tokens |
+| Guest MY/Settings login | source CTA existed; device-missing cause unproven | GuestAccountPrompt, private MY module gating | visible at360/428 and1x/2x; actual Auth route tests | GAP_FIXED | Explicit Login; keep local guest settings |
+| Materials10 + load more | prior24 superseded | SupabaseSearchRepository.pageSize10, sentinel11 | search_repository_test.dart parent pagination/general boundary; search UI journeys | IMPLEMENTED | Same query/sort/facet/attachment contracts |
+| Settings logout at bottom | former logout-before-policy superseded | settings_page.dart grouped content then logout/deletion | order render assertions; owner_handoff_fixes_test.dart success/cancel/error | IMPLEMENTED | Preserve confirmation and success HOME |
+| Auth/Meal/Profile/Study/LAB | established boundaries unchanged | provider flows, photo repository, school policy, Study/Trend models unchanged | full existing regression suite | PASS locally | Owner device review separate; no Production mutation |
+
+Component disposition: KEEP themed Flutter buttons, ShellPage, AppHeader,
+SearchEntry, QuickFilterChip, EmptyState/ErrorState. MODIFY SectionHeader,
+DailyUtilityCard, CompactUtilityCard, content/result cards. ADD LsCard/LsListRow/
+SettingsGroup/GuestAccountPrompt. REMOVE emphasized variant/SectionDivider/accent
+painter/Home accent colors. Do not add redundant wrapper names for their own sake.
+
+Old test assertions tied to horizontal D-Day headings, outlined MY buttons,
+guest-private menus and logout-before-policy were updated to Owner's v2 contract;
+route, auth, touch-target, error, overflow and data-boundary coverage retained.
+Original official provider branding remains an explicit palette exception.
+
+
+V2 closeout: analyze PASS; full Flutter685 PASS/1 existing opt-in skip; iOS simulator
+and Android debug builds PASS;67 responsive render cases PASS. Selected PNGs reviewed
+for normal/2x typography, Guest Login reachability, white surfaces, Settings bottom
+order and Materials result cards. Before PNGs: `/private/tmp/legendstudy-v2-before/`;
+after: `/private/tmp/legendstudy-core-ui/` (local review artifacts, not tracked).
+Signature scan/source-ignore readiness/diff PASS. No Deno changes; prior11 PASS
+is historical, not a rerun. Owner iOS file hashes match the task-start snapshot.
+Android build warns about future Kotlin plugin support; no toolchain upgrade was
+introduced. DEVICE REVIEW PENDING; no Production mutation or push.

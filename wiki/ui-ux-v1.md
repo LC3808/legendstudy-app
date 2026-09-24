@@ -220,3 +220,11 @@ information, optional Study settings; logout action has no account-management
 heading, followed by policy/info then deletion. LAB internal-grade/Mock details
 are independent. Study chart is7-day/8-week/6-month one-screen dynamic-max, zero
 unpainted, oldest left/newest right. See study-v1 for labels/comparison rules.
+
+## Owner-approved visual override — Design System v2, 2026-09-24
+
+[Design system v2](design-system-v2-proposed.md) supersedes v1 colors, surface,
+section strips, MY CTA styling and Settings logout placement. Functional/data
+contracts remain. Guest MY now shows a dedicated Login prompt instead of private
+dashboard modules; local school/study settings remain accessible via Settings.
+No new Badge/analysis/backend. Device review remains pending.

@@ -1988,3 +1988,21 @@ This is Owner-run production evidence; this documentation closeout made no DB re
   Initial render command used a nonexistent filename; corrected full render run
   passed. No test was deleted/disabled. No Production mutation or push.
   Local commit contains this entry; identify it from git log, not a pinned HEAD.
+
+## 2026-09-24 — Design System v2 proposal (Claude, UI/UX)
+
+Created `design-system-v2-proposed.md` (PROPOSED): code-grounded diagnosis, Palette A/B (A recommended), token spec, global policies (deprecate emphasized peach SectionHeader; cool-gray page + white cards), screen redesigns (Home/Materials/Learning/LAB/MY/Guest MY/Settings), Materials initial-count cause (pageSize=24) + recommendation (10), REMOVE/SIMPLIFY/KEEP, audits, Codex phases/acceptance. No code/DB/Production/Git change. Owner→ChatGPT→Codex approval pending.
+
+
+## 2026-09-24 — Owner-approved Design System v2 implementation
+
+- Implement Palette A tokens, white cards/plain headers, shared rows/settings groups,
+  Home/Materials/Learning/LAB/MY/Settings styling and explicit Guest Login.
+  Materials24→10 keeps parent pagination/sentinel and explicit load-more.
+- [Canonical design](design-system.md), [approved proposal mapping](design-system-v2-proposed.md#15-implementation-evidence--2026-09-24)
+  and [policy evidence](mobile-policy-audit.md#design-system-v2--owner-approved-2026-09-24).
+- Analyze PASS; Flutter685 PASS/1 existing skip; iOS simulator/Android debug PASS;
+  responsive renders67 PASS with PNG inspection; secret/readiness/diff checks PASS.
+  Deno unchanged (prior11 PASS). No DB/Storage/dependency or Production changes.
+- Owner iOS files and unrelated untracked directories preserved. Local commits only,
+  PUSH NO. New UI device review pending; prior Owner Auth/Meal acceptance preserved.

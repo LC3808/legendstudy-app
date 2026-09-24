@@ -226,3 +226,12 @@ Normal configured simulator app was rebuilt/reinstalled and launched after the
 memory fixture harness; no uninstall/container reset was used. Actual Materials
 empty state was verified through native UI (normal-app-empty.png), in addition to
 the26 fixture-matrix OS captures. Physical phone validation awaits9-D.
+
+## Current page-size and visual override — 2026-09-24
+
+Owner approved initial/load-more pageSize10 (previous24 is historical). Supabase
+queries request one sentinel beyond10, nextOffset advances10. Existing explicit
+자료 더 보기, facet paging, sort/keyword semantics, parent boundary and attachment
+contracts unchanged. Remove 검색·필터 title and helper copy (actual Korean:
+최신 시험순 · 첨부 종류는 등록 정보 기준). Result cards and inputs use
+[Design System v2](design-system-v2-proposed.md); no query ranking redesign.
