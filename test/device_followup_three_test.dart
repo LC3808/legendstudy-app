@@ -306,6 +306,7 @@ void main() {
           '9월 29일(화)',
         ]);
         expect(chips.map((c) => c.selected), [false, true, false]);
+        expect(chips.every((c) => c.showCheckmark == false), isTrue);
         expect(find.text('9월 24일(목)'), findsNothing);
         await capture(t, 'meal-expanded');
         await t.tap(find.text('9월 23일(수)'));
@@ -395,44 +396,50 @@ void main() {
         [60000, 60000, 60000, 60000, 60000, 60000, 60000],
         [0, 1800000, 3600000, 0, 7200000, 0, 10800000],
       ]) {
-        testWidgets(
-          'mean annotation outside bars $size/$scale/${totals.last}',
-          (t) async {
-            await setup(
-              t,
-              StudyBarChart(
-                labels: const ['목', '금', '토', '일', '월', '화', '수'],
-                totals: totals,
-                dailyDetails: true,
+        testWidgets('mean annotation bound to line $size/$scale/${totals.last}', (
+          t,
+        ) async {
+          await setup(
+            t,
+            StudyBarChart(
+              labels: const ['목', '금', '토', '일', '월', '화', '수'],
+              totals: totals,
+              dailyDetails: true,
+            ),
+          );
+          expect(find.text('이번 주'), findsOneWidget);
+          final label = t.getRect(find.byKey(const Key('study-average-label')));
+          for (var i = 0; i < 7; i++) {
+            final bar = t.getRect(find.byKey(ValueKey('study-bar-$i')));
+            expect(
+              bar.height,
+              closeTo(
+                studyBarHeight(totals[i], studyChartCeiling(totals)),
+                .001,
               ),
             );
-            expect(find.text('이번 주'), findsOneWidget);
-            final label = t.getRect(
-              find.byKey(const Key('study-average-label')),
-            );
-            for (var i = 0; i < 7; i++) {
-              final bar = t.getRect(find.byKey(ValueKey('study-bar-$i')));
-              expect(label.right, lessThanOrEqualTo(bar.left));
-              expect(
-                bar.height,
-                closeTo(
-                  studyBarHeight(totals[i], studyChartCeiling(totals)),
-                  .001,
-                ),
-              );
-            }
-            final line = t.getRect(find.byKey(const Key('study-average-line')));
-            final ratio = studyChartCeiling(totals) == 0
-                ? 0
-                : studyChartAverage(totals) / studyChartCeiling(totals);
-            expect(
-              label.bottom,
-              lessThanOrEqualTo(line.top + 160 * (1 - ratio)),
-            );
-            await capture(t, 'chart-${totals.last}');
-            expect(t.takeException(), isNull);
-          },
-        );
+          }
+          final line = t.getRect(find.byKey(const Key('study-average-line')));
+          expect(label.left, line.left);
+          expect(
+            find.text(
+              '총 ${studyDuration(totals.fold<int>(0, (sum, value) => sum + value))}',
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(
+              '일 최대 ${studyDuration(studyChartCeiling(totals).toInt())}',
+            ),
+            findsOneWidget,
+          );
+          final ratio = studyChartCeiling(totals) == 0
+              ? 0
+              : studyChartAverage(totals) / studyChartCeiling(totals);
+          expect(label.bottom, closeTo(line.top + 160 * (1 - ratio) - 3, .01));
+          await capture(t, 'chart-${totals.last}');
+          expect(t.takeException(), isNull);
+        });
       }
     }
   }

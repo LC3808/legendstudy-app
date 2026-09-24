@@ -393,3 +393,12 @@ verified results or MY/LAB/admissions inputs. No new taxonomy, fake key or inven
 official duration. Full key catalogue and analytics stay gaps. Implementation
 scope and storage boundary: [Mock contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes).
 Daily Sync Phase1 is explicitly outside this task.
+
+## 2026-09-24 — Final Home and Study visual polish
+
+Owner narrows this pass to Home daily white border/shadow, check-free Meal date
+selection, and displayed7day Study total/max plus line-bound mean annotation.
+Existing brand/Meal/Study contracts remain; [design](design-system.md#owner-final-ui-polish--2026-09-24)
+and [Study](study-v1.md#owner-final-ui-polish--2026-09-24) own details. Future
+study/score relationship analysis is descriptive PLANNED work, never automatic
+causation; no Mock/LAB/Daily Sync/backend expansion is authorized by this pass.

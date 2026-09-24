@@ -22,6 +22,11 @@ abstract final class AppTokens {
   static const disabled = Color(0xFFC2C7D0);
   static const divider = Color(0xFFEDF0F3);
   static const cardBorder = Color(0xFFE6E9EE);
+  // Opt-in Home daily surface; other cards retain their v2 treatment.
+  static const dailyCardBorder = Color(0xFFD5DBE3);
+  static const dailyCardShadow = [
+    BoxShadow(color: Color(0x0D1B2A4A), offset: Offset(0, 2), blurRadius: 4),
+  ];
   static const homeCardVerticalPadding = space8;
   static const homeCardGap = space8;
   static const navigationIndicator = primarySoft;

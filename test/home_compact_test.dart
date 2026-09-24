@@ -18,6 +18,32 @@ import 'neis_attribution_test.dart' show FixedSchool;
 import 'day7_school_test.dart' show schoolA;
 
 void main() {
+  testWidgets('Home daily surface is opt-in, not a global card change', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      MaterialApp(
+        home: Column(
+          children: const [
+            LsCard(child: Text('ordinary')),
+            DailyUtilityCard(title: 'daily', body: Text('summary')),
+          ],
+        ),
+      ),
+    );
+    final cards = t.widgetList<LsCard>(find.byType(LsCard)).toList();
+    expect(cards.map((card) => card.dailySurface), [false, true]);
+    final surfaces = t
+        .widgetList<Container>(find.byType(Container))
+        .where((c) => c.decoration is BoxDecoration)
+        .map((c) => c.decoration! as BoxDecoration)
+        .toList();
+    expect(surfaces[0].border, isNull);
+    expect(surfaces[0].boxShadow, AppTokens.shadowSm);
+    expect(surfaces[1].color, AppTokens.surface);
+    expect(surfaces[1].border, Border.all(color: AppTokens.dailyCardBorder));
+    expect(surfaces[1].boxShadow, AppTokens.dailyCardShadow);
+  });
   setUpAll(() async {
     if (const bool.fromEnvironment('CORE_RENDER')) {
       await (FontLoader(

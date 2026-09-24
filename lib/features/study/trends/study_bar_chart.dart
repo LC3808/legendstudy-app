@@ -47,8 +47,8 @@ class _StudyBarChartState extends State<StudyBarChart> {
   Widget build(BuildContext context) {
     final ceiling = studyChartCeiling(widget.totals);
     final average = studyChartAverage(widget.totals);
-    final annotationWidth = widget.dailyDetails ? 60.0 : 0.0;
-    final averageText = '평균\n${studyDuration(average.round())}';
+    final averageText = '평균 ${studyDuration(average.round())}';
+    final total = widget.totals.fold<int>(0, (sum, value) => sum + value);
     final measure = TextPainter(
       text: TextSpan(
         text: averageText,
@@ -56,7 +56,7 @@ class _StudyBarChartState extends State<StudyBarChart> {
       ),
       textDirection: Directionality.of(context),
       textScaler: MediaQuery.textScalerOf(context),
-    )..layout(maxWidth: annotationWidth > 4 ? annotationWidth - 4 : 80);
+    )..layout();
     final annotationHeight = widget.dailyDetails ? measure.height + 6 : 0.0;
     measure.dispose();
     final meanY = 160.0 * (1 - (ceiling <= 0 ? 0.0 : average / ceiling));
@@ -67,17 +67,17 @@ class _StudyBarChartState extends State<StudyBarChart> {
           spacing: 12,
           children: [
             if (widget.dailyDetails) const Text('이번 주'),
-            Text('최대 ${studyDuration(ceiling.toInt())}'),
+            if (widget.dailyDetails) Text('총 ${studyDuration(total)}'),
+            Text(
+              '${widget.dailyDetails ? '일 최대' : '최대'} ${studyDuration(ceiling.toInt())}',
+            ),
           ],
         ),
         const SizedBox(height: 8),
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(
-                top: annotationHeight,
-                left: annotationWidth,
-              ),
+              padding: EdgeInsets.only(top: annotationHeight),
               child: Row(
                 textDirection: TextDirection.ltr,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +151,7 @@ class _StudyBarChartState extends State<StudyBarChart> {
             ),
             if (widget.dailyDetails)
               Positioned(
-                left: annotationWidth,
+                left: 0,
                 right: 0,
                 top: annotationHeight,
                 height: 160,
@@ -168,10 +168,10 @@ class _StudyBarChartState extends State<StudyBarChart> {
               Positioned(
                 left: 0,
                 top: meanY,
-                width: annotationWidth,
                 child: IgnorePointer(
                   child: Container(
                     key: const Key('study-average-label'),
+                    color: Theme.of(context).colorScheme.surface,
                     padding: const EdgeInsets.only(right: 4, bottom: 3),
                     child: Text(averageText, style: AppTokens.caption),
                   ),

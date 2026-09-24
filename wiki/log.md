@@ -2065,3 +2065,17 @@ PASS with representative1×/2× PNG inspection. iOSsim/Androiddebug builds and f
 source/Wiki validation recorded in the policy audit. No new Production queries,
 DB/Storage/migration/key publication; Daily Sync Phase1 not started. Local commit
 only, PUSH NO; Owner iOS/untracked preserved, new UI device acceptance pending.
+
+## 2026-09-24 — Owner final UI polish only
+
+Home daily-only white border/shadow, Meal selected-check removal, displayed7day
+Study total/daily max and line-bound neutral mean caption. Mock/LAB/Auth/providers/
+Daily Sync/database unchanged; no Production mutation/push. Future study/score
+comparisons recorded PLANNED/descriptive only. Starting60e60b1; resulting commit
+is discoverable by this entry's Git history. [Design](design-system.md#owner-final-ui-polish--2026-09-24),
+[Study](study-v1.md#owner-final-ui-polish--2026-09-24), [audit](mobile-policy-audit.md#final-ui-only-polish-audit--2026-09-24).
+Validation:754 Flutter PASS/1 existing skip, analyze PASS,120 responsive/render-suite
+PASS at360/428px1×/2× (includes contract assertions). Home/expanded Meal/mean PNGs
+reviewed; iOS simulator and Android debug builds PASS. Secret/source-ignore audit,
+417 internal links/10 task routes and diff check PASS.
+Owner iOS/untracked preserved; physical acceptance NOT VERIFIED.

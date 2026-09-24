@@ -142,7 +142,7 @@ class _HomeMealCardState extends ConsumerState<HomeMealCard>
             );
     }
     if (school.value != null && !school.isLoading && !school.hasError) {
-      return LsCard(child: body);
+      return LsCard(dailySurface: true, child: body);
     }
     return DailyUtilityCard(
       icon: Icons.restaurant_outlined,
@@ -313,6 +313,7 @@ class _MealSummaryState extends State<MealSummary> {
             children: [
               for (final option in dates.take(3))
                 ChoiceChip(
+                  showCheckmark: false,
                   label: Text(mealChipLabel(option)),
                   selected: date == option,
                   onSelected: (_) => setState(() => selectedDate = option),

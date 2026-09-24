@@ -96,17 +96,22 @@ class SectionHeader extends StatelessWidget {
 class LsCard extends StatelessWidget {
   const LsCard({
     required this.child,
+    this.dailySurface = false,
     this.padding = const EdgeInsets.all(AppTokens.space16),
     super.key,
   });
   final Widget child;
+  final bool dailySurface;
   final EdgeInsetsGeometry padding;
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       color: AppTokens.surface,
       borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-      boxShadow: AppTokens.shadowSm,
+      border: dailySurface
+          ? Border.all(color: AppTokens.dailyCardBorder)
+          : null,
+      boxShadow: dailySurface ? AppTokens.dailyCardShadow : AppTokens.shadowSm,
     ),
     child: Material(
       color: Colors.transparent,
@@ -325,6 +330,7 @@ class DailyUtilityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LsCard(
+    dailySurface: true,
     padding: const EdgeInsets.symmetric(
       horizontal: AppTokens.space16,
       vertical: AppTokens.space8,

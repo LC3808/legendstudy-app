@@ -215,7 +215,7 @@ New MOBILE_UI_OWNER_E2E remains NOT VERIFIED. Canonical workflow details in
 |---|---|---|
 | Brand #FFA300, no peach | AppTokens neutral selections; design_v2_test + followup3 contrast | GAP_FIXED |
 | Provided-day Meal chips/trailing control | MealSummary/mealContextDates; followup3 bounds/order/render + existing meal suites | GAP_FIXED; expanded-only bounded reads, preview policy unchanged |
-| Average annotation outside bars | StudyBarChart measured gutter + dotted mean; followup3 geometry/allzero/hours/2× | GAP_FIXED |
+| Average annotation | Followup3 gutter superseded by final polish: mean caption above line start; measured3px clearance, allzero/hours/2× | GAP_FIXED |
 | Dual practice/official hierarchy | OfficialMockSelector + ScoringPaper metadata join; followup2/3 | GAP_FIXED supported-key path; full catalogue GAP_OPEN |
 | Free manual result isolation | StudyController separate free_practices; followup3 restore/failure/owner race/inclusion | IMPLEMENTED local only; cross-device score GAP_OPEN |
 | Published/current verified scoring | Existing prepare/submit unchanged; scoring/grade suites | PASS automated; no new Production keys/acceptance |
@@ -237,3 +237,16 @@ Deno unchanged/not rerun. Wiki410 links/10 routes PASS, current under12KB. Sourc
 signature/ignore audit and diff checks PASS; Owner iOS raw hashes preserved.
 New mobile UI Owner E2E NOT VERIFIED. Existing CocoaPods/Kotlin upgrade advisories
 remain tooling follow-ups; no unrelated package/SDK/native migration performed.
+
+## Final UI-only polish audit — 2026-09-24
+
+| Owner policy | Code / test evidence | Actual status |
+|---|---|---|
+| Home daily white border + weak shadow only | LsCard.dailySurface; home_compact_test opt-in isolation and responsive Home renders | GAP_FIXED |
+| Meal selected chip without check | HomeMealCard showCheckmark=false; followup3 chip selection and date geometry retained | GAP_FIXED |
+| Daily total + daily max | StudyBarChart existing totals; followup3 displayed sum/max assertions | GAP_FIXED |
+| Mean annotation above line left | study-average-label/line geometry3px clearance at both sizes/scales, equal/zero/multi-hour | GAP_FIXED |
+| Future descriptive study/score comparison | study-v1 PLANNED, no causal claims or engine | PASS |
+
+Mock/LAB/Auth/Meal providers/persistence/Daily Sync/schema remain unchanged.
+Automated evidence is not new Owner device acceptance; fresh UI E2E NOT VERIFIED.

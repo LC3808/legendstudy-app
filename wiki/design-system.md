@@ -10,7 +10,7 @@ section, D-Day and spacing paragraphs below. Original brand assets stay unchange
 
 - Page #F4F6F8; grouped/content surfaces #FFFFFF; primary #FFA300; navy #1B2A4A.
 - SectionHeader is a plain semantic18sp title; no emphasized variant/left rule.
-- LsCard: white/shadowSm/radius14, no border. LsListRow:48px target/chevron.
+- LsCard: white/shadowSm/radius14, no border by default; Home daily opt-in below. LsListRow:48px target/chevron.
   SettingsGroup: small neutral label + related white rows. No nested cards.
 - Orange fill uses navy text. Small selected/nav text uses contrast-safe orange
   ink #A94B00; destructive text #B42332. These derived text roles pass4.5:1;
@@ -255,3 +255,15 @@ contrast-safe ink, not raw brand orange. Brand assets/provider-brand colors rema
 Home D-Day small icon uses brand; Study blue and Meal green icons remain semantic.
 Mock selectors use reduced vertical padding and content-driven height, preserving
 48px interaction target and2× wrapping. No clipped fixed-height selectors.
+
+## Owner final UI polish — 2026-09-24
+
+Home D-Day, Study and Meal alone opt into `LsCard.dailySurface`: white,
+1px cool-neutral dailyCardBorder #D5DBE3, navy5% shadow offset(0,2)/blur4,
+radius14. Other cards retain v2 defaults; no strips/peach/elevation growth.
+Brand #FFA300 with navy ink (7.10:1) and existing D-Day/blue Study/green Meal
+icons remain. Meal date ChoiceChips explicitly suppress checkmarks while retaining
+neutral selected fill and selected semantics. No date/provider/policy changes.
+Daily Study summary uses a wrapping “이번 주 / 총 … / 일 최대 …”; the neutral
+mean caption sits directly above the dashed line's left start, with white backing
+for readability across bars. See [Study policy](study-v1.md#owner-final-ui-polish--2026-09-24).

@@ -580,8 +580,8 @@ Mock subject free-text presentation above is superseded by
 
 Daily header: 이번 주 + 최대N분/시간. This still describes recent7days ending today;
 existing period subtitle/weekday sequence remains, not a Monday-start change.
-Neutral mean label sits above its dotted reference in a dedicated left gutter;
-text scale is measured, so it cannot cover bars or the value/weekday axis. Bar
+Historical follow-up3 used a dedicated left gutter (superseded below);
+text scale was measured to separate the label from bars and the value/weekday axis. Bar
 height160×duration/max unchanged; zero/allzero safe. Under-bar multi-hour values
 use total minutes for compact readability, with full hours/minutes retained in
 semantics, header and selected detail.2× values wrap rather than truncate.
@@ -589,3 +589,27 @@ Weekly/monthly periods, deterministic comments and KST inclusion union unchanged
 Official/free Mock execution shares the existing duration/inclusion engine;
 [dual mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
 keeps manual practice scores outside confirmed academic results.
+
+## Owner final UI polish — 2026-09-24
+
+Daily summary now shows 이번 주, 총(sum of displayed7 canonical daily totals),
+일 최대(actual displayed max), wrapping on narrow/large-text screens. “이번 주”
+retains the existing recent7days presentation, not a new calendar-week aggregate.
+The mean caption is one phrase “평균 …”, secondary neutral ink, directly above
+left start of the dashed line (3px clearance). Removed the detached left gutter;
+a white backing preserves legibility when bars pass behind the annotation.
+Text-scale measured top space handles an all-equal mean at the chart ceiling;
+allzero mean stays at baseline above weekday/value labels. Bar geometry, daily
+values, KST aggregation/inclusion, detail navigation and deterministic comments
+are unchanged. Geometry/allzero/equal/multi-hour/1×/2× tests cover this override.
+
+### Future study analytics — PLANNED
+
+Future richer weekly/monthly/long-term visual comparisons may join sufficient
+study-volume history with confirmed score changes: correlation, co-movement and
+descriptive trend comparison only. Existing basic week/month charts remain
+implemented; this prospective cross-domain analysis is not. Do not infer that
+more study caused higher scores, invent forecasts or claim causal effects.
+Potential wording is descriptive (both series rose during a comparable period),
+subject to adequate comparable data and later analysis design. No analytics
+engine, new query/provider, Mock scoring or LAB change in this polish.

@@ -24,8 +24,9 @@ icons. Greeting uses compact16px hierarchy and a noninteractive planned bell slo
 D-Day name/date metadata sits above D-n; study label/value share a wrapping row.
 Brand accent is now Owner-confirmed #FFA300; no peach selections. Meal's explicit
 trailing control opens up to3 actual provided-day chips, lazily bounded past/future
-context; preview14/19KST/7day policy unchanged. Timer/Trend daily mean annotation
-sits outside proportional bars. Mock has official year/grade/month→actual subject/
+context; preview14/19KST/7day policy unchanged. Home daily cards have an opt-in white border/subtle shadow; Meal selection has
+no checkmark. Timer/Trend daily summary shows displayed7day total + daily max,
+with the neutral mean caption directly above its dashed line. Mock has official year/grade/month→actual subject/
 variant/key and separate free title/time/manual-score practice. Free scores are
 local personal records, excluded from official MY/LAB/admissions. MY confirmed correct-count snapshots push LAB and preserve Back.
 [Canonical design](design-system.md) maps the approved proposal to implementation.
@@ -45,10 +46,11 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest validation:
-753 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
-builds PASS. Responsive/render suites119 PASS (including non-render assertions),
+754 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
+builds PASS. Responsive/render suites120 PASS (including non-render assertions),
 360×640/428×926 at1×/2×, Home/Timer/Mock/MY, official/free selection and expanded Meal PNGs inspected;
-new34 contract/render cases cover mean geometry, provided-day bounds, dual selection and local manual-score isolation. Deno
+Daily-surface isolation and updated mean/total/chip assertions pass alongside
+existing provided-day/Mock isolation tests. Deno
 unchanged; previous11 PASS, not rerun in this Flutter-only follow-up. Secret
 signature scan/0hits, source-ignore readiness, diff and10 Wiki task-routing
 checks PASS. No new physical-device or Production catalogue verification claim.
@@ -97,7 +99,9 @@ and [source reconciliation](research-registry.md#owner-provided-manus-exports--s
 
 ## Current work and next actions
 
-Owner device follow-up3 implemented locally; new UI Owner review pending.
+Owner final UI-only polish implemented locally; new UI Owner review pending.
+[Study future comparison](study-v1.md#future-study-analytics--planned) is PLANNED
+descriptive study/score co-movement, no causal claims or engine.
 [Three-layer analytics](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24)
 recorded: MY snapshot / Mobile LAB actionable analysis / Web LAB deep work.
 Admissions prediction/bands/automatic qualification remain an open research gate,
@@ -106,9 +110,8 @@ names and source provenance; the synthesis and Phase1 package are now SOURCE
 ACQUIRED. Individual A–D full reports have not been inspected here. Daily Sync
 Phase1 is ready for subsequent offline implementation, not implemented. Compliance P0
 evidence audit pending. No new analysis/notification/Badge/backend implementation.
-Owner next: brand/daily accents → expanded Meal actual provided dates → daily mean
-annotation → official selection with existing verified keys → free practice/manual
-score → MY/LAB/Back. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
+Owner next: Home daily surface → check-free Meal selected date → daily total/max
+and mean-line annotation. Mock/LAB and domain implementations unchanged in this polish. [Mock two-mode contract](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes)
 owns schema/agency/duration audit and scope. Full key catalogue, timer-only official
 browser, authoritative duration/agency metadata, cross-device result/manual-score
 history and advanced analysis remain gaps. No new backend/keys or Production E2E.
