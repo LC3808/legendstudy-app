@@ -2020,6 +2020,6 @@ Created `design-system-v2-proposed.md` (PROPOSED): code-grounded diagnosis, Pale
   selected PNG inspection, Home4 rerun after test-font-only correction. iOS simulator
   and Android debug PASS. Old UI expectations updated, no test removed/disabled;
   new5→10 test fixture corrected from9 to10 genuine distinct fixture records.
-- Wiki356 links/9 routing checks PASS; secret/source-ignore/diff PASS. Deno unchanged.
+- Wiki359 links/9 routing checks PASS; secret/source-ignore/diff PASS. Deno unchanged.
   No DB/Storage/Production changes, no push. Owner iOS hashes unchanged. Device UI
   review pending; see [policy audit](mobile-policy-audit.md).

@@ -177,7 +177,7 @@ and Android debug PASS;71 responsive render cases at360×640/428×926,1x/2x, sel
 Home/Meal/Timer chart/Mock focused field/MY/LAB PNGs inspected. Test-only Home font
 correction rerun4 PASS. Local PNGs `/private/tmp/legendstudy-core-ui/` (not tracked).
 Secret signatures422 text files/0 hits, source-ignore readiness and diff PASS;
-Wiki356 links and9 routes PASS. No Deno changes or Production queries/mutations.
+Wiki359 links and9 routes PASS. No Deno changes or Production queries/mutations.
 Owner iOS files match start hashes. Android existing Kotlin future-support warning
 remains; no SDK/dependency/native configuration change in this task.
 
