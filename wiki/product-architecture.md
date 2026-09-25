@@ -175,3 +175,14 @@ planning, applications and outcomes while preserving this product family, shared
 identity, three-layer allocation and access boundaries. Follow its event/time/
 context/provenance review before new schemas; no engine, data collection or B2B
 implementation is authorized. Owner-approved direction, PLANNED architecture.
+
+## Analytics platform direction — 2026-09-25
+
+`analytics.legendstudy.com` is a **HIGH / CANONICAL PLATFORM STRATEGY — PLANNED**
+direction for internal operational dashboards, learning/score analytics,
+application/outcome analysis, cohort building, data quality, metric/cohort
+registries, privacy/RBAC/audit and internal research. It supports future B2C
+personalization, LAB, consulting, research/reporting and aggregate B2B analytics.
+Aggregate/cohort analysis is the default; browsing individual students' raw data
+is not the default UX. This direction does not create a domain, schema, pipeline,
+admin access, collection, or implementation authorization.

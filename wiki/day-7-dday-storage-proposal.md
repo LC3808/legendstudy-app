@@ -1,5 +1,14 @@
 # D-Day storage — production applied / JWT and Flutter runtime PASS
 
+## Multi D-Day direction — 2026-09-25
+
+The current single target remains implemented. The next product direction is a
+collection of user-owned events such as midterms, performance assessments, mock
+exams, CSAT, and personal schedules. Home should emphasize the representative or
+nearest event; a future Calendar view may expose the full collection and support
+admissions/essay/interview/announcement dates. This is planned product scope,
+not a schema or implementation authorization in this audit.
+
 ## Final acceptance (2026-09-13)
 
 Product Owner reports production migration, D-Day JWT/REST acceptance and actual

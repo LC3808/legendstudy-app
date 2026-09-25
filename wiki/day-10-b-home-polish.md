@@ -1,5 +1,14 @@
 # Day 10-B — Home Polish v2
 
+## Role-based Home customization direction — 2026-09-25
+
+Future Home presets may be selected by a user's role—student, N수생, parent,
+teacher, or academy instructor. Role is a recommendation/presentation preset,
+not a permission or authorization boundary. Users should eventually be able to
+show or hide D-Day, study time, meals, materials, scores and future Insight/
+Achievement surfaces, with reorder considered later. No role field, permission
+model or new customization UI is implemented by this audit.
+
 Status: original Day 10 evidence below is historical. Current meal policy and
 Owner acceptance follow-up are recorded at the end of this document.
 

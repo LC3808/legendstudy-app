@@ -424,3 +424,37 @@ remain exactly unchanged. Nested items stay flat and inline controls keep existi
 interaction. [Design system](design-system.md#global-surface-final-override--2026-09-24)
 owns tokens and hierarchy. Study total is primary, daily maximum secondary with
 neutral separators; approved mean position and all domain behavior remain fixed.
+
+## 2026-09-25 — Materials direct PDF open is release-critical
+
+The core Materials journey is search → detail → problem PDF → answer/explanation
+PDF → immediate reading. Current implementation is Guest-accessible external
+safe-open only; an in-app PDF viewer, signed-URL re-resolution and verified
+current-file availability are not implemented. The target is
+`Content → stable resource identity → safe-open resolver → current target →
+in-app viewer`, with original landing/source fallback. Direct source open is the
+default copyright boundary; public reachability is not redistribution permission,
+so no automatic PDF mirroring/rehosting or Storage copy is authorized.
+
+## 2026-09-25 — Cold-start baseline is a Daily Sync gate
+
+An empty accepted local state must not be interpreted as an empty Production
+baseline. Before Phase 2, a reviewed bootstrap/reconciliation strategy must bind
+the Production canonical baseline to accepted local/durable state. The complete
+sitemap inventory must not be treated as new publication candidates.
+
+## 2026-09-25 — Multi D-Day and role-based Home are planned directions
+
+D-Day may expand from one target to a user-owned event collection with Home
+nearest/representative emphasis and future Calendar support. Role-based Home
+presets for student, N수생, parent, teacher and academy instructor are
+recommendation/presentation settings, not permissions; show/hide and later reorder
+are future UX. No schema, role authorization or implementation is approved here.
+
+## 2026-09-25 — Analytics platform direction
+
+`analytics.legendstudy.com` is a HIGH / CANONICAL PLATFORM STRATEGY — PLANNED for
+internal operational, learning, score, application/outcome, cohort, data-quality,
+metric-registry, privacy/RBAC/audit and research workflows. Aggregate/cohort
+analysis is the default; individual raw-data browsing is not. No domain, schema,
+pipeline, data collection or admin implementation is authorized by this decision.

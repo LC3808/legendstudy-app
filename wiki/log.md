@@ -2172,6 +2172,21 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
 - B2 offline validation passed. Bounded source dry-run remains Owner-gated and
   unverified; Phase 2 remains not started.
 
+## 2026-09-25 — Phase 1 source validation and Materials direct-open audit
+
+- Completed one bounded read-only `legendstudy.com` observation with the existing
+  runner: sitemap 1,676 posts; recent IDs 1712,1711,1710; five landing pages;
+  7/24 attempts; retries 0; attachment fetch 0; mutation 0. Feed remains
+  UNAVAILABLE. Empty accepted local state produced NEW for IDs 2,4,6,7,8; this
+  is recorded as the cold-start baseline gap, not a Production-new-post claim.
+- Audited the actual Materials path: search → ContentDetailPage → ResourceSection
+  → safe resolver → external `url_launcher`. No in-app PDF viewer or signed-URL
+  re-resolution exists. Direct PDF open is now recorded as release-critical;
+  direct source open remains the no-mirroring boundary.
+- Recorded planned Multi D-Day, role-based Home presets and the analytics platform
+  direction in canonical routing/decision documents. No code, DB, Storage or
+  Production change.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,

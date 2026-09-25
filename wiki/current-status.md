@@ -79,12 +79,17 @@ active exam_subjects363; active resources739; reported integrity checks all0.
 Quarantine23 = EXPECTED advisory evidence; automatic deletion prohibited.
 This is Owner-reported evidence, not a DB query performed by Codex.
 
-**PHASE1_B2: OFFLINE PASS.** Discovery now has structured sitemap `lastmod`
-hints, fixture-only RSS/Atom parsing, deterministic bounded reconciliation
-cursor, priority/dedup selection, and attempt-level 24-request budgeting. The
-verified source has no configured feed endpoint, so live feed status is
-`UNAVAILABLE`; no endpoint is guessed. **BOUNDED_SOURCE_DRY_RUN: NOT VERIFIED /
-OWNER GATED. PHASE1 IN PROGRESS; PHASE2 NOT STARTED / OWNER GATED.**
+**PHASE_1: COMPLETE — DISCOVERY / DELTA FOUNDATION.** B1/B2 offline validation
+passed, followed by one bounded read-only source observation: sitemap 1,676
+posts; recent IDs `1712, 1711, 1710, ...`; five landing pages fetched; 7/24
+request attempts; retries 0; attachment fetch 0; Production mutation 0. Feed
+remains `UNAVAILABLE` because no verified endpoint exists. **PHASE1_SOURCE_VALIDATION:
+PASS. BOUNDED_SOURCE_DRY_RUN: PASS. PHASE2: NOT STARTED / OWNER GATED.**
+The empty local accepted state selected IDs `2, 4, 6, 7, 8` as `NEW`; this is a
+**COLD_START_BASELINE_GAP**, not evidence that Production has five new posts.
+Before Phase 2, bootstrap/reconcile the Production canonical baseline into the
+accepted local/durable state without turning the 1,676-post inventory into
+publication candidates.
 [Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
 [research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
 verbatim with verified hashes. That import checkpoint changed Wiki only; implementation does
@@ -131,8 +136,10 @@ free custom-time polish/subject-score structure and cross-device result history.
 Existing safe scoring is not a claim of full catalogue coverage.
 
 Next session priority (no implementation starts in this closeout):
-1. Daily Sync Phase1 deterministic source/delta core, offline/dry-run only;
-   no Production write/migration/scheduler/cron/publication. Phase2 Owner-gated.
+1. Materials direct PDF open is release-critical; audit current external-only
+   delivery and define the safe resolver/viewer/re-resolution milestone. Daily
+   Sync Phase 2 remains Owner-gated; no Production write/migration/scheduler/
+   cron/publication.
 2. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
 3. Longitudinal architecture review when Score/Application/Outcome design starts;
    first read the canonical strategy, preserve history/context/provenance/privacy.

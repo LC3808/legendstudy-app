@@ -15,10 +15,17 @@ resource_url_expiring advisory evidence, not a failed publication or cleanup lis
 **No automatic quarantine deletion.** Kakao signature rotation-only is UNCHANGED,
 not MODIFIED; package§2/§5 own the exact evidence/classification contract.
 
-Phase1: READY FOR CODEX, OFFLINE / DRY-RUN ONLY, NOT IMPLEMENTED. This import task
-does not execute its implementation instructions or SQL. Phase2: NOT STARTED /
-OWNER GATED. No DB connection/write, migration, staging/review queue, scheduler,
-Cron, Edge Function, publication, activation/deactivation or attachment downloads.
+Phase1: COMPLETE — DISCOVERY / DELTA FOUNDATION. B1/B2 offline validation and one
+bounded read-only source observation passed: sitemap 1,676 posts, five landing
+pages fetched, 7/24 attempts, feed UNAVAILABLE, attachment fetch 0 and Production
+mutation 0. Phase2: NOT STARTED / OWNER GATED. No DB connection/write, migration,
+staging/review queue, scheduler, Cron, Edge Function, publication,
+activation/deactivation or attachment downloads.
+The source run used an empty local accepted state, so selected IDs 2,4,6,7,8
+classified NEW only relative to that empty state. This is the canonical
+**COLD_START_BASELINE_GAP**: before Phase2, bootstrap/reconcile the Production
+canonical baseline into accepted local/durable state; never interpret the full
+1,676-post sitemap inventory as new publication candidates.
 The existing identity/source-time/publication rules below are unchanged. The
 historical empty/inactive/prepublication passages below and in the Day9 packages
 are dated design/acceptance evidence, not the current Production baseline.
