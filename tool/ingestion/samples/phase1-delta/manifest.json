@@ -1,0 +1,167 @@
+{
+  "schema_version": "phase1-fixture-manifest/1",
+  "description": "Metadata-only deterministic source/delta fixture contract.",
+  "source": "legendstudy",
+  "fixtures": [
+    {
+      "id": "new_post",
+      "external_post_id": "1901",
+      "prior_state": "absent",
+      "observation": "complete canonical observation",
+      "expected_classification": "NEW",
+      "expected_observation_status": "COMPLETE",
+      "state_advance": "accepted_snapshot_only_after_artifact_success",
+      "forbidden_actions": ["database_write", "publication"]
+    },
+    {
+      "id": "unchanged_post",
+      "external_post_id": "1705",
+      "prior_state": "same_canonical_projection",
+      "observation": "crawl time differs; source projection is equal",
+      "expected_classification": "UNCHANGED",
+      "expected_observation_status": "COMPLETE",
+      "state_advance": "observation_time_only",
+      "forbidden_actions": ["source_time_bump", "publication"]
+    },
+    {
+      "id": "edited_title",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "title differs; numeric identity is equal",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["title_changed"],
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["new_parent_identity", "database_write"]
+    },
+    {
+      "id": "edited_body_metadata",
+      "external_post_id": "1705",
+      "prior_state": "same_projection_attachment_set",
+      "observation": "normalized body or recognized metadata differs",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["body_or_metadata_changed"],
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["raw_body_artifact", "database_write"]
+    },
+    {
+      "id": "edited_subject_known_mapping",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "stable resource key has changed to a known subject scope",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["subject_mapping_changed"],
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["verified_mapping_update", "database_write"]
+    },
+    {
+      "id": "edited_subject_ambiguous_mapping",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "stable resource key has conflicting or unsafe subject scope",
+      "expected_classification": "AMBIGUOUS",
+      "expected_change_categories": ["subject_mapping_changed"],
+      "state_advance": "none",
+      "forbidden_actions": ["verified_mapping_update", "coercion_to_other", "database_write"]
+    },
+    {
+      "id": "added_answer",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "new stable answer resource identity",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["resource_added"],
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["attachment_download", "database_write"]
+    },
+    {
+      "id": "added_audio",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "new stable listening resource identity",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["resource_added"],
+      "expected_resource_type": "listening_audio",
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["attachment_download", "database_write"]
+    },
+    {
+      "id": "resource_absent_complete",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot_with_resource",
+      "observation": "complete parse omits a previously accepted resource",
+      "expected_classification": "MODIFIED",
+      "expected_change_categories": ["resource_unconfirmed_absent"],
+      "state_advance": "accepted_snapshot_only_after_complete_dry_run",
+      "forbidden_actions": ["resource_delete", "deactivation", "publication"]
+    },
+    {
+      "id": "signature_rotation_only",
+      "external_post_id": "1705",
+      "prior_state": "same_provider_and_unsigned_locator",
+      "observation": "ephemeral provider signing material rotates",
+      "expected_classification": "UNCHANGED",
+      "state_advance": "observation_time_only",
+      "forbidden_actions": ["signed_query_artifact", "resource_changed", "database_write"]
+    },
+    {
+      "id": "malformed_post",
+      "external_post_id": "1902",
+      "prior_state": "accepted_snapshot",
+      "observation": "retrieved page lacks required identity/title/category facts",
+      "expected_classification": "MALFORMED",
+      "expected_observation_status": "COMPLETE_BUT_INVALID",
+      "state_advance": "none",
+      "forbidden_actions": ["accepted_hash_advance", "resource_absence_inference", "database_write"]
+    },
+    {
+      "id": "partial_fetch",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "truncated response with incomplete source facts",
+      "expected_classification": "MALFORMED",
+      "expected_observation_status": "PARTIAL",
+      "state_advance": "none",
+      "forbidden_actions": ["accepted_hash_advance", "resource_delete", "database_write"]
+    },
+    {
+      "id": "source_missing",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "complete discovery inventory omits prior identity",
+      "expected_classification": "SOURCE_MISSING",
+      "expected_observation_status": "OBSERVATION_ONLY",
+      "state_advance": "none",
+      "forbidden_actions": ["state_delete", "canonical_delete", "unpublish", "database_write"]
+    },
+    {
+      "id": "duplicate_observation",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "same identity appears twice with inconsistent facts",
+      "expected_classification": "AMBIGUOUS",
+      "expected_observation_status": "COMPLETE_BUT_CONFLICTING",
+      "state_advance": "none",
+      "forbidden_actions": ["last_writer_wins", "database_write"]
+    },
+    {
+      "id": "unknown_provider_query_change",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "provider query semantics are not verified",
+      "expected_classification": "AMBIGUOUS",
+      "expected_observation_status": "COMPLETE_BUT_UNSAFE_IDENTITY",
+      "state_advance": "none",
+      "forbidden_actions": ["silent_query_stripping", "new_resource_identity", "database_write"]
+    },
+    {
+      "id": "fetch_timeout",
+      "external_post_id": "1705",
+      "prior_state": "accepted_snapshot",
+      "observation": "landing page exceeds timeout after bounded retries",
+      "expected_classification": "FETCH_FAILED",
+      "expected_observation_status": "FETCH_FAILED",
+      "state_advance": "none",
+      "forbidden_actions": ["source_missing", "accepted_hash_advance", "unpublish", "database_write"]
+    }
+  ]
+}

@@ -2124,6 +2124,32 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
   [design acceptance](design-system.md#ui-v2-owner-device-closeout--2026-09-24),
   [Study copy](study-v1.md#ui-v2-owner-device-closeout--2026-09-24).
 
+## 2026-09-25 — Daily Sync Phase 1-A audit / fixture foundation
+
+- Restored the canonical ingestion → Phase 1 package → research context and
+  verified the existing offline ingestion baseline: 146 tests PASS.
+- Audited the Python crawler/parser/normalizer/pipeline. Existing source and
+  resource identity, source-time separation, Kakao unsigned-path handling and
+  quarantine behavior remain intact; versioned Phase 1 state, classification,
+  RSS/lastmod discovery, reconciliation cursor and redacted artifacts are not
+  implemented yet.
+- Added the metadata-only 15-case fixture manifest and a focused contract test.
+  The classifier boundary is explicit as one EXPECTED_FAIL; no Production
+  crawl, mutation, migration, scheduler or publication occurred. Owner iOS and
+  untracked files were preserved; PUSH NO.
+
+## 2026-09-25 — Daily Sync Phase 1-B1 offline delta core
+
+- Implemented the offline-only versioned local state, safe observation
+  fingerprint, deterministic NEW/UNCHANGED/MODIFIED/MALFORMED/AMBIGUOUS plus
+  SOURCE_MISSING/FETCH_FAILED handling, stable resource diff, and atomic
+  redacted summary/candidate artifacts.
+- Split subject fixtures into known mapping and ambiguous mapping; completed
+  16 fixture cases and determinism/artifact-failure tests. Existing canonical
+  content hash semantics and Pilot writer paths remain unchanged.
+- No crawler/discovery expansion, Production crawl, DB/schema/migration,
+  scheduler, publication or push. Phase 1-B2 and Phase 2 remain not started.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,

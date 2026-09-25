@@ -9,6 +9,15 @@ from pathlib import Path
 from .models import PlannedPost, QuarantineCase, RawPost
 from .normalizer import BLOCKING, exam_identity, normalize
 
+# Phase 1-B1 offline APIs live in a separate module so the historical Pilot C
+# aggregation semantics above remain unchanged. Re-export the classifier entry
+# point for the focused contract test and future callers.
+from .delta import (  # noqa: E402
+    ArtifactWriteError, DeltaCandidate, DeltaRun, DeltaStateError, LocalDeltaState,
+    classify_delta, fetch_failed_candidate, load_delta_state, run_delta,
+    safe_observation_fingerprint, source_missing_candidate, write_delta_artifacts,
+)
+
 
 @dataclass
 class DryRunResult:
