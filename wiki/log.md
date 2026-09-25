@@ -2369,3 +2369,27 @@ horizontal16 unchanged across profile/study/score/materials. Analyze, personal19
 MY render12 (Guest/unset/auth,360/428,1×/2×), diff/Wiki PASS. Existing Materials
 Owner PASS retained; new visual spot-check then separate EOD closeout pending.
 [Design evidence](design-system.md#badge-centering-and-my-density--2026-09-25).
+
+
+## 2026-09-25 — End-of-day canonical closeout
+
+Owner closed implementation work after `db55ae1`. **Materials direct PDF is
+OWNER DEVICE PASS**: Production resolver returned resolved/pdf and actual iPhone
+problem/answer PDFs opened in-app. OAuth local runtime configuration was restored;
+the Production DB was not lost. Materials presentation now shares shortened exam
+titles across search/detail/saved/recent, uses 레전드스터디 닷컴 source copy,
+groups repeated subject occurrences without identity merge, and distinguishes
+학력평가/모의평가/수능 badges from canonical metadata. Final badge centering and
+MY-card density passed automation but did not satisfy Owner enough to freeze;
+further micro-polish is deferred to a future UI session.
+
+Daily Sync Phase1 remains COMPLETE and Phase2 NOT STARTED/OWNER GATED. Multi D-Day,
+Home customization and analytics.legendstudy.com remain top-level planned work,
+not implementation. Owner established the top-level engineering rule: minimize
+cost; prefer the easiest, lightest and most concise viable solution; reuse existing
+assets; expand only after real need/failure evidence. Required order is Wiki →
+actual code/runtime → reuse → minimum solution → real validation → investigate
+only the observed failure boundary. Tool usage should be appropriate rather than
+minimized for its own sake; avoid repeated investigation and speculative
+over-engineering. Full closeout and canonical device command:
+[eod-2026-09-25.md](eod-2026-09-25.md).
