@@ -18,8 +18,12 @@ validated PDF through Materials search → `/materials/:slug` `ContentDetailPage
 → `ResourceSection` → `resolveResourceDelivery` → internal
 `/materials/:slug/resource/:resourceId` `PdfViewerPage`. Non-PDF resources still
 use `ExternalLinkButton`/`url_launcher` with `LaunchMode.externalApplication`.
-Automated validation passes; Owner iOS/Android device PDF acceptance remains
-NOT VERIFIED.
+Automated validation passes; Owner device acceptance is **FAIL** with viewer
+entry count 0 across tested current materials. This is a data-contract gap, not
+permission to weaken Safe Open: published modern Kakao resources are
+`link_kind='unknown'` with unsigned identity locators, `file_url=NULL`, and no
+PDF metadata, so the client correctly uses the original-source fallback.
+`MATERIALS_DIRECT_OPEN` remains **RELEASE-CRITICAL GAP**.
 
 The public resource model contains `resource_type`, `title`, `source_label`,
 `source_url`, `link_kind`, optional `file_url`, MIME/extension/size, display
@@ -51,7 +55,27 @@ maintenance profile. No annotation, download manager, share, print or PDF byte
 mirroring is implemented. Target architecture remains
 `Content → stable resource identity → safe-open resolver → current valid target
 → in-app PDF viewer`, with trusted backend/source re-resolution planned for
-Phase B and original landing-page fallback.
+Phase B and original landing-page fallback. Phase A does not make Kakao
+`unknown` rows viewer-eligible.
+
+## Phase B1 trusted resolver foundation — offline only
+
+`supabase/functions/resource-resolver/` now records the minimum resolver
+contract without a Supabase client, Edge deployment, or source request. The
+client input is only a UUID `resource_id`; canonical resource/active-parent
+lookup and a future injected source observer decide the target. Matching uses
+`provider + source_resource_key`, never filename, position, or signed-query
+equality. Responses are either `resolved/pdf` with the current short-lived
+target or a bounded fallback reason (`not_found`, `inactive`,
+`not_resolvable`, `source_unavailable`, `ambiguous`, `unsupported`).
+
+The offline security foundation validates the LegendStudy numeric landing-page
+host/path, known provider hosts, schemes, userinfo, private/special IPs,
+manual redirects, 10-second timeout, 1 MB source response limit and three-hop
+redirect limit. It never fetches attachment bytes and never logs a target or
+signed query. HTML parsing remains a separate injected contract so the Python
+ingestion parser is not silently duplicated in TypeScript. Production DNS
+pinning/egress policy and rate limiting remain deployment requirements.
 
 ## Current delivery contract — 2026-09-20
 

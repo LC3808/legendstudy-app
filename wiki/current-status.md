@@ -136,10 +136,18 @@ free custom-time polish/subject-score structure and cross-device result history.
 Existing safe scoring is not a claim of full catalogue coverage.
 
 Next session priority (no implementation starts in this closeout):
-1. Materials direct PDF Phase A automated validation is PASS with `pdfrx` 2.6.5;
-   Owner iOS/Android device PDF acceptance remains NOT VERIFIED. Phase B signed-
-   target re-resolution is planned. Daily Sync Phase 2 remains Owner-gated; no
-   Production write/migration/scheduler/cron/publication.
+1. Materials direct PDF Phase A automated validation is PASS with `pdfrx` 2.6.5,
+   but Owner device validation is **FAIL**: current published Kakao resources do
+   not enter the viewer. The breakpoint is upstream: ingestion intentionally
+   stores modern Kakao attachments as `link_kind='unknown'`, unsigned
+   identity/provenance locators, `file_url=NULL`, and no PDF metadata; Flutter
+   therefore safely falls back to the original source page. Do not promote
+   `unknown` or infer PDF from a `.pdf` suffix. `MATERIALS_DIRECT_OPEN` remains
+   a **RELEASE-CRITICAL GAP**. Phase B1 now has an offline-only trusted resolver
+   contract/security foundation with 10 Deno tests; no Edge deployment or
+   Production invocation exists. Trusted Phase B re-resolution/backend design
+   remains pending independent security review. Daily Sync Phase 2 remains
+   Owner-gated; no Production write/migration/scheduler/cron/publication.
 2. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
 3. Longitudinal architecture review when Score/Application/Outcome design starts;
    first read the canonical strategy, preserve history/context/provenance/privacy.

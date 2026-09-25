@@ -2197,8 +2197,23 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
   retry, safe original-source fallback and Guest access are covered by focused
   tests; recent-view open-attempt behavior is reused without a new analytics
   schema. Full Flutter validation is 765 PASS / 1 existing skip; analyzer,
-  iOS simulator and Android debug builds pass. Owner device PDF acceptance is
-  still NOT VERIFIED. Phase B re-resolution remains planned.
+  iOS simulator and Android debug builds pass. Owner device validation then
+  FAILED with viewer entry count 0: current Kakao rows are intentionally
+  `link_kind='unknown'`, `file_url=NULL`, and lack PDF metadata, so Flutter
+  safely falls back to the original source. This remains a release-critical
+  data-contract gap; no Safe Open relaxation or Phase B implementation started.
+
+## 2026-09-25 — Materials Direct PDF Phase B1 resolver foundation
+
+- Added an offline-only `resource-resolver` Edge-shaped contract and 10 Deno
+  tests. The contract accepts only canonical `resource_id`, uses provider plus
+  stable `source_resource_key` matching, returns bounded fallback reasons, and
+  keeps current signed targets out of logs.
+- Added trusted-source/target validation, manual redirect checks, private/special
+  host rejection, 10-second timeout, 1 MB response limit and three-hop limit.
+  No Supabase client, source fetch, attachment-byte fetch, Edge deployment,
+  Production invocation, DB change or Flutter connection was added. Independent
+  Claude security review is required before any deployment work.
 
 ## 2026-09-24 — End-of-day canonical handoff
 
