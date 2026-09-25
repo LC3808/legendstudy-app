@@ -148,8 +148,12 @@ Next session priority (no implementation starts in this closeout):
    Production invocation exists. Trusted Phase B re-resolution/backend design
    remains pending independent security review. Daily Sync Phase 2 remains
    Owner-gated; no Production write/migration/scheduler/cron/publication.
-2. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
-3. Longitudinal architecture review when Score/Application/Outcome design starts;
+2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
+   canonical architecture and current-code audit are recorded in
+   [Home personalization and event collection](home-personalization-and-events.md).
+   No Flutter implementation or migration exists.
+3. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
+4. Longitudinal architecture review when Score/Application/Outcome design starts;
    first read the canonical strategy, preserve history/context/provenance/privacy.
 
 MY Snapshot / Mobile LAB actionable analysis / Web LAB deep analysis allocation

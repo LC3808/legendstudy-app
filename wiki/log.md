@@ -2215,6 +2215,19 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
   Production invocation, DB change or Flutter connection was added. Independent
   Claude security review is required before any deployment work.
 
+## 2026-09-25 — Multi D-Day and Home customization foundation audit
+
+- Audited the current single `DayTarget`: authenticated persistence is
+  `profiles.target_date/target_label`, Guest state is provider/session memory,
+  and Home renders one editable card with existing KST/past-event behavior.
+- Recorded the future event-collection contract shared by Home/List/Calendar,
+  one-pin representative selection, non-destructive past-event policy,
+  account/Guest persistence recommendation and admissions/notification boundaries.
+- Recorded role-as-presentation-preset (not permission), optional progressive
+  profiling, initial role presets, module visibility, fixed navigation, conditional
+  provider loading and deferred reorder. No Flutter, DB, Production or resolver
+  change.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,
