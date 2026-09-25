@@ -2317,3 +2317,12 @@ security/quota/matching changes. [Branch inventory and next diagnostic handoff](
 Deno58PASS including redaction/response equivalence; secret/diff/Wiki PASS.
 Root cause awaits diagnostic redeploy/log evidence. No deploy/Production calls,
 Flutter/DB/migration/ingestion/Daily Sync changes; Owner files preserved.
+
+
+## 2026-09-25 — Resolver unrelated meta duplicate correction
+
+Owner isolated Production rejection to one unrelated meta/content duplicate.
+Minimal synthetic reproduction; parser scopes duplicate rejection while retaining
+anchor/identity/article ambiguity protection. Deno62PASS, parity/contracts2PASS;
+secret/diff/Wiki PASS. No Flutter/DB/quota changes or Production calls/deploy.
+[Evidence and controlled-redeploy handoff](day-9-c-resource-detail.md#scoped-duplicate-attribute-correction--2026-09-25).

@@ -566,3 +566,42 @@ timeout, empty and ambiguous match. Secret/diff/Wiki checks PASS. No Flutter,
 repository queries, matching/security/quota policy, migration, ingestion or Daily
 Sync changes. **READY_FOR_DIAGNOSTIC_REDEPLOY:YES; THIS TASK DEPLOY:NO.**
 Owner device PDF remains NOT VERIFIED; accepted Guest cost risk remains unchanged.
+
+
+## Scoped duplicate-attribute correction — 2026-09-25
+
+Starting669ad07. Owner reports the diagnostic trace quota_ok → repository_ok →
+source_fetch_start → observer_failed/duplicate_attribute → observer_unavailable.
+Owner's separate privacy-safe inspection of public post1709 found exactly one
+such tag: unrelated head/meta with duplicate content. It was not an attachment,
+href or article identity attribute. This supersedes the earlier unknown-cause
+checkpoint; Codex did not fetch Production HTML or invoke the resolver.
+
+Reproduced before modification using only synthetic `<meta content="A" content="B">`
+plus the existing synthetic article/Kakao fixture. No Production HTML, attribute
+values, signed targets, cookies or user data are stored in tests/Wiki/artifacts.
+
+Before: any parsed duplicate attribute anywhere rejected the entire document.
+After: duplicate attributes on any anchor, markup within an active attachment
+anchor, or div/class (the article trust-boundary attribute) remain fatal. This
+conservatively rejects even equal duplicate href/class values and unknown duplicate
+anchor attributes. Other unused meta/presentation attributes do not invalidate
+observation; their duplicate values are skipped and never used for identity or
+boundary decisions. There is no first/last href resolution. Article requirement,
+nested/unclosed-anchor rejection, exact Kakao identity matching, ambiguity fallback,
+PDF evidence and every transport/quota/security bound are unchanged. Safe stage
+logging is retained without added fields or sensitive detail.
+
+Validation: all Deno62PASS (resolver37), offline without network permission;
+Python/Deno shared identity + quota static contracts2PASS. Added tests cover meta,
+presentation inside/outside article, identical/conflicting/case-folded href,
+identity/MIME attributes, ambiguous article classes, nested/unclosed anchors,
+rotated signatures and duplicate matching attachments→ambiguous. Existing diagnostic
+redaction and security/adversarial tests PASS. Secret-pattern scan, diff check and
+Wiki handoff PASS. Flutter/DB/quota/repository/ingestion unchanged.
+
+**READY_FOR_CONTROLLED_REDEPLOY:YES** for this parser correction after checks.
+No automatic deploy, Production resolver/source/PDF request or mutation. Next:
+Owner-controlled redeploy and bounded acceptance, checking observer_ok then resolved
+without logging targets. Actual Production success and Owner device PDF remain
+**NOT VERIFIED**; local synthetic success is not a Production acceptance claim.

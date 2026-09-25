@@ -86,7 +86,14 @@ export function observeHtml(
       /([a-z_:][a-z0-9_:.-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
     for (const m of open[2].matchAll(attrRe)) {
       const k = m[1].toLowerCase();
-      if (k in attrs) return reject("duplicate_attribute");
+      if (k in attrs) {
+        // Never choose between ambiguous anchor/target evidence or article classes.
+        // Unused presentation/meta attributes cannot alter attachment identity.
+        if (tag === "a" || anchor || (tag === "div" && k === "class")) {
+          return reject("duplicate_attribute");
+        }
+        continue;
+      }
       attrs[k] = decode(m[2] ?? m[3] ?? m[4]);
     }
     const article = stack.some((x) => x.article) || tag === "div" &&

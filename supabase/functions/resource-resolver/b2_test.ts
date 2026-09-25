@@ -324,3 +324,68 @@ Deno.test("expired target and contradictory MIME decline; script-only attachment
   );
   eq(observeHtml('<div class="contents_style"><script>' + fixture.html), null);
 });
+
+Deno.test("synthetic meta and unrelated presentation duplicates do not invalidate attachments", () => {
+  const baseline = observeHtml(fixture.html);
+  for (
+    const prefix of [
+      '<head><meta content="A" content="B"></head>',
+      '<span title="A" title="B">theme</span>',
+      '<div style="A" style="B">theme</div>',
+    ]
+  ) eq(observeHtml(prefix + fixture.html), baseline);
+  eq(
+    observeHtml(
+      fixture.html.replace("<figure ", '<figure title="A" title="B" '),
+    ),
+    baseline,
+  );
+});
+Deno.test("attachment duplicate href and identity evidence remain fail closed", () => {
+  for (
+    const attributes of [
+      'href="A" href="A"',
+      'href="A" href="B"',
+      'HREF="A" href="B"',
+      'href="A" data-resource-key="one" data-resource-key="two"',
+      'href="A" type="application/pdf" type="audio/mpeg"',
+    ]
+  ) {
+    eq(
+      observeHtml(
+        `<div class="contents_style"><a ${attributes}>file.pdf</a></div>`,
+      ),
+      null,
+    );
+  }
+});
+Deno.test("ambiguous article boundary and nested attachment markup remain fail closed", () => {
+  for (
+    const html of [
+      '<div class="contents_style" class="theme"></div>',
+      '<div class="theme" class="contents_style"></div>',
+      '<div class="contents_style" class="contents_style"></div>',
+      '<div class="contents_style"><a href="A"><a href="B">file.pdf</a></a></div>',
+      '<div class="contents_style"><a href="A">file.pdf',
+      '<div class="contents_style"><a href="A"><span title="A" title="B">file.pdf</span></a></div>',
+    ]
+  ) eq(observeHtml(html), null);
+});
+Deno.test("meta duplicates preserve rotated identity and duplicate-match fallback", async () => {
+  const prefix = '<meta content="A" content="B">';
+  const original = observeHtml(prefix + fixture.html)!;
+  const rotated = observeHtml(
+    prefix + fixture.html.replace("signature=xyz%3D", "signature=rotated"),
+  )!;
+  eq(
+    rotated.attachments[0].sourceResourceKey,
+    original.attachments[0].sourceResourceKey,
+  );
+  eq(rotated.attachments[0].provider, original.attachments[0].provider);
+  eq(
+    await resolveResource({ resource_id: id }, repository(rows()), {
+      observe: async () => observeHtml(prefix + fixture.html + fixture.html),
+    }),
+    { status: "fallback", reason: "ambiguous" },
+  );
+});
