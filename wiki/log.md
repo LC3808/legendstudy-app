@@ -2306,3 +2306,14 @@ records exact runtime evidence and risk limits. Deno52PASS (resolver27), entrypo
 check/secret/diff/Wiki PASS; Flutter unchanged/not rerun. Quota migration unchanged.
 READY TO DEPLOY / NOT DEPLOYED; Owner PDF NOT VERIFIED. No Production request,
 source/PDF fetch, migration/deploy or Daily Sync Phase2. Commit/branch push authorized.
+
+
+## 2026-09-25 — Resolver source_unavailable focused diagnostics
+
+Startingfee8112. Owner reports v1 deployed/Guest working but controlled post1709
+request source_unavailable; canonical DB and external HTTP200 checks reported PASS.
+Added safe allowlisted stage logs and request-random trace, no client contract or
+security/quota/matching changes. [Branch inventory and next diagnostic handoff](day-9-c-resource-detail.md#focused-source-unavailable-diagnostic--2026-09-25).
+Deno58PASS including redaction/response equivalence; secret/diff/Wiki PASS.
+Root cause awaits diagnostic redeploy/log evidence. No deploy/Production calls,
+Flutter/DB/migration/ingestion/Daily Sync changes; Owner files preserved.

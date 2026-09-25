@@ -54,8 +54,8 @@ builds PASS.** Resolver-focused23 tests include8 responsive loading/error/retry
 cases at360×640/428×926,1×/2×. Prior B2 Deno48PASS (resolver23), ingestion170PASS,
 Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
 parse PASS. Local quota concurrency tests were not run; Owner runtime acceptance is below.
-Activation-preparation Deno52PASS (resolver27); entrypoint/config/security checks
-PASS with no network permission. Flutter unchanged/not rerun in this wiring task.
+Diagnostic Deno58PASS (resolver33), no network permission; safe logs/response
+equivalence PASS. Flutter unchanged/not rerun in this diagnostics task.
 Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
 local automated results, not Production source/PDF or physical-device acceptance.
 
@@ -142,11 +142,12 @@ Current release priority:
 1. Materials direct PDF remains **RELEASE-CRITICAL GAP**: Phase A automatedPASS /
    Owner deviceFAIL. B2 backend+Flutter candidate now implemented after Owner
    Resume decisions: canonical source/no redirects, ephemeral Guest PDF delivery.
-   Claude B2 code review PASS and quota runtime Owner PASS (reported). Entry/config
-   wired: **READY TO DEPLOY / NOT DEPLOYED**, verify_jwt=false. Shared600/min global,
-   12/min resource quota mandatory; Guest invocation/DB-cost DoS remains
-   **ACCEPTED MVP OPERATIONAL RISK**, not a protection claim. Owner PDF NOT VERIFIED.
-   [Activation handoff](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25).
+   Claude B2 code review and quota runtime Owner PASS. Owner reports resolver v1
+   **DEPLOYED ACTIVE**, Guest works, first call **source_unavailable**; cause unknown.
+   Safe stage diagnostics implemented, **READY FOR DIAGNOSTIC REDEPLOY**, not deployed
+   by this task. Shared600/min global,12/min resource quota mandatory. Guest cost
+   DoS remains ACCEPTED MVP OPERATIONAL RISK. Owner device PDF NOT VERIFIED.
+   [Diagnostic handoff](day-9-c-resource-detail.md#focused-source-unavailable-diagnostic--2026-09-25).
 
 2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
    canonical architecture and current-code audit are recorded in

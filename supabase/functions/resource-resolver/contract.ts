@@ -1,3 +1,4 @@
+import type { Diagnostic } from "./diagnostics.ts";
 /** Offline contract for resolving a canonical resource to a current delivery target.
  *
  * This module deliberately has no Supabase client and no network access. The
@@ -62,7 +63,10 @@ export interface ResourceRepository {
 }
 
 export interface SourceObserver {
-  observe(sourceUrl: string): Promise<SourceObservation | null>;
+  observe(
+    sourceUrl: string,
+    diagnostic?: Diagnostic,
+  ): Promise<SourceObservation | null>;
 }
 
 export const PDF_RESOURCE_TYPES = new Set([

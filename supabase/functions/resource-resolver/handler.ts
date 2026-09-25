@@ -1,4 +1,10 @@
 import {
+  createDiagnostic,
+  type Diagnostic,
+  type DiagnosticSink,
+  noDiagnostic,
+} from "./diagnostics.ts";
+import {
   CanonicalResource,
   isPdfEvidence,
   ResolverFallback,
@@ -65,9 +71,21 @@ export async function resolveResource(
   request: ResolverRequest,
   repository: ResourceRepository,
   observer: SourceObserver,
+  log: Diagnostic = noDiagnostic,
 ): Promise<ResolverResponse> {
-  const resource = await repository.findById(request.resource_id);
-  if (!resource) return fallback("not_found");
+  log("repository_start");
+  let resource: CanonicalResource | null;
+  try {
+    resource = await repository.findById(request.resource_id);
+  } catch (error) {
+    log("repository_failed");
+    throw error;
+  }
+  if (!resource) {
+    log("repository_missing");
+    return fallback("not_found");
+  }
+  log("repository_ok");
   if (!resource.isActive || !resource.parent.isActive) {
     return fallback("inactive");
   }
@@ -77,15 +95,23 @@ export async function resolveResource(
   if (resource.provider !== "kakaocdn") return fallback("unsupported");
   let observation: Awaited<ReturnType<SourceObserver["observe"]>>;
   try {
-    observation = await observer.observe(resource.parent.sourceUrl);
+    observation = await observer.observe(resource.parent.sourceUrl, log);
   } catch (_) {
+    log("observer_failed", { reason: "exception" });
     return fallback("source_unavailable");
   }
-  if (!observation) return fallback("source_unavailable");
+  if (!observation) {
+    log("observer_unavailable");
+    return fallback("source_unavailable");
+  }
   const matched = matchAttachment(resource, observation.attachments);
-  if (matched.ambiguous) return fallback("ambiguous");
+  if (matched.ambiguous) {
+    log("match_ambiguous");
+    return fallback("ambiguous");
+  }
   const attachment = matched.attachment;
   if (!attachment || !attachment.currentTarget) {
+    log("match_none");
     return fallback("not_resolvable");
   }
   if (!isPdfEvidence(resource, attachment)) return fallback("unsupported");
@@ -102,6 +128,7 @@ export async function resolveResource(
     kind: "pdf",
     target: target.toString(),
   };
+  log("resolved");
   return result;
 }
 
@@ -111,6 +138,7 @@ export function createHandler(
   quota: { allow(resourceId: string): Promise<boolean> } = {
     allow: async () => false,
   },
+  diagnosticSink?: DiagnosticSink,
 ) {
   return async (request: Request): Promise<Response> => {
     if (request.method === "OPTIONS") {
@@ -132,13 +160,20 @@ export function createHandler(
     }
     const parsed = parseRequest(body);
     if (!parsed) return reply(400, { error: "invalid_request" });
+    const log = createDiagnostic(diagnosticSink);
+    let phase = "quota";
+    log("quota_start");
     try {
       if (!await quota.allow(parsed.resource_id)) {
+        log("quota_denied");
         return reply(200, fallback("rate_limited"));
       }
-      const result = await resolveResource(parsed, repository, observer);
+      log("quota_ok");
+      phase = "resolver";
+      const result = await resolveResource(parsed, repository, observer, log);
       return reply(200, result);
     } catch {
+      log(phase === "quota" ? "quota_failed" : "resolver_failed");
       return reply(200, fallback("source_unavailable"));
     }
   };

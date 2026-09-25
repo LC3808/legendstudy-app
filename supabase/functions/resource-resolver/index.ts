@@ -1,18 +1,27 @@
+import {
+  consoleDiagnostic,
+  createDiagnostic,
+  type DiagnosticSink,
+} from "./diagnostics.ts";
 import { createProductionCandidate } from "./candidate.ts";
 import { createHandler } from "./handler.ts";
 
 type ReadEnvironment = (name: string) => string | undefined;
 
 /** Guest endpoint; caller headers never become database credentials. */
-export function createEntrypoint(readEnvironment: ReadEnvironment) {
+export function createEntrypoint(
+  readEnvironment: ReadEnvironment,
+  diagnosticSink: DiagnosticSink = consoleDiagnostic,
+) {
   try {
     const url = readEnvironment("SUPABASE_URL");
     const serviceKey = readEnvironment("SUPABASE_SERVICE_ROLE_KEY");
     if (!url?.trim() || !serviceKey?.trim()) {
       throw new Error("configuration unavailable");
     }
-    return createProductionCandidate(url, serviceKey);
+    return createProductionCandidate(url, serviceKey, diagnosticSink);
   } catch {
+    createDiagnostic(diagnosticSink)("config_failed");
     // Preserve safe CORS/method/input handling; no lookup/source fetch without
     // valid server configuration. Never return/log environment or raw errors.
     return createHandler(
@@ -23,6 +32,7 @@ export function createEntrypoint(readEnvironment: ReadEnvironment) {
           throw new Error("configuration unavailable");
         },
       },
+      diagnosticSink,
     );
   }
 }

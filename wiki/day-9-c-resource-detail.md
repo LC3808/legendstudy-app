@@ -503,3 +503,66 @@ LegendStudy with this checked-in Guest policy, then bounded real resolver/source
 acceptance and iPhone/Android PDF checks. Do not confuse repository entrypoint
 activation with an already deployed endpoint. Production invocation/source/PDF
 fetch/mutation0 in this task. Daily Sync Phase2 NOT STARTED.
+
+
+## Focused source-unavailable diagnostic — 2026-09-25
+
+Startingfee8112. Owner reports resolver v1 **DEPLOYED / ACTIVE**, Guest invocation
+works, but controlled request returned `fallback/source_unavailable`. Resource
+74658215-857a-5d14-aceb-1e85252e049c and post1709: active resource/parent,
+matching provenance, legendstudy source, available status, question/unknown and
+stable key presence verified by Owner. Owner external check of canonical source:
+HTTP200, text/html;charset=UTF-8, Content-Length89336. This does not establish the
+same network/HTML behavior from Edge. **Root cause NOT YET DETERMINED.** No new
+Production/source/PDF invocation by Codex. New diagnostics require separate redeploy.
+
+### Every source_unavailable path
+
+| Code path | Cause | Safe diagnostic |
+|---|---|---|
+| index configuration catch → failing quota stub → handler catch | missing/empty environment, environment-read exception, invalid project URL/configuration or factory construction exception | config_failed (startup), then quota_failed |
+| handler quota await throws | REST fetch/TLS/timeout, non-OK quota RPC status, bounded response failure, JSON parse error, other quota exception | quota_start → quota_failed |
+| repository findById throws → handler catch | any of three REST reads: network/timeout, non-OK response, body bound/read/decode failure, JSON parse or unexpected repository exception | repository_start → repository_failed → resolver_failed |
+| observer rejects canonical boundary | observer source guard returns null (normal resolver guard rejects earlier as not_resolvable) | source_boundary_rejected → observer_unavailable |
+| observer fetch throws | network/DNS/TLS/runtime rejection, without raw exception text | source_fetch_failed |
+| observer non-200 response | includes redirects/404/etc.; cancellation failure also caught | source_http_rejected + numeric status |
+| observer HTTP200 non-HTML | missing or unsupported content type | source_body_rejected/type |
+| observer bounded reader returns null | declared/streamed size, absent body, abort, read failure, invalid UTF-8 decode | source_body_rejected with size/empty/aborted/read_error/decode_error |
+| observer deadline | total fetch/body deadline races to null | source_timeout with fetch/body/parser phase |
+| HTML parser returns null | leftover raw-text/comment, duplicate attributes, nested anchor, stack/attachment cap, missing article container, unclosed anchor | observer_failed with fixed parser reason |
+| observer other exception | parser or other observation work throws; injected observer throws at resolve boundary | observer_failed/exception |
+| observer null reaches resolveResource | any null observation above | observer_unavailable (terminal observation marker) |
+| other resolver/response exception inside handler try | unexpected post-quota resolution/matching/serialization failure | resolver_failed; preceding stage identifies last boundary |
+
+Not source_unavailable: quota returns false→rate_limited; repository returns
+null→not_found; inactive→inactive; unsupported provider/media→unsupported;
+no match/invalid current target→not_resolvable; duplicate match→ambiguous.
+Malformed request-body parse/read exceptions remain HTTP400 invalid_request.
+Exceptions outside the handler's resolution catch may be platform errors, not this
+bounded fallback. No raw exception names/messages/stack traces are logged.
+
+### Logging contract and interpretation
+
+Production entrypoint enables JSON console.info via closed stage/reason allowlists.
+Each valid request gets an unrelated random trace_id for concurrent log grouping;
+no resource ID, key, URL, query, HTML, headers, cookie, credential or user data is
+logged. Only HTTP status100–599 and attachment_count0–1001 are numeric details.
+Unknown fields/stages/reasons are discarded, and sink failures are swallowed.
+Config failure gets its own startup trace; request-level quota failure follows.
+No per-byte/attachment logging, extra fetch, retry, quota change or client field.
+
+After a separately authorized diagnostic redeploy, inspect resolver_stage records
+for the controlled request: repository_ok confirms lookup returned a canonical
+resource; source_fetch_start confirms observer entry; HTTP/body/parser reasons
+pinpoint the rejecting boundary. observer_ok attachment_count=0 followed by
+match_none differs from parser failure. resolved never includes target. Keep the
+full safe stage sequence/trace, not raw HTML or signed attachment evidence.
+
+Deno58PASS (resolver33) including safe-stage/redaction/response-equivalence cases;
+no network permission. Existing security/entrypoint tests pass. Logging-disabled,
+logging-enabled and throwing-sink successful responses match behavior. Tests cover
+configuration/quota/repository exceptions, HTTP/type/size/read/decode/parser failures,
+timeout, empty and ambiguous match. Secret/diff/Wiki checks PASS. No Flutter,
+repository queries, matching/security/quota policy, migration, ingestion or Daily
+Sync changes. **READY_FOR_DIAGNOSTIC_REDEPLOY:YES; THIS TASK DEPLOY:NO.**
+Owner device PDF remains NOT VERIFIED; accepted Guest cost risk remains unchanged.

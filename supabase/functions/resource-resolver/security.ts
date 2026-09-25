@@ -76,16 +76,27 @@ export async function readBoundedText(
   response: Response,
   maxBytes = SOURCE_MAX_BYTES,
   signal?: AbortSignal,
+  onRejected: (reason: string) => void = () => {},
 ): Promise<string | null> {
+  const reject = (reason: string) => {
+    try {
+      onRejected(reason);
+    } catch { /* logging only */ }
+  };
   const declared = response.headers.get("content-length");
   if (declared && Number(declared) > maxBytes) {
+    reject("size");
     await response.body?.cancel();
     return null;
   }
-  if (!response.body) return null;
+  if (!response.body) {
+    reject("empty");
+    return null;
+  }
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];
   let total = 0;
+  let phase = "read_error";
   const cancel = () => {
     void reader.cancel().catch(() => {});
   };
@@ -94,10 +105,14 @@ export async function readBoundedText(
   try {
     while (true) {
       const part = await reader.read();
-      if (signal?.aborted) return null;
+      if (signal?.aborted) {
+        reject("aborted");
+        return null;
+      }
       if (part.done) break;
       total += part.value.byteLength;
       if (total > maxBytes) {
+        reject("size");
         await reader.cancel();
         return null;
       }
@@ -109,8 +124,10 @@ export async function readBoundedText(
       bytes.set(c, offset);
       offset += c.byteLength;
     }
+    phase = "decode_error";
     return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
   } catch {
+    reject(phase);
     try {
       await reader.cancel();
     } catch { /* no raw errors */ }
