@@ -605,3 +605,38 @@ No automatic deploy, Production resolver/source/PDF request or mutation. Next:
 Owner-controlled redeploy and bounded acceptance, checking observer_ok then resolved
 without logging targets. Actual Production success and Owner device PDF remain
 **NOT VERIFIED**; local synthetic success is not a Production acceptance claim.
+
+
+## Materials detail cleanup and Owner PDF acceptance — 2026-09-25
+
+Owner reports **MATERIALS_DIRECT_PDF: OWNER DEVICE PASS**: actual iPhone problem
+and answer PDFs open inside the app; Production resolver resolved/pdf PASS.
+This supersedes prior device FAIL/pending and resolver redeploy checkpoints above.
+It is Owner evidence, not a Production call performed by this UI task.
+
+Starting7c98778, presentation-only cleanup:
+- Shared `materialDisplayTitle` formats search results/detail only for exam titles
+  with the explicit exam-name + 기출 - 문제/답(or 정답)/해설 suffix. Unknown patterns
+  and other content types keep their original text; DB title/search queries intact.
+- Detail omits published/source-updated dates; source attribution and one top
+  원문 보기 remain. Existing surface tokens and exam metadata remain unchanged.
+- One accordion per canonical display label; occurrence IDs and resource IDs remain
+  distinct within it. Existing projected raw_subject_label supplies multi-occurrence
+  headings without taxonomy guesses; absent labels are not invented. Single
+  occurrences retain the flat existing resource layout. Equal raw labels do not
+  deduplicate occurrences/resources. Content+group storage keys retain toggle state.
+- Normal resource-local source buttons removed. Unsupported direct links point to
+  the top source action. Resolver failure retains 다시 시도 + 원문에서 보기; viewer
+  error fallback and audio external-open behavior unchanged. Resolver, PDF viewer,
+  Safe Open, backend, projection query and ingestion untouched.
+
+Validation: analyze PASS; full Flutter795PASS/1existing skip; focused Materials,
+search, delivery, resolver tests PASS. Group responsive checks360×640/428×926 at
+1×/2×; existing render run10PASS with12 PNGs and 2× screenshot inspection. Search
+continues to find raw SEO terms despite shorter labels. Date/source, duplicate
+occurrence/no-loss/toggle, Guest question/answer/explanation, failure and audio
+regressions PASS. No DB/network/Production mutation or deployment.
+**UI_CLEANUP: AUTOMATED PASS / OWNER DEVICE NOT VERIFIED.** No EOD closeout yet.
+Next Owner checks search/detail title, hidden dates, single source action, one
+국어 group with existing variants, direct PDFs and failure fallback; only then
+perform a separate whole-day Wiki closeout.

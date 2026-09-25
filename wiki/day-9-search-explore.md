@@ -255,3 +255,11 @@ Education columns remain searchable/in 전체 and existing initialType routes wo
 Initial5 and explicit load-more preserved. Owner accepted global surfaces; no
 border/shadow changes in this closeout. search_ui_test covers order, hidden chips,
 column discovery, CSAT mapping and reset; repository regression remains required.
+
+
+## Materials display-title cleanup — 2026-09-25
+
+Search and detail reuse a conservative exam-only presentation formatter for the
+explicit 기출 - 문제/답/해설 SEO suffix; source title and keyword matching unchanged.
+Other content types and unrecognized titles remain intact. Raw suffix terms remain
+searchable. [Current cleanup and Owner PDF acceptance](day-9-c-resource-detail.md#materials-detail-cleanup-and-owner-pdf-acceptance--2026-09-25).

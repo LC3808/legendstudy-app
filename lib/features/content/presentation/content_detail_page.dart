@@ -1,3 +1,5 @@
+import 'material_display_title.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -180,7 +182,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                         Semantics(
                           header: true,
                           child: Text(
-                            item.title,
+                            materialDisplayTitle(item.title, item.contentType),
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
@@ -190,19 +192,23 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                           Text(item.summary!),
                         ],
                         const SizedBox(height: 16),
-                        if (item.publishedAt != null)
-                          Text('게시 ${formatDate(item.publishedAt!)}'),
-                        if (item.sourceUpdatedAt != null)
-                          Text('원문 수정 ${formatDate(item.sourceUpdatedAt!)}'),
-                        if (publicWebUri(item.sourceUrl) != null)
-                          Text('출처 ${publicWebUri(item.sourceUrl)!.host}'),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: ExternalLinkButton(
-                            uri: publicWebUri(item.sourceUrl),
-                            label: '원문 보기',
-                            onOpenAttempted: _markMeaningfulRecent,
-                          ),
+                        Wrap(
+                          spacing: 12,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            if (publicWebUri(item.sourceUrl) != null)
+                              Text(
+                                publicWebUri(item.sourceUrl)!.host ==
+                                        'legendstudy.com'
+                                    ? '출처: 레전드스터디'
+                                    : '출처: ${publicWebUri(item.sourceUrl)!.host}',
+                              ),
+                            ExternalLinkButton(
+                              uri: publicWebUri(item.sourceUrl),
+                              label: '원문 보기',
+                              onOpenAttempted: _markMeaningfulRecent,
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 16),
                         ResourceSection(

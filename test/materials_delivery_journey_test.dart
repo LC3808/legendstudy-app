@@ -177,8 +177,8 @@ void main() {
         expect(find.textContaining('외부 링크를 열지 못했어요'), findsOneWidget);
         expect(find.text('자료를 불러오지 못했어요.'), findsNothing);
         await capture(tester, 'delivery-$scale-failure');
-        await tester.ensureVisible(find.text('원문에서 찾기'));
-        await tester.tap(find.text('원문에서 찾기'));
+        await tester.ensureVisible(find.text('원문 보기'));
+        await tester.tap(find.text('원문 보기'));
         await tester.pumpAndSettle();
         expect(opened.last.toString(), first.content.sourceUrl);
         final detailScroll = tester.state<ScrollableState>(
@@ -212,9 +212,9 @@ void main() {
           isTrue,
         );
         expect(detailScroll.position.pixels, detailOffset);
-        await tester.ensureVisible(find.text('원문에서 보기'));
+        await tester.ensureVisible(find.text('원문 보기'));
         await capture(tester, 'delivery-$scale-source');
-        await tester.tap(find.text('원문에서 보기'));
+        await tester.tap(find.text('원문 보기'));
         await tester.pumpAndSettle();
         expect(opened.length, 3);
         await tester.tap(find.byType(BackButton));

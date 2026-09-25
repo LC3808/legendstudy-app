@@ -71,6 +71,38 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets(
+    'search uses display title while preserving searchable source title',
+    (tester) async {
+      const raw = '2026 고3 모의고사 기출 - 문제, 답, 해설, 등급컷';
+      const content = ContentItem(
+        id: 'title',
+        slug: 'title',
+        contentType: 'exam',
+        title: raw,
+        sourceUrl: 'https://legendstudy.com/1',
+        isActive: true,
+      );
+      final repo = FakeSearchRepository(
+        items: [ResourceSearchItem(content: content, groups: const [])],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [searchRepositoryProvider.overrideWithValue(repo)],
+          child: const MaterialApp(home: MaterialsPage()),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('2026 고3 모의고사'), findsOneWidget);
+      expect(find.text(raw), findsNothing);
+      expect(content.title, raw);
+      await tester.enterText(find.byType(TextField), '등급컷');
+      await tester.pump(const Duration(milliseconds: 600));
+      await tester.pumpAndSettle();
+      expect(find.text('2026 고3 모의고사'), findsOneWidget);
+    },
+  );
+
   for (final size in [const Size(360, 640), const Size(428, 926)]) {
     for (final scale in [1.0, 2.0]) {
       for (final scenario in [
@@ -181,19 +213,27 @@ void main() {
           expect(find.widgetWithText(ActionChip, '시험 종류'), findsNothing);
           expect(find.widgetWithText(FilterChip, '교육칼럼'), findsNothing);
           expect(
-            tester.widgetList<FilterChip>(find.byType(FilterChip))
-                .map((chip) => (chip.label as Text).data).toList(),
+            tester
+                .widgetList<FilterChip>(find.byType(FilterChip))
+                .map((chip) => (chip.label as Text).data)
+                .toList(),
             ['전체', '수능', '모의고사', '논술', '학습자료', '입시정보'],
           );
           if (scale == 1.0) {
             final chips = find.byType(ActionChip);
-            expect(tester.getTopLeft(chips.first).dy,
-                tester.getTopLeft(chips.last).dy);
+            expect(
+              tester.getTopLeft(chips.first).dy,
+              tester.getTopLeft(chips.last).dy,
+            );
           }
           if (scenario != 'filters') {
-            expect(tester.widgetList<ActionChip>(find.byType(ActionChip))
-                .map((chip) => (chip.label as Text).data).toList(),
-                ['학년', '연도', '시행 월', '과목']);
+            expect(
+              tester
+                  .widgetList<ActionChip>(find.byType(ActionChip))
+                  .map((chip) => (chip.label as Text).data)
+                  .toList(),
+              ['학년', '연도', '시행 월', '과목'],
+            );
           }
           if (scenario == 'filters') {
             await choose(tester, '학년', '고3');
@@ -264,17 +304,33 @@ void main() {
       }
     }
   }
-  testWidgets('hidden column remains discoverable; CSAT uses existing filter', (tester) async {
-    final repo = FakeSearchRepository(items: [
-      ResourceSearchItem(content: const ContentItem(
-        id: 'column', slug: 'column', contentType: 'education_column',
-        title: '진로 교육칼럼', sourceUrl: 'https://example.org/column', isActive: true,
-      ), groups: const []),
-    ]);
-    await tester.pumpWidget(ProviderScope(
-      overrides: [searchRepositoryProvider.overrideWithValue(repo)],
-      child: MaterialApp(theme: AppTheme.light, home: const Scaffold(body: MaterialsPage())),
-    ));
+  testWidgets('hidden column remains discoverable; CSAT uses existing filter', (
+    tester,
+  ) async {
+    final repo = FakeSearchRepository(
+      items: [
+        ResourceSearchItem(
+          content: const ContentItem(
+            id: 'column',
+            slug: 'column',
+            contentType: 'education_column',
+            title: '진로 교육칼럼',
+            sourceUrl: 'https://example.org/column',
+            isActive: true,
+          ),
+          groups: const [],
+        ),
+      ],
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [searchRepositoryProvider.overrideWithValue(repo)],
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(body: MaterialsPage()),
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
     expect(find.text('진로 교육칼럼'), findsOneWidget);
     expect(repo.calls.last.isBrowse, isTrue);

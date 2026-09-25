@@ -49,15 +49,15 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. B2 candidate:
-**788 Flutter PASS /1 existing skip; analyze PASS; iOS simulator / Android debug
-builds PASS.** Resolver-focused23 tests include8 responsive loading/error/retry
+**Latest UI cleanup795 Flutter PASS /1 existing skip; analyze PASS.** Previous B2
+iOS simulator / Android debug builds PASS; not rerun for this presentation task. Resolver-focused23 tests include8 responsive loading/error/retry
 cases at360×640/428×926,1×/2×. Prior B2 Deno48PASS (resolver23), ingestion170PASS,
 Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
 parse PASS. Local quota concurrency tests were not run; Owner runtime acceptance is below.
 Parser correction Deno62PASS (resolver37), Python parity/contracts2PASS; no network
 permission. Safe logs/security PASS. Flutter unchanged/not rerun.
 Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
-local automated results, not Production source/PDF or physical-device acceptance.
+local results; Owner separately reports Production resolver/iPhone PDF PASS below.
 
 ## Production DB/Storage applied
 
@@ -139,15 +139,13 @@ free custom-time polish/subject-score structure and cross-device result history.
 Existing safe scoring is not a claim of full catalogue coverage.
 
 Current release priority:
-1. Materials direct PDF remains **RELEASE-CRITICAL GAP**: Phase A automatedPASS /
-   Owner deviceFAIL. B2 backend+Flutter candidate now implemented after Owner
-   Resume decisions: canonical source/no redirects, ephemeral Guest PDF delivery.
-   Claude B2 code review and quota runtime Owner PASS. Owner reports resolver v1
-   **DEPLOYED ACTIVE**, Guest works. Owner traced source_unavailable to unrelated
-   meta/content duplication. Scoped parser fix offline PASS, **READY FOR CONTROLLED
-   REDEPLOY**; not deployed by this task. Shared600/min global,12/min resource quota mandatory. Guest cost
-   DoS remains ACCEPTED MVP OPERATIONAL RISK. Owner device PDF NOT VERIFIED.
-   [Parser handoff](day-9-c-resource-detail.md#scoped-duplicate-attribute-correction--2026-09-25).
+1. **MATERIALS_DIRECT_PDF: OWNER DEVICE PASS** (Owner2026-09-25): iPhone actual
+   problem/answer PDFs in-app and Production resolver resolved/pdf PASS. This
+   supersedes prior failure/redeploy checkpoints. Quota600/min global,12/min resource
+   and accepted Guest cost risk unchanged. Materials title/header/subject-group/source
+   button cleanup: **AUTOMATED PASS / OWNER DEVICE NOT VERIFIED**; no resolver changes.
+   [Current acceptance and cleanup](day-9-c-resource-detail.md#materials-detail-cleanup-and-owner-pdf-acceptance--2026-09-25).
+   Next: Owner UI verification, then separate EOD closeout (not done here).
 
 2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
    canonical architecture and current-code audit are recorded in

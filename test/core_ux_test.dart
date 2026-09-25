@@ -356,7 +356,7 @@ void main() {
       await capture(tester, 'resources-collapsed-$scale');
       await tester.tap(find.text('국어'));
       await tester.pumpAndSettle();
-      expect(find.text('원문에서 보기'), findsNWidgets(4));
+      expect(find.text('원문에서 보기'), findsNothing);
       expect(find.textContaining('이용 가능 여부'), findsNothing);
       await capture(tester, 'resources-expanded-$scale');
       await tester.pumpWidget(const SizedBox());

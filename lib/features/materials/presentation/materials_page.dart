@@ -1,3 +1,5 @@
+import '../../content/presentation/material_display_title.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -451,7 +453,10 @@ class SearchResultTile extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                item.content.title,
+                materialDisplayTitle(
+                  item.content.title,
+                  item.content.contentType,
+                ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleMedium,

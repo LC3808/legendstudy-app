@@ -43,10 +43,10 @@ class ResourceSection extends ConsumerWidget {
                 ? const SizedBox.shrink()
                 : const EmptyState('이 자료에는 별도의 첨부 파일이 없어요.');
           }
-          // Keep distinct historical occurrences, even when mapped to the same name.
+          // Group labels for display only; occurrence/resource identities stay distinct.
           final groups = <String, List<ContentResource>>{};
           for (final item in items) {
-            groups.putIfAbsent(item.examSubjectId ?? '', () => []).add(item);
+            groups.putIfAbsent(item.groupLabel, () => []).add(item);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,7 +56,7 @@ class ResourceSection extends ConsumerWidget {
               for (final group in groups.values)
                 ExpansionTile(
                   key: PageStorageKey(
-                    '$contentItemId:${group.first.examSubjectId ?? 'general'}',
+                    '$contentItemId:${group.first.groupLabel}',
                   ),
                   initiallyExpanded: items.length <= 8,
                   title: Text(group.first.groupLabel),
@@ -64,53 +64,78 @@ class ResourceSection extends ConsumerWidget {
                     '${group.length}개 · ${group.map((r) => resourceTypeLabels[r.resourceType] ?? '기타').toSet().join(' · ')}',
                   ),
                   children: [
-                    for (final item in group)
-                      Card(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        elevation: 0,
-                        color: AppTokens.background,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            AppTokens.cardRadius,
+                    for (final occurrence in _occurrences(group)) ...[
+                      if (group.map((r) => r.examSubjectId).toSet().length >
+                              1 &&
+                          occurrence.first.occurrenceLabel != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            occurrence.first.occurrenceLabel!,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          side: const BorderSide(color: AppTokens.cardBorder),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(14),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.displayTitle,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              Text(
-                                resourceTypeLabels[item.resourceType] ?? '기타',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              if (item.sourceLabel?.trim().isNotEmpty == true &&
-                                  item.sourceLabel != item.displayTitle)
-                                Text(item.sourceLabel!),
-                              _ResourceDeliveryActions(
-                                key: ValueKey(item.id),
-                                contentSlug: contentSlug,
-                                resource: item,
-                                delivery: resolveResourceDelivery(
-                                  item,
-                                  contentSourceUrl,
+                      for (final item in occurrence)
+                        Card(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          elevation: 0,
+                          color: AppTokens.background,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppTokens.cardRadius,
+                            ),
+                            side: const BorderSide(color: AppTokens.cardBorder),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(14),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.displayTitle,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium,
                                 ),
-                                onOpenAttempted: onMeaningfulAction,
-                              ),
-                            ],
+                                Text(
+                                  resourceTypeLabels[item.resourceType] ?? '기타',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium,
+                                ),
+                                if (item.sourceLabel?.trim().isNotEmpty ==
+                                        true &&
+                                    item.sourceLabel != item.displayTitle)
+                                  Text(item.sourceLabel!),
+                                _ResourceDeliveryActions(
+                                  key: ValueKey(item.id),
+                                  contentSlug: contentSlug,
+                                  resource: item,
+                                  delivery: resolveResourceDelivery(
+                                    item,
+                                    contentSourceUrl,
+                                  ),
+                                  onOpenAttempted: onMeaningfulAction,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                    ],
                   ],
                 ),
             ],
           );
         },
       );
+}
+
+List<List<ContentResource>> _occurrences(List<ContentResource> resources) {
+  final groups = <String, List<ContentResource>>{};
+  for (final resource in resources) {
+    groups.putIfAbsent(resource.examSubjectId ?? '', () => []).add(resource);
+  }
+  return groups.values.toList();
 }
 
 class _ResourceDeliveryActions extends StatelessWidget {
@@ -140,9 +165,12 @@ class _ResourceDeliveryActions extends StatelessWidget {
               resource.isPdf &&
                       delivery.kind == ResourceDeliveryKind.externalFile
                   ? '앱에서 자료를 엽니다.'
+                  : delivery.kind == ResourceDeliveryKind.sourcePage
+                  ? '상단 원문 보기에서 자료를 확인하세요.'
                   : delivery.description,
             ),
-            if (delivery.uri != null) ...[
+            if (delivery.uri != null &&
+                delivery.kind != ResourceDeliveryKind.sourcePage) ...[
               // Display the host only: paths/queries can carry transient credentials.
               if (!(resource.isPdf &&
                   delivery.kind == ResourceDeliveryKind.externalFile))
@@ -172,12 +200,6 @@ class _ResourceDeliveryActions extends StatelessWidget {
                   onOpenAttempted: onOpenAttempted,
                 ),
             ],
-            if (delivery.sourceFallback != null)
-              ExternalLinkButton(
-                uri: delivery.sourceFallback,
-                label: '원문에서 찾기',
-                onOpenAttempted: onOpenAttempted,
-              ),
           ],
         );
 }
@@ -252,7 +274,7 @@ class _ResolvedPdfActionState extends ConsumerState<_ResolvedPdfAction> {
         ),
       ),
       if (failed) const Text('자료를 바로 열 수 없어요.'),
-      if (widget.fallback != null)
+      if (failed && widget.fallback != null)
         ExternalLinkButton(
           uri: widget.fallback,
           label: '원문에서 보기',

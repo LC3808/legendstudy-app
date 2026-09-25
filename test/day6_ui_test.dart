@@ -261,6 +261,30 @@ void main() {
       );
     },
   );
+  testWidgets('detail uses display title and omits source dates', (
+    tester,
+  ) async {
+    const raw = '2026 고3 모의고사 기출 - 문제/답/해설 자료';
+    parents.detail = () async => ContentItem(
+      id: 'parent',
+      slug: 'fixture',
+      contentType: 'exam',
+      title: raw,
+      sourceUrl: 'https://legendstudy.com/1',
+      isActive: true,
+      publishedAt: DateTime.utc(2026, 9, 13),
+      sourceUpdatedAt: DateTime.utc(2026, 9, 14),
+    );
+    await mount(tester, route: '/materials/fixture');
+    await tester.pumpAndSettle();
+    expect(find.text('2026 고3 모의고사'), findsOneWidget);
+    expect(find.text(raw), findsNothing);
+    expect(find.textContaining('게시 '), findsNothing);
+    expect(find.textContaining('원문 수정'), findsNothing);
+    expect(find.text('출처: 레전드스터디'), findsOneWidget);
+    expect(find.text('원문 보기'), findsOneWidget);
+    expect((await parents.detail())!.title, raw);
+  });
   testWidgets(
     'parent error retries into general content without duplicate title',
     (tester) async {
@@ -275,7 +299,7 @@ void main() {
       expect(find.text('검증용 요약'), findsOneWidget);
       expect(find.text('이 자료에는 별도의 첨부 파일이 없어요.'), findsOneWidget);
       expect(find.text('원문 보기'), findsOneWidget);
-      expect(find.text('원문 수정 2026.09.14'), findsOneWidget);
+      expect(find.text('원문 수정 2026.09.14'), findsNothing);
     },
   );
   testWidgets(
@@ -337,9 +361,9 @@ void main() {
       ];
       await mount(tester, route: '/materials/fixture');
       await tester.pumpAndSettle();
-      expect(find.text('직접 열 수 있는 자료 링크를 확인할 수 없어 원본 게시글로 이동해요.'), findsOneWidget);
-      await tester.ensureVisible(find.text('원문에서 보기'));
-      await tester.tap(find.text('원문에서 보기'));
+      expect(find.text('상단 원문 보기에서 자료를 확인하세요.'), findsOneWidget);
+      await tester.ensureVisible(find.text('원문 보기'));
+      await tester.tap(find.text('원문 보기'));
       await tester.pumpAndSettle();
       expect(opened.toString(), 'https://legendstudy.com/1');
       expect(opened.toString(), isNot(contains('kakaocdn')));

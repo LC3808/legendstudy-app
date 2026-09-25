@@ -2326,3 +2326,13 @@ Minimal synthetic reproduction; parser scopes duplicate rejection while retainin
 anchor/identity/article ambiguity protection. Deno62PASS, parity/contracts2PASS;
 secret/diff/Wiki PASS. No Flutter/DB/quota changes or Production calls/deploy.
 [Evidence and controlled-redeploy handoff](day-9-c-resource-detail.md#scoped-duplicate-attribute-correction--2026-09-25).
+
+
+## 2026-09-25 — Materials detail presentation cleanup
+
+Owner Production resolver/iPhone question+answer PDF PASS recorded. Shared exam
+SEO display formatter, compact source header, grouped subject occurrences and
+normal repeated source-action removal; failure fallback preserved. Analyze/full
+Flutter795PASS/1skip; focused/responsive/render PASS. No backend/data/ingestion
+changes; Owner iOS/untracked preserved. UI device acceptance pending; EOD not closed.
+[Current handoff](day-9-c-resource-detail.md#materials-detail-cleanup-and-owner-pdf-acceptance--2026-09-25).

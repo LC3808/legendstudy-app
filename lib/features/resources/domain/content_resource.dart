@@ -42,6 +42,7 @@ class ContentResource {
     this.fileSize,
     this.displayOrder = 0,
     this.groupLabel = '일반 자료',
+    this.occurrenceLabel,
   });
   final String id,
       contentItemId,
@@ -51,6 +52,7 @@ class ContentResource {
       linkKind,
       groupLabel;
   final String? examSubjectId, sourceLabel, fileUrl, mimeType, fileExtension;
+  final String? occurrenceLabel;
   final int? fileSize;
   final int displayOrder;
   String get displayTitle => title.trim().isNotEmpty
@@ -93,6 +95,7 @@ class ContentResource {
       fileSize: json['file_size'] as int?,
       displayOrder: json['display_order'] as int,
       groupLabel: label,
+      occurrenceLabel: raw?.trim().isNotEmpty == true ? raw!.trim() : null,
     );
   }
 }
