@@ -51,9 +51,11 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. B2 candidate:
 **788 Flutter PASS /1 existing skip; analyze PASS; iOS simulator / Android debug
 builds PASS.** Resolver-focused23 tests include8 responsive loading/error/retry
-cases at360×640/428×926,1×/2×. Deno48PASS (resolver23), ingestion170PASS,
+cases at360×640/428×926,1×/2×. Prior B2 Deno48PASS (resolver23), ingestion170PASS,
 Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
-parse PASS. Quota runtime/concurrent-connection tests NOT RUN (no local Postgres).
+parse PASS. Local quota concurrency tests were not run; Owner runtime acceptance is below.
+Activation-preparation Deno52PASS (resolver27); entrypoint/config/security checks
+PASS with no network permission. Flutter unchanged/not rerun in this wiring task.
 Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
 local automated results, not Production source/PDF or physical-device acceptance.
 
@@ -67,7 +69,10 @@ exact auth.uid()/avatar.png, SELECT/INSERT/UPDATE/DELETE owner-only SQL PASS.
 [Study storage](day-8-study-storage-proposal.md), [school storage](day-7-school-storage-proposal.md),
 [scoring storage](day-8-scoring-storage-proposal.md) retain original acceptance.
 Feedback/admin/email-worker prior Production acceptance: [operations](day-11-account-personal-feedback.md).
-No current task DB/Storage mutation, migration application or function deployment.
+Owner reports resolver quota migration20260925000100 applied/runtime PASS:
+RLS/grants/definer/search_path, calls1–12/13 limit, resource isolation, minute reset.
+[Exact evidence and scope](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25).
+No agent DB/Storage mutation, migration application or function deployment.
 
 ## Daily Sync status
 
@@ -136,11 +141,12 @@ Existing safe scoring is not a claim of full catalogue coverage.
 Current release priority:
 1. Materials direct PDF remains **RELEASE-CRITICAL GAP**: Phase A automatedPASS /
    Owner deviceFAIL. B2 backend+Flutter candidate now implemented after Owner
-   Resume decisions: canonical numeric source, zero redirects, shared Postgres
-   quota migration (NOT APPLIED), deterministic provider recovery, Guest ephemeral
-   PDF delivery through Safe Open to existing Viewer. No deployment or Production
-   invocation. [B2 evidence and review handoff](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).
-   Claude security review, quota runtime acceptance and Owner PDF E2E remain gates.
+   Resume decisions: canonical source/no redirects, ephemeral Guest PDF delivery.
+   Claude B2 code review PASS and quota runtime Owner PASS (reported). Entry/config
+   wired: **READY TO DEPLOY / NOT DEPLOYED**, verify_jwt=false. Shared600/min global,
+   12/min resource quota mandatory; Guest invocation/DB-cost DoS remains
+   **ACCEPTED MVP OPERATIONAL RISK**, not a protection claim. Owner PDF NOT VERIFIED.
+   [Activation handoff](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25).
 
 2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
    canonical architecture and current-code audit are recorded in

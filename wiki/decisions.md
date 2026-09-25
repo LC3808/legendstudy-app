@@ -470,3 +470,16 @@ Use shared resource/global bounds when no trusted Guest actor is established;
 no fake per-user enforcement. No signed persistence, PDF mirroring or arbitrary
 URL input. Fixed-host DNS/TLS infrastructure residual must be reviewed explicitly;
 no unimplemented pinning claim. Cache optional. [Implementation and review gates](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).
+
+
+## 2026-09-25 — Public resolver activation and accepted MVP cost risk
+
+Following reported Claude B2 acceptance and Owner quota runtime PASS, Owner accepts
+Guest gateway invocation/DB-cost DoS as **ACCEPTED MVP OPERATIONAL RISK**. It is not
+claimed solved by Postgres quota. Keep global600/min and resource12/min mandatory,
+fail-closed; no Redis/Upstash/Cloudflare introduced. Public Guest entrypoint uses
+verify_jwt=false with server-only platform credentials. Prepare checked-in wiring
+now; deployment and Production calls are separate steps, not executed by this task.
+[Current activation contract](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25)
+supersedes the candidate's pending runtime/gateway conditions without weakening
+canonical identity, Safe Open, no-redirect or ephemeral-target boundaries.

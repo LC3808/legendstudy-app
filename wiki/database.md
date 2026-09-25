@@ -697,7 +697,9 @@ Implementation references: [Flutter image_picker](https://pub.dev/packages/image
 
 ## Resolver quota candidate — 2026-09-25
 
-Migration20260925000100 is **NOT APPLIED**. Resolver-only counters/RPC, no resource
+Migration20260925000100 was NOT APPLIED at the B2 candidate checkpoint;
+Owner now reports **APPLIED / RUNTIME PASS**. See
+[exact Owner acceptance](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25). Resolver-only counters/RPC, no resource
 identity/content/learning schema change. RLS/grants, bounded lazy cleanup, static
 validation limits and post-review Owner verification/rollback are canonical in
 [Resource B2 handoff](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).

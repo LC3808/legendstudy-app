@@ -278,6 +278,9 @@ PDF NOT VERIFIED for B2 (historical Phase A device FAIL remains).
 
 ## Phase B2 implementation candidate — 2026-09-25
 
+Historical implementation checkpoint. Current activation readiness and Owner-applied
+quota evidence are in [Production activation preparation](#production-activation-preparation--2026-09-25) below.
+
 Owner Resume decisions supersede the preflight's no-migration/unknown-egress
 assumptions, not ingestion safety. Starting6031fae. **MATERIALS_DIRECT_OPEN_CODE:
 IMPLEMENTED candidate; PRODUCTION_DEPLOYED:NO; OWNER_DEVICE_PDF:NOT VERIFIED.**
@@ -409,3 +412,94 @@ configuration and Guest gateway JWT policy reviewed before index activation;
 controlled real source observation/target-runtime egress+decompression verification;
 then iPhone/Android acceptance. No deploy, Production migration/invocation/source
 fetch/PDF fetch, Storage copy, ingestion modification or Daily Sync Phase2 here.
+
+
+## Production activation preparation — 2026-09-25
+
+Starting4b90a47. Owner reports Claude final review **B2_CODE_ACCEPTANCE:PASS**,
+**PRODUCTION_MIGRATION_READY:YES**. Previous deployment conditions were quota
+runtime verification and Guest gateway cost protection. Owner now reports quota
+migration applied and runtime acceptance PASS, and explicitly accepts remaining
+Guest invocation/DB-cost DoS as **ACCEPTED MVP OPERATIONAL RISK**. This supersedes
+prior candidate-only/not-applied and disabled-entrypoint statements above.
+
+**PRODUCTION_ENDPOINT: READY TO DEPLOY / NOT DEPLOYED.**
+**OWNER_DEVICE_PDF: NOT VERIFIED.** No new claim that the Materials release gap
+has closed; controlled deployment and actual source/PDF/device acceptance follow.
+
+### Owner quota runtime acceptance
+
+Owner-executed Production evidence (not queries run by Codex): RLS=true;
+anon/authenticated RPC=false; service_role RPC=true; all direct quota table
+SELECT/INSERT/UPDATE/DELETE=false; SECURITY DEFINER=true; search_path empty.
+Same resource calls1–12 allowed,13 blocked; different resource independent;
+next-minute reset PASS. Global600/min and resource12/min remain unchanged and
+mandatory/fail-closed. The supplied evidence does not separately report a global
+600-call exhaustion test or parallel-connection stress test; do not invent those
+results. Prior local static/grammar tests remain distinct from Owner runtime PASS.
+Migration20260925000100 is unchanged by this task; do not reapply it.
+
+### Guest entrypoint and server environment
+
+`supabase/functions/resource-resolver/index.ts` registers the existing reviewed
+candidate via Deno.serve when executed as the entry module. Imports have no listener,
+secret-read or network side effect, matching the existing worker main-entry guard.
+Candidate construction preserves CanonicalRepository, bounded observer and quota
+RPC with no alternate unmetered path. Missing/invalid environment uses existing
+safe fallback/CORS/method/input handling and never fetches DB or source.
+
+`supabase/config.toml` explicitly sets `[functions.resource-resolver] verify_jwt=false`.
+This is an intentionally public Guest endpoint: no sign-in/session JWT is required,
+and caller Authorization/apikey values never authorize privileged database access.
+Request input remains resource_id only; server canonical relationship checks and
+quota remain mandatory. This is not user-authorized personal data access. Existing
+personal feature auth boundaries and other function settings are unchanged.
+
+Required platform-provided server environment:
+- `SUPABASE_URL`: dedicated LegendStudy HTTPS project URL. Existing repository
+  adapter validates hosted-project origin; not supplied by the request.
+- `SUPABASE_SERVICE_ROLE_KEY`: existing platform-provided legacy service-role key,
+  server-only. Reuse reviewed REST adapter/header contract; no key migration or
+  new custom secrets in this task. Never send to Flutter, source HTML fetch, logs,
+  responses, command-line arguments or committed config.
+
+No NEIS key, Redis/Upstash/Cloudflare or client secret is required. Before later
+controlled deploy, the operator confirms these platform variables exist in the
+correct project without disclosing their values. Presence/validity was not checked
+by accessing Production secrets in this task. Supabase documents the
+[default Edge environment](https://supabase.com/docs/guides/functions/secrets) and
+[public-function JWT policy](https://supabase.com/docs/guides/functions/auth).
+This implementation reuses the still-provided legacy service-role environment;
+modern key/SDK migration is a separate reviewed change, not implicit scope here.
+
+### Accepted risk and unchanged safeguards
+
+The quota protects bounded downstream source work. It **does not protect Edge
+invocation cost, prevent all DB-cost DoS, identify Guests, or guarantee fair usage**.
+A caller can consume shared capacity or repeatedly invoke the quota RPC through
+the public handler, denying others temporarily and incurring cost. Owner accepts
+this MVP operational residual; no gateway limiter is falsely claimed. No external
+limiter is introduced. Anon/authenticated direct RPC remains forbidden.
+
+Preserved: resource_id-only input; canonical numeric source; HTTPS/no redirects;
+mandatory shared quota; ephemeral/no-store signed targets; no PDF backend fetch,
+Storage/mirroring or signed persistence; Flutter Safe Open revalidation. Existing
+fixed-host DNS/TLS residual remains as assessed in B2 review, not IP-pinning.
+
+### Validation and next handoff
+
+Deno52PASS including27 resolver tests (4 new entrypoint/config tests), executed
+without network permission. Real candidate factory is exercised with offline
+transport fixtures: Guest/no auth, caller-header isolation, quota-first order,
+resolved output, safe config failure, denied/error quota, OPTIONS/input/method
+handling and checked-in verify_jwt policy. Entrypoint type check PASS.
+Flutter/migration/ingestion code unchanged; Flutter tests/builds not rerun for this
+server wiring task (previous788PASS/1skip and both builds remain historical).
+Secret-pattern scan, diff and Wiki links/routing PASS. Owner iOS/untracked preserved.
+
+Next authorized *preparation* state is ready for controlled deployment; no deploy
+command was executed here. Separate next step: deploy only resource-resolver to
+LegendStudy with this checked-in Guest policy, then bounded real resolver/source
+acceptance and iPhone/Android PDF checks. Do not confuse repository entrypoint
+activation with an already deployed endpoint. Production invocation/source/PDF
+fetch/mutation0 in this task. Daily Sync Phase2 NOT STARTED.

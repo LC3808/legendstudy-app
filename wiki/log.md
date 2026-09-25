@@ -2294,3 +2294,15 @@ SQL/PLpgSQL grammar PASS. Quota live concurrency/role tests NOT RUN; deployment
 requires independent Claude review and Owner migration/runtime acceptance.
 Secret/scope/diff/Wiki checks PASS. Production mutation/source/PDF requests0,
 Daily Sync Phase2 untouched. Owner iOS/untracked preserved; branch push authorized.
+
+
+## 2026-09-25 — Resolver Production activation preparation
+
+Starting4b90a47. Owner reports Claude B2 PASS and Production quota runtime PASS;
+accepts residual Guest invocation/DB-cost DoS. Existing B2 factory now registered
+by index.ts, Guest verify_jwt=false, platform server env only, fail-closed config.
+[Activation handoff](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25)
+records exact runtime evidence and risk limits. Deno52PASS (resolver27), entrypoint
+check/secret/diff/Wiki PASS; Flutter unchanged/not rerun. Quota migration unchanged.
+READY TO DEPLOY / NOT DEPLOYED; Owner PDF NOT VERIFIED. No Production request,
+source/PDF fetch, migration/deploy or Daily Sync Phase2. Commit/branch push authorized.

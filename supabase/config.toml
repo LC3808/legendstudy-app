@@ -2,3 +2,8 @@
 # Deploy only to the dedicated LegendStudy project after owner review.
 [functions.neis]
 verify_jwt = false
+
+# Public Guest PDF resolution; Postgres quota remains mandatory in the handler.
+# No claim of gateway invocation/DB-cost DoS protection (Owner-accepted MVP risk).
+[functions.resource-resolver]
+verify_jwt = false
