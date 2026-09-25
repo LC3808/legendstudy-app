@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import io
 import sys
 import tempfile
 import unittest
@@ -18,8 +19,9 @@ from ingestion.crawler import (  # noqa: E402
 from ingestion.delta import LocalDeltaState, run_delta  # noqa: E402
 from ingestion.discovery import (  # noqa: E402
     ABSOLUTE_REQUEST_CEILING, DISCOVERY_STATE_VERSION, FEED_STATUS_UNAVAILABLE,
-    FeedCandidate, ReconciliationState, observe_selected, parse_feed_candidates,
-    select_candidates, write_bounded_dry_run,
+    BoundedDiscoveryRunner, FeedCandidate, ReconciliationState,
+    observe_selected, parse_feed_candidates, select_candidates,
+    write_bounded_dry_run,
 )
 from ingestion.models import RawPost  # noqa: E402
 from ingestion.parser import canonical_post_url  # noqa: E402
@@ -60,8 +62,36 @@ class DiscoveryFixtureTests(unittest.TestCase):
         self.assertEqual(len(plan.candidates), 5)
         self.assertEqual([candidate.external_post_id for candidate in plan.candidates],
                          ['1003', '999', '1000', '1001', '1002'])
-        self.assertEqual(plan.candidates[0].sources,
-                         ('pending_retry', 'reconciliation', 'sitemap_new'))
+        self.assertEqual(plan.reconciliation_scan, ())
+        self.assertEqual(plan.cursor_before, plan.cursor_after)
+        self.assertEqual(plan.candidates[0].sources, ('pending_retry', 'sitemap_new'))
+
+    def test_full_priority_batch_does_not_consume_reconciliation_cursor(self):
+        cursor = ReconciliationState('500')
+        plan = select_candidates(
+            [SitemapEntry(str(value), '2026-09-25') for value in range(500, 510)],
+            [], LocalDeltaState.empty(), pending_retry_ids=['505', '506', '507', '508', '509'],
+            cursor=cursor, limit=5)
+        self.assertEqual([candidate.external_post_id for candidate in plan.candidates],
+                         ['505', '506', '507', '508', '509'])
+        self.assertEqual(plan.reconciliation_scan, ())
+        self.assertEqual(plan.cursor_after, cursor)
+
+    def test_partial_priority_batch_advances_only_selected_reconciliation_slots(self):
+        cursor = ReconciliationState('500')
+        accepted = run_delta(
+            [post(str(value)) for value in range(500, 510)],
+            observed_at='2026-09-24T00:00:00+00:00').state_after
+        for entry in accepted.entries.values():
+            entry.accepted_source_times['sitemap_lastmod'] = '2026-09-25'
+        plan = select_candidates(
+            [SitemapEntry(str(value), '2026-09-25') for value in range(500, 510)],
+            [], accepted, pending_retry_ids=['505', '506'],
+            cursor=cursor, limit=5)
+        self.assertEqual([candidate.external_post_id for candidate in plan.candidates],
+                         ['505', '506', '500', '501', '502'])
+        self.assertEqual(plan.reconciliation_scan, ('500', '501', '502'))
+        self.assertEqual(plan.cursor_after.next_external_post_id, '503')
 
     def test_cursor_progresses_wraps_and_rejects_unknown_version(self):
         cursor = ReconciliationState.empty()
@@ -89,6 +119,26 @@ class DiscoveryFixtureTests(unittest.TestCase):
             self.assertFalse(path.exists())
             next_cursor.write(path)
             self.assertEqual(json.loads(path.read_text())['next_external_post_id'], '1000')
+
+    def test_failed_reconciliation_observation_preserves_existing_cursor(self):
+        accepted = run_delta(
+            [post('999'), post('1000')],
+            observed_at='2026-09-24T00:00:00+00:00').state_after
+        for entry in accepted.entries.values():
+            entry.accepted_source_times['sitemap_lastmod'] = '2026-09-25'
+        plan = select_candidates(
+            [SitemapEntry('999', '2026-09-25'), SitemapEntry('1000', '2026-09-25')],
+            [], accepted, cursor=ReconciliationState('999'), limit=1)
+        self.assertEqual(plan.reconciliation_scan, ('999',))
+        self.assertEqual(plan.cursor_after.next_external_post_id, '1000')
+        result = observe_selected(plan, [], accepted, failed_ids=['999'])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            cursor_path = root / 'cursor-state.json'
+            plan.cursor_before.write(cursor_path)
+            write_bounded_dry_run(result, plan, root / 'artifacts', cursor_path=cursor_path)
+            self.assertEqual(
+                json.loads(cursor_path.read_text())['next_external_post_id'], '999')
 
     def test_budget_counts_retries_and_stops_at_ceiling(self):
         budget = RequestBudget(3)
@@ -131,6 +181,49 @@ class DiscoveryFixtureTests(unittest.TestCase):
                              ABSOLUTE_REQUEST_CEILING)
             self.assertEqual(json.loads((root / 'cursor-state.json').read_text())['state_version'],
                              DISCOVERY_STATE_VERSION)
+
+    def test_runner_artifact_reports_actual_budget_after_retry(self):
+        budget = RequestBudget(ABSOLUTE_REQUEST_CEILING)
+        fetcher = PoliteFetcher(delay=0, max_retries=1, request_budget=budget)
+        runner = BoundedDiscoveryRunner(fetcher=fetcher)
+        html = ('<meta property="og:title" content="2026년 5월 고3 모의고사">'
+                '<meta property="article:published_time" content="2026-09-25">'
+                '<div class="contents_style">body</div>')
+
+        class Response:
+            def __init__(self, body):
+                self.body = body.encode('utf-8')
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self):
+                return io.BytesIO(self.body).read()
+
+        with mock.patch('urllib.request.urlopen', side_effect=[
+                Response('User-agent: *'), Response(SITEMAP),
+                urllib.error.HTTPError('https://legendstudy.com/999', 503,
+                                       'retry', {}, None), Response(html)]), \
+                mock.patch('time.sleep'):
+            network = runner.discover()
+            plan = select_candidates(list(network.sitemap), [], limit=1)
+            posts, failures = runner.fetch_landing_pages(plan)
+        self.assertEqual(failures, [])
+        result = observe_selected(plan, posts)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            summary, _, _ = runner.write_dry_run(result, plan, root / 'artifacts')
+            payload = json.loads(summary.read_text())
+        self.assertEqual(payload['source_budget'], {
+            'ceiling': ABSOLUTE_REQUEST_CEILING,
+            'requests': 4,
+            'retries': 1,
+            'remaining': ABSOLUTE_REQUEST_CEILING - 4,
+        })
+        self.assertEqual(payload['discovery']['budget'], payload['source_budget'])
 
     def test_feed_is_explicitly_unavailable_without_verified_endpoint(self):
         self.assertEqual(FEED_STATUS_UNAVAILABLE, 'UNAVAILABLE')

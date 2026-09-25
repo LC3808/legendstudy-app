@@ -223,7 +223,6 @@ def select_candidates(sitemap: list[SitemapEntry], feed: list[FeedCandidate],
     cursor = cursor or ReconciliationState.empty()
     sitemap_by_id = {entry.external_post_id: entry for entry in sitemap}
     feed_by_id = {entry.external_post_id: entry for entry in feed}
-    scan, cursor_after = cursor.scan(list(sitemap_by_id), limit)
     info: dict[str, dict] = {}
 
     def add(post_id: str, priority: int, source: str, *, rank: int | None = None) -> None:
@@ -254,15 +253,22 @@ def select_candidates(sitemap: list[SitemapEntry], feed: list[FeedCandidate],
         else:
             add(post_id, 3, 'feed_recent')
         info[post_id]['feed_timestamp'] = entry.timestamp
-    for rank, post_id in enumerate(scan):
-        add(post_id, 4, 'reconciliation', rank=rank)
-        if post_id in sitemap_by_id:
-            info[post_id]['sitemap_lastmod'] = sitemap_by_id[post_id].lastmod
 
     def sort_key(item: tuple[str, dict]) -> tuple:
         post_id, value = item
         tie = value['rank'] if value['priority'] == 4 else _numeric_key(post_id)
         return (value['priority'], tie)
+
+    # Reserve landing-page slots for reconciliation only after higher-priority
+    # candidates have been selected.  A full high-priority batch must not
+    # consume an unseen cursor range that will not be fetched this run.
+    priority_selected = sorted(info.items(), key=sort_key)[:max(0, limit)]
+    remaining = max(0, limit - len(priority_selected))
+    scan, cursor_after = cursor.scan(list(sitemap_by_id), remaining)
+    for rank, post_id in enumerate(scan):
+        add(post_id, 4, 'reconciliation', rank=rank)
+        if post_id in sitemap_by_id:
+            info[post_id]['sitemap_lastmod'] = sitemap_by_id[post_id].lastmod
 
     selected = []
     for post_id, value in sorted(info.items(), key=sort_key)[:max(0, limit)]:
@@ -300,11 +306,16 @@ class BoundedDiscoveryRunner:
                  timeout: int = DEFAULT_TIMEOUT_SECONDS,
                  max_retries: int = DEFAULT_MAX_RETRIES,
                  fetcher: PoliteFetcher | None = None) -> None:
-        self.budget = RequestBudget(ABSOLUTE_REQUEST_CEILING)
-        self.fetcher = fetcher or PoliteFetcher(
-            delay=delay, timeout=timeout, max_retries=max_retries,
-            max_requests=ABSOLUTE_REQUEST_CEILING,
-            request_budget=self.budget)
+        if fetcher is not None:
+            self.fetcher = fetcher
+            self.budget = fetcher.request_budget or RequestBudget(ABSOLUTE_REQUEST_CEILING)
+            self.fetcher.request_budget = self.budget
+        else:
+            self.budget = RequestBudget(ABSOLUTE_REQUEST_CEILING)
+            self.fetcher = PoliteFetcher(
+                delay=delay, timeout=timeout, max_retries=max_retries,
+                max_requests=ABSOLUTE_REQUEST_CEILING,
+                request_budget=self.budget)
 
     def discover(self, *, feed_url: str | None = None) -> NetworkDiscovery:
         """Fetch robots/sitemap and an explicitly supplied feed only.
@@ -348,6 +359,13 @@ class BoundedDiscoveryRunner:
             'remaining': max(0, ABSOLUTE_REQUEST_CEILING - self.fetcher.stats.requests),
         }
 
+    def write_dry_run(self, result: DeltaRun, plan: DiscoveryPlan,
+                      output_dir: Path, state_path: Path | None = None,
+                      cursor_path: Path | None = None) -> tuple[Path, Path, Path | None]:
+        """Write artifacts using this runner's actual shared request budget."""
+        return write_bounded_dry_run(result, plan, output_dir, state_path,
+                                     cursor_path, budget=self.budget)
+
 
 def observe_selected(plan: DiscoveryPlan, posts: list[RawPost],
                      accepted_state: LocalDeltaState | None = None,
@@ -372,15 +390,29 @@ def observe_selected(plan: DiscoveryPlan, posts: list[RawPost],
 
 def write_bounded_dry_run(result: DeltaRun, plan: DiscoveryPlan,
                           output_dir: Path, state_path: Path | None = None,
-                          cursor_path: Path | None = None) -> tuple[Path, Path, Path | None]:
+                          cursor_path: Path | None = None,
+                          budget: RequestBudget | dict | None = None) -> tuple[Path, Path, Path | None]:
     """Write B1 artifacts, then advance the reconciliation cursor safely."""
+    actual_budget = (budget.as_dict() if isinstance(budget, RequestBudget)
+                     else dict(budget) if budget is not None else dict(plan.budget))
+    discovery = plan.as_dict()
+    discovery['budget'] = actual_budget
     summary_extra = {
-        'discovery': plan.as_dict(),
+        'discovery': discovery,
         'candidate_selection_order': [c.external_post_id for c in plan.candidates],
-        'source_budget': plan.budget,
+        'source_budget': actual_budget,
     }
     paths = write_delta_artifacts(result, output_dir, state_path,
                                   summary_extra=summary_extra)
-    if cursor_path is not None:
+    # A cursor represents completed reconciliation observations, not merely
+    # planned candidates.  Keep it unchanged for any failed or incomplete
+    # observation, even though the safe diagnostic artifacts were finalized.
+    cursor_safe = result.failed == 0 and all(
+        candidate.observation_status == 'COMPLETE'
+        and candidate.classification not in {
+            'MALFORMED', 'AMBIGUOUS', 'SOURCE_MISSING', 'FETCH_FAILED'
+        }
+        for candidate in result.candidates)
+    if cursor_path is not None and cursor_safe:
         plan.cursor_after.write(cursor_path)
     return paths
