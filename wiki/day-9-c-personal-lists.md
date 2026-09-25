@@ -36,3 +36,12 @@ RLS change. Therefore **PUBLICATION READY = YES** for this implementation gate.
 This is readiness only: Pilot C remains inactive and no publication or
 production mutation was performed. Official Xcode 27/iOS15/arm64 compatibility
 is configured in-repository; default simulator validation passes.
+
+
+## Owner title and badge consistency — 2026-09-25
+
+Saved/recent reuse materialDisplayTitle and canonical materialTypeLabel, with one
+existing batch exam metadata provider per displayed list. csat is 수능, canonical
+mock types are 모의고사; unavailable exam metadata stays generic 시험 자료.
+No stored title rewrite, bookmark/recent mutation or new classification system.
+[Latest UI correction](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).

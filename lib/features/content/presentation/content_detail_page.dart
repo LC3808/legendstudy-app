@@ -171,7 +171,18 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(child: ContentTypeBadge(item.contentType)),
+                            Expanded(
+                              child: ContentTypeBadge(
+                                item.contentType,
+                                examType: item.contentType == 'exam'
+                                    ? ref
+                                          .watch(examMetadataProvider(item.id))
+                                          .asData
+                                          ?.value[item.id]
+                                          ?.examType
+                                    : null,
+                              ),
+                            ),
                             _BookmarkControl(
                               contentItemId: item.id,
                               onMeaningfulAction: _markMeaningfulRecent,
@@ -200,7 +211,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                               Text(
                                 publicWebUri(item.sourceUrl)!.host ==
                                         'legendstudy.com'
-                                    ? '출처: 레전드스터디'
+                                    ? '출처: 레전드스터디 닷컴'
                                     : '출처: ${publicWebUri(item.sourceUrl)!.host}',
                               ),
                             ExternalLinkButton(

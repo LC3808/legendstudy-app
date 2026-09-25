@@ -7,6 +7,7 @@ import '../domain/content_item.dart';
 import '../../exams/domain/exam_metadata.dart';
 import '../../exams/presentation/exam_labels.dart';
 import 'content_type_badge.dart';
+import 'material_display_title.dart';
 
 class ContentCard extends StatelessWidget {
   const ContentCard(this.item, {this.exam, super.key});
@@ -39,10 +40,10 @@ class ContentCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ContentTypeBadge(item.contentType),
+              ContentTypeBadge(item.contentType, examType: exam?.examType),
               const SizedBox(height: 8),
               Text(
-                item.title,
+                materialDisplayTitle(item.title, item.contentType),
                 style: Theme.of(context).textTheme.titleMedium,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

@@ -441,7 +441,10 @@ class SearchResultTile extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      contentTypeLabels[item.content.contentType] ?? '자료',
+                      materialTypeLabel(
+                        item.content.contentType,
+                        examType: item.exam?.examType,
+                      ),
                       style: const TextStyle(
                         fontSize: 12,
                         color: AppTokens.textSecondary,

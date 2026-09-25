@@ -217,8 +217,12 @@ void main() {
         preserved();
         await preview.capture(tester, 'inline-$scale-saved');
         await nativeCapture?.call('inline-$scale-saved');
-        await tester.ensureVisible(find.text(target.title));
-        await tester.tap(find.text(target.title));
+        final targetTile = find.ancestor(
+          of: button,
+          matching: find.byType(SearchResultTile),
+        );
+        await tester.ensureVisible(targetTile);
+        await tester.tap(targetTile);
         await tester.pumpAndSettle();
         expect(find.byType(ContentDetailPage), findsOneWidget);
         expect(find.text('저장됨'), findsOneWidget);

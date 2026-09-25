@@ -263,3 +263,8 @@ Search and detail reuse a conservative exam-only presentation formatter for the
 explicit 기출 - 문제/답/해설 SEO suffix; source title and keyword matching unchanged.
 Other content types and unrecognized titles remain intact. Raw suffix terms remain
 searchable. [Current cleanup and Owner PDF acceptance](day-9-c-resource-detail.md#materials-detail-cleanup-and-owner-pdf-acceptance--2026-09-25).
+
+
+Latest Owner override: exam display titles stop at the first 모의고사/모의평가;
+search matching still uses raw title. Result labels share canonical exam_type-based
+mapping with detail/saved/recent (csat→수능). [Current rule](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).

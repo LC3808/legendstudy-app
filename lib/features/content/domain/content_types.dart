@@ -6,3 +6,15 @@ const contentTypeLabels = {
   'education_column': '교육칼럼',
   'other': '기타',
 };
+
+/// Uses canonical exam metadata, never title parsing. Unknown exams stay generic.
+String materialTypeLabel(String type, {String? examType}) {
+  if (type == 'exam') {
+    if (examType == 'csat') return '수능';
+    if (examType == 'national_mock' || examType == 'evaluation_mock') {
+      return '모의고사';
+    }
+    return '시험 자료';
+  }
+  return contentTypeLabels[type] ?? '기타';
+}

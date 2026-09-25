@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/presentation/content_type_badge.dart';
+import '../../content/presentation/material_display_title.dart';
+import '../../exams/exam_providers.dart';
 import '../personal_providers.dart';
 import '../personal_list_providers.dart';
 
@@ -119,12 +121,20 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
     final visible = widget.homeMode
         ? items.take(expanded ? 6 : 2).toList()
         : items;
+    final ids = visible
+        .where((m) => m.item.contentType == 'exam')
+        .map((m) => m.item.id)
+        .join(',');
+    final exams = ids.isEmpty
+        ? null
+        : ref.watch(examMetadataProvider(ids)).asData?.value;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final material in visible)
           _PersonalMaterialCard(
             material: material,
+            examType: exams?[material.item.id]?.examType,
             kind: widget.kind,
             homeMode: widget.homeMode,
             onDelete:
@@ -158,9 +168,8 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       if (mounted) ref.invalidate(personalMaterialListProvider(widget.kind));
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
     }
   }
 
@@ -188,9 +197,8 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       if (mounted) ref.invalidate(personalMaterialListProvider(widget.kind));
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(
-        this.context,
-      ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
+      ScaffoldMessenger.of(this.context)
+          .showSnackBar(const SnackBar(content: Text('최근 본 자료를 삭제하지 못했어요.')));
     }
   }
 }
@@ -198,11 +206,13 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
 class _PersonalMaterialCard extends ConsumerWidget {
   const _PersonalMaterialCard({
     required this.material,
+    this.examType,
     required this.kind,
     this.onDelete,
     this.homeMode = false,
   });
   final PersonalMaterial material;
+  final String? examType;
   final PersonalListKind kind;
   final bool homeMode;
   final VoidCallback? onDelete;
@@ -210,6 +220,7 @@ class _PersonalMaterialCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final item = material.item;
+    final displayTitle = materialDisplayTitle(item.title, item.contentType);
     final timestamp = material.entry.timestamp.toLocal();
     final label = kind == PersonalListKind.bookmarks ? '저장' : '최근 본';
     return Padding(
@@ -219,7 +230,7 @@ class _PersonalMaterialCard extends ConsumerWidget {
         elevation: 0,
         child: Semantics(
           button: true,
-          label: '${item.title}, $label 자료 열기',
+          label: '$displayTitle, $label 자료 열기',
           child: InkWell(
             onTap: () async {
               await context.push(
@@ -243,7 +254,7 @@ class _PersonalMaterialCard extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ContentTypeBadge(item.contentType),
+                        ContentTypeBadge(item.contentType, examType: examType),
                         const SizedBox(height: 2),
                         Text(
                           '$label ${timestamp.year}.${timestamp.month.toString().padLeft(2, '0')}.${timestamp.day.toString().padLeft(2, '0')}',
@@ -257,7 +268,7 @@ class _PersonalMaterialCard extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            item.title,
+                            displayTitle,
                             style: Theme.of(context).textTheme.titleMedium,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,

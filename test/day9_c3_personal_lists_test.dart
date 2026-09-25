@@ -1,3 +1,7 @@
+import 'package:legendstudy_app/features/exams/exam_providers.dart';
+import 'package:legendstudy_app/features/exams/domain/exam_metadata.dart';
+import 'package:legendstudy_app/features/content/presentation/content_type_badge.dart';
+import 'package:legendstudy_app/features/content/domain/content_types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -106,6 +110,77 @@ ProviderContainer listContainer({
 );
 
 void main() {
+  test('canonical material labels match search categories', () {
+    expect(materialTypeLabel('exam', examType: 'csat'), '수능');
+    for (final type in ['national_mock', 'evaluation_mock']) {
+      expect(
+        materialTypeLabel('exam', examType: type),
+        contentTypeLabels['exam'],
+      );
+    }
+    expect(materialTypeLabel('exam'), '시험 자료');
+    expect(materialTypeLabel('university_essay'), '논술');
+    expect(materialTypeLabel('study_material'), '학습자료');
+  });
+  for (final kind in PersonalListKind.values) {
+    for (final type in ['csat', 'national_mock', 'evaluation_mock']) {
+      testWidgets('$kind uses canonical title and badge for $type', (
+        tester,
+      ) async {
+        final prefix = type == 'csat'
+            ? '2026학년도 수능'
+            : type == 'evaluation_mock'
+            ? '2026 고3 모의평가'
+            : '2025년 10월 고3 모의고사';
+        final raw = '$prefix 기출 - 문제, 답, 해설, 등급컷';
+        final item = ContentItem(
+          id: 'a',
+          slug: 'a',
+          contentType: 'exam',
+          title: raw,
+          sourceUrl: 'https://legendstudy.com/1',
+          isActive: true,
+        );
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              authStateProvider.overrideWith(
+                (ref) => Stream.value(const AuthStatus('a')),
+              ),
+              bookmarkRepositoryProvider.overrideWithValue(
+                ListBookmarkRepository([entry('a', 15)]),
+              ),
+              recentViewRepositoryProvider.overrideWithValue(
+                ListRecentRepository([entry('a', 15)]),
+              ),
+              contentRepositoryProvider.overrideWithValue(
+                BatchContentRepository([item]),
+              ),
+              examMetadataProvider('a').overrideWith(
+                (ref) async => {
+                  'a': ExamMetadata(contentItemId: 'a', examType: type),
+                },
+              ),
+            ],
+            child: MaterialApp(home: PersonalMaterialListPage(kind: kind)),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(prefix), findsOneWidget);
+        expect(find.text(raw), findsNothing);
+        expect(
+          find.descendant(
+            of: find.byType(ContentTypeBadge),
+            matching: find.text(type == 'csat' ? '수능' : '모의고사'),
+          ),
+          findsOneWidget,
+        );
+        expect(item.title, raw);
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
+
   test(
     'saved list keeps server order and hydrates with one bounded batch',
     () async {

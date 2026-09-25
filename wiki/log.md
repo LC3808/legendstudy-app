@@ -2336,3 +2336,11 @@ normal repeated source-action removal; failure fallback preserved. Analyze/full
 Flutter795PASS/1skip; focused/responsive/render PASS. No backend/data/ingestion
 changes; Owner iOS/untracked preserved. UI device acceptance pending; EOD not closed.
 [Current handoff](day-9-c-resource-detail.md#materials-detail-cleanup-and-owner-pdf-acceptance--2026-09-25).
+
+
+## 2026-09-25 — Owner final Materials title/source/badge corrections
+
+Shared mock/evaluation title shortening across search/detail/saved/recent/material
+cards; source label 닷컴; canonical exam_type badges including CSAT 수능. Existing
+personal data unchanged. Analyze/focused72/diff/Wiki PASS. Owner UI recheck pending;
+no EOD closeout. [Evidence](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).

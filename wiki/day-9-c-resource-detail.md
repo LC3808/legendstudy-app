@@ -640,3 +640,30 @@ regressions PASS. No DB/network/Production mutation or deployment.
 Next Owner checks search/detail title, hidden dates, single source action, one
 국어 group with existing variants, direct PDFs and failure fallback; only then
 perform a separate whole-day Wiki closeout.
+
+
+## Owner final title and classification corrections — 2026-09-25
+
+Startingdc415a5. Latest Owner override supersedes the strict mock SEO-suffix rule:
+exam titles containing 모의고사/모의평가 display through the first such word.
+Existing conservative CSAT suffix handling remains; non-exam titles/raw persisted
+values are untouched. One pure materialDisplayTitle is reused by search, detail,
+saved/recent (including accessibility label) and shared material cards; no screen
+copies or data rewrite. Source copy is now 출처: 레전드스터디 닷컴.
+
+Badge root cause: generic content_type=exam map labeled every exam 모의고사;
+personal cards did not read exams.exam_type. Existing batched examMetadataProvider
+now hydrates personal-list presentation, without changing bookmark/recent storage.
+Shared materialTypeLabel uses csat→수능, national_mock/evaluation_mock→모의고사,
+existing non-exam labels unchanged. Missing/other exam metadata→시험 자료, not a
+fabricated mock classification. Search results/detail/shared cards use the same
+mapping. Search filters already use csat; no title-derived taxonomy/query change.
+Home-specific files/layout/behavior were not edited; shared material rendering
+naturally uses the same title/badge rules wherever reused.
+
+Analyze PASS; focused72PASS: formatter examples, search/detail, saved/recent
+CSAT/mock/evaluation titles/badges, raw-title retention, bookmark/recents isolation
+and mutations. Diff/Wiki handoff PASS. No full suite/build rerun required for this
+scope. No DB/ingestion/resolver/PDF/OAuth/Production changes. Owner iOS/untracked
+preserved. Owner next verifies source copy + search/saved/recent titles and badges.
+Prior direct-PDF OWNER DEVICE PASS retained; this UI correction device NOT VERIFIED.

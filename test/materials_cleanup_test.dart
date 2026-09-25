@@ -15,8 +15,23 @@ void main() {
       materialDisplayTitle('2025 고2 모의고사 기출 - 문제/답/해설 자료', 'exam'),
       '2025 고2 모의고사',
     );
-    for (final value in ['모의고사 준비 방법', '모의고사 기출 - 학습 계획', '모의고사 기출 - 문제집 추천']) {
+    for (final value in ['이미 짧은 시험 제목', '수능 안내']) {
       expect(materialDisplayTitle(value, 'exam'), value);
+    }
+    for (final prefix in [
+      '2025년 10월 고2 모의고사',
+      '[2025년 9월 시행] 2026학년도 9월 모의평가',
+      '[2026년 6월 시행] 2027학년도 6월 모의평가',
+      '[2026년 3월 시행] 2026년 3월 고3 모의고사',
+      '[2026년 5월 시행] 2026년 5월 고3 모의고사',
+    ]) {
+      for (final suffix in [
+        '',
+        ' 문제, 답, 해설, 등급컷, 영어듣기 - 국어',
+        ' - 문제, 답, 해설 : 국어',
+      ]) {
+        expect(materialDisplayTitle('$prefix$suffix', 'exam'), prefix);
+      }
     }
     for (final type in [
       'essay',
