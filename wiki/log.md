@@ -2360,3 +2360,12 @@ Owner accepts remaining Materials UI/PDF. Only badge changes: light neutral/navy
 outline and canonical exam_type→학력평가/모의평가/수능; safe unknown fallback.
 Broad search filter unchanged. Analyze/focused51/diff/Wiki PASS, final badge device
 pending. [Handoff](day-9-c-personal-lists.md#final-badge-semantics-and-style--2026-09-25).
+
+
+## 2026-09-25 — Badge centering and MY density
+
+Even typography leading for outlined badge; MY-only card vertical padding16→8,
+horizontal16 unchanged across profile/study/score/materials. Analyze, personal19,
+MY render12 (Guest/unset/auth,360/428,1×/2×), diff/Wiki PASS. Existing Materials
+Owner PASS retained; new visual spot-check then separate EOD closeout pending.
+[Design evidence](design-system.md#badge-centering-and-my-density--2026-09-25).

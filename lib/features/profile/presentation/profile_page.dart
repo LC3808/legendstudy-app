@@ -1,5 +1,6 @@
 import '../../lab/score_summary.dart';
 import '../avatar.dart';
+import '../../../core/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,11 @@ import '../../personal/personal_providers.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../feedback/feedback_providers.dart';
+
+const _myCardPadding = EdgeInsets.symmetric(
+  horizontal: AppTokens.space16,
+  vertical: AppTokens.space8,
+);
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -40,6 +46,7 @@ class ProfilePage extends ConsumerWidget {
           ],
         ),
         LsCard(
+          padding: _myCardPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -103,6 +110,7 @@ class ProfilePage extends ConsumerWidget {
             builder: (context, ref, _) {
               final study = ref.watch(studyControllerProvider);
               return LsCard(
+                padding: _myCardPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -128,9 +136,10 @@ class ProfilePage extends ConsumerWidget {
             },
           ),
           const SectionHeader('성적'),
-          const LsCard(child: MyScoreSummary()),
+          const LsCard(padding: _myCardPadding, child: MyScoreSummary()),
           const SectionHeader('나의 자료'),
           LsCard(
+            padding: _myCardPadding,
             child: Column(
               children: [
                 LsListRow(

@@ -176,6 +176,10 @@ void main() {
             AppTokens.majorSurfaceBorder,
           );
           final titleRect = tester.getRect(find.text(title));
+          expect(
+            tester.widget<Text>(badgeText).style!.leadingDistribution,
+            TextLeadingDistribution.even,
+          );
           final badgeRect = tester.getRect(badgeText);
           expect(badgeRect.bottom <= titleRect.top, isTrue);
           expect(badgeRect.right <= width, isTrue);

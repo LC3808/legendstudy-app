@@ -333,3 +333,19 @@ only, all categories equally; no per-type colors or Home/search redesign.
 Owner reports all other Materials UI/PDF acceptance PASS. This last badge change
 is locally validated, device recheck pending. Analyze + focused51PASS; eight
 saved/recent360/428px ×1×/2× widget geometry/style checks, no overflow/collision.
+
+
+## Badge centering and MY density — 2026-09-25
+
+Owner accepts prior Materials UI/PDF and final outlined badge design. Latest tiny
+polish: outlined badge typography uses TextLeadingDistribution.even to distribute
+font leading above/below; no translation, new color, padding or classification.
+MY-only shared padding uses existing space16 horizontal/space8 vertical (formerly
+16 all sides) for profile, study, score and materials cards, including Guest profile.
+Global LsCard, surfaces/borders/radii/type, divider/row layout and touch targets
+unchanged. No Home/Study/LAB behavior or component change. Request body explicitly
+covers all four MY cards despite the report-template 'other cards NO' line.
+Analyze PASS; badge/personal19PASS; MY render12PASS at360×640/428×926 and1×/2×,
+Guest/configured/unset profiles, card padding and >=48px action rows checked.
+2× PNG inspected; no overflow. New centering/density Owner visual spot-check pending.
+Then separate Wiki EOD closeout; not completed here.

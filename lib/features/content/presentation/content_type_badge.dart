@@ -26,8 +26,10 @@ class ContentTypeBadge extends StatelessWidget {
       ),
       child: Text(
         materialTypeLabel(type, examType: examType, preciseExam: preciseExam),
-        style: Theme.of(context).textTheme.labelMedium
-            ?.copyWith(color: AppTokens.textPrimary),
+        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          color: AppTokens.textPrimary,
+          leadingDistribution: outlined ? TextLeadingDistribution.even : null,
+        ),
       ),
     ),
   );

@@ -159,18 +159,43 @@ void main() {
             final card = element.widget as LsCard;
             final container = element.findRenderObject();
             expect(container, isNotNull);
-            final decorated = find.descendant(of: find.byWidget(card), matching: find.byType(Container)).first;
-            final surface = t.widget<Container>(decorated).decoration! as BoxDecoration;
-            final major = card.level == LsSurfaceLevel.major &&
+            final decorated = find
+                .descendant(
+                  of: find.byWidget(card),
+                  matching: find.byType(Container),
+                )
+                .first;
+            final surface =
+                t.widget<Container>(decorated).decoration! as BoxDecoration;
+            final major =
+                card.level == LsSurfaceLevel.major &&
                 element.findAncestorWidgetOfExactType<LsCard>() == null;
             expect(surface.color, AppTokens.surface);
-            expect(surface.border, Border.all(color: major ? AppTokens.majorSurfaceBorder : AppTokens.cardBorder));
-            expect(surface.boxShadow, major ? AppTokens.majorSurfaceShadow : isNull);
+            expect(
+              surface.border,
+              Border.all(
+                color: major
+                    ? AppTokens.majorSurfaceBorder
+                    : AppTokens.cardBorder,
+              ),
+            );
+            expect(
+              surface.boxShadow,
+              major ? AppTokens.majorSurfaceShadow : isNull,
+            );
           }
           if (screen == 'materials') {
-            expect(find.byKey(const Key('materials-search-surface')), findsOneWidget);
+            expect(
+              find.byKey(const Key('materials-search-surface')),
+              findsOneWidget,
+            );
             for (final tile in find.byType(SearchResultTile).evaluate()) {
-              final card = t.widget<LsCard>(find.descendant(of: find.byWidget(tile.widget), matching: find.byType(LsCard)));
+              final card = t.widget<LsCard>(
+                find.descendant(
+                  of: find.byWidget(tile.widget),
+                  matching: find.byType(LsCard),
+                ),
+              );
               expect(card.level, LsSurfaceLevel.nested);
             }
             expect(find.text('검색·필터'), findsNothing);
@@ -227,6 +252,20 @@ void main() {
               isTrue,
             );
             expect(find.text('학습으로 이동'), findsOneWidget);
+          }
+          if (['my', 'my-unset', 'guest-my'].contains(screen)) {
+            for (final card in t.widgetList<LsCard>(find.byType(LsCard))) {
+              expect(
+                card.padding,
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              );
+            }
+            for (final row in find.byType(LsListRow).evaluate()) {
+              expect(
+                t.getSize(find.byWidget(row.widget)).height,
+                greaterThanOrEqualTo(48),
+              );
+            }
           }
           if (screen == 'my-unset') {
             expect(find.text('프로필 설정'), findsOneWidget);
