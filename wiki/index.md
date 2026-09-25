@@ -49,6 +49,10 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 implemented/local-tested/Owner-verified claims. Existing document directory below
 is preserved; historical checkpoints are accessed only when evidence is needed.
 
+## Latest end-of-day handoff
+
+- [2026-09-25 EOD closeout](eod-2026-09-25.md) — Materials PDF Owner PASS, Daily Sync Phase1 closeout, OAuth local runtime recovery, Multi D-Day/Home/Analytics planned state, deferred UI polish, and Owner top-level minimum-cost/simple/lightweight engineering rule.
+
 ## Product/platform canonical entry points
 
 - [Longitudinal Learning and Admissions Data Strategy](longitudinal-learning-admissions-data-strategy.md) — **HIGH / CANONICAL PRODUCT STRATEGY**, event 보존·cohort·지원/결과·사업화의 상위 원칙; architecture PLANNED
