@@ -79,12 +79,13 @@ active exam_subjects363; active resources739; reported integrity checks all0.
 Quarantine23 = EXPECTED advisory evidence; automatic deletion prohibited.
 This is Owner-reported evidence, not a DB query performed by Codex.
 
-**PHASE1_B1: IMPLEMENTED / OFFLINE.** The local deterministic delta core now
-provides versioned state, safe observation fingerprints, classification,
-resource diff, atomic redacted artifacts, and deterministic fixture tests.
-Discovery/network expansion (sitemap lastmod, RSS, request budget and old-post
-reconciliation cursor) remains B2 and is NOT IMPLEMENTED. **PHASE_1 IN PROGRESS;
-B1 PASS; B2 NOT STARTED. PHASE_2 NOT STARTED / OWNER GATED.**
+**PHASE1_B1: READY FOR INDEPENDENT RE-REVIEW.** The local deterministic delta
+core provides versioned state, safe observation fingerprints, classification,
+resource diff, atomic redacted artifacts, deterministic fixture parity, and the
+partial-observation safety correction. Discovery/network expansion (sitemap
+lastmod, RSS, request budget and old-post reconciliation cursor) remains B2 and
+is NOT IMPLEMENTED. **PHASE1 IN PROGRESS; B1 READY FOR INDEPENDENT RE-REVIEW;
+B2 NOT STARTED. PHASE2 NOT STARTED / OWNER GATED.**
 [Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
 [research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
 verbatim with verified hashes. That import checkpoint changed Wiki only; implementation does

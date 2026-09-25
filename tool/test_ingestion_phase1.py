@@ -55,6 +55,53 @@ class Phase1FixtureContractTests(unittest.TestCase):
             self.assertTrue(row['state_advance'])
             self.assertTrue(row['forbidden_actions'])
 
+    def test_manifest_declarations_execute_against_delta_engine(self):
+        """Fixture declarations are executable expectations, not documentation only."""
+        manifest = {row['id']: row for row in load_manifest()['fixtures']}
+        base = make_post(attachments=(make_attachment(),))
+        accepted = run_delta([base]).state_after
+        scenarios = {
+            'new_post': run_delta([make_post('1901')]),
+            'unchanged_post': run_delta([base], accepted),
+            'edited_title': run_delta([make_post(title='2026년 5월 고3 모의고사 수정')], accepted),
+            'edited_body_metadata': run_delta([make_post(body='본문 수정')], accepted),
+            'edited_subject_known_mapping': run_delta([make_post(attachments=(
+                make_attachment(name='2026년 5월 고3_영어 문제.pdf'),
+            ))], accepted),
+            'edited_subject_ambiguous_mapping': run_delta(
+                [make_post(attachments=(
+                    make_attachment(name='2026년 5월 고3_영어 문제.pdf'),
+                ))], accepted, subject_ambiguous_ids=['1705']),
+            'added_answer': run_delta([make_post(attachments=(
+                make_attachment(), make_attachment('s1/s3', '2026년 5월 고3_국어 정답.pdf'),
+            ))], accepted),
+            'added_audio': run_delta([make_post(attachments=(
+                make_attachment(), make_attachment('audio-1', '영어 듣기파일.mp3', 'box'),
+            ))], accepted),
+            'resource_absent_complete': run_delta([make_post(attachments=())], accepted),
+            'signature_rotation_only': run_delta([make_post(attachments=(
+                make_attachment(signed=False),
+            ))], accepted),
+            'malformed_post': run_delta([make_post(title='')], accepted),
+            'partial_fetch': run_delta([make_post(body='partial')], accepted,
+                                       partial_ids=['1705']),
+            'source_missing': run_delta([], accepted, source_missing_ids=['1705']),
+            'duplicate_observation': run_delta(
+                [base, make_post(title='conflicting')], accepted),
+            'unknown_provider_query_change': run_delta(
+                [base], accepted, ambiguous_ids=['1705']),
+            'fetch_timeout': run_delta([], accepted, fetch_failed_ids=['1705']),
+        }
+        for fixture_id, result in scenarios.items():
+            row = manifest[fixture_id]
+            candidate = result.candidates[0]
+            self.assertEqual(candidate.classification, row['expected_classification'], fixture_id)
+            for category in row.get('expected_change_categories', []):
+                self.assertIn(category, candidate.change_categories, fixture_id)
+            if fixture_id == 'partial_fetch':
+                self.assertEqual(candidate.resource_change_summary['unconfirmed_absent'], [])
+                self.assertNotIn('subject_mapping_changed', candidate.change_categories)
+
     def test_manifest_is_deterministically_serialized_and_redacted(self):
         raw = FIXTURE_PATH.read_bytes()
         parsed = json.loads(raw)
@@ -144,9 +191,11 @@ class DeltaCoreTests(unittest.TestCase):
         self.assertEqual(known.candidates[0].classification, 'MODIFIED')
         self.assertIn('subject_mapping_changed', known.candidates[0].change_categories)
 
-        ambiguous = run_delta([base], accepted, ambiguous_ids=['1705'])
+        ambiguous = run_delta([make_post(attachments=(
+            make_attachment(name='2026년 5월 고3_영어 문제.pdf'),
+        ))], accepted, subject_ambiguous_ids=['1705'])
         self.assertEqual(ambiguous.candidates[0].classification, 'AMBIGUOUS')
-        self.assertIn('unknown_provider_query_change',
+        self.assertIn('subject_mapping_conflict',
                       ambiguous.candidates[0].review_flags)
 
     def test_failure_and_ambiguity_do_not_advance_state(self):
@@ -202,9 +251,10 @@ class DeltaCoreTests(unittest.TestCase):
     def test_candidate_order_is_independent_of_input_order(self):
         posts = [make_post('1706', attachments=(make_attachment('s1/s3'),)),
                  make_post('1705', attachments=(make_attachment('s1/s2'),))]
+        posts.append(make_post('999', attachments=(make_attachment('s1/s1'),)))
         first = run_delta(posts)
         second = run_delta(list(reversed(posts)))
-        self.assertEqual([c.external_post_id for c in first.candidates], ['1705', '1706'])
+        self.assertEqual([c.external_post_id for c in first.candidates], ['999', '1705', '1706'])
         self.assertEqual([c.as_dict() for c in first.candidates],
                          [c.as_dict() for c in second.candidates])
 

@@ -2150,6 +2150,16 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
 - No crawler/discovery expansion, Production crawl, DB/schema/migration,
   scheduler, publication or push. Phase 1-B2 and Phase 2 remain not started.
 
+## 2026-09-25 — Daily Sync Phase 1-B1 corrective pass
+
+- Fixed incomplete-observation safety: `MALFORMED` partial observations now
+  emit no resource absence or subject-change evidence and never advance state.
+- Fixed numeric external-post ordering and added manifest-to-engine parity
+  execution for all 16 fixture declarations, including signature rotation,
+  subject ambiguity, unknown provider query, partial fetch and timeout.
+- Existing B1 contracts remain unchanged. Status is READY FOR INDEPENDENT
+  RE-REVIEW; B2 remains not started. No Production crawl/write or publication.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,

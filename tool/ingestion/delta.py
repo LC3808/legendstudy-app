@@ -77,6 +77,12 @@ def _resource_key(resource: dict) -> tuple[str, str]:
             str(resource.get('source_resource_key') or ''))
 
 
+def _post_id_sort_key(external_post_id: str) -> tuple[int, int | str]:
+    """Numeric LegendStudy IDs sort numerically, with a safe text fallback."""
+    value = str(external_post_id)
+    return (0, int(value)) if value.isdigit() else (1, value)
+
+
 def _safe_projection(post: RawPost, plan: PlannedPost, sitemap_lastmod: str | None) -> dict:
     exam = plan.exam or {}
     occurrences = [{
@@ -431,7 +437,11 @@ def _candidate_for(post: RawPost, plan: PlannedPost, state: LocalDeltaState,
                    review_flags: Iterable[str] = ()) -> DeltaCandidate:
     post_id = post.external_post_id
     after_projection = _safe_projection(post, plan, sitemap_lastmod)
-    after_fingerprint = safe_observation_fingerprint(post, plan, sitemap_lastmod)
+    evidence_complete = observation_status in {
+        'COMPLETE', 'COMPLETE_BUT_UNSAFE_IDENTITY', 'COMPLETE_BUT_CONFLICTING',
+    }
+    after_fingerprint = (safe_observation_fingerprint(post, plan, sitemap_lastmod)
+                         if evidence_complete else None)
     observed_entry = _entry_for(post, plan, observed_at, sitemap_lastmod)
     accepted = state.entries.get(post_id)
     if force_classification:
@@ -446,12 +456,19 @@ def _candidate_for(post: RawPost, plan: PlannedPost, state: LocalDeltaState,
         classification = 'MODIFIED'
     before_projection = _entry_projection(accepted.as_dict()) if accepted else None
     before_resources = list(accepted.accepted_resource_descriptors) if accepted else []
-    categories, resource_summary = _change_categories(
-        before_projection, after_projection,
-        before_resources, list(observed_entry.accepted_resource_descriptors),
-        after_fingerprint,
-        accepted.accepted_observation_fingerprint if accepted else None,
-    )
+    if evidence_complete:
+        categories, resource_summary = _change_categories(
+            before_projection, after_projection,
+            before_resources, list(observed_entry.accepted_resource_descriptors),
+            after_fingerprint or '',
+            accepted.accepted_observation_fingerprint if accepted else None,
+        )
+    else:
+        # Incomplete/malformed observations are not semantic evidence. In
+        # particular, omitted resources and partial subject facts must not
+        # become resource absence or mapping-change claims.
+        categories = []
+        resource_summary = {'added': [], 'changed': [], 'unconfirmed_absent': []}
     return DeltaCandidate(
         source=SOURCE,
         external_post_id=post_id,
@@ -554,6 +571,7 @@ def run_delta(posts: Iterable[RawPost], accepted_state: LocalDeltaState | dict |
               fetch_failed_ids: Iterable[str] = (),
               partial_ids: Iterable[str] = (),
               ambiguous_ids: Iterable[str] = (),
+              subject_ambiguous_ids: Iterable[str] = (),
               map_subjects: bool = False) -> DeltaRun:
     state = (accepted_state if isinstance(accepted_state, LocalDeltaState)
              else LocalDeltaState.from_dict(accepted_state)
@@ -561,11 +579,12 @@ def run_delta(posts: Iterable[RawPost], accepted_state: LocalDeltaState | dict |
     posts = list(posts)
     partial_ids = set(str(value) for value in partial_ids)
     ambiguous_ids = set(str(value) for value in ambiguous_ids)
+    subject_ambiguous_ids = set(str(value) for value in subject_ambiguous_ids)
     by_id: dict[str, list[RawPost]] = {}
     for post in posts:
         by_id.setdefault(post.external_post_id, []).append(post)
     candidates: list[DeltaCandidate] = []
-    for post_id in sorted(by_id, key=lambda value: (SOURCE, int(value) if value.isdigit() else value)):
+    for post_id in sorted(by_id, key=_post_id_sort_key):
         observations = by_id[post_id]
         first = observations[0]
         if len(observations) > 1:
@@ -583,15 +602,18 @@ def run_delta(posts: Iterable[RawPost], accepted_state: LocalDeltaState | dict |
         candidate = classify_delta(
             first, state, observed_at,
             observation_status='PARTIAL' if post_id in partial_ids else 'COMPLETE',
-            ambiguous_reason='unknown_provider_query_change' if post_id in set(ambiguous_ids) else None,
+            ambiguous_reason=(
+                'subject_mapping_conflict' if post_id in subject_ambiguous_ids else
+                'unknown_provider_query_change' if post_id in ambiguous_ids else None),
             map_subjects=map_subjects)
         candidates.append(candidate)
     for post_id in sorted(set(source_missing_ids), key=lambda value: str(value)):
         candidates.append(source_missing_candidate(str(post_id), state, observed_at))
     for post_id in sorted(set(fetch_failed_ids), key=lambda value: str(value)):
         candidates.append(fetch_failed_candidate(str(post_id), state, observed_at))
-    candidates.sort(key=lambda candidate: (candidate.source, candidate.external_post_id,
-                                           candidate.classification))
+    candidates.sort(key=lambda candidate: (
+        candidate.source, _post_id_sort_key(candidate.external_post_id),
+        candidate.classification))
     after = LocalDeltaState.from_dict(state.as_dict())
     for candidate in candidates:
         if candidate.classification in ('NEW', 'MODIFIED') and candidate._observed_entry:
