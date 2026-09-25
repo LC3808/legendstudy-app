@@ -143,11 +143,12 @@ Next session priority (no implementation starts in this closeout):
    identity/provenance locators, `file_url=NULL`, and no PDF metadata; Flutter
    therefore safely falls back to the original source page. Do not promote
    `unknown` or infer PDF from a `.pdf` suffix. `MATERIALS_DIRECT_OPEN` remains
-   a **RELEASE-CRITICAL GAP**. Phase B1 now has an offline-only trusted resolver
-   contract/security foundation with 10 Deno tests; no Edge deployment or
-   Production invocation exists. Trusted Phase B re-resolution/backend design
-   remains pending independent security review. Daily Sync Phase 2 remains
-   Owner-gated; no Production write/migration/scheduler/cron/publication.
+   a **RELEASE-CRITICAL GAP**. B1 offline foundation10tests PASS. B2 preflight
+   **BLOCKED**: shared Guest quota/actor configuration absent; verified DNS/IP-bound
+   egress unresolved. No B2 code/Flutter integration/deployment. See
+   [STOP evidence and restart gates](day-9-c-resource-detail.md#phase-b2-preflight-stop--2026-09-25).
+   B2 code candidate not ready; Production/Owner PDF acceptance pending.
+
 2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
    canonical architecture and current-code audit are recorded in
    [Home personalization and event collection](home-personalization-and-events.md).

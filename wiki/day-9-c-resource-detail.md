@@ -212,3 +212,64 @@ and [C3 personal lists](day-9-c-personal-lists.md).
   fully certified with the public contract. Existing policy/Auth/deletion release
   gates remain; MATERIALS DELIVERY UX COMPLETE YES (local scoped implementation),
   DIRECT RESOURCE ROUTING READY YES, RELEASE READY NO.
+
+## Phase B2 preflight STOP — 2026-09-25
+
+Starting code checkpoint5ef511c, B1ac9ec74 preserved. Owner's final B2 directive
+supersedes earlier backend-only scope: eventual acceptance MUST include Guest
+resource_id→trusted resolution→Safe Open→existing PdfViewerPage for question,
+answer, explanation and answer_explanation. This preflight does NOT deliver that
+integration. MATERIALS_DIRECT_OPEN remains RELEASE-CRITICAL GAP; Phase A automated
+PASS / Owner device FAIL; B1 OFFLINE FOUNDATION PASS; B2 BLOCKED BEFORE IMPLEMENTATION.
+
+### Stop evidence and boundaries
+
+- B1 index.ts exports nothing: no serve/deploy activation. handler.ts injects fake-
+  capable repository and observation, while its bounded fetch observer returns an
+  empty attachment list. No production read-only repository/HTML parser exists.
+- No shared Guest quota backend, atomic rate counter or trusted actor/gateway
+  configuration is present in resource-resolver or Supabase configuration.
+  Per-isolate memory limits/cache cannot establish a deployment-wide rate bound
+  across restarts/regions/instances. This meets Owner STOP condition for required
+  rate-limit infrastructure/configuration outside the currently safe repo scope.
+  Do not invent a Redis subscription, DB migration or deploy a gateway here.
+- [Supabase rate-limit example](https://supabase.com/docs/guides/functions/examples/rate-limiting)
+  uses external Redis/Upstash. It is evidence for one supported approach, not proof
+  Redis is the only solution. No external rate-limit infrastructure is approved
+  or configured by this task. A reviewed atomic shared quota/gateway and verified
+  actor derivation (not blindly trusted client forwarding headers) are required.
+- Existing fetch uses hostname validation then ordinary fetch; no validated-IP
+  binding or effective platform egress guarantee is established. DNS lookup then
+  a separate fetch would retain a check/use race. The documented
+  [Deno HTTP client options](https://docs.deno.com/api/deno/fetch/) expose TLS/proxy
+  configuration but do not establish a validated remote-IP binding for this B1
+  path. This is UNVERIFIED/OPEN, NOT a claim Supabase universally cannot pin DNS.
+  Need a runtime-supported transport preserving TLS hostname/SNI while binding
+  validated public destinations, or independently enforced egress, tested on the
+  intended runtime without Production/source/PDF traffic before deployment.
+- Current security primitive is incomplete for IPv4-mapped IPv6/nonstandard IP
+  inputs; redirects admit HTTPS→HTTP and source-boundary/port review remains.
+  Existing10 offline tests do not certify these B2 security requirements.
+- SOURCE_TIMEOUT_MS is per-fetch10s, not proven total redirect/body deadline.
+  Stream byte limit1MB exists; compressed-body adversarial coverage is pending.
+- Ingestion parser classifies Kakao provider + first two dna path segments as
+  stable key. normalizer intentionally keeps unknown/file_url NULL. apply.py
+  persists source_resource_key but not a provider column. Repository mapping
+  from canonical provenance must be reviewed; no fabricated provider/key, no
+  missing-schema/migration conclusion asserted from this preflight alone.
+
+### Required restart decisions
+
+Select/authorize the shared quota enforcement and actor trust contract, plus a
+verifiable egress transport/deployment requirement. Then implement read-only
+repository + minimal Python-parity observer + expiry-bounded memory cache + full
+security matrix + Flutter integration. A cache is an optimization, not a quota or
+correctness guarantee. Keep signed targets ephemeral; do not alter ingestion,
+canonical link kind, PDF storage or Safe Open to bypass the gates.
+
+No B2 code, Flutter change, migration, deployment, Production invocation/source
+fetch/PDF fetch or Daily Sync Phase2. No B2 integration/security/build PASS claim.
+B1 tests rerun offline:10PASS with --no-remote and no network permission. Wiki links,
+secret scan and diff checked. Claude can review this blocker handoff; a completed
+B2 code candidate is NOT ready. Production deployment remains NO. Owner device
+PDF NOT VERIFIED for B2 (historical Phase A device FAIL remains).

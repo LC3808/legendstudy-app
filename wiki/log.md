@@ -2268,3 +2268,14 @@ Handoff self-test routes A–E (link/section/content assertions):
 - E PASS: UI 다시 수정하자 → design v2 + latest Owner Device PASS/frozen surfaces.
 Internal links/task routing, diff check and secret scan PASS. UI PASS is not App
 Production release PASS; recovery/deletion/policy/Store/Community gates remain.
+
+## 2026-09-25 — Resolver B2 preflight stopped at infrastructure gate
+
+Starting5ef511c; actual B1 implementation and ingestion identity/persistence checked.
+No shared Guest rate-limit enforcement/actor configuration exists; Owner STOP
+condition applies. DNS/IP binding still unverified, not declared impossible.
+[Resource handoff](day-9-c-resource-detail.md#phase-b2-preflight-stop--2026-09-25)
+records evidence, additional B1 deficiencies and restart requirements. Final B2
+scope includes Flutter integration, but none implemented past this stop. B1 offline
+10tests PASS; docs checks only, no new Flutter/build/security-matrix PASS claim.
+No code/schema/deploy/Production source or PDF requests; Owner files preserved.
