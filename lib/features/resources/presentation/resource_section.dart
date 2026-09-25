@@ -7,6 +7,7 @@ import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../domain/content_resource.dart';
 import 'pdf_viewer_page.dart';
+import '../data/trusted_resolver_client.dart';
 import '../resource_providers.dart';
 
 class ResourceSection extends ConsumerWidget {
@@ -125,49 +126,137 @@ class _ResourceDeliveryActions extends StatelessWidget {
   final ResourceDelivery delivery;
   final VoidCallback? onOpenAttempted;
   @override
+  Widget build(BuildContext context) => resolverCapable(resource)
+      ? _ResolvedPdfAction(
+          resource: resource,
+          contentSlug: contentSlug,
+          fallback: delivery.uri ?? delivery.sourceFallback,
+          onOpenAttempted: onOpenAttempted,
+        )
+      : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              resource.isPdf &&
+                      delivery.kind == ResourceDeliveryKind.externalFile
+                  ? '앱에서 자료를 엽니다.'
+                  : delivery.description,
+            ),
+            if (delivery.uri != null) ...[
+              // Display the host only: paths/queries can carry transient credentials.
+              if (!(resource.isPdf &&
+                  delivery.kind == ResourceDeliveryKind.externalFile))
+                Text('이동할 사이트: ${delivery.uri!.host}'),
+              if (resource.isPdf &&
+                  delivery.kind == ResourceDeliveryKind.externalFile)
+                TextButton.icon(
+                  icon: const Icon(Icons.picture_as_pdf_outlined),
+                  label: Text(
+                    '${resourceTypeLabels[resource.resourceType] ?? '자료'} 보기',
+                  ),
+                  onPressed: () {
+                    onOpenAttempted?.call();
+                    context.push(
+                      '/materials/${Uri.encodeComponent(contentSlug)}/resource/${Uri.encodeComponent(resource.id)}',
+                      extra: PdfViewerRouteArgs(
+                        title: resource.displayTitle,
+                        delivery: delivery,
+                      ),
+                    );
+                  },
+                )
+              else
+                ExternalLinkButton(
+                  uri: delivery.uri,
+                  label: delivery.label,
+                  onOpenAttempted: onOpenAttempted,
+                ),
+            ],
+            if (delivery.sourceFallback != null)
+              ExternalLinkButton(
+                uri: delivery.sourceFallback,
+                label: '원문에서 찾기',
+                onOpenAttempted: onOpenAttempted,
+              ),
+          ],
+        );
+}
+
+class _ResolvedPdfAction extends ConsumerStatefulWidget {
+  const _ResolvedPdfAction({
+    required this.resource,
+    required this.contentSlug,
+    this.fallback,
+    this.onOpenAttempted,
+  });
+  final ContentResource resource;
+  final String contentSlug;
+  final Uri? fallback;
+  final VoidCallback? onOpenAttempted;
+  @override
+  ConsumerState<_ResolvedPdfAction> createState() => _ResolvedPdfActionState();
+}
+
+class _ResolvedPdfActionState extends ConsumerState<_ResolvedPdfAction> {
+  bool busy = false, failed = false;
+  Future<void> open() async {
+    if (busy) return;
+    setState(() {
+      busy = true;
+      failed = false;
+    });
+    widget.onOpenAttempted?.call();
+    final uri = await ref
+        .read(trustedResolverProvider)
+        .resolve(widget.resource.id);
+    if (!mounted) return;
+    setState(() {
+      busy = false;
+      failed = uri == null;
+    });
+    if (uri == null) return;
+    context.push(
+      '/materials/${Uri.encodeComponent(widget.contentSlug)}/resource/${Uri.encodeComponent(widget.resource.id)}',
+      extra: PdfViewerRouteArgs(
+        title: widget.resource.displayTitle,
+        ephemeral: true,
+        resolverResourceId: widget.resource.id,
+        delivery: ResourceDelivery(
+          kind: ResourceDeliveryKind.externalFile,
+          uri: uri,
+          sourceFallback: widget.fallback,
+          label: '자료 보기',
+          description: '앱에서 자료를 엽니다.',
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        resource.isPdf && delivery.kind == ResourceDeliveryKind.externalFile
-            ? '앱에서 자료를 엽니다.'
-            : delivery.description,
+      TextButton.icon(
+        onPressed: busy ? null : open,
+        icon: busy
+            ? const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.picture_as_pdf_outlined),
+        label: Text(
+          failed
+              ? '다시 시도'
+              : '${resourceTypeLabels[widget.resource.resourceType] ?? '자료'} 보기',
+        ),
       ),
-      if (delivery.uri != null) ...[
-        // Display the host only: paths/queries can carry transient credentials.
-        if (!(resource.isPdf &&
-            delivery.kind == ResourceDeliveryKind.externalFile))
-          Text('이동할 사이트: ${delivery.uri!.host}'),
-        if (resource.isPdf &&
-            delivery.kind == ResourceDeliveryKind.externalFile)
-          TextButton.icon(
-            icon: const Icon(Icons.picture_as_pdf_outlined),
-            label: Text(
-              '${resourceTypeLabels[resource.resourceType] ?? '자료'} 보기',
-            ),
-            onPressed: () {
-              onOpenAttempted?.call();
-              context.push(
-                '/materials/${Uri.encodeComponent(contentSlug)}/resource/${Uri.encodeComponent(resource.id)}',
-                extra: PdfViewerRouteArgs(
-                  title: resource.displayTitle,
-                  delivery: delivery,
-                ),
-              );
-            },
-          )
-        else
-          ExternalLinkButton(
-            uri: delivery.uri,
-            label: delivery.label,
-            onOpenAttempted: onOpenAttempted,
-          ),
-      ],
-      if (delivery.sourceFallback != null)
+      if (failed) const Text('자료를 바로 열 수 없어요.'),
+      if (widget.fallback != null)
         ExternalLinkButton(
-          uri: delivery.sourceFallback,
-          label: '원문에서 찾기',
-          onOpenAttempted: onOpenAttempted,
+          uri: widget.fallback,
+          label: '원문에서 보기',
+          onOpenAttempted: widget.onOpenAttempted,
         ),
     ],
   );

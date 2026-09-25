@@ -1,29 +1,71 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../data/ephemeral_pdf_loader.dart';
+import '../data/trusted_resolver_client.dart';
+
 import 'package:pdfrx/pdfrx.dart';
 
 import '../../../core/links/external_link.dart';
 import '../domain/content_resource.dart';
 
 class PdfViewerRouteArgs {
-  const PdfViewerRouteArgs({required this.title, required this.delivery});
+  const PdfViewerRouteArgs({
+    required this.title,
+    required this.delivery,
+    this.ephemeral = false,
+    this.resolverResourceId,
+  });
 
   final String title;
   final ResourceDelivery delivery;
+  final bool ephemeral;
+  final String? resolverResourceId;
 }
 
-class PdfViewerPage extends StatefulWidget {
+class PdfViewerPage extends ConsumerStatefulWidget {
   const PdfViewerPage({required this.args, super.key});
 
   final PdfViewerRouteArgs? args;
 
   @override
-  State<PdfViewerPage> createState() => _PdfViewerPageState();
+  ConsumerState<PdfViewerPage> createState() => _PdfViewerPageState();
 }
 
-class _PdfViewerPageState extends State<PdfViewerPage> {
+class _PdfViewerPageState extends ConsumerState<PdfViewerPage> {
   int _attempt = 0;
+  Future<Uint8List>? _bytes;
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
 
-  void _retry() => setState(() => _attempt++);
+  void _load() {
+    final args = widget.args;
+    if (args?.ephemeral == true && args?.delivery.uri != null) {
+      _bytes = _loadCurrent(args!);
+    }
+  }
+
+  Future<Uint8List> _loadCurrent(PdfViewerRouteArgs args) async {
+    var uri = args.delivery.uri;
+    if (_attempt > 0 && args.resolverResourceId != null) {
+      uri = await ref
+          .read(trustedResolverProvider)
+          .resolve(args.resolverResourceId!);
+    }
+    if (uri == null) throw StateError('자료를 열 수 없어요.');
+    if (!mounted) throw StateError('자료를 열 수 없어요.');
+    return ref.read(ephemeralPdfLoaderProvider)(uri);
+  }
+
+  void _retry() => setState(() {
+    _attempt++;
+    _load();
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +80,53 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
       body: usable
           ? KeyedSubtree(
               key: ValueKey(_attempt),
-              child: PdfViewer.uri(
-                uri,
-                timeout: const Duration(seconds: 30),
-                params: PdfViewerParams(
-                  loadingBannerBuilder: (context, bytesDownloaded, totalBytes) {
-                    final progress = totalBytes == null || totalBytes == 0
-                        ? null
-                        : bytesDownloaded / totalBytes;
-                    return _PdfLoadingPanel(progress: progress);
-                  },
-                  errorBannerBuilder:
-                      (context, error, stackTrace, documentRef) =>
-                          _PdfErrorPanel(
+              child: args!.ephemeral
+                  ? FutureBuilder<Uint8List>(
+                      future: _bytes,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return _PdfErrorPanel(
                             onRetry: _retry,
                             sourceFallback: sourceFallback,
+                          );
+                        }
+                        if (!snapshot.hasData) {
+                          return const _PdfLoadingPanel(progress: null);
+                        }
+                        return PdfViewer.data(
+                          snapshot.data!,
+                          sourceName: '자료',
+                          params: PdfViewerParams(
+                            errorBannerBuilder:
+                                (context, error, stackTrace, documentRef) =>
+                                    _PdfErrorPanel(
+                                      onRetry: _retry,
+                                      sourceFallback: sourceFallback,
+                                    ),
                           ),
-                ),
-              ),
+                        );
+                      },
+                    )
+                  : PdfViewer.uri(
+                      uri,
+                      timeout: const Duration(seconds: 30),
+                      params: PdfViewerParams(
+                        loadingBannerBuilder:
+                            (context, bytesDownloaded, totalBytes) {
+                              final progress =
+                                  totalBytes == null || totalBytes == 0
+                                  ? null
+                                  : bytesDownloaded / totalBytes;
+                              return _PdfLoadingPanel(progress: progress);
+                            },
+                        errorBannerBuilder:
+                            (context, error, stackTrace, documentRef) =>
+                                _PdfErrorPanel(
+                                  onRetry: _retry,
+                                  sourceFallback: sourceFallback,
+                                ),
+                      ),
+                    ),
             )
           : _PdfErrorPanel(
               onRetry: _retry,

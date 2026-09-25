@@ -693,3 +693,11 @@ Implementation references: [Flutter image_picker](https://pub.dev/packages/image
 (iOS photo-library usage description, Android lost result contract),
 [Storage access control](https://supabase.com/docs/guides/storage/security/access-control),
 [private downloads](https://supabase.com/docs/guides/storage/serving/downloads).
+
+
+## Resolver quota candidate — 2026-09-25
+
+Migration20260925000100 is **NOT APPLIED**. Resolver-only counters/RPC, no resource
+identity/content/learning schema change. RLS/grants, bounded lazy cleanup, static
+validation limits and post-review Owner verification/rollback are canonical in
+[Resource B2 handoff](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).

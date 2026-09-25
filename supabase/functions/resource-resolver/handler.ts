@@ -10,10 +10,8 @@ import {
   SourceObserver,
 } from "./contract.ts";
 import {
-  isAllowedRedirect,
+  kakaoIdentity,
   readBoundedText,
-  SOURCE_MAX_REDIRECTS,
-  SOURCE_TIMEOUT_MS,
   trustedCurrentTarget,
   trustedSourceUrl,
 } from "./security.ts";
@@ -21,7 +19,8 @@ import {
 const headers = {
   "Content-Type": "application/json; charset=utf-8",
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "apikey, content-type, authorization, x-client-info",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Cache-Control": "no-store",
 };
@@ -75,6 +74,7 @@ export async function resolveResource(
   if (!trustedSourceUrl(resource.parent.sourceUrl)) {
     return fallback("not_resolvable");
   }
+  if (resource.provider !== "kakaocdn") return fallback("unsupported");
   let observation: Awaited<ReturnType<SourceObserver["observe"]>>;
   try {
     observation = await observer.observe(resource.parent.sourceUrl);
@@ -93,7 +93,9 @@ export async function resolveResource(
     attachment.currentTarget,
     resource.provider,
   );
-  if (!target) return fallback("not_resolvable");
+  if (
+    !target || kakaoIdentity(target.toString()) !== resource.sourceResourceKey
+  ) return fallback("not_resolvable");
   const result: ResolverSuccess = {
     status: "resolved",
     resource_id: resource.id,
@@ -106,6 +108,9 @@ export async function resolveResource(
 export function createHandler(
   repository: ResourceRepository,
   observer: SourceObserver,
+  quota: { allow(resourceId: string): Promise<boolean> } = {
+    allow: async () => false,
+  },
 ) {
   return async (request: Request): Promise<Response> => {
     if (request.method === "OPTIONS") {
@@ -116,60 +121,27 @@ export function createHandler(
     }
     let body: unknown;
     try {
-      body = await request.json();
+      const text = await readBoundedText(
+        new Response(request.body, { headers: request.headers }),
+        256,
+        AbortSignal.timeout(3000),
+      );
+      body = text === null ? null : JSON.parse(text);
     } catch (_) {
       return reply(400, { error: "invalid_request" });
     }
     const parsed = parseRequest(body);
     if (!parsed) return reply(400, { error: "invalid_request" });
-    const result = await resolveResource(parsed, repository, observer);
-    return reply(result.status === "resolved" ? 200 : 200, result);
+    try {
+      if (!await quota.allow(parsed.resource_id)) {
+        return reply(200, fallback("rate_limited"));
+      }
+      const result = await resolveResource(parsed, repository, observer);
+      return reply(200, result);
+    } catch {
+      return reply(200, fallback("source_unavailable"));
+    }
   };
 }
 
-export function createBoundedSourceObserver(
-  fetcher: typeof fetch = fetch,
-): SourceObserver {
-  return {
-    async observe(sourceUrl: string) {
-      let target = trustedSourceUrl(sourceUrl);
-      if (!target) return null;
-      for (let hop = 0; hop <= SOURCE_MAX_REDIRECTS; hop++) {
-        let response: Response;
-        try {
-          response = await fetcher(target, {
-            method: "GET",
-            redirect: "manual",
-            signal: AbortSignal.timeout(SOURCE_TIMEOUT_MS),
-          });
-        } catch (_) {
-          return null;
-        }
-        if (response.status >= 300 && response.status < 400) {
-          if (hop === SOURCE_MAX_REDIRECTS) return null;
-          const location: string | null = response.headers.get("location");
-          target = location
-            ? isAllowedRedirect(new URL(location, target).toString())
-            : null;
-          if (!target) return null;
-          continue;
-        }
-        if (!response.ok) return null;
-        const contentType =
-          response.headers.get("content-type")?.toLowerCase() ?? "";
-        if (
-          contentType && !contentType.includes("text/html") &&
-          !contentType.includes("application/xhtml+xml")
-        ) {
-          return null;
-        }
-        // The HTML parser is intentionally injected later. This bounded
-        // observer proves transport policy without duplicating Python parser
-        // behavior in B1.
-        if (await readBoundedText(response) === null) return null;
-        return { attachments: [] };
-      }
-      return null;
-    },
-  };
-}
+export { createBoundedSourceObserver } from "./observer.ts";

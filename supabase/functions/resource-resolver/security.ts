@@ -1,123 +1,125 @@
-const TRUSTED_SOURCE_HOSTS = new Set([
-  "legendstudy.com",
-  "www.legendstudy.com",
-]);
-const TRUSTED_ATTACHMENT_HOSTS = new Set([
-  "blog.kakaocdn.net",
-  "t1.daumcdn.net",
-  "app.box.com",
-  "box.com",
-  "drive.google.com",
-  "docs.google.com",
-]);
 import type { ResolverResponse } from "./contract.ts";
-
 export const SOURCE_TIMEOUT_MS = 10_000;
 export const SOURCE_MAX_BYTES = 1_000_000;
-export const SOURCE_MAX_REDIRECTS = 3;
+export const SOURCE_MAX_REDIRECTS = 0;
+export const UUID =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-export function isPrivateOrSpecialHost(hostname: string): boolean {
-  const host = hostname.toLowerCase().replace(/^\[/, "").replace(/\]$/, "");
-  if (
-    host === "localhost" || host === "metadata.google.internal" ||
-    host === "metadata.google.com" || host === "::1"
-  ) return true;
-  if (host.startsWith("127.") || host.startsWith("169.254.")) return true;
-  if (host.includes(":")) {
-    return host === "::1" || host.startsWith("fc") || host.startsWith("fd") ||
-      host.startsWith("fe80:");
-  }
-  const octets = host.split(".").map(Number);
-  if (octets.length !== 4 || octets.some((part) => !Number.isInteger(part))) {
-    return false;
-  }
-  const [a, b] = octets;
-  return a === 10 || a === 127 || a === 169 && b === 254 ||
-    a === 172 && b >= 16 && b <= 31 || a === 192 && b === 168 ||
-    a === 0;
-}
-
-function parsedHttpUrl(value: string): URL | null {
+// Literal IPs are not required by this resolver. Reject all IPv6 (including
+// normalized mapped IPv4) and all numeric IPv4, including public literals.
+// This deliberately conservative primitive is not a DNS resolution guarantee.
+export function isPrivateOrSpecialHost(value: string): boolean {
   try {
+    const raw = value.replace(/^\[/, "").replace(/\]$/, "");
+    const host = new URL(`https://${raw.includes(":") ? `[${raw}]` : raw}/`)
+      .hostname.toLowerCase();
+    return host.includes(":") || /^\d+\.\d+\.\d+\.\d+$/.test(host) ||
+      host === "localhost" || host.endsWith(".localhost") ||
+      host === "metadata.google.internal" || host === "metadata.google.com";
+  } catch {
+    return true;
+  }
+}
+export function strictHttps(value: string): URL | null {
+  try {
+    if (/[\x00-\x20\\]/.test(value)) return null;
     const url = new URL(value);
-    if (!(["http:", "https:"].includes(url.protocol))) return null;
     if (
-      !url.hostname || url.username || url.password ||
-      isPrivateOrSpecialHost(url.hostname)
-    ) {
-      return null;
-    }
+      url.protocol !== "https:" || url.port || url.username || url.password ||
+      url.hash || isPrivateOrSpecialHost(url.hostname)
+    ) return null;
     return url;
-  } catch (_) {
+  } catch {
     return null;
   }
 }
-
+export function canonicalSource(source: unknown, id: unknown): string | null {
+  return source === "legendstudy" && typeof id === "string" &&
+      /^[1-9][0-9]{0,11}$/.test(id)
+    ? `https://legendstudy.com/${id}`
+    : null;
+}
 export function trustedSourceUrl(value: string): URL | null {
-  const url = parsedHttpUrl(value);
-  if (!url || !TRUSTED_SOURCE_HOSTS.has(url.hostname.toLowerCase())) {
-    return null;
-  }
-  // Canonical source posts use the numeric LegendStudy path. This also keeps
-  // the future resolver from becoming a general-purpose source proxy.
-  if (url.search || url.hash || !/^\/\d+\/?$/.test(url.pathname)) return null;
-  return url;
+  const url = strictHttps(value);
+  return url && url.hostname === "legendstudy.com" && !url.search &&
+      /^\/[1-9][0-9]{0,11}$/.test(url.pathname)
+    ? url
+    : null;
 }
-
+export function kakaoIdentity(value: string): string | null {
+  const url = strictHttps(value);
+  if (!url || url.hostname !== "blog.kakaocdn.net") return null;
+  const parts = /^\/dna\/([A-Za-z0-9_-]+)\/([A-Za-z0-9_-]+)\//.exec(
+    url.pathname,
+  );
+  return parts ? `${parts[1]}/${parts[2]}` : null;
+}
 export function trustedCurrentTarget(
   value: string,
   provider: string,
 ): URL | null {
-  const url = parsedHttpUrl(value);
-  if (
-    !url || !TRUSTED_ATTACHMENT_HOSTS.has(url.hostname.toLowerCase()) ||
-    url.hash
-  ) {
-    return null;
-  }
-  if (provider === "kakaocdn" && !url.search) return null;
-  return url;
+  const url = strictHttps(value);
+  return provider === "kakaocdn" && url && kakaoIdentity(value) && url.search &&
+      ["credential", "signature", "expires"].every((k) =>
+        url.searchParams.getAll(k).length === 1 && !!url.searchParams.get(k)
+      ) && /^[0-9]{10,11}$/.test(url.searchParams.get("expires") ?? "") &&
+      Number(url.searchParams.get("expires")) * 1000 > Date.now() + 5000
+    ? url
+    : null;
 }
-
-export function isAllowedRedirect(value: string): URL | null {
-  const url = parsedHttpUrl(value);
-  if (!url) return null;
-  return TRUSTED_SOURCE_HOSTS.has(url.hostname.toLowerCase()) ? url : null;
+// No redirect destination, even same-host, is authorized by this observer.
+export function isAllowedRedirect(_value: string): null {
+  return null;
 }
 
 export async function readBoundedText(
   response: Response,
   maxBytes = SOURCE_MAX_BYTES,
+  signal?: AbortSignal,
 ): Promise<string | null> {
   const declared = response.headers.get("content-length");
-  if (declared && Number(declared) > maxBytes) return null;
+  if (declared && Number(declared) > maxBytes) {
+    await response.body?.cancel();
+    return null;
+  }
   if (!response.body) return null;
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];
   let total = 0;
+  const cancel = () => {
+    void reader.cancel().catch(() => {});
+  };
+  signal?.addEventListener("abort", cancel, { once: true });
+  if (signal?.aborted) cancel();
   try {
     while (true) {
-      const next = await reader.read();
-      if (next.done) break;
-      total += next.value.byteLength;
+      const part = await reader.read();
+      if (signal?.aborted) return null;
+      if (part.done) break;
+      total += part.value.byteLength;
       if (total > maxBytes) {
         await reader.cancel();
         return null;
       }
-      chunks.push(next.value);
+      chunks.push(part.value);
     }
-  } catch (_) {
+    const bytes = new Uint8Array(total);
+    let offset = 0;
+    for (const c of chunks) {
+      bytes.set(c, offset);
+      offset += c.byteLength;
+    }
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    try {
+      await reader.cancel();
+    } catch { /* no raw errors */ }
     return null;
+  } finally {
+    signal?.removeEventListener("abort", cancel);
+    reader.releaseLock();
   }
-  const merged = new Uint8Array(total);
-  let offset = 0;
-  for (const chunk of chunks) {
-    merged.set(chunk, offset);
-    offset += chunk.byteLength;
-  }
-  return new TextDecoder().decode(merged);
 }
-
 export function safeOperationalLog(
   resourceId: string,
   provider: string,
@@ -126,10 +128,12 @@ export function safeOperationalLog(
 ) {
   return {
     event: "resource_resolver",
-    resource_id: resourceId,
-    provider,
+    resource_id: UUID.test(resourceId) ? resourceId : "invalid",
+    provider: provider === "kakaocdn" ? "kakaocdn" : "unsupported",
     status: result.status,
     reason: result.status === "fallback" ? result.reason : undefined,
-    duration_ms: Math.max(0, Math.round(durationMs)),
+    duration_ms: Number.isFinite(durationMs)
+      ? Math.max(0, Math.round(durationMs))
+      : 0,
   };
 }

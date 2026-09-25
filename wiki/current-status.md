@@ -48,16 +48,14 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 
 ## Local automated validation
 
-Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. Latest App validation
-from UI closeout (not rerun for the Wiki-only end-of-day task):
-758 Flutter PASS /1 existing skip; analyze PASS; Android debug/iOS simulator
-builds PASS. Responsive/render suites120 PASS (including non-render assertions),
-360×640/428×926 at1×/2×, Home/Timer/Mock/MY, official/free selection and expanded Meal PNGs inspected;
-Global major/nested/inline surface contracts and mean/total/chip assertions pass alongside
-existing provided-day/Mock isolation tests. Deno
-unchanged; previous11 PASS, not rerun in this Flutter-only follow-up. Secret
-signature scan/0hits, source-ignore readiness, diff and10 Wiki task-routing
-checks PASS. Owner UI acceptance is reported above; no new Codex physical-device or Production catalogue verification.
+Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. B2 candidate:
+**788 Flutter PASS /1 existing skip; analyze PASS; iOS simulator / Android debug
+builds PASS.** Resolver-focused23 tests include8 responsive loading/error/retry
+cases at360×640/428×926,1×/2×. Deno48PASS (resolver23), ingestion170PASS,
+Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
+parse PASS. Quota runtime/concurrent-connection tests NOT RUN (no local Postgres).
+Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
+local automated results, not Production source/PDF or physical-device acceptance.
 
 ## Production DB/Storage applied
 
@@ -135,19 +133,14 @@ full official/year-grade-month/key catalogue, official selection completion,
 free custom-time polish/subject-score structure and cross-device result history.
 Existing safe scoring is not a claim of full catalogue coverage.
 
-Next session priority (no implementation starts in this closeout):
-1. Materials direct PDF Phase A automated validation is PASS with `pdfrx` 2.6.5,
-   but Owner device validation is **FAIL**: current published Kakao resources do
-   not enter the viewer. The breakpoint is upstream: ingestion intentionally
-   stores modern Kakao attachments as `link_kind='unknown'`, unsigned
-   identity/provenance locators, `file_url=NULL`, and no PDF metadata; Flutter
-   therefore safely falls back to the original source page. Do not promote
-   `unknown` or infer PDF from a `.pdf` suffix. `MATERIALS_DIRECT_OPEN` remains
-   a **RELEASE-CRITICAL GAP**. B1 offline foundation10tests PASS. B2 preflight
-   **BLOCKED**: shared Guest quota/actor configuration absent; verified DNS/IP-bound
-   egress unresolved. No B2 code/Flutter integration/deployment. See
-   [STOP evidence and restart gates](day-9-c-resource-detail.md#phase-b2-preflight-stop--2026-09-25).
-   B2 code candidate not ready; Production/Owner PDF acceptance pending.
+Current release priority:
+1. Materials direct PDF remains **RELEASE-CRITICAL GAP**: Phase A automatedPASS /
+   Owner deviceFAIL. B2 backend+Flutter candidate now implemented after Owner
+   Resume decisions: canonical numeric source, zero redirects, shared Postgres
+   quota migration (NOT APPLIED), deterministic provider recovery, Guest ephemeral
+   PDF delivery through Safe Open to existing Viewer. No deployment or Production
+   invocation. [B2 evidence and review handoff](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).
+   Claude security review, quota runtime acceptance and Owner PDF E2E remain gates.
 
 2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
    canonical architecture and current-code audit are recorded in
@@ -164,7 +157,7 @@ PLANNED without backend or fake alerts. Existing release gates remain OPEN.
 Research synthesis and Phase1 package are SOURCE ACQUIRED in this repository;
 individual A–D full reports have not been separately inspected here.
 Future Wiki maintenance: separate historical design evidence from current design
-policy, preserving links; no such refactor today. Local commit only, PUSH NO;
+policy, preserving links; no such refactor today. B2 local commit and branch push authorized after checks;
 Owner iOS/untracked files retained. No automatic roadmap/Phase2 expansion.
 
 ## Handoff

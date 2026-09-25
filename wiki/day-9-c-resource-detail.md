@@ -215,6 +215,8 @@ and [C3 personal lists](day-9-c-personal-lists.md).
 
 ## Phase B2 preflight STOP — 2026-09-25
 
+Historical checkpoint; superseded by the Owner-authorized B2 candidate below.
+
 Starting code checkpoint5ef511c, B1ac9ec74 preserved. Owner's final B2 directive
 supersedes earlier backend-only scope: eventual acceptance MUST include Guest
 resource_id→trusted resolution→Safe Open→existing PdfViewerPage for question,
@@ -273,3 +275,137 @@ B1 tests rerun offline:10PASS with --no-remote and no network permission. Wiki l
 secret scan and diff checked. Claude can review this blocker handoff; a completed
 B2 code candidate is NOT ready. Production deployment remains NO. Owner device
 PDF NOT VERIFIED for B2 (historical Phase A device FAIL remains).
+
+## Phase B2 implementation candidate — 2026-09-25
+
+Owner Resume decisions supersede the preflight's no-migration/unknown-egress
+assumptions, not ingestion safety. Starting6031fae. **MATERIALS_DIRECT_OPEN_CODE:
+IMPLEMENTED candidate; PRODUCTION_DEPLOYED:NO; OWNER_DEVICE_PDF:NOT VERIFIED.**
+Phase A Owner FAIL remains historical evidence; release-critical direct-open is
+not closed until Claude review, controlled deployment and real device acceptance.
+
+### Architecture gates and security boundary
+
+- **A canonical source:** resources.id→content_items.id→source_posts.id. Require
+  the resource and parent source_post_id to agree, source=`legendstudy`, status
+  `available`, numeric external_post_id, active resource and parent. Construct
+  exactly `https://legendstudy.com/<id>`; no DB/client URL is fetch authority.
+  Cross-post provenance is valid elsewhere but conservatively falls back here.
+- **B quota:** resolver-only migration20260925000100, repository file only.
+  Postgres RPC serializes global/resource decisions with one transaction advisory
+  lock, shared across Edge instances and restarts. Fixed minute600 global calls,
+  12 per resource. Global counts resource-denied and unknown-UUID calls too;
+  malformed input never reaches RPC. Defaults are coarse MVP source-fetch bounds,
+  not per-user fairness or protection from invocation/DB-cost denial of service.
+  No trusted gateway actor demonstrated: do not trust client X-Forwarded-For.
+  No IP/user data collected. No Redis/gateway subscription introduced.
+- **C provider:** persisted unsigned resources.source_url must be strict HTTPS
+  blog.kakaocdn.net/dna/<segment1>/<segment2>/..., with no query/fragment and exact
+  equality to persisted source_resource_key. This reconstructs provider from
+  stored provenance, not filename/order/signature. Missing/mismatched evidence
+  falls back. No provider schema migration. Supported identity subset is narrower
+  than Python's permissive parser; unsupported historical forms fail closed.
+- Application guarantee: only one constructed canonical hostname, HTTPS443, no
+  credentials/query/fragment, no redirects at all (including same-host/HTTP).
+  Literal IPs, mapped IPv6 and nonstandard IPv4 are rejected. No arbitrary proxy.
+  **No DNS pinning or verified platform private-IP egress firewall is claimed.**
+  Native fetch/TLS performs DNS and certificate validation. Compromise of trusted
+  domain/DNS/routing/CA or runtime remains infrastructure residual risk; fixed
+  destination removes client-controlled rebinding authority. Claude must assess
+  this residual before any activation. DNS lookup followed by ordinary fetch is
+  intentionally not presented as pinning.
+- Landing fetch10s total including body; actual decoded HTML≤1,000,000bytes,
+  regardless of missing/lying Content-Length. Only HTML200. Tests feed a gzip
+  decompression stream through the byte limiter; target Supabase runtime decoding
+  remains a deployment verification item, not a Production test claim.
+- Server repository uses service credential only against fixed configured project
+  REST endpoints: three SELECTs and quota RPC. Existing service-role credential
+  has broader platform powers; adapter exposes no content writes. It must stay in
+  Edge secrets, never Flutter. No claim that this credential is intrinsically
+  read-only. index.ts still exports nothing; candidate.ts is not auto-started.
+
+### Observation and delivery
+
+Minimal article-anchor observer recognizes Tistory article containers and current
+Kakao href metadata. Shared synthetic fixture derived from existing ingestion
+MODERN_HTML is read by Python and Deno. Stable provider/key agree under signature
+rotation. Multiple matches decline as ambiguous (unlike ingestion deduplication).
+No HTML is stored/logged. Canonical PDF resource type plus current attachment
+PDF label/MIME evidence is required; contradictory media metadata declines.
+Backend never downloads PDF bytes and cannot verify file contents. Client loader
+also requires `%PDF-` before handing bytes to the existing PDF engine.
+
+Signed target exists only in no-store response and transient App memory; expiry
+must be in the future. **Cache intentionally absent**: no stale signature cache,
+no DB/Storage target persistence. Shared quota bounds repeated source observations.
+Cache hit/expiry/isolation tests N/A; adding one later needs expiry-aware review.
+
+Flutter sends resource_id only, supports Guest, keeps DB unknown unchanged and
+revalidates response ID/kind/HTTPS/host/path/credentials/expiry using existing
+publicWebUri Safe Open plus tighter Kakao rules. Four CTA types use the resolver;
+audio/non-PDF existing paths remain. Failures show “자료를 바로 열 수 없어요.”,
+retry and original source. No technical errors or targets displayed. Existing
+meaningful-action hook remains one call per attempted open; no signed history.
+PdfViewerPage is reused. Signed deliveries use bounded in-memory HTTP (30s,
+32MiB, no redirects) then PdfViewer.data with a non-URL source name. They never
+reach pdfrx's URI/disk-cache path. Retry re-resolves resource_id for a fresh target rather than reusing an expired
+signature. Oversize/download failures use existing original source fallback; public Phase A URI delivery behavior is unchanged.
+
+### Migration, validation and rollback handoff
+
+**Do not apply now. Claude independent security review and Owner decision first.**
+Then review `supabase/migrations/20260925000100_resource_resolver_quota.sql`:
+new quota table only, RLS enabled with no client policy; all direct table grants
+revoked including service_role. SECURITY DEFINER function has empty search_path,
+fully qualified objects and service_role-only EXECUTE. Global transaction lock
+has500ms timeout and failures close access. TTL is two minute-window boundaries;
+expired counters are removed lazily, at most128/request. Idle expired rows remain
+until traffic resumes; no scheduler. At most600 new resource keys/minute under
+this RPC. No personal or content records/URLs in this table.
+
+Before activation in an isolated database, verify:
+1. anon/authenticated/public cannot EXECUTE RPC or SELECT quota table.
+2. service_role can EXECUTE RPC but cannot access table directly.
+3. 12 calls to one UUID succeed,13th declines; a second UUID is independent;
+   total600 attempts exhaust global budget; next minute resets.
+4. Multiple concurrent connections never exceed12/resource or600/global; timeout
+   returns safe fallback. Inspect bounded cleanup and old-window reset.
+5. No content/source/resource rows or grants changed.
+
+Permission inspection (read-only, after approved apply):
+```sql
+select relrowsecurity from pg_class
+where oid = 'public.resource_resolver_quota'::regclass;
+select rolname,
+  has_function_privilege(rolname, 'public.consume_resource_resolver_quota(uuid)', 'EXECUTE') as rpc,
+  has_table_privilege(rolname, 'public.resource_resolver_quota', 'SELECT') as direct_read
+from pg_roles where rolname in ('anon','authenticated','service_role');
+select prosecdef, proconfig from pg_proc
+where oid = 'public.consume_resource_resolver_quota(uuid)'::regprocedure;
+```
+Expected RLS=true; RPC false/false/true, direct_read allfalse, definer=true,
+search_path empty. Runtime quota threshold/concurrency tests are **NOT RUN** in
+this task (no isolated Postgres available); static lock/threshold/cleanup/grant
+contract tests and PostgreSQL grammar parsing are the local evidence.
+Rollback only after disabling endpoint: drop function
+`public.consume_resource_resolver_quota(uuid)` then drop table
+`public.resource_resolver_quota`; no CASCADE or content changes. No target data
+needs migration. Do not run rollback while an active endpoint depends on quota.
+
+### Automated validation and remaining gates
+
+Final automated evidence: Flutter788PASS/1existing skip; analyze and both native
+builds PASS. Focused resolver23 tests include8 size/text-scale loading/error/retry
+cases. Deno48PASS (resolver23), ingestion170PASS, Python parity/quota-static2PASS;
+pglast parses9 SQL statements/1 PLpgSQL function. Secret/diff/Wiki checks PASS. Offline tests
+cover canonical lookup, provider parity, ambiguity, inactive parent/resource,
+URL/IP/redirect abuse, timeout, stream/gzip bounds, quota denial/error, safe errors,
+Guest four-CTA viewer routes, network/fallback/unsafe response, in-memory loader,
+and360×640/428×926 at1×/2×. No Production requests or device acceptance.
+
+Remaining deployment prerequisites: independent Claude security review; Owner
+quota migration with runtime concurrency/permissions acceptance; endpoint/secret
+configuration and Guest gateway JWT policy reviewed before index activation;
+controlled real source observation/target-runtime egress+decompression verification;
+then iPhone/Android acceptance. No deploy, Production migration/invocation/source
+fetch/PDF fetch, Storage copy, ingestion modification or Daily Sync Phase2 here.

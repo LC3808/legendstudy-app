@@ -1,7 +1,7 @@
 /** Offline contract for resolving a canonical resource to a current delivery target.
  *
  * This module deliberately has no Supabase client and no network access. The
- * future Edge Function will provide the repository and source observer.
+ * candidate factory supplies repository/observer/quota; index stays disabled.
  */
 
 export const RESOLVER_FAILURES = [
@@ -11,6 +11,7 @@ export const RESOLVER_FAILURES = [
   "source_unavailable",
   "ambiguous",
   "unsupported",
+  "rate_limited",
 ] as const;
 export type ResolverFailure = typeof RESOLVER_FAILURES[number];
 
@@ -79,9 +80,18 @@ export function isPdfEvidence(
   attachment: Pick<SourceAttachment, "mimeType" | "fileExtension">,
 ): boolean {
   if (!PDF_RESOURCE_TYPES.has(resource.resourceType)) return false;
-  const mime = [resource.mimeType, attachment.mimeType]
-    .find((value) => value?.trim())?.trim().toLowerCase().split(";")[0];
-  const extension = [resource.fileExtension, attachment.fileExtension]
-    .find((value) => value?.trim())?.trim().toLowerCase().replace(/^\./, "");
-  return mime === "application/pdf" || extension === "pdf";
+  const mimes = [resource.mimeType, attachment.mimeType].filter(Boolean)
+    .map((v) => v!.trim().toLowerCase().split(";")[0]);
+  const extensions = [resource.fileExtension, attachment.fileExtension].filter(
+    Boolean,
+  )
+    .map((v) => v!.trim().toLowerCase().replace(/^\./, ""));
+  if (
+    mimes.some((v) =>
+      v !== "application/pdf" && v !== "application/octet-stream"
+    ) || extensions.some((v) => v !== "pdf")
+  ) return false;
+  // Current attachment metadata must independently provide PDF evidence.
+  return attachment.mimeType?.split(";")[0].trim().toLowerCase() ===
+      "application/pdf" || attachment.fileExtension === "pdf";
 }

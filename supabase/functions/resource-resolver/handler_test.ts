@@ -41,7 +41,7 @@ const kakao = (overrides: Record<string, unknown> = {}) => ({
   sourceResourceKey: "s1/s2",
   fileExtension: "pdf",
   currentTarget:
-    "https://blog.kakaocdn.net/dna/s1/s2/file.pdf?credential=x&expires=1&signature=y",
+    "https://blog.kakaocdn.net/dna/s1/s2/file.pdf?credential=x&expires=4102444800&signature=y",
   ...overrides,
 });
 
@@ -146,7 +146,7 @@ Deno.test("signed target rotation is accepted only as a current response target"
     observer([
       kakao({
         currentTarget:
-          "https://blog.kakaocdn.net/dna/s1/s2/file.pdf?credential=new&expires=2&signature=new",
+          "https://blog.kakaocdn.net/dna/s1/s2/file.pdf?credential=new&expires=4102444800&signature=new",
       }),
     ]),
   );
@@ -250,7 +250,7 @@ Deno.test("handler maps malformed input and never exposes network errors", async
     observe: async () => {
       throw new Error("raw signed target");
     },
-  });
+  }, { allow: async () => true });
   const bad = await handler(
     new Request("https://example.invalid", {
       method: "POST",

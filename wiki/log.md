@@ -2279,3 +2279,18 @@ records evidence, additional B1 deficiencies and restart requirements. Final B2
 scope includes Flutter integration, but none implemented past this stop. B1 offline
 10tests PASS; docs checks only, no new Flutter/build/security-matrix PASS claim.
 No code/schema/deploy/Production source or PDF requests; Owner files preserved.
+
+
+## 2026-09-25 — Materials PDF B2 candidate after Owner architecture decisions
+
+Starting6031fae; fixed numeric canonical source/no redirects, persisted provenance
+provider recovery, shared Postgres resource/global quota migration candidate.
+Guest four-resource CTA→resolver→Safe Open→existing Viewer now wired; signed PDF
+bytes/targets memory-only, no pdfrx URI cache; expiry retry re-resolves. index
+remains disabled. [Canonical B2 evidence/gates](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).
+Flutter788PASS/1skip, analyze/iOSsim/Androiddebug PASS, resolver-focused23 tests
+(including8 responsive cases), Deno48PASS, ingestion170PASS, parity/SQL-contract2PASS,
+SQL/PLpgSQL grammar PASS. Quota live concurrency/role tests NOT RUN; deployment
+requires independent Claude review and Owner migration/runtime acceptance.
+Secret/scope/diff/Wiki checks PASS. Production mutation/source/PDF requests0,
+Daily Sync Phase2 untouched. Owner iOS/untracked preserved; branch push authorized.

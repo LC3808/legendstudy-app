@@ -458,3 +458,15 @@ internal operational, learning, score, application/outcome, cohort, data-quality
 metric-registry, privacy/RBAC/audit and research workflows. Aggregate/cohort
 analysis is the default; individual raw-data browsing is not. No domain, schema,
 pipeline, data collection or admin implementation is authorized by this decision.
+
+
+## 2026-09-25 — Resolver fixed source and shared coarse quota
+
+Owner B2 Resume refines the existing ephemeral delivery decision: build only
+HTTPS legendstudy.com/numeric-id from canonical relations, reject all redirects,
+recover provider only from matching persisted unsigned provenance/key. A minimal
+resolver-only Postgres quota migration is authorized in repository, not Production.
+Use shared resource/global bounds when no trusted Guest actor is established;
+no fake per-user enforcement. No signed persistence, PDF mirroring or arbitrary
+URL input. Fixed-host DNS/TLS infrastructure residual must be reviewed explicitly;
+no unimplemented pinning claim. Cache optional. [Implementation and review gates](day-9-c-resource-detail.md#phase-b2-implementation-candidate--2026-09-25).
