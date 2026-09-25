@@ -428,8 +428,8 @@ neutral separators; approved mean position and all domain behavior remain fixed.
 ## 2026-09-25 — Materials direct PDF open is release-critical
 
 The core Materials journey is search → detail → problem PDF → answer/explanation
-PDF → immediate reading. Current implementation is Guest-accessible external
-safe-open only; an in-app PDF viewer, signed-URL re-resolution and verified
+PDF → immediate reading. Phase A now provides Guest-accessible in-app viewing for
+metadata-validated current PDF targets; signed-URL re-resolution and verified
 current-file availability are not implemented. The target is
 `Content → stable resource identity → safe-open resolver → current target →
 in-app viewer`, with original landing/source fallback. Direct source open is the

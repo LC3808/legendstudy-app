@@ -80,7 +80,11 @@ Future<void> capture(WidgetTester tester, String name) async {
 
 Widget app(Widget child, {double scale = 1}) => MaterialApp(
   theme: AppTheme.light.copyWith(
-    chipTheme: AppTheme.light.chipTheme.copyWith(labelStyle: AppTheme.light.chipTheme.labelStyle?.copyWith(fontFamily: 'CorePreview')),
+    chipTheme: AppTheme.light.chipTheme.copyWith(
+      labelStyle: AppTheme.light.chipTheme.labelStyle?.copyWith(
+        fontFamily: 'CorePreview',
+      ),
+    ),
     textTheme: AppTheme.light.textTheme.apply(fontFamily: 'CorePreview'),
   ),
   home: RepaintBoundary(
@@ -338,6 +342,7 @@ void main() {
             SingleChildScrollView(
               child: ResourceSection(
                 contentItemId: 'p',
+                contentSlug: 'p',
                 contentSourceUrl: 'https://legendstudy.com/1',
                 isArticle: false,
               ),

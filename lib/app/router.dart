@@ -15,6 +15,7 @@ import '../features/profile/presentation/profile_page.dart';
 import '../features/profile/presentation/settings_page.dart';
 import 'navigation_shell.dart';
 import '../features/content/presentation/content_detail_page.dart';
+import '../features/resources/presentation/pdf_viewer_page.dart';
 import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
@@ -46,6 +47,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/materials/:slug',
         builder: (_, state) =>
             ContentDetailPage(slug: state.pathParameters['slug']!),
+        routes: [
+          GoRoute(
+            path: 'resource/:resourceId',
+            builder: (_, state) => PdfViewerPage(
+              args: state.extra is PdfViewerRouteArgs
+                  ? state.extra as PdfViewerRouteArgs
+                  : null,
+            ),
+          ),
+        ],
       ),
       GoRoute(path: '/', redirect: (context, state) => '/home'),
       GoRoute(path: '/browse', redirect: (_, _) => '/materials'),

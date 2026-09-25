@@ -58,6 +58,12 @@ class ContentResource {
       : sourceLabel?.trim().isNotEmpty == true
       ? sourceLabel!
       : resourceTypeLabels[resourceType] ?? '기타';
+
+  /// PDF-ness comes from normalized resource metadata, never a title or URL
+  /// suffix alone. A landing page remains a page even when its URL ends in
+  /// `.pdf`; only a file target with PDF metadata can enter the viewer.
+  bool get isPdf =>
+      linkKind == 'file' && isPdfMetadata(mimeType, fileExtension);
   // Without a parent there is no original-post fallback.
   Uri? get openUri => resolveResourceDelivery(this, '').uri;
   factory ContentResource.fromJson(Map<String, dynamic> json) {
@@ -89,6 +95,13 @@ class ContentResource {
       groupLabel: label,
     );
   }
+}
+
+bool isPdfMetadata(String? mimeType, String? fileExtension) {
+  final mime = mimeType?.trim().toLowerCase().split(';').first;
+  if (mime == 'application/pdf') return true;
+  final extension = fileExtension?.trim().toLowerCase().replaceFirst('.', '');
+  return extension == 'pdf';
 }
 
 /// Delivery is navigation metadata, not a rights or live availability verdict.

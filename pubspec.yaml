@@ -21,6 +21,7 @@ dependencies:
   sign_in_with_apple: ^8.2.0
   crypto: ^3.0.7
   image_picker: ^1.2.3
+  pdfrx: ^2.6.5
 
 dev_dependencies:
   flutter_test:

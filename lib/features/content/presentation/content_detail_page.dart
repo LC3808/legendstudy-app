@@ -129,9 +129,8 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
       if (mounted && !_recentFailureShown) {
         _recentFailureShown = true;
         // A recent view is auxiliary; never replace the resolved detail.
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('최근 본 자료를 기록하지 못했어요.')));
       }
     }
   }
@@ -208,6 +207,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                         const SizedBox(height: 16),
                         ResourceSection(
                           contentItemId: item.id,
+                          contentSlug: item.slug,
                           contentSourceUrl: item.sourceUrl,
                           isArticle: [
                             'education_column',

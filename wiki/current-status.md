@@ -136,10 +136,10 @@ free custom-time polish/subject-score structure and cross-device result history.
 Existing safe scoring is not a claim of full catalogue coverage.
 
 Next session priority (no implementation starts in this closeout):
-1. Materials direct PDF open is release-critical; audit current external-only
-   delivery and define the safe resolver/viewer/re-resolution milestone. Daily
-   Sync Phase 2 remains Owner-gated; no Production write/migration/scheduler/
-   cron/publication.
+1. Materials direct PDF Phase A automated validation is PASS with `pdfrx` 2.6.5;
+   Owner iOS/Android device PDF acceptance remains NOT VERIFIED. Phase B signed-
+   target re-resolution is planned. Daily Sync Phase 2 remains Owner-gated; no
+   Production write/migration/scheduler/cron/publication.
 2. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
 3. Longitudinal architecture review when Score/Application/Outcome design starts;
    first read the canonical strategy, preserve history/context/provenance/privacy.

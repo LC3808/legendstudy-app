@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/core/links/external_link.dart';
 import 'package:legendstudy_app/features/resources/domain/content_resource.dart';
+import 'package:legendstudy_app/features/resources/presentation/pdf_viewer_page.dart';
 
 import 'day6_ui_test.dart' show resource;
 
@@ -32,6 +33,62 @@ void main() {
       expect(unknown.uri.toString(), source);
     },
   );
+  test('PDF detection uses MIME or extension metadata only', () {
+    expect(isPdfMetadata('application/pdf', null), isTrue);
+    expect(isPdfMetadata('application/pdf; charset=binary', null), isTrue);
+    expect(isPdfMetadata(null, 'PDF'), isTrue);
+    expect(isPdfMetadata(null, null), isFalse);
+    expect(isPdfMetadata('audio/mpeg', 'mp3'), isFalse);
+    expect(isPdfMetadata(null, null), isFalse);
+  });
+  for (final type in [
+    'question',
+    'answer',
+    'explanation',
+    'answer_explanation',
+  ]) {
+    test('$type PDF metadata is eligible for the internal viewer', () {
+      final item = ContentResource(
+        id: type,
+        contentItemId: 'parent',
+        resourceType: type,
+        title: type,
+        sourceUrl: source,
+        linkKind: 'file',
+        fileUrl: 'https://files.example.test/$type',
+        mimeType: 'application/pdf',
+      );
+      expect(item.isPdf, isTrue);
+      expect(
+        resolveResourceDelivery(item, source).kind,
+        ResourceDeliveryKind.externalFile,
+      );
+    });
+  }
+  test('landing PDF suffix and non-PDF file remain outside the viewer', () {
+    final landing = ContentResource(
+      id: 'landing',
+      contentItemId: 'parent',
+      resourceType: 'question',
+      title: 'landing',
+      sourceUrl: 'https://files.example.test/paper.pdf',
+      linkKind: 'landing_page',
+      fileExtension: 'pdf',
+    );
+    final audio = ContentResource(
+      id: 'audio',
+      contentItemId: 'parent',
+      resourceType: 'listening_audio',
+      title: 'audio',
+      sourceUrl: source,
+      linkKind: 'file',
+      fileUrl: 'https://files.example.test/audio',
+      mimeType: 'audio/mpeg',
+      fileExtension: 'mp3',
+    );
+    expect(landing.isPdf, isFalse);
+    expect(audio.isPdf, isFalse);
+  });
   for (final invalid in <String?>[
     null,
     '',
@@ -189,4 +246,29 @@ void main() {
       expect(calls, 2);
     },
   );
+
+  testWidgets('invalid viewer target has safe retry/fallback UX', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: PdfViewerPage(
+          args: PdfViewerRouteArgs(
+            title: '문제지',
+            delivery: ResourceDelivery(
+              kind: ResourceDeliveryKind.unavailable,
+              uri: null,
+              label: '열 수 없음',
+              description: 'unavailable',
+              sourceFallback: Uri.parse('https://legendstudy.com/1'),
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(find.text('문제지'), findsOneWidget);
+    expect(find.text('자료를 바로 열 수 없어요.'), findsOneWidget);
+    expect(find.text('다시 시도'), findsOneWidget);
+    expect(find.text('원문에서 보기'), findsOneWidget);
+  });
 }

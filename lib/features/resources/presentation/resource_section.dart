@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../domain/content_resource.dart';
+import 'pdf_viewer_page.dart';
 import '../resource_providers.dart';
 
 class ResourceSection extends ConsumerWidget {
   const ResourceSection({
     required this.contentItemId,
+    required this.contentSlug,
     required this.contentSourceUrl,
     required this.isArticle,
     this.onMeaningfulAction,
     super.key,
   });
   final String contentItemId;
+  final String contentSlug;
   final String contentSourceUrl;
   final bool isArticle;
   final VoidCallback? onMeaningfulAction;
@@ -88,6 +92,8 @@ class ResourceSection extends ConsumerWidget {
                                 Text(item.sourceLabel!),
                               _ResourceDeliveryActions(
                                 key: ValueKey(item.id),
+                                contentSlug: contentSlug,
+                                resource: item,
                                 delivery: resolveResourceDelivery(
                                   item,
                                   contentSourceUrl,
@@ -108,25 +114,54 @@ class ResourceSection extends ConsumerWidget {
 
 class _ResourceDeliveryActions extends StatelessWidget {
   const _ResourceDeliveryActions({
+    required this.contentSlug,
+    required this.resource,
     required this.delivery,
     this.onOpenAttempted,
     super.key,
   });
+  final String contentSlug;
+  final ContentResource resource;
   final ResourceDelivery delivery;
   final VoidCallback? onOpenAttempted;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(delivery.description),
+      Text(
+        resource.isPdf && delivery.kind == ResourceDeliveryKind.externalFile
+            ? '앱에서 자료를 엽니다.'
+            : delivery.description,
+      ),
       if (delivery.uri != null) ...[
         // Display the host only: paths/queries can carry transient credentials.
-        Text('이동할 사이트: ${delivery.uri!.host}'),
-        ExternalLinkButton(
-          uri: delivery.uri,
-          label: delivery.label,
-          onOpenAttempted: onOpenAttempted,
-        ),
+        if (!(resource.isPdf &&
+            delivery.kind == ResourceDeliveryKind.externalFile))
+          Text('이동할 사이트: ${delivery.uri!.host}'),
+        if (resource.isPdf &&
+            delivery.kind == ResourceDeliveryKind.externalFile)
+          TextButton.icon(
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            label: Text(
+              '${resourceTypeLabels[resource.resourceType] ?? '자료'} 보기',
+            ),
+            onPressed: () {
+              onOpenAttempted?.call();
+              context.push(
+                '/materials/${Uri.encodeComponent(contentSlug)}/resource/${Uri.encodeComponent(resource.id)}',
+                extra: PdfViewerRouteArgs(
+                  title: resource.displayTitle,
+                  delivery: delivery,
+                ),
+              );
+            },
+          )
+        else
+          ExternalLinkButton(
+            uri: delivery.uri,
+            label: delivery.label,
+            onOpenAttempted: onOpenAttempted,
+          ),
       ],
       if (delivery.sourceFallback != null)
         ExternalLinkButton(

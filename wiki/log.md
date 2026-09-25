@@ -2187,6 +2187,19 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
   direction in canonical routing/decision documents. No code, DB, Storage or
   Production change.
 
+## 2026-09-25 — Materials Direct PDF Phase A
+
+- Added one `pdfrx` 2.6.5 MIT dependency and an internal
+  `/materials/:slug/resource/:resourceId` viewer route. PDF entry requires safe
+  HTTP(S) file delivery plus PDF MIME/extension metadata; question, answer,
+  explanation and answer/explanation retain their existing resource types.
+- Non-PDF and audio resources retain external safe-open. Viewer loading/error,
+  retry, safe original-source fallback and Guest access are covered by focused
+  tests; recent-view open-attempt behavior is reused without a new analytics
+  schema. Full Flutter validation is 765 PASS / 1 existing skip; analyzer,
+  iOS simulator and Android debug builds pass. Owner device PDF acceptance is
+  still NOT VERIFIED. Phase B re-resolution remains planned.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,

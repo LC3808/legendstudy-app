@@ -13,12 +13,13 @@ is retained below; C2/C3 and the current delivery increment are separate records
 
 ## Release-critical direct-open audit — 2026-09-25
 
-`MATERIALS_DIRECT_PDF_OPEN` is release-critical. The verified current flow is
-Materials search → `/materials/:slug` `ContentDetailPage` → `ResourceSection` →
-`resolveResourceDelivery` → `ExternalLinkButton` → `url_launcher` with
-`LaunchMode.externalApplication`. There is no in-app PDF viewer or PDF route in
-the repository, so the current journey ends in the external browser/file handler;
-it is not yet the target “앱에서 즉시 열람” experience.
+`MATERIALS_DIRECT_PDF_OPEN` is release-critical. Phase A now routes a metadata-
+validated PDF through Materials search → `/materials/:slug` `ContentDetailPage`
+→ `ResourceSection` → `resolveResourceDelivery` → internal
+`/materials/:slug/resource/:resourceId` `PdfViewerPage`. Non-PDF resources still
+use `ExternalLinkButton`/`url_launcher` with `LaunchMode.externalApplication`.
+Automated validation passes; Owner iOS/Android device PDF acceptance remains
+NOT VERIFIED.
 
 The public resource model contains `resource_type`, `title`, `source_label`,
 `source_url`, `link_kind`, optional `file_url`, MIME/extension/size, display
@@ -26,11 +27,12 @@ order and active status. `question`, `answer`, `explanation`,
 `answer_explanation` and `listening_audio` are distinguishable metadata. The app
 does not infer authority or PDF-ness from a filename or suffix.
 
-`file` opens only a query-free HTTP(S) `file_url`; `landing_page` opens the
-resource `source_url`; unknown/invalid targets fall back to the parent original
-source. Auth/transient query names, fragments, userinfo and unsafe schemes are
-rejected. Kakao signed/current URL re-resolution is not implemented: stale or
-expired targets have no refresh path and use the source fallback when available.
+`file` opens only a query-free HTTP(S) `file_url`; a PDF viewer target additionally
+requires `application/pdf` MIME or `pdf` extension metadata. `landing_page` opens
+the resource `source_url`; unknown/invalid targets fall back to the parent
+original source. Auth/transient query names, fragments, userinfo and unsafe
+schemes are rejected. Kakao signed/current URL re-resolution is not implemented:
+stale or expired targets use Phase A failure UX and source fallback when available.
 No raw token/query is displayed or logged. The launcher accepts any validated
 HTTP(S) host rather than an explicit LegendStudy/provider allowlist; redirects
 and remote availability are not verified locally.
@@ -42,11 +44,14 @@ successful bookmark; an open attempt counts intent, not confirmed PDF reading.
 The current failure UX is inline “외부 링크를 열지 못했어요. 다시 시도해 주세요.”
 with source fallback where available.
 
-Target architecture: `Content → stable resource identity → safe-open resolver →
-current valid target → in-app PDF viewer`, with re-resolution through a trusted
-backend/source refresh path and original landing-page fallback. Do not mirror or
-rehost externally hosted PDFs without a separate rights decision. New viewer or
-resolver implementation is not part of this audit.
+Phase A uses `pdfrx` `^2.6.5` (MIT; Android/iOS; remote `PdfViewer.uri`, zoom,
+scroll and loading/error hooks). It was selected over Syncfusion's Community/
+Commercial license requirement and the narrower `flutter_pdfview` feature/
+maintenance profile. No annotation, download manager, share, print or PDF byte
+mirroring is implemented. Target architecture remains
+`Content → stable resource identity → safe-open resolver → current valid target
+→ in-app PDF viewer`, with trusted backend/source re-resolution planned for
+Phase B and original landing-page fallback.
 
 ## Current delivery contract — 2026-09-20
 
