@@ -54,3 +54,17 @@ border token, elevation0. Secondary date/neutral delete and primary title retain
 No taxonomy, layout, navigation, persistence or deletion behavior changed. Home
 mode excluded from the new badge/border treatment. Analyze/focused26PASS including
 8 responsive combinations; device recheck pending. [Design override](design-system.md#savedrecent-card-hierarchy--owner-override-2026-09-25).
+
+
+## Final badge semantics and style — 2026-09-25
+
+Owner supersedes the broad mock label on individual saved/recent cards:
+national_mock→학력평가, evaluation_mock→모의평가, csat→수능. Unknown/missing→시험 자료.
+Existing canonical exam_type only; no month/title/grade inference or new taxonomy.
+Shared materialTypeLabel preciseExam option is used by both personal-list surfaces;
+search retains broad 모의고사 discovery labeling/filter. Non-exam mapping unchanged.
+Badge now light neutral with navy border/primary text, existing size/spacing.
+Prior card depth/layout/persistence unchanged; Home mode excluded. Analyze/focused
+51PASS including saved/recent exact labels, unknown fallback, responsive8 cases
+and search regression. Other Materials/PDF Owner PASS; last badge device pending.
+[Final visual override](design-system.md#savedrecent-final-badge-polish--2026-09-25).

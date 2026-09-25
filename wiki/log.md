@@ -2352,3 +2352,11 @@ Existing navy/white tokens for compact badges; white card with subtle existing
 border and elevation0. Same shared component in both MY lists; no behavior change.
 Analyze/focused26PASS (8 responsive cases), diff/Wiki PASS. Device pending.
 [Scoped design override](design-system.md#savedrecent-card-hierarchy--owner-override-2026-09-25).
+
+
+## 2026-09-25 — Saved/recent final badge polish
+
+Owner accepts remaining Materials UI/PDF. Only badge changes: light neutral/navy
+outline and canonical exam_type→학력평가/모의평가/수능; safe unknown fallback.
+Broad search filter unchanged. Analyze/focused51/diff/Wiki PASS, final badge device
+pending. [Handoff](day-9-c-personal-lists.md#final-badge-semantics-and-style--2026-09-25).

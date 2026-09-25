@@ -151,21 +151,22 @@ void main() {
           );
           await tester.pumpAndSettle();
           final badge = find.byType(ContentTypeBadge);
-          expect(tester.widget<ContentTypeBadge>(badge).emphasized, isTrue);
+          expect(tester.widget<ContentTypeBadge>(badge).outlined, isTrue);
           final marker = find.descendant(
             of: badge,
             matching: find.byType(Container),
           );
           final box =
               tester.widget<Container>(marker).decoration! as BoxDecoration;
-          expect(box.color, AppTokens.textPrimary);
+          expect(box.color, AppTokens.background);
+          expect((box.border! as Border).top.color, AppTokens.textPrimary);
           final badgeText = find.descendant(
             of: badge,
             matching: find.byType(Text),
           );
           expect(
             tester.widget<Text>(badgeText).style!.color,
-            AppTokens.surface,
+            AppTokens.textPrimary,
           );
           final card = tester.widget<Card>(find.byType(Card).first);
           expect(card.color, AppTokens.surface);
@@ -203,6 +204,18 @@ void main() {
       );
     }
     expect(materialTypeLabel('exam'), '시험 자료');
+    for (final pair in [
+      ('national_mock', '학력평가'),
+      ('evaluation_mock', '모의평가'),
+      ('csat', '수능'),
+      ('unknown', '시험 자료'),
+    ]) {
+      expect(
+        materialTypeLabel('exam', examType: pair.$1, preciseExam: true),
+        pair.$2,
+      );
+    }
+    expect(materialTypeLabel('exam', preciseExam: true), '시험 자료');
     expect(materialTypeLabel('university_essay'), '논술');
     expect(materialTypeLabel('study_material'), '학습자료');
   });
@@ -255,7 +268,13 @@ void main() {
         expect(
           find.descendant(
             of: find.byType(ContentTypeBadge),
-            matching: find.text(type == 'csat' ? '수능' : '모의고사'),
+            matching: find.text(
+              type == 'csat'
+                  ? '수능'
+                  : type == 'national_mock'
+                  ? '학력평가'
+                  : '모의평가',
+            ),
           ),
           findsOneWidget,
         );

@@ -8,9 +8,15 @@ const contentTypeLabels = {
 };
 
 /// Uses canonical exam metadata, never title parsing. Unknown exams stay generic.
-String materialTypeLabel(String type, {String? examType}) {
+String materialTypeLabel(
+  String type, {
+  String? examType,
+  bool preciseExam = false,
+}) {
   if (type == 'exam') {
     if (examType == 'csat') return '수능';
+    if (preciseExam && examType == 'national_mock') return '학력평가';
+    if (preciseExam && examType == 'evaluation_mock') return '모의평가';
     if (examType == 'national_mock' || examType == 'evaluation_mock') {
       return '모의고사';
     }

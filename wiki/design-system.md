@@ -321,3 +321,15 @@ without added shadow. Date/delete are textSecondary, title textPrimary. No layou
 navigation or persistence changes; Home mode and other badge surfaces keep their
 previous treatment. Responsive widget checks cover both lists360/428px at1×/2×,
 text/icon non-overlap and overflow. Analyze/focused26PASS; Owner device pending.
+
+
+## Saved/recent final badge polish — 2026-09-25
+
+Latest Owner override supersedes the navy-filled badge above: background uses
+AppTokens.background, 1px border/text use AppTokens.textPrimary. Existing small
+padding/type size stays; title is the primary focus. White card/border/elevation
+remain accepted and unchanged. Shared outlined badge applies to MY saved/recent
+only, all categories equally; no per-type colors or Home/search redesign.
+Owner reports all other Materials UI/PDF acceptance PASS. This last badge change
+is locally validated, device recheck pending. Analyze + focused51PASS; eight
+saved/recent360/428px ×1×/2× widget geometry/style checks, no overflow/collision.

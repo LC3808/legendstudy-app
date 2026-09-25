@@ -7,11 +7,12 @@ class ContentTypeBadge extends StatelessWidget {
   const ContentTypeBadge(
     this.type, {
     this.examType,
-    this.emphasized = false,
+    this.outlined = false,
+    this.preciseExam = false,
     super.key,
   });
   final String type;
-  final bool emphasized;
+  final bool outlined, preciseExam;
   final String? examType;
   @override
   Widget build(BuildContext context) => Align(
@@ -19,14 +20,14 @@ class ContentTypeBadge extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: emphasized ? AppTokens.textPrimary : AppTokens.background,
+        color: AppTokens.background,
+        border: outlined ? Border.all(color: AppTokens.textPrimary) : null,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        materialTypeLabel(type, examType: examType),
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-          color: emphasized ? AppTokens.surface : AppTokens.textPrimary,
-        ),
+        materialTypeLabel(type, examType: examType, preciseExam: preciseExam),
+        style: Theme.of(context).textTheme.labelMedium
+            ?.copyWith(color: AppTokens.textPrimary),
       ),
     ),
   );

@@ -265,7 +265,8 @@ class _PersonalMaterialCard extends ConsumerWidget {
                         ContentTypeBadge(
                           item.contentType,
                           examType: examType,
-                          emphasized: !homeMode,
+                          outlined: !homeMode,
+                          preciseExam: !homeMode,
                         ),
                         const SizedBox(height: 2),
                         Text(
