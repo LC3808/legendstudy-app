@@ -655,7 +655,8 @@ def _atomic_write_json(path: Path, payload: dict) -> None:
 
 
 def write_delta_artifacts(result: DeltaRun, output_dir: Path,
-                          state_path: Path | None = None) -> tuple[Path, Path, Path | None]:
+                          state_path: Path | None = None,
+                          summary_extra: dict | None = None) -> tuple[Path, Path, Path | None]:
     """Finalize both redacted artifacts, then atomically advance local state."""
     output_dir = Path(output_dir)
     parent = output_dir.parent
@@ -663,7 +664,10 @@ def write_delta_artifacts(result: DeltaRun, output_dir: Path,
     temp_dir = Path(tempfile.mkdtemp(prefix=f'.{output_dir.name}.', dir=str(parent)))
     try:
         summary_path = temp_dir / 'delta-run-summary.json'
-        summary_path.write_text(_canonical_json(result.summary()) + '\n', encoding='utf-8')
+        summary = result.summary()
+        if summary_extra:
+            summary.update(summary_extra)
+        summary_path.write_text(_canonical_json(summary) + '\n', encoding='utf-8')
         candidates_path = temp_dir / 'delta-candidates.jsonl'
         with candidates_path.open('w', encoding='utf-8') as handle:
             for candidate in result.candidates:

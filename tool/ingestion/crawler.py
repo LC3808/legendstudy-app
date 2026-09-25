@@ -17,6 +17,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
+from xml.etree import ElementTree
 from pathlib import Path
 from typing import Callable
 from urllib.parse import urlsplit
@@ -46,6 +47,13 @@ POST_URL = re.compile(r'^https://legendstudy\.com/(\d+)$')
 LOC = re.compile(r'<loc>\s*([^<\s]+)\s*</loc>', re.I)
 
 
+@dataclass(frozen=True)
+class SitemapEntry:
+    """Numeric source identity plus optional discovery-only lastmod hint."""
+    external_post_id: str
+    lastmod: str | None = None
+
+
 class FetchError(Exception):
     """Transport-level failure. Distinct from a malformed-source parse failure."""
 
@@ -54,6 +62,37 @@ class FetchError(Exception):
         self.url = url
         self.reason = reason
         self.transient = transient
+
+
+class BudgetExceeded(RuntimeError):
+    """Raised before an attempt would exceed the hard per-run ceiling."""
+
+
+@dataclass
+class RequestBudget:
+    """Attempt-level request accounting shared by discovery and retries."""
+    ceiling: int = 24
+    requests: int = 0
+    retries: int = 0
+
+    def reserve(self, request_label: str, *, retry: bool = False) -> None:
+        if self.requests >= self.ceiling:
+            raise BudgetExceeded(request_label)
+        self.requests += 1
+        if retry:
+            self.retries += 1
+
+    @property
+    def remaining(self) -> int:
+        return max(0, self.ceiling - self.requests)
+
+    def as_dict(self) -> dict:
+        return {
+            'ceiling': self.ceiling,
+            'requests': self.requests,
+            'retries': self.retries,
+            'remaining': self.remaining,
+        }
 
 
 def robots_allows(path: str) -> bool:
@@ -79,11 +118,13 @@ class PoliteFetcher:
                  timeout: int = DEFAULT_TIMEOUT_SECONDS,
                  max_retries: int = DEFAULT_MAX_RETRIES,
                  max_requests: int | None = None,
+                 request_budget: RequestBudget | None = None,
                  on_retry: Callable[[str, int, str], None] | None = None) -> None:
         self.delay = delay
         self.timeout = timeout
         self.max_retries = max_retries
         self.max_requests = max_requests
+        self.request_budget = request_budget
         self.on_retry = on_retry
         self.stats = FetchStats()
         self._last = 0.0
@@ -104,6 +145,11 @@ class PoliteFetcher:
         while True:
             if self.max_requests is not None and self.stats.requests >= self.max_requests:
                 raise FetchError(url, 'run request budget exhausted', transient=False)
+            try:
+                if self.request_budget is not None:
+                    self.request_budget.reserve(request_label, retry=attempt > 0)
+            except BudgetExceeded as exc:
+                raise FetchError(url, 'run request budget exhausted', transient=False) from exc
             self._wait()
             self.stats.requests += 1
             req = urllib.request.Request(url, headers={
@@ -136,19 +182,54 @@ class PoliteFetcher:
             time.sleep(self.delay * (2 ** attempt))
 
 
+def _xml_local_name(tag: str) -> str:
+    return tag.rsplit('}', 1)[-1].lower()
+
+
+def sitemap_entries(xml: str) -> list[SitemapEntry]:
+    """Parse numeric sitemap entries without treating lastmod as a delta."""
+    try:
+        root = ElementTree.fromstring(xml)
+    except ElementTree.ParseError:
+        # Preserve the historical test/sample contract for a loc fragment
+        # while structured sitemap documents use the lastmod-aware parser.
+        fallback: dict[str, None] = {}
+        for loc in LOC.findall(xml):
+            match = POST_URL.match(loc.strip())
+            if match:
+                fallback[match.group(1)] = None
+        return [SitemapEntry(post_id, None)
+                for post_id in sorted(fallback, key=lambda value: int(value))]
+    by_id: dict[str, str | None] = {}
+    for url_node in root.iter():
+        if _xml_local_name(url_node.tag) != 'url':
+            continue
+        loc = None
+        lastmod = None
+        for child in url_node:
+            name = _xml_local_name(child.tag)
+            if name == 'loc':
+                loc = (child.text or '').strip()
+            elif name == 'lastmod':
+                lastmod = (child.text or '').strip() or None
+        if not loc:
+            continue
+        match = POST_URL.match(loc)
+        if not match:
+            continue
+        post_id = match.group(1)
+        previous = by_id.get(post_id)
+        # Duplicate locs are not source identity changes. Keep the
+        # deterministic greatest hint for selection.
+        by_id[post_id] = max(filter(None, (previous, lastmod)), default=None)
+    return [SitemapEntry(post_id, by_id[post_id])
+            for post_id in sorted(by_id, key=lambda value: int(value))]
+
+
 def sitemap_post_ids(xml: str) -> list[int]:
     """Numeric post ids from sitemap.xml, newest id first, deduplicated."""
-    ids: list[int] = []
-    seen: set[int] = set()
-    for loc in LOC.findall(xml):
-        m = POST_URL.match(loc.strip())
-        if m:
-            value = int(m.group(1))
-            if value not in seen:
-                seen.add(value)
-                ids.append(value)
-    ids.sort(reverse=True)
-    return ids
+    return sorted((int(entry.external_post_id) for entry in sitemap_entries(xml)),
+                  reverse=True)
 
 
 class NetworkSource:

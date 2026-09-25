@@ -2160,6 +2160,18 @@ Secret signature scan430 text reads/0 flagged files and final diff checks PASS.
 - Existing B1 contracts remain unchanged. Status is READY FOR INDEPENDENT
   RE-REVIEW; B2 remains not started. No Production crawl/write or publication.
 
+## 2026-09-25 — Daily Sync Phase 1-B2 offline discovery
+
+- Added sitemap `lastmod` discovery hints, metadata-only RSS/Atom parsing with
+  no guessed live endpoint, deterministic numeric candidate priority/dedup,
+  wrap-around reconciliation cursor, and retry-inclusive 24-attempt budget.
+- Connected selected landing-page observations to the existing B1 delta engine;
+  no attachment fetch or source crawl was executed. Added offline discovery
+  fixtures and eight B2 tests covering cursor, priority, feed/sitemap parsing,
+  budget exhaustion and artifact/cursor integration.
+- B2 offline validation passed. Bounded source dry-run remains Owner-gated and
+  unverified; Phase 2 remains not started.
+
 ## 2026-09-24 — End-of-day canonical handoff
 
 App closeout baseline320c7fa on codex/day-7-school-neis; this is historical evidence,
