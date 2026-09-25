@@ -309,3 +309,15 @@ Future Wiki maintenance only: move historical design evidence into history while
 keeping current canonical policy discoverable and links intact. No refactor or
 historical deletion in this closeout. UI acceptance does not close feature/data,
 Mock catalogue, analytics or Production release gates.
+
+
+## Saved/recent card hierarchy — Owner override 2026-09-25
+
+Scoped override for MY saved/recent only: shared ContentTypeBadge emphasized mode
+uses existing textPrimary navy background and surface white text at the existing
+small label size. Every category uses the same style. Shared personal card retains
+white, radiusMd and elevation0; existing majorSurfaceBorder adds a subtle boundary
+without added shadow. Date/delete are textSecondary, title textPrimary. No layout,
+navigation or persistence changes; Home mode and other badge surfaces keep their
+previous treatment. Responsive widget checks cover both lists360/428px at1×/2×,
+text/icon non-overlap and overflow. Analyze/focused26PASS; Owner device pending.

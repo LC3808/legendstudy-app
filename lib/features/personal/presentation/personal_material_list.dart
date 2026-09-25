@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../content/presentation/content_type_badge.dart';
 import '../../content/presentation/material_display_title.dart';
@@ -228,6 +229,13 @@ class _PersonalMaterialCard extends ConsumerWidget {
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0,
+        color: AppTokens.surface,
+        shape: homeMode
+            ? null
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+                side: const BorderSide(color: AppTokens.majorSurfaceBorder),
+              ),
         child: Semantics(
           button: true,
           label: '$displayTitle, $label 자료 열기',
@@ -254,11 +262,16 @@ class _PersonalMaterialCard extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ContentTypeBadge(item.contentType, examType: examType),
+                        ContentTypeBadge(
+                          item.contentType,
+                          examType: examType,
+                          emphasized: !homeMode,
+                        ),
                         const SizedBox(height: 2),
                         Text(
                           '$label ${timestamp.year}.${timestamp.month.toString().padLeft(2, '0')}.${timestamp.day.toString().padLeft(2, '0')}',
-                          style: Theme.of(context).textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(color: AppTokens.textSecondary),
                         ),
                       ],
                     ),
@@ -269,7 +282,8 @@ class _PersonalMaterialCard extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             displayTitle,
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(color: AppTokens.textPrimary),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -277,6 +291,7 @@ class _PersonalMaterialCard extends ConsumerWidget {
                         if (onDelete != null)
                           IconButton(
                             tooltip: '최근 본 자료 삭제',
+                            color: AppTokens.textSecondary,
                             onPressed: onDelete,
                             icon: const Icon(Icons.delete_outline),
                           ),

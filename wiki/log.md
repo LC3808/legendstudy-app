@@ -2344,3 +2344,11 @@ Shared mock/evaluation title shortening across search/detail/saved/recent/materi
 cards; source label 닷컴; canonical exam_type badges including CSAT 수능. Existing
 personal data unchanged. Analyze/focused72/diff/Wiki PASS. Owner UI recheck pending;
 no EOD closeout. [Evidence](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).
+
+
+## 2026-09-25 — Saved/recent minimal visual hierarchy
+
+Existing navy/white tokens for compact badges; white card with subtle existing
+border and elevation0. Same shared component in both MY lists; no behavior change.
+Analyze/focused26PASS (8 responsive cases), diff/Wiki PASS. Device pending.
+[Scoped design override](design-system.md#savedrecent-card-hierarchy--owner-override-2026-09-25).

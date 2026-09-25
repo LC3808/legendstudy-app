@@ -1,3 +1,4 @@
+import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/exams/exam_providers.dart';
 import 'package:legendstudy_app/features/exams/domain/exam_metadata.dart';
 import 'package:legendstudy_app/features/content/presentation/content_type_badge.dart';
@@ -110,6 +111,89 @@ ProviderContainer listContainer({
 );
 
 void main() {
+  for (final kind in PersonalListKind.values) {
+    for (final width in [360.0, 428.0]) {
+      for (final scale in [1.0, 2.0]) {
+        testWidgets('personal card hierarchy $kind $width $scale', (
+          tester,
+        ) async {
+          tester.view.physicalSize = Size(width, width == 360 ? 640 : 926);
+          tester.view.devicePixelRatio = 1;
+          addTearDown(tester.view.resetPhysicalSize);
+          addTearDown(tester.view.resetDevicePixelRatio);
+          const title = '긴 학습자료 제목과 과목별 설명을 표시해도 삭제 아이콘과 겹치지 않는 자료';
+          await tester.pumpWidget(
+            ProviderScope(
+              overrides: [
+                authStateProvider.overrideWith(
+                  (ref) => Stream.value(const AuthStatus('a')),
+                ),
+                bookmarkRepositoryProvider.overrideWithValue(
+                  ListBookmarkRepository([entry('a', 15)]),
+                ),
+                recentViewRepositoryProvider.overrideWithValue(
+                  ListRecentRepository([entry('a', 15)]),
+                ),
+                contentRepositoryProvider.overrideWithValue(
+                  BatchContentRepository([content('a', title)]),
+                ),
+              ],
+              child: MaterialApp(
+                theme: AppTheme.light,
+                builder: (context, child) => MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: TextScaler.linear(scale)),
+                  child: child!,
+                ),
+                home: PersonalMaterialListPage(kind: kind),
+              ),
+            ),
+          );
+          await tester.pumpAndSettle();
+          final badge = find.byType(ContentTypeBadge);
+          expect(tester.widget<ContentTypeBadge>(badge).emphasized, isTrue);
+          final marker = find.descendant(
+            of: badge,
+            matching: find.byType(Container),
+          );
+          final box =
+              tester.widget<Container>(marker).decoration! as BoxDecoration;
+          expect(box.color, AppTokens.textPrimary);
+          final badgeText = find.descendant(
+            of: badge,
+            matching: find.byType(Text),
+          );
+          expect(
+            tester.widget<Text>(badgeText).style!.color,
+            AppTokens.surface,
+          );
+          final card = tester.widget<Card>(find.byType(Card).first);
+          expect(card.color, AppTokens.surface);
+          expect(card.elevation, 0);
+          expect(
+            (card.shape! as RoundedRectangleBorder).side.color,
+            AppTokens.majorSurfaceBorder,
+          );
+          final titleRect = tester.getRect(find.text(title));
+          final badgeRect = tester.getRect(badgeText);
+          expect(badgeRect.bottom <= titleRect.top, isTrue);
+          expect(badgeRect.right <= width, isTrue);
+          if (kind == PersonalListKind.recentViews) {
+            final delete = find.byWidgetPredicate(
+              (w) => w is IconButton && w.tooltip == '최근 본 자료 삭제',
+            );
+            expect(titleRect.right <= tester.getRect(delete).left, isTrue);
+            expect(
+              tester.widget<IconButton>(delete).color,
+              AppTokens.textSecondary,
+            );
+          }
+          expect(tester.takeException(), isNull);
+        });
+      }
+    }
+  }
+
   test('canonical material labels match search categories', () {
     expect(materialTypeLabel('exam', examType: 'csat'), '수능');
     for (final type in ['national_mock', 'evaluation_mock']) {

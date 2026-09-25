@@ -49,8 +49,8 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 ## Local automated validation
 
 Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. B2 candidate:
-**Prior UI cleanup795 Flutter PASS /1 existing skip. Title/badge correction:
-analyze + focused72PASS; full suite not rerun.** Previous B2
+**Prior UI cleanup795 Flutter PASS /1 existing skip. Personal-card polish:
+analyze + focused26PASS; full not rerun.** Previous B2
 iOS simulator / Android debug builds PASS; not rerun for this presentation task. Resolver-focused23 tests include8 responsive loading/error/retry
 cases at360×640/428×926,1×/2×. Prior B2 Deno48PASS (resolver23), ingestion170PASS,
 Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
@@ -144,7 +144,7 @@ Current release priority:
    problem/answer PDFs in-app and Production resolver resolved/pdf PASS. This
    supersedes prior failure/redeploy checkpoints. Quota600/min global,12/min resource
    and accepted Guest cost risk unchanged. Materials title/header/subject-group/source
-   button cleanup and shared titles/canonical exam badges: **AUTOMATED PASS / OWNER
+   button cleanup, shared titles/badges and personal-card contrast: **AUTOMATED PASS / OWNER
    DEVICE NOT VERIFIED**; no resolver changes.
    [Current acceptance and cleanup](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).
    Next: Owner UI verification, then separate EOD closeout (not done here).
