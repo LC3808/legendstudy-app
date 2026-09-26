@@ -2486,3 +2486,16 @@ only the observed failure boundary. Tool usage should be appropriate rather than
 minimized for its own sake; avoid repeated investigation and speculative
 over-engineering. Full closeout and canonical device command:
 [eod-2026-09-25.md](eod-2026-09-25.md).
+
+
+### 2026-09-26 — Recent Updates ordering and1710 recognition/HOLD
+
+Recent feed now uses full published_at DESC + existing id DESC across all active
+types, leaving search unchanged. Nine observed foreign-language/Hanmun raw labels
+recognized without canonical-ID invention.1710 unknown18→0; taxonomy gaps9,
+medium/notpublishable; Owner explicitly chose HOLD pending taxonomy approval.
+Plan1/1/1/33/67 not applied; accepted26 state unchanged. Flutter analyze and51
+focused Flutter tests,181 ingestion +38 focused Python tests PASS. Details and
+operator dry-run in [rollout](materials-data-rollout.md#recent-publication-ordering-and-1710-hold--2026-09-26).
+Historical current-status sections moved without evidence loss to existing history.
+Production write0; no migration,1618,PDF,OAuth or UI redesign.

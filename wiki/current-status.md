@@ -48,17 +48,11 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 
 ## Local automated validation
 
-Canonical ./tool/flutterw: Flutter3.47.5 stable / Dart3.13.4. B2 candidate:
-**Prior UI cleanup795 Flutter PASS /1 existing skip. Badge/MY polish:
-analyze + focused19/render12PASS; full not rerun.** Previous B2
-iOS simulator / Android debug builds PASS; not rerun for this presentation task. Resolver-focused23 tests include8 responsive loading/error/retry
-cases at360×640/428×926,1×/2×. Prior B2 Deno48PASS (resolver23), ingestion170PASS,
-Python parity/quota static contracts2PASS. SQL9 statements + PLpgSQL1 function
-parse PASS. Local quota concurrency tests were not run; Owner runtime acceptance is below.
-Parser correction Deno62PASS (resolver37), Python parity/contracts2PASS; no network
-permission. Safe logs/security PASS. Flutter unchanged/not rerun.
-Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
-local results; Owner separately reports Production resolver/iPhone PDF PASS below.
+Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Current Recent ordering task:
+analyze PASS;51 focused Flutter +181 ingestion +38 focused Python tests PASS.
+Full Flutter/builds not rerun. Prior UI/PDF validation is preserved in
+[history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26)
+and [EOD](eod-2026-09-25.md). Owner device PASS is separately reported below.
 
 ## Production DB/Storage applied
 
@@ -77,38 +71,20 @@ No agent DB/Storage mutation, migration application or function deployment.
 
 ## Daily Sync status
 
-Owner Production aggregate verification2026-09-24: **PHASE_0 PASS /
-PILOT_C PUBLISHED_COMPLETE**. source_posts23; active content_items23; exams23;
-active exam_subjects363; active resources739; reported integrity checks all0.
-Quarantine23 = EXPECTED advisory evidence; automatic deletion prohibited.
-This is Owner-reported evidence, not a DB query performed by Codex.
+Phase1 discovery/delta foundation is complete. Existing A1 bootstrap, recent-delta
+and A3 general controlled apply/activation code are present. Local ignored accepted
+state has26 entries (inspected2026-09-26); no blanket re-observation or state rewrite
+in this task. Historical23-row baseline and earlier pending checkpoints are
+preserved in [history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
+Scheduler/broad automation is not authorized by controlled per-post publication.
 
-**PHASE_1: COMPLETE — DISCOVERY / DELTA FOUNDATION.** B1/B2 offline validation
-passed, followed by one bounded read-only source observation: sitemap 1,676
-posts; recent IDs `1712, 1711, 1710, ...`; five landing pages fetched; 7/24
-request attempts; retries 0; attachment fetch 0; Production mutation 0. Feed
-remains `UNAVAILABLE` because no verified endpoint exists. **PHASE1_SOURCE_VALIDATION:
-PASS. BOUNDED_SOURCE_DRY_RUN: PASS. PHASE2: NOT STARTED / OWNER GATED.**
-The empty local accepted state selected IDs `2, 4, 6, 7, 8` as `NEW`; this is a
-**COLD_START_BASELINE_GAP**, not evidence that Production has five new posts.
-Before Phase 2, bootstrap/reconcile the Production canonical baseline into the
-accepted local/durable state without turning the 1,676-post inventory into
-publication candidates.
+Current1710 result: raw subject recognition fixed (unknown18→0), but9 canonical
+subjects are absent. Owner confirmed **taxonomy approval first; HOLD**.
+Medium / publishable=false; plan1 source +1 content +1 exam +33 occurrences +67
+resources, **not applied**. Current handoff and safe dry-run:
+[Materials rollout](materials-data-rollout.md#recent-publication-ordering-and-1710-hold--2026-09-26).
+No Production mutation, migration, attachment fetch or1618 change.
 
-**A1 ACCEPTED-STATE BOOTSTRAP: OFFLINE IMPLEMENTED / OPERATOR RUN PENDING.**
-`tool/ingestion/bootstrap.py` reconciles the 23 canonical `external_post_id`s
-(authority) with one bounded re-observation each into the accepted `LocalDeltaState`,
-reusing the delta helpers; canonical-only, fail-closed, deterministic/idempotent.
-Offline core + 11 tests PASS, ingestion regression unbroken; no DB/scheduler/
-attachment access. Operator step (read-only baseline query + `--observe`) and A2
-pending. Detail in [log](log.md).
-[Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
-[research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
-verbatim with verified hashes. That import checkpoint changed Wiki only; implementation does
-not start from instructions embedded in the package. **PHASE_2 NOT STARTED /
-OWNER GATED**. No scheduler, publication, DB/Storage/schema change or Production
-mutation. [Ingestion routing](ingestion.md#daily-sync-current-handoff--2026-09-24)
-and [source reconciliation](research-registry.md#owner-provided-manus-exports--source-acquired).
 
 ## Open release gates
 
@@ -134,46 +110,22 @@ validation above is from the subsequent global surface UI task; the strategy its
 
 ## Current work and next actions
 
-End-of-day2026-09-24: UI_V2 OWNER DEVICE PASS; final small filter/separator
-corrections locally validated. No further surface styling work authorized.
-Materials: search → grade/year/month/subject → 전체/수능/모의고사/논술/학습자료/입시정보;
-initial5 + explicit more, education columns remain discoverable. Study final copy:
-이번 주   총 N분 · 일 최대 N분; approved average placement retained.
+Materials Recent Updates now queries all active content by original
+`published_at DESC`, then stable `id DESC`; full timestamp retained. Search,
+filters, saved/recent semantics remain unchanged. Flutter analyze and51 focused
+Flutter tests PASS; ingestion181 + focused38 tests PASS. Actual device order is
+not reverified here.1710 publication remains Owner-approved HOLD pending canonical
+taxonomy support, not ready for controlled apply.
 
-Mock is FOUNDATION, not complete: supported-key official exam/subject/variant
-selection + safe verified scoring; separate local free title/time/manual score.
-[Phase2 gaps](day-8-d2-answer-scoring.md#end-of-day-foundation-and-phase2-gaps--2026-09-24):
-full official/year-grade-month/key catalogue, official selection completion,
-free custom-time polish/subject-score structure and cross-device result history.
-Existing safe scoring is not a claim of full catalogue coverage.
+Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
+deferred per [EOD closeout](eod-2026-09-25.md). Next data priority stays latest-post
+readiness → Wave1(2020→current) → release, then older waves; see
+[rollout](materials-data-rollout.md). No automatic backfill/publication authority.
+Mock full catalogue/history/advanced analysis remain gaps; Multi D-Day, Home
+customization, analytics platform, Achievement and Notification backend remain
+planned/foundation. Prior detailed checkpoints are preserved in
+[history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
 
-Current release priority:
-1. **MATERIALS_DIRECT_PDF: OWNER DEVICE PASS** (Owner2026-09-25): iPhone actual
-   problem/answer PDFs in-app and Production resolver resolved/pdf PASS. This
-   supersedes prior failure/redeploy checkpoints. Quota600/min global,12/min resource
-   and accepted Guest cost risk unchanged. Materials title/header/subject-group/source
-   button cleanup, Materials accepted; badge centering/MY density: **AUTOMATED PASS / OWNER
-   DEVICE NOT VERIFIED**; no resolver changes.
-   [Current acceptance and cleanup](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).
-   Next: Owner UI verification, then separate EOD closeout (not done here).
-
-2. Multi D-Day and Home customization are **PLANNED / FOUNDATION DESIGN ONLY**;
-   canonical architecture and current-code audit are recorded in
-   [Home personalization and event collection](home-personalization-and-events.md).
-   No Flutter implementation or migration exists.
-3. Mock Phase2 only when Owner resumes it; gaps above remain OPEN.
-4. Longitudinal architecture review when Score/Application/Outcome design starts;
-   first read the canonical strategy, preserve history/context/provenance/privacy.
-
-MY Snapshot / Mobile LAB actionable analysis / Web LAB deep analysis allocation
-stays canonical; advanced engines PLANNED. Community FUTURE/release-gated;
-Achievement FOUNDATION/FUTURE without catalogue/persistence; Notification Center
-PLANNED without backend or fake alerts. Existing release gates remain OPEN.
-Research synthesis and Phase1 package are SOURCE ACQUIRED in this repository;
-individual A–D full reports have not been separately inspected here.
-Future Wiki maintenance: separate historical design evidence from current design
-policy, preserving links; no such refactor today. B2 local commit and branch push authorized after checks;
-Owner iOS/untracked files retained. No automatic roadmap/Phase2 expansion.
 
 ## Handoff
 
@@ -227,5 +179,5 @@ quickly and accurately before expanding major feature work. Canonical plan:
 
 Do not commission duplicate research. Check Wiki/Research Registry/imported Manus
 sources first and retrieve original Manus reports when synthesis detail is
-insufficient. Next implementation scope is **A1 accepted-state bootstrap only**;
-no scheduler, broad Phase2, backfill mutation, Essay schema or UI work is bundled.
+insufficient. Current implementation handoff is the Recent ordering /1710 HOLD section above.
+No scheduler, broad automation, backfill mutation or Essay schema is bundled.

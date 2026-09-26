@@ -133,9 +133,56 @@ void main() {
       expect(q['select'], SupabaseContentRepository.projection);
       expect(q['is_active'], 'eq.true');
       expect(q['limit'], '12');
-      expect(q['order'], 'feed_updated_at.desc.nullslast,id.desc.nullslast');
+      expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
+      expect(q.containsKey('content_type'), isFalse);
+      expect(q.containsKey('exam_type'), isFalse);
     },
   );
+  test('recent feed preserves publication timestamp order across all types', () async {
+    // The backend owns ORDER BY; this fixture represents its result. Verify the
+    // exact query above and that the client neither re-sorts by update time nor
+    // drops non-exam rows. Equal publication timestamps use existing id DESC.
+    responseBody = jsonEncode([
+      {
+        ...sample,
+        'id': 'z',
+        'content_type': 'exam',
+        'published_at': '2026-09-26T15:00:00+09:00',
+      },
+      {
+        ...sample,
+        'id': 'y',
+        'content_type': 'university_essay',
+        'published_at': '2026-09-26T15:00:00+09:00',
+      },
+      {
+        ...sample,
+        'id': 'x',
+        'content_type': 'education_column',
+        'published_at': '2026-09-26T10:00:00+09:00',
+      },
+      {
+        ...sample,
+        'id': 'w',
+        'content_type': 'admissions_info',
+        'published_at': '2024-09-26T10:00:00+09:00',
+        'source_updated_at': '2026-09-26T23:00:00+09:00',
+        'feed_updated_at': '2026-09-26T23:00:00+09:00',
+      },
+    ]);
+    final rows = await SupabaseContentRepository(client).fetchRecentContent();
+    expect(rows.map((row) => row.id), ['z', 'y', 'x', 'w']);
+    expect(rows[0].publishedAt!.isAfter(rows[2].publishedAt!), isTrue);
+    expect(rows[3].publishedAt!.year, 2024);
+    expect(
+      requests.single.url.queryParameters['order'],
+      'published_at.desc.nullslast,id.desc.nullslast',
+    );
+    expect(
+      requests.single.url.queryParameters.containsKey('content_type'),
+      isFalse,
+    );
+  });
   test('content rows parse and missing slug returns null', () async {
     final repo = SupabaseContentRepository(client);
     responseBody = jsonEncode([sample]);

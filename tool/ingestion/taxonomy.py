@@ -65,6 +65,10 @@ SUBJECT_TOKENS: tuple[str, ...] = (
     '통합사회', '통합과학', '사회탐구', '과학탐구',
     # 고2 papers drop the elective number
     '생명과학', '지구과학', '물리학', '화학',
+    # Observed modern 제2외국어/한문 papers (2026-09-26). Recognition only:
+    # canonical mapping remains independently gated by subjects.py.
+    '독일어', '프랑스어', '스페인어', '중국어', '일본어',
+    '러시아어', '아랍어', '베트남어', '한문',
     # base subjects
     '한국사', '국어', '수학', '영어', '사회', '과학',
 )

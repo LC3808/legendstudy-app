@@ -210,3 +210,64 @@ After A1 passes, proceed A2 then A3. Only then begin Wave-1 backfill dry-run.
 Codex resource status at planning time is low; implementation may wait for reset.
 Luna/other lower-cost work may inspect/read/prepare fixtures, but a partial
 implementation should not be started merely to consume remaining quota.
+
+
+## Recent publication ordering and 1710 HOLD — 2026-09-26
+
+Owner definition: Recent Updates is **all active content**, ordered by original
+`content_items.published_at DESC NULLS LAST`, then existing `id DESC` only for
+equal timestamps. Full timestamp precision is preserved. Home's
+`homeRecentContentProvider` (limit 6) and `recentContentProvider` share
+`SupabaseContentRepository.fetchRecentContent`. Previously this used
+`feed_updated_at DESC`. Search ordering, relevance, filters, saved/recent-view
+semantics are unchanged. No content/exam type restriction is introduced.
+`source_updated_at`, `feed_updated_at`, sitemap lastmod and last_checked_at are
+not Recent Updates ordering evidence; delta discovery remains unchanged.
+
+Expected after eventual 1710 publication, subject to actual Production published
+values: 1712 → 1711 → 1710. Edited post1649 returns to its original published
+position. This task did not query Production or verify the actual device order.
+
+Fresh bounded source dry-runs observed only 1710 (plus sitemap, no attachments).
+Before: 18 `resource_subject_unknown` cases (9 subjects × question/answer).
+After: unknown **0**, **9 subject_taxonomy_gap**, and the existing one expiring-URL
+advisory. Metadata: exam / evaluation_mock / calendar2026 / academic2027 /
+month9 / grade3. Plan rows: source_posts1, content_items1, exams1,
+exam_subjects33 (24 provisional, 9 unmapped), resources67.
+These are **held plan counts, not approved inserts or Production counts**.
+
+Recognition now includes observed raw labels 독일어, 프랑스어, 스페인어, 중국어,
+일본어, 러시아어, 아랍어, 베트남어, 한문 in the existing parser vocabulary.
+No post-ID exception, invented subject ID, seed/schema change or publication-gate
+bypass. Canonical v1 still has23 subjects and apply preflight expects23.
+Owner confirmed no additional Production subjects and explicitly chose
+**taxonomy approval before publication; HOLD**. Confidence remains **medium**,
+publishable **false**. Existing `assert_in_scope` rejects this plan before DB
+connection. Live DB preflight/apply/activation were not executed.
+
+The local ignored A1 state contains26 entries; its stored occurrence projections
+contain none of these9 labels. Focused before/after fingerprint tests prove
+ordinary subject input unchanged and newly recognized-label input changed.
+This is not a fresh observation of every accepted page. No accepted state was
+rewritten and no26-page re-observation was performed. A later approved taxonomy
+change must assess affected entries only;1710 is not accepted by this task.
+
+Owner next step: separately approve canonical taxonomy support and its existing
+seed/preflight contract. Until then, **do not apply or activate1710**. The safe
+repeat command is:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 tool/ingest_legendstudy.py \
+  --source network --post-ids 1710 --out /tmp/legendstudy-1710-review
+```
+
+After that separate correction, obtain a fresh high/publishable plan and use the
+existing general `--post-ids` controlled apply and `tool/publish_pilot_c.py`
+activation path with reviewed exact counts. No new writer is needed; no executable
+write command is approved for the current held plan.1618 remains untouched.
+
+Validation: Flutter analyze PASS; recent/repository/search51 tests PASS;
+ingestion181 + focused subject/recent-delta/controlled-apply/activation/Pilot-C38
+PASS. An initial broader Python discovery also encountered4 unrelated Mock
+scoring import errors because system Python lacks psycopg; those tests are outside
+this task. No full Flutter suite/build requested or run. Production writes0.

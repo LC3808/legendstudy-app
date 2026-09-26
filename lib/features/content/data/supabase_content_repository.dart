@@ -22,7 +22,7 @@ class SupabaseContentRepository implements ContentRepository {
         .from('content_items')
         .select(projection)
         .eq('is_active', true)
-        .order('feed_updated_at', ascending: false, nullsFirst: false)
+        .order('published_at', ascending: false, nullsFirst: false)
         .order('id', ascending: false)
         .limit(_limit(limit));
     return rows.map(ContentItem.fromJson).toList();
