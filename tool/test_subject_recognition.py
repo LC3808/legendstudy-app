@@ -32,13 +32,28 @@ class ForeignLabelTests(unittest.TestCase):
         self.assertEqual(len(plan.occurrences), 9)
         self.assertEqual(len(plan.resources), 18)
         self.assertNotIn('resource_subject_unknown', [q.kind for q in plan.quarantine])
-        # Do not silently create v1 subjects or bypass the publication gate.
+        # Never invent a v1 subject for an unmapped foreign label: the occurrence
+        # publishes with its raw label and subject_id NULL, and the taxonomy gap is
+        # recorded as a deferred advisory (completed in a later taxonomy wave).
         self.assertEqual(sum(q.kind == 'subject_taxonomy_gap' for q in plan.quarantine), 9)
-        self.assertEqual(plan.confidence, 'medium')
-        self.assertFalse(plan.publishable)
-        with self.assertRaisesRegex(ScopeViolation, 'not a publish candidate'):
-            assert_in_scope([plan], approved_scope([9999]))
+        # Product decision (2026-09-26): a non-core taxonomy gap (제2외국어/한문) is a
+        # deferred advisory, not a whole-post publication blocker. The core exam is
+        # publishable now; the unmapped labels are filled in Wave 1.
+        self.assertEqual(plan.confidence, 'high')
+        self.assertTrue(plan.publishable)
+        assert_in_scope([plan], approved_scope([9999]))  # must not raise
         self.assertTrue(all(o.get('subject_id') is None for o in plan.occurrences))
+
+    def test_blocking_metadata_still_holds_whole_post(self):
+        # Safety preserved: a real structural/blocking gap (no parseable exam
+        # year/month) still holds the whole post, unlike a deferred taxonomy gap.
+        post = raw(post_id='8888', title='제목 미상',
+                   attachments=[att('a/1', '2027학년도 9월 모의평가_f 국어 문제.pdf')])
+        plan = normalize(post, CRAWLED_AT, map_subjects=True)
+        self.assertEqual(plan.confidence, 'low')
+        self.assertFalse(plan.publishable)
+        with self.assertRaises(ScopeViolation):
+            assert_in_scope([plan], approved_scope([8888]))
 
     def test_unrelated_accepted_fingerprint_unchanged(self):
         for labels, should_change in ((('국어', '영어'), False), (LABELS, True)):

@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-09-26 — 1710 9월 모의평가: non-core taxonomy gap no longer blocks publication
+
+- User-first product decision: an incomplete non-core subject taxonomy (제2외국어/
+  한문) must not hold back a whole exam post. Made `subject_taxonomy_gap` an
+  ADVISORY case (was soft/confidence-downgrading). This aligns the publication
+  gate with the existing canonical decision that "taxonomy activity does not
+  determine occurrence/resource publication" (decisions.md); no 1710-specific
+  code, no new writer/taxonomy/migration.
+- Effect: a recognized-but-unmapped subject publishes with its raw label and
+  subject_id NULL (never force-mapped to a wrong subject); the gap is recorded as
+  a deferred advisory to complete in Wave 1. Blocking gates (exam metadata,
+  identity collision, category) still hold the whole post; `resource_kind_unknown`
+  stays soft (1618 remains HELD, untouched).
+- 1710 fresh dry-run now: content_type exam / evaluation_mock / 2026 / 2027학년도 /
+  9월 / 고3, confidence high, publishable. Core 24 subjects mapped; 9 제2외국어/한문
+  unmapped (raw label, subject_id NULL, 0 forced provisional). PLANNED_INSERTS:
+  source_posts 1, content_items 1, exams 1, exam_subjects 33, resources 67.
+- test_subject_recognition updated to the new policy (+ a blocking-still-holds
+  test); full ingestion + Pilot C + controlled-apply/activation regression green.
+  PRODUCTION_WRITE 0 (Owner runs apply then activation).
+
 ## 2026-09-26 — Daily Sync A3-1 generalize controlled activation (offline; PRODUCTION_WRITE 0)
 
 - Owner completed the controlled Production apply of 1712/1711/1649 (insert-only,

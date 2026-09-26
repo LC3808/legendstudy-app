@@ -39,10 +39,15 @@ KINDS = (
     'source_missing',
     'subject_taxonomy_gap',
 )
-# Advisory cases: a known, uniform property of the source, not a per-post
-# ambiguity. They are still recorded for review but must not make one post look
-# less well parsed than another.
-ADVISORY = frozenset({'resource_url_expiring'})
+# Advisory cases: recorded for review but never a whole-post publication blocker.
+# - resource_url_expiring: a known, uniform Kakao CDN property.
+# - subject_taxonomy_gap: a recognized subject whose raw label has no taxonomy
+#   rule yet. Per decisions.md ("taxonomy activity does not determine occurrence/
+#   resource publication"), such an occurrence publishes UNMAPPED with its raw
+#   label (subject_id NULL) and is never force-mapped to a wrong subject; the
+#   canonical mapping is completed in a later taxonomy wave. An incomplete
+#   non-core taxonomy (e.g. 제2외국어/한문) must not hold back the core exam.
+ADVISORY = frozenset({'resource_url_expiring', 'subject_taxonomy_gap'})
 # Cases that stop a post from becoming a publish candidate.
 BLOCKING = frozenset({
     'classification_missing_category', 'classification_unknown_category',
