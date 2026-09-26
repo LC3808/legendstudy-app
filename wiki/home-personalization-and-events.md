@@ -243,7 +243,7 @@ useful without that engine.
 
 Implemented exactly as scoped below; migration `20260926000100_day_targets.sql`
 applied to Production (RLS, single-primary index, legacy backfill). Owner device
-acceptance pending. Calendar/notifications/admissions linking remain deferred.
+acceptance PASS (final Wave1 handoff). Calendar/notifications/admissions linking remain deferred.
 
 1. Event collection with account (RLS) / Guest-session persistence boundary. ✓
 2. Create/edit/delete + a single user-chosen representative (radio). ✓
@@ -273,3 +273,27 @@ acceptance pending. Calendar/notifications/admissions linking remain deferred.
 - Future Home provider composition must avoid hidden network work.
 - Admissions event linking, notifications and analytics require separate privacy,
   provenance and deletion review.
+
+
+## Personalization package after Wave1 — Owner direction 2026-09-27
+
+Next major product track after Wave1: first-login information onboarding with
+Skip, user type, school/grade/profile, Home presets and module ON/OFF. Planning
+only; implement no onboarding/profile/schema changes during Materials Wave1.
+This refines the existing role/visibility plan and
+[progressive profiling strategy](longitudinal-learning-admissions-data-strategy.md#progressive-profiling-and-onboarding).
+
+One canonical data model serves Onboarding (initial acquisition), LAB (contextual
+value/acquisition) and MY (view/edit/manage). Ask when the user has a reason to
+enter data, can provide accurate values and receives immediate value; no screen
+owns a competing profile DB. Interested universities/departments, actual
+applications/university/department/admission track, and results have distinct
+semantics.
+
+School is also a potential explanatory feature for future Admissions analysis,
+not merely meals/convenience data. Owner reports prior Selty service used school
+as an analysis input. Preserve remaining Selty data as a future legacy
+research/import asset for audit. Distinguish official university assessment
+criteria from empirically/statistically estimated school effects; never present
+an unvalidated school effect as an official university weighting. Existing
+Admissions evidence/privacy/model gates still apply.

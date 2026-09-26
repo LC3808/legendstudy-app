@@ -2570,3 +2570,18 @@ focused Flutter tests,181 ingestion +38 focused Python tests PASS. Details and
 operator dry-run in [rollout](materials-data-rollout.md#recent-publication-ordering-and-1710-hold--2026-09-26).
 Historical current-status sections moved without evidence loss to existing history.
 Production write0; no migration,1618,PDF,OAuth or UI redesign.
+
+
+## 2026-09-27 — Materials Wave1 inventory + minimal writer/parser checkpoint
+
+Inventory complete:1676 sitemap,781 candidate observations,296 source-publication
+Wave1 posts (27 published +269 new),485 pre2020; earlier-lastmod895 checked with13
+bounded samples. Reused saved observations for implementation/reclassification.
+Existing non-exam writer and narrow parser/confidence changes recover all109
+false holds and78 writer gaps:217 ready (63 exam/135 essay/14 study/5 columns),52
+identity-review posts frozen.229 offline tests, deterministic rerun/keys and
+preservation checks PASS. Private preflight unavailable without DB credentials;
+read-only SQL prepared, actual insert/no-op/collision counts unknown.1710 accepted
+gap unchanged; no recrawl/fabricated body fingerprint. No Production mutation.
+D-Day Owner PASS and prior Personalization continuity preserved. Owner authorized
+one combined code/Wiki commit/push. [Full gate/evidence](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27).

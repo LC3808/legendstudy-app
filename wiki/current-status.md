@@ -78,12 +78,27 @@ in this task. Historical23-row baseline and earlier pending checkpoints are
 preserved in [history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
 Scheduler/broad automation is not authorized by controlled per-post publication.
 
-Current1710 result: raw subject recognition fixed (unknown18→0), but9 canonical
-subjects are absent. Owner confirmed **taxonomy approval first; HOLD**.
-Medium / publishable=false; plan1 source +1 content +1 exam +33 occurrences +67
-resources, **not applied**. Current handoff and safe dry-run:
-[Materials rollout](materials-data-rollout.md#recent-publication-ordering-and-1710-hold--2026-09-26).
-No Production mutation, migration, attachment fetch or1618 change.
+2026-09-27 read-only public Production query confirms27 active content items,
+including1710, ordered1712→1711→1710 by original published_at then id descending.
+Owner confirms1710 apply/activation and device PASS; the former HOLD is superseded.
+The9 foreign-language/Hanmun taxonomy gaps are advisory, raw/unmapped with nullable
+subject_id. Existing code already implements this policy. Local accepted state
+still has26 entries:1710 reconciliation is pending, not a new publication.
+
+Wave1 read-only inventory COMPLETE (2026-09-27): sitemap1676, candidates781
+fully observed;296 actually published2020→current (27 public baseline +269 new),
+485 candidate posts pre2020. Earlier-lastmod895 excluded with13 bounded sanity
+checks and0 exceptions; not an exhaustive reread of those895.
+Writer/parser extension IMPLEMENTED / TESTED. Saved296 posts reclassified,
+no network re-observation. New269:217 writer-ready (10 no advisory +207 advisory),
+52 identity-review posts remain frozen in23 groups, no other holds. Ready types:
+exam63, essay135, study14, column5. Existing exam invariants and NULL raw taxonomy
+preserved; new non-exam scope has no exam/occurrence children.229 focused/regression
+tests PASS; deterministic rerun and planned-key checks PASS. Production publication
+**NOT YET APPLIED / OWNER GATED**. Private DB access unavailable: exact live inserts/
+no-ops/collisions UNKNOWN; read-only preflight SQL prepared.1710 acceptance gap
+unchanged (no recrawl; full A1 observation evidence absent from redacted snapshot).
+[Implementation and gate](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27).
 
 
 ## Open release gates
@@ -110,20 +125,19 @@ validation above is from the subsequent global surface UI task; the strategy its
 
 ## Current work and next actions
 
-Materials Recent Updates now queries all active content by original
-`published_at DESC`, then stable `id DESC`; full timestamp retained. Search,
-filters, saved/recent semantics remain unchanged. Flutter analyze and51 focused
-Flutter tests PASS; ingestion181 + focused38 tests PASS. Actual device order is
-not reverified here.1710 publication remains Owner-approved HOLD pending canonical
-taxonomy support, not ready for controlled apply.
+Materials Recent Updates queries all active content by original
+`published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
+order PASS and fresh public Production read agree.1710 is already published;
+do not reapply it. Inventory and minimal writer/parser implementation are complete. Obtain private
+read-only preflight results, then exact bounded Production review/Owner approval.
+52 identity-review posts remain isolated; no publication has been executed.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
-deferred per [EOD closeout](eod-2026-09-25.md). Next data priority stays latest-post
-readiness → Wave1(2020→current) → release, then older waves; see
+deferred per [EOD closeout](eod-2026-09-25.md). Next data priority is Wave1 review/implementation → controlled publication →
+release, then older waves; see
 [rollout](materials-data-rollout.md). No automatic backfill/publication authority.
 Mock full catalogue/history/advanced analysis remain gaps. Multi D-Day is
-IMPLEMENTED (Production `day_targets` schema applied; Owner device acceptance
-pending); Home customization, analytics platform, Achievement and Notification
+IMPLEMENTED (Production `day_targets` schema applied; OWNER DEVICE PASS); Home customization, analytics platform, Achievement and Notification
 backend remain planned/foundation. Prior detailed checkpoints are preserved in
 [history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
 
@@ -151,8 +165,7 @@ pending-device/EOD statements where they conflict.
 - OAuth local runtime configuration was restored; canonical profile-device command
   and required public config boundary are recorded in the EOD closeout.
 - **Daily Sync Phase1 COMPLETE; Phase2 NOT STARTED / OWNER GATED.**
-- **Multi D-Day: IMPLEMENTED / Production schema applied / Owner device acceptance
-  pending.** Owner-scoped `day_targets` (RLS, single primary), 2 legacy single
+- **Multi D-Day: IMPLEMENTED / Production schema applied / OWNER DEVICE PASS.** Owner-scoped `day_targets` (RLS, single primary), 2 legacy single
   D-Days backfilled. Home customization and `analytics.legendstudy.com` remain
   **PLANNED / FOUNDATION**.
 - Top-level engineering rule: **minimum cost; easiest viable solution; lightweight
@@ -161,26 +174,11 @@ pending-device/EOD statements where they conflict.
   scale-premature/speculative engineering.
 
 
-## 2026-09-26 Materials rollout priority override
+## Materials rollout priority
 
-Owner sets the immediate product sequence to finish the Materials foundation
-quickly and accurately before expanding major feature work. Canonical plan:
-[Materials rollout and historical backfill](materials-data-rollout.md).
+Wave1(2020→current) is the release data gate; older waves and product priorities
+are preserved in [Materials rollout](materials-data-rollout.md).
 
-1. Bootstrap/reconcile the already-published Production baseline into Daily Sync
-   accepted state; then re-run recent delta and controlled latest-post publication.
-2. Historical Wave1 **2020→current**, including safely supported essay-source
-   Materials, is the initial App-release data gate.
-3. Begin initial App deployment/release work after Wave1 validation rather than
-   waiting for the whole archive.
-4. Later backfill **2015–2019**, then **2010–2014**.
-5. Next major product tracks: Essay DB/LAB using existing Manus research/assets;
-   Mock score/grade history; Admissions evidence/rules and later model-gated
-   acceptance estimation; internal-grade input and university/department analysis.
-6. Home customization/analytics.legendstudy.com remain planned and are scheduled
-   around the higher-priority data/product tracks (Multi D-Day is implemented).
 
-Do not commission duplicate research. Check Wiki/Research Registry/imported Manus
-sources first and retrieve original Manus reports when synthesis detail is
-insufficient. Current implementation handoff is the Recent ordering /1710 HOLD section above.
-No scheduler, broad automation, backfill mutation or Essay schema is bundled.
+D-Day: IMPLEMENTED / Production applied / OWNER DEVICE PASS; no code changes.
+Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.

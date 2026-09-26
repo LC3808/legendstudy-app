@@ -35,6 +35,7 @@ RESOURCE_KIND_TOKENS: tuple[tuple[str, str], ...] = (
     ('듣기대본', 'listening_script'),
     ('듣기 파일', 'listening_audio'),
     ('듣기파일', 'listening_audio'),
+    ('듣기평가', 'listening_audio'),
     ('채점기준', 'reference'),
     ('출제의도', 'reference'),
     ('예시답안', 'answer'),
@@ -52,6 +53,12 @@ RESOURCE_KIND_TOKENS: tuple[tuple[str, str], ...] = (
 # Order matters. '한국지리' must be tested before '한국사' would ever match a
 # tail, and '세계지리' before '세계사'; see tests for the false-positive cases.
 SUBJECT_TOKENS: tuple[str, ...] = (
+    # Saved Wave1 labels; raw strings remain distinct. Broad/typo labels stay NULL.
+    '국어_공통', '국어_언매', '국어_화작', '국어-언매', '국어-화작',
+    '수학_공통', '수학_기하', '수학_미적', '수학_확통',
+    '국어(+언매)', '국어(+화작)', '수학(+기하)', '수학(+미적)', '수학(+확통)',
+    '국어(화작,매체)', '수학(기하,미적,확통)',
+    '탐구영역', '생화과윤리', '사회문화1',
     # 국어 / 수학 with elective in parentheses
     '국어(화작)', '국어(언매)', '국어(공통)', '국어(화법과작문)', '국어(언어와매체)',
     '수학(확통)', '수학(미적)', '수학(기하)', '수학(공통)',
@@ -75,6 +82,12 @@ SUBJECT_TOKENS: tuple[str, ...] = (
 
 # Historical labels. Never auto-mapped to a modern elective (wiki/ingestion.md).
 HISTORICAL_SUBJECT_TOKENS: tuple[str, ...] = (
+    # Saved Wave1 labels; raw strings remain distinct. Broad/typo labels stay NULL.
+    '국어_공통', '국어_언매', '국어_화작', '국어-언매', '국어-화작',
+    '수학_공통', '수학_기하', '수학_미적', '수학_확통',
+    '국어(+언매)', '국어(+화작)', '수학(+기하)', '수학(+미적)', '수학(+확통)',
+    '국어(화작,매체)', '수학(기하,미적,확통)',
+    '탐구영역', '생화과윤리', '사회문화1',
     '수학 가형', '수학 나형', '수학가형', '수학나형',
     '한국근현대사', '법과사회', '경제지리', '국사', '윤리',
     '물리1', '물리2', '생물1', '생물2',

@@ -244,7 +244,17 @@ def split_resource_kind(filename: str) -> tuple[str, str | None, str]:
     The kind is always the tail of the name. Longest token wins so that
     '정답,해설' is not read as '해설'.
     """
-    base = clean(re.sub(r'\.[A-Za-z0-9]{2,5}$', '', filename))
+    # Observed listening controls are decoration, only after a real MP3 suffix.
+    name = re.sub(
+        r'(?i)(\.mp3)\s*\((?:(?:pc|스마트폰|모바일|실시간|듣기|링크|다운로드|다운)'
+        r'|[\s/&])+\)\s*$', r'\1', filename)
+    base = clean(re.sub(r'\.[A-Za-z0-9]{2,5}$', '', name))
+    base = clean(re.sub(r'\s*\((?:홀|풀이)\)\s*$', '', base))
+    # Preserve combined elective labels as distinct raw subjects, never force-map.
+    combined = re.search(r'\((화작,매체|기하,미적,확통)\)$', base)
+    decoration = combined.group(0) if combined else ''
+    if combined:
+        base = clean(base[:combined.start()])
     best: tuple[int, str, str] | None = None
     for token, canonical in RESOURCE_KIND_TOKENS:
         if base.endswith(token):
@@ -254,7 +264,7 @@ def split_resource_kind(filename: str) -> tuple[str, str | None, str]:
     if best is None:
         return base, None, ''
     left = clean(base[: len(base) - len(best[2])].rstrip(' _-'))
-    return left, best[1], best[2]
+    return left + decoration, best[1], best[2]
 
 
 def _is_hangul(ch: str) -> bool:

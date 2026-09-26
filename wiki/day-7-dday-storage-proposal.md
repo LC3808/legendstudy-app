@@ -12,9 +12,9 @@ as primary events (backfill_missing=0, no multi-primary, no null owner), and the
 legacy `profiles.target_date/target_label` columns are preserved. The user chooses
 one representative (radio); Home shows it (or nearest upcoming as a display-only
 fallback) plus a compact upcoming list. Guests remain session-memory only.
-Owner device UX acceptance is still pending. A full Calendar view remains PLANNED.
+Owner reports final device UX acceptance PASS. A full Calendar view remains PLANNED.
 
-### Owner device follow-up — 2026-09-27 (DEVICE FOLLOW-UP PENDING)
+### Owner device follow-up — 2026-09-27 (OWNER DEVICE PASS)
 
 First device pass: all tested functions PASS (legacy preserved, weekday date,
 add, multiple events, representative select/change incl. a far event, Home
@@ -39,7 +39,8 @@ Delete re-check on device: **DELETE OWNER DEVICE PASS** (cancel + actual delete
 both work). Final micro-polish (2026-09-27): app title limit 20 → **15** code
 points (domain/form/decode-clamp; DB stays 80, no migration); representative D-N
 enlarged one point (18 → **19sp**), nothing else changed. Final visual device
-check (15-char limit + representative D-N size) pending.
+check (15-char limit + representative D-N size) is Owner PASS, as supplied in the
+Wave1 handoff; all CRUD/representative/persistence/compact/expand-collapse accepted.
 
 ### Original direction note (2026-09-25, superseded by the above)
 

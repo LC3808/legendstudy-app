@@ -110,6 +110,13 @@ def run(posts: list[RawPost], crawled_at: str, previous: dict | None = None,
                 {'identity': list(identity), 'external_post_ids': sorted(ids)})
             result.quarantine.append(case)
             result.merge_candidates.append(case.payload)
+            for plan in result.plans:
+                if plan.external_post_id in ids:
+                    plan.publishable = False
+                    if not any(q.kind == 'merge_candidate_exam' for q in plan.quarantine):
+                        plan.quarantine.append(QuarantineCase(
+                            'merge_candidate_exam', plan.external_post_id,
+                            case.note, case.payload))
 
     # Sources present in prior state but absent from this run are never deleted.
     for known in previous:

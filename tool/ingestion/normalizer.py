@@ -11,7 +11,8 @@ import hashlib
 import re
 
 from . import MAPPING_RULE_VERSION, PARSER_VERSION, SOURCE
-from .models import PlannedPost, QuarantineCase, RawPost
+from .models import (PlannedPost, QuarantineCase, RawPost,
+                     SUPPORTED_NON_EXAM_TYPES, IDENTITY_REVIEW_IDS)
 from .parser import parse_title, split_resource_kind, split_subject
 from .subjects import TAXONOMY_VERSION, map_subject, subject_id
 from .taxonomy import (
@@ -50,6 +51,7 @@ KINDS = (
 ADVISORY = frozenset({'resource_url_expiring', 'subject_taxonomy_gap'})
 # Cases that stop a post from becoming a publish candidate.
 BLOCKING = frozenset({
+    'merge_candidate_exam',
     'classification_missing_category', 'classification_unknown_category',
     'exam_year_unknown', 'exam_month_unknown', 'exam_grade_unknown',
     'exam_type_unknown', 'exam_academic_year_conflict',
@@ -337,8 +339,12 @@ def normalize(post: RawPost, crawled_at: str, map_subjects: bool = False) -> Pla
             'is_active': False,
         }
 
+    if post.external_post_id in IDENTITY_REVIEW_IDS:
+        cases.append(QuarantineCase('merge_candidate_exam', post.external_post_id,
+                                    'Owner-frozen canonical exam identity review.', {}))
     blocking = [c for c in cases if c.kind in BLOCKING]
-    soft = [c for c in cases if c.kind not in BLOCKING and c.kind not in ADVISORY]
+    soft = [c for c in cases if c.kind not in BLOCKING
+            and not is_advisory(c.kind, content_type)]
     if blocking or content_item is None:
         confidence = 'low'
     elif soft:
@@ -366,3 +372,10 @@ def exam_identity(plan: PlannedPost) -> tuple | None:
         return None
     e = plan.exam
     return (e['year'], e['exam_month'], e['grade_level'], e['exam_type'])
+
+
+def is_advisory(kind: str, content_type: str | None) -> bool:
+    """Scoped confidence policy; exam unknown-resource rules stay strict."""
+    return (kind in ADVISORY or
+            (kind == 'resource_kind_unknown' and content_type in SUPPORTED_NON_EXAM_TYPES) or
+            (kind == 'attachment_none' and content_type == 'education_column'))

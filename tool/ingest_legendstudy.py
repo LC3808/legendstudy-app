@@ -29,7 +29,7 @@ from ingestion.crawler import (  # noqa: E402
     FetchError, NetworkSource, PoliteFetcher, SampleSource,
 )
 from ingestion.pipeline import DryRunResult, load_state, next_state, run  # noqa: E402
-from ingestion.normalizer import ADVISORY, BLOCKING  # noqa: E402
+from ingestion.normalizer import BLOCKING, is_advisory  # noqa: E402
 from ingestion.apply import (  # noqa: E402
     ApplyAborted, PsycopgSession, apply_pilot, apply_quarantine, postflight,
     preflight, resolve,
@@ -168,7 +168,7 @@ def write_artifacts(result: DryRunResult, out: Path, crawled_at: str) -> list[Pa
     for p in rows:
         ex = p.exam or {}
         kinds = sorted({r['resource_type'] for r in p.resources})
-        flags = sorted({c.kind for c in p.quarantine if c.kind not in ADVISORY})
+        flags = sorted({c.kind for c in p.quarantine if not is_advisory(c.kind, (p.content_item or {}).get('content_type'))})
         title = p.source_post['title'].replace('|', '/')[:46]
         lines.append(
             f"| [{p.external_post_id}]({p.source_post['url']}) | {title} | "

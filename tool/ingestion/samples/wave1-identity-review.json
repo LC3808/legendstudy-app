@@ -1,0 +1,287 @@
+{
+  "reason": "Owner-frozen publication review; not parser exceptions. Resolve explicitly before removal.",
+  "groups": [
+    {
+      "identity": [
+        2019,
+        6,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1421",
+        "1422"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        6,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1423",
+        "1424"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        7,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1445",
+        "1460",
+        "1461"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1425",
+        "1426"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1427",
+        "1428",
+        "1450"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        9,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1416",
+        "1448"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        10,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1417",
+        "1446",
+        "1462",
+        "1463"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1418",
+        "1429",
+        "1451"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1419",
+        "1430",
+        "1452"
+      ]
+    },
+    {
+      "identity": [
+        2019,
+        11,
+        3,
+        "csat"
+      ],
+      "external_post_ids": [
+        "1420",
+        "1449"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        3,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1437",
+        "1464"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        3,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1438",
+        "1468"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        4,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1431",
+        "1475"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1439",
+        "1465"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1440",
+        "1469"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        6,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1433",
+        "1472"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        7,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1434",
+        "1476"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1441",
+        "1466"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1442",
+        "1470"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        9,
+        3,
+        "evaluation_mock"
+      ],
+      "external_post_ids": [
+        "1435",
+        "1473"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        10,
+        3,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1436",
+        "1477"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        11,
+        1,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1443",
+        "1467"
+      ]
+    },
+    {
+      "identity": [
+        2020,
+        11,
+        2,
+        "national_mock"
+      ],
+      "external_post_ids": [
+        "1444",
+        "1471"
+      ]
+    }
+  ]
+}

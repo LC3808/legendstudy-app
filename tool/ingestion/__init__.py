@@ -6,7 +6,7 @@ parser (raw HTML or extracted record -> raw observed facts), normalizer
 gated). Nothing in this package writes to Supabase.
 """
 
-PARSER_VERSION = 'legendstudy-parser/0.1.0'
-MAPPING_RULE_VERSION = 'legendstudy-mapping/0.1.0'
+PARSER_VERSION = 'legendstudy-parser/0.2.0'
+MAPPING_RULE_VERSION = 'legendstudy-mapping/0.2.0'
 SOURCE = 'legendstudy'
 SITE_ORIGIN = 'https://legendstudy.com'

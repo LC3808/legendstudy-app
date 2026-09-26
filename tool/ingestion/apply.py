@@ -33,7 +33,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Protocol, Sequence
 
-from .models import PlannedPost
+from .models import PlannedPost, SUPPORTED_NON_EXAM_TYPES, IDENTITY_REVIEW_IDS
 from .subjects import TAXONOMY_VERSION
 
 NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, 'https://legendstudy.com/ingest')
@@ -101,7 +101,7 @@ class ResolvedPost:
     external_post_id: str
     source_post: dict
     content_item: dict
-    exam: dict
+    exam: dict | None
     occurrences: list[dict] = field(default_factory=list)
     resources: list[dict] = field(default_factory=list)
     quarantine: list[dict] = field(default_factory=list)
@@ -114,8 +114,22 @@ def _pick(row: dict, columns: Sequence[str]) -> dict:
 
 def resolve(plan: PlannedPost) -> ResolvedPost:
     """Attach deterministic ids and drop planning-only fields."""
-    if plan.content_item is None or plan.exam is None:
+    if plan.content_item is None:
         raise ApplyAborted(f'{plan.external_post_id}: incomplete plan')
+
+    if plan.external_post_id in IDENTITY_REVIEW_IDS:
+        raise ApplyAborted('identity review remains frozen')
+    kind = plan.content_item['content_type']
+    if kind == 'exam':
+        if plan.exam is None:
+            raise ApplyAborted('exam extension missing')
+    elif kind in SUPPORTED_NON_EXAM_TYPES:
+        if plan.exam is not None or plan.occurrences or any(
+                r.get('occurrence_subject_key') is not None or
+                r.get('exam_subject_id') is not None for r in plan.resources):
+            raise ApplyAborted('non-exam has exam children')
+    else:
+        raise ApplyAborted('unsupported content type')
 
     post_id = row_id('source_post', SOURCE, plan.external_post_id)
     content_id = row_id('content_item', plan.content_item['slug'])
@@ -126,7 +140,8 @@ def resolve(plan: PlannedPost) -> ResolvedPost:
 
     content_item = _pick({**plan.content_item, 'id': content_id,
                           'source_post_id': post_id}, CONTENT_ITEM_COLUMNS)
-    exam = _pick({**plan.exam, 'content_item_id': content_id}, EXAM_COLUMNS)
+    exam = (_pick({**plan.exam, 'content_item_id': content_id}, EXAM_COLUMNS)
+            if plan.exam is not None else None)
 
     occurrences, by_subject_key = [], {}
     for occurrence in plan.occurrences:
@@ -146,14 +161,21 @@ def resolve(plan: PlannedPost) -> ResolvedPost:
                                 'exam_subject_id': scoped}, RESOURCE_COLUMNS))
 
     quarantine = []
+    by_kind = {}
     for case in plan.quarantine:
+        by_kind.setdefault(case.kind, []).append(case)
+    for kind, cases in by_kind.items():
+        first = cases[0]
+        # One stable quarantine ID per post/kind; retain every advisory detail.
+        payload = (first.payload if len(cases) == 1 else {
+            'cases': [{'note': c.note, 'payload': c.payload} for c in cases]})
         quarantine.append({
-            'id': row_id('quarantine', case.kind, plan.external_post_id),
+            'id': row_id('quarantine', kind, plan.external_post_id),
             'source_post_id': post_id,
-            'kind': case.kind,
-            'payload': json.dumps(case.payload or {}, ensure_ascii=False, sort_keys=True),
+            'kind': kind,
+            'payload': json.dumps(payload or {}, ensure_ascii=False, sort_keys=True),
             'status': 'open',
-            'note': case.note,
+            'note': first.note,
         })
 
     return ResolvedPost(plan.external_post_id, source_post, content_item, exam,
@@ -175,6 +197,18 @@ def assert_no_signing_material(posts: list[ResolvedPost]) -> None:
 def assert_write_shape(posts: list[ResolvedPost]) -> None:
     """Last barrier before SQL: publication and mapping invariants."""
     for post in posts:
+        if post.external_post_id in IDENTITY_REVIEW_IDS:
+            raise ApplyAborted('identity review remains frozen')
+        kind = post.content_item['content_type']
+        if kind == 'exam':
+            if post.exam is None:
+                raise ApplyAborted('exam extension missing')
+        elif kind in SUPPORTED_NON_EXAM_TYPES:
+            if post.exam is not None or post.occurrences or any(
+                    r.get('exam_subject_id') is not None for r in post.resources):
+                raise ApplyAborted('non-exam has exam children')
+        else:
+            raise ApplyAborted('unsupported content type')
         if post.content_item['is_active']:
             raise ApplyAborted(f'{post.external_post_id}: content_item is_active must be false')
         for occurrence in post.occurrences:
@@ -299,7 +333,7 @@ def _rows_for(table: str, posts: list[ResolvedPost]) -> list[dict]:
     if table == 'content_items':
         return [p.content_item for p in posts]
     if table == 'exams':
-        return [p.exam for p in posts]
+        return [p.exam for p in posts if p.exam is not None]
     if table == 'exam_subjects':
         return [o for p in posts for o in p.occurrences]
     if table == 'resources':

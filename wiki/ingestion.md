@@ -2,6 +2,15 @@
 
 ## Daily Sync current handoff — 2026-09-24
 
+**Current override —2026-09-27:** A1 bootstrap, A2 recent delta and A3 controlled
+exam apply/activation exist; public Production read verifies27 active contents,
+including1710. Local accepted26 omits1710. Earlier baseline/Phase2 statements below
+are dated history. Current [Wave1 implementation checkpoint](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27)
+records296 scoped posts,217 new writer-ready candidates and52 frozen identity
+review posts. Supported non-exam writer and scoped parser/confidence fixes are
+implemented/tested; private Production preflight and publication remain gated.
+Recognized subject_taxonomy_gap is advisory; raw nullable mapping is kept.
+
 “사이트에 새 글 올렸는데 앱에 안 보여” → read the
 [Phase 1 package](daily-sync-phase-1-deterministic-delta-package.md), then its
 [Research synthesis](research-2026-09-24-product-operations-synthesis.md) and

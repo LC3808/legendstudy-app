@@ -134,6 +134,19 @@ ALIASES: dict[str, tuple[str, float, str | None]] = {
     '지구과학2': ('earth_science_2', ALIAS, 'source writes 2 for Ⅱ'),
 }
 
+# Observed formatting aliases retain the original occurrence label. Combined
+# electives, broad inquiry and source typos deliberately have no mapping rule.
+for _raw, _canonical in {
+    '국어_공통': '국어(공통)', '국어_언매': '국어(언매)', '국어_화작': '국어(화작)',
+    '국어-언매': '국어(언매)', '국어-화작': '국어(화작)',
+    '국어(+언매)': '국어(언매)', '국어(+화작)': '국어(화작)',
+    '수학_공통': '수학(공통)', '수학_기하': '수학(기하)',
+    '수학_미적': '수학(미적)', '수학_확통': '수학(확통)',
+    '수학(+기하)': '수학(기하)', '수학(+미적)': '수학(미적)',
+    '수학(+확통)': '수학(확통)',
+}.items():
+    ALIASES[_raw] = ALIASES[_canonical]
+
 # Tokens whose subject is only decidable with the grade of the sitting.
 # Measured: these occur only at grade 1 (combined paper) or grade 2 (Ⅰ-level).
 GRADE_SCOPED: dict[str, dict[int, tuple[str, float, str]]] = {

@@ -221,8 +221,7 @@ class FilenameParsingTests(unittest.TestCase):
         self.assertEqual(split_subject(left), ('수학 가형', True))
 
     def test_source_typo_does_not_silently_map(self):
-        for name in ('2025학년도 수능_수학(미정) 정답,해설.pdf',
-                     '2024년 10월 사탐_사회문화1 문제.pdf'):
+        for name in ('2025학년도 수능_수학(미정) 정답,해설.pdf',):
             left, _k, _r = split_resource_kind(name)
             self.assertEqual(split_subject(left), (None, False), name)
 

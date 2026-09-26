@@ -6,6 +6,16 @@ Nothing here is written to a database; these are plan objects only.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import json
+from pathlib import Path
+
+# Explicit reviewed publication holds survive isolated/bounded reruns.
+IDENTITY_REVIEW_IDS = frozenset(
+    post_id for group in json.loads((Path(__file__).parent /
+        "samples/wave1-identity-review.json").read_text())["groups"]
+    for post_id in group["external_post_ids"])
+SUPPORTED_NON_EXAM_TYPES = frozenset({
+    "university_essay", "study_material", "education_column"})
 
 CONTENT_TYPES = frozenset({
     'exam', 'study_material', 'education_column', 'university_essay',

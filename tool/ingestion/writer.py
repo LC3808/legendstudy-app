@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .models import PlannedPost
+from .models import PlannedPost, SUPPORTED_NON_EXAM_TYPES, IDENTITY_REVIEW_IDS
 
 LEGENDSTUDY_PROJECT_REF = 'stlhijzpjfgwwdgunlsd'
 
@@ -91,11 +91,13 @@ _MIN_EXAM_YEAR = 1994
 _MAX_EXAM_YEAR = 2100
 
 
-def approved_scope(post_ids, content_types=frozenset({'exam'})) -> PilotScope:
+def approved_scope(
+    post_ids, content_types=frozenset({'exam'}) | SUPPORTED_NON_EXAM_TYPES,
+) -> PilotScope:
     """A controlled apply scope bounded to an explicit approved id set.
 
-    Reuses the Pilot C invariants through the same ``assert_in_scope`` gate; only
-    the fixed pilot id list and the 2025-2026 year window are generalized. An
+    Reuses the Pilot C invariants through the same ``assert_in_scope`` gate; the explicit source set may contain reviewed exam or supported non-exam
+    Materials, while Pilot C remains exam-only. An
     empty id set produces a scope that refuses every plan.
     """
     ids = frozenset(str(value) for value in post_ids)
@@ -135,13 +137,21 @@ def assert_in_scope(plans: list[PlannedPost], scope: PilotScope) -> None:
         if content_type not in scope.content_types:
             raise ScopeViolation(
                 f'{plan.external_post_id}: content_type {content_type!r} outside {scope.name}')
-        if plan.exam is None:
-            raise ScopeViolation(f'{plan.external_post_id}: exam extension missing')
-        year = plan.exam['year']
-        if not scope.min_year <= year <= scope.max_year:
-            raise ScopeViolation(
-                f'{plan.external_post_id}: year {year} outside {scope.name} '
-                f'({scope.min_year}-{scope.max_year})')
+        if plan.external_post_id in IDENTITY_REVIEW_IDS:
+            raise ScopeViolation(f'{plan.external_post_id}: identity review remains frozen')
+        if content_type == 'exam':
+            if plan.exam is None:
+                raise ScopeViolation(f'{plan.external_post_id}: exam extension missing')
+            year = plan.exam['year']
+            if not scope.min_year <= year <= scope.max_year:
+                raise ScopeViolation(f'{plan.external_post_id}: year outside {scope.name}')
+        elif content_type in SUPPORTED_NON_EXAM_TYPES:
+            if plan.exam is not None or plan.occurrences or any(
+                    r.get('occurrence_subject_key') is not None or
+                    r.get('exam_subject_id') is not None for r in plan.resources):
+                raise ScopeViolation(f'{plan.external_post_id}: non-exam has exam children')
+        else:
+            raise ScopeViolation(f'{plan.external_post_id}: unsupported content type')
         if not plan.publishable:
             raise ScopeViolation(
                 f'{plan.external_post_id}: not a publish candidate ({plan.confidence})')

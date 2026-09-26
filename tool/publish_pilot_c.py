@@ -11,6 +11,8 @@ content, or repairs a partial state.
 """
 from __future__ import annotations
 
+from ingestion.models import IDENTITY_REVIEW_IDS
+
 import argparse
 import getpass
 import json
@@ -285,6 +287,8 @@ def publish_scope(session, post_ids: Sequence[str],
     orphan evidence; activation flips only is_active and must not change any row
     total. Pilot C's own whole-table validator is untouched.
     """
+    if set(map(str, post_ids)) & IDENTITY_REVIEW_IDS:
+        raise PublicationRefused('identity review remains frozen')
     params = (list(post_ids),)
     session.begin()
     try:
