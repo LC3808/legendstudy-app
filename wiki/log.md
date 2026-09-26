@@ -1,5 +1,21 @@
 # Development Log
 
+## 2026-09-26 — Daily Sync A3-1 generalize controlled activation (offline; PRODUCTION_WRITE 0)
+
+- Owner completed the controlled Production apply of 1712/1711/1649 (insert-only,
+  staged inactive): totals 26/26/26/399/814, active still 23/363/739.
+- Generalized the activation core `publish_pilot_c.py` to activate an explicit
+  approved post set, reusing the same scope-parameterized ACTIVATE SQL and
+  affected-row guards. New `publish_scope()` runs a scope-LOCAL fail-closed
+  preflight (expected shape, target fully inactive, no verified/signed/blocking/
+  orphan in scope) and a UPDATE-only postflight (active +expected, row totals
+  unchanged, scope stable). Pilot C's whole-table validator/`publish()` are
+  untouched; `--post-ids`/`--expect` share the same core.
+- test_general_activation (8) covers happy path + every refusal; Pilot C
+  regression (test_publish_pilot_c) and full ingestion suite unchanged/green.
+- Activation is Owner-run interactively (getpass DB password); PRODUCTION_WRITE 0
+  here. Accepted-state advance + delta re-check follow the Owner's activation.
+
 ## 2026-09-26 — Daily Sync A3-1 generalize controlled apply (offline; PRODUCTION_WRITE 0)
 
 - Generalized the existing controlled apply so it accepts an explicit

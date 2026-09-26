@@ -116,6 +116,40 @@ SCOPE_QUERY = SCOPE_CTE + """SELECT
     (SELECT count(*) FROM pilot_resources)
 """
 
+# Scope-local activation state and invariants for the general controlled
+# activation path (A3-1). These evaluate only the given post set, so activating
+# a new bounded scope never depends on — or alters — Pilot C's whole-table gates.
+SCOPE_ACTIVE_QUERY = SCOPE_CTE + """SELECT
+    (SELECT count(*) FROM pilot_content t
+       JOIN public.content_items c ON c.id = t.id WHERE c.is_active),
+    (SELECT count(*) FROM pilot_occurrences t
+       JOIN public.exam_subjects es ON es.id = t.id WHERE es.is_active),
+    (SELECT count(*) FROM pilot_resources t
+       JOIN public.resources r ON r.id = t.id WHERE r.is_active)
+"""
+SCOPE_INVARIANTS_QUERY = SCOPE_CTE + """SELECT
+    (SELECT count(*) FROM pilot_occurrences t
+       JOIN public.exam_subjects es ON es.id = t.id WHERE es.mapping_status = 'verified'),
+    (SELECT count(*) FROM pilot_resources t
+       JOIN public.resources r ON r.id = t.id
+       WHERE r.source_url ILIKE ANY(ARRAY['%credential=%','%signature=%','%expires=%'])
+          OR r.file_url ILIKE ANY(ARRAY['%credential=%','%signature=%','%expires=%'])),
+    (SELECT count(*) FROM public.ingestion_quarantine q
+       JOIN pilot_posts p ON p.id = q.source_post_id
+       WHERE q.status = 'open' AND q.kind IN (
+         'classification_missing_category','classification_unknown_category',
+         'exam_year_unknown','exam_month_unknown','exam_grade_unknown','exam_type_unknown',
+         'exam_academic_year_conflict','resource_identity_missing',
+         'resource_identity_duplicate','source_missing')),
+    (SELECT count(*) FROM pilot_resources t
+       JOIN public.resources r ON r.id = t.id
+       WHERE NOT EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = r.content_item_id)
+          OR (r.exam_subject_id IS NOT NULL AND NOT EXISTS (
+             SELECT 1 FROM public.exam_subjects es WHERE es.id = r.exam_subject_id
+               AND es.content_item_id = r.content_item_id)))
+"""
+_ACTIVATION_TABLES = ("content_items", "exam_subjects", "resources")
+
 # These statements intentionally contain no SET of any column other than
 # is_active.  The chain is re-resolved in every statement from the fixed post
 # set; no broad slug, year, or table-wide UPDATE is possible.
@@ -205,8 +239,8 @@ def read_snapshot(session) -> tuple[dict[str, Any], ScopeCounts]:
     return snapshot, scope
 
 
-def activate(session, statement: str, expected: int) -> int:
-    ids = session.execute(statement, _scope_params())
+def activate(session, statement: str, expected: int, params: Sequence | None = None) -> int:
+    ids = session.execute(statement, _scope_params() if params is None else params)
     if len(ids) != expected:
         raise PublicationRefused(f"affected rows {len(ids)}, expected {expected}; transaction aborts")
     return len(ids)
@@ -230,6 +264,59 @@ def publish(session) -> str:
             raise PublicationRefused("scope changed during transaction")
         if any(after[f"active_{k}"] != v for k, v in EXPECTED_ACTIVE.items()):
             raise PublicationRefused("postflight active counts mismatch; transaction aborts")
+        session.commit()
+        return "published"
+    except Exception:
+        session.rollback()
+        raise
+
+
+def publish_scope(session, post_ids: Sequence[str],
+                  expected: ScopeCounts) -> str:
+    """General controlled activation for an explicit approved post set.
+
+    Reuses the same scope-parameterized ACTIVATE SQL and affected-row guards as
+    Pilot C. Every gate is scope-local and fail-closed: the target must match the
+    expected shape, be fully inactive, and carry no verified/signed/blocking/
+    orphan evidence; activation flips only is_active and must not change any row
+    total. Pilot C's own whole-table validator is untouched.
+    """
+    params = (list(post_ids),)
+    session.begin()
+    try:
+        scope = ScopeCounts(*map(int, session.execute(SCOPE_QUERY, params)[0]))
+        if scope != expected:
+            raise PublicationRefused(f"scope shape {scope}, expected {expected}")
+        if scope.source_posts == 0:
+            raise PublicationRefused("empty approved set")
+        active_before = tuple(int(x) for x in session.execute(SCOPE_ACTIVE_QUERY, params)[0])
+        if any(active_before):
+            raise PublicationRefused(f"target not fully inactive: active {active_before}")
+        verified, signed, blocking, orphans = (
+            int(x) for x in session.execute(SCOPE_INVARIANTS_QUERY, params)[0])
+        if verified:
+            raise PublicationRefused("verified mapping in scope; activation refused")
+        if signed:
+            raise PublicationRefused("signed URL material in scope; activation refused")
+        if blocking:
+            raise PublicationRefused("blocking quarantine in scope; activation refused")
+        if orphans:
+            raise PublicationRefused("orphan resource in scope; activation refused")
+        totals_before = {t: _count(session, f"select count(*) from public.{t}")
+                         for t in _ACTIVATION_TABLES}
+        activate(session, ACTIVATE_CONTENT, expected.content_items, params)
+        activate(session, ACTIVATE_OCCURRENCES, expected.exam_subjects, params)
+        activate(session, ACTIVATE_RESOURCES, expected.resources, params)
+        active_after = tuple(int(x) for x in session.execute(SCOPE_ACTIVE_QUERY, params)[0])
+        if active_after != (expected.content_items, expected.exam_subjects, expected.resources):
+            raise PublicationRefused(f"postflight active {active_after} != expected")
+        totals_after = {t: _count(session, f"select count(*) from public.{t}")
+                        for t in _ACTIVATION_TABLES}
+        if totals_after != totals_before:
+            raise PublicationRefused("row totals changed; activation must be UPDATE-only")
+        after_scope = ScopeCounts(*map(int, session.execute(SCOPE_QUERY, params)[0]))
+        if after_scope != scope:
+            raise PublicationRefused("scope changed during transaction")
         session.commit()
         return "published"
     except Exception:
@@ -303,6 +390,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--i-have-owner-approval", action="store_true")
     parser.add_argument("--db-host")
     parser.add_argument("--config", type=Path, default=Path("config/development.json"))
+    parser.add_argument("--post-ids",
+                        help="comma-separated explicit external post ids for a general "
+                             "controlled activation (A3-1); requires --expect")
+    parser.add_argument("--expect",
+                        help="expected scope shape for --post-ids as "
+                             "source_posts,content_items,exams,exam_subjects,resources")
     args = parser.parse_args(argv)
     try:
         if args.publish:
@@ -319,7 +412,27 @@ def main(argv: list[str] | None = None) -> int:
             def commit(self): connection.commit()
             def rollback(self): connection.rollback()
         session = Session()
-        if args.publish:
+        if args.post_ids:
+            post_ids = [x.strip() for x in args.post_ids.split(",") if x.strip()]
+            if not post_ids:
+                raise PublicationRefused("empty --post-ids")
+            if not args.expect:
+                raise PublicationRefused("--post-ids requires --expect scope shape")
+            try:
+                expected = ScopeCounts(*(int(x) for x in args.expect.split(",")))
+            except TypeError:
+                raise PublicationRefused("--expect needs 5 integers: "
+                                         "source_posts,content_items,exams,exam_subjects,resources")
+            if args.publish:
+                print(f"activation: {publish_scope(session, post_ids, expected)}")
+            else:
+                scope = ScopeCounts(*map(int, session.execute(SCOPE_QUERY, (post_ids,))[0]))
+                active = tuple(int(x) for x in session.execute(SCOPE_ACTIVE_QUERY, (post_ids,))[0])
+                if scope != expected:
+                    raise PublicationRefused(f"scope shape {scope}, expected {expected}")
+                print(f"preflight: PASS scope={scope} active={active} "
+                      "(read-only; activation not executed)")
+        elif args.publish:
             print(f"publication: {publish(session)}")
         else:
             snapshot, scope = read_snapshot(session)
