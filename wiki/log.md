@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-27 — D-Day micro-polish: title 15, representative D-N 19sp
+
+- Delete on device re-check: PASS (cancel + actual delete). Two micro changes only:
+  app title limit 20 → **15** code points (domain/form/validator; repo decode clamps
+  legacy titles to 15; Production `day_targets.title` check stays 80, no migration);
+  representative D-N font +1pt (sectionTitle 18 → **19sp**), no other UI/color/spacing
+  /layout change. day_event_test title case → 15 PASS / 16 FAIL; analyze clean;
+  Home regression PASS. Final visual device check pending.
+
 ## 2026-09-27 — D-Day device follow-up: delete fix + representative polish
 
 - Owner device first pass: all tested D-Day functions PASS except event deletion

@@ -85,7 +85,9 @@ class _RepInfo extends StatelessWidget {
         ),
         Text(
           target.dLabel(now),
+          // Representative D-N is emphasized one point above sectionTitle (18→19).
           style: AppTokens.sectionTitle.copyWith(
+            fontSize: 19,
             color: expired ? AppTokens.textSecondary : AppTokens.info,
           ),
         ),
@@ -445,7 +447,7 @@ class _EventFormDialogState extends State<_EventFormDialog> {
                 validator: (value) => value == null || value.trim().isEmpty
                     ? '이름을 입력해 주세요.'
                     : value.trim().runes.length > dayEventMaxTitle
-                    ? '20자 이내로 입력해 주세요.'
+                    ? '15자 이내로 입력해 주세요.'
                     : null,
               ),
               TextButton(

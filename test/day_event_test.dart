@@ -134,11 +134,11 @@ void main() {
       expect(compact.map((e) => e.id).toList(), ['t', 's']); // no rep, no past
     });
 
-    test('title limit is 20 code points', () {
-      expect(dayEventMaxTitle, 20);
-      final ok = DayEvent(date: DateTime(2026, 10, 1), label: '가' * 20);
-      expect(ok.label.runes.length, 20);
-      expect(() => DayEvent(date: DateTime(2026, 10, 1), label: '가' * 21),
+    test('title limit is 15 code points', () {
+      expect(dayEventMaxTitle, 15);
+      final ok = DayEvent(date: DateTime(2026, 10, 1), label: '가' * 15);
+      expect(ok.label.runes.length, 15);
+      expect(() => DayEvent(date: DateTime(2026, 10, 1), label: '가' * 16),
           throwsFormatException);
     });
   });

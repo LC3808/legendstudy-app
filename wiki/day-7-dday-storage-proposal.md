@@ -35,8 +35,11 @@ Follow-up applied (code, no DB/schema change):
   `day_targets.title` check stays at 80 (no DB change). Compact list keeps the
   trailing D-N alignment. Date format `YYYY.MM.DD.(요일)` unchanged.
 
-Owner device re-check pending (delete cancel/confirm, primary-delete fallback, new
-representative row, blue accent, stronger text, compact trailing, 20-char limit).
+Delete re-check on device: **DELETE OWNER DEVICE PASS** (cancel + actual delete
+both work). Final micro-polish (2026-09-27): app title limit 20 → **15** code
+points (domain/form/decode-clamp; DB stays 80, no migration); representative D-N
+enlarged one point (18 → **19sp**), nothing else changed. Final visual device
+check (15-char limit + representative D-N size) pending.
 
 ### Original direction note (2026-09-25, superseded by the above)
 
