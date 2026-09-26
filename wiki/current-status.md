@@ -94,6 +94,14 @@ The empty local accepted state selected IDs `2, 4, 6, 7, 8` as `NEW`; this is a
 Before Phase 2, bootstrap/reconcile the Production canonical baseline into the
 accepted local/durable state without turning the 1,676-post inventory into
 publication candidates.
+
+**A1 ACCEPTED-STATE BOOTSTRAP: OFFLINE IMPLEMENTED / OPERATOR RUN PENDING.**
+`tool/ingestion/bootstrap.py` reconciles the 23 canonical `external_post_id`s
+(authority) with one bounded re-observation each into the accepted `LocalDeltaState`,
+reusing the delta helpers; canonical-only, fail-closed, deterministic/idempotent.
+Offline core + 11 tests PASS, ingestion regression unbroken; no DB/scheduler/
+attachment access. Operator step (read-only baseline query + `--observe`) and A2
+pending. Detail in [log](log.md).
 [Canonical package](daily-sync-phase-1-deterministic-delta-package.md) and
 [research synthesis](research-2026-09-24-product-operations-synthesis.md) are imported
 verbatim with verified hashes. That import checkpoint changed Wiki only; implementation does

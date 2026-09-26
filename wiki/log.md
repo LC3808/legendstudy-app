@@ -1,5 +1,20 @@
 # Development Log
 
+## 2026-09-26 — Daily Sync A1 accepted-state bootstrap (offline)
+
+- Added `tool/ingestion/bootstrap.py`: reconciles the Production canonical
+  baseline (23 published `external_post_id`s as authority) with one bounded
+  re-observation per post (reusing `PoliteFetcher`/`parse_html`) into a
+  `LocalDeltaState`. Fixes COLD_START_BASELINE_GAP so already-published posts are
+  not classified `NEW` from empty state.
+- Reused delta contract via a new additive public wrapper
+  `delta.build_accepted_state_entry` (no duplicate hash/fingerprint/projection
+  logic, no second state model). Only canonical IDs accepted; duplicate/mismatch/
+  malformed/fetch-failure fail closed; deterministic + idempotent.
+- Offline core + `tool/test_ingestion_bootstrap.py` (11 tests) PASS; ingestion
+  regression 146+12+12+12 unbroken. No Production read/write, scheduler, migration,
+  or attachment fetch. Operator run (read-only baseline query + `--observe`) pending.
+
 ## 2026-09-16 — Day 12 Home Information Architecture & Visual Hierarchy
 
 - Reordered Home to D-Day, Study, Meal, Search, Recent Updates and Recent Views;

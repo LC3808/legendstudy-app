@@ -283,6 +283,17 @@ def _entry_for(post: RawPost, plan: PlannedPost, observed_at: str,
     )
 
 
+def build_accepted_state_entry(post: RawPost, plan: PlannedPost, observed_at: str,
+                               sitemap_lastmod: str | None = None) -> StateEntry:
+    """Public wrapper over the accepted-state entry constructor.
+
+    The accepted-state bootstrap (A1) reuses this so it never duplicates the
+    canonical hash, observation fingerprint, projection, source-time, or
+    resource-descriptor logic that the delta engine already owns.
+    """
+    return _entry_for(post, plan, observed_at, sitemap_lastmod)
+
+
 def _resource_diff(before: list[dict], after: list[dict]) -> tuple[list[dict], list[dict], list[dict]]:
     before_map = {_resource_key(resource): resource for resource in before}
     after_map = {_resource_key(resource): resource for resource in after}
