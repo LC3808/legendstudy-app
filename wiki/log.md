@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-09-26 — Daily Sync A2 recent delta (bounded, source read-only)
+
+- Added `tool/ingestion/recent_delta.py` (glue only): loads the A1 accepted state,
+  runs the existing bounded discovery + delta contracts, and reports NEW/MODIFIED/
+  UNCHANGED. Reuses `BoundedDiscoveryRunner`, `select_candidates`, `observe_selected`,
+  `delta` — no new crawler/engine/state model; `discovery.py` unchanged.
+- Recency fix: the sitemap carries a real `<lastmod>` per post; `select_candidates`
+  ranks not-in-state posts by ascending numeric id, which under the sparse 23-post
+  baseline would surface the OLDEST posts (2/4/6/7/8, 2013 lastmod) — a historical
+  flood. The glue adds `select_recent_by_lastmod` so the recent unaccepted slice is
+  chosen by `lastmod` (per rollout §3, not numeric id) before the unchanged
+  `select_candidates`/delta run.
+- Live bounded run vs Production accepted state (23): recent candidates
+  `1618, 1649, 1710, 1711, 1712` all classified **NEW** (2026-09 mock exams +
+  recently-modified 2024/25 기출); baseline post `1709` re-observed → **UNCHANGED**
+  (COLD_START_BASELINE_GAP fixed). No historical flood, no failures.
+  Source requests ~8 (robots+sitemap+5 landing+1 baseline verify), attachment
+  fetch 0, Production write 0, publication 0. Candidates await A3 human review.
+- Focused tests `tool/test_recent_delta.py` (4) + ingestion regression
+  (146+12+12+11) PASS.
+
 ## 2026-09-26 — Daily Sync A1 accepted-state bootstrap (offline)
 
 - Added `tool/ingestion/bootstrap.py`: reconciles the Production canonical
