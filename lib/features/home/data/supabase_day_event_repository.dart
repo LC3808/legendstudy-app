@@ -33,13 +33,20 @@ class SupabaseDayEventRepository implements DayEventRepository {
     }
     final parsed = DateTime.tryParse(date);
     if (parsed == null) throw const FormatException('Invalid calendar date');
+    // The app title limit is 20; a legacy backfilled row may hold up to 80.
+    // Clamp on load so an existing longer title still displays (and re-saves
+    // within the limit on edit) rather than breaking the whole fetch.
+    final runes = title.trim().runes.toList();
+    final safeLabel = runes.length > dayEventMaxTitle
+        ? String.fromCharCodes(runes.take(dayEventMaxTitle))
+        : title;
     final event = DayEvent(
       id: id,
       date: parsed,
-      label: title,
+      label: safeLabel,
       isPrimary: row['is_primary'] == true,
     );
-    if (_iso(event.date) != date || event.label != title) {
+    if (_iso(event.date) != date) {
       throw const FormatException('Invalid event row');
     }
     return event;

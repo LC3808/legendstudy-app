@@ -1,5 +1,22 @@
 # Development Log
 
+## 2026-09-27 — D-Day device follow-up: delete fix + representative polish
+
+- Owner device first pass: all tested D-Day functions PASS except event deletion
+  (confirm modal 취소/삭제 unresponsive). Fixed + applied requested UI polish; no
+  DB/schema/migration change.
+- Delete-confirm dialog now pops via its own dialog context (was the captured
+  sheet context → stale after rebuild → unresponsive). 취소 keeps event; 삭제 =
+  confirmed delete; failure keeps sheet open; primary delete → nearest fallback.
+- Representative consolidated into one strong row `📅 title · date(요일)  D-N` +
+  설정 (removed the large hero D-N row); wraps at 360/2×. Accent → clear blue
+  `AppTokens.info`; primary text → `AppTokens.textPrimary`. Compact keeps trailing
+  D-N. Title limit 80→**20** code points (domain/form/decode; DB stays 80, no
+  migration; legacy >20 titles clamped on load).
+- Tests: day_event_test 18 PASS (adds title 20/21, representative row, delete
+  cancel/confirm); Home regression (day_target, persistence, home_compact, day10_b,
+  study_home_polish) PASS; flutter analyze clean. Device re-check pending.
+
 ## 2026-09-26 — Multi D-Day implemented (Production schema applied)
 
 - Expanded D-Day from a single profile target to an owner-scoped event collection

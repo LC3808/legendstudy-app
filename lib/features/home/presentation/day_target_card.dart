@@ -10,8 +10,8 @@ import '../domain/day_event.dart';
 import '../domain/day_target.dart' show koreanCalendarDay;
 
 /// Home representative D-Day card plus a compact list of upcoming events.
-/// The representative (user-chosen primary, else nearest upcoming) keeps the
-/// existing big-card hierarchy: `title · date(요일)` + 설정, then a large D-N.
+/// The representative (user-chosen primary, else nearest upcoming) is a single
+/// strong row: `📅 title · date(요일)  D-N` with 설정 trailing (no large hero row).
 class DayTargetCard extends ConsumerWidget {
   const DayTargetCard({super.key});
 
@@ -27,22 +27,14 @@ class DayTargetCard extends ConsumerWidget {
     return DailyUtilityCard(
       title: rep?.label ?? 'D-DAY',
       icon: Icons.event_outlined,
-      accentColor: AppTokens.primary,
-      heading: rep == null
-          ? null
-          : Text(
-              '${rep.label} · ${rep.displayDate}',
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: AppTokens.secondary,
-            ),
+      accentColor: AppTokens.info,
+      wrapHeader: true,
+      heading: rep == null ? null : _RepInfo(target: rep, now: now),
       action: TextButton(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 8),
         ),
-        onPressed: ready
-            ? () => _openManageSheet(context, ref, now)
-            : null,
+        onPressed: ready ? () => _openManageSheet(context, ref, now) : null,
         child: const Text('설정'),
       ),
       body: state.isLoading
@@ -54,15 +46,9 @@ class DayTargetCard extends ConsumerWidget {
             )
           : rep == null
           ? const Text('목표 날짜를 설정해 주세요.')
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _RepHeading(target: rep, now: now),
-                _CompactEvents(
-                  events: compactUpcoming(events, now, rep),
-                  now: now,
-                ),
-              ],
+          : _CompactEvents(
+              events: compactUpcoming(events, now, rep),
+              now: now,
             ),
     );
   }
@@ -78,19 +64,32 @@ Future<void> _openManageSheet(BuildContext context, WidgetRef ref, DateTime now)
   );
 }
 
-class _RepHeading extends StatelessWidget {
-  const _RepHeading({required this.target, required this.now});
+/// Representative info as one strong, wrapping row: title·date (dark, larger,
+/// bold) and a blue-emphasized D-N. Wraps naturally on small/large-text screens.
+class _RepInfo extends StatelessWidget {
+  const _RepInfo({required this.target, required this.now});
   final DayEvent target;
   final DateTime now;
 
   @override
   Widget build(BuildContext context) {
     final expired = target.daysFrom(now) < 0;
-    return Text(
-      target.dLabel(now),
-      style: expired
-          ? AppTokens.secondary
-          : AppTokens.hero.copyWith(color: AppTokens.primaryInk),
+    return Wrap(
+      spacing: 10,
+      runSpacing: 2,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Text(
+          '${target.label} · ${target.displayDate}',
+          style: AppTokens.cardTitle.copyWith(color: AppTokens.textPrimary),
+        ),
+        Text(
+          target.dLabel(now),
+          style: AppTokens.sectionTitle.copyWith(
+            color: expired ? AppTokens.textSecondary : AppTokens.info,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -155,15 +154,15 @@ class _CompactRow extends StatelessWidget {
               '${event.label} · ${event.displayDate}',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppTokens.secondary,
+              style: AppTokens.body.copyWith(color: AppTokens.textPrimary),
             ),
           ),
           const SizedBox(width: 8),
           Text(
             event.dLabel(now),
             style: AppTokens.body.copyWith(
-              fontWeight: FontWeight.w600,
-              color: AppTokens.primaryInk,
+              fontWeight: FontWeight.w700,
+              color: AppTokens.info,
             ),
           ),
         ],
@@ -324,16 +323,18 @@ class _ManageEventsSheetState extends ConsumerState<_ManageEventsSheet> {
   Future<bool> _confirmDelete(BuildContext context, DayEvent e) async {
     final ok = await showDialog<bool>(
       context: context,
-      builder: (_) => AlertDialog(
+      // Use the dialog's OWN context to pop, not the captured sheet context
+      // (which can be stale after a rebuild and leave the buttons unresponsive).
+      builder: (dialogContext) => AlertDialog(
         title: const Text('일정 삭제'),
         content: Text("'${e.label}' 일정을 삭제할까요?"),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () => Navigator.pop(dialogContext, false),
             child: const Text('취소'),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(dialogContext, true),
             child: const Text('삭제'),
           ),
         ],
@@ -368,10 +369,18 @@ class _EventManageRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(event.label, maxLines: 2, overflow: TextOverflow.ellipsis),
+              Text(
+                event.label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTokens.body.copyWith(
+                  color: AppTokens.textPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               Text(
                 '${event.displayDate} · ${event.dLabel(now)}',
-                style: AppTokens.caption,
+                style: AppTokens.body.copyWith(color: AppTokens.textPrimary),
               ),
             ],
           ),
@@ -428,15 +437,15 @@ class _EventFormDialogState extends State<_EventFormDialog> {
             children: [
               TextFormField(
                 controller: _label,
-                maxLength: 80,
+                maxLength: dayEventMaxTitle,
                 decoration: const InputDecoration(
                   labelText: '이름 / 메모',
                   hintText: '예: 수능, 중간고사',
                 ),
                 validator: (value) => value == null || value.trim().isEmpty
                     ? '이름을 입력해 주세요.'
-                    : value.trim().runes.length > 80
-                    ? '80자 이내로 입력해 주세요.'
+                    : value.trim().runes.length > dayEventMaxTitle
+                    ? '20자 이내로 입력해 주세요.'
                     : null,
               ),
               TextButton(

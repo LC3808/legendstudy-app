@@ -133,6 +133,14 @@ void main() {
       final compact = compactUpcoming([today, soon, later, past], now, rep);
       expect(compact.map((e) => e.id).toList(), ['t', 's']); // no rep, no past
     });
+
+    test('title limit is 20 code points', () {
+      expect(dayEventMaxTitle, 20);
+      final ok = DayEvent(date: DateTime(2026, 10, 1), label: '가' * 20);
+      expect(ok.label.runes.length, 20);
+      expect(() => DayEvent(date: DateTime(2026, 10, 1), label: '가' * 21),
+          throwsFormatException);
+    });
   });
 
   group('controller', () {
@@ -271,7 +279,7 @@ void main() {
         testWidgets('compact list, more/less, no overflow ${width}px ${scale}x',
             (tester) async {
           final seeded = [
-            DayEvent(date: DateTime(2027, 11, 18), label: '수능 아주 긴 대표 일정 이름', isPrimary: true),
+            DayEvent(date: DateTime(2027, 11, 18), label: '수능 대표 일정 테스트', isPrimary: true),
             DayEvent(date: DateTime(2026, 10, 1), label: '국어 수행평가 매우 긴 제목'),
             DayEvent(date: DateTime(2026, 10, 3), label: '영어 수행평가'),
             DayEvent(date: DateTime(2026, 10, 6), label: '중간고사'),
@@ -282,7 +290,7 @@ void main() {
           addTearDown(c.dispose);
 
           // Representative (primary) hierarchy: date shown in the heading.
-          expect(find.textContaining('수능 아주 긴 대표 일정 이름 · 2027.11.18.(목)'),
+          expect(find.textContaining('수능 대표 일정 테스트 · 2027.11.18.(목)'),
               findsOneWidget);
           // Collapsed: 4 upcoming non-primary -> show 2, hide 2.
           expect(find.text('일정 2개 더보기 ˅'), findsOneWidget);
@@ -320,6 +328,48 @@ void main() {
       expect(find.text('D-Day 관리'), findsOneWidget);
       expect(find.widgetWithText(TextButton, '일정 추가'), findsOneWidget);
       expect(find.byType(Radio<String>), findsNWidgets(2));
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('representative shows one strong row: title·date + D-N + 설정',
+        (tester) async {
+      final rep = DayEvent(date: DateTime(2026, 11, 13), label: '수능', isPrimary: true);
+      final c = await pumpCard(tester, [rep]);
+      addTearDown(c.dispose);
+      expect(find.textContaining('수능 · ${rep.displayDate}'), findsOneWidget);
+      expect(find.text(rep.dLabel(now)), findsOneWidget); // e.g. D-48
+      expect(find.widgetWithText(TextButton, '설정'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('delete confirm: 취소 keeps the event, 삭제 removes it',
+        (tester) async {
+      final c = await pumpCard(tester, [
+        DayEvent(date: DateTime(2027, 11, 18), label: '수능', isPrimary: true),
+        DayEvent(date: DateTime(2026, 10, 1), label: '국어 수행'),
+      ]);
+      addTearDown(c.dispose);
+      await tester.tap(find.widgetWithText(TextButton, '설정'));
+      await tester.pumpAndSettle();
+      expect(find.byType(Radio<String>), findsNWidgets(2));
+
+      // Cancel path: dialog closes, both events remain.
+      await tester.tap(find.byIcon(Icons.delete_outline).first);
+      await tester.pumpAndSettle();
+      expect(find.text('일정 삭제'), findsOneWidget);
+      await tester.tap(find.text('취소'));
+      await tester.pumpAndSettle();
+      expect(find.text('일정 삭제'), findsNothing);
+      expect(find.byType(Radio<String>), findsNWidgets(2));
+
+      // Confirm path: dialog closes, the non-primary event is removed.
+      await tester.tap(find.byIcon(Icons.delete_outline).first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('삭제'));
+      await tester.pumpAndSettle();
+      expect(find.text('일정 삭제'), findsNothing);
+      expect(find.byType(Radio<String>), findsOneWidget);
+      expect(c.read(dayEventsProvider).value!.length, 1);
       expect(tester.takeException(), isNull);
     });
   });

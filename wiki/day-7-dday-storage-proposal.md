@@ -14,6 +14,30 @@ one representative (radio); Home shows it (or nearest upcoming as a display-only
 fallback) plus a compact upcoming list. Guests remain session-memory only.
 Owner device UX acceptance is still pending. A full Calendar view remains PLANNED.
 
+### Owner device follow-up — 2026-09-27 (DEVICE FOLLOW-UP PENDING)
+
+First device pass: all tested functions PASS (legacy preserved, weekday date,
+add, multiple events, representative select/change incl. a far event, Home
+representative, compact list, more/less, edit, relaunch persistence, no overflow)
+except **event deletion FAIL** — the delete-confirm modal's 취소/삭제 buttons were
+unresponsive on device.
+
+Follow-up applied (code, no DB/schema change):
+- Delete-confirm fix: the confirm dialog now pops via its **own** context (was
+  the captured sheet context, which could be stale after a rebuild → unresponsive
+  buttons). 취소 keeps the event; 삭제 does a confirmed delete; failure keeps the
+  sheet open; primary delete falls back to nearest upcoming.
+- Representative is now a single strong row `📅 title · date(요일)  D-N` with 설정
+  trailing (the separate large hero D-N row was removed); wraps at small/large text.
+- D-Day accent uses the clear blue `AppTokens.info` (icon + D-N emphasis), not the
+  previous brownish ink; primary text uses `AppTokens.textPrimary` (Deep Navy).
+- App title limit reduced to **20 code points** (domain/form/decode); the Production
+  `day_targets.title` check stays at 80 (no DB change). Compact list keeps the
+  trailing D-N alignment. Date format `YYYY.MM.DD.(요일)` unchanged.
+
+Owner device re-check pending (delete cancel/confirm, primary-delete fallback, new
+representative row, blue accent, stronger text, compact trailing, 20-char limit).
+
 ### Original direction note (2026-09-25, superseded by the above)
 
 The next product direction is a collection of user-owned events; Home emphasizes

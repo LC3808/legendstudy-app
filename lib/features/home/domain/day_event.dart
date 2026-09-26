@@ -1,5 +1,9 @@
 import 'day_target.dart' show koreanCalendarDay;
 
+/// App-side title limit for a D-Day event (code points). The Production column
+/// still permits up to 80; new/edited titles are limited to this in the app.
+const dayEventMaxTitle = 20;
+
 /// Korean weekday for a calendar date. `DateTime.weekday`: Mon=1 .. Sun=7.
 const _weekdays = ['월', '화', '수', '목', '금', '토', '일'];
 
@@ -23,8 +27,8 @@ class DayEvent {
     this.isPrimary = false,
   }) : date = DateTime.utc(date.year, date.month, date.day),
        label = label.trim() {
-    if (this.label.isEmpty || this.label.runes.length > 80) {
-      throw const FormatException('D-Day label must contain 1..80 characters.');
+    if (this.label.isEmpty || this.label.runes.length > dayEventMaxTitle) {
+      throw const FormatException('D-Day label must contain 1..20 characters.');
     }
   }
 
