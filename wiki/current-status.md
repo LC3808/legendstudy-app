@@ -196,3 +196,28 @@ pending-device/EOD statements where they conflict.
   structure; concise implementation; reuse first; expand only on demonstrated
   need/failure evidence.** Read Wiki first and avoid repeating solved research or
   scale-premature/speculative engineering.
+
+
+## 2026-09-26 Materials rollout priority override
+
+Owner sets the immediate product sequence to finish the Materials foundation
+quickly and accurately before expanding major feature work. Canonical plan:
+[Materials rollout and historical backfill](materials-data-rollout.md).
+
+1. Bootstrap/reconcile the already-published Production baseline into Daily Sync
+   accepted state; then re-run recent delta and controlled latest-post publication.
+2. Historical Wave1 **2020→current**, including safely supported essay-source
+   Materials, is the initial App-release data gate.
+3. Begin initial App deployment/release work after Wave1 validation rather than
+   waiting for the whole archive.
+4. Later backfill **2015–2019**, then **2010–2014**.
+5. Next major product tracks: Essay DB/LAB using existing Manus research/assets;
+   Mock score/grade history; Admissions evidence/rules and later model-gated
+   acceptance estimation; internal-grade input and university/department analysis.
+6. Multi D-Day/Home customization/analytics.legendstudy.com remain planned and
+   are scheduled around the higher-priority data/product tracks.
+
+Do not commission duplicate research. Check Wiki/Research Registry/imported Manus
+sources first and retrieve original Manus reports when synthesis detail is
+insufficient. Next implementation scope is **A1 accepted-state bootstrap only**;
+no scheduler, broad Phase2, backfill mutation, Essay schema or UI work is bundled.
