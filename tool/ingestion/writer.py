@@ -69,14 +69,38 @@ def plan_statements(plan: PlannedPost) -> list[str]:
 
 @dataclass(frozen=True)
 class PilotScope:
-    """A bounded, named apply scope. Nothing outside it may be written."""
+    """A bounded, named apply scope. Nothing outside it may be written.
+
+    ``approved_ids`` optionally restricts the scope to an explicit operator set of
+    external post ids. When it is ``None`` (Pilot C), the caller is responsible
+    for bounding the id set, and only the year/type/confidence invariants apply.
+    """
     name: str
     min_year: int
     max_year: int
     content_types: frozenset
+    approved_ids: frozenset | None = None
 
 
 PILOT_C = PilotScope('pilot-c-2025-2026', 2025, 2026, frozenset({'exam'}))
+
+# The widest year window an exam scope allows; general controlled apply does not
+# inherit the Pilot C 2025-2026 window (see A3-1). Every other Pilot C invariant
+# — exam type, high confidence, no verified mapping, is_active=false — is kept.
+_MIN_EXAM_YEAR = 1994
+_MAX_EXAM_YEAR = 2100
+
+
+def approved_scope(post_ids, content_types=frozenset({'exam'})) -> PilotScope:
+    """A controlled apply scope bounded to an explicit approved id set.
+
+    Reuses the Pilot C invariants through the same ``assert_in_scope`` gate; only
+    the fixed pilot id list and the 2025-2026 year window are generalized. An
+    empty id set produces a scope that refuses every plan.
+    """
+    ids = frozenset(str(value) for value in post_ids)
+    return PilotScope(f'approved-ids({len(ids)})', _MIN_EXAM_YEAR, _MAX_EXAM_YEAR,
+                      content_types, ids)
 
 
 class ScopeViolation(RuntimeError):
@@ -101,6 +125,10 @@ def assert_in_scope(plans: list[PlannedPost], scope: PilotScope) -> None:
     mistake that a transaction cannot undo for the Owner afterwards.
     """
     for plan in plans:
+        if scope.approved_ids is not None and \
+                str(plan.external_post_id) not in scope.approved_ids:
+            raise ScopeViolation(
+                f'{plan.external_post_id}: outside approved apply set {scope.name}')
         if plan.content_item is None:
             raise ScopeViolation(f'{plan.external_post_id}: no content item')
         content_type = plan.content_item['content_type']

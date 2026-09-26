@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-09-26 — Daily Sync A3-1 generalize controlled apply (offline; PRODUCTION_WRITE 0)
+
+- Generalized the existing controlled apply so it accepts an explicit
+  Owner-approved id set, not only Pilot C. No new writer/architecture: the same
+  `writer.assert_in_scope` / `apply.py` core and every safety gate are reused.
+  - `writer.PilotScope` gains optional `approved_ids` (None = Pilot C, unchanged);
+    `assert_in_scope` refuses any plan outside the approved set. New `approved_scope()`
+    keeps all Pilot C invariants (exam type, high confidence, no verified mapping,
+    is_active=false) but drops the fixed pilot list and the 2025-2026 year window.
+  - `ingest_legendstudy.py` adds `--post-ids`; it and `--pilot c` share the apply
+    core. `--post-ids` fetches/plans/apply only those ids; missing → fail closed;
+    mutually exclusive with `--pilot`.
+- Gates verified offline (test_controlled_apply, 10): no ids → refuse; approved
+  high-confidence NEW → allowed; outside-approved → refuse; medium/low → refuse;
+  identity collision → refuse; verified mapping → refuse; 2024/2025학년도 CSAT +
+  approval → allowed; Pilot C scope unchanged. Full regression (146+12+12+11+4) green.
+- Network dry-run for approved 1712/1711/1649 (no apply): 3 high-confidence,
+  advisory-only quarantine; apply would be accepted. INSERT plan: source_posts 3,
+  content_items 3, exams 3, exam_subjects 36, resources 75. PRODUCTION_WRITE 0.
+- 1710/1618 remain HELD (unchanged this task).
+
 ## 2026-09-26 — Daily Sync A3 preflight (dry-run only; PRODUCTION_WRITE 0)
 
 - Re-observed the 5 A2 candidates through the existing crawler/parser/normalizer

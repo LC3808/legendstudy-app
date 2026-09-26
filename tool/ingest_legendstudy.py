@@ -36,8 +36,8 @@ from ingestion.apply import (  # noqa: E402
 )
 from ingestion.writer import (  # noqa: E402
     LEGENDSTUDY_PROJECT_REF, PILOT_C, ApplyRefused, ScopeViolation,
-    assert_apply_allowed, assert_in_scope, assert_no_collisions, expected_rows,
-    plan_statements,
+    approved_scope, assert_apply_allowed, assert_in_scope, assert_no_collisions,
+    expected_rows, plan_statements,
 )
 
 REPO = Path(__file__).resolve().parent.parent
@@ -61,8 +61,17 @@ def _report_retry(request_label: str, attempt: int, reason: str) -> None:
 
 
 def _network_post_ids(ids: list[int], pilot: str | None,
-                      limit: int | None) -> list[int]:
-    if pilot == 'c':
+                      limit: int | None,
+                      post_ids: list[int] | None = None) -> list[int]:
+    if post_ids:
+        # Explicit operator-approved controlled apply set (A3-1). Every approved
+        # id must exist on the sitemap; nothing else is fetched.
+        available = set(ids)
+        missing = [post_id for post_id in post_ids if post_id not in available]
+        if missing:
+            raise ValueError(f'approved set is missing {len(missing)} sitemap posts')
+        selected = list(post_ids)
+    elif pilot == 'c':
         available = set(ids)
         missing = [post_id for post_id in PILOT_C_POST_IDS if post_id not in available]
         if missing:
@@ -232,19 +241,30 @@ def _open_session(args):
 
 
 def cmd_apply(args, result) -> int:
-    """Pilot C production apply. Every gate must pass before a row is sent."""
+    """Controlled production apply. Every gate must pass before a row is sent.
+
+    Two operator paths share this same writer/apply core and safety gates:
+    ``--pilot c`` (the fixed Pilot C scope) and ``--post-ids`` (an explicit
+    Owner-approved id set, A3-1). Neither is allowed to write outside its scope.
+    """
     try:
         assert_apply_allowed(args.project_ref, args.i_have_owner_approval,
                              live_source=(args.source == 'network'))
     except ApplyRefused as exc:
         print(f'APPLY {exc}', flush=True)
         return 3
-    if args.pilot != 'c':
-        print('APPLY refusing: --apply is bounded to --pilot c', flush=True)
+    if args.post_ids:
+        approved = [int(x) for x in args.post_ids.split(',') if x.strip()]
+        scope = approved_scope(approved)
+    elif args.pilot == 'c':
+        scope = PILOT_C
+    else:
+        print('APPLY refusing: --apply needs --pilot c or an explicit --post-ids set',
+              flush=True)
         return 3
 
     try:
-        assert_in_scope(result.plans, PILOT_C)
+        assert_in_scope(result.plans, scope)
         assert_no_collisions(result.plans)
     except ScopeViolation as exc:
         print(f'APPLY refusing: {exc}', flush=True)
@@ -425,6 +445,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument('--limit', type=int, default=None)
     ap.add_argument('--pilot', choices=('c',), default=None,
                     help="restrict to the approved pilot scope (c = 2025-2026 exams)")
+    ap.add_argument('--post-ids', default=None,
+                    help='comma-separated explicit external post ids for a general '
+                         'controlled apply (A3-1). Only these ids are fetched/applied; '
+                         'all Pilot C safety gates still apply.')
     ap.add_argument('--no-taxonomy', action='store_true',
                     help='plan occurrences as unmapped instead of applying taxonomy v1')
     ap.add_argument('--emit-subjects-seed', type=Path, default=None,
@@ -458,9 +482,25 @@ def main(argv: list[str] | None = None) -> int:
     if args.emit_subjects_seed is not None:
         return cmd_emit_seed(args.emit_subjects_seed)
 
+    approved_ids: list[int] | None = None
+    if args.post_ids:
+        if args.pilot:
+            print('INGEST error target=apply kind=pilot_and_post_ids_are_exclusive',
+                  flush=True)
+            return 2
+        try:
+            approved_ids = [int(x) for x in args.post_ids.split(',') if x.strip()]
+        except ValueError:
+            print('INGEST error target=apply kind=post_ids_must_be_integers', flush=True)
+            return 2
+        if not approved_ids:
+            print('INGEST error target=apply kind=empty_post_ids', flush=True)
+            return 2
+
     crawled_at = _now()
     if args.source == 'network':
-        anticipated = (min(args.limit, len(PILOT_C_POST_IDS))
+        anticipated = (len(approved_ids) if approved_ids is not None
+                       else min(args.limit, len(PILOT_C_POST_IDS))
                        if args.pilot == 'c' and args.limit is not None
                        else len(PILOT_C_POST_IDS) if args.pilot == 'c'
                        else args.limit)
@@ -483,7 +523,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f'INGEST done target=sitemap elapsed={time.monotonic() - sitemap_started:.1f}s '
               f'posts={len(ids)}', flush=True)
         try:
-            selected_ids = _network_post_ids(ids, args.pilot, args.limit)
+            selected_ids = _network_post_ids(ids, args.pilot, args.limit, approved_ids)
         except ValueError as exc:
             print(f'INGEST error target=pilot kind={str(exc).replace(" ", "_")}', flush=True)
             return 2
@@ -492,8 +532,8 @@ def main(argv: list[str] | None = None) -> int:
               f'retries={DEFAULT_MAX_RETRIES} delay={args.delay:g}s '
               f'request_budget={budget_text}', flush=True)
         posts, failures = _fetch_network_posts(source, selected_ids)
-        if args.pilot == 'c' and failures:
-            print(f'INGEST error target=pilot kind=incomplete_fetch failures={failures}',
+        if (args.pilot == 'c' or approved_ids is not None) and failures:
+            print(f'INGEST error target=apply kind=incomplete_fetch failures={failures}',
                   flush=True)
             return 2
     else:
@@ -509,6 +549,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.pilot == 'c':
         keep = {p.external_post_id for p in result.plans
                 if p.exam and p.exam['year'] >= 2025}
+        result.plans = [p for p in result.plans if p.external_post_id in keep]
+        result.quarantine = [c for c in result.quarantine
+                             if c.external_post_id in keep or c.external_post_id is None]
+        result.changed = [i for i in result.changed if i in keep]
+        result.unchanged = [i for i in result.unchanged if i in keep]
+    elif approved_ids is not None:
+        # General controlled apply: keep only the explicitly approved plans; an
+        # unrelated observed post is never carried into the apply set.
+        keep = {str(x) for x in approved_ids}
         result.plans = [p for p in result.plans if p.external_post_id in keep]
         result.quarantine = [c for c in result.quarantine
                              if c.external_post_id in keep or c.external_post_id is None]
