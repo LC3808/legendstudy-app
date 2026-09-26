@@ -13,8 +13,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import re  # noqa: E402
+
 from publish_pilot_c import (  # noqa: E402
-    PROJECT_REF, PublicationRefused, ScopeCounts, publish_scope,
+    ACTIVATE_CONTENT, ACTIVATE_OCCURRENCES, ACTIVATE_RESOURCES, PROJECT_REF,
+    PublicationRefused, SCOPE_ACTIVE_QUERY, SCOPE_INVARIANTS_QUERY, SCOPE_QUERY,
+    ScopeCounts, publish_scope,
 )
 
 EXPECT = ScopeCounts(3, 3, 3, 36, 75)
@@ -115,6 +119,22 @@ class GeneralActivationTests(unittest.TestCase):
         with self.assertRaises(PublicationRefused):
             publish_scope(s, ['1712', '1711', '1649'], EXPECT)
         self.assertFalse(s.committed)
+
+    def test_no_literal_percent_placeholder_in_parameterized_sql(self):
+        # psycopg3 parses the query text for placeholders; every '%' must be a
+        # valid client placeholder (%s/%b/%t) or an escaped '%%'. A literal
+        # ILIKE pattern like '%credential=%' would raise "got '%c'" at execute.
+        for name, sql in (('SCOPE_QUERY', SCOPE_QUERY),
+                          ('SCOPE_ACTIVE_QUERY', SCOPE_ACTIVE_QUERY),
+                          ('SCOPE_INVARIANTS_QUERY', SCOPE_INVARIANTS_QUERY),
+                          ('ACTIVATE_CONTENT', ACTIVATE_CONTENT),
+                          ('ACTIVATE_OCCURRENCES', ACTIVATE_OCCURRENCES),
+                          ('ACTIVATE_RESOURCES', ACTIVATE_RESOURCES)):
+            for ch in re.findall(r'%(.)', sql):
+                self.assertIn(ch, ('s', 'b', 't', '%'),
+                              f'{name}: invalid psycopg placeholder %{ch}')
+        # The signed-URL patterns must not be inlined into the query text.
+        self.assertNotIn('credential=', SCOPE_INVARIANTS_QUERY)
 
 
 if __name__ == '__main__':

@@ -127,13 +127,17 @@ SCOPE_ACTIVE_QUERY = SCOPE_CTE + """SELECT
     (SELECT count(*) FROM pilot_resources t
        JOIN public.resources r ON r.id = t.id WHERE r.is_active)
 """
+# Signed-URL patterns are passed as parameters (like Pilot C read_snapshot), never
+# inlined into the SQL text: psycopg3 parses the query text for placeholders, so a
+# literal '%credential=%' would be misread as a '%c' placeholder.
+SIGNED_URL_PATTERNS = ["%credential=%", "%signature=%", "%expires=%"]
+
 SCOPE_INVARIANTS_QUERY = SCOPE_CTE + """SELECT
     (SELECT count(*) FROM pilot_occurrences t
        JOIN public.exam_subjects es ON es.id = t.id WHERE es.mapping_status = 'verified'),
     (SELECT count(*) FROM pilot_resources t
        JOIN public.resources r ON r.id = t.id
-       WHERE r.source_url ILIKE ANY(ARRAY['%credential=%','%signature=%','%expires=%'])
-          OR r.file_url ILIKE ANY(ARRAY['%credential=%','%signature=%','%expires=%'])),
+       WHERE r.source_url ILIKE ANY(%s) OR r.file_url ILIKE ANY(%s)),
     (SELECT count(*) FROM public.ingestion_quarantine q
        JOIN pilot_posts p ON p.id = q.source_post_id
        WHERE q.status = 'open' AND q.kind IN (
@@ -293,7 +297,9 @@ def publish_scope(session, post_ids: Sequence[str],
         if any(active_before):
             raise PublicationRefused(f"target not fully inactive: active {active_before}")
         verified, signed, blocking, orphans = (
-            int(x) for x in session.execute(SCOPE_INVARIANTS_QUERY, params)[0])
+            int(x) for x in session.execute(
+                SCOPE_INVARIANTS_QUERY,
+                (list(post_ids), SIGNED_URL_PATTERNS, SIGNED_URL_PATTERNS))[0])
         if verified:
             raise PublicationRefused("verified mapping in scope; activation refused")
         if signed:
