@@ -1,5 +1,29 @@
 # Development Log
 
+## 2026-09-26 — Multi D-Day implemented (Production schema applied)
+
+- Expanded D-Day from a single profile target to an owner-scoped event collection
+  with one user-chosen representative. New `lib/features/home/domain/day_event.dart`
+  (+ weekday `YYYY.MM.DD.(요일)` formatter, representative/compact helpers),
+  `day_event_repository.dart`, `data/supabase_day_event_repository.dart`,
+  `day_event_providers.dart`; `day_target_card.dart` rewritten to the representative
+  big card (existing hierarchy) + compact upcoming list (collapsed 2, more/less) +
+  manage sheet (RadioGroup primary, add/edit/delete). Single-target domain/repo kept
+  for compatibility.
+- Migration `supabase/migrations/20260926000100_day_targets.sql`: `day_targets`
+  (RLS owner-only CRUD, partial unique index `(owner_id) where is_primary`), backfills
+  each existing `profiles.target_date/target_label` as a primary event (guarded),
+  keeps the legacy columns. Owner applied to Production 2026-09-26: table_exists=1,
+  rls_enabled, 4 policies, single-primary index, event_rows=2, legacy_pairs=2,
+  backfill_missing=0, multi_primary=0, null_owner=0, columns_kept=2. Claude performed
+  no Production mutation.
+- Guest session-only; auth owner-scoped persistence + account isolation; representative
+  fallback (nearest upcoming) is display-only (no DB write); primary past kept.
+- Tests: `test/day_event_test.dart` 14 PASS (domain/controller incl. save-failure +
+  responsive 360/428 × 1×/2×); direct regression (day_target, persistence, home_compact,
+  day10_b, study_home_polish) PASS; `flutter analyze` clean. Owner device acceptance
+  pending. Calendar/자동 입시 일정 = PLANNED; 학교 수행평가 공개 평가계획 연동 = FUTURE RESEARCH.
+
 ## 2026-09-26 — 1710 9월 모의평가: non-core taxonomy gap no longer blocks publication
 
 - User-first product decision: an incomplete non-core subject taxonomy (제2외국어/

@@ -239,14 +239,19 @@ useful without that engine.
 
 ## MVP boundary and implementation order
 
-### Multi D-Day MVP
+### Multi D-Day MVP — IMPLEMENTED / Production applied (2026-09-26)
 
-1. Introduce the event collection and account/Guest persistence boundary.
-2. Add list create/edit/delete and one representative/pin policy.
-3. Replace the Home single-target card with the compact representative card.
-4. Preserve the existing KST date calculation and explicit past-event policy.
-5. Add migration/compatibility handling for the existing profile target only after
-   schema and RLS review.
+Implemented exactly as scoped below; migration `20260926000100_day_targets.sql`
+applied to Production (RLS, single-primary index, legacy backfill). Owner device
+acceptance pending. Calendar/notifications/admissions linking remain deferred.
+
+1. Event collection with account (RLS) / Guest-session persistence boundary. ✓
+2. Create/edit/delete + a single user-chosen representative (radio). ✓
+3. Home single-target card replaced by the representative card + compact list
+   (collapsed 2, "일정 N개 더보기"/접기), date `YYYY.MM.DD.(요일)`. ✓
+4. Existing KST date calculation and explicit past-event policy preserved. ✓
+5. Existing single profile target backfilled as a primary event; profile columns
+   kept. ✓
 
 ### Home customization MVP
 

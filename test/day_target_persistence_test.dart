@@ -1,18 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
-import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/features/home/domain/day_target.dart';
 import 'package:legendstudy_app/features/home/domain/day_target_repository.dart';
 import 'package:legendstudy_app/features/home/data/supabase_day_target_repository.dart';
 import 'package:legendstudy_app/features/home/day_target_providers.dart';
-import 'package:legendstudy_app/features/home/presentation/day_target_card.dart';
 import 'package:legendstudy_app/features/personal/data/supabase_personal_repositories.dart';
 
 final first = DayTarget(date: DateTime(2026, 10, 6), label: '중간고사');
@@ -340,55 +337,4 @@ void main() {
     });
   });
 
-  for (final scale in [1.0, 2.0]) {
-    testWidgets(
-      'authenticated editor failures preserve visible target at ${scale}x',
-      (tester) async {
-        tester.view.physicalSize = const Size(360, 640);
-        tester.view.devicePixelRatio = 1;
-        tester.platformDispatcher.textScaleFactorTestValue = scale;
-        addTearDown(tester.view.resetPhysicalSize);
-        addTearDown(tester.view.resetDevicePixelRatio);
-        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-        final repository = Targets()..fail = true;
-        final container = ProviderContainer(
-          overrides: [
-            dayTargetRepositoryProvider.overrideWithValue(repository),
-            authStateProvider.overrideWith(
-              (ref) => Stream.value(const AuthStatus('A')),
-            ),
-          ],
-        );
-        addTearDown(container.dispose);
-        await tester.pumpWidget(
-          UncontrolledProviderScope(
-            container: container,
-            child: MaterialApp(
-              theme: AppTheme.light,
-              home: const Scaffold(
-                body: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: DayTargetCard(),
-                ),
-              ),
-            ),
-          ),
-        );
-        await tester.pumpAndSettle();
-        await tester.tap(find.widgetWithText(TextButton, '설정'));
-        await tester.pumpAndSettle();
-        expect(find.text('내 계정에 저장돼요.'), findsOneWidget);
-        await tester.enterText(find.byType(TextFormField), '새 시험');
-        await tester.tap(find.text('적용'));
-        await tester.pumpAndSettle();
-        expect(find.text('저장하지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
-        expect(container.read(dayTargetProvider).value?.label, first.label);
-        await tester.tap(find.text('해제'));
-        await tester.pumpAndSettle();
-        expect(container.read(dayTargetProvider).value?.label, first.label);
-        expect(find.byType(AlertDialog), findsOneWidget);
-        expect(tester.takeException(), isNull);
-      },
-    );
-  }
 }

@@ -1,13 +1,24 @@
 # D-Day storage — production applied / JWT and Flutter runtime PASS
 
-## Multi D-Day direction — 2026-09-25
+## Multi D-Day — IMPLEMENTED / Production applied — 2026-09-26
 
-The current single target remains implemented. The next product direction is a
-collection of user-owned events such as midterms, performance assessments, mock
-exams, CSAT, and personal schedules. Home should emphasize the representative or
-nearest event; a future Calendar view may expose the full collection and support
-admissions/essay/interview/announcement dates. This is planned product scope,
-not a schema or implementation authorization in this audit.
+Multi D-Day is now implemented as an owner-scoped event collection
+(`public.day_targets`: id, owner_id→auth.users, title, event_date, is_primary),
+migration `20260926000100_day_targets.sql`. RLS restricts SELECT/INSERT/UPDATE/
+DELETE to `owner_id = auth.uid()`; a partial unique index `(owner_id) where
+is_primary` keeps at most one representative per owner. Owner applied the
+migration to Production 2026-09-26; the 2 existing single D-Days were backfilled
+as primary events (backfill_missing=0, no multi-primary, no null owner), and the
+legacy `profiles.target_date/target_label` columns are preserved. The user chooses
+one representative (radio); Home shows it (or nearest upcoming as a display-only
+fallback) plus a compact upcoming list. Guests remain session-memory only.
+Owner device UX acceptance is still pending. A full Calendar view remains PLANNED.
+
+### Original direction note (2026-09-25, superseded by the above)
+
+The next product direction is a collection of user-owned events; Home emphasizes
+the representative or nearest event; a future Calendar may expose the full
+collection. This was planned scope, now realized by the implementation above.
 
 ## Final acceptance (2026-09-13)
 

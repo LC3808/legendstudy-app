@@ -121,9 +121,10 @@ Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remain
 deferred per [EOD closeout](eod-2026-09-25.md). Next data priority stays latest-post
 readiness → Wave1(2020→current) → release, then older waves; see
 [rollout](materials-data-rollout.md). No automatic backfill/publication authority.
-Mock full catalogue/history/advanced analysis remain gaps; Multi D-Day, Home
-customization, analytics platform, Achievement and Notification backend remain
-planned/foundation. Prior detailed checkpoints are preserved in
+Mock full catalogue/history/advanced analysis remain gaps. Multi D-Day is
+IMPLEMENTED (Production `day_targets` schema applied; Owner device acceptance
+pending); Home customization, analytics platform, Achievement and Notification
+backend remain planned/foundation. Prior detailed checkpoints are preserved in
 [history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
 
 
@@ -150,8 +151,10 @@ pending-device/EOD statements where they conflict.
 - OAuth local runtime configuration was restored; canonical profile-device command
   and required public config boundary are recorded in the EOD closeout.
 - **Daily Sync Phase1 COMPLETE; Phase2 NOT STARTED / OWNER GATED.**
-- Multi D-Day, Home customization and `analytics.legendstudy.com` remain
-  **PLANNED / FOUNDATION**, not implementation.
+- **Multi D-Day: IMPLEMENTED / Production schema applied / Owner device acceptance
+  pending.** Owner-scoped `day_targets` (RLS, single primary), 2 legacy single
+  D-Days backfilled. Home customization and `analytics.legendstudy.com` remain
+  **PLANNED / FOUNDATION**.
 - Top-level engineering rule: **minimum cost; easiest viable solution; lightweight
   structure; concise implementation; reuse first; expand only on demonstrated
   need/failure evidence.** Read Wiki first and avoid repeating solved research or
@@ -174,8 +177,8 @@ quickly and accurately before expanding major feature work. Canonical plan:
 5. Next major product tracks: Essay DB/LAB using existing Manus research/assets;
    Mock score/grade history; Admissions evidence/rules and later model-gated
    acceptance estimation; internal-grade input and university/department analysis.
-6. Multi D-Day/Home customization/analytics.legendstudy.com remain planned and
-   are scheduled around the higher-priority data/product tracks.
+6. Home customization/analytics.legendstudy.com remain planned and are scheduled
+   around the higher-priority data/product tracks (Multi D-Day is implemented).
 
 Do not commission duplicate research. Check Wiki/Research Registry/imported Manus
 sources first and retrieve original Manus reports when synthesis detail is
