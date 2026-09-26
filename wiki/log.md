@@ -1,5 +1,25 @@
 # Development Log
 
+## 2026-09-26 — Daily Sync A3 preflight (dry-run only; PRODUCTION_WRITE 0)
+
+- Re-observed the 5 A2 candidates through the existing crawler/parser/normalizer
+  (source read only, attachment fetch 0, no new pipeline). Preflight canonical plan
+  only; no apply/publish, no accepted-state advance.
+- SAFE_TO_PUBLISH (high confidence, valid canonical exam): **1712** (national_mock
+  2026-09 고1), **1711** (national_mock 2026-09 고2), **1649** (csat 2024/2025학년도).
+- HELD: **1710** — Owner fixed the source title (2027학년도 9월 모의평가) but the source
+  category is `◆ "고3"을 위한 공간` (no `모의고사` subcategory token), so classify() —
+  which is category-based by contract — yields study_material, not the expected
+  평가원 모의평가(exam). This is a source-category data mismatch, not a classifier bug
+  (sibling 1706 등 have the full `/3학년 모의고사 전과목 자료` category and classify as
+  exam). No taxonomy change made; needs Owner decision. **1618** — evaluation_mock
+  parsed but medium confidence (soft `resource_kind_unknown`/`resource_subject_unknown`
+  on 1–2 resources); held for resource review.
+- Production existing-rows not queried here; per Owner Phase 0 (source_posts=23 =
+  Pilot C set) the 5 are expected absent → INSERT, pending a read-only confirmation.
+- `.gitignore`: added `.local/` so operator accepted-state/report artifacts are not
+  committed. No pipeline code changed; ingestion regression (146+12+11+4) green.
+
 ## 2026-09-26 — Daily Sync A2 recent delta (bounded, source read-only)
 
 - Added `tool/ingestion/recent_delta.py` (glue only): loads the A1 accepted state,
