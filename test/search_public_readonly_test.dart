@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:legendstudy_app/features/content/data/supabase_content_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/features/materials/data/supabase_search_repository.dart';
@@ -36,6 +38,19 @@ void main() {
           browse.items.length,
           lessThanOrEqualTo(SupabaseSearchRepository.pageSize),
         );
+        expect(
+          (await repo.search(
+            SearchQuery('', filters: const SearchFilters(year: 2009)),
+          )).items,
+          isEmpty,
+        );
+        final y2010 = await repo.search(
+          SearchQuery('', filters: const SearchFilters(year: 2010)),
+        );
+        expect(y2010.items, isNotEmpty);
+        expect(y2010.items.every((item) => item.exam?.year == 2010), true);
+        await SupabaseContentRepository(client).fetchRecentContent();
+        await SupabaseContentRepository(client).searchContent('논술');
         await repo.search(SearchQuery('2026 9 월 고3 영어 문제'));
         await repo.search(SearchQuery('9월 모의평가'));
         await repo.search(SearchQuery('2025 수능 수학'));

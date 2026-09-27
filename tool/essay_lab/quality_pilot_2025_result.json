@@ -1,0 +1,173 @@
+{
+  "plan_sha256": "650923e5e4acd8db9fd7ae21ef6ab4c28491e31a06d636986f9d78d7d953ac94",
+  "preflight": {
+    "sookmyung": {
+      "universities": 1,
+      "essay_exams": 1,
+      "essay_exam_resources": 7
+    },
+    "hanyang": {
+      "universities": 1,
+      "essay_exams": 1,
+      "essay_exam_resources": 6
+    }
+  },
+  "production_mutation": true,
+  "prior_counts": {
+    "source_posts": 443,
+    "content_items": 443,
+    "exams": 298,
+    "exam_subjects": 5112,
+    "resources": 10556,
+    "ingestion_quarantine": 560,
+    "universities": 3,
+    "essay_exams": 19,
+    "essay_exam_resources": 121
+  },
+  "actual": {
+    "sookmyung": {
+      "universities": 1,
+      "essay_exams": 1,
+      "essay_exam_resources": 7
+    },
+    "hanyang": {
+      "universities": 1,
+      "essay_exams": 1,
+      "essay_exam_resources": 6
+    }
+  },
+  "runtime": {
+    "sookmyung": {
+      "anon": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 1,
+          "essay_exam_resources": 7
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          7
+        ]
+      },
+      "authenticated": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 1,
+          "essay_exam_resources": 7
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          7
+        ]
+      }
+    },
+    "hanyang": {
+      "anon": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 1,
+          "essay_exam_resources": 6
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          6
+        ]
+      },
+      "authenticated": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 1,
+          "essay_exam_resources": 6
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          6
+        ]
+      }
+    }
+  },
+  "unrelated_mutations": 0,
+  "duplicates": 0,
+  "orphans": 0,
+  "public_read": {
+    "sookmyung": {
+      "guest_http_read": "PASS",
+      "university": 1,
+      "exams": 1,
+      "mappings": 7,
+      "resources": 3
+    },
+    "hanyang": {
+      "guest_http_read": "PASS",
+      "university": 1,
+      "exams": 1,
+      "mappings": 6,
+      "resources": 3
+    }
+  },
+  "packages": {
+    "sookmyung": {
+      "package_version": "v1",
+      "package_sha256": "d6192e94a953c9d492b108bbb0d734327d05db3d8d5cabb9ea78c5019b7594f4",
+      "roles": [
+        "exam_intent",
+        "example_answer",
+        "explanation",
+        "high_scoring_answer",
+        "passage",
+        "question",
+        "scoring_criteria"
+      ],
+      "missing_roles": [
+        "guidebook",
+        "model_answer",
+        "other"
+      ],
+      "blind_ready": true,
+      "target_question": "1-1",
+      "files": {
+        "answer_1.png": "63b72db087a70e393e1c201c29b34c5b8ec86c9eda04ea2ab679472a40595736",
+        "blind_input.json": "35c2b5513b4ad8a0cbd1bbae589dfc5828e55bacebe291e434f013c478583ed1",
+        "evidence_package.json": "d6192e94a953c9d492b108bbb0d734327d05db3d8d5cabb9ea78c5019b7594f4",
+        "ground_truth.json": "cdb8dd0dad4cd7aa603c2b2d8737a519b7a79a48c19671aa8eaf8cd556911831",
+        "question_page_1.png": "a22921ec00616aa475675223f99618f1da9326f5fb7b73e7002907fb96361846",
+        "question_page_2.png": "9fccd3bd6615845a5e5a2b54fd6fa6068441c207fceefb47e8be2e5175547dd3"
+      }
+    },
+    "hanyang": {
+      "package_version": "v1",
+      "package_sha256": "5d0eb9e56d501d6a74d6d86f3099882e0ffdbe9a629a9fb29cbd43f5db6d4cf6",
+      "roles": [
+        "exam_intent",
+        "example_answer",
+        "explanation",
+        "passage",
+        "question",
+        "scoring_criteria"
+      ],
+      "missing_roles": [
+        "guidebook",
+        "high_scoring_answer",
+        "model_answer",
+        "other"
+      ],
+      "blind_ready": false,
+      "target_question": null,
+      "files": {
+        "evidence_package.json": "5d0eb9e56d501d6a74d6d86f3099882e0ffdbe9a629a9fb29cbd43f5db6d4cf6"
+      }
+    }
+  },
+  "deterministic_rerun": "PASS",
+  "ai_evaluation_executed": false,
+  "validation": {
+    "flutter_focused": 41,
+    "python_quality_and_regression": 42,
+    "flutter_analyze": "PASS",
+    "live_search": "PASS",
+    "private_pdf_proofs": "PASS",
+    "answer_crop_and_criteria_visual": "PASS",
+    "full_flutter_suite": "NOT_RUN",
+    "wiki": "PASS"
+  }
+}

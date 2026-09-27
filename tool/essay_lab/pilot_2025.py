@@ -77,9 +77,9 @@ def load_plan():
     return validate(json.loads(PLAN.read_text()))
 
 
-def scope(plan, slug):
-    validate(plan)
-    assert slug in SCOPE
+def scope(plan, slug, *, validate_plan=validate):
+    validate_plan(plan)
+    assert slug in {u["slug"] for u in plan["universities"]}
     u = next(u for u in plan['universities'] if u['slug'] == slug)
     es = sorted((e for e in plan['exams'] if e['university_id'] == u['id']), key=lambda e: e['exam_key'])
     ids = {e['id'] for e in es}
@@ -87,8 +87,8 @@ def scope(plan, slug):
     return dict(zip(TABLES, ([u], es, ms)))
 
 
-def preflight(session, plan, slug):
-    rows = scope(plan, slug); u = rows['universities'][0]
+def preflight(session, plan, slug, *, validate_plan=validate):
+    rows = scope(plan, slug, validate_plan=validate_plan); u = rows['universities'][0]
     assert session.execute('SELECT count(*) FROM public.universities WHERE id=%s OR slug=%s OR name=%s', (u['id'],u['slug'],u['name']))[0][0] == 0, 'University collision'
     es = rows['essay_exams']; ids = [e['id'] for e in es]
     assert session.execute('SELECT count(*) FROM public.essay_exams WHERE id::text=ANY(%s) OR university_id=%s', (ids,u['id']))[0][0] == 0, 'Exam collision'
@@ -113,11 +113,11 @@ def preflight(session, plan, slug):
     return {t:len(v) for t,v in rows.items()}
 
 
-def insert_scope(session, plan, slug):
+def insert_scope(session, plan, slug, *, validate_plan=validate):
     """Caller must rollback on ANY exception; no implicit transaction commit."""
     assert session.execute('SELECT current_user')[0][0] == 'postgres', 'Operator role required'
-    expected = preflight(session, plan, slug)
-    rows = scope(plan, slug); actual = {}
+    expected = preflight(session, plan, slug, validate_plan=validate_plan)
+    rows = scope(plan, slug, validate_plan=validate_plan); actual = {}
     session.execute('SET LOCAL ROLE service_role')
     for table, records in rows.items():
         columns = COLUMNS[table]
@@ -130,14 +130,14 @@ def insert_scope(session, plan, slug):
     return actual
 
 
-def runtime_check(session, plan, slug):
+def runtime_check(session, plan, slug, *, validate_plan=validate):
     """Exact rows, real SQL-role RLS reads/write denial and existing lookup query.
 
     Checks run inside the caller transaction. Write-denial probes affect zero rows
     even if privileges drift, and each probe is rolled back to its savepoint.
     SQL-role execution is not an end-user JWT login test.
     """
-    rows=scope(plan,slug); ids=[e['id'] for e in rows['essay_exams']]
+    rows=scope(plan,slug,validate_plan=validate_plan); ids=[e['id'] for e in rows['essay_exams']]
     uid=rows['universities'][0]['id']
     filters={'universities':('id=%s',(uid,)),
              'essay_exams':('id::text=ANY(%s)',(ids,)),

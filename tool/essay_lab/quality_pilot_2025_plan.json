@@ -1,0 +1,379 @@
+{
+  "scope": "2025 Sookmyung/Hanyang evaluation preparation; no AI execution",
+  "universities": [
+    {
+      "id": "c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b",
+      "slug": "sookmyung",
+      "name": "숙명여자대학교",
+      "is_active": true
+    },
+    {
+      "id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "slug": "hanyang",
+      "name": "한양대학교",
+      "is_active": true
+    }
+  ],
+  "exams": [
+    {
+      "id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "university_id": "c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b",
+      "admission_year": 2025,
+      "exam_key": "mock-humanities",
+      "exam_name": "2025학년도 숙명여자대학교 모의논술 인문계열",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "인문계열",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": 100,
+      "question_count": null,
+      "answer_length_text": "문항 1-1: 300±30자; 1-2: 600±60자 (mapped subset)",
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "Official 2025 mock exam headers verified against university-hosted PDFs; mapping covers 계열문항 1 (1-1, 1-2), not the entire humanities exam. Official selected respondent answers page 1 matched by embedded image SHA256.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "university_id": "1090e1be-174e-5042-abd3-ca929c6e26f8",
+      "admission_year": 2025,
+      "exam_key": "mock-humanities",
+      "exam_name": "2025학년도 한양대학교 모의논술 인문계열",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "인문계열",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 1,
+      "answer_length_text": "1,200자",
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "Official 2025 mock exam headers verified against university-hosted PDFs; mapping covers the single humanities question. Example answer is not a respondent high-scoring answer.",
+      "verification_status": "verified",
+      "is_active": true
+    }
+  ],
+  "documents": [
+    {
+      "content_item_id": "ba102b24-c82a-53d3-81a6-1519ec888b77",
+      "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+      "title": "2025학년도 숙명여대 모의논술_인문1 문제.pdf",
+      "source_resource_key": "cwj4l1/dJMcaaDD5RL",
+      "sha256": "c3d2a9ab563c91438dea5c4ff99b172e1fced4cfc7104bf22a599d816e6be4c2",
+      "source_post_id": "1697",
+      "file": "1697-2.pdf",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "source_publication_date": "2024-07-31"
+    },
+    {
+      "content_item_id": "ba102b24-c82a-53d3-81a6-1519ec888b77",
+      "resource_id": "55b745da-a297-5797-b855-678f8e744506",
+      "title": "2025학년도 숙명여대 모의논술_인문1 우수답안.pdf",
+      "source_resource_key": "1Pltt/dJMcaaDD5RN",
+      "sha256": "e0b55edd2eb70fe8b90da3e3d542ff9699066dfb22dd9d779bd298670d5e4429",
+      "source_post_id": "1697",
+      "file": "1697-3.pdf",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "source_publication_date": "2024-07-31"
+    },
+    {
+      "content_item_id": "ba102b24-c82a-53d3-81a6-1519ec888b77",
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "title": "2025학년도 숙명여대 모의논술_인문1 해설,답안.pdf",
+      "source_resource_key": "lJIka/dJMcagcNgjs",
+      "sha256": "307def4eb76c6690dd34c41e1b19b799fdd72563b563f6d8038d2b2925478151",
+      "source_post_id": "1697",
+      "file": "1697-4.pdf",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "source_publication_date": "2024-07-31"
+    },
+    {
+      "content_item_id": "83226e46-01e2-5a02-a6b7-de6546543d57",
+      "resource_id": "f35237a4-6d92-56da-9032-83d4e98c2db4",
+      "title": "2025학년도 한양대 모의논술_인문 문제.pdf",
+      "source_resource_key": "2VyfO/btsKR7HymmA",
+      "sha256": "200f46ed0b070299b0eb247eb57eef096222dcb0f1fde4f211f4956f9287fb4a",
+      "source_post_id": "1660",
+      "file": "1660-0.pdf",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "source_publication_date": "2024-08-28"
+    },
+    {
+      "content_item_id": "83226e46-01e2-5a02-a6b7-de6546543d57",
+      "resource_id": "2aecab13-e0ae-50f6-9ba6-ba04f2306354",
+      "title": "2025학년도 한양대 모의논술_인문 예시답안.pdf",
+      "source_resource_key": "cJhLzE/btsKSnwyCO0",
+      "sha256": "d48038a7fcd932e0c6260651713580e94bfc86b12107bf11a64220fc77c6bdc6",
+      "source_post_id": "1660",
+      "file": "1660-1.pdf",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "source_publication_date": "2024-08-28"
+    },
+    {
+      "content_item_id": "83226e46-01e2-5a02-a6b7-de6546543d57",
+      "resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "title": "2025학년도 한양대 모의논술_인문 출제의도.pdf",
+      "source_resource_key": "meEjU/btsKT5OHHgC",
+      "sha256": "e8bf4ac96fa6f117954d3c533d7915b6f8dce1e1074729c41ce070367ed8b06f",
+      "source_post_id": "1660",
+      "file": "1660-2.pdf",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "source_publication_date": "2024-08-28"
+    }
+  ],
+  "mappings": [
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; question 1-1,1-2",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; passages 가,나,다",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "55b745da-a297-5797-b855-678f8e744506",
+      "role": "high_scoring_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; question 1-1 (upper), question 1-2 (lower); respondent identities unknown",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "Official post explicitly calls attachment 모의논술 응시자 우수답안; embedded image identical to official selected-answer PDF page 1. No individual score or student identity asserted.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 4; section 3 출제 의도; question 1-1,1-2",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 5; section 5 문항 해설; question 1-1,1-2",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 6-7; section 6 채점 기준; question 1-1,1-2",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 7; section 7 예시 답안; question 1-1,1-2",
+      "official_source_url": "https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify",
+      "evidence_note": "University-hosted PDF selected pages match normalized text of existing resource.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "f35237a4-6d92-56da-9032-83d4e98c2db4",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 논제",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "f35237a4-6d92-56da-9032-83d4e98c2db4",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; passages 가,나,다",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "2aecab13-e0ae-50f6-9ba6-ba04f2306354",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 예시 답안",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 출제 의도 및 문제 해설",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 출제 의도 및 문제 해설",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5",
+      "resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; 평가 내용/배점/종합 기준/감점/유의 사항",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02",
+      "evidence_note": "University-hosted PDF SHA256 identical to existing resource; role verified from document headings.",
+      "is_active": true
+    }
+  ],
+  "review_queue": [
+    {
+      "university": "hanyang",
+      "exam_key": "mock-humanities",
+      "admission_year": 2025,
+      "reason": "official_respondent_answer_missing",
+      "required": "Official respondent high-scoring answer for this 2025 mock question, or existing Materials resource for a different 2025 exam containing both question and official respondent answer. Example answer cannot substitute.",
+      "status": "SOURCE_SUPPLEMENT_REQUIRED"
+    },
+    {
+      "university": "sookmyung",
+      "reason": "source_filename_not_exam_identity",
+      "status": "ISOLATED_NOT_MAPPED",
+      "detail": "1697 first pair filenames say mock but headers say regular admission; selected later mock resources verified from official content. No mapping of the conflicting pair."
+    }
+  ],
+  "official_documents": [
+    {
+      "file": "sm-official-0.pdf",
+      "url": "https://admission.sookmyung.ac.kr/common/downLoad.asp?strFileName=%EB%AC%B8%EC%A0%9C%EC%A7%80_2025%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%99%EB%AA%85%EC%97%AC%EC%9E%90%EB%8C%80%ED%95%99%EA%B5%90%20%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0%EC%8B%9C%ED%97%98%20%E2%98%85.pdf&strRealFileName=/upload/BBS0006/20240812170111001.pdf",
+      "sha256": "dd06fd2392033cb7e7d2e0442b0f30aeade02badb359f3e31f13c0949a86cc87"
+    },
+    {
+      "file": "sm-official-1.pdf",
+      "url": "https://admission.sookmyung.ac.kr/common/downLoad.asp?strFileName=%EB%AC%B8%ED%95%AD%EC%B9%B4%EB%93%9C_2025%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%99%EB%AA%85%EC%97%AC%EC%9E%90%EB%8C%80%ED%95%99%EA%B5%90%20%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0%EC%8B%9C%ED%97%98.pdf&strRealFileName=/upload/BBS0006/20240812170111002.pdf",
+      "sha256": "c8fb7cece3acf416c88948a23120a37f61d04731079de93a4f9076fb7db9f9a1"
+    },
+    {
+      "file": "sm-official-3.pdf",
+      "url": "https://admission.sookmyung.ac.kr/common/downLoad.asp?strFileName=%EC%84%A0%EC%A0%95%EB%90%9C%20%EC%9A%B0%EC%88%98%EB%8B%B5%EC%95%88_2025%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%99%EB%AA%85%EC%97%AC%EC%9E%90%EB%8C%80%ED%95%99%EA%B5%90%20%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0%EC%8B%9C%ED%97%98.pdf&strRealFileName=/upload/BBS0006/20240812170112001.pdf",
+      "sha256": "6375ed25f681369aaebdd92685324bdd61378509558402f7e024cf2e17151177"
+    },
+    {
+      "file": "hy-official-0.pdf",
+      "url": "https://go.hanyang.ac.kr/file/download.do?menu=boardfile&file_no=2545",
+      "sha256": "200f46ed0b070299b0eb247eb57eef096222dcb0f1fde4f211f4956f9287fb4a"
+    },
+    {
+      "file": "hy-official-1.pdf",
+      "url": "https://go.hanyang.ac.kr/file/download.do?menu=boardfile&file_no=2549",
+      "sha256": "d48038a7fcd932e0c6260651713580e94bfc86b12107bf11a64220fc77c6bdc6"
+    },
+    {
+      "file": "hy-official-2.pdf",
+      "url": "https://go.hanyang.ac.kr/file/download.do?menu=boardfile&file_no=2548",
+      "sha256": "e8bf4ac96fa6f117954d3c533d7915b6f8dce1e1074729c41ce070367ed8b06f"
+    }
+  ],
+  "proofs": {
+    "accessed_at": "2026-09-27",
+    "sookmyung": {
+      "question_pages": {
+        "local": [
+          1,
+          2
+        ],
+        "official": [
+          1,
+          2
+        ],
+        "method": "normalized extracted text equality"
+      },
+      "card_pages": {
+        "local": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "official": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "method": "normalized extracted text equality"
+      },
+      "answer_page": {
+        "local": 1,
+        "official": 1,
+        "method": "embedded image bytes SHA256 equality",
+        "image_sha256": "96ea75df7f998d17fd77cad5fa8a3aefd8958a921f55e5a522e3da1d5f0285e6",
+        "official_label": "모의논술 응시자 우수답안",
+        "answer_blocks": 2,
+        "selected_question": "1-1",
+        "individual_student_count": "UNKNOWN",
+        "individual_score": "NONE",
+        "university_comment": "NONE"
+      }
+    },
+    "hanyang": {
+      "method": "all three entire PDF SHA256 equality",
+      "high_scoring_answer": "NONE_IN_INSPECTED_SET"
+    }
+  }
+}

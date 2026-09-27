@@ -2770,3 +2770,14 @@ locators and shared-passage references. No AI content/execution or DB/schema cha
 Deterministic generator/contract/metadata manifest;17 new+32 regression tests PASS.
 Owner iOS/accepted-state preserved. [Canonical handoff](essay-lab-evidence-package-v1.md);
 Owner/ChatGPT package review then separate prototype gate.
+
+## 2026-09-27 — 2010+ discovery and two-university Essay evaluation preparation
+
+Shared repository policy hides pre2010 exams from ordinary search/Home only;
+archive/history and non-exams preserved. Applied Sookmyung1/1/7 + Hanyang1/1/6
+canonical rows with existing writer; Production5/21/134. Public read/RLS denial/
+unrelated fingerprints PASS. Sookmyung official respondent1-1 image blind READY;
+Hanyang example answer remains example, respondent source supplement required.
+Private deterministic packages, separate ground truth; no AI evaluation/schema/UI.
+[Next gate and review queue](essay-lab-evaluation-pilot-2025.md). Flutter41 + Python42,
+public read/analyze PASS; Owner iOS/accepted-state and SKKU preserved.

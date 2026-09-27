@@ -268,3 +268,20 @@ searchable. [Current cleanup and Owner PDF acceptance](day-9-c-resource-detail.m
 Latest Owner override: exam display titles stop at the first 모의고사/모의평가;
 search matching still uses raw title. Result labels share canonical exam_type-based
 mapping with detail/saved/recent (csat→수능). [Current rule](day-9-c-resource-detail.md#owner-final-title-and-classification-corrections--2026-09-25).
+
+## Exam discovery year policy
+
+2026-09-27 Owner decision: ordinary mock/CSAT discovery uses `exams.year >=2010`
+(inclusive), not academic_year/title/publication year. The shared `DiscoveryPolicy`
+applies before pagination in Materials exam search/facets and content discovery
+(Home recent + legacy content search). General content stream excludes exam rows
+so an extension-less exam cannot bypass the policy. Missing exam year is not
+eligible for ordinary discovery; no source data is changed.
+
+Home uses a filtered left relation plus non-exam OR qualifying-exam condition;
+non-exam content remains visible. No per-screen filter. Explicit2009 cannot
+override minimum2010. Details by slug/ID, saved/recent enrichment and archive
+queries remain unrestricted. Historical rows/active flags/resources preserved;
+no migration or Production data mutation for this policy. Essay/general2009
+fixtures remain visible.2009 excluded,2010/2011/current included: focused tests
+and actual public search2010 result PASS. UI deployment requires the new App build.

@@ -130,11 +130,10 @@ validation above is from the subsequent global surface UI task; the strategy its
 run latest profile build; check full exam sequences/known missing cases, Essay
 2020+ year/university searches and all CTA forms, especially Busan1593 real PDF.
 Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserved.
-On device PASS: Materials CLOSED. Owner separately authorized the
-[Essay LAB Pilot](essay-lab-pilot-2025.md): applied3 universities/19 exams/121 mappings.
-Pilot/schema PASS;2 role reviews closed, existing roles retained.
-[SKKU package v1](essay-lab-evidence-package-v1.md):3 questions/21 official items;
-49 tests PASS, DB READ ONLY. Owner review next; no AI/UI/expansion.
+On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
+Production5 universities/21 exams/134 mappings; Sookmyung1-1 image blind READY,
+Hanyang official evidence PARTIAL (respondent answer missing). SKKU v1 unchanged PASS.
+AI evaluation next. Exam discovery2010+; archive preserved. [Search policy](day-9-search-explore.md#exam-discovery-year-policy).
 Do not start analytics, new Materials audits or unrelated UI work.
 Current resource checks are automated server/App-contract evidence, not new device
 acceptance.1710 A1 reconciliation remains separate; never republish1710.

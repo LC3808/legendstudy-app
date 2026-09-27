@@ -1,5 +1,9 @@
 import 'dart:convert';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'discovery_policy.dart';
+
 import '../domain/content_item.dart';
 import '../domain/content_repository.dart';
 import '../domain/content_types.dart';
@@ -18,13 +22,16 @@ class SupabaseContentRepository implements ContentRepository {
 
   @override
   Future<List<ContentItem>> fetchRecentContent({int limit = 30}) async {
-    final rows = await client
-        .from('content_items')
-        .select(projection)
-        .eq('is_active', true)
-        .order('published_at', ascending: false, nullsFirst: false)
-        .order('id', ascending: false)
-        .limit(_limit(limit));
+    final rows =
+        await DiscoveryPolicy.content(
+              client
+                  .from('content_items')
+                  .select('$projection,${DiscoveryPolicy.examProjection}')
+                  .eq('is_active', true),
+            )
+            .order('published_at', ascending: false, nullsFirst: false)
+            .order('id', ascending: false)
+            .limit(_limit(limit));
     return rows.map(ContentItem.fromJson).toList();
   }
 
@@ -46,10 +53,12 @@ class SupabaseContentRepository implements ContentRepository {
     }
     final tokens = text.isEmpty ? <String>[] : text.split(RegExp(r'\s+'));
     if (tokens.length > 8) throw const FormatException('검색어는 8단어 이내로 입력해 주세요.');
-    var request = client
-        .from('content_items')
-        .select(projection)
-        .eq('is_active', true);
+    var request = DiscoveryPolicy.content(
+      client
+          .from('content_items')
+          .select('$projection,${DiscoveryPolicy.examProjection}')
+          .eq('is_active', true),
+    );
     if (contentType != null) request = request.eq('content_type', contentType);
     for (final token in tokens) {
       final literal = token

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../content/data/supabase_content_repository.dart';
+import '../../content/data/discovery_policy.dart';
 import '../../exams/data/supabase_exam_repository.dart';
 import '../../resources/data/supabase_resource_repository.dart';
 import '../domain/search_models.dart';
@@ -69,14 +70,16 @@ class SupabaseSearchRepository implements SearchRepository {
     final resourceJoin = terms.resourceKinds.isEmpty || scopedKinds
         ? ''
         : ',kind_matches:resources!inner(id)';
-    var examRequest = client
-        .from('exams')
-        .select(
-          '${SupabaseExamRepository.projection},'
-          'content:content_items!exams_content_type!inner('
-          '${SupabaseContentRepository.projection}$resourceJoin)$subjectJoin',
-        )
-        .eq('content.is_active', true);
+    var examRequest = DiscoveryPolicy.exams(
+      client
+          .from('exams')
+          .select(
+            '${SupabaseExamRepository.projection},'
+            'content:content_items!exams_content_type!inner('
+            '${SupabaseContentRepository.projection}$resourceJoin)$subjectJoin',
+          )
+          .eq('content.is_active', true),
+    );
     if (f.contentType != null) {
       examRequest = examRequest.eq('content.content_type', f.contentType!);
     }
@@ -138,7 +141,8 @@ class SupabaseSearchRepository implements SearchRepository {
             'exam:exams!exams_content_type(content_item_id)$resourceJoin',
           )
           .eq('is_active', true)
-          .isFilter('exam', null);
+          .isFilter('exam', null)
+          .neq('content_type', 'exam');
       if (f.contentType != null) {
         general = general.eq('content_type', f.contentType!);
       }
@@ -208,11 +212,9 @@ class SupabaseSearchRepository implements SearchRepository {
   @override
   Future<SearchFacets> facets({int offset = 0}) async {
     checkOffset(offset);
-    final exams = await client
-        .from('exams')
-        .select('content_item_id,year,exam_month,exam_type')
-        .order('content_item_id')
-        .range(offset, offset + facetPageSize);
+    final exams = await DiscoveryPolicy.exams(
+      client.from('exams').select('content_item_id,year,exam_month,exam_type'),
+    ).order('content_item_id').range(offset, offset + facetPageSize);
     final subjects = await client
         .from('subjects')
         .select('id,name')

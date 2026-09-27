@@ -122,22 +122,23 @@ void main() {
       isEmpty,
     );
   });
-  test(
-    'recent request uses exact projection, ordering and empty success',
-    () async {
-      expect(
-        await SupabaseContentRepository(client).fetchRecentContent(limit: 12),
-        isEmpty,
-      );
-      final q = requests.single.url.queryParameters;
-      expect(q['select'], SupabaseContentRepository.projection);
-      expect(q['is_active'], 'eq.true');
-      expect(q['limit'], '12');
-      expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
-      expect(q.containsKey('content_type'), isFalse);
-      expect(q.containsKey('exam_type'), isFalse);
-    },
-  );
+  test('recent request uses exact projection, ordering and empty success', () async {
+    expect(
+      await SupabaseContentRepository(client).fetchRecentContent(limit: 12),
+      isEmpty,
+    );
+    final q = requests.single.url.queryParameters;
+    expect(
+      q['select'],
+      '${SupabaseContentRepository.projection},discovery_exam:exams!exams_content_type(content_item_id)',
+    );
+    expect(q['discovery_exam.year'], 'gte.2010');
+    expect(q['is_active'], 'eq.true');
+    expect(q['limit'], '12');
+    expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
+    expect(q.containsKey('content_type'), isFalse);
+    expect(q.containsKey('exam_type'), isFalse);
+  });
   test('recent feed preserves publication timestamp order across all types', () async {
     // The backend owns ORDER BY; this fixture represents its result. Verify the
     // exact query above and that the client neither re-sorts by update time nor
@@ -198,10 +199,11 @@ void main() {
       expect(await repo.searchContent('  '), isEmpty);
       expect(requests, isEmpty);
       await repo.searchContent('영어 모의고사');
-      expect(requests.single.url.queryParametersAll['or'], hasLength(2));
+      expect(requests.single.url.queryParametersAll['or'], hasLength(3));
       expect(
         requests.single.url.queryParameters['select'],
-        SupabaseContentRepository.projection,
+        '${SupabaseContentRepository.projection},'
+        'discovery_exam:exams!exams_content_type(content_item_id)',
       );
       await expectLater(repo.searchContent('*'), throwsFormatException);
       await expectLater(
