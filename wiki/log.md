@@ -1,5 +1,20 @@
 # Development Log
 
+## 2026-09-27 — Materials final closeout / Essay LAB priority
+
+- [Closeout](materials-final-closeout-2026-09-27.md):915 archive entries checked;
+  +243 exams/+127 essays,37 bounded groups,14833 exact inserts. Public441 read paths
+  PASS; active296 exams/135 essays. Duplicates/collisions/unrelated mutations0.
+- Partial1474/1447 inactive, sources retained,2 test recent views deleted;1432 month
+  corrected5→4. Source343 genuine exception; original52 hold releases18 full-set
+  counterparts only. Accepted-state/1710/Owner iOS/onboarding preserved.
+- Busan1593 `other` PDF works through existing deployed resolver (HTTP206/%PDF);
+  Essay split/combined/guide CTA corrected. No schema/new architecture.
+- Analyze/focused38/Python389/resolver38 PASS. Full855 PASS/skip1/known3 failures;
+  native PostgreSQL25 NOT_RUN. Owner native QA remains PENDING, not CLOSED.
+- [Owner handoff](materials-closeout-essay-lab-handoff.md): Essay LAB P0 canonical
+  model after device PASS/separate instruction; analytics afterward. STOP for QA.
+
 ## 2026-09-27 — Phase3 FULL_SET22 Production publication
 
 - [Four-group closeout](exam-full-set-publication-2026-09-27.md): planned=actual

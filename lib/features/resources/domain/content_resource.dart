@@ -65,8 +65,11 @@ class ContentResource {
   /// kind is a single answer kind. Keep canonical metadata unchanged.
   String get purposeLabel {
     final label = sourceLabel?.trim().isNotEmpty == true ? sourceLabel! : title;
-    if (RegExp(r'가이드\s*북|guide\s*book', caseSensitive: false).hasMatch(label)) {
-      return '가이드북';
+    if (RegExp(
+      r'가이드\s*북|guide\s*book|안내서|자료집',
+      caseSensitive: false,
+    ).hasMatch(label)) {
+      return '자료';
     }
     if (resourceType == 'other') return '자료';
     if (label.contains('문제') && RegExp(r'답안|정답|해설').hasMatch(label)) {
@@ -74,6 +77,19 @@ class ContentResource {
     }
     if (resourceType == 'answer' && label.contains('답안')) return '답안';
     return resourceTypeLabels[resourceType] ?? '자료';
+  }
+
+  String openLabel({bool isEssay = false}) {
+    if (isEssay &&
+        !{'question', 'answer', 'answer_explanation'}.contains(resourceType)) {
+      return '자료 보기';
+    }
+    if (isEssay &&
+        purposeLabel != '자료' &&
+        {'answer', 'answer_explanation'}.contains(resourceType)) {
+      return '답안 보기';
+    }
+    return '$purposeLabel 보기';
   }
 
   /// PDF-ness comes from normalized resource metadata, never a title or URL

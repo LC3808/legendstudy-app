@@ -233,7 +233,7 @@ Deno.test("bounded observer rejects unsafe redirects, loops and oversized source
 });
 
 Deno.test("non-PDF and audio resources never resolve as PDF", async () => {
-  for (const resourceType of ["other", "listening_audio"]) {
+  for (const resourceType of ["listening_script", "listening_audio"]) {
     const result = await resolveResource(
       { resource_id: id },
       repo(resource({ resourceType, fileExtension: "pdf" })),
@@ -270,4 +270,17 @@ Deno.test("handler maps malformed input and never exposes network errors", async
     failed.status !== 200 ||
     JSON.stringify(await failed.json()).includes("signed")
   ) throw new Error("raw error");
+});
+
+Deno.test("generic PDF documents retain kind and require independent PDF evidence", async () => {
+  for (const resourceType of ["other", "reference"]) {
+    const result = await resolveResource({ resource_id: id },
+      repo(resource({ resourceType })), observer([kakao()]));
+    if (result.status !== "resolved") throw new Error("verified generic PDF blocked");
+    for (const fileExtension of [null, "html", "mp3"]) {
+      const bad = await resolveResource({ resource_id: id },
+        repo(resource({ resourceType })), observer([kakao({ fileExtension })]));
+      if (bad.status !== "fallback") throw new Error("non-PDF document admitted");
+    }
+  }
 });

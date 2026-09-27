@@ -1,5 +1,10 @@
 # Materials Data Rollout and Historical Backfill Plan
 
+**Current Owner decision2026-09-27:** [Final closeout](materials-final-closeout-2026-09-27.md)
+and [Essay LAB priority handoff](materials-closeout-essay-lab-handoff.md) supersede
+older batch/registry holds below. Full-set source rule; whole Essay archive
+discovery; no further audit phase. Materials CLOSED requires Owner device PASS.
+
 Status: **OWNER-APPROVED ROADMAP / IMPLEMENTATION GATED — 2026-09-26**
 
 This document records the canonical rollout order for LegendStudy Materials data.

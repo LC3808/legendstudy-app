@@ -1,5 +1,10 @@
 # Product Scope
 
+**Owner priority2026-09-27:** Materials final device QA → Essay LAB canonical
+model (separate instruction) → internal-grade → mock-score → admissions.
+[Source policy, corpus target and handoff](materials-closeout-essay-lab-handoff.md).
+No Essay LAB/payment/admissions implementation is included in Materials closeout.
+
 ## Current delivery priority — 2026-09-20
 
 Current cross-product priority is Auth Production completion → App/Web boundary

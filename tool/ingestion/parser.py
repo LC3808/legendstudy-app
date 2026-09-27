@@ -248,7 +248,21 @@ def split_resource_kind(filename: str) -> tuple[str, str | None, str]:
     name = re.sub(
         r'(?i)(\.mp3)\s*\((?:(?:pc|스마트폰|모바일|실시간|듣기|링크|다운로드|다운)'
         r'|[\s/&])+\)\s*$', r'\1', filename)
+    name = re.sub(r'(?i)(\.(?:mp3|wma))\s*\((?:(?:pc|스마트폰|모바일|실시간|듣기|링크|다운로드|다운|가능|권장)|[\s/&])+\)(?:\s*실시간)?\s*$', r'\1', name)
     base = clean(re.sub(r'\.[A-Za-z0-9]{2,5}$', '', name))
+    base = re.sub(r'\((?:script|스크립트)\)$', '', base, flags=re.I).strip()
+    base = re.sub(r'-min$', '', base)
+    base = re.sub(r'문제s$', '문제', base)
+    # Source audio link decorations carry no subject/kind identity.
+    base = re.sub(r'(?<=듣기)\([^)]*\)$', '', base)
+    base = re.sub(r'(?<=파일)\([^)]*\)$', '', base)
+    base = re.sub(r'(영어)\s*듣기\s*([AB]형)$', r'\1\2 듣기', base)
+    base = re.sub(r'_?\(\d{4}\.\d{1,2}월?\s*시행\)$', '', base).rstrip('_ ')
+    # Historical files put a subject/bundle after the kind; preserve it.
+    suffix = re.search(r'(정답\s*및\s*해설|정답[, ]*해설|문제|해설)\(([^)]+)\)$', base)
+    if suffix and suffix.group(2) not in ('풀이', '홀', '화작,매체', '기하,미적,확통'):
+        base = base[:suffix.start()] + ' ' + suffix.group(2) + ' ' + suffix.group(1)
+    base = re.sub(r'정답\s*및\s*해설', '정답 및 해설', base)
     base = clean(re.sub(r'\s*\((?:홀|풀이)\)\s*$', '', base))
     # Preserve combined elective labels as distinct raw subjects, never force-map.
     combined = re.search(r'\((화작,매체|기하,미적,확통)\)$', base)
@@ -263,7 +277,7 @@ def split_resource_kind(filename: str) -> tuple[str, str | None, str]:
                 best = (score, canonical, token)
     if best is None:
         return base, None, ''
-    left = clean(base[: len(base) - len(best[2])].rstrip(' _-'))
+    left = clean(base[: len(base) - len(best[2])].rstrip(' _-,'))
     return left + decoration, best[1], best[2]
 
 
@@ -287,6 +301,8 @@ def _tail_match(text: str, token: str) -> bool:
 def split_subject(left: str) -> tuple[str | None, bool]:
     """Return (raw subject label, is_historical) from the left part of a filename."""
     text = clean(left)
+    text = re.sub(r'[_ ](?:홀수형|짝수형)$', '', text)
+    text = re.sub(r'[_ -]*듣기평가$', '', text).rstrip(' _-,')
     for prefix in GROUP_PREFIXES:
         idx = text.rfind(prefix)
         if idx >= 0:
@@ -303,13 +319,18 @@ def split_subject(left: str) -> tuple[str | None, bool]:
         if _tail_match(text, token) and (best is None or len(token) > best[0]):
             best = (len(token), token, True)
     if best is None:
+        # Preserve observed historical grouped/raw labels; never map to a modern elective.
+        bundle = re.search(r'(?:사회탐구|과학탐구|탐구영역|사탐|과탐)\([^)]*\)$', text)
+        historical = re.search(r'(?:생물[12]|생물I{1,2}|생물[ⅠⅡ])(?:\([^)]*\))?$', text)
+        if bundle or historical:
+            return (bundle or historical).group(0), True
         return None, False
     return best[1], best[2]
 
 
 # --- title parsing -------------------------------------------------------
 
-ADMIN_PREFIX = re.compile(r'[\[(]\s*(\d{4})\s*년\s*(\d{1,2})\s*월\s*시행\s*[\])]')
+ADMIN_PREFIX = re.compile(r'[\[(]\s*(?:(\d{4})\s*년\s*)?(\d{1,2})\s*월\s*시행\s*[\])]')
 ACADEMIC_YEAR = re.compile(r'(\d{4})\s*학년도')
 SHORT_ACADEMIC_YEAR = re.compile(r'(?<!\d)(\d{2})\s*학년도')
 CALENDAR_YEAR = re.compile(r'(?<!\d)((?:19|20)\d{2})\s*년?(?!\s*학년도)')
@@ -339,9 +360,9 @@ def parse_title(title: str, category: str | None) -> dict:
     m = ADMIN_PREFIX.search(text)
     remainder = text
     if m:
-        facts['administered_year'] = int(m.group(1))
+        facts['administered_year'] = int(m.group(1)) if m.group(1) else None
         facts['administered_month'] = int(m.group(2))
-        facts['calendar_year'] = int(m.group(1))
+        facts['calendar_year'] = facts['administered_year']
         remainder = clean(text[: m.start()] + ' ' + text[m.end():])
 
     am = ACADEMIC_YEAR.search(remainder) or ACADEMIC_YEAR.search(text)

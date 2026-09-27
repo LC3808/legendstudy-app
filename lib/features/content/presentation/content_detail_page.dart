@@ -224,6 +224,7 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                         const SizedBox(height: 16),
                         ResourceSection(
                           contentItemId: item.id,
+                          isEssay: item.contentType == 'university_essay',
                           contentSlug: item.slug,
                           contentSourceUrl: item.sourceUrl,
                           isArticle: [

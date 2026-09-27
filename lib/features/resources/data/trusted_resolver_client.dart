@@ -76,6 +76,8 @@ bool resolverCapable(ContentResource resource) {
         'answer',
         'explanation',
         'answer_explanation',
+        'reference',
+        'other',
       }.contains(resource.resourceType)) {
     return false;
   }

@@ -1,6 +1,9 @@
 # LegendStudy LAB — Essay Service Module Roadmap
 
-Status: **RESEARCH COMPLETE / DEEP INTEGRATION PLANNED; PUBLIC APP ENTRY IMPLEMENTED**
+Status: **P0 NEXT AFTER MATERIALS OWNER QA — canonical model first; public entry implemented**
+
+[Owner decision2026-09-27](materials-closeout-essay-lab-handoff.md) supersedes
+older priority/three-year inventory rules below. This is a handoff, not LAB implementation.
 Historical target: **2026-10 Beta**, not a renewed release commitment.
 
 This document records a product priority change. It is a roadmap, not an
@@ -40,19 +43,20 @@ Essay is one module alongside Academic Analytics and other future services.
 [Product architecture](product-architecture.md) owns the family and current
 cross-product priority; [platform boundaries](product-platform-boundaries.md)
 owns App/Web allocation. This document owns Essay research/evaluation details.
-The earlier essay-before-analytics ordering is superseded by Auth → platform
-boundary → LAB authenticated IA/UX → Core release → Academic Record/Analytics
-→ Essay → Teacher/School. Shared canonical identity/data is required, but actual
-cross-product integration remains unverified and must not be assumed.
+Current priority is Essay LAB → internal-grade analysis → mock-score analysis →
+admissions strategy/prediction. Shared canonical identity/data is required;
+implemented integration must still be verified independently.
 
-## 2. Research prerequisite and nationwide inventory
+## 2. Official evidence and service-university inventory
 
-Before building the Essay Lab university inventory, perform a nationwide
-survey of universities conducting 논술고사 in the 2027학년도 수시모집.
+Phase0 first models the available corpus and canonical university/field/track
+relationships. When selecting service universities, consult official current
+논술고사 admissions evidence; the older nationwide survey is not a prerequisite
+to starting that canonical model.
 The inventory must be grounded in official 2027 admissions plans,
 전형계획, university admissions-office materials and other official sources.
-This is the prerequisite for selecting the first service universities and is a
-Manus Research task. Do not assume a university count in advance.
+Any additional research/delegation requires its own scope. Do not assume a
+university count or implement admissions ingestion during Materials closeout.
 
 After the survey:
 
@@ -75,8 +79,8 @@ LATER scope.
 
 The first content inventory must review the existing `legendstudy.com` assets
 and official university admissions materials for each selected university.
-The default coverage target is the latest **three years**, subject to what is
-officially available:
+The Owner target is **2020 onward, at least five years**, preferably2020–2025,
+with source publication year kept separate from admission year:
 
 - university-specific essay past questions
 - questions and passages
@@ -338,7 +342,7 @@ Planned sequence:
    2027학년도 수시 논술 실시 대학 nationwide from official sources.
 5. **Manus Phase 1 — first-wave selection and inventory: COMPLETE:** audited
    Seoul universities broadly plus representative non-Seoul formats and
-   inventoried the latest three years of official materials where available.
+   inventoried2020 onward (at least five years) of source/official materials where available.
 6. Define the taxonomy, data model and track-specific evaluation contracts from
    the researched formats.
 7. Build an AI evaluation proof of concept and benchmark it by track.
@@ -351,7 +355,7 @@ Planned sequence:
 13. October Beta/initial public release.
 
 The milestone list above is the historical Essay-module plan, not current
-cross-product ordering. Academic Record/Analytics now precedes Essay service;
+cross-product ordering. The2026-09-27 Owner decision puts Essay before analytics;
 Admission Simulator remains a separately gated candidate.
 Any reuse of Selty assets requires a legacy-system audit before implementation.
 

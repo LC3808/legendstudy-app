@@ -24,6 +24,17 @@ def clean(text: str | None) -> str:
 # --- resource kind -------------------------------------------------------
 # Longest-first: '정답,해설' must win over '정답' and over '해설'.
 RESOURCE_KIND_TOKENS: tuple[tuple[str, str], ...] = (
+    ('정답 해설 풀이', 'answer_explanation'),
+    ('정답표', 'answer'),
+    ('문제 해설', 'other'),
+    ('문항지', 'question'),
+    ('정답 해설', 'answer_explanation'),
+    ('답,해설', 'answer_explanation'),
+    ('답, 해설', 'answer_explanation'),
+    ('문제지', 'question'),
+    ('정답지', 'answer'),
+    ('해설지', 'explanation'),
+    ('듣기', 'listening_audio'),
     ('정답 및 해설', 'answer_explanation'),
     ('정답,해설', 'answer_explanation'),
     ('정답, 해설', 'answer_explanation'),
@@ -82,6 +93,22 @@ SUBJECT_TOKENS: tuple[str, ...] = (
 
 # Historical labels. Never auto-mapped to a modern elective (wiki/ingestion.md).
 HISTORICAL_SUBJECT_TOKENS: tuple[str, ...] = (
+    '언어(국어)영역', '수리(수학)영역_가형', '수리(수학)영역_나형', '외국어(영어)영역',
+    '생물', '생물(생명과학)', '지구과1학', '국시', '수리(수학 가,나)',
+    '국어AB', '수학AB', '국수영탐구', '도덕(생활과윤리)',
+    '전과목', '국영수', '국어,영어,수학', '사회탐구,과학탐구', '사회탐구, 과학탐구',
+    '수학(가)', '수학(나)', '수학 가,나형', '국어A,B', '수학A,B', '영어A,B',
+    '기초베트남어', '독일어I', '러시아어I', '스페인어I', '아랍어I', '일본어I', '중국어I', '프랑스어I', '한문I',
+    '윤리와 사상', '정치와 법', '생활과 윤리',
+    '언어(국어)', '수리(수학)', '외국어(영어)',
+    '수리(수학) 가형', '수리(수학) 나형',
+    '언어', '수리', '외국어', '정치', '물리', '도덕', '일반사회', '지리',
+    '국어A', '국어B', '수학A', '수학B', '영어A', '영어B',
+    '국어A형', '국어B형', '수학A형', '수학B형', '영어A형', '영어B형',
+    '국어 A형', '국어 B형', '수학 A형', '수학 B형', '영어 A형', '영어 B형',
+    '수학(가형)', '수학(나형)', '과탐', '사탐',
+    '물리I', '물리II', '화학I', '화학II', '생명과학I', '생명과학II', '지구과학I', '지구과학II',
+    '물리Ⅰ', '물리Ⅱ', '화학Ⅰ', '화학Ⅱ', '생명과학Ⅰ', '생명과학Ⅱ', '지구과학Ⅰ', '지구과학Ⅱ',
     # Saved Wave1 labels; raw strings remain distinct. Broad/typo labels stay NULL.
     '국어_공통', '국어_언매', '국어_화작', '국어-언매', '국어-화작',
     '수학_공통', '수학_기하', '수학_미적', '수학_확통',
@@ -114,10 +141,11 @@ EXAM_SUBCATEGORY = re.compile(r'모의고사|국영수|사탐,\s*과탐|사탐,\
 # --- exam type ----------------------------------------------------------
 # Checked in order; '모의평가'/'모평' must win before the generic '모의고사'.
 EXAM_TYPE_TOKENS: tuple[tuple[str, str], ...] = (
-    ('수능', 'csat'),
-    ('대학수학능력시험', 'csat'),
+    ('예비', 'preliminary'),
     ('모의평가', 'evaluation_mock'),
     ('모평', 'evaluation_mock'),
+    ('수능', 'csat'),
+    ('대학수학능력시험', 'csat'),
     ('전국연합학력평가', 'national_mock'),
     ('전국연합 학력평가', 'national_mock'),
     ('학력평가', 'national_mock'),

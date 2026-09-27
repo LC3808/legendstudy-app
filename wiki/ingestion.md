@@ -1,5 +1,11 @@
 # Ingestion Strategy — Unified Content v0.1
 
+**Owner closeout override2026-09-27:** [Source rule and Essay LAB handoff](materials-closeout-essay-lab-handoff.md)
+replaces strict coverage-registry publication holds. Full-set source counterparts18
+are selectively released from the original52;34 partial holds remain.
+[Final execution evidence](materials-final-closeout-2026-09-27.md) owns current counts.
+No new classifier, scheduler, schema or ingestion path.
+
 ## Daily Sync current handoff — 2026-09-24
 
 **Current override —2026-09-27:** A1 bootstrap, A2 recent delta and A3 controlled

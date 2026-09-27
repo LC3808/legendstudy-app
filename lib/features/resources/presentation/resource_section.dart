@@ -16,6 +16,7 @@ class ResourceSection extends ConsumerWidget {
     required this.contentSlug,
     required this.contentSourceUrl,
     required this.isArticle,
+    this.isEssay = false,
     this.onMeaningfulAction,
     super.key,
   });
@@ -23,6 +24,7 @@ class ResourceSection extends ConsumerWidget {
   final String contentSlug;
   final String contentSourceUrl;
   final bool isArticle;
+  final bool isEssay;
   final VoidCallback? onMeaningfulAction;
   @override
   Widget build(BuildContext context, WidgetRef ref) => ref
@@ -111,6 +113,7 @@ class ResourceSection extends ConsumerWidget {
                                   key: ValueKey(item.id),
                                   contentSlug: contentSlug,
                                   resource: item,
+                                  isEssay: isEssay,
                                   delivery: resolveResourceDelivery(
                                     item,
                                     contentSourceUrl,
@@ -143,17 +146,20 @@ class _ResourceDeliveryActions extends StatelessWidget {
     required this.contentSlug,
     required this.resource,
     required this.delivery,
+    required this.isEssay,
     this.onOpenAttempted,
     super.key,
   });
   final String contentSlug;
   final ContentResource resource;
   final ResourceDelivery delivery;
+  final bool isEssay;
   final VoidCallback? onOpenAttempted;
   @override
   Widget build(BuildContext context) => resolverCapable(resource)
       ? _ResolvedPdfAction(
           resource: resource,
+          isEssay: isEssay,
           contentSlug: contentSlug,
           fallback: delivery.uri ?? delivery.sourceFallback,
           onOpenAttempted: onOpenAttempted,
@@ -179,7 +185,7 @@ class _ResourceDeliveryActions extends StatelessWidget {
                   delivery.kind == ResourceDeliveryKind.externalFile)
                 TextButton.icon(
                   icon: const Icon(Icons.picture_as_pdf_outlined),
-                  label: Text('${resource.purposeLabel} 보기'),
+                  label: Text(resource.openLabel(isEssay: isEssay)),
                   onPressed: () {
                     onOpenAttempted?.call();
                     context.push(
@@ -206,11 +212,13 @@ class _ResolvedPdfAction extends ConsumerStatefulWidget {
   const _ResolvedPdfAction({
     required this.resource,
     required this.contentSlug,
+    required this.isEssay,
     this.fallback,
     this.onOpenAttempted,
   });
   final ContentResource resource;
   final String contentSlug;
+  final bool isEssay;
   final Uri? fallback;
   final VoidCallback? onOpenAttempted;
   @override
@@ -265,7 +273,9 @@ class _ResolvedPdfActionState extends ConsumerState<_ResolvedPdfAction> {
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             : const Icon(Icons.picture_as_pdf_outlined),
-        label: Text(failed ? '다시 시도' : '${widget.resource.purposeLabel} 보기'),
+        label: Text(
+          failed ? '다시 시도' : widget.resource.openLabel(isEssay: widget.isEssay),
+        ),
       ),
       if (failed) const Text('자료를 바로 열 수 없어요.'),
       if (failed && widget.fallback != null)

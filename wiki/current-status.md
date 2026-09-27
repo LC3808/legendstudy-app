@@ -82,23 +82,24 @@ Pre-pilot public baseline27 includes1710 (Owner apply/device PASS); it must not
 be republished. Foreign-language/Hanmun raw NULL taxonomy gaps remain advisory.
 Accepted state26 still excludes1710; A1 reconciliation is a separate pending task.
 
-Wave1 read-only inventory COMPLETE (2026-09-27): sitemap1676, candidates781
-fully observed;296 actually published2020→current (27 public baseline +269 new),
-485 candidate posts pre2020. Earlier-lastmod895 excluded with13 bounded sanity
-checks and0 exceptions; not an exhaustive reread of those895.
-Writer/parser extension IMPLEMENTED / TESTED. Frozen identity-review52 unchanged.
-Pilot1474/1593/1527/1478 (31 rows): MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS;
-iPhone detail/grouping/PDF direct-open PASS, cycle CLOSED.
-Batch #1 exact20 (+283 rows) remains verified; [historical closeout](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).
-[Phase3 FULL_SET22 publication](exam-full-set-publication-2026-09-27.md): four groups
-apply/activation/checkpoints PASS; +843 rows (source22/content22/exam22/subjects240/
-resources515/advisory22). Active73 content/55 exams; public search/detail/grade/resource
-and existing24 regression PASS.
-Remaining171: exam35 REVIEW, essay127, study9. Identity52 HOLD; accepted26 unchanged,
-1710 A1 pending. Owner device spot-check pending;
-no further publication or replacements authorized.
-Separate [Home school-setting error](day-7-neis.md#home-school-setting-error--2026-09-27):
-Owner logged-in device issue; Materials regression unestablished, no fix attempted.
+[Materials FINAL CLOSEOUT](materials-final-closeout-2026-09-27.md),2026-09-27:
+full category discovery915 (exam354/essay561). Existing writer added243 exams +127
+essays in37 bounded batches; exact inserts14833. Active441 content /296 exams
+(G1:79/G2:81/G3:136) /135 essays. Public441 search/detail/resources/grade PASS;
+canonical duplicates/collisions0, unrelated mutations0, recent timestamps preserved.
+Partial1474/1447 inactive after1431/1404 activation;2 test recent_views removed,
+original sources/content retained.1432 nominal month corrected5→4. Source343 is
+one real historical identity exception. No schema/migration or new architecture.
+Busan1593 generic PDF resolver deployed; actual HTTP206/PDF signature PASS, latest
+CTA/PDF native device QA PENDING. Owner iOS/onboarding files preserved.
+Owner source rule supersedes registry-as-publication-gate;18 full-set counterparts
+released from52 identity holds,34 partial holds remain. Accepted26/1710 A1 unchanged.
+Essay2020–2025 admission years evidenced independently of source publication years.
+Latest analyze/focused38/Python389/resolver38 PASS; full Flutter855 PASS/1 skip/
+3 baseline failures (badge and load-more expectations); native PostgreSQL25 NOT_RUN.
+Materials is NOT CLOSED until Owner device PASS. Next **Essay LAB P0**, canonical
+model first after separate instruction; then internal-grade, mock-score, admissions.
+[Canonical handoff](materials-closeout-essay-lab-handoff.md). No further audit/backfill.
 
 
 ## Open release gates
@@ -125,23 +126,16 @@ validation above is from the subsequent global surface UI task; the strategy its
 
 ## Current work and next actions
 
-[Owner QA](owner-device-qa-2026-09-27.md): CTA/PDF/settings device PASS; footer
-removed, guidebook display fixed; signed other-PDF resolver gap remains.
-
-Materials Recent Updates queries all active content by original
-`published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
-order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. [FULL_SET22 publication](exam-full-set-publication-2026-09-27.md)
-COMPLETE; Owner device spot-check pending. REVIEW35/52 HOLD; replacements/1710 A1 pending.
-
-Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
-deferred per [EOD closeout](eod-2026-09-25.md). Next data priority is Wave1 review/implementation → controlled publication →
-release, then older waves; see
-[rollout](materials-data-rollout.md). No automatic backfill/publication authority.
-Mock full catalogue/history/advanced analysis remain gaps. Multi D-Day is
-IMPLEMENTED (Production `day_targets` schema applied; OWNER DEVICE PASS); Home customization, analytics platform, Achievement and Notification
-backend remain planned/foundation. Prior detailed checkpoints are preserved in
-[history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
+[Final Owner device QA](materials-final-closeout-2026-09-27.md#owner-device-gate):
+run latest profile build; check full exam sequences/known missing cases, Essay
+2020+ year/university searches and all CTA forms, especially Busan1593 real PDF.
+Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserved.
+On device PASS: Materials CLOSED, then STOP. Await separate Essay LAB Phase0 scope.
+Do not start analytics, new audits, registry expansion or unrelated UI work.
+Current resource checks are automated server/App-contract evidence, not new device
+acceptance.1710 A1 reconciliation remains separate; never republish1710.
+Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
+Home customization, analytics and Achievement/Notification backends remain planned.
 
 
 ## Handoff
@@ -178,8 +172,8 @@ pending-device/EOD statements where they conflict.
 
 ## Materials rollout priority
 
-Wave1(2020→current) is the release data gate; older waves and product priorities
-are preserved in [Materials rollout](materials-data-rollout.md).
+The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the older
+wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 
 D-Day: IMPLEMENTED / Production applied / OWNER DEVICE PASS; no code changes.

@@ -71,7 +71,6 @@
         "evaluation_mock"
       ],
       "external_post_ids": [
-        "1416",
         "1448"
       ]
     },
@@ -83,7 +82,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1417",
         "1446",
         "1462",
         "1463"
@@ -97,7 +95,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1418",
         "1429",
         "1451"
       ]
@@ -110,7 +107,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1419",
         "1430",
         "1452"
       ]
@@ -123,7 +119,6 @@
         "csat"
       ],
       "external_post_ids": [
-        "1420",
         "1449"
       ]
     },
@@ -135,7 +130,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1437",
         "1464"
       ]
     },
@@ -147,7 +141,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1438",
         "1468"
       ]
     },
@@ -159,7 +152,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1431",
         "1475"
       ]
     },
@@ -171,7 +163,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1439",
         "1465"
       ]
     },
@@ -183,7 +174,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1440",
         "1469"
       ]
     },
@@ -195,7 +185,6 @@
         "evaluation_mock"
       ],
       "external_post_ids": [
-        "1433",
         "1472"
       ]
     },
@@ -207,7 +196,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1434",
         "1476"
       ]
     },
@@ -219,7 +207,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1441",
         "1466"
       ]
     },
@@ -231,7 +218,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1442",
         "1470"
       ]
     },
@@ -243,7 +229,6 @@
         "evaluation_mock"
       ],
       "external_post_ids": [
-        "1435",
         "1473"
       ]
     },
@@ -255,7 +240,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1436",
         "1477"
       ]
     },
@@ -267,7 +251,6 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1443",
         "1467"
       ]
     },
@@ -279,9 +262,32 @@
         "national_mock"
       ],
       "external_post_ids": [
-        "1444",
         "1471"
       ]
     }
-  ]
+  ],
+  "owner_closeout_resolution": {
+    "date": "2026-09-27",
+    "rule": "Full-set source counterparts released for source/identity/resource preflight; partial source records remain held. This is not automatic publication approval.",
+    "released_full_set_ids": [
+      "1416",
+      "1417",
+      "1418",
+      "1419",
+      "1420",
+      "1431",
+      "1433",
+      "1434",
+      "1435",
+      "1436",
+      "1437",
+      "1438",
+      "1439",
+      "1440",
+      "1441",
+      "1442",
+      "1443",
+      "1444"
+    ]
+  }
 }

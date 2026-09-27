@@ -494,3 +494,15 @@ requires review. Same rule applies to future browse/search/personalization/LAB a
 historical ingestion. Archive-only areas remain discoverable direction, no ranking
 or schema implementation. [Canonical policy](exam-full-set-canonical-policy.md)
 owns full scope and Owner gates; the dated audit does not authorize publication.
+
+## 2026-09-27 — Materials source rule and Essay LAB first
+
+Owner's original grade full-set source collections define the exam catalog;
+registry/classifier is QA support. Preserve partial sources, suppress duplicate
+normal exposure, and do not build compatibility frameworks for pre-launch test
+references. Essay targets2020+ minimum five years, with publication/admission
+years separate and generic verified PDFs accessible. After Materials device PASS:
+Essay LAB → internal-grade → mock-score → admissions. Shared university/field/track
+canonical data precedes onboarding extensions; three free feedback experiences,
+official-vs-AI provenance, minimal personal-data collection and later B2B remain
+product directions. [Full handoff](materials-closeout-essay-lab-handoff.md).

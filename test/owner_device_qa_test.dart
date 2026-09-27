@@ -106,16 +106,24 @@ void main() {
     expect(materialDisplayTitle(raw, 'study_material'), raw);
     expect(materialDisplayTitle('수능 안내', 'exam'), '수능 안내');
   });
-  test('guidebook semantics do not fabricate direct-open eligibility', () {
+  test('guidebook keeps its kind and uses evidence-gated PDF resolver', () {
     final guide = paper(
       label: '2024 부산대 논술가이드북.pdf',
       kind: 'other',
       link: 'unknown',
       url: 'https://blog.kakaocdn.net/dna/cODFT6/btsAzdEyA9A/token/guide.pdf',
     );
-    expect(guide.purposeLabel, '가이드북');
+    expect(guide.purposeLabel, '자료');
     expect(guide.resourceType, 'other');
-    expect(resolverCapable(guide), isFalse);
+    expect(guide.openLabel(isEssay: true), '자료 보기');
+    expect(
+      paper(
+        label: '정답 및 해설.pdf',
+        kind: 'answer_explanation',
+      ).openLabel(isEssay: true),
+      '답안 보기',
+    );
+    expect(resolverCapable(guide), isTrue);
     expect(
       resolveResourceDelivery(guide, 'https://legendstudy.com/1593').kind,
       ResourceDeliveryKind.sourcePage,

@@ -96,8 +96,8 @@ class Wave1Tests(unittest.TestCase):
                 self.assertIsNone(p.occurrences[0]['subject_id'])
         self.assertEqual(map_subject('국어_공통',3).code,'korean')
 
-    def test_all_52_frozen_individually_and_activation_refuses_before_transaction(self):
-        self.assertEqual(len(IDENTITY_REVIEW_IDS),52)
+    def test_remaining_identity_holds_refuse_before_transaction(self):
+        self.assertEqual(len(IDENTITY_REVIEW_IDS),34)
         for pid in IDENTITY_REVIEW_IDS:
             p=plan(pid,'고3을 위한 공간/모의고사','국어 문제.pdf')
             self.assertFalse(p.publishable)

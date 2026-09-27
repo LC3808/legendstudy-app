@@ -3,6 +3,15 @@
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**
 **Owner decision: 2026-09-24 · Architecture: PLANNED · No implementation authorization**
 
+## Latest delivery priority — 2026-09-27
+
+[Owner closeout / Essay LAB handoff](materials-closeout-essay-lab-handoff.md):
+Materials device QA → Essay LAB → 내신 분석 → 모의고사 분석 → 지원전략/합격예측.
+Essay canonical university/field/track data is shared with future onboarding/MY;
+no temporary fields now. Official evidence and AI inference stay distinguishable.
+This updates delivery order, not permission to pre-collect personal data or ship
+future analytics/B2B. The long-term relationships below remain design context.
+
 ## Authority and current scope
 
 이 문서는 LegendStudy의 상위 Product / Data / Marketing / Business Strategy다.

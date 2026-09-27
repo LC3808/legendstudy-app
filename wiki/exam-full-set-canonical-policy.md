@@ -1,6 +1,13 @@
 # Exam Full-Set Canonical Policy
 
-Status: OWNER-APPROVED POLICY, 2026-09-27. Production application remains gated.
+Status: OWNER SOURCE RULE supersedes the strict registry publication gate,
+2026-09-27. **Current policy:** [Materials closeout/handoff](materials-closeout-essay-lab-handoff.md).
+The coverage profiles and strict classifier below are retained as historical QA
+methodology, not current publication blockers. Source-selected full-set material,
+real exception handling and pre-launch partial cleanup govern the final closeout.
+The parenthesized administered-month parser is corrected; the18 full-set
+counterparts of the earlier52 hold are selectively released. Remaining34 partial
+holds are preserved. Detailed history below is not a renewed freeze.
 This supersedes treating every writer-ready blog post as an independent App exam.
 [Rollout](materials-data-rollout.md), [ingestion](ingestion.md),
 [source/identity contract](day-9-ingestion.md), [audit](exam-canonical-audit-2026-09-27.md).

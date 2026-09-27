@@ -103,7 +103,8 @@ void main() {
   });
   test('audio and non-PDF keep existing delivery contract', () {
     expect(resolverCapable(item('listening_audio')), isFalse);
-    expect(resolverCapable(item('other')), isFalse);
+    expect(resolverCapable(item('other')), isTrue);
+    expect(resolverCapable(item('reference')), isTrue);
     expect(
       resolverCapable(
         const ContentResource(

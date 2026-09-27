@@ -121,18 +121,13 @@ copy must state only implemented and verified facts.
 
 ## Delivery priority and remaining decisions
 
-1. Auth Production completion.
-2. App/Web platform boundary (recorded now; implementation is separate).
-3. LAB authenticated IA/UX.
-4. Core release readiness.
-5. Academic Record / Analytics.
-6. Essay service.
-7. Teacher / School B2B afterward.
-
-This supersedes older essay-first cross-product ordering, not essay research or
-rights gates. No B2B, payment, AI drafting, Viewer or ingestion expansion begins.
-Daily Sync and other existing backlogs remain recorded but are not advanced by
-this decision. Existing Auth/deletion release blockers remain open.
+Owner decision2026-09-27 supersedes the earlier analytics-first ordering:
+Materials final Owner QA → **P0 Essay LAB** → P1 internal-grade analysis →
+P2 mock-score analysis → P3 admissions strategy/prediction. Essay Phase0 starts
+with the canonical model after separate Owner instruction, not immediate coding.
+See [closeout and handoff](materials-closeout-essay-lab-handoff.md).
+Existing Auth/deletion/privacy/release gates remain open. No payment/B2B or
+admissions DB implementation is authorized by this handoff.
 
 Owner decisions later: first modules and release acceptance; LAB account linking
 and authenticated IA; first Teacher/School pilot and responsible data controller/

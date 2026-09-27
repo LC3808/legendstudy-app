@@ -343,8 +343,30 @@ def normalize(post: RawPost, crawled_at: str, map_subjects: bool = False) -> Pla
         cases.append(QuarantineCase('merge_candidate_exam', post.external_post_id,
                                     'Owner-frozen canonical exam identity review.', {}))
     blocking = [c for c in cases if c.kind in BLOCKING]
+    # Owner closeout rule: a named general attachment or whole-exam answer
+    # in the source's full-set category remains usable without inventing a
+    # question kind or subject. Keep its diagnostic and raw filename. Unlabelled
+    # binary files, missing attachments and identity conflicts remain unresolved;
+    # external media links keep their existing source fallback.
+    full_set_source = is_exam and '모의고사 전과목 자료' in (post.category or '')
+    def source_attachment_advisory(case):
+        if not full_set_source:
+            return False
+        name = clean(case.payload.get('name', ''))
+        matching = [a for a in post.attachments if clean(a.display_name) == name]
+        if matching and all(a.provider in ('box', 'gdrive') for a in matching):
+            return case.kind in ('resource_kind_unknown', 'resource_subject_unknown')
+        left, kind, _ = split_resource_kind(name)
+        subject, _ = split_subject(left)
+        if case.kind == 'resource_kind_unknown':
+            return bool(subject and re.search(r'\.(?:pdf|hwp|zip)$', name, re.I))
+        if case.kind == 'resource_subject_unknown':
+            return bool(kind in ('answer', 'answer_explanation', 'explanation')
+                        and re.search(r'(?:모의고사|모의평가|학력평가)[ _-]*$', left))
+        return False
     soft = [c for c in cases if c.kind not in BLOCKING
-            and not is_advisory(c.kind, content_type)]
+            and not is_advisory(c.kind, content_type)
+            and not source_attachment_advisory(c)]
     if blocking or content_item is None:
         confidence = 'low'
     elif soft:

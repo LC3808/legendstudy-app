@@ -74,6 +74,8 @@ export const PDF_RESOURCE_TYPES = new Set([
   "answer",
   "explanation",
   "answer_explanation",
+  "reference",
+  "other",
 ]);
 
 export function isPdfEvidence(
