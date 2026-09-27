@@ -126,12 +126,18 @@ class _CompactEventsState extends State<_CompactEvents> {
           if (hidden > 0)
             TextButton(
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                minimumSize: const Size(0, 36),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                minimumSize: const Size(48, 48),
               ),
               onPressed: () => setState(() => _expanded = !_expanded),
-              child: Text(_expanded ? '접기 ˄' : '일정 $hidden개 더보기 ˅'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(child: Text(_expanded ? '접기' : '일정 $hidden개 더보기')),
+                  const SizedBox(width: 6),
+                  Icon(_expanded ? Icons.expand_less : Icons.expand_more, size: 24),
+                ],
+              ),
             ),
         ],
       ),

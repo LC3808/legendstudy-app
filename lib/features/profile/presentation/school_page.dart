@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import 'grade_page.dart';
 
 import 'package:flutter/material.dart';
@@ -7,7 +9,6 @@ import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
-import '../../school/presentation/neis_attribution.dart';
 import 'academic_status_field.dart';
 
 class SchoolPage extends ConsumerStatefulWidget {
@@ -19,7 +20,7 @@ class SchoolPage extends ConsumerStatefulWidget {
 class _SchoolPageState extends ConsumerState<SchoolPage> {
   final _input = TextEditingController();
   String _query = '';
-  bool _saving = false;
+  bool _saving = false, _statusSaving = false, _statusFailed = false;
   @override
   void dispose() {
     _input.dispose();
@@ -51,7 +52,12 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
     if (_completed || !mounted) return;
     _completed = true;
     if (ModalRoute.of(context)?.isCurrent == true) {
-      Navigator.of(context).maybePop();
+      final router = GoRouter.maybeOf(context);
+      if (router != null && router.canPop()) {
+        router.pop();
+      } else if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
     }
   }
 
@@ -80,6 +86,8 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
       _saving = false;
       _edited = false;
       _completed = false;
+      _statusSaving = false;
+      _statusFailed = false;
     }
     final school = _edited
         ? _draft
@@ -188,10 +196,21 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           ),
         ],
         if (auth.value?.isAuthenticated == true) ...[
-          const AcademicStatusField(),
+          AcademicStatusField(
+            key: ValueKey('academic-status:${auth.value?.userId}'),
+            enabled: !_saving && !_completed,
+            onSavingChanged: (value) => setState(() => _statusSaving = value),
+            onResult: (success) => setState(() => _statusFailed = !success),
+          ),
+          if (_statusFailed) const Text('현재 상태를 다시 저장한 뒤 완료해 주세요.'),
           GradePage(
             key: ValueKey(auth.value?.userId),
-            enabled: !selection.isLoading && !selection.hasError && !_completed,
+            enabled:
+                !selection.isLoading &&
+                !selection.hasError &&
+                !_completed &&
+                !_statusSaving &&
+                !_statusFailed,
             beforeSave: _saveSchool,
             onSavingChanged: (value) => setState(() => _saving = value),
             onSaved: _finish,
@@ -204,10 +223,6 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
                 : _saveGuest,
             child: const Text('저장'),
           ),
-        const Align(
-          alignment: Alignment.centerRight,
-          child: NeisAttribution(label: '출처: 교육부·시도교육청 NEIS'),
-        ),
       ],
     );
   }

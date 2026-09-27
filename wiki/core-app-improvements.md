@@ -630,3 +630,10 @@ LLM, study-time→grade inference or admissions claim. Each snapshot keeps LAB �
 분석 via push; Owner confirms MY→detail→Back PASS. LAB caller/direct links preserve
 existing context tests. More sophisticated comparable-series trend/strategy is
 PARTIAL/FUTURE, not fabricated in MY. Internal-grade backend remains unavailable.
+
+
+## Owner save-navigation QA — 2026-09-27
+
+[QA follow-up](owner-device-qa-2026-09-27.md) replaces native maybePop with explicit
+router pop after confirmed writes and coordinates school/status/grade save state.
+Failure/partial writes stay; independent onboarding navigation is preserved.

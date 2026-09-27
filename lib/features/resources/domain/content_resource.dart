@@ -61,6 +61,21 @@ class ContentResource {
       ? sourceLabel!
       : resourceTypeLabels[resourceType] ?? '기타';
 
+  /// Filename evidence can describe an integrated paper even when the stored
+  /// kind is a single answer kind. Keep canonical metadata unchanged.
+  String get purposeLabel {
+    final label = sourceLabel?.trim().isNotEmpty == true ? sourceLabel! : title;
+    if (RegExp(r'가이드\s*북|guide\s*book', caseSensitive: false).hasMatch(label)) {
+      return '가이드북';
+    }
+    if (resourceType == 'other') return '자료';
+    if (label.contains('문제') && RegExp(r'답안|정답|해설').hasMatch(label)) {
+      return '자료';
+    }
+    if (resourceType == 'answer' && label.contains('답안')) return '답안';
+    return resourceTypeLabels[resourceType] ?? '자료';
+  }
+
   /// PDF-ness comes from normalized resource metadata, never a title or URL
   /// suffix alone. A landing page remains a page even when its URL ends in
   /// `.pdf`; only a file target with PDF metadata can enter the viewer.
@@ -177,11 +192,25 @@ ResourceDelivery resolveResourceDelivery(
   String contentSourceUrl,
 ) {
   final source = _pageTarget(contentSourceUrl);
-  final purpose = resourceTypeLabels[resource.resourceType] ?? '자료';
+  final purpose = resource.purposeLabel;
   Uri? target;
   ResourceDeliveryKind? kind;
   if (resource.linkKind == 'file') {
-    final candidate = _pageTarget(resource.fileUrl ?? '');
+    final legacy = _pageTarget(resource.sourceUrl);
+    // Legacy Tistory cfile identity is itself a stable file URL. Require the
+    // exact HTTPS CDN/path and explicit PDF metadata; never promote unknown,
+    // signed, arbitrary-source or landing-page links into direct files.
+    final stableLegacyPdf =
+        resource.isPdf &&
+        legacy != null &&
+        legacy.scheme == 'https' &&
+        legacy.port == 443 &&
+        legacy.host == 't1.daumcdn.net' &&
+        !legacy.hasQuery &&
+        RegExp(r'^/cfile/tistory/[A-Fa-f0-9]{16,64}$').hasMatch(legacy.path);
+    final candidate =
+        _pageTarget(resource.fileUrl ?? '') ??
+        (resource.fileUrl == null && stableLegacyPdf ? legacy : null);
     // Query-bearing file links cannot be verified as durable with today's API.
     if (candidate != null && !candidate.hasQuery) {
       target = candidate;

@@ -262,6 +262,9 @@ void main() {
       await tester.tap(find.text('학교 설정 저장'));
       await tester.pumpAndSettle();
       expect(find.text('로그인하면 학교 설정을 저장할 수 있어요.'), findsOneWidget);
+      // Let the transient login guidance stop covering the final Save button.
+      await tester.pump(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('저장'));
       await tester.tap(find.text('저장'));
       await tester.pumpAndSettle();

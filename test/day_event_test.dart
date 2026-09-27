@@ -293,18 +293,21 @@ void main() {
           expect(find.textContaining('수능 대표 일정 테스트 · 2027.11.18.(목)'),
               findsOneWidget);
           // Collapsed: 4 upcoming non-primary -> show 2, hide 2.
-          expect(find.text('일정 2개 더보기 ˅'), findsOneWidget);
+          expect(find.text('일정 2개 더보기'), findsOneWidget);
+          expect(find.byIcon(Icons.expand_more), findsOneWidget);
+          final toggle = find.ancestor(of: find.text('일정 2개 더보기'), matching: find.byType(TextButton));
+          expect(tester.getSize(toggle).height, greaterThanOrEqualTo(48));
           expect(find.textContaining('국어 수행평가 매우 긴 제목 · 2026.10.01.(목)'),
               findsOneWidget);
 
-          await tester.tap(find.text('일정 2개 더보기 ˅'));
+          await tester.tap(find.text('일정 2개 더보기'));
           await tester.pumpAndSettle();
-          expect(find.text('접기 ˄'), findsOneWidget);
+          expect(find.text('접기'), findsOneWidget);
           expect(find.textContaining('수학 수행 · 2026.10.08.(목)'), findsOneWidget);
 
-          await tester.tap(find.text('접기 ˄'));
+          await tester.tap(find.text('접기'));
           await tester.pumpAndSettle();
-          expect(find.text('일정 2개 더보기 ˅'), findsOneWidget);
+          expect(find.text('일정 2개 더보기'), findsOneWidget);
 
           expect(tester.takeException(), isNull);
         });

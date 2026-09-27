@@ -124,6 +124,9 @@ validation above is from the subsequent global surface UI task; the strategy its
 
 ## Current work and next actions
 
+[Owner QA](owner-device-qa-2026-09-27.md): CTA/PDF/settings device PASS; footer
+removed, guidebook display fixed; signed other-PDF resolver gap remains.
+
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;

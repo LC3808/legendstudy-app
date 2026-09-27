@@ -61,7 +61,7 @@ class ResourceSection extends ConsumerWidget {
                   initiallyExpanded: items.length <= 8,
                   title: Text(group.first.groupLabel),
                   subtitle: Text(
-                    '${group.length}개 · ${group.map((r) => resourceTypeLabels[r.resourceType] ?? '기타').toSet().join(' · ')}',
+                    '${group.length}개 · ${group.map((r) => r.purposeLabel).toSet().join(' · ')}',
                   ),
                   children: [
                     for (final occurrence in _occurrences(group)) ...[
@@ -98,7 +98,7 @@ class ResourceSection extends ConsumerWidget {
                                       .titleMedium,
                                 ),
                                 Text(
-                                  resourceTypeLabels[item.resourceType] ?? '기타',
+                                  item.purposeLabel,
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelMedium,
@@ -179,9 +179,7 @@ class _ResourceDeliveryActions extends StatelessWidget {
                   delivery.kind == ResourceDeliveryKind.externalFile)
                 TextButton.icon(
                   icon: const Icon(Icons.picture_as_pdf_outlined),
-                  label: Text(
-                    '${resourceTypeLabels[resource.resourceType] ?? '자료'} 보기',
-                  ),
+                  label: Text('${resource.purposeLabel} 보기'),
                   onPressed: () {
                     onOpenAttempted?.call();
                     context.push(
@@ -267,11 +265,7 @@ class _ResolvedPdfActionState extends ConsumerState<_ResolvedPdfAction> {
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             : const Icon(Icons.picture_as_pdf_outlined),
-        label: Text(
-          failed
-              ? '다시 시도'
-              : '${resourceTypeLabels[widget.resource.resourceType] ?? '자료'} 보기',
-        ),
+        label: Text(failed ? '다시 시도' : '${widget.resource.purposeLabel} 보기'),
       ),
       if (failed) const Text('자료를 바로 열 수 없어요.'),
       if (failed && widget.fallback != null)

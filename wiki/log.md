@@ -2629,3 +2629,21 @@ resource checks PASS; active51, recent1712→1711→1710. Pilot regression and u
 row preservation PASS;229 tests PASS. Remaining193, frozen52, accepted26 unchanged,
 1710 A1 pending. No next batch selected. Concurrent personalization commit preserved;
 only Materials Wiki closeout changed. [Evidence and STOP gate](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).
+
+
+## 2026-09-27 — Owner device QA follow-up
+
+D-Day48px/24px toggle, confirmed-save router pop/status race guards, existing
+CSAT display title, integrated-paper CTA and narrow stable cfile PDF delivery
+fixed. Year gaps = DATA_NOT_YET_PUBLISHED (51 active); no DB/schema/publication.
+Analyze/focused50 PASS; full848 PASS/1skip/3 baseline-reproduced failures. Owner
+retest pending. Concurrent onboarding UX commit preserved. [QA evidence](owner-device-qa-2026-09-27.md).
+
+
+## 2026-09-27 — Owner QA follow-up and preserved fixes
+
+Preserved D-Day/title/CTA/save/cfile fixes; removed school NEIS footer only.
+부산대1593 guidebook label corrected, signed PDF confirmed; existing other-kind
+resolver contract still requires a separately approved backend extension.
+Owner device PASS scope and72 focused/analyze PASS, full850/skip1/known3 failures
+recorded in [QA evidence](owner-device-qa-2026-09-27.md). No Production mutation.

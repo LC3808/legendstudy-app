@@ -14,7 +14,14 @@ const _statusLabels = <String, String>{
 };
 
 class AcademicStatusField extends ConsumerStatefulWidget {
-  const AcademicStatusField({super.key});
+  const AcademicStatusField({
+    super.key,
+    this.enabled = true,
+    this.onSavingChanged,
+    this.onResult,
+  });
+  final bool enabled;
+  final ValueChanged<bool>? onSavingChanged, onResult;
   @override
   ConsumerState<AcademicStatusField> createState() =>
       _AcademicStatusFieldState();
@@ -24,8 +31,9 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
   bool _saving = false;
 
   Future<void> _save(String? status, String? current) async {
-    if (_saving || status == current) return;
+    if (_saving || !widget.enabled || status == current) return;
     setState(() => _saving = true);
+    widget.onSavingChanged?.call(true);
     try {
       await ref
           .read(profileRepositoryProvider)
@@ -33,15 +41,21 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
             academicStatus: status,
             clearAcademicStatus: status == null,
           );
+      if (!mounted) return;
       ref.invalidate(currentProfileProvider);
+      widget.onResult?.call(true);
     } catch (_) {
       if (mounted) {
+        widget.onResult?.call(false);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('현재 상태를 저장하지 못했어요. 다시 시도해 주세요.')),
         );
       }
     } finally {
-      if (mounted) setState(() => _saving = false);
+      if (mounted) {
+        setState(() => _saving = false);
+        widget.onSavingChanged?.call(false);
+      }
     }
   }
 
@@ -66,7 +80,7 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
                 ChoiceChip(
                   label: Text(entry.value),
                   selected: current == entry.key,
-                  onSelected: _saving
+                  onSelected: _saving || !widget.enabled
                       ? null
                       : (_) => _save(entry.key, current),
                 ),

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import '../avatar.dart';
@@ -58,7 +59,12 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
           .showSnackBar(const SnackBar(content: Text('닉네임을 저장했어요.')));
       completed = true;
       if (ModalRoute.of(context)?.isCurrent == true) {
-        Navigator.of(context).maybePop();
+        final router = GoRouter.maybeOf(context);
+        if (router != null && router.canPop()) {
+          router.pop();
+        } else if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
       }
     } catch (_) {
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {

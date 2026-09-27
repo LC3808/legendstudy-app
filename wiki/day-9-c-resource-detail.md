@@ -667,3 +667,10 @@ and mutations. Diff/Wiki handoff PASS. No full suite/build rerun required for th
 scope. No DB/ingestion/resolver/PDF/OAuth/Production changes. Owner iOS/untracked
 preserved. Owner next verifies source copy + search/saved/recent titles and badges.
 Prior direct-PDF OWNER DEVICE PASS retained; this UI correction device NOT VERIFIED.
+
+
+## Owner QA follow-up — 2026-09-27
+
+[Read-only metadata evidence and display/delivery fixes](owner-device-qa-2026-09-27.md)
+cover CSAT suffixes, integrated essay CTA, stable legacy cfile PDFs and publication
+coverage gaps. No canonical resource/title rewrite or Production mutation.

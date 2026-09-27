@@ -35,7 +35,8 @@ runtime remain separate follow-up work, not uncompleted Day 7 implementation.
   to five sample rows. Read-only samples confirmed J10/7530932 (진접고등학교),
   one 20260911 lunch, and 20260913 INFO-200. That initial sample check used no key;
   keyed deployed proxy and guest acceptance subsequently passed as recorded above.
-- Source attribution is shown only in school setup UI, not Home. Menu parsing only splits br
+- Owner override2026-09-27 removes the attribution footer from school setup UI too;
+  NEIS identity/API/provenance stay intact. See [Owner QA](owner-device-qa-2026-09-27.md). Menu parsing only splits br
   variants/newlines and trims whitespace; it does not invent allergy/nutrition data.
 
 ## Deployed server function
