@@ -762,9 +762,12 @@ visible with preserved unsigned source locator/null unverified file_url contract
 Recent query uses published_at DESC,id DESC; active31, first1712→1711→1710 unchanged.
 Historical pilot dates remain original; apply time does not promote Recent Updates.
 These are App-equivalent backend read-path checks, not a Flutter/device run.
-Owner device checks: find/open all4, exam subject/resource grouping, essay/study
-PDF opening and fallback, attachment-free column display, recent ordering.
-Actual PDF resolution/download/device rendering was not claimed by this task.
+Subsequent Owner acceptance: **MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS**.
+iPhone exam detail/subject grouping, essay/study detail, attachment-free column,
+PDF direct-open PASS; existing Home/D-Day normal, no evident Materials read-path
+regression. Pilot cycle COMPLETE. Separate logged-in Home school-setting error is
+[an open school bug](day-7-neis.md#home-school-setting-error--2026-09-27), not an
+established Materials regression; no diagnosis/fix attempted here.
 
 Accepted state remains26 unchanged; no accepted mutation required for this pilot.
 1710 remains active and separately A1-pending (trusted body fingerprint/length
@@ -781,3 +784,48 @@ post. Preserve per-post gates and stop on failure/source drift/unexpected state.
 Local ignored evidence: `.local/materials-wave1/2026-09-27/pilot/` contains selection,
 redacted live resolved rows, scoped SQL/results, publication journal, App read report
 and operator scripts. No secrets/signed locators or raw HTML committed.
+
+
+## Wave1 next bounded batch preparation — 2026-09-27
+
+READ-ONLY PREFLIGHT COMPLETE / APPLY AND ACTIVATION NOT AUTHORIZED.
+Start local/origin94ab582. Reused saved observations and existing normalizer,
+writer scope/invariants and private preflight; no inventory/network recrawl or code
+change. Selection prioritizes high confidence, clear structures and few advisories;
+four English study collections avoid broad exam-like general collections for this
+batch. Each post remains whole. All20 high/publishable, no blockers.
+
+| Type | Exact post IDs | Posts | Resources |
+|---|---|---:|---:|
+|exam|1447,1432,1453,1492,1493|5|128|
+|university_essay|1645,1541,1542,1557,1560,1626,1642|7|20|
+|study_material|1519,1521,1522,1518|4|9|
+|education_column|1491,1575,1613,1701|4|0|
+
+Limits:20 posts /157 resources (maximum20/500). All27 baseline and4 Pilot posts,
+1710 and frozen52 excluded. Planned rows = potential inserts: source_posts20,
+content_items20, exams5, exam_subjects60, resources157, ingestion_quarantine21;
+**total283**. All six tables: key no-ops0, collisions0, existing inactive0,
+existing active0, planned updates0. Existing linked CLI authentication reused;
+connection transaction_read_only=on confirmed and SQL BEGIN READ ONLY/ROLLBACK.
+
+Advisories: resource_url_expiring on9 posts, resource_kind_unknown plus expiring
+on4 study posts, attachment_none on4 columns; first3 exams have none. They are
+allowed by the existing content-type policy, retained as21 grouped quarantine
+rows; no ignored blocker or forced taxonomy mapping. Non-exams have no exam/
+occurrence children; exam invariants and unsigned attachment identity contract PASS.
+
+Saved-observation deterministic rerun, exact canonical comparison, all source/
+resource natural keys, UUID uniqueness and slug uniqueness PASS. Scoped DB lookup
+confirms no live key/slug collision. Pilot31 rows exact-match their published
+plans. Six canonical/quarantine tables' before/after row digests unchanged,
+including1710; its active/exam1/occurrences33/resources67 evidence still matches.
+229 ingestion/controlled writer/activation/bootstrap/idempotency regressions PASS.
+Owner iOS and accepted-state hashes unchanged; no school fix/Flutter build.
+
+Remaining writer-ready stays213 until publication;52 HOLD and1710 A1 remain pending.
+Local ignored evidence: `.local/materials-wave1/2026-09-27/batch-01/` selection,
+scoped SQL/results and summary. Cached preparation is not the live-source apply
+gate: after explicit Owner approval, validate only this exact set live and repeat
+scoped preflight; STOP on drift/unexpected state. **Production mutation NO.**
+Next: Owner/ChatGPT approval → bounded Production apply + activation.

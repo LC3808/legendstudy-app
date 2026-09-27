@@ -78,12 +78,9 @@ in this task. Historical23-row baseline and earlier pending checkpoints are
 preserved in [history](history/status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
 Scheduler/broad automation is not authorized by controlled per-post publication.
 
-2026-09-27 read-only public Production query confirms27 active content items,
-including1710, ordered1712→1711→1710 by original published_at then id descending.
-Owner confirms1710 apply/activation and device PASS; the former HOLD is superseded.
-The9 foreign-language/Hanmun taxonomy gaps are advisory, raw/unmapped with nullable
-subject_id. Existing code already implements this policy. Local accepted state
-still has26 entries:1710 reconciliation is pending, not a new publication.
+Pre-pilot public baseline27 includes1710 (Owner apply/device PASS); it must not
+be republished. Foreign-language/Hanmun raw NULL taxonomy gaps remain advisory.
+Accepted state26 still excludes1710; A1 reconciliation is a separate pending task.
 
 Wave1 read-only inventory COMPLETE (2026-09-27): sitemap1676, candidates781
 fully observed;296 actually published2020→current (27 public baseline +269 new),
@@ -96,8 +93,12 @@ resource13/quarantine5), activation and exact read-back PASS. Guest App-equivale
 search/detail/resource queries PASS; active content31, recent1712→1711→1710.
 229 regressions PASS; no unrelated canonical changes. Remaining213 ready
 (exam62/essay134/study13/column4), further publication OWNER GATED. Accepted state
-unchanged;1710 A1 lacks trusted body evidence. Pilot physical PDF/device check pending.
+unchanged;1710 A1 lacks trusted body evidence. MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS; PDF direct-open PASS, cycle CLOSED.
 [Latest pilot and next gate](materials-data-rollout.md#wave1-production-publication-pilot--2026-09-27).
+Next batch20 (exam5/essay7/study4/column4),157 resources/283 rows: private
+read-only preflight PASS; no mutation, publication approval required.
+Separate [Home school-setting error](day-7-neis.md#home-school-setting-error--2026-09-27):
+Owner logged-in device issue; Materials regression unestablished, no fix attempted.
 
 
 ## Open release gates

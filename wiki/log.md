@@ -2606,3 +2606,15 @@ search/detail/resources PASS; active31, recent1712→1711→1710 unchanged.229 t
 PASS. Remaining213 and frozen52 not published; accepted26/1710 A1 unchanged.
 Device PDF/UI check pending; next bounded batch requires new approval. No code
 changes. [Pilot evidence](materials-data-rollout.md#wave1-production-publication-pilot--2026-09-27).
+
+
+## 2026-09-27 — Pilot Owner acceptance and next batch preflight
+
+Owner iPhone exam/general detail, subject grouping and PDF direct-open PASS;
+MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS, pilot CLOSED. Logged-in Home school-setting
+error recorded as separate [open bug](day-7-neis.md#home-school-setting-error--2026-09-27),
+no Materials causality claim or fix. Next20 (exam5/essay7/study4/column4),157 resources,
+283 potential inserts: private READ ONLY preflight PASS, collisions/inactive/active/
+no-ops/updates0.229 tests PASS; Pilot/1710 canonical data and accepted state preserved.
+No Production mutation. Remaining213/held52 unchanged; next apply requires approval.
+[Exact batch](materials-data-rollout.md#wave1-next-bounded-batch-preparation--2026-09-27).

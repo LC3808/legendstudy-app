@@ -93,3 +93,13 @@ for repeat checks using owner-controlled external account configuration.
 Mock payload tests and SQL Editor SET ROLE are not the live acceptance evidence;
 the actual JWT/REST and deployed proxy results above close these gates. Code,
 server secret and schema were not changed in this documentation closeout.
+
+
+## Home school-setting error — 2026-09-27
+
+Owner reports Home school/meal card showing “학교 설정을 불러오지 못했어요.”
+while logged in. OPEN / separate known bug; Materials regression NOT ESTABLISHED.
+Materials Pilot iPhone/PDF acceptance remains PASS. No school code change or fix
+attempt in this task. Investigate NEIS/profile/persistence/auth separately without
+assuming a cause. School identity is important for personalization/admissions;
+this is not merely cosmetic.
