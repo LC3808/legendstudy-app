@@ -2618,3 +2618,14 @@ no Materials causality claim or fix. Next20 (exam5/essay7/study4/column4),157 re
 no-ops/updates0.229 tests PASS; Pilot/1710 canonical data and accepted state preserved.
 No Production mutation. Remaining213/held52 unchanged; next apply requires approval.
 [Exact batch](materials-data-rollout.md#wave1-next-bounded-batch-preparation--2026-09-27).
+
+
+## 2026-09-27 — Wave1 Batch #1 Production published
+
+Owner-approved20 only: live source/deterministic/scoped private preflight PASS;
+existing writer/activation completed283 inserts (source20/content20/exam5/
+occurrence60/resource157/quarantine21). Exact canonical and guest search/detail/
+resource checks PASS; active51, recent1712→1711→1710. Pilot regression and unrelated
+row preservation PASS;229 tests PASS. Remaining193, frozen52, accepted26 unchanged,
+1710 A1 pending. No next batch selected. Concurrent personalization commit preserved;
+only Materials Wiki closeout changed. [Evidence and STOP gate](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).

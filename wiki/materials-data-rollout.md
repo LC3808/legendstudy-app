@@ -829,3 +829,44 @@ scoped SQL/results and summary. Cached preparation is not the live-source apply
 gate: after explicit Owner approval, validate only this exact set live and repeat
 scoped preflight; STOP on drift/unexpected state. **Production mutation NO.**
 Next: Owner/ChatGPT approval → bounded Production apply + activation.
+
+
+## Wave1 bounded batch 1 Production closeout — 2026-09-27
+
+Owner approved exactly the20 IDs in the preparation table above; no added posts.
+Starting local/origin130c241, branch codex/day-7-school-neis. Concurrent independent
+personalization commit bf6fdc0 was preserved; this task changes no app/ingestion/
+school/schema code and does not deploy its migration.
+
+All20 source pages re-observed just before apply; source identity/type/title/dates,
+canonical children, unsigned attachments and grouped advisories matched the saved
+plans exactly. High/publishable, no blockers; deterministic rerun PASS. Scoped
+READ ONLY preflight repeated: potential inserts283, key no-ops/collisions/existing
+inactive/active/planned updates all0. Frozen52,1710 and Pilot4 excluded.
+
+Existing apply_pilot/apply_quarantine/publish_scope functions ran sequentially per
+post, preserving atomic canonical writes and separate advisory transaction.
+Actual inserts: **source_posts20/content_items20/exams5/exam_subjects60/resources157/
+ingestion_quarantine21 =283**. Activation: content20/occurrences60/resources157.
+Every post had exact inactive and active read-back of all projected columns,
+keys/linkages/type/original published_at. All15 non-exams have no exam/occurrence
+children;5 exam invariants PASS. Duplicates0, unexpected inactive0. Outside-scope
+six-table counts and complete row digests remained unchanged after every post;
+no unrelated canonical mutation, including Pilot and1710.
+
+Guest Production queries matching App projections, exam/non-exam search joins,
+keyword search, detail, subject/resource embeddings PASS for all20. Resource URL
+contract PASS: unsigned source identity retained, unverified file_url remains NULL;
+this task does not claim20-post device PDF opening. Active contents51; recent
+published_at DESC,id DESC still starts1712→1711→1710. Historical dates unchanged.
+Pilot4 exact31-row regression and guest read-path checks PASS; prior Owner device
+PASS remains recorded. No new school/Home bug fix or unrelated feature work.
+
+229 ingestion/controlled writer/activation/bootstrap/idempotency regressions PASS;
+Owner iOS and accepted-state hashes unchanged. Accepted26 untouched;1710 A1 pending.
+Remaining **193**: exam57, university_essay127, study_material9, education_column0.
+Identity-review52 still HOLD. No next batch selected or published. **STOP: a new
+Owner/ChatGPT gate is required before next batch selection/apply/activation.**
+Local ignored batch-01 evidence now includes live validation/plans, repeated scoped
+preflight, per-post publication/exact journal, unrelated preservation and guest
+read reports. No credentials or local artifacts committed.

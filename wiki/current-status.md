@@ -86,17 +86,16 @@ Wave1 read-only inventory COMPLETE (2026-09-27): sitemap1676, candidates781
 fully observed;296 actually published2020→current (27 public baseline +269 new),
 485 candidate posts pre2020. Earlier-lastmod895 excluded with13 bounded sanity
 checks and0 exceptions; not an exhaustive reread of those895.
-Writer/parser extension IMPLEMENTED / TESTED. New269:217 ready,52 identity-review
-posts frozen. Owner-approved4-post Production pilot PASS:1474 exam,1593 essay,
-1527 study,1478 column;31 rows inserted (source4/content4/exam1/occurrence4/
-resource13/quarantine5), activation and exact read-back PASS. Guest App-equivalent
-search/detail/resource queries PASS; active content31, recent1712→1711→1710.
-229 regressions PASS; no unrelated canonical changes. Remaining213 ready
-(exam62/essay134/study13/column4), further publication OWNER GATED. Accepted state
-unchanged;1710 A1 lacks trusted body evidence. MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS; PDF direct-open PASS, cycle CLOSED.
-[Latest pilot and next gate](materials-data-rollout.md#wave1-production-publication-pilot--2026-09-27).
-Next batch20 (exam5/essay7/study4/column4),157 resources/283 rows: private
-read-only preflight PASS; no mutation, publication approval required.
+Writer/parser extension IMPLEMENTED / TESTED. Frozen identity-review52 unchanged.
+Pilot1474/1593/1527/1478 (31 rows): MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS;
+iPhone detail/grouping/PDF direct-open PASS, cycle CLOSED.
+Owner-approved Batch #1 exact20: Production apply/activation PASS,283 inserts
+(source20/content20/exam5/occurrence60/resource157/quarantine21). Live source and
+private preflight PASS; canonical exact/guest search/detail/resources and Pilot
+regression PASS; unrelated canonical changes0. Active51, recent1712→1711→1710.
+229 tests PASS. Remaining193 (exam57/essay127/study9/column0); next batch neither
+selected nor authorized. Accepted26 unchanged;1710 A1 remains pending.
+[Batch #1 closeout](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).
 Separate [Home school-setting error](day-7-neis.md#home-school-setting-error--2026-09-27):
 Owner logged-in device issue; Materials regression unestablished, no fix attempted.
 
@@ -128,8 +127,8 @@ validation above is from the subsequent global surface UI task; the strategy its
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. Wave1 four-type pilot is published and verified. Next213 require
-Owner approval for bounded batches (20 posts/500 resources maximum).
+do not reapply it. Pilot and Batch #1 are published and verified. Remaining193
+require a new Owner/ChatGPT gate before next selection or publication.
 52 identity-review posts remain isolated.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
