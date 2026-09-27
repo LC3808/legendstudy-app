@@ -1,5 +1,20 @@
 # Development Log
 
+## 2026-09-27 — Materials Exam Canonical Audit Phase2 (offline)
+
+- [Evidence/classifier/replacement plans](exam-canonical-audit-phase2-2026-09-27.md):
+  writer27 + active16 reevaluated;77 bounded source rechecks, attachment metadata
+  unchanged;185 cached sibling scan. Strict FULL_SET0; prior30 remain provisional
+  pending independently verified profiles. No forced ambiguous resolution.
+- 27 focused tests,190 ingestion tests,344 available offline Python tests PASS;
+  25 native-PostgreSQL tests prerequisite unavailable. No Flutter code changes.
+- 1474→1431 confirmed subset but target52 HOLD;1447→1404 candidate retains date/
+  historical-profile conflict. Both bookmark0/recent1; scoring/study refs0. Existing
+  merge pointer sufficient, App redirect/reference preservation needs separate gate.
+- Read-only Production hashes unchanged; no apply/activation/deactivation/delete,
+  migration, next batch, accepted-state/52/1710 changes. Owner iOS/QA preserved.
+
+
 ## 2026-09-27 — D-Day micro-polish: title 15, representative D-N 19sp
 
 - Delete on device re-check: PASS (cancel + actual delete). Two micro changes only:
@@ -784,7 +799,7 @@ Flutter persistence smoke: PASS
   runtime stages passed; cleanup/baseline/profile preservation/Auth retention PASS.
 - Restricted duration-only expected pairs to400/428C9 or403/42501. Ordinary user_id /
   created_at remain403/42501 only; no blanket400 pass or cleanup changes.
--17 offline tests,Python syntax,credential scan,diff and unchanged schema checks PASS.
+- 17 offline tests,Python syntax,credential scan,diff and unchanged schema checks PASS.
   Full live acceptance awaits rerun. No production/Flutter/migration/push/PR/merge.
 
 

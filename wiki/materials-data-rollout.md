@@ -9,11 +9,14 @@ pipeline and prove each boundary before expanding scope.
 ## Exam Full-Set Canonical Policy — Owner override2026-09-27
 
 [Canonical full-set policy](exam-full-set-canonical-policy.md) is mandatory before
-further publication. Source archive is not App catalogue. Remaining57 exams:
-30 full-set review candidates,27 ambiguous; active33:15 full,2 partial,16 review.
-[Complete audit/evidence](exam-canonical-audit-2026-09-27.md). No next batch selected,
-Production mutation or52-HOLD release. Original193 technical-ready count stays
-historical; do not use it as blanket publication approval.
+further publication. Source archive is not App catalogue. [Phase1 baseline](exam-canonical-audit-2026-09-27.md)
+was30 provisional candidates/27 ambiguous; active33:15 full,2 partial,16 review.
+[Phase2 strict audit](exam-canonical-audit-phase2-2026-09-27.md) now requires independent
+expected-profile/organizer evidence: strict writer ready0/review57 (prior30 need
+revalidation); active16 remain REVIEW. Replacement1474→1431 confirmed subset,
+1447→1404 retains calendar/profile review. No Production changes or next batch.
+Original193 technical-ready count remains, not blanket publication approval.
+52-HOLD and1710 A1 remain unchanged.
 
 ## Product objective
 

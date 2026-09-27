@@ -1,5 +1,11 @@
 # Exam canonical audit — 2026-09-27
 
+> Phase2 follow-up: [strict classifier and evidence ledger](exam-canonical-audit-phase2-2026-09-27.md).
+> Counts below are the preserved Phase1 baseline. Its30 provisional full-set
+> candidates are **not** the strict Phase2 ready pool (currently0); do not publish
+> from this historical report. Original27 + active16 remain REVIEW under stricter
+> evidence rules. No Production changes were made.
+
 Status: READ-ONLY AUDIT COMPLETE / APPLICATION STOPPED AT OWNER GATE.
 [Canonical policy](exam-full-set-canonical-policy.md) and
 [Owner QA diagnosis](owner-device-qa-2026-09-27.md) are the governing handoff.

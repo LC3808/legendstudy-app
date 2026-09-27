@@ -151,3 +151,31 @@ Stop unsafe selection on missing full-set evidence, required Production/schema
 change, accepted-state work,1710/52-HOLD conflict, same-file conflict or unexpected
 inventory drift. An AMBIGUOUS report is a stopped decision, not permission to
 force a full-set classification. Owner/ChatGPT review precedes any next batch.
+
+## Phase2 strict evidence rule (2026-09-27)
+
+[Phase2 audit and replacement plans](exam-canonical-audit-phase2-2026-09-27.md)
+implement the Owner's conservative rule in an **offline-only** classifier.
+The Phase1 label FULL_SET_CANONICAL describes a provisional metadata candidate;
+it must not bypass the stronger Phase2 requirement for an independently evidenced
+exam-specific complete expected profile and organizer. Previous30 are retained
+as provisional candidates but all30 need strict revalidation; original27 remain
+REVIEW. Strict verified ready pool currently0, not30. No source/Production rows
+or writer-ready inventory were reclassified in place.
+
+Profiles are exact year/grade/nominal session/family/organizer evidence, with
+actual date consistency and historical curriculum context. Unknown profiles,
+optional-domain applicability, raw occurrence splits and ambiguous bundles fail
+closed. Social/science domain membership is a named-paper set, not a count.
+Original labels and source provenance are retained; no modern taxonomy is forced
+onto2010s files. Partial needs a proven same-exam subset; a broader sibling can
+still be REVIEW and cannot become a replacement target automatically. Ranking
+uses identity, completeness, evidenced usability and metadata quality; ties REVIEW.
+No per-post FULL_SET bypass, production writer integration or automatic gate.
+
+The existing merged_into_content_item_id is sufficient for a future single-target
+supersede relation, but the App currently cannot follow inactive old links.
+Keep bookmarks/recent/history intact; recent_views content identity is immutable
+and its trigger overwrites timestamps. Both replacement cases remain unsafe until
+separate target/identity/scope and redirect/reference-preservation Owner gates.
+No migration, source deletion,52-HOLD release or1710 A1 action in Phase2.
