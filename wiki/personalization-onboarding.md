@@ -133,6 +133,51 @@ the flow on next launch.
   user were adjusted to represent onboarded returning users
   (`test/support/onboarding_override.dart`).
 
+## Phase 1.1 — Onboarding Visual UX (2026-09-27)
+
+Owner device review found the flow functional but visually flat ("설정 화면처럼
+보인다"). Phase 1.1 is a **visual-only** pass on `onboarding_page.dart` — no
+change to logic, gate, router, DB, providers, or NEIS search.
+
+- **Typography / hierarchy**: main question raised to 26/w800 in a near-black
+  navy (`_ink` 0xFF0D1730) for high emphasis; description stays secondary; a
+  2-segment progress bar (fresh blue) plus `1 / 2` caption replaces the bare
+  step text.
+- **Selection cards** (`_StatusTile`): elevated white surface, 1.5px border,
+  `radiusLg`, soft shadow, a tinted leading-icon chip per option (blue/orange/
+  mint — decorative, not body text), a ring→filled-check selection dot, and ink
+  press feedback. Selected = orange accent border + soft tint + stronger shadow.
+- **Onboarding palette**: keeps navy/orange identity but adds a fresher, livelier
+  feel — a subtle top gradient backdrop, fresh blue for progress, a warm orange
+  accent for selection/CTA. Accents mark selection/progress only.
+- **Grade chips** (`_SelectChip`): custom pill with a strong selected state
+  (accent fill + white bold), clearer than the default ChoiceChip.
+- **School search**: labelled field; the selected school rises into an elevated
+  accent confirmation card (`_SelectedSchoolCard`) — the seed of the Phase 1.2
+  foreground metaphor.
+- **CTA**: full-width 52px accent primary button (다음/완료) with skip/이전 as
+  quiet secondary actions.
+- **Accessibility**: transitions collapse to `Duration.zero` under Reduce Motion;
+  the decorative backdrop is `ExcludeSemantics`; touch targets ≥ 44–52px.
+- **Phase 1.2 readiness**: the body is a `Stack` whose first child is a reusable
+  `_OnboardingBackdrop` slot, so the moving identity field drops in without
+  restructuring the foreground.
+
+Verified: `flutter analyze` clean; new `test/onboarding_page_test.dart`
+(guest / student→grade→finish / retaker clear-grade / skip / small-phone
+no-overflow); full suite 848 pass, 1 skipped, 3 pre-existing failures unrelated
+to this task; **0 new regressions**.
+
+## Phase 1.2 — Motion personalization (design only)
+
+The "living personalization" motion concept (ambient background identity field,
+selection-rises-to-foreground metaphor, school then interested-university
+screens, visual-pool ≠ supported-university universe, ~30–50 representative
+visuals, multi-selection layout, reusable motion architecture, performance and
+Reduce-Motion rules, logo asset strategy) is specified in
+[personalization-motion-ux.md](personalization-motion-ux.md). It is **not
+implemented**; Owner opens that gate after Phase 1.1 device review.
+
 ## Constraints honored
 
 Materials Wave1 code/DB/ingestion untouched; the 3 locally-modified wiki files
