@@ -270,3 +270,11 @@ Owner reports Daily Content Sync Production Architecture research complete;
 implementation remains pending. [Manus registry](research-registry.md) records
 earlier provenance gaps; synthesis/package acquisition is now recorded above. Existing minimum contract
 above stands; no scheduler, ingestion writes or deployment is authorized here.
+
+## Exam canonicalization gate — Owner policy2026-09-27
+
+[Full-set canonical policy](exam-full-set-canonical-policy.md) supersedes per-post
+technical readiness as App exam selection. Reuse existing identity/coverage/source
+relations; partial HOLD and ambiguous REVIEW before exact Owner publication gate.
+[Read-only audit](exam-canonical-audit-2026-09-27.md):30 of57 are canonical review
+candidates; no writer integration, new architecture or Production change claimed.

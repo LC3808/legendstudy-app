@@ -483,3 +483,14 @@ now; deployment and Production calls are separate steps, not executed by this ta
 [Current activation contract](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25)
 supersedes the candidate's pending runtime/gateway conditions without weakening
 canonical identity, Safe Open, no-redirect or ephemeral-target boundaries.
+
+
+## 2026-09-27 — Exam full-set canonical selection
+
+SOURCE ARCHIVE ≠ APP CATALOG. Prefer one evidence-complete representative per exam;
+partial SEO posts remain source/archive evidence with publication HOLD. Preserve
+raw titles, historical subjects, source provenance and user references; ambiguity
+requires review. Same rule applies to future browse/search/personalization/LAB and
+historical ingestion. Archive-only areas remain discoverable direction, no ranking
+or schema implementation. [Canonical policy](exam-full-set-canonical-policy.md)
+owns full scope and Owner gates; the dated audit does not authorize publication.

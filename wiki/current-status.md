@@ -130,8 +130,8 @@ removed, guidebook display fixed; signed other-PDF resolver gap remains.
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. Pilot and Batch #1 are published and verified. Remaining193
-require a new Owner/ChatGPT gate before next selection or publication.
+do not reapply it. Pilot and Batch #1 are published and verified. Remaining193: exam57→30 candidates/27 review;
+[canonical audit](exam-canonical-audit-2026-09-27.md) gates next publication.
 52 identity-review posts remain isolated.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains

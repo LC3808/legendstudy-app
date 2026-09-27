@@ -6,6 +6,15 @@ This document records the canonical rollout order for LegendStudy Materials data
 It does not authorize Production mutation by itself. Reuse the existing ingestion
 pipeline and prove each boundary before expanding scope.
 
+## Exam Full-Set Canonical Policy — Owner override2026-09-27
+
+[Canonical full-set policy](exam-full-set-canonical-policy.md) is mandatory before
+further publication. Source archive is not App catalogue. Remaining57 exams:
+30 full-set review candidates,27 ambiguous; active33:15 full,2 partial,16 review.
+[Complete audit/evidence](exam-canonical-audit-2026-09-27.md). No next batch selected,
+Production mutation or52-HOLD release. Original193 technical-ready count stays
+historical; do not use it as blanket publication approval.
+
 ## Product objective
 
 Finish a useful Materials foundation quickly and accurately, then begin App

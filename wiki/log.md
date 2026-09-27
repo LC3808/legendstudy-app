@@ -2647,3 +2647,14 @@ Preserved D-Day/title/CTA/save/cfile fixes; removed school NEIS footer only.
 resolver contract still requires a separately approved backend extension.
 Owner device PASS scope and72 focused/analyze PASS, full850/skip1/known3 failures
 recorded in [QA evidence](owner-device-qa-2026-09-27.md). No Production mutation.
+
+
+## 2026-09-27 — Exam full-set read-only canonical audit
+
+185 observed exam posts/138 reviewed identities, not a full historical crawl.
+Remaining57:30 full-set candidates/27 review; active33:15 full/2 partial/16 review.
+1474→1431 reveals nominal/administered-month parser mismatch and52-HOLD boundary;
+1447→1404 is a pre2020 sibling. Both active partials have recent-view references.
+[Audit](exam-canonical-audit-2026-09-27.md), [policy](exam-full-set-canonical-policy.md),
+offline reproducibility6 tests PASS. No Production/schema/accepted-state mutation,
+next batch selection,52 release or1710 A1. Owner review is the next gate.
