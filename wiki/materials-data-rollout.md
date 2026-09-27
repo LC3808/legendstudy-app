@@ -883,3 +883,12 @@ Owner/ChatGPT gate is required before next batch selection/apply/activation.**
 Local ignored batch-01 evidence now includes live validation/plans, repeated scoped
 preflight, per-post publication/exact journal, unrelated preservation and guest
 read reports. No credentials or local artifacts committed.
+
+## 2026-09-27 — FULL_SET publication preflight follow-up
+
+[Fresh22/private preflight result](exam-full-set-publication-preflight-2026-09-27.md):
+all22 retain FULL_SET;515 resources/843 potential inserts, collision/noop/update0.
+Four resource-bounded groups proposed; no publication authority or Production write.
+This later explicit preflight request supersedes the earlier generic batch-size
+suggestion for this22-post pool. REVIEW35/identity52 remain HOLD; replacement pairs,
+1710 A1 and Busan guidebook remain separate. Owner/ChatGPT approval gate.

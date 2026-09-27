@@ -1,5 +1,16 @@
 # Development Log
 
+## 2026-09-27 — Exam FULL_SET publication preflight (no writes)
+
+- [Fresh22 + private preflight](exam-full-set-publication-preflight-2026-09-27.md):
+  FULL_SET22 retained, no downgrade/drift. Planned843 rows (resources515), all insert;
+  collisions/existing active/inactive/noop/update0. Existing24 exact/public PASS.
+- PDF493 HTTP206/signature PASS;480 direct contract,13 scripts +22 Box audio fallback.
+  Box GET200/MP3 metadata22; HEAD404 alone was not a valid availability verdict.
+- Propose four groups111/151/126/127 resources, no apply/activation. Python384 and
+  resolver37 PASS; native PostgreSQL25 NOT_RUN. REVIEW35/52 HOLD and1710 preserved.
+- Owner approval gate only; no Production/schema/accepted-state/App code changes.
+
 ## 2026-09-27 — Materials Exam Canonical Audit Phase2 (offline)
 
 - [Evidence/classifier/replacement plans](exam-canonical-audit-phase2-2026-09-27.md):

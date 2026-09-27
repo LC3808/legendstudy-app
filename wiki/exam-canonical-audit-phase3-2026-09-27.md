@@ -184,3 +184,12 @@ Claude outputs/,supabase/.temp/,__pycache__/ are excluded from staging.
 |F NEXT_PUBLICATION_RECOMMENDATION|Only verified FULL_SET without protected hold; exclude REVIEW/partial. Fresh source/resource check + scoped private preflight; retain bounded maximum20 posts/500 resources or smaller explicit Owner limit. Owner separately approves IDs and apply/activation. No batch selected here.|
 
 NEXT: Owner/ChatGPT review. STOP; no automatic publication continuation.
+
+## 2026-09-27 — FULL_SET publication preflight follow-up
+
+[Fresh22/private preflight result](exam-full-set-publication-preflight-2026-09-27.md):
+all22 retain FULL_SET;515 resources/843 potential inserts, collision/noop/update0.
+Four resource-bounded groups proposed; no publication authority or Production write.
+This later explicit preflight request supersedes the earlier generic batch-size
+suggestion for this22-post pool. REVIEW35/identity52 remain HOLD; replacement pairs,
+1710 A1 and Busan guidebook remain separate. Owner/ChatGPT approval gate.
