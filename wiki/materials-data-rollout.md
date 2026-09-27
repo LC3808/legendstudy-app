@@ -11,11 +11,12 @@ pipeline and prove each boundary before expanding scope.
 [Canonical full-set policy](exam-full-set-canonical-policy.md) is mandatory before
 further publication. Source archive is not App catalogue. [Phase1 baseline](exam-canonical-audit-2026-09-27.md)
 was30 provisional candidates/27 ambiguous; active33:15 full,2 partial,16 review.
-[Phase2 strict audit](exam-canonical-audit-phase2-2026-09-27.md) now requires independent
-expected-profile/organizer evidence: strict writer ready0/review57 (prior30 need
-revalidation); active16 remain REVIEW. Replacement1474→1431 confirmed subset,
-1447→1404 retains calendar/profile review. No Production changes or next batch.
-Original193 technical-ready count remains, not blanket publication approval.
+[Phase2 strict audit](exam-canonical-audit-phase2-2026-09-27.md) established the
+independent-evidence gate. [Phase3 registry audit](exam-canonical-audit-phase3-2026-09-27.md)
+now yields22 FULL_SET /0 partial /35 REVIEW for57; this is a publication review
+pool, not approval. Active16 were not re-audited in Phase3.1474→1431 coverage
+relation is verified, but1431 remains52-HOLD;1447→1404 retains date/profile review.
+No Production changes or next batch. Original193 technical-ready count remains;
 52-HOLD and1710 A1 remain unchanged.
 
 ## Product objective

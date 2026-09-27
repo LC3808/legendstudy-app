@@ -2673,3 +2673,14 @@ Remaining57:30 full-set candidates/27 review; active33:15 full/2 partial/16 revi
 [Audit](exam-canonical-audit-2026-09-27.md), [policy](exam-full-set-canonical-policy.md),
 offline reproducibility6 tests PASS. No Production/schema/accepted-state mutation,
 next batch selection,52 release or1710 A1. Owner review is the next gate.
+
+
+## 2026-09-27 — Materials Exam Canonical Phase3
+
+Independent official coverage registry59 (verified55/partial3/unverified1), pure
+offline lookup/classifier adapter and57-post rerun:22 FULL_SET/0 partial/35 REVIEW.
+1431 coverage FULL_SET but52-HOLD;1474 confirmed subset;1447/1404 remain REVIEW.
+Source-calendar conflicts stay review, no identity rewrites. Focused40 + prior33,
+ingestion190 and available Python suite384 PASS;25 native PostgreSQL NOT_RUN.
+No Production/writer/accepted-state/UI changes or next batch.
+[Evidence, limitations and Owner gates](exam-canonical-audit-phase3-2026-09-27.md).

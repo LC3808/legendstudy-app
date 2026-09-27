@@ -130,9 +130,10 @@ removed, guidebook display fixed; signed other-PDF resolver gap remains.
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. Pilot/Batch #1 verified. Remaining193; exam57 strict ready0/
-review57 (prior30 +27). [Phase2](exam-canonical-audit-phase2-2026-09-27.md):
-active16 REVIEW; replacements unsafe.52 HOLD/1710 A1 unchanged; Owner review next.
+do not reapply it. Pilot/Batch #1 verified. Remaining193; exam57 offline
+FULL_SET22/REVIEW35. [Phase3](exam-canonical-audit-phase3-2026-09-27.md):
+no publication.1474→1431 coverage confirmed; replacement unsafe.
+52 HOLD/1710 A1 unchanged; Owner review.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
 deferred per [EOD closeout](eod-2026-09-25.md). Next data priority is Wave1 review/implementation → controlled publication →

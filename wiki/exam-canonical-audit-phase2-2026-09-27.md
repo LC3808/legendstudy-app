@@ -1,5 +1,8 @@
 # Exam Canonical Audit Phase 2 — 2026-09-27
 
+Phase3 successor: [independent registry and57-post revalidation](exam-canonical-audit-phase3-2026-09-27.md).
+The numbers below are the preserved Phase2 baseline, not the current review pool.
+
 Status: **OFFLINE AUDIT COMPLETE; strict publication-ready pool NOT established (0).**
 The classifier/model and 43-post review are complete; the historical verified
 coverage registry is intentionally incomplete. No Production application is authorized.

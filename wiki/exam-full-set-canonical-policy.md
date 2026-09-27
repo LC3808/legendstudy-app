@@ -160,7 +160,7 @@ The Phase1 label FULL_SET_CANONICAL describes a provisional metadata candidate;
 it must not bypass the stronger Phase2 requirement for an independently evidenced
 exam-specific complete expected profile and organizer. Previous30 are retained
 as provisional candidates but all30 need strict revalidation; original27 remain
-REVIEW. Strict verified ready pool currently0, not30. No source/Production rows
+REVIEW. At the Phase2 checkpoint strict verified ready was0, not30. No source/Production rows
 or writer-ready inventory were reclassified in place.
 
 Profiles are exact year/grade/nominal session/family/organizer evidence, with
@@ -179,3 +179,19 @@ Keep bookmarks/recent/history intact; recent_views content identity is immutable
 and its trigger overwrites timestamps. Both replacement cases remain unsafe until
 separate target/identity/scope and redirect/reference-preservation Owner gates.
 No migration, source deletion,52-HOLD release or1710 A1 action in Phase2.
+
+
+## Phase3 independent expected coverage (2026-09-27)
+
+[Registry contract](exam-expected-coverage-registry.md) and [Phase3 audit](exam-canonical-audit-phase3-2026-09-27.md)
+supersede current pool counts:57→22 FULL_SET /0 partial /35 REVIEW. Source titles
+and counts never define expected coverage. Exact official year/grade/session
+inventories, conditional domains and field-scoped provenance are required;
+unknown profiles do not inherit adjacent years. Planned and actual dates remain
+separate; conflicting source assertions stay REVIEW without DB identity edits.
+Phase3 strengthens partial classification: only a strict subset of a unique
+verified FULL_SET sibling qualifies; broader REVIEW siblings and complete ties
+remain REVIEW. Phase2's weaker diagnostic subset output remains historical only.
+1431 passes coverage but52-HOLD remains;1474 is partial;1447/1404 remain REVIEW.
+This is offline reference tooling only. No writer/gate integration, Production
+mutation, target activation or next-batch selection. Owner/ChatGPT review next.
