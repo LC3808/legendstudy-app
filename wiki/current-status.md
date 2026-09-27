@@ -89,16 +89,15 @@ Wave1 read-only inventory COMPLETE (2026-09-27): sitemap1676, candidates781
 fully observed;296 actually published2020→current (27 public baseline +269 new),
 485 candidate posts pre2020. Earlier-lastmod895 excluded with13 bounded sanity
 checks and0 exceptions; not an exhaustive reread of those895.
-Writer/parser extension IMPLEMENTED / TESTED. Saved296 posts reclassified,
-no network re-observation. New269:217 writer-ready (10 no advisory +207 advisory),
-52 identity-review posts remain frozen in23 groups, no other holds. Ready types:
-exam63, essay135, study14, column5. Existing exam invariants and NULL raw taxonomy
-preserved; new non-exam scope has no exam/occurrence children.229 focused/regression
-tests PASS; deterministic rerun and planned-key checks PASS. Production publication
-**NOT YET APPLIED / OWNER GATED**. Private DB access unavailable: exact live inserts/
-no-ops/collisions UNKNOWN; read-only preflight SQL prepared.1710 acceptance gap
-unchanged (no recrawl; full A1 observation evidence absent from redacted snapshot).
-[Implementation and gate](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27).
+Writer/parser extension IMPLEMENTED / TESTED. New269:217 ready,52 identity-review
+posts frozen. Owner-approved4-post Production pilot PASS:1474 exam,1593 essay,
+1527 study,1478 column;31 rows inserted (source4/content4/exam1/occurrence4/
+resource13/quarantine5), activation and exact read-back PASS. Guest App-equivalent
+search/detail/resource queries PASS; active content31, recent1712→1711→1710.
+229 regressions PASS; no unrelated canonical changes. Remaining213 ready
+(exam62/essay134/study13/column4), further publication OWNER GATED. Accepted state
+unchanged;1710 A1 lacks trusted body evidence. Pilot physical PDF/device check pending.
+[Latest pilot and next gate](materials-data-rollout.md#wave1-production-publication-pilot--2026-09-27).
 
 
 ## Open release gates
@@ -128,9 +127,9 @@ validation above is from the subsequent global surface UI task; the strategy its
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. Inventory and minimal writer/parser implementation are complete. Obtain private
-read-only preflight results, then exact bounded Production review/Owner approval.
-52 identity-review posts remain isolated; no publication has been executed.
+do not reapply it. Wave1 four-type pilot is published and verified. Next213 require
+Owner approval for bounded batches (20 posts/500 resources maximum).
+52 identity-review posts remain isolated.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
 deferred per [EOD closeout](eod-2026-09-25.md). Next data priority is Wave1 review/implementation → controlled publication →

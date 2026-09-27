@@ -2585,3 +2585,24 @@ read-only SQL prepared, actual insert/no-op/collision counts unknown.1710 accept
 gap unchanged; no recrawl/fabricated body fingerprint. No Production mutation.
 D-Day Owner PASS and prior Personalization continuity preserved. Owner authorized
 one combined code/Wiki commit/push. [Full gate/evidence](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27).
+
+
+## 2026-09-27 — Wave1 private Production preflight PASS
+
+Reused authenticated linked Supabase CLI; fully validated217-post/5692-key SQL,
+52 frozen posts excluded. Read-only execution: potential inserts5692, no-ops0,
+collisions0, inactive0, updates0.1710 active/exam1/occurrences33/resources67;
+A1 still lacks trusted body fingerprint. No publication/activation/accepted write.
+SQL output/minimal inactive-count fixes and bounded batch recommendation recorded
+in [Materials rollout](materials-data-rollout.md#wave1-private-production-preflight--2026-09-27).
+
+
+## 2026-09-27 — Wave1 four-type Production pilot PASS
+
+Owner-approved1474 exam/1593 essay/1527 study/1478 column published sequentially
+through existing controlled writer and activation.31 inserted rows, exact columns/
+keys/linkages PASS, no unrelated canonical changes. Anonymous App-equivalent
+search/detail/resources PASS; active31, recent1712→1711→1710 unchanged.229 tests
+PASS. Remaining213 and frozen52 not published; accepted26/1710 A1 unchanged.
+Device PDF/UI check pending; next bounded batch requires new approval. No code
+changes. [Pilot evidence](materials-data-rollout.md#wave1-production-publication-pilot--2026-09-27).

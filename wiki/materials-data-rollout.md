@@ -629,10 +629,11 @@ validation under the existing live-source gate; no cached-sample write bypass ad
 
 ### Private Production preflight and1710
 
-No private Supabase connector is available; existing CLI uses hidden DB-password
-input and no DB credential/environment is configured here. No credential was
-printed, searched in unrelated apps, or embedded. Public27 baseline is not proof
-that candidate keys are absent from private/inactive canonical tables.
+Initial credential check was incomplete: the installed Supabase CLI supports
+`db query --linked --project-ref stlhijzpjfgwwdgunlsd --file ...` using existing
+authentication. This private read path succeeded on2026-09-27; no new credential
+requested, printed or saved. Legacy ingestion/verifiers prompt for passwords;
+public runtime configs and client JWTs do not expose private canonical tables.
 
 Prepared exact read-only SQL at:
 `.local/materials-wave1/2026-09-27/implementation/private-preflight.sql`.
@@ -640,7 +641,7 @@ Run in the Owner's **LegendStudy stlhijzpjfgwwdgunlsd** SQL session. It starts a
 READ ONLY transaction, inspects5692 planned canonical/quarantine keys against
 existing IDs/natural keys/alternate identities, reports potential inserts/key
 no-ops, inactive/active matches and collisions, then ROLLBACK. It also queries1710
-canonical publication shape. **Prepared, not executed or DB-syntax-validated.**
+canonical publication shape. **Executed successfully / read-only preflight PASS on2026-09-27.**
 Any collision, mixed existing/new batch, or unexpected delta requires STOP/review;
 this artifact does not replace existing runtime preflight or authorize repair.
 
@@ -670,5 +671,113 @@ Committed review artifacts: `tool/ingestion/samples/wave1-identity-review.json`
 and `wave1-publication-candidates.json`; no raw snapshot, credentials or signed
 locators committed. Detailed redacted plans, summary and read-only SQL remain
 under ignored `.local/materials-wave1/2026-09-27/implementation/`.
-Next gate: Owner private read-only preflight results → review exact bounded delta
+Next gate: review the private preflight results and exact bounded delta
 → Owner Production publication approval. **No Production mutation in this task.**
+
+
+### Wave1 private Production preflight — 2026-09-27
+
+Fetch confirmed local/origin `3b92439` on `codex/day-7-school-neis` before this
+verification. Entire SQL and5692 payload keys were read and compared exactly to
+saved217 resolved plans; frozen52 registry matches/exclusion PASS;1710 excluded.
+BEGIN TRANSACTION READ ONLY / final ROLLBACK; no DML/DDL, CALL/DO/COPY, dynamic SQL
+or side-effect functions. Production execution also confirmed SQL/schema validity.
+SQL was minimally corrected to count any inactive match even alongside active
+matches, return only parser/hash presence for1710, and combine both reports into
+one JSON result (CLI returns the final SELECT result). Payload keys unchanged.
+
+| Table | Planned | Potential inserts | Key no-ops | Collisions | Inactive | Active | Updates |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| source_posts |217|217|0|0|0|0|0|
+| content_items |217|217|0|0|0|0|0|
+| exams |63|63|0|0|0|0|0|
+| exam_subjects |1039|1039|0|0|0|0|0|
+| resources |3874|3874|0|0|0|0|0|
+| ingestion_quarantine |282|282|0|0|0|0|0|
+
+Snapshot delta:5410 canonical +282 quarantine =5692 potential insert rows across
+217 posts; no existing keys, collisions or unexpected inactive matches. Active
+flags are not applicable to source_posts/exams/quarantine; zero means no match,
+not an assertion that those tables have is_active. This is a key preflight, not
+proof of full-row equivalence or authorization to write. Recheck at publication.
+
+1710 canonical ID `c968af3c-768c-5a0f-8eed-c14a9e83322c`: parser_version and
+content_hash present, active=true, exams1, occurrences33, resources67.
+A1 remains NOT READY: original observation body fingerprint/length missing from
+redacted snapshot. No recrawl, republish or accepted-state change.
+
+Recommended publication after Owner approval: first4 posts covering each supported
+content type, then at most20 posts /500 resources per reviewed batch; keep each
+post atomic, isolate a larger post for review. Before each batch use existing fresh
+source validation and private preflight; apply inactive, verify exact counts and
+relationships, then separately approve activation and verify app visibility.
+Stop on collisions, unexpected existing/inactive rows or changed source/delta.
+The217 candidates are the upper scope, never blanket publication permission.
+No Production content/schema mutation or activation. CLI emitted its standard
+“Initialising login role” authentication message; this is not publication evidence.
+Owner iOS files and accepted-state hashes unchanged; untracked files preserved.
+
+
+## Wave1 Production publication pilot — 2026-09-27
+
+Owner explicitly approved exactly one post per supported type, existing controlled
+apply/activation only, then STOP. Starting local/origin HEAD3b92439. No app/parser/
+writer/schema changes; Owner and concurrent personalization work preserved.
+
+| ID | Type | Original published_at (KST) | Short title | Resources | Exam/occurrences | Advisory quarantine |
+|---|---|---|---|---:|---|---|
+|1474|exam|2020-12-13 00:17:00|2020 고3 3월 국영수 모의고사|10|1/4|none|
+|1593|university_essay|2023-11-21 17:27:28|부산대 2024 논술가이드북|1|0/0|resource_kind_unknown, resource_url_expiring|
+|1527|study_material|2023-09-11 12:38:24|영어 문장 넣기 유형문제|2|0/0|resource_kind_unknown, resource_url_expiring|
+|1478|education_column|2021-04-13 10:52:10|2021 모의고사 일정|0|0/0|attachment_none|
+
+Selected simple, small representative structures from217 ready; frozen52 and1710
+excluded. Four live source observations matched saved canonical plans exactly;
+all publishable, existing type-specific advisory policy PASS. No full inventory
+or217-post preflight rerun. Scoped private preflight planned=potential inserts:
+source4/content4/exam1/occurrence4/resources13/quarantine5; no-ops0/collisions0/
+existing inactive0/active0/planned updates0.229 existing/focused regressions PASS.
+
+Reused CLI authenticated temporary login credentials in process memory only,
+with its existing postgres role membership, through existing PsycopgSession.
+Initial default-role SELECT was refused; no write occurred before role selection
+and successful preflight. No credential printed or persisted. The local operator
+calls existing assert_apply_allowed/scope gates, apply_pilot, apply_quarantine,
+and publish_scope; no alternate writer, hand-written mutation SQL or schema change.
+Each post ran sequentially: atomic canonical insert → separate advisory transaction
+(existing contract) → exact inactive read-back → scoped activation → exact active
+read-back. Failure stops further posts; no force/repair path was used.
+
+Actual inserts: source_posts4, content_items4, exams1, exam_subjects4, resources13,
+ingestion_quarantine5 = **31 total**. Activation: content4/occurrences4/resources13.
+All projected canonical columns, deterministic IDs, source/resource relationships,
+original dates/types and active flags matched the live plans. General materials
+have zero exam/occurrence children; exam invariants preserved. Duplicate/mismatch0.
+Before/after count+row-digest comparison of all six canonical/quarantine tables
+outside the four-post scope was unchanged; no unrelated data mutation.
+
+Anonymous Production REST checks reused actual App repository projections/joins/
+filters for each search branch, detail and resource list: all4 PASS,13 resources
+visible with preserved unsigned source locator/null unverified file_url contract.
+Recent query uses published_at DESC,id DESC; active31, first1712→1711→1710 unchanged.
+Historical pilot dates remain original; apply time does not promote Recent Updates.
+These are App-equivalent backend read-path checks, not a Flutter/device run.
+Owner device checks: find/open all4, exam subject/resource grouping, essay/study
+PDF opening and fallback, attachment-free column display, recent ordering.
+Actual PDF resolution/download/device rendering was not claimed by this task.
+
+Accepted state remains26 unchanged; no accepted mutation required for this pilot.
+1710 remains active and separately A1-pending (trusted body fingerprint/length
+missing); no recrawl, republish or fabricated evidence. No auto acceptance claim.
+
+Remaining **213**: exam62, essay134, study13, column4; identity-review52 still HOLD.
+Remaining planned rows: source213/content213/exam62/occurrence1035/resource3861/
+quarantine277 =5384 canonical +277 quarantine =5661 total (recheck before apply).
+Recommend first next batch of small essay/study posts, then exam batches; each
+must stop at20 posts or500 resources, whichever comes first, and never split a
+post. Preserve per-post gates and stop on failure/source drift/unexpected state.
+**No next batch executed: Owner/ChatGPT approval required. Pilot complete, STOP.**
+
+Local ignored evidence: `.local/materials-wave1/2026-09-27/pilot/` contains selection,
+redacted live resolved rows, scoped SQL/results, publication journal, App read report
+and operator scripts. No secrets/signed locators or raw HTML committed.
