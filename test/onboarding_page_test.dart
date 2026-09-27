@@ -48,16 +48,44 @@ class _Repo implements ProfileRepository {
   }
 }
 
+const _fixtureSchool = School(
+  officeCode: 'B10',
+  schoolCode: '7010001',
+  name: '레전드고등학교',
+  schoolType: '고등학교',
+  address: '서울특별시',
+);
+
 class _NoSchools implements SchoolRepository {
+  int searches = 0;
   @override
-  Future<List<School>> search(String query) async => const [];
+  Future<List<School>> search(String query) async {
+    searches++;
+    return const [];
+  }
+
   @override
   Future<School?> find(String officeCode, String schoolCode) async => null;
   @override
   Future<List<Meal>> meals(School school, String date) async => const [];
 }
 
-Future<GoRouter> _mount(WidgetTester tester, _Repo repo, {String? user}) async {
+class _OneSchool implements SchoolRepository {
+  @override
+  Future<List<School>> search(String query) async => const [_fixtureSchool];
+  @override
+  Future<School?> find(String officeCode, String schoolCode) async =>
+      _fixtureSchool;
+  @override
+  Future<List<Meal>> meals(School school, String date) async => const [];
+}
+
+Future<GoRouter> _mount(
+  WidgetTester tester,
+  _Repo repo, {
+  String? user,
+  SchoolRepository? schools,
+}) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
     routes: [
@@ -73,7 +101,7 @@ Future<GoRouter> _mount(WidgetTester tester, _Repo repo, {String? user}) async {
       overrides: [
         authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
         profileRepositoryProvider.overrideWithValue(repo),
-        schoolRepositoryProvider.overrideWithValue(_NoSchools()),
+        schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
       ],
       child: MaterialApp.router(theme: AppTheme.light, routerConfig: router),
     ),
@@ -107,7 +135,7 @@ void main() {
     expect(find.text('학년과 학교'), findsOneWidget);
     await tester.tap(find.text('2학년'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('완료'));
+    await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'student');
@@ -128,7 +156,7 @@ void main() {
 
     expect(find.text('준비가 끝났어요'), findsOneWidget);
     expect(find.text('학년'), findsNothing);
-    await tester.tap(find.text('완료'));
+    await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'retaker');
@@ -157,5 +185,78 @@ void main() {
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
+  });
+
+  // --- School Search UX hotfix (Owner device QA) ---
+  // A tall surface so the lazy ListView builds the 검색 button and results.
+
+  Future<(_Repo, GoRouter)> toSchoolStep(
+    WidgetTester tester, {
+    SchoolRepository? schools,
+  }) async {
+    tester.view.physicalSize = const Size(1000, 2200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final repo = _Repo();
+    final router = await _mount(tester, repo, user: 'u1', schools: schools);
+    await tester.tap(find.text('고등학교 재학생'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    return (repo, router);
+  }
+
+  testWidgets('C: empty query disables the 검색 button', (tester) async {
+    await toSchoolStep(tester);
+    final button = tester.widget<OutlinedButton>(
+      find.widgetWithText(OutlinedButton, '검색'),
+    );
+    expect(button.onPressed, isNull);
+  });
+
+  testWidgets('A: on-screen 검색 button runs the search', (tester) async {
+    final schools = _NoSchools();
+    await toSchoolStep(tester, schools: schools);
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pumpAndSettle();
+    expect(schools.searches, greaterThan(0));
+    expect(find.text('검색 결과가 없어요.'), findsOneWidget);
+  });
+
+  testWidgets('B: keyboard search key runs the same search', (tester) async {
+    final schools = _NoSchools();
+    await toSchoolStep(tester, schools: schools);
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.testTextInput.receiveAction(TextInputAction.search);
+    await tester.pumpAndSettle();
+    expect(schools.searches, greaterThan(0));
+    expect(find.text('검색 결과가 없어요.'), findsOneWidget);
+  });
+
+  testWidgets('D: selecting a result shows the confirmation card',
+      (tester) async {
+    await toSchoolStep(tester, schools: _OneSchool());
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('레전드고등학교'));
+    await tester.pumpAndSettle();
+    expect(find.text('선택한 학교'), findsOneWidget);
+    expect(find.text('레전드고등학교'), findsWidgets);
+  });
+
+  testWidgets('E: 검색 does not finish onboarding or navigate Home',
+      (tester) async {
+    final (repo, router) = await toSchoolStep(tester, schools: _NoSchools());
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pumpAndSettle();
+    expect(repo.completed, isFalse);
+    expect(repo.upserts, 0);
+    expect(router.routeInformationProvider.value.uri.path, '/onboarding');
   });
 }

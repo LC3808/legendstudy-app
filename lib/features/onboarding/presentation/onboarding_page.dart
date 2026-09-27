@@ -120,6 +120,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     }
   }
 
+  // The single school-search action. Both the on-screen 검색 button and the
+  // keyboard search key call this — never a second search path. Searching only
+  // sets the query the existing schoolSearchProvider reacts to; it never
+  // finishes onboarding or navigates.
+  void _runSearch() {
+    final query = _searchInput.text.trim();
+    if (_busy || query.isEmpty || query == _query) return;
+    FocusScope.of(context).unfocus();
+    setState(() => _query = query);
+  }
+
   Future<void> _selectSchool(School? school) async {
     if (_busy) return;
     setState(() => _busy = true);
@@ -271,7 +282,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             setState(() => _query = '');
           }
         },
-        onSubmitted: (value) => setState(() => _query = value.trim()),
+        // Keyboard search key uses the exact same action as the 검색 button.
+        onSubmitted: (_) => _runSearch(),
+      ),
+      const SizedBox(height: AppTokens.space8),
+      _SchoolSearchButton(
+        controller: _searchInput,
+        // A search for the current query is still in flight.
+        loading: _query.isNotEmpty && results.isLoading,
+        onSearch: _busy ? null : _runSearch,
       ),
       if (_query.isNotEmpty)
         results.when(
@@ -369,7 +388,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     ? '저장 중…'
                     : _step == 0
                     ? '다음'
-                    : '완료',
+                    : '설정 완료',
               ),
             ),
           ),
@@ -558,6 +577,59 @@ class _SelectDot extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: AppTokens.cardBorder, width: 2),
       ),
+    );
+  }
+}
+
+// Explicit on-screen search CTA. Separated from the footer's 설정 완료 button so
+// a user searching for a school never accidentally finishes onboarding. Enabled
+// only when the field is non-empty; shows a spinner while a search is in flight.
+class _SchoolSearchButton extends StatelessWidget {
+  const _SchoolSearchButton({
+    required this.controller,
+    required this.loading,
+    required this.onSearch,
+  });
+  final TextEditingController controller;
+  final bool loading;
+  final VoidCallback? onSearch;
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: controller,
+      builder: (context, value, _) {
+        final hasQuery = value.text.trim().isNotEmpty;
+        final enabled = hasQuery && !loading && onSearch != null;
+        return SizedBox(
+          height: 48,
+          child: OutlinedButton.icon(
+            onPressed: enabled ? onSearch : null,
+            icon: loading
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.search, size: 20),
+            label: Text(loading ? '검색 중…' : '검색'),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: _accent,
+              disabledForegroundColor: AppTokens.disabled,
+              side: BorderSide(
+                color: enabled ? _accent : AppTokens.cardBorder,
+                width: 1.5,
+              ),
+              textStyle: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

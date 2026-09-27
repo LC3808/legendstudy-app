@@ -168,6 +168,31 @@ Verified: `flutter analyze` clean; new `test/onboarding_page_test.dart`
 no-overflow); full suite 848 pass, 1 skipped, 3 pre-existing failures unrelated
 to this task; **0 new regressions**.
 
+## Phase 1.1 hotfix — School search action separation (Owner device QA)
+
+Owner device QA: on the school step the field had no explicit search control, so
+users typed a school name and then pressed the strongest CTA, 완료, expecting it
+to search — which instead finished onboarding and jumped to Home. Fix (visual /
+UX only, no logic/gate/router/DB/NEIS change):
+
+- Added an explicit on-screen **검색** button (`_SchoolSearchButton`) under the
+  field: disabled while the query is empty, shows a spinner while a search is in
+  flight, and prevents duplicate submission.
+- One shared search action (`_runSearch`) is called by BOTH the button and the
+  keyboard search key (`onSubmitted`) — no second search path; still reuses
+  `schoolSearchProvider` / `schoolSelectionProvider`.
+- Renamed the final step CTA 완료 → **설정 완료** to separate it from searching.
+  Searching only sets the query; it never finishes onboarding or navigates.
+- Selected-school confirmation card, skip semantics, finish persistence, and the
+  optional-school policy are unchanged.
+- Search/select UI and the onboarding finish action stay decoupled, so a future
+  canonical step (관심 대학 등) can replace this step's CTA with 다음 without
+  re-coupling. No DB/schema change; no university/major UI.
+
+Covered by `test/onboarding_page_test.dart` (검색 button enable/disable, shared
+action for button + keyboard, selection confirmation, and that 검색 never
+finishes onboarding), plus the finish/skip/returning-user tests.
+
 ## Phase 1.2 — Motion personalization (design only)
 
 The "living personalization" motion concept (ambient background identity field,
