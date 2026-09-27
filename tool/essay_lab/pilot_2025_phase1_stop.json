@@ -1,0 +1,431 @@
+{
+  "scope": {
+    "universities": [
+      "연세대학교",
+      "성균관대학교",
+      "경희대학교"
+    ],
+    "admission_year": 2025,
+    "source_posts": [
+      "1671",
+      "1689",
+      "1633",
+      "1682"
+    ]
+  },
+  "starting_head": "4f27d9b",
+  "foundation": {
+    "owner_reported_applied": true,
+    "actual_relations_present": true,
+    "initial_rows": [
+      0,
+      0,
+      0
+    ],
+    "identity_unique": [
+      "university_id",
+      "admission_year",
+      "exam_key"
+    ],
+    "context_unique_present": false
+  },
+  "documents_read": 38,
+  "pages_available": 309,
+  "document_manifest": [
+    {
+      "post_id": "1671",
+      "index": 0,
+      "resource_id": "df3ef78d-386c-5c59-88d3-c1a48cce7521",
+      "title": "2025학년도 연세대 모의논술_자연 문제.pdf",
+      "source_resource_key": "cB8Xst/dJMb9PGbNj3",
+      "sha256": "b5ac54437078b49593477e6b768e12f676fd00b6a07782f56e0c39721d52663c",
+      "pages": 2
+    },
+    {
+      "post_id": "1671",
+      "index": 1,
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "title": "2025학년도 연세대 모의논술_자연 해설,답안.pdf",
+      "source_resource_key": "ekT42r/dJMb9jtKIsp",
+      "sha256": "cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53",
+      "pages": 12
+    },
+    {
+      "post_id": "1671",
+      "index": 2,
+      "resource_id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+      "title": "2025학년도 연세대 논술_인문 문제.pdf",
+      "source_resource_key": "bgb7zK/dJMb9MJsRho",
+      "sha256": "cafc28fcc36edbb608d5092f2aa91bcdd25c722642fd4c0ddc416be63f958a16",
+      "pages": 2
+    },
+    {
+      "post_id": "1671",
+      "index": 3,
+      "resource_id": "82411c51-171f-5617-b6c1-a896f7b4113a",
+      "title": "2025학년도 연세대 논술_인문 출제의도.pdf",
+      "source_resource_key": "cMmHGM/dJMb9YJTuXA",
+      "sha256": "1859c3d430bd5289063e61ac57b0673ce4f0463b932213b614cc1eb5ca5eb028",
+      "pages": 1
+    },
+    {
+      "post_id": "1671",
+      "index": 4,
+      "resource_id": "808d51eb-6257-59f1-846d-2a90a2c1b54e",
+      "title": "2025학년도 연세대 논술_인문 해설.pdf",
+      "source_resource_key": "sEWVb/dJMb9OtKjgx",
+      "sha256": "a84e71ac3cfa72a6e264d0b2286744f49a51241566dc14ff29e376fa68ba3bed",
+      "pages": 4
+    },
+    {
+      "post_id": "1671",
+      "index": 5,
+      "resource_id": "0c6e5a98-ecd7-5ddf-89e5-5f2e13b72fa3",
+      "title": "2025학년도 연세대 논술_자연 문제.pdf",
+      "source_resource_key": "voHl3/dJMb9OUOF5b",
+      "sha256": "8b449dcc0a573645316e54bf4edacbe59207072629581ebaadd5736f0459c4de",
+      "pages": 2
+    },
+    {
+      "post_id": "1671",
+      "index": 6,
+      "resource_id": "9ccc7a61-98e3-58c6-af50-92ef93af2021",
+      "title": "2025학년도 연세대 논술_자연 출제의도.pdf",
+      "source_resource_key": "sUyrb/dJMb9OtKjgy",
+      "sha256": "e92c234dbd613154b5ed4e8d0afbc1a8828c11bb60b8e5642b570785cbaa06b6",
+      "pages": 2
+    },
+    {
+      "post_id": "1671",
+      "index": 7,
+      "resource_id": "84d3e492-3e2b-522d-bc6f-26cac22e0bd1",
+      "title": "2025학년도 연세대 논술_자연 해설.pdf",
+      "source_resource_key": "epPRom/dJMb9NO8MKu",
+      "sha256": "5490dbdfe08e34285178cd9471934ce3fd1f9f16370d61ff000585f584a6df8f",
+      "pages": 7
+    },
+    {
+      "post_id": "1671",
+      "index": 8,
+      "resource_id": "1b898268-a55a-5cc4-9486-dea8d0db8740",
+      "title": "2025학년도 연세대 논술_자연(추가) 문제.pdf",
+      "source_resource_key": "b0QD5S/dJMb9YJTuXB",
+      "sha256": "4579ad889cea319cd0ecc7db636c24c5f2a303694270d42712dbb56ad7435389",
+      "pages": 1
+    },
+    {
+      "post_id": "1671",
+      "index": 9,
+      "resource_id": "72a1d13d-44f9-58e5-ac5a-30fd93c689a8",
+      "title": "2025학년도 연세대 논술_자연(추가) 출제의도.pdf",
+      "source_resource_key": "b0qDeh/dJMb9MJsRhp",
+      "sha256": "1fb758b601735ffe2fdff77fddbe65a8304a7276c1ff168a303cb4cb325208d9",
+      "pages": 1
+    },
+    {
+      "post_id": "1671",
+      "index": 10,
+      "resource_id": "eac2fcb4-269d-5a10-aa1a-d0ebc4127a20",
+      "title": "2025학년도 연세대 논술_자연(추가) 해설.pdf",
+      "source_resource_key": "cRSxEb/dJMb9MvVG5O",
+      "sha256": "2976a02f73136351d71f25d2a063c9fb1ed375a4b85d2c06835699a3819895b8",
+      "pages": 4
+    },
+    {
+      "post_id": "1689",
+      "index": 0,
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "title": "2025학년도 성균관대 논술_인문1 문제,답안.pdf",
+      "source_resource_key": "Cat4w/dJMb9WFjv7a",
+      "sha256": "43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d",
+      "pages": 18
+    },
+    {
+      "post_id": "1689",
+      "index": 1,
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "title": "2025학년도 성균관대 논술_인문2 문제,답안.pdf",
+      "source_resource_key": "cz3OmZ/dJMb85I2Dwp",
+      "sha256": "63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b",
+      "pages": 19
+    },
+    {
+      "post_id": "1689",
+      "index": 2,
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "title": "2025학년도 성균관대 논술_자연1 문제,답안.pdf",
+      "source_resource_key": "CUjTn/dJMb9c2s9ey",
+      "sha256": "5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177",
+      "pages": 16
+    },
+    {
+      "post_id": "1689",
+      "index": 3,
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "title": "2025학년도 성균관대 논술_자연2 문제,답안.pdf",
+      "source_resource_key": "k4vut/dJMb87tj4p5",
+      "sha256": "42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99",
+      "pages": 14
+    },
+    {
+      "post_id": "1689",
+      "index": 4,
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "title": "2025학년도 성균관대 논술_자연3 문제,답안.pdf",
+      "source_resource_key": "cvj1Nk/dJMb9hW0G0O",
+      "sha256": "dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34",
+      "pages": 15
+    },
+    {
+      "post_id": "1689",
+      "index": 5,
+      "resource_id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+      "title": "2025학년도 성균관대 모의논술_인문(언어) 문제.pdf",
+      "source_resource_key": "bXHtRW/dJMb9eFYZ4s",
+      "sha256": "bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f",
+      "pages": 6
+    },
+    {
+      "post_id": "1689",
+      "index": 6,
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "title": "2025학년도 성균관대 모의논술_인문(언어) 해설,답안.pdf",
+      "source_resource_key": "ehfYgJ/dJMb9O8mcAn",
+      "sha256": "d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3",
+      "pages": 14
+    },
+    {
+      "post_id": "1689",
+      "index": 7,
+      "resource_id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+      "title": "2025학년도 성균관대 모의논술_자연(수리) 문제.pdf",
+      "source_resource_key": "ciDA9P/dJMb9QrzhM9",
+      "sha256": "002d7be53b7bbca8151c82cb377375841782136390ce51a15bbaeded95336fe7",
+      "pages": 5
+    },
+    {
+      "post_id": "1689",
+      "index": 8,
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "title": "2025학년도 성균관대 모의논술_자연(수리) 해설,답안.pdf",
+      "source_resource_key": "bQXz55/dJMb9dAi5Rs",
+      "sha256": "e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171",
+      "pages": 19
+    },
+    {
+      "post_id": "1633",
+      "index": 0,
+      "resource_id": "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5",
+      "title": "2025학년도 경희대 모의논술_의약학_화학 문제.pdf",
+      "source_resource_key": "SItLH/btsJm8UFPFP",
+      "sha256": "5dd876952708e6767faf1813dc5be8472cc0539c74ee7872072e7a4934bc106c",
+      "pages": 2
+    },
+    {
+      "post_id": "1633",
+      "index": 1,
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "title": "2025학년도 경희대 모의논술_의약학_화학 답안.pdf",
+      "source_resource_key": "dcc7vj/btsJotcpe2P",
+      "sha256": "68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9",
+      "pages": 4
+    },
+    {
+      "post_id": "1633",
+      "index": 2,
+      "resource_id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+      "title": "2025학년도 경희대 모의논술_의약학_수학 문제.pdf",
+      "source_resource_key": "rxELZ/btsJmdo0x5X",
+      "sha256": "50f97de39e94e38e82ce8cefd068162807f22ccabad5aa5fc1061e28afa03d0b",
+      "pages": 1
+    },
+    {
+      "post_id": "1633",
+      "index": 3,
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "title": "2025학년도 경희대 모의논술_의약학_수학 답안.pdf",
+      "source_resource_key": "rQoqI/btsJoni3Kc1",
+      "sha256": "1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d",
+      "pages": 3
+    },
+    {
+      "post_id": "1633",
+      "index": 4,
+      "resource_id": "31699827-3b22-507a-a19e-44d56f2fa53b",
+      "title": "2025학년도 경희대 모의논술_의약학_생명과학 문제.pdf",
+      "source_resource_key": "bQ8McQ/btsJoDFXu4M",
+      "sha256": "12e4bfe1b87c5287c23c88252d636cd970488f308c7357347514137264f178c3",
+      "pages": 3
+    },
+    {
+      "post_id": "1633",
+      "index": 5,
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "title": "2025학년도 경희대 모의논술_의약학_생명과학 답안.pdf",
+      "source_resource_key": "IfupH/btsJot4yrAJ",
+      "sha256": "4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e",
+      "pages": 3
+    },
+    {
+      "post_id": "1633",
+      "index": 6,
+      "resource_id": "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9",
+      "title": "2025학년도 경희대 모의논술_의약학_물리학 문제.pdf",
+      "source_resource_key": "0mJjr/btsJnLkhM4n",
+      "sha256": "1518b3a16f63985a61d824c522bb92cccc4b1044511b550795ad763490cfe8e0",
+      "pages": 3
+    },
+    {
+      "post_id": "1633",
+      "index": 7,
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "title": "2025학년도 경희대 모의논술_의약학_물리학 답안.pdf",
+      "source_resource_key": "cbp4XN/btsJoqfK0fP",
+      "sha256": "10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b",
+      "pages": 5
+    },
+    {
+      "post_id": "1633",
+      "index": 8,
+      "resource_id": "592e0245-0c8a-548f-84df-2a81b805731e",
+      "title": "2025학년도 경희대 모의논술_자연계 문제.pdf",
+      "source_resource_key": "dsPy9Q/btsJntEceFG",
+      "sha256": "ce5465a361df29b2b028e6f3555f8eab911a2c490d5b30d1bdf545eeb2fef6f9",
+      "pages": 2
+    },
+    {
+      "post_id": "1633",
+      "index": 9,
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "title": "2025학년도 경희대 모의논술_자연계 답안.pdf",
+      "source_resource_key": "cFQsHf/btsJm90nRhL",
+      "sha256": "d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac",
+      "pages": 4
+    },
+    {
+      "post_id": "1633",
+      "index": 10,
+      "resource_id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+      "title": "2025학년도 경희대 모의논술_인문체육 문제.pdf",
+      "source_resource_key": "dFilq2/btsJmAqxbRk",
+      "sha256": "5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c",
+      "pages": 5
+    },
+    {
+      "post_id": "1633",
+      "index": 11,
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "title": "2025학년도 경희대 모의논술_인문체육 답안.pdf",
+      "source_resource_key": "5uXrW/btsJm9svdJo",
+      "sha256": "1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa",
+      "pages": 9
+    },
+    {
+      "post_id": "1633",
+      "index": 12,
+      "resource_id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+      "title": "2025학년도 경희대 모의논술_사회계 문제.pdf",
+      "source_resource_key": "bjUFe9/btsJm4ZelWd",
+      "sha256": "162b366ffd2a55c15da7a8b81fe1145cefd9d1b91673b8b622a98a00c4c0434b",
+      "pages": 4
+    },
+    {
+      "post_id": "1633",
+      "index": 13,
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "title": "2025학년도 경희대 모의논술_사회계 답안.pdf",
+      "source_resource_key": "bMbknb/btsJmoRtSuE",
+      "sha256": "89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f",
+      "pages": 9
+    },
+    {
+      "post_id": "1682",
+      "index": 0,
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "title": "2025학년도 경희대 논술_사회계 문제,답안.pdf",
+      "source_resource_key": "17lAE/dJMb9V7tzcP",
+      "sha256": "4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce",
+      "pages": 19
+    },
+    {
+      "post_id": "1682",
+      "index": 1,
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "title": "2025학년도 경희대 논술_인문체육계 문제,답안.pdf",
+      "source_resource_key": "bd5Ufz/dJMb9PGb8zK",
+      "sha256": "c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b",
+      "pages": 17
+    },
+    {
+      "post_id": "1682",
+      "index": 2,
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "title": "2025학년도 경희대 논술_자연계 문제,답안.pdf",
+      "source_resource_key": "D6yW1/dJMb9NhjaOG",
+      "sha256": "094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5",
+      "pages": 13
+    },
+    {
+      "post_id": "1682",
+      "index": 3,
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "title": "2025학년도 경희대 논술_의학약학 문제,답안.pdf",
+      "source_resource_key": "bZQ8jT/dJMb87tj37E",
+      "sha256": "9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16",
+      "pages": 39
+    }
+  ],
+  "identity_conflicts": [
+    {
+      "post_id": "1633",
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "source_resource_key": "dcc7vj/btsJotcpe2P",
+      "title": "2025학년도 경희대 모의논술_의약학_화학 답안.pdf",
+      "pdf_sha256": "68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9",
+      "pdf_page": 1,
+      "header_year": 2024,
+      "section_year": 2025,
+      "file_label_year": 2025,
+      "classification": "UNRESOLVED_ADMISSION_YEAR_CONFLICT",
+      "verification_status": "review",
+      "visual_confirmation": true
+    },
+    {
+      "post_id": "1633",
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "source_resource_key": "IfupH/btsJot4yrAJ",
+      "title": "2025학년도 경희대 모의논술_의약학_생명과학 답안.pdf",
+      "pdf_sha256": "4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e",
+      "pdf_page": 1,
+      "header_year": 2024,
+      "section_year": 2025,
+      "file_label_year": 2025,
+      "classification": "UNRESOLVED_ADMISSION_YEAR_CONFLICT",
+      "verification_status": "review",
+      "visual_confirmation": false
+    },
+    {
+      "post_id": "1633",
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "source_resource_key": "cbp4XN/btsJoqfK0fP",
+      "title": "2025학년도 경희대 모의논술_의약학_물리학 답안.pdf",
+      "pdf_sha256": "10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b",
+      "pdf_page": 1,
+      "header_year": 2024,
+      "section_year": 2025,
+      "file_label_year": 2025,
+      "classification": "UNRESOLVED_ADMISSION_YEAR_CONFLICT",
+      "verification_status": "review",
+      "visual_confirmation": false
+    }
+  ],
+  "stop_reason": "Owner instruction section17: unexpected identity conflict; stop before any Production write",
+  "production_writes": 0,
+  "plan_finalized": false,
+  "inserted": {
+    "universities": 0,
+    "essay_exams": 0,
+    "essay_exam_resources": 0
+  },
+  "prototype_exams_selected": []
+}

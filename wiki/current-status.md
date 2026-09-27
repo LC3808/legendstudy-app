@@ -131,9 +131,9 @@ run latest profile build; check full exam sequences/known missing cases, Essay
 2020+ year/university searches and all CTA forms, especially Busan1593 real PDF.
 Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserved.
 On device PASS: Materials CLOSED. Owner separately authorized the
-[Essay LAB foundation](essay-lab-data-foundation.md): schema approved; migration
-20260927000200 PREPARED/NOT APPLIED. Platform university master, stable exam key,
-context non-unique, locator retained. Next: Owner apply gate; no seed/UI/AI.
+[Essay LAB Pilot](essay-lab-pilot-2025.md): foundation Owner-applied, actual0/0/0.
+3-university mapping STOP before writes:3 KHU PDFs have2024 headers/2025 sections.
+Next: Owner identity resolution/scoped continuation; no seed/UI/AI executed.
 Do not start analytics, new Materials audits or unrelated UI work.
 Current resource checks are automated server/App-contract evidence, not new device
 acceptance.1710 A1 reconciliation remains separate; never republish1710.
