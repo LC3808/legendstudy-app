@@ -1,5 +1,16 @@
 # Development Log
 
+## 2026-09-27 — Essay LAB 2025 Pilot schema review package
+
+- [Foundation](essay-lab-data-foundation.md): 3 new tables proposed, existing
+  resources reused; exam/source identity separate, multi-role links and provenance.
+- READ ONLY live schema + guest55 resources inspected:44 exam attachments across
+  4 universities; Pusan2025 guide only, Chung-Ang2025 missing. No invented roles.
+- Reused local Manus/LAB public subset and boundaries; full42/53 master unavailable
+  locally, no broad research repeated. SQL draft outside migrations, no apply/seed.
+- Offline17 + existing schema/Study16 tests and schema checker PASS; native PostgreSQL execution
+  NOT_RUN (prerequisite absent). No Flutter changes. Owner schema review then STOP.
+
 ## 2026-09-27 — Materials final closeout / Essay LAB priority
 
 - [Closeout](materials-final-closeout-2026-09-27.md):915 archive entries checked;

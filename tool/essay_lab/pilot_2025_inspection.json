@@ -1,0 +1,1923 @@
+{
+  "scope": "2025 admission year; metadata inspection only; NOT A SEED",
+  "checked_at": "2026-09-27T10:34:49.219451+00:00",
+  "project_ref": "stlhijzpjfgwwdgunlsd",
+  "transaction_read_only": true,
+  "existing_public_tables": [
+    {
+      "rls": true,
+      "table": "admin_users"
+    },
+    {
+      "rls": true,
+      "table": "answer_key_versions"
+    },
+    {
+      "rls": true,
+      "table": "bookmarks"
+    },
+    {
+      "rls": true,
+      "table": "content_items"
+    },
+    {
+      "rls": true,
+      "table": "day_targets"
+    },
+    {
+      "rls": true,
+      "table": "exam_questions"
+    },
+    {
+      "rls": true,
+      "table": "exam_subjects"
+    },
+    {
+      "rls": true,
+      "table": "exams"
+    },
+    {
+      "rls": true,
+      "table": "feedback_notifications"
+    },
+    {
+      "rls": true,
+      "table": "feedback_submissions"
+    },
+    {
+      "rls": true,
+      "table": "grade_cutoff_versions"
+    },
+    {
+      "rls": true,
+      "table": "ingestion_quarantine"
+    },
+    {
+      "rls": true,
+      "table": "mock_exam_answers"
+    },
+    {
+      "rls": true,
+      "table": "mock_exam_attempts"
+    },
+    {
+      "rls": true,
+      "table": "profiles"
+    },
+    {
+      "rls": true,
+      "table": "recent_views"
+    },
+    {
+      "rls": true,
+      "table": "resource_resolver_quota"
+    },
+    {
+      "rls": true,
+      "table": "resources"
+    },
+    {
+      "rls": true,
+      "table": "source_posts"
+    },
+    {
+      "rls": true,
+      "table": "study_sessions"
+    },
+    {
+      "rls": true,
+      "table": "subjects"
+    }
+  ],
+  "manus_reuse": {
+    "local_lab_head": "b4360b7793e8c1da71dc534c7c6d6af03c7cce91",
+    "assets": [
+      {
+        "path": "src/types/domain.ts",
+        "sha256": "da5efa34c7cf851f6422e3b6d97752e2624847b2b2b23adea9f7627221a5271a"
+      },
+      {
+        "path": "src/fixtures/public-metadata.ts",
+        "sha256": "598d303ba8f52d4904989a8ce809354bf59a56a5b08d675c93ec65493514416c"
+      },
+      {
+        "path": "docs/DATA_BOUNDARIES.md",
+        "sha256": "7988e8b84ab4a5eac2167ca29fc04ca2e7b296d04583bc6b8fc2d1807b2b8b4d"
+      },
+      {
+        "path": "docs/PROTOTYPE_MIGRATION.md",
+        "sha256": "7b78f97bac6d6978310041e14595d6023b22f90006474214c4618980744ee1d1"
+      },
+      {
+        "path": "docs/FUTURE_IMPLEMENTATION_HANDOFF.md",
+        "sha256": "40ccf19ab420d1c9cdc920d4265c091acacd981feac2b5e8b84155875817234b"
+      }
+    ],
+    "full_42_university_53_row_master": "Owner reported; full master not present in inspected local LAB repository; five reviewed public fixtures available; no broad re-research"
+  },
+  "universities": [
+    {
+      "slug_candidate": "yonsei",
+      "name": "연세대학교",
+      "active_university_posts_all_years": 5,
+      "posts": [
+        {
+          "title": "연세대] 2025학년도 연세대 수시 논술 & 모의논술 기출 - 문제, 답안, 해설, 출제의도 등 + 2025 경쟁률, 2026수시모집요강",
+          "post_id": "1671",
+          "resources": [
+            {
+              "id": "df3ef78d-386c-5c59-88d3-c1a48cce7521",
+              "title": "2025학년도 연세대 모의논술_자연 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "cB8Xst/dJMb9PGbNj3",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+              "title": "2025학년도 연세대 모의논술_자연 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "ekT42r/dJMb9jtKIsp",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+              "title": "2025학년도 연세대 논술_인문 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "bgb7zK/dJMb9MJsRho",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "82411c51-171f-5617-b6c1-a896f7b4113a",
+              "title": "2025학년도 연세대 논술_인문 출제의도.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "reference",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "cMmHGM/dJMb9YJTuXA",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "exam_intent"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "808d51eb-6257-59f1-846d-2a90a2c1b54e",
+              "title": "2025학년도 연세대 논술_인문 해설.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "explanation",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "sEWVb/dJMb9OtKjgx",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "0c6e5a98-ecd7-5ddf-89e5-5f2e13b72fa3",
+              "title": "2025학년도 연세대 논술_자연 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "voHl3/dJMb9OUOF5b",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "9ccc7a61-98e3-58c6-af50-92ef93af2021",
+              "title": "2025학년도 연세대 논술_자연 출제의도.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "reference",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "sUyrb/dJMb9OtKjgy",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "exam_intent"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "84d3e492-3e2b-522d-bc6f-26cac22e0bd1",
+              "title": "2025학년도 연세대 논술_자연 해설.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "explanation",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "epPRom/dJMb9NO8MKu",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "1b898268-a55a-5cc4-9486-dea8d0db8740",
+              "title": "2025학년도 연세대 논술_자연(추가) 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "b0QD5S/dJMb9YJTuXB",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "72a1d13d-44f9-58e5-ac5a-30fd93c689a8",
+              "title": "2025학년도 연세대 논술_자연(추가) 출제의도.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "reference",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "b0qDeh/dJMb9MJsRhp",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "exam_intent"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "eac2fcb4-269d-5a10-aa1a-d0ebc4127a20",
+              "title": "2025학년도 연세대 논술_자연(추가) 해설.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "explanation",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "cRSxEb/dJMb9MvVG5O",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "50032002-2539-5b7b-ac46-914d1ad7c3ce",
+              "title": "2026학년도 연세대(서울) 수시 모집 요강.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "other",
+              "file_extension": "pdf",
+              "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+              "source_resource_key": "mk7Co/dJMb89dBhoH",
+              "admission_year_candidates": [
+                2026
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1671",
+          "published_at": "2025-08-05T06:20:10+00:00",
+          "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+          "source_published_at": "2025-08-05T06:20:10+00:00",
+          "guest_resources_verified": 12
+        }
+      ],
+      "official_role_content_verified": false
+    },
+    {
+      "slug_candidate": "skku",
+      "name": "성균관대학교",
+      "active_university_posts_all_years": 6,
+      "posts": [
+        {
+          "title": "성균관대] 2025학년도 성대 수시 논술 + 모의논술 기출 - 문제, 답안, 해설, 채점기준 등 + 2026 경쟁률",
+          "post_id": "1689",
+          "resources": [
+            {
+              "id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+              "title": "2025학년도 성균관대 논술_인문1 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "Cat4w/dJMb9WFjv7a",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+              "title": "2025학년도 성균관대 논술_인문2 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "cz3OmZ/dJMb85I2Dwp",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+              "title": "2025학년도 성균관대 논술_자연1 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "CUjTn/dJMb9c2s9ey",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+              "title": "2025학년도 성균관대 논술_자연2 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "k4vut/dJMb87tj4p5",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+              "title": "2025학년도 성균관대 논술_자연3 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "cvj1Nk/dJMb9hW0G0O",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+              "title": "2025학년도 성균관대 모의논술_인문(언어) 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "bXHtRW/dJMb9eFYZ4s",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+              "title": "2025학년도 성균관대 모의논술_인문(언어) 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "ehfYgJ/dJMb9O8mcAn",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+              "title": "2025학년도 성균관대 모의논술_자연(수리) 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "ciDA9P/dJMb9QrzhM9",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+              "title": "2025학년도 성균관대 모의논술_자연(수리) 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+              "source_resource_key": "bQXz55/dJMb9dAi5Rs",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1689",
+          "published_at": "2025-09-16T06:40:42+00:00",
+          "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+          "source_published_at": "2025-09-16T06:40:42+00:00",
+          "guest_resources_verified": 9
+        }
+      ],
+      "official_role_content_verified": false
+    },
+    {
+      "slug_candidate": "cau",
+      "name": "중앙대학교",
+      "active_university_posts_all_years": 4,
+      "posts": [],
+      "official_role_content_verified": false
+    },
+    {
+      "slug_candidate": "khu",
+      "name": "경희대학교",
+      "active_university_posts_all_years": 8,
+      "posts": [
+        {
+          "title": "경희대] 2025학년도 모의논술 기출 - 문제, 답안, 해설 + 2025학년도 수시 모집 요강",
+          "post_id": "1633",
+          "resources": [
+            {
+              "id": "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5",
+              "title": "2025학년도 경희대 모의논술_의약학_화학 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "SItLH/btsJm8UFPFP",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+              "title": "2025학년도 경희대 모의논술_의약학_화학 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "dcc7vj/btsJotcpe2P",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+              "title": "2025학년도 경희대 모의논술_의약학_수학 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "rxELZ/btsJmdo0x5X",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+              "title": "2025학년도 경희대 모의논술_의약학_수학 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "rQoqI/btsJoni3Kc1",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "31699827-3b22-507a-a19e-44d56f2fa53b",
+              "title": "2025학년도 경희대 모의논술_의약학_생명과학 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "bQ8McQ/btsJoDFXu4M",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+              "title": "2025학년도 경희대 모의논술_의약학_생명과학 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "IfupH/btsJot4yrAJ",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9",
+              "title": "2025학년도 경희대 모의논술_의약학_물리학 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "0mJjr/btsJnLkhM4n",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+              "title": "2025학년도 경희대 모의논술_의약학_물리학 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "cbp4XN/btsJoqfK0fP",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "592e0245-0c8a-548f-84df-2a81b805731e",
+              "title": "2025학년도 경희대 모의논술_자연계 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "dsPy9Q/btsJntEceFG",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+              "title": "2025학년도 경희대 모의논술_자연계 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "cFQsHf/btsJm90nRhL",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+              "title": "2025학년도 경희대 모의논술_인문체육 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "dFilq2/btsJmAqxbRk",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+              "title": "2025학년도 경희대 모의논술_인문체육 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "5uXrW/btsJm9svdJo",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+              "title": "2025학년도 경희대 모의논술_사회계 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "bjUFe9/btsJm4ZelWd",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+              "title": "2025학년도 경희대 모의논술_사회계 답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "bMbknb/btsJmoRtSuE",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "438d34a9-0d34-5c5a-a1d0-887f1afd7e82",
+              "title": "2025학년도 경희대 수시 모집요강.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "other",
+              "file_extension": "pdf",
+              "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+              "source_resource_key": "9WtfA/btsJmlAqGmK",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "admission_guide_only",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1633",
+          "published_at": "2024-09-04T08:32:51+00:00",
+          "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+          "source_published_at": "2024-09-04T08:32:51+00:00",
+          "guest_resources_verified": 15
+        },
+        {
+          "title": "경희대] 2025학년도 수시 논술 기출 - 문제, 답안, 해설 + 25학년도 경쟁률 & 2026학년도 수시 모집 요강",
+          "post_id": "1682",
+          "resources": [
+            {
+              "id": "ec08943a-0944-51e9-b353-64f62d43119c",
+              "title": "2025학년도 경희대 논술_사회계 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+              "source_resource_key": "17lAE/dJMb9V7tzcP",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+              "title": "2025학년도 경희대 논술_인문체육계 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+              "source_resource_key": "bd5Ufz/dJMb9PGb8zK",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "814897fd-14ca-5772-a3ce-b5317f080532",
+              "title": "2025학년도 경희대 논술_자연계 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+              "source_resource_key": "D6yW1/dJMb9NhjaOG",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "90d06205-63b7-5578-902a-f438a0bf6237",
+              "title": "2025학년도 경희대 논술_의학약학 문제,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer",
+              "file_extension": "pdf",
+              "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+              "source_resource_key": "bZQ8jT/dJMb87tj37E",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "8f072b75-98cf-542b-a7a0-f7e490ad895c",
+              "title": "2026학년도 경희대 모의논술_자연계 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+              "source_resource_key": "lQ0X4/dJMb9gjuPYk",
+              "admission_year_candidates": [
+                2026
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1682",
+          "published_at": "2025-08-24T11:13:40+00:00",
+          "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+          "source_published_at": "2025-08-24T11:13:40+00:00",
+          "guest_resources_verified": 5
+        }
+      ],
+      "official_role_content_verified": false
+    },
+    {
+      "slug_candidate": "pnu",
+      "name": "부산대학교",
+      "active_university_posts_all_years": 4,
+      "posts": [
+        {
+          "title": "부산대] 2024학년도 부산대 논술 기출 - 문제, 해설, 모범답안 & 25학년도 논술 경쟁률, 모집요강",
+          "post_id": "1658",
+          "resources": [
+            {
+              "id": "20c0a098-d0a9-58dc-9124-8c3776e47acf",
+              "title": "2024학년도 부산대 논술_인문사회 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "bzoc94/btsKNZhiH9g",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "21bf603b-3701-56ab-835b-789ab42d0e14",
+              "title": "2024학년도 부산대 논술_인문사회 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "lU2vz/btsKN5V2We5",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "828c2188-83a5-5f4b-91b7-2c9835a25687",
+              "title": "2024학년도 부산대 논술_자연 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "6rza9/btsKMllyZb7",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "11c6018a-0832-52a4-9f24-312673164915",
+              "title": "2024학년도 부산대 논술_자연 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "RTAI6/btsKMKMgNY2",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "dbcce7af-2668-5910-a956-0068b24aa356",
+              "title": "2024학년도 부산대 논술_의약학계 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "omllE/btsKMKZJYfo",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "22aaa075-4cdc-5e71-a0c6-f36c846b4f17",
+              "title": "2024학년도 부산대 논술_의약학계 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "6qrV6/btsKNoWmB7o",
+              "admission_year_candidates": [
+                2024
+              ],
+              "pilot_scope": "out_of_year",
+              "candidate_roles": [],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "96b90857-8f1c-5f22-a6d5-89b20a6315f8",
+              "title": "2025학년도 부산대 수시모집 요강.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "other",
+              "file_extension": "pdf",
+              "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+              "source_resource_key": "mpRiz/btsKMm5N1Qx",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "admission_guide_only",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1658",
+          "published_at": "2024-11-18T15:58:17+00:00",
+          "content_item_id": "b0fce120-0212-5a4c-a63b-c9d2b158e956",
+          "source_published_at": "2024-11-18T15:58:17+00:00",
+          "guest_resources_verified": 7
+        }
+      ],
+      "official_role_content_verified": false
+    },
+    {
+      "slug_candidate": "knu",
+      "name": "경북대학교",
+      "active_university_posts_all_years": 5,
+      "posts": [
+        {
+          "title": "경북대] 2025학년도 모의논술 AAT 기출 - 문제, 해설, 모범답안 등 + 25학년도 논술경쟁률 & 모집요강",
+          "post_id": "1657",
+          "resources": [
+            {
+              "id": "8c94b62d-50d0-5da9-855f-d2b0cf122d56",
+              "title": "2025학년도 경북대 모의논술_인문 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "lrOMD/btsKOyQYaxO",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "1b5a2813-5f2d-538f-b647-ee73aede1ee4",
+              "title": "2025학년도 경북대 모의논술_인문 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "drEcCy/btsKNAoAgb2",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "b586a053-8da4-5b48-b03b-8274e862a365",
+              "title": "2025학년도 경북대 모의논술_자연1 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "bze9MV/btsKMo3BQ4L",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "5946c12e-059e-55c3-b90c-30cd65d97283",
+              "title": "2025학년도 경북대 모의논술_자연1 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "xIg5f/btsKM5vZxq2",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "cf903870-ef54-5223-818e-6c533e3cd36b",
+              "title": "2025학년도 경북대 모의논술_자연2 문제.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "question",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "NcPMp/btsKMM4qQ1P",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "question"
+              ],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "79cf9fd7-b92c-5d56-b8ef-af52c3f09065",
+              "title": "2025학년도 경북대 모의논술_자연2 해설,답안.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "answer_explanation",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "ThQQY/btsKOwySnJR",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "exam_candidate",
+              "candidate_roles": [
+                "explanation",
+                "other"
+              ],
+              "answer_subtype": "unknown",
+              "provenance": null,
+              "verification_status": "review"
+            },
+            {
+              "id": "a24bdcb6-3233-5b03-b134-e83ef05c378a",
+              "title": "2025학년도 경북대 수시모집 요강.pdf",
+              "is_active": true,
+              "link_kind": "unknown",
+              "resource_type": "other",
+              "file_extension": "pdf",
+              "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+              "source_resource_key": "bSlms3/btsKMIgz9Yz",
+              "admission_year_candidates": [
+                2025
+              ],
+              "pilot_scope": "admission_guide_only",
+              "candidate_roles": [],
+              "answer_subtype": null,
+              "provenance": null,
+              "verification_status": "review"
+            }
+          ],
+          "source_url": "https://legendstudy.com/1657",
+          "published_at": "2024-11-18T14:46:04+00:00",
+          "content_item_id": "2ef1a545-ad62-5f0b-a462-a13ee419ed40",
+          "source_published_at": "2024-11-18T14:46:04+00:00",
+          "guest_resources_verified": 7
+        }
+      ],
+      "official_role_content_verified": false
+    }
+  ],
+  "excluded_context": [
+    {
+      "post_id": "1656",
+      "reason": "2024 exam; 2025 competition wording is not a 2025 exam"
+    },
+    {
+      "post_id": "1683",
+      "reason": "2026 mock; 2025 competition wording is not a 2025 exam"
+    },
+    {
+      "post_id": "1593",
+      "reason": "2024 guidebook, not a 2025 pilot exam"
+    }
+  ],
+  "reused_schema": {
+    "columns": {
+      "resources": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "content_item_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "exam_subject_id",
+          "type": "uuid",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_post_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "source_resource_key",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "resource_type",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "source_label",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_url",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "link_kind",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "file_url",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "mime_type",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "file_extension",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "file_size",
+          "type": "bigint",
+          "nullable": "YES"
+        },
+        {
+          "name": "link_status",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "last_checked_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "display_order",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": "NO"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "content_items": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "source_post_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "source_content_key",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "slug",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "content_type",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_url",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "feed_updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "thumbnail_url",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": "NO"
+        },
+        {
+          "name": "merged_into_content_item_id",
+          "type": "uuid",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "source_posts": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "source",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "external_post_id",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "url",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "category",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_published_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "raw_excerpt",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "raw_metadata",
+          "type": "jsonb",
+          "nullable": "NO"
+        },
+        {
+          "name": "content_hash",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "parser_version",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "last_crawled_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "source_status",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "profiles": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "display_name",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "grade_level",
+          "type": "smallint",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "neis_office_code",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "neis_school_code",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "target_date",
+          "type": "date",
+          "nullable": "YES"
+        },
+        {
+          "name": "target_label",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "academic_status",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "onboarding_completed_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        }
+      ]
+    },
+    "parent_policies": [
+      {
+        "cmd": "SELECT",
+        "qual": "is_active",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "content_items",
+        "permissive": "PERMISSIVE",
+        "policyname": "content_items_public_active_select",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(is_active AND (EXISTS ( SELECT 1\n   FROM content_items c\n  WHERE ((c.id = resources.content_item_id) AND c.is_active))) AND ((exam_subject_id IS NULL) OR (EXISTS ( SELECT 1\n   FROM exam_subjects es\n  WHERE ((es.id = resources.exam_subject_id) AND (es.content_item_id = resources.content_item_id) AND es.is_active)))))",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "resources",
+        "permissive": "PERMISSIVE",
+        "policyname": "resources_public_active_select",
+        "schemaname": "public",
+        "with_check": null
+      }
+    ],
+    "referenced_constraints": [
+      {
+        "name": "content_items_content_type_check",
+        "table": "content_items",
+        "definition": "CHECK ((content_type = ANY (ARRAY['exam'::text, 'study_material'::text, 'education_column'::text, 'university_essay'::text, 'admissions_info'::text, 'other'::text])))"
+      },
+      {
+        "name": "content_items_id_type",
+        "table": "content_items",
+        "definition": "UNIQUE (id, content_type)"
+      },
+      {
+        "name": "content_items_merge_state",
+        "table": "content_items",
+        "definition": "CHECK (((merged_into_content_item_id IS NULL) OR ((merged_into_content_item_id <> id) AND (NOT is_active))))"
+      },
+      {
+        "name": "content_items_merged_into_content_item_id_fkey",
+        "table": "content_items",
+        "definition": "FOREIGN KEY (merged_into_content_item_id) REFERENCES content_items(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "content_items_pkey",
+        "table": "content_items",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "content_items_slug_check",
+        "table": "content_items",
+        "definition": "CHECK ((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text))"
+      },
+      {
+        "name": "content_items_slug_key",
+        "table": "content_items",
+        "definition": "UNIQUE (slug)"
+      },
+      {
+        "name": "content_items_source_content_key_check",
+        "table": "content_items",
+        "definition": "CHECK ((source_content_key ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text))"
+      },
+      {
+        "name": "content_items_source_identity",
+        "table": "content_items",
+        "definition": "UNIQUE (source_post_id, source_content_key)"
+      },
+      {
+        "name": "content_items_source_post_id_fkey",
+        "table": "content_items",
+        "definition": "FOREIGN KEY (source_post_id) REFERENCES source_posts(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "content_items_source_url_check",
+        "table": "content_items",
+        "definition": "CHECK ((source_url ~* '^https?://[^/[:space:]]+'::text))"
+      },
+      {
+        "name": "content_items_thumbnail_url_check",
+        "table": "content_items",
+        "definition": "CHECK (((thumbnail_url IS NULL) OR (thumbnail_url ~* '^https?://[^/[:space:]]+'::text)))"
+      },
+      {
+        "name": "content_items_title_check",
+        "table": "content_items",
+        "definition": "CHECK ((btrim(title) <> ''::text))"
+      },
+      {
+        "name": "profiles_academic_status_check",
+        "table": "profiles",
+        "definition": "CHECK ((academic_status = ANY (ARRAY['student'::text, 'retaker'::text, 'other'::text])))"
+      },
+      {
+        "name": "profiles_display_name_check",
+        "table": "profiles",
+        "definition": "CHECK (((display_name IS NULL) OR ((char_length(btrim(display_name)) >= 1) AND (char_length(btrim(display_name)) <= 80))))"
+      },
+      {
+        "name": "profiles_grade_level_check",
+        "table": "profiles",
+        "definition": "CHECK ((grade_level = ANY (ARRAY[1, 2, 3])))"
+      },
+      {
+        "name": "profiles_id_fkey",
+        "table": "profiles",
+        "definition": "FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "profiles_neis_school_pair",
+        "table": "profiles",
+        "definition": "CHECK ((((neis_office_code IS NULL) = (neis_school_code IS NULL)) AND ((neis_office_code IS NULL) OR ((neis_office_code = btrim(neis_office_code, ' \t\n\r\f\u000b'::text)) AND ((char_length(neis_office_code) >= 1) AND (char_length(neis_office_code) <= 32)))) AND ((neis_school_code IS NULL) OR ((neis_school_code = btrim(neis_school_code, ' \t\n\r\f\u000b'::text)) AND ((char_length(neis_school_code) >= 1) AND (char_length(neis_school_code) <= 32))))))"
+      },
+      {
+        "name": "profiles_pkey",
+        "table": "profiles",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "profiles_target_pair",
+        "table": "profiles",
+        "definition": "CHECK ((((target_date IS NULL) = (target_label IS NULL)) AND ((target_date IS NULL) OR isfinite(target_date)) AND ((target_label IS NULL) OR ((target_label = btrim(target_label, ' \t\n\r\f\u000b'::text)) AND ((char_length(target_label) >= 1) AND (char_length(target_label) <= 80))))))"
+      },
+      {
+        "name": "resources_content_item_id_fkey",
+        "table": "resources",
+        "definition": "FOREIGN KEY (content_item_id) REFERENCES content_items(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "resources_display_order_check",
+        "table": "resources",
+        "definition": "CHECK ((display_order >= 0))"
+      },
+      {
+        "name": "resources_file_size_check",
+        "table": "resources",
+        "definition": "CHECK ((file_size >= 0))"
+      },
+      {
+        "name": "resources_file_url_check",
+        "table": "resources",
+        "definition": "CHECK (((file_url IS NULL) OR (file_url ~* '^https?://[^/[:space:]]+'::text)))"
+      },
+      {
+        "name": "resources_link_kind_check",
+        "table": "resources",
+        "definition": "CHECK ((link_kind = ANY (ARRAY['file'::text, 'landing_page'::text, 'unknown'::text])))"
+      },
+      {
+        "name": "resources_link_status_check",
+        "table": "resources",
+        "definition": "CHECK ((link_status = ANY (ARRAY['unchecked'::text, 'available'::text, 'broken'::text, 'restricted'::text])))"
+      },
+      {
+        "name": "resources_pkey",
+        "table": "resources",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "resources_resource_type_check",
+        "table": "resources",
+        "definition": "CHECK ((resource_type = ANY (ARRAY['question'::text, 'answer'::text, 'explanation'::text, 'answer_explanation'::text, 'listening_audio'::text, 'listening_script'::text, 'grade_cut'::text, 'reference'::text, 'other'::text])))"
+      },
+      {
+        "name": "resources_source_identity",
+        "table": "resources",
+        "definition": "UNIQUE (content_item_id, source_post_id, source_resource_key)"
+      },
+      {
+        "name": "resources_source_post_id_fkey",
+        "table": "resources",
+        "definition": "FOREIGN KEY (source_post_id) REFERENCES source_posts(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "resources_source_resource_key_check",
+        "table": "resources",
+        "definition": "CHECK ((btrim(source_resource_key) <> ''::text))"
+      },
+      {
+        "name": "resources_source_url_check",
+        "table": "resources",
+        "definition": "CHECK ((source_url ~* '^https?://[^/[:space:]]+'::text))"
+      },
+      {
+        "name": "resources_subject_same_content",
+        "table": "resources",
+        "definition": "FOREIGN KEY (exam_subject_id, content_item_id) REFERENCES exam_subjects(id, content_item_id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "resources_title_check",
+        "table": "resources",
+        "definition": "CHECK ((btrim(title) <> ''::text))"
+      },
+      {
+        "name": "source_posts_content_hash_check",
+        "table": "source_posts",
+        "definition": "CHECK (((content_hash IS NULL) OR (content_hash ~ '^[0-9a-f]{64}$'::text)))"
+      },
+      {
+        "name": "source_posts_external_identity",
+        "table": "source_posts",
+        "definition": "UNIQUE (source, external_post_id)"
+      },
+      {
+        "name": "source_posts_external_post_id_check",
+        "table": "source_posts",
+        "definition": "CHECK ((btrim(external_post_id) <> ''::text))"
+      },
+      {
+        "name": "source_posts_pkey",
+        "table": "source_posts",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "source_posts_raw_metadata_check",
+        "table": "source_posts",
+        "definition": "CHECK ((jsonb_typeof(raw_metadata) = 'object'::text))"
+      },
+      {
+        "name": "source_posts_source_check",
+        "table": "source_posts",
+        "definition": "CHECK ((btrim(source) <> ''::text))"
+      },
+      {
+        "name": "source_posts_source_status_check",
+        "table": "source_posts",
+        "definition": "CHECK ((source_status = ANY (ARRAY['unknown'::text, 'available'::text, 'missing'::text, 'error'::text])))"
+      },
+      {
+        "name": "source_posts_title_check",
+        "table": "source_posts",
+        "definition": "CHECK ((btrim(title) <> ''::text))"
+      },
+      {
+        "name": "source_posts_url_check",
+        "table": "source_posts",
+        "definition": "CHECK ((url ~* '^https?://[^/[:space:]]+'::text))"
+      },
+      {
+        "name": "source_posts_url_key",
+        "table": "source_posts",
+        "definition": "UNIQUE (url)"
+      }
+    ],
+    "clock_function": [
+      {
+        "name": "set_updated_at",
+        "definition": "CREATE OR REPLACE FUNCTION public.set_updated_at()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n    new.updated_at = pg_catalog.now();\n    return new;\nend;\n$function$\n"
+      }
+    ]
+  }
+}
