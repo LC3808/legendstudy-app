@@ -1,0 +1,2520 @@
+{
+  "scope": "2025 three-university Phase1 Owner CONTINUE",
+  "universities": [
+    {
+      "id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "slug": "yonsei",
+      "name": "연세대학교",
+      "is_active": true
+    },
+    {
+      "id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "slug": "sungkyunkwan",
+      "name": "성균관대학교",
+      "is_active": true
+    },
+    {
+      "id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "slug": "kyunghee",
+      "name": "경희대학교",
+      "is_active": true
+    }
+  ],
+  "exams": [
+    {
+      "id": "f95339d5-ffe8-59ff-960a-31ba637cf37b",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "admission_year": 2025,
+      "exam_key": "mock-natural",
+      "exam_name": "2025학년도 연세대학교 모의논술 자연계열(수학)",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "자연계열(수학)",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 6,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "df3ef78d-386c-5c59-88d3-c1a48cce7521",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "96153040-bcac-5006-82a4-147a98d0b553",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "admission_year": 2025,
+      "exam_key": "regular-humanities",
+      "exam_name": "2025학년도 연세대학교 논술 인문계열",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "인문계열",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "admission_year": 2025,
+      "exam_key": "regular-natural",
+      "exam_name": "2025학년도 연세대학교 논술 자연계열(수학)",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "자연계열(수학)",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "0c6e5a98-ecd7-5ddf-89e5-5f2e13b72fa3",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+      "university_id": "9076637b-d827-5bb6-8e4e-954bd2a05805",
+      "admission_year": 2025,
+      "exam_key": "regular-natural-additional",
+      "exam_name": "2025학년도 연세대학교 논술 자연계열(수학) 추가시험",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "자연계열(수학)",
+      "session_label": "추가시험",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "1b898268-a55a-5cc4-9486-dea8d0db8740",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "regular-humanities-1",
+      "exam_name": "2025학년도 성균관대학교 논술 언어형 1교시",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수전형",
+      "field_or_division": "언어형",
+      "session_label": "1교시",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "regular-humanities-2",
+      "exam_name": "2025학년도 성균관대학교 논술 언어형 2교시",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수전형",
+      "field_or_division": "언어형",
+      "session_label": "2교시",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "regular-natural-1",
+      "exam_name": "2025학년도 성균관대학교 논술 수리형 1교시",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수전형",
+      "field_or_division": "수리형",
+      "session_label": "1교시",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "regular-natural-2",
+      "exam_name": "2025학년도 성균관대학교 논술 수리형 2교시",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수전형",
+      "field_or_division": "수리형",
+      "session_label": "2교시",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "regular-natural-3",
+      "exam_name": "2025학년도 성균관대학교 논술 수리형 3교시",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수전형",
+      "field_or_division": "수리형",
+      "session_label": "3교시",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "mock-humanities",
+      "exam_name": "2025학년도 성균관대학교 모의논술 언어 논술",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "언어 논술",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": 100,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "university_id": "4acee829-94d4-5f8a-b440-a72e423d439f",
+      "admission_year": 2025,
+      "exam_key": "mock-natural",
+      "exam_name": "2025학년도 성균관대학교 모의논술 수리 논술",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "수리 논술",
+      "session_label": null,
+      "exam_date": null,
+      "duration_minutes": 100,
+      "question_count": 3,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "regular-social",
+      "exam_name": "2025학년도 경희대학교 논술 사회계 11월 17일 오후",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수자전형",
+      "field_or_division": "사회계",
+      "session_label": "11월 17일 오후",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "regular-humanities-sports",
+      "exam_name": "2025학년도 경희대학교 논술 인문·체육계 11월 16일 오전",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수자전형",
+      "field_or_division": "인문·체육계",
+      "session_label": "11월 16일 오전",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "regular-natural",
+      "exam_name": "2025학년도 경희대학교 논술 자연계 11월 17일 오전",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수자전형",
+      "field_or_division": "자연계",
+      "session_label": "11월 17일 오전",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "regular-medicine-pharmacy",
+      "exam_name": "2025학년도 경희대학교 논술 의·약학계 11월 16일 오후",
+      "exam_kind": "admission",
+      "campus": null,
+      "admission_track": "논술우수자전형",
+      "field_or_division": "의·약학계",
+      "session_label": "11월 16일 오후",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication. PDF p1: 수학 필수, 과학 물리학/화학/생명과학 중 택일. One exam with subject alternatives, not four exams.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "mock-medicine-pharmacy",
+      "exam_name": "2025학년도 경희대학교 모의논술 의·약학계 온라인",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "의·약학계",
+      "session_label": "온라인",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication. Official 의약학계.zip groups mathematics and three science components; resources retain component labels. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "mock-natural",
+      "exam_name": "2025학년도 경희대학교 모의논술 자연계 온라인",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "자연계",
+      "session_label": "온라인",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "592e0245-0c8a-548f-84df-2a81b805731e",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "mock-humanities-sports",
+      "exam_name": "2025학년도 경희대학교 모의논술 인문·체육계 온라인",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "인문·체육계",
+      "session_label": "온라인",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    },
+    {
+      "id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+      "admission_year": 2025,
+      "exam_key": "mock-social",
+      "exam_name": "2025학년도 경희대학교 모의논술 사회계 온라인",
+      "exam_kind": "mock",
+      "campus": null,
+      "admission_track": null,
+      "field_or_division": "사회계",
+      "session_label": "온라인",
+      "exam_date": null,
+      "duration_minutes": null,
+      "question_count": null,
+      "answer_length_text": null,
+      "exam_format": null,
+      "provenance": "official",
+      "metadata_resource_id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Inspected source PDF page 1 and matching official collection; admission year independent of source publication.",
+      "verification_status": "verified",
+      "is_active": true
+    }
+  ],
+  "mappings": [
+    {
+      "essay_exam_id": "f95339d5-ffe8-59ff-960a-31ba637cf37b",
+      "resource_id": "df3ef78d-386c-5c59-88d3-c1a48cce7521",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 문제/논제",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 b5ac54437078b49593477e6b768e12f676fd00b6a07782f56e0c39721d52663c.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "f95339d5-ffe8-59ff-960a-31ba637cf37b",
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,3,5,7,9,11; 문제 1-6",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "f95339d5-ffe8-59ff-960a-31ba637cf37b",
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,3,5,7,9,11; 출제의도",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "f95339d5-ffe8-59ff-960a-31ba637cf37b",
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,3,5,7,9,11; 풀이",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "96153040-bcac-5006-82a4-147a98d0b553",
+      "resource_id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 문제/논제",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 cafc28fcc36edbb608d5092f2aa91bcdd25c722642fd4c0ddc416be63f958a16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "96153040-bcac-5006-82a4-147a98d0b553",
+      "resource_id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 제시문",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 cafc28fcc36edbb608d5092f2aa91bcdd25c722642fd4c0ddc416be63f958a16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "96153040-bcac-5006-82a4-147a98d0b553",
+      "resource_id": "82411c51-171f-5617-b6c1-a896f7b4113a",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 출제의도",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 1859c3d430bd5289063e61ac57b0673ce4f0463b932213b614cc1eb5ca5eb028.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "96153040-bcac-5006-82a4-147a98d0b553",
+      "resource_id": "808d51eb-6257-59f1-846d-2a90a2c1b54e",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; 제시문 해설/문항 해설/지문 번역",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 a84e71ac3cfa72a6e264d0b2286744f49a51241566dc14ff29e376fa68ba3bed.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+      "resource_id": "0c6e5a98-ecd7-5ddf-89e5-5f2e13b72fa3",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 문제/논제",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 8b449dcc0a573645316e54bf4edacbe59207072629581ebaadd5736f0459c4de.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+      "resource_id": "9ccc7a61-98e3-58c6-af50-92ef93af2021",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; 출제의도",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 e92c234dbd613154b5ed4e8d0afbc1a8828c11bb60b8e5642b570785cbaa06b6.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "1825b3d9-3e15-519f-947c-8867cfbdaa67",
+      "resource_id": "84d3e492-3e2b-522d-bc6f-26cac22e0bd1",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-7; 문항 해설",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 5490dbdfe08e34285178cd9471934ce3fd1f9f16370d61ff000585f584a6df8f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+      "resource_id": "1b898268-a55a-5cc4-9486-dea8d0db8740",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1; section 문제/논제",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 4579ad889cea319cd0ecc7db636c24c5f2a303694270d42712dbb56ad7435389.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+      "resource_id": "72a1d13d-44f9-58e5-ac5a-30fd93c689a8",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 1; 추가시험 출제의도",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 1fb758b601735ffe2fdff77fddbe65a8304a7276c1ff168a303cb4cb325208d9.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "3cf7c549-32bc-5cdb-b1f5-4e8b24958559",
+      "resource_id": "eac2fcb4-269d-5a10-aa1a-d0ebc4127a20",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; 문항 해설",
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 2976a02f73136351d71f25d2a063c9fb1ed375a4b85d2c06835699a3819895b8.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4,9-10,14; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4,10,14; section 출제의도",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 7,12,17; section 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8,13,17; section 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 6,12,16; section 문항 해설/풀이",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4,9-12,16; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4,9-12,16; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4,12,16; section 출제의도",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 7,14,18; section 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8,14,19; section 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 6,13,18; section 문항 해설/풀이",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2,7-8,12-13; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2,7-8,12-13; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2,8,13; section 출제의도",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,9,14; section 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,9,14; section 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "e3b1b7b2-26ef-5a4f-8c5a-749aa0b5d949",
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,8,14; section 문항 해설/풀이",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,5-6,10-11; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,5-6,10-11; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1,6,11; section 출제의도",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,7,12; section 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,8,12; section 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "56a562f2-992e-5302-af54-1508b6a4c1c8",
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2,7,12; section 문항 해설/풀이",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2,6-7,11-12; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2,6-7,11-12; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2,7,12; section 출제의도",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,9,13; section 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,9,13; section 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "405fa544-7f65-5e56-88e6-a2959d32dd30",
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3,8,13; section 문항 해설/풀이",
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "resource_id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2-5; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "resource_id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2-5; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF page 2; 모의논술 개요",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-13; 평가항목/문항별 세부 채점지침과 채점등급",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4-13; 문항별 해설 및 채점지침",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2-4; section 문제/논제",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 002d7be53b7bbca8151c82cb377375841782136390ce51a15bbaeded95336fe7.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2-4; section 제시문",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 002d7be53b7bbca8151c82cb377375841782136390ce51a15bbaeded95336fe7.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2,6,10; 개요 및 주요 평가항목",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-5,7-9,11-17; 채점기준",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-5,7-9,11-17; 예시답안",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "df2ca870-5d5b-56c6-8257-0bd997b1bdc4",
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-5,7-9,11-18; 예시 풀이/별해",
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 7,11,16; section 출제의도",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8-9,12,17; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 9,14,18; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8,11,16; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 7,14; section 출제의도",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 9,15-16; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 10,16; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8,14; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 5,8,11; section 출제의도",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 5,8,12; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 5,8,12; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "de947c5e-7c9d-5190-a025-aeefb0631bcd",
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 5,8,11; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-8; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-8; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 10,12,16,20,25,29,33,37; section 출제의도",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 10,13,17,21,26,29,34,38; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 10,13,17,21,26,30,34,39; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "d190bb2e-711c-5bfb-9f79-19729e03bf8e",
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 10,12,16,21,25,29,33,38; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 5dd876952708e6767faf1813dc5be8472cc0539c74ee7872072e7a4934bc106c.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 5dd876952708e6767faf1813dc5be8472cc0539c74ee7872072e7a4934bc106c.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4; 화학; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 화학; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; 화학; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4; 화학; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-1; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 50f97de39e94e38e82ce8cefd068162807f22ccabad5aa5fc1061e28afa03d0b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-1; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 50f97de39e94e38e82ce8cefd068162807f22ccabad5aa5fc1061e28afa03d0b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 수학; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 수학; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; 수학; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 수학; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "31699827-3b22-507a-a19e-44d56f2fa53b",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 12e4bfe1b87c5287c23c88252d636cd970488f308c7357347514137264f178c3.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "31699827-3b22-507a-a19e-44d56f2fa53b",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 12e4bfe1b87c5287c23c88252d636cd970488f308c7357347514137264f178c3.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 생명과학; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 2; 생명과학; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1; 생명과학; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 생명과학; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 1518b3a16f63985a61d824c522bb92cccc4b1044511b550795ad763490cfe8e0.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 1518b3a16f63985a61d824c522bb92cccc4b1044511b550795ad763490cfe8e0.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4-5; 물리학; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; 물리학; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; 물리학; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "a5ce6865-b88d-57ef-9aa5-605ebc4e806c",
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4-5; 물리학; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b. Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "592e0245-0c8a-548f-84df-2a81b805731e",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 ce5465a361df29b2b028e6f3555f8eab911a2c490d5b30d1bdf545eeb2fef6f9.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "592e0245-0c8a-548f-84df-2a81b805731e",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 ce5465a361df29b2b028e6f3555f8eab911a2c490d5b30d1bdf545eeb2fef6f9.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2946d60b-cc6b-586b-b769-1f21718b4df7",
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 4; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-5; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-5; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 6-9; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-5; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-2; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 6-9; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+      "role": "question",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 문제/논제",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문제/문항), not filename. PDF SHA256 162b366ffd2a55c15da7a8b81fe1145cefd9d1b91673b8b622a98a00c4c0434b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+      "role": "passage",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-4; section 제시문",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (제시문), not filename. PDF SHA256 162b366ffd2a55c15da7a8b81fe1145cefd9d1b91673b8b622a98a00c4c0434b.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "role": "exam_intent",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8-9; section 문항 해설 중 평가목표",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (출제의도), not filename. PDF SHA256 89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "role": "scoring_criteria",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 3-6; section 채점기준",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (채점기준), not filename. PDF SHA256 89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "role": "example_answer",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 1-3; section 예시답안",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (예시답안), not filename. PDF SHA256 89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f.",
+      "is_active": true
+    },
+    {
+      "essay_exam_id": "2919c142-21d7-539d-952a-5382d16dbdf7",
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "role": "explanation",
+      "provenance": "official",
+      "verification_status": "verified",
+      "source_locator": "PDF pages 8-9; section 문항 해설/풀이",
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "evidence_note": "Role confirmed from document content (문항 해설/풀이), not filename. PDF SHA256 89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f.",
+      "is_active": true
+    }
+  ],
+  "documents": [
+    {
+      "resource_id": "df3ef78d-386c-5c59-88d3-c1a48cce7521",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 모의논술_자연 문제.pdf",
+      "source_resource_key": "cB8Xst/dJMb9PGbNj3",
+      "sha256": "b5ac54437078b49593477e6b768e12f676fd00b6a07782f56e0c39721d52663c",
+      "pages": 2,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236"
+    },
+    {
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 모의논술_자연 해설,답안.pdf",
+      "source_resource_key": "ekT42r/dJMb9jtKIsp",
+      "sha256": "cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53",
+      "pages": 12,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236"
+    },
+    {
+      "resource_id": "2c881e21-58e5-5dde-9b5e-5ab90b140a76",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_인문 문제.pdf",
+      "source_resource_key": "bgb7zK/dJMb9MJsRho",
+      "sha256": "cafc28fcc36edbb608d5092f2aa91bcdd25c722642fd4c0ddc416be63f958a16",
+      "pages": 2,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "82411c51-171f-5617-b6c1-a896f7b4113a",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_인문 출제의도.pdf",
+      "source_resource_key": "cMmHGM/dJMb9YJTuXA",
+      "sha256": "1859c3d430bd5289063e61ac57b0673ce4f0463b932213b614cc1eb5ca5eb028",
+      "pages": 1,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "808d51eb-6257-59f1-846d-2a90a2c1b54e",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_인문 해설.pdf",
+      "source_resource_key": "sEWVb/dJMb9OtKjgx",
+      "sha256": "a84e71ac3cfa72a6e264d0b2286744f49a51241566dc14ff29e376fa68ba3bed",
+      "pages": 4,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "0c6e5a98-ecd7-5ddf-89e5-5f2e13b72fa3",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연 문제.pdf",
+      "source_resource_key": "voHl3/dJMb9OUOF5b",
+      "sha256": "8b449dcc0a573645316e54bf4edacbe59207072629581ebaadd5736f0459c4de",
+      "pages": 2,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "9ccc7a61-98e3-58c6-af50-92ef93af2021",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연 출제의도.pdf",
+      "source_resource_key": "sUyrb/dJMb9OtKjgy",
+      "sha256": "e92c234dbd613154b5ed4e8d0afbc1a8828c11bb60b8e5642b570785cbaa06b6",
+      "pages": 2,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "84d3e492-3e2b-522d-bc6f-26cac22e0bd1",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연 해설.pdf",
+      "source_resource_key": "epPRom/dJMb9NO8MKu",
+      "sha256": "5490dbdfe08e34285178cd9471934ce3fd1f9f16370d61ff000585f584a6df8f",
+      "pages": 7,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "1b898268-a55a-5cc4-9486-dea8d0db8740",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연(추가) 문제.pdf",
+      "source_resource_key": "b0QD5S/dJMb9YJTuXB",
+      "sha256": "4579ad889cea319cd0ecc7db636c24c5f2a303694270d42712dbb56ad7435389",
+      "pages": 1,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "72a1d13d-44f9-58e5-ac5a-30fd93c689a8",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연(추가) 출제의도.pdf",
+      "source_resource_key": "b0qDeh/dJMb9MJsRhp",
+      "sha256": "1fb758b601735ffe2fdff77fddbe65a8304a7276c1ff168a303cb4cb325208d9",
+      "pages": 1,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "eac2fcb4-269d-5a10-aa1a-d0ebc4127a20",
+      "source_post_id": "1671",
+      "content_item_id": "9210dd0c-a123-5a1c-8fb8-8424b90c4a0f",
+      "title": "2025학년도 연세대 논술_자연(추가) 해설.pdf",
+      "source_resource_key": "cRSxEb/dJMb9MvVG5O",
+      "sha256": "2976a02f73136351d71f25d2a063c9fb1ed375a4b85d2c06835699a3819895b8",
+      "pages": 4,
+      "official_source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356"
+    },
+    {
+      "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 논술_인문1 문제,답안.pdf",
+      "source_resource_key": "Cat4w/dJMb9WFjv7a",
+      "sha256": "43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d",
+      "pages": 18,
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290"
+    },
+    {
+      "resource_id": "309b770e-f82c-5dd6-9318-c5ca196f53ed",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 논술_인문2 문제,답안.pdf",
+      "source_resource_key": "cz3OmZ/dJMb85I2Dwp",
+      "sha256": "63c1d4506c7171bef015fd83a58998b764f41e41de58027eb70c5aee69c9ac6b",
+      "pages": 19,
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290"
+    },
+    {
+      "resource_id": "937229f0-3c12-5a79-8f9c-0512ae28281c",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 논술_자연1 문제,답안.pdf",
+      "source_resource_key": "CUjTn/dJMb9c2s9ey",
+      "sha256": "5faa7659f88d66e891cf661553971ac0438bab964817042dad68a9cb8dfc7177",
+      "pages": 16,
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290"
+    },
+    {
+      "resource_id": "55715c37-f086-52c9-bd65-e0f7d36bc266",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 논술_자연2 문제,답안.pdf",
+      "source_resource_key": "k4vut/dJMb87tj4p5",
+      "sha256": "42fdd471696f639dde4cc242bcc0afb6a67e13eb6206827f25b8515bdac0df99",
+      "pages": 14,
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290"
+    },
+    {
+      "resource_id": "08c28e42-9844-5058-bb30-fda07a68b6c1",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 논술_자연3 문제,답안.pdf",
+      "source_resource_key": "cvj1Nk/dJMb9hW0G0O",
+      "sha256": "dc540d73e9826e661a1eb80bde896eaea4a38ca23c788d4ed494c503b6c42e34",
+      "pages": 15,
+      "official_source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290"
+    },
+    {
+      "resource_id": "122ddc87-3bf6-567c-90fc-7355bc0282bb",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 모의논술_인문(언어) 문제.pdf",
+      "source_resource_key": "bXHtRW/dJMb9eFYZ4s",
+      "sha256": "bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f",
+      "pages": 6,
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182"
+    },
+    {
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 모의논술_인문(언어) 해설,답안.pdf",
+      "source_resource_key": "ehfYgJ/dJMb9O8mcAn",
+      "sha256": "d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3",
+      "pages": 14,
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182"
+    },
+    {
+      "resource_id": "8762aef8-ef26-5839-a6ef-f0066b133530",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 모의논술_자연(수리) 문제.pdf",
+      "source_resource_key": "ciDA9P/dJMb9QrzhM9",
+      "sha256": "002d7be53b7bbca8151c82cb377375841782136390ce51a15bbaeded95336fe7",
+      "pages": 5,
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182"
+    },
+    {
+      "resource_id": "9b149626-89f3-5800-a4fd-22e38a49e9fb",
+      "source_post_id": "1689",
+      "content_item_id": "39e7ab60-47ef-5391-933a-60264642b452",
+      "title": "2025학년도 성균관대 모의논술_자연(수리) 해설,답안.pdf",
+      "source_resource_key": "bQXz55/dJMb9dAi5Rs",
+      "sha256": "e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171",
+      "pages": 19,
+      "official_source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182"
+    },
+    {
+      "resource_id": "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_화학 문제.pdf",
+      "source_resource_key": "SItLH/btsJm8UFPFP",
+      "sha256": "5dd876952708e6767faf1813dc5be8472cc0539c74ee7872072e7a4934bc106c",
+      "pages": 2,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_화학 답안.pdf",
+      "source_resource_key": "dcc7vj/btsJotcpe2P",
+      "sha256": "68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9",
+      "pages": 4,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "033f9ee4-fecf-59b7-865c-1f748528d993",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_수학 문제.pdf",
+      "source_resource_key": "rxELZ/btsJmdo0x5X",
+      "sha256": "50f97de39e94e38e82ce8cefd068162807f22ccabad5aa5fc1061e28afa03d0b",
+      "pages": 1,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "e5421bac-05b2-566f-aebf-da9d6cd2a5be",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_수학 답안.pdf",
+      "source_resource_key": "rQoqI/btsJoni3Kc1",
+      "sha256": "1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d",
+      "pages": 3,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "31699827-3b22-507a-a19e-44d56f2fa53b",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_생명과학 문제.pdf",
+      "source_resource_key": "bQ8McQ/btsJoDFXu4M",
+      "sha256": "12e4bfe1b87c5287c23c88252d636cd970488f308c7357347514137264f178c3",
+      "pages": 3,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_생명과학 답안.pdf",
+      "source_resource_key": "IfupH/btsJot4yrAJ",
+      "sha256": "4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e",
+      "pages": 3,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_물리학 문제.pdf",
+      "source_resource_key": "0mJjr/btsJnLkhM4n",
+      "sha256": "1518b3a16f63985a61d824c522bb92cccc4b1044511b550795ad763490cfe8e0",
+      "pages": 3,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_의약학_물리학 답안.pdf",
+      "source_resource_key": "cbp4XN/btsJoqfK0fP",
+      "sha256": "10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b",
+      "pages": 5,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "592e0245-0c8a-548f-84df-2a81b805731e",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_자연계 문제.pdf",
+      "source_resource_key": "dsPy9Q/btsJntEceFG",
+      "sha256": "ce5465a361df29b2b028e6f3555f8eab911a2c490d5b30d1bdf545eeb2fef6f9",
+      "pages": 2,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "b0f1a2cf-fe7f-53df-836e-d1c8078032b8",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_자연계 답안.pdf",
+      "source_resource_key": "cFQsHf/btsJm90nRhL",
+      "sha256": "d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac",
+      "pages": 4,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_인문체육 문제.pdf",
+      "source_resource_key": "dFilq2/btsJmAqxbRk",
+      "sha256": "5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c",
+      "pages": 5,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "18f30e64-d7ad-529a-923f-30eb2df88cfc",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_인문체육 답안.pdf",
+      "source_resource_key": "5uXrW/btsJm9svdJo",
+      "sha256": "1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa",
+      "pages": 9,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "18f3248d-a14b-500a-a47a-11e6bcc005c3",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_사회계 문제.pdf",
+      "source_resource_key": "bjUFe9/btsJm4ZelWd",
+      "sha256": "162b366ffd2a55c15da7a8b81fe1145cefd9d1b91673b8b622a98a00c4c0434b",
+      "pages": 4,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "946ec534-e8c7-5b36-9e55-2c18c76f86a2",
+      "source_post_id": "1633",
+      "content_item_id": "4a7ae6ab-29fd-55a7-87f7-4cce7a9b7898",
+      "title": "2025학년도 경희대 모의논술_사회계 답안.pdf",
+      "source_resource_key": "bMbknb/btsJmoRtSuE",
+      "sha256": "89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f",
+      "pages": 9,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "ec08943a-0944-51e9-b353-64f62d43119c",
+      "source_post_id": "1682",
+      "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+      "title": "2025학년도 경희대 논술_사회계 문제,답안.pdf",
+      "source_resource_key": "17lAE/dJMb9V7tzcP",
+      "sha256": "4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce",
+      "pages": 19,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "a1ec8a98-f653-5d10-ac9e-be58fb8f506e",
+      "source_post_id": "1682",
+      "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+      "title": "2025학년도 경희대 논술_인문체육계 문제,답안.pdf",
+      "source_resource_key": "bd5Ufz/dJMb9PGb8zK",
+      "sha256": "c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b",
+      "pages": 17,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "814897fd-14ca-5772-a3ce-b5317f080532",
+      "source_post_id": "1682",
+      "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+      "title": "2025학년도 경희대 논술_자연계 문제,답안.pdf",
+      "source_resource_key": "D6yW1/dJMb9NhjaOG",
+      "sha256": "094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5",
+      "pages": 13,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    },
+    {
+      "resource_id": "90d06205-63b7-5578-902a-f438a0bf6237",
+      "source_post_id": "1682",
+      "content_item_id": "db87adc8-1cf4-5648-bf80-08db551aa8cb",
+      "title": "2025학년도 경희대 논술_의학약학 문제,답안.pdf",
+      "source_resource_key": "bZQ8jT/dJMb87tj37E",
+      "sha256": "9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16",
+      "pages": 39,
+      "official_source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D"
+    }
+  ],
+  "review_queue": [
+    {
+      "review_id": "RQ-001",
+      "university": "연세대학교",
+      "admission_year_candidate": 2025,
+      "essay_exam_candidate": "mock-natural",
+      "resource_id": "1745ca8b-98a6-5404-b6be-a077c541fca0",
+      "source_post_id": "1671",
+      "resource_title": "2025학년도 연세대 모의논술_자연 해설,답안.pdf",
+      "issue_type": "ROLE_AMBIGUOUS",
+      "evidence": {
+        "filename": "2025학년도 연세대 모의논술_자연 해설,답안.pdf",
+        "source_context": "연세대] 2025학년도 연세대 수시 논술 & 모의논술 기출 - 문제, 답안, 해설, 출제의도 등 + 2025 경쟁률, 2026수시모집요강",
+        "pdf_notation": "풀이/해설",
+        "locator": "PDF pages 1-12",
+        "sha256": "cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53"
+      },
+      "candidate_interpretations": [
+        "Keep explanation/scoring roles only; no answer subtype",
+        "Add example_answer only after an explicit university/Owner interpretation of this document"
+      ],
+      "recommended_action": "Owner chooses between candidates; no model/example/high-scoring subtype applied.",
+      "blocking_scope": "RESOURCE_ONLY",
+      "held_roles": [
+        "model_answer",
+        "example_answer",
+        "high_scoring_answer"
+      ],
+      "applied_roles": [
+        "question",
+        "exam_intent",
+        "explanation"
+      ],
+      "status": "OWNER_REVIEW_REQUIRED"
+    },
+    {
+      "review_id": "RQ-002",
+      "university": "성균관대학교",
+      "admission_year_candidate": 2025,
+      "essay_exam_candidate": "mock-humanities",
+      "resource_id": "2d1b1e0b-8773-5a8a-b166-d69f4caedf17",
+      "source_post_id": "1689",
+      "resource_title": "2025학년도 성균관대 모의논술_인문(언어) 해설,답안.pdf",
+      "issue_type": "ROLE_AMBIGUOUS",
+      "evidence": {
+        "filename": "2025학년도 성균관대 모의논술_인문(언어) 해설,답안.pdf",
+        "source_context": "성균관대] 2025학년도 성대 수시 논술 + 모의논술 기출 - 문제, 답안, 해설, 채점기준 등 + 2026 경쟁률",
+        "pdf_notation": "채점지침/채점등급; no explicit answer subtype heading",
+        "locator": "PDF pages 2-13",
+        "sha256": "d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3"
+      },
+      "candidate_interpretations": [
+        "Keep explanation/scoring roles only; no answer subtype",
+        "Add example_answer only after an explicit university/Owner interpretation of this document"
+      ],
+      "recommended_action": "Owner chooses between candidates; no model/example/high-scoring subtype applied.",
+      "blocking_scope": "RESOURCE_ONLY",
+      "held_roles": [
+        "model_answer",
+        "example_answer",
+        "high_scoring_answer"
+      ],
+      "applied_roles": [
+        "exam_intent",
+        "scoring_criteria",
+        "explanation"
+      ],
+      "status": "OWNER_REVIEW_REQUIRED"
+    }
+  ],
+  "resolved_reviews": [
+    {
+      "resource_id": "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2",
+      "issue_type": "YEAR_CONFLICT",
+      "status": "RESOLVED_BY_OWNER",
+      "admission_year": 2025,
+      "evidence_note": "Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established."
+    },
+    {
+      "resource_id": "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60",
+      "issue_type": "YEAR_CONFLICT",
+      "status": "RESOLVED_BY_OWNER",
+      "admission_year": 2025,
+      "evidence_note": "Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established."
+    },
+    {
+      "resource_id": "891c9dd8-c97d-51b7-961f-344bb6d168fe",
+      "issue_type": "YEAR_CONFLICT",
+      "status": "RESOLVED_BY_OWNER",
+      "admission_year": 2025,
+      "evidence_note": "Owner decision 2026-09-27: admission_year=2025 after comparison with actual 2024 admissions papers. Original header says 2024 while filename/section says 2025; possible administration/admission-year mixing or original notation error, not a confirmed typo. Original preserved; administered date not established."
+    }
+  ],
+  "official_provenance_checks": [
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532487_1.+%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84.zip&ofn=1.+%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84.zip",
+      "sha256": "5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c",
+      "exact_matches": [
+        "2e9dbbae-b489-5a1e-b3a4-6c5402ef5d0d"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532487_1.+%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84.zip&ofn=1.+%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84.zip",
+      "sha256": "1ce1c1d31c41be716f5ab919d8ff6f01a0c3321e9a2fdd7c5fc94a0df4d394fa",
+      "exact_matches": [
+        "18f30e64-d7ad-529a-923f-30eb2df88cfc"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532720_2.+%ec%82%ac%ed%9a%8c%ea%b3%84.zip&ofn=2.+%ec%82%ac%ed%9a%8c%ea%b3%84.zip",
+      "sha256": "162b366ffd2a55c15da7a8b81fe1145cefd9d1b91673b8b622a98a00c4c0434b",
+      "exact_matches": [
+        "18f3248d-a14b-500a-a47a-11e6bcc005c3"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532720_2.+%ec%82%ac%ed%9a%8c%ea%b3%84.zip&ofn=2.+%ec%82%ac%ed%9a%8c%ea%b3%84.zip",
+      "sha256": "89abd1114915a8e20211c9bacb7441de455e987d74fdee803466acb65804a60f",
+      "exact_matches": [
+        "946ec534-e8c7-5b36-9e55-2c18c76f86a2"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532776_3.+%ec%9e%90%ec%97%b0%ea%b3%84.zip&ofn=3.+%ec%9e%90%ec%97%b0%ea%b3%84.zip",
+      "sha256": "ce5465a361df29b2b028e6f3555f8eab911a2c490d5b30d1bdf545eeb2fef6f9",
+      "exact_matches": [
+        "592e0245-0c8a-548f-84df-2a81b805731e"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532776_3.+%ec%9e%90%ec%97%b0%ea%b3%84.zip&ofn=3.+%ec%9e%90%ec%97%b0%ea%b3%84.zip",
+      "sha256": "d73a956cd36df929c1c86c260ee96c3fff975e60fe376de8384cb78dbfcb06ac",
+      "exact_matches": [
+        "b0f1a2cf-fe7f-53df-836e-d1c8078032b8"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "50f97de39e94e38e82ce8cefd068162807f22ccabad5aa5fc1061e28afa03d0b",
+      "exact_matches": [
+        "033f9ee4-fecf-59b7-865c-1f748528d993"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "1515ef206e429bdb15e24ed102a96b2cdee6f5c355351788e6b354a96573090d",
+      "exact_matches": [
+        "e5421bac-05b2-566f-aebf-da9d6cd2a5be"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "1518b3a16f63985a61d824c522bb92cccc4b1044511b550795ad763490cfe8e0",
+      "exact_matches": [
+        "d936ad5d-4be6-5f8e-b98f-e2d00775a7a9"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "10919fbaf8b7164cd3c436a17835308c60ac2bde3bb720491bff72f2f4b24b8b",
+      "exact_matches": [
+        "891c9dd8-c97d-51b7-961f-344bb6d168fe"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "5dd876952708e6767faf1813dc5be8472cc0539c74ee7872072e7a4934bc106c",
+      "exact_matches": [
+        "afe616cb-f5e5-5f62-bfd8-5b5d1a9f79f5"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "68410bdf8e05bcb21b16910be18b15ad96cb6b424b212ce632e990a83e24f8c9",
+      "exact_matches": [
+        "64d5bb47-4d92-5cc4-81aa-bb755aa16ff2"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "12e4bfe1b87c5287c23c88252d636cd970488f308c7357347514137264f178c3",
+      "exact_matches": [
+        "31699827-3b22-507a-a19e-44d56f2fa53b"
+      ]
+    },
+    {
+      "collection": "khu-mock",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20240808035532836_4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip&ofn=4.+%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84.zip",
+      "sha256": "4bee19c69075f1f5865be0c7eaf2db6a4b97dda2992704ac5ea0d74af5943e9e",
+      "exact_matches": [
+        "071a9b7e-1ad6-5c6d-a45a-b44feb66fe60"
+      ]
+    },
+    {
+      "collection": "khu-regular",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20250331025728399_1.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84).pdf&ofn=1.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9d%b8%eb%ac%b8%ec%b2%b4%ec%9c%a1%ea%b3%84).pdf",
+      "sha256": "c38e2b898dbfe0e47d64077596905d9433c7f1d23fd14d4931a5a1aa9694488b",
+      "exact_matches": [
+        "a1ec8a98-f653-5d10-ac9e-be58fb8f506e"
+      ]
+    },
+    {
+      "collection": "khu-regular",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20250331025728818_2.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%82%ac%ed%9a%8c%ea%b3%84).pdf&ofn=2.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%82%ac%ed%9a%8c%ea%b3%84).pdf",
+      "sha256": "4b37c99b68d20f4648ba11596064a2545c20d6d2b413a2b606088467d5f92bce",
+      "exact_matches": [
+        "ec08943a-0944-51e9-b353-64f62d43119c"
+      ]
+    },
+    {
+      "collection": "khu-regular",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20250331025728907_3.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9e%90%ec%97%b0%ea%b3%84).pdf&ofn=3.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9e%90%ec%97%b0%ea%b3%84).pdf",
+      "sha256": "094db2712831f975322a9fc90d1d680e68ad04f702b3da390b08d035693868b5",
+      "exact_matches": [
+        "814897fd-14ca-5772-a3ce-b5317f080532"
+      ]
+    },
+    {
+      "collection": "khu-regular",
+      "source_url": "https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D",
+      "download_url": "https://iphak.khu.ac.kr/file/download.do?sfn=20250331025728964_4.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84).pdf&ofn=4.+2025+%eb%85%bc%ec%88%a0%ea%b3%a0%ec%82%ac+%ea%b8%b0%ec%b6%9c%eb%ac%b8%ec%a0%9c(%ec%9d%98%ec%95%bd%ed%95%99%ea%b3%84).pdf",
+      "sha256": "9d5a76f5965fe02268ff9abc8b1b30be3dc0acd2178f9af6fbfcc8850855ee16",
+      "exact_matches": [
+        "90d06205-63b7-5578-902a-f438a0bf6237"
+      ]
+    },
+    {
+      "collection": "yonsei-mock",
+      "source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "download_url": "https://admission.yonsei.ac.kr/seoul/download.asp?furl=bbs/202406270922207WNLFD.PDF&fname=2%2E2025%C7%D0%B3%E2%B5%B5+%BF%AC%BC%BC%B4%EB%C7%D0%B1%B3+%B8%F0%C0%C7+%B3%ED%BC%FA%28%C0%DA%BF%AC+%B0%E8%BF%AD%29+%C3%E2%C1%A6%C0%C7%B5%B5+%B9%D7+%C7%D8%BC%B3%28%B0%F8%B0%B3%BF%EB%29%2Epdf",
+      "sha256": "cf44e4a9c09784272d6cd0b099a55126fe35fa40de9e79df1f519ae50bd97b53",
+      "exact_matches": [
+        "1745ca8b-98a6-5404-b6be-a077c541fca0"
+      ]
+    },
+    {
+      "collection": "yonsei-mock",
+      "source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/rolling/noticeView.asp?BBS_NO=3236",
+      "download_url": "https://admission.yonsei.ac.kr/seoul/download.asp?furl=bbs/202406270922203RAEQJ.PDF&fname=1%2E2025%C7%D0%B3%E2%B5%B5+%BF%AC%BC%BC%B4%EB%C7%D0%B1%B3+%B8%F0%C0%C7+%B3%ED%BC%FA%28%C0%DA%BF%AC+%B0%E8%BF%AD%29+%B9%AE%C1%A6%C1%F6%28%B0%F8%B0%B3%BF%EB%29%2Epdf",
+      "sha256": "b5ac54437078b49593477e6b768e12f676fd00b6a07782f56e0c39721d52663c",
+      "exact_matches": [
+        "df3ef78d-386c-5c59-88d3-c1a48cce7521"
+      ]
+    },
+    {
+      "collection": "yonsei-regular",
+      "source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "download_url": "https://admission.yonsei.ac.kr/seoul/download.asp?furl=bbs/20250327095714ZHKZD6.PDF&fname=2025%C7%D0%B3%E2%B5%B5+%BF%AC%BC%BC%B4%EB%C7%D0%B1%B3+%B4%EB%C7%D0%BA%B0%B0%ED%BB%E7+%BC%B1%C7%E0%C7%D0%BD%C0+%BF%B5%C7%E2%C6%F2%B0%A1+%B0%E1%B0%FA%BA%B8%B0%ED%BC%AD%28%BA%B0%C3%A5%29%2Epdf",
+      "sha256": "b0a41222d3923eedbe12bbe4340682d679dd4a32e13478aafa43e38b9364c7f5",
+      "exact_matches": [],
+      "pages": 48
+    },
+    {
+      "collection": "yonsei-regular",
+      "source_url": "https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356",
+      "download_url": "https://admission.yonsei.ac.kr/seoul/download.asp?furl=bbs/20250327095714YEKPG6.PDF&fname=2025%C7%D0%B3%E2%B5%B5+%BF%AC%BC%BC%B4%EB%C7%D0%B1%B3+%B4%EB%C7%D0%BA%B0%B0%ED%BB%E7+%BC%B1%C7%E0%C7%D0%BD%C0+%BF%B5%C7%E2%C6%F2%B0%A1+%B0%E1%B0%FA%BA%B8%B0%ED%BC%AD%2Epdf",
+      "sha256": "3a68c82e35f787ab8b48dcf8f9bc815b919755c59d31d28a810fa2550c8e35d5",
+      "exact_matches": [],
+      "pages": 157
+    },
+    {
+      "collection": "skku-mock",
+      "source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/20250626134000RUGU6P.pdf&fname=2025%ED%95%99%EB%85%84%EB%8F%84+%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%ED%95%99%EA%B5%90+%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0+%EB%AC%B8%EC%A0%9C%EC%A7%80_%EC%96%B8%EC%96%B4+%EB%85%BC%EC%88%A0.pdf",
+      "sha256": "bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f",
+      "exact_matches": [
+        "122ddc87-3bf6-567c-90fc-7355bc0282bb"
+      ]
+    },
+    {
+      "collection": "skku-mock",
+      "source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/202506261340005B5BTE.pdf&fname=2025%ED%95%99%EB%85%84%EB%8F%84+%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%ED%95%99%EA%B5%90+%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0+%ED%95%B4%EC%84%A4%EC%A7%80_%EC%96%B8%EC%96%B4+%EB%85%BC%EC%88%A0.pdf",
+      "sha256": "d966c1a31d32b4d8ac2d282ab7d401c07cf537875c7c901690785feba4b001b3",
+      "exact_matches": [
+        "2d1b1e0b-8773-5a8a-b166-d69f4caedf17"
+      ]
+    },
+    {
+      "collection": "skku-mock",
+      "source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/20250626134000SRL7PL.pdf&fname=2025%ED%95%99%EB%85%84%EB%8F%84+%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%ED%95%99%EA%B5%90+%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0+%EB%AC%B8%EC%A0%9C%EC%A7%80_%EC%88%98%EB%A6%AC+%EB%85%BC%EC%88%A0.pdf",
+      "sha256": "002d7be53b7bbca8151c82cb377375841782136390ce51a15bbaeded95336fe7",
+      "exact_matches": [
+        "8762aef8-ef26-5839-a6ef-f0066b133530"
+      ]
+    },
+    {
+      "collection": "skku-mock",
+      "source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59182",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/20250626134000BA9TME.pdf&fname=2025%ED%95%99%EB%85%84%EB%8F%84+%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%ED%95%99%EA%B5%90+%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0+%ED%95%B4%EC%84%A4%EC%A7%80_%EC%88%98%EB%A6%AC+%EB%85%BC%EC%88%A0.pdf",
+      "sha256": "e3844b60c519f2028ed1c53237882aed023812646ef41102e47769eb070af171",
+      "exact_matches": [
+        "9b149626-89f3-5800-a4fd-22e38a49e9fb"
+      ]
+    },
+    {
+      "collection": "skku-regular",
+      "source_url": "https://admission.skku.edu/admission/html/rolling/questionView.html?idx=59291",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/20250625163931H264BF.pdf&fname=%5B%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%5D+2025%ED%95%99%EB%85%84%EB%8F%84+%EB%85%BC%EC%88%A0%EC%9A%B0%EC%88%98%EC%A0%84%ED%98%95+%EA%B8%B0%EC%B6%9C%EB%AC%B8%ED%95%AD.pdf",
+      "sha256": "23169fb7a57f15fa2e9d2285940a45bb65334e99aa7381c668371f47e5111f7f",
+      "exact_matches": [],
+      "pages": 24
+    },
+    {
+      "collection": "skku-report",
+      "source_url": "https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290",
+      "download_url": "https://admission.skku.edu/common/download.php?fpath=board/20250625163810XHSSST.pdf&fname=2025%ED%95%99%EB%85%84%EB%8F%84+%EC%84%B1%EA%B7%A0%EA%B4%80%EB%8C%80%ED%95%99%EA%B5%90+%EC%84%A0%ED%96%89%ED%95%99%EC%8A%B5+%EC%98%81%ED%96%A5%ED%8F%89%EA%B0%80+%EC%9E%90%EC%B2%B4%ED%8F%89%EA%B0%80%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf",
+      "sha256": "42bb17047d18c239b737f6aee2423a3dd933a6b614aaebe6e1146691270ca0a0",
+      "exact_matches": [],
+      "pages": 244
+    }
+  ]
+}

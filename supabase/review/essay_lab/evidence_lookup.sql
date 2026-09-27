@@ -4,7 +4,8 @@
 select m.role, m.resource_id, m.source_locator, m.official_source_url,
        r.content_item_id, r.title, r.resource_type, r.source_url,
        c.source_url as content_source_url, c.published_at as source_published_at,
-       e.admission_year
+       e.admission_year, e.id as essay_exam_id, e.exam_key,
+       m.provenance, m.verification_status
 from public.essay_exam_resources m
 join public.essay_exams e on e.id = m.essay_exam_id
 join public.universities u on u.id = e.university_id

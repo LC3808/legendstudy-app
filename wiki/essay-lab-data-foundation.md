@@ -1,11 +1,13 @@
 # Essay LAB Data Foundation v1 — 2025 Pilot
 
-Status: **FOUNDATION APPLIED BY OWNER / INITIAL ROWS0 / PILOT STOPPED**, 2026-09-27.
+Status: **FOUNDATION APPLIED / PILOT MAPPED / TWO ROLE REVIEWS**, 2026-09-27.
 
-Latest: [Pilot Phase1 stop evidence](essay-lab-pilot-2025.md). Live READ ONLY
-confirmed all3 tables and empty0/0/0 state. Mapping stopped before writes after
-3 unexpected PDF year conflicts. Earlier NOT_APPLIED/runtime-NOT_RUN statements
-below describe the historical design/promotion checkpoint, not current deployment.
+Latest: [Pilot Phase1 continuation](essay-lab-pilot-2025.md): Production3 universities,
+19 active verified exams,121 official verified mappings reusing38 resources. Owner
+resolved3 document-year conflicts; original notes preserved. Two answer-subtype
+candidates remain in batch review, without holding independent mappings. No schema
+change. Historical design/promotion statements below are prior checkpoints.
+
 Owner's new explicit instruction opens this design task. Materials device QA remains
 pending; this is not a claim that Materials is CLOSED. P0 Essay LAB precedes score
 analytics. No Materials audit, UI, AI grading, Production migration or seed here.

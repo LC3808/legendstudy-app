@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-27 — Essay Pilot continuation applied
+
+- [Pilot](essay-lab-pilot-2025.md): Owner released3 year holds and adopted batch review.
+  Sequential university checkpoints applied3 universities/19 exams/121 official verified
+  mappings over38 unchanged resources. Two answer-subtype roles await grouped review.
+- Actual role RLS/read/write denial and repeated evidence queries PASS; guest REST3/19/121.
+  Initial operator role restoration error rolled back0/0/0, corrected without DB changes.
+  No schema/UI/AI/expansion; next Owner review and separate prototype/remaining-Pilot gate.
+
 ## 2026-09-27 — Essay Pilot Phase1 stopped before write
 
 - [Pilot stop](essay-lab-pilot-2025.md): Owner foundation apply confirmed READ ONLY,

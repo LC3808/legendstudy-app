@@ -1,0 +1,310 @@
+{
+  "status": "APPLIED_WITH_REVIEW_QUEUE",
+  "starting_head": "9cd7c9f",
+  "counts": {
+    "universities": 3,
+    "essay_exams": 19,
+    "essay_exam_resources": 121
+  },
+  "universities": [
+    {
+      "university": "yonsei",
+      "applied_at": "2026-09-27T11:55:54.162782+00:00",
+      "planned": {
+        "universities": 1,
+        "essay_exams": 4,
+        "essay_exam_resources": 14
+      },
+      "actual": {
+        "universities": 1,
+        "essay_exams": 4,
+        "essay_exam_resources": 14
+      },
+      "runtime": {
+        "anon": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 4,
+            "essay_exam_resources": 14
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            4,
+            4,
+            3,
+            3
+          ]
+        },
+        "authenticated": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 4,
+            "essay_exam_resources": 14
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            4,
+            4,
+            3,
+            3
+          ]
+        }
+      },
+      "unrelated_unchanged": true,
+      "duplicates": 0,
+      "orphans": 0,
+      "plan_sha256": "b138bb2ef88baf7627237bf7f8a5255ae45cb1338aa994026ebb3f2a45a08b73"
+    },
+    {
+      "university": "sungkyunkwan",
+      "applied_at": "2026-09-27T11:56:30.226323+00:00",
+      "planned": {
+        "universities": 1,
+        "essay_exams": 7,
+        "essay_exam_resources": 41
+      },
+      "actual": {
+        "universities": 1,
+        "essay_exams": 7,
+        "essay_exam_resources": 41
+      },
+      "runtime": {
+        "anon": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 7,
+            "essay_exam_resources": 41
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        },
+        "authenticated": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 7,
+            "essay_exam_resources": 41
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        }
+      },
+      "unrelated_unchanged": true,
+      "duplicates": 0,
+      "orphans": 0,
+      "plan_sha256": "b138bb2ef88baf7627237bf7f8a5255ae45cb1338aa994026ebb3f2a45a08b73"
+    },
+    {
+      "university": "kyunghee",
+      "applied_at": "2026-09-27T11:57:05.689708+00:00",
+      "planned": {
+        "universities": 1,
+        "essay_exams": 8,
+        "essay_exam_resources": 66
+      },
+      "actual": {
+        "universities": 1,
+        "essay_exams": 8,
+        "essay_exam_resources": 66
+      },
+      "runtime": {
+        "anon": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 8,
+            "essay_exam_resources": 66
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            6,
+            24,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        },
+        "authenticated": {
+          "select": {
+            "universities": 1,
+            "essay_exams": 8,
+            "essay_exam_resources": 66
+          },
+          "insert_update_delete_denied": true,
+          "deterministic_evidence_counts": [
+            6,
+            24,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        }
+      },
+      "unrelated_unchanged": true,
+      "duplicates": 0,
+      "orphans": 0,
+      "plan_sha256": "b138bb2ef88baf7627237bf7f8a5255ae45cb1338aa994026ebb3f2a45a08b73"
+    }
+  ],
+  "final_runtime": {
+    "yonsei": {
+      "anon": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 4,
+          "essay_exam_resources": 14
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          4,
+          4,
+          3,
+          3
+        ]
+      },
+      "authenticated": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 4,
+          "essay_exam_resources": 14
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          4,
+          4,
+          3,
+          3
+        ]
+      }
+    },
+    "sungkyunkwan": {
+      "anon": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 7,
+          "essay_exam_resources": 41
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "authenticated": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 7,
+          "essay_exam_resources": 41
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      }
+    },
+    "kyunghee": {
+      "anon": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 8,
+          "essay_exam_resources": 66
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          6,
+          24,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "authenticated": {
+        "select": {
+          "universities": 1,
+          "essay_exams": 8,
+          "essay_exam_resources": 66
+        },
+        "insert_update_delete_denied": true,
+        "deterministic_evidence_counts": [
+          6,
+          24,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      }
+    }
+  },
+  "anon_http": {
+    "universities": 3,
+    "essay_exams": 19,
+    "essay_exam_resources": 121
+  },
+  "review_queue_count": 2,
+  "resolved_year_conflicts": 3,
+  "remaining_year_conflicts": 0,
+  "original_resource_count": 38,
+  "resource_duplication": false,
+  "schema_changed": false,
+  "first_attempt": {
+    "committed": false,
+    "rollback_verified_counts": [
+      0,
+      0,
+      0
+    ],
+    "cause": "RESET ROLE restored cli_login_postgres instead of postgres; operator corrected without grant/RLS changes"
+  },
+  "auth_test_method": "Actual SQL SET LOCAL ROLE authenticated; no end-user JWT sign-in test",
+  "prototype_candidates": [
+    {
+      "university": "sungkyunkwan",
+      "exam_key": "regular-humanities-1"
+    },
+    {
+      "university": "sungkyunkwan",
+      "exam_key": "regular-natural-1"
+    },
+    {
+      "university": "kyunghee",
+      "exam_key": "regular-social"
+    }
+  ]
+}
