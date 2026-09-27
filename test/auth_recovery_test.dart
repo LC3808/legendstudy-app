@@ -10,6 +10,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'package:legendstudy_app/features/personal/personal_providers.dart';
+import 'package:legendstudy_app/features/personal/domain/personal_models.dart';
 import 'package:legendstudy_app/features/auth/auth_errors.dart';
 import 'package:legendstudy_app/features/auth/auth_recovery.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
@@ -336,6 +338,14 @@ void main() {
           authStateProvider.overrideWith(
             (ref) => withAuthFailures(auth.stream),
           ),
+          // Returning signed-in users are already onboarded, so the first-login
+          // gate never intercepts recovery/cold-start routing under test.
+          currentProfileProvider.overrideWith((ref) async {
+            final id = ref.watch(authStateProvider).value?.userId;
+            return id == null
+                ? null
+                : UserProfile(id: id, onboardingCompletedAt: DateTime(2026));
+          }),
         ],
       );
       addTearDown(container.dispose);

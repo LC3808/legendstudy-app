@@ -21,7 +21,10 @@ class SupabaseProfileRepository extends _PersonalRepository
     if (owner == null) return null;
     final row = await client!
         .from('profiles')
-        .select('id,display_name,grade_level,neis_office_code,neis_school_code')
+        .select(
+          'id,display_name,grade_level,neis_office_code,neis_school_code,'
+          'academic_status,onboarding_completed_at',
+        )
         .eq('id', owner)
         .maybeSingle();
     return row == null ? null : UserProfile.fromJson(row);
@@ -55,6 +58,8 @@ class SupabaseProfileRepository extends _PersonalRepository
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   }) async {
     final owner = requireUser();
     if (displayName != null &&
@@ -67,11 +72,26 @@ class SupabaseProfileRepository extends _PersonalRepository
     if (gradeLevel != null && ![1, 2, 3].contains(gradeLevel)) {
       throw const FormatException('Unsupported grade.');
     }
+    if (academicStatus != null &&
+        !academicStatusValues.contains(academicStatus)) {
+      throw const FormatException('Unsupported academic status.');
+    }
     await client!.from('profiles').upsert({
       'id': owner,
       if (displayName != null) 'display_name': displayName,
       if (gradeLevel != null || clearGrade)
         'grade_level': clearGrade ? null : gradeLevel,
+      if (academicStatus != null || clearAcademicStatus)
+        'academic_status': clearAcademicStatus ? null : academicStatus,
+    }, onConflict: 'id');
+  }
+
+  @override
+  Future<void> markOnboardingComplete() async {
+    final owner = requireUser();
+    await client!.from('profiles').upsert({
+      'id': owner,
+      'onboarding_completed_at': DateTime.now().toUtc().toIso8601String(),
     }, onConflict: 'id');
   }
 }

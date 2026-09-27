@@ -86,7 +86,11 @@ class Profiles implements ProfileRepository {
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   }) async {}
+  @override
+  Future<void> markOnboardingComplete() async {}
   @override
   Future<void> updateSchoolSelection({
     String? officeCode,
@@ -338,7 +342,10 @@ void main() {
     (tester) async {
       final auth = StreamController<AuthStatus>();
       addTearDown(auth.close);
-      final profiles = Profiles();
+      // Onboarded returning user, so the first-login gate keeps the app on Home
+      // where the meal card keeps schoolSelectionProvider subscribed.
+      final profiles = Profiles()
+        ..profile = UserProfile(id: 'owner-a', onboardingCompletedAt: DateTime(2026));
       final repo = Schools();
       final c = await mount(
         tester,

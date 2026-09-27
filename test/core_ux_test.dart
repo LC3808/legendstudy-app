@@ -51,6 +51,8 @@ class ProfileFake implements ProfileRepository {
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   }) async {
     writes++;
     if (fail) throw StateError('offline');
@@ -60,6 +62,9 @@ class ProfileFake implements ProfileRepository {
       displayName: value.displayName,
     );
   }
+
+  @override
+  Future<void> markOnboardingComplete() async {}
 }
 
 final frame = GlobalKey();

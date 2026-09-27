@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'support/onboarding_override.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/content/domain/content_item.dart';
@@ -76,6 +77,7 @@ void main() {
         final c = ProviderContainer(
           overrides: [
             authStateProvider.overrideWith((ref) => auth.stream),
+            onboardedProfileOverride,
             searchRepositoryProvider.overrideWithValue(search),
             bookmarkRepositoryProvider.overrideWithValue(repo),
             recentViewRepositoryProvider.overrideWithValue(

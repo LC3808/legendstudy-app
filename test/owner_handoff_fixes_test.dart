@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'package:legendstudy_app/features/personal/personal_providers.dart';
+import 'package:legendstudy_app/features/personal/domain/personal_models.dart';
 import 'package:legendstudy_app/features/profile/avatar.dart';
 
 import 'avatar_test.dart' show Photos, Picker, png;
@@ -34,6 +36,14 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         authStateProvider.overrideWith((ref) => events.stream),
+        // Signed-in user under test is an onboarded returning user, so the
+        // first-login gate does not intercept Settings/logout navigation.
+        currentProfileProvider.overrideWith((ref) async {
+          final id = ref.watch(authStateProvider).value?.userId;
+          return id == null
+              ? null
+              : UserProfile(id: id, onboardingCompletedAt: DateTime(2026));
+        }),
         localLogoutProvider.overrideWithValue(() async {
           events.add(const AuthStatus(null));
         }),

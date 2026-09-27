@@ -38,6 +38,8 @@ class PersistedProfile extends ProfileFake {
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   }) async {
     value = UserProfile(
       id: value.id,

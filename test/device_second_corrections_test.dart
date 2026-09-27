@@ -39,6 +39,8 @@ class Saves extends ProfileFake {
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   }) async {
     writes++;
     await pending.future;
@@ -127,8 +129,9 @@ void main() {
             await t.pumpAndSettle();
             expect(find.text(schoolB.name), findsNWidgets(2));
             expect(repo.schoolWrites, 0); // Selection is a draft until Save.
-            await t.ensureVisible(find.text('설정 안 함'));
-            await t.tap(find.text('설정 안 함'));
+            // Two '설정 안 함' chips now exist (현재 상태 / 학년); the last is grade.
+            await t.ensureVisible(find.text('설정 안 함').last);
+            await t.tap(find.text('설정 안 함').last);
           }
           await t.ensureVisible(find.text('저장'));
           await t.tap(find.text('저장'));

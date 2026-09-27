@@ -8,6 +8,7 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
 import '../../school/presentation/neis_attribution.dart';
+import 'academic_status_field.dart';
 
 class SchoolPage extends ConsumerStatefulWidget {
   const SchoolPage({super.key});
@@ -187,6 +188,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           ),
         ],
         if (auth.value?.isAuthenticated == true) ...[
+          const AcademicStatusField(),
           GradePage(
             key: ValueKey(auth.value?.userId),
             enabled: !selection.isLoading && !selection.hasError && !_completed,

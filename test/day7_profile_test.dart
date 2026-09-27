@@ -101,7 +101,8 @@ void main() {
     expect(saved.neisSchoolCode, '7530932');
     expect(
       requests.last.url.queryParameters['select'],
-      'id,display_name,grade_level,neis_office_code,neis_school_code',
+      'id,display_name,grade_level,neis_office_code,neis_school_code,'
+      'academic_status,onboarding_completed_at',
     );
     expect(requests.last.url.queryParameters['id'], 'eq.owner-a');
   });

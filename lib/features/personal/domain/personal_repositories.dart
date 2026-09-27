@@ -7,7 +7,13 @@ abstract interface class ProfileRepository {
     String? displayName,
     int? gradeLevel,
     bool clearGrade = false,
+    String? academicStatus,
+    bool clearAcademicStatus = false,
   });
+
+  /// Mark the first-login personalization flow finished (on finish OR skip),
+  /// so it never re-prompts. Idempotent.
+  Future<void> markOnboardingComplete();
 }
 
 abstract interface class BookmarkRepository {

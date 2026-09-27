@@ -8,6 +8,7 @@ import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'support/onboarding_override.dart';
 import 'package:legendstudy_app/features/profile/avatar.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
@@ -45,7 +46,10 @@ void main() {
     ) async {
       final events = StreamController<AuthStatus>.broadcast();
       final c = ProviderContainer(
-        overrides: [authStateProvider.overrideWith((ref) => events.stream)],
+        overrides: [
+          authStateProvider.overrideWith((ref) => events.stream),
+          onboardedProfileOverride,
+        ],
       );
       final router = c.read(routerProvider)..go('/my');
       await t.pumpWidget(
@@ -83,7 +87,10 @@ void main() {
     (t) async {
       final events = StreamController<AuthStatus>.broadcast();
       final c = ProviderContainer(
-        overrides: [authStateProvider.overrideWith((ref) => events.stream)],
+        overrides: [
+          authStateProvider.overrideWith((ref) => events.stream),
+          onboardedProfileOverride,
+        ],
       );
       final router = c.read(routerProvider)..go('/my/saved');
       await t.pumpWidget(

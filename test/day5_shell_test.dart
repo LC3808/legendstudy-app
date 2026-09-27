@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'support/onboarding_override.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/content/domain/content_item.dart';
 import 'package:legendstudy_app/features/content/domain/content_repository.dart';
@@ -57,6 +58,7 @@ void main() {
           LegacySearchFake(content ?? ShellContent()),
         ),
         authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
+        onboardedProfileOverride,
       ],
     );
     addTearDown(container.dispose);

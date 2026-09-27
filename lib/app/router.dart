@@ -28,16 +28,47 @@ import '../features/auth/presentation/new_password_page.dart';
 import '../features/auth/presentation/password_recovery_page.dart';
 import '../core/supabase/supabase_providers.dart';
 import '../shared/widgets/nested_page.dart';
+import '../features/onboarding/onboarding_gate.dart';
+import '../features/onboarding/presentation/onboarding_page.dart';
+import '../features/personal/personal_providers.dart';
+
+// Re-run GoRouter's redirect whenever the canonical profile changes, so the
+// first-login onboarding gate reacts once the profile resolves. We deliberately
+// listen ONLY to currentProfileProvider (which itself watches authState): on an
+// auth change it transitions loading -> data, and the gate must read a profile
+// state that matches the current user. Listening to authState directly would
+// fire the redirect while currentProfileProvider still holds the previous
+// user's (stale) value, wrongly sending an onboarded returning user to
+// onboarding. Watching it here also keeps that autoDispose provider alive for
+// the gate. Kept alive by LegendStudyApp's ref.watch of routerProvider.
+class _RouterRefresh extends ChangeNotifier {
+  _RouterRefresh(Ref ref) {
+    ref.listen(currentProfileProvider, (_, _) => notifyListeners());
+  }
+}
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
     navigatorKey: GlobalKey<NavigatorState>(),
+    refreshListenable: _RouterRefresh(ref),
+    redirect: (context, state) {
+      final auth = ref.read(authStateProvider);
+      return onboardingRedirect(
+        authed: auth.value?.isAuthenticated == true,
+        profile: ref.read(currentProfileProvider),
+        location: state.matchedLocation,
+      );
+    },
     initialLocation:
         ownerAuthCheckEnabled &&
             const bool.fromEnvironment('OWNER_AUTH_CHECK_START')
         ? '/auth/owner-check'
         : '/home',
     routes: [
+      GoRoute(
+        path: onboardingRoute,
+        builder: (_, _) => const OnboardingPage(),
+      ),
       if (ownerAuthCheckEnabled)
         GoRoute(
           path: '/auth/owner-check',
