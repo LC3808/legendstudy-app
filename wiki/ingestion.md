@@ -3,12 +3,12 @@
 ## Daily Sync current handoff — 2026-09-24
 
 **Current override —2026-09-27:** A1 bootstrap, A2 recent delta and A3 controlled
-exam apply/activation exist; public Production read verifies27 active contents,
-including1710. Local accepted26 omits1710. Earlier baseline/Phase2 statements below
-are dated history. Current [Wave1 implementation checkpoint](materials-data-rollout.md#wave1-writerparser-extension--2026-09-27)
-records296 scoped posts,217 new writer-ready candidates and52 frozen identity
-review posts. Supported non-exam writer and scoped parser/confidence fixes are
-implemented/tested; private Production preflight and publication remain gated.
+apply/activation exist. [Phase3 FULL_SET22 publication](exam-full-set-publication-2026-09-27.md)
+completed after Pilot4 and Batch1 twenty posts: Production active73 content/55 exams.
+Local accepted26 still omits1710; A1 reconciliation remains separate. Wave1 inventory
+has296 scoped posts. Remaining technical writer-ready171: exam35 canonical REVIEW,
+essay127/study9; identity-review52 stays HOLD. No next batch, scheduler or blanket
+publication authority. Earlier baseline/count/Phase2 passages are dated history.
 Recognized subject_taxonomy_gap is advisory; raw nullable mapping is kept.
 
 “사이트에 새 글 올렸는데 앱에 안 보여” → read the
@@ -17,7 +17,7 @@ Recognized subject_taxonomy_gap is advisory; raw nullable mapping is kept.
 [Current Status](current-status.md#daily-sync-status). Daily Sync is not operational:
 a new source post does not imply automatic App publication.
 
-Current Owner-verified Phase0 baseline: PASS / PUBLISHED_COMPLETE (2026-09-24).
+Historical Owner-verified Phase0 baseline: PASS / PUBLISHED_COMPLETE (2026-09-24).
 source_posts23; active content_items23; exams23; active exam_subjects363;
 active resources739; all reported integrity checks0. Quarantine23 is EXPECTED
 resource_url_expiring advisory evidence, not a failed publication or cleanup list.

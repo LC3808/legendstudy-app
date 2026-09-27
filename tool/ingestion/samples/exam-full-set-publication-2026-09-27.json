@@ -1,0 +1,3186 @@
+{
+  "classifier_changed": false,
+  "collisions": 0,
+  "duplicates": 0,
+  "fallback_resources": {
+    "box_audio": 22,
+    "listening_script": 13
+  },
+  "final_verification": {
+    "active_content": 73,
+    "active_exams": 55,
+    "canonical_exact": "PASS",
+    "final_table_counts": {
+      "content_items": 73,
+      "exam_subjects": 736,
+      "exams": 55,
+      "ingestion_quarantine": 76,
+      "resources": 1566,
+      "source_posts": 73
+    },
+    "new_posts": 22,
+    "new_resource_key_collisions_across_production": 0,
+    "outside_scope_unchanged": true,
+    "protected_hashes_unchanged": true
+  },
+  "full_set_preserved": 22,
+  "grade_exposure": {
+    "G1": 13,
+    "G2": 8,
+    "G3": 1
+  },
+  "groups": [
+    {
+      "checkpoint": {
+        "activation": "PASS",
+        "actual": {
+          "content_items": 5,
+          "exam_subjects": 52,
+          "exams": 5,
+          "ingestion_quarantine": 5,
+          "resources": 111,
+          "source_posts": 5
+        },
+        "apply": "PASS",
+        "checkpoint": "PASS",
+        "collisions": 0,
+        "detail": "PASS",
+        "duplicates": 0,
+        "exam_invariants": "PASS",
+        "full_set": "PASS",
+        "grade_exposure_cumulative": {
+          "1": 3,
+          "2": 2,
+          "3": 0
+        },
+        "group": 1,
+        "outside_scope": {
+          "content_items": [
+            51,
+            "d1144c6247e3604076b75c9b9b676506"
+          ],
+          "exam_subjects": [
+            496,
+            "c385fb8cee3000e1f9318d907179ba4b"
+          ],
+          "exams": [
+            33,
+            "2e6becc439ba2803471121d639f1aaa6"
+          ],
+          "ingestion_quarantine": [
+            54,
+            "a41e0b7ad1d70d7b75952d6142f1dbe0"
+          ],
+          "resources": [
+            1051,
+            "3d5c2043f781af80e3fe8007dbd2b1fb"
+          ],
+          "source_posts": [
+            51,
+            "67e65948a610ea809ad0589c3308f2cc"
+          ]
+        },
+        "pilot_batch1_regression": "PASS",
+        "planned": {
+          "content_items": 5,
+          "exam_subjects": 52,
+          "exams": 5,
+          "ingestion_quarantine": 5,
+          "resources": 111,
+          "source_posts": 5
+        },
+        "posts": [
+          "1480",
+          "1481",
+          "1494",
+          "1497",
+          "1499"
+        ],
+        "production_active_content": 56,
+        "production_active_exams": 38,
+        "recent_ordering": "PASS",
+        "resource_duplicates": 0,
+        "resources": "PASS",
+        "search": "PASS",
+        "subjects": "PASS",
+        "unexpected_inactive": 0,
+        "unrelated_mutations": 0
+      },
+      "fresh_sources": [
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2021-03-24",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "external:calendar_2021",
+              "registry:moe_2021_calendar",
+              "registry:school_2021_march",
+              "source:1480"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2021,
+            "grade": 2,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2021-03-24"
+          },
+          "post_id": "1480",
+          "published_at": "2021-04-15T12:41:30+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2021-G2-03-national_mock-SEOUL",
+          "resource_count": 36,
+          "source_evidence": {
+            "date_assertions": [
+              "2021-03-24"
+            ],
+            "html_sha256": "3e644367e5fed4ade4dcf5de98a6bcb34f7e6508f893f715038254b1d305ce06",
+            "observed_at": "2026-09-27T07:14:30.964550+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2021년 3월 고2 모의고사 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/탐구",
+            "url": "https://legendstudy.com/1480"
+          },
+          "source_url": "https://legendstudy.com/1480"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2021-03-23",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "external:calendar_2021",
+              "registry:moe_2021_calendar",
+              "registry:school_2021_march",
+              "source:1481"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2021,
+            "grade": 1,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2021-03-23"
+          },
+          "post_id": "1481",
+          "published_at": "2021-04-19T10:14:55+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2021-G1-03-national_mock-SEOUL",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [
+              "2021-03-23"
+            ],
+            "html_sha256": "eca429a673c0ac17516d17e5df0ee335dc90916520d2c4a841166d944d5c6690",
+            "observed_at": "2026-09-27T07:14:32.381001+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2021년 3월 고1 모의고사 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1481"
+          },
+          "source_url": "https://legendstudy.com/1481"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "external:calendar_2021",
+              "registry:moe_2021_calendar",
+              "source:1494"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2021,
+            "grade": 1,
+            "nominal_month": 11,
+            "organizer": "GYEONGGI",
+            "source_event_date": null
+          },
+          "post_id": "1494",
+          "published_at": "2022-03-10T15:28:42+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2021-G1-11-national_mock-GYEONGGI",
+          "resource_count": 13,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "26553fb199539b0179032792709d033df7a3c210bfc54855e015acb85ac035b2",
+            "observed_at": "2026-09-27T07:14:34.022076+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2021년 11월 고1 모의고사 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1494"
+          },
+          "source_url": "https://legendstudy.com/1494"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_calendar",
+              "source:1497"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 1,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": null
+          },
+          "post_id": "1497",
+          "published_at": "2022-03-27T23:01:00+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G1-03-national_mock-SEOUL",
+          "resource_count": 13,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "f7c23ffb705bd02a5a3f510b5c5aacd3e4e36288605ffcc3727562126b4249b4",
+            "observed_at": "2026-09-27T07:14:35.471874+00:00",
+            "organizer": "SEOUL",
+            "organizer_tokens": [
+              "서울시"
+            ],
+            "title": "→ 2022년 3월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1497"
+          },
+          "source_url": "https://legendstudy.com/1497"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2022-06-09",
+            "administered_month": 6,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_calendar",
+              "source:1499"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 2,
+            "nominal_month": 6,
+            "organizer": "BUSAN",
+            "source_event_date": "2022-06-09"
+          },
+          "post_id": "1499",
+          "published_at": "2022-07-21T09:33:23+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G2-06-national_mock-BUSAN",
+          "resource_count": 35,
+          "source_evidence": {
+            "date_assertions": [
+              "2022-06-09"
+            ],
+            "html_sha256": "9a6d9461c0a0974de17b06a6e7fe24c70c4c7010c7f0f67d119d1122967a793a",
+            "observed_at": "2026-09-27T07:14:37.075684+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2022년 6월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/사탐/과탐",
+            "url": "https://legendstudy.com/1499"
+          },
+          "source_url": "https://legendstudy.com/1499"
+        }
+      ],
+      "gate": {
+        "checked_at": "2026-09-27T07:15:58.138505+00:00",
+        "fresh_source": "PASS",
+        "full_set": "PASS",
+        "group": 1,
+        "ids": [
+          "1480",
+          "1481",
+          "1494",
+          "1497",
+          "1499"
+        ],
+        "private_preflight": "PASS",
+        "resource_contract": "PASS"
+      },
+      "private_preflight": [
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "content_items"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 52,
+          "planned_updates": 0,
+          "potential_inserts": 52,
+          "potential_key_noops": 0,
+          "table_name": "exam_subjects"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "exams"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "ingestion_quarantine"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 111,
+          "planned_updates": 0,
+          "potential_inserts": 111,
+          "potential_key_noops": 0,
+          "table_name": "resources"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "source_posts"
+        }
+      ],
+      "public_read": {
+        "device_pdf_open": "NOT_RUN",
+        "ordering": "published_at DESC,id DESC",
+        "posts": [
+          {
+            "detail": "PASS",
+            "id": "1474",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1593",
+            "materials_search": "PASS",
+            "resources": 1,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1527",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1478",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1447",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1432",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1453",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1492",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1493",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1645",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1541",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1542",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1557",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1560",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1626",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1642",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1519",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1521",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1522",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1518",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1491",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1575",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1613",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1701",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1480",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1481",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1494",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1497",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1499",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          }
+        ],
+        "public_active_count": 56,
+        "recent_first3": [
+          "legendstudy-1712-main",
+          "legendstudy-1711-main",
+          "legendstudy-1710-main"
+        ]
+      },
+      "publication_journal": [
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          },
+          "id": "1480",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1481",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          },
+          "id": "1494",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          },
+          "id": "1497",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          },
+          "id": "1499",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          }
+        }
+      ],
+      "resource_validation": {
+        "box_fallback": 5,
+        "box_get_metadata_pass": true,
+        "pdf_contract_pass": 104,
+        "pdf_http_signature_pass": 106,
+        "script_fallback": 2,
+        "total": 111
+      }
+    },
+    {
+      "checkpoint": {
+        "activation": "PASS",
+        "actual": {
+          "content_items": 5,
+          "exam_subjects": 72,
+          "exams": 5,
+          "ingestion_quarantine": 5,
+          "resources": 151,
+          "source_posts": 5
+        },
+        "apply": "PASS",
+        "checkpoint": "PASS",
+        "collisions": 0,
+        "detail": "PASS",
+        "duplicates": 0,
+        "exam_invariants": "PASS",
+        "full_set": "PASS",
+        "grade_exposure_cumulative": {
+          "1": 5,
+          "2": 4,
+          "3": 1
+        },
+        "group": 2,
+        "outside_scope": {
+          "content_items": [
+            51,
+            "d1144c6247e3604076b75c9b9b676506"
+          ],
+          "exam_subjects": [
+            496,
+            "c385fb8cee3000e1f9318d907179ba4b"
+          ],
+          "exams": [
+            33,
+            "2e6becc439ba2803471121d639f1aaa6"
+          ],
+          "ingestion_quarantine": [
+            54,
+            "a41e0b7ad1d70d7b75952d6142f1dbe0"
+          ],
+          "resources": [
+            1051,
+            "3d5c2043f781af80e3fe8007dbd2b1fb"
+          ],
+          "source_posts": [
+            51,
+            "67e65948a610ea809ad0589c3308f2cc"
+          ]
+        },
+        "pilot_batch1_regression": "PASS",
+        "planned": {
+          "content_items": 5,
+          "exam_subjects": 72,
+          "exams": 5,
+          "ingestion_quarantine": 5,
+          "resources": 151,
+          "source_posts": 5
+        },
+        "posts": [
+          "1502",
+          "1503",
+          "1504",
+          "1505",
+          "1511"
+        ],
+        "production_active_content": 61,
+        "production_active_exams": 43,
+        "recent_ordering": "PASS",
+        "resource_duplicates": 0,
+        "resources": "PASS",
+        "search": "PASS",
+        "subjects": "PASS",
+        "unexpected_inactive": 0,
+        "unrelated_mutations": 0
+      },
+      "fresh_sources": [
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2022-07-06",
+            "administered_month": 7,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_calendar",
+              "source:1502"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 3,
+            "nominal_month": 7,
+            "organizer": "INCHEON",
+            "source_event_date": "2022-07-06"
+          },
+          "post_id": "1502",
+          "published_at": "2022-08-05T22:55:58+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G3-07-national_mock-INCHEON",
+          "resource_count": 53,
+          "source_evidence": {
+            "date_assertions": [
+              "2022-07-06"
+            ],
+            "html_sha256": "830a8699471b6d8bdf966e4d0c26a2dc7266f5ea81d22549af35819f97ef5e4f",
+            "observed_at": "2026-09-27T07:17:34.287125+00:00",
+            "organizer": "INCHEON",
+            "organizer_tokens": [
+              "인천시"
+            ],
+            "title": "→ 2022년 7월 고3 모의고사 문제, 답, 해설, 등급, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+            "url": "https://legendstudy.com/1502"
+          },
+          "source_url": "https://legendstudy.com/1502"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2022-08-31",
+            "administered_month": 8,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_actual",
+              "registry:ice_2022_calendar",
+              "source:1503"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 1,
+            "nominal_month": 9,
+            "organizer": "INCHEON",
+            "source_event_date": "2022-08-31"
+          },
+          "post_id": "1503",
+          "published_at": "2023-01-18T12:35:14+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G1-09-national_mock-INCHEON",
+          "resource_count": 13,
+          "source_evidence": {
+            "date_assertions": [
+              "2022-08-31"
+            ],
+            "html_sha256": "ce8317ef4ec9563e595ca1ebf6308b614954978569ed466780986510d86c3f3c",
+            "observed_at": "2026-09-27T07:17:35.633133+00:00",
+            "organizer": "INCHEON",
+            "organizer_tokens": [
+              "인천시"
+            ],
+            "title": "→ 2022년 9월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1503"
+          },
+          "source_url": "https://legendstudy.com/1503"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2022-08-31",
+            "administered_month": 8,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_actual",
+              "registry:ice_2022_calendar",
+              "source:1504"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 2,
+            "nominal_month": 9,
+            "organizer": "INCHEON",
+            "source_event_date": "2022-08-31"
+          },
+          "post_id": "1504",
+          "published_at": "2023-01-18T13:21:03+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G2-09-national_mock-INCHEON",
+          "resource_count": 35,
+          "source_evidence": {
+            "date_assertions": [
+              "2022-08-31"
+            ],
+            "html_sha256": "a3d7f11dc090df7432f0665c864b1344cdc3d86d5e68345abffad84e0f29f96a",
+            "observed_at": "2026-09-27T07:17:37.251467+00:00",
+            "organizer": "INCHEON",
+            "organizer_tokens": [
+              "인천시"
+            ],
+            "title": "→ 2022년 9월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/사탐/과탐",
+            "url": "https://legendstudy.com/1504"
+          },
+          "source_url": "https://legendstudy.com/1504"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2022-11-23",
+            "administered_month": 11,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2022_calendar",
+              "source:1505"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2022,
+            "grade": 1,
+            "nominal_month": 11,
+            "organizer": "GYEONGGI",
+            "source_event_date": "2022-11-23"
+          },
+          "post_id": "1505",
+          "published_at": "2023-01-18T23:37:54+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2022-G1-11-national_mock-GYEONGGI",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [
+              "2022-11-23"
+            ],
+            "html_sha256": "362be9df127099db0fe6d8f410cb702551cc2fb10f6e889d6560d3af6cf8b2ca",
+            "observed_at": "2026-09-27T07:17:38.473796+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2022년 11월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1505"
+          },
+          "source_url": "https://legendstudy.com/1505"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-03-23",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1511"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 2,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2023-03-23"
+          },
+          "post_id": "1511",
+          "published_at": "2023-04-17T17:52:00+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G2-03-national_mock-SEOUL",
+          "resource_count": 36,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-03-23"
+            ],
+            "html_sha256": "bbd3141a8aa994baccedaa140e4cc4bb2734d66e513d036eefa9e48ba22d08b5",
+            "observed_at": "2026-09-27T07:17:40.129688+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2023년 3월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어수학/사탐/과탐",
+            "url": "https://legendstudy.com/1511"
+          },
+          "source_url": "https://legendstudy.com/1511"
+        }
+      ],
+      "gate": {
+        "checked_at": "2026-09-27T07:18:35.733710+00:00",
+        "fresh_source": "PASS",
+        "full_set": "PASS",
+        "group": 2,
+        "ids": [
+          "1502",
+          "1503",
+          "1504",
+          "1505",
+          "1511"
+        ],
+        "private_preflight": "PASS",
+        "resource_contract": "PASS"
+      },
+      "private_preflight": [
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "content_items"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 72,
+          "planned_updates": 0,
+          "potential_inserts": 72,
+          "potential_key_noops": 0,
+          "table_name": "exam_subjects"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "exams"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "ingestion_quarantine"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 151,
+          "planned_updates": 0,
+          "potential_inserts": 151,
+          "potential_key_noops": 0,
+          "table_name": "resources"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 5,
+          "planned_updates": 0,
+          "potential_inserts": 5,
+          "potential_key_noops": 0,
+          "table_name": "source_posts"
+        }
+      ],
+      "public_read": {
+        "device_pdf_open": "NOT_RUN",
+        "ordering": "published_at DESC,id DESC",
+        "posts": [
+          {
+            "detail": "PASS",
+            "id": "1474",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1593",
+            "materials_search": "PASS",
+            "resources": 1,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1527",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1478",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1447",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1432",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1453",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1492",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1493",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1645",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1541",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1542",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1557",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1560",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1626",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1642",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1519",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1521",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1522",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1518",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1491",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1575",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1613",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1701",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1480",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1481",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1494",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1497",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1499",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1502",
+            "materials_search": "PASS",
+            "resources": 53,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1503",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1504",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1505",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1511",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          }
+        ],
+        "public_active_count": 61,
+        "recent_first3": [
+          "legendstudy-1712-main",
+          "legendstudy-1711-main",
+          "legendstudy-1710-main"
+        ]
+      },
+      "publication_journal": [
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 26,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 53,
+            "source_posts": 1
+          },
+          "id": "1502",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 26,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 53,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          },
+          "id": "1503",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          },
+          "id": "1504",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1505",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          },
+          "id": "1511",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          }
+        }
+      ],
+      "resource_validation": {
+        "box_fallback": 5,
+        "box_get_metadata_pass": true,
+        "pdf_contract_pass": 144,
+        "pdf_http_signature_pass": 146,
+        "script_fallback": 2,
+        "total": 151
+      }
+    },
+    {
+      "checkpoint": {
+        "activation": "PASS",
+        "actual": {
+          "content_items": 6,
+          "exam_subjects": 58,
+          "exams": 6,
+          "ingestion_quarantine": 6,
+          "resources": 126,
+          "source_posts": 6
+        },
+        "apply": "PASS",
+        "checkpoint": "PASS",
+        "collisions": 0,
+        "detail": "PASS",
+        "duplicates": 0,
+        "exam_invariants": "PASS",
+        "full_set": "PASS",
+        "grade_exposure_cumulative": {
+          "1": 9,
+          "2": 6,
+          "3": 1
+        },
+        "group": 3,
+        "outside_scope": {
+          "content_items": [
+            51,
+            "d1144c6247e3604076b75c9b9b676506"
+          ],
+          "exam_subjects": [
+            496,
+            "c385fb8cee3000e1f9318d907179ba4b"
+          ],
+          "exams": [
+            33,
+            "2e6becc439ba2803471121d639f1aaa6"
+          ],
+          "ingestion_quarantine": [
+            54,
+            "a41e0b7ad1d70d7b75952d6142f1dbe0"
+          ],
+          "resources": [
+            1051,
+            "3d5c2043f781af80e3fe8007dbd2b1fb"
+          ],
+          "source_posts": [
+            51,
+            "67e65948a610ea809ad0589c3308f2cc"
+          ]
+        },
+        "pilot_batch1_regression": "PASS",
+        "planned": {
+          "content_items": 6,
+          "exam_subjects": 58,
+          "exams": 6,
+          "ingestion_quarantine": 6,
+          "resources": 126,
+          "source_posts": 6
+        },
+        "posts": [
+          "1512",
+          "1514",
+          "1515",
+          "1523",
+          "1524",
+          "1609"
+        ],
+        "production_active_content": 67,
+        "production_active_exams": 49,
+        "recent_ordering": "PASS",
+        "resource_duplicates": 0,
+        "resources": "PASS",
+        "search": "PASS",
+        "subjects": "PASS",
+        "unexpected_inactive": 0,
+        "unrelated_mutations": 0
+      },
+      "fresh_sources": [
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-03-23",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1512"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 1,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2023-03-23"
+          },
+          "post_id": "1512",
+          "published_at": "2023-04-17T18:29:57+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G1-03-national_mock-SEOUL",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-03-23"
+            ],
+            "html_sha256": "f832a8ccbeade6846fc5e2cd4554e95f2306f8a74f11fae329ecf925ef9063a1",
+            "observed_at": "2026-09-27T07:20:27.223191+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2023년 3월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1512"
+          },
+          "source_url": "https://legendstudy.com/1512"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-06-01",
+            "administered_month": 6,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1514"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 1,
+            "nominal_month": 6,
+            "organizer": "BUSAN",
+            "source_event_date": "2023-06-01"
+          },
+          "post_id": "1514",
+          "published_at": "2023-06-06T20:10:34+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G1-06-national_mock-BUSAN",
+          "resource_count": 13,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-06-01"
+            ],
+            "html_sha256": "88fad56feecbd91c066f94e1ae04cc07193e70c02a34b6c6208095fd733ac622",
+            "observed_at": "2026-09-27T07:20:28.537222+00:00",
+            "organizer": "BUSAN",
+            "organizer_tokens": [
+              "부산시"
+            ],
+            "title": "→ 2023년 6월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1514"
+          },
+          "source_url": "https://legendstudy.com/1514"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-06-01",
+            "administered_month": 6,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1515"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 2,
+            "nominal_month": 6,
+            "organizer": "BUSAN",
+            "source_event_date": "2023-06-01"
+          },
+          "post_id": "1515",
+          "published_at": "2023-06-06T20:31:09+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G2-06-national_mock-BUSAN",
+          "resource_count": 35,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-06-01"
+            ],
+            "html_sha256": "b738c8c3b16905b807e29a1d3c6a9841fb0db565d82891707f0ba4301e0420ff",
+            "observed_at": "2026-09-27T07:20:30.173996+00:00",
+            "organizer": "BUSAN",
+            "organizer_tokens": [
+              "부산시"
+            ],
+            "title": "→ 2023년 6월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사탐/과탐",
+            "url": "https://legendstudy.com/1515"
+          },
+          "source_url": "https://legendstudy.com/1515"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1523"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 1,
+            "nominal_month": 9,
+            "organizer": "INCHEON",
+            "source_event_date": null
+          },
+          "post_id": "1523",
+          "published_at": "2023-09-06T23:41:13+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G1-09-national_mock-INCHEON",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "2c1b8fb7f05e7004bfd6ab9ebcf6cfdadceda6fc1a6ff125aa49f49bd36c3889",
+            "observed_at": "2026-09-27T07:20:31.676374+00:00",
+            "organizer": "INCHEON",
+            "organizer_tokens": [
+              "인천시"
+            ],
+            "title": "→ 2023년 9월 고1 모의고사 기출 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1523"
+          },
+          "source_url": "https://legendstudy.com/1523"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-09-06",
+            "administered_month": 9,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2023_calendar",
+              "source:1524"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 2,
+            "nominal_month": 9,
+            "organizer": "INCHEON",
+            "source_event_date": "2023-09-06"
+          },
+          "post_id": "1524",
+          "published_at": "2023-09-07T00:10:32+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G2-09-national_mock-INCHEON",
+          "resource_count": 36,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-09-06"
+            ],
+            "html_sha256": "8141f4623d72a2b2be3ac918b9fc661b54d455a70e5c4376b6e54c7c71320768",
+            "observed_at": "2026-09-27T07:20:33.254991+00:00",
+            "organizer": "INCHEON",
+            "organizer_tokens": [
+              "인천시"
+            ],
+            "title": "→ 2023년 9월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사탐/과탐",
+            "url": "https://legendstudy.com/1524"
+          },
+          "source_url": "https://legendstudy.com/1524"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2023-12-19",
+            "administered_month": 12,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ebs_2023_late",
+              "registry:ice_2023_calendar",
+              "source:1609"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2023,
+            "grade": 1,
+            "nominal_month": 11,
+            "organizer": "GYEONGGI",
+            "source_event_date": "2023-12-19"
+          },
+          "post_id": "1609",
+          "published_at": "2023-12-20T13:33:38+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2023-G1-11-national_mock-GYEONGGI",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [
+              "2023-12-19"
+            ],
+            "html_sha256": "622ee71d271b38ff0dbe3eea3030260b95d5576a344657d413debefe56803c44",
+            "observed_at": "2026-09-27T07:20:34.550879+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ [2023년 12월 시행] 2023학년도 11월 고1 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1609"
+          },
+          "source_url": "https://legendstudy.com/1609"
+        }
+      ],
+      "gate": {
+        "checked_at": "2026-09-27T07:21:25.045704+00:00",
+        "fresh_source": "PASS",
+        "full_set": "PASS",
+        "group": 3,
+        "ids": [
+          "1512",
+          "1514",
+          "1515",
+          "1523",
+          "1524",
+          "1609"
+        ],
+        "private_preflight": "PASS",
+        "resource_contract": "PASS"
+      },
+      "private_preflight": [
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "content_items"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 58,
+          "planned_updates": 0,
+          "potential_inserts": 58,
+          "potential_key_noops": 0,
+          "table_name": "exam_subjects"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "exams"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "ingestion_quarantine"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 126,
+          "planned_updates": 0,
+          "potential_inserts": 126,
+          "potential_key_noops": 0,
+          "table_name": "resources"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "source_posts"
+        }
+      ],
+      "public_read": {
+        "device_pdf_open": "NOT_RUN",
+        "ordering": "published_at DESC,id DESC",
+        "posts": [
+          {
+            "detail": "PASS",
+            "id": "1474",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1593",
+            "materials_search": "PASS",
+            "resources": 1,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1527",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1478",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1447",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1432",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1453",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1492",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1493",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1645",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1541",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1542",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1557",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1560",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1626",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1642",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1519",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1521",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1522",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1518",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1491",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1575",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1613",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1701",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1480",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1481",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1494",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1497",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1499",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1502",
+            "materials_search": "PASS",
+            "resources": 53,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1503",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1504",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1505",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1511",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1512",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1514",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1515",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1523",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1524",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1609",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          }
+        ],
+        "public_active_count": 67,
+        "recent_first3": [
+          "legendstudy-1712-main",
+          "legendstudy-1711-main",
+          "legendstudy-1710-main"
+        ]
+      },
+      "publication_journal": [
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1512",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          },
+          "id": "1514",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          },
+          "id": "1515",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 35,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1523",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          },
+          "id": "1524",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1609",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        }
+      ],
+      "resource_validation": {
+        "box_fallback": 6,
+        "box_get_metadata_pass": true,
+        "pdf_contract_pass": 116,
+        "pdf_http_signature_pass": 120,
+        "script_fallback": 4,
+        "total": 126
+      }
+    },
+    {
+      "checkpoint": {
+        "activation": "PASS",
+        "actual": {
+          "content_items": 6,
+          "exam_subjects": 58,
+          "exams": 6,
+          "ingestion_quarantine": 6,
+          "resources": 127,
+          "source_posts": 6
+        },
+        "apply": "PASS",
+        "checkpoint": "PASS",
+        "collisions": 0,
+        "detail": "PASS",
+        "duplicates": 0,
+        "exam_invariants": "PASS",
+        "full_set": "PASS",
+        "grade_exposure_cumulative": {
+          "1": 13,
+          "2": 8,
+          "3": 1
+        },
+        "group": 4,
+        "outside_scope": {
+          "content_items": [
+            51,
+            "d1144c6247e3604076b75c9b9b676506"
+          ],
+          "exam_subjects": [
+            496,
+            "c385fb8cee3000e1f9318d907179ba4b"
+          ],
+          "exams": [
+            33,
+            "2e6becc439ba2803471121d639f1aaa6"
+          ],
+          "ingestion_quarantine": [
+            54,
+            "a41e0b7ad1d70d7b75952d6142f1dbe0"
+          ],
+          "resources": [
+            1051,
+            "3d5c2043f781af80e3fe8007dbd2b1fb"
+          ],
+          "source_posts": [
+            51,
+            "67e65948a610ea809ad0589c3308f2cc"
+          ]
+        },
+        "pilot_batch1_regression": "PASS",
+        "planned": {
+          "content_items": 6,
+          "exam_subjects": 58,
+          "exams": 6,
+          "ingestion_quarantine": 6,
+          "resources": 127,
+          "source_posts": 6
+        },
+        "posts": [
+          "1615",
+          "1616",
+          "1619",
+          "1620",
+          "1636",
+          "1648"
+        ],
+        "production_active_content": 73,
+        "production_active_exams": 55,
+        "recent_ordering": "PASS",
+        "resource_duplicates": 0,
+        "resources": "PASS",
+        "search": "PASS",
+        "subjects": "PASS",
+        "unexpected_inactive": 0,
+        "unrelated_mutations": 0
+      },
+      "fresh_sources": [
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2024-03-28",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1615"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 2,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2024-03-28"
+          },
+          "post_id": "1615",
+          "published_at": "2024-03-28T23:04:10+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G2-03-national_mock-SEOUL",
+          "resource_count": 36,
+          "source_evidence": {
+            "date_assertions": [
+              "2024-03-28"
+            ],
+            "html_sha256": "d230f4251e0b074e46a5034ebdedeeccd6c9ade71a966dd97d396cee0c2c5877",
+            "observed_at": "2026-09-27T07:23:06.392948+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→2024년 3월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 : 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1615"
+          },
+          "source_url": "https://legendstudy.com/1615"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2024-03-28",
+            "administered_month": 3,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1616"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 1,
+            "nominal_month": 3,
+            "organizer": "SEOUL",
+            "source_event_date": "2024-03-28"
+          },
+          "post_id": "1616",
+          "published_at": "2024-03-28T23:30:15+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G1-03-national_mock-SEOUL",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [
+              "2024-03-28"
+            ],
+            "html_sha256": "35ba8ef726a121ed19f3de313c59fde95cec1fffa8e5dbdaf2fc0366370d0d16",
+            "observed_at": "2026-09-27T07:23:07.700926+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2024년 3월 고1 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기파일 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1616"
+          },
+          "source_url": "https://legendstudy.com/1616"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1619"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 2,
+            "nominal_month": 6,
+            "organizer": "BUSAN",
+            "source_event_date": null
+          },
+          "post_id": "1619",
+          "published_at": "2024-06-15T18:51:46+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G2-06-national_mock-BUSAN",
+          "resource_count": 36,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "87932e878ae0d147940ec6036d211365ae5916905068d93dd68bdcc7c299cfa7",
+            "observed_at": "2026-09-27T07:23:09.359145+00:00",
+            "organizer": "BUSAN",
+            "organizer_tokens": [
+              "부산시"
+            ],
+            "title": "→ 2024년 6월 고2 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기 - 국어/영어/수학/한국사/사탐/과탐",
+            "url": "https://legendstudy.com/1619"
+          },
+          "source_url": "https://legendstudy.com/1619"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1620"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 1,
+            "nominal_month": 6,
+            "organizer": "BUSAN",
+            "source_event_date": null
+          },
+          "post_id": "1620",
+          "published_at": "2024-06-15T20:07:45+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G1-06-national_mock-BUSAN",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "2c72bdce563d9a507e40a353c32302193952b496bab66176e5e247aab153535b",
+            "observed_at": "2026-09-27T07:23:10.849481+00:00",
+            "organizer": "BUSAN",
+            "organizer_tokens": [
+              "부산시"
+            ],
+            "title": "→ 2024년 6월 고1 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기파일 - 국어/영어/수학/사회/과학",
+            "url": "https://legendstudy.com/1620"
+          },
+          "source_url": "https://legendstudy.com/1620"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": "2024-09-04",
+            "administered_month": 9,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1636"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 1,
+            "nominal_month": 9,
+            "organizer": "INCHEON",
+            "source_event_date": "2024-09-04"
+          },
+          "post_id": "1636",
+          "published_at": "2024-09-08T01:24:52+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G1-09-national_mock-INCHEON",
+          "resource_count": 13,
+          "source_evidence": {
+            "date_assertions": [
+              "2024-09-04"
+            ],
+            "html_sha256": "01b8beb3beb17bcecb47aa760cccf6381248dccf86a4db2da1d295f0801971e8",
+            "observed_at": "2026-09-27T07:23:12.228091+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2024년 9월 고1 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기파일 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1636"
+          },
+          "source_url": "https://legendstudy.com/1636"
+        },
+        {
+          "canonical_plan_drift": [],
+          "classification": "FULL_SET",
+          "identity": {
+            "academic_year": null,
+            "administered_date": null,
+            "administered_month": null,
+            "calendar_conflict": false,
+            "confidence": "high",
+            "event_kind": "exam",
+            "evidence": [
+              "registry:ice_2024_calendar",
+              "source:1648"
+            ],
+            "exam_family": "national_mock",
+            "exam_year": 2024,
+            "grade": 1,
+            "nominal_month": 10,
+            "organizer": "GYEONGGI",
+            "source_event_date": null
+          },
+          "post_id": "1648",
+          "published_at": "2024-11-07T00:20:17+09:00",
+          "reasons": [
+            "expected_coverage_satisfied"
+          ],
+          "registry_entry": "2024-G1-10-national_mock-GYEONGGI",
+          "resource_count": 14,
+          "source_evidence": {
+            "date_assertions": [],
+            "html_sha256": "6a5b9f1d30bf5895ff71b3b1435a5485dbb8ae1339a91b2503144b8daf577a7b",
+            "observed_at": "2026-09-27T07:23:13.786964+00:00",
+            "organizer": null,
+            "organizer_tokens": [],
+            "title": "→ 2024년 10월 고1 모의고사 기출 - 문제, 답, 해설, 등급컷, 영어듣기파일 - 국어/영어/수학/한국사/사회/과학",
+            "url": "https://legendstudy.com/1648"
+          },
+          "source_url": "https://legendstudy.com/1648"
+        }
+      ],
+      "gate": {
+        "checked_at": "2026-09-27T07:24:06.689126+00:00",
+        "fresh_source": "PASS",
+        "full_set": "PASS",
+        "group": 4,
+        "ids": [
+          "1615",
+          "1616",
+          "1619",
+          "1620",
+          "1636",
+          "1648"
+        ],
+        "private_preflight": "PASS",
+        "resource_contract": "PASS"
+      },
+      "private_preflight": [
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "content_items"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 58,
+          "planned_updates": 0,
+          "potential_inserts": 58,
+          "potential_key_noops": 0,
+          "table_name": "exam_subjects"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "exams"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "ingestion_quarantine"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 127,
+          "planned_updates": 0,
+          "potential_inserts": 127,
+          "potential_key_noops": 0,
+          "table_name": "resources"
+        },
+        {
+          "collisions": 0,
+          "existing_active": 0,
+          "existing_inactive": 0,
+          "planned_rows": 6,
+          "planned_updates": 0,
+          "potential_inserts": 6,
+          "potential_key_noops": 0,
+          "table_name": "source_posts"
+        }
+      ],
+      "public_read": {
+        "device_pdf_open": "NOT_RUN",
+        "ordering": "published_at DESC,id DESC",
+        "posts": [
+          {
+            "detail": "PASS",
+            "id": "1474",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1593",
+            "materials_search": "PASS",
+            "resources": 1,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1527",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1478",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1447",
+            "materials_search": "PASS",
+            "resources": 10,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1432",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1453",
+            "materials_search": "PASS",
+            "resources": 46,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1492",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1493",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1645",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1541",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1542",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1557",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1560",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1626",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1642",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1519",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1521",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1522",
+            "materials_search": "PASS",
+            "resources": 2,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1518",
+            "materials_search": "PASS",
+            "resources": 3,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1491",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1575",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1613",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1701",
+            "materials_search": "PASS",
+            "resources": 0,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1480",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1481",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1494",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1497",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1499",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1502",
+            "materials_search": "PASS",
+            "resources": 53,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1503",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1504",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1505",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1511",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1512",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1514",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1515",
+            "materials_search": "PASS",
+            "resources": 35,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1523",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1524",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1609",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1615",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1616",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1619",
+            "materials_search": "PASS",
+            "resources": 36,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1620",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1636",
+            "materials_search": "PASS",
+            "resources": 13,
+            "url_contract": "PASS"
+          },
+          {
+            "detail": "PASS",
+            "id": "1648",
+            "materials_search": "PASS",
+            "resources": 14,
+            "url_contract": "PASS"
+          }
+        ],
+        "public_active_count": 73,
+        "recent_first3": [
+          "legendstudy-1712-main",
+          "legendstudy-1711-main",
+          "legendstudy-1710-main"
+        ]
+      },
+      "publication_journal": [
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          },
+          "id": "1615",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1616",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          },
+          "id": "1619",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 17,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 36,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1620",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          },
+          "id": "1636",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 13,
+            "source_posts": 1
+          }
+        },
+        {
+          "activation": "published",
+          "exact_postflight": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          },
+          "id": "1648",
+          "inserted": {
+            "content_items": 1,
+            "exam_subjects": 6,
+            "exams": 1,
+            "ingestion_quarantine": 1,
+            "resources": 14,
+            "source_posts": 1
+          }
+        }
+      ],
+      "resource_validation": {
+        "box_fallback": 6,
+        "box_get_metadata_pass": true,
+        "pdf_contract_pass": 116,
+        "pdf_http_signature_pass": 121,
+        "script_fallback": 5,
+        "total": 127
+      }
+    }
+  ],
+  "inserted": {
+    "content_items": 22,
+    "exam_subjects": 240,
+    "exams": 22,
+    "ingestion_quarantine": 22,
+    "resources": 515,
+    "source_posts": 22
+  },
+  "new_active_content": 22,
+  "new_active_exams": 22,
+  "production_active_content": 73,
+  "production_active_exams": 55,
+  "protected": {
+    "1447_1404": "UNCHANGED",
+    "1474_1431": "UNCHANGED",
+    "1710_A1": "PENDING",
+    "accepted_state_changed": false,
+    "busan1593": "SEPARATE_FOLLOWUP",
+    "identity52": "HOLD",
+    "review35": "HOLD"
+  },
+  "registry_changed": false,
+  "resolver_changed": false,
+  "schema_changed": false,
+  "scope": "Owner-approved Phase3 FULL_SET22; sequential four groups",
+  "starting_head": "6ec893d",
+  "tests": {
+    "device_spot_check": "PENDING",
+    "flutter": "NOT_RUN: no code change",
+    "native_postgresql_not_run": 25,
+    "python_available": 384,
+    "resolver_contract": 37
+  },
+  "total_rows": 843,
+  "unrelated_canonical_mutations": 0
+}

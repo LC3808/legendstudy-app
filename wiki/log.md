@@ -1,5 +1,17 @@
 # Development Log
 
+## 2026-09-27 — Phase3 FULL_SET22 Production publication
+
+- [Four-group closeout](exam-full-set-publication-2026-09-27.md): planned=actual
+  183/243/208/209 rows;843 total. Each group fresh FULL_SET/resource/private gate,
+  apply/activation and exact/public checkpoint PASS before the next group.
+- Active73 content/55 exams; new G1:13/G2:8/G3:1. Existing24, recent ordering and
+  outside-scope canonical digests preserved; duplicates/collisions0. Script13/Box22
+  fallback explicitly accepted; no resolver/schema/classifier/App code changes.
+- Python384/resolver37 PASS; native PostgreSQL25 NOT_RUN. REVIEW35/identity52 HOLD,
+  replacement pairs/1710/accepted-state/Owner files preserved. Remaining171.
+- NEXT Owner device spot-check; no further publication authorized.
+
 ## 2026-09-27 — Exam FULL_SET publication preflight (no writes)
 
 - [Fresh22 + private preflight](exam-full-set-publication-preflight-2026-09-27.md):

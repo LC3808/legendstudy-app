@@ -67,7 +67,7 @@ Feedback/admin/email-worker prior Production acceptance: [operations](day-11-acc
 Owner reports resolver quota migration20260925000100 applied/runtime PASS:
 RLS/grants/definer/search_path, calls1–12/13 limit, resource isolation, minute reset.
 [Exact evidence and scope](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25).
-No agent DB/Storage mutation, migration application or function deployment.
+Schema/Storage entries above are Owner-applied; Materials publication is below.
 
 ## Daily Sync status
 
@@ -89,13 +89,14 @@ checks and0 exceptions; not an exhaustive reread of those895.
 Writer/parser extension IMPLEMENTED / TESTED. Frozen identity-review52 unchanged.
 Pilot1474/1593/1527/1478 (31 rows): MATERIALS_WAVE1_PILOT_OWNER_DEVICE: PASS;
 iPhone detail/grouping/PDF direct-open PASS, cycle CLOSED.
-Owner-approved Batch #1 exact20: Production apply/activation PASS,283 inserts
-(source20/content20/exam5/occurrence60/resource157/quarantine21). Live source and
-private preflight PASS; canonical exact/guest search/detail/resources and Pilot
-regression PASS; unrelated canonical changes0. Active51, recent1712→1711→1710.
-229 tests PASS. Remaining193 (exam57/essay127/study9/column0); next batch neither
-selected nor authorized. Accepted26 unchanged;1710 A1 remains pending.
-[Batch #1 closeout](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).
+Batch #1 exact20 (+283 rows) remains verified; [historical closeout](materials-data-rollout.md#wave1-bounded-batch-1-production-closeout--2026-09-27).
+[Phase3 FULL_SET22 publication](exam-full-set-publication-2026-09-27.md): four groups
+apply/activation/checkpoints PASS; +843 rows (source22/content22/exam22/subjects240/
+resources515/advisory22). Active73 content/55 exams; public search/detail/grade/resource
+and existing24 regression PASS.
+Remaining171: exam35 REVIEW, essay127, study9. Identity52 HOLD; accepted26 unchanged,
+1710 A1 pending. Owner device spot-check pending;
+no further publication or replacements authorized.
 Separate [Home school-setting error](day-7-neis.md#home-school-setting-error--2026-09-27):
 Owner logged-in device issue; Materials regression unestablished, no fix attempted.
 
@@ -130,10 +131,8 @@ removed, guidebook display fixed; signed other-PDF resolver gap remains.
 Materials Recent Updates queries all active content by original
 `published_at DESC`, then stable `id DESC`; full timestamp retained. Owner device
 order PASS and fresh public Production read agree.1710 is already published;
-do not reapply it. Pilot/Batch #1 verified. Remaining193; exam57 offline
-[22 FULL_SET preflight](exam-full-set-publication-preflight-2026-09-27.md) PASS;
-843 inserts,0 collisions. No publication. REVIEW35/52 HOLD,
-replacements/1710 A1 pending; Owner gate.
+do not reapply it. [FULL_SET22 publication](exam-full-set-publication-2026-09-27.md)
+COMPLETE; Owner device spot-check pending. REVIEW35/52 HOLD; replacements/1710 A1 pending.
 
 Materials PDF retains Owner device PASS. UI badge/MY density micro-polish remains
 deferred per [EOD closeout](eod-2026-09-25.md). Next data priority is Wave1 review/implementation → controlled publication →

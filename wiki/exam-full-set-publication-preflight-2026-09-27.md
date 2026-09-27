@@ -1,6 +1,8 @@
 # Exam FULL_SET Phase3 publication preflight — 2026-09-27
 
-Status: **PASS; Owner/ChatGPT publication approval required. No Production writes.**
+Status: **Historical preflight PASS.** Subsequent Owner approval and
+[Production publication closeout](exam-full-set-publication-2026-09-27.md) supersede
+the pending gate below; this document preserves the original read-only result.
 
 Starting HEAD `82fac2d`; branch `codex/day-7-school-neis`, local/origin matched.
 Exactly the22 Phase3 FULL_SET candidates were freshly read. All22 remain FULL_SET;
