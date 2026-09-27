@@ -11,7 +11,8 @@ from pglast.stream import RawStream
 from essay_lab.evidence_preview import ROLES, evidence_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
-DRAFT = ROOT / 'supabase/review/essay_lab/001_foundation.draft.sql'
+REVIEW = ROOT / 'supabase/review/essay_lab'
+DRAFT = ROOT / 'supabase/migrations/20260927000200_essay_lab_foundation.sql'
 FIXTURE = json.loads((ROOT / 'tool/essay_lab/pilot_2025_inspection.json').read_text())
 NEW_TABLES = {'universities', 'essay_exams', 'essay_exam_resources'}
 
@@ -41,7 +42,10 @@ class DraftReview(unittest.TestCase):
     def test_no_live_name_collision(self):
         self.assertFalse(NEW_TABLES & {r['table'] for r in FIXTURE['existing_public_tables']})
         for p in (ROOT / 'supabase/migrations').glob('*.sql'):
-            self.assertNotIn('create table public.essay_exams', p.read_text().lower())
+            if p != DRAFT:
+                for x in parse_sql(p.read_text()):
+                    if isinstance(x.stmt, ast.CreateStmt):
+                        self.assertNotIn(x.stmt.relation.relname, NEW_TABLES)
 
     def test_replay_static_guards(self):
         for s in self.stmts:
@@ -65,15 +69,32 @@ class DraftReview(unittest.TestCase):
         self.assertCountEqual(targets, ['universities', 'resources', 'essay_exams', 'resources'])
 
     def test_multi_role_identity(self):
+        for table in ['universities', 'essay_exams']:
+            col = next(c for c in self.tables[table].tableElts if isinstance(c, ast.ColumnDef) and c.colname == 'id')
+            self.assertEqual(col.typeName.names[-1].sval, 'uuid')
+            self.assertTrue(any(c.contype == enums.ConstrType.CONSTR_PRIMARY for c in col.constraints))
         pk = [c for c in self.constraints('essay_exam_resources') if c.contype == enums.ConstrType.CONSTR_PRIMARY]
         self.assertEqual([x.sval for x in pk[0].keys], ['essay_exam_id', 'resource_id', 'role'])
         unique = [c for c in self.constraints('essay_exams') if c.contype == enums.ConstrType.CONSTR_UNIQUE]
         self.assertEqual([x.sval for x in unique[0].keys], ['university_id', 'admission_year', 'exam_key'])
-        index = next(s for s in self.stmts if isinstance(s, ast.IndexStmt) and s.idxname == 'essay_exams_verified_context')
-        self.assertTrue(index.unique and index.nulls_not_distinct)
-        self.assertEqual(RawStream()(index.whereClause), "verification_status = 'verified'")
-        self.assertIn('session_label', [p.name for p in index.indexParams])
-        self.assertIn('exam_kind', [p.name for p in index.indexParams])
+        self.assertFalse(any(isinstance(s, ast.IndexStmt) and s.unique for s in self.stmts))
+        self.assertFalse(any(c.contype == enums.ConstrType.CONSTR_UNIQUE
+                             and any(k.sval in {'campus', 'admission_track', 'field_or_division', 'session_label'} for k in c.keys)
+                             for c in self.constraints('essay_exams')))
+
+    def test_finalized_copy_and_question_locator(self):
+        final_copy = (REVIEW / '001_foundation.draft.sql').read_text()
+        self.assertEqual(final_copy[final_copy.index('begin;'):], DRAFT.read_text()[DRAFT.read_text().index('begin;'):])
+        cols = {c.colname: c for c in self.tables['essay_exam_resources'].tableElts if isinstance(c, ast.ColumnDef)}
+        self.assertEqual(cols['source_locator'].typeName.names[-1].sval, 'text')
+        self.assertIn('question 2(a)', DRAFT.read_text())
+        self.assertEqual(set(self.tables), NEW_TABLES)
+
+    def test_owner_validation_is_read_only(self):
+        for name in ['preflight.sql', 'validate.sql']:
+            stmts = [x.stmt for x in parse_sql((REVIEW / name).read_text())]
+            self.assertTrue(all(isinstance(s, (ast.SelectStmt, ast.TransactionStmt)) for s in stmts))
+            self.assertEqual(stmts[-1].kind, enums.TransactionStmtKind.TRANS_STMT_ROLLBACK)
 
     def test_verification_is_fail_closed(self):
         for table in ['essay_exams', 'essay_exam_resources']:
@@ -111,7 +132,7 @@ class DraftReview(unittest.TestCase):
                 self.assertEqual(roles, {'service_role'})
 
     def test_lookup_is_select_with_official_and_parent_guards(self):
-        statements = parse_sql((DRAFT.parent / 'evidence_lookup.sql').read_text())
+        statements = parse_sql((REVIEW / 'evidence_lookup.sql').read_text())
         self.assertEqual(len(statements), 1)
         self.assertIsInstance(statements[0].stmt, ast.SelectStmt)
         sql = RawStream()(statements[0].stmt)

@@ -1,6 +1,6 @@
 # Essay LAB Data Foundation v1 — 2025 Pilot
 
-Status: **SCHEMA REVIEW PACKAGE / DRAFT ONLY / NOT APPLIED**, 2026-09-27.
+Status: **OWNER SCHEMA APPROVED / MIGRATION PREPARED / NOT APPLIED**, 2026-09-27.
 Owner's new explicit instruction opens this design task. Materials device QA remains
 pending; this is not a claim that Materials is CLOSED. P0 Essay LAB precedes score
 analytics. No Materials audit, UI, AI grading, Production migration or seed here.
@@ -129,8 +129,8 @@ master, analysis taxonomy or admission-results schema now.
 
 | New table | Purpose and key columns | Integrity / relationships |
 |---|---|---|
-| `universities` | UUID `id`, stable unique `slug`, `name`, inactive default, timestamps | Shared future FK for interests, MY, LAB, admissions. `pnu`/`knu` preserve existing LAB vocabulary; Web IDs require explicit mapping, not a new account model |
-| `essay_exams` | University FK, `admission_year`, stable `exam_key`, name, kind, nullable campus/track/field/session; nullable date/duration/question_count/answer_length_text/exam_format | UNIQUE university/year/key; reviewed-context unique index; UUID independent of source content; DELETE RESTRICT |
+| `universities` | UUID `id`, stable unique `slug`, `name`, inactive default, timestamps | Platform-wide FK for Onboarding/MY/LAB/모집요강/입결/School/Analytics. `pnu`/`knu` preserve existing LAB vocabulary; Web IDs require explicit mapping, not a new account model |
+| `essay_exams` | University FK, `admission_year`, stable `exam_key`, name, kind, nullable campus/track/field/session; nullable date/duration/question_count/answer_length_text/exam_format | UUID PK + UNIQUE university/year/key; context metadata is non-unique; UUID independent of source content; DELETE RESTRICT |
 | `essay_exam_resources` | Exam FK, existing resource FK, role, origin, review status, citation locator, official source URL, evidence note, timestamps/active | PK `(essay_exam_id, resource_id, role)` permits multi-role and many files per role; same resource may link to multiple exams/years |
 
 **Existing-table columns added: 0.** Resource binary duplication: NO. No new
@@ -140,14 +140,17 @@ joins content, backend provenance may additionally join private source_posts.
 
 ### Identity contract
 
-Reviewed natural identity:
-`university + admission_year + campus + admission_track + exam_kind + field + session`.
-Exact official names are reconciled before verification. In a verified row, NULL
-context means positively reviewed not-applicable/shared, not an unresolved label.
-A PostgreSQL `NULLS NOT DISTINCT` partial unique index prevents duplicate verified
-contexts. `exam_key` is assigned once after reconciliation and never regenerated
-from a filename, source post ID, title or array position. Draft unknowns can stay
-review rows; they must not be activated or merged by similarity.
+Owner/ChatGPT review decision: **UUID PK + UNIQUE
+(university_id, admission_year, exam_key)** is the canonical identity contract.
+The earlier draft's `essay_exams_verified_context` partial UNIQUE index has been
+removed before any deployment. Campus/track/field/session (and exam kind) are
+context metadata, not additional uniqueness constraints. The same context labels
+may describe distinct exams with different stable keys. NULL context remains
+unknown/not supplied; it is not coerced to a reviewed shared identity.
+
+`exam_key` is assigned once after exam identity reconciliation, never regenerated
+from a filename, source post ID, title or array position. Context corrections do
+not change the UUID/key. Similar context is a review signal, never a merge command.
 
 `exam_kind = admission / mock / other` is needed by actual Yonsei/SKKU/KNU files.
 Session is separate from field (e.g. natural main vs additional; humanities1/2).
@@ -187,8 +190,12 @@ Resource roles:
 `example_answer`, `high_scoring_answer`, `explanation`, `guidebook`, `other`.
 Generic 답안 remains `other`/review until its subtype is established. A combined
 PDF has multiple mapping rows to the **same UUID**, not a forced split or copy.
-A per-role `source_locator` can describe several page ranges/sections; verify the
-range for each exam/year when reusing a guide. No new page/extraction table.
+A per-role `source_locator text` already supports page/section/question references,
+e.g. `PDF pp. 3-4; section II; question 2(a), passage B`, or multiple disjoint
+references in the same role row. Verify each exam/year scope when reusing a guide.
+No new column or Question entity is needed now. This is an inspectable citation,
+not a machine-addressable Question PK or automatic question retrieval contract;
+future Question mapping can reuse the resource/locator without duplicating PDFs.
 
 All new tables contain **public metadata/citations only**. Do not put PDF body,
 private Gold rubrics, prompts, reviewer personal information or credentials into
@@ -199,10 +206,11 @@ existing resource IDs; no legal decision or blanket rights flag is invented now.
 
 ## RLS, SQL and deterministic evidence
 
-[Draft SQL](../supabase/review/essay_lab/001_foundation.draft.sql) is deliberately
-outside `supabase/migrations`. **DRAFT_ONLY / NOT_APPLIED**. It creates only the
-three proposed tables/indexes/policies/clock triggers; no seed, backfill, existing
-ALTER, data UPDATE/DELETE, function replacement or source mutation.
+[Formal migration](../supabase/migrations/20260927000200_essay_lab_foundation.sql)
+is **PREPARED / NOT APPLIED**. The [finalized review copy](../supabase/review/essay_lab/001_foundation.draft.sql)
+has an identical SQL body; execute the formal migration only, never both copies.
+Only the approved three tables/indexes/policies/clock triggers are created. No seed,
+backfill, existing-table ALTER, data UPDATE/DELETE or source mutation.
 
 - Public/anon/authenticated: SELECT only. Active university → verified active
   exam → verified active mapping → existing visible resource. Existing resource
@@ -213,8 +221,8 @@ ALTER, data UPDATE/DELETE, function replacement or source mutation.
   tables; clock triggers CREATE OR REPLACE. Replay of an identical definition is
   intended; this does **not** repair drift. Before promotion/replay compare actual
   definitions and unexpected policies/grants, abort on mismatch. Runtime replay
-  has not been executed. Approval-time migration timestamp follows latest applied
-  history (repository latest is `20260927000100`); do not assign/run one now.
+  has not been executed. New migration `20260927000200` follows repository
+  `20260927000100`; file presence is not Production deployment evidence.
 
 [Read-only lookup](../supabase/review/essay_lab/evidence_lookup.sql) selects mappings
 for `$1 = essay_exam_id`, official + verified + active only, with visible parents.
@@ -246,7 +254,11 @@ work. No claim that AI can grade from the current package.
 | Multi-year PDF / guide spans several exams | Reuse same UUID across year-specific exam IDs with scoped locators. No multi-year 2025 guide verified here |
 | Missing document / unknown role | Exam stays review or lacks that mapping; other/review retains uncertain evidence. Do not invent resources |
 
-University UUID is ready for future Onboarding/MY interests and admissions joins;
+The table name is **public.universities**, a LegendStudy platform-wide canonical
+university master, never Essay-specific. Onboarding/MY/LAB/모집요강/입결/School/Analytics
+will use this same university_id; no duplicate department-specific university master.
+School integration here does not replace the existing NEIS secondary-school identity.
+University UUID is ready for future shared FK joins;
 no current profile or UI modification. Department/track masters, 모집요강/입결
 structure and user submissions/feedback/revisions remain future separately reviewed
 work. The FK anchor is ready; those features are **not implemented**.
@@ -280,10 +292,9 @@ secret-shaped token scan PASS on9 scoped files. Owner iOS and accepted-state
 SHA256 values match the precheck. These checks do not assert exhaustive secret
 detection or native PostgreSQL runtime behavior.
 
-**SCHEMA_READY_FOR_OWNER_REVIEW: YES.** No fourth table justified by current data.
-Before apply: Owner/ChatGPT review this minimal identity/provenance/RLS contract;
-then approve a separately numbered migration and local/Supabase execution checks.
-No migration apply or data seed in this task. Before actual mapping, obtain missing
+**SCHEMA_REVIEW: APPROVED.** Owner corrections are finalized in the formal migration.
+No fourth table, Pilot seed, Question entity or AI implementation.
+No Production apply in this task; Owner execution is the next separate step. Before actual mapping, obtain missing
 2025 Chung-Ang/Pusan paper sources and KNU regular paper if regular coverage is
 required; reuse Manus assets rather than repeating the 42-university research.
 Confirm exact campus/track/session labels and whether shared exam contexts need
@@ -300,4 +311,45 @@ PRODUCTION_MUTATION:NO · MIGRATION_APPLIED:NO · PRODUCTION_SEED:NO ·
 RESOURCE_BINARY_DUPLICATION:NO · USER_SUBMISSIONS/FEEDBACK/PAYMENT_TABLES:NO.
 Accepted-state/1710, Materials, onboarding, Owner files and LAB repo preserved.
 
-**NEXT: Owner/ChatGPT canonical schema review. STOP.**
+**NEXT: Owner Production-apply gate. STOP before execution.**
+
+
+## Owner application package — approved schema, execution pending
+
+All three requested checks are complete:
+
+1. `public.universities` is the platform master; naming unchanged, scope explicit.
+2. Removed context UNIQUE; UUID PK + university/year/stable-key UNIQUE retained.
+3. Existing text locator supports page/section/question citations; no extra schema.
+
+Owner execution order, **only when choosing to apply**:
+
+1. Open the LegendStudy project `stlhijzpjfgwwdgunlsd` SQL Editor. Do not use another
+   project or run blanket `supabase db push` for this package.
+2. Run [preflight.sql](../supabase/review/essay_lab/preflight.sql). Expected new-table
+   names NULL, UUID resources PK and clock function present, all3 roles present,
+   service_role BYPASSRLS true. If any target already exists, STOP and compare
+   definitions; IF NOT EXISTS is not safe reconciliation of an older draft.
+3. Run the **entire** [20260927000200 migration](../supabase/migrations/20260927000200_essay_lab_foundation.sql)
+   once, including BEGIN/COMMIT. No seed follows it. SQL Editor application and CLI
+   migration history are distinct; record actual execution before any later CLI sync.
+4. Run [validate.sql](../supabase/review/essay_lab/validate.sql). Expected:3 RLS-enabled
+   tables, all row counts0;4 RESTRICT FKs; university slug + exam stable-key uniqueness;
+   mapping composite PK; context unique indexes0;3 public SELECT policies; public
+   write privileges false; service CRUD true;3 clock triggers; locator TEXT.
+5. Return preflight/apply/validation results. Catalog/grant checks do not establish
+   real JWT row-isolation behavior. Runtime fixtures/seed remain a separate gate.
+
+Failure/rollback: the migration is one transaction; on error ROLLBACK the failed
+transaction and report the error. After a successful commit, retain the empty
+inactive tables if validation fails and STOP; do not DROP tables, delete source
+rows or seed to mask failures. Any post-commit correction gets a reviewed forward
+migration. No destructive rollback script is included.
+
+Promotion checks:19 focused tests PASS (including finalized-copy equality,
+context-uniqueness exclusion, text locator and read-only validation SQL). Existing
+schema/Study16 regression tests PASS. SQL has been parsed only, not executed.
+Production apply, seed and runtime RLS/replay validation: **NOT_RUN**.
+
+Promotion live READ ONLY check: all3 target relations remain absent; existing
+resources/clock prerequisite present. No DDL, INSERT, UPDATE or DELETE executed.

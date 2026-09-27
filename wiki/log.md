@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-27 — Owner-approved Essay schema migration promotion
+
+- [Foundation](essay-lab-data-foundation.md#owner-application-package--approved-schema-execution-pending):
+  platform-wide universities; removed context UNIQUE, retained UUID/stable-key identity.
+- Existing text locator supports page/section/question citations; no new entity/column.
+- Migration20260927000200 PREPARED/NOT APPLIED; Owner preflight/validation SQL ready.
+- Focused19 + existing schema/Study16 tests PASS; no Production apply/seed/UI/AI.
+  Owner iOS/accepted-state preserved; STOP before Production execution.
+
 ## 2026-09-27 — Essay LAB 2025 Pilot schema review package
 
 - [Foundation](essay-lab-data-foundation.md): 3 new tables proposed, existing

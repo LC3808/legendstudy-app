@@ -506,3 +506,16 @@ Essay LAB → internal-grade → mock-score → admissions. Shared university/fi
 canonical data precedes onboarding extensions; three free feedback experiences,
 official-vs-AI provenance, minimal personal-data collection and later B2B remain
 product directions. [Full handoff](materials-closeout-essay-lab-handoff.md).
+
+
+## 2026-09-27 — Platform university identity and minimal Essay exam keys
+
+Owner/ChatGPT schema review approves three canonical tables;
+[foundation and application gate](essay-lab-data-foundation.md) own implementation status.
+`public.universities` is the LegendStudy platform master shared by Onboarding, MY,
+LAB, 모집요강, 입결, School and Analytics, not an Essay-only master.
+Essay identity uses UUID PK + UNIQUE(university_id, admission_year, exam_key).
+Campus/track/field/session are context metadata until real Pilot evidence justifies
+stronger constraints. Existing source_locator text can cite page/section/question;
+no Question entity now. Approval permits migration preparation, not Production apply
+or Pilot seed. Existing resources, multi-role mappings and provenance are preserved.

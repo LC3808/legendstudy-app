@@ -1,6 +1,7 @@
--- FINALIZED REVIEW COPY / NOT APPLIED.
--- Canonical executable artifact: ../../migrations/20260927000200_essay_lab_foundation.sql
--- SQL body must stay identical to that migration; do not apply both copies.
+-- Owner-reviewed platform university master + Essay canonical foundation.
+-- PREPARED / NOT APPLIED. Production execution remains Owner-gated.
+-- PostgreSQL17; public.resources and public.set_updated_at() required.
+-- No seed/backfill. Replay guards are not schema drift repair; run preflight first.
 begin;
 
 -- Platform-wide canonical university master, shared by Onboarding/MY/LAB,
