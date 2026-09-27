@@ -1,0 +1,235 @@
+{
+  "ai_generated_items": 0,
+  "characters_by_question": {
+    "문제 1": 11400,
+    "문제 2": 11900,
+    "문제 3": 11944
+  },
+  "derived_content_items": 0,
+  "derived_question_structures": 3,
+  "derived_table_layouts": 1,
+  "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+  "evidence_items": 21,
+  "evidence_package_version": "v1-sha256:bac7afbcbc2d11c18360d464d687065abf32a242d2a8545ad8fb3b1935576fd4",
+  "figure_bytes": 7322,
+  "figure_sha256": "c8e99ad43709c0a6cf707d3237bffcfd8c91c94c73ca781010856e087fa5d684",
+  "generated_at": "2026-09-27T12:23:44.682583+00:00",
+  "locators": [
+    {
+      "id": "q1-criteria",
+      "role": "scoring_criteria",
+      "source_locator": "PDF pages 7; section 문제 1/채점 기준",
+      "source_mapping_locator": "PDF pages 7,12,17; section 채점기준",
+      "text_sha256": "baf337bb0e491243b2ae4d03ce27c6faeed2dd963a86bc054bbdaebbf3dec685"
+    },
+    {
+      "id": "q1-example-answer",
+      "role": "example_answer",
+      "source_locator": "PDF pages 8; section 문제 1/예시 답안",
+      "source_mapping_locator": "PDF pages 8,13,17; section 예시답안",
+      "text_sha256": "cc8c8905dda5b9fb16c83a9b377f2346e50abdc9ebc61172b81066629293f968"
+    },
+    {
+      "id": "q1-explanation",
+      "role": "explanation",
+      "source_locator": "PDF pages 6,7; section 문제 1/문항 해설",
+      "source_mapping_locator": "PDF pages 6,12,16; section 문항 해설/풀이",
+      "text_sha256": "b9c1895d7ddc35a605d4676ec53d299f4e3f2521b3a3aed816a5701c3471b76c"
+    },
+    {
+      "id": "q1-intent",
+      "role": "exam_intent",
+      "source_locator": "PDF pages 4; section 문제 1/출제 의도",
+      "source_mapping_locator": "PDF pages 4,10,14; section 출제의도",
+      "text_sha256": "6b66c79a79e5689d91f462bdff323b4b30e2eead9e4d0a2f46956cb8c4c0d844"
+    },
+    {
+      "id": "q1-passage-1",
+      "role": "passage",
+      "source_locator": "PDF pages 1; section 제시문 1",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "68c9e36d7bbfec6bafcec2d34ef77d41edb048ecd3c06226d2c44e92c886610e"
+    },
+    {
+      "id": "q1-passage-2",
+      "role": "passage",
+      "source_locator": "PDF pages 2; section 제시문 2",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "fc5d6f94e4ab2ec2ccb0567a313091605469803feebab5c0b755541e9d1d5cbc"
+    },
+    {
+      "id": "q1-passage-3",
+      "role": "passage",
+      "source_locator": "PDF pages 2,3; section 제시문 3",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "952b9ac18f8f844abb0c5ac14034535ad5f549ec79363687f66fa619c9e55699"
+    },
+    {
+      "id": "q1-passage-4",
+      "role": "passage",
+      "source_locator": "PDF pages 3,4; section 제시문 4",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "195f65d2308994b4b619ec5da22d2dabe3e876a6c80683682b7fd82389b3642e"
+    },
+    {
+      "id": "q1-prompt",
+      "role": "question",
+      "source_locator": "PDF pages 1; section 문제 1",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 문제/논제",
+      "text_sha256": "3e5208a4f5d98a4fd36e3a238e268949be2ad44e5fd96adbfe36625883f04f91"
+    },
+    {
+      "id": "q2-criteria",
+      "role": "scoring_criteria",
+      "source_locator": "PDF pages 12,13; section 문제 2/채점 기준",
+      "source_mapping_locator": "PDF pages 7,12,17; section 채점기준",
+      "text_sha256": "5a6fc6a7c1ad8f8b93f20bda7976a20dfa74063182e6624ea9444f9bdd1424f4"
+    },
+    {
+      "id": "q2-data-1",
+      "role": "passage",
+      "source_locator": "PDF pages 9; section 자료 1 사회 활동 경험 / graph and footnote",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "66f5ec9b54ae2ec70fbb0f772081db69e0bef93e95cefc8a72932b67e5ac1505"
+    },
+    {
+      "id": "q2-data-2",
+      "role": "passage",
+      "source_locator": "PDF pages 10; section 자료 2 사회지표 및 주3-7",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 제시문",
+      "text_sha256": "853b174aa43821db275f87be487ec37f88359031e842af8b91658882ddb06714"
+    },
+    {
+      "id": "q2-example-answer",
+      "role": "example_answer",
+      "source_locator": "PDF pages 13; section 문제 2/예시 답안",
+      "source_mapping_locator": "PDF pages 8,13,17; section 예시답안",
+      "text_sha256": "a7a49917badbb9f3201755d8bacb6dd2020b12e7152c93269716343931461792"
+    },
+    {
+      "id": "q2-explanation",
+      "role": "explanation",
+      "source_locator": "PDF pages 12; section 문제 2/문항 해설",
+      "source_mapping_locator": "PDF pages 6,12,16; section 문항 해설/풀이",
+      "text_sha256": "11659ca25a69090034dd9843574f6d52656bcf25ab137a2c39ca58b431e05dd3"
+    },
+    {
+      "id": "q2-intent",
+      "role": "exam_intent",
+      "source_locator": "PDF pages 10; section 문제 2/출제 의도",
+      "source_mapping_locator": "PDF pages 4,10,14; section 출제의도",
+      "text_sha256": "ac297e4dfe978bf54b42688fe5a6d12026539e71c78b0d0b906da8d32dd339a9"
+    },
+    {
+      "id": "q2-prompt",
+      "role": "question",
+      "source_locator": "PDF pages 9; section 문제 2",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 문제/논제",
+      "text_sha256": "40ededa6927f0a410455c52bc8febbc5014d1b5dbc0771dd6f303ef0a9b138a5"
+    },
+    {
+      "id": "q3-criteria",
+      "role": "scoring_criteria",
+      "source_locator": "PDF pages 17; section 문제 3/채점 기준",
+      "source_mapping_locator": "PDF pages 7,12,17; section 채점기준",
+      "text_sha256": "f0058b7069dccb58cb03666a8e8eb63d42d9fdba60cbedacf34779df68f78e91"
+    },
+    {
+      "id": "q3-example-answer",
+      "role": "example_answer",
+      "source_locator": "PDF pages 17,18; section 문제 3/예시 답안",
+      "source_mapping_locator": "PDF pages 8,13,17; section 예시답안",
+      "text_sha256": "b719d5fd7cdbe5f550d3ae5e3ede8115bd1c85d1df6462b454f94e448147743a"
+    },
+    {
+      "id": "q3-explanation",
+      "role": "explanation",
+      "source_locator": "PDF pages 16,17; section 문제 3/문항 해설",
+      "source_mapping_locator": "PDF pages 6,12,16; section 문항 해설/풀이",
+      "text_sha256": "f02f412fd42320c366514910ea2055c90d5049e9bac6a321686a9bf3851d9693"
+    },
+    {
+      "id": "q3-intent",
+      "role": "exam_intent",
+      "source_locator": "PDF pages 14; section 문제 3/출제 의도",
+      "source_mapping_locator": "PDF pages 4,10,14; section 출제의도",
+      "text_sha256": "b44173349f0d1301e39b09f143b22a35d4ff2f6715b94c4ec4cb46e8a9ca3a7c"
+    },
+    {
+      "id": "q3-prompt",
+      "role": "question",
+      "source_locator": "PDF pages 14; section 문제 3",
+      "source_mapping_locator": "PDF pages 1-4,9-10,14; section 문제/논제",
+      "text_sha256": "e43bde7e9b7bb7d714d6cbb6cfd30fba72376461887a8775120ea51906c29cd7"
+    }
+  ],
+  "package_json_bytes": 75083,
+  "package_sha256": "fe04fed7984305f46a4e1c03431c7e0f751d2e644f4b2213c2dd737186c36b2b",
+  "pdf_sha256": "43371e05adaecbd324cadd2e28895d2b76e7d1598c9e857d1bd75aaa34d53e0d",
+  "questions": [
+    {
+      "completeness": "HIGH",
+      "evidence_ids": [
+        "q1-criteria",
+        "q1-example-answer",
+        "q1-explanation",
+        "q1-intent",
+        "q1-passage-1",
+        "q1-passage-2",
+        "q1-passage-3",
+        "q1-passage-4",
+        "q1-prompt"
+      ],
+      "max_score": 40,
+      "question_label": "문제 1",
+      "requires_figure": false
+    },
+    {
+      "completeness": "HIGH",
+      "evidence_ids": [
+        "q1-passage-1",
+        "q1-passage-2",
+        "q1-passage-3",
+        "q1-passage-4",
+        "q1-prompt",
+        "q2-criteria",
+        "q2-data-1",
+        "q2-data-2",
+        "q2-example-answer",
+        "q2-explanation",
+        "q2-intent",
+        "q2-prompt"
+      ],
+      "max_score": 40,
+      "question_label": "문제 2",
+      "requires_figure": true
+    },
+    {
+      "completeness": "HIGH",
+      "evidence_ids": [
+        "q1-passage-1",
+        "q1-passage-2",
+        "q1-passage-3",
+        "q1-passage-4",
+        "q1-prompt",
+        "q2-data-1",
+        "q2-data-2",
+        "q2-prompt",
+        "q3-criteria",
+        "q3-example-answer",
+        "q3-explanation",
+        "q3-intent",
+        "q3-prompt"
+      ],
+      "max_score": 20,
+      "question_label": "문제 3",
+      "requires_figure": true
+    }
+  ],
+  "repeated_exact_evidence_blocks": 0,
+  "resource_id": "796e82b5-1049-5005-ab6d-189b997ecd85",
+  "review_queue": [],
+  "shared_text_saved_characters": 14092,
+  "source_mapping_count": 6,
+  "total_unique_text_characters": 21152
+}

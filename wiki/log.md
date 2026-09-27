@@ -2760,3 +2760,13 @@ Source-calendar conflicts stay review, no identity rewrites. Focused40 + prior33
 ingestion190 and available Python suite384 PASS;25 native PostgreSQL NOT_RUN.
 No Production/writer/accepted-state/UI changes or next batch.
 [Evidence, limitations and Owner gates](exam-canonical-audit-phase3-2026-09-27.md).
+
+## 2026-09-27 — SKKU Essay Evidence Package v1
+
+Owner closed RQ-001/002 with existing roles unchanged; three-university Pilot PASS.
+READ ONLY scoped Production inventory; one SKKU2025 humanities1 PDF reused for
+3-question private JSON+graph,21 official items,21,152 chars, exact source hashes/
+locators and shared-passage references. No AI content/execution or DB/schema change.
+Deterministic generator/contract/metadata manifest;17 new+32 regression tests PASS.
+Owner iOS/accepted-state preserved. [Canonical handoff](essay-lab-evidence-package-v1.md);
+Owner/ChatGPT package review then separate prototype gate.

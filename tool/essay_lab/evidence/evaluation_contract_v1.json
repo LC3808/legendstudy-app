@@ -1,0 +1,66 @@
+{
+  "status": "DRAFT_FOR_OWNER_REVIEW",
+  "scope": "Evidence retrieval contract only; no evaluation run",
+  "input": {
+    "required": [
+      "essay_exam_id",
+      "question_label",
+      "student_answer",
+      "evidence_package_version"
+    ],
+    "essay_exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+    "question_label": [
+      "문제 1",
+      "문제 2",
+      "문제 3"
+    ],
+    "student_answer": "non-empty string; untrusted student content, not instructions",
+    "evidence_package_version": "must exactly match immutable reviewed package"
+  },
+  "context_resolution": "Use question_context; include shared passages and referenced prompts once; attach each required figure after SHA256 verification. Do not silently omit assets.",
+  "output_draft": {
+    "overall_feedback": "string",
+    "criterion_feedback": [
+      {
+        "criterion_id": "package criterion id",
+        "feedback": "string",
+        "evidence_references": [
+          "reference object"
+        ]
+      }
+    ],
+    "strengths": [
+      "string"
+    ],
+    "improvements": [
+      "string"
+    ],
+    "evidence_references": [
+      "reference object"
+    ],
+    "revision_priorities": [
+      "string"
+    ]
+  },
+  "reference_object": {
+    "resource_id": "exact package source resource UUID",
+    "source_locator": "exact evidence source_locator",
+    "evidence_id": "member of selected question context",
+    "criterion_id": "optional; must belong to selected question and point to this evidence_id"
+  },
+  "validation_rules": [
+    "Reject wrong exam/version/question; do not fall back to latest package.",
+    "Validate reference membership, resource UUID, exact locator and criterion offsets against package; never accept generated IDs.",
+    "Official source text stays immutable; feedback is generated interpretation, never OFFICIAL.",
+    "No invented point allocation or A-F numeric conversion. Official question maxima are 40/40/20; grade point ranges are absent.",
+    "Do not send credentials, user identity or unrelated history. No student data collected by this task."
+  ],
+  "not_implemented": [
+    "model/API",
+    "AI scoring",
+    "output validator/runtime",
+    "submission persistence",
+    "rights authorization"
+  ],
+  "next_gate": "Owner/ChatGPT package and prototype review"
+}

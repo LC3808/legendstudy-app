@@ -2,8 +2,8 @@
 
 2026-09-27 · continuation starting HEAD `9cd7c9f` · branch `codex/day-7-school-neis`.
 **CURRENT: APPLIED — 3 universities / 19 active verified exams / 121 active official verified mappings.**
-38 existing resources reused. Two optional answer-subtype decisions remain in batch review;
-no entire document/exam is held. This supersedes the historical STOP below.
+38 existing resources reused. Owner closed both optional answer-subtype reviews,
+keeping existing roles; THREE-UNIVERSITY PILOT PASS. This supersedes historical states below.
 
 ## Owner continuation policy
 
@@ -102,10 +102,17 @@ Official collection references (checked2026-09-27):
 - [KHU regular](https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D)
 - [KHU mock](https://iphak.khu.ac.kr/detail.do?board_seq=12260&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D)
 
-## Batch review queue — 2 items
+## Owner decision — review queue CLOSED
+
+RQ-001 and RQ-002: KEEP EXISTING ROLES; no example_answer addition without new
+explicit official evidence. THREE-UNIVERSITY PILOT PASS, SCHEMA PASS. No DB change.
+[One-exam Evidence Package v1](essay-lab-evidence-package-v1.md) is the next handoff.
+The following table and applied plan are historical review evidence.
+
+### Historical batch review queue — 2 items
 
 YEAR_CONFLICT0 · ROLE_AMBIGUOUS2 · EXAM_IDENTITY/SESSION/FIELD/LOCATOR/SOURCE/OTHER0.
-Both are RESOURCE_ONLY, status OWNER_REVIEW_REQUIRED. Only uncertain answer subtype is
+Both were RESOURCE_ONLY, status OWNER_REVIEW_REQUIRED at mapping time; now CLOSED. Only uncertain answer subtype is
 excluded; already confirmed roles and other university mappings continued.
 
 | ID | University / exam | Resource UUID / source | Issue / evidence | Candidate interpretations |
@@ -135,15 +142,15 @@ excluded; already confirmed roles and other university mappings continued.
 
 ## Decision gate / next
 
-- THREE-UNIVERSITY PILOT: **PARTIAL only for2 optional role decisions**; all3 universities,
+- THREE-UNIVERSITY PILOT: **PASS; Owner retained existing roles for both optional decisions**; all3 universities,
   all19 exams and all38 source PDFs have normal verified mappings. No whole-Pilot failure.
 - SCHEMA WORKED AS-IS: **PASS**, no schema change/new migration.
 - Evidence prototype candidates (no AI run): SKKU `regular-humanities-1`, SKKU
   `regular-natural-1`, KHU `regular-social`. Each has question, passage, intent, criteria,
   example_answer and explanation. A complete resource-level set is not extracted questions
   or permission to grade; private evaluation package/rights gates remain future work.
-- Owner/ChatGPT reviews the two roles together, then separately decides remaining Pilot
-  source supplementation (Chung-Ang/Pusan/Kyungpook) and Evidence Prototype entry.
+- Owner/ChatGPT now reviews the scoped SKKU Evidence Package v1. Remaining Pilot
+  supplementation and actual AI prototype execution remain separate gates.
 **STOP after handoff. No expansion or AI/UI development follows automatically.**
 
 ---

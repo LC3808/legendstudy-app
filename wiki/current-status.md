@@ -132,8 +132,9 @@ run latest profile build; check full exam sequences/known missing cases, Essay
 Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserved.
 On device PASS: Materials CLOSED. Owner separately authorized the
 [Essay LAB Pilot](essay-lab-pilot-2025.md): applied3 universities/19 exams/121 mappings.
-RLS/evidence PASS;2 answer-subtype roles queued. KHU year holds Owner-resolved.
-Next: batch review, then separate remaining-Pilot/prototype gate; no UI/AI.
+Pilot/schema PASS;2 role reviews closed, existing roles retained.
+[SKKU package v1](essay-lab-evidence-package-v1.md):3 questions/21 official items;
+49 tests PASS, DB READ ONLY. Owner review next; no AI/UI/expansion.
 Do not start analytics, new Materials audits or unrelated UI work.
 Current resource checks are automated server/App-contract evidence, not new device
 acceptance.1710 A1 reconciliation remains separate; never republish1710.
