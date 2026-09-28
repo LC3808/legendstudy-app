@@ -1,0 +1,4513 @@
+{
+  "date": "2026-09-28",
+  "starting_head": "6d1d266",
+  "branch": "codex/day-7-school-neis",
+  "pre_apply": "PASS",
+  "production_apply": "PASS",
+  "post_apply_validation": "PASS",
+  "security_contract": "PASS",
+  "product_schema": "DEPLOYED",
+  "ready_for_product_implementation": true,
+  "ready_for_real_student_traffic": false,
+  "b1": {
+    "root_cause": "postgres public-function default ACL grants service_role EXECUTE; nine original helper revokes omitted service_role",
+    "decision": "REVOKE",
+    "unexpected_execute_after": 0
+  },
+  "b2": {
+    "decision": "CONTRACT_REVISION",
+    "root_cause": "PostgreSQL non-superuser CREATEROLE automatic bootstrap-superuser ADMIN-only grant",
+    "direct_inherit": false,
+    "direct_set_role": false,
+    "admin_can_explicitly_regrant_runtime_access": true,
+    "trust_boundary": "postgres is a trusted migration/management administrator, not a worker/client role",
+    "bootstrap_grant_cannot_be_removed_by_createrole_user": true,
+    "memberships": [
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_executor",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      },
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_worker",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      },
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_finance",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      }
+    ]
+  },
+  "migration": "20260928000400_essay_helper_execute_boundary.sql",
+  "migration_sha256": "38f3b5b62ae045f41765ffdc601b9d0ac2e7ae8826d96be02d1a7baf65497fad",
+  "apply_count": 1,
+  "apply_output": {
+    "upToDate": false,
+    "dryRun": false,
+    "migrations": [
+      "20260928000400_essay_helper_execute_boundary.sql"
+    ],
+    "seeds": [],
+    "roles": [],
+    "message": "Finished supabase db push."
+  },
+  "ledger_total": 17,
+  "local_remote_match": true,
+  "pending": [],
+  "summary": {
+    "definitions": 47,
+    "tables": 19,
+    "columns": 4,
+    "rpcs": 12,
+    "new_rows": 0,
+    "membership_contract": "PASS",
+    "function_execute_mismatches": 0,
+    "canonical_preserved": true
+  },
+  "canonical_before": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "canonical_after": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "canonical_orphans": 0,
+  "new_product_rows": 0,
+  "student_data_created": false,
+  "ai_enabled": false,
+  "worker_deployed": false,
+  "ui_connected": false,
+  "local_runtime": {
+    "runtime": "PASS",
+    "regression": {
+      "server_transactions": "PASS",
+      "tests": [
+        "T1_draft_CAS",
+        "T2_stale_CAS",
+        "T3_submit_hash_count",
+        "T4_submit_idempotent",
+        "T5_submit_payload_mismatch",
+        "T6_cross_user_submit",
+        "T7_paid_reservation",
+        "request_same_payload_and_logical_dedupe",
+        "evaluation_key_payload_mismatch",
+        "active_worker_claim_denied",
+        "T19_invalid_level",
+        "T19_invalid_criterion",
+        "T20_cross_question_evidence",
+        "T15_failure_between_result_and_settlement",
+        "T15_result_rollback",
+        "T15_failure_after_consume_before_commit",
+        "T15_consume_rollback",
+        "T7_atomic_success",
+        "T16_idempotent_finalize_one_consume",
+        "T8_included_revision",
+        "T8_zero_charge",
+        "history_four_states_preserved",
+        "T21_regime_version_coexistence",
+        "rewrite_on_demand_reuse_no_extra_charge",
+        "worker_client_no_answer_write_authenticated",
+        "worker_client_no_ledger_delete_authenticated",
+        "worker_client_no_answer_write_essay_worker",
+        "worker_client_no_ledger_delete_essay_worker",
+        "client_worker_RPC_denied",
+        "T17_refund_idempotent",
+        "T18_refund_bound",
+        "worker_cannot_refund",
+        "T12_failure_release",
+        "T14_stale_worker_after_reclaim",
+        "T13_timeout_retry_success",
+        "T14_late_success_after_release",
+        "late_success_no_charge_no_result",
+        "T9_both_requests_complete",
+        "T9_concurrent_included_claim_one",
+        "T9_other_request_paid_reserved",
+        "RPC_concurrent_same_logical_request",
+        "RPC_concurrent_duplicate_single_consume",
+        "T10_insufficient_credit",
+        "expired_grant_unusable",
+        "T11_last_credit_one_winner",
+        "grant_expired_after_reservation_honored",
+        "erase_fences_active_worker",
+        "erase_releases_active_reservation",
+        "rewrite_expired_lease_rejected",
+        "T23_other_user_erase",
+        "T22_owner_erasure",
+        "T24_financial_history_preserved",
+        "erasure_detaches_billing",
+        "search_path_owner_spoof_denied",
+        "executor_not_granted_to_clients_or_worker"
+      ],
+      "phase2a_assertions": 77,
+      "phase2a": "PASS",
+      "supabase_integration": "SEPARATE",
+      "clock_test": "test-only time source replacement; production clock has no override",
+      "actual_ai_calls": 0,
+      "tables": 19
+    },
+    "security_checks": [
+      "B1_revoke_essay_product_reject_update",
+      "B1_revoke_essay_product_terminal_guard",
+      "B1_revoke_essay_product_child_guard",
+      "B1_revoke_essay_question_identity_guard",
+      "B1_revoke_essay_product_progress_guard",
+      "B1_revoke_essay_product_processing_guard",
+      "B1_revoke_essay_product_draft_guard",
+      "B1_revoke_essay_credit_account_guard",
+      "B1_revoke_essay_billing_history_guard",
+      "B2_auto_admin_bootstrap_grant",
+      "B2_no_inherited_table_privilege",
+      "B2_set_role_denied",
+      "B2_admin_allows_management",
+      "B2_self_revoke_does_not_remove_bootstrap_grant",
+      "B2_admin_can_explicitly_self_grant_runtime_access",
+      "B2_temporary_runtime_grant_revoked",
+      "B2_superuser_revoke_removes_management_authority"
+    ],
+    "security_check_count": 17,
+    "b2_decision": "CONTRACT_REVISION",
+    "admin_is_trusted_management_not_security_sandbox": true
+  },
+  "local_supabase": {
+    "supabase_integration": "PASS",
+    "environment": "LOCAL",
+    "real_auth_JWT": true,
+    "postgrest": true,
+    "tests": [
+      "local_auth_user_created",
+      "real_auth_password_JWT_issued",
+      "local_auth_user_created",
+      "real_auth_password_JWT_issued",
+      "S7_authorized_open_RPC",
+      "S7_authorized_draft_RPC",
+      "S7_authorized_submit_RPC",
+      "REST_submit_duplicate",
+      "S11_RPC_payload_mismatch",
+      "S8_unauthorized_submit",
+      "REST_stale_draft",
+      "S1_anon_private_denial",
+      "S2_owner_read",
+      "S3_other_user_isolation",
+      "S4_direct_attempt_insert_denied",
+      "S4_direct_attempt_insert_update_denied",
+      "S5_direct_evaluation_write_denied",
+      "S5_direct_evaluation_write_update_denied",
+      "S6_direct_ledger_write_denied",
+      "S6_direct_ledger_write_update_denied",
+      "S9_client_finalize_denied",
+      "S10_JWT_identity_spoof_denied",
+      "REST_billing_reserve",
+      "REST_narrow_worker_claim",
+      "REST_worker_arbitrary_answer_read_denied",
+      "REST_worker_credit_creation_denied",
+      "REST_worker_finalize_atomic",
+      "REST_finalize_retry_idempotent",
+      "REST_one_consume",
+      "REST_worker_refund_denied",
+      "REST_finance_refund",
+      "REST_refund_bound",
+      "REST_cross_user_erase_denied",
+      "REST_owner_erase",
+      "S12_auth_logout",
+      "S12_logout_client_clears_session",
+      "S12_account_switch_isolation"
+    ],
+    "worker_JWT": "server-signed synthetic local role; never issued to client",
+    "app_lab_E2E": "NOT_VERIFIED",
+    "no_production": true,
+    "actual_AI_calls": 0
+  },
+  "static_tests": 16,
+  "causal_catalog": {
+    "check_00": [
+      {
+        "grantee": "postgres",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "public"
+      },
+      {
+        "grantee": "anon",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "public"
+      },
+      {
+        "grantee": "authenticated",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "public"
+      },
+      {
+        "grantee": "service_role",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "public"
+      },
+      {
+        "grantee": "postgres",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "storage"
+      },
+      {
+        "grantee": "anon",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "storage"
+      },
+      {
+        "grantee": "authenticated",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "storage"
+      },
+      {
+        "grantee": "service_role",
+        "object_type": "f",
+        "owner": "postgres",
+        "privilege_type": "EXECUTE",
+        "schema": "storage"
+      }
+    ],
+    "check_01": [
+      {
+        "rolbypassrls": true,
+        "rolcreaterole": true,
+        "rolname": "postgres",
+        "rolsuper": false
+      }
+    ],
+    "check_02": [
+      {
+        "can_set": false,
+        "inherits": false,
+        "r": "essay_executor"
+      },
+      {
+        "can_set": false,
+        "inherits": false,
+        "r": "essay_worker"
+      },
+      {
+        "can_set": false,
+        "inherits": false,
+        "r": "essay_finance"
+      }
+    ]
+  },
+  "full_post_apply_catalog": {
+    "check_00": [
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.clock()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.fence(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.hash(p_text text)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.lock_job(p_evaluation uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.owner(p_session uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.release(p_evaluation uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "essay_private.uid()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_billing_history_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_claim(p_evaluation uuid, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_credit_account_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_erase(p_session uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_finalize_failure(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_finalize_success(p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_open_session(p_id uuid, p_question uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_child_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_draft_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_processing_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_progress_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_reject_update()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_product_terminal_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_question_identity_guard()"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_reconcile(p_evaluation uuid, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_refund(p_consume uuid, p_key text, p_amount integer)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_request_evaluation(p_attempt uuid, p_key uuid, p_regime text)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_request_rewrite(p_evaluation uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_save_draft(p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_submit_attempt(p_session uuid, p_revision bigint, p_key uuid, p_body_hash text)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "function",
+        "name": "public.essay_timeout(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "credit_accounts"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "credit_grants"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "credit_transactions"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_ai_processing_runs"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_attempts"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_billing_decisions"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_drafts"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_evaluation_criteria"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_evaluation_dimensions"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_evaluation_evidence"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_evaluations"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_generated_rewrites"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_improvement_items"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_improvement_progress"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_learning_events"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_practice_sessions"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_question_evidence"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "essay_questions"
+      },
+      {
+        "definition_matches": true,
+        "kind": "table",
+        "name": "student_target_universities"
+      }
+    ],
+    "check_01": [
+      {
+        "all_19_present": true,
+        "all_rls_enabled": true
+      }
+    ],
+    "check_02": [
+      {
+        "additive_column_present": true,
+        "c": "submission_request_hash",
+        "t": "essay_attempts"
+      },
+      {
+        "additive_column_present": true,
+        "c": "input_snapshot",
+        "t": "essay_evaluations"
+      },
+      {
+        "additive_column_present": true,
+        "c": "lease_token",
+        "t": "essay_ai_processing_runs"
+      },
+      {
+        "additive_column_present": true,
+        "c": "lease_expires_at",
+        "t": "essay_ai_processing_runs"
+      }
+    ],
+    "check_03": [
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_questions"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_question_evidence"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_evaluation_criteria"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "student_target_universities"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_practice_sessions"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_drafts"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_attempts"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_evaluations"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_evaluation_dimensions"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_improvement_items"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_improvement_progress"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_evaluation_evidence"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_generated_rewrites"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_learning_events"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_ai_processing_runs"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "credit_accounts"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "credit_grants"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "essay_billing_decisions"
+      },
+      {
+        "initial_count_should_be_zero": 0,
+        "name": "credit_transactions"
+      }
+    ],
+    "check_04": [
+      {
+        "conname": "credit_accounts_user_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_accounts"
+      },
+      {
+        "conname": "credit_grants_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_grants"
+      },
+      {
+        "conname": "credit_transactions_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_transactions"
+      },
+      {
+        "conname": "credit_transactions_decision_id_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_transactions"
+      },
+      {
+        "conname": "credit_transactions_grant_id_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_transactions"
+      },
+      {
+        "conname": "credit_transactions_reversal_of_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "credit_transactions"
+      },
+      {
+        "conname": "essay_ai_processing_runs_evaluation_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_ai_processing_runs"
+      },
+      {
+        "conname": "essay_ai_processing_runs_rewrite_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_ai_processing_runs"
+      },
+      {
+        "conname": "essay_attempts_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_attempts"
+      },
+      {
+        "conname": "essay_billing_decisions_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_billing_decisions"
+      },
+      {
+        "conname": "essay_billing_decisions_evaluation_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_billing_decisions"
+      },
+      {
+        "conname": "essay_billing_decisions_included_by_decision_id_account_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_billing_decisions"
+      },
+      {
+        "conname": "essay_drafts_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_drafts"
+      },
+      {
+        "conname": "essay_evaluation_criteria_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_criteria"
+      },
+      {
+        "conname": "essay_evaluation_criteria_source_evidence_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_criteria"
+      },
+      {
+        "conname": "essay_evaluation_dimensions_criterion_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_dimensions"
+      },
+      {
+        "conname": "essay_evaluation_dimensions_evaluation_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_dimensions"
+      },
+      {
+        "conname": "essay_evaluation_evidence_dimension_id_evaluation_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_evidence"
+      },
+      {
+        "conname": "essay_evaluation_evidence_evaluation_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_evidence"
+      },
+      {
+        "conname": "essay_evaluation_evidence_evidence_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_evidence"
+      },
+      {
+        "conname": "essay_evaluation_evidence_improvement_progress_id_evaluati_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluation_evidence"
+      },
+      {
+        "conname": "essay_evaluations_attempt_id_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluations"
+      },
+      {
+        "conname": "essay_evaluations_session_id_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluations"
+      },
+      {
+        "conname": "essay_evaluations_supersedes_evaluation_id_attempt_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_evaluations"
+      },
+      {
+        "conname": "essay_generated_rewrites_evaluation_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_generated_rewrites"
+      },
+      {
+        "conname": "essay_improvement_items_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_improvement_items"
+      },
+      {
+        "conname": "essay_improvement_progress_evaluation_id_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_improvement_progress"
+      },
+      {
+        "conname": "essay_improvement_progress_issue_id_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_improvement_progress"
+      },
+      {
+        "conname": "essay_improvement_progress_previous_progress_id_issue_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_improvement_progress"
+      },
+      {
+        "conname": "essay_learning_events_attempt_id_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_learning_events"
+      },
+      {
+        "conname": "essay_learning_events_evaluation_id_attempt_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_learning_events"
+      },
+      {
+        "conname": "essay_learning_events_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_learning_events"
+      },
+      {
+        "conname": "essay_learning_events_stage_attempt_id_session_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_learning_events"
+      },
+      {
+        "conname": "essay_practice_sessions_question_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_practice_sessions"
+      },
+      {
+        "conname": "essay_practice_sessions_user_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_practice_sessions"
+      },
+      {
+        "conname": "essay_question_evidence_essay_exam_id_resource_id_role_fkey",
+        "orphan_count": 0,
+        "relation": "essay_question_evidence"
+      },
+      {
+        "conname": "essay_question_evidence_question_id_essay_exam_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_question_evidence"
+      },
+      {
+        "conname": "essay_questions_essay_exam_id_fkey",
+        "orphan_count": 0,
+        "relation": "essay_questions"
+      },
+      {
+        "conname": "student_target_universities_university_id_fkey",
+        "orphan_count": 0,
+        "relation": "student_target_universities"
+      },
+      {
+        "conname": "student_target_universities_user_id_fkey",
+        "orphan_count": 0,
+        "relation": "student_target_universities"
+      }
+    ],
+    "check_05": [
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "credit_accounts",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_accounts",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "credit_grants",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_grants",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "credit_transactions",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "credit_transactions",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_ai_processing_runs",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_attempts",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_attempts",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_billing_decisions",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_billing_decisions",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": true,
+        "name": "essay_drafts",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_drafts",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_drafts",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_drafts",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_drafts",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": true,
+        "name": "essay_evaluation_criteria",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_evaluation_criteria",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_criteria",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_dimensions",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_evaluation_evidence",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluation_evidence",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_evaluations",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_evaluations",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_generated_rewrites",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_generated_rewrites",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_improvement_items",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_items",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_improvement_progress",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_improvement_progress",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_learning_events",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_learning_events",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_practice_sessions",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_practice_sessions",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": true,
+        "name": "essay_question_evidence",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_question_evidence",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_question_evidence",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": true,
+        "name": "essay_questions",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "essay_questions",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "essay_questions",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "DELETE",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "INSERT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "SELECT",
+        "role": "anon"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "UPDATE",
+        "role": "anon"
+      },
+      {
+        "granted": true,
+        "name": "student_target_universities",
+        "privilege": "DELETE",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "student_target_universities",
+        "privilege": "INSERT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "student_target_universities",
+        "privilege": "SELECT",
+        "role": "authenticated"
+      },
+      {
+        "granted": true,
+        "name": "student_target_universities",
+        "privilege": "UPDATE",
+        "role": "authenticated"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "DELETE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "INSERT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "SELECT",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "UPDATE",
+        "role": "essay_finance"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "DELETE",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "INSERT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "SELECT",
+        "role": "essay_worker"
+      },
+      {
+        "granted": false,
+        "name": "student_target_universities",
+        "privilege": "UPDATE",
+        "role": "essay_worker"
+      }
+    ],
+    "check_06": [
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "clock",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "clock",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "clock",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "clock",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "clock",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "fence",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "fence",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "fence",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "fence",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "fence",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_text text",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "hash",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_text text",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "hash",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_text text",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "hash",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_text text",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "hash",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_text text",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "hash",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "lock_job",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "lock_job",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "lock_job",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "lock_job",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "lock_job",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "owner",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "owner",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "owner",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "owner",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "owner",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "release",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "release",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "release",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "release",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "release",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "uid",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "uid",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "uid",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "uid",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "essay_private",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "uid",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_billing_history_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_billing_history_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_billing_history_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_billing_history_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_billing_history_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_claim",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_claim",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_claim",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_claim",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_claim",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_credit_account_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_credit_account_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_credit_account_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_credit_account_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_credit_account_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_erase",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_erase",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_erase",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_erase",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_session uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_erase",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_failure",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_failure",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_failure",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_failure",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_failure",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_success",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_success",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_success",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_success",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_finalize_success",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_id uuid, p_question uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_open_session",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_id uuid, p_question uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_open_session",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_id uuid, p_question uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_open_session",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_id uuid, p_question uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_open_session",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_id uuid, p_question uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_open_session",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_child_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_child_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_child_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_child_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_child_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_draft_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_draft_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_draft_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_draft_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_draft_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_processing_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_processing_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_processing_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_processing_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_processing_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_progress_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_progress_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_progress_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_progress_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_progress_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_reject_update",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_reject_update",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_reject_update",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_reject_update",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_reject_update",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_terminal_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_terminal_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_terminal_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_terminal_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_product_terminal_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_question_identity_guard",
+        "prosecdef": false,
+        "role": "anon"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_question_identity_guard",
+        "prosecdef": false,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_question_identity_guard",
+        "prosecdef": false,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_question_identity_guard",
+        "prosecdef": false,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "",
+        "executable": false,
+        "nspname": "public",
+        "owner": "postgres",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_question_identity_guard",
+        "prosecdef": false,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_reconcile",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_reconcile",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_reconcile",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_reconcile",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_reconcile",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_consume uuid, p_key text, p_amount integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_refund",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_consume uuid, p_key text, p_amount integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_refund",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_consume uuid, p_key text, p_amount integer",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_refund",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_consume uuid, p_key text, p_amount integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_refund",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_consume uuid, p_key text, p_amount integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_refund",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_attempt uuid, p_key uuid, p_regime text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_evaluation",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_attempt uuid, p_key uuid, p_regime text",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_evaluation",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_attempt uuid, p_key uuid, p_regime text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_evaluation",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_attempt uuid, p_key uuid, p_regime text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_evaluation",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_attempt uuid, p_key uuid, p_regime text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_evaluation",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_rewrite",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_rewrite",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_rewrite",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_rewrite",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_request_rewrite",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_save_draft",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_save_draft",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_save_draft",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_save_draft",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_save_draft",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_key uuid, p_body_hash text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_submit_attempt",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_key uuid, p_body_hash text",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_submit_attempt",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_key uuid, p_body_hash text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_submit_attempt",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_key uuid, p_body_hash text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_submit_attempt",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_session uuid, p_revision bigint, p_key uuid, p_body_hash text",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_submit_attempt",
+        "prosecdef": true,
+        "role": "service_role"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_timeout",
+        "prosecdef": true,
+        "role": "anon"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_timeout",
+        "prosecdef": true,
+        "role": "authenticated"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_timeout",
+        "prosecdef": true,
+        "role": "essay_finance"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": true,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_timeout",
+        "prosecdef": true,
+        "role": "essay_worker"
+      },
+      {
+        "arguments": "p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid",
+        "executable": false,
+        "nspname": "public",
+        "owner": "essay_executor",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "proname": "essay_timeout",
+        "prosecdef": true,
+        "role": "service_role"
+      }
+    ],
+    "check_07": [
+      {
+        "rolbypassrls": true,
+        "rolcanlogin": false,
+        "rolname": "essay_executor",
+        "rolsuper": false
+      },
+      {
+        "rolbypassrls": false,
+        "rolcanlogin": false,
+        "rolname": "essay_worker",
+        "rolsuper": false
+      },
+      {
+        "rolbypassrls": false,
+        "rolcanlogin": false,
+        "rolname": "essay_finance",
+        "rolsuper": false
+      }
+    ],
+    "check_08": [
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_executor",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      },
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_worker",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      },
+      {
+        "admin_option": true,
+        "effective_inherit": false,
+        "effective_set": false,
+        "granted_role": "essay_finance",
+        "grantor_role": "supabase_admin",
+        "inherit_option": false,
+        "member_role": "postgres",
+        "set_option": false
+      }
+    ],
+    "check_09": [
+      {
+        "executor_private_create_must_be_false": false,
+        "executor_public_create_must_be_false": false
+      }
+    ],
+    "check_10": [
+      {
+        "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+        "name": "essay_exam_resources",
+        "row_count": 134
+      },
+      {
+        "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+        "name": "essay_exams",
+        "row_count": 21
+      },
+      {
+        "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+        "name": "resources",
+        "row_count": 10556
+      },
+      {
+        "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+        "name": "universities",
+        "row_count": 5
+      }
+    ],
+    "check_11": [
+      {
+        "applied_versions": "<table xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\n<row>\n  <version>20260912000100</version>\n</row>\n\n<row>\n  <version>20260913000100</version>\n</row>\n\n<row>\n  <version>20260913000200</version>\n</row>\n\n<row>\n  <version>20260914000100</version>\n</row>\n\n<row>\n  <version>20260914000200</version>\n</row>\n\n<row>\n  <version>20260917000100</version>\n</row>\n\n<row>\n  <version>20260917000200</version>\n</row>\n\n<row>\n  <version>20260923000100</version>\n</row>\n\n<row>\n  <version>20260923000200</version>\n</row>\n\n<row>\n  <version>20260925000100</version>\n</row>\n\n<row>\n  <version>20260926000100</version>\n</row>\n\n<row>\n  <version>20260927000100</version>\n</row>\n\n<row>\n  <version>20260927000200</version>\n</row>\n\n<row>\n  <version>20260928000100</version>\n</row>\n\n<row>\n  <version>20260928000200</version>\n</row>\n\n<row>\n  <version>20260928000300</version>\n</row>\n\n<row>\n  <version>20260928000400</version>\n</row>\n\n</table>\n"
+      }
+    ]
+  },
+  "remaining_gates": [
+    "privacy/retention",
+    "actual AI provider adapter",
+    "provider retention",
+    "backup/storage deletion",
+    "worker credentials",
+    "reconciler/scheduler",
+    "telemetry/cost",
+    "UI/E2E"
+  ],
+  "review_static_tests": 36,
+  "total_static_tests": 52,
+  "isolated_environments_stopped": true
+}

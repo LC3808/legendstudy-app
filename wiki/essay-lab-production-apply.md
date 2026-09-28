@@ -1,5 +1,8 @@
 # Essay LAB Production apply — APPLIED_WITH_BLOCKER
 
+> Current: [Security resolution PASS / schema DEPLOYED](essay-lab-security-resolution.md), ledger17/no pending. Student/AI/worker/UI remain disabled. The checkpoint below is historical.
+
+
 2026-09-28. Owner explicitly authorized exactly the three promoted Product migrations at
 `fbe4783`. **Migration execution PASS; post-apply validation FAIL; security contract CHANGE_REQUIRED.**
 The schema exists, but Product/student writes remain NOT_ENABLED. No further Production mutation is authorized

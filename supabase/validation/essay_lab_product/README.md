@@ -1,4 +1,7 @@
-# Essay LAB migration validation — APPLIED_WITH_BLOCKER
+# Essay LAB migration validation — SECURITY PASS / DEPLOYED
+
+> Current canonical result: `security_resolution_result.json`; [B1/B2 resolution](../../../wiki/essay-lab-security-resolution.md). B1 forward REVOKE applied, B2 exact ADMIN-only contract. Historical preparation below is retained.
+
 
 > Current: [Production apply](../../../wiki/essay-lab-production-apply.md), `production_apply_result.json`:3 applied, ledger16/no pending; security discrepancies9 helper grants/3 ADMIN-only memberships. No further mutation authorized. Below preserves historical preparation.
 
@@ -97,3 +100,13 @@ minimal corrective forward migration preserving attempts/evaluations/progress/le
 retains its own BEGIN/COMMIT: earlier files may remain if a later file fails. Reconcile actual history before
 retry. A correction needs separate review/authorization; do not modify already-applied migration history.
 Do not use a privileged service_role worker to work around failed grants or missing transactions.
+
+## Current security verification
+
+`security_contract.py` validates Production memberships: exactly3 postgres/supabase_admin ADMIN-only
+rows, INHERIT/SET and effective USAGE/SET all false. No extra member or privilege path allowed.
+ADMIN is trusted administrative power and can explicitly regrant runtime privileges; it is not a sandbox.
+`run_security.py` runs77+55 regressions plus17 security probes on a new explicitly disposable PG17 DB.
+Use the same ESSAY_REVIEW_DISPOSABLE / ESSAY_REVIEW_TEST_DSN guards as the existing native runner.
+The one new migration only revokes service_role EXECUTE from9 helpers. Current Production17 versions
+match local, pending none. No further Production operation is authorized by this package.

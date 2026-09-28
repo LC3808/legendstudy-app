@@ -1,5 +1,8 @@
 # Essay LAB migration promotion — PROMOTED / NOT APPLIED
 
+> Current: [Security resolution PASS / schema DEPLOYED](essay-lab-security-resolution.md), ledger17/no pending. Student/AI/worker/UI remain disabled. The checkpoint below is historical.
+
+
 > Current status: [Product applied with security blocker](essay-lab-production-apply.md). All3 applied; ledger16/no pending. Historical checkpoint below is preserved; product remains disabled.
 
 

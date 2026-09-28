@@ -1,5 +1,12 @@
 # Development Log
 
+## 2026-09-28 — B1/B2 security resolution PASS
+
+- [Resolution](essay-lab-security-resolution.md):9 helper EXECUTE revokes applied via single004 forward migration; original migrations unchanged.
+- B2 exact managed ADMIN-only contract verified, including explicit self-regrant power; no worker/client membership.
+- Native77+55+17, local JWT/PostgREST37, static52 PASS. Production47 definitions match, ledger17/no pending, canonical unchanged/new rows0.
+- Schema DEPLOYED/security PASS; Product implementation ready, real student/AI/worker/UI remain disabled.
+
 ## 2026-09-28 — Product migrations applied; security contract blocker
 
 - [Production apply](essay-lab-production-apply.md): approved3 applied once; ledger16, no pending;47 definitions match,19 tables empty, canonical unchanged.

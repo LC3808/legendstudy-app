@@ -49,7 +49,15 @@ select n.nspname,p.proname,pg_get_function_identity_arguments(p.oid) arguments,
 from pg_proc p join pg_namespace n on n.oid=p.pronamespace join wanted w on (w.schema,w.name)=(n.nspname,p.proname)
 cross join unnest(array['anon','authenticated','service_role','essay_worker','essay_finance']) role order by 1,2,7;
 select rolname,rolcanlogin,rolsuper,rolbypassrls from pg_roles where rolname in ('essay_executor','essay_worker','essay_finance');
-select parent.rolname granted_role,member.rolname member_role from pg_auth_members a join pg_roles parent on parent.oid=a.roleid join pg_roles member on member.oid=a.member where parent.rolname in ('essay_executor','essay_worker','essay_finance');
+-- B2 contract: zero local superuser-created memberships OR exact managed ADMIN-only rows.
+-- postgres remains a trusted administrator; ADMIN permits explicit regrant, not a security sandbox.
+select parent.rolname granted_role,member.rolname member_role,grantor.rolname grantor_role,
+ a.admin_option,a.inherit_option,a.set_option,
+ pg_has_role(member.oid,parent.oid,'USAGE') as effective_inherit,
+ pg_has_role(member.oid,parent.oid,'SET') as effective_set
+from pg_auth_members a join pg_roles parent on parent.oid=a.roleid
+join pg_roles member on member.oid=a.member join pg_roles grantor on grantor.oid=a.grantor
+where parent.rolname in ('essay_executor','essay_worker','essay_finance');
 select has_schema_privilege('essay_executor','public','CREATE') as executor_public_create_must_be_false,
  has_schema_privilege('essay_executor','essay_private','CREATE') as executor_private_create_must_be_false;
 -- Same values as the saved PRE-APPLY snapshot required; no hard-coded Production row counts.
