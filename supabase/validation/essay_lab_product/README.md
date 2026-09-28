@@ -1,5 +1,8 @@
 # Essay LAB promoted migration validation — NOT APPLIED
 
+> Current follow-up: [Production read-only preflight](../../../wiki/essay-lab-production-preflight.md) executed; APPLY BLOCKED by absent migration history. Below preserves the promotion-stage preparation record.
+
+
 Owner approved KEEP19, four additive columns and server RPCs. Promotion is complete; Production access,
 preflight execution and apply require the next explicit authorization. **Do not run a deploy/db push now.**
 Canonical report: [Migration promotion](../../../wiki/essay-lab-migration-promotion.md).

@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-28 — Production read-only preflight blocked
+
+- [Preflight](essay-lab-production-preflight.md): catalog/count checks PASS; migration history schema absent, apply readiness NO.
+- Existing canonical5/21/134 and fingerprints unchanged; orphans0;19 target tables/28 functions absent.
+- No history repair, Production apply, student seed or Owner SQL request. Offline10 tests and Wiki/diff checks.
+
 ## 2026-09-27 — Essay Pilot continuation applied
 
 - [Pilot](essay-lab-pilot-2025.md): Owner released3 year holds and adopted batch review.

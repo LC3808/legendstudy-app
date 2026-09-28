@@ -1,5 +1,8 @@
 # Essay LAB migration promotion — PROMOTED / NOT APPLIED
 
+> Current follow-up: [Production read-only preflight](essay-lab-production-preflight.md) executed; APPLY BLOCKED by absent migration history. Below preserves the promotion-stage preparation record.
+
+
 Owner/ChatGPT approved Phase2A/2B/2C, KEEP19, four additive columns and server RPCs.
 **Formal migration package promoted; Production NOT APPLIED; real student data NOT ENABLED.**
 Shared App/LAB identity PASS (Kakao actual UUID equality Owner PASS, Apple/Google historical PASS).
