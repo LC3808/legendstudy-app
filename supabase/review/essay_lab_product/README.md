@@ -2,6 +2,15 @@
 
 **DRAFT ONLY / NOT APPLIED / Production apply prohibited in this task.**
 
+Final history review recommendation: **KEEP19**,0 moved/merged. See
+[full matrix and rationale](../../../wiki/essay-lab-final-schema-review.md).
+`final-review-validation.json` supersedes current check counts, while the original
+`validation-report.json` is preserved as the5497498 Phase1 review record.
+`history_queries.sql` provides12 SELECT templates; [runtime package](runtime/README.md)
+contains an executable disposable-PostgreSQL fixture and18 required validation gates.
+No runtime claims: server unavailable. The runner only exercised its missing-prerequisite refusal.
+
+
 - [Product spec](../../../wiki/essay-lab-product-v1.md)
 - [Recommended architecture, ERD, table decisions, Q1–Q20, 15 cases](../../../wiki/student-analytics-data-architecture.md)
 - `001_student_essay_product.draft.sql`: 15 tables; canonical questions/evidence/criteria,
@@ -10,7 +19,7 @@
 - `preflight.readonly.sql`: exact catalog-only Production read; no mutation statements.
 - `current_schema_inventory.json`: sanitized catalog snapshot, no private rows/secrets.
 - `validation-report.json`: precise checks, limitations and 15-case disposition.
-- `test_validate_drafts.py`: 15 negative/positive offline controls.
+- `test_validate_drafts.py` + `test_history_review.py`:30 offline positive/negative checks.
 - `validate_drafts.py`: PostgreSQL AST/static structural checks; no DB connection.
 
 No draft is in `supabase/migrations`. Do not blindly paste either into Production.

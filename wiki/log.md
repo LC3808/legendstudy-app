@@ -2836,3 +2836,12 @@ adds stance preservation/minimal editing without AI execution.15 cases:12 suppor
 3 partial (external erasure, common competencies, future School authorization). SQL/PLpgSQL
 parse,37 FK/static RLS reviews,15 negative/positive tests, Wiki/diff/scoped-secret checks PASS. Runtime DB tests
 NOT_RUN: no local PostgreSQL server. Owner review next; no migration apply/UI/payment/seed.
+
+## 2026-09-28 — Essay Final Schema Review: history first
+
+[Final review](essay-lab-final-schema-review.md) recommends KEEP19, no merges or removals.
+Preserve issue observations/provider retries/zero-charge decisions; add immutable terms and
+terminal telemetry guards, same-attempt request/posting dedupe, stage-view dedupe, explicit
+progress predecessor and safe erasure detachment.12 read-only history queries prepared;30 static
+tests PASS. Disposable PostgreSQL runner prepared, NOT_RUN (no local server/Docker daemon);
+real RPC and shared-identity E2E remain rollout gates. No Production/UI/AI/migration promotion.

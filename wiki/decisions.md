@@ -558,3 +558,12 @@ confirmed problems. Per-criterion integer1–5 levels are educational fulfillmen
 from official nullable weights. Overall sentence/no overall star is the review recommendation.
 [Product v1](essay-lab-product-v1.md), [architecture](student-analytics-data-architecture.md).
 Design only: no Production apply/UI/payment/AI run authorization from this record.
+
+## 2026-09-28 — History-first Student Analytics
+
+Retain immutable submitted answers, versioned judgments/dimensions, explicit issue observations,
+meaningful stage actions, provider attempts and credit movements. Growth/current-strength views
+derive from those facts. Do not overwrite issue history with current status, or conflate model
+changes with student growth. This does not mean permanent click/autosave retention. Separate
+learning/behavior/operations/financial retention; preserve correction evidence without rewriting
+original judgment. [Final19-table review](essay-lab-final-schema-review.md); Production gate closed.

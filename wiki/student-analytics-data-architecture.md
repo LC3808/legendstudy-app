@@ -6,6 +6,21 @@ not a second strategy or student master. [Product specification](essay-lab-produ
 learner behavior. [SQL review package](../supabase/review/essay_lab_product/README.md) is not in
 `supabase/migrations`. No Production student data, UI, payment or AI runs were created.
 
+## Final history review — 2026-09-28
+
+**Recommendation: KEEP19.** [Final review](essay-lab-final-schema-review.md) contains the full19-table
+history/reconstruction/lifecycle/security/transaction matrix,12 query contracts and runtime gates.
+
+LegendStudy는 학생의 현재 평가만 저장하지 않는다. 답안, 평가, 평가 항목, 보완점의 변화 등
+학습 과정에서 발생한 핵심 historical facts를 보존하고, 성장·강점·반복 약점과 같은 분석 결과는
+그 history에서 재계산하는 것을 기본 원칙으로 한다.
+**History 보존은 모든 click/autosave를 영구 저장한다는 뜻이 아니다.**
+
+Submitted snapshots, versioned evaluations/dimensions, issue observations, meaningful behavior,
+provider runs and ledger movements have distinct retention boundaries. No current-only status
+merge. Final SQL adds history guards, explicit predecessor, meaningful-stage dedupe and request/
+posting uniqueness without adding tables. Shared-identity rollout and runtime verification remain gates.
+
 ## Recommended MVP architecture — Owner decision summary
 
 **Choose: existing profiles + four-layer architecture: canonical question/evidence/criteria,
@@ -181,7 +196,8 @@ reevaluation has new logical ID/idempotency key and version, while transport ret
 old logical request. Request_hash mismatch on reused key returns conflict. AI provider retries
 are run_no rows; late/losing runs can finish for audit but selected_result uniqueness chooses one.
 One selected run records actual provider/model/version (nullable unknown), prompt version,
-usage/cost basis/latency. User-private result holds evaluation/contract/regime version, input/output
+usage/cost basis/latency. User-private result also freezes chosen provider/model/version/prompt context so shorter operational
+retention cannot erase judgment provenance. Result holds evaluation/contract/regime version, input/output
 hashes and exact evidence membership; telemetry is not publicly readable. Output hash is audit,
 not a promise of bit-identical stochastic reruns. No prompts/private bodies in normal logs.
 
@@ -197,7 +213,7 @@ are **not implemented in this draft** and are required before migration promotio
 string or AI's arbitrary cross-student taxonomy. E.g. one teacher-blame omission remains one issue
 across multiple dimensions. Progress observation per issue/evaluation captures status + specific
 explanation/action/priority. Missing observation means unknown, not resolved. Use comparable
-selected evaluations to infer open→improved→resolved/recurring. Re-evaluation branches never
+selected evaluations to infer open→improved→resolved/recurred. Re-evaluation branches never
 silently replace historical observations. Matcher uncertainty remains a review/uncertainty note;
 no universal perfect identity claim. Current issue state is a query, not mutable truth column.
 
@@ -281,7 +297,7 @@ requested/completed. Derive `essay_session_started`, `essay_attempt_submitted`,
 Persist only `essay_rewrite_started`, `essay_example_rewrite_viewed`, `essay_official_source_opened`.
 Server timestamp + dedupe event_key + same-session attempt/evaluation context; no freeform payload.
 Example event means result was actually displayed, not merely button tapped/generated. Compare
-first view to selected first/second completion/submission timestamps, retain repeated views.
+first view to selected first/second completion/submission timestamps, retain the first actual view per meaningful stage, not repeated clicks.
 Counts/ordering do not prove causal learning effects or absence of off-platform help.
 
 Question-type classification (multi-label summary/comparison/analysis/application/evaluation)
@@ -366,7 +382,7 @@ volume. Profile target and private-root checks use FK/PK indexes; measure joins 
 | Q12 examples | On-demand private DB text, unique evaluation; no v1 successful regeneration |
 | Q13 stars | Nullable integer essay_evaluation_dimensions.level_1_to_5, explanation required; NULL has uncertainty reason |
 | Q14 weight | Nullable official_weight_percent on criterion definition; not product stars or official predicted score |
-| Q15 versions | Evaluation/contract/regime and manifest/input/output hashes; selected processing run provider/model/prompt/version |
+| Q15 versions | Evaluation/contract/regime and manifest/input/output hashes; selected processing run plus frozen evaluation provider/model/prompt snapshot for independent retention |
 | Q16 credit set | credit_accounts + credit_grants + essay_billing_decisions + credit_transactions; no standalone mutable balance |
 | Q17 included revision | Reason included_revision, credits_required=0, policy_version, parent cycle decision; server policy/locking |
 | Q18 retry | Request payload hash/idempotency + serialized reservations + unique postings + atomic publish/settle + reconcile timeouts |
