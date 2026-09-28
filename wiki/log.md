@@ -2937,3 +2937,8 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - Result-only high-contrast warm-white reading surface, compact PC criterion/status/stars, restrained semantic headings and lightweight change blocks.
 - 1440/360px and 200%:20 widget tests + analyze PASS; four latest captures in [canonical UI](essay-lab-ui-ux-v1.md#owner-visual-polish-2--2026-09-28). No functionality/backend/DB changes; Owner review then STOP.
+
+## 2026-09-28 — Essay result overview
+
+- First/second result top four-group summary selects max2 existing items without AI inference; explicit resolution only, full details preserved. Desktop2×2/mobile1-column.
+- 21 widget + analyze PASS; [mapping and captures](essay-lab-ui-ux-v1.md#result-overview--2026-09-28). No backend/data-contract change.

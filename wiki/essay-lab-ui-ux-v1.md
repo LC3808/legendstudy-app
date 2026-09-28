@@ -145,3 +145,21 @@ Writing/Rewrite/IA/기능/backend/DB/RPC는 그대로.
 - [Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-polish2.png)
 - [Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-polish2.png)
 - [Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-polish2.png)
+
+## Result overview — 2026-09-28
+
+결과 상단(미리보기 고지 다음)에 ‘내 답안 한눈에 보기’를 추가한다.
+잘한 점=strengths, 보완할 점=improvements, 가장 먼저 고칠 것=priorities,
+다시 쓸 때 확인=checklist. 원본 순서/문장을 유지하고 빈 항목 제외 후 각각 최대2개.
+2차 제목은 ‘이번 답안의 변화 한눈에 보기’: 좋아진 점=changes의 좋아진 부분,
+아직 보완할 점=improvements, 해결한 부분=changes의 해결한 부분,
+다음에 확인할 부분=checklist. 해결 명시가 없으면 미확인 안내; 별 상승이나
+개선 설명으로 해결을 추정하지 않는다. comparable=false일 때 변화 판단을 보류한다.
+기존 상세 결과는 모두 유지한다. 별도 AI 판단/호출·모델/DB/RPC 변경 없음.
+Desktop 2×2, Mobile/큰 글자 1열. 옅은 의미 tint·icon·heading, 검정 본문, 그림자 없음.
+
+21 widget PASS (데이터 선택/상세 보존/해결 비추론/1440·360px/200%), analyze PASS.
+[Desktop 1차](../docs/previews/essay-lab-ui-phase1/essay-result-desktop-overview.png),
+[Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-overview.png),
+[Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-overview.png),
+[Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-overview.png)가 최신 캡처다.

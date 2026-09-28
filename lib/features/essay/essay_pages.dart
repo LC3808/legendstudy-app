@@ -584,9 +584,14 @@ const _needsWork = Color(0xFF8A3446);
 const _inProgress = Color(0xFF345F86);
 
 Color _sectionColor(String title) => switch (title) {
-  '잘한 점' || '좋아진 부분' || '해결한 부분' => _positive,
-  '보완할 점' || '먼저 고쳐야 할 부분' || '아직 확인할 부분' || '다시 나타난 부분' => _needsWork,
-  '좋아지고 있는 부분' => _inProgress,
+  '잘한 점' || '좋아진 점' || '좋아진 부분' || '해결한 부분' => _positive,
+  '보완할 점' ||
+  '아직 보완할 점' ||
+  '가장 먼저 고칠 것' ||
+  '먼저 고쳐야 할 부분' ||
+  '아직 확인할 부분' ||
+  '다시 나타난 부분' => _needsWork,
+  '좋아지고 있는 부분' || '다시 쓸 때 확인' || '다음에 확인할 부분' => _inProgress,
   _ => AppTokens.textPrimary,
 };
 
@@ -723,6 +728,50 @@ class _EssayResultViewState extends State<EssayResultView> {
         ),
     ],
   );
+  // Selection only: preserve source order and wording; never infer resolution.
+  Widget _answerOverview(EssayEvaluation e) {
+    List<String> firstTwo(List<String> values, String empty) {
+      final selected = values
+          .where((value) => value.trim().isNotEmpty)
+          .take(2)
+          .toList();
+      return selected.isEmpty ? [empty] : selected;
+    }
+
+    final content = widget.comparison
+        ? <String, List<String>>{
+            '좋아진 점': firstTwo(
+              e.comparable ? e.changes['좋아진 부분'] ?? [] : [],
+              e.comparable ? '평가에 명시된 변화가 아직 없어요.' : '평가 조건이 달라 비교를 보류해요.',
+            ),
+            '아직 보완할 점': firstTwo(e.improvements, '평가에 명시된 보완 내용이 없어요.'),
+            '해결한 부분': firstTwo(
+              e.comparable ? e.changes['해결한 부분'] ?? [] : [],
+              '해결 여부가 평가에 명시되지 않았어요.',
+            ),
+            '다음에 확인할 부분': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
+          }
+        : <String, List<String>>{
+            '잘한 점': firstTwo(e.strengths, '평가에 명시된 내용이 없어요.'),
+            '보완할 점': firstTwo(e.improvements, '평가에 명시된 내용이 없어요.'),
+            '가장 먼저 고칠 것': firstTwo(e.priorities, '평가에 명시된 우선순위가 없어요.'),
+            '다시 쓸 때 확인': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
+          };
+    return Column(
+      key: const ValueKey('answer-overview'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _resultHeader(widget.comparison ? '이번 답안의 변화 한눈에 보기' : '내 답안 한눈에 보기'),
+        _changeOverview(content),
+        const SizedBox(height: 12),
+        const Text(
+          '평가에 나온 핵심 항목을 먼저 보여드려요. 자세한 내용은 아래에서 확인해 보세요.',
+          style: AppTokens.caption,
+        ),
+      ],
+    );
+  }
+
   Widget _changeOverview(Map<String, List<String>> changes) => LayoutBuilder(
     builder: (context, box) {
       final twoColumns =
@@ -752,8 +801,12 @@ class _EssayResultViewState extends State<EssayResultView> {
                         ExcludeSemantics(
                           child: Icon(
                             switch (entry.key) {
-                              '좋아진 부분' || '해결한 부분' => Icons.check,
+                              '잘한 점' ||
+                              '좋아진 점' ||
+                              '좋아진 부분' ||
+                              '해결한 부분' => Icons.check,
                               '좋아지고 있는 부분' => Icons.north_east,
+                              '다시 쓸 때 확인' || '다음에 확인할 부분' => Icons.checklist,
                               '다시 나타난 부분' => Icons.replay,
                               _ => Icons.priority_high,
                             },
@@ -777,11 +830,14 @@ class _EssayResultViewState extends State<EssayResultView> {
                     ),
                     const SizedBox(height: 12),
                     for (final line in entry.value)
-                      Text(
-                        line,
-                        style: AppTokens.body.copyWith(
-                          color: _resultInk,
-                          height: 1.65,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: Text(
+                          line,
+                          style: AppTokens.body.copyWith(
+                            color: _resultInk,
+                            height: 1.65,
+                          ),
                         ),
                       ),
                   ],
@@ -843,6 +899,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                     '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
                     style: AppTokens.caption,
                   ),
+                  _answerOverview(e),
                   if (widget.comparison) ...[
                     _resultHeader('무엇이 달라졌나요?'),
                     if (!e.comparable)

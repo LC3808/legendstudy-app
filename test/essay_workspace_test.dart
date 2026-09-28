@@ -319,6 +319,53 @@ void main() {
     },
   );
 
+  testWidgets(
+    'overview selects existing first two items without inferring resolution',
+    (tester) async {
+      size(tester, const Size(1440, 1800));
+      for (final comparison in [false, true]) {
+        final e = comparison ? secondPreviewEvaluation : firstPreviewEvaluation;
+        await show(
+          tester,
+          EssayResultView(
+            evaluation: e,
+            question: essayPreviewQuestions.first,
+            comparison: comparison,
+            onRewrite: () {},
+          ),
+        );
+        final overview = find.byKey(const ValueKey('answer-overview'));
+        Finder within(String text) =>
+            find.descendant(of: overview, matching: find.text(text));
+        expect(
+          within(comparison ? '이번 답안의 변화 한눈에 보기' : '내 답안 한눈에 보기'),
+          findsOneWidget,
+        );
+        for (final text in e.checklist.take(2)) {
+          expect(within(text), findsOneWidget);
+        }
+        expect(within(e.checklist[2]), findsNothing);
+        expect(
+          find.text(e.checklist[2]),
+          findsOneWidget,
+        ); // Detailed result preserved.
+        expect(within(e.improvements.first), findsOneWidget);
+        if (comparison) {
+          expect(within('해결 여부가 평가에 명시되지 않았어요.'), findsOneWidget);
+          expect(within(e.changes['좋아진 부분']!.first), findsOneWidget);
+        } else {
+          expect(within(e.priorities.first), findsOneWidget);
+          expect(
+            tester.getTopLeft(within('잘한 점')).dy,
+            tester.getTopLeft(within('보완할 점')).dy,
+          );
+        }
+        expect(tester.takeException(), isNull);
+        await close(tester);
+      }
+    },
+  );
+
   for (final comparison in [false, true]) {
     for (final width in [360.0, 1440.0]) {
       for (final scale in [1.0, 2.0]) {
@@ -374,7 +421,7 @@ void main() {
           if (scale == 1) {
             await preview.capture(
               tester,
-              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-polish2',
+              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-overview',
             );
           }
           expect(tester.takeException(), isNull);
