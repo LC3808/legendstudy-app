@@ -1,5 +1,8 @@
 # Essay LAB Final Schema Review — history first
 
+Follow-up: [Phase2A actual PostgreSQL17.11 validation PASS](essay-lab-runtime-validation.md).
+The Final Review NOT_RUN statements below describe that earlier checkpoint.
+
 2026-09-28 · review of5497498 · **RECOMMENDED: KEEP 19 MVP / move0 of19 to Future**.
 No MERGE/REMOVE. History and Student Analytics: **PASS at design level**. Billing: **PASS at
 architecture level**, actual transaction safety unverified. Runtime: package prepared / environment

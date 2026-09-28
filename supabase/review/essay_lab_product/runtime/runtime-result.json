@@ -1,0 +1,300 @@
+{
+  "runtime": "PASS",
+  "postgres_version_num": 170011,
+  "table_count": 19,
+  "checks": [
+    "clean_apply_actual_baselines_plus_review_drafts",
+    "first_and_second_stage_views_distinct_repeated_stage_denied",
+    "one_credit_consumed_once_included_zero",
+    "refund_and_failure_release_history",
+    "rls_user1_essay_practice_sessions",
+    "rls_user1_essay_drafts",
+    "rls_user1_essay_attempts",
+    "rls_user1_essay_evaluations",
+    "rls_user1_essay_evaluation_dimensions",
+    "rls_user1_essay_improvement_items",
+    "rls_user1_essay_improvement_progress",
+    "rls_user1_essay_evaluation_evidence",
+    "rls_user1_essay_generated_rewrites",
+    "rls_user1_essay_learning_events",
+    "rls_user1_credit_accounts",
+    "rls_user1_credit_grants",
+    "rls_user1_essay_billing_decisions",
+    "rls_user1_credit_transactions",
+    "rls_user1_student_target_universities",
+    "rls_user2_essay_practice_sessions",
+    "rls_user2_essay_drafts",
+    "rls_user2_essay_attempts",
+    "rls_user2_essay_evaluations",
+    "rls_user2_essay_evaluation_dimensions",
+    "rls_user2_essay_improvement_items",
+    "rls_user2_essay_improvement_progress",
+    "rls_user2_essay_evaluation_evidence",
+    "rls_user2_essay_generated_rewrites",
+    "rls_user2_essay_learning_events",
+    "rls_user2_credit_accounts",
+    "rls_user2_credit_grants",
+    "rls_user2_essay_billing_decisions",
+    "rls_user2_credit_transactions",
+    "rls_user2_student_target_universities",
+    "other_user_draft_write_denied",
+    "other_user_target_write_denied",
+    "other_user_draft_delete_denied",
+    "anon_denied_owner_draft_cas_result_write_denied",
+    "trusted_service_read_grant",
+    "trusted_service_result_write_rolled_back",
+    "immutability_fk_check_unique",
+    "history_Q01_expected_rows",
+    "history_Q02_expected_rows",
+    "history_Q03_expected_rows",
+    "history_Q04_expected_rows",
+    "history_Q05_expected_rows",
+    "history_Q06_expected_rows",
+    "history_Q07_expected_rows",
+    "history_Q08_expected_rows",
+    "history_Q09_expected_rows",
+    "history_Q10_expected_rows",
+    "history_Q11_expected_rows",
+    "history_Q12_expected_rows",
+    "query_view_stage_timing",
+    "query_reviewed_cross_session_recurrence",
+    "query_university_attempt_revision_counts",
+    "all_12_history_queries_execute",
+    "comparable_growth_2_3_3_4_4",
+    "all_four_issue_states_retained",
+    "same_attempt_versions_coexist",
+    "included_revision_improvement_query",
+    "failed_no_charge_query",
+    "version_model_context_preserved",
+    "erasing_predecessor_preserves_later_observations",
+    "erasure_detaches_predecessor",
+    "financial_ledger_survives_answer_erasure",
+    "concurrent_duplicate_logical_request",
+    "concurrent_duplicate_request_one_consume",
+    "two_provider_runs_one_completed_evaluation_one_charge",
+    "timeout_then_selected_success_single_visible_result",
+    "concurrent_spend_starting_credit_one",
+    "concurrent_distinct_requests_one_credit_one_winner",
+    "no_negative_balance_with_reference_protocol",
+    "evaluation_model_context_survives_ops_retention",
+    "behavior_retention_independent",
+    "private_learning_cascade",
+    "financial_retention_boundary"
+  ],
+  "rls_matrix": [
+    {
+      "role": "owner",
+      "private_tables": 15,
+      "read": "ALLOW",
+      "server_fact_writes": "DENIED",
+      "provider_telemetry_read": "DENIED"
+    },
+    {
+      "role": "other_user",
+      "private_tables": 15,
+      "read": "NO_ROWS",
+      "server_fact_writes": "DENIED",
+      "provider_telemetry_read": "DENIED"
+    },
+    {
+      "role": "anon",
+      "private_tables": 16,
+      "read_and_insert": "DENIED"
+    }
+  ],
+  "history_queries": [
+    {
+      "query": "Q1",
+      "status": "PASS",
+      "rows": 6
+    },
+    {
+      "query": "Q2",
+      "status": "PASS",
+      "rows": 6
+    },
+    {
+      "query": "Q3",
+      "status": "PASS",
+      "rows": 6
+    },
+    {
+      "query": "Q4",
+      "status": "PASS",
+      "rows": 5
+    },
+    {
+      "query": "Q5",
+      "status": "PASS",
+      "rows": 1
+    },
+    {
+      "query": "Q6",
+      "status": "PASS",
+      "rows": 1
+    },
+    {
+      "query": "Q7",
+      "status": "PASS",
+      "rows": 12
+    },
+    {
+      "query": "Q8",
+      "status": "PASS",
+      "rows": 7
+    },
+    {
+      "query": "Q9",
+      "status": "PASS",
+      "rows": 6
+    },
+    {
+      "query": "Q10",
+      "status": "PASS",
+      "rows": 1
+    },
+    {
+      "query": "Q11",
+      "status": "PASS",
+      "rows": 1
+    },
+    {
+      "query": "Q12",
+      "status": "PASS",
+      "rows": 1
+    }
+  ],
+  "concurrency": {
+    "same_logical_request": {
+      "winner": 1,
+      "duplicate": 1,
+      "logical_evaluations": 1,
+      "consume_count": 1
+    },
+    "last_credit": {
+      "winner": 1,
+      "loser": 1,
+      "final_available": 0,
+      "negative": false
+    },
+    "deadlock_observed": false,
+    "lock_order": [
+      "account",
+      "session",
+      "grants_sorted",
+      "request"
+    ],
+    "protocol": "test_reference_not_production_RPC"
+  },
+  "limitations": [
+    "Auth stub, not full Supabase/PostgREST integration",
+    "Billing uses test reference transactions, production RPC not implemented",
+    "Submission endpoint and narrow worker permission E2E remain gates"
+  ],
+  "guards": [
+    {
+      "guard": "missing_consent",
+      "status": "PASS",
+      "refused": true
+    },
+    {
+      "guard": "non_loopback",
+      "status": "PASS",
+      "refused": true
+    },
+    {
+      "guard": "wrong_db_name",
+      "status": "PASS",
+      "refused": true
+    },
+    {
+      "guard": "populated_database",
+      "status": "PASS",
+      "refused": true
+    },
+    {
+      "guard": "postgres_before_17",
+      "status": "PASS",
+      "refused": true
+    }
+  ],
+  "negative_server_version_num": 160015,
+  "schema_footprints_unchanged": true,
+  "dsn_logged": false,
+  "phase": "Productization Phase 2A",
+  "date": "2026-09-28",
+  "starting_head": "ce2f754",
+  "scope": "Disposable PostgreSQL schema and reference transaction protocol only",
+  "environment": {
+    "host": "NUMERIC_LOOPBACK",
+    "database": "DEDICATED_DISPOSABLE",
+    "production_connection": false,
+    "real_user_data": false,
+    "ai_provider_calls": 0,
+    "driver": "psycopg 3.3.6",
+    "servers_stopped_after_validation": true
+  },
+  "bugs": [
+    {
+      "id": "P2A-01",
+      "classification": "SCHEMA_BUG",
+      "object": "essay_product_progress_guard",
+      "sqlstate": "42883",
+      "error": "operator does not exist: timestamp with time zone >= time with time zone",
+      "cause": "current_time resolved as PostgreSQL CURRENT_TIME instead of timestamptz variable",
+      "fix": "Rename variable/references to assessment_time; retain all constraints",
+      "regression": "OPEN -> IMPROVED -> RESOLVED -> RECURRED runtime fixture PASS"
+    },
+    {
+      "id": "P2A-02",
+      "classification": "TEST_FIXTURE_BUG",
+      "object": "history Q7 expected count",
+      "error": "expected 14 rows, actual 12",
+      "cause": "Cross-session answer correctly excluded from same-session view join",
+      "fix": "Expect 12; assert both meaningful stages separately"
+    }
+  ],
+  "static_tests": {
+    "count": 30,
+    "status": "PASS",
+    "tables": 19,
+    "foreign_keys": 40,
+    "policies": 24,
+    "plpgsql_functions": 9
+  },
+  "gates": {
+    "clean_apply": "PASS",
+    "fk": "PASS",
+    "unique": "PASS",
+    "check": "PASS",
+    "rls": "PASS",
+    "history": "PASS",
+    "immutability": "PASS",
+    "billing_idempotency_reference": "PASS",
+    "concurrency_reference": "PASS",
+    "deletion_boundary": "PASS"
+  },
+  "schema_status": "RUNTIME_VALIDATED",
+  "production_migration_promotion_ready": false,
+  "production_endpoint_ready": false,
+  "production_applied": false,
+  "app_lab_shared_identity": "NOT_VERIFIED",
+  "real_student_data_rollout": "BLOCKED",
+  "remaining_blockers": [
+    "Owner runtime review",
+    "Actual authorized submit/finalize/billing/erasure server transactions",
+    "Narrow worker authorization and Supabase JWT/PostgREST tests",
+    "Lease fencing/late success reconciliation; expiry, cumulative refunds, concurrent included benefits",
+    "Shared App/LAB auth.users.id E2E",
+    "Privacy/rights/retention release review"
+  ],
+  "input_hashes": {
+    "supabase/review/essay_lab_product/001_student_essay_product.draft.sql": "8a21d449446f3a3f9e851655b00a7bc970ab7794bc857c3b6ff0b00564ac8a1f",
+    "supabase/review/essay_lab_product/002_entitlements.draft.sql": "81c43fc8b266a844abf4d595301a1ac768e838c2931079fde8c7ec48f6e0aeab",
+    "supabase/review/essay_lab_product/history_queries.sql": "980eeb3fb1ca05715b1d143893fce18c85c218bde9f9c36ce17f12d726380b0e",
+    "supabase/review/essay_lab_product/runtime/run.py": "ee83a632243f38a397ff2a6a459dc2e8fd2913a124127f53e3f3010ca85f9577",
+    "supabase/review/essay_lab_product/runtime/guard_checks.py": "58bbbd987fe394f9860eef40bde94fbc31d24e4a0db6e59fce84674a041e31cd",
+    "supabase/migrations/20260912000100_initial_content_schema.sql": "2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b",
+    "supabase/migrations/20260927000200_essay_lab_foundation.sql": "d1c4fcb1b31cf4ea7979bc7cd585f5aa817383b5d3d531a4a64430d431dffcf3"
+  }
+}

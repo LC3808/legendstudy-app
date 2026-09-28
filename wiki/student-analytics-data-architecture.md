@@ -19,7 +19,8 @@ LegendStudy는 학생의 현재 평가만 저장하지 않는다. 답안, 평가
 Submitted snapshots, versioned evaluations/dimensions, issue observations, meaningful behavior,
 provider runs and ledger movements have distinct retention boundaries. No current-only status
 merge. Final SQL adds history guards, explicit predecessor, meaningful-stage dedupe and request/
-posting uniqueness without adding tables. Shared-identity rollout and runtime verification remain gates.
+posting uniqueness without adding tables. [Phase2A PostgreSQL17.11 runtime PASS](essay-lab-runtime-validation.md); shared-identity rollout,
+actual server endpoints and Supabase JWT/PostgREST verification remain gates.
 
 ## Recommended MVP architecture — Owner decision summary
 

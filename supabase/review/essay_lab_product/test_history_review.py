@@ -27,7 +27,7 @@ def history_checks(sql=SQL):
         'on delete set null (previous_progress_id)',
         'on delete set null (supersedes_evaluation_id)',
         'foreign key(previous_progress_id,issue_id)',
-        'prior_time >= current_time',
+        'prior_time >= assessment_time',
         'normalization_status',
         "'open','improved','resolved','unchanged','recurred'",
         'unique index essay_example_first_stage_view',

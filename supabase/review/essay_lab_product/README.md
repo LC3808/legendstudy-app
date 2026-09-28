@@ -8,7 +8,8 @@ Final history review recommendation: **KEEP19**,0 moved/merged. See
 `validation-report.json` is preserved as the5497498 Phase1 review record.
 `history_queries.sql` provides12 SELECT templates; [runtime package](runtime/README.md)
 contains an executable disposable-PostgreSQL fixture and18 required validation gates.
-No runtime claims: server unavailable. The runner only exercised its missing-prerequisite refusal.
+Phase2A actual PostgreSQL17.11 runtime PASS: [result](runtime/runtime-result.json).
+One PL/pgSQL variable-name correction; KEEP19, no invariant weakened. Earlier static reports remain historical.
 
 
 - [Product spec](../../../wiki/essay-lab-product-v1.md)
@@ -34,11 +35,11 @@ RLS anon/owner/other/service tests; source/rights/privacy release review. Curren
 proposal, not a complete deployable billing engine. Required cross-row transaction invariants
 are explicitly in architecture; CHECK constraints do not implement account locking or policy.
 
-**Local-only future runtime strategy:** isolated PostgreSQL/Supabase DB, synthetic auth users
+**Local-only runtime strategy (executed in Phase2A):** isolated PostgreSQL/Supabase DB, synthetic auth users
 A/B and public resource fixtures, apply both drafts, verify grants/constraints/state paths, rollback
 fixture transaction or discard only the disposable DB. Never load Owner/private Pilot answers.
-Do not run this DDL in Production even within rollback. No local server available this phase:
-RUNTIME_SCHEMA_TEST = NOT_RUN.
+Do not run this DDL in Production even within rollback. Dedicated disposable PostgreSQL17.11 now verified; schema/reference protocol PASS.
+Production endpoint and Supabase JWT/PostgREST verification remain pending.
 
 Static invocation (pglast8.4 used in a temporary venv; parser success does not establish PostgreSQL17/Supabase runtime behavior):
 `python3 supabase/review/essay_lab_product/validate_drafts.py`

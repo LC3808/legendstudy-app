@@ -2845,3 +2845,12 @@ terminal telemetry guards, same-attempt request/posting dedupe, stage-view dedup
 progress predecessor and safe erasure detachment.12 read-only history queries prepared;30 static
 tests PASS. Disposable PostgreSQL runner prepared, NOT_RUN (no local server/Docker daemon);
 real RPC and shared-identity E2E remain rollout gates. No Production/UI/AI/migration promotion.
+
+## 2026-09-28 — Essay Phase2A actual PostgreSQL runtime PASS
+
+[Runtime report](essay-lab-runtime-validation.md): disposable PostgreSQL17.11,77 named checks,
+12 history queries,5 actual guard refusals (including16.15),30 static tests PASS. KEEP19.
+Fixed PL/pgSQL current_time name collision only; preserved constraints/RLS/immutability.
+Two-connection races: duplicate logical evaluation1/consume1; last credit winner1/loser1/balance0.
+Both disposable servers stopped. Production never connected/applied; actual endpoints/JWT and
+App/LAB shared identity remain gates. No UI/AI/payment/migration promotion; Owner files preserved.

@@ -362,15 +362,15 @@ create trigger essay_result_evidence_guard before insert or update on public.ess
 
 -- Local previous-observation link is explicit; missing observation never means resolved.
 create function public.essay_product_progress_guard() returns trigger language plpgsql set search_path = '' as $$
-declare prior_time timestamptz; current_time timestamptz; prior_state text;
+declare prior_time timestamptz; assessment_time timestamptz; prior_state text;
 begin
  if tg_op='INSERT' and new.status <> 'open' and new.previous_progress_id is null then raise exception 'non-initial observation requires predecessor'; end if;
  if new.previous_progress_id is not null then
   select e.requested_at,p.status into prior_time,prior_state from public.essay_improvement_progress p
    join public.essay_evaluations e on e.id=p.evaluation_id
    where p.id=new.previous_progress_id and p.issue_id=new.issue_id and e.status='completed';
-  select e.requested_at into current_time from public.essay_evaluations e where e.id=new.evaluation_id;
-  if prior_time is null or prior_time >= current_time then raise exception 'progress predecessor must be an earlier completed assessment'; end if;
+  select e.requested_at into assessment_time from public.essay_evaluations e where e.id=new.evaluation_id;
+  if prior_time is null or prior_time >= assessment_time then raise exception 'progress predecessor must be an earlier completed assessment'; end if;
   if new.status='recurred' and prior_state<>'resolved' then raise exception 'recurrence requires prior resolution'; end if;
   if new.status='unchanged' and prior_state='resolved' then raise exception 'still resolved must be explicitly assessed as resolved'; end if;
  end if;
