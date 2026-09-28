@@ -1,4 +1,88 @@
-# Production migration history baseline reconciliation — READ ONLY / NOT READY
+# Migration baseline adoption — READY / NOT WRITTEN
+
+## Owner final adoption check — 2026-09-28
+
+**BASELINE_ADOPTION_READY: YES.** Current Production state can be adopted as the historical
+chain through20260927000200. **13 baseline candidates;3 Product versions remain pending.**
+Actual history write, repair, list, db push/dry-run and Product apply were not performed.
+The next controlled baseline write requires separate authorization.
+
+Owner supporting context: “초기 LegendStudy Production DB 변경은 주로 Supabase SQL Editor를 통한
+Owner 수동 적용으로 운영되었으며, 따라서 Supabase CLI migration ledger가 존재하지 않는다.”
+Ledger absence is consistent with that workflow; this is not individual migration execution proof.
+Further pursuit of historical CLI execution proof stops. Earlier UNKNOWN findings below remain a
+historical evidence boundary, superseded for current-state adoption by this Owner decision and narrow check.
+
+Existing1569/1569 structural comparisons, semantic divergence0, Foundation state equivalence and canonical
+5/21/134/orphan0 evidence were reused without another schema audit or canonical-data query.
+Only three data-correction current invariants were queried, using BEGIN READ ONLY/ROLLBACK and aggregate
+counts. No IDs, emails, tokens or private row contents returned. [Current sanitized result](../supabase/validation/migration_baseline/adoption_result.json).
+
+| Migration | Intended current invariant | Violation count | Result | Replay effect | Baseline safe |
+|---|---|---:|---|---|---|
+|20260917000200|Pending notifications have scheduling metadata; processing/claim fields are consistent|0|PASS|NO_OP|YES|
+|20260926000100|No eligible legacy profile remains without a target; no duplicate primary target per owner|0|PASS|NO_OP|YES|
+|20260927000100|Profiles with grade/school information do not lack an onboarding marker|0|PASS|NO_OP|YES|
+
+Replay effect describes **only the original data-correction statement at this observed snapshot**.
+No replay was executed; full historical DDL replay is still prohibited. Notification backfill NULL matches0;
+terminal sent/failed NULL schedules are legitimate later lifecycle states, not invariant violations. The
+unconditional old NULL backfill could be risky on such rows later; today no such rows match. D-Day titles
+need not equal legacy titles after legitimate user edits, so no equality condition was invented.
+These predicates assess current adoption safety, not historical affected populations or exact timestamps.
+Foundation20260927000200: STATE_EQUIVALENT YES / BASELINE_SAFE YES / execution proof remains NO.
+
+### Exact controlled baseline-write plan — prepared only
+
+After separate approval, Codex/operator verifies the linked LegendStudy project and the approved file
+hashes, then uses the supported CLI history initializer/explicit-version repair path already inspected.
+Do not ask Owner to execute SQL. Do not directly INSERT history. Never omit the version list.
+
+```sh
+supabase migration repair --linked --status applied 20260912000100 20260913000100 20260913000200 20260914000100 20260914000200 20260917000100 20260917000200 20260923000100 20260923000200 20260925000100 20260926000100 20260927000100 20260927000200
+supabase migration list --linked
+supabase db push --linked --skip-vault --dry-run
+```
+
+These commands were **not executed**. After repair, inspect the history metadata read-only: exactly13
+approved versions/names and file statement metadata match the frozen inventory; all3 Product versions
+remain absent. The CLI history initializer and row repair use separate transactions: if either fails,
+stop and inspect actual history rather than assuming rollback across both. Keep product writers disabled.
+Run list verification only after a successful approved repair. Run dry-run only if list/history verification
+passes; it must show exactly the following pending versions, otherwise STOP:
+
+- 20260928000100
+- 20260928000200
+- 20260928000300
+
+Do not use include-all/include-seed/include-roles. skip-vault avoids unrelated vault updates.
+**STOP after dry-run; no Product migration apply.** Privacy/provider/retention and actual student rollout
+remain separate gates. No old data correction or application schema change belongs in the baseline write.
+
+Ordered baseline versions:
+
+```text
+20260912000100
+20260913000100
+20260913000200
+20260914000100
+20260914000200
+20260917000100
+20260917000200
+20260923000100
+20260923000200
+20260925000100
+20260926000100
+20260927000100
+20260927000200
+```
+
+Validation:4 focused adoption tests PASS; Wiki/diff/secret/Owner-file preservation checks. The1569
+structural comparison and previous18 tests are historical evidence and were not rerun for this narrow task.
+
+---
+
+# Historical reconciliation checkpoint — before Owner adoption context
 
 **BASELINE_READY: NO · READY_FOR_BASELINE_WRITE: NO · READY_FOR_PRODUCT_APPLY: NO.**
 2026-09-28; starting package8ed425f. No migration was executed, including local replay. Production schema/history remain unchanged.

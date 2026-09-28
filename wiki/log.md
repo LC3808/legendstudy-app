@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-28 — Baseline adoption final current-state check
+
+- [Adoption](production-migration-baseline-reconciliation.md): Owner confirms SQL Editor manual deployment context; no further CLI execution archaeology.
+- Three correction invariants all0/PASS; existing1569 comparisons reused.13-version baseline adoption READY; Product3 pending.
+- No history write/repair/list/push/dry-run/apply;4 focused tests PASS. Controlled write plan prepared, separate approval next.
+
 ## 2026-09-28 — Migration history read-only reconciliation
 
 - [Baseline](production-migration-baseline-reconciliation.md):16 migrations;10 state-equivalent/unproven,3 historical backfill unknowns,3 confirmed pending.

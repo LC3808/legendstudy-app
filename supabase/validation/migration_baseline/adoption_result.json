@@ -1,0 +1,102 @@
+{
+  "date": "2026-09-28",
+  "starting_head": "9dba49c",
+  "owner_deployment_history": "MANUAL_SQL_EDITOR_PRIMARY",
+  "migration_ledger_absence": "CONSISTENT_WITH_HISTORICAL_WORKFLOW",
+  "owner_context": "초기 LegendStudy Production DB 변경은 주로 Supabase SQL Editor를 통한 Owner 수동 적용으로 운영되었으며, 따라서 Supabase CLI migration ledger가 존재하지 않는다. 개별 migration 실행 증명이 아닌 현재-state baseline 채택 supporting context.",
+  "structural_match": {
+    "matched": 1569,
+    "expected": 1569,
+    "source_commit": "9dba49c",
+    "reused": true,
+    "rerun": false
+  },
+  "semantic_divergence": 0,
+  "canonical_evidence": {
+    "universities": 5,
+    "essay_exams": 21,
+    "essay_exam_resources": 134,
+    "orphans": 0,
+    "reused": true,
+    "requeried": false
+  },
+  "corrections": {
+    "20260917000200": {
+      "intended_invariant": "기존 알림의 재시도 시각을 초기화하여 처리 가능한 대기 상태를 만든다. 현재 pending 일정 누락/claim 상태 위반을 검사한다. sent 또는 재시도 불가 failed의 NULL 일정은 정상 lifecycle로 허용한다.",
+      "current_violation_count": 0,
+      "current_invariant": "PASS",
+      "replay_effect": "NO_OP",
+      "replay_scope": "DATA_CORRECTION_STATEMENT_ONLY_AT_OBSERVED_SNAPSHOT; full historical DDL replay remains prohibited",
+      "baseline_safe": "YES",
+      "aggregate_evidence": {
+        "backfill_replay_matched_rows": 0,
+        "invalid_claim_state": 0,
+        "pending_missing_schedule": 0,
+        "terminal_null_schedule": 0
+      }
+    },
+    "20260926000100": {
+      "intended_invariant": "기존 단일 D-Day가 있고 새 target이 없는 계정에 primary target을 만든다. 기존 target의 이후 수정은 덮어쓰지 않으며 중복 primary가 없어야 한다.",
+      "current_violation_count": 0,
+      "current_invariant": "PASS",
+      "replay_effect": "NO_OP",
+      "replay_scope": "DATA_CORRECTION_STATEMENT_ONLY_AT_OBSERVED_SNAPSHOT; full historical DDL replay remains prohibited",
+      "baseline_safe": "YES",
+      "aggregate_evidence": {
+        "duplicate_primary_owners": 0,
+        "eligible_legacy_without_target": 0
+      }
+    },
+    "20260927000100": {
+      "intended_invariant": "학년 또는 학교 정보가 이미 있는 profile에 onboarding 완료 표시를 채워 불필요한 재질문을 방지한다.",
+      "current_violation_count": 0,
+      "current_invariant": "PASS",
+      "replay_effect": "NO_OP",
+      "replay_scope": "DATA_CORRECTION_STATEMENT_ONLY_AT_OBSERVED_SNAPSHOT; full historical DDL replay remains prohibited",
+      "baseline_safe": "YES",
+      "aggregate_evidence": {
+        "eligible_missing_onboarding_marker": 0
+      }
+    }
+  },
+  "foundation_20260927000200": {
+    "state_equivalent": "YES",
+    "baseline_safe": "YES",
+    "execution_proven": "NO"
+  },
+  "baseline_adoption_ready": "YES",
+  "baseline_cutoff": "20260927000200",
+  "baseline_version_count": 13,
+  "baseline_versions": [
+    "20260912000100",
+    "20260913000100",
+    "20260913000200",
+    "20260914000100",
+    "20260914000200",
+    "20260917000100",
+    "20260917000200",
+    "20260923000100",
+    "20260923000200",
+    "20260925000100",
+    "20260926000100",
+    "20260927000100",
+    "20260927000200"
+  ],
+  "expected_pending_after_baseline": [
+    "20260928000100",
+    "20260928000200",
+    "20260928000300"
+  ],
+  "history_write_performed": false,
+  "individual_cli_execution_proven": false,
+  "production_mutation": false,
+  "migration_repair": false,
+  "db_push": false,
+  "db_push_dry_run": false,
+  "owner_sql_required": false,
+  "product_apply": false,
+  "next_if_ready": "Separate approval: controlled explicit-version migration-history baseline write -> migration list verification -> db push --skip-vault --dry-run -> STOP before Product migration apply",
+  "read_only_guard": "PASS",
+  "query_sha256": "6e31aa2882b52bf172e9691feeafe4145b84d7dcde58fc17302d0b20d4053c49",
+  "supersedes_for_current_adoption_decision": "manifest.json historical UNKNOWN execution/data-effect assessment; historical evidence retained without rewriting execution facts"
+}
