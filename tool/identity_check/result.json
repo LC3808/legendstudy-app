@@ -1,0 +1,65 @@
+{
+  "phase": "2C",
+  "date": "2026-09-28",
+  "starting_head": "f06ae7d",
+  "static_backend_match": "PASS",
+  "project_reference": "stlhijzpjfgwwdgunlsd",
+  "identity_source": "server-validated auth.users.id",
+  "apple": {
+    "historical_owner_pass": true,
+    "fresh_e2e": "NOT_RUN"
+  },
+  "google": {
+    "historical_owner_pass": true,
+    "fresh_e2e": "NOT_RUN"
+  },
+  "kakao": {
+    "app_login": "NOT_RUN",
+    "lab_login": "NOT_RUN",
+    "same_account": "NOT_VERIFIED",
+    "same_auth_user_id": "NOT_VERIFIED",
+    "result": "OWNER_E2E_REQUIRED"
+  },
+  "email": "NOT_RUN",
+  "account_switch": {
+    "synthetic_stale_response_checks": "PASS",
+    "physical_e2e": "NOT_RUN",
+    "phase2b_local_isolation": "PRESERVED_PASS"
+  },
+  "diagnostic": {
+    "code": "READY",
+    "physical_device_connected": false,
+    "installed_or_armed": false,
+    "release_enabled": false,
+    "default_enabled": false,
+    "actual_private_identity_captured": false
+  },
+  "tests": {
+    "flutter_identity_shared_kakao_native": 21,
+    "lab_auth_kakao_existing": 33,
+    "browser_diagnostic": 4,
+    "python_comparison": 6,
+    "flutter_analyze": "PASS"
+  },
+  "sensitive_data_logged": false,
+  "production_auth_requests": 0,
+  "production_schema_mutation": false,
+  "production_data_mutation": false,
+  "migration_promotion": false,
+  "production_apply": false,
+  "migration_technically_ready": "YES_FOR_ACCEPTED_PHASE2B_SCOPE",
+  "real_student_data_ready": false,
+  "app_lab_shared_identity": "PARTIAL",
+  "migration_promotion_gate": "READY_FOR_OWNER_REVIEW",
+  "new_regressions": 0,
+  "owner_files_preserved": true,
+  "source_sha256": {
+    "lib/core/config/app_config.dart": "b4a9bfb4c40d88541cbe957f8cdb32dd1ade70d7425c49d85704dd867e332e8c",
+    "lib/features/auth/auth_oauth.dart": "4917c72edf3dc5829fa4bbf1478e24794f9ed136f19e62277350738ffbac4c03",
+    "lib/features/auth/identity_diagnostic.dart": "50feb407d5c548b24af3bcb31c99ad7d790ae21b0159979dcf64cc56608d6e1f",
+    "legendstudy-lab/src/lib/auth-config.ts": "0bba4ffa748f9a174d7e91a1fd660da830ea3fd2c8982d9b3dceee94382c4d1f",
+    "legendstudy-lab/src/lib/browser-auth-client.ts": "122ba07d95822704c6f4f84374ab2b1827dfb3777b67fe7925cbb97649830c88",
+    "legendstudy-lab/src/lib/kakao-oidc.ts": "d55c5810816d2ce3d17f2f6ba769939016fc9cc5a224bafd67023bcc316d6bcb",
+    "legendstudy-lab/src/components/kakao-callback.tsx": "b0727461fb3619f376f154ef6dd496bac9f1843d5e7282f6d14b6f84500789c5"
+  }
+}

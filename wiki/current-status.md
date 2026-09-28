@@ -135,7 +135,7 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Phase2B server/JWT](essay-lab-server-transactions.md): KEEP19;77+55 RPC/37 real JWT,
 5 guards/36 static PASS.4 additive draft columns; Production NOT_APPLIED.
-Owner review next; shared identity E2E/provider deployment/privacy gates remain.
+[Identity2C](essay-lab-shared-identity.md): diagnostic ready; Kakao E2E needs phone.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.

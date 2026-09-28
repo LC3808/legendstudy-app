@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {webcrypto,createHmac} from 'node:crypto';
+import {probeLabIdentity} from './browser.mjs';
+const config={salt:'a'.repeat(64),expires:new Date(Date.now()+3600000).toISOString(),publishableKey:'sb_publishable_fixture'};
+function fixture(){let value=JSON.stringify({access_token:'PRIVATE_TOKEN_SENTINEL',user:{id:'fixture-a'}});let calls=[];
+return {env:{location:{origin:'https://lab.legendstudy.com'},crypto:webcrypto,localStorage:{getItem:()=>value},fetch:async(url,options)=>{calls.push([url,options]);return {ok:true,json:async()=>({id:'fixture-a',email:'PRIVATE_EMAIL_SENTINEL'})};}},calls,set:v=>value=v};}
+test('validated GET only; same HMAC vector; no raw identity/token/email',async()=>{const f=fixture();const r=await probeLabIdentity(config,f.env);assert.equal(r.status,'verified');assert.equal(r.digest,createHmac('sha256',config.salt).update('legendstudy-identity-v1|stlhijzpjfgwwdgunlsd|fixture-a').digest('hex'));assert.equal(f.calls[0][1].method,'GET');assert(!JSON.stringify(r).includes('PRIVATE'));assert(!JSON.stringify(r).includes('fixture-a'));});
+test('wrong origin/expired challenge rejected without fetch',async()=>{const f=fixture();f.env.location.origin='https://other.invalid';assert.equal((await probeLabIdentity(config,f.env)).status,'invalid_configuration');assert.equal(f.calls.length,0);f.env.location.origin='https://lab.legendstudy.com';assert.equal((await probeLabIdentity({...config,expires:'2000-01-01'},f.env)).status,'invalid_configuration');});
+test('logout during validation cannot return prior digest',async()=>{const f=fixture();f.env.fetch=async()=>{f.set(null);return {ok:true,json:async()=>({id:'fixture-a'})};};assert.equal((await probeLabIdentity(config,f.env)).status,'session_changed');});
+test('server mismatch, error and signed-out return no digest',async()=>{const f=fixture();f.env.fetch=async()=>({ok:true,json:async()=>({id:'fixture-b'})});assert.equal((await probeLabIdentity(config,f.env)).status,'verification_failed');f.env.fetch=async()=>{throw Error('PRIVATE_TOKEN_SENTINEL');};assert(!JSON.stringify(await probeLabIdentity(config,f.env)).includes('PRIVATE'));f.set(null);assert.equal((await probeLabIdentity(config,f.env)).status,'signed_out');});

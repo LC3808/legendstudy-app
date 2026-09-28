@@ -2862,3 +2862,10 @@ columns.77 existing +55 operation checks,37 actual Auth JWT/PostgREST checks,5 g
 Concurrent included/last-credit claims, stale-worker fencing, rollback and bounded refunds verified.
 Shared backend static PASS; provider E2E/real worker deployment/privacy gates remain. No Production,
 UI, AI, payment or migration promotion. Owner iOS files preserved.
+
+## 2026-09-28 — Essay Phase2C shared identity diagnostic preparation
+
+[Identity gate](essay-lab-shared-identity.md): static backend PASS; Apple/Google historical Owner
+PASS retained. Opt-in App + LAB browser read-only salted-digest harness prepared, no UUID/token output.
+No phone connected, so Kakao/email fresh E2E and device install NOT_RUN; rollout BLOCKED. No Production
+request/mutation, migration, LAB deploy or product UI. Owner device connection/login is next.
