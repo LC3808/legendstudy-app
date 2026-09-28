@@ -357,3 +357,11 @@ selected answer/criteria; one v1.1 run frozen before reveal. Execution PASS, ben
 PARTIAL: final issue dedup PASS, level recognition/teacher balance PARTIAL. Original
 contract/Sookmyung untouched. No Production writes. Afternoon1 H24-R01 stopped and
 preserved; business REVIEW. Owner result review next; no further evaluation.
+
+## 2026-09-28 — Rewrite generation, no re-evaluation
+
+[Two-case rewrite Pilot](essay-lab-rewrite-pilot-v1.md): one independent generation per
+university, both frozen; original evaluations unchanged. Hanyang PARTIAL (unsupported
+policy-agreement insertion), Sookmyung PASS; both length ranges met. Optional AI example
+follows student-first revision UX. Full texts private; product-design gate CONDITIONAL.
+No Production/UI/schema change or further generation; Owner comparison next.

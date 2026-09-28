@@ -133,8 +133,8 @@ Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserv
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
 Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
-[Hanyang 오후2 v1.1](essay-lab-hanyang-2024-afternoon2-run-a.md):1 frozen run,
-benchmark PARTIAL; dedup PASS, level/tone review. H24-R01 preserved;0 DB writes.
+[Rewrite Pilot](essay-lab-rewrite-pilot-v1.md): 한양 PARTIAL/숙명 PASS; 각1회 frozen.
+입장 추가1건 Owner review; 직접 재작성 우선. 기존 평가/H24-R01 보존;0 DB writes.
 Do not start analytics, new Materials audits or unrelated UI work.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.

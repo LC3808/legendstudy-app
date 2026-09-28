@@ -538,3 +538,11 @@ in official criteria; consolidate the same root issue and prioritize concrete ne
 actions. Friendly concise Korean, no raw English/AI/internal status jargon to students;
 technical keys stay stable. Uncertain findings remain qualified.
 [Canonical details](essay-lab-hanyang-2024-benchmark.md#student-facing-language-and-evaluation-philosophy--canonical-owner-policy).
+
+## 2026-09-28 — Student revision first; optional AI rewrite example
+
+Students should first revise their own answer after diagnosis. An optional
+“첨삭을 반영한 예시 답안” preserves their stance and wording while applying only
+confirmed improvements. Its provenance is ai_generated, never university official
+or model_answer. Keep official examples distinct; no compulsory early reveal.
+[Pilot and private-body boundary](essay-lab-rewrite-pilot-v1.md). No UI/DB approval.

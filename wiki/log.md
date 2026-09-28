@@ -2818,3 +2818,11 @@ official answer provenance; Sookmyung frozen output unchanged.
   PARTIAL; final weakness dedup PASS, level/teacher balance remains review.
 - Contract unchanged; output frozen before reveal. No rerun/DB/schema/resource creation.
   H24-R01 preserved/stopped, business and Hanyang2025 REVIEW; Owner review next.
+
+## 2026-09-28 — Two independent rewrite samples frozen
+
+- [Rewrite Pilot](essay-lab-rewrite-pilot-v1.md): Hanyang1158 chars/PARTIAL and
+  Sookmyung310 chars/PASS;1 generation each,0 evaluation reruns.
+- All four confirmed improvements reflected; Hanyang adds one unsupported policy
+  stance. Preserve first outputs. Product design CONDITIONAL, Owner comparison next.
+- Full original/generated text private only; no DB/schema/UI changes.

@@ -1,0 +1,315 @@
+{
+  "version": "rewrite-pilot-v1",
+  "starting_head": "2341b2a",
+  "origin": "ai_generated",
+  "label": "첨삭을 반영한 예시 답안",
+  "review_method": "Operator comparison against immutable diagnoses and source; no generated-answer grading model, no scores, Owner judgment pending.",
+  "cases": {
+    "hanyang": {
+      "argument_preservation": "PARTIAL",
+      "improvement_coverage": "PASS",
+      "over_editing": "PARTIAL",
+      "length_compliance": "PASS",
+      "language_naturalness": "PASS",
+      "official_criteria_alignment": "PASS",
+      "student_learning_value": "PARTIAL",
+      "overall": "PARTIAL",
+      "over_editing_severity": "MINOR_WITH_STANCE_REVIEW",
+      "coverage": {
+        "B_premise": "YES",
+        "sanction_direction": "YES",
+        "total_utility_and_rights": "YES",
+        "compression_and_length": "YES"
+      },
+      "changes": [
+        {
+          "category": "A",
+          "item": "B의 비존재 대비 삶의 가치 전제 오류 수정",
+          "reason": "제시문 전제/기존 보완1"
+        },
+        {
+          "category": "A",
+          "item": "미래 세대가 현재 세대에 보상·제재하는 방향으로 수정",
+          "reason": "사회계약론 두 번째 조건/보완2"
+        },
+        {
+          "category": "A",
+          "item": "소수를 계산에서 배제한다는 설명을 계산에 포함해도 권리 침해 가능으로 수정",
+          "reason": "공리주의 평가/보완3"
+        },
+        {
+          "category": "B",
+          "item": "상호 협력과 두 조건의 결론 연결을 명확화",
+          "reason": "기존 논증 연결 보존"
+        },
+        {
+          "category": "C",
+          "item": "국가 창설 등 일반 이론 소개 압축",
+          "reason": "보완4"
+        },
+        {
+          "category": "C",
+          "item": "반복적 소수 희생 비판 압축",
+          "reason": "보완4"
+        },
+        {
+          "category": "D",
+          "item": "현재·미래 이익과 손실의 총량 비교 보충",
+          "reason": "공식 기준/보완3"
+        },
+        {
+          "category": "D",
+          "item": "보존 정책에서는 B가 아니라 A가 존재한다는 연결 보충",
+          "reason": "보완1"
+        },
+        {
+          "category": "E",
+          "item": "자원 보존 정책의 필요성에 동의한다는 명시적 입장 추가",
+          "reason": "원문은 공리주의적 결정에 반대한다고만 함. 이 찬성 입장을 학생 의도로 확정할 수 없음."
+        }
+      ],
+      "findings": [
+        "기본 순서와 공리주의 권리 비판은 유지. 전면적인 새 논증으로 교체하지는 않았음.",
+        "마지막의 정책 찬성 명시는 기존 진단에 필수인 수정이 아님. 추가 입장 보존 문제 때문에 PARTIAL.",
+        "불필요한 새 철학 개념 없음. 전개상 필요한 정책 비교는 보완 범위 안."
+      ],
+      "original_length_note": "1296 readable-transcription code points includes eight-character uncertainty marker; known characters excluding marker1288. Exact handwritten count UNKNOWN. Two handwritten characters unresolved; grid wrapping/spacing not a certified cell count.",
+      "generation_executed": true,
+      "run_count": 1,
+      "model": "gpt-6-astra",
+      "model_version": "UNKNOWN",
+      "output_sha256": "2301b72f68d0ae7c8a84ad8d9eb940760470f3f8965e8a368d623799cdc75d84",
+      "frozen_at": "2026-09-28T01:49:43.854204+00:00",
+      "latency_seconds": 126.976,
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 25833,
+          "output_tokens": 3560,
+          "reasoning_output_tokens": 2850
+        }
+      ],
+      "api_cost": "UNKNOWN; authenticated CLI usage is not product API cost",
+      "input_manifest": {
+        "accepted_evaluation_input_hash": "714bc8fa76d4f4f945e0f0e22a7f0ac571feae2c86eee02e09eb2a0b4d33dcd6",
+        "case": "hanyang",
+        "cross_case_output_supplied": false,
+        "image_count": 6,
+        "images": {
+          "input_1.png": "aff18fcb618b89403367b09e30013c66ab4227fb05c4f93498234cbba9232e8a",
+          "input_2.png": "00998c013ed6dd3ed8b5257cab58ca37b8aba2b1fb1a1e1a28988dc3c8434da1",
+          "input_3.png": "de1250108aee77c9100550f7380a94984f9360fab21c690ebe8409883abe9d14",
+          "input_4.png": "6bd10f25aaff0253f6bf3a7d04e27ca43ec4382df4a1e4c535b7fff3f9030f93",
+          "input_5.png": "cbacabb52212c5441307cef55bb4b92cde7b3640b665573beb3e44d14491e785",
+          "input_6.png": "ce3ffcef7aafe4f87e739ff5289713ed007c7871c7c4d3a99a9f970dacc0f5c2"
+        },
+        "input_bytes": 3826593,
+        "input_hash": "0d1c2698271359d11956d190843abd0a119d10af1254cfc78d1a435f5b1559e3",
+        "label": "첨삭을 반영한 예시 답안",
+        "length_range": [
+          1150,
+          1250
+        ],
+        "model": "gpt-6-astra",
+        "origin": "ai_generated",
+        "original_length": 1296,
+        "original_transcription_sha256": "27cad48cd49bcfbcdcaace43bbf5a799ab4d0e14fff0ae3468c118b834051a4c",
+        "prompt_sha256": "72dc1e277de2225e65673ac5d1ea31056a8514609e1fa21fa6fc7aabe31c7481",
+        "quality_label_supplied": false,
+        "reference_answer_supplied": false,
+        "references": {
+          "E1": {
+            "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+            "source_locator": "PDF page 5; afternoon2 intent; official guide PDF page 51"
+          },
+          "E2": {
+            "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+            "source_locator": "PDF pages 5-8; afternoon2 criteria; official guide PDF pages 52-53"
+          },
+          "P": {
+            "resource_id": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+            "source_locator": "PDF pages 2-3; passages 가/나/다"
+          },
+          "Q": {
+            "resource_id": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+            "source_locator": "PDF page 2; question"
+          }
+        },
+        "source_evaluation_sha256": "c456184b9ad875aceebb910bbf0e8717ef49d4bfa5fc64aefdae3b8318b10457",
+        "target": "한양대학교 2024학년도 인문계 오후2",
+        "version": "rewrite-pilot-v1"
+      },
+      "original_length": 1296,
+      "rewrite_length": 1158,
+      "sequence_match_ratio": 0.461,
+      "matching_character_count": 568,
+      "original_character_retention": 0.4383,
+      "change_category_counts": {
+        "A": 3,
+        "B": 1,
+        "C": 2,
+        "D": 2,
+        "E": 1
+      }
+    },
+    "sookmyung": {
+      "argument_preservation": "PASS",
+      "improvement_coverage": "PASS",
+      "over_editing": "PASS",
+      "length_compliance": "PASS",
+      "language_naturalness": "PASS",
+      "official_criteria_alignment": "PASS",
+      "student_learning_value": "PASS",
+      "overall": "PASS",
+      "over_editing_severity": "NONE_DETECTED",
+      "coverage": {
+        "teacher_responsibility": "YES",
+        "admission_to_participant_composition": "YES",
+        "compression": "YES",
+        "length": "YES"
+      },
+      "changes": [
+        {
+          "category": "A",
+          "item": "교사의 무능력에 책임을 돌린 판단을 비판 대상으로 명시",
+          "reason": "공식 기준②/보완1"
+        },
+        {
+          "category": "D",
+          "item": "대학의 취약계층 수용 확대→응시 증가 연결 보충",
+          "reason": "공식 기준③/보완2"
+        },
+        {
+          "category": "B",
+          "item": "응시 집단 구성 변화로 원래 표본 유입 설명을 구체화",
+          "reason": "기존 핵심 논지 명확화"
+        },
+        {
+          "category": "C",
+          "item": "노점상 일대일 사례의 세부 재설명 압축",
+          "reason": "보완3"
+        },
+        {
+          "category": "C",
+          "item": "낮은 점수 집단 유입의 반복을 인과관계 설명으로 통합",
+          "reason": "보완3"
+        }
+      ],
+      "findings": [
+        "평균 변화와 실제 학력 변화 구별, 집단 구성 변화, 해석 비판 순서를 유지.",
+        "교사 누락을 여러 개선 과제로 부풀리지 않음. 새 철학/배경지식 없음.",
+        "어휘·연결어 변경도 있으므로 원문 문장을 거의 그대로 둔 결과라고 과장하지 않음."
+      ],
+      "original_length_note": "Source image prints324/330; readable transcription330 including spaces/punctuation. Keep both figures, not equivalent counting rules.",
+      "generation_executed": true,
+      "run_count": 1,
+      "model": "gpt-6-astra",
+      "model_version": "UNKNOWN",
+      "output_sha256": "e111ddfd062989fbba0b05f3f6ff97770b6dc7e53578d5f4d94d37c9ce692b06",
+      "frozen_at": "2026-09-28T01:50:44.831849+00:00",
+      "latency_seconds": 42.824,
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 16360,
+          "output_tokens": 1220,
+          "reasoning_output_tokens": 1034
+        }
+      ],
+      "api_cost": "UNKNOWN; authenticated CLI usage is not product API cost",
+      "input_manifest": {
+        "accepted_evaluation_input_hash": "2807f333c06e51c5a30442bebe6e3ce77dc26b9862165254ec7ec30f25b63a4b",
+        "case": "sookmyung",
+        "cross_case_output_supplied": false,
+        "image_count": 3,
+        "images": {
+          "input_1.png": "a22921ec00616aa475675223f99618f1da9326f5fb7b73e7002907fb96361846",
+          "input_2.png": "9fccd3bd6615845a5e5a2b54fd6fa6068441c207fceefb47e8be2e5175547dd3",
+          "input_3.png": "63b72db087a70e393e1c201c29b34c5b8ec86c9eda04ea2ab679472a40595736"
+        },
+        "input_bytes": 469979,
+        "input_hash": "cbe45afee808a9cdcb4599749d033093a4000310f1c7aa81dc5b04e893c4cb3c",
+        "label": "첨삭을 반영한 예시 답안",
+        "length_range": [
+          270,
+          330
+        ],
+        "model": "gpt-6-astra",
+        "origin": "ai_generated",
+        "original_length": 330,
+        "original_transcription_sha256": "4dd3cc0a5be2ca41f05e0ec8bac95f863f449abfda93f3042aa51f3cb82a22a4",
+        "prompt_sha256": "06c49783a92b8b14fffce22d59a944aa3454f3a27e9baff6183e7b4a60d4eacd",
+        "quality_label_supplied": false,
+        "reference_answer_supplied": false,
+        "references": {
+          "E1": {
+            "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+            "source_locator": "PDF page 4; section 3 출제 의도; question 1-1,1-2"
+          },
+          "E2": {
+            "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+            "source_locator": "PDF page 6; section 6 채점 기준; question 1-1"
+          },
+          "P": {
+            "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+            "source_locator": "PDF page 1; passages 가,나"
+          },
+          "Q": {
+            "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+            "source_locator": "PDF page 2; question 1-1"
+          }
+        },
+        "source_evaluation_sha256": "d5dcba9a8fb2e39b5ef03366b0a42793f94ce2d6d2fe71efc85553154a101ed2",
+        "target": "숙명여자대학교 2025학년도 모의논술 1-1",
+        "version": "rewrite-pilot-v1"
+      },
+      "original_length": 330,
+      "rewrite_length": 310,
+      "sequence_match_ratio": 0.6031,
+      "matching_character_count": 193,
+      "original_character_retention": 0.5848,
+      "change_category_counts": {
+        "A": 1,
+        "B": 1,
+        "C": 2,
+        "D": 1,
+        "E": 0
+      }
+    }
+  },
+  "cross_case": {
+    "lighter_editing_for_sookmyung": "YES_OBSERVED_IN_TWO_CASES",
+    "adaptive_editing": "PARTIAL; different lengths/tasks preclude causal/general capability claim",
+    "unnecessary_changes": "Hanyang1 explicit policy-agreement insertion; Sookmyung0 detected",
+    "product_design_gate": "CONDITIONAL",
+    "condition": "Preserve stance explicitly; do not present Hanyang first output as an unqualified student-faithful rewrite. Owner reviews originals and frozen outputs; no automatic regeneration."
+  },
+  "safety": {
+    "generation_calls": 2,
+    "evaluation_reruns": 0,
+    "ground_truth_label_leakage": 0,
+    "additional_reference_answer_leakage": 0,
+    "cross_case_leakage": 0,
+    "production_mutation": false,
+    "schema_change": false,
+    "migration": "NONE",
+    "private_bodies_in_git": false
+  },
+  "length_method": "NFC code points, spaces/punctuation included, CR/LF excluded, outer whitespace trimmed; not exact 원고지 cells",
+  "official_answer_similarity_note": "Original student input itself matches the university-published answer. Shared retained wording is expected, not evidence that an additional official answer was provided. Separate reference edition/quality label absent; no comprehensive plagiarism metric claimed.",
+  "validation": {
+    "tests": 75,
+    "result": "PASS",
+    "source_traceability": "PASS",
+    "input_isolation": "PASS",
+    "length_measurement": "PASS",
+    "private_exclusion": "PASS",
+    "wiki_handoff": "PASS",
+    "diff_check": "PASS",
+    "evaluation_outputs_preserved": "PASS",
+    "student_language": "PASS",
+    "flutter": "NOT_RUN_NO_FLUTTER_CHANGES"
+  }
+}
