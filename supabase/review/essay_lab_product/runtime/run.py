@@ -19,7 +19,7 @@ def uid(n): return f'00000000-0000-0000-0000-{n:012d}'
 SHA='a'*64
 T=datetime(2026,1,1,tzinfo=timezone.utc)
 
-def main(additional_draft=None):
+def main(additional_draft=None, schema_paths=None):
     dsn=os.environ.get('ESSAY_REVIEW_TEST_DSN')
     if not dsn or os.environ.get('ESSAY_REVIEW_DISPOSABLE')!='YES':
         print('NOT_RUN: explicit disposable PostgreSQL test environment not configured')
@@ -71,7 +71,7 @@ def main(additional_draft=None):
     grant usage on schema public,auth to anon,authenticated,service_role;
     grant execute on function auth.uid() to anon,authenticated,service_role;
     """)
-    for path in [ROOT/'supabase/migrations/20260912000100_initial_content_schema.sql',ROOT/'supabase/migrations/20260927000200_essay_lab_foundation.sql',DRAFT/'001_student_essay_product.draft.sql',DRAFT/'002_entitlements.draft.sql']:
+    for path in [ROOT/'supabase/migrations/20260912000100_initial_content_schema.sql',ROOT/'supabase/migrations/20260927000200_essay_lab_foundation.sql',*(schema_paths if schema_paths is not None else [DRAFT/'001_student_essay_product.draft.sql',DRAFT/'002_entitlements.draft.sql'])]:
         c.execute(path.read_text())
     if additional_draft is not None:
         c.execute(additional_draft.read_text())

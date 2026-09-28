@@ -13,7 +13,11 @@ HERE=Path(__file__).resolve().parent
 def main():
     buf=io.StringIO()
     with contextlib.redirect_stdout(buf):
-        result=baseline.main(additional_draft=HERE.parent/'003_server_operations.draft.sql')
+        if os.environ.get('ESSAY_REVIEW_PROMOTED') == 'YES':
+            migrations=baseline.ROOT/'supabase/migrations'
+            result=baseline.main(schema_paths=[migrations/'20260928000100_student_essay_product.sql',migrations/'20260928000200_essay_entitlements.sql'],additional_draft=migrations/'20260928000300_essay_server_operations.sql')
+        else:
+            result=baseline.main(additional_draft=HERE.parent/'003_server_operations.draft.sql')
     if result:return result
     regression=json.loads(buf.getvalue())
     dsn=os.environ['ESSAY_REVIEW_TEST_DSN']

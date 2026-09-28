@@ -1,5 +1,9 @@
 # Essay LAB Phase 2B — server transactions and Supabase integration
 
+**Subsequent Owner acceptance:** shared identity PASS; KEEP19+4/RPCs approved and
+[migrations promoted](essay-lab-migration-promotion.md), NOT APPLIED. The execution record below preserves
+Phase2B findings; its earlier identity/promotion pending gates are historical, not current blockers.
+
 **OWNER REVIEW READY — review RPCs validated; Production NOT APPLIED.**
 KEEP19, no new/removed tables. Twelve RPCs replace test-only inline transactions at the operation boundary.
 Native PostgreSQL17.11: existing77 regression assertions +55 new checks PASS. Actual local Supabase

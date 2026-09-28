@@ -81,7 +81,7 @@ or repeat E2E is required for the accepted Kakao identity gate.
 | Kakao same user | OWNER_PASS — SAME auth.users.id VERIFIED |
 | App/LAB shared identity | PASS |
 | Migration technically ready | YES for accepted Phase2B schema/transaction correctness; separate approval still required |
-| Migration promotion | READY_FOR_OWNER_REVIEW, not promoted |
+| Migration promotion | [PROMOTED / NOT_APPLIED](essay-lab-migration-promotion.md), Owner approved |
 | Real student data identity gate | PASS |
 | Overall real student rollout | Other privacy/AI provider/retention gates remain; not automatically approved |
 | Production schema/data mutation | NO |
@@ -92,4 +92,4 @@ Auth/DB request, SQL execution or mutation. Owner login/comparison is the accept
 Identity PASS alone will not implement the remaining worker/provider/retention deployment work from Phase2B.
 
 [Sanitized status and historical preparation result](../tool/identity_check/result.json) records test counts/source references.
-Next: Owner/ChatGPT migration-promotion decision; no additional identity test requested.
+Next: Owner/ChatGPT promoted package review → separately authorized Production preflight; no identity retest.

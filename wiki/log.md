@@ -2876,3 +2876,11 @@ Owner directly confirmed equal actual Supabase auth.users.id after same Kakao ac
 App and LAB. [Phase2C](essay-lab-shared-identity.md): shared identity/identity rollout gate PASS;
 Apple/Google historical PASS preserved, Email NOT_RUN is not a Migration Gate blocker. No repeat
 login/build/SQL, identifiers stored, or Production changes. Other rollout gates remain separate.
+
+## 2026-09-28 — Essay migration promotion approved / NOT APPLIED
+
+[Formal package](essay-lab-migration-promotion.md):3 ordered migrations, KEEP19+4 columns/12 RPCs,
+review AST MATCH (status comments only). Promoted-file77+55 regressions PASS; separate clean apply
+proves47 object definitions, empty19 new tables, grants/orphans and canonical fixture preservation.
+42 static tests PASS; read-only preflight/post-validation prepared. No Production connection/apply,
+Owner SQL, seed/UI/AI or identity retest. Next package review → separate Production preflight approval.

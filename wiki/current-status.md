@@ -133,9 +133,9 @@ Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserv
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
 Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
-Essay [Phase2B server/JWT](essay-lab-server-transactions.md): KEEP19;77+55 RPC/37 real JWT,
-5 guards/36 static PASS.4 additive draft columns; Production NOT_APPLIED.
-[Identity2C](essay-lab-shared-identity.md): Owner PASS; other rollout gates remain.
+Essay [Migration](essay-lab-migration-promotion.md): PROMOTED / NOT_APPLIED; KEEP19+4.
+77+55 regression/42 static PASS; identity PASS. Real student data NOT_ENABLED.
+Next package review → authorized Production preflight; other rollout gates remain.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.

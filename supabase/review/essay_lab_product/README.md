@@ -1,6 +1,8 @@
 # Essay LAB Product Phase 1 review package
 
-**DRAFT ONLY / NOT APPLIED / Production apply prohibited in this task.**
+**REVIEW SOURCES PRESERVED / PROMOTED COPIES / NOT APPLIED.**
+Owner approved promotion after Phase2A/2B/2C. [Formal package and current gates](../../../wiki/essay-lab-migration-promotion.md).
+Historical review notes below do not override that approval; Production apply remains separately gated.
 
 Final history review recommendation: **KEEP19**,0 moved/merged. See
 [full matrix and rationale](../../../wiki/essay-lab-final-schema-review.md).
@@ -23,16 +25,16 @@ One PL/pgSQL variable-name correction; KEEP19, no invariant weakened. Earlier st
 - `test_validate_drafts.py` + `test_history_review.py`:30 offline positive/negative checks.
 - `validate_drafts.py`: PostgreSQL AST/static structural checks; no DB connection.
 
-No draft is in `supabase/migrations`. Do not blindly paste either into Production.
+Review sources remain here; matching promoted copies now exist in `supabase/migrations`. Do not apply without separate approval.
 No replay guards: existing names should fail rather than hide drift. All new tables have PK,
 FK/CHECK/UNIQUE where relevant, timestamps and RLS. Existing canonical mappings use a composite
 PK; SQL references that actual key, not an invented mapping UUID. Phase2B003 adds four identity/lease columns to three proposed tables; no existing Production table changes.
 
 **Phase2B:** [server transaction report](../../../wiki/essay-lab-server-transactions.md),
 [results](runtime/server-result.json), `003_server_operations.draft.sql` (12 RPCs, KEEP19).
-Actual local Supabase Auth/PostgREST PASS; shared identity E2E and deployment/retention gates remain.
+Actual local Supabase Auth/PostgREST and Owner shared identity PASS; deployment/retention gates remain.
 
-**Before promotion:** Owner review; local PostgreSQL17 with Supabase roles/auth.uid fixtures;
+**Historical pre-promotion checklist (technical gates accepted):** Owner review; local PostgreSQL17 with Supabase roles/auth.uid fixtures;
 validated server submit/finalize/billing/erasure RPCs and worker authorization; concurrency/timeout
 reconciliation; fixture tests for cross-owner, cross-question and cross-account forgery;
 RLS anon/owner/other/service tests; source/rights/privacy release review. Current SQL is a schema

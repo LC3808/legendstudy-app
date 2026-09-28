@@ -1,0 +1,374 @@
+{
+  "tables": [
+    "essay_questions",
+    "essay_question_evidence",
+    "essay_evaluation_criteria",
+    "student_target_universities",
+    "essay_practice_sessions",
+    "essay_drafts",
+    "essay_attempts",
+    "essay_evaluations",
+    "essay_evaluation_dimensions",
+    "essay_improvement_items",
+    "essay_improvement_progress",
+    "essay_evaluation_evidence",
+    "essay_generated_rewrites",
+    "essay_learning_events",
+    "essay_ai_processing_runs",
+    "credit_accounts",
+    "credit_grants",
+    "essay_billing_decisions",
+    "credit_transactions"
+  ],
+  "functions": [
+    [
+      "public",
+      "essay_product_reject_update"
+    ],
+    [
+      "public",
+      "essay_product_terminal_guard"
+    ],
+    [
+      "public",
+      "essay_product_child_guard"
+    ],
+    [
+      "public",
+      "essay_question_identity_guard"
+    ],
+    [
+      "public",
+      "essay_product_progress_guard"
+    ],
+    [
+      "public",
+      "essay_product_processing_guard"
+    ],
+    [
+      "public",
+      "essay_product_draft_guard"
+    ],
+    [
+      "public",
+      "essay_credit_account_guard"
+    ],
+    [
+      "public",
+      "essay_billing_history_guard"
+    ],
+    [
+      "essay_private",
+      "uid"
+    ],
+    [
+      "essay_private",
+      "clock"
+    ],
+    [
+      "essay_private",
+      "hash"
+    ],
+    [
+      "essay_private",
+      "owner"
+    ],
+    [
+      "essay_private",
+      "lock_job"
+    ],
+    [
+      "essay_private",
+      "release"
+    ],
+    [
+      "public",
+      "essay_open_session"
+    ],
+    [
+      "public",
+      "essay_save_draft"
+    ],
+    [
+      "public",
+      "essay_submit_attempt"
+    ],
+    [
+      "public",
+      "essay_request_evaluation"
+    ],
+    [
+      "public",
+      "essay_request_rewrite"
+    ],
+    [
+      "public",
+      "essay_claim"
+    ],
+    [
+      "essay_private",
+      "fence"
+    ],
+    [
+      "public",
+      "essay_timeout"
+    ],
+    [
+      "public",
+      "essay_finalize_success"
+    ],
+    [
+      "public",
+      "essay_finalize_failure"
+    ],
+    [
+      "public",
+      "essay_reconcile"
+    ],
+    [
+      "public",
+      "essay_refund"
+    ],
+    [
+      "public",
+      "essay_erase"
+    ]
+  ],
+  "objects": [
+    {
+      "kind": "function",
+      "name": "essay_private.clock()",
+      "definition_hash": "6ba208957796c86031be7f150988ee24"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.fence(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)",
+      "definition_hash": "3960cea03c6ccdefac9289187fa3b0aa"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.hash(p_text text)",
+      "definition_hash": "d21fb8743e7a5039a26ecebd1b5a92e7"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.lock_job(p_evaluation uuid)",
+      "definition_hash": "02853d30a8ddccee78ee7f7e0bbfd4f1"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.owner(p_session uuid)",
+      "definition_hash": "2b90f025f8ae19d53cb653d2c4868422"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.release(p_evaluation uuid)",
+      "definition_hash": "e019bddf2af1d0a95f28e7e318112031"
+    },
+    {
+      "kind": "function",
+      "name": "essay_private.uid()",
+      "definition_hash": "b2d988f9bc5bb6e7b742c7821db7a7a5"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_billing_history_guard()",
+      "definition_hash": "367d2b0957d708ffd408890e55ab33b3"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_claim(p_evaluation uuid, p_rewrite uuid)",
+      "definition_hash": "69bd6e34605f65cf40140673a77d4a49"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_credit_account_guard()",
+      "definition_hash": "1466dc181f4100782035c4c7934344f9"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_erase(p_session uuid)",
+      "definition_hash": "7e9f0a1996431f1c010ffec20ad81d02"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_finalize_failure(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)",
+      "definition_hash": "1b8c08e315725e62c909df242c5f2768"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_finalize_success(p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid)",
+      "definition_hash": "1317ab408ccb208041f01955b958a109"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_open_session(p_id uuid, p_question uuid)",
+      "definition_hash": "724c4a8a6e8228e4996441ef4c274fed"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_child_guard()",
+      "definition_hash": "ae43c0e2d3a1a15cbc3ae3f79e14f885"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_draft_guard()",
+      "definition_hash": "178355a7378a6970676ffa1af2acda4c"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_processing_guard()",
+      "definition_hash": "a7559f3135904f27b2e68fe2a75c2fc8"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_progress_guard()",
+      "definition_hash": "3f0dd98c4b05ebb5faaf42743dd63e45"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_reject_update()",
+      "definition_hash": "be7868ad49936437d52a7fe0c1366cc7"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_product_terminal_guard()",
+      "definition_hash": "dc40b178939b1fdc119c007db28edf8a"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_question_identity_guard()",
+      "definition_hash": "5b634bcca516ead399ffd38eee569461"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_reconcile(p_evaluation uuid, p_rewrite uuid)",
+      "definition_hash": "1f2a603f781b2a8898c72d9610606ba4"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_refund(p_consume uuid, p_key text, p_amount integer)",
+      "definition_hash": "5f82b9cb5cd645e8e1d084aebf4a36c6"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_request_evaluation(p_attempt uuid, p_key uuid, p_regime text)",
+      "definition_hash": "ac0832ffb7e2ac96d75cc76ff09cab8e"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_request_rewrite(p_evaluation uuid)",
+      "definition_hash": "afc5b871a8f8c647bbfb734505b6ebec"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_save_draft(p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer)",
+      "definition_hash": "b85e042902169e1cd99d107206ce0976"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_submit_attempt(p_session uuid, p_revision bigint, p_key uuid, p_body_hash text)",
+      "definition_hash": "93d9a0ef45a58ca5e037b062a809d661"
+    },
+    {
+      "kind": "function",
+      "name": "public.essay_timeout(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)",
+      "definition_hash": "b5b74d44275a5dc881207e2c0ec4fb13"
+    },
+    {
+      "kind": "table",
+      "name": "credit_accounts",
+      "definition_hash": "065f9ec7d3332691b28295654cd1c962"
+    },
+    {
+      "kind": "table",
+      "name": "credit_grants",
+      "definition_hash": "368fb4eeeaf3ceedcb5ef35eb11f7339"
+    },
+    {
+      "kind": "table",
+      "name": "credit_transactions",
+      "definition_hash": "0fe5f8c8f2277cc4ca17ce7dec875058"
+    },
+    {
+      "kind": "table",
+      "name": "essay_ai_processing_runs",
+      "definition_hash": "205ac0d67fa18c80c697ebcfd838e021"
+    },
+    {
+      "kind": "table",
+      "name": "essay_attempts",
+      "definition_hash": "77d4b71131025686fcb9d7d29dd9f8cc"
+    },
+    {
+      "kind": "table",
+      "name": "essay_billing_decisions",
+      "definition_hash": "3b8291374232f2a536362f2b6d0225d8"
+    },
+    {
+      "kind": "table",
+      "name": "essay_drafts",
+      "definition_hash": "6978d419d8dcf2748778b92497eb9142"
+    },
+    {
+      "kind": "table",
+      "name": "essay_evaluation_criteria",
+      "definition_hash": "373de96a82d2ee3388f4c9b1d35123f9"
+    },
+    {
+      "kind": "table",
+      "name": "essay_evaluation_dimensions",
+      "definition_hash": "6e13296ebd64b937592a1fc53eaea9d1"
+    },
+    {
+      "kind": "table",
+      "name": "essay_evaluation_evidence",
+      "definition_hash": "716a71fb768d6cb6792fa578d5da1144"
+    },
+    {
+      "kind": "table",
+      "name": "essay_evaluations",
+      "definition_hash": "9b29f6e6b69a8af75fb84ffba53103f7"
+    },
+    {
+      "kind": "table",
+      "name": "essay_generated_rewrites",
+      "definition_hash": "2103c217cb1fc3eadb72430b937e8e0b"
+    },
+    {
+      "kind": "table",
+      "name": "essay_improvement_items",
+      "definition_hash": "bf7fce080e57d8cffb8a4f66fff77897"
+    },
+    {
+      "kind": "table",
+      "name": "essay_improvement_progress",
+      "definition_hash": "925f48c83dd633728a3d945b9e6275d0"
+    },
+    {
+      "kind": "table",
+      "name": "essay_learning_events",
+      "definition_hash": "19cf4b2e3d4ca9f0875141cf2f67591d"
+    },
+    {
+      "kind": "table",
+      "name": "essay_practice_sessions",
+      "definition_hash": "c782690219b3654faf5a3b6d3650d32b"
+    },
+    {
+      "kind": "table",
+      "name": "essay_question_evidence",
+      "definition_hash": "1d13692345fe709bb983f7d05cf97317"
+    },
+    {
+      "kind": "table",
+      "name": "essay_questions",
+      "definition_hash": "0951e523947ad74e72d66570945edad7"
+    },
+    {
+      "kind": "table",
+      "name": "student_target_universities",
+      "definition_hash": "ad63e7bd37e03bec052fee85089a6a84"
+    }
+  ]
+}
