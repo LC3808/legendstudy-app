@@ -1,5 +1,8 @@
 # Essay LAB migration promotion — PROMOTED / NOT APPLIED
 
+> Current status: [Product applied with security blocker](essay-lab-production-apply.md). All3 applied; ledger16/no pending. Historical checkpoint below is preserved; product remains disabled.
+
+
 > Current follow-up: [Production read-only preflight](essay-lab-production-preflight.md) executed; APPLY BLOCKED by absent migration history. Below preserves the promotion-stage preparation record.
 
 

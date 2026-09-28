@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-28 — Product migrations applied; security contract blocker
+
+- [Production apply](essay-lab-production-apply.md): approved3 applied once; ledger16, no pending;47 definitions match,19 tables empty, canonical unchanged.
+- Post-apply FAIL:9 service_role trigger-helper EXECUTE grants and3 postgres ADMIN-only memberships differ from allowlist. No corrective mutation/retry.
+-10 offline tests PASS. Student/AI/worker/UI remain disabled; Owner review of exact blockers next.
+
 ## 2026-09-28 — Authorized baseline write verified; dry-run PASS
 
 - [Baseline](production-migration-baseline-reconciliation.md): supported explicit repair recorded exactly13 approved historical versions; metadata AST match.

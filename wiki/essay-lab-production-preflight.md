@@ -1,5 +1,8 @@
 # Essay LAB Production preflight — READ ONLY / APPLY BLOCKED
 
+> Current status: [Product applied with security blocker](essay-lab-production-apply.md). All3 applied; ledger16/no pending. Historical checkpoint below is preserved; product remains disabled.
+
+
 2026-09-28. Owner approved promoted package2819b67 for read-only inspection only.
 **READY_FOR_PRODUCTION_APPLY: NO.** The sole observed blocker is absent Production
 `supabase_migrations` schema / `schema_migrations` table. Existing canonical objects are present;

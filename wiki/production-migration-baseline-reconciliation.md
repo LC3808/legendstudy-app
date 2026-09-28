@@ -1,5 +1,8 @@
 # Production migration baseline — ADOPTED / LEDGER VERIFIED
 
+> Current status: [Product applied with security blocker](essay-lab-production-apply.md). All3 applied; ledger16/no pending. Historical checkpoint below is preserved; product remains disabled.
+
+
 ## Authorized baseline write and dry-run — 2026-09-28
 
 **BASELINE_WRITE: PASS · MIGRATION_LIST: PASS · DRY_RUN: PASS.**
