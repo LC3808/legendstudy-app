@@ -107,3 +107,21 @@ materials delivery load-more 기대2개. 관련 없는 기존 자료 정책/테�
 전체 suite PASS라고 주장하지 않는다. Wiki handoff/diff check PASS, Owner iOS 파일 hash 보존.
 Owner native device/browser 직접 검토는 미실행. 화면 검토 후 필요한 UI 수정 및 별도
 AI/provider/privacy/retention rollout gate를 진행한다. 실제 학생 traffic은 여전히 NO.
+
+## Owner visual polish — 2026-09-28
+
+평가 정보 계층만 수정. 1차 Desktop은 항목명 왼쪽, 한국어 상태·별 오른쪽;
+Mobile은 항목명 다음 행에 상태·별. 구체 진단은 ▶로 구분하며 기존 divider 유지.
+2차 항목 변화는 항목명/별 변화 → 한국어 상태 변화 → ▶ 변화 이유 순서다.
+종합 평가·잘한 점·보완할 점·우선순위·체크리스트는 진단/행동 설명을 ▶로 구분하되,
+좋아진/좋아지고 있는/아직 확인할/다시 나타난 부분은 일반 본문을 유지한다.
+Writing/Rewrite/IA/backend/DB/RPC 변경 없음. 새 기능 없음.
+
+관련 widget 20 PASS (360/1120px, 1x/2x), analyze PASS; 전체 suite 재실행 없음.
+아래 4개가 최신 검토 캡처이며 위 Phase1 초기 결과 캡처보다 우선한다.
+긴 결과의 정보 계층을 보기 위한 세로1800px Flutter render다.
+
+- [Desktop 1차](../docs/previews/essay-lab-ui-phase1/essay-result-desktop-polish.png)
+- [Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-polish.png)
+- [Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-polish.png)
+- [Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-polish.png)

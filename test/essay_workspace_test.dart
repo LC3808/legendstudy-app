@@ -320,26 +320,65 @@ void main() {
   );
 
   for (final comparison in [false, true]) {
-    testWidgets('desktop result visual $comparison', (tester) async {
-      size(tester, const Size(1120, 1400));
-      await show(
-        tester,
-        EssayResultView(
-          evaluation: comparison
+    for (final width in [360.0, 1120.0]) {
+      for (final scale in [1.0, 2.0]) {
+        testWidgets('result hierarchy $comparison width $width scale $scale', (
+          tester,
+        ) async {
+          size(tester, Size(width, 1800));
+          final evaluation = comparison
               ? secondPreviewEvaluation
-              : firstPreviewEvaluation,
-          question: essayPreviewQuestions.first,
-          comparison: comparison,
-          onRewrite: () {},
-        ),
-      );
-      await preview.capture(
-        tester,
-        comparison ? 'essay-comparison-desktop' : 'essay-result-desktop',
-      );
-      expect(tester.takeException(), isNull);
-      await close(tester);
-    });
+              : firstPreviewEvaluation;
+          await show(
+            tester,
+            EssayResultView(
+              evaluation: evaluation,
+              question: essayPreviewQuestions.first,
+              comparison: comparison,
+              onRewrite: () {},
+            ),
+            scale: scale,
+          );
+          final title = find.text(evaluation.dimensions.first.label).first;
+          final explanation = find
+              .text(evaluation.dimensions.first.explanation)
+              .first;
+          expect(
+            tester.getTopLeft(explanation).dy,
+            greaterThan(tester.getTopLeft(title).dy),
+          );
+          expect(find.text('▶'), findsWidgets);
+          if (!comparison) {
+            final state = find.text('대체로 충실').first;
+            final stars = find.text('★★★★☆').first;
+            expect(
+              tester.getTopLeft(state).dx,
+              lessThan(tester.getTopLeft(stars).dx),
+            );
+            if (width > 600 && scale == 1) {
+              expect(tester.getTopLeft(state).dy, tester.getTopLeft(title).dy);
+              expect(
+                tester.getTopLeft(state).dx,
+                greaterThan(tester.getTopLeft(title).dx),
+              );
+            } else {
+              expect(
+                tester.getTopLeft(state).dy,
+                greaterThan(tester.getTopLeft(title).dy),
+              );
+            }
+          }
+          if (scale == 1) {
+            await preview.capture(
+              tester,
+              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-polish',
+            );
+          }
+          expect(tester.takeException(), isNull);
+          await close(tester);
+        });
+      }
+    }
   }
   testWidgets(
     'problem-only source provenance and unknown time do not imply eligibility',

@@ -570,27 +570,65 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
   }
 }
 
+String _levelLabel(int? level) => level != null && level >= 1 && level <= 5
+    ? ['크게 보완 필요', '부족', '보완 필요', '대체로 충실', '매우 충실'][level - 1]
+    : '판단이 어려워요';
+
+String _levelStars(int? level) => level != null && level >= 1 && level <= 5
+    ? '${'★' * level}${'☆' * (5 - level)}'
+    : '판단 보류';
+
+// Reading order remains title → status → stars when the trailing group wraps.
+Widget _dimensionHeading(BuildContext context, String title, Widget trailing) =>
+    LayoutBuilder(
+      builder: (context, box) {
+        final heading = Text(title, style: AppTokens.cardTitle);
+        if (box.maxWidth < 600 ||
+            MediaQuery.textScalerOf(context).scale(1) >= 1.8) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [heading, const SizedBox(height: 8), trailing],
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: heading),
+            const SizedBox(width: 20),
+            trailing,
+          ],
+        );
+      },
+    );
+
+Widget _diagnosis(String text) => Row(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const ExcludeSemantics(child: Text('▶', style: AppTokens.secondary)),
+    const SizedBox(width: 8),
+    Expanded(child: Text(text, style: AppTokens.body.copyWith(height: 1.6))),
+  ],
+);
+
 class EssayLevel extends StatelessWidget {
   const EssayLevel(this.level, {super.key});
   final int? level;
   @override
   Widget build(BuildContext context) {
     final valid = level != null && level! >= 1 && level! <= 5;
-    final label = valid
-        ? ['크게 보완 필요', '부족', '보완 필요', '대체로 충실', '매우 충실'][level! - 1]
-        : '판단이 어려워요';
+    final label = _levelLabel(level);
     return Semantics(
       label: valid ? '5단계 중 $level단계, $label' : label,
       child: ExcludeSemantics(
         child: Wrap(
           spacing: 8,
           children: [
+            Text(label, style: AppTokens.secondary),
             if (valid)
               Text(
-                '${'★' * level!}${'☆' * (5 - level!)}',
+                _levelStars(level),
                 style: AppTokens.body.copyWith(color: AppTokens.primaryInk),
               ),
-            Text(label, style: AppTokens.secondary),
           ],
         ),
       ),
@@ -622,14 +660,20 @@ class _EssayResultViewState extends State<EssayResultView> {
     if (oldWidget.evaluation != widget.evaluation) example = false;
   }
 
-  Widget section(String title, List<String> content) => Column(
+  Widget section(
+    String title,
+    List<String> content, {
+    bool diagnostic = false,
+  }) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       SectionHeader(title),
       for (final line in content)
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
-          child: Text(line, style: AppTokens.body),
+          child: diagnostic
+              ? _diagnosis(line)
+              : Text(line, style: AppTokens.body),
         ),
     ],
   );
@@ -688,25 +732,42 @@ class _EssayResultViewState extends State<EssayResultView> {
                     section(entry.key, entry.value),
                   const SectionHeader('평가 항목 변화'),
                   for (final d in e.dimensions) ...[
-                    Text(d.label, style: AppTokens.cardTitle),
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 8,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        EssayLevel(d.previousLevel),
-                        const Text('→'),
-                        EssayLevel(d.level),
-                      ],
+                    _dimensionHeading(
+                      context,
+                      d.label,
+                      Semantics(
+                        label:
+                            '${_levelLabel(d.previousLevel)}에서 ${_levelLabel(d.level)}',
+                        child: ExcludeSemantics(
+                          child: Wrap(
+                            spacing: 8,
+                            runSpacing: 4,
+                            children: [
+                              Text(
+                                _levelStars(d.previousLevel),
+                                style: AppTokens.body,
+                              ),
+                              const Text('→'),
+                              Text(_levelStars(d.level), style: AppTokens.body),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                    Text(d.explanation, style: AppTokens.body),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}',
+                      style: AppTokens.secondary,
+                    ),
+                    const SizedBox(height: 8),
+                    _diagnosis(d.explanation),
                     const SizedBox(height: 20),
                   ],
                 ],
                 const Divider(color: AppTokens.textPrimary),
               ],
-              section('종합 평가', [e.summary]),
-              section('잘한 점', e.strengths),
+              section('종합 평가', [e.summary], diagnostic: true),
+              section('잘한 점', e.strengths, diagnostic: true),
               const SectionHeader('평가 항목별 진단'),
               const Text(
                 '별은 평가 기준의 충족 정도를 설명하며, 대학의 공식 점수가 아닙니다.',
@@ -718,23 +779,21 @@ class _EssayResultViewState extends State<EssayResultView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(d.label, style: AppTokens.cardTitle),
-                      const SizedBox(height: 8),
-                      EssayLevel(d.level),
+                      _dimensionHeading(context, d.label, EssayLevel(d.level)),
                       if (d.officialWeight != null)
                         Text(
                           '대학 공식 배점 비중 ${d.officialWeight}% · 별 단계와 별개',
                           style: AppTokens.caption,
                         ),
                       const SizedBox(height: 8),
-                      Text(d.explanation, style: AppTokens.body),
+                      _diagnosis(d.explanation),
                       const Divider(),
                     ],
                   ),
                 ),
-              section('보완할 점', e.improvements),
-              section('먼저 고쳐야 할 부분', e.priorities),
-              section('다시 쓸 때 확인할 것', e.checklist),
+              section('보완할 점', e.improvements, diagnostic: true),
+              section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
+              section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),
               section('평가 근거', [
                 '${widget.question.origin.label} · 표시 예시',
                 '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',

@@ -2927,3 +2927,8 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 - Existing LAB → university/exam/question → writing → first result → rewrite → changes → optional example, native Flutter fixture-only implementation.
 - Canonical [UI/UX](essay-lab-ui-ux-v1.md) restored; real Flutter desktop/mobile captures, CAS/conflict/failure and accessibility checks. No DB/RPC/migration/AI/real student writes.
 - Owner visual review next; existing iOS files preserved. Full validation detail in canonical UI document.
+
+## 2026-09-28 — Essay result visual polish
+
+- Result-only hierarchy: title/status/right-side stars, diagnostic ▶; comparison stars/status/reason separated, four change summaries stay plain.
+- 360/1120px, 1x/2x:20 widget tests + analyze PASS; four [Flutter review captures](essay-lab-ui-ux-v1.md#owner-visual-polish--2026-09-28). Writing/Rewrite/IA/backend unchanged; Owner visual review then STOP.
