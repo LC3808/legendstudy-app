@@ -73,7 +73,7 @@ All three PDFs are byte-identical to attachments from the
 - Example answer: `2aecab13-e0ae-50f6-9ba6-ba04f2306354`, p1.
 - Intent/explanation/criteria: `fe18e74e-1fcf-52fa-818a-2df96104be65`, p1–2.
   Includes analytic scoring20/20/25/25/10, holistic criteria and formal deductions.
-- `model_answer=NONE`, **high_scoring_answer=NONE in inspected set**.
+- `model_answer=NONE`, **high_scoring_answer=UNVERIFIED / REVIEW** (bounded recheck below).
 
 Six official verified roles mapped; private source evidence package generated.
 This is useful for a normal student-answer evaluation, but **not ready for the
@@ -124,8 +124,9 @@ or prompt tuning has been performed today.
 1. **Hanyang source supplement**: official actual respondent high-scoring answer
    tied to this2025 mock question; alternatively, a2025 regular exam with both its
    question and verified respondent answer in reusable Materials resources.
-   Current inspected set contains only an example answer. Manus/Owner can supply
-   the exact missing document/question/locator; do not repeat broad research.
+   2026-09-28 recheck covers every attachment of1660; retain REVIEW without asking
+   Owner for manual data entry. Metadata of1659 identifies2024 exams, not2025.
+   Resume only on a concrete2025 respondent-answer source; no broad re-research.
 2. **Sookmyung filename conflict isolated**: first question/explanation pair in1697
    is named mock but document headers say regular admission. Not mapped here.
    Selected later mock PDFs are independently verified; no blocker for1-1.
@@ -285,3 +286,58 @@ contract **MINOR_REVISION** (deduplicate critique, no new schema/framework).
 SKKU general-answer next pilot **YES after Owner gate**; Essay LAB v1
 **CONDITIONAL**, not proven product readiness from one positive answer.
 Owner/ChatGPT chooses v1.1, SKKU, or contract revision. **STOP; no next evaluation.**
+
+
+## 2026-09-28 — Hanyang bounded recheck / Owner official-source decision
+
+Sookmyung Run A remains frozen and was not rerun. Follow-up starting HEAD733b83d.
+Read-only Production inventory plus current source1660 attachment list were compared.
+Expired delivery links were refreshed from the same post; existing resource UUIDs
+and cached PDFs reused. No PDF/resource duplication in DB, mapping write or AI call.
+
+**HANYANG_HIGH_SCORING_RECHECK: REVIEW — not found in this bounded scope.**
+This supersedes the earlier apparent final NONE; it is not a university-wide absence
+claim. All10 attachments /105 PDF pages were text searched for 우수답안, 응시자/학생
+우수답안, 답안 사례, 우수 사례 and 합격자 with whitespace normalization. All22 pages
+of the9 exam PDFs were visually checked, including diagrams/images. The83-page
+admission guide had no answer-section hit; its embedded-image pages1/53/55/56 were
+also visually checked. Acceptance-related hits in that guide are admission rules,
+not respondent-answer evidence. No empty extracted-text page in the guide.
+
+| Source1660 resource | PDF pages checked | Finding |
+|---|---:|---|
+| 인문 문제 | 1 | Question/passages |
+| 인문 예시답안 | 1 | Official example; no student provenance |
+| 인문 출제의도 | 1–2 | Intent/criteria/explanation |
+| 자연 문제 | 1–2 | Questions |
+| 자연 예시답안 | 1–5 | Example solutions |
+| 자연 출제의도 | 1–2 | Intent/criteria |
+| 상경 문제 | 1–2 | Questions |
+| 상경 예시답안 | 1–3 | Example solutions |
+| 상경 출제의도 | 1–4 | Intent/criteria |
+| 신입학 수시 모집요강 | 1–83 text; image pages noted above | Admission information |
+
+[Exact resource UUIDs, hashes and page scope](../tool/essay_lab/evidence/hanyang_2025_recheck.json)
+are public metadata only. Original PDFs/text/renders stay in ignored
+`.local/hanyang-recheck-2026-09-28/`; no student body copied to Git.
+Production metadata for post1659 does list 합격자/우수답안 attachments, but its source
+exam title is **2024학년도 수시**;2025 refers to competition information. Those files
+were not relabelled as2025 or mapped. This is a possible year-context explanation,
+not a conclusion about which document Owner remembers.
+
+New verified high-scoring mappings:0; verified2025 respondent answers found:0;
+answer locator:UNRESOLVED; blind fixture:NOT_READY. Existing6 official mappings and
+Hanyang source package remain unchanged. No fabricated blind answer or ground truth.
+Review queue: obtain a concrete2025 respondent-answer/question match when available;
+retain the existing official example role in the meantime. No Owner manual entry request.
+
+[Official-source policy](essay-lab-data-foundation.md#official-source-policy--owner-decision-2026-09-28)
+is now canonical. Existing exam/mapping official_source_url + provenance + locator
+columns are sufficient; migration NONE. This follow-up records the display contract;
+App/LAB UI was not changed. Rights review remains required before full public release.
+
+Follow-up validation: quality Pilot12 + existing Pilot13 + Run A16 =41 PASS using
+bundled Python. Initial system-Python attempt lacked pypdf; dependency-runtime retry
+passed, no code regression. Resource UUID uniqueness/page-range/hash manifest checks,
+protected iOS/accepted-state/plan hashes, private exclusion, scoped secret scan,
+Wiki handoff and diff checks PASS. No Flutter change/test, no new evaluation run.

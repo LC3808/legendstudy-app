@@ -133,10 +133,10 @@ Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserv
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
 Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
-Hanyang source gap/SKKU package unchanged. Exam discovery2010+; archive preserved.
+Hanyang1660 rechecked10 PDFs/105pages: respondent evidence REVIEW; SKKU unchanged.
+[Official-source policy](essay-lab-data-foundation.md#official-source-policy--owner-decision-2026-09-28): existing schema; rights review required.
 Do not start analytics, new Materials audits or unrelated UI work.
-Current resource checks are automated server/App-contract evidence, not new device
-acceptance.1710 A1 reconciliation remains separate; never republish1710.
+No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.
 

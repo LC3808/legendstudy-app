@@ -2790,3 +2790,13 @@ benchmark PARTIAL: substantive/rubric-based strengths and improvements, but E10
 same omission repeated5/7 criterion sections. No invented score/criterion detected.
 Private raw output retained; sanitized v1 receipt/scorecard committed.16 checks PASS;
 no Production/schema/UI/other-university work. [First result and next Owner gate](essay-lab-evaluation-pilot-2025.md#2026-09-28--sookmyung-run-a-frozen-first-benchmark).
+
+
+## 2026-09-28 — Hanyang recheck and official-source policy
+
+After frozen Sookmyung Run A, rechecked1660 all10 PDFs/105pages (22 exam pages visual;
+83 guide pages text + embedded-image pages visual). No verified2025 respondent answer
+found; REVIEW, not global NONE.1659 metadata refers2024 exams/2025 competition.
+No invented mapping/fixture, Production write or AI rerun. Existing official_source_url
+supports Owner attribution/delivery separation; rights review before full release.
+[Scope and follow-up](essay-lab-evaluation-pilot-2025.md#2026-09-28--hanyang-bounded-recheck--owner-official-source-decision).

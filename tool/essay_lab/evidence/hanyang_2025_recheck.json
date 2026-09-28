@@ -1,0 +1,436 @@
+{
+  "version": 1,
+  "checked_at": "2026-09-28",
+  "admission_year": 2025,
+  "source_post": "1660",
+  "source_url": "https://legendstudy.com/1660",
+  "status": "REVIEW",
+  "finding": "NOT_FOUND_IN_BOUNDED_RECHECK_NOT_GLOBAL_ABSENCE",
+  "resource_count": 10,
+  "total_pages": 105,
+  "method": "All pages text searched; all 22 exam PDF pages visually reviewed; guide embedded-image pages visually reviewed. No OCR rewrite. PDF page numbers are one-based.",
+  "search_terms": [
+    "우수답안",
+    "우수 답안",
+    "응시자 우수답안",
+    "학생 우수답안",
+    "답안 사례",
+    "우수 사례",
+    "합격자"
+  ],
+  "resources": [
+    {
+      "resource_id": "f35237a4-6d92-56da-9032-83d4e98c2db4",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_인문 문제.pdf",
+      "sha256": "200f46ed0b070299b0eb247eb57eef096222dcb0f1fde4f211f4956f9287fb4a",
+      "pages": 1,
+      "inspected_text_pages": [
+        1
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "1f24aba4-c56f-5dc3-9c65-600ab6e426a3",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_자연 문제.pdf",
+      "sha256": "5644e34d888a14032f5be122e34d61d1ee50b8200442ad48d10686691b2bea11",
+      "pages": 2,
+      "inspected_text_pages": [
+        1,
+        2
+      ],
+      "image_pages": [
+        2
+      ],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "dcad8a5d-cebc-551f-8550-41643f86e66f",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_자연 예시답안.pdf",
+      "sha256": "7a31ce563f72733f54b009c7ac8fd1a830da1de248520d1035965f67ce73dcd5",
+      "pages": 5,
+      "inspected_text_pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "image_pages": [
+        3,
+        5
+      ],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "2aecab13-e0ae-50f6-9ba6-ba04f2306354",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_인문 예시답안.pdf",
+      "sha256": "d48038a7fcd932e0c6260651713580e94bfc86b12107bf11a64220fc77c6bdc6",
+      "pages": 1,
+      "inspected_text_pages": [
+        1
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "ee6521f1-93d9-5ade-8e03-db9bc7369344",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_자연 출제의도.pdf",
+      "sha256": "31a55f77920165143c49267cb33a6e812fdec0172e42efd034a24004c82cdaf4",
+      "pages": 2,
+      "inspected_text_pages": [
+        1,
+        2
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "fe18e74e-1fcf-52fa-818a-2df96104be65",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_인문 출제의도.pdf",
+      "sha256": "e8bf4ac96fa6f117954d3c533d7915b6f8dce1e1074729c41ce070367ed8b06f",
+      "pages": 2,
+      "inspected_text_pages": [
+        1,
+        2
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "32995377-980d-53b0-a54e-966508b74ce1",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_상경 출제의도.pdf",
+      "sha256": "a33506413b89ab63356a3eb2d03d1d925fa29297d70465e6c508990de654b332",
+      "pages": 4,
+      "inspected_text_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "06e5bff7-a549-5083-98f4-840fa5350426",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_상경 예시답안.pdf",
+      "sha256": "334ce94caf26b12f346ce16675caa07dc4de3da6dd6bfcab5bb7e1873f6042c2",
+      "pages": 3,
+      "inspected_text_pages": [
+        1,
+        2,
+        3
+      ],
+      "image_pages": [],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2,
+        3
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    },
+    {
+      "resource_id": "f1b9f57f-31cf-5918-9a33-115cfc82b35b",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 신입학 수시 모집요강.pdf",
+      "sha256": "b1fc1bf4738a3a08e8f723e4ffc0cd38210c7bd83cad6f826c6189ba6c5a0027",
+      "pages": 83,
+      "inspected_text_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "image_pages": [
+        1,
+        53,
+        55,
+        56
+      ],
+      "hits": [
+        {
+          "page": 2,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 4,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 5,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 16,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 17,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 18,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 19,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 20,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 30,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 31,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 38,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 40,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 47,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 57,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 58,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 59,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 62,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 64,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 65,
+          "terms": [
+            "합격자"
+          ]
+        },
+        {
+          "page": 82,
+          "terms": [
+            "합격자"
+          ]
+        }
+      ],
+      "visual_pages": [
+        1,
+        53,
+        55,
+        56
+      ],
+      "finding": "admissions guide; acceptance-related keyword hits, no answer section identified"
+    },
+    {
+      "resource_id": "9ec11554-d35d-5a45-a2a3-181da3ecc915",
+      "source_post": "1660",
+      "title": "2025학년도 한양대 모의논술_상경 문제.pdf",
+      "sha256": "1ffe6082fa3d1fe6521260c12fc75bb53fccf0ce8f1616f12008b05dd2b9c9c0",
+      "pages": 2,
+      "inspected_text_pages": [
+        1,
+        2
+      ],
+      "image_pages": [
+        2
+      ],
+      "hits": [],
+      "visual_pages": [
+        1,
+        2
+      ],
+      "finding": "example/question/criteria documents; no verified respondent answer found"
+    }
+  ],
+  "year_context": {
+    "source_post": "1659",
+    "exam_year_in_title": 2024,
+    "year_2025_context": "competition information",
+    "inspection": "Production metadata only; not mapped or claimed as 2025 respondent evidence"
+  },
+  "blind_fixture_ready": false,
+  "production_mutation": false,
+  "limitation": "No claim of absence across all Hanyang 2025 sources. Exact 2025 respondent-answer evidence remains unresolved."
+}

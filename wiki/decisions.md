@@ -519,3 +519,13 @@ Campus/track/field/session are context metadata until real Pilot evidence justif
 stronger constraints. Existing source_locator text can cite page/section/question;
 no Question entity now. Approval permits migration preparation, not Production apply
 or Pilot seed. Existing resources, multi-role mappings and provenance are preserved.
+
+
+## 2026-09-28 — Essay official original source and delivery separation
+
+University admission-office postings/archives are official essay canonical sources.
+App/LAB must show university attribution and verified original links; LegendStudy
+blog/delivery URLs do not substitute for official provenance. Reuse existing
+exam/mapping official_source_url fields; no signed URL as canonical source.
+Attribution is not rights clearance; review before full public expansion.
+[Canonical policy](essay-lab-data-foundation.md#official-source-policy--owner-decision-2026-09-28).

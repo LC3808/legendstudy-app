@@ -360,3 +360,48 @@ Production apply, seed and runtime RLS/replay validation: **NOT_RUN**.
 
 Promotion live READ ONLY check: all3 target relations remain absent; existing
 resources/clock prerequisite present. No DDL, INSERT, UPDATE or DELETE executed.
+
+
+## Official Source Policy — Owner decision 2026-09-28
+
+University admission offices / official university archives are the canonical
+original sources for official essay questions, passages, intent, criteria, explanations,
+example/model/high-scoring answers, guidebooks and other official essay documents.
+App and lab.legendstudy.com display: **출처 · ○○대학교 입학처** and
+**원문 자료 보기 ↗**. LegendStudy provides discovery, viewer, structuring, analysis and
+learning; it does not present university documents as its own authored work.
+
+Use the exact stable official posting URL where verified. If unavailable, a verified
+relevant official essay/past-question archive URL is an allowed fallback; record the
+fallback scope in existing evidence_note. Do not fabricate a posting URL or imply a
+specific document was verified merely because the archive exists. Missing official
+URL stays a review item, not a LegendStudy-blog substitution.
+
+Existing schema is sufficient, no migration:
+- essay_exam_resources.official_source_url records the specific evidence source;
+  essay_exams.official_source_url records the exam-level source. Prefer the verified
+  mapping-specific URL; use exam URL only when it genuinely covers that evidence.
+- provenance / verification_status / evidence_note distinguish official verified
+  facts from derived or AI-generated interpretation. source_locator identifies
+  PDF page/section/question/answer without duplicating resources.
+- resources.source_url is delivery/viewer access; content_items/source_posts retain
+  blog/source lineage. Do not overwrite these as a substitute for official provenance.
+- Existing evidence_lookup.sql already returns official_source_url and delivery URL
+  separately. Temporary/signed PDF URLs are not canonical official source URLs.
+
+Reused verified posting references from existing Pilot plans (not a new university
+research inventory; each link covers the named exam/report, not every university file):
+
+| University | Official reference |
+|---|---|
+| 숙명여자대학교 | [2025 모의논술](https://admission.sookmyung.ac.kr/admission/html/rolling/previousView.asp?p_board_idx=52111&p_mode=modify) |
+| 한양대학교 | [2025 모의논술](https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI&ct02=ns02) |
+| 성균관대학교 | [2025 정규시험 보고서](https://admission.skku.edu/admission/html/ipsi/noticeView.html?idx=59290) |
+| 연세대학교 | [2025 정규시험 보고서](https://admission.yonsei.ac.kr/seoul/admission/html/counsel/dataView.asp?BBS_NO=3356) |
+| 경희대학교 | [2025 정규시험 자료](https://iphak.khu.ac.kr/detail.do?board_seq=13928&menuurl=89BGs%2Bk748ajyySWoWlQPw%3D%3D) |
+
+**Attribution does not grant processing, redistribution or commercial-use rights.**
+Source/rights review is required before full public release/expansion. Record unresolved
+conditions in the review queue; no legal clearance is asserted and no rights framework
+is introduced here. UI rendering of this policy is a future implementation obligation,
+not an implemented-UI claim from this documentation follow-up.
