@@ -1,0 +1,924 @@
+{
+  "captured_on": "2026-09-28",
+  "method": "BEGIN READ ONLY; pg_catalog/information_schema; ROLLBACK",
+  "project_ref": "stlhijzpjfgwwdgunlsd",
+  "inventory": {
+    "columns": [
+      {
+        "column": "essay_exam_id",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "uuid"
+      },
+      {
+        "column": "resource_id",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "uuid"
+      },
+      {
+        "column": "role",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "provenance",
+        "nullable": "YES",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "verification_status",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "source_locator",
+        "nullable": "YES",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "official_source_url",
+        "nullable": "YES",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "evidence_note",
+        "nullable": "YES",
+        "table": "essay_exam_resources",
+        "type": "text"
+      },
+      {
+        "column": "verified_at",
+        "nullable": "YES",
+        "table": "essay_exam_resources",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "is_active",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "boolean"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "updated_at",
+        "nullable": "NO",
+        "table": "essay_exam_resources",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "id",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "uuid"
+      },
+      {
+        "column": "university_id",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "uuid"
+      },
+      {
+        "column": "admission_year",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "smallint"
+      },
+      {
+        "column": "exam_key",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "exam_name",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "exam_kind",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "campus",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "admission_track",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "field_or_division",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "session_label",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "exam_date",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "date"
+      },
+      {
+        "column": "duration_minutes",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "smallint"
+      },
+      {
+        "column": "question_count",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "smallint"
+      },
+      {
+        "column": "answer_length_text",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "exam_format",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "provenance",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "metadata_resource_id",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "uuid"
+      },
+      {
+        "column": "official_source_url",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "evidence_note",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "verification_status",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "text"
+      },
+      {
+        "column": "verified_at",
+        "nullable": "YES",
+        "table": "essay_exams",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "is_active",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "boolean"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "updated_at",
+        "nullable": "NO",
+        "table": "essay_exams",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "id",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "user_id",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "study_session_id",
+        "nullable": "YES",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "exam_subject_id",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "paper_variant",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "text"
+      },
+      {
+        "column": "answer_key_version_id",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "grade_cutoff_version_id",
+        "nullable": "YES",
+        "table": "mock_exam_attempts",
+        "type": "uuid"
+      },
+      {
+        "column": "scoring_version",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "text"
+      },
+      {
+        "column": "submitted_at",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "raw_score",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "integer"
+      },
+      {
+        "column": "max_score",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "integer"
+      },
+      {
+        "column": "question_count",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "smallint"
+      },
+      {
+        "column": "correct_count",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "smallint"
+      },
+      {
+        "column": "unanswered_count",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "smallint"
+      },
+      {
+        "column": "grade",
+        "nullable": "YES",
+        "table": "mock_exam_attempts",
+        "type": "smallint"
+      },
+      {
+        "column": "grade_status",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "text"
+      },
+      {
+        "column": "request_payload",
+        "nullable": "NO",
+        "table": "mock_exam_attempts",
+        "type": "jsonb"
+      },
+      {
+        "column": "id",
+        "nullable": "NO",
+        "table": "profiles",
+        "type": "uuid"
+      },
+      {
+        "column": "display_name",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "text"
+      },
+      {
+        "column": "grade_level",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "smallint"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "profiles",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "updated_at",
+        "nullable": "NO",
+        "table": "profiles",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "neis_office_code",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "text"
+      },
+      {
+        "column": "neis_school_code",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "text"
+      },
+      {
+        "column": "target_date",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "date"
+      },
+      {
+        "column": "target_label",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "text"
+      },
+      {
+        "column": "academic_status",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "text"
+      },
+      {
+        "column": "onboarding_completed_at",
+        "nullable": "YES",
+        "table": "profiles",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "id",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "uuid"
+      },
+      {
+        "column": "user_id",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "uuid"
+      },
+      {
+        "column": "mode",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "text"
+      },
+      {
+        "column": "title",
+        "nullable": "YES",
+        "table": "study_sessions",
+        "type": "text"
+      },
+      {
+        "column": "subject",
+        "nullable": "YES",
+        "table": "study_sessions",
+        "type": "text"
+      },
+      {
+        "column": "planned_duration_seconds",
+        "nullable": "YES",
+        "table": "study_sessions",
+        "type": "integer"
+      },
+      {
+        "column": "started_at",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "ended_at",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "active_segments",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "jsonb"
+      },
+      {
+        "column": "duration_seconds",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "integer"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "include_in_study_total",
+        "nullable": "NO",
+        "table": "study_sessions",
+        "type": "boolean"
+      },
+      {
+        "column": "id",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "uuid"
+      },
+      {
+        "column": "slug",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "text"
+      },
+      {
+        "column": "name",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "text"
+      },
+      {
+        "column": "is_active",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "boolean"
+      },
+      {
+        "column": "created_at",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "timestamp with time zone"
+      },
+      {
+        "column": "updated_at",
+        "nullable": "NO",
+        "table": "universities",
+        "type": "timestamp with time zone"
+      }
+    ],
+    "constraints": [
+      {
+        "definition": "CHECK ((academic_status = ANY (ARRAY['student'::text, 'retaker'::text, 'other'::text])))",
+        "table": "profiles"
+      },
+      {
+        "definition": "CHECK (((display_name IS NULL) OR ((char_length(btrim(display_name)) >= 1) AND (char_length(btrim(display_name)) <= 80))))",
+        "table": "profiles"
+      },
+      {
+        "definition": "CHECK ((grade_level = ANY (ARRAY[1, 2, 3])))",
+        "table": "profiles"
+      },
+      {
+        "definition": "FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "table": "profiles"
+      },
+      {
+        "definition": "CHECK ((((neis_office_code IS NULL) = (neis_school_code IS NULL)) AND ((neis_office_code IS NULL) OR ((neis_office_code = btrim(neis_office_code, ' \t\n\r\f\u000b'::text)) AND ((char_length(neis_office_code) >= 1) AND (char_length(neis_office_code) <= 32)))) AND ((neis_school_code IS NULL) OR ((neis_school_code = btrim(neis_school_code, ' \t\n\r\f\u000b'::text)) AND ((char_length(neis_school_code) >= 1) AND (char_length(neis_school_code) <= 32))))))",
+        "table": "profiles"
+      },
+      {
+        "definition": "PRIMARY KEY (id)",
+        "table": "profiles"
+      },
+      {
+        "definition": "CHECK ((((target_date IS NULL) = (target_label IS NULL)) AND ((target_date IS NULL) OR isfinite(target_date)) AND ((target_label IS NULL) OR ((target_label = btrim(target_label, ' \t\n\r\f\u000b'::text)) AND ((char_length(target_label) >= 1) AND (char_length(target_label) <= 80))))))",
+        "table": "profiles"
+      },
+      {
+        "definition": "CHECK ((btrim(name) <> ''::text))",
+        "table": "universities"
+      },
+      {
+        "definition": "PRIMARY KEY (id)",
+        "table": "universities"
+      },
+      {
+        "definition": "CHECK ((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text))",
+        "table": "universities"
+      },
+      {
+        "definition": "UNIQUE (slug)",
+        "table": "universities"
+      },
+      {
+        "definition": "CHECK (((admission_track IS NULL) OR (btrim(admission_track) <> ''::text)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK (((admission_year >= 1900) AND (admission_year <= 2200)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK (((campus IS NULL) OR (btrim(campus) <> ''::text)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((duration_minutes > 0))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((exam_key ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((exam_kind = ANY (ARRAY['admission'::text, 'mock'::text, 'other'::text])))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((btrim(exam_name) <> ''::text))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK (((field_or_division IS NULL) OR (btrim(field_or_division) <> ''::text)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "UNIQUE (university_id, admission_year, exam_key)",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "FOREIGN KEY (metadata_resource_id) REFERENCES resources(id) ON DELETE RESTRICT",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK (((verification_status <> 'verified'::text) OR (provenance <> 'official'::text) OR (official_source_url IS NOT NULL)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((official_source_url ~* '^https?://[^/[:space:]]+'::text))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "PRIMARY KEY (id)",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((provenance = ANY (ARRAY['official'::text, 'legendstudy_derived'::text, 'ai_generated'::text])))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((question_count > 0))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK (((session_label IS NULL) OR (btrim(session_label) <> ''::text)))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "FOREIGN KEY (university_id) REFERENCES universities(id) ON DELETE RESTRICT",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((((verification_status = 'review'::text) AND (verified_at IS NULL) AND (NOT is_active)) OR ((verification_status = 'verified'::text) AND (verified_at IS NOT NULL) AND (provenance IS NOT NULL) AND (NULLIF(btrim(evidence_note), ''::text) IS NOT NULL) AND ((metadata_resource_id IS NOT NULL) OR (official_source_url IS NOT NULL)))))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "CHECK ((verification_status = ANY (ARRAY['review'::text, 'verified'::text])))",
+        "table": "essay_exams"
+      },
+      {
+        "definition": "FOREIGN KEY (essay_exam_id) REFERENCES essay_exams(id) ON DELETE RESTRICT",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK (((verification_status <> 'verified'::text) OR (provenance <> 'official'::text) OR (official_source_url IS NOT NULL)))",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK ((official_source_url ~* '^https?://[^/[:space:]]+'::text))",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "PRIMARY KEY (essay_exam_id, resource_id, role)",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK ((provenance = ANY (ARRAY['official'::text, 'legendstudy_derived'::text, 'ai_generated'::text])))",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "FOREIGN KEY (resource_id) REFERENCES resources(id) ON DELETE RESTRICT",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK ((role = ANY (ARRAY['question'::text, 'passage'::text, 'exam_intent'::text, 'scoring_criteria'::text, 'model_answer'::text, 'example_answer'::text, 'high_scoring_answer'::text, 'explanation'::text, 'guidebook'::text, 'other'::text])))",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK ((((verification_status = 'review'::text) AND (verified_at IS NULL) AND (NOT is_active)) OR ((verification_status = 'verified'::text) AND (verified_at IS NOT NULL) AND (provenance IS NOT NULL) AND (NULLIF(btrim(evidence_note), ''::text) IS NOT NULL) AND (NULLIF(btrim(source_locator), ''::text) IS NOT NULL))))",
+        "table": "essay_exam_resources"
+      },
+      {
+        "definition": "CHECK ((verification_status = ANY (ARRAY['review'::text, 'verified'::text])))",
+        "table": "essay_exam_resources"
+      }
+    ],
+    "functions": [
+      {
+        "arguments": "p_values smallint[], p_max integer",
+        "name": "scoring_cutoffs_valid"
+      },
+      {
+        "arguments": "p_attempt_id uuid",
+        "name": "fetch_own_mock_attempt"
+      },
+      {
+        "arguments": "",
+        "name": "feedback_updated_at"
+      },
+      {
+        "arguments": "",
+        "name": "enqueue_feedback_notification"
+      },
+      {
+        "arguments": "",
+        "name": "set_updated_at"
+      },
+      {
+        "arguments": "",
+        "name": "set_viewed_at"
+      },
+      {
+        "arguments": "p_segments jsonb, p_span_ms numeric",
+        "name": "study_active_milliseconds"
+      },
+      {
+        "arguments": "p_value text, p_max integer",
+        "name": "scoring_text"
+      },
+      {
+        "arguments": "p_value text",
+        "name": "scoring_source_url"
+      },
+      {
+        "arguments": "",
+        "name": "scoring_answer_guard"
+      },
+      {
+        "arguments": "p_answers jsonb, p_count integer",
+        "name": "scoring_normalize_answers"
+      },
+      {
+        "arguments": "p_questions jsonb, p_answers jsonb, p_cutoffs smallint[], p_certainty text",
+        "name": "scoring_mcq5"
+      },
+      {
+        "arguments": "",
+        "name": "scoring_question_guard"
+      },
+      {
+        "arguments": "",
+        "name": "scoring_publication_guard"
+      },
+      {
+        "arguments": "",
+        "name": "scoring_attempt_guard"
+      },
+      {
+        "arguments": "",
+        "name": "scoring_attempt_consistency"
+      },
+      {
+        "arguments": "p_attempt_id uuid, p_study_session_id uuid, p_answer_key_version_id uuid, p_grade_cutoff_version_id uuid, p_scoring_version text, p_answers jsonb",
+        "name": "submit_mock_attempt"
+      },
+      {
+        "arguments": "",
+        "name": "is_feedback_admin"
+      },
+      {
+        "arguments": "p_batch_size integer",
+        "name": "claim_feedback_notifications"
+      },
+      {
+        "arguments": "p_notification_id uuid, p_claim_token uuid",
+        "name": "complete_feedback_notification"
+      },
+      {
+        "arguments": "p_notification_id uuid, p_claim_token uuid, p_error_code text, p_retryable boolean",
+        "name": "fail_feedback_notification"
+      },
+      {
+        "arguments": "p_lease_seconds integer",
+        "name": "reclaim_feedback_notification_leases"
+      },
+      {
+        "arguments": "p_resource_id uuid",
+        "name": "consume_resource_resolver_quota"
+      }
+    ],
+    "profile_policies": [
+      {
+        "check": null,
+        "command": "DELETE",
+        "name": "profiles_owner_delete",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "authenticated"
+        ]
+      },
+      {
+        "check": "(( SELECT auth.uid() AS uid) = id)",
+        "command": "INSERT",
+        "name": "profiles_owner_insert",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ]
+      },
+      {
+        "check": null,
+        "command": "SELECT",
+        "name": "profiles_owner_select",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "authenticated"
+        ]
+      },
+      {
+        "check": "(( SELECT auth.uid() AS uid) = id)",
+        "command": "UPDATE",
+        "name": "profiles_owner_update",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "authenticated"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "kind": "r",
+        "name": "admin_users",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "answer_key_versions",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "bookmarks",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "content_items",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "day_targets",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "essay_exam_resources",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "essay_exams",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "exam_questions",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "exam_subjects",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "exams",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "feedback_notifications",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "feedback_submissions",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "grade_cutoff_versions",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "ingestion_quarantine",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "mock_exam_answers",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "mock_exam_attempts",
+        "rls": true
+      },
+      {
+        "kind": "v",
+        "name": "mock_exam_scoring_availability",
+        "rls": false
+      },
+      {
+        "kind": "r",
+        "name": "profiles",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "recent_views",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "resource_resolver_quota",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "resources",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "source_posts",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "study_sessions",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "subjects",
+        "rls": true
+      },
+      {
+        "kind": "r",
+        "name": "universities",
+        "rls": true
+      }
+    ]
+  }
+}

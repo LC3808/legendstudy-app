@@ -546,3 +546,15 @@ Students should first revise their own answer after diagnosis. An optional
 confirmed improvements. Its provenance is ai_generated, never university official
 or model_answer. Keep official examples distinct; no compulsory early reveal.
 [Pilot and private-body boundary](essay-lab-rewrite-pilot-v1.md). No UI/DB approval.
+
+## 2026-09-28 — Essay learning cycle and student-preserving assistance
+
+Owner confirms one credit represents first evaluation plus the first same-question revision
+evaluation in a learning cycle, not one AI call. Keep entitlement policy/version/ledger separate
+from attempts; no attempt-number pricing constraints. Primary action is direct student revision;
+optional on-demand AI example stays collapsed, recommended after second evaluation but not locked.
+Students retain their unstated judgments: do not add stance/conclusion; minimally edit only
+confirmed problems. Per-criterion integer1–5 levels are educational fulfillment signals, separate
+from official nullable weights. Overall sentence/no overall star is the review recommendation.
+[Product v1](essay-lab-product-v1.md), [architecture](student-analytics-data-architecture.md).
+Design only: no Production apply/UI/payment/AI run authorization from this record.

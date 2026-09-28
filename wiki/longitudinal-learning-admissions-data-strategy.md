@@ -12,6 +12,13 @@ no temporary fields now. Official evidence and AI inference stay distinguishable
 This updates delivery order, not permission to pre-collect personal data or ship
 future analytics/B2B. The long-term relationships below remain design context.
 
+## Essay product data design — 2026-09-28
+
+[Student Analytics-ready architecture](student-analytics-data-architecture.md) is this strategy’s
+implementation-level Essay companion: shared profiles/university identity, immutable learning
+facts and versioned results, commercial ledger separated. SQL/RLS is review-only; no Production
+apply or new analytics service. [Product v1](essay-lab-product-v1.md) owns the learner experience.
+
 ## Authority and current scope
 
 이 문서는 LegendStudy의 상위 Product / Data / Marketing / Business Strategy다.

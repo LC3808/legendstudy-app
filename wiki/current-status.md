@@ -133,9 +133,9 @@ Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserv
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
 Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
-[Rewrite Pilot](essay-lab-rewrite-pilot-v1.md): 한양 PARTIAL/숙명 PASS; 각1회 frozen.
-입장 추가1건 Owner review; 직접 재작성 우선. 기존 평가/H24-R01 보존;0 DB writes.
-Do not start analytics, new Materials audits or unrelated UI work.
+Essay Product/Data: [OWNER REVIEW READY](student-analytics-data-architecture.md).
+19-table SQL/RLS draft only; student Production tables NOT APPLIED, UI/payment NOT IMPLEMENTED.
+[Product v1](essay-lab-product-v1.md): v1.2 입장 보존/최소 수정 설계; Pilot 보존,0 AI runs.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.
