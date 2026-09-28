@@ -2869,3 +2869,10 @@ UI, AI, payment or migration promotion. Owner iOS files preserved.
 PASS retained. Opt-in App + LAB browser read-only salted-digest harness prepared, no UUID/token output.
 No phone connected, so Kakao/email fresh E2E and device install NOT_RUN; rollout BLOCKED. No Production
 request/mutation, migration, LAB deploy or product UI. Owner device connection/login is next.
+
+## 2026-09-28 — Owner Kakao shared identity acceptance
+
+Owner directly confirmed equal actual Supabase auth.users.id after same Kakao account login in
+App and LAB. [Phase2C](essay-lab-shared-identity.md): shared identity/identity rollout gate PASS;
+Apple/Google historical PASS preserved, Email NOT_RUN is not a Migration Gate blocker. No repeat
+login/build/SQL, identifiers stored, or Production changes. Other rollout gates remain separate.

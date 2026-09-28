@@ -14,11 +14,13 @@
     "fresh_e2e": "NOT_RUN"
   },
   "kakao": {
-    "app_login": "NOT_RUN",
-    "lab_login": "NOT_RUN",
-    "same_account": "NOT_VERIFIED",
-    "same_auth_user_id": "NOT_VERIFIED",
-    "result": "OWNER_E2E_REQUIRED"
+    "app_login": "OWNER_PASS",
+    "lab_login": "OWNER_PASS",
+    "same_account": "OWNER_CONFIRMED",
+    "same_auth_user_id": "YES",
+    "result": "OWNER_PASS",
+    "verification_method": "Owner directly compared actual Supabase auth.users.id from App and LAB after same Kakao account login",
+    "codex_repeat_e2e": "NOT_RUN_NOT_REQUIRED"
   },
   "email": "NOT_RUN",
   "account_switch": {
@@ -49,7 +51,7 @@
   "production_apply": false,
   "migration_technically_ready": "YES_FOR_ACCEPTED_PHASE2B_SCOPE",
   "real_student_data_ready": false,
-  "app_lab_shared_identity": "PARTIAL",
+  "app_lab_shared_identity": "PASS",
   "migration_promotion_gate": "READY_FOR_OWNER_REVIEW",
   "new_regressions": 0,
   "owner_files_preserved": true,
@@ -61,5 +63,22 @@
     "legendstudy-lab/src/lib/browser-auth-client.ts": "122ba07d95822704c6f4f84374ab2b1827dfb3777b67fe7925cbb97649830c88",
     "legendstudy-lab/src/lib/kakao-oidc.ts": "d55c5810816d2ce3d17f2f6ba769939016fc9cc5a224bafd67023bcc316d6bcb",
     "legendstudy-lab/src/components/kakao-callback.tsx": "b0727461fb3619f376f154ef6dd496bac9f1843d5e7282f6d14b6f84500789c5"
-  }
+  },
+  "real_student_data_identity_gate": "PASS",
+  "email_blocks_current_migration_gate": false,
+  "owner_acceptance_update": {
+    "date": "2026-09-28",
+    "starting_head": "6b8939b",
+    "evidence_source": "Owner report",
+    "actual_identifiers_stored": false,
+    "diagnostic_install_required": false,
+    "additional_login_required": false
+  },
+  "remaining_production_gates": [
+    "Owner migration-promotion/apply approval",
+    "Privacy and external/provider/backup retention review",
+    "Real AI provider adapter and telemetry integration",
+    "Scoped worker credential deployment and reconciler operation"
+  ],
+  "preparation_fields_scope": "diagnostic/device/test counts and source hashes retain prior preparation evidence; not rerun for Owner acceptance"
 }

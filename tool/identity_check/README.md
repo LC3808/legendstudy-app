@@ -1,5 +1,10 @@
 # Private shared-identity diagnostic (Phase2C)
 
+**Owner acceptance update:** Kakao App/LAB actual auth.users.id equality is Owner-verified.
+No repeat login, phone connection or diagnostic build installation is required. The procedures below
+are retained tooling reference, not current Owner instructions. See
+[canonical acceptance](../../wiki/essay-lab-shared-identity.md).
+
 Operator tooling, not product UI, account linking, or a deployed service. Default App builds do not
 run it; Release is always disabled. Never store real UUIDs/tokens/emails in Git or diagnostic output.
 A salted digest is still private pseudonymous data. Challenge/observations live only in a chmod700

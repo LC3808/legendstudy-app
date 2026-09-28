@@ -1,8 +1,14 @@
 # Essay LAB Phase2C — shared identity E2E gate
 
-**STATIC PASS / DIAGNOSTIC READY / OWNER_E2E_REQUIRED.** No physical iOS/Android device was connected
-at preparation time; no instrumented App was installed and no actual provider login was captured.
-Do not interpret harness tests as equal Production auth.users.id. Owner action comes after operator setup.
+**APP_LAB_SHARED_IDENTITY: PASS — Owner acceptance, 2026-09-28.**
+Owner logged into LegendStudy App and LAB with the same actual Kakao account and directly compared
+both surfaces' actual Supabase auth.users.id UUIDs, confirming equality. KAKAO: OWNER_PASS — SAME
+auth.users.id VERIFIED. This is Owner-reported actual identity comparison, not an inference from email,
+provider labels or diagnostic unit tests. No actual UUID/email/token is recorded here.
+
+The earlier OWNER_E2E_REQUIRED gate is closed. No repeat Kakao login, diagnostic iPhone build installation
+or additional capture is required. Apple/Google historical Owner PASS is retained. Email/password NOT_RUN
+does not block the current Migration Gate. Other privacy/AI provider/retention rollout gates remain separate.
 
 [Phase2B](essay-lab-server-transactions.md) actual local JWT/PostgREST and isolation results remain PASS.
 Schema, transactions and KEEP19 were not reopened. [Existing auth acceptance](auth-native-owner-acceptance.md)
@@ -23,7 +29,7 @@ records Apple/Google shared identity Owner PASS, preserved without repeat login 
 LAB source was read and its existing tests run, not edited/deployed. Hosted provider configuration was not
 changed or queried. Code/config match is STATIC_BACKEND_MATCH: PASS, not a fresh provider E2E claim.
 
-## Safe diagnostic
+## Prepared diagnostic — retained, not required for this acceptance
 
 [Operator harness instructions](../tool/identity_check/README.md),
 [App collector](../lib/features/auth/identity_diagnostic.dart),
@@ -53,44 +59,37 @@ linking or callback/config causes for Owner review, without automatic remediatio
 |---|---|---|
 | Apple | HISTORICAL_OWNER_PASS | NOT_RUN; no repeat requested |
 | Google | HISTORICAL_OWNER_PASS | NOT_RUN; no repeat requested |
-| Kakao | Login accepted historically; equality unverified | OWNER_E2E_REQUIRED |
-| Email/password | Same backend/password flow; login accepted historically | NOT_RUN; optional existing account only |
+| Kakao | Owner same-account App/LAB actual UUID comparison | OWNER_PASS — SAME auth.users.id VERIFIED |
+| Email/password | Same backend/password flow; login accepted historically | NOT_RUN; does not block current Migration Gate |
 
-KAKAO_APP_LOGIN / LAB_LOGIN / SAME_ACCOUNT / SAME_AUTH_USER_ID: NOT_VERIFIED in this phase.
+KAKAO_APP_LOGIN / LAB_LOGIN / SAME_ACCOUNT / SAME_AUTH_USER_ID: YES, confirmed by Owner.
+No fresh Codex login test or diagnostic capture was performed for this acceptance update.
 ACCOUNT_SWITCH: diagnostic stale-response/logout tests PASS; actual device/browser A→B NOT_RUN.
 Phase2B local RLS isolation remains PASS and is not relabelled Production history validation.
 Production Essay tables were not created/populated to test switching.
 
-Current device discovery found only macOS/Web targets, no physical phone. Diagnostic build installation
-and live capture are NOT_RUN. This is a concrete prerequisite, not missing SQL or a request for user IDs.
-Codex/operator must connect/install/arm capture first; Owner then only performs the logins.
-
-## Minimal next Owner actions
-
-1. Connect the iPhone to the Mac so Codex can install/run the short-lived diagnostic build.
-2. Once Codex says capture is armed, log into the App with Kakao.
-3. Log into LAB with the same Kakao account.
-
-Codex handles browser diagnostic and SAME_USER comparison. Do not ask Owner for UUIDs, tokens, SQL,
-Dashboard access or developer-console input. Existing account only; no signup or Apple/Google repeat.
-Optional A logout→B switch may be verified afterward if another existing account is readily available.
+At the earlier preparation checkpoint only macOS/Web targets were available; diagnostic installation
+and live capture were NOT_RUN. That historical tooling state is preserved and does not invalidate the
+subsequent Owner comparison. The prior device-connection/login action list is superseded: no Owner action
+or repeat E2E is required for the accepted Kakao identity gate.
 
 ## Gates and limits
 
 | Gate | Status |
 |---|---|
 | Static shared backend | PASS |
-| Kakao same user | OWNER_E2E_REQUIRED |
-| App/LAB shared identity | PARTIAL (historical Apple/Google retained) |
+| Kakao same user | OWNER_PASS — SAME auth.users.id VERIFIED |
+| App/LAB shared identity | PASS |
 | Migration technically ready | YES for accepted Phase2B schema/transaction correctness; separate approval still required |
 | Migration promotion | READY_FOR_OWNER_REVIEW, not promoted |
-| Real student data ready | NO / BLOCKED |
+| Real student data identity gate | PASS |
+| Overall real student rollout | Other privacy/AI provider/retention gates remain; not automatically approved |
 | Production schema/data mutation | NO |
 | Production apply / Owner SQL | NO |
 
-No real credentials/UUIDs were captured. No Production Auth/DB request was made by this preparation task.
-Actual future login is the only authorized Production interaction; diagnostic GETs must remain read-only.
+No real credentials/UUIDs were collected or stored by Codex. This documentation update made no Production
+Auth/DB request, SQL execution or mutation. Owner login/comparison is the acceptance evidence.
 Identity PASS alone will not implement the remaining worker/provider/retention deployment work from Phase2B.
 
-[Sanitized preparation result](../tool/identity_check/result.json) records test counts/source references.
-Next is actual Owner Kakao E2E with this harness, then Owner/ChatGPT migration-promotion decision.
+[Sanitized status and historical preparation result](../tool/identity_check/result.json) records test counts/source references.
+Next: Owner/ChatGPT migration-promotion decision; no additional identity test requested.

@@ -35,7 +35,7 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 
 - App and LAB Email/Google/Apple/Kakao Production login PASS (Owner report).
 - App Profile-build session restore PASS; school/grade values device PASS.
-- Apple and Google LAB/App shared identity PASS; Kakao equality NOT VERIFIED.
+- App/LAB identity PASS: Kakao same UUID Owner-verified; Apple/Google historical PASS.
 - Meal Owner E2E PASS: Home excludes breakfast,14/19KST progression, next eligible
   date within7 candidates D..D+6, expanded full-date meals. Keep implementation.
 - Storage SQL acceptance is not App photo E2E. Owner reports first-photo false
@@ -107,8 +107,8 @@ model first after separate instruction; then internal-grade, mock-score, admissi
 - Account deletion deployed/configured/E2E + avatar cleanup/retention review;
   Apple authorization revoke remains OPEN. Policy URLs/content/Store acceptance OPEN.
 - Apple secret renewal and Google credential rotation OPEN.
-- App recovery mailbox expired/reused/cold/warm acceptance and Kakao shared identity
-  must not be inferred from login PASS; see [Auth acceptance](auth-native-owner-acceptance.md).
+- App recovery mailbox expired/reused/cold/warm acceptance remains open;
+  see [Auth acceptance](auth-native-owner-acceptance.md).
 - Native focus/DND physical acceptance and notification operations: [Study](study-v1.md).
 - Community block/report/moderation/support/terms are coupled release prerequisites;
   backend absent. [Platform boundaries](product-platform-boundaries.md).
@@ -135,7 +135,7 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Phase2B server/JWT](essay-lab-server-transactions.md): KEEP19;77+55 RPC/37 real JWT,
 5 guards/36 static PASS.4 additive draft columns; Production NOT_APPLIED.
-[Identity2C](essay-lab-shared-identity.md): diagnostic ready; Kakao E2E needs phone.
+[Identity2C](essay-lab-shared-identity.md): Owner PASS; other rollout gates remain.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.

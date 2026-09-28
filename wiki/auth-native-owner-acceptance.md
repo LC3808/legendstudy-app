@@ -1,5 +1,14 @@
 # App Native Auth and Shared Account — Owner Acceptance
 
+## 2026-09-28 — Kakao shared identity Owner PASS
+
+Owner logged into App and LAB with the same actual Kakao account and directly confirmed that
+both actual Supabase auth.users.id UUIDs match. **OWNER_PASS — SAME auth.users.id VERIFIED.**
+This supersedes the historical Kakao equality NOT VERIFIED statements below. Apple/Google
+historical shared identity PASS retained; Email identity NOT_RUN does not block the current
+Migration Gate. No identifiers stored, repeat login or diagnostic build required.
+[Phase2C status and separate rollout gates](essay-lab-shared-identity.md).
+
 ## 2026-09-23 — Owner Production Auth checkpoint
 
 Owner reports App and LAB Email / Apple / Google / Kakao Production E2E PASS.
