@@ -578,11 +578,48 @@ String _levelStars(int? level) => level != null && level >= 1 && level <= 5
     ? '${'★' * level}${'☆' * (5 - level)}'
     : '판단 보류';
 
+const _resultInk = Color(0xFF202124);
+const _positive = Color(0xFF276348);
+const _needsWork = Color(0xFF8A3446);
+const _inProgress = Color(0xFF345F86);
+
+Color _sectionColor(String title) => switch (title) {
+  '잘한 점' || '좋아진 부분' || '해결한 부분' => _positive,
+  '보완할 점' || '먼저 고쳐야 할 부분' || '아직 확인할 부분' || '다시 나타난 부분' => _needsWork,
+  '좋아지고 있는 부분' => _inProgress,
+  _ => AppTokens.textPrimary,
+};
+
+Widget _resultHeader(String title) => Padding(
+  padding: const EdgeInsets.only(top: 28, bottom: 16),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      const Divider(height: 1, color: Color(0xFFD8D9D5)),
+      const SizedBox(height: 18),
+      Semantics(
+        header: true,
+        child: Text(
+          title,
+          style: AppTokens.cardTitle.copyWith(
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
+            color: _sectionColor(title),
+          ),
+        ),
+      ),
+    ],
+  ),
+);
+
 // Reading order remains title → status → stars when the trailing group wraps.
 Widget _dimensionHeading(BuildContext context, String title, Widget trailing) =>
     LayoutBuilder(
       builder: (context, box) {
-        final heading = Text(title, style: AppTokens.cardTitle);
+        final heading = Text(
+          title,
+          style: AppTokens.cardTitle.copyWith(color: AppTokens.textPrimary),
+        );
         if (box.maxWidth < 600 ||
             MediaQuery.textScalerOf(context).scale(1) >= 1.8) {
           return Column(
@@ -590,13 +627,11 @@ Widget _dimensionHeading(BuildContext context, String title, Widget trailing) =>
             children: [heading, const SizedBox(height: 8), trailing],
           );
         }
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(child: heading),
-            const SizedBox(width: 20),
-            trailing,
-          ],
+        return Wrap(
+          spacing: 18,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [heading, trailing],
         );
       },
     );
@@ -606,7 +641,12 @@ Widget _diagnosis(String text) => Row(
   children: [
     const ExcludeSemantics(child: Text('▶', style: AppTokens.secondary)),
     const SizedBox(width: 8),
-    Expanded(child: Text(text, style: AppTokens.body.copyWith(height: 1.6))),
+    Expanded(
+      child: Text(
+        text,
+        style: AppTokens.body.copyWith(height: 1.65, color: _resultInk),
+      ),
+    ),
   ],
 );
 
@@ -667,16 +707,92 @@ class _EssayResultViewState extends State<EssayResultView> {
   }) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      SectionHeader(title),
+      _resultHeader(title),
       for (final line in content)
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: diagnostic
               ? _diagnosis(line)
-              : Text(line, style: AppTokens.body),
+              : Text(
+                  line,
+                  style: AppTokens.body.copyWith(
+                    color: _resultInk,
+                    height: 1.65,
+                  ),
+                ),
         ),
     ],
   );
+  Widget _changeOverview(Map<String, List<String>> changes) => LayoutBuilder(
+    builder: (context, box) {
+      final twoColumns =
+          box.maxWidth >= 600 &&
+          MediaQuery.textScalerOf(context).scale(1) < 1.8;
+      return Wrap(
+        spacing: 16,
+        runSpacing: 14,
+        children: [
+          for (final entry in changes.entries)
+            SizedBox(
+              width: twoColumns ? (box.maxWidth - 16) / 2 : box.maxWidth,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: _sectionColor(entry.key).withValues(alpha: 0.045),
+                  border: Border(
+                    left: BorderSide(color: _sectionColor(entry.key), width: 2),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ExcludeSemantics(
+                          child: Icon(
+                            switch (entry.key) {
+                              '좋아진 부분' || '해결한 부분' => Icons.check,
+                              '좋아지고 있는 부분' => Icons.north_east,
+                              '다시 나타난 부분' => Icons.replay,
+                              _ => Icons.priority_high,
+                            },
+                            size: 18,
+                            color: _sectionColor(entry.key),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Semantics(
+                            header: true,
+                            child: Text(
+                              entry.key,
+                              style: AppTokens.cardTitle.copyWith(
+                                color: _sectionColor(entry.key),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    for (final line in entry.value)
+                      Text(
+                        line,
+                        style: AppTokens.body.copyWith(
+                          color: _resultInk,
+                          height: 1.65,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      );
+    },
+  );
+
   Future<void> openExample() async {
     if (!widget.comparison) {
       final proceed = await showDialog<bool>(
@@ -708,140 +824,158 @@ class _EssayResultViewState extends State<EssayResultView> {
   @override
   Widget build(BuildContext context) {
     final e = widget.evaluation;
-    return SingleChildScrollView(
-      key: const ValueKey('result-scroll'),
-      padding: const EdgeInsets.all(20),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 760),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const _PreviewNotice(),
-              const SizedBox(height: 12),
-              const Text(
-                '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
-                style: AppTokens.caption,
-              ),
-              if (widget.comparison) ...[
-                const SectionHeader('무엇이 달라졌나요?'),
-                if (!e.comparable)
-                  const Text('평가 조건이 달라 직접적인 향상으로 비교하기 어려워요.')
-                else ...[
-                  for (final entry in e.changes.entries)
-                    section(entry.key, entry.value),
-                  const SectionHeader('평가 항목 변화'),
-                  for (final d in e.dimensions) ...[
-                    _dimensionHeading(
-                      context,
-                      d.label,
-                      Semantics(
-                        label:
-                            '${_levelLabel(d.previousLevel)}에서 ${_levelLabel(d.level)}',
-                        child: ExcludeSemantics(
-                          child: Wrap(
-                            spacing: 8,
-                            runSpacing: 4,
-                            children: [
-                              Text(
-                                _levelStars(d.previousLevel),
-                                style: AppTokens.body,
-                              ),
-                              const Text('→'),
-                              Text(_levelStars(d.level), style: AppTokens.body),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}',
-                      style: AppTokens.secondary,
-                    ),
-                    const SizedBox(height: 8),
-                    _diagnosis(d.explanation),
-                    const SizedBox(height: 20),
-                  ],
-                ],
-                const Divider(color: AppTokens.textPrimary),
-              ],
-              section('종합 평가', [e.summary], diagnostic: true),
-              section('잘한 점', e.strengths, diagnostic: true),
-              const SectionHeader('평가 항목별 진단'),
-              const Text(
-                '별은 평가 기준의 충족 정도를 설명하며, 대학의 공식 점수가 아닙니다.',
-                style: AppTokens.caption,
-              ),
-              for (final d in e.dimensions)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _dimensionHeading(context, d.label, EssayLevel(d.level)),
-                      if (d.officialWeight != null)
-                        Text(
-                          '대학 공식 배점 비중 ${d.officialWeight}% · 별 단계와 별개',
-                          style: AppTokens.caption,
-                        ),
-                      const SizedBox(height: 8),
-                      _diagnosis(d.explanation),
-                      const Divider(),
-                    ],
-                  ),
-                ),
-              section('보완할 점', e.improvements, diagnostic: true),
-              section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
-              section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),
-              section('평가 근거', [
-                '${widget.question.origin.label} · 표시 예시',
-                '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
-              ]),
-              if (widget.question.officialSource != null)
-                ExternalLinkButton(
-                  uri: widget.question.officialSource,
-                  label: '대학 공식 자료 보기',
-                ),
-              const SizedBox(height: 16),
-              FilledButton(
-                onPressed: widget.onRewrite,
-                child: const Text('다시 써보기'),
-              ),
-              if (e.includedRevision)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    '첫 재첨삭은 추가 차감 없이 이용할 수 있어요.\n이 화면의 안내는 이용 권한 표시 예시입니다.',
+    return ColoredBox(
+      color: const Color(0xFFFFFEFC),
+      child: DefaultTextStyle.merge(
+        style: const TextStyle(color: _resultInk),
+        child: SingleChildScrollView(
+          key: const ValueKey('result-scroll'),
+          padding: const EdgeInsets.all(20),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 760),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const _PreviewNotice(),
+                  const SizedBox(height: 12),
+                  const Text(
+                    '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
                     style: AppTokens.caption,
                   ),
-                ),
-              const SizedBox(height: 12),
-              OutlinedButton(
-                onPressed: example
-                    ? () => setState(() => example = false)
-                    : openExample,
-                child: Text(example ? '예시 답안 접기' : '첨삭을 반영한 예시답안 보기'),
+                  if (widget.comparison) ...[
+                    _resultHeader('무엇이 달라졌나요?'),
+                    if (!e.comparable)
+                      const Text('평가 조건이 달라 직접적인 향상으로 비교하기 어려워요.')
+                    else ...[
+                      _changeOverview(e.changes),
+                      _resultHeader('평가 항목 변화'),
+                      for (final d in e.dimensions) ...[
+                        _dimensionHeading(
+                          context,
+                          d.label,
+                          Semantics(
+                            label:
+                                '${_levelLabel(d.previousLevel)}에서 ${_levelLabel(d.level)}',
+                            child: ExcludeSemantics(
+                              child: Wrap(
+                                spacing: 8,
+                                runSpacing: 4,
+                                children: [
+                                  Text(
+                                    _levelStars(d.previousLevel),
+                                    style: AppTokens.body.copyWith(
+                                      color: AppTokens.primaryInk,
+                                    ),
+                                  ),
+                                  const Text('→'),
+                                  Text(
+                                    _levelStars(d.level),
+                                    style: AppTokens.body.copyWith(
+                                      color: AppTokens.primaryInk,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}',
+                          style: AppTokens.secondary,
+                        ),
+                        const SizedBox(height: 8),
+                        _diagnosis(d.explanation),
+                        const SizedBox(height: 20),
+                      ],
+                    ],
+                  ],
+                  section('종합 평가', [e.summary], diagnostic: true),
+                  section('잘한 점', e.strengths, diagnostic: true),
+                  _resultHeader('평가 항목별 진단'),
+                  const Text(
+                    '별은 평가 기준의 충족 정도를 설명하며, 대학의 공식 점수가 아닙니다.',
+                    style: AppTokens.caption,
+                  ),
+                  for (final d in e.dimensions)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _dimensionHeading(
+                            context,
+                            d.label,
+                            EssayLevel(d.level),
+                          ),
+                          if (d.officialWeight != null)
+                            Text(
+                              '대학 공식 배점 비중 ${d.officialWeight}% · 별 단계와 별개',
+                              style: AppTokens.caption,
+                            ),
+                          const SizedBox(height: 8),
+                          _diagnosis(d.explanation),
+                          const Divider(),
+                        ],
+                      ),
+                    ),
+                  section('보완할 점', e.improvements, diagnostic: true),
+                  section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
+                  section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),
+                  section('평가 근거', [
+                    '${widget.question.origin.label} · 표시 예시',
+                    '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
+                  ]),
+                  if (widget.question.officialSource != null)
+                    ExternalLinkButton(
+                      uri: widget.question.officialSource,
+                      label: '대학 공식 자료 보기',
+                    ),
+                  const SizedBox(height: 16),
+                  FilledButton(
+                    onPressed: widget.onRewrite,
+                    child: const Text('다시 써보기'),
+                  ),
+                  if (e.includedRevision)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: Text(
+                        '첫 재첨삭은 추가 차감 없이 이용할 수 있어요.\n이 화면의 안내는 이용 권한 표시 예시입니다.',
+                        style: AppTokens.caption,
+                      ),
+                    ),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: example
+                        ? () => setState(() => example = false)
+                        : openExample,
+                    child: Text(example ? '예시 답안 접기' : '첨삭을 반영한 예시답안 보기'),
+                  ),
+                  if (example) ...[
+                    _resultHeader('첨삭을 반영한 예시 답안 · AI 생성'),
+                    const Text(
+                      'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.',
+                      style: AppTokens.caption,
+                    ),
+                    const SizedBox(height: 16),
+                    SelectableText(
+                      e.example,
+                      style: AppTokens.body.copyWith(
+                        height: 1.8,
+                        color: _resultInk,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      '정답처럼 외우기보다는 자신의 답안을 다시 작성할 때 참고해 보세요.',
+                      style: AppTokens.secondary,
+                    ),
+                  ],
+                  const SizedBox(height: 32),
+                ],
               ),
-              if (example) ...[
-                const SectionHeader('첨삭을 반영한 예시 답안 · AI 생성'),
-                const Text(
-                  'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.',
-                  style: AppTokens.caption,
-                ),
-                const SizedBox(height: 16),
-                SelectableText(
-                  e.example,
-                  style: AppTokens.body.copyWith(height: 1.8),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  '정답처럼 외우기보다는 자신의 답안을 다시 작성할 때 참고해 보세요.',
-                  style: AppTokens.secondary,
-                ),
-              ],
-              const SizedBox(height: 32),
-            ],
+            ),
           ),
         ),
       ),

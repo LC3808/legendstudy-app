@@ -125,3 +125,23 @@ Writing/Rewrite/IA/backend/DB/RPC 변경 없음. 새 기능 없음.
 - [Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-polish.png)
 - [Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-polish.png)
 - [Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-polish.png)
+
+## Owner visual polish 2 — 2026-09-28
+
+이번 Owner 결정이 이전 polish의 Desktop 우측 정렬을 대체한다. 항목명 직후18px
+간격으로 상태·별 또는 별 변화를 묶는다. Mobile은 기존 줄 분리 유지.
+결과 본문 #202124 / warm-white #FFFEFC; Navy는 heading/구조, Orange는 별/CTA.
+잘한 점·좋아진/해결한 부분 green, 보완/우선순위/아직 확인할 부분 burgundy,
+진행 중 blue. 본문 전체에 의미 색상을 적용하지 않는다.
+변화 요약은 Desktop 2열/Mobile 1열의 옅은 tint·2px left rule·작은 아이콘 블록;
+shadow 없음. 글자 크기가 커지면 1열. 큰 section은 여백·얇은 rule·굵기로 구분.
+색상만으로 의미를 전달하지 않으며 제목은 접근성 header로 표시한다.
+Writing/Rewrite/IA/기능/backend/DB/RPC는 그대로.
+
+1440px와360px 각각100%/200% widget 검증20 PASS; analyze/Wiki/diff PASS.
+전체 suite 재실행 없음. 아래 실제 Flutter 4개 캡처가 최신 Owner 검토본이다.
+
+- [Desktop 1차](../docs/previews/essay-lab-ui-phase1/essay-result-desktop-polish2.png)
+- [Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-polish2.png)
+- [Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-polish2.png)
+- [Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-polish2.png)

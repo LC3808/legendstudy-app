@@ -320,7 +320,7 @@ void main() {
   );
 
   for (final comparison in [false, true]) {
-    for (final width in [360.0, 1120.0]) {
+    for (final width in [360.0, 1440.0]) {
       for (final scale in [1.0, 2.0]) {
         testWidgets('result hierarchy $comparison width $width scale $scale', (
           tester,
@@ -356,10 +356,13 @@ void main() {
               lessThan(tester.getTopLeft(stars).dx),
             );
             if (width > 600 && scale == 1) {
-              expect(tester.getTopLeft(state).dy, tester.getTopLeft(title).dy);
               expect(
-                tester.getTopLeft(state).dx,
-                greaterThan(tester.getTopLeft(title).dx),
+                tester.getTopLeft(state).dy,
+                closeTo(tester.getTopLeft(title).dy, 1),
+              );
+              expect(
+                tester.getTopLeft(state).dx - tester.getTopRight(title).dx,
+                closeTo(18, 1),
               );
             } else {
               expect(
@@ -371,7 +374,7 @@ void main() {
           if (scale == 1) {
             await preview.capture(
               tester,
-              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-polish',
+              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-polish2',
             );
           }
           expect(tester.takeException(), isNull);

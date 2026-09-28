@@ -2932,3 +2932,8 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - Result-only hierarchy: title/status/right-side stars, diagnostic ▶; comparison stars/status/reason separated, four change summaries stay plain.
 - 360/1120px, 1x/2x:20 widget tests + analyze PASS; four [Flutter review captures](essay-lab-ui-ux-v1.md#owner-visual-polish--2026-09-28). Writing/Rewrite/IA/backend unchanged; Owner visual review then STOP.
+
+## 2026-09-28 — Essay visual polish 2
+
+- Result-only high-contrast warm-white reading surface, compact PC criterion/status/stars, restrained semantic headings and lightweight change blocks.
+- 1440/360px and 200%:20 widget tests + analyze PASS; four latest captures in [canonical UI](essay-lab-ui-ux-v1.md#owner-visual-polish-2--2026-09-28). No functionality/backend/DB changes; Owner review then STOP.
