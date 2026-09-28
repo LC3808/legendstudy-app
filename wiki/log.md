@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-28 — Authorized baseline write verified; dry-run PASS
+
+- [Baseline](production-migration-baseline-reconciliation.md): supported explicit repair recorded exactly13 approved historical versions; metadata AST match.
+- Actual migration list/dry-run show only Product3 pending; seed/role bundles empty, vault skipped. No actual Product apply.
+- Application catalog and canonical counts/fingerprints unchanged.4 focused tests PASS; Owner files preserved; STOP pending apply approval.
+
 ## 2026-09-28 — Baseline adoption final current-state check
 
 - [Adoption](production-migration-baseline-reconciliation.md): Owner confirms SQL Editor manual deployment context; no further CLI execution archaeology.

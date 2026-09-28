@@ -1,4 +1,57 @@
-# Migration baseline adoption — READY / NOT WRITTEN
+# Production migration baseline — ADOPTED / LEDGER VERIFIED
+
+## Authorized baseline write and dry-run — 2026-09-28
+
+**BASELINE_WRITE: PASS · MIGRATION_LIST: PASS · DRY_RUN: PASS.**
+**BASELINE_ADOPTED: YES · MIGRATION_LEDGER: INITIALIZED / VERIFIED.**
+**READY_FOR_PRODUCT_APPLY: YES (technical gate); PRODUCT APPLY: NOT AUTHORIZED / NOT APPLIED.**
+
+Owner/ChatGPT explicitly authorized only the13 historical versions listed below. They were recorded with
+one supported explicit-version `migration repair --linked --status applied` invocation, repairAll=false.
+No direct history INSERT, old migration SQL replay, reverted repair or automatic repair retry occurred.
+This adopts current Production state as the official managed baseline; it does not prove historical CLI execution.
+
+Pre-write verification: linked LegendStudy, history still absent, all16 pinned migration hashes unchanged,
+canonical counts/fingerprints unchanged and Product19 tables/28 functions/private schema absent.
+After repair, actual history was read: exactly13 approved versions, no unexpected versions, no Product
+versions. Every name matched its pinned filename; stored statements parsed to the same SQL AST as the
+pinned repository file. Application catalog snapshot (excluding the intentionally changed history-presence
+flag) and canonical counts/fingerprints were identical before/after.
+
+Then `supabase migration list --linked` showed13 exact local/remote matches and3 local-only versions.
+Only after that PASS, `supabase db push --linked --skip-vault --dry-run` ran. Actual output: dryRun=true,
+exactly the3 Product files, seeds=[], roles=[]. skip-vault excluded vault updates. No non-dry push ran.
+Final read-only verification after dry-run again showed exactly13 historical entries, absent Product
+objects and unchanged canonical counts/fingerprints.
+
+| Canonical relation | Before | After |
+|---|---:|---:|
+| universities |5|5|
+| essay_exams |21|21|
+| essay_exam_resources |134|134|
+| resources |10556|10556|
+
+Actual pending / dry-run planned, and **not applied**:
+
+- 20260928000100_student_essay_product.sql
+- 20260928000200_essay_entitlements.sql
+- 20260928000300_essay_server_operations.sql
+
+[Sanitized write/list/dry-run result](../supabase/validation/migration_baseline/write_result.json).
+No credential, personal UUID/email, student content or raw DSN in the result. Only migration history
+schema/metadata changed under authorization; no application schema/data, Product migration, student seed,
+AI, payment or UI work. Owner SQL required:NO. Owner iOS edits preserved.
+
+Four focused write-result tests and Wiki/diff/secret checks PASS. Previous1569 schema comparisons and
+adoption invariants were reused; before/after catalog snapshots verify this operation's noninterference.
+The remaining product rollout gates are privacy/provider/backup retention, actual AI provider adapter,
+and worker credentials/reconciler deployment. Technical apply readiness does not close those gates.
+
+**STOP after dry-run. Next: Owner/ChatGPT reviews this output and separately authorizes Product apply.**
+
+---
+
+# Historical adoption approval — before authorized write
 
 ## Owner final adoption check — 2026-09-28
 

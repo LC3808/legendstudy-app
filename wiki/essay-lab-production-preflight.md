@@ -33,7 +33,7 @@ essay_exams and essay_exam_resources. Canonical counts and aggregate fingerprint
 final supplement counts also matched. No actual user rows queried. Migration role capability review is
 catalog/static evidence, not a Production role-creation experiment.
 
-Follow-up: [baseline adoption final check](production-migration-baseline-reconciliation.md) READY;13 historical candidates, actual history write awaits separate authorization.
+Follow-up: [authorized baseline write](production-migration-baseline-reconciliation.md) VERIFIED; history blocker closed, Product3-only dry-run PASS. Product apply awaits separate approval.
 
 ## Blocker resolution boundary
 

@@ -1,0 +1,300 @@
+{
+  "date": "2026-09-28",
+  "starting_head": "5f001b1",
+  "branch": "codex/day-7-school-neis",
+  "linked_project": "LegendStudy VERIFIED",
+  "prewrite": "PASS",
+  "baseline_write": "PASS",
+  "baseline_adopted": true,
+  "meaning": "Current state adopted as historical chain baseline, NOT historical CLI execution proven.",
+  "migration_ledger": "INITIALIZED / VERIFIED",
+  "repair_count": 1,
+  "repair_all": false,
+  "baseline_version_count": 13,
+  "remote_baseline_versions": [
+    "20260912000100",
+    "20260913000100",
+    "20260913000200",
+    "20260914000100",
+    "20260914000200",
+    "20260917000100",
+    "20260917000200",
+    "20260923000100",
+    "20260923000200",
+    "20260925000100",
+    "20260926000100",
+    "20260927000100",
+    "20260927000200"
+  ],
+  "unexpected_remote_versions": [],
+  "product_versions_marked_applied": false,
+  "metadata_checks": [
+    {
+      "version": "20260912000100",
+      "name": "initial_content_schema",
+      "pinned_file_sha256": "2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b",
+      "statements_ast_match": true,
+      "statement_count": 74
+    },
+    {
+      "version": "20260913000100",
+      "name": "profile_school_selection",
+      "pinned_file_sha256": "7d151a18ff2aab721eb40c9e1ccef54b1c8e186d0e50619aa9ed05e45970e7cb",
+      "statements_ast_match": true,
+      "statement_count": 5
+    },
+    {
+      "version": "20260913000200",
+      "name": "profile_day_target",
+      "pinned_file_sha256": "c060ced1166740c272f34320953b74f46d629ef51034616fe3f1a64a4c977b53",
+      "statements_ast_match": true,
+      "statement_count": 5
+    },
+    {
+      "version": "20260914000100",
+      "name": "study_sessions",
+      "pinned_file_sha256": "a832d5e4704d868461d1dd24e0253c1b06e5feb0fa2546b0ebceb115d4d6eb51",
+      "statements_ast_match": true,
+      "statement_count": 16
+    },
+    {
+      "version": "20260914000200",
+      "name": "mock_exam_scoring",
+      "pinned_file_sha256": "3ff1fb8c7a638e93e36194a28338caee0356ee1b0834fba6709940722296b0e8",
+      "statements_ast_match": true,
+      "statement_count": 78
+    },
+    {
+      "version": "20260917000100",
+      "name": "feedback_operations",
+      "pinned_file_sha256": "f9d4f7fa29385272bab5ae6f5074a854641b9ce52863f29f00dd148a8f30720b",
+      "statements_ast_match": true,
+      "statement_count": 34
+    },
+    {
+      "version": "20260917000200",
+      "name": "feedback_notification_worker",
+      "pinned_file_sha256": "3c1b73b7ac7e22c71d7ec8575b19635ed79559e4580aa59e2357e5549aded633",
+      "statements_ast_match": true,
+      "statement_count": 21
+    },
+    {
+      "version": "20260923000100",
+      "name": "study_total_inclusion",
+      "pinned_file_sha256": "041c9f1607465700b268ce96287f9452b7ba7e07cf450dba7f6ca1c3902c0800",
+      "statements_ast_match": true,
+      "statement_count": 7
+    },
+    {
+      "version": "20260923000200",
+      "name": "private_profile_avatars",
+      "pinned_file_sha256": "ad5cb2605b75ece2ef0118fd663b470c3deae53b6b56bccb90580ed56ba29507",
+      "statements_ast_match": true,
+      "statement_count": 7
+    },
+    {
+      "version": "20260925000100",
+      "name": "resource_resolver_quota",
+      "pinned_file_sha256": "a575befd10afe13581ba29fac2a16c0d0d63e48a22eb40952bf9b0c085335e0d",
+      "statements_ast_match": true,
+      "statement_count": 9
+    },
+    {
+      "version": "20260926000100",
+      "name": "day_targets",
+      "pinned_file_sha256": "5bfd34f8c4f2a452e0c3cf6cdf47916c155f675a2c117229f1a2f1f2224ba7ba",
+      "statements_ast_match": true,
+      "statement_count": 13
+    },
+    {
+      "version": "20260927000100",
+      "name": "profile_personalization",
+      "pinned_file_sha256": "5f0433622c532f52748b9b261c93f3df8683dd28ad825c9d8ea0317be4dfbca8",
+      "statements_ast_match": true,
+      "statement_count": 6
+    },
+    {
+      "version": "20260927000200",
+      "name": "essay_lab_foundation",
+      "pinned_file_sha256": "d1c4fcb1b31cf4ea7979bc7cd585f5aa817383b5d3d531a4a64430d431dffcf3",
+      "statements_ast_match": true,
+      "statement_count": 22
+    }
+  ],
+  "migration_list": "PASS",
+  "migration_list_output": {
+    "migrations": [
+      {
+        "local": "20260912000100",
+        "remote": "20260912000100",
+        "time": "2026-09-12 00:01:00"
+      },
+      {
+        "local": "20260913000100",
+        "remote": "20260913000100",
+        "time": "2026-09-13 00:01:00"
+      },
+      {
+        "local": "20260913000200",
+        "remote": "20260913000200",
+        "time": "2026-09-13 00:02:00"
+      },
+      {
+        "local": "20260914000100",
+        "remote": "20260914000100",
+        "time": "2026-09-14 00:01:00"
+      },
+      {
+        "local": "20260914000200",
+        "remote": "20260914000200",
+        "time": "2026-09-14 00:02:00"
+      },
+      {
+        "local": "20260917000100",
+        "remote": "20260917000100",
+        "time": "2026-09-17 00:01:00"
+      },
+      {
+        "local": "20260917000200",
+        "remote": "20260917000200",
+        "time": "2026-09-17 00:02:00"
+      },
+      {
+        "local": "20260923000100",
+        "remote": "20260923000100",
+        "time": "2026-09-23 00:01:00"
+      },
+      {
+        "local": "20260923000200",
+        "remote": "20260923000200",
+        "time": "2026-09-23 00:02:00"
+      },
+      {
+        "local": "20260925000100",
+        "remote": "20260925000100",
+        "time": "2026-09-25 00:01:00"
+      },
+      {
+        "local": "20260926000100",
+        "remote": "20260926000100",
+        "time": "2026-09-26 00:01:00"
+      },
+      {
+        "local": "20260927000100",
+        "remote": "20260927000100",
+        "time": "2026-09-27 00:01:00"
+      },
+      {
+        "local": "20260927000200",
+        "remote": "20260927000200",
+        "time": "2026-09-27 00:02:00"
+      },
+      {
+        "local": "20260928000100",
+        "remote": "",
+        "time": "2026-09-28 00:01:00"
+      },
+      {
+        "local": "20260928000200",
+        "remote": "",
+        "time": "2026-09-28 00:02:00"
+      },
+      {
+        "local": "20260928000300",
+        "remote": "",
+        "time": "2026-09-28 00:03:00"
+      }
+    ],
+    "message": "Migrations listed"
+  },
+  "expected_pending": [
+    "20260928000100",
+    "20260928000200",
+    "20260928000300"
+  ],
+  "actual_pending": [
+    "20260928000100",
+    "20260928000200",
+    "20260928000300"
+  ],
+  "dry_run": "PASS",
+  "dry_run_only_product_3": true,
+  "dry_run_command": "supabase db push --linked --skip-vault --dry-run",
+  "dry_run_output": {
+    "upToDate": false,
+    "dryRun": true,
+    "migrations": [
+      "20260928000100_student_essay_product.sql",
+      "20260928000200_essay_entitlements.sql",
+      "20260928000300_essay_server_operations.sql"
+    ],
+    "seeds": [],
+    "roles": [],
+    "message": "Finished supabase db push."
+  },
+  "canonical_before": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "canonical_after": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "canonical_fingerprints_unchanged": true,
+  "application_catalog_sha256_before": "1aa1f15ceece84d24a08bb808e9c407d846f2fe0687dd4a81b4c77e9c335ec03",
+  "application_catalog_sha256_after": "1aa1f15ceece84d24a08bb808e9c407d846f2fe0687dd4a81b4c77e9c335ec03",
+  "application_schema_mutation": false,
+  "application_data_mutation": false,
+  "migration_history_mutation": "YES — authorized baseline only",
+  "product_migration_apply": false,
+  "owner_sql_required": false,
+  "ready_for_product_apply": true,
+  "apply_authorization": "NOT_GRANTED; separate Owner/ChatGPT approval required",
+  "remaining_product_rollout_gates": [
+    "privacy / provider / backup retention",
+    "actual AI provider adapter",
+    "worker credentials / reconciler deployment"
+  ],
+  "final_product_table_collision_count": 0,
+  "final_product_function_collision_count": 0,
+  "old_sql_replayed": false,
+  "student_data_created": false,
+  "ai_called": false,
+  "owner_files_preserved": true
+}

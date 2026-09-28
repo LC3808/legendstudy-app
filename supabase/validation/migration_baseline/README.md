@@ -1,7 +1,8 @@
-# Migration baseline adoption — READY / NOT WRITTEN
+# Migration baseline — ADOPTED / VERIFIED / PRODUCT PENDING
 
-**Current canonical adoption status:** adoption_result.json;3 current invariants PASS,13 candidates, no history write.
-Run only `test_adoption.py` for the narrow final check; do not repeat the historical1569 comparison.
+**Current canonical status:** write_result.json; authorized13-version history write verified; migration list/dry-run PASS; Product3 pending.
+`adoption_result.json` and `manifest.json` retain historical pre-write observations.
+Run `test_write_result.py` for this write verification; do not repeat the historical1569 comparison.
 
 Canonical decisions and exact per-version plan: [Wiki](../../../wiki/production-migration-baseline-reconciliation.md).
 
@@ -21,4 +22,4 @@ Canonical decisions and exact per-version plan: [Wiki](../../../wiki/production-
 
 Run with Python+pglast8.4: `python -m unittest discover -s supabase/validation/migration_baseline -p 'test_*.py'`.
 No migrations were replayed even locally. No data backfill was simulated as proof of historical execution.
-Do not run list/repair/push/dry-run on Production from this package. The13-version candidate list is now confirmed for baseline adoption; actual write still requires separate authorization.
+One authorized explicit13-version repair and list/dry-run completed. No further repair or Product apply is authorized.
