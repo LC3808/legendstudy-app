@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "gate": "PASS",
+  "checked_at": "2026-09-28",
+  "target": {
+    "university": "hanyang",
+    "admission_year": 2024,
+    "exam_kind": "admission",
+    "exam_key": "humanities-afternoon-2",
+    "question": "1"
+  },
+  "contract_sha256": "92a84addc22045a62be66009a3d637f6f94344214f8cccd737384a0c69bb08cf",
+  "official_guide_url": "https://go.hanyang.ac.kr/resources/upload_data/pdf/20240503114801523_.pdf",
+  "official_archive_url": "https://go.hanyang.ac.kr/web/guide/guidebook.do",
+  "official_question_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=13537&m_type=SUSI",
+  "files": [
+    {
+      "local_path": "/Users/woojinchang/Downloads/2024학년도 한양대 수시 논술_인문계(오후2) 문제.pdf",
+      "sha256": "4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b"
+    },
+    {
+      "local_path": "/Users/woojinchang/Downloads/2024학년도 한양대 수시 논술_인문계열(오후2) 합격자 예시답안.pdf",
+      "sha256": "43a9271aa86ffe6231cb3bc9d8cbd0c88f6f015dbb28e0b2db0d627450290e77"
+    },
+    {
+      "local_path": "/Users/woojinchang/development/legendstudy-app/.local/hanyang-2024-v1.1/official-2025-guide.pdf",
+      "sha256": "6de905abebcc25734b21abe4a939ebf1bb00ea605633195439b5e4c260a82a20"
+    }
+  ],
+  "references": {
+    "Q": {
+      "resource_id": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+      "source_locator": "PDF page 2; question"
+    },
+    "P": {
+      "resource_id": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+      "source_locator": "PDF pages 2-3; passages 가/나/다"
+    },
+    "E1": {
+      "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+      "source_locator": "PDF page 5; afternoon2 intent; official guide PDF page 51"
+    },
+    "E2": {
+      "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+      "source_locator": "PDF pages 5-8; afternoon2 criteria; official guide PDF pages 52-53"
+    }
+  },
+  "selected_answer_page": 2,
+  "answer_resource_id": "2c82e2fa-096e-56ee-a310-eee6a7c12d76",
+  "answer_embedded_image_sha256": "8f3488597ee667a572b4fe060838b70511f6cd32aa70841163454e250b7aa549",
+  "answer_provenance": "Official guide PDF54 / printed52 labels the same response 합격자 우수답안. Existing selected Owner PDF page2 is handwritten version; visually matched full response, not binary-identical to typeset guide. Preserve example_answer role as Owner instructed; no Production update.",
+  "verification_method": "Official question binary match reused. Guide PDF51-53 official headers, five weights, A/B/C/F descriptors and cautions visually match local integrated criteria PDF5-8. Guide PDF54 response compared to entire handwritten page2; same sequence, phrasing and conclusion, layout/typesetting differ.",
+  "ground_truth_limit": "University-published successful-applicant example; official guide says high-scoring; no actual student score known; not a perfect answer guarantee.",
+  "production_mutation": false
+}

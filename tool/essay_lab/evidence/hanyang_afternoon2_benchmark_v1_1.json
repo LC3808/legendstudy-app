@@ -1,0 +1,189 @@
+{
+  "version": "hanyang-afternoon2-run-a-v1.1",
+  "starting_head": "9fdccb8",
+  "target": {
+    "admission_year": 2024,
+    "exam_key": "humanities-afternoon-2",
+    "exam_kind": "admission",
+    "question": "1",
+    "university": "hanyang"
+  },
+  "execution": "PASS",
+  "run_count": 1,
+  "input_manifest": {
+    "contract_sha256": "92a84addc22045a62be66009a3d637f6f94344214f8cccd737384a0c69bb08cf",
+    "contract_version": "1.1",
+    "ground_truth_sent": false,
+    "image_count": 6,
+    "images": {
+      "criteria_1.png": "6bd10f25aaff0253f6bf3a7d04e27ca43ec4382df4a1e4c535b7fff3f9030f93",
+      "criteria_2.png": "cbacabb52212c5441307cef55bb4b92cde7b3640b665573beb3e44d14491e785",
+      "intent.png": "de1250108aee77c9100550f7380a94984f9360fab21c690ebe8409883abe9d14",
+      "question_1.png": "aff18fcb618b89403367b09e30013c66ab4227fb05c4f93498234cbba9232e8a",
+      "question_2.png": "00998c013ed6dd3ed8b5257cab58ca37b8aba2b1fb1a1e1a28988dc3c8434da1",
+      "student_1.png": "ce3ffcef7aafe4f87e739ff5289713ed007c7871c7c4d3a99a9f970dacc0f5c2"
+    },
+    "input_artifact_hash": "714bc8fa76d4f4f945e0f0e22a7f0ac571feae2c86eee02e09eb2a0b4d33dcd6",
+    "input_bytes": 3822890,
+    "model_requested": "gpt-6-astra",
+    "package_manifest_sha256": "50590ec8bc0944fbc13948820cc11aa7dcb9775253b1efef2243371aa75e3638",
+    "package_version": "hanyang-2024-afternoon2-v1",
+    "production_mutation": false,
+    "prompt_sha256": "cf26731ab68ecf6fcbc83da1fcd6e6b4cba7c8d5edb71c89203a84ef4fa12eb8",
+    "prompt_version": "hanyang-afternoon2-run-a-v1.1",
+    "scope_override": "Owner changed target to afternoon2; original contract file unchanged",
+    "target": {
+      "admission_year": 2024,
+      "exam_key": "humanities-afternoon-2",
+      "exam_kind": "admission",
+      "question": "1",
+      "university": "hanyang"
+    }
+  },
+  "frozen_at": "2026-09-28T01:23:10.731012+00:00",
+  "output_sha256": "c456184b9ad875aceebb910bbf0e8717ef49d4bfa5fc64aefdae3b8318b10457",
+  "events_sha256": "be8bb23f116acb4e7289581dfe98777bc2db7214b42af0507c8e807c17ba2340",
+  "revealed_at": "2026-09-28T01:23:30.299735+00:00",
+  "model": "gpt-6-astra",
+  "model_version": "UNKNOWN",
+  "model_reason": "Reuse prior single image-capable frontier CLI model; no provider integration or model comparison.",
+  "latency_seconds": 96.961,
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 25183,
+      "output_tokens": 3024,
+      "reasoning_output_tokens": 1034
+    }
+  ],
+  "output_bytes": 7883,
+  "api_cost": "UNKNOWN; authenticated CLI usage is not product API billing",
+  "ground_truth": "University-published successful-applicant answer; official guide labels 합격자 우수답안. Positive benchmark, not known perfect answer/score.",
+  "actual_university_score": "UNKNOWN",
+  "scorecard": {
+    "task_fulfillment": "PASS",
+    "passage_understanding": "PASS",
+    "reasoning": "PASS",
+    "official_criteria_alignment": "PASS",
+    "strength_identification": "PASS",
+    "duplicate_feedback_control": "PASS",
+    "evidence_grounding": "PASS",
+    "hallucination_control": "PASS",
+    "actionability": "PASS",
+    "student_language_quality": "PASS",
+    "level_recognition": "PARTIAL",
+    "weakness_calibration": "PARTIAL",
+    "teacher_like_tone": "PARTIAL",
+    "overall": "PARTIAL"
+  },
+  "student_summary": {
+    "종합 평가": "논제가 요구한 순서에 따라 사회계약론과 공리주의를 적용하고 자신의 견해까지 제시했습니다. 다만 모델은 미래 세대 B에 관한 전제, 제재의 방향, 두 세대의 총효용 비교를 핵심 보완점으로 판단했으며, 공식 A 수준을 충족했다고 보기는 어렵다고 평가했습니다. 이는 AI의 판단이며 실제 대학 점수는 확인되지 않았습니다.",
+    "잘한 점": [
+      "사회계약론의 두 조건을 나누어 설명했습니다.",
+      "공리주의가 미래 사람의 정체성보다 복지의 결과를 중시한다는 방향을 짚었습니다.",
+      "소수의 권리 문제를 근거로 자신의 견해를 제시했습니다."
+    ],
+    "평가 항목별 진단": {
+      "구성과 전개": "요구 순서를 잘 따랐습니다. 일반 이론 설명을 줄이고 사례 분석에 분량을 더 배분하면 좋겠습니다.",
+      "미래 세대 문제 이해": "A와 B를 구분한 점은 좋습니다. 다만 B의 삶이 비존재보다 낫다는 제시문의 전제를 유지하며 논증해야 합니다.",
+      "사회계약론": "합의의 어려움과 상호성의 한계를 짚었습니다. 제재는 미래 세대가 현재 세대에게 가할 수 있는지를 중심으로 설명해 보세요.",
+      "공리주의": "권리 침해 가능성에 대한 비판이 있습니다. 현재·미래 세대를 합친 순수 쾌락을 비교하고, 소수의 고통을 계산하더라도 권리 침해가 생길 수 있다는 점을 분명히 하세요.",
+      "문장과 표현": "대체로 뜻이 명확합니다. 결론의 범위를 기본권 침해 문제로 구체화하고, 원고지 분량도 확인해 보세요."
+    },
+    "보완할 점": [
+      "정책에 따라 태어나는 사람이 달라진다는 문제를 제시문 전제에 맞게 설명하기.",
+      "세대 간 보상과 제재의 방향을 분명히 하기.",
+      "두 세대의 총효용 비교와 소수 권리 비판을 정확하게 연결하기.",
+      "이론 소개와 반복 설명을 압축해 분석 분량 확보하기."
+    ],
+    "먼저 고쳐야 할 부분": [
+      "B에 관한 전제를 먼저 바로잡으세요.",
+      "조건 2의 제재 방향을 분명히 하세요.",
+      "정책별 총효용을 비교한 다음 소수 권리 비판을 다듬으세요.",
+      "마지막으로 반복 표현과 분량을 확인하세요."
+    ],
+    "다시 쓸 때 확인할 것": [
+      "제시문의 전제를 바꾸지 않았나요?",
+      "어느 세대가 누구에게 이익·불이익을 주는지 분명한가요?",
+      "현재와 미래의 이익·손실을 함께 비교했나요?",
+      "같은 설명을 반복하지 않고 공식 분량 범위를 확인했나요?"
+    ],
+    "평가 근거": [
+      "한양대학교 2024학년도 인문계 오후2 문제·제시문",
+      "한양대학교 출제 의도 — 미래 세대와 도덕적 의무",
+      "한양대학교 평가 지침 — 다섯 평가 영역과 종합 기준"
+    ]
+  },
+  "summary_note": "Sanitized post-run condensation, not altered raw model output. Checklist derived from frozen priorities; no second model run.",
+  "findings": [
+    {
+      "code": "K01",
+      "status": "REVIEW_NOT_CONFIRMED_ERROR",
+      "detail": "Model recognizes task structure/theoretical foundations but explicitly declines A-level fulfillment. It does not strongly recognize the positive benchmark level. Without actual university score, underestimation is a concern, not a proven grading error."
+    },
+    {
+      "code": "K11",
+      "status": "MINOR_PRESENTATION",
+      "detail": "Three high-weight domains are criticized in the opening assessment; concrete strengths are present but the balance and long criterion prose can feel severe. Teacher tone PARTIAL."
+    }
+  ],
+  "grounded_criticisms": [
+    "B existence premise reversal is visible in handwriting and conflicts with passage premise.",
+    "Sanction direction critique follows the intergenerational application; not an additional official criterion.",
+    "Explicit current+future total utility comparison is required by official criteria and underdeveloped in answer.",
+    "Minority-rights critique is valid; calculation-exclusion phrasing and broad totalitarianism claim can be refined.",
+    "Answer visibly continues after1260 grid mark; official no-deduction range1150–1250. No exact student score/deduction assigned."
+  ],
+  "quality_limits": [
+    "Official positive designation does not imply A/100 or eliminate legitimate criticism.",
+    "No independent human grading panel; operator source-grounded review after reveal.",
+    "One different-university case cannot prove causal improvement or general grading accuracy.",
+    "One ambiguous handwritten word explicitly left unjudged; no detected material image-reading error."
+  ],
+  "dedup_review": {
+    "exact_duplicates": 0,
+    "final_improvement_groups": 4,
+    "semantic_review": "Distinct premise / sanction direction / utility reasoning / compression-length groups. Priorities are short ordered actions, not repeated critique paragraphs.",
+    "criterion_mentions": "Related references remain in structure/expression; permitted by v1.1. Not a claim of zero topic recurrence."
+  },
+  "comparison": {
+    "sookmyung_v1": "PARTIAL; same teacher-related omission in5/7 criteria; frozen untouched",
+    "hanyang_v1_1": "PARTIAL overall; final4 action groups are distinct; no inflated duplicate list",
+    "duplication_improved": "YES_OBSERVED_NOT_CAUSAL",
+    "student_presentation_improved": "PARTIAL; natural Korean and concrete actions, but long critical prose/achievement balance need review",
+    "v1_1_improvement_confirmed": "PARTIAL"
+  },
+  "safety": {
+    "ground_truth_leakage": 0,
+    "invented_criteria_detected": 0,
+    "evidence_mismatch_detected": 0,
+    "private_artifact_exposed": false,
+    "production_mutation": false,
+    "schema_changed": false,
+    "migration": "NONE",
+    "contract_changed": false,
+    "tool_calls": 0
+  },
+  "review_queue": {
+    "H24-R01": "PRESERVED; afternoon1 stopped; no correction/deletion",
+    "H24-R02_AFTERNOON2": "RESOLVED for selected answer p2 and criteria via exact official guide",
+    "BUSINESS": "REVIEW; no additional evaluation/provenance resolution",
+    "HANYANG2025": "REVIEW unchanged"
+  },
+  "next_gate": "Owner reviews first frozen afternoon2 result; no rerun or next exam. Productization CONDITIONAL.",
+  "validation": {
+    "tests": 63,
+    "focused_tests": "PASS",
+    "deterministic_package_rebuild": "PASS",
+    "output_schema": "PASS",
+    "reference_mapping": "PASS",
+    "image_pixel_preservation": "PASS",
+    "private_artifact_exclusion": "PASS",
+    "protected_hashes": "PASS",
+    "wiki_handoff": "PASS",
+    "diff_check": "PASS",
+    "flutter": "NOT_RUN_NO_FLUTTER_CHANGE",
+    "secret_scan": "scoped credential-pattern scan before commit"
+  }
+}

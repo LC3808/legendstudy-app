@@ -1,5 +1,8 @@
 # Hanyang2024 / Evaluation Contract v1.1 — preparation, target mismatch
 
+Historical afternoon1 record preserved. Owner stopped this target; see the later
+[afternoon2 frozen Run A](essay-lab-hanyang-2024-afternoon2-run-a.md): execution PASS, benchmark PARTIAL.
+
 2026-09-28 · **BLOCKED BEFORE MODEL RUN; NOT A BENCHMARK RESULT**.
 Starting HEAD60ab454, branch codex/day-7-school-neis, local=origin. Owner scope is
 one2024 admission humanities-afternoon-1 benchmark, not historical expansion.

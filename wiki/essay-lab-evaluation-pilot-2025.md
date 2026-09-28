@@ -349,3 +349,11 @@ Wiki handoff and diff checks PASS. No Flutter change/test, no new evaluation run
 Materials, but afternoon1 answer has the same embedded images as business answer.
 Correct afternoon1 answer unresolved; AI runs0. v1.1 contract and Korean student
 language policy prepared; no empirical improvement claim. Sookmyung Run A preserved.
+
+## 2026-09-28 — Owner redirected Hanyang2024 to afternoon2
+
+[Afternoon2 Run A](essay-lab-hanyang-2024-afternoon2-run-a.md): official guide verifies
+selected answer/criteria; one v1.1 run frozen before reveal. Execution PASS, benchmark
+PARTIAL: final issue dedup PASS, level recognition/teacher balance PARTIAL. Original
+contract/Sookmyung untouched. No Production writes. Afternoon1 H24-R01 stopped and
+preserved; business REVIEW. Owner result review next; no further evaluation.

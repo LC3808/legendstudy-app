@@ -2810,3 +2810,11 @@ afternoon1/2 questions binary-matched. Contract v1.1 prepared; Korean learner to
 and deduplication documented.48 focused tests PASS. Business remains REVIEW for
 official answer provenance; Sookmyung frozen output unchanged.
 [Evidence and next gate](essay-lab-hanyang-2024-benchmark.md).
+
+## 2026-09-28 — Hanyang2024 afternoon2 v1.1 frozen benchmark
+
+- Official guide establishes selected handwritten answer PDF2 provenance and criteria.
+- [One Run A](essay-lab-hanyang-2024-afternoon2-run-a.md): execution PASS / benchmark
+  PARTIAL; final weakness dedup PASS, level/teacher balance remains review.
+- Contract unchanged; output frozen before reveal. No rerun/DB/schema/resource creation.
+  H24-R01 preserved/stopped, business and Hanyang2025 REVIEW; Owner review next.
