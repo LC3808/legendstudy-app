@@ -131,9 +131,9 @@ run latest profile build; check full exam sequences/known missing cases, Essay
 2020+ year/university searches and all CTA forms, especially Busan1593 real PDF.
 Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserved.
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
-Production5 universities/21 exams/134 mappings; Sookmyung1-1 image blind READY,
-Hanyang official evidence PARTIAL (respondent answer missing). SKKU v1 unchanged PASS.
-AI evaluation next. Exam discovery2010+; archive preserved. [Search policy](day-9-search-explore.md#exam-discovery-year-policy).
+Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
+first output frozen, E10 repeated critique. Owner review next; no rerun.
+Hanyang source gap/SKKU package unchanged. Exam discovery2010+; archive preserved.
 Do not start analytics, new Materials audits or unrelated UI work.
 Current resource checks are automated server/App-contract evidence, not new device
 acceptance.1710 A1 reconciliation remains separate; never republish1710.

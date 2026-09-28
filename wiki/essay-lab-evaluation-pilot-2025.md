@@ -149,3 +149,139 @@ visually checked: entire1-1 response, no1-2/quality label. Actual public HTTP ma
 reads and SQL-role write denial PASS. Diff/secret/Wiki checks recorded at closeout.
 Full Flutter suite NOT_RUN (focused search/Home repository tests cover changed paths).
 SKKU production rows/package code/source metadata preserved; no SKKU rebuild.
+
+## 2026-09-28 — Sookmyung Run A, frozen first benchmark
+
+**EXECUTION PASS / BENCHMARK PARTIAL / EVIDENCE ARCHITECTURE PASS.**
+Exactly one model run: Sookmyung2025 `mock-humanities` 문항1-1. No SKKU/Hanyang
+run, Run B, prompt tuning, DB call/mutation, migration, UI or package rebuild.
+Prior accepted schema/5–21–134 mappings/search/package states were not re-audited.
+Starting HEAD `e83648c`, local/origin matched; protected Owner files unchanged.
+
+### Execution and blind boundary
+
+Existing ChatGPT-authenticated Codex CLI0.157.1, requested `gpt-6-astra`, high
+reasoning. Available local model catalog lists text/image support and frontier
+capability; this is a practical single-model choice, not a comparative benchmark.
+Server-specific model snapshot/version was not reported: **UNKNOWN**.
+[Official CLI documentation](https://learn.chatgpt.com/docs/developer-commands?surface=cli)
+describes fresh `exec`, image attachment, JSON output and ephemeral runs.
+
+[Small one-shot adapter](../tool/essay_lab/sookmyung_run_a.py) uses a neutral temporary
+working directory, fresh session without conversation history, user config ignored,
+project instruction loading disabled, tools/apps/plugins/memory/web/multi-agent
+features disabled. No security-policy bypass flag. Model tool calls observed:0.
+Only original accepted blind JSON plus three hash-verified original image assets
+and allowlisted Q/P/E1/E2 reference metadata were supplied. No full package,
+reference/example answer, response subtype, Owner judgement or ground truth.
+Original answer image was neither OCR-transcribed nor rewritten/resized by runner.
+Provider-internal image preprocessing is not asserted to be pixel-identical.
+
+The existing contract file is **unchanged**. Adapter preserves its output_draft
+fields, adds uncertainty, and substitutes this question/image input for its original
+SKKU-only/string-input example. It does not carry SKKU40/40/20 scoring into Sookmyung.
+No numerical student score or assigned grade was generated.
+
+Private directory: `.local/essay-evaluation/sookmyung-2025-q1-1-run-a/`.
+`attempt.json` is exclusive-create: rerunning the adapter refuses another attempt.
+`prompt.txt`, `input_manifest.json`, `events.jsonl`, `stderr.log`, `raw_output.json`
+and `frozen_receipt.json` are preserved read-only. After exit0, hashes were frozen
+**before** opening `ground_truth.json`; reveal has a separate timestamp/receipt.
+Do not delete/overwrite these files to obtain a better first result.
+
+- Started2026-09-28T00:09:41.506776+00:00; frozen00:10:54.977 UTC.
+- Ground truth file opened/reveal recorded00:19:31.580 UTC.
+- Model process latency73.469s; output7509 bytes.
+- Input artifacts466616 bytes, assembled prompt10824 bytes, images3.
+- CLI usage: input16576, cached0, output2171, reasoning_output230.
+  Values are reported fields; do not sum reasoning into output without provider
+  accounting evidence. CLI usage includes its system/runtime context.
+- API cost **UNKNOWN** (existing ChatGPT auth, not metered product API observation).
+- Input bundle hash `2807f333c06e51c5a30442bebe6e3ce77dc26b9862165254ec7ec30f25b63a4b`.
+- Raw output hash `d5dcba9a8fb2e39b5ef03366b0a42793f94ce2d6d2fe71efc85553154a101ed2`.
+
+Initial postprocessor classified two CLI startup feature notices as tool activity.
+The model itself exited0 with one completed turn. Log-only validation was corrected
+for those exact notices; original prompt/input/output remained identical and **no
+model retry** occurred. Notices describe skip-host-skill-discovery and disabled code
+mode. Full record: private validated_receipt; no hidden replacement result.
+
+### First result, sanitized
+
+[Immutable v1 summary/scorecard/metadata](../tool/essay_lab/evidence/sookmyung_run_a_benchmark_v1.json).
+This is a sanitized report, not the private raw evaluation body or student answer.
+
+AI overall assessment:
+
+> 평균 점수 하락과 학생들의 실제 학력 저하를 구분하고, 취약계층 응시자의 유입으로 평균이 달라졌다는 핵심 원인을 설득력 있게 설명한 답안입니다. 분량과 전체 전개도 적절합니다. 다만 공식 기준에 더 충실하려면 교육위원회의 교사 책임론을 명시하고, 취약계층의 응시 증가를 낳은 대학의 수용 확대까지 인과관계에 포함해야 합니다.
+
+| Criterion | AI's concrete finding, paraphrased |
+|---|---|
+| 논제 충족 | 가를 나의 오류 설명에 활용; 표시된324자는 허용 분량. 교사 책임론 명시 부족 |
+| 제시문 이해 | 평균 해석의 주의와 응시 집단 구성 변화 이해; 대학 수용 확대 배경 미명시 |
+| 비교/분석 | 개념→사례 적용 적절; 수치 산출 대상 구성이라는 연결을 더 명료하게 권고 |
+| 논리 구성 | 오류→사례→실제 원인→비판 흐름 인정; 반복 압축 권고 |
+| 근거 활용 | 취약계층 응시 증가를 공식③ 핵심으로 인정; 배경과 비판 대상 보충 |
+| 표현 | 의미/연결어 명확; 첫 문장의 추상적 표현 구체화 |
+| 공식 rubric | ① 충족,② 부분 반영,③ 핵심 반영하나 대학 수용 확대 배경 미명시 |
+
+Strengths: numerical change vs causal interpretation distinction; population
+composition explanation; application of passage principle in the student's own
+reasoning. Revision priorities: clarify teacher-blame interpretation; connect
+university access expansion→candidate composition→average; compress repetition
+within300±30 characters. No generic praise-only response.
+
+Exact internal citations:
+- Q/P → existing resource `ed10de4d-3a33-5fbc-94f3-27ad7521f3cc`;
+  Q p2 question1-1, P p1 가/나.
+- E1/E2 → `ba072916-f610-515f-96e9-251ff3fc8745`;
+  E1 p4 section3, E2 p6 section6 question1-1.
+All four output IDs/UUIDs/locators exactly match the supplied reference catalog.
+No invented criteria, mismatched reference or image reading error was detected in
+this case.324 is the image's printed count, not an independently recomputed count.
+
+### Ground-truth comparison and scorecard
+
+Ground truth: university-published respondent high-scoring answer. It is a strong
+positive example, not an absolute perfect-answer score. The model independently
+recognized its substantive strengths. Teacher blame/access expansion are actually
+present in official②③ and not explicit in the answer; requesting precision is
+therefore evidence-based, not an invented deduction. There was no student score.
+
+| Benchmark dimension | Verdict |
+|---|---|
+| Task fulfilment recognition | PASS |
+| Passage understanding recognition | PASS |
+| Reasoning quality recognition | PASS |
+| Official rubric alignment | PASS |
+| Strength identification | PASS |
+| Weakness calibration | PARTIAL |
+| Evidence grounding | PASS |
+| Hallucination control | PASS |
+| Actionability | PASS |
+| Overall benchmark recognition | PARTIAL |
+
+Observed issue1: **E10 / MINOR**, same teacher-related omission appears in5 of7
+criterion_feedback sections. This can amplify one weakness in the perceived overall
+judgement. Future contract/presentation should distinguish core achievement from
+one consolidated improvement issue. **E03/E06 are not established**: no numerical
+penalty/grade exists, and a university-selected answer can have valid improvements.
+Do not relabel supported critique as hallucination merely because ground truth is
+positive. Scorecard is post-reveal Codex review, not independent human gold scoring.
+One positive case cannot establish separation from weak answers or admission prediction.
+
+### Validation and next gate
+
+16 focused checks PASS: input/label/reference-answer exclusion, exact source-image
+hashes, deterministic assembly, output schema/reference membership, no tools,
+first-write protection, frozen output hashes and reveal-after-freeze ordering.
+Private fixture tests explicitly skip when a clean checkout lacks ignored bodies.
+Private artifacts excluded by Git; no raw answer/image/evaluation body committed.
+No Flutter changes/suite; no accepted-state or other university artifact changes.
+Wiki/diff/secret/protected-file checks completed before commit.
+
+Decision: execution **PASS**, benchmark **PARTIAL**, evidence architecture **PASS**,
+contract **MINOR_REVISION** (deduplicate critique, no new schema/framework).
+SKKU general-answer next pilot **YES after Owner gate**; Essay LAB v1
+**CONDITIONAL**, not proven product readiness from one positive answer.
+Owner/ChatGPT chooses v1.1, SKKU, or contract revision. **STOP; no next evaluation.**

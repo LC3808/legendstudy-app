@@ -2781,3 +2781,12 @@ Hanyang example answer remains example, respondent source supplement required.
 Private deterministic packages, separate ground truth; no AI evaluation/schema/UI.
 [Next gate and review queue](essay-lab-evaluation-pilot-2025.md). Flutter41 + Python42,
 public read/analyze PASS; Owner iOS/accepted-state and SKKU preserved.
+
+## 2026-09-28 — Sookmyung single blind Evaluation Run A
+
+Existing blind JSON/images reused; gpt-6-astra high via authenticated CLI, one run,
+no tools. Original output hash frozen before ground-truth reveal. Execution PASS;
+benchmark PARTIAL: substantive/rubric-based strengths and improvements, but E10
+same omission repeated5/7 criterion sections. No invented score/criterion detected.
+Private raw output retained; sanitized v1 receipt/scorecard committed.16 checks PASS;
+no Production/schema/UI/other-university work. [First result and next Owner gate](essay-lab-evaluation-pilot-2025.md#2026-09-28--sookmyung-run-a-frozen-first-benchmark).

@@ -1,0 +1,158 @@
+{
+  "blind_input_sha256": "35c2b5513b4ad8a0cbd1bbae589dfc5828e55bacebe291e434f013c478583ed1",
+  "cli_version": "codex-cli 0.157.1",
+  "comparison_analysis": [
+    "모델은 답안을 설득력 있고 분량/전개가 적절하다고 인정했으며 공식 positive benchmark와 방향이 일치한다.",
+    "학생답안에 교사 책임론과 대학의 수용 확대가 명시되지 않은 것은 원본 이미지와 일치한다. E2②③에 실제로 있는 근거이며 invented criterion이 아니다.",
+    "동일 교사 관련 누락이 7개 criterion_feedback 중 5개에서 언급된다. 중복 강조가 총체적 수준 판단을 과도하게 부정적으로 보이게 할 수 있다.",
+    "실제 점수/등급을 부여하지 않았으므로 E03 부당 감점이나 E06 수준 과소평가를 확정하지 않는다. 반복 피드백은 별도 관찰된 개선 항목이다.",
+    "대학 공개 우수답안이라고 모든 rubric 문구를 완벽히 갖춰야 하는 것은 아니다. 높은 수준 인식과 합리적 개선 지적은 양립한다.",
+    "한 개 positive 사례만으로 낮은 수준 답안과의 구별, 상대적 정확도 또는 합격 점수 예측을 검증하지 못했다."
+  ],
+  "contract_adapter": "existing output_draft + uncertainty; image input and current question replace SKKU-only scope; original contract unchanged",
+  "contract_base_sha256": "a9e5282a45a17e05addf946e33f427ade105f01cc0e77057834e145dc32c370b",
+  "cost_note": "ChatGPT-authenticated CLI usage includes system/runtime context, not a standalone product API cost measurement. Do not extrapolate billing from these tokens.",
+  "decision_gate": {
+    "benchmark_quality": "PARTIAL",
+    "evaluation_contract": "MINOR_REVISION",
+    "evidence_architecture": "PASS",
+    "execution": "PASS",
+    "ready_for_essay_lab_v1": "CONDITIONAL",
+    "ready_for_skku_general_answer": "YES_AFTER_OWNER_GATE"
+  },
+  "estimated_api_cost": "UNKNOWN",
+  "events_sha256": "dfec670a221b6c88dc5f1376c78a1aa54973a3cb1ec1060b445757a5b7cc5ef6",
+  "evidence_mismatches_detected": 0,
+  "executed_at": "2026-09-28T00:09:41.506776+00:00",
+  "failures": [
+    {
+      "code": "E10",
+      "finding": "중복 피드백: 교사 관련 누락이 criterion_feedback 7개 중 5개에 반복된다. 핵심 수준 판단과 하나의 개선 이슈를 분리/중복 제거할 필요.",
+      "next_gate_only": "Deduplicate repeated findings; distinguish core fulfilment from optional precision before a separately authorized future run.",
+      "not_established": [
+        "E03",
+        "E06"
+      ],
+      "severity": "MINOR"
+    }
+  ],
+  "ground_truth": "university-published respondent high-scoring answer; positive benchmark, not perfect-answer score",
+  "ground_truth_in_ai_input": false,
+  "ground_truth_revealed_at": "2026-09-28T00:19:31.580032+00:00",
+  "hard_safety_failures": 0,
+  "image_count": 3,
+  "image_hashes": {
+    "answer_1.png": "63b72db087a70e393e1c201c29b34c5b8ec86c9eda04ea2ab679472a40595736",
+    "question_page_1.png": "a22921ec00616aa475675223f99618f1da9326f5fb7b73e7002907fb96361846",
+    "question_page_2.png": "9fccd3bd6615845a5e5a2b54fd6fa6068441c207fceefb47e8be2e5175547dd3"
+  },
+  "image_read_errors_detected": 0,
+  "input_artifact_hash": "2807f333c06e51c5a30442bebe6e3ce77dc26b9862165254ec7ec30f25b63a4b",
+  "input_bytes": 466616,
+  "instrumentation_note": "Original output frozen successfully. Initial log validator rejected two expected CLI startup notices as tool activity; corrected log-only validation, no model retry or prompt/input change.",
+  "invented_criteria_detected": 0,
+  "latency_seconds": 73.469,
+  "migration": "NONE",
+  "model_requested": "gpt-6-astra",
+  "model_runs": 1,
+  "model_selection_reason": "Existing authenticated CLI; available model catalog describes frontier intelligence and text/image support. Single model; no performance comparison claim.",
+  "next_run_executed": false,
+  "official_reference_validation": "PASS",
+  "output_bytes": 7509,
+  "output_frozen_at": "2026-09-28T00:10:54.977430+00:00",
+  "output_schema_validation": "PASS",
+  "output_sha256": "d5dcba9a8fb2e39b5ef03366b0a42793f94ce2d6d2fe71efc85553154a101ed2",
+  "package_sha256": "d6192e94a953c9d492b108bbb0d734327d05db3d8d5cabb9ea78c5019b7594f4",
+  "package_version": "v1",
+  "production_mutation": false,
+  "prompt_bytes": 10824,
+  "prompt_sha256": "b97df4e0b30e7989b638ead9981f95ee51b7a5f95eadc473eeaa72d2d213a17b",
+  "prompt_version": "sookmyung-run-a-v1",
+  "provider": "OpenAI via existing ChatGPT-authenticated Codex CLI",
+  "reasoning_effort": "high",
+  "reference_answers_in_ai_input": false,
+  "references": {
+    "E1": {
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "source_locator": "PDF page 4; section 3 출제 의도; question 1-1,1-2"
+    },
+    "E2": {
+      "resource_id": "ba072916-f610-515f-96e9-251ff3fc8745",
+      "source_locator": "PDF page 6; section 6 채점 기준; question 1-1"
+    },
+    "P": {
+      "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+      "source_locator": "PDF page 1; passages 가,나"
+    },
+    "Q": {
+      "resource_id": "ed10de4d-3a33-5fbc-94f3-27ad7521f3cc",
+      "source_locator": "PDF page 2; question 1-1"
+    }
+  },
+  "reviewer": "Codex orchestration review after reveal; not an independent human gold score",
+  "revision_priorities": [
+    "1순위: 평균 하락을 교사의 무능력 탓으로 돌린 판단을 분명히 지적하기.",
+    "2순위: 대학의 취약계층 수용 확대 → 해당 집단의 응시 증가 → 전체 평균 하락의 연결을 완성하기.",
+    "3순위: 사례 설명과 반복을 압축한 뒤 300±30자 안에 필요한 내용이 모두 있는지 확인하기."
+  ],
+  "sanitized_criterion_summary": {
+    "comparison_analysis": "가의 개념을 나의 사례에 적용한 방향 적절; 수치 산출 대상 구성을 더 직접 연결하도록 권고.",
+    "evidence_use": "취약계층 응시 증가를 공식 기준③ 핵심으로 인정; 원인과 비판 대상 보충 권고.",
+    "expression": "의미와 연결어 명확; 첫 문장의 추상적 표현 구체화 권고.",
+    "logical_structure": "오류 제시→사례→실제 원인→해석 비판의 논리 인정; 반복 압축 권고.",
+    "official_rubric": "① 충족, ② 부분 반영, ③ 핵심 반영이나 대학 수용 확대 배경 미명시로 판단.",
+    "passage_understanding": "평균의 해석 주의 및 응시 집단 구성 변화 이해 인정; 대학 수용 확대 배경 누락 지적.",
+    "task_fulfillment": "논제와 300±30자 요구 충족; 교사 책임론 명시 누락 지적."
+  },
+  "sanitized_improvements": [
+    "보고서가 SAT 평균 하락의 책임을 교사의 무능력에 돌렸다는 점을 명시하여, 비판하는 해석의 내용을 정확히 제시하세요.",
+    "대학의 취약계층 수용 확대가 이들의 SAT 응시 증가로 이어졌다는 배경을 보충하세요. 이미 설명한 응시 집단의 구성 변화와 연결하면 됩니다.",
+    "노점상 사례의 재설명과 취약계층 유입에 대한 반복을 줄이고, 확보한 분량을 위 두 내용에 배분하세요."
+  ],
+  "sanitized_overall_assessment": "평균 점수 하락과 학생들의 실제 학력 저하를 구분하고, 취약계층 응시자의 유입으로 평균이 달라졌다는 핵심 원인을 설득력 있게 설명한 답안입니다. 분량과 전체 전개도 적절합니다. 다만 공식 기준에 더 충실하려면 교육위원회의 교사 책임론을 명시하고, 취약계층의 응시 증가를 낳은 대학의 수용 확대까지 인과관계에 포함해야 합니다.",
+  "sanitized_strengths": [
+    "평균값만으로 판단하면 오류가 생길 수 있다는 <가>의 요지를 정확히 활용했습니다.",
+    "평균 하락 자체는 사실로 인정하면서 그 원인에 대한 해석을 비판했습니다.",
+    "응시 집단의 구성 변화가 평균 하락을 설명한다는 핵심 논리를 자신의 문장으로 제시했습니다."
+  ],
+  "schema_changed": false,
+  "scorecard": {
+    "actionability": "PASS",
+    "evidence_grounding": "PASS",
+    "hallucination_control": "PASS",
+    "official_rubric_alignment": "PASS",
+    "overall_benchmark_recognition": "PARTIAL",
+    "passage_understanding_recognition": "PASS",
+    "reasoning_quality_recognition": "PASS",
+    "strength_identification": "PASS",
+    "task_fulfillment_recognition": "PASS",
+    "weakness_calibration": "PARTIAL"
+  },
+  "server_model_version": "UNKNOWN",
+  "starting_head": "e83648c",
+  "status": "RUN_A_COMPLETE_NO_RERUN",
+  "target": {
+    "admission_year": 2025,
+    "exam_key": "mock-humanities",
+    "question": "1-1",
+    "university": "sookmyung"
+  },
+  "tool_calls": 0,
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 16576,
+      "output_tokens": 2171,
+      "reasoning_output_tokens": 230
+    }
+  ],
+  "validation": {
+    "assembly_deterministic": "PASS",
+    "blind_leakage": "PASS",
+    "flutter": "NOT_RUN_NO_FLUTTER_CHANGE",
+    "private_artifact_exclusion": "PASS",
+    "source_traceability": "PASS",
+    "tests": 16
+  }
+}
