@@ -19,7 +19,7 @@ def uid(n): return f'00000000-0000-0000-0000-{n:012d}'
 SHA='a'*64
 T=datetime(2026,1,1,tzinfo=timezone.utc)
 
-def main():
+def main(additional_draft=None):
     dsn=os.environ.get('ESSAY_REVIEW_TEST_DSN')
     if not dsn or os.environ.get('ESSAY_REVIEW_DISPOSABLE')!='YES':
         print('NOT_RUN: explicit disposable PostgreSQL test environment not configured')
@@ -73,6 +73,8 @@ def main():
     """)
     for path in [ROOT/'supabase/migrations/20260912000100_initial_content_schema.sql',ROOT/'supabase/migrations/20260927000200_essay_lab_foundation.sql',DRAFT/'001_student_essay_product.draft.sql',DRAFT/'002_entitlements.draft.sql']:
         c.execute(path.read_text())
+    if additional_draft is not None:
+        c.execute(additional_draft.read_text())
     check(True,'clean_apply_actual_baselines_plus_review_drafts')
     c.execute('insert into auth.users values (%s),(%s)',(uid(1),uid(2)))
     put('profiles',id=uid(1));put('profiles',id=uid(2))

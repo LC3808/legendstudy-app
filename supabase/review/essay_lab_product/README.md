@@ -26,7 +26,11 @@ One PL/pgSQL variable-name correction; KEEP19, no invariant weakened. Earlier st
 No draft is in `supabase/migrations`. Do not blindly paste either into Production.
 No replay guards: existing names should fail rather than hide drift. All new tables have PK,
 FK/CHECK/UNIQUE where relevant, timestamps and RLS. Existing canonical mappings use a composite
-PK; SQL references that actual key, not an invented mapping UUID. No changes to existing tables.
+PK; SQL references that actual key, not an invented mapping UUID. Phase2B003 adds four identity/lease columns to three proposed tables; no existing Production table changes.
+
+**Phase2B:** [server transaction report](../../../wiki/essay-lab-server-transactions.md),
+[results](runtime/server-result.json), `003_server_operations.draft.sql` (12 RPCs, KEEP19).
+Actual local Supabase Auth/PostgREST PASS; shared identity E2E and deployment/retention gates remain.
 
 **Before promotion:** Owner review; local PostgreSQL17 with Supabase roles/auth.uid fixtures;
 validated server submit/finalize/billing/erasure RPCs and worker authorization; concurrency/timeout
@@ -39,7 +43,7 @@ are explicitly in architecture; CHECK constraints do not implement account locki
 A/B and public resource fixtures, apply both drafts, verify grants/constraints/state paths, rollback
 fixture transaction or discard only the disposable DB. Never load Owner/private Pilot answers.
 Do not run this DDL in Production even within rollback. Dedicated disposable PostgreSQL17.11 now verified; schema/reference protocol PASS.
-Production endpoint and Supabase JWT/PostgREST verification remain pending.
+Phase2B review RPC and actual local Supabase JWT/PostgREST verification now PASS; deployment remains pending.
 
 Static invocation (pglast8.4 used in a temporary venv; parser success does not establish PostgreSQL17/Supabase runtime behavior):
 `python3 supabase/review/essay_lab_product/validate_drafts.py`

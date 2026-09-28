@@ -1,3 +1,37 @@
+# Runtime package — Phase2A + Phase2B
+
+**Phase2B: actual review RPC and local Supabase JWT/PostgREST PASS.**
+[Canonical server report](../../../../wiki/essay-lab-server-transactions.md), [new machine result](server-result.json).
+The Phase2A section below and runtime-result.json are historical reference-protocol evidence.
+Phase2B supersedes their pending endpoint/JWT gates locally, not Production readiness.
+
+## Phase2B reproduction
+
+1. Native PostgreSQL17: create a NEW empty database on a dedicated disposable loopback cluster,
+   named essay_review_<unique>. Supply ESSAY_REVIEW_TEST_DSN privately and ESSAY_REVIEW_DISPOSABLE=YES.
+   Run `python3 supabase/review/essay_lab_product/runtime/run_server.py`.
+   It applies baselines/001/002/003, then runs the original77 assertions and55 RPC checks.
+2. Real Supabase: use a NEW isolated CLI workdir with project_id starting essay-p2b- or essay-review-.
+   Start its local stack (Docker/CLI required); never use a linked remote project. Store
+   `supabase status --workdir <isolated-dir> --output json` in a private chmod600 temp file, not Git/logs.
+   Set ESSAY_REVIEW_SUPABASE_STATUS_FILE to that path, ESSAY_REVIEW_LOCAL_PROJECT_ID to its ID,
+   and ESSAY_REVIEW_DISPOSABLE=YES.
+3. Run `python3 supabase/review/essay_lab_product/runtime/prepare_supabase.py`, then
+   `python3 supabase/review/essay_lab_product/runtime/integration.py`. Preparation checks numeric
+   loopback DB/API, matching Docker project label/port, PG17+, and empty public tables/views.
+   It refuses populated public schema and never resets a database. Auth users/answers are synthetic.
+4. Save sanitized stdout only. Stop this specific Supabase project and disposable native clusters
+   after inspection; never stop/reset shared or Production environments. Private status/JWT files
+   stay outside Git. No real provider credentials or student accounts are needed.
+
+Python dependencies: psycopg[binary], pglast (offline checks). Integration uses standard-library HTTP/JWT
+helpers plus psycopg. No extra backend framework. Actual tested stack: PG17.11 native; local Supabase
+PG17.6.1.158/Auth2.195.0/PostgREST16.1. SQL-role tests and signed-JWT tests are separately reported.
+Fault/time injection exists only in disposable test scripts, never a caller-controlled RPC parameter.
+`test_server_operations.py` adds6 offline security/shape tests (36 total with prior suites).
+
+---
+
 # Disposable PostgreSQL runtime validation package
 
 **Phase 2A: EXECUTED / PASS on disposable PostgreSQL17.11 (2026-09-28).**

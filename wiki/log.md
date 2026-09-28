@@ -2854,3 +2854,11 @@ Fixed PL/pgSQL current_time name collision only; preserved constraints/RLS/immut
 Two-connection races: duplicate logical evaluation1/consume1; last credit winner1/loser1/balance0.
 Both disposable servers stopped. Production never connected/applied; actual endpoints/JWT and
 App/LAB shared identity remain gates. No UI/AI/payment/migration promotion; Owner files preserved.
+
+## 2026-09-28 — Essay Phase2B server boundaries / real local Supabase
+
+[Server report](essay-lab-server-transactions.md):12 review RPCs; KEEP19 with4 additive identity/lease
+columns.77 existing +55 operation checks,37 actual Auth JWT/PostgREST checks,5 guard/36 static tests PASS.
+Concurrent included/last-credit claims, stale-worker fencing, rollback and bounded refunds verified.
+Shared backend static PASS; provider E2E/real worker deployment/privacy gates remain. No Production,
+UI, AI, payment or migration promotion. Owner iOS files preserved.
