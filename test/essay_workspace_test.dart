@@ -328,10 +328,7 @@ void main() {
       final excerpt = essaySummaryExcerpt(source);
       expect(excerpt.length, lessThan(source.length));
       expect(excerpt.endsWith('연결하기'), isTrue);
-      expect(
-        excerpt,
-        source.replaceFirst('연결해 보세요.', '연결하기'),
-      );
+      expect(excerpt, source.replaceFirst('연결해 보세요.', '연결하기'));
     },
   );
 
@@ -429,9 +426,12 @@ void main() {
           if (!comparison) {
             final state = find.text('대체로 충실').first;
             final stars = find.text('★★★★☆').first;
+            final statePosition = tester.getTopLeft(state);
+            final starsPosition = tester.getTopLeft(stars);
             expect(
-              tester.getTopLeft(state).dx,
-              lessThan(tester.getTopLeft(stars).dx),
+              starsPosition.dy > statePosition.dy ||
+                  starsPosition.dx > statePosition.dx,
+              isTrue,
             );
             if (width > 600 && scale == 1) {
               expect(

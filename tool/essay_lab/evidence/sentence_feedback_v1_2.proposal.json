@@ -1,0 +1,55 @@
+{
+  "status": "DESIGN_ONLY_NOT_EXECUTED",
+  "version": "sentence_feedback_proposal_1",
+  "parent_contract": "1.2",
+  "output_field": "sentence_feedback",
+  "count": {
+    "minimum": 0,
+    "maximum": 5,
+    "guidance": "Typically2~5 only when warranted; never meet a quota; one is valid"
+  },
+  "categories": {
+    "grammar": "맞춤법·문법",
+    "expression": "어색한 표현",
+    "structure": "문장 구조",
+    "logic": "논리 표현"
+  },
+  "priority_order": [
+    "contradiction",
+    "unclear_meaning",
+    "grammar_agreement",
+    "wording"
+  ],
+  "binding": {
+    "evaluation_id": "Server-assigned evaluation identity; never trust provider ID",
+    "attempt_id": "Immutable submitted attempt, resolved by server",
+    "answer_sha256": "Server input snapshot hash",
+    "offset_unit": "Unicode code points, zero-based, end exclusive, no normalization"
+  },
+  "item_fields": {
+    "issue_key": "Evaluation-local stable root issue key",
+    "category": "One of categories",
+    "priority": "One of priority_order",
+    "start": "integer >=0",
+    "end": "integer > start",
+    "quote": "Exact complete sentence copied from this submitted answer only",
+    "diagnosis": "Friendly Korean explanation, no preference presented as an error",
+    "direction": "Concrete minimal action preserving stance",
+    "example": "Optional minimal rewrite, omit if unnecessary; never decide a new stance"
+  },
+  "rules": [
+    "Do not invent errors or quote other students/reference answers.",
+    "Preserve original argument, stance and voice. Do not rewrite all sentences.",
+    "Prioritize logical contradiction, unclear meaning, important grammar/agreement, then expression.",
+    "Deduplicate the same root issue across sentence feedback and improvements; reference one issue identity rather than repeating criticism.",
+    "No issue: empty array. Uncertain reading: omit quote-dependent finding, preserve uncertainty separately.",
+    "No permanent student weakness classification; longitudinal grouping is versioned observational analysis."
+  ],
+  "validation": [
+    "Before persistence resolve attempt from evaluation; verify answer hash and exact code-point slice equals quote.",
+    "Reject unknown category/priority, blank quote/diagnosis/direction, invalid offsets, duplicate root issue/span, more than5.",
+    "Source existence alone does not prove diagnosis is true or rewrite preserves stance; independent quality/owner review remains required.",
+    "Provider quote never becomes trusted through UI display; server validation is mandatory."
+  ],
+  "storage_status": "Existing history/FKs reusable; structured category/span/example persistence missing; no migration or production RPC changes in this task."
+}

@@ -1,3 +1,5 @@
+import 'essay_sentence_review.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -712,8 +714,14 @@ class EssayResultView extends StatefulWidget {
     required this.question,
     required this.comparison,
     required this.onRewrite,
+    this.sentenceReview,
+    this.evaluationId,
+    this.attemptId,
+    this.submittedAnswer,
     super.key,
   });
+  final EssaySentenceReview? sentenceReview;
+  final String? evaluationId, attemptId, submittedAnswer;
   final EssayEvaluation evaluation;
   final EssayQuestion question;
   final bool comparison;
@@ -1019,6 +1027,12 @@ class _EssayResultViewState extends State<EssayResultView> {
                         ],
                       ),
                     ),
+                  EssaySentenceSection(
+                    review: widget.sentenceReview,
+                    evaluationId: widget.evaluationId,
+                    attemptId: widget.attemptId,
+                    submittedAnswer: widget.submittedAnswer,
+                  ),
                   section('보완할 점', e.improvements, diagnostic: true),
                   section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
                   section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),

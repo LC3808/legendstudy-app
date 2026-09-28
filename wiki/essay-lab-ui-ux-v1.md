@@ -177,3 +177,9 @@ Desktop 2×2, Mobile/큰 글자 1열. 옅은 의미 tint·icon·heading, 검정 
 [Mobile1](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-final.png),
 [Desktop2](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-final.png),
 [Mobile2](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-final.png).
+
+## Sentence review — 2026-09-28
+
+평가 항목별 진단과 보완할 점 사이에 [문장 다듬기](essay-lab-sentence-review.md)를 추가.
+항목 수/접기 UI, 정확한 자기 제출문 인용 검증. 미제공과0개 구분.
+기존 preview는 임의 지적을 생성하지 않는다. 구조화 출력/persistence는 별도 리뷰 제안.

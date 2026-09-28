@@ -45,5 +45,10 @@
     "PARTIAL",
     "FAIL"
   ],
-  "design_note": "Two-rule additive proposal only. No evaluation/rewrite run. Product dimension levels need a separately reviewed structured output adapter; do not reinterpret old outputs as stars."
+  "design_note": "Two-rule additive proposal only. No evaluation/rewrite run. Product dimension levels need a separately reviewed structured output adapter; do not reinterpret old outputs as stars.",
+  "sentence_feedback_proposal": {
+    "status": "DESIGN_ONLY_NOT_EXECUTED",
+    "contract": "sentence_feedback_v1_2.proposal.json",
+    "activation": "Separate owner approval and server validation/storage adapter required; existing output keys unchanged."
+  }
 }

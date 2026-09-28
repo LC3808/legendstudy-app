@@ -2947,3 +2947,8 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - Summary: existing first item with deterministic ending shortening; full detail retained. Compact10px PC row, duplicate second-result blocks removed, unresolved evidence neutral.
 - 22 widget/analyze PASS; [final captures](essay-lab-ui-ux-v1.md#final-result-polish--2026-09-28). No evaluation data/backend change.
+
+## 2026-09-28 — Essay sentence review
+
+- Added typed bounded own-answer quote validation and expandable 문장 다듬기; no synthetic critique of entered answers.
+- [Storage reuse / v1.2 output proposal](essay-lab-sentence-review.md): history reusable, structured span/category/example persistence missing. No SQL/RPC/AI execution. Related27 Flutter + analyze PASS.

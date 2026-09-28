@@ -136,7 +136,7 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Security resolution](essay-lab-security-resolution.md):DEPLOYED/PASS; ledger17/no pending.
 KEEP19+4+12RPC;47 definitions match. B1 revoked; B2 ADMIN-only contract verified.
-[Essay UI Phase1](essay-lab-ui-ux-v1.md): Flutter preview + final result UI; Owner visual review next.
+[Essay UI Phase1](essay-lab-ui-ux-v1.md): Flutter preview + sentence UI; Owner visual review next.
 Real student/AI/worker NOT_ENABLED. Identity PASS; baseline ADOPTED.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
