@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/links/external_link.dart';
 import '../../core/links/service_links.dart';
@@ -10,10 +11,19 @@ class LegendStudyLabEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CompactUtilityCard(
     title: '논술 준비',
-    body: '논술 준비를 위한 LAB을 웹에서 살펴보세요.',
-    action: ExternalLinkButton(
-      uri: legendStudyLabEntryUri(legendStudyLabUrl),
-      label: 'LAB 살펴보기',
+    body: '문제를 읽고, 직접 쓰고, 다시 고쳐 쓰는 논술 학습',
+    action: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FilledButton(
+          onPressed: () => context.push('/lab/essay'),
+          child: const Text('논술 화면 미리보기'),
+        ),
+        ExternalLinkButton(
+          uri: legendStudyLabEntryUri(legendStudyLabUrl),
+          label: 'LAB 살펴보기',
+        ),
+      ],
     ),
   );
 }

@@ -2921,3 +2921,9 @@ review AST MATCH (status comments only). Promoted-file77+55 regressions PASS; se
 proves47 object definitions, empty19 new tables, grants/orphans and canonical fixture preservation.
 42 static tests PASS; read-only preflight/post-validation prepared. No Production connection/apply,
 Owner SQL, seed/UI/AI or identity retest. Next package review → separate Production preflight approval.
+
+## 2026-09-28 — Essay Workspace UI Phase 1
+
+- Existing LAB → university/exam/question → writing → first result → rewrite → changes → optional example, native Flutter fixture-only implementation.
+- Canonical [UI/UX](essay-lab-ui-ux-v1.md) restored; real Flutter desktop/mobile captures, CAS/conflict/failure and accessibility checks. No DB/RPC/migration/AI/real student writes.
+- Owner visual review next; existing iOS files preserved. Full validation detail in canonical UI document.

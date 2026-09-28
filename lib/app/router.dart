@@ -1,6 +1,7 @@
 import '../features/study/trends/study_trend_page.dart';
 import '../features/lab/score_summary.dart';
 import '../features/lab/lab_page.dart';
+import '../features/essay/essay_pages.dart';
 import '../features/profile/presentation/profile_edit_page.dart';
 
 import 'package:flutter/material.dart';
@@ -65,10 +66,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         ? '/auth/owner-check'
         : '/home',
     routes: [
-      GoRoute(
-        path: onboardingRoute,
-        builder: (_, _) => const OnboardingPage(),
-      ),
+      GoRoute(path: onboardingRoute, builder: (_, _) => const OnboardingPage()),
       if (ownerAuthCheckEnabled)
         GoRoute(
           path: '/auth/owner-check',
@@ -157,6 +155,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/lab',
                 builder: (context, state) => const LabPage(),
                 routes: [
+                  ...essayRoutes,
                   GoRoute(
                     path: 'school-scores',
                     builder: (_, _) => const NestedPage(

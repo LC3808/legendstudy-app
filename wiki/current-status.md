@@ -7,7 +7,7 @@ Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
 owner-scoped saved/recent. Study Timer + Mock Exam/scoring/result foundation,
 optional Mock study-time inclusion, KST shared aggregation. MY Profile/private
 photo/school-grade, seven-day/eight-week/six-month study trends, actual Mock score
-summary; LAB independent internal-grade/Mock details and external Essay entry.
+summary; LAB independent internal-grade/Mock details and Essay preview/external entry.
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView or shared App/Web session.
 
@@ -48,11 +48,12 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 
 ## Local automated validation
 
-Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Current Recent ordering task:
-analyze PASS;51 focused Flutter +181 ingestion +38 focused Python tests PASS.
-Full Flutter/builds not rerun. Prior UI/PDF validation is preserved in
-[history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26)
-and [EOD](eod-2026-09-25.md). Owner device PASS is separately reported below.
+Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Essay UI: analyze and focused33 PASS;
+full878 PASS/1 skip/5 failures, all5 reproduced at starting HEAD (no new regression).
+[UI validation and screenshots](essay-lab-ui-ux-v1.md). Prior Recent ordering:
+51 focused Flutter +181 ingestion +38 Python PASS; earlier evidence in
+[history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26).
+Device review pending.
 
 ## Production DB/Storage applied
 
@@ -135,7 +136,8 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Security resolution](essay-lab-security-resolution.md):DEPLOYED/PASS; ledger17/no pending.
 KEEP19+4+12RPC;47 definitions match. B1 revoked; B2 ADMIN-only contract verified.
-Implementation READY; real student/AI/worker/UI NOT_ENABLED. Identity PASS; baseline ADOPTED.
+[Essay UI Phase1](essay-lab-ui-ux-v1.md): Flutter preview IMPLEMENTED; Owner visual review next.
+Real student/AI/worker NOT_ENABLED. Identity PASS; baseline ADOPTED.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.
@@ -178,6 +180,4 @@ pending-device/EOD statements where they conflict.
 The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the older
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
-
-D-Day: IMPLEMENTED / Production applied / OWNER DEVICE PASS; no code changes.
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
