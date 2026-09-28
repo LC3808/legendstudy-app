@@ -2800,3 +2800,13 @@ found; REVIEW, not global NONE.1659 metadata refers2024 exams/2025 competition.
 No invented mapping/fixture, Production write or AI rerun. Existing official_source_url
 supports Owner attribution/delivery separation; rights review before full release.
 [Scope and follow-up](essay-lab-evaluation-pilot-2025.md#2026-09-28--hanyang-bounded-recheck--owner-official-source-decision).
+
+
+## 2026-09-28 — Hanyang2024 v1.1 source blocker
+
+Owner7 PDFs matched existing resources. Afternoon1-named answer contains business
+answer images (2 exact image hashes), so no blind run/Production mapping. Official
+afternoon1/2 questions binary-matched. Contract v1.1 prepared; Korean learner tone
+and deduplication documented.48 focused tests PASS. Business remains REVIEW for
+official answer provenance; Sookmyung frozen output unchanged.
+[Evidence and next gate](essay-lab-hanyang-2024-benchmark.md).

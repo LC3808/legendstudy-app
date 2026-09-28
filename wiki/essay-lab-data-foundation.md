@@ -405,3 +405,9 @@ Source/rights review is required before full public release/expansion. Record un
 conditions in the review queue; no legal clearance is asserted and no rights framework
 is introduced here. UI rendering of this policy is a future implementation obligation,
 not an implemented-UI claim from this documentation follow-up.
+
+
+Student-facing Essay language/evaluation philosophy now follows the
+[2026-09-28 Owner policy](essay-lab-hanyang-2024-benchmark.md#student-facing-language-and-evaluation-philosophy--canonical-owner-policy):
+Korean teacher-like explanations, achievements first, deduplicated actionable
+improvements, internal identifiers kept out of student prose. No UI implementation.

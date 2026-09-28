@@ -1,0 +1,54 @@
+{
+  "version": "1.1",
+  "status": "PREPARED_NOT_BENCHMARKED",
+  "base_file": "evaluation_contract_v1.json",
+  "base_sha256": "a9e5282a45a17e05addf946e33f427ade105f01cc0e77057834e145dc32c370b",
+  "scope": "Owner-authorized Hanyang2024 humanities-afternoon-1; source mismatch currently blocks execution",
+  "output_keys_preserved": [
+    "overall_feedback",
+    "criterion_feedback",
+    "strengths",
+    "improvements",
+    "evidence_references",
+    "revision_priorities"
+  ],
+  "rules": [
+    "각 평가 항목은 공식 기준과 학생답안의 구체적 부분을 연결한다. 새로운 공식 기준을 만들지 않는다.",
+    "핵심 성취를 먼저 설명하고, 실제 개선점과 구분한다. 작은 약점 하나로 전체 수준을 과장해 낮추지 않는다.",
+    "동일한 근본 약점은 improvements에서 하나의 개선 과제로 통합한다. 항목별 진단에서는 관련성을 짧게 연결할 수 있지만, 같은 비판을 표현만 바꾸어 반복하지 않는다.",
+    "revision_priorities는 통합된 개선 과제의 순서와 구체적 행동을 제시한다. improvements의 설명을 다시 길게 복제하지 않는다.",
+    "보완할 점이 없다면 억지로 만들지 않는다. 장점은 구체적으로, 불확실한 판단은 신중하게 표현한다.",
+    "학생용 문장은 친절하고 자연스러운 한국어로 쓴다. 내부 JSON key/UUID/locator는 유지하되 학생용 설명에 그대로 노출하지 않는다."
+  ],
+  "score_policy": "시험별 공식 근거만 사용한다. 한양2024 공식 A/B/C/F 구간과 항목별 배점은 기준으로 설명할 수 있으나 실제 대학 채점 점수인 것처럼 정밀한 점수를 단정하지 않는다. 기존 v1의 SKKU 전용40/40/20 점수는 다른 시험에 적용하지 않는다.",
+  "presentation": {
+    "overall_feedback": "종합 평가",
+    "strengths": "잘한 점",
+    "criterion_feedback": "평가 항목별 진단",
+    "improvements": "보완할 점",
+    "revision_priorities": "먼저 고쳐야 할 부분",
+    "rewrite_checklist": "다시 쓸 때 확인할 것",
+    "evidence_references": "평가 근거"
+  },
+  "presentation_note": "rewrite_checklist is a future presentation suggestion, not a new required JSON field. Keep internal contract identifiers stable.",
+  "blind_boundary": [
+    "No answer subtype, filename, successful-applicant label, Owner prior, expected band or reference answer in model input.",
+    "Question/answer identity and verified official source must pass before running.",
+    "One attempt; freeze output before reveal; no retry after inspecting result."
+  ],
+  "validation_note": "Exact duplicate/terminology checks supplement semantic human review; they do not prove paraphrase deduplication or quality.",
+  "student_hidden_terms": [
+    "rubric",
+    "criterion",
+    "feedback",
+    "revision priority",
+    "ground truth",
+    "benchmark",
+    "hallucination",
+    "evidence grounding",
+    "calibration",
+    "PASS",
+    "PARTIAL",
+    "FAIL"
+  ]
+}

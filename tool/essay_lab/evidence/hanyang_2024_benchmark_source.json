@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "status": "BLOCKED_TARGET_ANSWER_MISMATCH",
+  "starting_head": "60ab454",
+  "checked_at": "2026-09-28",
+  "target": {
+    "university": "hanyang",
+    "admission_year": 2024,
+    "exam_kind": "admission",
+    "exam_key": "humanities-afternoon-1",
+    "session_label": "오후1"
+  },
+  "source_post": "1659",
+  "source_url": "https://legendstudy.com/1659",
+  "documents": [
+    {
+      "pages": 4,
+      "sha256": "36c19a3701380a4cb4baed9736073c0af55067b44e2a38c036a554f217da8401",
+      "resource_id": "b9674fd0-41ae-5713-afa4-66d367040027",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_상경계 문제.pdf",
+      "official_source_url": null,
+      "official_url_status": "REVIEW"
+    },
+    {
+      "pages": 2,
+      "sha256": "faffabd56b8cd3e97f9834e99165bcdaa38ccddf9bdae19b0416036eadcce38f",
+      "resource_id": "c30fa960-1186-5242-ad00-506bce75f57d",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_상경계 우수답안 (1).pdf",
+      "official_source_url": null,
+      "official_url_status": "REVIEW"
+    },
+    {
+      "pages": 3,
+      "sha256": "578846ffd0f36c2d5bb899ba3dfcb58aa71d961914f760419937caed78128bee",
+      "resource_id": "3e2a4997-8673-5dff-ab26-c2342b0b6bf0",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_인문계(오후1) 문제.pdf",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=13536&m_type=SUSI",
+      "official_url_status": "VERIFIED_BINARY_MATCH"
+    },
+    {
+      "pages": 3,
+      "sha256": "4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b",
+      "resource_id": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_인문계(오후2) 문제.pdf",
+      "official_source_url": "https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=13537&m_type=SUSI",
+      "official_url_status": "VERIFIED_BINARY_MATCH"
+    },
+    {
+      "pages": 8,
+      "sha256": "ced37494c6b65531cca30649093846dde665bf401e630e8751f0bc8a3be90060",
+      "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_인문계열 출제의도,평가기준(통합).pdf",
+      "official_source_url": null,
+      "official_url_status": "REVIEW"
+    },
+    {
+      "pages": 2,
+      "sha256": "9ad76635172a3290f4e16056aaebbd94e45654bcfae23ab3ecaedf2a56cc9690",
+      "resource_id": "75dd05ef-dda7-55c7-a5cf-92e1001bbbda",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_인문계열(오후1) 합격자 예시답안.pdf",
+      "official_source_url": null,
+      "official_url_status": "REVIEW"
+    },
+    {
+      "pages": 2,
+      "sha256": "43a9271aa86ffe6231cb3bc9d8cbd0c88f6f015dbb28e0b2db0d627450290e77",
+      "resource_id": "2c82e2fa-096e-56ee-a310-eee6a7c12d76",
+      "content_item_id": "4475390e-4193-51dc-8ed9-4e095eacded7",
+      "resource_hash_match": true,
+      "filename": "2024학년도 한양대 수시 논술_인문계열(오후2) 합격자 예시답안.pdf",
+      "official_source_url": null,
+      "official_url_status": "REVIEW"
+    }
+  ],
+  "existing_resources_reused": 7,
+  "new_resources_created": 0,
+  "duplicate_resource_created": 0,
+  "owner_extra_duplicate": "상경계 우수답안 (1).pdf and unsuffixed download are byte-identical; one resource reused",
+  "mismatch": {
+    "resource_id": "75dd05ef-dda7-55c7-a5cf-92e1001bbbda",
+    "misleading_title": "인문계열(오후1) 합격자 예시답안",
+    "actual_content": "Page1: 2024 business question1 SNS/정서적 양극화; page2: business question2 mathematics. Not 노자/캠든 벤치.",
+    "same_embedded_images_as_resource": "c30fa960-1186-5242-ad00-506bce75f57d",
+    "embedded_image_sha256": [
+      "a42fbc1be17cfd382a8f3d8d909cd60a7ad571bc45c660ded6c7e3ab5ec53757",
+      "f7dfac9f7e761a529f89f4b14d49080d43651ccf0977a32eacd0c0b61bfe4e9e"
+    ],
+    "container_hashes_differ": true,
+    "all_embedded_images_equal": true,
+    "action": "HOLD example_answer mapping for afternoon1; do not evaluate wrong exam or silently repair Production"
+  },
+  "mapping_preview": [
+    {
+      "exam_key": "humanities-afternoon-1",
+      "role": "question",
+      "resource_id": "3e2a4997-8673-5dff-ab26-c2342b0b6bf0",
+      "source_locator": "PDF page 2; 문제",
+      "status": "VERIFIED_SOURCE_ONLY_NOT_APPLIED"
+    },
+    {
+      "exam_key": "humanities-afternoon-1",
+      "role": "passage",
+      "resource_id": "3e2a4997-8673-5dff-ab26-c2342b0b6bf0",
+      "source_locator": "PDF pages 2-3; passages 가/나/다",
+      "status": "VERIFIED_SOURCE_ONLY_NOT_APPLIED"
+    },
+    {
+      "exam_key": "humanities-afternoon-1",
+      "role": "exam_intent",
+      "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+      "source_locator": "PDF page 1; 오후1 출제 의도 및 근거",
+      "status": "OFFICIAL_URL_REVIEW_NOT_APPLIED"
+    },
+    {
+      "exam_key": "humanities-afternoon-1",
+      "role": "scoring_criteria",
+      "resource_id": "b5d0d455-1f31-5372-af49-b1d24e190b6d",
+      "source_locator": "PDF pages 2-4; 오후1 평가 내용/배점/종합 기준/감점/유의사항",
+      "status": "OFFICIAL_URL_REVIEW_NOT_APPLIED"
+    }
+  ],
+  "afternoon2": {
+    "exam_key": "humanities-afternoon-2",
+    "session_label": "오후2",
+    "question_resource": "91d95b4b-de81-53a9-a2f8-314aac218c2b",
+    "criteria_locator": "PDF pages5-8",
+    "answer_resource": "2c82e2fa-096e-56ee-a310-eee6a7c12d76",
+    "answer_locator": "PDF pages1-2",
+    "content_match": "사회계약론/미래세대/공리주의 matches question; official answer source URL remains REVIEW",
+    "candidate_role": "example_answer",
+    "executed": false
+  },
+  "business": {
+    "question_resource": "b9674fd0-41ae-5713-afa4-66d367040027",
+    "answer_resource": "c30fa960-1186-5242-ad00-506bce75f57d",
+    "criteria_resource": "41e3ee39-bb56-572b-a2b3-038d0ca40196",
+    "question_locator": "PDF page2 question1; pages3-4 question2",
+    "answer_locator": "PDF page1 question1; page2 question2",
+    "criteria_locator": "PDF pages1-2 question1; page3 question2",
+    "content_match": true,
+    "official_answer_source": "REVIEW",
+    "second_benchmark_candidate": "REVIEW",
+    "executed": false
+  },
+  "package_status": "PARTIAL_OFFLINE_ONLY",
+  "blind_input_generated": false,
+  "run_count": 0,
+  "production_mapping_apply": false,
+  "schema_changed": false,
+  "migration": "NONE",
+  "review_queue": [
+    {
+      "code": "H24-R01",
+      "reason": "Afternoon1 answer is business answer; exact correct humanities response missing."
+    },
+    {
+      "code": "H24-R02",
+      "reason": "Exact official URL for shared intent/criteria and respondent answers not verified. Official question posting contains question only."
+    }
+  ]
+}

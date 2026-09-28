@@ -341,3 +341,11 @@ bundled Python. Initial system-Python attempt lacked pypdf; dependency-runtime r
 passed, no code regression. Resource UUID uniqueness/page-range/hash manifest checks,
 protected iOS/accepted-state/plan hashes, private exclusion, scoped secret scan,
 Wiki handoff and diff checks PASS. No Flutter change/test, no new evaluation run.
+
+
+## 2026-09-28 — Hanyang2024 v1.1 benchmark exception
+
+[Bounded2024 preparation](essay-lab-hanyang-2024-benchmark.md): Owner PDFs match
+Materials, but afternoon1 answer has the same embedded images as business answer.
+Correct afternoon1 answer unresolved; AI runs0. v1.1 contract and Korean student
+language policy prepared; no empirical improvement claim. Sookmyung Run A preserved.

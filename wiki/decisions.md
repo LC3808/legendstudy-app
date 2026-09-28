@@ -529,3 +529,12 @@ blog/delivery URLs do not substitute for official provenance. Reuse existing
 exam/mapping official_source_url fields; no signed URL as canonical source.
 Attribution is not rights clearance; review before full public expansion.
 [Canonical policy](essay-lab-data-foundation.md#official-source-policy--owner-decision-2026-09-28).
+
+
+## 2026-09-28 — Essay learner-facing Korean and calibrated explanations
+
+Explain achievement before improvement, reasons before scores. Ground criticism
+in official criteria; consolidate the same root issue and prioritize concrete next
+actions. Friendly concise Korean, no raw English/AI/internal status jargon to students;
+technical keys stay stable. Uncertain findings remain qualified.
+[Canonical details](essay-lab-hanyang-2024-benchmark.md#student-facing-language-and-evaluation-philosophy--canonical-owner-policy).
