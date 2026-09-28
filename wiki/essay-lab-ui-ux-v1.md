@@ -163,3 +163,17 @@ Desktop 2×2, Mobile/큰 글자 1열. 옅은 의미 tint·icon·heading, 검정 
 [Mobile 1차](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-overview.png),
 [Desktop 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-overview.png),
 [Mobile 2차](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-overview.png)가 최신 캡처다.
+
+## Final result polish — 2026-09-28
+
+상단 요약은 원본 순서의 핵심1개로 축소. 정해진 존대 어미만 표시용으로 압축
+(설명해 보세요→설명하기 등), 임의 문장 생성/중간 말줄임 없음. 알 수 없는 어미는
+원문 유지. 상세 평가 본문/데이터 불변. Desktop 항목명·상태 간격10px.
+2차 중복 ‘무엇이 달라졌나요?’ 4개 블록 제거; 상단 변화 요약→항목 변화→종합/상세
+평가→보완/확인→근거 순서. 해결 항목 미확인 시 gray/minus +
+‘이번 평가에서 확인된 항목이 없어요.’. 해결 여부 추정 없음.
+22 tests/analyze PASS, 1440/360px 및200% 포함; 전체 suite 재실행 없음.
+최신 캡처: [Desktop1](../docs/previews/essay-lab-ui-phase1/essay-result-desktop-final.png),
+[Mobile1](../docs/previews/essay-lab-ui-phase1/essay-result-mobile-final.png),
+[Desktop2](../docs/previews/essay-lab-ui-phase1/essay-comparison-desktop-final.png),
+[Mobile2](../docs/previews/essay-lab-ui-phase1/essay-comparison-mobile-final.png).

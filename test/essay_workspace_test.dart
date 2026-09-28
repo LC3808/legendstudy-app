@@ -212,7 +212,7 @@ void main() {
       await tapVisible(tester, find.text('제출하고 첨삭 화면 살펴보기'));
       expect(c.stage, EssayStage.comparison);
       expect(gateway.submitted, [previewAnswer, '수정한 새로운 답안']);
-      expect(find.text('무엇이 달라졌나요?'), findsOneWidget);
+      expect(find.text('이번 답안의 변화 한눈에 보기'), findsOneWidget);
       expect(find.text('→'), findsNWidgets(3));
       expect(find.textContaining('길어진 문장'), findsWidgets);
       await preview.capture(tester, 'essay-comparison-mobile');
@@ -319,8 +319,24 @@ void main() {
     },
   );
 
+  test(
+    'summary excerpts preserve source prefix and keep short text intact',
+    () {
+      const short = '확인된 변화 없음';
+      expect(essaySummaryExcerpt(short), short);
+      final source = firstPreviewEvaluation.priorities.first;
+      final excerpt = essaySummaryExcerpt(source);
+      expect(excerpt.length, lessThan(source.length));
+      expect(excerpt.endsWith('연결하기'), isTrue);
+      expect(
+        excerpt,
+        source.replaceFirst('연결해 보세요.', '연결하기'),
+      );
+    },
+  );
+
   testWidgets(
-    'overview selects existing first two items without inferring resolution',
+    'overview selects existing first item without inferring resolution',
     (tester) async {
       size(tester, const Size(1440, 1800));
       for (final comparison in [false, true]) {
@@ -341,20 +357,35 @@ void main() {
           within(comparison ? '이번 답안의 변화 한눈에 보기' : '내 답안 한눈에 보기'),
           findsOneWidget,
         );
-        for (final text in e.checklist.take(2)) {
-          expect(within(text), findsOneWidget);
+        for (final text in e.checklist.take(1)) {
+          expect(within(essaySummaryExcerpt(text)), findsOneWidget);
         }
         expect(within(e.checklist[2]), findsNothing);
         expect(
           find.text(e.checklist[2]),
           findsOneWidget,
         ); // Detailed result preserved.
-        expect(within(e.improvements.first), findsOneWidget);
+        expect(
+          within(essaySummaryExcerpt(e.improvements.first)),
+          findsOneWidget,
+        );
         if (comparison) {
-          expect(within('해결 여부가 평가에 명시되지 않았어요.'), findsOneWidget);
-          expect(within(e.changes['좋아진 부분']!.first), findsOneWidget);
+          expect(within('이번 평가에서 확인된 항목이 없어요.'), findsOneWidget);
+          expect(find.text('무엇이 달라졌나요?'), findsNothing);
+          expect(find.text('좋아지고 있는 부분'), findsNothing);
+          expect(
+            tester.widget<Text>(within('해결한 부분')).style!.color,
+            const Color(0xFF5C6269),
+          );
+          expect(
+            within(essaySummaryExcerpt(e.changes['좋아진 부분']!.first)),
+            findsOneWidget,
+          );
         } else {
-          expect(within(e.priorities.first), findsOneWidget);
+          expect(
+            within(essaySummaryExcerpt(e.priorities.first)),
+            findsOneWidget,
+          );
           expect(
             tester.getTopLeft(within('잘한 점')).dy,
             tester.getTopLeft(within('보완할 점')).dy,
@@ -409,7 +440,7 @@ void main() {
               );
               expect(
                 tester.getTopLeft(state).dx - tester.getTopRight(title).dx,
-                closeTo(18, 1),
+                closeTo(10, 1),
               );
             } else {
               expect(
@@ -421,7 +452,7 @@ void main() {
           if (scale == 1) {
             await preview.capture(
               tester,
-              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-overview',
+              'essay-${comparison ? 'comparison' : 'result'}-${width == 360 ? 'mobile' : 'desktop'}-final',
             );
           }
           expect(tester.takeException(), isNull);

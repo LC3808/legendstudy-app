@@ -2942,3 +2942,8 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - First/second result top four-group summary selects max2 existing items without AI inference; explicit resolution only, full details preserved. Desktop2×2/mobile1-column.
 - 21 widget + analyze PASS; [mapping and captures](essay-lab-ui-ux-v1.md#result-overview--2026-09-28). No backend/data-contract change.
+
+## 2026-09-28 — Final Essay result polish
+
+- Summary: existing first item with deterministic ending shortening; full detail retained. Compact10px PC row, duplicate second-result blocks removed, unresolved evidence neutral.
+- 22 widget/analyze PASS; [final captures](essay-lab-ui-ux-v1.md#final-result-polish--2026-09-28). No evaluation data/backend change.

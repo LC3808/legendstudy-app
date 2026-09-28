@@ -578,6 +578,31 @@ String _levelStars(int? level) => level != null && level >= 1 && level <= 5
     ? '${'★' * level}${'☆' * (5 - level)}'
     : '판단 보류';
 
+// Display-only shortening of known polite endings; preserve unknown text in full.
+String essaySummaryExcerpt(String source) {
+  final text = source.trim();
+  const endings = {
+    '설명해 보세요.': '설명하기',
+    '연결해 보세요.': '연결하기',
+    '표현해 보세요.': '표현하기',
+    '읽어 보세요.': '읽기',
+    '구분했어요.': '구분',
+    '연결했어요.': '연결',
+    '분명해졌어요.': '분명해짐',
+    '비교했나요?': '비교 여부 확인',
+    '설명했나요?': '설명 여부 확인',
+    '유지했나요?': '유지 확인',
+    '연결했나요?': '연결 확인',
+    '확인했나요?': '확인',
+  };
+  for (final entry in endings.entries) {
+    if (text.endsWith(entry.key)) {
+      return text.substring(0, text.length - entry.key.length) + entry.value;
+    }
+  }
+  return text;
+}
+
 const _resultInk = Color(0xFF202124);
 const _positive = Color(0xFF276348);
 const _needsWork = Color(0xFF8A3446);
@@ -633,7 +658,7 @@ Widget _dimensionHeading(BuildContext context, String title, Widget trailing) =>
           );
         }
         return Wrap(
-          spacing: 18,
+          spacing: 10,
           runSpacing: 8,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [heading, trailing],
@@ -728,12 +753,13 @@ class _EssayResultViewState extends State<EssayResultView> {
         ),
     ],
   );
-  // Selection only: preserve source order and wording; never infer resolution.
+  // Select and excerpt existing text only; never infer resolution.
   Widget _answerOverview(EssayEvaluation e) {
     List<String> firstTwo(List<String> values, String empty) {
       final selected = values
           .where((value) => value.trim().isNotEmpty)
-          .take(2)
+          .take(1)
+          .map(essaySummaryExcerpt)
           .toList();
       return selected.isEmpty ? [empty] : selected;
     }
@@ -747,7 +773,7 @@ class _EssayResultViewState extends State<EssayResultView> {
             '아직 보완할 점': firstTwo(e.improvements, '평가에 명시된 보완 내용이 없어요.'),
             '해결한 부분': firstTwo(
               e.comparable ? e.changes['해결한 부분'] ?? [] : [],
-              '해결 여부가 평가에 명시되지 않았어요.',
+              '이번 평가에서 확인된 항목이 없어요.',
             ),
             '다음에 확인할 부분': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
           }
@@ -762,7 +788,14 @@ class _EssayResultViewState extends State<EssayResultView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _resultHeader(widget.comparison ? '이번 답안의 변화 한눈에 보기' : '내 답안 한눈에 보기'),
-        _changeOverview(content),
+        _changeOverview(
+          content,
+          neutralResolved:
+              !e.comparable ||
+              !(e.changes['해결한 부분'] ?? []).any(
+                (line) => line.trim().isNotEmpty,
+              ),
+        ),
         const SizedBox(height: 12),
         const Text(
           '평가에 나온 핵심 항목을 먼저 보여드려요. 자세한 내용은 아래에서 확인해 보세요.',
@@ -772,82 +805,93 @@ class _EssayResultViewState extends State<EssayResultView> {
     );
   }
 
-  Widget _changeOverview(Map<String, List<String>> changes) => LayoutBuilder(
-    builder: (context, box) {
-      final twoColumns =
-          box.maxWidth >= 600 &&
-          MediaQuery.textScalerOf(context).scale(1) < 1.8;
-      return Wrap(
-        spacing: 16,
-        runSpacing: 14,
-        children: [
-          for (final entry in changes.entries)
-            SizedBox(
-              width: twoColumns ? (box.maxWidth - 16) / 2 : box.maxWidth,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: _sectionColor(entry.key).withValues(alpha: 0.045),
-                  border: Border(
-                    left: BorderSide(color: _sectionColor(entry.key), width: 2),
+  Widget _changeOverview(
+    Map<String, List<String>> changes, {
+    bool neutralResolved = false,
+  }) {
+    Color color(String title) => title == '해결한 부분' && neutralResolved
+        ? const Color(0xFF5C6269)
+        : _sectionColor(title);
+    return LayoutBuilder(
+      builder: (context, box) {
+        final twoColumns =
+            box.maxWidth >= 600 &&
+            MediaQuery.textScalerOf(context).scale(1) < 1.8;
+        return Wrap(
+          spacing: 16,
+          runSpacing: 14,
+          children: [
+            for (final entry in changes.entries)
+              SizedBox(
+                width: twoColumns ? (box.maxWidth - 16) / 2 : box.maxWidth,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: color(entry.key).withValues(alpha: 0.045),
+                    border: Border(
+                      left: BorderSide(color: color(entry.key), width: 2),
+                    ),
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ExcludeSemantics(
-                          child: Icon(
-                            switch (entry.key) {
-                              '잘한 점' ||
-                              '좋아진 점' ||
-                              '좋아진 부분' ||
-                              '해결한 부분' => Icons.check,
-                              '좋아지고 있는 부분' => Icons.north_east,
-                              '다시 쓸 때 확인' || '다음에 확인할 부분' => Icons.checklist,
-                              '다시 나타난 부분' => Icons.replay,
-                              _ => Icons.priority_high,
-                            },
-                            size: 18,
-                            color: _sectionColor(entry.key),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ExcludeSemantics(
+                            child: Icon(
+                              entry.key == '해결한 부분' && neutralResolved
+                                  ? Icons.remove
+                                  : switch (entry.key) {
+                                      '잘한 점' ||
+                                      '좋아진 점' ||
+                                      '좋아진 부분' ||
+                                      '해결한 부분' => Icons.check,
+                                      '좋아지고 있는 부분' => Icons.north_east,
+                                      '다시 쓸 때 확인' ||
+                                      '다음에 확인할 부분' => Icons.checklist,
+                                      '다시 나타난 부분' => Icons.replay,
+                                      _ => Icons.priority_high,
+                                    },
+                              size: 18,
+                              color: color(entry.key),
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Semantics(
-                            header: true,
-                            child: Text(
-                              entry.key,
-                              style: AppTokens.cardTitle.copyWith(
-                                color: _sectionColor(entry.key),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Semantics(
+                              header: true,
+                              child: Text(
+                                entry.key,
+                                style: AppTokens.cardTitle.copyWith(
+                                  color: color(entry.key),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    for (final line in entry.value)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        child: Text(
-                          line,
-                          style: AppTokens.body.copyWith(
-                            color: _resultInk,
-                            height: 1.65,
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      for (final line in entry.value)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text(
+                            line,
+                            style: AppTokens.body.copyWith(
+                              color: _resultInk,
+                              height: 1.65,
+                            ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-        ],
-      );
-    },
-  );
+          ],
+        );
+      },
+    );
+  }
 
   Future<void> openExample() async {
     if (!widget.comparison) {
@@ -901,11 +945,9 @@ class _EssayResultViewState extends State<EssayResultView> {
                   ),
                   _answerOverview(e),
                   if (widget.comparison) ...[
-                    _resultHeader('무엇이 달라졌나요?'),
                     if (!e.comparable)
                       const Text('평가 조건이 달라 직접적인 향상으로 비교하기 어려워요.')
                     else ...[
-                      _changeOverview(e.changes),
                       _resultHeader('평가 항목 변화'),
                       for (final d in e.dimensions) ...[
                         _dimensionHeading(
