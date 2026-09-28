@@ -1,0 +1,345 @@
+{
+  "defaults": [
+    {
+      "owner": "postgres",
+      "privilege": "INSERT",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "DELETE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRUNCATE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "REFERENCES",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRIGGER",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "MAINTAIN",
+      "role": "postgres",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "INSERT",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "DELETE",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRUNCATE",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "REFERENCES",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRIGGER",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "MAINTAIN",
+      "role": "anon",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "INSERT",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "DELETE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRUNCATE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "REFERENCES",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRIGGER",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "MAINTAIN",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "INSERT",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "DELETE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRUNCATE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "REFERENCES",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "TRIGGER",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "MAINTAIN",
+      "role": "service_role",
+      "schema": "public",
+      "type": "r"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "EXECUTE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "f"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "EXECUTE",
+      "role": "anon",
+      "schema": "public",
+      "type": "f"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "EXECUTE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "f"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "EXECUTE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "f"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "postgres",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "USAGE",
+      "role": "postgres",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "anon",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "anon",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "USAGE",
+      "role": "anon",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "USAGE",
+      "role": "authenticated",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "SELECT",
+      "role": "service_role",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "UPDATE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "S"
+    },
+    {
+      "owner": "postgres",
+      "privilege": "USAGE",
+      "role": "service_role",
+      "schema": "public",
+      "type": "S"
+    }
+  ],
+  "view_definition": " SELECT es.id AS exam_subject_id,\n    k.paper_variant,\n    k.id AS answer_key_version_id,\n    k.version AS answer_key_version,\n    k.content_digest,\n    k.question_count,\n    k.max_score,\n        CASE\n            WHEN k.id IS NULL THEN 'timer_only'::text\n            ELSE 'scoring_available'::text\n        END AS availability,\n    g.id AS grade_cutoff_version_id,\n    g.version AS grade_cutoff_version,\n    COALESCE(g.certainty, 'unavailable'::text) AS grade_status,\n    'mcq5-v1'::text AS scoring_version\n   FROM exam_subjects es\n     LEFT JOIN answer_key_versions k ON k.exam_subject_id = es.id AND k.is_current AND k.status = 'published'::text\n     LEFT JOIN grade_cutoff_versions g ON g.exam_subject_id = k.exam_subject_id AND g.paper_variant = k.paper_variant AND g.max_score = k.max_score AND g.is_current AND g.status = 'published'::text;",
+  "view_options": [
+    "security_invoker=true"
+  ],
+  "study_token_sha256": "4678e662a48e89375954806ec030e09be36457be9117c90a6aee03d3549a76b3"
+}

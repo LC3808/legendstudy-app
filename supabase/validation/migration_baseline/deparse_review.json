@@ -1,0 +1,44 @@
+{
+  "public.exams.sort_date": {
+    "reason": "make_date smallint arguments widen to integer; ELSE NULL has inferred date type. Same branches/default.",
+    "expected": {
+      "type": "date",
+      "not_null": false,
+      "default": "CASE WHEN exam_date IS NOT NULL THEN exam_date WHEN year IS NOT NULL AND exam_month IS NOT NULL THEN pg_catalog.make_date(year, exam_month, 1) WHEN year IS NOT NULL THEN pg_catalog.make_date(year, 1, 1) ELSE NULL END"
+    },
+    "actual": {
+      "default": "\nCASE\n    WHEN (exam_date IS NOT NULL) THEN exam_date\n    WHEN ((year IS NOT NULL) AND (exam_month IS NOT NULL)) THEN make_date((year)::integer, (exam_month)::integer, 1)\n    WHEN (year IS NOT NULL) THEN make_date((year)::integer, 1, 1)\n    ELSE NULL::date\nEND",
+      "generated": "s",
+      "identity": "",
+      "name": "sort_date",
+      "not_null": false,
+      "type": "date"
+    }
+  },
+  "public.exams.exams_calendar_year_matches_date": {
+    "reason": "EXTRACT returns numeric; smallint year widened to numeric. Same equality and NULL guards.",
+    "expected": "CONSTRAINT exams_calendar_year_matches_date CHECK (exam_date IS NULL OR year IS NULL OR EXTRACT(YEAR FROM exam_date) = year)",
+    "actual": "CHECK (((exam_date IS NULL) OR (year IS NULL) OR (EXTRACT(year FROM exam_date) = (year)::numeric)))"
+  },
+  "public.study_sessions.study_sessions_time_bounds": {
+    "reason": "interval 24 hours deparses as 24:00:00; same bounds and finite guards.",
+    "expected": "CONSTRAINT study_sessions_time_bounds CHECK (isfinite(started_at) AND isfinite(ended_at) AND ended_at >= started_at AND (ended_at - started_at) <= CAST('24 hours' AS interval))",
+    "actual": "CHECK ((isfinite(started_at) AND isfinite(ended_at) AND (ended_at >= started_at) AND ((ended_at - started_at) <= '24:00:00'::interval)))"
+  },
+  "public.mock_exam_answers.awarded_points": {
+    "reason": "smallint points_snapshot widened to declared integer result; same CASE.",
+    "expected": {
+      "type": "integer",
+      "not_null": false,
+      "default": "CASE WHEN submitted_answer = correct_answer_snapshot THEN points_snapshot ELSE 0 END"
+    },
+    "actual": {
+      "default": "\nCASE\n    WHEN (submitted_answer = correct_answer_snapshot) THEN (points_snapshot)::integer\n    ELSE 0\nEND",
+      "generated": "s",
+      "identity": "",
+      "name": "awarded_points",
+      "not_null": false,
+      "type": "integer"
+    }
+  }
+}

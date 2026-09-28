@@ -1,0 +1,12 @@
+{
+  "binary_sha256": "372e2b371842ba3c8175a7eeeff694ad48ea383fa9c923d93953b1a29551206b",
+  "help_commands": [
+    "migration list --help",
+    "migration repair --help",
+    "db push --help"
+  ],
+  "repair_implementation": "repair handler itR calls TQ history initializer (schema/table + statements/name columns) before transactionally upserting explicit version/name/statements. Parsed file statements are stored as history values, not executed. Empty version list selects all-file repair/truncate path: prohibited.",
+  "initialization_and_rows_separate_transactions": true,
+  "execution": "STATIC_LOCAL_SOURCE_INSPECTION_ONLY",
+  "migration_sql_executed": false
+}

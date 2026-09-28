@@ -135,7 +135,7 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Migration](essay-lab-migration-promotion.md): PROMOTED / NOT_APPLIED; KEEP19+4.
 77+55 regression/42 static PASS; identity PASS. Real student data NOT_ENABLED.
-[Production preflight](essay-lab-production-preflight.md): APPLY BLOCKED—migration history absent; canonical5/21/134 unchanged.
+[Baseline review](production-migration-baseline-reconciliation.md):10 equivalent candidates/3 backfill unknowns; history/apply BLOCKED.
 No new device acceptance;1710 A1 remains separate, never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.

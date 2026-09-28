@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-28 — Migration history read-only reconciliation
+
+- [Baseline](production-migration-baseline-reconciliation.md):16 migrations;10 state-equivalent/unproven,3 historical backfill unknowns,3 confirmed pending.
+- 1569 catalog comparisons match; no semantic divergence. History writes/apply NOT READY; canonical fingerprints unchanged.
+- CLI explicit-version repair plan only; no list/repair/push/dry-run or Production writes. Owner files preserved.
+
 ## 2026-09-28 — Production read-only preflight blocked
 
 - [Preflight](essay-lab-production-preflight.md): catalog/count checks PASS; migration history schema absent, apply readiness NO.

@@ -1,0 +1,715 @@
+[
+  {
+    "version": "20260912000100",
+    "filename": "20260912000100_initial_content_schema.sql",
+    "sha256": "2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b",
+    "statement_types": {
+      "AlterTableStmt": 10,
+      "CreateFunctionStmt": 2,
+      "CreatePolicyStmt": 16,
+      "CreateStmt": 10,
+      "CreateTrigStmt": 8,
+      "GrantStmt": 16,
+      "IndexStmt": 10,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.bookmarks",
+      "public.content_items",
+      "public.exam_subjects",
+      "public.exams",
+      "public.ingestion_quarantine",
+      "public.profiles",
+      "public.recent_views",
+      "public.resources",
+      "public.source_posts",
+      "public.subjects"
+    ],
+    "functions": [
+      "public.set_updated_at",
+      "public.set_viewed_at"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Initial content/profile/bookmark/recent/quarantine schema",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "auth.users",
+      "public.content_items",
+      "public.exam_subjects",
+      "public.exams",
+      "public.source_posts",
+      "public.subjects"
+    ],
+    "rls_changes": 16,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 2,
+      "CreateTrigStmt": 8
+    }
+  },
+  {
+    "version": "20260913000100",
+    "filename": "20260913000100_profile_school_selection.sql",
+    "sha256": "7d151a18ff2aab721eb40c9e1ccef54b1c8e186d0e50619aa9ed05e45970e7cb",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "GrantStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.profiles"
+    ],
+    "functions": [],
+    "data_mutation_count": 0,
+    "purpose": "Profile NEIS school selection",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.profiles"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "GrantStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260913000200",
+    "filename": "20260913000200_profile_day_target.sql",
+    "sha256": "c060ced1166740c272f34320953b74f46d629ef51034616fe3f1a64a4c977b53",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "GrantStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.profiles"
+    ],
+    "functions": [],
+    "data_mutation_count": 0,
+    "purpose": "Profile single D-Day fields",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.profiles"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "GrantStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260914000100",
+    "filename": "20260914000100_study_sessions.sql",
+    "sha256": "a832d5e4704d868461d1dd24e0253c1b06e5feb0fa2546b0ebceb115d4d6eb51",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "CreateFunctionStmt": 1,
+      "CreatePolicyStmt": 3,
+      "CreateStmt": 1,
+      "GrantStmt": 6,
+      "IndexStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.study_sessions"
+    ],
+    "functions": [
+      "public.study_active_milliseconds"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Study session facts and interval validation",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "auth.users"
+    ],
+    "rls_changes": 3,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 1,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260914000200",
+    "filename": "20260914000200_mock_exam_scoring.sql",
+    "sha256": "3ff1fb8c7a638e93e36194a28338caee0356ee1b0834fba6709940722296b0e8",
+    "statement_types": {
+      "AlterTableStmt": 6,
+      "CreateFunctionStmt": 12,
+      "CreatePolicyStmt": 6,
+      "CreateStmt": 5,
+      "CreateTrigStmt": 7,
+      "GrantStmt": 33,
+      "IndexStmt": 5,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2,
+      "ViewStmt": 1
+    },
+    "relations": [
+      "public.answer_key_versions",
+      "public.exam_questions",
+      "public.grade_cutoff_versions",
+      "public.mock_exam_answers",
+      "public.mock_exam_attempts",
+      "public.study_sessions"
+    ],
+    "functions": [
+      "public.fetch_own_mock_attempt",
+      "public.scoring_answer_guard",
+      "public.scoring_attempt_consistency",
+      "public.scoring_attempt_guard",
+      "public.scoring_cutoffs_valid",
+      "public.scoring_mcq5",
+      "public.scoring_normalize_answers",
+      "public.scoring_publication_guard",
+      "public.scoring_question_guard",
+      "public.scoring_source_url",
+      "public.scoring_text",
+      "public.submit_mock_attempt"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Versioned mock scoring schema/RPC/RLS",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "auth.users",
+      "public.answer_key_versions",
+      "public.exam_questions",
+      "public.exam_subjects",
+      "public.grade_cutoff_versions",
+      "public.mock_exam_attempts",
+      "public.study_sessions"
+    ],
+    "rls_changes": 6,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "GrantStmt",
+      "IndexStmt",
+      "ViewStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 12,
+      "CreateTrigStmt": 7
+    }
+  },
+  {
+    "version": "20260917000100",
+    "filename": "20260917000100_feedback_operations.sql",
+    "sha256": "f9d4f7fa29385272bab5ae6f5074a854641b9ce52863f29f00dd148a8f30720b",
+    "statement_types": {
+      "AlterTableStmt": 3,
+      "CreateFunctionStmt": 3,
+      "CreatePolicyStmt": 5,
+      "CreateStmt": 3,
+      "CreateTrigStmt": 2,
+      "GrantStmt": 11,
+      "IndexStmt": 3,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.admin_users",
+      "public.feedback_notifications",
+      "public.feedback_submissions"
+    ],
+    "functions": [
+      "public.enqueue_feedback_notification",
+      "public.feedback_updated_at",
+      "public.is_feedback_admin"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Feedback/admin/outbox schema",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "auth.users",
+      "public.feedback_submissions"
+    ],
+    "rls_changes": 5,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 3,
+      "CreateTrigStmt": 2
+    }
+  },
+  {
+    "version": "20260917000200",
+    "filename": "20260917000200_feedback_notification_worker.sql",
+    "sha256": "3c1b73b7ac7e22c71d7ec8575b19635ed79559e4580aa59e2357e5549aded633",
+    "statement_types": {
+      "AlterTableStmt": 5,
+      "CreateFunctionStmt": 4,
+      "GrantStmt": 8,
+      "IndexStmt": 1,
+      "TransactionStmt": 2,
+      "UpdateStmt": 1
+    },
+    "relations": [
+      "public.feedback_notifications"
+    ],
+    "functions": [
+      "public.claim_feedback_notifications",
+      "public.complete_feedback_notification",
+      "public.fail_feedback_notification",
+      "public.reclaim_feedback_notification_leases"
+    ],
+    "data_mutation_count": 1,
+    "purpose": "Feedback lease/retry worker and scheduling backfill",
+    "classification": "MIXED",
+    "data_mutation": "UPDATE feedback_notifications next_attempt_at where NULL; subsequent worker activity can change it.",
+    "dependencies": [
+      "public.feedback_notifications"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 4,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260923000100",
+    "filename": "20260923000100_study_total_inclusion.sql",
+    "sha256": "041c9f1607465700b268ce96287f9452b7ba7e07cf450dba7f6ca1c3902c0800",
+    "statement_types": {
+      "AlterTableStmt": 2,
+      "GrantStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.study_sessions"
+    ],
+    "functions": [],
+    "data_mutation_count": 0,
+    "purpose": "Study total inclusion flag",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.study_sessions"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "GrantStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260923000200",
+    "filename": "20260923000200_private_profile_avatars.sql",
+    "sha256": "ad5cb2605b75ece2ef0118fd663b470c3deae53b6b56bccb90580ed56ba29507",
+    "statement_types": {
+      "CreatePolicyStmt": 4,
+      "InsertStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "storage.buckets"
+    ],
+    "functions": [],
+    "data_mutation_count": 1,
+    "purpose": "Private profile avatar bucket and owner policies",
+    "classification": "MIXED",
+    "data_mutation": "INSERT one fixed profile-avatars storage bucket configuration.",
+    "dependencies": [
+      "storage.buckets"
+    ],
+    "rls_changes": 4,
+    "ddl": [
+      "CreatePolicyStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260925000100",
+    "filename": "20260925000100_resource_resolver_quota.sql",
+    "sha256": "a575befd10afe13581ba29fac2a16c0d0d63e48a22eb40952bf9b0c085335e0d",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "CreateFunctionStmt": 1,
+      "CreateStmt": 1,
+      "GrantStmt": 3,
+      "IndexStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.resource_resolver_quota"
+    ],
+    "functions": [
+      "public.consume_resource_resolver_quota"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Resource resolver quota/RPC",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreateStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 1,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260926000100",
+    "filename": "20260926000100_day_targets.sql",
+    "sha256": "5bfd34f8c4f2a452e0c3cf6cdf47916c155f675a2c117229f1a2f1f2224ba7ba",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "CreatePolicyStmt": 4,
+      "CreateStmt": 1,
+      "GrantStmt": 1,
+      "IndexStmt": 2,
+      "InsertStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.day_targets"
+    ],
+    "functions": [],
+    "data_mutation_count": 1,
+    "purpose": "Multiple D-Day targets and legacy backfill",
+    "classification": "MIXED",
+    "data_mutation": "INSERT primary day_targets from legacy profile target when no target exists. Subsequent user edits/deletes make original mapping/time unreconstructable.",
+    "dependencies": [
+      "auth.users"
+    ],
+    "rls_changes": 4,
+    "ddl": [
+      "AlterTableStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260927000100",
+    "filename": "20260927000100_profile_personalization.sql",
+    "sha256": "5f0433622c532f52748b9b261c93f3df8683dd28ad825c9d8ea0317be4dfbca8",
+    "statement_types": {
+      "AlterTableStmt": 1,
+      "GrantStmt": 1,
+      "NotifyStmt": 1,
+      "TransactionStmt": 2,
+      "UpdateStmt": 1
+    },
+    "relations": [
+      "public.profiles"
+    ],
+    "functions": [],
+    "data_mutation_count": 1,
+    "purpose": "Profile personalization and onboarding backfill",
+    "classification": "MIXED",
+    "data_mutation": "UPDATE NULL onboarding timestamp for existing grade/school profiles. Later onboarding/profile changes make execution-time eligibility unreconstructable.",
+    "dependencies": [
+      "public.profiles"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "GrantStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 0
+    }
+  },
+  {
+    "version": "20260927000200",
+    "filename": "20260927000200_essay_lab_foundation.sql",
+    "sha256": "d1c4fcb1b31cf4ea7979bc7cd585f5aa817383b5d3d531a4a64430d431dffcf3",
+    "statement_types": {
+      "AlterTableStmt": 3,
+      "CreatePolicyStmt": 3,
+      "CreateStmt": 3,
+      "CreateTrigStmt": 3,
+      "DropStmt": 3,
+      "GrantStmt": 3,
+      "IndexStmt": 2,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.essay_exam_resources",
+      "public.essay_exams",
+      "public.universities"
+    ],
+    "functions": [],
+    "data_mutation_count": 0,
+    "purpose": "University/Essay canonical foundation",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.essay_exams",
+      "public.resources",
+      "public.universities"
+    ],
+    "rls_changes": 3,
+    "ddl": [
+      "AlterTableStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "DropStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 0,
+      "CreateTrigStmt": 3
+    }
+  },
+  {
+    "version": "20260928000100",
+    "filename": "20260928000100_student_essay_product.sql",
+    "sha256": "9db7bdf6c17895a8fb8dcc2f105919f87e37202a84929bbeebcc3ca6978e21e2",
+    "statement_types": {
+      "AlterTableStmt": 15,
+      "CreateFunctionStmt": 7,
+      "CreatePolicyStmt": 20,
+      "CreateStmt": 15,
+      "CreateTrigStmt": 16,
+      "GrantStmt": 49,
+      "IndexStmt": 13,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.essay_ai_processing_runs",
+      "public.essay_attempts",
+      "public.essay_drafts",
+      "public.essay_evaluation_criteria",
+      "public.essay_evaluation_dimensions",
+      "public.essay_evaluation_evidence",
+      "public.essay_evaluations",
+      "public.essay_generated_rewrites",
+      "public.essay_improvement_items",
+      "public.essay_improvement_progress",
+      "public.essay_learning_events",
+      "public.essay_practice_sessions",
+      "public.essay_question_evidence",
+      "public.essay_questions",
+      "public.student_target_universities"
+    ],
+    "functions": [
+      "public.essay_product_child_guard",
+      "public.essay_product_draft_guard",
+      "public.essay_product_processing_guard",
+      "public.essay_product_progress_guard",
+      "public.essay_product_reject_update",
+      "public.essay_product_terminal_guard",
+      "public.essay_question_identity_guard"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Essay student product tables",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.essay_attempts",
+      "public.essay_evaluation_criteria",
+      "public.essay_evaluation_dimensions",
+      "public.essay_evaluations",
+      "public.essay_exam_resources",
+      "public.essay_exams",
+      "public.essay_generated_rewrites",
+      "public.essay_improvement_items",
+      "public.essay_improvement_progress",
+      "public.essay_practice_sessions",
+      "public.essay_question_evidence",
+      "public.essay_questions",
+      "public.profiles",
+      "public.universities"
+    ],
+    "rls_changes": 20,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 7,
+      "CreateTrigStmt": 16
+    }
+  },
+  {
+    "version": "20260928000200",
+    "filename": "20260928000200_essay_entitlements.sql",
+    "sha256": "9e3427fe3ffeec94569e19f4d7958df210fff15ca3c15a8d17652db96df847d9",
+    "statement_types": {
+      "AlterTableStmt": 4,
+      "CreateFunctionStmt": 2,
+      "CreatePolicyStmt": 4,
+      "CreateStmt": 4,
+      "CreateTrigStmt": 4,
+      "GrantStmt": 14,
+      "IndexStmt": 4,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.credit_accounts",
+      "public.credit_grants",
+      "public.credit_transactions",
+      "public.essay_billing_decisions"
+    ],
+    "functions": [
+      "public.essay_billing_history_guard",
+      "public.essay_credit_account_guard"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Essay credit entitlement ledger",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.credit_accounts",
+      "public.credit_grants",
+      "public.credit_transactions",
+      "public.essay_billing_decisions",
+      "public.essay_evaluations",
+      "public.profiles"
+    ],
+    "rls_changes": 4,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreatePolicyStmt",
+      "CreateStmt",
+      "CreateTrigStmt",
+      "GrantStmt",
+      "IndexStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 2,
+      "CreateTrigStmt": 4
+    }
+  },
+  {
+    "version": "20260928000300",
+    "filename": "20260928000300_essay_server_operations.sql",
+    "sha256": "9bc223185e464f4187d6c8e2abcb9d419091fc84ac2bba21f14cc44f5e254995",
+    "statement_types": {
+      "AlterTableStmt": 3,
+      "CreateFunctionStmt": 19,
+      "CreateSchemaStmt": 1,
+      "DoStmt": 2,
+      "GrantRoleStmt": 2,
+      "GrantStmt": 10,
+      "TransactionStmt": 2
+    },
+    "relations": [
+      "public.essay_ai_processing_runs",
+      "public.essay_attempts",
+      "public.essay_evaluations"
+    ],
+    "functions": [
+      "essay_private.clock",
+      "essay_private.fence",
+      "essay_private.hash",
+      "essay_private.lock_job",
+      "essay_private.owner",
+      "essay_private.release",
+      "essay_private.uid",
+      "public.essay_claim",
+      "public.essay_erase",
+      "public.essay_finalize_failure",
+      "public.essay_finalize_success",
+      "public.essay_open_session",
+      "public.essay_reconcile",
+      "public.essay_refund",
+      "public.essay_request_evaluation",
+      "public.essay_request_rewrite",
+      "public.essay_save_draft",
+      "public.essay_submit_attempt",
+      "public.essay_timeout"
+    ],
+    "data_mutation_count": 0,
+    "purpose": "Essay server operations/leases/idempotency",
+    "classification": "SCHEMA",
+    "data_mutation": "NONE at top level; runtime function bodies are not migration-time execution.",
+    "dependencies": [
+      "public.essay_ai_processing_runs",
+      "public.essay_attempts",
+      "public.essay_evaluations"
+    ],
+    "rls_changes": 0,
+    "ddl": [
+      "AlterTableStmt",
+      "CreateFunctionStmt",
+      "CreateSchemaStmt",
+      "DoStmt",
+      "GrantRoleStmt",
+      "GrantStmt"
+    ],
+    "function_trigger_changes": {
+      "CreateFunctionStmt": 19,
+      "CreateTrigStmt": 0
+    }
+  }
+]
