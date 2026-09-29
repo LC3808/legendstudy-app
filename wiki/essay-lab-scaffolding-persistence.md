@@ -4,7 +4,8 @@
 Owner approved the [product contract](essay-lab-product-v1.md) and1.3-review.1 direction.
 KEEP19; one new nullable column; no AI call, real student data, UI change or new table.
 [Sanitized verification](../supabase/validation/essay_lab_product/scaffolding_result.json).
-The pre-existing submit timing issue below remains OPEN and outside this extension.
+Scaffolding result is Owner ACCEPTED. The timing issue below was outside this extension;
+[separately authorized forward correction](essay-lab-submit-timing-correction.md) now addresses it.
 
 ## Migration and server boundary
 
@@ -116,7 +117,7 @@ this is regression evidence, not a new live UI persistence adapter. The review f
 is preserved; [runtime contract](../tool/essay_lab/evidence/evaluation_contract_v1_3.json) specifies
 RPC field mapping. Independent AI/pedagogy validation remains NOT_RUN.
 
-## Existing submit timing issue — OPEN, not a scaffolding regression
+## Existing submit timing issue — historical discovery, not a scaffolding regression
 
 Runtime exposed migration003's existing expression:
 `least(d.active_writing_seconds, greatest(0, extract(epoch from now()-d.started_at)::int))`.
@@ -131,6 +132,9 @@ as outside the approved scaffolding scope and conflicting with preserving1.2 beh
 change was made. Owner was asked whether to authorize a separate fix. Until separately authorized,
 retain the issue as a rollout prerequisite; do not weaken the CHECK or alter history to pass tests.
 
-Next: Owner reviews runtime results and this open baseline issue → separately decides Production
+Owner subsequently accepted this result and separately authorized the linked timing correction.
+This report and its original validation artifacts retain their historical scope.
+
+Next: Owner reviews runtime results → separately decides Production
 persistence apply → separately authorizes Scaffolding AI Pilot. This task neither applies Production
 nor enables real student/provider traffic.

@@ -2964,3 +2964,9 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - KEEP19 +1 nullable observation column, frozen previous-core snapshot and version-dispatched1.3 adapter; v1.2 path preserved.
 - [Isolated runtime/JWT matrix](essay-lab-scaffolding-persistence.md):80/79 PASS; native77/55 and JWT37 regression PASS, static55/27, Flutter27/analyze PASS; no Production/AI/student data. Existing submit NULL/rounding issue remains OPEN after out-of-scope auto-review rejection; fixtures use explicit0 active seconds.
+
+## 2026-09-29 — Essay submit timing forward correction
+
+Owner separately authorized NULL/floor correction; accepted Scaffolding preserved.
+[Exact scope and isolated validation](essay-lab-submit-timing-correction.md).
+Existing CHECK/history/migrations unchanged; Production/AI/real student data NO.
