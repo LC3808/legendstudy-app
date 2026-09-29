@@ -1,5 +1,10 @@
 # Essay LAB L2-A2 — provider provenance and telemetry
 
+> 2026-09-30 follow-up: [L2-A3 reviewer architecture](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture)
+> recommends narrow conditional review and a separate human-reviewed private Pilot. Architecture
+> PARTIAL, not deployed. The accepted L2-A2 implementation/results below remain unchanged.
+
+
 2026-09-29. **IMPLEMENTED / isolated PostgreSQL + actual local JWT/PostgREST PASS.**
 Production **NOT_APPLIED**. Real AI runs **0**. No provider/model selected. Production
 reviewer **BLOCKED**; real AI Pilot and real student traffic **NOT_READY**.

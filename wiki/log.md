@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-30 — Essay L2-A3 reviewer architecture review
+
+- [Existing worker/provider canonical](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture):
+  recommend single evaluator + narrow sentence/progression review; keep current full signed boundary unchanged.
+- First proposed API Pilot: private artifacts, human QA, staged2+2 calls only after separate authorization;
+  no DB lease held for manual review. Model selection ready; real Pilot/reviewer deployment not ready.
+- 005 conditional apply recommendation; no source/SQL/DB/AI changes. Existing23/50/55 tests PASS,
+  accepted runtime reused. Analytics/School/Coupon/Owner iOS work preserved.
+
+
 ## 2026-09-29 — Essay L2-A2 provider provenance / telemetry
 
 - [Server binding + telemetry](essay-lab-provider-provenance-l2-a2.md): KEEP19, total_tokens nullable,
