@@ -567,3 +567,12 @@ derive from those facts. Do not overwrite issue history with current status, or 
 changes with student growth. This does not mean permanent click/autosave retention. Separate
 learning/behavior/operations/financial retention; preserve correction evidence without rewriting
 original judgment. [Final19-table review](essay-lab-final-schema-review.md); Production gate closed.
+
+
+## 2026-09-29 — Essay criterion-led scaffolding
+
+[Product contract](essay-lab-product-v1.md) is canonical: prioritize official criteria, normally1–3
+core tasks and0–5 grounded sentence observations; review previous tasks before selecting the next.
+Preserve student stance, use smaller guidance when unresolved, and derive progression from history.
+Never conceal necessary feedback to drive payment. Own-answer quotes and official evidence have
+distinct provenance. v1.2/Pilots stay frozen;1.3-review.1 and minimal persistence are review only.

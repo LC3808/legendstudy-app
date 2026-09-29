@@ -1,0 +1,150 @@
+{
+  "version": "1.3-review.1",
+  "status": "REVIEW_ONLY_NOT_EXECUTED",
+  "base_file": "evaluation_contract_v1_2.json",
+  "base_sha256": "84d19d3474ffdf1a1dc6cf7ec8a1de108cac0de221b148c87f6574931c3af021",
+  "compatibility": "v1.2 and frozen Pilot outputs remain byte-for-byte unchanged. This is a proposed additive semantic contract, not an activated provider schema or RPC payload.",
+  "product_principle": "대학의 평가 기준에 따라 지금 가장 먼저 고쳐야 할 부분을 찾고, 구체적인 첨삭과 재작성을 통해 한 단계씩 더 나은 답안을 완성하도록 돕는다.",
+  "inherit": "All v1.2 rules, student Korean, stance preservation, minimal editing and official criterion priority.",
+  "core_focus": {
+    "minimum": 0,
+    "default_maximum": 3,
+    "typical": "1–3 when warranted; 0 and 1 valid",
+    "selection": "Official university criteria override the default order; select actionable root issues, not a quota.",
+    "default_order": [
+      "task_fulfillment",
+      "passage_accuracy",
+      "official_criterion_core",
+      "argument_evidence_conclusion",
+      "organization",
+      "sentence_clarity",
+      "grammar_expression"
+    ],
+    "overflow": "Keep material findings in detailed criterion diagnosis; group shared roots. Never hide necessary guidance or misrepresent severity to sell another evaluation."
+  },
+  "sentence_feedback": {
+    "minimum": 0,
+    "maximum": 5,
+    "typical": "2–5 when warranted; 0 and 1 valid",
+    "categories": {
+      "grammar": "맞춤법·문법",
+      "expression": "어색한 표현",
+      "structure": "문장 구조",
+      "logic": "논리 표현"
+    },
+    "priority_order": [
+      "contradiction",
+      "unclear_meaning",
+      "grammar_agreement",
+      "wording"
+    ],
+    "fields": {
+      "observation_key": "Evaluation-local unique string, never a global weakness ID",
+      "linked_issue_key": "Must resolve to one current improvement progress; server assigns real issue/progress UUIDs",
+      "category": "One of four categories",
+      "priority": "One of priority_order",
+      "start": "Unicode code-point integer, zero-based inclusive",
+      "end": "Unicode code-point integer, exclusive; greater than start",
+      "quote": "Exact sentence/span from this evaluation’s immutable submitted attempt, no normalization",
+      "diagnosis": "Specific friendly Korean, not a preference asserted as error",
+      "direction": "Small actionable correction preserving stance",
+      "example": "Optional nonblank minimal example; omitted if unnecessary"
+    },
+    "relationship": "Supports selected core issues. A justified local sentence task may exist outside the core list; no separate duplicate root criticism.",
+    "duplicate_policy": "One progress per root/evaluation. Distinct sentence observations can share that root. Same span must not be repeated under multiple roots; combine genuinely co-located guidance."
+  },
+  "input_snapshot_addition": {
+    "key": "scaffolding_context",
+    "version": 1,
+    "fields": [
+      "selected_previous_evaluation_id",
+      "previous_core_progress_ids",
+      "previous_resolved_progress_ids",
+      "comparison_regime",
+      "history_manifest_sha256"
+    ],
+    "source": "Server-selected compatible completed earlier evaluation in same session/owner/question, with source attempt hash and immutable progress IDs. Include previous title, explanation, action, status and evidence through references in worker payload; never profile/PII.",
+    "selection": "Record selected predecessor at request time; no moving latest lookup during finalize. Same-attempt re-evaluation is not rewrite growth. Old v1.2 outputs lack explicit core_focus: no automatic retroactive conversion.",
+    "no_history": "Empty lists with an explicit unavailable/incompatible reason; no invented progression."
+  },
+  "output_additions": {
+    "core_improvement_keys": "Ordered unique subset of current improvements, 0..3 by default. Persist core_focus with each progress and existing priority as order.",
+    "previous_improvement_reviews": "Exactly one review per snapshotted previous core progress ID before selecting new focus. Optional explicit reviews of prior resolved issues may establish recurrence.",
+    "sentence_feedback": "0..5 structured observations using sentence_feedback.fields",
+    "improvement_extension_fields": {
+      "claim_scope": "official_criterion or local_sentence; trusted adapter validates semantics, never trust provider scope as authorization",
+      "previous_progress_id": "Explicit predecessor for assessed previous review",
+      "core_focus": "Derived by server from core_improvement_keys; resolved issues cannot be active core"
+    }
+  },
+  "previous_review": {
+    "fields": [
+      "previous_progress_id",
+      "outcome",
+      "reason"
+    ],
+    "outcomes": [
+      "open",
+      "unchanged",
+      "improved",
+      "resolved",
+      "recurred",
+      "not_assessable"
+    ],
+    "assessed": "Create new progress linked to the exact prior progress and same issue; never update past rows.",
+    "not_assessable": "No progress assertion. Persist required uncertainty reason in evaluation.uncertainty_note; input predecessor list minus linked assessed progress identifies unknown tasks. Missing observation is not resolved or unchanged.",
+    "recurrence": "Requires an explicitly referenced earlier resolved observation on the comparable branch and current evidence; cross-session normalized keys are only candidates, not automatic identity merging."
+  },
+  "progression_rules": [
+    "Review prior core tasks before looking for new ones; collect and validate full output before atomic publication.",
+    "If unresolved, offer smaller steps, clearer cause, exact quote or optional short example; do not repeat old action unchanged.",
+    "Move to next priority only with recorded resolved/improved evidence; a newly severe error can take priority, with explanation.",
+    "Student labels: open/unchanged=아직 확인할 부분, improved=좋아지고 있는 부분, resolved=해결한 부분, recurred=다시 나타난 부분; not_assessable=판단이 어려운 부분.",
+    "No claimed trend from missing observations, incomparable regimes or one sample. Preserve strengths and do not classify permanent weakness."
+  ],
+  "provenance": {
+    "official": "Existing essay_evaluation_evidence FK to allowed question/criterion evidence; mandatory for university-criterion judgments.",
+    "student_quote": "Server-resolved evaluation → submitted attempt → answer hash → exact code-point slice. Separate from official evidence table.",
+    "both": "Criterion/application/logical judgment with a sentence location retains official mapping AND verified quote.",
+    "quote_only_exception": "Only a trusted-classified local sentence claim, including internal contradiction, that does not assert university criteria or passage interpretation. Active finding requires a verified own quote and diagnosis/direction. Provider claim_scope alone never grants the exception.",
+    "inference": "Having a quote does not prove a diagnosis true; provenance mode and pedagogic merit need semantic review, not just enum checks.",
+    "resolved_local_exception": "A resolved prior local sentence issue may have no current sentence_feedback: require explicit verified predecessor, current immutable answer/hash and trusted review of the resolution reason. Do not fabricate an erroneous sentence to prove resolution. This is a progress disposition, not a new sentence finding."
+  },
+  "server_validation": [
+    "Resolve evaluation/attempt/owner/question/hash from trusted job, never provider IDs or draft.",
+    "Validate exact quote, types/enums/nonblank fields, bounds, root links, total count <=5 and duplicates across the whole evaluation.",
+    "Validate all previous core reviews and predecessor membership/chronology/regime. Unknown is not completion.",
+    "Validate core subset/count/order and no duplicate roots. Preserve all required university dimensions regardless of focus budget.",
+    "Validate official evidence membership; narrowly allow quote-only local observations; do not relax dimension evidence validation.",
+    "Atomic finalize stores progress/observations/evidence plus result/settlement; any invalid fragment rejects the entire output.",
+    "Contract, prompt, regime and manifest versions are server-controlled. Old in-flight v1.2 jobs retain old handling."
+  ],
+  "storage_proposal": {
+    "table": "essay_improvement_progress",
+    "column": "scaffolding_observation",
+    "type": "jsonb NULL",
+    "shape": {
+      "version": 1,
+      "core_focus": "boolean",
+      "sentences": "array of sentence fields excluding linked_issue_key (parent issue_id supplies relation)"
+    },
+    "limits": "0..5 sentences per envelope AND <=5 summed across evaluation; <=3 core_focus=true by default; root-specific diagnosis/action stay in existing columns; sentence-specific diagnosis/direction are distinct local guidance.",
+    "historical_null": "Legacy/unsupported contract, not zero findings. New v1.3 progress uses explicit envelope, including empty sentences.",
+    "tables_added": 0,
+    "reason_for_envelope": "Persist which tasks were core without inferring from priority or labels; allow multiple sentence locations for the same root despite UNIQUE(issue_id,evaluation_id)."
+  },
+  "quality_review": [
+    "No invented errors; preferences labeled as suggestions.",
+    "No unstated stance/conclusion or wholesale AI style replacement.",
+    "No full answer disguised as a minimal sentence example.",
+    "Quotes only from that student’s submitted answer.",
+    "Necessary feedback never withheld for payment; full example remains secondary."
+  ],
+  "activation_gates": [
+    "Owner contract review",
+    "Minimal persistence and versioned RPC adapter implementation",
+    "Isolated PostgreSQL/JWT, history, quote/provenance and billing regression tests",
+    "Separate approval for Scaffolding AI Pilot",
+    "Privacy/provider/real-student rollout gates remain separate"
+  ]
+}

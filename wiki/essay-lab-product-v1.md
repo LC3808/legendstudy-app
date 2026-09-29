@@ -1,7 +1,8 @@
 # Essay LAB v1 Product Specification
 
-2026-09-28 · **OWNER REVIEW READY / DESIGN ONLY**. No UI, AI run, payment integration,
-student seed or Production migration. [Architecture and SQL](student-analytics-data-architecture.md)
+2026-09-29 · **Scaffolding contract OWNER REVIEW READY / NOT EXECUTED**.
+Base schema/RPC deployed: [security acceptance](essay-lab-security-resolution.md).
+UI is a fixture preview; sentence persistence, live AI/payment and real-student traffic are not enabled. [Architecture and SQL](student-analytics-data-architecture.md)
 implements this proposal's data contract; the [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md)
 remains the upper-level strategy, not a competing student master.
 
@@ -38,6 +39,42 @@ six v1.1 rules and adds only stance preservation and minimal editing. Old output
 unchanged. **Not executed or quality-validated.** Product levels require a separately reviewed
 output adapter using criterion IDs/level explanations; no retroactive stars from old prose.
 
+## 단계별 첨삭 — canonical product contract (2026-09-29)
+
+**대학의 평가 기준에 따라 지금 가장 먼저 고쳐야 할 부분을 찾고,
+구체적인 첨삭과 재작성을 통해 한 단계씩 더 나은 답안을 완성하도록 돕는다.**
+오류 개수가 목표가 아니다. 이 원칙은 향후 평가·재작성·문장 다듬기 구현의 기준이다.
+
+기본 지도 순서는 논제 요구 → 제시문/자료 정확성 → 공식 기준의 핵심 요구 →
+논증·근거·결론 연결 → 구성/전개 → 문장 구조/의미 → 문법/표현이다.
+**대학 공식 기준이 우선**이며 이 순서를 모든 대학에 기계적으로 강제하지 않는다.
+
+한 회차의 집중 과제는 기본1~3개, 문장 관측은0~5개(필요할 때 보통2~5개)다.
+0/1개도 정상이다. 같은 근본 원인은 한 과제로 묶고 문장 관측이 그 과제를 구체화한다.
+핵심 과제 밖의 중요한 진단은 상세 평가에 남긴다. 개수 제한을 이유로 중요한 오류를
+감추거나 다음 결제를 유도하지 않는다. 모든 공식 평가 항목의 진단은 계속 제공한다.
+
+재작성 평가는 **이전 핵심 과제 확인 → 변화 근거 기록 → 이번 집중 과제 선택** 순서다.
+OPEN/UNCHANGED는 아직 확인할 부분, IMPROVED는 좋아지고 있는 부분,
+RESOLVED는 해결한 부분, RECURRED는 다시 나타난 부분이다. 판독/비교 근거가 부족하면
+판단이 어렵다고 알린다. 관측 없음은 해결됨이 아니다. 모델/기준이 달라 비교할 수 없거나
+같은 답안을 재평가했을 뿐이면 학생의 성장으로 표현하지 않는다.
+
+아직 해결하지 못했다면 같은 조언을 반복하지 않고 실제 문장, 더 쉬운 원인 설명,
+작은 수정 단계 또는 짧은 최소 수정 예시로 안내를 구체화한다. 입장·문체·강점을 보존하며
+답안 전체를 대신 쓰지 않는다. 해결/개선이 확인되면 다음 우선순위로 진행할 수 있다.
+새로 나타난 중대한 오류는 먼저 다룰 수 있지만 그 이유를 설명한다.
+
+문장 최소 수정 예시는 위 과정을 돕는 수단이다. 전체 **첨삭을 반영한 예시 답안**은
+계속 선택 기능이며 **직접 다시 써보기**가 기본 행동이다. 유료 재첨삭의 가치는 새로운
+작성본의 개선 확인과 다음 지도·누적 이력에 있다. 필요한 첨삭을 숨기는 데 있지 않다.
+
+관측은 evaluation-local 사실로 보존한다. 반복 관측·비교 가능한 평가·관측 기간에서
+장기 패턴을 도출하며, 한 번의 문제를 학생의 영구 약점으로 확정하지 않는다.
+[문장/저장/검증 설계](essay-lab-sentence-review.md)와
+[Evaluation 1.3-review.1](../tool/essay_lab/evidence/evaluation_contract_v1_3.review.json)이
+다음 구현의 검토 입력이다. **기존v1.2와 Pilot은 변경하지 않았고 새 AI 실행도 없다.**
+
 ## Journey and screens
 
 University → admission year/exam → question → question/passages → draft → submit → first
@@ -67,16 +104,19 @@ exam simulation wall countdown continues while the page is backgrounded. No hidd
 
 ## Results and five levels
 
-Canonical order:
-1. 종합 평가 (sentence, no overall stars)
-2. 잘한 점
-3. 평가 항목별 진단
-4. 보완할 점
-5. 먼저 고쳐야 할 부분
-6. 다시 쓸 때 확인할 것
-7. 평가 근거
-8. **직접 다시 써보기**
-9. Collapsed **첨삭을 반영한 예시 답안 보기**
+Current preview order (details retained):
+
+1. 내 답안 한눈에 보기 (second result: 이번 답안의 변화 한눈에 보기, then 평가 항목 변화)
+2. 종합 평가 (sentence, no overall stars)
+3. 잘한 점
+4. 평가 항목별 진단
+5. 문장 다듬기 · N개 (existing optional, collapsible UI)
+6. 보완할 점
+7. 먼저 고쳐야 할 부분
+8. 다시 쓸 때 확인할 것
+9. 평가 근거
+10. **직접 다시 써보기**
+11. Collapsed **첨삭을 반영한 예시 답안 보기**
 
 | Stored level | Presentation | Meaning |
 |---|---|---|
@@ -103,8 +143,9 @@ never imply university endorsement. Unsupported evaluation stays unavailable.
 
 ## Second evaluation and changes
 
-Start with **무엇이 달라졌나요?**: improved dimensions, resolved issues, remaining issues,
-new issues, then full details. Compare the selected completed evaluation for each attempt
+Start with **이번 답안의 변화 한눈에 보기**, then **평가 항목 변화**, overall summary and
+full details. The duplicate four-block “무엇이 달라졌나요?” section was removed in the
+[accepted preview polish](essay-lab-ui-ux-v1.md). No resolved observation means a neutral empty state. Compare the selected completed evaluation for each attempt
 under the same `regime_key`, criterion identity/version, evidence completeness and writing
 conditions. A 3→4 is not “+1 official point.” Explain the specific change, qualify difficulty/model
 changes. Preserve all evaluations; “latest” means latest successful compatible result, not
@@ -184,9 +225,9 @@ changes/history, targets, credit ledger and minimal events. AI example design in
 **FUTURE:** image upload/OCR, school/organization memberships, internal grades, broader Mock
 analytics, common competencies, admissions outcomes, subscription/provider integration, advanced
 cohorts and dashboard narratives. **OPTIONAL:** materialized caches/snapshots after query profiling.
-No data reingestion, UI or provider work in this phase.
+No data reingestion, UI change or provider execution in this contract-review phase.
 
-Next: Owner schema/policy review → revised migrations/local tests → Production authorization + RLS
-runtime verification. Web UX detail may follow design approval in parallel; actual writes require
-validated server APIs. Then writing → v1.2 evaluation → revision/changes → optional examples →
-commercial payment/operations → E2E/release. Productization-ready does not mean release-ready.
+Next: Owner/ChatGPT scaffolding contract review → minimal persistence/versioned adapter → isolated
+runtime regression → separately approved AI Pilot. Existing schema security acceptance is preserved;
+this extension is not applied. Real-student writes require privacy/provider/retention and integration
+gates, independent of this review. Productization-ready does not mean release-ready.

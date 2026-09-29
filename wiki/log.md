@@ -2952,3 +2952,9 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - Added typed bounded own-answer quote validation and expandable 문장 다듬기; no synthetic critique of entered answers.
 - [Storage reuse / v1.2 output proposal](essay-lab-sentence-review.md): history reusable, structured span/category/example persistence missing. No SQL/RPC/AI execution. Related27 Flutter + analyze PASS.
+
+
+## 2026-09-29 — Essay scaffolding contract Phase1
+
+- Canonicalized criterion-led progression and previous-core review; preserved v1.2, Pilot and sentence UI.
+- [1.3 review / one-column proposal / next runtime gates](essay-lab-sentence-review.md): KEEP19, typed own-answer observations separate from official evidence. 19 offline review tests + Wiki/diff checks PASS; no Production/AI/student-data operations.

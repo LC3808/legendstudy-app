@@ -1,5 +1,10 @@
 # Essay LAB Product Phase 1 review package
 
+2026-09-29 addition: [Scaffolding1.3-review.1 / minimal persistence / next runtime plan](scaffolding-review.md).
+Base schema is now [DEPLOYED](../../../wiki/essay-lab-security-resolution.md); historical promotion
+notes below retain earlier states. The new one-column proposal is NOT IMPLEMENTED/NOT APPLIED.
+Offline review checks: `python3 -B -m unittest discover -s supabase/review/essay_lab_product -p test_scaffolding_contract.py`.
+
 **REVIEW SOURCES PRESERVED / PROMOTED COPIES / NOT APPLIED.**
 Owner approved promotion after Phase2A/2B/2C. [Formal package and current gates](../../../wiki/essay-lab-migration-promotion.md).
 Historical review notes below do not override that approval; Production apply remains separately gated.

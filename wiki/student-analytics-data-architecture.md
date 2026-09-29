@@ -1,10 +1,22 @@
 # Student Analytics-ready Data Architecture
 
-2026-09-28 · **OWNER REVIEW READY / DRAFT ONLY / NOT APPLIED**.
+Base design dated2026-09-28. **Base schema/RPC DEPLOYED** per
+[accepted security verification](essay-lab-security-resolution.md); historical design sections below
+retain their original stage. New2026-09-29 scaffolding extension is REVIEW ONLY / NOT APPLIED.
 Implementation-level companion to the [existing longitudinal strategy](longitudinal-learning-admissions-data-strategy.md),
 not a second strategy or student master. [Product specification](essay-lab-product-v1.md) governs
-learner behavior. [SQL review package](../supabase/review/essay_lab_product/README.md) is not in
-`supabase/migrations`. No Production student data, UI, payment or AI runs were created.
+learner behavior. The [SQL review sources](../supabase/review/essay_lab_product/README.md) remain
+separate from `supabase/migrations`; their promoted copies have since been applied.
+Real student/AI/payment remain NOT_ENABLED; Flutter fixture preview exists.
+
+## Scaffolding extension review — 2026-09-29
+
+Keep19 and existing owner/history/FKs. Add only a proposed nullable structured observation envelope
+on improvement_progress; store explicit core-focus selection and bounded sentence observations.
+No extra sentence master/history/analytics table. Previous core IDs and comparison regime belong
+in the existing evaluation input snapshot; absent observation never means resolved.
+[Product policy](essay-lab-product-v1.md), [exact storage/RPC/runtime proposal](../supabase/review/essay_lab_product/scaffolding-review.md).
+This is not implemented or a migration approval. Base security/identity acceptance is unchanged.
 
 ## Final history review — 2026-09-28
 
