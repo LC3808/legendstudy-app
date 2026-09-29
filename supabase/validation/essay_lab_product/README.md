@@ -1,4 +1,6 @@
-# Essay LAB migration validation — SECURITY / SCAFFOLDING DEPLOYED
+# Essay LAB migration validation — SECURITY / SCAFFOLDING / G1 DEPLOYED
+
+> Latest G1: `g1_production_result.json`; [canonical apply record](../../../wiki/essay-lab-server-transactions.md#production-apply--owner-authorized-2026-09-29).29000300 applied; ledger20/pending0; read-only151 PASS; no student/AI/IAP enabling. Earlier checkpoints below are historical.
 
 > Latest: [2026-09-29 apply](../../../wiki/essay-lab-scaffolding-production-apply.md), `scaffolding_production_result.json`: two forward migrations applied; ledger19/pending0; AI/student disabled.
 

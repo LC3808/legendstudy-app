@@ -183,10 +183,10 @@ Unstated stance: guide student to decide, do not invent a completed policy argum
 
 ## Credits — G1 commercial policy (2026-09-29)
 
-**Owner-approved / IMPLEMENTED / isolated PostgreSQL + actual local JWT PASS / Production NOT APPLIED.**
+**Owner-approved / PRODUCTION_DEPLOYED / POST_APPLY_VALIDATED.**
 [Server operation and validation details](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29).
-This section is the canonical commercial policy; the v1 table below remains historical/current
-Production behavior until the new forward migration is separately approved and applied.
+This section is the canonical commercial policy. G1 applied2026-09-29 after separate Owner approval;
+the v1 table below remains historical policy for existing pinned v1 sessions.
 
 - `essay_cycle/v2`: one `essay_practice_session` is one Learning Cycle. Successful paid evaluations
   each supply one included evaluation: **1 → 0 → 1 → 0 → 1 → 0**, continuing in that session.

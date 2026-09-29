@@ -13,6 +13,44 @@ contains exact check names and source hashes. This is not deployment, AI quality
 
 ## G1 Credit Commercial Core — 2026-09-29
 
+### Production apply — Owner authorized 2026-09-29
+
+**PRODUCTION_DEPLOYED / POST_APPLY_VALIDATED.** Applied only
+`20260929000300_essay_credit_commercial_core.sql` once, through normal linked Supabase
+migration flow. Latest branch HEAD at start was `9af9667`; no checkout/reset to G1.
+Approved migration bytes exactly matched `2ce0840`; migration itself was not edited.
+[Sanitized apply result](../supabase/validation/essay_lab_product/g1_production_result.json),
+[supplemental read-only query](../supabase/validation/essay_lab_product/g1_post_apply.readonly.sql).
+
+Preflight matched linked LegendStudy, existing ledger19, exactly G1 pending, accepted47-object
+schema/security plus Scaffolding definitions and canonical baseline. Dry-run listed only G1,
+no seeds or unrelated role bundle. Apply succeeded; read-only post-apply **151 checks PASS**:
+
+- Ledger20 local/remote MATCH; pending0. KEEP19; one `billing_policy_version text NOT NULL`
+  column/default v2 and existing session immutability; two public RPCs added (14 total).
+- All47 expected catalog hashes match previously validated G1 runtime. Existing37 function
+  signatures/security preserved; unchanged34 definitions exact; eight approved static function
+  bodies exact; new activation helper has fixed deployment-time cutoff.
+- Existing RLS/policies/client table rights, worker/finance boundaries, fixed search_path,
+  function ownership, managed ADMIN-only membership and helper execute restrictions preserved.
+  Manual grant EXECUTE denied to anon/authenticated/worker/service_role; finance only.
+- Product19 tables: all0 before→after; financial accounts/grants/transactions/decisions0.
+  Canonical universities5, exams21, mappings134, resources10556; full fingerprints unchanged.
+  No existing-user backfill, manual grant, test Auth user, student/evaluation data or AI.
+
+The initial supplemental read-only fingerprint query assumed all tables had an `id`; corrected
+its sort to row JSON for composite-key tables and reran read-only validation. No schema correction,
+migration retry, repair/replay or write fixture. The prior isolated PG84/JWT88 and regression
+reports remain behavioral evidence, not a claim of new Production write tests. Static39 PASS.
+
+Signup is now deployed behavior: eligible post-activation Auth identities receive +3 on profile
+provisioning; no existing-user retroactive bonus. IAP/price/Paywall/Store unchanged. Essay production
+worker/AI/student traffic remain NOT_ENABLED. **Ready for separately authorized Essay Live
+Integration: YES; ready for real student traffic: NO.** Next Owner review → PreviewEssayGateway
+replacement with real RPC/worker integration; IAP later, separately authorized.
+
+### Historical isolated implementation checkpoint
+
 **IMPLEMENTED / isolated runtime PASS / NOT APPLIED to Production.** Commercial meaning lives in
 [Product Credit policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29).
 Forward [migration20260929000300](../supabase/migrations/20260929000300_essay_credit_commercial_core.sql)
@@ -114,7 +152,7 @@ The G1 runner refuses non-local targets and an already-applied G1 schema. All id
 synthetic. Result files contain check names, counts and hashes only; do not retain JWT/DSN/email.
 
 No Production query/apply, AI, IAP/Store, Analytics, Ads, Banner, Deep Link or UI work occurred.
-Production remains on the accepted v1 deployment until separate approval. Next: Owner G1 review →
+At this historical implementation checkpoint Production remained on v1. Then-next: Owner G1 review →
 Production apply decision → G2 IAP. Runtime PASS is not payment/real-student traffic authorization.
 
 ## Implementation and caller boundary

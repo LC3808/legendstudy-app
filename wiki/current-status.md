@@ -136,7 +136,7 @@ KEEP19+5 columns+12RPC; RLS/security preserved. Scaffolding1.3 and submit timing
 Production AI/student/worker OFF. Identity PASS. [AI Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-run-a.md):
 2 frozen, quality PARTIAL; Owner review pending; RPC gap disclosed.
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
-isolated PG/JWT PASS; migration29000300 NOT_APPLIED. Owner review→apply decision→G2.
+DEPLOYED; ledger20/pending0, post151 PASS. Owner review→Live Integration; IAP later.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.
 

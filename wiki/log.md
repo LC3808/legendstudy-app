@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-29 — G1 Production apply PASS
+
+- [G1 apply](essay-lab-server-transactions.md#production-apply--owner-authorized-2026-09-29): approved29000300 only, exact2ce0840 bytes; current HEAD retained.
+- Preflight/dry-run/apply/read-only post151 PASS; ledger20/pending0, KEEP19, Product rows0, canonical fingerprints preserved.
+- Signup activation deployed; no test users/manual grants/backfill/AI/IAP. Next Owner review → separate Live Integration approval.
+
 ## 2026-09-29 — Growth G1 Credit core implemented, not deployed
 
 - [Canonical policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): new session v2 repeated paid/included pairs; existing v1 preserved.

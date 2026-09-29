@@ -509,7 +509,7 @@ Home/MY/LAB 후보 질문: “나는 어디쯤일까?”, “나와 비슷한 �
 ## Monetization and incentive boundary
 
 G1 Owner-approved [Essay Credit policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29)
-is implemented with isolated runtime PASS, Production NOT APPLIED. Financial/entitlement facts reuse
+is Production DEPLOYED / post-apply validated (2026-09-29). Financial/entitlement facts reuse
 account/grant/ledger and versioned decisions, separate from Learning/Decision/Admissions Outcome
 and marketing telemetry; [seven preservation answers](essay-lab-server-transactions.md#seven-preservation-questions).
 This approval does not implement the broader monetization/analytics candidates below.
