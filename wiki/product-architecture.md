@@ -170,6 +170,11 @@ planning, applications and outcomes while preserving this product family, shared
 identity, three-layer allocation and access boundaries. Follow its event/time/
 context/provenance review before new schemas; no engine, data collection or B2B
 implementation is authorized. Owner-approved direction, PLANNED architecture.
+The [2026-09-29 history clarification](longitudinal-learning-admissions-data-strategy.md#learning-decision-and-outcome-history--owner-clarification-2026-09-29)
+separates Learning / Decision / Outcome, target from actual application, and timestamped result
+history from current status. B2C/B2B share that model and identity; organization membership adds
+scoped access, never replaces personal history. Consult the seven preservation questions first.
+
 
 ## Analytics platform direction — 2026-09-25
 

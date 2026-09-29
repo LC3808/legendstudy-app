@@ -2984,3 +2984,10 @@ Exactly Sookmyung1 + Hanyang1 frozen; no retry, prior judgment/quality labels ex
 [Review](essay-lab-scaffolding-ai-pilot-1-3-run-a.md): quotes6/6 PASS, core2/3,
 sentences2/4, both quality PARTIAL. Private full report; transport/report-field gap disclosed.
 Production DB/AI/student traffic unchanged. Owner review before any second-attempt run.
+
+## 2026-09-29 — Long-term history strategy clarification
+
+Extended the [existing canonical strategy](longitudinal-learning-admissions-data-strategy.md):
+Learning/Decision/Outcome, target vs application, timestamped result history, progressive value,
+shared B2C/B2B identity/model and derived analytics. AGENTS/seven-question review and domain
+links updated. Wiki-only; no DB/migration/Production/UI/AI/Pilot artifact changes.

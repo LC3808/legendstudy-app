@@ -1,7 +1,7 @@
 # LegendStudy Longitudinal Learning and Admissions Data Strategy
 
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**
-**Owner decision: 2026-09-24 · Architecture: PLANNED · No implementation authorization**
+**Owner decision: 2026-09-24; history-model clarification: 2026-09-29 · Long-term architecture: PLANNED · No new implementation authorization**
 
 ## Latest delivery priority — 2026-09-27
 
@@ -16,8 +16,41 @@ future analytics/B2B. The long-term relationships below remain design context.
 
 [Student Analytics-ready architecture](student-analytics-data-architecture.md) is this strategy’s
 implementation-level Essay companion: shared profiles/university identity, immutable learning
-facts and versioned results, commercial ledger separated. SQL/RLS is review-only; no Production
-apply or new analytics service. [Product v1](essay-lab-product-v1.md) owns the learner experience.
+facts and versioned results, commercial ledger separated. Its historical review has since
+progressed to [Production schema deployment](essay-lab-scaffolding-production-apply.md);
+this does not implement the future Admissions model or enable real student/Production AI traffic.
+[Product v1](essay-lab-product-v1.md) owns the learner experience.
+
+## Learning, decision and outcome history — Owner clarification 2026-09-29
+
+LegendStudy의 장기 핵심 자산은 개별 App 기능보다 **학생의 학습·선택·입시 결과를
+시간축으로 연결한 신뢰할 수 있는 longitudinal data**다. 동일 학생 identity를
+중심으로 다음 세 영역을 연결한다. 아래 기존 four layers는 상세 domain 분류이며
+이 세 history와 경쟁하는 별도 모델이 아니다.
+
+| History | 보존할 사실 | 기존 상세 layer와 관계 |
+|---|---|---|
+| Learning History — 무엇을 했는가 | 내신, 모의고사/수능, 공부 기록, 논술 답안·첨삭·재작성, 당시 평가 항목 결과, 보완점의 발견·개선·해결·재발, 기타 학습 활동 | Learning Behavior + Academic Performance 및 Essay history |
+| Decision History — 무엇을 선택했는가 | 관심·준비·목표 대학, 실제 지원 대학·전형·모집단위·지원 시점, 실제 응시 여부 | 목표/계획과 Application을 분리; 응시는 지원에 연결된 참여 사실 |
+| Outcome History — 무엇이 발생했는가 | 최초합격·불합격·예비, 차수별 충원 상태·추가합격·최종 결과, 필요 시 등록·등록포기 | Admission Outcomes; 결과 발표 시점별 기록 |
+
+아래 과거 Admission Outcomes 후보의 ‘응시’는 입시 journey 맥락이다. 이번 구분에서는
+응시 여부를 합불 결과로 간주하지 않고 Decision/참여 사실로 연결한다.
+
+학생 기본정보 → 내신 → 모의고사/수능 → 학습 과정 → 논술 준비 → 목표 대학 →
+실제 지원 → 실제 응시 → 최초 결과 → 충원 → 최종 결과가 데이터 기반 입시 컨설팅과
+Admissions Analytics의 근거가 된다. 이는 한 번에 모두 입력받거나 구현하라는 지시가 아니다.
+
+**현재 상태인가, 미래 분석에 필요한 historical fact인가를 먼저 판단한다.**
+예를 들어 9월 목표가 성균관대이고 12월 실제 지원이 한양대라면 두 사실을 각각 남긴다.
+목표 값을 한양대로 덮어써 과거 선택을 없애거나 목표에서 실제 지원을 추론하지 않는다.
+현재 상태는 history에서 만든 projection일 수 있으나 원본 이력을 대체하지 않는다.
+과거 목표 변경을 기록하지 않았던 기간은 복원 불가로 표시하며 추정 backfill하지 않는다.
+
+성장도·강점·약점·대학별 준비도·지원 전략·유사 학생 비교는 원본 fact가 아니라
+가능한 한 원본 history에서 재계산하는 derived result다. 당시 AI 평가 자체는
+versioned judgment로 보존하되 학생의 영구적 특성으로 확정하지 않는다.
+AI가 history 없이 그럴듯한 성장·입시 서사를 생성하지 않는다.
 
 ## Authority and current scope
 
@@ -125,16 +158,17 @@ versioned exam-subject/채점 키 계약을 재사용하며 UTC 날짜로 임의
 - 과거 이력이 이미 없는 경우 생성 시점·결과를 지어내는 backfill은 하지 않는다.
   삭제·정정 때문에 재현 범위가 달라지면 그 한계를 표시한다.
 
-새 schema 기능 전 아래 질문에 답한다. 중요한 손실이 있으면 구현 전 재검토한다.
+내신 LAB, 모의고사·수능 LAB, 논술 LAB, MY, 지원 대학 관리, Admissions/입시 결과,
+컨설팅, B2B/School Analytics, 관리자, 추천/예측을 설계·개발할 때 이 전략을 먼저 읽는다.
+새 기능마다 다음 일곱 질문을 설계 검토에 남기며, 중요한 이력 손실은 구현 전에 해소한다.
 
-1. 과거 값/정정 관계가 보존되는가?
-2. occurred_at/event time을 알 수 있는가?
-3. 당시 academic context가 남는가?
-4. source/provenance를 추적할 수 있는가?
-5. self-reported와 verified의 범위를 구분하는가?
-6. 사용자의 longitudinal timeline에 연결 가능한가?
-7. 삭제·정정·Privacy 정책을 적용할 수 있는가?
-8. 집단 분석에서 직접 식별자를 분리할 수 있는가?
+1. 어떤 historical fact가 발생하는가? 현재 상태와 발생·기록·정정 시점을 구분했는가?
+2. 나중에 다른 immutable 원본으로 정확히 복원 가능한가? 출처·당시 맥락이 남는가?
+3. UPDATE로 잃는 정보가 있는가? 정정·삭제와 단순 현재 projection 갱신을 구분했는가?
+4. 동일 학생 identity에 연결되는가? 소속/연도 변경이 과거 사실의 주체를 바꾸지 않는가?
+5. Learning / Decision / Outcome 중 어디에 속하는가? 목표·지원·결과를 혼동하지 않는가?
+6. 개인정보/권한/동의/retention 범위는 무엇인가? 자기보고·검증 범위와 집계 식별 위험은?
+7. derived data를 원본 사실처럼 저장하지 않는가? 재계산 근거·version·불확실성을 남기는가?
 
 정식 출시 또는 Score/Application 본격 개발 전 **Longitudinal Data Architecture
 Review**를 수행할 계획을 둔다: Study events, score history, academic context,
@@ -254,15 +288,31 @@ Data completion(예:60%) 표시는 후속 UX 후보다. 강제입력/dark patter
 
 ## Application and outcome lifecycle
 
-지원 대학 기록을 먼저 만들고 일정/발표 시점에 간단히 업데이트할 수 있는 흐름을
-계획한다. Application은 boolean 하나가 아니라 track별 lifecycle 후보이며,
-관심/계획/지원/응시/발표 대기/단계 결과/최종 결과/등록을 구분한다.
+**Target University(관심·준비·목표)**와 **Application(실제 원서 제출 사실)**을
+별도 entity로 설계한다. 실제 지원 여부는 별도 입력/관측 근거가 필요하며 target에서
+추론하지 않는다. 학생·대학 identity는 공유하지만 두 entity의 목적과 lifecycle은 다르다.
 
-후보 상태: INTERESTED, PLANNED, APPLIED, ATTENDED, STAGE1_PASS, STAGE1_FAIL,
-FINAL_PENDING, FINAL_PASS, WAITLIST, ADDITIONAL_PASS, FINAL_FAIL, ENROLLED,
-DECLINED. **확정 enum이 아니며 모든 전형에 강제하지 않는다.** 최종 합격도
-최초합과 추가합을 구별할 수 있어야 한다. 불합격→추가합 같은 이후 변화나 잘못
-입력한 결과의 정정은 이력/시점/출처를 남기고 current projection을 갱신하는 방향이다.
+Application 결과를 단일 result column UPDATE로 계속 덮어쓰는 구조를 장기 canonical
+model로 사용하지 않는다. **Application → Application Result History**를 향후 Admissions
+설계에서 검토한다. 예: 최초 발표 예비12번 → 1차 충원 예비5번 → 2차 충원 추가합격은
+서로 다른 시점의 사실이다. 차수·발표 시점·출처를 남기고 최종/현재 결과는 별도로 조회한다.
+잘못 입력한 사실의 정정과 실제 충원 결과 변화도 구분한다.
+
+Journey 후보: 관심/계획 → 실제 지원 → 응시 여부 → 발표 대기 → 단계/최초 결과 →
+충원 → 최종 결과 → 필요 시 등록/등록포기. 이는 서로 다른 entity에 걸친 UX 단계이며
+한 table의 공통 status enum이 아니다. 전형별 존재하는 단계만 사용하고 미입력은 UNKNOWN으로 둔다.
+최초합과 추가합은 최종 합격 여부가 같아도 구분하여 보존한다.
+
+| 자연스러운 입력 시점 | 필요한 사실 | 학생에게 돌아오는 가치 |
+|---|---|---|
+| 원서접수 종료 | 실제 지원 대학·전형·모집단위·지원 시점 | 나의 수시 지원 현황, 대학별 준비 현황 |
+| 논술 시험 이후 | 해당 지원의 실제 응시 여부 | 논술 준비/응시 기록과 일정·D-Day 정리 |
+| 최초 발표 이후 | 최초합격·예비·불합격 및 발표 시점 | 나의 입시 기록과 다음 일정 확인 |
+| 충원 기간 | 차수별 예비/추가합격·최종 결과, 필요 시 등록/포기 | 결과 변화와 후속 행동 정리 |
+
+데이터 수집만을 위한 입력을 요구하지 않는다. 학습 변화·준비 현황 등 실제 제공하는
+가치와 함께 시점별로 최소 수집한다. 표의 UX는 미래 설계이며 현재 구현된 혜택으로
+광고하거나 모든 데이터를 첫 온보딩에서 한 번에 요구하지 않는다.
 
 | Domain | 후보 journey / context |
 |---|---|
@@ -316,6 +366,10 @@ outcome이 공식 입시 규칙을 대체하지 않는다. 공개 자료만으�
 새 outcome dataset은 미래 evidence 후보일 뿐 즉시 확률/등급 출시의 근거가 아니다.
 [기존 Admissions evidence gate](roadmap-academic-analytics.md#research-boundary--2026-09-24)를
 충족하고 별도 Owner 승인을 받아야 한다.
+
+기본 발전 순서는 **FACT → STATISTICS → COMPARISON → EXPLANATION → 충분히 검증된 경우에만 PREDICTION**이다.
+근거가 부족하면 UNKNOWN을 유지한다. 표본 편향, 자기보고 오류, 연도별 전형 변화,
+모집인원, 학교/교과 차이, 평가 기준 변화 때문에 데이터 존재 자체가 예측 근거는 아니다.
 
 검토: data quality, outcome completeness, selection/missing outcome bias,
 calibration, coverage, hold-out/validation set, year-to-year stability,
@@ -393,6 +447,16 @@ analytics dataset(pseudonymous subject, minimized attributes, derived features)�
   노출하지 않는 방향이며 Notification/Privacy 설계에서 구체화한다.
 
 ## External sharing and B2B boundary
+
+개인 학생과 학교/B2B 학생은 **동일 user identity와 동일 Learning/Admissions model**을
+사용한다. 향후 organizations, organization_memberships, B2B program/contract 등으로
+소속과 제공 권리를 별도로 연결한다. 이는 후보 entity이며 이번 schema 추가가 아니다.
+개인 History를 학교 계정으로 교체·분리하지 않으며 소속 변경도 기존 개인 이력을 덮어쓰지 않는다.
+동일 모델을 쓴다는 사실은 학교의 열람 권한을 자동 부여하지 않는다.
+
+권한·동의·Privacy 경계 안에서 학교별 가입/활성 학생 수, 첨삭 이용, 재작성률,
+학습 진행, 집계된 보완 영역 등을 제공할 수 있다. **개별 답안 공개 권한과 익명/집계
+Analytics 권한은 별개**다. cohort 크기·재식별 위험과 지표 분모/관측 기간은 각각 검토한다.
 
 **Raw individual student data sale is NOT the default business model.** 학교·학원·
 대학·기업·연구기관에 원본 개인 기록을 판매/제공하는 것을 승인하지 않는다.

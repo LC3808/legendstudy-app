@@ -15,6 +15,18 @@ learner behavior. The [SQL review sources](../supabase/review/essay_lab_product/
 separate from `supabase/migrations`; their promoted copies have since been applied.
 Real student/AI/payment remain NOT_ENABLED; Flutter fixture preview exists.
 
+## Long-term history boundary — 2026-09-29
+
+[Canonical three-history strategy](longitudinal-learning-admissions-data-strategy.md#learning-decision-and-outcome-history--owner-clarification-2026-09-29)
+connects this Essay Learning History to future Decision and Outcome History through the same
+student identity. Existing target relations describe interest/preparation, not proof of actual
+application. Future Application and Application Result History remain separate entities;
+no target UPDATE should stand in for actual application or erase past choices.
+Current mutable target storage does not claim to retain every preference change. Before that
+future feature collects history, review capture timing; missing past changes cannot be recreated.
+No KEEP19/schema/SQL/Pilot change follows from this strategy record. School membership extends
+access/entitlement, not the student's identity or learning/admissions model.
+
 ## Scaffolding extension review — 2026-09-29
 
 Keep19 and existing owner/history/FKs. Add only a proposed nullable structured observation envelope

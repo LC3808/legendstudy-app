@@ -20,7 +20,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 DATABASE / Study / Score / Mock / MY / LAB / Admissions / Essay / Application /
 Outcome / Onboarding / Marketing / Achievement / Notifications / Analytics /
 Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽고 domain
-문서를 읽는다. 이 전략은 구현 승인이나 현재 기능 목록이 아니다.
+문서를 읽는다. [Learning / Decision / Outcome 구분과 지원·결과 이력](longitudinal-learning-admissions-data-strategy.md#learning-decision-and-outcome-history--owner-clarification-2026-09-29),
+설계 전 일곱 preservation 질문을 확인한다. 이 전략은 구현 승인이나 현재 기능 목록이 아니다.
 
 | Task / aliases | Required canonical reading |
 |---|---|

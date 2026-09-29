@@ -118,12 +118,9 @@ model first after separate instruction; then internal-grade, mock-score, admissi
 
 ## Longitudinal data strategy
 
-[Canonical strategy](longitudinal-learning-admissions-data-strategy.md): HIGH /
-CANONICAL PRODUCT STRATEGY; PLANNED ARCHITECTURE. APPLICATION_OUTCOME_DATA: PLANNED.
-COHORT_ANALYTICS: FUTURE — DATA/PRIVACY/STATISTICAL GATED.
-PREDICTIVE_ADMISSIONS: FUTURE — MODEL/EVIDENCE GATED. Strategy/handoff documentation
-complete; no new code, data collection, schema or engine. Latest automated App
-validation above is from the subsequent global surface UI task; the strategy itself adds no implementation.
+[Canonical strategy](longitudinal-learning-admissions-data-strategy.md): Owner-confirmed2026-09-29.
+Learning / Decision / Outcome history, target/application separation and result history adopted.
+Architecture PLANNED; cohort/prediction evidence/privacy gates remain. Documentation only.
 
 ## Current work and next actions
 

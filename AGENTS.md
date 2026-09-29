@@ -31,6 +31,11 @@ Use this restore protocol at START, reference decisions DURING implementation,
 and at END link new Owner decisions to their existing canonical decisions.
 Keep current-status concise/current, log chronological, feature docs detailed.
 Validate links and task routing as part of handoff, not merely "Wiki updated".
+For Student/LAB/MY/Admissions/application/outcome/consulting/B2B/School Analytics,
+admin or recommendation/prediction design, first read
+`wiki/longitudinal-learning-admissions-data-strategy.md` and answer its seven
+preservation-review questions before choosing storage or UPDATE semantics.
+This is a design prerequisite, not authorization for new collection or deployment.
 Run `python3 tool/check_wiki_handoff.py`; keep current-status under its 12 KB
 restore budget, preserving historical evidence before moving it.
 

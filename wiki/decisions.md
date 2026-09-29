@@ -576,3 +576,14 @@ core tasks and0–5 grounded sentence observations; review previous tasks before
 Preserve student stance, use smaller guidance when unresolved, and derive progression from history.
 Never conceal necessary feedback to drive payment. Own-answer quotes and official evidence have
 distinct provenance. v1.2/Pilots stay frozen;1.3-review.1 and minimal persistence are review only.
+
+## 2026-09-29 — Learning, Decision and Outcome History
+
+Owner reaffirms the existing [canonical long-term data strategy](longitudinal-learning-admissions-data-strategy.md#learning-decision-and-outcome-history--owner-clarification-2026-09-29).
+Preserve meaningful historical facts under one student identity; derive current views/analytics.
+Target University and actual Application are separate. Application Result History preserves
+initial/waitlist/supplementary/final outcomes instead of overwriting one result. Collect facts
+progressively with immediate student value. B2C/B2B share models; membership and individual vs
+aggregate permissions remain separate. Evidence-poor predictions stay UNKNOWN. The strategy's
+seven review questions apply before future Student/LAB/Admissions/B2B/admin design.
+Documentation only: no schema, data collection, UI, AI run or Production authorization.
