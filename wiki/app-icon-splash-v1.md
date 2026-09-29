@@ -1,11 +1,50 @@
-# App Icon & Splash — Visual Design Review v1 (Claude UI/UX Lead)
+# App Icon & Splash — v1 (Claude UI/UX Lead)
 
-2026-09-29 · **DESIGN REVIEW ONLY.** No production icon/splash/version change; no
-Store submission. Uses the existing official brand assets — no new logo, symbol,
-or color. Owner approves the final choice, then a separate task applies it.
+2026-09-29 · **IMPLEMENTED (Owner-approved) — pending device screenshot QA.** No
+new logo/symbol/color; no app version/build change; no Store submission. The
+design-review history and options are preserved below the implementation record.
 
 Visual concept (open from the repo or over a local server so the sibling preview
 images resolve): [brand-icon-splash-review/icon-splash-concept.html](brand-icon-splash-review/icon-splash-concept.html)
+
+---
+
+## IMPLEMENTED — 2026-09-29
+
+Owner approved: icon **75%**, product name **레전드스터디⁺** (superscript +,
+single near-black `#12161F`, symbol keeps orange), tagline **"나의 학습 기록이
+쌓일수록, 나의 가능성은 선명해집니다."**, minimal native splash + Flutter
+cold-start brand frame.
+
+| Area | Result |
+|---|---|
+| ICON_SCALE | **75%** via `tool/export_launcher_icons.py` (`SCALE=0.75`), composite on white 1024 before export |
+| IOS_APPICON | Regenerated 15 sizes + 1024 (padded); Contents.json 19 entries, all present |
+| ANDROID_LEGACY_ICON | Regenerated mipmap-mdpi…xxxhdpi (75%) |
+| ANDROID_ADAPTIVE_ICON | Foreground symbol 45dp/108dp; safe radius **23.89dp < 33dp** |
+| IOS_NATIVE_SPLASH | `LaunchScreen.storyboard` white + centred symbol `LaunchImage` (180/360/540) |
+| ANDROID_NATIVE_SPLASH | pre-12 `launch_background.xml` white + centred `@mipmap/ic_launcher`; API31+ `values-v31` + `values-night-v31` white `windowSplashScreenBackground` + `windowSplashScreenAnimatedIcon` |
+| FLUTTER_BRAND_FRAME | `lib/features/brand/brand_frame.dart` — symbol + 레전드스터디⁺ + tagline; wraps app in `main.dart` above MaterialApp |
+| Brand-frame trigger | **COLD_START_ONLY** (static once-per-process; no resume re-show) |
+| Brand-frame timing | visible `brandFrameTarget(1.5s) − elapsed`; **skip if init ≥ ~1.5s** (no extra delay); ~150ms anti-flash floor |
+| SIZE_JUMP / DOUBLE_SPLASH / WHITE_FLASH | designed out — native symbol size/position matched to the frame (iOS 180pt = frame 180px); frame bg white = native white, shown on the first Flutter frame → no gap. **Physical-device confirmation pending.** |
+
+**Bundled asset:** `assets/brand/generated/legendstudy_symbol.png` (transparent
+75% symbol, 512px) added to `pubspec.yaml`.
+
+**Validation:** `flutter analyze` PASS; export-script integrity check PASS (21
+launcher PNGs + symbol + LaunchImage, deterministic, source hash intact);
+`test/brand_frame_test.dart` PASS (timing table, cold-start-once, dismissal);
+iOS `plutil`/storyboard/AppIcon lint PASS; Android splash/adaptive XML lint PASS.
+Full suite: 891 passed, 1 skipped, 5 failing — **all pre-existing / other-agent,
+0 introduced by this task** (day5_shell content-badge + materials_delivery ×2 are
+long-standing; the 2 `day6_repositories` projection failures come from Codex's
+concurrent commit `2ce0840`, not the icon/splash change).
+
+**Not done (needs a build + booted device/simulator):** real iOS Home/cold-launch
+and Android launcher/12+ cold-launch **screenshots** and the physical no-size-jump
+/ no-double-splash / no-white-flash confirmation (Owner step 7). Everything else is
+in place; this is the recommended next verification step. **No Store submission.**
 
 ---
 

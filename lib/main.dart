@@ -6,8 +6,12 @@ import 'app/legendstudy_app.dart';
 import 'core/config/app_config.dart';
 import 'core/supabase/supabase_providers.dart';
 import 'features/auth/identity_diagnostic.dart';
+import 'features/brand/brand_frame.dart';
 
 Future<void> main() async {
+  // Captured before any initialization so the cold-start brand frame runs in
+  // parallel with init (fills up to the target, adds no extra delay after).
+  final processStart = DateTime.now();
   WidgetsFlutterBinding.ensureInitialized();
   final config = AppConfig.fromEnvironment();
   SupabaseClient? client;
@@ -35,7 +39,12 @@ Future<void> main() async {
         supabaseClientProvider.overrideWithValue(client),
         backendIssueProvider.overrideWithValue(issue),
       ],
-      child: const LegendStudyApp(),
+      // BrandGate wraps the app above MaterialApp (cold-start only). Widget
+      // tests mount LegendStudyApp directly and are unaffected.
+      child: BrandGate(
+        processStart: processStart,
+        child: const LegendStudyApp(),
+      ),
     ),
   );
 }

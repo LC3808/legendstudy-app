@@ -1,6 +1,38 @@
 # Official LegendStudy+ brand assets
 
 
+## Launcher 75% scale + cold-start splash — Owner approved 2026-09-29
+
+- **Source asset:** `assets/brand/source/legendstudy_app_iocon_1024.png` unchanged
+  (SHA pinned; the script asserts the source hash and never alters it).
+- **Export rule (75%):** `tool/export_launcher_icons.py` (`SCALE = 0.75`)
+  composites the source at 75% onto a white 1024 canvas before every export, so
+  the rotated document keeps clear margin off the iOS squircle / Android circle
+  masks. No recolor, redraw, crop or new symbol. Run
+  `…/python -B tool/export_launcher_icons.py` to check, `--write` to re-export.
+  Outputs: iOS AppIcon (15 sizes + 1024, padded), Android legacy mipmaps and the
+  adaptive foreground (symbol at 45dp on the 108dp canvas; safe radius 23.89dp <
+  33dp), plus the transparent runtime symbol
+  `assets/brand/generated/legendstudy_symbol.png` and the iOS `LaunchImage`
+  (180/360/540). The App-Store 1024 is now the padded composite (no longer pixel-
+  equal to the raw source — an intended, approved change).
+- **Splash rule:** native launch stays minimal — **warm-white/white background +
+  centred orange symbol only** (iOS `LaunchScreen.storyboard` centres the symbol
+  `LaunchImage`; Android pre-12 `launch_background.xml` centres `@mipmap/
+  ic_launcher`; Android 12+ `values-v31`/`values-night-v31` set
+  `windowSplashScreenBackground` white + `windowSplashScreenAnimatedIcon`).
+  Product name and tagline are **not** in the native splash — they are drawn by
+  the Flutter cold-start brand frame (`lib/features/brand/brand_frame.dart`):
+  symbol + `레전드스터디⁺` (superscript +, single near-black `#12161F`) + tagline
+  **"나의 학습 기록이 쌓일수록, 나의 가능성은 선명해집니다."**. The frame is
+  cold-start only, runs in parallel with init (visible up to ~1.5s from process
+  start, no extra delay if init already exceeded it, no re-show on resume), and
+  is aligned to the native symbol to avoid size-jump / double-splash / white
+  flash. See [app-icon-splash-v1.md](../../wiki/app-icon-splash-v1.md).
+- Display name, package `com.legendstudy.app`, version/build, deep links and
+  OAuth remain unchanged.
+
+
 ## Canonical launcher source — Owner supplied 2026-09-20
 
 `assets/brand/source/legendstudy_app_iocon_1024.png` is the sole approved launcher

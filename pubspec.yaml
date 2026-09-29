@@ -34,5 +34,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/brand/generated/legendstudy_wordmark_header.png
+    - assets/brand/generated/legendstudy_symbol.png
     - assets/auth/google.png
     - assets/auth/kakao.png
