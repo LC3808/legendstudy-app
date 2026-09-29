@@ -17,7 +17,7 @@ class LegendStudyLabEntry extends StatelessWidget {
       children: [
         FilledButton(
           onPressed: () => context.push('/lab/essay'),
-          child: const Text('논술 화면 미리보기'),
+          child: const Text('논술 학습'),
         ),
         ExternalLinkButton(
           uri: legendStudyLabEntryUri(legendStudyLabUrl),

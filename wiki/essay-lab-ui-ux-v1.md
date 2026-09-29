@@ -183,3 +183,110 @@ Desktop 2×2, Mobile/큰 글자 1열. 옅은 의미 tint·icon·heading, 검정 
 평가 항목별 진단과 보완할 점 사이에 [문장 다듬기](essay-lab-sentence-review.md)를 추가.
 항목 수/접기 UI, 정확한 자기 제출문 인용 검증. 미제공과0개 구분.
 기존 preview는 임의 지적을 생성하지 않는다. 구조화 출력/persistence는 별도 리뷰 제안.
+
+## Live integration L1 — 2026-09-29
+
+**IMPLEMENTED / ISOLATED CLIENT + JWT VALIDATED; Production student/AI traffic OFF.**
+This supersedes the earlier preview-only runtime status, not the frozen visual contract.
+[Live gateway](../lib/features/essay/essay_live_gateway.dart),
+[controller](../lib/features/essay/essay_live_controller.dart),
+[live routes](../lib/features/essay/essay_live_pages.dart),
+[sanitized result](../supabase/validation/essay_lab_product/l1_client_result.json).
+Owner approved resume after the [status RPC](essay-lab-server-transactions.md#owner-status-projection)
+was deployed. G1/Scaffolding/timing/security contracts are reused; no migration or RPC modification.
+
+### Runtime boundary and identity
+
+App `/lab/essay` uses live published question→exam→university records and the existing native
+Workspace/result UI. Preview gateway/routes remain explicitly available for deterministic tests
+and design QA; the App router never installs them or falls back to synthetic questions/results.
+Empty Production question inventory shows preparation, not fake catalog content. Current schema
+stores source references, not public extracted question/passage bodies; live reading links the
+verified exam official source. Detailed extraction/Viewer delivery is not invented in the client.
+Guests can inspect public metadata/original links; private writing/history needs existing Auth.
+
+`ESSAY_LIVE_WRITES_ENABLED=false` and `ESSAY_EVALUATION_REQUESTS_ENABLED=false` by default.
+These are rollout switches, not RLS/security controls; local tests explicitly enable them.
+No real student write, AI provider call or Production worker credential was used. No IAP/Paywall,
+Analytics/Ads, new dependency, table, column, migration, server function or Production mutation.
+
+`essay_open_session` resumes an explicit owned session or the latest owned question cycle.
+If no row exists, the default first-cycle UUID derives from owner/question so an ambiguous first
+response and process restart cannot silently create a second cycle. Later explicit independent
+new-cycle UX is not added here. Auth UID is SDK-derived, checked before/after each operation;
+page auth changes revoke in-flight gateways and dispose all private controller state. Logging out,
+switching accounts and returning to the same identity never revive that page's prior gateway.
+
+### Submission and server decisions
+
+- `essay_save_draft`: expected revision CAS, no silent stale overwrite. Network/stale errors retain
+  local text; compare/reload is explicit. Leaving with dirty text requires explicit discard.
+- `essay_submit_attempt`: stable session/revision/body-hash UUID and server body fingerprint;
+  duplicate tap/network retry reuses the immutable submission. Server assigns attempt number.
+  Device/mode transmitted; unknown active writing time stays NULL, never inferred from UI timer.
+- `essay_request_evaluation`: explicit `essay-v1.3`, stable logical key, no balance precheck or
+  attempt-parity billing. Paid/included comes from server. PT402 means no right for this request.
+  Unknown transport outcome retries the same logical request; confirmed failed requests can use a
+  new request key without overwriting the failed record. Changing attempt under an active request conflicts.
+- `essay_evaluation_status`: periodic read, only server `processing/reconciling/completed/failed`.
+  Network read failure offers status retry; no elapsed-time failure/release inference. Reconciling
+  never asserts charged/free. Failed no-charge text requires authoritative `no_credit_consumed`.
+  Credit reserved/included/settled/released/pending remain distinct from account balance.
+
+### Results, scaffolding, revision and history
+
+Completed status is checked before mapping owner-readable result facts; invalidated results,
+answer-hash mismatch, unknown criterion version or fabricated sentence spans fail closed.
+Map summary/strengths/criterion integer levels and nullable official numeric weights separately,
+progress explanations/actions/core focus/checklist, uncertainty, official evidence references,
+and already-completed optional AI examples. No generation is requested in L1; no empty/example
+fallback. Official citations and local sentence quotes are separate, with no fabricated evidence IDs.
+
+v1.2 NULL observation means not supplied. v1.3 zero roots / empty sentences means supported zero.
+Sentence categories/priorities, Unicode code-point exact spans (no normalization), <=5 observations
+and <=3 core tasks are preserved. Explicit progress links preserve open/improved/resolved/recurred;
+`not_assessable` is not interpreted as unresolved/resolved and uncertainty remains visible.
+
+Comparison uses `input_snapshot.scaffolding_context.selected_previous_evaluation_id` and explicit
+progress links, never a moving latest lookup. Criterion/evidence versions and model/regime must
+match; otherwise comparison is withheld. Changes derive from levels and linked observations, not
+new AI narrative. Legacy results without a pinned comparison retain detail but do not invent growth.
+Manual rewrite retains session, creates a new submitted attempt and requests server-decided credit.
+History displays actual submissions, their evaluations and progress chronologically; no snapshot table.
+
+### Verification and remaining gates
+
+[Client tests](../test/essay_live_gateway_test.dart), existing Workspace/sentence tests cover CAS,
+idempotency, payload conflict, owner/isolation/logout, disabled rollout, paid/included/PT402,
+status/release, v1.2/1.3/Unicode quote mapping, pinned comparison, 360px/200% and unsaved text.
+[Actual local Dart test](../test/essay_live_local_test.dart) uses the real Supabase client with
+Auth-issued user JWTs and public PostgREST RPCs: open/resume, CAS/stale, duplicate submit,
+paid→included, timeout/unknown, synthetic lease retry/stale rejection, completion, failure/release,
+retry, legacy result, same-session history, other-user denial, erasure and ledger preservation.
+Synthetic worker finalization is test-only, never an actual AI call.
+
+Reproduce only in the guarded disposable Supabase environment:
+existing `submit_timing_runtime.py --supabase` → `status_projection_runtime.py --supabase` →
+[private fixture preparer](../tool/essay_lab/prepare_l1_client_fixture.py) →
+`flutterw test test/essay_live_local_test.dart` with private `ESSAY_L1_CLIENT_FIXTURE` and
+`ESSAY_L1_PYTHON` plus the existing disposable environment variables. Credentials remain in
+chmod600 `/private/tmp` files. Numeric loopback and test-container identity are mandatory.
+The local-only clock shift checks lease expiry deterministically and resets afterward.
+Default CI skips this opt-in external test. Never point it at Production.
+
+Android debug and iOS simulator debug builds PASS; real device/store acceptance is not claimed.
+Full Flutter run: 925 PASS / 2 skips / 5 failures; the five are the same previously documented
+Materials/search/badge baseline failures (see earlier UI validation), not Essay failures.
+Focused final counts and analyze are in the sanitized result. Build tool warnings about the
+existing Kotlin/Android SDK/CocoaPods setup remain separate maintenance, not changed here.
+
+Seven preservation answers: (1) submitted attempts/evaluations/progress are existing facts;
+(2) reconstruct UI from owner domain rows and pinned evidence; (3) only draft is mutable;
+(4) same Auth identity with revoked stale page contexts; (5) learning and financial decisions
+stay separate from Admissions Outcome; (6) RLS/erasure/private response/retention unchanged,
+no answer telemetry; (7) no derived growth stored or invented.
+
+**READY_FOR_WORKER_PROVIDER_INTEGRATION=YES**, subject to Owner review.
+IAP live connection is NOT ready yet: worker/reviewer/evidence assembly, quality/privacy/retention
+and full learning-loop E2E remain before purchase integration. Production published question/criterion
+readiness and real-device acceptance remain rollout gates. Real student traffic stays NO.

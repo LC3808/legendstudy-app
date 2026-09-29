@@ -66,7 +66,8 @@ class EssayDimension {
     this.officialWeight,
   });
   final String key, label, explanation;
-  final int? level, previousLevel, officialWeight;
+  final int? level, previousLevel;
+  final num? officialWeight;
 }
 
 @immutable
@@ -82,8 +83,10 @@ class EssayEvaluation {
     required this.changes,
     this.includedRevision = false,
     this.comparable = true,
+    this.uncertainty,
   });
   final String summary, example;
+  final String? uncertainty;
   final List<String> strengths, improvements, priorities, checklist;
   final List<EssayDimension> dimensions;
   final Map<String, List<String>> changes;
@@ -100,7 +103,7 @@ class EssayDraft {
 
 class EssayConflict implements Exception {}
 
-/// Client operations only. Phase1 has no Supabase implementation or credentials.
+/// Client operations only. Implementations separate live persistence from preview fixtures.
 /// Maps to save_draft / submit_attempt / request_evaluation / request_rewrite.
 abstract interface class EssayGateway {
   Future<EssayDraft> saveDraft(String body, int expectedRevision);

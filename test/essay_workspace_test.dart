@@ -65,7 +65,7 @@ void main() {
         GoRoute(
           path: '/lab',
           builder: (_, _) => const Scaffold(body: LabPage()),
-          routes: essayRoutes,
+          routes: essayPreviewRoutes,
         ),
       ],
     );
@@ -75,7 +75,7 @@ void main() {
         child: MaterialApp.router(theme: AppTheme.light, routerConfig: router),
       ),
     );
-    await tapVisible(tester, find.text('논술 화면 미리보기'));
+    await tapVisible(tester, find.text('논술 학습'));
     expect(find.byType(EssayHomePage), findsOneWidget);
     await tapVisible(tester, find.text('문항 1 · 공공 공간과 선택'));
     expect(find.byType(EssayWorkspacePage), findsOneWidget);
@@ -292,7 +292,7 @@ void main() {
     expect(c.stage, EssayStage.failed);
     await preview.capture(tester, 'essay-failure-mobile');
     gateway.failEvaluation = false;
-    await tester.tap(find.text('다시 시도'));
+    await tester.tap(find.text('다시 확인'));
     await tester.pumpAndSettle();
     expect(c.stage, EssayStage.result);
     expect(gateway.submitted.length, 1);

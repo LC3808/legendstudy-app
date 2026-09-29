@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-29 — Essay L1 live client integration
+
+- [L1 contract and validation](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29): Supabase gateway, authoritative status/credit, CAS/immutable submissions, result/Scaffolding/history and Auth isolation.
+- Real local Dart JWT/PostgREST and existing G1/Scaffolding regressions PASS; Android/iOS simulator builds PASS.
+- Production writes/AI OFF, no DB/RPC/migration changes; Owner/Claude files preserved. Next Owner review → worker/provider.
+
 ## 2026-09-29 — Owner 2026–2027 roadmap and monetization
 
 - [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29) integrates Store launch/stabilization, Mock/CSAT BETA and Subscription direction.

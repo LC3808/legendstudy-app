@@ -1,4 +1,6 @@
 import 'essay_sentence_review.dart';
+import 'essay_live_pages.dart';
+import 'essay_live_controller.dart';
 
 import 'dart:async';
 
@@ -13,6 +15,21 @@ import 'essay_preview.dart';
 import 'essay_controller.dart';
 
 List<RouteBase> get essayRoutes => [
+  GoRoute(
+    path: 'essay',
+    builder: (_, _) => const EssayLiveHome(),
+    routes: [
+      GoRoute(
+        path: 'write/:question',
+        builder: (_, state) =>
+            EssayLiveWorkspace(questionId: state.pathParameters['question']!),
+      ),
+    ],
+  ),
+];
+
+/// Explicit synthetic routes for tests/design QA only; never installed by app router.
+List<RouteBase> get essayPreviewRoutes => [
   GoRoute(
     path: 'essay',
     builder: (_, _) => const EssayHomePage(),
@@ -149,7 +166,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
   final passageKeys = <GlobalKey>[];
   Timer? ticker;
   DateTime started = DateTime.now();
-  bool problem = false, timed = false;
+  bool problem = false, timed = false, allowLeave = false;
   @override
   void initState() {
     super.initState();
@@ -186,102 +203,144 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
     return '${timed ? '남은' : '경과'} ${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}';
   }
 
+  EssayLiveController? get live =>
+      c is EssayLiveController ? c as EssayLiveController : null;
+
   bool get writing =>
       c.stage == EssayStage.writing || c.stage == EssayStage.revising;
   @override
   Widget build(BuildContext context) {
     final q = widget.question;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(c.stage == EssayStage.revising ? '다시 써보기' : '논술 첨삭'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('${q.university} · ${q.exam}', style: AppTokens.caption),
-                const SizedBox(height: 4),
-                Text(q.title, style: AppTokens.cardTitle),
-                const SizedBox(height: 8),
-                const Text(
-                  '미리보기 · 이 화면을 나가면 작성 내용이 사라져요.',
-                  style: AppTokens.caption,
-                ),
-                if (writing)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: Wrap(
-                      spacing: 16,
-                      runSpacing: 8,
-                      children: [
-                        Text(
-                          '${c.body.runes.length}자 · 공백 포함',
-                          style: AppTokens.cardTitle,
-                        ),
-                        Semantics(
-                          label: '작성 시간',
-                          child: Text(timerText, style: AppTokens.secondary),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
+    return PopScope<void>(
+      canPop: live == null || !c.dirty || allowLeave,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        final discard = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('아직 저장하지 못한 내용이 있어요.'),
+            content: const Text('작성 화면에 남아 내용을 복사하거나 저장을 다시 시도할 수 있어요.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('작성 계속'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('저장하지 않고 나가기'),
+              ),
+            ],
           ),
-          const Divider(height: 1, color: AppTokens.textPrimary),
-          Expanded(
-            child: writing
-                ? LayoutBuilder(
-                    builder: (context, box) {
-                      if (box.maxWidth >= 900 &&
-                          MediaQuery.textScalerOf(context).scale(1) < 1.8) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(flex: 42, child: _questionPane()),
-                            const VerticalDivider(
-                              width: 1,
-                              color: AppTokens.textPrimary,
-                            ),
-                            Expanded(flex: 58, child: _answerPane()),
-                          ],
-                        );
-                      }
-                      return Column(
+        );
+        if (discard == true && mounted) {
+          setState(() => allowLeave = true);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) Navigator.of(context).pop();
+          });
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(c.stage == EssayStage.revising ? '다시 써보기' : '논술 첨삭'),
+          actions: [
+            if (live != null)
+              IconButton(
+                onPressed: _history,
+                icon: const Icon(Icons.history),
+                tooltip: '작성 이력',
+              ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('${q.university} · ${q.exam}', style: AppTokens.caption),
+                  const SizedBox(height: 4),
+                  Text(q.title, style: AppTokens.cardTitle),
+                  const SizedBox(height: 8),
+                  Text(
+                    live == null
+                        ? '미리보기 · 이 화면을 나가면 작성 내용이 사라져요.'
+                        : '저장된 답안은 같은 학습 기록에서 이어 쓸 수 있어요.',
+                    style: AppTokens.caption,
+                  ),
+                  if (writing)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Wrap(
+                        spacing: 16,
+                        runSpacing: 8,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: SegmentedButton<bool>(
-                              segments: const [
-                                ButtonSegment(
-                                  value: true,
-                                  label: Text('문제'),
-                                  icon: Icon(Icons.article_outlined),
-                                ),
-                                ButtonSegment(
-                                  value: false,
-                                  label: Text('답안'),
-                                  icon: Icon(Icons.edit_outlined),
-                                ),
-                              ],
-                              selected: {problem},
-                              onSelectionChanged: (v) =>
-                                  setState(() => problem = v.first),
-                            ),
+                          Text(
+                            '${c.body.runes.length}자 · 공백 포함',
+                            style: AppTokens.cardTitle,
                           ),
-                          Expanded(
-                            child: problem ? _questionPane() : _answerPane(),
+                          Semantics(
+                            label: '작성 시간',
+                            child: Text(timerText, style: AppTokens.secondary),
                           ),
                         ],
-                      );
-                    },
-                  )
-                : _statusOrResult(),
-          ),
-        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            const Divider(height: 1, color: AppTokens.textPrimary),
+            Expanded(
+              child: writing
+                  ? LayoutBuilder(
+                      builder: (context, box) {
+                        if (box.maxWidth >= 900 &&
+                            MediaQuery.textScalerOf(context).scale(1) < 1.8) {
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(flex: 42, child: _questionPane()),
+                              const VerticalDivider(
+                                width: 1,
+                                color: AppTokens.textPrimary,
+                              ),
+                              Expanded(flex: 58, child: _answerPane()),
+                            ],
+                          );
+                        }
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: SegmentedButton<bool>(
+                                segments: const [
+                                  ButtonSegment(
+                                    value: true,
+                                    label: Text('문제'),
+                                    icon: Icon(Icons.article_outlined),
+                                  ),
+                                  ButtonSegment(
+                                    value: false,
+                                    label: Text('답안'),
+                                    icon: Icon(Icons.edit_outlined),
+                                  ),
+                                ],
+                                selected: {problem},
+                                onSelectionChanged: (v) =>
+                                    setState(() => problem = v.first),
+                              ),
+                            ),
+                            Expanded(
+                              child: problem ? _questionPane() : _answerPane(),
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                  : _statusOrResult(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -294,8 +353,10 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '화면 검토용 창작 문제 · 실제 대학 기출이 아닙니다.',
+          Text(
+            live == null
+                ? '화면 검토용 창작 문제 · 실제 대학 기출이 아닙니다.'
+                : '대학 공식 자료를 확인한 뒤 답안을 작성해 주세요.',
             style: AppTokens.caption,
           ),
           const SectionHeader('문제'),
@@ -345,7 +406,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
           Text(
             q.minLength == null
                 ? '분량 미확인'
-                : '${q.minLength}~${q.maxLength}자 · 표시 예시',
+                : '${q.minLength}~${q.maxLength}자${live == null ? ' · 표시 예시' : ''}',
           ),
           Text(
             q.examMinutes == null
@@ -353,14 +414,22 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
                 : '시험 전체 ${q.examMinutes}분 · 문항별 시간이 아닙니다.',
           ),
           const SectionHeader('평가 근거 · 출처'),
-          Text('${q.origin.label} · 표시 예시', style: AppTokens.secondary),
+          Text(
+            live == null ? '${q.origin.label} · 표시 예시' : '공식 원문 출처',
+            style: AppTokens.secondary,
+          ),
           if (q.officialSource != null)
             ExternalLinkButton(
               uri: q.officialSource,
               label: '출처 · ${q.university} 입학처 / 원문 자료 보기',
             )
           else
-            const Text('가상 자료이므로 연결할 공식 원문이 없습니다.', style: AppTokens.caption),
+            Text(
+              live == null
+                  ? '가상 자료이므로 연결할 공식 원문이 없습니다.'
+                  : '공식 원문 연결을 확인하고 있어요.',
+              style: AppTokens.caption,
+            ),
           if (q.resourceUrl != null)
             ExternalLinkButton(uri: q.resourceUrl, label: '원문 PDF 보기'),
         ],
@@ -379,10 +448,15 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
           runSpacing: 8,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            if (widget.question.examMinutes != null)
+            if (widget.question.examMinutes != null &&
+                (live == null || live!.live.writesEnabled))
               TextButton(
                 onPressed: () => setState(() {
                   timed = !timed;
+                  if (live != null) {
+                    live!.live.mode = timed ? 'exam_simulation' : 'practice';
+                    c.edit(c.body);
+                  }
                   started = DateTime.now();
                 }),
                 child: Text(timed ? '연습 모드로' : '실전 모드로'),
@@ -397,7 +471,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
         Semantics(
           liveRegion: true,
           child: Text(switch (c.draftStatus) {
-            DraftStatus.saved => '저장됨 · 미리보기 세션',
+            DraftStatus.saved => live == null ? '저장됨 · 미리보기 세션' : '저장됨',
             DraftStatus.saving => '저장 중...',
             DraftStatus.conflict => '다른 기기에서 더 최근에 수정한 내용이 있습니다.',
             DraftStatus.failed => '저장하지 못했어요. 입력한 내용은 그대로 있습니다.',
@@ -447,6 +521,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
           maxLines: null,
           keyboardType: TextInputType.multiline,
           style: AppTokens.body.copyWith(height: 1.9),
+          readOnly: live != null && !live!.live.writesEnabled,
           onChanged: c.edit,
           decoration: const InputDecoration(
             labelText: '내 답안',
@@ -464,17 +539,22 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
           onPressed:
               c.body.trim().isEmpty ||
                   c.draftStatus == DraftStatus.conflict ||
-                  !widget.question.availability.canEvaluate
+                  !widget.question.availability.canEvaluate ||
+                  (live != null && !live!.canRequest)
               ? null
               : () {
                   FocusScope.of(context).unfocus();
                   c.submit();
                 },
-          child: const Text('제출하고 첨삭 화면 살펴보기'),
+          child: Text(live == null ? '제출하고 첨삭 화면 살펴보기' : '제출하고 첨삭받기'),
         ),
         const SizedBox(height: 8),
-        const Text(
-          '입력한 글을 평가하지 않습니다. 제출 후에는 미리 준비된 결과 예시가 표시됩니다.',
+        Text(
+          live == null
+              ? '입력한 글을 평가하지 않습니다. 제출 후에는 미리 준비된 결과 예시가 표시됩니다.'
+              : live!.canRequest
+              ? '차감 여부는 서버에서 확인합니다. 같은 요청을 반복 제출하지 않아도 됩니다.'
+              : '실제 AI 첨삭 연결을 준비하고 있어요. 현재 첨삭 요청은 비활성화되어 있습니다.',
           style: AppTokens.caption,
         ),
         if (!widget.question.availability.canEvaluate)
@@ -482,8 +562,87 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
       ],
     ),
   );
+  Future<void> _history() async {
+    try {
+      final history = await live!.live.loadHistory();
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('작성 이력'),
+          content: SizedBox(
+            width: 560,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final attempt in history.attempts)
+                    ExpansionTile(
+                      title: Text(
+                        '${attempt['attempt_no']}차 답안 · ${attempt['character_count']}자',
+                      ),
+                      subtitle: Text('${attempt['submitted_at']}'),
+                      children: [
+                        SelectableText(attempt['body'] as String),
+                        for (final evaluation in history.evaluations.where(
+                          (e) => e['attempt_id'] == attempt['id'],
+                        )) ...[
+                          const Divider(),
+                          Text(
+                            evaluation['status'] == 'completed'
+                                ? '첨삭 기록 · ${evaluation['contract_version']}'
+                                : '진행 기록',
+                          ),
+                          if (evaluation['overall_summary'] != null)
+                            Text(evaluation['overall_summary'] as String),
+                          for (final progress in history.progress.where(
+                            (p) => p['evaluation_id'] == evaluation['id'],
+                          ))
+                            Text(
+                              '${switch (progress['status']) {
+                                'resolved' => '해결한 부분',
+                                'improved' => '좋아지고 있는 부분',
+                                'recurred' => '다시 나타난 부분',
+                                _ => '확인할 부분',
+                              }}: ${progress['explanation']}',
+                            ),
+                        ],
+                      ],
+                    ),
+                  if (history.attempts.isEmpty) const Text('아직 제출한 답안이 없어요.'),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('닫기'),
+            ),
+          ],
+        ),
+      );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('이력을 불러오지 못했어요. 다시 확인해 주세요.')),
+        );
+      }
+    }
+  }
+
   Future<void> _reviewConflict() async {
-    final remote = await c.gateway.loadDraft();
+    EssayDraft remote;
+    try {
+      remote = await c.gateway.loadDraft();
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('최신 내용을 불러오지 못했어요. 입력한 내용은 유지됩니다.')),
+        );
+      }
+      return;
+    }
     if (!mounted) return;
     final reload = await showDialog<bool>(
       context: context,
@@ -531,10 +690,17 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
               const SizedBox(height: 20),
               Semantics(
                 liveRegion: true,
-                child: const Text('첨삭 화면 예시를 준비하고 있어요.'),
+                child: Text(
+                  live == null
+                      ? '첨삭 화면 예시를 준비하고 있어요.'
+                      : live!.message ?? '답안을 분석하고 있어요.',
+                ),
               ),
-              const Text(
-                '중복으로 제출하지 않아도 됩니다. 실제 AI 호출은 없습니다.',
+              Text(
+                live == null
+                    ? '중복으로 제출하지 않아도 됩니다. 실제 AI 호출은 없습니다.'
+                    : live!.serverStatus?.creditMessage ??
+                          '서버의 처리 결과를 기다리고 있어요.',
                 textAlign: TextAlign.center,
               ),
             ],
@@ -551,9 +717,12 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
             children: [
               const Icon(Icons.refresh),
               const SizedBox(height: 16),
-              const Text('첨삭 화면을 준비하지 못했어요. 입력한 답안은 그대로 있습니다.'),
-              const Text('미리보기에서는 회차권을 차감하지 않습니다.'),
-              FilledButton(onPressed: c.submit, child: const Text('다시 시도')),
+              Text(live?.message ?? '첨삭 화면을 준비하지 못했어요. 입력한 답안은 그대로 있습니다.'),
+              if (live == null) const Text('미리보기에서는 회차권을 차감하지 않습니다.'),
+              FilledButton(
+                onPressed: live == null ? c.submit : live!.retry,
+                child: const Text('다시 확인'),
+              ),
             ],
           ),
         ),
@@ -561,6 +730,12 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
     }
     return EssayResultView(
       evaluation: c.evaluation!,
+      isPreview: live == null,
+      sentenceReview: live?.live.sentenceReview,
+      evaluationId: live?.live.evaluationId,
+      attemptId: live?.live.attemptId,
+      submittedAnswer: live?.live.submittedAnswer,
+      evidenceLabels: live?.live.evidenceLabels ?? const [],
       question: widget.question,
       comparison: c.stage == EssayStage.comparison,
       onRewrite: () {
@@ -714,12 +889,16 @@ class EssayResultView extends StatefulWidget {
     required this.question,
     required this.comparison,
     required this.onRewrite,
+    this.isPreview = true,
+    this.evidenceLabels = const [],
     this.sentenceReview,
     this.evaluationId,
     this.attemptId,
     this.submittedAnswer,
     super.key,
   });
+  final bool isPreview;
+  final List<String> evidenceLabels;
   final EssaySentenceReview? sentenceReview;
   final String? evaluationId, attemptId, submittedAnswer;
   final EssayEvaluation evaluation;
@@ -945,12 +1124,13 @@ class _EssayResultViewState extends State<EssayResultView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const _PreviewNotice(),
+                  if (widget.isPreview) const _PreviewNotice(),
                   const SizedBox(height: 12),
-                  const Text(
-                    '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
-                    style: AppTokens.caption,
-                  ),
+                  if (widget.isPreview)
+                    const Text(
+                      '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
+                      style: AppTokens.caption,
+                    ),
                   _answerOverview(e),
                   if (widget.comparison) ...[
                     if (!e.comparable)
@@ -999,6 +1179,8 @@ class _EssayResultViewState extends State<EssayResultView> {
                     ],
                   ],
                   section('종합 평가', [e.summary], diagnostic: true),
+                  if (e.uncertainty != null)
+                    section('판단을 보류한 부분', [e.uncertainty!]),
                   section('잘한 점', e.strengths, diagnostic: true),
                   _resultHeader('평가 항목별 진단'),
                   const Text(
@@ -1036,10 +1218,17 @@ class _EssayResultViewState extends State<EssayResultView> {
                   section('보완할 점', e.improvements, diagnostic: true),
                   section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
                   section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),
-                  section('평가 근거', [
-                    '${widget.question.origin.label} · 표시 예시',
-                    '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
-                  ]),
+                  section(
+                    '평가 근거',
+                    widget.isPreview
+                        ? [
+                            '${widget.question.origin.label} · 표시 예시',
+                            '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
+                          ]
+                        : widget.evidenceLabels.isEmpty
+                        ? ['확인할 수 있는 공식 근거 표시가 없어요.']
+                        : widget.evidenceLabels,
+                  ),
                   if (widget.question.officialSource != null)
                     ExternalLinkButton(
                       uri: widget.question.officialSource,
@@ -1050,7 +1239,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                     onPressed: widget.onRewrite,
                     child: const Text('다시 써보기'),
                   ),
-                  if (e.includedRevision)
+                  if (e.includedRevision && widget.isPreview)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 12),
                       child: Text(
@@ -1059,16 +1248,19 @@ class _EssayResultViewState extends State<EssayResultView> {
                       ),
                     ),
                   const SizedBox(height: 12),
-                  OutlinedButton(
-                    onPressed: example
-                        ? () => setState(() => example = false)
-                        : openExample,
-                    child: Text(example ? '예시 답안 접기' : '첨삭을 반영한 예시답안 보기'),
-                  ),
+                  if (widget.isPreview || e.example.isNotEmpty)
+                    OutlinedButton(
+                      onPressed: example
+                          ? () => setState(() => example = false)
+                          : openExample,
+                      child: Text(example ? '예시 답안 접기' : '첨삭을 반영한 예시답안 보기'),
+                    ),
                   if (example) ...[
                     _resultHeader('첨삭을 반영한 예시 답안 · AI 생성'),
-                    const Text(
-                      'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.',
+                    Text(
+                      widget.isPreview
+                          ? 'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.'
+                          : 'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.',
                       style: AppTokens.caption,
                     ),
                     const SizedBox(height: 16),

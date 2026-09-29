@@ -7,7 +7,7 @@ Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
 owner-scoped saved/recent. Study Timer + Mock Exam/scoring/result foundation,
 optional Mock study-time inclusion, KST shared aggregation. MY Profile/private
 photo/school-grade, seven-day/eight-week/six-month study trends, actual Mock score
-summary; LAB independent internal-grade/Mock details and Essay preview/external entry.
+summary; LAB internal-grade/Mock details and gated Essay live entry.
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 
@@ -47,10 +47,9 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 
 ## Local automated validation
 
-Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Essay UI: analyze and focused33 PASS;
-full878 PASS/1 skip/5 failures, all5 reproduced at starting HEAD (no new regression).
-[UI validation and screenshots](essay-lab-ui-ux-v1.md). Prior Recent ordering:
-51 focused Flutter +181 ingestion +38 Python PASS; earlier evidence in
+Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Essay L1 analyze/focused/client JWT PASS;
+full925 PASS/2 skips/5 known baseline failures (no new Essay regression).
+[UI validation and screenshots](essay-lab-ui-ux-v1.md). Earlier regression evidence in
 [history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26).
 Device review pending.
 
@@ -124,7 +123,7 @@ history adopted; architecture PLANNED, evidence/privacy gates remain.
 
 [Owner delivery targets](roadmap-monetization-and-in-app-learning.md#delivery-calendar):
 mid-Oct Store launch → end-Oct Essay stabilization → Nov Mock/CSAT BETA.
-Next: L1 → worker/Scaffolding → loop E2E → IAP/Store; ads/advanced Growth must not delay launch.
+Next: worker/Scaffolding → loop E2E → IAP/Store; ads/Growth must not delay launch.
 
 [Final Owner device QA](materials-final-closeout-2026-09-27.md#owner-device-gate):
 run latest profile build; check full exam sequences/known missing cases, Essay
@@ -139,7 +138,8 @@ Production AI/student/worker OFF. Identity PASS. [AI Pilot1.3](essay-lab-scaffol
 2 frozen, quality PARTIAL; Owner review pending; RPC gap disclosed.
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
-ledger21/pending0. L1 resume awaits Owner.
+ledger21/pending0. [L1 client](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) isolated PASS;
+write/AI flags OFF. Next Owner review → worker/provider; IAP/real traffic gated.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 
@@ -149,7 +149,7 @@ Home customization and Analytics/Achievement/Notification backends remain planne
 Start with [Task Routing Map](index.md#task-routing-map), decisions and product scope.
 [Policy audit](mobile-policy-audit.md) owns code/test evidence and remaining gaps.
 [Log](log.md) is chronology; [deduplicated historical status evidence](history/status-checkpoints.md)
-preserves former checkpoints without burdening the current restore path. Historical PASS/migration statements are dated evidence.
+preserves former checkpoints without burdening the current restore path. Historical PASS statements are dated evidence.
 
 
 ## 2026-09-25 EOD override

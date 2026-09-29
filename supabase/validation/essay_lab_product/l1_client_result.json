@@ -1,0 +1,119 @@
+{
+  "task": "Essay LAB L1 RESUME",
+  "date": "2026-09-29",
+  "starting_head": "32f72de",
+  "scope": "Flutter client integration with existing public RPC contracts; isolated synthetic validation only",
+  "live_client_integration": "PASS",
+  "preview": "Explicit deterministic test/design routes only; no runtime fallback",
+  "rollout": {
+    "ESSAY_LIVE_WRITES_ENABLED": false,
+    "ESSAY_EVALUATION_REQUESTS_ENABLED": false,
+    "real_student_traffic": false
+  },
+  "rpc": [
+    "essay_open_session",
+    "essay_save_draft",
+    "essay_submit_attempt",
+    "essay_request_evaluation",
+    "essay_evaluation_status"
+  ],
+  "client_checks": {
+    "session_open_resume": "PASS",
+    "draft_cas_stale": "PASS",
+    "immutable_submit_retry": "PASS",
+    "request_payload_conflict": "PASS",
+    "paid_included_authoritative": "PASS",
+    "insufficient_rights": "PASS",
+    "processing_reconciling": "PASS",
+    "failed_release": "PASS",
+    "completed_mapping": "PASS",
+    "legacy_1_2": "PASS",
+    "scaffolding_1_3": "PASS",
+    "unicode_exact_quote": "PASS",
+    "pinned_previous_comparison": "PASS",
+    "same_session_rewrite": "PASS",
+    "history": "PASS",
+    "logout_account_switch": "PASS",
+    "other_owner_denial": "PASS",
+    "inflight_auth_revocation": "PASS",
+    "360px_200percent": "PASS",
+    "unsaved_exit_confirmation": "PASS"
+  },
+  "verification": {
+    "focused_flutter": {
+      "passed": 61,
+      "failed": 0
+    },
+    "analyze": "PASS",
+    "full_flutter": {
+      "passed": 925,
+      "skipped": 2,
+      "failed": 5,
+      "known_baseline_failures": [
+        "day5_shell content badge metadata small/large",
+        "day6_repositories parent filter empty query",
+        "day6_repositories parent filter Korean query",
+        "materials_delivery_journey guest scale1",
+        "materials_delivery_journey guest scale2"
+      ],
+      "baseline_attribution": "Same five documented prior failures; not a fresh starting-HEAD reproduction",
+      "new_essay_failures": 0
+    },
+    "actual_local_dart_supabase": {
+      "passed": 1,
+      "real_auth_jwt": true,
+      "postgrest": true,
+      "synthetic_worker_only": true,
+      "scenarios": [
+        "open/resume",
+        "CAS/stale",
+        "duplicate submission",
+        "paid/included",
+        "timeout/reconciling",
+        "lease retry/stale rejection",
+        "completed result",
+        "failure/release/retry",
+        "legacy result",
+        "history",
+        "cross-user denial",
+        "erasure/ledger preservation",
+        "logout"
+      ]
+    },
+    "local_backend_regression": {
+      "legacy_before": 37,
+      "legacy_after": 37,
+      "scaffolding": 79,
+      "timing": 306,
+      "g1": 88,
+      "status_projection": 55,
+      "post_g1_scaffolding": 70,
+      "status": "PASS"
+    },
+    "android_debug": "PASS",
+    "ios_simulator_debug": "PASS",
+    "physical_device": "NOT_RUN"
+  },
+  "boundaries": {
+    "db_change": false,
+    "migration_change": false,
+    "rpc_change": false,
+    "production_mutation": false,
+    "production_test_rows": false,
+    "actual_ai_called": false,
+    "worker_credentials_deployed": false,
+    "iap_paywall_analytics_ads": false
+  },
+  "remaining_gates": [
+    "Owner review",
+    "Worker/provider/evidence assembly and quality/privacy/retention acceptance",
+    "Published canonical question/criterion readiness",
+    "Real device and full learning-loop E2E",
+    "IAP/Store integration"
+  ],
+  "ready_for_worker_provider_integration": true,
+  "ready_for_iap": false,
+  "ready_for_real_student_traffic": false,
+  "owner_ios_files_preserved": true,
+  "sanitized": true
+}
