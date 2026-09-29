@@ -1,5 +1,118 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-B1 private Round1 dispatcher — 2026-09-30
+
+**Dispatcher technically READY; real AI/provider requests 0. Real execution DISABLED.**
+[Dispatcher](../tool/essay_lab/round1_dispatcher.py),
+[synthetic tests](../tool/test_essay_round1_dispatcher.py),
+[frozen input pins](../tool/essay_lab/evidence/l2_b1_frozen_files.json),
+[sanitized validation](../tool/essay_lab/evidence/l2_b1_result.json).
+No credential was inspected or provisioned. No DB connection/write, migration, RPC,
+Production reviewer activation, real student traffic or Round2 implementation.
+
+Readiness vocabulary: **READY_FOR_ROUND1_EXECUTION=YES only in Owner L2-B1 §35's
+technical sense** (dispatcher safety/isolated tests passed). **EXECUTION_AUTHORIZED=NO**;
+credential/account/model access and live API compatibility are **NOT_VERIFIED**.
+L2-B2 still requires separate Owner authorization, secure provisioning and a reviewed
+activation change. No environment variable or credential can enable L2-B1 real mode.
+No quality, real latency or actual cost conclusion follows from synthetic tests.
+
+### Fixed inputs and actual HTTP boundary
+
+Only these slot IDs, in future operator execution order: `sookmyung-openai`,
+`sookmyung-anthropic`, `hanyang-openai`, `hanyang-anthropic`. One request per slot,
+maximum4, no runner loop/queue/scheduler/job scan or arbitrary model/prompt/answer/endpoint.
+The existing L2-B policy/model bindings, prompt, schema, packages and image order are unchanged.
+Before any send, all22 frozen files are hash-checked against committed pins and the accepted
+preparation result, including manifests/context, answer/package, evidence/locator data,
+ordered images, policy/regime, prompt/schema and contract-source hashes. Drift fails closed;
+no regeneration/repair. Synthetic tests copy the frozen inputs into disposable0700 directories.
+
+`OfficialHTTP` makes one bounded TLS HTTPS POST using stdlib `http.client`,300s timeout:
+`https://api.openai.com/v1/responses` or `https://api.anthropic.com/v1/messages` only.
+No caller URL, proxy-env routing, redirects, retries, fallback, repair or continuation.
+3xx is terminal failure, never follow Location. Prepared OpenAI `store:false`, exact
+Structured Outputs/no tools and equivalent Anthropic request are reused unchanged.
+Unexpected returned model identity rejects the slot; no alias/version substitution.
+Both still use the same strict Contract1.3 parser; provider envelope/thinking is not product data.
+Actual HTTP serialization/read path is tested using injected fake HTTPS connections;
+real socket construction is blocked in the test fixture. `dispatch()` and a non-fake
+`OfficialHTTP` both require the compiled-closed execution gate before credentials/network.
+
+Safe offline command (no credential lookup or writes):
+
+```sh
+python3 -B -m tool.essay_lab.round1_dispatcher --slot sookmyung-openai
+```
+
+`--execute` always refuses in this version. There are no model/provider/case/prompt/answer/
+endpoint/root CLI overrides. The synthetic entry requires an explicitly fake connection and
+an isolated `/private/tmp/essay-l2b1-test*` root, never the real private artifact root.
+
+### Credential and immutable artifact protocol
+
+Exactly one existing L2-B env or `_FILE` source per provider; even an empty second source
+is ambiguous. File must be a current-operator-owned regular0400/0600 file, no symlink,
+hardlink or FIFO; missing/unsafe input fails before STARTED/send. Never log values, headers,
+paths containing credentials or exception strings. No CLI-session/service_role substitution.
+
+1. Validate mode, slot, all frozen inputs, credentials and request binding.
+2. Exclusively create+fsync immutable0400 `round1-started/<slot>.json` **before send**.
+   O_EXCL decides concurrent same-slot claims. Marker contains hashes/policy/time, no credential.
+3. Send once. Freeze private `round1/<slot>/raw-response.bin` before JSON/contract parsing.
+4. On strict success freeze separate `normalized.json`; then sanitized `terminal.json`.
+5. Every sent request consumes the slot, including refusal/schema/model/HTTP errors.
+   Timeout/reset/interruption/local persistence failure is `UNKNOWN_CONSUMED_FOR_ROUND1`.
+   A marker without terminal is UNKNOWN too; it never unlocks. No automatic second call.
+
+The permanent marker is separate from results: deleting the result directory cannot enable
+retry. No reset/delete command exists. Operator filesystem tampering cannot be prevented by
+application code; marker retention and a new explicit Owner decision are required for any
+exception. Never delete a marker to obtain another Round1 call. Files0400, directories0700,
+no symlinks, exclusive creation/fsync, ignored `.local/essay-bakeoff-l2b/`; tracked private
+files or missing Git exclusion stop dispatch. Private normalized/body/image artifacts never
+enter Git. Raw capture is bounded at256KiB+1; oversize is rejected with a truncated-capture flag.
+If a response echoes a credential/Authorization pattern (including JSON ASCII escapes),
+withhold raw, preserve only hash+notice, reject without parsing; secret safety takes precedence
+over byte-for-byte raw retention. No raw headers are persisted. No ordinary exception log.
+
+### Telemetry and full human review
+
+Private terminal includes pinned provider/requested model, exact matched returned model,
+latency, provider-reported input/output/total/cache counters, outcome/parser status.
+Unexpected model strings stay in private raw, not sanitized metadata. Missing/invalid counters
+remain NULL. Anthropic native input and cache-read/write counters are separate here; the earlier
+adapter's aggregate is not mislabeled as a provider-supplied total. Latency is dispatch elapsed
+through persistence/parsing, not a quality score. Current official envelopes have no trusted
+billed-cost field: actual_cost/currency remain NULL; any later list-rate calculation must be
+separate and ESTIMATE. No GA4/Firebase/DB telemetry.
+
+After all four terminal artifacts exist, `build_review()` freezes private
+`round1-owner-review.md`: original answer, frozen criterion labels/official references,
+both complete evaluations (all dimensions/core tasks/sentences/quotes/directions/examples,
+priorities/checklist/evidence), parser status, telemetry and an unfilled human rubric.
+Rejected/unknown output is shown honestly, never repaired. Raw/normalized hashes are checked;
+provider text is fenced against Markdown/HTML execution. No automated score/winner or signed
+review receipt. Sookmyung content-vs-clarity and zero-sentence gate, Hanyang official-issue/
+stance/verified-length gates below remain **human checks, not synthetic quality PASS**.
+
+### L2-B1 validation and next step
+
+20 dispatcher tests +47 existing L2-B/L2-A/L2-A2/Scaffolding unit regressions PASS;
+50 canonical +55 review static tests PASS. Matrix A–AJ is mapped in the sanitized report.
+Frozen22 inputs/prompt/schema/policy and accepted005 migration bytes unchanged.
+No new native DB run: this task changes no SQL/RPC/DB integration; accepted L2-B native802
+assertions remain historical evidence, not a new test count. No Flutter/build change.
+Seven preservation answers below still apply: started/raw/normalized/terminal are distinct
+immutable private operational facts; no student master/history/marketing fact is created.
+
+**NEXT:** Owner reviews L2-B1 → securely provision credentials → explicitly authorize L2-B2
+and reviewed gate activation → revalidate frozen inputs → exactly four slots, sequentially,
+one request each → freeze all outcomes → private full Owner review → select primary model.
+Only then consider separately authorized Round2. Production AI/traffic remains OFF.
+
+## Accepted L2-B preparation checkpoint (historical)
+
 2026-09-30. **PREPARATION ONLY / real AI calls 0.** GPT-5.6 Sol and Claude Sonnet5.5
 are the two Owner-selected Pilot candidates, not Production defaults. Round1 is four
 calls, followed by human review; Round2 is a **plan only**, at most two evaluations
@@ -114,7 +227,7 @@ Exactly **4 maximum calls**, one each. These are finite explicit slots, not queu
 
 `offline_slot` tests this protocol using synthetic transport only, including failed/unknown
 slot non-retry and raw-before-parse preservation. Real started/completed timestamps and the
-live HTTP dispatcher remain execution-phase wiring; there are no fake real run receipts.
+live HTTP dispatcher were pending at L2-B (now implemented but disabled above); there are no fake real run receipts.
 Private human review may take days: no DB reservation,120s lease or HMAC receipt is held.
 Later RPC E2E and production reviewer hosting/broker remain separate gates.
 

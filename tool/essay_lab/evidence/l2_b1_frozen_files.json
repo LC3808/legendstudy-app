@@ -1,0 +1,28 @@
+{
+  "accepted_commit": "c98d35d",
+  "files": {
+    "manifest.json": "6857432d8120eadccbdb57c927f7d2479be4c3433a4b8d929cd04a7da61c3a5f",
+    "policy-regimes.json": "596f6f44648e329b891138c7a0feea17cd1d3df265bcbc9c52e5d986b3e02484",
+    "transport-plan.json": "6c630dc5b1f005b139961afcefbc10e5a6e661ef727eba950d8f3e8a97c0904b",
+    "sookmyung/manifest.json": "0df1aca29b91557d67048d422c734e6e6a7cc4d30c282783d39de72e38cca4d7",
+    "sookmyung/package.json": "291c4a74800292649f1f02dfc5775660f5b2a44d75e4483de6229bfa5d4e9099",
+    "sookmyung/validation-context.json": "7be6f81bd848c3e1548054dc104f463c82c74616d940cfbd2dd35565a39c6aad",
+    "sookmyung/prompt.txt": "550a1646313602c8d517b9800dcea01b8292436fa0876378fdccf9793936d63f",
+    "sookmyung/schema.json": "737078fba6bfe5ad7828414c7d2ebdc048419f79f99670f5b06cee23e5509940",
+    "sookmyung/input_1.png": "a22921ec00616aa475675223f99618f1da9326f5fb7b73e7002907fb96361846",
+    "sookmyung/input_2.png": "9fccd3bd6615845a5e5a2b54fd6fa6068441c207fceefb47e8be2e5175547dd3",
+    "sookmyung/input_3.png": "63b72db087a70e393e1c201c29b34c5b8ec86c9eda04ea2ab679472a40595736",
+    "hanyang/manifest.json": "cd13b63603763adb70d779ba49a777d08fed0af8fcbc14ba5e5c095216d3a67a",
+    "hanyang/package.json": "cec3187e9f9665d6d54583f7735933f5c8fdb3eada1d5bd182cd056d3a13efb6",
+    "hanyang/validation-context.json": "4c03e54da0a8ffa6dcbc994a9b9e296d4bebe3427618d265682ae7dbf9b3d7a0",
+    "hanyang/prompt.txt": "550a1646313602c8d517b9800dcea01b8292436fa0876378fdccf9793936d63f",
+    "hanyang/schema.json": "737078fba6bfe5ad7828414c7d2ebdc048419f79f99670f5b06cee23e5509940",
+    "hanyang/input_1.png": "aff18fcb618b89403367b09e30013c66ab4227fb05c4f93498234cbba9232e8a",
+    "hanyang/input_2.png": "00998c013ed6dd3ed8b5257cab58ca37b8aba2b1fb1a1e1a28988dc3c8434da1",
+    "hanyang/input_3.png": "de1250108aee77c9100550f7380a94984f9360fab21c690ebe8409883abe9d14",
+    "hanyang/input_4.png": "6bd10f25aaff0253f6bf3a7d04e27ca43ec4382df4a1e4c535b7fff3f9030f93",
+    "hanyang/input_5.png": "cbacabb52212c5441307cef55bb4b92cde7b3640b665573beb3e44d14491e785",
+    "hanyang/input_6.png": "ce3ffcef7aafe4f87e739ff5289713ed007c7871c7c4d3a99a9f970dacc0f5c2"
+  },
+  "preparation_result_sha256": "bd4bc00858e4cc5aa710085310ab9006a8c3dff94c0692f8f8d5b6ded9ff45e6"
+}

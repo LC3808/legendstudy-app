@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-30 — Essay L2-B1 private Round1 dispatcher
+
+- [L2-B canonical](essay-lab-model-bakeoff-l2-b.md#l2-b1-private-round1-dispatcher--2026-09-30):
+  four frozen slots, exact endpoint/model/hash checks, permanent STARTED before one send,
+  private raw-before-parse/normalized/terminal, full human comparison builder. Real mode closed.
+- Synthetic20 + existing47 + static105 PASS; no retries/fallback/repair, unknown consumes slot.
+  Credential safety and separate result-deletion tombstone tested. No actual credential inspection.
+- Real provider/AI calls0, DB writes0,005 unchanged, no Round2/Production activation.
+  Owner iOS/parallel work preserved. Next: separate L2-B2 authorization + secure provisioning.
+
 ## 2026-09-30 — Essay L2-A3 reviewer architecture review
 
 - [Existing worker/provider canonical](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture):

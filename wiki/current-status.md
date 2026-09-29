@@ -138,7 +138,7 @@ DEPLOYED/KEEP19. Identity PASS. [Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-ru
 2 frozen, quality PARTIAL; Owner review pending. Production AI/student/worker OFF.
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
-Last verified ledger21. [L1](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) PASS. [L2-B](essay-lab-model-bakeoff-l2-b.md): bake-off prep READY;4 calls await approval. Reviewer PARTIAL;005 NOT_APPLIED;AI/traffic OFF.
+Last verified ledger21. [L1](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) PASS. [L2-B](essay-lab-model-bakeoff-l2-b.md): L2-B1 dispatcher PASS;real calls0/disabled. Reviewer PARTIAL;005 NOT_APPLIED;AI/traffic OFF.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 
