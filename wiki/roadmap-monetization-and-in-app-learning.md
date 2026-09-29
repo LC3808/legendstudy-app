@@ -1,5 +1,10 @@
 # Monetization & In-App Learning Strategy
 
+> **Essay Credit Coupon/Voucher = Launch P0** (distribution channel into the
+> existing G1 ledger; no separate coupon balance): design in
+> [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md#part-2--essay-credit-couponvoucher-launch-p0).
+> B2B organization/membership/batch = P1.
+
 ## 2026–2027 roadmap and monetization — Owner decision 2026-09-29
 
 **CANONICAL ROADMAP / STRATEGY ONLY.** 아래 일정은 Owner가 확정한 제품 목표와

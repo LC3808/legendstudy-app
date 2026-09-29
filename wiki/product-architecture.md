@@ -2,6 +2,11 @@
 
 Recorded: 2026-09-20. **OWNER PRODUCT DIRECTION / DOCUMENTATION ONLY.**
 This is the canonical long-term product family, shared-engine and B2B boundary.
+
+> **Personal identity vs organization membership / B2B entitlement boundary**
+> (school selection ≠ B2B eligibility; a school never auto-reads student essays)
+> is designed in
+> [School History & Coupon/Voucher design — Part 3](school-history-and-coupon-design-v1.md#part-3--b2b-organization-boundary-p1).
 It does not authorize implementation, deployment, data collection or payment.
 Implementation evidence stays in [current status](current-status.md); platform
 allocation stays in [platform boundaries](product-platform-boundaries.md).

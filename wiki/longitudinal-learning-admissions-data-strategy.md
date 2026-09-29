@@ -3,6 +3,11 @@
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**
 **Owner decision: 2026-09-24; history-model clarification: 2026-09-29 · Long-term architecture: PLANNED · No new implementation authorization**
 
+> **School History (append-only) + current projection** and the Academic-School ≠
+> B2B-Membership boundary are designed in
+> [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md#part-1--school-history--change-policy).
+> High-school info is longitudinal academic context; do not overwrite prior schools.
+
 ## Latest delivery priority — 2026-09-29
 
 [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29)가 최신 일정과 Monetization을 소유한다.

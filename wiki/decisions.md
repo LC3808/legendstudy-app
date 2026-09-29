@@ -597,3 +597,13 @@ prior internal-grade-before-Mock ordering. G1 is deployed; L1/worker/E2E/IAP/Sto
 Essay prices are fixed; Analytics subscription and Essay credits are separate products,
 not unlimited Essay. Subscription pricing/periods/benefits and Beta free scope remain undecided.
 Learning/Decision/Outcome evidence and privacy gates remain. Strategy only, no implementation.
+
+Owner adopts [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md)
+(2026-09-29): high-school info becomes longitudinal **School History + current projection**
+(not overwrite), change policy **2 free corrections + 14-day cooldown** (transfers supported,
+server-authoritative); Essay Credit **Coupon/Voucher is Launch P0** as a distribution channel
+into the existing G1 ledger (`credit_grants.origin` promotion/b2b_program, no separate coupon
+balance), with server-side Campaign/Voucher/Redemption policy, per-user/total/budget limits, no
+unlimited master code; **Academic School ≠ verified B2B Organization Membership** (school
+selection alone grants no B2B eligibility and no access to student essays). B2B organization/
+membership/batch = P1. Design only, no implementation.

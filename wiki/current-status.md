@@ -124,6 +124,10 @@ history adopted; architecture PLANNED, evidence/privacy gates remain.
 [Owner delivery targets](roadmap-monetization-and-in-app-learning.md#delivery-calendar):
 mid-Oct Store launch → end-Oct Essay stabilization → Nov Mock/CSAT BETA.
 Next: worker/Scaffolding → loop E2E → IAP/Store; ads/Growth must not delay launch.
+[School History & Coupon/Voucher](school-history-and-coupon-design-v1.md): design adopted,
+NOT implemented — Coupon/Voucher is **Launch P0** (ships with IAP/Paywall, reuses G1 ledger);
+School History + 2-correction/14-day-cooldown is **P0_NON_BLOCKING** (staged migration). No
+code/DB change.
 
 [Final Owner device QA](materials-final-closeout-2026-09-27.md#owner-device-gate):
 run latest profile build; check full exam sequences/known missing cases, Essay
