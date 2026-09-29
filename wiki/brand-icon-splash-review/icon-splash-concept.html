@@ -6,10 +6,10 @@
 <title>LegendStudy+ App Icon & Splash — Design Review</title>
 <!--
   DESIGN REVIEW ARTIFACT ONLY — no production asset is changed.
-  Uses the REAL canonical brand assets by relative path:
-    icon.png
-    wordmark.png
-  Open this file from the repository checkout so the relative paths resolve.
+  Uses the real canonical icon (icon.png = sips downscale of the source) by
+  relative path. Splash is text-based: no wordmark image; product name is
+  rendered as near-black type with a superscript +.
+  Open this file over a local server (or from the repo) so icon.png resolves.
   The symbol "scale %" is simulated with CSS transform inside the SAME white
   icon canvas — i.e. the symbol's footprint shrinks and margin grows, exactly
   as the approved implementation would composite the source before export.
@@ -17,6 +17,7 @@
 <style>
   :root{
     --navy:#1B2A4A; --navy-soft:#5B6472; --orange:#FFA300; --ink:#0D1730;
+    --nearblack:#12161F;
     --warm:#FFFFFF; --canvas:#F4F6F8; --border:#E6E9EE; --border-strong:#C4CCD7;
     --ios-radius:22.37%;      /* Apple icon corner ratio */
     --sq-radius:26%;          /* Android squircle-ish */
@@ -71,13 +72,21 @@
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.18)}
   .splash .sym{width:132px;height:132px}
   .splash .sym img{width:100%;height:100%;object-fit:contain}
-  .splash .name{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
-  .splash .name .plus{color:var(--orange)}
-  .splash .word{width:190px}
-  .splash .word img{width:100%;display:block}
-  .splash .tag{font-size:14px;color:var(--navy-soft);font-weight:600;letter-spacing:.02em}
-  .splash .foot{position:absolute;bottom:26px;font-size:11px;color:#aeb6c4}
+  /* Product name: single near-black colour, whole word incl. + (no orange +). */
+  .splash .name{font-size:27px;font-weight:800;color:var(--nearblack);letter-spacing:-.01em}
+  /* baseline + and superscript + variants */
+  .name .plus-base{font-weight:800}
+  .name .plus-sup{font-size:.5em;font-weight:800;vertical-align:super;line-height:0;margin-left:.04em;position:relative;top:-.06em}
+  .splash .tag{font-size:13.5px;color:var(--navy-soft);font-weight:600;line-height:1.5;text-align:center;max-width:220px;letter-spacing:.01em}
+  .splash .foot{position:absolute;bottom:26px;font-size:11px;color:#aeb6c4;letter-spacing:.04em}
   .warmbg{background:#FFFFFF}
+  /* + placement comparison cards */
+  .nameCard{background:#fff;border:1px solid var(--border);border-radius:16px;padding:34px 22px;min-width:230px;text-align:center}
+  .nameCard.rec{border:2px solid var(--orange)}
+  .nameCard .big{font-size:34px;font-weight:800;color:var(--nearblack);letter-spacing:-.01em}
+  .nameCard .big .plus-sup{font-size:.5em;vertical-align:super;line-height:0;margin-left:.04em;position:relative;top:-.06em}
+  .check{font-size:12.5px;color:#33405c;text-align:left;max-width:230px;margin:12px auto 0}
+  .check li{margin:2px 0}
   .capt{font-size:12.5px;color:var(--navy-soft);text-align:center;margin-top:10px}
   .lead{max-width:720px}
   ul{margin:8px 0;padding-left:20px;color:#33405c}
@@ -182,64 +191,90 @@
     </div>
   </div>
 
-  <h2>3 · Splash 후보</h2>
-  <p class="lead">밝은 warm-white 배경 · 공식 심볼/워드마크 중심 · 버전·로딩·기능·광고 없음 · 애니메이션 최소.</p>
+  <h2>3 · 제품명 표기 — <code>+</code> 위치 비교</h2>
+  <p class="lead">공식 wordmark 이미지는 Splash에서 제외하고 <b>텍스트 기반</b>으로 구성합니다. 제품명 전체는 <b>단색 near-black</b>(<code>#12161F</code>), <code>+</code>도 같은 색(별도 orange 아님). 심볼의 orange는 그대로 유지됩니다.</p>
+  <div class="grid">
+    <div class="nameCard">
+      <div class="cap" style="justify-content:center"><span class="pill">A · baseline +</span></div>
+      <div class="big" style="margin-top:14px">레전드스터디<span class="plus-base">+</span></div>
+      <ul class="check">
+        <li>· 가장 단순·안전, 어느 크기에서도 선명</li>
+        <li>· <code>+</code>가 제품명 한 글자처럼 읽힘</li>
+        <li>· 다만 “스터디 + 무언가”처럼 평범하게 보일 수 있음</li>
+      </ul>
+    </div>
+    <div class="nameCard rec">
+      <div class="cap" style="justify-content:center"><span class="pill rec">B · 우상단 superscript ⁺ · 추천</span></div>
+      <div class="big" style="margin-top:14px">레전드스터디<span class="plus-sup">+</span></div>
+      <ul class="check">
+        <li>· <code>+</code>를 <b>디</b> 우상단에 작게 → 브랜드 마크처럼 인식</li>
+        <li>· 각주처럼 보이지 않도록 <b>0.5em</b>로 유지(너무 작지 않게)</li>
+        <li>· 작은 화면에서도 선명 확인 필요 → 아래 실제 Splash 크기 비교</li>
+      </ul>
+    </div>
+  </div>
+  <p class="capt">두 안 모두 아래 Splash 실제 크기에서 렌더링됩니다. superscript는 각주가 아니라 제품명 일부로 자연스럽게 읽히는 선(≈0.5em, 우상단)으로 조정.</p>
+
+  <h2>4 · Splash 후보 — tagline 유무</h2>
+  <p class="lead">warm-white 배경 · orange 심볼 + near-black <b>레전드스터디⁺</b>(superscript) · 버전·로딩·기능·광고·워드마크 이미지 없음 · 애니메이션 최소.</p>
   <div class="phones">
     <div>
       <div class="splash warmbg">
         <div class="sym"><img src="icon.png" style="transform:scale(.78)"></div>
-        <div class="name">레전드스터디<span class="plus">+</span></div>
+        <div class="name">레전드스터디<span class="plus-sup">+</span></div>
         <div class="foot">LegendStudy+</div>
       </div>
-      <p class="capt">A · 심볼 + 레전드스터디+</p>
-    </div>
-    <div>
-      <div class="splash warmbg">
-        <div class="word"><img src="wordmark.png"></div>
-        <div class="foot">LegendStudy+</div>
-      </div>
-      <p class="capt">B · 공식 워드마크 중심</p>
+      <p class="capt">A · 심볼 + 레전드스터디⁺ (tagline 없음)</p>
     </div>
     <div>
       <div class="splash warmbg">
         <div class="sym"><img src="icon.png" style="transform:scale(.78)"></div>
-        <div class="name">레전드스터디<span class="plus">+</span></div>
-        <div class="tag">기출부터 학습까지</div>
+        <div class="name">레전드스터디<span class="plus-sup">+</span></div>
+        <div class="tag">나의 학습 기록이 쌓일수록,<br>나의 가능성은 선명해집니다.</div>
         <div class="foot">LegendStudy+</div>
       </div>
-      <p class="capt">C · 심볼 + 이름 + 짧은 tagline</p>
+      <p class="capt">B · 심볼 + 이름 + tagline · <b>추천</b></p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Android 예시 (B)</h3>
+      <div class="splash warmbg" style="width:250px;height:520px">
+        <div class="sym" style="width:118px;height:118px"><img src="icon.png" style="transform:scale(.78)"></div>
+        <div class="name" style="font-size:24px">레전드스터디<span class="plus-sup">+</span></div>
+        <div class="tag">나의 학습 기록이 쌓일수록,<br>나의 가능성은 선명해집니다.</div>
+      </div>
+      <p class="capt" style="max-width:250px">Android 12+ 동일 구성. 네이티브 splash는 심볼 중심, 이름·tagline은 Flutter 첫 프레임.</p>
     </div>
   </div>
 
-  <h2>4 · 추천 Splash</h2>
+  <h2>5 · 추천 Splash</h2>
   <div class="phones">
     <div>
       <div class="splash warmbg" style="border-color:#111">
         <div class="sym"><img src="icon.png" style="transform:scale(.78)"></div>
-        <div class="name">레전드스터디<span class="plus">+</span></div>
-        <div class="tag">기출부터 학습까지</div>
+        <div class="name">레전드스터디<span class="plus-sup">+</span></div>
+        <div class="tag">나의 학습 기록이 쌓일수록,<br>나의 가능성은 선명해집니다.</div>
       </div>
     </div>
-    <div class="lead" style="max-width:420px">
-      <p><span class="pill rec">추천</span> <b>C안 (심볼 + 레전드스터디+ + tagline)</b>.</p>
+    <div class="lead" style="max-width:430px">
+      <p><span class="pill rec">추천</span> <b>B안 (심볼 + 레전드스터디⁺ + tagline)</b>, 이름 표기는 <b>superscript ⁺</b>, 색은 단색 near-black.</p>
       <ul>
-        <li><b>아이콘과 한 시스템</b>: 홈 화면의 축소된 심볼이 그대로 확대되어 나타나므로 아이콘↔Splash 연속성이 명확.</li>
-        <li><b>tagline “기출부터 학습까지”</b>: 광고가 아니라 제품 정체성 한 줄. 불필요하면 <b>A안(심볼+이름)</b>으로 축소 가능 — 둘 다 같은 레이아웃 계열.</li>
-        <li>워드마크 전용(B안)은 심볼이 빠져 아이콘과의 연결이 약함 → 보조안.</li>
+        <li><b>아이콘과 한 시스템</b>: 홈 화면의 75% 심볼이 그대로 확대되어 나타나 아이콘↔Splash 연속성이 명확.</li>
+        <li><b>tagline “나의 학습 기록이 쌓일수록, 나의 가능성은 선명해집니다.”</b> — LAB의 “데이터가 쌓일수록, 나의 가능성은 선명해집니다.”와 브랜드 철학을 연결. 광고 문구 아님.</li>
+        <li><b>노출 시간이 짧으면 tagline이 안 읽힐 수 있음</b> → 두 줄 tagline이 과하게 느껴지면 <b>A안(심볼+이름)</b>으로 축소. 같은 레이아웃 계열이라 전환이 자연스러움.</li>
       </ul>
-      <p class="sub">네이티브 런치(흰 배경 + 중앙 심볼)와 Flutter 첫 프레임(같은 위치 심볼 → 이름/태그라인 페이드)을 정렬해 <b>이중 깜빡임·크기 점프 없이</b> 이어지도록 구현.</p>
+      <p class="sub"><b>Native launch = orange 심볼 중심(흰 배경)</b> → <b>Flutter 첫 브랜드 프레임 = 심볼 + 레전드스터디⁺ + tagline</b>. tagline을 네이티브 런치스크린에 넣지 않고 첫 프레임에서 페이드로 얹어, iOS/Android 12+에서 <b>logo size jump·double splash 없이</b> 이어지도록 구현.</p>
     </div>
   </div>
 
-  <h2>5 · 플랫폼 구현 메모 (승인 시)</h2>
+  <h2>6 · 플랫폼 구현 메모 (승인 시)</h2>
   <ul>
-    <li><b>iOS</b>: <code>AppIcon.appiconset</code> 15개 사이즈 + 1024 App Store는 <code>tool/export_launcher_icons.py</code>가 소스에서 생성. 스케일 적용 = export 전에 소스를 흰 1024 캔버스에 75%로 합성(재도색·재드로우 없음). 런치스크린은 흰 배경 + 중앙 심볼로 최소 구성.</li>
-    <li><b>Android</b>: 적응형 <code>ic_launcher_foreground</code>는 이미 24dp 패딩(240/432). 레거시 <code>mipmap-*/ic_launcher.png</code>도 동일 75% 합성으로 통일. Android 12+ Splash는 흰 배경 + 심볼(테마 <code>windowSplashScreenAnimatedIcon</code>/values-v31), 세이프존 준수.</li>
-    <li><b>세이프존/마스크</b>: 75% 합성 후에도 export 스크립트의 세이프서클 검증(≤33dp)을 유지·갱신. 원형·스퀴클·라운드 모두 문서 모서리 보존.</li>
-    <li><b>이중 스플래시 방지</b>: 네이티브 심볼 위치 = Flutter 첫 프레임 심볼 위치 동일. 인위적 지연·네트워크·로딩 % 없음.</li>
-    <li>이름 <b>레전드스터디+ / LegendStudy+</b>, 패키지·버전·딥링크·OAuth 불변.</li>
+    <li><b>iOS</b>: <code>AppIcon.appiconset</code> 15개 + 1024는 <code>tool/export_launcher_icons.py</code>가 소스에서 생성. 스케일 적용 = export 전에 소스를 흰 1024 캔버스에 75%로 합성(재도색·재드로우 없음). <code>LaunchScreen.storyboard</code>는 흰 배경 + <b>중앙 orange 심볼만</b>(텍스트 없음).</li>
+    <li><b>Android</b>: 적응형 <code>ic_launcher_foreground</code>는 이미 24dp 패딩(240/432). 레거시 <code>mipmap-*/ic_launcher.png</code>도 동일 75% 합성으로 통일. Android 12+ splash 테마(values-v31)는 흰 배경 + <b>심볼</b>만, 세이프존 준수.</li>
+    <li><b>이름/tagline = Flutter 첫 프레임</b>: 네이티브 런치(심볼) → Flutter 첫 프레임(심볼 동일 위치 + <b>레전드스터디⁺</b> superscript, near-black + 두 줄 tagline 페이드). 네이티브에 텍스트를 넣지 않아 size jump·double splash 회피.</li>
+    <li><b>세이프존/마스크</b>: 75% 합성 후에도 export 스크립트의 세이프서클 검증(≤33dp) 유지·갱신. 원형·스퀴클·라운드 모두 문서 모서리 보존.</li>
+    <li>제품명 <b>레전드스터디+ / LegendStudy+</b> 유지, 심볼 orange 유지, <code>+</code>는 이름과 동일 near-black. 패키지·버전·딥링크·OAuth 불변.</li>
   </ul>
-  <p class="capt">이 페이지는 리뷰용입니다. 실제 적용은 Owner 승인 후 별도 작업에서 export 스크립트 스케일 반영 → <code>--write</code> 재생성 → 기기 검증 순으로 진행합니다.</p>
+  <p class="capt">이 페이지는 리뷰용입니다. 실제 적용은 Owner 선택(아이콘 %, + 표기, tagline 유무) 후 별도 승인 작업에서 export 스크립트 스케일 반영 → <code>--write</code> 재생성 → Flutter 첫 프레임 + 네이티브 splash 구성 → 기기 검증 순으로 진행합니다.</p>
 </div>
 </body>
 </html>

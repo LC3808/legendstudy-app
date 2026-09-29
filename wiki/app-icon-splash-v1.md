@@ -57,24 +57,34 @@ diagonal. Confirm on the visual artifact.
 
 ---
 
-## Splash options
+## Splash options (Owner revision 2026-09-29)
 
-Warm-white background · official brand · no version/loading %/features/ads ·
-minimal motion · shown regardless of login/network.
+Warm-white background · **text-based, official wordmark image dropped** · no
+version/loading %/features/ads · minimal motion · shown regardless of login/
+network. Product name is a **single near-black colour** (`#12161F`) — the `+` is
+the **same near-black, not a separate orange**; only the **symbol keeps its
+orange**.
 
-- **SPLASH_OPTIONS A:** 심볼 + `레전드스터디+`.
-- **SPLASH_OPTIONS B:** official wordmark (레전드스터디) centered.
-- **SPLASH_OPTIONS C:** 심볼 + `레전드스터디+` + tagline `기출부터 학습까지`.
+**Product-name `+` placement** (compared at real splash size):
+- **A — baseline `레전드스터디+`:** simplest/safest, crisp at any size; `+` reads
+  as one more character, but a touch generic.
+- **B — superscript `레전드스터디⁺` (RECOMMENDED):** `+` set small at the upper-
+  right of 디 → reads as a brand mark, not a footnote (kept ≈0.5em so it isn't too
+  small); confirm crispness at small size on the artifact.
 
-**RECOMMENDED_SPLASH: C** (fall back to **A** if a tagline-free splash is
-preferred — same layout family).
+**Splash layout — tagline or not:**
+- **A — 심볼 + `레전드스터디⁺`** (no tagline).
+- **B — 심볼 + `레전드스터디⁺` + tagline** (RECOMMENDED).
 
-- The home-screen symbol (now at 75%) scales up into the splash → clear
-  **icon ↔ splash continuity**, one brand system.
-- Tagline `기출부터 학습까지` is product identity in one line, not an ad; drop it
-  for A with no layout change.
-- Wordmark-only (B) omits the symbol, weakening the tie to the app icon → keep as
-  a secondary option.
+**New tagline** (replaces "기출부터 학습까지", which is dropped — 기출 is not the
+brand message): **"나의 학습 기록이 쌓일수록, 나의 가능성은 선명해집니다."**
+(exact spacing: 쌓일수록 / 가능성). It ties to LAB's "데이터가 쌓일수록, 나의
+가능성은 선명해집니다."
+
+**RECOMMENDED_SPLASH: B with superscript `⁺`** — fall back to **A (no tagline)**
+if the short native-splash exposure makes the two-line tagline feel heavy or
+unreadable (same layout family, easy switch). The home-screen 75% symbol scales
+up into the splash → clear **icon ↔ splash continuity**.
 
 ---
 
@@ -82,11 +92,11 @@ preferred — same layout family).
 
 **IOS_CONSIDERATIONS:** icons are square PNGs masked by the system to the squircle
 — 75% padding keeps the mark off the mask. Launch screens can't reliably scale
-text, so keep the **native LaunchScreen minimal** (white + centered symbol) and
-render the fuller brand (symbol + name + tagline) as the **Flutter first frame**.
+text, so keep the **native LaunchScreen minimal** (white + centered **orange
+symbol only, no text**) and render the fuller brand (symbol + near-black
+`레전드스터디⁺` superscript + two-line tagline) as the **Flutter first frame**.
 Align the native symbol's size/position to the Flutter first-frame symbol so there
-is **no double flash or size jump**. Support-light/dark: launch stays warm-white
-(brand), no dark variant required for MVP.
+is **no double flash or size jump**. Launch stays warm-white; no dark variant for MVP.
 
 **ANDROID_CONSIDERATIONS:** adaptive icon foreground already pads to the safe zone;
 apply the same 75% to legacy `ic_launcher.png` for consistency. Android 12+ splash
@@ -101,13 +111,14 @@ OEM masks; keep the export script's safe-circle assertion.
 ## Artifacts & implementation
 
 **VISUAL_ARTIFACTS:**
-- `wiki/brand-icon-splash-review/icon-splash-concept.html` — current / 70 / 75 /
-  80 under iOS+Android masks at large & small sizes; iOS home & Android launcher
-  mocks; splash A/B/C; recommended splash; platform notes.
-- `wiki/brand-icon-splash-review/icon.png`, `wordmark.png` — self-contained
-  review previews (512px `sips` downscale of the source, and a copy of the
-  generated wordmark) so the HTML renders portably. **Review previews only — not
-  runtime assets; the source bytes are untouched.**
+- `wiki/brand-icon-splash-review/icon-splash-concept.html` — icon current/70/75/80
+  under iOS+Android masks at large & small sizes; iOS home & Android launcher
+  mocks; **product-name `+` placement A(baseline) vs B(superscript)**; splash
+  A(no tagline)/B(tagline) + Android example; recommended splash; platform notes.
+- `wiki/brand-icon-splash-review/icon.png` — self-contained review preview (512px
+  `sips` downscale of the source). **Review preview only — not a runtime asset;
+  the canonical source bytes are untouched.** (The wordmark image is no longer
+  used — splash is text-based.)
 
 **IMPLEMENTATION_FILES_IF_APPROVED** (only after Owner approval, separate task):
 - `tool/export_launcher_icons.py` — composite source at the approved scale on a
