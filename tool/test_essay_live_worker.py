@@ -123,7 +123,7 @@ class Contracts(unittest.TestCase):
         class NeverCall:
             def evaluate(self,p):raise AssertionError('Actual provider must not run without metadata boundary')
         worker=Worker(rpc,NeverCall(),self.cache,None,None,None,None)
-        with self.assertRaisesRegex(Invalid,'PROVIDER_METADATA_RPC_REQUIRED'):worker.execute('e')
+        with self.assertRaisesRegex(Invalid,'REAL_PROVIDER_NOT_AUTHORIZED'):worker.execute('e')
         self.assertEqual(calls,[])
     def test_malformed_types_fail_closed(self):
         for key in ['dimensions','improvements','sentence_feedback','previous_improvement_reviews']:

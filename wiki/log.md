@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-09-29 — Essay L2-A2 provider provenance / telemetry
+
+- [Server binding + telemetry](essay-lab-provider-provenance-l2-a2.md): KEEP19, total_tokens nullable,
+  empty deployment policy resolver, fenced worker RPC; native/local JWT and L1 regressions PASS.
+- Forward005 NOT_APPLIED; no model selected, real AI0, reviewer BLOCKED, Production/traffic OFF.
+- Historical v1.2/unconfigured runs and Owner iOS changes preserved. Owner review → model selection.
+
+
 ## 2026-09-29 — Essay L2-A partial worker integration
 
 - [L2 boundary/report](essay-lab-worker-provider-l2.md): strict Provider parsing, frozen package, independent signed review, fenced synthetic orchestration and local JWT tests.

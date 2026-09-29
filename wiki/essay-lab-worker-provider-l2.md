@@ -1,5 +1,10 @@
 # Essay LAB L2-A — worker/provider boundary
 
+> Current follow-up: [L2-A2](essay-lab-provider-provenance-l2-a2.md) resolves the binding/telemetry
+> contract in isolated runtime. Its forward migration is NOT_APPLIED; no model selected or real AI
+> enabled. The L2-A results and blockers below are the accepted historical baseline.
+
+
 2026-09-29 · **PARTIAL / NOT PRODUCTION READY**. L1 and Production G1/status/Scaffolding
 acceptance remain preserved. This package implements and tests worker orchestration, strict
 parsing and an independently authenticated review boundary. It does **not** claim the requested
