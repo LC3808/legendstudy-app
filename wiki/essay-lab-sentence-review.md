@@ -3,11 +3,11 @@
 
 2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
 implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
-Isolated runtime/JWT validated; Production NOT_APPLIED, AI NOT_EXECUTED. Review sections below
-remain design context; existing submit timing issue is tracked in the implementation report.
+[Production apply PASS](essay-lab-scaffolding-production-apply.md): persistence and submit timing
+DEPLOYED; AI/student traffic NOT_ENABLED. Historical review sections remain design context.
 
 2026-09-28 · UI/typed preview boundary IMPLEMENTED; persistence and contract extension
-ISOLATED PERSISTENCE RUNTIME VALIDATED (2026-09-29); Production not applied. Actual AI/provider/Production writes in this task: NONE.
+PERSISTENCE PRODUCTION DEPLOYED (2026-09-29); actual AI/provider/student writes: NONE.
 
 ## Product contract
 

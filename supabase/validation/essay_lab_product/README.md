@@ -1,6 +1,8 @@
-# Essay LAB migration validation — SECURITY PASS / DEPLOYED
+# Essay LAB migration validation — SECURITY / SCAFFOLDING DEPLOYED
 
-> Current canonical result: `security_resolution_result.json`; [B1/B2 resolution](../../../wiki/essay-lab-security-resolution.md). B1 forward REVOKE applied, B2 exact ADMIN-only contract. Historical preparation below is retained.
+> Latest: [2026-09-29 apply](../../../wiki/essay-lab-scaffolding-production-apply.md), `scaffolding_production_result.json`: two forward migrations applied; ledger19/pending0; AI/student disabled.
+
+> Previous canonical result: `security_resolution_result.json`; [B1/B2 resolution](../../../wiki/essay-lab-security-resolution.md). B1 forward REVOKE applied, B2 exact ADMIN-only contract. Historical preparation below is retained.
 
 
 > Current: [Production apply](../../../wiki/essay-lab-production-apply.md), `production_apply_result.json`:3 applied, ledger16/no pending; security discrepancies9 helper grants/3 ADMIN-only memberships. No further mutation authorized. Below preserves historical preparation.

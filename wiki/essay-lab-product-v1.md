@@ -3,12 +3,12 @@
 
 2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
 implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
-Isolated runtime/JWT validated; Production NOT_APPLIED, AI NOT_EXECUTED. Review sections below
-remain design context; existing submit timing issue is tracked in the implementation report.
+[Production apply PASS](essay-lab-scaffolding-production-apply.md): persistence and submit timing
+DEPLOYED; AI/student traffic NOT_ENABLED. Historical review sections remain design context.
 
 2026-09-29 · **Scaffolding APPROVED / PERSISTENCE RUNTIME VALIDATED / AI NOT EXECUTED**.
 Base schema/RPC deployed: [security acceptance](essay-lab-security-resolution.md).
-UI is a fixture preview; persistence is isolated-runtime validated but not applied. Live AI/payment and real-student traffic are not enabled. [Architecture and SQL](student-analytics-data-architecture.md)
+UI is a fixture preview; persistence is Production deployed. Live AI/payment and real-student traffic are not enabled. [Architecture and SQL](student-analytics-data-architecture.md)
 implements this proposal's data contract; the [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md)
 remains the upper-level strategy, not a competing student master.
 
@@ -233,7 +233,6 @@ analytics, common competencies, admissions outcomes, subscription/provider integ
 cohorts and dashboard narratives. **OPTIONAL:** materialized caches/snapshots after query profiling.
 No data reingestion, UI change or provider execution in this contract-review phase.
 
-Next: Owner/ChatGPT scaffolding contract review → minimal persistence/versioned adapter → isolated
-runtime regression → separately approved AI Pilot. Existing schema security acceptance is preserved;
-this extension is not applied. Real-student writes require privacy/provider/retention and integration
+Next: Owner/ChatGPT Production result review → separately approved AI Pilot.
+Persistence/versioned adapter is deployed; existing security acceptance is preserved. Real-student writes require privacy/provider/retention and integration
 gates, independent of this review. Productization-ready does not mean release-ready.

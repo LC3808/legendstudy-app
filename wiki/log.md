@@ -2970,3 +2970,10 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 Owner separately authorized NULL/floor correction; accepted Scaffolding preserved.
 [Exact scope and isolated validation](essay-lab-submit-timing-correction.md).
 Existing CHECK/history/migrations unchanged; Production/AI/real student data NO.
+
+## 2026-09-29 — Scaffolding and submit correction Production deployment
+
+Owner-authorized00100/00200 normal migration push once; preflight/dry-run PASS.
+[Read-only post-apply](essay-lab-scaffolding-production-apply.md):100 checks PASS,
+ledger19/pending0, KEEP19, unchanged canonical fingerprints/security, Product rows0.
+AI/student traffic disabled; next separately approved Scaffolding AI Pilot.

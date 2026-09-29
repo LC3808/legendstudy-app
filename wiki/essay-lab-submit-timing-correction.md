@@ -2,7 +2,7 @@
 
 2026-09-29. Owner separately approved this correction after accepting the
 [Scaffolding persistence result](essay-lab-scaffolding-persistence.md).
-**Production NOT APPLIED.** No AI, real student data, UI or billing change.
+**Production DEPLOYED** — [apply evidence](essay-lab-scaffolding-production-apply.md). No AI, real student data, UI or billing change.
 
 ## Root cause and exact correction
 
@@ -79,8 +79,7 @@ converted to1.3. Existing accepted Scaffolding artifacts remain byte-for-byte un
 
 ## Deployment boundary
 
-Only the new forward migration is pending for Owner review. Do not infer Production
-apply from file presence. Scaffolding persistence migration is also unapplied.
-No Production connection, SQL execution, repair, db push, AI call, or real student
-seed was performed. Existing privacy/provider/retention gates remain independent.
-Next: Owner/ChatGPT reviews isolated validation → separately authorizes apply.
+The original correction task performed no Production operation. Owner subsequently
+approved both forward migrations; the linked read-only Production report confirms
+application. Original runtime artifacts remain unchanged historical evidence.
+Privacy/provider/retention gates remain independent. Next: separately approved AI Pilot.

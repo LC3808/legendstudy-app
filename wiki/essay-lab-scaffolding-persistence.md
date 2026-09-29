@@ -1,6 +1,6 @@
 # Essay LAB Scaffolding Persistence — 1.3
 
-2026-09-29 · IMPLEMENTED / ISOLATED RUNTIME VALIDATED / **PRODUCTION NOT APPLIED**.
+2026-09-29 · IMPLEMENTED / ISOLATED RUNTIME VALIDATED / **PRODUCTION DEPLOYED** — [apply evidence](essay-lab-scaffolding-production-apply.md).
 Owner approved the [product contract](essay-lab-product-v1.md) and1.3-review.1 direction.
 KEEP19; one new nullable column; no AI call, real student data, UI change or new table.
 [Sanitized verification](../supabase/validation/essay_lab_product/scaffolding_result.json).
@@ -135,6 +135,6 @@ retain the issue as a rollout prerequisite; do not weaken the CHECK or alter his
 Owner subsequently accepted this result and separately authorized the linked timing correction.
 This report and its original validation artifacts retain their historical scope.
 
-Next: Owner reviews runtime results → separately decides Production
-persistence apply → separately authorizes Scaffolding AI Pilot. This task neither applies Production
-nor enables real student/provider traffic.
+Subsequent Production apply is verified in the linked deployment report.
+Next: Owner reviews Production results → separately authorizes Scaffolding AI Pilot.
+Real student/provider traffic remains disabled.

@@ -1,0 +1,535 @@
+{
+  "date": "2026-09-29",
+  "starting_head": "6816642",
+  "pre_apply": "PASS",
+  "dry_run": {
+    "upToDate": false,
+    "dryRun": true,
+    "migrations": [
+      "20260929000100_essay_scaffolding_persistence.sql",
+      "20260929000200_essay_submit_timing_correction.sql"
+    ],
+    "seeds": [],
+    "roles": [],
+    "message": "Finished supabase db push."
+  },
+  "apply_count": 1,
+  "migrations_applied": [
+    "20260929000100",
+    "20260929000200"
+  ],
+  "ledger_total": 19,
+  "local_remote_match": true,
+  "pending": [],
+  "schema_tables": 19,
+  "new_columns": [
+    "essay_improvement_progress.scaffolding_observation jsonb NULL"
+  ],
+  "checks": {
+    "all_47_existing_object_definitions_match_validated_runtime": "PASS",
+    "check_01_preserved": "PASS",
+    "check_02_preserved": "PASS",
+    "check_03_preserved": "PASS",
+    "check_04_preserved": "PASS",
+    "check_05_preserved": "PASS",
+    "check_06_preserved": "PASS",
+    "check_07_preserved": "PASS",
+    "check_08_preserved": "PASS",
+    "check_09_preserved": "PASS",
+    "check_10_preserved": "PASS",
+    "policies_preserved": "PASS",
+    "canonical_orphans_preserved": "PASS",
+    "managed_memberships_exact": "PASS",
+    "nullable_jsonb_no_default": "PASS",
+    "nine_helpers_external_roles_denied": "PASS",
+    "28_existing_plus9_private_functions": "PASS",
+    "clock_signature_security_preserved": "PASS",
+    "clock_definition_unchanged": "PASS",
+    "fence_signature_security_preserved": "PASS",
+    "fence_definition_unchanged": "PASS",
+    "hash_signature_security_preserved": "PASS",
+    "hash_definition_unchanged": "PASS",
+    "lock_job_signature_security_preserved": "PASS",
+    "lock_job_definition_unchanged": "PASS",
+    "owner_signature_security_preserved": "PASS",
+    "owner_definition_unchanged": "PASS",
+    "release_signature_security_preserved": "PASS",
+    "release_definition_unchanged": "PASS",
+    "uid_signature_security_preserved": "PASS",
+    "uid_definition_unchanged": "PASS",
+    "essay_billing_history_guard_signature_security_preserved": "PASS",
+    "essay_billing_history_guard_definition_unchanged": "PASS",
+    "essay_claim_signature_security_preserved": "PASS",
+    "essay_credit_account_guard_signature_security_preserved": "PASS",
+    "essay_credit_account_guard_definition_unchanged": "PASS",
+    "essay_erase_signature_security_preserved": "PASS",
+    "essay_erase_definition_unchanged": "PASS",
+    "essay_finalize_failure_signature_security_preserved": "PASS",
+    "essay_finalize_failure_definition_unchanged": "PASS",
+    "essay_finalize_success_signature_security_preserved": "PASS",
+    "essay_open_session_signature_security_preserved": "PASS",
+    "essay_open_session_definition_unchanged": "PASS",
+    "essay_product_child_guard_signature_security_preserved": "PASS",
+    "essay_product_child_guard_definition_unchanged": "PASS",
+    "essay_product_draft_guard_signature_security_preserved": "PASS",
+    "essay_product_draft_guard_definition_unchanged": "PASS",
+    "essay_product_processing_guard_signature_security_preserved": "PASS",
+    "essay_product_processing_guard_definition_unchanged": "PASS",
+    "essay_product_progress_guard_signature_security_preserved": "PASS",
+    "essay_product_progress_guard_definition_unchanged": "PASS",
+    "essay_product_reject_update_signature_security_preserved": "PASS",
+    "essay_product_reject_update_definition_unchanged": "PASS",
+    "essay_product_terminal_guard_signature_security_preserved": "PASS",
+    "essay_product_terminal_guard_definition_unchanged": "PASS",
+    "essay_question_identity_guard_signature_security_preserved": "PASS",
+    "essay_question_identity_guard_definition_unchanged": "PASS",
+    "essay_reconcile_signature_security_preserved": "PASS",
+    "essay_reconcile_definition_unchanged": "PASS",
+    "essay_refund_signature_security_preserved": "PASS",
+    "essay_refund_definition_unchanged": "PASS",
+    "essay_request_evaluation_signature_security_preserved": "PASS",
+    "essay_request_rewrite_signature_security_preserved": "PASS",
+    "essay_request_rewrite_definition_unchanged": "PASS",
+    "essay_save_draft_signature_security_preserved": "PASS",
+    "essay_save_draft_definition_unchanged": "PASS",
+    "essay_submit_attempt_signature_security_preserved": "PASS",
+    "essay_timeout_signature_security_preserved": "PASS",
+    "essay_timeout_definition_unchanged": "PASS",
+    "approved_13_function_bodies_extracted": "PASS",
+    "scaffold_envelope_valid_approved_source_exact": "PASS",
+    "scaffold_envelope_valid_owner_search_path": "PASS",
+    "scaffold_context_approved_source_exact": "PASS",
+    "scaffold_context_owner_search_path": "PASS",
+    "scaffold_validate_approved_source_exact": "PASS",
+    "scaffold_validate_owner_search_path": "PASS",
+    "scaffold_legacy_essay_request_evaluation_approved_source_exact": "PASS",
+    "scaffold_legacy_essay_request_evaluation_owner_search_path": "PASS",
+    "scaffold_legacy_essay_claim_approved_source_exact": "PASS",
+    "scaffold_legacy_essay_claim_owner_search_path": "PASS",
+    "scaffold_legacy_essay_finalize_success_approved_source_exact": "PASS",
+    "scaffold_legacy_essay_finalize_success_owner_search_path": "PASS",
+    "scaffold_request_v13_approved_source_exact": "PASS",
+    "scaffold_request_v13_owner_search_path": "PASS",
+    "scaffold_claim_v13_approved_source_exact": "PASS",
+    "scaffold_claim_v13_owner_search_path": "PASS",
+    "scaffold_finalize_v13_approved_source_exact": "PASS",
+    "scaffold_finalize_v13_owner_search_path": "PASS",
+    "essay_request_evaluation_approved_source_exact": "PASS",
+    "essay_request_evaluation_owner_search_path": "PASS",
+    "essay_claim_approved_source_exact": "PASS",
+    "essay_claim_owner_search_path": "PASS",
+    "essay_finalize_success_approved_source_exact": "PASS",
+    "essay_finalize_success_owner_search_path": "PASS",
+    "essay_submit_attempt_approved_source_exact": "PASS",
+    "essay_submit_attempt_owner_search_path": "PASS",
+    "ledger19_match": "PASS",
+    "migration_list_match_pending0": "PASS",
+    "v1_2_legacy_bodies_byte_exact": "PASS",
+    "actual_apply_only2_no_seed_or_role_bundle": "PASS"
+  },
+  "canonical_before": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "canonical_after": [
+    {
+      "content_fingerprint": "e30252ff15c14acd752ba7ffc60b9d84",
+      "name": "essay_exam_resources",
+      "row_count": 134
+    },
+    {
+      "content_fingerprint": "7495d3a5bde6b1c314ff2f71896272f7",
+      "name": "essay_exams",
+      "row_count": 21
+    },
+    {
+      "content_fingerprint": "b7e19b9c859e0da4dc927d3c74c49cd4",
+      "name": "resources",
+      "row_count": 10556
+    },
+    {
+      "content_fingerprint": "6d5507e6d2d15b3108ddac431bb88241",
+      "name": "universities",
+      "row_count": 5
+    }
+  ],
+  "product_counts": [
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_questions"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_question_evidence"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_evaluation_criteria"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "student_target_universities"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_practice_sessions"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_drafts"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_attempts"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_evaluations"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_evaluation_dimensions"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_improvement_items"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_improvement_progress"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_evaluation_evidence"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_generated_rewrites"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_learning_events"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_ai_processing_runs"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "credit_accounts"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "credit_grants"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "essay_billing_decisions"
+    },
+    {
+      "initial_count_should_be_zero": 0,
+      "name": "credit_transactions"
+    }
+  ],
+  "canonical_orphans": [
+    {
+      "exams": 0,
+      "mappings": 0
+    }
+  ],
+  "security_contract": "PASS",
+  "v1_2_compatibility": "PASS_catalog_and_accepted_isolated_runtime",
+  "scaffolding_persistence": "PRODUCTION_DEPLOYED",
+  "submit_timing_correction": "PRODUCTION_DEPLOYED",
+  "student_data_created": false,
+  "AI_executed": false,
+  "real_student_traffic": "NOT_ENABLED",
+  "production_validation": "READ_ONLY_CATALOG_NO_WRITE_FIXTURES",
+  "post_apply_validation": "PASS",
+  "migration_sha256": {
+    "20260929000100_essay_scaffolding_persistence.sql": "1eb5c7491490e4e411b7eb32222b86976039264560bc13ad915f7cb0e452ea89",
+    "20260929000200_essay_submit_timing_correction.sql": "845a62146938665882efecf25ee1a6f0a28db68ddd88b83c857b9926f8838e1c"
+  },
+  "post_catalog_definitions": [
+    {
+      "definition_hash": "6ba208957796c86031be7f150988ee24",
+      "kind": "function",
+      "name": "essay_private.clock()"
+    },
+    {
+      "definition_hash": "3960cea03c6ccdefac9289187fa3b0aa",
+      "kind": "function",
+      "name": "essay_private.fence(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "d21fb8743e7a5039a26ecebd1b5a92e7",
+      "kind": "function",
+      "name": "essay_private.hash(p_text text)"
+    },
+    {
+      "definition_hash": "02853d30a8ddccee78ee7f7e0bbfd4f1",
+      "kind": "function",
+      "name": "essay_private.lock_job(p_evaluation uuid)"
+    },
+    {
+      "definition_hash": "2b90f025f8ae19d53cb653d2c4868422",
+      "kind": "function",
+      "name": "essay_private.owner(p_session uuid)"
+    },
+    {
+      "definition_hash": "e019bddf2af1d0a95f28e7e318112031",
+      "kind": "function",
+      "name": "essay_private.release(p_evaluation uuid)"
+    },
+    {
+      "definition_hash": "b2d988f9bc5bb6e7b742c7821db7a7a5",
+      "kind": "function",
+      "name": "essay_private.uid()"
+    },
+    {
+      "definition_hash": "367d2b0957d708ffd408890e55ab33b3",
+      "kind": "function",
+      "name": "public.essay_billing_history_guard()"
+    },
+    {
+      "definition_hash": "c5d2fd6cb290841d3e38e40c85eb399a",
+      "kind": "function",
+      "name": "public.essay_claim(p_evaluation uuid, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "1466dc181f4100782035c4c7934344f9",
+      "kind": "function",
+      "name": "public.essay_credit_account_guard()"
+    },
+    {
+      "definition_hash": "7e9f0a1996431f1c010ffec20ad81d02",
+      "kind": "function",
+      "name": "public.essay_erase(p_session uuid)"
+    },
+    {
+      "definition_hash": "1b8c08e315725e62c909df242c5f2768",
+      "kind": "function",
+      "name": "public.essay_finalize_failure(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "51f31da5c692113c00f05a75133a5b3a",
+      "kind": "function",
+      "name": "public.essay_finalize_success(p_evaluation uuid, p_run uuid, p_token uuid, p_output jsonb, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "724c4a8a6e8228e4996441ef4c274fed",
+      "kind": "function",
+      "name": "public.essay_open_session(p_id uuid, p_question uuid)"
+    },
+    {
+      "definition_hash": "ae43c0e2d3a1a15cbc3ae3f79e14f885",
+      "kind": "function",
+      "name": "public.essay_product_child_guard()"
+    },
+    {
+      "definition_hash": "178355a7378a6970676ffa1af2acda4c",
+      "kind": "function",
+      "name": "public.essay_product_draft_guard()"
+    },
+    {
+      "definition_hash": "a7559f3135904f27b2e68fe2a75c2fc8",
+      "kind": "function",
+      "name": "public.essay_product_processing_guard()"
+    },
+    {
+      "definition_hash": "3f0dd98c4b05ebb5faaf42743dd63e45",
+      "kind": "function",
+      "name": "public.essay_product_progress_guard()"
+    },
+    {
+      "definition_hash": "be7868ad49936437d52a7fe0c1366cc7",
+      "kind": "function",
+      "name": "public.essay_product_reject_update()"
+    },
+    {
+      "definition_hash": "dc40b178939b1fdc119c007db28edf8a",
+      "kind": "function",
+      "name": "public.essay_product_terminal_guard()"
+    },
+    {
+      "definition_hash": "5b634bcca516ead399ffd38eee569461",
+      "kind": "function",
+      "name": "public.essay_question_identity_guard()"
+    },
+    {
+      "definition_hash": "1f2a603f781b2a8898c72d9610606ba4",
+      "kind": "function",
+      "name": "public.essay_reconcile(p_evaluation uuid, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "5f82b9cb5cd645e8e1d084aebf4a36c6",
+      "kind": "function",
+      "name": "public.essay_refund(p_consume uuid, p_key text, p_amount integer)"
+    },
+    {
+      "definition_hash": "a1106ec6eb5d775760463d0b5ca81c4c",
+      "kind": "function",
+      "name": "public.essay_request_evaluation(p_attempt uuid, p_key uuid, p_regime text)"
+    },
+    {
+      "definition_hash": "afc5b871a8f8c647bbfb734505b6ebec",
+      "kind": "function",
+      "name": "public.essay_request_rewrite(p_evaluation uuid)"
+    },
+    {
+      "definition_hash": "b85e042902169e1cd99d107206ce0976",
+      "kind": "function",
+      "name": "public.essay_save_draft(p_session uuid, p_revision bigint, p_body text, p_device text, p_mode text, p_active_seconds integer)"
+    },
+    {
+      "definition_hash": "b840138884781b3a3ed1d29168152685",
+      "kind": "function",
+      "name": "public.essay_submit_attempt(p_session uuid, p_revision bigint, p_key uuid, p_body_hash text)"
+    },
+    {
+      "definition_hash": "b5b74d44275a5dc881207e2c0ec4fb13",
+      "kind": "function",
+      "name": "public.essay_timeout(p_evaluation uuid, p_run uuid, p_token uuid, p_rewrite uuid)"
+    },
+    {
+      "definition_hash": "065f9ec7d3332691b28295654cd1c962",
+      "kind": "table",
+      "name": "credit_accounts"
+    },
+    {
+      "definition_hash": "368fb4eeeaf3ceedcb5ef35eb11f7339",
+      "kind": "table",
+      "name": "credit_grants"
+    },
+    {
+      "definition_hash": "0fe5f8c8f2277cc4ca17ce7dec875058",
+      "kind": "table",
+      "name": "credit_transactions"
+    },
+    {
+      "definition_hash": "205ac0d67fa18c80c697ebcfd838e021",
+      "kind": "table",
+      "name": "essay_ai_processing_runs"
+    },
+    {
+      "definition_hash": "77d4b71131025686fcb9d7d29dd9f8cc",
+      "kind": "table",
+      "name": "essay_attempts"
+    },
+    {
+      "definition_hash": "3b8291374232f2a536362f2b6d0225d8",
+      "kind": "table",
+      "name": "essay_billing_decisions"
+    },
+    {
+      "definition_hash": "6978d419d8dcf2748778b92497eb9142",
+      "kind": "table",
+      "name": "essay_drafts"
+    },
+    {
+      "definition_hash": "373de96a82d2ee3388f4c9b1d35123f9",
+      "kind": "table",
+      "name": "essay_evaluation_criteria"
+    },
+    {
+      "definition_hash": "6e13296ebd64b937592a1fc53eaea9d1",
+      "kind": "table",
+      "name": "essay_evaluation_dimensions"
+    },
+    {
+      "definition_hash": "716a71fb768d6cb6792fa578d5da1144",
+      "kind": "table",
+      "name": "essay_evaluation_evidence"
+    },
+    {
+      "definition_hash": "9b29f6e6b69a8af75fb84ffba53103f7",
+      "kind": "table",
+      "name": "essay_evaluations"
+    },
+    {
+      "definition_hash": "2103c217cb1fc3eadb72430b937e8e0b",
+      "kind": "table",
+      "name": "essay_generated_rewrites"
+    },
+    {
+      "definition_hash": "bf7fce080e57d8cffb8a4f66fff77897",
+      "kind": "table",
+      "name": "essay_improvement_items"
+    },
+    {
+      "definition_hash": "054e79a88e5421b52d9a6a7042c40469",
+      "kind": "table",
+      "name": "essay_improvement_progress"
+    },
+    {
+      "definition_hash": "19cf4b2e3d4ca9f0875141cf2f67591d",
+      "kind": "table",
+      "name": "essay_learning_events"
+    },
+    {
+      "definition_hash": "c782690219b3654faf5a3b6d3650d32b",
+      "kind": "table",
+      "name": "essay_practice_sessions"
+    },
+    {
+      "definition_hash": "1d13692345fe709bb983f7d05cf97317",
+      "kind": "table",
+      "name": "essay_question_evidence"
+    },
+    {
+      "definition_hash": "0951e523947ad74e72d66570945edad7",
+      "kind": "table",
+      "name": "essay_questions"
+    },
+    {
+      "definition_hash": "ad63e7bd37e03bec052fee85089a6a84",
+      "kind": "table",
+      "name": "student_target_universities"
+    }
+  ],
+  "new_helper_source_hashes": {
+    "scaffold_claim_v13": "628d7d90c116fc1cdbafd806c9e4a440e9fe43f9c79fc9f76ab495dd10ed3042",
+    "scaffold_context": "8d8b9ecc5c6e7ec6152bd012364a22c0a2568e2f001d81dfd39512883a0d1239",
+    "scaffold_envelope_valid": "b291cd5744334fc79183140dc4c70d144f7b6030de51d3b3349cab30ce48df3a",
+    "scaffold_finalize_v13": "ed9925fe2a1dadbf26ac50817dab1fed34da9b68a21e695e82551f0651778212",
+    "scaffold_legacy_essay_claim": "5a3862c1cf5206e96b1e175496d9ce3dc9bc9e37610a827bfe449d8bd02c7416",
+    "scaffold_legacy_essay_finalize_success": "9066bf243df3af3c46d765b300cb7e0f97eb2038f2ba929c14752d1a16a9e75d",
+    "scaffold_legacy_essay_request_evaluation": "ca907d3e5291a8c43bc717a4915d728f24afafff4113e305cc03949875664902",
+    "scaffold_request_v13": "021251bdf310b1915faca4dac730a1e998263b6338d4ebbda6bcd54c5394d7fa",
+    "scaffold_validate": "1221ca6931b6d9b0d4828fb27db2510e08885595aca1c8dc0c8b095f7127ab49"
+  },
+  "accepted_isolated_evidence": [
+    "scaffolding_result.json",
+    "submit_timing_result.json"
+  ],
+  "new_regressions": "NONE_OBSERVED_WITHIN_CATALOG_VALIDATION",
+  "ready_for_scaffolding_ai_pilot": true,
+  "ready_for_real_student_traffic": false,
+  "static_tests": {
+    "validation": 32,
+    "review": 55,
+    "status": "PASS"
+  },
+  "wiki_check": "PASS",
+  "diff_check": "PASS",
+  "secret_uuid_scan": "PASS",
+  "owner_files_preserved": true
+}
