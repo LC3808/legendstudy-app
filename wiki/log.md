@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-09-29 — L1 status projection blocker resolved
+
+- [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection): one read-only projection, no table/column/history/RLS changes.
+- Native/JWT55 each, G1/Scaffolding regressions and static46 PASS. Approved29000400 applied; post25 PASS; ledger21/pending0, existing data/contracts unchanged.
+- Ready to resume L1 after Owner review; no Flutter/AI/worker/IAP/student traffic started.
+
 ## 2026-09-29 — G1 Production apply PASS
 
 - [G1 apply](essay-lab-server-transactions.md#production-apply--owner-authorized-2026-09-29): approved29000300 only, exact2ce0840 bytes; current HEAD retained.

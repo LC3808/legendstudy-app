@@ -11,6 +11,89 @@ Auth/PostgREST:37 checks PASS, including real password-issued user JWTs. Five sa
 static tests PASS. [Machine result](../supabase/review/essay_lab_product/runtime/server-result.json)
 contains exact check names and source hashes. This is not deployment, AI quality or App/LAB OAuth E2E approval.
 
+## Owner status projection
+
+2026-09-29 · **L1 blocker RESOLVED / PRODUCTION_DEPLOYED / POST_APPLY PASS**.
+Owner authorized one additive read RPC and its Production apply after isolated validation.
+[Migration](../supabase/migrations/20260929000400_essay_owner_evaluation_status.sql),
+[runtime suite](../supabase/validation/essay_lab_product/status_projection_runtime.py),
+[sanitized results](../supabase/validation/essay_lab_product/status_projection_result.json),
+[read-only catalog query](../supabase/validation/essay_lab_product/status_projection_post.readonly.sql).
+
+The original timeout RPC only marks a private processing run `unknown`; the student-visible
+result remains `processing`. Clients cannot read processing telemetry and must not infer server
+status from elapsed client time. New `essay_evaluation_status(p_evaluation uuid) → jsonb` closes
+this gap without changing timeout/claim/finalize/billing functions, history, tables or columns.
+
+### Caller and response contract
+
+Authenticated owner only. Server auth.uid() → evaluation → attempt → practice session verifies
+ownership and question/session relations; no user_id input. Missing/erased/foreign records all
+return PT404, an absent identity PT401 (anon is also denied EXECUTE). SECURITY DEFINER owned by
+`essay_executor`, empty search_path, STABLE read snapshot. No SELECT FOR UPDATE or mutation.
+No worker/finance/service_role EXECUTE grant; existing role memberships and RLS unchanged.
+
+Exact response allowlist (no IDs/body/telemetry):
+
+| Field | Values / meaning |
+|---|---|
+| `state` | processing / reconciling / completed / failed |
+| `credit_state` | reserved / included / settled / released / pending |
+| `credit_mode` | paid / included / pending; zero-credit means included, no client balance inference |
+| `release_confirmed` | released decision + timestamp, no consume, all reservations released per grant |
+| `no_credit_consumed` | confirmed release OR valid zero-credit authorization/settlement, suppressed while reconciling |
+
+- Processing: authorized billing and either a fresh queued request or latest active unexpired run.
+- Reconciling: timeout/unknown, lease expiry, unclaimed queue beyond the existing15-minute server
+  window, invalidated result, missing/inconsistent billing, or other unconfirmed combination.
+  Old unknown runs do not override a newer active retry. Rewrite runs are excluded.
+- Completed: non-invalidated completed result with output hash/summary AND valid settled ledger;
+  reserved/consumed amounts equal required credits, no release, per-grant reservation closure.
+  Included completion needs valid zero-credit settlement and has no consume.
+- Failed: authoritative failed/cancelled evaluation. Financial wording is separate; never claim
+  a release solely from failure. A fully refunded historical paid consume is still historical
+  consumption, not a technical-failure "never charged" claim.
+- PT402 belongs to request rejection, not a failed evaluation. No evaluation row is created for
+  insufficient rights. This read RPC neither requests an evaluation nor calculates affordability.
+
+Flutter should show processing/reconciling wording from this server state. While reconciling it
+must not finalize charged/uncharged wording, even for an included authorization. A definitive
+failure can show "첨삭권은 차감되지 않았습니다" only with `no_credit_consumed=true` and the
+returned release/zero-credit basis. This phase does not implement Flutter or restart L1.
+
+There is no lease_token, worker identity/credential, provider status/request ID/error body,
+retry secret, raw telemetry or other-user information in the response. Processing table stays
+private. Projection uses existing evaluation/run/decision/ledger facts in one statement snapshot;
+it is an observation at query time and naturally changes after a subsequent server transition.
+
+### Validation and Production record
+
+- Disposable PG: status55 + G1 84 + post-change legacy Scaffolding80 PASS.
+- Actual local Supabase Auth JWT/PostgREST: status55 + G1 88 + Scaffolding70 PASS. Anonymous
+  HTTP denied; owner allowed; other-user/nonexistent/erased denied. Raw response keys allowlisted.
+- Both v1/v2 exercise requested/running, timeout→unknown→reconciling, retry→processing, paid and
+  included completion, definitive failure/release, reserved-before-failure, queue/lease expiry,
+  reconciliation release, stale/late success rejection and PT402 without phantom failure row.
+  Clock shifts are disposable-only deterministic fixtures, never an RPC argument or Production change.
+- Existing pre-G1 Phase2A77/Phase2B55, Scaffolding80 native/79 local and submit timing306 each
+  also passed via the baseline harness. Static46 PASS. No provider call or real student fixture.
+- Production preflight matched LegendStudy, existing ledger20, exactly29000400 pending, the exact
+  hash tested in both environments, and G1/security/Scaffolding/canonical baseline. Dry-run/apply
+  listed only this migration, empty seeds/role bundles. One normal Supabase apply; no repair/replay.
+- Read-only post-apply25 checks PASS: ledger21/local-remote match/pending0; all47 existing catalog
+  object hashes and all43 existing function definitions/ACL unchanged; new function signature,
+  owner, stable security-definer/search_path and EXECUTE allowlist exact.
+- Product19 tables remain0 rows; canonical5 universities/21 exams/134 mappings/10556 resources,
+  fingerprints unchanged. No Production synthetic Auth/student/financial writes or AI.
+
+Seven history-preservation answers: (1) this read creates no new fact; (2) states are recomputable
+from existing authoritative facts and server time; (3) no UPDATE/history loss; (4) shared Auth owner
+identity is enforced; (5) financial state is not Learning/Admissions Outcome; (6) existing deletion,
+RLS and retention remain, response contains no telemetry/PII; (7) no mutable projection/cache truth.
+
+**READY_TO_RESUME_L1=YES**, after Owner review. Real student traffic remains NO. Flutter L1,
+Production worker/provider, IAP/Paywall/Analytics/Ads are not started by this blocker resolution.
+
 ## G1 Credit Commercial Core — 2026-09-29
 
 ### Production apply — Owner authorized 2026-09-29
