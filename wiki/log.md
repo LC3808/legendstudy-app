@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-09-30 — L2-B1 Product revision-limit clarification
+
+- Owner addendum: Pilot4/2 external-call caps are not student revision/lifetime limits.
+  [Product v2](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29) repeats paid/included;
+  Scaffolding continues prior-task review and next guidance without a round cap.
+- Narrow code/G1 fixture check: no conflict. Historical v1 stays pinned. Documentation only;
+  no DB/RPC/migration/function change, actual AI0. Existing private/iOS artifacts preserved.
+
 ## 2026-09-30 — Essay L2-B1 private Round1 dispatcher
 
 - [L2-B canonical](essay-lab-model-bakeoff-l2-b.md#l2-b1-private-round1-dispatcher--2026-09-30):

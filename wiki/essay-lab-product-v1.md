@@ -190,6 +190,10 @@ the v1 table below remains historical policy for existing pinned v1 sessions.
 
 - `essay_cycle/v2`: one `essay_practice_session` is one Learning Cycle. Successful paid evaluations
   each supply one included evaluation: **1 → 0 → 1 → 0 → 1 → 0**, continuing in that session.
+  Owner clarification2026-09-30: this is repeatable, not a student revision/evaluation
+  lifetime cap. Pilot Round1=4/Round2=2 caps only private external provider calls.
+  Scaffolding repeats prior-task review, improvement/resolution/recurrence assessment,
+  next priority or more specific help, and student rewriting without a round-count limit.
   Each included decision references its successful parent paid decision. Authoritative source:
   versioned billing decisions and ledger, never `attempt_no` parity or client-side counters.
 - A new submitted revision after the parent answer can claim that benefit. Retrying the same logical

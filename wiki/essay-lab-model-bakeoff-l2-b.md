@@ -17,6 +17,30 @@ L2-B2 still requires separate Owner authorization, secure provisioning and a rev
 activation change. No environment variable or credential can enable L2-B1 real mode.
 No quality, real latency or actual cost conclusion follows from synthetic tests.
 
+### Pilot call caps are not Product revision limits — Owner addendum
+
+`ROUND1_CALL_LIMIT=4` and `ROUND2_PLANNED_CALLS=2` bound only external provider
+requests in this model-selection Pilot. **Pilot call cap ≠ student revision cap ≠
+Product evaluation lifetime cap.** Students may continue rewriting/re-evaluating the
+same question as needed under the authoritative server entitlement policy.
+[Product essay_cycle/v2](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29)
+repeats paid → included → paid → included indefinitely; it is not an attempt-number
+parity rule or a four/six-evaluation ceiling. Required credits and existing validation,
+idempotency/concurrency/security boundaries still apply. Historical v1 sessions retain
+their pinned policy; this clarification does not rewrite past entitlements.
+
+Scaffolding also has no revision-count cap: review previous core tasks → assess
+improvement/resolution/recurrence → choose the next priority when resolved or provide
+more specific help when unresolved → student rewrites → re-evaluation. Unknown or
+not_assessable is not inferred resolution. Per-evaluation core/sentence limits stay intact.
+
+Narrow source cross-check: deployed G1 migration003 selects an unclaimed settled paid
+v2 decision in the same session, otherwise starts another paid decision; there is no
+lifetime count condition. Existing G1 runtime fixture covers six successful alternating
+charges. Pending L2-A2 migration005 retains that selection. Scaffolding adapter has no
+round counter; dispatcher caps are private Pilot-only and have no DB/RPC path.
+**CONFLICT: NONE.** No code/DB/RPC/migration change, Production re-audit or AI execution.
+
 ### Fixed inputs and actual HTTP boundary
 
 Only these slot IDs, in future operator execution order: `sookmyung-openai`,
