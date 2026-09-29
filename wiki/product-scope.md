@@ -1,6 +1,10 @@
 # Product Scope
 
-**Owner priority2026-09-27:** Materials final device QA → Essay LAB canonical
+**Current Owner target2026-09-29:** [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29) 우선.
+10월 중순 App+Essay Store 출시·10월 말 안정화 후 Mock/CSAT BETA, 2027 내신/Admissions.
+아래 과거 순서는 이 목표로 대체되며 미구현 기능의 자동 승인/완료를 뜻하지 않는다.
+
+**Historical Owner priority2026-09-27:** Materials final device QA → Essay LAB canonical
 model (separate instruction) → internal-grade → mock-score → admissions.
 [Source policy, corpus target and handoff](materials-closeout-essay-lab-handoff.md).
 No Essay LAB/payment/admissions implementation is included in Materials closeout.

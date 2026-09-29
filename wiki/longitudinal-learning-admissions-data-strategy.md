@@ -3,7 +3,15 @@
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**
 **Owner decision: 2026-09-24; history-model clarification: 2026-09-29 · Long-term architecture: PLANNED · No new implementation authorization**
 
-## Latest delivery priority — 2026-09-27
+## Latest delivery priority — 2026-09-29
+
+[2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29)가 최신 일정과 Monetization을 소유한다.
+Essay Store 출시·안정화 후 모의고사/수능 BETA 우선, 내신/Admissions 및 Subscription은
+2027 고도화 방향. Learning / Decision / Outcome history를 지속적 사용자 가치로
+돌려주며 수집 자체를 구독 가치로 삼지 않는다. 공식 입결/외부 배치자료는 자체 Outcome과
+분리한다. 기존 일곱 preservation 질문과 evidence/privacy gate를 유지한다.
+
+## Historical delivery priority — 2026-09-27
 
 [Owner closeout / Essay LAB handoff](materials-closeout-essay-lab-handoff.md):
 Materials device QA → Essay LAB → 내신 분석 → 모의고사 분석 → 지원전략/합격예측.
@@ -70,7 +78,7 @@ ANALYTICS, MONETIZATION, B2B. 구현 상태는 [current-status](current-status.m
 | [Three-layer allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24) | MY Snapshot / Mobile LAB Actionable / Web LAB Deep Analysis 유지 |
 | [Analytics and Achievement](roadmap-academic-analytics.md) | 공부시간 ≠ 성적 향상의 원인, 공부시간/배지 ≠ 직접 합격확률 입력; 논술 평가와 시험 점수의 척도 분리 |
 | [Official and Free Mock](day-8-d2-answer-scoring.md#owner-follow-up-3--dual-practice-modes) | 공식 키로 채점한 연습 결과와 자유 연습 수동 점수 분리; 후자는 현재 공식 MY/LAB/입시 분석에 자동 편입 금지 |
-| [Monetization](roadmap-monetization-and-in-app-learning.md) | 무료 자료/Guest 가치 유지; 유료 가치는 분석·연속성, 가격·entitlement는 미확정 |
+| [Monetization](roadmap-monetization-and-in-app-learning.md) | 무료 자료/Guest 가치 유지; Essay 가격/G1 정책 확정, Subscription·Beta 범위 미확정; 최신 roadmap 우선 |
 | [Privacy and deletion](account-deletion-privacy.md) | 기존 삭제/Apple revoke/정책 release gate 유지; 장기 데이터가 권리·삭제 의무를 우회하지 않음 |
 | [Research synthesis](research-2026-09-24-product-operations-synthesis.md) | 연구 권고는 증거이며 배포 승인이 아님; Admissions evidence gate 유지; Daily Sync는 별도 작업 |
 

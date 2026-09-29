@@ -1,6 +1,17 @@
 # LegendStudy LAB — Essay Service Module Roadmap
 
-Status: **P0 NEXT AFTER MATERIALS OWNER QA — canonical model first; public entry implemented**
+## Current delivery target — 2026-09-29
+
+[2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29)가 일정·가격·상품 전략의 단일 원본이다.
+10월 중순 App + Essay LAB Store 등록·배포 목표 → 10월 말 Essay 안정화 →
+모의고사/수능 LAB BETA 우선. G1 및 owner status RPC는 Production 완료;
+[현재 서버 상태](essay-lab-server-transactions.md#owner-status-projection),
+[Product 계약](essay-lab-product-v1.md)이 과거 미구현/체험/모바일 범위 설명보다 우선한다.
+L1/worker/E2E/IAP/Store 순으로 별도 승인 후 진행하며 이 문서는 구현을 재개하지 않는다.
+
+## Historical roadmap context
+
+Status at 2026-09-27: **P0 NEXT AFTER MATERIALS OWNER QA — canonical model first; public entry implemented**
 
 [Owner decision2026-09-27](materials-closeout-essay-lab-handoff.md) supersedes
 older priority/three-year inventory rules below. This is a handoff, not LAB implementation.
@@ -43,7 +54,7 @@ Essay is one module alongside Academic Analytics and other future services.
 [Product architecture](product-architecture.md) owns the family and current
 cross-product priority; [platform boundaries](product-platform-boundaries.md)
 owns App/Web allocation. This document owns Essay research/evaluation details.
-Current priority is Essay LAB → internal-grade analysis → mock-score analysis →
+Historical 2026-09-27 priority (superseded by the current target above): Essay LAB → internal-grade analysis → mock-score analysis →
 admissions strategy/prediction. Shared canonical identity/data is required;
 implemented integration must still be verified independently.
 

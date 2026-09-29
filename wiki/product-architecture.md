@@ -119,7 +119,16 @@ of current infrastructure. Do not publish absolute claims such as “all data is
 securely encrypted” without implementation-specific evidence. Public security
 copy must state only implemented and verified facts.
 
+## Current delivery priority — 2026-09-29
+
+[2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29)가 최신 제품 순서를 소유한다.
+Essay 출시·안정화 → 모의고사/수능 BETA → 2027 내신/Admissions 고도화.
+FREE CORE + Subscription Analytics + Essay Credits는 장기 기본 가설이며
+Essay 가격 외 구독 구성은 미확정. 기존 공유 identity/engine·플랫폼·권한 경계는 유지한다.
+
 ## Delivery priority and remaining decisions
+
+Historical 2026-09-27 ordering; the current delivery priority above supersedes it.
 
 Owner decision2026-09-27 supersedes the earlier analytics-first ordering:
 Materials final Owner QA → **P0 Essay LAB** → P1 internal-grade analysis →

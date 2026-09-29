@@ -48,7 +48,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 | ADMISSIONS DATA / ANALYTICS / 입시 데이터 / 합격 가능성 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Owner allocation](product-architecture.md#academic-analytics-three-layer-allocation--2026-09-24), [roadmap / research gate](roadmap-academic-analytics.md#research-boundary--2026-09-24), [Manus registry](research-registry.md), [decisions](decisions.md) |
 | DAILY SYNC / INGESTION / Daily Sync 시작하자 / 사이트에 새 글 올렸는데 앱에 안 보여 / Pilot C / quarantine | [Current ingestion handoff](ingestion.md#daily-sync-current-handoff--2026-09-24) → [Phase 1 deterministic delta package](daily-sync-phase-1-deterministic-delta-package.md) → [Research synthesis](research-2026-09-24-product-operations-synthesis.md) → [Current baseline/status](current-status.md#daily-sync-status); [historical pipeline](day-9-ingestion.md), [source provenance and reconciliation](research-registry.md#owner-provided-manus-exports--source-acquired) |
 | COMPLIANCE / RELEASE / App Store 출시 | [Privacy/deletion](account-deletion-privacy.md), [Auth acceptance](auth-native-owner-acceptance.md), [current release gates](current-status.md), [Community safety](product-platform-boundaries.md), [research audit boundary](research-registry.md) |
-| PRODUCT STRATEGY | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Product architecture](product-architecture.md), [scope](product-scope.md), [strategy](roadmap-monetization-and-in-app-learning.md), [Manus registry](research-registry.md) |
+| PRODUCT STRATEGY / 2026~2027 출시 일정 / Subscription / Essay 가격 | [상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md) → [Product architecture](product-architecture.md), [scope](product-scope.md), [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29), [Manus registry](research-registry.md) |
 | COMMUNITY / 커뮤니티 | [monetization/learning roadmap](roadmap-monetization-and-in-app-learning.md), [Community decision](decisions.md#2026-09-19--community-is-a-free-retention-feature-not-a-launch-blocker), [Profile privacy and safety gates](product-platform-boundaries.md), [private profile](database.md), [research/compliance registry](research-registry.md) |
 
 [Policy/code evidence audit](mobile-policy-audit.md) distinguishes gaps from
@@ -135,7 +135,7 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [LAB Essay Service Module Roadmap — research complete; Phase 2 Web architecture recorded](roadmap-essay-lab.md)
 - [Academic Analytics → Achievement → Admissions Engine Roadmap — PLANNED, not implemented](roadmap-academic-analytics.md)
-- [Monetization & In-App Learning Strategy — PLANNED, not implemented](roadmap-monetization-and-in-app-learning.md)
+- [2026–2027 Roadmap & Monetization — Owner targets; Essay prices fixed, Subscription planned](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29)
 - [Day 10-B Home Polish v2 — implemented; device launch follow-up](day-10-b-home-polish.md)
 - [Day 10-C Legacy Subject Alias — minimum foundation implemented](legacy-subject-aliases.md)
 - [Day 11 Account, Personal and Feedback Operations — foundation / Production pending](day-11-account-personal-feedback.md)

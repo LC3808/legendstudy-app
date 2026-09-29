@@ -9,7 +9,7 @@ optional Mock study-time inclusion, KST shared aggregation. MY Profile/private
 photo/school-grade, seven-day/eight-week/six-month study trends, actual Mock score
 summary; LAB independent internal-grade/Mock details and Essay preview/external entry.
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
-Achievement Engine are NOT implemented. No WebView or shared App/Web session.
+Achievement Engine are NOT implemented. No WebView/shared session.
 
 Current editing UX: Profile and school/grade Save success→previous screen once;
 failed/partial save stays. School results directly below search. Chart uses actual
@@ -43,8 +43,7 @@ local personal records, excluded from official MY/LAB/admissions. MY confirmed c
 - Materials initial5/load-more, vertical study bars, MY→LAB→Back PASS (Owner follow-up2).
 - UI_V2: OWNER DEVICE PASS. Home/Materials/global/Learning/LAB/MY/Settings surfaces,
   Study chart/average and Meal UI accepted by Owner. Border/shadow frozen.
-- Final Materials filter exposure and week separator corrections locally validated;
-  these two small changes have no separate new device-run claim. Other release gates remain.
+- Materials filter/week separators locally validated; separate device acceptance pending.
 
 ## Local automated validation
 
@@ -118,11 +117,14 @@ model first after separate instruction; then internal-grade, mock-score, admissi
 
 ## Longitudinal data strategy
 
-[Canonical strategy](longitudinal-learning-admissions-data-strategy.md): Owner-confirmed2026-09-29.
-Learning / Decision / Outcome history, target/application separation and result history adopted.
-Architecture PLANNED; cohort/prediction evidence/privacy gates remain. Documentation only.
+[Canonical strategy](longitudinal-learning-admissions-data-strategy.md): Learning/Decision/Outcome
+history adopted; architecture PLANNED, evidence/privacy gates remain.
 
 ## Current work and next actions
+
+[Owner delivery targets](roadmap-monetization-and-in-app-learning.md#delivery-calendar):
+mid-Oct Store launch → end-Oct Essay stabilization → Nov Mock/CSAT BETA.
+Next: L1 → worker/Scaffolding → loop E2E → IAP/Store; ads/advanced Growth must not delay launch.
 
 [Final Owner device QA](materials-final-closeout-2026-09-27.md#owner-device-gate):
 run latest profile build; check full exam sequences/known missing cases, Essay
@@ -139,7 +141,7 @@ Production AI/student/worker OFF. Identity PASS. [AI Pilot1.3](essay-lab-scaffol
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
 ledger21/pending0. L1 resume awaits Owner.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
-Home customization, analytics and Achievement/Notification backends remain planned.
+Home customization and Analytics/Achievement/Notification backends remain planned.
 
 
 ## Handoff
@@ -147,8 +149,7 @@ Home customization, analytics and Achievement/Notification backends remain plann
 Start with [Task Routing Map](index.md#task-routing-map), decisions and product scope.
 [Policy audit](mobile-policy-audit.md) owns code/test evidence and remaining gaps.
 [Log](log.md) is chronology; [deduplicated historical status evidence](history/status-checkpoints.md)
-preserves former checkpoints without burdening the current restore path. Historical
-PASS and staged migration statements are date-specific, not current HEAD/status.
+preserves former checkpoints without burdening the current restore path. Historical PASS/migration statements are dated evidence.
 
 
 ## 2026-09-25 EOD override

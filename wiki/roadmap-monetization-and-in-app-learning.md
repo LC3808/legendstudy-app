@@ -1,5 +1,129 @@
 # Monetization & In-App Learning Strategy
 
+## 2026–2027 roadmap and monetization — Owner decision 2026-09-29
+
+**CANONICAL ROADMAP / STRATEGY ONLY.** 아래 일정은 Owner가 확정한 제품 목표와
+개발 우선순위다. 개발·Store 심사·데이터 준비 상황에 따라 조정 가능하며 출시 완료
+주장이 아니다. 이 절은 과거 내신→모의고사 순서, 10월 Beta 목표, 미확정 Essay 가격 및
+구독 tier 예시보다 우선한다. 과거 기록은 아래에 보존한다.
+
+### Delivery calendar
+
+| 목표 시기 | 제품 목표 / 완료 의미 |
+|---|---|
+| ~2026년 10월 중순 | LegendStudy+ App + Essay LAB을 App Store / Google Play 등록·심사·배포 단계까지 포함한 출시 가능 상태로 완성. 단순 개발 완료가 아님 |
+| 10월 중순~10월 말 | 실제 운영 결과 기반 Essay LAB v1 안정화·1차 고도화; 2026-10-31 전후 목표 |
+| 10월 말~11월 초 | Essay 1차 안정화 후 모의고사/수능 LAB을 다음 최우선으로 개발 |
+| 2026년 11월 | 모의고사/수능 분석 BETA |
+| 2026년 11~12월 | 수능 분석 → 대학/학과 비교 → 정시 지원 분석 고도화 |
+| 2026년 12월~2027년 | 실제 Application / Outcome data 연결·확대, 별도 개인정보/수집 승인 필요 |
+| 2027년 | 내신 LAB + 모의고사/수능 LAB + Admissions Analytics 고도화 및 Subscription 정식화 검토 |
+
+출시 핵심은 **문제 선택 → 답안 작성 → 제출 → 첨삭 → 결과 확인 → 재작성 →
+재첨삭 → 변화 확인 → 필요 시 Credit 구매**가 실제 서비스에서 끊기지 않는 것이다.
+기능 개수가 출시 기준이 아니다. App/LAB의 기존 native/deep-work 역할과 동일 학생
+identity를 유지하며 별도 독립 성적 시스템을 만들지 않는다. Academic/Mock 설계와
+기존 구현을 먼저 재사용하되 현재 기본 채점/기록과 미래 분석 완성을 구분한다.
+
+### Essay launch critical path
+
+1. G1 Credit Core — Production 완료, [배포 근거](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29).
+2. Essay LAB Live Integration — [owner status RPC](essay-lab-server-transactions.md#owner-status-projection) blocker 해소; L1 재개는 별도 Owner 확인 후.
+3. AI Worker / Provider / Scaffolding 연결 — 별도 구현·운영 승인.
+4. 실제 작성→첨삭→재작성→재첨삭 E2E.
+5. IAP / Paywall.
+6. Store Sandbox / 실제 기기 E2E.
+7. App Store / Google Play 등록·심사·배포.
+
+광고, 고급 attribution, Deferred Deep Link, 부가 Growth 기능은 이 경로를 지연시키지
+않는다. 이 일정은 현재 privacy/삭제/retention/AI provider/rights/Store gate를 자동
+통과시키지 않는다. Store 상품·Console 작업도 이번 문서로 실행하지 않는다.
+
+출시 후 10월 말까지 AI 첨삭 품질, Scaffolding 우선순위, 과잉 첨삭 방지, 문장 다듬기,
+오류·timeout·reconciliation, Credit 정책/결제 안정성, 재작성 loop, 모바일 UX,
+AI 운영비용과 실제 사용자 이탈 지점을 운영 근거로 개선한다.
+
+### Product and commercial structure
+
+장기 기본 가설은 **FREE CORE + SUBSCRIPTION ANALYTICS / ADMISSIONS + ESSAY CREDITS**다.
+아래 후보는 현재 구현 목록이나 확정 entitlement표가 아니다.
+
+| 축 | 역할 / 후보 |
+|---|---|
+| FREE CORE | 학생 기본 생활·기록 공간: 입시자료, Study Timer, D-Day, 급식, 기본 학습/성적 기록, 지원 대학 관리, 기본 분석 |
+| SUBSCRIPTION ANALYTICS / ADMISSIONS | 내신·모의고사·수능 LAB, 장기 성적 변화, 상세 비교, 대학/학과 분석, 입시 전략, 장기 리포트, 충분히 검증된 이후 Prediction |
+| ESSAY LAB CREDITS | 직접 AI 비용이 발생하는 논술 첨삭·재첨삭·Scaffolding·문장 첨삭·대학별 논술 분석의 사용량 기반 서비스 |
+
+Subscription은 지속적인 Analytics/Admissions 이용권, Essay Credit은 AI-intensive
+Essay workload 이용권으로 **별도 commercial product**다. 구독이 Essay 무제한을 뜻하지
+않으며 월 일부 Credit 제공은 향후 별도 검토한다. 구독 여부나 무료 Credit 여부로
+Essay 평가 품질·Learning Loop 기능을 낮추지 않는다.
+
+### Confirmed 2026 Essay prices
+
+| 상품 | 승인 가격 | 역할 |
+|---|---|---|
+| 1 Credit | 4,900원 | 단건 / 가격 anchor |
+| 3 Credits | 11,900원 | 첫 유료 진입 |
+| 5 Credits | 17,900원 | 기본 추천 — 표시는 ‘추천’ |
+| 10 Credits | 29,900원 | 반복 학습 |
+| 20 Credits | 2026 출시 제외 | 실제 사용 데이터 후 2027 검토 |
+
+별도 출시 할인 없음. **신규 가입 +3 Essay Credits**가 Launch Benefit이다.
+실제 Store price point·세금·지역 가격 제약이 승인 금액과 다르면 임의 변경하지 않고
+Owner에게 보고한다. 구매 데이터 없이 ‘가장 많이 선택’은 쓰지 않는다. AI 호출당
+저가 환산을 기본 포지셔닝으로 사용하지 않는다.
+
+[G1 canonical policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29)가
+실행 계약을 소유한다. 동일 Learning Cycle에서 **paid → included → paid → included**
+반복; 최초 첨삭과 그 다음 제출 재작성의 첫 재첨삭이 한 Credit 학습 단위다.
+versioned server decision/parent paid decision/ledger가 authoritative하며 attempt_no
+홀짝으로 계산하지 않는다. 다른 문제/새 cycle은 새 유료 단위이고 기존 v1/in-flight
+history는 유지한다. 신규 +3은 동일 auth identity에 한 번, 기존 계정 소급 지급 아님.
+학생 안내는 ‘첨삭권 1회로 같은 답안을 두 번 첨삭받을 수 있어요’처럼 단순하게 하되
+현재 행동의 차감 여부는 서버 판단으로 표시한다.
+
+### 2026 Mock / CSAT BETA and 2027 subscription
+
+11월 수능 전후 수요 가능성을 고려하되 **2026 모의고사/수능·입시 분석은 BETA**로
+운영하는 방향이다. 사용자 longitudinal/지원·합불 표본, 대학·학과 정보, 공식 입결
+수집·정규화, 외부 입시기관 배치자료 사용 검토와 예측 검증에 시간이 필요하다.
+BETA는 근거 없는 결과를 제공할 면책이 아니다.
+
+발전 순서는 **FACT → STATISTICS → COMPARISON → EXPLANATION → 충분한 검증 이후
+PREDICTION**. 초기에는 성적 한눈에 보기, 과목별 기록, 이전 시험 대비 변화,
+백분위/표준점수, 강점·취약 과목, 최근 추세, 목표 대학 및 전년도 공식 입결과의 비교,
+검증된 참고 정보에 집중한다. 근거 없이 ‘합격확률 73%’ 같은 정밀 예측을 제공하지 않는다.
+
+2026 BETA는 무료 또는 제한적 무료를 우선 검토한다. 단기 매출보다 성적 데이터의
+품질, 사용 패턴, 분석 정확도, longitudinal 축적, 지원/Outcome 연결 및 사용자 가치
+검증이 목적이다. 무료 범위/가격은 **미확정**, 영구 무료나 저가 상품 약속이 아니다.
+2027 정식 Subscription 전환을 검토한다. 월간/6개월/연간/학년도/고3 수능·정시 시즌
+이용권은 retention·시즌별 사용 패턴에 따른 후보이며 가격·기간·상품 구성·Essay
+Credit 포함 혜택 모두 Owner 최종 결정 전이다.
+
+### Longitudinal value and evidence boundary
+
+[상위 데이터 전략](longitudinal-learning-admissions-data-strategy.md)의
+**Learning History → Decision History → Outcome History**를 따른다.
+고1 내신+Study → 고2 내신+모의고사+목표 대학 → 고3 상반기 내신+모의고사+수시+논술
+→ 고3 하반기 9월 모평+논술+수능+정시 → 실제 지원+최초 결과+충원+최종 결과까지
+학생에게 지속적 분석 가치를 돌려주는 것이 목표다. 구독의 가치는 데이터 수집 자체가
+아니라 축적한 사실로 더 유용한 분석·관리를 제공하는 데 있다. History 없이 AI가
+성장/입시 서사를 만들지 않는다.
+
+학생 내신·모의고사·수능·학습 이력·목표 대학·실제 지원·응시·최초 결과·예비/충원·
+추가합격·최종 결과와 대학 공식 입결·검토된 외부 자료를 단계적으로 연결한다.
+자기보고/검증된 사용자 사실, 공식 자료, 외부 자료의 provenance를 구분한다.
+외부 배치표나 전년도 입결은 LegendStudy 자체 Outcome Dataset이 아니다.
+telemetry와 학습·선택·결과 사실, 금융 ledger를 혼합하지 않으며 개인정보/retention
+경계를 보존한다. 이번 전략 기록은 새 수집·분석·DB·AI 실행 승인이 아니다.
+
+## Historical strategy — precedence
+
+아래 2026-09-19~24 tier/가격/구현 상태는 당시 기록이다. 최신 일정·상품 방향은 위 절,
+현재 구현/배포는 [Current Status](current-status.md)와 G1 계약이 우선한다.
+
 ## Platform clarification — 2026-09-20
 
 [Product architecture](product-architecture.md) and [platform boundaries](product-platform-boundaries.md)

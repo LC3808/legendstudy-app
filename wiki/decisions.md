@@ -587,3 +587,13 @@ progressively with immediate student value. B2C/B2B share models; membership and
 aggregate permissions remain separate. Evidence-poor predictions stay UNKNOWN. The strategy's
 seven review questions apply before future Student/LAB/Admissions/B2B/admin design.
 Documentation only: no schema, data collection, UI, AI run or Production authorization.
+
+## 2026-09-29 — Store launch and separate Analytics subscription / Essay credits
+
+Owner adopts [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29) as the single calendar/commercial strategy source.
+Mid-October App+Essay Store launch target → end-October Essay stabilization → November
+Mock/CSAT BETA → 2027 internal-grade/Admissions and Subscription direction supersedes the
+prior internal-grade-before-Mock ordering. G1 is deployed; L1/worker/E2E/IAP/Store remain gates.
+Essay prices are fixed; Analytics subscription and Essay credits are separate products,
+not unlimited Essay. Subscription pricing/periods/benefits and Beta free scope remain undecided.
+Learning/Decision/Outcome evidence and privacy gates remain. Strategy only, no implementation.

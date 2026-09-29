@@ -1,5 +1,10 @@
 # Development Log
 
+## 2026-09-29 — Owner 2026–2027 roadmap and monetization
+
+- [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29) integrates Store launch/stabilization, Mock/CSAT BETA and Subscription direction.
+- Existing routes linked; prior decisions preserved with precedence. Wiki only, no code/DB/AI/Store changes.
+
 ## 2026-09-29 — L1 status projection blocker resolved
 
 - [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection): one read-only projection, no table/column/history/RLS changes.
