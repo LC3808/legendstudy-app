@@ -1,0 +1,218 @@
+# Essay LAB L2-B — model bake-off preparation
+
+2026-09-30. **PREPARATION ONLY / real AI calls 0.** GPT-5.6 Sol and Claude Sonnet5.5
+are the two Owner-selected Pilot candidates, not Production defaults. Round1 is four
+calls, followed by human review; Round2 is a **plan only**, at most two evaluations
+of human rewrites after the primary model is selected. This supersedes L2-A3's earlier
+2+2 call plan without changing its reviewer architecture or accepted historical results.
+
+Preparation **READY**. **READY_FOR_ROUND1_EXECUTION: NO** until separate execution
+approval and secure credential provisioning. No credentials were requested, provisioned,
+or inspected. Live account/model access, actual latency, output quality and actual cost
+are **NOT_RUN**. The adapters deliberately permit only injected synthetic transports;
+there is no live dispatch command, DB claim/finalize or background worker activation.
+After execution approval, a narrow reviewed dispatcher must connect the prepared
+request/response adapters to the provider once per frozen slot. It must preserve the
+one-shot artifact protocol below; changing `synthetic_only` is not an authorization flow.
+
+[Preparation/result](../tool/essay_lab/evidence/l2_b_preparation_result.json),
+[adapter](../tool/essay_lab/bakeoff.py), [offline assembler](../tool/essay_lab/prepare_bakeoff.py),
+[tests](../tool/test_essay_bakeoff.py). Existing
+[L2-A2 binding/telemetry](essay-lab-provider-provenance-l2-a2.md) and
+[L2-A3 reviewer gates](essay-lab-worker-provider-l2.md#l2-a3-reviewer-architecture) remain intact.
+
+## Candidate policies and identical contract
+
+| Pilot policy | API model / returned-model binding | Transport |
+|---|---|---|
+| `pilot-openai-gpt56-sol-v1` | `gpt-5.6-sol` | Responses; `text.format`, strict JSON Schema |
+| `pilot-anthropic-sonnet55-v1` | `claude-sonnet-5-5` | Messages; `output_config.format`, JSON Schema |
+
+Six L2-A2 binding fields are preserved: policy_version/provider/model/model_version/
+prompt_version/contract_version. Prompt is `scaffolding-1.3-v1-bakeoff1`; Contract **1.3**.
+The committed report contains regimes computed by **PostgreSQL `jsonb::text`**, tested
+against the existing `provider_binding_valid` helper in a disposable DB. Compact Python
+JSON hashes are used only for private package/content hashes, never as SQL regime hashes.
+No candidate entry was installed in a DB resolver; 005 and its empty shipped registry
+are unchanged, Production NOT_APPLIED. This Pilot's multimodal prompt/alias IDs are not
+a claim that the current production Worker can dispatch it. Existing Worker remains closed.
+
+The API names currently published are aliases/model IDs, not verified immutable weight
+revisions. `model_version` records the exact expected response model identifier; a different
+response is rejected, not silently substituted. Hidden provider weight revision remains
+unknown. Later dated API snapshots or prompt/settings changes require a new reviewed
+policy/package. Freeze actual returned model and response envelope privately during execution.
+
+Both transports use **exactly the existing `live_worker.output_schema()`**; no removed
+constraints, alternate fields, SDK schema transformation or permissive fallback. Both
+normalize through the unchanged `parse_provider` + `validate_output`: counts, enums,
+all dimensions, answer hash, exact Unicode quote, root/evidence links, previous history,
+stance/minimal-edit review gates stay unchanged. Nullable `example` is the existing sole
+wire adaptation. Unknown fields (including old Pilot `uncertainty_note` or provider-supplied
+`local_reviews`) fail. Model-specific envelopes/think blocks never become product fields.
+
+Both receive identical product/system text, JSON data, images in the same order and byte
+content, official sources, criterion labels and frozen empty previous context. High effort
+is explicit for both (`reasoning.effort` vs adaptive thinking/output effort); it is **not**
+an assertion that their internal reasoning budgets are identical. Output token cap12000,
+private Pilot network timeout300s, no tools/web, no automatic retry, no batch or explicit prompt cache.
+The longer private timeout avoids imposing the production lease on a human-reviewed artifact
+Pilot; existing live Worker75s timeout/120s DB lease are unchanged. Timeout consumes its slot.
+OpenAI `store:false` is not a promise of zero provider retention. Image tokenization and
+provider-added schema instructions may differ; record actual usage rather than equalizing
+or guessing it. A timeout or token limit consumes the original execution slot.
+
+## Exactly two frozen cases
+
+| Case | Original accepted inputs | Current context |
+|---|---|---|
+| Sookmyung2025 mock Q1-1 | Original3 images, reviewed reading transcription, Q/P/E1/E2 | Seven reporting axes, not seven invented official weights |
+| Hanyang2024 humanities Afternoon2 | Original6 images, reviewed reading transcription, Q/P/E1/E2 | Five official criteria; existing handwriting uncertainty preserved |
+
+Assembler reuses the original RunA **input-only** verification functions and accepted source
+hashes. It does not read old output, ground truth, rewritten answer or Owner quality judgment.
+The university-published answer remains the blind target answer with unchanged provenance;
+no separate high-scoring/reference answer or quality label is supplied. IDs in this private
+Pilot are explicit aliases, not student/attempt UUIDs. No Production row is created.
+
+The same new provider-neutral JSON is used twice per university. Its hash includes ordered
+image hashes; each original image is copied once into the private package, unchanged. All
+transport image bytes are rehashed before request construction. The existing image-checked
+transcription remains the exact quote coordinate system, not new OCR or a rewritten answer.
+
+Existing official images were visually checked, without new collection: Sookmyung question
+page2/Q1-1 **300±30자**; Hanyang question page1/problem header **1,200자**. Source image hash
+and index accompany the rule. Hanyang's old Rewrite Pilot1150–1250 target is **not imported
+as an official tolerance**. Neither transcription count nor `[판독 어려움]` justifies an
+invented grid-length deduction. Rules are identical for both candidates.
+
+Private root: `.local/essay-bakeoff-l2b/` (git-ignored, directory0700, new files0400).
+Each case contains package/validation context/prompt/schema/manifest and original images.
+Manifest hashes are committed; bodies, prompts with answers, provider payloads and images
+are not. `prepare_bakeoff --freeze` is exclusive and refuses overwrite; default command
+only recomputes input manifests. Historical Pilot artifacts remain untouched.
+
+## Round1 execution contract — not authorized or implemented as a live launcher
+
+Ordered slots: Sookmyung/OpenAI, Sookmyung/Anthropic, Hanyang/OpenAI, Hanyang/Anthropic.
+Exactly **4 maximum calls**, one each. These are finite explicit slots, not queue jobs.
+
+1. Before execution, verify approval, secure credential presence, all frozen package/prompt/
+   schema/policy hashes and API endpoint allowlist. No key/model probing inference call.
+2. Atomically create the private slot directory (case + policy); write an exclusive started
+   receipt containing input/policy hashes and time **before** the one outbound request.
+3. Freeze raw envelope privately before parsing. Preserve malformed/refused/truncated output
+   as failure. Record transport failures even without a response. A crash/unknown slot must
+   be reconciled as consumed; never delete/reset marker or send the request again.
+4. Strict parse and freeze normalized output separately only if valid; no repair prompt,
+   second call, fallback model or silent field stripping. Exact artifacts and hashes are
+   immutable; quality annotations are separate human documents. Private HTTP failure bodies,
+   if retained by the future dispatcher, must never enter ordinary logs/sanitized errors.
+5. All four slots freeze before cross-candidate/ground-truth comparison. Schema PASS means
+   **UNREVIEWED**. Human review never fabricates a runtime signed receipt or bypasses a lease.
+   No one candidate judges the other; no `winner` field or automatic promotion.
+
+`offline_slot` tests this protocol using synthetic transport only, including failed/unknown
+slot non-retry and raw-before-parse preservation. Real started/completed timestamps and the
+live HTTP dispatcher remain execution-phase wiring; there are no fake real run receipts.
+Private human review may take days: no DB reservation,120s lease or HMAC receipt is held.
+Later RPC E2E and production reviewer hosting/broker remain separate gates.
+
+## Human review sheet
+
+Copy this sheet separately for each of the four frozen outputs. Evaluate content before
+considering provider price. Mark **PASS / PARTIAL / FAIL / NOT_ASSESSABLE**, cite exact output
+field/issue/quote and relevant official source. No weighted automatic winner. A human chooses
+and records the later primary model only after reviewing both cases and tradeoffs.
+
+| Dimension | Evidence reviewer must record |
+|---|---|
+| Official criterion grounding | Each major claim linked to the actual university requirement |
+| Major issue recall | Important official issues found/missed; review ground truth only after freeze |
+| False criticism | Unsupported/invented problem or preference framed as error |
+| Core-focus priority | Most consequential roots first;0–3, no quota filling or repeated root |
+| Sentence diagnosis | Actual learning value, correct category and explanation;0–5 |
+| Content vs clarity | Missing content does not make a clear sentence ambiguous |
+| Stance preservation | No new policy preference/conclusion/value judgment inserted |
+| Minimal editing | Optional example only when useful, smallest change preserving argument/style |
+| Excessive feedback | Good text/strengths retained, no correction flood or duplicated criticism |
+| Actionability | A student can act on the specific concise direction |
+| Korean clarity | Friendly, precise Korean; no student-facing internal IDs/jargon |
+| Evidence correctness | Official source vs target-answer quote separate, exact spans/provenance |
+| Schema compliance | Strict parser outcome; quote/hash/core/sentence/history limits |
+| Latency | Measured elapsed milliseconds; first-schema cold compilation noted |
+| Input/output/total tokens | Actual returned counters; distinguish absent and calculated values |
+| Provider cost | Actual billed/reported amount only, otherwise NULL; list rate separate |
+
+Per output also record core_count/sentence_count, why selected, omitted important issues,
+overemphasized/invented issues, duplication, stance change and unknown evidence. Include
+full original answer and all evaluation fields privately for Owner reading: summary,
+strengths, every dimension, all core tasks/sentences (quote/diagnosis/direction/example),
+priorities/checklist/evidence. Template is prepared privately alongside the two cases.
+
+**Sookmyung mandatory gate:** Never label intelligible sentences `unclear_meaning` merely
+because an official content point could be added. Zero sentence observations is valid.
+**Hanyang mandatory gate:** Retain substantive official-issue recall, keep each core action
+concise, include relevant verified length checking without invented tolerance/deductions.
+The four historical recall checks remain human ground truth, not extra provider hints.
+Review all proposed local-sentence observations independently before any future publication.
+Round1 contains no previous evaluation, so it cannot establish Scaffolding progression.
+
+## Credentials, telemetry and list pricing
+
+Server-only names: `ESSAY_PILOT_OPENAI_API_KEY`, `ESSAY_PILOT_ANTHROPIC_API_KEY` or the
+corresponding `_FILE` containing an operator-owned0400/0600 regular file, no symlink.
+One source only; missing/ambiguous/unsafe credential fails closed. No Flutter configuration,
+CLI argument secret, shared review key, DB service_role, credential check call or chat secret.
+Secure production provisioning and provider retention approval remain separate rollout tasks.
+
+Provider counters are preserved; `cost_amount/currency` remain NULL when the response does
+not report actual cost. Anthropic total is NULL if not reported; input includes returned
+cache-read/cache-write input counters when present, original breakdown stays in raw private
+usage. A computed sum must be labelled derived separately, never reported as supplied total.
+Refusal/incomplete response usage is retained where valid. Malformed unknown usage stays
+unknown. No model-generated cost, list-rate estimate or historical CLI tokens are actual cost.
+
+Public USD list rates checked **2026-09-30**, per million tokens, standard API (not batch):
+
+| Candidate | Input | Cached input/read | Output | Source |
+|---|---:|---:|---:|---|
+| GPT-5.6 Sol | $4 | $0.40 | $20 | [Official model/pricing](https://developers.openai.com/api/docs/models/gpt-5.6-sol) |
+| Claude Sonnet5.5 | $2 | $0.20 | $10 | [Official model/pricing](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
+
+OpenAI page lists this promotional rate through at least2026-11-21; >272K input changes
+full-request multipliers (2× input/1.5× output), cache write1.25× input. Claude cache writes
+$2.50/5m or $4/1h per million. These prices are planning references, not billed receipts;
+unknown actual Pilot cost is NULL. No candidate is selected based on list price alone.
+
+Request references: [OpenAI structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs),
+[Anthropic structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
+Provider schema subsets/refusals do not waive application validation. Existing transport schema
+already avoids unsupported min/max/array bounds; identical strict application validation
+continues enforcing them for both providers. Live API compatibility remains execution evidence.
+
+## Round2 — plan only
+
+After human review selects the primary model and separate approval is given: one **human-written**
+revision evaluation per university, max2 additional calls. Freeze prior evaluation/core progress
+with compatible regime and bind each actual rewritten answer. Assess previous cores before new
+ones; OPEN/IMPROVED/RESOLVED/RECURRED and not_assessable remain evidence-bound. No invented
+rewrites, automated winner, Round2 runner or call is implemented now.
+
+## History/privacy review and validation
+
+Seven preservation answers: (1) immutable preparation/dispatch/outcome records retain time and
+version context; (2) original answer/evidence/output hashes allow exact tracing; (3) no historical
+output overwrite or regenerating failed slot; (4) no new identity/student master—private aliases
+only; (5) operational Pilot judgments are not Learning/Decision/Admissions Outcome facts or
+marketing events; (6) answer/raw files private, provider/backup/deletion retention needs review;
+(7) human quality conclusions remain versioned judgments, not permanent student traits.
+
+No new DB column/table/migration/RPC. Existing KEEP19/history/billing/security unchanged.
+Tests: both adapter request/parity/strict parser/error/credential/telemetry/privacy/no-retry;
+existing worker/binding tests; static backend/review suites; actual isolated PostgreSQL L2-A2
+fencing with prerequisite timing/G1/status/history regressions. See machine report for counts.
+No new JWT/PostgREST execution claim: accepted L2-A2 local JWT evidence remains historical.
+No Flutter changes/build, AI run, production connection or student traffic. Owner iOS/parallel
+Analytics/Coupon/School files preserved. Next: Owner reviews preparation → separately authorizes
+four-call Round1 and secure execution wiring → freeze → human review → STOP before Round2.

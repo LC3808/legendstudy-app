@@ -5,6 +5,9 @@
 > PARTIAL, not deployed. The accepted L2-A2 implementation/results below remain unchanged.
 
 
+> [L2-B](essay-lab-model-bakeoff-l2-b.md) now prepares two Pilot-only candidate policies.
+> Production resolver/default and the historical accepted implementation below are unchanged.
+
 2026-09-29. **IMPLEMENTED / isolated PostgreSQL + actual local JWT/PostgREST PASS.**
 Production **NOT_APPLIED**. Real AI runs **0**. No provider/model selected. Production
 reviewer **BLOCKED**; real AI Pilot and real student traffic **NOT_READY**.

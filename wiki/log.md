@@ -3044,3 +3044,12 @@ Extended the [existing canonical strategy](longitudinal-learning-admissions-data
 Learning/Decision/Outcome, target vs application, timestamped result history, progressive value,
 shared B2C/B2B identity/model and derived analytics. AGENTS/seven-question review and domain
 links updated. Wiki-only; no DB/migration/Production/UI/AI/Pilot artifact changes.
+
+## 2026-09-30 — L2-B two-model bake-off preparation
+
+[Preparation](essay-lab-model-bakeoff-l2-b.md): GPT-5.6 Sol/Claude Sonnet5.5 transports,
+unchanged1.3 schema/parser, two private frozen packages with equal image/text inputs,
+SQL-validated Pilot policy hashes, human rubric, four-call Round1 + future two-call Round2.
+Offline47/static105 and isolated native802 fencing/regression checks PASS. No real AI/Production,
+DB/RPC/migration/default change, credentials or new source collection. Execution awaits
+separate approval; historical artifacts and parallel Owner files preserved.

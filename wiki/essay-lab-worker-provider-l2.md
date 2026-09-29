@@ -1,5 +1,9 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+> Current follow-up: [L2-B bake-off preparation](essay-lab-model-bakeoff-l2-b.md) freezes
+> GPT-5.6 Sol / Claude Sonnet5.5 inputs. Round1 four calls + future Round2 max2,
+> separate execution approval required. Real AI0; the historical L2-A3 plan below is superseded.
+
 ## L2-A3 reviewer architecture
 
 2026-09-30 · **ARCHITECTURE REVIEW COMPLETE / recommendation, NOT ACTIVATED.**
