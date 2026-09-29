@@ -12,7 +12,7 @@ class PromotionTests(unittest.TestCase):
  def test_order_unique_and_after_foundation(self):
   files=sorted((ROOT/'supabase/migrations').glob('*.sql'));versions=[p.name.split('_')[0] for p in files]
   self.assertEqual(len(versions),len(set(versions)))
-  names=[p.name for p in files];self.assertEqual(names[-5:],['20260927000200_essay_lab_foundation.sql']+[x[1] for x in PAIRS]+['20260928000400_essay_helper_execute_boundary.sql'])
+  names=[p.name for p in files];self.assertEqual(names[-6:],['20260927000200_essay_lab_foundation.sql']+[x[1] for x in PAIRS]+['20260928000400_essay_helper_execute_boundary.sql','20260929000100_essay_scaffolding_persistence.sql'])
  def test_real_sql_and_function_parse(self):
   for _,target in PAIRS:
    text=(ROOT/'supabase/migrations'/target).read_text();self.assertTrue(parse_sql(text))

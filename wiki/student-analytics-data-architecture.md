@@ -1,8 +1,14 @@
 # Student Analytics-ready Data Architecture
 
+
+2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
+implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
+Isolated runtime/JWT validated; Production NOT_APPLIED, AI NOT_EXECUTED. Review sections below
+remain design context; existing submit timing issue is tracked in the implementation report.
+
 Base design dated2026-09-28. **Base schema/RPC DEPLOYED** per
 [accepted security verification](essay-lab-security-resolution.md); historical design sections below
-retain their original stage. New2026-09-29 scaffolding extension is REVIEW ONLY / NOT APPLIED.
+retain their original stage. New2026-09-29 scaffolding persistence is isolated-runtime validated / NOT APPLIED to Production.
 Implementation-level companion to the [existing longitudinal strategy](longitudinal-learning-admissions-data-strategy.md),
 not a second strategy or student master. [Product specification](essay-lab-product-v1.md) governs
 learner behavior. The [SQL review sources](../supabase/review/essay_lab_product/README.md) remain
@@ -16,7 +22,7 @@ on improvement_progress; store explicit core-focus selection and bounded sentenc
 No extra sentence master/history/analytics table. Previous core IDs and comparison regime belong
 in the existing evaluation input snapshot; absent observation never means resolved.
 [Product policy](essay-lab-product-v1.md), [exact storage/RPC/runtime proposal](../supabase/review/essay_lab_product/scaffolding-review.md).
-This is not implemented or a migration approval. Base security/identity acceptance is unchanged.
+This is implemented in isolated runtime, not Production-applied. Base security/identity acceptance is unchanged.
 
 ## Final history review — 2026-09-28
 

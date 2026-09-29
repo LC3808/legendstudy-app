@@ -1,7 +1,13 @@
 # Essay LAB 문장 다듬기
 
+
+2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
+implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
+Isolated runtime/JWT validated; Production NOT_APPLIED, AI NOT_EXECUTED. Review sections below
+remain design context; existing submit timing issue is tracked in the implementation report.
+
 2026-09-28 · UI/typed preview boundary IMPLEMENTED; persistence and contract extension
-REVIEW PROPOSAL ONLY. Actual AI/provider/Production writes: NONE.
+ISOLATED PERSISTENCE RUNTIME VALIDATED (2026-09-29); Production not applied. Actual AI/provider/Production writes in this task: NONE.
 
 ## Product contract
 
@@ -37,7 +43,7 @@ REVIEW PROPOSAL ONLY. Actual AI/provider/Production writes: NONE.
 텍스트 column에 JSON을 숨기거나 issue_key에 유형/인용을 인코딩하지 않는다.
 
 2026-09-29 추천 최소 확장은 progress의 nullable **`scaffolding_observation jsonb` 한 column**이다.
-어제 단일 `sentence_observation` 제안을 아래 고정 envelope로 구체화한다(아직 구현 안 됨).
+어제 단일 `sentence_observation` 제안을 아래 고정 envelope로 구체화했다(격리 구현 검증 완료, Production 미적용).
 
 ```json
 {"version": 1, "core_focus": true, "sentences": []}
@@ -59,7 +65,7 @@ REVIEW PROPOSAL ONLY. Actual AI/provider/Production writes: NONE.
 
 [최소 저장/서버 변경 제안과 runtime 계획](../supabase/review/essay_lab_product/scaffolding-review.md)
 에 정확한 validation, previous-core snapshot, provenance 예외 및 버전 분기를 정리했다.
-**19 table 유지; 이번 작업에서 SQL/RPC 구현·배포·Production 재조회는 하지 않았다.**
+**19 table 유지. 아래 배포 기준 대조는 설계 단계 기록이며, 후속 격리 SQL/RPC 구현 결과는 상단 구현 문서에서 관리한다. Production은 재조회/변경하지 않았다.**
 배포 상태 대조는 현재 migration001/003과 배포 후47개 정의 일치를 기록한
 [보안 검증 artifact](../supabase/validation/essay_lab_product/security_resolution_result.json)에 한정한다.
 새 runtime PASS로 표현하지 않는다.
@@ -103,4 +109,4 @@ offset/emoji code point/중복/5개 cap/우선순위/0개,360px100·200%,접힘/
 UI가 구현됐다는 이유로 persistence/AI/실제 학생 rollout을 PASS로 바꾸지 않는다.
 
 2026-09-29 검증:19 offline contract tests와 Wiki/diff checks PASS. 기존 UI는 변경하지 않았다.
-새 persistence/RPC 및 실제 AI의 진단 품질은 NOT_RUN이며 다음 승인 단계다.
+이 기록 이후 persistence/RPC는 상단의 격리 runtime 검증을 통과했다. 실제 AI 진단 품질은 계속 NOT_RUN이다.

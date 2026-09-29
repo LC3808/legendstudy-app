@@ -1,0 +1,54 @@
+{
+  "version": "1.3",
+  "status": "PERSISTENCE_IMPLEMENTED_NOT_PRODUCTION_APPLIED_NOT_AI_EXECUTED",
+  "approved_review": "evaluation_contract_v1_3.review.json",
+  "approved_review_sha256": "9f35bec98211e70c747e0ee678de2395db919558c0c165a3bb589d499777dc14",
+  "regimes": [
+    "essay-v1.3",
+    "essay-v1.3-next-model"
+  ],
+  "prompt_version": "scaffolding-1.3-v1",
+  "legacy_default": "essay-v1.2",
+  "provider_contract_inherited": "All1.3-review.1 product/quality rules; runtime syntax below does not relax stance, minimal editing, count or evidence rules.",
+  "rpc_field_mapping": {
+    "overall_feedback": "summary",
+    "criterion_feedback": "dimensions",
+    "strengths": "strengths",
+    "improvements": "improvements",
+    "revision_priorities": "core_improvement_keys + improvement.priority",
+    "rewrite_checklist": "checklist",
+    "evidence_references": "dimension/improvement.evidence_ids"
+  },
+  "required_additions": [
+    "contract_version",
+    "attempt_id",
+    "answer_hash",
+    "core_improvement_keys",
+    "previous_improvement_reviews",
+    "sentence_feedback"
+  ],
+  "root_additions": {
+    "claim_scope": [
+      "official_criterion",
+      "local_sentence"
+    ],
+    "previous_progress_id": "Same-root ID from frozen context, or null for independently observed open root"
+  },
+  "server_only_field": "local_reviews; never accept this field from raw provider output",
+  "trusted_review_shape": {
+    "issue": "Exact original improvement object",
+    "sentences": "Exact linked sentence array in provider order",
+    "reviewer": "Non-PII trusted review source identifier",
+    "decision": "local_only"
+  },
+  "storage": "essay_improvement_progress.scaffolding_observation JSONB NULL; server derives version/core_focus/sentences from validated output",
+  "limits": {
+    "core_focus": 3,
+    "sentence_feedback": 5,
+    "minimum": 0
+  },
+  "offset_unit": "Unicode codepoints [start,end); no normalization",
+  "unsupported_claims": "SQL quote presence/identity checks do not prove semantic correctness; trusted review orchestration and AI Pilot remain separately gated",
+  "new_tables": 0,
+  "new_columns": 1
+}

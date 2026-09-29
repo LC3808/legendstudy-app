@@ -1,8 +1,14 @@
 # Essay LAB v1 Product Specification
 
-2026-09-29 · **Scaffolding contract OWNER REVIEW READY / NOT EXECUTED**.
+
+2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
+implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
+Isolated runtime/JWT validated; Production NOT_APPLIED, AI NOT_EXECUTED. Review sections below
+remain design context; existing submit timing issue is tracked in the implementation report.
+
+2026-09-29 · **Scaffolding APPROVED / PERSISTENCE RUNTIME VALIDATED / AI NOT EXECUTED**.
 Base schema/RPC deployed: [security acceptance](essay-lab-security-resolution.md).
-UI is a fixture preview; sentence persistence, live AI/payment and real-student traffic are not enabled. [Architecture and SQL](student-analytics-data-architecture.md)
+UI is a fixture preview; persistence is isolated-runtime validated but not applied. Live AI/payment and real-student traffic are not enabled. [Architecture and SQL](student-analytics-data-architecture.md)
 implements this proposal's data contract; the [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md)
 remains the upper-level strategy, not a competing student master.
 
@@ -73,7 +79,7 @@ RESOLVED는 해결한 부분, RECURRED는 다시 나타난 부분이다. 판독/
 장기 패턴을 도출하며, 한 번의 문제를 학생의 영구 약점으로 확정하지 않는다.
 [문장/저장/검증 설계](essay-lab-sentence-review.md)와
 [Evaluation 1.3-review.1](../tool/essay_lab/evidence/evaluation_contract_v1_3.review.json)이
-다음 구현의 검토 입력이다. **기존v1.2와 Pilot은 변경하지 않았고 새 AI 실행도 없다.**
+승인된 구현 입력이다. **기존v1.2와 Pilot은 변경하지 않았고 새 AI 실행도 없다.**
 
 ## Journey and screens
 

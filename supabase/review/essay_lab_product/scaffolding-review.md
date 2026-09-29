@@ -1,5 +1,7 @@
 # Scaffolding / sentence persistence review — 1.3-review.1
 
+Owner approved this direction; [persistence implementation/runtime](../../../wiki/essay-lab-scaffolding-persistence.md) now supersedes the historical NOT_RUN gates below. Production remains NOT_APPLIED.
+
 2026-09-29 · REVIEW ONLY, NOT IMPLEMENTED / NOT APPLIED. No executable migration or RPC
 replacement here. Canonical pedagogy: [Product](../../../wiki/essay-lab-product-v1.md).
 [Machine review contract](../../../tool/essay_lab/evidence/evaluation_contract_v1_3.review.json).

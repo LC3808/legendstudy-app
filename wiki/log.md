@@ -2958,3 +2958,9 @@ Owner SQL, seed/UI/AI or identity retest. Next package review → separate Produ
 
 - Canonicalized criterion-led progression and previous-core review; preserved v1.2, Pilot and sentence UI.
 - [1.3 review / one-column proposal / next runtime gates](essay-lab-sentence-review.md): KEEP19, typed own-answer observations separate from official evidence. 19 offline review tests + Wiki/diff checks PASS; no Production/AI/student-data operations.
+
+
+## 2026-09-29 — Scaffolding persistence implementation
+
+- KEEP19 +1 nullable observation column, frozen previous-core snapshot and version-dispatched1.3 adapter; v1.2 path preserved.
+- [Isolated runtime/JWT matrix](essay-lab-scaffolding-persistence.md):80/79 PASS; native77/55 and JWT37 regression PASS, static55/27, Flutter27/analyze PASS; no Production/AI/student data. Existing submit NULL/rounding issue remains OPEN after out-of-scope auto-review rejection; fixtures use explicit0 active seconds.
