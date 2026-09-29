@@ -132,14 +132,12 @@ Onboarding Phase1.1 and school-search hotfix are Owner-reported PASS and preserv
 On device PASS: Materials CLOSED. [Essay quality Pilot](essay-lab-evaluation-pilot-2025.md):
 Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
-Essay [last Production apply](essay-lab-scaffolding-production-apply.md): PASS; then ledger19/pending0.
-KEEP19+5 columns+12RPC; RLS/security preserved. Scaffolding1.3 and submit timing DEPLOYED.
+[Scaffolding/timing apply](essay-lab-scaffolding-production-apply.md): DEPLOYED, KEEP19/security preserved.
 Production AI/student/worker OFF. Identity PASS. [AI Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-run-a.md):
 2 frozen, quality PARTIAL; Owner review pending; RPC gap disclosed.
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
-ledger21/pending0. [L1 client](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) isolated PASS;
-write/AI flags OFF. Next Owner review → worker/provider; IAP/real traffic gated.
+ledger21/pending0. [L1](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) PASS. [L2-A](essay-lab-worker-provider-l2.md) PARTIAL: synthetic worker/JWT PASS; real API/model/reviewer + narrow metadata RPC blocked. AI/IAP/traffic OFF.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 

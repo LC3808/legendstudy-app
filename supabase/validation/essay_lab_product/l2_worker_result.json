@@ -1,0 +1,146 @@
+{
+  "phase": "L2-A",
+  "starting_head": "2ec68e8",
+  "status": "PARTIAL",
+  "contract": "1.3",
+  "provider": "NOT_SELECTED; OpenAI Responses adapter candidate only",
+  "model": "NOT_CONFIGURED",
+  "implementation": [
+    "bounded explicit-job worker",
+    "server-owned frozen evidence cache validation",
+    "strict output parser",
+    "independent signed review verification",
+    "existing Scaffolding adapter dispatch",
+    "private checkpoint/receipt callback contracts",
+    "failure/unknown/finalize boundaries"
+  ],
+  "worker_unit_tests": {
+    "passed": 15
+  },
+  "new_local_worker_integration": {
+    "environment": "LOCAL_SUPABASE",
+    "real_auth_jwt": true,
+    "postgrest": true,
+    "provider": "SYNTHETIC",
+    "real_ai_calls": 0,
+    "checks": [
+      "submit_idempotent",
+      "other_owner_status_denied",
+      "worker_open",
+      "atomic_completed_open",
+      "server_credit_open",
+      "finalize_idempotent_open",
+      "submit_idempotent",
+      "other_owner_status_denied",
+      "worker_improved",
+      "atomic_completed_improved",
+      "server_credit_improved",
+      "finalize_idempotent_improved",
+      "submit_idempotent",
+      "other_owner_status_denied",
+      "worker_resolved",
+      "atomic_completed_resolved",
+      "server_credit_resolved",
+      "finalize_idempotent_resolved",
+      "submit_idempotent",
+      "other_owner_status_denied",
+      "worker_recurred",
+      "atomic_completed_recurred",
+      "server_credit_recurred",
+      "finalize_idempotent_recurred",
+      "history_preserved",
+      "submit_idempotent",
+      "failure_bad",
+      "release_bad",
+      "no_invalid_result_bad",
+      "submit_idempotent",
+      "failure_failure",
+      "release_failure",
+      "no_invalid_result_failure",
+      "submit_idempotent",
+      "worker_timeout",
+      "authoritative_reconciling",
+      "retry_new_fence",
+      "processing_history_not_overwritten",
+      "client_claim_denied",
+      "client_finalize_denied",
+      "financial_survives_erasure",
+      "erased_job_finalize_denied",
+      "sanitized_provider_receipts"
+    ],
+    "count": 43,
+    "runtime": "PASS",
+    "db_provider_metadata": "BLOCKED_EXISTING_UNCONFIGURED_CLAIM",
+    "production_mutation": false
+  },
+  "native_regression": {
+    "runtime": "PASS",
+    "phase2a_assertions": 77,
+    "phase2b_count": 55,
+    "scaffolding": 80,
+    "timing": 306,
+    "g1": 84,
+    "status_projection": 55,
+    "post_g1_scaffolding": 80
+  },
+  "jwt_regression": {
+    "runtime": "PASS",
+    "legacy_before": 37,
+    "legacy_after": 37,
+    "scaffolding": 79,
+    "timing": 306,
+    "g1": 88,
+    "status_projection": 55,
+    "post_g1_scaffolding": 70
+  },
+  "flutter": {
+    "focused": 56,
+    "sentence": 5,
+    "analyze": "PASS",
+    "actual_local_dart_jwt": "PASS",
+    "native_build": "NOT_RERUN_NO_FLUTTER_NATIVE_CHANGE"
+  },
+  "static_validation": {
+    "security_migration_tests": 46,
+    "review_suite": {
+      "passed": 55,
+      "initial_system_python": "NOT_RUN_MISSING_PGLAST; corrected existing venv PASS"
+    }
+  },
+  "quality": {
+    "sookmyung_content_vs_clarity": "PROMPT_REQUIREMENT_ONLY; REAL_REGRESSION_NOT_RUN",
+    "hanyang_concision_length": "PROMPT_REQUIREMENT_ONLY; REAL_REGRESSION_NOT_RUN",
+    "actual_learning_loop": "NOT_RUN",
+    "signed_review": "SYNTHETIC_VERIFICATION_ONLY",
+    "educational_quality": "NOT_RUN"
+  },
+  "blockers": [
+    "Approved product API provider/model and credential location unavailable",
+    "Current claim hard-codes immutable unconfigured provider/model identity",
+    "No narrow RPC to ingest existing usage/latency fields",
+    "Independent semantic reviewer and hosting/secret/checkpoint provisioning not deployed",
+    "Reviewed representative evidence package and actual student rewrite not bound for real API loop"
+  ],
+  "required_correction": {
+    "new_tables": 0,
+    "new_columns": 0,
+    "rpc_change_required": true,
+    "forward_migration_required": true,
+    "implemented": false,
+    "proposal": "Server-owned versioned model policy at claim and fenced append-once telemetry ingestion; preserve legacy1.2"
+  },
+  "real_ai_runs": 0,
+  "real_ai_cost": 0,
+  "production_mutation": false,
+  "production_ai_enabled": false,
+  "real_student_traffic": false,
+  "new_regressions": 0,
+  "readiness": {
+    "worker_provider_integration": "PARTIAL",
+    "scaffolding_quality": "PARTIAL_NOT_RUN",
+    "production_worker_deployment": false,
+    "iap": false,
+    "real_student_traffic": false
+  },
+  "owner_files_preserved": true
+}

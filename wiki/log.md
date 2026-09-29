@@ -1,5 +1,10 @@
 # Development Log
 
+## 2026-09-29 — Essay L2-A partial worker integration
+
+- [L2 boundary/report](essay-lab-worker-provider-l2.md): strict Provider parsing, frozen package, independent signed review, fenced synthetic orchestration and local JWT tests.
+- Real API calls0; model/credential/reviewer and unconfigured immutable processing metadata remain blockers. No schema/RPC/Production mutation; L1/iOS/Claude files preserved.
+
 ## 2026-09-29 — Essay L1 live client integration
 
 - [L1 contract and validation](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29): Supabase gateway, authoritative status/credit, CAS/immutable submissions, result/Scaffolding/history and Auth isolation.
