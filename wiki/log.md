@@ -2977,3 +2977,10 @@ Owner-authorized00100/00200 normal migration push once; preflight/dry-run PASS.
 [Read-only post-apply](essay-lab-scaffolding-production-apply.md):100 checks PASS,
 ledger19/pending0, KEEP19, unchanged canonical fingerprints/security, Product rows0.
 AI/student traffic disabled; next separately approved Scaffolding AI Pilot.
+
+## 2026-09-29 — Authorized Scaffolding AI Pilot1.3 Run A
+
+Exactly Sookmyung1 + Hanyang1 frozen; no retry, prior judgment/quality labels excluded.
+[Review](essay-lab-scaffolding-ai-pilot-1-3-run-a.md): quotes6/6 PASS, core2/3,
+sentences2/4, both quality PARTIAL. Private full report; transport/report-field gap disclosed.
+Production DB/AI/student traffic unchanged. Owner review before any second-attempt run.

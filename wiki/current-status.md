@@ -136,7 +136,8 @@ Production5/21/134 preserved. Sookmyung Run A: execution PASS/benchmark PARTIAL;
 first output frozen, E10 repeated critique. Owner review next; no rerun.
 Essay [Production apply](essay-lab-scaffolding-production-apply.md): PASS; ledger19, pending0.
 KEEP19+5 columns+12RPC; RLS/security preserved. Scaffolding1.3 and submit timing DEPLOYED.
-AI/student/worker NOT_ENABLED. Identity PASS; next separately approved AI Pilot.
+Production AI/student/worker OFF. Identity PASS. [AI Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-run-a.md):
+2 frozen, quality PARTIAL; Owner review pending; RPC gap disclosed.
 1710 A1 separate; never republish1710.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization, analytics and Achievement/Notification backends remain planned.

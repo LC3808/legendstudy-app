@@ -1,0 +1,178 @@
+{
+  "pilot": "scaffolding_1.3_run_a",
+  "starting_head": "2d31af1",
+  "contract": "1.3",
+  "prompt_version": "scaffolding-1.3-v1-blind-pilot-a",
+  "execution": "PASS_TWO_FROZEN_RUNS",
+  "production_mutation": false,
+  "ai_calls": 2,
+  "retry_count": 0,
+  "production_worker_enabled": false,
+  "real_student_traffic_enabled": false,
+  "ground_truth_reveal": {
+    "hanyang_ground_truth_hash": "9ca1c3530b761b51532904761f34e87c98b9ad62f30bfb13324b22904bf4fee8",
+    "production_connected": false,
+    "recorded_at": "2026-09-29T02:25:15.563375+00:00",
+    "reveal_order": "both raw outputs frozen and hashes verified before reading operator ground truth",
+    "sookmyung_ground_truth_hash": "cdb8dd0dad4cd7aa603c2b2d8737a519b7a79a48c19671aa8eaf8cd556911831"
+  },
+  "cases": {
+    "sookmyung": {
+      "run_count": 1,
+      "output_sha256": "84c66760f2246131c866c0b5c626f141ee15151eafefee75790301a9b9f7e31c",
+      "input_hash": "f3b9b940c7479214927aefd687c9b1eadcdec71b7b435aeb246cdde95901acc4",
+      "prompt_sha256": "9ad4ece92a2180ea10deeeb712ffd9e5915f684f9b0e0ffc813ae32e11492fa0",
+      "contract_hashes": {
+        "evaluation_contract_v1_2.json": "84d19d3474ffdf1a1dc6cf7ec8a1de108cac0de221b148c87f6574931c3af021",
+        "evaluation_contract_v1_3.json": "d4c95d1bba52dd7ef787d0d73bbfb5033fe55d80741941968aa36c67b4eabfa9",
+        "evaluation_contract_v1_3.review.json": "9f35bec98211e70c747e0ee678de2395db919558c0c165a3bb589d499777dc14"
+      },
+      "frozen_at": "2026-09-29T02:22:51.531803+00:00",
+      "model": "gpt-6-astra",
+      "model_version": "UNKNOWN",
+      "token_usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 18859,
+          "output_tokens": 2402,
+          "reasoning_output_tokens": 388
+        }
+      ],
+      "latency_seconds": 77.132,
+      "api_cost": "UNKNOWN_CLI_USAGE_NOT_API_PRICE",
+      "validation": {
+        "core_focus_count": 2,
+        "dimension_count": 7,
+        "errors": [],
+        "improvement_root_count": 2,
+        "quote_accuracy": "PASS",
+        "quote_checks": [
+          true,
+          true
+        ],
+        "semantic_review_required": true,
+        "sentence_feedback_count": 2,
+        "structural_validation": "PASS"
+      },
+      "benchmark": {
+        "PRIORITY_SELECTION": "PASS",
+        "STRENGTH_RECOGNITION": "PASS",
+        "SCAFFOLDING_DISCIPLINE": "PASS",
+        "SENTENCE_FEEDBACK": "PARTIAL",
+        "QUOTE_ACCURACY": "PASS",
+        "OFFICIAL_CRITERIA_ALIGNMENT": "PASS",
+        "STANCE_PRESERVATION": "PASS",
+        "HALLUCINATION_CONTROL": "PASS",
+        "STUDENT_LANGUAGE": "PASS",
+        "OVERALL": "PARTIAL"
+      },
+      "review": {
+        "selection": "공식 내용 기준의 교사 책임 해석과 대학 수용 확대라는 두 보충점을 선택했다. 이미 잘한 응시자 구성 분석과 전개를 인정하고 사소한 표현 지적은 집중 과제로 올리지 않았다.",
+        "comparison": "공식 우수답안이라는 positive benchmark와 강점 인정은 일치한다. 두 누락은 기존 E2②③에 실제 존재한다. 이전 평가의 교사 책임 지적 5/7항목 반복은 이번 2/7로 줄었다. 공식 개별 점수는 없어 실제 등급의 과소평가 여부는 확정할 수 없다.",
+        "missed": "확인된 주요 공식 내용 보충점 누락 없음.",
+        "over": "핵심 내용은 명료한 두 문장을 unclear_meaning으로 분류했다. 이는 의미 불명확보다 기준상 내용 보충에 가깝다. 공식 기준 대응 항목과 개별 항목의 일부 중복도 남는다.",
+        "invented": "확인된 가공 원문·새 공식 기준 없음. 단 내용 보충을 문장 오류처럼 해석할 위험이 있다.",
+        "duplication": "근본 과제 2개로 통합. 교사 책임 지적은 논제 충족/공식 기준 대응 2곳에 반복; 서로 다른 문장 span의 중복은 없음.",
+        "reason": "중요한 내용 선택과 강점 인정은 적절하다. 그러나 좋은 답안의 보충 가능성을 의미 불명확 유형으로 분류하여 sentence-level calibration은 PARTIAL."
+      },
+      "stance_change": false,
+      "ground_truth_leakage_detected": 0,
+      "evidence_mismatches_detected": 0,
+      "invented_issues_detected": 0,
+      "prior_judgment_in_model_input": false,
+      "local_sentence_path": "NOT_EXERCISED",
+      "previous_core_history": "NOT_EXERCISED"
+    },
+    "hanyang": {
+      "run_count": 1,
+      "output_sha256": "ee487c871a704755d00801ecbb6f2177b4bf663359ca38f8d7dbab00038807ba",
+      "input_hash": "46a2a512d34158f33ffeb08fa720efbc20bf3c3e0f5aec7d9f2d17b87d9b21be",
+      "prompt_sha256": "8aa30063be84b09f25c999ddc1c03775c47a81dac4ebf1ce335415db24295bc7",
+      "contract_hashes": {
+        "evaluation_contract_v1_2.json": "84d19d3474ffdf1a1dc6cf7ec8a1de108cac0de221b148c87f6574931c3af021",
+        "evaluation_contract_v1_3.json": "d4c95d1bba52dd7ef787d0d73bbfb5033fe55d80741941968aa36c67b4eabfa9",
+        "evaluation_contract_v1_3.review.json": "9f35bec98211e70c747e0ee678de2395db919558c0c165a3bb589d499777dc14"
+      },
+      "frozen_at": "2026-09-29T02:24:13.582001+00:00",
+      "model": "gpt-6-astra",
+      "model_version": "UNKNOWN",
+      "token_usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 29015,
+          "output_tokens": 3760,
+          "reasoning_output_tokens": 865
+        }
+      ],
+      "latency_seconds": 120.981,
+      "api_cost": "UNKNOWN_CLI_USAGE_NOT_API_PRICE",
+      "validation": {
+        "core_focus_count": 3,
+        "dimension_count": 5,
+        "errors": [],
+        "improvement_root_count": 3,
+        "quote_accuracy": "PASS",
+        "quote_checks": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "semantic_review_required": true,
+        "sentence_feedback_count": 4,
+        "structural_validation": "PASS"
+      },
+      "benchmark": {
+        "PRIORITY_SELECTION": "PASS",
+        "STRENGTH_RECOGNITION": "PASS",
+        "SCAFFOLDING_DISCIPLINE": "PARTIAL",
+        "SENTENCE_FEEDBACK": "PASS",
+        "QUOTE_ACCURACY": "PASS",
+        "OFFICIAL_CRITERIA_ALIGNMENT": "PASS",
+        "STANCE_PRESERVATION": "PASS",
+        "HALLUCINATION_CONTROL": "PASS",
+        "STUDENT_LANGUAGE": "PASS",
+        "OVERALL": "PARTIAL"
+      },
+      "review": {
+        "selection": "공식 배점 30%의 공리주의 적용을 먼저 선택하고, 미래 세대 전제와 사회계약의 제재 방향을 뒤따르게 했다. 총효용 정당화와 소수 권리 비판은 같은 총량 이해 root 아래 서로 다른 두 관측으로 묶었다.",
+        "comparison": "freeze 후 기존 v1.1의 B 전제·제재 방향·현재/미래 총효용·소수 권리 비판 네 쟁점 모두 확인되었다. 공식 합격자 우수답안 provenance를 유지하며 실제 점수는 알 수 없다. 과거 rewrite의 새 정책 찬성 입장 삽입은 재발하지 않았다.",
+        "missed": "공식 분량 조건을 직접 확인하라는 안내는 빠졌다. 일반 이론 소개 압축은 구성 항목에만 있고 checklist에는 없다. 전사 길이로 감점을 추정하지 않은 것은 적절하지만 원본 분량 확인 안내까지 생략할 필요는 없었다.",
+        "over": "첫 핵심 과제에 정당화와 비판 두 행동이 묶여 설명이 길다. 일부 개념 오류도 unclear_meaning으로 분류되어 진단 우선순위 enum의 교육적 구분은 더 검토해야 한다.",
+        "invented": "확인된 가공 원문·새 공식 기준 없음. 보존의 총효용 정당화는 문제/공식 기준의 요구이며 학생 개인의 정책 찬성으로 새로 확정한 것이 아니다.",
+        "duplication": "근본 과제 3개. 총량 root의 두 span은 정당화/권리 비판의 별개 오적용이며 동일 span 중복은 없다.",
+        "reason": "핵심 네 쟁점 선택과 입장 보존은 PASS. 다만 형식 확인 안내 누락과 첫 과제의 높은 행동 밀도 때문에 전체 지도 완결성은 PARTIAL."
+      },
+      "stance_change": false,
+      "ground_truth_leakage_detected": 0,
+      "evidence_mismatches_detected": 0,
+      "invented_issues_detected": 0,
+      "prior_judgment_in_model_input": false,
+      "local_sentence_path": "NOT_EXERCISED",
+      "previous_core_history": "NOT_EXERCISED"
+    }
+  },
+  "limitations": [
+    "Pilot uncertainty_note is not accepted by deployed provider output whitelist; alias mapping also required. Raw output is not RPC-ready; no ingestion attempted.",
+    "local_sentence trusted review path and previous-core progression not exercised",
+    "Two positive fixtures; not a calibrated grading or production readiness benchmark"
+  ],
+  "production_rpc_payload_compatibility": "NOT_COMPATIBLE_AS_IS",
+  "production_ingestion": "NOT_RUN",
+  "owner_quality_acceptance": "PENDING",
+  "next": "Owner review; any second-attempt Pilot requires separate approval",
+  "validation": {
+    "focused_tests": 52,
+    "focused_tests_status": "PASS",
+    "new_pilot_tests": 9,
+    "wiki_handoff": "PASS",
+    "diff_check": "PASS",
+    "frozen_files_hash_recheck": "PASS",
+    "private_body_exclusion": "PASS",
+    "owner_files_preserved": "PASS",
+    "new_regressions_detected": 0,
+    "test_environment_note": "Initial invocation lacked tool import path and PDF/image libraries; rerun with PYTHONPATH=.:tool and isolated pypdf/Pillow passed. No AI retry."
+  }
+}
