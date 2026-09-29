@@ -181,7 +181,40 @@ answer + confirmed improvements + necessary official question/intent/criteria, e
 reference answers, source-quality labels, expected band and other students' answers.
 Unstated stance: guide student to decide, do not invent a completed policy argument.
 
-## Credits: approved product meaning, proposed transaction behavior
+## Credits — G1 commercial policy (2026-09-29)
+
+**Owner-approved / IMPLEMENTED / isolated PostgreSQL + actual local JWT PASS / Production NOT APPLIED.**
+[Server operation and validation details](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29).
+This section is the canonical commercial policy; the v1 table below remains historical/current
+Production behavior until the new forward migration is separately approved and applied.
+
+- `essay_cycle/v2`: one `essay_practice_session` is one Learning Cycle. Successful paid evaluations
+  each supply one included evaluation: **1 → 0 → 1 → 0 → 1 → 0**, continuing in that session.
+  Each included decision references its successful parent paid decision. Authoritative source:
+  versioned billing decisions and ledger, never `attempt_no` parity or client-side counters.
+- A new submitted revision after the parent answer can claim that benefit. Retrying the same logical
+  request does not use another slot. A same-answer evaluation with another regime remains a separate
+  paid request, not a submitted revision. Included claims are not shared across sessions/questions.
+- Existing sessions retain v1 and in-flight requests complete under v1. New sessions pin v2; reopening
+  the same session UUID preserves its cycle. Explicit new practice on the same question starts another
+  cycle. UI/device restart must reuse the persisted session ID; this phase does not alter UI.
+- One active evaluation per v2 session; a concurrent distinct request conflicts until it finishes.
+  Failure releases reservation/claim without consuming credit; timeout retains existing reconciliation
+  and fencing. Successful included decisions cannot be claimed twice. Refunded paid decisions cannot
+  issue new included claims; already authorized/completed history is not retroactively rewritten.
+- New Auth identities created after migration activation receive **3 Essay Credits once** when their
+  profile is provisioned. Same UUID login/logout/reinstall/provider-link does not award again. Existing
+  users are not backfilled; test/support accounts use the authorized manual grant operation.
+  `essay_claim_signup_credit()` is an owner-only idempotent provisioning-recovery endpoint.
+- Reuse origins `purchase`, `signup_bonus`, `promotion`, `admin_grant`, `compensation`, `b2b_program`.
+  Signup is server-fixed +3. Finance-only manual grant supports +10 and other positive quantities,
+  approved reason codes and audited operator identity. No admin UI, payment provider, new organization
+  table, mutable balance, PII/device fingerprint or natural-person lifetime deduplication.
+- Public materials, draft/save, change analysis and example answer retain their existing no-extra-credit
+  policy. Credit entitlement is financial history; it is not Learning/Decision/Admissions Outcome fact
+  or marketing telemetry. Product AI/student traffic remain disabled.
+
+### Historical v1 policy and common transaction behavior
 
 | Action | Basic `essay_cycle_v1` decision |
 |---|---|

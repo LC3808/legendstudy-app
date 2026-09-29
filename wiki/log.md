@@ -1,5 +1,12 @@
 # Development Log
 
+## 2026-09-29 — Growth G1 Credit core implemented, not deployed
+
+- [Canonical policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): new session v2 repeated paid/included pairs; existing v1 preserved.
+- Signup +3 once and finance-only manual grant use existing ledger; KEEP19, one column, two RPCs, one forward migration.
+- [Runtime/security evidence](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29): native84/JWT88 plus legacy suites PASS; no Production/AI/UI/payment-provider work.
+- Owner G1 review → Production apply decision → G2.
+
 ## 2026-09-28 — B1/B2 security resolution PASS
 
 - [Resolution](essay-lab-security-resolution.md):9 helper EXECUTE revokes applied via single004 forward migration; original migrations unchanged.

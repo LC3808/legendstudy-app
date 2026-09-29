@@ -1,6 +1,10 @@
 # Student Analytics-ready Data Architecture
 
 
+2026-09-29 [G1 Credit extension](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29):
+KEEP19, one session policy column, existing financial entities reused; isolated runtime PASS,
+Production NOT APPLIED. [Canonical commercial policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29).
+
 2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
 implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
 [Production apply PASS](essay-lab-scaffolding-production-apply.md): persistence and submit timing

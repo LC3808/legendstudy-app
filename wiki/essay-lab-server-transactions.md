@@ -11,6 +11,112 @@ Auth/PostgREST:37 checks PASS, including real password-issued user JWTs. Five sa
 static tests PASS. [Machine result](../supabase/review/essay_lab_product/runtime/server-result.json)
 contains exact check names and source hashes. This is not deployment, AI quality or App/LAB OAuth E2E approval.
 
+## G1 Credit Commercial Core — 2026-09-29
+
+**IMPLEMENTED / isolated runtime PASS / NOT APPLIED to Production.** Commercial meaning lives in
+[Product Credit policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29).
+Forward [migration20260929000300](../supabase/migrations/20260929000300_essay_credit_commercial_core.sql)
+adds **0 tables, 1 column, 2 public RPCs**. KEEP19; historical migrations untouched.
+[Sanitized result](../supabase/validation/essay_lab_product/g1-result.json) and
+[runnable suite](../supabase/validation/essay_lab_product/g1_runtime.py) cover fixtures A–Q.
+
+### Policy, locks and history
+
+`essay_practice_sessions.billing_policy_version` is the one required extension: existing rows v1,
+future inserts v2. Session immutability prevents client policy changes. Inferring from the first
+billing decision would misclassify pre-existing sessions with no request, so this pin is necessary.
+`essay_request_evaluation` dispatches by this server-owned session value independently of model
+regime. The old v1 request functions remain byte-for-byte unchanged. Both existing success finalize
+implementations change only the consume reason expression to the decision's policy key/version.
+
+v2 retains account → session → grants(sorted ID) → request locking. Allocation uses earliest expiry,
+then created_at/id; reservation honors existing expiry/reconcile semantics. One active evaluation per
+session serializes pair allocation. A settled unrefunded paid decision with no active/settled included
+child is eligible; a later distinct submitted revision explicitly links that parent. The partial
+UNIQUE on parent decision additionally prevents two authorized/reserved/settled v2 included claims.
+Released failures are retryable under a new request key; reusing a failed request key returns that
+same historical request. Provider retry/timeout never creates an additional student charge.
+
+No submitted answer, prior decision, ledger posting, progress or evaluation is rewritten. Result plus
+consume settle together; failure/lease/fencing/refund/erasure operations stay unchanged. A refunded
+parent is excluded from future included selection. Already authorized children are not retroactively
+cancelled. Balance is ledger-derived per unexpired grant minus active reservations, not a new column.
+
+### Signup and operator boundary
+
+| Operation | Authorized caller | Validation / idempotency |
+|---|---|---|
+| `essay_claim_signup_credit()` | authenticated self | server `auth.uid()` only; activation cutoff; fixed +3; same UUID/key returns grant |
+| profile AFTER INSERT trigger | existing profile provisioning transaction | same private grant operation; profile + grant + ledger atomic; no auth schema trigger |
+| `essay_admin_grant(p_user,p_quantity,p_origin,p_key,p_reason,p_expires)` | server-only `essay_finance` JWT with operator `sub` | existing profile/account; quantity1..100000; UUID request key; origin/reason allowlist; expiry validated |
+
+Signup activation timestamp is captured once by the migration in a fixed-path boolean Auth helper.
+It exposes no Auth row or profile fields. New profile creation via existing app provisioning activates
+it; delayed/retried provisioning uses the same key. Existing Auth users are intentionally ineligible.
+Two layers prevent duplicates: `external_reference=signup_bonus/<auth UUID>` global UNIQUE plus
+partial signup UNIQUE per account. No provider/device key. Profile/Essay erasure is not permission to
+mint a second bonus under the same UUID; detached financial records remain retained. A genuinely new
+Auth UUID is a new eligibility identity; natural-person anti-abuse remains out of scope.
+
+Manual grant audit actor is read from the **signed finance JWT**, never from request parameters.
+Finance role issuance is trusted server/operator infrastructure; ordinary clients cannot mint it.
+Anonymous, authenticated, worker and service_role have no EXECUTE. No new role membership or broad
+helper grants. All new functions use fixed empty search_path; grant logic is owned by essay_executor.
+The narrow Auth eligibility bridge is migration-owner SECURITY DEFINER like the existing uid bridge.
+
+Allowed manual pairs: admin_grant/test_account or manual_support; promotion/operational_promotion;
+compensation/customer_compensation; b2b_program/program_allocation. Purchase and signup cannot be
+minted through this operation. For a test account +10, an authorized operator calls the signature
+above with quantity10, admin_grant, a fresh UUID key and test_account; retain that key on retry.
+No Owner SQL Editor operation is required. An identical key/payload returns the original grant;
+changed recipient, amount, origin, reason, expiry or actor conflicts. Grant+positive ledger posting
+share one transaction. No direct balance write. B2B later links organization/program/batch metadata
+to existing grant IDs and per-recipient keys without replacing personal account or ledger identity;
+no bulk grant interface or organization schema is built now.
+
+### Seven preservation questions
+
+1. Facts: grant origin/amount/actor/time and each versioned authorization, reserve, consume/refund;
+   successful included benefit has an explicit parent paid decision.
+2. Reconstruction: immutable ledger and billing decisions retain policy/request/session provenance.
+3. Updates: existing history is untouched; only normal pre-completion request/decision state changes;
+   refund is an appended posting. No rewriting old v1 into v2.
+4. Identity: profiles/auth.users.id reused; providers/devices do not redefine the student.
+5. Domain: financial/entitlement history linked to learning facts, not Admissions Outcome or telemetry.
+6. Boundary: own reads, narrow server writes, financial retention separate from learning erasure;
+   no new PII, body copies, analytics SDK properties or device fingerprints.
+7. Derived values: balance/usage computed from the ledger; no new cache/source of truth or invented
+   historical backfill. Policy snapshot records the rule that actually applied.
+
+### Verification and repeatable local package
+
+- Pre-G1 regression: native Phase2A77 + Phase2B55, Scaffolding80, submit timing306;
+  local Auth JWT/PostgREST37 before +37 after legacy correction, Scaffolding79, timing306 PASS.
+- G1 actual operations: native84 / local Auth JWT+PostgREST88 PASS. Includes six paid/included slots,
+  failure/retry at every slot, included/last-credit races, old v1 in-flight +1/0/1/1, v1.2 contract on v2,
+  signup+3/concurrent retry/DB uniqueness, manual+10/retry/payload attacks/origins/role denials,
+  injected grant and settlement rollback, timeout/stale rejection, bounded refund and erasure.
+- Post-G1 legacy Scaffolding suite: native80 / JWT70 PASS. Test-only session default temporarily
+  pins v1 to emulate legacy sessions and is restored to v2; the shipping migration is not changed.
+  The local migration login cannot directly invoke private envelope helpers after G1; the suite
+  verifies that denial instead of privileged envelope probes. Native80 covers those probes.
+- Static: validation39 + review55 tests PASS. Finalize function equality allows only the reason-code
+  expression change. Existing submit/security/Scaffolding migrations are unchanged. pglast parses the
+  SQL and non-trigger functions; its known trigger AST JSON serialization limitation is covered by
+  real PostgreSQL compilation and signup trigger execution.
+
+Use an **empty disposable** UTF8 PostgreSQL database (`essay_review_*`,127.0.0.1) or dedicated local
+Supabase project (`essay-review-*`, verified Docker label/port). First run existing
+`submit_timing_runtime.py --native|--supabase`; then `g1_runtime.py` with the same guarded environment.
+See the [existing runtime prerequisite](../supabase/review/essay_lab_product/runtime/README.md) and
+[Scaffolding runtime package](essay-lab-scaffolding-persistence.md) for local credential-file setup.
+The G1 runner refuses non-local targets and an already-applied G1 schema. All identities/answers are
+synthetic. Result files contain check names, counts and hashes only; do not retain JWT/DSN/email.
+
+No Production query/apply, AI, IAP/Store, Analytics, Ads, Banner, Deep Link or UI work occurred.
+Production remains on the accepted v1 deployment until separate approval. Next: Owner G1 review →
+Production apply decision → G2 IAP. Runtime PASS is not payment/real-student traffic authorization.
+
 ## Implementation and caller boundary
 
 Use PostgreSQL RPCs, matching existing Supabase architecture; no new backend framework.

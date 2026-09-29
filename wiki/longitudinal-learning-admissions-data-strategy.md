@@ -508,6 +508,12 @@ Home/MY/LAB 후보 질문: “나는 어디쯤일까?”, “나와 비슷한 �
 
 ## Monetization and incentive boundary
 
+G1 Owner-approved [Essay Credit policy](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29)
+is implemented with isolated runtime PASS, Production NOT APPLIED. Financial/entitlement facts reuse
+account/grant/ledger and versioned decisions, separate from Learning/Decision/Admissions Outcome
+and marketing telemetry; [seven preservation answers](essay-lab-server-transactions.md#seven-preservation-questions).
+This approval does not implement the broader monetization/analytics candidates below.
+
 FREE CONTENT→획득, STUDY/SCORE RECORD→유지, PERSONAL ANALYTICS→참여,
 COHORT ANALYTICS→차별화, LAB→유료 심층 분석, APPLICATION/OUTCOME→장기 근거,
 CONSULTING→고부가 가치, AGGREGATE B2B→장기 선택지라는 사업 구조 후보다.
