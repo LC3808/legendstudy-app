@@ -2,6 +2,42 @@
 
 Owner Human Review update2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) records Hanyang source/transcription/non-criteria findings and next-version prompt guidance. It does not rescore frozen runs or select a model. Any separately authorized GPT Supplemental must preserve Claude’s frozen conditions; improvements belong to a different version/experiment.
 
+## L2-B3 Owner Human Review freeze — 2026-09-30
+
+**OWNER_REVIEW_COMPLETED=YES. PRIMARY_CANDIDATE=GPT-5.6 Sol. PRIMARY_MODEL_SELECTED=NO.**
+This is Owner Product quality review comparing the actual two answers, official questions,
+intent/criteria/examples and both outputs, not an AI-generated conclusion or numeric ranking.
+For these two Pilot cases Owner judged GPT's educational evaluation/feedback somewhat better:
+more appropriate core consolidation in some cases, more concrete fine-grained logic detection
+and more direct revision guidance. Do not generalize absolute model superiority to all universities.
+Claude is an acceptable **VALID_ALTERNATIVE / REVIEWED_CANDIDATE**, with shortcomings.
+
+| Evidence axis | GPT-5.6 Sol | Claude Sonnet5.5 |
+|---|---|---|
+| Owner educational review | Preferred in the two reviewed cases | Acceptable, shortcomings recorded |
+| Historical Contract1.3 | Supplemental2/2 SENTENCE_ROOT rejection | Round1 2/2 parser PASS |
+| Production selection | Candidate only | Reviewed alternative only |
+
+Owner Hanyang finding: Claude proposed using an X-country example not used by the student.
+Its specificity intent was understandable, but the proposal did not naturally connect to the
+student's argument. Official presence alone does not make an example mandatory. Both models
+need more concrete diagnosis and solutions, anchored in student text, selective and tied to
+important evaluation issues; abstract advice is insufficient. Students may not independently
+identify their weakness: show where/why/how, preserve reasoning and strengths, examine missing
+logical links precisely, then verify actual improvement through repeated student rewriting.
+These nine Owner findings are accepted qualitative requirements, not automatic quality PASS.
+
+[Product feedback principles](essay-lab-product-v1.md#l2-b3-concrete-feedback-contract--design)
+own durable pedagogy. [vNext contract design](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation)
+owns root semantics, field reuse and T1–T16 acceptance. [Evidence strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30)
+owns input limitations; model error and missing/incorrect input remain separate.
+
+Original raw/normalized outputs, failed slots, frozen prompts/packages and machine reports
+remain immutable. Their PENDING review fields are historical execution-time facts; this new
+Owner review record supersedes current review status without rewriting those artifacts.
+Next: Owner reviews root/storage recommendation → separately authorize L2-B4 implementation.
+No provider call, model registration, Production write, Round2 or ingestion is authorized here.
+
 ## L2-B2S supplemental frozen GPT comparison — 2026-09-30 (current)
 
 Owner explicitly authorized **two NEW supplemental slots**, not retry/reset of the original

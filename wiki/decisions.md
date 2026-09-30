@@ -2,6 +2,16 @@
 
 This file records long-lived product and architecture decisions. Routine progress belongs in `log.md` and `current-status.md`.
 
+## 2026-09-30 — Concrete student-anchored Essay instruction
+
+[L2-B3 Product contract](essay-lab-product-v1.md#l2-b3-concrete-feedback-contract--design)
+requires where/what/why/how/next-check, precise logical connections, selective sentence review,
+strength/stance preservation and repeated student rewriting. Core1–2 preferred;3 exceptional,
+existing hard cap preserved. Schema PASS or quantity never proves educational quality.
+[Owner review](essay-lab-model-bakeoff-l2-b.md#l2-b3-owner-human-review-freeze--2026-09-30)
+prefers GPT in two cases only, candidate not Production selection. [Root design](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation)
+recommends real non-core roots without DB change; nullable independent storage awaits review.
+
 ## 2026-09-30 — Archive-first official Essay evidence
 
 [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) is canonical: verified Owner-held university PDFs precede web reacquisition;

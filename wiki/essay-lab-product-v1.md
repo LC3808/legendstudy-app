@@ -14,6 +14,68 @@ UI is a fixture preview; persistence is Production deployed. Live AI/payment and
 implements this proposal's data contract; the [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md)
 remains the upper-level strategy, not a competing student master.
 
+## L2-B3 concrete feedback contract — design
+
+Accepted Owner qualitative requirements2026-09-30; [review provenance](essay-lab-model-bakeoff-l2-b.md#l2-b3-owner-human-review-freeze--2026-09-30).
+**DIAGNOSE → EXPLAIN → SHOW WHERE → GUIDE HOW → STUDENT REWRITE → VERIFY IMPROVEMENT
+→ NEXT CORE TASK. CONCRETE does not mean writing the completed answer for the student.**
+
+A core explanation should identify student expression/claim/argument location, WHAT is wrong
+or missing, WHY it matters to task/official criterion/passage/logic, HOW to revise and what to
+check next time. Existing explanation/action/checklist and selected exact sentence observations
+are preferred over adding fields. An omission has no literal missing-text quote: identify the
+relevant surrounding argument honestly, never fabricate a quotation of something not written.
+Do not quote/correct every sentence or finish with only “논리를 강화하세요/설명을 보완하세요”.
+
+Default focus1–2, zero valid when justified;3 only for independent significant failures that
+must be addressed together or cannot be combined without making the student action vague.
+Keep the existing hard maximum3;4+ would require separately reviewed contract/storage changes,
+not this task. Other actual issues remain non-core detailed history, selective sentence advice
+or checklist. Do not promote minor wording to a fake CORE. Do not optimize feedback count.
+One precise important correction can be better than five minor criticisms; zero sentences is valid.
+
+Consolidate roots when one coherent revision action resolves them. Owner's Sookmyung example:
+teacher-blame interpretation plus expanded disadvantaged-student access, increased participation
+and changed average-population composition can form one task: complete the report's actual
+error and causal chain. Preserve each concrete step within explanation/action/checklist rather
+than four repetitive core tasks. This is human-review calibration, not a hint inserted into old runs.
+
+Examine CLAIM → REASON → EVIDENCE → INTERPRETATION → QUESTION CONNECTION → JUDGMENT
+as relationships, not a mandatory six-part essay form. For an A→C jump, identify the missing B
+and an actionable connection: cause/result intermediates, inconsistent comparison axes,
+reversed claim/evidence direction, swapped actor/object, concept/application disconnect,
+passage/judgment disconnect or criticism/conclusion disconnect. Content presence alone is
+insufficient. Preserve valid student argumentative choices before diagnosing weak support.
+
+Priority: official criterion/task necessities → passage understanding → core logic → evidence
+use → sentence meaning → grammar/expression → style. Sentence review prioritizes changes
+that alter meaning, task fulfillment, concepts, causality, comparison or argument support.
+Minor clear grammar errors may be low-priority observations; repetition/spacing/preferences
+must not displace core content. Do not turn uncertain transcription into student error.
+
+Official examples are calibration, not normative templates. A particular case/expression/form/
+conclusion is mandatory only if supported by task/scoring requirements, a direct necessary
+relation to official intent, or the actual student's logical completion. A suggested optional
+case must naturally help this argument. Do not demand the X-country case merely because it
+appears officially. Absence of a separate conclusion paragraph differs from an unfinished
+required judgment; explicit official non-criteria override generic essay conventions.
+
+Recognize good task approach, passage reading, evidence, connections and expression explicitly;
+advise keeping them. Preserve stance, value judgment and style. AI examples are optional and
+do not replace student rewriting. Existing paid→included cycles have no Pilot-derived lifetime cap.
+
+Re-evaluation first reviews frozen compatible prior cores: name what changed, what remains and
+its textual/evidence basis. OPEN/UNCHANGED/IMPROVED/RESOLVED/RECURRED stay historical;
+not_assessable never implies resolution. A consolidated task may have resolved and unresolved
+substeps: describe them in progress reason, keep overall IMPROVED until the task is resolved.
+Current schema does not claim independently queryable subtask states. Version/model changes
+are not automatically student growth. Human acceptance asks: can the student locate the issue,
+understand why, know how, rewrite independently and verify prior improvement next time?
+
+Educational quality combines accuracy, priority, concreteness, actionability, logical coherence,
+stance preservation and false-criticism control. Schema validity, exact quotes, evidence IDs,
+model price/novelty, output length or feedback count alone never establish quality PASS.
+
 ## Recommended MVP architecture
 
 Reuse `profiles.id = auth.users.id`, platform `universities`, existing exam/resource mappings.

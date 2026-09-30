@@ -1,5 +1,7 @@
 # Essay LAB 문장 다듬기
 
+L2-B3: Sentence selection stays tied to learning value, not proofreading. Real non-core roots already exist; do not equate every improvement with CORE. Nullable orphan observations require separate persistence review. [vNext contract design](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation).
+
 
 2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
 implements the approved1.3 direction with one nullable column and versioned RPC dispatch.

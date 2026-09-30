@@ -1,9 +1,11 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+L2-B3: Owner Human Review is now recorded; GPT is PRIMARY_CANDIDATE, not selected. Existing signed-review/security boundary remains. Concrete/logic semantics and nullable-link storage blocker are design-only. [vNext contract design](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation).
+
 Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) governs future packages: raw PDF truth, separate scoring rules/non-criteria and reviewed transcription. Current L2-B2 prompt/evidence/outputs stay frozen; no worker change.
 
 > Current follow-up: [L2-B2S supplemental](essay-lab-model-bakeoff-l2-b.md): new GPT2 HTTP200,
-> both SENTENCE_ROOT parser failures; raw human review pending. Claude2 PASS and original429 history preserved.
+> both SENTENCE_ROOT parser failures. Owner review now prefers GPT as candidate; Claude2 PASS and original429 history preserved.
 > No retries/fallback/repair or Round2. Checked-in execution gate remains closed.
 > Production worker/reviewer/AI/traffic remain inactive. Historical L2-A3 plan below is superseded.
 

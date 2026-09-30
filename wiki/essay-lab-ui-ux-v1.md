@@ -4,6 +4,30 @@
 실제 Flutter 화면이며 **메모리 내 가상 자료만 사용**한다. Production 학생 저장,
 AI 평가·생성, worker, 회차권 결제는 활성화하지 않았다. DB/RPC/migration 변경 없음.
 
+## L2-B3 vNext UI compatibility review — design only
+
+[Product concrete feedback](essay-lab-product-v1.md#l2-b3-concrete-feedback-contract--design)
+and [root/storage proposal](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation)
+retain the current overview/summary/strengths/dimensions/sentence review/improvements/priority/
+checklist/direct rewrite/change sequence. No UI implementation or IA redesign here.
+
+Verified `essay_live_gateway.dart` maps non-resolved core_focus actions into priority, progress
+explanations into change groups and every stored sentence envelope into typed sentence items.
+Thus genuine non-core local roots can display sentence advice without becoming CORE actions.
+`EssaySentenceSection` already checks immutable attempt/evaluation ownership and exact quote,
+then displays quote/diagnosis/direction/optional example with count/collapse behavior.
+This supports student text → why → how for sentence-linked advice today.
+
+Current CORE rendering relies on prose/actions; it is not a structured per-core anchor card or
+a structured per-substep progress tracker. Use existing explanation/action/checklist semantics
+first; do not claim a new student_anchor field is already mapped. If later Owner requests
+separate per-core quote/why/how labels, reuse sentence presentation and add a minimal typed
+association/layout in an explicitly authorized UI step. Do not infer links from text similarity,
+show internal IDs or copy every sentence. No mandatory UI change for the recommended wire-
+compatible prompt refinement; stronger per-core hierarchy is DESIGN_ONLY. Null root persistence
+cannot be fixed by frontend-only changes. Future implementation must keep360px/200% scaling
+and historical1.2/1.3/empty-observation behavior; no Flutter build is claimed in this design task.
+
 ## Canonical decisions and IA
 
 [Product v1](essay-lab-product-v1.md), [history architecture](student-analytics-data-architecture.md),

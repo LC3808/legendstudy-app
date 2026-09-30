@@ -446,6 +446,25 @@ permitted evaluation direction, then distinguish insufficient application/argume
 Never turn uncertain reading into a student grammar/logic error. This is a review direction,
 not a changed parser cap or an executed prompt upgrade.
 
+### L2-B3 evidence quality clarifications
+
+Owner Human Review is [frozen separately](essay-lab-model-bakeoff-l2-b.md#l2-b3-owner-human-review-freeze--2026-09-30),
+not an automatic model verdict or a new source acquisition. Readable-text uncertainty defects,
+missing multiple examples and richer official guidance are INPUT_PACKAGE_LIMITATION; preserve
+that attribution separately from model mistakes. Raw PDF remains source truth; normative
+question/intent/scoring criteria differ from official examples, accepted/high-quality examples
+and AI-generated examples. None of these example categories is a mandatory answer template.
+
+Transcription review order: original image → enlarged/page context → surrounding meaning →
+human-reviewed transcription → retain uncertainty only if still unreadable; never guess.
+Correction lineage needs prior and corrected version, reason, reviewer/source and timestamp.
+Unicode transcription character count is not proof of official manuscript length: account for
+original image/grid numbering, deletions/corrections and official counting method. No numeric
+scoring threshold is inferred without verified scoring evidence. Absence of a conclusion
+paragraph and absence of a logically required final judgment are different; preserve explicit
+non-criteria without excusing genuinely incomplete reasoning. Next evidence version only;
+no original package/transcription/OCR rerun or overwrite in L2-B3.
+
 ### Transcription and correction history
 
 Preserve original PDF/image and transcription together. Use an unreadable marker only where

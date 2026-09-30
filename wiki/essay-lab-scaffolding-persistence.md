@@ -7,6 +7,123 @@ KEEP19; one new nullable column; no AI call, real student data, UI change or new
 Scaffolding result is Owner ACCEPTED. The timing issue below was outside this extension;
 [separately authorized forward correction](essay-lab-submit-timing-correction.md) now addresses it.
 
+## L2-B3 vNext contract design — no implementation
+
+**Recommended minimum: retain non-null sentence→real improvement links, distinguish
+non-core roots from CORE selection, strengthen prompt/semantic review.** Owner review and
+[concrete Product contract](essay-lab-product-v1.md#l2-b3-concrete-feedback-contract--design)
+are inputs. No parser/schema/SQL/RPC/UI implementation or provider run in L2-B3.
+Nullable independent observations need Owner review before any implementation path is chosen.
+
+### Verified current contract and nullable-link blocker
+
+`live_worker.py` output_schema requires string linked_issue_key; validate_output requires a
+matching active improvement (`SENTENCE_ROOT`). Supplemental GPT failed with2 missing links
+in Sookmyung and1 in Hanyang. Do not rewrite these outputs to pass, infer missing roots, strip
+observations or reclassify them automatically as minor. Claude's historical valid output is
+also retained; contracts must be model-neutral.
+
+**improvements != core_improvement_keys.** Up to30 actual roots can exist, only0–3 are selected
+cores. Current `claim_scope=local_sentence`, empty official evidence, exact quote and independent
+local review already allow a genuine minor non-core root. It is an evaluation-local observation,
+not a permanent student weakness and not a fabricated core task. One real issue can own several
+spans; don't create duplicate roots just to satisfy a quota. Content/official issues retain
+`official_criterion` evidence and appropriate core priority; local category cannot hide them.
+
+The suggested nullable path is NOT a parser-only change:
+- migration20260929000100 scaffold validation rejects NULL with INVALID_SENTENCE_LINK;
+- sentences are grouped by issue into `essay_improvement_progress.scaffolding_observation`;
+- progress requires an issue parent, and finalize iterates improvements to persist observations;
+- independent local-review binding and Flutter mapping also follow that parent envelope.
+Allowing null only in Python would either fail SQL or lose the observation. No silent carrier
+root, synthetic issue, body-JSON dumping or dropping data is acceptable.
+
+If Owner requires truly rootless observations, **STOP that implementation path**: separately
+review an evaluation-owned observation storage location (existing evaluation payload capacity
+must be verified before proposing a nullable column), versioned RPC validation/write mapping,
+review authorization, erasure and UI mapping. No new sentence table is proposed now, no exact
+migration is drafted. New storage/version dispatch likely requires forward migration; retain
+1.3/in-flight/historical behavior and replay/atomicity/RLS tests. This is a blocker report,
+not a declaration that current JSONB can store orphan observations safely.
+
+### Single recommended no-DB handoff
+
+For L2-B4 recommend prompt-only semantic refinement with existing wire Contract1.3 and
+new explicit prompt/package/policy regime identity. Non-null link → existing non-resolved
+real issue. Independent minor grammar/wording → real local non-core issue, no official-evidence
+claim, reviewed exact span; linked issue omitted from core_improvement_keys. Null → reject.
+Do not enforce that every sentence belongs to a CORE; it belongs to an improvement.
+Do not generate a root solely to force an unnecessary minor correction into the output.
+This resolves the Product concern (no fake CORE) without weakening graph/provenance checks.
+**Owner must confirm this recommendation versus nullable storage expansion before L2-B4.**
+
+Wire contract/schema/DB/RPC/migration changes: **NO for recommended path**. Prompt changes:
+YES. Parser algorithm changes: NO required; deterministic regression/diagnostic coverage and
+semantic quality fixtures are required. Nullable alternative: wire/parser YES and storage/RPC/
+forward migration review required, not authorized. Current enum/count/quote/evidence/security/
+billing invariants remain. Do not register a Production model or alter the policy resolver here.
+
+Reuse mappings:
+
+| Product meaning | Existing field(s) / limitation |
+|---|---|
+| Student location + WHAT/WHY | improvement.explanation; exact quote/span in linked sentence_feedback only where warranted |
+| HOW / missing logical B | improvement.action; sentence.direction; optional minimal example, never a completed answer |
+| Next attempt check | checklist with explicit task wording; no new structured checklist→issue FK claimed |
+| Normative grounding | dimension/improvement evidence_ids in frozen allowed official package |
+| Preserve strengths | strengths + keep-good-parts instruction |
+| Core selection | core_improvement_keys only; priorities1..N;0 valid,1–2 default,3 justified |
+| Changed substeps | previous_improvement_reviews.reason + progress explanation/action; substeps are not separate states |
+
+Retain existing core text limits (explanation450/action240); concrete does not mean verbose.
+WHAT/WHY/HOW completeness and task consolidation are semantic judgments. Nonblank fields,
+exact spans and graph membership are deterministic; a keyword blacklist cannot prove useful
+advice or that an official case is necessary. An abstract-only action can be flagged in fixtures
+but cannot be universally certified by SQL or JSON Schema. Existing signed-review boundary is
+not bypassed; strengthen future human/semantic quality criteria without inventing receipts.
+
+### Offline acceptance design T1–T16 (not implemented fixtures)
+
+| Test | Fixture / expected gate |
+|---|---|
+| T1 | Linked active real root → structural PASS, even if non-core; semantic review separate |
+| T2 | Independent minor grammar/wording: null rejected in recommended path; genuine non-core local root + exact quote + review accepted; nullable alternative blocked pending storage review |
+| T3 | Nonexistent link → reject for every provider; no auto-repair |
+| T4 | Official/logic issue mislabeled local/minor to evade grounding: scope/evidence inconsistency rejects structurally; plausible dishonest label requires semantic review, cannot be proven by category alone |
+| T5 | Core1/2 correct roots/order → structure PASS; priority/actionability human review |
+| T6 | Core3 → within hard cap, exceptional independent necessity must be justified in review artifact (no extra wire key) |
+| T7 | Core4+ rejects; redundant three or minor-priority overload → quality FAIL despite structurally valid count |
+| T8 | Exact submitted-answer quote/codepoint/hash including emoji/decomposed Hangul/whitespace → PASS |
+| T9 | Normalized/fabricated quote, draft quote or wrong owner/source → reject |
+| T10 | Official evidence IDs/version/scope membership → structural gate; claim actually supported → semantic gate |
+| T11 | Explicit no-form criterion plus missing conclusion paragraph → false-criticism FAIL; distinguish missing required judgment |
+| T12 | Question1200 versus actual verified scoring rule, manuscript numbering/deletions/count method → separate evidence; invented1201 automatic penalty FAIL |
+| T13 | OPEN→IMPROVED→RESOLVED→RECURRED via explicit previous links preserved; reason names actual changed/remaining substeps |
+| T14 | not_assessable retains reason, no inferred status/root transition; absent observation not resolution |
+| T15 | Minimal wording correction must preserve stance/argument; introduced policy preference → semantic FAIL |
+| T16 | Only abstract action such as “논리를 강화하세요” → quality FAIL; structural nonblank may PASS, no claim SQL proves pedagogy |
+
+Fixtures should be synthetic/minimal, model-neutral; include both accepted historical Claude
+shapes and rejected GPT graph shapes without mutating originals. Holdout good-answer fixture
+must allow0 core/0 sentence and preserve strengths. Causal-chain fixture must identify A,
+missing B and directed repair, not enumerate unconnected concepts. All16 designs include
+where/why/how/independent rewrite/improvement checks. No real provider needed for fixtures.
+
+### Versioning and gates
+
+Do not change old1.3 result meaning or append corrected fields to frozen outputs. A next
+prompt/evidence experiment uses new immutable identities, verified corrected transcription
+and reviewed evidence version; never claim it is the old fair comparison. Compatible previous
+context is explicitly selected/frozen under existing regime rules; no moving latest lookup
+or cross-regime growth assertion. Same underlying wire1.3 does not imply same evaluation regime.
+Any later provider test needs separate Owner approval, narrow question, frozen new package,
+acceptance rubric and small explicit budget; no broad bake-off repeated automatically.
+
+Design READY for Owner review; **SENTENCE_ROOT_RESOLUTION=NEEDS_OWNER_REVIEW** and
+**READY_FOR_L2_B4_IMPLEMENTATION=NO** until the no-DB recommendation is accepted or nullable
+storage scope separately authorized. No Production policy/worker/model-selection/AI/traffic,
+Round2 or evidence ingestion implementation readiness is implied.
+
 ## Migration and server boundary
 
 [20260929000100](../supabase/migrations/20260929000100_essay_scaffolding_persistence.sql)
