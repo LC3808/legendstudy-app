@@ -1,5 +1,7 @@
 # Essay LAB L2-B — model bake-off preparation
 
+Owner review update 2026-09-30 (Architecture Review baseline): Sookmyung/Hanyang original-answer quality and Sookmyung strong-answer blind calibration accepted PASS; CORE=0, Positive Learning and No Forced Defect real validation PASS. Historical raw/terminal receipts remain unchanged. PRIMARY_MODEL_SELECTED=NO; Round2/Production remain OFF. [Cross-review baseline](platform-architecture-health-review-a.md).
+
 ## L2-C3 Gate D real calibration — 2026-09-30
 
 **Gate D one-call execution COMPLETE; STRUCTURAL PASS; HUMAN_QUALITY=PENDING_OWNER_REVIEW.**

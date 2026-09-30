@@ -2,6 +2,8 @@
 
 ## Current product state
 
+[Architecture audit](platform-architecture-health-review-a.md): schema freeze.
+
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
 owner-scoped saved/recent. Study Timer + Mock Exam/scoring/result foundation,
@@ -138,7 +140,7 @@ DEPLOYED/KEEP19. Identity PASS. [Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-ru
 2 frozen, quality PARTIAL; Owner review pending. Production AI/student/worker OFF.
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
-Last verified ledger21. [L1](essay-lab-ui-ux-v1.md#live-integration-l1--2026-09-29) PASS. [L2-C3](essay-lab-model-bakeoff-l2-b.md): S/H Owner PASS; Gate D structural PASS/CORE0, Owner pending. GPT candidate;AI OFF.
+Ledger21; L1 PASS. [L2-C3](essay-lab-model-bakeoff-l2-b.md): S/H + Gate D Owner PASS, CORE0/Positive Learning PASS. GPT candidate;AI OFF.
 Multi D-Day remains IMPLEMENTED / Production applied / OWNER DEVICE PASS.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 
