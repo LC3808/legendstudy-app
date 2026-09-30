@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-30 — L2-C3 Gate C Owner PASS / Gate D approval block
+
+Sookmyung/Hanyang educational PASS explicitly accepted; original-answer validation COMPLETE.
+Selected verified Sookmyung official example as a blind calibration answer with exact source
+hash and separate execution assembly. New closed one-slot adapter/private renderer;143 offline
+tests PASS,104 historical files preserved. Automatic approval review rejected provider command
+before process/STARTED: new calls0, slot still NOT_STARTED. Private exact-payload review ready;
+no bypass/retry. Primary not selected; no Round2/Production. [Canonical](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30).
+
 ## 2026-09-30 — L2-C3 Hanyang structural PASS / WAIT_OWNER_REVIEW
 
 Old UNKNOWN preserved; local investigation finds insufficient evidence for a specific cause.

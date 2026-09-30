@@ -1,5 +1,52 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-C3 Gate C Owner PASS and Gate D preflight — 2026-09-30
+
+**Sookmyung HUMAN_QUALITY=PASS; Hanyang HUMAN_QUALITY=PASS;
+ORIGINAL_ANSWER_VALIDATION=COMPLETE; Gate C=PASS.** Owner/ChatGPT explicitly accepted
+Hanyang's two criterion-relevant priorities, condition2 actor/sanction direction diagnosis,
+utilitarian total-welfare/criticism→policy connection, preserved stance, concrete student-led
+revision, secondary wording, and positive WHY/reusable strategy. No unnecessary X-country
+insertion or invented separate-conclusion requirement. The minority-rights instruction is
+limited to specifying the student's existing criticism in the actual policy context; it must
+not invent affected groups or cases absent from official evidence. This acceptance is a new
+Owner review record, not a mutation of historical VALID_UNREVIEWED terminal receipts.
+
+Owner authorized Gate D one blind strong-answer calibration. Selected Sookmyung2025 mock
+humanities Q1-1 official example, reviewed derivative `example-1` v1, official rubric PDF7.
+It is neither labeled perfect nor required to produce CORE0. Exact source text is used as a
+new evaluation submission; no official-example/quality label or prior model/Owner judgment
+is sent. The normal primary evidence excludes reference examples. [Assembly boundary](essay-lab-data-foundation.md#l2-c3-blind-calibration-assembly--2026-09-30).
+
+**Execution BLOCKED_APPROVAL_REVIEW; new provider calls0; slot NOT_STARTED.** Automatic
+approval review rejected process creation for the proposed OpenAI Responses transmission,
+stating that authorization did not specifically cover this selected answer/evaluation payload
+and destination disclosure. No outbound process, STARTED receipt, response or terminal exists;
+no workaround/second attempt. This is an execution approval blocker, not a parser/quality
+failure. Exact frozen payload/destination can be reviewed privately in
+`.local/essay-calibration-l2c3/preflight-owner-review.md`. Resume only after that disclosure is
+approved, rechecking all security/binding gates and consuming the same still-unused
+`sookmyung-openai-l2c3-2` slot once. Do not create a replacement slot or repeat Gate B.
+
+[Sanitized state](../tool/essay_lab/evidence/l2_c3_gate_d_result.json),
+[closed Gate D adapter](../tool/essay_lab/strong_answer_calibration.py),
+[private result renderer](../tool/essay_lab/strong_answer_review.py),
+[15 focused offline tests](../tool/test_strong_answer_calibration.py).
+The bounded600s transport/lifecycle is isolated from historical adapters and Production;
+no prompt/Contract/source-package bytes changed. 143 offline tests PASS. Initial preparation
+found the private directory absent; it was created0700 before freezing, with no started slot
+or outbound request. All104 prior private files preserved (Pilot46/C1 31/C2 17/C3 10), tracked
+private0; secret and repository ignore checks PASS. Strong-answer empirical quality is
+NOT_APPLICABLE until output exists, primary selectionNO; Round2/Production remain OFF.
+
+Seven preservation answers: (1) dated Owner acceptance and distinct experiment preparation;
+(2) exact source/page/derivative plus request/prompt/schema hashes; (3) no historical UPDATE;
+(4) calibration is not a real student's learning history or identity; (5) model-quality
+experiment separate from model selection/outcomes; (6) private local ACL and no analytics/body
+publication; (7) output/review are derivative judgments, never official rubric or billing facts.
+
+Earlier L2-C3 Gate C pending statements below are the preserved pre-review checkpoint.
+
 ## L2-C3 Hanyang investigation and sequential gate — 2026-09-30
 
 **Gate A PASS; new Hanyang REAL_PROVIDER=STRUCTURAL_PASS; HUMAN_QUALITY=PENDING_OWNER_REVIEW.**

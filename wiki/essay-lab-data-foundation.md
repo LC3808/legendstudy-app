@@ -1,5 +1,27 @@
 # Essay LAB Data Foundation v1 — 2025 Pilot
 
+## L2-C3 blind calibration assembly — 2026-09-30
+
+For the separately approved Gate D, Sookmyung Q1-1's source-reviewed official example v1
+(PDF7) is selected as the new answer body, blind to its provenance/quality label. It is not
+added to rubric/evidence or labeled perfect. Source and derivative hashes are checked against
+the immutable C1 catalog; exact body bytes are retained without editorial rewriting.
+
+C1's manifest includes its original student transcription, so its hash must not falsely claim
+to describe this different answer. Keep **official-evidence-vnext-1** and the C1 base package
+unchanged; use a separate execution assembly manifest binding base package/catalog hashes,
+question, projected blind evidence/criteria hashes and new submission hash. Its deterministic
+hash becomes the provider input's evidence_package_hash; base_package_hash and source role/page
+remain in the private operator binding. This is evaluation assembly metadata, not a new
+canonical source identity, DB schema or output Contract. Prompt scaffolding-1.3-v3 and
+Contract1.3 remain byte-identical. Original C1 packages still validate unchanged.
+
+No previous student answer, model evaluation, Owner preference or expected quality verdict is
+transmitted in the prepared payload. Provider sees only the chosen answer and the same
+question-scoped official evidence. One source example can be evaluated as an answer without
+being shown as a reference answer or a normative template. Execution currently blocked before
+any call by automatic approval review; [exact gate/status](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30).
+
 ## L2-C1 Official Evidence vNext — 2026-09-30
 
 **Two representative offline packages READY; no provider/Production mutation.**
