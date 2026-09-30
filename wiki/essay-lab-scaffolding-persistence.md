@@ -1,5 +1,87 @@
 # Essay LAB Scaffolding Persistence — 1.3
 
+## L2-B4 Option A implementation — 2026-09-30
+
+**Owner Option A APPROVED; offline prompt/contract regression PASS.** This supersedes
+L2-B3's pending choice below: nullable links are NOT introduced. Wire Contract1.3,
+parser, adapter, SQL finalize and KEEP19 remain unchanged. Every sentence observation
+must reference a real active improvement; a genuine local problem can be NON-CORE.
+Do not repair old GPT output, drop observations or fabricate roots. Existing independent
+local semantic review is still mandatory before finalization.
+
+Implementation: [versioned prompt](../tool/essay_lab/prompts/scaffolding-1.3-v2.txt),
+[offline prompt descriptor](../tool/essay_lab/scaffolding_vnext.py),
+[evidence sidecar preparation](../tool/essay_lab/evidence_vnext.py),
+[regression tests](../tool/test_scaffolding_vnext.py),
+[curated quality examples](../tool/essay_lab/fixtures/scaffolding_vnext_quality.json).
+Prompt **scaffolding-1.3-v2**, same output schema1.3; no change to v1/bakeoff1 or deployed
+policy registry. Descriptor is opt-in and intentionally NOT connected to live_worker or
+Round1 dispatch. Future authorized package preparation must pin this prompt hash and a
+new policy/regime; same wire does not establish comparable regimes automatically.
+
+### Implemented semantics and validation boundary
+
+improvements are supported historical roots (existing max30), CORE is the next-rewrite
+subset (default1–2, hard max3, supported zero). One coherent repair can consolidate multiple
+spans; minor local roots retain quote and review provenance without becoming priority tasks.
+explanation expresses location/WHAT/WHY; action expresses HOW; checklist is next-attempt
+checks. Existing450/240 core text limits remain. No student-anchor field or new DB column.
+Prompt checks directed logic and official criteria, avoids forced examples/conclusion form,
+preserves strengths/stance, reviews prior cores before new tasks and allows zero sentences.
+
+**ABSTRACT_FEEDBACK_GATE=PROMPT_AND_FIXTURE.**23 curated semantic examples/anti-examples
+record expected human verdicts, context and rationale, not automatic model scoring. Unit tests
+validate those fixtures and demonstrate that structurally valid abstract/overloaded guidance
+can still be semantically unacceptable. No Korean keyword classifier or fake signed reviewer.
+Real educational quality, priority necessity and subtle false criticism require human review.
+
+| L2-B4 acceptance | Implemented verification |
+|---|---|
+| T1–T4 | CORE/non-core real roots PASS; absent/null roots rejected; independent local review required |
+| T5–T7 | 1/2/3 core structural PASS;3 justification in synthetic fixture;4 rejected; real necessity remains semantic |
+| T8 | Minor-core overload structurally valid but curated quality REJECT |
+| T9–T11 | Unicode/codepoint exact spans; normalized/fabricated/draft quote reject; allowed official grounding + local segregation |
+| T12 | Explicit non-criterion→mandatory conclusion anti-example quality REJECT |
+| T13 | Separate question/scoring source role/hash; wrong source rejects, no invented numeric penalty |
+| T14–T15 | Explicit OPEN→IMPROVED→RESOLVED→RECURRED; non-core history; not_assessable preserved, false transition rejects |
+| T16 | Added stance/value judgment quality REJECT |
+| Q1–Q8 | Abstract action/evidence anti-examples; concrete diagnosis, alternate-valid reasoning, stance, non-core provenance, zero sentence, consolidated root |
+| Pilot regression | Synthetic S2/H1 missing local roots reject; actual-root variants PASS, no historical artifact repair |
+| Direction review | actor/object, cause/effect, necessary/sufficient, comparison axis, evidence/claim, criticism/judgment, concept/application anti-examples |
+
+### UI compatibility finding
+
+No Flutter change. Existing sentence quote/diagnosis/direction/optional-example mapping is
+compatible. `essay_live_gateway.dart` filters first priorities by core_focus, so NON-CORE does
+not become “가장 먼저 고칠 것”. Core title is not a separate mapped card; explanation appears
+in general improvements and action in priorities. Stronger per-core grouping is DESIGN_ONLY.
+**Remaining mapping limitation:** gateway maps ALL active improvement explanations into
+`EssayEvaluation.improvements`; `essay_pages.dart` overview uses its first two. Thus a non-core
+root can appear in top summary when fewer than two core roots exist. UI_MAPPING_COMPATIBLE=
+DESIGN_ONLY for the full desired focus, not an unconditional PASS. No silent UI change here;
+future narrow UI review should choose summary items using core metadata without deleting detail.
+UI_SCHEMA_CHANGE_REQUIRED=NO for persistence/wire; a typed presentation association may help.
+
+### Validation and preservation
+
+New vNext20 PASS; existing worker15 + bakeoff15 + provider binding8 + scaffolding Pilot9 =47
+PASS; SQL static validation50 and review55 PASS; Wiki handoff PASS. Initial worktree run lacked
+private fixtures (one error/one skip), resolved by read-only fixture path injection; initial
+pglast import failures resolved in a disposable venv. No unrelated code repaired. No Flutter
+build/analyze (Flutter unchanged), no DB runtime/Production connection claimed.
+
+Private46 files hash-identical before/after; no answer bodies/raw output/images added to Git.
+New tiny Hanyang transcription fixture uses the Owner-provided fragment, not full benchmark
+text. SQL/migrations/parser/historical prompt bytes unchanged. New provider calls0, DB writes0.
+Seven preservation answers: (1) no new student fact generated; (2) roots/quotes retain original
+attempt/evaluation identity; (3) no historical UPDATE; (4) student identity unchanged;
+(5) learning history stays distinct from billing/telemetry; (6) private inputs/retention/review
+boundary unchanged; (7) synthetic quality labels are review examples, not observed model facts.
+
+Next: Owner review, including UI summary limitation → separately authorized Evidence vNext
+and tiny frozen provider validation. GPT remains candidate, not selected. No Production AI,
+worker, Round2, student traffic, billing/security changes, migration or archive ingestion.
+
 2026-09-29 · IMPLEMENTED / ISOLATED RUNTIME VALIDATED / **PRODUCTION DEPLOYED** — [apply evidence](essay-lab-scaffolding-production-apply.md).
 Owner approved the [product contract](essay-lab-product-v1.md) and1.3-review.1 direction.
 KEEP19; one new nullable column; no AI call, real student data, UI change or new table.

@@ -1,5 +1,10 @@
 # Essay LAB v1 Product Specification
 
+L2-B4: Owner approves **Option A**: real improvement roots include genuine NON-CORE
+observations; CORE selects the next1–2 priorities (max3). [Implementation and UI limitation](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30).
+The concrete teaching principles below are encoded in the new provider-neutral prompt;
+offline verification is not actual model-quality acceptance. Commercial policy unchanged.
+
 Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) owns archive-first source policy and Human Review findings. Prefer1–2 core tasks in the next prompt version; retain3 only when necessary. Current frozen comparison and deployed contract are unchanged.
 
 

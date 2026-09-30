@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-09-30 — L2-B4 offline scaffolding vNext
+
+Owner Option A implemented as prompt v2 + unchanged1.3 regression fixtures; evidence sidecar
+preparation only. New20/existing47/static50+55 PASS. Private46 unchanged, providers/DB0.
+[Canonical result / UI overview limitation](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30).
+Original development checkout was main; isolated codex/essay-scaffolding-vnext starts from
+accepted82fa70a without resetting Owner checkout. No Flutter, billing, policy activation or AI.
+
 ## 2026-09-30 — L2-B3 Owner review freeze / vNext design
 
 - [Owner quality evidence](essay-lab-model-bakeoff-l2-b.md#l2-b3-owner-human-review-freeze--2026-09-30):

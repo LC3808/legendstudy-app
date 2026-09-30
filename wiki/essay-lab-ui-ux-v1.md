@@ -1,5 +1,10 @@
 # Essay LAB Workspace UI v1
 
+L2-B4 mapping recheck: first priorities correctly filter core_focus; sentence detail preserves
+quote/diagnosis/direction/optional example. However overview “보완할 점” takes the first two
+ALL-active improvements and can include NON-CORE. [Exact limitation / DESIGN_ONLY follow-up](essay-lab-scaffolding-persistence.md#ui-compatibility-finding).
+No Flutter/IA implementation or build in this prompt task. Internal issue keys remain hidden.
+
 2026-09-28 · Phase 1 IMPLEMENTED / OWNER VISUAL REVIEW READY.
 실제 Flutter 화면이며 **메모리 내 가상 자료만 사용**한다. Production 학생 저장,
 AI 평가·생성, worker, 회차권 결제는 활성화하지 않았다. DB/RPC/migration 변경 없음.

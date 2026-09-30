@@ -1,5 +1,13 @@
 # Durable Decisions
 
+## 2026-09-30 — Sentence roots remain mandatory; CORE is a subset
+
+Owner approves [Option A](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30):
+every persisted sentence observation belongs to a real improvement; minor issues may be
+NON-CORE. No null orphan links, fake CORE, parser repair or SQL weakening. Contract1.3 remains;
+new prompt version expresses the accepted teaching semantics. Historical L2-B3 pending-choice
+statements are superseded by this approval. Model selection/real calls remain separate gates.
+
 This file records long-lived product and architecture decisions. Routine progress belongs in `log.md` and `current-status.md`.
 
 ## 2026-09-30 — Concrete student-anchored Essay instruction

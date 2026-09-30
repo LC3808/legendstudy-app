@@ -1,0 +1,178 @@
+[
+  {
+    "id": "T8",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "공식 요구의 중요한 인과 누락과 의미에 영향 없는 반복 두 개가 함께 있음.",
+    "feedback": "인과 누락, 단어 반복, 사소한 문법을 모두 같은 CORE로 선정.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "세 번째 독립 과제의 필요성이 없고 작은 문제가 핵심 집중을 분산함."
+  },
+  {
+    "id": "T12",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "합성 공식 기준: 서론-본론-결론 형식은 평가하지 않음. 학생의 판단은 이미 있음.",
+    "feedback": "별도 결론 단락이 없으므로 구조 감점입니다.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "명시적 non-criterion을 평가 의무로 바꿈. 실제 판단 누락과 구분해야 함."
+  },
+  {
+    "id": "T16",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "학생은 정책의 단점을 비판하되 찬반 결론을 확정하지 않았고 논제도 찬성을 요구하지 않음.",
+    "feedback": "결론에 이 정책을 적극 지지한다고 쓰세요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "입력에 없고 필수도 아닌 가치판단을 추가함."
+  },
+  {
+    "id": "Q1",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "주장과 근거 사이의 연결이 빠진 합성 답안.",
+    "feedback": "논리가 부족합니다. 논리를 강화하세요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "위치와 빠진 관계, 다음 수정 행동이 없음. 길이가 아닌 내용의 문제."
+  },
+  {
+    "id": "Q2",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "특정 집단의 비용을 비교하지 않은 효용 논증.",
+    "feedback": "근거를 보완하세요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "어느 집단의 어떤 비용을 비교해야 하는지 알려주지 않음."
+  },
+  {
+    "id": "Q3",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "평균 하락을 보고했으나 응시 집단의 변화와 원인 관계를 생략.",
+    "feedback": "평균이 낮아졌다는 대목에서 응시 집단이 어떻게 바뀌었는지가 빠졌어요. 평균의 해석은 집단 구성에 의존하므로 접근 기회 확대→응시 참여 증가→평균 산출 집단 변화를 연결해 보세요.",
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "학생 위치, 누락 관계, 중요성, 구체 행동을 연결하며 완성 답안은 대신 쓰지 않음."
+  },
+  {
+    "id": "Q4",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "학생은 공식 예시와 다른 근거를 사용했지만 논제와 공식 기준을 충족함.",
+    "feedback": "예시의 표현과 다르므로 틀렸어요. 예시 문장을 그대로 쓰세요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "예시는 calibration이지 normative template가 아님."
+  },
+  {
+    "id": "Q5",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "학생의 비판 입장은 타당하지만 주장과 비교 근거 연결이 부족함.",
+    "feedback": "비판의 방향은 유지하세요. 두 집단의 손익 비교를 덧붙이고 그 비교가 현재 비판을 지지하는 이유를 연결하세요.",
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "입장을 바꾸지 않고 근거 관계만 보강함."
+  },
+  {
+    "id": "Q6",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "substantive CORE 1개, 정확한 인용으로 확인된 문법 문제 1개.",
+    "feedback": "문법 문제를 실제 local_sentence improvement로 남기고 sentence가 그 root를 참조하되 CORE에는 넣지 않음.",
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "필수 provenance를 유지하면서 작은 문제를 주된 재작성 과제로 승격하지 않음."
+  },
+  {
+    "id": "Q7",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "문장 자체에 의미 있는 문제가 없고 강점이 확인됨.",
+    "feedback": "sentence_feedback=[]; strengths에 유지할 좋은 논증을 기록.",
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "수량을 채우지 않음. zero는 미지원 NULL과 다름."
+  },
+  {
+    "id": "Q8",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "여러 문장에 걸쳐 하나의 인과 연쇄가 누락됨.",
+    "feedback": "하나의 substantive root로 묶고 explanation/action/checklist에 누락된 중간 관계들을 안내.",
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "한 수정 행동으로 해결되는 관측을 통합. 가짜 단일 span이나 다수 CORE 불필요."
+  },
+  {
+    "id": "X_COUNTRY",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "공식 예시에 X국이 있으나 학생은 다른 타당한 논증을 사용하며 X국은 필수 요건이 아님.",
+    "feedback": "X국 사례를 반드시 추가해야 답안이 구체적입니다.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "공식 예시 존재만으로 학생 논증과 부자연스러운 사례 삽입을 강요함."
+  },
+  {
+    "id": "LOGICAL_DIRECTION",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "합성 criterion은 현재 세대가 미래 세대에 행사하는 관계를 묻는데 답안은 반대로 서술함.",
+    "feedback": "관련 단어가 모두 있으니 사회계약 관계가 충족되었습니다.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "단어 존재 대신 행위자→대상의 방향을 확인해야 함."
+  },
+  {
+    "id": "LENGTH",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "문제 명목 분량은 1200. 별도 공식 감점 구간은 제공되지 않음. 전사 Unicode count만 있음.",
+    "feedback": "1201자이므로 반드시 감점입니다.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "명목 분량에서 scoring tolerance를 발명하고 원고지 산정과 혼동함."
+  },
+  {
+    "id": "TRANSCRIPTION",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "새 version은 Owner가 판독 확인한 전사를 사용. 이전 version에만 판독 어려움 표식 존재.",
+    "feedback": "학생이 판독 어려움이라고 잘못 썼으니 문법을 고치세요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "입력 전사 결함은 학생 문장 오류가 아님. historical package는 유지."
+  },
+  {
+    "id": "ACTOR_OBJECT",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "공식 관계는 A가 B에 책임을 물음. 답안은 B가 A에 책임을 묻는다고 함.",
+    "feedback": "책임이라는 개념을 사용했으므로 정확해요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "행위자/대상을 역전함."
+  },
+  {
+    "id": "CAUSE_EFFECT",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "합성 근거는 기회 확대가 응시 증가의 원인. 답안은 순서를 반대로 주장.",
+    "feedback": "두 현상이 모두 언급되어 인과 설명이 충분해요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "원인·결과의 방향 확인이 필요함."
+  },
+  {
+    "id": "NECESSARY_SUFFICIENT",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "조건은 필요조건으로 주어졌는데 답안은 충분조건으로 판단.",
+    "feedback": "조건이 있으므로 결론은 반드시 성립해요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "필요조건만으로 충분성을 추론함."
+  },
+  {
+    "id": "COMPARISON_AXIS",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "A는 비용, B는 혜택만 비교하여 우열을 판단.",
+    "feedback": "두 대상을 비교했으니 기준을 충족해요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "공통 비교 축을 사용하지 않음."
+  },
+  {
+    "id": "EVIDENCE_CLAIM",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "근거는 참여율을 설명하지만 주장은 개별 역량 상승.",
+    "feedback": "통계가 있으니 역량 주장이 뒷받침돼요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "서로 다른 주장을 지지하는 근거임."
+  },
+  {
+    "id": "CRITICISM_JUDGMENT",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "비판 근거와 최종 판단이 서로 반대 방향.",
+    "feedback": "비판과 결론이 모두 있으니 완결됐어요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "비판이 판단을 어떻게 지지하는지 빠짐."
+  },
+  {
+    "id": "CONCEPT_APPLICATION",
+    "gate": "HUMAN_SEMANTIC_REVIEW",
+    "context": "공리주의 개념 설명은 맞으나 사례에서 한 집단만 고려.",
+    "feedback": "정의를 정확히 썼으므로 적용도 정확해요.",
+    "expected_human_verdict": "REJECT",
+    "rationale": "정의와 실제 비교 적용은 다름."
+  }
+]

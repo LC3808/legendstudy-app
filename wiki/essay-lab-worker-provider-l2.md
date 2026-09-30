@@ -1,5 +1,9 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+L2-B4: [Option A / prompt v2 offline implementation](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30)
+retains wire1.3 and strict parser. Worker/dispatch still use their historical prompt; no live
+binding or policy registration is activated. Real provider calls0; GPT candidate only.
+
 L2-B3: Owner Human Review is now recorded; GPT is PRIMARY_CANDIDATE, not selected. Existing signed-review/security boundary remains. Concrete/logic semantics and nullable-link storage blocker are design-only. [vNext contract design](essay-lab-scaffolding-persistence.md#l2-b3-vnext-contract-design--no-implementation).
 
 Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) governs future packages: raw PDF truth, separate scoring rules/non-criteria and reviewed transcription. Current L2-B2 prompt/evidence/outputs stay frozen; no worker change.

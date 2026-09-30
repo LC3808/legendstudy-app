@@ -1,5 +1,13 @@
 # Essay LAB Data Foundation v1 — 2025 Pilot
 
+L2-B4: [offline evidence sidecar](../tool/essay_lab/evidence_vnext.py) prepares additive
+source-bound distinctions using existing question/scoring references, separate calibration
+examples and versioned transcription corrections. It is not a deployed enum, ingestion or
+provider input adapter. Current four-role live package allowlist stays unchanged. The next
+Evidence track must review disclosure/blind policy and exact source verification before
+wiring a new package; examples are reviewer calibration, never promoted to rubric.
+[Acceptance fixtures and scope](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30).
+
 Status: **FOUNDATION APPLIED / THREE-UNIVERSITY PILOT PASS**, 2026-09-27.
 
 Latest: [Pilot Phase1 continuation](essay-lab-pilot-2025.md): Production3 universities,

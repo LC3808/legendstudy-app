@@ -1,5 +1,10 @@
 # Essay LAB L2-B — model bake-off preparation
 
+L2-B4 follow-up: Owner approved real NON-CORE roots (Option A). New
+[offline prompt and synthetic regressions](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30)
+do not repair/rescore historical GPT SENTENCE_ROOT failures. All46 private artifacts preserved.
+Owner educational preference remains GPT candidate, PRIMARY_MODEL_SELECTED=NO. No new call.
+
 Owner Human Review update2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) records Hanyang source/transcription/non-criteria findings and next-version prompt guidance. It does not rescore frozen runs or select a model. Any separately authorized GPT Supplemental must preserve Claude’s frozen conditions; improvements belong to a different version/experiment.
 
 ## L2-B3 Owner Human Review freeze — 2026-09-30
