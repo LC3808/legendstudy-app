@@ -1,5 +1,27 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+## L2-C3 Pilot latency review — 2026-09-30
+
+New Hanyang validated structurally at87.079s: above the existing75s generator limit. With the
+planned reviewer25s + validation/finalize10s + safety10s, the total would be132.079s, exceeding
+120s lease. Therefore this private result does not establish Production fit. The600s Pilot
+bound was not needed for this observed completion, and does not explain the earlier unknown.
+Educational quality and operational feasibility remain independent Owner decision dimensions.
+
+[Investigation / bounded validation](essay-lab-model-bakeoff-l2-b.md#l2-c3-hanyang-investigation-and-sequential-gate--2026-09-30)
+is separate from Production. Pilot observations: Sookmyung GPT66.865s, older Hanyang GPT83.944s,
+Claude197.740s, Hanyang C2 unknown300.071s. These are not an SLA or comparable latency benchmark.
+HIGH operational risk against current generator<=75s and immutable120s lease including reviewer/
+validation/finalize. Sookmyung fits the generator target once, not a reliability guarantee;
+older Hanyang GPT exceeds75s, Claude exceeds120s. An unknown duration proves no server completion.
+
+Student submission→accepted evaluation request→processing→status polling/result/reconciling
+should reuse existing L1/L2 RPC/status flow, not hold a synchronous screen request for minutes.
+An async UI does not itself solve lease expiry. Any background continuation, lease/reconciliation,
+provider reliability and hosting changes require a separate deployment review. No worker/RPC/
+lease/timeout/hosting implementation changed here; only private Pilot gets a600s total bound.
+
+
 L2-B4: [Option A / prompt v2 offline implementation](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30)
 retains wire1.3 and strict parser. Worker/dispatch still use their historical prompt; no live
 binding or policy registration is activated. Real provider calls0; GPT candidate only.

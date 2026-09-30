@@ -1,5 +1,70 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-C3 Hanyang investigation and sequential gate — 2026-09-30
+
+**Gate A PASS; new Hanyang REAL_PROVIDER=STRUCTURAL_PASS; HUMAN_QUALITY=PENDING_OWNER_REVIEW.**
+Gate C=WAIT_OWNER_REVIEW; strong-answer call0. New OpenAI call1, no Claude/retry/repair/fallback.
+[Sanitized result](../tool/essay_lab/evidence/l2_c3_result.json),
+[diagnostic one-shot adapter](../tool/essay_lab/hanyang_recovery.py),
+[transport/identity tests](../tool/test_hanyang_recovery.py).
+
+Hanyang `hanyang-openai-vnext-l2c3-1`: HTTP200, exactgpt-5.6-sol binding, strict Contract1.3 /
+SENTENCE_ROOT PASS, CORE2, stateVALID_UNREVIEWED. Input13002, cached0, output5746, total18748,
+latency87079ms, actual costNULL. Transport recorded request-write return, HTTP headers and
+complete76587-byte body; no exception. Raw frozen before parse, normalized saved only on PASS.
+This87.079s completion was below even the old300s configured timeout: success does not prove
+the timeout extension fixed the prior UNKNOWN. Old server completion/billing remain unknown.
+
+Private `.local/essay-vnext-l2c3/hanyang-owner-review.md` includes original corrected answer,
+full strengths/dimensions/CORE/NON-CORE/sentences/checklist, actual official evidence text/page
+renders and per-finding student quote (only if present), GPT judgment/WHY, source locator,
+revision direction and Owner checks. Missing reasons/quotes are not fabricated. Source examples
+remain excluded from provider input; no previous model judgment is fed back. Sookmyung human
+PASS is accepted; Hanyang structural PASS is not educational PASS. Original-answer validation
+is PARTIAL until Hanyang Owner review. Primary selection remainsNO. Strong-answer case/slot
+is deliberately NOT_SELECTED, no active Gate D launcher; later Owner Gate C PASS resumes that
+portion without rerunning Hanyang. Zero-core/no-forced-defect empirical calibration NOT_RUN.
+
+Post-run128 offline tests PASS including18 new transport/identity tests and3 new review-layout
+checks. Existing historical94 files hash-identical; repository/private/secret/Wiki checks PASS.
+No Production/DB/RPC/schema/Flutter/credit changes, no deploy, no student traffic or Round2.
+
+Owner/ChatGPT now accepts **Sookmyung L2-C2 educational quality PASS**, in addition to its
+structural PASS. This is explicit Owner review evidence, not an automatic parser conclusion.
+GPT remains candidate only. Old Hanyang `hanyang-openai-vnext-l2c2-1` stays UNKNOWN_CONSUMED.
+
+[Local investigation](../tool/essay_lab/evidence/l2_c3_investigation.json) COMPLETE;
+classification **INSUFFICIENT_EVIDENCE**. Configured socket timeout300s and elapsed300071ms
+are verified. Catch-all BaseException discarded exception class/stage; terminal persisted and
+CLI exited normally, so there is no evidence of an abrupt local process kill. A caught local
+interrupt cannot be ruled out. Socket timeout is plausible, not a verified provider cause.
+`send()` returned status only after full read: null HTTP/raw does not prove headers/partial
+bytes never arrived. STARTED precedes send and is not proof that bytes reached the network or
+provider. Server completion, billing, tokens and generation length remain unknown.
+
+Frozen Hanyang request2,018,335 bytes, text7,524 UTF-8 bytes, five high-detail images with
+1,997,496 base64 bytes; high reasoning, max output12000. Sookmyung request23,547 bytes/no
+images. Image/answer/output complexity may affect latency but no causal attribution is
+supported. No evidence/context reduction or prompt/Contract change is made.
+
+New Gate B slot `hanyang-openai-vnext-l2c3-1` uses identical v3 prompt/schema/answer/evidence/
+ordered image hashes, new attempt identity and policy/regime. Pilot-only socket/total network
+deadline600s bounds one fresh experiment at twice the old configured bound. No unlimited
+extension, retry, repaired output, Production75s timeout or120s lease change. New sanitized
+transport progress distinguishes connect/write, returned request write, waiting headers,
+reading body and completion; records safe exception category and byte count, never exception
+text/header values/credentials. Partial bytes are private/redacted and never parsed as complete.
+
+Gate A requires repository protection, preserved94 prior private files (46 Pilot +31 C1 +17 C2),
+exact bindings, credential metadata and offline tests. Gate C defaults WAIT_OWNER_REVIEW after
+valid Hanyang output. Gate D has no active execution entry in this change; do not spend a
+second call before explicit Hanyang quality acceptance. Strong-answer case/slot not selected.
+Seven preservation answers: new operational event and timestamp; exact prior/current bindings;
+no historical UPDATE; same submission with distinct experiment identity; learning/quality and
+model decision separate; private ACL/retention unchanged; telemetry/quality are derivatives,
+not official evidence or an inferred billing fact.
+
+
 ## L2-C2A private protection repair and resume — 2026-09-30
 
 **Security/Phase A PASS; two approved request attempts consumed. Sookmyung structural PASS;

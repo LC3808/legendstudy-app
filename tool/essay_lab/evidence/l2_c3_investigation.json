@@ -1,0 +1,56 @@
+{
+  "task": "L2-C3",
+  "gate": "A",
+  "investigation": "COMPLETE",
+  "classification": "INSUFFICIENT_EVIDENCE",
+  "old_slot": "hanyang-openai-vnext-l2c2-1",
+  "historical_state": "UNKNOWN_CONSUMED",
+  "old_terminal_sha256": "15f14d0aaf9d33dd92a551180f1afc0f12c8a518eef6db6c7b401bc8cf5e1613",
+  "started_at": "2026-09-30T08:43:59.228832+00:00",
+  "completed_at": "2026-09-30T08:48:59.308005+00:00",
+  "elapsed_ms": 300071,
+  "verified_facts": [
+    "HTTPSConnection socket timeout configured 300 seconds",
+    "Terminal saved normally after caught BaseException; CLI returned exit0",
+    "No exception type/stage/header/partial-body diagnostic retained",
+    "http_status assigned only when send returned after full read; null does not prove no headers arrived",
+    "No captured raw/normalized result; no evidence of remote completion/billing"
+  ],
+  "request_left_machine": "NOT_PROVEN",
+  "headers_received": "UNKNOWN",
+  "partial_response_bytes": "UNKNOWN",
+  "server_completion": "UNKNOWN",
+  "billing": "UNKNOWN",
+  "hypotheses": [
+    "Socket timeout consistent with ~300s elapsed, but not distinguishable from other caught local/transport interruptions",
+    "Five high-detail evidence images and high reasoning/12000 output cap plausibly add latency, not proven causal"
+  ],
+  "input_metrics": {
+    "hanyang_request_bytes": 2018335,
+    "hanyang_text_utf8_bytes": 7524,
+    "images": 5,
+    "image_base64_bytes": 1997496,
+    "reasoning": "high",
+    "max_output_tokens": 12000
+  },
+  "pilot_timeout_old_seconds": 300,
+  "pilot_timeout_new_seconds": 600,
+  "new_timeout_scope": "validation-only total network deadline and socket timeout, one new slot; no retries",
+  "timeout_rationale": "One finite window twice prior configured socket bound, preserving inputs and reasoning while collecting stage diagnostics. No claim that more time guarantees success.",
+  "production_timeout_seconds": 75,
+  "production_lease_seconds": 120,
+  "production_changed": false,
+  "pilot_latency_ms": {
+    "sookmyung_c2": 66865,
+    "hanyang_gpt_supplemental": 83944,
+    "hanyang_claude_round1": 197740,
+    "hanyang_c2_unknown": 300071
+  },
+  "production_latency_risk": "HIGH",
+  "production_implication": "Existing asynchronous request/status/reconciling flow avoids long UI request; async UI alone does not extend 120s lease. Separate deployment review required.",
+  "sookmyung_human_quality": "PASS",
+  "human_review_provenance": "Owner/ChatGPT acceptance supplied in L2-C3 instruction; not inferred from parser",
+  "new_slot": "hanyang-openai-vnext-l2c3-1",
+  "strong_answer_gate": "WAIT_OWNER_REVIEW_AFTER_STRUCTURAL_PASS",
+  "strong_answer_execution_implemented": false
+}

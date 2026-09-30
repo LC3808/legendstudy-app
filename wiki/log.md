@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-30 — L2-C3 Hanyang structural PASS / WAIT_OWNER_REVIEW
+
+Old UNKNOWN preserved; local investigation finds insufficient evidence for a specific cause.
+New bounded600s Pilot transport records stages without exception text/credentials; same v3/
+Contract1.3/C1 evidence. One new Hanyang call: HTTP200, parser/root PASS, CORE2,87.079s. Private
+source-linked Owner artifact created. Sookmyung human PASS recorded; Hanyang human pending,
+Gate C WAIT, strong-answer0.128 offline tests PASS;94 historical hashes preserved. Production
+latency risk HIGH against75s generator/120s lease; no Production/schema change. [Canonical](essay-lab-model-bakeoff-l2-b.md#l2-c3-hanyang-investigation-and-sequential-gate--2026-09-30).
+
+
 ## 2026-09-30 — L2-C2A protection PASS / bounded GPT PARTIAL
 
 Repository-owned private ignore repaired on main and both related worktrees;0 tracked private
