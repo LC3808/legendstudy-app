@@ -19,8 +19,8 @@ Contract1.3 remain byte-identical. Original C1 packages still validate unchanged
 No previous student answer, model evaluation, Owner preference or expected quality verdict is
 transmitted in the prepared payload. Provider sees only the chosen answer and the same
 question-scoped official evidence. One source example can be evaluated as an answer without
-being shown as a reference answer or a normative template. Execution currently blocked before
-any call by automatic approval review; [exact gate/status](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30).
+being shown as a reference answer or a normative template. Exact external transmission was subsequently approved by Owner; one blind call is now
+structurally valid and educational review is pending; [exact gate/status](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30).
 
 ## L2-C1 Official Evidence vNext — 2026-09-30
 

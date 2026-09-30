@@ -1,5 +1,42 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-C3 Gate D real calibration — 2026-09-30
+
+**Gate D one-call execution COMPLETE; STRUCTURAL PASS; HUMAN_QUALITY=PENDING_OWNER_REVIEW.**
+Owner explicitly approved the exact frozen payload87ac08a4…197d6a5ec6 and OpenAI Responses
+external transmission after the earlier approval-review block. The same previously unused
+`sookmyung-openai-l2c3-2` slot was consumed once; no new replacement slot or payload change.
+[Sanitized execution record](../tool/essay_lab/evidence/l2_c3_gate_d_execution.json).
+
+Verified Sookmyung2025 mock humanities Q1-1 official example was evaluated blind: no source/
+quality label, original student answer, prior model output, Owner verdict or expected CORE
+count. Prompt scaffolding-1.3-v3, Contract1.3 and official-evidence-vnext-1 unchanged; source
+C1 package and new submission assembly remain independently hashed as documented below.
+
+HTTP200, exact returnedgpt-5.6-sol, Contract/parser/evidence/criterion/quote/root/subset/count
+checks PASS. **CORE0, improvements0, sentence_feedback0, strengths3**. Zero-core occurred in
+real output without being forced. This is an observed structural result, not certification
+that every strength is accurate or that no substantive issue was missed. Positive WHY,
+criterion alignment, transferable reasoning and no-forced-defect quality still require Owner
+review. No numeric quality score or automatic Primary selection.
+
+Latency18609ms; input5681, cached0, output1051, total6732 tokens; actual_cost=NULL.
+Complete34354-byte raw saved before parse, normalized saved only after strict PASS, terminal
+VALID_UNREVIEWED. Private `.local/essay-calibration-l2c3/owner-review.md` includes exact answer,
+question/criteria, all strengths/dimensions/checklist, explicit no-CORE state, actual official
+evidence and positive/corrective Owner checklists. Missing model explanations are not filled
+in by the report. Prepared input/source/response/history remain frozen separately.
+
+This resume made **OpenAI1** call; full L2-C3 total2 (Hanyang1 + calibration1). Claude/retry/
+repair/fallback0; Round2 NOT_RUN. Prior104 private hashes match; repository-level exclusion,
+tracked private0, secret/private-body checks PASS.143 offline tests PASS, Wiki/diff PASS.
+Original-answer Sookmyung/Hanyang HUMAN_PASS remains accepted; strong-answer review PENDING.
+PRIMARY_MODEL_SELECTED=NO; READY_FOR_PRIMARY_MODEL_DECISION=NO until this review. No schema/
+DB/RPC/migration/Production worker/AI/student traffic/model policy change. STOP, no more calls.
+
+This18.609s sample fits75s generator and120s lease with the existing45s planning allowance,
+but does not remove Hanyang's87.079s overrun/old UNKNOWN or establish a Production SLA.
+
 ## L2-C3 Gate C Owner PASS and Gate D preflight — 2026-09-30
 
 **Sookmyung HUMAN_QUALITY=PASS; Hanyang HUMAN_QUALITY=PASS;

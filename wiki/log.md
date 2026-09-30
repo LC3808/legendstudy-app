@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-09-30 — L2-C3 Gate D structural PASS / Owner review pending
+
+Owner explicitly approved frozen payload/destination; same unused slot dispatched once.
+GPT HTTP200/Contract1.3/root PASS, CORE0/improvements0/sentences0/strengths3;18.609s,
+5681 input +1051 output tokens, actual costNULL. Private raw-before-parse and Owner artifact
+preserved.143 offline tests PASS;104 prior private files unchanged. No retry/repair/fallback,
+Claude/Round2/Production/model selection. [Canonical result](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-d-real-calibration--2026-09-30).
+
 ## 2026-09-30 — L2-C3 Gate C Owner PASS / Gate D approval block
 
 Sookmyung/Hanyang educational PASS explicitly accepted; original-answer validation COMPLETE.

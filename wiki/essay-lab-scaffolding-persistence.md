@@ -3,7 +3,7 @@
 [L2-C2A resume](essay-lab-model-bakeoff-l2-b.md#l2-c2a-private-protection-repair-and-resume--2026-09-30):
 repository private protection repaired; same v3/Contract1.3/C1 Evidence used for two attempts.
 Historical C2 Hanyang remains UNKNOWN_CONSUMED. Later C3 Hanyang and C2 Sookmyung now have
-Owner human PASS; [Gate D preparation](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30) is blocked before execution. No model selection.
+Owner human PASS; [Gate D preparation](essay-lab-model-bakeoff-l2-b.md#l2-c3-gate-c-owner-pass-and-gate-d-preflight--2026-09-30) now has one structural PASS/CORE0 result; calibration Owner review pending. No model selection.
 
 
 ## L2-C2 positive learning guard — 2026-09-30
@@ -22,7 +22,8 @@ non-core roots and positive text remain wire-valid. Generic praise/forced critic
 polish as CORE can be structurally valid yet educationally rejected. No Korean keyword
 classifier or SQL semantic-quality claim. The initial C2 authorization used examples only offline. Owner now separately authorizes one
 blind Gate D source-example answer calibration, without a quality label or perfect-answer
-guarantee; execution is blocked before dispatch. Real output requires Owner quality review.
+guarantee; the one authorized execution returned CORE0/three strengths and structural PASS.
+Real educational quality remains pending Owner review.
 
 Seven preservation answers: (1) new timestamped private evaluation regime; (2) frozen input,
 prompt, request/raw/normalized/terminal retain provenance; (3) no historical overwrite;
