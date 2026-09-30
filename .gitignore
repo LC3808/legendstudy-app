@@ -1,3 +1,6 @@
+# Private evaluation, evidence, and operator artifacts: never track.
+/.local/
+
 # Dart / Flutter
 .dart_tool/
 .packages
