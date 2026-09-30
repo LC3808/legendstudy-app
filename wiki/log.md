@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-30 — day_targets security closeout / Production verified
+
+Owner directly applied least-privilege SQL. Read-only Production verification: anon none,
+authenticated CRUD only; RLS4/owner/service/default ACL preserved, other43 relations unchanged.
+Finding RESOLVED. SQL20260930000100 effect applied but remote ledger still21 versions and
+this version absent; tracking gap reported without repair. Provider005 remains unapplied.
+Migration, Cross Review A, Owner clarifications/private artifacts unchanged. No Codex DB write,
+provider or new feature work. [Closeout](day-7-dday-storage-proposal.md).
+
 ## 2026-09-30 — Post-audit alignment / day_targets ACL migration ready
 
 Owner clarified one Profile experience/domain facts, distinct credit/ad removal/period membership,

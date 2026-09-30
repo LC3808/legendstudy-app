@@ -1,6 +1,28 @@
 # D-Day storage — production applied / JWT and Flutter runtime PASS
 
-## ACL security correction — MIGRATION READY / NOT APPLIED — 2026-09-30
+## ACL security correction — PRODUCTION VERIFIED / RESOLVED — 2026-09-30
+
+**DAY_TARGETS_SECURITY_FINDING=RESOLVED; PRODUCTION_APPLY=OWNER_APPLIED;
+LEAST_PRIVILEGE_END_STATE=VERIFIED.** Owner applied the prepared SQL directly.
+Codex reverified Production read-only at2026-09-30 13:55:02 UTC:
+anon has no table privileges; authenticated has CRUD only; TRUNCATE/TRIGGER/
+REFERENCES/MAINTAIN absent. Table exists/RLS enabled; all4 owner policies,
+postgres ownership/service ACL, schema grants and defaults unchanged. No column
+ACL or client-role inheritance bypass found. All other43 public relations (42 tables
+and1 view) match the historical catalog, including ACLs/policies/structure.
+[After evidence](../supabase/verification/day_targets_acl_after_20260930.json).
+No Production row mutation or destructive test was performed by Codex.
+
+**SQL application ≠ migration tracking.** Remote ledger still has21 versions:
+`20260930000100` is **not registered**, although its exact least-privilege effect is
+verified. Tracking discrepancy is reported, not silently repaired. Owner should
+reconcile this exact version through the approved migration-history workflow;
+no agent repair/update was performed. Provider005 remains NOT_APPLIED/unregistered;
+do not use an unfiltered db push to close the tracking gap. Migration SQL is unchanged.
+Architecture remains **HEALTHY_WITH_DEBT**; broad default privilege follow-up and
+other architecture debt remain open. Owner clarifications and Cross Review A are preserved.
+
+### Preparation evidence (before Owner application)
 
 [Cross Review A](platform-architecture-health-review-a.md)의 HIGH finding을 별도로 재검증했다.
 Live PostgreSQL17.6, 2026-09-30 13:33:27 UTC: postgres owner, RLS ON/force OFF,
@@ -17,7 +39,7 @@ additive이고 REVOKE가 없어 default 과다 권한을 제거하지 않는다.
 
 ### Minimum end state
 
-| Role | BEFORE live | AFTER expected / isolated verified |
+| Role | BEFORE live | AFTER Production verified |
 |---|---|---|
 | anon / PUBLIC | anon ALL / PUBLIC none | none |
 | authenticated | ALL (8 privileges, including MAINTAIN) | SELECT, INSERT, UPDATE, DELETE only |
@@ -38,9 +60,10 @@ remain separate debts.
 
 ### Owner application gate and rollback
 
-**MIGRATION_READY_NOT_APPLIED.** AGENTS.md §4 assigns Production apply to Owner;
-this task does not separately authorize agent apply. Live excessive grants therefore remain
-until Owner executes/accepts the exact bounded migration. Before apply, run
+**Historical preparation state was MIGRATION_READY_NOT_APPLIED.** Owner has now applied
+the SQL and Codex verified it above. AGENTS.md §4 still assigns Production apply to Owner.
+The following preflight/rollback instructions remain reference guidance, not a pending
+request to reapply SQL. Before any separately approved application, run
 [read-only catalog verification](../supabase/verification/day_targets_acl.sql), check no
 new role inheritance/column grants or policy drift, and preserve its output. Execute only
 this migration under normal migration ownership. Do **not** run an unfiltered `supabase db push`:
@@ -61,8 +84,8 @@ The before snapshot is evidence, not an instruction to reintroduce excessive pri
 ### Regression and follow-up
 
 Validation results: isolated PostgreSQL17 security regression PASS; live effective privilege
-preflight confirms both client roles still have8 grants and no column grants/client role
-inheritance. Migration remains NOT_APPLIED. Existing Flutter D-Day tests were attempted but
+pre-apply preflight recorded both client roles with8 grants and no column grants/client role
+inheritance. That historical NOT_APPLIED state is superseded by the Production verification above. Existing Flutter D-Day tests were attempted but
 stopped before execution because this local SDK requires native-assets enablement for
 objective_c/pdfium_dart. No SDK/global setting or unrelated package change was made;
 guest/auth client behavior was reviewed statically. Wiki links, migration scope, secret
@@ -77,7 +100,8 @@ No Production rows or provider calls. Static migration scope and existing Flutte
 regression are validated separately; no Flutter code/build changes.
 
 **FOLLOW_UP_SECURITY_DEBT:** broad default ACLs for future public tables remain. A read-only
-scan confirms day_targets is the only current public table with these client excess grants.
+pre-apply scan found day_targets as the only public table with these client excess grants;
+post-apply scan finds none. The broad defaults themselves remain unchanged.
 Other migrations must explicitly restrict client ACLs. Global defaults and other tables are
 not fixed here; a separate approved security review must decide that policy. Architecture
 health remains HEALTHY_WITH_DEBT; historical Cross Review A is unchanged.

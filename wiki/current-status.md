@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[ACL fix](day-7-dday-storage-proposal.md): READY/NOT_APPLIED; [Owner alignment](product-architecture.md).
+[ACL fix](day-7-dday-storage-proposal.md): RESOLVED/VERIFIED; [Owner alignment](product-architecture.md).
 
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
@@ -141,7 +141,7 @@ DEPLOYED/KEEP19. Identity PASS. [Pilot1.3](essay-lab-scaffolding-ai-pilot-1-3-ru
 [G1 Credit](essay-lab-product-v1.md#credits--g1-commercial-policy-2026-09-29): v2/+3/manual grant
 DEPLOYED. [Owner status RPC](essay-lab-server-transactions.md#owner-status-projection) PASS;
 Ledger21; L1 PASS. [L2-C3](essay-lab-model-bakeoff-l2-b.md): S/H + Gate D Owner PASS, CORE0/Positive Learning PASS. GPT candidate;AI OFF.
-Multi D-Day: applied/Owner PASS; ACL correction NOT_APPLIED.
+Multi D-Day: applied/Owner PASS; ACL correction Owner-applied/verified.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 
 

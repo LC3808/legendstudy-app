@@ -1,0 +1,717 @@
+{
+  "acl": [
+    {
+      "grantable": false,
+      "privilege": "INSERT",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "SELECT",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "UPDATE",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "DELETE",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "TRUNCATE",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "REFERENCES",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "TRIGGER",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "MAINTAIN",
+      "role": "postgres"
+    },
+    {
+      "grantable": false,
+      "privilege": "INSERT",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "SELECT",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "UPDATE",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "DELETE",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "TRUNCATE",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "REFERENCES",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "TRIGGER",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "MAINTAIN",
+      "role": "service_role"
+    },
+    {
+      "grantable": false,
+      "privilege": "INSERT",
+      "role": "authenticated"
+    },
+    {
+      "grantable": false,
+      "privilege": "SELECT",
+      "role": "authenticated"
+    },
+    {
+      "grantable": false,
+      "privilege": "UPDATE",
+      "role": "authenticated"
+    },
+    {
+      "grantable": false,
+      "privilege": "DELETE",
+      "role": "authenticated"
+    }
+  ],
+  "captured_at": "2026-09-30T13:55:02.467716+00:00",
+  "column_acl": null,
+  "defaults": [
+    {
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "creator": "postgres",
+      "kind": "r",
+      "schema": "public"
+    },
+    {
+      "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+      "creator": "supabase_admin",
+      "kind": "r",
+      "schema": "public"
+    }
+  ],
+  "effective_privileges": [
+    {
+      "allowed": false,
+      "privilege": "SELECT",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "INSERT",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "UPDATE",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "DELETE",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "TRUNCATE",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "TRIGGER",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "REFERENCES",
+      "role": "anon"
+    },
+    {
+      "allowed": false,
+      "privilege": "MAINTAIN",
+      "role": "anon"
+    },
+    {
+      "allowed": true,
+      "privilege": "SELECT",
+      "role": "authenticated"
+    },
+    {
+      "allowed": true,
+      "privilege": "INSERT",
+      "role": "authenticated"
+    },
+    {
+      "allowed": true,
+      "privilege": "UPDATE",
+      "role": "authenticated"
+    },
+    {
+      "allowed": true,
+      "privilege": "DELETE",
+      "role": "authenticated"
+    },
+    {
+      "allowed": false,
+      "privilege": "TRUNCATE",
+      "role": "authenticated"
+    },
+    {
+      "allowed": false,
+      "privilege": "TRIGGER",
+      "role": "authenticated"
+    },
+    {
+      "allowed": false,
+      "privilege": "REFERENCES",
+      "role": "authenticated"
+    },
+    {
+      "allowed": false,
+      "privilege": "MAINTAIN",
+      "role": "authenticated"
+    },
+    {
+      "allowed": true,
+      "privilege": "SELECT",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "INSERT",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "UPDATE",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "DELETE",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "TRUNCATE",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "TRIGGER",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "REFERENCES",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "MAINTAIN",
+      "role": "service_role"
+    },
+    {
+      "allowed": true,
+      "privilege": "SELECT",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "INSERT",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "UPDATE",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "DELETE",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "TRUNCATE",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "TRIGGER",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "REFERENCES",
+      "role": "postgres"
+    },
+    {
+      "allowed": true,
+      "privilege": "MAINTAIN",
+      "role": "postgres"
+    }
+  ],
+  "memberships": [
+    {
+      "inherit": true,
+      "member": "pg_monitor",
+      "role": "pg_read_all_settings",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "pg_monitor",
+      "role": "pg_read_all_stats",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "pg_monitor",
+      "role": "pg_stat_scan_tables",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "supabase_etl_admin",
+      "role": "pg_read_all_data",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "supabase_read_only_user",
+      "role": "pg_read_all_data",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "authenticator",
+      "role": "anon",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "authenticator",
+      "role": "authenticated",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "authenticator",
+      "role": "service_role",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "supabase_storage_admin",
+      "role": "authenticator",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "anon",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "authenticated",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "service_role",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "authenticator",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "pg_monitor",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "pg_read_all_data",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "pg_signal_backend",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "supabase_etl_admin",
+      "role": "pg_monitor",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "supabase_read_only_user",
+      "role": "pg_monitor",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "pg_create_subscription",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "postgres",
+      "role": "supabase_privileged_role",
+      "set": true
+    },
+    {
+      "inherit": true,
+      "member": "supabase_etl_admin",
+      "role": "supabase_privileged_role",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "supabase_realtime_admin",
+      "role": "anon",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "supabase_realtime_admin",
+      "role": "authenticated",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "supabase_realtime_admin",
+      "role": "service_role",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "cli_login_postgres",
+      "role": "postgres",
+      "set": true
+    },
+    {
+      "inherit": false,
+      "member": "postgres",
+      "role": "essay_executor",
+      "set": false
+    },
+    {
+      "inherit": false,
+      "member": "postgres",
+      "role": "essay_worker",
+      "set": false
+    },
+    {
+      "inherit": false,
+      "member": "postgres",
+      "role": "essay_finance",
+      "set": false
+    }
+  ],
+  "migration_versions": [
+    "20260912000100",
+    "20260913000100",
+    "20260913000200",
+    "20260914000100",
+    "20260914000200",
+    "20260917000100",
+    "20260917000200",
+    "20260923000100",
+    "20260923000200",
+    "20260925000100",
+    "20260926000100",
+    "20260927000100",
+    "20260927000200",
+    "20260928000100",
+    "20260928000200",
+    "20260928000300",
+    "20260928000400",
+    "20260929000100",
+    "20260929000200",
+    "20260929000300",
+    "20260929000400"
+  ],
+  "other_client_excess": null,
+  "policies": [
+    {
+      "cmd": "DELETE",
+      "permissive": "PERMISSIVE",
+      "policyname": "day_targets_owner_delete",
+      "qual": "(owner_id = auth.uid())",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "with_check": null
+    },
+    {
+      "cmd": "INSERT",
+      "permissive": "PERMISSIVE",
+      "policyname": "day_targets_owner_insert",
+      "qual": null,
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "with_check": "(owner_id = auth.uid())"
+    },
+    {
+      "cmd": "SELECT",
+      "permissive": "PERMISSIVE",
+      "policyname": "day_targets_owner_select",
+      "qual": "(owner_id = auth.uid())",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "permissive": "PERMISSIVE",
+      "policyname": "day_targets_owner_update",
+      "qual": "(owner_id = auth.uid())",
+      "roles": [
+        "authenticated"
+      ],
+      "schemaname": "public",
+      "tablename": "day_targets",
+      "with_check": "(owner_id = auth.uid())"
+    }
+  ],
+  "read_only": "on",
+  "schema": {
+    "acl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner,essay_executor=U/pg_database_owner,essay_worker=U/pg_database_owner,essay_finance=U/pg_database_owner}",
+    "owner": "pg_database_owner"
+  },
+  "server_version": "17.6",
+  "table": {
+    "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=arwd/postgres}",
+    "force_rls": false,
+    "owner": "postgres",
+    "rls": true
+  },
+  "status": "PRODUCTION_APPLIED_OWNER / PRODUCTION_VERIFIED",
+  "finding": "RESOLVED",
+  "migration_tracking": "20260930000100 ABSENT; SQL end-state applied; tracking not repaired",
+  "migration_sql_sha256": "ea060b70b73c53be1c8f346496b5dc03ecb634eaab9f194d5e7f5d5d65ba56c5",
+  "unrelated_relations_compared_to": "Cross Review A catalog at cca543dc",
+  "unrelated_relation_verification": [
+    {
+      "relation": "public.admin_users",
+      "unchanged_catalog_sha256": "a3bb11e3fa0cc453c377295394cd9c13c63fa285b09e882d5736d3a36890e898"
+    },
+    {
+      "relation": "public.answer_key_versions",
+      "unchanged_catalog_sha256": "5658945f9e7b12a6b07424ba95cb4c2453f6a418370c6e047bdd3def185baac4"
+    },
+    {
+      "relation": "public.bookmarks",
+      "unchanged_catalog_sha256": "400ba0b49a2fb59caf6022722f73a18495f35cfde6fdd42e96a5fcea50a262b2"
+    },
+    {
+      "relation": "public.content_items",
+      "unchanged_catalog_sha256": "ea3aaeeb976a98bfeebcfc43318286a093da2f13dbf22f4e65da6d88102c3020"
+    },
+    {
+      "relation": "public.credit_accounts",
+      "unchanged_catalog_sha256": "3f61d794e21c66e8ce9a2595f27da6ee6417ce4c78aabf5f73df494ede641e54"
+    },
+    {
+      "relation": "public.credit_grants",
+      "unchanged_catalog_sha256": "e68bbd1229af1f58c2498ff7cc9fd7f55eb15fa84506fc766b64f6adad618924"
+    },
+    {
+      "relation": "public.credit_transactions",
+      "unchanged_catalog_sha256": "710f1d370d991544ff96690554c02892ef1212ad3909fd527bcc1805a2e3be07"
+    },
+    {
+      "relation": "public.essay_ai_processing_runs",
+      "unchanged_catalog_sha256": "08f56c01989a08b7bcdde296a357fb103ecc4bda658b73a05a88259a4e8e0129"
+    },
+    {
+      "relation": "public.essay_attempts",
+      "unchanged_catalog_sha256": "cb616070c887eebac5f7a7a374a4c93ba61b0923df5e9282e04a9744052c218a"
+    },
+    {
+      "relation": "public.essay_billing_decisions",
+      "unchanged_catalog_sha256": "2603c060e5f6820b83474b773e5a7129eb1306df54c2d6963adb5857439c5cb8"
+    },
+    {
+      "relation": "public.essay_drafts",
+      "unchanged_catalog_sha256": "a8bfa1109f9a76f24dec8282feacf684babc3113b3f105e549e54e694693db81"
+    },
+    {
+      "relation": "public.essay_evaluation_criteria",
+      "unchanged_catalog_sha256": "122a44ecf08b922f9d882f0a754485e54f8b8d7c7e422134cc21535381a8d890"
+    },
+    {
+      "relation": "public.essay_evaluation_dimensions",
+      "unchanged_catalog_sha256": "7eca8eb98b796acab092882f900202ed96948c4a13cc7fd2e152b9eb2e28a4f7"
+    },
+    {
+      "relation": "public.essay_evaluation_evidence",
+      "unchanged_catalog_sha256": "3404c1ef5913877c238bb9bb889aba8f81a80fe189d2403fddcb01c3f8c89023"
+    },
+    {
+      "relation": "public.essay_evaluations",
+      "unchanged_catalog_sha256": "584bb333923e5146cf57e1d7d90e87524b5fb702602647621b98a8f835fe6850"
+    },
+    {
+      "relation": "public.essay_exam_resources",
+      "unchanged_catalog_sha256": "090471db830ea9e82ab497e0db01b4edc10aa60793a461f7afd92b4994ffa2b1"
+    },
+    {
+      "relation": "public.essay_exams",
+      "unchanged_catalog_sha256": "f349d830723627a91ad689e2b95b3b25854af893a0da4734cf993db41c549a32"
+    },
+    {
+      "relation": "public.essay_generated_rewrites",
+      "unchanged_catalog_sha256": "4da54f5111bc577d1bdd18330b1ac8548a7712ac357384e9d4002f2d24d6dff1"
+    },
+    {
+      "relation": "public.essay_improvement_items",
+      "unchanged_catalog_sha256": "5b48d097256758546127599e2224f0212cb7e5784dd35afd589dfab9f2b8d452"
+    },
+    {
+      "relation": "public.essay_improvement_progress",
+      "unchanged_catalog_sha256": "05e59cd4b2b8d6f1e2bbb66a27421f089490d720d3ac193f95334954a6db98cc"
+    },
+    {
+      "relation": "public.essay_learning_events",
+      "unchanged_catalog_sha256": "496dd5591beba4f21c7aa322d1593547fdffbf1f665452d8e3b47a13b5cc2dc8"
+    },
+    {
+      "relation": "public.essay_practice_sessions",
+      "unchanged_catalog_sha256": "fec6c5b4748a9088dfcb52e0511bde845d59cc17398d63ae872283f532ca42df"
+    },
+    {
+      "relation": "public.essay_question_evidence",
+      "unchanged_catalog_sha256": "f932ea82ab1358a21a4351ce75a175b2c6bc060ba1ad682ecefd5b5c672e0068"
+    },
+    {
+      "relation": "public.essay_questions",
+      "unchanged_catalog_sha256": "3e3ea073cc70927f6e988e54985c9a7a2d0107ed306ea44669be840721c83c07"
+    },
+    {
+      "relation": "public.exam_questions",
+      "unchanged_catalog_sha256": "653a8f9f8980a156ee856f5617f6d681feb842af18276d4dc0be7d470b652d38"
+    },
+    {
+      "relation": "public.exam_subjects",
+      "unchanged_catalog_sha256": "8a381fe8265064d07e0c97e658e1d242137914d1acc29e332187908ec196f454"
+    },
+    {
+      "relation": "public.exams",
+      "unchanged_catalog_sha256": "038b9ffcd92c81db0f69267c1a550f5e168f5bff568640d704136e5ec22d2fb0"
+    },
+    {
+      "relation": "public.feedback_notifications",
+      "unchanged_catalog_sha256": "05aa98f63535a21106eadd49c82b95bdb84752a91434b396cf588f634c122998"
+    },
+    {
+      "relation": "public.feedback_submissions",
+      "unchanged_catalog_sha256": "105bf1fd7f1268a04854b9e652313c3fbe40e416756285522ad39cc7cdcbe4a9"
+    },
+    {
+      "relation": "public.grade_cutoff_versions",
+      "unchanged_catalog_sha256": "6496b44abfff509e2589f16a1b0250118348a6c328f1042b3758108ba9689d50"
+    },
+    {
+      "relation": "public.ingestion_quarantine",
+      "unchanged_catalog_sha256": "105e2681ab13d9b23ef99e4fb4b95cdfbea5ea696b0a6645d8c599606e0b3f7c"
+    },
+    {
+      "relation": "public.mock_exam_answers",
+      "unchanged_catalog_sha256": "4cb096b05d04c2627b08f38fd12d29ff55e63deb91c52e3a39b57cf73925361a"
+    },
+    {
+      "relation": "public.mock_exam_attempts",
+      "unchanged_catalog_sha256": "1a64cc78a1f36bbfaaf124a0266503d1aa3511da69b828737d5be4d88e3a8818"
+    },
+    {
+      "relation": "public.mock_exam_scoring_availability",
+      "unchanged_catalog_sha256": "cec8d8b41553714ec9bb7b20fddada8a1af91bbecc0f28a7ae1ac6e43650153a"
+    },
+    {
+      "relation": "public.profiles",
+      "unchanged_catalog_sha256": "d47221b920d96af64e56e3f8394bb34539209ec2ca3ecad362941dda9aa48f69"
+    },
+    {
+      "relation": "public.recent_views",
+      "unchanged_catalog_sha256": "f7bca93b2424b6d21ab769c53f3636f2716cf6150e8754c23029cc955a592780"
+    },
+    {
+      "relation": "public.resource_resolver_quota",
+      "unchanged_catalog_sha256": "dd28a81a502f3f89271125495c5bc2401d0245537753a7ca8aaf62696dc610ec"
+    },
+    {
+      "relation": "public.resources",
+      "unchanged_catalog_sha256": "2013b3528fdca94a8ba3a16299e9e7c67b15ea4e4c8e98efefcdaaaa2c85d6cb"
+    },
+    {
+      "relation": "public.source_posts",
+      "unchanged_catalog_sha256": "bafde5bc6e68e273645cfbba2e5cb6229f3b783a9fc960b6113dc94d4b65248a"
+    },
+    {
+      "relation": "public.student_target_universities",
+      "unchanged_catalog_sha256": "92a97278c0ff168aced3935ba3109fd4e42571415e02f771b5713e886bf13556"
+    },
+    {
+      "relation": "public.study_sessions",
+      "unchanged_catalog_sha256": "c807ca9bccae80db3ab60af00615ad9a347c1fb0b6a1d76aae58f9abbd59e592"
+    },
+    {
+      "relation": "public.subjects",
+      "unchanged_catalog_sha256": "71401809688d4ccdbeb24ce98d7e2e5ab0b69bb82a6ad1d4f23db59622fc47db"
+    },
+    {
+      "relation": "public.universities",
+      "unchanged_catalog_sha256": "a339aeed1dafe476fc20816bc9c93028264130c1cd7d2d3177d4fd9a009b64b7"
+    }
+  ]
+}
