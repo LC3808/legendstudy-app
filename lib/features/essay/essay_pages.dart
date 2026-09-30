@@ -942,10 +942,10 @@ class _EssayResultViewState extends State<EssayResultView> {
   );
   // Select and excerpt existing text only; never infer resolution.
   Widget _answerOverview(EssayEvaluation e) {
-    List<String> firstTwo(List<String> values, String empty) {
+    List<String> firstTwo(List<String> values, String empty, {int limit = 1}) {
       final selected = values
           .where((value) => value.trim().isNotEmpty)
-          .take(1)
+          .take(limit)
           .map(essaySummaryExcerpt)
           .toList();
       return selected.isEmpty ? [empty] : selected;
@@ -957,7 +957,11 @@ class _EssayResultViewState extends State<EssayResultView> {
               e.comparable ? e.changes['좋아진 부분'] ?? [] : [],
               e.comparable ? '평가에 명시된 변화가 아직 없어요.' : '평가 조건이 달라 비교를 보류해요.',
             ),
-            '아직 보완할 점': firstTwo(e.improvements, '평가에 명시된 보완 내용이 없어요.'),
+            '아직 보완할 점': firstTwo(
+              e.overviewImprovements ?? e.improvements,
+              '평가에 명시된 보완 내용이 없어요.',
+              limit: 2,
+            ),
             '해결한 부분': firstTwo(
               e.comparable ? e.changes['해결한 부분'] ?? [] : [],
               '이번 평가에서 확인된 항목이 없어요.',
@@ -966,7 +970,11 @@ class _EssayResultViewState extends State<EssayResultView> {
           }
         : <String, List<String>>{
             '잘한 점': firstTwo(e.strengths, '평가에 명시된 내용이 없어요.'),
-            '보완할 점': firstTwo(e.improvements, '평가에 명시된 내용이 없어요.'),
+            '보완할 점': firstTwo(
+              e.overviewImprovements ?? e.improvements,
+              '평가에 명시된 내용이 없어요.',
+              limit: 2,
+            ),
             '가장 먼저 고칠 것': firstTwo(e.priorities, '평가에 명시된 우선순위가 없어요.'),
             '다시 쓸 때 확인': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
           };

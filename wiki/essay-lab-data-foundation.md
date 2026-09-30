@@ -1,5 +1,116 @@
 # Essay LAB Data Foundation v1 — 2025 Pilot
 
+## L2-C1 Official Evidence vNext — 2026-09-30
+
+**Two representative offline packages READY; no provider/Production mutation.**
+[Sanitized manifests](../tool/essay_lab/evidence/evidence_vnext_l2c1_result.json) record source
+filenames/hashes, derivative/page/version hashes, exact case identity, criteria/examples,
+package hash and independent prompt/schema hashes. Full artifacts remain ignored under
+`.local/essay-evidence-vnext-l2c1/` in the managed worktree, directories0700/files0600.
+[Validator](../tool/essay_lab/official_evidence_package.py),
+[offline builder](../tool/essay_lab/prepare_evidence_vnext.py),
+[E1–E20 tests](../tool/test_evidence_package.py). Existing SKKU evidence builder is unchanged.
+
+Branch gate: remote development `codex/day-7-school-neis` was82fa70a; accepted1b63f15 was
+its direct child, with no intervening/divergent commits. Exact L2-B4 commit fast-forwarded
+onto that development line; no reimplementation, conflict, reset, stash restoration or
+Owner checkout switch. Reused clean managed `codex/essay-scaffolding-vnext` worktree.
+Original development checkout remains main with private/iOS local files preserved.
+
+### Package contract and source boundary
+
+Version **official-evidence-vnext-1**, prompt **scaffolding-1.3-v2**, output Contract **1.3**.
+No prompt/schema change. The reviewed catalog is separate from its hash-pinned manifest;
+source PDF hash → page/locator → derivative version/hash/review state → semantic role →
+question allowlist → deterministic sorted manifest (machine file paths excluded from identity hash). Explicit prior/current transcription
+versions preserve correction lineage. Source PDF stays authoritative; extracted text/renders
+are derivatives, never silent source replacement. Catalog classification needs human/source
+review: hashes cannot prove that arbitrarily relabeled prose is an official rubric.
+
+Roles: question, passage, official_intent, scoring_criterion, question_length_rule,
+scoring_length_rule, explicit_non_criterion, official/accepted/high-quality example.
+These are package facets, NOT new DB enums. Bind question-length to question and scoring
+length/non-criteria to scoring_criteria. Only scoring_criterion may ground a criterion;
+intent is context, not automatically mandatory. Examples are reviewer-only calibration;
+blind_input explicitly excludes them and projects no Owner preference/model results.
+Student manuscript/transcription is a separate submission provenance, never official evidence.
+Full source catalogs/reviewer notes must not be serialized wholesale into provider input.
+
+Existing resources/exam mappings and question evidence support version/hash/locator references;
+criteria already distinguish official vs derived and nullable official weights. Fine package
+facets/extraction files live in immutable private manifests, not duplicate canonical tables.
+**DB_CHANGE_REQUIRED=NO for this offline package foundation.** No new UUIDs are invented:
+question IDs are scoped natural keys; canonical question UUID is null until separately
+registered. Sookmyung reuses known university/exam IDs. Hanyang retains known university and
+exact2024 Afternoon2 key; canonical exam UUID is not asserted from an unverified current DB.
+This is not Production question readiness or a claim of new canonical registration.
+
+### Representative source review
+
+| Case | Verified package contents |
+|---|---|
+| Sookmyung2025 mock Q1-1 | Retained official question/card PDFs, reviewed Q1-1 가/나 extraction; shared intent scoped to this task; PDF6 Q1-1 rubric only (not1-2); one holistic official criterion with NULL weight; displayed300±30; separate<=200 zero-score rule; PDF7 Q1-1 official example withheld from evaluation |
+| Hanyang2024 humanities Afternoon2 | Existing approved question/accepted-answer/guide source hashes match; guide PDF51 intent,52 five criteria (10/25/25/30/10),53 holistic/formal rules; nominal1200 separate from verified scoring table; explicit no introduction/body/conclusion-form scoring; two accepted example pages preserved for reviewer only |
+
+Sookmyung source rubric itself supplies simple-average interpretation, teacher-incompetence
+attribution and access→participation→population-composition causal background. No previous
+model misses or expected diagnosis is added to input. Hanyang's guide PDF53 visually confirms
+1150–1250 inclusive no deduction, >1250 minus1 and the displayed lower ranges; unlisted ranges
+are not inferred. Its formal non-criterion does not excuse an actually unfinished argument.
+PDF page renders plus exact source-bound excerpts retain official evidence; no OCR implemented.
+Multiple examples preserve distinct page identities; no perfect-score claim or template grading.
+No official numerical weights invented for Sookmyung. Internal diagnostic level is not score.
+
+Hanyang NEW transcription replaces exactly one Owner-verified phrase with
+“오로지 최대 행복, 최소 고통만을 주장하는 공리주의는”. Prior bytes/hash/version are retained;
+old frozen transcription is unchanged. This is OWNER_VERIFIED reading correction, not university
+scoring evidence. Owner manuscript observations (both reviewed answers exceed1250; first grid
+numbering exceeds1300 with deletions) remain review context, not an automatic Unicode-based
+penalty and not hidden model guidance. New package keeps original manuscript source available.
+
+### Validation and limits
+
+Evidence27 PASS (E1–E20 plus derivative/current/source/version/catalog/allowlist guards);
+L2-B4 20 PASS; worker/parser15 and provider-binding8 PASS; existing Data Foundation/evidence
+26 PASS/10 private SKKU tests skipped in this worktree; SQL static50+55 PASS. Two actual
+representative packages validate source/derivative hashes, allowlist/blind projection and
+save/reload deterministic hash. A discovered criterion-order serialization issue was fixed
+by sorting, with regression coverage. Existing frozen L2-B46/46 files hash-identical.
+No full answer, raw provider result, PDF or private image committed. Secret/exclusion scan PASS.
+
+CORE-first Flutter66 focused PASS including360px/200%; analyze PASS on identical tracked code
+in an ASCII temporary path. Initial Korean-worktree analyzer LSP JSON framing crashed; no
+application diagnostic was emitted. No mobile builds or unrelated baseline repairs.
+
+### Later archive interface — design only
+
+Owner hands off one loosely university/year-organized folder; no manual hundreds-file rename.
+Resumable inventory records source hash + discovered identity candidates + review status.
+Byte-identical duplicate → reuse source bytes/retain aliases. Different bytes with similar
+identity → review semantic duplicate vs official revision, never discard automatically.
+Resume by hash and completed extraction version; classification uncertainty stays unresolved.
+Workflow: inventory → official identity verification → page/question mapping → versioned
+extraction → review → role/criteria/examples/length/non-criteria classification → approved
+canonical registration → package build → human spot check. File copying is not evaluation
+readiness.2026/latest acquisition remains separate; no bulk ingestion or web rediscovery here.
+
+Seven preservation answers: source/derivative/review/correction are distinct facts; hashes and
+locators reconstruct context; prior derivatives remain; no student identity changes; evidence
+is not student Learning/Decision/Outcome/telemetry; private answers retain restricted access;
+extraction/quality judgments remain derivative facts, never original university authority.
+
+### Next bounded validation — not authorized
+
+Proposed GPT-5.6 Sol only, Sookmyung then Hanyang, max2 evaluation calls, no retry/fallback/
+repair/Round2, no automatic selection. Freeze prompt hash, schema hash and each package/catalog
+hash independently. Before any call, a separately authorized adapter must materialize referenced
+derivative bytes in role/order, preserve reviewer-only examples, build exact parser claim
+binding and verify one-shot/raw-before-parse receipts. Current code performs no dispatch.
+Require Contract1.3/model/root/evidence/quote/core structural PASS AND Owner human review of
+concreteness, priority, logic, false criticism, stance and actionability. GPT remains candidate.
+READY_FOR_SMALL_VNEXT_PROVIDER_VALIDATION=YES for evidence/prompt preparation; execution
+AUTHORIZATION=NO. Production model/worker/AI/traffic and Round2 remain NO.
+
 L2-B4: [offline evidence sidecar](../tool/essay_lab/evidence_vnext.py) prepares additive
 source-bound distinctions using existing question/scoring references, separate calibration
 examples and versioned transcription corrections. It is not a deployed enum, ingestion or

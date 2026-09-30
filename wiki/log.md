@@ -1,5 +1,12 @@
 # Development Log
 
+## 2026-09-30 — L2-C1 evidence foundation
+
+Exact L2-B4 fast-forward integration; two private versioned evidence packages,27 new guards,
+CORE-first UI/detail preservation,66 Flutter PASS/analyze ASCII PASS. Existing frozen46 intact.
+[Canonical source/provenance/test report](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30).
+No provider, DB mutation, model selection or archive ingestion. Next2-call proposal NOT authorized.
+
 ## 2026-09-30 — L2-B4 offline scaffolding vNext
 
 Owner Option A implemented as prompt v2 + unchanged1.3 regression fixtures; evidence sidecar

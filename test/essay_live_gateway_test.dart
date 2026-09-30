@@ -165,6 +165,60 @@ MappedEssayResult mapped({
   previousDimensions: previousDimensions,
 );
 void main() {
+  for (final count in [0, 1, 2, 3]) {
+    test('CORE overview retains $count priorities and all detail', () {
+      final rows = [
+        for (var i = 0; i < count; i++)
+          {
+            ...progress(),
+            'id': 'core$i',
+            'priority': i + 1,
+            'explanation': '핵심 $i',
+          },
+        {
+          ...progress(core: false, sentences: [sentence()]),
+          'id': 'minor1',
+          'priority': 10,
+          'explanation': '문장 보완',
+        },
+        {
+          ...progress(core: false),
+          'id': 'minor2',
+          'priority': 11,
+          'explanation': '추가 보완',
+        },
+      ];
+      final r = mapped(items: rows);
+      expect(r.evaluation.overviewImprovements, [
+        for (var i = 0; i < count; i++) '핵심 $i',
+      ]);
+      expect(r.evaluation.improvements.length, count + 2);
+      expect(r.sentences!.items.length, 1);
+    });
+  }
+  test('Non-core historical improvement remains visible', () {
+    final e = evaluation();
+    (e['input_snapshot'] as Map)['scaffolding_context'] = {
+      'items': [
+        {'progress_id': 'prior'},
+      ],
+    };
+    for (final status in ['resolved', 'improved', 'recurred', 'open']) {
+      final r = mapped(
+        e: e,
+        items: [
+          {
+            ...progress(core: false),
+            'previous_progress_id': 'prior',
+            'status': status,
+          },
+        ],
+      );
+      expect(r.evaluation.overviewImprovements, isEmpty);
+      expect(r.evaluation.changes.values.expand((x) => x), contains('보완'));
+    }
+  });
+
   test('open resumes owner session without generating a new cycle', () async {
     final s = FakeEssayStore();
     final g = gateway(s);
@@ -496,7 +550,12 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
     final result = mapped(
       items: [
-        progress(sentences: [sentence()]),
+        progress(),
+        {
+          ...progress(core: false, sentences: [sentence()]),
+          'priority': 10,
+          'explanation': '부차 문장 관측',
+        },
       ],
     );
     await tester.pumpWidget(
@@ -522,6 +581,13 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(tester.takeException(), null);
+    expect(
+      find.descendant(
+        of: find.byKey(const ValueKey('answer-overview')),
+        matching: find.textContaining('부차 문장 관측'),
+      ),
+      findsNothing,
+    );
     expect(find.textContaining('표시 예시'), findsNothing);
     expect(find.textContaining('미리보기'), findsNothing);
     expect(find.text('첨삭을 반영한 예시답안 보기'), findsNothing);

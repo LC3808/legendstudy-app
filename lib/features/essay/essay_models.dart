@@ -84,9 +84,12 @@ class EssayEvaluation {
     this.includedRevision = false,
     this.comparable = true,
     this.uncertainty,
+    this.overviewImprovements,
   });
   final String summary, example;
   final String? uncertainty;
+  // Null preserves legacy presentation; empty means no current priority.
+  final List<String>? overviewImprovements;
   final List<String> strengths, improvements, priorities, checklist;
   final List<EssayDimension> dimensions;
   final Map<String, List<String>> changes;

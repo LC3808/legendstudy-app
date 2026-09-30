@@ -1,5 +1,10 @@
 # Essay LAB v1 Product Specification
 
+L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
+prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
+now preserves detail/history while selecting only current priorities at the top. Historical
+frozen artifacts remain unchanged; GPT candidate only, new provider calls0.
+
 L2-B4: Owner approves **Option A**: real improvement roots include genuine NON-CORE
 observations; CORE selects the next1–2 priorities (max3). [Implementation and UI limitation](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30).
 The concrete teaching principles below are encoded in the new provider-neutral prompt;

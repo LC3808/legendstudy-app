@@ -628,6 +628,16 @@ MappedEssayResult mapEssayResult({
           .where((p) => p['status'] != 'resolved')
           .map((p) => p['explanation'] as String)
           .toList(),
+      overviewImprovements: scaffold
+          ? items
+                .where(
+                  (p) =>
+                      p['status'] != 'resolved' &&
+                      p['scaffolding_observation']['core_focus'] == true,
+                )
+                .map((p) => p['explanation'] as String)
+                .toList()
+          : null,
       priorities: priorities,
       checklist: _strings(e['rewrite_checklist']),
       example: validExamples.isEmpty

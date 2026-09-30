@@ -1,5 +1,10 @@
 # Essay LAB L2-B — model bake-off preparation
 
+L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
+prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
+now preserves detail/history while selecting only current priorities at the top. Historical
+frozen artifacts remain unchanged; GPT candidate only, new provider calls0.
+
 L2-B4 follow-up: Owner approved real NON-CORE roots (Option A). New
 [offline prompt and synthetic regressions](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30)
 do not repair/rescore historical GPT SENTENCE_ROOT failures. All46 private artifacts preserved.

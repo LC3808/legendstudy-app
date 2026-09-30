@@ -1,0 +1,225 @@
+[
+  {
+    "case_id": "sookmyung",
+    "catalog_hash": "89906e81be608ef8792a5acd7c3ba5887b1efc03d0f3ca603319c246c5abc3f4",
+    "contract_version": "1.3",
+    "criterion_count": 1,
+    "derivative_versions": {
+      "P": {
+        "page": 1,
+        "sha256": "62115c8e181c6eb6d9b18c8699e8254c83dd723466f842567e305ace6183d16c",
+        "version": "1"
+      },
+      "Q": {
+        "page": 2,
+        "sha256": "d0b1fed6094777bbfc6944c240943a2091840fc9b9bdd981b202b1a8854f9a87",
+        "version": "1"
+      },
+      "answer-v1": {
+        "page": 1,
+        "sha256": "4dd3cc0a5be2ca41f05e0ec8bac95f863f449abfda93f3042aa51f3cb82a22a4",
+        "version": "1"
+      },
+      "answer-v2": {
+        "page": 1,
+        "sha256": "4dd3cc0a5be2ca41f05e0ec8bac95f863f449abfda93f3042aa51f3cb82a22a4",
+        "version": "2"
+      },
+      "example-1": {
+        "page": 7,
+        "sha256": "8bc1d18c37e16a5e941aa45609be37409e3bba71818b655c550d9d6c0aa27325",
+        "version": "1"
+      },
+      "intent": {
+        "page": 4,
+        "sha256": "34214f3df757c5b1e05b0b09bf465a334731c3f853c3d170550955fe154b51f7",
+        "version": "1"
+      },
+      "question-length": {
+        "page": 2,
+        "sha256": "2c572c683ed4b371196f5d933e4f0b286229aafdb3cd28e661b1eca295b97e23",
+        "version": "1"
+      },
+      "rubric": {
+        "page": 6,
+        "sha256": "99216b69637b597cb392a92cdbf95bff09f57824cc7b9f8ea9a9d189acdbff09",
+        "version": "1"
+      },
+      "scoring-length": {
+        "page": 6,
+        "sha256": "c22d5ae309d63252383201a91802ab9faad3afb296cb286cd0d0e956b320fe64",
+        "version": "1"
+      }
+    },
+    "evidence_roles": [
+      "official_example",
+      "official_intent",
+      "passage",
+      "question",
+      "question_length_rule",
+      "scoring_criterion",
+      "scoring_length_rule",
+      "student_transcription"
+    ],
+    "example_answer_count": 1,
+    "non_criteria_count": 0,
+    "package_hash": "7490a3f6e4617d0f9d488dc9552a1e6ace4daa17fac90712b1dee70450a5cc08",
+    "package_version": "official-evidence-vnext-1",
+    "production_registered": false,
+    "prompt_hash": "b962a46cab2a93ab7ff56eda700cba97c17e3babfbd34c6fa835cecffab01f5b",
+    "prompt_version": "scaffolding-1.3-v2",
+    "question": {
+      "admission_year": 2025,
+      "canonical_question_id": null,
+      "exam_id": "a6667288-75ad-50d4-b237-d2a08e2bff8b",
+      "exam_key": "mock-humanities",
+      "id": "sookmyung/2025/mock-humanities/1-1",
+      "university": "sookmyung",
+      "university_id": "c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b"
+    },
+    "question_length_rule_present": true,
+    "schema_hash": "737078fba6bfe5ad7828414c7d2ebdc048419f79f99670f5b06cee23e5509940",
+    "scoring_length_rule_present": true,
+    "source_files": [
+      {
+        "filename": "sm-official-0.pdf",
+        "id": "question-pdf",
+        "sha256": "dd06fd2392033cb7e7d2e0442b0f30aeade02badb359f3e31f13c0949a86cc87"
+      },
+      {
+        "filename": "sm-official-1.pdf",
+        "id": "rubric-pdf",
+        "sha256": "c8fb7cece3acf416c88948a23120a37f61d04731079de93a4f9076fb7db9f9a1"
+      },
+      {
+        "filename": "1697-3.pdf",
+        "id": "answer-source",
+        "sha256": "e0b55edd2eb70fe8b90da3e3d542ff9699066dfb22dd9d779bd298670d5e4429"
+      }
+    ],
+    "transcription_review_state": "RETAINED_REVIEWED",
+    "validation_status": "PASS"
+  },
+  {
+    "case_id": "hanyang",
+    "catalog_hash": "642616484cad24a9ebfce21621e250b8c359a87319b67be55c4522cdadbb61ed",
+    "contract_version": "1.3",
+    "criterion_count": 5,
+    "derivative_versions": {
+      "P": {
+        "page": 3,
+        "sha256": "5b24d6b89fef85be3003f46365199f92aa174b3d0d92cd0e421f692c36b5f43d",
+        "version": "1"
+      },
+      "Q": {
+        "page": 2,
+        "sha256": "18c03d3456b00d45f799b2b7f5c8ad48c607d1ca237b8538b4bf96367c1ee99a",
+        "version": "1"
+      },
+      "answer-v1": {
+        "page": 2,
+        "sha256": "27cad48cd49bcfbcdcaace43bbf5a799ab4d0e14fff0ae3468c118b834051a4c",
+        "version": "1"
+      },
+      "answer-v2": {
+        "page": 2,
+        "sha256": "9985a31d6f9b07c997a8d7d4af8050dda3c7ce2c18e0c9e281273d472a324e05",
+        "version": "2"
+      },
+      "example-1": {
+        "page": 1,
+        "sha256": "bdfd5d970c2e072c671f33f7dbbced37cdf9536a86489c15b8fefcac241d67b4",
+        "version": "1"
+      },
+      "example-2": {
+        "page": 2,
+        "sha256": "eb8de99b3d2929be9cd7358167efaafec8fae3a0fa2c69fafaaf16ab78f061c1",
+        "version": "1"
+      },
+      "intent": {
+        "page": 51,
+        "sha256": "fe05a676a800e63f9d10ef2b86fe07c0c0bda8ae2a6921dae170be39ad361ad0",
+        "version": "1"
+      },
+      "non-criterion": {
+        "page": 53,
+        "sha256": "5ac7b6a5e493d0dabf718f2b5a2acda063376f2ce53f90cd2c05bd1f9e960ce6",
+        "version": "1"
+      },
+      "question-length": {
+        "page": 2,
+        "sha256": "8bfe909c762cf4f81a87d1f795df5eafabe6a45bff535cfa336c9ae9f88de80f",
+        "version": "1"
+      },
+      "rubric": {
+        "page": 52,
+        "sha256": "b8dc8f67347601fa5f7b282a03c7f01368a512563bc940906e20ded93ee6a468",
+        "version": "1"
+      },
+      "rubric-holistic": {
+        "page": 53,
+        "sha256": "494c85a561db47481c909e971564fa740612fa39974cb5dd943f8577b700363a",
+        "version": "1"
+      },
+      "scoring-length": {
+        "page": 53,
+        "sha256": "960dcd0cb050554a253e95dc2363cd220bea8947b89e05aa2da17a593bcce9d9",
+        "version": "1"
+      }
+    },
+    "evidence_roles": [
+      "accepted_example",
+      "explicit_non_criterion",
+      "official_intent",
+      "passage",
+      "question",
+      "question_length_rule",
+      "scoring_criterion",
+      "scoring_length_rule",
+      "student_transcription"
+    ],
+    "example_answer_count": 2,
+    "non_criteria_count": 1,
+    "package_hash": "0d6c20bc7d3309ec22548e49293b233f92df981325d35aec5f7cdc6f147586fc",
+    "package_version": "official-evidence-vnext-1",
+    "production_registered": false,
+    "prompt_hash": "b962a46cab2a93ab7ff56eda700cba97c17e3babfbd34c6fa835cecffab01f5b",
+    "prompt_version": "scaffolding-1.3-v2",
+    "question": {
+      "admission_year": 2024,
+      "canonical_question_id": null,
+      "exam_id": null,
+      "exam_key": "humanities-afternoon-2",
+      "id": "hanyang/2024/humanities-afternoon-2/1",
+      "university": "hanyang",
+      "university_id": "1090e1be-174e-5042-abd3-ca929c6e26f8"
+    },
+    "question_length_rule_present": true,
+    "schema_hash": "737078fba6bfe5ad7828414c7d2ebdc048419f79f99670f5b06cee23e5509940",
+    "scoring_length_rule_present": true,
+    "source_files": [
+      {
+        "filename": "2024학년도 한양대 수시 논술_인문계(오후2) 문제.pdf",
+        "id": "question-pdf",
+        "sha256": "4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b"
+      },
+      {
+        "filename": "2024학년도 한양대 수시 논술_인문계열(오후2) 합격자 예시답안.pdf",
+        "id": "examples-pdf",
+        "sha256": "43a9271aa86ffe6231cb3bc9d8cbd0c88f6f015dbb28e0b2db0d627450290e77"
+      },
+      {
+        "filename": "official-2025-guide.pdf",
+        "id": "guide-pdf",
+        "sha256": "6de905abebcc25734b21abe4a939ebf1bb00ea605633195439b5e4c260a82a20"
+      },
+      {
+        "filename": "2024학년도 한양대 수시 논술_인문계열(오후2) 합격자 예시답안.pdf",
+        "id": "answer-source",
+        "sha256": "43a9271aa86ffe6231cb3bc9d8cbd0c88f6f015dbb28e0b2db0d627450290e77"
+      }
+    ],
+    "transcription_review_state": "OWNER_VERIFIED_CORRECTION",
+    "validation_status": "PASS"
+  }
+]

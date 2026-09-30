@@ -1,5 +1,16 @@
 # Essay LAB Workspace UI v1
 
+## L2-C1 CORE-first overview — 2026-09-30
+
+Implemented narrow presentation correction. Live1.3 maps active core_focus explanations into
+optional `overviewImprovements`; empty means no CORE, null preserves legacy presentation.
+Top “보완할 점”/“아직 보완할 점” shows at most2 current CORE explanations. Three CORE retain
+all detail/priority but overview caps2; zero does not fall back to minor roots. Detailed
+improvements and non-core sentences remain intact. Resolved/improved/recurred/open historical
+changes are not filtered by core status. No DB/RPC/output Contract change or technical labels.
+Focused66 PASS including0/1/2/3 CORE, non-core history and360px/200%; analyze ASCII mirror PASS.
+This resolves L2-B4's overview limitation below; no broader result redesign or mobile build.
+
 L2-B4 mapping recheck: first priorities correctly filter core_focus; sentence detail preserves
 quote/diagnosis/direction/optional example. However overview “보완할 점” takes the first two
 ALL-active improvements and can include NON-CORE. [Exact limitation / DESIGN_ONLY follow-up](essay-lab-scaffolding-persistence.md#ui-compatibility-finding).

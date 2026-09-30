@@ -1,5 +1,10 @@
 # Essay LAB Scaffolding Persistence — 1.3
 
+L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
+prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
+now preserves detail/history while selecting only current priorities at the top. Historical
+frozen artifacts remain unchanged; GPT candidate only, new provider calls0.
+
 ## L2-B4 Option A implementation — 2026-09-30
 
 **Owner Option A APPROVED; offline prompt/contract regression PASS.** This supersedes
