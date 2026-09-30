@@ -72,9 +72,10 @@ class Dispatcher(unittest.TestCase):
         self.assertEqual(len(d.SLOTS),4)
         for slot in ['arbitrary','../sookmyung','sookmyung-other']:
             with self.assertRaises(d.Invalid): d.verify_frozen(self.root,slot)
+        private_states={slot:d.slot_state(d.PRIVATE,slot) for slot in d.SLOTS}
         with patch.dict(os.environ,{'ESSAY_PILOT_OPENAI_API_KEY':KEY}):
             with self.assertRaisesRegex(d.Invalid,'REAL_EXECUTION_DISABLED'): d.dispatch('sookmyung-openai')
-        self.assertFalse((d.PRIVATE/'round1-started').exists())
+        self.assertEqual({slot:d.slot_state(d.PRIVATE,slot) for slot in d.SLOTS},private_states)
         with self.assertRaises(d.Invalid): d.run_synthetic(d.PRIVATE,'sookmyung-openai',{},FakeHTTPS())
 
     def test_endpoint_provider_and_redirect(self):

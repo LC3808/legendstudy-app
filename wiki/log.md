@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-30 — L2-B2 authorized private Round1 execution
+
+- [Execution record](essay-lab-model-bakeoff-l2-b.md#l2-b2-round1-execution--2026-09-30-current):
+  exactly4 sequential requests; Claude2 parser PASS, OpenAI2 HTTP429 insufficient_quota.
+- Four immutable STARTED/raw/terminal sets, two normalized results and private full Owner
+  comparison frozen. No retries/fallback/repair; quality pending; no model selection.
+- Credential/file/hash preflight and synthetic67 PASS. STARTED hash metadata enriched before
+  first call; checked-in real gate remains closed. No Production/DB/005/Round2/traffic changes.
+- Owner iOS/private inputs preserved. Next: human review and separately authorized follow-up only.
+
 ## 2026-09-30 — L2-B1 Product revision-limit clarification
 
 - Owner addendum: Pilot4/2 external-call caps are not student revision/lifetime limits.

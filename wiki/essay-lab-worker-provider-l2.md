@@ -1,10 +1,9 @@
 # Essay LAB — worker/provider and reviewer architecture
 
-> Current follow-up: [L2-B1 private dispatcher](essay-lab-model-bakeoff-l2-b.md) reuses frozen
-> GPT-5.6 Sol / Claude Sonnet5.5 inputs. Round1 four calls + future Round2 max2,
-> synthetic validation PASS; real execution compiled closed, separate approval required. Real AI0.
-> Private STARTED/raw/normalized/terminal protocol; no Production worker/reviewer activation.
-> The historical L2-A3 plan below is superseded.
+> Current follow-up: [L2-B2 private Round1](essay-lab-model-bakeoff-l2-b.md): four calls ended;
+> Claude2 parser PASS, OpenAI2 quota failures; human quality review pending, no model selected.
+> No retries/fallback/repair or Round2. Checked-in execution gate remains closed.
+> Production worker/reviewer/AI/traffic remain inactive. Historical L2-A3 plan below is superseded.
 
 ## L2-A3 reviewer architecture
 

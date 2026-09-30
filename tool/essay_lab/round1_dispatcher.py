@@ -234,6 +234,9 @@ def _run(root, slot, environment, http, *, synthetic):
     # Permanent separate tombstone. O_EXCL is the process/concurrency boundary.
     freeze(marker_dir/f'{slot}.json', encoded(dict(state='STARTED_CONSUMED_FOR_ROUND1',slot=slot,
            started_at=now(), policy=binding, regime=regime, package_sha256=manifest['package_sha256'],
+           policy_sha256=digest(binding), prompt_sha256=sha256(PILOT_PROMPT.encode()).hexdigest(),
+           schema_sha256=digest(output_schema()), case_manifest_sha256=digest(manifest),
+           ordered_image_sha256=value['image_sha256'],
            synthetic=synthetic, automatic_retry=False)))
     target = slots_dir/slot
     target.mkdir(mode=0o700, exist_ok=False)

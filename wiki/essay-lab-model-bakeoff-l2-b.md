@@ -1,5 +1,58 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-B2 Round1 execution — 2026-09-30 (current)
+
+Owner accepted L2-B1 and explicitly authorized four sequential private provider requests.
+**All four slots terminal; total requests4, retries0, fallback0, repair0, UNKNOWN0.**
+[Sanitized execution evidence](../tool/essay_lab/evidence/l2_b2_execution_result.json).
+Model comparison is **PARTIAL**: both OpenAI calls returned HTTP429 `insufficient_quota`;
+no GPT evaluation was produced. Both Claude responses passed strict Contract1.3 parsing.
+**QUALITY_REVIEW=PENDING_OWNER_REVIEW; PRIMARY_MODEL_SELECTED=NO.**
+
+| Slot (execution order) | HTTP / parser | Returned model | Input / output tokens | Latency ms |
+|---|---|---|---|---|
+| Sookmyung / OpenAI | 429 insufficient_quota / NOT_RUN | NULL | NULL / NULL | 1942 |
+| Sookmyung / Anthropic | 200 / PASS | claude-sonnet-5-5 | 12908 / 6641 | 54214 |
+| Hanyang / OpenAI | 429 insufficient_quota / NOT_RUN | NULL | NULL / NULL | 4821 |
+| Hanyang / Anthropic | 200 / PASS | claude-sonnet-5-5 | 23019 / 9277 | 197740 |
+
+Claude completion state `end_turn`; cache-read/write counters0 for both responses.
+Provider-reported total tokens and actual cost/currency are NULL for all four; no estimate
+was calculated, no billing/model probe or account/credit adjustment was made. Each failed
+OpenAI slot is consumed too. No re-run/reset is authorized by this record.
+
+Preflight: latest HEAD retained, accepted dispatcher hash matched052d595; all frozen inputs,
+endpoints/model bindings and outside-repository regular/non-symlink0400/0600 non-empty
+credential files validated locally without printing contents or copying credentials.
+67 synthetic regressions and secret scan passed before any call. Immediately before execution,
+STARTED metadata was enriched with explicit case/policy/prompt/schema/ordered-image hashes;
+transport/prompt/parser/settings did not change. The executed source hash is in the report.
+Activation used process-local named Owner authorization and approved file references only;
+checked-in `EXECUTION_AUTHORIZATION=None` still prevents accidental CLI real execution.
+No behavioral source change occurred between calls. Test-only post-run correction compares
+private slot states before/after a disabled call rather than assuming no real receipts exist.
+
+Each real raw response was frozen before parse; normalized files exist only for Claude PASS.
+Private hashes, restrictive permissions and credential exclusion verified. Separate STARTED
+markers and terminal records are preserved for all four. Inputs were never changed based on
+another provider's output. No comparative quality review occurred before all four froze.
+
+**Private Owner artifact:** `.local/essay-bakeoff-l2b/round1-owner-comparison.md`.
+Contains originals, frozen official references, complete available evaluations, all core/sentence
+observations, parser/telemetry and human rubric. Missing GPT outputs are explicitly marked.
+No answers/raw/normalized output or credentials are committed. Sookmyung content-vs-clarity/
+over-editing and Hanyang recall/stance/length/verbosity checks are **PENDING_HUMAN_REVIEW**;
+parser PASS never establishes educational quality. No automatic winner or signed reviewer receipt.
+
+Post-run synthetic67 + Wiki/diff checks PASS; actual provider calls remain exactly4.
+Production DB writes0; no migration/RPC/apply/worker/traffic activation, no Round2.
+Pilot4/2 call caps remain unrelated to unlimited Product revision cycles.
+**NEXT:** Owner reads private results → resolves OpenAI quota outside this task if desired →
+explicitly decides any bounded follow-up/model selection. No automatic retry or Round2.
+
+All L2-B1/L2-B sections below are accepted historical checkpoints; their real-call0 statements
+refer to preparation time, not this executed Round1.
+
 ## L2-B1 private Round1 dispatcher — 2026-09-30
 
 **Dispatcher technically READY; real AI/provider requests 0. Real execution DISABLED.**
