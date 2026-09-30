@@ -1,5 +1,25 @@
 # LegendStudy Longitudinal Learning and Admissions Data Strategy
 
+## Deep Analytics and Student Context — Owner clarification 2026-09-30
+
+**DEEP ANALYTICS = CORE PRODUCT GOAL. ANALYTICS-READY CANONICAL DATA NOW ≠ WAREHOUSE NOW.**
+단순 운영 dashboard가 아니라 Product 개선·학생 개인화·Quality Intelligence·B2B Evidence·Business Intelligence를 위한 장기 목표다. 현재부터 history/context/provenance/version을 파괴하지 않는다. warehouse/generic metric registry/mega-event table을 지금 만드는 지시가 아니다.
+
+| Domain | 보존해야 할 분석 가능성 (현재 제공 기능 목록 아님) |
+|---|---|
+| Essay | CORE 유형/해결률, 재작성 개선·회수별 변화, 기준별 취약점, 강점 유지, model/prompt/evidence별 QA |
+| Learning | 공부시간·지속성·과목별 시간·시험 전 패턴 |
+| Academic | 학교/학년/과목별 성취, 내신·모의고사 변화, 강약 과목 |
+| Admission | 학교·학년·성적·목표 대학/학과·지원자격·지원/결과 |
+| B2B | 학생/집단 개선, cohort 변화, 프로그램 효과, 학교 보고서 |
+
+**OPERATIONAL IDENTITY / ANALYTICAL STUDENT CONTEXT / PRESENTATION·REPORTING**을 구분한다.
+이름·이메일·전화번호는 목적상 불필요하면 표시/사용을 최소화한다. 그러나 학교·학교 유형·학년·성적·과목·희망 대학/학과·입시 자격 및 농어촌 등 특별전형 context는 분석과 개인화에 의미가 있으므로 모두 제거하는 접근을 취하지 않는다. **NAME REMOVED ≠ ANONYMOUS**: 학교+학년+성적+특별전형 등의 조합으로 재식별될 수 있다.
+
+내부 longitudinal analysis는 동일 canonical student의 사실을 연결할 수 있어야 한다. 운영자/학교/B2B/외부 report에는 목적과 권한에 따라 최소정보·집계·비식별화를 적용한다. 분석 가치가 무제한 수집/접근/보존을 허용하지 않으며, privacy schema나 신규 수집을 이번에 승인하지 않는다. [Admission eligibility](roadmap-academic-analytics.md#phased-and-source-gated--owner-clarification-2026-09-30)는 별도 source/verification context이고 단일 profile flag가 아니다.
+
+기존 seven preservation questions 적용: (1) 발생/기록/정정 시점 분리, (2) immutable 원본 재현, (3) current UPDATE로 history 소실 금지, (4) auth.users 동일 identity, (5) Learning/Decision/Outcome 구분, (6) 목적·권한·retention·재식별 위험, (7) derived metric/model을 raw fact로 취급하지 않기. 이번은 원칙 정합화이며 신규 storage 선택/구현이 아니다.
+
 Essay source follow-up2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) applies the seven preservation questions to raw PDF, extraction and correction history. Official/calibration evidence stays separate from private student learning facts and marketing telemetry.
 
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**

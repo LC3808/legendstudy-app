@@ -1,5 +1,21 @@
 # LegendStudy Product Family Architecture
 
+## Post-audit Owner alignment — 2026-09-30
+
+Cross Review A/B와 Owner 교차검토의 **HEALTHY_WITH_DEBT** 판정을 유지한다.
+대규모 refactor/consolidation은 필요하지 않으며 [Cross Review A](platform-architecture-health-review-a.md)는 당시 사실 그대로 보존한다. Claude의 별도 Architecture Baseline은 이 문서와 병행 조율하되, 실제 구현과 명시적 Owner 결정이 우선한다. 이번 정합화는 새 foundation/기능 구현 승인이 아니다.
+
+**ONE IDENTITY · ONE STUDENT PROFILE EXPERIENCE ≠ ONE PROFILES TABLE.**
+온보딩에서 학교·학년·희망 대학·희망 학과/모집단위 및 필요한 학업/진학 context를 단계적으로 입력하고 MY에서 통합 확인/수정한다. 대학 입시 뉴스·일정·모집요강·입결·논술 자료·성적 분석·대학/학과 비교·진학 분석·합격예측의 개인화에 쓰되, 각 사실은 자기 canonical domain이 소유한다. profiles에 Membership/Transcript/Application/Entitlement/Human Review를 몰아넣지 않는다.
+
+학교 preference ≠ 검증된 Organization Membership; mock self-score ≠ 공식 transcript;
+공식 admission formula ≠ LegendStudy analysis model; domain fact ≠ analytics event;
+model evaluation ≠ human quality judgment. 미래 B2B 소속은 현재 학교 선택으로 권한을 얻지 않는다.
+[상업 모델](roadmap-monetization-and-in-app-learning.md#post-audit-commercial-boundary--2026-09-30),
+[학업·진학 단계](roadmap-academic-analytics.md#phased-and-source-gated--owner-clarification-2026-09-30),
+[분석 context](longitudinal-learning-admissions-data-strategy.md#deep-analytics-and-student-context--owner-clarification-2026-09-30),
+[Quality 경계](essay-lab-worker-provider-l2.md#quality-console-boundary--owner-clarification-2026-09-30)가 상세 의미를 소유한다.
+
 Recorded: 2026-09-20. **OWNER PRODUCT DIRECTION / DOCUMENTATION ONLY.**
 This is the canonical long-term product family, shared-engine and B2B boundary.
 

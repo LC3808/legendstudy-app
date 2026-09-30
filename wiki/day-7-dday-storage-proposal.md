@@ -1,5 +1,87 @@
 # D-Day storage — production applied / JWT and Flutter runtime PASS
 
+## ACL security correction — MIGRATION READY / NOT APPLIED — 2026-09-30
+
+[Cross Review A](platform-architecture-health-review-a.md)의 HIGH finding을 별도로 재검증했다.
+Live PostgreSQL17.6, 2026-09-30 13:33:27 UTC: postgres owner, RLS ON/force OFF,
+owner CRUD policies4개. anon/authenticated/service_role 모두 CRUD + TRUNCATE +
+TRIGGER + REFERENCES + MAINTAIN. PUBLIC table grant는 없으며 public schema USAGE는 존재한다.
+[Sanitized before metadata](../supabase/verification/day_targets_acl_before_20260930.json).
+
+**ROOT_CAUSE: mechanism VERIFIED / historical origin LIKELY.** 현재 postgres/public
+default table ACL은 application roles에 ALL을 부여한다. 원 migration의 GRANT CRUD는
+additive이고 REVOKE가 없어 default 과다 권한을 제거하지 않는다. 같은 default와 실제
+원 migration을 isolated PostgreSQL17에서 재생해 동일 과다 권한을 재현했다. 당시 생성
+시점 default ACL audit log는 없으므로 모든 과거 grant 경로까지 확정하지 않는다.
+실제 exploit path를 증명하지 않았으며 Production 파괴/공격 테스트는 없다.
+
+### Minimum end state
+
+| Role | BEFORE live | AFTER expected / isolated verified |
+|---|---|---|
+| anon / PUBLIC | anon ALL / PUBLIC none | none |
+| authenticated | ALL (8 privileges, including MAINTAIN) | SELECT, INSERT, UPDATE, DELETE only |
+| postgres owner / service_role | ALL | unchanged |
+
+`SupabaseDayEventRepository` uses only CRUD and requires currentUser for writes.
+Signed-out fetch returns empty without querying DB. `DayEventsController` keeps guest
+changes in session memory; auth-loading/errors do not dispatch writes; login never
+uploads guest events. Signup/onboarding has no anonymous day_targets write requirement.
+Thus anon table grants are unnecessary. Owner four RLS policies and semantics remain unchanged.
+
+[Migration](../supabase/migrations/20260930000100_day_targets_least_privilege.sql)
+revokes ALL only on day_targets from PUBLIC/anon/authenticated, then grants authenticated
+CRUD. REVOKE ALL includes MAINTAIN on17; no global default ACL, schema, owner, service,
+column, data or RLS change. No CASCADE. Short lock/statement timeouts; atomic transaction;
+reapplying has identical ACL end state. Existing primary-target atomicity/legacy cleanup
+remain separate debts.
+
+### Owner application gate and rollback
+
+**MIGRATION_READY_NOT_APPLIED.** AGENTS.md §4 assigns Production apply to Owner;
+this task does not separately authorize agent apply. Live excessive grants therefore remain
+until Owner executes/accepts the exact bounded migration. Before apply, run
+[read-only catalog verification](../supabase/verification/day_targets_acl.sql), check no
+new role inheritance/column grants or policy drift, and preserve its output. Execute only
+this migration under normal migration ownership. Do **not** run an unfiltered `supabase db push`:
+older provider005 is still pending and is outside this authorization. Record this migration
+in the approved deployment ledger workflow only after successful execution; do not mark
+unapplied005 as applied.
+
+After apply, repeat the same catalog verification: effective anon privileges all false;
+authenticated CRUD true, other4 false; owner/service ACL and policies identical; unrelated
+ACL/defaults unchanged. Production CRUD tests are not needed to destroy/recreate user rows.
+Actual owner device/JWT smoke can be separately confirmed through normal safe workflow.
+
+On SQL failure the transaction rolls back automatically; no data rollback is needed. Do not
+automatically restore insecure ALL grants as rollback. If a legitimate consumer fails, stop
+rollout, inspect exact required operation/role, and obtain Owner approval for a narrow grant.
+The before snapshot is evidence, not an instruction to reintroduce excessive privileges.
+
+### Regression and follow-up
+
+Validation results: isolated PostgreSQL17 security regression PASS; live effective privilege
+preflight confirms both client roles still have8 grants and no column grants/client role
+inheritance. Migration remains NOT_APPLIED. Existing Flutter D-Day tests were attempted but
+stopped before execution because this local SDK requires native-assets enablement for
+objective_c/pdfium_dart. No SDK/global setting or unrelated package change was made;
+guest/auth client behavior was reviewed statically. Wiki links, migration scope, secret
+scan and frozen/private preservation checks are part of this handoff.
+
+`python3 tool/test_day_targets_acl.py --pg-bin /opt/homebrew/opt/postgresql@17/bin`
+creates a disposable local Unix-socket-only PostgreSQL17 cluster, reproduces default ACLs,
+applies the original and new migrations, and tests owner CRUD, foreign SELECT/UPDATE/DELETE
+isolation, forged-owner INSERT/UPDATE rejection, anon CRUD denial, all4 excess privilege
+removal, service CRUD, unchanged RLS/owner/service/unrelated/default ACLs and idempotency.
+No Production rows or provider calls. Static migration scope and existing Flutter D-Day
+regression are validated separately; no Flutter code/build changes.
+
+**FOLLOW_UP_SECURITY_DEBT:** broad default ACLs for future public tables remain. A read-only
+scan confirms day_targets is the only current public table with these client excess grants.
+Other migrations must explicitly restrict client ACLs. Global defaults and other tables are
+not fixed here; a separate approved security review must decide that policy. Architecture
+health remains HEALTHY_WITH_DEBT; historical Cross Review A is unchanged.
+
 ## Multi D-Day — IMPLEMENTED / Production applied — 2026-09-26
 
 Multi D-Day is now implemented as an owner-scoped event collection

@@ -1,5 +1,18 @@
 # Academic Analytics → Achievement → Admissions Engine Roadmap
 
+## Phased and source-gated — Owner clarification 2026-09-30
+
+Academic/Admission은 CANCELLED/UNKNOWN이 아니라 **PHASED + SOURCE_GATED**다.
+현재는 Essay LAB 우선. Essay LAB 이후/수능 이후 정시 준비 학생을 위한
+**수능·모의 성적 → 대학/학과 → 공개 입결 → 대학별 공식 환산 → 지원 참고 분석**을 시작한다.
+이는 현재 자기채점 foundation과 미래 Intelligence를 구분하는 개발 순서이며 출시 완료 주장이 아니다.
+
+**1월부터** 예비 고2·예비 고3·신입생으로 확대하고, 내신·학기/학년별 성적·과목별 성취·모의고사 변화·장기 추이·희망 대학/학과·교과/학과 가중·고교 보정으로 확장한다. 과거 포괄적 defer/일정 문구보다 이 순서가 우선한다.
+
+실제 학교 Excel sample, 검증된 공식 입결/공식 환산식, 고교 보정 및 과목/학과 가중 자료를 확보한 뒤 persistent schema를 상세 설계한다. Mock score를 official transcript로, 공식 환산식을 LS 예측모델로 취급하지 않는다. 희망 대학/학과는 personalization의 핵심 context로 보존한다.
+
+**ADMISSION ELIGIBILITY CONTEXT**(농어촌 등 특별전형)는 future requirement다. admission year/university/admission type/qualification rule/evidence·verification state에 따라 달라질 수 있으므로 `profiles.is_rural` 같은 단일 boolean으로 구현하지 않는다. 현재 수집/schema/예측 모델 개발 승인은 없다. [분석 context와 재식별 경계](longitudinal-learning-admissions-data-strategy.md#deep-analytics-and-student-context--owner-clarification-2026-09-30)를 함께 따른다.
+
 ## Platform and B2B clarification — 2026-09-20
 
 LAB is a multi-service Web Intelligence / Deep Work Platform; Essay is one module.

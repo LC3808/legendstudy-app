@@ -1,5 +1,17 @@
 # Monetization & In-App Learning Strategy
 
+## Post-audit commercial boundary — 2026-09-30
+
+Owner 재확인: **ESSAY CREDIT ≠ AD REMOVAL ≠ PREMIUM INTELLIGENCE MEMBERSHIP**.
+
+| Product | Meaning / canonical boundary |
+|---|---|
+| Essay Credit / 첨삭권 | 사용량·회차 기반. 무료·개인 구매·Coupon·Voucher·Institution 제공은 기존 credit_accounts/grants/transactions 및 essay_billing_decisions를 재사용한다. 새 wallet/balance 금지 |
+| Ad Removal | **ONE-TIME PURCHASE**. Credit이나 Premium 구독과 별도. profiles boolean/entitlement table 등 저장 방식은 아직 확정하지 않음 |
+| Premium Intelligence | 심층 성적·입결·대학/학과 비교·공식 환산·고교 보정·교과/학과 가중·진학 분석·합격예측의 기간형 서비스 후보. Subscription / Semester Membership / Annual Membership은 검토 가능하며 가격/기간/schema는 미확정 |
+
+**USAGE CREDIT ≠ TIME-BASED SERVICE ENTITLEMENT.** 기관 사용권의 scope/기간/자격과 실제 Essay credit 지급을 분리한다. 기존 paid→included 반복 정책과 lifetime rewrite cap 없음은 유지한다. 이번 작업은 Coupon/IAP/Subscription/Entitlement 구현을 승인하지 않는다. 개발 순서는 [Academic/Admission phased roadmap](roadmap-academic-analytics.md#phased-and-source-gated--owner-clarification-2026-09-30)을 따른다. 아래 과거 상품 예시는 이 의미 경계를 바꾸지 않는다.
+
 > **Essay Credit Coupon/Voucher = Launch P0** (distribution channel into the
 > existing G1 ledger; no separate coupon balance): design in
 > [School History & Coupon/Voucher design](school-history-and-coupon-design-v1.md#part-2--essay-credit-couponvoucher-launch-p0).

@@ -1,5 +1,7 @@
 # Product Scope
 
+Current Owner clarification2026-09-30: [post-audit Product boundaries](product-architecture.md#post-audit-owner-alignment--2026-09-30) and [Essay first → post-CSAT admissions → January expansion](roadmap-academic-analytics.md#phased-and-source-gated--owner-clarification-2026-09-30) take precedence over earlier broad defer/order wording. Future Academic/Admission remains phased and source-gated, not cancelled. No new foundation implementation is authorized.
+
 **Current Owner target2026-09-29:** [2026–2027 canonical roadmap](roadmap-monetization-and-in-app-learning.md#20262027-roadmap-and-monetization--owner-decision-2026-09-29) 우선.
 10월 중순 App+Essay Store 출시·10월 말 안정화 후 Mock/CSAT BETA, 2027 내신/Admissions.
 아래 과거 순서는 이 목표로 대체되며 미구현 기능의 자동 승인/완료를 뜻하지 않는다.

@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-30 — Post-audit alignment / day_targets ACL migration ready
+
+Owner clarified one Profile experience/domain facts, distinct credit/ad removal/period membership,
+post-CSAT→January source-gated Academic/Admission, Deep Analytics/context/re-identification and
+Quality design gates. Live17.6 reconfirmed client ALL incl. MAINTAIN; default-ACL/original-migration
+mechanism reproduced locally. One day_targets-only ACL migration, isolated owner/non-owner/anon/
+service/RLS/idempotency regression PASS. Owner apply policy: NOT_APPLIED; live debt remains.
+No unrelated schema, provider, model-selection or LAB changes. [Security handoff](day-7-dday-storage-proposal.md).
+
 ## 2026-09-30 — Architecture Cross Review A / report only
 
 Fresh read-only catalog:43 tables/1view,67 functions/40 definers;21 remote migrations all match local SQL AST; provider005 remains DRAFT. Full capability/SoT/health/debt inventory records HIGH day_targets client overgrant, missing Human Quality persistence, school/context boundary, analytics writer/doc drift and LAB mock-contract gap. Owner now accepts Gate D strong-answer/CORE0/Positive Learning quality; Primary remains unselected. No code/schema/provider/deploy change. [Report and evidence](platform-architecture-health-review-a.md). New foundations await cross-review.

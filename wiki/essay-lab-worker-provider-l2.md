@@ -1,5 +1,18 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+## Quality Console boundary — Owner clarification 2026-09-30
+
+**Quality Console v0 = NEXT DESIGN, READ-MOSTLY.** 기존 canonical evaluation,
+dimensions, strengths, CORE/NON-CORE, sentence feedback, generated/student rewrite,
+progress, processing telemetry를 읽어 시작한다. 새 evaluation store를 만들지 않고
+기존 invalidation/operator reevaluation 경로를 보존한다. Model evaluation은 Human Quality Judgment가 아니며 owner lifecycle/status RPC도 human verdict가 아니다.
+
+**HUMAN QUALITY PERSISTENCE = DESIGN BEFORE REAL-STUDENT PILOT.** 체계적 Human QA를 위해 evaluation-bound judgment/reviewer/history가 별도로 필요할 수 있으므로 실제 학생 Pilot 전에 설계한다. **GOLDEN SET DB = DEFER.** 이번 정합화로 console/reviewer/schema/authorization를 구현하지 않는다.
+
+권고 후속 gate: LAB server authorization → LAB Essay canonical contract mapping →
+Quality Console v0 design → Human Quality persistence design → real-student Pilot.
+각각 별도 검토/승인 대상이며 Primary model selection, Production worker/AI, Round2 또는 real-student traffic 자동 승인이 아니다.
+
 ## L2-C3 Pilot latency review — 2026-09-30
 
 New Hanyang validated structurally at87.079s: above the existing75s generator limit. With the

@@ -1,5 +1,15 @@
 # Durable Decisions
 
+## 2026-09-30 — Post-audit Owner clarification
+
+Cross Review A/B: HEALTHY_WITH_DEBT; no broad refactor/consolidation. Owner preserves
+[one Profile experience with domain-owned facts](product-architecture.md#post-audit-owner-alignment--2026-09-30),
+[credit / one-time ad removal / period membership separation](roadmap-monetization-and-in-app-learning.md#post-audit-commercial-boundary--2026-09-30),
+[post-CSAT then January phased/source-gated Academic/Admission](roadmap-academic-analytics.md#phased-and-source-gated--owner-clarification-2026-09-30),
+[Deep Analytics and context without automatic anonymity](longitudinal-learning-admissions-data-strategy.md#deep-analytics-and-student-context--owner-clarification-2026-09-30),
+and [read-mostly Quality v0 / pre-student-pilot Human Judgment design / Golden Set DB defer](essay-lab-worker-provider-l2.md#quality-console-boundary--owner-clarification-2026-09-30).
+No new foundation implementation authorized. The separate day_targets ACL correction follows Owner-applied Production policy.
+
 ## 2026-09-30 — Essay learns from success and error
 
 [Positive learning reinforcement](essay-lab-product-v1.md#l2-c2-positive-learning-reinforcement--2026-09-30)

@@ -17,7 +17,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-Architecture / DB cross-domain changes: [Cross Review A — live inventory, debt and foundation freeze](platform-architecture-health-review-a.md). Review findings before new foundation schema.
+Architecture / DB cross-domain changes: [Cross Review A — live inventory, debt and foundation freeze](platform-architecture-health-review-a.md). Review findings before new foundation schema; [Owner alignment](product-architecture.md#post-audit-owner-alignment--2026-09-30) and [bounded ACL fix](day-7-dday-storage-proposal.md) are the current follow-up.
 
 DATABASE / Study / Score / Mock / MY / LAB / Admissions / Essay / Application /
 Outcome / Onboarding / Marketing / Achievement / Notifications / Analytics /
