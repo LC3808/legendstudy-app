@@ -1,6 +1,79 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-C2A private protection repair and resume — 2026-09-30
+
+**Security/Phase A PASS; two approved request attempts consumed. Sookmyung structural PASS;
+Hanyang UNKNOWN_CONSUMED after300071ms with no captured HTTP/raw body. Overall PARTIAL.**
+No retry, retrieval, repair, fallback, Claude or Round2. Unknown means server completion and
+billing remain unknown, not a confirmed failed evaluation or an unused slot. Both existing
+slot identities were NOT_STARTED before resume; no replacement slots created.
+
+### Root cause and repository-owned repair
+
+The original `~/development/legendstudy-app` clone was on old main7e241e8, and the Documents
+primary checkout on old8dd1313. Neither branch's `.gitignore` had `.local/`; the managed
+4bf1e34 development branch did. `core.excludesFile` came from the user config (temporary
+files/`.DS_Store` only); both repositories' info/exclude had comments only. Documents/managed
+share Git common metadata, original is a separate clone; worktreeConfig was enabled only in
+the shared clone and supplied no protecting ignore rule. Thus global/worktree metadata did
+not explain a hidden protection: this was a tracked `.gitignore` branch-content difference.
+
+Minimal repository-owned `/.local/` committed on main asd07671e and cherry-picked into managed
+6e6639d and Documentsb00627d, without switching/resetting branches or copying private files.
+Main repair pushed; development result pushed separately. Documents intentionally remains
+its older checkout plus the security patch; no unrelated history integration/force push.
+All three current checkouts pass repository-controlled check-ignore with global excludes
+disabled, and have0 tracked `.local/**` files. Existing private roots show `!! .local/`;
+Documents has no private root yet but the prospective-path test passes. `.gitignore` protects
+normal adds, not deliberate force-add; the tracked-file preflight remains mandatory before
+future execution or use of older branches. No global/info-exclude dependency was introduced.
+
+### Frozen execution and result
+
+[Sanitized result](../tool/essay_lab/evidence/l2_c2a_result.json),
+[exclusion regressions](../tool/test_private_artifact_exclusion.py),
+[private report renderer](../tool/essay_lab/vnext_owner_review.py).
+Prompt scaffolding-1.3-v3 (25ff799c…98ca0), Contract1.3, Evidence official-evidence-vnext-1;
+all full hashes remain in frozen receipts and sanitized report. Credential metadata passed
+regular-file/no-symlink/owner-only/outside-repository/single-source checks. Contents were read
+only by dispatch, never printed/copied. Both package hashes and original77 files match.
+
+| Existing slot | HTTP / model | Parser / root | CORE | State |
+|---|---|---|---:|---|
+| sookmyung-openai-vnext-l2c2-1 | 200 / gpt-5.6-sol | PASS / PASS | 1 | VALID_UNREVIEWED |
+| hanyang-openai-vnext-l2c2-1 | unknown / unknown | NOT_RUN / NOT_RUN | unknown | UNKNOWN_CONSUMED |
+
+Sookmyung input5682/cache0/output5555/total11237 tokens; latency66865ms. Hanyang token usage
+unknown, latency300071ms. Both actual_cost=NULL; no billing query/estimate. Hanyang transport
+record does not retain the exception type, so no more specific server-side diagnosis is claimed.
+Exclusive STARTED receipts2; requests attempted2; confirmed HTTP responses1. Sookmyung raw
+frozen before strict parse, normalized only on PASS. Hanyang terminal exists but no raw or
+normalized file. No response repair, historical identity reuse or further request occurred.
+
+Private `.local/essay-vnext-l2c2/owner-review.md` provides the full available Sookmyung answer,
+strengths, dimensions, CORE/NON-CORE explanations/actions, sentences/checklist and Owner
+positive/corrective/logic checks; Hanyang includes answer/context/telemetry and explicitly
+unavailable output. Missing WHY/transfer content is not invented by the renderer. A print of
+private evaluation fields was rejected before execution; the safe replacement emitted only
+artifact path/status. No private bodies are in this Wiki/Git.
+
+Post-run107 offline tests PASS (positive12, dispatcher17, Evidence27, scaffolding20,
+parser15, binding8, new exclusion3, report5). Initial report rendering hit the response parser's
+256KiB cap on a larger image request; report reader now verifies frozen request bytes first,
+uses the separate bounded request reader, and has a regression. Provider parser is unchanged.
+Private historical46 + C1 31 hashes preserved; secret/private-body/Git exclusion/Wiki checks
+PASS. Owner OAuth file and Documents `.wrangler/` remain untouched. No Flutter/DB/schema/
+RPC/migration/model registration/Production worker/AI/student traffic change.
+
+HUMAN_QUALITY_REVIEW=PENDING_OWNER_REVIEW for the available result, PRIMARY_MODEL_SELECTED=NO,
+PRIMARY_CANDIDATE=GPT-5.6 Sol. READY_FOR_PRIMARY_MODEL_DECISION=NO because the second outcome
+is unknown and human quality is unreviewed. Strong-answer real calibration, Round2 and
+Production remain closed. STOP; no automatic new slot or provider query.
+
+
 ## L2-C2 vNext validation — 2026-09-30
+
+Historical blocked checkpoint; superseded by the L2-C2A resume above.
 
 **PHASE_A=BLOCKED at final private-protection gate; GPT calls0.** Positive-learning/HQ1–HQ10,
 Contract and both Evidence packages pass offline. New prompt v3 is implemented, but no Phase A

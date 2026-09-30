@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-09-30 — L2-C2A protection PASS / bounded GPT PARTIAL
+
+Repository-owned private ignore repaired on main and both related worktrees;0 tracked private
+files,77 frozen hashes unchanged. Phase A/security PASS, existing unused slots consumed once:
+Sookmyung HTTP200/Contract/root PASS/CORE1; Hanyang300071ms UNKNOWN/no raw, no retry/query.
+Private Owner report created;107 offline tests PASS. GPT candidate only, human review pending,
+Production/DB/AI/traffic unchanged. [Exact record](essay-lab-model-bakeoff-l2-b.md#l2-c2a-private-protection-repair-and-resume--2026-09-30).
+
+
 ## 2026-09-30 — L2-C2 positive learning / execution BLOCKED
 
 Owner positive reinforcement/zero-core/no-forced-defect recorded; immutable prompt v3 added,

@@ -1,5 +1,10 @@
 # Essay LAB Scaffolding Persistence — 1.3
 
+[L2-C2A resume](essay-lab-model-bakeoff-l2-b.md#l2-c2a-private-protection-repair-and-resume--2026-09-30):
+repository private protection repaired; same v3/Contract1.3/C1 Evidence used for two attempts.
+Sookmyung parser/root PASS, Hanyang UNKNOWN_CONSUMED. Human quality pending; no model selection.
+
+
 ## L2-C2 positive learning guard — 2026-09-30
 
 [Owner Product principle](essay-lab-product-v1.md#l2-c2-positive-learning-reinforcement--2026-09-30)
