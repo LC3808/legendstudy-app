@@ -1,5 +1,14 @@
 # Durable Decisions
 
+## 2026-09-30 — Essay learns from success and error
+
+[Positive learning reinforcement](essay-lab-product-v1.md#l2-c2-positive-learning-reinforcement--2026-09-30)
+requires concrete student move→WHY→criterion→reusable strategy, alongside corrective
+where/what/why/how. Strong answers may have zero CORE; no forced defect or optional-polish
+promotion. Examples are not answer keys or perfect-answer guarantees. This is student learning,
+not model RL training; parser validity never certifies educational quality.
+
+
 ## 2026-09-30 — Sentence roots remain mandatory; CORE is a subset
 
 Owner approves [Option A](essay-lab-scaffolding-persistence.md#l2-b4-option-a-implementation--2026-09-30):

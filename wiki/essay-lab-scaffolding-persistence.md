@@ -1,5 +1,30 @@
 # Essay LAB Scaffolding Persistence — 1.3
 
+## L2-C2 positive learning guard — 2026-09-30
+
+[Owner Product principle](essay-lab-product-v1.md#l2-c2-positive-learning-reinforcement--2026-09-30)
+is implemented in new immutable [scaffolding-1.3-v3](../tool/essay_lab/prompts/scaffolding-1.3-v3.txt).
+v2 already allowed zero CORE/preserving strengths, but did not explicitly teach criterion-linked
+WHY and transferable successful reasoning. v3 adds that material requirement and removes the
+summary's presumption of a remaining problem. v2 and historical prompts are unchanged.
+Wire1.3/schema/parser/root invariant/SQL remain unchanged; strengths, dimensions, summary and
+checklist already express positive instruction. Existing local reviewer gate is not bypassed.
+
+[HQ1–HQ10](../tool/essay_lab/fixtures/positive_learning_quality.json) are curated semantic
+examples/anti-examples; [tests](../tool/test_positive_learning.py) also prove zero-core/real
+non-core roots and positive text remain wire-valid. Generic praise/forced criticism/optional
+polish as CORE can be structurally valid yet educationally rejected. No Korean keyword
+classifier or SQL semantic-quality claim. Official examples remain offline calibration only,
+not live answers or a perfect-answer oracle. Real output requires Owner quality review.
+
+Seven preservation answers: (1) new timestamped private evaluation regime; (2) frozen input,
+prompt, request/raw/normalized/terminal retain provenance; (3) no historical overwrite;
+(4) same representative submission, new private attempt identity, no Production student link;
+(5) learning evaluation distinct from model choice/outcomes/billing; (6) private local access,
+no analytics/body publication; (7) synthetic verdicts and model judgments are derivatives,
+never official criteria or observed human-review facts.
+
+
 L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
 prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
 now preserves detail/history while selecting only current priorities at the top. Historical

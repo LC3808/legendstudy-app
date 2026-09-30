@@ -1,5 +1,29 @@
 # Essay LAB v1 Product Specification
 
+## L2-C2 positive learning reinforcement — 2026-09-30
+
+Owner accepts two equally important teaching directions: preserve/reinforce success and
+explain/correct genuine problems. Positive learning reinforcement means **student learning**,
+not model RL training. A strength is not praise decorating criticism: identify the actual
+student move, WHY it works, which question/criterion it satisfies, and a reusable reasoning
+strategy. Examine successful and broken logical connections equally. Concept→application→
+judgment, claim→evidence→interpretation and cause→mechanism→result are useful patterns,
+not a universal essay template. Do not fabricate strengths to fill a quota.
+
+A strong answer can legitimately have **CORE=0**, with zero sentence observations or a useful
+minor NON-CORE observation. Never invent a defect or promote optional polish to avoid zero.
+Summary/dimensions explain where and why requirements were met; checklist can reinforce
+successful transferable strategies. Do not make a successful answer appear defective.
+Example/reference answer != answer key: different valid reasoning and structure are welcome.
+An official example is not automatically perfect either; any criticism needs actual criterion
+and answer evidence. Already successful reasoning/stance should remain during rewriting.
+
+[Prompt v3 / HQ guards](essay-lab-scaffolding-persistence.md#l2-c2-positive-learning-guard--2026-09-30)
+uses existing fields, unchanged Contract1.3. Synthetic quality examples cannot certify real
+model teaching quality. [Bounded execution](essay-lab-model-bakeoff-l2-b.md#l2-c2-vnext-validation--2026-09-30)
+remains separate from Owner educational review and Production model selection.
+
+
 L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
 prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
 now preserves detail/history while selecting only current priorities at the top. Historical

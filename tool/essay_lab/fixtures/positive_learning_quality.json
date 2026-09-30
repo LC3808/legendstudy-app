@@ -1,0 +1,92 @@
+[
+  {
+    "id": "HQ1",
+    "context": "모든 명시 기준 충족, 개념과 사례의 관계가 타당함",
+    "feedback": "핵심 개념으로 사례를 판단한 근거가 분명해요. 이 연결을 유지하세요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "실질 결함이 없는 답안에는 CORE를 만들지 않는다."
+  },
+  {
+    "id": "HQ2",
+    "context": "명시 기준 충족, 의미에 영향 없는 한 표현만 다듬을 가치 있음",
+    "feedback": "핵심 논증은 그대로 유지하고 해당 표현만 선택적으로 다듬으세요.",
+    "core_count": 0,
+    "minor_count": 1,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "진짜 경미 문제는 NON-CORE로 보존한다."
+  },
+  {
+    "id": "HQ3",
+    "context": "공식 예시는 인과 설명, 학생은 같은 기준을 충족하는 비교 논증",
+    "feedback": "동일 비교 기준으로 두 사례를 판단해 요구를 충족했어요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "예시와 다른 타당한 경로는 오류가 아니다."
+  },
+  {
+    "id": "HQ4",
+    "context": "예시는 개념부터, 학생은 사례 관찰 뒤 개념을 적용해 판단함",
+    "feedback": "사례 관찰을 개념과 연결해 판단 근거를 밝혔어요. 이 연결을 다른 사례에서도 활용하세요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "서술 순서 차이만으로 모방을 요구하지 않는다."
+  },
+  {
+    "id": "HQ5",
+    "context": "합성 기준: 같은 축으로 비교하고 판단의 근거를 설명",
+    "feedback": "두 집단에 같은 비교 기준을 적용하고 차이의 이유를 설명했어요. 공정한 비교 요구를 충족한 방식이므로 다음 비교에서도 기준을 먼저 확인하세요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "학생 행동과 기준 충족 이유를 연결한다."
+  },
+  {
+    "id": "HQ6",
+    "context": "학생이 원인에서 중간 기제를 거쳐 결과를 설명",
+    "feedback": "중간 과정까지 설명하여 결과가 생긴 이유가 드러나요. 다음 인과 문제에서도 원인과 결과 사이 작동 과정을 확인하세요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "성공한 논리 연결의 재사용 전략을 설명한다."
+  },
+  {
+    "id": "HQ7",
+    "context": "구체적인 비교 논증이 있으나 장점은 칭찬뿐",
+    "feedback": "논리적입니다. 잘 썼습니다.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "REJECT",
+    "rationale": "무엇이 왜 효과적인지 배우는 정보가 없다. 구조 PASS와 별개."
+  },
+  {
+    "id": "HQ8",
+    "context": "모든 필수 기준 충족; 평가자는 비판이 반드시 있어야 한다고 가정",
+    "feedback": "문제가 없더라도 첨삭이므로 별도 결론을 추가하세요.",
+    "core_count": 1,
+    "minor_count": 0,
+    "expected_human_verdict": "REJECT",
+    "rationale": "빈 CORE를 피하려고 기준에 없는 결함을 발명했다."
+  },
+  {
+    "id": "HQ9",
+    "context": "논증은 충분하며 선택적 간결화만 존재",
+    "feedback": "논증보다 가장 먼저 같은 단어의 반복부터 고치세요.",
+    "core_count": 1,
+    "minor_count": 1,
+    "expected_human_verdict": "REJECT",
+    "rationale": "선택적 polish를 빈 CORE 때문에 승격했다."
+  },
+  {
+    "id": "HQ10",
+    "context": "문장 의미가 정확하고 유익한 국소 교정이 없음",
+    "feedback": "주장과 근거가 정확히 연결되어 의미가 분명해요. 이 연결을 유지하세요.",
+    "core_count": 0,
+    "minor_count": 0,
+    "expected_human_verdict": "ACCEPT",
+    "rationale": "문장 관측 수를 채우지 않는다."
+  }
+]

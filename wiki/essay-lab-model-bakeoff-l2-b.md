@@ -1,5 +1,57 @@
 # Essay LAB L2-B — model bake-off preparation
 
+## L2-C2 vNext validation — 2026-09-30
+
+**PHASE_A=BLOCKED at final private-protection gate; GPT calls0.** Positive-learning/HQ1–HQ10,
+Contract and both Evidence packages pass offline. New prompt v3 is implemented, but no Phase A
+PASS receipt, prepared execution bundle, STARTED receipt, provider output or Owner output-review
+artifact was created. Neither slot was consumed. Human output review is NOT_APPLICABLE.
+
+Exact blocker: original `~/development/legendstudy-app` is on `main` at7e241e8. Its historical
+`.local/essay-bakeoff-l2b/` is untracked but `git check-ignore` exits1. Current managed worktree's
+`.local/` is correctly ignored. Being untracked is NOT sufficient private-artifact protection.
+Owner's explicit STOP condition applies; original checkout/excludes were not changed. Restore
+historical private exclusion and review before a separately resumed execution. No credential
+contents were inspected; no billing/model/credential probe. Existing46 and C1's31 files match
+pre-task hashes. Original OpenAI429/Claude/GPT histories and v2 bytes remain unchanged.
+
+[Sanitized Phase A outcome](../tool/essay_lab/evidence/l2_c2_phase_a_result.json): positive12,
+new dispatcher17, Evidence27, scaffolding20, parser15, binding8 =99 PASS. Historical bakeoff15,
+Pilot9, dispatcher21 =45 PASS with hash-identical temporary input fixtures in the protected
+worktree. Direct use of the original checkout first exposed16 dispatcher setup errors from its
+missing ignore protection; no guard was mocked/weakened. SQL static11 + review19 PASS;
+Data Foundation/evidence26 PASS,10 unavailable private SKKU fixtures skipped. Initial static
+module-path/pglast import setup errors resolved using the existing isolated venv/PYTHONPATH.
+No Flutter change/build. No new regression found in tested scope; live adapter unverified.
+
+
+Owner authorizes Phase A positive-learning offline guard, then at most two new OpenAI
+GPT-5.6 Sol requests (Sookmyung/Hanyang original answers), one per case. No retries, repair,
+fallback, Claude, strong-answer real call or Round2. No real structural result exists; educational output review is NOT_APPLICABLE until execution.
+
+Version decision: scaffolding-1.3-v3 adds explicit positive learning/transfer/no-forced-defect
+semantics to immutable v2; output Contract1.3 and official-evidence-vnext-1 unchanged.
+[Product owner](essay-lab-product-v1.md#l2-c2-positive-learning-reinforcement--2026-09-30),
+[offline guards](essay-lab-scaffolding-persistence.md#l2-c2-positive-learning-guard--2026-09-30),
+[narrow dispatcher](../tool/essay_lab/vnext_validation.py). Phase receipt pins reviewed code,
+tests, prompt and source manifests before any STARTED receipt. New private slot identities:
+`sookmyung-openai-vnext-l2c2-1`, `hanyang-openai-vnext-l2c2-1`.
+
+Each request binds case/answer/package/catalog/prompt/schema/policy/regime and ordered image
+hashes. Only blind question-scoped official evidence is materialized; examples, old evaluations
+and Owner model preference are absent. Corrected transcription is the quote authority; source
+manuscripts remain archived, Unicode counts do not become official length judgments. Official
+PDF-derived question/passage/rubric images accompany text as needed. No source path or reviewer
+annotations are sent. Reviewed Responses transport shape: store:false, strict schema, high
+reasoning, max_output_tokens12000, timeout300s, no tools/redirect/retry. Actual cost stays NULL
+without billing data. Credential-file mechanism never emits key contents.
+
+Separate exclusive started tombstones survive result deletion; raw is frozen before parse,
+normalized saved only on strict PASS. Unknown outcome/model mismatch/credential echo stops
+further dispatch. Historical Round1/supplemental and C1 files remain immutable. Production
+registry/DB/worker/AI/student rollout unchanged; GPT candidate only, not selected.
+
+
 L2-C1: [Evidence vNext representative packages](essay-lab-data-foundation.md#l2-c1-official-evidence-vnext--2026-09-30)
 prepared offline; [CORE-first overview](essay-lab-ui-ux-v1.md#l2-c1-core-first-overview--2026-09-30)
 now preserves detail/history while selecting only current priorities at the top. Historical
