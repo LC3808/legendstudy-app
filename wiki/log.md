@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-09-30 — L2-B2S new supplemental GPT slots
+
+- [Canonical execution](essay-lab-model-bakeoff-l2-b.md#l2-b2s-supplemental-frozen-gpt-comparison--2026-09-30-current):
+  two new sequential GPT requests, HTTP200/model match but SENTENCE_ROOT parser rejection.
+  Original39 files/Claude outputs/429 history preserved; no retry/fallback/repair/probe.
+- Private new comparison includes Claude validated results + GPT UNVALIDATED raw full text;
+  input limitations isolated from model errors, quality pending, no winner. Synthetic68 PASS.
+- Minimal registry/storage identity extension only; request semantics unchanged. No DB/RPC/
+  migration/Production/Anthropic/Round2/ingestion. Next: Owner human review.
+
 ## 2026-09-30 — Official Essay evidence source strategy (documentation)
 
 - [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30): verified Owner10yr+ archive first,2026 separate acquisition target;
@@ -10,7 +20,7 @@
 
 ## 2026-09-30 — L2-B2 authorized private Round1 execution
 
-- [Execution record](essay-lab-model-bakeoff-l2-b.md#l2-b2-round1-execution--2026-09-30-current):
+- [Execution record](essay-lab-model-bakeoff-l2-b.md#l2-b2-round1-execution--2026-09-30-historical-preserved):
   exactly4 sequential requests; Claude2 parser PASS, OpenAI2 HTTP429 insufficient_quota.
 - Four immutable STARTED/raw/terminal sets, two normalized results and private full Owner
   comparison frozen. No retries/fallback/repair; quality pending; no model selection.

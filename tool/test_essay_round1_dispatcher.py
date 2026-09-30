@@ -268,6 +268,24 @@ class Dispatcher(unittest.TestCase):
                          [i['source']['data'] for i in y['messages'][0]['content'][1:]])
         self.assertIs(x['store'],False);self.assertNotIn('tools',x);self.assertNotIn('tools',y)
 
+    def test_supplemental_registry_and_separation(self):
+        self.assertEqual(len(d.SUPPLEMENTAL),2)
+        original_fake=self.fixture();original=self.run_slot(fake=original_fake);before=(self.root/'round1/sookmyung-openai/terminal.json').read_bytes()
+        fake=self.fixture();slot='sookmyung-openai-supplemental-1'
+        env={d.CREDENTIAL_NAMES['openai']:KEY}
+        r=d._run(self.root,slot,env,d.OfficialHTTP(fake),synthetic=True,supplemental=True)
+        self.assertEqual(r['parser_status'],'PASS');self.assertEqual(len(fake.calls),1)
+        self.assertEqual(original_fake.calls[0][2],fake.calls[0][2])
+        self.assertEqual(before,(self.root/'round1/sookmyung-openai/terminal.json').read_bytes())
+        marker=json.loads(d.read_private(self.root/'supplemental-started'/f'{slot}.json'))
+        self.assertEqual(marker['original_round1_slot'],'sookmyung-openai')
+        with self.assertRaises(d.Invalid):d._run(self.root,slot,env,d.OfficialHTTP(fake),synthetic=True,supplemental=True)
+        for bad in ['sookmyung-openai','sookmyung-anthropic','hanyang-openai-supplemental-2']:
+            with self.assertRaises(d.Invalid):d._run(self.root,bad,env,d.OfficialHTTP(fake),synthetic=True,supplemental=True)
+        timeout=self.fixture(error=TimeoutError())
+        r=d._run(self.root,'hanyang-openai-supplemental-1',env,d.OfficialHTTP(timeout),synthetic=True,supplemental=True)
+        self.assertEqual(r['state'],'UNKNOWN_CONSUMED_FOR_SUPPLEMENTAL')
+
     def test_single_http_object_not_reusable(self):
         fake=FakeHTTPS();http=d.OfficialHTTP(fake)
         http.send('openai','https://api.openai.com/v1/responses',b'{}',{})

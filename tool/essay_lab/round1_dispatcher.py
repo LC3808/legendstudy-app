@@ -31,6 +31,10 @@ SLOTS = {
 }
 ENDPOINTS = {'openai': ('api.openai.com', '/v1/responses'),
              'anthropic': ('api.anthropic.com', '/v1/messages')}
+SUPPLEMENTAL = {
+    'sookmyung-openai-supplemental-1': 'sookmyung-openai',
+    'hanyang-openai-supplemental-1': 'hanyang-openai',
+}
 MAX_RESPONSE = 262144
 
 
@@ -185,13 +189,14 @@ class OfficialHTTP:
 
 
 def slot_state(root, slot):
-    require(slot in SLOTS, 'SLOT_NOT_ALLOWED')
-    marker = root/'round1-started'/f'{slot}.json'
-    result = root/'round1'/slot/'terminal.json'
+    require(slot in SLOTS or slot in SUPPLEMENTAL, 'SLOT_NOT_ALLOWED')
+    supplemental = slot in SUPPLEMENTAL
+    marker = root/('supplemental-started' if supplemental else 'round1-started')/f'{slot}.json'
+    result = root/('supplemental-openai' if supplemental else 'round1')/slot/'terminal.json'
     if marker.exists() or marker.is_symlink():
         if result.is_file():
             return strict_json(read_private(result))['state']
-        return 'UNKNOWN_CONSUMED_FOR_ROUND1'
+        return 'UNKNOWN_CONSUMED_FOR_SUPPLEMENTAL' if supplemental else 'UNKNOWN_CONSUMED_FOR_ROUND1'
     require(not result.parent.exists(), 'ORPHAN_SLOT_REQUIRES_REVIEW')
     return 'NOT_STARTED'
 
@@ -215,12 +220,13 @@ def metadata(data, binding, elapsed):
     return out
 
 
-def _run(root, slot, environment, http, *, synthetic):
+def _run(root, slot, environment, http, *, synthetic, supplemental=False):
+    require(slot in (SUPPLEMENTAL if supplemental else SLOTS), 'SLOT_NOT_ALLOWED')
     if not synthetic: real_gate()
     else:
         require(http.synthetic_only and root.absolute().as_posix().startswith('/private/tmp/essay-l2b1-test'),
                 'ISOLATED_SYNTHETIC_ROOT_REQUIRED')
-    value, images, claim, binding, regime, manifest = verify_frozen(root, slot)
+    value, images, claim, binding, regime, manifest = verify_frozen(root, SUPPLEMENTAL[slot] if supplemental else slot)
     require(slot_state(root, slot) == 'NOT_STARTED', 'SLOT_ALREADY_CONSUMED')
     key = credential(binding['provider'], environment)
     cls = OpenAIPilot if binding['provider'] == 'openai' else AnthropicPilot
@@ -229,10 +235,11 @@ def _run(root, slot, environment, http, *, synthetic):
     require(adapter.binding == binding and payload['model'] == binding['model'], 'MODEL_BINDING')
     host, path = ENDPOINTS[binding['provider']]
     require(adapter.endpoint == 'https://'+host+path, 'ENDPOINT_NOT_ALLOWED')
-    marker_dir = child_dir(root, 'round1-started')
-    slots_dir = child_dir(root, 'round1')
+    marker_dir = child_dir(root, 'supplemental-started' if supplemental else 'round1-started')
+    slots_dir = child_dir(root, 'supplemental-openai' if supplemental else 'round1')
     # Permanent separate tombstone. O_EXCL is the process/concurrency boundary.
-    freeze(marker_dir/f'{slot}.json', encoded(dict(state='STARTED_CONSUMED_FOR_ROUND1',slot=slot,
+    freeze(marker_dir/f'{slot}.json', encoded(dict(state='STARTED_CONSUMED_FOR_SUPPLEMENTAL' if supplemental else 'STARTED_CONSUMED_FOR_ROUND1',slot=slot,
+           original_round1_slot=SUPPLEMENTAL.get(slot),
            started_at=now(), policy=binding, regime=regime, package_sha256=manifest['package_sha256'],
            policy_sha256=digest(binding), prompt_sha256=sha256(PILOT_PROMPT.encode()).hexdigest(),
            schema_sha256=digest(output_schema()), case_manifest_sha256=digest(manifest),
@@ -286,16 +293,25 @@ def _run(root, slot, environment, http, *, synthetic):
         # Even KeyboardInterrupt/write failure is UNKNOWN, never retry/release the marker.
         record.update(state='UNKNOWN_CONSUMED_FOR_ROUND1', request_outcome='TRANSPORT_OR_LOCAL_OUTCOME_UNKNOWN')
     record['telemetry']['latency_ms'] = round((time.monotonic()-start)*1000)
+    if supplemental: record['state'] = record['state'].replace('FOR_ROUND1','FOR_SUPPLEMENTAL')
     record['completed_at'] = now()
     try: freeze(target/'terminal.json', encoded(record))
     except BaseException:
-        return dict(slot=slot, state='UNKNOWN_CONSUMED_FOR_ROUND1', terminal_saved=False)
+        return dict(slot=slot, state='UNKNOWN_CONSUMED_FOR_SUPPLEMENTAL' if supplemental else 'UNKNOWN_CONSUMED_FOR_ROUND1', terminal_saved=False)
     return record
 
 
 def dispatch(slot):
     real_gate()  # Before environment access, file mutation, socket or credential inspection.
     return _run(PRIVATE, slot, os.environ, OfficialHTTP(), synthetic=False)
+
+
+def dispatch_supplemental(slot):
+    real_gate()
+    require(slot in SUPPLEMENTAL, 'SUPPLEMENTAL_SLOT_NOT_ALLOWED')
+    for prior in list(SUPPLEMENTAL)[:list(SUPPLEMENTAL).index(slot)]:
+        require((PRIVATE/'supplemental-openai'/prior/'terminal.json').is_file(), 'SEQUENTIAL_ONLY')
+    return _run(PRIVATE, slot, os.environ, OfficialHTTP(), synthetic=False, supplemental=True)
 
 
 def run_synthetic(root, slot, environment, connection_factory):

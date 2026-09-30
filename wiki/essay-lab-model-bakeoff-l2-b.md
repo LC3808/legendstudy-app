@@ -2,7 +2,60 @@
 
 Owner Human Review update2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) records Hanyang source/transcription/non-criteria findings and next-version prompt guidance. It does not rescore frozen runs or select a model. Any separately authorized GPT Supplemental must preserve Claude’s frozen conditions; improvements belong to a different version/experiment.
 
-## L2-B2 Round1 execution — 2026-09-30 (current)
+## L2-B2S supplemental frozen GPT comparison — 2026-09-30 (current)
+
+Owner explicitly authorized **two NEW supplemental slots**, not retry/reset of the original
+Round1 OpenAI429 slots. [Sanitized evidence](../tool/essay_lab/evidence/l2_b2s_execution_result.json).
+**Two requests, two terminal failures at strict parser; no retry/fallback/repair/probe.**
+Both provider responses were HTTP200, exact `gpt-5.6-sol`, completion `completed`.
+**CONTRACT_VALIDATION=FAIL; QUALITY_REVIEW=PENDING_OWNER_REVIEW; no model selected.**
+
+| Supplemental slot | HTTP / parser | Input / cached / output / total tokens | Latency ms |
+|---|---|---|---|
+| sookmyung-openai-supplemental-1 | 200 / REJECTED: SENTENCE_ROOT | 8511 / 0 / 6221 / 14732 | 70705 |
+| hanyang-openai-supplemental-1 | 200 / REJECTED: SENTENCE_ROOT | 17753 / 1047 / 6507 / 24260 | 83944 |
+
+Local diagnostic, no network: Sookmyung's2 sentence observations and Hanyang's1 observation
+reference issue keys absent from their respective improvement arrays. No linking repair,
+field stripping, parser relaxation or normalized output was performed. Raw complete model
+text is available for human inspection but is **not a contract-valid evaluation**. Actual
+cost/currency and list-cost estimates remain NULL; no billing query or rate calculation.
+
+Before execution, all39 existing private files matched the prior accepted preservation
+manifest; original22 input files also passed committed L2-B pins, and raw/normalized artifacts
+retain their accepted hashes. Approved OpenAI file safety checked without logging/copying its
+value. Only the two-slot identity registry/path separation and original-slot reference were
+added to the existing dispatcher. Same request builder/parser code, frozen package/answer/
+transcription/evidence/images/order/prompt/schema/reasoning configuration as earlier comparison.
+68 synthetic regressions passed before execution. Both calls ran sequentially, one each.
+
+Supplemental exclusive STARTED records live under `supplemental-started/`, terminal/raw under
+`supplemental-openai/<slot>/`; original `round1/`, STARTED and comparison documents are unchanged.
+No Anthropic calls. Process-local named Owner gate was used; checked-in real gate remains closed.
+Each supplemental slot is consumed, including failure/UNKNOWN semantics; no retry authorization
+is implied. Frozen request semantics did not change before/between/after these two calls.
+
+New private Owner artifact: `.local/essay-bakeoff-l2b/round1-owner-comparison-supplemental-gpt.md`.
+Original answers, existing validated Claude results, explicitly UNVALIDATED full GPT raw text,
+original official evidence and unfilled16-dimension human review sheets are included. The
+original comparison file is preserved. **MODEL_COMPARISON_DATASET=INCOMPLETE** under strict
+validated-output criteria; both GPT raw texts can still be read, without claiming parser PASS.
+
+Post-generation review warns about transcription uncertainty, omitted multiple examples,
+length-vs-scoring and non-criteria limitations; distinguish MODEL_ERROR from INPUT_PACKAGE_LIMITATION.
+Those Owner discoveries, core1–2 refinement and archive documents were never sent to GPT.
+Sookmyung teacher-blame/participation/clarity and Hanyang official-issue/stance/conclusion/
+length checks remain human-only pending gates. Do not penalize unavailable information;
+assess any opportunity offered by identical image input under the original frozen contract.
+
+Post-run68 synthetic regressions, Wiki/diff/secret scans and original39 preservation PASS.
+Production DB writes0; DB/migration/RPC/G1 unchanged; no student traffic, worker activation,
+Round2, model choice, vNext prompt application or archive ingestion. Pilot limits are not
+Product revision limits. Official Evidence Ingestion remains DESIGN_READY/IMPLEMENTATION_NOT_STARTED.
+**NEXT:** Owner reads both model outputs and contract failures → explicitly decides model
+selection or any bounded follow-up. No additional model call is authorized by this report.
+
+## L2-B2 Round1 execution — 2026-09-30 (historical, preserved)
 
 Owner accepted L2-B1 and explicitly authorized four sequential private provider requests.
 **All four slots terminal; total requests4, retries0, fallback0, repair0, UNKNOWN0.**
