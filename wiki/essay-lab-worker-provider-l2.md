@@ -1,5 +1,7 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) governs future packages: raw PDF truth, separate scoring rules/non-criteria and reviewed transcription. Current L2-B2 prompt/evidence/outputs stay frozen; no worker change.
+
 > Current follow-up: [L2-B2 private Round1](essay-lab-model-bakeoff-l2-b.md): four calls ended;
 > Claude2 parser PASS, OpenAI2 quota failures; human quality review pending, no model selected.
 > No retries/fallback/repair or Round2. Checked-in execution gate remains closed.

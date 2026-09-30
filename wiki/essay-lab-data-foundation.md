@@ -362,6 +362,135 @@ Promotion live READ ONLY check: all3 target relations remain absent; existing
 resources/clock prerequisite present. No DDL, INSERT, UPDATE or DELETE executed.
 
 
+## Official evidence archive strategy — Owner decision 2026-09-30
+
+**Canonical source/ingestion architecture decision; documentation only.** Owner reports
+holding more than10 years of historical university essay PDFs, including originals of
+materials previously posted on legendstudy.com; **2026학년도 is excluded** from that archive.
+This is an Owner inventory statement, not a file-by-file provenance or completeness audit.
+No archive file was opened, ingested, moved or copied in this task.
+
+### Source priority and immutable pipeline
+
+1. Owner-held university official PDF originals, after publisher/year/type/provenance verification.
+2. Latest official documents obtained directly from university websites.
+3. Web research to verify original existence/version or identify missing material.
+4. Blogs/secondary material for discovery/reference only.
+
+Custody by Owner does not establish official origin. Do not repeatedly search/download/rebuild
+originals already in the repository or supplied by Owner. Preserve university publisher,
+admission year versus publication year, document type, acquisition context and verification
+state. The official-source URL and resource delivery URL distinction below still applies;
+a missing exact source URL is a review item, never a fabricated URL or blog attribution.
+
+**Raw official PDF → file identity/hash → page/source locator → structured extraction →
+human/review validation → canonical evidence → frozen evaluation package → AI evaluation.**
+The raw PDF remains the Source of Truth; extracted text is a versioned derivative and never
+replaces it. This is an Official Evidence Knowledge Base, not PDF fine-tuning. Select verified
+question-specific evidence at evaluation time; do not send the entire archive to a model.
+
+Existing universities/exams/resources/exam mappings/question evidence/criterion identities
+remain reuse targets, not duplicate masters. Earlier blog lineage describes existing ingested
+records, not a requirement to re-scrape blogs or invent blog posts for Owner archives. Exact
+direct-PDF linkage, schema coverage and role/version constraints require later ingestion
+architecture review; this decision changes no current enum, table, locator or DB row.
+
+### Evidence distinctions for the next architecture review
+
+| Proposed evidence type (conceptual, not a deployed enum) | Meaning |
+|---|---|
+| question / passage | Task and source passages |
+| exam_intent | Official purpose and intended competencies |
+| scoring_criteria / scoring_weights | Normative requirements versus explicit allocation |
+| length_requirement | Wording/length requested on the question paper |
+| length_scoring_rule | Separately verified official tolerance/deduction/scoring treatment |
+| evaluation_notes | Official evaluation guidance and caveats |
+| explicit_non_criteria | Features explicitly excluded from grading or prohibited in judgment |
+| official_example_answer | Official illustrative answer; calibration, not a required template |
+| accepted_student_example | Officially supplied accepted/excellent student answer; calibration |
+| other official guidance | Other verified directions, classified with review |
+
+Question length and scoring treatment must never be collapsed. A question saying1,200
+characters does not establish its deduction threshold or tolerance. Store/report an actual
+scoring rule only after exact official-source verification; no numeric tolerance is invented here.
+Positive requirements and explicit non-criteria must both reach future evidence packages.
+Absence of a positive requirement alone is not an explicit prohibition: preserve source scope.
+
+Preserve **all** official examples when several exist, with separate identity/locator and
+provenance. Official rubric is normative; accepted/excellent examples are calibration evidence.
+They demonstrate multiple successful arguments and expressions, not one correct template.
+Do not grade wording/structure similarity to an example. Preservation in the Knowledge Base
+is separate from disclosure to a blind evaluation: reference answers remain excluded from
+current frozen provider input; calibration/reviewer access needs a separately reviewed policy.
+
+### Owner Human Review findings and next version
+
+Owner's L2-B2 Claude Human Review reports the following Hanyang findings. They are recorded
+as Owner findings, not a new Codex inspection of official PDFs or a retroactive Pilot rescore:
+
+- Prior automated/web-based acquisition was incomplete; two accepted examples existed but
+  were not sufficiently represented in the earlier package.
+- A readable portion of the manuscript had been transcribed as unreadable. Original and
+  transcription uncertainty can disagree; the transcription is not the higher authority.
+- The question's1,200-character instruction and separate official length/scoring treatment
+  require distinct evidence.
+- Official guidance excluded introduction/body/conclusion form from evaluation, yet Claude
+  criticized missing conclusion as a structural weakness. Explicit non-criteria were needed.
+
+For the **next prompt/evidence/contract version**, strongly prefer1–2 core tasks; use3 only
+when independent and necessary in the same rewrite. Zero remains valid for a strong answer.
+Retain other findings in detailed diagnosis/history. Minor spelling/spacing/repetition must
+not outrank central task/content deficits. Do not criticize absence of a conclusion itself
+when official criteria do not require that form. First recognize a student's officially
+permitted evaluation direction, then distinguish insufficient application/argument support.
+Never turn uncertain reading into a student grammar/logic error. This is a review direction,
+not a changed parser cap or an executed prompt upgrade.
+
+### Transcription and correction history
+
+Preserve original PDF/image and transcription together. Use an unreadable marker only where
+reasonable reading is actually difficult; faint handwriting, low OCR confidence or model
+hesitation alone is insufficient. Where original and transcript disagree, review the original.
+Plan extraction method/version, confidence, review state and linked correction history.
+Corrections must retain the original extraction and its evaluation-package lineage; never
+silently overwrite old transcription or pretend a historical model saw corrected input.
+Confidence is diagnostic metadata, not proof of a student error or source truth.
+
+### Historical batches and yearly updates
+
+Later historical ingestion uses bounded Owner-archive batches: university → admission year →
+admission track/division → exam → question → question/passages → intent → criteria → weights →
+length/scoring rules → official/accepted examples → other guidance. Validate duplicate files,
+revisions, missing coverage and misclassification at each stage before canonical admission.
+
+For new yearly data: official university sites → discovery candidates → compare with existing
+dataset → new/changed candidates → extraction → validation/review → approved canonical
+registration. A web agent assists discovery/updates; it does not manufacture source truth.
+2026학년도 is a separate latest-data acquisition target, using the same provenance/evidence
+contract. No acquisition or scheduling is authorized now. Archive-first reuse reduces agent
+work, repeat collection and web cost; it never removes validation or rights/privacy review.
+
+### Frozen comparison and longitudinal boundary
+
+Current L2-B2 packages, prompts, transcriptions, images and Claude outputs remain immutable.
+Any later **separately authorized** GPT Supplemental must use the same frozen conditions,
+even where this review identifies defects. Corrected evidence/prompt belongs to a new version
+and a separate improvement experiment. This document does not authorize Supplemental calls,
+reset consumed slots, select a model or change billing/revision limits.
+
+Seven preservation answers: (1) acquisition/extraction/review/correction are distinct dated
+facts; (2) raw hashes/locators/context preserve traceability; (3) retain prior extraction and
+package versions rather than silent UPDATE; (4) official evidence does not create a student
+identity, while private attempt identity remains unchanged; (5) source/calibration evidence
+is not a student's Learning/Decision/Outcome fact or marketing telemetry; (6) source rights,
+example-answer privacy, access and retention require review—possession is not clearance;
+(7) extraction/confidence/quality judgments are derivatives, not original truth. No student
+body is copied into this Wiki or marketing properties.
+
+Next: resolve OpenAI quota → separately authorized frozen GPT comparison → Owner model
+comparison → primary model decision → Official Evidence Ingestion implementation planning.
+No ingestion, code/DB/migration/Production change or AI/provider call in this documentation task.
+
 ## Official Source Policy — Owner decision 2026-09-28
 
 University admission offices / official university archives are the canonical

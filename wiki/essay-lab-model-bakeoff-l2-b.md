@@ -1,5 +1,7 @@
 # Essay LAB L2-B — model bake-off preparation
 
+Owner Human Review update2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) records Hanyang source/transcription/non-criteria findings and next-version prompt guidance. It does not rescore frozen runs or select a model. Any separately authorized GPT Supplemental must preserve Claude’s frozen conditions; improvements belong to a different version/experiment.
+
 ## L2-B2 Round1 execution — 2026-09-30 (current)
 
 Owner accepted L2-B1 and explicitly authorized four sequential private provider requests.

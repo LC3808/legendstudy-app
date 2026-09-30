@@ -1,5 +1,7 @@
 # Student Analytics-ready Data Architecture
 
+Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) defines versioned source/extraction/correction lineage, normative versus calibration evidence and seven preservation answers. Reuse existing identities; exact evidence enum/schema is deferred, no migration.
+
 
 2026-09-29 [G1 Credit extension](essay-lab-server-transactions.md#g1-credit-commercial-core--2026-09-29):
 KEEP19, one session policy column, existing financial entities reused; isolated runtime PASS,

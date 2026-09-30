@@ -2,6 +2,14 @@
 
 This file records long-lived product and architecture decisions. Routine progress belongs in `log.md` and `current-status.md`.
 
+## 2026-09-30 — Archive-first official Essay evidence
+
+[Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) is canonical: verified Owner-held university PDFs precede web reacquisition;
+raw PDF remains source truth, rubric is normative and multiple examples are calibration.
+Explicit non-criteria/scoring-length rules and versioned transcription review are required
+future evidence distinctions. Current frozen bake-off stays unchanged; next prompt/version
+prefers1–2 core tasks. Documentation decision only, no ingestion/schema/AI authorization.
+
 ## 2026-09-12 — Project independence
 
 LegendStudy is fully separate from Muselry, including repository, codebase, Supabase, secrets, OAuth setup, identifiers, wiki, and deployment.

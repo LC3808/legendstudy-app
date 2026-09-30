@@ -1,5 +1,7 @@
 # LegendStudy Longitudinal Learning and Admissions Data Strategy
 
+Essay source follow-up2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) applies the seven preservation questions to raw PDF, extraction and correction history. Official/calibration evidence stays separate from private student learning facts and marketing telemetry.
+
 **Importance: HIGH / CANONICAL PRODUCT STRATEGY**
 **Owner decision: 2026-09-24; history-model clarification: 2026-09-29 · Long-term architecture: PLANNED · No new implementation authorization**
 

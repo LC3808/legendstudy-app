@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-09-30 — Official Essay evidence source strategy (documentation)
+
+- [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30): verified Owner10yr+ archive first,2026 separate acquisition target;
+  raw PDF truth, distinct scoring/non-criteria/calibration, versioned transcription corrections.
+- Owner Human Review findings recorded without student quotes; next-version core1–2 preference.
+  Frozen comparison unchanged; no PDF handling/ingestion/code/DB/AI or Supplemental execution.
+
+
 ## 2026-09-30 — L2-B2 authorized private Round1 execution
 
 - [Execution record](essay-lab-model-bakeoff-l2-b.md#l2-b2-round1-execution--2026-09-30-current):

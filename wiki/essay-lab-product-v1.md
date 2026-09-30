@@ -1,5 +1,7 @@
 # Essay LAB v1 Product Specification
 
+Owner2026-09-30: [Official evidence archive strategy](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30) owns archive-first source policy and Human Review findings. Prefer1–2 core tasks in the next prompt version; retain3 only when necessary. Current frozen comparison and deployed contract are unchanged.
+
 
 2026-09-29 implementation update: [Scaffolding persistence](essay-lab-scaffolding-persistence.md)
 implements the approved1.3 direction with one nullable column and versioned RPC dispatch.
