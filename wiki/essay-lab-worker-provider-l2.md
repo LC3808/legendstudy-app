@@ -1,5 +1,193 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+## LSA-2C shared Quality authorization — 2026-10-01
+
+**MIGRATION_READY_NOT_APPLIED.** Quality Console is a future **WEB operator surface** at
+`lab.legendstudy.com/ql`; authorization is the **shared Supabase backend**, canonically owned
+by App migrations. No Flutter/LAB UI or adapter, Production SQL/ledger write, provider005,
+provider call, model selection, Round2, Human Quality persistence or live student traffic.
+[Owner application/security/rollback package](../supabase/verification/quality_authorization/README.md),
+[canonical SQL](../supabase/migrations/20261001000100_quality_read_authorization.sql),
+[isolated T1–T15](../tool/test_quality_authorization.py),
+[sanitized evidence](../supabase/verification/quality_authorization/validation.json).
+
+### Canonical reconciliation and cross-review
+
+The development checkout `~/development/legendstudy-app` was old `main` at d07671e with only
+one initial migration. Canonical `codex/essay-scaffolding-vnext` worktree at
+`~/.codex/worktrees/essay-scaffolding-vnext/레전드스터디 앱` had **23 local / 21 remote** before
+this task; **24 local / 21 remote** after preparing this migration. All21 remote statement
+ASTs match their local SQL (parser source positions ignored). This checkout difference
+explains Claude's one-file observation; no migration restoration/replay was necessary.
+Provider005 remains local-only, not applied. `20260930000100_day_targets_least_privilege`
+remains SQL-effect verified (anon NONE/auth CRUD/RLS preserved) but ledger-untracked;
+LSA-2C does not repair it. New `20261001000100` conflicts with neither pending version.
+
+Read-only LAB sources at `claude/intelligence-school-architecture`/7bd9f2d:
+`docs/architecture/ARCHITECTURE_BASELINE_V1.md`, `LSA-1_SERVER_AUTHORIZATION.md`,
+`LSA-2_SERVER_AUTH_IMPLEMENTATION.md`, and `lsa2/01…04`, shim and test harness.
+No LAB file/branch merge. Draft differences resolved:
+
+- timestamp-only pagination could skip equal-time cases: use a paired timestamp/UUID cursor;
+- explicit projection adds canonical sentence/CORE/history mapping, full answer retained;
+- list result changes from rows to a versioned envelope; LAB must adopt the final DTO below;
+- inherited default grants cleared on each **new** object, including service_role excess;
+- authorization checks the real auth.uid allowlist, matching authenticated request subject
+  and numeric future expiry; gateway still verifies JWT signature/revocation;
+- bounded session navigation and distinct selected/latest processing, not an unbounded history aggregate;
+- actual App migrations + strict finalize replace draft Essay-table stubs in isolated PG17.
+
+### Authority and operating policy
+
+`quality_operators(user_id PK/FK auth.users ON DELETE CASCADE, created_at)` means **Quality
+LAB access only**. No admin_users, profile/school, organization, reviewer assignment or generic
+RBAC authority. No client table rights/policies/self-enrollment. Operator membership deletion
+revokes future RPC access; this minimal allowlist is current authorization, not a human-review
+or historical audit store. Offline registration is Owner-controlled, exact UUID only.
+Functions are postgres-owned SECURITY DEFINER, empty search_path, qualified relations;
+PUBLIC/anon/service_role EXECUTE revoked, authenticated EXECUTE only, with an internal gate.
+Service_role table S/I/D exists for offline administration, **not web runtime**.
+
+Full submitted answer is necessary Quality evidence; account name/email/phone/OAuth identifiers
+are excluded by default. Free-text answers can themselves contain identifying content: this is
+privileged personal-data access, not anonymization. Presentation pseudonym is
+`left(md5(session.user_id::text),12)` (48bits), stable and linkable with a small nonzero collision
+risk; sufficient for small v0 presentation, never a lookup key, identity or authorization fact.
+Use evaluation/attempt UUIDs for case navigation, not the pseudonym.
+
+Owner policy: early/Pilot **detailed near-census** review; mature **problem-focused + sample-based**.
+Privileged READ audit is POST_LAUNCH. Privileged WRITE audit is required when such UI/API
+operations are introduced; preserve Owner registration approval/execution records now. No new
+audit framework here. Quality membership alone does not grant existing invalidate/re-evaluate
+RPC permissions; their independent current write gate remains unchanged.
+
+### LAB public read DTO — ql-read-v1
+
+Only these documented RPCs/DTOs are a LAB dependency. Do not query underlying tables, rely on
+ownership/private helper schemas, use service_role or infer undocumented JSON fields.
+The migration is prepared and locally validated; it is **not a LIVE endpoint contract yet**.
+
+`is_quality_operator() → boolean`: caller only, no user-id parameter. False for missing,
+malformed, expired or nonmember authenticated context; anon lacks EXECUTE. Other RPCs raise
+42501 before any case lookup if unauthorized. SQL role/context tests do not replace real
+signed-token gateway verification after Owner application.
+
+`ql_list_cases(p_limit integer=50,p_before timestamptz=NULL,p_before_id uuid=NULL) → jsonb`:
+
+- envelope `{dto_version, cases:[], next_cursor:null|{requested_at,evaluation_id}}`;
+- p_limit NULL→50, clamp1…100; both cursor values absent or both supplied, otherwise22023;
+- order `(requested_at DESC,id DESC)`, strict tuple `<` cursor; next cursor is last returned
+  case only when an additional row exists. Equal timestamps never skip. Concurrent new cases
+  appear on refresh, not earlier pages of an existing traversal; no snapshot-isolation promise;
+- case keys: evaluation_id, attempt_id, question_id, university_name, exam_name, admission_year,
+  question_label; requested_at/completed_at/submitted_at; status, request_kind, invalidated_at;
+  model_provider/model_name/prompt_version/contract_version/evaluation_version/regime_key/
+  evidence_manifest_sha256; core_count, has_generated_rewrite, has_subsequent_student_attempt,
+  processing_outcome, student_pseudonym. **No answer body.**
+- core_count NULL when not completed, legacy or observation-incomplete; 0 is valid completed1.3.
+  Rewrite booleans express row/attempt existence, not completed content or human quality.
+- future filters may be explicit optional inputs or a versioned RPC, preserving the paired
+  cursor and filtered traversal; no generic query DSL, offset pagination or silent overload.
+
+`ql_case_detail(p_evaluation_id uuid) → jsonb`: null input22004; authorized missing caseP0002.
+The answer at student_submission is the immutable submitted attempt, never the current draft.
+
+| Field group | Canonical mapping / meaning |
+|---|---|
+| dto_version/evaluation_id/student_pseudonym | envelope and presentation identity |
+| question_context | question/exam/university catalog; submitted question_metadata_version and conditions snapshot separately preserved |
+| student_submission | attempt id/no/time, character_count/count_rule_version, input_method, body_sha256, **answer_full_text** |
+| evaluation | status/request_kind/supersedes/correction/invalidation; summary, strengths[], rewrite_checklist[], uncertainty/error_code; request/completion time |
+| dimensions[] | dimension_id/criterion_id/key/label/description/definition version/source evidence/origin/weight, level1…5, explanation/uncertainty |
+| improvements[] | progress id/previous id, previous_progress, issue key/category/status/title/explanation/next_action/priority, is_core, versioned observation |
+| scaffolding_availability | available / not_completed / legacy_not_available / incomplete |
+| core_improvement_keys | selected active issue keys ordered by canonical priority; [] valid; NULL if unavailable |
+| sentence_feedback | version1 sentence objects + restored linked_issue_key and progress_id; [] vs NULL preserved |
+| history_context | frozen input_snapshot.scaffolding_context; prior selected evaluation/progress bindings and availability |
+| previous_review_representation | explicitly states progress links + uncertainty; original review array is not stored |
+| official_evidence[] | current question_evidence resource/role/location/mapping/source hash and source URL |
+| evaluation_evidence_links[] | evidence id linked to dimension_id or progress_id |
+| frozen_evidence_bindings / frozen_criterion_bindings | exact input_snapshot ID/version/hash bindings used for this evaluation; not full PDF text |
+| reference_metadata_scope | current_catalog; frozen bindings identify evaluated versions |
+| student_attempts[] / attempt_window | immutable same-session attempt_no ±10 (max21), body/hash/time, explicit truncated flag |
+| generated_rewrite | latest generated row's origin/status/body/completion; NULL absent; **not student rewrite** |
+| provenance | provider/model/version/prompt/contract/evaluation/regime/evidence completeness/manifest and input/output hashes |
+| processing | selected evaluation run only; run id/no, provider/model/status/start/completion/latency/token/cost/error/timeout metadata, NULL absent |
+| latest_processing | most recent evaluation run (may be unknown/nonselected), explicitly separate from selected result |
+| session_evaluations[] / session_evaluations_truncated | at most100 recent id/attempt/status/supersession/invalidation/time for navigation, explicit truncation |
+
+Arrays of available relational facts are []; missing optional scalar/object facts are NULL.
+Scaffolding NULL is deliberately not an empty list. Timestamps are timestamptz instants, not
+academic years. Evaluation lifecycle uses requested/processing/completed/failed/cancelled;
+processing uses processing/completed/failed/unknown; improvement uses
+open/improved/resolved/unchanged/recurred. Preserve vocabulary, not generic Quality PASS.
+NULL tokens/cost means unknown/not provided, never zero. `cost_basis=estimate` is not actual
+cost; only provider_reported is provider-reported. No cached/total-token fields are invented
+from pending provider005. Completed processing is not Human Quality PASS.
+
+Criterion labels/description, question context and official resource projections are current
+catalog metadata. Frozen evidence/criterion bindings identify the evaluated versions; do not
+claim a silently changed current source is the historical source. Full PDF/transcription bodies,
+original previous-review reason array, independent human judgments, and complete pagination of
+sessions beyond the stated history windows are **NOT_AVAILABLE_YET** through this DTO.
+Truncation must be visible, never presented as a complete history. Prior links remain addressable
+via ql_case_detail(evaluation_id), without a parallel Quality history store.
+
+### Canonical Contract 1.3 mapping
+
+[Persistence mapping](essay-lab-scaffolding-persistence.md#lsa-2c-quality-read-mapping--2026-10-01):
+`essay_improvement_progress.scaffolding_observation` is versioned JSON `{version:1,
+core_focus:boolean,sentences:[]}`. Sentence root is its issue FK→improvement_items.issue_key.
+Quote offsets are Unicode code points, zero-based half-open `[start,end)` in the submitted body;
+no normalization/UTF16 conversion. Original sentence order within each root is retained.
+
+CORE membership is active progress (`status <> resolved`) with core_focus=true. Priority is
+**ordering, not membership**: strict finalize requires each CORE priority equal its 1-based
+core_improvement_keys position. Thus selected keys sorted by priority recover original CORE
+order for valid1.3 writes. NON-CORE includes remaining improvements, including useful local
+polish; resolved history stays visible. No priority<=2/category heuristic. Zero roots/CORE/
+sentence feedback is valid. Older/incomplete observations remain unavailable rather than
+being misclassified. No duplicate sentence table or is_core column is created.
+
+Progress chain is session→attempt_no→evaluation→issue/progress→previous_progress_id.
+Assessed prior outcomes live in linked immutable progress/status, NOT a second Quality stream.
+`not_assessable` reasons append to evaluation.uncertainty_note, not fake resolved progress;
+original previous_improvement_reviews array/reasons are not losslessly stored separately.
+Reevaluation supersession/invalidation and student vs generated rewrite remain distinct.
+
+### Validation, performance and next gate
+
+T1–T15 PASS on isolated PG17 with actual12 dependency migrations and strict1.3 finalization;
+no Essay-table shim. Auth schema/roles only are emulated. The final Owner registration script
+also runs there. Tests cover exact ACLs, expired/malformed subjects, forged identity, profile
+non-authority, 108 cases including105 equal-time ties, full answer, Unicode/root mapping,
+CORE order/zero/non-core, prior progress, original RLS/table/function ACL preservation and
+bounded rollback with unexpected dependency rejection. Live21 migration AST matches, 210 column-type comparisons across15 referenced tables and
+four canonical function-body matches confirm prerequisite compatibility. Actual JWT/PostgREST tests remain pending.
+
+Performance **FINDING**: live EXPLAIN (no ANALYZE/load test) shows Limit→Sort→Seq Scan for
+global recent order. Existing attempt_recent index is not a global ordering index. Candidate
+`essay_evaluations(requested_at DESC,id DESC)` needs a separate launch decision/approval;
+no speculative index added. Page+1 selection bounds expensive enrichment, not base scan.
+PK/FKs, attempt(session,attempt_no), progress(evaluation), processing(evaluation,run_no) and
+selected-run partial index support detail joins; session list sorts a bounded result over the
+session population. JSON extraction is limited to selected cases' progress. No dashboard read
+model or denormalization proposed. This is not a Production latency/SLA claim.
+
+Seven preservation answers: (1) no new learning/evaluation fact; only current authorization
+membership/time; (2) original immutable attempts/evaluations/progress and frozen bindings are
+read directly; (3) no historical UPDATE, minimal allowlist removal is not an audit history;
+(4) same auth.users identity, no LAB identity; (5) derived learning review projection, not an
+admission outcome/human verdict; (6) explicit narrow operator access, full evidence with identity
+minimization, same privacy/erasure policy, no anonymous-data claim; (7) DTO is a projection,
+not a new canonical fact store or inferred score.
+
+Architecture remains HEALTHY_WITH_DEBT. Launch requires Owner migration review/application,
+Production authorization verification and index decision; read audit/sampling/statistics are
+post-launch. Next: Owner review → exact Owner apply/tracking → Production auth verification
+→ LAB canonical contract mapping → web Quality v0 → Human Judgment design before student Pilot.
+STOP here; no UI/live adapter or broader foundation work.
+
 ## Quality Console boundary — Owner clarification 2026-09-30
 
 **Quality Console v0 = NEXT DESIGN, READ-MOSTLY.** 기존 canonical evaluation,

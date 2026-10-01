@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Quality authorization / LSA-2C / ql_list_cases / ql_case_detail: [canonical read contract and Owner application gate](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01) → [sentence/CORE persistence mapping](essay-lab-scaffolding-persistence.md#lsa-2c-quality-read-mapping--2026-10-01). Prepared, NOT APPLIED; web UI remains separate.
+
 Architecture / DB cross-domain changes: [Cross Review A — live inventory, debt and foundation freeze](platform-architecture-health-review-a.md). Review findings before new foundation schema; [Owner alignment](product-architecture.md#post-audit-owner-alignment--2026-09-30) and [bounded ACL fix](day-7-dday-storage-proposal.md) are the current follow-up.
 
 DATABASE / Study / Score / Mock / MY / LAB / Admissions / Essay / Application /

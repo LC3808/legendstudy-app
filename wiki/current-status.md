@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[ACL fix](day-7-dday-storage-proposal.md): RESOLVED/VERIFIED; [Owner alignment](product-architecture.md).
+[LSA-2C](essay-lab-worker-provider-l2.md): READY/NOT APPLIED; T1–T15 PASS; Owner gate next.
 
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;

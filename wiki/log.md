@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-10-01 — LSA-2C canonical Quality migration preparation
+
+[Cross-review/package](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01):
+old development/main had1 migration, canonical branch23 before/new24; live21 AST matches.
+Four Quality-only objects prepared with exact ACLs, paired cursor, full-answer detail and
+canonical JSON sentence/CORE/history mapping. Actual-migration PG17 T1–T15/registration/
+rollback PASS; global recent index candidate separated. Owner SQL/tracking package ready,
+not applied. provider005/day_targets tracking untouched; no Production write/UI/AI/LAB edits.
+
 ## 2026-09-30 — day_targets security closeout / Production verified
 
 Owner directly applied least-privilege SQL. Read-only Production verification: anon none,
