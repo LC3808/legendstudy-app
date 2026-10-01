@@ -1,0 +1,136 @@
+{
+  "ADMIN_AUTHENTICATED_JWT": "PASS",
+  "STUDENT_AUTHENTICATED_JWT": "PASS",
+  "ADMIN_OPERATOR_TRUE": "PASS",
+  "ADMIN_ALLOW": "PASS",
+  "FULL_ANSWER_OPERATOR_ACCESS": "NOT_ASSESSABLE",
+  "ADMIN_DETAIL": "NOT_ASSESSABLE",
+  "STUDENT_OPERATOR_FALSE": "PASS",
+  "STUDENT_ql_list_cases_HTTP": 403,
+  "STUDENT_ql_case_detail_HTTP": 403,
+  "STUDENT_DENY": "PASS",
+  "ANON_is_quality_operator_HTTP": 401,
+  "ANON_ql_list_cases_HTTP": 401,
+  "ANON_ql_case_detail_HTTP": 401,
+  "ANON_DENY": "PASS",
+  "CALLER_ID_ARGUMENT_REJECTED": "PASS",
+  "FORGED_JWT_DENY": "PASS",
+  "PRODUCTION_GATEWAY_AUTHORIZATION": "PASS",
+  "APPLICATION_DATA_WRITES": 0,
+  "PROVIDER_CALLS": 0,
+  "task": "LSA-2C Production Gateway Authorization Verification",
+  "starting_head": "1ecb8f888d95e02cc22c800ced91b66188eb06b4",
+  "LSA_2_PRODUCTION_SQL": "APPLIED",
+  "LSA_2_MIGRATION_TRACKING": "APPLIED",
+  "QUALITY_OPERATOR_REGISTERED": "YES",
+  "LSA_2_PRODUCTION_AUTHORIZATION": "VERIFIED",
+  "PROVIDER005": "PRESERVED_NOT_APPLIED",
+  "DAY_TARGETS_TRACKING": "PRESERVED_SEPARATE",
+  "metadata_verification": {
+    "captured_at": "2026-10-01T03:35:03.600799+00:00",
+    "essay_catalog_preserved": 17,
+    "canonical_function_bodies_match": 3,
+    "quality_rls": true,
+    "quality_policy_count": 0,
+    "quality_table_acl": [
+      {
+        "grantable": false,
+        "privilege": "DELETE",
+        "role": "service_role"
+      },
+      {
+        "grantable": false,
+        "privilege": "INSERT",
+        "role": "service_role"
+      },
+      {
+        "grantable": false,
+        "privilege": "SELECT",
+        "role": "service_role"
+      }
+    ],
+    "quality_function_acl": [
+      {
+        "name": "public.is_quality_operator",
+        "acl": [
+          {
+            "grantable": false,
+            "privilege": "EXECUTE",
+            "role": "authenticated"
+          }
+        ],
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "owner": "postgres"
+      },
+      {
+        "name": "public.ql_list_cases",
+        "acl": [
+          {
+            "grantable": false,
+            "privilege": "EXECUTE",
+            "role": "authenticated"
+          }
+        ],
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "owner": "postgres"
+      },
+      {
+        "name": "public.ql_case_detail",
+        "acl": [
+          {
+            "grantable": false,
+            "privilege": "EXECUTE",
+            "role": "authenticated"
+          }
+        ],
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": true,
+        "owner": "postgres"
+      }
+    ],
+    "migration_versions": [
+      "20260912000100",
+      "20260913000100",
+      "20260913000200",
+      "20260914000100",
+      "20260914000200",
+      "20260917000100",
+      "20260917000200",
+      "20260923000100",
+      "20260923000200",
+      "20260925000100",
+      "20260926000100",
+      "20260927000100",
+      "20260927000200",
+      "20260928000100",
+      "20260928000200",
+      "20260928000300",
+      "20260928000400",
+      "20260929000100",
+      "20260929000200",
+      "20260929000300",
+      "20260929000400",
+      "20261001000100"
+    ],
+    "profile_school_admin_users_authority": "NONE: exact deployed helper/function definitions matched reviewed SQL",
+    "production_db_writes": 0,
+    "essay_function_catalog_preserved": 44
+  },
+  "full_answer_limit": "No evaluation cases returned; no fixture or student data created; real operator detail/full-answer coverage NOT_ASSESSABLE.",
+  "bypass_verification": "Forged JWT subject/signature rejected401; extra caller user_id argument rejected404; deployed helper only uses auth.uid/request claims/quality_operators, not profile/school/admin_users. No rows mutated.",
+  "credentials": "Owner-owned0600 repository-external files; values never persisted/logged",
+  "auth_side_effect": "Two authorized password sign-ins create Auth sessions/logs; no application/profile/allowlist writes; no client SDK sync",
+  "runtime_identity": "Real authenticated JWTs; no service-role substitution",
+  "provider_calls": 0,
+  "migration_apply_or_repair": false,
+  "offline_safety_tests": 6,
+  "runner_sha256": "bb81d357139dd76f22a7f6af46e745e339cfb3d88198722981daec4b9bf65b39"
+}

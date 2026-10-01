@@ -1,11 +1,13 @@
-# LSA-2C Owner application package — NOT APPLIED
+# LSA-2C Owner application package — APPLIED / gateway VERIFIED
 
 Canonical contract: [Worker/Provider Wiki](../../../wiki/essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01).
 SQL: [20261001000100](../../migrations/20261001000100_quality_read_authorization.sql). SHA-256: `079f03a0bb65612292ce0d1343f395cc1b4acbdcc9cfe696b1072dd49f248764`.
 
-## Exact bounded application and separate tracking
+## Historical bounded application and separate tracking
 
-Only the Owner may execute after reviewing this package. Nothing below ran in Production.
+Owner has completed SQL application, single-version tracking and operator registration.
+[Production gateway verification](gateway_verification.json) PASS; full-answer access remains
+NOT_ASSESSABLE because no evaluation case exists. The procedure below is historical; do not replay it.
 Do not use `db push`, even from the canonical checkout: provider005 and day_targets tracking
 are separate pending entries. Do not replay historical migrations or merge the LAB branch.
 
@@ -68,16 +70,26 @@ review; never automatically mark anything reverted. Forward SQL is single-apply,
 requires Python psycopg and local PG17. It creates a temporary Unix-socket-only cluster,
 loads actual App migrations and strict finalize RPCs, uses synthetic answers/UUIDs, runs
 T1–T15 and rolls back, including a dependency-failure test. No Production DSN or provider.
-See [sanitized evidence](validation.json). Live gateway verification is intentionally pending.
+See [sanitized evidence](validation.json). [Live gateway verification](gateway_verification.json) is complete with the documented no-case limitation.
 
 ## Launch classification
 
-- LAUNCH_BLOCKER: until Owner application + real authorization verification, no live Quality UI.
-  Canonical path/mapping/bypass questions are resolved at isolated-test level, not deployed.
-- LAUNCH_REQUIRED: reviewed authorization package; real operator/student/anon verification;
-  list global-order index decision before growth. Candidate only:
+- Authorization blocker CLOSED: applied and real gateway verified. No Quality UI or LAB adapter
+  implementation is authorized by this closeout. Actual full-answer retrieval awaits a legitimate case.
+- LAUNCH_REQUIRED: list global-order index decision before growth. Candidate only:
   `essay_evaluations(requested_at DESC,id DESC)`. No index added here. Current live EXPLAIN
   (without ANALYZE) is Limit→Sort→Seq Scan. LIMIT bounds output/enrichment, **not base scan**;
   tiny estimated row count is not a latency/load test. Owner approval needed for any index.
 - POST_LAUNCH: read audit, sampling/anomaly detection/statistics. Generic RBAC and School tenant
   authorization remain separate future design. Privileged writes need audit when introduced.
+
+## Read-only gateway re-verification (separate authorization required)
+
+`python tool/verify_quality_gateway.py EXTERNAL_PUBLIC_CONFIG EXTERNAL_TEST_CREDENTIALS`
+reads only Owner-owned0600 regular non-symlink files outside the repository. Credential fields:
+QUALITY_ADMIN_EMAIL/PASSWORD and QUALITY_STUDENT_EMAIL/PASSWORD. Never pass values on the
+command line. Uses existing password-grant accounts, JWT user validation and only the three
+Quality read RPCs. Auth sessions/logs are created by sign-in; no application DML or SDK sync.
+No service-role credentials, automatic retry, redirect, raw response output or token persistence.
+Output is a fixed sanitized result. Missing cases yield NOT_ASSESSABLE, not synthetic Production
+fixtures. `PYTHONPATH=tool python -m unittest tool.test_quality_gateway` runs offline safety tests.

@@ -7,7 +7,7 @@ Console is web; authorization is shared App/LAB backend. Authorized detail inclu
 submitted answer; account direct identifiers excluded by default. Early detailed/near-census
 review → mature problem-focused + sampled review. Privileged read audit POST_LAUNCH;
 privileged-write audit required when introduced. [LSA-2C contract/package](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01)
-is prepared, not applied. No duplicate evaluation/sentence/history store or current Human QA
+defines the narrow shared read authority. No duplicate evaluation/sentence/history store or current Human QA
 persistence. Production application remains Owner-controlled and separately verified.
 
 ## 2026-09-30 — Post-audit Owner clarification

@@ -2,7 +2,7 @@
 
 ## LSA-2C Quality read mapping — 2026-10-01
 
-Prepared only: [shared Quality read contract](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01).
+[Shared Quality read contract](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01).
 No Essay persistence/RLS/Contract change. `essay_improvement_progress.scaffolding_observation`
 is version1 JSON: core_focus + sentences (observation_key/category/priority/start/end/quote/
 diagnosis/direction/optional example). linked_issue_key is restored through issue_id→
@@ -19,7 +19,8 @@ Prior assessed reviews map previous_progress_id/status; not_assessable reasons a
 uncertainty_note. The original previous_improvement_reviews array is not stored verbatim.
 Frozen scaffolding_context binds the prior scope. Student attempt chains and generated rewrites
 remain separate. T11–T14 use actual canonical finalize and Unicode/zero-core/non-core/history
-fixtures, not simulated Essay tables. Production Quality RPC application remains pending.
+fixtures, not simulated Essay tables. Production gateway authorization is now VERIFIED;
+actual full-answer retrieval is NOT_ASSESSABLE because no evaluation case exists.
 
 [L2-C2A resume](essay-lab-model-bakeoff-l2-b.md#l2-c2a-private-protection-repair-and-resume--2026-09-30):
 repository private protection repaired; same v3/Contract1.3/C1 Evidence used for two attempts.

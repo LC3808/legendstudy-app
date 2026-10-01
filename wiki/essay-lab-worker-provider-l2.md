@@ -1,8 +1,52 @@
 # Essay LAB — worker/provider and reviewer architecture
 
+## LSA-2C Production gateway verification — 2026-10-01
+
+**LSA_2_PRODUCTION_AUTHORIZATION = VERIFIED.** Owner applied/tracked the exact LSA-2C
+migration and registered the operator. Actual Production JWT/PostgREST authorization is now
+verified using existing operator and normal non-operator accounts, not service_role.
+[Sanitized result](../supabase/verification/quality_authorization/gateway_verification.json),
+[read-only verification runner](../tool/verify_quality_gateway.py),
+[offline safety tests](../tool/test_quality_gateway.py).
+
+| Gate | Actual result |
+|---|---|
+| LSA_2_PRODUCTION_SQL / LSA_2_MIGRATION_TRACKING | APPLIED / APPLIED;22 remote versions, only LSA-2C added |
+| QUALITY_OPERATOR_REGISTERED | YES; real JWT helper returns true |
+| ADMIN_ALLOW | PASS; bounded list200 |
+| STUDENT_DENY | PASS; helper200/false; list/detail403 |
+| ANON_DENY | PASS; helper/list/detail401 |
+| FULL_ANSWER_OPERATOR_ACCESS | NOT_ASSESSABLE: list contains no evaluation cases |
+| Forged identity | Subject-tampered JWT401; caller-supplied user_id RPC argument404 |
+| profile/school/admin_users | Not authorization sources: deployed canonical function bodies match; no profile/admin/allowlist writes tested |
+| Existing Essay student RLS/ACL | PASS; all17 Essay table +44 function catalog records unchanged against pre-apply capture |
+| provider005 / day_targets tracking | PRESERVED_NOT_APPLIED / PRESERVED_SEPARATE |
+
+No Production fixture/evaluation/user was created to force detail coverage. Full-answer
+projection remains proven by the isolated canonical finalize tests, but **real operator detail
+and full-answer retrieval were not exercised**. Recheck that read when a legitimate case exists
+under separate authorization; do not reinterpret NOT_ASSESSABLE as PASS or create data now.
+
+Quality table PK/FK auth.users CASCADE, owner postgres, two columns and RLS/no policies match.
+Client table rights remain NONE; service_role S/I/D only. All three deployed function bodies
+match the reviewed migration; SECURITY DEFINER, empty search_path, owner postgres; EXECUTE
+only authenticated (PUBLIC/anon/service_role absent). Forged-token checks use only the two
+Owner-authorized test identities; no arbitrary account lookup or data mutation.
+
+Credentials were read from Owner-owned repository-external0600 files; JWTs, account identifiers,
+response bodies and any answer text are never written to output/artifacts. Password sign-in
+necessarily creates Auth sessions/logs; no app/profile/allowlist DML, SDK profile sync, SQL apply,
+ledger repair, provider call or service-role client test occurred. Existing private history104
+hashes remain intact. Six synthetic safety tests cover redaction, full-answer branch without
+real data, route restrictions, redirect refusal and file safety.
+
+This closes authorization only. No Quality UI, LAB adapter, Human Quality persistence or Wiki
+reorganization implemented. The global recent-list index candidate remains a separate launch
+performance decision; it is not resolved by an empty list. Owner decides the next task.
+
 ## LSA-2C shared Quality authorization — 2026-10-01
 
-**MIGRATION_READY_NOT_APPLIED.** Quality Console is a future **WEB operator surface** at
+**Historical preparation checkpoint: MIGRATION_READY_NOT_APPLIED; superseded by the Production verification above.** Quality Console is a future **WEB operator surface** at
 `lab.legendstudy.com/ql`; authorization is the **shared Supabase backend**, canonically owned
 by App migrations. No Flutter/LAB UI or adapter, Production SQL/ledger write, provider005,
 provider call, model selection, Round2, Human Quality persistence or live student traffic.
@@ -65,7 +109,8 @@ RPC permissions; their independent current write gate remains unchanged.
 
 Only these documented RPCs/DTOs are a LAB dependency. Do not query underlying tables, rely on
 ownership/private helper schemas, use service_role or infer undocumented JSON fields.
-The migration is prepared and locally validated; it is **not a LIVE endpoint contract yet**.
+This DTO is now deployed with Production gateway authorization VERIFIED above.
+Real operator full-answer retrieval remains untested because there are no evaluation cases.
 
 `is_quality_operator() → boolean`: caller only, no user-id parameter. False for missing,
 malformed, expired or nonmember authenticated context; anon lacks EXECUTE. Other RPCs raise
@@ -163,7 +208,7 @@ also runs there. Tests cover exact ACLs, expired/malformed subjects, forged iden
 non-authority, 108 cases including105 equal-time ties, full answer, Unicode/root mapping,
 CORE order/zero/non-core, prior progress, original RLS/table/function ACL preservation and
 bounded rollback with unexpected dependency rejection. Live21 migration AST matches, 210 column-type comparisons across15 referenced tables and
-four canonical function-body matches confirm prerequisite compatibility. Actual JWT/PostgREST tests remain pending.
+four canonical function-body matches confirm prerequisite compatibility. Actual JWT/PostgREST authorization has since passed; see the Production closeout above.
 
 Performance **FINDING**: live EXPLAIN (no ANALYZE/load test) shows Limit→Sort→Seq Scan for
 global recent order. Existing attempt_recent index is not a global ordering index. Candidate
@@ -182,11 +227,10 @@ admission outcome/human verdict; (6) explicit narrow operator access, full evide
 minimization, same privacy/erasure policy, no anonymous-data claim; (7) DTO is a projection,
 not a new canonical fact store or inferred score.
 
-Architecture remains HEALTHY_WITH_DEBT. Launch requires Owner migration review/application,
-Production authorization verification and index decision; read audit/sampling/statistics are
-post-launch. Next: Owner review → exact Owner apply/tracking → Production auth verification
-→ LAB canonical contract mapping → web Quality v0 → Human Judgment design before student Pilot.
-STOP here; no UI/live adapter or broader foundation work.
+Architecture remains HEALTHY_WITH_DEBT. Owner application/tracking and Production
+authorization verification are complete. The index decision remains separate; read audit/
+sampling/statistics are post-launch. LAB mapping → web Quality v0 → Human Judgment design
+remain future, separately authorized tasks. STOP here; no UI/live adapter or broader work.
 
 ## Quality Console boundary — Owner clarification 2026-09-30
 

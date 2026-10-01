@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-10-01 — LSA-2C Production authorization VERIFIED
+
+[Gateway closeout](essay-lab-worker-provider-l2.md#lsa-2c-production-gateway-verification--2026-10-01):
+Owner-applied/tracked SQL and operator registration verified. Real operator JWT true/list200;
+normal user false/list+detail403; anon three401; forged JWT401/caller user_id404. Live functions
+match canonical SQL;17 Essay catalogs/RLS/ACL unchanged; remote22, provider005/day_targets
+tracking unchanged. No evaluation cases: real operator detail/full answer NOT_ASSESSABLE.
+Credentials/PII/JWT/answers not logged; no app DB write, fixture, SQL apply/repair, provider,
+UI/adapter/Human QA work. Six offline safety tests PASS. Stop for Owner next-task decision.
+
 ## 2026-10-01 — LSA-2C canonical Quality migration preparation
 
 [Cross-review/package](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01):

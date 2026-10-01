@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[LSA-2C](essay-lab-worker-provider-l2.md): READY/NOT APPLIED; T1–T15 PASS; Owner gate next.
+[LSA-2C](essay-lab-worker-provider-l2.md): gateway VERIFIED; full answer unassessable (no cases).
 
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
