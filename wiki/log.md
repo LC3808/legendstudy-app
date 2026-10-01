@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-01 — HQP-2 canonical Human Quality review
+
+[Review](human-quality-persistence-canonical-review.md): accept HQP-1 with narrow corrections; D1–D5 accepted. Existing evaluation/JSON/root/operator facts reused; bounded RPCs, correction/idempotency and rubric targets clarified. Owner E1 student erasure retention and E2 reviewer attribution decisions remain: READY_FOR_IMPLEMENTATION=NO. No SQL, DB access, credential/provider call, code or LAB change. Production states unchanged.
+
 ## 2026-10-01 — LSA-2C Production authorization VERIFIED
 
 [Gateway closeout](essay-lab-worker-provider-l2.md#lsa-2c-production-gateway-verification--2026-10-01):

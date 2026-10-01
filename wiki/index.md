@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Human Quality / HQP: [canonical DB/security review](human-quality-persistence-canonical-review.md) — design only; E1/E2 erasure policy gates, implementation NOT_STARTED.
+
 Quality authorization / LSA-2C / ql_list_cases / ql_case_detail: [canonical read contract and Owner application gate](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01) → [sentence/CORE persistence mapping](essay-lab-scaffolding-persistence.md#lsa-2c-quality-read-mapping--2026-10-01). Production gateway VERIFIED; no case for full-answer verification; web UI remains separate.
 
 Architecture / DB cross-domain changes: [Cross Review A — live inventory, debt and foundation freeze](platform-architecture-health-review-a.md). Review findings before new foundation schema; [Owner alignment](product-architecture.md#post-audit-owner-alignment--2026-09-30) and [bounded ACL fix](day-7-dday-storage-proposal.md) are the current follow-up.

@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[LSA-2C](essay-lab-worker-provider-l2.md): gateway VERIFIED; full answer unassessable (no cases).
+[HQP-2](human-quality-persistence-canonical-review.md): review complete; erasure gate; not implemented.
 
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
