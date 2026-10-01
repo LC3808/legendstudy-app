@@ -16,7 +16,7 @@ export type Config = {
   provider: (job: Job) => Promise<boolean>;
 };
 export function createPorts(c: Config): Ports {
-  if (c.restoreKey.byteLength < 32 || c.benefitKeys.size === 0) {
+  if (c.restoreKey.byteLength < 32) {
     throw Error("ACTIVATION_GATE");
   }
   const request = async (
@@ -66,16 +66,39 @@ export function createPorts(c: Config): Ports {
         p_markers: await markers(c.benefitKeys, identityInputs(user)),
       });
     },
+    async captureBenefit(job) {
+      if (!job.subject_id) return "NOT_AVAILABLE";
+      try {
+        const user = await authUser(job.subject_id);
+        const inputs = user ? identityInputs(user) : [];
+        if (!inputs.length) return "NOT_AVAILABLE";
+        const values = await markers(c.benefitKeys, inputs);
+        await rpc("account_benefit_record_existing", {
+          p_subject: job.subject_id,
+          p_markers: values,
+        });
+        return "CAPTURED";
+      } catch {
+        return "FAILED_SAFE";
+      }
+    },
     async bindAndCheckpoint(job) {
       if (!job.subject_id) return;
-      const user = await authUser(job.subject_id);
-      if (!user) return; // Auth timeout-after-success: SQL FK determines the next phase.
-      const inputs = identityInputs(user);
-      const values = await markers(c.benefitKeys, [...new Set(inputs)]);
-      await rpc("account_benefit_record_existing", {
-        p_subject: job.subject_id,
-        p_markers: values,
-      });
+      // Lifecycle/restore uses its own key boundary; benefit-key loss cannot stop binding.
+      let inputs: string[] = [];
+      try {
+        const user = await authUser(job.subject_id);
+        if (user) {
+          inputs = identityInputs(user);
+          // DENY-only lifecycle identity; never used to grant promotional credits.
+          if (typeof user.email === "string" && user.email.trim()) {
+            inputs.push("email:" + user.email.trim().toLowerCase());
+          }
+        }
+      } catch {
+        /* restore tag still binds current subject without copying personal content */
+      }
+      const identityKeys = new Map([[c.restoreVersion, c.restoreKey]]);
       const key = await crypto.subtle.importKey(
         "raw",
         c.restoreKey as BufferSource,
@@ -94,11 +117,13 @@ export function createPorts(c: Config): Ports {
       ).join("");
       await rpc("account_deletion_bind", {
         p_id: job.request_id,
-        p_markers: await markers(
-          c.benefitKeys,
-          [...new Set(inputs)],
-          "lifecycle",
-        ),
+        p_markers: inputs.length
+          ? await markers(
+            identityKeys,
+            [...new Set(inputs)].slice(0, 16),
+            "lifecycle",
+          )
+          : [],
         p_restore_version: c.restoreVersion,
         p_restore_marker: tag,
       });

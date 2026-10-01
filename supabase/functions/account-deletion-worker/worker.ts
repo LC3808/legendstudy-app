@@ -6,12 +6,16 @@ export type Job = {
   request_id: string;
   subject_id: string | null;
   phase: string;
+  state?: string;
   lease_token: string;
 };
 export type Marker = { version: string; marker: string };
 export interface Ports {
   rpc(name: string, args: Record<string, unknown>): Promise<unknown>;
   claimVerifiedBenefit(subject: string): Promise<void>;
+  captureBenefit(
+    job: Job,
+  ): Promise<"CAPTURED" | "NOT_AVAILABLE" | "FAILED_SAFE">;
   // Registers verified-credential blocking + restore tags while identity exists.
   bindAndCheckpoint(job: Job): Promise<void>;
   // Enumerate ALL registered owner namespaces, remove via API, verify absence.
@@ -48,6 +52,17 @@ export async function dispatch(
     };
     try {
       if (job.subject_id) await p.bindAndCheckpoint(job);
+      if (job.phase === "PERSONAL") {
+        let captured: "CAPTURED" | "NOT_AVAILABLE" | "FAILED_SAFE" =
+          "FAILED_SAFE";
+        try {
+          captured = await p.captureBenefit(job);
+        } catch { /* no promotional retry holds privacy */ }
+        await p.rpc("account_deletion_capture_result", {
+          p_id: job.request_id,
+          p_result: captured,
+        });
+      }
       if (job.phase === "PERSONAL") {
         if (await p.rpc("account_deletion_personal", args) !== true) {
           throw Error("BATCH_REMAINS");

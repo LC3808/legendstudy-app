@@ -1,5 +1,30 @@
 # ADR-2P — Production activation preflight
 
+## ADR-2C targeted recheck — current readiness
+
+[Correction closeout](account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted)
+supersedes the historical findings below: **P-01 RESOLVED; P-02 PARTIAL_EXTERNAL_GATE;
+P-03 RESOLVED** under accepted Owner privacy-first/no-global-hold policy.
+CODE_CORRECTION_REQUIRED: NO within the reviewed narrow scope.
+READINESS_CLASSIFICATION: **READY_FOR_STAGED_PRODUCTION_APPLY** for default-OFF schema
+installation after Owner approval; ACCOUNT_DELETION_GENERAL_ACTIVATION: **NO**.
+SCHEMA_INSTALL_IS_DORMANT: PARTIAL — reviewed helper/RLS gates change immediately, but
+OFF preserves ordinary signup and accepts no lifecycle requests. Do not enable DB/Edge,
+connect admission hooks or release clients before the documented external gates pass.
+Read-only recheck2026-10-01: ledger23, version20261001000300 absent, lifecycle table absent;
+provider005 remains absent; day_targets tracking remains separate. Other detailed catalog
+anchors below are the prior ADR-2P snapshot, not a freshly rerun full catalog audit.
+Current hash: `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7`. Original hash below: SUPERSEDED_PRE_APPLY.
+Correction adds only capture-state metadata and one worker-only RPC to the existing
+candidate: total7 new tables /34 new functions (24public+10private), no new migration.
+111SQL/48Deno/7Flutter PASS; rollback preservation/refusal PASS. No Production writes.
+The [Owner package](../supabase/verification/account_deletion/README.md) is review-ready.
+Remaining runtime gates: provider reauth/admission, secrets/role delegation, backup replay,
+finance, Storage, scheduler/notification, client UX and separately authorized live checks.
+No apply/deploy authorization is implied. Original historical review follows unchanged.
+
+## Original ADR-2P snapshot
+
 2026-10-01 · READ-ONLY PRODUCTION REVIEW / DOCUMENTATION ONLY.
 Reviewed implementation: `4f92b58c967895de3769236e0cc5c2698d2b509b`, canonical
 `codex/essay-scaffolding-vnext`; local HEAD, origin and actual remote matched, 0/0.

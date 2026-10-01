@@ -21,6 +21,7 @@ create table public.account_deletion_requests(
  error_code text check(error_code in ('STORAGE_UNAVAILABLE','PROVIDER_EXTERNAL_GATE','FINANCE_EXTERNAL_GATE','AUTH_UNAVAILABLE','POSTCONDITION_FAILED','TRANSPORT_UNAVAILABLE','RESTORE_CHECKPOINT_UNAVAILABLE')),
  notification_pending boolean not null default true,
  provider_verified boolean not null default false,
+ benefit_capture_state text not null default 'NOT_AVAILABLE' check(benefit_capture_state in ('CAPTURED','NOT_AVAILABLE','FAILED_SAFE')),
  check(scheduled_deletion_at=requested_at+interval '336 hours'),
  check((state='ERASED')=(completed_at is not null)),
  check(state<>'ERASED' or(subject_id is null and phase='DONE' and expires_at=completed_at+interval '720 hours')),
@@ -92,22 +93,24 @@ declare u uuid=auth.uid(); t timestamptz=clock_timestamp();begin
  return public.account_deletion_status();
 end$$;
 create function public.account_deletion_cancel() returns jsonb language plpgsql security definer set search_path='' as $$
-declare u uuid=auth.uid();r public.account_deletion_requests;sid uuid;begin
+declare u uuid=auth.uid();r public.account_deletion_requests;sid uuid;t timestamptz;begin
  if u is null then raise insufficient_privilege;end if;
  perform account_private.lock_subject(u);
  select * into r from public.account_deletion_requests where subject_id=u and state='DELETION_PENDING' for update;
  if r.id is null or clock_timestamp()>=r.scheduled_deletion_at then raise exception 'cancellation closed' using errcode='22023';end if;
  sid=(nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'session_id')::uuid;
  if not exists(select 1 from account_private.reauth_tickets where subject_id=u and session_id=sid and expires_at>clock_timestamp()) then raise insufficient_privilege using message='RECENT_REAUTH_REQUIRED';end if;
- update public.account_deletion_requests set state='CANCELLED',cancelled_at=clock_timestamp(),expires_at=clock_timestamp()+interval '720 hours',notification_pending=false where id=r.id;
+ t=clock_timestamp();
+ if t>=r.scheduled_deletion_at then raise exception 'cancellation closed' using errcode='22023';end if;
+ update public.account_deletion_requests set state='CANCELLED',cancelled_at=t,expires_at=t+interval '720 hours',notification_pending=false where id=r.id;
  delete from account_private.reauth_tickets where subject_id=u;
  delete from account_private.lifecycle_identity_blocks where request_id=r.id;
  return public.account_deletion_status();
 end$$;
 -- Only the trusted server reauthentication adapter can attest a fresh challenge.
-create function public.account_reauth_attest(p_subject uuid,p_session uuid) returns void language plpgsql security definer set search_path='' as $$begin
+create function public.account_reauth_attest(p_subject uuid,p_session uuid) returns void language plpgsql security definer set search_path='' as $$declare t timestamptz=clock_timestamp();begin
  if p_subject is null or p_session is null then raise invalid_parameter_value;end if;
- insert into account_private.reauth_tickets values(p_subject,p_session,clock_timestamp(),clock_timestamp()+interval '5 minutes') on conflict(subject_id) do update set session_id=excluded.session_id,verified_at=excluded.verified_at,expires_at=excluded.expires_at;
+ insert into account_private.reauth_tickets values(p_subject,p_session,t,t+interval '5 minutes') on conflict(subject_id) do update set session_id=excluded.session_id,verified_at=excluded.verified_at,expires_at=excluded.expires_at;
 end$$;
 -- Current Quality RPC bodies/DTOs stay untouched; helper takes lifecycle precedence.
 do $$declare body text;begin
@@ -305,18 +308,26 @@ end$$;
 create function public.account_deletion_bind(p_id uuid,p_markers jsonb,p_restore_version text,p_restore_marker text) returns void language plpgsql security definer set search_path='' as $$
 declare r public.account_deletion_requests;m jsonb;begin
  select * into r from public.account_deletion_requests where id=p_id for update;
- if r.id is null or r.state not in ('DELETION_PENDING','ERASING') or r.subject_id is null then raise invalid_parameter_value;end if;
- if jsonb_typeof(p_markers) is distinct from 'array' or jsonb_array_length(p_markers) not between 1 and 16 then raise invalid_parameter_value;end if;
+ if r.id is null or r.state not in ('DELETION_PENDING','ERASING','CANCELLED') or r.subject_id is null then raise invalid_parameter_value;end if;
+ if jsonb_typeof(p_markers) is distinct from 'array' or jsonb_array_length(p_markers) not between 0 and 16 then raise invalid_parameter_value;end if;
  for m in select value from jsonb_array_elements(p_markers) loop
  if m-array['version','marker']<>'{}' or not(m ?& array['version','marker']) then raise invalid_parameter_value;end if;
- insert into account_private.lifecycle_identity_blocks values(r.id,m->>'version',m->>'marker') on conflict do nothing;
+ if r.state<>'CANCELLED' then insert into account_private.lifecycle_identity_blocks values(r.id,m->>'version',m->>'marker') on conflict do nothing;end if;
  end loop;
  insert into account_private.restore_tags values(r.id,p_restore_version,p_restore_marker) on conflict(request_id) do nothing;
 end$$;
+-- Promotional capture is operational metadata, never an erasure phase prerequisite.
+-- Owner ADR-2C: no global hold. Missing erased historical markers mean normal future eligibility,
+-- with accepted duplicate-promotion risk; current eligibility outages still grant nothing.
+create function public.account_deletion_capture_result(p_id uuid,p_result text) returns void language plpgsql security definer set search_path='' as $$begin
+ if p_result is null or p_result not in ('CAPTURED','NOT_AVAILABLE','FAILED_SAFE') then raise invalid_parameter_value;end if;
+ update public.account_deletion_requests set benefit_capture_state=p_result
+ where id=p_id and state in ('DELETION_PENDING','ERASING');
+end$$;
 -- Pending obligations must be checkpointed before they become due.
 create function public.account_deletion_unbound(p_limit integer default 20) returns jsonb language sql stable security definer set search_path='' as $$
- select coalesce(jsonb_agg(jsonb_build_object('request_id',r.id,'subject_id',r.subject_id,'phase',r.phase,'lease_token',null)),'[]') from
- (select d.* from public.account_deletion_requests d where d.state in ('DELETION_PENDING','ERASING') and d.subject_id is not null and not exists(select 1 from account_private.restore_tags t where t.request_id=d.id) order by d.requested_at,d.id limit least(100,greatest(1,coalesce(p_limit,20)))) r
+ select coalesce(jsonb_agg(jsonb_build_object('request_id',r.id,'subject_id',r.subject_id,'phase',r.phase,'state',r.state,'lease_token',null)),'[]') from
+ (select d.* from public.account_deletion_requests d where d.state in ('DELETION_PENDING','ERASING','CANCELLED') and d.subject_id is not null and not exists(select 1 from account_private.restore_tags t where t.request_id=d.id) order by d.requested_at,d.id limit least(100,greatest(1,coalesce(p_limit,20)))) r
 $$;
 create function public.account_identity_blocked(p_markers jsonb) returns boolean language plpgsql security definer set search_path='' as $$begin
  if jsonb_typeof(p_markers) is distinct from 'array' or jsonb_array_length(p_markers) not between 1 and 16 then raise invalid_parameter_value;end if;
@@ -328,7 +339,7 @@ create function public.account_deletion_notifications(p_limit integer default 20
 end$$;
 create function public.account_deletion_notification_ack(p_id uuid) returns void language sql security definer set search_path='' as $$update public.account_deletion_requests set notification_pending=false where id=p_id$$;
 create function public.account_deletion_restore_manifest() returns jsonb language sql security definer set search_path='' as $$
- select coalesce(jsonb_agg(jsonb_build_object('request_id',r.id,'state',r.state,'deadline',r.scheduled_deletion_at,'expires_at',r.expires_at,'key_version',t.key_version,'restore_tag',t.marker)),'[]') from public.account_deletion_requests r join account_private.restore_tags t on t.request_id=r.id where r.state in ('DELETION_PENDING','ERASING','ERASED')
+ select coalesce(jsonb_agg(jsonb_build_object('request_id',r.id,'state',r.state,'requested_at',r.requested_at,'deadline',r.scheduled_deletion_at,'cancelled_at',r.cancelled_at,'completed_at',r.completed_at,'expires_at',r.expires_at,'key_version',t.key_version,'restore_tag',t.marker) order by r.requested_at,r.id),'[]') from public.account_deletion_requests r left join account_private.restore_tags t on t.request_id=r.id where r.state in ('DELETION_PENDING','ERASING','CANCELLED','ERASED')
 $$;
 create function public.account_benefit_record_existing(p_subject uuid,p_markers jsonb) returns void language plpgsql security definer set search_path='' as $$declare m jsonb;begin
  if not exists(select 1 from public.credit_grants g join public.credit_accounts a on a.id=g.account_id where a.user_id=p_subject and g.origin='signup_bonus') then return;end if;

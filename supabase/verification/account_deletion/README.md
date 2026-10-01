@@ -1,16 +1,51 @@
 # ADR-2 Owner review / application package
 
-**LOCAL CANDIDATE; Production NOT_APPLIED. No action in this package has been executed on Production.**
+**ADR-2C LOCAL ISOLATED VERIFIED / OWNER REVIEW READY. Production NOT_APPLIED. Apply/deploy requires separate Owner authorization.**
+
+Old hash `d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1`: SUPERSEDED_PRE_APPLY. Current hash below is the reviewed unapplied candidate.
+[Correction closeout](../../../wiki/account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted) supersedes the prior instructions below; no apply/deploy authorization.
 Migration: [20261001000300_account_deletion_lifecycle.sql](../../migrations/20261001000300_account_deletion_lifecycle.sql).
-SHA-256: `d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1`.
+SHA-256: `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7`.
 [Implementation](../../../wiki/account-deletion-14-day-implementation.md), [validation](validation.json),
 [catalog](catalog.sql), [rollback](rollback.sql).
+
+## ADR-2C application delta and activation boundaries
+
+Same unapplied migration; no additional version. Capture-state metadata and worker-only
+account_deletion_capture_result are included in the catalog/rollback inventory (7 tables,
+34 functions). PG17 111 / Deno48 / Flutter7 PASS; isolated evidence is not live verification.
+
+Owner rejects a global benefit hold. Failed/unavailable historical marker capture does not
+block erasure or other users' promotions. No raw identity fallback. Future verified signup
+without surviving evidence follows normal eligibility; bounded duplicate risk accepted.
+Current temporary eligibility errors still allow account creation but DO_NOT_GRANT_YET.
+ACCOUNT_BENEFIT_KEYS missing/malformed does not disable the privacy worker; /benefit fails
+closed until its keys recover. Restore/control keys remain independently required.
+
+Additional names: ACCOUNT_AUTH_HOOK_SECRET (Standard Webhooks secret),
+ACCOUNT_EMAIL_REAUTH_ENABLED (false by default). /reauth performs a fresh same-subject
+email challenge and revokes its temporary session before attesting. Actual email settings,
+rate-limit/CAPTCHA/session behavior, OAuth reauth and client UX are activation gates.
+/admission authenticates signatures itself (Edge gateway configuration must permit the
+signed hook), never trusts unsigned candidate data. Deploy/configure its secret first;
+verify DB-OFF allows ordinary signup before connecting the hook. Do not connect an endpoint
+whose Edge configuration still returns disabled/unavailable. Auth hook coverage and
+concurrent provider provisioning require live acceptance before lifecycle activation.
+Lifecycle blocking uses the restore-key version with separate HMAC purpose; key rotation
+must preserve checkability of existing blocks/tags. No automatic rotation is implemented.
+
+Restore manifest includes CANCELLED, pending and erasing before deadline/expiry, plus
+bounded erased receipts; missing bindings are visible and fail closed. Replay typed actions
+per request, preserving newer independent requests. Trusted verifyAction must prove each
+postcondition before reopening; merely generating a plan is not replay success. Checkpoint
+transport and actual replay execution remain operational gates. No global promotion switch
+or permanent identity tombstone is introduced.
 
 ## Installation is not activation
 
 1. Verify approved APP branch/commit and the hash with `shasum -a 256` on this one file.
    Verify the LegendStudy shared project, canonical chain through LSA-2C/HQP, all actual current personal-domain relations and storage policies.
-   Last Owner-reported ledger snapshot:23; HQP20261001000200 tracked. This task did not query it again.
+   Read-only ADR-2C recheck:23; ADR-2 absent/lifecycle table absent; provider005 and day_targets tracking absent. Prior HQP tracked snapshot retained.
    Run catalog.sql read-only and compare prior function definitions/ACLs privately. Preflight must find no `account_private`, account RPC namespace, lifecycle table or either new executor role.
 2. STOP for unexpected schema/helper body, role/name/version collision, unidentified project, unreviewed finance retention or missing cleanup inventory. Migration has no broad replay and fails on conflicts.
 3. After separate Owner approval, SQL Editor executes **only this file** including its transaction. Never `db push` / `migration up` / all-pending replay. Candidate includes a5s lock timeout. Record unknown outcome and inspect before retrying. Installation defaults lifecycle OFF; ordinary signup remains legacy until explicit activation.
@@ -55,7 +90,7 @@ The new finance role has RLS bypass solely to detach approved references; it has
 ```sh
 python3 tool/test_account_deletion.py --pg-bin /path/to/postgresql17/bin
 python3 tool/test_account_deletion.py --pg-bin /path/to/postgresql17/bin --rollback-probe
-deno test supabase/functions/account-deletion-worker/worker_test.ts supabase/functions/delete-account/handler_test.ts
+deno test supabase/functions/account-deletion-worker/worker_test.ts supabase/functions/account-deletion-worker/correction_test.ts supabase/functions/delete-account/handler_test.ts
 ./tool/flutterw test test/account_deletion_test.dart
 ```
 

@@ -1,18 +1,18 @@
 {
-  "task": "ADR-2",
-  "status": "LOCAL_CANDIDATE_ISOLATED_VERIFIED",
+  "task": "ADR-2C",
+  "status": "COMPLETE_LOCAL_ISOLATED_VERIFIED",
   "production": "NOT_APPLIED",
   "migration": "20261001000300_account_deletion_lifecycle.sql",
-  "migration_sha256": "d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1",
+  "migration_sha256": "b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7",
   "postgres_version": "17",
-  "sql_assertions": 97,
+  "sql_assertions": 111,
   "rollback": [
     "DATA_REFUSAL_PASS",
     "UNEXPECTED_DEPENDENCY_REFUSAL_PASS",
     "CLEAN_ROLLBACK_PASS",
     "CANONICAL_POLICY_QL_PRESERVATION_PASS"
   ],
-  "deno_tests": 21,
+  "deno_tests": 48,
   "flutter_tests": 7,
   "live_gateway": "NOT_RUN",
   "storage_provider_runtime": "NOT_RUNTIME_VERIFIED",
@@ -61,7 +61,8 @@
     "public.account_deletion_postconditions(p_id uuid,p_token uuid)",
     "account_private.caller_write_gate()",
     "public.account_deletion_health()",
-    "account_private.activation_guard()"
+    "account_private.activation_guard()",
+    "public.account_deletion_capture_result(p_id uuid,p_result text)"
   ],
   "functions_intentionally_changed": [
     "public.is_quality_operator()",
@@ -254,7 +255,7 @@
     },
     "D43": {
       "level": "ISOLATED_SQL_AND_MOCK",
-      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+      "evidence": "Known surviving marker denies a new UUID; unavailable historical marker follows normal current eligibility under final Owner accepted duplicate risk. Live re-registration NOT_RUNTIME_VERIFIED."
     },
     "D44": {
       "level": "ISOLATED_SQL_AND_MOCK",
@@ -374,23 +375,42 @@
     },
     "D73": {
       "level": "SOURCE_BOUNDARY",
-      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+      "evidence": "Only same unapplied ADR-2 migration corrected; read-only ledger recheck, no remote writes/repair. provider005/day_targets unchanged."
     },
     "D74": {
       "level": "SOURCE_BOUNDARY",
-      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+      "evidence": "Only same unapplied ADR-2 migration corrected; read-only ledger recheck, no remote writes/repair. provider005/day_targets unchanged."
     },
     "D75": {
       "level": "SOURCE_BOUNDARY",
-      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+      "evidence": "Only same unapplied ADR-2 migration corrected; read-only ledger recheck, no remote writes/repair. provider005/day_targets unchanged."
     }
   },
   "limitations": [
     "Provider-specific fresh reauth adapter and Auth identity-admission integration require activation verification.",
     "APP/LAB global restricted navigation and reauthentication UX remain activation work; benefit dispatch recovery is server-side.",
-    "Owner remote ledger snapshot reused; no live catalog requery.",
+    "Narrow live ledger/collision recheck only; prior ADR-2P detailed catalog evidence retained.",
     "Backup horizon/checkpoint transport freshness and restore replay require operational verification.",
     "Finance unknown historical/paid reference review required; only documented UUID reference formats detached."
   ],
-  "analyze": "PASS: ASCII-path copy of current changed Auth sources/test; no issues"
+  "analyze": "PASS: ASCII-path copy of current changed Auth sources/test; no issues",
+  "previous_migration_sha256": "d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1",
+  "previous_hash_status": "SUPERSEDED_PRE_APPLY",
+  "corrections": {
+    "P01": "RESOLVED",
+    "P02": "PARTIAL_EXTERNAL_GATE",
+    "P03": "RESOLVED",
+    "global_signup_benefit_hold": "REJECTED_NOT_IMPLEMENTED",
+    "historical_marker_unavailable": "ERASE_NORMALLY_NORMAL_FUTURE_ELIGIBILITY_DUPLICATE_RISK_ACCEPTED",
+    "temporary_current_eligibility_failure": "ACCOUNT_ALLOW_BENEFIT_DO_NOT_GRANT_YET",
+    "restore": "R1-R8 typed request actions, cancellation and verified replay postconditions",
+    "owner_policy_regression": "I7 known prior marker denies; missing historical marker allows normal eligibility; unrelated account grants unaffected"
+  },
+  "production_read_only_recheck": {
+    "remote_count": 23,
+    "adr2_tracked": false,
+    "lifecycle_table_exists": false,
+    "provider005_tracked": false,
+    "day_targets_tracked": false
+  }
 }

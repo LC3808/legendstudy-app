@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-10-01 — ADR-2C completed / Owner policy resolved
+
+[Closeout](account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted): P-01/P-03 resolved; P-02 trusted adapters locally verified, provider activation external. Privacy erasure takes priority; no global promotion hold; missing historical marker duplicate risk accepted, current outages still defer grants. PG17 111/Deno48/Flutter7 PASS; rollback/analyze PASS. Same unapplied SQL hash/package regenerated. Read-only ledger23/ADR-2 absent; no Production writes/deploy/providers/LAB edits.
+
+## 2026-10-01 — ADR-2C working correction / historical policy gate
+
+[Working correction](account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted): restore cancellation/typed intent and trusted Auth adapters added; promotional capture detached from erasure. PG17 105/Deno47/Flutter7 PASS, rollback/analyze PASS. No-marker future benefit safety requires Owner choice; I7 incomplete, apply/commit/push held. No Production/LAB/Unified Wiki change.
+
 ## 2026-10-01 — ADR-2P read-only activation preflight
 
 [Preflight](account-deletion-production-activation-preflight.md): live ledger23, ADR-2 absent, no object collisions; delete-account/worker absent; catalog/FK/ACL anchors checked. OFF install is only partially dormant. Restore cancellation/intent replay requires correction; reauth/admission wiring and external activation gates remain. Owner phase checklist/postflight/test strategy prepared. Documentation only; no code, Production writes/deployment, credential-value exposure, provider calls, LAB or Unified Wiki changes.

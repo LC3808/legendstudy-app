@@ -209,6 +209,7 @@ drop function public.account_deletion_finish(uuid,uuid);
 drop function public.account_deletion_maintenance();
 drop function public.account_deletion_provider_result(uuid,uuid,boolean);
 drop function public.account_deletion_bind(uuid,jsonb,text,text);
+drop function public.account_deletion_capture_result(uuid,text);
 drop function public.account_identity_blocked(jsonb);
 drop function public.account_deletion_unbound(integer);
 drop function public.account_deletion_notifications(integer);

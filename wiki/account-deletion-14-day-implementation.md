@@ -1,5 +1,49 @@
 # ADR-2 — 336-hour account deletion implementation
 
+## ADR-2C narrow correction — Owner policy accepted
+
+2026-10-01. **COMPLETE / LOCAL ISOLATED VERIFIED. Production NOT_APPLIED.**
+Starting APP commit9084a69; same unapplied migration version20261001000300.
+Old hash `d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1` is **SUPERSEDED_PRE_APPLY**.
+Reviewed SQL SHA-256: `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7`.
+
+| Finding | Final correction | Evidence / remaining gate |
+|---|---|---|
+| P-01 | RESOLVED: manifest includes CANCELLED and original intent/deadline/terminal times; unbound facts remain visible. Typed per-request restore actions preserve pending restrictions, resume due erasure, neutralize cancellation, or reapply completed erasure. | R1–R8; deterministic deduplication and independently verified action postconditions before reopening. Real restore replay/backup horizon remains external. |
+| P-02 | PARTIAL_EXTERNAL_GATE: trusted /reauth fresh email challenge and signed /admission adapter implemented; server-derived subject/session only. | Wrong subject/session, stale token-only proof, unsigned/stale hook and metadata forgery denied locally. Real provider configuration/client UX not verified. |
+| P-03 | RESOLVED: capture CAPTURED/NOT_AVAILABLE/FAILED_SAFE independently of erasure. Missing keys/identity/derivation do not trap personal cleanup or Auth-last completion. | I7 plus mocked worker failures; Owner accepts bounded duplicate grant when historical evidence cannot survive erasure. |
+
+**Owner policy: PRIVACY ERASURE > PROMOTIONAL ABUSE PREVENTION. GLOBAL HOLD REJECTED.**
+Known surviving benefit markers prevent repeat grants. If capture is unavailable or
+permanently impossible, erase normally: no raw email/Auth UUID/student-data fallback,
+stronger identity collection, or global suspension. A later valid new account with no
+historical evidence runs normal eligibility and may receive the promotion; this bounded
+risk is accepted. A **temporary current eligibility-system failure** remains different:
+account creation ALLOW, free benefit DO_NOT_GRANT_YET. No second credit ledger.
+
+/reauth verifies caller through Auth, binds the verified JWT session, performs a fresh
+same-subject email/password challenge, revokes only its temporary session, then attests
+a short-lived ticket. ACCOUNT_EMAIL_REAUTH_ENABLED defaults false. Google/Kakao/Apple
+remain fail-closed external gates; passwords/tokens are not stored/logged.
+/admission verifies Standard Webhooks signature/timestamp using ACCOUNT_AUTH_HOOK_SECRET.
+Signed candidate email is deny-only, never benefit proof; user_metadata is not authority.
+Configure this hook only after its endpoint/secret are ready and default-OFF behavior is
+verified. Provider identity/linking races and supported identity-set coverage remain gates.
+Lifecycle denial markers use the restore key with a separate HMAC purpose; they do not
+depend on promotional keys. Restore checkpoint integrity remains a distinct requirement.
+
+Validation: **PG17 111 assertions; Deno48; Flutter7 PASS**, focused analyze/typecheck clean.
+Rollback data/dependency refusal and canonical restoration PASS. Read-only Production
+recheck: ledger23, ADR-2 absent, lifecycle table absent; provider005 absent and day_targets
+tracking separate. This is not Production lifecycle verification. Writes/deploy/provider
+calls0; no LAB edits. Owner review package READY; Production apply remains unauthorized.
+Schema-OFF staged readiness does not imply general activation; external gates stay open.
+
+Official adapter contracts (documentation, not runtime proof):
+[Supabase before-user-created](https://supabase.com/docs/guides/auth/auth-hooks/before-user-created-hook),
+[Auth REST API](https://github.com/supabase/auth/blob/master/openapi.yaml),
+[Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md).
+
 2026-10-01 · LOCAL IMPLEMENTATION / ISOLATED VERIFICATION · **Production NOT_APPLIED**.
 Successor to [ADR-1](account-deletion-14-day-architecture.md) and
 [ADR-1B](account-deletion-erasure-retention-boundary.md); their design history is unchanged.
@@ -92,18 +136,18 @@ FK NULL is not an anonymization claim, and no statutory retention duration is in
 Verified Auth canonical email (trim/lowercase, no Gmail alias guessing) and currently
 verified Google/Kakao/Apple identity subjects supply HMAC inputs server-side only. An
 unverified email/profile field does not qualify. Benefit markers use purpose-specific
-HMAC with versioned server secret, no raw email/permanent Auth UUID. Existing grants seed
-prior-claim markers before erasure. Atomic marker locks + existing Credit Ledger grant
+HMAC with versioned server secret, no raw email/permanent Auth UUID. Existing grants seed prior-claim markers when capture is available; capture failure
+never delays erasure. Atomic marker locks + existing Credit Ledger grant
 ensure at most one3credit delivery. Exact old/current keys are checked during rotation;
 losing old keys is a launch/operational incident, not permission to grant again.
 
-After ERASED, a new Auth account may exist; previous verified benefit identity is denied
-another grant. If identity/secret check fails: account creation remains allowed, benefit
+After ERASED, a new Auth account may exist; surviving prior-claim evidence denies
+another grant. Missing historical evidence follows the accepted normal-eligibility risk. If identity/secret check fails: account creation remains allowed, benefit
 not granted yet. Client recovery RPC returns only a grant already delivered server-side. The same dispatcher also recovers up to20 verified eligible accounts per run, so new-account benefit delivery does not require client-side identity/HMAC logic.
 Server /benefit endpoint verifies actual JWT user and ignores caller-supplied identity.
 No marker is used as an Essay/Learning/Finance/Analytics join key or returned to clients.
 Lifecycle blocking markers use a different HMAC domain from benefit markers; restore tags
-use a separate key. Provider identity admission/linking integration is an activation gate.
+use the restore key under separate purposes. Provider admission/linking runtime is an activation gate.
 Owner-observed same-email linking is preserved as bounded evidence, not universal proof.
 Unverified/unsupported identity coverage must be inventoried before activation; no provider
 console/configuration was accessed here.
@@ -121,20 +165,21 @@ state/error only and must obey bounded operational retention.
 Restore manifest is protected outside the restored DB, atomically reconciled with bounded
 TTL and freshness/ack monitoring. restore.ts computes exact restore-only tag matches,
 requires complete inventory/fresh checkpoint evidence, and refuses horizon>30days. Matching
-PENDING must regain restrictions/original deadline; matching completed/due obligations must
+PENDING must regain restrictions/original deadline; CANCELLED neutralizes only that request;
+matching completed/due obligations must
 be erased before normal service reopens. Checkpoint loss/staleness or unknown backup horizon
 means do not reopen. No managed backup was edited and no live restore was performed.
 
 ## Tests and limits
 
-Validation:97 isolated SQL assertions,21 mocked Deno tests,7 Flutter tests PASS; focused analyze clean. See validation.json for D1–D75 evidence levels. Actual canonical PG17
+Validation:111 isolated SQL assertions,48 mocked Deno tests,7 Flutter tests PASS; focused analyze clean. See validation.json for D1–D75 evidence levels. Actual canonical PG17
 migrations/functions and synthetic Essay/HQP/credit records exercise locks, two-connection
 races, single release, HQP E1/E2, erasure, signup retry and receipt purge. New catalog/ACL
 checks distinguish the intentionally added finance executor rights from existing-role
 preservation. Rollback rejects data and unexpected dependencies; clean rollback passes.
 Auth role shim is not real JWT/provider verification. Storage/Auth/HTTP/notification/restore
 transport tests are mocked. No real identities, credentials, provider calls or Production
-fixtures/queries/writes. No provider005/day_targets tracking repair, no LAB change.
+fixtures/writes; only sanitized read-only catalog/ledger recheck. No provider005/day_targets tracking repair, no LAB change.
 
 Flutter typed DTO/minimal screen distinguishes normal/pending/erasing/cancelled/erased,
 displays fixed deadline and explicit cancellation, never says deletion completed after

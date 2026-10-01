@@ -14,6 +14,7 @@ function fixture() {
   let retry: unknown;
   const p: Ports = {
     claimVerifiedBenefit: async () => {},
+    captureBenefit: async () => "CAPTURED",
     rpc: async (name, args) => {
       calls.push(name);
       if (name === "account_deletion_claim") return [{ ...job }];
@@ -295,7 +296,11 @@ Deno.test("restore gate fails closed for incompatible backup horizon or missing 
   const result = await restoreGate(
     ["synthetic"],
     [{
+      request_id: "request",
       state: "ERASED",
+      requested_at: "2026-09-17T00:00:00Z",
+      cancelled_at: null,
+      completed_at: "2026-10-01T00:00:00Z",
       deadline: "2026-10-01T00:00:00Z",
       expires_at: "2026-10-31T00:00:00Z",
       key_version: "v1",
@@ -306,5 +311,39 @@ Deno.test("restore gate fails closed for incompatible backup horizon or missing 
     168,
     { inventoryComplete: true, checkpointFresh: true },
   );
-  assert(!result.reopen && result.subjectsToErase.length === 1);
+  assert(!result.reopen && result.actions.length === 1);
+});
+
+for (const state of ["NOT_AVAILABLE", "FAILED_SAFE"] as const) {
+  Deno.test(
+    "I3-I6/I11 " + state + " capture cannot stop personal/Auth erasure",
+    async () => {
+      const f = fixture();
+      f.p.captureBenefit = async () => state;
+      assert((await dispatch(f.p)).processed === 1);
+      assert(
+        f.calls.includes("account_deletion_personal") &&
+          f.calls.includes("auth"),
+      );
+      assert(f.calls.includes("account_deletion_capture_result"));
+    },
+  );
+}
+Deno.test("unexpected marker exception also continues erasure", async () => {
+  const f = fixture();
+  f.p.captureBenefit = async () => {
+    throw Error("synthetic failure");
+  };
+  assert((await dispatch(f.p)).processed === 1 && f.calls.includes("auth"));
+});
+Deno.test("cancelled unbound intent is checkpointed without an erasure claim", async () => {
+  const f = fixture(), base = f.p.rpc;
+  f.p.rpc = async (n, a) =>
+    n === "account_deletion_unbound"
+      ? [{ ...job, state: "CANCELLED" }]
+      : n === "account_deletion_claim"
+      ? []
+      : base(n, a);
+  await dispatch(f.p);
+  assert(f.calls.includes("bind") && !f.calls.includes("auth"));
 });
