@@ -1,0 +1,179 @@
+{
+  "PRODUCTION_HQP_AUTHORIZATION": "PASS",
+  "OPERATOR_READ_PATH": "PASS",
+  "OPERATOR_MISSING_CASE_HTTP": 500,
+  "OPERATOR_MISSING_CASE_SQLSTATE": "P0002",
+  "NON_OPERATOR_DENY": "PASS",
+  "ANON_DENY": "PASS",
+  "DIRECT_TABLE_DENY": "PASS",
+  "FORGED_IDENTITY_DENY": "PASS",
+  "EXISTING_QL_READ_GATEWAY_BEHAVIOR": "PASS",
+  "EXISTING_FUNCTION_BODY_ACL_RECHECK": "NOT_RUN_GATEWAY_CANNOT_PROVE_CATALOG_EQUALITY",
+  "OPERATOR_WRITE_SUCCESS": "NOT_ASSESSABLE",
+  "PRODUCTION_HQ_ROWS_CREATED": 0,
+  "PRODUCTION_APPLICATION_DATA_WRITES": 0,
+  "PROVIDER_CALLS": 0,
+  "WRITE_SAFETY_BASIS": "no operator submit; only non-operator/anon structurally invalid payloads; no REST DML",
+  "AUTH_SIDE_EFFECT": "password sign-in creates Auth sessions/logs",
+  "requests": [
+    {
+      "role": "ADMIN",
+      "route": "/auth/v1/token",
+      "http": 200
+    },
+    {
+      "role": "ADMIN",
+      "route": "/auth/v1/user",
+      "http": 200
+    },
+    {
+      "role": "STUDENT",
+      "route": "/auth/v1/token",
+      "http": 200
+    },
+    {
+      "role": "STUDENT",
+      "route": "/auth/v1/user",
+      "http": 200
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/rpc/is_quality_operator",
+      "http": 200
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/is_quality_operator",
+      "http": 200
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/rpc/ql_review_state",
+      "http": 200
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/rpc/ql_list_human_judgments",
+      "http": 500
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_review_state",
+      "http": 403
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_list_human_judgments",
+      "http": 403
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_submit_human_judgment",
+      "http": 403
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/rpc/ql_review_state",
+      "http": 401
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/rpc/ql_list_human_judgments",
+      "http": 401
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/rpc/ql_submit_human_judgment",
+      "http": 401
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/human_quality_judgments",
+      "http": 403
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/human_quality_findings",
+      "http": 403
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/human_quality_judgments",
+      "http": 403
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/human_quality_findings",
+      "http": 403
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/human_quality_judgments",
+      "http": 401
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/human_quality_findings",
+      "http": 401
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_submit_human_judgment",
+      "http": 403
+    },
+    {
+      "role": "FORGED",
+      "route": "/rest/v1/rpc/ql_review_state",
+      "http": 401
+    },
+    {
+      "role": "ADMIN",
+      "route": "/rest/v1/rpc/ql_list_cases",
+      "http": 200
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_list_cases",
+      "http": 403
+    },
+    {
+      "role": "STUDENT",
+      "route": "/rest/v1/rpc/ql_case_detail",
+      "http": 403
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/rpc/ql_list_cases",
+      "http": 401
+    },
+    {
+      "role": "ANON",
+      "route": "/rest/v1/rpc/ql_case_detail",
+      "http": 401
+    }
+  ],
+  "OWNER_REPORTED_POSTFLIGHT": {
+    "HQP_SQL_APPLIED": true,
+    "HQP_MIGRATION_TRACKED": true,
+    "REMOTE_LEDGER_COUNT": 23,
+    "DAY_TARGETS_TRACKING": "PRESERVED_UNTRACKED",
+    "PROVIDER005": "PRESERVED_NOT_APPLIED",
+    "HQP_TABLE_ACL_RLS": "OWNER_VERIFIED",
+    "HQP_FUNCTION_ACL_OWNER_SEARCH_PATH": "OWNER_VERIFIED"
+  },
+  "DIAGNOSTIC_RUNS": [
+    {
+      "outcome": "STOP",
+      "check": "OPERATOR_MISSING_CASE_FAILED",
+      "requests": 8
+    },
+    {
+      "outcome": "STOP",
+      "check": "OPERATOR_MISSING_CASE_FAILED_HTTP_500_SQLSTATE_P0002",
+      "requests": 8
+    }
+  ],
+  "TOTAL_GATEWAY_REQUESTS_INCLUDING_DIAGNOSTICS": 43,
+  "READY_FOR_HUMAN_REVIEW_WRITE_UI": true,
+  "PRESERVATION_EVIDENCE": "Existing gateway behavior rerun PASS; HQP-3 isolated exact catalog comparison PASS; new Production catalog/function-body equality NOT_RUN. Owner postflight is separately attributed."
+}

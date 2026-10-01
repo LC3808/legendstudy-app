@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[HQP-3](human-quality-persistence-implementation.md): isolated PASS; Production NOT_APPLIED.
+[HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 
 LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
 Learning / LAB / MY. Guest-first materials search/filter/detail/external access;

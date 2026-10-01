@@ -1,11 +1,17 @@
-# HQP-3 Owner apply package — READY / NOT APPLIED
+# HQP-3 — Owner applied/tracked; gateway authorization PASS
 
 Canonical migration: [20261001000200_human_quality_persistence.sql](../../migrations/20261001000200_human_quality_persistence.sql).
 SHA-256: `598aacc93d6749f2b890dfc440564a179e9185c1978e05b09ba8df9304449fd5`.
 
-This package authorizes no Production action by the agent. Owner review/application is the next gate. No real JWT write verification has occurred. [Isolated evidence](validation.json), [catalog pre/postflight](catalog.sql), [rollback](rollback.sql), [implementation contract](../../../wiki/human-quality-persistence-implementation.md).
+This package authorizes no Production action by the agent. Owner application is now complete; actual gateway authorization was verified separately. Successful operator INSERT remains NOT_ASSESSABLE. [Isolated evidence](validation.json), [catalog pre/postflight](catalog.sql), [rollback](rollback.sql), [implementation contract](../../../wiki/human-quality-persistence-implementation.md).
 
-## Prerequisites and exact bounded order
+## Current closeout
+
+Owner confirms SQL/tracking applied, remote23; no replay authorized. [Gateway artifact](gateway_verification.json) records actual JWT authorization PASS; normal operator INSERT NOT_ASSESSABLE. Missing-case path is P0002/HTTP500. Live catalog properties are Owner-reported; exact existing-body/ACL equality was not rerun via catalog in this gateway task. [Current implementation closeout](../../../wiki/human-quality-persistence-implementation.md#production-gateway-closeout--2026-10-01). No Production application-data writes, fixture or operator submit.
+
+The application instructions and isolated results below are historical preparation evidence. Do not execute them again.
+
+## Historical prerequisites and exact bounded order
 
 1. Owner verifies canonical APP task branch/approved commit and file hash (`shasum -a 256 supabase/migrations/20261001000200_human_quality_persistence.sql`). Correct project is the already verified LegendStudy shared backend, never a similarly named project. Existing canonical dependency chain through scaffolding/commercial/owner-status and LSA-2C must match. HQP does not require provider005. Run catalog.sql read-only and retain its sanitized preflight privately for comparison. Expect no HQP objects/version, existing Quality auth verified. Last verified remote ledger has22 entries; recheck rather than assuming it is still22.
 2. STOP for existing/conflicting HQP name/version, unexpected drift, unreviewed hash, changed existing functions/ACLs, or unidentified project. Do not use db push, migrate up, automatic replay or unrelated tracking repair. The migration deliberately uses CREATE (not IF NOT EXISTS/OR REPLACE) to fail on conflicts.

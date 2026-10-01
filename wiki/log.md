@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-01 — HQP Production gateway authorization PASS
+
+[Closeout](human-quality-persistence-implementation.md#production-gateway-closeout--2026-10-01): Owner applied/tracked HQP; real JWT operator reads/non-operator+anon denies/direct-table denies/forgery denies PASS. Missing case=P0002/HTTP500, not404. Normal INSERT NOT_ASSESSABLE; no valid writer payload or app/HQP data writes. Existing Quality gateway behavior PASS; exact live catalog equality not rerun. Six safety tests PASS; no secrets/bodies stored, SQL/ledger/LAB/provider changes. Separate write-UI task may follow; Pilot closed.
+
 ## 2026-10-01 — HQP-3 isolated implementation / Owner package
 
 [HQP-3](human-quality-persistence-implementation.md): one migration, two QA tables, three gated RPCs; E1 evaluation cascade/E2 reviewer nulling, immutable correction/idempotency/rubric/targets. PG17 105 checks and bounded rollback PASS; existing Quality/Essay/Credit catalogs unchanged. Owner apply package ready, Production NOT_APPLIED; no ledger repair/provider/LAB/UI/Pilot. 14-day account lifecycle and deletion notice require separate implementation; analytics retention separate future design.

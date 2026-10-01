@@ -1,6 +1,20 @@
 # Human Quality persistence — HQP-3
 
-2026-10-01. IMPLEMENTED / ISOLATED_VERIFIED; Production NOT_APPLIED. Historical [HQP-2](human-quality-persistence-canonical-review.md) remains unchanged. Owner D1–D5 retained; E1/E2 now resolved.
+2026-10-01. IMPLEMENTED / ISOLATED_VERIFIED; Production SQL/tracking APPLIED (Owner-reported), gateway authorization PASS; normal write NOT_ASSESSABLE. Historical [HQP-2](human-quality-persistence-canonical-review.md) remains unchanged. Owner D1–D5 retained; E1/E2 now resolved.
+
+## Production gateway closeout — 2026-10-01
+
+**PRODUCTION_HQP_AUTHORIZATION=PASS.** Owner reports exact HQP SQL applied/tracked, remote ledger23, day_targets still separately untracked, provider005 unapplied. Owner postflight confirms both HQP tables RLS ON/zero policies/no client or service CRUD, public RPC postgres/SECURITY DEFINER/empty search_path with authenticated-only EXECUTE, private helpers no client EXECUTE. This catalog evidence is **Owner-reported**, not independently rerun here.
+
+[Sanitized gateway evidence](../supabase/verification/human_quality/gateway_verification.json), [non-mutating verifier](../tool/verify_human_quality_gateway.py), [six offline safety tests](../tool/test_human_quality_gateway.py).
+
+Actual existing operator/non-operator JWT sign-in succeeded. Operator empty ql_review_state returns hq-read-v1/[]; synthetic missing evaluation history reaches **P0002 with HTTP500**. This is authorization-gate passage and canonical missing-case semantics, not successful history retrieval. Do not mislabel it HTTP404; a later contract/error-mapping review may improve this API status, but no SQL changed here.
+
+Non-operator: all three HQP RPCs403/42501; anon: all three401/42501. Direct HQP table GET select=id&limit=0 denied for operator/student/anon. Caller-supplied reviewer field in an incomplete non-operator payload403; tampered JWT subject401. No operator submit was sent; only structurally invalid non-operator/anon submit payloads. No REST DML, legitimate evaluation lookup/detail body, fixture, HQP row or application-data write. Password login creates Auth sessions/logs; those are not application-data writes. Two diagnostic read-only runs stopped on an initially too-narrow HTTP-status expectation; final run27 requests, total43 including diagnostics. No provider calls or automatic retry.
+
+Existing is_quality_operator true/false and ql-read-v1 operator list/non-operator+anon deny behavior PASS. **Exact live function-definition/entire ACL equality NOT_RECHECKED**: gateway behavior cannot prove catalog equivalence. Prior isolated HQP-3 catalog equality remains PASS; original Quality source/functions were not edited. Do not promote these evidence layers into a new Production catalog comparison.
+
+OPERATOR_WRITE_SUCCESS=NOT_ASSESSABLE (no legitimate case; no real insert attempted). PRODUCTION_HQ_ROWS_CREATED=0; PRODUCTION_APPLICATION_DATA_WRITES=0 are supported by the enforced request allowlist and lack of any valid write request, not a privileged row-count scan. READY_FOR_HUMAN_REVIEW_WRITE_UI=YES **for a separately authorized next task**: gateway authorization boundary passed; normal write success remains unassessed. Real-student Pilot remains NOT_AUTHORIZED; Production AI OFF. No ledger/SQL/allowlist modification, service-role client, LAB implementation or 14-day scheduler work.
 
 ## Final reconciliation before SQL
 
@@ -59,4 +73,4 @@ Schema snapshot covers existing public/private definitions, ownership, RLS/polic
 
 Seven preservation answers: server created_at/explicit correction separates events; evaluation/hash/rubric/rewrite pin retained subject; no correction UPDATE; canonical auth identity reused; human operational judgment distinct from Learning/Outcome; explicit E1/E2 erasure and operator-only notes; review state/metrics derived, never stored as model ground truth. Hard erasure deliberately ends per-student QA reproducibility. Future analytics retention cannot quietly restore it.
 
-READY_FOR_OWNER_MIGRATION_REVIEW=YES. READY_FOR_PRODUCTION_APPLY=NO (Owner required); READY_FOR_HUMAN_REVIEW_WRITE_UI=NO until apply+gateway verification; READY_FOR_REAL_STUDENT_PILOT=NO. AI OFF; model NOT_SELECTED. Stop after source/doc closeout; no HQP runtime apply or LAB work authorized here.
+Historical isolated closeout: READY_FOR_OWNER_MIGRATION_REVIEW=YES; apply/gateway were then pending. Superseded by the Production gateway closeout above; READY_FOR_HUMAN_REVIEW_WRITE_UI=YES with normal write NOT_ASSESSABLE; READY_FOR_REAL_STUDENT_PILOT=NO. AI OFF; model NOT_SELECTED. Stop after source/doc closeout; no HQP runtime apply or LAB work authorized here.
