@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-01 — ADR-2P read-only activation preflight
+
+[Preflight](account-deletion-production-activation-preflight.md): live ledger23, ADR-2 absent, no object collisions; delete-account/worker absent; catalog/FK/ACL anchors checked. OFF install is only partially dormant. Restore cancellation/intent replay requires correction; reauth/admission wiring and external activation gates remain. Owner phase checklist/postflight/test strategy prepared. Documentation only; no code, Production writes/deployment, credential-value exposure, provider calls, LAB or Unified Wiki changes.
+
 ## 2026-10-01 — ADR-2 isolated lifecycle candidate
 
 [ADR-2](account-deletion-14-day-implementation.md): fixed336h request/cancel/worker, server restrictions, canonical Essay release/HQP E1/E2, finance detachment, feedback/Storage/Auth-last, purpose-limited benefit and30day receipt. Local PG17/mocked transport/Flutter verification and bounded Owner package; Production NOT_APPLIED. External activation and full consumer UX gates remain. No DB/ledger/provider/LAB changes; historical ADR-1/1B preserved.

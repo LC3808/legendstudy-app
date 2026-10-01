@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Account deletion activation / ADR-2P: [Production preflight and Owner checklist](account-deletion-production-activation-preflight.md) — read-only catalog PASS; correction required before activation; no apply/deploy.
+
 Human Quality / HQP: [HQP-3 implementation/Owner gate](human-quality-persistence-implementation.md) — isolated verified, Production NOT_APPLIED; [historical HQP-2](human-quality-persistence-canonical-review.md).
 
 Quality authorization / LSA-2C / ql_list_cases / ql_case_detail: [canonical read contract and Owner application gate](essay-lab-worker-provider-l2.md#lsa-2c-shared-quality-authorization--2026-10-01) → [sentence/CORE persistence mapping](essay-lab-scaffolding-persistence.md#lsa-2c-quality-read-mapping--2026-10-01). Production gateway VERIFIED; no case for full-answer verification; web UI remains separate.
