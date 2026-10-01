@@ -3,7 +3,7 @@
 ## Current product state
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
-[ADR-1B](account-deletion-erasure-retention-boundary.md): design.
+[ADR-2](account-deletion-14-day-implementation.md): NOT_APPLIED.
 
 LegendStudy+ native Flutter: Home / Materials / Learning / LAB / MY.
 Guest materials search/filter/detail/external access; owner saved/recent. Study Timer + Mock Exam/scoring/result foundation,

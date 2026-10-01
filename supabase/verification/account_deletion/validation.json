@@ -1,0 +1,396 @@
+{
+  "task": "ADR-2",
+  "status": "LOCAL_CANDIDATE_ISOLATED_VERIFIED",
+  "production": "NOT_APPLIED",
+  "migration": "20261001000300_account_deletion_lifecycle.sql",
+  "migration_sha256": "d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1",
+  "postgres_version": "17",
+  "sql_assertions": 97,
+  "rollback": [
+    "DATA_REFUSAL_PASS",
+    "UNEXPECTED_DEPENDENCY_REFUSAL_PASS",
+    "CLEAN_ROLLBACK_PASS",
+    "CANONICAL_POLICY_QL_PRESERVATION_PASS"
+  ],
+  "deno_tests": 21,
+  "flutter_tests": 7,
+  "live_gateway": "NOT_RUN",
+  "storage_provider_runtime": "NOT_RUNTIME_VERIFIED",
+  "production_writes": 0,
+  "provider_calls": 0,
+  "auth_shim": "auth.users/id/created_at/email_confirmed_at, auth.uid, API roles; no JWT signature/provider-linking simulation",
+  "tables_created": [
+    "public.account_deletion_requests",
+    "account_private.benefit_claims",
+    "account_private.benefit_delivery",
+    "account_private.reauth_tickets",
+    "account_private.lifecycle_identity_blocks",
+    "account_private.restore_tags",
+    "account_private.dispatch_health"
+  ],
+  "functions_created": [
+    "account_private.enabled()",
+    "account_private.lock_subject(u uuid)",
+    "account_private.allowed(u uuid)",
+    "public.account_service_allowed()",
+    "account_private.guard_request()",
+    "public.account_deletion_status()",
+    "public.account_deletion_request()",
+    "public.account_deletion_cancel()",
+    "public.account_reauth_attest(p_subject uuid,p_session uuid)",
+    "account_private.personal_write_gate()",
+    "public.account_benefit_claim(p_subject uuid,p_markers jsonb)",
+    "public.account_benefit_candidates(p_limit integer default 20)",
+    "public.account_deletion_claim(p_limit integer default 5)",
+    "account_private.fenced(p_id uuid,p_token uuid)",
+    "public.account_deletion_personal(p_id uuid,p_token uuid)",
+    "account_private.finance_privacy_guard()",
+    "account_private.detach_finance(u uuid)",
+    "public.account_deletion_advance(p_id uuid,p_token uuid,p_phase text)",
+    "public.account_deletion_retry(p_id uuid,p_token uuid,p_error text)",
+    "public.account_deletion_finish(p_id uuid,p_token uuid)",
+    "public.account_deletion_maintenance()",
+    "public.account_deletion_provider_result(p_id uuid,p_token uuid,p_verified boolean)",
+    "public.account_deletion_bind(p_id uuid,p_markers jsonb,p_restore_version text,p_restore_marker text)",
+    "public.account_deletion_unbound(p_limit integer default 20)",
+    "public.account_identity_blocked(p_markers jsonb)",
+    "public.account_deletion_notifications(p_limit integer default 20)",
+    "public.account_deletion_notification_ack(p_id uuid)",
+    "public.account_deletion_restore_manifest()",
+    "public.account_benefit_record_existing(p_subject uuid,p_markers jsonb)",
+    "public.account_deletion_postconditions(p_id uuid,p_token uuid)",
+    "account_private.caller_write_gate()",
+    "public.account_deletion_health()",
+    "account_private.activation_guard()"
+  ],
+  "functions_intentionally_changed": [
+    "public.is_quality_operator()",
+    "essay_private.uid()",
+    "essay_private.owner(uuid)",
+    "essay_private.lock_job(uuid)",
+    "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamptz)",
+    "essay_private.credit_profile_signup()",
+    "public.essay_claim_signup_credit()",
+    "public.fetch_own_mock_attempt(uuid)",
+    "public.submit_mock_attempt(uuid,uuid,uuid,uuid,text,jsonb)"
+  ],
+  "launch_indexes": [
+    "account_deletion_one_active",
+    "account_deletion_due",
+    "account_deletion_expiry",
+    "account_deletion_lease",
+    "account_deletion_subject",
+    "account_lifecycle_identity_lookup"
+  ],
+  "post_launch_indexes": [],
+  "coverage": {
+    "D1": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D2": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D3": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D4": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D5": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D6": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D7": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D8": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D9": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D10": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D11": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D12": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Request/status, immutable deadline, fresh attestation, past deadline, concurrent cancel/claim, retry metadata."
+    },
+    "D13": {
+      "level": "MOCK",
+      "evidence": "Notification failure does not prevent finish; deadline immutable SQL."
+    },
+    "D14": {
+      "level": "CATALOG_AND_TARGETED_SQL",
+      "evidence": "Restrictive policy/ACL comparison; profile mutation/read deny and public resources preserved. Every APP screen is not E2E tested."
+    },
+    "D19": {
+      "level": "CATALOG_AND_TARGETED_SQL",
+      "evidence": "Restrictive policy/ACL comparison; profile mutation/read deny and public resources preserved. Every APP screen is not E2E tested."
+    },
+    "D22": {
+      "level": "CATALOG_AND_TARGETED_SQL",
+      "evidence": "Restrictive policy/ACL comparison; profile mutation/read deny and public resources preserved. Every APP screen is not E2E tested."
+    },
+    "D15": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D16": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D17": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D18": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D20": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D21": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Canonical Essay/Quality/signup entrypoints denied; cancellation restores allowed predicate; erased subject stale context denied. Real JWT not exercised."
+    },
+    "D23": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D24": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D25": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D26": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D27": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D28": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D29": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D30": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D31": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D32": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D33": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D34": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Real canonical queued/settled billing, release once, stale finalize deny, two-connection erasure/grant race, E1/E2/feedback cascades. No Production fixture."
+    },
+    "D35": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D36": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D37": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D38": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D39": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D40": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D41": {
+      "level": "MOCK_AND_ISOLATED_SQL",
+      "evidence": "Supported Storage ports/idempotency/failure; Auth-last SQL and mocked timeout-after-success/missing subject. Provider revoke explicitly unknown."
+    },
+    "D42": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D43": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D44": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D45": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D46": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D47": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "UUID-independent marker denial; actual concurrent claims; endpoint failure without Auth mutation; canonical grant/recovery. Live re-registration NOT_RUNTIME_VERIFIED."
+    },
+    "D48": {
+      "level": "SCHEMA_ACL_AND_MOCK",
+      "evidence": "Marker schema omits raw identity/joins; server HMAC; no client ACL; purpose separation tested."
+    },
+    "D49": {
+      "level": "SCHEMA_ACL_AND_MOCK",
+      "evidence": "Marker schema omits raw identity/joins; server HMAC; no client ACL; purpose separation tested."
+    },
+    "D50": {
+      "level": "SCHEMA_ACL_AND_MOCK",
+      "evidence": "Marker schema omits raw identity/joins; server HMAC; no client ACL; purpose separation tested."
+    },
+    "D51": {
+      "level": "SCHEMA_ACL_AND_MOCK",
+      "evidence": "Marker schema omits raw identity/joins; server HMAC; no client ACL; purpose separation tested."
+    },
+    "D52": {
+      "level": "SCHEMA_ACL_AND_MOCK",
+      "evidence": "Marker schema omits raw identity/joins; server HMAC; no client ACL; purpose separation tested."
+    },
+    "D53": {
+      "level": "MOCK",
+      "evidence": "Old/current HMAC versions stable; deployment key provisioning/rotation not run."
+    },
+    "D54": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D55": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D56": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D57": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D58": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D59": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D60": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D61": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D62": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D63": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D64": {
+      "level": "ISOLATED_SQL_AND_MOCK",
+      "evidence": "Lease/fence/retry/deadline/purge health and separate concurrent connections; phase ordering/failures mocked. Real scheduler not deployed."
+    },
+    "D65": {
+      "level": "SCHEMA",
+      "evidence": "Receipt and benefit marker are separate relations/purposes; no benefit joins exposed."
+    },
+    "D66": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D67": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D68": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D69": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D70": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D71": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D72": {
+      "level": "ISOLATED_SQL",
+      "evidence": "Existing role ACL/owner/RLS snapshots, unchanged ql/HQP bodies, intentional helper gates, ledger economic fingerprint and first grant."
+    },
+    "D73": {
+      "level": "SOURCE_BOUNDARY",
+      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+    },
+    "D74": {
+      "level": "SOURCE_BOUNDARY",
+      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+    },
+    "D75": {
+      "level": "SOURCE_BOUNDARY",
+      "evidence": "Only new migration added; no remote DB/ledger operation. Existing provider005/day_targets files unchanged."
+    }
+  },
+  "limitations": [
+    "Provider-specific fresh reauth adapter and Auth identity-admission integration require activation verification.",
+    "APP/LAB global restricted navigation and reauthentication UX remain activation work; benefit dispatch recovery is server-side.",
+    "Owner remote ledger snapshot reused; no live catalog requery.",
+    "Backup horizon/checkpoint transport freshness and restore replay require operational verification.",
+    "Finance unknown historical/paid reference review required; only documented UUID reference formats detached."
+  ],
+  "analyze": "PASS: ASCII-path copy of current changed Auth sources/test; no issues"
+}

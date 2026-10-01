@@ -1,5 +1,7 @@
 # Account Deletion & Privacy Lifecycle
 
+Successor: [ADR-2 local implementation](account-deletion-14-day-implementation.md), Production NOT_APPLIED. Earlier status below is historical.
+
 ## Owner policy update — 2026-10-01
 
 Deletion request → **14-day grace period → automatic personal-data erasure**. This supersedes the immediate-delete candidate behavior described historically below. The existing handler calls deleteUser immediately; pending/access restriction/cancellation/deadline scheduling and administrator notice are **SEPARATE_IMPLEMENTATION_REQUIRED / FOLLOW_UP_REQUIRED**, not implemented by HQP-3. Do not deploy that candidate as compliance with the new lifecycle.

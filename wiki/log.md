@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-01 — ADR-2 isolated lifecycle candidate
+
+[ADR-2](account-deletion-14-day-implementation.md): fixed336h request/cancel/worker, server restrictions, canonical Essay release/HQP E1/E2, finance detachment, feedback/Storage/Auth-last, purpose-limited benefit and30day receipt. Local PG17/mocked transport/Flutter verification and bounded Owner package; Production NOT_APPLIED. External activation and full consumer UX gates remain. No DB/ledger/provider/LAB changes; historical ADR-1/1B preserved.
+
 ## 2026-10-01 — ADR-1B retention / re-registration design
 
 [ADR-1B](account-deletion-erasure-retention-boundary.md): Owner A/B/C/D accepted; fixed336h, minimal30-day receipt, finance detachment and purpose-limited benefit markers. Current UUID-based signup protection does not cover rejoin. Auth linking independently PARTIAL; provider/backup/finance/secret deployment activation gates remain. ADR-2 YES_WITH_EXTERNAL_GATES, not started. ADR-1 preserved; docs-only, no DB/Auth/LAB/provider operation.

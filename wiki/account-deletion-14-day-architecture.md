@@ -1,5 +1,7 @@
 # ADR-1 — 14-day account deletion lifecycle
 
+Successor: [ADR-2 local implementation](account-deletion-14-day-implementation.md), Production NOT_APPLIED. Earlier status below is historical.
+
 Date: 2026-10-01. Status: DESIGN REVIEW; NOT IMPLEMENTED / NOT APPLIED.
 Scope: canonical APP/shared-backend account lifecycle only. LAB/HQR-1 and Unified
 Wiki are concurrent work and were not modified. No DB connection, credentials,

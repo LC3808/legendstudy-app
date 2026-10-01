@@ -1,5 +1,7 @@
 # ADR-1B — Erasure, retention and re-registration boundary
 
+Successor: [ADR-2 local implementation](account-deletion-14-day-implementation.md), Production NOT_APPLIED. Earlier status below is historical.
+
 2026-10-01 · DESIGN / CANONICAL CONTRACT · NOT IMPLEMENTED.
 Successor to [ADR-1](account-deletion-14-day-architecture.md). Owner A/B/C/D are
 accepted; ADR-1's earlier readiness NO remains historical. This review concludes

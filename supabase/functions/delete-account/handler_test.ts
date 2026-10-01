@@ -1,142 +1,62 @@
 import { bearerToken, createHandler } from "./handler.ts";
-import type { AccountDeletionAdmin } from "./handler.ts";
-
-function equal(actual: unknown, expected: unknown) {
-  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    throw new Error(`Assertion failed: ${JSON.stringify(actual)}`);
-  }
+function assert(v: unknown) {
+  if (!v) throw Error("assertion failed");
 }
-
-type Calls = { resolved: string[]; deleted: string[] };
-
-const admin = (
-  calls: Calls,
-  options: {
-    tokens?: Record<string, string>;
-    admins?: string[];
-    deleted?: Set<string>;
-    throwOn?: "resolve" | "admin" | "delete";
-  } = {},
-): AccountDeletionAdmin => {
-  const tokens = options.tokens ?? { "good-token": "user-a" };
-  const gone = options.deleted ?? new Set<string>();
-  return {
-    async userIdFromToken(token) {
-      if (options.throwOn === "resolve") throw new Error("boom");
-      calls.resolved.push(token);
-      return tokens[token] ?? null;
-    },
-    async isAdmin(userId) {
-      if (options.throwOn === "admin") throw new Error("boom");
-      return (options.admins ?? []).includes(userId);
-    },
-    async deleteUser(userId) {
-      if (options.throwOn === "delete") throw new Error("boom");
-      calls.deleted.push(userId);
-      gone.add(userId);
-      return true;
-    },
-  };
-};
-
-const post = (init: RequestInit = {}) =>
-  new Request("https://example.invalid/delete-account", {
+const req = (body: unknown, token = true) =>
+  new Request("https://example.invalid", {
     method: "POST",
-    ...init,
+    headers: token ? { authorization: "Bearer synthetic-token" } : {},
+    body: JSON.stringify(body),
   });
-
-const authed = (token = "good-token", body?: unknown) =>
-  post({
-    headers: { authorization: `Bearer ${token}` },
-    body: body === undefined ? undefined : JSON.stringify(body),
+Deno.test("caller target rejected, no privileged delete dependency", async () => {
+  let calls = 0;
+  const h = createHandler({
+    call: async () => {
+      calls++;
+      return {};
+    },
   });
-
-Deno.test("a caller is identified only by the bearer token", () => {
-  equal(bearerToken(post()), null);
-  equal(bearerToken(post({ headers: { authorization: "Basic abc" } })), null);
-  equal(bearerToken(post({ headers: { authorization: "Bearer  " } })), null);
-  equal(
-    bearerToken(post({ headers: { authorization: "Bearer abc.def" } })),
-    "abc.def",
+  assert(
+    (await h(req({ operation: "request", user_id: "forged" }))).status === 400,
   );
+  assert(calls === 0);
 });
-
-Deno.test("no token is refused before anything else happens", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const response = await createHandler(admin(calls))(post());
-  equal(response.status, 401);
-  equal(await response.json(), { error: "unauthorized" });
-  equal(calls.deleted, []);
-});
-
-Deno.test("an unknown token deletes nothing", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const response = await createHandler(admin(calls))(authed("stale-token"));
-  equal(response.status, 401);
-  equal(calls.deleted, []);
-});
-
-Deno.test("the body cannot name the account to delete", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const response = await createHandler(admin(calls))(
-    authed("good-token", { user_id: "victim", email: "victim@example.com" }),
-  );
-  equal(response.status, 200);
-  equal(await response.json(), { status: "deleted" });
-  equal(calls.deleted, ["user-a"]);
-});
-
-Deno.test("an admin cannot delete themselves from the app", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const handler = createHandler(admin(calls, { admins: ["user-a"] }));
-  const response = await handler(authed());
-  equal(response.status, 403);
-  equal(await response.json(), { error: "admin_blocked" });
-  equal(calls.deleted, []);
-});
-
-Deno.test("repeating the request stays safe and says the same thing", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const handler = createHandler(admin(calls));
-  const first = await handler(authed());
-  const second = await handler(authed());
-  equal(first.status, 200);
-  equal(second.status, 200);
-  equal(await second.json(), { status: "deleted" });
-});
-
-Deno.test("a failure is reported without leaking anything", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  for (const stage of ["resolve", "admin", "delete"] as const) {
-    const handler = createHandler(admin(calls, { throwOn: stage }));
-    const response = await handler(authed());
-    equal(response.status, 500);
-    equal(await response.json(), { error: "deletion_failed" });
-  }
-});
-
-Deno.test("only POST deletes, and preflight carries no data", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const handler = createHandler(admin(calls));
-  const get = await handler(
-    new Request("https://example.invalid/delete-account", { method: "GET" }),
-  );
-  equal(get.status, 405);
-  const preflight = await handler(
-    new Request("https://example.invalid/delete-account", {
-      method: "OPTIONS",
+Deno.test("request receipt is 202 pending, never deleted", async () => {
+  const h = createHandler({
+    call: async () => ({
+      state: "DELETION_PENDING",
+      scheduled_deletion_at: "2026-10-15T00:00:00Z",
+      secret: "must-not-escape",
     }),
-  );
-  equal(preflight.status, 204);
-  equal(await preflight.text(), "");
-  equal(calls.deleted, []);
+  });
+  const r = await h(req({ operation: "request" }));
+  assert(r.status === 202);
+  const b = await r.text();
+  assert(b.includes("DELETION_PENDING") && !b.includes("secret"));
 });
-
-Deno.test("the response never carries schema or identifiers", async () => {
-  const calls: Calls = { resolved: [], deleted: [] };
-  const response = await createHandler(admin(calls))(authed());
-  const body = await response.text();
-  for (const leak of ["user-a", "good-token", "profiles", "bookmarks"]) {
-    if (body.includes(leak)) throw new Error(`leaked ${leak}`);
-  }
+Deno.test("anon denied before gateway", async () => {
+  const h = createHandler({
+    call: async () => {
+      throw Error();
+    },
+  });
+  assert((await h(req({ operation: "request" }, false))).status === 401);
+  assert(bearerToken(req({})) === "synthetic-token");
+});
+Deno.test("reauth rejection remains sanitized", async () => {
+  const h = createHandler({
+    call: async () => {
+      throw Error("sensitive");
+    },
+  });
+  const r = await h(req({ operation: "cancel" }));
+  assert(r.status === 403 && !(await r.text()).includes("sensitive"));
+});
+Deno.test("unknown old empty request cannot trigger deletion", async () => {
+  const h = createHandler({
+    call: async () => {
+      throw Error();
+    },
+  });
+  assert((await h(req({}))).status === 400);
 });
