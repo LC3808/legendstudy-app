@@ -1,5 +1,15 @@
 # ADR-2 — 336-hour account deletion implementation
 
+## ADR-2D current ownership successor
+
+[Ownership correction](account-deletion-ownership-compatibility.md): local non-superuser
+apply/rollback verified; 112 lifecycle +17 ownership checks PASS. Failed ADR-2C Production
+attempt fully rolled back/untracked. Its hash `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7` is
+SUPERSEDED_PRE_APPLY_FAILED_ATTEMPT. New hash `38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94`.
+Owner review READY; Production retry/general activation NOT_AUTHORIZED. Prior ADR-2C/2P
+sections below remain historical; use the current Owner package for any future review.
+
+
 ## ADR-2C narrow correction — Owner policy accepted
 
 2026-10-01. **COMPLETE / LOCAL ISOLATED VERIFIED. Production NOT_APPLIED.**

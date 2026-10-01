@@ -17,7 +17,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-Account deletion activation / ADR-2P: [Production preflight and Owner checklist](account-deletion-production-activation-preflight.md) — read-only catalog PASS; ADR-2C local corrections verified; external activation gates OPEN; no apply/deploy.
+Account deletion / ADR-2D: [Ownership correction and Owner retry checklist](account-deletion-ownership-compatibility.md) — isolated verified; failed Production attempt rolled back; retry requires Owner review.
 
 Human Quality / HQP: [HQP-3 implementation/Owner gate](human-quality-persistence-implementation.md) — isolated verified, Production NOT_APPLIED; [historical HQP-2](human-quality-persistence-canonical-review.md).
 

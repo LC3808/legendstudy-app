@@ -10,16 +10,19 @@ from psycopg import sql
 R=Path(__file__).resolve().parents[1]
 M=R/'supabase/migrations/20261001000100_quality_read_authorization.sql'
 V=R/'supabase/verification/quality_authorization'
-def main():
+def main(bootstrap_user="postgres"):
  ap=argparse.ArgumentParser();ap.add_argument('--pg-bin',type=Path,required=True);args=ap.parse_args()
  env={k:v for k,v in os.environ.items() if not k.startswith('PG')};env['LC_ALL']='C'
  def run(cmd,**kw):return subprocess.run(list(map(str,cmd)),check=True,capture_output=True,text=True,env=env,**kw).stdout
  assert ' 17.' in run([args.pg_bin/'postgres','--version'])
  with tempfile.TemporaryDirectory(prefix='hqp3-',dir='/private/tmp') as temp:
   root=Path(temp);sock=root/'socket';sock.mkdir();data=root/'db';started=False
-  run([args.pg_bin/'initdb','-D',data,'-U','postgres','--auth=trust','--no-locale','--encoding=UTF8'])
+  run([args.pg_bin/'initdb','-D',data,'-U',bootstrap_user,'--auth=trust','--no-locale','--encoding=UTF8'])
   try:
    run([args.pg_bin/'pg_ctl','-D',data,'-l',root/'server.log','-o',f"-k {sock} -p 5432 -c listen_addresses=''",'-w','start']);started=True
+   if bootstrap_user != 'postgres':
+    with psycopg.connect(host=str(sock),user=bootstrap_user,dbname='postgres',autocommit=True) as bootstrap:
+     bootstrap.execute('create role postgres login superuser; alter database postgres owner to postgres')
    with psycopg.connect(host=str(sock),port=5432,user='postgres',dbname='postgres',autocommit=True) as c:
     def scalar(q,p=()):return c.execute(q,p or None).fetchone()[0]
     def put(table,**v):

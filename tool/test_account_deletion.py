@@ -49,15 +49,20 @@ def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock)
  settled_before=scalar("select count(*) from public.credit_transactions where transaction_type='consume'")
  fb=str(scalar("insert into public.feedback_submissions(user_id,category,title,body,app_version,build_number,platform,os_version) values(%s,'inquiry','Synthetic','Synthetic feedback','1','1','web','test') returning id",(A,)))
 
- c.execute((h.R/'supabase/migrations/20261001000300_account_deletion_lifecycle.sql').read_text())
+ import test_account_deletion_ownership as ownership
+ admin=ownership.prepare(c,sock)
+ ownership_before=ownership.snapshot(c)
+ ownership.negative_and_failure_tests(c,admin,(h.R/'supabase/migrations/20261001000300_account_deletion_lifecycle.sql').read_text())
+ ownership.execute_as_production(c,admin,(h.R/'supabase/migrations/20261001000300_account_deletion_lifecycle.sql').read_text())
+ ownership.after_apply(c,admin,(h.R/'supabase/migrations/20261001000300_account_deletion_lifecycle.sql').read_text())
  if ROLLBACK_ONLY:
   c.execute('create view public.adr2_test_dependency as select * from public.account_deletion_requests')
   try:
-   c.execute((h.R/'supabase/verification/account_deletion/rollback.sql').read_text())
+   ownership.execute_as_production(c,admin,(h.R/'supabase/verification/account_deletion/rollback.sql').read_text())
    raise AssertionError('unexpected dependency removed')
   except psycopg.errors.DependentObjectsStillExist:
    c.execute('rollback');c.execute('drop view public.adr2_test_dependency');print('ROLLBACK_DEPENDENCY_REFUSED')
-  c.execute((h.R/'supabase/verification/account_deletion/rollback.sql').read_text());assert scalar("select to_regnamespace('account_private')") is None;assert oldpolicies==scalar("select jsonb_agg(to_jsonb(p) order by schemaname,tablename,policyname) from pg_policies p");assert oldql==scalar("select jsonb_agg(jsonb_build_array(p.oid,pg_get_functiondef(p.oid),p.proacl::text) order by p.oid) from pg_proc p where pronamespace='public'::regnamespace and proname like 'ql_%'");assert originals==[scalar('select pg_get_functiondef(%s::regprocedure)',(name,)) for name in restore_signatures];print('ROLLBACK_CANONICAL_PRESERVATION_PASS');print('ROLLBACK_PASS');return
+  ownership.execute_as_production(c,admin,(h.R/'supabase/verification/account_deletion/rollback.sql').read_text());assert scalar("select to_regnamespace('account_private')") is None;assert oldpolicies==scalar("select jsonb_agg(to_jsonb(p) order by schemaname,tablename,policyname) from pg_policies p");assert oldql==scalar("select jsonb_agg(jsonb_build_array(p.oid,pg_get_functiondef(p.oid),p.proacl::text) order by p.oid) from pg_proc p where pronamespace='public'::regnamespace and proname like 'ql_%'");assert originals==[scalar('select pg_get_functiondef(%s::regprocedure)',(name,)) for name in restore_signatures];assert ownership.snapshot(c)==ownership_before;print('ROLLBACK_OWNER_ACL_MEMBERSHIP_EXACT_PASS');print('ROLLBACK_CANONICAL_PRESERVATION_PASS');print('ROLLBACK_PASS');return
  checks=[]
  def ok(n,v=True):assert v,n;checks.append(n);print(n,'PASS',flush=True)
  def deny(n,fn):
@@ -133,7 +138,13 @@ def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock)
  ok('D54',job['phase']=='PERSONAL');ok('D55',rpc('account_deletion_claim',[5],role='account_lifecycle_worker')==[])
  deny('D8_D9',lambda:rpc('account_deletion_cancel',uid=U))
  rpc('account_deletion_personal',[str(pid),job['lease_token']],role='account_lifecycle_worker');ok('personal')
- for phase in ['STORAGE','PROVIDER','FINANCE']:rpc('account_deletion_advance',[str(pid),job['lease_token'],phase],role='account_lifecycle_worker')
+ for phase in ['STORAGE','PROVIDER']:rpc('account_deletion_advance',[str(pid),job['lease_token'],phase],role='account_lifecycle_worker')
+ c.execute('set role account_lifecycle_worker')
+ admin.execute('alter role postgres nosuperuser createrole bypassrls')
+ try:scalar('select public.account_deletion_advance(%s,%s,%s)',(str(pid),job['lease_token'],'FINANCE'))
+ finally:
+  c.execute('reset role');admin.execute('alter role postgres superuser')
+ ok('FINANCE_NON_SUPERUSER_DEFINER_CHAIN')
  deny('D38_auth_last',lambda:rpc('account_deletion_advance',[str(pid),job['lease_token'],'AUTH'],role='account_lifecycle_worker'))
  c.execute('delete from auth.users where id=%s',(U,))
  rpc('account_deletion_advance',[str(pid),job['lease_token'],'AUTH'],role='account_lifecycle_worker')
@@ -252,7 +263,7 @@ def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock)
  ok('D29',results==['erased','42501'])
  # Rollback must refuse an active or historical lifecycle, preserving all data.
  try:
-  c.execute((h.R/'supabase/verification/account_deletion/rollback.sql').read_text())
+  ownership.execute_as_production(c,admin,(h.R/'supabase/verification/account_deletion/rollback.sql').read_text())
   raise AssertionError('unsafe rollback allowed')
  except psycopg.Error:
   c.execute('rollback');ok('rollback_data_refused')
@@ -261,4 +272,4 @@ def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock)
 ROLLBACK_ONLY='--rollback-probe' in sys.argv
 if ROLLBACK_ONLY:sys.argv.remove('--rollback-probe')
 h.verify_hqp=verify
-h.main()
+h.main(bootstrap_user="supabase_admin")

@@ -1,19 +1,10 @@
 {
-  "task": "ADR-2C",
+  "task": "ADR-2D",
   "status": "COMPLETE_LOCAL_ISOLATED_VERIFIED",
   "production": "NOT_APPLIED",
   "migration": "20261001000300_account_deletion_lifecycle.sql",
-  "migration_sha256": "b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7",
+  "migration_sha256": "38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94",
   "postgres_version": "17",
-  "sql_assertions": 111,
-  "rollback": [
-    "DATA_REFUSAL_PASS",
-    "UNEXPECTED_DEPENDENCY_REFUSAL_PASS",
-    "CLEAN_ROLLBACK_PASS",
-    "CANONICAL_POLICY_QL_PRESERVATION_PASS"
-  ],
-  "deno_tests": 48,
-  "flutter_tests": 7,
   "live_gateway": "NOT_RUN",
   "storage_provider_runtime": "NOT_RUNTIME_VERIFIED",
   "production_writes": 0,
@@ -391,11 +382,12 @@
     "APP/LAB global restricted navigation and reauthentication UX remain activation work; benefit dispatch recovery is server-side.",
     "Narrow live ledger/collision recheck only; prior ADR-2P detailed catalog evidence retained.",
     "Backup horizon/checkpoint transport freshness and restore replay require operational verification.",
-    "Finance unknown historical/paid reference review required; only documented UUID reference formats detached."
+    "Finance unknown historical/paid reference review required; only documented UUID reference formats detached.",
+    "Supabase supautils storage.objects policy delegation verified read-only; local plain PG17 has no managed Storage schema/extension. No Production policy DDL was exercised."
   ],
   "analyze": "PASS: ASCII-path copy of current changed Auth sources/test; no issues",
-  "previous_migration_sha256": "d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1",
-  "previous_hash_status": "SUPERSEDED_PRE_APPLY",
+  "previous_migration_sha256": "b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7",
+  "previous_hash_status": "SUPERSEDED_PRE_APPLY_FAILED_ATTEMPT",
   "corrections": {
     "P01": "RESOLVED",
     "P02": "PARTIAL_EXTERNAL_GATE",
@@ -412,5 +404,42 @@
     "lifecycle_table_exists": false,
     "provider005_tracked": false,
     "day_targets_tracked": false
-  }
+  },
+  "adr2c_historical_tests": {
+    "sql_assertions": 111,
+    "deno_tests": 48,
+    "flutter_tests": 7,
+    "rollback": [
+      "DATA_REFUSAL_PASS",
+      "UNEXPECTED_DEPENDENCY_REFUSAL_PASS",
+      "CLEAN_ROLLBACK_PASS",
+      "CANONICAL_POLICY_QL_PRESERVATION_PASS"
+    ]
+  },
+  "full_non_superuser_apply": "PASS: actual canonical public/Essay/HQP chain; managed Storage policy branch catalog-verified separately",
+  "full_regression": "PASS",
+  "owner_package_ready": true,
+  "sql_assertions": 112,
+  "ownership_regression_checks": 17,
+  "deno_tests": 48,
+  "flutter_tests": 7,
+  "rollback": [
+    "DATA_REFUSAL_PASS",
+    "DEPENDENCY_REFUSAL_PASS",
+    "NON_SUPERUSER_CLEAN_ROLLBACK_PASS",
+    "EXACT_OWNERS_ACL_MEMBERSHIP_DEFINITIONS_PASS"
+  ],
+  "ownership_validation": {
+    "O1_O16": "PASS",
+    "S1_S20": "PASS for function/role/schema bridge topology; managed Storage extension excluded from local runtime",
+    "F1_F4": "PASS",
+    "temporary_set_required": true,
+    "temporary_create_required": true,
+    "finance_schema": "account_private",
+    "scope": "five existing essay_executor functions + new detach_finance only",
+    "new_finance_execute": "owner + postgres only; explicit nested-definer invocation, no client grant",
+    "production_storage_setting_verified": true,
+    "storage_managed_extension_runtime": "NOT_RUN"
+  },
+  "hqp_shared_harness_regression": 105
 }

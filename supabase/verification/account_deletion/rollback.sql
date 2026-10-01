@@ -2,6 +2,34 @@
 begin;
 set local lock_timeout='5s';
 set local statement_timeout='30s';
+-- ADR-2D exact reviewed ownership topology; temporary snapshots disappear on commit.
+create temporary table adr2d_expected(nsp text,name text,args text,owner_name text,definer boolean,acl text) on commit drop;
+insert into adr2d_expected values
+('essay_private','credit_post_grant','p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone','essay_executor',true,'{essay_executor=X/essay_executor}'),
+('essay_private','credit_profile_signup','','essay_executor',true,'{essay_executor=X/essay_executor}'),
+('essay_private','lock_job','p_evaluation uuid','essay_executor',false,'{essay_executor=X/essay_executor}'),
+('essay_private','owner','p_session uuid','essay_executor',false,'{essay_executor=X/essay_executor}'),
+('essay_private','uid','','postgres',true,'{postgres=X/postgres,essay_executor=X/postgres}'),
+('public','essay_claim_signup_credit','','essay_executor',true,'{essay_executor=X/essay_executor,authenticated=X/essay_executor}'),
+('public','fetch_own_mock_attempt','p_attempt_id uuid','postgres',true,'{postgres=X/postgres,authenticated=X/postgres}'),
+('public','is_quality_operator','','postgres',true,'{postgres=X/postgres,authenticated=X/postgres}'),
+('public','submit_mock_attempt','p_attempt_id uuid, p_study_session_id uuid, p_answer_key_version_id uuid, p_grade_cutoff_version_id uuid, p_scoring_version text, p_answers jsonb','postgres',true,'{postgres=X/postgres,authenticated=X/postgres}');
+do $$begin
+ if current_user<>'postgres' then raise exception 'ADR2D requires reviewed postgres execution context';end if;
+ if (select count(*) from pg_auth_members where roleid='essay_executor'::regrole)<>1 or not exists(
+ select 1 from pg_auth_members where roleid='essay_executor'::regrole and member='postgres'::regrole
+ and grantor='supabase_admin'::regrole and admin_option and not inherit_option and not set_option)
+ then raise exception 'ADR2D membership drift';end if;
+ if has_schema_privilege('essay_executor','essay_private','CREATE') or has_schema_privilege('essay_executor','public','CREATE') then raise exception 'ADR2D schema CREATE drift';end if;
+ if exists(select 1 from adr2d_expected e left join pg_namespace n on n.nspname=e.nsp left join pg_proc p on p.pronamespace=n.oid and p.proname=e.name and pg_get_function_identity_arguments(p.oid)=e.args
+ where p.oid is null or pg_get_userbyid(p.proowner)<>e.owner_name or p.prosecdef<>e.definer
+ or p.proconfig is distinct from array['search_path=""'] or p.proacl::text is distinct from e.acl)
+ then raise exception 'ADR2D function owner/security/ACL drift';end if;
+end$$;
+create temporary table adr2d_functions on commit drop as select p.oid,p.proowner,p.proacl,p.prosecdef,p.proconfig from pg_proc p join pg_namespace n on n.oid=p.pronamespace join adr2d_expected e on e.nsp=n.nspname and e.name=p.proname and e.args=pg_get_function_identity_arguments(p.oid);
+create temporary table adr2d_membership on commit drop as select * from pg_auth_members where roleid='essay_executor'::regrole;
+create temporary table adr2d_schema on commit drop as select n.oid,n.nspowner,coalesce((select jsonb_agg(to_jsonb(a) order by grantor,grantee,privilege_type,is_grantable) from aclexplode(coalesce(n.nspacl,acldefault('n',n.nspowner))) a where not (n.nspname='public' and pg_get_userbyid(a.grantee) in ('account_lifecycle_worker','account_erasure_executor') and a.privilege_type='USAGE' and not a.is_grantable)),'[]'::jsonb) acl from pg_namespace n where nspname in ('public','essay_private');
+
 do $$begin
  if exists(select 1 from public.account_deletion_requests) or exists(select 1 from account_private.benefit_claims)
  or exists(select 1 from account_private.benefit_delivery) or exists(select 1 from account_private.reauth_tickets)
@@ -21,29 +49,13 @@ drop trigger credit_ledger_no_update on public.credit_transactions;
 drop trigger credit_grant_terms_frozen on public.credit_grants;
 create trigger credit_ledger_no_update before update on public.credit_transactions for each row execute function public.essay_product_reject_update();
 create trigger credit_grant_terms_frozen before update on public.credit_grants for each row execute function public.essay_product_reject_update();
-CREATE OR REPLACE FUNCTION public.is_quality_operator()
- RETURNS boolean
- LANGUAGE plpgsql
- STABLE SECURITY DEFINER
- SET search_path TO ''
-AS $function$
-declare claims jsonb; expiry numeric;
-begin
- -- Identity is always auth.uid(); API JWT signature validation remains at the gateway.
- -- Require an unexpired verified request context, also denying missing/malformed context.
- claims := nullif(current_setting('request.jwt.claims',true),'')::jsonb;
- if auth.uid() is null or claims->>'sub' is distinct from auth.uid()::text or claims->>'role' is distinct from 'authenticated' or jsonb_typeof(claims->'exp') is distinct from 'number' then return false; end if;
- expiry := (claims->>'exp')::numeric;
- if expiry <= extract(epoch from statement_timestamp()) then return false; end if;
- return exists(select 1 from public.quality_operators q where q.user_id=auth.uid());
-exception when invalid_text_representation or numeric_value_out_of_range then return false;
-end$function$;
-CREATE OR REPLACE FUNCTION essay_private.uid()
- RETURNS uuid
- LANGUAGE sql
- SECURITY DEFINER
- SET search_path TO ''
-AS $function$select auth.uid()$function$;
+-- ADR-2D bridge BEGIN: only the five reviewed essay_executor function replacements.
+-- Existing supabase_admin-granted membership is untouched; this grant has postgres grantor.
+grant essay_executor to postgres with admin false, inherit false, set true granted by postgres;
+grant create on schema essay_private to essay_executor;
+-- ADR2D_TEST_AFTER_FIRST_SCHEMA_GRANT
+grant create on schema public to essay_executor;
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.owner(p_session uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -71,27 +83,6 @@ begin
  select * into e from public.essay_evaluations where id=p_evaluation for update;
  if e.id is null then raise sqlstate 'PT404' using message='NOT_FOUND'; end if;
  return e;
-end$function$;
-CREATE OR REPLACE FUNCTION essay_private.credit_profile_signup()
- RETURNS trigger
- LANGUAGE plpgsql
- SECURITY DEFINER
- SET search_path TO ''
-AS $function$begin
- if essay_private.credit_signup_eligible(new.id) then
- perform essay_private.credit_post_grant(new.id,3,'signup_bonus','signup_bonus/'||new.id::text,'signup_bonus_v1','system/signup_bonus',null);
- end if;return new;
-end$function$;
-CREATE OR REPLACE FUNCTION public.essay_claim_signup_credit()
- RETURNS uuid
- LANGUAGE plpgsql
- SECURITY DEFINER
- SET search_path TO ''
-AS $function$
-declare u uuid=essay_private.uid();begin
- if u is null then raise sqlstate 'PT401' using message='UNAUTHENTICATED';end if;
- if not essay_private.credit_signup_eligible(u) then raise sqlstate 'PT403' using message='SIGNUP_NOT_ELIGIBLE';end if;
- return essay_private.credit_post_grant(u,3,'signup_bonus','signup_bonus/'||u::text,'signup_bonus_v1','system/signup_bonus',null);
 end$function$;
 CREATE OR REPLACE FUNCTION essay_private.credit_post_grant(p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone)
  RETURNS uuid
@@ -121,6 +112,56 @@ begin
  return g.id;
 exception when unique_violation then raise sqlstate 'PT409' using message='CONFLICT';
 end$function$;
+CREATE OR REPLACE FUNCTION essay_private.credit_profile_signup()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO ''
+AS $function$begin
+ if essay_private.credit_signup_eligible(new.id) then
+ perform essay_private.credit_post_grant(new.id,3,'signup_bonus','signup_bonus/'||new.id::text,'signup_bonus_v1','system/signup_bonus',null);
+ end if;return new;
+end$function$;
+CREATE OR REPLACE FUNCTION public.essay_claim_signup_credit()
+ RETURNS uuid
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO ''
+AS $function$
+declare u uuid=essay_private.uid();begin
+ if u is null then raise sqlstate 'PT401' using message='UNAUTHENTICATED';end if;
+ if not essay_private.credit_signup_eligible(u) then raise sqlstate 'PT403' using message='SIGNUP_NOT_ELIGIBLE';end if;
+ return essay_private.credit_post_grant(u,3,'signup_bonus','signup_bonus/'||u::text,'signup_bonus_v1','system/signup_bonus',null);
+end$function$;
+-- ADR2D_TEST_AFTER_REPLACEMENTS
+reset role;
+-- ADR2D_TEST_AFTER_RESET
+revoke create on schema essay_private,public from essay_executor;
+revoke essay_executor from postgres granted by postgres;
+-- ADR-2D bridge END: no role/schema privilege is intentionally retained.
+CREATE OR REPLACE FUNCTION public.is_quality_operator()
+ RETURNS boolean
+ LANGUAGE plpgsql
+ STABLE SECURITY DEFINER
+ SET search_path TO ''
+AS $function$
+declare claims jsonb; expiry numeric;
+begin
+ -- Identity is always auth.uid(); API JWT signature validation remains at the gateway.
+ -- Require an unexpired verified request context, also denying missing/malformed context.
+ claims := nullif(current_setting('request.jwt.claims',true),'')::jsonb;
+ if auth.uid() is null or claims->>'sub' is distinct from auth.uid()::text or claims->>'role' is distinct from 'authenticated' or jsonb_typeof(claims->'exp') is distinct from 'number' then return false; end if;
+ expiry := (claims->>'exp')::numeric;
+ if expiry <= extract(epoch from statement_timestamp()) then return false; end if;
+ return exists(select 1 from public.quality_operators q where q.user_id=auth.uid());
+exception when invalid_text_representation or numeric_value_out_of_range then return false;
+end$function$;
+CREATE OR REPLACE FUNCTION essay_private.uid()
+ RETURNS uuid
+ LANGUAGE sql
+ SECURITY DEFINER
+ SET search_path TO ''
+AS $function$select auth.uid()$function$;
 create or replace function public.fetch_own_mock_attempt(p_attempt_id uuid)
 returns jsonb language plpgsql stable security definer set search_path = ''
 as $$
@@ -228,7 +269,14 @@ drop function account_private.guard_request();
 drop function account_private.personal_write_gate();
 drop function account_private.fenced(uuid,uuid);
 drop function account_private.finance_privacy_guard();
+-- Remove only the approved private finance function under its canonical owner.
+create temporary table adr2d_finance_membership on commit drop as select * from pg_auth_members where roleid='account_erasure_executor'::regrole;
+grant account_erasure_executor to postgres with admin false, inherit false, set true granted by postgres;
+set local role account_erasure_executor;
 drop function account_private.detach_finance(uuid);
+reset role;
+revoke account_erasure_executor from postgres granted by postgres;
+do $$begin if exists((select * from adr2d_finance_membership except select * from pg_auth_members where roleid='account_erasure_executor'::regrole) union all (select * from pg_auth_members where roleid='account_erasure_executor'::regrole except select * from adr2d_finance_membership)) then raise exception 'ADR2D finance rollback membership residue';end if;end$$;
 drop function account_private.caller_write_gate();
 drop table account_private.benefit_delivery;
 drop table account_private.benefit_claims;
@@ -243,4 +291,10 @@ revoke all on schema public from account_erasure_executor,account_lifecycle_work
 drop schema account_private;
 drop role account_erasure_executor;
 drop role account_lifecycle_worker;
+-- Fail closed rather than commit privilege residue or altered function security.
+do $$begin
+ if exists((select * from adr2d_membership except select * from pg_auth_members where roleid='essay_executor'::regrole) union all (select * from pg_auth_members where roleid='essay_executor'::regrole except select * from adr2d_membership)) then raise exception 'ADR2D membership restoration failed';end if;
+ if exists(select 1 from adr2d_schema s join pg_namespace n on n.oid=s.oid where n.nspowner<>s.nspowner or s.acl is distinct from coalesce((select jsonb_agg(to_jsonb(a) order by grantor,grantee,privilege_type,is_grantable) from aclexplode(coalesce(n.nspacl,acldefault('n',n.nspowner))) a where not (n.nspname='public' and pg_get_userbyid(a.grantee) in ('account_lifecycle_worker','account_erasure_executor') and a.privilege_type='USAGE' and not a.is_grantable)),'[]'::jsonb)) then raise exception 'ADR2D schema ACL restoration failed';end if;
+ if exists(select 1 from adr2d_functions s left join pg_proc p on p.oid=s.oid where p.oid is null or p.proowner<>s.proowner or p.proacl is distinct from s.proacl or p.prosecdef<>s.prosecdef or p.proconfig is distinct from s.proconfig) then raise exception 'ADR2D function security restoration failed';end if;
+end$$;
 commit;

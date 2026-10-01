@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-10-01 — ADR-2D ownership correction verified
+
+[Closeout](account-deletion-ownership-compatibility.md): five-function and single finance-owner bridges preserve membership/schema ACL; all nine security contracts preserved. Non-superuser full apply/rollback,112SQL+17ownership,48Deno,7Flutter/analyze PASS. Failed Production hash superseded; new Owner package ready, no retry/apply/deploy. Managed Storage policy delegation read-only verified; runtime gate remains. ADR-2C privacy semantics unchanged.
+
+
+## 2026-10-01 — ADR-2D partial ownership correction
+
+[Blocker](account-deletion-ownership-compatibility.md): approved five-function bridge/transaction rollback locally verified; full non-superuser migration reaches a separate account_erasure_executor ownership failure. No scope expansion, Production writes or retry. Full validation and publication withheld.
+
 ## 2026-10-01 — ADR-2C completed / Owner policy resolved
 
 [Closeout](account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted): P-01/P-03 resolved; P-02 trusted adapters locally verified, provider activation external. Privacy erasure takes priority; no global promotion hold; missing historical marker duplicate risk accepted, current outages still defer grants. PG17 111/Deno48/Flutter7 PASS; rollback/analyze PASS. Same unapplied SQL hash/package regenerated. Read-only ledger23/ADR-2 absent; no Production writes/deploy/providers/LAB edits.

@@ -1,19 +1,44 @@
 # ADR-2 Owner review / application package
 
-**ADR-2C LOCAL ISOLATED VERIFIED / OWNER REVIEW READY. Production NOT_APPLIED. Apply/deploy requires separate Owner authorization.**
+**ADR-2D LOCAL ISOLATED VERIFIED / OWNER REVIEW READY. Production NOT_APPLIED. Apply/deploy requires separate Owner authorization.**
 
 Old hash `d7fa626d468e5c1d071a693f09f15fd4f34838db0f87b1a8acd1955dde6aa3b1`: SUPERSEDED_PRE_APPLY. Current hash below is the reviewed unapplied candidate.
-[Correction closeout](../../../wiki/account-deletion-14-day-implementation.md#adr-2c-narrow-correction--owner-policy-accepted) supersedes the prior instructions below; no apply/deploy authorization.
+[Ownership correction closeout](../../../wiki/account-deletion-ownership-compatibility.md) supersedes the prior instructions below; no apply/deploy authorization.
 Migration: [20261001000300_account_deletion_lifecycle.sql](../../migrations/20261001000300_account_deletion_lifecycle.sql).
-SHA-256: `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7`.
+SHA-256: `38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94`.
 [Implementation](../../../wiki/account-deletion-14-day-implementation.md), [validation](validation.json),
 [catalog](catalog.sql), [rollback](rollback.sql).
+
+## ADR-2D ownership correction / fresh retry gate
+
+Failed Production attempt hash `b815b4d82ddf14c33f22be64f44a21666918787e9466f097f858c5b4b5844ff7` is
+SUPERSEDED_PRE_APPLY_FAILED_ATTEMPT; Owner confirmed FULLY_ROLLED_BACK. Ledger23, no ADR-2
+objects/tracking. Never retry that hash. [Ownership audit](../../../wiki/account-deletion-ownership-compatibility.md)
+and [inventory](ownership_inventory.json) define all nine function owners and exact security.
+Run [ownership_catalog.sql](ownership_catalog.sql) read-only before/after application.
+Check current execution role postgres, expected membership ADMIN=true/INHERIT=false/SET=false
+from supabase_admin, exact schema ACLs, nine security_match rows, managed storage.objects
+policy delegation. Missing/mismatched state: STOP, not automatic privilege adaptation.
+
+Only reviewed bridges are five existing essay_executor functions and new detach_finance.
+All temporary SET/CREATE restored within the same transaction; no schema owner change.
+Final finance function owner account_erasure_executor, EXECUTE owner+postgres only. This
+explicit private postgres grant supports nested lifecycle definers; client roles get none.
+Postflight verifies no essay_executor CREATE on public/essay_private, no finance CREATE on
+account_private, no residual SET/INHERIT, nine unchanged security contracts, enabled=false,
+zero request/benefit rows and no scheduler. Public USAGE for two new executor roles is an
+original ADR-2 baseline grant, not bridge residue. Capture schema ACL fingerprints as defined
+in inventory JSON. Successful apply is not activation and is not authorized by this package.
+
+Tests:112 lifecycle SQL +17 ownership checks, non-superuser rollback PASS; Deno48/Flutter7 PASS.
+Managed Storage policy authority is read-only catalog verified; supautils/storage schema is
+not emulated in plain local PG17. Owner Storage policy postflight remains mandatory.
 
 ## ADR-2C application delta and activation boundaries
 
 Same unapplied migration; no additional version. Capture-state metadata and worker-only
 account_deletion_capture_result are included in the catalog/rollback inventory (7 tables,
-34 functions). PG17 111 / Deno48 / Flutter7 PASS; isolated evidence is not live verification.
+34 functions). PG17 112 +17 ownership / Deno48 / Flutter7 PASS; isolated evidence is not live verification.
 
 Owner rejects a global benefit hold. Failed/unavailable historical marker capture does not
 block erasure or other users' promotions. No raw identity fallback. Future verified signup

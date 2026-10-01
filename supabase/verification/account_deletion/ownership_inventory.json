@@ -1,0 +1,162 @@
+{
+  "source": "Production read-only catalogs 2026-10-01; before ADR-2D",
+  "execution_role": {
+    "name": "postgres",
+    "superuser": false,
+    "bypassrls": true,
+    "createrole": true
+  },
+  "membership": {
+    "role": "essay_executor",
+    "member": "postgres",
+    "grantor": "supabase_admin",
+    "admin": true,
+    "inherit": false,
+    "set": false
+  },
+  "functions": [
+    {
+      "args": "p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone",
+      "nspname": "essay_private",
+      "owner": "essay_executor",
+      "proacl": "{essay_executor=X/essay_executor}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "credit_post_grant",
+      "prosecdef": true
+    },
+    {
+      "args": "",
+      "nspname": "essay_private",
+      "owner": "essay_executor",
+      "proacl": "{essay_executor=X/essay_executor}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "credit_profile_signup",
+      "prosecdef": true
+    },
+    {
+      "args": "p_evaluation uuid",
+      "nspname": "essay_private",
+      "owner": "essay_executor",
+      "proacl": "{essay_executor=X/essay_executor}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "lock_job",
+      "prosecdef": false
+    },
+    {
+      "args": "p_session uuid",
+      "nspname": "essay_private",
+      "owner": "essay_executor",
+      "proacl": "{essay_executor=X/essay_executor}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "owner",
+      "prosecdef": false
+    },
+    {
+      "args": "",
+      "nspname": "essay_private",
+      "owner": "postgres",
+      "proacl": "{postgres=X/postgres,essay_executor=X/postgres}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "uid",
+      "prosecdef": true
+    },
+    {
+      "args": "",
+      "nspname": "public",
+      "owner": "essay_executor",
+      "proacl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "essay_claim_signup_credit",
+      "prosecdef": true
+    },
+    {
+      "args": "p_attempt_id uuid",
+      "nspname": "public",
+      "owner": "postgres",
+      "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "fetch_own_mock_attempt",
+      "prosecdef": true
+    },
+    {
+      "args": "",
+      "nspname": "public",
+      "owner": "postgres",
+      "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "is_quality_operator",
+      "prosecdef": true
+    },
+    {
+      "args": "p_attempt_id uuid, p_study_session_id uuid, p_answer_key_version_id uuid, p_grade_cutoff_version_id uuid, p_scoring_version text, p_answers jsonb",
+      "nspname": "public",
+      "owner": "postgres",
+      "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "proname": "submit_mock_attempt",
+      "prosecdef": true
+    }
+  ],
+  "schemas": [
+    {
+      "nspacl": "{supabase_admin=UC/supabase_admin,postgres=U*/supabase_admin,anon=U/supabase_admin,authenticated=U/supabase_admin,service_role=U/supabase_admin,supabase_storage_admin=U*C*/supabase_admin,dashboard_user=UC/supabase_admin}",
+      "nspname": "storage",
+      "owner": "supabase_admin"
+    },
+    {
+      "nspacl": "{postgres=UC/postgres,essay_executor=U/postgres}",
+      "nspname": "essay_private",
+      "owner": "postgres"
+    },
+    {
+      "nspacl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner,essay_executor=U/pg_database_owner,essay_worker=U/pg_database_owner,essay_finance=U/pg_database_owner}",
+      "nspname": "public",
+      "owner": "pg_database_owner"
+    }
+  ],
+  "tables": "Modified public tables/triggers postgres-owned; storage.objects supabase_storage_admin-owned; managed policy authority requires separate platform verification",
+  "schema_acl_fingerprints": {
+    "essay_private": "cd12f98486ee6502b256dc2844d50946b0cc9eab2db3598baf5877f759aae6eb",
+    "public": "4eb1761cc92e94c9d8b806136cd5b3230f1d9a32842d2d4733c4e3bf719c0d8c"
+  },
+  "fingerprint_algorithm": "SHA256 of sorted aclitem strings joined by newline; role/grantor names, not OIDs",
+  "managed_storage_policy_authority": {
+    "verified_read_only": true,
+    "setting": "supautils.policy_grants",
+    "postgres_includes": "storage.objects",
+    "storage_owner_membership": false,
+    "local_runtime": "NOT_EMULATED: managed extension not installed; plain local harness lacks storage.objects"
+  },
+  "final_finance_contract": {
+    "owner": "account_erasure_executor",
+    "prosecdef": true,
+    "proconfig": [
+      "search_path=\"\""
+    ],
+    "execute": [
+      "account_erasure_executor",
+      "postgres"
+    ],
+    "browser_execute": false,
+    "temporary_membership_restored": true,
+    "temporary_create_removed": true
+  }
+}

@@ -3,7 +3,7 @@
 ## Current product state
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
-[ADR-2C](account-deletion-14-day-implementation.md): LOCAL_VERIFIED; NOT_APPLIED.
+[ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
 
 LegendStudy+ native Flutter: Home / Materials / Learning / LAB / MY.
 Guest materials search/filter/detail/external access; owner saved/recent. Study Timer + Mock Exam/scoring/result foundation,
@@ -105,7 +105,7 @@ model first after separate instruction; then internal-grade, mock-score, admissi
 
 ## Open release gates
 
-- Account deletion NOT_APPLIED; ADR-2C external activation gates OPEN.
+- Account deletion NOT_APPLIED; ADR-2D retry review/activation gates OPEN.
   Apple revoke, privacy/Store acceptance OPEN.
 - Apple secret renewal and Google credential rotation OPEN.
 - App recovery mailbox expired/reused/cold/warm acceptance remains open;
