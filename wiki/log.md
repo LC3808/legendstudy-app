@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-10-01 — ADR-1B retention / re-registration design
+
+[ADR-1B](account-deletion-erasure-retention-boundary.md): Owner A/B/C/D accepted; fixed336h, minimal30-day receipt, finance detachment and purpose-limited benefit markers. Current UUID-based signup protection does not cover rejoin. Auth linking independently PARTIAL; provider/backup/finance/secret deployment activation gates remain. ADR-2 YES_WITH_EXTERNAL_GATES, not started. ADR-1 preserved; docs-only, no DB/Auth/LAB/provider operation.
+
+## 2026-10-01 — ADR-1 account deletion architecture review
+
+[ADR-1](account-deletion-14-day-architecture.md): immediate-delete candidate lacks 14-day lifecycle. Designed fixed deadline, restricted access/cancellation, erasure/retry/watchdog and HQP E1/E2 ordering. Found signup UUID/finance actor linkage surviving FK detachment; retention/cleanup gates require resolution before implementation. APP documentation only; no credentials, DB, SQL, code, LAB/HQR-1 or Unified Wiki changes.
+
 ## 2026-10-01 — HQP Production gateway authorization PASS
 
 [Closeout](human-quality-persistence-implementation.md#production-gateway-closeout--2026-10-01): Owner applied/tracked HQP; real JWT operator reads/non-operator+anon denies/direct-table denies/forgery denies PASS. Missing case=P0002/HTTP500, not404. Normal INSERT NOT_ASSESSABLE; no valid writer payload or app/HQP data writes. Existing Quality gateway behavior PASS; exact live catalog equality not rerun. Six safety tests PASS; no secrets/bodies stored, SQL/ledger/LAB/provider changes. Separate write-UI task may follow; Pilot closed.

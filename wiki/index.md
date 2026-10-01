@@ -154,6 +154,8 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [Auth Recovery — code verified; Production E2E pending](auth-recovery.md)
 - [Account Deletion & Privacy — foundation implemented; Production deletion pending](account-deletion-privacy.md)
+- [ADR-1 — 14-day account deletion architecture; design only](account-deletion-14-day-architecture.md)
+- [ADR-1B — Erasure/retention/rejoin boundary; ADR-2 external gates](account-deletion-erasure-retention-boundary.md)
 
 - [In-App Exam architecture — paper-first engine / independent Viewer gates](architecture-in-app-exam.md)
 

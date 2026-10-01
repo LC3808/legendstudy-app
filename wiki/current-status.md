@@ -3,10 +3,10 @@
 ## Current product state
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
+[ADR-1B](account-deletion-erasure-retention-boundary.md): design.
 
-LegendStudy+ / 레전드스터디+, native Flutter App. Five tabs: Home / Materials /
-Learning / LAB / MY. Guest-first materials search/filter/detail/external access;
-owner-scoped saved/recent. Study Timer + Mock Exam/scoring/result foundation,
+LegendStudy+ native Flutter: Home / Materials / Learning / LAB / MY.
+Guest materials search/filter/detail/external access; owner saved/recent. Study Timer + Mock Exam/scoring/result foundation,
 optional Mock study-time inclusion, KST shared aggregation. MY Profile/private
 photo/school-grade, seven-day/eight-week/six-month study trends, actual Mock score
 summary; LAB internal-grade/Mock details and gated Essay live entry.

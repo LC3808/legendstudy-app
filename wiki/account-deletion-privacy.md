@@ -6,6 +6,8 @@ Deletion request → **14-day grace period → automatic personal-data erasure**
 
 [HQP-3](human-quality-persistence-implementation.md) follows final evaluation hard erasure by deleting dependent QA judgments/findings, including hashes/notes; reviewer account erasure removes reviewer identity while retaining reviews of existing student subjects. Invalidation/reevaluation preserve QA. Deletion-pending data is not analytics data. PRIVACY_ANALYTICS_RETENTION_DESIGN is a separate future gate; no archive/copy-before-delete/pseudonymization pipeline authorized.
 
+ADR-1 targeted audit and proposed lifecycle: [14-day architecture](account-deletion-14-day-architecture.md). Current FK inventory, credit residual identifiers, cancellation/access gates and erasure ordering there supersede the limited historical inventory below. Design only; retention/cleanup gates remain before implementation.
+
 ## Native Apple gate — 2026-09-21
 
 App iOS Apple native sign-in integration does not close account-deletion release
