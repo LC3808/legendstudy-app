@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-01 — HQP-3 isolated implementation / Owner package
+
+[HQP-3](human-quality-persistence-implementation.md): one migration, two QA tables, three gated RPCs; E1 evaluation cascade/E2 reviewer nulling, immutable correction/idempotency/rubric/targets. PG17 105 checks and bounded rollback PASS; existing Quality/Essay/Credit catalogs unchanged. Owner apply package ready, Production NOT_APPLIED; no ledger repair/provider/LAB/UI/Pilot. 14-day account lifecycle and deletion notice require separate implementation; analytics retention separate future design.
+
 ## 2026-10-01 — HQP-2 canonical Human Quality review
 
 [Review](human-quality-persistence-canonical-review.md): accept HQP-1 with narrow corrections; D1–D5 accepted. Existing evaluation/JSON/root/operator facts reused; bounded RPCs, correction/idempotency and rubric targets clarified. Owner E1 student erasure retention and E2 reviewer attribution decisions remain: READY_FOR_IMPLEMENTATION=NO. No SQL, DB access, credential/provider call, code or LAB change. Production states unchanged.

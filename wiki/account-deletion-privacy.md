@@ -1,5 +1,11 @@
 # Account Deletion & Privacy Lifecycle
 
+## Owner policy update — 2026-10-01
+
+Deletion request → **14-day grace period → automatic personal-data erasure**. This supersedes the immediate-delete candidate behavior described historically below. The existing handler calls deleteUser immediately; pending/access restriction/cancellation/deadline scheduling and administrator notice are **SEPARATE_IMPLEMENTATION_REQUIRED / FOLLOW_UP_REQUIRED**, not implemented by HQP-3. Do not deploy that candidate as compliance with the new lifecycle.
+
+[HQP-3](human-quality-persistence-implementation.md) follows final evaluation hard erasure by deleting dependent QA judgments/findings, including hashes/notes; reviewer account erasure removes reviewer identity while retaining reviews of existing student subjects. Invalidation/reevaluation preserve QA. Deletion-pending data is not analytics data. PRIVACY_ANALYTICS_RETENTION_DESIGN is a separate future gate; no archive/copy-before-delete/pseudonymization pipeline authorized.
+
 ## Native Apple gate — 2026-09-21
 
 App iOS Apple native sign-in integration does not close account-deletion release
