@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-03 — PAYMENT APP foundation
+
+[Implementation/Owner package](payment-app-foundation.md): server order snapshots, TEST isolation, existing Ledger purchase binding, posting-once confirmation and full/partial cancellation/reconciliation. Isolated non-superuser migration/rollback, concurrency, G1/Humanities/Math regressions pass. Provider TEST remains configuration-gated; calls0. No Production, LAB or Unified Wiki changes; next Owner review.
+
 ## 2026-10-02 — MATH-2E learning runtime
 
 [Implementation/handoff](math-essay-learning-runtime.md): bounded learning state, authorized hint/solution delivery, immutable resolves, included reevaluation and history. L01–L40 +131 Math +C01–C30 +102 Humanities/HQP pass; real concurrency, failure and non-superuser rollback verified. Owner package ready. C/D and Credit authority preserved; R21 remains gate. Production/provider/LAB changes0.

@@ -2,18 +2,18 @@
 
 ## Current product state
 
+[Payment](payment-app-foundation.md): isolated; NOT_APPLIED.
+
 [MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
 
-Native Flutter: Home / Materials / Learning / LAB / MY.
-Guest materials search/filter/detail/external access; owner saved/recent. Timer + Mock scoring/results, optional Mock study-time inclusion, KST aggregation. MY profile/private photo/school-grade, 7-day/8-week/6-month study trends, actual Mock scores; LAB internal-grade/Mock details and gated Essay live entry.
+Native: Home/Materials/Learning/LAB/MY; guest materials search/filter/detail/external access; owner saved/recent. Timer + Mock scoring/results, optional Mock study-time inclusion, KST aggregation. MY profile/private photo/school-grade, 7-day/8-week/6-month study trends, actual Mock scores; LAB internal-grade/Mock details and gated Essay live entry.
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 
-Current editing UX: Profile and school/grade Save success→previous screen once;
-failed/partial save stays. School results directly below search. Chart uses actual
+Editing: Profile/school Save returns once on success; failed/partial save stays. School results directly below search. Chart uses actual
 max, zero unpainted, oldest→newest, no horizontal scrolling. Login default HOME,
 trusted explicit protected return preserved. Owner corrections now add logout HOME,
 verified avatar read-after-write. Owner-approved Design System v2 now uses Orange /

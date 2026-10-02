@@ -1,0 +1,20 @@
+begin;
+do $$begin
+ if exists(select 1 from public.payment_orders) or exists(select 1 from public.payment_operations) or exists(select 1 from public.payment_events) then raise exception 'PAYMENT_HISTORY_REQUIRES_FORWARD_RECOVERY';end if;
+ if pg_has_role('postgres','essay_executor','SET') then raise exception 'UNEXPECTED_SET';end if;
+end$$;
+grant essay_executor to postgres with admin false,inherit false,set true granted by postgres;
+set role essay_executor;
+drop function public.payment_process(jsonb);
+drop function public.payment_order(jsonb);
+reset role;
+revoke essay_executor from postgres granted by postgres;
+drop trigger payment_purchase_spend_guard on public.credit_transactions;
+drop function payment_private.spend_guard();
+drop function payment_private.result(uuid);
+drop table public.payment_events;
+drop table public.payment_operations;
+drop table public.payment_orders;
+drop table payment_private.configuration;
+drop schema payment_private;
+commit;

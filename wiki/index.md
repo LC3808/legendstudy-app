@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
+
 Account deletion / ADR-2D: [Ownership correction and Owner retry checklist](account-deletion-ownership-compatibility.md) — isolated verified; failed Production attempt rolled back; retry requires Owner review.
 
 Human Quality / HQP: [HQP-3 implementation/Owner gate](human-quality-persistence-implementation.md) — isolated verified, Production NOT_APPLIED; [historical HQP-2](human-quality-persistence-canonical-review.md).
