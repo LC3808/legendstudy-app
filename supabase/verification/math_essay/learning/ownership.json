@@ -1,0 +1,16 @@
+{
+  "new_functions": [
+    {"signature":"public.math_learning(p_request jsonb)","owner":"postgres","security":"DEFINER","search_path":"","volatility":"VOLATILE","execute":["postgres","authenticated"]},
+    {"signature":"math_private.learning_eligibility(uuid,timestamptz)","owner":"postgres","security":"INVOKER","search_path":"","volatility":"STABLE","execute":["postgres"]},
+    {"signature":"math_private.learning_state(uuid)","owner":"postgres","security":"INVOKER","search_path":"","volatility":"VOLATILE","execute":["postgres"]}
+  ],
+  "changed_functions": [
+    {"signature":"math_private.validate_output(uuid,jsonb)","owner":"math_executor","security":"DEFINER","search_path":"","volatility":"VOLATILE","execute":["math_executor"],"scope":"strict optional MATH-4 delta/review-status payload validation; no correctness computation"}
+  ],
+  "temporary_set":"postgres -> math_executor only",
+  "temporary_create":["math_private"],
+  "new_roles":[],
+  "new_table_grants":[],
+  "finance_helper_changes":[],
+  "adr2_changes":[]
+}

@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-02 — MATH-2E learning runtime
+
+[Implementation/handoff](math-essay-learning-runtime.md): bounded learning state, authorized hint/solution delivery, immutable resolves, included reevaluation and history. L01–L40 +131 Math +C01–C30 +102 Humanities/HQP pass; real concurrency, failure and non-superuser rollback verified. Owner package ready. C/D and Credit authority preserved; R21 remains gate. Production/provider/LAB changes0.
+
 ## 2026-10-02 — MATH-2D runtime consumer boundary
 
 [Contract/closeout](math-essay-runtime-consumer.md): versioned student/worker/QLM RPCs, deterministic extraction confirmation/readiness and physical mapping. C01–C30 +131 Math +102 Humanities/HQP checks PASS;8 runtime and14 base install/failure/rollback checks PASS. R21 Storage remains an activation gate. No Production/provider/LAB changes; MATH-2C hash preserved.

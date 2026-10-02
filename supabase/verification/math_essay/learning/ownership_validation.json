@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "failure_0",
+    "failure_1",
+    "failure_2",
+    "failure_3",
+    "failure_4",
+    "function_owner_acl_security_volatility_search_path",
+    "rls_table_acl_preserved",
+    "existing_function_preservation",
+    "unexpected_dependency_abort",
+    "exact_empty_install_rollback"
+  ],
+  "count": 10,
+  "migration_sha256": "fa0fbb507dd650d2e684f7dc9bc9375c6c5db09eac64405a438ad63206933f7d",
+  "execution_superuser": false,
+  "production_writes": 0
+}

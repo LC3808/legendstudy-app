@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[MATH-2D](math-essay-runtime-consumer.md): isolated; NOT_APPLIED.
+[MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
