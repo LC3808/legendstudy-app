@@ -169,3 +169,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MATH-2B — Canonical DB/security cross-review; corrections required, no implementation](math-essay-canonical-db-security-review.md)
 
 - [MATH-2R — Shared HQ/Billing/deletion/worker contract; implementation authorization next](math-essay-shared-integration-contract.md)
+- [MATH-2C — Math persistence isolated verified; Owner apply package, Production NOT_APPLIED](math-essay-persistence-implementation.md)

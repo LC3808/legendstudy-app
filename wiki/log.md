@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-02 — MATH-2C persistence isolated verified
+
+[Implementation](math-essay-persistence-implementation.md): canonical migration, HQ-A and single-ledger Math binding;131 Math +102 legacy assertions and14 installation/topology/rollback checks PASS. R21 actual Storage API remains NOT_ASSESSABLE; metadata safeguards verified and ADR-2 Math erasure hook remains an activation gate. Owner package ready, Production NOT_APPLIED; no provider/Production/LAB changes.
+
 ## 2026-10-02 — MATH-2R shared integration reconciled
 
 [Contract](math-essay-shared-integration-contract.md): HQ-A typed exclusive binding, two supersession FKs and legacy DTO projection; single-ledger Math billing binding; phased Storage/erasure and split worker capability contracts. MATH-2B integration blockers resolved at design level;24 future regression groups, no runtime PASS claim. Ready for separately authorized MATH-2C; no code/migration/DB/provider/LAB changes.

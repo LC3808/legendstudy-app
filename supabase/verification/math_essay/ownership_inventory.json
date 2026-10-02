@@ -1,0 +1,678 @@
+{
+  "status": "FULL_NON_SUPERUSER_INSTALLATION_VERIFIED",
+  "authority": "MATH-2C Owner authorization #2 and role topology decision #3",
+  "starting_head": "104f3ef97b043b861c1b4133f9a2d2ae2196c45b",
+  "functions": [
+    {
+      "signature": "public.math_submit_attempt(jsonb)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Own immutable attempt, typed lineage, lifecycle lock"
+    },
+    {
+      "signature": "public.math_register_artifact(uuid,jsonb)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Server-owned bounded metadata admission; no Storage upload/deletion"
+    },
+    {
+      "signature": "public.math_confirm_extraction(uuid,uuid,jsonb)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "New immutable selected extraction/confirmation; no candidate overwrite"
+    },
+    {
+      "signature": "public.math_request_evaluation(uuid,uuid)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Ready input and authority pins; fresh finance binding in same transaction"
+    },
+    {
+      "signature": "public.math_attempt_detail(uuid)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Owner-only bounded input projection"
+    },
+    {
+      "signature": "public.math_evaluation_detail(uuid)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Owner-only completed graph; excludes unrevealed hint bodies"
+    },
+    {
+      "signature": "public.math_reveal_hint(uuid,uuid)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Bounded L0-L2 delivery and idempotent exposure; no charge"
+    },
+    {
+      "signature": "public.math_claim_extraction(uuid)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_extraction_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Owned input, fresh extraction fence and bounded lease"
+    },
+    {
+      "signature": "public.math_finalize_extraction(uuid,uuid,jsonb)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_extraction_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Fenced immutable extraction and regions; no evaluation/billing"
+    },
+    {
+      "signature": "public.math_fail_extraction(uuid,uuid,text)",
+      "returns": "void",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_extraction_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Fenced sanitized extraction failure"
+    },
+    {
+      "signature": "public.math_claim_evaluation(uuid)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_evaluation_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Lifecycle/financial gates, fresh evaluation fence and bounded lease"
+    },
+    {
+      "signature": "public.math_finalize_evaluation(uuid,uuid,jsonb)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_evaluation_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Atomic whole graph, canonical hash and financial settlement"
+    },
+    {
+      "signature": "public.math_fail_evaluation(uuid,uuid,text)",
+      "returns": "void",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "math_evaluation_worker"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Fenced sanitized failure and eligible release exactly once"
+    },
+    {
+      "signature": "math_private.resolve_profile(uuid)",
+      "returns": "uuid",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Serialized deterministic leaf/problem/exam/common profile resolution"
+    },
+    {
+      "signature": "math_private.lock_evaluation(uuid)",
+      "returns": "void",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Lifecycle/account/lineage/grants/evaluation/decision lock order"
+    },
+    {
+      "signature": "math_private.evaluation_projection(uuid,boolean)",
+      "returns": "jsonb",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor",
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Explicit bounded result; operator evidence vs student reveal projection"
+    },
+    {
+      "signature": "math_private.validate_output(uuid,jsonb)",
+      "returns": "void",
+      "final_owner": "math_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Exact versioned output shape and all graph/pin/applicability invariants"
+    },
+    {
+      "signature": "math_private.authorize_billing(uuid)",
+      "returns": "uuid",
+      "final_owner": "essay_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "essay_executor",
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Create fresh decision and binding, canonical G1 v2 reserve/included revision"
+    },
+    {
+      "signature": "math_private.settle_billing(uuid)",
+      "returns": "void",
+      "final_owner": "essay_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "essay_executor",
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Validate typed binding and atomically consume or settle zero-charge"
+    },
+    {
+      "signature": "math_private.release_billing(uuid)",
+      "returns": "void",
+      "final_owner": "essay_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "essay_executor",
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Validate typed binding and release only eligible outstanding reservation"
+    },
+    {
+      "signature": "math_private.current_subject()",
+      "returns": "uuid",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "math_executor"
+      ],
+      "volatility": "stable",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "auth.uid bridge only; no caller-selected identity"
+    },
+    {
+      "signature": "math_private.require_active(uuid[])",
+      "returns": "void",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "math_executor",
+        "essay_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Sorted subject lifecycle locking; reject absent ADR-2 dependency"
+    },
+    {
+      "signature": "math_private.content_immutable()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "INVOKER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Version payload immutability; only documented activation metadata transitions"
+    },
+    {
+      "signature": "math_private.personal_immutable()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "INVOKER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Submitted/frozen Math facts cannot be overwritten"
+    },
+    {
+      "signature": "math_private.artifact_guard()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Immutable owned namespace/path binding, bytes-before-metadata erasure"
+    },
+    {
+      "signature": "math_private.binding_guard()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Fresh same-transaction decision, same student/account, no reassignment"
+    },
+    {
+      "signature": "math_private.activate_profile(uuid)",
+      "returns": "void",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Offline content authority only; serialized active scope overlap rejection"
+    },
+    {
+      "signature": "math_private.hq_parent_guard()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Already-existing same-domain/evaluation active parent; no multirow cycles"
+    },
+    {
+      "signature": "math_private.hq_finding_guard()",
+      "returns": "trigger",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Parent-bound domain shape and Math membership enforcement"
+    },
+    {
+      "signature": "math_private.hq_rubric_valid(jsonb)",
+      "returns": "boolean",
+      "final_owner": "postgres",
+      "security_mode": "INVOKER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "immutable",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Exact eleven-key human Math rubric vocabulary"
+    },
+    {
+      "signature": "math_private.hq_finding_valid(jsonb)",
+      "returns": "boolean",
+      "final_owner": "postgres",
+      "security_mode": "INVOKER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "immutable",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Exact Math category/target reference shapes"
+    },
+    {
+      "signature": "math_private.hq_validate_context(uuid,jsonb,jsonb)",
+      "returns": "void",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Frozen output applicability/availability and finding membership"
+    },
+    {
+      "signature": "math_private.hq_require_operator(uuid)",
+      "returns": "uuid",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Current allowlist plus sorted actor/student lifecycle gate"
+    },
+    {
+      "signature": "public.qlm_submit_human_judgment(jsonb)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Strict hq-math-write-v1 global retry/correction authority"
+    },
+    {
+      "signature": "public.qlm_review_state(uuid[])",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Max100 domain-filtered active-head projection"
+    },
+    {
+      "signature": "public.qlm_list_human_judgments(uuid,integer,timestamp with time zone,uuid)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Explicit bounded Math history with paired cursor"
+    },
+    {
+      "signature": "public.qlm_list_cases(integer,timestamp with time zone,uuid)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Max100 completed Math cases, no answers/direct account identifiers"
+    },
+    {
+      "signature": "public.qlm_case_detail(uuid)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Authorized bounded full Math evidence; no public URLs or account PII"
+    },
+    {
+      "signature": "public.ql_submit_human_judgment(jsonb)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": true,
+      "purpose": "Only foreign-domain submission-key conflict guard; legacy hash normalization unchanged"
+    },
+    {
+      "signature": "public.ql_list_human_judgments(uuid,integer,timestamp with time zone,uuid)",
+      "returns": "jsonb",
+      "final_owner": "postgres",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "postgres",
+        "authenticated"
+      ],
+      "volatility": "stable",
+      "parallel_safety": "unsafe",
+      "existing": true,
+      "purpose": "Replace row serialization with exact legacy projection; preserve all wire/cursor/errors"
+    },
+    {
+      "signature": "math_private.lock_account_attempt(uuid)",
+      "returns": "uuid",
+      "final_owner": "essay_executor",
+      "security_mode": "DEFINER",
+      "search_path": "",
+      "execute_roles": [
+        "essay_executor",
+        "math_executor"
+      ],
+      "volatility": "volatile",
+      "parallel_safety": "unsafe",
+      "existing": false,
+      "purpose": "Lifecycle/account/attempt/grant locks without changing Credit ACL; derives account from immutable Math attempt"
+    }
+  ],
+  "temporary_schema_create": {
+    "math_executor": [
+      "public",
+      "math_private"
+    ],
+    "essay_executor": [
+      "math_private"
+    ]
+  },
+  "temporary_set_targets": [
+    "math_executor",
+    "essay_executor"
+  ],
+  "new_roles": {
+    "math_executor": {
+      "login": false,
+      "bypassrls": false,
+      "superuser": false,
+      "createdb": false,
+      "createrole": false,
+      "replication": false
+    },
+    "math_extraction_worker": {
+      "login": false,
+      "bypassrls": false,
+      "superuser": false,
+      "createdb": false,
+      "createrole": false,
+      "replication": false
+    },
+    "math_evaluation_worker": {
+      "login": false,
+      "bypassrls": false,
+      "superuser": false,
+      "createdb": false,
+      "createrole": false,
+      "replication": false
+    }
+  },
+  "allowed_final_new_memberships": [
+    {
+      "role": "math_executor",
+      "member": "postgres",
+      "grantor": "supabase_admin",
+      "admin": true,
+      "inherit": false,
+      "set": false
+    },
+    {
+      "role": "math_extraction_worker",
+      "member": "postgres",
+      "grantor": "supabase_admin",
+      "admin": true,
+      "inherit": false,
+      "set": false
+    },
+    {
+      "role": "math_evaluation_worker",
+      "member": "postgres",
+      "grantor": "supabase_admin",
+      "admin": true,
+      "inherit": false,
+      "set": false
+    }
+  ],
+  "other_owner_bridge": [],
+  "runtime_worker_executor_membership": [],
+  "client_role_membership": [],
+  "production_writes": 0
+}

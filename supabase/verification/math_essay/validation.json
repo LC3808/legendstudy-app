@@ -1,0 +1,347 @@
+{
+  "scope": "Math persistence foundation, isolated verification, Owner apply package; Production NOT_APPLIED",
+  "migration": "20261002000100_math_essay_persistence.sql",
+  "migration_sha256": "73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51",
+  "production_equivalent_non_superuser_full_migration": "PASS",
+  "ownership_bootstrap": "PASS",
+  "auto_admin_membership_accepted": true,
+  "temporary_set_remaining": [],
+  "temporary_schema_create_remaining": [],
+  "unexpected_memberships": [],
+  "behavior_checks": 131,
+  "legacy_checks": 102,
+  "installation_checks": 14,
+  "R01_R24": [
+    {
+      "id": "R01",
+      "requirement": "Existing Essay rows/hash/notes unchanged across migration; new Essay rows still use identical validation and defaults",
+      "status": "PASS",
+      "evidence": [
+        "legacy_fact_hash_wire_exact",
+        "legacy_validation.json: 102 post-Math assertions"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R02",
+      "requirement": "Exact-one HQ binding rejects neither/both; dangling FK; foreign rubric; identical UUID in two domains remains distinct",
+      "status": "PASS",
+      "evidence": [
+        "R02_neither",
+        "R02_same_UUID_domains",
+        "R02_both_bindings"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R03",
+      "requirement": "Both composite supersession branches: same-eval correction allowed, cross-domain/eval/self/cycle/second successor denied; independent roots survive",
+      "status": "PASS",
+      "evidence": [
+        "R03_correction",
+        "R03_second_successor",
+        "R03_cycle_update",
+        "R03_cross_domain_parent",
+        "R03_cross_evaluation_parent",
+        "R03_multirow_cycle"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R04",
+      "requirement": "Legacy Essay submit/correction response, normalization/hash bytes, findings and all conditional NA behavior match baseline fixtures",
+      "status": "PASS",
+      "evidence": [
+        "legacy_fact_hash_wire_exact",
+        "legacy_validation.json: 102 post-Math assertions"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R05",
+      "requirement": "hq-read-v1 explicit legacy field set/null/cursor/errors/limits semantically identical; no Math key/row leakage; ql-read-v1 body/signature/ACL fingerprint unchanged",
+      "status": "PASS",
+      "evidence": [
+        "legacy_fact_hash_wire_exact",
+        "legacy_validation.json: 102 post-Math assertions"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R06",
+      "requirement": "Global submission key: exact retry, changed payload, cross-domain/subject/reviewer collision; revoked operator retry denied; real concurrent duplicate submit one row",
+      "status": "PASS",
+      "evidence": [
+        "R06_concurrent_retry",
+        "R06_changed_payload",
+        "R06_revoked_retry"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R07",
+      "requirement": "Math rubric exact keys/version/verdicts, content-based NA, missing evidence unassessable, disposition/finding consistency, size/note limits",
+      "status": "PASS",
+      "evidence": [
+        "R07_foreign_rubric",
+        "R07_missing",
+        "R07_unknown",
+        "R07_verdict",
+        "R07_NA",
+        "R07_blocking",
+        "R07_summary",
+        "R07_PASS_finding",
+        "R07_note_bound"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R08",
+      "requirement": "Each Math target positive/negative; wrong eval, propagated-as-root, wrong extraction candidate/run/attempt, unconsidered reference/private path rejected",
+      "status": "PASS",
+      "evidence": [
+        "R08_overall_positive",
+        "R08_foreign_SOLUTION_STEP",
+        "R08_foreign_ROOT_ERROR",
+        "R08_foreign_EXTRACTION_REGION",
+        "R08_foreign_ALTERNATIVE_PATH",
+        "R08_foreign_ALTERNATIVE_PATH",
+        "R08_selected_region_positive",
+        "R08_original_candidate_denied",
+        "R08_all_graph_targets_positive",
+        "R08_propagated_not_root"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R09",
+      "requirement": "Shared finding insert gate cannot accept Math shape under Essay or vice versa, even through privileged constraint fixture",
+      "status": "PASS",
+      "evidence": [
+        "R09_Math_shape_on_Essay",
+        "R09_Essay_shape_on_Math"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R10",
+      "requirement": "E1 on each domain removes QA hash/notes/findings; invalidation does not; E2 reviewer deletion preserves others; combined student/reviewer behavior",
+      "status": "PASS",
+      "evidence": [
+        "R10_invalidation_history",
+        "R10_math_E1",
+        "R10_Math_E2",
+        "R10_combined_E1_E2"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R11",
+      "requirement": "Math/Essay projections remain separate; independent disagreement, superseded heads, incompatible rubric NOT_COMPARABLE and deleted-reviewer rendering",
+      "status": "PASS",
+      "evidence": [
+        "R11_disagreement",
+        "R11_deleted_reviewer"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R12",
+      "requirement": "Table CRUD/EXECUTE/RLS/search_path/owners matrix; anon/student/forged authority denied; pending operator denied; no browser service-role/executor secret",
+      "status": "PASS",
+      "evidence": [
+        "R12_table_ACLs",
+        "R12_worker_separation",
+        "R12_student_foreign_read",
+        "R12_nonoperator",
+        "R12_anon",
+        "R12_forged_reviewer"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R13",
+      "requirement": "Fresh Math decision+binding atomic; student/account mismatch, existing detached decision reuse and Essay-bound decision rejected",
+      "status": "PASS",
+      "evidence": [
+        "R13_duplicate_binding",
+        "R13_Essay_bound_rejected",
+        "R13_account_mismatch",
+        "R13_request_unit_rollback",
+        "R13_detached_decision_reuse"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R14",
+      "requirement": "Concurrent both-domain binding attempts in both orders; billing guard disallows reassignment; binding immutable; no dangling transaction decision",
+      "status": "PASS",
+      "evidence": [
+        "R14_Math_to_Essay_reassignment",
+        "R14_binding_immutable",
+        "R14_concurrent_request_binding"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R15",
+      "requirement": "Existing Essay reserve/consume/release/refund/reversal, signup/manual grants and detachment fixtures unchanged; no historical economic update",
+      "status": "PASS",
+      "evidence": [
+        "R15_refund_idempotency",
+        "R15_refund_overrun",
+        "R15_ledger_immutable",
+        "essay_private_definitions_acl_preserved",
+        "canonical Essay fixture reserve/consume, manual grants, refund/reversal; legacy erasure"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R16",
+      "requirement": "Math initial/revision policy mapping parity, grant order/expiry, included-parent eligibility, same-policy lineage and no cross-domain inclusion",
+      "status": "PASS",
+      "evidence": [
+        "R16_exact_336h_expired",
+        "R16_included",
+        "R16_second_revision_paid"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R17",
+      "requirement": "Input/Vision failure causes no consume; reservation releases once; confirmation/hints uncharged; retry/timeout/unknown completion/settled deletion behavior",
+      "status": "PASS",
+      "evidence": [
+        "R17_release_once",
+        "R17_input_notready",
+        "R17_uncertainty_not_confirmed",
+        "R17_settled_not_refunded"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R18",
+      "requirement": "Graph+consume atomic rollback on every validation/posting failure; duplicate finalize/reconcile concurrency yields one completed graph and posting",
+      "status": "PASS",
+      "evidence": [
+        "R18_duplicate_finalize",
+        "R18_rollback_extraction_pin",
+        "R18_rollback_cycle",
+        "R18_rollback_self",
+        "R18_rollback_duplicate",
+        "R18_rollback_foreign",
+        "R18_rollback_causal",
+        "R18_rollback_core",
+        "R18_rollback_rubric",
+        "R18_rollback_criterion",
+        "R18_rollback_reference",
+        "R18_posting_fault",
+        "R18_posting_rollback",
+        "R18_finalize_reconcile_concurrency",
+        "R18_winner_atomic"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R19",
+      "requirement": "Old fence, lease expiry, changed output retry, unselected extraction, malformed DAG/causal/CORE/rubric rejected; no partial publication",
+      "status": "PASS",
+      "evidence": [
+        "R19_changed_retry",
+        "R19_extraction_pin",
+        "R19_cycle",
+        "R19_self",
+        "R19_duplicate",
+        "R19_foreign",
+        "R19_causal",
+        "R19_core",
+        "R19_rubric",
+        "R19_criterion",
+        "R19_reference",
+        "R19_stale_fence",
+        "R19_expired_lease"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R20",
+      "requirement": "Pending/ERASING gates at request/upload/dispatch/claim/finalize; lifecycle/account/grants lock-order stress with Essay/Math/HQ/delete shows no tested deadlock",
+      "status": "PASS",
+      "evidence": [
+        "R20_pending_attempt",
+        "R20_pending_read",
+        "R20_pending_finalize",
+        "R20_pending_quality_subject",
+        "R20_cancel_restores",
+        "R20_mixed_concurrency_no_deadlock"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R21",
+      "requirement": "Storage namespace traversal/foreign ownership/orphan/list error/delete timeout/late upload: never false ERASED; supported API only, resumable batches",
+      "status": "NOT_ASSESSABLE",
+      "evidence": [
+        "R21_unverified_bytes_block_delete",
+        "R21_wrong_namespace",
+        "R21_timeout_inventory_retained"
+      ],
+      "note": "DB metadata/path guards executed and PASS. No Math Storage bucket, API cleanup adapter, upload grant or ADR-2 Math hook exists/deployed in this authorized metadata-only scope; list/delete/late-upload runtime cannot be assessed. Required activation gate, not fabricated PASS."
+    },
+    {
+      "id": "R22",
+      "requirement": "Metadata held through bytes verification; Math DB/HQ cascade then Auth-last; public content retained; reviewer E2; receipts no private Math ids/hashes",
+      "status": "PASS",
+      "evidence": [
+        "R22_Auth_last_before_Math_cleanup",
+        "R22_bytes_then_metadata"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R23",
+      "requirement": "Non-superuser Production-equivalent apply/empty rollback restores grants/owners; unexpected dependencies reject; unrelated migration files untouched",
+      "status": "PASS",
+      "evidence": [
+        "full_migration_failure_0",
+        "full_migration_failure_1",
+        "full_migration_failure_2",
+        "full_migration_failure_3",
+        "full_migration_failure_4",
+        "full_migration_failure_5",
+        "full_migration_failure_6",
+        "full_migration_failure_7",
+        "full_migration_failure_8",
+        "full_migration_failure_9",
+        "full_migration_failure_10",
+        "final_owners_acl_config_memberships",
+        "unexpected_dependency_abort_exact",
+        "empty_install_rollback_legacy_owner_acl_security_restored"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    },
+    {
+      "id": "R24",
+      "requirement": "Math DTO bounds, full authorized evidence, no direct PII, unavailable vs NA, confirmation not re-solve, generated solution not student solution",
+      "status": "PASS",
+      "evidence": [
+        "R24_short_answer_zero_graph",
+        "R24_confirmation_not_resolve",
+        "R24_no_direct_PII"
+      ],
+      "note": "Isolated canonical DB contract; does not certify Production JWT, provider, Storage transport or deployed account-erasure worker."
+    }
+  ],
+  "storage_runtime": "NOT_ASSESSABLE",
+  "adr2_math_erasure_hook": "SEPARATE_ACTIVATION_GATE",
+  "production_writes": 0,
+  "provider_calls": 0,
+  "ready_for_production_apply": false,
+  "static_validation": {
+    "wiki_links_budget": "PASS",
+    "python_compile": "PASS",
+    "secret_scan": "PASS",
+    "migration_hash_consistency": "PASS",
+    "private_artifacts_excluded": true
+  }
+}

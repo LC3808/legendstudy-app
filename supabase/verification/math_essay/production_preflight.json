@@ -1,0 +1,225 @@
+{
+  "scope": "READ ONLY catalogs and migration ledger; no application rows",
+  "migration_count": 23,
+  "versions": [
+    "20260912000100",
+    "20260913000100",
+    "20260913000200",
+    "20260914000100",
+    "20260914000200",
+    "20260917000100",
+    "20260917000200",
+    "20260923000100",
+    "20260923000200",
+    "20260925000100",
+    "20260926000100",
+    "20260927000100",
+    "20260927000200",
+    "20260928000100",
+    "20260928000200",
+    "20260928000300",
+    "20260928000400",
+    "20260929000100",
+    "20260929000200",
+    "20260929000300",
+    "20260929000400",
+    "20261001000100",
+    "20261001000200"
+  ],
+  "collisions": [],
+  "roles": [
+    {
+      "bypassrls": true,
+      "createrole": false,
+      "login": false,
+      "name": "essay_executor",
+      "superuser": false
+    },
+    {
+      "bypassrls": false,
+      "createrole": false,
+      "login": false,
+      "name": "essay_worker",
+      "superuser": false
+    },
+    {
+      "bypassrls": true,
+      "createrole": true,
+      "login": true,
+      "name": "postgres",
+      "superuser": false
+    },
+    {
+      "bypassrls": false,
+      "createrole": false,
+      "login": false,
+      "name": "essay_finance",
+      "superuser": false
+    }
+  ],
+  "schemas": [
+    {
+      "acl": "{postgres=UC/postgres,essay_executor=U/postgres}",
+      "owner": "postgres",
+      "schema": "essay_private"
+    },
+    {
+      "acl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner,essay_executor=U/pg_database_owner,essay_worker=U/pg_database_owner,essay_finance=U/pg_database_owner}",
+      "owner": "pg_database_owner",
+      "schema": "public"
+    }
+  ],
+  "memberships": [
+    {
+      "admin": true,
+      "grantor": "supabase_admin",
+      "inherit": false,
+      "member": "postgres",
+      "role": "essay_executor",
+      "set": false
+    }
+  ],
+  "prerequisites": [
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=arw/postgres}",
+      "name": "credit_accounts",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=arw/postgres}",
+      "name": "credit_grants",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=ar/postgres}",
+      "name": "credit_transactions",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=arw/postgres}",
+      "name": "essay_billing_decisions",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=r/postgres,essay_executor=r/postgres}",
+      "name": "essay_exams",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres}",
+      "name": "human_quality_findings",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres}",
+      "name": "human_quality_judgments",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,anon=r/postgres,authenticated=r/postgres}",
+      "name": "universities",
+      "owner": "postgres",
+      "rls": true
+    }
+  ],
+  "functions": [
+    {
+      "acl": "{essay_executor=X/essay_executor}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": true,
+      "owner": "essay_executor",
+      "signature": "essay_private.credit_request_v2(uuid,uuid,text)"
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": false,
+      "owner": "postgres",
+      "signature": "essay_billing_history_guard()"
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": false,
+      "owner": "postgres",
+      "signature": "essay_private.hq_finding_valid(jsonb)"
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": false,
+      "owner": "postgres",
+      "signature": "essay_private.hq_immutable()"
+    },
+    {
+      "acl": "{postgres=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": false,
+      "owner": "postgres",
+      "signature": "essay_private.hq_rubric_valid(jsonb)"
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": true,
+      "owner": "postgres",
+      "signature": "is_quality_operator()"
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": true,
+      "owner": "postgres",
+      "signature": "ql_list_human_judgments(uuid,integer,timestamp with time zone,uuid)"
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": true,
+      "owner": "postgres",
+      "signature": "ql_review_state(uuid[])"
+    },
+    {
+      "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": true,
+      "owner": "postgres",
+      "signature": "ql_submit_human_judgment(jsonb)"
+    },
+    {
+      "acl": "{essay_executor=X/essay_executor}",
+      "config": [
+        "search_path=\"\""
+      ],
+      "definer": false,
+      "owner": "essay_executor",
+      "signature": "essay_private.release(uuid)"
+    }
+  ],
+  "production_writes": 0
+}

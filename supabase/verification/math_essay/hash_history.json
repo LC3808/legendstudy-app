@@ -1,0 +1,11 @@
+[
+  {
+    "sha256": "963d75e2dbd1416d024a9bf38511d0b1567e61bb83ebe5d1d19f48e456c84e11",
+    "status": "SUPERSEDED_PRE_APPLY",
+    "reason": "Behavioral validation corrected draft SQL; never applied to Production"
+  },
+  {
+    "sha256": "73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51",
+    "status": "FINAL_ISOLATED_VERIFIED_NOT_APPLIED"
+  }
+]

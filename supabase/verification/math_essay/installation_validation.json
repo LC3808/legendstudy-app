@@ -1,0 +1,463 @@
+{
+  "checks": [
+    "full_migration_failure_0",
+    "full_migration_failure_1",
+    "full_migration_failure_2",
+    "full_migration_failure_3",
+    "full_migration_failure_4",
+    "full_migration_failure_5",
+    "full_migration_failure_6",
+    "full_migration_failure_7",
+    "full_migration_failure_8",
+    "full_migration_failure_9",
+    "full_migration_failure_10",
+    "final_owners_acl_config_memberships",
+    "unexpected_dependency_abort_exact",
+    "empty_install_rollback_legacy_owner_acl_security_restored"
+  ],
+  "count": 14,
+  "catalog": {
+    "indexes": [
+      [
+        "human_quality_math_history",
+        "CREATE INDEX human_quality_math_history ON public.human_quality_judgments USING btree (math_evaluation_id, created_at DESC, id DESC) WHERE (math_evaluation_id IS NOT NULL)"
+      ],
+      [
+        "math_attempt_artifacts_attempt_id_position_key",
+        "CREATE UNIQUE INDEX math_attempt_artifacts_attempt_id_position_key ON public.math_attempt_artifacts USING btree (attempt_id, \"position\")"
+      ],
+      [
+        "math_attempt_artifacts_id_attempt_id_key",
+        "CREATE UNIQUE INDEX math_attempt_artifacts_id_attempt_id_key ON public.math_attempt_artifacts USING btree (id, attempt_id)"
+      ],
+      [
+        "math_attempt_artifacts_object_key_key",
+        "CREATE UNIQUE INDEX math_attempt_artifacts_object_key_key ON public.math_attempt_artifacts USING btree (object_key)"
+      ],
+      [
+        "math_attempt_artifacts_pkey",
+        "CREATE UNIQUE INDEX math_attempt_artifacts_pkey ON public.math_attempt_artifacts USING btree (id)"
+      ],
+      [
+        "math_attempt_lineage",
+        "CREATE INDEX math_attempt_lineage ON public.math_attempts USING btree (lineage_id, created_at, id)"
+      ],
+      [
+        "math_attempt_student",
+        "CREATE INDEX math_attempt_student ON public.math_attempts USING btree (student_id, created_at, id)"
+      ],
+      [
+        "math_attempts_client_submission_id_key",
+        "CREATE UNIQUE INDEX math_attempts_client_submission_id_key ON public.math_attempts USING btree (client_submission_id)"
+      ],
+      [
+        "math_attempts_id_leaf_id_key",
+        "CREATE UNIQUE INDEX math_attempts_id_leaf_id_key ON public.math_attempts USING btree (id, leaf_id)"
+      ],
+      [
+        "math_attempts_id_student_id_key",
+        "CREATE UNIQUE INDEX math_attempts_id_student_id_key ON public.math_attempts USING btree (id, student_id)"
+      ],
+      [
+        "math_attempts_pkey",
+        "CREATE UNIQUE INDEX math_attempts_pkey ON public.math_attempts USING btree (id)"
+      ],
+      [
+        "math_billing_bindings_billing_decision_id_key",
+        "CREATE UNIQUE INDEX math_billing_bindings_billing_decision_id_key ON public.math_billing_bindings USING btree (billing_decision_id)"
+      ],
+      [
+        "math_billing_bindings_pkey",
+        "CREATE UNIQUE INDEX math_billing_bindings_pkey ON public.math_billing_bindings USING btree (math_evaluation_id)"
+      ],
+      [
+        "math_canonical_solution_steps_pkey",
+        "CREATE UNIQUE INDEX math_canonical_solution_steps_pkey ON public.math_canonical_solution_steps USING btree (id)"
+      ],
+      [
+        "math_canonical_solution_steps_solution_id_position_key",
+        "CREATE UNIQUE INDEX math_canonical_solution_steps_solution_id_position_key ON public.math_canonical_solution_steps USING btree (solution_id, \"position\")"
+      ],
+      [
+        "math_canonical_solutions_id_leaf_id_key",
+        "CREATE UNIQUE INDEX math_canonical_solutions_id_leaf_id_key ON public.math_canonical_solutions USING btree (id, leaf_id)"
+      ],
+      [
+        "math_canonical_solutions_logical_id_version_key",
+        "CREATE UNIQUE INDEX math_canonical_solutions_logical_id_version_key ON public.math_canonical_solutions USING btree (logical_id, version)"
+      ],
+      [
+        "math_canonical_solutions_pkey",
+        "CREATE UNIQUE INDEX math_canonical_solutions_pkey ON public.math_canonical_solutions USING btree (id)"
+      ],
+      [
+        "math_considered_references_pkey",
+        "CREATE UNIQUE INDEX math_considered_references_pkey ON public.math_considered_references USING btree (evaluation_id, solution_id)"
+      ],
+      [
+        "math_core_evaluation_id_position_key",
+        "CREATE UNIQUE INDEX math_core_evaluation_id_position_key ON public.math_core USING btree (evaluation_id, \"position\")"
+      ],
+      [
+        "math_core_id_evaluation_id_key",
+        "CREATE UNIQUE INDEX math_core_id_evaluation_id_key ON public.math_core USING btree (id, evaluation_id)"
+      ],
+      [
+        "math_core_pkey",
+        "CREATE UNIQUE INDEX math_core_pkey ON public.math_core USING btree (id)"
+      ],
+      [
+        "math_error_propagations_pkey",
+        "CREATE UNIQUE INDEX math_error_propagations_pkey ON public.math_error_propagations USING btree (evaluation_id, root_error_id, consequence_error_id)"
+      ],
+      [
+        "math_errors_id_evaluation_id_key",
+        "CREATE UNIQUE INDEX math_errors_id_evaluation_id_key ON public.math_errors USING btree (id, evaluation_id)"
+      ],
+      [
+        "math_errors_pkey",
+        "CREATE UNIQUE INDEX math_errors_pkey ON public.math_errors USING btree (id)"
+      ],
+      [
+        "math_evaluated_paths_pkey",
+        "CREATE UNIQUE INDEX math_evaluated_paths_pkey ON public.math_evaluated_paths USING btree (evaluation_id, path_key)"
+      ],
+      [
+        "math_evaluation_attempt",
+        "CREATE INDEX math_evaluation_attempt ON public.math_evaluations USING btree (attempt_id, requested_at, id)"
+      ],
+      [
+        "math_evaluation_cases",
+        "CREATE INDEX math_evaluation_cases ON public.math_evaluations USING btree (completed_at DESC, id DESC) WHERE (completed_at IS NOT NULL)"
+      ],
+      [
+        "math_evaluation_criteria_pkey",
+        "CREATE UNIQUE INDEX math_evaluation_criteria_pkey ON public.math_evaluation_criteria USING btree (evaluation_id, criterion_id)"
+      ],
+      [
+        "math_evaluation_profiles_logical_id_version_key",
+        "CREATE UNIQUE INDEX math_evaluation_profiles_logical_id_version_key ON public.math_evaluation_profiles USING btree (logical_id, version)"
+      ],
+      [
+        "math_evaluation_profiles_pkey",
+        "CREATE UNIQUE INDEX math_evaluation_profiles_pkey ON public.math_evaluation_profiles USING btree (id)"
+      ],
+      [
+        "math_evaluation_sources_pkey",
+        "CREATE UNIQUE INDEX math_evaluation_sources_pkey ON public.math_evaluation_sources USING btree (evaluation_id, source_id)"
+      ],
+      [
+        "math_evaluations_id_attempt_id_key",
+        "CREATE UNIQUE INDEX math_evaluations_id_attempt_id_key ON public.math_evaluations USING btree (id, attempt_id)"
+      ],
+      [
+        "math_evaluations_id_leaf_id_key",
+        "CREATE UNIQUE INDEX math_evaluations_id_leaf_id_key ON public.math_evaluations USING btree (id, leaf_id)"
+      ],
+      [
+        "math_evaluations_idempotency_key_key",
+        "CREATE UNIQUE INDEX math_evaluations_idempotency_key_key ON public.math_evaluations USING btree (idempotency_key)"
+      ],
+      [
+        "math_evaluations_pkey",
+        "CREATE UNIQUE INDEX math_evaluations_pkey ON public.math_evaluations USING btree (id)"
+      ],
+      [
+        "math_extraction_regions_id_run_id_key",
+        "CREATE UNIQUE INDEX math_extraction_regions_id_run_id_key ON public.math_extraction_regions USING btree (id, run_id)"
+      ],
+      [
+        "math_extraction_regions_pkey",
+        "CREATE UNIQUE INDEX math_extraction_regions_pkey ON public.math_extraction_regions USING btree (id)"
+      ],
+      [
+        "math_extraction_regions_run_id_reading_order_key",
+        "CREATE UNIQUE INDEX math_extraction_regions_run_id_reading_order_key ON public.math_extraction_regions USING btree (run_id, reading_order)"
+      ],
+      [
+        "math_extraction_runs_id_attempt_id_key",
+        "CREATE UNIQUE INDEX math_extraction_runs_id_attempt_id_key ON public.math_extraction_runs USING btree (id, attempt_id)"
+      ],
+      [
+        "math_extraction_runs_pkey",
+        "CREATE UNIQUE INDEX math_extraction_runs_pkey ON public.math_extraction_runs USING btree (id)"
+      ],
+      [
+        "math_hint_exposures_client_key_key",
+        "CREATE UNIQUE INDEX math_hint_exposures_client_key_key ON public.math_hint_exposures USING btree (client_key)"
+      ],
+      [
+        "math_hint_exposures_pkey",
+        "CREATE UNIQUE INDEX math_hint_exposures_pkey ON public.math_hint_exposures USING btree (id)"
+      ],
+      [
+        "math_hints_core_id_level_key",
+        "CREATE UNIQUE INDEX math_hints_core_id_level_key ON public.math_hints USING btree (core_id, level)"
+      ],
+      [
+        "math_hints_id_evaluation_id_key",
+        "CREATE UNIQUE INDEX math_hints_id_evaluation_id_key ON public.math_hints USING btree (id, evaluation_id)"
+      ],
+      [
+        "math_hints_pkey",
+        "CREATE UNIQUE INDEX math_hints_pkey ON public.math_hints USING btree (id)"
+      ],
+      [
+        "math_problem_sets_logical_id_version_key",
+        "CREATE UNIQUE INDEX math_problem_sets_logical_id_version_key ON public.math_problem_sets USING btree (logical_id, version)"
+      ],
+      [
+        "math_problem_sets_pkey",
+        "CREATE UNIQUE INDEX math_problem_sets_pkey ON public.math_problem_sets USING btree (id)"
+      ],
+      [
+        "math_problems_logical_id_version_key",
+        "CREATE UNIQUE INDEX math_problems_logical_id_version_key ON public.math_problems USING btree (logical_id, version)"
+      ],
+      [
+        "math_problems_pkey",
+        "CREATE UNIQUE INDEX math_problems_pkey ON public.math_problems USING btree (id)"
+      ],
+      [
+        "math_problems_problem_set_id_display_order_key",
+        "CREATE UNIQUE INDEX math_problems_problem_set_id_display_order_key ON public.math_problems USING btree (problem_set_id, display_order)"
+      ],
+      [
+        "math_profile_active_scope",
+        "CREATE UNIQUE INDEX math_profile_active_scope ON public.math_evaluation_profiles USING btree (scope, leaf_id, problem_id, essay_exam_id, response_format) NULLS NOT DISTINCT WHERE (state = 'ACTIVE'::text)"
+      ],
+      [
+        "math_scoring_criteria_id_leaf_id_key",
+        "CREATE UNIQUE INDEX math_scoring_criteria_id_leaf_id_key ON public.math_scoring_criteria USING btree (id, leaf_id)"
+      ],
+      [
+        "math_scoring_criteria_leaf_id_criterion_key_key",
+        "CREATE UNIQUE INDEX math_scoring_criteria_leaf_id_criterion_key_key ON public.math_scoring_criteria USING btree (leaf_id, criterion_key)"
+      ],
+      [
+        "math_scoring_criteria_pkey",
+        "CREATE UNIQUE INDEX math_scoring_criteria_pkey ON public.math_scoring_criteria USING btree (id)"
+      ],
+      [
+        "math_solution_exposures_client_key_key",
+        "CREATE UNIQUE INDEX math_solution_exposures_client_key_key ON public.math_solution_exposures USING btree (client_key)"
+      ],
+      [
+        "math_solution_exposures_pkey",
+        "CREATE UNIQUE INDEX math_solution_exposures_pkey ON public.math_solution_exposures USING btree (id)"
+      ],
+      [
+        "math_solution_steps_evaluation_id_position_key",
+        "CREATE UNIQUE INDEX math_solution_steps_evaluation_id_position_key ON public.math_solution_steps USING btree (evaluation_id, \"position\")"
+      ],
+      [
+        "math_solution_steps_id_evaluation_id_key",
+        "CREATE UNIQUE INDEX math_solution_steps_id_evaluation_id_key ON public.math_solution_steps USING btree (id, evaluation_id)"
+      ],
+      [
+        "math_solution_steps_pkey",
+        "CREATE UNIQUE INDEX math_solution_steps_pkey ON public.math_solution_steps USING btree (id)"
+      ],
+      [
+        "math_source_artifacts_id_problem_id_key",
+        "CREATE UNIQUE INDEX math_source_artifacts_id_problem_id_key ON public.math_source_artifacts USING btree (id, problem_id)"
+      ],
+      [
+        "math_source_artifacts_pkey",
+        "CREATE UNIQUE INDEX math_source_artifacts_pkey ON public.math_source_artifacts USING btree (id)"
+      ],
+      [
+        "math_step_dependencies_pkey",
+        "CREATE UNIQUE INDEX math_step_dependencies_pkey ON public.math_step_dependencies USING btree (evaluation_id, from_step_id, to_step_id)"
+      ],
+      [
+        "math_step_regions_pkey",
+        "CREATE UNIQUE INDEX math_step_regions_pkey ON public.math_step_regions USING btree (step_id, region_id)"
+      ],
+      [
+        "math_subproblems_id_problem_id_key",
+        "CREATE UNIQUE INDEX math_subproblems_id_problem_id_key ON public.math_subproblems USING btree (id, problem_id)"
+      ],
+      [
+        "math_subproblems_pkey",
+        "CREATE UNIQUE INDEX math_subproblems_pkey ON public.math_subproblems USING btree (id)"
+      ],
+      [
+        "math_subproblems_problem_id_display_order_key",
+        "CREATE UNIQUE INDEX math_subproblems_problem_id_display_order_key ON public.math_subproblems USING btree (problem_id, display_order)"
+      ],
+      [
+        "math_subproblems_problem_id_leaf_key_key",
+        "CREATE UNIQUE INDEX math_subproblems_problem_id_leaf_key_key ON public.math_subproblems USING btree (problem_id, leaf_key)"
+      ]
+    ],
+    "tables": [
+      [
+        "math_attempt_artifacts",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_attempts",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres,essay_executor=rw/postgres}"
+      ],
+      [
+        "math_billing_bindings",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres,essay_executor=arw/postgres}"
+      ],
+      [
+        "math_canonical_solution_steps",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_canonical_solutions",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_considered_references",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_core",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_error_propagations",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_errors",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_evaluated_paths",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_evaluation_criteria",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_evaluation_profiles",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_evaluation_sources",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_evaluations",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres,essay_executor=rw/postgres}"
+      ],
+      [
+        "math_extraction_regions",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_extraction_runs",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_hint_exposures",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_hints",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_problem_sets",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_problems",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_scoring_criteria",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_solution_exposures",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_solution_steps",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_source_artifacts",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ],
+      [
+        "math_step_dependencies",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_step_regions",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=arw/postgres}"
+      ],
+      [
+        "math_subproblems",
+        "postgres",
+        true,
+        "{postgres=arwdDxtm/postgres,math_executor=r/postgres}"
+      ]
+    ]
+  },
+  "migration_sha256": "73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51",
+  "execution_superuser": false,
+  "production_writes": 0,
+  "owner_catalog_postflight_sql": "PASS"
+}

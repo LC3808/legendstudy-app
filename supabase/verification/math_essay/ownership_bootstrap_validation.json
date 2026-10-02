@@ -1,0 +1,92 @@
+{
+  "scope": "ownership bootstrap fixtures only; NOT complete Math migration or R01-R24",
+  "canonical_prerequisite_migrations": 15,
+  "new_inert_function_fixtures": 39,
+  "execution_superuser": false,
+  "auto_admin_membership_accepted": true,
+  "tests": [
+    {
+      "test": "complete_ownership_fixture_and_rollback",
+      "result": "PASS"
+    },
+    {
+      "test": "math_executor_A_AFTER_SET_GRANT",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "math_executor_B_AFTER_CREATE_GRANT",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "math_executor_D_AFTER_SET_ROLE",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "math_executor_C_AFTER_FIRST_FUNCTION",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "math_executor_E_AFTER_OWNER_INITIALIZATION",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "math_executor_D_AFTER_RESET_ROLE",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_A_AFTER_SET_GRANT",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_B_AFTER_CREATE_GRANT",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_D_AFTER_SET_ROLE",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_C_AFTER_FIRST_FUNCTION",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_E_AFTER_OWNER_INITIALIZATION",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "essay_executor_D_AFTER_RESET_ROLE",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "F_AFTER_COMPLETE_OWNERSHIP_FIXTURE",
+      "result": "PASS",
+      "restoration": "EXACT"
+    },
+    {
+      "test": "committed_final_admin_only_topology",
+      "result": "PASS"
+    },
+    {
+      "test": "unexpected_dependency_rejected_without_cascade",
+      "result": "PASS"
+    },
+    {
+      "test": "committed_empty_ownership_fixture_rollback",
+      "result": "PASS"
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0
+}
