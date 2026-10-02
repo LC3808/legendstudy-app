@@ -2,14 +2,13 @@
 
 ## Current product state
 
+[MATH-2B](math-essay-canonical-db-security-review.md): corrections required.
+
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
 
-LegendStudy+ native Flutter: Home / Materials / Learning / LAB / MY.
-Guest materials search/filter/detail/external access; owner saved/recent. Study Timer + Mock Exam/scoring/result foundation,
-optional Mock study-time inclusion, KST shared aggregation. MY Profile/private
-photo/school-grade, seven-day/eight-week/six-month study trends, actual Mock score
-summary; LAB internal-grade/Mock details and gated Essay live entry.
+Native Flutter: Home / Materials / Learning / LAB / MY.
+Guest materials search/filter/detail/external access; owner saved/recent. Timer + Mock scoring/results, optional Mock study-time inclusion, KST aggregation. MY profile/private photo/school-grade, 7-day/8-week/6-month study trends, actual Mock scores; LAB internal-grade/Mock details and gated Essay live entry.
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 

@@ -165,3 +165,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [Mobile IA / Profile / Learning handoff](core-app-improvements.md#mobile-ia-profile-and-learning--2026-09-23)
 
 - [MY dashboard / Study Trends / private avatar refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23)
+
+- [MATH-2B — Canonical DB/security cross-review; corrections required, no implementation](math-essay-canonical-db-security-review.md)
