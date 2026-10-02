@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "failure_0",
+    "failure_1",
+    "failure_2",
+    "failure_3",
+    "failure_4",
+    "topology_acl_security",
+    "unexpected_dependency_abort",
+    "exact_empty_install_rollback"
+  ],
+  "count": 8,
+  "migration_sha256": "b40bf7224a84658308ff1640b639acb857e379998211131d97a688a9711fe049",
+  "execution_superuser": false,
+  "production_writes": 0
+}

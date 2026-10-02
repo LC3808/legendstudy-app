@@ -1,0 +1,38 @@
+{
+  "replaced_math_executor_functions": [
+    "public.math_register_artifact(uuid,jsonb)",
+    "public.math_confirm_extraction(uuid,uuid,jsonb)",
+    "public.math_request_evaluation(uuid,uuid)",
+    "public.math_claim_extraction(uuid)",
+    "public.math_finalize_extraction(uuid,uuid,jsonb)",
+    "public.math_fail_extraction(uuid,uuid,text)"
+  ],
+  "new_postgres_functions": [
+    "public.math_input(p_request jsonb)",
+    "public.math_extraction(p_request jsonb)",
+    "public.math_evaluation(p_request jsonb)",
+    "public.qlm_quality(p_request jsonb)"
+  ],
+  "temporary_schema_create": [
+    "public"
+  ],
+  "temporary_set": [
+    "postgres -> math_executor"
+  ],
+  "new_roles": [],
+  "internal_postgres_execute": [
+    "public.math_submit_attempt(jsonb)",
+    "public.math_register_artifact(uuid,jsonb)",
+    "public.math_confirm_extraction(uuid,uuid,jsonb)",
+    "public.math_request_evaluation(uuid,uuid)",
+    "public.math_evaluation_detail(uuid)",
+    "public.math_reveal_hint(uuid,uuid)",
+    "public.math_claim_extraction(uuid)",
+    "public.math_finalize_extraction(uuid,uuid,jsonb)",
+    "public.math_fail_extraction(uuid,uuid,text)",
+    "public.math_claim_evaluation(uuid)",
+    "public.math_finalize_evaluation(uuid,uuid,jsonb)",
+    "public.math_fail_evaluation(uuid,uuid,text)"
+  ],
+  "new_function_security": "postgres-owned DEFINER; search_path empty; exact EXECUTE in physical_catalog.json"
+}

@@ -170,3 +170,4 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 
 - [MATH-2R — Shared HQ/Billing/deletion/worker contract; implementation authorization next](math-essay-shared-integration-contract.md)
 - [MATH-2C — Math persistence isolated verified; Owner apply package, Production NOT_APPLIED](math-essay-persistence-implementation.md)
+- [MATH-2D — Runtime consumer contract; isolated verified, Production NOT_APPLIED](math-essay-runtime-consumer.md)

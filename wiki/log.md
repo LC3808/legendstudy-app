@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-02 — MATH-2D runtime consumer boundary
+
+[Contract/closeout](math-essay-runtime-consumer.md): versioned student/worker/QLM RPCs, deterministic extraction confirmation/readiness and physical mapping. C01–C30 +131 Math +102 Humanities/HQP checks PASS;8 runtime and14 base install/failure/rollback checks PASS. R21 Storage remains an activation gate. No Production/provider/LAB changes; MATH-2C hash preserved.
+
 ## 2026-10-02 — MATH-2C persistence isolated verified
 
 [Implementation](math-essay-persistence-implementation.md): canonical migration, HQ-A and single-ledger Math binding;131 Math +102 legacy assertions and14 installation/topology/rollback checks PASS. R21 actual Storage API remains NOT_ASSESSABLE; metadata safeguards verified and ADR-2 Math erasure hook remains an activation gate. Owner package ready, Production NOT_APPLIED; no provider/Production/LAB changes.
