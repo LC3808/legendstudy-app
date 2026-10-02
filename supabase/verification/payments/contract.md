@@ -13,7 +13,7 @@ APP owns persistence; LAB implementation NOT started. No HTTP/SDK/provider adapt
 
 Subject is `essay_private.uid()`, never a payload identifier. Lifecycle advisory lock precedes current allow check, even on retries. Missing ADR prerequisite fails closed. Server configuration selects mode. New order validity is 30 minutes; unpaid expired orders remain historical ORDER_CREATED but confirm_begin rejects by expires_at. This is independent of paid Credit expiry. Duplicate create preserves original snapshot/deadline; changed SKU conflicts.
 
-Result exact fields: dto_version, order_id (`ls_` + UUID without hyphens), id, mode, sku, amount, quantity, currency=KRW, state, grant_state, expires_at, paid_at, credit_expires_at. Nullable fields are null before completion. No provider key, financial account/grant id, buyer identity, worker secret or internal notes in user projection. Order ID is identifier, never authorization.
+Result exact fields: dto_version, order_id (`ls_` + UUID without hyphens), id, provider, mode, sku, amount, quantity, currency=KRW, state, grant_state, expires_at, paid_at, credit_expires_at. Nullable fields are null before completion. No provider key, financial account/grant id, buyer identity, worker secret or internal notes in user projection. Order ID is identifier, never authorization.
 
 Prices v1: 1c=4900,3c=11900,5c=17900,10c=29900 KRW. This is the server-side snapshot of approved LAB pricing.ts; future price changes require a new reviewed policy version. No prices are accepted from clients. TEST order creation does not create a Credit account.
 
@@ -55,3 +55,11 @@ Statutory cancellation/exception amounts are deliberately not exposed through ge
 ## Deployment gates
 
 Owner migration review/apply separate; ADR lifecycle prerequisite independently reviewed/applied; existing ledger owner topology must match. TEST provider secret binding and trusted gateway capability required; LAB functions/SDK/callbacks are later scope. Before LIVE additionally resolve provider-paid/ungranted deletion/reconciliation, overdue paid grant expiry, financial retention/privacy detachment and statutory exceptions; review actual merchant partial-cancel support, privacy, monitoring and deployment. Nothing here declares a Production checkout ready.
+
+## Provider-neutral purchase identity — Owner amendment
+
+`payment_orders.provider` is TOSS / APPLE_IAP / GOOGLE_PLAY. `provider_purchase_id` is a bounded opaque external grantable purchase identity, unique together with provider and mode. TEST and LIVE are separate namespaces. Existing unique grant_id and server order identity preserve one purchase→one canonical grant. No second wallet, no Auth duplication.
+
+Toss adapter maps verified paymentKey to provider_purchase_id; its public request field stays payment_key, with existing200-character Toss bound. Generic storage allows1024 characters for future normalized purchase identities; this is not permission to store receipts, credentials or raw provider payloads. A future Apple/Google adapter must independently verify the actual grantable transaction/purchase identity (not merely a subscription-family ID), account binding, environment and SKU snapshot, then use the same durable purchase uniqueness/one-grant discipline. Provider-specific verification, replay/refund rules and receipt normalization remain future work. No store API or recurring-product authority is implemented.
+
+Current order RPC always selects TOSS server-side and rejects client provider selection. Current finance RPC rejects non-TOSS rows with PROVIDER_NOT_ENABLED before any processing. Schema vocabulary does not enable IAP or allow caller-claimed verification. User DTO adds provider to this unreleased payment-v1 contract. Current KRW catalogue, pricing, expiry and general refund policy remain unchanged; future store-specific policies need their own reviewed adapter, not a wallet or persistence rewrite.

@@ -60,6 +60,16 @@ def payment_cases(c,rpc,new,scalar,sock):
  def finish(o,op,paid=None):return process('confirm_finish',id=o['id'],operation_id=op['operation_id'],payment_key=op['payment_key'],amount=o['amount'],paid_at=paid or scalar('select clock_timestamp()').isoformat())
  def paid_order(sku='10c'):
   o=create(sku);op=start(o);result=finish(o,op);return o,op,result
+ # Provider-neutral identity storage, with Toss-only executable adapter.
+ neutral=[]
+ for provider,mode in [('TOSS','TEST'),('APPLE_IAP','TEST'),('GOOGLE_PLAY','TEST'),('TOSS','LIVE')]:
+  nid=new();c.execute("insert into public.payment_orders(id,subject_id,request_key,provider,mode,sku,amount,quantity,provider_purchase_id) values(%s,%s,%s,%s,%s,'1c',4900,1,'synthetic_shared_identity')",(nid,U,new(),provider,mode));neutral.append(nid)
+ ok('provider_mode_identity_namespace',len(neutral)==4)
+ deny('same_provider_mode_purchase_duplicate',lambda:c.execute("insert into public.payment_orders(subject_id,request_key,provider,mode,sku,amount,quantity,provider_purchase_id) values(%s,%s,'APPLE_IAP','TEST','1c',4900,1,'synthetic_shared_identity')",(U,new())))
+ deny('unsupported_provider',lambda:c.execute("insert into public.payment_orders(subject_id,request_key,provider,mode,sku,amount,quantity) values(%s,%s,'OTHER','TEST','1c',4900,1)",(U,new())))
+ for nid in neutral[1:3]:deny('iap_adapter_not_enabled_'+nid[:0]+str(neutral.index(nid)),lambda nid=nid:process('get',id=nid))
+ deny('browser_provider_selection',lambda:create(provider='APPLE_IAP'))
+ ok('toss_server_selected',create()['provider']=='TOSS')
  baseline=scalar('select count(*) from public.credit_transactions')
  for sku,amount,quantity in [('1c',4900,1),('3c',11900,3),('5c',17900,5),('10c',29900,10)]:
   r=create(sku);ok('sku_'+sku,r['amount']==amount and r['quantity']==quantity and r['mode']=='TEST')

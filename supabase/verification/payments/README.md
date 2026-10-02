@@ -3,15 +3,17 @@
 Implemented/isolated verified, **NOT APPLIED**. TEST-only installation; LIVE and LAB are not deployed. Base APP cd215a6d88c0f72e59d06478bf4727ed676ca5f9. No remote DB connection or ledger inspection occurred; remote migration count is NOT_ASSESSABLE in this phase.
 
 Migration: `20261003000100_payment_foundation.sql`
-SHA-256: `be808d9625729bac336446d07d92460d57286cfec30f0c29f9135fd70ce1f643`
+SHA-256: `77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75`
 
 [RPC contract](contract.md), [ownership allowlist](ownership.md), [isolated payment evidence](validation.json), [G1 Credit84](g1_validation.json), [Humanities/HQP102](legacy_validation.json), [Math regression](regression.json), [provider gate](provider-test.md).
 
 ## Exact scope
 
+Owner provider-neutral amendment, pre-apply: provider TOSS/APPLE_IAP/GOOGLE_PLAY plus unique(provider,mode,provider_purchase_id). Current runtime remains Toss-only; no Apple/Google implementation. Previous hash is SUPERSEDED_PRE_APPLY; if any previous version was applied, STOP instead of replaying this file.
+
 Three public payment relations: payment_orders, payment_operations, payment_events. One private configuration relation with TEST default. No wallet/balance table. Two public RPCs, two private helpers. Only existing-object change is the additive payment_purchase_spend_guard trigger on credit_transactions; existing Ledger columns/helpers/functions/ACL/RLS unchanged. No historic data backfill. No provider payload, buyer email/name/card, JWT or secret storage.
 
-Indexes: unique owner/request key (retry), provider key (one payment), grant_id (one purchase grant), operation request scope/provider idempotency (retry), one confirm/one pending/one successful cancellation (serialization), owner history (bounded lookup), pending reconciliation traversal, per-order events. No analytics indexes. Standard primary/FK support included as defined in migration; no speculative reporting indexes.
+Indexes: unique owner/request key (retry), provider/mode/purchase identity (one verified purchase), grant_id (one purchase grant), operation request scope/provider idempotency (retry), one confirm/one pending/one successful cancellation (serialization), owner history (bounded lookup), pending reconciliation traversal, per-order events. No analytics indexes. Standard primary/FK support included as defined in migration; no speculative reporting indexes.
 
 ## Prerequisites and STOP
 
@@ -44,6 +46,6 @@ python -m unittest discover -s supabase/validation/essay_lab_product -p test_g1_
 python tool/check_wiki_handoff.py
 ```
 
-Unix-socket disposable DB only; network DSN unsupported. Auth shim models roles/auth.uid JWT claims; no real JWT gateway proof. Actual canonical migration/functions loaded, no fake Essay/Math table stubs. Production-equivalent non-superuser used for payment migration and rollback. Existing suites use their documented synthetic fixtures/privileged fixture setup. G1 keeps all84 assertions with only preinstalled-migration/v1-fixture setup adaptation. Math131 + runtime37 (C01–C30) + learning63 (L01–L40); Humanities/HQP102. Payment60 checks include bootstrap failures, atomic grant/cancel failure, real multi-connection confirm/cancel races, TEST isolation and detached-account cancellation.
+Unix-socket disposable DB only; network DSN unsupported. Auth shim models roles/auth.uid JWT claims; no real JWT gateway proof. Actual canonical migration/functions loaded, no fake Essay/Math table stubs. Production-equivalent non-superuser used for payment migration and rollback. Existing suites use their documented synthetic fixtures/privileged fixture setup. G1 keeps all84 assertions with only preinstalled-migration/v1-fixture setup adaptation. Math131 + runtime37 (C01–C30) + learning63 (L01–L40); Humanities/HQP102. Payment67 checks include bootstrap failures, atomic grant/cancel failure, real multi-connection confirm/cancel races, TEST isolation and detached-account cancellation.
 
 No provider TEST, Storage, scheduler, remote Auth or Production verification claimed. LIVE provider-paid/ungranted deletion reconciliation, overdue paid outcomes, statutory exception authority, financial retention/privacy and deployment credential provisioning remain activation gates. General refund only, not a legal entitlement decision. The package is ready for Owner migration review and subsequent LAB coding, not Production or LIVE activation.

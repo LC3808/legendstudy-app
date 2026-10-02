@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-03 — Payment provider-neutral amendment
+
+[Foundation](payment-app-foundation.md): typed provider and environment-scoped purchase uniqueness; Toss-only runtime retained, Apple/Google adapters disabled. No second wallet or pricing changes. Pre-apply hash regenerated with prior hash marked superseded; isolated regression rerun.
+
 ## 2026-10-03 — PAYMENT APP foundation
 
 [Implementation/Owner package](payment-app-foundation.md): server order snapshots, TEST isolation, existing Ledger purchase binding, posting-once confirmation and full/partial cancellation/reconciliation. Isolated non-superuser migration/rollback, concurrency, G1/Humanities/Math regressions pass. Provider TEST remains configuration-gated; calls0. No Production, LAB or Unified Wiki changes; next Owner review.
