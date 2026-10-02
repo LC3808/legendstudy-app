@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-02 — MATH-2R shared integration reconciled
+
+[Contract](math-essay-shared-integration-contract.md): HQ-A typed exclusive binding, two supersession FKs and legacy DTO projection; single-ledger Math billing binding; phased Storage/erasure and split worker capability contracts. MATH-2B integration blockers resolved at design level;24 future regression groups, no runtime PASS claim. Ready for separately authorized MATH-2C; no code/migration/DB/provider/LAB changes.
+
 ## 2026-10-02 — MATH-2B canonical cross-review
 
 [Review](math-essay-canonical-db-security-review.md): ACCEPT_WITH_CORRECTIONS;21 candidates, exact identity/FK reuse, shared Credit/HQP limitations and E1 CASCADE correction. Live read-only ledger23/no Math collisions; ADR-2 absent; provider005/day_targets tracking separate. Owner D1 reference+hash/D2 finite+erasable accepted. Shared-HQP typed extension must be reconciled before Math DDL. Documentation only, no Production/provider/LAB changes.

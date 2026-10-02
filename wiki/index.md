@@ -167,3 +167,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MY dashboard / Study Trends / private avatar refinement](core-app-improvements.md#my-dashboard-study-trends-and-lab-refinement--2026-09-23)
 
 - [MATH-2B — Canonical DB/security cross-review; corrections required, no implementation](math-essay-canonical-db-security-review.md)
+
+- [MATH-2R — Shared HQ/Billing/deletion/worker contract; implementation authorization next](math-essay-shared-integration-contract.md)

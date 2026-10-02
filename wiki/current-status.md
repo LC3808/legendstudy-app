@@ -2,7 +2,7 @@
 
 ## Current product state
 
-[MATH-2B](math-essay-canonical-db-security-review.md): corrections required.
+[MATH-2R](math-essay-shared-integration-contract.md): contract ready; no code.
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
