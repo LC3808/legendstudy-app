@@ -205,3 +205,13 @@ to the fresh 24-file bootstrap run, not a claim of managed Auth/extension equiva
 Next: resume the separately authorized HOSTED-1 exact-file process against the preserved
 empty TEST project, starting with fresh read-only preflight. No schema-owner/ACL workaround
 is required. Managed gateway/config and merchant E2E remain later verification gates.
+
+## PAYMENT-E2E-HOSTED-1 — actual Hosted bootstrap, 2026-10-03
+
+**24/24 installed and Hosted postflight PASS.** [Actual Hosted evidence](hosted-validation.json) is separate from [local compatibility evidence](validation.json). Fresh project identity/empty-state preflight and observed role/schema/default ACL comparison passed. Each exact hash-verified allowlisted file ran separately as postgres through the existing authenticated CLI Management API; each file's function inventory matched the manifest. No canonical SQL changed.
+
+Final114 functions have exact expected owner/security/search_path/EXECUTE; no unexpected application functions. All application relation owners are postgres. Public schema remains pg_database_owner with pg_database_owner ACL grantor; schema ACL matches the local compatibility result. Five custom memberships are only postgres ADMIN=true/INHERIT=false/SET=false; no authenticator→essay_finance enrollment. Payment RLS/direct-CRUD denial/EXECUTE matrix and TEST configuration pass. Orders/operations/events, credit accounts/grants/transactions and Auth users all0. Spendable Credit delta0. No synthetic orders or financial RPCs invoked.
+
+SQL installation is verified; migration ledger tracking is **NOT_CREATED** (`supabase_migrations.schema_migrations` absent). Do not interpret24/24 as CLI migration-ledger tracking or later run broad db push. No repair/manual ledger writes performed. Any future tracking process needs its own exact-file authorization.
+
+Production untouched; Finance gateway/signing/JWT/token, Cloudflare and Toss remain unconfigured/not run. Ready for separately authorized Finance gateway setup. STOP after bootstrap/postflight; merchant E2E and LIVE remain outside this result.
