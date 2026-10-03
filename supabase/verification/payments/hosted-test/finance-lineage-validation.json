@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "baseline": "zero before synthetic profiles; all scoped TEST ledger rows classified",
+  "aggregate": {
+    "live_orders": 0,
+    "non_creation_events": 0,
+    "order_grant_links": 0,
+    "payment_attributable_spendable_delta": 0,
+    "payment_linked_postings": 0,
+    "payment_operations": 0,
+    "provider_purchase_links": 0,
+    "purchase_grants": 0,
+    "signup_bonus_delta": 6,
+    "unclassified_postings": 0,
+    "unexplained_delta": 0,
+    "unexplained_postings": 0
+  },
+  "synthetic_subject_labels": {
+    "buyer": {
+      "bonus": 3,
+      "canonical": true,
+      "postings": 1,
+      "reserved": 0
+    },
+    "gateway": {
+      "bonus": 3,
+      "canonical": true,
+      "postings": 1,
+      "reserved": 0
+    }
+  },
+  "production_writes": 0,
+  "cleanup": false,
+  "gateway_membership": [
+    {
+      "admin_option": false,
+      "inherit_option": false,
+      "set_option": true
+    }
+  ],
+  "gateway_matrix": "PASS: preserved actual Hosted A-G evidence from finance-validation.json; not replaced by local ACL tests",
+  "gateway_profile_required": false,
+  "historical_zero_total_delta_stop": "preserved; superseded by Owner lineage-aware invariant",
+  "payment_e2e_finance_gateway": "COMPLETE",
+  "isolated_regression": {
+    "payment": 69,
+    "math_2c": 131,
+    "math_2d": 37,
+    "math_2e": 63
+  },
+  "cloudflare_preview_configured": false,
+  "toss_calls": 0
+}

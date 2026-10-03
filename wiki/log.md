@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-04 — PAYMENT-E2E-FINANCE-1A lineage correction
+
+[Finance COMPLETE](payment-app-foundation.md#payment-e2e-finance-1a--2026-10-04-complete): canonical signup+6 classified; payment-attributable delta0/unexplained0. Prior safety stop retained, no cleanup. Payment69/Math regressions PASS; ready for separate Cloudflare setup authorization. Production/Toss unchanged.
+
 ## 2026-10-04 — PAYMENT-E2E-FINANCE-1 safety stop
 
 [Gateway evidence](payment-app-foundation.md#payment-e2e-finance-1--2026-10-04): A–G and profile RLS pass, but profile signup trigger created+6 TEST credits; zero-delta requirement failed. No payment purchase grants; no corrective writes or Production/Cloudflare/Toss action. Owner review pending.

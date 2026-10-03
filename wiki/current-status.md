@@ -2,7 +2,7 @@
 
 ## Product state
 
-[Payment](payment-app-foundation.md): Finance STOP; PROD OFF.
+[Payment](payment-app-foundation.md): Finance PASS; PROD OFF.
 
 [MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 

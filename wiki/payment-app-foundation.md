@@ -43,3 +43,7 @@ This supersedes the simplified PREP-1 fixture as Hosted compatibility evidence. 
 ## PAYMENT-E2E-FINANCE-1 — 2026-10-04
 
 [Hosted gateway evidence](../supabase/verification/payments/hosted-test/finance-validation.json): A–G gateway and owner/foreign-profile RLS pass. Overall BLOCKED: two authenticated profile creations triggered existing signup_bonus3 each (+6 spendable TEST Credit), violating required zero delta. Pre-activation signup branch persists when ADR enabled=false; missing HMAC marker alone does not suppress it. One unconfirmed TEST order/event, no payment operations/purchase grant/LIVE grant. Stop without ledger cleanup, trigger/schema changes or ADR activation. Owner review required; no Cloudflare/Toss/Production action.
+
+## PAYMENT-E2E-FINANCE-1A — 2026-10-04 COMPLETE
+
+Owner corrected zero-total-delta to payment-attributable zero. [Read-only lineage evidence](../supabase/verification/payments/hosted-test/finance-lineage-validation.json): buyer signup+3/gateway signup+3 proven through account/grant/transaction and canonical posting metadata; payment-attributable delta0, purchase/LIVE grants0, unexplained0. Prior BLOCKED record retained for traceability; no bonus removal or ledger/policy change. Actual Hosted A–G PASS preserved; narrow membership rechecked. Gateway Auth identity suffices; future gateway preparation omits public profile. Existing profile/bonus retained. Payment69/Math131+37+63 regressions PASS. Ready for separate Cloudflare authorization; no config/provider/Production action.

@@ -71,6 +71,7 @@ def payment_cases(c,rpc,new,scalar,sock):
  deny('browser_provider_selection',lambda:create(provider='APPLE_IAP'))
  ok('toss_server_selected',create()['provider']=='TOSS')
  baseline=scalar('select count(*) from public.credit_transactions')
+ signup_baseline=scalar("select coalesce(sum(t.balance_delta),0) from public.credit_transactions t join public.credit_grants g on g.id=t.grant_id where g.origin='signup_bonus'")
  for sku,amount,quantity in [('1c',4900,1),('3c',11900,3),('5c',17900,5),('10c',29900,10)]:
   r=create(sku);ok('sku_'+sku,r['amount']==amount and r['quantity']==quantity and r['mode']=='TEST')
  deny('unsupported_sku',lambda:create('20c'));deny('client_amount',lambda:create(amount=1));deny('forged_user',lambda:create(user_id=OTHER));deny('coupon',lambda:create(coupon='free'));deny('anon',lambda:create(role='anon'))
@@ -82,6 +83,8 @@ def payment_cases(c,rpc,new,scalar,sock):
  process('outcome',id=o['id'],operation_id=op['operation_id'],outcome='UNKNOWN');ok('unknown_recoverable',process('get',id=o['id'])['operation_state']=='PENDING')
  paid=scalar('select clock_timestamp()').isoformat();result=finish(o,op,paid);ok('test_confirm',result['state']=='PAID' and result['grant_state']=='TEST_RECORDED')
  ok('confirm_retry',finish(o,op,paid)==result);ok('test_no_spendable_credit',scalar('select count(*) from public.credit_transactions')==baseline and scalar("select count(*) from public.payment_orders where mode='TEST' and grant_id is not null")==0)
+ ok('test_payment_attributable_credit_zero',scalar("select count(*) from public.credit_transactions t join public.credit_grants g on g.id=t.grant_id where g.origin='purchase' or g.external_reference like 'payment/%' or t.idempotency_key like 'grant/payment/%' or t.actor_reference='system/payment' or exists(select 1 from public.payment_orders o where o.grant_id=g.id)")==0)
+ ok('test_signup_lineage_preserved',scalar("select coalesce(sum(t.balance_delta),0) from public.credit_transactions t join public.credit_grants g on g.id=t.grant_id where g.origin='signup_bonus'")==signup_baseline)
  deny('changed_payment_key',lambda:process('confirm_finish',id=o['id'],operation_id=op['operation_id'],payment_key='other',amount=o['amount'],paid_at=paid))
  neworder=create();deny('duplicate_provider_identity',lambda:start(neworder,payment=op['payment_key']))
  failed=create();failop=start(failed);process('outcome',id=failed['id'],operation_id=failop['operation_id'],outcome='REJECTED');ok('provider_failure_no_grant',process('get',id=failed['id'])['grant_state']=='NONE')

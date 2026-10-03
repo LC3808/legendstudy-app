@@ -131,8 +131,9 @@ through the existing authenticated owner RLS path: public.profiles INSERT of onl
 `id = session.user.id` and optional synthetic display_name; no authority in user-editable
 metadata. Existing profile insert privilege and owner policy govern it; do not disable RLS.
 Do this once through the authenticated Supabase client/REST, then verify own read and
-foreign denial. Missing benefit marker leaves signup benefit ungranted; account/profile
-creation must still succeed. No signup marker secret is required for TEST payment.
+foreign denial. When ADR activation is disabled, canonical profile creation may grant signup_bonus3.
+This is separate from payment purchase lineage; do not require total wallet balance0.
+No signup marker secret is required for TEST payment.
 Never insert paid grants to prepare a test purchase. Support test subject may be this
 buyer (cancel API requires support allowlist AND order ownership). Gateway subject is separate.
 
@@ -223,3 +224,13 @@ Production untouched; Finance gateway/signing/JWT/token, Cloudflare and Toss rem
 **Safety failure:** creating the two profiles invoked preserved `credit_profile_signup()` with lifecycle activation disabled. It automatically posted two signup_bonus grants of3, total spendable delta+6. This side effect was missed before profile writes. PREP statement that missing benefit marker alone leaves signup ungranted is not true while the preserved pre-activation branch runs; this observation supersedes that claim. No canonical migration changed.
 
 One TEST ORDER_CREATED, grant_state NONE; one CREATED event; zero operations, purchase grants or LIVE/POSTED orders. No provider confirm/cancel, no Toss call. Payment did not post credits, but task-wide zero-Credit criterion failed. STOP; no deletion/reversal, trigger suppression or ADR activation. Owner must review the synthetic signup-credit state and authorize any reconciliation or revised test baseline before progression. Cloudflare readiness:NO; Production untouched.
+
+## PAYMENT-E2E-FINANCE-1A — 2026-10-04 COMPLETE
+
+Owner corrected the acceptance invariant to **PAYMENT_ATTRIBUTABLE_SPENDABLE_CREDIT_DELTA=0**, not zero total wallet balance. [Lineage evidence](finance-lineage-validation.json) supersedes the overall BLOCKED disposition above; historical stop and original gateway observations remain intact.
+
+Read-only [credit-lineage.sql](credit-lineage.sql) joins transaction→grant→account and verifies signup origin/type/reference/idempotency/reason/actor. Current fixture buyer+3 and gateway+3 are exact canonical signup postings; total+6, reserved0. Payment-linked postings/purchase grants/order grant links/provider purchase links/operations/non-creation events0; unexplained and unclassified postings0. No cleanup, reversal or policy changes. Sums are deltas only because this bounded TEST fixture's historical baseline was zero; arbitrary environments need their own before/after lineage baseline.
+
+Actual Hosted A–G evidence remains PASS; membership rechecked unchanged. Gateway only needs an existing allowed Auth subject; `essay_private.uid()` checks Auth/lifecycle, while payment_process.get does not require its public profile. The prior successful ORDER_NOT_FOUND probe before gateway profile creation also demonstrated this. Future setup must omit gateway public profile; use a separate ordinary synthetic student fixture if foreign-profile RLS needs a row. Current gateway profile/bonus remain untouched. Buyer signup3 is expected product behavior.
+
+Isolated Payment69 (67 existing+2 lineage assertions), Math131+37+63 PASS. Tests separately assert TEST payment-linked grant absence and preservation of existing signup lineage; no economics changed. Ready for separately authorized Cloudflare Preview setup, not merchant E2E/LIVE. No Cloudflare config, Toss calls or Production changes in FINANCE-1A.

@@ -37,6 +37,8 @@
     "test_confirm",
     "confirm_retry",
     "test_no_spendable_credit",
+    "test_payment_attributable_credit_zero",
+    "test_signup_lineage_preserved",
     "changed_payment_key",
     "duplicate_provider_identity",
     "provider_failure_no_grant",
@@ -68,7 +70,7 @@
     "detached_account_cancellation",
     "real_history_rollback_refused"
   ],
-  "count": 67,
+  "count": 69,
   "migration_sha256": "77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75",
   "production_writes": 0,
   "test_provider_calls": 0
