@@ -1,5 +1,10 @@
 {
   "postgres": "17.11",
+  "public_schema_owner": "pg_database_owner",
+  "public_schema_acl_grantor": "pg_database_owner",
+  "observed_public_preflight": "PASS",
+  "observed_roles_memberships_default_acls": "PASS",
+  "managed_extensions_auth_runtime": "NOT_EMULATED; local Auth facilities only; no Hosted JWT claim",
   "deployer": "NOSUPERUSER CREATEROLE BYPASSRLS",
   "migration_count": 24,
   "full_chain": "PASS",
@@ -66,8 +71,8 @@
     ],
     [
       "public",
-      "postgres",
-      "{postgres=UC/postgres,=U/postgres,anon=U/postgres,authenticated=U/postgres,service_role=U/postgres,essay_executor=U/postgres,essay_worker=U/postgres,essay_finance=U/postgres,account_lifecycle_worker=U/postgres,account_erasure_executor=U/postgres}"
+      "pg_database_owner",
+      "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner,essay_executor=U/pg_database_owner,essay_worker=U/pg_database_owner,essay_finance=U/pg_database_owner,account_lifecycle_worker=U/pg_database_owner,account_erasure_executor=U/pg_database_owner}"
     ]
   ],
   "finance_public_execute_surface": [
@@ -82,7 +87,16 @@
     ]
   ],
   "db_execute_matrix": "PASS",
-  "local_authenticator_finance_set_and_revoke": "PASS",
+  "finance_gateway_enrolled": false,
+  "failure_points": [
+    "grant essay_executor to postgres with admin false,inherit false,set true granted by postgres;",
+    "grant create on schema public to essay_executor;",
+    "set role essay_executor;",
+    "grant execute on function public.payment_order(jsonb) to authenticated;",
+    "reset role;",
+    "before_commit"
+  ],
+  "rollback_catalog_membership_schema_default_acl_exact": "PASS",
   "managed_auth_gateway": "HOSTED_VERIFICATION_REQUIRED",
   "expired_invalid_signature_JWT": "HOSTED_VERIFICATION_REQUIRED",
   "production_writes": 0

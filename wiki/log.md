@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-03 — PAYMENT-E2E-HOSTED-COMPAT-1
+
+[Payment compatibility](payment-app-foundation.md#payment-e2e-hosted-compat-1--2026-10-03): corrected local public owner/grantor fixture; unchanged 24-file non-superuser bootstrap, regression and six failure/rollback checks PASS. Hosted remains untouched0/24; ready to resume HOSTED-1.
+
 ## 2026-10-03 — Payment provider-neutral amendment
 
 [Foundation](payment-app-foundation.md): typed provider and environment-scoped purchase uniqueness; Toss-only runtime retained, Apple/Google adapters disabled. No second wallet or pricing changes. Pre-apply hash regenerated with prior hash marked superseded; isolated regression rerun.

@@ -2,7 +2,7 @@
 
 ## Product state
 
-[Payment](payment-app-foundation.md): TEST prep ready; NOT_APPLIED.
+[Payment](payment-app-foundation.md): compat PASS; NOT_APPLIED.
 
 [MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 

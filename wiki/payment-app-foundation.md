@@ -29,3 +29,9 @@ payment feature branch. Official documentation Sandbox proof is recorded in LAB;
 leglabn24k E2E remains NOT_RUN. No project/config/deployment/Production changes.
 Next: Owner approves empty TEST project creation, then package/config/gateway verification,
 then separately authorized merchant E2E. Do not replay bootstrap into Production.
+
+## PAYMENT-E2E-HOSTED-COMPAT-1 — 2026-10-03
+
+[Corrected local compatibility evidence](../supabase/verification/payments/hosted-test/README.md#payment-e2e-hosted-compat-1--2026-10-03): PREP-1's public-owner normalization removed. Observed `pg_database_owner` owner/grantor, managed roles/memberships and schema/default ACL reproduced. Same 24 immutable migrations PASS as non-superuser; exact catalog, six injected failures and empty rollback PASS. Payment67, Credit84+static7, Humanities/HQP102, Math131+37+63 rerun PASS. No canonical migration change needed.
+
+This supersedes the simplified PREP-1 fixture as Hosted compatibility evidence. Real Auth/extensions/gateway are not emulated. Existing Hosted TEST project remains untouched, applied0/24; no Finance/Cloudflare/Toss/Production action. Ready to resume HOSTED-1 with fresh preflight; actual installation and merchant E2E remain unverified.

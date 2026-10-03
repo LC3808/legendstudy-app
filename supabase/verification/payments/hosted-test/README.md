@@ -168,3 +168,40 @@ payment failure/concurrency tests and Essay/HQP/Math regressions separately reru
 Actual Hosted Auth, signing/gateway, SMTP, dashboard ACL, cloud Preview config and merchant
 E2E remain HOSTED_VERIFICATION_REQUIRED. Storage/provider/AI are outside this test bootstrap.
 PRODUCTION_WRITES=0; EXTERNAL_CONFIG_CHANGES=0; merchant provider calls0 in PREP-1.
+
+## PAYMENT-E2E-HOSTED-COMPAT-1 — 2026-10-03
+
+Local compatibility PASS; ready to resume HOSTED-1, **not a Hosted installation PASS**.
+Owner-reported Hosted preflight remains empty (0/24 applied). This task made no Hosted,
+Production, Finance gateway, Cloudflare or Toss changes.
+
+Root cause: PREP-1 introduced `ALTER SCHEMA public OWNER TO postgres` as fixture setup.
+Git history records no canonical prerequisite requiring it. That normalization hid the
+actual PG17/Hosted `pg_database_owner` ownership and ACL grantor. The correction removes
+that fixture statement; no migration SQL or manifest bytes changed.
+
+[Observed platform](observed-platform.json) captures sanitized Owner-supplied role,
+membership, schema/default ACL evidence. Local-only `tool/payment_hosted_fixture.py`
+reproduces and compares those catalogs before installation. Managed extensions and real
+Auth/JWT gateway runtime are not emulated. Do not execute the fixture on Hosted.
+
+Fresh PG17.11: all 24 hash-verified files applied in order by non-superuser postgres;
+per-file function owner/security/search_path/ACL inventory matches the existing manifest.
+Final public owner/grantor stays `pg_database_owner`; only canonical grants are added.
+Managed memberships are preserved; custom ADMIN-only memberships and RLS/EXECUTE pass.
+No Finance gateway membership is enrolled by this compatibility test.
+
+Payment postflight, TEST isolation and empty-install rollback PASS. Six injected failures
+(after temporary SET, schema CREATE, SET ROLE, first public function setup, RESET ROLE,
+and before COMMIT) restore exact function definitions/owners/ACL/config, relation
+ownership/RLS, memberships, schema/default ACL; no partial payment namespace survives.
+[Validation evidence](validation.json) records the topology and failure checkpoints.
+
+Separate existing regression suites rerun: Payment67, Essay Credit84 + static7,
+Humanities/HQP102, Math persistence131 + runtime37 + learning63: all PASS. Those suites
+retain their existing synthetic fixtures; the full observed platform comparison belongs
+to the fresh 24-file bootstrap run, not a claim of managed Auth/extension equivalence.
+
+Next: resume the separately authorized HOSTED-1 exact-file process against the preserved
+empty TEST project, starting with fresh read-only preflight. No schema-owner/ACL workaround
+is required. Managed gateway/config and merchant E2E remain later verification gates.
