@@ -215,3 +215,11 @@ Final114 functions have exact expected owner/security/search_path/EXECUTE; no un
 SQL installation is verified; migration ledger tracking is **NOT_CREATED** (`supabase_migrations.schema_migrations` absent). Do not interpret24/24 as CLI migration-ledger tracking or later run broad db push. No repair/manual ledger writes performed. Any future tracking process needs its own exact-file authorization.
 
 Production untouched; Finance gateway/signing/JWT/token, Cloudflare and Toss remain unconfigured/not run. Ready for separately authorized Finance gateway setup. STOP after bootstrap/postflight; merchant E2E and LIVE remain outside this result.
+
+## PAYMENT-E2E-FINANCE-1 — 2026-10-04 BLOCKED
+
+[Actual gateway evidence](finance-validation.json): Owner imported/rotated TEST ES256; narrow authenticator→essay_finance enrollment ADMIN=false/INHERIT=false/SET=true. Real A–G probes pass: anon401, buyer403, wrong-role403, expired401, invalid-signature401; finance get200; private schema406. Normal buyer password login verified through Auth; existing foreign profile hidden by RLS. Gateway's foreign-profile fixture used a locally signed authenticated TEST JWT through owner RLS; it was not a password-login test. No credentials/subjects retained here.
+
+**Safety failure:** creating the two profiles invoked preserved `credit_profile_signup()` with lifecycle activation disabled. It automatically posted two signup_bonus grants of3, total spendable delta+6. This side effect was missed before profile writes. PREP statement that missing benefit marker alone leaves signup ungranted is not true while the preserved pre-activation branch runs; this observation supersedes that claim. No canonical migration changed.
+
+One TEST ORDER_CREATED, grant_state NONE; one CREATED event; zero operations, purchase grants or LIVE/POSTED orders. No provider confirm/cancel, no Toss call. Payment did not post credits, but task-wide zero-Credit criterion failed. STOP; no deletion/reversal, trigger suppression or ADR activation. Owner must review the synthetic signup-credit state and authorize any reconciliation or revised test baseline before progression. Cloudflare readiness:NO; Production untouched.

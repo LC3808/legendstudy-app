@@ -39,3 +39,7 @@ This supersedes the simplified PREP-1 fixture as Hosted compatibility evidence. 
 ## PAYMENT-E2E-HOSTED-1 — actual TEST installation, 2026-10-03
 
 [Hosted evidence](../supabase/verification/payments/hosted-test/hosted-validation.json): fresh preflight PASS; exact24 files installed, per-file and final114 function catalog/ownership/ACL PASS. Public owner/grantor remains pg_database_owner; custom roles/memberships and payment RLS/TEST foundation PASS. Payment, Credit and Auth counts0; spendable delta0. No unexpected grants. SQL installation verified; migration-ledger tracking NOT_CREATED, no repair. Production untouched. Finance gateway, signing/JWT/token, Cloudflare and Toss NOT_CONFIGURED/NOT_RUN. Ready for separate Finance gateway authorization; stop before configuration.
+
+## PAYMENT-E2E-FINANCE-1 — 2026-10-04
+
+[Hosted gateway evidence](../supabase/verification/payments/hosted-test/finance-validation.json): A–G gateway and owner/foreign-profile RLS pass. Overall BLOCKED: two authenticated profile creations triggered existing signup_bonus3 each (+6 spendable TEST Credit), violating required zero delta. Pre-activation signup branch persists when ADR enabled=false; missing HMAC marker alone does not suppress it. One unconfirmed TEST order/event, no payment operations/purchase grant/LIVE grant. Stop without ledger cleanup, trigger/schema changes or ADR activation. Owner review required; no Cloudflare/Toss/Production action.

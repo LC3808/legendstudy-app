@@ -1,0 +1,102 @@
+{
+  "status": "BLOCKED",
+  "probes": [
+    {
+      "probe": "BUYER_NORMAL_AUTH",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "A_ANON",
+      "status": 401,
+      "code": "42501"
+    },
+    {
+      "probe": "B_BUYER",
+      "status": 403,
+      "code": "42501"
+    },
+    {
+      "probe": "C_WRONG_ROLE",
+      "status": 403,
+      "code": "42501"
+    },
+    {
+      "probe": "D_EXPIRED",
+      "status": 401,
+      "code": "PGRST303"
+    },
+    {
+      "probe": "E_INVALID_SIGNATURE",
+      "status": 401,
+      "code": "PGRST301"
+    },
+    {
+      "probe": "BUYER_PROFILE",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "GATEWAY_PROFILE_FIXTURE",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "FOREIGN_EXISTING_PROFILE_HIDDEN",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "SYNTHETIC_TEST_ORDER",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "F_VALID_FINANCE",
+      "status": 200,
+      "code": null
+    },
+    {
+      "probe": "G_PRIVATE_HELPER",
+      "status": 406,
+      "code": "PGRST106"
+    }
+  ],
+  "gateway_profile_fixture": "authenticated owner RLS via signed TEST fixture JWT",
+  "provider_calls": 0,
+  "credit_aggregate": [
+    {
+      "balance_delta": 6,
+      "origin": "signup_bonus",
+      "postings": 2,
+      "reserved_delta": 0,
+      "transaction_type": "signup_bonus"
+    }
+  ],
+  "profile_trigger": [
+    {
+      "definition": "CREATE OR REPLACE FUNCTION essay_private.credit_profile_signup()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$begin\n if not account_private.enabled() and essay_private.credit_signup_eligible(new.id) then perform essay_private.credit_post_grant(new.id,3,'signup_bonus','signup_bonus/'||new.id::text,'signup_bonus_v1','system/signup_bonus',null);end if;\n return new;end$function$\n"
+    }
+  ],
+  "counts": [
+    {
+      "events": 1,
+      "live_or_posted": 0,
+      "operations": 0,
+      "orders": 1,
+      "purchase_grants": 0
+    }
+  ],
+  "memberships": [
+    {
+      "admin_option": false,
+      "inherit_option": false,
+      "set_option": true
+    }
+  ],
+  "spendable_credit_delta": 6,
+  "production_writes": 0,
+  "live_grants": 0,
+  "cloudflare_configured": false,
+  "stop_reason": "Authenticated profile creation invoked preserved signup trigger: two signup_bonus postings of3 each; required zero delta violated. No repair/cleanup."
+}

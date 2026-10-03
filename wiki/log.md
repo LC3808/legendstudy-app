@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-04 — PAYMENT-E2E-FINANCE-1 safety stop
+
+[Gateway evidence](payment-app-foundation.md#payment-e2e-finance-1--2026-10-04): A–G and profile RLS pass, but profile signup trigger created+6 TEST credits; zero-delta requirement failed. No payment purchase grants; no corrective writes or Production/Cloudflare/Toss action. Owner review pending.
+
 ## 2026-10-03 — PAYMENT-E2E-HOSTED-1 TEST bootstrap
 
 [Actual Hosted verification](payment-app-foundation.md#payment-e2e-hosted-1--actual-test-installation-2026-10-03): exact24 SQL files installed, preflight/postflight/catalog114/ACL/roles PASS; payment/Credit/Auth counts0. No ledger tracking/repair, Production, Finance gateway, Cloudflare or Toss action. Ready for separate Finance setup authorization.
