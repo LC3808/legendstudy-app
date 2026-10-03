@@ -15,3 +15,17 @@ Validation: payment checks including real multi-session concurrency and transact
 Independent [Toss TEST gate](../supabase/verification/payments/provider-test.md): official TEST/Sandbox/API documentation reviewed; runtime TEST credentials/session unavailable, calls0. Provider-only TEST may proceed independently once configured, with no Ledger access. Provider success must never be promoted to APP/LAB end-to-end success.
 
 Next: Owner migration review, then separately authorized apply/config and LAB payment implementation. LIVE additionally requires payment/deletion reconciliation for provider-paid/ungranted outcomes, financial privacy/retention, statutory exception handling, operational reconciliation and explicit Owner activation. Current public policy and Production remain unchanged. Unified Wiki and LAB were not modified in this APP-only phase.
+
+## PAYMENT-E2E-PREP-1 — 2026-10-03
+
+Canonical candidate3b3b869 / hash77b460bf… supersedes e4836eda pre-apply. Original60
+payment checks retained;67 current checks and Credit84, Humanities102, Math131+37+63
+rerun PASS. [Independent Hosted TEST bootstrap package](../supabase/verification/payments/hosted-test/README.md)
+contains24 exact ordered hashes and function ownership/ACL inventory; fresh non-superuser
+PG17 install, postflight, payment rollback/failure restoration and local authenticator
+finance SET/revoke PASS. Managed Auth/JWT signatures/expiry remain HOSTED_VERIFICATION_REQUIRED.
+LAB Preview pair enforcement and real workerd redirect checks are implemented on its
+payment feature branch. Official documentation Sandbox proof is recorded in LAB; merchant
+leglabn24k E2E remains NOT_RUN. No project/config/deployment/Production changes.
+Next: Owner approves empty TEST project creation, then package/config/gateway verification,
+then separately authorized merchant E2E. Do not replay bootstrap into Production.

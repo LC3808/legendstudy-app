@@ -3283,3 +3283,11 @@ SQL-validated Pilot policy hashes, human rubric, four-call Round1 + future two-c
 Offline47/static105 and isolated native802 fencing/regression checks PASS. No real AI/Production,
 DB/RPC/migration/default change, credentials or new source collection. Execution awaits
 separate approval; historical artifacts and parallel Owner files preserved.
+
+## 2026-10-03 — PAYMENT-E2E-PREP-1
+
+Reconciled provider-neutral payment candidate3b3b869/hash77b460bf…; original60 retained,
+67 current checks + Credit84/HQP102/Math131+37+63 PASS. Fresh24-file TEST bootstrap
+non-superuser install/rollback/failure PASS; gateway crypto remains Hosted gate.
+[Owner TEST package](../supabase/verification/payments/hosted-test/README.md).
+External configuration and Production writes0; merchant E2E not run.

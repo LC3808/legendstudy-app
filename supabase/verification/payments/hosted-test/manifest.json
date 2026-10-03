@@ -1,0 +1,1611 @@
+{
+  "scope": "Fresh TEST only. No db push; no Production replay. Managed auth fixtures excluded. Math/provider005/avatar/quota omitted.",
+  "migrations": [
+    {
+      "order": 1,
+      "filename": "20260912000100_initial_content_schema.sql",
+      "sha256": "2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b",
+      "dependency": "Managed auth.users/auth.uid and platform roles",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "set_updated_at()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "set_viewed_at()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 2,
+      "filename": "20260913000100_profile_school_selection.sql",
+      "sha256": "7d151a18ff2aab721eb40c9e1ccef54b1c8e186d0e50619aa9ed05e45970e7cb",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 3,
+      "filename": "20260913000200_profile_day_target.sql",
+      "sha256": "c060ced1166740c272f34320953b74f46d629ef51034616fe3f1a64a4c977b53",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 4,
+      "filename": "20260914000100_study_sessions.sql",
+      "sha256": "a832d5e4704d868461d1dd24e0253c1b06e5feb0fa2546b0ebceb115d4d6eb51",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "study_active_milliseconds(jsonb,numeric)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 5,
+      "filename": "20260914000200_mock_exam_scoring.sql",
+      "sha256": "3ff1fb8c7a638e93e36194a28338caee0356ee1b0834fba6709940722296b0e8",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "fetch_own_mock_attempt(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "scoring_answer_guard()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_attempt_consistency()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_attempt_guard()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_cutoffs_valid(smallint[],integer)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "scoring_mcq5(jsonb,jsonb,smallint[],text)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_normalize_answers(jsonb,integer)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_publication_guard()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_question_guard()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "scoring_source_url(text)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "scoring_text(text,integer)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "submit_mock_attempt(uuid,uuid,uuid,uuid,text,jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 6,
+      "filename": "20260917000100_feedback_operations.sql",
+      "sha256": "f9d4f7fa29385272bab5ae6f5074a854641b9ce52863f29f00dd148a8f30720b",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "enqueue_feedback_notification()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "feedback_updated_at()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "is_feedback_admin()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 7,
+      "filename": "20260917000200_feedback_notification_worker.sql",
+      "sha256": "3c1b73b7ac7e22c71d7ec8575b19635ed79559e4580aa59e2357e5549aded633",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "claim_feedback_notifications(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "complete_feedback_notification(uuid,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "fail_feedback_notification(uuid,uuid,text,boolean)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "reclaim_feedback_notification_leases(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 8,
+      "filename": "20260923000100_study_total_inclusion.sql",
+      "sha256": "041c9f1607465700b268ce96287f9452b7ba7e07cf450dba7f6ca1c3902c0800",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 9,
+      "filename": "20260926000100_day_targets.sql",
+      "sha256": "5bfd34f8c4f2a452e0c3cf6cdf47916c155f675a2c117229f1a2f1f2224ba7ba",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 10,
+      "filename": "20260927000100_profile_personalization.sql",
+      "sha256": "5f0433622c532f52748b9b261c93f3df8683dd28ad825c9d8ea0317be4dfbca8",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 11,
+      "filename": "20260927000200_essay_lab_foundation.sql",
+      "sha256": "d1c4fcb1b31cf4ea7979bc7cd585f5aa817383b5d3d531a4a64430d431dffcf3",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": []
+    },
+    {
+      "order": 12,
+      "filename": "20260928000100_student_essay_product.sql",
+      "sha256": "9db7bdf6c17895a8fb8dcc2f105919f87e37202a84929bbeebcc3ca6978e21e2",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_product_child_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_product_draft_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_product_processing_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_product_progress_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_product_reject_update()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_product_terminal_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_question_identity_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 13,
+      "filename": "20260928000200_essay_entitlements.sql",
+      "sha256": "9e3427fe3ffeec94569e19f4d7958df210fff15ca3c15a8d17652db96df847d9",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_billing_history_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        },
+        {
+          "signature": "essay_credit_account_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,service_role=X/postgres}"
+        }
+      ],
+      "roles_present": []
+    },
+    {
+      "order": 14,
+      "filename": "20260928000300_essay_server_operations.sql",
+      "sha256": "9bc223185e464f4187d6c8e2abcb9d419091fc84ac2bba21f14cc44f5e254995",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_claim(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_erase(uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_finalize_failure(uuid,uuid,uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_finalize_success(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_open_session(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.clock()",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.fence(uuid,uuid,uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.hash(text)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.lock_job(uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.owner(uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.release(uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.uid()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "essay_reconcile(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_refund(uuid,text,integer)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_finance=X/essay_executor}"
+        },
+        {
+          "signature": "essay_request_evaluation(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_request_rewrite(uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_save_draft(uuid,bigint,text,text,text,integer)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_submit_attempt(uuid,bigint,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_timeout(uuid,uuid,uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 15,
+      "filename": "20260928000400_essay_helper_execute_boundary.sql",
+      "sha256": "38f3b5b62ae045f41765ffdc601b9d0ac2e7ae8826d96be02d1a7baf65497fad",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_billing_history_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_credit_account_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_child_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_draft_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_processing_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_progress_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_reject_update()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_product_terminal_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_question_identity_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 16,
+      "filename": "20260929000100_essay_scaffolding_persistence.sql",
+      "sha256": "1eb5c7491490e4e411b7eb32222b86976039264560bc13ad915f7cb0e452ea89",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_claim(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_finalize_success(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_worker=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_claim_v13(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_context(uuid,text,jsonb,jsonb)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_envelope_valid(jsonb)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_finalize_v13(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_legacy_essay_claim(uuid,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_legacy_essay_finalize_success(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_legacy_essay_request_evaluation(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_request_v13(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_validate(uuid,jsonb)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_request_evaluation(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 17,
+      "filename": "20260929000200_essay_submit_timing_correction.sql",
+      "sha256": "845a62146938665882efecf25ee1a6f0a28db68ddd88b83c857b9926f8838e1c",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_submit_attempt(uuid,bigint,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 18,
+      "filename": "20260929000300_essay_credit_commercial_core.sql",
+      "sha256": "f1b752720bb81222071543928be4b9ef24c466bf8f415b1e951158523d383d6c",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_admin_grant(uuid,integer,text,uuid,text,timestamp with time zone)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_finance=X/essay_executor}"
+        },
+        {
+          "signature": "essay_claim_signup_credit()",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamp with time zone)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_profile_signup()",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_request_v2(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_signup_eligible(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "essay_private.scaffold_finalize_v13(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.scaffold_legacy_essay_finalize_success(uuid,uuid,uuid,jsonb,uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_request_evaluation(uuid,uuid,text)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 19,
+      "filename": "20260929000400_essay_owner_evaluation_status.sql",
+      "sha256": "7d0ef18ddfce510cc96db140e282d57e6716d51e37bc7a39f34c9efe9c95375e",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_evaluation_status(uuid)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 20,
+      "filename": "20260930000100_day_targets_least_privilege.sql",
+      "sha256": "ea060b70b73c53be1c8f346496b5dc03ecb634eaab9f194d5e7f5d5d65ba56c5",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 21,
+      "filename": "20261001000100_quality_read_authorization.sql",
+      "sha256": "079f03a0bb65612292ce0d1343f395cc1b4acbdcc9cfe696b1072dd49f248764",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "is_quality_operator()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "ql_case_detail(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "ql_list_cases(integer,timestamp with time zone,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 22,
+      "filename": "20261001000200_human_quality_persistence.sql",
+      "sha256": "598aacc93d6749f2b890dfc440564a179e9185c1978e05b09ba8df9304449fd5",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "essay_private.hq_finding_valid(jsonb)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_private.hq_immutable()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_private.hq_projection(jsonb)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "essay_private.hq_rubric_valid(jsonb)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "ql_list_human_judgments(uuid,integer,timestamp with time zone,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "ql_review_state(uuid[])",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "ql_submit_human_judgment(jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": [
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 23,
+      "filename": "20261001000300_account_deletion_lifecycle.sql",
+      "sha256": "38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "account_benefit_candidates(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_benefit_claim(uuid,jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_benefit_record_existing(uuid,jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_advance(uuid,uuid,text)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_bind(uuid,jsonb,text,text)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_cancel()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_capture_result(uuid,text)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_claim(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_finish(uuid,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_health()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_maintenance()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_notification_ack(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_notifications(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_personal(uuid,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_postconditions(uuid,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_provider_result(uuid,uuid,boolean)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_request()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_restore_manifest()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_retry(uuid,uuid,text)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_status()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "account_deletion_unbound(integer)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_identity_blocked(jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_private.activation_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_private.allowed(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "account_private.caller_write_gate()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_private.detach_finance(uuid)",
+          "owner": "account_erasure_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{account_erasure_executor=X/account_erasure_executor,postgres=X/account_erasure_executor}"
+        },
+        {
+          "signature": "account_private.enabled()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "account_private.fenced(uuid,uuid)",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_private.finance_privacy_guard()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_private.guard_request()",
+          "owner": "postgres",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_private.lock_subject(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "account_private.personal_write_gate()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "account_reauth_attest(uuid,uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,account_lifecycle_worker=X/postgres}"
+        },
+        {
+          "signature": "account_service_allowed()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "essay_claim_signup_credit()",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamp with time zone)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.credit_profile_signup()",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.lock_job(uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.owner(uuid)",
+          "owner": "essay_executor",
+          "security": "INVOKER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor}"
+        },
+        {
+          "signature": "essay_private.uid()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "fetch_own_mock_attempt(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "is_quality_operator()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        },
+        {
+          "signature": "submit_mock_attempt(uuid,uuid,uuid,uuid,text,jsonb)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,authenticated=X/postgres}"
+        }
+      ],
+      "roles_present": [
+        [
+          "account_erasure_executor"
+        ],
+        [
+          "account_lifecycle_worker"
+        ],
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    },
+    {
+      "order": 24,
+      "filename": "20261003000100_payment_foundation.sql",
+      "sha256": "77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75",
+      "dependency": "All preceding allowlisted entries (conservative exact tested chain)",
+      "deployer": "postgres NOSUPERUSER CREATEROLE BYPASSRLS",
+      "function_changes": [
+        {
+          "signature": "payment_order(jsonb)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}"
+        },
+        {
+          "signature": "payment_private.result(uuid)",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+        },
+        {
+          "signature": "payment_private.spend_guard()",
+          "owner": "postgres",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{postgres=X/postgres}"
+        },
+        {
+          "signature": "payment_process(jsonb)",
+          "owner": "essay_executor",
+          "security": "DEFINER",
+          "config": [
+            "search_path=\"\""
+          ],
+          "execute_acl": "{essay_executor=X/essay_executor,essay_finance=X/essay_executor}"
+        }
+      ],
+      "roles_present": [
+        [
+          "account_erasure_executor"
+        ],
+        [
+          "account_lifecycle_worker"
+        ],
+        [
+          "essay_executor"
+        ],
+        [
+          "essay_finance"
+        ],
+        [
+          "essay_worker"
+        ]
+      ]
+    }
+  ]
+}

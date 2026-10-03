@@ -1,0 +1,89 @@
+{
+  "postgres": "17.11",
+  "deployer": "NOSUPERUSER CREATEROLE BYPASSRLS",
+  "migration_count": 24,
+  "full_chain": "PASS",
+  "payment_postflight": "PASS",
+  "payment_empty_rollback": "PASS",
+  "payment_injected_failure_restoration": "PASS",
+  "role_memberships": [
+    [
+      "account_erasure_executor",
+      "postgres",
+      "supabase_admin",
+      true,
+      false,
+      false
+    ],
+    [
+      "account_lifecycle_worker",
+      "postgres",
+      "supabase_admin",
+      true,
+      false,
+      false
+    ],
+    [
+      "essay_executor",
+      "postgres",
+      "supabase_admin",
+      true,
+      false,
+      false
+    ],
+    [
+      "essay_finance",
+      "postgres",
+      "supabase_admin",
+      true,
+      false,
+      false
+    ],
+    [
+      "essay_worker",
+      "postgres",
+      "supabase_admin",
+      true,
+      false,
+      false
+    ]
+  ],
+  "schema_acl": [
+    [
+      "account_private",
+      "postgres",
+      "{postgres=UC/postgres,essay_executor=U/postgres,account_erasure_executor=U/postgres}"
+    ],
+    [
+      "essay_private",
+      "postgres",
+      "{postgres=UC/postgres,essay_executor=U/postgres}"
+    ],
+    [
+      "payment_private",
+      "postgres",
+      "{postgres=UC/postgres,essay_executor=U/postgres}"
+    ],
+    [
+      "public",
+      "postgres",
+      "{postgres=UC/postgres,=U/postgres,anon=U/postgres,authenticated=U/postgres,service_role=U/postgres,essay_executor=U/postgres,essay_worker=U/postgres,essay_finance=U/postgres,account_lifecycle_worker=U/postgres,account_erasure_executor=U/postgres}"
+    ]
+  ],
+  "finance_public_execute_surface": [
+    [
+      "essay_admin_grant(uuid,integer,text,uuid,text,timestamp with time zone)"
+    ],
+    [
+      "essay_refund(uuid,text,integer)"
+    ],
+    [
+      "payment_process(jsonb)"
+    ]
+  ],
+  "db_execute_matrix": "PASS",
+  "local_authenticator_finance_set_and_revoke": "PASS",
+  "managed_auth_gateway": "HOSTED_VERIFICATION_REQUIRED",
+  "expired_invalid_signature_JWT": "HOSTED_VERIFICATION_REQUIRED",
+  "production_writes": 0
+}
