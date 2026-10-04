@@ -20,6 +20,7 @@ export interface Ports {
   bindAndCheckpoint(job: Job): Promise<void>;
   // Enumerate ALL registered owner namespaces, remove via API, verify absence.
   storageEraseAndVerify(subject: string): Promise<void>;
+  mathEraseAndVerify?(job: Job): Promise<void>;
   // Return false if unknown or unsupported. Never fake provider completion.
   providerEraseAndVerify(job: Job): Promise<boolean>;
   financePolicyReady(): boolean;
@@ -73,6 +74,7 @@ export async function dispatch(
         failure = "STORAGE_UNAVAILABLE";
         if (!job.subject_id) throw Error();
         await p.storageEraseAndVerify(job.subject_id);
+        if (p.mathEraseAndVerify) await p.mathEraseAndVerify(job);
         await advance("STORAGE", "PROVIDER");
       }
       if (job.phase === "PROVIDER") {

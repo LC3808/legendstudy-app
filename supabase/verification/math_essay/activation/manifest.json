@@ -1,0 +1,118 @@
+{
+  "scope": "Owner-reviewed exact activation allowlist; NOT APPLIED. Existing prerequisites are verified, never replayed.",
+  "app_authority": "0570099c98929b27f8e484210efc14fe061e8476",
+  "prerequisites_inspect_only": [
+    {
+      "filename": "20260912000100_initial_content_schema.sql",
+      "sha256": "2a2c55cfc542e961fe2356e211141b3a3df0d0c47044efac3f8360dd1f360a2b"
+    },
+    {
+      "filename": "20260913000100_profile_school_selection.sql",
+      "sha256": "7d151a18ff2aab721eb40c9e1ccef54b1c8e186d0e50619aa9ed05e45970e7cb"
+    },
+    {
+      "filename": "20260917000100_feedback_operations.sql",
+      "sha256": "f9d4f7fa29385272bab5ae6f5074a854641b9ce52863f29f00dd148a8f30720b"
+    },
+    {
+      "filename": "20260927000100_profile_personalization.sql",
+      "sha256": "5f0433622c532f52748b9b261c93f3df8683dd28ad825c9d8ea0317be4dfbca8"
+    },
+    {
+      "filename": "20260927000200_essay_lab_foundation.sql",
+      "sha256": "d1c4fcb1b31cf4ea7979bc7cd585f5aa817383b5d3d531a4a64430d431dffcf3"
+    },
+    {
+      "filename": "20260928000100_student_essay_product.sql",
+      "sha256": "9db7bdf6c17895a8fb8dcc2f105919f87e37202a84929bbeebcc3ca6978e21e2"
+    },
+    {
+      "filename": "20260928000200_essay_entitlements.sql",
+      "sha256": "9e3427fe3ffeec94569e19f4d7958df210fff15ca3c15a8d17652db96df847d9"
+    },
+    {
+      "filename": "20260928000300_essay_server_operations.sql",
+      "sha256": "9bc223185e464f4187d6c8e2abcb9d419091fc84ac2bba21f14cc44f5e254995"
+    },
+    {
+      "filename": "20260928000400_essay_helper_execute_boundary.sql",
+      "sha256": "38f3b5b62ae045f41765ffdc601b9d0ac2e7ae8826d96be02d1a7baf65497fad"
+    },
+    {
+      "filename": "20260929000100_essay_scaffolding_persistence.sql",
+      "sha256": "1eb5c7491490e4e411b7eb32222b86976039264560bc13ad915f7cb0e452ea89"
+    },
+    {
+      "filename": "20260929000200_essay_submit_timing_correction.sql",
+      "sha256": "845a62146938665882efecf25ee1a6f0a28db68ddd88b83c857b9926f8838e1c"
+    },
+    {
+      "filename": "20260929000300_essay_credit_commercial_core.sql",
+      "sha256": "f1b752720bb81222071543928be4b9ef24c466bf8f415b1e951158523d383d6c"
+    },
+    {
+      "filename": "20260929000400_essay_owner_evaluation_status.sql",
+      "sha256": "7d0ef18ddfce510cc96db140e282d57e6716d51e37bc7a39f34c9efe9c95375e"
+    },
+    {
+      "filename": "20261001000100_quality_read_authorization.sql",
+      "sha256": "079f03a0bb65612292ce0d1343f395cc1b4acbdcc9cfe696b1072dd49f248764"
+    },
+    {
+      "filename": "20260913000200_profile_day_target.sql",
+      "sha256": "c060ced1166740c272f34320953b74f46d629ef51034616fe3f1a64a4c977b53"
+    },
+    {
+      "filename": "20260914000100_study_sessions.sql",
+      "sha256": "a832d5e4704d868461d1dd24e0253c1b06e5feb0fa2546b0ebceb115d4d6eb51"
+    },
+    {
+      "filename": "20260914000200_mock_exam_scoring.sql",
+      "sha256": "3ff1fb8c7a638e93e36194a28338caee0356ee1b0834fba6709940722296b0e8"
+    },
+    {
+      "filename": "20260923000100_study_total_inclusion.sql",
+      "sha256": "041c9f1607465700b268ce96287f9452b7ba7e07cf450dba7f6ca1c3902c0800"
+    },
+    {
+      "filename": "20260926000100_day_targets.sql",
+      "sha256": "5bfd34f8c4f2a452e0c3cf6cdf47916c155f675a2c117229f1a2f1f2224ba7ba"
+    },
+    {
+      "filename": "20260930000100_day_targets_least_privilege.sql",
+      "sha256": "ea060b70b73c53be1c8f346496b5dc03ecb634eaab9f194d5e7f5d5d65ba56c5"
+    },
+    {
+      "filename": "20260917000200_feedback_notification_worker.sql",
+      "sha256": "3c1b73b7ac7e22c71d7ec8575b19635ed79559e4580aa59e2357e5549aded633"
+    },
+    {
+      "filename": "20261001000200_human_quality_persistence.sql",
+      "sha256": "598aacc93d6749f2b890dfc440564a179e9185c1978e05b09ba8df9304449fd5"
+    }
+  ],
+  "ordered_activation": [
+    {
+      "filename": "20261001000300_account_deletion_lifecycle.sql",
+      "sha256": "38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94"
+    },
+    {
+      "filename": "20261002000100_math_essay_persistence.sql",
+      "sha256": "73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51"
+    },
+    {
+      "filename": "20261002000200_math_runtime_surface.sql",
+      "sha256": "b40bf7224a84658308ff1640b639acb857e379998211131d97a688a9711fe049"
+    },
+    {
+      "filename": "20261002000300_math_learning_runtime.sql",
+      "sha256": "fa0fbb507dd650d2e684f7dc9bc9375c6c5db09eac64405a438ad63206933f7d"
+    },
+    {
+      "filename": "20261004000200_math_storage_erasure_activation.sql",
+      "sha256": "fa5718c586a6affb5ffabbedbccf4f1a6d43c21c7fc91dec1c5e1c4daa654489"
+    }
+  ],
+  "canonical_math_bytes_changed": false,
+  "production_applied": false
+}

@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-04 — MATH-PRODUCTION-ACTIVATION-1
+
+[Activation package](math-production-activation.md): APP release0570099 reconciled. Additive private Storage/byte admission, fenced Math erasure and default-OFF admission/stale recovery; unchanged C/D/E/Payment. Real PG→LAB wire→PG billing -1/0 PASS; Deno57 PASS. LAB student route/physical adapter added on Claude6dec4f. Production preflight/Hosted gateway/byte lifecycle/model smoke remain external gates; RC NO. No Production/provider/student data.
+
 ## 2026-10-04 — APP-RELEASE-CLOSEOUT-1
 
 [Closeout](app-release-closeout.md): five stale baseline assertions corrected; owner-scoped deletion routing, email reauth, cleanup retry/logout and timer privacy manifest added. Local test/analyze and unsigned release compiles PASS. Apple revoke transport tested but token lifecycle connection remains blocked. Separate LAB deletion request candidate; no Production/deploy/upload. Privacy/public-policy mismatch, signing, credentials and device acceptance remain release gates.

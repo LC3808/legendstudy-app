@@ -4,7 +4,7 @@
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.
 
-[MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
+[Math activation](math-production-activation.md): local PASS; OFF; RC NO.
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.

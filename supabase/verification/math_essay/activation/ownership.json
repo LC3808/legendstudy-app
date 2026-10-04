@@ -1,0 +1,56 @@
+[
+  {
+    "name": "math_storage_owner",
+    "owner": "postgres",
+    "executors": [
+      "authenticated",
+      "postgres"
+    ],
+    "search_path": ""
+  },
+  {
+    "name": "math_storage_worker_read",
+    "owner": "postgres",
+    "executors": [
+      "math_extraction_worker",
+      "postgres"
+    ],
+    "search_path": ""
+  },
+  {
+    "name": "math_artifact_storage",
+    "owner": "postgres",
+    "executors": [
+      "math_extraction_worker",
+      "postgres"
+    ],
+    "search_path": ""
+  },
+  {
+    "name": "math_account_erasure",
+    "owner": "postgres",
+    "executors": [
+      "account_lifecycle_worker",
+      "postgres"
+    ],
+    "search_path": ""
+  },
+  {
+    "name": "math_recover_evaluation",
+    "owner": "postgres",
+    "executors": [
+      "math_evaluation_worker",
+      "postgres"
+    ],
+    "search_path": ""
+  },
+  {
+    "name": "math_catalog",
+    "owner": "postgres",
+    "executors": [
+      "authenticated",
+      "postgres"
+    ],
+    "search_path": ""
+  }
+]

@@ -1,6 +1,7 @@
 // Server-only boundary. Never import from Flutter/LAB. No credentials are provisioned here.
 import { type Job, markers, type Ports } from "./worker.ts";
 import { identityInputs } from "./http.ts";
+import { eraseMathStorage } from "./math-storage.ts";
 import { eraseOwnedStorage } from "./storage.ts";
 export type Config = {
   url: string;
@@ -11,6 +12,7 @@ export type Config = {
   restoreKey: Uint8Array;
   restoreVersion: string;
   financeReviewed: boolean;
+  mathStorageEnabled?: boolean;
   checkpoint: (manifest: unknown) => Promise<void>;
   notification: (event: unknown) => Promise<void>;
   provider: (job: Job) => Promise<boolean>;
@@ -153,6 +155,23 @@ export function createPorts(c: Config): Ports {
         },
       }, subject);
     },
+    mathEraseAndVerify: c.mathStorageEnabled ? async (job) => {
+      if (!job.subject_id) throw Error("STORAGE_UNAVAILABLE");
+      const args = { p_id: job.request_id, p_token: job.lease_token };
+      await rpc("math_account_erasure", { ...args, p_action: "prepare" });
+      await eraseMathStorage({
+        list: async (bucket, prefix, limit) => await request(
+          "/storage/v1/object/list/" + bucket, c.authAdminKey, "POST",
+          { prefix, limit, offset: 0, sortBy: { column: "name", order: "asc" } },
+        ),
+        remove: async (bucket, paths) => { await request(
+          "/storage/v1/object/" + bucket, c.authAdminKey, "DELETE", { prefixes: paths },
+        ); },
+      }, job.subject_id);
+      if (await rpc("math_account_erasure", { ...args, p_action: "complete" }) !== true) {
+        throw Error("STORAGE_UNAVAILABLE");
+      }
+    } : undefined,
     providerEraseAndVerify: c.provider,
     financePolicyReady: () => c.financeReviewed,
     async authDeleteAndVerify(subject) {

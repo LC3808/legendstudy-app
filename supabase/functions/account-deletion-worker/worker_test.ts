@@ -347,3 +347,20 @@ Deno.test("cancelled unbound intent is checkpointed without an erasure claim", a
   await dispatch(f.p);
   assert(f.calls.includes("bind") && !f.calls.includes("auth"));
 });
+Deno.test("Math cleanup completes before provider/Auth and receives the fenced lease", async () => {
+  const f = fixture();
+  f.p.mathEraseAndVerify = async (actual) => {
+    assert(actual.request_id === job.request_id && actual.lease_token === job.lease_token);
+    f.calls.push("math");
+  };
+  assert((await dispatch(f.p)).processed === 1);
+  assert(f.calls.indexOf("math") > f.calls.indexOf("storage"));
+  assert(f.calls.indexOf("math") < f.calls.indexOf("auth"));
+});
+Deno.test("Math byte cleanup failure blocks Auth and retains retryable lifecycle", async () => {
+  const f = fixture();
+  f.p.mathEraseAndVerify = async () => { throw Error("private Math transport detail"); };
+  assert((await dispatch(f.p)).retryable === 1);
+  assert(!f.calls.includes("auth") && !f.calls.includes("account_deletion_finish"));
+  assert(!JSON.stringify(f.retry()).includes("private Math transport detail"));
+});

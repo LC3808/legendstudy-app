@@ -50,6 +50,7 @@ function configure() {
     benefitKeys: keys,
     restoreKey: decode(env("ACCOUNT_RESTORE_KEY")),
     restoreVersion: env("ACCOUNT_RESTORE_KEY_VERSION"),
+    mathStorageEnabled: Deno.env.get("MATH_STORAGE_ENABLED") === "true",
     financeReviewed: env("ACCOUNT_FINANCE_REVIEWED") === "true",
     checkpoint: (m) => webhook(checkpoint, m),
     notification: (e) => webhook(notification, e),
