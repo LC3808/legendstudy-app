@@ -1,6 +1,8 @@
 # MATH-PRODUCTION-ACTIVATION-1 — exact activation candidate
 
-2026-10-04. Code/local verification only. **Production NOT APPLIED; live provider calls 0; RC NO pending actual gateway/Storage/model smoke.**
+Current Hosted result: [2026-10-04 exact installation evidence](hosted-2026-10-04/README.md). SQL5/5 applied/tracked, runtime OFF, credential/E2E gate; do not replay.
+
+Historical PREP record follows. 2026-10-04. Code/local verification only. **Production NOT APPLIED; live provider calls 0; RC NO pending actual gateway/Storage/model smoke.**
 
 Authority: APP release `0570099c98929b27f8e484210efc14fe061e8476`, LAB Claude consumer `6dec4f98887cee2e7c661996e083289b853054b3`, latest release Wiki `8b6ba25`. APP's five stale tests are already fixed (936 Flutter PASS); they are not new Math debt. This change extends the current fenced deletion worker and preserves its reauth/account-switch work. Separate LAB deletion ref `e512974` is unchanged. Payment files/economics are unchanged.
 

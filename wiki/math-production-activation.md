@@ -9,3 +9,7 @@ APP release0570099 is the current deletion/erasure integration authority; the pr
 MATH_CONSUMER: COMPLETE. MATH_BACKEND_ACTIVATION_PACKAGE: COMPLETE (code/local evidence). MATH_STUDENT_ROUTE: COMPLETE (local synthetic integration). PRODUCTION_APPLIED: NO. LIVE_PROVIDER: NO. MATH_RELEASE_CANDIDATE: NO until fresh Production preflight, actual role admission/private Storage/account erasure, model selection/cost approval and controlled end-user E2E pass. Current deployment remains OFF. Production writes0; live calls0; student dataNO; Payment codeNO.
 
 Next: Owner/ChatGPT review → separately approved exact activation → provider secret/cost/model gate → synthetic smoke and actual private bytes/credit checks → route enable/release. No owner/ACL normalization, broad push, migration repair, signing change or Store work is bundled here.
+
+## Hosted execution — 2026-10-04 (supersedes PREP deployment status)
+
+Production preflight PASS; approved ADR + Math C/D/E + Storage activation exact5/5 installed and tracked (ledger23→28). Ownership/ACL preserved, private bucket installed, Math rows/objects0, admission OFF; Hosted SQL kill switch PASS. Actual worker/byte/model E2E BLOCKED at Owner runtime credential gate; RC NO. No provider calls or Payment code changes. [Hosted evidence and continuation](../supabase/verification/math_essay/activation/hosted-2026-10-04/README.md). Do not replay installed files.
