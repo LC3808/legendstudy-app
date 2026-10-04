@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:legendstudy_app/features/study/data/study_local.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
@@ -47,6 +49,76 @@ class MemoryStore implements StudyLocalStore {
 }
 
 void main() {
+  test('restricted or unknown lifecycle cannot enter personalized routes', () {
+    for (final state in ['DELETION_PENDING', 'ERASING', 'ERASED']) {
+      expect(
+        accountLifecycleRedirect(
+          enabled: true,
+          authenticated: true,
+          status: AsyncData(DeletionStatus(state)),
+          location: '/lab',
+        ),
+        '/my/delete-account',
+      );
+    }
+    for (final status in <AsyncValue<DeletionStatus?>>[
+      const AsyncLoading(),
+      AsyncError(StateError('offline'), StackTrace.empty),
+    ]) {
+      expect(
+        accountLifecycleRedirect(
+          enabled: true,
+          authenticated: true,
+          status: status,
+          location: '/my',
+        ),
+        '/my/delete-account',
+      );
+    }
+  });
+  test('normal, guest, disabled and recovery routes preserve access', () {
+    for (final state in ['NORMAL', 'CANCELLED']) {
+      expect(
+        accountLifecycleRedirect(
+          enabled: true,
+          authenticated: true,
+          status: AsyncData(DeletionStatus(state)),
+          location: '/home',
+        ),
+        isNull,
+      );
+    }
+    for (final location in ['/my/delete-account', '/auth', '/auth/recovery']) {
+      expect(
+        accountLifecycleRedirect(
+          enabled: true,
+          authenticated: true,
+          status: const AsyncLoading(),
+          location: location,
+        ),
+        isNull,
+      );
+    }
+    expect(
+      accountLifecycleRedirect(
+        enabled: false,
+        authenticated: true,
+        status: const AsyncLoading(),
+        location: '/home',
+      ),
+      isNull,
+    );
+    expect(
+      accountLifecycleRedirect(
+        enabled: true,
+        authenticated: false,
+        status: const AsyncLoading(),
+        location: '/home',
+      ),
+      isNull,
+    );
+  });
+
   test('local pending cleanup preserves other users and guest', () async {
     final s = MemoryStore();
     await purgeStudyOwner(s, 'synthetic-a');
@@ -125,5 +197,37 @@ void main() {
     await mount(t, f);
     expect(find.text('개인정보 파기가 확인됐어요.'), findsOneWidget);
     expect(find.text('탈퇴 요청하기'), findsNothing);
+  });
+  testWidgets('owner switch clears acknowledgement and stale deadline', (
+    t,
+  ) async {
+    final auth = StreamController<AuthStatus>();
+    addTearDown(auth.close);
+    final f = FakeDeletionService();
+    await t.pumpWidget(
+      ProviderScope(
+        overrides: [
+          accountDeletionServiceProvider.overrideWithValue(f),
+          studyLocalStoreProvider.overrideWithValue(MemoryStore()),
+          authStateProvider.overrideWith((ref) => auth.stream),
+        ],
+        child: const MaterialApp(home: Scaffold(body: DeleteAccountPage())),
+      ),
+    );
+    auth.add(const AuthStatus('synthetic-a'));
+    await t.pumpAndSettle();
+    await t.tap(find.byType(CheckboxListTile));
+    await t.pump();
+    expect(
+      t.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value,
+      isTrue,
+    );
+    auth.add(const AuthStatus('synthetic-b'));
+    await t.pumpAndSettle();
+    expect(
+      t.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value,
+      isFalse,
+    );
+    expect(f.requests, 0);
   });
 }

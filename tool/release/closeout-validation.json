@@ -1,0 +1,25 @@
+{
+  "task": "APP-RELEASE-CLOSEOUT-1",
+  "flutter_test": {
+    "passed": 936,
+    "existing_opt_in_skips": 2
+  },
+  "flutter_analyze": "PASS",
+  "deno_tests": 52,
+  "android_release_compile": "PASS_UNSIGNED",
+  "ios_release_compile": "PASS_NO_CODESIGN",
+  "android_aab_sha256": "fdf899904e25734bc58ea15615226a782f8cb8f4f90c8ac4340ac893120e8e8a",
+  "ios_timer_privacy_resource": "PRESENT",
+  "merged_android_permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NOTIFICATION_POLICY",
+    "android.permission.POST_NOTIFICATIONS",
+    "com.legendstudy.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "secret_signature_scan": "PASS",
+  "secret_scan_limits": "credential signatures and tracked filenames, not proof of all possible secrets",
+  "production_mutations": 0,
+  "store_uploads": 0,
+  "physical_device_e2e": "NOT_VERIFIED",
+  "store_submission_ready": false
+}

@@ -9,7 +9,7 @@
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
 
-Native: Home/Materials/Learning/LAB/MY; guest materials search/filter/detail/external access; owner saved/recent. Timer + Mock scoring/results, optional Mock study-time inclusion, KST aggregation. MY profile/private photo/school-grade, 7-day/8-week/6-month study trends, actual Mock scores; LAB internal-grade/Mock details and gated Essay live entry.
+Native: Home/Materials/Learning/LAB/MY; guest materials, owner saved/recent; Timer/Mock, MY profile/avatar, school-grade/D-Day and trends. [APP closeout](app-release-closeout.md): baseline5 fixed; tests/build compile PASS; Store BLOCKED (deletion/revoke/policy/signing/device gates).
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 

@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-04 — APP-RELEASE-CLOSEOUT-1
+
+[Closeout](app-release-closeout.md): five stale baseline assertions corrected; owner-scoped deletion routing, email reauth, cleanup retry/logout and timer privacy manifest added. Local test/analyze and unsigned release compiles PASS. Apple revoke transport tested but token lifecycle connection remains blocked. Separate LAB deletion request candidate; no Production/deploy/upload. Privacy/public-policy mismatch, signing, credentials and device acceptance remain release gates.
+
 ## 2026-10-04 — Dedicated Cloudflare TEST token lifetime
 
 Owner-approved24h option added to offline signer; default1h unchanged. Synthetic signing/security tests PASS. Runtime verification and key/MID gate remain pending; no Production/provider action.

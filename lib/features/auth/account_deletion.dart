@@ -90,3 +90,48 @@ final accountDeletionServiceProvider = Provider<AccountDeletionService?>((ref) {
   }
   return SupabaseAccountDeletionService(client);
 });
+
+// A lifecycle lookup is scoped to the observed owner. Unknown/error states do
+// not reopen personalized routes while deletion protection is enabled.
+final accountLifecycleStatusProvider = FutureProvider<DeletionStatus?>((
+  ref,
+) async {
+  final owner = ref.watch(authStateProvider).value?.userId;
+  final service = ref.watch(accountDeletionServiceProvider);
+  if (owner == null || service == null) return null;
+  return service.readStatus().timeout(const Duration(seconds: 15));
+});
+
+String? accountLifecycleRedirect({
+  required bool enabled,
+  required bool authenticated,
+  required AsyncValue<DeletionStatus?> status,
+  required String location,
+}) {
+  if (!enabled || !authenticated) return null;
+  if (location == '/my/delete-account' || location.startsWith('/auth')) {
+    return null;
+  }
+  final state = status.asData?.value?.state;
+  if (state == 'NORMAL' || state == 'CANCELLED') return null;
+  return '/my/delete-account';
+}
+
+final accountEmailReauthenticationProvider =
+    Provider<Future<void> Function(String)?>((ref) {
+      final client = ref.watch(supabaseClientProvider);
+      if (client == null) return null;
+      return (password) async {
+        final response = await client.functions
+            .invoke(
+              'account-deletion-worker/reauth',
+              body: {'provider': 'email', 'password': password},
+            )
+            .timeout(const Duration(seconds: 20));
+        if (response.status != 200 ||
+            response.data is! Map ||
+            response.data['state'] != 'REAUTHENTICATED') {
+          throw const AccountDeletionException('reauth_required');
+        }
+      };
+    });

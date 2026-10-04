@@ -11,6 +11,7 @@ import 'package:legendstudy_app/core/links/external_link.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/content/presentation/content_detail_page.dart';
+import 'package:legendstudy_app/features/content/presentation/material_display_title.dart';
 import 'package:legendstudy_app/features/exams/exam_providers.dart';
 import 'package:legendstudy_app/features/materials/application/search_controller.dart';
 import 'package:legendstudy_app/features/materials/presentation/materials_page.dart';
@@ -53,6 +54,10 @@ void main() {
         }
         final search = FakeSearchRepository()..pageSize = 1;
         final first = search.items.first;
+        final displayTitle = materialDisplayTitle(
+          first.content.title,
+          first.content.contentType,
+        );
         final parents = Parents()..detail = () async => first.content;
         final resources = Resources()
           ..result = () async => [
@@ -141,7 +146,7 @@ void main() {
         await tester.tap(find.text('자료 더 보기'));
         await tester.pumpAndSettle();
         expect(container.read(searchControllerProvider).items.length, 3);
-        await tester.ensureVisible(find.text(first.content.title));
+        await tester.ensureVisible(find.text(displayTitle));
         await tester.pumpAndSettle();
         final materialScroll = find
             .descendant(
@@ -161,7 +166,7 @@ void main() {
             .state<ScrollableState>(scrollable)
             .position
             .pixels;
-        await tester.tap(find.text(first.content.title));
+        await tester.tap(find.text(displayTitle));
         await tester.pumpAndSettle();
         expect(find.byType(ContentDetailPage), findsOneWidget);
         expect(
@@ -243,7 +248,7 @@ void main() {
             1 + tester.view.viewPadding.bottom / tester.view.devicePixelRatio,
           ),
         );
-        expect(find.text(first.content.title).hitTestable(), findsOneWidget);
+        expect(find.text(displayTitle).hitTestable(), findsOneWidget);
         await capture(tester, 'delivery-$scale-return');
         await tester.pumpWidget(const SizedBox());
       },

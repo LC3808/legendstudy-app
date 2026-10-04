@@ -174,3 +174,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MATH-2C — Math persistence isolated verified; Owner apply package, Production NOT_APPLIED](math-essay-persistence-implementation.md)
 - [MATH-2D — Runtime consumer contract; isolated verified, Production NOT_APPLIED](math-essay-runtime-consumer.md)
 - [MATH-2E — Learning runtime and MATH-5B/6B physical handoff; isolated, NOT_APPLIED](math-essay-learning-runtime.md)
+
+- [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.

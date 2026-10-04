@@ -6,6 +6,7 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../study/data/study_local.dart';
 import '../../study/study_providers.dart';
 import '../account_deletion.dart';
+import '../auth_email.dart';
 
 /// Minimal lifecycle screen; shared restricted routing/reauth flow remains gated.
 class DeleteAccountPage extends ConsumerStatefulWidget {
@@ -19,6 +20,45 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
   String? _loadedOwner;
   bool _busy = false, _confirmed = false;
   String? _error;
+  final _password = TextEditingController();
+  String? _viewOwner;
+  bool _cleanupPending = false;
+
+  @override
+  void dispose() {
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> _cleanup(String owner) async {
+    try {
+      await purgeStudyOwner(ref.read(studyLocalStoreProvider), owner);
+      if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        setState(() => _cleanupPending = false);
+      }
+    } catch (_) {
+      if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        setState(() {
+          _cleanupPending = true;
+          _error = '탈퇴 요청은 접수됐어요. 기기 기록 정리를 다시 시도해 주세요.';
+        });
+      }
+    }
+  }
+
+  Future<void> _logout() async {
+    final logout = ref.read(localLogoutProvider);
+    if (_busy || logout == null) return;
+    setState(() => _busy = true);
+    try {
+      await logout().timeout(const Duration(seconds: 15));
+    } catch (_) {
+      if (mounted) setState(() => _error = '로그아웃하지 못했어요. 다시 시도해 주세요.');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,29 +76,38 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
       _error = null;
     });
     try {
-      final status = switch (operation) {
-        'request' => await service.requestDeletion(),
-        'cancel' => await service.cancelDeletion(),
-        _ => await service.readStatus(),
-      };
+      if (operation == 'cancel') {
+        final reauth = ref.read(accountEmailReauthenticationProvider);
+        if (reauth != null) {
+          final password = _password.text;
+          _password.clear();
+          await reauth(password);
+          if (!mounted ||
+              ref.read(authStateProvider).value?.userId != ownerAtStart) {
+            return;
+          }
+        }
+      }
+      final status = await (switch (operation) {
+        'request' => service.requestDeletion(),
+        'cancel' => service.cancelDeletion(),
+        _ => service.readStatus(),
+      }).timeout(const Duration(seconds: 20));
       if (!mounted) return;
       if (ref.read(authStateProvider).value?.userId != ownerAtStart) {
         setState(() => _status = null);
         return;
       }
       setState(() => _status = status);
-      if (operation == 'request') {
-        final owner = ownerAtStart;
-        try {
-          await purgeStudyOwner(ref.read(studyLocalStoreProvider), owner);
-        } catch (_) {
-          if (mounted) {
-            setState(() => _error = '탈퇴 요청은 접수됐어요. 이 기기의 기록 정리는 다시 확인해야 해요.');
-          }
-        }
+      ref.invalidate(accountLifecycleStatusProvider);
+      if (status.state == 'DELETION_PENDING' ||
+          status.state == 'ERASING' ||
+          status.state == 'ERASED') {
+        await _cleanup(ownerAtStart);
       }
     } catch (_) {
-      if (mounted) {
+      if (mounted &&
+          ref.read(authStateProvider).value?.userId == ownerAtStart) {
         setState(
           () => _error = operation == 'cancel'
               ? '본인 재인증이 필요하거나 취소 가능 시간이 지났어요.'
@@ -73,6 +122,15 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
   @override
   Widget build(BuildContext context) {
     final owner = ref.watch(authStateProvider).value?.userId;
+    if (owner != _viewOwner) {
+      _viewOwner = owner;
+      _confirmed = false;
+      _password.clear();
+      _error = null;
+      _status = null;
+      _loadedOwner = null;
+      _cleanupPending = false;
+    }
     final signedIn = owner != null;
     final available =
         signedIn && ref.watch(accountDeletionServiceProvider) != null;
@@ -92,7 +150,7 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
         if (state == 'ERASING') const Text('개인정보 파기 중이에요. 탈퇴를 취소할 수 없어요.'),
         if (state == 'ERASED') const Text('개인정보 파기가 확인됐어요.'),
         if (state == 'CANCELLED') const Text('탈퇴 요청을 취소했어요.'),
-        if (_status?.deadline != null)
+        if (owner == _loadedOwner && _status?.deadline != null)
           Text('파기 예정 시각: ${_status!.deadline!.toLocal().toIso8601String()}'),
         if (available && normal) ...[
           const Text(
@@ -112,6 +170,15 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
         ],
         if (available && pending) ...[
           const Text('예정 시각 전 본인 재인증 후에만 명시적으로 취소할 수 있어요.'),
+          if (ref.watch(accountEmailReauthenticationProvider) != null)
+            TextField(
+              controller: _password,
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: const InputDecoration(labelText: '이메일 계정 비밀번호'),
+            ),
+          const Text('소셜 계정의 재인증은 아직 지원하지 않아요. 로그인만으로 탈퇴가 취소되지는 않습니다.'),
           OutlinedButton(
             onPressed: _busy ? null : () => _run('cancel'),
             child: const Text('탈퇴 취소'),
@@ -121,6 +188,16 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
           TextButton(
             onPressed: _busy ? null : () => _run('status'),
             child: const Text('상태 확인'),
+          ),
+        if (_cleanupPending && owner != null)
+          TextButton(
+            onPressed: _busy ? null : () => _cleanup(owner),
+            child: const Text('기기 기록 정리 재시도'),
+          ),
+        if (signedIn && ref.watch(localLogoutProvider) != null)
+          TextButton(
+            onPressed: _busy ? null : _logout,
+            child: const Text('로그아웃'),
           ),
         if (_error != null) Text(_error!),
       ],

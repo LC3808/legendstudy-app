@@ -1,3 +1,4 @@
+import '../features/auth/account_deletion.dart';
 import '../features/study/trends/study_trend_page.dart';
 import '../features/lab/score_summary.dart';
 import '../features/lab/lab_page.dart';
@@ -45,6 +46,7 @@ import '../features/personal/personal_providers.dart';
 class _RouterRefresh extends ChangeNotifier {
   _RouterRefresh(Ref ref) {
     ref.listen(currentProfileProvider, (_, _) => notifyListeners());
+    ref.listen(accountLifecycleStatusProvider, (_, _) => notifyListeners());
   }
 }
 
@@ -54,6 +56,14 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: _RouterRefresh(ref),
     redirect: (context, state) {
       final auth = ref.read(authStateProvider);
+      final restricted = accountLifecycleRedirect(
+        enabled: ref.read(accountDeletionServiceProvider) != null,
+        authenticated: auth.value?.isAuthenticated == true,
+        status: ref.read(accountLifecycleStatusProvider),
+        location: state.matchedLocation,
+      );
+      if (restricted != null) return restricted;
+      if (state.matchedLocation == '/my/delete-account') return null;
       return onboardingRedirect(
         authed: auth.value?.isAuthenticated == true,
         profile: ref.read(currentProfileProvider),

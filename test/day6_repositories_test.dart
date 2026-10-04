@@ -63,11 +63,20 @@ void main() {
         final p = requests.single.url.queryParameters;
         expect(p['content_type'], 'eq.exam');
         expect(p['is_active'], 'eq.true');
-        expect(p['select'], SupabaseContentRepository.projection);
+        expect(
+          p['select'],
+          '${SupabaseContentRepository.projection},'
+          'discovery_exam:exams!exams_content_type(content_item_id)',
+        );
+        expect(p['discovery_exam.year'], 'gte.2010');
+        expect(
+          requests.single.url.queryParametersAll['or'],
+          contains('(content_type.neq.exam,discovery_exam.not.is.null)'),
+        );
         expect(p['order'], 'feed_updated_at.desc.nullslast,id.desc.nullslast');
         expect(p['limit'], '30');
         if (query.isEmpty) {
-          expect(p.containsKey('or'), isFalse);
+          expect(p['or'], '(content_type.neq.exam,discovery_exam.not.is.null)');
         } else {
           expect(
             requests.single.url.queryParametersAll['or']!.join(),

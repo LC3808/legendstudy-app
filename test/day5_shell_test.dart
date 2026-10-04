@@ -253,7 +253,7 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
       for (final entry in {
-        'exam': '모의고사',
+        'exam': '시험 자료',
         'study_material': '학습자료',
         'university_essay': '논술',
         'admissions_info': '입시정보',
