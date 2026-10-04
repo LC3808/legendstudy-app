@@ -96,6 +96,24 @@ def payment_cases(c,rpc,new,scalar,sock):
  deny('client_live_mode',lambda:create(mode='LIVE'))
  # Synthetic local activation ONLY, never emitted as Owner apply instruction.
  c.execute("update payment_private.configuration set mode='LIVE'")
+ # Production readiness: every canonical LIVE-equivalent SKU posts only once.
+ for sku,amount,quantity in [('1c',4900,1),('3c',11900,3),('5c',17900,5),('10c',29900,10)]:
+  so,sp,sr=paid_order(sku); finish(so,sp,sr['paid_at'])
+  facts=c.execute("select g.origin,o.quantity,g.expires_at=o.credit_expires_at,count(t.id),sum(t.balance_delta),sum(t.reserved_delta) from public.payment_orders o join public.credit_grants g on g.id=o.grant_id join public.credit_transactions t on t.grant_id=g.id where o.id=%s group by g.origin,o.quantity,g.expires_at,o.credit_expires_at",(so['id'],)).fetchone()
+  ok('live_sku_'+sku+'_exactly_once_spendable',so['amount']==amount and facts==('purchase',quantity,True,1,quantity,0))
+ # Same expression as canonical expiry; explicit leap/month-end and UTC contracts.
+ for date,expected in [('2026-01-31T12:00:00Z','2026-04-30T12:00:00Z'),('2027-11-30T12:00:00Z','2028-02-29T12:00:00Z'),('2026-10-31T12:00:00Z','2027-01-31T12:00:00Z')]:
+  ok('calendar_month_end_'+date[:10],scalar("select ((%s::timestamptz at time zone 'UTC'+interval '3 months') at time zone 'UTC')=%s::timestamptz",(date,expected)))
+ five,fiveop,_=paid_order('5c')
+ fg,fa=c.execute('select g.id,g.account_id from public.payment_orders o join public.credit_grants g on g.id=o.grant_id where o.id=%s',(five['id'],)).fetchone()
+ for _ in range(2):
+  d=new();c.execute("insert into public.essay_billing_decisions(id,account_id,idempotency_key,policy_key,policy_version,reason,credits_required,status) values(%s,%s,%s,'essay_cycle','v2','paid_cycle',1,'authorized')",(d,fa,new()))
+  for kind,delta,reserved in [('reserve',0,1),('consume',-1,-1)]:
+   c.execute("insert into public.credit_transactions(account_id,grant_id,decision_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code) values(%s,%s,%s,%s,%s,%s,%s,'synthetic')",(fa,fg,d,kind,delta,reserved,new()))
+ fcancel=process('cancel_begin',id=five['id'],request_key=new())
+ ok('refund_17900_2_used_8100',fcancel['operation_amount']==8100 and fcancel['consumed']==2)
+ process('cancel_finish',id=five['id'],operation_id=fcancel['operation_id'],payment_key=fiveop['payment_key'],amount=8100)
+ ok('refund_8100_retires_only_unused_purchase',scalar('select sum(balance_delta) from public.credit_transactions where grant_id=%s',(fg,))==0)
  lo,lp,lr=paid_order();grant=scalar('select grant_id from public.payment_orders where id=%s',(lo['id'],));acct=scalar('select account_id from public.credit_grants where id=%s',(grant,))
  ok('live_one_grant',scalar('select count(*) from public.credit_transactions where grant_id=%s',(grant,))==1)
  ok('expiry_3_calendar_months_utc',scalar("select credit_expires_at=((paid_at at time zone 'UTC'+interval '3 months') at time zone 'UTC') from public.payment_orders where id=%s",(lo['id'],)))
@@ -165,6 +183,29 @@ def payment_cases(c,rpc,new,scalar,sock):
   futures=[pool.submit(concurrent_rpc,'confirm_finish',dict(id=racing['id'],operation_id=rr['operation_id'],payment_key=rr['payment_key'],amount=racing['amount'],paid_at=rrr['paid_at'])),pool.submit(concurrent_rpc,'cancel_finish',dict(id=racing['id'],operation_id=begins[0]['operation_id'],payment_key=rr['payment_key'],amount=racing['amount']))]
   [f.result() for f in futures]
  ok('confirm_cancel_race_no_double_grant',scalar("select count(*) from public.credit_transactions where grant_id=(select grant_id from public.payment_orders where id=%s) and transaction_type='purchase'",(racing['id'],))==1)
+ # Two real sessions compete for the canonical account lock used by consumption.
+ race,rop,_=paid_order('5c');rg,ra=c.execute('select g.id,g.account_id from public.payment_orders o join public.credit_grants g on g.id=o.grant_id where o.id=%s',(race['id'],)).fetchone()
+ import threading
+ barrier=threading.Barrier(2)
+ def spend_racer():
+  try:
+   with psycopg.connect(host=str(sock),user='postgres',dbname='postgres',autocommit=True) as conn:
+    with conn.transaction():
+     conn.execute("set local statement_timeout='8s'");barrier.wait()
+     conn.execute('select id from public.credit_accounts where id=%s for update',(ra,))
+     decision=new();conn.execute("insert into public.essay_billing_decisions(id,account_id,idempotency_key,policy_key,policy_version,reason,credits_required,status) values(%s,%s,%s,'essay_cycle','v2','paid_cycle',1,'authorized')",(decision,ra,new()))
+     for kind,delta,reserved in [('reserve',0,1),('consume',-1,-1)]:
+      conn.execute("insert into public.credit_transactions(account_id,grant_id,decision_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code) values(%s,%s,%s,%s,%s,%s,%s,'synthetic')",(ra,rg,decision,kind,delta,reserved,new()))
+   return True
+  except psycopg.Error as e:
+   assert e.sqlstate=='PT409';return False
+ def cancel_racer():
+  barrier.wait();return concurrent_rpc('cancel_begin',dict(id=race['id'],request_key=new()))
+ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+  spend=pool.submit(spend_racer);cancel=pool.submit(cancel_racer);spent=spend.result();rc=cancel.result()
+ ok('cancel_vs_consumption_serialized',rc['operation_amount']==17900-(4900 if spent else 0) and rc['consumed']==int(spent))
+ process('cancel_finish',id=race['id'],operation_id=rc['operation_id'],payment_key=rop['payment_key'],amount=rc['operation_amount'])
+ ok('cancel_vs_consumption_final_balance_zero',scalar('select sum(balance_delta) from public.credit_transactions where grant_id=%s',(rg,))==0)
  # Existing financial principal may be detached by approved privacy erasure.
  detached,dp,dr=paid_order('1c');dg=scalar('select grant_id from public.payment_orders where id=%s',(detached['id'],));da=scalar('select account_id from public.credit_grants where id=%s',(dg,))
  c.execute('update public.payment_orders set subject_id=null where id=%s',(detached['id'],))
@@ -172,6 +213,7 @@ def payment_cases(c,rpc,new,scalar,sock):
  dc=process('cancel_begin',id=detached['id'],request_key=new());process('cancel_finish',id=detached['id'],operation_id=dc['operation_id'],payment_key=dp['payment_key'],amount=4900)
  ok('detached_account_cancellation',scalar('select sum(balance_delta) from public.credit_transactions where grant_id=%s',(dg,))==0)
  c.execute("update payment_private.configuration set mode='TEST'")
+ c.execute((V/'production/monitor.sql').read_text());ok('bounded_monitor_query')
  try:c.execute((V/'rollback.sql').read_text());raise AssertionError('data rollback allowed')
  except psycopg.errors.RaiseException:pass
  finally:c.execute('rollback')

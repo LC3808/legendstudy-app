@@ -1,0 +1,307 @@
+{
+  "inventory": {
+    "inventory": {
+      "auth_users_present": true,
+      "database": "postgres",
+      "executor": "postgres",
+      "functions": [
+        {
+          "acl": "{postgres=X/postgres,essay_executor=X/postgres}",
+          "config": [
+            "search_path=\"\""
+          ],
+          "definition_md5": "b2d988f9bc5bb6e7b742c7821db7a7a5",
+          "owner": "postgres",
+          "security_definer": true,
+          "signature": "essay_private.uid()"
+        },
+        {
+          "acl": "{essay_executor=X/essay_executor}",
+          "config": [
+            "search_path=\"\""
+          ],
+          "definition_md5": "31eb6164322009258432c19a74ad3cb6",
+          "owner": "essay_executor",
+          "security_definer": true,
+          "signature": "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamp with time zone)"
+        }
+      ],
+      "ledger_present": true,
+      "memberships": [
+        {
+          "admin": true,
+          "grantor": "supabase_admin",
+          "inherit": false,
+          "member": "postgres",
+          "role": "essay_executor",
+          "set": false
+        },
+        {
+          "admin": true,
+          "grantor": "supabase_admin",
+          "inherit": false,
+          "member": "postgres",
+          "role": "essay_finance",
+          "set": false
+        }
+      ],
+      "relations": [
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=rd/postgres,essay_executor=r/postgres}",
+          "name": "public.profiles",
+          "owner": "postgres",
+          "rls": true
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=ar/postgres}",
+          "name": "public.credit_transactions",
+          "owner": "postgres",
+          "rls": true
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=arw/postgres}",
+          "name": "public.credit_grants",
+          "owner": "postgres",
+          "rls": true
+        },
+        {
+          "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres,essay_executor=arw/postgres}",
+          "name": "public.credit_accounts",
+          "owner": "postgres",
+          "rls": true
+        }
+      ],
+      "roles": [
+        {
+          "bypass": false,
+          "create_role": false,
+          "inherit": false,
+          "login": true,
+          "name": "authenticator",
+          "super": false
+        },
+        {
+          "bypass": true,
+          "create_role": false,
+          "inherit": true,
+          "login": false,
+          "name": "essay_executor",
+          "super": false
+        },
+        {
+          "bypass": true,
+          "create_role": true,
+          "inherit": true,
+          "login": true,
+          "name": "postgres",
+          "super": false
+        },
+        {
+          "bypass": false,
+          "create_role": false,
+          "inherit": true,
+          "login": false,
+          "name": "essay_finance",
+          "super": false
+        }
+      ],
+      "schemas": [
+        {
+          "acl": "{postgres=UC/postgres,essay_executor=U/postgres}",
+          "name": "essay_private",
+          "owner": "postgres"
+        },
+        {
+          "acl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner,essay_executor=U/pg_database_owner,essay_worker=U/pg_database_owner,essay_finance=U/pg_database_owner}",
+          "name": "public",
+          "owner": "pg_database_owner"
+        }
+      ],
+      "server_version": "17.6"
+    }
+  },
+  "dependencies": {
+    "dependencies": {
+      "credit_functions": [
+        "essay_claim_signup_credit()",
+        "essay_credit_account_guard()",
+        "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamp with time zone)",
+        "essay_private.credit_profile_signup()",
+        "essay_private.credit_request_v2(uuid,uuid,text)",
+        "essay_private.credit_signup_eligible(uuid)"
+      ],
+      "prerequisites": [
+        {
+          "present": true,
+          "signature": "essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamptz)"
+        },
+        {
+          "present": true,
+          "signature": "essay_private.uid()"
+        },
+        {
+          "present": false,
+          "signature": "account_private.allowed(uuid)"
+        },
+        {
+          "present": false,
+          "signature": "account_private.lock_subject(uuid)"
+        }
+      ],
+      "purchase_grants": 0,
+      "versions": [
+        "20260912000100",
+        "20260913000100",
+        "20260913000200",
+        "20260914000100",
+        "20260914000200",
+        "20260917000100",
+        "20260917000200",
+        "20260923000100",
+        "20260923000200",
+        "20260925000100",
+        "20260926000100",
+        "20260927000100",
+        "20260927000200",
+        "20260928000100",
+        "20260928000200",
+        "20260928000300",
+        "20260928000400",
+        "20260929000100",
+        "20260929000200",
+        "20260929000300",
+        "20260929000400",
+        "20261001000100",
+        "20261001000200"
+      ]
+    }
+  },
+  "adr_security": {
+    "functions": [
+      {
+        "args": "",
+        "definition_fingerprint": "b2d988f9bc5bb6e7b742c7821db7a7a5",
+        "name": "uid",
+        "nsp": "essay_private",
+        "owner": "postgres",
+        "proacl": "{postgres=X/postgres,essay_executor=X/postgres}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "p_session uuid",
+        "definition_fingerprint": "2b90f025f8ae19d53cb653d2c4868422",
+        "name": "owner",
+        "nsp": "essay_private",
+        "owner": "essay_executor",
+        "proacl": "{essay_executor=X/essay_executor}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": false,
+        "security_match": true
+      },
+      {
+        "args": "p_evaluation uuid",
+        "definition_fingerprint": "02853d30a8ddccee78ee7f7e0bbfd4f1",
+        "name": "lock_job",
+        "nsp": "essay_private",
+        "owner": "essay_executor",
+        "proacl": "{essay_executor=X/essay_executor}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": false,
+        "security_match": true
+      },
+      {
+        "args": "",
+        "definition_fingerprint": "4bfaf1d027dfc92a15b16310b8372604",
+        "name": "credit_profile_signup",
+        "nsp": "essay_private",
+        "owner": "essay_executor",
+        "proacl": "{essay_executor=X/essay_executor}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "p_user uuid, p_quantity integer, p_origin text, p_key text, p_reason text, p_actor text, p_expires timestamp with time zone",
+        "definition_fingerprint": "31eb6164322009258432c19a74ad3cb6",
+        "name": "credit_post_grant",
+        "nsp": "essay_private",
+        "owner": "essay_executor",
+        "proacl": "{essay_executor=X/essay_executor}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "p_attempt_id uuid, p_study_session_id uuid, p_answer_key_version_id uuid, p_grade_cutoff_version_id uuid, p_scoring_version text, p_answers jsonb",
+        "definition_fingerprint": "c8b2bf0de90ad14b5031ae731c112f24",
+        "name": "submit_mock_attempt",
+        "nsp": "public",
+        "owner": "postgres",
+        "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "",
+        "definition_fingerprint": "89a4d1b2c289e62c5a95ac9d4c830820",
+        "name": "is_quality_operator",
+        "nsp": "public",
+        "owner": "postgres",
+        "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "p_attempt_id uuid",
+        "definition_fingerprint": "57447b98265b353f1369072eebc9cc57",
+        "name": "fetch_own_mock_attempt",
+        "nsp": "public",
+        "owner": "postgres",
+        "proacl": "{postgres=X/postgres,authenticated=X/postgres}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      },
+      {
+        "args": "",
+        "definition_fingerprint": "9ac8b6d949d81a75ee84fa8664b68f7f",
+        "name": "essay_claim_signup_credit",
+        "nsp": "public",
+        "owner": "essay_executor",
+        "proacl": "{essay_executor=X/essay_executor,authenticated=X/essay_executor}",
+        "proconfig": [
+          "search_path=\"\""
+        ],
+        "prosecdef": true,
+        "security_match": true
+      }
+    ]
+  },
+  "storage": {
+    "storage_policy_authority": true
+  },
+  "as_of": "2026-10-04",
+  "access": "BEGIN READ ONLY; catalog metadata and aggregate purchase count only",
+  "production_writes": 0,
+  "production_financial_writes": 0
+}

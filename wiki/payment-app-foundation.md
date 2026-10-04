@@ -55,3 +55,9 @@ default stays1h, optional final argument86400 selects24h, all other lifetimes re
 Synthetic signature/claims/mode0600/default/24h/invalid-lifetime/Production/overwrite tests PASS.
 No role, signing configuration, migration or financial changes. Cloudflare runtime
 verification remains pending; key-to-MID match UNVERIFIED, merchant E2E not ready.
+
+## PAYMENT-PRODUCTION-READINESS-1 — 2026-10-04
+
+TEST E2E COMPLETE preserved. [Production review package](../supabase/verification/payments/production/README.md) and [exact two-file manifest](../supabase/verification/payments/production/manifest.json) prepared; apply BLOCKED pending prerequisite/Owner review. Explicit read-only Production audit:23 tracked migrations, ADR/Payment absent, purchase grants0, nine existing ADR security contracts PASS, pg_database_owner preserved. No Production mutation. Canonical migration hashes unchanged.
+
+Isolated Payment81/Math131+37+63/Credit84+7/HQP102 PASS, including all four LIVE-equivalent SKU quantities, UTC calendar-month ends,8,100 refund and actual consumption/cancellation competition. Same ledger reused. APP/LAB visible balance parity, LAB LIVE adapter, operational recovery/kill-switch/finance renewal and support/legal cancellation remain pre-LIVE gates. Only a code preparation branch was changed; no activation or deployment.

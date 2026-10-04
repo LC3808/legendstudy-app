@@ -2,7 +2,7 @@
 
 ## Product state
 
-[Payment](payment-app-foundation.md): TEST JWT1h/24h; PROD OFF.
+[Payment](payment-app-foundation.md): TEST PASS; LIVE BLOCKED.
 
 [MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 
