@@ -1,0 +1,37 @@
+{
+  "task": "PAYMENT-PRODUCTION-IMPLEMENTATION-1",
+  "implementation": "COMPLETE",
+  "payment_tests": 117,
+  "essay_credit_tests": 84,
+  "essay_static_tests": 7,
+  "hqp_tests": 102,
+  "math_tests": [
+    131,
+    37,
+    63
+  ],
+  "native_focused": {
+    "passed": 64,
+    "skipped": 1
+  },
+  "native_full": {
+    "passed": 927,
+    "skipped": 2,
+    "failed": 5,
+    "baseline_reproduced": true,
+    "baseline": "8881eeeff0fbcb152304cc31fe28be6d1c0d4469",
+    "failures": [
+      "day6_repositories projection (2)",
+      "day5_shell badge (1)",
+      "materials_delivery_journey (2)"
+    ]
+  },
+  "flutter_analyze": "PASS",
+  "runtime_migration_sha256": "b1613b352ceed6ab300c08c04decf5bb036d019e4318da159b6f3f859f4a6ab3",
+  "canonical_migration_unchanged": true,
+  "actual_toss_calls": 0,
+  "production_access": false,
+  "production_writes": 0,
+  "production_applied": false,
+  "live_enabled": false
+}

@@ -104,5 +104,7 @@
     "account_erasure"
   ],
   "count": 102,
-  "payment_migration_sha256": "77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75"
+  "payment_migration_sha256": "77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75",
+  "runtime_migration_sha256": "b1613b352ceed6ab300c08c04decf5bb036d019e4318da159b6f3f859f4a6ab3",
+  "production_writes": 0
 }

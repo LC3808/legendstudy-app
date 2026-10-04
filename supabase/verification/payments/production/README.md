@@ -15,7 +15,7 @@ LAB implementation/runbook is in its existing `docs/PAYMENT_2_TOSS_INTEGRATION_H
 
 ## Exact candidate allowlist and order
 
-[manifest.json](manifest.json) is the two-file review allowlist with SHA-256, not an apply script.
+[manifest.json](manifest.json) is the three-file review allowlist with SHA-256, not an apply script.
 Run `python3 supabase/verification/payments/production/verify_manifest.py` offline.
 
 1. `20261001000300_account_deletion_lifecycle.sql` — prerequisite, separately reviewed ADR-2D; lifecycle stays OFF. SHA `38c86fd79554225fbc6a5a30be791c860e6c89dcaa64ad7e229e3710b9a29d94`.
@@ -27,7 +27,7 @@ Before approval, rerun [inventory.sql](inventory.sql), [dependencies.sql](depend
 
 After separately approved ADR apply: verify lifecycle OFF, exact ADR catalog and original ownership/ACL restoration per its Owner package. Then run [preflight.sql](preflight.sql), existing Payment [catalog.sql](../catalog.sql), hash checks, and compare the complete inventory again. Known current ADR absence makes preflight abort intentionally. Do not edit Hosted/Production schema owners.
 
-After separately approved Payment apply: run [postflight.sql](../postflight.sql), [catalog.sql](../catalog.sql), [ownership audit](../ownership.md); verify2 public RPCs/2 private functions,3 payment tables + configuration, RLS/ACL, original memberships/schema ACL restored, config TEST, payment rows0, purchase grants/postings/spendable delta unchanged from pre-apply baseline. Do not run synthetic orders in Production for this check. Capture aggregate deltas rather than assuming whole wallet0.
+After separately approved Payment apply: run [postflight.sql](../postflight.sql), [catalog.sql](../catalog.sql), [ownership audit](../ownership.md); verify2 public RPCs/2 private functions,3 payment tables + configuration (before runtime extension), RLS/ACL, original memberships/schema ACL restored, config TEST, payment rows0, purchase grants/postings/spendable delta unchanged from pre-apply baseline. Do not run synthetic orders in Production for this check. Capture aggregate deltas rather than assuming whole wallet0.
 
 Abort on first SQL error, hash mismatch, unexpected existing object, missing predecessor, security drift, uncertain commit, changed mode, new financial row or unexpected grant. Each migration has its own transaction; do not run the next file after failure. An unknown apply outcome requires read-only catalog inspection, never blind replay.
 
@@ -55,14 +55,14 @@ Refund derives purchase-specific net consume/refund facts; full unused returns a
 
 | Class | Finding / acceptance needed |
 |---|---|
-| BLOCKER | Production ADR prerequisite missing; exact two-file package requires separate ADR/Payment review and fresh preflight. |
-| BLOCKER | LAB adapter accepts TEST only and rejects POSTED grants; setting PAYMENT_MODE=LIVE today returns503. Implement and review LIVE adapter before activation, preserving the TEST mapping exclusively in TEST. |
-| BLOCKER | APP/LAB balance display parity is not implemented/verified. APP Essay gateway calls canonical essay_request_evaluation; LAB payment writes that same ledger, but current LAB has no spendable-balance consumer and APP has no purchased-balance display. Same underlying authority is proven; visible cross-client parity is NOT PASS. Add bounded own balance/history read contract/consumers, keep one ledger, test same account across both clients. |
-| REQUIRED_BEFORE_LIVE | Separate new-order/confirm/CTA gates and Owner-only smoke entry; independent recovery access while new purchases stop. Current TEST-only config rejection is not a recoverable LIVE kill switch. |
-| REQUIRED_BEFORE_LIVE | Support cannot cancel another buyer's order through current LAB route (support must also own it); add bounded server operator route/CLI with purpose/reason audit and no browser finance capability. |
-| REQUIRED_BEFORE_LIVE | Provider-paid/deleted-or-restricted subject fails PAID_REQUIRES_REFUND_RECONCILIATION; implement reviewed compensation/retention process. GENERAL_REFUND only; statutory/admin legal cancellation must have a separate authorized process, never forced through general formula. |
-| REQUIRED_BEFORE_LIVE | Production finance provisioning, automated renewal/expiry monitoring/revocation drill and hosted gateway matrix. Existing offline mint tool is TEST-pinned; do not bypass or reuse TEST24h credentials in Production. |
-| REQUIRED_BEFORE_LIVE | Reviewer-visible LIVE mode/CTA, terminal failure handling, history/support status, pending mismatch detection, finance/legal retention and account-deletion integration acceptance. |
+| BLOCKER | Production ADR prerequisite missing; exact three-file package requires separate ADR/Payment review and fresh preflight. |
+| IMPLEMENTED | LIVE/TEST server adapters, pinned origin/project/key family/MID, canonical POSTED grant validation. |
+| IMPLEMENTED | Shared credit-v1 summary and APP/LAB balance display; real 5→4→4→3 evaluation integration. |
+| IMPLEMENTED | Explicit PAYMENT_ENABLED order/confirm/CTA control with lookup recovery while paused; missing config NOT_READY. |
+| IMPLEMENTED | Cross-owner support Auth allowlist, bounded preview/audit, cancel and reconciliation. Restricted/detached account after provider success has no-grant full-refund compensation claim and existing cancel recovery. |
+| OWNER_CONFIG_GATE | Production finance provisioning, credential renewal/expiry monitoring/revocation drill and hosted matrix; TEST credentials must not be reused in Production. |
+| OWNER_POLICY_GATE | Statutory/legal decisions and financial-retention/account-deletion operational acceptance remain separate from general-policy calculation. No age-based automated rule. |
+| BASELINE_TEST_DEBT | Five unrelated materials/discovery Flutter tests also fail on unchanged baseline; not a Payment regression, not silently fixed in this scope. |
 | POST_LAUNCH | Rich support dashboard and richer trend telemetry, after bounded operational read/recovery is available. |
 | OPTIONAL | Automated report formatting beyond the required bounded evidence. |
 | EXTERNAL_GATE | Toss/card merchant approval WAITING (no completion evidence provided); LIVE key↔merchant proof and Store commercial review separate. |
@@ -71,6 +71,13 @@ No Apple/Google API, external native purchase CTA, second wallet or new pricing 
 
 ## Verification receipt
 
-Payment81 PASS; Math131+37+63 PASS; Essay Credit84 +static7 PASS; Humanities/HQP102 PASS. Payment bootstrap injected failures, ownership/ACL restoration, empty rollback and refusal with history/dependency PASS. [Payment evidence](../validation.json), [Math evidence](../regression.json), [G1](../g1_validation.json), [HQP](../legacy_validation.json). All new finance examples are disposable local data. LAB receipt and operational activation sequence reside in the existing LAB handoff. TEST E2E COMPLETE is historical accepted runtime evidence; not rerun here. Production read-only audit today is new evidence; Production writes0/LIVE calls0/main merges0.
+Payment117 PASS; Math131+37+63 PASS; Essay Credit84 +static7 PASS; Humanities/HQP102 PASS. Payment bootstrap injected failures, ownership/ACL restoration, empty rollback and refusal with history/dependency PASS. [Payment evidence](../validation.json), [Math evidence](../regression.json), [G1](../g1_validation.json), [HQP](../legacy_validation.json). All new finance examples are disposable local data. LAB receipt and operational activation sequence reside in the existing LAB handoff. TEST E2E COMPLETE is historical accepted runtime evidence; not rerun here. Production read-only audit today is new evidence; Production writes0/LIVE calls0/main merges0.
 
 Bounded [monitor.sql](monitor.sql) is a read-only operator query template for pending operations and grant mismatches after installation; it has not been executed on Production (Payment tables absent). No provider key/PII is selected. It is not an authorization mechanism or replacement for the required controlled support tool.
+
+## 2026-10-04 implementation extension (supersedes internal blocker rows above)
+Third ordered candidate: `20261004000100_payment_runtime.sql`; exact SHA is in manifest. Additive `public.credit_summary()` authenticated own read, `public.payment_support(jsonb)` finance-only bounded support preview/audit, `public.payment_compensate(jsonb)` finance-only no-grant refund claim, and private append-only support audit table. No existing migration changed. Postflight: `../runtime_postflight.sql` plus existing payment checks. Expected owners postgres, security definer+empty search_path, EXECUTE authenticated only for summary and essay_finance only for support/compensate (plus postgres owner). No browser/private-table CRUD. Verify runtime support audit0 and unchanged purchase/posting aggregates.
+
+Rollback in reverse order: `../runtime_rollback.sql` only with empty support audit, then original guarded Payment rollback if empty, then separately reviewed ADR rollback. Any support history requires forward fix; no cascade or historical ledger reversal as rollback. Test/LIVE DB configuration still defaults TEST; configuration of LIVE DB mode, server keys and purchase switch remains separately approved activation work.
+
+Credit summary derives canonical grant balances minus reservations, excludes expired or cancellation-fenced grants, and separates purchase/signup/other. Consumption policy is unchanged: earliest expiry first, null expiry last, then creation/id; signup Credits do not expire. APP/LAB read the identical credit-v1 RPC. Support preview is advisory; canonical cancel_begin re-locks/recomputes before execution and persisted claim drives provider amount.

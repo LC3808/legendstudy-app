@@ -5,6 +5,7 @@ do $$begin
  if current_user<>'postgres' then raise exception 'EXECUTOR_MISMATCH'; end if;
  if (select nspowner from pg_namespace where nspname='public')<>'pg_database_owner'::regrole then raise exception 'PUBLIC_OWNER_DRIFT'; end if;
  if to_regnamespace('payment_private') is not null or to_regclass('public.payment_orders') is not null or to_regprocedure('public.payment_order(jsonb)') is not null or to_regprocedure('public.payment_process(jsonb)') is not null then raise exception 'PAYMENT_COLLISION'; end if;
+ if to_regprocedure('public.credit_summary()') is not null or to_regprocedure('public.payment_support(jsonb)') is not null or to_regprocedure('public.payment_compensate(jsonb)') is not null then raise exception 'PAYMENT_RUNTIME_COLLISION';end if;
  if to_regprocedure('account_private.allowed(uuid)') is null or to_regprocedure('account_private.lock_subject(uuid)') is null then raise exception 'ADR_PREREQUISITE_MISSING'; end if;
  if to_regprocedure('essay_private.credit_post_grant(uuid,integer,text,text,text,text,timestamptz)') is null then raise exception 'LEDGER_PREREQUISITE_MISSING'; end if;
  if pg_has_role('postgres','essay_executor','SET') or has_schema_privilege('essay_executor','public','CREATE') then raise exception 'BOOTSTRAP_TOPOLOGY_DRIFT'; end if;

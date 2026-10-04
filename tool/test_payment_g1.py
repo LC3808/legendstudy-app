@@ -17,7 +17,7 @@ def verify(c,*args):
  with psycopg.connect(host=str(sock),user='supabase_admin',dbname='postgres',autocommit=True) as admin:
   c.execute('revoke essay_executor from postgres;grant usage on schema public to postgres')
   admin.execute('grant essay_executor to postgres with admin true,inherit false,set false granted by supabase_admin;alter role postgres nosuperuser createrole bypassrls')
-  try:c.execute((R/'supabase/migrations/20261003000100_payment_foundation.sql').read_text())
+  try:c.execute((R/'supabase/migrations/20261003000100_payment_foundation.sql').read_text());c.execute((R/'supabase/migrations/20261004000100_payment_runtime.sql').read_text())
   finally:c.execute('rollback');admin.execute('alter role postgres superuser')
  def user(old=False):
   u=str(uuid.uuid4());c.execute("insert into auth.users(id,created_at) values(%s,clock_timestamp()-case when %s then interval '10 years' else interval '0' end)",(u,old));c.execute('insert into public.profiles(id) values(%s)',(u,));return u

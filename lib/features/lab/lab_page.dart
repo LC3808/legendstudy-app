@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../credits/credit_balance.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../shared/widgets/shell_widgets.dart';
@@ -10,6 +11,7 @@ class LabPage extends StatelessWidget {
   Widget build(BuildContext context) => ShellPage(
     children: [
       const AppHeader(title: 'LAB'),
+      const CreditBalanceCard(),
       LsCard(
         child: ListTile(
           contentPadding: EdgeInsets.zero,

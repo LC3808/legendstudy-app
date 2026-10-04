@@ -44,6 +44,17 @@ def install(c,admin):
    assert not c.execute("select has_table_privilege(%s,%s,'SELECT,INSERT,UPDATE,DELETE,TRUNCATE')",(role,table)).fetchone()[0]
  ok('rls_no_client_crud')
 
+ runtime=(R/'supabase/migrations/20261004000100_payment_runtime.sql').read_text();before=topology.snapshot(c)
+ for marker in ['grant execute on function public.credit_summary() to authenticated;', 'grant execute on function public.payment_support(jsonb) to essay_finance;']:
+  try:topology.execute_as_production(c,admin,runtime.replace(marker,marker+"do $$begin raise exception 'RUNTIME_INJECT';end$$;"));raise AssertionError('runtime injection missing')
+  except psycopg.errors.RaiseException as e:assert e.diag.message_primary=='RUNTIME_INJECT'
+  assert topology.snapshot(c)==before
+ ok('runtime_failure_rollback_exact')
+ topology.execute_as_production(c,admin,(R/'supabase/migrations/20261004000100_payment_runtime.sql').read_text())
+ topology.execute_as_production(c,admin,(V/'runtime_rollback.sql').read_text())
+ topology.execute_as_production(c,admin,(R/'supabase/migrations/20261004000100_payment_runtime.sql').read_text())
+ ok('runtime_install_empty_rollback_reinstall')
+
 def payment_cases(c,rpc,new,scalar,sock):
  U,OTHER,SERVER=[new() for _ in range(3)]
  for u in [U,OTHER,SERVER]:
@@ -218,6 +229,8 @@ def payment_cases(c,rpc,new,scalar,sock):
  except psycopg.errors.RaiseException:pass
  finally:c.execute('rollback')
  ok('real_history_rollback_refused')
+ from test_payment_runtime import verify
+ checks.extend(verify(c))
  (V/'validation.json').write_text(json.dumps(dict(checks=checks,count=len(checks),migration_sha256=hashlib.sha256(M.read_bytes()).hexdigest(),production_writes=0,test_provider_calls=0),indent=2)+'\n')
 
 s=(R/'tool/test_math_learning.py').read_text()

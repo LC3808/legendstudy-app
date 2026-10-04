@@ -2,7 +2,7 @@
 
 ## Product state
 
-[Payment](payment-app-foundation.md): TEST PASS; LIVE BLOCKED.
+[Payment](payment-app-foundation.md): code PASS; LIVE OFF.
 
 [MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 

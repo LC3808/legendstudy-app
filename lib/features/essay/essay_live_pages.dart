@@ -8,6 +8,7 @@ import '../../core/supabase/supabase_providers.dart';
 import '../../core/links/external_link.dart';
 import '../../shared/widgets/shell_widgets.dart';
 import 'essay_live_gateway.dart';
+import '../credits/credit_balance.dart';
 import 'essay_live_controller.dart';
 import 'essay_models.dart';
 import 'essay_pages.dart';
@@ -236,6 +237,9 @@ class _EssayLiveWorkspaceState extends ConsumerState<EssayLiveWorkspace> {
         return;
       }
       controller = EssayLiveController(gateway, draft);
+      controller!.addListener(() {
+        if (mounted) ref.invalidate(creditBalanceProvider);
+      });
       question = model;
       await controller!.restore();
     } catch (e) {
