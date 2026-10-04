@@ -3327,3 +3327,19 @@ Prepared [read-only Production audit and exact candidate package](../supabase/ve
 - 2026-10-04 PAYMENT-PRODUCTION-IMPLEMENTATION-1: additive runtime read/support RPC, APP/LAB canonical balance, 5→4→4→3 integration and refund preview. Payment117/Essay84+7/HQP102/Math131+37+63 PASS. Native payment/Essay64 PASS+1 opt-in skip; full APP927 PASS/2 skips/5 failures reproduce unchanged baseline (materials/discovery, not payment). Production apply/LIVE calls/deploy/main merge0. Three-file Owner review package; see payment-app-foundation.
 
 - 2026-10-04 MATH-HOSTED-ACTIVATION-1: Production preflight and exact ADR/C/D/E/Storage installation5/5 PASS; ledger23→28. Owners preserved, private bucket, empty Math state, OFF switch Hosted PASS. Worker/provider credential gate; actual byte/model/Credit E2E NOT_RUN; RC NO. [Evidence](../supabase/verification/math_essay/activation/hosted-2026-10-04/README.md). No Payment code/provider/student data.
+
+- 2026-10-04 MATH-HOSTED-CREDENTIAL-GATE-1 ongoing: Owner import/public-key match; narrow Math gateway enrollments PASS; offline mint tests PASS. Owner evaluation-token mint pending; admission OFF, no model call.
+
+- Math credential continuation: extraction gateway admission PASS; account_lifecycle_worker SET-only enrollment PASS; Owner erasure-worker token mint pending. No migration replay, data/provider execution or dispatch activation.
+
+2026-10-04 Math credential gate: isolated Pages configured; LAB340b2f4 routing correction deployed and OFF HTTP probes PASS. Bounded18-file remote secret scan clean. Full credential/byte/provider E2E pending; see math-production-activation.md.
+
+2026-10-04 Owner release-prep TTL policy:24h default/48h extended-run maximum; three local Math/account JWTs renewed and Hosted role admission verified. Server Secret replacement pending; no signing-key rotation or Payment change.
+
+## MATH-FINAL-RUNTIME-CLOSEOUT-1 — in progress
+
+Owner simplified scope to existing Production infrastructure, 3–5 synthetic real-model cases and one complete student/Storage/Credit/erasure smoke; no new site/DB or broad repeat audit. Privileged worker mint default is now7 days, superseding24/48h default; existing healthy24h credentials preserved, no signing rotation. Offline mint tests PASS. Owner confirmed logged-in synthetic account; browser session restore and local0600 session identity verified against Production Auth. Nonexistent Math IDs returnedP0002 (not foreign-owner proof), application writes0/provider calls0. Added required Auth-verified server synthetic allowlist to prevent general-user exposure during activation;26 scoped tests/TypeScript PASS. Owner reported all three renewed remote worker Secret replacements and latest Pages deployment63a7319d at340b2f4; binding use in actual jobs remains unverified. Provider API secret and remaining runtime smoke pending; RC NO. Payment untouched.
+
+## 2026-10-04 Owner pause / resume boundary
+
+Work stopped at Owner request. Math ADR/SQL/Storage exact5 applied; no migration replay. Auth/worker role admission PASS, but actual provider/student/Storage-byte/erasure/Credit Hosted smoke NOT_COMPLETE; evaluation OFF, provider calls0, RC NO. LAB4fe733e synthetic admission gate pushed; latest verified Hosted deployment remains340b2f4.7-day default mint policy implemented/tested locally, current24h tokens retained. Added provider-key registration request CANCELLED; check existing server configuration/reuse before requesting any key. No further runtime or code work until Owner names next task. Credential-gate tools remain uncommitted; supabase/.temp must not be committed. Full status/refs and remaining gates: Unified Wiki codex/math-production-activation-1 CURRENT_STATUS and Daily2026-10-04 Owner-stop entry. No Payment/Pricing changes.

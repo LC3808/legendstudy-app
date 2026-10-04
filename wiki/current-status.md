@@ -1,5 +1,9 @@
 # Current Status
 
+## 2026-10-04 Owner pause / resume boundary
+
+Work stopped at Owner request. Math ADR/SQL/Storage exact5 applied; no migration replay. Auth/worker role admission PASS, but actual provider/student/Storage-byte/erasure/Credit Hosted smoke NOT_COMPLETE; evaluation OFF, provider calls0, RC NO. LAB4fe733e synthetic admission gate pushed; latest verified Hosted deployment remains340b2f4.7-day default mint policy implemented/tested locally, current24h tokens retained. Added provider-key registration request CANCELLED; check existing server configuration/reuse before requesting any key. No further runtime or code work until Owner names next task. Credential-gate tools remain uncommitted; supabase/.temp must not be committed. Full status/refs and remaining gates: Unified Wiki codex/math-production-activation-1 CURRENT_STATUS and Daily2026-10-04 Owner-stop entry. No Payment/Pricing changes.
+
 ## Product state
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.
