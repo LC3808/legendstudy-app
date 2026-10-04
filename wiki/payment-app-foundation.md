@@ -47,3 +47,11 @@ This supersedes the simplified PREP-1 fixture as Hosted compatibility evidence. 
 ## PAYMENT-E2E-FINANCE-1A — 2026-10-04 COMPLETE
 
 Owner corrected zero-total-delta to payment-attributable zero. [Read-only lineage evidence](../supabase/verification/payments/hosted-test/finance-lineage-validation.json): buyer signup+3/gateway signup+3 proven through account/grant/transaction and canonical posting metadata; payment-attributable delta0, purchase/LIVE grants0, unexplained0. Prior BLOCKED record retained for traceability; no bonus removal or ledger/policy change. Actual Hosted A–G PASS preserved; narrow membership rechecked. Gateway Auth identity suffices; future gateway preparation omits public profile. Existing profile/bonus retained. Payment69/Math131+37+63 regressions PASS. Ready for separate Cloudflare authorization; no config/provider/Production action.
+
+## Cloudflare TEST token lifetime — Owner decision, 2026-10-04
+
+Owner approved24h for this dedicated TEST verification token; canonical offline signer
+default stays1h, optional final argument86400 selects24h, all other lifetimes rejected.
+Synthetic signature/claims/mode0600/default/24h/invalid-lifetime/Production/overwrite tests PASS.
+No role, signing configuration, migration or financial changes. Cloudflare runtime
+verification remains pending; key-to-MID match UNVERIFIED, merchant E2E not ready.

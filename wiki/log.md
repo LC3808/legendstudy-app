@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-04 — Dedicated Cloudflare TEST token lifetime
+
+Owner-approved24h option added to offline signer; default1h unchanged. Synthetic signing/security tests PASS. Runtime verification and key/MID gate remain pending; no Production/provider action.
+
 ## 2026-10-04 — PAYMENT-E2E-FINANCE-1A lineage correction
 
 [Finance COMPLETE](payment-app-foundation.md#payment-e2e-finance-1a--2026-10-04-complete): canonical signup+6 classified; payment-attributable delta0/unexplained0. Prior safety stop retained, no cleanup. Payment69/Math regressions PASS; ready for separate Cloudflare setup authorization. Production/Toss unchanged.

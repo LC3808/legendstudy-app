@@ -91,7 +91,10 @@ node supabase/verification/payments/hosted-test/mint-finance-token.mjs \
 ```
 
 This future Owner command writes a new mode0600 file, never prints JWT, rejects the
-Production project, pins ES256/essay_finance, issuer/audience and one-hour expiry. It does
+Production project, pins ES256/essay_finance, issuer/audience and default one-hour expiry. Owner approved a TEST-only24-hour option
+on2026-10-04: append `86400` as the final argument for the dedicated Cloudflare TEST
+verification. Only `3600` (default) and `86400` are accepted; longer/arbitrary lifetimes
+and extra arguments fail closed. No automatic refresh or Production authorization. It does
 not import keys or contact Supabase. Keep the private JWK offline; enter only bearer-file
 contents into PAYMENT_FINANCE_TOKEN through the approved secret UI, then securely remove
 the disposable token file after use. Rotate before expiry; no automatic refresh authority.
