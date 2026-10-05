@@ -28,7 +28,7 @@ export function createPorts(c: Config): Ports {
     const res = await fetch(c.url + path, {
       method,
       headers: {
-        apikey: c.publicKey,
+        apikey: c.authAdminKey,
         authorization: `Bearer ${token}`,
         "content-type": "application/json",
       },
@@ -39,13 +39,13 @@ export function createPorts(c: Config): Ports {
     return res.status === 204 ? null : await res.json();
   };
   const rpc = async (name: string, args: Record<string, unknown>) =>
-    request("/rest/v1/rpc/" + name, c.workerJwt, "POST", args);
+    request("/rest/v1/rpc/" + name, c.authAdminKey, "POST", args);
   const authUser = async (subject: string) => {
     const res = await fetch(
       c.url + "/auth/v1/admin/users/" + encodeURIComponent(subject),
       {
         headers: {
-          apikey: c.publicKey,
+          apikey: c.authAdminKey,
           authorization: `Bearer ${c.authAdminKey}`,
         },
         signal: AbortSignal.timeout(10000),

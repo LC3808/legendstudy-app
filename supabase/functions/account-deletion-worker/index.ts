@@ -86,7 +86,7 @@ function configure() {
   portsRef = p;
   const verify = async (jwt: string) => {
     const response = await fetch(url + "/auth/v1/user", {
-      headers: { apikey: publicKey, authorization: "Bearer " + jwt },
+      headers: { apikey: env("SUPABASE_SERVICE_ROLE_KEY"), authorization: "Bearer " + jwt },
       signal: AbortSignal.timeout(10000),
     });
     if (!response.ok) throw Error("DENIED");
