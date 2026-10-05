@@ -1,0 +1,711 @@
+{
+ "task": "ADMIN-P0-A",
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu",
+ "chain": "core + quality + HQP applied; account-deletion / Math / payment candidates excluded because they are NOT_APPLIED",
+ "phases": [
+  "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
+  "PHASE 2 structural stand-ins present -> installed path executes"
+ ],
+ "total": 126,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "A1 anonymous admin_operator=false",
+   "ok": true
+  },
+  {
+   "check": "A2 anonymous dashboard denied",
+   "ok": true
+  },
+  {
+   "check": "A3 non-operator admin_operator=false",
+   "ok": true
+  },
+  {
+   "check": "A4 non-operator dashboard denied",
+   "ok": true
+  },
+  {
+   "check": "A5 expired operator denied",
+   "ok": true
+  },
+  {
+   "check": "A6 subject mismatch denied",
+   "ok": true
+  },
+  {
+   "check": "A7 non-authenticated role denied",
+   "ok": true
+  },
+  {
+   "check": "A8 malformed claims denied",
+   "ok": true
+  },
+  {
+   "check": "A9 operator admin_operator=true",
+   "ok": true
+  },
+  {
+   "check": "B1 dto_version",
+   "ok": true
+  },
+  {
+   "check": "B2 members.total=2",
+   "ok": true
+  },
+  {
+   "check": "B3 new_7d>=2",
+   "ok": true
+  },
+  {
+   "check": "B4 active_30d observed (0 without a valid session)",
+   "ok": true
+  },
+  {
+   "check": "B5 grade_distribution present",
+   "ok": true
+  },
+  {
+   "check": "B6 school_code only",
+   "ok": true
+  },
+  {
+   "check": "B7 credit.spendable=7",
+   "ok": true
+  },
+  {
+   "check": "B8 spendable by origin",
+   "ok": true
+  },
+  {
+   "check": "B9 granted_total=10",
+   "ok": true
+  },
+  {
+   "check": "B10 consumed_total=1",
+   "ok": true
+  },
+  {
+   "check": "B11 expiring_30d=4",
+   "ok": true
+  },
+  {
+   "check": "B12 payment LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "B13 payment not installed",
+   "ok": true
+  },
+  {
+   "check": "B14 payment orders null (not a fake 0)",
+   "ok": true
+  },
+  {
+   "check": "B15 math RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "B16 math not installed",
+   "ok": true
+  },
+  {
+   "check": "B17 math attempts null",
+   "ok": true
+  },
+  {
+   "check": "B18 no secret tokens",
+   "ok": true
+  },
+  {
+   "check": "C1 exact email",
+   "ok": true
+  },
+  {
+   "check": "C2 item email",
+   "ok": true
+  },
+  {
+   "check": "C3 spendable present",
+   "ok": true
+  },
+  {
+   "check": "C4 account_state NORMAL",
+   "ok": true
+  },
+  {
+   "check": "C5 exact uuid",
+   "ok": true
+  },
+  {
+   "check": "C6 prefix search",
+   "ok": true
+  },
+  {
+   "check": "C7 pagination offset",
+   "ok": true
+  },
+  {
+   "check": "C8 no secret fields",
+   "ok": true
+  },
+  {
+   "check": "C9 short query denied",
+   "ok": true
+  },
+  {
+   "check": "C10 limit 0 denied",
+   "ok": true
+  },
+  {
+   "check": "C11 limit 51 denied",
+   "ok": true
+  },
+  {
+   "check": "C12 negative offset denied",
+   "ok": true
+  },
+  {
+   "check": "C13 null query denied",
+   "ok": true
+  },
+  {
+   "check": "D1 email",
+   "ok": true
+  },
+  {
+   "check": "D2 display name",
+   "ok": true
+  },
+  {
+   "check": "D3 school code",
+   "ok": true
+  },
+  {
+   "check": "D4 state NORMAL",
+   "ok": true
+  },
+  {
+   "check": "D5 deletion null when subsystem absent",
+   "ok": true
+  },
+  {
+   "check": "D6 study sessions observed",
+   "ok": true
+  },
+  {
+   "check": "D7 study seconds is numeric",
+   "ok": true
+  },
+  {
+   "check": "D8 mock attempts observed",
+   "ok": true
+  },
+  {
+   "check": "D9 math installed=false",
+   "ok": true
+  },
+  {
+   "check": "D10 no answer body",
+   "ok": true
+  },
+  {
+   "check": "D11 unknown account denied",
+   "ok": true
+  },
+  {
+   "check": "D12 null account denied",
+   "ok": true
+  },
+  {
+   "check": "E1 summary spendable=7",
+   "ok": true
+  },
+  {
+   "check": "E2 summary free=3",
+   "ok": true
+  },
+  {
+   "check": "E3 summary paid=4",
+   "ok": true
+  },
+  {
+   "check": "E4 summary other=0 (promotion expired)",
+   "ok": true
+  },
+  {
+   "check": "E5 summary reserved=0",
+   "ok": true
+  },
+  {
+   "check": "E6 next_expiry is the purchase grant",
+   "ok": true
+  },
+  {
+   "check": "E7 grants_total=3",
+   "ok": true
+  },
+  {
+   "check": "E8 transactions_total=4",
+   "ok": true
+  },
+  {
+   "check": "E9 grants list bounded",
+   "ok": true
+  },
+  {
+   "check": "E10 expired grant flagged",
+   "ok": true
+  },
+  {
+   "check": "E11 grant available arithmetic",
+   "ok": true
+  },
+  {
+   "check": "E12 transactions list bounded",
+   "ok": true
+  },
+  {
+   "check": "E13 transaction fields",
+   "ok": true
+  },
+  {
+   "check": "E14 actor reduced to namespace",
+   "ok": true
+  },
+  {
+   "check": "E15 no external_reference",
+   "ok": true
+  },
+  {
+   "check": "E16 no provider payload",
+   "ok": true
+  },
+  {
+   "check": "E17 grants pagination",
+   "ok": true
+  },
+  {
+   "check": "E18 invalid limit denied",
+   "ok": true
+  },
+  {
+   "check": "E19 unknown account denied",
+   "ok": true
+  },
+  {
+   "check": "E20 account without wallet",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F all eight functions present",
+   "ok": true
+  },
+  {
+   "check": "F anon cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F service_role cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F count rejects non-public relation",
+   "ok": true
+  },
+  {
+   "check": "F count rejects injection",
+   "ok": true
+  },
+  {
+   "check": "F count of missing relation is null",
+   "ok": true
+  },
+  {
+   "check": "F count of present relation",
+   "ok": true
+  },
+  {
+   "check": "G1 payment installed=true",
+   "ok": true
+  },
+  {
+   "check": "G2 payment orders=1 (real count)",
+   "ok": true
+  },
+  {
+   "check": "G3 payment still LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "G4 math installed=true",
+   "ok": true
+  },
+  {
+   "check": "G5 math attempts=1 (real count)",
+   "ok": true
+  },
+  {
+   "check": "G6 math still RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "G7 member math attempts=1",
+   "ok": true
+  },
+  {
+   "check": "G8 member math evaluations=1",
+   "ok": true
+  },
+  {
+   "check": "G9 member math still RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "G10 deletion absent for normal member",
+   "ok": true
+  },
+  {
+   "check": "G11 deletion state surfaced",
+   "ok": true
+  },
+  {
+   "check": "G12 deletion detail surfaced",
+   "ok": true
+  },
+  {
+   "check": "G13 search reflects deletion state",
+   "ok": true
+  },
+  {
+   "check": "G14 ERASING surfaced",
+   "ok": true
+  },
+  {
+   "check": "G15 ERASED surfaced",
+   "ok": true
+  }
+ ],
+ "acl": [
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  }
+ ]
+}
