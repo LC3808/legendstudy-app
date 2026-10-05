@@ -8,7 +8,7 @@
 --   A. model, ACL and duration of the owner boundary
 --   B. reader RPCs (list / count / mark one / mark all)
 --   C. producers (inquiry reply, Credit grant) including idempotency
---   D. daily producers (balance once a day, expiry thresholds and dedupe)
+--   D. low Credit is a crossing, not a state; expiry thresholds and dedupe
 \set ON_ERROR_STOP on
 create or replace function pg_temp.check(p_name text, p_ok boolean) returns void
 language plpgsql as $$
@@ -66,7 +66,7 @@ select pg_temp.check('N-A10 an arbitrary notification type is rejected', pg_temp
   $q$select notification_private.emit('22222222-2222-4222-8222-222222222222','totally_made_up','t','b',null,null,'x/1')$q$)
   <> 'NONE');
 select pg_temp.check('N-A11 the daily producer is not callable by a browser session',
-  not has_function_privilege('authenticated','public.user_notification_run_daily_producers(integer,integer)','execute'));
+  not has_function_privilege('authenticated','public.user_notification_run_daily_producers(integer)','execute'));
 select pg_temp.check('N-A12 the payment producer is not callable by a browser session',
   not has_function_privilege('authenticated','public.user_notification_payment_complete(uuid)','execute'));
 select pg_temp.check('N-A13 the math producer is not callable by a browser session',
@@ -259,11 +259,11 @@ select pg_temp.check('N-C10 an operator grant notifies through the same producer
     where user_id='66666666-6666-4666-8666-666666666666' and type='credit_grant') = 1);
 
 -- ===========================================================================
--- D. Daily producers
+-- D. Low Credit is a crossing, and the daily producer is expiry only
 -- ===========================================================================
 delete from public.user_notifications;
--- Also drop the grant the operator producer check posted, so the balance
--- thresholds below see only the fixtures their own comments describe.
+-- Also drop the grant the operator producer check posted, so the fixtures below
+-- see only what their own comments describe.
 delete from public.credit_transactions where grant_id in (
   select id from public.credit_grants
    where id in ('e1111111-1111-4111-8111-111111111111','e2222222-2222-4222-8222-222222222222')
@@ -292,23 +292,9 @@ begin
   end loop;
 end $$;
 
--- Low balance member: 2 spendable Credits, none expiring.
-insert into public.credit_accounts(user_id) values ('66666666-6666-4666-8666-666666666666')
-on conflict(user_id) do nothing;
-insert into public.credit_grants(account_id,origin,external_reference,expires_at,created_at)
-select id,'promotion','nf/low',null,now() from public.credit_accounts where user_id='66666666-6666-4666-8666-666666666666'
-on conflict do nothing;
-insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference,created_at)
-select a.id, g.id, 'promotion', 6, 0, 'nf-low-tx', 'operational_promotion', 'operator/system', now()
-  from public.credit_accounts a join public.credit_grants g on g.account_id=a.id and g.external_reference='nf/low'
- where a.user_id='66666666-6666-4666-8666-666666666666';
--- ... but the member has already spent four, leaving two.
-insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference,created_at)
-select a.id, g.id, 'adjustment', -4, 0, 'nf-low-consume', 'essay_evaluation', 'system/consumer', now()
-  from public.credit_accounts a join public.credit_grants g on g.account_id=a.id and g.external_reference='nf/low'
- where a.user_id='66666666-6666-4666-8666-666666666666';
-
--- Zero balance member: granted then fully consumed.
+-- Zero balance member: granted then fully consumed. Granted 3 is not a crossing
+-- (nothing was above the threshold) and consuming 3 arrives at zero from a
+-- balance that was already low, so this member is never told anything.
 insert into public.credit_accounts(user_id) values ('77777777-7777-4777-8777-777777777777')
 on conflict(user_id) do nothing;
 insert into public.credit_grants(account_id,origin,external_reference,expires_at,created_at)
@@ -323,58 +309,139 @@ select a.id, g.id, 'adjustment', -3, 0, 'nf-zero-consume', 'essay_evaluation', '
   from public.credit_accounts a join public.credit_grants g on g.account_id=a.id and g.external_reference='nf/zero'
  where a.user_id='77777777-7777-4777-8777-777777777777';
 
--- The account that granted Credit above also got grant notifications; clear so the
--- daily assertions count only what the scheduler produced.
+-- Crossing member: the balance walks 5 -> 4 -> 3 -> 2 -> 1 -> 0, recovers to 6,
+-- and walks down again.
 delete from public.user_notifications;
 
+create function pg_temp.spend(n integer, key text) returns void language plpgsql as $f$
+begin
+  insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference,created_at)
+  select a.id, gr.id, 'adjustment', -n, 0, key, 'essay_evaluation', 'system/consumer', now()
+    from public.credit_accounts a
+    join public.credit_grants gr on gr.account_id=a.id and gr.external_reference='nf/cross'
+   where a.user_id='66666666-6666-4666-8666-666666666666';
+end; $f$;
+
+create function pg_temp.low_count() returns integer language sql as $f$
+  select count(*)::integer from public.user_notifications
+   where user_id='66666666-6666-4666-8666-666666666666'
+     and type='low_credit_notification'; $f$;
+
+do $$
+declare acct uuid; g uuid;
+begin
+  insert into public.credit_accounts(user_id) values ('66666666-6666-4666-8666-666666666666')
+  on conflict(user_id) do nothing;
+  select id into acct from public.credit_accounts where user_id='66666666-6666-4666-8666-666666666666';
+  insert into public.credit_grants(account_id,origin,external_reference,expires_at,created_at)
+  values (acct,'promotion','nf/cross',null,now()) returning id into g;
+  insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference,created_at)
+  values (acct,g,'promotion',5,0,'nf-cross-grant','operational_promotion','operator/system',now());
+
+  perform pg_temp.check('N-D6 a grant that lands above the threshold announces nothing',
+    pg_temp.low_count() = 0);
+
+  perform pg_temp.spend(1,'nf-cross-spend-1');   -- 5 -> 4, still above
+  perform pg_temp.check('N-D6b 5 -> 4 announces nothing', pg_temp.low_count() = 0);
+
+  perform pg_temp.spend(1,'nf-cross-spend-2');   -- 4 -> 3, the crossing
+  perform pg_temp.check('N-D7 4 -> 3 announces the low balance exactly once',
+    pg_temp.low_count() = 1);
+  perform pg_temp.check('N-D7b the low balance notification is the Owner copy and unread',
+    exists(select 1 from public.user_notifications
+      where user_id='66666666-6666-4666-8666-666666666666'
+        and type='low_credit_notification'
+        and title = '남은 Credit이 3개입니다.'
+        and body = '필요한 경우 Credit을 충전해 주세요.'
+        and target_type = 'credit_history' and target_id is null
+        and read_at is null));
+
+  perform pg_temp.spend(1,'nf-cross-spend-3');   -- 3 -> 2
+  perform pg_temp.check('N-D8 3 -> 2 announces nothing', pg_temp.low_count() = 1);
+
+  perform pg_temp.spend(1,'nf-cross-spend-4');   -- 2 -> 1
+  perform pg_temp.spend(1,'nf-cross-spend-5');   -- 1 -> 0
+  perform pg_temp.check('N-D9 falling to zero from inside the low band announces nothing',
+    pg_temp.low_count() = 1);
+
+  -- Recovery and a second cycle.
+  insert into public.credit_transactions(account_id,grant_id,transaction_type,balance_delta,reserved_delta,idempotency_key,reason_code,actor_reference,created_at)
+  values (acct,g,'promotion',6,0,'nf-cross-grant-2','operational_promotion','operator/system',now());
+  perform pg_temp.spend(1,'nf-cross-spend-6');   -- 6 -> 5
+  perform pg_temp.spend(1,'nf-cross-spend-7');   -- 5 -> 4
+  perform pg_temp.check('N-D9b recovering above the threshold and falling to 4 announces nothing',
+    pg_temp.low_count() = 1);
+  perform pg_temp.spend(1,'nf-cross-spend-8');   -- 4 -> 3, a new cycle
+  perform pg_temp.check('N-D10 recovering above 3 and crossing again is a new cycle',
+    pg_temp.low_count() = 2);
+  perform pg_temp.check('N-D10b the new cycle states the new balance',
+    exists(select 1 from public.user_notifications
+      where user_id='66666666-6666-4666-8666-666666666666'
+        and type='low_credit_notification' and title = '남은 Credit이 3개입니다.'
+        and dedupe_key = 'low-credit/' || (select id::text from public.credit_transactions
+                                            where idempotency_key='nf-cross-spend-8')));
+end$$;
+
+-- reserve and release move the reserved amount, never the balance, so an
+-- evaluation that is abandoned and retried cannot re-announce a low balance the
+-- member never left. The ledger constraint keeps them at balance_delta = 0 and
+-- the producer returns early on a zero movement.
+do $$
+begin
+  perform pg_temp.check('N-D11 reserve / release cannot move the ledger balance',
+    exists(select 1 from pg_constraint c
+      join pg_class t on t.oid = c.conrelid
+     where t.relname = 'credit_transactions' and c.contype = 'c'
+       and pg_get_constraintdef(c.oid) like '%reserve%balance_delta = 0%'
+       and pg_get_constraintdef(c.oid) like '%release%balance_delta = 0%'));
+  perform pg_temp.check('N-D11b the crossing producer ignores a zero movement',
+    pg_get_functiondef('notification_private.on_credit_balance_changed()'::regprocedure)
+      like '%coalesce(new.balance_delta, 0) = 0%');
+end$$;
+
+-- The daily producer is expiry only: it must not create or touch low Credit.
 do $$
 declare r1 jsonb;
 begin
-  r1 := public.user_notification_run_daily_producers(500, 3);
-  perform pg_temp.check('N-D1 the daily run reports the expiries it created',
+  delete from public.user_notifications;
+  r1 := public.user_notification_run_daily_producers(500);
+  perform pg_temp.check('N-D12 the daily run reports the expiries it created',
     (r1->>'expiry_created')::integer = 4);
-  perform pg_temp.check('N-D2 D-30 / D-14 / D-7 / D-3 each produced exactly one notification',
+  perform pg_temp.check('N-D12b the daily result no longer reports a balance counter',
+    not (r1 ? 'balance_created'));
+  perform pg_temp.check('N-D13 D-30 / D-14 / D-7 / D-3 each produced exactly one notification',
     (select count(*) from public.user_notifications
       where user_id='55555555-5555-4555-8555-555555555555' and type='credit_expiry') = 4);
-  perform pg_temp.check('N-D3 the D-7 group summed the two grants expiring that day',
+  perform pg_temp.check('N-D13b the D-7 group summed the two grants expiring that day',
     exists(select 1 from public.user_notifications
       where user_id='55555555-5555-4555-8555-555555555555'
         and dedupe_key like 'credit-expiry/%/7' and title = '3 Credits가 7일 후 만료됩니다'));
-  perform pg_temp.check('N-D4 a non-threshold date produced nothing',
+  perform pg_temp.check('N-D13c a non-threshold date produced nothing',
     not exists(select 1 from public.user_notifications where dedupe_key like 'credit-expiry/%/20'));
-  perform pg_temp.check('N-D5 the expiry notification carries the quantity and the date',
+  perform pg_temp.check('N-D13d the expiry notification carries the quantity and the date',
     exists(select 1 from public.user_notifications
       where dedupe_key like 'credit-expiry/%/30' and title = '3 Credits가 30일 후 만료됩니다'
         and body like '%만료일: %' and target_type = 'credit_history'));
-  perform pg_temp.check('N-D6 the low balance member got exactly one reminder',
-    (select count(*) from public.user_notifications
-      where user_id='66666666-6666-4666-8666-666666666666' and type='credit_balance_reminder') = 1);
-  perform pg_temp.check('N-D7 the reminder states the current balance',
-    exists(select 1 from public.user_notifications
-      where user_id='66666666-6666-4666-8666-666666666666'
-        and type='credit_balance_reminder' and title = '현재 2 Credits가 남아 있습니다'));
-  perform pg_temp.check('N-D8 a zero balance member is not nagged',
-    not exists(select 1 from public.user_notifications
-      where user_id='77777777-7777-4777-8777-777777777777' and type='credit_balance_reminder'));
+  perform pg_temp.check('N-D14 no member is sent a low balance notification by the scheduler',
+    not exists(select 1 from public.user_notifications where type='low_credit_notification'));
 end$$;
 
 -- Second run, same day, same scheduler: nothing new.
 do $$
 declare r2 jsonb;
 begin
-  r2 := public.user_notification_run_daily_producers(500, 3);
-  perform pg_temp.check('N-D9 a repeated scheduler run creates nothing',
-    (r2->>'expiry_created')::integer = 0 and (r2->>'balance_created')::integer = 0);
-  perform pg_temp.check('N-D10 the reminder is at most once a day',
-    (select count(*) from public.user_notifications
-      where user_id='66666666-6666-4666-8666-666666666666' and type='credit_balance_reminder') = 1);
-  perform pg_temp.check('N-D11 the expiry notifications were not duplicated',
+  r2 := public.user_notification_run_daily_producers(500);
+  perform pg_temp.check('N-D15 a repeated scheduler run creates nothing',
+    (r2->>'expiry_created')::integer = 0);
+  perform pg_temp.check('N-D15b the expiry notifications were not duplicated',
     (select count(*) from public.user_notifications
       where user_id='55555555-5555-4555-8555-555555555555' and type='credit_expiry') = 4);
+  perform pg_temp.check('N-D15c the scheduler never produced a low balance notification',
+    not exists(select 1 from public.user_notifications where type='low_credit_notification'));
 end$$;
 
--- An exhausted grant must not produce an expiry notification. The grant terms
--- are frozen once posted, so this posts a fresh grant and consumes it entirely.
+-- A balance that is already below the threshold and drops further is not a new
+-- crossing, and an exhausted grant must not produce an expiry notification.
 do $$
 declare acct uuid; today date := (essay_private.clock() at time zone 'Asia/Seoul')::date; g uuid;
 begin
@@ -386,9 +453,11 @@ begin
   values (acct,g,'promotion',2,0,'nf-zero-d3-grant','operational_promotion','operator/system',now()),
          (acct,g,'adjustment',-2,0,'nf-zero-d3-consume','essay_evaluation','system/consumer',now());
   delete from public.user_notifications where user_id='77777777-7777-4777-8777-777777777777';
-  perform public.user_notification_run_daily_producers(500, 3);
-  perform pg_temp.check('N-D12 a fully consumed grant expires without a notification',
+  perform public.user_notification_run_daily_producers(500);
+  perform pg_temp.check('N-D16 a fully consumed grant expires without a notification',
     not exists(select 1 from public.user_notifications where user_id='77777777-7777-4777-8777-777777777777'));
+  perform pg_temp.check('N-D16b an unexpired grant at or below the threshold is not a crossing',
+    not exists(select 1 from public.user_notifications where type='low_credit_notification'));
 end$$;
 
 -- ===========================================================================

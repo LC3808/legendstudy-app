@@ -27,7 +27,7 @@
 | Credit 지급 | `credit_transactions` INSERT 트리거 | Credit 내역 |
 | 결제 완료 | 서버 `user_notification_payment_complete(order)` | 결제 내역 |
 | 수리논술 첨삭 완료 | 서버 `user_notification_math_evaluation_complete(...)` | 첨삭 결과 |
-| Credit 잔액 부족 | 일일 스케줄러 | Credit 내역 |
+| Credit 부족 | 원장에서 잔액이 3 이하로 **진입**할 때 1회 | Credit 내역 |
 | Credit 만료 예정(D-30/14/7/3) | 일일 스케줄러 | Credit 내역 |
 
 앱은 **읽음 상태를 공유**합니다. 앱에서 읽은 알림은 LAB에서도 읽음이고,
@@ -144,19 +144,44 @@ ADMIN-P0-B에서 이미 큐로 분리되어 있고, **메일이 실패해도 인
 ```
 POST /rest/v1/rpc/user_notification_run_daily_producers
 Headers: Authorization: Bearer <service_role key>
-{ "p_limit": 500, "p_threshold": 3 }
+{ "p_limit": 500 }
 ```
 
 ```json
-{ "balance_created": 12, "expiry_created": 34, "skipped": 0 }
+{ "expiry_created": 34, "as_of": "2026-10-05" }
 ```
 
 - 하루 한 번 실행합니다.
+- **만료 알림만** 만듭니다. 잔액 알림은 이 함수에서 더 이상 만들어지지 않습니다.
 - **멱등합니다.** 같은 날 두 번 실행해도 중복이 생기지 않습니다
-  (검증: `N-D9`, `N-D10`, `N-D11`).
-- 잔액 알림은 **1일 1회**, 만료 알림은 **D-30/14/7/3 각 1회**입니다.
+  (검증: `N-D15`).
+- 만료 알림은 **D-30/14/7/3 각 1회**입니다.
 - 같은 만료일의 여러 지급은 **하나의 알림으로 합산**됩니다.
-- 이미 다 쓴 Credit은 만료 알림을 만들지 않습니다(`N-D12`).
+- 이미 다 쓴 Credit은 만료 알림을 만들지 않습니다(`N-D16`).
+
+### 5.1 Credit 부족 알림은 "상태"가 아니라 "진입"입니다
+
+매일 반복되는 잔액 알림은 폐기되었습니다. 잔액은 Credit 내역에서 상시 확인할 수
+있으므로, 알릴 가치가 있는 것은 **낮은 구간으로 들어오는 순간 한 번**뿐입니다.
+
+```
+5 → 4   없음
+4 → 3   알림 1회   "남은 Credit이 3개입니다."
+3 → 2   없음
+2 → 1   없음
+1 → 0   없음
+1 → 6   (충전) 없음
+6 → 5 → 4 → 3   새로운 cycle로 알림 1회
+```
+
+앱에서 중요한 두 가지:
+
+1. **예약(reserve)과 해제(release)는 알림을 만들지 않습니다.** 이것들은 예약분만
+   움직이고 원장 잔액은 건드리지 않기 때문입니다. 즉 첨삭이 실패해 해제되고
+   다시 시도되어도, 사용자가 떠난 적 없는 저잔액 상태를 다시 알리지 않습니다.
+2. **알림 타입 이름이 `credit_balance_reminder` → `low_credit_notification`으로
+   바뀌었습니다.** 앱이 타입 이름을 분기한다면 이 값을 쓰십시오. 모르는 타입은
+   무시하는 구현이면 변경이 필요 없습니다.
 
 새 스케줄러를 만들지 마십시오. 기존 워커가 쓰는 service role 호출 방식을
 그대로 사용하면 됩니다.
@@ -172,7 +197,7 @@ CANONICAL_CHAIN=OK
 ADMIN_MIGRATION_APPLY=OK (19 entry points)
 ADMIN_CONSOLE_CHECKS   158 checks, 0 failed
 ADMIN_P0B_CHECKS       351 checks, 0 failed
-NOTIFICATION_CENTER_CHECKS  59 checks, 0 failed
+NOTIFICATION_CENTER_CHECKS  70 checks, 0 failed
 ```
 
 알림센터 전용 59개 검사에는 다음이 포함됩니다.
@@ -181,4 +206,8 @@ NOTIFICATION_CENTER_CHECKS  59 checks, 0 failed
 - 문의 답변 1건 = 알림 1건, 재시도 시 중복 없음 — `N-C1`, `N-C4`
 - 메일 실패가 인앱 알림에 영향 없음 — `N-C5`
 - Credit 지급만 알림 생성, 조정·만료·가입 보너스는 미생성 — `N-C6` ~ `N-C9`
-- 잔액 알림 1일 1회, 만료 임계값·중복 방지 — `N-D1` ~ `N-D12`
+- 잔액 진입 알림: 5→4 없음, 4→3 1회, 3→2·2→1·1→0 없음, 회복 후 재진입 1회 —
+  `N-D6` ~ `N-D10b`
+- 예약/해제가 잔액을 움직일 수 없음 — `N-D11`, `N-D11b`
+- 스케줄러가 잔액 알림을 만들지 않음 — `N-D12`, `N-D12b`, `N-D14`, `N-D15c`
+- 만료 임계값·합산·중복 방지 — `N-D13` ~ `N-D16b`

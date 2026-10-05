@@ -6,7 +6,7 @@
   "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
   "PHASE 2 structural stand-ins present -> installed path executes"
  ],
- "total": 410,
+ "total": 421,
  "failed": 0,
  "checks": [
   {
@@ -1602,51 +1602,95 @@
    "ok": true
   },
   {
-   "check": "N-D1 the daily run reports the expiries it created",
+   "check": "N-D6 a grant that lands above the threshold announces nothing",
    "ok": true
   },
   {
-   "check": "N-D2 D-30 / D-14 / D-7 / D-3 each produced exactly one notification",
+   "check": "N-D6b 5 -> 4 announces nothing",
    "ok": true
   },
   {
-   "check": "N-D3 the D-7 group summed the two grants expiring that day",
+   "check": "N-D7 4 -> 3 announces the low balance exactly once",
    "ok": true
   },
   {
-   "check": "N-D4 a non-threshold date produced nothing",
+   "check": "N-D7b the low balance notification is the Owner copy and unread",
    "ok": true
   },
   {
-   "check": "N-D5 the expiry notification carries the quantity and the date",
+   "check": "N-D8 3 -> 2 announces nothing",
    "ok": true
   },
   {
-   "check": "N-D6 the low balance member got exactly one reminder",
+   "check": "N-D9 falling to zero from inside the low band announces nothing",
    "ok": true
   },
   {
-   "check": "N-D7 the reminder states the current balance",
+   "check": "N-D9b recovering above the threshold and falling to 4 announces nothing",
    "ok": true
   },
   {
-   "check": "N-D8 a zero balance member is not nagged",
+   "check": "N-D10 recovering above 3 and crossing again is a new cycle",
    "ok": true
   },
   {
-   "check": "N-D9 a repeated scheduler run creates nothing",
+   "check": "N-D10b the new cycle states the new balance",
    "ok": true
   },
   {
-   "check": "N-D10 the reminder is at most once a day",
+   "check": "N-D11 reserve / release cannot move the ledger balance",
    "ok": true
   },
   {
-   "check": "N-D11 the expiry notifications were not duplicated",
+   "check": "N-D11b the crossing producer ignores a zero movement",
    "ok": true
   },
   {
-   "check": "N-D12 a fully consumed grant expires without a notification",
+   "check": "N-D12 the daily run reports the expiries it created",
+   "ok": true
+  },
+  {
+   "check": "N-D12b the daily result no longer reports a balance counter",
+   "ok": true
+  },
+  {
+   "check": "N-D13 D-30 / D-14 / D-7 / D-3 each produced exactly one notification",
+   "ok": true
+  },
+  {
+   "check": "N-D13b the D-7 group summed the two grants expiring that day",
+   "ok": true
+  },
+  {
+   "check": "N-D13c a non-threshold date produced nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D13d the expiry notification carries the quantity and the date",
+   "ok": true
+  },
+  {
+   "check": "N-D14 no member is sent a low balance notification by the scheduler",
+   "ok": true
+  },
+  {
+   "check": "N-D15 a repeated scheduler run creates nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D15b the expiry notifications were not duplicated",
+   "ok": true
+  },
+  {
+   "check": "N-D15c the scheduler never produced a low balance notification",
+   "ok": true
+  },
+  {
+   "check": "N-D16 a fully consumed grant expires without a notification",
+   "ok": true
+  },
+  {
+   "check": "N-D16b an unexpired grant at or below the threshold is not a crossing",
    "ok": true
   }
  ],

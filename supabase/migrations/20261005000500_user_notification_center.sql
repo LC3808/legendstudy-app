@@ -53,7 +53,7 @@ create table public.user_notifications (
         'math_evaluation_complete',
         'payment_complete',
         'credit_grant',
-        'credit_balance_reminder',
+        'low_credit_notification',
         'credit_expiry',
         'payment_refund',
         'account_notice',
@@ -211,6 +211,66 @@ create trigger credit_grant_posted_notifies_member
     for each row execute function notification_private.on_credit_grant_posted();
 
 -- ---------------------------------------------------------------------------
+-- 4.2b low_credit_notification — the balance crosses into the low band.
+--
+-- The member can already see the balance in Credit 내역, so a repeated reminder
+-- is noise. What is worth telling them once is the moment the balance becomes
+-- low, and only when it becomes low from above.
+--
+-- The authority is the ledger balance (sum of balance_delta), not the spendable
+-- balance: a reserve and its release move the reserved amount, never the
+-- balance, so an evaluation that is abandoned and retried cannot re-announce a
+-- low balance the member never left. Rows that move the balance are the real
+-- events — a grant, a consumption, an expiration, an adjustment.
+--
+-- The crossing row is the dedupe key, so a retried or replayed posting produces
+-- nothing, and recovering above the threshold and falling again is a new cycle
+-- with a new key.
+-- ---------------------------------------------------------------------------
+create function notification_private.on_credit_balance_changed() returns trigger
+language plpgsql security definer set search_path='' as $$
+declare
+    threshold constant integer := 3;
+    owner uuid;
+    balance_after integer;
+    balance_before integer;
+begin
+    -- reserve and release are constrained to balance_delta = 0 and therefore
+    -- cannot cross anything; returning early keeps that explicit.
+    if coalesce(new.balance_delta, 0) = 0 then return null; end if;
+
+    select ca.user_id into owner
+      from public.credit_grants g
+      join public.credit_accounts ca on ca.id = g.account_id
+     where g.id = new.grant_id;
+    if owner is null then return null; end if;
+
+    select coalesce(sum(t.balance_delta), 0)::integer into balance_after
+      from public.credit_transactions t
+      join public.credit_grants g on g.id = t.grant_id
+     where g.account_id = new.account_id;
+    balance_before := balance_after - new.balance_delta;
+
+    if balance_before > threshold and balance_after <= threshold then
+        perform notification_private.emit(
+            owner,
+            'low_credit_notification',
+            '남은 Credit이 ' || balance_after || '개입니다.',
+            '필요한 경우 Credit을 충전해 주세요.',
+            'credit_history',
+            null,
+            'low-credit/' || new.id::text
+        );
+    end if;
+    return null;
+end$$;
+revoke all on function notification_private.on_credit_balance_changed() from public, anon, authenticated, service_role;
+
+create trigger credit_balance_crossing_notifies_member
+    after insert on public.credit_transactions
+    for each row execute function notification_private.on_credit_balance_changed();
+
+-- ---------------------------------------------------------------------------
 -- 4.3 essay_evaluation_complete — 인문논술 첨삭 completed.
 --
 -- Fires on the canonical completed state, never on a client's belief that a
@@ -315,27 +375,27 @@ revoke all on function public.user_notification_math_evaluation_complete(uuid,uu
 grant execute on function public.user_notification_math_evaluation_complete(uuid,uuid) to essay_executor;
 
 -- ---------------------------------------------------------------------------
--- 4.6 + 4.7 credit_balance_reminder / credit_expiry — the daily producer.
+-- 4.7 credit_expiry — the daily producer.
 --
--- One bounded, idempotent call covers both. The database unique constraint is
--- the authority on duplication, so a scheduler that runs twice, retries, or
--- overlaps produces nothing extra; the scheduler is only a trigger.
+-- One bounded, idempotent call. The database unique constraint is the authority
+-- on duplication, so a scheduler that runs twice, retries, or overlaps produces
+-- nothing extra; the scheduler is only a trigger.
 --
 -- Expiry thresholds are the user-visible expiry date in Asia/Seoul, so grants
 -- expiring on the same day are summed into one notification per threshold
 -- instead of one per grant.
+--
+-- A low balance is NOT produced here. It is a crossing, not a state, and it is
+-- announced once by notification_private.on_credit_balance_changed().
 -- ---------------------------------------------------------------------------
 create function public.user_notification_run_daily_producers(
-    p_limit integer default 500,
-    p_balance_threshold integer default 3
+    p_limit integer default 500
 ) returns jsonb
 language plpgsql security definer set search_path='' as $$
 declare
     bounded integer := least(greatest(coalesce(p_limit, 1), 1), 2000);
-    threshold integer := least(greatest(coalesce(p_balance_threshold, 3), 1), 100);
     today date := (essay_private.clock() at time zone 'Asia/Seoul')::date;
     expiry_created integer := 0;
-    balance_created integer := 0;
     s record;
 begin
     -- Expiry: remaining Credits per (user, expiry date), notified at D-30/14/7/3.
@@ -369,42 +429,14 @@ begin
         end if;
     end loop;
 
-    -- Balance: a low positive balance is worth one reminder a day. Zero balance
-    -- is not nagged: the member already gets the expiry notice and the inbox is
-    -- not an advertising channel. The once-a-day rule is the date in the key.
-    for s in
-        select ca.user_id, sum(t.balance_delta - t.reserved_delta)::integer as remaining
-          from public.credit_accounts ca
-          join public.credit_grants g on g.account_id = ca.id
-          join public.credit_transactions t on t.grant_id = g.id
-         where g.expires_at is null or g.expires_at > essay_private.clock()
-         group by ca.user_id
-        having sum(t.balance_delta - t.reserved_delta) between 1 and threshold
-         order by 1
-         limit bounded
-    loop
-        if notification_private.emit(
-               s.user_id,
-               'credit_balance_reminder',
-               '현재 ' || s.remaining || ' Credits가 남아 있습니다',
-               '현재 ' || s.remaining || ' Credits가 남아 있습니다. Credit 내역에서 확인할 수 있습니다.',
-               'credit_history',
-               null,
-               'credit-balance/' || to_char(today, 'YYYY-MM-DD')
-           ) is not null then
-            balance_created := balance_created + 1;
-        end if;
-    end loop;
-
     return jsonb_build_object(
         'expiry_created', expiry_created,
-        'balance_created', balance_created,
         'as_of', today
     );
 end$$;
-revoke all on function public.user_notification_run_daily_producers(integer,integer)
+revoke all on function public.user_notification_run_daily_producers(integer)
     from public, anon, authenticated, service_role;
-grant execute on function public.user_notification_run_daily_producers(integer,integer) to service_role, essay_executor;
+grant execute on function public.user_notification_run_daily_producers(integer) to service_role, essay_executor;
 
 -- ===========================================================================
 -- 5. Owner-facing read and acknowledgement
