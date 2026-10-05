@@ -6,7 +6,7 @@
   "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
   "PHASE 2 structural stand-ins present -> installed path executes"
  ],
- "total": 126,
+ "total": 351,
  "failed": 0,
  "checks": [
   {
@@ -310,18 +310,6 @@
    "ok": true
   },
   {
-   "check": "F owner postgres: admin_count",
-   "ok": true
-  },
-  {
-   "check": "F security definer: admin_count",
-   "ok": true
-  },
-  {
-   "check": "F empty search_path: admin_count",
-   "ok": true
-  },
-  {
    "check": "F owner postgres: admin_credit_snapshot",
    "ok": true
   },
@@ -334,51 +322,23 @@
    "ok": true
   },
   {
-   "check": "F owner postgres: admin_dashboard",
+   "check": "F owner postgres: inquiry_touch",
    "ok": true
   },
   {
-   "check": "F security definer: admin_dashboard",
+   "check": "F empty search_path: inquiry_touch",
    "ok": true
   },
   {
-   "check": "F empty search_path: admin_dashboard",
+   "check": "F owner postgres: admin_count",
    "ok": true
   },
   {
-   "check": "F owner postgres: admin_member_credit",
+   "check": "F security definer: admin_count",
    "ok": true
   },
   {
-   "check": "F security definer: admin_member_credit",
-   "ok": true
-  },
-  {
-   "check": "F empty search_path: admin_member_credit",
-   "ok": true
-  },
-  {
-   "check": "F owner postgres: admin_member_detail",
-   "ok": true
-  },
-  {
-   "check": "F security definer: admin_member_detail",
-   "ok": true
-  },
-  {
-   "check": "F empty search_path: admin_member_detail",
-   "ok": true
-  },
-  {
-   "check": "F owner postgres: admin_member_search",
-   "ok": true
-  },
-  {
-   "check": "F security definer: admin_member_search",
-   "ok": true
-  },
-  {
-   "check": "F empty search_path: admin_member_search",
+   "check": "F empty search_path: admin_count",
    "ok": true
   },
   {
@@ -394,7 +354,175 @@
    "ok": true
   },
   {
-   "check": "F all eight functions present",
+   "check": "F owner postgres: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F security definer: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F security definer: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F security definer: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F security definer: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F full operations entry-point set present",
    "ok": true
   },
   {
@@ -512,6 +640,778 @@
   {
    "check": "G15 ERASED surfaced",
    "ok": true
+  },
+  {
+   "check": "A anon cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A service_role cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A essay_finance can execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot insert credit_grants",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot update credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot insert credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot delete credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A grant refused with no request identity",
+   "ok": true
+  },
+  {
+   "check": "A grant refused for anonymous caller",
+   "ok": true
+  },
+  {
+   "check": "A invalid origin refused",
+   "ok": true
+  },
+  {
+   "check": "A mismatched origin/reason refused",
+   "ok": true
+  },
+  {
+   "check": "A arbitrary reason string refused",
+   "ok": true
+  },
+  {
+   "check": "A null idempotency key refused",
+   "ok": true
+  },
+  {
+   "check": "A zero quantity refused",
+   "ok": true
+  },
+  {
+   "check": "A negative quantity refused",
+   "ok": true
+  },
+  {
+   "check": "A past expiry refused",
+   "ok": true
+  },
+  {
+   "check": "A grant returns a grant id",
+   "ok": true
+  },
+  {
+   "check": "A grant posts the requested quantity",
+   "ok": true
+  },
+  {
+   "check": "A grant records the canonical origin",
+   "ok": true
+  },
+  {
+   "check": "A grant records the canonical reason",
+   "ok": true
+  },
+  {
+   "check": "A grant records the operator actor",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key returns the same grant",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key posts exactly one transaction",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key with a different quantity conflicts",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key with a different reason conflicts",
+   "ok": true
+  },
+  {
+   "check": "A promotion/operational_promotion accepted",
+   "ok": true
+  },
+  {
+   "check": "A compensation/customer_compensation accepted",
+   "ok": true
+  },
+  {
+   "check": "A b2b_program/program_allocation accepted",
+   "ok": true
+  },
+  {
+   "check": "A admin_grant/test_account accepted",
+   "ok": true
+  },
+  {
+   "check": "B anon cannot execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B authenticated can execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B service_role cannot execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B order-action contract absent from this cluster",
+   "ok": true
+  },
+  {
+   "check": "B no browser role reads orders directly",
+   "ok": true
+  },
+  {
+   "check": "B no browser role writes orders directly",
+   "ok": true
+  },
+  {
+   "check": "B anonymous payment read refused",
+   "ok": true
+  },
+  {
+   "check": "B normal member payment read refused",
+   "ok": true
+  },
+  {
+   "check": "B installed order table is reported as installed",
+   "ok": true
+  },
+  {
+   "check": "B order list is returned",
+   "ok": true
+  },
+  {
+   "check": "B total matches the row count",
+   "ok": true
+  },
+  {
+   "check": "B runtime state is LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "B runtime label names the disabled state",
+   "ok": true
+  },
+  {
+   "check": "B runtime label does not claim a live payment state",
+   "ok": true
+  },
+  {
+   "check": "B provider mode is reported",
+   "ok": true
+  },
+  {
+   "check": "B response carries the dto version",
+   "ok": true
+  },
+  {
+   "check": "B order carries the order id",
+   "ok": true
+  },
+  {
+   "check": "B order carries the member",
+   "ok": true
+  },
+  {
+   "check": "B order carries the product",
+   "ok": true
+  },
+  {
+   "check": "B order carries the amount",
+   "ok": true
+  },
+  {
+   "check": "B order carries the credit quantity",
+   "ok": true
+  },
+  {
+   "check": "B order carries the currency",
+   "ok": true
+  },
+  {
+   "check": "B order carries the payment state",
+   "ok": true
+  },
+  {
+   "check": "B order carries the grant state",
+   "ok": true
+  },
+  {
+   "check": "B order carries the payment date",
+   "ok": true
+  },
+  {
+   "check": "B order carries the reconciliation flag",
+   "ok": true
+  },
+  {
+   "check": "B paid order with a grant is marked refundable",
+   "ok": true
+  },
+  {
+   "check": "B order payload omits the provider purchase id",
+   "ok": true
+  },
+  {
+   "check": "B no provider or finance secret in the read payload",
+   "ok": true
+  },
+  {
+   "check": "B state filter matches a paid order",
+   "ok": true
+  },
+  {
+   "check": "B state filter excludes non-matching rows",
+   "ok": true
+  },
+  {
+   "check": "B search by order id matches",
+   "ok": true
+  },
+  {
+   "check": "B search by member id matches",
+   "ok": true
+  },
+  {
+   "check": "B unknown state refused",
+   "ok": true
+  },
+  {
+   "check": "B short query refused",
+   "ok": true
+  },
+  {
+   "check": "B limit is bounded to 50",
+   "ok": true
+  },
+  {
+   "check": "B limit floor is 1",
+   "ok": true
+  },
+  {
+   "check": "B negative offset is floored to 0",
+   "ok": true
+  },
+  {
+   "check": "B wrong dto version refused",
+   "ok": true
+  },
+  {
+   "check": "B unknown payload key refused",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot execute inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "C authenticated can execute inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read the inquiry table directly",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can write the inquiry table",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read replies directly",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read the delivery queue",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot drain the delivery queue",
+   "ok": true
+  },
+  {
+   "check": "C anonymous submit refused",
+   "ok": true
+  },
+  {
+   "check": "C member submit creates an inquiry",
+   "ok": true
+  },
+  {
+   "check": "C new inquiry starts RECEIVED",
+   "ok": true
+  },
+  {
+   "check": "C first submit is not a duplicate",
+   "ok": true
+  },
+  {
+   "check": "C submit records a status event",
+   "ok": true
+  },
+  {
+   "check": "C inquiry owner is the caller, not the payload",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit returns the same inquiry",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit is flagged",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit does not create a second row",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit with different content conflicts",
+   "ok": true
+  },
+  {
+   "check": "C unknown category refused",
+   "ok": true
+  },
+  {
+   "check": "C blank title refused",
+   "ok": true
+  },
+  {
+   "check": "C over-long body refused",
+   "ok": true
+  },
+  {
+   "check": "C unknown payload key refused",
+   "ok": true
+  },
+  {
+   "check": "C submit cannot set the status",
+   "ok": true
+  },
+  {
+   "check": "C mine returns an empty list for a member with no inquiries",
+   "ok": true
+  },
+  {
+   "check": "C mine never leaks another member inquiry",
+   "ok": true
+  },
+  {
+   "check": "C mine returns the caller own inquiry",
+   "ok": true
+  },
+  {
+   "check": "C mine marks an unanswered inquiry as unanswered",
+   "ok": true
+  },
+  {
+   "check": "C mine is bounded",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot execute admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "C authenticated can execute admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "C normal member inquiry list refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member inquiry detail refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member reply refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member status change refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member support metrics refused",
+   "ok": true
+  },
+  {
+   "check": "C operator list returns the inquiry",
+   "ok": true
+  },
+  {
+   "check": "C operator list carries the open count",
+   "ok": true
+  },
+  {
+   "check": "C operator list marks the member",
+   "ok": true
+  },
+  {
+   "check": "C operator list carries the category",
+   "ok": true
+  },
+  {
+   "check": "C operator list truncates the body preview",
+   "ok": true
+  },
+  {
+   "check": "C operator list has no full body field",
+   "ok": true
+  },
+  {
+   "check": "C status filter excludes non-matching rows",
+   "ok": true
+  },
+  {
+   "check": "C category filter matches",
+   "ok": true
+  },
+  {
+   "check": "C unknown status filter refused",
+   "ok": true
+  },
+  {
+   "check": "C unknown category filter refused",
+   "ok": true
+  },
+  {
+   "check": "C short search query refused",
+   "ok": true
+  },
+  {
+   "check": "C list limit is bounded",
+   "ok": true
+  },
+  {
+   "check": "C search by inquiry id matches",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the body",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the member block",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the credit snapshot",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the account state",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the status history",
+   "ok": true
+  },
+  {
+   "check": "C detail starts with no replies",
+   "ok": true
+  },
+  {
+   "check": "C detail carries bounded related references",
+   "ok": true
+  },
+  {
+   "check": "C related payment count reflects the member own orders",
+   "ok": true
+  },
+  {
+   "check": "C related reference count is bounded to the submitting member",
+   "ok": true
+  },
+  {
+   "check": "C unknown inquiry id is NOT_FOUND",
+   "ok": true
+  },
+  {
+   "check": "C malformed inquiry id refused",
+   "ok": true
+  },
+  {
+   "check": "C ANSWERED without a reply refused [PT409]",
+   "ok": true
+  },
+  {
+   "check": "C status can move to IN_PROGRESS",
+   "ok": true
+  },
+  {
+   "check": "C status change is audited",
+   "ok": true
+  },
+  {
+   "check": "C repeating the same status is a no-op",
+   "ok": true
+  },
+  {
+   "check": "C status change does not duplicate the audit row",
+   "ok": true
+  },
+  {
+   "check": "C reply returns a reply id",
+   "ok": true
+  },
+  {
+   "check": "C reply sets the inquiry to ANSWERED",
+   "ok": true
+  },
+  {
+   "check": "C reply reports the delivery as queued",
+   "ok": true
+  },
+  {
+   "check": "C reply stamps answered_at",
+   "ok": true
+  },
+  {
+   "check": "C reply is appended, not overwritten",
+   "ok": true
+  },
+  {
+   "check": "C reply is recorded",
+   "ok": true
+  },
+  {
+   "check": "C reply is audited",
+   "ok": true
+  },
+  {
+   "check": "C exactly one delivery is queued",
+   "ok": true
+  },
+  {
+   "check": "C queued delivery starts pending",
+   "ok": true
+  },
+  {
+   "check": "C queued delivery stores no recipient address",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply returns the same reply",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply is flagged",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply does not queue a second delivery",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply does not append a second row",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply with different content conflicts",
+   "ok": true
+  },
+  {
+   "check": "C blank reply refused",
+   "ok": true
+  },
+  {
+   "check": "C reply to an unknown inquiry is NOT_FOUND",
+   "ok": true
+  },
+  {
+   "check": "C member sees the inquiry as answered",
+   "ok": true
+  },
+  {
+   "check": "C member sees the ANSWERED status",
+   "ok": true
+  },
+  {
+   "check": "C member list still omits the reply body",
+   "ok": true
+  },
+  {
+   "check": "C status can move to CLOSED",
+   "ok": true
+  },
+  {
+   "check": "C reply to a closed inquiry refused",
+   "ok": true
+  },
+  {
+   "check": "C metrics count the open queue",
+   "ok": true
+  },
+  {
+   "check": "C metrics count closed inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics count answered inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics count today new inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics report the failed delivery count",
+   "ok": true
+  },
+  {
+   "check": "C first response time is a real measurement",
+   "ok": true
+  },
+  {
+   "check": "C oldest open inquiry is null when nothing is open",
+   "ok": true
+  },
+  {
+   "check": "C claim is service-role only",
+   "ok": true
+  },
+  {
+   "check": "C complete is service-role only",
+   "ok": true
+  },
+  {
+   "check": "C a second claim finds nothing while the lease is held",
+   "ok": true
+  },
+  {
+   "check": "C worker claims the queued delivery",
+   "ok": true
+  },
+  {
+   "check": "C claim resolves the member for delivery",
+   "ok": true
+  },
+  {
+   "check": "C claim returns a token",
+   "ok": true
+  },
+  {
+   "check": "C claim counts the attempt",
+   "ok": true
+  },
+  {
+   "check": "C completion marks the delivery sent",
+   "ok": true
+  },
+  {
+   "check": "C sent delivery is stamped",
+   "ok": true
+  },
+  {
+   "check": "C operator can reopen and answer again",
+   "ok": true
+  },
+  {
+   "check": "C a second reply queues a second delivery",
+   "ok": true
+  },
+  {
+   "check": "C a stale claim token cannot complete the delivery",
+   "ok": true
+  },
+  {
+   "check": "C worker claims the second delivery",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery records the error code",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery schedules a retry",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery releases the lease",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery does not lose the reply",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery is counted in the metrics",
+   "ok": true
+  },
+  {
+   "check": "C exactly one delivery is in the failed state",
+   "ok": true
+  },
+  {
+   "check": "C no secret token in any P0-B payload",
+   "ok": true
+  },
+  {
+   "check": "C no finance actor reference in any P0-B payload",
+   "ok": true
+  },
+  {
+   "check": "C admin console defines no credit write function",
+   "ok": true
+  },
+  {
+   "check": "C inquiry functions never update a credit table",
+   "ok": true
+  },
+  {
+   "check": "D absent order table is reported as not installed",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports a JSON null total",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports a JSON null list",
+   "ok": true
+  },
+  {
+   "check": "D absent order table is not reported as zero",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports mode NONE",
+   "ok": true
+  },
+  {
+   "check": "D absent order table still reports LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "D absent order table still validates the request",
+   "ok": true
+  },
+  {
+   "check": "D related payment count degrades to null",
+   "ok": true
   }
  ],
  "acl": [
@@ -612,6 +1512,102 @@
    "execute": false
   },
   {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
    "function": "admin_member_credit",
    "owner": "postgres",
    "security_definer": true,
@@ -701,6 +1697,54 @@
   },
   {
    "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_support_metrics",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_support_metrics",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_support_metrics",
    "owner": "postgres",
    "security_definer": true,
    "search_path": "search_path=\"\"",

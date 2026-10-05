@@ -226,20 +226,32 @@ end$$;
 -- F. Ownership and ACL
 -- ---------------------------------------------------------------------------
 do $$
-declare f record;
+declare f record; actual text;
 begin
+ -- Every operations entry point, P0-A and P0-B alike: one owner, SECURITY
+ -- DEFINER, and an empty search_path.
  for f in
-  select p.oid, p.proname, pg_get_userbyid(p.proowner) owner, p.prosecdef definer, p.proconfig cfg
+  select p.oid, p.proname, pg_get_userbyid(p.proowner) owner, p.prosecdef definer, p.proconfig cfg,
+   p.prorettype='trigger'::regtype as is_trigger
   from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-  where n.nspname='public' and p.proname like 'admin\_%'
+  where n.nspname='public' and (p.proname like 'admin\_%' or p.proname like 'inquiry\_%'
+   or p.proname like 'claim\_inquiry%' or p.proname like 'complete\_inquiry%')
  loop
   perform pg_temp.check('F owner postgres: '||f.proname, f.owner='postgres');
-  perform pg_temp.check('F security definer: '||f.proname, f.definer);
+  -- A trigger body must run with the invoker's rights, so only real entry points
+  -- are required to be SECURITY DEFINER.
+  if not f.is_trigger then
+   perform pg_temp.check('F security definer: '||f.proname, f.definer);
+  end if;
   perform pg_temp.check('F empty search_path: '||f.proname, f.cfg is not distinct from array['search_path=""']);
  end loop;
- perform pg_temp.check('F all eight functions present',
-  (select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-   where n.nspname='public' and p.proname like 'admin\_%')=8);
+ -- An explicit set, not a count: a renamed or dropped entry point must fail.
+ select string_agg(p.proname,' ' order by p.proname) into actual
+  from pg_proc p join pg_namespace n on n.oid=p.pronamespace
+  where n.nspname='public' and (p.proname like 'admin\_%' or p.proname like 'inquiry\_%'
+   or p.proname like 'claim\_inquiry%' or p.proname like 'complete\_inquiry%');
+ perform pg_temp.check('F full operations entry-point set present',
+  actual='admin_account_state admin_count admin_credit_snapshot admin_dashboard admin_inquiry_detail admin_inquiry_list admin_inquiry_reply admin_inquiry_set_status admin_member_credit admin_member_detail admin_member_search admin_operator admin_payment_orders admin_support_metrics claim_inquiry_notifications complete_inquiry_notification inquiry_mine inquiry_submit inquiry_touch');
 
  perform pg_temp.check('F anon cannot execute admin_count',
   not has_function_privilege('anon','public.admin_count(text)','execute'));
@@ -276,10 +288,23 @@ end$$;
 -- ---------------------------------------------------------------------------
 -- G. PHASE 2 — structural stand-ins for the pending subsystems
 -- ---------------------------------------------------------------------------
+-- Column set mirrors 20261003000100_payment_foundation so that reads written
+-- against the real table are exercised here too. The CHECK constraints are
+-- deliberately omitted: this is a structural stand-in for read behaviour, and
+-- it is NOT a claim that the payment migration applied.
 create table public.payment_orders(
- id uuid primary key default gen_random_uuid(), subject_id uuid, grant_id uuid,
- state text not null default 'CREATED', sku text, amount integer, currency text,
- paid_at timestamptz, created_at timestamptz not null default now());
+ id uuid primary key default gen_random_uuid(), subject_id uuid,
+ request_key uuid not null default gen_random_uuid(),
+ provider text not null default 'TOSS', mode text not null default 'TEST',
+ sku text not null default '5c', amount integer not null default 4900,
+ quantity integer not null default 5, currency text not null default 'KRW',
+ policy_version text not null default 'commerce-2026-10-03',
+ deduction_unit integer not null default 4900, validity_months integer not null default 3,
+ state text not null default 'ORDER_CREATED', grant_state text not null default 'NONE',
+ provider_purchase_id text, grant_id uuid,
+ created_at timestamptz not null default now(),
+ expires_at timestamptz not null default now()+interval '30 minutes',
+ paid_at timestamptz, credit_expires_at timestamptz);
 create table public.math_attempts(
  id uuid primary key default gen_random_uuid(), student_id uuid not null,
  created_at timestamptz not null default now());
