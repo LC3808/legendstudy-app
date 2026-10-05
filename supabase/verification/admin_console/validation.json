@@ -6,7 +6,7 @@
   "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
   "PHASE 2 structural stand-ins present -> installed path executes"
  ],
- "total": 351,
+ "total": 410,
  "failed": 0,
  "checks": [
   {
@@ -1411,6 +1411,242 @@
   },
   {
    "check": "D related payment count degrades to null",
+   "ok": true
+  },
+  {
+   "check": "N-A1 authenticated cannot read the notification table directly",
+   "ok": true
+  },
+  {
+   "check": "N-A2 authenticated cannot insert notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A3 authenticated cannot update notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A4 anon cannot read the notification table",
+   "ok": true
+  },
+  {
+   "check": "N-A5 service_role cannot insert notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A6 row level security is enabled with no permissive policy",
+   "ok": true
+  },
+  {
+   "check": "N-A7 the emitter is not callable by any client role",
+   "ok": true
+  },
+  {
+   "check": "N-A8 the notification schema is not reachable by clients",
+   "ok": true
+  },
+  {
+   "check": "N-A9 duplicate dedupe key per member is rejected",
+   "ok": true
+  },
+  {
+   "check": "N-A10 an arbitrary notification type is rejected",
+   "ok": true
+  },
+  {
+   "check": "N-A11 the daily producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A12 the payment producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A13 the math producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A14 canonical ledger postings produced notifications",
+   "ok": true
+  },
+  {
+   "check": "N-B1 list returns only the caller own rows",
+   "ok": true
+  },
+  {
+   "check": "N-B2 list is newest first",
+   "ok": true
+  },
+  {
+   "check": "N-B3 list carries the read flag",
+   "ok": true
+  },
+  {
+   "check": "N-B4 unread count counts only unread own rows",
+   "ok": true
+  },
+  {
+   "check": "N-B5 unread_only filter hides read rows",
+   "ok": true
+  },
+  {
+   "check": "N-B6 paging is bounded",
+   "ok": true
+  },
+  {
+   "check": "N-B7 marking a foreign notification is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B7b the foreign notification is untouched",
+   "ok": true
+  },
+  {
+   "check": "N-B8 marking an own notification succeeds once",
+   "ok": true
+  },
+  {
+   "check": "N-B8b the own notification is now read",
+   "ok": true
+  },
+  {
+   "check": "N-B8c the unread count dropped by one",
+   "ok": true
+  },
+  {
+   "check": "N-B9 marking all read affects only the caller",
+   "ok": true
+  },
+  {
+   "check": "N-B9b the caller has nothing unread",
+   "ok": true
+  },
+  {
+   "check": "N-B9c the foreign notification is still unread",
+   "ok": true
+  },
+  {
+   "check": "N-B10 marking all read twice is idempotent",
+   "ok": true
+  },
+  {
+   "check": "N-B11 unauthenticated list is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B12 unauthenticated count is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B13 unauthenticated mark read is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B14 unauthenticated mark all read is refused",
+   "ok": true
+  },
+  {
+   "check": "N-C1 an operator reply produces exactly one notification",
+   "ok": true
+  },
+  {
+   "check": "N-C2 the reply notification targets the inquiry",
+   "ok": true
+  },
+  {
+   "check": "N-C3 the reply notification is unread and summary only",
+   "ok": true
+  },
+  {
+   "check": "N-C3b the reply enqueued an email delivery",
+   "ok": true
+  },
+  {
+   "check": "N-C4 a retried operator reply does not duplicate the notification",
+   "ok": true
+  },
+  {
+   "check": "N-C4b the retry did not insert a second reply",
+   "ok": true
+  },
+  {
+   "check": "N-C5 the email delivery is recorded as failed",
+   "ok": true
+  },
+  {
+   "check": "N-C5b a failed email delivery leaves the notification intact",
+   "ok": true
+  },
+  {
+   "check": "N-C5c a failed email delivery does not mark the notification read",
+   "ok": true
+  },
+  {
+   "check": "N-C6 a canonical grant produces exactly one credit_grant notification",
+   "ok": true
+  },
+  {
+   "check": "N-C7 the grant notification states the quantity",
+   "ok": true
+  },
+  {
+   "check": "N-C8 a positive adjustment, a negative adjustment and an expiry do not notify",
+   "ok": true
+  },
+  {
+   "check": "N-C9 a signup bonus does not notify",
+   "ok": true
+  },
+  {
+   "check": "N-C10 an operator grant notifies through the same producer",
+   "ok": true
+  },
+  {
+   "check": "N-D1 the daily run reports the expiries it created",
+   "ok": true
+  },
+  {
+   "check": "N-D2 D-30 / D-14 / D-7 / D-3 each produced exactly one notification",
+   "ok": true
+  },
+  {
+   "check": "N-D3 the D-7 group summed the two grants expiring that day",
+   "ok": true
+  },
+  {
+   "check": "N-D4 a non-threshold date produced nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D5 the expiry notification carries the quantity and the date",
+   "ok": true
+  },
+  {
+   "check": "N-D6 the low balance member got exactly one reminder",
+   "ok": true
+  },
+  {
+   "check": "N-D7 the reminder states the current balance",
+   "ok": true
+  },
+  {
+   "check": "N-D8 a zero balance member is not nagged",
+   "ok": true
+  },
+  {
+   "check": "N-D9 a repeated scheduler run creates nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D10 the reminder is at most once a day",
+   "ok": true
+  },
+  {
+   "check": "N-D11 the expiry notifications were not duplicated",
+   "ok": true
+  },
+  {
+   "check": "N-D12 a fully consumed grant expires without a notification",
    "ok": true
   }
  ],

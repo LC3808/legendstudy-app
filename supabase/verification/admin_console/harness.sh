@@ -152,5 +152,16 @@ else
   echo "BEHAVIOR_P0B=FAIL"
   exit 1
 fi
+echo "=== behavior suite (notification center) ==="
+if sudo -n -u postgres psql -q -v ON_ERROR_STOP=1 -d "$DB" \
+     -f supabase/verification/admin_console/behavior_notifications.sql > /tmp/admin_behavior_notifications.log 2>&1 \
+   && grep -q "NOTIFICATION_CENTER_CHECKS total=[0-9]* failed=0" /tmp/admin_behavior_notifications.log; then
+  grep -E "NOTIFICATION_CENTER_CHECKS" /tmp/admin_behavior_notifications.log | sed 's/^/  /'
+  echo "BEHAVIOR_NOTIFICATIONS=PASS"
+else
+  grep -E "NOTIFICATION_CENTER_CHECKS|CHECK FAILED|NOTIFICATION FAILED|ERROR" /tmp/admin_behavior_notifications.log | tail -20 | sed 's/^/  /'
+  echo "BEHAVIOR_NOTIFICATIONS=FAIL"
+  exit 1
+fi
 python3 supabase/verification/admin_console/collect.py "$DB"
 exit 0
