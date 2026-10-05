@@ -46,6 +46,13 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
     }
   }
 
+  String _providerLabel(String provider) => switch (provider) {
+    'google' => 'Google',
+    'apple' => 'Apple',
+    'kakao' => 'Kakao',
+    _ => provider,
+  };
+
   Future<void> _logout() async {
     final logout = ref.read(localLogoutProvider);
     if (_busy || logout == null) return;
@@ -77,15 +84,33 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
     });
     try {
       if (operation == 'cancel') {
-        final reauth = ref.read(accountEmailReauthenticationProvider);
-        if (reauth != null) {
-          final password = _password.text;
-          _password.clear();
-          await reauth(password);
-          if (!mounted ||
-              ref.read(authStateProvider).value?.userId != ownerAtStart) {
-            return;
-          }
+        // Pick the reauthentication path from the verified sign-in provider, not from
+        // any user-editable field. A fresh same-owner challenge is required to cancel.
+        final provider = ref.read(accountPrimaryProviderProvider);
+        Future<void>? reauth;
+        switch (provider) {
+          case 'email':
+            final email = ref.read(accountEmailReauthenticationProvider);
+            if (email != null) {
+              final password = _password.text;
+              _password.clear();
+              reauth = email(password);
+            }
+          case 'google':
+            reauth = ref.read(accountGoogleReauthenticationProvider)?.call();
+          case 'apple':
+            reauth = ref.read(accountAppleReauthenticationProvider)?.call();
+          case 'kakao':
+            reauth = ref.read(accountKakaoReauthenticationProvider)?.call();
+        }
+        if (reauth == null) {
+          setState(() => _error = '이 계정의 재인증 방식을 사용할 수 없어요.');
+          return;
+        }
+        await reauth;
+        if (!mounted ||
+            ref.read(authStateProvider).value?.userId != ownerAtStart) {
+          return;
         }
       }
       final status = await (switch (operation) {
@@ -132,6 +157,7 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
       _cleanupPending = false;
     }
     final signedIn = owner != null;
+    final provider = ref.watch(accountPrimaryProviderProvider);
     final available =
         signedIn && ref.watch(accountDeletionServiceProvider) != null;
     if (available && owner != _loadedOwner && !_busy) {
@@ -170,7 +196,8 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
         ],
         if (available && pending) ...[
           const Text('예정 시각 전 본인 재인증 후에만 명시적으로 취소할 수 있어요.'),
-          if (ref.watch(accountEmailReauthenticationProvider) != null)
+          if (provider == 'email' &&
+              ref.watch(accountEmailReauthenticationProvider) != null)
             TextField(
               controller: _password,
               obscureText: true,
@@ -178,7 +205,12 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
               autocorrect: false,
               decoration: const InputDecoration(labelText: '이메일 계정 비밀번호'),
             ),
-          const Text('소셜 계정의 재인증은 아직 지원하지 않아요. 로그인만으로 탈퇴가 취소되지는 않습니다.'),
+          if (provider == 'google' ||
+              provider == 'apple' ||
+              provider == 'kakao')
+            Text(
+              '탈퇴를 취소하려면 ${_providerLabel(provider!)} 계정으로 다시 로그인해 본인 확인을 완료해요. 로그인만으로 탈퇴가 취소되지는 않습니다.',
+            ),
           OutlinedButton(
             onPressed: _busy ? null : () => _run('cancel'),
             child: const Text('탈퇴 취소'),

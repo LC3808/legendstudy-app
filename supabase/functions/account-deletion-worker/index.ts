@@ -1,7 +1,12 @@
 // Candidate deployment only. No secrets/default-enabled runtime in this repository.
 import { createPorts } from "./server.ts";
 import { createHttp } from "./http.ts";
-import { createAuthBoundaries, emailChallenge, oauthChallenge } from "./auth-boundaries.ts";
+import {
+  createAuthBoundaries,
+  emailChallenge,
+  kakaoSessionChallenge,
+  oauthChallenge,
+} from "./auth-boundaries.ts";
 import { createAppleProvider, type StoredProviderMaterial } from "./apple-provider.ts";
 import { exchangeAppleAuthorizationCode } from "./apple-token-exchange.ts";
 import type { AppleSigningConfig } from "./apple-client-secret.ts";
@@ -108,6 +113,9 @@ function configure() {
     challengeOauth: oauthChallenge(
       url,
       publicKey,
+      Deno.env.get("ACCOUNT_SOCIAL_REAUTH_ENABLED") === "true",
+    ),
+    challengeKakao: kakaoSessionChallenge(
       Deno.env.get("ACCOUNT_SOCIAL_REAUTH_ENABLED") === "true",
     ),
     captureAppleRevocation: async (user, code) => {

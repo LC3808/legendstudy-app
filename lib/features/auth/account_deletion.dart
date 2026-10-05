@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
 import '../../core/supabase/supabase_providers.dart';
+import 'auth_oauth.dart';
 import 'native_auth.dart';
 
 const accountDeletionFunction = 'delete-account';
@@ -197,3 +200,62 @@ final accountAppleReauthenticationProvider =
         'apple',
       );
     });
+
+/// Kakao has no native id_token (browser/PKCE only). The smallest reauth path reuses
+/// the existing Kakao OAuth sign-in: it produces a FRESH Supabase session for the same
+/// owner, which the server attests from a recent authentication. Nothing new is built.
+final accountKakaoReauthenticationProvider =
+    Provider<Future<void> Function()?>((ref) {
+      final client = ref.watch(supabaseClientProvider);
+      final oauth = ref.watch(oauthServiceProvider);
+      if (client == null || oauth == null) return null;
+      return () async {
+        final owner = client.auth.currentUser?.id;
+        if (owner == null) throw const AccountDeletionException('reauth_required');
+        final before = client.auth.currentSession?.accessToken;
+        final completer = Completer<void>();
+        final sub = client.auth.onAuthStateChange.listen((data) {
+          final session = data.session;
+          if (!completer.isCompleted &&
+              session != null &&
+              session.user.id == owner &&
+              session.accessToken != before) {
+            completer.complete();
+          }
+        });
+        try {
+          await oauth.startSignIn(OAuthProvider.kakao);
+          await completer.future.timeout(const Duration(seconds: 120));
+        } on TimeoutException {
+          throw const AccountDeletionException('reauth_required');
+        } finally {
+          await sub.cancel();
+        }
+        final response = await client.functions
+            .invoke(
+              'account-deletion-worker/reauth',
+              body: {'provider': 'kakao'},
+            )
+            .timeout(const Duration(seconds: 20));
+        if (response.status != 200 ||
+            response.data is! Map ||
+            response.data['state'] != 'REAUTHENTICATED') {
+          throw const AccountDeletionException('reauth_required');
+        }
+      };
+    });
+
+/// Verified sign-in provider from server-set Auth metadata (never user-editable).
+/// Used to choose the correct reauthentication path at deletion cancellation.
+final accountPrimaryProviderProvider = Provider<String?>((ref) {
+  final client = ref.watch(supabaseClientProvider);
+  final user = client?.auth.currentUser;
+  if (user == null) return null;
+  final provider = user.appMetadata['provider'];
+  if (provider is String && provider.isNotEmpty) return provider;
+  final identities = user.identities;
+  if (identities != null && identities.isNotEmpty) {
+    return identities.first.provider;
+  }
+  return null;
+});

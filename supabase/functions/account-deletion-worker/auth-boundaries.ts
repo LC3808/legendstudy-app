@@ -14,6 +14,8 @@ export type AuthBoundaries = {
   ): Promise<boolean>;
   /** Best-effort Apple revoke-material capture from a fresh authorization code. */
   captureAppleRevocation?(user: VerifiedUser, authorizationCode: string): Promise<void>;
+  /** Kakao (browser/PKCE, no native id_token): attest from a recent same-owner session. */
+  challengeKakao?(user: VerifiedUser, claims: Record<string, unknown>): boolean;
   hookSecret?: Uint8Array;
   identityKeys: ReadonlyMap<string, Uint8Array>;
   now?: () => number;
@@ -144,10 +146,7 @@ export function createAuthBoundaries(p: AuthBoundaries) {
           input.password.length > 1024
         ) throw Error();
         challenged = await p.challengeEmail(user, input.password);
-      } else if (
-        input.provider === "google" || input.provider === "apple" ||
-        input.provider === "kakao"
-      ) {
+      } else if (input.provider === "google" || input.provider === "apple") {
         if (
           !p.challengeOauth ||
           typeof input.id_token !== "string" || input.id_token.length < 1 ||
@@ -173,6 +172,14 @@ export function createAuthBoundaries(p: AuthBoundaries) {
             await p.captureAppleRevocation(user, input.authorization_code);
           } catch { /* provider revoke stays best-effort; attest still proceeds */ }
         }
+      } else if (input.provider === "kakao") {
+        // Kakao has no native id_token. The client completes a fresh Kakao OAuth sign-in
+        // (same owner, new session); we attest from a recent authentication in the caller's
+        // own verified session claims (amr/auth_time, never access-token iat).
+        if (!p.challengeKakao || Object.keys(input).join(",") !== "provider") {
+          throw Error();
+        }
+        challenged = p.challengeKakao(user, claims);
       } else {
         throw Error();
       }
@@ -270,5 +277,43 @@ export function oauthChallenge(
       signal: AbortSignal.timeout(10000),
     });
     return logout.ok;
+  };
+}
+
+/** True when the verified session shows an interactive authentication within the window.
+ * Uses `amr[].timestamp` (preferred) or `auth_time` — both reflect an actual sign-in and,
+ * unlike access-token `iat`, do NOT advance on a silent token refresh. Fail-closed when no
+ * authentication timestamp is present. */
+export function recentAuthentication(
+  claims: Record<string, unknown>,
+  nowSeconds: number,
+  maxAgeSeconds: number,
+): boolean {
+  const amr = Array.isArray(claims?.amr) ? claims.amr : [];
+  const stamps = amr
+    .map((entry) =>
+      entry && typeof (entry as { timestamp?: unknown }).timestamp === "number"
+        ? (entry as { timestamp: number }).timestamp
+        : 0
+    )
+    .filter((t) => t > 0);
+  const authTime = typeof claims?.auth_time === "number" ? claims.auth_time as number : 0;
+  const latest = Math.max(0, ...stamps, authTime);
+  if (!latest) return false;
+  return latest <= nowSeconds + 60 && nowSeconds - latest <= maxAgeSeconds;
+}
+
+/** Kakao reauth adapter, disabled until Owner enables social reauth. Requires a linked
+ * Kakao identity and a recent same-owner authentication. No provider HTTP call: the fresh
+ * Kakao OAuth already produced the verified session the boundary checked. */
+export function kakaoSessionChallenge(
+  enabled: boolean,
+  maxAgeSeconds = 300,
+  now: () => number = () => Date.now(),
+) {
+  return (user: VerifiedUser, claims: Record<string, unknown>): boolean => {
+    if (!enabled) return false;
+    if (!(user.identities ?? []).some((i) => i.provider === "kakao")) return false;
+    return recentAuthentication(claims, Math.floor(now() / 1000), maxAgeSeconds);
   };
 }

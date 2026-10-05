@@ -1,7 +1,7 @@
 import { appleClientSecret, type AppleSigningConfig } from "./apple-client-secret.ts";
 import { exchangeAppleAuthorizationCode } from "./apple-token-exchange.ts";
 import { createAppleProvider } from "./apple-provider.ts";
-import { oauthChallenge } from "./auth-boundaries.ts";
+import { kakaoSessionChallenge, oauthChallenge, recentAuthentication } from "./auth-boundaries.ts";
 import type { Job } from "./worker.ts";
 
 function check(value: boolean, message = "assertion failed") {
@@ -138,4 +138,31 @@ Deno.test("oauthChallenge: disabled / unlinked provider / wrong owner deny; fres
   } finally {
     globalThis.fetch = old;
   }
+});
+
+Deno.test("recentAuthentication uses amr/auth_time, not iat, and fails closed", () => {
+  const now = 1_000_000;
+  // amr timestamp within the window
+  check(recentAuthentication({ amr: [{ method: "oauth", timestamp: now - 100 }] }, now, 300));
+  // amr too old
+  check(!recentAuthentication({ amr: [{ method: "oauth", timestamp: now - 400 }] }, now, 300));
+  // auth_time fallback within window
+  check(recentAuthentication({ auth_time: now - 10 }, now, 300));
+  // iat alone must NOT satisfy freshness (silent refresh advances iat, not amr/auth_time)
+  check(!recentAuthentication({ iat: now - 1 }, now, 300));
+  // nothing present -> fail closed
+  check(!recentAuthentication({}, now, 300));
+});
+
+Deno.test("kakaoSessionChallenge: disabled / no kakao identity / stale deny; fresh kakao accepts", () => {
+  const nowMs = 1_000_000_000;
+  const now = () => nowMs;
+  const kakaoUser = { id: "o1", identities: [{ provider: "kakao", identity_data: { sub: "k1" } }] };
+  const nonKakao = { id: "o1", identities: [{ provider: "google" }] };
+  const fresh = { amr: [{ method: "oauth", timestamp: Math.floor(nowMs / 1000) - 30 }] };
+  const stale = { amr: [{ method: "oauth", timestamp: Math.floor(nowMs / 1000) - 3600 }] };
+  check(!kakaoSessionChallenge(false, 300, now)(kakaoUser, fresh));
+  check(!kakaoSessionChallenge(true, 300, now)(nonKakao, fresh));
+  check(!kakaoSessionChallenge(true, 300, now)(kakaoUser, stale));
+  check(kakaoSessionChallenge(true, 300, now)(kakaoUser, fresh));
 });
