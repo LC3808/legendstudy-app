@@ -5,6 +5,15 @@ export type AuthBoundaries = {
   rpc(name: string, args: Record<string, unknown>): Promise<unknown>;
   verify(token: string): Promise<VerifiedUser>;
   challengeEmail(user: VerifiedUser, password: string): Promise<boolean>;
+  /** Fresh social sign-in attestation (Google/Apple/Kakao). Optional until wired. */
+  challengeOauth?(
+    user: VerifiedUser,
+    provider: string,
+    idToken: string,
+    nonce?: string,
+  ): Promise<boolean>;
+  /** Best-effort Apple revoke-material capture from a fresh authorization code. */
+  captureAppleRevocation?(user: VerifiedUser, authorizationCode: string): Promise<void>;
   hookSecret?: Uint8Array;
   identityKeys: ReadonlyMap<string, Uint8Array>;
   now?: () => number;
@@ -125,16 +134,51 @@ export function createAuthBoundaries(p: AuthBoundaries) {
         throw Error();
       }
       const input = JSON.parse(text);
-      if (
-        !input || Object.keys(input).sort().join(",") !== "password,provider" ||
-        input.provider !== "email" ||
-        typeof input.password !== "string" || input.password.length < 1 ||
-        input.password.length > 1024
-      ) throw Error();
+      if (!input || typeof input.provider !== "string") throw Error();
       const started = (p.now ?? Date.now)();
-      if (!await p.challengeEmail(user, input.password)) throw Error();
+      let challenged = false;
+      if (input.provider === "email") {
+        if (
+          Object.keys(input).sort().join(",") !== "password,provider" ||
+          typeof input.password !== "string" || input.password.length < 1 ||
+          input.password.length > 1024
+        ) throw Error();
+        challenged = await p.challengeEmail(user, input.password);
+      } else if (
+        input.provider === "google" || input.provider === "apple" ||
+        input.provider === "kakao"
+      ) {
+        if (
+          !p.challengeOauth ||
+          typeof input.id_token !== "string" || input.id_token.length < 1 ||
+          input.id_token.length > 8192 ||
+          (input.nonce !== undefined && typeof input.nonce !== "string") ||
+          (input.authorization_code !== undefined &&
+            typeof input.authorization_code !== "string")
+        ) throw Error();
+        challenged = await p.challengeOauth(
+          user,
+          input.provider,
+          input.id_token,
+          typeof input.nonce === "string" ? input.nonce : undefined,
+        );
+        // Apple: capture revoke material from the fresh authorization code. Best-effort —
+        // a capture failure never blocks reauth, and privacy erasure never depends on it.
+        if (
+          challenged && input.provider === "apple" &&
+          typeof input.authorization_code === "string" &&
+          input.authorization_code && p.captureAppleRevocation
+        ) {
+          try {
+            await p.captureAppleRevocation(user, input.authorization_code);
+          } catch { /* provider revoke stays best-effort; attest still proceeds */ }
+        }
+      } else {
+        throw Error();
+      }
+      if (!challenged) throw Error();
       if ((p.now ?? Date.now)() - started > 60000) throw Error();
-      // No caller-selected subject/session or admin cancellation. A new password challenge is required each time.
+      // No caller-selected subject/session or admin cancellation. A fresh challenge is required each time.
       await p.rpc("account_reauth_attest", {
         p_subject: user.id,
         p_session: claims.session_id,
@@ -180,5 +224,51 @@ export function emailChallenge(
     });
     return logout.ok && fresh.user?.id === user.id &&
       typeof fresh.user?.email_confirmed_at === "string";
+  };
+}
+
+/** Real social adapter (Google/Apple/Kakao), disabled until Owner verifies provider
+ * sign-in configuration. Mirrors emailChallenge: the client submits a FRESH provider
+ * id_token it just obtained interactively; the server re-verifies it through Supabase's
+ * id_token grant, confirms it resolves to the SAME owner, and immediately discards the
+ * temporary session. The original caller session stays the attestation target. Freshness
+ * is proven by server-side re-verification of a provider credential, not by access-token
+ * iat. The provider must already be one of the user's linked identities. */
+export function oauthChallenge(
+  url: string,
+  publicKey: string,
+  enabled: boolean,
+) {
+  return async (
+    user: VerifiedUser,
+    provider: string,
+    idToken: string,
+    nonce?: string,
+  ): Promise<boolean> => {
+    if (!enabled) return false;
+    if (!["google", "apple", "kakao"].includes(provider)) return false;
+    // The claimed provider must be a verified identity of this owner.
+    if (!(user.identities ?? []).some((i) => i.provider === provider)) return false;
+    const response = await fetch(url + "/auth/v1/token?grant_type=id_token", {
+      method: "POST",
+      headers: { apikey: publicKey, "content-type": "application/json" },
+      body: JSON.stringify({ provider, id_token: idToken, ...(nonce ? { nonce } : {}) }),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!response.ok) return false;
+    const fresh = await response.json();
+    if (typeof fresh.access_token !== "string" || fresh.user?.id !== user.id) {
+      return false;
+    }
+    // scope=local avoids revoking the caller's unrelated sessions.
+    const logout = await fetch(url + "/auth/v1/logout?scope=local", {
+      method: "POST",
+      headers: {
+        apikey: publicKey,
+        authorization: "Bearer " + fresh.access_token,
+      },
+      signal: AbortSignal.timeout(10000),
+    });
+    return logout.ok;
   };
 }

@@ -1,7 +1,11 @@
 // Candidate deployment only. No secrets/default-enabled runtime in this repository.
 import { createPorts } from "./server.ts";
 import { createHttp } from "./http.ts";
-import { createAuthBoundaries, emailChallenge } from "./auth-boundaries.ts";
+import { createAuthBoundaries, emailChallenge, oauthChallenge } from "./auth-boundaries.ts";
+import { createAppleProvider, type StoredProviderMaterial } from "./apple-provider.ts";
+import { exchangeAppleAuthorizationCode } from "./apple-token-exchange.ts";
+import type { AppleSigningConfig } from "./apple-client-secret.ts";
+import type { Ports } from "./worker.ts";
 const env = (key: string) => {
   const value = Deno.env.get(key);
   if (!value) throw Error("ACTIVATION_GATE");
@@ -42,6 +46,25 @@ function configure() {
   };
   const checkpoint = env("ACCOUNT_RESTORE_CHECKPOINT_URL"),
     notification = env("ACCOUNT_NOTIFICATION_URL");
+  // Apple revoke signing material (Owner secrets). Absent -> provider stays unknown/false
+  // and privacy erasure is never blocked.
+  const appleP8 = Deno.env.get("APPLE_SIGNIN_KEY_P8"),
+    appleKeyId = Deno.env.get("APPLE_SIGNIN_KEY_ID"),
+    appleTeamId = Deno.env.get("APPLE_TEAM_ID"),
+    appleClientId = Deno.env.get("APPLE_SIGNIN_CLIENT_ID");
+  const appleSigning: AppleSigningConfig | null =
+    appleP8 && appleKeyId && appleTeamId && appleClientId
+      ? { privateKeyPem: appleP8, keyId: appleKeyId, teamId: appleTeamId, clientId: appleClientId }
+      : null;
+  let portsRef: Ports | null = null;
+  const provider = createAppleProvider({
+    signing: appleSigning,
+    readMaterial: async (job) =>
+      (await portsRef!.rpc("account_provider_material", {
+        p_id: job.request_id,
+        p_token: job.lease_token,
+      })) as StoredProviderMaterial,
+  });
   const p = createPorts({
     url,
     publicKey,
@@ -53,8 +76,9 @@ function configure() {
     financeReviewed: env("ACCOUNT_FINANCE_REVIEWED") === "true",
     checkpoint: (m) => webhook(checkpoint, m),
     notification: (e) => webhook(notification, e),
-    provider: async () => false,
+    provider,
   });
+  portsRef = p;
   const verify = async (jwt: string) => {
     const response = await fetch(url + "/auth/v1/user", {
       headers: { apikey: publicKey, authorization: "Bearer " + jwt },
@@ -81,6 +105,21 @@ function configure() {
       publicKey,
       Deno.env.get("ACCOUNT_EMAIL_REAUTH_ENABLED") === "true",
     ),
+    challengeOauth: oauthChallenge(
+      url,
+      publicKey,
+      Deno.env.get("ACCOUNT_SOCIAL_REAUTH_ENABLED") === "true",
+    ),
+    captureAppleRevocation: async (user, code) => {
+      if (!appleSigning) return;
+      const exchanged = await exchangeAppleAuthorizationCode(appleSigning, code);
+      if (!exchanged) return;
+      await p.rpc("account_store_apple_revocation", {
+        p_subject: user.id,
+        p_token: exchanged.refreshToken,
+        p_token_type: "refresh_token",
+      });
+    },
     hookSecret,
     identityKeys: new Map([[
       env("ACCOUNT_RESTORE_KEY_VERSION"),

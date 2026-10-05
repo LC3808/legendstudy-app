@@ -17,9 +17,14 @@ String _rawNonce() => base64UrlEncode(
 
 /// Ephemeral exchange material. Never expose through UI state or logging.
 class NativeIdentityToken {
-  const NativeIdentityToken(this.token, this.nonce);
+  const NativeIdentityToken(this.token, this.nonce, {this.authorizationCode});
   final String token;
   final String? nonce;
+
+  /// Apple only: one-time authorization code. The server exchanges it for a
+  /// refresh token used to revoke the Apple grant at account deletion. Never
+  /// used for sign-in and never persisted on the device.
+  final String? authorizationCode;
 }
 
 class NativeAuthCancelled implements Exception {
@@ -120,7 +125,11 @@ class DeviceIdentityProvider implements NativeIdentityProvider {
         );
       }
       appleDiagnostics.report(stage, complete: true);
-      return NativeIdentityToken(token, nonce);
+      return NativeIdentityToken(
+        token,
+        nonce,
+        authorizationCode: credential.authorizationCode,
+      );
     } on SignInWithAppleAuthorizationException catch (error) {
       appleDiagnostics.report(stage, error: error);
       if (error.code == AuthorizationErrorCode.canceled) {

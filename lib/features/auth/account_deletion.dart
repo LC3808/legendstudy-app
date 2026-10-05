@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/config/app_config.dart';
 import '../../core/supabase/supabase_providers.dart';
+import 'native_auth.dart';
 
 const accountDeletionFunction = 'delete-account';
 
@@ -134,4 +135,65 @@ final accountEmailReauthenticationProvider =
           throw const AccountDeletionException('reauth_required');
         }
       };
+    });
+
+/// Fresh social reauthentication. The native SDK yields a fresh provider id_token
+/// (and, for Apple, a one-time authorization code) WITHOUT replacing the current
+/// Supabase session; the server re-verifies it against the same owner and attests the
+/// original session. Apple additionally forwards the authorization code so the server
+/// can capture revoke material. Kakao is intentionally absent: it has no native
+/// id_token path (browser/PKCE only), so its deletion reauth remains an Owner/config
+/// follow-up rather than a faked native flow.
+Future<void> _socialReauthenticate(
+  SupabaseClient client,
+  Future<NativeIdentityToken> credentialFuture,
+  String provider,
+) async {
+  final NativeIdentityToken id;
+  try {
+    id = await credentialFuture;
+  } on NativeAuthCancelled {
+    throw const AccountDeletionException('reauth_cancelled');
+  }
+  final response = await client.functions
+      .invoke(
+        'account-deletion-worker/reauth',
+        body: {
+          'provider': provider,
+          'id_token': id.token,
+          if (id.nonce != null) 'nonce': id.nonce,
+          if (id.authorizationCode != null)
+            'authorization_code': id.authorizationCode,
+        },
+      )
+      .timeout(const Duration(seconds: 20));
+  if (response.status != 200 ||
+      response.data is! Map ||
+      response.data['state'] != 'REAUTHENTICATED') {
+    throw const AccountDeletionException('reauth_required');
+  }
+}
+
+final accountGoogleReauthenticationProvider =
+    Provider<Future<void> Function()?>((ref) {
+      final client = ref.watch(supabaseClientProvider);
+      if (client == null) return null;
+      final config = ref.watch(appConfigProvider);
+      return () => _socialReauthenticate(
+        client,
+        DeviceIdentityProvider(config).google(),
+        'google',
+      );
+    });
+
+final accountAppleReauthenticationProvider =
+    Provider<Future<void> Function()?>((ref) {
+      final client = ref.watch(supabaseClientProvider);
+      if (client == null) return null;
+      final config = ref.watch(appConfigProvider);
+      return () => _socialReauthenticate(
+        client,
+        DeviceIdentityProvider(config).apple(),
+        'apple',
+      );
     });
