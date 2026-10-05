@@ -387,10 +387,15 @@ grant execute on function public.admin_support_metrics() to authenticated;
 -- Same claim/retry shape as claim_feedback_notifications. Reachable by the
 -- service role only; no browser role can drain or read the queue.
 create function public.claim_inquiry_notifications(p_batch_size integer default 10)
-returns table(notification_id uuid, inquiry_id uuid, reply_id uuid, member_id uuid, claim_token uuid, attempt_count integer)
+returns table(notification_id uuid, inquiry_id uuid, reply_id uuid, member_id uuid,
+ member_email text, member_display_name text, category text, title text, body text,
+ claim_token uuid, attempt_count integer)
 language plpgsql security definer set search_path='' as $$
 declare bounded integer:=least(greatest(coalesce(p_batch_size,1),1),10);
 begin
+ -- The delivery payload is assembled here, in one place, so the worker never
+ -- needs a second read of the inquiry tables. Only the operator's reply body is
+ -- sent, never the member's own submission text.
  return query
  with candidates as (
   select n.id from public.inquiry_notifications n
@@ -401,8 +406,14 @@ begin
   update public.inquiry_notifications n set status='processing',claimed_at=clock_timestamp(),
    claim_token=gen_random_uuid(),attempt_count=n.attempt_count+1
   where n.id in (select id from candidates) returning n.*)
- select c.id,c.inquiry_id,c.reply_id,i.user_id,c.claim_token,c.attempt_count
-  from claimed c join public.inquiries i on i.id=c.inquiry_id;
+ select c.id,c.inquiry_id,c.reply_id,i.user_id,
+  nullif(u.email,''),nullif(pr.display_name,''),i.category,i.title,r.body,
+  c.claim_token,c.attempt_count
+  from claimed c
+  join public.inquiries i on i.id=c.inquiry_id
+  join public.inquiry_replies r on r.id=c.reply_id
+  left join public.profiles pr on pr.id=i.user_id
+  left join auth.users u on u.id=i.user_id;
 end$$;
 revoke all on function public.claim_inquiry_notifications(integer) from public,anon,authenticated,service_role;
 grant execute on function public.claim_inquiry_notifications(integer) to service_role;
