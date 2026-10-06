@@ -24,7 +24,10 @@
       "width": 330,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/gachon.png"
     },
     {
       "uid": "c5850ef5-616e-4ebb-aeac-3f6a3e7c4d0a",
@@ -38,7 +41,10 @@
       "width": 844,
       "height": 196,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/catholic.png"
     },
     {
       "uid": "d3375d8b-2ce3-4ff8-a95c-6d8127b149a7",
@@ -52,7 +58,10 @@
       "width": 1287,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kangwon.png"
     },
     {
       "uid": "77fe30b2-f693-4612-a6d3-50e8be5c8f6c",
@@ -66,7 +75,10 @@
       "width": 384,
       "height": 112,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/konkuk.png"
     },
     {
       "uid": "295f71b3-12da-4122-b743-f0c2c8bebe44",
@@ -80,7 +92,10 @@
       "width": 370,
       "height": 110,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kyonggi.png"
     },
     {
       "uid": "72bc4be0-6e72-4c72-adc5-8ee54279f3bd",
@@ -94,7 +109,10 @@
       "width": 426,
       "height": 134,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kyungpook.png"
     },
     {
       "uid": "0397d2cf-0de1-40f0-8952-31d884065264",
@@ -108,7 +126,10 @@
       "width": 440,
       "height": 104,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/gnu.png"
     },
     {
       "uid": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
@@ -122,7 +143,10 @@
       "width": 355,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kyunghee.png"
     },
     {
       "uid": "449fccf3-762c-498a-90dc-21ad2f6ac4b7",
@@ -136,7 +160,10 @@
       "width": 342,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/keimyung.png"
     },
     {
       "uid": "a93ec9df-2096-4550-801f-07a25b9a437b",
@@ -150,7 +177,10 @@
       "width": 764,
       "height": 208,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/korea.png"
     },
     {
       "uid": "3d35489f-2e90-47b8-af1b-48928ee2269a",
@@ -164,7 +194,10 @@
       "width": 350,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/kwangwoon.png"
     },
     {
       "uid": "0551756e-a642-4a55-860a-305adc898cc5",
@@ -178,7 +211,10 @@
       "width": 277,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/gist.png"
     },
     {
       "uid": "88aa2231-6a1c-47ee-a063-b168cdaf85ad",
@@ -192,7 +228,10 @@
       "width": 220,
       "height": 220,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kookmin.png"
     },
     {
       "uid": "bdae801b-e46e-449f-9211-0a440f8eb78d",
@@ -206,7 +245,10 @@
       "width": 224,
       "height": 176,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/dankook.png"
     },
     {
       "uid": "5b1686f3-1e1f-47d4-8bf8-bdbf94d66b01",
@@ -220,7 +262,10 @@
       "width": 304,
       "height": 136,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/dgist.png"
     },
     {
       "uid": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
@@ -234,7 +279,10 @@
       "width": 342,
       "height": 106,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/dongguk.png"
     },
     {
       "uid": "48c9bab6-a34e-47b0-b7c1-cd529876ede1",
@@ -248,7 +296,10 @@
       "width": 542,
       "height": 140,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/donga.png"
     },
     {
       "uid": "274c35c9-7135-40e9-97f5-19ce3f572c8b",
@@ -262,7 +313,10 @@
       "width": 248,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/myongji.png"
     },
     {
       "uid": "ab8bee6f-632c-4ef1-bd5f-0ffb74e23c35",
@@ -276,7 +330,10 @@
       "width": 412,
       "height": 102,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/pknu.png"
     },
     {
       "uid": "08303fd3-ec87-4976-a9a9-547a1d52f996",
@@ -290,7 +347,10 @@
       "width": 406,
       "height": 100,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/pusan.png"
     },
     {
       "uid": "816c1cb8-b54d-4f05-ae64-e82abfec0ada",
@@ -304,7 +364,10 @@
       "width": 820,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/sogang.png"
     },
     {
       "uid": "52ec1dd2-b27b-4a5e-9ebb-a85cb8079ff2",
@@ -318,7 +381,10 @@
       "width": 1602,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/seoultech.png"
     },
     {
       "uid": "b5ac5045-b2eb-4c20-a1f0-c36f04e4fab6",
@@ -332,7 +398,10 @@
       "width": 366,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/seoul-national.png"
     },
     {
       "uid": "0598e08a-20d6-4814-9511-6abe22814355",
@@ -346,7 +415,10 @@
       "width": 358,
       "height": 60,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/uos.png"
     },
     {
       "uid": "4acee829-94d4-5f8a-b440-a72e423d439f",
@@ -360,7 +432,10 @@
       "width": 390,
       "height": 94,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/sungkyunkwan.png"
     },
     {
       "uid": "447d2f79-fb0a-4a02-bce6-d214244b683d",
@@ -374,7 +449,10 @@
       "width": 780,
       "height": 188,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/sejong.png"
     },
     {
       "uid": "c4fa65ac-bbc6-5897-b4d8-f12f5a8f222b",
@@ -388,7 +466,10 @@
       "width": 982,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/sookmyung.png"
     },
     {
       "uid": "eff85fe1-992d-4a73-ad22-b34977720380",
@@ -402,7 +483,9 @@
       "width": null,
       "height": null,
       "has_alpha": null,
-      "fallback": "neutral"
+      "fallback": "neutral",
+      "needs_white_chip": false,
+      "status": "fallback"
     },
     {
       "uid": "6ae1fd3f-22da-43f4-a796-1cfe960c5fcb",
@@ -416,7 +499,10 @@
       "width": 785,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/soongsil.png"
     },
     {
       "uid": "25f8c2a3-7a6c-445a-80c5-f62f7b1ca4c6",
@@ -430,7 +516,10 @@
       "width": 436,
       "height": 112,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/ajou.png"
     },
     {
       "uid": "9076637b-d827-5bb6-8e4e-954bd2a05805",
@@ -444,7 +533,10 @@
       "width": 256,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/yonsei.png"
     },
     {
       "uid": "1e9b16de-aea0-40a0-ba9c-cffa6b4d829e",
@@ -458,7 +550,10 @@
       "width": 1329,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/yeungnam.png"
     },
     {
       "uid": "0961d2d2-1f56-4d73-a748-99ffb315091e",
@@ -472,7 +567,10 @@
       "width": 338,
       "height": 58,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/unist.png"
     },
     {
       "uid": "6f05c615-c57c-4ef7-aeaa-271b09f7623e",
@@ -486,7 +584,10 @@
       "width": 360,
       "height": 68,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/ulsan.png"
     },
     {
       "uid": "fdc7e693-15a2-47fc-b080-4f14e9274d95",
@@ -500,7 +601,10 @@
       "width": 260,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/ewha.png"
     },
     {
       "uid": "3d5d162d-5736-4930-91bc-1cfe26876b60",
@@ -514,7 +618,10 @@
       "width": 687,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/incheon.png"
     },
     {
       "uid": "e40f4b8f-8949-4726-a774-2b6f0e6d8939",
@@ -528,7 +635,10 @@
       "width": 300,
       "height": 84,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/inha.png"
     },
     {
       "uid": "f6396984-c0a3-4000-ad01-838bb1ae2ca1",
@@ -542,7 +652,10 @@
       "width": 380,
       "height": 76,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/chonnam.png"
     },
     {
       "uid": "a43bc36c-65ea-4f87-943c-c897c1e15857",
@@ -556,7 +669,10 @@
       "width": 96,
       "height": 96,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/jeonbuk.png"
     },
     {
       "uid": "c53426e9-fd95-455f-8719-65949acfc3a6",
@@ -570,7 +686,10 @@
       "width": 683,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/jeju.png"
     },
     {
       "uid": "7874b743-0325-47b4-8983-b9067e75e468",
@@ -584,7 +703,10 @@
       "width": 338,
       "height": 82,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/chosun.png"
     },
     {
       "uid": "ffad67a6-107f-47b7-a1cb-ab61687ffb9f",
@@ -598,7 +720,10 @@
       "width": 430,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/chungang.png"
     },
     {
       "uid": "8dc048bb-c1cb-4520-80c5-95fdaf216866",
@@ -612,7 +737,10 @@
       "width": 340,
       "height": 108,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/chungnam.png"
     },
     {
       "uid": "6ccec6b3-d2bf-4926-bb46-398211aa6991",
@@ -626,7 +754,10 @@
       "width": 362,
       "height": 98,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/chungbuk.png"
     },
     {
       "uid": "3da83c80-2703-4b08-90bc-4c81c3a86c47",
@@ -640,7 +771,10 @@
       "width": 84,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/postech.png"
     },
     {
       "uid": "ee6a98b1-cc25-4d0f-bb8e-810c5f1838f1",
@@ -654,7 +788,10 @@
       "width": 898,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/kaist.png"
     },
     {
       "uid": "1fd29b0d-1141-4ff0-b1b3-c4f201854476",
@@ -668,7 +805,10 @@
       "width": 114,
       "height": 114,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/hufs.png"
     },
     {
       "uid": "94642ac2-c5e7-4eec-aee6-e97fa3c96bc9",
@@ -682,7 +822,10 @@
       "width": 256,
       "height": 256,
       "has_alpha": false,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": true,
+      "status": "verified",
+      "asset_path": "assets/universities/hallym.png"
     },
     {
       "uid": "1090e1be-174e-5042-abd3-ca929c6e26f8",
@@ -696,7 +839,9 @@
       "width": null,
       "height": null,
       "has_alpha": null,
-      "fallback": "neutral"
+      "fallback": "neutral",
+      "needs_white_chip": false,
+      "status": "fallback"
     },
     {
       "uid": "15f50d54-001d-49b9-836b-a5d9c76b9c0a",
@@ -710,7 +855,11 @@
       "width": 2048,
       "height": 256,
       "has_alpha": true,
-      "fallback": null
+      "fallback": null,
+      "needs_white_chip": false,
+      "status": "verified",
+      "asset_path": "assets/universities/hongik.png"
     }
-  ]
+  ],
+  "render_rule": "작은 원형/사각 타일에 표시할 때 has_alpha=false인 자산은 흰색 배경 칩 위에, has_alpha=true인 자산은 투명 배경 위에 렌더링합니다. 모든 자산은 원본 비율을 유지합니다(BoxFit.contain, stretch 금지). asset이 null이면 중립 이니셜 아바타를 사용합니다."
 }
