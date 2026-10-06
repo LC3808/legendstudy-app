@@ -15,6 +15,7 @@ import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
 import 'package:legendstudy_app/features/study/trends/study_trends.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/features/lab/score_summary.dart';
+import 'package:legendstudy_app/features/lab/lab_coming_soon_page.dart';
 import 'package:legendstudy_app/app/legendstudy_app.dart';
 
 import 'core_ux_test.dart' show ProfileFake;
@@ -110,12 +111,12 @@ void main() {
             pops,
           );
           if (school) {
-            await t.enterText(find.byType(TextField), '테스트');
+            await t.enterText(find.byType(TextField).first, '테스트');
             await t.testTextInput.receiveAction(TextInputAction.search);
             await t.pumpAndSettle();
             expect(
               t.getTopLeft(find.text('검색 결과')).dy,
-              greaterThan(t.getTopLeft(find.byType(TextField)).dy),
+              greaterThan(t.getTopLeft(find.byType(TextField).first).dy),
             );
             expect(
               t.getTopLeft(find.text(schoolB.name)).dy,
@@ -153,7 +154,7 @@ void main() {
     final repo = Saves()..failSchool = true;
     final pops = Pops();
     await mountEditor(t, const SchoolPage(), repo, pops);
-    await t.enterText(find.byType(TextField), '테스트');
+    await t.enterText(find.byType(TextField).first, '테스트');
     await t.testTextInput.receiveAction(TextInputAction.search);
     await t.pumpAndSettle();
     await t.tap(find.text(schoolA.name));
@@ -237,8 +238,8 @@ void main() {
         Pops(),
         schools: Schools()..results = [longSchool],
       );
-      await t.enterText(find.byType(TextField), '테스트');
-      await t.showKeyboard(find.byType(TextField));
+      await t.enterText(find.byType(TextField).first, '테스트');
+      await t.showKeyboard(find.byType(TextField).first);
       await t.testTextInput.receiveAction(TextInputAction.search);
       await t.pumpAndSettle();
       expect(
@@ -340,22 +341,26 @@ void main() {
         UncontrolledProviderScope(container: c, child: const LegendStudyApp()),
       );
       await t.pumpAndSettle();
-      await t.tap(find.text('내신 분석'));
+      // Canonical LAB home: 내신분석/수능·모의고사 LAB are 준비 중 detail pages.
+      await t.tap(find.text('내신분석 LAB'));
       await t.pumpAndSettle();
-      expect(find.byType(SchoolScorePage), findsOneWidget);
-      expect(find.text('모의고사'), findsNothing);
-      expect(find.text('내신 성적 입력과 상세 분석은 아직 지원하지 않아요.'), findsOneWidget);
+      expect(find.byType(LabComingSoonPage), findsOneWidget);
+      expect(find.text('서비스 준비 중'), findsOneWidget);
       router.pop();
       await t.pumpAndSettle();
-      await t.tap(find.text('모의고사 분석'));
+      await t.tap(find.text('수능·모의고사 LAB'));
       await t.pumpAndSettle();
-      expect(find.byType(ScoreOverviewPage), findsOneWidget);
+      expect(find.byType(LabComingSoonPage), findsOneWidget);
+      router.pop();
+      await t.pumpAndSettle();
+      // Legacy score URLs still resolve (routes preserved, reachable from MY).
       router.go('/lab/scores');
       await t.pumpAndSettle();
       expect(router.routeInformationProvider.value.uri.path, '/lab/scores');
-      expect(find.text('내신'), findsNothing);
-      expect(find.text('성적 분석'), findsNothing);
-      expect(find.text('모의고사 분석'), findsOneWidget);
+      expect(find.byType(ScoreOverviewPage), findsOneWidget);
+      router.go('/lab/school-scores');
+      await t.pumpAndSettle();
+      expect(find.byType(SchoolScorePage), findsOneWidget);
       await t.pumpWidget(const SizedBox());
       c.dispose();
     },

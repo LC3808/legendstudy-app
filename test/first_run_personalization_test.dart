@@ -78,7 +78,28 @@ ProviderContainer _container({
     ],
   );
   addTearDown(c.dispose);
+  // Subscribe to the auth StreamProvider immediately so its underlying stream
+  // starts and Stream.value is delivered; otherwise read(authStateProvider.future)
+  // hangs with no listener. Deterministic, not a delay workaround.
+  c.listen(authStateProvider, (_, _) {});
   return c;
+}
+
+// Keep autoDispose providers alive while awaiting their futures so the watched
+// auth StreamProvider is not disposed during loading (repo container pattern).
+Future<List<University>> _search(ProviderContainer c, String q) {
+  c.listen(universitySearchProvider(q), (_, _) {});
+  return c.read(universitySearchProvider(q).future);
+}
+
+Future<List<InterestedUniversity>> _interestedFuture(ProviderContainer c) {
+  c.listen(interestedUniversitiesProvider, (_, _) {});
+  return c.read(interestedUniversitiesProvider.future);
+}
+
+Future<String?> _majorFuture(ProviderContainer c) {
+  c.listen(intendedMajorProvider, (_, _) {});
+  return c.read(intendedMajorProvider.future);
 }
 
 void main() {
@@ -116,7 +137,7 @@ void main() {
     test('search returns empty for blank query / signed out', () async {
       final c = _container(signedIn: true, uni: _FakeUniversityRepo());
       await c.read(authStateProvider.future);
-      expect(await c.read(universitySearchProvider('').future), isEmpty);
+      expect(await _search(c, ''), isEmpty);
     });
 
     test('interested list is empty when signed out', () async {
@@ -127,7 +148,7 @@ void main() {
         ]),
       );
       await c.read(authStateProvider.future);
-      expect(await c.read(interestedUniversitiesProvider.future), isEmpty);
+      expect(await _interestedFuture(c), isEmpty);
     });
 
     test('add respects the 5 cap and skips duplicates', () async {
@@ -137,7 +158,7 @@ void main() {
       final repo = _FakeUniversityRepo(catalog: catalog);
       final c = _container(signedIn: true, uni: repo);
       await c.read(authStateProvider.future);
-      await c.read(interestedUniversitiesProvider.future);
+      await _interestedFuture(c);
       final notifier = c.read(interestedUniversitiesProvider.notifier);
       for (var i = 1; i <= 7; i++) {
         await notifier.add('u$i', source: 'onboarding');
@@ -155,7 +176,7 @@ void main() {
       ]);
       final c = _container(signedIn: true, uni: repo);
       await c.read(authStateProvider.future);
-      await c.read(interestedUniversitiesProvider.future);
+      await _interestedFuture(c);
       final notifier = c.read(interestedUniversitiesProvider.notifier);
       await notifier.add('u1', source: 'onboarding');
       final rowId = c.read(interestedUniversitiesProvider).value!.single.id;
@@ -169,11 +190,11 @@ void main() {
     test('null when signed out; reads value when signed in', () async {
       final out = _container(signedIn: false, major: _FakeMajorRepo('공학'));
       await out.read(authStateProvider.future);
-      expect(await out.read(intendedMajorProvider.future), isNull);
+      expect(await _majorFuture(out), isNull);
 
       final inc = _container(signedIn: true, major: _FakeMajorRepo('공학'));
       await inc.read(authStateProvider.future);
-      expect(await inc.read(intendedMajorProvider.future), '공학');
+      expect(await _majorFuture(inc), '공학');
     });
   });
 

@@ -113,6 +113,10 @@ void main() {
           );
           await preview.capture(tester, name);
           await nativeCapture?.call(name);
+          // The 논술 LAB card sits below the two 준비 중 cards; under 200% text the
+          // secondary web CTA can fall past the fold, so scroll it in before tap.
+          await tester.ensureVisible(find.text('웹에서 이용하기 ↗'));
+          await tester.pumpAndSettle();
           await tester.tap(find.text('웹에서 이용하기 ↗'));
           await tester.pumpAndSettle();
           expect(opened.map((u) => u.toString()), [legendStudyLabUrl]);

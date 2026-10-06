@@ -1,8 +1,8 @@
-/// Shared notification center — app consumer models (`notification-v1`).
-///
-/// The app is a pure consumer: it never produces notifications, never counts
-/// unread locally, and never persists a second copy. The server row (shared
-/// with LAB web) is the single source of truth for read state.
+// Shared notification center — app consumer models (`notification-v1`).
+//
+// The app is a pure consumer: it never produces notifications, never counts
+// unread locally, and never persists a second copy. The server row (shared
+// with LAB web) is the single source of truth for read state.
 
 /// Allowlisted target types the app can navigate to. Any value the server adds
 /// later arrives as [unknown] and is never turned into navigation — the app
@@ -131,8 +131,8 @@ class NotificationFeed {
     final rawItems = json['items'];
     final items = rawItems is List
         ? rawItems
-              .whereType<Map>()
-              .map((e) => UserNotification.fromJson(e.cast<String, dynamic>()))
+              .whereType<Map<String, dynamic>>()
+              .map(UserNotification.fromJson)
               .toList()
         : <UserNotification>[];
     return NotificationFeed(

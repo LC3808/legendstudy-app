@@ -1,10 +1,9 @@
-/// First-run personalization — interested universities.
-///
-/// IMPORTANT semantics: these are **관심 대학 (interest)**, not application
-/// records. They are stored in `student_target_universities` with
-/// `status = 'interested'` and are deliberately distinct from any future
-/// `지원 예정 대학` ('planned') or actual-application model. Nothing here is an
-/// application history entry.
+// First-run personalization — interested universities.
+//
+// IMPORTANT semantics: these are 관심 대학 (interest), not application records.
+// They are stored in `student_target_universities` with `status = 'interested'`
+// and are deliberately distinct from any future `지원 예정 대학` ('planned') or
+// actual-application model. Nothing here is an application history entry.
 
 /// A row from the public `universities` catalog (search result).
 class University {
@@ -40,7 +39,7 @@ class InterestedUniversity {
 
   factory InterestedUniversity.fromJson(Map<String, dynamic> json) {
     final uni = json['universities'];
-    final embedded = uni is Map ? uni.cast<String, dynamic>() : const {};
+    final embedded = uni is Map<String, dynamic> ? uni : const <String, dynamic>{};
     return InterestedUniversity(
       id: json['id'] as String,
       universityId: json['university_id'] as String,

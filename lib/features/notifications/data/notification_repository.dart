@@ -27,7 +27,7 @@ class SupabaseNotificationRepository implements NotificationApi {
     int offset = 0,
     bool unreadOnly = false,
   }) async {
-    final res = await _client.rpc(
+    final res = await _client.rpc<Map<String, dynamic>>(
       'user_notifications_list',
       params: {
         'p_limit': limit,
@@ -35,20 +35,18 @@ class SupabaseNotificationRepository implements NotificationApi {
         'p_unread_only': unreadOnly,
       },
     );
-    if (res is Map) return NotificationFeed.fromJson(res.cast<String, dynamic>());
-    return NotificationFeed.empty;
+    return NotificationFeed.fromJson(res);
   }
 
   @override
   Future<int> unreadCount() async {
-    final res = await _client.rpc('user_notifications_unread_count');
-    if (res is num) return res.toInt();
-    return 0;
+    final res = await _client.rpc<int?>('user_notifications_unread_count');
+    return res ?? 0;
   }
 
   @override
   Future<bool> markRead(String id) async {
-    final res = await _client.rpc(
+    final res = await _client.rpc<bool?>(
       'user_notification_mark_read',
       params: {'p_id': id},
     );
@@ -57,7 +55,7 @@ class SupabaseNotificationRepository implements NotificationApi {
 
   @override
   Future<void> markAllRead() async {
-    await _client.rpc('user_notifications_mark_all_read');
+    await _client.rpc<void>('user_notifications_mark_all_read');
   }
 }
 

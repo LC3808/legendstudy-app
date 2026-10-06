@@ -49,7 +49,7 @@ void main() {
         expect(find.byIcon(Icons.notifications_outlined), findsOneWidget);
         expect(t.widget<Text>(find.text(state.$4)).style!.fontSize, 16);
         expect(find.byType(IconButton), findsNothing);
-        expect(find.byTooltip('알림 센터 준비 중'), findsOneWidget);
+        expect(find.byTooltip('알림'), findsOneWidget);
         expect(find.text('레전드스터디+'), findsNothing);
       },
     );

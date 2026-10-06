@@ -69,6 +69,9 @@ class _MajorChip extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
+    // Cap each chip to the viewport width so a long Korean label under 200%
+    // text scaling wraps inside the chip instead of overflowing the row.
+    final maxWidth = MediaQuery.sizeOf(context).width - 48;
     return Semantics(
       button: true,
       selected: selected,
@@ -76,35 +79,44 @@ class _MajorChip extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(AppTokens.radiusPill),
-          child: Container(
-            constraints: const BoxConstraints(minHeight: 42),
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: selected ? AppTokens.primary : AppTokens.surface,
-              borderRadius: BorderRadius.circular(AppTokens.radiusPill),
-              border: Border.all(
-                color: selected ? AppTokens.primary : AppTokens.cardBorder,
-                width: 1.5,
+          borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxWidth > 0 ? maxWidth : 280),
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 42),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
               ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (selected) ...[
-                  const Icon(Icons.check, size: 16, color: Colors.white),
-                  const SizedBox(width: 6),
-                ],
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: selected ? Colors.white : AppTokens.textPrimary,
-                  ),
+              decoration: BoxDecoration(
+                color: selected ? AppTokens.primary : AppTokens.surface,
+                borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+                border: Border.all(
+                  color: selected ? AppTokens.primary : AppTokens.cardBorder,
+                  width: 1.5,
                 ),
-              ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (selected) ...[
+                    const Icon(Icons.check, size: 16, color: Colors.white),
+                    const SizedBox(width: 6),
+                  ],
+                  Flexible(
+                    child: Text(
+                      label,
+                      softWrap: true,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: selected ? Colors.white : AppTokens.textPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

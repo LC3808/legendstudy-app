@@ -157,6 +157,28 @@ void main() {
     await t.pumpAndSettle();
   }
 
+  // Cancel requires a fresh same-owner reauthentication (CLOSEOUT-2); mount with
+  // a verified email provider + a succeeding reauth path.
+  Future<void> mountCancellable(WidgetTester t, FakeDeletionService f) async {
+    await t.pumpWidget(
+      ProviderScope(
+        overrides: [
+          accountDeletionServiceProvider.overrideWithValue(f),
+          studyLocalStoreProvider.overrideWithValue(MemoryStore()),
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(const AuthStatus('synthetic-a')),
+          ),
+          accountPrimaryProviderProvider.overrideWith((ref) => 'email'),
+          accountEmailReauthenticationProvider.overrideWith(
+            (ref) => (String _) async {},
+          ),
+        ],
+        child: const MaterialApp(home: Scaffold(body: DeleteAccountPage())),
+      ),
+    );
+    await t.pumpAndSettle();
+  }
+
   testWidgets('request shows pending deadline, never immediate deletion', (
     t,
   ) async {
@@ -177,7 +199,7 @@ void main() {
         'DELETION_PENDING',
         deadline: DateTime.utc(2026, 10, 15),
       );
-    await mount(t, f);
+    await mountCancellable(t, f);
     await t.tap(find.text('탈퇴 취소'));
     await t.pumpAndSettle();
     expect(find.text('탈퇴 요청을 취소했어요.'), findsOneWidget);

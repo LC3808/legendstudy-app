@@ -35,9 +35,7 @@ class SupabaseUniversityRepository implements UniversityRepository {
         .ilike('name', '%$q%')
         .order('name')
         .limit(limit);
-    return rows
-        .map((r) => University.fromJson(r as Map<String, dynamic>))
-        .toList();
+    return rows.map(University.fromJson).toList();
   }
 
   @override
@@ -48,9 +46,7 @@ class SupabaseUniversityRepository implements UniversityRepository {
         .eq('status', 'interested')
         .order('priority', ascending: true, nullsFirst: false)
         .order('created_at');
-    return rows
-        .map((r) => InterestedUniversity.fromJson(r as Map<String, dynamic>))
-        .toList();
+    return rows.map(InterestedUniversity.fromJson).toList();
   }
 
   @override

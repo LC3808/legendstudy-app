@@ -12,7 +12,7 @@ import 'package:legendstudy_app/features/notifications/presentation/notification
 /// In-memory consumer contract used in place of the Supabase-backed RPCs.
 class _FakeApi implements NotificationApi {
   _FakeApi(this._feed, {this.markReadOwner = true, this.throwOnCount = false});
-  NotificationFeed _feed;
+  final NotificationFeed _feed;
   final bool markReadOwner;
   final bool throwOnCount;
   int markReadCalls = 0;
@@ -79,7 +79,26 @@ ProviderContainer _container({
     ],
   );
   addTearDown(c.dispose);
+  // Subscribe to the auth StreamProvider immediately: a StreamProvider only
+  // starts its underlying stream once it has a listener, so without this
+  // `read(authStateProvider.future)` would never receive the Stream.value event
+  // and would hang (then dispose during loading). This is the deterministic
+  // container-test fix — not a timeout/delay workaround.
+  c.listen(authStateProvider, (_, _) {});
   return c;
+}
+
+// Keep an autoDispose provider alive while we await its future, so the watched
+// auth StreamProvider is not disposed during its loading state (deterministic
+// container-test pattern used across the repo).
+Future<int> _unread(ProviderContainer c) {
+  c.listen(unreadNotificationCountProvider, (_, _) {});
+  return c.read(unreadNotificationCountProvider.future);
+}
+
+Future<NotificationFeed> _feedFuture(ProviderContainer c) {
+  c.listen(notificationFeedProvider, (_, _) {});
+  return c.read(notificationFeedProvider.future);
 }
 
 void main() {
@@ -184,7 +203,7 @@ void main() {
     test('signed out returns 0 without calling the backend', () async {
       final c = _container(signedIn: false, api: _FakeApi(_feed([_n('1')])));
       await c.read(authStateProvider.future);
-      expect(await c.read(unreadNotificationCountProvider.future), 0);
+      expect(await _unread(c), 0);
     });
 
     test('signed in returns the backend count', () async {
@@ -193,7 +212,7 @@ void main() {
         api: _FakeApi(_feed([_n('1'), _n('2'), _n('3', read: true)])),
       );
       await c.read(authStateProvider.future);
-      expect(await c.read(unreadNotificationCountProvider.future), 2);
+      expect(await _unread(c), 2);
     });
 
     test('backend failure degrades to 0 (never blocks the bell)', () async {
@@ -202,7 +221,7 @@ void main() {
         api: _FakeApi(_feed([_n('1')]), throwOnCount: true),
       );
       await c.read(authStateProvider.future);
-      expect(await c.read(unreadNotificationCountProvider.future), 0);
+      expect(await _unread(c), 0);
     });
   });
 
@@ -210,7 +229,7 @@ void main() {
     test('signed out yields an empty feed', () async {
       final c = _container(signedIn: false, api: _FakeApi(_feed([_n('1')])));
       await c.read(authStateProvider.future);
-      final feed = await c.read(notificationFeedProvider.future);
+      final feed = await _feedFuture(c);
       expect(feed.items, isEmpty);
     });
 
@@ -218,7 +237,7 @@ void main() {
       final api = _FakeApi(_feed([_n('1'), _n('2')]));
       final c = _container(signedIn: true, api: api);
       await c.read(authStateProvider.future);
-      await c.read(notificationFeedProvider.future);
+      await _feedFuture(c);
       await c.read(notificationFeedProvider.notifier).markRead('1');
       final feed = c.read(notificationFeedProvider).value!;
       expect(feed.items.firstWhere((n) => n.id == '1').isRead, isTrue);
@@ -230,7 +249,7 @@ void main() {
       final api = _FakeApi(_feed([_n('1')]), markReadOwner: false);
       final c = _container(signedIn: true, api: api);
       await c.read(authStateProvider.future);
-      await c.read(notificationFeedProvider.future);
+      await _feedFuture(c);
       await c.read(notificationFeedProvider.notifier).markRead('1');
       final feed = c.read(notificationFeedProvider).value!;
       expect(feed.items.single.isRead, isFalse);
@@ -241,7 +260,7 @@ void main() {
       final api = _FakeApi(_feed([_n('1'), _n('2'), _n('3')]));
       final c = _container(signedIn: true, api: api);
       await c.read(authStateProvider.future);
-      await c.read(notificationFeedProvider.future);
+      await _feedFuture(c);
       await c.read(notificationFeedProvider.notifier).markAllRead();
       final feed = c.read(notificationFeedProvider).value!;
       expect(feed.items.every((n) => n.isRead), isTrue);
@@ -277,6 +296,7 @@ void main() {
         ],
       );
       addTearDown(c.dispose);
+      c.listen(authStateProvider, (_, _) {});
       await c.read(authStateProvider.future);
       await t.pumpWidget(host(const NotificationBell(), c));
       await t.pumpAndSettle();
