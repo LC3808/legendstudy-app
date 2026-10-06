@@ -251,7 +251,7 @@ begin
   where n.nspname='public' and (p.proname like 'admin\_%' or p.proname like 'inquiry\_%'
    or p.proname like 'claim\_inquiry%' or p.proname like 'complete\_inquiry%');
  perform pg_temp.check('F full operations entry-point set present',
-  actual='admin_account_state admin_count admin_credit_snapshot admin_dashboard admin_inquiry_detail admin_inquiry_list admin_inquiry_reply admin_inquiry_set_status admin_member_credit admin_member_detail admin_member_search admin_operator admin_payment_orders admin_support_metrics claim_inquiry_notifications complete_inquiry_notification inquiry_mine inquiry_submit inquiry_touch');
+  actual='admin_account_state admin_count admin_credit_snapshot admin_dashboard admin_essay_operations admin_inquiry_detail admin_inquiry_list admin_inquiry_reply admin_inquiry_set_status admin_math_operations admin_member_credit admin_member_detail admin_member_search admin_operations_summary admin_operator admin_payment_orders admin_support_metrics claim_inquiry_notifications complete_inquiry_notification inquiry_mine inquiry_submit inquiry_touch');
 
  perform pg_temp.check('F anon cannot execute admin_count',
   not has_function_privilege('anon','public.admin_count(text)','execute'));

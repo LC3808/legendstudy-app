@@ -150,12 +150,12 @@ if [ "$fail" = 0 ]; then echo "CANONICAL_CHAIN=OK"; else echo "CANONICAL_CHAIN=F
 # The chain loop above already applied the admin migrations in ledger order, so
 # assert the installed function set instead of applying them a second time.
 # An explicit list, not a magic count: a renamed or dropped entry point fails.
-EXPECTED="admin_account_state admin_count admin_credit_snapshot admin_dashboard admin_inquiry_detail admin_inquiry_list admin_inquiry_reply admin_inquiry_set_status admin_member_credit admin_member_detail admin_member_search admin_operator admin_payment_orders admin_support_metrics claim_inquiry_notifications complete_inquiry_notification inquiry_mine inquiry_submit inquiry_touch"
+EXPECTED="admin_account_state admin_count admin_credit_snapshot admin_dashboard admin_essay_operations admin_inquiry_detail admin_inquiry_list admin_inquiry_reply admin_inquiry_set_status admin_math_operations admin_member_credit admin_member_detail admin_member_search admin_operations_summary admin_operator admin_payment_orders admin_support_metrics claim_inquiry_notifications complete_inquiry_notification inquiry_mine inquiry_submit inquiry_touch"
 ACTUAL=$(sudo -n -u postgres psql -qtA -d "$DB" -c \
   "select string_agg(p.proname,' ' order by p.proname) from pg_proc p join pg_namespace n on n.oid=p.pronamespace
    where n.nspname='public' and (p.proname like 'admin\\_%' or p.proname like 'inquiry\\_%' or p.proname like 'claim\\_inquiry%' or p.proname like 'complete\\_inquiry%')" 2>/dev/null)
 if [ "$ACTUAL" = "$EXPECTED" ]; then
-  echo "ADMIN_MIGRATION_APPLY=OK (19 entry points)"
+  echo "ADMIN_MIGRATION_APPLY=OK (22 entry points)"
 else
   echo "ADMIN_MIGRATION_APPLY=FAIL"
   echo "  expected: $EXPECTED"
@@ -191,6 +191,17 @@ if sudo -n -u postgres psql -q -v ON_ERROR_STOP=1 -d "$DB" \
 else
   grep -E "NOTIFICATION_CENTER_CHECKS|CHECK FAILED|NOTIFICATION FAILED|ERROR" /tmp/admin_behavior_notifications.log | tail -20 | sed 's/^/  /'
   echo "BEHAVIOR_NOTIFICATIONS=FAIL"
+  exit 1
+fi
+echo "=== behavior suite (P0-C operations) ==="
+if sudo -n -u postgres psql -q -v ON_ERROR_STOP=1 -d "$DB" \
+     -f supabase/verification/admin_console/behavior_p0c.sql > /tmp/admin_behavior_p0c.log 2>&1 \
+   && grep -q "ADMIN_P0C_CHECKS total=[0-9]* failed=0" /tmp/admin_behavior_p0c.log; then
+  grep -E "ADMIN_P0C_CHECKS" /tmp/admin_behavior_p0c.log | sed 's/^/  /'
+  echo "BEHAVIOR_P0C=PASS"
+else
+  grep -E "ADMIN_P0C_CHECKS|CHECK FAILED|ADMIN P0C FAILED|ERROR" /tmp/admin_behavior_p0c.log | tail -20 | sed 's/^/  /'
+  echo "BEHAVIOR_P0C=FAIL"
   exit 1
 fi
 python3 supabase/verification/admin_console/collect.py "$DB"

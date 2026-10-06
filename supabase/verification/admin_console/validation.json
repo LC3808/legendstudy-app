@@ -6,7 +6,7 @@
   "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
   "PHASE 2 structural stand-ins present -> installed path executes"
  ],
- "total": 421,
+ "total": 472,
  "failed": 0,
  "checks": [
   {
@@ -519,6 +519,42 @@
   },
   {
    "check": "F empty search_path: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_operations_summary",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_operations_summary",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_operations_summary",
    "ok": true
   },
   {
@@ -1692,6 +1728,174 @@
   {
    "check": "N-D16b an unexpired grant at or below the threshold is not a crossing",
    "ok": true
+  },
+  {
+   "check": "C1 an anonymous caller is refused FORBIDDEN",
+   "ok": true
+  },
+  {
+   "check": "C1b the Math read is refused the same way",
+   "ok": true
+  },
+  {
+   "check": "C1c the operations summary is refused the same way",
+   "ok": true
+  },
+  {
+   "check": "C2 the operator gate opens the read",
+   "ok": true
+  },
+  {
+   "check": "C2b the payload is versioned and typed",
+   "ok": true
+  },
+  {
+   "check": "C3 the answer body never appears in the payload",
+   "ok": true
+  },
+  {
+   "check": "C3b no item carries a body or draft field",
+   "ok": true
+  },
+  {
+   "check": "C4 every fixture evaluation is listed",
+   "ok": true
+  },
+  {
+   "check": "C5 a completed evaluation reports success",
+   "ok": true
+  },
+  {
+   "check": "C5b the completed row carries the processing time",
+   "ok": true
+  },
+  {
+   "check": "C5c the completed row carries the provider, model and prompt",
+   "ok": true
+  },
+  {
+   "check": "C6 a failed evaluation reports failure and its error code",
+   "ok": true
+  },
+  {
+   "check": "C6b a failed evaluation still reports its elapsed time",
+   "ok": true
+  },
+  {
+   "check": "C7 a pending request reports pending, not failure",
+   "ok": true
+  },
+  {
+   "check": "C8 an invalidated evaluation is flagged with its reason",
+   "ok": true
+  },
+  {
+   "check": "C9 a re-evaluation is flagged and the original is not",
+   "ok": true
+  },
+  {
+   "check": "C10 Credits come from the billing decision, not the evaluation",
+   "ok": true
+  },
+  {
+   "check": "C10b an evaluation with no decision reports no Credits rather than zero",
+   "ok": true
+  },
+  {
+   "check": "C10c the summary counts each status",
+   "ok": true
+  },
+  {
+   "check": "C11 the status filter narrows the list",
+   "ok": true
+  },
+  {
+   "check": "C11b an unknown status is refused",
+   "ok": true
+  },
+  {
+   "check": "C12 human review is reported as tracked",
+   "ok": true
+  },
+  {
+   "check": "C12b an unreviewed evaluation says so",
+   "ok": true
+  },
+  {
+   "check": "C13 a reviewed evaluation reports the state and the disposition",
+   "ok": true
+  },
+  {
+   "check": "C13b the other evaluations remain unreviewed",
+   "ok": true
+  },
+  {
+   "check": "C14 the summary reports the reviewed case count",
+   "ok": true
+  },
+  {
+   "check": "C14b the summary carries the essay availability and activity",
+   "ok": true
+  },
+  {
+   "check": "C15 partially deployed Math is reported unavailable",
+   "ok": true
+  },
+  {
+   "check": "C15b unavailable Math reports no summary instead of a zero summary",
+   "ok": true
+  },
+  {
+   "check": "C15c unavailable Math is typed, so the console can label it",
+   "ok": true
+  },
+  {
+   "check": "C15d a partial table is never read as an installed runtime",
+   "ok": true
+  },
+  {
+   "check": "C16 the summary distinguishes undeployed Math from idle Math",
+   "ok": true
+  },
+  {
+   "check": "C16b the summary names its own as-of time",
+   "ok": true
+  },
+  {
+   "check": "C17 an oversized limit is clamped, not honoured",
+   "ok": true
+  },
+  {
+   "check": "C17b a null limit falls back to the default",
+   "ok": true
+  },
+  {
+   "check": "C17c a zero limit still returns a bounded list",
+   "ok": true
+  },
+  {
+   "check": "C17d a cursor returns only older rows",
+   "ok": true
+  },
+  {
+   "check": "C18 anon cannot execute the operations reads",
+   "ok": true
+  },
+  {
+   "check": "C18b but an authenticated operator can",
+   "ok": true
+  },
+  {
+   "check": "C18c service_role is not granted the operator reads",
+   "ok": true
+  },
+  {
+   "check": "C18d the functions are SECURITY DEFINER with an empty search path",
+   "ok": true
+  },
+  {
+   "check": "C18e the shape probe is not reachable from the API surface",
+   "ok": true
   }
  ],
  "acl": [
@@ -1792,6 +1996,30 @@
    "execute": false
   },
   {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
    "function": "admin_inquiry_detail",
    "owner": "postgres",
    "security_definer": true,
@@ -1888,6 +2116,30 @@
    "execute": false
   },
   {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
    "function": "admin_member_credit",
    "owner": "postgres",
    "security_definer": true,
@@ -1953,6 +2205,30 @@
   },
   {
    "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_operations_summary",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_operations_summary",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_operations_summary",
    "owner": "postgres",
    "security_definer": true,
    "search_path": "search_path=\"\"",
