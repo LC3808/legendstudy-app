@@ -34,6 +34,7 @@ import '../features/onboarding/onboarding_gate.dart';
 import '../features/onboarding/presentation/onboarding_page.dart';
 import '../features/personal/personal_providers.dart';
 import '../features/notifications/presentation/notifications_page.dart';
+import '../features/onboarding/presentation/brand_replay_page.dart';
 
 // Re-run GoRouter's redirect whenever the canonical profile changes, so the
 // first-login onboarding gate reacts once the profile resolves. We deliberately
@@ -134,6 +135,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/notifications',
         builder: (_, _) =>
             const NestedPage(title: '알림', child: NotificationsPage()),
+      ),
+      GoRoute(
+        path: '/app-guide',
+        builder: (_, _) =>
+            const NestedPage(title: '앱 사용 안내', child: BrandReplayPage()),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => NavigationShell(shell: shell),

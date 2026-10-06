@@ -107,6 +107,12 @@ Future<GoRouter> _mount(
     ),
   );
   await tester.pumpAndSettle();
+  // First-run now opens on the brand intro; skip it so the existing cases start
+  // at the personalization steps. Guests see the sign-in notice, not the intro.
+  if (user != null) {
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+  }
   return router;
 }
 
@@ -135,6 +141,10 @@ void main() {
     expect(find.text('학년과 학교'), findsOneWidget);
     await tester.tap(find.text('2학년'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('다음')); // 학년/학교 → 관심 대학
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다음')); // 관심 대학 → 희망 전공
+    await tester.pumpAndSettle();
     await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();
 
@@ -154,8 +164,12 @@ void main() {
     await tester.tap(find.text('다음'));
     await tester.pumpAndSettle();
 
-    expect(find.text('준비가 끝났어요'), findsOneWidget);
+    expect(find.text('학년·학교는 재학생 전용이에요'), findsOneWidget);
     expect(find.text('학년'), findsNothing);
+    await tester.tap(find.text('다음')); // 확인 → 관심 대학
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다음')); // 관심 대학 → 희망 전공
+    await tester.pumpAndSettle();
     await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();
 

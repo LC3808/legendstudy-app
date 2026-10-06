@@ -8,6 +8,8 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
+import '../../universities/presentation/interested_universities_field.dart';
+import '../../profile/presentation/intended_major_field.dart';
 
 // Onboarding-only palette (Phase 1.1). The app keeps its navy/orange identity;
 // onboarding is allowed a slightly livelier, fresher feel. Accents mark
@@ -178,22 +180,24 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           // names) without restructuring the foreground.
           const _OnboardingBackdrop(),
           SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.fromLTRB(
-                      AppTokens.space20,
-                      AppTokens.space24,
-                      AppTokens.space20,
-                      AppTokens.space16,
-                    ),
-                    children: _step == 0 ? _statusStep() : _detailStep(),
+            child: _step == 0
+                ? _BrandOnboarding(onStart: () => setState(() => _step = 1))
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          padding: const EdgeInsets.fromLTRB(
+                            AppTokens.space20,
+                            AppTokens.space24,
+                            AppTokens.space20,
+                            AppTokens.space16,
+                          ),
+                          children: _stepContent(),
+                        ),
+                      ),
+                      _footer(),
+                    ],
                   ),
-                ),
-                _footer(),
-              ],
-            ),
           ),
         ],
       ),
@@ -203,7 +207,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Widget _header(String title, String description) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _StepProgress(step: _step, total: 2),
+      _StepProgress(step: _step - 1, total: 4),
       const SizedBox(height: AppTokens.space16),
       Text(
         title,
@@ -219,6 +223,35 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       const SizedBox(height: AppTokens.space24),
     ],
   );
+
+  List<Widget> _stepContent() {
+    switch (_step) {
+      case 1:
+        return _statusStep();
+      case 2:
+        return _detailStep();
+      case 3:
+        return _universitiesStep();
+      default:
+        return _majorStep();
+    }
+  }
+
+  List<Widget> _universitiesStep() => [
+    _header(
+      '관심 있는 대학을 선택해 주세요',
+      '아직 지원 대학을 정하지 않았어도 괜찮아요. 관심 대학을 바탕으로 필요한 입시 정보를 보여드릴게요.',
+    ),
+    const InterestedUniversitiesField(source: 'onboarding'),
+  ];
+
+  List<Widget> _majorStep() => [
+    _header(
+      '어떤 전공에 관심이 있나요?',
+      '관심 있는 전공 계열을 선택해 주세요. 아직 정하지 못했다면 나중에 MY에서 언제든 바꿀 수 있어요.',
+    ),
+    const IntendedMajorField(),
+  ];
 
   List<Widget> _statusStep() => [
     _header(
@@ -242,7 +275,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   List<Widget> _detailStep() {
     if (!_isStudent) {
       return [
-        _header('준비가 끝났어요', '학년·학교 설정은 재학생에게만 필요해요. 필요하면 나중에 MY에서 추가할 수 있어요.'),
+        _header(
+          '학년·학교는 재학생 전용이에요',
+          '재학생이 아니어도 관심 대학과 전공을 설정하면 맞춤 입시 정보를 받아볼 수 있어요.',
+        ),
       ];
     }
     final selection = ref.watch(schoolSelectionProvider);
@@ -341,7 +377,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Widget _footer() {
-    final canAdvance = _step == 0 ? _status != null : true;
+    final canAdvance = _step == 1 ? _status != null : true;
     return Container(
       decoration: const BoxDecoration(
         color: AppTokens.surface,
@@ -368,8 +404,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             child: FilledButton(
               onPressed: !canAdvance || _busy
                   ? null
-                  : _step == 0
-                  ? () => setState(() => _step = 1)
+                  : _step < 4
+                  ? () => setState(() => _step += 1)
                   : _finish,
               style: FilledButton.styleFrom(
                 backgroundColor: _accent,
@@ -386,7 +422,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               child: Text(
                 _busy
                     ? '저장 중…'
-                    : _step == 0
+                    : _step < 4
                     ? '다음'
                     : '설정 완료',
               ),
@@ -395,9 +431,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           const SizedBox(height: AppTokens.space4),
           Row(
             children: [
-              if (_step == 1)
+              if (_step > 1)
                 TextButton(
-                  onPressed: _busy ? null : () => setState(() => _step = 0),
+                  onPressed: _busy ? null : () => setState(() => _step -= 1),
                   child: const Text('이전'),
                 ),
               const Spacer(),
@@ -741,4 +777,163 @@ class _GuestNotice extends StatelessWidget {
       ),
     ],
   );
+}
+
+// Concise brand intro (2–3 screens, no carousel overload). Positioning is fixed
+// by product authority: "내신 관리부터 수능, 논술 준비까지" — never 기출/AI as the
+// headline, and LAB = 내신·수능·논술 LAB. Reused by the Settings "앱 사용 안내
+// 다시 보기" replay, which never resets personalization.
+const List<(String, String, IconData)> brandSlides = [
+  (
+    'LegendStudy+',
+    '내신 관리부터 수능, 논술 준비까지.\n데이터가 쌓일수록\n나의 가능성은 더 선명해집니다.',
+    Icons.auto_graph_rounded,
+  ),
+  (
+    '나의 학습을 기록하고 관리하세요',
+    '공부 시간과 학습 기록, 성적의 변화를\n한곳에서 확인하세요.',
+    Icons.insights_rounded,
+  ),
+  (
+    '내신 · 수능 · 논술을 하나로',
+    '내신 LAB · 수능 LAB · 논술 LAB에서\n필요한 학습과 분석을 이어가세요.',
+    Icons.school_rounded,
+  ),
+];
+
+class _BrandOnboarding extends StatefulWidget {
+  const _BrandOnboarding({required this.onStart});
+  final VoidCallback onStart;
+  @override
+  State<_BrandOnboarding> createState() => _BrandOnboardingState();
+}
+
+class _BrandOnboardingState extends State<_BrandOnboarding> {
+  final _controller = PageController();
+  int _page = 0;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final last = _page == brandSlides.length - 1;
+    return Column(
+      children: [
+        Expanded(
+          child: PageView.builder(
+            controller: _controller,
+            itemCount: brandSlides.length,
+            onPageChanged: (i) => setState(() => _page = i),
+            itemBuilder: (context, i) {
+              final (title, body, icon) = brandSlides[i];
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppTokens.space24,
+                  AppTokens.space32,
+                  AppTokens.space24,
+                  AppTokens.space24,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 72,
+                      height: 72,
+                      decoration: BoxDecoration(
+                        color: _accentSoft,
+                        borderRadius: BorderRadius.circular(AppTokens.radiusLg),
+                      ),
+                      child: Icon(icon, size: 40, color: _accent),
+                    ),
+                    const SizedBox(height: AppTokens.space24),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        height: 1.2,
+                        color: _ink,
+                      ),
+                    ),
+                    const SizedBox(height: AppTokens.space16),
+                    Text(
+                      body,
+                      style: AppTokens.body.copyWith(
+                        color: AppTokens.textSecondary,
+                        height: 1.6,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i = 0; i < brandSlides.length; i++)
+              Container(
+                width: i == _page ? 20 : 8,
+                height: 8,
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                decoration: BoxDecoration(
+                  color: i == _page ? _accent : AppTokens.cardBorder,
+                  borderRadius: BorderRadius.circular(AppTokens.radiusPill),
+                ),
+              ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+            AppTokens.space20,
+            AppTokens.space16,
+            AppTokens.space20,
+            AppTokens.space20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 52,
+                child: FilledButton(
+                  onPressed: last
+                      ? widget.onStart
+                      : () => _controller.nextPage(
+                          duration: const Duration(milliseconds: 240),
+                          curve: Curves.easeOut,
+                        ),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: _accent,
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppTokens.radiusMd),
+                    ),
+                  ),
+                  child: Text(last ? '시작하기' : '다음'),
+                ),
+              ),
+              if (!last)
+                TextButton(
+                  onPressed: widget.onStart,
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppTokens.textSecondary,
+                  ),
+                  child: const Text('건너뛰기'),
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }

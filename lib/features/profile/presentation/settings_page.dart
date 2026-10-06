@@ -94,6 +94,10 @@ class SettingsPage extends ConsumerWidget {
                 title: '문의·건의사항',
                 onTap: () => context.push('/my/feedback'),
               ),
+              LsListRow(
+                title: '앱 사용 안내 다시 보기',
+                onTap: () => context.push('/app-guide'),
+              ),
             ],
           ),
           SettingsGroup(

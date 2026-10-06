@@ -10,6 +10,8 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
 import 'academic_status_field.dart';
+import 'intended_major_field.dart';
+import '../../universities/presentation/interested_universities_field.dart';
 
 class SchoolPage extends ConsumerStatefulWidget {
   const SchoolPage({super.key});
@@ -215,6 +217,14 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             onSavingChanged: (value) => setState(() => _saving = value),
             onSaved: _finish,
           ),
+          const SizedBox(height: 24),
+          const SectionHeader('관심 대학'),
+          const SizedBox(height: 8),
+          const InterestedUniversitiesField(source: 'my'),
+          const SizedBox(height: 24),
+          const SectionHeader('희망 학과·관심 전공'),
+          const SizedBox(height: 8),
+          const IntendedMajorField(),
         ],
         if (auth.value?.isAuthenticated != true)
           FilledButton(
