@@ -4,7 +4,7 @@
 -- Reuse, not replacement. This file adds no wallet, no analytics store, no
 -- admin auth, no email service and no payment architecture:
 --   public.admin_users              operations allowlist (20260917000100, reused)
---   public.admin_operator()         fail-closed gate (20261005000200, reused)
+--   public.admin_operator()         fail-closed gate (20261007000100, reused)
 --   public.essay_admin_grant(...)   the ONLY Credit write path (20260929000300)
 --   public.payment_support(jsonb)   the ONLY order action path (20261004000100)
 --   Resend + the notification-queue claim/retry pattern (20260917000100/200)

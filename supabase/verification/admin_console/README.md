@@ -1,6 +1,6 @@
 # ADMIN-P0-A — operations console read boundary
 
-Migration: [`20261005000200_admin_console_read.sql`](../../migrations/20261005000200_admin_console_read.sql)
+Migration: [`20261007000100_admin_console_read.sql`](../../migrations/20261007000100_admin_console_read.sql)
 Branch: `manus/admin-console-p0-a` (base `claude/app-release-blocker-closeout-1 @ 0b0b562`)
 
 Read-only, operator-gated surface for the LegendStudy release-operations console.

@@ -3,7 +3,7 @@
 #
 # Loads the canonical migration chain into a throwaway PostgreSQL cluster with
 # synthetic Supabase shims (auth schema, storage catalog, platform roles) and
-# then applies 20261005000200_admin_console_read.sql.
+# then applies 20261007000100_admin_console_read.sql.
 #
 # No Production connection, no remote apply, no ledger write.
 #
@@ -24,6 +24,36 @@ LOG=/tmp/admin_console_chain.log
 EXCLUDE="20261001000300_account_deletion_lifecycle.sql 20261005000100_account_provider_revocation.sql"
 EXCLUDE="$EXCLUDE 20261002000100_math_essay_persistence.sql 20261002000200_math_runtime_surface.sql 20261002000300_math_learning_runtime.sql"
 EXCLUDE="$EXCLUDE 20261003000100_payment_foundation.sql 20261004000100_payment_runtime.sql"
+
+# ---------------------------------------------------------------------------
+# Migration version guard.
+#
+# Version collisions are silent in Supabase: an applied version is recorded and a
+# changed file at that version is skipped, so a collision shows up as "the
+# migration went in" while the schema did not change. Assert the local ledger and
+# the versions claimed from outside this repository are disjoint, and that this
+# workstream stays inside its reserved block.
+# ---------------------------------------------------------------------------
+VERSION_GUARD=FAIL
+dupes=$(ls "$MIG"/*.sql 2>/dev/null | sed 's|.*/||; s|_.*||' | sort | uniq -d)
+if [ -n "$dupes" ]; then
+  echo "VERSION_GUARD=FAIL duplicate version(s): $dupes"
+elif ! ls "$MIG"/20261007000100_admin_console_read.sql "$MIG"/20261007000200_admin_console_p0b.sql >/dev/null 2>&1; then
+  echo "VERSION_GUARD=FAIL the admin console migrations left their reserved block"
+else
+  # Only this workstream's own files are constrained to the block. Another
+  # workstream's file at a version it also owns in Production (for example
+  # 20261005000100_account_provider_revocation) is correct, not a collision.
+  stray=$(ls "$MIG"/*_admin_console_read.sql "$MIG"/*_admin_console_p0b.sql \
+              "$MIG"/*_admin_console_p0c.sql "$MIG"/*_user_notification_center.sql 2>/dev/null \
+          | sed 's|.*/||' | grep -v '^20261007' || true)
+  if [ -n "$stray" ]; then
+    echo "VERSION_GUARD=FAIL console migration outside the reserved block: $stray"
+  else
+    VERSION_GUARD=PASS
+    echo "VERSION_GUARD=PASS"
+  fi
+fi
 
 sudo -n pg_ctlcluster 16 main start >/dev/null 2>&1 || true
 sleep 2

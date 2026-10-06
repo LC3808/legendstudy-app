@@ -1,6 +1,6 @@
 # ADMIN-P0-B — Credit grant boundary, payment operations read, 1:1 inquiry
 
-Migration: `supabase/migrations/20261005000300_admin_console_p0b.sql`
+Migration: `supabase/migrations/20261007000200_admin_console_p0b.sql`
 Verification: `supabase/verification/admin_console/behavior_p0b.sql`
 
 ## What this adds
