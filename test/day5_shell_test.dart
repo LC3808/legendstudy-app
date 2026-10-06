@@ -111,8 +111,8 @@ void main() {
     expect(find.text('MY'), findsWidgets);
   });
   for (final detail in [
-    ('내신 분석', '/lab/school-scores'),
-    ('모의고사 분석', '/lab/scores'),
+    ('내신분석 LAB', '/lab/school-record'),
+    ('수능·모의고사 LAB', '/lab/csat-mock'),
   ]) {
     testWidgets('LAB ${detail.$1} and direct link return to LAB', (
       tester,
@@ -127,21 +127,23 @@ void main() {
         tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
         3,
       );
-      expect(find.text('논술 준비'), findsOneWidget);
+      expect(find.text('논술 LAB'), findsOneWidget);
       c.read(routerProvider).go(detail.$2);
       await tester.pumpAndSettle();
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
-      expect(find.text('논술 준비'), findsOneWidget);
+      expect(find.text('논술 LAB'), findsOneWidget);
     });
+  }
+  // MY entry points still open the existing score pages (unchanged).
+  for (final detail in [
+    ('내신 분석', 'my-school-lab'),
+    ('모의고사 분석', 'my-mock-lab'),
+  ]) {
     testWidgets('MY ${detail.$1} Back returns MY', (tester) async {
       await mount(tester, user: 'a');
       await tab(tester, 4);
-      final entry = find.byKey(
-        Key(
-          detail.$2.endsWith('school-scores') ? 'my-school-lab' : 'my-mock-lab',
-        ),
-      );
+      final entry = find.byKey(Key(detail.$2));
       await tester.ensureVisible(entry);
       await tester.tap(entry);
       await tester.pumpAndSettle();

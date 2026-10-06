@@ -271,9 +271,9 @@ void main() {
             expect(find.text('프로필 설정'), findsOneWidget);
           }
           if (screen == 'lab') {
-            expect(find.text('내신 분석'), findsOneWidget);
-            expect(find.text('모의고사 분석'), findsOneWidget);
-            expect(find.text('논술 준비'), findsOneWidget);
+            expect(find.text('내신분석 LAB'), findsOneWidget);
+            expect(find.text('수능·모의고사 LAB'), findsOneWidget);
+            expect(find.text('논술 LAB'), findsOneWidget);
             expect(find.text('성적 분석'), findsNothing);
           }
           if (screen == 'settings') {

@@ -25,7 +25,7 @@ void main() {
 
     for (final entry in {
       '학습': '00:00:00',
-      'LAB': 'LAB 살펴보기',
+      'LAB': '논술 LAB',
       'MY': '로그인',
       '홈': 'D-DAY',
     }.entries) {

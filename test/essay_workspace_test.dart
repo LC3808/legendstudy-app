@@ -75,7 +75,7 @@ void main() {
         child: MaterialApp.router(theme: AppTheme.light, routerConfig: router),
       ),
     );
-    await tapVisible(tester, find.text('논술 학습'));
+    await tapVisible(tester, find.text('논술 LAB 시작하기'));
     expect(find.byType(EssayHomePage), findsOneWidget);
     await tapVisible(tester, find.text('문항 1 · 공공 공간과 선택'));
     expect(find.byType(EssayWorkspacePage), findsOneWidget);

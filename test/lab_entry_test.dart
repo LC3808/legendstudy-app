@@ -108,12 +108,12 @@ void main() {
           await tester.ensureVisible(find.byType(LegendStudyLabEntry));
           await tester.pumpAndSettle();
           expect(
-            tester.getSize(find.widgetWithText(TextButton, 'LAB 살펴보기')).height,
+            tester.getSize(find.widgetWithText(TextButton, '웹에서 이용하기 ↗')).height,
             greaterThanOrEqualTo(48),
           );
           await preview.capture(tester, name);
           await nativeCapture?.call(name);
-          await tester.tap(find.text('LAB 살펴보기'));
+          await tester.tap(find.text('웹에서 이용하기 ↗'));
           await tester.pumpAndSettle();
           expect(opened.map((u) => u.toString()), [legendStudyLabUrl]);
           expect(find.byType(home ? HomePage : LabPage), findsOneWidget);
@@ -141,18 +141,18 @@ void main() {
           child: preview.app(const LegendStudyLabEntry()),
         ),
       );
-      await tester.tap(find.text('LAB 살펴보기'));
-      await tester.tap(find.text('LAB 살펴보기'));
+      await tester.tap(find.text('웹에서 이용하기 ↗'));
+      await tester.tap(find.text('웹에서 이용하기 ↗'));
       await tester.pump();
       expect(calls, 1);
       pending.complete(false);
       await tester.pumpAndSettle();
       expect(find.text('외부 링크를 열지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
-      await tester.tap(find.text('LAB 살펴보기'));
+      await tester.tap(find.text('웹에서 이용하기 ↗'));
       await tester.pumpAndSettle();
       expect(find.textContaining('private platform'), findsNothing);
       expect(find.text('외부 링크를 열지 못했어요. 다시 시도해 주세요.'), findsOneWidget);
-      await tester.tap(find.text('LAB 살펴보기'));
+      await tester.tap(find.text('웹에서 이용하기 ↗'));
       await tester.pumpAndSettle();
       expect(calls, 3);
       expect(find.text('외부 링크를 열지 못했어요. 다시 시도해 주세요.'), findsNothing);
