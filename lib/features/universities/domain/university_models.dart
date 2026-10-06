@@ -54,8 +54,10 @@ class InterestedUniversity {
       University(id: universityId, name: name, slug: slug);
 }
 
-/// Interest selection policy (authority: AI_CONTEXT §15 / handoff). 1–5 with ~3
-/// recommended; the UI caps at [maxInterested].
-const int minInterested = 1;
+/// Interest selection policy (authority: Owner UX correction 2026-10-06).
+/// **0–5**, ~3 recommended. Interest is personalization, not required admissions
+/// data, so a student may select none and skip the step; the UI caps at
+/// [maxInterested].
+const int minInterested = 0;
 const int maxInterested = 5;
 const int recommendedInterested = 3;

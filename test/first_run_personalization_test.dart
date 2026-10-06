@@ -97,8 +97,8 @@ void main() {
       expect(i.priority, 2);
     });
 
-    test('interest policy is 1..5, ~3', () {
-      expect(minInterested, 1);
+    test('interest policy is 0..5, ~3 (optional, skippable)', () {
+      expect(minInterested, 0);
       expect(maxInterested, 5);
       expect(recommendedInterested, 3);
     });
@@ -196,7 +196,10 @@ void main() {
       );
       await t.pumpAndSettle();
       expect(find.textContaining('최대 5개'), findsWidgets);
-      expect(find.text('아직 선택한 관심 대학이 없어요.'), findsOneWidget);
+      expect(
+        find.text('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('major field marks undecided when unset', (t) async {

@@ -8,6 +8,7 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
+import '../../universities/application/university_providers.dart';
 import '../../universities/presentation/interested_universities_field.dart';
 import '../../profile/presentation/intended_major_field.dart';
 
@@ -378,6 +379,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Widget _footer() {
     final canAdvance = _step == 1 ? _status != null : true;
+    // 관심 대학은 0개도 허용 — 선택이 없으면 이 단계를 건너뛰는 CTA를 보여준다.
+    final interestedEmpty =
+        _step == 3 &&
+        (ref.watch(interestedUniversitiesProvider).asData?.value.isEmpty ?? true);
     return Container(
       decoration: const BoxDecoration(
         color: AppTokens.surface,
@@ -422,6 +427,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               child: Text(
                 _busy
                     ? '저장 중…'
+                    : interestedEmpty
+                    ? '나중에 설정할게요'
                     : _step < 4
                     ? '다음'
                     : '설정 완료',

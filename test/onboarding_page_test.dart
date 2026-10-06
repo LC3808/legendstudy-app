@@ -143,7 +143,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('다음')); // 학년/학교 → 관심 대학
     await tester.pumpAndSettle();
-    await tester.tap(find.text('다음')); // 관심 대학 → 희망 전공
+    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
     await tester.pumpAndSettle();
     await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();
@@ -168,7 +168,7 @@ void main() {
     expect(find.text('학년'), findsNothing);
     await tester.tap(find.text('다음')); // 확인 → 관심 대학
     await tester.pumpAndSettle();
-    await tester.tap(find.text('다음')); // 관심 대학 → 희망 전공
+    await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
     await tester.pumpAndSettle();
     await tester.tap(find.text('설정 완료'));
     await tester.pumpAndSettle();

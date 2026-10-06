@@ -82,7 +82,7 @@ class _InterestedUniversitiesFieldState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          '최대 $maxInterested개 · 약 $recommendedInterested개를 추천해요',
+          '선택하지 않아도 괜찮아요 · 최대 $maxInterested개, 약 $recommendedInterested개 추천',
           style: AppTokens.caption.copyWith(color: AppTokens.textTertiary),
         ),
         const SizedBox(height: AppTokens.space8),
@@ -136,7 +136,7 @@ class _InterestedUniversitiesFieldState
           ),
         const SizedBox(height: AppTokens.space12),
         if (selected.isEmpty)
-          const EmptyState('아직 선택한 관심 대학이 없어요.')
+          const EmptyState('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.')
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
