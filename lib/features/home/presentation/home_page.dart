@@ -15,6 +15,7 @@ import '../../content/domain/content_types.dart';
 import '../../content/presentation/content_results.dart';
 import '../../personal/personal_list_providers.dart';
 import '../../personal/presentation/personal_material_list.dart';
+import '../../notifications/presentation/notification_bell.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -93,23 +94,7 @@ class HomeGreeting extends ConsumerWidget {
               ),
             ),
           ),
-          notificationEntry ??
-              Tooltip(
-                message: '알림 센터 준비 중',
-                child: Semantics(
-                  label: '알림 센터 준비 중',
-                  child: ExcludeSemantics(
-                    child: SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: Icon(
-                        Icons.notifications_outlined,
-                        color: AppTokens.textSecondary,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+          notificationEntry ?? const NotificationBell(),
         ],
       ),
     );
