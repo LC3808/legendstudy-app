@@ -5,6 +5,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../application/university_providers.dart';
 import '../domain/university_models.dart';
+import '../data/university_logo_assets.dart';
 
 /// Reusable 관심 대학 editor (first-run onboarding + My Page). Interest, not
 /// application. Search the catalog, select up to [maxInterested]; selected
@@ -125,7 +126,11 @@ class _InterestedUniversitiesFieldState
                   for (final uni in available)
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: _UniversityAvatar(name: uni.name, selected: false),
+                      leading: _UniversityAvatar(
+                        name: uni.name,
+                        slug: uni.slug,
+                        selected: false,
+                      ),
                       title: Text(uni.name),
                       trailing: const Icon(Icons.add_circle_outline),
                       onTap: _busy ? null : () => _add(uni),
@@ -146,6 +151,7 @@ class _InterestedUniversitiesFieldState
                   padding: const EdgeInsets.only(bottom: AppTokens.space8),
                   child: _SelectedUniversityCard(
                     name: uni.name,
+                    slug: uni.slug,
                     onRemove: _busy ? null : () => _remove(uni.id),
                   ),
                 ),
@@ -157,16 +163,24 @@ class _InterestedUniversitiesFieldState
 }
 
 /// School/university logo stand-in. No external logo source exists, so this is
-/// always a graceful fallback: the name's initial on a neutral surface. UX never
-/// depends on a real logo being present.
+/// Shows the bundled official brand mark for a known `universities.slug`, and
+/// otherwise degrades to the name's initial on a neutral surface. The mark is a
+/// secondary identifier only — selection is signalled by check, weight and
+/// border — and UX never depends on a logo being present.
 class _UniversityAvatar extends StatelessWidget {
-  const _UniversityAvatar({required this.name, required this.selected});
+  const _UniversityAvatar({
+    required this.name,
+    required this.selected,
+    this.slug,
+  });
   final String name;
   final bool selected;
+  final String? slug;
   @override
   Widget build(BuildContext context) {
     final trimmed = name.trim();
     final initial = trimmed.isEmpty ? '대' : trimmed.substring(0, 1);
+    final asset = slug == null ? null : kUniversityLogoAssets[slug];
     return Container(
       width: 40,
       height: 40,
@@ -177,19 +191,41 @@ class _UniversityAvatar extends StatelessWidget {
             : AppTokens.primarySoft,
         borderRadius: BorderRadius.circular(AppTokens.radiusSm),
       ),
-      child: Text(
-        initial,
-        style: AppTokens.cardTitle.copyWith(
-          color: selected ? AppTokens.primaryInk : AppTokens.textSecondary,
-        ),
-      ),
+      child: asset == null
+          ? Text(
+              initial,
+              style: AppTokens.cardTitle.copyWith(
+                color: selected ? AppTokens.primaryInk : AppTokens.textSecondary,
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(5),
+              child: Image.asset(
+                asset,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.medium,
+                semanticLabel: null,
+                errorBuilder: (_, _, _) => Text(
+                  initial,
+                  style: AppTokens.cardTitle.copyWith(
+                    color: selected
+                        ? AppTokens.primaryInk
+                        : AppTokens.textSecondary,
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }
-
 class _SelectedUniversityCard extends StatelessWidget {
-  const _SelectedUniversityCard({required this.name, required this.onRemove});
+  const _SelectedUniversityCard({
+    required this.name,
+    required this.onRemove,
+    this.slug,
+  });
   final String name;
+  final String? slug;
   final VoidCallback? onRemove;
   @override
   Widget build(BuildContext context) {
@@ -210,7 +246,7 @@ class _SelectedUniversityCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            _UniversityAvatar(name: name, selected: true),
+            _UniversityAvatar(name: name, slug: slug, selected: true),
             const SizedBox(width: AppTokens.space12),
             Expanded(
               child: Text(
