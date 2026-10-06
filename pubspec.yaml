@@ -37,3 +37,6 @@ flutter:
     - assets/brand/generated/legendstudy_symbol.png
     - assets/auth/google.png
     - assets/auth/kakao.png
+    # Release Core 50 university brand marks (UNIVERSITY-BRAND-ASSETS-1).
+    # Directory form so new universities can be added without touching this file.
+    - assets/universities/
