@@ -1673,14 +1673,14 @@ local results; Owner separately reports Production resolver/iPhone PDF PASS belo
 ## Product state preserved at Overnight Phase A
 
 
-[Payment](payment-app-foundation.md): code PASS; LIVE OFF.
+[Payment](../payment-app-foundation.md): code PASS; LIVE OFF.
 
-[MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
+[MATH-2E](../math-essay-learning-runtime.md): isolated; NOT_APPLIED.
 
-[HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
-[ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
+[HQP](../human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
+[ADR-2D](../account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
 
-Native: Home/Materials/Learning/LAB/MY; guest materials, owner saved/recent; Timer/Mock, MY profile/avatar, school-grade/D-Day and trends. [APP closeout](app-release-closeout.md): baseline5 fixed; tests/build compile PASS; Store BLOCKED (deletion/revoke/policy/signing/device gates).
+Native: Home/Materials/Learning/LAB/MY; guest materials, owner saved/recent; Timer/Mock, MY profile/avatar, school-grade/D-Day and trends. [APP closeout](../app-release-closeout.md): baseline5 fixed; tests/build compile PASS; Store BLOCKED (deletion/revoke/policy/signing/device gates).
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 
@@ -1701,4 +1701,4 @@ no checkmark. Timer/Trend daily summary shows displayed7day total + daily max,
 with the neutral mean caption directly above its dashed line. Mock has official year/grade/month→actual subject/
 variant/key and separate free title/time/manual-score practice. Free scores are
 local personal records, excluded from official MY/LAB/admissions. MY confirmed correct-count snapshots push LAB and preserve Back.
-[Canonical design](design-system.md) maps the approved proposal to implementation.
+[Canonical design](../design-system.md) maps the approved proposal to implementation.
