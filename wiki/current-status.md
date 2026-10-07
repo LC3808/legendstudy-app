@@ -1,5 +1,14 @@
 # Current Status
 
+## APP Store RC — 2026-10-07
+
+[Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
+personalization, native LAB entry, notifications and account deletion. Owner full tests
++967 ~2 PASS; Flutter3.47.6 fresh analyze, unsigned Android AAB and iOS release PASS.
+Store submission remains blocked by signing, final release flags/policy, device smoke
+and Console inputs. SDK wrapper aligned with verified3.47.6; no feature/Production change.
+Oct06 Unified Daily supersedes older APP deletion/release pending statements below.
+
 ## Product state
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.

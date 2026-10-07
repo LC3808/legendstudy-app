@@ -14,9 +14,8 @@ This repository is the canonical source for the LegendStudy native app and its i
 
 ## Development
 
-Verified toolchain: Flutter **3.47.5 stable**, Dart **3.13.4**.
-Canonical local SDK: `/Users/woojinchang/development/flutter-3.47` (directory name
-retained after patch upgrade). Use `./tool/flutterw` to avoid PATH's old Flutter
+Verified toolchain: Flutter **3.47.6 stable**, Dart **3.13.5**.
+Canonical local SDK: `$HOME/fvm/versions/3.47.6`. Use `./tool/flutterw` to avoid PATH's old Flutter
 3.32.0 / Dart 3.8.0. The wrapper requires Python 3 for SDK metadata validation,
 checks the exact verified stable version and never falls back to global Flutter.
 Other machines may set `LEGENDSTUDY_FLUTTER_SDK` to the same verified SDK version.

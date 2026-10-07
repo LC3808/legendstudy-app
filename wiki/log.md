@@ -3321,3 +3321,11 @@ External configuration and Production writes0; merchant E2E not run.
 Prepared [read-only Production audit and exact candidate package](../supabase/verification/payments/production/README.md);23 versions, ADR/Payment absent, no purchased grants. Payment81 + unchanged Credit/Essay/HQP/Math regressions PASS. TEST E2E remains COMPLETE; LIVE readiness BLOCKED by documented internal gates, separately from Toss approval. No migration SQL changed, Production writes/provider calls/main merges0.
 
 - 2026-10-04 PAYMENT-PRODUCTION-IMPLEMENTATION-1: additive runtime read/support RPC, APP/LAB canonical balance, 5→4→4→3 integration and refund preview. Payment117/Essay84+7/HQP102/Math131+37+63 PASS. Native payment/Essay64 PASS+1 opt-in skip; full APP927 PASS/2 skips/5 failures reproduce unchanged baseline (materials/discovery, not payment). Production apply/LIVE calls/deploy/main merge0. Three-file Owner review package; see payment-app-foundation.
+
+## 2026-10-07 — APP-FINAL-STORE-RC-1
+
+Base73a2a35; Owner967~2 retained. Fresh analyze and unsigned AAB/iOS release PASS.
+Fixed stale SDK wrapper3.47.5→approved3.47.6. Standard Android build regenerates release
+registrant; --no-pub failed with dev-only integration_test. No Dart/dependency changes.
+[RC report/checklist](final-store-rc-1.md) records signing, final defines, device/Store/policy
+gates. Logos deferred; Production/Toss/Store writes0.
