@@ -3342,3 +3342,9 @@ native essay save/evaluation entry and synthetic deletion request→cancel.
 
 Minimal guard migration and 11 local assertions PASS. Production apply/E2E blocked
 by absent DB credentials; no grant or runtime change. [Evidence](verified-signup-overnight.md).
+
+## 2026-10-08 — Production activation candidates
+
+Added reviewed Admin source + hash-guarded Credit/UUID/member-read correction and
+column-only MY major write ACL. Local SQL regression/role verification; hosted apply
+not performed. See [activation closeout](production-activation-closeout.md).

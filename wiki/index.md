@@ -178,3 +178,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.
 
 - [Overnight verified signup eligibility](verified-signup-overnight.md) — additive guard, local PASS, hosted apply blocked.
+
+- [Production activation closeout](production-activation-closeout.md) — Admin Credit correction, MY column ACL and hosted gates.

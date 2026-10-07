@@ -171,3 +171,10 @@ The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the olde
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
+
+## Production activation closeout — 2026-10-08
+
+Admin reads corrected additively; intended-major UPDATE ACL fixed with owner-RLS
+preflight. Original Admin migration history preserved. Hosted apply/session/finance
+verification blocked by missing existing access bindings. See
+[activation closeout](production-activation-closeout.md); do not infer deployment.

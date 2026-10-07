@@ -1,0 +1,2311 @@
+{
+ "task": "ADMIN-P0-A",
+ "engine": "PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu",
+ "chain": "core + quality + HQP applied; account-deletion / Math / payment candidates excluded because they are NOT_APPLIED",
+ "phases": [
+  "PHASE 1 pending subsystems absent -> NOT_INSTALLED reported, never a fake 0",
+  "PHASE 2 structural stand-ins present -> installed path executes"
+ ],
+ "total": 472,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "A1 anonymous admin_operator=false",
+   "ok": true
+  },
+  {
+   "check": "A2 anonymous dashboard denied",
+   "ok": true
+  },
+  {
+   "check": "A3 non-operator admin_operator=false",
+   "ok": true
+  },
+  {
+   "check": "A4 non-operator dashboard denied",
+   "ok": true
+  },
+  {
+   "check": "A5 expired operator denied",
+   "ok": true
+  },
+  {
+   "check": "A6 subject mismatch denied",
+   "ok": true
+  },
+  {
+   "check": "A7 non-authenticated role denied",
+   "ok": true
+  },
+  {
+   "check": "A8 malformed claims denied",
+   "ok": true
+  },
+  {
+   "check": "A9 operator admin_operator=true",
+   "ok": true
+  },
+  {
+   "check": "B1 dto_version",
+   "ok": true
+  },
+  {
+   "check": "B2 members.total=2",
+   "ok": true
+  },
+  {
+   "check": "B3 new_7d>=2",
+   "ok": true
+  },
+  {
+   "check": "B4 active_30d observed (0 without a valid session)",
+   "ok": true
+  },
+  {
+   "check": "B5 grade_distribution present",
+   "ok": true
+  },
+  {
+   "check": "B6 school_code only",
+   "ok": true
+  },
+  {
+   "check": "B7 credit.spendable=7",
+   "ok": true
+  },
+  {
+   "check": "B8 spendable by origin",
+   "ok": true
+  },
+  {
+   "check": "B9 granted_total=10",
+   "ok": true
+  },
+  {
+   "check": "B10 consumed_total=1",
+   "ok": true
+  },
+  {
+   "check": "B11 expiring_30d=4",
+   "ok": true
+  },
+  {
+   "check": "B12 payment LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "B13 payment not installed",
+   "ok": true
+  },
+  {
+   "check": "B14 payment orders null (not a fake 0)",
+   "ok": true
+  },
+  {
+   "check": "B15 math RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "B16 math not installed",
+   "ok": true
+  },
+  {
+   "check": "B17 math attempts null",
+   "ok": true
+  },
+  {
+   "check": "B18 no secret tokens",
+   "ok": true
+  },
+  {
+   "check": "C1 exact email",
+   "ok": true
+  },
+  {
+   "check": "C2 item email",
+   "ok": true
+  },
+  {
+   "check": "C3 spendable present",
+   "ok": true
+  },
+  {
+   "check": "C4 account_state NORMAL",
+   "ok": true
+  },
+  {
+   "check": "C5 exact uuid",
+   "ok": true
+  },
+  {
+   "check": "C6 prefix search",
+   "ok": true
+  },
+  {
+   "check": "C7 pagination offset",
+   "ok": true
+  },
+  {
+   "check": "C8 no secret fields",
+   "ok": true
+  },
+  {
+   "check": "C9 short query denied",
+   "ok": true
+  },
+  {
+   "check": "C10 limit 0 denied",
+   "ok": true
+  },
+  {
+   "check": "C11 limit 51 denied",
+   "ok": true
+  },
+  {
+   "check": "C12 negative offset denied",
+   "ok": true
+  },
+  {
+   "check": "C13 null query denied",
+   "ok": true
+  },
+  {
+   "check": "D1 email",
+   "ok": true
+  },
+  {
+   "check": "D2 display name",
+   "ok": true
+  },
+  {
+   "check": "D3 school code",
+   "ok": true
+  },
+  {
+   "check": "D4 state NORMAL",
+   "ok": true
+  },
+  {
+   "check": "D5 deletion null when subsystem absent",
+   "ok": true
+  },
+  {
+   "check": "D6 study sessions observed",
+   "ok": true
+  },
+  {
+   "check": "D7 study seconds is numeric",
+   "ok": true
+  },
+  {
+   "check": "D8 mock attempts observed",
+   "ok": true
+  },
+  {
+   "check": "D9 math installed=false",
+   "ok": true
+  },
+  {
+   "check": "D10 no answer body",
+   "ok": true
+  },
+  {
+   "check": "D11 unknown account denied",
+   "ok": true
+  },
+  {
+   "check": "D12 null account denied",
+   "ok": true
+  },
+  {
+   "check": "E1 summary spendable=7",
+   "ok": true
+  },
+  {
+   "check": "E2 summary free=3",
+   "ok": true
+  },
+  {
+   "check": "E3 summary paid=4",
+   "ok": true
+  },
+  {
+   "check": "E4 summary other=0 (promotion expired)",
+   "ok": true
+  },
+  {
+   "check": "E5 summary reserved=0",
+   "ok": true
+  },
+  {
+   "check": "E6 next_expiry is the purchase grant",
+   "ok": true
+  },
+  {
+   "check": "E7 grants_total=3",
+   "ok": true
+  },
+  {
+   "check": "E8 transactions_total=4",
+   "ok": true
+  },
+  {
+   "check": "E9 grants list bounded",
+   "ok": true
+  },
+  {
+   "check": "E10 expired grant flagged",
+   "ok": true
+  },
+  {
+   "check": "E11 grant available arithmetic",
+   "ok": true
+  },
+  {
+   "check": "E12 transactions list bounded",
+   "ok": true
+  },
+  {
+   "check": "E13 transaction fields",
+   "ok": true
+  },
+  {
+   "check": "E14 actor reduced to namespace",
+   "ok": true
+  },
+  {
+   "check": "E15 no external_reference",
+   "ok": true
+  },
+  {
+   "check": "E16 no provider payload",
+   "ok": true
+  },
+  {
+   "check": "E17 grants pagination",
+   "ok": true
+  },
+  {
+   "check": "E18 invalid limit denied",
+   "ok": true
+  },
+  {
+   "check": "E19 unknown account denied",
+   "ok": true
+  },
+  {
+   "check": "E20 account without wallet",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: inquiry_touch",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: inquiry_touch",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_count",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F security definer: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F security definer: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: inquiry_mine",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_detail",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_reply",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_inquiry_set_status",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_support_metrics",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F security definer: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: claim_inquiry_notifications",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F security definer: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: complete_inquiry_notification",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_essay_operations",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_math_operations",
+   "ok": true
+  },
+  {
+   "check": "F owner postgres: admin_operations_summary",
+   "ok": true
+  },
+  {
+   "check": "F security definer: admin_operations_summary",
+   "ok": true
+  },
+  {
+   "check": "F empty search_path: admin_operations_summary",
+   "ok": true
+  },
+  {
+   "check": "F full operations entry-point set present",
+   "ok": true
+  },
+  {
+   "check": "F anon cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_account_state",
+   "ok": true
+  },
+  {
+   "check": "F authenticated cannot execute admin_credit_snapshot",
+   "ok": true
+  },
+  {
+   "check": "F service_role cannot execute admin_count",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_operator",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_dashboard",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_search",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_detail",
+   "ok": true
+  },
+  {
+   "check": "F authenticated can execute admin_member_credit",
+   "ok": true
+  },
+  {
+   "check": "F count rejects non-public relation",
+   "ok": true
+  },
+  {
+   "check": "F count rejects injection",
+   "ok": true
+  },
+  {
+   "check": "F count of missing relation is null",
+   "ok": true
+  },
+  {
+   "check": "F count of present relation",
+   "ok": true
+  },
+  {
+   "check": "G1 payment installed=true",
+   "ok": true
+  },
+  {
+   "check": "G2 payment orders=1 (real count)",
+   "ok": true
+  },
+  {
+   "check": "G3 payment still LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "G4 math installed=true",
+   "ok": true
+  },
+  {
+   "check": "G5 math attempts=1 (real count)",
+   "ok": true
+  },
+  {
+   "check": "G6 math still RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "G7 member math attempts=1",
+   "ok": true
+  },
+  {
+   "check": "G8 member math evaluations=1",
+   "ok": true
+  },
+  {
+   "check": "G9 member math still RUNTIME_OFF",
+   "ok": true
+  },
+  {
+   "check": "G10 deletion absent for normal member",
+   "ok": true
+  },
+  {
+   "check": "G11 deletion state surfaced",
+   "ok": true
+  },
+  {
+   "check": "G12 deletion detail surfaced",
+   "ok": true
+  },
+  {
+   "check": "G13 search reflects deletion state",
+   "ok": true
+  },
+  {
+   "check": "G14 ERASING surfaced",
+   "ok": true
+  },
+  {
+   "check": "G15 ERASED surfaced",
+   "ok": true
+  },
+  {
+   "check": "A anon cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A service_role cannot execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A essay_finance can execute essay_admin_grant",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot insert credit_grants",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot update credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot insert credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A authenticated cannot delete credit_transactions",
+   "ok": true
+  },
+  {
+   "check": "A grant refused with no request identity",
+   "ok": true
+  },
+  {
+   "check": "A grant refused for anonymous caller",
+   "ok": true
+  },
+  {
+   "check": "A invalid origin refused",
+   "ok": true
+  },
+  {
+   "check": "A mismatched origin/reason refused",
+   "ok": true
+  },
+  {
+   "check": "A arbitrary reason string refused",
+   "ok": true
+  },
+  {
+   "check": "A null idempotency key refused",
+   "ok": true
+  },
+  {
+   "check": "A zero quantity refused",
+   "ok": true
+  },
+  {
+   "check": "A negative quantity refused",
+   "ok": true
+  },
+  {
+   "check": "A past expiry refused",
+   "ok": true
+  },
+  {
+   "check": "A grant returns a grant id",
+   "ok": true
+  },
+  {
+   "check": "A grant posts the requested quantity",
+   "ok": true
+  },
+  {
+   "check": "A grant records the canonical origin",
+   "ok": true
+  },
+  {
+   "check": "A grant records the canonical reason",
+   "ok": true
+  },
+  {
+   "check": "A grant records the operator actor",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key returns the same grant",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key posts exactly one transaction",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key with a different quantity conflicts",
+   "ok": true
+  },
+  {
+   "check": "A duplicate key with a different reason conflicts",
+   "ok": true
+  },
+  {
+   "check": "A promotion/operational_promotion accepted",
+   "ok": true
+  },
+  {
+   "check": "A compensation/customer_compensation accepted",
+   "ok": true
+  },
+  {
+   "check": "A b2b_program/program_allocation accepted",
+   "ok": true
+  },
+  {
+   "check": "A admin_grant/test_account accepted",
+   "ok": true
+  },
+  {
+   "check": "B anon cannot execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B authenticated can execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B service_role cannot execute admin_payment_orders",
+   "ok": true
+  },
+  {
+   "check": "B order-action contract absent from this cluster",
+   "ok": true
+  },
+  {
+   "check": "B no browser role reads orders directly",
+   "ok": true
+  },
+  {
+   "check": "B no browser role writes orders directly",
+   "ok": true
+  },
+  {
+   "check": "B anonymous payment read refused",
+   "ok": true
+  },
+  {
+   "check": "B normal member payment read refused",
+   "ok": true
+  },
+  {
+   "check": "B installed order table is reported as installed",
+   "ok": true
+  },
+  {
+   "check": "B order list is returned",
+   "ok": true
+  },
+  {
+   "check": "B total matches the row count",
+   "ok": true
+  },
+  {
+   "check": "B runtime state is LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "B runtime label names the disabled state",
+   "ok": true
+  },
+  {
+   "check": "B runtime label does not claim a live payment state",
+   "ok": true
+  },
+  {
+   "check": "B provider mode is reported",
+   "ok": true
+  },
+  {
+   "check": "B response carries the dto version",
+   "ok": true
+  },
+  {
+   "check": "B order carries the order id",
+   "ok": true
+  },
+  {
+   "check": "B order carries the member",
+   "ok": true
+  },
+  {
+   "check": "B order carries the product",
+   "ok": true
+  },
+  {
+   "check": "B order carries the amount",
+   "ok": true
+  },
+  {
+   "check": "B order carries the credit quantity",
+   "ok": true
+  },
+  {
+   "check": "B order carries the currency",
+   "ok": true
+  },
+  {
+   "check": "B order carries the payment state",
+   "ok": true
+  },
+  {
+   "check": "B order carries the grant state",
+   "ok": true
+  },
+  {
+   "check": "B order carries the payment date",
+   "ok": true
+  },
+  {
+   "check": "B order carries the reconciliation flag",
+   "ok": true
+  },
+  {
+   "check": "B paid order with a grant is marked refundable",
+   "ok": true
+  },
+  {
+   "check": "B order payload omits the provider purchase id",
+   "ok": true
+  },
+  {
+   "check": "B no provider or finance secret in the read payload",
+   "ok": true
+  },
+  {
+   "check": "B state filter matches a paid order",
+   "ok": true
+  },
+  {
+   "check": "B state filter excludes non-matching rows",
+   "ok": true
+  },
+  {
+   "check": "B search by order id matches",
+   "ok": true
+  },
+  {
+   "check": "B search by member id matches",
+   "ok": true
+  },
+  {
+   "check": "B unknown state refused",
+   "ok": true
+  },
+  {
+   "check": "B short query refused",
+   "ok": true
+  },
+  {
+   "check": "B limit is bounded to 50",
+   "ok": true
+  },
+  {
+   "check": "B limit floor is 1",
+   "ok": true
+  },
+  {
+   "check": "B negative offset is floored to 0",
+   "ok": true
+  },
+  {
+   "check": "B wrong dto version refused",
+   "ok": true
+  },
+  {
+   "check": "B unknown payload key refused",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot execute inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "C authenticated can execute inquiry_submit",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read the inquiry table directly",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can write the inquiry table",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read replies directly",
+   "ok": true
+  },
+  {
+   "check": "C no browser role can read the delivery queue",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot drain the delivery queue",
+   "ok": true
+  },
+  {
+   "check": "C anonymous submit refused",
+   "ok": true
+  },
+  {
+   "check": "C member submit creates an inquiry",
+   "ok": true
+  },
+  {
+   "check": "C new inquiry starts RECEIVED",
+   "ok": true
+  },
+  {
+   "check": "C first submit is not a duplicate",
+   "ok": true
+  },
+  {
+   "check": "C submit records a status event",
+   "ok": true
+  },
+  {
+   "check": "C inquiry owner is the caller, not the payload",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit returns the same inquiry",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit is flagged",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit does not create a second row",
+   "ok": true
+  },
+  {
+   "check": "C duplicate submit with different content conflicts",
+   "ok": true
+  },
+  {
+   "check": "C unknown category refused",
+   "ok": true
+  },
+  {
+   "check": "C blank title refused",
+   "ok": true
+  },
+  {
+   "check": "C over-long body refused",
+   "ok": true
+  },
+  {
+   "check": "C unknown payload key refused",
+   "ok": true
+  },
+  {
+   "check": "C submit cannot set the status",
+   "ok": true
+  },
+  {
+   "check": "C mine returns an empty list for a member with no inquiries",
+   "ok": true
+  },
+  {
+   "check": "C mine never leaks another member inquiry",
+   "ok": true
+  },
+  {
+   "check": "C mine returns the caller own inquiry",
+   "ok": true
+  },
+  {
+   "check": "C mine marks an unanswered inquiry as unanswered",
+   "ok": true
+  },
+  {
+   "check": "C mine is bounded",
+   "ok": true
+  },
+  {
+   "check": "C anon cannot execute admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "C authenticated can execute admin_inquiry_list",
+   "ok": true
+  },
+  {
+   "check": "C normal member inquiry list refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member inquiry detail refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member reply refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member status change refused",
+   "ok": true
+  },
+  {
+   "check": "C normal member support metrics refused",
+   "ok": true
+  },
+  {
+   "check": "C operator list returns the inquiry",
+   "ok": true
+  },
+  {
+   "check": "C operator list carries the open count",
+   "ok": true
+  },
+  {
+   "check": "C operator list marks the member",
+   "ok": true
+  },
+  {
+   "check": "C operator list carries the category",
+   "ok": true
+  },
+  {
+   "check": "C operator list truncates the body preview",
+   "ok": true
+  },
+  {
+   "check": "C operator list has no full body field",
+   "ok": true
+  },
+  {
+   "check": "C status filter excludes non-matching rows",
+   "ok": true
+  },
+  {
+   "check": "C category filter matches",
+   "ok": true
+  },
+  {
+   "check": "C unknown status filter refused",
+   "ok": true
+  },
+  {
+   "check": "C unknown category filter refused",
+   "ok": true
+  },
+  {
+   "check": "C short search query refused",
+   "ok": true
+  },
+  {
+   "check": "C list limit is bounded",
+   "ok": true
+  },
+  {
+   "check": "C search by inquiry id matches",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the body",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the member block",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the credit snapshot",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the account state",
+   "ok": true
+  },
+  {
+   "check": "C detail returns the status history",
+   "ok": true
+  },
+  {
+   "check": "C detail starts with no replies",
+   "ok": true
+  },
+  {
+   "check": "C detail carries bounded related references",
+   "ok": true
+  },
+  {
+   "check": "C related payment count reflects the member own orders",
+   "ok": true
+  },
+  {
+   "check": "C related reference count is bounded to the submitting member",
+   "ok": true
+  },
+  {
+   "check": "C unknown inquiry id is NOT_FOUND",
+   "ok": true
+  },
+  {
+   "check": "C malformed inquiry id refused",
+   "ok": true
+  },
+  {
+   "check": "C ANSWERED without a reply refused [PT409]",
+   "ok": true
+  },
+  {
+   "check": "C status can move to IN_PROGRESS",
+   "ok": true
+  },
+  {
+   "check": "C status change is audited",
+   "ok": true
+  },
+  {
+   "check": "C repeating the same status is a no-op",
+   "ok": true
+  },
+  {
+   "check": "C status change does not duplicate the audit row",
+   "ok": true
+  },
+  {
+   "check": "C reply returns a reply id",
+   "ok": true
+  },
+  {
+   "check": "C reply sets the inquiry to ANSWERED",
+   "ok": true
+  },
+  {
+   "check": "C reply reports the delivery as queued",
+   "ok": true
+  },
+  {
+   "check": "C reply stamps answered_at",
+   "ok": true
+  },
+  {
+   "check": "C reply is appended, not overwritten",
+   "ok": true
+  },
+  {
+   "check": "C reply is recorded",
+   "ok": true
+  },
+  {
+   "check": "C reply is audited",
+   "ok": true
+  },
+  {
+   "check": "C exactly one delivery is queued",
+   "ok": true
+  },
+  {
+   "check": "C queued delivery starts pending",
+   "ok": true
+  },
+  {
+   "check": "C queued delivery stores no recipient address",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply returns the same reply",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply is flagged",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply does not queue a second delivery",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply does not append a second row",
+   "ok": true
+  },
+  {
+   "check": "C duplicate reply with different content conflicts",
+   "ok": true
+  },
+  {
+   "check": "C blank reply refused",
+   "ok": true
+  },
+  {
+   "check": "C reply to an unknown inquiry is NOT_FOUND",
+   "ok": true
+  },
+  {
+   "check": "C member sees the inquiry as answered",
+   "ok": true
+  },
+  {
+   "check": "C member sees the ANSWERED status",
+   "ok": true
+  },
+  {
+   "check": "C member list still omits the reply body",
+   "ok": true
+  },
+  {
+   "check": "C status can move to CLOSED",
+   "ok": true
+  },
+  {
+   "check": "C reply to a closed inquiry refused",
+   "ok": true
+  },
+  {
+   "check": "C metrics count the open queue",
+   "ok": true
+  },
+  {
+   "check": "C metrics count closed inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics count answered inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics count today new inquiries",
+   "ok": true
+  },
+  {
+   "check": "C metrics report the failed delivery count",
+   "ok": true
+  },
+  {
+   "check": "C first response time is a real measurement",
+   "ok": true
+  },
+  {
+   "check": "C oldest open inquiry is null when nothing is open",
+   "ok": true
+  },
+  {
+   "check": "C claim is service-role only",
+   "ok": true
+  },
+  {
+   "check": "C complete is service-role only",
+   "ok": true
+  },
+  {
+   "check": "C a second claim finds nothing while the lease is held",
+   "ok": true
+  },
+  {
+   "check": "C worker claims the queued delivery",
+   "ok": true
+  },
+  {
+   "check": "C claim resolves the member for delivery",
+   "ok": true
+  },
+  {
+   "check": "C claim returns a token",
+   "ok": true
+  },
+  {
+   "check": "C claim counts the attempt",
+   "ok": true
+  },
+  {
+   "check": "C completion marks the delivery sent",
+   "ok": true
+  },
+  {
+   "check": "C sent delivery is stamped",
+   "ok": true
+  },
+  {
+   "check": "C operator can reopen and answer again",
+   "ok": true
+  },
+  {
+   "check": "C a second reply queues a second delivery",
+   "ok": true
+  },
+  {
+   "check": "C a stale claim token cannot complete the delivery",
+   "ok": true
+  },
+  {
+   "check": "C worker claims the second delivery",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery records the error code",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery schedules a retry",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery releases the lease",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery does not lose the reply",
+   "ok": true
+  },
+  {
+   "check": "C failed delivery is counted in the metrics",
+   "ok": true
+  },
+  {
+   "check": "C exactly one delivery is in the failed state",
+   "ok": true
+  },
+  {
+   "check": "C no secret token in any P0-B payload",
+   "ok": true
+  },
+  {
+   "check": "C no finance actor reference in any P0-B payload",
+   "ok": true
+  },
+  {
+   "check": "C admin console defines no credit write function",
+   "ok": true
+  },
+  {
+   "check": "C inquiry functions never update a credit table",
+   "ok": true
+  },
+  {
+   "check": "D absent order table is reported as not installed",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports a JSON null total",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports a JSON null list",
+   "ok": true
+  },
+  {
+   "check": "D absent order table is not reported as zero",
+   "ok": true
+  },
+  {
+   "check": "D absent order table reports mode NONE",
+   "ok": true
+  },
+  {
+   "check": "D absent order table still reports LIVE_OFF",
+   "ok": true
+  },
+  {
+   "check": "D absent order table still validates the request",
+   "ok": true
+  },
+  {
+   "check": "D related payment count degrades to null",
+   "ok": true
+  },
+  {
+   "check": "N-A1 authenticated cannot read the notification table directly",
+   "ok": true
+  },
+  {
+   "check": "N-A2 authenticated cannot insert notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A3 authenticated cannot update notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A4 anon cannot read the notification table",
+   "ok": true
+  },
+  {
+   "check": "N-A5 service_role cannot insert notifications",
+   "ok": true
+  },
+  {
+   "check": "N-A6 row level security is enabled with no permissive policy",
+   "ok": true
+  },
+  {
+   "check": "N-A7 the emitter is not callable by any client role",
+   "ok": true
+  },
+  {
+   "check": "N-A8 the notification schema is not reachable by clients",
+   "ok": true
+  },
+  {
+   "check": "N-A9 duplicate dedupe key per member is rejected",
+   "ok": true
+  },
+  {
+   "check": "N-A10 an arbitrary notification type is rejected",
+   "ok": true
+  },
+  {
+   "check": "N-A11 the daily producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A12 the payment producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A13 the math producer is not callable by a browser session",
+   "ok": true
+  },
+  {
+   "check": "N-A14 canonical ledger postings produced notifications",
+   "ok": true
+  },
+  {
+   "check": "N-B1 list returns only the caller own rows",
+   "ok": true
+  },
+  {
+   "check": "N-B2 list is newest first",
+   "ok": true
+  },
+  {
+   "check": "N-B3 list carries the read flag",
+   "ok": true
+  },
+  {
+   "check": "N-B4 unread count counts only unread own rows",
+   "ok": true
+  },
+  {
+   "check": "N-B5 unread_only filter hides read rows",
+   "ok": true
+  },
+  {
+   "check": "N-B6 paging is bounded",
+   "ok": true
+  },
+  {
+   "check": "N-B7 marking a foreign notification is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B7b the foreign notification is untouched",
+   "ok": true
+  },
+  {
+   "check": "N-B8 marking an own notification succeeds once",
+   "ok": true
+  },
+  {
+   "check": "N-B8b the own notification is now read",
+   "ok": true
+  },
+  {
+   "check": "N-B8c the unread count dropped by one",
+   "ok": true
+  },
+  {
+   "check": "N-B9 marking all read affects only the caller",
+   "ok": true
+  },
+  {
+   "check": "N-B9b the caller has nothing unread",
+   "ok": true
+  },
+  {
+   "check": "N-B9c the foreign notification is still unread",
+   "ok": true
+  },
+  {
+   "check": "N-B10 marking all read twice is idempotent",
+   "ok": true
+  },
+  {
+   "check": "N-B11 unauthenticated list is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B12 unauthenticated count is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B13 unauthenticated mark read is refused",
+   "ok": true
+  },
+  {
+   "check": "N-B14 unauthenticated mark all read is refused",
+   "ok": true
+  },
+  {
+   "check": "N-C1 an operator reply produces exactly one notification",
+   "ok": true
+  },
+  {
+   "check": "N-C2 the reply notification targets the inquiry",
+   "ok": true
+  },
+  {
+   "check": "N-C3 the reply notification is unread and summary only",
+   "ok": true
+  },
+  {
+   "check": "N-C3b the reply enqueued an email delivery",
+   "ok": true
+  },
+  {
+   "check": "N-C4 a retried operator reply does not duplicate the notification",
+   "ok": true
+  },
+  {
+   "check": "N-C4b the retry did not insert a second reply",
+   "ok": true
+  },
+  {
+   "check": "N-C5 the email delivery is recorded as failed",
+   "ok": true
+  },
+  {
+   "check": "N-C5b a failed email delivery leaves the notification intact",
+   "ok": true
+  },
+  {
+   "check": "N-C5c a failed email delivery does not mark the notification read",
+   "ok": true
+  },
+  {
+   "check": "N-C6 a canonical grant produces exactly one credit_grant notification",
+   "ok": true
+  },
+  {
+   "check": "N-C7 the grant notification states the quantity",
+   "ok": true
+  },
+  {
+   "check": "N-C8 a positive adjustment, a negative adjustment and an expiry do not notify",
+   "ok": true
+  },
+  {
+   "check": "N-C9 a signup bonus does not notify",
+   "ok": true
+  },
+  {
+   "check": "N-C10 an operator grant notifies through the same producer",
+   "ok": true
+  },
+  {
+   "check": "N-D6 a grant that lands above the threshold announces nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D6b 5 -> 4 announces nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D7 4 -> 3 announces the low balance exactly once",
+   "ok": true
+  },
+  {
+   "check": "N-D7b the low balance notification is the Owner copy and unread",
+   "ok": true
+  },
+  {
+   "check": "N-D8 3 -> 2 announces nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D9 falling to zero from inside the low band announces nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D9b recovering above the threshold and falling to 4 announces nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D10 recovering above 3 and crossing again is a new cycle",
+   "ok": true
+  },
+  {
+   "check": "N-D10b the new cycle states the new balance",
+   "ok": true
+  },
+  {
+   "check": "N-D11 reserve / release cannot move the ledger balance",
+   "ok": true
+  },
+  {
+   "check": "N-D11b the crossing producer ignores a zero movement",
+   "ok": true
+  },
+  {
+   "check": "N-D12 the daily run reports the expiries it created",
+   "ok": true
+  },
+  {
+   "check": "N-D12b the daily result no longer reports a balance counter",
+   "ok": true
+  },
+  {
+   "check": "N-D13 D-30 / D-14 / D-7 / D-3 each produced exactly one notification",
+   "ok": true
+  },
+  {
+   "check": "N-D13b the D-7 group summed the two grants expiring that day",
+   "ok": true
+  },
+  {
+   "check": "N-D13c a non-threshold date produced nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D13d the expiry notification carries the quantity and the date",
+   "ok": true
+  },
+  {
+   "check": "N-D14 no member is sent a low balance notification by the scheduler",
+   "ok": true
+  },
+  {
+   "check": "N-D15 a repeated scheduler run creates nothing",
+   "ok": true
+  },
+  {
+   "check": "N-D15b the expiry notifications were not duplicated",
+   "ok": true
+  },
+  {
+   "check": "N-D15c the scheduler never produced a low balance notification",
+   "ok": true
+  },
+  {
+   "check": "N-D16 a fully consumed grant expires without a notification",
+   "ok": true
+  },
+  {
+   "check": "N-D16b an unexpired grant at or below the threshold is not a crossing",
+   "ok": true
+  },
+  {
+   "check": "C1 an anonymous caller is refused FORBIDDEN",
+   "ok": true
+  },
+  {
+   "check": "C1b the Math read is refused the same way",
+   "ok": true
+  },
+  {
+   "check": "C1c the operations summary is refused the same way",
+   "ok": true
+  },
+  {
+   "check": "C2 the operator gate opens the read",
+   "ok": true
+  },
+  {
+   "check": "C2b the payload is versioned and typed",
+   "ok": true
+  },
+  {
+   "check": "C3 the answer body never appears in the payload",
+   "ok": true
+  },
+  {
+   "check": "C3b no item carries a body or draft field",
+   "ok": true
+  },
+  {
+   "check": "C4 every fixture evaluation is listed",
+   "ok": true
+  },
+  {
+   "check": "C5 a completed evaluation reports success",
+   "ok": true
+  },
+  {
+   "check": "C5b the completed row carries the processing time",
+   "ok": true
+  },
+  {
+   "check": "C5c the completed row carries the provider, model and prompt",
+   "ok": true
+  },
+  {
+   "check": "C6 a failed evaluation reports failure and its error code",
+   "ok": true
+  },
+  {
+   "check": "C6b a failed evaluation still reports its elapsed time",
+   "ok": true
+  },
+  {
+   "check": "C7 a pending request reports pending, not failure",
+   "ok": true
+  },
+  {
+   "check": "C8 an invalidated evaluation is flagged with its reason",
+   "ok": true
+  },
+  {
+   "check": "C9 a re-evaluation is flagged and the original is not",
+   "ok": true
+  },
+  {
+   "check": "C10 Credits come from the billing decision, not the evaluation",
+   "ok": true
+  },
+  {
+   "check": "C10b an evaluation with no decision reports no Credits rather than zero",
+   "ok": true
+  },
+  {
+   "check": "C10c the summary counts each status",
+   "ok": true
+  },
+  {
+   "check": "C11 the status filter narrows the list",
+   "ok": true
+  },
+  {
+   "check": "C11b an unknown status is refused",
+   "ok": true
+  },
+  {
+   "check": "C12 human review is reported as tracked",
+   "ok": true
+  },
+  {
+   "check": "C12b an unreviewed evaluation says so",
+   "ok": true
+  },
+  {
+   "check": "C13 a reviewed evaluation reports the state and the disposition",
+   "ok": true
+  },
+  {
+   "check": "C13b the other evaluations remain unreviewed",
+   "ok": true
+  },
+  {
+   "check": "C14 the summary reports the reviewed case count",
+   "ok": true
+  },
+  {
+   "check": "C14b the summary carries the essay availability and activity",
+   "ok": true
+  },
+  {
+   "check": "C15 partially deployed Math is reported unavailable",
+   "ok": true
+  },
+  {
+   "check": "C15b unavailable Math reports no summary instead of a zero summary",
+   "ok": true
+  },
+  {
+   "check": "C15c unavailable Math is typed, so the console can label it",
+   "ok": true
+  },
+  {
+   "check": "C15d a partial table is never read as an installed runtime",
+   "ok": true
+  },
+  {
+   "check": "C16 the summary distinguishes undeployed Math from idle Math",
+   "ok": true
+  },
+  {
+   "check": "C16b the summary names its own as-of time",
+   "ok": true
+  },
+  {
+   "check": "C17 an oversized limit is clamped, not honoured",
+   "ok": true
+  },
+  {
+   "check": "C17b a null limit falls back to the default",
+   "ok": true
+  },
+  {
+   "check": "C17c a zero limit still returns a bounded list",
+   "ok": true
+  },
+  {
+   "check": "C17d a cursor returns only older rows",
+   "ok": true
+  },
+  {
+   "check": "C18 anon cannot execute the operations reads",
+   "ok": true
+  },
+  {
+   "check": "C18b but an authenticated operator can",
+   "ok": true
+  },
+  {
+   "check": "C18c service_role is not granted the operator reads",
+   "ok": true
+  },
+  {
+   "check": "C18d the functions are SECURITY DEFINER with an empty search path",
+   "ok": true
+  },
+  {
+   "check": "C18e the shape probe is not reachable from the API surface",
+   "ok": true
+  }
+ ],
+ "acl": [
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_account_state",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_count",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": false
+  },
+  {
+   "function": "admin_credit_snapshot",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_dashboard",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_essay_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_list",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_reply",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_inquiry_set_status",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_math_operations",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_credit",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_detail",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_member_search",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_operations_summary",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_operations_summary",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_operations_summary",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_operator",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_payment_orders",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  },
+  {
+   "function": "admin_support_metrics",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "anon",
+   "execute": false
+  },
+  {
+   "function": "admin_support_metrics",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "authenticated",
+   "execute": true
+  },
+  {
+   "function": "admin_support_metrics",
+   "owner": "postgres",
+   "security_definer": true,
+   "search_path": "search_path=\"\"",
+   "role": "service_role",
+   "execute": false
+  }
+ ]
+}
