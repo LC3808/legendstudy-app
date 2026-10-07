@@ -176,3 +176,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MATH-2E — Learning runtime and MATH-5B/6B physical handoff; isolated, NOT_APPLIED](math-essay-learning-runtime.md)
 
 - [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.
+
+- [Overnight verified signup eligibility](verified-signup-overnight.md) — additive guard, local PASS, hosted apply blocked.

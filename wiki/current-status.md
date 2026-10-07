@@ -1,3 +1,9 @@
+# Overnight verified signup — 2026-10-07
+
+Verified-email eligibility guard prepared and locally tested; Production NOT_APPLIED
+(no DB binding). Existing +3 ledger/benefit lifecycle reused.
+[Scoped evidence](verified-signup-overnight.md).
+
 # Current Status
 
 ## APP Store RC — 2026-10-07
