@@ -1,5 +1,28 @@
 # LEGENDSTUDY-APP-FINAL-STORE-RC-1 — 2026-10-07
 
+## Owner release-defines confirmation — supersedes initial config notes below
+
+Owner confirms native essay available in v1. Independent Opus audit is cross-check
+material: P0=0, P1=2 (defines), GO_WITH_FIXES; no feature change required. We did not
+reopen router/onboarding/manifest audits. All three flags are now fixed true by
+`tool/store-release`: ACCOUNT_DELETION_ENABLED, ESSAY_LIVE_WRITES_ENABLED,
+ESSAY_EVALUATION_REQUESTS_ENABLED. Existing public production fields are retained;
+the ignored local config was updated in place. Both platforms share the same loader
+and overrides. Temporary merged config is mode0600 and deleted after the build.
+Direct Flutter/Xcode commands bypass the wrapper; final signed builds must use it.
+Updated defines: Android unsigned AAB PASS; iOS unsigned archive through the shared
+entrypoint PASS. Generated iOS DART_DEFINES independently confirms all three true.
+Merge/preservation, secure temporary file cleanup and missing Android signing rejection PASS.
+
+Android release signing now consumes ignored android/key.properties; no key generated,
+no debug-key fallback. Existing upload-key file is absent. iOS still has only Apple
+Development identity; Team/distribution provisioning/export need Owner completion.
+Signing/device status remains NO. No new feature-code/Production/Payment changes.
+
+Focused device smoke after signing: login → first-run → native 논술 LAB → 문항 →
+답안 저장 → 평가 요청 진입; deletion request→cancel on disposable synthetic account;
+external browser link→return. No deletion of the durable reviewer or real student data.
+
 ## Result and evidence
 
 APP base `73a2a358631f478d5bceaccb8ecd03c38218890a` on

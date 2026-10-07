@@ -1,8 +1,16 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+// Local upload-key material is never committed. No debug-key release fallback.
+val uploadPropertiesFile = rootProject.file("key.properties")
+val uploadProperties = Properties().apply {
+    if (uploadPropertiesFile.exists()) uploadPropertiesFile.inputStream().use { load(it) }
 }
 
 android {
@@ -31,9 +39,25 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (uploadPropertiesFile.exists()) {
+            create("release") {
+                fun required(name: String): String = requireNotNull(uploadProperties.getProperty(name)) {
+                    "Missing upload signing property: $name"
+                }
+                storeFile = rootProject.file(required("storeFile"))
+                storePassword = required("storePassword")
+                keyAlias = required("keyAlias")
+                keyPassword = required("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // Release signing must be configured explicitly before distribution.
+            if (uploadPropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }

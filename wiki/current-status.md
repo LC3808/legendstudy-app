@@ -5,7 +5,9 @@
 [Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
 personalization, native LAB entry, notifications and account deletion. Owner full tests
 +967 ~2 PASS; Flutter3.47.6 fresh analyze, unsigned Android AAB and iOS release PASS.
-Store submission remains blocked by signing, final release flags/policy, device smoke
+Owner has confirmed all three release flags true; tool/store-release preserves other
+production defines for both platforms. Android local upload-key binding prepared.
+Store submission remains blocked by signing, device smoke
 and Console inputs. SDK wrapper aligned with verified3.47.6; no feature/Production change.
 Oct06 Unified Daily supersedes older APP deletion/release pending statements below.
 

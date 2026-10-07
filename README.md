@@ -101,3 +101,34 @@ No guessed or redrawn logo has been introduced.
 See [architecture](wiki/architecture.md), [design system](wiki/design-system.md),
 and [current status](wiki/current-status.md) for implementation boundaries and
 verified build outcomes.
+
+## Final Store release
+
+Use the same existing **public** Production config for both platforms. Never place
+server secrets in Dart defines. The committed `tool/store-release` preserves every
+existing define and forces Owner-approved `ACCOUNT_DELETION_ENABLED`,
+`ESSAY_LIVE_WRITES_ENABLED`, `ESSAY_EVALUATION_REQUESTS_ENABLED` to true.
+
+```sh
+./tool/store-release android --config config/store-rc.local.json --check
+./tool/store-release ios --config config/store-rc.local.json --check
+./tool/store-release android --config config/store-rc.local.json
+./tool/store-release ios --config config/store-rc.local.json
+```
+
+Use this entrypoint for final signed builds; direct Flutter/Xcode builds bypass its
+define guarantee. `--build-name`, `--build-number` and iOS `--export-options-plist`
+can be forwarded. Do not use `--no-pub` for release builds (registrant regeneration).
+No command uploads artifacts.
+
+Android: Owner supplies the existing upload keystore and ignored `android/key.properties`
+with `storeFile` (absolute path recommended), `storePassword`, `keyAlias`, `keyPassword`.
+Do not share these values in chat/Git. Gradle now binds that file to release signing;
+the Store entrypoint refuses Android builds when the file is absent. It never silently
+uses the debug key. Play App Signing certificate fingerprint must match Google OAuth
+for Play-distributed login (upload-key fingerprint is not a substitute).
+
+iOS: open `ios/Runner.xcworkspace`, choose the correct organization Team and confirm
+bundle `com.legendstudy.app`, distribution provisioning and Sign in with Apple. Run the
+shared Store entrypoint again after signing setup. Only Apple Development was available
+in the current local keychain; signed archive/export remain Owner gates.

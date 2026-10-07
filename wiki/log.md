@@ -3329,3 +3329,11 @@ Fixed stale SDK wrapper3.47.5→approved3.47.6. Standard Android build regenerat
 registrant; --no-pub failed with dev-only integration_test. No Dart/dependency changes.
 [RC report/checklist](final-store-rc-1.md) records signing, final defines, device/Store/policy
 gates. Logos deferred; Production/Toss/Store writes0.
+
+### Final release defines confirmed
+
+Owner resolves both define P1s: deletion + essay writes + evaluation true. Added shared
+Store build entrypoint preserving all other production values, and Android existing
+upload-key properties binding. No feature-code change or key creation. Merge/override/
+mode0600 cleanup tests PASS. Signing remains Owner action; focused device smoke includes
+native essay save/evaluation entry and synthetic deletion request→cancel.

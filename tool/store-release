@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Build either Store artifact from one local production config; never upload."""
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import tempfile
+
+ROOT = Path(__file__).resolve().parent.parent
+REQUIRED = {
+    'ACCOUNT_DELETION_ENABLED': True,
+    'ESSAY_LIVE_WRITES_ENABLED': True,
+    'ESSAY_EVALUATION_REQUESTS_ENABLED': True,
+}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('platform', choices=['android', 'ios'])
+    parser.add_argument('--config', type=Path, default=ROOT / 'config/store-rc.local.json')
+    parser.add_argument('--check', action='store_true', help='Validate config without building')
+    args, extra = parser.parse_known_args()
+    if any(x.startswith(('--dart-define', '--debug', '--profile', '--flavor', '--config')) for x in extra):
+        parser.error('Use the shared production config; define/build-mode overrides are not allowed.')
+    try:
+        config = json.loads(args.config.read_text())
+    except (OSError, ValueError):
+        parser.error('Production config is missing or invalid; no values printed.')
+    if not isinstance(config, dict) or config.get('APP_ENV') != 'production':
+        parser.error('APP_ENV must be production in the existing local config.')
+    config.update(REQUIRED)  # Preserve every other existing production define.
+    if args.check:
+        print('PRODUCTION_CONFIG_PASS: existing defines preserved; all three release flags true.')
+        return 0
+    if args.platform == 'android' and not (ROOT / 'android/key.properties').is_file():
+        parser.error('Android upload signing required: configure ignored android/key.properties first.')
+    # Flutter embeds defines in the app: this file must contain PUBLIC client config only.
+    fd, name = tempfile.mkstemp(prefix='legendstudy-store-', suffix='.json')
+    try:
+        with os.fdopen(fd, 'w') as output:
+            json.dump(config, output)
+        target = 'appbundle' if args.platform == 'android' else 'ipa'
+        return subprocess.call([
+            str(ROOT / 'tool/flutterw'), 'build', target, '--release',
+            '--dart-define-from-file=' + name, *extra,
+        ], cwd=ROOT)
+    finally:
+        Path(name).unlink(missing_ok=True)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
