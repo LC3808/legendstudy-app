@@ -3374,3 +3374,10 @@ postgres EXECUTE on credit_post_grant. Candidate20261008000400 fixes only that A
 with the established temporary role bridge. Reproduced under real NOSUPERUSER and
 verified canonical3/duplicate/concurrency plus lifecycle and transactional rollback.
 Owner apply pending. [Details](production-activation-closeout.md#benefit-grant-acl-root-cause--2026-10-08).
+
+
+## 2026-10-08 — Actual signup3 delivered
+
+Owner confirms one signup grant,3 balance, delivery relation and no expiry for the
+affected test account after the minimum ACL correction. No manual grant. MY/Essay
+Header display pending. [Evidence](production-activation-closeout.md#signup-bonus-production-ledger-verified--2026-10-08).

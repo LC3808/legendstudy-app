@@ -1,16 +1,16 @@
 # Owner-assisted activation — 2026-10-08
 
-2026-10-08 signup recovery: diagnostic Worker v22 Owner-deployed. Both candidates
-fail CLAIM_HTTP_403_42501. Owner catalog confirms postgres cannot execute the
-essay_executor-owned credit_post_grant. Minimum one-function ACL correction
-20261008000400 and atomic Owner SQL bundle are locally verified, Production PENDING.
-See [activation closeout](production-activation-closeout.md#benefit-grant-acl-root-cause--2026-10-08).
+2026-10-08 signup recovery: **PRODUCTION LEDGER VERIFIED for the affected test account**.
+Owner confirms1 signup grant /3 Credits /delivery linked /no expiry after key
+provisioning and migration20261008000400. Temporary bridge removed. MY/Essay Header
+cross-surface display and hosted duplicate retry remain unverified.
+See [activation closeout](production-activation-closeout.md#signup-bonus-production-ledger-verified--2026-10-08).
 
 Owner applied all six signup/MY/Admin candidates and returned ledger/catalog proof.
 Admin authenticated reads and normal/review denial Owner-verified. New Web-only
-profile gap diagnosed and LAB4de6dfa deployed; actual repaired new-user/+3 runtime
-pending. Finance writes remain disabled. Additional school aggregate candidate
-20261008000300 is LOCAL_VERIFIED / NOT_APPLIED (402+54 SQL assertions).
+profile gap diagnosed and LAB4de6dfa deployed; new-user profile and signup3 ledger verified; MY display verification
+pending. Finance writes remain disabled. School aggregate migration
+20261008000300 Owner-applied/catalog verified (402+54 local SQL assertions).
 [Activation and school detail](production-activation-closeout.md).
 
 # Current Status
