@@ -183,3 +183,14 @@ grant/ledger/summary verification. No manual3, key rotation or new secret requir
 Rollback: if needed use the same temporary owner SET bridge to REVOKE only this
 function's postgres EXECUTE, then remove the temporary bridge. That reblocks benefits;
 never remove granted Credits or migration history to simulate rollback.
+
+
+### Owner post-error catalog — 2026-10-08
+
+Owner reported42P01 benefit_acl_before missing; pasted SQL exactly matched the
+published apply bundle. A new read-only query nevertheless confirms migration
+20261008000400 recorded, postgres EXECUTE effective, and no postgres-granted temporary
+essay_executor membership. Thus do not replay the migration or deploy the proposed
+temp-table-free replacement. The discrepancy in Editor execution remains unexplained;
+rollback was not assumed. Applied source history is preserved. Automatic worker
+delivery and target grant/ledger/UI checks remain pending.
