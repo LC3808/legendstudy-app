@@ -69,6 +69,56 @@ IAP_CHANGED: NO · TARGET_005: HOLD. Manus and Codex work preserved; Codex
    Connect / Play Console inputs (screenshots, content rating, export compliance,
    external-link/payment policy answers), recovery-redirect verification.
 
+## Signed-release attempt (2026-10-09)
+- **ANDROID_SIGNED_AAB: BLOCKED.** No LegendStudy keystore exists anywhere on the
+  machine (only an unrelated *muselry* keystore — not used), no env/CI/gradle
+  signing path, git history never held one, `android/key.properties` absent, and
+  gradle has no debug-key fallback. **No new key generated.** Owner upload keystore
+  required.
+- **IOS_ARCHIVE: BLOCKED.** Only an *Apple Development* identity (woojin chang
+  7P4MAL37T7) and **0 provisioning profiles** — **no Distribution identity/profile**.
+  `build ios --release --no-codesign` already PASS; a distribution Archive needs the
+  Owner's Team/Distribution cert + profile.
+
+## Simulator Visual QA (iPhone 17 Pro, iOS 26.5, real rendering — 2026-10-09)
+Built with the public `config/development.local.json`, installed and driven on the
+booted simulator; every screen below was actually rendered.
+- **Splash:** white bg + centred orange symbol only (no orange bg, no copy). ✅
+- **Home (guest):** cards (D-Day/공부시간/급식), search + chips, **로그인 =
+  orange-outlined** (secondary). Bottom nav 홈/자료/학습/LAB/MY. ✅
+- **Materials:** live data (`2026년 9월 고1 모의고사` …), filter dropdowns +
+  type chips (전체✓), bookmark icons. ✅
+- **Material detail:** `출처: 레전드스터디 닷컴 · 원문 보기` (external), per-subject
+  resources (국어/영어/수학/한국사/통합사회/통합과학 · 문제·정답·해설), 저장. ✅
+- **Study Timer:** idle `00:00:00` + **공부 시작 (orange filled, primary)** →
+  running `공부 중` with **일시정지/종료 (orange outlined)** → stop → `이 기기에
+  저장됨` (guest local). **최근 7일 chart updates, today's bar at the right.** ✅
+- **D-Day:** 관리 sheet (`아직 저장된 일정이 없어요 · 앱 종료 시 초기화`) → create
+  form `이름/메모 0/15` + `날짜: 2026.10.09.(금)` (YYYY.MM.DD.(요일)). ✅
+- **MY (guest):** login prompt (orange-outlined), private modules hidden, gear. ✅
+- **Settings:** grouped 계정 / 기본정보(학교·학년) / 학습설정(모의 시간 toggle,
+  orange) / 서비스정보(문의, 앱 안내 다시 보기) / 약관·개인정보. ✅
+- **LAB:** 내신분석 LAB [준비 중], 수능·모의고사 LAB [준비 중] (gated/honest),
+  논술 LAB "이용 가능" + **논술 LAB 시작하기 (orange filled)** + **웹에서 이용하기 ↗**. ✅
+- **Login:** email/password + **로그인 (orange filled, strong action)** + tertiary
+  links + **Google / Kakao / Apple** brand-styled social buttons. ✅
+- **CTA hierarchy confirmed on-device:** filled-orange only for strong actions
+  (공부 시작, 로그인 submit, 논술 시작); orange-outlined for nav/general (로그인
+  entry, timer controls); text for tertiary. No jarring filled-orange on the warm
+  surface. No clipping/overflow seen; Dynamic Island safe area respected.
+- **Not rendered:** Onboarding (only shows for authenticated-not-onboarded users; a
+  guest never reaches it, and real login needs Owner credentials — not performed).
+  Small-screen (360px) / 200% text per-screen device pass not repeated here; the
+  967-test suite already asserts 360×640 @2x no-overflow.
+
+## Functional smoke (guest, real)
+Materials search/browse + detail + source link ✅ · Study Timer start→run→stop→save
++ 7-day chart ✅ · D-Day management + create form ✅ · 5-tab + nested-route + back
+navigation ✅ · Login page + 3 social providers render ✅ (actual auth needs Owner
+credentials — not performed) · LAB gated labels + web link ✅. PDF viewer *open* not
+exercised (resource structure verified).
+
 ## Next
-Owner provides signing → signed builds via `tool/store-release` → device smoke →
-Console submission. The code RC is green and finalized on `a3cc3b3`+.
+Owner provides Android keystore + iOS Distribution identity/profile → signed
+AAB/Archive via `tool/store-release` → device smoke → Console submission. The code
+RC is green and finalized on `a3cc3b3`+; simulator visual + functional QA PASS.
