@@ -75,3 +75,20 @@ access and content/provider prerequisites are collected in the final closeout.
 
 Preserved: Signup CLOSED; Target005 HOLD; Payment/Toss/IAP unchanged; MY/Admin and
 Manus Header/Icon/Favicon/global CSS unchanged by this task.
+
+## Verified release evidence
+
+LAB main `ea144bc0c19d64c916fb4485b8bd7b175a465154`, Cloudflare Production
+`2e7b5c14-953b-497c-b873-88567c521442` SUCCESS. Existing isolated math-test project
+also deployed via its pre-existing Git integration; no new infrastructure/config.
+Production browser `/essay-lab/` and `/math/`,390/1440px:4 checks PASS, HTTP200,
+correct login-next destination, no anonymous evaluation control or page error.
+Actual availability HTTP200/all four false; anonymous upload/extract HTTP409 and
+EVALUATE HTTP503, no body/artifact/token submitted. This is denial/read verification,
+NOT authenticated evaluation, model quality, credit consumption or end-to-end evidence.
+
+LAB824 tests/80 files, lint/typecheck/boundary/static export and browser secret graph
+PASS. APP31 synthetic contract/worker tests PASS; PostgreSQL17 existing Math learning,
+legacy102 and installation14 suites PASS; isolated010 projection10 checks PASS with
+stubbed existing lifecycle authority. 010 remains NOT_APPLIED; provider calls0.
+APP candidate361880b records implementation; this documentation does not apply it.
