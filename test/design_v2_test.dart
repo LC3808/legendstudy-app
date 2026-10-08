@@ -88,7 +88,7 @@ void main() {
         UncontrolledProviderScope(container: c, child: const LegendStudyApp()),
       );
       await t.pumpAndSettle();
-      final button = find.widgetWithText(FilledButton, '로그인');
+      final button = find.widgetWithText(OutlinedButton, '로그인');
       expect(button, findsOneWidget);
       expect(t.getSize(button).height, greaterThanOrEqualTo(48));
       expect(find.text('프로필 수정'), findsNothing);

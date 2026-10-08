@@ -198,7 +198,8 @@ class GuestAccountPrompt extends StatelessWidget {
     children: [
       const Text('학습 기록과 저장한 자료를 계정에 연결해 관리하세요.'),
       const SizedBox(height: AppTokens.space16),
-      FilledButton(onPressed: onLogin, child: const Text('로그인')),
+      // Login is a general/entry CTA → orange outline (see app_theme CTA hierarchy).
+      OutlinedButton(onPressed: onLogin, child: const Text('로그인')),
     ],
   );
 }

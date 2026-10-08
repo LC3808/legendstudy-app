@@ -180,7 +180,7 @@ void main() {
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    expect(find.widgetWithText(FilledButton, '로그인'), findsOneWidget);
+    expect(find.widgetWithText(OutlinedButton, '로그인'), findsOneWidget);
   });
   testWidgets(
     'materials search state survives tabs and detail pushes above shell',

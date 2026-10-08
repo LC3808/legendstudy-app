@@ -33,7 +33,8 @@ class PersonalMaterialListPage extends ConsumerWidget {
               : Column(
                   children: [
                     const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
-                    FilledButton(
+                    // Login entry = general CTA → orange outline (app_theme hierarchy).
+                    OutlinedButton(
                       onPressed: () => context.push('/auth', extra: true),
                       child: const Text('로그인'),
                     ),
@@ -79,7 +80,8 @@ class _PersonalMaterialListState extends ConsumerState<PersonalMaterialList> {
       return Column(
         children: [
           const EmptyState('로그인하면 이 기능을 이용할 수 있어요.'),
-          FilledButton(
+          // Login entry = general CTA → orange outline (app_theme hierarchy).
+          OutlinedButton(
             onPressed: () => context.push('/auth', extra: true),
             child: const Text('로그인'),
           ),

@@ -230,9 +230,9 @@ void main() {
             );
           }
           if (screen.startsWith('guest-')) {
-            expect(find.widgetWithText(FilledButton, '로그인'), findsOneWidget);
+            expect(find.widgetWithText(OutlinedButton, '로그인'), findsOneWidget);
             expect(
-              t.getBottomRight(find.widgetWithText(FilledButton, '로그인')).dy,
+              t.getBottomRight(find.widgetWithText(OutlinedButton, '로그인')).dy,
               lessThanOrEqualTo(size.height),
             );
             if (screen == 'guest-my') {
