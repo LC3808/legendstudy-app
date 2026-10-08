@@ -1,7 +1,42 @@
 # Official LegendStudy+ brand assets
 
 
-## Launcher 75% scale + cold-start splash — Owner approved 2026-09-29
+## FULL-ORANGE launcher icon + simple splash — Owner approved 2026-10-08 (CURRENT)
+
+Supersedes the 2026-09-29 75% white-canvas icon (kept below + in git history, commit `9af9667`).
+
+- **Design:** launcher icon = **brand-orange background + white notebook/pencil symbol**.
+  No white outer canvas, no border, no text, no wordmark.
+- **Orange = `#FFA300`** — the app's canonical brand token `AppTokens.primary` /
+  `AppTokens.brand` (`lib/core/theme/app_theme.dart = 0xFFFFA300`). The Owner source
+  symbol itself is `#ffa200`; the LAB/web brand oranges (`#ffac14`, `#ffa400`) are
+  nearby but the **APP canonical token wins for the APP icon**.
+- **Source unchanged:** `assets/brand/source/legendstudy_app_iocon_1024.png`
+  (SHA pinned; the script asserts the hash and never alters it). The symbol is NOT
+  redrawn — `tool/export_launcher_icons.py` derives a per-pixel symbol-coverage map
+  from the source blue channel (preserving its anti-aliasing) and does a faithful
+  figure/ground colour-swap: `launcher = t·white + (1−t)·orange`.
+- **Optical size:** iOS AppIcon + Android legacy mipmaps at **78%** (squircle-safe);
+  Android **adaptive** foreground = white symbol on transparent, farthest point at
+  **~31.5dp** (inside the guaranteed 33dp / 66dp-diameter safe circle); adaptive
+  **background = `@color/ic_launcher_background` = `#FFFFA300`** (`values/colors.xml`).
+  iOS icons stay **RGB, no alpha** (App Store requirement).
+- **Splash (unchanged intent, simplified):** white/warm-white background + centred
+  **orange** symbol. The launcher `ic_launcher` is now orange-bg, so the Android splash
+  drawables (`drawable[-v21]/launch_background.xml`) and Android-12 themes
+  (`values-v31` + `values-night-v31` `windowSplashScreenAnimatedIcon`) reference the new
+  **`@drawable/ic_brand_symbol`** (orange symbol on transparent). iOS `LaunchImage`
+  (orange symbol) unchanged. Dark mode keeps the white splash.
+- **Flutter cold-start frame** (`lib/features/brand/brand_frame.dart`): centred orange
+  symbol + the minimal `레전드스터디⁺` wordmark only — **the long tagline was removed**
+  (Owner: simple splash). Cold-start-only, ≤~1.5s, no version/loading/features/ads.
+- **Regenerate:** `…/python tool/export_launcher_icons.py` to check, `--write` to export.
+  Verified `flutter analyze` clean, 967 tests pass, unsigned Android AAB + iOS (no-codesign)
+  release builds PASS, iOS Simulator icon/splash/transition QA PASS.
+
+---
+
+## Launcher 75% scale + cold-start splash — Owner approved 2026-09-29 (SUPERSEDED 2026-10-08)
 
 - **Source asset:** `assets/brand/source/legendstudy_app_iocon_1024.png` unchanged
   (SHA pinned; the script asserts the source hash and never alters it).

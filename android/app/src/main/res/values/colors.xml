@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher adaptive-icon background: LegendStudy brand orange (AppTokens.primary). -->
+<resources>
+    <color name="ic_launcher_background">#FFFFA300</color>
+</resources>

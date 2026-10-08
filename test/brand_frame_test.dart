@@ -34,15 +34,15 @@ void main() {
         child: const MaterialApp(home: Scaffold(body: Text('APP HOME'))),
       ),
     );
-    // Frame is up: tagline visible, app underneath in the tree.
-    expect(find.text('나의 학습 기록이 쌓일수록,\n나의 가능성은 선명해집니다.'), findsOneWidget);
+    // Frame is up: brand wordmark visible, app underneath in the tree.
+    expect(find.image(const AssetImage('assets/brand/generated/legendstudy_symbol.png')), findsOneWidget);
     expect(find.text('APP HOME'), findsOneWidget);
 
     // After the target + fade the frame is gone.
     await tester.pump(brandFrameTarget);
     await tester.pump(const Duration(milliseconds: 300)); // fade
     await tester.pumpAndSettle();
-    expect(find.text('나의 학습 기록이 쌓일수록,\n나의 가능성은 선명해집니다.'), findsNothing);
+    expect(find.image(const AssetImage('assets/brand/generated/legendstudy_symbol.png')), findsNothing);
     expect(find.text('APP HOME'), findsOneWidget);
 
     // Cold-start-only: a second mount in the same process does not re-show it
@@ -54,7 +54,7 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(find.text('나의 학습 기록이 쌓일수록,\n나의 가능성은 선명해집니다.'), findsNothing);
+    expect(find.image(const AssetImage('assets/brand/generated/legendstudy_symbol.png')), findsNothing);
     expect(find.text('RESUMED'), findsOneWidget);
   });
 }
