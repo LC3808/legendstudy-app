@@ -3355,3 +3355,13 @@ Owner applied006–008 from APP35ab994. Postflight8 function definitions/grants 
 LAB507ed7b deployed; anonymous read RPC denial verified live, authenticated runtime
 pending. Target005 remains held, no APP binary release or Flutter pass claimed.
 See [activation evidence](my-shared-foundation.md#production-activation-postflight--2026-10-08).
+
+
+## 2026-10-08 — Admin directory and Essay mixed-mode candidates
+
+Owner execution update permits next foundation with predecessor authenticated E2E
+pending and005 HELD. Directory009 adds paginated operator-only current member reads
+and a2-entry verified NEIS display cache, preserving existing detail/Student360.
+Essay current inventory/gap report plus offline typed planning contract; no new
+Essay schema/runtime/provider or APP client changes.
+See [directory](admin-member-directory.md) and [Essay analysis](essay-mixed-mode-foundation.md).

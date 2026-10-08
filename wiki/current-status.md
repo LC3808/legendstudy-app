@@ -1,5 +1,9 @@
 # Current Status
 
+## Admin members / Essay next — 2026-10-08
+
+[Member directory009](admin-member-directory.md): local PASS, Production pending. [Essay gap/contract](essay-mixed-mode-foundation.md): current inventory + offline planning only. No runtime activation;005 HELD.
+
 ## Shared MY foundation — 2026-10-08
 
 [Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. Application/Study/Admin006–008 are PRODUCTION_APPLIED; Owner postflight8 RPC hashes/ACLs and2 table RLS/direct-write denial match. LAB507ed7b deployed; authenticated runtime pending. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.

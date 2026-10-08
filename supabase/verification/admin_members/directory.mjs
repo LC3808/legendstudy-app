@@ -1,0 +1,48 @@
+import {readFileSync} from 'node:fs';import assert from 'node:assert/strict';
+const {PGlite}=await import(process.env.PGLITE_MODULE);const db=new PGlite();
+await db.exec(`create role anon;create role authenticated;create role service_role;create schema auth;create schema account_private;create schema student_private;
+create function auth.uid() returns uuid language sql as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+create table auth.users(id uuid primary key,email text,created_at timestamptz);
+create table profiles(id uuid primary key,display_name text,academic_status text,grade_level smallint,intended_major text,neis_office_code text,neis_school_code text);
+create table account_deletion_requests(id uuid primary key,subject_id uuid,state text,requested_at timestamptz);
+create table admin_users(user_id uuid primary key);create table quality_operators(user_id uuid primary key);`);
+const lifecycle=readFileSync('supabase/migrations/20261001000300_account_deletion_lifecycle.sql','utf8');
+await db.exec(lifecycle.slice(lifecycle.indexOf('create function account_private.lock_subject'),lifecycle.indexOf('create function account_private.guard_request')));
+await db.exec(readFileSync('supabase/verification/my_foundation/fixtures/admin_operator.sql','utf8'));
+await db.exec(readFileSync('supabase/migrations/20261008000900_admin_member_directory.sql','utf8'));
+const id=n=>`00000000-0000-4000-8000-${String(n).padStart(12,'0')}`;
+const session=async(role,n,exp=9999999999)=>{await db.exec(`reset role;set role ${role}`);await db.query("select set_config('request.jwt.claim.sub',$1,false),set_config('request.jwt.claims',$2,false)",[n?id(n):'',JSON.stringify({sub:n?id(n):null,role,exp})]);};
+const read=async(p={})=>(await db.query('select admin_member_list($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) value',[p.q??'',p.limit??25,p.offset??0,p.sort??'newest',p.state??null,p.status??null,p.grade??null,p.office??null,p.school??null,p.unset??false])).rows[0].value;
+await db.exec(`insert into admin_users values('${id(1)}');insert into quality_operators values('${id(2)}');`);
+await session('authenticated',1);await assert.rejects(read(),e=>e.code==='42501'); // missing auth identity still denied
+await db.exec('reset role');
+for(let n=1;n<=32;n++)await db.query('insert into auth.users values($1,$2,$3)',[id(n),`member${n}@example.test`,`2026-10-${String(n<=28?n:28).padStart(2,'0')}T00:00:00Z`]);
+await db.exec(`insert into profiles values('${id(3)}','학교 학생','student',2,'공학','B10','known'),('${id(4)}','other_%','retaker',null,null,null,null),('${id(5)}',null,'student',1,null,'B10','unknown');
+insert into student_private.school_display_cache values('B10','known','검증고등학교','NEIS',now());
+insert into account_deletion_requests values('${id(90)}','${id(6)}','DELETION_PENDING',now());`);
+for(const [role,n] of [['anon',null],['authenticated',2],['authenticated',3]]){await session(role,n);await assert.rejects(read(),e=>e.code==='42501');}
+await session('authenticated',1,1);await assert.rejects(read(),e=>e.code==='42501');
+await session('authenticated',1);
+let p=await read();assert.equal(p.total,32);assert.equal(p.filtered_total,32);assert.equal(p.items.length,25);
+let next=await read({offset:25});assert.equal(next.items.length,7);assert.equal(new Set([...p.items,...next.items].map(x=>x.account_id)).size,32);
+p=await read({sort:'oldest'});assert.equal(p.items[0].account_id,id(1));
+p=await read({q:'MEMBER3@'});assert.equal(p.items[0].account_id,id(3));
+p=await read({q:id(3)});assert.equal(p.items.length,1);assert.equal(p.items[0].school_name,'검증고등학교');assert.equal(p.items[0].school_state,'resolved');
+assert.equal((await read({q:'학교 학생'})).filtered_total,1);
+assert.equal((await read({q:'_%'})).filtered_total,1); // literal wildcard characters
+assert.equal((await read({q:'nothing'})).filtered_total,0);
+assert.equal((await read({office:'B10',school:'known'})).filtered_total,1);
+assert.equal((await read({status:'student'})).filtered_total,2);
+assert.equal((await read({grade:2})).filtered_total,1);
+assert.equal((await read({state:'DELETION_PENDING'})).filtered_total,1);
+assert.equal((await read({unset:true})).filtered_total,30);
+assert.equal((await read({q:id(5)})).items[0].school_state,'unresolved');
+assert.equal((await read({q:id(4)})).items[0].school_state,'unset');
+for(const args of [{limit:51},{offset:-1},{sort:'SQL'},{state:'BAD'},{grade:4},{office:'B10'},{status:'teacher'},{unset:true,office:'B10',school:'known'}])await assert.rejects(read(args),e=>e.code==='22023');
+const keys=Object.keys((await read()).items[0]);assert.deepEqual(keys.sort(),['account_id','email','display_name','created_at','account_state','academic_status','grade_level','intended_major','school_name','school_state'].sort());
+await assert.rejects(db.query('select * from student_private.school_display_cache'),e=>e.code==='42501');
+await db.exec('reset role');await db.exec(`insert into account_deletion_requests values('${id(91)}','${id(1)}','DELETION_PENDING',now());`);
+await session('authenticated',1);await assert.rejects(read(),e=>e.code==='42501');
+await db.exec('reset role;truncate account_deletion_requests,auth.users,profiles');await db.query('insert into auth.users values($1,$2,now())',[id(1),'admin@example.test']);
+await session('authenticated',1);assert.equal((await read({q:'no records'})).items.length,0);
+console.log('ADMIN_DIRECTORY: pagination/count/search/filter/sort/privacy/role/lifecycle PASS');await db.close();

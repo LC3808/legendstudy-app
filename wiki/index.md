@@ -17,7 +17,9 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (new candidates NOT_APPLIED; school flow Owner verified).
+Admin member management: [directory009](admin-member-directory.md). Essay four-type/mixed-mode: [current gap analysis and contract](essay-mixed-mode-foundation.md); no provider activation.
+
+MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).
 
 Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
 
