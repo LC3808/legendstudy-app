@@ -151,3 +151,35 @@ files/config, replaces exactly worker/server/new diagnostics, checks version aga
 and deploys only this function. No manual dispatch (which could process deletions).
 Rollback if needed: deploy the retained before directory with the same project and
 --use-api; no DB rollback or ledger deletion. Production diagnostic deploy PENDING.
+
+
+## Benefit grant ACL root cause — 2026-10-08
+
+Owner deployed diagnostic Worker v22 preserving verify_jwt=false. Scheduled HTTP200
+now reports2 attempts,2 failures CLAIM_HTTP_403_42501. Auth and marker construction
+passed. Read-only catalog confirms postgres-owned account_benefit_claim can execute
+eligibility/allowed/lock helpers but cannot execute essay_executor-owned private
+credit_post_grant; ACL is solely essay_executor=X/essay_executor. Schema USAGE exists.
+
+Candidate20261008000400 grants only EXECUTE on that exact existing helper to postgres.
+Uses existing reviewed transaction-only SET-role bridge, preserves supabase_admin
+membership and removes only its own postgres-granted temporary membership. No schema
+CREATE, helper body/owner/config change, role inheritance, browser/service_role grant
+or direct table permission. Preconditions refuse different ACL/owner/security/gate.
+Postconditions verify all direct untrusted roles still denied and memberships equal.
+The SQL Editor bundle additionally guards the migration version and records the exact
+migration source atomically. Neither file calls grant/claim or touches user rows.
+
+Regression now explicitly keeps the function's postgres owner NOSUPERUSER during
+benefit execution: prior full-suite runtime used a restored superuser after migration
+checks, masking this nested call failure. Actual canonical local functions reproduce
+the42501 and leave no partial credit account; corrected claim grants3 once/no expiry
+and repeated/concurrent identity claims remain idempotent. Existing lifecycle suite
+and forced mid-apply failure rollback run; no existing assertion removed. Only test
+transport caller-role SET rights are supplied separately from essay_executor authority.
+Production correction remains PENDING until Owner SQL result and automatic worker
+grant/ledger/summary verification. No manual3, key rotation or new secret required.
+
+Rollback: if needed use the same temporary owner SET bridge to REVOKE only this
+function's postgres EXECUTE, then remove the temporary bridge. That reblocks benefits;
+never remove granted Credits or migration history to simulate rollback.

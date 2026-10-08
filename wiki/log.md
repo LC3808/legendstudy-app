@@ -3365,3 +3365,12 @@ deployed source parity; deletion counters do not report benefit results. Added s
 aggregate dispatcher diagnostics and pinned, settings-preserving Owner deploy helper.
 66 regression tests PASS; no Production deploy performed from cloud.
 [Evidence and pending verification](production-activation-closeout.md#benefit-dispatch-diagnostics--2026-10-08).
+
+
+## 2026-10-08 — Signup root cause: nested private grant ACL
+
+Production diagnostic v22 identifies CLAIM42501; Owner catalog confirms missing
+postgres EXECUTE on credit_post_grant. Candidate20261008000400 fixes only that ACL
+with the established temporary role bridge. Reproduced under real NOSUPERUSER and
+verified canonical3/duplicate/concurrency plus lifecycle and transactional rollback.
+Owner apply pending. [Details](production-activation-closeout.md#benefit-grant-acl-root-cause--2026-10-08).

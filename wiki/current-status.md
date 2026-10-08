@@ -1,9 +1,10 @@
 # Owner-assisted activation — 2026-10-08
 
-2026-10-08 signup recovery: Owner provisioned the missing benefit HMAC key;
-2 candidates still pending. Diagnostic-only Worker candidate adds aggregate
-AUTH/MARKERS/CLAIM failures; 66 tests PASS, Production deploy pending.
-See [activation closeout](production-activation-closeout.md#benefit-dispatch-diagnostics--2026-10-08).
+2026-10-08 signup recovery: diagnostic Worker v22 Owner-deployed. Both candidates
+fail CLAIM_HTTP_403_42501. Owner catalog confirms postgres cannot execute the
+essay_executor-owned credit_post_grant. Minimum one-function ACL correction
+20261008000400 and atomic Owner SQL bundle are locally verified, Production PENDING.
+See [activation closeout](production-activation-closeout.md#benefit-grant-acl-root-cause--2026-10-08).
 
 Owner applied all six signup/MY/Admin candidates and returned ledger/catalog proof.
 Admin authenticated reads and normal/review denial Owner-verified. New Web-only
