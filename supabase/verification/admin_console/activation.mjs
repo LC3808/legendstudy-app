@@ -21,7 +21,7 @@ try {
  // Same absent-subsystem posture as the original harness; includes the current
  // profile-field migration. These exclusions are not a hosted topology claim.
  for(const name of (await readdir(root)).filter(x=>x.endsWith('.sql')).sort()){
-  if(/^(20261001000300|20261002000[123]00|20261003000100|20261004000100|20261005000100|20261006000100|20261008000100)/.test(name))continue;
+  if(/^(20261001000300|20261002000[123]00|20261003000100|20261004000100|20261005000100|20261006000100|20261008000100|20261008000300)/.test(name))continue;
   await db.exec(await readFile(new URL(name,root),'utf8'));
  }
  const catalog=()=>query(`select oid,proname,proowner,proacl::text,prosecdef,provolatile,proconfig from pg_proc where pronamespace='public'::regnamespace and proname in ('admin_credit_snapshot','admin_dashboard','admin_member_credit','admin_inquiry_detail','admin_member_detail') order by proname`);
@@ -98,5 +98,24 @@ try {
  check((await db.query('select sum(balance_delta)::int n from public.credit_transactions where grant_id=$1',[first])).rows[0].n===3);
  // Repeat-apply rejects an unexpected body rather than overwriting later work.
  await assert.rejects(db.exec(correction),/ADMIN_AUTHORITY_MISMATCH/);checks++;await db.exec('rollback');
+ // Preserve old aggregates while adding composite NEIS identities and unset count.
+ await db.exec(admin);
+ const dashboardBefore=(await query('select public.admin_dashboard() x'))[0].x;
+ const beforeSchoolCatalog=await catalog();
+ const schoolMigration=await readFile(new URL('20261008000300_admin_school_identity_distribution.sql',root),'utf8');
+ await db.exec(schoolMigration);assert.deepEqual(await catalog(),beforeSchoolCatalog);checks++;
+ const schoolAfter=(await query('select public.admin_dashboard() x'))[0].x;
+ check(JSON.stringify(schoolAfter.profile.school_distribution)===JSON.stringify(dashboardBefore.profile.school_distribution));
+ check(schoolAfter.profile.school_unset_count===(await query('select count(*)::int n from public.profiles where neis_school_code is null'))[0].n);
+ await db.exec("update public.profiles set neis_office_code='B10',neis_school_code='same-code' where id='22222222-2222-4222-8222-222222222222';update public.profiles set neis_office_code='J10',neis_school_code='same-code' where id='33333333-3333-4333-8333-333333333333'");
+ const paired=(await query('select public.admin_dashboard() x'))[0].x.profile.school_distribution_by_identity;
+ check(paired.filter(r=>r.school_code==='same-code').length===2);
+ check(paired.filter(r=>r.school_code==='same-code').every(r=>r.count===1));
+ await db.exec("select set_config('request.jwt.claims',json_build_object('sub','33333333-3333-4333-8333-333333333333','role','authenticated','exp',extract(epoch from now())+600)::text,false);set role authenticated;");
+ await assert.rejects(db.query('select public.admin_dashboard()'),/OPERATOR_REQUIRED/);checks++;
+ await db.exec('reset role;set role anon;');
+ await assert.rejects(db.query('select public.admin_dashboard()'),/permission denied/);checks++;
+ await db.exec('reset role;');
+ await assert.rejects(db.exec(schoolMigration),/ADMIN_DASHBOARD_AUTHORITY_CHANGED/);checks++;await db.exec('rollback');
  console.log(JSON.stringify({existing_checks:old.total,correction_checks:checks,failed:0,concurrency:'NOT_TESTED: single-connection engine',hosted:false}));
 } finally {await db.close();}

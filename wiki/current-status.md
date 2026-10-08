@@ -1,8 +1,11 @@
-# Overnight verified signup — 2026-10-07
+# Owner-assisted activation — 2026-10-08
 
-Verified-email eligibility guard prepared and locally tested; Production NOT_APPLIED
-(no DB binding). Existing +3 ledger/benefit lifecycle reused.
-[Scoped evidence](verified-signup-overnight.md).
+Owner applied all six signup/MY/Admin candidates and returned ledger/catalog proof.
+Admin authenticated reads and normal/review denial Owner-verified. New Web-only
+profile gap diagnosed and LAB4de6dfa deployed; actual repaired new-user/+3 runtime
+pending. Finance writes remain disabled. Additional school aggregate candidate
+20261008000300 is LOCAL_VERIFIED / NOT_APPLIED (402+54 SQL assertions).
+[Activation and school detail](production-activation-closeout.md).
 
 # Current Status
 

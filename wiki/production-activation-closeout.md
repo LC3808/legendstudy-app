@@ -93,3 +93,29 @@ No actual test/review Credit grant, payment, refund or user deletion performed.
 
 Unified Wiki owns the final cross-repo deployment/runtime status. Backend candidates
 are reviewable source, not a claim that Production activation succeeded.
+
+
+## Owner-assisted results and school-name addendum — 2026-10-08
+
+The earlier NOT_APPLIED observations above are historical: Owner supplied ledger
+and catalog proof of all six candidates applied. All17 Admin bodies matched source;
+Owner Admin reads and normal/review denial passed. New Web-only account had verified
+Auth but no profiles row, blocking MY writes and benefit worker candidate discovery.
+LAB4de6dfa initializes only missing own profile without overwriting shared APP data.
+Actual new-user profile/bonus follow-up remains pending; no manual bonus used.
+
+New candidate20261008000300: admin_dashboard additive profile fields
+school_distribution_by_identity (office+school,count,top20) and school_unset_count.
+Old field, Credit computations, OID/owner/ACL preserved; exact deployed source hash
+required. No external calls inside SQL, no school master/table, no profile writes.
+Browser exact-pair name lookup is per aggregate school, bounded/cache, never per-user.
+SQL402existing+54correction checks PASS including pair collisions, unset count,
+old response preservation, anon/normal denial, admin allow and repeated apply refusal.
+Production candidate NOT_APPLIED; read current ledger/hash/ACL before Owner execution.
+
+Preservation review: existing timestamps unchanged; raw facts untouched; current
+profile aggregate is not historical school membership; auth identity and credit-account
+identity remain distinct; goals are not applications/outcomes; operator authorization
+and existing retention remain; derived counts are not raw measurements or predictions.
+Manus view contract and conservative Essay comparison gate are maintained in LAB
+`docs/MY_STUDENT_360_CONTRACT.md`. No Student360 page or new student store created.

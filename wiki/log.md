@@ -3348,3 +3348,11 @@ by absent DB credentials; no grant or runtime change. [Evidence](verified-signup
 Added reviewed Admin source + hash-guarded Credit/UUID/member-read correction and
 column-only MY major write ACL. Local SQL regression/role verification; hosted apply
 not performed. See [activation closeout](production-activation-closeout.md).
+
+## 2026-10-08 — Admin school identity aggregate candidate
+
+20261008000300 adds office+school aggregate and unset count without replacing old
+admin-v1 field, changing Credit/RLS, or creating a school master. SQL402+54 PASS.
+Production NOT_APPLIED; Owner preflight/apply pending. Six previous candidates
+Owner-applied, new Web-only profile fix deployed in LAB; +3 runtime pending.
+[Evidence](production-activation-closeout.md#owner-assisted-results-and-school-name-addendum--2026-10-08).
