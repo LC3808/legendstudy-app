@@ -1,8 +1,8 @@
 # Current Status
 
-## Essay Web runtime — 2026-10-08
+## Essay runtime — 2026-10-09
 
-[Runtime closeout](essay-web-runtime-activation.md): PARTIAL; Math restored/gated, Humanities adapter fixture-tested.010 LOCAL_ONLY; Production credentials unavailable. No live E2E/provider call. [Directory009](admin-member-directory.md) Owner verified;005 HELD; Owner-away override active.
+[Completion follow-up](essay-runtime-completion.md): PARTIAL;16 SQL/Web checks, reviewed worker and mixed/science candidates; all types GATED.010 BLOCKED; no live provider/authenticated E2E.005 HELD; Signup frozen.
 
 ## Shared MY foundation — 2026-10-08
 

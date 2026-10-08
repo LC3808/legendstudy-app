@@ -247,7 +247,7 @@ def provider_binding(claim, provider):
     for value in binding.values():text(value,160)
     require(binding==claim['input'].get('provider_binding'),'CLAIM_BINDING_MISMATCH')
     require(binding==getattr(provider,'binding',None),'ADAPTER_BINDING_MISMATCH')
-    require(binding['contract_version']=='1.3' and binding['prompt_version']==PROMPT_VERSION,'PROMPT_CONTRACT_BINDING')
+    require(binding['contract_version']=='1.3' and binding['prompt_version']==getattr(provider,'prompt_version',PROMPT_VERSION),'PROMPT_CONTRACT_BINDING')
     require(binding['provider']!='unconfigured','UNCONFIGURED_PROVIDER')
     return binding
 
@@ -270,13 +270,15 @@ class OpenAIResponses:
     """Explicit model/key injection, store:false, no tools, no SDK automatic retries.
     Request deadline < immutable 120s DB lease. No raw response/error logs.
     """
-    def __init__(self, key, model, schema, timeout=75, transport=urlopen):
+    def __init__(self, key, model, schema, timeout=75, transport=urlopen, *, instructions=PROMPT, prompt_version=PROMPT_VERSION):
         require(bool(key) and bool(model) and 0<timeout<=75,'PROVIDER_CONFIG')
         self.key=key;self.model=model;self.schema=schema;self.timeout=timeout;self.transport=transport
+        text(instructions,50000);text(prompt_version,160)
+        self.instructions=instructions;self.prompt_version=prompt_version
 
     def evaluate(self, value):
         payload={'model':self.model,'store':False,'max_output_tokens':12000,
-                 'instructions':PROMPT,'input':encoded(value).decode(),
+                 'instructions':self.instructions,'input':encoded(value).decode(),
                  'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':self.schema}}}
         request=Request('https://api.openai.com/v1/responses',data=encoded(payload),headers={'Authorization':'Bearer '+self.key,'Content-Type':'application/json'})
         started=time.monotonic()
@@ -315,19 +317,29 @@ class Worker:
         self.review_source=review_source;self.receipt_sink=receipt_sink;self.checkpoint=checkpoint
         self.isolated_fixture=isolated_fixture
 
-    def execute(self,evaluation):
-        # L2-A2 does not authorize real API execution or deploy a production reviewer.
+    def authorize(self, evaluation):
+        # Existing default remains synthetic-only. Reviewed runtime subclass is job-scoped.
         require(self.isolated_fixture, 'REAL_PROVIDER_NOT_AUTHORIZED')
         require(getattr(self.provider, 'synthetic_only', False), 'SYNTHETIC_ONLY')
+
+    def bind_claim(self, claim):
+        if 'provider_binding' in claim or 'provider_binding' in claim['input']:
+            return provider_binding(claim,self.provider)
+        return None
+
+    def check_result_identity(self, result):
+        require(result.provider == 'synthetic', 'SYNTHETIC_IDENTITY')
+
+    def execute(self,evaluation):
+        self.authorize(evaluation)
         claim=self.rpc('essay_claim',{'p_evaluation':evaluation})
         args={'p_evaluation':evaluation,'p_run':claim['run_id'],'p_token':claim['lease_token']}
         binding=None
         try:
-            if 'provider_binding' in claim or 'provider_binding' in claim['input']:
-                binding=provider_binding(claim,self.provider)
+            binding=self.bind_claim(claim)
             value=package(claim,self.cache)
             result=self.provider.evaluate(value)
-            require(result.provider == 'synthetic', 'SYNTHETIC_IDENTITY')
+            self.check_result_identity(result)
         except (Unknown,ProviderFailure) as error:
             # Usage, if supplied by the adapter, is recorded before terminal/fencing change.
             # A telemetry transport error escapes: do not hide it as provider failure.
