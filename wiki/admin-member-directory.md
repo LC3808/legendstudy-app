@@ -1,6 +1,13 @@
 # Admin member directory — 2026-10-08
 
-IMPLEMENTED / LOCAL_VERIFIED; Production009 pending Owner apply. LAB functionality
+IMPLEMENTED / LOCAL_VERIFIED / PRODUCTION_APPLIED. Owner postflight confirms009
+RPC MD5 `4ad4a5be429a5b43788b23502ca863e7`, postgres SECURITY DEFINER with empty
+search_path, anonymous EXECUTE denied/authenticated allowed. Cache RLS enabled,
+authenticated direct CRUD denied; both NEIS names match. Actual anonymous RPC HTTP401/42501.
+LAB e7810c2 deployed (Cloudflare9e2dc6f2-af55-4210-9953-e64a092ae11a); live
+/admin/members/ HTTP200/new admin_member_list bundle/anonymous login gate verified.
+Follow-up b1ad6d1 changes only the stale search introduction; no visual redesign.
+Authenticated operator acceptance remains pending. LAB functionality
 uses existing Admin gate and Member Detail → Student360008, no duplicate detail.
 Existing006 Application+Events and007 Study stay unchanged. Target005 is HELD.
 

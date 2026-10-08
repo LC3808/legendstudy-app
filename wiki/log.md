@@ -3365,3 +3365,8 @@ and a2-entry verified NEIS display cache, preserving existing detail/Student360.
 Essay current inventory/gap report plus offline typed planning contract; no new
 Essay schema/runtime/provider or APP client changes.
 See [directory](admin-member-directory.md) and [Essay analysis](essay-mixed-mode-foundation.md).
+
+
+## 2026-10-08 — Admin directory009 Production activation
+
+Owner applied009 and verified exact RPC hash/owner/ACL/empty search_path, private cache RLS/direct CRUD denial and both NEIS school names. LAB e7810c2 deployed as9e2dc6f2-af55-4210-9953-e64a092ae11a; live new bundle and anonymous gate verified. Follow-up b1ad6d1 corrects only search introduction. Actual anonymous RPC401/42501; authenticated operator acceptance pending. [Contract](admin-member-directory.md). No005/Essay runtime/Payment/Signup change.
