@@ -6,8 +6,9 @@ search_path, anonymous EXECUTE denied/authenticated allowed. Cache RLS enabled,
 authenticated direct CRUD denied; both NEIS names match. Actual anonymous RPC HTTP401/42501.
 LAB e7810c2 deployed (Cloudflare9e2dc6f2-af55-4210-9953-e64a092ae11a); live
 /admin/members/ HTTP200/new admin_member_list bundle/anonymous login gate verified.
-Follow-up b1ad6d1 changes only the stale search introduction; no visual redesign.
-Authenticated operator acceptance remains pending. LAB functionality
+Follow-up b1ad6d1 corrects search introduction. bfc20c0 adds result ordinals and
+preserves concurrent brand main0847170. No Codex visual redesign.
+Owner authenticated operator acceptance: all requested checks PASS. LAB functionality
 uses existing Admin gate and Member Detail → Student360008, no duplicate detail.
 Existing006 Application+Events and007 Study stay unchanged. Target005 is HELD.
 
@@ -70,7 +71,7 @@ PGlite: directory/count/page/no-results/search/UUID/name/literal wildcard/school
 grade/sort/unknown-unset/privacy-key allowlist/anonymous-normal-quality-expired-denying
 operator PASS. PG17 NOSUPERUSER postgres: exact package install, grants/RLS, actual
 Admin read/anonymous-normal denial, collision refusal, rollback preserving users PASS.
-LAB full539 tests, lint/typecheck/boundary/static build PASS. Browser fixture1440/390 Admin/normal/quality-only/anonymous, pagination, existing detail/Student360 and0 list NEIS requests PASS; authenticated Production acceptance pending.
+LAB full539 tests, lint/typecheck/boundary/static build PASS. Browser fixture1440/390 Admin/normal/quality-only/anonymous, pagination, existing detail/Student360 and0 list NEIS requests PASS; authenticated Production acceptance subsequently Owner-confirmed PASS.
 APP UI/client unchanged, pinned Flutter runtime unavailable; no claim of Flutter pass.
 
 Apply only009 with `tool/production/prepare_admin_directory.py` pinned to reviewed Git
@@ -81,3 +82,16 @@ restore LAB old list first. Existing migration evidence is not silently rewritte
 
 Payment/Toss/Signup/IAP/global CSS/MY visuals unchanged. Existing Admin detail/QL,
 Credit authority, account deletion and Student360 remain authoritative.
+
+Owner follow-up: add display ordinals using server offset + row position +1,
+not account identifiers. Filter/sort define result order; no stable membership rank.
+
+Ordinal follow-up verification:14 focused tests, lint/typecheck/boundary PASS;
+Node-direct Turbopack static build PASS (package-runner subprocess sandbox issue
+resolved without source/config changes); browser8 role/viewport cases PASS.
+
+Final LAB main bfc20c0 / Production deployment0494a6f8-c82d-40af-8722-f59f2f519d43.
+Merged final suite539 PASS. Owner actual authenticated acceptance PASS before
+ordinal-only follow-up; no new runtime authorization claim from fixture tests.
+Live deployed code with isolated fixture RPCs:8 role/viewport cases plus ordinal1/26
+PASS; this is frontend verification, separate from Owner actual DB/session acceptance.

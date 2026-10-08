@@ -2,7 +2,7 @@
 
 ## Admin members / Essay next — 2026-10-08
 
-[Member directory009](admin-member-directory.md): local PASS, Production009 applied; Owner hash/ACL/RLS/cache postflight PASS. Operator runtime pending. [Essay gap/contract](essay-mixed-mode-foundation.md): current inventory + offline planning only. No runtime activation;005 HELD.
+[Member directory009](admin-member-directory.md): local PASS, Production009 applied; Owner hash/ACL/RLS/cache postflight PASS. Owner operator acceptance PASS; ordinal display follow-up. [Essay gap/contract](essay-mixed-mode-foundation.md): current inventory + offline planning only. No runtime activation;005 HELD.
 
 ## Shared MY foundation — 2026-10-08
 

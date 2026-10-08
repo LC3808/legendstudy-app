@@ -3370,3 +3370,8 @@ See [directory](admin-member-directory.md) and [Essay analysis](essay-mixed-mode
 ## 2026-10-08 — Admin directory009 Production activation
 
 Owner applied009 and verified exact RPC hash/owner/ACL/empty search_path, private cache RLS/direct CRUD denial and both NEIS school names. LAB e7810c2 deployed as9e2dc6f2-af55-4210-9953-e64a092ae11a; live new bundle and anonymous gate verified. Follow-up b1ad6d1 corrects only search introduction. Actual anonymous RPC401/42501; authenticated operator acceptance pending. [Contract](admin-member-directory.md). No005/Essay runtime/Payment/Signup change.
+
+
+## 2026-10-08 — Owner Admin acceptance and ordinal follow-up
+
+Owner reports all requested directory/runtime/denial checks PASS, then requests row numbers. LAB bfc20c0 adds server-offset-based ordinals; first1/next26 assertions pass. Existing columns/permissions unchanged; concurrent brand0847170 preserved.14 focused tests, lint/typecheck/boundary/static build/browser8 PASS. No migration needed. Production ordinal deployment0494a6f8-c82d-40af-8722-f59f2f519d43 succeeded. Final merged LAB suite539 PASS.
