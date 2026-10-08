@@ -3375,3 +3375,12 @@ Owner applied009 and verified exact RPC hash/owner/ACL/empty search_path, privat
 ## 2026-10-08 — Owner Admin acceptance and ordinal follow-up
 
 Owner reports all requested directory/runtime/denial checks PASS, then requests row numbers. LAB bfc20c0 adds server-offset-based ordinals; first1/next26 assertions pass. Existing columns/permissions unchanged; concurrent brand0847170 preserved.14 focused tests, lint/typecheck/boundary/static build/browser8 PASS. No migration needed. Production ordinal deployment0494a6f8-c82d-40af-8722-f59f2f519d43 succeeded. Final merged LAB suite539 PASS.
+
+### 2026-10-09 — Essay activation, canonical component persistence candidate
+
+Existing access re-audit confirms Owner-local SQL/CLI path is not available in cloud;
+management APIs reject unauthenticated access, Actions workflows0. New component
+claim/finalize/read candidate reuses existing parent/ledger:38 isolated PG checks.
+LAB bridge/history read preserves closed activation, durable checkpoint and account scope.
+Real provider/authenticated E2E blocked; no Production DB write. Full evidence and
+remaining content/access gates in [activation](essay-runtime-activation-2026-10-09.md).

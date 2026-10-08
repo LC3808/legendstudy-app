@@ -2,7 +2,7 @@
 
 ## Essay runtime — 2026-10-09
 
-[Completion follow-up](essay-runtime-completion.md): PARTIAL;16 SQL/Web checks, reviewed worker and mixed/science candidates; all types GATED.010 BLOCKED; no live provider/authenticated E2E.005 HELD; Signup frozen.
+[Activation](essay-runtime-activation-2026-10-09.md): PARTIAL; canonical component persistence38 SQL PASS, all types GATED.010 BLOCKED_NO_PRIVILEGE; no live provider/auth E2E.005 HELD; Signup frozen.
 
 ## Shared MY foundation — 2026-10-08
 
