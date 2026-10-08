@@ -119,3 +119,35 @@ identity remain distinct; goals are not applications/outcomes; operator authoriz
 and existing retention remain; derived counts are not raw measurements or predictions.
 Manus view contract and conservative Essay comparison gate are maintained in LAB
 `docs/MY_STUDENT_360_CONTRACT.md`. No Student360 page or new student store created.
+
+
+## Benefit dispatch diagnostics — 2026-10-08
+
+Owner explicitly approved first provisioning of ACCOUNT_BENEFIT_KEYS after the
+read-only inventory showed zero stored marker versions/deliveries and2 candidates.
+Owner reports v1 registered with a private local backup; no value was shared.
+Subsequent target read still shows no credit account/delivery/grant. Health fresh,
+service_role and lifecycle_worker can execute all3 benefit/health RPCs. Cron targets
+the correct Edge /dispatch each minute; pg_net shows200 processed0/retryable0, which
+counts deletion work only, not benefit success. Dashboard invocation list was empty
+and must not be interpreted as no HTTP execution. Downloaded index/server/worker/http
+SHA256 exactly match the reviewed pre-diagnostic source. Root cause beyond missing
+key remains unconfirmed; no manual grant, permission expansion or secret rotation.
+
+Candidate adds benefits.attempted/completed/failed and closed-category failure counts
+only to the existing secret-protected dispatcher response. Stages AUTH/MARKERS/CLAIM;
+only allowlisted SQL codes and HTTP statuses. No raw errors, messages, account IDs,
+identities, key material or markers. completed means RPC returned, not necessarily
+a new grant. Existing /benefit auth response and deletion transitions stay unchanged.
+No SQL migration, Public/MY visual, finance/Toss, grant rule or credential change.
+
+Validation: Deno2.5.4 tests66 PASS (8 new); production-file lint PASS and test typecheck
+PASS. Broad test-file lint reports require-await in existing async fixture style
+(and new matching fixtures); it is not claimed clean. Owner deploy helper syntax
+and mocked JWT-gate preservation, concurrent-version refusal and file bounds PASS.
+Helper tool/production/deploy_benefit_diagnostics.py downloads the current function,
+fails on changed reviewed hashes or missing verify_jwt metadata, retains rollback
+files/config, replaces exactly worker/server/new diagnostics, checks version again,
+and deploys only this function. No manual dispatch (which could process deletions).
+Rollback if needed: deploy the retained before directory with the same project and
+--use-api; no DB rollback or ledger deletion. Production diagnostic deploy PENDING.

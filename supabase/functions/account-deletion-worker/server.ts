@@ -2,6 +2,11 @@
 import { type Job, markers, type Ports } from "./worker.ts";
 import { identityInputs } from "./http.ts";
 import { eraseOwnedStorage } from "./storage.ts";
+import {
+  BenefitFailure,
+  type BenefitStage,
+  RemoteFailure,
+} from "./benefit-diagnostics.ts";
 export type Config = {
   url: string;
   publicKey: string;
@@ -35,11 +40,19 @@ export function createPorts(c: Config): Ports {
       body: body === undefined ? undefined : JSON.stringify(body),
       signal: AbortSignal.timeout(10000),
     });
-    if (!res.ok) throw Error("REMOTE_UNAVAILABLE");
+    if (!res.ok) {
+      // Only a closed allowlist of database codes can reach dispatch diagnostics.
+      // Never retain response message/detail/hint, request body or credentials.
+      let code: unknown;
+      try {
+        code = (await res.json())?.code;
+      } catch { /* Non-JSON error. */ }
+      throw new RemoteFailure(res.status, code);
+    }
     return res.status === 204 ? null : await res.json();
   };
   const rpc = async (name: string, args: Record<string, unknown>) =>
-    request("/rest/v1/rpc/" + name, c.authAdminKey, "POST", args);
+    await request("/rest/v1/rpc/" + name, c.authAdminKey, "POST", args);
   const authUser = async (subject: string) => {
     const res = await fetch(
       c.url + "/auth/v1/admin/users/" + encodeURIComponent(subject),
@@ -52,19 +65,27 @@ export function createPorts(c: Config): Ports {
       },
     );
     if (res.status === 404) return null;
-    if (!res.ok) throw Error("AUTH_UNAVAILABLE");
+    if (!res.ok) throw new RemoteFailure(res.status);
     const data = await res.json();
     return data.user ?? data;
   };
   return {
     rpc,
     async claimVerifiedBenefit(subject) {
-      const user = await authUser(subject);
-      if (!user) throw Error("ELIGIBILITY_UNAVAILABLE");
-      await rpc("account_benefit_claim", {
-        p_subject: subject,
-        p_markers: await markers(c.benefitKeys, identityInputs(user)),
-      });
+      let stage: BenefitStage = "AUTH";
+      try {
+        const user = await authUser(subject);
+        if (!user) throw Error("ELIGIBILITY_UNAVAILABLE");
+        stage = "MARKERS";
+        const values = await markers(c.benefitKeys, identityInputs(user));
+        stage = "CLAIM";
+        await rpc("account_benefit_claim", {
+          p_subject: subject,
+          p_markers: values,
+        });
+      } catch (error) {
+        throw new BenefitFailure(stage, error);
+      }
     },
     async captureBenefit(job) {
       if (!job.subject_id) return "NOT_AVAILABLE";

@@ -3356,3 +3356,12 @@ admin-v1 field, changing Credit/RLS, or creating a school master. SQL402+54 PASS
 Production NOT_APPLIED; Owner preflight/apply pending. Six previous candidates
 Owner-applied, new Web-only profile fix deployed in LAB; +3 runtime pending.
 [Evidence](production-activation-closeout.md#owner-assisted-results-and-school-name-addendum--2026-10-08).
+
+
+## 2026-10-08 — Benefit runtime diagnosis
+
+Owner-provisioned HMAC key, still0 grants. Confirmed scheduler endpoint/HTTP200 and
+deployed source parity; deletion counters do not report benefit results. Added safe
+aggregate dispatcher diagnostics and pinned, settings-preserving Owner deploy helper.
+66 regression tests PASS; no Production deploy performed from cloud.
+[Evidence and pending verification](production-activation-closeout.md#benefit-dispatch-diagnostics--2026-10-08).

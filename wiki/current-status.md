@@ -1,5 +1,10 @@
 # Owner-assisted activation — 2026-10-08
 
+2026-10-08 signup recovery: Owner provisioned the missing benefit HMAC key;
+2 candidates still pending. Diagnostic-only Worker candidate adds aggregate
+AUTH/MARKERS/CLAIM failures; 66 tests PASS, Production deploy pending.
+See [activation closeout](production-activation-closeout.md#benefit-dispatch-diagnostics--2026-10-08).
+
 Owner applied all six signup/MY/Admin candidates and returned ledger/catalog proof.
 Admin authenticated reads and normal/review denial Owner-verified. New Web-only
 profile gap diagnosed and LAB4de6dfa deployed; actual repaired new-user/+3 runtime

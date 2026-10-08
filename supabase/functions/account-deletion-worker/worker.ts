@@ -2,6 +2,7 @@
  * No implicit provider success; bounded calls and lease lifetime are transport contracts.
  * Driver must not log jobs, IDs, tokens or payloads.
  */
+import { BenefitFailure } from "./benefit-diagnostics.ts";
 export type Job = {
   request_id: string;
   subject_id: string | null;
@@ -31,7 +32,16 @@ export interface Ports {
 }
 export async function dispatch(
   p: Ports,
-): Promise<{ processed: number; retryable: number }> {
+): Promise<{
+  processed: number;
+  retryable: number;
+  benefits: {
+    attempted: number;
+    completed: number;
+    failed: number;
+    failures: Record<string, number>;
+  };
+}> {
   const unbound = await p.rpc("account_deletion_unbound", {
     p_limit: 20,
   }) as Job[];
@@ -42,7 +52,16 @@ export async function dispatch(
   }
   await p.checkpointManifest(); // Do not lose obligations across restore.
   const jobs = await p.rpc("account_deletion_claim", { p_limit: 5 }) as Job[];
-  const result = { processed: 0, retryable: 0 };
+  const result = {
+    processed: 0,
+    retryable: 0,
+    benefits: {
+      attempted: 0,
+      completed: 0,
+      failed: 0,
+      failures: {} as Record<string, number>,
+    },
+  };
   for (const job of jobs) {
     let failure = "TRANSPORT_UNAVAILABLE";
     const args = { p_id: job.request_id, p_token: job.lease_token };
@@ -130,9 +149,20 @@ export async function dispatch(
     p_limit: 20,
   }) as string[];
   for (const subject of candidates) {
+    result.benefits.attempted++;
     try {
       await p.claimVerifiedBenefit(subject);
-    } catch { /* Benefit pending; account creation and erasure unaffected. */ }
+      // A completed RPC is not proof of a newly created grant; verify the ledger.
+      result.benefits.completed++;
+    } catch (error) {
+      result.benefits.failed++;
+      const category = error instanceof BenefitFailure
+        ? error.category
+        : "UNKNOWN";
+      result.benefits.failures[category] =
+        (result.benefits.failures[category] ?? 0) + 1;
+      // Benefit pending; account creation and erasure remain unaffected.
+    }
   }
   await p.rpc("account_deletion_maintenance", {});
   return result;

@@ -1,4 +1,5 @@
 import { dispatch, type Job, markers, type Ports } from "./worker.ts";
+import { BenefitFailure, RemoteFailure } from "./benefit-diagnostics.ts";
 import { eraseOwnedStorage } from "./storage.ts";
 function assert(v: unknown) {
   if (!v) throw Error("assertion failed");
@@ -48,6 +49,111 @@ function fixture() {
     notify: async () => {},
   };
   return { p, calls, retry: () => retry };
+}
+Deno.test("dispatch reports aggregate benefit outcomes without leaking failed subjects/errors", async () => {
+  const f = fixture(), rpc = f.p.rpc;
+  f.p.rpc = async (name, args) =>
+    name === "account_benefit_candidates"
+      ? ["private-first", "private-second", "private-third"]
+      : rpc(name, args);
+  f.p.claimVerifiedBenefit = async (subject) => {
+    if (subject === "private-first") {
+      throw new BenefitFailure("CLAIM", new RemoteFailure(403, "42501"));
+    }
+    if (subject === "private-second") throw Error("private-email-token-marker");
+  };
+  const result = await dispatch(f.p);
+  assert(result.processed === 1 && result.retryable === 0);
+  assert(
+    result.benefits.attempted === 3 && result.benefits.completed === 1 &&
+      result.benefits.failed === 2,
+  );
+  assert(
+    result.benefits.failures.CLAIM_HTTP_403_42501 === 1 &&
+      result.benefits.failures.UNKNOWN === 1,
+  );
+  assert(!JSON.stringify(result).includes("private"));
+  assert(f.calls.includes("account_deletion_maintenance"));
+});
+
+for (
+  const scenario of [
+    "auth",
+    "keys",
+    "identity",
+    "sql",
+    "unsafe-code",
+    "network",
+    "success",
+  ] as const
+) {
+  Deno.test(`benefit diagnostic boundary: ${scenario}`, async () => {
+    const original = globalThis.fetch;
+    let claimCalls = 0;
+    globalThis.fetch = async (input) => {
+      if (String(input).includes("/auth/")) {
+        if (scenario === "auth") {
+          return new Response("private token", { status: 401 });
+        }
+        return Response.json({
+          id: "private-subject",
+          email: "private@example.invalid",
+          email_confirmed_at: scenario === "identity" ? null : "confirmed",
+        });
+      }
+      claimCalls++;
+      if (scenario === "network") throw Error("private remote address");
+      if (scenario === "sql" || scenario === "unsafe-code") {
+        return Response.json({
+          code: scenario === "sql" ? "42702" : "private-token",
+          message: "private student data",
+          details: "private marker",
+        }, { status: 400 });
+      }
+      return Response.json({ state: "GRANTED" });
+    };
+    try {
+      const p = createPorts({
+        url: "https://example.invalid",
+        publicKey: "synthetic",
+        workerJwt: "synthetic",
+        authAdminKey: "synthetic",
+        benefitKeys: scenario === "keys"
+          ? new Map()
+          : new Map([["v1", new Uint8Array(32).fill(1)]]),
+        restoreKey: new Uint8Array(32).fill(2),
+        restoreVersion: "v1",
+        financeReviewed: false,
+        checkpoint: async () => {},
+        notification: async () => {},
+        provider: async () => false,
+      });
+      let category = "success";
+      try {
+        await p.claimVerifiedBenefit("private-subject");
+      } catch (error) {
+        assert(error instanceof BenefitFailure);
+        category = (error as BenefitFailure).category;
+        assert(!JSON.stringify(error).includes("private"));
+      }
+      const expected = {
+        auth: "AUTH_HTTP_401_OTHER",
+        keys: "MARKERS_UNAVAILABLE",
+        identity: "MARKERS_UNAVAILABLE",
+        sql: "CLAIM_HTTP_400_42702",
+        "unsafe-code": "CLAIM_HTTP_400_OTHER",
+        network: "CLAIM_UNAVAILABLE",
+        success: "success",
+      };
+      assert(category === expected[scenario]);
+      assert(
+        claimCalls ===
+          (["auth", "keys", "identity"].includes(scenario) ? 0 : 1),
+      );
+    } finally {
+      globalThis.fetch = original;
+    }
+  });
 }
 Deno.test("worker: Auth follows personal/storage/provider/finance; finish follows verify", async () => {
   const { p, calls } = fixture();
