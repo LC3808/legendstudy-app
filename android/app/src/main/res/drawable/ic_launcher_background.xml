@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher adaptive-icon background: master orange gradient (top #FDB215 -> bottom #FB9302). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:type="linear" android:angle="270"
+        android:startColor="#FFFDB215" android:endColor="#FFFB9302" />
+</shape>

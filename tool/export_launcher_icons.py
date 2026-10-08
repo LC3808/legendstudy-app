@@ -1,119 +1,122 @@
 #!/usr/bin/env python3
-"""Check (default) or export (--write) approved launcher + splash assets. Requires Pillow.
-Never alters the Owner source. No network, credentials or runtime dependency.
+"""Check (default) or export (--write) the approved launcher icon. Requires Pillow.
+Never alters the Owner master. No network, credentials or runtime dependency.
 
-Owner-approved 2026-10-08 — FULL-ORANGE launcher icon:
-    background = brand orange (#FFA300, = AppTokens.primary / AppTokens.brand)
-    foreground = the white notebook+pencil symbol.
-No white outer canvas, no border, no text, no wordmark.
+Owner-approved 2026-10-08 — CANONICAL APP ICON MASTER:
+    assets/brand/source/legendstudy_app_icon_master.png  (sha256 asserted below)
+A rounded-square ORANGE-GRADIENT icon with a WHITE notebook + **WHITE pencil body**
+(orange negative-space detail inside the pencil/notebook). The attached master IS
+the visual authority: we do NOT redraw, re-swap or re-scale it. Platform exports
+are produced directly FROM this master.
 
-The symbol geometry is the Owner's canonical source
-(assets/brand/source/legendstudy_app_iocon_1024.png, sha256 below): an orange
-mark on white. We do NOT redraw it. We derive a per-pixel symbol-coverage map
-`t` from the source (white background -> 0, orange ink -> 1, with the source's
-own anti-aliasing preserved) and recolour by figure/ground swap:
-    launcher pixel = t*WHITE + (1-t)*ORANGE   (white symbol on orange)
-    splash  symbol = orange where t, transparent elsewhere (for the white splash)
+This supersedes the 2026-09-29 75% white-canvas design (commit 9af9667) and the
+2026-10-08 full-orange figure/ground swap (commit 8cb7b24) — both kept in git
+history. That swap wrongly rendered the pencil body orange; this master restores
+the white pencil body.
 
-This supersedes the 2026-09-29 75% white-canvas design (commit 9af9667), kept in
-git history. The source bytes are untouched.
+Export treatment (technical only, visible result == master):
+- iOS AppIcon + Android legacy mipmaps: the master made full-bleed (the 4 white
+  corner cutouts are filled with the master's own edge gradient so the OS mask
+  produces a clean rounded icon), opaque RGB (App Store: no alpha).
+- Android adaptive: background = the master's vertical orange gradient (a
+  <shape> drawable); foreground = the WHITE symbol extracted from the master
+  (white on transparent), sized into the 66dp safe circle. The pencil body stays
+  white; the orange negative space shows the gradient background through.
+- Splash (LaunchImage / ic_brand_symbol / legendstudy_symbol.png) and the Flutter
+  cold-start brand frame are NOT touched here (Owner: splash stays white + orange
+  symbol, separate from the app icon).
 """
 import argparse
 import hashlib
 import json
 from pathlib import Path
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / 'assets/brand/source/legendstudy_app_iocon_1024.png'
-SHA256 = '7f37ed2c16a43f739cfcb618190bacedaaacdb7877dcf000578f8b6611e25a68'
+MASTER = ROOT / 'assets/brand/source/legendstudy_app_icon_master.png'
+SHA256 = 'e37afa18ceaf9e27ab275c1cb460b512697baa3d745689ed741c871ce079abfe'
 
-# Brand orange = AppTokens.primary / AppTokens.brand (lib/core/theme/app_theme.dart = 0xFFFFA300).
-ORANGE = (255, 163, 0)
-# iOS + Android legacy full square: white symbol footprint inside the (squircle) mask.
-FULL_SCALE = 0.78
-# Android adaptive foreground: the symbol's farthest point as a fraction of the
-# 108dp canvas radius (canvas/2 = 216px = 54dp). The rotated-document corners
-# sit inside the bbox, so the real farthest ink is < this nominal radius; 0.72
-# yields ~31.4dp measured, filling the 33dp (66dp diameter) safe circle.
-ADAPTIVE_RADIUS_FRAC = 0.72
-# Splash orange symbol: larger for presence on the white splash (iOS LaunchScreen
-# is unmasked; Android 12 splash icon circle is generous). ~0.62 of the radius.
-SPLASH_RADIUS_FRAC = 0.62
+# Vertical gradient sampled from the master (top lighter -> bottom deeper).
+GRAD_TOP = (253, 178, 21)      # ~#FDB215
+GRAD_BOTTOM = (251, 147, 2)    # ~#FB9302
+# Android adaptive foreground: white symbol farthest point as a fraction of the
+# 108dp canvas radius. ~0.70 -> ~31dp, filling the 33dp (66dp diameter) safe circle.
+ADAPTIVE_RADIUS_FRAC = 0.70
 
-ADAPTIVE = '''<?xml version="1.0" encoding="utf-8"?>
+ADAPTIVE_XML = '''<?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@color/ic_launcher_background" />
+    <background android:drawable="@drawable/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_foreground" />
 </adaptive-icon>
 '''
 
-COLORS = '''<?xml version="1.0" encoding="utf-8"?>
-<!-- Launcher adaptive-icon background: LegendStudy brand orange (AppTokens.primary). -->
-<resources>
-    <color name="ic_launcher_background">#FFFFA300</color>
-</resources>
-'''
+# Adaptive background = the master's vertical orange gradient (angle 270 = top->bottom).
+BG_DRAWABLE = ('<?xml version="1.0" encoding="utf-8"?>\n'
+               '<!-- Launcher adaptive-icon background: master orange gradient (top #FDB215 -> bottom #FB9302). -->\n'
+               '<shape xmlns:android="http://schemas.android.com/apk/res/android">\n'
+               '    <gradient android:type="linear" android:angle="270"\n'
+               '        android:startColor="#FFFDB215" android:endColor="#FFFB9302" />\n'
+               '</shape>\n')
 
 
-def coverage_map(source_rgb):
-    """Symbol coverage t in [0,255] from the blue channel: white bg(blue~254)->0,
-    orange ink(blue~0)->255. Preserves the source's own edge anti-aliasing."""
-    blue = source_rgb.getchannel('B')
-    lut = [max(0, min(255, round((254 - b) * 255 / 254))) for b in range(256)]
-    return blue.point(lut)  # 'L' image, 255 = full symbol
+def vertical_gradient(w, h):
+    col = Image.new('RGB', (1, h))
+    px = col.load()
+    for y in range(h):
+        t = y / (h - 1)
+        px[0, y] = tuple(round(GRAD_TOP[i] + (GRAD_BOTTOM[i] - GRAD_TOP[i]) * t) for i in range(3))
+    return col.resize((w, h), Image.Resampling.LANCZOS)
 
 
-def farthest_symbol_radius(t):
-    """Farthest symbol pixel (t>0.5) distance from centre, in source px."""
-    x0, y0, x1, y1 = t.point(lambda v: 255 if v > 128 else 0).getbbox()
-    cx = cy = t.size[0] / 2
-    corners = [(x0, y0), (x1, y0), (x0, y1), (x1, y1)]
-    return max(((x - cx) ** 2 + (y - cy) ** 2) ** 0.5 for x, y in corners)
+def corner_mask(master):
+    """255 where the white corner cutouts are (border-connected white), dilated to
+    absorb the anti-aliased ring."""
+    w, h = master.size
+    flood = master.copy()
+    for seed in [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)]:
+        ImageDraw.floodfill(flood, seed, (255, 0, 255), thresh=45)
+    r, g, b = flood.split()
+    rm = r.point(lambda v: 255 if v == 255 else 0)
+    gm = g.point(lambda v: 255 if v == 0 else 0)
+    bm = b.point(lambda v: 255 if v == 255 else 0)
+    cm = ImageChops.multiply(ImageChops.multiply(rm, gm), bm)
+    return cm.filter(ImageFilter.MaxFilter(21))
 
 
-def white_on_orange(t, scale, canvas=1024):
-    """Opaque RGB: white symbol (scaled, centred) on a full orange canvas."""
-    inner = round(canvas * scale)
-    off = (canvas - inner) // 2
-    full_t = Image.new('L', (canvas, canvas), 0)
-    full_t.paste(t.resize((inner, inner), Image.Resampling.LANCZOS), (off, off))
-    bg = Image.new('RGB', (canvas, canvas), ORANGE)
-    white = Image.new('RGB', (canvas, canvas), (255, 255, 255))
-    return Image.composite(white, bg, full_t)
+def symbol_alpha(master, corner):
+    """Alpha of the WHITE symbol: min(G,B) whiteness, excluding corners and a thin
+    outer border ring (orange margin between the symbol and the square edge)."""
+    w, h = master.size
+    _, g, b = master.split()
+    min_gb = ImageChops.darker(g, b)
+    lut = [max(0, min(255, round((v - 150) * 255 / (245 - 150)))) for v in range(256)]
+    alpha = min_gb.point(lut)
+    alpha.paste(0, mask=corner)  # drop corner white
+    inset = Image.new('L', (w, h), 0)
+    ImageDraw.Draw(inset).rounded_rectangle([70, 70, w - 71, h - 71], radius=180, fill=255)
+    alpha.paste(0, mask=ImageChops.invert(inset))  # drop outer border artifacts
+    return alpha
 
 
-def coloured_symbol(t, far, radius_frac, colour, canvas):
-    """RGBA symbol of `colour` on transparent, sized so the farthest symbol
-    point sits at radius_frac of the canvas radius (canvas/2) from the centre."""
-    want_px = radius_frac * (canvas / 2)
-    inner = round(want_px * 2 / (far / (t.size[0] / 2)))
-    off = (canvas - inner) // 2
-    full_t = Image.new('L', (canvas, canvas), 0)
-    full_t.paste(t.resize((inner, inner), Image.Resampling.LANCZOS), (off, off))
-    sym = Image.new('RGBA', (canvas, canvas), colour + (0,))
-    solid = Image.new('RGBA', (canvas, canvas), colour + (255,))
-    sym.paste(solid, (0, 0), full_t)
-    return sym
+def full_bleed(master, corner, grad):
+    """Master with the white corner cutouts replaced by the gradient, so the OS
+    mask yields a clean rounded icon. Opaque RGB."""
+    return Image.composite(master, grad, ImageChops.invert(corner))
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--write', action='store_true')
-    args = parser.parse_args()
-    assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == SHA256
-    with Image.open(SOURCE) as source:
-        source.verify()
-    with Image.open(SOURCE) as source:
-        assert source.format == 'PNG' and source.size == (1024, 1024)
-        assert source.mode == 'RGBA' and source.getchannel('A').getextrema() == (255, 255)
-        source_rgb = source.convert('RGB')
-
-    t = coverage_map(source_rgb)
-    far = farthest_symbol_radius(t)
-
-    # Full orange launcher image (white symbol @ FULL_SCALE), opaque RGB.
-    image = white_on_orange(t, FULL_SCALE)
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--write', action='store_true')
+    args = ap.parse_args()
+    assert hashlib.sha256(MASTER.read_bytes()).hexdigest() == SHA256, 'master sha256 mismatch'
+    with Image.open(MASTER) as src:
+        src.verify()
+    master = Image.open(MASTER).convert('RGB')
+    w, h = master.size
+    grad = vertical_gradient(w, h)
+    corner = corner_mask(master)
+    image = full_bleed(master, corner, grad)      # opaque RGB, full-bleed
+    alpha = symbol_alpha(master, corner)
 
     outputs = {}
     appicon = ROOT / 'ios/Runner/Assets.xcassets/AppIcon.appiconset'
@@ -124,9 +127,6 @@ def main():
     for density, n in [('mdpi', 48), ('hdpi', 72), ('xhdpi', 96), ('xxhdpi', 144), ('xxxhdpi', 192)]:
         outputs[res / f'mipmap-{density}/ic_launcher.png'] = image.resize((n, n), Image.Resampling.LANCZOS)
 
-    # Android adaptive foreground: WHITE symbol on transparent, 108dp @4x = 432.
-    adaptive_fg = coloured_symbol(t, far, ADAPTIVE_RADIUS_FRAC, (255, 255, 255), 432)
-
     for path, expected in outputs.items():
         if args.write:
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -136,56 +136,45 @@ def main():
             assert actual.size == expected.size, path
             assert ImageChops.difference(actual, expected).getbbox() is None, path
 
-    # Adaptive foreground PNG (RGBA white) + adaptive xml + colors.xml.
+    # Android adaptive foreground: white symbol on transparent, sized to ~31dp.
+    bbox = alpha.point(lambda v: 255 if v > 128 else 0).getbbox()
+    x0, y0, x1, y1 = bbox
+    far = max(((x - w / 2) ** 2 + (y - h / 2) ** 2) ** 0.5
+              for x, y in [(x0, y0), (x1, y0), (x0, y1), (x1, y1)])
+    C = 432
+    want = ADAPTIVE_RADIUS_FRAC * (C / 2)
+    inner = round(want * 2 / (far / (w / 2)))
+    off = (C - inner) // 2
+    sym = Image.new('RGBA', (w, h), (255, 255, 255, 255))
+    sym.putalpha(alpha)
+    fg = Image.new('RGBA', (C, C), (255, 255, 255, 0))
+    fg.paste(sym.resize((inner, inner), Image.Resampling.LANCZOS), (off, off))
     fg_path = res / 'drawable-xxxhdpi/ic_launcher_foreground.png'
     if args.write:
         fg_path.parent.mkdir(parents=True, exist_ok=True)
-        adaptive_fg.save(fg_path)
+        fg.save(fg_path)
     with Image.open(fg_path) as actual:
         assert actual.format == 'PNG' and actual.mode == 'RGBA', fg_path
-        assert actual.size == (432, 432), fg_path
-        assert ImageChops.difference(actual, adaptive_fg).getbbox() is None, fg_path
+        assert actual.size == (C, C), fg_path
+        assert ImageChops.difference(actual, fg).getbbox() is None, fg_path
 
     xml = res / 'mipmap-anydpi-v26/ic_launcher.xml'
-    colors = res / 'values/colors.xml'
+    bg = res / 'drawable/ic_launcher_background.xml'
     if args.write:
         xml.parent.mkdir(parents=True, exist_ok=True)
-        xml.write_text(ADAPTIVE)
-        colors.parent.mkdir(parents=True, exist_ok=True)
-        colors.write_text(COLORS)
-    assert xml.read_text() == ADAPTIVE
-    assert colors.read_text() == COLORS
+        xml.write_text(ADAPTIVE_XML)
+        bg.parent.mkdir(parents=True, exist_ok=True)
+        bg.write_text(BG_DRAWABLE)
+    assert xml.read_text() == ADAPTIVE_XML
+    assert bg.read_text() == BG_DRAWABLE
 
-    # Splash orange symbol (transparent) for: Flutter cold-start brand frame,
-    # iOS LaunchImage, Android pre-12 + API31 splash. White splash, orange mark.
-    symbol_path = ROOT / 'assets/brand/generated/legendstudy_symbol.png'
-    ios_launch = ROOT / 'ios/Runner/Assets.xcassets/LaunchImage.imageset'
-    android_splash = res / 'drawable-xxxhdpi/ic_brand_symbol.png'
-    base_symbol = coloured_symbol(t, far, SPLASH_RADIUS_FRAC, ORANGE, 1024)
-    rgba_targets = {
-        symbol_path: base_symbol.resize((512, 512), Image.Resampling.LANCZOS),
-        android_splash: base_symbol.resize((432, 432), Image.Resampling.LANCZOS),
-        ios_launch / 'LaunchImage.png': base_symbol.resize((180, 180), Image.Resampling.LANCZOS),
-        ios_launch / 'LaunchImage@2x.png': base_symbol.resize((360, 360), Image.Resampling.LANCZOS),
-        ios_launch / 'LaunchImage@3x.png': base_symbol.resize((540, 540), Image.Resampling.LANCZOS),
-    }
-    for path, expected in rgba_targets.items():
-        if args.write:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            expected.save(path)
-        with Image.open(path) as actual:
-            assert actual.format == 'PNG' and actual.mode == 'RGBA', path
-            assert actual.size == expected.size, path
-            assert ImageChops.difference(actual, expected).getbbox() is None, path
-
-    # Safety: every white foreground pixel must sit inside the 66dp safe circle
-    # (radius 132px on the 432 canvas), stricter than the 72dp visible viewport.
-    px = adaptive_fg.load()
+    # Safety: the white foreground sits inside the 66dp safe circle (132px of 432).
+    px = fg.load()
     radii = [((x - 215.5) ** 2 + (y - 215.5) ** 2) ** 0.5
-             for y in range(432) for x in range(432) if px[x, y][3] > 40]
+             for y in range(C) for x in range(C) if px[x, y][3] > 40]
     assert radii and max(radii) < 132, f'adaptive foreground exceeds 66dp safe circle: {max(radii)/4:.2f}dp'
-    print(f'Launcher+splash assets PASS: {len(outputs)} launcher PNGs (orange bg, white symbol @ {int(FULL_SCALE*100)}%), '
-          f'adaptive fg safe radius {max(radii)/4:.2f}dp < 33dp, {len(rgba_targets)} splash symbols.')
+    print(f'Launcher icon PASS: {len(outputs)} PNGs from master (full-bleed, white pencil preserved); '
+          f'adaptive fg safe radius {max(radii)/4:.2f}dp < 33dp. Splash untouched.')
 
 
 if __name__ == '__main__':
