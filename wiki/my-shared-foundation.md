@@ -18,7 +18,7 @@ Canonical APP base: Store RC `claude/final-store-release-2026-10-08`; LAB base: 
 Profiles: display_name exists; school identity is neis_office_code + neis_school_code; **no school_name column**. Name resolves through existing NEIS proxy. academic_status allows student/retaker/other; grade is nullable 1..3. No parent/teacher enum is invented.
 Targets: UNIQUE NULLS NOT DISTINCT(user_id, university_id, admission_year); nullable intended_division already exists. Existing APP inserts omit division/year and delete by target row ID. Same-university multi-division requires replacing the unique constraint: Owner §74 STOP applies. Migration 20261008000500 is a candidate, NOT approved/applied. It builds normalized replacement uniqueness before dropping the old constraint and does not rewrite rows; rollback must stop once multiple divisions make the old uniqueness impossible. APP runtime regression is pending the pinned Flutter SDK.
 Study: completed study_sessions with validated active_segments, include_in_study_total and user FK; no Web timer database. APP unions overlapping absolute intervals across sessions/devices before KST bucketing; week starts Monday. Unsynced local work/live drafts cannot be claimed by Web.
-Application tables: absent in Owner inventory. New application/event data will use existing profiles/Auth ON DELETE CASCADE; deletion function bodies are not modified. Verified personal/postconditions hashes match canonical lifecycle migration.
+Application tables: absent at preflight, now applied by Owner as006. Application/event data uses existing profiles/Auth ON DELETE CASCADE; deletion function bodies are not modified. Verified personal/postconditions hashes match canonical lifecycle migration.
 
 ## Status
 
@@ -56,4 +56,21 @@ and mobile390 PASS (one-step multi-division, Application create/outcome/correcti
 PostgreSQL17 NOSUPERUSER postgres, eight-way same-key save/event concurrency, exact
 activation package/ledger/replay rejection and Auth cascade PASS. PGlite Target,
 Application, Study and Student360 suites PASS. APP Flutter tests remain NOT_RUN.
-New migrations005–008 are NOT_PRODUCTION_APPLIED. Target005 remains explicitly held.
+Migrations006–008 are now PRODUCTION_APPLIED. Target005 remains unapplied/held.
+
+
+## Production activation postflight — 2026-10-08
+
+Owner applied exact APP35ab994 foundation package (006–008 only). Owner postflight:
+8 RPC body MD5 values match candidate SQL; all postgres-owned SECURITY DEFINER with
+empty search_path, anon execute false, authenticated execute true. Both new tables
+have RLS true and authenticated INSERT/UPDATE/DELETE false. FK cascades to profiles
+and application/events confirmed; university remains restrictive. No reapplication.
+LAB507ed7b preserves latest Manus typography857ec9c and holds the Target interface;
+Cloudflare60564c64-3fe4-49fe-8075-d117f4f24865 succeeded, live domain serves new adapters.
+Local merged release536 tests/lint/typecheck/boundary/build and1440/390 browser fixture PASS.
+Actual Production anonymous read RPCs my_applications/my_study_summary/my_essay_summary/
+admin_student360 all return401/42501. Owner authenticated Application/Study/Admin
+acceptance is pending; availability/ACL verification is not read/write acceptance.
+Target005 still requires Owner §74 resolution and APP Flutter regression (NOT_RUN).
+No migration history, Payment/Toss, IAP, signup worker or deletion runtime changed.

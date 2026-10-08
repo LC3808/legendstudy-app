@@ -2,7 +2,7 @@
 
 ## Shared MY foundation — 2026-10-08
 
-[Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. New Target/Application/Study/Admin candidates are LOCAL_VERIFIED, NOT_PRODUCTION_APPLIED. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.
+[Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. Application/Study/Admin006–008 are PRODUCTION_APPLIED; Owner postflight8 RPC hashes/ACLs and2 table RLS/direct-write denial match. LAB507ed7b deployed; authenticated runtime pending. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.
 
 ## APP Store RC — 2026-10-07
 

@@ -3346,3 +3346,12 @@ pass local SQL and PostgreSQL17 non-superuser/concurrency boundaries. Target uni
 replacement remains Owner §74-held; Flutter SDK/network gate means APP regression
 is NOT_RUN. No Production activation or Payment/deletion runtime modification.
 See [contract, evidence and constraints](my-shared-foundation.md).
+
+
+## 2026-10-08 — Shared MY foundation Production activation
+
+Owner applied006–008 from APP35ab994. Postflight8 function definitions/grants and
+2 tables RLS/direct-DML denial match; existing deletion cascade retained.
+LAB507ed7b deployed; anonymous read RPC denial verified live, authenticated runtime
+pending. Target005 remains held, no APP binary release or Flutter pass claimed.
+See [activation evidence](my-shared-foundation.md#production-activation-postflight--2026-10-08).
