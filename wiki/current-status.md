@@ -1,5 +1,9 @@
 # Current Status
 
+## Shared MY foundation — 2026-10-08
+
+[Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. New Target/Application/Study/Admin candidates are LOCAL_VERIFIED, NOT_PRODUCTION_APPLIED. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.
+
 ## APP Store RC — 2026-10-07
 
 [Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
@@ -24,24 +28,7 @@ Native: Home/Materials/Learning/LAB/MY; guest materials, owner saved/recent; Tim
 Internal-grade backend, advanced analysis/admissions, Community, Level and full
 Achievement Engine are NOT implemented. No WebView/shared session.
 
-Editing: Profile/school Save returns once on success; failed/partial save stays. School results directly below search. Chart uses actual
-max, zero unpainted, oldest→newest, no horizontal scrolling. Login default HOME,
-trusted explicit protected return preserved. Owner corrections now add logout HOME,
-verified avatar read-after-write. Owner-approved Design System v2 now uses Orange /
-Deep Navy / Cool Neutral, white grouped surfaces and plain section headings.
-Guest MY exposes Login and hides private dashboard modules. Materials pages contain
-5 items with explicit load-more after Owner device follow-up; Settings logout follows
-service/policy groups. Home has an own-nickname greeting and small daily semantic
-icons. Greeting uses compact16px hierarchy and a noninteractive planned bell slot.
-D-Day name/date metadata sits above D-n; study label/value share a wrapping row.
-Brand accent is now Owner-confirmed #FFA300; no peach selections. Meal's explicit
-trailing control opens up to3 actual provided-day chips, lazily bounded past/future
-context; preview14/19KST/7day policy unchanged. All major groups share a white surface, stronger cool-neutral border and the unchanged approved Home shadow; nested/items remain flat; Meal selection has
-no checkmark. Timer/Trend daily summary shows displayed7day total + daily max,
-with the neutral mean caption directly above its dashed line. Mock has official year/grade/month→actual subject/
-variant/key and separate free title/time/manual-score practice. Free scores are
-local personal records, excluded from official MY/LAB/admissions. MY confirmed correct-count snapshots push LAB and preserve Back.
-[Canonical design](design-system.md) maps the approved proposal to implementation.
+Existing presentation/runtime notes are preserved in [shared foundation history](my-shared-foundation.md#preserved-prior-presentation-status); Manus visual authority remains unchanged.
 
 ## Owner verified
 

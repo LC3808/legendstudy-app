@@ -42,7 +42,9 @@ class SupabaseUniversityRepository implements UniversityRepository {
   Future<List<InterestedUniversity>> listInterested() async {
     final rows = await _client
         .from('student_target_universities')
-        .select('id,university_id,priority,universities(name,slug)')
+        .select(
+          'id,university_id,priority,intended_division,admission_year,universities(name,slug)',
+        )
         .eq('status', 'interested')
         .order('priority', ascending: true, nullsFirst: false)
         .order('created_at');

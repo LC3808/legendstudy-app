@@ -3337,3 +3337,12 @@ Store build entrypoint preserving all other production values, and Android exist
 upload-key properties binding. No feature-code change or key creation. Merge/override/
 mode0600 cleanup tests PASS. Signing remains Owner action; focused device smoke includes
 native essay save/evaluation entry and synthetic deletion request→cancel.
+
+## 2026-10-08 — Shared MY foundation candidate
+
+LAB school 3c432cd deployed and Owner verified auto-student/optional grade/save/reload.
+New additive Application/event, Study summary and Student360/Essay read candidates
+pass local SQL and PostgreSQL17 non-superuser/concurrency boundaries. Target unique
+replacement remains Owner §74-held; Flutter SDK/network gate means APP regression
+is NOT_RUN. No Production activation or Payment/deletion runtime modification.
+See [contract, evidence and constraints](my-shared-foundation.md).
