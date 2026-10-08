@@ -1,0 +1,38 @@
+{
+  "lab_tests": 824,
+  "python_contract_tests": 31,
+  "read_projection_checks": 10,
+  "read_projection_scope": "isolated PGlite with lifecycle helper fixture",
+  "postgres17_regression": [
+    {
+      "test": "test_math_learning.py",
+      "exit": 0,
+      "tail": [
+        "history_bound PASS",
+        "transaction_rollback PASS",
+        "erasing_learning_denied PASS",
+        "erasing_hint_retry_denied PASS"
+      ]
+    },
+    {
+      "test": "test_math_learning_legacy.py",
+      "exit": 0,
+      "tail": [
+        "catalog_after_writes PASS",
+        "session_erasure PASS",
+        "account_erasure PASS",
+        "LEGACY_POST_MATH_CHECKS 102"
+      ]
+    },
+    {
+      "test": "test_math_learning_installation.py",
+      "exit": 0,
+      "tail": [
+        "MATH_INSTALLATION_CHECKS 14"
+      ]
+    }
+  ],
+  "production_db_apply": false,
+  "provider_calls": 0,
+  "four_type_authenticated_production_e2e": false
+}

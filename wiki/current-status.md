@@ -1,8 +1,8 @@
 # Current Status
 
-## Admin members / Essay next — 2026-10-08
+## Essay Web runtime — 2026-10-08
 
-[Member directory009](admin-member-directory.md): local PASS, Production009 applied; Owner hash/ACL/RLS/cache postflight PASS. Owner operator acceptance PASS; ordinal display follow-up. [Essay gap/contract](essay-mixed-mode-foundation.md): current inventory + offline planning only. No runtime activation;005 HELD.
+[Runtime closeout](essay-web-runtime-activation.md): PARTIAL; Math restored/gated, Humanities adapter fixture-tested.010 LOCAL_ONLY; Production credentials unavailable. No live E2E/provider call. [Directory009](admin-member-directory.md) Owner verified;005 HELD; Owner-away override active.
 
 ## Shared MY foundation — 2026-10-08
 
@@ -23,7 +23,7 @@ Oct06 Unified Daily supersedes older APP deletion/release pending statements bel
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.
 
-[MATH-2E](math-essay-learning-runtime.md): isolated; NOT_APPLIED.
+[MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 
 [HQP](human-quality-persistence-implementation.md): gateway PASS; write NOT_ASSESSABLE.
 [ADR-2D](account-deletion-ownership-compatibility.md): LOCAL_VERIFIED; NOT_APPLIED.
