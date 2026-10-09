@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 
@@ -33,7 +34,13 @@ final creditBalanceProvider = FutureProvider.autoDispose<CreditBalance?>((
 });
 
 class CreditBalanceCard extends ConsumerWidget {
-  const CreditBalanceCard({super.key});
+  const CreditBalanceCard({super.key, this.showTopUp = false});
+
+  /// When true, a "충전하기" entry to the Credit purchase screen is shown below
+  /// the balance (e.g. on the LAB home). The purchase screen itself passes false
+  /// to avoid a recursive entry.
+  final bool showTopUp;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref
@@ -49,16 +56,27 @@ class CreditBalanceCard extends ConsumerWidget {
           ),
           data: (balance) => balance == null
               ? const SizedBox.shrink()
-              : ListTile(
-                  title: Text('사용 가능 ${balance.spendable} Credits'),
-                  subtitle: Text(
-                    '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}'
-                    '${balance.nextExpiry == null ? '' : '\n가장 가까운 만료: ${DateTime.parse(balance.nextExpiry!).toLocal()}'}',
-                  ),
-                  trailing: IconButton(
-                    onPressed: () => ref.invalidate(creditBalanceProvider),
-                    icon: const Icon(Icons.refresh),
-                  ),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text('사용 가능 ${balance.spendable} Credits'),
+                      subtitle: Text(
+                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}'
+                        '${balance.nextExpiry == null ? '' : '\n가장 가까운 만료: ${DateTime.parse(balance.nextExpiry!).toLocal()}'}',
+                      ),
+                      trailing: IconButton(
+                        onPressed: () => ref.invalidate(creditBalanceProvider),
+                        icon: const Icon(Icons.refresh),
+                      ),
+                    ),
+                    if (showTopUp)
+                      OutlinedButton(
+                        onPressed: () => context.push('/lab/credits'),
+                        child: const Text('충전하기'),
+                      ),
+                  ],
                 ),
         );
   }

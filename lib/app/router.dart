@@ -3,6 +3,7 @@ import '../features/study/trends/study_trend_page.dart';
 import '../features/lab/score_summary.dart';
 import '../features/lab/lab_page.dart';
 import '../features/lab/lab_coming_soon_page.dart';
+import '../features/billing/presentation/credit_purchase_page.dart';
 import '../features/essay/essay_pages.dart';
 import '../features/profile/presentation/profile_edit_page.dart';
 
@@ -179,6 +180,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => const LabPage(),
                 routes: [
                   ...essayRoutes,
+                  GoRoute(
+                    path: 'credits',
+                    builder: (_, _) => const NestedPage(
+                      title: 'Credit 충전',
+                      child: CreditPurchasePage(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'school-record',
                     builder: (_, _) => const NestedPage(

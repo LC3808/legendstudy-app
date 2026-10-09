@@ -16,7 +16,7 @@ class LabPage extends StatelessWidget {
   Widget build(BuildContext context) => ShellPage(
     children: [
       const AppHeader(title: 'LAB'),
-      const CreditBalanceCard(),
+      const CreditBalanceCard(showTopUp: true),
       // Owner order (2026-10-09): 논술 LAB first (live, primary CTA), then
       // 내신 LAB, then 모의/수능 LAB.
       const LegendStudyLabEntry(),
