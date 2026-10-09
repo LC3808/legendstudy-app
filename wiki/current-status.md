@@ -1,16 +1,16 @@
 # Current Status
 
-## Integrated account/data candidate — Oct09
+## Production integration — Oct09 — PARTIAL
 
-[Backend follow-up](integrated-account-data-2026-10-09.md): existing-profile routing,
-owner recheck and Google error mapping updated on independent Codex branch.
-Flutter/device verification blocked (pinned SDK absent); Claude RC unchanged.
-Published-date search correction is partial; advanced search stream ordering remains.
-
-
-## Essay runtime — 2026-10-09
-
-[Activation](essay-runtime-activation-2026-10-09.md): PARTIAL; canonical component persistence38 SQL PASS, all types GATED.010 BLOCKED_NO_PRIVILEGE; no live provider/auth E2E.005 HELD; Signup frozen.
+[Current integration](production-integration-2026-10-09.md): Claude Release/IAP + Codex
+Account/Data/runtime merged on codex/production-integration. Final analyze and Android
+debug compile PASS; device/iOS QA unverified. Native shared History read surface,
+active/published-date search, brand initialization and Store recovery fixes implemented.
+Production:7 missing posts/78 resources activated; additive IAP RPC20261009000200 and
+verify-iap-purchase v1 deployed (JWT=true, service-only ledger RPC, IAP_ENABLED=false,
+actual grants0).010 already applied, not reapplied;005 HOLD. Real Math E2E blocked by
+expired test session and3 missing Production secrets. All types GATED. Store/refund
+acceptance and full native Math flow remain. Payment/Toss/Signup and LAB unchanged.
 
 ## Shared MY foundation — 2026-10-08
 

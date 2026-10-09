@@ -1,5 +1,7 @@
 # In-App Purchase (Credit) Preparation — 2026-10-09
 
+> Follow-up: [Codex integration](production-integration-2026-10-09.md) now merges this client and deploys a gated server/RPC. Historical client-only evidence below remains; server absence is superseded, real Store/refund acceptance is still pending.
+
 **IAP_PREPARATION: PARTIAL** — the Flutter client (Apple IAP + Google Play
 Billing adapter, product catalog, purchase UI, server-verification contract,
 pending/failure/recovery) is **implemented, compiling and unit-tested**. End-to-

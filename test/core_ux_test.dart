@@ -238,7 +238,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('개인정보처리방침'), findsOneWidget);
       expect(find.text('이용약관'), findsOneWidget);
-      expect(find.text('준비 중 · 문의·건의사항으로 연락해 주세요.'), findsNWidgets(2));
+      expect(find.text('환불 안내'), findsOneWidget);
+      expect(find.text('준비 중 · 문의·건의사항으로 연락해 주세요.'), findsNWidgets(3));
       await tester.ensureVisible(find.text('앱 정보'));
       await tester.tap(find.text('앱 정보'));
       await tester.pumpAndSettle();

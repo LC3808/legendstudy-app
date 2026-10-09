@@ -3391,3 +3391,11 @@ claim/finalize/read candidate reuses existing parent/ledger:38 isolated PG check
 LAB bridge/history read preserves closed activation, durable checkpoint and account scope.
 Real provider/authenticated E2E blocked; no Production DB write. Full evidence and
 remaining content/access gates in [activation](essay-runtime-activation-2026-10-09.md).
+
+## 2026-10-09 — Production integration (PARTIAL)
+
+Integrated latest Claude Release/IAP + Codex backend/runtime. Production materials7/78;
+IAP migration20261009000200 + verifierv1 JWT=true applied but activationOFF, grants0.
+Flutter analyze/Android debug PASS, failed regression policy fixtures corrected and
+rerun. Real Math/Store/device acceptance blocked/unverified. Exact evidence, authority,
+preservation and one-batch Owner settings: [integration](production-integration-2026-10-09.md).

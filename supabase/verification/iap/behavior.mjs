@@ -1,0 +1,32 @@
+import {readFile} from 'node:fs/promises';
+const {PGlite}=await import(process.env.PGLITE_MODULE);
+const {pgcrypto}=await import(process.env.PGCRYPTO_MODULE);
+import assert from 'node:assert/strict';
+if (!process.env.IAP_TEST_DB || process.env.IAP_TEST_DB.includes('://')) throw Error('Isolated canonical-ledger fixture directory required');
+const db=new PGlite(process.env.IAP_TEST_DB,{extensions:{pgcrypto}});
+try {
+ await db.exec('begin');
+ await db.exec((await readFile('supabase/migrations/20261009000200_iap_verified_credit.sql','utf8')).replace('create function','create or replace function').replace('begin;','').replace('commit;',''));
+ await db.exec(`create schema if not exists account_private; create table if not exists public.account_deletion_requests(subject_id uuid,state text);`);
+ const lifecycle=await readFile('supabase/migrations/20261001000300_account_deletion_lifecycle.sql','utf8');
+ await db.exec(lifecycle.slice(lifecycle.indexOf('create function account_private.lock_subject'),lifecycle.indexOf('create function account_private.guard_request')));
+ await db.exec(`create or replace function auth.role() returns text language sql as $$select current_setting('request.jwt.claim.role',true)$$; select set_config('request.jwt.claim.role','service_role',true);`);
+ const user='11111111-1111-4111-8111-111111111111',other='22222222-2222-4222-8222-222222222222';
+ await db.query('insert into public.profiles(id) values($1),($2) on conflict do nothing',[user,other]);
+ const paid=(await db.query('select clock_timestamp() as at')).rows[0].at;
+ const args=[user,'google','com.legendstudy.essay.credit3','GPA.integration',paid];
+ const call=()=>db.query('select public.iap_post_verified_purchase($1,$2,$3,$4,$5) as status',args);
+ assert.equal((await call()).rows[0].status,'granted');assert.equal((await call()).rows[0].status,'already_processed');
+ const deny=async(fn)=>{await db.exec('savepoint denied');let failed=false;try{await fn()}catch{failed=true}await db.exec('rollback to savepoint denied');assert.equal(failed,true)};
+ args[0]=other;await deny(call);args[0]=user;args[2]='com.legendstudy.essay.credit10';await deny(call);args[2]='com.legendstudy.essay.credit3';
+ await db.exec("select set_config('request.jwt.claim.role','authenticated',true)");await deny(call);
+ assert.equal((await db.query("select has_function_privilege('authenticated','public.iap_post_verified_purchase(uuid,text,text,text,timestamptz)','execute') as ok")).rows[0].ok,false);
+ const row=(await db.query("select count(*)::int n,sum(t.balance_delta)::int amount,max(g.expires_at)::text expiry from public.credit_grants g join public.credit_transactions t on t.grant_id=g.id where g.external_reference like 'iap/%'")).rows[0];assert.equal(row.n,1);assert.equal(row.amount,3);assert.equal(row.expiry,(await db.query("select (($1::timestamptz at time zone 'UTC'+interval '3 months') at time zone 'UTC')::text expiry",[paid])).rows[0].expiry);
+ await db.exec("select set_config('request.jwt.claim.role','service_role',true)");
+ await db.exec(`create function pg_temp.iap_fail() returns trigger language plpgsql as $$begin if new.reason_code='iap_google_v1' then raise exception 'TEST_FAILURE';end if;return new;end$$;
+ create trigger iap_fail before insert on public.credit_transactions for each row execute function pg_temp.iap_fail();`);
+ const before=(await db.query('select count(*)::int n from public.credit_grants')).rows[0].n;
+ args[3]='GPA.failure';await deny(call);
+ assert.equal((await db.query('select count(*)::int n from public.credit_grants')).rows[0].n,before);
+ await db.exec('rollback');console.log('IAP canonical grant/replay/cross-account/SKU mismatch/role/ACL/expiry PASS (rollback)');
+}catch(e){console.error(e.message);process.exitCode=1;await db.exec('rollback').catch(()=>{})}finally{await db.close()}

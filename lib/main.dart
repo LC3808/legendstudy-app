@@ -8,43 +8,59 @@ import 'core/supabase/supabase_providers.dart';
 import 'features/auth/identity_diagnostic.dart';
 import 'features/brand/brand_frame.dart';
 
-Future<void> main() async {
-  // Captured before any initialization so the cold-start brand frame runs in
-  // parallel with init (fills up to the target, adds no extra delay after).
-  final processStart = DateTime.now();
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  final config = AppConfig.fromEnvironment();
-  SupabaseClient? client;
-  String? issue;
-  if (config.validationErrors.isEmpty) {
-    try {
-      await Supabase.initialize(
-        url: config.supabaseUrl,
-        publishableKey: config.supabasePublishableKey,
-        debug: false,
-      );
-      client = Supabase.instance.client;
-    } catch (_) {
-      // Never expose SDK exceptions which may contain credentials or URLs.
-      issue = '서버 연결을 초기화하지 못했습니다. 설정과 네트워크를 확인한 뒤 앱을 다시 실행해 주세요.';
+  runApp(AppBootstrap(config: AppConfig.fromEnvironment()));
+}
+
+/// Render the existing brand immediately; mount providers/router only after
+/// persisted authentication initialization finishes. No guest/new-user flash.
+class AppBootstrap extends StatefulWidget {
+  const AppBootstrap({required this.config, super.key});
+  final AppConfig config;
+  @override
+  State<AppBootstrap> createState() => _AppBootstrapState();
+}
+
+class _AppBootstrapState extends State<AppBootstrap> {
+  final processStart = DateTime.now();
+  late final Future<Widget> initialized = _initialize(widget.config);
+  Future<Widget> _initialize(AppConfig config) async {
+    SupabaseClient? client;
+    String? issue;
+    if (config.validationErrors.isEmpty) {
+      try {
+        await Supabase.initialize(
+          url: config.supabaseUrl,
+          publishableKey: config.supabasePublishableKey,
+          debug: false,
+        );
+        client = Supabase.instance.client;
+      } catch (_) {
+        // Never expose SDK exceptions which may contain credentials or URLs.
+        issue = '서버 연결을 초기화하지 못했습니다. 설정과 네트워크를 확인한 뒤 앱을 다시 실행해 주세요.';
+      }
+    } else {
+      issue = config.validationErrors.join('\n');
     }
-  } else {
-    issue = config.validationErrors.join('\n');
-  }
-  startIdentityDiagnostic(client);
-  runApp(
-    ProviderScope(
+    startIdentityDiagnostic(client);
+    return ProviderScope(
       overrides: [
         appConfigProvider.overrideWithValue(config),
         supabaseClientProvider.overrideWithValue(client),
         backendIssueProvider.overrideWithValue(issue),
       ],
-      // BrandGate wraps the app above MaterialApp (cold-start only). Widget
-      // tests mount LegendStudyApp directly and are unaffected.
-      child: BrandGate(
-        processStart: processStart,
-        child: const LegendStudyApp(),
-      ),
+      child: const LegendStudyApp(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<Widget>(
+    future: initialized,
+    builder: (context, snapshot) => BrandGate(
+      processStart: processStart,
+      ready: snapshot.hasData,
+      child: snapshot.data ?? const SizedBox.expand(),
     ),
   );
 }

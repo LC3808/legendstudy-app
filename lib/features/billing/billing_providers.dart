@@ -16,10 +16,13 @@ final purchaseVerifierProvider = Provider<PurchaseVerifier?>((ref) {
 /// unavailable. After a settled purchase it invalidates [creditBalanceProvider]
 /// so the balance is re-read from the canonical ledger.
 final iapControllerProvider = Provider.autoDispose<IapController?>((ref) {
+  final auth = ref.watch(authStateProvider);
+  final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
   final verifier = ref.watch(purchaseVerifierProvider);
-  if (verifier == null) return null;
+  if (verifier == null || owner == null) return null;
   final controller = IapController(
     verifier: verifier,
+    accountId: owner,
     onBalanceChanged: () => ref.invalidate(creditBalanceProvider),
   );
   ref.onDispose(controller.dispose);

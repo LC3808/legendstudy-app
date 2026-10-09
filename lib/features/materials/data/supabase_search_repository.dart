@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../content/data/supabase_content_repository.dart';
-import '../../content/data/discovery_policy.dart';
 import '../../exams/data/supabase_exam_repository.dart';
 import '../../resources/data/supabase_resource_repository.dart';
 import '../domain/search_models.dart';
@@ -70,103 +69,53 @@ class SupabaseSearchRepository implements SearchRepository {
     final resourceJoin = terms.resourceKinds.isEmpty || scopedKinds
         ? ''
         : ',kind_matches:resources!inner(id)';
-    var examRequest = DiscoveryPolicy.exams(
-      client
-          .from('exams')
-          .select(
-            '${SupabaseExamRepository.projection},'
-            'content:content_items!exams_content_type!inner('
-            '${SupabaseContentRepository.projection}$resourceJoin)$subjectJoin',
-          )
-          .eq('content.is_active', true),
-    );
+    var request = client
+        .from('content_items')
+        .select(
+          '${SupabaseContentRepository.projection},'
+          'exam:exams!exams_content_type${needsExam ? '!inner' : ''}('
+          '${SupabaseExamRepository.projection}$subjectJoin)$resourceJoin',
+        )
+        .eq('is_active', true);
     if (f.contentType != null) {
-      examRequest = examRequest.eq('content.content_type', f.contentType!);
+      request = request.eq('content_type', f.contentType!);
     }
     for (final year in [if (f.year != null) f.year!, ...terms.years]) {
-      examRequest = examRequest.eq('year', year);
+      request = request.eq('exam.year', year);
     }
     for (final month in [if (f.month != null) f.month!, ...terms.months]) {
-      examRequest = examRequest.eq('exam_month', month);
+      request = request.eq('exam.exam_month', month);
     }
     for (final grade in [if (f.grade != null) f.grade!, ...terms.grades]) {
-      examRequest = examRequest.eq('grade_level', grade);
+      request = request.eq('exam.grade_level', grade);
     }
     for (final type in [if (f.examType != null) f.examType!, ...terms.types]) {
-      examRequest = examRequest.eq('exam_type', type);
+      request = request.eq('exam.exam_type', type);
     }
     if (subjectIds != null) {
-      examRequest = examRequest.inFilter(
-        'matches.subject_id',
+      request = request.inFilter(
+        'exam.matches.subject_id',
         subjectIds.toList(),
       );
     }
     if (terms.resourceKinds.isNotEmpty) {
-      examRequest = examRequest.inFilter(
+      request = request.inFilter(
         scopedKinds
-            ? 'matches.kind_matches.resource_type'
-            : 'content.kind_matches.resource_type',
+            ? 'exam.matches.kind_matches.resource_type'
+            : 'kind_matches.resource_type',
         terms.resourceKinds,
       );
     }
     for (final word in words) {
       final pattern = jsonEncode('%${literal(word)}%');
-      examRequest = examRequest.or(
-        'title.ilike.$pattern,summary.ilike.$pattern',
-        referencedTable: 'content',
-      );
+      request = request.or('title.ilike.$pattern,summary.ilike.$pattern');
     }
-    // The composite FK is not recognized as a to-one inverse by PostgREST.
-    // Start at exams to use its canonical date index; append extension-less
-    // parents in feed order. Counts locate the second stream's bounded offset.
-    final exams = await examRequest
-        .order('sort_date', ascending: false, nullsFirst: false)
-        .order('content_item_id', ascending: false)
+    // One parent stream, so exams and general/essay materials share publication
+    // order and pagination. Source modification dates never promote old posts.
+    final rows = await request
+        .order('published_at', ascending: false, nullsFirst: false)
+        .order('id', ascending: false)
         .range(offset, offset + pageSize);
-    final rows = <Map<String, dynamic>>[
-      for (final row in exams)
-        {
-          ...(row['content'] as Map<String, dynamic>),
-          'exam': {
-            for (final entry in row.entries)
-              if (entry.key != 'content') entry.key: entry.value,
-          },
-        },
-    ];
-    if (rows.length <= pageSize && !needsExam) {
-      var general = client
-          .from('content_items')
-          .select(
-            '${SupabaseContentRepository.projection},'
-            'exam:exams!exams_content_type(content_item_id)$resourceJoin',
-          )
-          .eq('is_active', true)
-          .isFilter('exam', null)
-          .neq('content_type', 'exam');
-      if (f.contentType != null) {
-        general = general.eq('content_type', f.contentType!);
-      }
-      if (terms.resourceKinds.isNotEmpty) {
-        general = general.inFilter(
-          'kind_matches.resource_type',
-          terms.resourceKinds,
-        );
-      }
-      for (final word in words) {
-        final pattern = jsonEncode('%${literal(word)}%');
-        general = general.or('title.ilike.$pattern,summary.ilike.$pattern');
-      }
-      // Counting an out-of-range page produces PGRST103. Count separately at
-      // offset zero only when crossing into the general-content stream.
-      final examCount = (await examRequest.limit(0).count(CountOption.exact))
-          .count;
-      final start = (offset - examCount).clamp(0, maxOffset);
-      final generalRows = await general
-          .order('published_at', ascending: false, nullsFirst: false)
-          .order('id', ascending: false)
-          .range(start, start + pageSize - rows.length);
-      rows.addAll(generalRows.map((r) => {...r, 'exam': null}));
-    }
     final page = rows.take(pageSize).toList();
     if (page.isEmpty) return const SearchPage([], null);
     final ids = page.map((r) => r['id'] as String).toList();
@@ -212,9 +161,14 @@ class SupabaseSearchRepository implements SearchRepository {
   @override
   Future<SearchFacets> facets({int offset = 0}) async {
     checkOffset(offset);
-    final exams = await DiscoveryPolicy.exams(
-      client.from('exams').select('content_item_id,year,exam_month,exam_type'),
-    ).order('content_item_id').range(offset, offset + facetPageSize);
+    final exams = await client
+        .from('exams')
+        .select(
+          'content_item_id,year,exam_month,exam_type,content:content_items!exams_content_type!inner(id)',
+        )
+        .eq('content.is_active', true)
+        .order('content_item_id')
+        .range(offset, offset + facetPageSize);
     final subjects = await client
         .from('subjects')
         .select('id,name')

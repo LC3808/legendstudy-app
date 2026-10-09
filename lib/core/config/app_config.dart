@@ -13,6 +13,7 @@ class AppConfig {
     this.accountDeletionEnabled = false,
     this.privacyUrl = '',
     this.termsUrl = '',
+    this.refundUrl = '',
     this.googleOAuthEnabled = false,
     this.appleOAuthEnabled = false,
     this.kakaoOAuthEnabled = false,
@@ -32,13 +33,23 @@ class AppConfig {
     // without it tells the user the feature is not ready instead of failing
     // with a transport error.
     accountDeletionEnabled: bool.fromEnvironment('ACCOUNT_DELETION_ENABLED'),
-    privacyUrl: String.fromEnvironment('PRIVACY_POLICY_URL'),
-    termsUrl: String.fromEnvironment('TERMS_URL'),
+    privacyUrl: String.fromEnvironment(
+      'PRIVACY_POLICY_URL',
+      defaultValue: 'https://lab.legendstudy.com/privacy/',
+    ),
+    termsUrl: String.fromEnvironment(
+      'TERMS_URL',
+      defaultValue: 'https://lab.legendstudy.com/terms/',
+    ),
+    refundUrl: String.fromEnvironment(
+      'REFUND_URL',
+      defaultValue: 'https://lab.legendstudy.com/refund/',
+    ),
     googleOAuthEnabled: bool.fromEnvironment('GOOGLE_OAUTH_ENABLED'),
     appleOAuthEnabled: bool.fromEnvironment('APPLE_OAUTH_ENABLED'),
     kakaoOAuthEnabled: bool.fromEnvironment('KAKAO_OAUTH_ENABLED'),
   );
-  final String privacyUrl, termsUrl;
+  final String privacyUrl, termsUrl, refundUrl;
   final bool googleOAuthEnabled, appleOAuthEnabled, kakaoOAuthEnabled;
   final String environment;
   final String supabaseUrl;

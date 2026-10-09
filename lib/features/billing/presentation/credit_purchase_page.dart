@@ -26,15 +26,19 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
   IapController? _controller;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = ref.read(iapControllerProvider);
-    _controller?.init();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final authed = ref.watch(authStateProvider).value?.isAuthenticated == true;
+    final auth = ref.watch(authStateProvider);
+    final authed =
+        !auth.isLoading &&
+        !auth.hasError &&
+        auth.value?.isAuthenticated == true;
+    final controller = ref.watch(iapControllerProvider);
+    if (!identical(controller, _controller)) {
+      _controller = controller;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && identical(controller, _controller)) controller?.init();
+      });
+    }
     if (!authed) {
       return ShellPage(
         children: [
@@ -46,7 +50,6 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       );
     }
 
-    final controller = _controller;
     if (controller == null) {
       return const ShellPage(
         children: [
@@ -99,7 +102,8 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
                   priceLabel:
                       controller.storeProducts[product.id]?.price ??
                       formatKrw(product.approvedKrw),
-                  purchasable: controller.storeProducts.containsKey(product.id) &&
+                  purchasable:
+                      controller.storeProducts.containsKey(product.id) &&
                       controller.phase != BillingPhase.purchasing &&
                       controller.phase != BillingPhase.pending,
                   onBuy: () => controller.buy(product),

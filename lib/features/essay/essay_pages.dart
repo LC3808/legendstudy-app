@@ -1,4 +1,5 @@
 import 'essay_sentence_review.dart';
+import 'shared_history_page.dart';
 import 'essay_live_pages.dart';
 import 'essay_live_controller.dart';
 
@@ -19,6 +20,10 @@ List<RouteBase> get essayRoutes => [
     path: 'essay',
     builder: (_, _) => const EssayLiveHome(),
     routes: [
+      GoRoute(
+        path: 'history',
+        builder: (_, _) => const SharedEssayHistoryPage(),
+      ),
       GoRoute(
         path: 'write/:question',
         builder: (_, state) =>

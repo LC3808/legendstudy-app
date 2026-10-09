@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Current APP/Production/IAP integration: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.
+
 Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
 
 MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).

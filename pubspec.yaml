@@ -25,6 +25,7 @@ dependencies:
   # In-app purchase (Apple IAP + Google Play Billing) for 논술 Credit. The app
   # never grants Credit — purchases are verified and granted server-side.
   in_app_purchase: ^3.2.0
+  in_app_purchase_android: 0.5.3
 
 dev_dependencies:
   flutter_test:

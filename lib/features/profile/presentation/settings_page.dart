@@ -110,6 +110,7 @@ class SettingsPage extends ConsumerWidget {
               for (final policy in [
                 ('개인정보처리방침', config.privacyUrl),
                 ('이용약관', config.termsUrl),
+                ('환불 안내', config.refundUrl),
               ])
                 publicWebUri(policy.$2) == null
                     ? ListTile(

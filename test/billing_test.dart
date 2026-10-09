@@ -43,8 +43,13 @@ PurchaseDetails _pd(
   return d;
 }
 
-({IapController c, List<String> completed, _FakeVerifier v, int Function() refreshed})
-    _harness(VerificationOutcome outcome) {
+({
+  IapController c,
+  List<String> completed,
+  _FakeVerifier v,
+  int Function() refreshed,
+})
+_harness(VerificationOutcome outcome) {
   final completed = <String>[];
   var refreshed = 0;
   final v = _FakeVerifier(outcome);
@@ -57,12 +62,29 @@ PurchaseDetails _pd(
 }
 
 void main() {
+  test('store completion failure stays retryable after server grant', () async {
+    final c = IapController(
+      verifier: _FakeVerifier(
+        const VerificationOutcome(VerificationStatus.granted),
+      ),
+      onBalanceChanged: () {},
+      complete: (_) async {
+        throw StateError('offline');
+      },
+    );
+    await c.handleOne(_pd(PurchaseStatus.purchased));
+    expect(c.phase, BillingPhase.pending);
+    c.dispose();
+  });
   group('credit product catalog', () {
     test('four launch products, correct credit mapping', () {
       expect(creditProducts.length, 4);
       expect(creditProductForId('com.legendstudy.essay.credit1')!.credits, 1);
       expect(creditProductForId('com.legendstudy.essay.credit10')!.credits, 10);
-      expect(creditProductForId('com.legendstudy.essay.credit3')!.approvedKrw, 11900);
+      expect(
+        creditProductForId('com.legendstudy.essay.credit3')!.approvedKrw,
+        11900,
+      );
       expect(creditProductForId('unknown.product'), isNull);
       expect(creditProductIds.length, 4);
     });
@@ -76,9 +98,15 @@ void main() {
     VerificationStatus s(Object? data) =>
         VerificationOutcome.fromResponse(data).status;
     test('server statuses map correctly', () {
-      expect(s({'status': 'granted', 'spendable': 7}), VerificationStatus.granted);
-      expect(s({'status': 'already_processed'}), VerificationStatus.alreadyProcessed);
-      expect(s({'status': 'duplicate'}), VerificationStatus.alreadyProcessed);
+      expect(
+        s({'status': 'granted', 'spendable': 7}),
+        VerificationStatus.granted,
+      );
+      expect(
+        s({'status': 'already_processed'}),
+        VerificationStatus.alreadyProcessed,
+      );
+      expect(s({'status': 'duplicate'}), VerificationStatus.pending);
       expect(s({'status': 'rejected'}), VerificationStatus.rejected);
       expect(s({'status': 'refunded'}), VerificationStatus.rejected);
       expect(s({'status': 'pending'}), VerificationStatus.pending);
@@ -90,50 +118,72 @@ void main() {
       expect(s('oops'), VerificationStatus.pending);
     });
     test('granted carries spendable', () {
-      final o = VerificationOutcome.fromResponse({'status': 'granted', 'spendable': 7});
+      final o = VerificationOutcome.fromResponse({
+        'status': 'granted',
+        'spendable': 7,
+      });
       expect(o.spendable, 7);
       expect(o.isSettled, isTrue);
     });
   });
 
   group('IapController.handleOne — the app never self-grants', () {
-    test('granted → success, balance refreshed, transaction completed', () async {
-      final h = _harness(const VerificationOutcome(VerificationStatus.granted));
-      await h.c.handleOne(_pd(PurchaseStatus.purchased));
-      expect(h.c.phase, BillingPhase.success);
-      expect(h.refreshed(), 1);
-      expect(h.completed, ['tx-1']);
-      expect(h.v.calls, 1);
-    });
+    test(
+      'granted → success, balance refreshed, transaction completed',
+      () async {
+        final h = _harness(
+          const VerificationOutcome(VerificationStatus.granted),
+        );
+        await h.c.handleOne(_pd(PurchaseStatus.purchased));
+        expect(h.c.phase, BillingPhase.success);
+        expect(h.refreshed(), 1);
+        expect(h.completed, ['tx-1']);
+        expect(h.v.calls, 1);
+      },
+    );
 
-    test('pending verification → pending, NOT completed, NOT refreshed', () async {
-      final h = _harness(const VerificationOutcome(VerificationStatus.pending));
-      await h.c.handleOne(_pd(PurchaseStatus.purchased));
-      expect(h.c.phase, BillingPhase.pending);
-      expect(h.refreshed(), 0);
-      expect(h.completed, isEmpty); // kept open for store re-delivery
-    });
+    test(
+      'pending verification → pending, NOT completed, NOT refreshed',
+      () async {
+        final h = _harness(
+          const VerificationOutcome(VerificationStatus.pending),
+        );
+        await h.c.handleOne(_pd(PurchaseStatus.purchased));
+        expect(h.c.phase, BillingPhase.pending);
+        expect(h.refreshed(), 0);
+        expect(h.completed, isEmpty); // kept open for store re-delivery
+      },
+    );
 
-    test('rejected → error, no grant, transaction cleared', () async {
-      final h = _harness(const VerificationOutcome(VerificationStatus.rejected));
+    test('rejected → error, no grant, transaction retained', () async {
+      final h = _harness(
+        const VerificationOutcome(VerificationStatus.rejected),
+      );
       await h.c.handleOne(_pd(PurchaseStatus.purchased));
       expect(h.c.phase, BillingPhase.error);
       expect(h.refreshed(), 0);
-      expect(h.completed, ['tx-1']);
+      expect(h.completed, isEmpty);
     });
 
-    test('duplicate transaction verifies once, then completes + refreshes', () async {
-      final h = _harness(const VerificationOutcome(VerificationStatus.granted));
-      await h.c.handleOne(_pd(PurchaseStatus.purchased));
-      await h.c.handleOne(_pd(PurchaseStatus.purchased)); // same tx-1
-      expect(h.v.calls, 1); // not re-verified
-      expect(h.refreshed(), 2); // balance re-read both times
-      expect(h.completed, ['tx-1', 'tx-1']);
-    });
+    test(
+      'duplicate transaction verifies once, then completes + refreshes',
+      () async {
+        final h = _harness(
+          const VerificationOutcome(VerificationStatus.granted),
+        );
+        await h.c.handleOne(_pd(PurchaseStatus.purchased));
+        await h.c.handleOne(_pd(PurchaseStatus.purchased)); // same tx-1
+        expect(h.v.calls, 1); // not re-verified
+        expect(h.refreshed(), 2); // balance re-read both times
+        expect(h.completed, ['tx-1', 'tx-1']);
+      },
+    );
 
     test('unknown product id → never granted, left pending', () async {
       final h = _harness(const VerificationOutcome(VerificationStatus.granted));
-      await h.c.handleOne(_pd(PurchaseStatus.purchased, product: 'com.other.x'));
+      await h.c.handleOne(
+        _pd(PurchaseStatus.purchased, product: 'com.other.x'),
+      );
       expect(h.v.calls, 0);
       expect(h.c.phase, BillingPhase.pending);
       expect(h.completed, isEmpty);
@@ -169,7 +219,9 @@ void main() {
     });
 
     test('platform derived from source (google → google)', () async {
-      final v = _FakeVerifier(const VerificationOutcome(VerificationStatus.granted));
+      final v = _FakeVerifier(
+        const VerificationOutcome(VerificationStatus.granted),
+      );
       IapVerificationRequest? seen;
       final c = IapController(
         verifier: _CapturingVerifier((r) => seen = r, v.outcome),

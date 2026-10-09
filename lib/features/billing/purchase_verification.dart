@@ -36,15 +36,21 @@ class VerificationOutcome {
   /// Map a server JSON response to an outcome. Unknown/missing status is treated
   /// as [VerificationStatus.pending] (retryable) — never an implicit grant.
   factory VerificationOutcome.fromResponse(Object? data) {
-    if (data is! Map) return const VerificationOutcome(VerificationStatus.pending);
+    if (data is! Map) {
+      return const VerificationOutcome(VerificationStatus.pending);
+    }
     final raw = (data['status'] as String?)?.toLowerCase();
-    final spendable = data['spendable'] is int ? data['spendable'] as int : null;
+    final spendable = data['spendable'] is int
+        ? data['spendable'] as int
+        : null;
     final message = data['message'] as String?;
     final status = switch (raw) {
       'granted' => VerificationStatus.granted,
-      'already_processed' || 'duplicate' => VerificationStatus.alreadyProcessed,
-      'rejected' || 'invalid' || 'refunded' || 'revoked' =>
-        VerificationStatus.rejected,
+      'already_processed' => VerificationStatus.alreadyProcessed,
+      'rejected' ||
+      'invalid' ||
+      'refunded' ||
+      'revoked' => VerificationStatus.rejected,
       _ => VerificationStatus.pending,
     };
     return VerificationOutcome(status, spendable: spendable, message: message);
@@ -90,27 +96,30 @@ abstract interface class PurchaseVerifier {
 /// posts an idempotent grant to the canonical ledger keyed by `transaction_id`,
 /// with provider `APPLE_IAP` / `GOOGLE_PLAY`.
 ///
-/// CODEX/SERVER CONTRACT (this endpoint does not exist yet — IAP verification is
-/// future work per the payment foundation):
+/// CODEX/SERVER CONTRACT (server implementation is gated until Store credentials, products, and
+/// refund/revocation acceptance are verified):
 ///   request : { platform, product_id, transaction_id, verification_data }
 ///   response: { status: granted|already_processed|pending|rejected, spendable? }
 /// Codex may instead expose this as `rpc('payment_redeem_iap', ...)`; only this
 /// class changes.
 class SupabaseFunctionPurchaseVerifier implements PurchaseVerifier {
-  const SupabaseFunctionPurchaseVerifier(this._client, {this.functionName = 'verify-iap-purchase'});
+  const SupabaseFunctionPurchaseVerifier(
+    this._client, {
+    this.functionName = 'verify-iap-purchase',
+  });
   final SupabaseClient _client;
   final String functionName;
 
   @override
   Future<VerificationOutcome> verify(IapVerificationRequest request) async {
     try {
-      final res = await _client.functions.invoke(functionName, body: request.toJson());
+      final res = await _client.functions.invoke(
+        functionName,
+        body: request.toJson(),
+      );
       // 2xx → parse body; anything else is retryable (pending), not a grant.
       if (res.status >= 200 && res.status < 300) {
         return VerificationOutcome.fromResponse(res.data);
-      }
-      if (res.status == 409) {
-        return const VerificationOutcome(VerificationStatus.alreadyProcessed);
       }
       if (res.status == 422 || res.status == 400) {
         return const VerificationOutcome(VerificationStatus.rejected);

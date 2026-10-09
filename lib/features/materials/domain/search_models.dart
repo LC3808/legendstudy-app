@@ -176,7 +176,13 @@ class ResourceSearchItem {
     List<Map<String, dynamic>> resources,
   ) {
     final content = ContentItem.fromJson(row);
-    final metadata = row['exam'] as Map<String, dynamic>?;
+    final rawExam = row['exam'];
+    if (rawExam is List && rawExam.length > 1) {
+      throw const FormatException('자료의 시험 정보를 확인하지 못했어요.');
+    }
+    final metadata =
+        (rawExam is List ? (rawExam.isEmpty ? null : rawExam.single) : rawExam)
+            as Map<String, dynamic>?;
     final scoped = occurrences.where((o) => o['content_item_id'] == content.id);
     final attachments = resources
         .where((r) => r['content_item_id'] == content.id)

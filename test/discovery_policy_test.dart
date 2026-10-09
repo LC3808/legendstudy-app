@@ -34,12 +34,9 @@ void main() {
         List<Map<String, dynamic>> rows = [];
         if (table == 'exams') {
           // Assert the server filter exists before simulating SQL >= semantics.
-          expect(
-            request.url.queryParametersAll['or'],
-            contains('(year.gte.2010)'),
-          );
+          expect(q['content.is_active'], 'eq.true');
           rows = [
-            for (final year in years.where((y) => y >= 2010))
+            for (final year in years)
               {
                 'content_item_id': 'e$year',
                 'year': year,
@@ -61,23 +58,37 @@ void main() {
               headers: {'content-type': 'application/json'},
             );
           }
-          if (q['exam'] == 'is.null') {
-            expect(q['content_type'], 'neq.exam');
+          expect(q.containsKey('discovery_exam.year'), false);
+          final advanced = q['select']!.contains('exam:exams');
+          rows = [
+            for (final year in years)
+              {
+                ...content('e$year', 'exam'),
+                if (advanced)
+                  'exam': [
+                    {
+                      'content_item_id': 'e$year',
+                      'year': year,
+                      'grade_level': 3,
+                      'exam_type': 'national_mock',
+                    },
+                  ],
+              },
+          ];
+          if (q['exam.year'] != null) {
+            rows = rows
+                .where(
+                  (r) =>
+                      'eq.${(r['exam'] as List).single['year']}' ==
+                      q['exam.year'],
+                )
+                .toList();
           } else {
-            expect(q['discovery_exam.year'], 'gte.2010');
-            expect(
-              request.url.queryParametersAll['or'],
-              contains('(content_type.neq.exam,discovery_exam.not.is.null)'),
-            );
             rows.addAll([
-              for (final year in years.where((y) => y >= 2010))
-                content('e$year', 'exam'),
+              content('essay2009', 'university_essay'),
+              content('general2009', 'study_material'),
             ]);
           }
-          rows.addAll([
-            content('essay2009', 'university_essay'),
-            content('general2009', 'study_material'),
-          ]);
         }
         final count = rows.length;
         rows = rows
@@ -98,24 +109,20 @@ void main() {
   });
   tearDown(() => client.dispose());
 
-  test(
-    'browse excludes 2009, keeps 2010/2011/current and old non-exams',
-    () async {
-      final page = await SupabaseSearchRepository(client)
-          .search(SearchQuery(''));
-      expect(page.items.map((r) => r.content.id), [
-        'e2010',
-        'e2011',
-        'e2025',
-        'essay2009',
-        'general2009',
-      ]);
-    },
-  );
-  test('explicit old year cannot bypass lower bound', () async {
+  test('browse includes every active year in one parent stream', () async {
+    final page = await SupabaseSearchRepository(client).search(SearchQuery(''));
+    expect(page.items.map((r) => r.content.id), [
+      'e2009',
+      'e2010',
+      'e2011',
+      'e2025',
+      'essay2009',
+    ]);
+  });
+  test('explicit older year is searchable', () async {
     final page = await SupabaseSearchRepository(client)
         .search(SearchQuery('', filters: const SearchFilters(year: 2009)));
-    expect(page.items, isEmpty);
+    expect(page.items.single.content.id, 'e2009');
   });
   test('2010 is included with explicit year filter', () async {
     final page = await SupabaseSearchRepository(client)
@@ -125,7 +132,7 @@ void main() {
   test('facets only advertise visible exam years', () async {
     final facets = await SupabaseSearchRepository(client).facets();
     expect(facets.years, containsAll([2010, 2011, 2025]));
-    expect(facets.years, isNot(contains(2009)));
+    expect(facets.years, contains(2009));
   });
   test(
     'Home and legacy search share visibility without removing old essays',
@@ -136,6 +143,7 @@ void main() {
         await repo.searchContent('자료'),
       ]) {
         expect(rows.map((r) => r.id), [
+          'e2009',
           'e2010',
           'e2011',
           'e2025',

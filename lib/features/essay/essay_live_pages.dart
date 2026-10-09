@@ -52,7 +52,16 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Essay LAB')),
+    appBar: AppBar(
+      title: const Text('Essay LAB'),
+      actions: [
+        IconButton(
+          tooltip: '나의 논술 기록',
+          icon: const Icon(Icons.history),
+          onPressed: () => context.push('/lab/essay/history'),
+        ),
+      ],
+    ),
     body: FutureBuilder<List<Map<String, dynamic>>>(
       future: questions,
       builder: (context, snapshot) {

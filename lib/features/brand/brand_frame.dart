@@ -33,9 +33,15 @@ Duration? brandFrameDuration(DateTime processStart, DateTime now) {
 /// - Sits ABOVE `MaterialApp`, so it never touches the router, auth, onboarding
 ///   or any existing screen; it is a temporary cover the app resolves beneath.
 class BrandGate extends StatefulWidget {
-  const BrandGate({required this.processStart, required this.child, super.key});
+  const BrandGate({
+    required this.processStart,
+    required this.child,
+    this.ready = true,
+    super.key,
+  });
   final DateTime processStart;
   final Widget child;
+  final bool ready;
   @override
   State<BrandGate> createState() => _BrandGateState();
 }
@@ -43,6 +49,7 @@ class BrandGate extends StatefulWidget {
 class _BrandGateState extends State<BrandGate> {
   static bool _shownThisProcess = false;
   bool _show = false;
+  bool _budgetElapsed = false;
   double _opacity = 1;
   Timer? _dismiss;
 
@@ -52,11 +59,25 @@ class _BrandGateState extends State<BrandGate> {
     if (_shownThisProcess) return; // one cold-start attempt per process
     _shownThisProcess = true;
     final remaining = brandFrameDuration(widget.processStart, DateTime.now());
-    if (remaining == null) return; // init already covered the budget
+    if (remaining == null && widget.ready) {
+      return; // init already covered the budget
+    }
     _show = true;
-    _dismiss = Timer(remaining, () {
-      if (mounted) setState(() => _opacity = 0);
+    _dismiss = Timer(remaining ?? Duration.zero, () {
+      _budgetElapsed = true;
+      if (mounted && widget.ready) setState(() => _opacity = 0);
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant BrandGate oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!oldWidget.ready &&
+        widget.ready &&
+        (_budgetElapsed ||
+            brandFrameDuration(widget.processStart, DateTime.now()) == null)) {
+      _opacity = 0;
+    }
   }
 
   @override
@@ -128,7 +149,9 @@ class _BrandSplashState extends State<_BrandSplash> {
           // Symbol centred and solid → continuous with the native splash symbol.
           const Center(
             child: Image(
-              image: AssetImage('assets/brand/generated/legendstudy_symbol.png'),
+              image: AssetImage(
+                'assets/brand/generated/legendstudy_symbol.png',
+              ),
               width: 180,
               height: 180,
               filterQuality: FilterQuality.medium,

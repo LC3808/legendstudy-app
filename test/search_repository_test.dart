@@ -92,10 +92,19 @@ void main() {
               .toList();
         }
         if (table == 'content_items') {
-          rows = generalRows
-              .skip(int.parse(q['offset'] ?? '0'))
-              .take(int.parse(q['limit'] ?? '100'))
-              .toList();
+          rows =
+              [
+                    ...examRows.map(
+                      (e) => {
+                        ...(e['content'] as Map<String, dynamic>),
+                        'exam': [e],
+                      },
+                    ),
+                    ...generalRows,
+                  ]
+                  .skip(int.parse(q['offset'] ?? '0'))
+                  .take(int.parse(q['limit'] ?? '100'))
+                  .toList();
         }
         if (table == 'exam_subjects') {
           rows = [
@@ -146,19 +155,16 @@ void main() {
       final q = calls.single.queryParameters;
       expect(q['limit'], '6');
       expect(q['offset'], '0');
-      expect(
-        q['order'],
-        'sort_date.desc.nullslast,content_item_id.desc.nullslast',
-      );
-      expect(q['content.is_active'], 'eq.true');
-      if (entry.value.grade != null) expect(q['grade_level'], 'eq.3');
-      if (entry.value.year != null) expect(q['year'], 'eq.2026');
-      if (entry.value.month != null) expect(q['exam_month'], 'eq.9');
+      expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
+      expect(q['is_active'], 'eq.true');
+      if (entry.value.grade != null) expect(q['exam.grade_level'], 'eq.3');
+      if (entry.value.year != null) expect(q['exam.year'], 'eq.2026');
+      if (entry.value.month != null) expect(q['exam.exam_month'], 'eq.9');
       if (entry.value.examType != null) {
-        expect(q['exam_type'], 'eq.${entry.value.examType}');
+        expect(q['exam.exam_type'], 'eq.${entry.value.examType}');
       }
       if (entry.value.subjectId != null) {
-        expect(q['matches.subject_id'], 'in.("english")');
+        expect(q['exam.matches.subject_id'], 'in.("english")');
       }
       expect(q['select'], isNot(contains('*')));
       for (final private in [
@@ -184,7 +190,7 @@ void main() {
       final q = calls
           .firstWhere((u) => u.path.endsWith('content_items'))
           .queryParameters;
-      expect(q['exam'], 'is.null');
+      expect(q['exam'], isNull);
       expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
     },
   );
@@ -198,12 +204,12 @@ void main() {
         ),
       );
       final q = calls
-          .firstWhere((u) => u.path.endsWith('/exams'))
+          .firstWhere((u) => u.path.endsWith('/content_items'))
           .queryParameters;
-      expect(q['year'], 'eq.2026');
-      expect(q['exam_month'], 'eq.9');
-      expect(q['matches.subject_id'], 'in.("english")');
-      expect(q['matches.kind_matches.resource_type'], 'in.("question")');
+      expect(q['exam.year'], 'eq.2026');
+      expect(q['exam.exam_month'], 'eq.9');
+      expect(q['exam.matches.subject_id'], 'in.("english")');
+      expect(q['exam.matches.kind_matches.resource_type'], 'in.("question")');
       expect(q.containsKey('content.or'), isFalse);
     },
   );
@@ -268,7 +274,7 @@ void main() {
     );
     expect(
       calls
-          .where((u) => u.path.endsWith('/exams'))
+          .where((u) => u.path.endsWith('/content_items'))
           .map((u) => u.queryParameters['offset']),
       ['0', '5'],
     );
@@ -316,42 +322,39 @@ void main() {
       expect(calls.every((u) => u.queryParameters['limit'] == '101'), isTrue);
     },
   );
-  test(
-    'exam-to-general boundary uses exact count and no duplicate parents',
-    () async {
-      examRows = List.generate(4, exam);
-      generalRows = [
-        for (final n in [30, 31, 32])
-          {...parent(n), 'exam': <Map<String, dynamic>>[]},
-      ];
-      final first = await repository.search(SearchQuery(''));
-      expect(first.items.length, 5);
-      expect(first.items.last.content.id, 'c30');
-      final second = await repository.search(
-        SearchQuery(''),
-        offset: first.nextOffset!,
-      );
-      expect(second.items.map((i) => i.content.id), ['c31', 'c32']);
-      expect(second.nextOffset, isNull);
-      expect(
-        {
-          ...first.items.map((i) => i.content.id),
-          ...second.items.map((i) => i.content.id),
-        }.length,
-        7,
-      );
-    },
-  );
+  test('unified parent page has no duplicate parents', () async {
+    examRows = List.generate(4, exam);
+    generalRows = [
+      for (final n in [30, 31, 32])
+        {...parent(n), 'exam': <Map<String, dynamic>>[]},
+    ];
+    final first = await repository.search(SearchQuery(''));
+    expect(first.items.length, 5);
+    expect(first.items.last.content.id, 'c30');
+    final second = await repository.search(
+      SearchQuery(''),
+      offset: first.nextOffset!,
+    );
+    expect(second.items.map((i) => i.content.id), ['c31', 'c32']);
+    expect(second.nextOffset, isNull);
+    expect(
+      {
+        ...first.items.map((i) => i.content.id),
+        ...second.items.map((i) => i.content.id),
+      }.length,
+      7,
+    );
+  });
   test('literal search is safely quoted on each public stream', () async {
     await repository.search(SearchQuery('50%_자료'));
     final exams = calls
-        .firstWhere((u) => u.path.endsWith('/exams'))
+        .firstWhere((u) => u.path.endsWith('/content_items'))
         .queryParameters;
     final general = calls
         .firstWhere((u) => u.path.endsWith('/content_items'))
         .queryParameters;
-    expect(exams['content.or'], contains(r'50\\%\\_자료'));
-    expect(exams['content.or'], general['or']);
+    expect(exams['or'], contains(r'50\\%\\_자료'));
+    expect(exams['or'], general['or']);
   });
   test('historical raw subject label survives missing active taxonomy', () {
     final item = ResourceSearchItem.fromRows(

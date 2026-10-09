@@ -1,0 +1,19 @@
+[
+  {
+    "iap_postflight": {
+      "rpc": {
+        "md5": "c216866a95254f1ce3206db9737d38c2",
+        "anon": false,
+        "owner": "postgres",
+        "settings": [
+          "search_path=\"\""
+        ],
+        "service_role": true,
+        "authenticated": false,
+        "security_definer": true
+      },
+      "migration": "iap_verified_credit",
+      "iap_grants": 0
+    }
+  }
+]

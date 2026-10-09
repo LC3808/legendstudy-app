@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 import 'credit_product.dart';
 import 'purchase_verification.dart';
@@ -26,9 +28,16 @@ class IapController extends ChangeNotifier {
     required this.onBalanceChanged,
     InAppPurchase? iap,
     this._complete,
+    this.accountId,
   }) : _injectedIap = iap;
 
   final PurchaseVerifier verifier;
+  final String? accountId;
+  bool _disposed = false;
+  @override
+  void notifyListeners() {
+    if (!_disposed) super.notifyListeners();
+  }
 
   /// Called after the server settles a purchase, so the balance is re-read from
   /// the canonical ledger (the app does not compute it locally).
@@ -62,6 +71,7 @@ class IapController extends ChangeNotifier {
     } catch (_) {
       available = false;
     }
+    if (_disposed) return;
     if (!available) {
       notifyListeners();
       return;
@@ -76,6 +86,9 @@ class IapController extends ChangeNotifier {
         },
       );
       await loadProducts();
+      if (!_disposed) {
+        await _iap.restorePurchases(applicationUserName: accountId);
+      }
     } catch (_) {
       available = false;
       notifyListeners();
@@ -103,13 +116,24 @@ class IapController extends ChangeNotifier {
   /// from the store.
   Future<bool> buy(CreditProduct product) async {
     final details = storeProducts[product.id];
-    if (details == null) return false;
+    if (details == null || accountId == null || _disposed) return false;
     phase = BillingPhase.purchasing;
     message = null;
     notifyListeners();
-    return _iap.buyConsumable(
-      purchaseParam: PurchaseParam(productDetails: details),
-    );
+    try {
+      return await _iap.buyConsumable(
+        purchaseParam: PurchaseParam(
+          productDetails: details,
+          applicationUserName: accountId,
+        ),
+        autoConsume: false,
+      );
+    } catch (_) {
+      phase = BillingPhase.pending;
+      message = '스토어 연결을 확인하지 못했어요. 잠시 후 구매 내역을 다시 확인해 주세요.';
+      notifyListeners();
+      return false;
+    }
   }
 
   @visibleForTesting
@@ -175,6 +199,7 @@ class IapController extends ChangeNotifier {
       ),
     );
 
+    if (_disposed) return;
     switch (outcome.status) {
       case VerificationStatus.granted:
       case VerificationStatus.alreadyProcessed:
@@ -186,11 +211,11 @@ class IapController extends ChangeNotifier {
       case VerificationStatus.pending:
         phase = BillingPhase.pending;
         message = '구매가 확인되면 Credit이 자동으로 충전돼요.';
-        // Do NOT complete — keep it open so the store re-delivers for retry.
+      // Do NOT complete — keep it open so the store re-delivers for retry.
       case VerificationStatus.rejected:
         phase = BillingPhase.error;
         message = '구매를 확인하지 못했어요. 금액이 청구되었다면 문의·건의로 알려주세요.';
-        await _finish(p); // nothing granted; clear the transaction
+      // Keep unverified transactions open for support/recovery.
     }
     notifyListeners();
   }
@@ -198,20 +223,45 @@ class IapController extends ChangeNotifier {
   String _platformOf(PurchaseDetails p) {
     final src = p.verificationData.source.toLowerCase();
     if (src.contains('google')) return 'google';
-    if (src.contains('app_store') || src.contains('apple') || src.contains('ios')) {
+    if (src.contains('app_store') ||
+        src.contains('apple') ||
+        src.contains('ios')) {
       return 'apple';
     }
     return defaultTargetPlatform == TargetPlatform.android ? 'google' : 'apple';
   }
 
   Future<void> _finish(PurchaseDetails p) async {
-    if (!p.pendingCompletePurchase) return;
-    final fn = _complete ?? _iap.completePurchase;
-    await fn(p);
+    if (_disposed) return;
+    try {
+      if (_complete == null &&
+          p is GooglePlayPurchaseDetails &&
+          (p.status == PurchaseStatus.purchased ||
+              p.status == PurchaseStatus.restored)) {
+        final result = await _iap
+            .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>()
+            .consumePurchase(p);
+        if (result.responseCode != BillingResponse.ok &&
+            result.responseCode != BillingResponse.itemNotOwned) {
+          phase = BillingPhase.pending;
+          message = 'Credit은 반영되었어요. 구매 완료 확인을 다시 시도해 주세요.';
+          return;
+        }
+        return; // Consumption acknowledges the consumable.
+      }
+      if (!p.pendingCompletePurchase) return;
+      final fn = _complete ?? _iap.completePurchase;
+      await fn(p);
+    } catch (_) {
+      phase = BillingPhase.pending;
+      message = '구매 완료 확인이 지연되고 있어요. 잠시 후 다시 시도해 주세요.';
+      notifyListeners();
+    }
   }
 
   @override
   void dispose() {
+    _disposed = true;
     _sub?.cancel();
     super.dispose();
   }

@@ -1669,3 +1669,17 @@ Parser correction Deno62PASS (resolver37), Python parity/contracts2PASS; no netw
 permission. Safe logs/security PASS. Flutter unchanged/not rerun.
 Credential-pattern/explicit-scope audit, diff and Wiki routing PASS. These are
 local results; Owner separately reports Production resolver/iPhone PDF PASS below.
+
+## Pre-integration restore — 2026-10-09
+
+## Integrated account/data candidate — Oct09
+
+[Backend follow-up](../integrated-account-data-2026-10-09.md): existing-profile routing,
+owner recheck and Google error mapping updated on independent Codex branch.
+Flutter/device verification blocked (pinned SDK absent); Claude RC unchanged.
+Published-date search correction is partial; advanced search stream ordering remains.
+
+
+## Essay runtime — 2026-10-09
+
+[Activation](../essay-runtime-activation-2026-10-09.md): PARTIAL; canonical component persistence38 SQL PASS, all types GATED.010 BLOCKED_NO_PRIVILEGE; no live provider/auth E2E.005 HELD; Signup frozen.
