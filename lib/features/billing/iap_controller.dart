@@ -55,20 +55,31 @@ class IapController extends ChangeNotifier {
   final Set<String> _processed = {};
 
   Future<void> init() async {
-    available = await _iap.isAvailable();
+    // Any plugin error (e.g. billing unavailable on a sideloaded build) resolves
+    // to a deterministic unavailable state — never an unhandled async error.
+    try {
+      available = await _iap.isAvailable();
+    } catch (_) {
+      available = false;
+    }
     if (!available) {
       notifyListeners();
       return;
     }
-    _sub ??= _iap.purchaseStream.listen(
-      handlePurchaseUpdate,
-      onError: (_) {
-        phase = BillingPhase.error;
-        message = '구매 처리 중 문제가 발생했어요. 잠시 후 다시 시도해 주세요.';
-        notifyListeners();
-      },
-    );
-    await loadProducts();
+    try {
+      _sub ??= _iap.purchaseStream.listen(
+        handlePurchaseUpdate,
+        onError: (_) {
+          phase = BillingPhase.error;
+          message = '구매 처리 중 문제가 발생했어요. 잠시 후 다시 시도해 주세요.';
+          notifyListeners();
+        },
+      );
+      await loadProducts();
+    } catch (_) {
+      available = false;
+      notifyListeners();
+    }
   }
 
   Future<void> loadProducts() async {

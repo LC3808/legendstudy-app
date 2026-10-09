@@ -130,6 +130,32 @@ iOS simulator build **PASS**.
 - Cross-platform entitlement: Web/iOS/Android share one `credit_summary`; this
   client already re-reads it after purchase, so balances stay consistent.
 
+## Device readiness & QA — 2026-10-09 (physical SM-G950N / API 28)
+Real device `SM-G950N` (Android 9, 1080×2220 @ density 480 = **360dp wide**),
+signed-in account (배재고등학교·2학년, 6 Credits). Debug APK installed and driven.
+- **Home / Materials / LAB / MY / Essay LAB entry:** render cleanly, **no
+  clipping / overflow** on the narrow old device. LAB order (논술 → 내신 →
+  모의/수능) and MY 성적 order (논술 LAB top → 내신 LAB → 모의/수능 LAB) confirmed
+  **on real hardware**. Balance card shows `6 Credits · 구매 0 · 가입 무료 3 · 기타 3`;
+  the new **충전하기** entry renders.
+- **IAP purchase screen (real device):** Play Billing client connects, but a
+  **sideloaded debug APK cannot query products** (products unregistered + build
+  not from a Play test track) → the screen shows the balance + a graceful
+  "현재 이 기기에서는 Credit 충전을 사용할 수 없어요" state. **No crash, no overflow.**
+  This is the correct behaviour — APK install is **not** real Play Billing (needs
+  a Play internal-test-track build). No purchase attempted.
+- **Fix applied (own code):** `IapController.init()` hardened with try/catch so any
+  plugin error resolves to a deterministic `available=false` and never logs an
+  unhandled async error (seen once on the sideloaded build). Re-verified: logcat
+  clean, screen renders the same graceful state. `flutter test` **985 pass**.
+- **Found (flagged, NOT fixed — Codex essay domain):** the **Essay LAB empty-state
+  body** ("공식 문항 자료를 준비하고 있어요…") renders **edge-to-edge without the page
+  horizontal padding**. Minor cosmetic; in `lib/features/essay/` (Codex-owned) —
+  handed to Codex rather than edited here.
+- **iOS physical:** two iPhones visible **wirelessly only, not dev-paired**; Apple
+  **Development** identity + team `7P4MAL37T7`, **0 provisioning profiles**. A real-
+  device install is an Owner Xcode step (below). Not performed.
+
 ## Boundary
 PAYMENT_CHANGED: **NO** · TOSS_CHANGED: **NO** · Ledger/DB/Essay-runtime/Admin
 grant: **unchanged** · CODEX_WORK_PRESERVED: **YES** (no merge) · Main merge:
