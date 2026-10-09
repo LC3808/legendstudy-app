@@ -3344,3 +3344,50 @@ native essay save/evaluation entry and synthetic deletion request→cancel.
 See [account/data follow-up](integrated-account-data-2026-10-09.md). Profile gate,
 owner recheck, Google error classification and publication-date fallback updated.
 No APP UI/Production migration change; Flutter verification blocked, RC not merged.
+
+## 2026-10-08 — Shared MY foundation candidate
+
+LAB school 3c432cd deployed and Owner verified auto-student/optional grade/save/reload.
+New additive Application/event, Study summary and Student360/Essay read candidates
+pass local SQL and PostgreSQL17 non-superuser/concurrency boundaries. Target unique
+replacement remains Owner §74-held; Flutter SDK/network gate means APP regression
+is NOT_RUN. No Production activation or Payment/deletion runtime modification.
+See [contract, evidence and constraints](my-shared-foundation.md).
+
+
+## 2026-10-08 — Shared MY foundation Production activation
+
+Owner applied006–008 from APP35ab994. Postflight8 function definitions/grants and
+2 tables RLS/direct-DML denial match; existing deletion cascade retained.
+LAB507ed7b deployed; anonymous read RPC denial verified live, authenticated runtime
+pending. Target005 remains held, no APP binary release or Flutter pass claimed.
+See [activation evidence](my-shared-foundation.md#production-activation-postflight--2026-10-08).
+
+
+## 2026-10-08 — Admin directory and Essay mixed-mode candidates
+
+Owner execution update permits next foundation with predecessor authenticated E2E
+pending and005 HELD. Directory009 adds paginated operator-only current member reads
+and a2-entry verified NEIS display cache, preserving existing detail/Student360.
+Essay current inventory/gap report plus offline typed planning contract; no new
+Essay schema/runtime/provider or APP client changes.
+See [directory](admin-member-directory.md) and [Essay analysis](essay-mixed-mode-foundation.md).
+
+
+## 2026-10-08 — Admin directory009 Production activation
+
+Owner applied009 and verified exact RPC hash/owner/ACL/empty search_path, private cache RLS/direct CRUD denial and both NEIS school names. LAB e7810c2 deployed as9e2dc6f2-af55-4210-9953-e64a092ae11a; live new bundle and anonymous gate verified. Follow-up b1ad6d1 corrects only search introduction. Actual anonymous RPC401/42501; authenticated operator acceptance pending. [Contract](admin-member-directory.md). No005/Essay runtime/Payment/Signup change.
+
+
+## 2026-10-08 — Owner Admin acceptance and ordinal follow-up
+
+Owner reports all requested directory/runtime/denial checks PASS, then requests row numbers. LAB bfc20c0 adds server-offset-based ordinals; first1/next26 assertions pass. Existing columns/permissions unchanged; concurrent brand0847170 preserved.14 focused tests, lint/typecheck/boundary/static build/browser8 PASS. No migration needed. Production ordinal deployment0494a6f8-c82d-40af-8722-f59f2f519d43 succeeded. Final merged LAB suite539 PASS.
+
+### 2026-10-09 — Essay activation, canonical component persistence candidate
+
+Existing access re-audit confirms Owner-local SQL/CLI path is not available in cloud;
+management APIs reject unauthenticated access, Actions workflows0. New component
+claim/finalize/read candidate reuses existing parent/ledger:38 isolated PG checks.
+LAB bridge/history read preserves closed activation, durable checkpoint and account scope.
+Real provider/authenticated E2E blocked; no Production DB write. Full evidence and
+remaining content/access gates in [activation](essay-runtime-activation-2026-10-09.md).

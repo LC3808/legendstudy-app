@@ -17,6 +17,10 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
+
+MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).
+
 Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
 
 Account deletion / ADR-2D: [Ownership correction and Owner retry checklist](account-deletion-ownership-compatibility.md) — isolated verified; failed Production attempt rolled back; retry requires Owner review.
@@ -176,3 +180,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [MATH-2E — Learning runtime and MATH-5B/6B physical handoff; isolated, NOT_APPLIED](math-essay-learning-runtime.md)
 
 - [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.
+
+- [Essay runtime completion follow-up](essay-runtime-completion.md) — PARTIAL / gated.

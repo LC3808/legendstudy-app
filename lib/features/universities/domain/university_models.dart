@@ -28,6 +28,8 @@ class InterestedUniversity {
     required this.name,
     this.slug,
     this.priority,
+    this.intendedDivision,
+    this.admissionYear,
   });
 
   /// `student_target_universities.id` (the selection row, not the catalog id).
@@ -36,6 +38,8 @@ class InterestedUniversity {
   final String name;
   final String? slug;
   final int? priority;
+  final String? intendedDivision;
+  final int? admissionYear;
 
   factory InterestedUniversity.fromJson(Map<String, dynamic> json) {
     final uni = json['universities'];
@@ -46,8 +50,16 @@ class InterestedUniversity {
       name: (embedded['name'] as String?) ?? '',
       slug: embedded['slug'] as String?,
       priority: (json['priority'] as num?)?.toInt(),
+      intendedDivision: json['intended_division'] as String?,
+      admissionYear: (json['admission_year'] as num?)?.toInt(),
     );
   }
+
+  String get displayLabel => [
+    name,
+    if (intendedDivision?.trim().isNotEmpty ?? false) intendedDivision!.trim(),
+    if (admissionYear != null) '$admissionYear학년도',
+  ].join(' · ');
 
   University get university =>
       University(id: universityId, name: name, slug: slug);

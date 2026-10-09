@@ -145,7 +145,7 @@ class _InterestedUniversitiesFieldState
                 Padding(
                   padding: const EdgeInsets.only(bottom: AppTokens.space8),
                   child: _SelectedUniversityCard(
-                    name: uni.name,
+                    name: uni.displayLabel,
                     onRemove: _busy ? null : () => _remove(uni.id),
                   ),
                 ),
