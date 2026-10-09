@@ -99,7 +99,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('비밀번호를 잊으셨나요?'), findsOneWidget);
+      expect(find.text('비밀번호 찾기'), findsOneWidget);
     });
   });
 

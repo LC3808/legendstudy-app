@@ -132,6 +132,9 @@ final availableOAuthProvidersProvider = Provider<List<OAuthProvider>>((ref) {
             config.googleIosClientId.isNotEmpty))
       OAuthProvider.google,
     if (config.kakaoOAuthEnabled) OAuthProvider.kakao,
-    if (config.appleOAuthEnabled) OAuthProvider.apple,
+    // Apple sign-in is shown on iOS only (hidden on Android/web); the auth
+    // capability itself is preserved.
+    if (config.appleOAuthEnabled && defaultTargetPlatform == TargetPlatform.iOS)
+      OAuthProvider.apple,
   ];
 });

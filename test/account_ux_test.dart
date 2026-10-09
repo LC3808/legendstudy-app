@@ -112,7 +112,7 @@ void main() {
   }
 
   Future<void> signupMode(WidgetTester tester) async {
-    final toggle = find.text('처음이신가요? 회원가입');
+    final toggle = find.text('회원가입');
     await tester.ensureVisible(toggle);
     await tester.tap(toggle);
     await tester.pumpAndSettle();
