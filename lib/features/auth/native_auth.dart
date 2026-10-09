@@ -31,6 +31,17 @@ class NativeAuthCancelled implements Exception {
   const NativeAuthCancelled();
 }
 
+/// Android Credential Manager may report configuration/no-credential failures as
+/// canceled; this does not prove that the user pressed Cancel. Never expose raw
+/// SDK descriptions or tokens. iOS cancellation keeps its established behavior.
+String? googleFailureCode(String code, {required bool android}) {
+  if (code == 'canceled') return android ? 'google_sign_in_incomplete' : null;
+  if (code == 'clientConfigurationError' || code == 'providerConfigurationError') {
+    return 'oauth_configuration_error';
+  }
+  return 'unexpected_failure';
+}
+
 abstract class NativeIdentityProvider {
   Future<NativeIdentityToken> google();
   Future<NativeIdentityToken> apple();
@@ -94,11 +105,10 @@ class DeviceIdentityProvider implements NativeIdentityProvider {
       }
       return NativeIdentityToken(token, _googleNonce);
     } on GoogleSignInException catch (error) {
-      if (error.code == GoogleSignInExceptionCode.canceled) {
-        throw const NativeAuthCancelled();
-      }
-      // Do not forward SDK descriptions, which can carry platform diagnostics.
-      throw const AuthException('Unavailable', code: 'unexpected_failure');
+      final code = googleFailureCode(error.code.name,
+          android: defaultTargetPlatform == TargetPlatform.android);
+      if (code == null) throw const NativeAuthCancelled();
+      throw AuthException('Unavailable', code: code);
     }
   }
 

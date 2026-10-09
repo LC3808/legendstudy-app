@@ -1,5 +1,13 @@
 # Current Status
 
+## Integrated account/data candidate — Oct09
+
+[Backend follow-up](integrated-account-data-2026-10-09.md): existing-profile routing,
+owner recheck and Google error mapping updated on independent Codex branch.
+Flutter/device verification blocked (pinned SDK absent); Claude RC unchanged.
+Published-date search correction is partial; advanced search stream ordering remains.
+
+
 ## APP Store RC — 2026-10-07
 
 [Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed

@@ -29,14 +29,14 @@ void main() {
       );
     });
 
-    test('authenticated user without completed onboarding is sent to flow', () {
+    test('existing shared profile skips full onboarding without APP marker', () {
       expect(
         onboardingRedirect(
           authed: true,
           profile: authedIncomplete,
           location: '/home',
         ),
-        onboardingRoute,
+        isNull,
       );
     });
 

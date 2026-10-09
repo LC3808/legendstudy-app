@@ -37,6 +37,13 @@ class FakeIdentity extends NativeIdentityProvider {
 }
 
 void main() {
+  test('Android cancellation is ambiguous, configuration errors stay distinct', () {
+    expect(googleFailureCode('canceled', android: true), 'google_sign_in_incomplete');
+    expect(googleFailureCode('canceled', android: false), isNull);
+    expect(googleFailureCode('clientConfigurationError', android: true), 'oauth_configuration_error');
+    expect(googleFailureCode('providerConfigurationError', android: true), 'oauth_configuration_error');
+    expect(googleFailureCode('unknownError', android: true), 'unexpected_failure');
+  });
   test('Apple fresh nonce is hashed for native and raw for exchange', () async {
     final hashes = <String>[];
     final provider = DeviceIdentityProvider(

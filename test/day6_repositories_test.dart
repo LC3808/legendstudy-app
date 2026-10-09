@@ -73,7 +73,7 @@ void main() {
           requests.single.url.queryParametersAll['or'],
           contains('(content_type.neq.exam,discovery_exam.not.is.null)'),
         );
-        expect(p['order'], 'feed_updated_at.desc.nullslast,id.desc.nullslast');
+        expect(p['order'], 'published_at.desc.nullslast,id.desc.nullslast');
         expect(p['limit'], '30');
         if (query.isEmpty) {
           expect(p['or'], '(content_type.neq.exam,discovery_exam.not.is.null)');
