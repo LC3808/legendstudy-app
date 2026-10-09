@@ -27,6 +27,7 @@ class SupabaseProfileRepository extends _PersonalRepository
         )
         .eq('id', owner)
         .maybeSingle();
+    if (userId != owner) throw const SignedOutException();
     return row == null ? null : UserProfile.fromJson(row);
   }
 

@@ -1,5 +1,13 @@
 # Current Status
 
+## Integrated account/data candidate — Oct09
+
+[Backend follow-up](integrated-account-data-2026-10-09.md): existing-profile routing,
+owner recheck and Google error mapping updated on independent Codex branch.
+Flutter/device verification blocked (pinned SDK absent); Claude RC unchanged.
+Published-date search correction is partial; advanced search stream ordering remains.
+
+
 ## APP Store RC — 2026-10-07
 
 [Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
@@ -163,28 +171,9 @@ Start with [Task Routing Map](index.md#task-routing-map), decisions and product 
 preserves former checkpoints without burdening the current restore path. Historical PASS statements are dated evidence.
 
 
-## 2026-09-25 EOD override
+## Historical EOD
 
-[Canonical same-day closeout](eod-2026-09-25.md) supersedes earlier 2026-09-25
-pending-device/EOD statements where they conflict.
-
-- **MATERIALS_DIRECT_PDF: OWNER DEVICE PASS** — Production resolved/pdf plus actual
-  iPhone problem and answer PDF in-app open.
-- Materials title/source/grouping and 학력평가/모의평가/수능 classification are
-  Owner-reviewed. Badge centering and MY vertical-density code are automated PASS
-  but **Owner visual satisfaction is not sufficient to freeze them**; defer
-  micro-polish to a later dedicated UI session.
-- OAuth local runtime configuration was restored; canonical profile-device command
-  and required public config boundary are recorded in the EOD closeout.
-- **Daily Sync Phase1 COMPLETE; Phase2 NOT STARTED / OWNER GATED.**
-- **Multi D-Day: IMPLEMENTED / Production schema applied / OWNER DEVICE PASS.** Owner-scoped `day_targets` (RLS, single primary), 2 legacy single
-  D-Days backfilled. Home customization and `analytics.legendstudy.com` remain
-  **PLANNED / FOUNDATION**.
-- Top-level engineering rule: **minimum cost; easiest viable solution; lightweight
-  structure; concise implementation; reuse first; expand only on demonstrated
-  need/failure evidence.** Read Wiki first and avoid repeating solved research or
-  scale-premature/speculative engineering.
-
+[September25 evidence](status-archive-2026-10-09.md) is archived; latest Daily takes precedence.
 
 ## Materials rollout priority
 

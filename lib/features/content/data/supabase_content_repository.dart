@@ -70,7 +70,7 @@ class SupabaseContentRepository implements ContentRepository {
       request = request.or('title.ilike.$pattern,summary.ilike.$pattern');
     }
     final rows = await request
-        .order('feed_updated_at', ascending: false, nullsFirst: false)
+        .order('published_at', ascending: false, nullsFirst: false)
         .order('id', ascending: false)
         .limit(limit);
     return rows.map(ContentItem.fromJson).toList();

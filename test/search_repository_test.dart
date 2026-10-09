@@ -185,7 +185,7 @@ void main() {
           .firstWhere((u) => u.path.endsWith('content_items'))
           .queryParameters;
       expect(q['exam'], 'is.null');
-      expect(q['order'], 'feed_updated_at.desc.nullslast,id.desc.nullslast');
+      expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
     },
   );
   test(

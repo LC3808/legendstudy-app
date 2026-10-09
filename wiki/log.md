@@ -3337,3 +3337,10 @@ Store build entrypoint preserving all other production values, and Android exist
 upload-key properties binding. No feature-code change or key creation. Merge/override/
 mode0600 cleanup tests PASS. Signing remains Owner action; focused device smoke includes
 native essay save/evaluation entry and synthetic deletion request→cancel.
+
+
+## 2026-10-09 — Integrated backend candidate
+
+See [account/data follow-up](integrated-account-data-2026-10-09.md). Profile gate,
+owner recheck, Google error classification and publication-date fallback updated.
+No APP UI/Production migration change; Flutter verification blocked, RC not merged.

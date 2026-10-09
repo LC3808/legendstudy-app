@@ -16,6 +16,8 @@ const genericAuthFailure = '요청을 처리하지 못했습니다. 잠시 후 �
 const recoveryLinkUnusableMessage = '재설정 링크를 사용할 수 없어요. 다시 요청해 주세요.';
 
 const _byCode = <String, String>{
+  'google_sign_in_incomplete': 'Google 로그인을 완료하지 못했어요. 다른 로그인 방법을 이용하거나 다시 시도해 주세요.',
+  'oauth_configuration_error': 'Google 로그인 설정을 확인해야 합니다. 다른 로그인 방법을 이용해 주세요.',
   'email_exists': '가입 정보를 확인해 주세요. 기존 계정이 있다면 로그인하거나 비밀번호를 재설정해 주세요.',
   'oauth_provider_not_supported': '현재 이 로그인 방식을 사용할 수 없습니다.',
   'unexpected_failure': '로그인을 완료하지 못했어요. 잠시 후 다시 시도해 주세요.',

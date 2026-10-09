@@ -162,7 +162,7 @@ class SupabaseSearchRepository implements SearchRepository {
           .count;
       final start = (offset - examCount).clamp(0, maxOffset);
       final generalRows = await general
-          .order('feed_updated_at', ascending: false, nullsFirst: false)
+          .order('published_at', ascending: false, nullsFirst: false)
           .order('id', ascending: false)
           .range(start, start + pageSize - rows.length);
       rows.addAll(generalRows.map((r) => {...r, 'exam': null}));
