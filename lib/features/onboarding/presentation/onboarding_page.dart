@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../brand/brand_wordmark.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../../school/domain/school.dart';
@@ -792,7 +793,10 @@ class _GuestNotice extends StatelessWidget {
 // 다시 보기" replay, which never resets personalization.
 const List<(String, String, IconData)> brandSlides = [
   (
-    'LegendStudy+',
+    // Official plain name (a11y / replay). The onboarding brand slide renders
+    // this title as the BrandWordmark logotype (레전드스터디⁺). Official English
+    // name is "LegendStudy Plus" — never "LegendStudy+".
+    '레전드스터디+',
     '내신 관리부터 수능, 논술 준비까지.\n데이터가 쌓일수록\n나의 가능성은 더 선명해집니다.',
     Icons.auto_graph_rounded,
   ),
@@ -858,15 +862,21 @@ class _BrandOnboardingState extends State<_BrandOnboarding> {
                       child: Icon(icon, size: 40, color: _accent),
                     ),
                     const SizedBox(height: AppTokens.space24),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        height: 1.2,
-                        color: _ink,
+                    // Slide 0 is the brand identity → render the canonical
+                    // logotype (레전드스터디⁺, superscript +); later slides use
+                    // their plain headline.
+                    if (i == 0)
+                      const BrandWordmark(fontSize: 28, color: _ink)
+                    else
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                          height: 1.2,
+                          color: _ink,
+                        ),
                       ),
-                    ),
                     const SizedBox(height: AppTokens.space16),
                     Text(
                       body,

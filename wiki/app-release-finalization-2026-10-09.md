@@ -122,3 +122,102 @@ exercised (resource structure verified).
 Owner provides Android keystore + iOS Distribution identity/profile → signed
 AAB/Archive via `tool/store-release` → device smoke → Console submission. The code
 RC is green and finalized on `a3cc3b3`+; simulator visual + functional QA PASS.
+
+---
+
+# Device-first release + splash/wordmark (Owner priority override, 2026-10-09)
+
+Owner re-prioritised: produce **installable** builds for hands-on first-run QA
+*before* signed store artifacts, verify the splash cold-start, and restore the
+approved brand wordmark. No store submission.
+
+## Installable builds
+- **ANDROID_INSTALLABLE_APK: READY.** `flutter build apk --debug`
+  (`--dart-define-from-file=config/development.local.json`) →
+  `build/app/outputs/flutter-apk/app-debug.apk` (~276 MB, auto debug keystore,
+  sideload-installable). Verified: `adb install` Success on an arm64 emulator,
+  launches, Home renders, launcher icon correct (orange gradient + white
+  notebook/pencil). This is the fast Owner-install path.
+  - *Not* the Play artifact: a release **AAB** still needs the Owner upload
+    keystore (`android/key.properties` absent; no debug fallback by design).
+- **IOS_INSTALLABLE: PARTIAL.** Simulator build PASS
+  (`build ios --debug --simulator`), installed+run on iPhone sims. **Physical
+  iPhone install = Owner action**: only an *Apple Development* identity
+  (`7P4MAL37T7`) and **0 provisioning profiles**; the two physical iPhones are
+  visible only *wirelessly* and not paired for development. One-step Owner path:
+  open `ios/Runner.xcworkspace` in Xcode, select the team (auto-signing), connect
+  + trust the iPhone, Run (Xcode auto-provisions a development profile). No new
+  signing key generated.
+
+## Splash cold-start (Owner observation: "orange symbol → ~2s later wordmark")
+- **ROOT_CAUSE:** No hardcoded delay anywhere. `main()` captures `processStart`
+  then `await Supabase.initialize()`; the native splash (symbol-only) is visible
+  during engine + Supabase init (~2s in a *debug* build, sub-second in release).
+  The **wordmark is drawn by the Flutter brand frame, not the native splash**, so
+  it only appears once Flutter is up — and only if init left >150 ms of the
+  parallel 1.5 s budget, else the frame (and the wordmark) is **skipped** entirely
+  (observed: debug slow-init → native symbol → Home, no wordmark). So wordmark
+  visibility is *erratic* (shows on fast init, skipped on slow init) and, when it
+  showed, it *popped* in with no transition.
+- **PLATFORM CONSTRAINTS (verified):**
+  - **Android 12+** system `SplashScreen` is **icon-only**
+    (`windowSplashScreenAnimatedIcon`) — it cannot render a wordmark/text. Hard OS
+    limit → a frame-1-complete wordmark is not achievable natively on Android.
+  - No bundled font (platform default SF Pro / Roboto) → a *baked* native wordmark
+    image cannot pixel-match the live Flutter text cross-platform and would add a
+    font-shift at handoff + iOS/Android divergence. So baking text into the native
+    splash is rejected.
+- **CHANGE (FIXED, within constraints):** the Flutter brand frame now holds the
+  symbol **solid + pixel-matched** to the native symbol (no jump/flicker) and
+  **eases the wordmark in** (320 ms) so the lockup *completes* smoothly instead of
+  popping. Timing logic unchanged (no added delay; Owner-approved parallel budget
+  preserved). Native splash left symbol-only (consistent across iOS/Android).
+- **OWNER DECISION (optional, not done — needs Owner visual sign-off):** to show
+  the wordmark from the very first native frame on iOS only, bake a symbol+wordmark
+  `LaunchImage`. Deliberately not done unilaterally (iOS/Android divergence +
+  Android 12+ can't match it).
+
+## Brand wordmark restored (레전드스터디⁺ — Owner standard)
+- New reusable `lib/features/brand/brand_wordmark.dart` (`BrandWordmark`): Korean
+  logotype `레전드스터디` + **superscript `+`** as a *separate, size/position-
+  controlled* element (not the Unicode `⁺`); a11y/plain name `레전드스터디+`;
+  `BrandWordmark.englishName = 'LegendStudy Plus'` (never `LegendStudy+`).
+- Wired into the brand frame, the onboarding brand slide (replaced the stray
+  `'LegendStudy+'` title), and the Settings "앱 사용 안내 다시 보기" replay —
+  rendered identically everywhere. Verified on-device (simulator): the `+` sits
+  small and raised at the top-right of the name.
+- Login/Signup carry **no** logotype header today (text headers only) — left as-is
+  (no unsolicited redesign); flagged for Owner review.
+
+## Device matrix QA — SIMULATOR / EMULATOR only (NO physical device)
+Debug build, public config. First-run surfaces: Splash → Login → Signup → Home +
+MY/Settings/replay. (Onboarding/Initial-Profile need an authenticated session →
+Owner-authenticated QA; the brand replay is the guest-reachable logotype proxy.)
+- **iPhone small — iPhone 17e (26.5), SIMULATOR:** splash = white + orange symbol;
+  Home clean, no clipping. ✅
+- **iPhone large — iPhone 17 Pro Max (26.5), SIMULATOR:** Home / Login
+  (orange-filled 로그인 + Google/Kakao/Apple) / Signup (orange-filled 회원가입,
+  8-char helper, 비밀번호 확인) / MY / Settings / brand replay (new 레전드스터디⁺)
+  all clean, Dynamic-Island safe-area respected. ✅
+- **Android normal — Pixel-class phone (android-36 arm64), EMULATOR:** APK
+  install Success, launches, Home clean, no crash in logcat, launcher icon
+  correct. ✅
+- **Android large — Medium Tablet (android-36 arm64), EMULATOR:** splash symbol
+  centred (landscape), Home renders as a centred max-width column (no edge-to-edge
+  stretch). ✅ (P2: tablet layout is phone-style centred — not blocking.)
+- The pre-existing `LegendStudyBrand_API36` AVD is **broken** (an `arm` — not
+  arm64 — image, unsupported by QEMU2); replaced with arm64 AVDs for QA.
+
+## Problem classification
+- **P0 (blocks install/use/crash/clipping):** none found on the four sizes.
+- **P1 (Owner visual review):** splash wordmark timing/visibility (erratic by
+  design; smoothed — Owner to decide if iOS native lockup is wanted); wordmark
+  superscript final size/kerning; whether Login/Signup should carry the logotype.
+- **P2 (non-blocking):** tablet layout is a centred phone column.
+
+## Verification (this change)
+`flutter analyze`: No issues. `flutter test`: **967 passed, 2 skipped.**
+CHANGED_FILES: `lib/features/brand/brand_wordmark.dart` (new),
+`lib/features/brand/brand_frame.dart`, `lib/features/onboarding/presentation/onboarding_page.dart`,
+`lib/features/onboarding/presentation/brand_replay_page.dart`. No native splash,
+icon, DB, payment, Toss, IAP, or Essay-runtime change.

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'brand_wordmark.dart';
+
 /// Cold-start brand experience target from process start. The Flutter brand
 /// frame runs *in parallel* with initialization: it fills the time up to this
 /// target and adds no extra delay once initialization already exceeded it.
@@ -93,17 +95,38 @@ class _BrandGateState extends State<BrandGate> {
 /// the native launch symbol) + the minimal 레전드스터디⁺ wordmark (superscript +,
 /// single near-black). Owner 2026-10-08: simple splash — no tagline, no
 /// version/loading/features/ads. Continuous with the native white+orange splash.
-class _BrandSplash extends StatelessWidget {
+///
+/// The symbol is held SOLID and pixel-matched to the native launch symbol, so
+/// the native→Flutter handoff shows no jump or flicker. Only the wordmark eases
+/// in (Owner 2026-10-09): the lockup *completes* smoothly instead of the name
+/// popping in abruptly after the orange symbol.
+class _BrandSplash extends StatefulWidget {
   const _BrandSplash();
   @override
+  State<_BrandSplash> createState() => _BrandSplashState();
+}
+
+class _BrandSplashState extends State<_BrandSplash> {
+  // Gentle wordmark reveal. Starts transparent and fades to 1 on first frame.
+  double _wordmarkOpacity = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) setState(() => _wordmarkOpacity = 1);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const ColoredBox(
+    return ColoredBox(
       color: Colors.white,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Symbol centred → continuous with the native splash symbol.
-          Center(
+          // Symbol centred and solid → continuous with the native splash symbol.
+          const Center(
             child: Image(
               image: AssetImage('assets/brand/generated/legendstudy_symbol.png'),
               width: 180,
@@ -111,53 +134,17 @@ class _BrandSplash extends StatelessWidget {
               filterQuality: FilterQuality.medium,
             ),
           ),
-          // Minimal wordmark sits just below centre.
+          // Minimal wordmark sits just below centre and eases in.
           Align(
-            alignment: Alignment(0, 0.34),
-            child: _Wordmark(),
+            alignment: const Alignment(0, 0.34),
+            child: AnimatedOpacity(
+              opacity: _wordmarkOpacity,
+              duration: const Duration(milliseconds: 320),
+              curve: Curves.easeOut,
+              child: const BrandWordmark(fontSize: 26, color: _nearBlack),
+            ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Wordmark extends StatelessWidget {
-  const _Wordmark();
-  @override
-  Widget build(BuildContext context) {
-    const nameStyle = TextStyle(
-      fontSize: 26,
-      fontWeight: FontWeight.w800,
-      color: _nearBlack,
-      letterSpacing: -0.2,
-      height: 1.1,
-    );
-    return Semantics(
-      label: '레전드스터디+',
-      child: Text.rich(
-        TextSpan(
-          children: [
-            const TextSpan(text: '레전드스터디'),
-            WidgetSpan(
-              alignment: PlaceholderAlignment.top,
-              child: Transform.translate(
-                offset: const Offset(1, 1),
-                child: const Text(
-                  '+',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w800,
-                    color: _nearBlack,
-                    height: 1,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        style: nameStyle,
-        textDirection: TextDirection.ltr,
       ),
     );
   }
