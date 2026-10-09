@@ -1,3 +1,6 @@
+import 'evaluation_report.dart';
+import 'evaluation_report_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +14,7 @@ class SharedEssayHistoryPage extends ConsumerWidget {
     final auth = ref.watch(authStateProvider);
     final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
     return Scaffold(
-      appBar: AppBar(title: const Text('나의 논술 기록')),
+      appBar: AppBar(title: const Text('나의 첨삭 기록')),
       body: owner == null
           ? const Center(child: Text('로그인 상태를 확인해 주세요.'))
           : _HistoryBody(key: ValueKey(owner), owner: owner),
@@ -67,10 +70,14 @@ class _HistoryBody extends ConsumerWidget {
                                 final client = ref.read(supabaseClientProvider);
                                 if (client == null) return;
                                 try {
-                                  final text = await SharedEssayHistory(
-                                    client,
-                                    owner,
-                                  ).evaluationText(row.math, e['id'] as String);
+                                  final result =
+                                      await SharedEssayHistory(
+                                        client,
+                                        owner,
+                                      ).evaluationReport(
+                                        row.math,
+                                        e['id'] as String,
+                                      );
                                   if (!context.mounted ||
                                       ref
                                               .read(authStateProvider)
@@ -82,8 +89,11 @@ class _HistoryBody extends ConsumerWidget {
                                   // Detail stays on this owner-keyed page; account switch removes it.
                                   await Navigator.of(context).push(
                                     MaterialPageRoute<void>(
-                                      builder: (_) =>
-                                          _Result(owner: owner, text: text),
+                                      builder: (_) => _Result(
+                                        owner: owner,
+                                        report: result.report,
+                                        before: result.before,
+                                      ),
                                     ),
                                   );
                                 } catch (_) {
@@ -116,23 +126,18 @@ class _HistoryBody extends ConsumerWidget {
 }
 
 class _Result extends ConsumerWidget {
-  const _Result({required this.owner, required this.text});
-  final String owner, text;
+  const _Result({required this.owner, required this.report, this.before});
+  final String owner;
+  final EvaluationReport report;
+  final EvaluationReport? before;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('첨삭 결과')),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: SelectableText(
-            !auth.isLoading && !auth.hasError && auth.value?.userId == owner
-                ? text
-                : '로그인 상태가 변경되었습니다.',
-          ),
-        ),
-      ),
+      body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
+          ? EvaluationReportView(report: report, before: before)
+          : const Center(child: Text('로그인 상태가 변경되었습니다.')),
     );
   }
 }
