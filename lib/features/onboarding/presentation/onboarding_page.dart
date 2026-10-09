@@ -807,7 +807,7 @@ const List<(String, String, IconData)> brandSlides = [
   ),
   (
     '내신 · 수능 · 논술을 하나로',
-    '내신 LAB · 수능 LAB · 논술 LAB에서\n필요한 학습과 분석을 이어가세요.',
+    '나의 가능성을 선명하게 만드세요.',
     Icons.school_rounded,
   ),
 ];
@@ -840,52 +840,66 @@ class _BrandOnboardingState extends State<_BrandOnboarding> {
             itemCount: brandSlides.length,
             onPageChanged: (i) => setState(() => _page = i),
             itemBuilder: (context, i) {
-              final (title, body, icon) = brandSlides[i];
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppTokens.space24,
-                  AppTokens.space32,
-                  AppTokens.space24,
-                  AppTokens.space24,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 72,
-                      height: 72,
-                      decoration: BoxDecoration(
-                        color: _accentSoft,
-                        borderRadius: BorderRadius.circular(AppTokens.radiusLg),
-                      ),
-                      child: Icon(icon, size: 40, color: _accent),
+              // Owner 2026-10-09: every onboarding slide uses the SAME brand mark
+              // (the LegendStudy symbol — no per-screen icons), centred, with a
+              // compact single-screen layout. The slide's `icon` is intentionally
+              // unused here (still used by the Settings app-guide replay).
+              final (title, body, _) = brandSlides[i];
+              return LayoutBuilder(
+                builder: (context, constraints) => SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppTokens.space24,
+                    AppTokens.space32,
+                    AppTokens.space24,
+                    AppTokens.space16,
+                  ),
+                  child: ConstrainedBox(
+                    // Centre when the content is short; scroll (never clip) on a
+                    // small screen or at large text scale.
+                    constraints: BoxConstraints(
+                      minHeight:
+                          constraints.maxHeight - AppTokens.space32 - AppTokens.space16,
                     ),
-                    const SizedBox(height: AppTokens.space24),
-                    // Slide 0 is the brand identity → render the canonical
-                    // logotype (레전드스터디⁺, superscript +); later slides use
-                    // their plain headline.
-                    if (i == 0)
-                      const BrandWordmark(fontSize: 28, color: _ink)
-                    else
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                          height: 1.2,
-                          color: _ink,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Image(
+                          image: AssetImage(
+                            'assets/brand/generated/legendstudy_symbol.png',
+                          ),
+                          width: 84,
+                          height: 84,
+                          filterQuality: FilterQuality.medium,
                         ),
-                      ),
-                    const SizedBox(height: AppTokens.space16),
-                    Text(
-                      body,
-                      style: AppTokens.body.copyWith(
-                        color: AppTokens.textSecondary,
-                        height: 1.6,
-                      ),
+                        const SizedBox(height: AppTokens.space24),
+                        // Slide 0 is the brand identity → the canonical logotype
+                        // (레전드스터디⁺); later slides use their plain headline.
+                        if (i == 0)
+                          const BrandWordmark(fontSize: 26, color: _ink)
+                        else
+                          Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                              height: 1.25,
+                              color: _ink,
+                            ),
+                          ),
+                        const SizedBox(height: AppTokens.space12),
+                        Text(
+                          body,
+                          textAlign: TextAlign.center,
+                          style: AppTokens.body.copyWith(
+                            color: AppTokens.textSecondary,
+                            height: 1.6,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               );
             },

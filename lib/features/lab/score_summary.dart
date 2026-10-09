@@ -50,11 +50,23 @@ class MyScoreSummary extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final study = ref.watch(studyControllerProvider);
+    // Owner order (2026-10-09): 논술 LAB · 내신 LAB · 모의/수능 LAB — naming kept
+    // identical to the LAB home so the same service never reads two ways.
     return Column(
       children: [
         const ListTile(
           contentPadding: EdgeInsets.zero,
-          title: Text('내신'),
+          title: Text('논술 LAB'),
+          subtitle: Text('내 논술 학습과 첨삭 기록을 이어서 확인하세요.'),
+        ),
+        LsListRow(
+          title: '논술 LAB 바로가기',
+          key: const Key('my-essay-lab'),
+          onTap: () => context.push('/lab/essay'),
+        ),
+        const ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text('내신 LAB'),
           subtitle: Text('내신 성적 입력은 아직 지원하지 않아요.'),
         ),
         LsListRow(
@@ -64,7 +76,7 @@ class MyScoreSummary extends ConsumerWidget {
         ),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          title: const Text('모의고사'),
+          title: const Text('모의/수능 LAB'),
           subtitle: Text(
             !study.ready ? '성적을 확인하고 있어요.' : mockScoreSummary(study.attempts),
           ),

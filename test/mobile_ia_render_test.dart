@@ -217,7 +217,7 @@ void main() {
             expect(find.text('프로필 설정'), findsNothing);
             expect(find.text('공부하러 가기'), findsOneWidget);
             expect(find.text('공부 추이 보기'), findsOneWidget);
-            expect(find.text('내신'), findsOneWidget);
+            expect(find.text('내신 LAB'), findsOneWidget);
             expect(find.text('저장한 자료'), findsOneWidget);
             final trend = t.getTopLeft(find.text('공부 추이 보기'));
             expect(find.widgetWithText(LsListRow, '공부하러 가기'), findsOneWidget);
@@ -271,8 +271,8 @@ void main() {
             expect(find.text('프로필 설정'), findsOneWidget);
           }
           if (screen == 'lab') {
-            expect(find.text('내신분석 LAB'), findsOneWidget);
-            expect(find.text('수능·모의고사 LAB'), findsOneWidget);
+            expect(find.text('내신 LAB'), findsOneWidget);
+            expect(find.text('모의/수능 LAB'), findsOneWidget);
             expect(find.text('논술 LAB'), findsOneWidget);
             expect(find.text('성적 분석'), findsNothing);
           }

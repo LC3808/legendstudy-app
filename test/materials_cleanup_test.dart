@@ -42,6 +42,32 @@ void main() {
       expect(materialDisplayTitle(original, type), original);
     }
   });
+
+  test('display-only 논술(university_essay) title cleanup', () {
+    expect(
+      materialDisplayTitle(
+        '서강대] 2025학년도 서강대 논술 & 모의논술 기출 - 문제, 해설, 답안 등 + 2026학년도 논술 경쟁률',
+        'university_essay',
+      ),
+      '2025학년도 서강대 논술 & 모의논술 기출',
+    );
+    expect(
+      materialDisplayTitle(
+        '숙명여대] 2026학년도 숙명여대 수시 모의논술 기출 - 문제, 해설, 예시답안 등 + 2026학년도 논술 경쟁률',
+        'university_essay',
+      ),
+      '2026학년도 숙명여대 수시 모의논술 기출',
+    );
+    // Already-clean title and other types are left untouched.
+    expect(
+      materialDisplayTitle('2026학년도 고려대 논술 기출', 'university_essay'),
+      '2026학년도 고려대 논술 기출',
+    );
+    expect(
+      materialDisplayTitle('서강대] 2025학년도 서강대 논술 기출 - 문제', 'exam'),
+      '서강대] 2025학년도 서강대 논술 기출 - 문제',
+    );
+  });
   for (final width in [360.0, 428.0]) {
     for (final scale in [1.0, 2.0]) {
       testWidgets('group occurrences without resource loss $width/$scale', (

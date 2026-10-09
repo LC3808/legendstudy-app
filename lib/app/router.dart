@@ -182,9 +182,9 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'school-record',
                     builder: (_, _) => const NestedPage(
-                      title: '내신분석 LAB',
+                      title: '내신 LAB',
                       child: LabComingSoonPage(
-                        title: '내신분석 LAB',
+                        title: '내신 LAB',
                         lead:
                             '내신 성적을 입력하면 과목별 강점과 보완이 필요한 영역을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '더 정교한 내신 분석 서비스를 준비하고 있습니다.',
@@ -194,9 +194,9 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'csat-mock',
                     builder: (_, _) => const NestedPage(
-                      title: '수능·모의고사 LAB',
+                      title: '모의/수능 LAB',
                       child: LabComingSoonPage(
-                        title: '수능·모의고사 LAB',
+                        title: '모의/수능 LAB',
                         lead:
                             '모의고사·수능 성적을 입력하면 영역별 강점과 보완이 필요한 부분을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '성적 변화까지 한눈에 확인할 수 있도록 준비하고 있습니다.',

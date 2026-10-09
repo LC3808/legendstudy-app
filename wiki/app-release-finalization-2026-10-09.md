@@ -221,3 +221,76 @@ CHANGED_FILES: `lib/features/brand/brand_wordmark.dart` (new),
 `lib/features/brand/brand_frame.dart`, `lib/features/onboarding/presentation/onboarding_page.dart`,
 `lib/features/onboarding/presentation/brand_replay_page.dart`. No native splash,
 icon, DB, payment, Toss, IAP, or Essay-runtime change.
+
+---
+
+# First-run UX finalization (Owner APPROVED, 2026-10-09)
+
+Final pre-handoff UI/UX pass (APP lead → Codex after this). Claude scope =
+UI/navigation/layout/copy/presentation/responsive; Codex scope = auth contract,
+account linking, profile data, materials ingestion, DB, essay runtime, credit,
+history. Base `45ac927`; Codex `codex/essay-web-runtime @ 2657952` preserved.
+
+## Done (pure-UI, verified)
+- **Onboarding visual (§5/§6):** every brand slide now uses the SAME brand symbol
+  (no per-screen Material icons), **centre-aligned** logo/title/body, compact
+  single-screen layout that **scrolls instead of clipping** (LayoutBuilder +
+  min-height). Slide-3 copy → **"나의 가능성을 선명하게 만드세요."** (title kept).
+  Verified: `onboarding_capture_test` renders all 3 slides at 360×640 with no
+  overflow; copy asserted. (Symbol asset doesn't load in widget tests — renders
+  at runtime, as on the splash.)
+- **LAB home (§9):** order **논술 LAB → 내신 LAB → 모의/수능 LAB**; renamed
+  `내신분석 LAB → 내신 LAB`, `수능·모의고사 LAB → 모의/수능 LAB`; detail-page titles
+  updated to match. 논술 LAB leads as the primary CTA. **Verified on Android
+  emulator.**
+- **MY 성적 (§11):** order/naming unified with LAB — **논술 LAB** added on top,
+  `내신 → 내신 LAB`, `모의고사 → 모의/수능 LAB`. (History wiring stays on the
+  existing backend contract — Codex.)
+- **Settings (§12):** removed **"앱 사용 안내 다시 보기"**; service info now
+  **LAB 이용 안내** (→ in-app `/lab`, no fabricated URL) + **문의·건의사항**.
+  **논술 LAB 가격 안내 omitted** (no canonical pricing page/URL yet — Codex/Owner).
+  **Verified on Android emulator.** (Privacy/Terms show "준비 중" in dev only
+  because `PRIVACY_POLICY_URL`/`TERMS_URL` env are unset — release/Owner config.)
+- **Materials 논술 titles (§13):** display-only cleanup in `materialDisplayTitle`
+  for `university_essay` — strips the leading feed prefix ("서강대] ") and the
+  trailing descriptor tail ("- 문제, 해설, 예시답안 등 + … 경쟁률"). DB titles and
+  search matching unchanged; locked by a unit test. **Verified on Android
+  emulator** ("2025학년도 서강대 논술 & 모의논술 기출", "2026학년도 숙명여대 수시 모의논술 기출").
+- **Google login (§14):** the Flutter UI **already** separates cancel vs failure
+  — only `GoogleSignInExceptionCode.canceled` → "로그인을 취소했어요"; other errors
+  → a non-cancel message. No UI bug. The real-device "취소" is an Android OAuth
+  **config** issue (debug/release SHA-1 not registered for the Google client, or
+  server-client-ID mismatch) → **Codex/Owner** (auth contract + keystore SHA-1).
+  No auth code changed.
+
+## Deferred to Codex / Owner (with reason)
+- **First-run reorder — onboarding BEFORE login, once per device (§2):** needs
+  new **device-scoped persistence** (no `shared_preferences`/KV store exists;
+  local state goes through a native MethodChannel), and the existing-user "skip
+  setup" path depends on Codex's **Profile Contract** (§3). Not a "가볍게" change
+  and risky to land in the final pass; design handed to Codex. Today onboarding
+  stays account-scoped (shown to a new authenticated user).
+- **Profile setup deep polish + school-selection animation (§7/§8):** larger
+  responsive/interaction work; not in this pass.
+- **Real device (Samsung SM-G950N / API 28) (§15):** no API-28 image on this
+  machine; verified on API-36 arm64 emulator + iOS sims instead (SIMULATOR/
+  EMULATOR, not PHYSICAL).
+
+## Device QA (SIMULATOR / EMULATOR only — no physical device)
+- **Android normal (Pixel-class, android-36 arm64 EMULATOR):** LAB order/names ✅,
+  Settings service info ✅, Materials 논술 title cleanup ✅, Home ✅.
+- **iOS (17 Pro Max / 17e SIMULATOR):** Home/Login/Signup verified in the prior
+  pass (unchanged here); iOS simulator build PASS with these changes.
+- **Onboarding 1–3:** rendered via capture test at 360×640 (centred, no overflow).
+- **MY Grades / Initial Setup / Onboarding on real auth:** auth-gated — covered by
+  green widget tests, **not** rendered on-device (no Owner credentials / no guest
+  route). Reported as such, not claimed.
+
+## Verification (this pass)
+`flutter analyze`: No issues. `flutter test`: **969 passed, 2 skipped** (added the
+essay-title + onboarding-capture tests). Android debug APK built (installable);
+iOS simulator build PASS. CHANGED_FILES: `lab_page.dart`, `app/router.dart`,
+`lab/score_summary.dart`, `profile/presentation/settings_page.dart`,
+`content/presentation/material_display_title.dart`,
+`onboarding/presentation/onboarding_page.dart`, + tests. No DB/payment/Toss/IAP/
+Essay-runtime/native change; Codex `essay-web-runtime` untouched.

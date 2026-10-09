@@ -6,10 +6,10 @@ import '../credits/credit_balance.dart';
 import '../../shared/widgets/shell_widgets.dart';
 import '../../shared/widgets/legendstudy_lab_entry.dart';
 
-/// LegendStudy LAB home. LAB is the umbrella: 내신분석 LAB / 수능·모의고사 LAB /
-/// 논술 LAB. Only 논술 LAB is live today; the other two are 준비 중 but still
-/// discoverable (clickable → a 준비 중 detail), never hidden and never shown as if
-/// already available.
+/// LegendStudy LAB home. LAB is the umbrella: 논술 LAB / 내신 LAB / 모의/수능 LAB.
+/// Only 논술 LAB is live today (and leads as the primary CTA); the other two are
+/// 준비 중 but still discoverable (clickable → a 준비 중 detail), never hidden and
+/// never shown as if already available.
 class LabPage extends StatelessWidget {
   const LabPage({super.key});
   @override
@@ -17,9 +17,13 @@ class LabPage extends StatelessWidget {
     children: [
       const AppHeader(title: 'LAB'),
       const CreditBalanceCard(),
+      // Owner order (2026-10-09): 논술 LAB first (live, primary CTA), then
+      // 내신 LAB, then 모의/수능 LAB.
+      const LegendStudyLabEntry(),
+      const SizedBox(height: 12),
       const _LabServiceCard(
         icon: Icons.school_outlined,
-        title: '내신분석 LAB',
+        title: '내신 LAB',
         subtitle: '내신 성적 기반 강점·보완 분석 (관심 대학 기준)',
         available: false,
         route: '/lab/school-record',
@@ -27,13 +31,11 @@ class LabPage extends StatelessWidget {
       const SizedBox(height: 12),
       const _LabServiceCard(
         icon: Icons.assessment_outlined,
-        title: '수능·모의고사 LAB',
+        title: '모의/수능 LAB',
         subtitle: '모의고사·수능 성적 기반 영역별 분석 (관심 대학 기준)',
         available: false,
         route: '/lab/csat-mock',
       ),
-      const SizedBox(height: 12),
-      const LegendStudyLabEntry(),
     ],
   );
 }
