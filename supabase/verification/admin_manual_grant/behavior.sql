@@ -30,7 +30,23 @@ do $$ begin
  begin perform public.admin_manual_credit_grant('ac000000-0000-4000-8000-000000000002','recipient@example.test',1,'denied','ac000000-0000-4000-8000-000000000011');raise exception 'expired allowed';exception when sqlstate 'PT403' then null;end;
 end $$;
 reset role;
+-- Simulate a failure after the grant row insert but before its transaction commits.
+create function pg_temp.reject_test_transaction() returns trigger language plpgsql as $$
+begin
+ if new.idempotency_key='grant/admin_manual/ac000000-0000-4000-8000-000000000013' then
+  raise sqlstate 'PT503' using message='TEST_LEDGER_FAILURE';
+ end if;return new;
+end $$;
+create trigger reject_test_transaction before insert on public.credit_transactions
+for each row execute function pg_temp.reject_test_transaction();
+select set_config('request.jwt.claims',jsonb_build_object('sub','ac000000-0000-4000-8000-000000000001','role','authenticated','exp',extract(epoch from now())+3600)::text,true);
+set local role authenticated;
+do $$ begin
+ begin perform public.admin_manual_credit_grant('ac000000-0000-4000-8000-000000000002','recipient@example.test',1,'atomic failure','ac000000-0000-4000-8000-000000000013');raise exception 'failure ignored';exception when sqlstate 'PT503' then null;end;
+end $$;
+reset role;
 do $$ declare n integer; begin
+ if exists(select 1 from public.credit_grants where external_reference='admin_manual/ac000000-0000-4000-8000-000000000013') then raise exception 'Partial grant survived failure';end if;
  select count(*) into n from public.credit_transactions where idempotency_key like 'grant/admin_manual/ac000000-%';
  if n<>1 then raise exception 'Unexpected transaction count %',n;end if;
  if not exists(select 1 from public.credit_transactions t join public.credit_grants g on g.id=t.grant_id join public.credit_accounts a on a.id=t.account_id where
