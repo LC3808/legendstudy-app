@@ -68,15 +68,16 @@ void main() {
           '${SupabaseContentRepository.projection},'
           'discovery_exam:exams!exams_content_type(content_item_id)',
         );
-        expect(p['discovery_exam.year'], 'gte.2010');
+        // Oct09 policy includes all active years and unclassified exams.
+        expect(p.containsKey('discovery_exam.year'), isFalse);
         expect(
           requests.single.url.queryParametersAll['or'],
-          contains('(content_type.neq.exam,discovery_exam.not.is.null)'),
+          isNot(contains('(content_type.neq.exam,discovery_exam.not.is.null)')),
         );
         expect(p['order'], 'published_at.desc.nullslast,id.desc.nullslast');
         expect(p['limit'], '30');
         if (query.isEmpty) {
-          expect(p['or'], '(content_type.neq.exam,discovery_exam.not.is.null)');
+          expect(p.containsKey('or'), isFalse);
         } else {
           expect(
             requests.single.url.queryParametersAll['or']!.join(),

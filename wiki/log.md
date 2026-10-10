@@ -3409,3 +3409,14 @@ unit/widget checks pass, including Android/iOS layout simulation at 360px and 20
 text; focused analyze and Wiki handoff pass. Physical-device/store release and native
 TTS are not verified. No new AI evaluation, Credit event, migration or public switch.
 [Contract and limitations](essay-lab-product-v1.md#2026-10-09--evaluation-and-growth-display-implementation).
+
+
+## 2026-10-10 — Local APP branch integration COMPLETE
+
+Separate `codex/local-app-integration` worktree; base8e89dfc → essayb0facde →
+loginc11fc84, no conflicts. Preserved original checkout/untracked files and all
+Backend/Payment/Ledger/IAP implementations. Reproduced4 baseline policy-test failures,
+updated stale expectations only, added actual-router Guest/History guard regression.
+Flutter3.47.6 analyze PASS, final1015 PASS/2 existing opt-in skips/0 failures;
+Android debug/iOS simulator builds PASS. No APP main merge/Store/Production action.
+[Complete evidence and next gates](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10).

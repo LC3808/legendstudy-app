@@ -29,6 +29,36 @@ class ReadAfterWritePhotos extends Photos {
 }
 
 void main() {
+  testWidgets('integrated guest login entry reaches Home and public Materials', (t) async {
+    final container = ProviderContainer(overrides: [
+      authStateProvider.overrideWith((ref) => Stream.value(const AuthStatus(null))),
+    ]);
+    final router = container.read(routerProvider)..go('/auth');
+    await t.pumpWidget(UncontrolledProviderScope(
+      container: container,
+      child: const LegendStudyApp(),
+    ));
+    await t.pumpAndSettle();
+    await t.ensureVisible(find.text('비회원으로 이용하기'));
+    await t.tap(find.text('비회원으로 이용하기'));
+    await t.pumpAndSettle();
+    expect(router.routeInformationProvider.value.uri.path, '/home');
+    expect(container.read(authStateProvider).value?.isAuthenticated, false);
+    router.go('/materials');
+    await t.pumpAndSettle();
+    expect(router.routeInformationProvider.value.uri.path, '/materials');
+    expect(find.byType(NavigationBar), findsOneWidget);
+    // Shared history resolves through the real router while private data stays gated.
+    router.go('/lab/essay/history');
+    await t.pumpAndSettle();
+    expect(find.text('나의 첨삭 기록'), findsOneWidget);
+    expect(find.text('로그인 상태를 확인해 주세요.'), findsOneWidget);
+    expect(t.takeException(), isNull);
+    await t.pumpWidget(const SizedBox());
+    container.dispose();
+    await t.pump();
+  });
+
   testWidgets('real five-tab shell selects Home after logout from Settings', (
     t,
   ) async {

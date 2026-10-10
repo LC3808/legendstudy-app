@@ -132,7 +132,9 @@ void main() {
       q['select'],
       '${SupabaseContentRepository.projection},discovery_exam:exams!exams_content_type(content_item_id)',
     );
-    expect(q['discovery_exam.year'], 'gte.2010');
+    // Oct09 policy keeps historical and unclassified active materials visible.
+    expect(q.containsKey('discovery_exam.year'), isFalse);
+    expect(q.containsKey('or'), isFalse);
     expect(q['is_active'], 'eq.true');
     expect(q['limit'], '12');
     expect(q['order'], 'published_at.desc.nullslast,id.desc.nullslast');
@@ -199,7 +201,7 @@ void main() {
       expect(await repo.searchContent('  '), isEmpty);
       expect(requests, isEmpty);
       await repo.searchContent('영어 모의고사');
-      expect(requests.single.url.queryParametersAll['or'], hasLength(3));
+      expect(requests.single.url.queryParametersAll['or'], hasLength(2));
       expect(
         requests.single.url.queryParameters['select'],
         '${SupabaseContentRepository.projection},'

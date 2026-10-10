@@ -1,5 +1,8 @@
 # Production integration — 2026-10-09
 
+Current local APP closeout: [Oct10 integration](#local-app-branch-integration--2026-10-10).
+The Oct09 Production/backend evidence below is historical; latest Unified Wiki owns subsequent runtime state.
+
 **LEGENDSTUDY_PRODUCTION_INTEGRATION: PARTIAL.** This is an integrated APP candidate plus scoped Production backend/data deployment, not an Essay or IAP launch.
 
 ## Authority / implemented
@@ -66,3 +69,81 @@ Android debug APK build PASS after final source changes (Linux JDK21/SDK35+36/ND
 4. macOS/Xcode signing and approved Android/iPhone devices are required for remaining device/build acceptance. Current Linux compile does not replace that evidence.
 
 Next engineering work: refund/revocation lifecycle within existing canonical ledger policy; complete native Math submission/rewrite wiring, then fresh authenticated Provider/Store E2E. No new Foundation required.
+
+
+## Local APP branch integration — 2026-10-10
+
+**LOCAL_APP_INTEGRATION: COMPLETE.** Scope is code integration and local validation,
+not Production activation, physical OAuth acceptance or Store release.
+
+### Verified refs and preservation
+
+Fetched origin before work; known refs matched actual remote tips:
+- Base `codex/production-integration`: `8e89dfce2ce3b2f2af4beca28f068c0bc668ce4e`.
+- First merge `codex/essay-growth-ux`: `b0facde42c5df7ee38969b72b89ed2228a2a4c48`.
+- Second merge `claude/android-google-login-final`: `c11fc8467bc19bacf7713b377e7269674fb3b870`.
+- Separate worktree, branch `codex/local-app-integration`; two no-ff merges,
+  no conflicts or duplicate commits. Existing Claude checkout/branch and untracked
+  `.fvm/`, `.fvmrc`, `supabase/.temp/` preserved. No reset/clean/force push/deletion.
+- Production Dart delta consists solely of the source branches' three Auth UI/provider
+  files and five Essay display/history files; no reimplementation.
+- Backend contracts, Supabase tree, Payment/Toss/Credit Ledger, IAP client, profile,
+  account-linking engine, materials/PDF, timer/D-Day, splash/onboarding, platform
+  settings and dependency locks are unchanged from the base. No DB/Production call
+  or deployment. APP main and all existing branches remain unchanged.
+
+### Validation and existing failure resolution
+
+Existing SDK reused through `./tool/flutterw`: Flutter **3.47.6**, Dart **3.13.5**.
+No SDK reinstall/upgrade or PATH Flutter use.
+
+- Initial integrated full run: **1010 passed, 2 skipped, 4 failed**.
+- Clean base8e89dfc, same SDK, the two reported files: **27 passed, same4 failed**.
+  All failures were obsolete2010 cutoff/discovery-OR assertions in
+  `day6_repositories_test` (2) and `supabase_foundation_test` (2). Oct09 explicitly
+  permits every active year. Corrected test assertions to require no year cutoff
+  or discovery exclusion, retaining active/type/projection/order/token guards.
+  No production query, schema or backend contract was changed.
+- Added one actual-router regression: login Guest button → Home → public Materials;
+  auth remains signed out; `/lab/essay/history` resolves and keeps private reads gated.
+- Final analyze: **PASS, no issues**. Final complete suite: **1015 passed, 2 skipped,
+  0 failed**. Existing opt-in skips are live public-search and local Auth JWT/RPC
+  tests; neither implies new live-backend verification.
+- Focused repaired fixtures/login/router suite: **38 passed**. Existing full suite
+  covers Auth/native providers/recovery/linking, login UI/Apple iOS visibility,
+  Guest, onboarding, shared Essay History, version-safe growth comparison at
+  360px/200% text, Credit, billing/IAP lifetime and navigation.
+- Android `build apk --debug`: **PASS**. iOS `build ios --simulator --debug`:
+  **PASS**; built bundle ID `com.legendstudy.app`. Existing Android SDK/Xcode reused.
+  No Production dart-defines: compile artifacts, not authenticated runtime proof.
+- Android login widget capture at360×640 inspected with local Korean font: hero,
+  email fields, account links, Google/Kakao and Guest entry visible; Apple absent.
+  iOS Apple visibility assertion PASS. No physical-device or audible-voice claim.
+- `git diff --check` and Wiki handoff/link/routing check PASS. Existing Android
+  toolchain-version/XML and CocoaPods-to-SPM advisory warnings are not build failures;
+  native toolchain migration remains separate.
+
+### Remaining / next starting point
+
+Start future APP work from the fetched `codex/local-app-integration` branch, then
+consult current Unified Wiki; dated refs above are evidence, not a permanent HEAD.
+
+- **Android Google OAuth:** existing Claude handoff reports missing debug SHA-1
+  registration. Console state was not independently re-read here. Owner verifies
+  Android OAuth package+SHA-1 and Web client configuration, then actual device login.
+  See [exact handoff](android-google-login-finalization-2026-10-09.md).
+- **Splash:** existing immediate-brand bootstrap preserved and tested; signed
+  device cold/warm timing and final visual acceptance remain separate QA.
+- **First-run:** profile-driven authenticated onboarding preserved. Current router
+  starts atHome for Guest; device/install-once brand-before-login flow from Oct09
+  remains a separate implementation/acceptance gap, not reimplemented in this merge.
+- **iPhone QA:** simulator compilation is PASS; physical login/provider switching,
+  launch/first-run, materials/PDF and authenticated Essay/Growth/Store QA pending.
+- **Essay Voice:** APP TTS absent. Unified Oct09 policy excludes Math voice from
+  first release; humanities/economics remain scope, science undecided/gated.
+- Native full Math submission/rewrite, Store sandbox acceptance and post-grant
+  refund/revocation remain pre-existing gaps; IAP implementation preserved, no purchase.
+- No Store submission, production deployment, APP main merge or branch deletion.
+  Owner action is required for subsequent OAuth/device/release QA, not to finish
+  this code integration. Unified Wiki latest Math E2E evidence supersedes Oct09
+  expired-token/missing-secret blockers above; no fresh runtime claim in this task.

@@ -1,28 +1,20 @@
 # Current Status
 
-## Evaluation growth UX — Oct09 — PARTIAL
+## Local APP integration — Oct10 — COMPLETE
 
-[Display contract and limitations](essay-lab-product-v1.md#2026-10-09--evaluation-and-growth-display-implementation):
-WEB/APP stored-result reports, safe criterion comparison and Humanities 1–5 stars;
-qualitative Math is not converted to fabricated scores. APP isolated branch
-`codex/essay-growth-ux` extends native shared History while preserving Claude/IAP.
-Shared fixtures and Android/iOS 360px/200% widget checks pass; real devices/store
-release and APP TTS unverified. No Provider prompt or financial mutation.
-Unified DOCS Oct09 confirms predecessor real Math E2E PASS, balance4, public HOLD;
-this supersedes the old integration blocker below. WEB deployment evidence: DOCS Oct09.
-
-
-## Production integration — Oct09 — PARTIAL
-
-[Current integration](production-integration-2026-10-09.md): Claude Release/IAP + Codex
-Account/Data/runtime merged on codex/production-integration. Final analyze and Android
-debug compile PASS; device/iOS QA unverified. Native shared History read surface,
-active/published-date search, brand initialization and Store recovery fixes implemented.
-Production:7 missing posts/78 resources activated; additive IAP RPC20261009000200 and
-verify-iap-purchase v1 deployed (JWT=true, service-only ledger RPC, IAP_ENABLED=false,
-actual grants0).010 already applied, not reapplied;005 HOLD. Real Math E2E blocked by
-expired test session and3 missing Production secrets. All types GATED. Store/refund
-acceptance and full native Math flow remain. Payment/Toss/Signup and LAB unchanged.
+[Verified integration / tests / remaining work](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10):
+`codex/local-app-integration` merges latest fetched production-integration →
+essay-growth-ux → Claude login UI without conflicts. Flutter3.47.6 analyze PASS;
+full1015 PASS/2 opt-in skips/0 failures; Android debug and iOS simulator builds PASS.
+Four obsolete baseline policy assertions reproduced and corrected in tests only.
+Auth/Guest/Profile/linking, Materials/PDF, Timer/D-Day, Splash/Onboarding, Essay
+History/Growth, Credit/IAP preserved. No Backend/Payment/Ledger change or deployment.
+Next: Android Google console/device acceptance; signed Splash/first-run/iPhone QA.
+Device-once pre-login onboarding and native Essay voice/full Math submission remain
+separate gaps. Math voice excluded from first release; humanities/economics in scope,
+science gated. Existing Store/refund gates remain. APP main untouched.
+Unified Wiki Oct09 confirms actual Math E2E PASS/public HOLD, superseding the
+historical integration token/secret blockers; this task does not re-test Production.
 
 ## Shared MY foundation — 2026-10-08
 
@@ -70,11 +62,9 @@ Existing presentation/runtime notes are preserved in [shared foundation history]
 
 ## Local automated validation
 
-Flutter3.47.5 / Dart3.13.4 via ./tool/flutterw. Essay L1 analyze/focused/client JWT PASS;
-full925 PASS/2 skips/5 known baseline failures (no new Essay regression).
-[UI validation and screenshots](essay-lab-ui-ux-v1.md). Earlier regression evidence in
-[history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26).
-Device review pending.
+Latest integration checks are above; [integration evidence](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10)
+distinguishes compile/widget acceptance from actual backend/device OAuth and Store QA.
+Earlier regression evidence: [history](history/status-checkpoints.md#pre-recent-ordering-validation--2026-09-26).
 
 ## Production DB/Storage applied
 
