@@ -1,3 +1,4 @@
+import 'math_workspace_page.dart';
 import 'essay_sentence_review.dart';
 import 'shared_history_page.dart';
 import 'essay_live_pages.dart';
@@ -20,6 +21,12 @@ List<RouteBase> get essayRoutes => [
     path: 'essay',
     builder: (_, _) => const EssayLiveHome(),
     routes: [
+      GoRoute(
+        path: 'math',
+        builder: (_, state) => MathWorkspacePage(
+          evaluationId: state.uri.queryParameters['evaluation'],
+        ),
+      ),
       GoRoute(
         path: 'history',
         builder: (_, _) => const SharedEssayHistoryPage(),

@@ -22,6 +22,19 @@ import UserNotifications
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
     let info = FlutterMethodChannel(name: "com.legendstudy.app/info", binaryMessenger: binaryMessenger)
     info.setMethodCallHandler { call, result in
+      if call.method == "introCompleted" || call.method == "completeIntro" {
+        do {
+          let folder = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+          let file = folder.appendingPathComponent("intro-v1-complete")
+          if call.method == "introCompleted" {
+            result(FileManager.default.fileExists(atPath: file.path) || FileManager.default.fileExists(atPath: folder.appendingPathComponent("study-state-v1.json").path))
+          } else {
+            try Data("complete".utf8).write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+            result(nil)
+          }
+        } catch { result(FlutterError(code: "LOCAL_IO", message: "Unable to save introduction", details: nil)) }
+        return
+      }
       if call.method == "googleSchemeReady" {
         guard let client = call.arguments as? String else { result(false); return }
         let expected = client.split(separator: ".").reversed().joined(separator: ".")

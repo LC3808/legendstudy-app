@@ -7,6 +7,7 @@ import 'core/config/app_config.dart';
 import 'core/supabase/supabase_providers.dart';
 import 'features/auth/identity_diagnostic.dart';
 import 'features/brand/brand_frame.dart';
+import 'features/onboarding/device_intro.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +25,12 @@ class AppBootstrap extends StatefulWidget {
 
 class _AppBootstrapState extends State<AppBootstrap> {
   final processStart = DateTime.now();
-  late final Future<Widget> initialized = _initialize(widget.config);
-  Future<Widget> _initialize(AppConfig config) async {
+  late Future<Widget> initialized = _initialize(widget.config);
+  late final connection = _connect(widget.config);
+
+  Future<({SupabaseClient? client, String? issue})> _connect(
+    AppConfig config,
+  ) async {
     SupabaseClient? client;
     String? issue;
     if (config.validationErrors.isEmpty) {
@@ -44,8 +49,42 @@ class _AppBootstrapState extends State<AppBootstrap> {
       issue = config.validationErrors.join('\n');
     }
     startIdentityDiagnostic(client);
+    return (client: client, issue: issue);
+  }
+
+  Future<Widget> _initialize(AppConfig config) async {
+    final introStore = DeviceIntroStore();
+    bool introDone;
+    SupabaseClient? client;
+    String? issue;
+    try {
+      introDone = await introStore.completed();
+      final backend = await connection;
+      client = backend.client;
+      issue = backend.issue;
+      if (!introDone && client?.auth.currentUser != null) {
+        await introStore.complete();
+        introDone = true;
+      }
+    } catch (_) {
+      // Local I/O failure is not evidence of a fresh installation.
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: TextButton(
+              onPressed: () => setState(() {
+                initialized = _initialize(widget.config);
+              }),
+              child: const Text('앱 시작 정보를 불러오지 못했어요. 다시 시도'),
+            ),
+          ),
+        ),
+      );
+    }
     return ProviderScope(
       overrides: [
+        introRequiredAtBootProvider.overrideWithValue(!introDone),
+        deviceIntroStoreProvider.overrideWithValue(introStore),
         appConfigProvider.overrideWithValue(config),
         supabaseClientProvider.overrideWithValue(client),
         backendIssueProvider.overrideWithValue(issue),

@@ -1,3 +1,5 @@
+import 'math_gateway.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -62,74 +64,84 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
         ),
       ],
     ),
-    body: FutureBuilder<List<Map<String, dynamic>>>(
-      future: questions,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const EmptyState('문항을 불러오지 못했어요. 잠시 후 다시 확인해 주세요.');
-        }
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final rows = snapshot.data!;
-        if (rows.isEmpty) {
-          return const EmptyState('공식 문항 자료를 준비하고 있어요. 준비된 문항부터 안내할게요.');
-        }
-        final universities = rows.map(uni).toSet();
-        final selected = university ?? universities.first;
-        final exams = rows.where((q) => uni(q) == selected).toList();
-        final selectedExam = exam ?? exams.first['essay_exam_id'] as String;
-        return ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            if (!essayLiveWritesEnabled)
-              const Text('실제 답안 저장과 첨삭 연결을 준비하고 있어요.'),
-            const SectionHeader('대학 · 시험 선택'),
-            DropdownButtonFormField<String>(
-              initialValue: selected,
-              isExpanded: true,
-              decoration: const InputDecoration(labelText: '대학'),
-              items: [
-                for (final u in universities)
-                  DropdownMenuItem(value: u, child: Text(u)),
-              ],
-              onChanged: (v) => setState(() {
-                university = v;
-                exam = null;
-              }),
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              key: ValueKey(selected),
-              initialValue: selectedExam,
-              isExpanded: true,
-              decoration: const InputDecoration(labelText: '학년도 · 시험'),
-              items: [
-                for (final id
-                    in exams.map((q) => q['essay_exam_id'] as String).toSet())
-                  DropdownMenuItem(
-                    value: id,
-                    child: Text(
-                      examLabel(
-                        exams.firstWhere((q) => q['essay_exam_id'] == id),
-                      ),
-                    ),
+    body: Column(
+      children: [
+        const _MathEntry(),
+        Expanded(
+          child: FutureBuilder<List<Map<String, dynamic>>>(
+            future: questions,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const EmptyState('문항을 불러오지 못했어요. 잠시 후 다시 확인해 주세요.');
+              }
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final rows = snapshot.data!;
+              if (rows.isEmpty) {
+                return const EmptyState('공식 문항 자료를 준비하고 있어요. 준비된 문항부터 안내할게요.');
+              }
+              final universities = rows.map(uni).toSet();
+              final selected = university ?? universities.first;
+              final exams = rows.where((q) => uni(q) == selected).toList();
+              final selectedExam =
+                  exam ?? exams.first['essay_exam_id'] as String;
+              return ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  if (!essayLiveWritesEnabled)
+                    const Text('실제 답안 저장과 첨삭 연결을 준비하고 있어요.'),
+                  const SectionHeader('대학 · 시험 선택'),
+                  DropdownButtonFormField<String>(
+                    initialValue: selected,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: '대학'),
+                    items: [
+                      for (final u in universities)
+                        DropdownMenuItem(value: u, child: Text(u)),
+                    ],
+                    onChanged: (v) => setState(() {
+                      university = v;
+                      exam = null;
+                    }),
                   ),
-              ],
-              onChanged: (v) => setState(() => exam = v),
-            ),
-            const SectionHeader('문항 선택'),
-            for (final q in exams.where(
-              (q) => q['essay_exam_id'] == selectedExam,
-            ))
-              ListTile(
-                title: Text(q['label'] as String),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push('/lab/essay/write/${q['id']}'),
-              ),
-          ],
-        );
-      },
+                  const SizedBox(height: 16),
+                  DropdownButtonFormField<String>(
+                    key: ValueKey(selected),
+                    initialValue: selectedExam,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: '학년도 · 시험'),
+                    items: [
+                      for (final id
+                          in exams
+                              .map((q) => q['essay_exam_id'] as String)
+                              .toSet())
+                        DropdownMenuItem(
+                          value: id,
+                          child: Text(
+                            examLabel(
+                              exams.firstWhere((q) => q['essay_exam_id'] == id),
+                            ),
+                          ),
+                        ),
+                    ],
+                    onChanged: (v) => setState(() => exam = v),
+                  ),
+                  const SectionHeader('문항 선택'),
+                  for (final q in exams.where(
+                    (q) => q['essay_exam_id'] == selectedExam,
+                  ))
+                    ListTile(
+                      title: Text(q['label'] as String),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () => context.push('/lab/essay/write/${q['id']}'),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     ),
   );
 }
@@ -300,5 +312,41 @@ class _EssayLiveWorkspaceState extends ConsumerState<EssayLiveWorkspace> {
         ),
       ),
     );
+  }
+}
+
+class _MathEntry extends ConsumerWidget {
+  const _MathEntry();
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authStateProvider);
+    final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
+    if (owner == null) {
+      return ListTile(
+        title: const Text('내 답안 첨삭'),
+        subtitle: const Text('로그인 후 이용 가능한 문항을 확인하세요.'),
+        onTap: () => context.push('/auth'),
+      );
+    }
+    return ref
+        .watch(mathCatalogProvider(owner))
+        .when(
+          loading: () => const LinearProgressIndicator(),
+          error: (_, _) => ListTile(
+            title: const Text('문항을 불러오지 못했어요.'),
+            trailing: IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () => ref.invalidate(mathCatalogProvider(owner)),
+            ),
+          ),
+          data: (rows) => rows.isEmpty
+              ? const SizedBox.shrink()
+              : ListTile(
+                  title: const Text('수리논술 · 답안 작성'),
+                  subtitle: const Text('문제 선택부터 첨삭·재작성까지'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push('/lab/essay/math'),
+                ),
+        );
   }
 }

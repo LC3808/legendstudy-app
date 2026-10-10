@@ -181,3 +181,12 @@ OEM masks; keep the export script's safe-circle assertion.
 
 **STOP.** NEXT: Owner/ChatGPT visual review → choose icon scale + splash →
 separate approved task applies iOS/Android icon + splash and runs device verification.
+
+## Cold-start correction — 2026-10-10
+
+Supersedes process-age/duration skipping: native splash hands off to a Flutter
+frame containing the existing official symbol and BrandWordmark. It stays visible
+while initialization runs, then fades after its first painted frame. No fixed
+1.5-second hold, no slow-init skip. Android12 system-icon restrictions are handled
+by this Flutter frame. Warm resume does not remount the bootstrap.
+[Validation and physical QA](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).

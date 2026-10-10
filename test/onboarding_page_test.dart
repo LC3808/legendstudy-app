@@ -107,12 +107,6 @@ Future<GoRouter> _mount(
     ),
   );
   await tester.pumpAndSettle();
-  // First-run now opens on the brand intro; skip it so the existing cases start
-  // at the personalization steps. Guests see the sign-in notice, not the intro.
-  if (user != null) {
-    await tester.tap(find.text('건너뛰기'));
-    await tester.pumpAndSettle();
-  }
   return router;
 }
 

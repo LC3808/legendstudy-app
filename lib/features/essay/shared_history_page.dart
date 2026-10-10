@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import 'evaluation_report.dart';
 import 'evaluation_report_view.dart';
 
@@ -63,6 +65,14 @@ class _HistoryBody extends ConsumerWidget {
                   children: [
                     Text(row.at.toLocal().toString().substring(0, 16)),
                     if (row.evaluations.isEmpty) const Text('평가 요청 전'),
+                    if (row.math)
+                      for (final e in row.evaluations)
+                        TextButton(
+                          onPressed: () => context.push(
+                            '/lab/essay/math?evaluation=${Uri.encodeQueryComponent(e['id'] as String)}',
+                          ),
+                          child: const Text('처리 상태 · 재첨삭 확인'),
+                        ),
                     for (final e in row.evaluations)
                       e['state'] == 'COMPLETED'
                           ? TextButton(

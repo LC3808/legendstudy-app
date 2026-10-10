@@ -1,3 +1,4 @@
+import '../features/onboarding/device_intro.dart';
 import '../features/auth/account_deletion.dart';
 import '../features/study/trends/study_trend_page.dart';
 import '../features/lab/score_summary.dart';
@@ -49,6 +50,7 @@ import '../features/onboarding/presentation/brand_replay_page.dart';
 // the gate. Kept alive by LegendStudyApp's ref.watch of routerProvider.
 class _RouterRefresh extends ChangeNotifier {
   _RouterRefresh(Ref ref) {
+    ref.listen(deviceIntroProvider, (_, _) => notifyListeners());
     ref.listen(currentProfileProvider, (_, _) => notifyListeners());
     ref.listen(accountLifecycleStatusProvider, (_, _) => notifyListeners());
   }
@@ -59,6 +61,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     navigatorKey: GlobalKey<NavigatorState>(),
     refreshListenable: _RouterRefresh(ref),
     redirect: (context, state) {
+      if (ref.read(deviceIntroProvider)) {
+        return state.matchedLocation == '/intro' ? null : '/intro';
+      }
+      if (state.matchedLocation == '/intro') return null;
       final auth = ref.read(authStateProvider);
       final restricted = accountLifecycleRedirect(
         enabled: ref.read(accountDeletionServiceProvider) != null,
@@ -80,6 +86,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         ? '/auth/owner-check'
         : '/home',
     routes: [
+      GoRoute(path: '/intro', builder: (_, _) => const DeviceIntroPage()),
       GoRoute(path: onboardingRoute, builder: (_, _) => const OnboardingPage()),
       if (ownerAuthCheckEnabled)
         GoRoute(
@@ -193,8 +200,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                       title: '내신 LAB',
                       child: LabComingSoonPage(
                         title: '내신 LAB',
-                        lead:
-                            '내신 성적을 입력하면 과목별 강점과 보완이 필요한 영역을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
+                        lead: '내신 성적을 입력하면 과목별 강점과 보완이 필요한 영역을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '더 정교한 내신 분석 서비스를 준비하고 있습니다.',
                       ),
                     ),
@@ -205,8 +211,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                       title: '모의/수능 LAB',
                       child: LabComingSoonPage(
                         title: '모의/수능 LAB',
-                        lead:
-                            '모의고사·수능 성적을 입력하면 영역별 강점과 보완이 필요한 부분을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
+                        lead: '모의고사·수능 성적을 입력하면 영역별 강점과 보완이 필요한 부분을 분석하고, 관심 대학을 기준으로 성적을 살펴볼 수 있어요.',
                         note: '성적 변화까지 한눈에 확인할 수 있도록 준비하고 있습니다.',
                       ),
                     ),

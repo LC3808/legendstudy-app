@@ -23,6 +23,18 @@ class MainActivity : FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/info")
             .setMethodCallHandler { call, result ->
+                if (call.method == "introCompleted") {
+                    val prefs = getSharedPreferences("legendstudy-install", MODE_PRIVATE)
+                    val knownInstall = File(filesDir, "study-state-v1.json").exists()
+                    result.success(prefs.getBoolean("intro-v1-complete", false) || knownInstall)
+                    return@setMethodCallHandler
+                }
+                if (call.method == "completeIntro") {
+                    val saved = getSharedPreferences("legendstudy-install", MODE_PRIVATE)
+                        .edit().putBoolean("intro-v1-complete", true).commit()
+                    if (saved) result.success(null) else result.error("LOCAL_IO", "Unable to save introduction", null)
+                    return@setMethodCallHandler
+                }
                 if (call.method != "version") { result.notImplemented() } else {
                     try {
                         @Suppress("DEPRECATION")

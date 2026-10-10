@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-10-10 — Native Math / first-run implementation
+
+Connected existing Math gateway/History/Credit contracts; preserved included
+reevaluation and owner isolation. Added device-local introduction → login choice
+and non-skipping brand frame. Google Android package/SHA registration verified.
+Analyze/1019 tests (2 skips)/Android/iOS simulator+signed builds PASS.
+Actual OAuth/Provider/shared-history QA pending; public HOLD. See
+[checkpoint](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+
+
 ## 2026-10-04 — APP-RELEASE-CLOSEOUT-1
 
 [Closeout](app-release-closeout.md): five stale baseline assertions corrected; owner-scoped deletion routing, email reauth, cleanup retry/logout and timer privacy manifest added. Local test/analyze and unsigned release compiles PASS. Apple revoke transport tested but token lifecycle connection remains blocked. Separate LAB deletion request candidate; no Production/deploy/upload. Privacy/public-policy mismatch, signing, credentials and device acceptance remain release gates.

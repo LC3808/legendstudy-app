@@ -216,3 +216,15 @@ applied — Owner applies via SQL Editor.**
 Interested/application universities and any admissions computation require their
 own DB and are explicitly out of scope. When ready, onboarding step 3 can host
 that input against a real table.
+
+## Device-once introduction — Owner superseding decision 2026-10-10
+
+App introduction is install-local and independent of login. Both Skip and Start
+persist completion then open the existing login choice. Guest entry goes Home
+without anonymous Auth creation. Android info channel uses SharedPreferences;
+iOS uses an atomic Application Support marker. Existing study-state footprint or
+restored Auth session identifies an earlier install; local read failure never
+means new installation. Completion is not cleared on logout/provider switch.
+Profile onboarding starts directly at personalization for confirmed missing
+profiles. Existing shared profiles are reused; loading/error is not absence.
+[Validation and pending device gates](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).

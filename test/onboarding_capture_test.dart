@@ -64,7 +64,7 @@ void main() {
           profileRepositoryProvider.overrideWithValue(_Repo()),
           schoolRepositoryProvider.overrideWithValue(_NoSchools()),
         ],
-        child: preview.app(const OnboardingPage()),
+        child: preview.app(const DeviceIntroPage()),
       ),
     );
     await tester.pumpAndSettle();

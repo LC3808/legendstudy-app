@@ -68,3 +68,55 @@ use an approved isolated/reviewer session and real reviewed content/provider for
 No ordinary user Credit may be used. Do not enable any type merely because tests pass.
 Payment/Toss/IAP/Signup/Target005/Credit policy and MY/Admin/Manus visuals unchanged.
 APP Store RC85aefb1 is a documentation-only finalization over a3cc3b3; preserved.
+
+
+## Google Auth / Essay Production user flow — 2026-10-10
+
+Owner expanded this task to device-once introduction, Splash and first-run flow.
+APP worktree `/private/tmp/legendstudy-user-flow-app`, branch
+`codex/essay-production-user-flow`, base6b003888. Original Claude checkout and its
+.fvm/.fvmrc/supabase/.temp remain untouched. LAB independently starts at8991b51.
+
+Native Math reuses math_catalog, math_input, math_learning and the existing WEB
+/api/math/evaluate gateway. Availability is checked against the existing signed-in
+allowlist endpoint. Auth tokens are only sent to the pinned LegendStudy origin;
+redirects are disabled. No worker key, new AI engine or client-side billing.
+Typed inputs are frozen before writes; retries retain submission/evaluation keys.
+Pending History evaluations can resume the same gateway request. Completed
+results use the existing report/Growth reader; included rewrite follows canonical
+predecessor/prior-evaluation lineage and server eligibility. request_reevaluation
+atomically rejects any paid fallback. Credit/History refresh on completion/error.
+Other essay types remain unverified and unavailable for public evaluation.
+
+Seven preservation answers: (1) server submission/evaluation timestamps retained;
+(2) original attempts and evidence never overwritten; (3) rewrite creates a linked
+attempt; (4) current Auth UID scopes all reads and responses; (5) learning results
+remain learning evidence, no admissions prediction; (6) existing owner/RLS/private
+storage unchanged; (7) reports are derived reads, no new raw-data collection or
+ledger writes. The only new persistence is install-local introduction completion.
+
+Google diagnosis: Cloud Console originally had Web/iOS clients but no Android
+client. Actual Mac debug keystore SHA-1 is
+0F:EB:E3:EF:8F:2C:92:C7:42:D9:08:D9:B4:68:5D:3E:E1:B6:A9:88,
+package com.legendstudy.app. Owner registered LegendStudy Android Debug; both
+values were independently confirmed in Console. Web server client/iOS client,
+nonce exchange and callback remain unchanged. Release signing file is absent,
+so Release SHA is NOT VERIFIED. Actual device success remains a separate gate.
+
+Validation at implementation checkpoint: Flutter3.47.6 wrapper analyze PASS;
+1019 tests PASS / 2 existing opt-in skips; Android debug APK, iOS Simulator and
+signed iOS debug builds PASS. New tests cover first-frame brand visibility,
+slow initialization, local completion failure/retry, both introduction exits,
+owner-scoped gateway, exact DTO/retry keys and redirect refusal. Earlier failing
+fixture tests were corrected; final suite has zero failures.
+
+SM-G950N update install preserved data. Returning Guest reached Home and login
+choice. Device currently has no validated internet connection; Owner connection
+requested before actual OAuth/Math QA. iPhone physical and fresh-install simulator
+QA pending. Automated mocks are not real Provider acceptance.
+
+Production checkpoint: DB evaluations_enabled=false; Cloudflare three Math gates
+false; existing allowlist has one approved UID, unchanged. Worker expiry remains
+2026-10-16 18:57:41 KST; rotate via existing dedicated authority before expiry.
+Migration010 not reapplied,005 HOLD; Payment/Toss/IAP/Credit Ledger unchanged.
+Final operational evidence will update this checkpoint and Unified Wiki.

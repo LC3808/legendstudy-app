@@ -1,5 +1,18 @@
 # Current Status
 
+## Google Auth / Essay user flow — Oct10 implementation checkpoint
+
+`codex/essay-production-user-flow` starts at fetched integration6b003888.
+Native Math typed input, canonical evaluation gateway, included rewrite, shared
+History/report/Credit reads are connected. Device-local introduction is separate
+from Auth/Profile; completion leads to login choice, Guest stays anonymous.
+Splash always paints the symbol and wordmark during initialization, without a
+fixed hold. Existing shared profiles remain the authority for returning users.
+Analyze PASS; **1019 tests PASS / 2 opt-in skips**; Android debug, iOS Simulator
+and signed iOS debug builds PASS. Physical Android Guest Home/login-choice checked;
+actual OAuth/Provider/shared-data E2E still pending. Public activation HOLD.
+[Detailed checkpoint and operational gates](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+
 ## Local APP integration — Oct10 — COMPLETE
 
 [Verified integration / tests / remaining work](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10):

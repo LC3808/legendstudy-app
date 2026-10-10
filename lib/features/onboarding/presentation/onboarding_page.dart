@@ -1,3 +1,5 @@
+import '../device_intro.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -58,7 +60,7 @@ class OnboardingPage extends ConsumerStatefulWidget {
 }
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
-  int _step = 0;
+  int _step = 1;
   String? _status;
   int? _grade;
   bool _busy = false;
@@ -183,7 +185,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           const _OnboardingBackdrop(),
           SafeArea(
             child: _step == 0
-                ? _BrandOnboarding(onStart: () => setState(() => _step = 1))
+                ? BrandOnboarding(onStart: () => setState(() => _step = 1))
                 : Column(
                     children: [
                       Expanded(
@@ -353,9 +355,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   contentPadding: EdgeInsets.zero,
                   title: Text(result.name),
                   subtitle: Text(
-                    [result.schoolType, result.address]
-                        .where((s) => s.isNotEmpty)
-                        .join(' · '),
+                    [
+                      result.schoolType,
+                      result.address,
+                    ].where((s) => s.isNotEmpty).join(' · '),
                   ),
                   selected: result.identity == school?.identity,
                   trailing: result.identity == school?.identity
@@ -383,7 +386,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     // 관심 대학은 0개도 허용 — 선택이 없으면 이 단계를 건너뛰는 CTA를 보여준다.
     final interestedEmpty =
         _step == 3 &&
-        (ref.watch(interestedUniversitiesProvider).asData?.value.isEmpty ?? true);
+        (ref.watch(interestedUniversitiesProvider).asData?.value.isEmpty ??
+            true);
     return Container(
       decoration: const BoxDecoration(
         color: AppTokens.surface,
@@ -518,10 +522,8 @@ class _FieldLabel extends StatelessWidget {
   const _FieldLabel(this.text);
   final String text;
   @override
-  Widget build(BuildContext context) => Text(
-    text,
-    style: AppTokens.cardTitle.copyWith(color: _ink),
-  );
+  Widget build(BuildContext context) =>
+      Text(text, style: AppTokens.cardTitle.copyWith(color: _ink));
 }
 
 class _StatusTile extends StatelessWidget {
@@ -540,7 +542,8 @@ class _StatusTile extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final reduceMotion = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     return Semantics(
       button: true,
       selected: selected,
@@ -689,7 +692,8 @@ class _SelectChip extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final reduceMotion = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     return Semantics(
       button: true,
       selected: selected,
@@ -757,10 +761,7 @@ class _SelectedSchoolCard extends StatelessWidget {
               children: [
                 Text('선택한 학교', style: AppTokens.caption),
                 const SizedBox(height: 2),
-                Text(
-                  name,
-                  style: AppTokens.cardTitle.copyWith(color: _ink),
-                ),
+                Text(name, style: AppTokens.cardTitle.copyWith(color: _ink)),
               ],
             ),
           ),
@@ -805,21 +806,17 @@ const List<(String, String, IconData)> brandSlides = [
     '공부 시간과 학습 기록, 성적의 변화를\n한곳에서 확인하세요.',
     Icons.insights_rounded,
   ),
-  (
-    '내신 · 수능 · 논술을 하나로',
-    '나의 가능성을 선명하게 만드세요.',
-    Icons.school_rounded,
-  ),
+  ('내신 · 수능 · 논술을 하나로', '나의 가능성을 선명하게 만드세요.', Icons.school_rounded),
 ];
 
-class _BrandOnboarding extends StatefulWidget {
-  const _BrandOnboarding({required this.onStart});
+class BrandOnboarding extends StatefulWidget {
+  const BrandOnboarding({required this.onStart, super.key});
   final VoidCallback onStart;
   @override
-  State<_BrandOnboarding> createState() => _BrandOnboardingState();
+  State<BrandOnboarding> createState() => BrandOnboardingState();
 }
 
-class _BrandOnboardingState extends State<_BrandOnboarding> {
+class BrandOnboardingState extends State<BrandOnboarding> {
   final _controller = PageController();
   int _page = 0;
 
@@ -858,7 +855,9 @@ class _BrandOnboardingState extends State<_BrandOnboarding> {
                     // small screen or at large text scale.
                     constraints: BoxConstraints(
                       minHeight:
-                          constraints.maxHeight - AppTokens.space32 - AppTokens.space16,
+                          constraints.maxHeight -
+                          AppTokens.space32 -
+                          AppTokens.space16,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -967,4 +966,49 @@ class _BrandOnboardingState extends State<_BrandOnboarding> {
       ],
     );
   }
+}
+
+class DeviceIntroPage extends ConsumerStatefulWidget {
+  const DeviceIntroPage({super.key});
+  @override
+  ConsumerState<DeviceIntroPage> createState() => _DeviceIntroPageState();
+}
+
+class _DeviceIntroPageState extends ConsumerState<DeviceIntroPage> {
+  bool busy = false;
+  String? error;
+  Future<void> finish() async {
+    if (busy) return;
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await ref.read(deviceIntroProvider.notifier).complete();
+      if (mounted) context.go('/auth');
+    } catch (_) {
+      if (mounted) setState(() => error = '앱 소개 완료를 저장하지 못했어요. 다시 시도해 주세요.');
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: AppTokens.background,
+    body: SafeArea(
+      child: Column(
+        children: [
+          if (error != null) Text(error!),
+          Expanded(
+            child: AbsorbPointer(
+              absorbing: busy,
+              child: BrandOnboarding(onStart: finish),
+            ),
+          ),
+          if (busy) const LinearProgressIndicator(),
+        ],
+      ),
+    ),
+  );
 }
