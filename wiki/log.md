@@ -1,20 +1,15 @@
 # Development Log
 
-## 2026-10-10 — Native Math / first-run implementation
+## 2026-10-10 — Native Math / first-run and actual UI QA
 
-Device follow-up: SM-G950N real Google login/Home/relaunch session and Profile
-PASS; approved review-account Profile restored, existing WEB/APP Math History
-and4-Credit balance agree. Fresh iOS Simulator intro/login choice/Guest/relaunch
-PASS. iPhone signed install/launch PASS; physical UI acceptance continues.
-
-
-Connected existing Math gateway/History/Credit contracts; preserved included
-reevaluation and owner isolation. Added device-local introduction → login choice
-and non-skipping brand frame. Google Android package/SHA registration verified.
-Analyze/1019 tests (2 skips)/Android/iOS simulator+signed builds PASS.
-Actual OAuth/Provider/shared-history QA pending; public HOLD. See
-[checkpoint](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
-
+Android Google real OAuth/session PASS. WEB + physical Android/iPhone completed
+3 initial +3 included reevaluations; Credit4→1, shared History PASS. One Android
+PROCESSING timeout recovered through existing RPC, reservation released; cause and
+automatic recovery remain follow-up. LAB header route/focus refresh fixed.
+Analyze/1019 tests (2 skips)/Android/iOS builds PASS; LAB16 UI tests/build PASS.
+Production9c66fe2 deployed; all Math gates OFF/single allowlist/public HOLD verified.
+Remaining physical OAuth/clean-install/Profile matrix is not claimed complete.
+[Evidence](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
 
 ## 2026-10-04 — APP-RELEASE-CLOSEOUT-1
 

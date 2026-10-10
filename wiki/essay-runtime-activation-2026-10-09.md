@@ -72,66 +72,65 @@ APP Store RC85aefb1 is a documentation-only finalization over a3cc3b3; preserved
 
 ## Google Auth / Essay Production user flow — 2026-10-10
 
-Owner expanded this task to device-once introduction, Splash and first-run flow.
-APP worktree `/private/tmp/legendstudy-user-flow-app`, branch
-`codex/essay-production-user-flow`, base6b003888. Original Claude checkout and its
-.fvm/.fvmrc/supabase/.temp remain untouched. LAB independently starts at8991b51.
+APP `codex/essay-production-user-flow` (implementation56f1635, base6b003888)
+and LAB branch of the same name (implementationb4df1936 + credit-refresh9c66fe2,
+base8991b51) are pushed. Fetch latest refs before continuing; APP main untouched.
+Native Math reuses existing catalog/input/learning/evaluation contracts and WEB
+Provider gateway. No new AI engine, schema, Payment/Toss/IAP or Ledger policy.
+Device-local introduction is separate from Auth, exits to login choice, supports
+Guest without anonymous Auth, and preserves returning Profile/Home routing.
+BrandGate paints official symbol and wordmark before routing, without fixed delay.
 
-Native Math reuses math_catalog, math_input, math_learning and the existing WEB
-/api/math/evaluate gateway. Availability is checked against the existing signed-in
-allowlist endpoint. Auth tokens are only sent to the pinned LegendStudy origin;
-redirects are disabled. No worker key, new AI engine or client-side billing.
-Typed inputs are frozen before writes; retries retain submission/evaluation keys.
-Pending History evaluations can resume the same gateway request. Completed
-results use the existing report/Growth reader; included rewrite follows canonical
-predecessor/prior-evaluation lineage and server eligibility. request_reevaluation
-atomically rejects any paid fallback. Credit/History refresh on completion/error.
-Other essay types remain unverified and unavailable for public evaluation.
+Validation: Flutter3.47.6 analyze PASS; **1019 tests PASS / 2 opt-in skips / 0 failures**;
+Android debug APK, iOS Simulator and signed iPhone debug builds PASS. LAB16 relevant
+UI tests, TypeScript, targeted lint and static build PASS. Mock tests are separate
+from the following actual Production UI evidence:
 
-Seven preservation answers: (1) server submission/evaluation timestamps retained;
-(2) original attempts and evidence never overwritten; (3) rewrite creates a linked
-attempt; (4) current Auth UID scopes all reads and responses; (5) learning results
-remain learning evidence, no admissions prediction; (6) existing owner/RLS/private
-storage unchanged; (7) reports are derived reads, no new raw-data collection or
-ledger writes. The only new persistence is install-local introduction completion.
+- Android SM-G950N: missing Android OAuth client was the configuration cause.
+  Owner registered the verified com.legendstudy.app/debug SHA-1 pair; real Google
+  chooser → Supabase session → new-user Profile setup/Skip → Home → cold relaunch
+  session/Profile persistence PASS. Review-account existing Profile goes straight
+  Home. Release SHA unavailable because release signing material is absent.
+- WEB, physical Android and physical iPhone each completed an actual Math initial
+  evaluation and included reevaluation through their UI, using the same approved
+  Auth UID, existing OpenAI/gpt-5.6-sol Provider and canonical backend.
+  WEB evaluation prefixes2c6af9ee/4a35ac2b; iPhone0ffeb194/a9e65551;
+  Android7432ad79/07512c6f. All six are COMPLETED; no mocked result insertion.
+- Actual Credit4→3→2→1: three consume transactions total−3; three included
+  reevaluations add no debit. One earlier Android requestce4d77dd timed out after
+  entering PROCESSING. Existing math_recover_evaluation after lease expiry marked
+  FAILED/TIMEOUT and released its reservation. Four reserves, three consumes,
+  one release net reserved0. No direct ledger edits or duplicate charge.
+  The original upstream/finalization failure cause remains undetermined; reliable
+  automatic orphan recovery needs follow-up before public activation.
+- WEB→Android History and APP→WEB History/report/comparison verified. Final WEB,
+  Android and iPhone UI balances all1. WEB persistent header could become stale
+  after another device spent Credit; route/focus/visibility canonical reload fixes
+  this without changing billing. Existing Oct09 records remain intact.
+- WEB actual PNG upload → private Storage → actual extraction → confirm four
+  regions → evaluation-ready PASS. This uploaded attempt was not evaluated or
+  charged; PDF upload and native image/voice submission are not claimed.
+- Final post-essay cold relaunch on both physical devices restored Review Home
+  directly, with no login/introduction/Profile setup repeat.
+- Fresh isolated iOS Simulator Next/Start → login choice → Guest Home → relaunch
+  Home PASS; Skip covered by unit tests. Both physical devices used update installs
+  to preserve data. Physical clean-install/brand cold-start capture, populated
+  school/grade/targets restoration and provider-switching matrix remain limited.
+  iPhone Apple button present; Android absent. iPhone Google/Kakao/Apple and Android
+  Kakao actual provider login acceptance remain pending Owner-assisted QA.
 
-Google diagnosis: Cloud Console originally had Web/iOS clients but no Android
-client. Actual Mac debug keystore SHA-1 is
-0F:EB:E3:EF:8F:2C:92:C7:42:D9:08:D9:B4:68:5D:3E:E1:B6:A9:88,
-package com.legendstudy.app. Owner registered LegendStudy Android Debug; both
-values were independently confirmed in Console. Web server client/iOS client,
-nonce exchange and callback remain unchanged. Release signing file is absent,
-so Release SHA is NOT VERIFIED. After registration and network restoration,
-SM-G950N actual Google account selection → Supabase session → Home PASS.
-No authentication-code redesign was required.
+Production deployed source9c66fe2 via existing Pages procedure; canonical deployment
+`92f79bf7-7bb5-4fce-867f-735a6b4b8b99` SUCCESS. Final MATH_ENABLED,
+MATH_PROVIDER_CALLS_ENABLED and NEXT_PUBLIC_MATH_ENABLED=false; DB evaluations=false.
+One existing approved UID remains allowlisted; no public widening. Public availability
+HTTP200 reports all four types false; signed-in UI has no available evaluation entry.
+**PUBLIC_ACTIVATION: HOLD.** Humanities/Econ-Business/Science actual Provider QA
+not performed and remain unavailable. Worker JWT expiry2026-10-16 18:57:41 KST:
+renew using existing dedicated authority before expiry. Migration010 not reapplied;
+Target005 HOLD; worker bindings, RLS/private Storage and existing Math E2E preserved.
+No APP main merge, Store submission or release-signing change.
 
-Validation at implementation checkpoint: Flutter3.47.6 wrapper analyze PASS;
-1019 tests PASS / 2 existing opt-in skips; Android debug APK, iOS Simulator and
-signed iOS debug builds PASS. New tests cover first-frame brand visibility,
-slow initialization, local completion failure/retry, both introduction exits,
-owner-scoped gateway, exact DTO/retry keys and redirect refusal. Earlier failing
-fixture tests were corrected; final suite has zero failures.
-
-SM-G950N update install preserved data. Returning Guest reached Home/login
-choice; Apple is absent on Android. Google login succeeded at 2026-10-10
-19:36:50 KST. This Google identity had no existing Profile: new-user setup was
-correctly shown, Skip created its Profile, and cold relaunch restored the session
-and Home without repeating introduction/profile setup. This does not establish
-restoration of populated school/grade/targets on the separate approved review account.
-Fresh isolated iOS Simulator verified introduction Next/Start → login choice
-(with Apple) → Guest Home; relaunch goes directly Home. iPhone 17 Pro Max signed
-update install succeeded after Owner unlock; physical runtime QA continues.
-Owner then signed in the approved review account on Android and the isolated
-iOS Simulator. Android restored its existing Profile directly to Home. Android
-and WEB both show4 Credits and the same two Oct09 Math History rows (initial
-and rewrite); actual stored report and three-dimension comparison are readable.
-New cross-surface submissions/Provider calls remain unverified. Cloudflare CLI
-reauthentication is awaiting explicit Owner approval after automatic review denied
-the Pages-write/account-read/user-read/offline-access authorization flow. Automated
-mocks are not real Provider acceptance.
-
-Production checkpoint: DB evaluations_enabled=false; Cloudflare three Math gates
-false; existing allowlist has one approved UID, unchanged. Worker expiry remains
-2026-10-16 18:57:41 KST; rotate via existing dedicated authority before expiry.
-Migration010 not reapplied,005 HOLD; Payment/Toss/IAP/Credit Ledger unchanged.
-Final operational evidence will update this checkpoint and Unified Wiki.
+Next: finish remaining physical OAuth/first-install/Profile matrix, investigate
+orphan evaluation recovery and renew Worker credentials before a separately
+approved public release. No further evaluation activation is authorized by this
+closeout. Owner-assisted remaining device authentication QA is requested.

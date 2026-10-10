@@ -1,18 +1,17 @@
 # Current Status
 
-## Google Auth / Essay user flow — Oct10 implementation checkpoint
+## Google Auth / Essay user flow — Oct10 — PARTIAL
 
-`codex/essay-production-user-flow` starts at fetched integration6b003888.
-Native Math typed input, canonical evaluation gateway, included rewrite, shared
-History/report/Credit reads are connected. Device-local introduction is separate
-from Auth/Profile; completion leads to login choice, Guest stays anonymous.
-Splash always paints the symbol and wordmark during initialization, without a
-fixed hold. Existing shared profiles remain the authority for returning users.
-Analyze PASS; **1019 tests PASS / 2 opt-in skips**; Android debug, iOS Simulator
-and signed iOS debug builds PASS. Physical Android Google login, Home, persisted
-Profile/session after relaunch PASS. Fresh iOS Simulator intro → login choice →
-Guest Home and relaunch PASS. Provider/shared-data E2E pending; public HOLD.
-[Detailed checkpoint and operational gates](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+Native Math and first-run integration implemented on `codex/essay-production-user-flow`
+from6b003888. Android Google OAuth real login/session PASS. WEB + physical Android
++ iPhone actual Math initial/re-evaluation PASS (6 completed); canonical Credit4→1,
+no reevaluation debit, one timeout reservation recovered. Shared History and final
+balance1 verified. Device-local intro→login choice→Guest and brand first-frame tests
+PASS. Analyze/1019 tests (2 skips)/Android/iOS simulator+signed builds PASS.
+LAB16 UI tests/build PASS; source9c66fe2 deployed. All Math gates OFF, single
+allowlist retained, public HOLD. Remaining physical OAuth/clean-install/Profile QA,
+orphan recovery follow-up and Worker renewal are explicit limits.
+[Detailed evidence and next actions](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
 
 ## Local APP integration — Oct10 — COMPLETE
 
