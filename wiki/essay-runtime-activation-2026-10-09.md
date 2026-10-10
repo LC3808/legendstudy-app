@@ -134,3 +134,57 @@ Next: finish remaining physical OAuth/first-install/Profile matrix, investigate
 orphan evaluation recovery and renew Worker credentials before a separately
 approved public release. No further evaluation activation is authorized by this
 closeout. Owner-assisted remaining device authentication QA is requested.
+
+## APP WEB UX cleanup — 2026-10-10
+
+Owner-approved UI cleanup on `codex/app-web-ux-cleanup`, based on APP938b02b
+and LABc652133 (latest remote refs verified before independent worktrees).
+Login hero uses the existing section-title token, two centered lines; policy links
+follow Guest at the SafeArea footer. Shared primary buttons are navy/white and
+secondary buttons white/gray/navy; destructive and provider brand styles remain.
+MY has three divided LAB rows and a compact canonical Credit balance/IAP top-up.
+LAB home removes balance categories. Display labels are 논술 LAB / 내신 LAB / 수능 LAB;
+settings removes only LAB 이용 안내. Submit buttons are 첨삭 진행 / 재첨삭, with
+1 Credit + included same-answer reevaluation within14 days still visible before submit.
+WEB guide removes the requested redundant purchase/promo copy; refund copy and
+responsive wrapping are corrected without changing amounts, periods or legal rights.
+
+Availability cause: production has0 published general essay_questions but1 ACTIVE
+Math problem/set. The existing APP catalog and WEB entry depended on evaluation
+availability, so switching evaluation OFF also hid approved Math questions.
+Availability now adds `catalog.math` after the existing authenticated allowlist check,
+separately from `types.math` (unchanged evaluation meaning). The APP reads this field
+with a backward-compatible fallback. Approved accounts can browse while evaluation
+is OFF; other/anonymous accounts cannot gain access. UI evaluation actions stay
+disabled and the APP rechecks availability before any submission mutation. Existing
+server Provider/Worker/DB GATE remains authoritative. No migration/RLS/Storage,
+Auth/Profile/Payment/Toss/IAP verification/Ledger or evaluation contract redesign.
+No Provider call, new submission, reevaluation or Credit debit was performed for UI QA.
+
+Checks: Flutter3.47.6 analyze PASS (0 issues); full regression1019 PASS/2 opt-in skips;
+latest focused31 PASS plus2 Android/iOS login render tests. New widget cases cover
+360/375/430dp and100/200% text for hero/footer/compact Credit, plus CTA colors and
+catalog-open/evaluation-closed behavior. WEB81 related tests PASS; final copy/gate
+subset53 PASS; full ESLint, TypeScript and static production build PASS.
+Android debug APK and iOS Simulator builds PASS with existing public configuration.
+WEB pricing/refund six viewport widths360/375/390/768/1280/1440 at100% and200%
+zoom have no horizontal overflow after the scoped minimum-width correction.
+Widget render captures use test fonts: they establish geometry, not Korean visual QA.
+
+Public activation remains HOLD; Math flags and DB evaluation switch stay OFF,
+existing single-account allowlist retained. No APP main merge or store submission.
+Prior actual Math E2E evidence and its unresolved OAuth/first-install/orphan recovery
+and Worker-expiry follow-ups remain in the preceding section, outside this UI task.
+
+Deployment/visual verification: LAB source015f6e9 deployed through existing Pages
+procedure, canonical deploymentf03197c5-b040-481d-ae62-c77c7173ca88 SUCCESS.
+Production guide/refund/naming verified in browser. Anonymous availability HTTP200
+has catalog.math=false/all types=false; CF three flags=false, DB evaluation=false,
+allowlist count1 unchanged. No secret values recorded.
+Android SM-G950N update: two-line navy hero, primary Login and bottom muted
+privacy/terms links visually PASS. Guest remains accessible. iOS Simulator MY
+shows live credit_summary11 and divided LAB rows. These are read-only UI checks.
+Approved catalog runtime verification needs a fresh test login: current Review
+server sessions count0; old Simulator JWT still reads RLS data but server Auth
+user lookup returns403. This is a stale-session limitation, not a reason to bypass
+Auth or open the allowlist. Owner Android re-login requested; no password collected.

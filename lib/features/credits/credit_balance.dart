@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_theme.dart';
+
 import '../../core/supabase/supabase_providers.dart';
 
 /// Read-only canonical ledger snapshot shared with LAB credit-v1.
@@ -29,17 +31,24 @@ final creditBalanceProvider = FutureProvider.autoDispose<CreditBalance?>((
   final client = ref.watch(supabaseClientProvider);
   if (owner == null || client == null) return null;
   final data = await client.rpc<Map<String, dynamic>>('credit_summary');
-  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) return null;
+  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
+    return null;
+  }
   return CreditBalance.fromJson(data);
 });
 
 class CreditBalanceCard extends ConsumerWidget {
-  const CreditBalanceCard({super.key, this.showTopUp = false});
+  const CreditBalanceCard({
+    super.key,
+    this.showTopUp = false,
+    this.compact = false,
+  });
 
   /// When true, a "충전하기" entry to the Credit purchase screen is shown below
   /// the balance (e.g. on the LAB home). The purchase screen itself passes false
   /// to avoid a recursive entry.
   final bool showTopUp;
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,6 +65,33 @@ class CreditBalanceCard extends ConsumerWidget {
           ),
           data: (balance) => balance == null
               ? const SizedBox.shrink()
+              : compact
+              ? Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '사용 가능 Credit ${balance.spendable}개',
+                        style: AppTokens.secondary.copyWith(
+                          color: AppTokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                    if (showTopUp) ...[
+                      const SizedBox(width: AppTokens.space8),
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 12,
+                          ),
+                          textStyle: AppTokens.caption,
+                        ),
+                        onPressed: () => context.push('/lab/credits'),
+                        child: const Text('충전하기'),
+                      ),
+                    ],
+                  ],
+                )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

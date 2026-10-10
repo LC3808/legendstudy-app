@@ -55,7 +55,7 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Essay LAB'),
+      title: const Text('논술 LAB'),
       actions: [
         IconButton(
           tooltip: '나의 첨삭 기록',
@@ -79,7 +79,7 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
               }
               final rows = snapshot.data!;
               if (rows.isEmpty) {
-                return const EmptyState('공식 문항 자료를 준비하고 있어요. 준비된 문항부터 안내할게요.');
+                return const EmptyState('등록된 일반 논술 문항이 없습니다.');
               }
               final universities = rows.map(uni).toSet();
               final selected = university ?? universities.first;

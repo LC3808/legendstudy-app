@@ -1,24 +1,19 @@
 # Current Status
 
-## Google Auth / Essay user flow — Oct10 — PARTIAL
+## APP WEB UX cleanup — Oct10
 
-Native Math and first-run integration implemented on `codex/essay-production-user-flow`
-from6b003888. Android Google OAuth real login/session PASS. WEB + physical Android
-+ iPhone actual Math initial/re-evaluation PASS (6 completed); canonical Credit4→1,
-no reevaluation debit, one timeout reservation recovered. Shared History and final
-balance1 verified. Device-local intro→login choice→Guest and brand first-frame tests
-PASS. Analyze/1019 tests (2 skips)/Android/iOS simulator+signed builds PASS.
-LAB16 UI tests/build PASS; source9c66fe2 deployed. All Math gates OFF, single
-allowlist retained, public HOLD. Remaining physical OAuth/clean-install/Profile QA,
-orphan recovery follow-up and Worker renewal are explicit limits.
-[Detailed evidence and next actions](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+Active continuation: fetch APP/LAB `codex/app-web-ux-cleanup` (bases938b02b/c652133).
+Login footer/hero, navy CTA tokens, MY/LAB Credit and naming, WEB guide/refund cleaned.
+Approved Math catalog now independent of evaluation OFF; public HOLD/allowlist/GATE
+unchanged. Analyze,1019 full tests/2 skips,31 focused+2 render tests, Android/iOS
+simulator builds PASS. WEB81 tests/lint/typecheck/build and six-width100/200% QA PASS.
+[UX evidence](essay-runtime-activation-2026-10-09.md#app-web-ux-cleanup--2026-10-10).
 
-## Local APP integration — Oct10 — COMPLETE
-
-[Integration evidence](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10):
-base8e89dfc + essayb0facde + Claude loginc11fc84 integrated without conflicts on
-`codex/local-app-integration` (6b003888), pushed/verified. Previous1015 tests/2 skips
-and both builds passed. The user-flow checkpoint above is the active continuation.
+Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
+Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+
+3 reevaluations PASS, shared Credit4→1/History; one timeout reservation recovered.
+Physical OAuth/clean-install/Profile matrix, orphan recovery and Worker renewal
+remain separate follow-ups. [Prior evidence](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
 
 ## Shared MY foundation — 2026-10-08
 

@@ -1,5 +1,12 @@
 # Development Log
 
+## 2026-10-10 — APP WEB UX cleanup
+
+Login/footer/CTA/LAB/MY Credit and WEB guide/refund cleanup; approved catalog read
+separated from closed evaluation gate. No billing/Provider mutation. Analyze/full
+regression and focused tests, Android/iOS builds and WEB responsive checks PASS.
+[Details](essay-runtime-activation-2026-10-09.md#app-web-ux-cleanup--2026-10-10).
+
 ## 2026-10-10 — Native Math / first-run and actual UI QA
 
 Android Google real OAuth/session PASS. WEB + physical Android/iPhone completed

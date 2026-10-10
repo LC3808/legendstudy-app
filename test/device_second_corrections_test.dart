@@ -341,14 +341,14 @@ void main() {
         UncontrolledProviderScope(container: c, child: const LegendStudyApp()),
       );
       await t.pumpAndSettle();
-      // Canonical LAB home: 내신 LAB / 모의/수능 LAB are 준비 중 detail pages.
+      // Canonical LAB home: 내신 LAB / 수능 LAB are 준비 중 detail pages.
       await t.tap(find.text('내신 LAB'));
       await t.pumpAndSettle();
       expect(find.byType(LabComingSoonPage), findsOneWidget);
       expect(find.text('서비스 준비 중'), findsOneWidget);
       router.pop();
       await t.pumpAndSettle();
-      await t.tap(find.text('모의/수능 LAB'));
+      await t.tap(find.text('수능 LAB'));
       await t.pumpAndSettle();
       expect(find.byType(LabComingSoonPage), findsOneWidget);
       router.pop();

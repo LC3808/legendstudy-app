@@ -24,42 +24,49 @@ const _config = AppConfig(
 void main() {
   // flutter_test's default platform is Android, so the Android case needs no
   // override.
-  testWidgets('login UI on Android: hero/links/guest, Apple hidden, no overflow',
-      (tester) async {
-    tester.view.physicalSize = const Size(720, 1280); // 360x640 @2x
-    tester.view.devicePixelRatio = 2.0;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
+  testWidgets(
+    'login UI on Android: hero/links/guest, Apple hidden, no overflow',
+    (tester) async {
+      tester.view.physicalSize = const Size(720, 1280); // 360x640 @2x
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
 
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          appConfigProvider.overrideWithValue(_config),
-          authStateProvider.overrideWith((ref) => Stream.value(const AuthStatus(null))),
-        ],
-        child: preview.app(const AuthPage()),
-      ),
-    );
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appConfigProvider.overrideWithValue(_config),
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus(null)),
+            ),
+          ],
+          child: preview.app(const AuthPage()),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-    // Hero (new copy), single-line account links, guest entry.
-    expect(find.text('나의 가능성을 좀 더\n선명하게 만드세요.'), findsOneWidget);
-    expect(find.text('회원가입'), findsOneWidget);
-    expect(find.text('비밀번호 찾기'), findsOneWidget);
-    expect(find.text('이메일 찾기'), findsOneWidget);
-    expect(find.text('비회원으로 이용하기'), findsOneWidget);
+      // Hero (new copy), single-line account links, guest entry.
+      expect(find.text('나의 가능성을\n더 선명하게 만드세요.'), findsOneWidget);
+      expect(find.text('회원가입'), findsOneWidget);
+      expect(find.text('비밀번호 찾기'), findsOneWidget);
+      expect(find.text('이메일 찾기'), findsOneWidget);
+      expect(find.text('비회원으로 이용하기'), findsOneWidget);
 
-    // Social: Google + Kakao on Android; Apple hidden (capability preserved).
-    final buttons = tester
-        .widgetList<ProviderButton>(find.byType(ProviderButton))
-        .map((b) => b.provider)
-        .toList();
-    expect(buttons, containsAll(<OAuthProvider>[OAuthProvider.google, OAuthProvider.kakao]));
-    expect(buttons, isNot(contains(OAuthProvider.apple)));
+      // Social: Google + Kakao on Android; Apple hidden (capability preserved).
+      final buttons = tester
+          .widgetList<ProviderButton>(find.byType(ProviderButton))
+          .map((b) => b.provider)
+          .toList();
+      expect(
+        buttons,
+        containsAll(<OAuthProvider>[OAuthProvider.google, OAuthProvider.kakao]),
+      );
+      expect(buttons, isNot(contains(OAuthProvider.apple)));
 
-    expect(tester.takeException(), isNull);
-    await preview.capture(tester, 'login-android');
-  });
+      expect(tester.takeException(), isNull);
+      await preview.capture(tester, 'login-android');
+    },
+  );
 
   testWidgets('login UI on iOS shows Apple', (tester) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
@@ -70,7 +77,9 @@ void main() {
             appConfigProvider.overrideWithValue(
               _config.copyWithIosClientId('test-ios-client-id'),
             ),
-            authStateProvider.overrideWith((ref) => Stream.value(const AuthStatus(null))),
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus(null)),
+            ),
           ],
           child: preview.app(const AuthPage()),
         ),

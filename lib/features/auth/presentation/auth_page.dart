@@ -182,14 +182,13 @@ class _AuthPageState extends ConsumerState<AuthPage> {
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(vertical: AppTokens.space12),
-              child: Text(
-                '나의 가능성을 좀 더\n선명하게 만드세요.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w800,
-                  height: 1.35,
-                  color: AppTokens.textPrimary,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  '나의 가능성을\n더 선명하게 만드세요.',
+                  textAlign: TextAlign.center,
+                  softWrap: false,
+                  style: AppTokens.sectionTitle,
                 ),
               ),
             ),
@@ -318,7 +317,6 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                 ],
               ),
             ),
-            AuthSupportLinks(enabled: !_busy),
             if (providers.isNotEmpty) ...[
               const Divider(height: 32),
               const Text('다른 방법으로 로그인'),
@@ -339,6 +337,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
               onPressed: _busy ? null : () => context.go('/home'),
               child: const Text('비회원으로 이용하기'),
             ),
+            const SizedBox(height: AppTokens.space24),
+            SafeArea(top: false, child: AuthSupportLinks(enabled: !_busy)),
           ],
         ),
       ),

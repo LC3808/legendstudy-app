@@ -133,6 +133,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
   }
 
   Future<void> submit() async {
+    if (!await gateway.available()) throw StateError('UNAVAILABLE');
+    if (!current) return;
     if (evaluation != null) {
       await resumeEvaluation();
       return;
@@ -219,6 +221,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
   @override
   Widget build(BuildContext context) {
     final catalog = ref.watch(mathCatalogProvider(widget.owner));
+    final canEvaluate =
+        ref.watch(mathEvaluationAvailableProvider(widget.owner)).value == true;
     return catalog.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (_, _) => Center(
@@ -237,8 +241,9 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
           children: [
             const CreditBalanceCard(),
             const Text(
-              '1 Credit으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. 포함 여부는 서버에서 확인합니다.',
+              '1 Credit으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. ',
             ),
+            if (!canEvaluate) const Text('문항을 확인할 수 있어요. 현재 첨삭은 이용할 수 없습니다.'),
             if (notice != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -279,7 +284,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                   ),
                 ),
                 FilledButton(
-                  onPressed: busy
+                  onPressed: busy || !canEvaluate
                       ? null
                       : () {
                           leaf = selected;
@@ -291,8 +296,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                         : frozen
                         ? '같은 요청 다시 확인'
                         : prior == null
-                        ? '답안 제출 · 첨삭 요청 (1 Credit)'
-                        : '재첨삭 요청 (추가 차감 없음)',
+                        ? '첨삭 진행'
+                        : '재첨삭',
                   ),
                 ),
               ],
@@ -304,7 +309,9 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               ),
             if (evaluation != null && state?['evaluation_state'] == 'REQUESTED')
               OutlinedButton(
-                onPressed: busy ? null : () => run(resumeEvaluation),
+                onPressed: busy || !canEvaluate
+                    ? null
+                    : () => run(resumeEvaluation),
                 child: const Text('같은 첨삭 처리 다시 요청'),
               ),
             if (report != null) ...[

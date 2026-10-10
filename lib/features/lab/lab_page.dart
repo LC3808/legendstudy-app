@@ -6,7 +6,7 @@ import '../credits/credit_balance.dart';
 import '../../shared/widgets/shell_widgets.dart';
 import '../../shared/widgets/legendstudy_lab_entry.dart';
 
-/// LegendStudy LAB home. LAB is the umbrella: 논술 LAB / 내신 LAB / 모의/수능 LAB.
+/// LegendStudy LAB home. LAB is the umbrella: 논술 LAB / 내신 LAB / 수능 LAB.
 /// Only 논술 LAB is live today (and leads as the primary CTA); the other two are
 /// 준비 중 but still discoverable (clickable → a 준비 중 detail), never hidden and
 /// never shown as if already available.
@@ -16,9 +16,9 @@ class LabPage extends StatelessWidget {
   Widget build(BuildContext context) => ShellPage(
     children: [
       const AppHeader(title: 'LAB'),
-      const CreditBalanceCard(showTopUp: true),
+      const CreditBalanceCard(showTopUp: true, compact: true),
       // Owner order (2026-10-09): 논술 LAB first (live, primary CTA), then
-      // 내신 LAB, then 모의/수능 LAB.
+      // 내신 LAB, then 수능 LAB.
       const LegendStudyLabEntry(),
       const SizedBox(height: 12),
       const _LabServiceCard(
@@ -31,7 +31,7 @@ class LabPage extends StatelessWidget {
       const SizedBox(height: 12),
       const _LabServiceCard(
         icon: Icons.assessment_outlined,
-        title: '모의/수능 LAB',
+        title: '수능 LAB',
         subtitle: '모의고사·수능 성적 기반 영역별 분석 (관심 대학 기준)',
         available: false,
         route: '/lab/csat-mock',

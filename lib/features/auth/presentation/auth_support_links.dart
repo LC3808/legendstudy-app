@@ -44,15 +44,22 @@ class AuthSupportLinks extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final config = ref.watch(appConfigProvider);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final links = {
+      '개인정보처리방침': config.privacyUrl,
+      '이용약관': config.termsUrl,
+    }.entries.where((e) => publicWebUri(e.value) != null).toList();
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        for (final entry in {
-          '개인정보처리방침': config.privacyUrl,
-          '이용약관': config.termsUrl,
-        }.entries)
-          if (publicWebUri(entry.value) case final uri?)
-            ExternalLinkButton(uri: enabled ? uri : null, label: entry.key),
+        for (var i = 0; i < links.length; i++) ...[
+          if (i > 0) const Text('|'),
+          ExternalLinkButton(
+            uri: enabled ? publicWebUri(links[i].value) : null,
+            label: links[i].key,
+            compact: true,
+          ),
+        ],
       ],
     );
   }

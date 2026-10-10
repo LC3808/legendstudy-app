@@ -8,7 +8,9 @@ import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+
 import 'support/onboarding_override.dart';
+
 import 'package:legendstudy_app/features/profile/avatar.dart';
 import 'package:legendstudy_app/features/auth/presentation/auth_page.dart';
 import 'package:legendstudy_app/features/study/trends/study_bar_chart.dart';
@@ -59,7 +61,7 @@ void main() {
       await t.pumpAndSettle();
       unawaited(router.push('/auth'));
       await t.pumpAndSettle();
-      expect(find.text('나의 가능성을 좀 더\n선명하게 만드세요.'), findsOneWidget);
+      expect(find.text('나의 가능성을\n더 선명하게 만드세요.'), findsOneWidget);
       expect(find.text('LegendStudy Account'), findsNothing);
       expect(find.text('레전드스터디+'), findsNothing);
       events.add(const AuthStatus(owner, event: AuthChangeEvent.signedIn));

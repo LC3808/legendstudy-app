@@ -15,8 +15,10 @@ class ExternalLinkButton extends ConsumerStatefulWidget {
     required this.uri,
     required this.label,
     this.onOpenAttempted,
+    this.compact = false,
     super.key,
   });
+  final bool compact;
   final Uri? uri;
   final String label;
   final VoidCallback? onOpenAttempted;
@@ -59,19 +61,29 @@ class _ExternalLinkButtonState extends ConsumerState<ExternalLinkButton> {
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      TextButton.icon(
-        onPressed: opening || publicWebUri(widget.uri?.toString()) == null
-            ? null
-            : open,
-        icon: opening
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : const Icon(Icons.open_in_new),
-        label: Text(widget.label),
-      ),
+      if (widget.compact)
+        TextButton(
+          onPressed: opening || widget.uri == null ? null : open,
+          style: TextButton.styleFrom(
+            foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+            textStyle: Theme.of(context).textTheme.labelMedium,
+          ),
+          child: Text(widget.label),
+        )
+      else
+        TextButton.icon(
+          onPressed: opening || publicWebUri(widget.uri?.toString()) == null
+              ? null
+              : open,
+          icon: opening
+              ? const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.open_in_new),
+          label: Text(widget.label),
+        ),
       if (failed)
         Semantics(
           liveRegion: true,

@@ -214,26 +214,23 @@ abstract final class AppTheme {
           minimumSize: const Size(48, 48),
         ),
       ),
-      // CTA hierarchy (Owner 2026-10-08): the base UI is white / warm-light-gray +
-      // navy, and brand orange (#FFA300) is an ACCENT. General / navigational CTAs
-      // (e.g. 로그인 entry prompts) use the orange OUTLINE below — transparent fill,
-      // orange border, navy label, light-orange press tint. Filled orange
-      // (filledButtonTheme) is reserved for strong final actions: form submit/save,
-      // auth submit, destructive confirm, essay submit, onboarding completion,
-      // payment. Buttons that set their own style (e.g. social ProviderButton) are
-      // unaffected. Bottom navigation keeps its orange accent (navigationBarTheme).
+      // Owner Oct10: navy primary, neutral secondary; brand accents remain.
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppTokens.textPrimary, // navy label (high contrast)
-          backgroundColor: Colors.transparent, // white / transparent surface
+          backgroundColor: AppTokens.surface,
           minimumSize: const Size(48, 48),
-          side: const BorderSide(color: AppTokens.primary, width: 1.75),
-          overlayColor: AppTokens.primary, // pressed/hover → very-light orange tint
+          side: const BorderSide(color: AppTokens.cardBorder),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          overlayColor: AppTokens.textPrimary,
           shape: shape, // existing radius preserved
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          foregroundColor: AppTokens.surface,
+          backgroundColor: AppTokens.textPrimary,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           minimumSize: const Size(48, 48),
           shape: shape,
         ),

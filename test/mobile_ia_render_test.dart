@@ -272,7 +272,7 @@ void main() {
           }
           if (screen == 'lab') {
             expect(find.text('내신 LAB'), findsOneWidget);
-            expect(find.text('모의/수능 LAB'), findsOneWidget);
+            expect(find.text('수능 LAB'), findsOneWidget);
             expect(find.text('논술 LAB'), findsOneWidget);
             expect(find.text('성적 분석'), findsNothing);
           }

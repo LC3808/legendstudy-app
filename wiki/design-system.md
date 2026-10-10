@@ -1,5 +1,15 @@
 # Design System
 
+## Owner UI refinement — 2026-10-10
+
+Primary CTA: existing navy background/white text. Secondary: white background,
+light-gray border/navy text, centralized48dp minimum target and16×12 padding.
+Danger/provider styles and orange navigation/brand emphasis remain unchanged.
+Login hero reuses sectionTitle font size/weight with two explicit centered lines;
+legal links follow Guest at the bottom with SafeArea. Compact MY/LAB Credit uses
+canonical credit_summary and the existing IAP route. Display names are 논술 LAB,
+내신 LAB, 수능 LAB; MY rows use dividers. This supersedes conflicting CTA labels below.
+
 ## Current canonical system — v2 (Owner approved 2026-09-24)
 
 Owner approved Palette A (brand refined below), Materials5 + existing load-more, Settings-bottom logout,

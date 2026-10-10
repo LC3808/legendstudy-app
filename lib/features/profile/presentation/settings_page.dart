@@ -90,14 +90,6 @@ class SettingsPage extends ConsumerWidget {
           SettingsGroup(
             title: '서비스 정보',
             children: [
-              // Owner 2026-10-09: service info centred on what a user needs.
-              // "앱 사용 안내 다시 보기" removed. "LAB 이용 안내" → the LAB home
-              // (in-app, no fabricated URL). "논술 LAB 가격 안내" is intentionally
-              // omitted until a canonical pricing page/URL exists (Codex/Owner).
-              LsListRow(
-                title: 'LAB 이용 안내',
-                onTap: () => context.push('/lab'),
-              ),
               LsListRow(
                 title: '문의·건의사항',
                 onTap: () => context.push('/my/feedback'),

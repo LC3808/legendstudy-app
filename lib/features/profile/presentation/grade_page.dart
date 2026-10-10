@@ -132,7 +132,7 @@ class _GradePageState extends ConsumerState<GradePage> {
       return ShellPage(
         children: [
           const Text('학년을 저장하려면 로그인이 필요해요.'),
-          // Login entry = general CTA → orange outline (app_theme CTA hierarchy).
+          // Login entry uses the shared secondary CTA style.
           OutlinedButton(
             onPressed: () => context.push('/auth', extra: true),
             child: const Text('로그인'),

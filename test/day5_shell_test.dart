@@ -9,7 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/app/legendstudy_app.dart';
 import 'package:legendstudy_app/app/router.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+
 import 'support/onboarding_override.dart';
+
 import 'package:legendstudy_app/features/content/content_providers.dart';
 import 'package:legendstudy_app/features/content/domain/content_item.dart';
 import 'package:legendstudy_app/features/content/domain/content_repository.dart';
@@ -112,7 +114,7 @@ void main() {
   });
   for (final detail in [
     ('내신 LAB', '/lab/school-record'),
-    ('모의/수능 LAB', '/lab/csat-mock'),
+    ('수능 LAB', '/lab/csat-mock'),
   ]) {
     testWidgets('LAB ${detail.$1} and direct link return to LAB', (
       tester,

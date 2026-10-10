@@ -37,7 +37,7 @@ class MathGateway {
     }
   }
 
-  Future<bool> available() async {
+  Future<bool> available({bool browsing = false}) async {
     checkOwner();
     final request =
         http.Request('GET', Uri.parse('$mathOrigin/api/essay/availability'))
@@ -56,12 +56,14 @@ class MathGateway {
         value['types'] is! Map) {
       throw const FormatException('INVALID_RESPONSE');
     }
-    return value['types']['math'] == true;
+    final catalog = value['catalog'];
+    final canBrowse = catalog is Map && catalog['math'] == true;
+    return value['types']['math'] == true || (browsing && canBrowse);
   }
 
   Future<List<Map<String, dynamic>>> catalog() async {
     checkOwner();
-    if (!await available()) return [];
+    if (!await available(browsing: true)) return [];
     final data = await client.rpc<dynamic>(
       'math_catalog',
       params: {'p_limit': 20},
@@ -145,4 +147,10 @@ final mathCatalogProvider = FutureProvider.autoDispose
     .family<List<Map<String, dynamic>>, String>((ref, owner) async {
       final gateway = ref.watch(mathGatewayProvider(owner));
       return gateway == null ? [] : gateway.catalog();
+    });
+
+final mathEvaluationAvailableProvider = FutureProvider.autoDispose
+    .family<bool, String>((ref, owner) async {
+      final gateway = ref.watch(mathGatewayProvider(owner));
+      return gateway != null && await gateway.available();
     });

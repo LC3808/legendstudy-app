@@ -71,6 +71,25 @@ void main() {
       wrong.close();
     },
   );
+  test(
+    'approved catalog remains readable with evaluation gate closed',
+    () async {
+      final gateway = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient(
+          (request) async => http.Response(
+            '{"version":"essay-web-v1","catalog":{"math":true},"types":{"math":false}}',
+            200,
+          ),
+        ),
+      );
+      expect(await gateway.available(), isFalse);
+      await gateway.catalog();
+      expect(calls.single.url.path, endsWith('math_catalog'));
+      gateway.close();
+    },
+  );
   test('RPC retries retain caller idempotency key and shared DTO', () async {
     final gateway = MathGateway(client, 'fixture-a');
     final payload = {

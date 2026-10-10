@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 
 /// Shared "서비스 준비 중" detail for a LAB that is not live yet (내신분석 LAB,
-/// 수능·모의고사 LAB). The card on the LAB home is clickable and lands here so the
+/// 수능·수능 LAB). The card on the LAB home is clickable and lands here so the
 /// user understands the future value — it is never a dead disabled card. Copy
 /// avoids any 합격 가능성/예측 claim (that feature does not exist yet). No analysis
 /// logic, no backend.
