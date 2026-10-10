@@ -1,0 +1,32 @@
+{
+  "scope": "isolated PG17 canonical chain; synthetic auth roles/claims; no provider or Storage runtime",
+  "migration_sha256": "73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51",
+  "checks": [
+    "deployed_recovery_fingerprint_exact",
+    "no_batch_anon",
+    "no_batch_authenticated",
+    "no_batch_service_role",
+    "no_batch_math_extraction_worker",
+    "limit_bounded",
+    "completed_job_untouched",
+    "active_request_not_recovered",
+    "active_lease_not_recovered",
+    "expired_processing_recovered",
+    "failed_timeout_state",
+    "replay_no_duplicate_settlement",
+    "canonical_credit_release",
+    "late_finalize_denied",
+    "concurrent_attempt_lock_skipped",
+    "expired_unclaimed_request_recovered",
+    "requested_failure_release",
+    "original_recovery_unchanged",
+    "completed_result_preserved",
+    "rollback_only_batch_removed",
+    "rollback_preserves_credit_facts"
+  ],
+  "count": 21,
+  "legacy_fact_hash_wire_exact": true,
+  "essay_private_definitions_acl_preserved": true,
+  "ql_read_v1_preserved": true,
+  "production_writes": 0
+}

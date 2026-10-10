@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-10-11 — Essay service contracts and recovery
+
+Reused private officialSKKU3 questions/9 criteria; isolated19 content +21 recovery
+checks PASS. WEB catalog/draft/CAS/submit/result/retry and default-closed worker
+gateway implemented;96 tests PASS/1 optional skip, lint/typecheck/boundaries/build
+PASS. Production/Provider/Credit writes0. Hosted adapter/rights/public content and
+real E2E still pending. [Evidence](essay-full-service-implementation-20261011.md).
+
 ## 2026-10-10 — APP WEB UX cleanup
 
 Fresh Android re-login/catalog/read-only evaluation-OFF QA closes the stale-session gap.

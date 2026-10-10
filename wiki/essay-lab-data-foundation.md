@@ -704,3 +704,7 @@ improvements, internal identifiers kept out of student prose. No UI implementati
 ## Manus 2027 candidate bridge — Oct10 V2
 
 [Offline validation, existing schema mapping and local LAB preview](essay-lab-manus-handoff-20261010.md) reuse this foundation. No2027-to-historical exam merge or production registration. Source hashes and rights gates remain separate.
+
+## Service content binding — Oct11
+
+[Isolated official3-question import and canonical worker-cache binding](essay-full-service-implementation-20261011.md) now reuse existing schema/source IDs. Production general-question inventory remains0; source rights/publication and graph-capable dispatch remain held.

@@ -1,5 +1,13 @@
 # Current Status
 
+## Essay full service — Oct11 — PARTIAL
+
+Canonical WEB draft/submit/result gateway + private SKKU3-question/9-criterion
+import and Math recovery verified locally.19 content/21 recovery checks; WEB96 PASS
+(1 optional skip), lint/typecheck/boundaries/Webpack build PASS. Hosted worker,
+rights, public question bodies and real E2E remain incomplete. No Production write
+or deployment; public HOLD. [Result and next steps](essay-full-service-implementation-20261011.md).
+
 ## Manus Essay overnight V2 — Oct10 — LOCAL COMPLETE / PUBLIC HOLD
 
 Independent `codex/essay-research-overnight-v2`:12 source hashes verified;53 Master/
