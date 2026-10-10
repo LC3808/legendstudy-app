@@ -2,6 +2,7 @@
 
 ## 2026-10-10 — APP WEB UX cleanup
 
+Fresh Android re-login/catalog/read-only evaluation-OFF QA closes the stale-session gap.
 Login/footer/CTA/LAB/MY Credit and WEB guide/refund cleanup; approved catalog read
 separated from closed evaluation gate. No billing/Provider mutation. Analyze/full
 regression and focused tests, Android/iOS builds and WEB responsive checks PASS.

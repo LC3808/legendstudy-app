@@ -1,11 +1,11 @@
 # Current Status
 
-## APP WEB UX cleanup — Oct10
+## APP WEB UX cleanup — Oct10 — COMPLETE
 
 Active continuation: fetch APP/LAB `codex/app-web-ux-cleanup` (bases938b02b/c652133).
 Login footer/hero, navy CTA tokens, MY/LAB Credit and naming, WEB guide/refund cleaned.
 Approved Math catalog now independent of evaluation OFF; public HOLD/allowlist/GATE
-unchanged. Analyze,1019 full tests/2 skips,31 focused+2 render tests, Android/iOS
+unchanged. Fresh Android login/catalog and disabled evaluation UI verified. Analyze,1019 full tests/2 skips,31 focused+2 render tests, Android/iOS
 simulator builds PASS. WEB81 tests/lint/typecheck/build and six-width100/200% QA PASS.
 [UX evidence](essay-runtime-activation-2026-10-09.md#app-web-ux-cleanup--2026-10-10).
 

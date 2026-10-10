@@ -188,3 +188,9 @@ Approved catalog runtime verification needs a fresh test login: current Review
 server sessions count0; old Simulator JWT still reads RLS data but server Auth
 user lookup returns403. This is a stale-session limitation, not a reason to bypass
 Auth or open the allowlist. Owner Android re-login requested; no password collected.
+
+UX verification follow-up: Owner re-login is now present on Android. SM-G950N
+UI shows the approved Math entry, actual catalog/problem text and evaluation-OFF
+notice with disabled submit. No Provider request or Credit debit. This closes the
+previous stale-session catalog verification gap; APP WEB UX CLEANUP is COMPLETE.
+The subsequent admin quality/preview task continues in the same LAB branch.
