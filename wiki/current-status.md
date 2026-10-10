@@ -1,16 +1,16 @@
 # Current Status
 
-## Quality traceability refinement — Oct10 — PARTIAL
+## Admin Quality metadata — Oct10 — READY / PRODUCTION NOT APPLIED
 
-Fetch APP/LAB `codex/quality-traceability-refinement`. School status persistence,
-MY aspirations/applications summary and compact Credit CTA implemented; existing
-onboarding animation/Reduce Motion verified; no new school animation invented.
-Flutter analyze0/full1034 PASS2 skips; WEB180 related tests/lint/typecheck/build PASS.
-No mobile device use or builds this task. Quality8 records trace4 independent pairs;
-existing Human Review reused. Pseudonymous user/exam classification needs approved
-additive operator read metadata; official-content/provider activation gaps remain.
-Public HOLD; no Provider/Credit/DB/permission change. Prior UX cleanup remains complete.
-[Current detail](essay-runtime-activation-2026-10-09.md#quality-traceability-refinement--2026-10-10).
+Continue APP/LAB `codex/quality-traceability-refinement`; prior UI fixes retained.
+Operator-only list/detail metadata candidate adds stable pseudonym, validated root/
+prior keys and verified exam/rubric fields. Live read-only projection:8 evaluations,
+1 user,4 independent roots/4 pairs,0 invalid links; current exam labels remain NULL.
+Isolated PG17:34 checks including auth/lifecycle/cursor/exact rollback PASS. WEB full
+963 plus final78 related tests/typecheck/lint/build PASS. No mobile or Provider calls.
+**Owner final approval required before production migration**; no DB/permission/
+Credit change, no new LAB deployment, public HOLD. [SQL/rollback review packet](../supabase/verification/quality_metadata/README.md).
+[Current evidence](essay-runtime-activation-2026-10-09.md#admin-quality-metadata--2026-10-10).
 
 Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
 Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+

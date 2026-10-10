@@ -242,3 +242,30 @@ from activation. Existing Math real E2E retained; no new Provider/Credit transac
 Public HOLD, CF Math flags false, existing allowlist, RLS and Private Storage preserved.
 Worker encrypted binding is masked; last verified expiryOct16 18:57:41KST is not a
 fresh token validity check. Dedicated-authority renewal remains a pre-activation task.
+
+## Admin Quality metadata — 2026-10-10
+
+The prior metadata implementation blocker is now resolved in source under explicit
+bounded Owner approval. Operating migration approval is still outstanding. Existing
+APP UI, Human Review write contract and Math real-E2E evidence remain unchanged.
+Only qlm_list_cases/qlm_case_detail add quality_metadata; student/shared projection,
+RLS, ACL, cursor and lifecycle guards are retained. Server purpose-scoped SHA256
+pseudonym (not anonymity), validated attempt/root/prior keys and canonical content
+IDs/rubric are provided. University/year require verified exam metadata; all current
+synthetic exam rows return NULL. WEB separates problem/rubric → pseudonymous user →
+independent root → initial/revision → comparison/review; missing or conflicting pins
+stay separate, and absent prior detail does not hide the selected evaluation.
+
+Actual production read-only candidate SELECT:8 evaluations,1 pseudonym,4 roots,
+4 explicit pairs,0 wrong links,0 verified exam labels. This is NOT production RPC
+acceptance. Isolated canonical PG17:34 checks PASS, including non-superuser apply,
+legacy wire/OID/ACL parity, other-user/forged roots, cursor ties, anonymous/nonoperator/
+expired/revoked/lifecycle denial and exact rollback/drift denial. No real Credit or
+Provider activity. WEB full963 tests PASS; final related78 PASS after UI fixture
+addition; typecheck/lint/static build PASS. No APP build/device QA in this scope.
+
+[Exact SQL, rollback and Owner apply sequence](../supabase/verification/quality_metadata/README.md).
+Migration20261010134235 is NOT_APPLIED. LAB source awaits paired deployment after
+Owner DB acceptance; production remains previous501d272/a2e09fea. Public HOLD and
+existing production gates unchanged. Next: Owner final apply approval, approved
+migration path, real operator/nonoperator postflight, then existing Pages deployment.

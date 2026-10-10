@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-10",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "method": "read-only candidate SELECT; no deployed RPC changes",
+  "evaluations": 8,
+  "pseudonymous_users": 1,
+  "independent_lineages": 4,
+  "roots": 4,
+  "reevaluation_pairs": 4,
+  "unlinked": 0,
+  "verified_exam_labels": 0,
+  "invalid_links": 0,
+  "production_applied": false,
+  "production_writes": 0,
+  "real_role_post_apply_tests": "pending Owner apply"
+}
