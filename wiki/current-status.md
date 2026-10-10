@@ -9,25 +9,17 @@ from Auth/Profile; completion leads to login choice, Guest stays anonymous.
 Splash always paints the symbol and wordmark during initialization, without a
 fixed hold. Existing shared profiles remain the authority for returning users.
 Analyze PASS; **1019 tests PASS / 2 opt-in skips**; Android debug, iOS Simulator
-and signed iOS debug builds PASS. Physical Android Guest Home/login-choice checked;
-actual OAuth/Provider/shared-data E2E still pending. Public activation HOLD.
+and signed iOS debug builds PASS. Physical Android Google login, Home, persisted
+Profile/session after relaunch PASS. Fresh iOS Simulator intro → login choice →
+Guest Home and relaunch PASS. Provider/shared-data E2E pending; public HOLD.
 [Detailed checkpoint and operational gates](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
 
 ## Local APP integration — Oct10 — COMPLETE
 
-[Verified integration / tests / remaining work](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10):
-`codex/local-app-integration` merges latest fetched production-integration →
-essay-growth-ux → Claude login UI without conflicts. Flutter3.47.6 analyze PASS;
-full1015 PASS/2 opt-in skips/0 failures; Android debug and iOS simulator builds PASS.
-Four obsolete baseline policy assertions reproduced and corrected in tests only.
-Auth/Guest/Profile/linking, Materials/PDF, Timer/D-Day, Splash/Onboarding, Essay
-History/Growth, Credit/IAP preserved. No Backend/Payment/Ledger change or deployment.
-Next: Android Google console/device acceptance; signed Splash/first-run/iPhone QA.
-Device-once pre-login onboarding and native Essay voice/full Math submission remain
-separate gaps. Math voice excluded from first release; humanities/economics in scope,
-science gated. Existing Store/refund gates remain. APP main untouched.
-Unified Wiki Oct09 confirms actual Math E2E PASS/public HOLD, superseding the
-historical integration token/secret blockers; this task does not re-test Production.
+[Integration evidence](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10):
+base8e89dfc + essayb0facde + Claude loginc11fc84 integrated without conflicts on
+`codex/local-app-integration` (6b003888), pushed/verified. Previous1015 tests/2 skips
+and both builds passed. The user-flow checkpoint above is the active continuation.
 
 ## Shared MY foundation — 2026-10-08
 

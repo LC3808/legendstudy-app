@@ -101,7 +101,9 @@ client. Actual Mac debug keystore SHA-1 is
 package com.legendstudy.app. Owner registered LegendStudy Android Debug; both
 values were independently confirmed in Console. Web server client/iOS client,
 nonce exchange and callback remain unchanged. Release signing file is absent,
-so Release SHA is NOT VERIFIED. Actual device success remains a separate gate.
+so Release SHA is NOT VERIFIED. After registration and network restoration,
+SM-G950N actual Google account selection → Supabase session → Home PASS.
+No authentication-code redesign was required.
 
 Validation at implementation checkpoint: Flutter3.47.6 wrapper analyze PASS;
 1019 tests PASS / 2 existing opt-in skips; Android debug APK, iOS Simulator and
@@ -110,10 +112,23 @@ slow initialization, local completion failure/retry, both introduction exits,
 owner-scoped gateway, exact DTO/retry keys and redirect refusal. Earlier failing
 fixture tests were corrected; final suite has zero failures.
 
-SM-G950N update install preserved data. Returning Guest reached Home and login
-choice. Device currently has no validated internet connection; Owner connection
-requested before actual OAuth/Math QA. iPhone physical and fresh-install simulator
-QA pending. Automated mocks are not real Provider acceptance.
+SM-G950N update install preserved data. Returning Guest reached Home/login
+choice; Apple is absent on Android. Google login succeeded at 2026-10-10
+19:36:50 KST. This Google identity had no existing Profile: new-user setup was
+correctly shown, Skip created its Profile, and cold relaunch restored the session
+and Home without repeating introduction/profile setup. This does not establish
+restoration of populated school/grade/targets on the separate approved review account.
+Fresh isolated iOS Simulator verified introduction Next/Start → login choice
+(with Apple) → Guest Home; relaunch goes directly Home. iPhone 17 Pro Max signed
+update install succeeded after Owner unlock; physical runtime QA continues.
+Owner then signed in the approved review account on Android and the isolated
+iOS Simulator. Android restored its existing Profile directly to Home. Android
+and WEB both show4 Credits and the same two Oct09 Math History rows (initial
+and rewrite); actual stored report and three-dimension comparison are readable.
+New cross-surface submissions/Provider calls remain unverified. Cloudflare CLI
+reauthentication is awaiting explicit Owner approval after automatic review denied
+the Pages-write/account-read/user-read/offline-access authorization flow. Automated
+mocks are not real Provider acceptance.
 
 Production checkpoint: DB evaluations_enabled=false; Cloudflare three Math gates
 false; existing allowlist has one approved UID, unchanged. Worker expiry remains

@@ -2,6 +2,12 @@
 
 ## 2026-10-10 — Native Math / first-run implementation
 
+Device follow-up: SM-G950N real Google login/Home/relaunch session and Profile
+PASS; approved review-account Profile restored, existing WEB/APP Math History
+and4-Credit balance agree. Fresh iOS Simulator intro/login choice/Guest/relaunch
+PASS. iPhone signed install/launch PASS; physical UI acceptance continues.
+
+
 Connected existing Math gateway/History/Credit contracts; preserved included
 reevaluation and owner isolation. Added device-local introduction → login choice
 and non-skipping brand frame. Google Android package/SHA registration verified.
