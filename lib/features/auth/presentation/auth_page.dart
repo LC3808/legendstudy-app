@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../auth_errors.dart';
@@ -157,6 +158,16 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
   }
 
+  void _toggleMode() => setState(() {
+    _signUp = !_signUp;
+    _error = null;
+    _notice = null;
+    _password.clear();
+    _confirm.clear();
+    _visible = false;
+    _form.currentState?.reset();
+  });
+
   @override
   Widget build(BuildContext context) {
     ref.listen<AsyncValue<AuthStatus>>(
@@ -169,7 +180,19 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       child: AutofillGroup(
         child: ShellPage(
           children: [
-            const Text('나의 학습 기록을 이어가세요.'),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: AppTokens.space12),
+              child: Text(
+                '나의 가능성을 좀 더\n선명하게 만드세요.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w800,
+                  height: 1.35,
+                  color: AppTokens.textPrimary,
+                ),
+              ),
+            ),
             SectionHeader(_signUp ? '회원가입' : '로그인'),
             TextFormField(
               controller: _email,
@@ -266,25 +289,35 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                     : '로그인',
               ),
             ),
-            TextButton(
-              onPressed: _busy
-                  ? null
-                  : () => setState(() {
-                      _signUp = !_signUp;
-                      _error = null;
-                      _notice = null;
-                      _password.clear();
-                      _confirm.clear();
-                      _visible = false;
-                      _form.currentState?.reset();
-                    }),
-              child: Text(_signUp ? '로그인으로 돌아가기' : '처음이신가요? 회원가입'),
-            ),
-            if (!_signUp)
-              TextButton(
-                onPressed: _busy ? null : () => context.push('/auth/recovery'),
-                child: const Text('비밀번호를 잊으셨나요?'),
+            // Account links on one centred line (회원가입 | 비밀번호 찾기 | 이메일
+            // 찾기); wraps naturally on a small screen or at large text scale.
+            Padding(
+              padding: const EdgeInsets.only(top: AppTokens.space8),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  _LinkText(
+                    _signUp ? '로그인' : '회원가입',
+                    onTap: _busy ? null : _toggleMode,
+                  ),
+                  if (!_signUp) ...[
+                    const _LinkDivider(),
+                    _LinkText(
+                      '비밀번호 찾기',
+                      onTap: _busy
+                          ? null
+                          : () => context.push('/auth/recovery'),
+                    ),
+                  ],
+                  const _LinkDivider(),
+                  _LinkText(
+                    '이메일 찾기',
+                    onTap: _busy ? null : () => showFindEmailDialog(context),
+                  ),
+                ],
               ),
+            ),
             AuthSupportLinks(enabled: !_busy),
             if (providers.isNotEmpty) ...[
               const Divider(height: 32),
@@ -299,9 +332,53 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                   ),
                 ),
             ],
+            const SizedBox(height: AppTokens.space8),
+            // Guest entry — stays a guest (no anonymous account), goes Home.
+            // First-run routing/onboarding is Codex's; this only navigates.
+            TextButton(
+              onPressed: _busy ? null : () => context.go('/home'),
+              child: const Text('비회원으로 이용하기'),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+/// A tappable inline text link for the single-line account links.
+class _LinkText extends StatelessWidget {
+  const _LinkText(this.label, {required this.onTap});
+  final String label;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: onTap == null
+                ? AppTokens.textSecondary
+                : AppTokens.textPrimary,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The "|" separator between inline account links.
+class _LinkDivider extends StatelessWidget {
+  const _LinkDivider();
+  @override
+  Widget build(BuildContext context) => const Text(
+    '|',
+    style: TextStyle(color: AppTokens.cardBorder, fontSize: 13),
+  );
 }

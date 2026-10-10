@@ -100,7 +100,7 @@ void main() {
       await t.pumpAndSettle();
       expect(find.byType(AuthPage), findsOneWidget);
       expect(c.read(routerProvider).canPop(), isTrue);
-      expect(find.text('나의 학습 기록을 이어가세요.'), findsOneWidget);
+      expect(find.text('나의 가능성을 좀 더\n선명하게 만드세요.'), findsOneWidget);
       await t.pumpWidget(const SizedBox());
       c.dispose();
     });

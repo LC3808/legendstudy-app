@@ -94,8 +94,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('개인정보처리방침'), findsNothing);
       expect(find.text('이용약관'), findsNothing);
-      await tester.ensureVisible(find.text('가입한 이메일을 잊으셨나요?'));
-      await tester.tap(find.text('가입한 이메일을 잊으셨나요?'));
+      await tester.ensureVisible(find.text('이메일 찾기'));
+      await tester.tap(find.text('이메일 찾기'));
       await tester.pumpAndSettle();
       expect(find.textContaining('Google·Apple·Kakao'), findsOneWidget);
       expect(find.textContaining('비밀번호나 인증 코드는 보내지 마세요'), findsOneWidget);

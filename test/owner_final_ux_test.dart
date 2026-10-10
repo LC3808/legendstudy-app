@@ -59,7 +59,7 @@ void main() {
       await t.pumpAndSettle();
       unawaited(router.push('/auth'));
       await t.pumpAndSettle();
-      expect(find.text('나의 학습 기록을 이어가세요.'), findsOneWidget);
+      expect(find.text('나의 가능성을 좀 더\n선명하게 만드세요.'), findsOneWidget);
       expect(find.text('LegendStudy Account'), findsNothing);
       expect(find.text('레전드스터디+'), findsNothing);
       events.add(const AuthStatus(owner, event: AuthChangeEvent.signedIn));

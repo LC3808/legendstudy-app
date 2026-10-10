@@ -99,8 +99,8 @@ void main() {
       );
       await tester.pumpAndSettle();
       if (scenario == 'signup') {
-        await tester.ensureVisible(find.text('처음이신가요? 회원가입'));
-        await tester.tap(find.text('처음이신가요? 회원가입'));
+        await tester.ensureVisible(find.text('회원가입'));
+        await tester.tap(find.text('회원가입'));
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.widgetWithText(FilledButton, '회원가입'));
         await tester.tap(find.widgetWithText(FilledButton, '회원가입'));
