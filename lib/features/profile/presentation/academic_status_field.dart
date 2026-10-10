@@ -40,6 +40,7 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
           .upsertCurrentProfile(
             academicStatus: status,
             clearAcademicStatus: status == null,
+            clearGrade: status != 'student',
           );
       if (!mounted) return;
       ref.invalidate(currentProfileProvider);

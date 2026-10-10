@@ -30,6 +30,15 @@ class _GradePageState extends ConsumerState<GradePage> {
   @override
   void initState() {
     super.initState();
+    ref.listenManual(currentProfileProvider, (previous, next) {
+      final value = next.asData?.value;
+      if (!saving &&
+          value != null &&
+          value.id == owner &&
+          previous?.value?.academicStatus != value.academicStatus) {
+        setState(() => selected = value.gradeLevel);
+      }
+    });
     ref.listenManual(authStateProvider, (_, next) {
       final id = next.value?.userId;
       if (id != owner) {
@@ -92,6 +101,8 @@ class _GradePageState extends ConsumerState<GradePage> {
           .upsertCurrentProfile(
             gradeLevel: selected,
             clearGrade: selected == null,
+            // Selecting a school grade explicitly establishes current enrollment.
+            academicStatus: selected != null ? 'student' : null,
           );
       if (!mounted ||
           request != generation ||

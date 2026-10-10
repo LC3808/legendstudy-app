@@ -69,6 +69,7 @@ class SchoolSelection extends AsyncNotifier<School?> {
       return false;
     }
     state = AsyncData(school);
+    if (owner != null) ref.invalidate(currentProfileProvider);
     // Dependents invalidate through the selection change.
     return true;
   }

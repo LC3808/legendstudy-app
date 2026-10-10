@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'learning_info_row.dart';
+import 'aspirations_card.dart';
 import '../../study/study_providers.dart';
 import '../../personal/personal_providers.dart';
 
@@ -141,6 +142,8 @@ class ProfilePage extends ConsumerWidget {
           ),
           const SectionHeader('LAB'),
           const LsCard(padding: _myCardPadding, child: MyScoreSummary()),
+          const SectionHeader('희망대학·학과'),
+          const AspirationsCard(),
           const SectionHeader('나의 자료'),
           LsCard(
             padding: _myCardPadding,

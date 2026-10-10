@@ -51,6 +51,7 @@ class SupabaseProfileRepository extends _PersonalRepository
       'id': owner,
       'neis_office_code': officeCode,
       'neis_school_code': schoolCode,
+      if (schoolCode != null) 'academic_status': 'student',
     }, onConflict: 'id');
   }
 

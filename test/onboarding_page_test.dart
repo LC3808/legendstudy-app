@@ -85,6 +85,7 @@ Future<GoRouter> _mount(
   _Repo repo, {
   String? user,
   SchoolRepository? schools,
+  bool reduceMotion = false,
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -103,7 +104,15 @@ Future<GoRouter> _mount(
         profileRepositoryProvider.overrideWithValue(repo),
         schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
       ],
-      child: MaterialApp.router(theme: AppTheme.light, routerConfig: router),
+      child: MaterialApp.router(
+        theme: AppTheme.light,
+        routerConfig: router,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(disableAnimations: reduceMotion),
+          child: child!,
+        ),
+      ),
     ),
   );
   await tester.pumpAndSettle();
@@ -111,13 +120,41 @@ Future<GoRouter> _mount(
 }
 
 void main() {
+  for (final reduced in [false, true]) {
+    testWidgets(
+      'existing status selection animation honors Reduce Motion $reduced',
+      (tester) async {
+        await _mount(tester, _Repo(), user: 'u1', reduceMotion: reduced);
+        final tile = find.ancestor(
+          of: find.text('고등학교 재학생'),
+          matching: find.byType(AnimatedContainer),
+        );
+        final before = tester.widget<AnimatedContainer>(tile).decoration;
+        await tester.tap(find.text('고등학교 재학생'));
+        await tester.pump();
+        final after = tester.widget<AnimatedContainer>(tile);
+        expect(
+          after.duration,
+          reduced ? Duration.zero : const Duration(milliseconds: 160),
+        );
+        expect(after.decoration, isNot(before));
+        await tester.pumpAndSettle();
+        expect(
+          tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+          isNotNull,
+        );
+      },
+    );
+  }
+
   testWidgets('guest cannot personalize', (tester) async {
     await _mount(tester, _Repo(), user: null);
     expect(find.text('개인화 설정은 로그인 후 이용할 수 있어요.'), findsOneWidget);
   });
 
-  testWidgets('student → grade → finish persists canonical fields',
-      (tester) async {
+  testWidgets('student → grade → finish persists canonical fields', (
+    tester,
+  ) async {
     final repo = _Repo();
     final router = await _mount(tester, repo, user: 'u1');
 
@@ -149,8 +186,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('retaker skips grade/school and clears grade on finish',
-      (tester) async {
+  testWidgets('retaker skips grade/school and clears grade on finish', (
+    tester,
+  ) async {
     final repo = _Repo();
     await _mount(tester, repo, user: 'u1');
     await tester.tap(find.text('N수생 · 검정고시 등'));
@@ -173,7 +211,9 @@ void main() {
     expect(repo.completed, isTrue);
   });
 
-  testWidgets('skip completes onboarding without writing status', (tester) async {
+  testWidgets('skip completes onboarding without writing status', (
+    tester,
+  ) async {
     final repo = _Repo();
     final router = await _mount(tester, repo, user: 'u1');
     await tester.tap(find.text('건너뛰기'));
@@ -201,6 +241,7 @@ void main() {
   Future<(_Repo, GoRouter)> toSchoolStep(
     WidgetTester tester, {
     SchoolRepository? schools,
+    bool reduceMotion = false,
   }) async {
     tester.view.physicalSize = const Size(1000, 2200);
     tester.view.devicePixelRatio = 1;
@@ -244,8 +285,9 @@ void main() {
     expect(find.text('검색 결과가 없어요.'), findsOneWidget);
   });
 
-  testWidgets('D: selecting a result shows the confirmation card',
-      (tester) async {
+  testWidgets('D: selecting a result shows the confirmation card', (
+    tester,
+  ) async {
     await toSchoolStep(tester, schools: _OneSchool());
     await tester.enterText(find.byType(TextField), '레전드');
     await tester.pumpAndSettle();
@@ -257,8 +299,9 @@ void main() {
     expect(find.text('레전드고등학교'), findsWidgets);
   });
 
-  testWidgets('E: 검색 does not finish onboarding or navigate Home',
-      (tester) async {
+  testWidgets('E: 검색 does not finish onboarding or navigate Home', (
+    tester,
+  ) async {
     final (repo, router) = await toSchoolStep(tester, schools: _NoSchools());
     await tester.enterText(find.byType(TextField), '레전드');
     await tester.tap(find.widgetWithText(OutlinedButton, '검색'));

@@ -1,13 +1,16 @@
 # Current Status
 
-## APP WEB UX cleanup — Oct10 — COMPLETE
+## Quality traceability refinement — Oct10 — PARTIAL
 
-Active continuation: fetch APP/LAB `codex/app-web-ux-cleanup` (bases938b02b/c652133).
-Login footer/hero, navy CTA tokens, MY/LAB Credit and naming, WEB guide/refund cleaned.
-Approved Math catalog now independent of evaluation OFF; public HOLD/allowlist/GATE
-unchanged. Fresh Android login/catalog and disabled evaluation UI verified. Analyze,1019 full tests/2 skips,31 focused+2 render tests, Android/iOS
-simulator builds PASS. WEB81 tests/lint/typecheck/build and six-width100/200% QA PASS.
-[UX evidence](essay-runtime-activation-2026-10-09.md#app-web-ux-cleanup--2026-10-10).
+Fetch APP/LAB `codex/quality-traceability-refinement`. School status persistence,
+MY aspirations/applications summary and compact Credit CTA implemented; existing
+onboarding animation/Reduce Motion verified; no new school animation invented.
+Flutter analyze0/full1034 PASS2 skips; WEB180 related tests/lint/typecheck/build PASS.
+No mobile device use or builds this task. Quality8 records trace4 independent pairs;
+existing Human Review reused. Pseudonymous user/exam classification needs approved
+additive operator read metadata; official-content/provider activation gaps remain.
+Public HOLD; no Provider/Credit/DB/permission change. Prior UX cleanup remains complete.
+[Current detail](essay-runtime-activation-2026-10-09.md#quality-traceability-refinement--2026-10-10).
 
 Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
 Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+

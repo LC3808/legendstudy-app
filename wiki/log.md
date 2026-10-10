@@ -3439,3 +3439,13 @@ updated stale expectations only, added actual-router Guest/History guard regress
 Flutter3.47.6 analyze PASS, final1015 PASS/2 existing opt-in skips/0 failures;
 Android debug/iOS simulator builds PASS. No APP main merge/Store/Production action.
 [Complete evidence and next gates](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10).
+
+## 2026-10-10 — Quality traceability refinement
+
+School/student state saves and Profile refresh corrected; MY canonical aspirations +
+conditional application summary added; shared top-up visual padding reduced with48dp
+touch area. Existing animation/Reduce Motion verified; school animation never existed.
+Analyze PASS/full1034 tests2 skips; WEB180 contract tests/build PASS. No device use.
+Admin8 records/4 pairs read-only audited; complete pseudonym/exam grouping requires
+Owner-approved read projection extension. Public HOLD, no Provider/Credit/DB changes.
+[Evidence](essay-runtime-activation-2026-10-09.md#quality-traceability-refinement--2026-10-10).

@@ -166,7 +166,7 @@ void main() {
         );
         expect(
           (jsonDecode(requests.last.body) as Map).keys,
-          unorderedEquals(['id', 'neis_office_code', 'neis_school_code']),
+          unorderedEquals(['id', 'neis_office_code', 'neis_school_code', 'academic_status']),
         );
         expect(row!['target_label'], first.label);
         expect((await repository.fetchCurrentTarget())?.date, first.date);

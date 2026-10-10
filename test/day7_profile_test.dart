@@ -90,6 +90,25 @@ void main() {
     final profile = await repository.fetchCurrentProfile();
     expect(profile!.displayName, '새닉네임');
   });
+  test(
+    'school save replaces stale retaker status without clearing grade or name',
+    () async {
+      await session('owner-a');
+      await repository.upsertCurrentProfile(
+        displayName: '학생',
+        gradeLevel: 2,
+        academicStatus: 'retaker',
+      );
+      await repository.updateSchoolSelection(
+        officeCode: 'J10',
+        schoolCode: '7530932',
+      );
+      final restored = await repository.fetchCurrentProfile();
+      expect(restored!.academicStatus, 'student');
+      expect(restored.gradeLevel, 2);
+      expect(restored.displayName, '학생');
+    },
+  );
   test('school pair saves and fetch selects both fields', () async {
     await session('owner-a');
     await repository.updateSchoolSelection(

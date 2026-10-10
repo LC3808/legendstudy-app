@@ -194,3 +194,51 @@ UI shows the approved Math entry, actual catalog/problem text and evaluation-OFF
 notice with disabled submit. No Provider request or Credit debit. This closes the
 previous stale-session catalog verification gap; APP WEB UX CLEANUP is COMPLETE.
 The subsequent admin quality/preview task continues in the same LAB branch.
+
+## Quality traceability refinement — 2026-10-10
+
+Owner explicitly prohibits mobile debugging/device use this task. No ADB, Android
+or iPhone installation/run/login/logout was performed. Android/iOS builds omitted
+as not required. Flutter3.47.6 analyze0 issues; full1034 PASS/2 opt-in skips.
+WEB180 related quality/runtime/provider-contract tests PASS, full lint/typecheck
+and static build PASS. Provider calls in these tests are mocks, not new E2E.
+
+APP school bug: school-only upsert previously preserved stale academic_status,
+and grade save could coexist with retaker. Selecting a school stays a draft until
+Save; successful school upsert writes student atomically with school identity,
+then invalidates shared Profile. Explicit nonempty grade save establishes student;
+nonstudent status clears grade and GradePage refreshes after status restoration.
+No existing profile rows were reset or backfilled. Failed saves retain the editor.
+New transport tests verify stale retaker correction and preserve nickname/grade;
+existing school failure/navigation/auth-state tests remain green.
+
+MY adds 희망대학·학과 between LAB and 나의 자료. Canonical interests and intended_major
+are reused; existing applications-v1 RPC provides conditional stored application
+labels, distinct from interests. Existing school/profile management path reused;
+empty state only after successful empty reads. No duplicate storage or target005.
+Compact shared top-up style: minimum visual28dp, vertical padding4dp per side,
+text-sized width, standard padded >=48dp touch target, navy/gray tokens and original
+IAP route. Widget360dp at100/200% PASS; natural text size may expand visual height.
+
+Animation investigation: existing status tiles160ms and grade chips140ms in
+onboarding use state-driven AnimatedContainer and zero duration for Reduce Motion.
+Tests demonstrate selection changes and no blocked Next action. No broken controller
+was found. School-selection animation was explicitly deferred in release-finalization
+Wiki; it was never implemented. No new animation or artificial delay added.
+
+LAB trace UI follows explicit prior evaluation links within problem/profile groups;
+Production read-only8 results =>1 student/4 independent lineages/4 valid pairs;
+no cross-student/lineage edges. Missing student/exam metadata is explicitly shown,
+not inferred. Existing human review history/write contract reused with output hash,
+idempotency and operator fence. No Production review was written. LAB implementation
+501d272 is pushed/remote verified. Full backend/status/approval proposal:
+[LAB audit](https://github.com/LC3808/legendstudy-lab/blob/codex/quality-traceability-refinement/docs/PRODUCTION_ACTIVATION_2026-10-08.md#quality-traceability-refinement--2026-10-10).
+
+Overall PARTIAL: operator-only read projection needs separately approved additive
+student pseudonym/lineage/exam/university fields for complete user/year classification.
+Active Math is1 synthetic smoke problem, not official content. Published general
+questions/criteria/evaluations0; unverified Humanities/Econ/Science remain blocked
+from activation. Existing Math real E2E retained; no new Provider/Credit transaction.
+Public HOLD, CF Math flags false, existing allowlist, RLS and Private Storage preserved.
+Worker encrypted binding is masked; last verified expiryOct16 18:57:41KST is not a
+fresh token validity check. Dedicated-authority renewal remains a pre-activation task.

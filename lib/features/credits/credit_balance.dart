@@ -82,8 +82,11 @@ class CreditBalanceCard extends ConsumerWidget {
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
-                            vertical: 12,
+                            vertical: 4,
                           ),
+                          minimumSize: const Size(48, 28),
+                          tapTargetSize: MaterialTapTargetSize.padded,
+                          visualDensity: VisualDensity.standard,
                           textStyle: AppTokens.caption,
                         ),
                         onPressed: () => context.push('/lab/credits'),

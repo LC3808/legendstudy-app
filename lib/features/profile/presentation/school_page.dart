@@ -198,12 +198,18 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           ),
         ],
         if (auth.value?.isAuthenticated == true) ...[
-          AcademicStatusField(
-            key: ValueKey('academic-status:${auth.value?.userId}'),
-            enabled: !_saving && !_completed,
-            onSavingChanged: (value) => setState(() => _statusSaving = value),
-            onResult: (success) => setState(() => _statusFailed = !success),
-          ),
+          if (_edited && _draft != null)
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [SectionHeader('현재 상태'), Text('재학생 · 저장 전')],
+            )
+          else
+            AcademicStatusField(
+              key: ValueKey('academic-status:${auth.value?.userId}'),
+              enabled: !_saving && !_completed,
+              onSavingChanged: (value) => setState(() => _statusSaving = value),
+              onResult: (success) => setState(() => _statusFailed = !success),
+            ),
           if (_statusFailed) const Text('현재 상태를 다시 저장한 뒤 완료해 주세요.'),
           GradePage(
             key: ValueKey(auth.value?.userId),
