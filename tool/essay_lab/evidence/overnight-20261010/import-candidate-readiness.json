@@ -1,0 +1,222 @@
+[
+  {
+    "university": "건국대학교",
+    "researchTier": "Tier B",
+    "ownerTier": "UNDECIDED",
+    "readiness": "NEEDS_EXTRACTION",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "경희대학교",
+    "researchTier": "Tier A",
+    "ownerTier": "UNDECIDED",
+    "readiness": "READY",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "단국대학교",
+    "researchTier": "Tier B",
+    "ownerTier": "UNDECIDED",
+    "readiness": "NEEDS_EXTRACTION",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "동국대학교",
+    "researchTier": "Tier A — 공식 2026 인문 자료로 범위를 제한한 즉시 PoC 후보. LegendStudy 단독 자료는 2025·2024 실논술 rubric이 UNKNOWN이어서 Tier A 근거가 아니다.",
+    "ownerTier": "UNDECIDED",
+    "readiness": "READY — 단, 공식 2026 인문 검수 범위 한정. 실행 전 문항·하위기준·배점·근거 페이지 단위 구조화 및 표 추출 사람 검수가 필요하며, 자연/2025/LegendStudy 확장은 NEEDS_EXTRACTION이다.",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "성균관대학교",
+    "researchTier": "Tier A — 단, 2026학년도 모의논술 언어형 공식 세트에만 한정. 나머지 2025·2024·2026 수리형은 원문 추출·구조화·rubric 확인 후 Tier B 재평가 대상이다.",
+    "ownerTier": "UNDECIDED",
+    "readiness": "READY — 위에 한정한 2026 공식 모의논술 언어형 세트만 해당한다. 대학 전체 자료 풀은 NEEDS_EXTRACTION이다.",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "숙명여자대학교",
+    "researchTier": "Tier B",
+    "ownerTier": "UNDECIDED",
+    "readiness": "NEEDS_EXTRACTION",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "연세대학교",
+    "researchTier": "Tier B",
+    "ownerTier": "UNDECIDED",
+    "readiness": "NEEDS_RUBRIC",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "한양대학교",
+    "researchTier": "Tier A",
+    "ownerTier": "UNDECIDED",
+    "readiness": "READY",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "광운대학교",
+    "researchTier": "Tier A",
+    "ownerTier": "UNDECIDED",
+    "readiness": "READY",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  },
+  {
+    "university": "경북대학교",
+    "researchTier": "Tier B",
+    "ownerTier": "UNDECIDED",
+    "readiness": "NEEDS_EXTRACTION",
+    "sourceFile": "research/university-evidence.json",
+    "sourceSha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+    "validation": {
+      "missing": [
+        "questionId",
+        "academicYear",
+        "examKind",
+        "sourceLocator",
+        "pdfSha256",
+        "RIGHTS_REVIEW",
+        "VERIFIED_QUESTION_RUBRIC_MAPPINGS"
+      ],
+      "importReady": false,
+      "evaluationAllowed": false,
+      "publicationAllowed": false
+    }
+  }
+]

@@ -700,3 +700,7 @@ Student-facing Essay language/evaluation philosophy now follows the
 [2026-09-28 Owner policy](essay-lab-hanyang-2024-benchmark.md#student-facing-language-and-evaluation-philosophy--canonical-owner-policy):
 Korean teacher-like explanations, achievements first, deduplicated actionable
 improvements, internal identifiers kept out of student prose. No UI implementation.
+
+## Manus 2027 candidate bridge — Oct10 V2
+
+[Offline validation, existing schema mapping and local LAB preview](essay-lab-manus-handoff-20261010.md) reuse this foundation. No2027-to-historical exam merge or production registration. Source hashes and rights gates remain separate.

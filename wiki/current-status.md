@@ -1,16 +1,17 @@
 # Current Status
 
-## Admin Quality metadata — Oct10 — READY / PRODUCTION NOT APPLIED
+## Manus Essay overnight V2 — Oct10 — LOCAL COMPLETE / PUBLIC HOLD
 
-Continue APP/LAB `codex/quality-traceability-refinement`; prior UI fixes retained.
-Operator-only list/detail metadata candidate adds stable pseudonym, validated root/
-prior keys and verified exam/rubric fields. Live read-only projection:8 evaluations,
-1 user,4 independent roots/4 pairs,0 invalid links; current exam labels remain NULL.
-Isolated PG17:34 checks including auth/lifecycle/cursor/exact rollback PASS. WEB full
-963 plus final78 related tests/typecheck/lint/build PASS. No mobile or Provider calls.
-**Owner final approval required before production migration**; no DB/permission/
-Credit change, no new LAB deployment, public HOLD. [SQL/rollback review packet](../supabase/verification/quality_metadata/README.md).
-[Current evidence](essay-runtime-activation-2026-10-09.md#admin-quality-metadata--2026-10-10).
+Independent `codex/essay-research-overnight-v2`:12 source hashes verified;53 Master/
+50 Offering/101 Track links valid; future-date052 quarantined. Existing LAB routes
+now have local-only university/year/campus/track preview; production excludes raw
+research. Reused3 historical evidence packages;10 import candidates remain rights/
+source gated. Python10/WEB13/typecheck/lint/build PASS; no device/Provider/Credit writes.
+[Full result and restore](essay-lab-manus-handoff-20261010.md).
+
+Prior QA metadata APP4de2125/LABc977493 unchanged:34 isolated checks passed previously,
+8 evaluations/4 pairs read-only verified. Production migration NOT_APPLIED and Wiki
+PR#1 unmerged; final approval still required. [Review packet](../supabase/verification/quality_metadata/README.md).
 
 Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
 Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+

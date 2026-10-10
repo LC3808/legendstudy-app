@@ -1,0 +1,101 @@
+{
+  "version": "manus-handoff-audit-v2",
+  "counts": {
+    "master": 53,
+    "universities": 42,
+    "seoul": 27,
+    "nonseoul": 26,
+    "offerings": 50,
+    "tracks": 101,
+    "evidenceUniversities": 10
+  },
+  "files": [
+    {
+      "path": "research/essay-lab-research-report.md",
+      "sha256": "3a9dce01649e98b766b595c39510bdaae200705f0f174170157f2134fea349f9",
+      "manifest_match": true
+    },
+    {
+      "path": "research/artifact-guide.md",
+      "sha256": "7ee523e5d04033051ad0b69334450e400dc43c4ce368ba3b86b51a65d08ae455",
+      "manifest_match": true
+    },
+    {
+      "path": "research/university-evidence.json",
+      "sha256": "a504e3ec9791b815eb2e88334f80008921a5f90570a47afbe8b783f226c17462",
+      "manifest_match": true
+    },
+    {
+      "path": "research/admissions-source-registry.md",
+      "sha256": "429faca0f820cc2d248fb93747a1df233063391947735cf940cd970096835e99",
+      "manifest_match": true
+    },
+    {
+      "path": "policy/essay-lab-roadmap.md",
+      "sha256": "4fb9ac7ed938e0cb7254cceaec78b1e470f6a95849a844b573717541ab69fc87",
+      "manifest_match": true
+    },
+    {
+      "path": "policy/core-university-strategy.md",
+      "sha256": "4bab082e4beb1d8426b52d128116055fe360a1b6d9cf1aa9d2aff96062bd81f0",
+      "manifest_match": true
+    },
+    {
+      "path": "data/admission-master-2027.csv",
+      "sha256": "856db356ff71b90acc53553ced0ca940ac6fb9812c08d5e57193b2be883743cc",
+      "manifest_match": true
+    },
+    {
+      "path": "data/admission-master-2027.json",
+      "sha256": "87dd5625768ccd71424877dd135a53d2eefc1938d17f46fdd85e0918f9b51717",
+      "manifest_match": true
+    },
+    {
+      "path": "data/admission-seoul-2027.csv",
+      "sha256": "ea2064add9decd55d1fb909d9b6943c2d2660d0906bf13296ff4404e200fea7f",
+      "manifest_match": true
+    },
+    {
+      "path": "data/admission-nonseoul-2027.csv",
+      "sha256": "823d38e808011f4a768757ea98a582c53daaca952f131510d5a3840a83fba783",
+      "manifest_match": true
+    },
+    {
+      "path": "data/essay-offerings-2027.csv",
+      "sha256": "b90b00365860cc24d27e43e8dd4b1e6c84c8f390b404c550c7c13c852d718adf",
+      "manifest_match": true
+    },
+    {
+      "path": "data/essay-tracks-2027.csv",
+      "sha256": "503b14b5832c1acb606b945c195e4af809d7cfdfd60f239cd92b38f4b9b08ad3",
+      "manifest_match": true
+    },
+    {
+      "path": "CODEX_OVERNIGHT_INSTRUCTIONS.md",
+      "sha256": "615a5b3c6e70d09b0cf411a676db8443b26b70224e4c5bc732fe83097fbb4089",
+      "manifest_match": false
+    }
+  ],
+  "issues": [
+    {
+      "code": "STALE_INSTRUCTION_MANIFEST",
+      "severity": "warning",
+      "id": "CODEX_OVERNIGHT_INSTRUCTIONS.md"
+    },
+    {
+      "code": "FUTURE_NOTICE_RELATIVE_TO_AS_OF",
+      "severity": "quarantine",
+      "id": "LSL27-052",
+      "as_of": "2026-09-18",
+      "mentioned_date": "2027-08-27"
+    }
+  ],
+  "allTracksHeld": true,
+  "sourceContentPublished": false,
+  "productionWrites": 0,
+  "missingArtifacts": [
+    "134-row inventory CSV",
+    "original PDF bodies"
+  ],
+  "researchAsOf": "2026-09-18"
+}
