@@ -371,3 +371,52 @@ No data reingestion, UI change or provider execution in this contract-review pha
 Next: Owner/ChatGPT Production result review → separately approved AI Pilot.
 Persistence/versioned adapter is deployed; existing security acceptance is preserved. Real-student writes require privacy/provider/retention and integration
 gates, independent of this review. Productization-ready does not mean release-ready.
+
+
+## 2026-10-09 — Evaluation and growth display implementation
+
+Owner authority: learning analysis `/account/essay/`, canonical History `/my/essays/`,
+and Credit `/account/credits/` have distinct purposes. Analysis excludes Credit and
+usage counts; History keeps separate rewritten/subsequently evaluated events.
+
+Implemented display contract `growth-display-v1` in WEB TypeScript and APP Dart:
+- Stored Humanities `level_1_to_5` is displayed identically as 1–5 stars, without
+  rounding, aggregate scores, official-weight multiplication or missing-value defaults.
+- Math `math-rubric-v1` remains qualitative. Official criterion descriptions and
+  stored verdicts precede general rubric dimensions. Existing point weights remain
+  untouched; no numerical Math stars are inferred.
+- Math comparison requires explicit prior evaluation, same leaf/profile/rubric,
+  contract/provider/model/prompt versions, and complete identical criterion sets.
+  STEP_RETRY is not compared as a whole-answer improvement. Humanities comparison
+  additionally requires same session/question/regime, pinned criterion versions,
+  complete evidence, writing mode and question conditions/metadata version.
+- IMPROVED/UNCHANGED/DECLINED/UNAVAILABLE are derived solely from comparable
+  stored levels/grades. Qualitative rank is used only for direction, never a score.
+- Existing erroneous generic progression text is not treated as evidence of growth:
+  actual Production pair has three STRONG→STRONG dimensions and displays unchanged.
+- Stored strengths, improvement progress/actions/checklists, valid Math steps and
+  their answer evidence are shown. Missing content stays missing. No legacy result
+  rewrite, AI re-evaluation, automatic essay generation, migration or Credit mutation.
+- Exact diagnostic enum translations use friendly teacher wording. Provider prompts
+  and stored prose are preserved; new teacher-style generated feedback remains a
+  separately validated Provider change, not claimed complete by this UI work.
+- Native History keeps owner/session guards and uses the same result RPC/tables;
+  no separate APP evaluation. WEB/APP fixture JSON is byte-identical and tested.
+
+WEB adds owner-scoped joint History, filters/reset, explicit safe fallback navigation,
+A4 report printing and PDF-only sharing. Unknown historical university/year/type
+metadata is retained as unknown, never inferred from a title. Bounded History is not
+represented as lifetime statistics. Math History currently lacks university/year in
+its canonical listing; those records remain in the unfiltered list.
+
+Voice: no prior TTS found. WEB uses explicitly local Korean Web Speech voices only,
+manual play/pause/resume/replay/speed, cancellation on unmount/account changes.
+No local voice means unavailable; no external provider, audio upload/cache, added
+Credit use or autoplay. APP TTS is not implemented. Real audible-device verification
+is still required; browser control tests do not prove voice availability on devices.
+
+Preservation review: raw answers/results stay immutable, original timestamps remain,
+no new fact/balance store; shared identity and owner-only reads; learning evidence is
+not admissions prediction; display derivation only; private artifacts stay private.
+Production public activation HOLD; Payment/Toss/IAP/010/005 unchanged. Android/iOS
+widget layout checks are simulations, not physical-device/store-release acceptance.

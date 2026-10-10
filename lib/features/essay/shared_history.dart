@@ -1,3 +1,5 @@
+import 'evaluation_report.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -79,6 +81,64 @@ class SharedEssayHistory {
     return parseSharedHistory(
       results[0] as Map<String, dynamic>,
       results[1] as List,
+    );
+  }
+
+  Future<({EvaluationReport report, EvaluationReport? before})>
+  evaluationReport(bool math, String id) async {
+    checkOwner();
+    if (math) {
+      final wire = await mathRead('read_result', {'evaluation_id': id});
+      final report = mathEvaluationReport(wire);
+      final before = report.priorId == null
+          ? null
+          : mathEvaluationReport(
+              await mathRead('read_result', {'evaluation_id': report.priorId!}),
+            );
+      checkOwner();
+      return (report: report, before: before);
+    }
+    const projection =
+        'id,attempt_id,session_id,question_id,regime_key,contract_version,evidence_completeness,input_snapshot,overall_summary,strengths,rewrite_checklist,'
+        'attempt:essay_attempts!essay_evaluations_attempt_id_session_id_fkey(body,attempt_no,mode,conditions_snapshot,question_metadata_version),'
+        'essay_improvement_progress(title,explanation,next_action,status),'
+        'essay_evaluation_dimensions(criterion_id,display_order,level_1_to_5,explanation,essay_evaluation_criteria(label,definition_version)),'
+        'session:essay_practice_sessions!inner(user_id,essay_questions(label))';
+    final row = await client
+        .from('essay_evaluations')
+        .select(projection)
+        .eq('id', id)
+        .eq('session.user_id', owner)
+        .eq('status', 'completed')
+        .isFilter('invalidated_at', null)
+        .single();
+    checkOwner();
+    EvaluationReport? before;
+    if (evaluationObject(row['attempt'])['attempt_no'] != 1) {
+      final initial = await client
+          .from('essay_attempts')
+          .select('id')
+          .eq('session_id', row['session_id'] as String)
+          .eq('attempt_no', 1)
+          .maybeSingle();
+      checkOwner();
+      if (initial != null) {
+        final rows = await client
+            .from('essay_evaluations')
+            .select(projection)
+            .eq('attempt_id', initial['id'] as String)
+            .eq('session.user_id', owner)
+            .eq('status', 'completed')
+            .isFilter('invalidated_at', null)
+            .order('completed_at')
+            .limit(1);
+        checkOwner();
+        if (rows.isNotEmpty) before = humanEvaluationReport(rows.first);
+      }
+    }
+    return (
+      report: humanEvaluationReport(row, priorId: before?.id),
+      before: before,
     );
   }
 

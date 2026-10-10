@@ -56,7 +56,7 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
       title: const Text('Essay LAB'),
       actions: [
         IconButton(
-          tooltip: '나의 논술 기록',
+          tooltip: '나의 첨삭 기록',
           icon: const Icon(Icons.history),
           onPressed: () => context.push('/lab/essay/history'),
         ),

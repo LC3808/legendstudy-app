@@ -1,5 +1,17 @@
 # Current Status
 
+## Evaluation growth UX — Oct09 — PARTIAL
+
+[Display contract and limitations](essay-lab-product-v1.md#2026-10-09--evaluation-and-growth-display-implementation):
+WEB/APP stored-result reports, safe criterion comparison and Humanities 1–5 stars;
+qualitative Math is not converted to fabricated scores. APP isolated branch
+`codex/essay-growth-ux` extends native shared History while preserving Claude/IAP.
+Shared fixtures and Android/iOS 360px/200% widget checks pass; real devices/store
+release and APP TTS unverified. No Provider prompt or financial mutation.
+Unified DOCS Oct09 confirms predecessor real Math E2E PASS, balance4, public HOLD;
+this supersedes the old integration blocker below. WEB deployment evidence: DOCS Oct09.
+
+
 ## Production integration — Oct09 — PARTIAL
 
 [Current integration](production-integration-2026-10-09.md): Claude Release/IAP + Codex
