@@ -477,11 +477,34 @@ replacement of three earlier universities. Evidence gaps do not remove any membe
 강남·을지 remain deferred special-format review and stay public. No autonomous
 university removal, ranking or future cap is permitted.
 
-Public display: all42 remain the default searchable, name-sorted view. A separate
+Public display: all42 remain searchable; default service-priority sorting supersedes
+the historical name-sorted default (see correction below). A separate
 주요 대학 view includes exact22 + universities with verified Seoul offerings.
 The additional>=8000-applicants rule awaits verified counts, not invented values;
 all potentially qualifying universities remain discoverable in the complete view.
 No GROUP/CORE or Owner rank is shown as university quality/prestige to students.
+
+### Catalog sorting correction — Owner override Oct11
+
+Default `서비스 우선순위순`: verified, currently gate-approved actual service first;
+then fixed22 focus universities; then additional Seoul/verified2027 >=8000 cohort;
+then future service. Explicitly deferred Kangnam/Eulji are last, never removed.
+Current public HOLD and read model provide no gate-approved ready IDs. Presence of
+published questions or historical E2E alone never promotes a university to ready.
+Within each group, verified2027 university-wide applicant totals descend; unknown
+values use Korean name order. Do not sum overlapping tracks/campuses. All current
+applicant/rate fields remain NULL. Thus Gachon leads focus22 alphabetically, while
+Cau/SKKU remain in focus22 rather than being asserted as numeric ranks2/3.
+The requested Gachon→Cau→SKKU order cannot be established from verified numbers;
+Owner was asked whether explicit ordered22 should override unknown-name fallback.
+Without a reply this release follows the directive's explicit unknown-data rule.
+
+Options: service priority (default), applicants, competition, university name. The
+last three are global sort orders; absent verified statistics, numeric options
+show a short alphabetical-fallback notice. Filtered offerings retain the original
+university's priority cohort; sorting precedes pagination and never removes matches.
+42 universities/49 offerings,30 preparation,22 focus/GroupA4/B18 preserved.
+No statistic, readiness, evaluator route or public permission is invented.
 
 ### Catalog visual reference — Owner override Oct11
 

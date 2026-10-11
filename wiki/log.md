@@ -3509,3 +3509,12 @@ search affordance now match the supplied visual structure. Sogang uses temporary
 monogram.114 WEB files/1026 tests +Python5 PASS; six widths/200% checked.
 [Policy/reference](roadmap-essay-lab.md#catalog-visual-reference--owner-override-oct11);
 [deployment evidence](essay-full-service-implementation-20261011.md). HOLD unchanged.
+
+## 2026-10-11 — Catalog sorting correction
+
+Default22 priority/Seoul/future groups; Kangnam/Eulji last; all42/49 preserved.
+Unknown2027 statistics stay unknown; global applicant/rate/name options provided.
+1034 WEB tests PASS/1 optional skip, lint/types/build/audits PASS; six widths and
+200% text checked. No Math/Credit/History/GATE change.
+[Policy](roadmap-essay-lab.md#catalog-sorting-correction--owner-override-oct11);
+[release evidence](essay-full-service-implementation-20261011.md).

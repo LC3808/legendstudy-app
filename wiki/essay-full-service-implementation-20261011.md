@@ -397,3 +397,43 @@ Existing worker credential renewal (prior Wiki expiryOct16) still needs operatio
 
 General user activation HOLD. No main merge, store submission, device debugging,
 Production DB apply, allowlist expansion or real Credit mutation occurred.
+
+## Oct11 Catalog sorting correction — LIVE / statistics unavailable
+
+- Implementation: LAB `d03acc6`; enlarged-label follow-up/deployed source
+  `00106fb46fb774fbddd6318c0ddd0a920acc2846`. Both pushed, remote SHA matched.
+- Production Pages `28e4c1ff-9c0d-4104-89da-e93a3bd6aa26`, success
+  2026-10-11T03:01:04.376194Z, actual `lab.legendstudy.com/essay-lab/` verified.
+  A same-commit automatic Git Preview was returned during the first final upload;
+  independent project-state verification caught it. Explicit Production retry
+  succeeded; preview success was never accepted as Production verification.
+- Rollback before this task: Pages `997c9086-0147-4fd4-9cac-a7d56990e85c`,
+  source `2fa8af7f0794f9f0a2e13225f42b8ede9d6db8c9`. Intermediate production
+  `bcde30b3`/`d03acc6` had sorting before the enlarged-label padding correction.
+- Live pagination visited all4 pages:42 distinct universities; first22 exactly the
+  Owner cohort including Pusan/Kyungpook; last2 Kangnam/Eulji.49 offerings unchanged.
+  Name option restores global alphabetical order. Search Gangnam/Eulji and combined
+  Seoul/math/2027 filter work; applicant/competition options disclose unknown fallback.
+- No verified2027 numerical totals exist in retained records. Default groups use
+  Korean name order within unknowns: Gachon/Konkuk/Kyonggi/Kyungpook first4;
+  SKKU12th/Cau19th remain within focus22. Requested Gachon→Cau→SKKU exact ranking
+  is NOT verified or fabricated. Clarification was offered; no answer at release.
+  [Canonical sorting policy](roadmap-essay-lab.md#catalog-sorting-correction--owner-override-oct11).
+- Tests:115 WEB files,1034 PASS/1 optional private-fixture skip; lint/typecheck,
+  webpack static build133 routes, boundary/secret audits PASS. New8 tests cover
+  groups/counts/filter/pagination/unknowns/verified metric fixtures/readiness inputs.
+  Synthetic metric fixtures are comparator tests, not actual admission statistics.
+- Browser local+live360/375/390/768/1280/1440: document width equals viewport;
+  grid1/2/4. Local200% root text-size simulation caught fixed filter heights and
+  long select clipping, both repaired and visually rechecked. No actual device QA.
+- Screenshot evidence under local visualization `catalog-sorting-20261011/`:
+  `live-desktop.png`, `live-mobile.png`. Actual selected default and rendered cards
+  were reviewed, not only DOM/test output.
+- Production configuration maps including flags/allowlist exactly equal before/after;
+  MATH_ENABLED=false, MATH_PROVIDER_CALLS_ENABLED=false; other reviewed-runtime and
+  recovery flags unset. Public AI HOLD. No DB, Provider call, Credit transaction,
+  migration, permission, Math/History/Payment/Toss/IAP contract or native UI change.
+
+Implementation/deployment complete for source-backed sorting; actual numerical
+2027 demand ranking remains unavailable. Future availability input requires both
+Provider verification and current user GATE; a published question is insufficient.
