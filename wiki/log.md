@@ -3518,3 +3518,12 @@ Unknown2027 statistics stay unknown; global applicant/rate/name options provided
 200% text checked. No Math/Credit/History/GATE change.
 [Policy](roadmap-essay-lab.md#catalog-sorting-correction--owner-override-oct11);
 [release evidence](essay-full-service-implementation-20261011.md).
+
+## 2026-10-11 — Demand research linkage and Owner fallback
+
+Recovered44-row applicant workbook, all officially unverified. Joined existing42 IDs,
+kept Korea Sejong/Yonsei Mirae separate, no aggregation or invented statistics.
+Owner22 order now applies to unknowns: Gachon/Cau/SKKU.117 WEB files/1041 PASS,
+1 optional skip; lint/types/build/audits PASS. No DB/Credit/runtime activation.
+[Policy/source](roadmap-essay-lab.md#demand-data-integration--owner-correction-oct11);
+[release evidence](essay-full-service-implementation-20261011.md).

@@ -3,7 +3,7 @@
 ## Essay Catalog/detail UX — Oct11
 
 Catalog service-priority sort LIVE;42/49,Owner22/retained30 preserved.
-Stats unknown: within-group 가나다순. Logos41/42; Sogang pending.
+44행 조사 연결; 미검증 수치는 Owner 순서 적용. Logos41/42; Sogang pending.
 [Policy/data](roadmap-essay-lab.md#2026-10-11-owner-final-policy--22-focus--30-retained--42-public).
 [Release/QA](essay-full-service-implementation-20261011.md). Runtime remains PARTIAL/HOLD.
 

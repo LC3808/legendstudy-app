@@ -484,7 +484,45 @@ The additional>=8000-applicants rule awaits verified counts, not invented values
 all potentially qualifying universities remain discoverable in the complete view.
 No GROUP/CORE or Owner rank is shown as university quality/prestige to students.
 
+### Demand data integration — Owner correction Oct11
+
+Supersedes the earlier unknown-statistics alphabetical fallback below. Source recovery
+found `2027_논술전형_44개대학_지원자수순위.xlsx` in existing Downloads, outside the
+Manus V2 Master. SHA256 `5bac5decaf773096df341f1037154c0748f1f2f667d4f29087e10d4cdc001efb`.
+Sheet `지원자수 내림차순`, A5:G48 holds44 university/campus rows; A2 and
+`안내 및 출처` B4:B6 explicitly say conversational first aggregation, official final
+cross-check pending, applications (not unique students). No official URLs or source
+verification dates exist. Previous statement “no statistics in retained Master” was
+true for that file but incomplete for the available research assets; recovered counts
+are **unverified**, not absent. Do not present them as official2027 statistics.
+
+LAB `data/research/essay-demand-2027.json` preserves44 scoped rows and original claims,
+source cells/hash/status; matches existing42 sourceUniversityIds and existing DB UUIDs
+(or null). Korea Sejong and Yonsei Mirae keep separate records and existing offering
+IDs; main-name records do not silently become multi-campus totals. No sums, inferred
+scopes, new university IDs or changes to42/49,30 preparation,22 focus/GroupA4/B18.
+
+Owner22 ordered list above remains independent of reportedRank/Applicants/Ratio.
+Default: actual gate-approved service → Owner22 → additional display → other catalog;
+Kangnam/Eulji remain explicit deferred tail. Inside groups verified2027 university-wide
+applicants descend; missing/unverified metrics use **Owner ordered22**, then names
+only for universities without an Owner order. Therefore current first3 are Gachon,
+Cau,SKKU. This is service priority, not an assertion that draft counts are verified.
+A future verified metric may change sorting inside a group, never Owner membership.
+
+The build-time projection `scripts/project-catalog-demand.mjs` joins evidence into
+`src/data/essay-catalog-demand.json`, excluding provisional numeric claims from browser
+bundles. Only separate official verification (2027, university-total scope, original
+source URL/date, validated count/rate) can populate public metrics. Duplicate totals,
+wrong year/identity/campus are rejected. Currently44 unverified/0 official verified.
+No student-visible numeric statistics are added. Applicant/rate options use verified
+numbers then the service/Owner fallback, with accurate notice. Explicit name sort
+stays alphabetical. Filters retain university priority even when offerings are filtered.
+Service display state and development priority remain separate; no readiness promotion.
+
 ### Catalog sorting correction — Owner override Oct11
+
+Historical first release; unknown fallback is superseded by the data integration above.
 
 Default `서비스 우선순위순`: verified, currently gate-approved actual service first;
 then fixed22 focus universities; then additional Seoul/verified2027 >=8000 cohort;

@@ -437,3 +437,60 @@ Production DB apply, allowlist expansion or real Credit mutation occurred.
 Implementation/deployment complete for source-backed sorting; actual numerical
 2027 demand ranking remains unavailable. Future availability input requires both
 Provider verification and current user GATE; a published question is insufficient.
+
+## Oct11 Demand data integration — Owner policy correction
+
+Existing44-row applicant workbook recovered from Downloads; its first aggregation
+explicitly requires official cross-check. LAB research extraction links all44 rows to
+42 existing source IDs and canonical UUID/nulls. Explicit Korea Sejong/Yonsei Mirae
+campus rows preserved, no invented university/combined campus total. Source cells,
+original claims, verification notice and SHA retained; no workbook edits.
+[Source and current policy](roadmap-essay-lab.md#demand-data-integration--owner-correction-oct11).
+Prior “statistics absent” conclusion was limited to the Master; broader available
+research contains unverified counts. That oversight is corrected without promoting
+draft claims to official statistics.
+
+Owner22 ordered policy is separate from research rank and future verified metrics.
+Default first3 now Gachon/Cau/SKKU; all22 in exact Owner order while no official totals
+are verified. Verified totals will sort descending within cohorts, unknowns use Owner
+order, then names for entries without Owner order. Explicit name sort unchanged.
+Service future/provision state never reduces development priority. Gangnam/Eulji last.
+42 universities/49 offerings,30 preparation,22 focus preserved. Raw research numbers
+excluded from browser bundles; public metrics NULL pending official verification.
+
+Preservation review seven answers: (1) source research claims are retained with
+2027/year and source cells, not student events; (2) source hash/ranges reproduce44
+rows; (3) no existing historical record overwritten, old policies labelled historical;
+(4) canonical university IDs reused, no student identity touched; (5) external admission
+research is separate from student Learning/Decision/Outcome; (6) bounded non-personal
+aggregate claims only, no permission expansion; (7) derived public projection separates
+unverified claims, verified totals and Owner planning order, rejecting ambiguous sums.
+
+Validation:117 WEB files/1041 PASS,1 existing optional private-fixture skip;
+post-type-fix related4 files/18 PASS; lint/typecheck/build133 routes/audits PASS.
+Projection checks verify44→42 join, campus/identity/year, distinct source records,
+source ratio arithmetic, exclusion of unverified numbers, duplicate-total denial,
+future verified metric ordering and policy membership preservation. Browser local
+six widths360/375/390/768/1280/1440 no horizontal overflow; compound filters preserve
+Owner sequence, deferred university search works. No CSS/design/detail code change.
+No actual Provider/Credit transaction, DB migration or mobile device debugging.
+
+### Demand integration release verification
+
+LAB source `2f22fe62cf79299f356eb0f797846b9235bd3b4a` pushed/remote-matched;
+Production Pages `ff21b878-c428-494e-bdae-2870c90cbe13`, success
+2026-10-11T03:10:03.465758Z. Existing OAuth refresh succeeded with no permission
+change. Production config maps/allowlist identical before/after; public AI HOLD.
+Rollback Pages `28e4c1ff-9c0d-4104-89da-e93a3bd6aa26`, source `00106fb`.
+Live domain all4 pages:42 unique universities; first22 exactly Owner's sequence,
+first3 Gachon/Cau/SKKU and final2 Gangnam/Eulji. Explicit name sort restores
+Gachon/Catholic/Gangnam. Competition fallback correctly discloses service priority.
+Seoul+Math+2027 filter, university search, Cau detail/official sources/disabled future
+service verified. Mobile360 scrollWidth=360, existing design retained. Screenshots:
+local visualizations `catalog-demand-20261011/live-desktop.png` and `live-mobile.png`.
+
+COMPLETE for authorized data linkage, fallback policy, tests and deployment. Official
+cross-verification of44 provisional statistics remains pending as the source states;
+no official-value claim or numeric ranking was fabricated. No Owner action required
+for this release. Future verification must preserve scope/provenance and rerun the
+projection/checks; no new data or general AI activation is implied.
