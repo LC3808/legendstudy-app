@@ -433,6 +433,86 @@ current state live in [current-status.md](current-status.md).
 - **Status on 2026-09-18: Core selection is HOLD until the Owner review next
   week.** This historical entry does not override the 2026-09-20 product/platform decision.
 
+### 2026-10-11 Owner final policy — 22 focus / 30 retained / 42 public
+
+This explicit named decision supersedes prior uncertainty about the first focus set;
+it does not reduce the existing30 preparation cohort or42-university/49-offering
+Public Catalog. The Owner designates the following22 as the first development focus,
+described as2027 applicants top22. That approval is a planning authority, not independent
+verification of numerical applicants/rates. The retained Master contains no verified
+applicant/competition fields, so the UI must not invent numbers or statistical ordering.
+
+1. 가천대학교
+2. 중앙대학교
+3. 성균관대학교
+4. 경희대학교
+5. 한양대학교
+6. 한국외국어대학교
+7. 고려대학교
+8. 국민대학교
+9. 건국대학교
+10. 서강대학교
+11. 이화여자대학교
+12. 숭실대학교
+13. 인하대학교
+14. 동국대학교
+15. 세종대학교
+16. 연세대학교
+17. 홍익대학교
+18. 아주대학교
+19. 삼육대학교
+20. 경북대학교
+21. 경기대학교
+22. 부산대학교
+
+GROUP A: 가천·삼육·경북·부산 (short-answer-oriented development planning).
+GROUP B: the remaining18 (long-answer-oriented development planning). These are
+internal UX/work groups, not official admission labels, rubric definitions or evaluator
+routing. E.g. Pusan official integrated-humanities/math labels remain unchanged;
+Math questions always retain the existing Math contract. Unknowns are not guessed.
+
+The existing30 research preparation rows below remain intact. 고려·국민·삼육 are
+additional Owner focus members outside that preserved cohort: union33, not a forced
+replacement of three earlier universities. Evidence gaps do not remove any member.
+강남·을지 remain deferred special-format review and stay public. No autonomous
+university removal, ranking or future cap is permitted.
+
+Public display: all42 remain the default searchable, name-sorted view. A separate
+주요 대학 view includes exact22 + universities with verified Seoul offerings.
+The additional>=8000-applicants rule awaits verified counts, not invented values;
+all potentially qualifying universities remain discoverable in the complete view.
+No GROUP/CORE or Owner rank is shown as university quality/prestige to students.
+
+### Catalog/detail UX and public data projection — Oct11
+
+Reuse one generated Catalog, shared original university/offering/source IDs and
+27 actual DB UUIDs/15 nulls. UI does not create a second database or guess missing IDs.
+White cards sit on a muted surface, with restrained shadow, type/status badges,
+Dark Navy44–48px actions, equal-row button alignment, keyboard focus and reduced motion.
+Intrinsic rem-based columns reflow4/2/1 and at enlarged text. Detail has university
+Hero, section navigation, structured admissions facts, scoped characteristics,
+intake/schedule facts, actual past questions, honest AI availability and separate
+source cards. Dates are original verification dates; admissionyear and examyear stay
+separate. No forced fixed heights or clipped long campus names.
+
+APP `tool/essay_lab/public_catalog.py` extends the existing projection with per-Master
+row facts: intake/time/date/answer-format/CSAT/weights when recorded, unknowns omitted.
+Separate recruitment tracks are never summed (e.g. Pusan general/regional21).
+Source status and document basis travel with each row; implementation-plan material
+is labelled as such. Existing10 Manus official-source inventories supply reference
+links only. Private Evidence Packages, PDF bodies, model prompts, answers and
+rights-gated content are not copied into the public bundle. Verified literal 약술/단답
+may add a discovery badge, never an engine rule. Applicants/rates remain null.
+
+Preservation review: source/recorded dates separate; raw Master/research kept immutable;
+projection regenerated with hashes; no learning/history UPDATE; no Auth UID change;
+Learning/Decision/Outcome data untouched; public admissions facts only/no new personal
+collection; derived UI labels and Owner priority never treated as raw official facts.
+Existing42:58 writer/mobile tabs, five-level results/rewrite/growth/History, Math,
+Credit Ledger, Auth, Quality and evaluation GATE remain untouched. Public AI HOLD.
+Release verification belongs in the existing task evidence/current log, not duplicated
+here. Future applicant sorting requires scoped official2027 statistics first.
+
 ### 2026-10-11 Owner scope correction — current service preparation scope
 
 **Current authority: priority service preparation at least20 universities, at least15

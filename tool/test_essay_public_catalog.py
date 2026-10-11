@@ -19,4 +19,16 @@ class PublicCatalogTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'DUPLICATE_OFFERING'):build(c,i)
   c,i=self.fixture();c['offerings'][0]['rawMaster'][0]['evidence_status']='UNVERIFIED'
   with self.assertRaisesRegex(ValueError,'UNVERIFIED_UNIVERSITY'):build(c,i)
+ def test_admission_projection_omits_unknowns_and_preserves_source_scope(self):
+  c,i=self.fixture();r=c['offerings'][0]['rawMaster'][0]
+  r.update(inventory_id='row-1',recruitment_track='지역인재',intake_count='21명',exam_date='NOT PUBLISHED',essay_weight='80%',notes='시행계획 값',private_answer='must not be public')
+  d=build(c,i)['universities'][0]['offerings'][0]['admissionDetails'][0]
+  self.assertEqual(d['facts'],dict(intake_count='21명',essay_weight='80%'))
+  self.assertEqual(d['name'],'지역인재');self.assertEqual(d['documentBasis'],'시행계획 포함')
+  self.assertIsNone(d['applicants']);self.assertIsNone(d['competitionRatio']);self.assertNotIn('private_answer',str(d))
+ def test_development_group_never_generates_short_answer_type(self):
+  c,i=self.fixture();c['offerings'][0]['rawMaster'][0]['essay_type']='인문·사회 통합 논술 및 수학 논술'
+  self.assertNotIn('단답·약술형',build(c,i)['universities'][0]['offerings'][0]['types'])
+  c['offerings'][0]['rawMaster'][0]['essay_type']='국어·수학 약술형 논술'
+  self.assertIn('단답·약술형',build(c,i)['universities'][0]['offerings'][0]['types'])
 if __name__=='__main__':unittest.main()
