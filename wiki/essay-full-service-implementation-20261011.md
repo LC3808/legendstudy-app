@@ -5,7 +5,72 @@ Branch: `codex/essay-full-service-implementation` in APP, LAB and DOCS.
 This is the Oct10 Owner full-service directive continued past midnight KST. It
 supersedes the V2 preview-only stopping point, not publication or DB approval gates.
 
-## Oct11 Catalog release and university scope correction — current checkpoint
+## Oct11 Catalog/detail UX final refinement — COMPLETE
+
+Owner-approved UI release is live at https://lab.legendstudy.com/essay-lab/ .
+Production source `d39cb5b29565ae48ccd31188402d347e72145388`, Pages deployment
+`437bd406-9afe-4a5c-80da-98d098802ac9`, success `2026-10-11T02:10:07.770175Z`.
+Source was committed, pushed and exact remote SHA verified before deployment.
+Existing Pages static export/Functions procedure; production branch selector main
+is not a Git main merge. Later closeout commits are documentation only.
+Rollback point: prior UI deployment `9d802cb2-13c8-42b1-8909-6c2bcccde573`, source
+`35fd8f97aa791aeb2bdc855c8c06a3ab7a22f867`; rollback not performed. Intermediate
+`b4147413`/`e7622b4` was replaced after live QA found unresolved source-note wording.
+
+### UI, data and Owner policy
+
+White cards with gray border/soft shadow, Navy white-text44–48px CTA, visible focus,
+type/status badges and4/2/1 intrinsic grid. University detail now separates Hero,
+admissions facts, essay characteristics, recruitment/schedule, actual exam-year
+questions, disabled AI service panel and official sources. Existing search, filters,
+pagination, campus/source IDs,27 DB UUIDs and15 nullable university IDs preserved.
+DB-unmapped Eulji still opens both campus records with an honest empty question state.
+Existing writer42:58/mobile switch, results/rewrite/comparison, History unchanged.
+
+Owner22 focus universities and GroupA4/B18 are fixed by source ID in existing read
+model policy; original30 preparation cohort remains intact (union33). Public42/49
+unchanged. Default university-name order; optional 주요 대학 shows22 + Seoul=32.
+No verified applicant counts/competition rates exist in retained source fields, so
+no invented statistical sort or8000-applicant qualification. This data gap does not
+remove any university or redefine the Owner22 list. Internal groups never select
+question evaluators. Full named list stays in the existing roadmap, not duplicated.
+
+Reused52 published Master rows within49 offerings,10 Manus research records and27
+additional official reference links. Facts preserve per-track scope/source basis,
+2027 admissions year and original verification dates; never sum distinct tracks.
+Only confirmed/partial official source fields are projected. Unresolved value markers
+are omitted even when embedded mid-sentence; original private research unchanged.
+No question text, private Evidence Package, answer or prompt newly published.
+Existing Evidence Packages remain runtime inputs, not public admission statistics.
+
+### Validation and limits
+
+- Full WEB113 files:1022 PASS,1 optional private-fixture skip; Python projection5 PASS.
+- Lint/typecheck/boundary audit/GitHub readiness/Node22 webpack static build PASS.
+- Catalog42/49, Owner22, retained30, GroupA4/B18, original source identity/date/campus
+  preservation, filters, unknown-statistic omission and disabled service regression PASS.
+- Browser local and actual production catalog/Konkuk detail:360/375/390/768/1280/1440
+  no horizontal overflow; desktop4/tablet2/mobile1 cards. Mobile Eulji two-campus
+  detail and disabled empty state verified. Actual production search 건국 + Seoul +
+  Math +2027 returns1; 주요 대학32 and all42 verified.
+- 200% text tested using root-font32px in a copy of built output, all6 widths for
+  catalog/detail no overflow. This is text-size simulation, not device QA/browser zoom.
+- Keyboard Tab focus, semantic headings/labels, external rel protection,44px targets
+  and reduced-motion styles checked; no claim of a full screen-reader/WCAG audit.
+- Before captured from actual old Production Konkuk and university list; after from
+  actual new Production. Source URLs/dates and rendered links checked; this is not
+  a fresh availability audit of every external admissions website.
+
+Production env maps compare exactly equal before/after (including allowlist); Math
+flags remain false, reviewed/recovery flags unset. No new Provider call, Credit
+transaction, migration, RLS/permissions, Worker/Auth/Payment/Toss/IAP change or mobile
+debugging. Existing Math regression suite passes; prior real E2E is preserved, not
+repeated or claimed as new evidence. Public AI activation remains **HOLD**. Official
+Humanities production readiness remains the separately documented PARTIAL task.
+No Owner action is required for this UI deployment. Future metadata/recovery SQL,
+missing verified statistics and public activation retain their existing gates.
+
+## Prior Oct11 Catalog release and university scope correction
 
 **Catalog release COMPLETE / Scope correction COMPLETE / official Humanities runtime
 still PARTIAL.** Owner authorized migration-free production deployment then corrected
