@@ -2,7 +2,8 @@
 
 ## Essay Catalog/detail UX — Oct11
 
-Production UI refined;42/49 preserved, Owner22 focus + retained30 preparation.
+Production visual reference applied; logos41/42 (Sogang pending),42/49 preserved.
+Owner22 focus + retained30 preparation.
 [Policy/data](roadmap-essay-lab.md#2026-10-11-owner-final-policy--22-focus--30-retained--42-public).
 [Release/QA](essay-full-service-implementation-20261011.md). Runtime remains PARTIAL/HOLD.
 

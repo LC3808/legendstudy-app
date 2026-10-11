@@ -3501,3 +3501,11 @@ Cards/detail IA, scoped facts, official sources, disabled service states impleme
 Owner22/GroupA4/B18 fixed; original30 retained. Unknown statistics not ranked.
 WEB1022 tests/Python5/lint/types/build PASS; responsive/live deployment evidence in
 [existing task record](essay-full-service-implementation-20261011.md). No DB/Credit writes.
+
+## 2026-10-11 — Owner Catalog visual fidelity
+
+Official logos41/42, region/type pills, icon status rows, compact black CTA and
+search affordance now match the supplied visual structure. Sogang uses temporary
+monogram.114 WEB files/1026 tests +Python5 PASS; six widths/200% checked.
+[Policy/reference](roadmap-essay-lab.md#catalog-visual-reference--owner-override-oct11);
+[deployment evidence](essay-full-service-implementation-20261011.md). HOLD unchanged.

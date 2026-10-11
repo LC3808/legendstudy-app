@@ -5,6 +5,48 @@ Branch: `codex/essay-full-service-implementation` in APP, LAB and DOCS.
 This is the Oct10 Owner full-service directive continued past midnight KST. It
 supersedes the V2 preview-only stopping point, not publication or DB approval gates.
 
+## Oct11 University Catalog visual fidelity — UI LIVE / logo1 pending
+
+Owner supplied target image is now the visual authority; the policy and reference
+hash are in [the existing roadmap](roadmap-essay-lab.md#catalog-visual-reference--owner-override-oct11).
+LAB release `2fa8af7f0794f9f0a2e13225f42b8ede9d6db8c9` pushed/remote-verified then
+deployed as Pages `997c9086-0147-4fd4-9cac-a7d56990e85c` at2026-10-11T02:47:15.580263Z.
+Canonical live domain verified, not inferred from Git. Rollback point is preceding
+`437bd406-9afe-4a5c-80da-98d098802ac9` / source `d39cb5b29565ae48ccd31188402d347e72145388`.
+No main merge, migration, new Provider call, Credit transaction or device debugging.
+
+Official university logos41/42 are stored unmodified with source URL/date/hash in
+LAB manifest; Sogang1 uses the explicitly allowed temporary monogram. Main/admissions
+retrieval did not yield a usable official logo. No unofficial or generated substitute.
+Original official wordmarks differ from the target's chosen emblem variants; white
+marks use contrast surfaces. Reference's unverified type labels and incorrect region
+labels are not copied. Example: Catholic Sungsim is Gyeonggi/Incheon, not Seoul.
+
+Reference structure implemented: logo/region top row, name/campus/year, semantic
+colored types, divider + document/book/sparkle status lines and aligned black44px
+CTA; layered shadows/radius18,200ms subtle hover/reduced motion, search icon and48px
+aligned filters. Details share logo/region/type system. Existing42/49,30 preparation,
+22 focus and GroupA/B preserved. Region filter contract unchanged; raw sourceRegion
+added only to the generated read model to avoid guessing Daegu/Busan labels.
+No verified applicant/rate statistics; default name sorting preserved.
+
+Checks:114 WEB files/1026 PASS,1 optional private-fixture skip; Python5 PASS;
+lint/typecheck/boundary/audit/Node22 webpack build PASS,41 original asset hashes match.
+Actual browser catalog/detail at360/375/390/768/1280/1440 have no horizontal overflow;
+4/2/1 cards verified.200% root-font32px built-copy simulation also passes all6 widths
+for both pages; no claim of physical-device QA or a comprehensive accessibility audit.
+Search/filter/detail links and disabled AI state verified on live domain. Before/target
+versus actual Production screenshots compared side-by-side; official logo originals,
+source-backed types and unavailable statistics are intentional differences. Final UI
+build includes the corrected maximum4 columns found during visual QA.
+
+Production deployment env maps (including allowlist) compare exactly equal before/
+after; Math flags false and reviewed/recovery flags unset. Public AI **HOLD** and
+Math/Credit/History/evaluation contracts preserved. Scope is visual UI only; previous
+real E2E is not relabelled as a new run. Overall fidelity report PARTIAL solely for
+one pending official logo; implementation/deployment and visual checks complete.
+No Owner action or additional approval required to use the deployed UI.
+
 ## Oct11 Catalog/detail UX final refinement — COMPLETE
 
 Owner-approved UI release is live at https://lab.legendstudy.com/essay-lab/ .

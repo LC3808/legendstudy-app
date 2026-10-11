@@ -54,7 +54,7 @@ def build(catalog,identities,research=None):
   for label,pattern in [('인문',r'인문|언어|사회논술'),('경제·경영',r'경제|경영'),('수리',r'수리|수학\s*논술'),('과학',r'과학\s*논술|과학\([0-9]+%\)|과학 제시문 서논술'),('단답·약술형',r'약술|단답')]:
    if re.search(pattern,text):types.append(label)
   sources=list(dict.fromkeys(r['official_source_url'] for r in rows if source_url(r.get('official_source_url',''))))
-  item['offerings'].append(dict(id=o['id'],campus=o['campus'],region=region(o['region']),admissionYear=o['year'],admissionNames=o['admissionNames'],types=types,rawEssayTypes=raw_types,sourceIds=o['sourceIds'],sources=sources,verifiedAt=o['checkedAt'],sourceStatus=o['sourceStatus'],admissionDetails=admission_details(rows)))
+  item['offerings'].append(dict(id=o['id'],campus=o['campus'],region=region(o['region']),sourceRegion=o['region'],admissionYear=o['year'],admissionNames=o['admissionNames'],types=types,rawEssayTypes=raw_types,sourceIds=o['sourceIds'],sources=sources,verifiedAt=o['checkedAt'],sourceStatus=o['sourceStatus'],admissionDetails=admission_details(rows)))
  for entry in research or []:
   match=next((u for u in out.values() if u['name']==entry['university']),None)
   if match:

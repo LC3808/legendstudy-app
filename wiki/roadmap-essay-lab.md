@@ -483,6 +483,32 @@ The additional>=8000-applicants rule awaits verified counts, not invented values
 all potentially qualifying universities remain discoverable in the complete view.
 No GROUP/CORE or Owner rank is shown as university quality/prestige to students.
 
+### Catalog visual reference — Owner override Oct11
+
+The supplied `codex-clipboard-eccf1638-53f2-4181-af8a-7953e0bd8dd2.png` is the current
+visual target (SHA256 `fdf7f522c059425b0b29cc82be62fd714d3e00f824f5b0b94610efe2cb780987`).
+Card top: original official university logo + evidence-derived region pill; then name,
+campus/year, colored essay-type pills, divider, document/book/sparkle status rows and
+full-width black44px CTA. Soft layered shadow/radius18, subtle hover/focus and reduced
+motion. Search icon/placeholder, aligned48px inputs. Desktop4/tablet2/mobile1; text
+expansion reflows without truncation. Detail uses the same logo/region/type system.
+This explicit three-row status request supersedes the previous single-status card.
+
+Actual source data takes priority over illustrative image labels: Gachon/Kangnam
+unverified types are not copied from the reference; Catholic Sungsim remains
+Gyeonggi/Incheon, multi-campus universities retain multiple evidence-derived regions.
+No recommendation ranking or invented applicant statistics.22/30/42 cohorts unchanged.
+Raw sourceRegion is retained alongside the existing broad region-filter contract.
+
+Official logo manifest lives in LAB `src/data/university-logos.json` with source page,
+asset URL, verification date and original SHA.41 retrieved/visually checked; Sogang1
+remains temporary monogram because a usable official asset could not be retrieved.
+Official wordmark/symbol variations stay original, uncropped and undistorted; white
+variants use a dark presentation surface. No generated/unofficial substitute logos.
+48px mobile/56px desktop contain slots. This can differ from the reference's chosen
+emblem variant while preserving the university identity. No new data collection,
+student identity changes, UPDATE/history loss or inferred evaluation readiness.
+
 ### Catalog/detail UX and public data projection — Oct11
 
 Reuse one generated Catalog, shared original university/offering/source IDs and
