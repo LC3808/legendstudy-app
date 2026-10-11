@@ -1,18 +1,16 @@
 # Current Status
 
-## Essay runtime/catalog — Oct11 — PARTIAL
+## Essay Catalog / scope correction — Oct11
 
-42-university discovery + Sep28 UI + private worker adapter implemented. Tests PASS;
-rights/host/real E2E pending. No Production writes/deploy; HOLD.
-[Evidence/next steps](essay-full-service-implementation-20261011.md).
+Catalog42/49 Production deployed; preparation30 (metro28 + Pusan/Kyungpook).
+[Current scope/readiness](roadmap-essay-lab.md#2026-10-11-owner-scope-correction--current-service-preparation-scope).
+[Release evidence](essay-full-service-implementation-20261011.md). AI runtime PARTIAL/HOLD.
 
 ## Manus Essay overnight V2 — Oct10 — LOCAL COMPLETE / PUBLIC HOLD
 
-Independent `codex/essay-research-overnight-v2`:12 source hashes verified;53 Master/
-50 Offering/101 Track links valid; future-date052 quarantined. Existing LAB routes
-now have local-only university/year/campus/track preview; production excludes raw
-research. Reused3 historical evidence packages;10 import candidates remain rights/
-source gated. Python10/WEB13/typecheck/lint/build PASS; no device/Provider/Credit writes.
+V2 retained12 source hashes;53 Master/50 Offering/101 Track,052 quarantined.
+Raw research stays private. Historical packages preserved; runtime rights gates remain.
+Python10/WEB13/typecheck/lint/build previously PASS; no device/Provider/Credit writes.
 [Full result and restore](essay-lab-manus-handoff-20261010.md).
 
 Prior QA metadata APP4de2125/LABc977493 unchanged:34 isolated checks passed previously,

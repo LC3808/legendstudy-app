@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-10-11 — Catalog Production release and Owner scope correction
+
+Owner overrides historical10–15 cap. Restored all30 Manus inventory universities
+(28 unique metro + Pusan/Kyungpook), not only11 detailed-review entries;19 restored.
+A–H matrix/source/region/type comparison in [existing roadmap](roadmap-essay-lab.md).
+Public42/49 deployed source35fd8f9, Pages9d802cb2; real-domain search/filter/detail
+and6 widths PASS; local200% text simulation PASS. WEB1016 PASS/1 optional skip;
+lint/types/build/boundaries PASS. Env/allowlist unchanged; Math8 completed/1 failed,
+general questions/evaluations0. No migration/Provider/Credit/native changes; HOLD.
+
 ## 2026-10-11 — Runtime adapter / approved human UI / national catalog
 
 Continued existing branch:42 universities/49 offerings (27 DB identities/15 null),

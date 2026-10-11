@@ -433,6 +433,118 @@ current state live in [current-status.md](current-status.md).
 - **Status on 2026-09-18: Core selection is HOLD until the Owner review next
   week.** This historical entry does not override the 2026-09-20 product/platform decision.
 
+### 2026-10-11 Owner scope correction — current service preparation scope
+
+**Current authority: priority service preparation at least20 universities, at least15
+in Seoul/Gyeonggi/Incheon, with Pusan National and Kyungpook National required.
+20 is a floor, not a ceiling.** The historical10–15 Core strategy above is retained
+as the original validation strategy; it MUST NOT limit current preparation scope.
+Scope/A-stage membership is distinct from CORE assignment and production activation.
+
+#### Restoration basis and correction
+
+The previous11-entry note incorrectly used the10 deeply reviewed Manus universities
+plus Owner-priority Pusan as the service preparation queue. It was not an implemented
+catalog/API limit: all42 universities/49 offerings were already deployed. Nevertheless,
+the planning scope was too narrow and is superseded here, preserving all11 entries.
+
+Unified Wiki/current/Daily, APP roadmap and historical Owner checkpoint, Git strategy
+history, Manus V2 policy/research and2027 Master were compared. The retained policy
+records15 **candidates** with Owner decisions blank, not a later approved named list.
+No complete previously approved expanded membership was found in the available
+records; do not invent its approval. The Owner's current correction takes precedence.
+
+Manus `research/essay-lab-research-report.md` §1/§4 explicitly names a **30-university
+inventory**:10 detailed research entries +20 less-reviewed candidates. Restore ALL30
+as the current A-stage preparation set, not an arbitrary new top20 or ranking.
+The old research label `Hold` for20 candidates means insufficient evaluation evidence,
+not removal from A-stage. Compare each with the existing public Catalog/Master source
+IDs, campus, type and verified official admissions links; unknowns stay unknown.
+
+**Current30 / unique metropolitan28**: Seoul offerings21, Gyeonggi/Incheon offerings11,
+with4 universities present in both (경희·성균관·중앙·한국외대). These regional counts
+are overlapping university counts, not32 unique metropolitan universities. Pusan and
+Kyungpook add2. Campus distinctions for Yonsei/Kyunghee/HUFS/etc remain unchanged.
+No university is deleted from the full42. Further Owner-approved membership is added
+without a20/30 cap; the remaining12 public entries are retained, not declared excluded
+from future service. Gangnam/Eulji retain explicit special-format deferred review.
+
+Previously missing from the11-entry preparation note (19 restored):
+가천대학교, 가톨릭대학교, 경기대학교, 상명대학교, 서강대학교, 서경대학교, 서울과학기술대학교, 서울시립대학교, 서울여자대학교, 성신여자대학교, 세종대학교, 숭실대학교, 아주대학교, 이화여자대학교, 인하대학교, 중앙대학교, 한국외국어대학교, 한국항공대학교, 홍익대학교.
+
+#### Readiness contract (independent evidence states A–H)
+
+A = preparation target; B = official material evidence; C = structured questions;
+D = rubric; E = private Evidence Package; F = production Worker connection;
+G = actual Provider proof for the exact official question/runtime; H = public activation.
+A never requires B–H completion. B admissions URL ≠ official question/rubric acquired.
+Research `READY` ≠ rights cleared, structured/imported, Worker deployed or Provider
+verified. Existing historical pilots/Math E2E are retained but not relabelled as
+30-university official Humanities production verification. No new Provider call.
+
+All30 have verified-at2026-09-18 admissions source links in the existing49-offering
+projection.10 have retained detailed research;5 have scoped official inner-content/
+rubric findings (경희·동국·성균관·한양·광운).3 historical private packages are retained
+(SKKU2025, Hanyang2024 afternoon2, Sookmyung2025), not newly published. SKKU2025 has
+3 locally structured questions/9 criteria/1 package; Q1 remains the first runtime
+integration target, Q2/Q3 stay graph-blocked. Hanyang canonical-exam mapping remains
+unverified. Other unknown/unstructured questions and rubric gaps are not marked PASS.
+F/G current official Humanities production-ready count0; H HOLD for every row.
+
+| University / source ID | Region / campus scope / verified public types | A | B official material | C questions | D rubric | E package | F Worker | G Provider | H |
+|---|---|---|---|---|---|---|---|---|---|
+| 가천대학교 (`gachon`) | 경기·인천; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://admission.gachon.ac.kr/upload/BBS0021/20260522154511HBZYTW.PDF) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 가톨릭대학교 (`catholic`) | 경기·인천; 1 전형; 수리·인문 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90/%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 건국대학교 (`konkuk`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://admission.konkuk.ac.kr/admission/37981/subview.do) · 상세 연구/미추출 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 경기대학교 (`kyonggi`) | 경기·인천; 1 전형; 수리·인문 | 대상 | [전형 출처](https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDownload.do?FILE_ORG_NM=%EA%B2%BD%EA%B8%B0%EB%8C%80_2027%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95%28%EA%B3%B5%EC%A7%80%EC%9A%A9%29.pdf&FILE_NM=202606/1781506250597_0.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 경북대학교 (`knu`) | 기타 지역; 1 전형; 인문 | 대상 | [전형 출처](https://ipsi1.knu.ac.kr/mojib/?m_type=SUSI) · 상세 연구/미추출 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 경희대학교 (`kyunghee`) | 경기·인천 / 서울; 2 전형; 과학·수리·인문 | 대상 | [전형 출처](https://iphak.khu.ac.kr/file/download.do?sfn=20260826010029371_2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf&ofn=2027%ed%95%99%eb%85%84%eb%8f%84+%ea%b2%bd%ed%9d%ac%eb%8c%80%ed%95%99%ea%b5%90+%ec%88%98%ec%8b%9c+%eb%aa%a8%ec%a7%91%ec%9a%94%ea%b0%95-%ec%b5%9c%ec%a2%85_20260811%28%ea%b3%b5%ec%a7%80%29.pdf) · 범위 한정 원문 확인 | 원문 확인/구조화 대기 | 범위 한정 확인/정규화 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 광운대학교 (`kwangwoon`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://iphak.kw.ac.kr/upload_data/mojib/20260526155135_27.pdf) · 범위 한정 원문 확인 | 원문 확인/구조화 대기 | 범위 한정 확인/정규화 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 단국대학교 (`dankook`) | 경기·인천; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://ipsi.dankook.ac.kr/jukjeon/notice/list.html?bbsid=juk_info&bltn_seq=50954&mode=view&ctg_cd=01) · 상세 연구/미추출 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 동국대학교 (`dongguk`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://ipsi.dongguk.edu/upload/file/20260623144248DQV7LA.PDF) · 범위 한정 원문 확인 | 원문 확인/구조화 대기 | 범위 한정 확인/정규화 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 부산대학교 (`pnu`) | 기타 지역; 1 전형; 수리·인문 | 대상 | [전형 출처](https://go.pusan.ac.kr/college_2016/pages/index.asp?p=3&mj=01) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 상명대학교 (`sangmyung`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](http://admission.smu.ac.kr/_seoul/board/bbs.html?bbsid=seoul_dataroom&ctg_cd=susi) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 서강대학교 (`sogang`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](http://admission.sogang.ac.kr/upload/GUIDES/20250430181056FTR2FK.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 서경대학교 (`seokyeong`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2026/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EA%B2%BD%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 서울과학기술대학교 (`seoultech`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90/%EC%84%9C%EC%9A%B8%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 서울시립대학교 (`uos`) | 서울; 1 전형; 수리 | 대상 | [전형 출처](https://file.uos.ac.kr/upload/admission/2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%88%98%EC%8B%9C%EB%AA%A8%EC%A7%91%20%EC%8B%A0%EC%9E%85%EC%83%9D%20%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 서울여자대학교 (`swu`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://www.swu.ac.kr/bbs/swu/157/138473/artclView.do?layout=unknown) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 성균관대학교 (`skku`) | 경기·인천 / 서울; 2 전형; 수리 | 대상 | [전형 출처](https://admission.skku.edu/admission/html/rolling/guide.html) · 범위 한정 원문 확인 | 2025 3문항 로컬 | 9기준 로컬 | 기존 비공개 보존 | 어댑터 계약만/미배포 | 운영 미검증 | HOLD |
+| 성신여자대학교 (`sungshin`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://ipsi.sungshin.ac.kr/guide/dataroom.htm?bbsid=notice&ctg_cd=all&mode=view&bltn_seq=36050) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 세종대학교 (`sejong`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://ipsi.sejong.ac.kr/ipsi/early/notice.do?mode=view&articleNo=2785) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 숙명여자대학교 (`sookmyung`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://admission.sookmyung.ac.kr/admission/html/counsel/noticeView.asp?p_board_idx=54119) · 상세 연구/미추출 | 보존 패키지/운영 미연결 | 기존 패키지 범위/재검증 | 기존 비공개 보존 | 운영 미연결 | 운영 미검증 | HOLD |
+| 숭실대학교 (`soongsil`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://iphak.ssu.ac.kr/upload/2027_plan.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 아주대학교 (`ajou`) | 경기·인천; 1 전형; 과학·수리·인문 | 대상 | [전형 출처](https://www.iajou.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=4601) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 연세대학교 (`yonsei`) | 기타 지역 / 서울; 2 전형; 과학·수리·인문 | 대상 | [전형 출처](https://mirae.yonsei.ac.kr/wj/2349/subview.do) · 상세 연구/미추출 | 미구조화 | NEEDS_RUBRIC | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 이화여자대학교 (`ewha`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://admission.ewha.ac.kr/admission/html/ewharo/noticeView.asp?idx=14986) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 인하대학교 (`inha`) | 경기·인천; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90/%EC%9D%B8%ED%95%98%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 중앙대학교 (`cau`) | 경기·인천 / 서울; 2 전형; 유형 미확인 | 대상 | [전형 출처](https://admission.cau.ac.kr/) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 한국외국어대학교 (`hufs`) | 경기·인천 / 서울; 2 전형; 유형 미확인 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%EC%99%B8%EA%B5%AD%EC%96%B4%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 한국항공대학교 (`kau`) | 경기·인천; 1 전형; 수리·인문 | 대상 | [전형 출처](https://cdn013.negagea.net/dgsmidc/omr/seoul/web/univ_info2025/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90/%ED%95%9C%EA%B5%AD%ED%95%AD%EA%B3%B5%EB%8C%80%ED%95%99%EA%B5%90_2027%ED%95%99%EB%85%84%EB%8F%84_%EB%8C%80%ED%95%99%EC%9E%85%ED%95%99%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+| 한양대학교 (`hanyang`) | 서울; 1 전형; 유형 미확인 | 대상 | [전형 출처](https://site.hanyang.ac.kr/documents/11081467/141054756/2027%ED%95%99%EB%85%84%EB%8F%84+%ED%95%9C%EC%96%91%EB%8C%80%ED%95%99%EA%B5%90+%EC%8B%A0%EC%9E%85%ED%95%99+%EC%A0%84%ED%98%95%EA%B3%84%ED%9A%8D.pdf/027468c2-d69a-e7b4-9437-1e66d12f76f4?t=1745975250171) · 범위 한정 원문 확인 | 보존 패키지/운영 미연결 | 기존 패키지 범위/재검증 | 기존 비공개 보존 | 운영 미연결 | 운영 미검증 | HOLD |
+| 홍익대학교 (`hongik`) | 서울; 1 전형; 수리·인문 | 대상 | [전형 출처](https://www.hongik.ac.kr/kr/admission/recruitment.do?mode=download&articleNo=152315&attachNo=91150) · 문항 원문 미검증 | 미구조화 | 미확인/추출 대기 | 미준비 | 운영 미연결 | 운영 미검증 | HOLD |
+
+#### Scope preservation and next work
+
+Keep the existing11 universities' evidence and completed runtime/UI work. First close
+SKKU2025Q1 rights/content/host dependencies, while the30-row A-stage list remains
+intact. Reuse Hanyang/Sookmyung packages; prioritize Pusan/Kyungpook official evidence;
+continue scoped Kyunghee/Dongguk/Kwangwoon structure review and remaining source/rubric
+gaps. This is work ordering, never an A-stage cap or automatic CORE designation.
+Demand/intake/engine-fit/cost inform review, not prestige or region alone. Existing
+Master Pusan048/049 intake scopes may overlap: never sum them. Unknown demand and
+rubric facts remain unknown. No repeated research or invented university IDs/URLs.
+
+Gangnam and Eulji: special-format deferred review, still public. The other retained
+Catalog entries without this30-university research inventory are not removed or
+assigned CATALOG_ONLY by an agent. Public UI never displays internal tiers.
+
+Read-only public metadata projection remains42/49 with no11/20/30 service cap.
+Student answers/history, canonical ID/null boundaries, private evidence, dates and
+raw source records are preserved. No new personal/decision/outcome data collection.
+Evaluation still requires exact question/rubric/evidence + Provider/Worker + existing
+Credit/History + allowlist and server GATE; catalog release grants no execution.
+
 ## 2026-09-23 App entry and future preparation data
 
 App LAB labels the existing safe public Web entry 논술 준비. Existing LAB public

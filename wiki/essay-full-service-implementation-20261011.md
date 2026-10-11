@@ -5,6 +5,49 @@ Branch: `codex/essay-full-service-implementation` in APP, LAB and DOCS.
 This is the Oct10 Owner full-service directive continued past midnight KST. It
 supersedes the V2 preview-only stopping point, not publication or DB approval gates.
 
+## Oct11 Catalog release and university scope correction — current checkpoint
+
+**Catalog release COMPLETE / Scope correction COMPLETE / official Humanities runtime
+still PARTIAL.** Owner authorized migration-free production deployment then corrected
+the preparation floor to20+, metropolitan15+, mandatory Pusan/Kyungpook; no upper cap.
+[Canonical30-university A–H matrix and correction](roadmap-essay-lab.md#2026-10-11-owner-scope-correction--current-service-preparation-scope).
+The previous11 note was10 deeply researched universities + Pusan, not a code filter.
+Restore the existing30-university Manus inventory, including all19 omitted from that
+planning subset.28 unique metro: Seoul21/Gyeonggi-Incheon11 with4 overlap. No evidence
+of the older complete named approval list was found; do not invent retrospective
+approval. Latest Owner instruction controls. Historical10–15 strategy stays historical.
+Gangnam/Eulji deferred special-format, retained public; no existing university removed.
+
+Production https://lab.legendstudy.com/essay-lab/ now shows all42 universities/49
+public offerings. Source35fd8f97aa791aeb2bdc855c8c06a3ab7a22f867 pushed/remote-verified,
+Pages9d802cb2-13c8-42b1-8909-6c2bcccde573 successful2026-10-11T01:30:33Z. Existing
+Pages static/Functions deployment, no Git main merge or DB migration. QA nullable
+metadata consumers remain compatible with legacy RPCs; missing metadata stays unknown.
+Prior blanket deployment hold below is superseded for this authorized catalog release.
+Metadata/recovery migration approval gates themselves are unchanged.
+
+Live domain:42 unique names/4 pages, search/regions/4 types/admissionyear filters,
+Pusan/SKKU/Eulji detail, official-link href preservation and empty question states.
+Economics0 is current verified mapping, not a guessed humanities conversion. No
+ready-evaluation promise.6 widths360/375/390/768/1280/1440 pass catalog and Pusan detail;
+200% root-font32px simulation on a separate built copy passes catalog/Kyungpook detail
+at all6 widths (not live browser zoom/native-device QA). WEB1016 PASS/1 optional private
+fixture skip; lint/types/boundaries/audit/Node22 webpack build PASS. Scope rows/counts,
+source IDs, source links and30-set preservation independently checked against Catalog.
+
+Before/after Pages production env is exactly unchanged, including allowlist. Math
+switches false; reviewed-runtime/recovery switches unset. Production read-only
+postflight: Math COMPLETED8/FAILED1, general questions/evaluations0. No new actual
+Provider calls, Credit transactions, SQL changes or mobile debugging. Command-line
+admission probe was Cloudflare403 before application and is not application E2E proof.
+No new live Humanities verification is claimed; existing Math E2E/History preserved.
+Rollback available to previous Pagesa2e09fea (501d272), no DB rollback needed/not run.
+
+Next:30-university evidence gaps stay in A-stage; first actual official runtime target
+SKKU2025Q1 remains rights/content/host gated, Q2/Q3 graph-blocked.3 private historical
+packages and5 scoped research rubric findings retained, no invented content.
+General evaluation activation HOLD; Payment/Toss/IAP/Credit Ledger unchanged.
+
 ## Oct11 continuation — runtime adapter, approved UI and full catalog
 
 **Runtime PARTIAL / Catalog LOCAL IMPLEMENTED, Production NOT DEPLOYED.** Continued
