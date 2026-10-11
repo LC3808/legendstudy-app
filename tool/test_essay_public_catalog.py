@@ -21,7 +21,7 @@ class PublicCatalogTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'UNVERIFIED_UNIVERSITY'):build(c,i)
  def test_admission_projection_omits_unknowns_and_preserves_source_scope(self):
   c,i=self.fixture();r=c['offerings'][0]['rawMaster'][0]
-  r.update(inventory_id='row-1',recruitment_track='지역인재',intake_count='21명',exam_date='NOT PUBLISHED',essay_weight='80%',notes='시행계획 값',private_answer='must not be public')
+  r.update(inventory_id='row-1',recruitment_track='지역인재',intake_count='21명',exam_date='NOT PUBLISHED',answer_length='노트형 답안지; individual limit NOT PUBLISHED',question_count='Campus subtotal NOT PUBLISHED',essay_weight='80%',notes='시행계획 값',private_answer='must not be public')
   d=build(c,i)['universities'][0]['offerings'][0]['admissionDetails'][0]
   self.assertEqual(d['facts'],dict(intake_count='21명',essay_weight='80%'))
   self.assertEqual(d['name'],'지역인재');self.assertEqual(d['documentBasis'],'시행계획 포함')

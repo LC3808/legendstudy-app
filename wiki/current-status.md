@@ -1,10 +1,10 @@
 # Current Status
 
-## Essay Catalog / scope correction — Oct11
+## Essay Catalog/detail UX — Oct11
 
-Catalog42/49 Production deployed; preparation30 (metro28 + Pusan/Kyungpook).
-[Current scope/readiness](roadmap-essay-lab.md#2026-10-11-owner-scope-correction--current-service-preparation-scope).
-[Release evidence](essay-full-service-implementation-20261011.md). AI runtime PARTIAL/HOLD.
+Production UI refined;42/49 preserved, Owner22 focus + retained30 preparation.
+[Policy/data](roadmap-essay-lab.md#2026-10-11-owner-final-policy--22-focus--30-retained--42-public).
+[Release/QA](essay-full-service-implementation-20261011.md). Runtime remains PARTIAL/HOLD.
 
 ## Manus Essay overnight V2 — Oct10 — LOCAL COMPLETE / PUBLIC HOLD
 

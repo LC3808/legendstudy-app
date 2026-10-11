@@ -17,7 +17,7 @@ def source_url(v):
 FACT_FIELDS = ('intake_count','exam_date','exam_time','question_count','answer_length','csat_minimum','essay_weight','school_record_weight')
 def public_value(value):
  value=str(value or '').strip()
- if not value or re.match(r'^(NOT PUBLISHED|UNKNOWN|UNVERIFIED|NOT CONFIRMED)',value,re.I):return None
+ if not value or re.search(r'\b(NOT PUBLISHED|UNKNOWN|UNVERIFIED|NOT CONFIRMED)\b',value,re.I):return None
  return re.sub(r'\s*[—–-]\s*CONFIRMED.*$', '', value).strip()
 
 def admission_details(rows):

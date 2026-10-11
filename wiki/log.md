@@ -3493,3 +3493,11 @@ validated;052 future notice held. Local LAB university/year exploration and impo
 validators implemented;10 Python/13 WEB tests, typecheck/lint/build PASS. Production
 changes0, public HOLD, no devices/Provider/Credit. Separate Wiki PR; PR#1 untouched.
 [Detailed handoff](essay-lab-manus-handoff-20261010.md).
+
+## 2026-10-11 — Catalog/detail UX and Owner22 policy
+
+Reused52 Master rows/10 Manus research records;42 universities/49 offerings preserved.
+Cards/detail IA, scoped facts, official sources, disabled service states implemented.
+Owner22/GroupA4/B18 fixed; original30 retained. Unknown statistics not ranked.
+WEB1022 tests/Python5/lint/types/build PASS; responsive/live deployment evidence in
+[existing task record](essay-full-service-implementation-20261011.md). No DB/Credit writes.
