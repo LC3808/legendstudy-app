@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-10-11 — Runtime adapter / approved human UI / national catalog
+
+Continued existing branch:42 universities/49 offerings (27 DB identities/15 null),
+search/filter/pagination/detail, Sep28 report hierarchy and actual-prior comparison.
+Existing worker private adapter stays default closed. Python26/WEB1014 PASS,1 skip;
+lint/types/boundary/build PASS,6 widths/catalog200% checked. General questions and
+evaluations remain0; Math8 completed preserved. No Production/Provider/Credit writes.
+[Current evidence](essay-full-service-implementation-20261011.md#oct11-continuation--runtime-adapter-approved-ui-and-full-catalog).
+
 ## 2026-10-11 — Essay service contracts and recovery
 
 Reused private officialSKKU3 questions/9 criteria; isolated19 content +21 recovery

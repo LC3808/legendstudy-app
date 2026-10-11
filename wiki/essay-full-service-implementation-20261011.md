@@ -5,6 +5,104 @@ Branch: `codex/essay-full-service-implementation` in APP, LAB and DOCS.
 This is the Oct10 Owner full-service directive continued past midnight KST. It
 supersedes the V2 preview-only stopping point, not publication or DB approval gates.
 
+## Oct11 continuation — runtime adapter, approved UI and full catalog
+
+**Runtime PARTIAL / Catalog LOCAL IMPLEMENTED, Production NOT DEPLOYED.** Continued
+from APP9081ee8/LABa942aa7/DOCSc50d6d4 after fresh remote and Unified Wiki verification.
+The earlier sections below are the previous checkpoint; this section supersedes
+its five-university UI and “host adapter not implemented” statements only.
+
+### Runtime and actual state
+
+`tool/essay_lab/runtime_host.py` now implements bounded private POST admission/evaluate
+and WSGI dispatch over the existing ReviewedRuntimeWorker. Pages supports an existing
+service binding or explicit HTTPS private origin + separate service token. Caller
+JWT/allowlist/owned snapshot stay distinct from the narrow worker credential.
+Admission fails before reservation unless rights, text-compatible reviewed content,
+provider policy and provider/reviewer/persistence preflight pass. Durable checkpoint
+replay never repeats a Provider call. No new engine, wallet or public listener.
+**Concrete host dependency composition/provisioning is still incomplete**: no actual
+Auth/PostgREST host acceptance, current independent review storage or deployment
+was supplied. Dependency injection tests do not establish an operating service.
+
+Production read-only recheck: general questions0/evaluations0, Math COMPLETED8 and
+FAILED1 (no in-flight Math state observed). Existing claim/finalize functions present.
+Cloudflare authenticated read recovered through existing Node22/Wrangler credentials;
+Production remains source501d272/deploymenta2e09fea. Both Math evaluation switches
+false, general runtime/recovery switches unset; allowlist and opaque worker secret
+present. Actual JWT validity/expiry unknown. No credentials or permissions changed.
+
+SKKU2025 3-question/9-criterion/1-package plan reused, not re-extracted. Q1 text cache
+supported, Q2/Q3 graph-dependent and blocked. Source rights remain unresolved; no
+public passage/body delivery, first actual Humanities evaluation, revised evaluation,
+Credit settlement, shared actual Humanities History or admin-human QA E2E claimed.
+[Concrete activation impacts/rollback and remaining prerequisites](../supabase/verification/essay_service/runtime-integration-review.md).
+
+### Sep28 approved UI → current implementation
+
+Source APP commits `f153c43` and `ebbc43c` were inspected, together with the existing
+UI v1 Wiki and native implementation. Native APP files are unchanged.
+
+| Approved screen / behavior | Current WEB connection | Validation / remaining |
+|---|---|---|
+| Desktop problem42% / answer58% | CSS grid, independently scrolling panes | Implemented; authenticated visual E2E pending |
+| Mobile question ↔ answer | Tabs preserve mounted draft text | Implemented; existing Draft/CAS tests preserved |
+| Summary → strengths → criteria → weaknesses → priority → rewrite → evidence | Existing shared MY RecordDetail and human report reused in workspace | DOM order regression PASS; actual result absent |
+| Five-level item/status/right stars, optional details | Original native labels, exact stored level, collapsed details | PASS, never official point prediction |
+| Primary 다시 써보기 | Submitted answer retained; student edits draft | Existing submit/rewrite contract PASS |
+| Initial/revised stars/status/reason | Actual selected_previous_evaluation_id required; exact pins | Different session/question/rubric rejected; missing connection not invented |
+| Teacher-style explanation | Stored summary/why/actions + existing positive-learning prompt | Real Provider tone NOT validated |
+| Model-answer area collapsed | Existing stored AI-generated example explicitly labeled; separate official area | Official body unavailable; source link only, no invented example |
+| Shared WEB/APP results | Same existing evaluation/criteria/progress/History contract | Native implementation reused; no device debugging |
+
+### Public Catalog and shared identifiers
+
+`tool/essay_lab/public_catalog.py` deterministically projects the retained V2 catalog
+into LAB `src/data/essay-public-catalog.json`:42 universities,49 public offerings.
+The original53 Master/50 Offering/101 Track source remains unchanged; future-date
+LSL27-052 remains quarantined, Hongik is retained through its verified Seoul row.
+No new research or invented university/count padding. Source SHA is embedded.
+Read-only active Production identities50 were reconciled by exact Korean name:
+27 canonical UUID matches,15 explicit nulls. Original Manus sourceUniversityId is
+shared across clients; null means no backend routing, never a fabricated WEB DB ID.
+Campus-specific offering/source IDs remain separate under each original university.
+
+Home/list and common university/year detail now use the actual42-university read
+model instead of the five sample array. Legacy test fixtures are retained outside
+these discovery routes. Search + region + literal source essay-type +2027 admission
+filter +12-per-page pagination use the same offering for combined matches.
+Verified 기출 exam years are queried separately through existing RLS (currently no
+published general questions);2027 admission rows never claim2027 past questions.
+Literal 수학 논술/수리 and explicit 과학 labels are mapped for discovery only. Unknown
+or administrative tracks do not route to evaluators. Econ/Business is not inferred
+where the source lacks a verified type. Official links/check dates and nullable
+question state are retained. No internal CORE/NEXT tier shown; Owner core selection
+remains undecided. Existing Math entry/availability gate remains separate and intact.
+
+Question availability uses live published-question RLS reads, not an invented READY
+flag; network/config failures show unknown, missing questions show preparing. No
+university is advertised evaluation-ready without runtime proof. Canonical question
+metadata and write route still enforce the existing server admission.15 unmatched
+universities have source metadata/detail but no fabricated question link.
+
+### Current validation and release limits
+
+- Python26 contract tests PASS: host7 + catalog3 + provider binding8 + reviewed
+  runtime8. Provider HTTP is synthetic, no external call. A system-Python run first
+  lacked psycopg for the unchanged SQL suite; the new pure contract suite then ran
+  clean. Previous19 content/21 recovery PG evidence was not relabeled as new E2E.
+- Full WEB1014 PASS +1 optional private V2 fixture SKIP;110 test files. Lint,
+  typecheck, boundary audit and Webpack build PASS; final checks use existing Node22.
+- Browser catalog + detail360/375/390/768/1280/1440: no horizontal overflow. Catalog
+  and detail200% root-font simulation (32px) on temporary built-page copies: no overflow;
+  test style restored, not committed. Real search, pagination and combined region/
+  type/year filter verified. Authenticated writer/results 200% visual QA is pending.
+- Anonymous actual PostgREST GET: questions HTTP200/0 rows, verified exams HTTP200/21.
+  Localhost Auth is intentionally closed by existing origin binding, not bypassed.
+- No actual Provider, Credit, migration, deployment or native-device action. Existing
+  QA metadata migration/paired deployment and Wiki PR#1 remain pending. No bulk
+  migration or hidden approval bypass to put this accumulated branch in Production.
+
 ## Product and source authority
 
 Read Unified AI_CONTEXT, CURRENT_STATUS, ARCHITECTURE, SOURCE_OF_TRUTH, latest Daily,
