@@ -519,3 +519,33 @@ Longitudinal preservation answers:
 5. Source selector is learning material, not admissions advice; original university/exam/question identifiers remain.
 6. Local files are private, excluded from backup and deletion-purge integrated; WEB uses separate browser-local storage. Cross-device drafts are explicitly not claimed.
 7. Drafts and recognized text are student/derived content, not official problem statements or university exemplar answers.
+
+
+## Oct12 overnight exam-unit continuation — LOCAL PARTIAL
+
+Existing21/77/237 Native/Web source UI and deployed image/text drafts are preserved.
+Added local atomic exam reservation/finalization candidate reusing actual legacy
+Ledger DDL, eight-connection races, partial failure, idempotency, rewrite and
+rollback tests. Existing reviewed Humanities Worker is reused through child-output
+staging; only an entire exam can finalize. No production endpoint is mounted.
+Native/Web snapshot/hash fixtures agree; Math billing remains unchanged.
+
+Implementation and exact release gaps: `supabase/candidates/essay_exam_unit/README.md`.
+This is NOT approval-ready SQL: content authority, lifecycle/least-privilege owner
+integration, durable lease/journal, new History/QA/erasure adapters and exam synthesis
+remain development work. No new verified Evaluation Package or real Provider E2E.
+Existing production source evaluation readiness remains0. Shared server Draft is
+not implemented; current drafts remain platform-local.
+
+Data strategy check: (1) immutable initial/revised snapshots and server timestamps;
+(2) exam/question IDs and Rubric/evidence versions pinned; (3) append-only terminal
+history with independent roots; (4) shared account/UID, no platform copy of ledger;
+(5) learning feedback only, no admissions predictions; (6) private storage, no API
+grants, erasure integration required before deployment; (7) derived comparisons
+must not overwrite original answers/evaluations. Retention is not complete yet.
+
+Validation: PostgreSQL17 synthetic fixtures on canonical ledger prerequisites;
+12 scenario checks, including concurrent different-key overspend denial and late
+transaction failure rollback. Python reviewed Worker transport tests15 PASS
+(7 new exam scenarios plus8 existing runtime cases); no real Provider calls.
+Native tests12 PASS; WEB contract/reservation tests12 PASS. Flutter analyze/Android debug/iOS Simulator and WEB lint/types/build PASS. No production DB/Credit/activation change. HOLD preserved.

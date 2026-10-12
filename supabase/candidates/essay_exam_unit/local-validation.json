@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "empty_rollback_restores_legacy_functions",
+    "all_api_roles_denied",
+    "eight_concurrent_retries_one_reservation",
+    "idempotency_conflict_and_cross_exam_no_posting",
+    "partial_result_no_charge_complete_exactly_one_credit",
+    "completed_history_immutable",
+    "free_reevaluation_once_failed_attempt_retry",
+    "independent_submissions_and_frozen_set_versions",
+    "insufficient_credit_and_idempotent_release",
+    "distinct_request_race_and_late_failure_transaction_rollback",
+    "expired_and_cross_account_reevaluation_denied",
+    "nonempty_rollback_denied_legacy_functions_unchanged"
+  ],
+  "count": 12,
+  "productionWrites": 0,
+  "providerCalls": 0,
+  "localDatabase": "PostgreSQL 17, canonical legacy ledger migrations",
+  "deploymentReady": false
+}

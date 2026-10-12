@@ -3529,3 +3529,5 @@ Owner22 order now applies to unknowns: Gachon/Cau/SKKU.117 WEB files/1041 PASS,
 [release evidence](essay-full-service-implementation-20261011.md).
 
 - 2026-10-12: Shared21-university source Catalog Native selection/drafts and photo-first input; existing Math upload/extract/confirmation reused.75 tests PASS/1SKIP, analyze/builds PASS. Actual Provider/exam Credit/shared Draft/QA remain PARTIAL; no DB/Credit mutation.
+
+- 2026-10-12 overnight: Added unmounted exam-unit SQL/ReviewedRuntimeWorker candidate, Native/Web canonical request/hash alignment. Local PG17 concurrency/atomicity/rollback12 scenarios PASS; synthetic Provider tests only. Runtime authorization, journal/lease, History/QA/erasure and source authority remain development gaps; no Production DB/Credit change.
