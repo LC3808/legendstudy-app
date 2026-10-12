@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../study/data/study_local.dart';
+import '../../essay/source_draft.dart';
 import '../../study/study_providers.dart';
 import '../account_deletion.dart';
 import '../auth_email.dart';
@@ -33,6 +34,7 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
   Future<void> _cleanup(String owner) async {
     try {
       await purgeStudyOwner(ref.read(studyLocalStoreProvider), owner);
+      await SourceDraftGateway.purge(owner);
       if (mounted && ref.read(authStateProvider).value?.userId == owner) {
         setState(() => _cleanupPending = false);
       }

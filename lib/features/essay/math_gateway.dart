@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
+
+import 'answer_image.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -103,6 +106,55 @@ class MathGateway {
       throw const FormatException('INVALID_RESPONSE');
     }
     return Map<String, dynamic>.from(value['result'] as Map);
+  }
+
+  Future<void> uploadEvidence(String artifact, Uint8List bytes) async {
+    checkOwner();
+    final type = answerImageType(bytes);
+    if (type == null) throw const FormatException('INVALID_IMAGE');
+    final request =
+        http.MultipartRequest('POST', Uri.parse('$mathOrigin/api/math/upload'))
+          ..followRedirects = false
+          ..headers.addAll({
+            'Authorization':
+                'Bearer ${client.auth.currentSession!.accessToken}',
+            'Origin': mathOrigin,
+          })
+          ..fields['artifact_id'] = artifact
+          ..files.add(
+            http.MultipartFile.fromBytes(
+              'file',
+              bytes,
+              filename: 'answer.${type.split('/').last}',
+              contentType: http.MediaType.parse(type),
+            ),
+          );
+    final response = await transport
+        .send(request)
+        .then(http.Response.fromStream)
+        .timeout(const Duration(seconds: 60));
+    checkOwner();
+    if (response.statusCode != 200) throw StateError('UPLOAD_UNVERIFIED');
+  }
+
+  Future<void> extract(String attempt) async {
+    checkOwner();
+    final request =
+        http.Request('POST', Uri.parse('$mathOrigin/api/math/extract'))
+          ..followRedirects = false
+          ..headers.addAll({
+            'Authorization':
+                'Bearer ${client.auth.currentSession!.accessToken}',
+            'Origin': mathOrigin,
+            'Content-Type': 'application/json',
+          })
+          ..body = jsonEncode({'attempt_id': attempt});
+    final response = await transport
+        .send(request)
+        .then(http.Response.fromStream)
+        .timeout(const Duration(seconds: 60));
+    checkOwner();
+    if (response.statusCode != 200) throw StateError('CHECK_EXTRACTION_STATUS');
   }
 
   Future<void> evaluate(String id) async {

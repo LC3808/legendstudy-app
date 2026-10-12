@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>논술 답안 사진을 촬영할 때 카메라를 사용합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>선택한 사진을 레전드스터디 프로필 사진으로 사용합니다.</string>
 	<key>CFBundleDevelopmentRegion</key>

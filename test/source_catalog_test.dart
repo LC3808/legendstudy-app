@@ -1,0 +1,68 @@
+import 'dart:convert';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:legendstudy_app/features/essay/source_catalog.dart';
+import 'package:legendstudy_app/features/essay/source_draft.dart';
+import 'package:legendstudy_app/features/essay/essay_models.dart';
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  test('server source keys are preserved; duplicates cannot merge exams', () {
+    final exam = {
+      'key': 'source:shared',
+      'verification': 'VERIFIED',
+      'questions': [
+        {'key': 'source:shared:1'},
+      ],
+    };
+    final data = {
+      'version': 'essay-source-registry-v1',
+      'universities': <Object>[],
+      'exams': [exam],
+    };
+    expect(
+      SourceCatalog.parse(jsonEncode(data)).exams.single['key'],
+      'source:shared',
+    );
+    data['exams'] = [exam, exam];
+    expect(() => SourceCatalog.parse(jsonEncode(data)), throwsFormatException);
+  });
+  test(
+    'draft restore, owner isolation, stale revisions and disabled evaluation',
+    () async {
+      final disk = <String, String>{};
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
+            if (call.method == 'read') return disk[call.arguments];
+            if (call.method == 'write') {
+              final a = call.arguments as Map;
+              disk[a['key'] as String] = a['value'] as String;
+              return null;
+            }
+            return null;
+          });
+      final a = SourceDraftGateway('owner-a', 'source:question');
+      await a.saveDraft('내 답안', 0);
+      expect(
+        (await SourceDraftGateway(
+          'owner-a',
+          'source:question',
+        ).loadDraft()).body,
+        '내 답안',
+      );
+      expect(
+        (await SourceDraftGateway(
+          'owner-b',
+          'source:question',
+        ).loadDraft()).body,
+        '',
+      );
+      expect(
+        (await SourceDraftGateway('owner-a', 'source:other').loadDraft()).body,
+        '',
+      );
+      await expectLater(a.saveDraft('stale', 0), throwsA(isA<EssayConflict>()));
+      await expectLater(a.submit('answer', 1, 'k'), throwsStateError);
+    },
+  );
+}

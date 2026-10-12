@@ -1,5 +1,11 @@
 # Current Status
 
+## Shared Essay APP/WEB — Oct12 — PARTIAL
+
+Native21 universities/77 selections/237 inputs use WEB Catalog; photo-first input and local drafts connected.
+Analyze/builds PASS;75PASS/1SKIP. No DB/Credit writes; public HOLD. Atomic exam billing/shared Draft/QA pending.
+[Details](essay-full-service-implementation-20261011.md#oct12-shared-source-catalog-and-image-input).
+
 ## Essay Catalog/detail UX — Oct11
 
 Catalog service-priority sort LIVE;42/49,Owner22/retained30 preserved.
@@ -14,9 +20,7 @@ Raw research stays private. Historical packages preserved; runtime rights gates 
 Python10/WEB13/typecheck/lint/build previously PASS; no device/Provider/Credit writes.
 [Full result and restore](essay-lab-manus-handoff-20261010.md).
 
-Prior QA metadata APP4de2125/LABc977493 unchanged:34 isolated checks passed previously,
-8 evaluations/4 pairs read-only verified. Production migration NOT_APPLIED and Wiki
-PR#1 unmerged; final approval still required. [Review packet](../supabase/verification/quality_metadata/README.md).
+Prior QA metadata remains unapplied; [review packet](../supabase/verification/quality_metadata/README.md).
 
 Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
 Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+

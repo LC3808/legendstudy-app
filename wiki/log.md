@@ -3527,3 +3527,5 @@ Owner22 order now applies to unknowns: Gachon/Cau/SKKU.117 WEB files/1041 PASS,
 1 optional skip; lint/types/build/audits PASS. No DB/Credit/runtime activation.
 [Policy/source](roadmap-essay-lab.md#demand-data-integration--owner-correction-oct11);
 [release evidence](essay-full-service-implementation-20261011.md).
+
+- 2026-10-12: Shared21-university source Catalog Native selection/drafts and photo-first input; existing Math upload/extract/confirmation reused.75 tests PASS/1SKIP, analyze/builds PASS. Actual Provider/exam Credit/shared Draft/QA remain PARTIAL; no DB/Credit mutation.

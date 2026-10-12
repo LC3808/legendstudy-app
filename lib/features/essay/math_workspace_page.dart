@@ -1,3 +1,7 @@
+import 'dart:typed_data';
+
+import 'answer_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -53,6 +57,12 @@ class _MathWorkspace extends ConsumerStatefulWidget {
 }
 
 class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
+  final drafts=<String,({String text,Uint8List? photo})>{};
+  Uint8List? photo;
+  String? artifact;
+  bool uploaded = false;
+  Map<String, dynamic>? inputState;
+  final corrections = <String, String>{};
   final answer = TextEditingController();
   String? leaf, attempt, evaluation, notice;
   String submissionKey = mathRequestId(), evaluationKey = mathRequestId();
@@ -139,7 +149,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       await resumeEvaluation();
       return;
     }
-    if (leaf == null || answer.text.trim().isEmpty) return;
+    if (leaf == null || (answer.text.trim().isEmpty && photo == null)) return;
     if (!await gateway.available()) throw StateError('CLOSED');
     if (!current) return;
     // Freeze before the first request: a lost response must retry identical payload/key.
@@ -156,8 +166,12 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               : prior!['response_format'] == 'SHORT_ANSWER'
               ? 'SHORT_ANSWER_RESOLVE'
               : 'FULL_RESOLVE',
-          'input_kind': 'TYPED',
-          'typed_answer': answer.text,
+          'input_kind': photo == null
+              ? 'TYPED'
+              : answer.text.trim().isEmpty
+              ? 'EVIDENCE'
+              : 'MIXED',
+          if (answer.text.trim().isNotEmpty) 'typed_answer': answer.text,
           if (prior != null) ...{
             'predecessor_id': prior!['attempt_id'],
             'prior_evaluation_id': prior!['evaluation_id'],
@@ -167,10 +181,51 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       if (!current) return;
       setState(() => attempt = data['attempt_id'] as String);
     }
-    final input = await gateway.call('math_input', 'read_input', {
+    if (photo != null && !uploaded) {
+      if (artifact == null) {
+        final data = await gateway.call('math_input', 'register_evidence', {
+          'attempt_id': attempt,
+          'metadata': {
+            'position': 1,
+            'media_type': answerImageType(photo!),
+            'byte_size': photo!.length,
+          },
+        });
+        if (!current) return;
+        artifact = data['artifact_id'] as String;
+      }
+      await gateway.uploadEvidence(artifact!, photo!);
+      if (!current) return;
+      uploaded = true;
+    }
+    var input = await gateway.call('math_input', 'read_input', {
       'attempt_id': attempt,
     });
-    if (input['can_request_evaluation'] != true) throw StateError('NOT_READY');
+    if (!current) return;
+    if (photo != null &&
+        input['candidate'] == null &&
+        input['can_request_evaluation'] != true) {
+      try {
+        await gateway.extract(attempt!);
+      } finally {
+        if (current) {
+          input = await gateway.call('math_input', 'read_input', {
+            'attempt_id': attempt,
+          });
+          if (current) setState(() => inputState = input);
+        }
+      }
+      if (current) setState(() => notice = '사진에서 읽은 답안을 확인해 주세요.');
+      return;
+    }
+    if (input['can_request_evaluation'] != true) {
+      setState(() {
+        inputState = input;
+        notice = '사진에서 읽은 답안을 확인해 주세요.';
+      });
+      return;
+    }
+
     if (evaluation == null) {
       final data = await gateway.call(
         prior == null ? 'math_input' : 'math_learning',
@@ -184,6 +239,42 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       await gateway.evaluate(evaluation!);
     } finally {
       if (current) await refresh();
+    }
+  }
+
+  Future<void> confirmInput() async {
+    final candidate = inputState?['candidate'] as Map?;
+    final regions = (inputState?['candidate_regions'] as List? ?? [])
+        .cast<Map<String, dynamic>>();
+    if (candidate == null || regions.isEmpty) throw StateError('NO_EXTRACTION');
+    await gateway.call('math_input', 'confirm_extraction', {
+      'attempt_id': attempt,
+      'run_id': candidate['run_id'] ?? candidate['id'],
+      'regions': [
+        for (final r in regions)
+          {
+            'region_id': r['region_id'] ?? r['id'],
+            'raw_text':
+                corrections['${r['region_id'] ?? r['id']}'] ??
+                r['raw_text'] ??
+                '',
+            'normalized_math':
+                corrections['${r['region_id'] ?? r['id']}'] ??
+                r['normalized_math'] ??
+                r['raw_text'] ??
+                '',
+          },
+      ],
+    });
+    if (!current) return;
+    final next = await gateway.call('math_input', 'read_input', {
+      'attempt_id': attempt,
+    });
+    if (current) {
+      setState(() {
+        inputState = next;
+        notice = '판독 내용을 저장했습니다. 첨삭 진행을 눌러 주세요.';
+      });
     }
   }
 
@@ -205,6 +296,11 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       return;
     }
     setState(() {
+      photo = null;
+      artifact = null;
+      uploaded = false;
+      inputState = null;
+      corrections.clear();
       prior = old;
       state = null;
       attempt = null;
@@ -265,7 +361,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 ],
                 onChanged: busy || frozen || prior != null || evaluation != null
                     ? null
-                    : (v) => setState(() => leaf = v),
+                    : (v) => setState(() {if(selected!=null)drafts[selected]=(text:answer.text,photo:photo);leaf=v;answer.text=drafts[v]?.text??'';photo=drafts[v]?.photo;}),
               ),
               if (question != null) ...[
                 SelectableText(question['problem_statement'] as String? ?? ''),
@@ -273,16 +369,46 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               ],
               if (report == null &&
                   (widget.evaluationId == null || prior != null)) ...[
+                AnswerImageInput(
+                  value: photo,
+                  enabled: !busy && !frozen,
+                  onChanged: (value) async {
+                    if (current) setState(() => photo = value);
+                  },
+                ),
                 TextField(
                   controller: answer,
                   enabled: !busy && !frozen,
                   minLines: 6,
                   maxLines: 12,
                   maxLength: 30000,
-                  decoration: InputDecoration(
-                    labelText: prior == null ? '내 답안' : '다시 작성한 답안',
-                  ),
+                  decoration: InputDecoration(labelText: '추가 설명 또는 텍스트 답안'),
                 ),
+                if (inputState != null &&
+                    inputState!['can_request_evaluation'] != true) ...[
+                  const Text('사진에서 읽은 답안 확인'),
+                  for (final r
+                      in (inputState!['candidate_regions'] as List? ?? [])
+                          .cast<Map<String, dynamic>>())
+                    TextFormField(
+                      key: ValueKey(
+                        '${inputState!['candidate']}:${r['region_id'] ?? r['id']}',
+                      ),
+                      initialValue: r['raw_text'] as String? ?? '',
+                      maxLines: null,
+                      maxLength: 10000,
+                      enabled: !busy,
+                      decoration: const InputDecoration(
+                        labelText: '판독된 내용 (직접 수정 가능)',
+                      ),
+                      onChanged: (v) =>
+                          corrections['${r['region_id'] ?? r['id']}'] = v,
+                    ),
+                  OutlinedButton(
+                    onPressed: busy ? null : () => run(confirmInput),
+                    child: const Text('판독 내용 확인·저장'),
+                  ),
+                ],
                 FilledButton(
                   onPressed: busy || !canEvaluate
                       ? null
@@ -294,7 +420,9 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                     busy
                         ? '첨삭을 확인하고 있어요…'
                         : frozen
-                        ? '같은 요청 다시 확인'
+                        ? (inputState?['can_request_evaluation'] == true
+                              ? '첨삭 진행'
+                              : '같은 요청 다시 확인')
                         : prior == null
                         ? '첨삭 진행'
                         : '재첨삭',

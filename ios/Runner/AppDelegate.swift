@@ -20,6 +20,42 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let essayDraft = FlutterMethodChannel(name: "com.legendstudy.app/essay-draft", binaryMessenger: binaryMessenger)
+    essayDraft.setMethodCallHandler { call, result in
+      do {
+        let root = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        var folder = root.appendingPathComponent("essay-drafts", isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        var backup = URLResourceValues(); backup.isExcludedFromBackup = true; try folder.setResourceValues(backup)
+        if call.method == "purge" {
+          guard let owner = call.arguments as? String, owner.range(of: "^[a-f0-9]{64}$", options: .regularExpression) != nil else { throw NSError(domain: "Draft", code: 1) }
+          for file in try FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil) where file.lastPathComponent.hasPrefix(owner + "_") { try FileManager.default.removeItem(at: file) }
+          result(nil); return
+        }
+        let args = call.arguments as? [String: Any]
+        guard let key = (call.arguments as? String) ?? (args?["key"] as? String), key.range(of: "^[a-f0-9]{64}_[a-f0-9]{64}$", options: .regularExpression) != nil else { throw NSError(domain: "Draft", code: 1) }
+        if call.method == "readImage" || call.method == "writeImage" {
+          let file = folder.appendingPathComponent(key + ".image")
+          if call.method == "readImage" { result(FileManager.default.fileExists(atPath: file.path) ? FlutterStandardTypedData(bytes: try Data(contentsOf: file)) : nil); return }
+          if let bytes = args?["value"] as? FlutterStandardTypedData {
+            guard bytes.data.count <= 20971520 else { throw NSError(domain: "Draft", code: 3) }
+            try bytes.data.write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+          } else if FileManager.default.fileExists(atPath: file.path) { try FileManager.default.removeItem(at: file) }
+          result(nil); return
+        }
+        let file = folder.appendingPathComponent(key + ".json")
+        let old = FileManager.default.fileExists(atPath: file.path) ? try String(contentsOf: file, encoding: .utf8) : nil
+        if call.method == "read" { result(old); return }
+        if call.method == "write" {
+          let doc: [String: Any] = try old.map { try JSONSerialization.jsonObject(with: Data($0.utf8)) as? [String: Any] ?? [:] } ?? [:]
+          let revision = doc["revision"] as? Int ?? 0
+          guard revision == args?["expected"] as? Int, let value = args?["value"] as? String, value.utf8.count <= 250000 else { throw NSError(domain: "Draft", code: 2) }
+          try Data(value.utf8).write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+          result(nil); return
+        }
+        result(FlutterMethodNotImplemented)
+      } catch { result(FlutterError(code: "ESSAY_DRAFT_IO", message: "Unable to store draft", details: nil)) }
+    }
     let info = FlutterMethodChannel(name: "com.legendstudy.app/info", binaryMessenger: binaryMessenger)
     info.setMethodCallHandler { call, result in
       if call.method == "introCompleted" || call.method == "completeIntro" {

@@ -21,6 +21,51 @@ class MainActivity : FlutterActivity() {
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/essay-draft")
+            .setMethodCallHandler { call, result ->
+                try {
+                    val folder = File(filesDir, "essay-drafts").apply { mkdirs() }
+                    if (call.method == "purge") {
+                        val owner = call.arguments as String
+                        require(owner.matches(Regex("[a-f0-9]{64}")))
+                        folder.listFiles()?.filter { it.name.startsWith(owner + "_") }?.forEach { check(it.delete()) }
+                        result.success(null)
+                    } else {
+                        val args = call.arguments
+                        val key = if (args is String) args else (args as Map<*, *>)["key"] as String
+                        require(key.matches(Regex("[a-f0-9]{64}_[a-f0-9]{64}")))
+                        if (call.method == "readImage" || call.method == "writeImage") {
+                            val image = AtomicFile(File(folder, key + ".image"))
+                            if (call.method == "readImage") result.success(if (image.baseFile.exists() || File(image.baseFile.path + ".bak").exists()) image.openRead().use { it.readBytes() } else null)
+                            else {
+                                val bytes = (args as Map<*, *>)["value"] as ByteArray?
+                                if (bytes == null) image.delete() else {
+                                    require(bytes.size <= 20971520)
+                                    val output = image.startWrite()
+                                    try { output.write(bytes); image.finishWrite(output) } catch (e: Exception) { image.failWrite(output); throw e }
+                                }
+                                result.success(null)
+                            }
+                            return@setMethodCallHandler
+                        }
+                        val file = AtomicFile(File(folder, key + ".json"))
+                        val old = if (file.baseFile.exists() || File(file.baseFile.path + ".bak").exists()) file.openRead().bufferedReader().use { it.readText() } else null
+                        if (call.method == "read") result.success(old)
+                        else if (call.method == "write") {
+                            val map = args as Map<*, *>
+                            val revision = if (old == null) 0 else org.json.JSONObject(old).getInt("revision")
+                            check(revision == (map["expected"] as Number).toInt())
+                            val value = map["value"] as String
+                            require(value.length <= 250000)
+                            val output = file.startWrite()
+                            try { output.write(value.toByteArray(Charsets.UTF_8)); file.finishWrite(output) }
+                            catch (e: Exception) { file.failWrite(output); throw e }
+                            result.success(null)
+                        } else result.notImplemented()
+                    }
+                } catch (_: Exception) { result.error("ESSAY_DRAFT_IO", "Unable to store draft", null) }
+            }
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/info")
             .setMethodCallHandler { call, result ->
                 if (call.method == "introCompleted") {

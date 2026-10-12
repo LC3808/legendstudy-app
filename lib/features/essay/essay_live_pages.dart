@@ -1,4 +1,5 @@
 import 'math_gateway.dart';
+import 'source_catalog_page.dart';
 
 import 'dart:async';
 
@@ -67,6 +68,7 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
     body: Column(
       children: [
         const _MathEntry(),
+        ListTile(title: const Text('대학 · 시험 선택'), subtitle: const Text('학년도와 문항을 선택하고 답안을 작성하세요.'), trailing: const Icon(Icons.chevron_right), onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const SourceCatalogPage()))),
         Expanded(
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: questions,
@@ -79,7 +81,7 @@ class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
               }
               final rows = snapshot.data!;
               if (rows.isEmpty) {
-                return const EmptyState('등록된 일반 논술 문항이 없습니다.');
+                return const SizedBox.shrink();
               }
               final universities = rows.map(uni).toSet();
               final selected = university ?? universities.first;

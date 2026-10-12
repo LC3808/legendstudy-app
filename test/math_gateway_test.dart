@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -125,4 +126,21 @@ void main() {
     gateway.close();
     await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
   });
+  test('native photo uses existing multipart and extract endpoints without billing', () async {
+    final paths=<String>[];
+    final gateway=MathGateway(client,'fixture-a',transport:MockClient((r)async{
+      paths.add(r.url.path);expect(r.followRedirects,false);expect(r.headers['Origin'],mathOrigin);
+      expect(r.headers['Authorization'],startsWith('Bearer '));
+      if(r.url.path.endsWith('upload')){expect(r.headers['content-type'],startsWith('multipart/form-data'));expect(r.bodyBytes,isNotEmpty);}
+      else {expect(jsonDecode(r.body),{'attempt_id':'same-attempt'});}
+      return http.Response('{}',200);
+    }));
+    await gateway.uploadEvidence('same-artifact',Uint8List.fromList([137,80,78,71,13,10,26,10,0,0,0,0]));
+    await gateway.extract('same-attempt');
+    expect(paths,['/api/math/upload','/api/math/extract']);
+    await expectLater(gateway.uploadEvidence('x',Uint8List(12)),throwsFormatException);
+    expect(paths.length,2);gateway.close();
+    await expectLater(gateway.extract('same-attempt'),throwsStateError);
+  });
+
 }

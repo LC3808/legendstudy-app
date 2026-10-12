@@ -494,3 +494,28 @@ cross-verification of44 provisional statistics remains pending as the source sta
 no official-value claim or numeric ranking was fabricated. No Owner action required
 for this release. Future verification must preserve scope/provenance and rerun the
 projection/checks; no new data or general AI activation is implied.
+
+
+## Oct12 shared source catalog and image input
+
+Branch `codex/essay-shared-app-integration` preserves prior full-service implementation.
+The APP uses the WEB public metadata endpoint `/api/essay/catalog`, not a duplicate bundled catalog.
+21 universities,77 exam/subject selection records,237 question-answer slots retain source keys and university IDs.
+This count describes reviewed selection metadata, not completed evaluation packages or 77 unique fully verified examinations.
+Native cascading selectors (year, admission/mock, track, campus/session), per-question editor and whole/subset humanities selection are connected.
+Source metadata `inputMode` is a UI preference only: natural/math/science photo-first; humanities/business text-first. It never selects an evaluator or changes billing. Mixed/science still require per-question official evaluation packages.
+Native camera/gallery uses image_picker already in the app. Existing Math input RPCs register evidence; the same WEB `/api/math/upload` and `/extract` authenticate, upload privately and recognize; the student confirms extracted regions before evaluation. Existing request keys, reevaluation and shared History remain.
+No actual image Provider/Credit E2E or physical device verification this turn. Camera permission/native hardware behavior remains unverified on devices.
+New source drafts are device-local text/photos, isolated by owner/question SHA keys, atomic file writes with revision checks for text, excluded from OS backup, and purged by existing account deletion cleanup. Not WEB/APP cloud-synced. In-flight picker recovery after Android process destruction remains unverified.
+New source submissions are disabled; source IDs must never be passed to UUID/billing RPCs. Canonical question registration, approved package injection, atomic exam reservation/finalization, shared drafts and exam History/QA adapter remain development work; no applicable production migration was prepared or applied here.
+Math remains per-question. Humanities/business policy remains one Credit per initial selected exam-question set plus one reevaluation within14days with the set frozen; UI selection does not implement backend billing.
+Validation: Flutter3.47.6 analyze PASS; related75PASS/1SKIP (legacy conditional skip); Android debug and iOS simulator builds PASS. WEB169 related tests PASS; lint/typecheck/build PASS. No Store/main merge or deployment of APP.
+
+Longitudinal preservation answers:
+1. Local edits are drafts; immutable historical attempts/evaluations are not modified.
+2. Reopening a question restores the owner's saved draft; historical evaluation versions retain existing shared History.
+3. Revision-checked text save avoids replacing a newer local draft; photo persistence is local and does not rewrite evidence artifacts.
+4. Owner switches recreate selection state; writer checks current identity. Guest drafts never silently transfer to an account.
+5. Source selector is learning material, not admissions advice; original university/exam/question identifiers remain.
+6. Local files are private, excluded from backup and deletion-purge integrated; WEB uses separate browser-local storage. Cross-device drafts are explicitly not claimed.
+7. Drafts and recognized text are student/derived content, not official problem statements or university exemplar answers.
