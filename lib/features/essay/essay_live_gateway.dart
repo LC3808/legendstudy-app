@@ -187,7 +187,10 @@ class SupabaseEssayGateway implements EssayGateway {
 
   String get _session => sessionId ?? (throw const EssayClientError('PT404'));
 
-  Future<EssayDraft> open({String? resumeSession}) async {
+  Future<EssayDraft> open({
+    String? resumeSession,
+    bool loadResults = true,
+  }) async {
     _auth();
     if (resumeSession != null) {
       final own = await read('essay_practice_sessions', {
@@ -224,6 +227,7 @@ class SupabaseEssayGateway implements EssayGateway {
       });
     }
     final draft = await loadDraft();
+    if (!loadResults) return draft;
     await loadHistory();
     if (history.attempts.isNotEmpty) {
       final last = history.attempts.last;

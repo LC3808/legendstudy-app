@@ -2,8 +2,8 @@
 
 ## Shared Essay APP/WEB — Oct12 — PARTIAL
 
-Native21 universities/77 selections/237 inputs use WEB Catalog; photo-first input and local drafts connected.
-Analyze/builds PASS;75PASS/1SKIP. No DB/Credit writes; public HOLD. Exam billing local SQL/Worker candidate tested; deployment/Draft/QA pending.
+Native21/77/237 shared source UI preserved. Canonical-question Draft/CAS sync added; production questions0, so live cross-device sync/evaluation remain unverified.
+Analyze/46 tests/APK/iOS PASS. Exam billing/History/QA remain development gaps. Public HOLD; no DB/Credit writes.
 [Details](essay-full-service-implementation-20261011.md#oct12-shared-source-catalog-and-image-input).
 
 ## Essay Catalog/detail UX — Oct11

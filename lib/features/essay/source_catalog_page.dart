@@ -11,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/supabase/supabase_providers.dart';
 import 'source_catalog.dart';
 import 'source_draft.dart';
+import 'essay_live_gateway.dart';
 import 'essay_controller.dart';
 import 'essay_models.dart';
 
@@ -47,7 +48,7 @@ class _SourceSelection extends StatefulWidget {
 
 class _SourceSelectionState extends State<_SourceSelection> {
   late Future<SourceCatalog> data = widget.catalog ?? SourceCatalog.load();
-  final included=<String,Set<String>>{};
+  final included = <String, Set<String>>{};
   String? university, year, kind, track, examKey;
   Widget choice(
     String label,
@@ -180,7 +181,17 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 const Text(
                   '최초 첨삭은 시험의 선택 문항 묶음당 1 Credit입니다. 14일 이내 같은 문항 집합의 재첨삭 1회가 포함됩니다.',
                 ),
-              if(RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t??''))OutlinedButton(onPressed:()=>setState(()=>included[exam['key'] as String]=(exam['questions'] as List).cast<Map<String,dynamic>>().map((q)=>q['key'] as String).toSet()),child:const Text('전체 문항 선택')),
+              if (RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? ''))
+                OutlinedButton(
+                  onPressed: () => setState(
+                    () => included[exam['key'] as String] =
+                        (exam['questions'] as List)
+                            .cast<Map<String, dynamic>>()
+                            .map((q) => q['key'] as String)
+                            .toSet(),
+                  ),
+                  child: const Text('전체 문항 선택'),
+                ),
               for (final q
                   in (exam['questions'] as List).cast<Map<String, dynamic>>())
                 ListTile(
@@ -188,7 +199,25 @@ class _SourceSelectionState extends State<_SourceSelection> {
                   subtitle: q['lengthLabel'] == null
                       ? null
                       : Text(q['lengthLabel'] as String),
-                  leading:RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t??'')?Checkbox(value:included[exam['key']]?.contains(q['key'])??false,semanticLabel:'${q['label']} 첨삭 선택',onChanged:(v)=>setState((){final selected=included.putIfAbsent(exam['key'] as String,()=>{});if(v==true){selected.add(q['key'] as String);}else{selected.remove(q['key']);}})):null,
+                  leading: RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? '')
+                      ? Checkbox(
+                          value:
+                              included[exam['key']]?.contains(q['key']) ??
+                              false,
+                          semanticLabel: '${q['label']} 첨삭 선택',
+                          onChanged: (v) => setState(() {
+                            final selected = included.putIfAbsent(
+                              exam['key'] as String,
+                              () => {},
+                            );
+                            if (v == true) {
+                              selected.add(q['key'] as String);
+                            } else {
+                              selected.remove(q['key']);
+                            }
+                          }),
+                        )
+                      : null,
                   trailing: const Icon(Icons.edit_outlined),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
@@ -237,6 +266,16 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   late final draft = SourceDraftGateway(
     widget.owner,
     widget.question['key'] as String,
+    remote:
+        widget.owner != 'guest' &&
+            widget.question['dbQuestionId'] is String &&
+            ref.read(supabaseClientProvider) != null
+        ? SupabaseEssayGateway(
+            SupabaseEssayStore(ref.read(supabaseClientProvider)!),
+            questionId: widget.question['dbQuestionId'] as String,
+            writesEnabled: true,
+          )
+        : null,
   );
   Future<void> savePhoto(Uint8List? bytes) async {
     setState(() {
@@ -262,7 +301,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   EssayController? controller;
   final editor = TextEditingController();
   String? error;
-  bool problem = false;
+  bool problem = false, showOptionalImage = false, syncBusy = false;
   @override
   void initState() {
     super.initState();
@@ -272,7 +311,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   Future<void> load() async {
     try {
       final g = draft;
-      final d = await g.loadDraft();
+      final d = await g.openSharedDraft();
       final image = await g.loadImage();
       if (mounted) {
         photo = image;
@@ -313,7 +352,8 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     }
     final c = controller;
     return PopScope(
-      canPop: (c == null || !c.dirty) && !imageSaving && !imageDirty,
+      canPop:
+          (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
       child: Scaffold(
         appBar: AppBar(title: Text(widget.question['label'] as String)),
         body: c == null
@@ -335,11 +375,16 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                     Text('${widget.exam['year']}학년도 · ${widget.exam['track']}'),
                     const Text('대학 공식 기출자료에서 문제와 제시문을 확인하세요.'),
                     if (widget.officialUrl != null)
-                      ExternalLinkButton(uri:Uri.tryParse(widget.officialUrl!),label:'공식 자료 확인 ↗'),
+                      ExternalLinkButton(
+                        uri: Uri.tryParse(widget.officialUrl!),
+                        label: '공식 자료 확인 ↗',
+                      ),
                     if (widget.question['sourceLocator'] != null)
                       Text(widget.question['sourceLocator'] as String),
                   ] else ...[
-                    if (widget.question['inputMode'] == 'image') ...[
+                    if (widget.question['inputMode'] == 'image' ||
+                        photo != null ||
+                        showOptionalImage) ...[
                       AnswerImageInput(
                         value: photo,
                         enabled: imageReady && !imageSaving,
@@ -352,9 +397,21 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                           child: const Text('사진 저장 다시 시도'),
                         ),
                     ],
+                    if (widget.question['inputMode'] != 'image' &&
+                        photo == null &&
+                        !showOptionalImage)
+                      TextButton.icon(
+                        onPressed: () =>
+                            setState(() => showOptionalImage = true),
+                        icon: const Icon(Icons.add_photo_alternate_outlined),
+                        label: const Text('수식·도표 이미지 첨부'),
+                      ),
                     TextField(
                       controller: editor,
-                      minLines: widget.question['inputMode']=='image'?3:12,
+                      enabled: !syncBusy,
+                      minLines: widget.question['inputMode'] == 'image'
+                          ? 3
+                          : 12,
                       maxLines: null,
                       maxLength: 30000,
                       onChanged: c.edit,
@@ -371,6 +428,49 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       DraftStatus.failed => '저장하지 못했어요. 답안을 복사해 보관해 주세요.',
                       DraftStatus.conflict => '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
                     }),
+                    if (draft.syncNotice != null) Text(draft.syncNotice!),
+                    if (draft.remote != null)
+                      TextButton(
+                        onPressed: syncBusy
+                            ? null
+                            : () async {
+                                setState(() => syncBusy = true);
+                                try {
+                                  await c.save();
+                                  if (c.dirty) return;
+                                  await draft.openSharedDraft();
+                                  await c.reloadDraft();
+                                  editor.text = c.body;
+                                  if (!mounted || !context.mounted) return;
+                                  if (draft.syncConflict &&
+                                      draft.remoteBody != null) {
+                                    await showDialog<void>(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text('계정에 저장된 답안'),
+                                        content: SingleChildScrollView(
+                                          child: SelectionArea(
+                                            child: Text(draft.remoteBody!),
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text('닫기'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    await draft.sync(editor.text);
+                                  }
+                                } finally {
+                                  if (mounted) setState(() => syncBusy = false);
+                                }
+                              },
+                        child: const Text('계정 답안 확인·저장'),
+                      ),
                     if (c.dirty)
                       TextButton(
                         onPressed: c.save,

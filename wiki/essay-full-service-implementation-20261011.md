@@ -549,3 +549,26 @@ Validation: PostgreSQL17 synthetic fixtures on canonical ledger prerequisites;
 transaction failure rollback. Python reviewed Worker transport tests15 PASS
 (7 new exam scenarios plus8 existing runtime cases); no real Provider calls.
 Native tests12 PASS; WEB contract/reservation tests12 PASS. Flutter analyze/Android debug/iOS Simulator and WEB lint/types/build PASS. No production DB/Credit/activation change. HOLD preserved.
+
+## Oct13 shared Draft and registration continuation — PARTIAL
+
+Source writer reuses canonical `essay_open_session`/`essay_save_draft` with the same
+owner/question-derived session ID as WEB. Local text/photos stay preserved; canonical
+text restore/save uses revision checks, protects different nonempty drafts and reports
+network/length conflicts. No History read is required for opening a draft. APP auto-save
+after successful canonical open; WEB explicit account-save. Source-only IDs never call
+UUID RPCs. Optional image attachment added to text-first inputs; Math stays photo-first.
+Photos remain local and one per question, not cloud-synchronized evidence.
+
+LAB prepares unpublished canonical metadata registration for76 exam/subject records
+and234 inputs;1 Yonsei additional exam/3 inputs held for identity reconciliation.
+Production general questions remain0. Public Catalog only enriches exact published
+source keys under anonymous RLS, does not set evaluation readiness. Live cross-platform
+Draft and actual Provider/Credit E2E are NOT verified. No schema/permission change.
+
+Flutter3.47.6 analyze PASS;46 related tests PASS; Android debug/iOS Simulator PASS.
+WEB1080PASS/1SKIP plus2 additional anonymous-boundary checks PASS, lint/types/build PASS.
+PG17 registration replay/unpublished/edited rollback denial/exact baseline restore PASS;
+3 generator tests PASS. Full corpus Rubric/evidence/rights verification, durable exam
+worker authorization/journal/synthesis, shared exam History/QA/erasure and mounted
+submission remain development gaps. Production migration/Credit/public launch held.
