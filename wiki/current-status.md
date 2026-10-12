@@ -17,10 +17,7 @@ Catalog service-priority sort LIVE;42/49,Owner22/retained30 preserved.
 
 V2 retained12 source hashes;53 Master/50 Offering/101 Track,052 quarantined.
 Raw research stays private. Historical packages preserved; runtime rights gates remain.
-Python10/WEB13/typecheck/lint/build previously PASS; no device/Provider/Credit writes.
 [Full result and restore](essay-lab-manus-handoff-20261010.md).
-
-Prior QA metadata remains unapplied; [review packet](../supabase/verification/quality_metadata/README.md).
 
 Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
 Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+
