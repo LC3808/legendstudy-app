@@ -669,3 +669,9 @@ rollback before asking for a separate operational apply; do not bulk db push.
 New exam submission, whole-exam Credit settlement, shared server Draft, exam History/
 growth/QA and actual WEB↔APP Provider/Credit E2E remain incomplete. This is PARTIAL,
 not approval-only blocked and not a completed universal service.
+
+WEB release verified: LAB96d6572f392c6f79e09f6083d5270fdac7f16dc1,
+Pagesb95c09d6-f388-47ed-81a9-8f68376231f4 Production SUCCESS; settings unchanged.
+Live21/77/237 selection, six widths×100/200%, text/photo restore, photo deletion,
+question isolation and disabled evaluation PASS. Rollback deploymentdd8a45d0 remains.
+No private gateway success claimed without essay_worker server credential.
