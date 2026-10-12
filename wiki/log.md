@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-13 — Owner-approved private source registration applied
+
+74new exams+234unpublished questions applied/read-back;2existing exams reused, Yonsei1/3held. RLS/ACL unchanged. Registry-bound real content19RPC checks and durable Worker34tests PASS. Actual service/Provider/Credit E2E still incomplete. [Details](essay-full-service-implementation-20261011.md#oct13-p0-final-connection--registration-applied-service-partial).
+
 ## 2026-10-13 — Shared Draft and canonical registration review
 
 Native+WEB canonical text Draft/CAS connection preserves local/conflicting answers; optional text-image attachment. Analyze46tests/APK/iOS PASS. Registration review76/234,1exam/3inputs held; no production apply. Actual new-source Provider/Credit/History service remains PARTIAL/HOLD. [Details](essay-full-service-implementation-20261011.md#oct13-shared-draft-and-registration-continuation--partial).

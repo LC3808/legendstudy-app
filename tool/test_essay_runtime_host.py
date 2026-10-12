@@ -1,5 +1,5 @@
 """Private HTTP adapter + existing worker, synthetic transport only. No Provider call."""
-import unittest,io,json
+import unittest,io,json,tempfile
 from contextlib import nullcontext
 from unittest.mock import patch
 from dataclasses import replace
@@ -13,6 +13,10 @@ class HostTests(unittest.TestCase):
   class Journal:
    ready=True
    value=None
+   started=False
+   def begin(self,e):
+    if self.started:return False
+    self.started=True;return True
    def lock(self,e):return nullcontext()
    def read(self,e):return self.value
    def write(self,e,v):self.value=v;saved.append(v)
@@ -49,6 +53,16 @@ class HostTests(unittest.TestCase):
   h,w,c,r,j=self.fixture();h.user_rpc=lambda *a:{'state':'completed'}
   with patch('tool.essay_lab.runtime_host.cache_for_claim',return_value=w.cache):self.assertEqual(self.dispatch(h)[0],200)
   self.assertEqual(r,[])
+ def test_durable_pending_after_process_loss_does_not_redispatch(self):
+  from tool.essay_lab.durable_journal import DurableJournal
+  with tempfile.TemporaryDirectory() as root:
+   h,w,c,r,j=self.fixture();h.journal=DurableJournal(root)
+   def interrupted(_):raise RuntimeError('simulated process loss after dispatch intent')
+   original=w.execute;w.execute=interrupted
+   with patch('tool.essay_lab.runtime_host.cache_for_claim',return_value=w.cache):self.assertEqual(self.dispatch(h)[0],503)
+   w.execute=original;h.journal=DurableJournal(root)
+   with patch('tool.essay_lab.runtime_host.cache_for_claim',return_value=w.cache):self.assertEqual(self.dispatch(h)[0],409)
+   self.assertEqual(r,[]);self.assertEqual(c,[])
  def test_wsgi_bounded_and_no_store(self):
   h,*_=self.fixture();statuses=[]
   body=b'{}';out=h.wsgi({'REQUEST_METHOD':'POST','CONTENT_LENGTH':'5000','wsgi.input':io.BytesIO(body)},lambda *a:statuses.append(a))

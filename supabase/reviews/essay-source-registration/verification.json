@@ -1,0 +1,18 @@
+{
+  "localRegistration": {
+    "engine": "PostgreSQL17",
+    "replay": "PASS",
+    "anonymousAuthenticatedReadHiddenWriteDenied": "PASS",
+    "rlsDriftRejected": "PASS",
+    "policyPreserved": "PASS",
+    "editedRollbackDenied": "PASS",
+    "exactPriorBaselineRestored": "PASS"
+  },
+  "privateRealPackageBindingTests": 3,
+  "realContentLocalRpcChecks": 19,
+  "workerAndDurableJournalTests": 34,
+  "existingExamLedgerLocalChecks": 12,
+  "realProviderCalls": 0,
+  "operatingCreditTransactions": 0,
+  "publicActivation": "HOLD"
+}

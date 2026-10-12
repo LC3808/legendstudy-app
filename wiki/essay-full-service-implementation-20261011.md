@@ -572,3 +572,41 @@ PG17 registration replay/unpublished/edited rollback denial/exact baseline resto
 3 generator tests PASS. Full corpus Rubric/evidence/rights verification, durable exam
 worker authorization/journal/synthesis, shared exam History/QA/erasure and mounted
 submission remain development gaps. Production migration/Credit/public launch held.
+
+## Oct13 P0 final connection — registration APPLIED, service PARTIAL
+
+Owner explicitly approved only74 new private exams +2 existing exams reused +234
+unpublished questions. Hosted migration20261012212352 applied successfully. Actual
+read-back:96total exams,74new,234registered questions,0published,0active new exams.
+Exact question-ID set MD5f5c1407ffbf7c735e22d587aaff27fbd matches manifest; existing
+RLS expression hashes and ACLs unchanged. Yonsei additional1/3 remains excluded.
+CLI-created draft20261012211746 renamed to hosted migration version to keep history
+consistent; SQL hash unchanged. Package: supabase/reviews/essay-source-registration.
+No operating Credit transaction, Provider call, publication or permission expansion.
+
+Existing SKKU private package3questions/9official criteria bound to registered IDs
+using exact exam/PDF SHA and unique verified labels, preserving source text, evidence
+and criterion identities. Existing content preparation CLI accepts registration
+manifest. Real private content + local canonical PG/RPC tests19 PASS: Draft/submit,
+owner and stale-revision denial, reviewed Worker evidence claim, failed reservation
+release, immutable original/rewrite. No real Provider call. Figure-dependent2/3
+remain blocked by existing text-only worker boundary; no invented visual support.
+Hanyang/Sookmyung reviewed offline sources still require production package bindings.
+
+DurableJournal implements private atomic/fsync checkpoints and process locks for the
+existing RuntimeHost. Persistent dispatch-intent prevents a restart from silently
+calling the Provider twice; unknown work requires reconciliation.34 related Python
+tests PASS including8 competing processes and restart. Single persistent host only,
+not a distributed lease/ephemeral Cloudflare storage solution.3real-package binding
+tests PASS. Local registration RLS/replay/rollback checks PASS. No frontend/native
+UI changes in this continuation; prior builds retained, not claimed rerun.
+
+Longitudinal checks: immutable student/history records untouched; original package
+hashes and criterion context retained; alias binding makes copies, never rewrites
+old IDs; owner identity remains existing Auth UID; learning-only derived metadata;
+private journal must integrate existing deletion/retention before production hosting;
+no source/evaluation/growth fabricated. Existing Math, Ledger, payment/IAP preserved.
+Remaining service work: reviewed package completion and rights, exam runtime
+least-privilege/lifecycle/worker deployment, mounted exam submit/reevaluation,
+shared History/growth/adminQA/erasure. Registration alone does not open Draft or
+Provider access under existing published-question RLS. Public activation HOLD.

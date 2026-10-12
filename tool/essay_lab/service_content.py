@@ -48,6 +48,33 @@ def prepare(package,manifest,figure):
     return dict(version='essay-service-import-v1',exam_id=EXAM_ID,source_sha256=PDF_SHA,package_version=version,
       publication_allowed=False,provider_transmission_allowed=False,questions=questions,evidence=evidence,criteria=criteria,private_content=content)
 
+def bind_registration(plan,registered):
+    """Bind already validated private content to reviewed canonical registration.
+    Exact PDF hash, exam ID and unique labels required; never infer numbered aliases.
+    Only question IDs/metadata keys change; evidence text/hashes and criterion IDs stay.
+    Registration does not grant publication or Provider processing rights.
+    """
+    if registered['examId']!=plan['exam_id'] or plan['source_sha256'] not in registered['sourceHashes']:
+        raise ValueError('REGISTRY_SOURCE_MISMATCH')
+    mapping={};targets={}
+    for q in plan['questions']:
+        matches=[x for x in registered['questions'] if x['label']==q['label']]
+        if len(matches)!=1:raise ValueError('REGISTRY_QUESTION_REVIEW_REQUIRED')
+        target=matches[0]
+        if target['id'] in targets:raise ValueError('REGISTRY_QUESTION_COLLISION')
+        mapping[q['id']]=target['id'];targets[target['id']]=target
+    result=deepcopy(plan)
+    for q in result['questions']:
+        q['id']=mapping[q['id']];target=targets[q['id']]
+        q.update(question_key=target['sourceKey'],display_order=target['order'],metadata_version='source-registration-v1')
+    for key in ['evidence','criteria','private_content']:
+        for row in result[key]:
+            row['question_id']=mapping[row['question_id']]
+            if key=='private_content':row['metadata_version']='source-registration-v1'
+    result['source_registry_key']=registered['sourceKey']
+    return result
+
+
 def import_isolated(connection,plan):
     """One transaction; idempotent exact replay, conflicting originals abort. Caller cannot publish.
     Uses psycopg composables/parameters, never interpolates source text into SQL.
@@ -116,12 +143,18 @@ def main():
     parser=argparse.ArgumentParser(description='Prepare private, unpublished existing-schema content. Never connects to Production.')
     parser.add_argument('--package-dir',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--registration',type=Path)
     args=parser.parse_args()
     if '.local' not in args.out.resolve().parts:raise ValueError('PRIVATE_LOCAL_OUTPUT_REQUIRED')
     root=Path(__file__).resolve().parents[2]
     plan=prepare(json.loads((args.package_dir/'package.json').read_text()),
       json.loads((root/'tool/essay_lab/evidence/skku_2025_humanities1_manifest.json').read_text()),
       (args.package_dir/'q2-data-1.png').read_bytes())
+    if args.registration:
+        registration=json.loads(args.registration.read_text())
+        matches=[e for e in registration['exams'] if e['examId']==plan['exam_id']]
+        if len(matches)!=1:raise ValueError('REGISTRY_EXAM_NOT_UNIQUE')
+        plan=bind_registration(plan,matches[0])
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n')
     args.out.chmod(0o600)

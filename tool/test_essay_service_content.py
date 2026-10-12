@@ -3,7 +3,7 @@ import copy,json,os,hashlib
 import psycopg
 from pathlib import Path
 import test_human_quality as harness
-from essay_lab.service_content import prepare,import_isolated,cache_for_claim,EXAM_ID,RESOURCE_ID
+from essay_lab.service_content import prepare,import_isolated,cache_for_claim,bind_registration,EXAM_ID,RESOURCE_ID
 R=Path(__file__).resolve().parents[1]
 
 def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock):
@@ -12,6 +12,11 @@ def verify(c,rpc,new,scalar,first,second,zero,A,B,OP,session,previous,args,sock)
  manifest=json.loads((R/'tool/essay_lab/evidence/skku_2025_humanities1_manifest.json').read_text())
  figure=(root/'q2-data-1.png').read_bytes()
  plan=prepare(package,manifest,figure);checks=[]
+ if os.environ.get('ESSAY_REGISTRATION_BINDING')=='1':
+  registration_manifest=json.loads((R/'supabase/reviews/essay-source-registration/manifest.json').read_text())
+  registration=next(e for e in registration_manifest['exams'] if e['examId']==EXAM_ID)
+  plan=bind_registration(plan,registration)
+
  def ok(name,condition=True):assert condition,name;checks.append(name);print(name,'PASS',flush=True)
  def reject(name,fn):
   try:fn()

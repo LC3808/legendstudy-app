@@ -2,8 +2,8 @@
 
 ## Shared Essay APP/WEB — Oct12 — PARTIAL
 
-Native21/77/237 shared source UI preserved. Canonical-question Draft/CAS sync added; production questions0, so live cross-device sync/evaluation remain unverified.
-Analyze/46 tests/APK/iOS PASS. Exam billing/History/QA remain development gaps. Public HOLD; no DB/Credit writes.
+Native/WEB21/77/237 preserved. Owner-approved private registration APPLIED:74new exams/234questions; published0. Existing RLS/Credit/HOLD unchanged.
+Registry→reviewed Worker binding and durable dispatch journal tested; operational exam submission/History/QA still incomplete.
 [Details](essay-full-service-implementation-20261011.md#oct12-shared-source-catalog-and-image-input).
 
 ## Essay Catalog/detail UX — Oct11

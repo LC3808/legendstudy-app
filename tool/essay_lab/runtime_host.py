@@ -25,7 +25,7 @@ class RuntimeHost:
 
     authenticate(token) verifies Auth online AND existing allowlist.
     owned(token,id) performs RLS read of the evaluation with its frozen input_snapshot.
-    journal.lock(id) must serialize processes, journal.read/write are durable/private.
+    journal.lock(id) must serialize processes, journal.read/write are durable/private; begin atomically marks pending before dispatch.
     worker_factory(permit,cache,checkpoint) MUST return ReviewedRuntimeWorker with
     independent SignedReview, receipt persistence and the existing provider adapter.
     preflight(q) must validate exact provider binding, reviewer key/source and receipt sink
@@ -79,7 +79,9 @@ class RuntimeHost:
                     return 200,{'code':'STATUS_CHECK_REQUIRED','evaluation_id':eid}
                 saved=self.journal.read(eid)
                 if saved is not None:worker.resume_finalization(saved)
-                else:dispatch_owned_evaluation(eid,user,worker)
+                else:
+                    require(self.journal.begin(eid),'RECONCILIATION_REQUIRED')
+                    dispatch_owned_evaluation(eid,user,worker)
                 return 202,{'code':'STATUS_CHECK_REQUIRED','evaluation_id':eid}
         except (Invalid,ValueError,KeyError,TypeError):
             return 409,{'code':'STATUS_CHECK_REQUIRED'}

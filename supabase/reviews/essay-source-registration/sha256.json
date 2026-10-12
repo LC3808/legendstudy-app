@@ -1,0 +1,5 @@
+{
+  "supabase/reviews/essay-source-registration/rollback.sql": "9b28d50551edecfe820346aae2d276a9d747e16724d016afa1717f4154f4c41a",
+  "supabase/reviews/essay-source-registration/manifest.json": "df3aeafec3b3484d8b660c3e9aee401f5e1eb79ef234b858cbf33ae744fb6edc",
+  "supabase/migrations/20261012212352_essay_source_registration_76_234.sql": "127473bcf490aa9ecf2e5fa5f6b6b3fd9d449e13419d2a609d695d2d0e5d3bed"
+}
