@@ -610,3 +610,62 @@ Remaining service work: reviewed package completion and rights, exam runtime
 least-privilege/lifecycle/worker deployment, mounted exam submit/reevaluation,
 shared History/growth/adminQA/erasure. Registration alone does not open Draft or
 Provider access under existing published-question RLS. Public activation HOLD.
+
+
+## Oct13 universal runtime continuation
+
+Latest Owner policy: common runtime + independent university/exam/question evidence;
+Hanyang/Sookmyung are verified examples, never a university scope limit. All21 remain
+in scope. Original20ZIP/1030PDF and private content remain outside Git/public storage.
+
+Explicitly approved RPC applied as `20261012215054_essay_private_registry_read.sql`.
+Actual read234 questions/76 exams, exact manifest ID digest
+`f5c1407ffbf7c735e22d587aaff27fbd`; unpublished234. EXECUTE: essay_worker true,
+anon/authenticated/service_role false. Read-back used DB owner, not an app JWT E2E.
+No table grants/RLS/publication/evaluation activation/Credit changes.
+
+WEB/Native use authenticated POST for canonical private metadata with the existing
+online Auth/allowlist gateway, public GET fallback. Production still needs an existing
+unexpired essay_worker credential in ESSAY_REGISTRY_WORKER_JWT. Missing config stays
+closed; private metadata alone never enables published-question Draft or evaluation.
+
+Both clients now preserve up to6 ordered image pages per question, preview/delete,
+legacy single-image restoration and failed-save retry. Native reuses private atomic
+files with an atomic manifest; WEB uses existing IndexedDB. These photos remain
+DEVICE LOCAL; private storage upload and cross-device image Draft are NOT connected.
+
+Reused source inventory maps every registered source to21/76/234. Existing review
+pair groups add76 companion-file candidates;56 exams have scoring-criterion page
+candidates. These are not56 verified Rubrics or Provider-ready packages.
+Aggregate coverage: `supabase/reviews/essay-source-registration/material-coverage.json`.
+Private per-exam locators remain outside Git. Actual question/role pairing review and
+external transmission permission are still necessary; no inferred official criteria.
+
+Common package adapter checks university/year/kind/track/session/campus/question,
+question-source hash and cache digest. It accepts text-assessment contracts only;
+Math/science stay on their existing runtime. All234 identity permutations tested with
+synthetic caches are security tests, not actual234 evaluation packages.
+Reused actual accepted Hanyang2024admission afternoon2q1 and Sookmyung2025mockq1-1
+inputs bind exact registered IDs, excluding prior student answer/image. Accepted
+source images now pass through existing Responses transport with hash/ref checking,
+store:false, current reviewed Worker prompt and existing independent-review gate.
+SKKU existing3-question package remains; figure/rights/operational gates preserved.
+No material or model binding was installed in Production by these local adapters.
+
+Exam adapter restores completed children by exact frozen-claim digest. Unknown work
+stays reconciling; no guessed retry/refund. Durable production store wiring and whole
+exam synthesis, lifecycle/lease ownership, canonical History/QA persistence remain
+DEVELOPMENT GAPS. Existing canonical result UI/stars/Math/Credit ledger are unchanged.
+
+Checks: new private SQL7 local checks+rollback; runtime/package37 (synthetic transport,
+actual two private input fixtures); WEB172 related tests; Native11; analyze, typecheck,
+lint, boundary/secret audits, WEB build, Android debug/iOS Simulator build PASS.
+Real Chromium two-image restore/delete/order,6 widths360–1440 and200% text PASS locally.
+No physical-device debugging, actual Provider call or operating Credit transaction.
+
+Read-only Production verified provider_policy/provider_binding_valid/telemetry RPC
+are absent despite their repository migration. Review exact prerequisite SQL and
+rollback before asking for a separate operational apply; do not bulk db push.
+New exam submission, whole-exam Credit settlement, shared server Draft, exam History/
+growth/QA and actual WEB↔APP Provider/Credit E2E remain incomplete. This is PARTIAL,
+not approval-only blocked and not a completed universal service.

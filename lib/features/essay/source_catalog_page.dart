@@ -34,20 +34,33 @@ class SourceCatalogPage extends ConsumerWidget {
       key: ValueKey(owner),
       owner: owner,
       catalog: catalog,
+      loadCatalog: () => SourceCatalog.load(
+        accessToken: ref
+            .read(supabaseClientProvider)
+            ?.auth
+            .currentSession
+            ?.accessToken,
+      ),
     );
   }
 }
 
 class _SourceSelection extends StatefulWidget {
-  const _SourceSelection({super.key, required this.owner, this.catalog});
+  const _SourceSelection({
+    super.key,
+    required this.owner,
+    required this.loadCatalog,
+    this.catalog,
+  });
   final String owner;
+  final Future<SourceCatalog> Function() loadCatalog;
   final Future<SourceCatalog>? catalog;
   @override
   State<_SourceSelection> createState() => _SourceSelectionState();
 }
 
 class _SourceSelectionState extends State<_SourceSelection> {
-  late Future<SourceCatalog> data = widget.catalog ?? SourceCatalog.load();
+  late Future<SourceCatalog> data = widget.catalog ?? widget.loadCatalog();
   final included = <String, Set<String>>{};
   String? university, year, kind, track, examKey;
   Widget choice(
@@ -88,7 +101,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
         if (snapshot.hasError) {
           return Center(
             child: TextButton(
-              onPressed: () => setState(() => data = SourceCatalog.load()),
+              onPressed: () => setState(() => data = widget.loadCatalog()),
               child: const Text('문항을 불러오지 못했어요. 다시 확인'),
             ),
           );
@@ -260,7 +273,7 @@ class _SourceWriter extends ConsumerStatefulWidget {
 }
 
 class _SourceWriterState extends ConsumerState<_SourceWriter> {
-  Uint8List? photo;
+  List<Uint8List> photo = [];
   bool imageReady = false, imageSaving = false, imageDirty = false;
   String? photoNotice;
   late final draft = SourceDraftGateway(
@@ -269,6 +282,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     remote:
         widget.owner != 'guest' &&
             widget.question['dbQuestionId'] is String &&
+            widget.question['accountDraftReady'] != false &&
             ref.read(supabaseClientProvider) != null
         ? SupabaseEssayGateway(
             SupabaseEssayStore(ref.read(supabaseClientProvider)!),
@@ -277,14 +291,14 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
           )
         : null,
   );
-  Future<void> savePhoto(Uint8List? bytes) async {
+  Future<void> savePhoto(List<Uint8List> bytes) async {
     setState(() {
       photo = bytes;
       imageSaving = true;
       imageDirty = true;
     });
     try {
-      await draft.saveImage(bytes);
+      await draft.saveImages(bytes);
       if (mounted) {
         setState(() {
           imageDirty = false;
@@ -312,7 +326,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     try {
       final g = draft;
       final d = await g.openSharedDraft();
-      final image = await g.loadImage();
+      final image = await g.loadImages();
       if (mounted) {
         photo = image;
         imageReady = true;
@@ -383,10 +397,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       Text(widget.question['sourceLocator'] as String),
                   ] else ...[
                     if (widget.question['inputMode'] == 'image' ||
-                        photo != null ||
+                        photo.isNotEmpty ||
                         showOptionalImage) ...[
-                      AnswerImageInput(
-                        value: photo,
+                      AnswerImagesInput(
+                        values: photo,
                         enabled: imageReady && !imageSaving,
                         onChanged: savePhoto,
                       ),
@@ -398,7 +412,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         ),
                     ],
                     if (widget.question['inputMode'] != 'image' &&
-                        photo == null &&
+                        photo.isEmpty &&
                         !showOptionalImage)
                       TextButton.icon(
                         onPressed: () =>

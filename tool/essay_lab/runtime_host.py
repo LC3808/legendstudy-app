@@ -5,7 +5,7 @@ Host callbacks must use the verified caller JWT / existing narrow worker credent
 from copy import deepcopy
 from dataclasses import dataclass
 import hmac,json,re,time
-from .live_worker import digest,require,Invalid
+from .live_worker import digest,require,Invalid,package
 from .reviewed_runtime import ReviewedRuntimeWorker,RuntimePermit,dispatch_owned_evaluation
 from .service_content import cache_for_claim
 
@@ -19,6 +19,7 @@ class HostedQuestion:
     plan:dict
     approved_processing:bool=False
     reviewed_cache:bool=False
+    frozen_cache:dict|None=None
 
 class RuntimeHost:
     """Dependency-injected production adapter; missing prerequisites fail before claiming.
@@ -44,6 +45,9 @@ class RuntimeHost:
         require(q.binding.get('provider') not in (None,'unconfigured','synthetic'),'PROVIDER_REQUIRED')
         require(self.journal.ready is True,'DURABLE_CHECKPOINT_REQUIRED')
         require(self.preflight(q) is True,'REVIEWER_PROVIDER_PERSISTENCE_UNAVAILABLE')
+        if q.frozen_cache is not None:
+            require(q.frozen_cache.get('contract_version')=='1.3' and bool(q.frozen_cache.get('evidence')) and bool(q.frozen_cache.get('criteria')),'CONTENT_NOT_SUPPORTED')
+            return
         private=next((x for x in q.plan['private_content'] if x['question_id']==q.question_id),None)
         require(private and not private['requires_figure'] and private['metadata_version']==q.metadata_version,'CONTENT_NOT_SUPPORTED')
 
@@ -67,7 +71,9 @@ class RuntimeHost:
                 q=self.questions.get(row.get('question_id'));require(q,'QUESTION_UNAVAILABLE');self.ready(q)
                 require(row.get('regime_key')==q.regime,'POLICY_CHANGED')
                 snapshot=row['input_snapshot']
-                cache=cache_for_claim(q.plan,q.question_id,{'input':snapshot,'answer':row['answer']})
+                claim={'input':snapshot,'answer':row['answer']}
+                cache=deepcopy(q.frozen_cache) if q.frozen_cache is not None else cache_for_claim(q.plan,q.question_id,claim)
+                package(claim,cache)
                 permit=RuntimePermit(eid,digest(snapshot),digest(cache),q.binding,int(self.clock()+90),True)
                 checkpoint=lambda value:self.journal.write(eid,deepcopy(value))
                 worker=self.worker_factory(permit,cache,checkpoint)

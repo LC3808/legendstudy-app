@@ -25,11 +25,30 @@ class SourceCatalog {
       exams,
     );
   }
-  static Future<SourceCatalog> load() async {
-    final response = await http
-        .get(Uri.parse('https://lab.legendstudy.com/api/essay/catalog'))
-        .timeout(const Duration(seconds: 20));
-    if (response.statusCode != 200) throw Exception('Catalog unavailable');
-    return SourceCatalog.parse(utf8.decode(response.bodyBytes));
+  static Future<SourceCatalog> load({
+    String? accessToken,
+    http.Client? client,
+  }) async {
+    final transport = client ?? http.Client();
+    try {
+      if (accessToken != null && accessToken.isNotEmpty) {
+        final privateResponse = await transport
+            .post(
+              Uri.parse('https://lab.legendstudy.com/api/essay/catalog'),
+              headers: {'Authorization': 'Bearer $accessToken'},
+            )
+            .timeout(const Duration(seconds: 20));
+        if (privateResponse.statusCode == 200) {
+          return SourceCatalog.parse(utf8.decode(privateResponse.bodyBytes));
+        }
+      }
+      final response = await transport
+          .get(Uri.parse('https://lab.legendstudy.com/api/essay/catalog'))
+          .timeout(const Duration(seconds: 20));
+      if (response.statusCode != 200) throw Exception('Catalog unavailable');
+      return SourceCatalog.parse(utf8.decode(response.bodyBytes));
+    } finally {
+      if (client == null) transport.close();
+    }
   }
 }

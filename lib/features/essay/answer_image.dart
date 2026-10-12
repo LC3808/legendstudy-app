@@ -111,3 +111,47 @@ class _AnswerImageInputState extends State<AnswerImageInput> {
     ],
   );
 }
+
+/// Ordered pages; existing single-page camera/gallery component remains unchanged.
+class AnswerImagesInput extends StatelessWidget {
+  const AnswerImagesInput({
+    super.key,
+    required this.values,
+    required this.onChanged,
+    this.enabled = true,
+  });
+  final List<Uint8List> values;
+  final Future<void> Function(List<Uint8List>) onChanged;
+  final bool enabled;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      for (var i = 0; i < values.length; i++) ...[
+        Text('답안 사진 ${i + 1}'),
+        AnswerImageInput(
+          value: values[i],
+          enabled: enabled,
+          onChanged: (next) async {
+            final changed = List<Uint8List>.of(values);
+            if (next == null) {
+              changed.removeAt(i);
+            } else {
+              changed[i] = next;
+            }
+            await onChanged(changed);
+          },
+        ),
+      ],
+      if (values.length < 6)
+        AnswerImageInput(
+          value: null,
+          enabled: enabled,
+          onChanged: (next) async {
+            if (next != null) await onChanged([...values, next]);
+          },
+        ),
+      Text('사진 ${values.length}/6장 · 첨부한 순서로 저장됩니다.'),
+    ],
+  );
+}

@@ -34,6 +34,9 @@ an exam question staging channel. Existing prompt, output validation, Provider
 identity/permit and independent review remain. Child success never calls legacy
 per-question settlement. Only a complete exam checkpoint reaches exam finalization.
 Unknown outcomes remain reconciling; no automatic refund or second Provider call.
+Completed child checkpoints can be restored with an exact frozen-claim hash;
+pending/unknown children remain reconciling without another Provider call. The
+trusted persistent store must supply these checkpoints; this is not an exposed API.
 Whole-exam synthesis must be supplied by a reviewed implementation; no invented
 summary fallback. Tests use fake transport, not real Provider acceptance.
 

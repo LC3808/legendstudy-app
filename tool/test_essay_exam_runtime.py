@@ -51,8 +51,26 @@ class ExamRuntimeTests(unittest.TestCase):
   execute,_,requests,_,saved,settled=self.setup_exam()
   with self.assertRaises(Invalid):execute(summary=lambda _: '')
   self.assertEqual(settled,[])
-  with self.assertRaises(Invalid):execute()
+  self.assertEqual(execute(),'completed')
   self.assertEqual([len(x) for x in requests],[1,1])
+ def test_child_checkpoint_restores_without_second_provider(self):
+  execute,questions,requests,_,saved,settled=self.setup_exam()
+  self.assertEqual(execute(),'completed')
+  originals=[q['channel'] for q in questions]
+  for q,old in zip(questions,originals):
+   restored=ExamQuestionChannel(old.evaluation_id,old.claim,lambda *args: self.fail('No new child event'))
+   restored.restore(old.snapshot());q['channel']=restored
+  self.assertEqual(execute(),'completed')
+  self.assertEqual([len(x) for x in requests],[1,1])
+  foreign=ExamQuestionChannel('foreign',originals[0].claim,lambda *args:None)
+  with self.assertRaises(Invalid):foreign.restore(originals[0].snapshot())
+ def test_pending_child_checkpoint_never_redispatches(self):
+  execute,questions,requests,_,_,settled=self.setup_exam()
+  first=questions[0]['channel'];first('essay_claim',{'p_evaluation':first.evaluation_id})
+  restored=ExamQuestionChannel(first.evaluation_id,first.claim,lambda *args:None)
+  restored.restore(first.snapshot());questions[0]['channel']=restored
+  self.assertEqual(execute(),'reconciling')
+  self.assertEqual([len(x) for x in requests],[0,0]);self.assertEqual(settled,[])
  def test_unknown_rpc_and_foreign_lease_rejected(self):
   _,questions,_,_,_,_=self.setup_exam();channel=questions[0]['channel']
   channel('essay_claim',{'p_evaluation':'evaluation-0'})

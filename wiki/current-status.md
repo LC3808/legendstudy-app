@@ -1,10 +1,11 @@
 # Current Status
 
-## Shared Essay APP/WEB — Oct12 — PARTIAL
+## Universal Essay — Oct13 — PARTIAL
 
-Native/WEB21/77/237 preserved. Owner-approved private registration APPLIED:74new exams/234questions; published0. Existing RLS/Credit/HOLD unchanged.
-Registry→reviewed Worker binding and durable dispatch journal tested; operational exam submission/History/QA still incomplete.
-[Details](essay-full-service-implementation-20261011.md#oct12-shared-source-catalog-and-image-input).
+Private Registry76/234 and approved worker-only read RPC applied; published0/HOLD.
+WEB/Native multi-photo drafts and common package binding tested. Operational exam
+Credit/History/QA, server Draft and actual Provider E2E remain unfinished.
+[Details](essay-full-service-implementation-20261011.md#oct13-universal-runtime-continuation).
 
 ## Essay Catalog/detail UX — Oct11
 

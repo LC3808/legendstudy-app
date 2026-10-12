@@ -1,0 +1,261 @@
+{
+  "universities": 21,
+  "exams": 76,
+  "questions": 234,
+  "scope": "Exact source/registry mapping; role pages are candidates, not approved runtime packages",
+  "runtimeActivation": false,
+  "coverage": {
+    "konkuk": {
+      "exams": 3,
+      "questions": 8,
+      "sourceFiles": 3,
+      "roleCandidateExams": {
+        "exam_intent": 3,
+        "scoring_criteria": 3,
+        "explanation": 3,
+        "example_answer": 3
+      },
+      "pairedCandidateFiles": 3
+    },
+    "kyunghee": {
+      "exams": 2,
+      "questions": 7,
+      "sourceFiles": 2,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 0,
+        "explanation": 2,
+        "example_answer": 2
+      },
+      "pairedCandidateFiles": 2
+    },
+    "cau": {
+      "exams": 24,
+      "questions": 75,
+      "sourceFiles": 24,
+      "roleCandidateExams": {
+        "exam_intent": 20,
+        "scoring_criteria": 23,
+        "explanation": 22,
+        "example_answer": 23
+      },
+      "pairedCandidateFiles": 23
+    },
+    "catholic": {
+      "exams": 1,
+      "questions": 3,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 1
+    },
+    "yonsei": {
+      "exams": 12,
+      "questions": 47,
+      "sourceFiles": 12,
+      "roleCandidateExams": {
+        "exam_intent": 12,
+        "scoring_criteria": 1,
+        "explanation": 12,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 14
+    },
+    "dongguk": {
+      "exams": 6,
+      "questions": 18,
+      "sourceFiles": 6,
+      "roleCandidateExams": {
+        "exam_intent": 6,
+        "scoring_criteria": 6,
+        "explanation": 6,
+        "example_answer": 6
+      },
+      "pairedCandidateFiles": 6
+    },
+    "pnu": {
+      "exams": 2,
+      "questions": 6,
+      "sourceFiles": 2,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 2,
+        "explanation": 2,
+        "example_answer": 2
+      },
+      "pairedCandidateFiles": 2
+    },
+    "skku": {
+      "exams": 2,
+      "questions": 6,
+      "sourceFiles": 2,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 2,
+        "explanation": 2,
+        "example_answer": 2
+      },
+      "pairedCandidateFiles": 1
+    },
+    "sejong": {
+      "exams": 3,
+      "questions": 9,
+      "sourceFiles": 3,
+      "roleCandidateExams": {
+        "exam_intent": 2,
+        "scoring_criteria": 3,
+        "explanation": 3,
+        "example_answer": 3
+      },
+      "pairedCandidateFiles": 4
+    },
+    "ajou": {
+      "exams": 6,
+      "questions": 12,
+      "sourceFiles": 6,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 5,
+        "explanation": 1,
+        "example_answer": 5
+      },
+      "pairedCandidateFiles": 6
+    },
+    "inha": {
+      "exams": 3,
+      "questions": 9,
+      "sourceFiles": 3,
+      "roleCandidateExams": {
+        "exam_intent": 3,
+        "scoring_criteria": 3,
+        "explanation": 3,
+        "example_answer": 3
+      },
+      "pairedCandidateFiles": 3
+    },
+    "hanyang": {
+      "exams": 3,
+      "questions": 5,
+      "sourceFiles": 3,
+      "roleCandidateExams": {
+        "exam_intent": 2,
+        "scoring_criteria": 1,
+        "explanation": 2,
+        "example_answer": 0
+      },
+      "pairedCandidateFiles": 4
+    },
+    "sookmyung": {
+      "exams": 1,
+      "questions": 4,
+      "sourceFiles": 2,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 4
+    },
+    "uos": {
+      "exams": 1,
+      "questions": 4,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 0,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 1
+    },
+    "knu": {
+      "exams": 1,
+      "questions": 3,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 1
+    },
+    "ewha": {
+      "exams": 1,
+      "questions": 3,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 0,
+        "explanation": 1,
+        "example_answer": 0
+      },
+      "pairedCandidateFiles": 1
+    },
+    "sogang": {
+      "exams": 1,
+      "questions": 1,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 0
+    },
+    "hufs": {
+      "exams": 1,
+      "questions": 3,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 0
+    },
+    "soongsil": {
+      "exams": 1,
+      "questions": 2,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 0
+    },
+    "kwangwoon": {
+      "exams": 1,
+      "questions": 2,
+      "sourceFiles": 2,
+      "roleCandidateExams": {
+        "exam_intent": 1,
+        "scoring_criteria": 1,
+        "explanation": 1,
+        "example_answer": 1
+      },
+      "pairedCandidateFiles": 0
+    },
+    "hongik": {
+      "exams": 1,
+      "questions": 7,
+      "sourceFiles": 1,
+      "roleCandidateExams": {
+        "exam_intent": 0,
+        "scoring_criteria": 0,
+        "explanation": 0,
+        "example_answer": 0
+      },
+      "pairedCandidateFiles": 0
+    }
+  }
+}

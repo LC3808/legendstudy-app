@@ -120,10 +120,25 @@ def package(claim, cache):
         require(len(matches) == 1, 'CRITERION_VERSION')
         text(matches[0]['label']); criteria.append({'reference':ref, 'label':matches[0]['label']})
     # Server identity and only the frozen prior observations; no moving latest reads.
-    return {'contract_version':'1.3','attempt_id':snap['attempt_id'],'answer_hash':snap['answer_hash'],
+    result = {'contract_version':'1.3','attempt_id':snap['attempt_id'],'answer_hash':snap['answer_hash'],
             'answer':answer,'criteria':criteria,'evidence':evidence,
             'scaffolding_context':deepcopy(snap['scaffolding_context']),
             'length_requirement':cache.get('length_requirement')}
+    if cache.get('official_images'):
+        import base64
+        from .bakeoff import image_parts
+        images=cache['official_images'];require(type(images) is list and len(images)<=10,'OFFICIAL_IMAGE_LIMIT')
+        allowed={r['id'] for r in snap['evidence']}
+        decoded=[]
+        for image in images:
+            require(set(image)=={'sha256','data','evidence_ids'} and type(image['data']) is str and len(image['data'])<=8_000_000,'OFFICIAL_IMAGE_SHAPE')
+            require(type(image['evidence_ids']) is list and image['evidence_ids'] and set(image['evidence_ids'])<=allowed,'FOREIGN_OFFICIAL_IMAGE')
+            raw=base64.b64decode(image['data'],validate=True)
+            decoded.append({'sha256':image['sha256'],'bytes':raw})
+        require(sum(len(x['bytes']) for x in decoded)<=12_000_000,'OFFICIAL_IMAGE_LIMIT')
+        image_parts(decoded) # existing hash/PNG validator, no file/network lookup
+        result['official_images']=deepcopy(images)
+    return result
 
 
 def validate_output(out, claim):
@@ -280,6 +295,11 @@ class OpenAIResponses:
         payload={'model':self.model,'store':False,'max_output_tokens':12000,
                  'instructions':self.instructions,'input':encoded(value).decode(),
                  'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':self.schema}}}
+        if value.get('official_images'):
+            text_value={k:v for k,v in value.items() if k!='official_images'}
+            text_value['official_images']=[{k:v for k,v in image.items() if k!='data'} for image in value['official_images']]
+            payload['input']=[{'role':'user','content':[{'type':'input_text','text':encoded(text_value).decode()}]+[
+                {'type':'input_image','image_url':'data:image/png;base64,'+image['data'],'detail':'high'} for image in value['official_images']]}]
         request=Request('https://api.openai.com/v1/responses',data=encoded(payload),headers={'Authorization':'Bearer '+self.key,'Content-Type':'application/json'})
         started=time.monotonic()
         try:

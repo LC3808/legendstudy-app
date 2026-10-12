@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "234_exact_private_ids",
+    "metadata_only",
+    "all_other_roles_denied",
+    "real_account_lifecycle_denied",
+    "unchanged_rls_and_credit",
+    "rollback_removes_only_rpc",
+    "reinstall_after_rollback"
+  ],
+  "productionApplied": false,
+  "providerCalls": 0
+}

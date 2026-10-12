@@ -73,6 +73,60 @@ class SourceDraftGateway implements EssayGateway {
       channel.invokeMethod<Uint8List>('readImage', key);
   Future<void> saveImage(Uint8List? bytes) =>
       channel.invokeMethod('writeImage', {'key': key, 'value': bytes});
+  String get _imagesKey => '${key.split('_').first}_${hash('$key:images-v2')}';
+  String _imageKey(String id) =>
+      '${key.split('_').first}_${hash('$key:image:$id')}';
+  int _imagesRevision = 0;
+  Future<List<Uint8List>> loadImages() async {
+    final raw = await channel.invokeMethod<String>('read', _imagesKey);
+    if (raw == null) {
+      final legacy = await loadImage();
+      return legacy == null ? [] : [legacy];
+    }
+    final doc = jsonDecode(raw) as Map<String, dynamic>;
+    _imagesRevision = doc['revision'] as int;
+    final ids = (jsonDecode(doc['body'] as String) as List).cast<String>();
+    if (ids.length > 6) throw const FormatException('Too many images');
+    final result = <Uint8List>[];
+    for (final id in ids) {
+      final bytes = await channel.invokeMethod<Uint8List>(
+        'readImage',
+        _imageKey(id),
+      );
+      if (bytes == null || sha256.convert(bytes).toString() != id) {
+        throw const FormatException('Image draft incomplete');
+      }
+      result.add(bytes);
+    }
+    return result;
+  }
+
+  Future<void> saveImages(List<Uint8List> images) async {
+    if (images.length > 6 || images.any((b) => b.length > 20971520)) {
+      throw const FormatException('Image limit');
+    }
+    final ids = <String>[];
+    for (final bytes in images) {
+      final id = sha256.convert(bytes).toString();
+      ids.add(id);
+      await channel.invokeMethod('writeImage', {
+        'key': _imageKey(id),
+        'value': bytes,
+      });
+    }
+    // Atomic manifest is committed last. Failed writes leave the previous draft intact.
+    // Old content-addressed pages remain private and are removed by existing owner purge.
+    await channel.invokeMethod('write', {
+      'key': _imagesKey,
+      'expected': _imagesRevision,
+      'value': jsonEncode({
+        'body': jsonEncode(ids),
+        'revision': _imagesRevision + 1,
+      }),
+    });
+    _imagesRevision++;
+  }
+
   @override
   Future<EssayDraft> loadDraft() async {
     final raw = await channel.invokeMethod<String>('read', key);

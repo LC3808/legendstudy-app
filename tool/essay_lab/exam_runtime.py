@@ -6,7 +6,7 @@ is staged, and only the whole exam may settle its single reservation. Production
 hosting, lease fencing and operator/owner reads remain deployment prerequisites.
 """
 from copy import deepcopy
-from .live_worker import Invalid, require
+from .live_worker import Invalid, require, digest
 from .reviewed_runtime import ReviewedRuntimeWorker
 
 class ExamQuestionChannel:
@@ -17,6 +17,26 @@ class ExamQuestionChannel:
         self.output=None
         self.claimed=False
         self.terminal=None
+
+    def restore(self, saved):
+        """Restore only from the trusted durable worker journal, never HTTP input.
+        Bind persisted output to this exact frozen claim, not just a question ID.
+        Pending/unknown work must be reconciled; it cannot dispatch again.
+        """
+        require(not self.claimed and self.terminal is None, 'CHANNEL_ALREADY_STARTED')
+        require(type(saved) is dict and set(saved)=={'evaluation_id','claim_sha256','state','output'}, 'INVALID_CHANNEL_CHECKPOINT')
+        require(saved['evaluation_id']==self.evaluation_id and saved['claim_sha256']==digest(self.claim), 'FOREIGN_CHANNEL_CHECKPOINT')
+        state=saved['state']
+        require(state in ('processing','completed','failed','reconciling'), 'INVALID_CHANNEL_CHECKPOINT')
+        require((state=='completed' and type(saved['output']) is dict) or (state!='completed' and saved['output'] is None), 'INVALID_CHANNEL_CHECKPOINT')
+        self.claimed=True
+        self.terminal=state if state!='processing' else 'reconciling'
+        self.output=deepcopy(saved['output'])
+
+    def snapshot(self):
+        require(self.claimed,'CHANNEL_NOT_STARTED')
+        return dict(evaluation_id=self.evaluation_id,claim_sha256=digest(self.claim),
+                    state=self.terminal or 'processing',output=deepcopy(self.output))
 
     def __call__(self,name,args):
         require(args.get('p_evaluation')==self.evaluation_id,'FOREIGN_EXAM_QUESTION')
@@ -61,10 +81,15 @@ def execute_exam(exam_id, questions, build_worker, summarize, checkpoint, finali
     results=[]
     for question in questions:
         channel=question['channel']
-        worker=build_worker(channel)
-        require(isinstance(worker,ReviewedRuntimeWorker) and worker.rpc is channel,
-                'EXISTING_REVIEWED_WORKER_REQUIRED')
-        state=worker.execute(channel.evaluation_id)
+        # A trusted completed child can survive process restart without re-evaluation.
+        # Claimed-but-unfinished children never get a new provider call by guessing.
+        if channel.claimed:
+            state=channel.terminal or 'reconciling'
+        else:
+            worker=build_worker(channel)
+            require(isinstance(worker,ReviewedRuntimeWorker) and worker.rpc is channel,
+                    'EXISTING_REVIEWED_WORKER_REQUIRED')
+            state=worker.execute(channel.evaluation_id)
         if state=='reconciling':return 'reconciling'
         if state=='failed':
             record={'examId':exam_id,'result':None,'failed':True}

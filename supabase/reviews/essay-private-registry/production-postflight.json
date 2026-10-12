@@ -1,0 +1,15 @@
+{
+  "migration": "20261012215054",
+  "questions": 234,
+  "exams": 76,
+  "published": 0,
+  "execute": {
+    "anon": false,
+    "authenticated": false,
+    "service_role": false,
+    "essay_worker": true
+  },
+  "liveGatewayVerified": false,
+  "functionReadVerifiedAsDatabaseOwner": true,
+  "registeredIdSetMd5": "f5c1407ffbf7c735e22d587aaff27fbd"
+}
