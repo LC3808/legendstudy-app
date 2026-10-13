@@ -1,5 +1,13 @@
 # Development Log
 
+## 2026-10-13 — Materials review / PDF delivery
+
+Protected WEB review UI + Native pdfrx viewer, source hash/page candidates and
+revision-safe private SQL candidate implemented. Local SQL/Python/WEB/Flutter
+checks and Android/iOS simulator builds passed. Hanyang2 PDFs analyzed privately;
+no verification or publication inferred. New DB, actual Provider/Credit and
+student PDF delivery remain pending. [Details](essay-full-service-implementation-20261011.md#oct13-materials-review-and-pdf-delivery--partial).
+
 ## 2026-10-13 — Owner-approved private source registration applied
 
 74new exams+234unpublished questions applied/read-back;2existing exams reused, Yonsei1/3held. RLS/ACL unchanged. Registry-bound real content19RPC checks and durable Worker34tests PASS. Actual service/Provider/Credit E2E still incomplete. [Details](essay-full-service-implementation-20261011.md#oct13-p0-final-connection--registration-applied-service-partial).

@@ -2,9 +2,14 @@
 
 ## Universal Essay — Oct13 — PARTIAL
 
+Materials review/PDF viewer local implementation is ready for review; new private
+DB candidate is NOT APPLIED. WEB/Native conditional PDF viewers preserve existing
+writer/Draft; no student PDF is published. [Materials delivery](essay-full-service-implementation-20261011.md#oct13-materials-review-and-pdf-delivery--partial).
+
 Private Registry76/234 and approved worker-only read RPC applied; published0/HOLD.
 Oct13 persistent exam recovery + local Ledger integration PASS; WEB credential
-preflight added. Worker issuer AND authenticator membership remain unprovisioned.
+preflight added. Owner has configured the Worker Secret; authenticator membership remains false.
+Secret preflight is not successful DB authentication.
 Exact Owner Secret procedure is in the existing private Registry review.
 WEB/Native multi-photo drafts and common package binding tested. Operational exam
 Credit/History/QA, server Draft and actual Provider E2E remain unfinished.

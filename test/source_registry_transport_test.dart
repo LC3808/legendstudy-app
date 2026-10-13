@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -39,7 +38,7 @@ void main() {
             if (call.method == 'readImage') return images[a];
             final args = a as Map;
             if (call.method == 'writeImage') {
-              images[args['key']] = args['value'];
+              images[args['key'] as String] = args['value'] as Uint8List;
               return null;
             }
             if (fail) throw PlatformException(code: 'IO');
@@ -48,7 +47,7 @@ void main() {
               args['expected'],
               old == null ? 0 : jsonDecode(old)['revision'],
             );
-            json[args['key']] = args['value'];
+            json[args['key'] as String] = args['value'] as String;
             return null;
           });
       final gateway = SourceDraftGateway('a', 'q');

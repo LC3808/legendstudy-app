@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'answer_image.dart';
+import 'question_pdf.dart';
+
 import '../../core/links/external_link.dart';
 
 import 'package:go_router/go_router.dart';
@@ -312,6 +314,26 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     }
   }
 
+  late final pdfPosition = SourceDraftGateway(
+    widget.owner,
+    'pdf:${widget.question['key']}:${widget.question['studentPdf']}',
+  );
+  int pdfRevision = 0;
+  Future<void> pdfWrite = Future<void>.value();
+  Future<int?> restorePdfPage() async {
+    final d = await pdfPosition.loadDraft();
+    pdfRevision = d.revision;
+    return int.tryParse(d.body);
+  }
+
+  Future<void> savePdfPage(int page) {
+    pdfWrite = pdfWrite.catchError((Object _) {}).then((_) async {
+      final d = await pdfPosition.saveLocalDraft('$page', pdfRevision);
+      pdfRevision = d.revision;
+    });
+    return pdfWrite;
+  }
+
   EssayController? controller;
   final editor = TextEditingController();
   String? error;
@@ -365,6 +387,11 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       );
     }
     final c = controller;
+    final pdf = QuestionPdfAsset.parse(
+      widget.question['studentPdf'],
+      widget.question['dbQuestionId'] as String? ?? '',
+    );
+    final positionKey = 'essay-pdf:${widget.owner}:${pdf?.id}:${pdf?.hash}';
     return PopScope(
       canPop:
           (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
@@ -385,6 +412,26 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         setState(() => problem = v.first),
                   ),
                   const SizedBox(height: 20),
+                  if (pdf != null)
+                    Offstage(
+                      offstage: !problem,
+                      child: EssayQuestionPdf(
+                        key: ValueKey(positionKey),
+                        asset: pdf,
+                        load: () async {
+                          final client = ref.read(supabaseClientProvider);
+                          if (client == null ||
+                              client.auth.currentUser?.id != widget.owner) {
+                            throw StateError('로그인 필요');
+                          }
+                          return client.storage
+                              .from('essay-student-questions')
+                              .download('${pdf.id}.pdf');
+                        },
+                        restorePage: restorePdfPage,
+                        savePage: savePdfPage,
+                      ),
+                    ),
                   if (problem) ...[
                     Text('${widget.exam['year']}학년도 · ${widget.exam['track']}'),
                     const Text('대학 공식 기출자료에서 문제와 제시문을 확인하세요.'),

@@ -718,3 +718,46 @@ and private photo sync, exam submission and canonical History/growth/QA + lifecy
 and erasure integration, actual approved WEB↔APP E2E. Owner action does not replace
 these development gaps. Separate approvals remain required for operational DB,
 actual Credit, public activation and Store release.
+
+
+## Oct13 materials review and PDF delivery — PARTIAL
+
+Latest Owner direction adds original-layout student question PDFs and protected
+materials review; it supersedes the earlier no-PDF-viewer scope without changing
+rights, Registry IDs, Runtime, Ledger, Math or result UX. Unified policy remains
+in legendstudy-docs/00_PROJECT/ESSAY_FIRST_UX_OWNER_POLICY_2026-10-11.md.
+
+- LAB `/admin/materials/`: server operator RPC checks; university/year/type/track/
+  status search, priority22 order, progress, PDF/page evidence, editable mappings,
+  17 checks, separate rights, revision save/conflict, history and approval request.
+- Candidate SQL reuses canonical exams/questions/resources; private source/review/
+  revision metadata is separate from student History. No operational apply yet.
+  [Impact/apply/rollback](../supabase/candidates/essay_material_review/README.md).
+- Native existing pdfrx and WEB PDF.js render approved question-only DTOs; exact
+  question/hash/rights gate, page/zoom/retry/position, mobile tab preservation and
+  desktop42:58 adjustable width. No original/answer PDF is exposed to students.
+- Offline pypdf + browser text heuristics produce NEEDS_REVIEW role/page candidates.
+  Hanyang2024 afternoon2 question and answer originals (2 PDFs) analyzed read-only
+  into ignored .local/material-review-drafts. No source reupload/Git publication.
+- Immutable question manifest uses canonical exam/question/source hashes, revision
+  and digest. It is NOT a complete Runtime-ready Evaluation Package. Full visual
+  structure extraction, safe derivatives, final package approval/promotion and
+  Runtime adapter are still incomplete. All21 universities remain in scope.
+
+Validation: new WEB9 tests; earlier related source/Math57 checks; Python4; isolated
+PG repeat install/auth/concurrency/page/rollback PASS; Flutter analyze and10 related
+tests PASS; Android debug APK/iOS simulator build PASS (no device/Store). WEB134-page
+webpack build PASS. Actual browser synthetic PDF page2/reload restore, widths360/
+375/390/768/1280/1440,360px200% text: no document overflow. Synthetic UI fixture was
+removed before build; original university PDFs were not used in a public fixture.
+
+No new Production deployment, DB mutation, Provider or Credit transaction.
+Owner configured ESSAY_REGISTRY_WORKER_JWT; Pages aec0f8af-8a01-4b62-b690-f2c71e007816
+is successful. No-secret preflight passes, but authenticator→essay_worker is still
+false (read-only rechecked). The role has finalize/claim rights; do not grant it
+under a read-only description. Actual Worker authentication and E2E remain pending.
+
+Owner action: approve the concrete private materials SQL candidate for review
+workflow only. After apply, verify real operator/ordinary-user API and storage
+denials before deployment/Owner review. Package review is not public activation.
+General activation HOLD; final Provider/Credit E2E needs separate bounded approval.

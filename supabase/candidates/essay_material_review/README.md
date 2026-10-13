@@ -1,0 +1,75 @@
+# Private materials review — application candidate (2026-10-13)
+
+**NOT APPLIED. Owner approval is required.** This candidate enables administrator
+review only, not student PDF delivery or evaluation. Target: LegendStudy
+`stlhijzpjfgwwdgunlsd`. Do not rerun the already-applied Registry migrations.
+
+## Impact
+
+- Existing canonical `essay_exams`, `essay_questions`, `resources` IDs are reused.
+- New private schema `essay_material_private`: documents, current review, immutable
+  revision snapshots. Existing resources require content/source-post linkage and
+  cannot represent private multi-exam review revisions without changing their contract.
+- Five authenticated RPCs check the existing `is_quality_operator()` on every call.
+  No new administrator membership, Worker grant, public question or Credit change.
+- One **private**, immutable SHA256-keyed original PDF bucket
+  `essay-material-originals`, maximum32MiB. SELECT/INSERT only for quality operators.
+  No student policy, overwrite or delete permission is added.
+- Reviewer UID is set by `auth.uid()`; deletion sets reviewer references to null.
+  Review notes must contain source/review observations, not student personal data.
+- Existing Registry76/234, Math, Ledger, payments and History are not mutated.
+
+## Local validation / production read-only comparison
+
+`PYTHONDONTWRITEBYTECODE=1 python3 tool/test_material_review_sql.py`
+passed: repeat install, anonymous/nonoperator/table denial, immutable object
+registration, concurrent revision conflict, foreign-question/page guards, unfinished
+mapping drafts, checklist enforcement, ACTIVE denial, revisions and retained-data rollback.
+This is an isolated PostgreSQL17 test with minimal canonical fixtures, not a
+Supabase API E2E or complete production-schema clone.
+
+Oct13 production read-only comparison: `is_quality_operator()` already validates
+JWT/account lifecycle; existing Storage permissive policies are avatar/Math-bucket
+scoped. `math_storage_owner` rejects other buckets; lifecycle/Math restrictions are
+RESTRICTIVE. No materials schema is currently installed. Recheck before application.
+
+## Apply and verify (Owner)
+
+1. Supabase project above → SQL Editor. Review `install.sql`, run it as one transaction
+   only after explicit approval. It uses no secrets and does not grant operator roles.
+2. Run `verify.sql` (read-only). Confirm private bucket, RLS, RPC ACLs, original
+   Registry/publication counts and no `authenticator → essay_worker` change.
+3. Deploy the reviewed LAB branch to an approved environment with its existing
+   Auth configuration. `/admin/materials/` requires a signed-in quality operator.
+4. Verify anonymous and ordinary account denial using real Auth. Operator can select
+   an existing exam, upload/select a PDF, analyze, save, reload and compare revision.
+   A second editor with an old revision must get a conflict and retain its text.
+5. Confirm Storage download denial for ordinary users and no overwrite/delete access.
+   Record actual API/browser results separately from local SQL tests.
+
+## Owner workflow after installation
+
+Existing LAB login → `/admin/materials/` → search university/year/type/track/status
+→ select exam → choose existing source or upload a PDF → analyze draft → map each
+candidate to an actual question and PDF page range → inspect source → set independent
+rights statuses and review checklist → save → verify → request Package approval.
+Saving does not publish. `VERIFIED` does not mean `PACKAGE_READY`, `E2E_PASSED` or `ACTIVE`.
+Approval request records intent only; final package build/promotion is not implemented.
+Empty extracted text/scans require visual review; heuristic analysis is not verification.
+
+## Rollback
+
+Run `rollback.sql` to revoke all five client RPCs and remove bucket policies.
+Retain all private documents, review revisions and source objects. Existing exams,
+Credit and student History remain intact. Revert the LAB/APP UI commit if required.
+Do not DROP tables/bucket or delete source PDFs as part of rollback.
+
+## Remaining before service activation
+
+Server-verified PDF ingestion, full identity/region/image analysis, safe student
+question derivation + delivery policies, approved package→existing Runtime adapter,
+Owner review, actual Provider/Credit scope approval and WEB/Native service E2E.
+The conditional student viewer expects an approved `student_question` DTO; no such
+asset is published by this candidate. Original/evaluation PDFs cannot be used there.
+Worker Secret is configured, but authenticator membership remains false; this
+candidate deliberately does not resolve or expand Worker execution permissions.
