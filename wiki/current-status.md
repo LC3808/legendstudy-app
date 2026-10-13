@@ -3,6 +3,9 @@
 ## Universal Essay — Oct13 — PARTIAL
 
 Private Registry76/234 and approved worker-only read RPC applied; published0/HOLD.
+Oct13 persistent exam recovery + local Ledger integration PASS; WEB credential
+preflight added. Worker issuer AND authenticator membership remain unprovisioned.
+Exact Owner Secret procedure is in the existing private Registry review.
 WEB/Native multi-photo drafts and common package binding tested. Operational exam
 Credit/History/QA, server Draft and actual Provider E2E remain unfinished.
 [Details](essay-full-service-implementation-20261011.md#oct13-universal-runtime-continuation).

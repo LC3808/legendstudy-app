@@ -625,8 +625,8 @@ anon/authenticated/service_role false. Read-back used DB owner, not an app JWT E
 No table grants/RLS/publication/evaluation activation/Credit changes.
 
 WEB/Native use authenticated POST for canonical private metadata with the existing
-online Auth/allowlist gateway, public GET fallback. Production still needs an existing
-unexpired essay_worker credential in ESSAY_REGISTRY_WORKER_JWT. Missing config stays
+online Auth/allowlist gateway, public GET fallback. Correction Oct13: no operational issuer/credential has been established.
+ESSAY_REGISTRY_WORKER_JWT and API role membership both require provisioning. Missing config stays
 closed; private metadata alone never enables published-question Draft or evaluation.
 
 Both clients now preserve up to6 ordered image pages per question, preview/delete,
@@ -675,3 +675,46 @@ Pagesb95c09d6-f388-47ed-81a9-8f68376231f4 Production SUCCESS; settings unchanged
 Live21/77/237 selection, six widths×100/200%, text/photo restore, photo deletion,
 question isolation and disabled evaluation PASS. Rollback deploymentdd8a45d0 remains.
 No private gateway success claimed without essay_worker server credential.
+
+
+## Oct13 durable exam / Owner Secret continuation — PARTIAL
+
+Preserved codex/essay-shared-app-integration and verified remote before edits.
+Read-only Production reconfirms76/234 registered,0published. essay_worker has registry
+EXECUTE, but authenticator membership is FALSE; anon/authenticated/service_role
+EXECUTE false. This corrects the earlier assumption that pasting an existing token
+was sufficient. No secret values were printed or committed.
+
+Owner procedure (service/menu, existing credential check, conditional issuance,
+Secret entry and verification) is maintained in the existing
+[private Registry review](../supabase/reviews/essay-private-registry/README.md#owner-action--worker-authentication-correction-2026-10-13).
+It separates issuer/role membership from Cloudflare Secret entry and documents
+that enabling essay_worker also exposes its pre-existing write RPC capability.
+No permission SQL or signer/key rotation was executed.
+
+Implementation: existing reviewed exam adapter now has persistent orchestration
+with exact immutable run/owner/claim binding, per-child dispatch/review checkpoints,
+synthesis checkpoint and final settlement replay.8-process competition, crashes,
+partial failure and lost settlement response are exercised. Existing local Ledger
+candidate is connected to that runner in disposable PostgreSQL; initial1/rewrite0,
+exact retry and failed/ambiguous behavior checked. No second evaluator/UI or Ledger
+schema introduced. Production hosting/authorization/lease/retention wiring is still
+unfinished, not falsely reported as merely awaiting a Secret.
+
+WEB private Catalog preflight rejects malformed, wrong-role, expired/near-expiry
+Worker configuration before network dispatch. This does not verify signatures or
+replace online student Auth/allowlist and Supabase ACL/signature checks. Both WEB
+and Native use the same endpoint. No Flutter code change; previous builds retained.
+
+Tests: Python durable/runtime regression PASS;14 actual local PostgreSQL scenarios
+PASS; WEB142 related tests PASS, typecheck/lint/boundary/secret audits PASS; Node22
+webpack static build133 pages PASS. Default Turbopack cannot follow existing external
+node_modules symlink; documented webpack path used. No real Provider or operational
+Credit test, no DB change, no source material publication. Public activation HOLD.
+
+Remaining:21-university package rights/criterion verification (56 candidates still
+unverified), production provider-policy prerequisites/worker hosting, server Draft
+and private photo sync, exam submission and canonical History/growth/QA + lifecycle
+and erasure integration, actual approved WEB↔APP E2E. Owner action does not replace
+these development gaps. Separate approvals remain required for operational DB,
+actual Credit, public activation and Store release.

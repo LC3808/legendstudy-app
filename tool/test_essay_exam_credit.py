@@ -89,7 +89,44 @@ def main():
    foreign_account=sql(f"select id from public.credit_accounts where user_id='{foreign_user}'")
    sql(reserve(uid(),snapshot,initial,foreign_account),'REEVALUATION_NOT_INCLUDED')
    checks.append('expired_and_cross_account_reevaluation_denied')
-   sql(C.joinpath('rollback.sql').read_text(),'NONEMPTY_EXAM_ROLLBACK_DENIED');assert balance()=='1,0'
+   # Compose the existing reviewed Worker, persistent exam journal and actual
+   # candidate Ledger functions. The Provider/reviewer fixture is synthetic;
+   # PostgreSQL postings and retry behavior are real disposable local DB calls.
+   from dataclasses import replace
+   from tool.test_essay_reviewed_runtime import RuntimeTests
+   from tool.essay_lab.durable_exam import DurableExamRunner
+   from tool.essay_lab.durable_journal import DurableJournal
+   from tool.essay_lab.live_worker import Unknown
+   def runtime_run(run_id,lost=False):
+    questions=[];workers={};requests=[]
+    for index,qid in enumerate([q1,q2]):
+     worker,_,req,_,claim,_=RuntimeTests().fixture()
+     eid=f'{run_id}-{index}';worker.permit=replace(worker.permit,evaluation_id=eid)
+     workers[eid]=worker;requests.append(req)
+     questions.append(dict(questionId=qid,rubricVersion='r1',evidenceVersion='e1',evaluationId=eid,claim=claim))
+    def build(channel,checkpoint):
+     worker=workers[channel.evaluation_id];worker.rpc=channel;worker.checkpoint=checkpoint;return worker
+    def finalize(record):
+     result=sql(f"select essay_exam_private.finish('{run_id}',{literal(json.dumps(record['result']))}::jsonb,{str(record['failed']).lower()})")
+     if lost:raise Unknown()
+     return result
+    result=DurableExamRunner(DurableJournal(root/'runtime-journal')).execute(
+     run_id=run_id,subject_id=user,exam_id=exam,questions=questions,
+     authorize=lambda _:True,build_worker=build,summarize=lambda _: 'Synthetic reviewed exam summary',finalize=finalize)
+    return result,sum(len(req) for req in requests)
+   coupled=sql(reserve(uid()));assert balance()=='1,1'
+   try:runtime_run(coupled,lost=True)
+   except Unknown:pass
+   else:raise AssertionError('Expected lost settlement response')
+   assert balance()=='0,0'
+   assert runtime_run(coupled)==('completed',0);assert balance()=='0,0'
+   checks.append('durable_runtime_lost_settlement_replay_no_new_provider_or_charge')
+   rewritten=json.loads(json.dumps(snapshot))
+   for answer in rewritten['answers']:answer.update(body='Synthetic revised answer',revision=2)
+   included=sql(reserve(uid(),rewritten,coupled));assert balance()=='0,0'
+   assert runtime_run(included)==('completed',2);assert balance()=='0,0'
+   checks.append('durable_runtime_included_reevaluation_zero_additional_credit')
+   sql(C.joinpath('rollback.sql').read_text(),'NONEMPTY_EXAM_ROLLBACK_DENIED');assert balance()=='0,0'
    assert sql(fingerprint)==before;checks.append('nonempty_rollback_denied_legacy_functions_unchanged')
    print(json.dumps({'checks':checks,'count':len(checks),'productionWrites':0,'providerCalls':0,'localDatabase':'PostgreSQL 17, canonical legacy ledger migrations','deploymentReady':False},indent=2))
   finally:

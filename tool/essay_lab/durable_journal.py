@@ -57,6 +57,9 @@ class DurableJournal:
     def read(self,key):
         value=self._load(key)
         return value.get('payload') if value and value['state']=='checkpoint' else None
+    def exists(self,key):
+        """Includes dispatch intent without a completed checkpoint; requires lock."""
+        return self._load(key) is not None
     def write(self,key,payload):
         prior=self._load(key);require(prior is not None,'JOURNAL_NOT_STARTED')
         require(prior['state']=='pending' or prior.get('payload')==payload,'JOURNAL_CHECKPOINT_IMMUTABLE')

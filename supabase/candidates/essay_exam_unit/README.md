@@ -71,3 +71,25 @@ answers; retention/erasure integration is a release blocker, not optional cleanu
 rollback is rejected. Once runs or postings exist, use a reviewed forward repair;
 never delete runs or ledger rows to force rollback. Tests verify legacy function
 fingerprints across installation/rollback and a rejected nonempty rollback.
+
+
+## Oct13 persistent runtime connection — local verified
+
+`tool/essay_lab/durable_exam.py` now composes the existing ReviewedRuntimeWorker,
+ExamQuestionChannel and DurableJournal. A run lock serializes processes; immutable
+owner/exam/question/claim digests prevent changed-input replay. Each child intent,
+reviewed output, synthesis intent/result and whole-exam finalization are persisted.
+Completed children and an ambiguous settlement replay without another Provider call.
+Unknown child/synthesis stays reconciling; no guessed refund/retry. Existing review,
+provider validation and final result schema remain unchanged.
+
+Local actual PostgreSQL Ledger composition verifies settlement committed before a
+lost response, exact retry without another debit/Provider dispatch, and included
+rewrite with zero additional Credit.14 local database scenarios PASS. Durable
+runtime tests include8 competing processes and restart between review/child success.
+Synthetic Provider/reviewer only; this is NOT actual service E2E.
+
+Host authorization is still a trusted required callback. The production owner/
+lifecycle/lease checks, deployment, deletion/retention, approved synthesis/reviewer
+and RPC composition remain release blockers. This single-host journal is not a
+multi-host database lease. No SQL/grant/migration was added or applied by this step.
