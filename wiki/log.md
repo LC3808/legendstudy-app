@@ -3428,4 +3428,18 @@ Changed files: `android/.../values/colors.xml` (new `brand_splash_bg`),
 (ref `@color/brand_splash_bg` resolves); iOS — xmllint OK + ibtool compile OK; Flutter brand/
 bootstrap tests pass. Full debug APK blocked only by an unrelated environmental failure (pdfium
 native-asset download from GitHub reset in sandbox), independent of this change. No DB / payment /
-Codex change. Remote push held.
+Codex change. Remote push held. STEP 3 committed `c125209` (local; push held).
+
+## 2026-10-13 — STEP 4: iOS StoreKit/IAP read-only verification (Claude)
+
+Read-only review of the existing IAP implementation (client + server), no code change.
+Items 1–8 and 10 of the STEP 4 checklist are PRESENT in code; item 9 (refund/revocation)
+is PARTIAL — synchronous revocation handled, but no async App Store Server Notifications v2 /
+Play RTDN claw-back. transaction_id idempotency is consistent end-to-end (client → edge →
+RPC `reference=sha256(tx)`); accountId binds Supabase userId to appAccountToken/
+obfuscatedExternalAccountId (one Google case check in sandbox). Balance reads canonical
+`credit_summary` only — no platform-specific balance. IAP remains gated OFF (`IAP_ENABLED`
+absent, 0 grants). Full findings, Owner-direct store/secret setup, and release blockers:
+[STEP 4 verification](ios-storekit-verification-2026-10-13.md). pdfium Android/iOS build
+blocker recorded with log + repro: [pdfium blocker](pdfium-build-blocker-2026-10-13.md)
+(Codex-owned PDF viewer not modified). No DB/payment/Codex change; push held.
