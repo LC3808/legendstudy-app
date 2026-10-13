@@ -413,23 +413,47 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                   ),
                   const SizedBox(height: 20),
                   if (pdf != null)
-                    Offstage(
-                      offstage: !problem,
-                      child: EssayQuestionPdf(
-                        key: ValueKey(positionKey),
-                        asset: pdf,
-                        load: () async {
-                          final client = ref.read(supabaseClientProvider);
-                          if (client == null ||
-                              client.auth.currentUser?.id != widget.owner) {
-                            throw StateError('로그인 필요');
-                          }
-                          return client.storage
-                              .from('essay-student-questions')
-                              .download('${pdf.id}.pdf');
-                        },
-                        restorePage: restorePdfPage,
-                        savePage: savePdfPage,
+                    TextButton.icon(
+                      icon: const Icon(Icons.open_in_full),
+                      label: const Text('문제 보기'),
+                      onPressed: () => Navigator.of(context).push<void>(
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            appBar: AppBar(
+                              title: const Text('문제 보기'),
+                              leading: IconButton(
+                                tooltip: '닫기',
+                                icon: const Icon(Icons.close),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                            ),
+                            body: SafeArea(
+                              child: LayoutBuilder(
+                                builder: (context, constraints) =>
+                                    EssayQuestionPdf(
+                                      height: constraints.maxHeight,
+                                      key: ValueKey(positionKey),
+                                      asset: pdf,
+                                      load: () async {
+                                        final client = ref.read(
+                                          supabaseClientProvider,
+                                        );
+                                        if (client == null ||
+                                            client.auth.currentUser?.id !=
+                                                widget.owner) {
+                                          throw StateError('로그인 필요');
+                                        }
+                                        return client.storage
+                                            .from('essay-student-questions')
+                                            .download('${pdf.id}.pdf');
+                                      },
+                                      restorePage: restorePdfPage,
+                                      savePage: savePdfPage,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   if (problem) ...[

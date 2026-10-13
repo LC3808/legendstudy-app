@@ -54,7 +54,9 @@ class EssayQuestionPdf extends StatefulWidget {
     required this.load,
     required this.restorePage,
     required this.savePage,
+    this.height = 520,
   });
+  final double height;
   final QuestionPdfAsset asset;
   final Future<Uint8List> Function() load;
   final Future<int?> Function() restorePage;
@@ -76,7 +78,7 @@ class _EssayQuestionPdfState extends State<EssayQuestionPdf> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 520,
+    height: widget.height,
     child: Column(
       children: [
         Wrap(

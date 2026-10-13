@@ -1,5 +1,20 @@
 # Current Status
 
+## Oct13 problem viewer Owner policy update — PARTIAL
+
+WEB uses existing PDF renderer in a separate PC window, new-tab attempt if blocked,
+mobile full-screen dialog with close; answer component remains mounted. Native
+uses existing pdfrx in a full-screen route with close, retaining underlying writer
+and image state. No WebView or download/print/share controls added. Existing
+student_question hash/rights gate retained; no private source exposed.
+Native analyze and3 related tests PASS; no new Android/iOS build yet. WEB2 launch
+tests/typecheck/lint PASS; real mobile browser modal/close/Draft retained in local
+error-state fixture. PC popup not observable in IAB, actual authorized PDF asset
+not available; do not claim full visual QA. No change to evaluation/Credit.
+Hanyang Package16 remains correctly bound; Provider rights, Worker authentication,
+telemetry/policy/host/settlement E2E outstanding. Public HOLD.
+
+
 Oct13 Owner-approved Package read RPC applied:20261013115731. Worker-only
 EXECUTE verified, anon/authenticated denied, role membership remains false.
 Registry234 intact; no Provider/Credit call. Worker JWT E2E still blocked by
