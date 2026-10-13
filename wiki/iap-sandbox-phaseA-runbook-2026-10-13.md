@@ -69,10 +69,18 @@ On a **separate, Owner-provided** Supabase test project (never production):
     wrapper mirroring a sibling contrib module (`{name:'pgcrypto',setup:()=>({bundlePath:new
     URL('../pgcrypto.tar.gz',import.meta.url)})}`) and point `PGCRYPTO_MODULE` at it. (pgcrypto's
     functions are not actually required — the RPC uses core `sha256`/`gen_random_uuid`.)
-- **NOT covered by behavior.mjs** (reported, not claimed): the `credit_summary` read RPC itself (the
-  ledger amount is asserted directly instead), and concurrent-request idempotency (single-connection
-  pglite can't simulate it; the RPC's `pg_advisory_xact_lock` on the receipt hash is the mechanism).
-  Production-flow regression is covered by the deno suite above.
+- **credit_summary + concurrency — EXECUTED and PASSED** on a local throwaway real Postgres 17
+  (no cloud/prod DB), via `supabase/verification/iap/pg_integration.mjs` (reuses the real
+  `credit_summary`, `iap_post_verified_purchase`, `credit_post_grant` SQL):
+  - **A credit_summary**: `spendable 0 → 3 (paid 3, free 0, other 0)` across a real grant, and the
+    summary equals the canonical ledger sum (`== 3`). Uses the real read RPC — no separate balance calc.
+  - **B true concurrency**: two **independent connections** race the same transaction →
+    `["already_processed","granted"]`, exactly **one** grant row for the receipt, paid total 6
+    (3 + one concurrent grant; the duplicate granted nothing). Exercises the RPC's cross-connection
+    `pg_advisory_xact_lock` + unique `external_reference`.
+  - Local setup: real Postgres (`initdb`/`pg_ctl`, `LC_ALL=C`, TCP 127.0.0.1, socket in `/tmp`),
+    `npm i pg`, run with `PG_MODULE`/`PGHOST`/`PGPORT`/`PGUSER`/`PGDATABASE`; stop + `rm -rf $PGDATA` to clean up.
+  - Production-flow regression is covered by the deno suite above.
 - **NOT executed here**: a real Apple Sandbox purchase E2E — needs Apple Sandbox tester + the test
   project + store secrets (Owner). Mock/unit/DB-fixture passing is **not** reported as a real sandbox success.
 
@@ -81,6 +89,36 @@ On a **separate, Owner-provided** Supabase test project (never production):
 - Apple Sandbox tester, Store API key/secrets, Apple root certs.
 - Run `behavior.mjs` against the fixture DB; run the real sandbox purchase E2E.
 - Production deploy of the updated Edge Function (separate approval).
+
+## Isolated Supabase test project — preparation checklist (Owner creates the project; Claude prepared this)
+Owner will create a **separate** Supabase test project and provide its ref; nothing below touches
+production. The production project ref (`stlhijzpjfgwwdgunlsd`) is denylisted in code regardless.
+
+1. **Settings after project creation** (collect, don't commit secrets): project ref, `SUPABASE_URL`
+   (`https://<ref>.supabase.co`), anon/publishable key, service-role key (server-only).
+2. **Canonical migration order**: apply `supabase/migrations/*.sql` in ascending filename order
+   (`20260912… → 20261009000200_iap_verified_credit`) to the test project (CLI `supabase db push`
+   or SQL editor). Includes the credit ledger + `iap_post_verified_purchase`.
+3. **Verify ledger/RPC**: run `supabase/verification/iap/postflight.sql` (read-only) and confirm
+   `iap_post_verified_purchase` is service_role-only (anon/authenticated `has_function_privilege` =
+   false). Optionally run `pg_integration.mjs` against a local mirror for summary/concurrency.
+4. **Edge Function deploy**: deploy only `verify-iap-purchase` to the **test** project
+   (`supabase functions deploy verify-iap-purchase`). Do not deploy to production.
+5. **Sandbox Secret list** (test project Edge secrets): `IAP_ENABLED=true`,
+   `IAP_ALLOW_SANDBOX_GRANT=true`, `IAP_APPLE_ENVIRONMENT=Sandbox`, `IAP_SANDBOX_PROJECT_REF=<test ref>`,
+   `IAP_APPLE_PRIVATE_KEY`, `IAP_APPLE_KEY_ID`, `IAP_APPLE_ISSUER_ID`, `IAP_APPLE_BUNDLE_ID`,
+   `IAP_APPLE_APP_ID`, `IAP_APPLE_ROOT_CERTIFICATES_BASE64` (`SUPABASE_URL/ANON_KEY/SERVICE_ROLE_KEY`
+   auto-injected). Secrets entered only in the dashboard/CLI — never in code/Git/Wiki.
+6. **Production misconnection prevention**: `IAP_SANDBOX_PROJECT_REF` must equal the test ref and
+   must not be the production ref; the code denylists the production ref (fail-closed) and gates on
+   `SUPABASE_URL`'s own ref; keep production's `IAP_ALLOW_SANDBOX_GRANT` unset. Use the test
+   project's own keys only (mismatched prod keys fail-closed to `pending`).
+7. **Test Flutter build** (points the app at the test project):
+   `flutter build ios --debug --dart-define=SUPABASE_URL=https://<test-ref>.supabase.co
+   --dart-define=SUPABASE_PUBLISHABLE_KEY=<test anon/publishable key>` (match the app's config keys),
+   signed for a Sandbox tester. Do the Sandbox purchase with that build.
+8. **Teardown**: delete the test project's Edge secrets, undeploy/disable the function, and delete or
+   pause the test project. No production artifact is created or changed at any point.
 
 ## Guardrails honored
 No production DB change, no production deploy, no activation, no prod secret change, no new external

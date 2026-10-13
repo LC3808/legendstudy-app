@@ -3498,3 +3498,16 @@ DB ledger test now **executed and PASSED** locally: new reproducible builder
 concurrent-request idempotency (single-conn pglite) — reported, not claimed. Real Apple Sandbox E2E
 still needs Owner (test project + tester + secrets). No production change/deploy/DB/activation/push.
 Details + setup notes: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
+
+## 2026-10-13 — Phase A: credit_summary + concurrency EXECUTED on real Postgres (Claude)
+
+Added `supabase/verification/iap/pg_integration.mjs` (reuses the real credit_summary /
+iap_post_verified_purchase / credit_post_grant SQL) and ran it on a LOCAL throwaway Postgres 17
+(no cloud/prod DB). (A) credit_summary spendable 0→3 (paid 3) across a real grant and equals the
+canonical ledger sum — real read RPC, no separate balance calc. (B) TWO independent connections
+racing the same transaction → ["already_processed","granted"], exactly one grant row, paid total 6;
+exercises the RPC's cross-connection pg_advisory_xact_lock + unique external_reference. Both PASS.
+Earlier-unverified items (credit_summary, independent-connection concurrency) are now verified
+locally; real Apple Sandbox purchase E2E still needs Owner (test project + tester + secrets). The
+Phase A runbook now also carries the 8-point isolated-Supabase-project prep checklist. No production
+change/deploy/DB/activation/push; no production code changed (core.ts/index.ts remain 9d8bce2).
