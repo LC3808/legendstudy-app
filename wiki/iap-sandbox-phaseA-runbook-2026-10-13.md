@@ -90,6 +90,27 @@ On a **separate, Owner-provided** Supabase test project (never production):
 - Run `behavior.mjs` against the fixture DB; run the real sandbox purchase E2E.
 - Production deploy of the updated Edge Function (separate approval).
 
+## Test project — pre-verification (READ-ONLY, 2026-10-13)
+Owner created the IAP-only test project. Public identifiers only (no secrets recorded):
+- **Test**: `legendstudy-iap-sandbox`, ref `kpqbedylxlyntrrfybpn`,
+  `https://kpqbedylxlyntrrfybpn.supabase.co`, region ap-northeast-2, Postgres 17.11, ACTIVE_HEALTHY.
+- **Production (do NOT touch)**: `LegendStudy`, ref `stlhijzpjfgwwdgunlsd`. (Also visible: Muselry —
+  separate product; `legendstudy-payment-test` `wsnrwklplnunjktyfmbr` — an older payment test project.)
+
+Read-only findings:
+- **CLI**: v2.114.0, authenticated; **linked to NO project** (`supabase link` not run in this worktree;
+  no `supabase/.temp`, no `project_id` in `config.toml`) — so no command can accidentally hit production.
+- **Test DB initial state**: public/essay_private/account_private/payment_private schemas are **empty**
+  (only the default Supabase `auth.*` system tables; `auth.users` rows=0). **Migrations: none.**
+  **Edge Functions: none.** → clean project, **no migration conflicts expected**.
+- **Sandbox gate accepts the test ref**: `projectRef('…kpqbedylxlyntrrfybpn…') = kpqbedylxlyntrrfybpn`;
+  `sandboxGrantAllowed` = **true** with the test secrets, and **false** for the production ref even with
+  the flag on (verified by running `core.ts` against the test URL). `verify-iap-purchase` has no
+  `config.toml` entry → defaults to `verify_jwt=true` (matches deployed), no config change needed.
+- **Flutter test-build defines** (`lib/core/config/app_config.dart`): `SUPABASE_URL`,
+  `SUPABASE_PUBLISHABLE_KEY` (+ for Sandbox sign-in as needed: `APP_ENV`, `GOOGLE_OAUTH_ENABLED`/
+  `GOOGLE_SERVER_CLIENT_ID`/`GOOGLE_IOS_CLIENT_ID` or `APPLE_OAUTH_ENABLED`).
+
 ## Isolated Supabase test project — preparation checklist (Owner creates the project; Claude prepared this)
 Owner will create a **separate** Supabase test project and provide its ref; nothing below touches
 production. The production project ref (`stlhijzpjfgwwdgunlsd`) is denylisted in code regardless.

@@ -3511,3 +3511,16 @@ Earlier-unverified items (credit_summary, independent-connection concurrency) ar
 locally; real Apple Sandbox purchase E2E still needs Owner (test project + tester + secrets). The
 Phase A runbook now also carries the 8-point isolated-Supabase-project prep checklist. No production
 change/deploy/DB/activation/push; no production code changed (core.ts/index.ts remain 9d8bce2).
+
+## 2026-10-13 — IAP Sandbox test project created (Owner) + READ-ONLY pre-verification (Claude)
+
+Owner created the IAP-only test project `legendstudy-iap-sandbox` (ref `kpqbedylxlyntrrfybpn`),
+distinct from production `LegendStudy` (`stlhijzpjfgwwdgunlsd`). READ-ONLY pre-verification, no DB/
+deploy/secret change: Supabase CLI v2.114.0 is authenticated but **linked to no project** (no
+accidental prod target); the test DB is **empty** (default auth.* only, 0 migrations, 0 edge
+functions) so the canonical chain applies cleanly; the fail-closed sandbox gate **accepts** the test
+ref and still **denies** the production ref with the flag on (verified against core.ts);
+`verify-iap-purchase` defaults to verify_jwt=true (no config change); Flutter test-build defines are
+`SUPABASE_URL`/`SUPABASE_PUBLISHABLE_KEY` (+ auth defines). Public identifiers only — no secrets
+recorded. Details: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md). Awaiting Owner
+approval before any test-project migration/deploy/secret step. Push held.
