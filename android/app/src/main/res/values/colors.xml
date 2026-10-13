@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cold-start splash background. Unified near-black (#12161F) across native
+         launch (pre-API31 + API31+) and the Flutter brand frame, in both light
+         and dark mode, so there is no white→dark flip at startup. The orange
+         LegendStudy symbol has strong contrast on this background. -->
+    <color name="brand_splash_bg">#FF12161F</color>
+</resources>

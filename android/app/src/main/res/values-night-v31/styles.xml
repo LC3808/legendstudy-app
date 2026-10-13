@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 12+ dark mode: keep the brand splash white with the LegendStudy
-     symbol (Owner: warm-white/white splash regardless of theme). Overrides the
-     values-night black LaunchTheme for API31+ so the splash stays on-brand. -->
+<!-- Android 12+ dark mode: unified near-black (#12161F) splash with the
+     LegendStudy symbol (Owner 2026-10-13: #12161F splash in both light and dark,
+     superseding the earlier warm-white-regardless-of-theme decision). Overrides
+     the values-night black LaunchTheme for API31+ so the splash stays on-brand. -->
 <resources>
     <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
-        <item name="android:windowSplashScreenBackground">@android:color/white</item>
+        <item name="android:windowSplashScreenBackground">@color/brand_splash_bg</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_brand_symbol</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/white</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/brand_splash_bg</item>
         <item name="android:windowBackground">@drawable/launch_background</item>
     </style>
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">

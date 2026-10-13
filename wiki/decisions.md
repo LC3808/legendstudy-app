@@ -662,3 +662,19 @@ balance), with server-side Campaign/Voucher/Redemption policy, per-user/total/bu
 unlimited master code; **Academic School ≠ verified B2B Organization Membership** (school
 selection alone grants no B2B eligibility and no access to student essays). B2B organization/
 membership/batch = P1. Design only, no implementation.
+
+Owner decisions for app-release readiness (2026-10-13):
+- **논술 LAB is a core feature and a primary revenue model.** The app funnels from free
+  learning materials / study management into the 논술 LAB service, so **onboarding keeps its
+  논술 wording** (slides, copy and design are retained unchanged), and the existing academic-
+  status / grade / school / interested-university personalization flow is retained.
+- **논술 LAB general-availability stays HOLD.** Feature access and payment (IAP) activation
+  proceed only on separate Owner approval. Onboarding keeping 논술 wording does not change the
+  HOLD, and no feature is exposed as shipped beyond the HOLD.
+- **Cold-start splash unifies on near-black #12161F** across Android (pre-API31 + API31+,
+  light and dark) and iOS, matching the Flutter brand frame, to remove the white→dark flip.
+  This supersedes the earlier "warm-white/white splash regardless of theme" note. The existing
+  orange LegendStudy symbol is kept (strong contrast on #12161F; verified). **App icon and
+  brand identity are unchanged.**
+- STEP 2 commit `bb41b29` is accepted as complete; **remote push is held** pending separate
+  instruction.

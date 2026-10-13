@@ -3413,3 +3413,19 @@ needs a DB column, reported separately). Source URL / 원문 보기 / PDF / sear
 No operating DB change. 29 new unit tests + updated day6_ui exam assertion; `flutter test`
 1019 pass / 2 skip / 4 fail — the 4 are pre-existing search projection/tokenization failures
 (confirmed failing at base `c11fc84`), unrelated to this change. Not committed pending Owner.
+
+## 2026-10-13 — STEP 3: 스플래시 #12161F 통일 (Claude)
+
+Owner decision (see decisions.md 2026-10-13): onboarding retained as-is (논술 wording kept;
+논술 LAB is core/revenue, GA stays HOLD); splash unified on near-black #12161F; app icon
+unchanged. Splash background changed white → `#12161F` across native launch and the Flutter
+frame (already #12161F). Verified the existing orange symbol (`ic_brand_symbol.png` /
+iOS `LaunchImage*.png`) has strong contrast on #12161F, so no inverted asset / icon change.
+Changed files: `android/.../values/colors.xml` (new `brand_splash_bg`),
+`drawable/launch_background.xml`, `drawable-v21/launch_background.xml`, `values-v31/styles.xml`,
+`values-night-v31/styles.xml` (splash bg + icon-bg color), `ios/Runner/Base.lproj/LaunchScreen.storyboard`
+(backgroundColor). Verification: Android res — xmllint OK + aapt2 37.0.0 compile OK for all 5
+(ref `@color/brand_splash_bg` resolves); iOS — xmllint OK + ibtool compile OK; Flutter brand/
+bootstrap tests pass. Full debug APK blocked only by an unrelated environmental failure (pdfium
+native-asset download from GitHub reset in sandbox), independent of this change. No DB / payment /
+Codex change. Remote push held.

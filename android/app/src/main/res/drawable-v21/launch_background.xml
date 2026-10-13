@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- API21–30 launch splash: warm-white background + centered LegendStudy symbol.
-     API31+ uses the system SplashScreen theme (values-v31). -->
+<!-- API21–30 launch splash: near-black (#12161F) background + centered
+     LegendStudy symbol. API31+ uses the system SplashScreen theme (values-v31). -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/white" />
+    <item android:drawable="@color/brand_splash_bg" />
     <item>
         <bitmap
             android:gravity="center"
