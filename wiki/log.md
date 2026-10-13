@@ -3483,3 +3483,18 @@ single var, nothing client-supplied; production can never grant Sandbox even if 
 `deno test core_test.ts` **19/0**. NOT executed (reported, not claimed): `behavior.mjs` DB fixture
 (no PGLITE/IAP_TEST_DB), and a real Apple Sandbox purchase E2E (needs test project + tester + secrets).
 Implementation + E2E runbook + Owner steps: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
+
+## 2026-10-13 — Phase A verification: DB ledger test executed + gate re-review (Claude)
+
+Security re-review of the fail-closed gate — **no defects found**: the ref used by the gate is the
+same `SUPABASE_URL` used for auth/grant (can't gate one project while DB-accessing another);
+mismatched prod/test credentials fail-closed to `pending`; missing/mis-set env → no grant; production
+ref denylisted so a mis-set flag can't grant; Apple `IAP_APPLE_ENVIRONMENT` drives both verifier and
+gate; production flow unchanged (deno 19/0). No code change from these findings.
+DB ledger test now **executed and PASSED** locally: new reproducible builder
+`supabase/verification/iap/local_fixture.mjs` (reuses real clock()/credit_post_grant SQL) + unmodified
+`behavior.mjs` in isolated pglite (no cloud/prod DB) →
+`grant/replay/cross-account/SKU/role/ACL/expiry PASS`. Not covered: credit_summary read RPC and
+concurrent-request idempotency (single-conn pglite) — reported, not claimed. Real Apple Sandbox E2E
+still needs Owner (test project + tester + secrets). No production change/deploy/DB/activation/push.
+Details + setup notes: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
