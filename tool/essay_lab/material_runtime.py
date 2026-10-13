@@ -100,3 +100,16 @@ def load_reviewed_material(package, registry, *, pinned_digest, binding, regime,
         questions[q.question_id]=q;reports.append(report)
     return questions,{'ready':True,'issues':[],'activation_granted':activation_approved,
                       'questions':reports}
+
+
+
+def fetch_reviewed_material(worker_rpc, registry, *, exam_id, pinned_digest,
+                            binding, regime, evaluation_type,
+                            activation_approved=False, length_requirement=None):
+    """Deployment hook using only the narrow worker RPC, never a service-role key."""
+    package=worker_rpc('essay_material_runtime_package',
+                       {'p_exam':exam_id,'p_digest':pinned_digest})
+    require(type(package) is dict and package.get('exam_id')==exam_id,'PACKAGE_EXAM_MISMATCH')
+    return load_reviewed_material(package,registry,pinned_digest=pinned_digest,
+        binding=binding,regime=regime,evaluation_type=evaluation_type,
+        activation_approved=activation_approved,length_requirement=length_requirement)

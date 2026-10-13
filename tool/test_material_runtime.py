@@ -1,6 +1,6 @@
 import unittest
 from copy import deepcopy
-from essay_lab.material_runtime import reviewed_material_question,material_readiness,load_reviewed_material
+from essay_lab.material_runtime import reviewed_material_question,material_readiness,load_reviewed_material,fetch_reviewed_material
 from essay_lab.live_worker import Invalid
 
 class MaterialRuntimeTests(unittest.TestCase):
@@ -28,6 +28,12 @@ class MaterialRuntimeTests(unittest.TestCase):
   self.package['questions'][0]['source_page_references'][0]['evidenceText']=''
   q,r=load_reviewed_material(self.package,{'exams':[self.exam]},pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
   self.assertEqual(q,{});self.assertFalse(r['ready'])
+ def test_fetch_uses_pinned_worker_rpc_without_activation(self):
+  calls=[]
+  def rpc(name,args):calls.append((name,args));return self.package
+  q,r=fetch_reviewed_material(rpc,{'exams':[self.exam]},exam_id='e',pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+  self.assertEqual(calls,[('essay_material_runtime_package',{'p_exam':'e','p_digest':'f'*64})])
+  self.assertFalse(q['q'].approved_processing)
  def test_model_answer_is_not_misrepresented_as_criteria(self):
   self.package['questions'][0]['source_page_references'].append(dict(questionId='q',sourceHash='a'*64,role='model_answer',startPage=2,endPage=2,evidenceText='answer',verification='VERIFIED'))
   q,r=self.bind();self.assertEqual(r['not_forwarded_roles'],['model_answer']);self.assertEqual(len(q.frozen_cache['criteria']),1)

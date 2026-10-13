@@ -94,3 +94,28 @@ PDF/save/reload validation awaits an existing administrator login; no claim of E
 Security advisor's no-policy INFO on these private tables is intentional direct-access
 denial; authenticated definer endpoints rely on existing server operator checks.
 [Advisor background](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
+
+## Oct13 reviewed Package Worker read — NOT APPLIED
+
+`worker_read.sql` adds exactly one SECURITY DEFINER RPC:
+`essay_material_runtime_package(uuid,text)`, executable only by existing essay_worker.
+Reads current VERIFIED/approval-requested package with exact pinned digest,
+recomputed integrity, canonical question source key, nonempty question text and
+per-document Provider transmission approval. No direct table grant, role membership,
+activation, Provider request, Credit or student-data mutation. No DROP/DELETE.
+`worker_read_rollback.sql` revokes that one grant and retains every record.
+
+Local verification: `python3 tool/test_material_worker_read.py` uses disposable PG17.
+PASS: repeated installation, anon/authenticated denial, missing-rights denial,
+pinned Worker read, stale-digest denial, empty-question denial, rollback retaining rows.
+Runtime `fetch_reviewed_material` uses this RPC and existing HostedQuestion loader;
+activation flag defaults false. Adapter7 tests PASS.
+
+Production permission remains pending Owner approval. Existing authenticator→
+essay_worker membership is separately absent; this SQL deliberately does not alter
+it. Provider telemetry/policy, hosted Worker composition and exam Credit deployment
+are still missing; applying this RPC alone does NOT complete E2E.
+
+Hanyang Package v16 was generated through the existing approved admin workflow:
+question binding now succeeds,13 existing-runtime evidence inputs/5criteria;
+no question/content identity blockers. Provider rights remain unset, no calls made.
