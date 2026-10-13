@@ -10,6 +10,28 @@ NS=UUID('bfbc9384-f407-440d-aa9e-45e2f485a849')
 ROLE={'question':'question','shared_passage':'passage','intent':'exam_intent',
       'criteria':'scoring_criteria','scoring':'scoring_criteria'}
 
+def material_readiness(package, registry):
+    """Content-only blockers, without exposing source text or granting approval."""
+    issues=[]
+    exams=[e for e in registry['exams'] if e['examId']==package.get('exam_id')]
+    if len(exams)!=1:return [{'code':'EXAM_NOT_REGISTERED'}]
+    exam=exams[0]
+    for q in package.get('questions',[]):
+        qid=q.get('question_id'); mappings=q.get('source_page_references',[])
+        def issue(code,**extra):issues.append(dict(code=code,question_id=qid,**extra))
+        registered=next((r for r in exam['questions'] if r['id']==qid),None)
+        if not registered or registered['sourceKey']!=q.get('source_key'):issue('QUESTION_SOURCE_MISMATCH')
+        for role in ('question','shared_passage','intent','criteria'):
+            if not any(m.get('role')==role and str(m.get('evidenceText','')).strip() for m in mappings):issue('MISSING_EVIDENCE',role=role)
+        for i,m in enumerate(mappings):
+            if m.get('role') in ROLE and not str(m.get('evidenceText','')).strip():issue('EMPTY_MAPPING',index=i,role=m.get('role'))
+            if m.get('verification')!='VERIFIED':issue('MAPPING_REVIEW_REQUIRED',index=i)
+            if m.get('role')=='question' and m.get('sourceHash') not in exam['sourceHashes']:issue('QUESTION_DOCUMENT_MISMATCH',index=i)
+        for source in sorted({m.get('sourceHash','') for m in mappings}):
+            if package.get('rights_status',{}).get(source,{}).get('providerTransmission')!='APPROVED':issue('PROVIDER_RIGHTS_REQUIRED',source_hash=source)
+    if not package.get('questions'):issues.append({'code':'QUESTIONS_REQUIRED'})
+    return issues
+
 def reviewed_material_question(package,registry,question_id,*,pinned_digest,binding,regime,evaluation_type,
                               approved_processing=False,length_requirement=None):
     require(evaluation_type in ('humanities','business'),'USE_EXISTING_MATH_OR_SCIENCE_RUNTIME')
@@ -56,3 +78,25 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
                                    approved_processing=approved_processing,reviewed_cache=True)
     return hosted,{'package_digest':pinned_digest,'package_version':package['package_version'],
                    'not_forwarded_roles':sorted(set(unsupported)),'activation_granted':False}
+
+
+def load_reviewed_material(package, registry, *, pinned_digest, binding, regime,
+                           evaluation_type, activation_approved=False,
+                           length_requirement=None):
+    """Host startup hook: all question bindings from one trusted package or none.
+
+    A review request is not activation authority. The deployment passes a separately
+    approved activation flag and policy; student requests cannot supply these inputs.
+    """
+    issues=material_readiness(package,registry)
+    require(package.get('package_digest')==pinned_digest,'REVIEWED_PACKAGE_PIN_REQUIRED')
+    if issues:return {},{'ready':False,'issues':issues,'activation_granted':False}
+    questions={};reports=[]
+    for entry in package['questions']:
+        q,report=reviewed_material_question(package,registry,entry['question_id'],
+            pinned_digest=pinned_digest,binding=binding,regime=regime,
+            evaluation_type=evaluation_type,approved_processing=activation_approved,
+            length_requirement=length_requirement)
+        questions[q.question_id]=q;reports.append(report)
+    return questions,{'ready':True,'issues':[],'activation_granted':activation_approved,
+                      'questions':reports}

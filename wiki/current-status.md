@@ -1,5 +1,26 @@
 # Current Status
 
+### Oct13 Owner-reviewed Package v12 — service PARTIAL
+
+Actual DB revision12 VERIFIED/approval_requested=true; package version12,17
+verified mappings, digest978b4c6f07432b75055eff63baa415bb9061adf2b5ebbeb17c95dbecce323543
+recomputed valid. runtime_ready=false, rights_status empty. Package is durably
+stored, not runtime activation. Current UI approval label does not represent a
+separate implemented approval endpoint.
+
+Material host loader now consumes existing canonical registration manifest and
+version-pinned package, reports content/rights blockers and returns HostedQuestion
+bindings for existing RuntimeHost only when content is usable. No new engine.
+Actual v12 binds0: original question text classified intent, new question empty
+and points to criteria PDF6. Owner asked whether to correct just these mappings;
+no review edits or approvals performed. Empty optional model-answer/image mappings
+are not required content. Document Provider rights both absent.
+
+Six local adapter tests PASS. No actual Provider/Credit E2E. Existing production
+role/telemetry/policy/host/exam Credit/History deployment gaps remain. No DB or
+Rights changes. Public HOLD. Private package export and preflight are outside Git.
+
+
 ## Hanyang material connection — Oct13 — PARTIAL
 
 Owner-uploaded two PDFs reused by exact SHA256. Production review revision1 saved

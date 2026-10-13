@@ -1,6 +1,6 @@
 import unittest
 from copy import deepcopy
-from essay_lab.material_runtime import reviewed_material_question
+from essay_lab.material_runtime import reviewed_material_question,material_readiness,load_reviewed_material
 from essay_lab.live_worker import Invalid
 
 class MaterialRuntimeTests(unittest.TestCase):
@@ -14,6 +14,20 @@ class MaterialRuntimeTests(unittest.TestCase):
   for mutate in [lambda p:p['exam_identity'].update(academic_year=2025),lambda p:p.update(package_digest='e'*64),lambda p:p['questions'][0]['source_page_references'][0].update(verification='NEEDS_REVIEW'),lambda p:p.update(rights_status={})]:
    p=deepcopy(self.package);mutate(p)
    with self.assertRaises(Invalid):self.bind(p,True)
+ def test_review_status_does_not_hide_empty_question_or_missing_rights(self):
+  p=deepcopy(self.package)
+  p['questions'][0]['source_page_references'][0]['evidenceText']=''
+  p['rights_status']={}
+  codes={i['code'] for i in material_readiness(p,{'exams':[self.exam]})}
+  self.assertTrue({'MISSING_EVIDENCE','EMPTY_MAPPING','PROVIDER_RIGHTS_REQUIRED'}<=codes)
+ def test_complete_content_has_no_readiness_blockers(self):
+  self.assertEqual(material_readiness(self.package,{'exams':[self.exam]}),[])
+ def test_host_loader_requires_content_and_keeps_activation_separate(self):
+  q,r=load_reviewed_material(self.package,{'exams':[self.exam]},pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+  self.assertTrue(r['ready']);self.assertFalse(q['q'].approved_processing)
+  self.package['questions'][0]['source_page_references'][0]['evidenceText']=''
+  q,r=load_reviewed_material(self.package,{'exams':[self.exam]},pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+  self.assertEqual(q,{});self.assertFalse(r['ready'])
  def test_model_answer_is_not_misrepresented_as_criteria(self):
   self.package['questions'][0]['source_page_references'].append(dict(questionId='q',sourceHash='a'*64,role='model_answer',startPage=2,endPage=2,evidenceText='answer',verification='VERIFIED'))
   q,r=self.bind();self.assertEqual(r['not_forwarded_roles'],['model_answer']);self.assertEqual(len(q.frozen_cache['criteria']),1)
