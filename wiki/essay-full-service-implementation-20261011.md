@@ -780,3 +780,15 @@ Pages5987e864-8cbf-413b-806d-9fa497d9d3f8, LAB e464477.
 Production Auth config preserved. Browser login gate confirmed; operator session
 requested for real upload/save/restore. No Provider or Credit transaction.
 [Workflow and retained-data rollback](../supabase/candidates/essay_material_review/README.md).
+
+
+### Oct13 Hanyang reviewed material adapter — PARTIAL
+
+`tool/essay_lab/material_runtime.py` converts a trusted server material package
+and pinned digest into the existing HostedQuestion contract. Exact exam title
+(session), year, type, track, university, question/source key and human review are
+required. Provider use additionally requires each source's transmission approval.
+No activation is granted by conversion. Unsupported evidence roles are explicitly
+reported, never relabeled as official scoring criteria. Three local unit tests
+verify binding/rejection; no real Provider call. Rollback: revert adapter commit;
+no database changes. Shared WEB/APP runtime integration remains incomplete.

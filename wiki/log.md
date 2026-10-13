@@ -3562,3 +3562,5 @@ Existing reviewed Worker and journal connected for persistent exam recovery; loc
 PG Ledger lost-response retry/initial1/rewrite0 PASS. WEB worker configuration
 preflight added. Production read76/234/unpublished234; API role membership absent.
 Corrected Owner Secret runbook. No DB/operating Credit/Provider call; service PARTIAL.
+
+- 2026-10-13: Hanyang reviewed-material adapter added with exact exam/source/version/rights checks;3 tests PASS. Actual private review draft saved via WEB. Provider RPC/auth and mounted evaluation remain incomplete; public HOLD.

@@ -1,5 +1,16 @@
 # Current Status
 
+## Hanyang material connection — Oct13 — PARTIAL
+
+Owner-uploaded two PDFs reused by exact SHA256. Production review revision1 saved
+with14 source mappings/5 official criteria; reload verified. No human approval or
+Provider rights inferred. New material_runtime adapter connects trusted versioned
+review manifests to existing package_registry/ReviewedRuntimeWorker input;3 local
+tests PASS. Not mounted in production. Existing Runtime supports four evidence
+roles; explanation/model-answer/image forwarding remains explicitly unresolved.
+Actual DB lacks essay_record_provider_telemetry; authenticator membership false.
+No Provider/Credit E2E, migration, public activation or Flutter UI changes.
+
 ## Universal Essay — Oct13 — PARTIAL
 
 Materials review/PDF viewer implementation is deployed; new private
