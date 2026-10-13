@@ -114,12 +114,16 @@ Refund (larger; needs Owner approval + Owner-applied DB):
 - Reconciliation must be idempotent to avoid double recovery/double grant.
 
 ## H. Owner — App Store Connect checklist (do NOT paste key/cert contents anywhere)
-1. **In-App Purchases** → create 4 **Consumable** products:
-   - `com.legendstudy.essay.credit1` — 표시명 "논술 Credit 1개", KRW 4,900 tier, 설명 "논술 답안 1개 첨삭(답안당 재첨삭 1회 포함)".
+> Correction 2026-10-13: the 4 Consumable products are **already registered**, status
+> **"제출 준비 중"**. **Do NOT create new products or change Product IDs.** The step below is
+> **verify existing**, not create.
+1. **In-App Purchases** → verify the 4 existing **Consumable** products (do not recreate):
+   - `com.legendstudy.essay.credit1` — expect 표시명 "논술 Credit 1개", KRW 4,900 tier, 설명 "논술 답안 1개 첨삭(답안당 재첨삭 1회 포함)".
    - `com.legendstudy.essay.credit3` — "논술 Credit 3개", KRW 11,900.
    - `com.legendstudy.essay.credit5` — "논술 Credit 5개", KRW 17,900.
    - `com.legendstudy.essay.credit10` — "논술 Credit 10개", KRW 29,900.
-   - Each: Cleared for Sale, review screenshot + review notes, localized 표시명/설명.
+   - Confirm each: price tier, localized 표시명/설명, review screenshot/notes, and Paid Applications
+     contract status (these are currently UNVERIFIED by Claude). Report only items actually missing.
 2. **App information**: Bundle ID `com.legendstudy.app`; note the numeric **App ID** (Apple ID) for `IAP_APPLE_APP_ID`.
 3. **App Store Server API key** (Users and Access → Integrations → In-App Purchase): create key → record **Key ID**, **Issuer ID**, download the **.p8** (store securely; load into the Edge secret `IAP_APPLE_PRIVATE_KEY`; never commit).
 4. **Apple root certificates** (AppleRootCA-G3 chain) base64 → Edge secret `IAP_APPLE_ROOT_CERTIFICATES_BASE64`.
@@ -134,7 +138,8 @@ Refund (larger; needs Owner approval + Owner-applied DB):
 3. Approve the refund design → then the additive migration (Owner-applied) + new refund Edge Function.
 4. Confirm the Codex consume/grant model alignment (negative `adjustment` vs essay `refund`).
 5. Decide the already-used-credit shortfall policy.
-6. Store product registration + secrets (Owner-direct, section H).
+6. Store secrets + sandbox tester (Owner-direct, section H). Products are already registered
+   (제출 준비 중) — verify price/metadata/contract only; do not recreate or change IDs.
 
 HOLD/policy unchanged: 논술 LAB GA HOLD; no production DB change, IAP activation, secret registration,
 store operational change, or push without separate Owner approval.

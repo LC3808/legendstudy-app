@@ -3457,3 +3457,15 @@ unused-only recovery is exact. New (pending approval): gated edge flag; refund E
 additive `iap_revoke_refunded_purchase` RPC + `iap_refund_events` table (uses existing `adjustment`
 type — no type/constraint migration). Full design, reuse scope, files, tests, risks, Owner ASC
 checklist and approval items: [Sandbox E2E + refund design](iap-sandbox-e2e-and-refund-design-2026-10-13.md).
+
+## 2026-10-13 — Correction: App Store Connect products already registered
+
+Owner directly confirmed in App Store Connect that the 4 논술 Credit products
+(`com.legendstudy.essay.credit1/3/5/10`) are **already registered**, all type **Consumable**,
+status **"제출 준비 중"**. Supersedes the earlier "App Store Connect 상품 미등록" blocker.
+Do not create new products or change Product IDs. Remaining IAP store work = verify existing
+products' price/metadata/Paid-Apps contract, Sandbox 구매 검증, server Credit grant E2E. Price
+tiers / localized metadata / contract status remain UNVERIFIED by Claude (no ASC access); request
+only genuinely missing items (Store API key/secrets, sandbox tester). Docs updated:
+[STEP 4 verification](ios-storekit-verification-2026-10-13.md),
+[Sandbox E2E + refund design](iap-sandbox-e2e-and-refund-design-2026-10-13.md).

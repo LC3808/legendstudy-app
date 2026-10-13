@@ -53,17 +53,28 @@ is compared **without** case folding — confirm in sandbox that Play echoes the
   **`IAP_ENABLED` absent → gated OFF; real grants = 0** (per iap README). Paid-credit expiry
   = purchased_at + 3 months in RPC. Not re-verified against live DB here.
 
+## Correction 2026-10-13 — App Store Connect products ARE registered
+Owner directly confirmed in App Store Connect that the 4 논술 Credit products are **already
+registered**, all type **Consumable (소모품)**, current status **"제출 준비 중" (Prepare for
+Submission / Ready to Submit)**:
+`com.legendstudy.essay.credit1/3/5/10`. **Do not create new products or change Product IDs.**
+This supersedes any earlier "App Store Connect 상품 미등록" statement in this doc.
+Still **UNVERIFIED by Claude** (no ASC access here; Owner to confirm): exact price tiers,
+localized 표시명/설명 metadata, and the Paid Applications contract/agreement status.
+
 ## Sandbox test readiness
 - Harness present: `supabase/functions/verify-iap-purchase/core_test.ts` (deno test),
   `supabase/verification/iap/behavior.mjs` (pglite fixture; role/receipt/SKU/replay/expiry/
   rollback), `postflight.sql` (read-only prod metadata + grant count).
-- **Blocked on**: Store credentials/secrets (below), Store Console product registration,
-  and a sandbox tester account. None present in this environment.
+- Product registration: **DONE** (4 consumables, 제출 준비 중 — Owner-confirmed 2026-10-13).
+- **Still blocked on**: Store API credentials/secrets (below) and a sandbox tester account;
+  plus price/metadata/contract-status confirmation (UNVERIFIED above). None present in this environment.
 
-## Owner-direct setup required (not done; needs Owner approval)
-- **App Store Connect**: register 4 consumables with exact IDs
-  `com.legendstudy.essay.credit1/3/5/10`, KRW tiers, bundle `com.legendstudy.app`; create an
-  App Store Server API key (issuer id / key id / .p8 private key); a sandbox tester.
+## Owner-direct setup required (needs Owner; products already registered — do not recreate)
+- **App Store Connect** (products exist, 제출 준비 중): confirm each product's **price tier**,
+  localized **표시명/설명**, and **Paid Applications contract** status; do NOT create new
+  products or change IDs. Create an App Store Server API key (issuer id / key id / .p8 private
+  key) and add a sandbox tester — **only if actually missing** (currently UNVERIFIED/likely missing).
 - **Google Play Console**: same 4 consumable products; a Play Developer API service account
   (JSON); package `com.legendstudy.app`; internal-test track.
 - **Supabase Edge Function secrets**: `IAP_ENABLED` (set `true` only at go-live),
@@ -79,7 +90,8 @@ is compared **without** case folding — confirm in sandbox that Play echoes the
 
 ## Release blockers
 - **IAP activation gated** (`IAP_ENABLED` off; 0 grants) — intentional; Owner-approved go-live only.
-- **Store product registration + credentials absent** (Owner-direct).
+- **Store API credentials/secrets + sandbox tester absent** (Owner-direct). Product registration
+  itself is DONE (see Correction 2026-10-13); price/metadata/contract status still UNVERIFIED.
 - **No async refund/revocation handling** (F1).
 - **論述 LAB GA HOLD** — monetization of a HELD service must not be exposed without Owner approval.
 - **Android release build blocker (pdfium)** — see `pdfium-build-blocker-2026-10-13.md`.
