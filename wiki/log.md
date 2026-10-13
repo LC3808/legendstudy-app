@@ -3443,3 +3443,17 @@ absent, 0 grants). Full findings, Owner-direct store/secret setup, and release b
 [STEP 4 verification](ios-storekit-verification-2026-10-13.md). pdfium Android/iOS build
 blocker recorded with log + repro: [pdfium blocker](pdfium-build-blocker-2026-10-13.md)
 (Codex-owned PDF viewer not modified). No DB/payment/Codex change; push held.
+
+## 2026-10-13 — STEP 4 follow-up: Sandbox E2E + async refund design (Claude)
+
+Design and code-impact analysis only (no code/DB change, no activation, no push). Sandbox E2E:
+run against an isolated Supabase env with the same canonical migrations (no ledger duplication,
+no separate balance); one gated edge flag `IAP_ALLOW_SANDBOX_GRANT` (default off, test-project only)
+lets Sandbox grant there while Production keeps `Sandbox→pending`. Async refund: Apple ASSN v2 +
+Google RTDN/Voided Purchases → map tx→`reference` → service-role RPC posts a negative `adjustment`
+of `-min(qty, grant remaining unspent)` (append-only, clamped ≥0, FIFO-safe); separate from store
+refund and from the essay-domain positive `refund` type (Codex). Ledger consume is per-grant, so
+unused-only recovery is exact. New (pending approval): gated edge flag; refund Edge handler(s);
+additive `iap_revoke_refunded_purchase` RPC + `iap_refund_events` table (uses existing `adjustment`
+type — no type/constraint migration). Full design, reuse scope, files, tests, risks, Owner ASC
+checklist and approval items: [Sandbox E2E + refund design](iap-sandbox-e2e-and-refund-design-2026-10-13.md).
