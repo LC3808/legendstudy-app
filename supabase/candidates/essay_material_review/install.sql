@@ -54,7 +54,7 @@ begin
 end $$;
 create or replace function public.essay_material_save(p_exam uuid,p_revision integer,p_body jsonb,p_state text,p_request_approval boolean default false) returns jsonb
 language plpgsql security definer set search_path='' as $$
-declare old essay_material_private.reviews; m jsonb; h text; n integer; required_checks text[]:=array['university','year','kind','track','sessionCampus','question','passages','questionPages','visuals','length','intent','explanation','criteria','modelAnswer','source','providerRights','studentRights'];
+declare old essay_material_private.reviews; package jsonb; m jsonb; h text; n integer; required_checks text[]:=array['university','year','kind','track','sessionCampus','question','passages','questionPages','visuals','length','intent','explanation','criteria','modelAnswer','source','providerRights','studentRights'];
 begin
  if not public.is_quality_operator() then raise exception 'MATERIAL_OPERATOR_REQUIRED' using errcode='42501'; end if;
  if p_state is null or p_state not in ('ANALYZED','NEEDS_REVIEW','IN_REVIEW','VERIFIED','BLOCKED') then raise exception 'STATE_TRANSITION_DENIED'; end if;
@@ -82,6 +82,24 @@ begin
  select * into old from essay_material_private.reviews where exam_id=p_exam for update;
  if old.revision<>p_revision then raise exception 'REVISION_CONFLICT' using errcode='40001'; end if;
  if old.state in ('PACKAGE_READY','E2E_PASSED','ACTIVE') then raise exception 'APPROVED_VERSION_IMMUTABLE'; end if;
+ -- The server builds a versioned evidence package from the reviewed canonical mapping.
+ -- It never grants runtime/publication permission and never invents criterion weights.
+ p_body := p_body - 'package';
+ if p_request_approval then
+  select jsonb_build_object('schema','essay-material-package-v1','exam_id',e.id,
+   'university_id',e.university_id,'package_version',p_revision+1,
+   'exam_identity',jsonb_build_object('academic_year',e.admission_year,'exam_type',e.exam_kind,'track',e.field_or_division,'title',e.exam_name),
+   'verification_status','VERIFIED_MANIFEST','runtime_ready',false,
+   'rights_status',coalesce(p_body->'rights','{}'::jsonb),
+   'questions',(select jsonb_agg(jsonb_build_object('question_id',q.id,'source_key',q.question_key,
+      'official_question',(select coalesce(jsonb_agg(x),'[]'::jsonb) from jsonb_array_elements(p_body->'mappings') x where x->>'questionId'=q.id::text and x->>'role'='question'),
+      'source_page_references',(select jsonb_agg(x) from jsonb_array_elements(p_body->'mappings') x where x->>'questionId'=q.id::text),
+      'criterion_weights',null) order by q.display_order)
+    from public.essay_questions q where q.essay_exam_id=p_exam and exists(select 1 from jsonb_array_elements(p_body->'mappings') x where x->>'questionId'=q.id::text and x->>'role'='question')))
+  into package from public.essay_exams e where e.id=p_exam;
+  package:=package||jsonb_build_object('package_digest',encode(sha256(convert_to(package::text,'UTF8')),'hex'));
+  p_body:=p_body||jsonb_build_object('package',package);
+ end if;
  update essay_material_private.reviews set revision=revision+1,body=p_body,state=p_state,reviewer=auth.uid(),updated_at=now(),approval_requested=p_request_approval where exam_id=p_exam;
  insert into essay_material_private.revisions(exam_id,revision,state,body,reviewer) values(p_exam,p_revision+1,p_state,p_body,auth.uid());
  return public.essay_material_detail(p_exam);

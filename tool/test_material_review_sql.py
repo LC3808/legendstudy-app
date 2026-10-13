@@ -55,6 +55,7 @@ def main():
    bad=json.loads(json.dumps(body));bad['mappings'][0]['questionId']='';sql(save(1,b=bad))
    checks=['university','year','kind','track','sessionCampus','question','passages','questionPages','visuals','length','intent','explanation','criteria','modelAnswer','source','providerRights','studentRights'];body['checks']={k:True for k in checks}
    sql(save(2,'VERIFIED',approval=True));detail=json.loads(sql(auth+f"select public.essay_material_detail('{E}')"));assert len(detail['history'])==3 and detail['review']['approvalRequested']
+   package=detail['review']['body']['package'];assert package['exam_id']==E and package['questions'][0]['question_id']==Q and package['runtime_ready'] is False and len(package['package_digest'])==64 and package['questions'][0]['criterion_weights'] is None
    sql((R/'supabase/candidates/essay_material_review/rollback.sql').read_text())
    sql(auth+'select public.essay_material_list()','permission denied')
    assert sql('select count(*) from essay_material_private.revisions')=='3'

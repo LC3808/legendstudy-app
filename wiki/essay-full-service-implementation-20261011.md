@@ -761,3 +761,22 @@ Owner action: approve the concrete private materials SQL candidate for review
 workflow only. After apply, verify real operator/ordinary-user API and storage
 denials before deployment/Owner review. Package review is not public activation.
 General activation HOLD; final Provider/Credit E2E needs separate bounded approval.
+
+
+### Owner-approved materials operational connection
+
+Owner approved private review DB and administrator web connection. Applied
+20261013032726 and20261013033132; read-back confirms3 RLS tables/private bucket/
+5 anon-denied operator RPCs, Registry234 preserved, Worker membership unchanged.
+No DELETE/DROP TABLE: only replacement of the two new named Storage policies.
+
+Server now builds a versioned evidence package from reviewed text/page mappings,
+canonical exam/question IDs, rights and SHA256 digest. No invented weights or
+runtime activation. This supersedes the earlier package-generation pending note;
+full evaluation-ready private evidence/image/rights validation remains pending.
+
+LIVE https://lab.legendstudy.com/admin/materials/
+Pages5987e864-8cbf-413b-806d-9fa497d9d3f8, LAB e464477.
+Production Auth config preserved. Browser login gate confirmed; operator session
+requested for real upload/save/restore. No Provider or Credit transaction.
+[Workflow and retained-data rollback](../supabase/candidates/essay_material_review/README.md).

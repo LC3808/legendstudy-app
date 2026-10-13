@@ -1,5 +1,11 @@
 # Development Log
 
+## 2026-10-13 — Materials review operational connection
+
+Explicit Owner approval received; private review DB2 migrations applied and checked.
+LAB admin/materials deployed5987e864/e464477; server Package creation added without
+activation. Existing administrator login needed for live upload/save/restore check.
+
 ## 2026-10-13 — Materials review / PDF delivery
 
 Protected WEB review UI + Native pdfrx viewer, source hash/page candidates and

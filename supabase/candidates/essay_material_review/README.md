@@ -1,6 +1,6 @@
 # Private materials review — application candidate (2026-10-13)
 
-**NOT APPLIED. Owner approval is required.** This candidate enables administrator
+**APPLIED after explicit Owner approval (Oct13).** This candidate enables administrator
 review only, not student PDF delivery or evaluation. Target: LegendStudy
 `stlhijzpjfgwwdgunlsd`. Do not rerun the already-applied Registry migrations.
 
@@ -31,7 +31,7 @@ Supabase API E2E or complete production-schema clone.
 Oct13 production read-only comparison: `is_quality_operator()` already validates
 JWT/account lifecycle; existing Storage permissive policies are avatar/Math-bucket
 scoped. `math_storage_owner` rejects other buckets; lifecycle/Math restrictions are
-RESTRICTIVE. No materials schema is currently installed. Recheck before application.
+RESTRICTIVE. The approved schema was subsequently applied and read back.
 
 ## Apply and verify (Owner)
 
@@ -54,7 +54,9 @@ Existing LAB login → `/admin/materials/` → search university/year/type/track
 candidate to an actual question and PDF page range → inspect source → set independent
 rights statuses and review checklist → save → verify → request Package approval.
 Saving does not publish. `VERIFIED` does not mean `PACKAGE_READY`, `E2E_PASSED` or `ACTIVE`.
-Approval request records intent only; final package build/promotion is not implemented.
+Evaluation Package 생성 builds a server-versioned evidence package (canonical IDs,
+reviewed text/page references, rights, SHA256 digest) and records an approval request.
+It remains runtime_ready=false; actual evaluation activation is separate.
 Empty extracted text/scans require visual review; heuristic analysis is not verification.
 
 ## Rollback
@@ -73,3 +75,22 @@ The conditional student viewer expects an approved `student_question` DTO; no su
 asset is published by this candidate. Original/evaluation PDFs cannot be used there.
 Worker Secret is configured, but authenticator membership remains false; this
 candidate deliberately does not resolve or expand Worker execution permissions.
+
+## Applied release
+
+Migrations20261013032726/20261013033132 are recorded in production. CLI-created files
+were aligned to the actual server-returned migration versions, not invented timestamps.
+The second migration only adds server Package generation to the existing save RPC.
+No role grant, Registry write, Credit or publication change.
+
+Production WEB: https://lab.legendstudy.com/admin/materials/
+LAB e4644774732e56c0f603a2a612b8a73173c58b95; Pages
+5987e864-8cbf-413b-806d-9fa497d9d3f8. Rollback WEB point
+aec0f8af-8a01-4b62-b690-f2c71e007816. Production Auth configuration preserved.
+
+Read-back:3 RLS tables,private32MiB bucket,5 RPCs deny anon; Registry234 questions
+unchanged; worker membershipfalse. Browser confirms real-domain login gate. Operator
+PDF/save/reload validation awaits an existing administrator login; no claim of E2E.
+Security advisor's no-policy INFO on these private tables is intentional direct-access
+denial; authenticated definer endpoints rely on existing server operator checks.
+[Advisor background](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).

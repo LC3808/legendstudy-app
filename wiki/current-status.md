@@ -2,8 +2,8 @@
 
 ## Universal Essay — Oct13 — PARTIAL
 
-Materials review/PDF viewer local implementation is ready for review; new private
-DB candidate is NOT APPLIED. WEB/Native conditional PDF viewers preserve existing
+Materials review/PDF viewer implementation is deployed; new private
+DB applied after explicit Owner approval. WEB/Native conditional PDF viewers preserve existing
 writer/Draft; no student PDF is published. [Materials delivery](essay-full-service-implementation-20261011.md#oct13-materials-review-and-pdf-delivery--partial).
 
 Private Registry76/234 and approved worker-only read RPC applied; published0/HOLD.
