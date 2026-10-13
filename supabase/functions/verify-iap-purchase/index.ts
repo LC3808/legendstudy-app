@@ -1,7 +1,12 @@
-import { handler, type VerifiedPurchase } from './core.ts';
+import { handler, sandboxGrantAllowed, type VerifiedPurchase } from './core.ts';
 import { verifyStore } from './stores.ts';
 const env = (key: string): string => { const v = Deno.env.get(key); if (!v) throw Error('UNCONFIGURED'); return v; };
-const project = 'https://stlhijzpjfgwwdgunlsd.supabase.co';
+// The function's own project. Injected by Supabase as SUPABASE_URL; in production
+// this equals the previous constant, so production behavior is unchanged, while an
+// isolated test project resolves to its own URL. Fallback keeps prod safe if unset.
+const project = Deno.env.get('SUPABASE_URL') ?? 'https://stlhijzpjfgwwdgunlsd.supabase.co';
+// Fail-closed Sandbox-grant decision, computed once from server env (never client).
+const sandboxGrant = sandboxGrantAllowed(key => Deno.env.get(key));
 Deno.serve(handler({
   async authenticate(token: string) {
     const r = await fetch(`${project}/auth/v1/user`, { headers: { apikey: env('SUPABASE_ANON_KEY'), Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(10000) });
@@ -18,4 +23,4 @@ Deno.serve(handler({
     if (!r.ok) throw Error('GRANT_UNAVAILABLE');
     const v = await r.json(); if (!['granted', 'already_processed'].includes(v)) throw Error('GRANT_UNAVAILABLE'); return v;
   },
-}, Deno.env.get('IAP_ENABLED') === 'true'));
+}, Deno.env.get('IAP_ENABLED') === 'true', sandboxGrant));

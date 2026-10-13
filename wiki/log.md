@@ -3469,3 +3469,17 @@ tiers / localized metadata / contract status remain UNVERIFIED by Claude (no ASC
 only genuinely missing items (Store API key/secrets, sandbox tester). Docs updated:
 [STEP 4 verification](ios-storekit-verification-2026-10-13.md),
 [Sandbox E2E + refund design](iap-sandbox-e2e-and-refund-design-2026-10-13.md).
+
+## 2026-10-13 — STEP 4 Phase A: Sandbox grant gate implemented (Claude)
+
+Implemented the fail-closed Sandbox-grant gate in the existing IAP Edge Function (no production
+change/deploy, no DB change, no activation, no push; Flutter untouched). `handler` gains
+`sandboxGrant` (default false → Sandbox stays pending, production identical). New pure
+`sandboxGrantAllowed()` requires flag ON + `IAP_APPLE_ENVIRONMENT=Sandbox` + own project ref
+(from `SUPABASE_URL`) ≠ production ref (denylist) + == `IAP_SANDBOX_PROJECT_REF` (allowlist) — not a
+single var, nothing client-supplied; production can never grant Sandbox even if the flag is mis-set.
+`index.ts` project URL now from `SUPABASE_URL` (prod == old constant). Reuses verify-iap-purchase /
+`iap_post_verified_purchase` / ledger / `credit_summary` — no new balance. Tests: `deno check` PASS,
+`deno test core_test.ts` **19/0**. NOT executed (reported, not claimed): `behavior.mjs` DB fixture
+(no PGLITE/IAP_TEST_DB), and a real Apple Sandbox purchase E2E (needs test project + tester + secrets).
+Implementation + E2E runbook + Owner steps: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
