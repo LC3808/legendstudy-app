@@ -3399,3 +3399,17 @@ IAP migration20261009000200 + verifierv1 JWT=true applied but activationOFF, gra
 Flutter analyze/Android debug PASS, failed regression policy fixtures corrected and
 rerun. Real Math/Store/device acceptance blocked/unverified. Exact evidence, authority,
 preservation and one-batch Owner settings: [integration](production-integration-2026-10-09.md).
+
+## 2026-10-13 — STEP 2: 모의고사 시행기관 표시 (Claude, display-only)
+
+Worktree `app-release-readiness-eab636` off `c11fc84`. Exam material detail now shows
+`시행기관: [기관]` instead of `출처: 레전드스터디 닷컴`, display-only. New pure resolver
+`lib/features/exams/presentation/exam_institution.dart` with priority: (1) authoritative
+`ExamMetadata.institution`, (2) verified mapping — `evaluation_mock`/`csat` → 한국교육과정평가원
+(연도 무관), `national_mock` → 시·도교육청 by grade+month gated to academic year ≥ 2022,
+(3) else null (검토 대상, no label). `ExamMetadata` gains an optional, defensively-read
+`institution` field; the `exams` projection is UNCHANGED (field is null today — priority-1
+needs a DB column, reported separately). Source URL / 원문 보기 / PDF / search untouched.
+No operating DB change. 29 new unit tests + updated day6_ui exam assertion; `flutter test`
+1019 pass / 2 skip / 4 fail — the 4 are pre-existing search projection/tokenization failures
+(confirmed failing at base `c11fc84`), unrelated to this change. Not committed pending Owner.

@@ -281,7 +281,10 @@ void main() {
     expect(find.text(raw), findsNothing);
     expect(find.textContaining('게시 '), findsNothing);
     expect(find.textContaining('원문 수정'), findsNothing);
-    expect(find.text('출처: 레전드스터디 닷컴'), findsOneWidget);
+    // Exam materials now show the official administering institution instead of
+    // the generic source label. The source URL and 원문 link are preserved.
+    expect(find.text('시행기관: 한국교육과정평가원'), findsOneWidget);
+    expect(find.text('출처: 레전드스터디 닷컴'), findsNothing);
     expect(find.text('원문 보기'), findsOneWidget);
     expect((await parents.detail())!.title, raw);
   });

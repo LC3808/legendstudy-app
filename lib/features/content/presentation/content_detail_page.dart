@@ -10,6 +10,7 @@ import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../exams/exam_providers.dart';
+import '../../exams/presentation/exam_institution.dart';
 import '../../exams/presentation/exam_labels.dart';
 import '../../resources/domain/content_resource.dart';
 import '../../resources/presentation/resource_section.dart';
@@ -207,13 +208,8 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                           spacing: 12,
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            if (publicWebUri(item.sourceUrl) != null)
-                              Text(
-                                publicWebUri(item.sourceUrl)!.host ==
-                                        'legendstudy.com'
-                                    ? '출처: 레전드스터디 닷컴'
-                                    : '출처: ${publicWebUri(item.sourceUrl)!.host}',
-                              ),
+                            if (_provenanceLabel(ref, item) case final label?)
+                              Text(label),
                             ExternalLinkButton(
                               uri: publicWebUri(item.sourceUrl),
                               label: '원문 보기',
@@ -306,6 +302,29 @@ class _BookmarkControl extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// The provenance line shown above the "원문 보기" link.
+///
+/// For exam materials, the official administering institution ("시행기관: …") is
+/// preferred when it can be confirmed; otherwise — and for every other content
+/// type — the original source label is kept. This changes the displayed text
+/// only: the material's stored source URL and the download/원문 link are never
+/// altered or removed.
+String? _provenanceLabel(WidgetRef ref, ContentItem item) {
+  if (item.contentType == 'exam') {
+    final exam = ref
+        .watch(examMetadataProvider(item.id))
+        .asData
+        ?.value[item.id];
+    final label = exam == null ? null : examInstitutionLabel(exam);
+    if (label != null) return label;
+  }
+  final uri = publicWebUri(item.sourceUrl);
+  if (uri == null) return null;
+  return uri.host == 'legendstudy.com'
+      ? '출처: 레전드스터디 닷컴'
+      : '출처: ${uri.host}';
 }
 
 class _ExamDetails extends ConsumerWidget {
