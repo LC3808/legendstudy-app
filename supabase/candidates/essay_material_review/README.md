@@ -119,3 +119,12 @@ are still missing; applying this RPC alone does NOT complete E2E.
 Hanyang Package v16 was generated through the existing approved admin workflow:
 question binding now succeeds,13 existing-runtime evidence inputs/5criteria;
 no question/content identity blockers. Provider rights remain unset, no calls made.
+
+
+## Applied Oct13 — Owner approved Package read RPC only
+
+Migration20261013115731 APPLIED. Catalog read-back: essay_worker EXECUTE=true,
+anon/authenticated=false; authenticator membership remains false; Registry234
+unchanged. No Credit/activation/data update. SQL-admin connection cannot SET ROLE
+essay_worker; do not bypass by granting membership. Therefore external Worker JWT
+read remains unverified. Rollback is worker_read_rollback.sql (revoke only).

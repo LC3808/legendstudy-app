@@ -1,5 +1,11 @@
 # Current Status
 
+Oct13 Owner-approved Package read RPC applied:20261013115731. Worker-only
+EXECUTE verified, anon/authenticated denied, role membership remains false.
+Registry234 intact; no Provider/Credit call. Worker JWT E2E still blocked by
+existing authentication membership and missing source transmission approval.
+
+
 ## Oct13 final review and Package v16
 
 Owner completed revision15 VERIFIED/all16 mappings. Generated Package16 via

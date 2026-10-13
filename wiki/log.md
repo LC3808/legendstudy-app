@@ -3597,3 +3597,9 @@ Added narrow current-package Worker read candidate and fetch→existing RuntimeH
 loader. Local PG ACL/integrity/rights/rollback PASS;7 adapter tests PASS. No new
 operating SQL, Provider or Credit transaction. Role/telemetry/host/exam settlement
 remain unresolved operating integration. Candidate README gives impact/rollback.
+
+
+Oct13 Owner-approved Package read RPC applied:20261013115731. Worker-only
+EXECUTE verified, anon/authenticated denied, role membership remains false.
+Registry234 intact; no Provider/Credit call. Worker JWT E2E still blocked by
+existing authentication membership and missing source transmission approval.
