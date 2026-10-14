@@ -213,6 +213,8 @@ void main() {
       expect(c.stage, EssayStage.comparison);
       expect(gateway.submitted, [previewAnswer, '수정한 새로운 답안']);
       expect(find.text('이번 답안의 변화 한눈에 보기'), findsOneWidget);
+      expect(find.text('→'), findsNWidgets(2));
+      await tapVisible(tester, find.text('유지된 항목 1개 · 상세 비교'));
       expect(find.text('→'), findsNWidgets(3));
       expect(find.textContaining('길어진 문장'), findsWidgets);
       await preview.capture(tester, 'essay-comparison-mobile');
@@ -424,7 +426,7 @@ void main() {
           );
           expect(find.text('▶'), findsWidgets);
           if (!comparison) {
-            final state = find.text('대체로 충실').first;
+            final state = find.text('4/5단계 · 대체로 충실').first;
             final stars = find.text('★★★★☆').first;
             final statePosition = tester.getTopLeft(state);
             final starsPosition = tester.getTopLeft(stars);

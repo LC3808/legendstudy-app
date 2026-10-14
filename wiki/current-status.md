@@ -1,27 +1,16 @@
 # Current Status
 
-## 2026-10-14 — Approved Flutter Essay UX connected; device acceptance pending
+## 2026-10-14 — iPhone usability closeout; today stopped
 
-Owner GO implemented on `codex/essay-shared-app-integration` only. Existing
-EssayResultView now receives saved exam evaluations; canonical metadata header,
-short criterion titles/full detail, explicit History, parent-linked comparison,
-rewrite with saved-answer protection and server eligibility, writer review/submit/status
-reuse existing APIs. Catalog displays all42/Owner22 from existing LAB metadata.
-Native PDF supports the exact already-approved Hanyang question-only source;
-Math result/engine and payment/IAP unchanged. No new Provider/Credit/DB operation.
-
-Validation: focused58 PASS plus rewrite preservation test PASS (59 distinct tests),
-Flutter Analyze PASS, iOS simulator debug build PASS. Saved real initial/rewrite data
-renders at390dp/100–200%: utilitarian3→4 and four unchanged. Source writer360dp/200%
-PASS. This is local Native rendering, not new operating E2E or Owner device approval.
-Last Owner-reported Credit balance10 remains historical evidence; no new trade.
-
-Remaining: Owner iPhone approval of new screens; WEB/APP shared photo Draft has no
-compatible source-exam upload/read contract and remains unconnected. Existing
-server text Draft remains capability-gated; local Native drafts/images preserved.
-No Store submission, Claude branch/worktree changes, or public activation.
-Public evaluation HOLD/execution OFF retained. See [implementation and device steps](essay-lab-ui-ux-v1.md#approved-native-operating-data-connection--2026-10-14)
-and [preserved operating evidence](essay-runtime-completion.md#archived-oct14-operating-checkpoints-before-approved-native-ux-connection).
+Owner confirmed prior dc722315 iPhone Release, login, Credit10, first/rewrite results,
+comparison/stars, Native PDF and photos. New15-item UX polish implemented: tab-scoped
+PDF/CTA, writer identity, fit-width root PDF, one photo picker/confirmed × deletion,
+truthful Draft status, collapsed/deduplicated feedback, N/5 labels, empty-evidence
+hiding, changed-first comparison and consistent actions. Existing components reused.
+41 local tests, Analyze and iOS simulator build PASS. No Provider/Credit/DB operation.
+Physical recheck of these new changes remains for next workday; public HOLD retained.
+WEB/APP photo sharing and AI quality excluded. Today ends after Git/Wiki handoff.
+[Exact findings, changes, evidence and remaining device checks](essay-lab-ui-ux-v1.md#iphone-usability-closeout--2026-10-14).
 
 ## Shared MY foundation — 2026-10-08
 

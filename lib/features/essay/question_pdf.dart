@@ -152,6 +152,8 @@ class _EssayQuestionPdfState extends State<EssayQuestionPdf> {
                 controller: controller,
                 initialPageNumber: page,
                 params: PdfViewerParams(
+                  sizeDelegateProvider:
+                      const PdfViewerSizeDelegateProviderSmart(),
                   onViewerReady: (document, c) {
                     if (mounted) setState(() => ready = true);
                   },

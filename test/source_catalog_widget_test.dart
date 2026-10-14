@@ -68,6 +68,20 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('답안 사진 촬영'), findsOneWidget);
         expect(find.text('이미지 첨부'), findsOneWidget);
+        expect(find.text('시험 대학'), findsOneWidget);
+        await tester.tap(find.text('문제 보기'));
+        await tester.pumpAndSettle();
+        expect(find.text('답안 확인 · 첨삭 요청'), findsNothing);
+        await tester.tap(find.text('답안 작성'));
+        await tester.pumpAndSettle();
+        await tester.scrollUntilVisible(
+          find.text('답안 확인 · 첨삭 요청'),
+          250,
+          scrollable: find.byType(Scrollable).first,
+        );
+        expect(find.text('답안 확인 · 첨삭 요청'), findsOneWidget);
+        await tester.ensureVisible(find.byType(TextField));
+
         await tester.enterText(find.byType(TextField), '풀이 보충 설명');
         await tester.pump(const Duration(seconds: 1));
         await tester.pumpAndSettle();

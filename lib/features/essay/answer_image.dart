@@ -34,10 +34,12 @@ class AnswerImageInput extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.enabled = true,
+    this.showPicker = true,
   });
   final Uint8List? value;
   final Future<void> Function(Uint8List?) onChanged;
   final bool enabled;
+  final bool showPicker;
   @override
   State<AnswerImageInput> createState() => _AnswerImageInputState();
 }
@@ -72,47 +74,81 @@ class _AnswerImageInputState extends State<AnswerImageInput> {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: [
-          FilledButton.icon(
-            onPressed: widget.enabled && !busy
-                ? () => pick(ImageSource.camera)
-                : null,
-            icon: const Icon(Icons.camera_alt_outlined),
-            label: const Text('답안 사진 촬영'),
-          ),
-          OutlinedButton.icon(
-            onPressed: widget.enabled && !busy
-                ? () => pick(ImageSource.gallery)
-                : null,
-            icon: const Icon(Icons.photo_library_outlined),
-            label: const Text('이미지 첨부'),
-          ),
-        ],
-      ),
-      if (widget.value != null) ...[
-        Image.memory(
-          widget.value!,
-          height: 240,
-          fit: BoxFit.contain,
-          semanticLabel: '선택한 답안 사진',
-          errorBuilder: (_, _, _) => const Text('사진 미리보기를 표시할 수 없습니다.'),
+      if (widget.showPicker)
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OutlinedButton.icon(
+              onPressed: widget.enabled && !busy
+                  ? () => pick(ImageSource.camera)
+                  : null,
+              icon: const Icon(Icons.camera_alt_outlined),
+              label: const Text('답안 사진 촬영'),
+            ),
+            OutlinedButton.icon(
+              onPressed: widget.enabled && !busy
+                  ? () => pick(ImageSource.gallery)
+                  : null,
+              icon: const Icon(Icons.photo_library_outlined),
+              label: const Text('이미지 첨부'),
+            ),
+          ],
         ),
-        TextButton(
-          onPressed: widget.enabled && !busy
-              ? () => widget.onChanged(null)
-              : null,
-          child: const Text('사진 삭제'),
+      if (widget.value != null)
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 24, right: 24),
+              child: Image.memory(
+                widget.value!,
+                height: 240,
+                fit: BoxFit.contain,
+                semanticLabel: '선택한 답안 사진',
+                errorBuilder: (_, _, _) => const Text('사진 미리보기를 표시할 수 없습니다.'),
+              ),
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: IconButton.filledTonal(
+                tooltip: '답안 사진 삭제',
+                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                icon: const Icon(Icons.close),
+                onPressed: widget.enabled && !busy
+                    ? () async {
+                        final remove = await showDialog<bool>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('이 사진을 삭제할까요?'),
+                            content: const Text('작성한 텍스트 답안과 다른 사진은 유지됩니다.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: const Text('취소'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text('삭제'),
+                              ),
+                            ],
+                          ),
+                        );
+                        if (remove == true && mounted) {
+                          await widget.onChanged(null);
+                        }
+                      }
+                    : null,
+              ),
+            ),
+          ],
         ),
-      ],
       if (error != null) Text(error!),
     ],
   );
 }
 
-/// Ordered pages; existing single-page camera/gallery component remains unchanged.
+/// Ordered pages with one shared picker and per-page removal.
 class AnswerImagesInput extends StatelessWidget {
   const AnswerImagesInput({
     super.key,
@@ -127,10 +163,20 @@ class AnswerImagesInput extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
+      if (values.length < 6)
+        AnswerImageInput(
+          value: null,
+          enabled: enabled,
+          onChanged: (next) async {
+            if (next != null) await onChanged([...values, next]);
+          },
+        ),
+      Text('첨부한 답안 사진 ${values.length}/6 · 첨부 순서 유지'),
       for (var i = 0; i < values.length; i++) ...[
         Text('답안 사진 ${i + 1}'),
         AnswerImageInput(
           value: values[i],
+          showPicker: false,
           enabled: enabled,
           onChanged: (next) async {
             final changed = List<Uint8List>.of(values);
@@ -143,15 +189,6 @@ class AnswerImagesInput extends StatelessWidget {
           },
         ),
       ],
-      if (values.length < 6)
-        AnswerImageInput(
-          value: null,
-          enabled: enabled,
-          onChanged: (next) async {
-            if (next != null) await onChanged([...values, next]);
-          },
-        ),
-      Text('사진 ${values.length}/6장 · 첨부한 순서로 저장됩니다.'),
     ],
   );
 }

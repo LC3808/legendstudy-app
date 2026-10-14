@@ -882,7 +882,10 @@ class EssayLevel extends StatelessWidget {
         child: Wrap(
           spacing: 8,
           children: [
-            Text(label, style: AppTokens.secondary),
+            Text(
+              valid ? '$level/5단계 · $label' : label,
+              style: AppTokens.secondary,
+            ),
             if (valid)
               Text(
                 _levelStars(level),
@@ -937,25 +940,70 @@ class _EssayResultViewState extends State<EssayResultView> {
     String title,
     List<String> content, {
     bool diagnostic = false,
-  }) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      _resultHeader(title),
-      for (final line in content)
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: diagnostic
-              ? _diagnosis(line)
-              : Text(
-                  line,
-                  style: AppTokens.body.copyWith(
-                    color: _resultInk,
-                    height: 1.65,
+  }) {
+    final lines = content.where((s) => s.trim().isNotEmpty).toList();
+    if (lines.isEmpty) return const SizedBox.shrink();
+    final body = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (final line in lines)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: diagnostic
+                ? _diagnosis(line)
+                : Text(
+                    line,
+                    textAlign: TextAlign.left,
+                    style: AppTokens.body.copyWith(
+                      color: _resultInk,
+                      height: 1.65,
+                    ),
                   ),
-                ),
+          ),
+      ],
+    );
+    return widget.collapsedDetails
+        ? ExpansionTile(
+            title: Text(title),
+            children: [Padding(padding: const EdgeInsets.all(12), child: body)],
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [_resultHeader(title), body],
+          );
+  }
+
+  Widget comparisonDimension(EssayDimension d) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(d.label, style: Theme.of(context).textTheme.titleMedium),
+        Wrap(
+          spacing: 8,
+          children: [
+            Text(_levelStars(d.previousLevel)),
+            const Text('→'),
+            Text(_levelStars(d.level)),
+          ],
         ),
-    ],
+        Text('${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}'),
+        if (d.explanation.trim().isNotEmpty)
+          ExpansionTile(
+            title: Text(
+              d.previousLevel == d.level ? '평가 설명 보기' : '변화 관련 평가 보기',
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: _diagnosis(d.explanation),
+              ),
+            ],
+          ),
+      ],
+    ),
   );
+
   // Select and excerpt existing text only; never infer resolution.
   Widget _answerOverview(EssayEvaluation e) {
     List<String> firstTwo(List<String> values, String empty, {int limit = 1}) {
@@ -994,6 +1042,13 @@ class _EssayResultViewState extends State<EssayResultView> {
             '가장 먼저 고칠 것': firstTwo(e.priorities, '평가에 명시된 우선순위가 없어요.'),
             '다시 쓸 때 확인': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
           };
+    final seen = <String>{};
+    content.removeWhere((key, values) {
+      values.removeWhere(
+        (v) => !seen.add(v.replaceAll(RegExp(r'\s+'), ' ').trim()),
+      );
+      return values.isEmpty;
+    });
     return Column(
       key: const ValueKey('answer-overview'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1086,13 +1141,39 @@ class _EssayResultViewState extends State<EssayResultView> {
                       for (final line in entry.value)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 6),
-                          child: Text(
-                            line,
-                            style: AppTokens.body.copyWith(
-                              color: _resultInk,
-                              height: 1.65,
-                            ),
-                          ),
+                          child:
+                              widget.collapsedDetails && line.runes.length > 120
+                              ? Material(
+                                  type: MaterialType.transparency,
+                                  child: ExpansionTile(
+                                    tilePadding: EdgeInsets.zero,
+                                    title: Text(
+                                      '${String.fromCharCodes(line.runes.take(100))}…',
+                                      style: AppTokens.body.copyWith(
+                                        color: _resultInk,
+                                        height: 1.65,
+                                      ),
+                                    ),
+                                    children: [
+                                      Text(
+                                        line,
+                                        textAlign: TextAlign.left,
+                                        style: AppTokens.body.copyWith(
+                                          color: _resultInk,
+                                          height: 1.65,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Text(
+                                  line,
+                                  textAlign: TextAlign.left,
+                                  style: AppTokens.body.copyWith(
+                                    color: _resultInk,
+                                    height: 1.65,
+                                  ),
+                                ),
                         ),
                     ],
                   ),
@@ -1135,6 +1216,13 @@ class _EssayResultViewState extends State<EssayResultView> {
   @override
   Widget build(BuildContext context) {
     final e = widget.evaluation;
+    final shown = <String>{};
+    List<String> unique(List<String> lines) => lines
+        .where((line) => shown.add(line.replaceAll(RegExp(r'\s+'), ' ').trim()))
+        .toList();
+    final improvements = unique(e.improvements),
+        priorities = unique(e.priorities),
+        checklist = unique(e.checklist);
     return Material(
       color: const Color(0xFFFFFEFC),
       child: DefaultTextStyle.merge(
@@ -1162,60 +1250,25 @@ class _EssayResultViewState extends State<EssayResultView> {
                       const Text('평가 조건이 달라 직접적인 향상으로 비교하기 어려워요.')
                     else ...[
                       _resultHeader('평가 항목 변화'),
-                      for (final d in e.dimensions) ...[
-                        _dimensionHeading(
-                          context,
-                          d.label,
-                          Semantics(
-                            label:
-                                '${_levelLabel(d.previousLevel)}에서 ${_levelLabel(d.level)}',
-                            child: ExcludeSemantics(
-                              child: Wrap(
-                                spacing: 8,
-                                runSpacing: 4,
-                                children: [
-                                  Text(
-                                    _levelStars(d.previousLevel),
-                                    style: AppTokens.body.copyWith(
-                                      color: AppTokens.primaryInk,
-                                    ),
-                                  ),
-                                  const Text('→'),
-                                  Text(
-                                    _levelStars(d.level),
-                                    style: AppTokens.body.copyWith(
-                                      color: AppTokens.primaryInk,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                      Text(
+                        '변화한 항목 ${e.dimensions.where((d) => d.previousLevel != d.level).length}개',
+                      ),
+                      for (final d in e.dimensions.where(
+                        (d) => d.previousLevel != d.level,
+                      ))
+                        comparisonDimension(d),
+                      if (e.dimensions.any((d) => d.previousLevel == d.level))
+                        ExpansionTile(
+                          title: Text(
+                            '유지된 항목 ${e.dimensions.where((d) => d.previousLevel == d.level).length}개 · 상세 비교',
                           ),
+                          children: [
+                            for (final d in e.dimensions.where(
+                              (d) => d.previousLevel == d.level,
+                            ))
+                              comparisonDimension(d),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}',
-                          style: AppTokens.secondary,
-                        ),
-                        const SizedBox(height: 8),
-                        if (widget.collapsedDetails)
-                          ExpansionTile(
-                            title: Text(
-                              d.previousLevel == d.level
-                                  ? '유지 · 평가 설명'
-                                  : '변화 · 평가 설명',
-                            ),
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: _diagnosis(d.explanation),
-                              ),
-                            ],
-                          )
-                        else
-                          _diagnosis(d.explanation),
-                        const SizedBox(height: 20),
-                      ],
                     ],
                   ],
                   section('종합 평가', [e.summary], diagnostic: true),
@@ -1266,20 +1319,19 @@ class _EssayResultViewState extends State<EssayResultView> {
                     attemptId: widget.attemptId,
                     submittedAnswer: widget.submittedAnswer,
                   ),
-                  section('보완할 점', e.improvements, diagnostic: true),
-                  section('먼저 고쳐야 할 부분', e.priorities, diagnostic: true),
-                  section('다시 쓸 때 확인할 것', e.checklist, diagnostic: true),
-                  section(
-                    '평가 근거',
-                    widget.isPreview
-                        ? [
-                            '${widget.question.origin.label} · 표시 예시',
-                            '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
-                          ]
-                        : widget.evidenceLabels.isEmpty
-                        ? ['확인할 수 있는 공식 근거 표시가 없어요.']
-                        : widget.evidenceLabels,
-                  ),
+                  section('보완할 점', improvements, diagnostic: true),
+                  section('먼저 고쳐야 할 부분', priorities, diagnostic: true),
+                  section('다시 쓸 때 확인할 것', checklist, diagnostic: true),
+                  if (widget.isPreview || widget.evidenceLabels.isNotEmpty)
+                    section(
+                      '평가 근거',
+                      widget.isPreview
+                          ? [
+                              '${widget.question.origin.label} · 표시 예시',
+                              '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
+                            ]
+                          : widget.evidenceLabels,
+                    ),
                   if (widget.question.officialSource != null)
                     ExternalLinkButton(
                       uri: widget.question.officialSource,
@@ -1287,6 +1339,11 @@ class _EssayResultViewState extends State<EssayResultView> {
                     ),
                   const SizedBox(height: 16),
                   FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppTokens.primaryInk,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(48, 48),
+                    ),
                     onPressed: widget.onRewrite,
                     child: const Text('다시 써보기'),
                   ),

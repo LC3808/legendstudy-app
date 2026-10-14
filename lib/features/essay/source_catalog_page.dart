@@ -1,3 +1,4 @@
+import '../../core/theme/app_theme.dart';
 import '../credits/credit_balance.dart';
 
 import 'dart:async';
@@ -176,6 +177,11 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         ),
                         const SizedBox(height: 12),
                         FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: AppTokens.primaryInk,
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(48, 48),
+                          ),
                           onPressed: () => setState(
                             () =>
                                 university = u['sourceUniversityId'] as String,
@@ -326,11 +332,18 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         )
                       : null,
                   trailing: const Icon(Icons.edit_outlined),
-                  onTap: () => Navigator.of(context).push(
+                  onTap: () => Navigator.of(context, rootNavigator: true).push(
                     MaterialPageRoute<void>(
                       builder: (_) => _SourceWriter(
                         owner: widget.owner,
                         question: q,
+                        universityName:
+                            c.universities
+                                    .where(
+                                      (u) => u['sourceUniversityId'] == uni,
+                                    )
+                                    .first['name']
+                                as String?,
                         exam: exam,
                         rewriteRun: widget.rewriteRun,
                         officialUrl:
@@ -366,10 +379,11 @@ class _SourceWriter extends ConsumerStatefulWidget {
     required this.question,
     required this.exam,
     this.officialUrl,
+    this.universityName,
   });
   final Map<String, dynamic>? rewriteRun;
   final String owner;
-  final String? officialUrl;
+  final String? officialUrl, universityName;
   final Map<String, dynamic> question, exam;
   @override
   ConsumerState<_SourceWriter> createState() => _SourceWriterState();
@@ -405,11 +419,11 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       if (mounted) {
         setState(() {
           imageDirty = false;
-          photoNotice = '사진을 이 기기에 저장했습니다.';
+          photoNotice = '사진: 이 기기에 임시 저장됨';
         });
       }
     } catch (_) {
-      if (mounted) setState(() => photoNotice = '사진을 저장하지 못했어요. 원본을 보관해 주세요.');
+      if (mounted) setState(() => photoNotice = '사진을 저장하지 못했어요. 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => imageSaving = false);
     }
@@ -511,6 +525,35 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
             : ListView(
                 padding: const EdgeInsets.all(20),
                 children: [
+                  if (widget.universityName != null)
+                    Text(
+                      widget.universityName!,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  Text(
+                    [
+                      if (widget.exam['year'] != null)
+                        '${widget.exam['year']}학년도',
+                      if (widget.exam['kind'] != null)
+                        widget.exam['kind'] == 'admission'
+                            ? '수시 논술'
+                            : widget.exam['kind'] == 'mock'
+                            ? '모의논술'
+                            : widget.exam['kind'].toString(),
+                    ].join(' '),
+                  ),
+                  Text(
+                    [
+                          widget.exam['track'],
+                          widget.exam['session'],
+                          widget.exam['campus'],
+                          widget.question['label'],
+                        ]
+                        .whereType<String>()
+                        .where((v) => v.isNotEmpty)
+                        .join(' · '),
+                  ),
+                  const SizedBox(height: 16),
                   SegmentedButton<bool>(
                     segments: const [
                       ButtonSegment(value: true, label: Text('문제 보기')),
@@ -521,57 +564,58 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         setState(() => problem = v.first),
                   ),
                   const SizedBox(height: 20),
-                  if (pdf != null)
+                  if (problem && pdf != null)
                     TextButton.icon(
                       icon: const Icon(Icons.open_in_full),
-                      label: const Text('문제 보기'),
-                      onPressed: () => Navigator.of(context).push<void>(
-                        MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                            appBar: AppBar(
-                              title: const Text('문제 보기'),
-                              leading: IconButton(
-                                tooltip: '닫기',
-                                icon: const Icon(Icons.close),
-                                onPressed: () => Navigator.of(context).pop(),
-                              ),
-                            ),
-                            body: SafeArea(
-                              child: LayoutBuilder(
-                                builder: (context, constraints) =>
-                                    EssayQuestionPdf(
-                                      height: constraints.maxHeight,
-                                      key: ValueKey(positionKey),
-                                      asset: pdf,
-                                      load: () async {
-                                        final client = ref.read(
-                                          supabaseClientProvider,
-                                        );
-                                        if (client == null ||
-                                            client.auth.currentUser?.id !=
-                                                widget.owner) {
-                                          throw StateError('로그인 필요');
-                                        }
-                                        return client.storage
-                                            .from(pdf.bucket)
-                                            .download('${pdf.id}.pdf');
-                                      },
-                                      restorePage: restorePdfPage,
-                                      savePage: savePdfPage,
-                                    ),
+                      label: const Text('문제 PDF 열기'),
+                      onPressed: () =>
+                          Navigator.of(context, rootNavigator: true).push<void>(
+                            MaterialPageRoute(
+                              builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  title: const Text('문제 보기'),
+                                  leading: IconButton(
+                                    tooltip: '닫기',
+                                    icon: const Icon(Icons.close),
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                  ),
+                                ),
+                                body: SafeArea(
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) =>
+                                        EssayQuestionPdf(
+                                          height: constraints.maxHeight,
+                                          key: ValueKey(positionKey),
+                                          asset: pdf,
+                                          load: () async {
+                                            final client = ref.read(
+                                              supabaseClientProvider,
+                                            );
+                                            if (client == null ||
+                                                client.auth.currentUser?.id !=
+                                                    widget.owner) {
+                                              throw StateError('로그인 필요');
+                                            }
+                                            return client.storage
+                                                .from(pdf.bucket)
+                                                .download('${pdf.id}.pdf');
+                                          },
+                                          restorePage: restorePdfPage,
+                                          savePage: savePdfPage,
+                                        ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
                     ),
                   if (problem) ...[
-                    Text('${widget.exam['year']}학년도 · ${widget.exam['track']}'),
                     const Text('대학 공식 기출자료에서 문제와 제시문을 확인하세요.'),
                     if (widget.officialUrl != null)
                       ExternalLinkButton(
                         uri: Uri.tryParse(widget.officialUrl!),
-                        label: '공식 자료 확인 ↗',
+                        label: '대학 입학처 원본 자료 ↗',
                       ),
                     if (widget.question['sourceLocator'] != null)
                       Text(widget.question['sourceLocator'] as String),
@@ -584,7 +628,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         enabled: imageReady && !imageSaving,
                         onChanged: savePhoto,
                       ),
-                      if (photoNotice != null) Text(photoNotice!),
+                      if (imageSaving)
+                        const Text('사진 저장 중')
+                      else if (photoNotice != null)
+                        Text(photoNotice!),
                       if (imageDirty && !imageSaving)
                         TextButton(
                           onPressed: () => savePhoto(photo),
@@ -631,13 +678,26 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         alignLabelWithHint: true,
                       ),
                     ),
-                    Text(switch (c.draftStatus) {
-                      DraftStatus.saved => draft.syncNotice ?? '이 기기에 저장했습니다.',
-                      DraftStatus.saving => '저장 중…',
-                      DraftStatus.failed => '저장하지 못했어요. 답안을 복사해 보관해 주세요.',
-                      DraftStatus.conflict => '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
-                    }),
-                    if (draft.syncNotice != null) Text(draft.syncNotice!),
+                    Text(
+                      syncBusy
+                          ? '저장 중'
+                          : switch (c.draftStatus) {
+                              DraftStatus.saved =>
+                                draft.remote != null &&
+                                        !draft.syncConflict &&
+                                        draft.remoteBody == c.body
+                                    ? '계정에 저장됨'
+                                    : '이 기기에 임시 저장됨',
+                              DraftStatus.saving => '저장 중…',
+                              DraftStatus.failed => '저장하지 못했어요. 다시 시도해 주세요.',
+                              DraftStatus.conflict =>
+                                '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
+                            },
+                    ),
+                    if (draft.syncNotice != null &&
+                        (draft.syncConflict || draft.remoteBody != c.body))
+                      Text(draft.syncNotice!),
+                    const Text('아직 첨삭 요청 전입니다.'),
                     if (draft.remote != null)
                       TextButton(
                         onPressed: syncBusy
@@ -686,29 +746,38 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         child: const Text('저장 다시 시도'),
                       ),
                   ],
-                  const SizedBox(height: 20),
-                  FilledButton(
-                    onPressed: () async {
-                      await c.save();
-                      if (!context.mounted ||
-                          c.dirty ||
-                          imageSaving ||
-                          imageDirty) {
-                        return;
-                      }
-                      await showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (_) => ExamAnswerReview(
-                          owner: widget.owner,
-                          exam: widget.exam,
-                          currentQuestion: widget.question['key'] as String,
-                          rewriteRun: widget.rewriteRun,
-                        ),
-                      );
-                    },
-                    child: const Text('답안 확인 · 첨삭 요청'),
-                  ),
+                  if (!problem) ...[
+                    const SizedBox(height: 20),
+                    if ((widget.exam['questions'] as List).length > 1)
+                      const Text('다음 화면에서 이 시험의 제출 문항을 선택합니다.'),
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: AppTokens.primaryInk,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(48, 48),
+                      ),
+                      onPressed: () async {
+                        await c.save();
+                        if (!context.mounted ||
+                            c.dirty ||
+                            imageSaving ||
+                            imageDirty) {
+                          return;
+                        }
+                        await showModalBottomSheet<void>(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (_) => ExamAnswerReview(
+                            owner: widget.owner,
+                            exam: widget.exam,
+                            currentQuestion: widget.question['key'] as String,
+                            rewriteRun: widget.rewriteRun,
+                          ),
+                        );
+                      },
+                      child: const Text('답안 확인 · 첨삭 요청'),
+                    ),
+                  ],
                 ],
               ),
       ),
@@ -869,8 +938,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
               children: [
                 Text(
                   parentId == null
-                      ? '선택한 ${answers.length}개 문항 · 최초 첨삭 1 Credit'
-                      : '동일 문항 집합 · 무료 재첨삭 자격은 서버에서 확인합니다.',
+                      ? '선택한 ${answers.length}개 문항 · 최초 첨삭 · 예상 1 Credit'
+                      : '선택한 ${answers.length}개 문항 · 무료 재첨삭 · 예상 0 Credit',
+                ),
+                const Text(
+                  '실제 차감은 서버 정책을 따릅니다. 제출 후 처리 상태와 저장된 결과를 확인할 수 있어요.',
                 ),
                 for (var i = 0; i < answers.length; i++) ...[
                   Text(selected[i]['label'] as String),
@@ -885,6 +957,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
               child: const Text('계속 작성'),
             ),
             FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppTokens.primaryInk,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(48, 48),
+              ),
               onPressed: () => Navigator.pop(context, true),
               child: const Text('첨삭 요청'),
             ),
@@ -979,6 +1056,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
       if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppTokens.primaryInk,
+          foregroundColor: Colors.white,
+          minimumSize: const Size(48, 48),
+        ),
         onPressed:
             ready &&
                 submittedRun == null &&

@@ -374,3 +374,53 @@ Do not submit a new evaluation. Final UX approval belongs to Owner physical iPho
 Rollback: revert this UI connection commit and rebuild APP; no DB rollback, data
 migration, Provider/Package/Prompt change or Credit transaction. Claude release/IAP
 branch and WEB deployment untouched. Public HOLD retained.
+
+## iPhone usability closeout — 2026-10-14
+
+Owner physical iPhone acceptance of dc722315: Release launch, login, Credit10,
+Hanyang selection, initial/rewrite History and comparison, criterion stars/change,
+Native PDF and answer photo attachment PASS. This supersedes prior device-pending
+status for that baseline. The changes below require next-workday device recheck.
+
+Scope: existing Flutter UX only; no DB, Ledger, Provider, Package, Prompt, Math
+engine, Payment/IAP, Claude release branch or public activation change.
+
+| Owner finding | Implemented minimum change |
+|---|---|
+| 1. Duplicate problem actions | Problem tab alone offers `문제 PDF 열기`; external admissions link labeled separately. |
+| 2. Submission CTA placement | Writer tab bottom only; bundle-selection notice, question count, initial/free mode and expected1/0Credit in existing confirmation. |
+| 3. Writer identity | Registry university/year/type/track/session/campus/question, omitting absent fields. |
+| 4. Small PDF | Existing pdfrx Smart fit-width sizing; zoom/page controls and saved page retained, no cropping. |
+| 5. PDF bottom navigation | Root Navigator fullscreen; writer also uses focused root route, existing app shell unchanged. |
+| 6. Repeated photo pickers | One camera/gallery set, ordered thumbnails, six-photo limit retained. |
+| 7. Delete affordance | 48px thumbnail × with explicit confirm/cancel; existing storage callback preserves remaining order/text. |
+| 8. Draft truthfulness | Distinguish local temporary save, confirmed matching account body, saving/failure and not-yet-submitted. accountDraftReady unchanged. |
+| 9. Result hierarchy | Existing EssayResultView/overview/cards retained, verbose summary/strength/detail collapsed. |
+| 10. Repeated feedback | Exact whitespace-normalized duplicates removed only at display level across related detail lists and overview cards; distinct feedback preserved. |
+| 11. Long overview reasons | Long text excerpts with expand-to-full source; no AI paraphrase or new evaluation. |
+| 12. Star meaning | Existing level mapping now explicitly N/5단계 + label; official-score disclaimer retained. |
+| 13. Missing public evidence | Hide empty evidence section; never claim missing display means missing Package evidence. |
+| 14. Comparison | Changed criteria first, unchanged count collapsed and expandable; actual Hanyang3→4/four unchanged preserved. Existing evaluation explanation is labeled as such, not invented causal reason. |
+| 15. Button/navigation consistency | Existing navy token for main actions; outlined photo actions, text details,48px controls, local200% checks. |
+
+Components: source_catalog_page.dart, answer_image.dart, question_pdf.dart,
+essay_pages.dart. Existing Native renderer, writer/Draft/store and result adapters reused.
+No new route framework, evaluation view or storage. No original evaluation modified.
+
+Validation: 41 focused tests PASS including saved actual initial/rewrite renders at
+390dp100/200%, writer tab/CTA and Draft at360dp100/200%, thumbnail cancel/delete/order,
+existing image storage rollback/restore, comparison and shared History. Analyze PASS;
+iOS simulator debug build PASS. These are local checks, not a new Provider E2E.
+Provider calls0, Credit transactions0; balance10 is Owner-confirmed, not a fresh DB read.
+Saved actual fixture remains private outside Git. No migration or production deployment.
+
+Remaining: next-workday physical iPhone recheck of fit-width/fullscreen close/page
+restore, keyboard/CTA placement, camera/gallery/add/delete, source metadata,
+result fold/expand and comparison; no new submission. PDF restores page, not exact
+pixel offset/zoom after process restart. WEB/APP shared photo Draft and AI quality
+are expressly excluded from this closeout. No blocked implementation within the
+15-item scope; UX final acceptance remains pending Owner device review.
+
+Rollback: revert this UI commit and rebuild; no DB/data rollback. General public
+HOLD and execution OFF maintained. Today stops after Wiki, Commit/Push/Remote Verify.
+Next resumption priority is Owner device verification only; no extra development started.

@@ -64,99 +64,120 @@ void main() {
     );
   });
   final path = Platform.environment['ESSAY_QA_RESULT_PATH'];
-  for (final scale in [1.0, 2.0]) {
-    testWidgets('saved operating result approved Native view scale $scale', (
-      tester,
-    ) async {
-      final rows = (jsonDecode(File(path!).readAsStringSync()) as List)
-          .cast<Map<String, dynamic>>();
-      final q = rows.last['answers'][0]['questionId'] as String;
-      final before = examEvaluationReport(rows.first, q),
-          after = examEvaluationReport(rows.last, q);
-      final e = approvedEssayEvaluation(after, before);
-      expect(e.dimensions.where((d) => d.level != d.previousLevel).length, 1);
-      expect(
-        e.dimensions
-            .where((d) => d.label == '공리주의 이해와 평가')
-            .single
-            .previousLevel,
-        3,
-      );
-      expect(
-        e.dimensions.where((d) => d.label == '공리주의 이해와 평가').single.level,
-        4,
-      );
-      expect(e.changes['해결한 부분'], isNotEmpty);
-      tester.view.physicalSize = const Size(390, 844);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: ThemeData(
-            fontFamily: const bool.fromEnvironment('CORE_RENDER')
-                ? 'CorePreview'
-                : null,
-          ),
-          home: MediaQuery(
-            data: MediaQueryData(
-              size: const Size(390, 844),
-              textScaler: TextScaler.linear(scale),
-            ),
-            child: Scaffold(
-              body: RepaintBoundary(
-                key: const ValueKey('capture'),
-                child: EssayResultView(
-                  evaluation: e,
-                  question: EssayQuestion(
-                    id: q,
-                    university: '한양대학교',
-                    exam: '2024학년도 수시 논술 · 인문계열 · 오후 2',
-                    title: '문제 1',
-                    prompt: '',
-                    passages: const [],
-                    origin: CriteriaOrigin.officialExam,
-                  ),
-                  comparison: true,
-                  isPreview: false,
-                  collapsedDetails: true,
-                  onRewrite: () {},
-                  submittedAnswer: after.answer,
-                  header: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('한양대학교'),
-                      Text('2024학년도 수시 논술'),
-                      Text('인문계열 · 오후 2 · 문제 1'),
-                      Text('재첨삭 | 2026.10.14'),
-                    ],
+  for (final comparison in [false, true]) {
+    for (final scale in [1.0, 2.0]) {
+      testWidgets(
+        'saved operating result approved Native view comparison $comparison scale $scale',
+        (tester) async {
+          final rows = (jsonDecode(File(path!).readAsStringSync()) as List)
+              .cast<Map<String, dynamic>>();
+          final q = rows.last['answers'][0]['questionId'] as String;
+          final before = examEvaluationReport(rows.first, q),
+              after = examEvaluationReport(rows.last, q);
+          final e = approvedEssayEvaluation(after, before);
+          expect(
+            e.dimensions.where((d) => d.level != d.previousLevel).length,
+            1,
+          );
+          expect(
+            e.dimensions
+                .where((d) => d.label == '공리주의 이해와 평가')
+                .single
+                .previousLevel,
+            3,
+          );
+          expect(
+            e.dimensions.where((d) => d.label == '공리주의 이해와 평가').single.level,
+            4,
+          );
+          expect(e.changes['해결한 부분'], isNotEmpty);
+          tester.view.physicalSize = const Size(390, 844);
+          tester.view.devicePixelRatio = 1;
+          addTearDown(tester.view.resetPhysicalSize);
+          addTearDown(tester.view.resetDevicePixelRatio);
+          await tester.pumpWidget(
+            MaterialApp(
+              theme: ThemeData(
+                fontFamily: const bool.fromEnvironment('CORE_RENDER')
+                    ? 'CorePreview'
+                    : null,
+              ),
+              home: MediaQuery(
+                data: MediaQueryData(
+                  size: const Size(390, 844),
+                  textScaler: TextScaler.linear(scale),
+                ),
+                child: Scaffold(
+                  body: RepaintBoundary(
+                    key: const ValueKey('capture'),
+                    child: EssayResultView(
+                      evaluation: comparison
+                          ? e
+                          : approvedEssayEvaluation(before, null),
+                      question: EssayQuestion(
+                        id: q,
+                        university: '한양대학교',
+                        exam: '2024학년도 수시 논술 · 인문계열 · 오후 2',
+                        title: '문제 1',
+                        prompt: '',
+                        passages: const [],
+                        origin: CriteriaOrigin.officialExam,
+                      ),
+                      comparison: comparison,
+                      isPreview: false,
+                      collapsedDetails: true,
+                      onRewrite: () {},
+                      submittedAnswer: comparison
+                          ? after.answer
+                          : before.answer,
+                      header: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('한양대학교'),
+                          Text('2024학년도 수시 논술'),
+                          Text('인문계열 · 오후 2 · 문제 1'),
+                          Text('재첨삭 | 2026.10.14'),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+          await tester.pumpAndSettle();
+          expect(
+            find.text(comparison ? '이번 답안의 변화 한눈에 보기' : '내 답안 한눈에 보기'),
+            findsOneWidget,
+          );
+          if (comparison) {
+            expect(find.text('변화한 항목 1개'), findsOneWidget);
+            expect(find.text('유지된 항목 4개 · 상세 비교'), findsOneWidget);
+          }
+          expect(find.text('확인할 수 있는 공식 근거 표시가 없어요.'), findsNothing);
+          expect(tester.takeException(), isNull);
+          if (scale == 1 && comparison) {
+            final boundary = tester.renderObject<RenderRepaintBoundary>(
+              find.byKey(const ValueKey('capture')),
+            );
+            await tester.runAsync(() async {
+              final image = await boundary.toImage(pixelRatio: 2);
+              final data = await image.toByteData(
+                format: ui.ImageByteFormat.png,
+              );
+              await File('/private/tmp/essay-approved-native-result.png')
+                  .writeAsBytes(data!.buffer.asUint8List());
+            });
+          }
+          await tester.scrollUntilVisible(
+            find.text('다시 써보기'),
+            700,
+            scrollable: find.byType(Scrollable).first,
+          );
+          expect(tester.takeException(), isNull);
+        },
+        skip: path == null,
       );
-      await tester.pumpAndSettle();
-      expect(find.text('이번 답안의 변화 한눈에 보기'), findsOneWidget);
-      expect(tester.takeException(), isNull);
-      if (scale == 1) {
-        final boundary = tester.renderObject<RenderRepaintBoundary>(
-          find.byKey(const ValueKey('capture')),
-        );
-        await tester.runAsync(() async {
-          final image = await boundary.toImage(pixelRatio: 2);
-          final data = await image.toByteData(format: ui.ImageByteFormat.png);
-          await File('/private/tmp/essay-approved-native-result.png')
-              .writeAsBytes(data!.buffer.asUint8List());
-        });
-      }
-      await tester.scrollUntilVisible(
-        find.text('다시 써보기'),
-        700,
-        scrollable: find.byType(Scrollable).first,
-      );
-      expect(tester.takeException(), isNull);
-    }, skip: path == null);
+    }
   }
 }
