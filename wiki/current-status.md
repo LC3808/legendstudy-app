@@ -200,3 +200,19 @@ PASS after staging module fix. Not deployed; operating E2E NOT_RUN.
 Next: Owner approval of candidate SQL, Owner Provider/review-signing Secrets, disabled
 Worker deployment/configuration, then separately scoped actual Provider/Credit E2E.
 No Math, Payment/IAP, Registry IDs, evaluation prompt/schema or approved UX changes.
+
+### Oct14 Hanyang policy applied; Worker remains OFF
+
+Owner approved rights/model-policy DB scope. Applied migration
+`20261014064346_essay_hanyang_reviewed_execution_policy`. Package17 hash
+`40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae` verified;
+v16 retained and all question/evaluation content unchanged. Existing Worker-role
+Package RPC and exam preflight PASS, Registry234, private function ACLs unchanged,
+runs0/checkpoints0. No Provider/Credit transaction.
+Deployed existing independent-review connection to the same Worker, version
+`f27efa26-42ef-4102-ad87-3d048d4363d6`; execution false, Pages unset/off, existing
+Secrets preserved. Non-secret model/reviewer bindings now configured.
+Owner action: Worker Secrets ESSAY_PROVIDER_KEY and ESSAY_REVIEW_VERIFY_KEYS only;
+exact dashboard path and hidden clipboard generation instructions provided. No JWT
+reset, no new infrastructure. After settings: safe admission validation, then separate
+limited Provider/Credit E2E approval. Actual E2E NOT_RUN; overall PARTIAL/public HOLD.

@@ -63,7 +63,7 @@ class Default(WorkerEntrypoint):
                 result={'service_auth':'PASS','user_auth':'PASS','execution_enabled':False,'probe_id':probe}
                 # Fixed read-only RPCs. Never claim/reserve/evaluate, return evidence or log credentials.
                 calls=[('registry','essay_registered_questions',{'p_subject':subject}),
-                    ('package','essay_material_runtime_package',{'p_exam':'345d3caa-3438-58c3-8f80-62a6242179ec','p_digest':'09b50772b37f69ec7544a752ba88f5cde6c8de555ab17339a13eb6ef4fdcf106'}),
+                    ('package','essay_material_runtime_package',{'p_exam':'345d3caa-3438-58c3-8f80-62a6242179ec','p_digest':'40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae'}),
                     ('policy','essay_exam_preflight',{'p_subject':subject,'p_exam':'345d3caa-3438-58c3-8f80-62a6242179ec'})]
                 for label,name,args in calls:
                     try:

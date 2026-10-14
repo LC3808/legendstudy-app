@@ -1,8 +1,16 @@
-# Hanyang first-exam execution policy — approval candidate (2026-10-14)
+# Hanyang first-exam execution policy — applied 2026-10-14
 
 Owner confirmed transmission rights for the two reviewed PDFs to OpenAI for evaluation and independent review. This is **not** authorization for operating SQL application, Provider calls, Credit transactions or public activation.
 
-## Apply (Owner approval still required)
+## Application record
+
+Owner approved the exact rights/model-policy scope. Applied migration `20261014064346_essay_hanyang_reviewed_execution_policy`; do not reapply. Operating Worker role read returned Package17; preflight pinned its digest; Registry234. Hash/content preservation true, both function ACLs unchanged (`postgres` only). Runs0/checkpoints0.
+
+Digest: `40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae`.
+
+Worker disabled deployment `f27efa26-42ef-4102-ad87-3d048d4363d6`: independent review mode and model bindings configured; prior Secrets preserved. Worker execution false, Pages flag unset/off. Still missing Owner-entered `ESSAY_PROVIDER_KEY` and `ESSAY_REVIEW_VERIFY_KEYS`. No Provider/Credit call.
+
+## Original approved application instructions
 
 In LegendStudy Supabase (`stlhijzpjfgwwdgunlsd`) SQL Editor, run `install.sql` once after approval.
 
