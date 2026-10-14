@@ -1,16 +1,14 @@
 -- =====================================================================
 -- CONSOLIDATED MIGRATIONS #27-42  —  TEST PROJECT ONLY: kpqbedylxlyntrrfybpn
--- Generated from canonical files (verbatim, byte-faithful). DO NOT run on
--- production (stlhijzpjfgwwdgunlsd). Run once in the Supabase SQL Editor of
--- the TEST project. Each migration keeps its own begin/commit (temp tables,
--- set local, reset role rely on it); the SQL Editor runs as session_user=postgres
--- so the reset-role bridges (#27-30) succeed. Per-migration history is recorded
--- only AFTER that migration commits, so a failed migration is NOT recorded and
--- execution stops at the first error (earlier ones stay applied+recorded).
--- Re-running is blocked by the pre-flight guard below (duplicate prevention).
+-- Generated from canonical files (verbatim DDL). DO NOT run on production
+-- (stlhijzpjfgwwdgunlsd). Run once in the TEST project's Supabase SQL Editor,
+-- which executes as session_user=postgres so the #27-30 reset-role bridges work.
+-- SAFETY: each migration is preceded by a guard requiring its predecessor to be
+-- recorded; the per-migration history INSERT is INSIDE the migration transaction
+-- (atomic with its DDL). So a failed migration is never recorded, and every later
+-- migration's guard then aborts — enforcing stop-on-error regardless of the editor.
 -- =====================================================================
 
--- ---- PRE-FLIGHT GUARD: baseline must be exactly #1-26, and #27-42 must be absent ----
 do $preflight$
 begin
   if (select count(*) from supabase_migrations.schema_migrations) <> 26
@@ -18,15 +16,24 @@ begin
     raise exception 'ABORT: baseline is not exactly 26 migrations through 20261001000300 (found % rows)',
       (select count(*) from supabase_migrations.schema_migrations);
   end if;
-  if exists (select 1 from supabase_migrations.schema_migrations
-             where version in ('20261002000100','20261002000200','20261002000300','20261003000100','20261004000100','20261005000100','20261006000100','20261006000200','20261008000500','20261008000600','20261008000700','20261008000800','20261008000900','20261008001000','20261009000100','20261009000200')) then
-    raise exception 'ABORT: at least one of #27-42 is already applied — this consolidated script was already run (duplicate prevention). Report the current state for a resume script.';
+  if exists (select 1 from supabase_migrations.schema_migrations where version in ('20261002000100','20261002000200','20261002000300','20261003000100','20261004000100','20261005000100','20261006000100','20261006000200','20261008000500','20261008000600','20261008000700','20261008000800','20261008000900','20261008001000','20261009000100','20261009000200')) then
+    raise exception 'ABORT: one of #27-42 already applied — script already run (duplicate prevention).';
   end if;
 end
 $preflight$;
 
 
--- ========== #27  20261002000100_math_essay_persistence  (version 20261002000100) ==========
+-- ========== #27  20261002000100_math_essay_persistence  (version 20261002000100; predecessor 20261001000300) ==========
+do $pre_20261002000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261001000300') then
+    raise exception 'ABORT #27: predecessor 20261001000300 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261002000100') then
+    raise exception 'ABORT #27: 20261002000100 already applied';
+  end if;
+end
+$pre_20261002000100$;
 -- MATH-2C. Isolated implementation; separate Owner Production apply required.
 -- No provider calls, price policy, wallet duplication or unrelated migration replay.
 -- Runtime fails closed without ADR-2; Math erasure/Storage deployment are activation gates.
@@ -998,12 +1005,21 @@ do $postflight$declare r text;begin
  end loop;
  if has_schema_privilege('math_executor','public','CREATE') or has_schema_privilege('math_executor','math_private','CREATE') or has_schema_privilege('essay_executor','math_private','CREATE') or exists(select 1 from pg_auth_members where roleid='essay_executor'::regrole and (set_option or inherit_option)) then raise exception 'MATH_TEMPORARY_PRIVILEGE_REMAINS';end if;
 end $postflight$;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000100','math_essay_persistence', array['-- consolidated apply of canonical 20261002000100_math_essay_persistence.sql sha256=73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000100','math_essay_persistence', array['-- consolidated apply of canonical 20261002000100_math_essay_persistence.sql, sha256=73fae66a4a9198885c6bf505ac87d9a3abcc453dd1017e666a217bac486c7d51']);
 
-
--- ========== #28  20261002000200_math_runtime_surface  (version 20261002000200) ==========
+-- ========== #28  20261002000200_math_runtime_surface  (version 20261002000200; predecessor 20261002000100) ==========
+do $pre_20261002000200$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261002000100') then
+    raise exception 'ABORT #28: predecessor 20261002000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261002000200') then
+    raise exception 'ABORT #28: 20261002000200 already applied';
+  end if;
+end
+$pre_20261002000200$;
 -- MATH-2D bounded runtime consumer surface. No Production activation.
 begin;
 do $$begin
@@ -1271,12 +1287,21 @@ grant execute on function public.qlm_quality(jsonb) to authenticated;
 do $$begin
  if has_schema_privilege('math_executor','public','CREATE') or exists(select 1 from pg_auth_members where roleid='math_executor'::regrole and (member<>'postgres'::regrole or not admin_option or inherit_option or set_option)) then raise exception 'BOOTSTRAP_NOT_RESTORED';end if;
 end$$;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000200','math_runtime_surface', array['-- consolidated apply of canonical 20261002000200_math_runtime_surface.sql sha256=b40bf7224a84658308ff1640b639acb857e379998211131d97a688a9711fe049 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000200','math_runtime_surface', array['-- consolidated apply of canonical 20261002000200_math_runtime_surface.sql, sha256=b40bf7224a84658308ff1640b639acb857e379998211131d97a688a9711fe049']);
 
-
--- ========== #29  20261002000300_math_learning_runtime  (version 20261002000300) ==========
+-- ========== #29  20261002000300_math_learning_runtime  (version 20261002000300; predecessor 20261002000200) ==========
+do $pre_20261002000300$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261002000200') then
+    raise exception 'ABORT #29: predecessor 20261002000200 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261002000300') then
+    raise exception 'ABORT #29: 20261002000300 already applied';
+  end if;
+end
+$pre_20261002000300$;
 -- MATH-2E: learning delivery/resolve surface, NOT Production activation.
 begin;
 do $$begin
@@ -1456,12 +1481,21 @@ grant execute on function public.math_learning(jsonb) to authenticated;
 do $$begin
  if has_schema_privilege('math_executor','math_private','CREATE') or exists(select 1 from pg_auth_members where roleid='math_executor'::regrole and (member<>'postgres'::regrole or not admin_option or inherit_option or set_option)) then raise exception 'TOPOLOGY_NOT_RESTORED';end if;
 end$$;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000300','math_learning_runtime', array['-- consolidated apply of canonical 20261002000300_math_learning_runtime.sql sha256=fa0fbb507dd650d2e684f7dc9bc9375c6c5db09eac64405a438ad63206933f7d (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261002000300','math_learning_runtime', array['-- consolidated apply of canonical 20261002000300_math_learning_runtime.sql, sha256=fa0fbb507dd650d2e684f7dc9bc9375c6c5db09eac64405a438ad63206933f7d']);
 
-
--- ========== #30  20261003000100_payment_foundation  (version 20261003000100) ==========
+-- ========== #30  20261003000100_payment_foundation  (version 20261003000100; predecessor 20261002000300) ==========
+do $pre_20261003000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261002000300') then
+    raise exception 'ABORT #30: predecessor 20261002000300 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261003000100') then
+    raise exception 'ABORT #30: 20261003000100 already applied';
+  end if;
+end
+$pre_20261003000100$;
 -- PAYMENT APP foundation. NOT APPLIED. No provider/network calls or LIVE activation.
 begin;
 create schema payment_private;
@@ -1698,12 +1732,21 @@ revoke essay_executor from postgres granted by postgres;
 do $$begin
  if (select jsonb_agg(to_jsonb(m) order by roleid,member,grantor) from pg_auth_members m) is distinct from (select memberships from payment_bootstrap_before) or (select nspacl::text from pg_namespace where nspname='public') is distinct from (select acl from payment_bootstrap_before) then raise exception 'PAYMENT_BOOTSTRAP_RESTORE';end if;
 end$$;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261003000100','payment_foundation', array['-- consolidated apply of canonical 20261003000100_payment_foundation.sql sha256=77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261003000100','payment_foundation', array['-- consolidated apply of canonical 20261003000100_payment_foundation.sql, sha256=77b460bf2bf437a8d6dd03d78454ece17c6c4143fe50d7f28b6ea30a51509c75']);
 
-
--- ========== #31  20261004000100_payment_runtime  (version 20261004000100) ==========
+-- ========== #31  20261004000100_payment_runtime  (version 20261004000100; predecessor 20261003000100) ==========
+do $pre_20261004000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261003000100') then
+    raise exception 'ABORT #31: predecessor 20261003000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261004000100') then
+    raise exception 'ABORT #31: 20261004000100 already applied';
+  end if;
+end
+$pre_20261004000100$;
 -- Additive read/support boundary. No activation, grant, or second wallet.
 begin;
 create function public.credit_summary() returns jsonb language plpgsql security definer set search_path='' as $$
@@ -1802,12 +1845,21 @@ end$$;
 revoke all on function public.payment_compensate(jsonb) from public,anon,authenticated,service_role;
 grant execute on function public.payment_compensate(jsonb) to essay_finance;
 notify pgrst,'reload schema';
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261004000100','payment_runtime', array['-- consolidated apply of canonical 20261004000100_payment_runtime.sql sha256=b1613b352ceed6ab300c08c04decf5bb036d019e4318da159b6f3f859f4a6ab3 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261004000100','payment_runtime', array['-- consolidated apply of canonical 20261004000100_payment_runtime.sql, sha256=b1613b352ceed6ab300c08c04decf5bb036d019e4318da159b6f3f859f4a6ab3']);
 
-
--- ========== #32  20261005000100_account_provider_revocation  (version 20261005000100) ==========
+-- ========== #32  20261005000100_account_provider_revocation  (version 20261005000100; predecessor 20261004000100) ==========
+do $pre_20261005000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261004000100') then
+    raise exception 'ABORT #32: predecessor 20261004000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261005000100') then
+    raise exception 'ABORT #32: 20261005000100 already applied';
+  end if;
+end
+$pre_20261005000100$;
 -- APP-RELEASE-BLOCKER-CLOSEOUT-1 — Apple revoke material (additive, worker-only).
 --
 -- Companion to 20261001000300_account_deletion_lifecycle. Adds a single private,
@@ -1863,32 +1915,63 @@ revoke all on function public.account_provider_material(uuid,uuid) from public,a
 grant execute on function public.account_store_apple_revocation(uuid,text,text) to account_lifecycle_worker;
 grant execute on function public.account_provider_material(uuid,uuid) to account_lifecycle_worker;
 
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261005000100','account_provider_revocation', array['-- consolidated apply of canonical 20261005000100_account_provider_revocation.sql sha256=114f172320b62771e949887fb0541499877807744c31538d1aec8196737c31cc (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261005000100','account_provider_revocation', array['-- consolidated apply of canonical 20261005000100_account_provider_revocation.sql, sha256=114f172320b62771e949887fb0541499877807744c31538d1aec8196737c31cc']);
 
-
--- ========== #33  20261006000100_math_attempts_cascade_on_profile_delete  (version 20261006000100) ==========
+-- ========== #33  20261006000100_math_attempts_cascade_on_profile_delete  (version 20261006000100; predecessor 20261005000100) ==========
+do $pre_20261006000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261005000100') then
+    raise exception 'ABORT #33: predecessor 20261005000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261006000100') then
+    raise exception 'ABORT #33: 20261006000100 already applied';
+  end if;
+end
+$pre_20261006000100$;
+begin;
 -- Math erasure fix: math_attempts.student_id RESTRICT -> CASCADE so the ADR-2
 -- auth.users -> profiles deletion cascade also erases the student's Math data.
 alter table public.math_attempts
   drop constraint math_attempts_student_id_fkey,
   add constraint math_attempts_student_id_fkey
     foreign key (student_id) references public.profiles(id) on delete cascade;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261006000100','math_attempts_cascade_on_profile_delete', array['-- consolidated apply of canonical 20261006000100_math_attempts_cascade_on_profile_delete.sql sha256=faa92d69706675724eb81bdea39d4f2a03d65f05ba33ce2c1dfc01ecf7f2401d (recorded atomically with DDL)']);
+commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261006000100','math_attempts_cascade_on_profile_delete', array['-- consolidated apply of canonical 20261006000100_math_attempts_cascade_on_profile_delete.sql, sha256=faa92d69706675724eb81bdea39d4f2a03d65f05ba33ce2c1dfc01ecf7f2401d']);
 
-
--- ========== #34  20261006000200_profiles_intended_major  (version 20261006000200) ==========
+-- ========== #34  20261006000200_profiles_intended_major  (version 20261006000200; predecessor 20261006000100) ==========
+do $pre_20261006000200$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261006000100') then
+    raise exception 'ABORT #34: predecessor 20261006000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261006000200') then
+    raise exception 'ABORT #34: 20261006000200 already applied';
+  end if;
+end
+$pre_20261006000200$;
+begin;
 -- APP-FIRST-RUN-PERSONALIZATION-1
 -- Desired major / interest field. Personalization data, not an application record.
 alter table public.profiles
   add column if not exists intended_major text;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261006000200','profiles_intended_major', array['-- consolidated apply of canonical 20261006000200_profiles_intended_major.sql sha256=0e13f74f080a36cbb4ac1833a7e05d18bc66b9170912d6cbb9b90b665844b062 (recorded atomically with DDL)']);
+commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261006000200','profiles_intended_major', array['-- consolidated apply of canonical 20261006000200_profiles_intended_major.sql, sha256=0e13f74f080a36cbb4ac1833a7e05d18bc66b9170912d6cbb9b90b665844b062']);
 
-
--- ========== #35  20261008000500_target_division_identity  (version 20261008000500) ==========
+-- ========== #35  20261008000500_target_division_identity  (version 20261008000500; predecessor 20261006000200) ==========
+do $pre_20261008000500$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261006000200') then
+    raise exception 'ABORT #35: predecessor 20261006000200 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008000500') then
+    raise exception 'ABORT #35: 20261008000500 already applied';
+  end if;
+end
+$pre_20261008000500$;
 -- Candidate only. Owner §74 approval required before replacing the old unique constraint.
 -- Preserve rows/IDs/nullable legacy year/division and APP insert/delete-by-ID behavior.
 begin;
@@ -1906,13 +1989,22 @@ end$$;
 create unique index student_target_division_identity on public.student_target_universities
  (user_id,university_id,admission_year,(lower(btrim(coalesce(intended_division,''))))) nulls not distinct;
 alter table public.student_target_universities drop constraint student_target_universities_user_id_university_id_admission_key;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000500','target_division_identity', array['-- consolidated apply of canonical 20261008000500_target_division_identity.sql sha256=469b5def1cd90f7247a970e2bed348a5ab6f0a01cd3a07aa0ebc11b09fafd833 (recorded atomically with DDL)']);
 commit;
 -- Rollback only when no university/year has multiple rows. Never delete rows to roll back.
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000500','target_division_identity', array['-- consolidated apply of canonical 20261008000500_target_division_identity.sql, sha256=469b5def1cd90f7247a970e2bed348a5ab6f0a01cd3a07aa0ebc11b09fafd833']);
 
-
--- ========== #36  20261008000600_student_application_foundation  (version 20261008000600) ==========
+-- ========== #36  20261008000600_student_application_foundation  (version 20261008000600; predecessor 20261008000500) ==========
+do $pre_20261008000600$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008000500') then
+    raise exception 'ABORT #36: predecessor 20261008000500 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008000600') then
+    raise exception 'ABORT #36: 20261008000600 already applied';
+  end if;
+end
+$pre_20261008000600$;
 -- Shared self-reported Application facts, distinct from interests and Essay practice.
 -- Additive; no replacement of existing profile/target/payment/deletion functions.
 begin;
@@ -2067,14 +2159,23 @@ end$$;
 revoke all on function student_private.applications(uuid,integer) from public,anon,authenticated;
 revoke all on function public.my_application_save(uuid,integer,integer,uuid,text,text,text,uuid),public.my_application_event(uuid,text,timestamptz,uuid,uuid),public.my_application_delete(uuid),public.my_applications(integer),public.my_application_events(uuid,integer) from public,anon,authenticated;
 grant execute on function public.my_application_save(uuid,integer,integer,uuid,text,text,text,uuid),public.my_application_event(uuid,text,timestamptz,uuid,uuid),public.my_application_delete(uuid),public.my_applications(integer),public.my_application_events(uuid,integer) to authenticated;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000600','student_application_foundation', array['-- consolidated apply of canonical 20261008000600_student_application_foundation.sql sha256=92a8cfd6a235564609fd171a9ada4a17451d49bb2f3c931083ef1d044e6ba7b5 (recorded atomically with DDL)']);
 commit;
 -- Rollback: revoke the five public RPC grants to disable new writes/reads; preserve facts.
 -- Do not DROP these tables after real data has been entered. No existing runtime is replaced.
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000600','student_application_foundation', array['-- consolidated apply of canonical 20261008000600_student_application_foundation.sql, sha256=92a8cfd6a235564609fd171a9ada4a17451d49bb2f3c931083ef1d044e6ba7b5']);
 
-
--- ========== #37  20261008000700_shared_study_summary  (version 20261008000700) ==========
+-- ========== #37  20261008000700_shared_study_summary  (version 20261008000700; predecessor 20261008000600) ==========
+do $pre_20261008000700$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008000600') then
+    raise exception 'ABORT #37: predecessor 20261008000600 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008000700') then
+    raise exception 'ABORT #37: 20261008000700 already applied';
+  end if;
+end
+$pre_20261008000700$;
 -- APP completed Study snapshots -> one shared KST union read model for MY/Admin.
 -- No timer writes, profile changes or changes to existing APP functions.
 begin;
@@ -2117,14 +2218,23 @@ begin
 end$$;
 revoke all on function student_private.study_summary(uuid,timestamptz),public.my_study_summary() from public,anon,authenticated;
 grant execute on function public.my_study_summary() to authenticated;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000700','shared_study_summary', array['-- consolidated apply of canonical 20261008000700_shared_study_summary.sql sha256=e5de76ce66a59646f7548618ea0434fca99ec54204a7e2a09ec5daf8be5bfe47 (recorded atomically with DDL)']);
 commit;
 -- Safe disable: revoke execute on public.my_study_summary() from authenticated.
 -- Original APP Study storage and functions remain untouched.
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000700','shared_study_summary', array['-- consolidated apply of canonical 20261008000700_shared_study_summary.sql, sha256=e5de76ce66a59646f7548618ea0434fca99ec54204a7e2a09ec5daf8be5bfe47']);
 
-
--- ========== #38  20261008000800_student360_read_foundation  (version 20261008000800) ==========
+-- ========== #38  20261008000800_student360_read_foundation  (version 20261008000800; predecessor 20261008000700) ==========
+do $pre_20261008000800$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008000700') then
+    raise exception 'ABORT #38: predecessor 20261008000700 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008000800') then
+    raise exception 'ABORT #38: 20261008000800 already applied';
+  end if;
+end
+$pre_20261008000800$;
 -- Additive, operator-gated supplement to the existing member detail/credit RPCs.
 -- Same Essay source can serve the student/report contract. No new fact store.
 begin;
@@ -2169,13 +2279,22 @@ begin
 end$$;
 revoke all on function student_private.essay_summary(uuid),public.my_essay_summary(),public.admin_student360(uuid) from public,anon,authenticated;
 grant execute on function public.my_essay_summary(),public.admin_student360(uuid) to authenticated;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000800','student360_read_foundation', array['-- consolidated apply of canonical 20261008000800_student360_read_foundation.sql sha256=b56f72b08fde37511fef02133e608f07c1af9e8db488bd2699819a560e8e11f4 (recorded atomically with DDL)']);
 commit;
 -- Disable only the new RPC grants to roll back exposure. Existing Admin/QL remains unchanged.
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000800','student360_read_foundation', array['-- consolidated apply of canonical 20261008000800_student360_read_foundation.sql, sha256=b56f72b08fde37511fef02133e608f07c1af9e8db488bd2699819a560e8e11f4']);
 
-
--- ========== #39  20261008000900_admin_member_directory  (version 20261008000900) ==========
+-- ========== #39  20261008000900_admin_member_directory  (version 20261008000900; predecessor 20261008000800) ==========
+do $pre_20261008000900$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008000800') then
+    raise exception 'ABORT #39: predecessor 20261008000800 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008000900') then
+    raise exception 'ABORT #39: 20261008000900 already applied';
+  end if;
+end
+$pre_20261008000900$;
 -- Additive directory only. Existing Admin search/detail, financial helpers and
 -- Application/Study/Student360 functions stay byte-identical. Target005 excluded.
 begin;
@@ -2262,12 +2381,21 @@ end $$;
 alter function public.admin_member_list(text,integer,integer,text,text,text,integer,text,text,boolean) owner to postgres;
 revoke all on function public.admin_member_list(text,integer,integer,text,text,text,integer,text,text,boolean) from public,anon,authenticated,service_role;
 grant execute on function public.admin_member_list(text,integer,integer,text,text,text,integer,text,text,boolean) to authenticated;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000900','admin_member_directory', array['-- consolidated apply of canonical 20261008000900_admin_member_directory.sql sha256=1209d9890f17c40eb8be01ea27d4caa0b7ce579dd332a3d28a3d3b7a0557f70e (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008000900','admin_member_directory', array['-- consolidated apply of canonical 20261008000900_admin_member_directory.sql, sha256=1209d9890f17c40eb8be01ea27d4caa0b7ce579dd332a3d28a3d3b7a0557f70e']);
 
-
--- ========== #40  20261008001000_essay_web_runtime_status  (version 20261008001000) ==========
+-- ========== #40  20261008001000_essay_web_runtime_status  (version 20261008001000; predecessor 20261008000900) ==========
+do $pre_20261008001000$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008000900') then
+    raise exception 'ABORT #40: predecessor 20261008000900 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261008001000') then
+    raise exception 'ABORT #40: 20261008001000 already applied';
+  end if;
+end
+$pre_20261008001000$;
 -- Additive read projection only; does not activate providers, change Credit, or open the Math kill switch.
 begin;
 set local lock_timeout='5s';
@@ -2289,12 +2417,21 @@ revoke all on function public.essay_web_runtime_status() from public,anon,servic
 grant execute on function public.essay_web_runtime_status() to authenticated;
 comment on function public.essay_web_runtime_status() is 'Authenticated active-account read of existing runtime kill switch; no content, credentials or student records.';
 notify pgrst,'reload schema';
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008001000','essay_web_runtime_status', array['-- consolidated apply of canonical 20261008001000_essay_web_runtime_status.sql sha256=cc911a6d7ad90c768b388e52520a7e72c40ebb885b4d862c0e07231b34e49734 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261008001000','essay_web_runtime_status', array['-- consolidated apply of canonical 20261008001000_essay_web_runtime_status.sql, sha256=cc911a6d7ad90c768b388e52520a7e72c40ebb885b4d862c0e07231b34e49734']);
 
-
--- ========== #41  20261009000100_admin_manual_credit_grant  (version 20261009000100) ==========
+-- ========== #41  20261009000100_admin_manual_credit_grant  (version 20261009000100; predecessor 20261008001000) ==========
+do $pre_20261009000100$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261008001000') then
+    raise exception 'ABORT #41: predecessor 20261008001000 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261009000100') then
+    raise exception 'ABORT #41: 20261009000100 already applied';
+  end if;
+end
+$pre_20261009000100$;
 -- Owner-approved operator grant. Reuses the canonical ledger; no finance JWT,
 -- wallet, payment change or direct-table access is introduced.
 begin;
@@ -2325,12 +2462,21 @@ revoke all on function public.admin_manual_credit_grant(uuid,text,integer,text,u
 grant execute on function public.admin_manual_credit_grant(uuid,text,integer,text,uuid) to authenticated;
 comment on function public.admin_manual_credit_grant(uuid,text,integer,text,uuid) is
  'Admin-only 1..100 manual support credit; canonical atomic ledger and idempotency; null expiry.';
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261009000100','admin_manual_credit_grant', array['-- consolidated apply of canonical 20261009000100_admin_manual_credit_grant.sql sha256=6f25a4a97ca0c94e92ee9874fec749df8a43d87dd48f1a5ba2ff41db8cd8b388 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261009000100','admin_manual_credit_grant', array['-- consolidated apply of canonical 20261009000100_admin_manual_credit_grant.sql, sha256=6f25a4a97ca0c94e92ee9874fec749df8a43d87dd48f1a5ba2ff41db8cd8b388']);
 
-
--- ========== #42  20261009000200_iap_verified_credit  (version 20261009000200) ==========
+-- ========== #42  20261009000200_iap_verified_credit  (version 20261009000200; predecessor 20261009000100) ==========
+do $pre_20261009000200$
+begin
+  if not exists (select 1 from supabase_migrations.schema_migrations where version='20261009000100') then
+    raise exception 'ABORT #42: predecessor 20261009000100 not recorded — a prior migration failed or ran out of order';
+  end if;
+  if exists (select 1 from supabase_migrations.schema_migrations where version='20261009000200') then
+    raise exception 'ABORT #42: 20261009000200 already applied';
+  end if;
+end
+$pre_20261009000200$;
 -- Server verified Production Store purchases only. No wallet/table or payment mutation.
 begin;
 create function public.iap_post_verified_purchase(p_user uuid,p_platform text,p_product text,p_transaction text,p_purchased_at timestamptz)
@@ -2361,18 +2507,25 @@ end$$;
 alter function public.iap_post_verified_purchase(uuid,text,text,text,timestamptz) owner to postgres;
 revoke all on function public.iap_post_verified_purchase(uuid,text,text,text,timestamptz) from public,anon,authenticated;
 grant execute on function public.iap_post_verified_purchase(uuid,text,text,text,timestamptz) to service_role;
+insert into supabase_migrations.schema_migrations(version,name,statements) values('20261009000200','iap_verified_credit', array['-- consolidated apply of canonical 20261009000200_iap_verified_credit.sql sha256=ff03ee2f928d9bad7b37c388657dc03d95dfb9b3e172b4f1973febdd13a9f849 (recorded atomically with DDL)']);
 commit;
 
-insert into supabase_migrations.schema_migrations(version,name,statements) values('20261009000200','iap_verified_credit', array['-- consolidated apply of canonical 20261009000200_iap_verified_credit.sql, sha256=ff03ee2f928d9bad7b37c388657dc03d95dfb9b3e172b4f1973febdd13a9f849']);
 
-
--- ---- POST-FLIGHT: confirm all 42 applied (only reached if every migration above succeeded) ----
+-- ---- POST-FLIGHT: verify the full canonical 42-version set (reached only if all succeeded) ----
 do $postflight$
+declare expected text[] := array['20260912000100','20260913000100','20260913000200','20260914000100','20260914000200','20260917000100','20260917000200','20260923000100','20260923000200','20260925000100','20260926000100','20260927000100','20260927000200','20260928000100','20260928000200','20260928000300','20260928000400','20260929000100','20260929000200','20260929000300','20260929000400','20260929000500','20260930000100','20261001000100','20261001000200','20261001000300','20261002000100','20261002000200','20261002000300','20261003000100','20261004000100','20261005000100','20261006000100','20261006000200','20261008000500','20261008000600','20261008000700','20261008000800','20261008000900','20261008001000','20261009000100','20261009000200'];
+declare got text[];
 begin
+  select array_agg(version order by version) into got from supabase_migrations.schema_migrations;
   if (select count(*) from supabase_migrations.schema_migrations) <> 42 then
     raise exception 'POST: expected 42 migrations, found %', (select count(*) from supabase_migrations.schema_migrations);
   end if;
+  if exists (select unnest(expected) except select unnest(got)) then
+    raise exception 'POST: missing canonical versions: %', (select array_agg(v) from (select unnest(expected) except select unnest(got)) t(v));
+  end if;
+  if exists (select unnest(got) except select unnest(expected)) then
+    raise exception 'POST: unexpected versions present: %', (select array_agg(v) from (select unnest(got) except select unnest(expected)) t(v));
+  end if;
 end
 $postflight$;
-select 'OK: #27-42 applied; schema_migrations now has ' || count(*) || ' rows' as result
-from supabase_migrations.schema_migrations;
+select 'OK: #27-42 applied; schema_migrations matches the canonical 42-version set' as result;
