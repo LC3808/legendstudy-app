@@ -244,32 +244,8 @@ class ReservedExamRuntime:
                 if self.journal.read(key) is None:return {'run_id':run_id,'state':'reconciling'}
         snap=claimed['snapshot'];policy=snap['runtime'];exam_id=claimed['exam_id']
         pkg=self.rpc('essay_material_runtime_package',{'p_exam':exam_id,'p_digest':policy['package_digest']})
-        hosted, report=load_reviewed_material(pkg,self.registry,pinned_digest=policy['package_digest'],
-            binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
-        require(report['ready'] and claimed['subject_id']==subject and snap['ownerId']==subject,'EXAM_ACCESS_DENIED')
-        questions=[];caches={}
-        parent=claimed.get('parent_result')
-        for answer in snap['answers']:
-            qid=answer['questionId'];cache=hosted[qid].frozen_cache;caches[qid]=cache
-            evaluation=str(uuid5(NS,'evaluation/'+run_id+'/'+qid))
-            context={'items':[],'previous_core_progress_ids':[]}
-            if claimed.get('parent_id'):
-                previous=[q for q in parent['questions'] if q['questionId']==qid]
-                require(len(previous)==1,'PRIOR_RESULT_REQUIRED')
-                out=previous[0]['evaluation'];core=set(out['core_improvement_keys'])
-                for item in out['improvements']:
-                    progress=str(uuid5(NS,'progress/'+claimed['parent_id']+'/'+qid+'/'+item['issue_key']))
-                    context['items'].append(dict(item,progress_id=progress))
-                    if item['issue_key'] in core:context['previous_core_progress_ids'].append(progress)
-            frozen=dict(contract_version='1.3',attempt_id=evaluation,
-                answer_hash=sha256(answer['body'].encode()).hexdigest(),
-                criteria=[c['binding'] for c in cache['criteria']],evidence=[e['binding'] for e in cache['evidence']],
-                scaffolding_context=context,provider_binding=policy['binding'])
-            claim=dict(run_id=run_id,lease_token=claimed['lease_token'],answer=answer['body'],
-                input=frozen,provider_binding=policy['binding'])
-            provider_package(claim,cache)
-            questions.append(dict(questionId=qid,rubricVersion=answer['rubricVersion'],
-                evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim))
+        questions,caches=prepare_claimed_material(claimed,pkg,self.registry)
+        require(claimed['subject_id']==subject and snap['ownerId']==subject,'EXAM_ACCESS_DENIED')
 
         def authorize(_):
             # Recheck Auth/lifecycle/lease on cached replay too; no guessed ownership.
@@ -296,3 +272,34 @@ class ReservedExamRuntime:
             review_source=self.review_source,receipt_sink=self.receipt_sink,finalize=finish,
             summarize=self.summarize,clock=self.clock)
         return {'run_id':run_id,'state':state}
+
+def prepare_claimed_material(claimed,pkg,registry):
+    from .live_worker import package as provider_package
+    snap=claimed['snapshot'];policy=snap['runtime'];run_id=claimed['run_id']
+    hosted, report=load_reviewed_material(pkg,registry,pinned_digest=policy['package_digest'],
+        binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
+    require(report['ready'] and claimed['subject_id']==snap['ownerId'],'EXAM_ACCESS_DENIED')
+    questions=[];caches={}
+    parent=claimed.get('parent_result')
+    for answer in snap['answers']:
+        qid=answer['questionId'];cache=hosted[qid].frozen_cache;caches[qid]=cache
+        evaluation=str(uuid5(NS,'evaluation/'+run_id+'/'+qid))
+        context={'items':[],'previous_core_progress_ids':[]}
+        if claimed.get('parent_id'):
+            previous=[q for q in parent['questions'] if q['questionId']==qid]
+            require(len(previous)==1,'PRIOR_RESULT_REQUIRED')
+            out=previous[0]['evaluation'];core=set(out['core_improvement_keys'])
+            for item in out['improvements']:
+                progress=str(uuid5(NS,'progress/'+claimed['parent_id']+'/'+qid+'/'+item['issue_key']))
+                context['items'].append(dict(item,progress_id=progress))
+                if item['issue_key'] in core:context['previous_core_progress_ids'].append(progress)
+        frozen=dict(contract_version='1.3',attempt_id=evaluation,
+            answer_hash=sha256(answer['body'].encode()).hexdigest(),
+            criteria=[c['binding'] for c in cache['criteria']],evidence=[e['binding'] for e in cache['evidence']],
+            scaffolding_context=context,provider_binding=policy['binding'])
+        claim=dict(run_id=run_id,lease_token=claimed['lease_token'],answer=answer['body'],
+            input=frozen,provider_binding=policy['binding'])
+        provider_package(claim,cache)
+        questions.append(dict(questionId=qid,rubricVersion=answer['rubricVersion'],
+            evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim))
+    return questions,caches

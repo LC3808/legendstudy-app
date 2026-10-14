@@ -298,3 +298,20 @@ Actual operating host HTTP admission NOT_RUN; no Provider/Credit/config/DB chang
 [Exact host/config/acceptance checklist](../tool/essay_lab/deployment/README.md).
 Independent review service, Provider rights/model policy and actual host remain
 unprovisioned; no readiness claim based on callbacks or mocks.
+
+### Owner A — Cloudflare + Supabase (Oct14 superseding host decision)
+No separate Linux/container host. Existing evaluator now has one shared sync/async
+state machine; Prompt/Schema/parser/review rules preserved. Provider fetch and
+Supabase checkpoint RPC replace POSIX I/O in the new Cloudflare path. Existing
+Legacy synchronous runtime remains supported. No Math/payment changes.
+Candidate checkpoint table/RPC passed concurrent start/immutability/owner ACL,
+local async fake-Provider→Ledger/History, interrupted finalization replay without
+Provider retry, and erasure/rollback. Owner DB approval pending. Existing76/234
+Registry/Package retained.16 targeted unit checks PASS. Local workerd startup and
+unauthenticated HTTP denial PASS; no operating E2E.
+Cloudflare Pages currently lacks Worker/Queue deployment scopes. Entry and staging
+are ready for further integration, execution defaults OFF. Independent SignedReview
+service, approved Provider/material policy, enqueue-failure/DLQ operator recovery,
+changed-Package rewrite selection and actual operating E2E remain incomplete.
+No mock receipt or auto-approval introduced. [Configuration, evidence and remaining
+gates](../tool/cloudflare_essay/README.md).

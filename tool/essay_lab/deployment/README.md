@@ -1,3 +1,5 @@
+> Superseded by Owner A decision (2026-10-14): no Linux/container host. See `tool/cloudflare_essay/README.md`. Historical host notes below are not the current execution plan.
+
 # Existing ReviewedRuntimeWorker host connection
 
 Status: NOT DEPLOYED. Cloudflare Pages production inspection on 2026-10-14:

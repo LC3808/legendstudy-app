@@ -39,26 +39,34 @@ class ExamQuestionChannel:
                     state=self.terminal or 'processing',output=deepcopy(self.output))
 
     def __call__(self,name,args):
+        from .runtime_effects import drive_sync
+        return drive_sync(self.event_steps(name,args),self)
+
+    async def call_async(self,name,args):
+        from .runtime_effects import drive_async
+        return await drive_async(self.event_steps(name,args),self)
+
+    def event_steps(self,name,args):
         require(args.get('p_evaluation')==self.evaluation_id,'FOREIGN_EXAM_QUESTION')
         if name=='essay_claim':
             require(not self.claimed,'QUESTION_ALREADY_CLAIMED')
             # Durable claim event must succeed BEFORE permitting a provider call.
-            self.save_event('claim',deepcopy(args))
+            (yield ('save_event',('claim',deepcopy(args))))
             self.claimed=True
             return deepcopy(self.claim)
         require(self.claimed and args.get('p_run')==self.claim['run_id'] and
                 args.get('p_token')==self.claim['lease_token'],'FOREIGN_EXAM_LEASE')
         require(self.terminal is None,'QUESTION_ALREADY_TERMINAL')
         if name=='essay_record_provider_telemetry':
-            self.save_event('telemetry',deepcopy(args));return None
+            (yield ('save_event',('telemetry',deepcopy(args))));return None
         if name=='essay_finalize_success':
             require(type(args.get('p_output')) is dict,'INVALID_EXAM_OUTPUT')
-            self.save_event('question_success',deepcopy(args))
+            (yield ('save_event',('question_success',deepcopy(args))))
             self.output=deepcopy(args['p_output']);self.terminal='completed'
         elif name=='essay_finalize_failure':
-            self.save_event('question_failure',deepcopy(args));self.terminal='failed'
+            (yield ('save_event',('question_failure',deepcopy(args))));self.terminal='failed'
         elif name=='essay_timeout':
-            self.save_event('question_unknown',deepcopy(args));self.terminal='reconciling'
+            (yield ('save_event',('question_unknown',deepcopy(args))));self.terminal='reconciling'
         else:
             raise Invalid('EXAM_RPC_NOT_ALLOWED')
         return self.terminal

@@ -9,7 +9,6 @@ from urllib.request import Request, build_opener, HTTPRedirectHandler
 from urllib.error import HTTPError, URLError
 from uuid import UUID
 from .live_worker import require, Unknown
-from .durable_journal import DurableJournal
 from .material_runtime import ReservedExamRuntime
 from .runtime_host import RuntimeHost
 from .reviewed_runtime import reviewed_openai
@@ -74,6 +73,7 @@ def compose_host(*,transport,registry,journal_path,service_token,provider_key,
     require(len(service_token)>=32,'SERVICE_TOKEN_REQUIRED')
     require(isinstance(provider_key,str) and bool(provider_key),'PROVIDER_KEY_REQUIRED')
     require(callable(review_source) and callable(receipt_sink),'REVIEW_SERVICE_REQUIRED')
+    from .durable_journal import DurableJournal
     journal=DurableJournal(journal_path)
     runtime=ReservedExamRuntime(subject=transport.subject,worker_rpc=transport.rpc,
         registry=registry,journal=journal,provider=reviewed_openai(provider_key,binding),

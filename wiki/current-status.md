@@ -14,8 +14,8 @@ bodies now tested; private hash ACL incompatibility fixed without extending gran
 Local first1Credit/free rewrite/replay/history/erasure and formal SQL installation,
 repeat refusal/empty rollback PASS; Provider transport remains fake.
 
-Existing Worker host composition now defaults to admission-only (execution blocked).
-Private host/reviewer deployment, approved Provider/model/material transmission,
+Owner A: Cloudflare Python Worker + Supabase DB checkpoints; no Linux host.
+Async existing evaluator/local workerd PASS; deployment/reviewer/Provider rights,
 operational old-version Package/rewrite selection, admin QA projection and real Provider/Credit E2E
 remain incomplete. Approved exam API installed; zero runs/billing, Provider/model policies null.
 WEB/Native result adapters preserve approved UX; public HOLD, Math/Toss/IAP unchanged.

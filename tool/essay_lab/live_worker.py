@@ -305,6 +305,14 @@ class OpenAIResponses:
         self.instructions=instructions;self.prompt_version=prompt_version
 
     def evaluate(self, value):
+        from .runtime_effects import drive_sync
+        return drive_sync(self.response_steps(value),self)
+
+    async def evaluate_async(self, value):
+        from .runtime_effects import drive_async
+        return await drive_async(self.response_steps(value),self)
+
+    def response_steps(self, value):
         payload={'model':self.model,'store':False,'max_output_tokens':12000,
                  'instructions':self.instructions,'input':encoded(value).decode(),
                  'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':self.schema}}}
@@ -316,7 +324,7 @@ class OpenAIResponses:
         request=Request('https://api.openai.com/v1/responses',data=encoded(payload),headers={'Authorization':'Bearer '+self.key,'Content-Type':'application/json'})
         started=time.monotonic()
         try:
-            with self.transport(request,timeout=self.timeout) as response:
+            with (yield ('transport',(request,self.timeout))) as response:
                 raw=response.read(524289)
                 require(len(raw)<=524288,'PROVIDER_RESPONSE_SIZE'); data=strict_json(raw)
         except HTTPError as error:
@@ -364,51 +372,60 @@ class Worker:
         require(result.provider == 'synthetic', 'SYNTHETIC_IDENTITY')
 
     def execute(self,evaluation):
+        from .runtime_effects import drive_sync
+        return drive_sync(self.execution_steps(evaluation),self)
+
+    async def execute_async(self,evaluation):
+        from .runtime_effects import drive_async
+        return await drive_async(self.execution_steps(evaluation),self)
+
+    def execution_steps(self,evaluation):
+        """Same evaluator rules; yield only external I/O for sync or async hosting."""
         self.authorize(evaluation)
-        claim=self.rpc('essay_claim',{'p_evaluation':evaluation})
+        claim=(yield ('rpc', ('essay_claim',{'p_evaluation':evaluation},)))
         args={'p_evaluation':evaluation,'p_run':claim['run_id'],'p_token':claim['lease_token']}
         binding=None
         try:
             binding=self.bind_claim(claim)
             value=package(claim,self.cache)
-            result=self.provider.evaluate(value)
+            result=(yield ('provider.evaluate', (value,)))
             self.check_result_identity(result)
         except (Unknown,ProviderFailure) as error:
             # Usage, if supplied by the adapter, is recorded before terminal/fencing change.
             # A telemetry transport error escapes: do not hide it as provider failure.
             if binding and error.usage is not None:
-                self.rpc('essay_record_provider_telemetry',telemetry_payload(args,error.usage,binding))
+                (yield ('rpc', ('essay_record_provider_telemetry',telemetry_payload(args,error.usage,binding),)))
             if isinstance(error,Unknown):
-                self.rpc('essay_timeout',args);return 'reconciling'
-            self.rpc('essay_finalize_failure',args);return 'failed'
+                (yield ('rpc', ('essay_timeout',args,)));return 'reconciling'
+            (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         except Invalid:
-            self.rpc('essay_finalize_failure',args);return 'failed'
+            (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         try:
             telemetry=telemetry_payload(args,result,binding) if binding else None
         except Invalid:
-            self.rpc('essay_finalize_failure',args);return 'failed'
+            (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         if telemetry is not None:
-            self.rpc('essay_record_provider_telemetry',telemetry)
+            (yield ('rpc', ('essay_record_provider_telemetry',telemetry,)))
         # Receipt identity is claim-owned. Provider output must match, never overwrite it.
-        self.receipt_sink({'run_id':claim['run_id'],'provider':binding['provider'] if binding else result.provider,
+        (yield ('receipt_sink', ({'run_id':claim['run_id'],'provider':binding['provider'] if binding else result.provider,
             'model':binding['model'] if binding else result.model,'input_tokens':result.input_tokens,
             'output_tokens':result.output_tokens,'total_tokens':result.total_tokens,
             'latency_ms':result.latency_ms,'output_sha256':sha256(result.raw.encode()).hexdigest(),
-            'cost_amount':result.cost_amount})
+            'cost_amount':result.cost_amount},)))
         try:
             out=parse_provider(result.raw,claim)
-            try:receipt=self.review_source(evaluation,value,out)
+            try:receipt=(yield ('review_source', (evaluation,value,out,)))
             except (TimeoutError, URLError):raise Unknown('REVIEW_UNAVAILABLE') from None
             local=self.reviewer.verify(receipt,evaluation,value,out)
             payload=finalize_payload(out,contract_version='1.3',local_reviews=local)
         except Unknown:
-            self.rpc('essay_timeout',args);return 'reconciling'
+            (yield ('rpc', ('essay_timeout',args,)));return 'reconciling'
         except (Invalid,ProviderFailure):
-            self.rpc('essay_finalize_failure',args);return 'failed'
+            (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         # Ambiguous telemetry/finalize transport never causes a second provider invocation.
         final_args=dict(args,p_output=payload)
-        self.checkpoint(final_args)
-        return self.rpc('essay_finalize_success',final_args)
+        (yield ('checkpoint', (final_args,)))
+        return (yield ('rpc', ('essay_finalize_success',final_args,)))
 
     def reconcile(self,evaluation):
         return self.rpc('essay_reconcile',{'p_evaluation':evaluation})

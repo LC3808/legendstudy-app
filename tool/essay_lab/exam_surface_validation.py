@@ -1,12 +1,12 @@
 """Local API surface integration atop real canonical Ledger schema.
 Lifecycle/Package lookups use explicit synthetic fixtures, not production evidence.
 """
-import json,uuid,tempfile,time,re
+import json,uuid,tempfile,time,re,os,asyncio
 from .material_runtime import NS, ReservedExamRuntime
 from .durable_journal import DurableJournal
 from .reviewed_runtime import reviewed_openai
 from .positive_learning import PROMPT_VERSION
-from .live_worker import SignedReview
+from .live_worker import SignedReview,Unknown
 from tool.test_essay_live_worker import receipt
 
 def cases(sql, root, user, account, exam, question):
@@ -82,14 +82,51 @@ def cases(sql, root, user, account, exam, question):
         try:return json.loads(data)
         except json.JSONDecodeError:return data
     registry={'exams':[dict(examId=exam,universityId=pkg['university_id'],year=2025,kind='mock',track='humanities',session=None,campus=None,name='Fixture',sourceHashes=['a'*64],questions=[dict(id=question,sourceKey='source:fixture')])]}
-    with tempfile.TemporaryDirectory(prefix='exam-surface-journal-',dir='/private/tmp') as directory:
-        runtime=ReservedExamRuntime(subject=lambda _:user,worker_rpc=rpc,registry=registry,journal=DurableJournal(directory),
-            provider=reviewed_openai('fixture-only',binding,transport=transport),reviewer=SignedReview({'independent-test':b'test-only-not-deployed'},clock=lambda:100),
-            review_source=receipt,receipt_sink=lambda _:None,clock=lambda:100)
-        assert runtime.handle('/exam-admission','fixture',{'exam_id':exam})['ready']
-        assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
-        assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
-        assert len(requests)==1 and requests[0]['answer']=='Synthetic answer'
+    async_mode=os.environ.get('ESSAY_ASYNC_TEST')=='1'
+    if async_mode:
+        from .cloudflare_runtime import CloudflareExamRuntime
+        sql((root/'supabase/candidates/essay_cloudflare_execution/install.sql').read_text())
+        writer=str(uuid.uuid4())
+        def cp(action,key='probe',writer_id=writer,payload='null',subject=user):
+            return f"set role essay_worker;select public.essay_exam_checkpoint('{subject}','{initial}','{c['lease_token']}','{key}','{action}','{writer_id}',{payload})"
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+            attempts=list(pool.map(lambda _:json.loads(sql(cp('begin'))),range(4)))
+        assert sum(v['started'] for v in attempts)==1
+        sql(cp('write',writer_id=str(uuid.uuid4()),payload="'{}'::jsonb"),'PT409')
+        sql(cp('write',payload="'{}'::jsonb"))
+        sql(cp('write',payload="'{\"different\":true}'::jsonb"),'CHECKPOINT_IMMUTABLE')
+        sql(cp('read',subject=other),'PT403')
+        sql(cp('read').replace('set role essay_worker','set role authenticated'),'permission denied')
+        provider=reviewed_openai('fixture-only',binding,transport=transport)
+        provider.evaluate=provider.evaluate_async
+        finish_attempts=[]
+        async def async_rpc(name,args):
+            if name=='essay_exam_finish':
+                finish_attempts.append(args)
+                if len(finish_attempts)==1:raise Unknown('LOCAL_LOST_FINALIZE')
+            return rpc(name,args)
+        runtime=CloudflareExamRuntime(rpc=async_rpc,registry=registry,provider=provider,
+            reviewer=SignedReview({'independent-test':b'test-only-not-deployed'},clock=lambda:100),
+            review_source=receipt,receipt_sink=lambda _:None,allowed_subjects=[user],enabled=True)
+        async def execute():
+            try:await runtime.consume({'subject_id':user,'run_id':initial})
+            except Unknown:pass
+            else:raise AssertionError('missing simulated interruption')
+            assert await runtime.consume({'subject_id':user,'run_id':initial})=='completed'
+            assert await runtime.consume({'subject_id':user,'run_id':initial})=='completed'
+        asyncio.run(execute())
+        assert len(requests)==1
+        sql((root/'supabase/candidates/essay_cloudflare_execution/rollback.sql').read_text(),'NONEMPTY_CHECKPOINT_ROLLBACK_DENIED')
+    else:
+        with tempfile.TemporaryDirectory(prefix='exam-surface-journal-',dir='/private/tmp') as directory:
+            runtime=ReservedExamRuntime(subject=lambda _:user,worker_rpc=rpc,registry=registry,journal=DurableJournal(directory),
+                provider=reviewed_openai('fixture-only',binding,transport=transport),reviewer=SignedReview({'independent-test':b'test-only-not-deployed'},clock=lambda:100),
+                review_source=receipt,receipt_sink=lambda _:None,clock=lambda:100)
+            assert runtime.handle('/exam-admission','fixture',{'exam_id':exam})['ready']
+            assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
+            assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
+            assert len(requests)==1 and requests[0]['answer']=='Synthetic answer'
     result=json.loads(sql(f"select result from essay_exam_private.runs where id='{initial}'"))
 
     assert result['questions'][0]['telemetry']['total_tokens']==3
@@ -111,6 +148,9 @@ def cases(sql, root, user, account, exam, question):
     sql(f"update public.credit_accounts set user_id=null where id='{account}'")
     assert sql(f"select count(*) from essay_exam_private.runs where account_id='{account}'")=='0'
     assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
+    if async_mode:
+        assert sql('select count(*) from essay_exam_private.checkpoints')=='0'
+        sql((root/'supabase/candidates/essay_cloudflare_execution/rollback.sql').read_text())
     sql(rollback)
     assert sql("select count(*) from public.credit_transactions")!='0'
     formal=(root/'supabase/migrations/20261014023133_essay_exam_operating_api.sql').read_text()
