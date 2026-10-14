@@ -3671,3 +3671,21 @@ earlier ones staying applied+recorded), and a post-flight 42-count check. A sing
 PostgreSQL's simple-query protocol honours the explicit per-file transactions, and each #27–30 resets
 role before its commit. On partial failure the Owner reports the stop point and I issue a resume script.
 Owner runs after approval; nothing applied yet; production and the canonical files untouched.
+
+## 2026-10-14 — Consolidated #27-42 hardened + validated on local PG17 (Claude)
+
+Owner review points addressed in `consolidated_27-42_TEST.sql` (260KB): (1) each migration's history
+INSERT moved INSIDE its transaction (immediately before its final `commit;`) so DDL+history are atomic;
+(2) a precondition guard before each migration requires the predecessor to be recorded, and — since the
+Supabase SQL Editor sends the whole script as one simple-query that PostgreSQL aborts entirely on the
+first error — stop-on-error is guaranteed; (3) #33/#34 (no explicit tx) are wrapped in begin/commit so
+they are atomic too; (4) post-flight now checks the full canonical 42-version set, not just count=42.
+Verified the 16 canonical DDL blocks remain byte-identical (only section headers, precondition guards,
+history inserts, #33/#34 wrappers, and pre/post guards were added). Validated on a local PostgreSQL 17
+isolated DB (seed=26) across 4 scenarios as a single simple-query (mirrors the SQL Editor): NORMAL →
+42 + OK; FAILURE injected at #30 → errors and stops, final 29 (#27-29 applied, #30 NOT recorded =
+atomic rollback, #31-42 NOT applied); DUPLICATE re-run → pre-flight ABORT, stays 42; WRONG BASELINE
+(25 rows) → pre-flight ABORT, nothing applied. Single-file execution is therefore safe (not split).
+260KB is within SQL-Editor/pg-meta limits; a 2-part split (#27-30 bridges / #31-42) is held as fallback
+if the Owner's editor balks. TEST-only; production, canonical files and the TEST DB (still 26) untouched;
+Owner runs after approval.
