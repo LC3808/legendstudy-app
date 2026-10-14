@@ -3542,3 +3542,17 @@ Current TEST state: 25 migrations recorded, credit_accounts/grants/transactions 
 `iap_post_verified_purchase`/`credit_summary` NOT yet applied (after #26). Production unchanged
 (never targeted). No code change; push held. Details:
 [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
+
+## 2026-10-14 — Option A approved; execution HALTED by connectivity/credential (Claude)
+
+Owner approved Option A (resume `db push` as `session_user=postgres` via direct connection, TEST only).
+Root cause (read-only): [privilege analysis](iap-sandbox-migration-privilege-analysis-2026-10-14.md) —
+`#26`'s `reset role` returns to the session login role; only the **direct** host gives
+`session_user=postgres`. Pre-checks before any write: link=TEST ✓, schema_migrations=25, `#26` absent ✓.
+**Halted — no write**: (1) no credential (`SUPABASE_DB_PASSWORD` unset, no `~/.pgpass`); (2) the direct
+host `db.kpqbedylxlyntrrfybpn.supabase.co` is **IPv6-only** (AAAA only) and this machine has **no IPv6
+egress** → unreachable; the IPv4 pooler's session user is `postgres.<ref>` (would fail identically).
+So Option A can't run from here. Owner choices recorded: run the direct push from an IPv6/IPv4-add-on
+machine with the password at the prompt; or enable IPv6 + secure password here; or authorize Option B
+(management API, session_user=postgres, IPv4, no password). Production untouched; test DB unchanged
+(25/42); no deploy/secret/push.

@@ -90,3 +90,27 @@ production untouched.
 Pick A or B. For A: lift the "no db push re-run" hold for the TEST project and have the Owner supply
 the postgres password / run the direct-URL push. For B: approve management-API application of the
 verbatim `#26…#42`. Then DB verification (§4 of the prior directive) and the Edge deploy proceed.
+
+## 8. Option A execution attempt — HALTED by connectivity/credential (2026-10-14)
+Owner approved Option A. Pre-checks before any write:
+- Worktree/branch correct; CLI linked to TEST `kpqbedylxlyntrrfybpn`; `schema_migrations`=25,
+  last `20261001000200`, `#26` absent, `iap_post_verified_purchase`/`credit_summary` not present. ✓
+- **No credential available**: `SUPABASE_DB_PASSWORD` unset, no `~/.pgpass`. (Owner must provide securely.)
+- **Direct host is IPv6-only**: `db.kpqbedylxlyntrrfybpn.supabase.co` → AAAA `2406:da12:…`, **no A record**;
+  the pooler host is IPv4 but its session user is `postgres.<ref>` (not `postgres`, so it would hit the
+  same `reset role` failure). This machine has **no IPv6 egress** (`nc -6 …:5432` → unreachable).
+- Therefore the only connection that yields `session_user=postgres` (the direct host) is **unreachable
+  from this machine**, and no password is present → **halted, no write performed**. Production untouched.
+
+### Ways to proceed with Option A (Owner choice)
+1. **Owner runs the direct push** from a machine with IPv6 (or with Supabase's **IPv4 add-on** enabled
+   so the direct host gets an A record), entering the password at the interactive prompt (never in the
+   URL/logs):
+   `supabase db push --db-url "postgresql://postgres@db.kpqbedylxlyntrrfybpn.supabase.co:5432/postgres?sslmode=require"`
+   (or a `~/.pgpass` line `db.kpqbedylxlyntrrfybpn.supabase.co:5432:postgres:postgres:<PW>`, chmod 600).
+   This applies `#26…#42` as `session_user=postgres`.
+2. **Enable IPv6/IPv4-add-on + provide the password securely** to this environment (env `SUPABASE_DB_PASSWORD`
+   or `~/.pgpass`, never printed) → Claude runs the same direct push here.
+3. **Authorize Option B** (management API `apply_migration`, `session_user=postgres`, IPv4-reachable, no
+   password) as the from-here alternative — verbatim `#26…#42`, with the schema_migrations-format check.
+No Ledger/RLS/RPC change in any path; TEST-only; production never touched.
