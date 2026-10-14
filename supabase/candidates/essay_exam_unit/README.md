@@ -93,3 +93,18 @@ Host authorization is still a trusted required callback. The production owner/
 lifecycle/lease checks, deployment, deletion/retention, approved synthesis/reviewer
 and RPC composition remain release blockers. This single-host journal is not a
 multi-host database lease. No SQL/grant/migration was added or applied by this step.
+
+## Oct14 reviewed material execution — local only
+
+`execute_reviewed_material_exam` in the existing material adapter now composes
+reviewed Package loading with DurableExamRunner and ReviewedRuntimeWorker directly.
+It requires server-owned frozen claims, exact Package version/evidence/criteria,
+explicit activation and Provider rights. All selected questions are checked before
+dispatch. Single-question summary is the reviewed existing summary; multi-question
+synthesis remains an explicit required dependency. Canonical identity is sent with
+the frozen evidence. No per-question financial finalizer is used.
+
+Five targeted integration scenarios plus related worker/material/durability tests
+passed (44 total). Provider transport and independent reviewer are synthetic test
+fixtures, NOT operational E2E. The production deployment blockers above still apply.
+No migration or grant is authorized by this local implementation.

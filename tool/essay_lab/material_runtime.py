@@ -68,7 +68,10 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
             criteria.append({'binding':dict(id=str(uuid5(NS,f'{version}/{question_id}/criterion/{index}')),version=version),'label':text})
     require({e['binding']['role'] for e in evidence}=={'question','passage','exam_intent','scoring_criteria'},'EVIDENCE_COVERAGE')
     require(criteria,'OFFICIAL_CRITERIA_REQUIRED')
-    cache={'contract_version':'1.3','evidence':evidence,'criteria':criteria,'length_requirement':length_requirement}
+    cache={'contract_version':'1.3','evidence':evidence,'criteria':criteria,'length_requirement':length_requirement,
+           'exam_identity':dict(university_id=exam['universityId'], exam_id=exam['examId'],
+               question_id=question_id, academic_year=exam['year'], exam_type=exam['kind'],
+               track=exam['track'], session=exam['session'], campus=exam['campus'])}
     sources={e['binding']['hash'] for e in evidence if e['binding']['role']=='question'}
     require(len(sources)==1,'QUESTION_DOCUMENT_MISMATCH')
     assignment={k:exam[k] for k in ('examId','universityId','year','kind','track','session','campus')}
@@ -113,3 +116,84 @@ def fetch_reviewed_material(worker_rpc, registry, *, exam_id, pinned_digest,
     return load_reviewed_material(package,registry,pinned_digest=pinned_digest,
         binding=binding,regime=regime,evaluation_type=evaluation_type,
         activation_approved=activation_approved,length_requirement=length_requirement)
+
+
+def execute_reviewed_material_exam(*, package, registry, pinned_digest, binding,
+        regime, evaluation_type, activation_approved, frozen_run, journal,
+        authorize, provider, reviewer, review_source, receipt_sink, finalize,
+        summarize=None, length_requirement=None, clock=None):
+    """Connect stored material to the existing durable exam runner.
+
+    All arguments are trusted server inputs, never request JSON. frozen_run comes
+    from an owned, reserved, immutable exam run. authorize/finalize must enforce
+    the current account, allowlist and reservation lease. This is not an HTTP API
+    and does not reserve Credit or grant activation. Unknown dispatch is never
+    retried. A single submitted question uses its reviewed summary unchanged;
+    multiple questions require the existing reviewed exam synthesis callback.
+    """
+    import time
+    import re
+    from copy import deepcopy
+    from .durable_exam import DurableExamRunner
+    from .live_worker import package as provider_package, provider_binding
+    from .reviewed_runtime import ReviewedRuntimeWorker, RuntimePermit
+    clock = clock or time.time
+    run = deepcopy(frozen_run)
+    require(type(run) is dict and set(run) == {
+        'run_id', 'subject_id', 'exam_id', 'questions'
+    }, 'INVALID_EXAM_RUN')
+    require(run['exam_id'] == package.get('exam_id'), 'PACKAGE_EXAM_MISMATCH')
+    require(activation_approved is True, 'CONTENT_HELD')
+    require(isinstance(regime, str) and re.fullmatch(r'essay-v1\.3/policy/[a-f0-9]{64}', regime),
+            'POLICY_REQUIRED')
+    hosted, readiness = load_reviewed_material(package, registry,
+        pinned_digest=pinned_digest, binding=binding, regime=regime,
+        evaluation_type=evaluation_type, activation_approved=True,
+        length_requirement=length_requirement)
+    require(readiness['ready'] and hosted, 'MATERIAL_NOT_READY')
+    questions = run['questions']
+    require(type(questions) is list and bool(questions), 'QUESTIONS_REQUIRED')
+    require(len(questions) == 1 or callable(summarize), 'EXAM_SYNTHESIS_REQUIRED')
+    prepared = {}
+    # Validate ALL selected questions before any journal intent or Provider call.
+    # Exact list equality prevents quietly dropping a required official criterion.
+    for q in questions:
+        require(type(q) is dict and set(q) == {
+            'questionId', 'rubricVersion', 'evidenceVersion', 'evaluationId', 'claim'
+        }, 'INVALID_EXAM_QUESTION_SET')
+        content = hosted.get(q['questionId'])
+        require(content is not None, 'QUESTION_NOT_IN_EXAM')
+        version = f"material-{package['package_version']}-{pinned_digest}"
+        require(q['rubricVersion'] == version and q['evidenceVersion'] == version,
+                'REVIEWED_PACKAGE_PIN_REQUIRED')
+        cache = deepcopy(content.frozen_cache)
+        claim = q['claim']
+        require(claim['input']['evidence'] == [e['binding'] for e in cache['evidence']]
+                and claim['input']['criteria'] == [c['binding'] for c in cache['criteria']],
+                'FROZEN_PACKAGE_MISMATCH')
+        provider_package(claim, cache)
+        require(provider_binding(claim, provider) == content.binding,
+                'PERMIT_BINDING_MISMATCH')
+        require(q['evaluationId'] not in prepared, 'DUPLICATE_EXAM_CHANNEL')
+        prepared[q['evaluationId']] = (cache, content.binding)
+
+    def build(channel, checkpoint):
+        cache, policy = prepared[channel.evaluation_id]
+        permit = RuntimePermit(channel.evaluation_id, digest(channel.claim['input']),
+            digest(cache), policy, int(clock() + 90), True)
+        return ReviewedRuntimeWorker(channel, provider, cache, reviewer, review_source,
+            receipt_sink, checkpoint, permit=permit, clock=clock)
+
+    # Configuration must fail before the first dispatch, including missing reviewer.
+    from .exam_runtime import ExamQuestionChannel
+    for q in questions:
+        probe = ExamQuestionChannel(q['evaluationId'], q['claim'], lambda *_: None)
+        build(probe, lambda _: None).authorize(q['evaluationId'])
+
+    def synthesis(results):
+        if len(results) == 1:
+            return results[0]['evaluation']['summary']
+        return summarize(results)
+
+    return DurableExamRunner(journal).execute(**run, authorize=authorize,
+        build_worker=build, summarize=synthesis, finalize=finalize)

@@ -124,6 +124,19 @@ def package(claim, cache):
             'answer':answer,'criteria':criteria,'evidence':evidence,
             'scaffolding_context':deepcopy(snap['scaffolding_context']),
             'length_requirement':cache.get('length_requirement')}
+    # Optional identity is installed from the canonical Registry in the pinned
+    # reviewed cache, never from student text. Legacy caches remain unchanged.
+    if 'exam_identity' in cache:
+        identity=cache['exam_identity']
+        require(type(identity) is dict and set(identity)=={
+            'university_id','exam_id','question_id','academic_year','exam_type',
+            'track','session','campus'}, 'EXAM_IDENTITY_SHAPE')
+        require(type(identity['academic_year']) is int, 'EXAM_IDENTITY_YEAR')
+        for key in ('university_id','exam_id','question_id','exam_type','track'):
+            text(identity[key],1000)
+        for key in ('session','campus'):
+            if identity[key] is not None:text(identity[key],1000)
+        result['exam_identity']=deepcopy(identity)
     if cache.get('official_images'):
         import base64
         from .bakeoff import image_parts

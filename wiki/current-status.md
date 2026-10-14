@@ -1,5 +1,37 @@
 # Current Status
 
+## 2026-10-14 — Hanyang evaluation connection: PARTIAL
+
+Owner confirmed operating problem PDF PASS; PDF/admin UX work is closed for this task.
+Read-only Production check: Hanyang review revision16 VERIFIED, Package16 digest
+09b50772b37f69ec7544a752ba88f5cde6c8de555ab17339a13eb6ef4fdcf106,
+approval_requested=true, rights_status={}. Review approval request does not grant
+Provider transmission or evaluation activation. authenticator cannot assume
+essay_worker; essay_record_provider_telemetry is absent (checked by function name,
+not only one guessed signature). Package read RPC is present. No SQL was applied.
+
+Implemented execute_reviewed_material_exam in the existing material adapter:
+canonical Package -> all selected frozen claims preflight -> ReviewedRuntimeWorker
+-> existing DurableExamRunner -> unchanged result/finalization contract. Exact
+criteria/evidence lists, version pins, Provider binding and independent review are
+required before dispatch. One selected question reuses its reviewed summary;
+multiple questions still require reviewed exam-wide synthesis. Canonical exam,
+year, track, session and question identity now accompany Provider evidence from the
+pinned server cache. Legacy cache/result/Prompt contracts are preserved.
+
+44 related local tests PASS, including real adapter with fake transport, wrong
+mapping/rights/pin rejection, later-question preflight, account recheck, timeout
+without retry/settlement, process concurrency and durable recovery. These are NOT
+actual Provider E2E or operating Credit verification.
+
+Still unmounted: production exam reservation/claim/finalize, authenticated host
+composition, independent review service, WEB/Native submission/result/History
+connection for these exam runs. Existing local SQL candidate remains NOT DEPLOYABLE
+until lifecycle/least-privilege/History/erasure integration is completed. Do not
+activate submit or substitute per-question Credit. Real Provider/Credit test request
+must name the approved model, account, calls, cost cap and recovery after prerequisites
+are ready. Public HOLD; Math/Toss/IAP unchanged. No deployment in this change.
+
 ## Oct13 problem viewer Owner policy update — PARTIAL
 
 WEB uses existing PDF renderer in a separate PC window, new-tab attempt if blocked,
