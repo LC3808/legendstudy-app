@@ -3663,3 +3663,10 @@ apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
 - Oct14 Owner A: no Linux host; shared evaluator async I/O, Cloudflare consumer entry and Supabase checkpoint candidate implemented. Local DB race/replay/credit/history/erasure +16 unit checks and workerd startup PASS. Operating settings/DB/provider unchanged; review service/deployment/policy/E2E pending.
 
 - Cloudflare local queue smoke: fixture Auth/consumer, HTTP202 → queue1/1 ACK; native send/handler context compatibility fixed. No Provider/Credit or operating connection claim.
+
+- Oct14 Owner approvals: checkpoint20261014044957 applied/ACL+Registry234 verified;
+  Cloudflare scopes verified, private Worker/Queues deployed OFF. Owner JWT not
+  retained; actual Legacy HS256 still-used screen verified and hidden-input mint/
+  read-only validation helper prepared. No key rotation/Provider/Credit.
+
+- Pages197c1ef5 source da479da deployed with private Worker service binding; build PASS, Hanyang200/public submit503 HOLD. Owner Secret entry pending; no actual authenticated host/Provider E2E claim.

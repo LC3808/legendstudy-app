@@ -315,3 +315,14 @@ service, approved Provider/material policy, enqueue-failure/DLQ operator recover
 changed-Package rewrite selection and actual operating E2E remain incomplete.
 No mock receipt or auto-approval introduced. [Configuration, evidence and remaining
 gates](../tool/cloudflare_essay/README.md).
+
+### Oct14 approved infrastructure application
+Owner approved private checkpoints and completed Cloudflare login. Migration
+20261014044957 applied; forcedRLS, Worker-only RPC, student/anon denial,0 runs and
+checkpoints, Registry234 preserved. Worker version6eec8e98-6040-4e71-8d12-6ae3a3953288
+and two queues deployed; execution false, public/preview Worker URLs disabled.
+Pages service binding configured, existing environment preserved. Owner needs JWT
+reissuance: actual dashboard confirms Legacy HS256 previous/not revoked and still
+used. Safe terminal helper signs fixed essay_worker365days and copies only after
+read-only234 verification. No key rotation/secret output. See Cloudflare runbook.
+Actual Provider/Credit E2E and independent review/model policies remain incomplete.

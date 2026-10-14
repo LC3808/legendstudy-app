@@ -2,7 +2,7 @@
 
 Supersedes the persistent Linux host request in `../essay_lab/deployment/README.md`.
 No Linux/Container, new evaluator, separate Registry or UI. Implementation is NOT
-production deployed or E2E complete.
+E2E complete. Worker/Queues are deployed disabled as recorded below.
 
 ## Reuse and async boundary
 
@@ -64,14 +64,12 @@ supported by the tested workerd binary (2026-10-14 was rejected). No remote flag
 ## Operating prerequisites / exact Owner actions
 
 1. DB checkpoint candidate: `supabase/candidates/essay_cloudflare_execution/README.md`.
-   Separate Owner approval pending; do not bulk push migrations.
-2. Cloudflare CLI currently has Pages scope only. Owner runs `wrangler login` on the
-   existing account and approves Worker/Queue deployment scopes; do not send token.
-   Alternatively use an account-scoped deployment token with Workers Scripts/Queues
-   Edit; keep it in the approved secret mechanism, never chat/Git.
-3. Create `legendstudy-essay-exams` queue and `legendstudy-essay-exams-dlq`, deploy
-   staged `legendstudy-essay-reviewed` with execution false. No public workers.dev.
-   Bind Pages `ESSAY_REVIEWED_WORKER` to this Worker (keep Pages evaluation OFF).
+   Owner approved and applied20261014044957; postflight PASS. Do not reapply.
+2. Owner reauthenticated: Workers Scripts/Queues write scopes verified.
+3. Both queues and Worker now created. Version6eec8e98-6040-4e71-8d12-6ae3a3953288,
+   execution false, workers.dev and preview URL disabled. Pages Production services
+   configuration binds ESSAY_REVIEWED_WORKER; existing env variables unchanged.
+   Existing publishable key/one allowed subject reused, Math configuration unchanged.
 4. Worker Secrets: ESSAY_REGISTRY_WORKER_JWT (existing role),
    ESSAY_WORKER_SERVICE_TOKEN (same value in Pages and Worker, including service binding),
    ESSAY_PROVIDER_KEY, ESSAY_REVIEW_VERIFY_KEYS. Nonsecret config:
@@ -99,3 +97,41 @@ https://developers.cloudflare.com/workers/languages/python/
 https://developers.cloudflare.com/workers/languages/python/stdlib/
 https://developers.cloudflare.com/queues/platform/limits/
 https://developers.cloudflare.com/queues/configuration/batching-retries/
+
+## Owner JWT issuance (Oct14 actual screen checked)
+
+Production current key is ECC P-256; Legacy HS256 is still PREVIOUS, not revoked.
+Legacy tab explicitly shows "Legacy JWT secret (still used)". No Rotate/Revoke.
+Public JWKS lists EC keys only; its absence of HS256 is not evidence of revocation.
+Supabase-generated ECC private keys are not exportable; key ID/public key/API key
+or ordinary user JWT cannot substitute for the essay_worker credential.
+
+Owner opens https://supabase.com/dashboard/project/stlhijzpjfgwwdgunlsd/settings/jwt/legacy
+and copies Legacy Secret using Reveal (agent never reveals it). On Mac terminal:
+
+```sh
+python3 /private/tmp/legendstudy-shared-app/tool/cloudflare_essay/issue_worker_jwt.py --config /private/tmp/legendstudy-cf-production-disabled/wrangler.jsonc
+```
+
+Prompt takes Legacy Secret with getpass (not Mac/Supabase login password). Fixed
+essay_worker role,365-day expiry, HS256. It sends only the signed JWT to the exact
+LegendStudy read-only Registry RPC using existing allowed account metadata; no
+Provider/Credit/mutation. Only HTTP200 +234 rows copies JWT to clipboard. Failure
+prints status only, never request/response/token/Secret. No private key written.
+Owner pastes into Worker Settings → Variables and Secrets → Secret named
+ESSAY_REGISTRY_WORKER_JWT. This is the JWT, NOT its signing Secret.
+
+Then generate the separate host credential:
+
+```sh
+python3 /private/tmp/legendstudy-shared-app/tool/cloudflare_essay/issue_worker_jwt.py --service-token
+```
+
+Paste the SAME clipboard value into Secret ESSAY_WORKER_SERVICE_TOKEN in Worker
+legendstudy-essay-reviewed and Pages legendstudy-lab Production. Do not send it to
+chat; save/deploy and notify completion. Pages requires redeploy for settings to
+apply. Keep both evaluation flags OFF. After Owner action verify actual private
+connection separately; issuance alone is not Provider/Credit E2E.
+
+Sources: https://supabase.com/docs/guides/auth/signing-keys
+https://developers.cloudflare.com/pages/functions/bindings/#service-bindings

@@ -5,7 +5,8 @@
 Cloudflare→Supabase essay_worker HTTP read returned **200 /234** using the existing
 allowlisted Chrome account (11:35KST). The IAB administrator session was not that
 account; no Math configuration/allowlist/Secret change was needed. Production WEB
-b16867e deployed as f247776b; exam submit remains OFF and balance11 unchanged.
+da479da deployed as197c1ef5 with internal Worker binding; exam submit remains OFF.
+Earlier observed balance11; no new Credit transaction.
 
 Owner installed the disabled exam API through SQL Editor; DB postflight PASS:
 [impact/test/rollback](../supabase/reviews/essay-exam-operating-api/README.md).
@@ -15,7 +16,8 @@ Local first1Credit/free rewrite/replay/history/erasure and formal SQL installati
 repeat refusal/empty rollback PASS; Provider transport remains fake.
 
 Owner A: Cloudflare Python Worker + Supabase DB checkpoints; no Linux host.
-Async existing evaluator/local workerd PASS; deployment/reviewer/Provider rights,
+Checkpoint migration20261014044957 applied/verified; Worker/Queues deployed OFF.
+Owner Secret entry pending; no Provider/Credit. Async evaluator/local workerd PASS; reviewer/Provider rights,
 operational old-version Package/rewrite selection, admin QA projection and real Provider/Credit E2E
 remain incomplete. Approved exam API installed; zero runs/billing, Provider/model policies null.
 WEB/Native result adapters preserve approved UX; public HOLD, Math/Toss/IAP unchanged.

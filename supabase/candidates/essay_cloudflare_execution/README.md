@@ -1,4 +1,4 @@
-# Cloudflare execution checkpoints — candidate, NOT APPLIED
+# Cloudflare execution checkpoints — APPLIED 2026-10-14
 
 Owner A decision: Cloudflare Python Workers + Supabase; no Linux/container host.
 Existing evaluator Prompt/Schema/validation remains Python; async I/O driver only.
@@ -26,7 +26,10 @@ PASS: existing canonical Ledger DDL + real lifecycle bodies/non-superuser deploy
 student RPC denial, async existing ReviewedRuntimeWorker→DB checkpoints→finish→
 History, replay one Provider request, first1Credit/free rewrite, erasure cascade,
 nonempty rollback refusal and empty rollback. Local fixture only; fake Provider.
-No actual Provider/Credit E2E, no production installation.
+Local test uses no actual Provider/Credit. Production installation was subsequently
+approved and applied: migration20261014044957. Postflight: forced RLS, Worker RPC
+EXECUTE true, student/anon RPC and direct student table access false, runs/checkpoints0,
+canonical Registry234 preserved. Exact SQL copied into migrations; do not replay.
 
 ## Rollback
 
