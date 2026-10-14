@@ -3739,3 +3739,20 @@ re-applies or deletes a remote-only migration, so future pushes from this branch
 untouched; `supabase migration list` shows it as remote-only (informational). Bringing the identical file
 into this branch's chain (local==remote) is deferred to explicit Owner instruction due to Codex/Math
 branch ownership. Production and the canonical files untouched.
+
+## 2026-10-14 — verify-iap-purchase deployed to TEST (inert, no grants) (Claude)
+
+Owner approved; deployed `verify-iap-purchase` to the TEST project `kpqbedylxlyntrrfybpn` ONLY via the
+management API (production `stlhijzpjfgwwdgunlsd` not targeted). Existing verified code used as-is; no
+code change, no secrets set, no migration, no LIVE. Source SHAs: index.ts 9eb793ed, core.ts 3fc970d5,
+stores.ts e505c0c6 (combined e5223715). Deploy result: status ACTIVE, version 1, id
+db3e579e-33ea-4370-9a89-835ec9f17693, **verify_jwt=true**, bundle ezbr_sha256
+f4e6aa2025aada3ed01145f639d71e1a52987e0cecb94cc21bc7fb4263f8a8a5. Post-deploy verification (read-only,
+no payment): (1) deployed; (2) `get_edge_function` source identical to local; (3) verify_jwt=true applied;
+(4) unauthenticated POST → HTTP 401 at the JWT gateway (body never runs); (5) no grant — `IAP_ENABLED`
+unset (handler returns pending before grant) and the Sandbox gate stays off (no IAP_ALLOW_SANDBOX_GRANT /
+secrets); (6) Credit Ledger unchanged — credit_transactions=0, purchase tx/grants=0, iap grants=0,
+credit_accounts=0; (7) no Apple/Google call — IAP_ENABLED=false gate returns pending before verifyStore,
+and no store secrets configured; (8) math runtime evaluations_enabled=false maintained. All PASS; nothing
+unverified at this stage except the intentionally-deferred real Sandbox purchase + grant (needs Owner
+secrets/IAP_ENABLED). Production, secrets, DB and Git remote untouched; no push.
