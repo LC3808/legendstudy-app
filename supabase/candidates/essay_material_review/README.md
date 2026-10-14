@@ -128,3 +128,12 @@ anon/authenticated=false; authenticator membership remains false; Registry234
 unchanged. No Credit/activation/data update. SQL-admin connection cannot SET ROLE
 essay_worker; do not bypass by granting membership. Therefore external Worker JWT
 read remains unverified. Rollback is worker_read_rollback.sql (revoke only).
+
+### Oct14 historical Package reader — candidate only
+`worker_read_history.sql` reuses existing immutable review revisions for exact pinned
+digest lookup, keeping current VERIFIED/approval and current rights checks. New
+rights are never inferred from old approval. No table/grant expansion. Local test:
+`python3 tool/test_material_worker_read.py --history` PASS (historical reuse, hash
+tamper, current revocation/blocked state, caller denial). This does not yet change
+submit/preflight parent policy selection. Operational application requires Owner
+approval; restore `worker_read.sql` for rollback, retaining all review data.

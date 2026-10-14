@@ -2,7 +2,7 @@
 import json,os,subprocess,tempfile
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];PG=Path('/opt/homebrew/opt/postgresql@17/bin')
-def main():
+def main(history=False):
  env={k:v for k,v in os.environ.items() if not k.startswith('PG')}
  with tempfile.TemporaryDirectory(prefix='material-worker-') as td:
   d=Path(td);sock=d/'sock';sock.mkdir()
@@ -17,11 +17,12 @@ def main():
   try:
    e='00000000-0000-4000-8000-000000000001';q='00000000-0000-4000-8000-000000000002'
    sql(f"create role anon;create role authenticated;create role essay_worker;create schema essay_material_private;create table essay_material_private.reviews(exam_id uuid,state text,approval_requested bool,body jsonb);create table public.essay_questions(id uuid,essay_exam_id uuid,question_key text);insert into public.essay_questions values('{q}','{e}','source:q');")
-   source=(R/'supabase/candidates/essay_material_review/worker_read.sql').read_text();sql(source);sql(source)
+   if history:sql('create table essay_material_private.revisions(exam_id uuid,revision int,state text,body jsonb)')
+   source=(R/('supabase/candidates/essay_material_review/worker_read_history.sql' if history else 'supabase/candidates/essay_material_review/worker_read.sql')).read_text();sql(source);sql(source)
    p=dict(exam_id=e,verification_status='VERIFIED_MANIFEST',rights_status={},questions=[dict(question_id=q,source_key='source:q',source_page_references=[dict(role='question',verification='VERIFIED',evidenceText='question')])])
    def store(p):
     raw=json.dumps(p).replace("'","''")
-    sql(f"delete from essay_material_private.reviews;insert into essay_material_private.reviews values('{e}','VERIFIED',true,jsonb_build_object('documents',jsonb_build_array('source'),'package','{raw}'::jsonb||jsonb_build_object('package_digest',encode(sha256(convert_to(('{raw}'::jsonb)::text,'UTF8')),'hex'))));")
+    sql(f"delete from essay_material_private.reviews;insert into essay_material_private.reviews values('{e}','VERIFIED',true,jsonb_build_object('documents',jsonb_build_array('source'),'rights','{raw}'::jsonb->'rights_status','package','{raw}'::jsonb||jsonb_build_object('package_digest',encode(sha256(convert_to(('{raw}'::jsonb)::text,'UTF8')),'hex'))));")
     return sql("select body->'package'->>'package_digest' from essay_material_private.reviews")
    digest=store(p)
    def call(digest):return f"select public.essay_material_runtime_package('{e}','{digest}')"
@@ -30,6 +31,19 @@ def main():
    p['rights_status']={'source':{'providerTransmission':'APPROVED'}};digest=store(p)
    assert json.loads(sql('set role essay_worker;'+call(digest)))['package_digest']==digest
    sql('set role essay_worker;'+call('0'*64),'REVIEWED_PACKAGE_UNAVAILABLE')
+   if history:
+    old_digest=digest
+    sql(f"insert into essay_material_private.revisions select exam_id,1,state,body from essay_material_private.reviews")
+    p['package_version']=2;digest=store(p)
+    assert json.loads(sql('set role essay_worker;'+call(old_digest)))['package_digest']==old_digest
+    sql("update essay_material_private.reviews set body=jsonb_set(body,'{rights,source,providerTransmission}','\"REVOKED\"')")
+    sql('set role essay_worker;'+call(old_digest),'PROVIDER_RIGHTS_REQUIRED')
+    digest=store(p)
+    sql("update essay_material_private.reviews set state='BLOCKED'")
+    sql('set role essay_worker;'+call(old_digest),'REVIEWED_PACKAGE_UNAVAILABLE')
+    digest=store(p)
+    sql("update essay_material_private.revisions set body=jsonb_set(body,'{package,package_version}','99')")
+    sql('set role essay_worker;'+call(old_digest),'REVIEWED_PACKAGE_UNAVAILABLE')
    p['questions'][0]['source_page_references'][0]['evidenceText']='';digest=store(p)
    sql('set role essay_worker;'+call(digest),'QUESTION_CONTENT_INVALID')
    sql((R/'supabase/candidates/essay_material_review/worker_read_rollback.sql').read_text())
@@ -37,4 +51,6 @@ def main():
    assert sql('select count(*) from essay_material_private.reviews')=='1'
    print('PASS: replay, caller grants, missing rights, pinned read, stale digest, empty question, retained-data rollback')
   finally:run([PG/'pg_ctl','-D',d/'db','-m','fast','-w','stop'])
-if __name__=='__main__':main()
+if __name__=='__main__':
+ import sys
+ main(history='--history' in sys.argv)

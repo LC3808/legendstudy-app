@@ -1,5 +1,5 @@
 {
-  "status": "OWNER_APPROVED_NOT_APPLIED_TOOL_ERROR",
+  "status": "PRODUCTION_APPLIED_OWNER_SQL_EDITOR_VERIFIED",
   "sql_sha256": "ad4f2570f6a8dea8e9149294af4829d12d0e9d0690dbb7f74031f697ee1601c8",
   "non_superuser_deployer": true,
   "real_lifecycle_function_bodies": true,
@@ -7,11 +7,21 @@
   "provider": "fake transport",
   "production_credit_transactions": 0,
   "production_provider_calls": 0,
-  "apply_error": "Invalid or expired requestState (two attempts)",
   "postflight": {
-    "schema_exists": false,
-    "submit_rpc_exists": false,
+    "schema_exists": true,
+    "rpc_count": 5,
+    "rpc_bodies_match_approved_sql": true,
     "registry_questions": 234,
-    "math_account_function_hash_unchanged": true
-  }
+    "math_account_function_hash_unchanged": true,
+    "rls_enabled_and_forced": true,
+    "worker_only_mutations": true,
+    "history_authenticated_only": true,
+    "student_direct_table_access": false,
+    "runs": 0,
+    "exam_billing": 0,
+    "provider_policy": null,
+    "runtime_policy": null,
+    "account_erasure_trigger": true
+  },
+  "prior_apply_error": "Invalid or expired requestState (two attempts)"
 }

@@ -7,7 +7,7 @@ allowlisted Chrome account (11:35KST). The IAB administrator session was not tha
 account; no Math configuration/allowlist/Secret change was needed. Production WEB
 b16867e deployed as f247776b; exam submit remains OFF and balance11 unchanged.
 
-Formal disabled exam API SQL is Owner-approved; tool request-state error blocked application:
+Owner installed the disabled exam API through SQL Editor; DB postflight PASS:
 [impact/test/rollback](../supabase/reviews/essay-exam-operating-api/README.md).
 Actual non-superuser/BYPASSRLS PostgreSQL ownership and real lifecycle function
 bodies now tested; private hash ACL incompatibility fixed without extending grants.
@@ -16,8 +16,8 @@ repeat refusal/empty rollback PASS; Provider transport remains fake.
 
 Existing ReviewedRuntimeWorker now has a concrete Auth/worker HTTP host composition.
 Private host/reviewer deployment, approved Provider/model/material transmission,
-old-version Package retrieval, admin QA projection and real Provider/Credit E2E
-remain incomplete. No new SQL, actual Provider or Credit trade this continuation.
+operational old-version Package/rewrite selection, admin QA projection and real Provider/Credit E2E
+remain incomplete. Approved exam API installed; zero runs/billing, Provider/model policies null.
 WEB/Native result adapters preserve approved UX; public HOLD, Math/Toss/IAP unchanged.
 See [runtime completion](essay-runtime-completion.md) for details.
 

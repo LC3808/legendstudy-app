@@ -268,3 +268,19 @@ persistent host and independent semantic reviewer provisioning; immutable histor
 Package access for changed-version rewrites; operator QA projection; approved first
 Provider evaluation+free rewrite and WEB/Native cross-result check. Existing44tests
 were not rerun. No new result engine/UI or Math/Toss/IAP change.
+
+### Oct14 Owner SQL installation verified
+Approved exam API installed via Owner SQL Editor, not reapplied by agent. Five RPC
+body hashes match approved SQL. Private RLS forced; students cannot directly read/write
+runs or invoke Worker mutations; owner History granted authenticated. Runs/billing0,
+policies null, Registry234 and Math/account function hash unchanged. This is DB
+postflight, not actual Credit/Provider E2E. Existing Credit functional regression was
+not rerun against production.
+
+Independent follow-up: `worker_read_history.sql` candidate reuses existing revisions
+for exact digest retrieval. Current VERIFIED/approval-request state and current source
+Provider rights remain mandatory; revocation/blocked review invalidates access.
+Local historical reuse, tampered digest, revoked rights, blocked review and caller ACL
+checks PASS. Not deployed. Submit/preflight still need parent-bound policy selection;
+this reader alone does not complete changed-version free reevaluation. Rollback uses
+existing `worker_read.sql` to restore current-only behavior without deleting revisions.

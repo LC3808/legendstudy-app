@@ -3655,3 +3655,5 @@ No Secret access, Provider/Credit transaction, activation, other grants or API S
 apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
 
 - Oct14: Owner approved disabled exam API installation. Migration tool twice returned invalid/expired requestState; postflight confirms no schema/RPC installed, Registry234 and Math/account definitions unchanged. No Provider/Credit calls. Approval retained; application pending.
+
+- Oct14: Owner SQL Editor installation verified (5 RPC body hashes, RLS/ACL, zero runs/billing, null policies, Registry234, unchanged Math/account functions). Historical Package reader candidate locally tested; not deployed. Provider/Credit E2E pending.

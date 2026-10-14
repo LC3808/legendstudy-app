@@ -1,8 +1,14 @@
-# Disabled exam submission API — Owner approved; application pending
+# Disabled exam submission API — Production applied, evaluation OFF
 
 Target: LegendStudy `stlhijzpjfgwwdgunlsd` only.
 SQL: `supabase/migrations/20261014023133_essay_exam_operating_api.sql`.
-Owner approved disabled installation on 2026-10-14. Two migration-tool attempts returned `Invalid or expired requestState`. Read-only postflight confirmed schema/RPC absent, Registry234 intact and Math/account function hashes unchanged. Approval remains valid; no SQL was applied.
+Owner applied the exact approved SQL through SQL Editor on 2026-10-14.
+Read-only postflight verified private table/forced RLS, all five RPC bodies matching
+approved SQL, worker-only writes, authenticated owner History, zero runs/billing,
+null runtime/model policies, Registry234, and unchanged Math/account function hash.
+Do not reapply or invent a migration-history entry. Prior connector attempts failed
+before changes; Owner SQL Editor application supersedes that blocker.
+
 
 ## Exact impact
 
