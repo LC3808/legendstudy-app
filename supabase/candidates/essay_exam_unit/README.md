@@ -108,3 +108,48 @@ Five targeted integration scenarios plus related worker/material/durability test
 passed (44 total). Provider transport and independent reviewer are synthetic test
 fixtures, NOT operational E2E. The production deployment blockers above still apply.
 No migration or grant is authorized by this local implementation.
+
+## Oct14 shared operating API composition — LOCAL ONLY
+
+New files: `provider-policy.sql` (only two existing Provider005 policy helpers;
+no old request/claim override), `api.sql` (preflight/submit/claim/finish/History),
+`api-rollback.sql` (full empty candidate removal). Install order on disposable DB:
+existing Ledger prerequisites → install.sql → provider-policy.sql → api.sql.
+The deployment-owned runtime/model policies are empty, so no exam is activated.
+
+The verified gateway checks Auth online and the existing allowlist, then forwards
+only its verified subject to worker-only RPCs. Account lifecycle lock precedes the
+credit-account lock. A single immutable dispatch lease prevents another dispatch;
+expired leases do not authorize Provider retry. Only a persisted reviewed final
+checkpoint can settle using the original immutable lease after expiry. Lost/unknown
+Provider work stays reconciliation-required, never automatic refund/redispatch.
+
+WEB/Native use the same endpoint, server reservation, owner History and existing
+result views. Selected question set is fixed by the existing reserve contract.
+Rewrite revisions derive from the stored parent (platform Draft counters are not
+server revision authority). Images are not silently dropped: this first text bundle
+rejects image answers; the existing Math image path remains unchanged.
+
+Existing durable per-question Provider telemetry is copied into the private stored
+result at settlement; user History strips telemetry and independent-review receipts.
+The legacy per-question telemetry RPC remains absent in Production and is not
+invoked by this exam channel. No second billing event is created per question.
+Account anonymization releases pending reservations and removes private answer/result
+runs, retaining all canonical Ledger transactions. This trigger is NOT applied.
+
+Local surface-only test uses actual canonical Ledger tables, candidate RPCs,
+ReviewedRuntimeWorker and fake Provider transport. It checks one dispatch on replay,
+one Credit, included rewrite with cross-platform revision0, owner isolation,
+worker-only ACL, receipt redaction, nonempty rollback denial and empty rollback.
+Lifecycle/Package lookups are explicit synthetic fixtures: this does not prove
+Production deletion workflow, deployment ownership, actual Provider, or user E2E.
+
+Remaining before production approval: full deployed lifecycle/ownership review,
+admin Quality Console projection, immutable old Package availability for rewrite,
+private host plus independent review service deployment, reviewed content rights and
+approved model entry. Do not promote this directory by wholesale migration push.
+Only the separate Worker gateway-role migration is currently approval-ready.
+
+Rollback after real use must be forward repair; `api-rollback.sql` refuses nonempty
+runs and never removes Ledger records. Provider helpers may only be removed by this
+rollback when created from this candidate and unused by other deployed features.

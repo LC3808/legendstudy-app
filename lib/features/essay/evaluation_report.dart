@@ -352,3 +352,103 @@ String _mathCriterionName(Map<String, dynamic> v, dynamic id) {
   }
   return '대학 평가 기준';
 }
+
+/// Canonical exam History projection -> existing approved Native report widgets.
+EvaluationReport examEvaluationReport(
+  Map<String, dynamic> run,
+  String questionId,
+) {
+  if (run['state'] != 'completed') throw StateError('EVALUATION_NOT_COMPLETED');
+  final questions = evaluationList(evaluationObject(run['result'])['questions'])
+      .map(evaluationObject);
+  final matches = questions
+      .where((q) => q['questionId'] == questionId)
+      .toList();
+  final answers = evaluationList(run['answers'])
+      .map(evaluationObject)
+      .where((a) => a['questionId'] == questionId)
+      .toList();
+  if (matches.length != 1 || answers.length != 1) {
+    throw const FormatException('INVALID_EXAM_RESULT');
+  }
+  final q = matches.single, out = evaluationObject(q['evaluation']);
+  if (out['contract_version'] != '1.3') {
+    throw const FormatException('INVALID_EXAM_RESULT');
+  }
+  final criteria = evaluationList(q['criteria']).map(evaluationObject).toList();
+  final progress = evaluationList(out['improvements'])
+      .map(evaluationObject)
+      .toList();
+  final dimensions = evaluationList(out['dimensions'])
+      .map(evaluationObject)
+      .toList();
+  final report = humanEvaluationReport(
+    {
+      'id': '${run['id']}/$questionId',
+      'contract_version': '1.3',
+      'attempt': {'body': answers.single['body']},
+      'session': {
+        'essay_questions': {'label': run['title']},
+      },
+      'input_snapshot': {
+        'criteria': criteria.map((c) => c['binding']).toList(),
+      },
+      'overall_summary': out['summary'],
+      'strengths': out['strengths'],
+      'rewrite_checklist': out['checklist'],
+      'essay_improvement_progress': [
+        for (final i in progress) {...i, 'next_action': i['action']},
+      ],
+      'essay_evaluation_dimensions': [
+        for (var i = 0; i < dimensions.length; i++)
+          {
+            'criterion_id': dimensions[i]['criterion_id'],
+            'display_order': i + 1,
+            'level_1_to_5': dimensions[i]['level'],
+            'explanation': dimensions[i]['explanation'],
+            'essay_evaluation_criteria': {
+              'label': criteria
+                  .where(
+                    (c) =>
+                        evaluationObject(c['binding'])['id'] ==
+                        dimensions[i]['criterion_id'],
+                  )
+                  .map((c) => c['label'])
+                  .firstOrNull,
+              'definition_version': q['rubricVersion'],
+            },
+          },
+      ],
+    },
+    priorId: run['parent_id'] == null
+        ? null
+        : '${run['parent_id']}/$questionId',
+  );
+  return EvaluationReport(
+    id: report.id,
+    answer: report.answer,
+    question: report.question,
+    summary: report.summary,
+    rubric: report.rubric,
+    strengths: report.strengths,
+    weaknesses: report.weaknesses,
+    actions: progress
+        .where(
+          (p) =>
+              p['status'] != 'resolved' &&
+              evaluationList(out['core_improvement_keys'])
+                  .contains(p['issue_key']),
+        )
+        .map((p) => evaluationText(p['action']))
+        .where((s) => s.isNotEmpty)
+        .toList(),
+    nextSteps: report.nextSteps,
+    pins: [
+      questionId,
+      evaluationText(q['rubricVersion']),
+      evaluationText(q['evidenceVersion']),
+      '1.3',
+    ],
+    priorId: report.priorId,
+  );
+}

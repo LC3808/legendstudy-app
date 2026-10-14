@@ -1,0 +1,101 @@
+"""Local API surface integration atop real canonical Ledger schema.
+Lifecycle/Package lookups use explicit synthetic fixtures, not production evidence.
+"""
+import json,uuid,tempfile,time
+from .material_runtime import NS, ReservedExamRuntime
+from .durable_journal import DurableJournal
+from .reviewed_runtime import reviewed_openai
+from .positive_learning import PROMPT_VERSION
+from .live_worker import SignedReview
+from tool.test_essay_live_worker import receipt
+
+def cases(sql, root, user, account, exam, question):
+    def literal(v):return "'"+json.dumps(v,ensure_ascii=False).replace("'","''")+"'::jsonb"
+    sql((root/'supabase/candidates/essay_exam_unit/provider-policy.sql').read_text())
+    sql("create schema math_private;create function math_private.require_active(uuid[]) returns void language plpgsql as $$begin if $1 is null or $1[1] is null or current_setting('fixture.blocked',true)='true' or not exists(select 1 from auth.users where id=$1[1]) then raise insufficient_privilege;end if;end$$;")
+    pkg=dict(university_id=sql(f"select university_id from public.essay_exams where id='{exam}'"),package_version=16,package_digest='f'*64,exam_identity={'track':'humanities'},questions=[{'question_id':question}])
+    pkg.update(schema='essay-material-package-v1',verification_status='VERIFIED_MANIFEST',exam_id=exam,rights_status={'a'*64:{'providerTransmission':'APPROVED'}},exam_identity=dict(academic_year=2025,exam_type='mock',track='humanities',title='Fixture'))
+    pkg['questions'][0].update(source_key='source:fixture',source_page_references=[dict(questionId=question,sourceHash='a'*64,role=role,startPage=1,endPage=1,evidenceText='Synthetic '+role,verification='VERIFIED') for role in ('question','shared_passage','intent','criteria')])
+    sql(f"create function public.essay_material_runtime_package(p_exam uuid,p_digest text) returns jsonb language sql as $$select {literal(pkg)}$$;")
+    sql((root/'supabase/candidates/essay_exam_unit/api.sql').read_text())
+    binding=dict(policy_version='fixture-v1',provider='openai',model='fixture',model_version='fixture',prompt_version=PROMPT_VERSION,contract_version='1.3')
+    regime='essay-v1.3/policy/'+sql(f"select essay_private.hash(({literal(binding)})::text)")
+    sql(f"create or replace function essay_private.provider_policy(p_regime text) returns jsonb language sql immutable as $$select {literal(binding)}$$;")
+    policy=dict(evaluation_type='humanities',regime=regime,package_digest='f'*64)
+    answer=[dict(questionId=question,body='Synthetic answer',revision=1)]
+    key=str(uuid.uuid4());dispatch=None;other=str(uuid.uuid4())
+    def submit(a=answer,k=key,parent=None,subject=user,role='essay_worker',extra=''):
+        return f"{extra}set role {role};select public.essay_exam_submit('{subject}','{exam}','{k}',{literal(a)},{'null' if parent is None else chr(39)+parent+chr(39)})"
+    sql(submit(), 'EXAM_NOT_ACTIVATED')
+    sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(policy)}$$;")
+    for role in ('authenticated','anon','service_role'):
+        sql(submit(role=role),'permission denied')
+    sql(submit(extra="set fixture.blocked='true';"),'insufficient_privilege')
+    initial=sql(submit());assert sql(submit())==initial
+    dispatch=str(uuid.uuid5(NS,'dispatch/'+user+'/'+initial))
+    assert sql(f"select sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='1'
+    def claim(run=initial,d=dispatch,subject=user):return f"set role essay_worker;select public.essay_exam_claim('{subject}','{run}','{d}')"
+    c=json.loads(sql(claim()));assert c['lease_token']==json.loads(sql(claim()))['lease_token']
+    sql(claim(d=str(uuid.uuid4())),'RECONCILIATION_REQUIRED')
+    sql(f"insert into auth.users(id) values('{other}');insert into public.profiles(id) values('{other}');")
+    sql(claim(subject=other),'PT403')
+    version='material-16-'+'f'*64
+    result=dict(summary='Synthetic summary',questions=[dict(questionId=question,rubricVersion=version,evidenceVersion=version,evaluation={'summary':'fixture','local_reviews':[{'private':'receipt'}]})])
+    def finish(run=initial,token=c['lease_token'],r=result):return f"set role essay_worker;select public.essay_exam_finish('{user}','{run}','{token}',{literal(r)},false)"
+    sql(finish(token=str(uuid.uuid4())),'PT403')
+    # Execute the actual Package -> ReviewedRuntimeWorker -> Ledger RPC path.
+    requests=[]
+    class Response:
+        def __init__(self,body):self.body=body
+        def __enter__(self):return self
+        def __exit__(self,*_):pass
+        def read(self,_):return json.dumps(self.body).encode()
+    def transport(req,timeout):
+        value=json.loads(json.loads(req.data)['input']);requests.append(value)
+        output=dict(contract_version='1.3',attempt_id=value['attempt_id'],answer_hash=value['answer_hash'],
+            summary='Synthetic summary',strengths=['Synthetic strength'],checklist=['Synthetic checklist'],
+            dimensions=[dict(criterion_id=c['reference']['id'],level=3,explanation='Synthetic explanation',evidence_ids=[value['evidence'][-1]['reference']['id']]) for c in value['criteria']],
+            improvements=[],core_improvement_keys=[],previous_improvement_reviews=[],sentence_feedback=[])
+        return Response(dict(status='completed',model='fixture',usage=dict(input_tokens=1,output_tokens=2,total_tokens=3),output=[dict(type='message',content=[dict(type='output_text',text=json.dumps(output))])]))
+    def rpc(name,args):
+        def arg(v):
+            if isinstance(v,(dict,list)):return literal(v)
+            if v is None:return 'null'
+            if isinstance(v,bool):return str(v).lower()
+            return "'"+str(v).replace("'","''")+"'"
+        data=sql('set role essay_worker;select public.'+name+'('+','.join(k+'=>'+arg(v) for k,v in args.items())+')')
+        try:return json.loads(data)
+        except json.JSONDecodeError:return data
+    registry={'exams':[dict(examId=exam,universityId=pkg['university_id'],year=2025,kind='mock',track='humanities',session=None,campus=None,name='Fixture',sourceHashes=['a'*64],questions=[dict(id=question,sourceKey='source:fixture')])]}
+    with tempfile.TemporaryDirectory(prefix='exam-surface-journal-',dir='/private/tmp') as directory:
+        runtime=ReservedExamRuntime(subject=lambda _:user,worker_rpc=rpc,registry=registry,journal=DurableJournal(directory),
+            provider=reviewed_openai('fixture-only',binding,transport=transport),reviewer=SignedReview({'independent-test':b'test-only-not-deployed'},clock=lambda:100),
+            review_source=receipt,receipt_sink=lambda _:None,clock=lambda:100)
+        assert runtime.handle('/exam-admission','fixture',{'exam_id':exam})['ready']
+        assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
+        assert runtime.handle('/exam-evaluate','fixture',{'run_id':initial})['state']=='completed'
+        assert len(requests)==1 and requests[0]['answer']=='Synthetic answer'
+    result=json.loads(sql(f"select result from essay_exam_private.runs where id='{initial}'"))
+
+    assert result['questions'][0]['telemetry']['total_tokens']==3
+    assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
+    def history(subject=user,run=initial):return json.loads(sql(f"set request.jwt.claim.sub='{subject}';set role authenticated;select public.essay_exam_history('{run}')"))
+    h=history()['runs'][0];assert h['free_rewrite_available'];assert 'local_reviews' not in h['result']['questions'][0]['evaluation']
+    assert history(other)['runs']==[]
+    rewritten=[dict(questionId=question,body='Rewritten answer',revision=0)]
+    second=sql(submit(rewritten,str(uuid.uuid4()),initial))
+    secondclaim=json.loads(sql(claim(second,str(uuid.uuid4()))))
+    assert sql(finish(second,secondclaim['lease_token']))=='completed'
+    assert not history()['runs'][0]['free_rewrite_available']
+    assert history(run=second)['runs'][0]['parent_id']==initial
+    sql(submit(rewritten,str(uuid.uuid4()),initial),'REEVALUATION_ALREADY_USED')
+    assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
+    rollback=(root/'supabase/candidates/essay_exam_unit/api-rollback.sql').read_text()
+    sql(rollback,'NONEMPTY_EXAM_ROLLBACK_DENIED')
+    # Exact legacy Ledger facts survive account anonymization; answer/result runs do not.
+    sql(f"update public.credit_accounts set user_id=null where id='{account}'")
+    assert sql(f"select count(*) from essay_exam_private.runs where account_id='{account}'")=='0'
+    assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
+    sql(rollback)
+    assert sql("select count(*) from public.credit_transactions")!='0'
+    print('PASS: full local Package -> Provider adapter(fake transport) -> Ledger -> History; worker-only submit/claim/finish, owner-isolated shared History, 1 Credit, included rewrite, exact replay, lease fencing, receipt redaction, erasure preserves Ledger. Synthetic local fixtures only.')

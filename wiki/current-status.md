@@ -1,135 +1,25 @@
 # Current Status
 
-## 2026-10-14 — Hanyang evaluation connection: PARTIAL
+## Oct14 operating essay connection — PARTIAL
 
-Owner confirmed operating problem PDF PASS; PDF/admin UX work is closed for this task.
-Read-only Production check: Hanyang review revision16 VERIFIED, Package16 digest
-09b50772b37f69ec7544a752ba88f5cde6c8de555ab17339a13eb6ef4fdcf106,
-approval_requested=true, rights_status={}. Review approval request does not grant
-Provider transmission or evaluation activation. authenticator cannot assume
-essay_worker; essay_record_provider_telemetry is absent (checked by function name,
-not only one guessed signature). Package read RPC is present. No SQL was applied.
+Existing Package→ReviewedRuntimeWorker 44-test acceptance is preserved. New local
+submission/lease/settlement API composes that runtime with existing Ledger; real
+local PostgreSQL validates one Credit, free same-set rewrite, replay, owner History,
+telemetry persistence/redaction and erasure retaining Ledger. Provider is FAKE.
+WEB and Native submit/rewrite controls and existing report/History adapters share
+this API. Production flag stays OFF; no actual Provider/Credit E2E or deployment.
 
-Implemented execute_reviewed_material_exam in the existing material adapter:
-canonical Package -> all selected frozen claims preflight -> ReviewedRuntimeWorker
--> existing DurableExamRunner -> unchanged result/finalization contract. Exact
-criteria/evidence lists, version pins, Provider binding and independent review are
-required before dispatch. One selected question reuses its reviewed summary;
-multiple questions still require reviewed exam-wide synthesis. Canonical exam,
-year, track, session and question identity now accompany Provider evidence from the
-pinned server cache. Legacy cache/result/Prompt contracts are preserved.
+Production read-only: Package16 VERIFIED, rights empty; Worker role switching and
+Provider policy/telemetry/exam API absent. Role-only SQL is ready, Owner approval
+pending. Broader exam SQL remains a candidate pending production lifecycle/owner
+integration and admin QA. Private host/reviewer deployment and source transmission
+approval remain blockers. No Secret read/output or new DB change this turn.
 
-44 related local tests PASS, including real adapter with fake transport, wrong
-mapping/rights/pin rejection, later-question preflight, account recheck, timeout
-without retry/settlement, process concurrency and durable recovery. These are NOT
-actual Provider E2E or operating Credit verification.
-
-Still unmounted: production exam reservation/claim/finalize, authenticated host
-composition, independent review service, WEB/Native submission/result/History
-connection for these exam runs. Existing local SQL candidate remains NOT DEPLOYABLE
-until lifecycle/least-privilege/History/erasure integration is completed. Do not
-activate submit or substitute per-question Credit. Real Provider/Credit test request
-must name the approved model, account, calls, cost cap and recovery after prerequisites
-are ready. Public HOLD; Math/Toss/IAP unchanged. No deployment in this change.
-
-## Oct13 problem viewer Owner policy update — PARTIAL
-
-WEB uses existing PDF renderer in a separate PC window, new-tab attempt if blocked,
-mobile full-screen dialog with close; answer component remains mounted. Native
-uses existing pdfrx in a full-screen route with close, retaining underlying writer
-and image state. No WebView or download/print/share controls added. Existing
-student_question hash/rights gate retained; no private source exposed.
-Native analyze and3 related tests PASS; no new Android/iOS build yet. WEB2 launch
-tests/typecheck/lint PASS; real mobile browser modal/close/Draft retained in local
-error-state fixture. PC popup not observable in IAB, actual authorized PDF asset
-not available; do not claim full visual QA. No change to evaluation/Credit.
-Hanyang Package16 remains correctly bound; Provider rights, Worker authentication,
-telemetry/policy/host/settlement E2E outstanding. Public HOLD.
-
-
-Oct13 Owner-approved Package read RPC applied:20261013115731. Worker-only
-EXECUTE verified, anon/authenticated denied, role membership remains false.
-Registry234 intact; no Provider/Credit call. Worker JWT E2E still blocked by
-existing authentication membership and missing source transmission approval.
-
-
-## Oct13 final review and Package v16
-
-Owner completed revision15 VERIFIED/all16 mappings. Generated Package16 via
-existing admin UI; exact question binding succeeds (13 Runtime evidence/5criteria).
-Package digest09b50772b37f69ec7544a752ba88f5cde6c8de555ab17339a13eb6ef4fdcf106.
-No PDF reanalysis/review repetition. Provider rights absent; processing remains held.
-Added narrow current-package Worker read candidate and fetch→existing RuntimeHost
-loader. Local PG ACL/integrity/rights/rollback PASS;7 adapter tests PASS. No new
-operating SQL, Provider or Credit transaction. Role/telemetry/host/exam settlement
-remain unresolved operating integration. Candidate README gives impact/rollback.
-
-
-### Oct13 Owner-reviewed Package v12 — service PARTIAL
-
-Actual DB revision12 VERIFIED/approval_requested=true; package version12,17
-verified mappings, digest978b4c6f07432b75055eff63baa415bb9061adf2b5ebbeb17c95dbecce323543
-recomputed valid. runtime_ready=false, rights_status empty. Package is durably
-stored, not runtime activation. Current UI approval label does not represent a
-separate implemented approval endpoint.
-
-Material host loader now consumes existing canonical registration manifest and
-version-pinned package, reports content/rights blockers and returns HostedQuestion
-bindings for existing RuntimeHost only when content is usable. No new engine.
-Actual v12 binds0: original question text classified intent, new question empty
-and points to criteria PDF6. Owner asked whether to correct just these mappings;
-no review edits or approvals performed. Empty optional model-answer/image mappings
-are not required content. Document Provider rights both absent.
-
-Six local adapter tests PASS. No actual Provider/Credit E2E. Existing production
-role/telemetry/policy/host/exam Credit/History deployment gaps remain. No DB or
-Rights changes. Public HOLD. Private package export and preflight are outside Git.
-
-
-## Hanyang material connection — Oct13 — PARTIAL
-
-Owner-uploaded two PDFs reused by exact SHA256. Production review revision1 saved
-with14 source mappings/5 official criteria; reload verified. No human approval or
-Provider rights inferred. New material_runtime adapter connects trusted versioned
-review manifests to existing package_registry/ReviewedRuntimeWorker input;3 local
-tests PASS. Not mounted in production. Existing Runtime supports four evidence
-roles; explanation/model-answer/image forwarding remains explicitly unresolved.
-Actual DB lacks essay_record_provider_telemetry; authenticator membership false.
-No Provider/Credit E2E, migration, public activation or Flutter UI changes.
-
-## Universal Essay — Oct13 — PARTIAL
-
-Materials review/PDF viewer implementation is deployed; new private
-DB applied after explicit Owner approval. WEB/Native conditional PDF viewers preserve existing
-writer/Draft; no student PDF is published. [Materials delivery](essay-full-service-implementation-20261011.md#oct13-materials-review-and-pdf-delivery--partial).
-
-Private Registry76/234 and approved worker-only read RPC applied; published0/HOLD.
-Oct13 persistent exam recovery + local Ledger integration PASS; WEB credential
-preflight added. Owner has configured the Worker Secret; authenticator membership remains false.
-Secret preflight is not successful DB authentication.
-Exact Owner Secret procedure is in the existing private Registry review.
-WEB/Native multi-photo drafts and common package binding tested. Operational exam
-Credit/History/QA, server Draft and actual Provider E2E remain unfinished.
-[Details](essay-full-service-implementation-20261011.md#oct13-universal-runtime-continuation).
-
-## Essay Catalog/detail UX — Oct11
-
-Catalog service-priority sort LIVE;42/49,Owner22/retained30 preserved.
-44행 조사 연결; 미검증 수치는 Owner 순서 적용. Logos41/42; Sogang pending.
-[Policy/data](roadmap-essay-lab.md#2026-10-11-owner-final-policy--22-focus--30-retained--42-public).
-[Release/QA](essay-full-service-implementation-20261011.md). Runtime remains PARTIAL/HOLD.
-
-## Manus Essay overnight V2 — Oct10 — LOCAL COMPLETE / PUBLIC HOLD
-
-V2 retained12 source hashes;53 Master/50 Offering/101 Track,052 quarantined.
-Raw research stays private. Historical packages preserved; runtime rights gates remain.
-[Full result and restore](essay-lab-manus-handoff-20261010.md).
-
-Prior integration6b003888 combined8e89dfc/b0facde/c11fc84 without conflicts.
-Prior user flow: real Android Google session and WEB/Android/iPhone Math3 initial+
-3 reevaluations PASS, shared Credit4→1/History; one timeout reservation recovered.
-Physical OAuth/clean-install/Profile matrix, orphan recovery and Worker renewal
-remain separate follow-ups. [Prior evidence](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+Checks: WEB targeted tests/typecheck/lint; Native result fixture and analyze (see
+feature log for final outcomes/build limitations). Public HOLD; Math/Toss/IAP and
+Owner-PASS PDF/admin UI unchanged. See [runtime completion](essay-runtime-completion.md)
+and [API candidate](../supabase/candidates/essay_exam_unit/README.md) for exact state.
+Earlier Catalog/materials handoffs moved to the same runtime document, not discarded.
 
 ## Shared MY foundation — 2026-10-08
 

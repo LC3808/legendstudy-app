@@ -9,12 +9,13 @@ class SharedEssayRecord {
   const SharedEssayRecord({
     required this.id,
     required this.math,
+    this.exam = false,
     required this.at,
     required this.rewrite,
     required this.evaluations,
   });
   final String id;
-  final bool math, rewrite;
+  final bool math, rewrite, exam;
   final DateTime at;
   final List<Map<String, dynamic>> evaluations;
 }
@@ -78,15 +79,54 @@ class SharedEssayHistory {
           .limit(50),
     ]);
     checkOwner();
-    return parseSharedHistory(
+    final legacy = parseSharedHistory(
       results[0] as Map<String, dynamic>,
       results[1] as List,
     );
+    final exams = await examRuns();
+    final records = [
+      ...legacy,
+      for (final r in exams)
+        SharedEssayRecord(
+          id: r['id'] as String,
+          math: false,
+          exam: true,
+          at: DateTime.parse(r['created_at'] as String),
+          rewrite: r['parent_id'] != null,
+          evaluations: [
+            for (final q in r['question_ids'] as List)
+              {
+                'id': '${r['id']}/$q',
+                'state': r['state'] == 'reserved'
+                    ? 'PROCESSING'
+                    : (r['state'] as String).toUpperCase(),
+              },
+          ],
+        ),
+    ];
+    records.sort((a, b) => b.at.compareTo(a.at));
+    return records;
   }
 
   Future<({EvaluationReport report, EvaluationReport? before})>
-  evaluationReport(bool math, String id) async {
+  evaluationReport(bool math, String id, {bool exam = false}) async {
     checkOwner();
+    if (exam) {
+      final parts = id.split('/');
+      if (parts.length != 2) throw const FormatException('INVALID_EXAM_ID');
+      final rows = await examRuns(parts[0]);
+      if (rows.length != 1) throw StateError('READ_FAILED');
+      final row = rows.single;
+      final report = examEvaluationReport(row, parts[1]);
+      EvaluationReport? before;
+      if (row['parent_id'] is String) {
+        final prior = await examRuns(row['parent_id'] as String);
+        if (prior.length == 1) {
+          before = examEvaluationReport(prior.single, parts[1]);
+        }
+      }
+      return (report: report, before: before);
+    }
     if (math) {
       final wire = await mathRead('read_result', {'evaluation_id': id});
       final report = mathEvaluationReport(wire);
@@ -140,6 +180,29 @@ class SharedEssayHistory {
       report: humanEvaluationReport(row, priorId: before?.id),
       before: before,
     );
+  }
+
+  Future<List<Map<String, dynamic>>> examRuns([String? id]) async {
+    checkOwner();
+    dynamic data;
+    try {
+      data = await client.rpc<dynamic>(
+        'essay_exam_history',
+        params: {'p_run': id},
+      );
+    } on PostgrestException catch (e) {
+      if (e.code == 'PGRST202' && id == null) return [];
+      rethrow;
+    }
+    checkOwner();
+    if (data is! Map ||
+        data['version'] != 'essay-exam-history-v1' ||
+        data['runs'] is! List) {
+      throw const FormatException('INVALID_RESPONSE');
+    }
+    return (data['runs'] as List)
+        .map((r) => Map<String, dynamic>.from(r as Map))
+        .toList();
   }
 
   Future<String> evaluationText(bool math, String id) async {

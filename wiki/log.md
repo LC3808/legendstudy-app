@@ -3626,3 +3626,12 @@ error-state fixture. PC popup not observable in IAB, actual authorized PDF asset
 not available; do not claim full visual QA. No change to evaluation/Credit.
 Hanyang Package16 remains correctly bound; Provider rights, Worker authentication,
 telemetry/policy/host/settlement E2E outstanding. Public HOLD.
+
+## 2026-10-14 — Operating essay API continuation (PARTIAL)
+
+Added shared gated WEB/Native submit and rewrite route, DB worker-only exam API
+candidate, lease fencing, existing Ledger settlement, owner History and approved
+result adapters. Real local PG + fake Provider composition passed; no real Provider
+or operating Credit transaction. Worker role-only migration reviewed/local verified;
+Owner approval pending. See essay-runtime-completion.md and candidate README for
+precise limitations. No PDF/admin UX changes, public activation or DB apply.

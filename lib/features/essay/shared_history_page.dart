@@ -87,6 +87,7 @@ class _HistoryBody extends ConsumerWidget {
                                       ).evaluationReport(
                                         row.math,
                                         e['id'] as String,
+                                        exam: row.exam,
                                       );
                                   if (!context.mounted ||
                                       ref

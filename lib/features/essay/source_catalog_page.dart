@@ -1,4 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
+
+import 'exam_submission.dart';
+import 'shared_history_page.dart';
+import 'shared_history.dart';
+
 import 'dart:typed_data';
 
 import 'answer_image.dart';
@@ -251,7 +257,12 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     ),
                   ),
                 ),
-              const FilledButton(onPressed: null, child: Text('첨삭 준비 중')),
+              _ExamSubmit(
+                key: ValueKey('${widget.owner}:${exam['key']}'),
+                owner: widget.owner,
+                exam: exam,
+                included: included[exam['key']] ?? {},
+              ),
             ],
           ],
         );
@@ -569,4 +580,197 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       ),
     );
   }
+}
+
+class _ExamSubmit extends ConsumerStatefulWidget {
+  const _ExamSubmit({
+    super.key,
+    required this.owner,
+    required this.exam,
+    required this.included,
+  });
+  final String owner;
+  final Map<String, dynamic> exam;
+  final Set<String> included;
+  @override
+  ConsumerState<_ExamSubmit> createState() => _ExamSubmitState();
+}
+
+class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
+  bool ready = false, busy = false;
+  String notice = '';
+  String? parentId;
+  List<Map<String, dynamic>> rewrites = [];
+  SourceDraftGateway get pending => SourceDraftGateway(
+    widget.owner,
+    'exam-request:${widget.exam['key']}:${parentId ?? 'initial'}',
+  );
+  @override
+  void initState() {
+    super.initState();
+    unawaited(check());
+  }
+
+  ExamSubmissionGateway? gateway() {
+    final client = ref.read(supabaseClientProvider);
+    return client == null ? null : ExamSubmissionGateway(client, widget.owner);
+  }
+
+  Future<void> check() async {
+    try {
+      final result = await gateway()?.request({
+        'action': 'availability',
+        'examId': widget.exam['dbExamId'],
+      });
+      if (mounted) setState(() => ready = result?['ready'] == true);
+      final client = ref.read(supabaseClientProvider);
+      if (client != null) {
+        final rows = await SharedEssayHistory(client, widget.owner).examRuns();
+        if (mounted) {
+          setState(
+            () => rewrites = rows
+                .where(
+                  (r) =>
+                      r['exam_id'] == widget.exam['dbExamId'] &&
+                      r['free_rewrite_available'] == true,
+                )
+                .toList(),
+          );
+        }
+      }
+    } catch (_) {
+      /* Existing public HOLD remains closed. */
+    }
+  }
+
+  Future<void> submit() async {
+    if (busy || !ready) return;
+    setState(() => busy = true);
+    try {
+      final selected = (widget.exam['questions'] as List)
+          .cast<Map<String, dynamic>>()
+          .where((q) => widget.included.contains(q['key']))
+          .toList();
+      if (selected.isEmpty) throw StateError('답안을 제출할 문항을 선택해 주세요.');
+      final answers = <Map<String, dynamic>>[];
+      for (final q in selected) {
+        final store = SourceDraftGateway(widget.owner, q['key'] as String);
+        final draft = await store.loadDraft();
+        final images = await store.loadImages();
+        if (q['dbQuestionId'] == null ||
+            draft.body.trim().isEmpty ||
+            images.isNotEmpty ||
+            q['inputMode'] == 'image') {
+          throw StateError(
+            '선택한 문항의 텍스트 답안을 확인해 주세요. 사진 포함 답안은 아직 이 시험에서 제출할 수 없습니다.',
+          );
+        }
+        answers.add({
+          'questionId': q['dbQuestionId'],
+          'body': draft.body,
+          'revision': draft.revision,
+        });
+      }
+      final fingerprint = jsonEncode({
+        'parentId': parentId,
+        'examId': widget.exam['dbExamId'],
+        'answers': answers,
+      });
+      final saved = await pending.loadDraft();
+      final prior = saved.body.isEmpty
+          ? null
+          : jsonDecode(saved.body) as Map<String, dynamic>;
+      if (prior != null && prior['fingerprint'] != fingerprint) {
+        throw StateError('이전 제출의 처리 상태를 첨삭 기록에서 먼저 확인해 주세요.');
+      }
+      final key = prior?['key'] as String? ?? newEssayUuid();
+      if (prior == null) {
+        await pending.saveLocalDraft(
+          jsonEncode({'fingerprint': fingerprint, 'key': key}),
+          saved.revision,
+        );
+      }
+      final result = await gateway()?.request({
+        'action': 'submit',
+        'examId': widget.exam['dbExamId'],
+        'key': key,
+        'parentId': parentId,
+        'answers': answers,
+      });
+      if (result?['runId'] == null) {
+        throw StateError('제출 상태를 확인하지 못했어요. 같은 답안으로 다시 확인해 주세요.');
+      }
+      if (mounted) {
+        setState(() => notice = '답안을 제출했어요. 나의 첨삭 기록에서 결과를 확인해 주세요.');
+      }
+    } catch (error) {
+      if (error is ExamSubmissionRejected) {
+        final saved = await pending.loadDraft();
+        await pending.saveLocalDraft('', saved.revision);
+      }
+      if (mounted) {
+        setState(
+          () => notice = error is ExamSubmissionRejected
+              ? (error.code == 'INSUFFICIENT_CREDIT'
+                    ? '첨삭권이 부족합니다.'
+                    : '제출 조건을 확인해 주세요.')
+              : error is StateError
+              ? error.message.toString()
+              : '연결을 확인하지 못했어요. 답안과 제출 정보는 보존됩니다.',
+        );
+      }
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      if (rewrites.isNotEmpty)
+        DropdownButtonFormField<String>(
+          initialValue: parentId ?? '',
+          decoration: const InputDecoration(labelText: '제출 방식'),
+          items: [
+            const DropdownMenuItem(value: '', child: Text('새 첨삭 · 1 Credit')),
+            for (final r in rewrites)
+              DropdownMenuItem(
+                value: r['id'] as String,
+                child: Text(
+                  '무료 재첨삭 · ${r['created_at'].toString().substring(0, 10)}',
+                ),
+              ),
+          ],
+          onChanged: busy
+              ? null
+              : (v) => setState(() {
+                  parentId = v == '' ? null : v;
+                  notice = '';
+                }),
+        ),
+      if (parentId != null)
+        const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
+      FilledButton(
+        onPressed: ready && !busy ? submit : null,
+        child: Text(
+          busy
+              ? '처리 중…'
+              : ready
+              ? '답안 제출'
+              : '첨삭 준비 중',
+        ),
+      ),
+      if (notice.isNotEmpty) Text(notice),
+      if (notice.isNotEmpty)
+        TextButton(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const SharedEssayHistoryPage(),
+            ),
+          ),
+          child: const Text('나의 첨삭 기록'),
+        ),
+    ],
+  );
 }

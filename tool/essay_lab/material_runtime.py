@@ -197,3 +197,102 @@ def execute_reviewed_material_exam(*, package, registry, pinned_digest, binding,
 
     return DurableExamRunner(journal).execute(**run, authorize=authorize,
         build_worker=build, summarize=synthesis, finalize=finalize)
+
+
+class ReservedExamRuntime:
+    """Private HTTP host composition for the existing DB lease + reviewed runtime.
+
+    subject(token) must verify Auth online and the existing allowlist. worker_rpc
+    uses only essay_worker. Construction does not enable public submission.
+    """
+    def __init__(self, *, subject, worker_rpc, registry, journal, provider, reviewer,
+                 review_source, receipt_sink, summarize=None, clock=None):
+        import time
+        self.subject=subject;self.rpc=worker_rpc;self.registry=registry
+        self.journal=journal;self.provider=provider;self.reviewer=reviewer
+        self.review_source=review_source;self.receipt_sink=receipt_sink
+        self.summarize=summarize;self.clock=clock or time.time
+
+    def handle(self, path, token, payload):
+        from copy import deepcopy
+        from .live_worker import package as provider_package
+        require(type(payload) is dict, 'INVALID_REQUEST')
+        subject=self.subject(token);require(isinstance(subject,str) and subject,'ACCESS_DENIED')
+        if path=='/exam-admission':
+            require(set(payload)=={'exam_id'},'INVALID_REQUEST')
+            policy=self.rpc('essay_exam_preflight',{'p_subject':subject,'p_exam':payload['exam_id']})
+            hosted, report=fetch_reviewed_material(self.rpc,self.registry,
+                exam_id=payload['exam_id'],pinned_digest=policy['package_digest'],
+                binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],
+                activation_approved=True)
+            from .reviewed_runtime import ReviewedRuntimeWorker,RuntimePermit
+            for q in hosted.values():
+                probe=ReviewedRuntimeWorker(self.rpc,self.provider,q.frozen_cache,self.reviewer,
+                    self.review_source,self.receipt_sink,lambda _:None,
+                    permit=RuntimePermit('preflight','unused',digest(q.frozen_cache),q.binding,int(self.clock()+90),True),clock=self.clock)
+                probe.authorize('preflight')
+            require(report['ready'] and hosted and self.journal.ready,'RUNTIME_UNAVAILABLE')
+            return {'ready':True,'exam_id':payload['exam_id']}
+        require(path=='/exam-evaluate' and set(payload)=={'run_id'},'INVALID_REQUEST')
+        run_id=str(UUID(payload['run_id']))
+        dispatch=str(uuid5(NS,'dispatch/'+subject+'/'+run_id))
+        claimed=self.rpc('essay_exam_claim',{'p_subject':subject,'p_run':run_id,'p_dispatch':dispatch})
+        if claimed['state'] in ('completed','failed'):return {'run_id':run_id,'state':claimed['state']}
+        if claimed.get('dispatch_allowed') is not True:
+            key='exam-'+digest(run_id)+'-final'
+            with self.journal.lock(key):
+                if self.journal.read(key) is None:return {'run_id':run_id,'state':'reconciling'}
+        snap=claimed['snapshot'];policy=snap['runtime'];exam_id=claimed['exam_id']
+        pkg=self.rpc('essay_material_runtime_package',{'p_exam':exam_id,'p_digest':policy['package_digest']})
+        hosted, report=load_reviewed_material(pkg,self.registry,pinned_digest=policy['package_digest'],
+            binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
+        require(report['ready'] and claimed['subject_id']==subject and snap['ownerId']==subject,'EXAM_ACCESS_DENIED')
+        questions=[];caches={}
+        parent=claimed.get('parent_result')
+        for answer in snap['answers']:
+            qid=answer['questionId'];cache=hosted[qid].frozen_cache;caches[qid]=cache
+            evaluation=str(uuid5(NS,'evaluation/'+run_id+'/'+qid))
+            context={'items':[],'previous_core_progress_ids':[]}
+            if claimed.get('parent_id'):
+                previous=[q for q in parent['questions'] if q['questionId']==qid]
+                require(len(previous)==1,'PRIOR_RESULT_REQUIRED')
+                out=previous[0]['evaluation'];core=set(out['core_improvement_keys'])
+                for item in out['improvements']:
+                    progress=str(uuid5(NS,'progress/'+claimed['parent_id']+'/'+qid+'/'+item['issue_key']))
+                    context['items'].append(dict(item,progress_id=progress))
+                    if item['issue_key'] in core:context['previous_core_progress_ids'].append(progress)
+            frozen=dict(contract_version='1.3',attempt_id=evaluation,
+                answer_hash=sha256(answer['body'].encode()).hexdigest(),
+                criteria=[c['binding'] for c in cache['criteria']],evidence=[e['binding'] for e in cache['evidence']],
+                scaffolding_context=context,provider_binding=policy['binding'])
+            claim=dict(run_id=run_id,lease_token=claimed['lease_token'],answer=answer['body'],
+                input=frozen,provider_binding=policy['binding'])
+            provider_package(claim,cache)
+            questions.append(dict(questionId=qid,rubricVersion=answer['rubricVersion'],
+                evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim))
+
+        def authorize(_):
+            # Recheck Auth/lifecycle/lease on cached replay too; no guessed ownership.
+            require(self.subject(token)==subject,'EXAM_ACCESS_DENIED')
+            latest=self.rpc('essay_exam_claim',{'p_subject':subject,'p_run':run_id,'p_dispatch':dispatch})
+            return latest.get('lease_token')==claimed['lease_token'] or latest.get('state') in ('completed','failed')
+
+        def finish(record):
+            result=deepcopy(record['result'])
+            if result is not None:
+                for index,q in enumerate(result['questions']):
+                    q['criteria']=deepcopy(caches[q['questionId']]['criteria'])
+                    usage_key='exam-'+digest(run_id)+'-q'+str(index)+'-usage'
+                    with self.journal.lock(usage_key):usage=self.journal.read(usage_key)
+                    require(type(usage) is dict,'PROVIDER_TELEMETRY_REQUIRED')
+                    q['telemetry']={k:usage.get('p_'+k) for k in ('input_tokens','output_tokens','total_tokens','latency_ms','image_count','cost_amount','currency')}
+            return self.rpc('essay_exam_finish',dict(p_subject=subject,p_run=run_id,
+                p_token=claimed['lease_token'],p_result=result,p_failed=record['failed']))
+        state=execute_reviewed_material_exam(package=pkg,registry=self.registry,
+            pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],
+            evaluation_type=policy['evaluation_type'],activation_approved=True,
+            frozen_run=dict(run_id=run_id,subject_id=subject,exam_id=exam_id,questions=questions),
+            journal=self.journal,authorize=authorize,provider=self.provider,reviewer=self.reviewer,
+            review_source=self.review_source,receipt_sink=self.receipt_sink,finalize=finish,
+            summarize=self.summarize,clock=self.clock)
+        return {'run_id':run_id,'state':state}
