@@ -3705,3 +3705,21 @@ Owner action: Worker Secrets ESSAY_PROVIDER_KEY and ESSAY_REVIEW_VERIFY_KEYS onl
 exact dashboard path and hidden clipboard generation instructions provided. No JWT
 reset, no new infrastructure. After settings: safe admission validation, then separate
 limited Provider/Credit E2E approval. Actual E2E NOT_RUN; overall PARTIAL/public HOLD.
+
+### Oct14 Provider/review Secrets — operating preflight PASS
+
+Owner entered ESSAY_PROVIDER_KEY and ESSAY_REVIEW_VERIFY_KEYS. Cloudflare metadata
+confirms both secret_text; values were never read/output. Existing HOLD-only diagnostic
+now reuses the actual exam-admission method (preflight RPC, exact Package converter,
+ReviewedRuntimeWorker.authorize, reviewer signing/verification key identity). No
+Provider evaluate, submission, reserve or finalize method runs in this check.
+Operating browser result: HTTP200, no missing bindings, ready=true, Package17 digest
+40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae, question_count1,
+model gpt-5.6-sol, review_key_binding PASS, provider_called=false. Credit visible11;
+DB runs0/checkpoints0. Worker version c6e89ab9-7248-40c9-ac21-b5acd88158c4, execution
+false. Local boundary3 + semantic5 PASS (synthetic only).
+This validates key wiring and evaluation configuration, NOT OpenAI key validity,
+model access, live model quality, signed live review or charged/free E2E. Actual
+Provider/Credit remain NOT_RUN; public HOLD. Next is separately approved bounded
+initial evaluation + free reevaluation on the existing allowlisted account. No more
+Secret input is currently needed. Screenshot local /private/tmp/essay-runtime-admission-pass.png.

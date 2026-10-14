@@ -47,6 +47,20 @@ class Default(WorkerEntrypoint):
             reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,
             allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true')
 
+    async def admission(self,t,subject,exam):
+        policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=exam))
+        pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=exam,p_digest=policy['package_digest']))
+        hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
+        runtime=self.configuration(t)
+        for q in hosted.values():
+            worker=ReviewedRuntimeWorker(t.rpc,runtime.provider,q.frozen_cache,runtime.reviewer,runtime.review_source,runtime.receipt_sink,lambda _:None,
+                permit=RuntimePermit('preflight','unused',digest(q.frozen_cache),policy['binding'],int(time.time()+90),True))
+            worker.authorize('preflight')
+        source=runtime.review_source
+        key_bound=bool(getattr(source,'key',None) and runtime.reviewer.keys.get(getattr(source,'reviewer_id',''))==source.key)
+        if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model':require(key_bound,'REVIEW_KEY_BINDING_REQUIRED')
+        return {'ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
+
     async def fetch(self,request):
         headers={'Cache-Control':'no-store'}
         try:
@@ -74,20 +88,16 @@ class Default(WorkerEntrypoint):
                     except Exception:result[label]={'http':None}
                 review_binding='ESSAY_REVIEW_BINDING' if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model' else 'ESSAY_REVIEWER'
                 result['missing_runtime_bindings']=[name for name in (review_binding,'ESSAY_PROVIDER_BINDING','ESSAY_PROVIDER_KEY','ESSAY_REVIEW_VERIFY_KEYS') if not getattr(self.env,name,None)]
+                try:
+                    result['runtime_admission']=await self.admission(t,subject,'345d3caa-3438-58c3-8f80-62a6242179ec')
+                except Exception as error:
+                    result['runtime_admission']={'ready':False,'code':type(error).__name__}
                 await self.env.ESSAY_QUEUE.send(json.dumps({'kind':'connection_probe','probe_id':probe}))
                 result['queue']='ENQUEUED'
                 return Response.json(result,headers=headers)
             if path=='/exam-admission':
                 require(set(payload)=={'exam_id'},'INVALID_REQUEST')
-                policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=payload['exam_id']))
-                pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=payload['exam_id'],p_digest=policy['package_digest']))
-                hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
-                runtime=self.configuration(t)
-                for q in hosted.values():
-                    worker=ReviewedRuntimeWorker(t.rpc,runtime.provider,q.frozen_cache,runtime.reviewer,runtime.review_source,runtime.receipt_sink,lambda _:None,
-                        permit=RuntimePermit('preflight','unused',digest(q.frozen_cache),policy['binding'],int(time.time()+90),True))
-                    worker.authorize('preflight')
-                return Response.json({'ready':bool(report['ready'] and hosted)},headers=headers)
+                return Response.json(await self.admission(t,subject,payload['exam_id']),headers=headers)
             require(path=='/exam-evaluate' and set(payload)=={'run_id'},'INVALID_REQUEST')
             require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
             # Identity-only message. Consumer independently verifies owner/lifecycle/lease.
