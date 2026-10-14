@@ -34,7 +34,8 @@ class RuntimeHost:
     No callback is accepted from HTTP input. No public administrative metadata.
     """
     def __init__(self,*,questions,authenticate,owned,user_rpc,worker_factory,journal,
-                 service_token,preflight,enabled=False,clock=time.time,exam_runtime=None):
+                 service_token,preflight,enabled=False,clock=time.time,exam_runtime=None,admission_only=False):
+        self.admission_only=admission_only
         self.exam_runtime=exam_runtime
         self.questions=deepcopy(questions);self.authenticate=authenticate;self.owned=owned
         self.user_rpc=user_rpc;self.worker_factory=worker_factory;self.journal=journal
@@ -55,6 +56,8 @@ class RuntimeHost:
     def handle(self,path,service_token,caller_token,payload):
         if not self.enabled or len(self.service_token)<32:return 503,{'code':'RUNTIME_UNAVAILABLE'}
         if not hmac.compare_digest(service_token,self.service_token):return 403,{'code':'ACCESS_DENIED'}
+        if self.admission_only and path not in ('/admission','/exam-admission'):
+            return 403,{'code':'EVALUATION_EXECUTION_HELD'}
         try:
             require(type(payload) is dict,'INVALID_REQUEST')
             if path in ('/exam-admission','/exam-evaluate'):

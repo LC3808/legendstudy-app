@@ -284,3 +284,17 @@ Local historical reuse, tampered digest, revoked rights, blocked review and call
 checks PASS. Not deployed. Submit/preflight still need parent-bound policy selection;
 this reader alone does not complete changed-version free reevaluation. Rollback uses
 existing `worker_read.sql` to restore current-only behavior without deleting revisions.
+
+### Oct14 host P0 follow-up — not deployed
+Fresh Cloudflare production inspection: registry JWT present; no service binding,
+origin or service secret; evaluation flag absent/OFF. Existing runtime requires
+persistent POSIX journal; Python Workers/Containers default ephemeral storage is
+not compatible without a verified persistence adapter. Owner asked whether an
+existing LegendStudy Linux/container host is available (no secret requested).
+Composition defaults to admission-only: both execute paths blocked before any
+claim/provider call; authenticated admission path remains available when real
+prerequisites are configured.13 focused local synthetic host/transport tests PASS.
+Actual operating host HTTP admission NOT_RUN; no Provider/Credit/config/DB changes.
+[Exact host/config/acceptance checklist](../tool/essay_lab/deployment/README.md).
+Independent review service, Provider rights/model policy and actual host remain
+unprovisioned; no readiness claim based on callbacks or mocks.

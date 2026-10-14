@@ -63,6 +63,18 @@ class HostTests(unittest.TestCase):
    w.execute=original;h.journal=DurableJournal(root)
    with patch('tool.essay_lab.runtime_host.cache_for_claim',return_value=w.cache):self.assertEqual(self.dispatch(h)[0],409)
    self.assertEqual(r,[]);self.assertEqual(c,[])
+ def test_admission_only_blocks_both_execution_routes_before_runtime(self):
+  h,w,c,r,j=self.fixture();h.admission_only=True
+  class Exam:
+   def handle(self,path,token,payload):
+    self.seen=(path,token,payload);return {'ready':True}
+  e=Exam();h.exam_runtime=e
+  for path in ('/evaluate','/exam-evaluate'):
+   code,value=h.handle(path,h.service_token,'owner',{'run_id':E})
+   self.assertEqual((code,value),(403,{'code':'EVALUATION_EXECUTION_HELD'}))
+  self.assertFalse(hasattr(e,'seen'));self.assertEqual(c,[]);self.assertEqual(r,[])
+  self.assertEqual(h.handle('/exam-admission',h.service_token,'owner',{'exam_id':E})[0],200)
+  self.assertEqual(e.seen,('/exam-admission','owner',{'exam_id':E}))
  def test_wsgi_bounded_and_no_store(self):
   h,*_=self.fixture();statuses=[]
   body=b'{}';out=h.wsgi({'REQUEST_METHOD':'POST','CONTENT_LENGTH':'5000','wsgi.input':io.BytesIO(body)},lambda *a:statuses.append(a))

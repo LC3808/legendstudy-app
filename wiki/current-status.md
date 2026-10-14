@@ -14,7 +14,7 @@ bodies now tested; private hash ACL incompatibility fixed without extending gran
 Local first1Credit/free rewrite/replay/history/erasure and formal SQL installation,
 repeat refusal/empty rollback PASS; Provider transport remains fake.
 
-Existing ReviewedRuntimeWorker now has a concrete Auth/worker HTTP host composition.
+Existing Worker host composition now defaults to admission-only (execution blocked).
 Private host/reviewer deployment, approved Provider/model/material transmission,
 operational old-version Package/rewrite selection, admin QA projection and real Provider/Credit E2E
 remain incomplete. Approved exam API installed; zero runs/billing, Provider/model policies null.

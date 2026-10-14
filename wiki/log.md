@@ -3657,3 +3657,5 @@ apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
 - Oct14: Owner approved disabled exam API installation. Migration tool twice returned invalid/expired requestState; postflight confirms no schema/RPC installed, Registry234 and Math/account definitions unchanged. No Provider/Credit calls. Approval retained; application pending.
 
 - Oct14: Owner SQL Editor installation verified (5 RPC body hashes, RLS/ACL, zero runs/billing, null policies, Registry234, unchanged Math/account functions). Historical Package reader candidate locally tested; not deployed. Provider/Credit E2E pending.
+
+- Oct14 host P0: confirmed Pages lacks host origin/binding/token; Registry JWT retained. Existing runtime admission-only execution guard implemented,13 local tests PASS. Host reuse question pending; exact configuration runbook added. Operating host/provider/Credit not exercised.

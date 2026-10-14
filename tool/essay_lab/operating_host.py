@@ -64,7 +64,7 @@ class OperatingTransport:
         return self._request('/rest/v1/rpc/'+name,self.worker,args)
 
 def compose_host(*,transport,registry,journal_path,service_token,provider_key,
-                 binding,reviewer,review_source,receipt_sink,enabled=False):
+                 binding,reviewer,review_source,receipt_sink,enabled=False,admission_only=True):
     """Reuse current prompt, SignedReview and durable runner without a fallback.
 
     The caller must supply the existing independent reviewer and durable receipt
@@ -81,5 +81,6 @@ def compose_host(*,transport,registry,journal_path,service_token,provider_key,
     # This host mounts only exam routes; legacy per-question endpoints stay closed.
     host=RuntimeHost(questions={},authenticate=transport.subject,owned=None,
         user_rpc=None,worker_factory=None,journal=journal,service_token=service_token,
-        preflight=lambda _:False,enabled=enabled,exam_runtime=runtime)
+        preflight=lambda _:False,enabled=enabled,exam_runtime=runtime,
+        admission_only=admission_only)
     return host.wsgi
