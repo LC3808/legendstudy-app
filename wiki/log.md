@@ -3524,3 +3524,21 @@ ref and still **denies** the production ref with the flag on (verified against c
 `SUPABASE_URL`/`SUPABASE_PUBLISHABLE_KEY` (+ auth defines). Public identifiers only — no secrets
 recorded. Details: [Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md). Awaiting Owner
 approval before any test-project migration/deploy/secret step. Push held.
+
+## 2026-10-14 — TEST-project migration attempt HALTED at #26 (Claude)
+
+Owner approved test-project migration + IAP Edge deploy (test `kpqbedylxlyntrrfybpn` only; production
+`stlhijzpjfgwwdgunlsd` untouched). Linked to TEST (re-confirmed), dry-run showed 42 pending (remote
+empty). `supabase db push` applied **25/42** then FAILED on
+`20261001000300_account_deletion_lifecycle.sql` statement 49:
+`permission denied for schema essay_private` on
+`revoke create on schema essay_private,public from essay_executor` (ADR-2D role bridge).
+**Halted per Owner rule — no skip, no migration edit, no Edge deploy.** Diagnosis (read-only):
+essay_private owned by `postgres`, `public` by `pg_database_owner`; the `db push` connection role
+lacks privilege to revoke CREATE on these schemas. The management-API (MCP) connection runs as
+`postgres` AND is a member of `pg_database_owner` (`can_create_public=true`) — so re-applying #26→#42
+via `apply_migration` (management API) would likely succeed; needs Owner approval to switch method.
+Current TEST state: 25 migrations recorded, credit_accounts/grants/transactions present,
+`iap_post_verified_purchase`/`credit_summary` NOT yet applied (after #26). Production unchanged
+(never targeted). No code change; push held. Details:
+[Phase A runbook](iap-sandbox-phaseA-runbook-2026-10-13.md).
