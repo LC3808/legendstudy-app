@@ -60,7 +60,9 @@ class Default(WorkerEntrypoint):
             require(path=='/exam-evaluate' and set(payload)=={'run_id'},'INVALID_REQUEST')
             require(self.env.ESSAY_EXECUTION_ENABLED=='true','EVALUATION_EXECUTION_HELD')
             # Identity-only message. Consumer independently verifies owner/lifecycle/lease.
-            await self.env.ESSAY_QUEUE.send(json.dumps({'subject_id':subject,'run_id':payload['run_id']}),contentType='text')
+            # Native binding is a JS proxy: use its positional API. The default
+            # structured-clone encoding preserves this JSON string on delivery.
+            await self.env.ESSAY_QUEUE.send(json.dumps({'subject_id':subject,'run_id':payload['run_id']}))
             return Response.json({'run_id':payload['run_id'],'state':'queued'},status=202,headers=headers)
         except Exception:
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
