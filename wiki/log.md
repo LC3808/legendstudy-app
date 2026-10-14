@@ -3689,3 +3689,27 @@ atomic rollback, #31-42 NOT applied); DUPLICATE re-run → pre-flight ABORT, sta
 260KB is within SQL-Editor/pg-meta limits; a 2-part split (#27-30 bridges / #31-42) is held as fallback
 if the Owner's editor balks. TEST-only; production, canonical files and the TEST DB (still 26) untouched;
 Owner runs after approval.
+
+## 2026-10-14 — #40 MATH_ACTIVATION_AUTHORITY_REQUIRED: root cause + recovery (READ-ONLY)
+
+Owner ran the consolidated file: #27-39 applied (migration_count=39), #40 failed with
+MATH_ACTIVATION_AUTHORITY_REQUIRED, #41-42 not applied (designed stop-on-error worked). Root cause
+(read-only): #40 `essay_web_runtime_status` only PROJECTS an existing kill switch — it gates on
+`math_private.runtime_control` (and `require_active`). `require_active` exists (from #29), but
+`runtime_control` is created ONLY by the separate canonical Math activation migration
+`20261004000200_math_storage_erasure_activation.sql` (branch codex/math-production-activation-1),
+which is NOT in this branch's 42-file chain. Production has it installed (wiki essay-web-runtime-
+activation.md: "Oct04 storage activation migrations are installed"). TEST got only the canonical chain,
+so runtime_control is absent and #40 correctly fired. No bug in #40 or the consolidation — a missing
+prerequisite activation migration. runtime_control canonical def: `create table
+math_private.runtime_control(singleton boolean primary key default true check(singleton),
+evaluations_enabled boolean not null default false); insert values(true,false)` (kill switch default
+OFF). The activation migration's preconditions are satisfied on TEST (math_learning #29, fenced #26,
+storage built-in, no math-private bucket) and it is additive (storage bucket/RLS + erasure fns +
+runtime_control + admission trigger + math_catalog), touching no Credit/IAP. Recovery prepared
+(`supabase/verification/iap/recovery_40-42_TEST.sql`, NOT applied): install the canonical authority
+20261004000200 (verbatim — not an arbitrary table; #40's check unchanged), then #40, #41, #42, with a
+pre-flight guard (exactly 39, prerequisites present, runtime_control/bucket/targets absent), atomic
+per-migration history, and a post-flight 43-version-set check (42 canonical + 20261004000200). 4
+canonical blocks byte-identical verified. Existing 39 migrations/objects preserved; production and
+TEST DB untouched; Owner approves before running.
