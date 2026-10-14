@@ -3713,3 +3713,29 @@ pre-flight guard (exactly 39, prerequisites present, runtime_control/bucket/targ
 per-migration history, and a post-flight 43-version-set check (42 canonical + 20261004000200). 4
 canonical blocks byte-identical verified. Existing 39 migrations/objects preserved; production and
 TEST DB untouched; Owner approves before running.
+
+## 2026-10-14 — Recovery applied; TEST postflight PASS; cross-branch history recorded (Claude)
+
+Owner ran `recovery_40-42_TEST.sql` in the TEST SQL Editor. TEST DB now (read-only verified, no change):
+43 migrations (43 unique versions). Full postflight PASS — credit_accounts/grants/transactions +
+payment_orders present with RLS enabled and `credit_grants.external_reference` UNIQUE (idempotency key);
+`iap_post_verified_purchase`, `essay_private.credit_post_grant`, `public.credit_summary` present; the IAP
+RPC is service_role-only (anon/authenticated EXECUTE denied), SECURITY DEFINER, search_path=''; its body
+carries the 3-month paid-credit expiry, the sha256(transaction_id)+pg_advisory_xact_lock idempotency
+(duplicate-grant prevention) and the service_role VERIFIER check; `credit_summary` is authenticated-only;
+`math_private.runtime_control` exists with evaluations_enabled=false (kill switch OFF). No DB-level FAIL.
+Not verified at DB level (requires runtime/secrets): a real Apple Sandbox purchase E2E and an actual grant
+(intentionally impossible until Owner sets secrets + IAP_ENABLED/sandbox flag).
+
+### Cross-branch migration 20261004000200 — history consistency (per Unified Wiki)
+`20261004000200_math_storage_erasure_activation.sql` is an Owner-authored (commit a9fec5e, 2026-10-04),
+production-installed canonical Math activation migration owned on `codex/math-production-activation-1`
+(AGENTS.md: Math = Codex). It is NOT part of this `claude/app-release-readiness` branch's 42-file chain.
+TEST now carries it (43 remote) while this branch's local `supabase/migrations` has 42 — the SAME, by-design
+difference production has versus this branch (Math activation is a separate, cross-branch, Owner-applied
+step). Resolution (no duplicate file, no redesign): it is recorded here as a cross-branch prerequisite with
+its authoritative source/commit; `supabase db push` only pushes local-missing-from-remote and never
+re-applies or deletes a remote-only migration, so future pushes from this branch leave 20261004000200
+untouched; `supabase migration list` shows it as remote-only (informational). Bringing the identical file
+into this branch's chain (local==remote) is deferred to explicit Owner instruction due to Codex/Math
+branch ownership. Production and the canonical files untouched.
