@@ -3635,3 +3635,14 @@ result adapters. Real local PG + fake Provider composition passed; no real Provi
 or operating Credit transaction. Worker role-only migration reviewed/local verified;
 Owner approval pending. See essay-runtime-completion.md and candidate README for
 precise limitations. No PDF/admin UX changes, public activation or DB apply.
+
+## Oct14 approved Worker role switching applied
+
+Owner approved existing Worker role switching only. Migration20261014020622
+applied; repository file renamed from proposal20261014011329 to match actual
+Supabase history. SET=true/INHERIT=false/ADMIN=false; no student/anon Worker
+membership or worker→executor membership. Worker remains NOLOGIN/NOSUPERUSER/
+NOBYPASSRLS. Read-only rollback transaction authenticator→essay_worker and existing
+Registry RPC returned234 questions. Fresh Cloudflare JWT HTTP E2E not verified.
+No Secret access, Provider/Credit transaction, activation, other grants or API SQL
+apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.

@@ -223,3 +223,14 @@ facts, never Admissions/Outcome facts; (6) owner-only projection and deletion wo
 retain financial facts but erase answers, with full deployed retention review still
 required; (7) model-derived stars/advice remain separate from raw answers/official
 criteria; growth compares matching pins only. No new data-purpose authorization.
+
+## Oct14 approved Worker role switching applied
+
+Owner approved existing Worker role switching only. Migration20261014020622
+applied; repository file renamed from proposal20261014011329 to match actual
+Supabase history. SET=true/INHERIT=false/ADMIN=false; no student/anon Worker
+membership or worker→executor membership. Worker remains NOLOGIN/NOSUPERUSER/
+NOBYPASSRLS. Read-only rollback transaction authenticator→essay_worker and existing
+Registry RPC returned234 questions. Fresh Cloudflare JWT HTTP E2E not verified.
+No Secret access, Provider/Credit transaction, activation, other grants or API SQL
+apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.

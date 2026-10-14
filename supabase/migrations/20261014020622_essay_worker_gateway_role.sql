@@ -1,4 +1,4 @@
--- PENDING OWNER APPROVAL. Enable verified JWT role switching only.
+-- Owner-approved role-only migration; applied as 20261014020622.
 begin;
 set local lock_timeout='5s';
 set local statement_timeout='15s';

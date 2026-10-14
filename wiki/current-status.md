@@ -9,11 +9,10 @@ telemetry persistence/redaction and erasure retaining Ledger. Provider is FAKE.
 WEB and Native submit/rewrite controls and existing report/History adapters share
 this API. Production flag stays OFF; no actual Provider/Credit E2E or deployment.
 
-Production read-only: Package16 VERIFIED, rights empty; Worker role switching and
-Provider policy/telemetry/exam API absent. Role-only SQL is ready, Owner approval
-pending. Broader exam SQL remains a candidate pending production lifecycle/owner
+Production read-only: Package16 VERIFIED, rights empty; Provider policy/telemetry/exam API absent. Owner-approved Worker role switching
+applied as20261014020622: SET-only, SQL Registry read234 PASS. JWT HTTP E2E pending. Broader exam SQL remains a candidate pending production lifecycle/owner
 integration and admin QA. Private host/reviewer deployment and source transmission
-approval remain blockers. No Secret read/output or new DB change this turn.
+approval remain blockers. No Secret exposure or Provider/Credit transaction.
 
 Checks: WEB targeted tests/typecheck/lint; Native result fixture and analyze (see
 feature log for final outcomes/build limitations). Public HOLD; Math/Toss/IAP and
