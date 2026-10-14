@@ -135,3 +135,16 @@ connection separately; issuance alone is not Provider/Credit E2E.
 
 Sources: https://supabase.com/docs/guides/auth/signing-keys
 https://developers.cloudflare.com/pages/functions/bindings/#service-bindings
+
+## Oct14 Owner Secret postflight (14:36 KST)
+
+Worker0bab25ca / Pages3b6c4c0b reflect encrypted credentials. Real existing allowed
+Chrome account: LAB Registry234 → private service auth PASS → Worker Auth PASS →
+Worker Registry234. HOLD-only /connection-check sends one nonce-only probe; operating
+queue received/ACKed matching nonce. This probe never constructs runtime or reserves
+Credit. Package HTTP400=PROVIDER_RIGHTS_REQUIRED; exam preflight403=policy null,
+not Worker EXECUTE denial. Four reviewer/provider bindings absent. Runs/checkpoints0.
+Actual evaluation/Provider/Credit E2E NOT_RUN, public HOLD. Secret input complete;
+no rotation/reset required. New queue boundary2 and Web7 tests, typecheck/lint/build
+PASS. Diagnostic route only accepts existing authenticated allowlisted users and is
+disabled when evaluation flag is on. No student/result UX changes.
