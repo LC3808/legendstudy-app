@@ -3639,3 +3639,20 @@ READ-ONLY study of normal supported paths. New findings:
   THIS environment, no extra Owner infra. Atomic (begin/commit), #1–26 untouched.
 - Recommendation: (A) is the cleanest (native, file-from-disk) if the Owner has IPv6; otherwise (B) is
   fully supported and runnable here. Nothing applied (READ-ONLY step); production untouched.
+
+## 2026-10-14 — #27–42 application impasse: all disk-faithful paths blocked (Claude)
+
+Tried to proceed. Path A confirmed dead: Owner's `supabase db push --dry-run --db-url` to the direct
+host failed `getaddrinfo ENOTFOUND` (IPv6-only host unreachable without the declined IPv4 add-on). Path B
+via MCP: the management tools work, but applying a migration requires me to re-emit its full SQL as a
+string, and **#27 is 973 lines** (reading just its first 430 lines cost ~48K tokens) — hand-reproducing
+it is impractical and unreliable, and any slip is the forbidden "canonical SQL 재작성"; #27 must go first
+(in-order), so it blocks the rest. The only disk-faithful channels — `db push` (direct, unreachable) and
+the Management API query endpoint fed from disk — are blocked (unreachable / classifier "Credential
+Exploration"). **Nothing applied; test DB still 26; production untouched.** Genuine impasse: applying the
+original files faithfully needs the Owner to relax exactly one constraint. Options surfaced for Owner:
+(A) allow the Supabase MCP tools and/or the query-endpoint-from-disk path (a permission rule) so Claude
+applies the original files faithfully; (B) the Owner runs a short reviewed script (provided) that POSTs
+each file FROM DISK to the Management API query endpoint under their own session, stop-on-error, then
+shares results; (C) enable the IPv4 add-on so `db push` direct works. Small files alone are emittable,
+but the 973-line #27 (required first) makes hand-application via MCP non-viable.
