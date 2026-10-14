@@ -3800,3 +3800,34 @@ Unknown outcome: same-run checkpoints only, no fresh Provider retry; included at
 failure recovery uses existing finish, no manual Ledger edits. Actual rewrite execution
 awaits separate Owner approval. Public HOLD remains.
 
+
+### Oct14 20:28 KST — approved free rewrite completed; native rewrite confirmation pending
+
+Owner confirmed the initial result in Native APP and approved one free rewrite
+(maximum 2 Provider calls, $2, 0 Credit, same-run recovery).
+Run `414a207b-2c51-48e6-97ea-2ddf49b77c9e` completed and settled as
+`included_revision`, parent `5b636cda-9915-42e1-b209-9934c7c0fcb1`.
+Same Hanyang 2024 admission humanities afternoon2, question1, Package17.
+The 1174-character revised test answer was submitted; evaluator and independent
+review each ran once. Stored receipts: input26409/output6040 tokens total;
+token-rate estimate $0.226436 (not a billing invoice), within approved $2.
+No further Provider retry or evaluation was executed.
+
+Operating DB: required credits0, rewrite Ledger rows0, balance10/reserved0/available10.
+Original snapshot/result hashes unchanged. Actual reserve duplicate guard rejects
+REEVALUATION_ALREADY_USED; one child remains, with no extra Provider call or debit.
+WEB authenticated History shows both records; existing result and comparison UX
+shows utilitarianism3→4, other four criteria unchanged4, one improvement/four same.
+Prior improvement is recorded resolved. This is a QA answer, not proof of student outcomes.
+Owner confirmed initial WEB/APP equality; rewrite Native display confirmation remains
+pending the existing Owner question. Shared backend does not substitute for native UI QA.
+
+Pages canonical deployment45c3935b-c8c8-4fd4-94fc-5c1e31bb51a8 and Worker
+version6ff0ea08-ad10-4cb0-bffd-56313d470126 restored execution OFF.
+Cloudflare API independently confirmed both live flags false. Public HOLD maintained.
+No schema/Prompt/resultSchema/resultUX/Math/Payment/IAP changes.
+Private comparison artifact: /private/tmp/essay-cycle-comparison.html (answers/results,
+not committed). WEB screenshot: /private/tmp/essay-rewrite-result.png.
+Next: Native rewrite display confirmation and Owner feedback-quality review.
+Failure recovery was not invoked; no new failure-injection claim is made.
+

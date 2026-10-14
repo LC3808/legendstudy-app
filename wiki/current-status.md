@@ -1,39 +1,36 @@
 # Current Status
 
-### Oct14 free rewrite preparation — not executed
+### Oct14 20:28 KST — approved free rewrite completed; native rewrite confirmation pending
 
-Owner requests existing first result WEB/APP consistency before one free rewrite.
-Initial run5b636cda-9915-42e1-b209-9934c7c0fcb1 remains completed; no child runs.
-Free window ends2026-10-28 17:30:54KST. Same question/Package17 pinned.
-Prepared1174-character revised QA answer (revision2) explicitly defines net pleasure
-and states the justification's advantage; preserves original contract analysis and
-rights criticism. Private local /private/tmp/essay-free-rewrite-answer.txt; not yet
-submitted and not written over the original stored answer.
+Owner confirmed the initial result in Native APP and approved one free rewrite
+(maximum 2 Provider calls, $2, 0 Credit, same-run recovery).
+Run `414a207b-2c51-48e6-97ea-2ddf49b77c9e` completed and settled as
+`included_revision`, parent `5b636cda-9915-42e1-b209-9934c7c0fcb1`.
+Same Hanyang 2024 admission humanities afternoon2, question1, Package17.
+The 1174-character revised test answer was submitted; evaluator and independent
+review each ran once. Stored receipts: input26409/output6040 tokens total;
+token-rate estimate $0.226436 (not a billing invoice), within approved $2.
+No further Provider retry or evaluation was executed.
 
-WEB first-result display was operating-verified in prior E2E; actual DB result
-re-read unchanged. Native code uses the same essay_exam_history RPC and existing
-EvaluationReportView. iOS simulator build PASS (56.5s Xcode), installed onto existing
-iPhone17Pro AEC17AF7-4950-4B41-9520-45A60BB7C918 without erasing app data.
-Native actual authenticated UI/result equality is NOT verified: computer-use opening
-Simulator/Xcode failed/timed out. Owner must open Simulator, launch LegendStudy+,
-login review@legendstudy.com and check latest essay History; never send password/JWT.
-Do not relabel shared RPC implementation or successful build as native live PASS.
+Operating DB: required credits0, rewrite Ledger rows0, balance10/reserved0/available10.
+Original snapshot/result hashes unchanged. Actual reserve duplicate guard rejects
+REEVALUATION_ALREADY_USED; one child remains, with no extra Provider call or debit.
+WEB authenticated History shows both records; existing result and comparison UX
+shows utilitarianism3→4, other four criteria unchanged4, one improvement/four same.
+Prior improvement is recorded resolved. This is a QA answer, not proof of student outcomes.
+Owner confirmed initial WEB/APP equality; rewrite Native display confirmation remains
+pending the existing Owner question. Shared backend does not substitute for native UI QA.
 
-Pages scope code now optionally pins parentId, keeps initial scope rejecting rewrites,
-and rejects new-paid submissions/wrong parents in rewrite scope. Fixed server request
-key still prevents an additional run. Eleven focused tests/typecheck/targeted lint
-PASS. Not activated or deployed in this preparation; existing production gates OFF.
-No Prompt/Schema/result UX, DB schema, Ledger or Math/Payment/IAP changes.
+Pages canonical deployment45c3935b-c8c8-4fd4-94fc-5c1e31bb51a8 and Worker
+version6ff0ea08-ad10-4cb0-bffd-56313d470126 restored execution OFF.
+Cloudflare API independently confirmed both live flags false. Public HOLD maintained.
+No schema/Prompt/resultSchema/resultUX/Math/Payment/IAP changes.
+Private comparison artifact: /private/tmp/essay-cycle-comparison.html (answers/results,
+not committed). WEB screenshot: /private/tmp/essay-rewrite-result.png.
+Next: Native rewrite display confirmation and Owner feedback-quality review.
+Failure recovery was not invoked; no new failure-injection claim is made.
 
-Proposed approval: same account/exam/question/Package, first run as parent, one revised
-answer; evaluator1 + independent reviewer1 (max2 calls), estimated$0.25–$0.80, cap$2.
-Existing included_revision billing decision uses0Credit; no paid fallback, balance10
-must remain10. Verify child-parent History, unchanged first result, duplicate free-use
-rejection (no extra Provider), WEB/APP display. No migration. Temporarily enable exact
-scope only after approval and native initial-result check; close Pages then Worker OFF.
-Unknown outcome: same-run checkpoints only, no fresh Provider retry; included attempt
-failure recovery uses existing finish, no manual Ledger edits. Actual rewrite execution
-awaits separate Owner approval. Public HOLD remains.
+
 
 ### Oct14 first paid E2E — operating WEB PASS; overall service PARTIAL
 
