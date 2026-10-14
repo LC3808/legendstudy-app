@@ -1,9 +1,11 @@
 """Deployment entry. Disabled by default; no Provider/Credit startup calls."""
 import json,hmac
+from uuid import UUID
+from urllib.error import HTTPError
 from urllib.parse import urlparse
 from workers import WorkerEntrypoint,Response,Request
 from essay_lab.live_worker import require,SignedReview,Unknown
-from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport
+from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport,fetch_bytes
 from essay_lab.cloudflare_runtime import CloudflareExamRuntime
 from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit
 from essay_lab.material_runtime import load_reviewed_material
@@ -46,6 +48,25 @@ class Default(WorkerEntrypoint):
             payload=json.loads(raw);path=urlparse(request.url).path
             token=request.headers.get('Authorization','').removeprefix('Bearer ')
             t=self.transport();subject=await t.subject(token)
+            if path=='/connection-check':
+                require(self.env.ESSAY_EXECUTION_ENABLED=='false' and set(payload)=={'probe_id'},'INVALID_REQUEST')
+                probe=str(UUID(payload['probe_id']))
+                result={'service_auth':'PASS','user_auth':'PASS','execution_enabled':False,'probe_id':probe}
+                # Fixed read-only RPCs. Never claim/reserve/evaluate, return evidence or log credentials.
+                calls=[('registry','essay_registered_questions',{'p_subject':subject}),
+                    ('package','essay_material_runtime_package',{'p_exam':'345d3caa-3438-58c3-8f80-62a6242179ec','p_digest':'09b50772b37f69ec7544a752ba88f5cde6c8de555ab17339a13eb6ef4fdcf106'}),
+                    ('policy','essay_exam_preflight',{'p_subject':subject,'p_exam':'345d3caa-3438-58c3-8f80-62a6242179ec'})]
+                for label,name,args in calls:
+                    try:
+                        raw=await fetch_bytes(ORIGIN+'/rest/v1/rpc/'+name,{'apikey':t.key,'Authorization':'Bearer '+t.worker,'Content-Type':'application/json'},json.dumps(args))
+                        value=json.loads(raw)
+                        result[label]={'http':200,**({'count':len(value)} if label=='registry' and isinstance(value,list) else {})}
+                    except HTTPError as e:result[label]={'http':e.code}
+                    except Exception:result[label]={'http':None}
+                result['missing_runtime_bindings']=[name for name in ('ESSAY_REVIEWER','ESSAY_PROVIDER_BINDING','ESSAY_PROVIDER_KEY','ESSAY_REVIEW_VERIFY_KEYS') if not getattr(self.env,name,None)]
+                await self.env.ESSAY_QUEUE.send(json.dumps({'kind':'connection_probe','probe_id':probe}))
+                result['queue']='ENQUEUED'
+                return Response.json(result,headers=headers)
             if path=='/exam-admission':
                 require(set(payload)=={'exam_id'},'INVALID_REQUEST')
                 policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=payload['exam_id']))
@@ -70,6 +91,13 @@ class Default(WorkerEntrypoint):
     async def queue(self,batch,*_context):
         for message in batch.messages:
             try:
+                value=json.loads(message.body)
+                if isinstance(value,dict) and value.get('kind')=='connection_probe':
+                    require(self.env.ESSAY_EXECUTION_ENABLED=='false' and set(value)=={'kind','probe_id'},'INVALID_PROBE')
+                    probe=str(UUID(value['probe_id']))
+                    print('ESSAY_CONNECTION_PROBE_ACK '+probe)
+                    message.ack()
+                    continue
                 t=self.transport();runtime=self.configuration(t)
                 state=await runtime.consume(json.loads(message.body))
                 if state=='reconciling':message.retry()

@@ -3670,3 +3670,5 @@ apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
   read-only validation helper prepared. No key rotation/Provider/Credit.
 
 - Pages197c1ef5 source da479da deployed with private Worker service binding; build PASS, Hanyang200/public submit503 HOLD. Owner Secret entry pending; no actual authenticated host/Provider E2E claim.
+
+- Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.

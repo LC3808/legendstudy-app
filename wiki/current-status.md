@@ -181,3 +181,5 @@ The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the olde
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
+
+- Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
