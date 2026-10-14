@@ -3674,3 +3674,18 @@ apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
 - Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
 
 - Oct14 operating postflight: LAB/Worker Registry234 + service/user Auth PASS; Queue no-op ACK. Package rights and exam policy block evaluation; reviewer/provider bindings missing. Runs0/checkpoints0, Provider/Credit NOT_RUN, HOLD. See tool/cloudflare_essay/README.md.
+
+### Oct14 Hanyang rights approval and independent review — PARTIAL
+
+Owner confirmed OpenAI transmission permission for Hanyang2024 admission humanities
+afternoon2 Packagev16's two PDFs, evaluation and independent review only. No operating
+DB change or Provider/Credit call was performed. Prepared rights-only v17 candidate
+with exact-exam/model policy, content/version guards and non-destructive rollback.
+Local PostgreSQL17 non-superuser apply/content-preservation/repeat/rollback PASS.
+Separate semantic review request reuses Responses and existing SignedReview; evidence,
+usage and receipt use existing checkpoints. Five synthetic semantic/runtime checks
+PASS, async parity and queue boundary checks PASS; local Cloudflare workerd startup
+PASS after staging module fix. Not deployed; operating E2E NOT_RUN.
+Next: Owner approval of candidate SQL, Owner Provider/review-signing Secrets, disabled
+Worker deployment/configuration, then separately scoped actual Provider/Credit E2E.
+No Math, Payment/IAP, Registry IDs, evaluation prompt/schema or approved UX changes.

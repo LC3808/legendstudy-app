@@ -9,6 +9,7 @@ from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_tr
 from essay_lab.cloudflare_runtime import CloudflareExamRuntime
 from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit
 from essay_lab.material_runtime import load_reviewed_material
+from essay_lab.semantic_review import openai_review
 from essay_lab.live_worker import digest
 from registry_asset import REGISTRY
 import time
@@ -20,7 +21,8 @@ class Default(WorkerEntrypoint):
 
     def configuration(self,transport):
         # No synthetic review callback or automatic signing fallback.
-        require(getattr(self.env,'ESSAY_REVIEWER',None) is not None,'REVIEW_SERVICE_REQUIRED')
+        mode=getattr(self.env,'ESSAY_REVIEW_MODE','service')
+        require(mode in ('service','independent_model'),'REVIEW_MODE_REQUIRED')
         binding=json.loads(self.env.ESSAY_PROVIDER_BINDING)
         provider=reviewed_openai(self.env.ESSAY_PROVIDER_KEY,binding,transport=provider_transport)
         provider.evaluate=provider.evaluate_async
@@ -31,6 +33,13 @@ class Default(WorkerEntrypoint):
                 headers={'Content-Type':'application/json'},body=json.dumps({'evaluation_id':evaluation,'package':value,'output':output})).js_object)
             require(response.status==200,'REVIEW_UNAVAILABLE')
             return json.loads(await response.text())
+        if mode=='independent_model':
+            policy=json.loads(self.env.ESSAY_REVIEW_BINDING)
+            require(set(policy)=={'reviewer_id','model','model_version'} and policy['reviewer_id'] in keys,'REVIEW_POLICY_REQUIRED')
+            review=openai_review(key=self.env.ESSAY_PROVIDER_KEY,model=policy['model'],model_version=policy['model_version'],
+                reviewer_id=policy['reviewer_id'],signing_key=keys[policy['reviewer_id']],transport=provider_transport)
+        else:
+            require(getattr(self.env,'ESSAY_REVIEWER',None) is not None,'REVIEW_SERVICE_REQUIRED')
         async def receipt(_):
             # Actual receipt persistence is supplied per-run below, never discard.
             raise Unknown('RECEIPT_PERSISTENCE_REQUIRED')
@@ -63,7 +72,8 @@ class Default(WorkerEntrypoint):
                         result[label]={'http':200,**({'count':len(value)} if label=='registry' and isinstance(value,list) else {})}
                     except HTTPError as e:result[label]={'http':e.code}
                     except Exception:result[label]={'http':None}
-                result['missing_runtime_bindings']=[name for name in ('ESSAY_REVIEWER','ESSAY_PROVIDER_BINDING','ESSAY_PROVIDER_KEY','ESSAY_REVIEW_VERIFY_KEYS') if not getattr(self.env,name,None)]
+                review_binding='ESSAY_REVIEW_BINDING' if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model' else 'ESSAY_REVIEWER'
+                result['missing_runtime_bindings']=[name for name in (review_binding,'ESSAY_PROVIDER_BINDING','ESSAY_PROVIDER_KEY','ESSAY_REVIEW_VERIFY_KEYS') if not getattr(self.env,name,None)]
                 await self.env.ESSAY_QUEUE.send(json.dumps({'kind':'connection_probe','probe_id':probe}))
                 result['queue']='ENQUEUED'
                 return Response.json(result,headers=headers)

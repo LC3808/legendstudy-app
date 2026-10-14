@@ -7,7 +7,8 @@ def main():
  target=args.directory.resolve();target.mkdir(parents=True,exist_ok=False)
  source=target/'src';source.mkdir();package=source/'essay_lab';package.mkdir()
  # Build copies are disposable; there is one maintained Runtime/Registry source.
- pending=['cloudflare_http','cloudflare_runtime','live_worker','reviewed_runtime','material_runtime']
+ pending=[node.module.split('.')[1] for node in ast.walk(ast.parse(Path(__file__).with_name('entry.py').read_text()))
+          if isinstance(node,ast.ImportFrom) and node.module and node.module.startswith('essay_lab.')]
  seen=set()
  while pending:
   name=pending.pop()

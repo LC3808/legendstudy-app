@@ -35,10 +35,16 @@ class CloudflareExamRuntime:
             key='receipt-'+value['output_sha256']
             await journal.begin(key)
             await journal.write(key,value)
+        source=self.review_source.bind_audit(persist_receipt) if hasattr(self.review_source,'bind_audit') else self.review_source
+        async def review(evaluation,value,output):
+            receipt=await source(evaluation,value,output)
+            await journal.begin('review-'+evaluation)
+            await journal.write('review-'+evaluation,receipt)
+            return receipt
         def build(channel,checkpoint):
             q=next(q for q in questions if q['evaluationId']==channel.evaluation_id)
             cache=caches[q['questionId']]
-            return ReviewedRuntimeWorker(channel,self.provider,cache,self.reviewer,self.review_source,persist_receipt,checkpoint,
+            return ReviewedRuntimeWorker(channel,self.provider,cache,self.reviewer,review,persist_receipt,checkpoint,
                 permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True))
         for q in questions:
             require(q['rubricVersion']==version and q['evidenceVersion']==version,'REVIEWED_PACKAGE_PIN_REQUIRED')

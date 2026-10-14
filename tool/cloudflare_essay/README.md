@@ -148,3 +148,20 @@ Actual evaluation/Provider/Credit E2E NOT_RUN, public HOLD. Secret input complet
 no rotation/reset required. New queue boundary2 and Web7 tests, typecheck/lint/build
 PASS. Diagnostic route only accepts existing authenticated allowlisted users and is
 disabled when evaluation flag is on. No student/result UX changes.
+
+## Oct14 independent review connection (local validated, not deployed)
+
+`ESSAY_REVIEW_MODE=independent_model` selects a separate OpenAI review request on
+this same Worker; default external-service mode remains available. Semantic checks
+must all pass before the existing SignedReview validator accepts the response.
+Review assessment/usage and signed receipt persist through existing checkpoints.
+No new evaluator, schema, infrastructure, Credit logic or result UI was created.
+Staging now derives modules from entry imports; local workerd startup passed after
+fixing an initially missing semantic-review module. Five new semantic/integration
+checks and existing async/probe boundaries passed with synthetic transport only.
+Rights-only Hanyang v17 + exact model policy are an unapplied SQL candidate:
+`supabase/candidates/essay_hanyang_execution_policy/README.md`.
+Owner confirmed material transmission rights, but DB apply, Provider calls, Credit
+transactions and public activation are separate. Existing operating auth/Queue PASS
+is preserved and was not repeated. Provider project key and review receipt signing
+Secret remain Owner-entered settings. Public HOLD remains in force.
