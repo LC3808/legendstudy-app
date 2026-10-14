@@ -81,9 +81,11 @@ class EvaluationReport {
     required this.nextSteps,
     required this.pins,
     this.priorId,
+    this.previousReviews = const [],
   });
   final String id, answer, question, summary;
   final String? priorId;
+  final List<Map<String, dynamic>> previousReviews;
   final List<String> pins, actions, nextSteps;
   final List<EvaluationCriterion> rubric;
   final List<EvaluationFeedback> strengths, weaknesses;
@@ -425,6 +427,9 @@ EvaluationReport examEvaluationReport(
         : '${run['parent_id']}/$questionId',
   );
   return EvaluationReport(
+    previousReviews: evaluationList(out['previous_improvement_reviews'])
+        .map(evaluationObject)
+        .toList(),
     id: report.id,
     answer: report.answer,
     question: report.question,

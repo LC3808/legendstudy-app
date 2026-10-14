@@ -1,3 +1,5 @@
+import '../credits/credit_balance.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -24,8 +26,9 @@ import 'essay_controller.dart';
 import 'essay_models.dart';
 
 class SourceCatalogPage extends ConsumerWidget {
-  const SourceCatalogPage({super.key, this.catalog});
+  const SourceCatalogPage({super.key, this.catalog, this.rewriteRun});
   final Future<SourceCatalog>? catalog;
+  final Map<String, dynamic>? rewriteRun;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
@@ -42,6 +45,7 @@ class SourceCatalogPage extends ConsumerWidget {
       key: ValueKey(owner),
       owner: owner,
       catalog: catalog,
+      rewriteRun: rewriteRun,
       loadCatalog: () => SourceCatalog.load(
         accessToken: ref
             .read(supabaseClientProvider)
@@ -59,7 +63,9 @@ class _SourceSelection extends StatefulWidget {
     required this.owner,
     required this.loadCatalog,
     this.catalog,
+    this.rewriteRun,
   });
+  final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Future<SourceCatalog> Function() loadCatalog;
   final Future<SourceCatalog>? catalog;
@@ -88,16 +94,16 @@ class _SourceSelectionState extends State<_SourceSelection> {
         for (final x in options)
           DropdownMenuItem(value: x, child: Text(labels?[x] ?? x)),
       ],
-      onChanged: options.isEmpty ? null : change,
+      onChanged: options.isEmpty || widget.rewriteRun != null ? null : change,
     ),
   );
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('대학 · 시험 선택'),
+      title: Text(university == null ? '논술 LAB' : '논술 첨삭 시작'),
       actions: [
-        IconButton(
-          tooltip: '나의 첨삭 기록',
+        TextButton.icon(
+          label: const Text('나의 첨삭 기록'),
           icon: const Icon(Icons.history),
           onPressed: () => context.push('/lab/essay/history'),
         ),
@@ -118,6 +124,71 @@ class _SourceSelectionState extends State<_SourceSelection> {
           return const Center(child: CircularProgressIndicator());
         }
         final c = snapshot.data!;
+        if (widget.rewriteRun != null && university == null) {
+          final matched = c.exams
+              .where((e) => e['dbExamId'] == widget.rewriteRun!['exam_id'])
+              .firstOrNull;
+          if (matched == null) {
+            return const Center(
+              child: Text('이 시험의 작성 자료를 확인하지 못했어요. 기존 첨삭 기록은 보존됩니다.'),
+            );
+          }
+          university = matched['sourceUniversityId'] as String;
+          year = '${matched['year']}';
+          kind = matched['kind'] as String;
+          track = matched['track'] as String;
+          examKey = matched['key'] as String;
+          included[examKey!] = (matched['questions'] as List)
+              .cast<Map<String, dynamic>>()
+              .where(
+                (q) => (widget.rewriteRun!['question_ids'] as List).contains(
+                  q['dbQuestionId'],
+                ),
+              )
+              .map((q) => q['key'] as String)
+              .toSet();
+        }
+        if (university == null) {
+          return ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              const CreditBalanceCard(compact: true),
+              for (final u in c.universities)
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (u['logo'] is String)
+                          Image.network(
+                            'https://lab.legendstudy.com${u['logo']}',
+                            height: 48,
+                            width: 140,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.centerLeft,
+                            errorBuilder: (_, _, _) =>
+                                const Icon(Icons.school_outlined),
+                          ),
+                        Text(
+                          u['name'] as String,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 12),
+                        FilledButton(
+                          onPressed: () => setState(
+                            () =>
+                                university = u['sourceUniversityId'] as String,
+                          ),
+                          child: const Text('첨삭 시작하기'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          );
+        }
         final uni = university;
         final rows = c.exams
             .where((e) => e['sourceUniversityId'] == uni)
@@ -140,6 +211,18 @@ class _SourceSelectionState extends State<_SourceSelection> {
         return ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            const CreditBalanceCard(compact: true),
+            if (widget.rewriteRun == null)
+              TextButton(
+                onPressed: () => setState(() {
+                  university = null;
+                  year = kind = track = examKey = null;
+                }),
+                child: const Text('대학 목록'),
+              ),
+            if (widget.rewriteRun != null)
+              const Text('다시 써보기 · 최초 제출 문항을 유지합니다.'),
+            if (rows.isEmpty) const Text('이 대학의 시험 자료를 준비하고 있어요.'),
             choice(
               '대학',
               uni,
@@ -202,7 +285,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 const Text(
                   '최초 첨삭은 시험의 선택 문항 묶음당 1 Credit입니다. 14일 이내 같은 문항 집합의 재첨삭 1회가 포함됩니다.',
                 ),
-              if (RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? ''))
+              if (widget.rewriteRun == null &&
+                  RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? ''))
                 OutlinedButton(
                   onPressed: () => setState(
                     () => included[exam['key'] as String] =
@@ -226,17 +310,19 @@ class _SourceSelectionState extends State<_SourceSelection> {
                               included[exam['key']]?.contains(q['key']) ??
                               false,
                           semanticLabel: '${q['label']} 첨삭 선택',
-                          onChanged: (v) => setState(() {
-                            final selected = included.putIfAbsent(
-                              exam['key'] as String,
-                              () => {},
-                            );
-                            if (v == true) {
-                              selected.add(q['key'] as String);
-                            } else {
-                              selected.remove(q['key']);
-                            }
-                          }),
+                          onChanged: widget.rewriteRun != null
+                              ? null
+                              : (v) => setState(() {
+                                  final selected = included.putIfAbsent(
+                                    exam['key'] as String,
+                                    () => {},
+                                  );
+                                  if (v == true) {
+                                    selected.add(q['key'] as String);
+                                  } else {
+                                    selected.remove(q['key']);
+                                  }
+                                }),
                         )
                       : null,
                   trailing: const Icon(Icons.edit_outlined),
@@ -246,6 +332,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         owner: widget.owner,
                         question: q,
                         exam: exam,
+                        rewriteRun: widget.rewriteRun,
                         officialUrl:
                             c.universities
                                     .where(
@@ -262,6 +349,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 owner: widget.owner,
                 exam: exam,
                 included: included[exam['key']] ?? {},
+                rewriteRun: widget.rewriteRun,
               ),
             ],
           ],
@@ -273,11 +361,13 @@ class _SourceSelectionState extends State<_SourceSelection> {
 
 class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
+    this.rewriteRun,
     required this.owner,
     required this.question,
     required this.exam,
     this.officialUrl,
   });
+  final Map<String, dynamic>? rewriteRun;
   final String owner;
   final String? officialUrl;
   final Map<String, dynamic> question, exam;
@@ -368,6 +458,14 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       controller = EssayController(g, initialBody: d.body)
         ..revision = d.revision;
       editor.text = d.body;
+      final previous = (widget.rewriteRun?['answers'] as List? ?? [])
+          .cast<Map<String, dynamic>>()
+          .where((a) => a['questionId'] == widget.question['dbQuestionId'])
+          .firstOrNull;
+      if (d.body.isEmpty && previous?['body'] is String) {
+        editor.text = previous!['body'] as String;
+        controller!.edit(editor.text);
+      }
       controller!.addListener(refresh);
       setState(() {});
     } catch (_) {
@@ -455,7 +553,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                           throw StateError('로그인 필요');
                                         }
                                         return client.storage
-                                            .from('essay-student-questions')
+                                            .from(pdf.bucket)
                                             .download('${pdf.id}.pdf');
                                       },
                                       restorePage: restorePdfPage,
@@ -502,6 +600,21 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         icon: const Icon(Icons.add_photo_alternate_outlined),
                         label: const Text('수식·도표 이미지 첨부'),
                       ),
+                    if (widget.rewriteRun != null)
+                      ExpansionTile(
+                        title: const Text('최초 답안 참고'),
+                        children: [
+                          for (final a
+                              in (widget.rewriteRun!['answers'] as List)
+                                  .cast<Map<String, dynamic>>()
+                                  .where(
+                                    (a) =>
+                                        a['questionId'] ==
+                                        widget.question['dbQuestionId'],
+                                  ))
+                            SelectableText(a['body'] as String),
+                        ],
+                      ),
                     TextField(
                       controller: editor,
                       enabled: !syncBusy,
@@ -519,7 +632,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       ),
                     ),
                     Text(switch (c.draftStatus) {
-                      DraftStatus.saved => '이 기기에 저장했습니다. 다른 기기와 동기화되지 않습니다.',
+                      DraftStatus.saved => draft.syncNotice ?? '이 기기에 저장했습니다.',
                       DraftStatus.saving => '저장 중…',
                       DraftStatus.failed => '저장하지 못했어요. 답안을 복사해 보관해 주세요.',
                       DraftStatus.conflict => '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
@@ -574,7 +687,28 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       ),
                   ],
                   const SizedBox(height: 20),
-                  const FilledButton(onPressed: null, child: Text('첨삭 준비 중')),
+                  FilledButton(
+                    onPressed: () async {
+                      await c.save();
+                      if (!context.mounted ||
+                          c.dirty ||
+                          imageSaving ||
+                          imageDirty) {
+                        return;
+                      }
+                      await showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (_) => ExamAnswerReview(
+                          owner: widget.owner,
+                          exam: widget.exam,
+                          currentQuestion: widget.question['key'] as String,
+                          rewriteRun: widget.rewriteRun,
+                        ),
+                      );
+                    },
+                    child: const Text('답안 확인 · 첨삭 요청'),
+                  ),
                 ],
               ),
       ),
@@ -585,10 +719,12 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
 class _ExamSubmit extends ConsumerStatefulWidget {
   const _ExamSubmit({
     super.key,
+    this.rewriteRun,
     required this.owner,
     required this.exam,
     required this.included,
   });
+  final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
@@ -597,9 +733,53 @@ class _ExamSubmit extends ConsumerStatefulWidget {
 }
 
 class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
-  bool ready = false, busy = false;
+  bool ready = false, busy = false, polling = false, eligibilityLoaded = false;
   String notice = '';
   String? parentId;
+  String? submittedRun;
+  Timer? statusPoll;
+  int polls = 0;
+  @override
+  void dispose() {
+    statusPoll?.cancel();
+    super.dispose();
+  }
+
+  Future<void> pollStatus() async {
+    if (polling) return;
+    statusPoll?.cancel();
+    final client = ref.read(supabaseClientProvider);
+    if (client == null || submittedRun == null || !mounted) return;
+    polling = true;
+    try {
+      final rows = await SharedEssayHistory(
+        client,
+        widget.owner,
+      ).examRuns(submittedRun);
+      if (!mounted || rows.length != 1) return;
+      final state = rows.single['state'];
+      setState(
+        () => notice = switch (state) {
+          'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
+          'failed' => '첨삭을 완료하지 못했어요. 기록에서 처리 상태를 확인해 주세요.',
+          _ => '첨삭 중입니다. 화면을 닫아도 제출 기록은 유지됩니다.',
+        },
+      );
+      if (state == 'completed' || state == 'failed') {
+        ref.invalidate(sharedEssayHistoryProvider(widget.owner));
+        ref.invalidate(creditBalanceProvider);
+        return;
+      }
+    } catch (_) {
+      if (mounted) setState(() => notice = '처리 상태를 확인하지 못했어요. 제출 기록은 보존됩니다.');
+    } finally {
+      polling = false;
+    }
+    if (mounted && ++polls < 100) {
+      statusPoll = Timer(const Duration(seconds: 3), pollStatus);
+    }
+  }
+
   List<Map<String, dynamic>> rewrites = [];
   SourceDraftGateway get pending => SourceDraftGateway(
     widget.owner,
@@ -608,6 +788,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   @override
   void initState() {
     super.initState();
+    parentId = widget.rewriteRun?['id'] as String?;
     unawaited(check());
   }
 
@@ -623,9 +804,14 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         'examId': widget.exam['dbExamId'],
       });
       if (mounted) setState(() => ready = result?['ready'] == true);
+    } catch (_) {
+      // Availability failure leaves execution closed, but must not hide eligibility.
+    }
+    try {
       final client = ref.read(supabaseClientProvider);
       if (client != null) {
         final rows = await SharedEssayHistory(client, widget.owner).examRuns();
+        if (mounted) setState(() => eligibilityLoaded = true);
         if (mounted) {
           setState(
             () => rewrites = rows
@@ -671,6 +857,41 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           'revision': draft.revision,
         });
       }
+      if (!mounted) return;
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('제출할 답안 확인'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  parentId == null
+                      ? '선택한 ${answers.length}개 문항 · 최초 첨삭 1 Credit'
+                      : '동일 문항 집합 · 무료 재첨삭 자격은 서버에서 확인합니다.',
+                ),
+                for (var i = 0; i < answers.length; i++) ...[
+                  Text(selected[i]['label'] as String),
+                  Text(answers[i]['body'] as String),
+                ],
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('계속 작성'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('첨삭 요청'),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return;
       final fingerprint = jsonEncode({
         'parentId': parentId,
         'examId': widget.exam['dbExamId'],
@@ -701,7 +922,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         throw StateError('제출 상태를 확인하지 못했어요. 같은 답안으로 다시 확인해 주세요.');
       }
       if (mounted) {
-        setState(() => notice = '답안을 제출했어요. 나의 첨삭 기록에서 결과를 확인해 주세요.');
+        setState(() {
+          submittedRun = result!['runId'] as String;
+          notice = '답안을 제출했어요. 처리 상태를 확인합니다.';
+        });
+        unawaited(pollStatus());
       }
     } catch (error) {
       if (error is ExamSubmissionRejected) {
@@ -728,7 +953,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      if (rewrites.isNotEmpty)
+      if (widget.rewriteRun == null && rewrites.isNotEmpty)
         DropdownButtonFormField<String>(
           initialValue: parentId ?? '',
           decoration: const InputDecoration(labelText: '제출 방식'),
@@ -742,26 +967,42 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                 ),
               ),
           ],
-          onChanged: busy
+          onChanged: busy || submittedRun != null
               ? null
               : (v) => setState(() {
                   parentId = v == '' ? null : v;
                   notice = '';
                 }),
         ),
+      const CreditBalanceCard(compact: true),
       if (parentId != null)
         const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
+      if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
-        onPressed: ready && !busy ? submit : null,
+        onPressed:
+            ready &&
+                submittedRun == null &&
+                !busy &&
+                (parentId == null || rewrites.any((r) => r['id'] == parentId))
+            ? submit
+            : null,
         child: Text(
           busy
               ? '처리 중…'
               : ready
               ? '답안 제출'
-              : '첨삭 준비 중',
+              : '첨삭 실행 대기',
         ),
       ),
+      if (parentId != null &&
+          eligibilityLoaded &&
+          !rewrites.any((r) => r['id'] == parentId))
+        const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
+      if (parentId != null && !eligibilityLoaded)
+        const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
       if (notice.isNotEmpty) Text(notice),
+      if (submittedRun != null)
+        TextButton(onPressed: pollStatus, child: const Text('처리 상태 새로고침')),
       if (notice.isNotEmpty)
         TextButton(
           onPressed: () => Navigator.of(context).push(
@@ -772,5 +1013,69 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           child: const Text('나의 첨삭 기록'),
         ),
     ],
+  );
+}
+
+/// Review the existing per-question drafts before using the same exam submission API.
+class ExamAnswerReview extends StatefulWidget {
+  const ExamAnswerReview({
+    super.key,
+    required this.owner,
+    required this.exam,
+    required this.currentQuestion,
+    this.rewriteRun,
+  });
+  final String owner, currentQuestion;
+  final Map<String, dynamic> exam;
+  final Map<String, dynamic>? rewriteRun;
+  @override
+  State<ExamAnswerReview> createState() => _ExamAnswerReviewState();
+}
+
+class _ExamAnswerReviewState extends State<ExamAnswerReview> {
+  late final Set<String> selected = widget.rewriteRun == null
+      ? {widget.currentQuestion}
+      : (widget.exam['questions'] as List)
+            .cast<Map<String, dynamic>>()
+            .where(
+              (q) => (widget.rewriteRun!['question_ids'] as List).contains(
+                q['dbQuestionId'],
+              ),
+            )
+            .map((q) => q['key'] as String)
+            .toSet();
+  @override
+  Widget build(BuildContext context) => SafeArea(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
+          for (final q
+              in (widget.exam['questions'] as List)
+                  .cast<Map<String, dynamic>>())
+            CheckboxListTile(
+              title: Text(q['label'] as String),
+              value: selected.contains(q['key']),
+              onChanged: widget.rewriteRun != null
+                  ? null
+                  : (v) => setState(() {
+                      if (v == true) {
+                        selected.add(q['key'] as String);
+                      } else {
+                        selected.remove(q['key']);
+                      }
+                    }),
+            ),
+          _ExamSubmit(
+            owner: widget.owner,
+            exam: widget.exam,
+            included: selected,
+            rewriteRun: widget.rewriteRun,
+          ),
+        ],
+      ),
+    ),
   );
 }

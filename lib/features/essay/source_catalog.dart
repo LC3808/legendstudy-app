@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'university_catalog.dart';
+
 import 'package:http/http.dart' as http;
 
 /// Same source keys as WEB. These are not canonical question UUIDs or billing IDs.
@@ -20,10 +22,16 @@ class SourceCatalog {
         throw const FormatException('Invalid essay catalog');
       }
     }
-    return SourceCatalog(
-      (data['universities'] as List).cast<Map<String, dynamic>>(),
-      exams,
-    );
+    return SourceCatalog([
+      for (final u in essayUniversityCatalog)
+        {
+          ...u,
+          ...?(data['universities'] as List)
+              .cast<Map<String, dynamic>>()
+              .where((r) => r['sourceUniversityId'] == u['sourceUniversityId'])
+              .firstOrNull,
+        },
+    ], exams);
   }
   static Future<SourceCatalog> load({
     String? accessToken,

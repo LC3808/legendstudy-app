@@ -6,8 +6,14 @@ import 'package:pdfrx/pdfrx.dart';
 
 /// Backend-issued, question-only derivative. Never accept a source PDF URL here.
 class QuestionPdfAsset {
-  const QuestionPdfAsset(this.id, this.hash, this.pages, this.startPage);
-  final String id, hash;
+  const QuestionPdfAsset(
+    this.id,
+    this.hash,
+    this.pages,
+    this.startPage, {
+    this.bucket = 'essay-student-questions',
+  });
+  final String id, hash, bucket;
   final int pages, startPage;
   static QuestionPdfAsset? parse(dynamic value, String questionId) {
     if (questionId.isEmpty ||
@@ -24,6 +30,16 @@ class QuestionPdfAsset {
         value['startPage'] is! int) {
       return null;
     }
+    final bucket = value['bucket'] ?? 'essay-student-questions';
+    // Exact approved question-only source; never expose other original materials.
+    if (bucket != 'essay-student-questions' &&
+        !(bucket == 'essay-material-originals' &&
+            questionId == '4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde' &&
+            value['assetId'] ==
+                '4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b' &&
+            value['sha256'] == value['assetId'])) {
+      return null;
+    }
     final pages = value['pageCount'] as int, start = value['startPage'] as int;
     if (pages < 1 || pages > 3000 || start < 1 || start > pages) return null;
     return QuestionPdfAsset(
@@ -31,6 +47,7 @@ class QuestionPdfAsset {
       value['sha256'] as String,
       pages,
       start,
+      bucket: bucket as String,
     );
   }
 

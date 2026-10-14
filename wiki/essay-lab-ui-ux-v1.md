@@ -330,3 +330,47 @@ no answer telemetry; (7) no derived growth stored or invented.
 IAP live connection is NOT ready yet: worker/reviewer/evidence assembly, quality/privacy/retention
 and full learning-loop E2E remain before purchase integration. Production published question/criterion
 readiness and real-device acceptance remain rollout gates. Real student traffic stays NO.
+
+## Approved Native operating data connection — 2026-10-14
+
+Status: IMPLEMENTED / LOCAL_VALIDATED; OWNER_DEVICE_ACCEPTANCE_PENDING. P1 shared
+photo Draft remains PARTIAL. This connects the existing approved design, not a new design.
+
+- `EssayResultView` reused for actual humanities exam History; Math retains its
+  existing view. Adapter changes display whitespace/short headings only; full labels,
+  feedback, answer evidence and actual next actions preserved. No invented example,
+  score, or growth claim. Details collapsed; same cards/stars/overview.
+- Header uses canonical catalog metadata and actual question/date. History groups
+  explicit parent IDs only; independent attempts at the same exam remain separate.
+- Existing comparison: saved Hanyang initial/rewrite, utilitarian3→4, four unchanged.
+  Resolved-feedback reasons come from stored previous_improvement_reviews.
+- Explicit `나의 첨삭 기록`; writer saves before review, selected bundle confirmation,
+  existing idempotent API and read-only status polling. Public HOLD is not bypassed.
+- `다시 써보기` reads original from existing History RPC, fills empty Draft only,
+  protects ongoing edits, locks original question set and reads server eligibility.
+  No client billing or automatic new paid fallback.
+- 42 university display records generated from existing LAB catalog and priority22
+  through tool/essay_ux/export_catalog.mjs; no duplicate exam/question records.
+  Existing validation-only Math selector removed from ordinary entry, routes/engine kept.
+- Native pdfrx, image-first input and local image save/delete/restore remain.
+  PDF original-bucket exception permits ONLY the previously approved Hanyang question
+  UUID/hash; all other originals denied. No Storage permissions changed.
+- Server text Draft is existing capability-gated CAS. Hanyang capability is not enabled.
+  Shared WEB/APP source-exam photos remain unconnected: existing Math ownership/upload
+  contract must not be repurposed without compatible source-question binding.
+
+Validation: focused58 tests PASS with saved actual QA results (no Provider), separate
+rewrite preservation/selection test PASS, Analyze clean, iOS simulator debug build PASS.
+Native390dp at100/200% real-result rendering; writer360dp at100/200% PASS.
+Real result fixture and PNG stay local, outside Git. Optional real-data tests require
+ESSAY_QA_RESULT_PATH and are skipped in CI without private fixture. No new E2E run.
+
+Owner device check on this branch's new build: review account → 논술 LAB → fullCatalog
+and `나의 첨삭 기록` → Hanyang2024 afternoon2 → initial/rewrite. Check identifying
+header, overview/cards/stars/collapsed detail, utilitarian3→4/four unchanged, original
+and revised answers, `다시 써보기`, preserved edits, PDF close/reopen, balance10.
+Do not submit a new evaluation. Final UX approval belongs to Owner physical iPhone.
+
+Rollback: revert this UI connection commit and rebuild APP; no DB rollback, data
+migration, Provider/Package/Prompt change or Credit transaction. Claude release/IAP
+branch and WEB deployment untouched. Public HOLD retained.

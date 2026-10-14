@@ -902,6 +902,8 @@ class EssayResultView extends StatefulWidget {
     required this.comparison,
     required this.onRewrite,
     this.isPreview = true,
+    this.header,
+    this.collapsedDetails = false,
     this.evidenceLabels = const [],
     this.sentenceReview,
     this.evaluationId,
@@ -916,7 +918,9 @@ class EssayResultView extends StatefulWidget {
   final EssayEvaluation evaluation;
   final EssayQuestion question;
   final bool comparison;
-  final VoidCallback onRewrite;
+  final VoidCallback? onRewrite;
+  final Widget? header;
+  final bool collapsedDetails;
   @override
   State<EssayResultView> createState() => _EssayResultViewState();
 }
@@ -1121,7 +1125,7 @@ class _EssayResultViewState extends State<EssayResultView> {
       );
       if (!mounted || proceed == null) return;
       if (!proceed) {
-        widget.onRewrite();
+        widget.onRewrite?.call();
         return;
       }
     }
@@ -1131,7 +1135,7 @@ class _EssayResultViewState extends State<EssayResultView> {
   @override
   Widget build(BuildContext context) {
     final e = widget.evaluation;
-    return ColoredBox(
+    return Material(
       color: const Color(0xFFFFFEFC),
       child: DefaultTextStyle.merge(
         style: const TextStyle(color: _resultInk),
@@ -1151,6 +1155,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                       '아래 내용은 입력한 글의 평가가 아닌 별도로 준비한 표시 예시입니다.',
                       style: AppTokens.caption,
                     ),
+                  if (widget.header != null) widget.header!,
                   _answerOverview(e),
                   if (widget.comparison) ...[
                     if (!e.comparable)
@@ -1193,7 +1198,22 @@ class _EssayResultViewState extends State<EssayResultView> {
                           style: AppTokens.secondary,
                         ),
                         const SizedBox(height: 8),
-                        _diagnosis(d.explanation),
+                        if (widget.collapsedDetails)
+                          ExpansionTile(
+                            title: Text(
+                              d.previousLevel == d.level
+                                  ? '유지 · 평가 설명'
+                                  : '변화 · 평가 설명',
+                            ),
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: _diagnosis(d.explanation),
+                              ),
+                            ],
+                          )
+                        else
+                          _diagnosis(d.explanation),
                         const SizedBox(height: 20),
                       ],
                     ],
@@ -1224,7 +1244,18 @@ class _EssayResultViewState extends State<EssayResultView> {
                               style: AppTokens.caption,
                             ),
                           const SizedBox(height: 8),
-                          _diagnosis(d.explanation),
+                          if (widget.collapsedDetails)
+                            ExpansionTile(
+                              title: const Text('상세 평가'),
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: _diagnosis(d.explanation),
+                                ),
+                              ],
+                            )
+                          else
+                            _diagnosis(d.explanation),
                           const Divider(),
                         ],
                       ),

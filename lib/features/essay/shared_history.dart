@@ -1,3 +1,4 @@
+import 'source_catalog.dart';
 import 'evaluation_report.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,10 +11,18 @@ class SharedEssayRecord {
     required this.id,
     required this.math,
     this.exam = false,
+    this.examData = const {},
     required this.at,
     required this.rewrite,
     required this.evaluations,
   });
+  final Map<String, dynamic> examData;
+  String get title =>
+      examData['university'] as String? ?? (math ? '수리논술' : '논술');
+  String get examLabel =>
+      (examData['displayExam'] as String? ?? examData['title'] as String? ?? '')
+          .replaceAll('admission', '수시 논술')
+          .replaceAll('mock', '모의논술');
   final String id;
   final bool math, rewrite, exam;
   final DateTime at;
@@ -84,6 +93,34 @@ class SharedEssayHistory {
       results[1] as List,
     );
     final exams = await examRuns();
+    SourceCatalog? catalog;
+    if (exams.isNotEmpty) {
+      try {
+        catalog = await SourceCatalog.load(
+          accessToken: client.auth.currentSession?.accessToken,
+        );
+      } catch (_) {
+        /* Stored title is the fallback. */
+      }
+      checkOwner();
+    }
+    Map<String, dynamic> metadata(Map<String, dynamic> r) {
+      final e = catalog?.exams
+          .where((e) => e['dbExamId'] == r['exam_id'])
+          .firstOrNull;
+      return {
+        ...r,
+        if (e != null)
+          'displayExam':
+              '${e['year']}학년도 ${e['kind'] == 'admission'
+                  ? '수시 논술'
+                  : e['kind'] == 'mock'
+                  ? '모의논술'
+                  : e['kind']} · ${e['track']}${e['session'] == null ? '' : ' · ${e['session']}'}',
+        if (e != null) 'questions': e['questions'],
+      };
+    }
+
     final records = [
       ...legacy,
       for (final r in exams)
@@ -91,6 +128,7 @@ class SharedEssayHistory {
           id: r['id'] as String,
           math: false,
           exam: true,
+          examData: metadata(r),
           at: DateTime.parse(r['created_at'] as String),
           rewrite: r['parent_id'] != null,
           evaluations: [
@@ -273,3 +311,20 @@ final sharedEssayHistoryProvider = FutureProvider.autoDispose
       if (client == null) throw StateError('UNAVAILABLE');
       return SharedEssayHistory(client, owner).read();
     });
+
+/// Group only explicit parent lineage; independent submissions never merge by exam.
+List<List<SharedEssayRecord>> groupEssayHistory(List<SharedEssayRecord> rows) {
+  final groups = <String, List<SharedEssayRecord>>{};
+  for (final row in rows) {
+    final root = row.exam
+        ? row.examData['parent_id'] as String? ?? row.id
+        : row.id;
+    groups.putIfAbsent('${row.math}:$root', () => []).add(row);
+  }
+  for (final group in groups.values) {
+    group.sort((a, b) => a.at.compareTo(b.at));
+  }
+  final result = groups.values.toList()
+    ..sort((a, b) => b.last.at.compareTo(a.last.at));
+  return result;
+}

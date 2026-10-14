@@ -1683,3 +1683,38 @@ Published-date search correction is partial; advanced search stream ordering rem
 ## Essay runtime — 2026-10-09
 
 [Activation](../essay-runtime-activation-2026-10-09.md): PARTIAL; canonical component persistence38 SQL PASS, all types GATED.010 BLOCKED_NO_PRIVILEGE; no live provider/auth E2E.005 HELD; Signup frozen.
+
+
+## Daily Sync checkpoint preserved during Oct14 Native UX handoff
+
+## Daily Sync status
+
+Phase1 discovery/delta foundation is complete. Existing A1 bootstrap, recent-delta
+and A3 general controlled apply/activation code are present. Local ignored accepted
+state has26 entries (inspected2026-09-26); no blanket re-observation or state rewrite
+in this task. Historical23-row baseline and earlier pending checkpoints are
+preserved in [history](status-checkpoints.md#pre-recent-ordering-status--2026-09-26).
+Scheduler/broad automation is not authorized by controlled per-post publication.
+
+Pre-pilot public baseline27 includes1710 (Owner apply/device PASS); it must not
+be republished. Foreign-language/Hanmun raw NULL taxonomy gaps remain advisory.
+Accepted state26 still excludes1710; A1 reconciliation is a separate pending task.
+
+[Materials FINAL CLOSEOUT](../materials-final-closeout-2026-09-27.md),2026-09-27:
+full category discovery915 (exam354/essay561). Existing writer added243 exams +127
+essays in37 bounded batches; exact inserts14833. Active441 content /296 exams
+(G1:79/G2:81/G3:136) /135 essays. Public441 search/detail/resources/grade PASS;
+canonical duplicates/collisions0, unrelated mutations0, recent timestamps preserved.
+Partial1474/1447 inactive after1431/1404 activation;2 test recent_views removed,
+original sources/content retained.1432 nominal month corrected5→4. Source343 is
+one real historical identity exception. No schema/migration or new architecture.
+Busan1593 generic PDF resolver deployed; actual HTTP206/PDF signature PASS, latest
+CTA/PDF native device QA PENDING. Owner iOS/onboarding files preserved.
+Owner source rule supersedes registry-as-publication-gate;18 full-set counterparts
+released from52 identity holds,34 partial holds remain. Accepted26/1710 A1 unchanged.
+Essay2020–2025 admission years evidenced independently of source publication years.
+Latest analyze/focused38/Python389/resolver38 PASS; full Flutter855 PASS/1 skip/
+3 baseline failures (badge and load-more expectations); native PostgreSQL25 NOT_RUN.
+Materials is NOT CLOSED until Owner device PASS. Next **Essay LAB P0**, canonical
+model first after separate instruction; then internal-grade, mock-score, admissions.
+[Canonical handoff](../materials-closeout-essay-lab-handoff.md). No further audit/backfill.
