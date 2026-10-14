@@ -3656,3 +3656,18 @@ applies the original files faithfully; (B) the Owner runs a short reviewed scrip
 each file FROM DISK to the Management API query endpoint under their own session, stop-on-error, then
 shares results; (C) enable the IPv4 add-on so `db push` direct works. Small files alone are emittable,
 but the 973-line #27 (required first) makes hand-application via MCP non-viable.
+
+## 2026-10-14 — Consolidated #27–42 SQL prepared for the TEST SQL Editor (Claude)
+
+Resolved the impasse with a supported, disk-faithful path: a single consolidated SQL file
+`supabase/verification/iap/consolidated_27-42_TEST.sql` the Owner runs ONCE in the TEST project's
+Supabase SQL Editor (which runs as session_user=postgres, so the #27–30 reset-role bridges succeed).
+Built FROM DISK (no hand-transcription): verified all 16 canonical files are embedded byte-identical and
+in order. Not a raw concat — it adds a pre-flight guard (baseline must be exactly 26 incl. #26, and
+#27–42 must be absent → duplicate-run prevention), keeps each migration's own begin/commit (temp
+tables / set local / reset role depend on it), records each version into schema_migrations only AFTER
+that migration commits (so a failed migration is never recorded and execution stops at the first error,
+earlier ones staying applied+recorded), and a post-flight 42-count check. A single file is safe because
+PostgreSQL's simple-query protocol honours the explicit per-file transactions, and each #27–30 resets
+role before its commit. On partial failure the Owner reports the stop point and I issue a resume script.
+Owner runs after approval; nothing applied yet; production and the canonical files untouched.
