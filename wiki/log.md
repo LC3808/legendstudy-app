@@ -3723,3 +3723,44 @@ model access, live model quality, signed live review or charged/free E2E. Actual
 Provider/Credit remain NOT_RUN; public HOLD. Next is separately approved bounded
 initial evaluation + free reevaluation on the existing allowlisted account. No more
 Secret input is currently needed. Screenshot local /private/tmp/essay-runtime-admission-pass.png.
+
+### Oct14 first paid E2E — operating WEB PASS; overall service PARTIAL
+
+Owner approved one initial submission, at most2 Provider calls/$2, 1Credit and same-run
+recovery. review@legendstudy.com submitted one 1152-character QA-generated text answer
+for Hanyang2024 admission humanities afternoon2, Package17, question
+4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde. Package digest:
+40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae.
+Run5b636cda-9915-42e1-b209-9934c7c0fcb1 completed at2026-10-14T08:30:54.827523Z
+(17:30:54KST), submitted08:29:19Z. No schema/RLS/Registry change.
+
+Actual OpenAI requests2: evaluator12934 input/2552 output tokens,31954ms;
+independent review12546 input/3984 output tokens,52044ms. All8 independent checks
+passed; signed review, reviewed output and final checkpoints persisted. No retry or
+recovery transaction was required. Price-based estimate$0.23264 using input$4/output$20
+per million (https://developers.openai.com/api/docs/models/gpt-5.6-sol); Provider
+cost_amount is null, so this is NOT an invoiced cost or proven billing amount.
+Ledger exactly reserve(0,+1), consume(-1,-1); available11→10, reserved0.
+Existing History and result UI visibly show completed initial evaluation, summary,
+strengths, five criteria/star ratings and improvement advice; screenshot local
+/private/tmp/essay-first-e2e-result.png. Actual browser, not mock/build-only proof.
+
+LAB093d417 adds server-only ESSAY_E2E_SCOPE pinning account/exam/request key and
+rejecting parent runs;9 focused tests, typecheck, targeted lint and build PASS.
+Request key b21dabf9-2d51-4446-9e0e-c2d6b4dc3796 retained to prevent another run.
+Pages partial-variable PATCH initially blocked by automatic approval review; confirmed
+official API null-only deletion and Wrangler single-key PATCH implementation, then
+review permitted update. Before/after unrelated bindings identical; no secret values
+printed, round-tripped or committed. Math/Payment/IAP/allowlists unchanged.
+
+Both actual gates restored OFF: Pages deployment991b59fd-78a9-4a4f-a9f0-bd6b9d206993,
+Worker version21c5dc83-ebcf-4962-b753-73d878a19c06. Metadata verified false on active
+Pages deployment and Worker. Public HOLD remains. No extra Owner action for this run.
+
+Remaining: separately approved free reevaluation E2E, native APP result consistency,
+real failure recovery exercise and QA review. They are NOT claimed PASS by this run.
+Observed UI follow-ups: repeated university in History title/raw admission label,
+long criterion headings, formal rather than consistently teacher-style feedback,
+and no linked evidence displayed in existing result UX. Do not confuse successful
+runtime flow with full pedagogical/product acceptance. Preserve stored Package/output.
+
