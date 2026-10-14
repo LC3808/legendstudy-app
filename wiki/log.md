@@ -1,5 +1,12 @@
 # Development Log
 
+## 2026-10-14 — Actual Worker HTTP and disabled API preparation
+
+Cloudflare→Supabase Registry200/234 verified with existing allowed Chrome account.
+Non-superuser/lifecycle API installation and Ledger integration PASS locally; formal
+SQL approval requested, no production apply/trade. Existing runtime host transport
+implemented; private deployment/reviewer and real E2E still pending.
+
 ## 2026-10-14 — Reviewed material to durable exam execution
 
 Connected pinned material and frozen exam claims to existing ReviewedRuntimeWorker;

@@ -1,7 +1,7 @@
 """Local API surface integration atop real canonical Ledger schema.
 Lifecycle/Package lookups use explicit synthetic fixtures, not production evidence.
 """
-import json,uuid,tempfile,time
+import json,uuid,tempfile,time,re
 from .material_runtime import NS, ReservedExamRuntime
 from .durable_journal import DurableJournal
 from .reviewed_runtime import reviewed_openai
@@ -12,14 +12,27 @@ from tool.test_essay_live_worker import receipt
 def cases(sql, root, user, account, exam, question):
     def literal(v):return "'"+json.dumps(v,ensure_ascii=False).replace("'","''")+"'::jsonb"
     sql((root/'supabase/candidates/essay_exam_unit/provider-policy.sql').read_text())
-    sql("create schema math_private;create function math_private.require_active(uuid[]) returns void language plpgsql as $$begin if $1 is null or $1[1] is null or current_setting('fixture.blocked',true)='true' or not exists(select 1 from auth.users where id=$1[1]) then raise insufficient_privilege;end if;end$$;")
+    # Use the real deployed lifecycle bodies, including subject advisory locking.
+    # The deletion table below is a local fixture; no deletion worker is run.
+    sql("create schema math_private;create schema account_private;create table public.account_deletion_requests(subject_id uuid,state text);")
+    lifecycle=(root/'supabase/migrations/20261001000300_account_deletion_lifecycle.sql').read_text()
+    math=(root/'supabase/migrations/20261002000100_math_essay_persistence.sql').read_text()
+    for name, source in [('account_private.lock_subject',lifecycle),('account_private.allowed',lifecycle),('math_private.require_active',math)]:
+        match=re.search(r'create (?:or replace )?function '+re.escape(name)+r'\(.*?\$(?:math_fn)?\$;',source,re.S|re.I)
+        assert match, name
+        sql(match.group(0))
+    # Match the verified production deployer: NOSUPERUSER+BYPASSRLS; it cannot
+    # execute essay_executor's private hash helper. Do not mask ownership failures.
+    sql("grant select,insert,update,delete,references,trigger on all tables in schema public to postgres;alter role postgres nosuperuser bypassrls;")
+    assert sql("select has_function_privilege('postgres','essay_private.hash(text)','EXECUTE')")=='f'
+
     pkg=dict(university_id=sql(f"select university_id from public.essay_exams where id='{exam}'"),package_version=16,package_digest='f'*64,exam_identity={'track':'humanities'},questions=[{'question_id':question}])
     pkg.update(schema='essay-material-package-v1',verification_status='VERIFIED_MANIFEST',exam_id=exam,rights_status={'a'*64:{'providerTransmission':'APPROVED'}},exam_identity=dict(academic_year=2025,exam_type='mock',track='humanities',title='Fixture'))
     pkg['questions'][0].update(source_key='source:fixture',source_page_references=[dict(questionId=question,sourceHash='a'*64,role=role,startPage=1,endPage=1,evidenceText='Synthetic '+role,verification='VERIFIED') for role in ('question','shared_passage','intent','criteria')])
     sql(f"create function public.essay_material_runtime_package(p_exam uuid,p_digest text) returns jsonb language sql as $$select {literal(pkg)}$$;")
     sql((root/'supabase/candidates/essay_exam_unit/api.sql').read_text())
     binding=dict(policy_version='fixture-v1',provider='openai',model='fixture',model_version='fixture',prompt_version=PROMPT_VERSION,contract_version='1.3')
-    regime='essay-v1.3/policy/'+sql(f"select essay_private.hash(({literal(binding)})::text)")
+    regime='essay-v1.3/policy/'+sql(f"select encode(sha256(convert_to(({literal(binding)})::text,'UTF8')),'hex')")
     sql(f"create or replace function essay_private.provider_policy(p_regime text) returns jsonb language sql immutable as $$select {literal(binding)}$$;")
     policy=dict(evaluation_type='humanities',regime=regime,package_digest='f'*64)
     answer=[dict(questionId=question,body='Synthetic answer',revision=1)]
@@ -30,7 +43,9 @@ def cases(sql, root, user, account, exam, question):
     sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(policy)}$$;")
     for role in ('authenticated','anon','service_role'):
         sql(submit(role=role),'permission denied')
-    sql(submit(extra="set fixture.blocked='true';"),'insufficient_privilege')
+    sql(f"insert into public.account_deletion_requests values('{user}','DELETION_PENDING')")
+    sql(submit(),'ACCOUNT_RESTRICTED')
+    sql(f"delete from public.account_deletion_requests where subject_id='{user}'")
     initial=sql(submit());assert sql(submit())==initial
     dispatch=str(uuid.uuid5(NS,'dispatch/'+user+'/'+initial))
     assert sql(f"select sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='1'
@@ -98,4 +113,10 @@ def cases(sql, root, user, account, exam, question):
     assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
     sql(rollback)
     assert sql("select count(*) from public.credit_transactions")!='0'
+    formal=(root/'supabase/migrations/20261014023133_essay_exam_operating_api.sql').read_text()
+    sql(formal)
+    sql(formal,'EXAM_API_ALREADY_INSTALLED_OR_DRIFT')
+    assert sql("select count(*) from essay_exam_private.runs")=='0'
+    assert sql(f"select essay_exam_private.runtime_policy('{exam}') is null")=='t'
+    sql(rollback)
     print('PASS: full local Package -> Provider adapter(fake transport) -> Ledger -> History; worker-only submit/claim/finish, owner-isolated shared History, 1 Credit, included rewrite, exact replay, lease fencing, receipt redaction, erasure preserves Ledger. Synthetic local fixtures only.')

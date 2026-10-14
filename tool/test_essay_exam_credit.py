@@ -2,7 +2,7 @@
 """Disposable PostgreSQL test of exam billing candidate, real legacy ledger DDL.
 Synthetic records only. No remote connection argument or provider transport.
 """
-import argparse, ast, concurrent.futures, json, os, subprocess, tempfile, uuid
+import argparse, ast, concurrent.futures, json, os, re, subprocess, tempfile, uuid
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 C=R/'supabase/candidates/essay_exam_unit'
@@ -16,11 +16,12 @@ def main():
  checks=[]
  with tempfile.TemporaryDirectory(prefix='essay-exam-credit-',dir='/private/tmp') as td:
   root=Path(td);sock=root/'socket';sock.mkdir();data=root/'db';started=False
-  p=run([args.pg_bin/'initdb','-D',data,'-U','postgres','--auth=trust','--no-locale','--encoding=UTF8']);assert p.returncode==0,p.stderr
+  p=run([args.pg_bin/'initdb','-D',data,'-U','local_admin','--auth=trust','--no-locale','--encoding=UTF8']);assert p.returncode==0,p.stderr
   try:
    p=run([args.pg_bin/'pg_ctl','-D',data,'-l',root/'server.log','-o',f"-k {sock} -p 5432 -c listen_addresses=''",'-w','start']);assert p.returncode==0,p.stderr;started=True
+   bootstrap=run([args.pg_bin/'psql','-X','-qAt','-v','ON_ERROR_STOP=1','-h',sock,'-U','local_admin','-d','postgres'],input='create role postgres login superuser createdb createrole bypassrls;alter database postgres owner to postgres;');assert bootstrap.returncode==0,bootstrap.stderr
    def sql(s,error=None):
-    p=run([args.pg_bin/'psql','-X','-qAt','-v','ON_ERROR_STOP=1','-h',sock,'-U','postgres','-d','postgres'],input=s)
+    p=run([args.pg_bin/'psql','-X','-qAt','-v','ON_ERROR_STOP=1','-h',sock,'-U','local_admin' if re.search(r'(?:^|;)\s*set role ',s,re.I) else 'postgres','-d','postgres'],input=s)
     if error:assert p.returncode!=0 and error in p.stderr,(error,p.stderr);return p.stderr
     assert p.returncode==0,p.stderr
     return p.stdout.strip()

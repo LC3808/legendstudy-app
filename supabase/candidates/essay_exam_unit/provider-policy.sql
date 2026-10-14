@@ -14,7 +14,7 @@ begin
   if jsonb_typeof(b->k) is distinct from 'string' or not ((b->>k) ~ '^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,159}$') then return false;end if;
  end loop;
  if b->>'provider'='unconfigured' or b->>'model'='unconfigured' then return false;end if;
- return coalesce(p_regime='essay-v1.3/policy/'||essay_private.hash(b::text),false);
+ return coalesce(p_regime='essay-v1.3/policy/'||pg_catalog.encode(pg_catalog.sha256(pg_catalog.convert_to(b::text,'UTF8')),'hex'),false);
 end$$;
 
 

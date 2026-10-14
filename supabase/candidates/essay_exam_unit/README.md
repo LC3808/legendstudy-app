@@ -1,3 +1,11 @@
+# Latest Oct14 status
+
+The disabled API subset is now formal SQL20261014023133, tested under the verified
+NOSUPERUSER+BYPASSRLS deployment context with actual lifecycle function bodies.
+See [approval review](../../reviews/essay-exam-operating-api/README.md).
+It is NOT applied or activated. Historical candidate notes below remain for context;
+covered ownership/lifecycle-body gaps are superseded, not actual service E2E.
+
 # Exam-unit atomic billing candidate — NOT DEPLOYABLE
 
 Oct12 continuation of the existing LAB `exam-unit.ts` contract and storage

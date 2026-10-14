@@ -1,24 +1,25 @@
 # Current Status
 
-## Oct14 operating essay connection — PARTIAL
+## Oct14 operating essay connection — HTTP VERIFIED / E2E PENDING
 
-Existing Package→ReviewedRuntimeWorker 44-test acceptance is preserved. New local
-submission/lease/settlement API composes that runtime with existing Ledger; real
-local PostgreSQL validates one Credit, free same-set rewrite, replay, owner History,
-telemetry persistence/redaction and erasure retaining Ledger. Provider is FAKE.
-WEB and Native submit/rewrite controls and existing report/History adapters share
-this API. Production flag stays OFF; no actual Provider/Credit E2E or deployment.
+Cloudflare→Supabase essay_worker HTTP read returned **200 /234** using the existing
+allowlisted Chrome account (11:35KST). The IAB administrator session was not that
+account; no Math configuration/allowlist/Secret change was needed. Production WEB
+b16867e deployed as f247776b; exam submit remains OFF and balance11 unchanged.
 
-Production read-only: Package16 VERIFIED, rights empty; Provider policy/telemetry/exam API absent. Owner-approved Worker role switching
-applied as20261014020622: SET-only, SQL Registry read234 PASS. JWT HTTP E2E pending. Broader exam SQL remains a candidate pending production lifecycle/owner
-integration and admin QA. Private host/reviewer deployment and source transmission
-approval remain blockers. No Secret exposure or Provider/Credit transaction.
+Formal disabled exam API SQL is ready for Owner approval:
+[impact/test/rollback](../supabase/reviews/essay-exam-operating-api/README.md).
+Actual non-superuser/BYPASSRLS PostgreSQL ownership and real lifecycle function
+bodies now tested; private hash ACL incompatibility fixed without extending grants.
+Local first1Credit/free rewrite/replay/history/erasure and formal SQL installation,
+repeat refusal/empty rollback PASS; Provider transport remains fake.
 
-Checks: WEB targeted tests/typecheck/lint; Native result fixture and analyze (see
-feature log for final outcomes/build limitations). Public HOLD; Math/Toss/IAP and
-Owner-PASS PDF/admin UI unchanged. See [runtime completion](essay-runtime-completion.md)
-and [API candidate](../supabase/candidates/essay_exam_unit/README.md) for exact state.
-Earlier Catalog/materials handoffs moved to the same runtime document, not discarded.
+Existing ReviewedRuntimeWorker now has a concrete Auth/worker HTTP host composition.
+Private host/reviewer deployment, approved Provider/model/material transmission,
+old-version Package retrieval, admin QA projection and real Provider/Credit E2E
+remain incomplete. No new SQL, actual Provider or Credit trade this continuation.
+WEB/Native result adapters preserve approved UX; public HOLD, Math/Toss/IAP unchanged.
+See [runtime completion](essay-runtime-completion.md) for details.
 
 ## Shared MY foundation — 2026-10-08
 
