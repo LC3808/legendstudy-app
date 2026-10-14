@@ -3556,3 +3556,22 @@ So Option A can't run from here. Owner choices recorded: run the direct push fro
 machine with the password at the prompt; or enable IPv6 + secure password here; or authorize Option B
 (management API, session_user=postgres, IPv4, no password). Production untouched; test DB unchanged
 (25/42); no deploy/secret/push.
+
+## 2026-10-14 — Option B: #26 applied to TEST, but history version MISMATCH — halted (Claude)
+
+Owner approved Option B (management API, #26 only). Pre-state verified to match #26's strict guards
+exactly (current_user=postgres; essay_executor 1 member postgres/supabase_admin/admin/no-inherit/no-set;
+no schema CREATE; function ACLs; account_private absent). First apply attempt failed on a self-inflicted
+inline transcription omission (dropped the `state` column) → atomic rollback, no partial. Re-verified the
+exact SQL via a scratch copy diff (sha256 38c86fd7…, byte-identical) and re-applied: `apply_migration`
+returned success → all the migration's fail-closed ADR-2D assertions passed, so the DDL is faithfully
+applied (account_deletion_requests + account_private + 24 account_* RPCs + 25 restrictive RLS policies +
+2 finance triggers; ADR-2D bridge fully reverted — essay_executor back to its single supabase_admin
+membership, no residual CREATE). **BUT** the management API recorded the history row as
+`version='20261014024438'` (a fresh timestamp) with `name='20261001000300_account_deletion_lifecycle'`,
+NOT the canonical `version='20261001000300'`. `supabase migration list` therefore does NOT recognize #26
+(local `20261001000300` shows unapplied; remote `20261014024438` unmatched). Per the Owner rule
+(stop on history-format mismatch) this is HALTED — no correction, no #27–42, no deploy. Proposed fix
+(needs approval; equivalent to the forbidden `migration repair`): set that row's version to
+`20261001000300` and name to `account_deletion_lifecycle`. Totals: 26 records, previous 25 preserved.
+Production untouched; no deploy/secret/push.
