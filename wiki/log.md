@@ -3764,3 +3764,39 @@ long criterion headings, formal rather than consistently teacher-style feedback,
 and no linked evidence displayed in existing result UX. Do not confuse successful
 runtime flow with full pedagogical/product acceptance. Preserve stored Package/output.
 
+
+### Oct14 free rewrite preparation — not executed
+
+Owner requests existing first result WEB/APP consistency before one free rewrite.
+Initial run5b636cda-9915-42e1-b209-9934c7c0fcb1 remains completed; no child runs.
+Free window ends2026-10-28 17:30:54KST. Same question/Package17 pinned.
+Prepared1174-character revised QA answer (revision2) explicitly defines net pleasure
+and states the justification's advantage; preserves original contract analysis and
+rights criticism. Private local /private/tmp/essay-free-rewrite-answer.txt; not yet
+submitted and not written over the original stored answer.
+
+WEB first-result display was operating-verified in prior E2E; actual DB result
+re-read unchanged. Native code uses the same essay_exam_history RPC and existing
+EvaluationReportView. iOS simulator build PASS (56.5s Xcode), installed onto existing
+iPhone17Pro AEC17AF7-4950-4B41-9520-45A60BB7C918 without erasing app data.
+Native actual authenticated UI/result equality is NOT verified: computer-use opening
+Simulator/Xcode failed/timed out. Owner must open Simulator, launch LegendStudy+,
+login review@legendstudy.com and check latest essay History; never send password/JWT.
+Do not relabel shared RPC implementation or successful build as native live PASS.
+
+Pages scope code now optionally pins parentId, keeps initial scope rejecting rewrites,
+and rejects new-paid submissions/wrong parents in rewrite scope. Fixed server request
+key still prevents an additional run. Eleven focused tests/typecheck/targeted lint
+PASS. Not activated or deployed in this preparation; existing production gates OFF.
+No Prompt/Schema/result UX, DB schema, Ledger or Math/Payment/IAP changes.
+
+Proposed approval: same account/exam/question/Package, first run as parent, one revised
+answer; evaluator1 + independent reviewer1 (max2 calls), estimated$0.25–$0.80, cap$2.
+Existing included_revision billing decision uses0Credit; no paid fallback, balance10
+must remain10. Verify child-parent History, unchanged first result, duplicate free-use
+rejection (no extra Provider), WEB/APP display. No migration. Temporarily enable exact
+scope only after approval and native initial-result check; close Pages then Worker OFF.
+Unknown outcome: same-run checkpoints only, no fresh Provider retry; included attempt
+failure recovery uses existing finish, no manual Ledger edits. Actual rewrite execution
+awaits separate Owner approval. Public HOLD remains.
+
