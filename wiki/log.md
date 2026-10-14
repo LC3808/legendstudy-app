@@ -3575,3 +3575,24 @@ NOT the canonical `version='20261001000300'`. `supabase migration list` therefor
 (needs approval; equivalent to the forbidden `migration repair`): set that row's version to
 `20261001000300` and name to `account_deletion_lifecycle`. Totals: 26 records, previous 25 preserved.
 Production untouched; no deploy/secret/push.
+
+## 2026-10-14 — #26 history corrected; #27–42 application strategy (READ-ONLY) (Claude)
+
+Owner approved the single #26 history correction. Ran a guarded transactional UPDATE on TEST only
+(precondition: exactly 1 row `version=20261014024438`, 0 rows `20261001000300`, else abort): set
+`version=20261001000300`, `name=account_deletion_lifecycle`. Verified: 26 records, first 25 versions
+unchanged, #26 now canonical (timestamp row gone), #26 DDL objects/permissions intact, and
+`supabase migration list` now shows #26 `local==remote` (recognized). Production untouched.
+
+READ-ONLY study of #27–42 (no apply): all 16 are atomically applicable (14 carry explicit
+`begin;/commit;`, the other 2 are tool-wrapped) → a failure rolls back fully, no partial state.
+**#27–#30 (`math_essay_persistence`, `math_runtime_surface`, `math_learning_runtime`,
+`payment_foundation`) use the same `reset role`/`granted by` privilege-bridge as #26, and 5 files assert
+`current_user='postgres'`**, so they require `session_user=postgres` to apply (a pooler `db push` would
+fail on them exactly as #26 did). The management API (`apply_migration`) runs as postgres so the DDL
+applies, but it auto-assigns a timestamp version → it would need a history correction on every one of
+the 16 (the repeated-error pattern the Owner wants to avoid). **Recommended: apply #27–42 via Option A —
+direct `postgres` `db push`** (Owner runs it, or enable Supabase IPv4 add-on / provide IPv6+password):
+it is both privilege-correct (session=postgres for the bridges) and history-native (canonical versions,
+no corrections). Fallback if Option A stays infeasible: `apply_migration` for the 16 then ONE batched
+guarded version-correction. No #27–42 applied; no deploy/secret/push; production untouched.
