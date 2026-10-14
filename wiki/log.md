@@ -3661,3 +3661,5 @@ apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
 - Oct14 host P0: confirmed Pages lacks host origin/binding/token; Registry JWT retained. Existing runtime admission-only execution guard implemented,13 local tests PASS. Host reuse question pending; exact configuration runbook added. Operating host/provider/Credit not exercised.
 
 - Oct14 Owner A: no Linux host; shared evaluator async I/O, Cloudflare consumer entry and Supabase checkpoint candidate implemented. Local DB race/replay/credit/history/erasure +16 unit checks and workerd startup PASS. Operating settings/DB/provider unchanged; review service/deployment/policy/E2E pending.
+
+- Cloudflare local queue smoke: fixture Auth/consumer, HTTP202 → queue1/1 ACK; native send/handler context compatibility fixed. No Provider/Credit or operating connection claim.

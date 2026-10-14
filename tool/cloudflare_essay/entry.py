@@ -67,7 +67,7 @@ class Default(WorkerEntrypoint):
         except Exception:
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
 
-    async def queue(self,batch):
+    async def queue(self,batch,*_context):
         for message in batch.messages:
             try:
                 t=self.transport();runtime=self.configuration(t)

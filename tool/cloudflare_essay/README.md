@@ -56,6 +56,9 @@ supported by the tested workerd binary (2026-10-14 was rejected). No remote flag
 - Actual LOCAL workerd startup imports the runtime, binds local queue, and POST
   without service credential returns503 before network. This is Cloudflare local
   execution, NOT operating Provider/HTTP E2E.
+- Actual LOCAL queue smoke (fixture Auth/consumer only): POST202 → queue1/1 ACK.
+  Found/fixed native binding positional send and SDK handler context arguments.
+  No production Auth/DB/Provider/Credit in this check.
 - No production SQL/Provider/Credit/Cloudflare setting changed in this phase.
 
 ## Operating prerequisites / exact Owner actions
