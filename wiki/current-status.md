@@ -1,5 +1,27 @@
 # Current Status
 
+### 2026-10-14 — Owner iPhone 실기기 검증 및 UX 후속 과제
+
+Owner가 iPhone 실기기에서 직접 확인한 결과: review 계정 로그인, Supabase 연결,
+Credit 잔액 10, 논술 LAB 진입, 한양대 2024 수시 인문계열 시험 조회,
+나의 첨삭 기록 조회, WEB에서 생성된 기존 실제 AI 첨삭 결과 표시 모두 PASS.
+검증 출처는 Owner 실기기 보고이며 자동화 테스트 결과로 대체 표기하지 않는다.
+
+UX 개선 과제 (기록만, 이번 작업에서는 구현하지 않음):
+- 시계 아이콘만으로 접근하기 어려운 History에 '나의 첨삭 기록' 메뉴 명시.
+- 결과 화면에 대학·학년도·시험 정보 표시.
+- 평가 결과의 긴 텍스트와 과도한 자간 개선.
+- History 목록의 대학·시험별 구분 개선.
+
+무료 재첨삭은 기존 승인 범위에서 이미 완료: run
+`414a207b-2c51-48e6-97ea-2ddf49b77c9e`, 추가 Credit 0, 잔액 10,
+최초·재첨삭 History 보존, 중복 사용 차단, WEB 비교 표시 확인.
+이번 실기기 보고는 기존 결과 조회 PASS이며 재첨삭 결과·3→4 비교 화면까지
+명시적으로 확인한 보고는 아니므로 그 항목은 확인 대기로 구분한다.
+다음 단계는 기존 저장된 재첨삭 결과의 APP 표시·비교 확인 및 Owner 품질 검토.
+완료된 재첨삭을 재실행하거나 추가 Provider 호출·Credit 거래를 하지 않는다.
+실행 OFF 및 일반 사용자 공개 HOLD 유지. 코드·UI·DB·배포 변경 없음.
+
 ### Oct14 20:28 KST — approved free rewrite completed; native rewrite confirmation pending
 
 Owner confirmed the initial result in Native APP and approved one free rewrite
