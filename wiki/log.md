@@ -3653,3 +3653,5 @@ NOBYPASSRLS. Read-only rollback transaction authenticator→essay_worker and exi
 Registry RPC returned234 questions. Fresh Cloudflare JWT HTTP E2E not verified.
 No Secret access, Provider/Credit transaction, activation, other grants or API SQL
 apply. Broader Runtime/Provider/exam API/E2E blockers remain as recorded above.
+
+- Oct14: Owner approved disabled exam API installation. Migration tool twice returned invalid/expired requestState; postflight confirms no schema/RPC installed, Registry234 and Math/account definitions unchanged. No Provider/Credit calls. Approval retained; application pending.

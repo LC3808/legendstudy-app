@@ -7,7 +7,7 @@ allowlisted Chrome account (11:35KST). The IAB administrator session was not tha
 account; no Math configuration/allowlist/Secret change was needed. Production WEB
 b16867e deployed as f247776b; exam submit remains OFF and balance11 unchanged.
 
-Formal disabled exam API SQL is ready for Owner approval:
+Formal disabled exam API SQL is Owner-approved; tool request-state error blocked application:
 [impact/test/rollback](../supabase/reviews/essay-exam-operating-api/README.md).
 Actual non-superuser/BYPASSRLS PostgreSQL ownership and real lifecycle function
 bodies now tested; private hash ACL incompatibility fixed without extending grants.

@@ -1,10 +1,17 @@
 {
-  "status": "LOCAL_VERIFIED_NOT_APPLIED",
+  "status": "OWNER_APPROVED_NOT_APPLIED_TOOL_ERROR",
   "sql_sha256": "ad4f2570f6a8dea8e9149294af4829d12d0e9d0690dbb7f74031f697ee1601c8",
   "non_superuser_deployer": true,
   "real_lifecycle_function_bodies": true,
   "deletion_table": "synthetic fixture",
   "provider": "fake transport",
   "production_credit_transactions": 0,
-  "production_provider_calls": 0
+  "production_provider_calls": 0,
+  "apply_error": "Invalid or expired requestState (two attempts)",
+  "postflight": {
+    "schema_exists": false,
+    "submit_rpc_exists": false,
+    "registry_questions": 234,
+    "math_account_function_hash_unchanged": true
+  }
 }
