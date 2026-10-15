@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app/legendstudy_app.dart';
 import 'core/config/app_config.dart';
 import 'core/supabase/supabase_providers.dart';
+import 'core/supabase/test_session_storage.dart';
 import 'features/auth/identity_diagnostic.dart';
 import 'features/brand/brand_frame.dart';
 import 'features/onboarding/device_intro.dart';
@@ -39,6 +40,11 @@ class _AppBootstrapState extends State<AppBootstrap> {
           url: config.supabaseUrl,
           publishableKey: config.supabasePublishableKey,
           debug: false,
+          authOptions: FlutterAuthClientOptions(
+            localStorage: config.environment == 'test'
+                ? IapTestSessionStorage()
+                : null,
+          ),
         );
         client = Supabase.instance.client;
       } catch (_) {

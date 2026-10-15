@@ -122,6 +122,24 @@ void main() {
       isEmpty,
     );
   });
+  test('TEST backend is isolated from production build configuration', () {
+    for (final environment in ['test', 'production']) {
+      final config = AppConfig(
+        environment: environment,
+        supabaseUrl: 'https://kpqbedylxlyntrrfybpn.supabase.co',
+        supabasePublishableKey: 'sb_publishable_unit_test',
+      );
+      expect(config.validationErrors.isEmpty, environment == 'test');
+    }
+    expect(
+      const AppConfig(
+        environment: 'test',
+        supabaseUrl: 'https://unrelated.supabase.co',
+        supabasePublishableKey: 'sb_publishable_unit_test',
+      ).validationErrors,
+      isNotEmpty,
+    );
+  });
   test('recent request uses exact projection, ordering and empty success', () async {
     expect(
       await SupabaseContentRepository(client).fetchRecentContent(limit: 12),

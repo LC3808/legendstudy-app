@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
+import '../../core/config/app_config.dart';
 import '../credits/credit_balance.dart';
 import 'iap_controller.dart';
 import 'purchase_verification.dart';
@@ -9,7 +10,12 @@ import 'purchase_verification.dart';
 /// build). Default implementation calls the `verify-iap-purchase` Edge Function.
 final purchaseVerifierProvider = Provider<PurchaseVerifier?>((ref) {
   final client = ref.watch(supabaseClientProvider);
-  return client == null ? null : SupabaseFunctionPurchaseVerifier(client);
+  return client == null
+      ? null
+      : SupabaseFunctionPurchaseVerifier(
+          client,
+          testSessionOnly: ref.watch(appConfigProvider).environment == 'test',
+        );
 });
 
 /// IAP controller for the Credit purchase screen. Null when verification is

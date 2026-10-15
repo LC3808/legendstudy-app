@@ -74,6 +74,15 @@ class AppConfig {
   String? get recoveryRedirectTo =>
       recoveryRedirectUrl.isEmpty ? null : recoveryRedirectUrl;
 
+  /// Production is always the sole allowed Supabase host. An explicit TEST
+  /// build must use the isolated TEST project. All other environments retain
+  /// the existing Production-only host policy. See wiki/iap-billing-preparation-2026-10-09.md.
+  static const _prodSupabaseHost = 'stlhijzpjfgwwdgunlsd.supabase.co';
+  static const _testSupabaseHost = 'kpqbedylxlyntrrfybpn.supabase.co';
+  bool _supabaseHostAllowed(String host) => environment == 'test'
+      ? host == _testSupabaseHost
+      : host == _prodSupabaseHost;
+
   List<String> get validationErrors {
     final errors = <String>[];
     final uri = Uri.tryParse(supabaseUrl);
@@ -81,7 +90,7 @@ class AppConfig {
       errors.add('SUPABASE_URL 설정이 필요합니다.');
     } else if (uri == null ||
         uri.scheme != 'https' ||
-        uri.host != 'stlhijzpjfgwwdgunlsd.supabase.co' ||
+        !_supabaseHostAllowed(uri.host) ||
         uri.userInfo.isNotEmpty ||
         uri.hasPort ||
         uri.hasQuery ||

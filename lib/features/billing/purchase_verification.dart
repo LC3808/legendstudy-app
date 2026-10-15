@@ -1,5 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../core/supabase/test_session_storage.dart';
+
 /// Server verification outcome. The **server** is the sole authority: the app
 /// never grants Credit from a store "purchased" event — it submits the purchase
 /// for server-side verification (Apple App Store Server API / Google Play
@@ -106,16 +108,23 @@ class SupabaseFunctionPurchaseVerifier implements PurchaseVerifier {
   const SupabaseFunctionPurchaseVerifier(
     this._client, {
     this.functionName = 'verify-iap-purchase',
+    this.testSessionOnly = false,
   });
   final SupabaseClient _client;
   final String functionName;
+  final bool testSessionOnly;
 
   @override
   Future<VerificationOutcome> verify(IapVerificationRequest request) async {
     try {
+      final token = _client.auth.currentSession?.accessToken;
+      if (testSessionOnly && !isIapTestToken(token)) {
+        return const VerificationOutcome(VerificationStatus.pending);
+      }
       final res = await _client.functions.invoke(
         functionName,
         body: request.toJson(),
+        headers: testSessionOnly ? {'Authorization': 'Bearer $token'} : null,
       );
       // 2xx → parse body; anything else is retryable (pending), not a grant.
       if (res.status >= 200 && res.status < 300) {

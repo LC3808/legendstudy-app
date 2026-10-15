@@ -163,3 +163,55 @@ PAYMENT_CHANGED: **NO** · TOSS_CHANGED: **NO** · Ledger/DB/Essay-runtime/Admin
 grant: **unchanged** · CODEX_WORK_PRESERVED: **YES** (no merge) · Main merge:
 **NO** · Store submission: **NO** · Real purchase executed: **NO** · Target 005:
 **HOLD**.
+
+## 2026-10-15 — Google TEST authentication preparation (Codex)
+
+Latest Owner scope: independent preparation only; STOP after report. No login,
+signup grant, purchase, verifier invocation, DB change or deployment performed.
+Claude b97e833 was verified in its local worktree (not assumed remote); worktree
+unchanged. Only its AppConfig host support selectively reused, with explicit
+APP_ENV=test now requiring TEST host; other environments preserve Production-only.
+
+Evidence and cause boundary:
+- Claude config/iap-test.json metadata: APP_ENV=test, correct TEST URL and
+  publishable-key format. No credential values recorded.
+- Locked SDK2.15.4 already persists sessions under sb-<project-ref>-auth-token. Therefore
+  cross-project restoration is NOT proven by the reported old logged-in screen.
+- Prior Claude guard allowed Production URL even for APP_ENV=test: closed locally.
+- Connected SM_G950N reports com.legendstudy.app0.1.0/versionCode1, installer=null,
+  lastUpdate2026-10-10. This does not establish the Play internal-test binary or its
+  compiled defines; no APK replacement, uninstall, data clear or session deletion.
+- TEST read-only: users1/email-confirmed1/signed-in0/profiles0/accounts0/Ledger0.
+  No actual TEST login yet. Profile provisioning on login is the existing path
+  to the signup trigger; do not manually grant or duplicate the free3.
+- Deployed TEST verifier v5 uses own SUPABASE_URL, verify_jwt=true. It calls its
+  own auth/v1/user before Store verification and own grant RPC afterward. Current
+  Codex Edge source is older than TEST/Claude; do not redeploy it over TEST.
+
+Minimal local change:
+- lib/core/config/app_config.dart: exact TEST/Production host selection.
+- lib/core/supabase/test_session_storage.dart + lib/main.dart: TEST-only wrapper
+  over existing SDK TEST key filters foreign/malformed issuer BEFORE restoration.
+  It never reads/deletes Production storage and does not erase rejected records.
+- billing_providers.dart/purchase_verification.dart: TEST-only issuer check and
+  explicit token forwarding. Missing/foreign session stays pending without a
+  verification request. Claim decoding is a routing guard, NOT authentication;
+  Supabase Auth/Edge must still verify signatures and identity.
+- pubspec.yaml/lock: already-resolved shared_preferences2.5.5 declared as a dev
+  dependency for storage tests; no package-version upgrade.
+- test/iap_test_session_test.dart + supabase_foundation_test.dart: Mock transport
+  confirms TEST JWT header/target, foreign-token zero requests, original storage
+  preservation, invalid issuer and production-host guard. Existing billing tests
+  retain failure/cancel/retry behavior.39 related tests PASS; Flutter Analyze PASS.
+
+Status: LOCAL PREPARATION PASS / actual JWT, Google verify, grant, deduplication,
+consume and restart persistence NOT_VERIFIED. No new build installed today.
+Next Owner session: verify/update Play internal-test build with these changes,
+login test3@legendstudy.com on TEST (Owner controls password), verify issuer via
+server and normal profile/signup balance, then request credit1 purchase approval.
+License tester may use the Owner's configured Google account. Confirm test-card
+label before purchase; no real-money assumption from internal track alone. Do not
+replay previously cancelled orders as success. Expected3+1=4 only after actual
+signup3 observation. Purchase1/dedup replay/no extra purchase must be separately
+approved; recovery uses existing verifier and grant idempotency, never manual Credit.
+Production and Claude/main untouched; public HOLD.

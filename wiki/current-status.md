@@ -1,13 +1,12 @@
 # Current Status
 
-## 2026-10-15 — APP/WEB UX and cycles / LOCAL PARTIAL
+## 2026-10-15 — IAP TEST auth preparation / LOCAL PASS
 
-UX local complete; device approval pending. Final cycles RPC preparation/local
-PostgreSQL concurrency/recovery PASS; production APPLIED INACTIVE. Registry234/runs2
-and Ledger/Package hashes preserved; worker-only RPCs verified. See
-[application and verification SQL](../supabase/candidates/essay_continuous_cycles/README.md).
-Owner-approved DB installation only; no Provider/Credit calls. HOLD.
-[Evidence and remaining gates](essay-lab-ui-ux-v1.md#appweb-result-consistency-and-paid-cycles--2026-10-15).
+TEST-only host/session/JWT routing guards;39 tests and Analyze PASS.
+Actual TEST login/purchase/grant NOT_VERIFIED; connected binary authority unclear.
+No purchases, grants, DB/deploy or Claude changes. Stop pending Owner session.
+[Evidence and next gate](iap-billing-preparation-2026-10-09.md#2026-10-15--google-test-authentication-preparation-codex).
+Essay cycle RPC APPLIED INACTIVE; data preserved, public HOLD.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 

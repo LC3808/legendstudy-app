@@ -3950,3 +3950,12 @@ verified. Registry234/runs2/Ledger31/material revisions17 fingerprints unchanged
 New cycle rows0; flags unchanged, no Provider/Credit calls. Public HOLD.
 Operating additional-paid E2E still requires separate approval. Candidate README
 records exact preservation evidence and rollback boundary.
+
+## 2026-10-15 — Google IAP TEST auth preparation / local only
+
+Read Claude local b97e833 and TEST deployed v5; no branch merge/worktree edits.
+Exact TEST host guard, TEST persisted-issuer filter and purchase JWT routing added.
+SDK already project-scopes storage; actual prior mixing cause not proven. Connected
+installed version1 has installer=null. TEST confirmed user1/no login/profiles0/
+Ledger0.39 Mock/local tests and Analyze PASS; no actual login/grant/purchase/deploy.
+See existing IAP preparation doc. Stop after handoff; public HOLD.
