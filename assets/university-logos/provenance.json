@@ -126,17 +126,17 @@
   },
   "seokyeong": {
     "src": "/university-logos/seokyeong.png",
-    "sourcePage": "https://www.skuniv.ac.kr/intro",
-    "sourceAsset": "https://go.skuniv.ac.kr/share/img/layout/logo-green.svg",
+    "sourcePage": "https://www.skuniv.ac.kr/ui",
+    "sourceAsset": "https://www.skuniv.ac.kr/wp-content/themes/_tw/theme/assets/logo-ui/%EA%B3%B5%EC%8B%9D%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98-%ED%95%9C%EA%B8%80.png",
     "verifiedAt": "2026-10-15",
-    "sha256": "9a4cc1193864d97557ab13ffed10b9e0d43d6748175a7f65bb2ae4a4c418fcda",
+    "sha256": "08a82b284da8794a4c90a9632479e51be47a80c28af117c651e89ef042ac990e",
     "darkSurface": false,
     "asset": "assets/university-logos/seokyeong.png",
-    "sourceHash": "9a4cc1193864d97557ab13ffed10b9e0d43d6748175a7f65bb2ae4a4c418fcda",
-    "bundleHash": "10c9602dfe762e82d1c4983583645e22d849f1be8d4ca4c3a2481772f90095e5",
-    "previousSourceAsset": "https://www.skuniv.ac.kr/wp-content/uploads/2025/10/59447f92-b298-4a56-a591-608cc6619fd0.png",
-    "previousBundleHash": "134e61436f05b6a5405d34378f9a993878c0ae075c4c02c4b0e17003fb9ae4e0",
-    "variant": "Official admissions-office color logo; includes admissions wording, unmodified"
+    "sourceHash": "08a82b284da8794a4c90a9632479e51be47a80c28af117c651e89ef042ac990e",
+    "bundleHash": "08a82b284da8794a4c90a9632479e51be47a80c28af117c651e89ef042ac990e",
+    "previousSourceAsset": "https://go.skuniv.ac.kr/share/img/layout/logo-green.svg",
+    "previousBundleHash": "10c9602dfe762e82d1c4983583645e22d849f1be8d4ca4c3a2481772f90095e5",
+    "variant": "Official basic university logo without admissions-office wording; original pixels preserved"
   },
   "seoultech": {
     "src": "/university-logos/seoultech.svg",
@@ -150,13 +150,17 @@
   },
   "uos": {
     "src": "/university-logos/uos.png",
-    "sourcePage": "https://admission.uos.ac.kr/admissionNew/main.do",
-    "sourceAsset": "https://admission.uos.ac.kr/images/admissionNew/common/logo_on.png",
-    "verifiedAt": "2026-10-11",
-    "sha256": "31f56bfdff41a2510eb1922eb1a6232267d577ce8669eccdf1827672a98a9714",
+    "sourcePage": "https://engraduate.uos.ac.kr/eng/web/contents/UOS_About_04_02_10",
+    "sourceAsset": "https://engraduate.uos.ac.kr/design/theme/eng/images/sub/about/charactermark_01.png",
+    "verifiedAt": "2026-10-15",
+    "sha256": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
     "asset": "assets/university-logos/uos.png",
-    "sourceHash": "31f56bfdff41a2510eb1922eb1a6232267d577ce8669eccdf1827672a98a9714",
-    "bundleHash": "9e84f94a5cf2d18cedcc4b9bc3ad9c52df9c112466d8f847d91ffe8ea5d23214"
+    "sourceHash": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
+    "bundleHash": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
+    "previousSourceAsset": "https://admission.uos.ac.kr/images/admissionNew/common/logo_on.png",
+    "previousBundleHash": "9e84f94a5cf2d18cedcc4b9bc3ad9c52df9c112466d8f847d91ffe8ea5d23214",
+    "darkSurface": false,
+    "variant": "Official basic university logo without admissions-office wording; original pixels preserved"
   },
   "skku": {
     "src": "/university-logos/skku.png",
@@ -327,17 +331,17 @@
   },
   "kangnam": {
     "src": "/university-logos/kangnam.png",
-    "sourcePage": "https://www.kangnam.ac.kr",
-    "sourceAsset": "https://admission.kangnam.ac.kr/img/logo.png",
+    "sourcePage": "https://web.kangnam.ac.kr/menu/0a4747b9674cfaf5d070b3786db9c51a.do",
+    "sourceAsset": "https://web.kangnam.ac.kr/common/plugin/syworks.design.library/template/portal/images/sub/introd/logo_06.png",
     "verifiedAt": "2026-10-15",
-    "sha256": "f81ad744c322a306154aa46b5689c91a145869f9af808e1832057b42ead11d70",
+    "sha256": "4058df4ed76b0b2dd8876d70ca1f31617ec47ce20326ffeb459ef9e012c0b65f",
     "darkSurface": false,
     "asset": "assets/university-logos/kangnam.png",
-    "sourceHash": "f81ad744c322a306154aa46b5689c91a145869f9af808e1832057b42ead11d70",
-    "bundleHash": "094c6648f2f03036e58121c7f4ac6ca83709dee2bd29f80d0130ec5f92d276b7",
-    "previousSourceAsset": "https://www.kangnam.ac.kr/css/images/logo.png",
-    "previousBundleHash": "054bd46d479599d8a05782b6e45af758219d87a3db8cbc4ebf87069bca4f85d0",
-    "variant": "Official admissions-office color logo; includes admissions wording, unmodified"
+    "sourceHash": "4058df4ed76b0b2dd8876d70ca1f31617ec47ce20326ffeb459ef9e012c0b65f",
+    "bundleHash": "4058df4ed76b0b2dd8876d70ca1f31617ec47ce20326ffeb459ef9e012c0b65f",
+    "previousSourceAsset": "https://admission.kangnam.ac.kr/img/logo.png",
+    "previousBundleHash": "094c6648f2f03036e58121c7f4ac6ca83709dee2bd29f80d0130ec5f92d276b7",
+    "variant": "Official basic university logo without admissions-office wording; original pixels preserved"
   },
   "soongsil": {
     "src": "/university-logos/soongsil.png",
@@ -351,17 +355,17 @@
   },
   "ewha": {
     "src": "/university-logos/ewha.svg",
-    "sourcePage": "https://www.ewha.ac.kr/ewha/index.do",
-    "sourceAsset": "https://admission.ewha.ac.kr/admission/images/common/logo_bk.png",
+    "sourcePage": "https://www.ewha.ac.kr/ewha/intro/ui-si01.do",
+    "sourceAsset": "https://www.ewha.ac.kr/_res/ewha/img/common/img-logo.png",
     "verifiedAt": "2026-10-15",
-    "sha256": "2b7a6e561dc34a44ca102cdd80eb85179a12b8ecb24258024224b335e25318da",
+    "sha256": "b991968412b742d062ce4a6cdff7771a6ca1e008755b04acf14e5a4ac3b93199",
     "darkSurface": false,
     "asset": "assets/university-logos/ewha.png",
-    "sourceHash": "2b7a6e561dc34a44ca102cdd80eb85179a12b8ecb24258024224b335e25318da",
-    "bundleHash": "b34dce2e6ae5a8bd4737fed41eadbb8e185b69ee276814e6fbed9506f94cfb67",
-    "previousSourceAsset": "https://www.ewha.ac.kr/ewha/index.do#header-logo-wrap",
-    "previousBundleHash": "f03ce4c9e9efa2843b256af8f2df99aa6427b2941a9041264a6a3532ac202fde",
-    "variant": "Official admissions-office color logo; includes admissions wording, unmodified"
+    "sourceHash": "b991968412b742d062ce4a6cdff7771a6ca1e008755b04acf14e5a4ac3b93199",
+    "bundleHash": "b991968412b742d062ce4a6cdff7771a6ca1e008755b04acf14e5a4ac3b93199",
+    "previousSourceAsset": "https://admission.ewha.ac.kr/admission/images/common/logo_bk.png",
+    "previousBundleHash": "b34dce2e6ae5a8bd4737fed41eadbb8e185b69ee276814e6fbed9506f94cfb67",
+    "variant": "Official basic university logo without admissions-office wording; original pixels preserved"
   },
   "kwangwoon": {
     "src": "/university-logos/kwangwoon.png",

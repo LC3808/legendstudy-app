@@ -1,3 +1,4 @@
+import '../../core/theme/app_theme.dart';
 import 'approved_result_adapter.dart';
 import 'essay_pages.dart';
 import 'essay_models.dart';
@@ -64,12 +65,17 @@ class _HistoryBody extends ConsumerWidget {
               for (final row in group)
                 ListTile(
                   title: Text(
-                    '${row.title} · ${row.rewrite ? '재첨삭' : '최초 첨삭'}',
+                    row.title,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (row.exam) Text(row.examLabel),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: EssayHistoryBadge(record: row),
+                      ),
                       Text(
                         '평가 ${((DateTime.tryParse(row.examData['completed_at'] as String? ?? '') ?? row.at).toLocal()).toString().substring(0, 16)}',
                       ),
@@ -154,6 +160,42 @@ class _HistoryBody extends ConsumerWidget {
               const Divider(),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Labels rely on the existing exam contract, not attempt numbering or color alone.
+class EssayHistoryBadge extends StatelessWidget {
+  const EssayHistoryBadge({super.key, required this.record});
+  final SharedEssayRecord record;
+  @override
+  Widget build(BuildContext context) {
+    final included = record.exam && record.examData['parent_id'] != null;
+    final label = included
+        ? '무료 재첨삭'
+        : record.rewrite
+        ? '재첨삭'
+        : '최초 첨삭';
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: included
+            ? Color.alphaBlend(
+                Colors.black.withValues(alpha: 0.2),
+                AppTokens.success,
+              )
+            : AppTokens.textPrimary,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

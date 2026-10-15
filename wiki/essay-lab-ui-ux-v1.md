@@ -527,3 +527,75 @@ wording), SKKU scale, shorter Hero, multi-question selection→write→switch→
 restore, empty-answer notice and navy buttons including 다시 써보기. No new evaluation
 submission needed. Earlier initial server cost-quote limitation remains outside
 these four fixes. Rollback: revert follow-up UI/assets commit and rebuild; no DB rollback.
+
+## iPhone logo, Hero and History follow-up — 2026-10-15
+
+Owner scope: preserve accepted selection/writer flow; only logos, Hero spacing and
+History readability. Paid-cycle extension is READ-ONLY analysis, not implementation.
+
+Implemented in existing source_catalog_page.dart/shared_history_page.dart:
+- Ewha, Seokyeong, UOS and Kangnam use official basic university PNG assets without
+  입학처. Original pixels/proportions preserved, source URLs/hashes in
+  assets/university-logos/provenance.json. No generated/recolored assets.
+- SKKU wide 518×97 logo keeps aspect ratio; display width100→132, height52 unchanged.
+  Its wide source aspect, not brown container or distortion, caused small lettering.
+- Hero vertical padding16→6; History action and live server Credit unchanged.
+- History shows university, exam identity, text badge, date and existing result
+  actions. First-cycle badge navy; existing exam parent_id rewrite green (darkened
+  success token for white-text contrast). Legacy/Math rewrites say 재첨삭, without
+  inventing a free entitlement. Existing explicit parent grouping/dividers remain;
+  independent same-exam submissions are never heuristically merged.
+- Result/comparison screens, history queries, Drafts and all Backend contracts unchanged.
+
+### Additional paid cycles — read-only findings
+
+Evidence: supabase/migrations/20261014023133_essay_exam_operating_api.sql;
+lib/features/essay/{source_catalog_page,shared_history}.dart;
+LAB src/components/essay-exam-submit.tsx and functions/api/essay/exam.ts.
+This is checked-in contract analysis, not a new production DB audit or transaction.
+
+Existing reserve API accepts a new root (parent_id=null) with a new request key for
+same exam/questions:1 Credit. One child of that successful paid root is included
+at0 Credit. Window is measured from parent's successful completed_at +14days,
+not submission date or free-child completion. A child cannot itself be a free
+parent. Root refund, changed question set/snapshot context/version, expired window
+or existing reserved/completed child blocks inclusion; failed child does not consume
+it. Account row locks, account+request_key uniqueness and immutable terminal results
+protect duplicate/concurrent same-intent calls. Failure releases reserved Credit;
+completion consumes once. Distinct keys deliberately represent distinct paid intents.
+
+Therefore existing Ledger can support repeated paid/free PAIRS without changing
+Ledger rules. Full continuous paid-cycle UX/lineage is NOT currently implemented:
+WEB and APP keep pending request IDs under exam+parent/initial, with changed-answer
+conflict protection and no explicit new-paid-cycle transition. History only returns
+parent_id within a pair, not previous paid cycle or billing reason. Same exam/date
+cannot prove an additional paid relationship. Additional-paid badge must await that
+reliable relation; it is not inferred or falsely displayed in this patch.
+
+Minimum future implementation:
+1. Shared server quote/eligibility and explicit additional-paid consent; preserve
+   unresolved pending requests. Only after known terminal state start a new persistent
+   cycle request ID; WEB/APP retry same intent with same ID, not a random retry ID.
+2. Reuse reserve/finish/Ledger. Keep parent_id exclusively the free child→paid root.
+3. For continuous history, optional previous_paid_run_id on the EXISTING runs table
+   plus submit/history RPC fields and account/exam/exact-question-set validation,
+   immutable link/cycle prevention, deletion lifecycle. No new History store.
+   This minimal DB/RPC change needs separate Owner approval; no SQL applied now.
+4. Both clients read that shared link to label additional paid navy and free green,
+   preserve separate paid/free pairs and original results. Pair retains frozen
+   evidence/rubric; any next-paid package-version change must be explicit.
+5. Preserve immutable learning events, account identity, privacy/deletion policy,
+   evidence versions, independent submissions, existing comparisons and audit facts.
+   No guessed backfill or automatic growth comparison across incompatible rubrics.
+
+Validation:13 relevant tests PASS across History/selection/Draft/logo decoding;
+4 existing actual-result private-fixture tests SKIP (fixture unavailable).
+360dp at100%/200% text: History badge/identity, Hero and multi-question Draft flow PASS.
+Flutter Analyze PASS. iOS simulator debug build PASS (Runner.app).
+No Provider call, Credit trade, production DB/config change or release-branch edits.
+Public HOLD.
+
+Owner iPhone recheck: four official basic logos and SKKU visual size, shorter Hero
+with live Credit and working History, navy 최초 첨삭 / green 무료 재첨삭,
+exam identity/date, result and existing comparison navigation. No new submission.
+Rollback: revert this UI/assets commit and rebuild; no DB rollback required.

@@ -195,7 +195,10 @@ class _SourceSelectionState extends State<_SourceSelection> {
               children: [
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -245,7 +248,9 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         child: Row(
                           children: [
                             Container(
-                              width: 100,
+                              width: u['sourceUniversityId'] == 'skku'
+                                  ? 132
+                                  : 100,
                               height: 52,
                               padding: EdgeInsets.all(
                                 u['sourceUniversityId'] == 'skku' ? 0 : 5,
