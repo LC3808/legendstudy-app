@@ -248,12 +248,15 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         child: Row(
                           children: [
                             Container(
-                              width: u['sourceUniversityId'] == 'skku'
-                                  ? 132
-                                  : 100,
+                              width: 100,
                               height: 52,
                               padding: EdgeInsets.all(
-                                u['sourceUniversityId'] == 'skku' ? 0 : 5,
+                                const {
+                                      'skku',
+                                      'uos',
+                                    }.contains(u['sourceUniversityId'])
+                                    ? 0
+                                    : 5,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white,

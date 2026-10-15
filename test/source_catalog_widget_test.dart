@@ -1,3 +1,8 @@
+import 'dart:io';
+import 'dart:ui' as ui;
+
+import 'package:flutter/rendering.dart';
+import 'package:legendstudy_app/features/essay/university_catalog.dart';
 import 'package:legendstudy_app/features/credits/credit_balance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -104,6 +109,90 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
+  }
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('Owner logos preserve card navigation at 360/$scale', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(360, 800);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final boundary = GlobalKey();
+      final universities = ['skku', 'uos', 'hanyang']
+          .map(
+            (id) => essayUniversityCatalog.singleWhere(
+              (u) => u['sourceUniversityId'] == id,
+            ),
+          )
+          .toList();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
+              child: child!,
+            ),
+            home: RepaintBoundary(
+              key: boundary,
+              child: SourceCatalogPage(
+                catalog: Future.value(SourceCatalog(universities, [])),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        for (final u in universities) {
+          await precacheImage(
+            AssetImage(u['logoAsset'] as String),
+            boundary.currentContext!,
+          );
+        }
+      });
+      await tester.pumpAndSettle();
+      expect(find.byType(Image), findsNWidgets(3));
+      for (final id in ['skku', 'uos']) {
+        final logo = find.byWidgetPredicate(
+          (w) =>
+              w is Image &&
+              w.image is AssetImage &&
+              (w.image as AssetImage).assetName ==
+                  'assets/university-logos/$id.png',
+        );
+        expect(logo, findsOneWidget);
+        expect(tester.getSize(logo), const Size(100, 52));
+      }
+      expect(tester.takeException(), isNull);
+      if (Platform.environment['ESSAY_LOGO_CAPTURE'] == '1') {
+        await tester.runAsync(() async {
+          final image =
+              await (boundary.currentContext!.findRenderObject()
+                      as RenderRepaintBoundary)
+                  .toImage();
+          final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+          await File('/private/tmp/essay-owner-logos-$scale.png')
+              .writeAsBytes(bytes!.buffer.asUint8List());
+          image.dispose();
+        });
+      }
+      await tester.tap(find.text('서울시립대학교'));
+      await tester.pumpAndSettle();
+      expect(find.byTooltip('대학 목록'), findsOneWidget);
+      await tester.tap(find.byTooltip('대학 목록'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('성균관대학교'));
+      await tester.pumpAndSettle();
+      expect(find.byTooltip('대학 목록'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
   }
   testWidgets('rewrite starts blank, restores scoped draft, locks selection and respects HOLD', (
     tester,

@@ -3914,3 +3914,9 @@ concurrency/quote/recovery/Rollback PASS; no operating DDL/Provider/Credit/deplo
 Private Owner quality HTML prepared; no source/answers committed. Device/audio,
 cycle activation and quality approval pending; cycle Draft cross-device sync gap
 explicit. See [feature evidence](essay-lab-ui-ux-v1.md#appweb-result-consistency-and-paid-cycles--2026-10-15).
+
+## 2026-10-15 — Owner SKKU/UOS assets
+
+Replaced only SKKU/UOS logos; alpha-only UOS crop, original SKKU white pixels.
+Unified100×52 centered boxes, zero internal padding for both. Related7tests and
+Analyze PASS; iPhone visual approval pending. See essay-lab-ui-ux-v1.md.

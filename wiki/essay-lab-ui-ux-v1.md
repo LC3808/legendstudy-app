@@ -641,7 +641,7 @@ Claude branch, production settings or data changed. General public HOLD.
   background stop. No AI Provider. iOS uses CocoaPods fallback (SPM warning).
   WEB existing local Korean voice controls retained, explicit stop added. Native
   voice availability/audio and route transitions require physical acceptance.
-- Owner's new SKKU/UOS official logo files have not been supplied: no invented
+- Earlier checkpoint (superseded by Owner logo delivery below): no invented
   replacement or change to currently accepted assets in this task.
 
 ### Read-only operating evidence and quality preparation
@@ -686,3 +686,16 @@ header/question/type/date; actual3/5→4/5; answer expansions; empty/restore/imp
 rewrite with photos; full/section voice pause/resume/stop and back navigation;
 200% text. New paid cycle operating activation requires separate SQL/config and
 Provider/Credit approval. Rollback is documented and refuses nonempty cycle data.
+
+## Owner supplied SKKU/UOS logos — 2026-10-15
+
+Only two logo assets replaced: `assets/university-logos/skku.png` from Owner
+`n_2.jpg` (1136×271, original white background); `assets/university-logos/uos.png`
+from `logo_horizontal_2.png` (900×900, only transparent margins cropped to
+809×112). No recoloring/generation; source/bundle hashes in provenance.json.
+Both use the existing 100×52 card logo box, centered BoxFit.contain, zero inner
+padding for these two only. Earlier SKKU-only132px width removed to match existing
+card geometry. Other logos, card padding/touch behavior and catalog IDs unchanged.
+Validation: related7 tests (all42 assets decode; real supplied assets at360px and
+100%/200% text, whole-card navigation), Flutter Analyze. iPhone final visual
+approval remains Owner action; no build/deploy/DB/Provider/Credit changes.

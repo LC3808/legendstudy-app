@@ -149,29 +149,20 @@
     "bundleHash": "3cdc99b2b39fa3181ae1559628dafcf2abd1f23069c9a9acafa3b5cad2d23b92"
   },
   "uos": {
-    "src": "/university-logos/uos.png",
-    "sourcePage": "https://engraduate.uos.ac.kr/eng/web/contents/UOS_About_04_02_10",
-    "sourceAsset": "https://engraduate.uos.ac.kr/design/theme/eng/images/sub/about/charactermark_01.png",
-    "verifiedAt": "2026-10-15",
-    "sha256": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
+    "sourceAsset": "logo_horizontal_2.png",
+    "sourceAuthority": "Owner supplied official logo, 2026-10-15",
     "asset": "assets/university-logos/uos.png",
-    "sourceHash": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
-    "bundleHash": "9c516ebfb8956d9e84ae6823370ddf44209936a8a8278cbeb58fb056f7fcee97",
-    "previousSourceAsset": "https://admission.uos.ac.kr/images/admissionNew/common/logo_on.png",
-    "previousBundleHash": "9e84f94a5cf2d18cedcc4b9bc3ad9c52df9c112466d8f847d91ffe8ea5d23214",
-    "darkSurface": false,
-    "variant": "Official basic university logo without admissions-office wording; original pixels preserved"
+    "sourceHash": "3e8dd3d1b2b8cf864cbf90c355f856cd2bfaf8ec756375034949f7afca681fc5",
+    "bundleHash": "5f3241f09e265b7d3be425ae2acf93673aa27196caffe1e69ca1c7b4e672bbb3",
+    "processing": "Preserve pixels and proportions; alpha-only bounding box (46, 394, 855, 506); JPG decoded to PNG without recoloring."
   },
   "skku": {
-    "src": "/university-logos/skku.png",
-    "paddedWordmark": true,
-    "sourcePage": "https://www.skku.edu/skku/index.do",
-    "sourceAsset": "https://www.skku.edu/_res/skku//img/common/logo_o.png",
-    "verifiedAt": "2026-10-11",
-    "sha256": "d02d96d5701b9e78032a5740c9b990c9d5973489a680bc7d54bf69c391020b67",
+    "sourceAsset": "n_2.jpg",
+    "sourceAuthority": "Owner supplied official logo, 2026-10-15",
     "asset": "assets/university-logos/skku.png",
-    "sourceHash": "d02d96d5701b9e78032a5740c9b990c9d5973489a680bc7d54bf69c391020b67",
-    "bundleHash": "080e92f9682aba4a85dd0b0a22bef77581e3f561272f57bd10983e7c1c09ca88"
+    "sourceHash": "6c7d3933ad8e15154d765696a3b1a6ad55efb88d881477c3b3e04f519849a83b",
+    "bundleHash": "841e65d2112096372a371740147458cc04b2e6eb864dc70a49a9bba7e44da52f",
+    "processing": "Preserve pixels and proportions; alpha-only bounding box (0, 0, 1136, 271); JPG decoded to PNG without recoloring."
   },
   "sungshin": {
     "src": "/university-logos/sungshin.jpg",

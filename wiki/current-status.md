@@ -2,9 +2,9 @@
 
 ## 2026-10-15 — APP/WEB UX and cycles / LOCAL PARTIAL
 
-History/result/rewrite adapters connected; Native OS TTS added.44 related tests,
+SKKU/UOS Owner logos replaced; Native OS TTS added.44 related tests,
 Analyze/iOS build PASS. Full Flutter:1059 pass/6 skip/4 pre-existing deletion
-timeouts, reproduced on unchanged HEAD. WEB1131 pass/1 skip; final checks in log.
+timeouts, reproduced on unchanged HEAD. WEB1131 pass/1 skip; checks in log.
 Cycle SQL/local concurrency/refund PASS, NOT_APPLIED. Actual stored Hanyang
 results reused; quality NOT_VERIFIED (quotes empty). Scoped rewrite Draft local
 only; device voice/UX and operating cycles await approval. Public HOLD.
