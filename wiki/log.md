@@ -3756,3 +3756,50 @@ credit_accounts=0; (7) no Apple/Google call — IAP_ENABLED=false gate returns p
 and no store secrets configured; (8) math runtime evaluations_enabled=false maintained. All PASS; nothing
 unverified at this stage except the intentionally-deferred real Sandbox purchase + grant (needs Owner
 secrets/IAP_ENABLED). Production, secrets, DB and Git remote untouched; no push.
+
+## 2026-10-15 — Android IAP real-purchase E2E session (TEST) + Codex handoff
+Owner-driven live run on TEST project `kpqbedylxlyntrrfybpn` (production `stlhijzpjfgwwdgunlsd`
+never touched). Goal: Android license-test purchase → server verify → Credit grant.
+
+DONE / VERIFIED:
+- App config guard (`lib/core/config/app_config.dart`): production host stays the sole allowed
+  Supabase host; a non-production build (`APP_ENV!=production`) may additionally target the TEST
+  ref. Release/production builds remain locked to production; unknown hosts still rejected.
+- Signed Android AAB built with `--dart-define-from-file=config/iap-test.json` (APP_ENV=test, TEST
+  URL + publishable key; config is gitignored). `jarsigner` → "jar verified"; upload cert SHA-256
+  C0:0F:42:60:…8E:F1; package com.legendstudy.app; versionCode 1; `com.android.vending.BILLING`
+  merged (billing:8.0.0 AAR). Uploaded to Play **Internal testing** (track active, v1 0.1.0).
+- Play Console: 4 one-time products ACTIVE with IDs/prices matching code exactly —
+  credit1 ₩4,900 / credit3 ₩11,900 / credit5 ₩17,900 / credit10 ₩29,900 (one purchase option each).
+- License tester + internal-test tester list configured.
+- Google Play Developer API: Cloud project `legendstudy-iap`, service account
+  `legendstudy-iap-verify@legendstudy-iap.iam.gserviceaccount.com`, androidpublisher API enabled,
+  granted "재무 데이터·주문 보기" + "주문 관리" in Play Console.
+- TEST Supabase secrets set (digest-verified, values not logged): IAP_ENABLED=true,
+  IAP_ALLOW_SANDBOX_GRANT=true, IAP_APPLE_ENVIRONMENT=Sandbox, IAP_SANDBOX_PROJECT_REF=
+  kpqbedylxlyntrrfybpn, IAP_GOOGLE_PACKAGE_ID=com.legendstudy.app, IAP_GOOGLE_SERVICE_ACCOUNT_JSON
+  (initially mis-pasted as the package id — sha256 match caught it — then corrected).
+- Edge Function `verify-iap-purchase` live on TEST, verify_jwt=true (unauth POST → 401).
+- Google Billing path works: test-card orders created (GPA.3392-… credit1 ₩4,900 11:01;
+  GPA.3380-… credit3 ₩12,000 10:53).
+
+NOT COMPLETED (handed to Codex):
+- The purchases were made while the app held a **stale/production auth session** (the internal-test
+  build was run over an existing install, restoring a production session; OAuth is disabled in the
+  TEST build so only email login is surfaced). TEST `auth_logs` show **no /token login** and
+  `auth.users`=0 — the login never reached TEST. So verify-iap-purchase was called (if at all) with
+  a non-TEST JWT → rejected → purchase never acknowledged → **Google auto-cancelled the unverified
+  orders**. Credit Ledger on TEST stayed empty (users/accounts/grants/txns = 0).
+- Net: Play Billing + products + server config are in place, but the **verify→grant→acknowledge
+  chain was never exercised with a valid TEST session**, so grant/idempotency/balance are UNVERIFIED.
+
+CODEX TO FINISH (purchase↔login integration):
+- Ensure the app authenticates against the SAME backend it verifies against; for TEST runs start from
+  a clean session (fresh install, email signup on TEST, or configure TEST OAuth providers), confirm a
+  TEST `auth.users` row + free-3-credit via `essay_claim_signup_credit`, then buy → confirm
+  `iap_post_verified_purchase` grants +1, balance 4, idempotency key `iap/google/sha256(orderId)`,
+  and the client consumes/acknowledges so Google does not cancel.
+- Clear/replay the auto-cancelled consumable orders during retry testing.
+
+Boundaries kept: production/secrets/DB/Git-remote untouched; no push; Codex Math runtime unchanged;
+no new Wallet; existing Ledger reused. iOS E2E not started this session.
