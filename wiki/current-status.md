@@ -2,12 +2,11 @@
 
 ## 2026-10-15 — APP/WEB UX and cycles / LOCAL PARTIAL
 
-Three result badges aligned; first speech overview fixed.11 related tests,
-Analyze PASS; prior iOS build PASS. Full Flutter:1059 pass/6 skip/4 pre-existing deletion
-timeouts, reproduced on unchanged HEAD. WEB1131 pass/1 skip; checks in log.
-Cycle SQL/local concurrency/refund PASS, NOT_APPLIED. Actual stored Hanyang
-results reused; quality NOT_VERIFIED (quotes empty). Scoped rewrite Draft local
-only; final speech/badges and operating cycles await approval. HOLD.
+UX local complete; device approval pending. Final cycles RPC preparation/local
+PostgreSQL concurrency/recovery PASS; production NOT_APPLIED. Registry234/runs2
+preserved read-only; submit/history match Rollback baseline. See
+[application and verification SQL](../supabase/candidates/essay_continuous_cycles/README.md).
+No Provider/real Credit/hosted TEST writes. Inactive DB approval pending; HOLD.
 [Evidence and remaining gates](essay-lab-ui-ux-v1.md#appweb-result-consistency-and-paid-cycles--2026-10-15).
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION

@@ -106,9 +106,11 @@ def cases(sql, root, user, account, exam, question):
                 finish_attempts.append(args)
                 if len(finish_attempts)==1:raise Unknown('LOCAL_LOST_FINALIZE')
             return rpc(name,args)
+        async def async_review(*args):
+            return receipt(*args)
         runtime=CloudflareExamRuntime(rpc=async_rpc,registry=registry,provider=provider,
             reviewer=SignedReview({'independent-test':b'test-only-not-deployed'},clock=lambda:100),
-            review_source=receipt,receipt_sink=lambda _:None,allowed_subjects=[user],enabled=True)
+            review_source=async_review,receipt_sink=lambda _:None,allowed_subjects=[user],enabled=True)
         async def execute():
             try:await runtime.consume({'subject_id':user,'run_id':initial})
             except Unknown:pass

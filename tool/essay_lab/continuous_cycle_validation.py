@@ -3,7 +3,11 @@ import json, uuid, concurrent.futures
 
 def cases(sql, root, user, account, exam, question, initial):
     folder=root/'supabase/candidates/essay_continuous_cycles'
+    legacy=sql("select md5(string_agg(id::text||snapshot::text||coalesce(result::text,''),'' order by id)) from essay_exam_private.runs")
+    sql((folder/'preflight.sql').read_text())
     sql((folder/'install.sql').read_text())
+    sql((folder/'postflight.sql').read_text())
+    assert sql("select md5(string_agg(id::text||snapshot::text||coalesce(result::text,''),'' order by id)) from essay_exam_private.runs")==legacy
     sql((folder/'install.sql').read_text(),'CYCLES_ALREADY_INSTALLED')
     answers=json.dumps([dict(questionId=question,body='Synthetic next paid answer',revision=4)])
     def request(key,previous=initial,role='essay_worker'):
@@ -14,7 +18,13 @@ def cases(sql, root, user, account, exam, question, initial):
         a="null" if parent is None else "'"+parent+"'"
         b="null" if previous is None else "'"+previous+"'"
         return f"set role essay_worker;select public.essay_exam_quote('{who}','{exam}',array['{question}']::uuid[],{a},{b})"
+    transactions=sql('select count(*) from public.credit_transactions')
+    assert json.loads(sql(quote()))['credits']==1
     assert json.loads(sql(quote(previous=initial)))['credits']==1
+    assert sql('select count(*) from public.credit_transactions')==transactions
+    for role in ('anon','authenticated','service_role'):
+        sql(quote().replace('set role essay_worker','set role '+role),'permission denied')
+    sql(quote().replace("array['"+question+"']","array['"+question+"','"+question+"']"),'INVALID_QUESTION_SET')
     sql(quote(parent=initial),'REEVALUATION_NOT_INCLUDED')
     key=str(uuid.uuid4())
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
@@ -37,7 +47,15 @@ def cases(sql, root, user, account, exam, question, initial):
     sql(f"select essay_exam_private.finish('{run}',{quoted},false)")
     assert balance()=='1,0'
     sql(f"set role essay_worker;select public.essay_exam_submit('{user}','{exam}','{uuid.uuid4()}','{answers}'::jsonb,'{paid}')",'REEVALUATION_ALREADY_USED')
-    next_paid=sql(request(str(uuid.uuid4()),paid))
+    def compete(_):
+        try:return sql(request(str(uuid.uuid4()),paid))
+        except AssertionError as error:
+            assert any(reason in str(error) for reason in ('PAID_CYCLE_ALREADY_STARTED','INSUFFICIENT_CREDIT'))
+            return None
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        winners=[x for x in pool.map(compete,range(4)) if x]
+    assert len(winners)==1
+    next_paid=winners[0]
     assert balance()=='1,1'
     sql(f"select essay_exam_private.finish('{next_paid}',null,true)")
     assert balance()=='1,0'

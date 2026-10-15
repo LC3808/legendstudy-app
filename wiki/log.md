@@ -3933,3 +3933,12 @@ Owner iPhone final speech/badge check pending; see essay-lab-ui-ux-v1.md.
 Track/session/question share one wrapping badge row. First-result speech now
 starts at its existing overview; rewrite order/controls preserved.11 related tests
 and Analyze PASS. No operating changes; stop UX work and prioritize release.
+
+## 2026-10-15 — Final cycle RPC application preparation
+
+Existing install/rollback SQL unchanged. Production baseline function hashes checked
+read-only; Registry234/runs2/revisions17. Added pre/postflight and preservation SQL.
+Synthetic PostgreSQL async/cycles integration and14 Ledger regression groups PASS.
+Distinct-key concurrency and quote/preservation checks strengthened; async review
+test fixture repaired. No hosted TEST/production writes or real Provider/Credit.
+Inactive DB installation requires Owner approval; see candidate README. HOLD.
