@@ -729,3 +729,17 @@ unchanged; SKKU/UOS assets at3f28529 also unchanged.
   layout; Analyze/iOS simulator build PASS. WEB102 related tests plus
   Lint/Typecheck/Build PASS. Actual iPhone pronunciation/reading alignment and
   visual badges await Owner. No Provider/Credit/DB/deployment execution; HOLD.
+
+### Final bounded mobile polish — 2026-10-15
+
+Owner requests only three identity badges on one wrapping line and actual
+screen/speech order alignment. `EssayExamBadges` now includes the existing Registry
+question label alongside track/session, sharing bodyMedium/padding/border style.
+360px normal scale fits one row;200% wraps. No separate question text row.
+First result visibly begins with 내 답안 한눈에 보기 but speech skipped it:
+added that existing summary before 종합 평가. Rewrite already begins with
+이번 답안의 변화 한눈에 보기; unchanged. All playback controls unchanged.
+Files: shared_history_page.dart, essay_voice.dart; related3 test files.
+11 related tests PASS (stored actual first/rewrite,360px/200%, badges and speech),
+Flutter Analyze PASS. No new build/deploy/WEB/Provider/Credit/DB/IAP change.
+Further UX development stopped per Owner; release preparation is next.

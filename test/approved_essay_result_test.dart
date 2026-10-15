@@ -136,8 +136,7 @@ void main() {
                         children: [
                           Text('한양대학교'),
                           Text('2024학년도 수시 논술'),
-                          EssayExamBadges(data: {'track':'인문계열','session':'오후 2'}),
-                          Text('문제 1'),
+                          EssayExamBadges(data: {'track':'인문계열','session':'오후 2'}, questionLabel:'문제 1'),
                           Text('재첨삭 | 2026.10.14'),
                         ],
                       ),

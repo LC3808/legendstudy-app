@@ -7,19 +7,27 @@ import 'package:legendstudy_app/features/essay/shared_history.dart';
 import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 
 void main() {
-  testWidgets('registry track/session badges wrap at360 and200%', (tester) async {
+  for (final badgeScale in [1.0,2.0]) {
+  testWidgets('three identity badges at360 scale $badgeScale', (tester) async {
     tester.view.physicalSize = const Size(360,800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    await tester.pumpWidget(const MaterialApp(home: MediaQuery(
-      data: MediaQueryData(textScaler: TextScaler.linear(2)),
-      child: Scaffold(body: Padding(padding: EdgeInsets.all(20),child: EssayExamBadges(data:{'track':'인문계열','session':'오후 2'}))),
+    await tester.pumpWidget(MaterialApp(home: MediaQuery(
+      data: MediaQueryData(textScaler: TextScaler.linear(badgeScale)),
+      child: const Scaffold(body: Padding(padding: EdgeInsets.all(20),child: EssayExamBadges(data:{'track':'인문계열','session':'오후 2'}, questionLabel:'문제 1'))),
     )));
     expect(find.text('인문계열'),findsOneWidget);
     expect(find.text('오후 2'),findsOneWidget);
+    expect(find.text('문제 1'),findsOneWidget);
+    final badges = tester.widgetList<Container>(find.descendant(of: find.byType(EssayExamBadges), matching: find.byType(Container))).toList();
+    expect(badges.length,3);
+    expect(badges.map((w)=>w.padding).toSet().length,1);
+    expect(badges.map((w)=>w.decoration).toSet().length,1);
+    if(badgeScale==1) expect(tester.getTopLeft(find.text('인문계열')).dy,tester.getTopLeft(find.text('문제 1')).dy);
     expect(tester.takeException(),isNull);
   });
+  }
 
   for (final scale in [1.0, 2.0]) {
     testWidgets(

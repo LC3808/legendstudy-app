@@ -2,8 +2,8 @@
 
 ## 2026-10-15 — APP/WEB UX and cycles / LOCAL PARTIAL
 
-Result badges/change prose/speech aligned.32 related tests,
-Analyze/iOS build PASS. Full Flutter:1059 pass/6 skip/4 pre-existing deletion
+Three result badges aligned; first speech overview fixed.11 related tests,
+Analyze PASS; prior iOS build PASS. Full Flutter:1059 pass/6 skip/4 pre-existing deletion
 timeouts, reproduced on unchanged HEAD. WEB1131 pass/1 skip; checks in log.
 Cycle SQL/local concurrency/refund PASS, NOT_APPLIED. Actual stored Hanyang
 results reused; quality NOT_VERIFIED (quotes empty). Scoped rewrite Draft local

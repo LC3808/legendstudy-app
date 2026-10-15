@@ -19,6 +19,19 @@ Map<String, String> essaySpeechSections(
   final improved = changes?.where((c) => c.direction == 'IMPROVED').firstOrNull;
   final resolved = report.previousReviews.where((r) => r['outcome'] == 'resolved').firstOrNull;
   final sections = <String, String>{
+    if (before == null)
+      '내 답안 한눈에 보기': [
+        '잘한 점.',
+        if (report.strengths.isEmpty) '평가에 명시된 내용이 없어요.',
+        ...report.strengths.take(1).map((r) => '${r.title}. ${r.explanation}'),
+        '보완할 점.',
+        if (report.weaknesses.isEmpty) '평가에 명시된 내용이 없어요.',
+        ...report.weaknesses.take(2).map((r) => '${r.title}. ${r.explanation}'),
+        '가장 먼저 고칠 것.',
+        report.actions.firstOrNull ?? '평가에 명시된 우선순위가 없어요.',
+        '다시 쓸 때 확인.',
+        report.nextSteps.firstOrNull ?? '평가에 명시된 확인 항목이 없어요.',
+      ].join('\n'),
     if (changes != null)
       '이번 답안의 변화 한눈에 보기': [
         '좋아진 점.',

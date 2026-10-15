@@ -3927,3 +3927,9 @@ Owner device PASS preserved. Registry track/session badges, factual delta prose,
 spoken 단계 instead of fractions, visible section order. Native32/Web102 related
 tests, Analyze/iOS/Lint/Typecheck/Build PASS. No operational calls or migrations.
 Owner iPhone final speech/badge check pending; see essay-lab-ui-ux-v1.md.
+
+## 2026-10-15 — Final two mobile UX corrections
+
+Track/session/question share one wrapping badge row. First-result speech now
+starts at its existing overview; rewrite order/controls preserved.11 related tests
+and Analyze PASS. No operating changes; stop UX work and prioritize release.

@@ -18,7 +18,7 @@ void main() {
       pins: [],
     );
     final sections = essaySpeechSections(r);
-    expect(sections.keys, ['종합 평가', '잘한 점', '평가 항목별 진단', '보완할 점', '먼저 고쳐야 할 부분', '다시 쓸 때 확인할 것']);
+    expect(sections.keys, ['내 답안 한눈에 보기', '종합 평가', '잘한 점', '평가 항목별 진단', '보완할 점', '먼저 고쳐야 할 부분', '다시 쓸 때 확인할 것']);
     expect(sections['평가 항목별 진단'], contains('5단계 평가 중 3단계입니다.'));
     expect(sections['보완할 점'], '');
     final after = EvaluationReport(id:'b', priorId:'a', answer:'',question:'q', summary:'이번 종합',rubric:[EvaluationCriterion('c','논리','',4,'이번 근거')],strengths:[],weaknesses:[],actions:[],nextSteps:[],pins:['same']);

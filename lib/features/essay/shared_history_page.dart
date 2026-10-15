@@ -293,8 +293,9 @@ class _Result extends ConsumerWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        EssayExamBadges(data: record.examData),
-                        Text(
+                        EssayExamBadges(
+                          data: record.examData,
+                          questionLabel:
                           (record.examData['questions'] as List? ?? [])
                                       .cast<Map<String, dynamic>>()
                                       .where(
@@ -345,17 +346,18 @@ class _Result extends ConsumerWidget {
 
 /// Registry fields stay separate; never parse track/session from a display label.
 class EssayExamBadges extends StatelessWidget {
-  const EssayExamBadges({super.key, required this.data});
+  const EssayExamBadges({super.key, required this.data, this.questionLabel});
   final Map<String, dynamic> data;
+  final String? questionLabel;
   @override
   Widget build(BuildContext context) => Wrap(
     spacing: 8, runSpacing: 6,
-    children: [for (final field in ['track', 'session'])
-      if ((data[field] as String? ?? '').trim().isNotEmpty)
+    children: [for (final label in [data['track'] as String?, data['session'] as String?, questionLabel])
+      if ((label ?? '').trim().isNotEmpty)
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(border: Border.all(color: AppTokens.textPrimary.withValues(alpha: 0.3)), borderRadius: BorderRadius.circular(6)),
-          child: Text(data[field] as String),
+          child: Text(label!, style: Theme.of(context).textTheme.bodyMedium),
         ),
     ],
   );
