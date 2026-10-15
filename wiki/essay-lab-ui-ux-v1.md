@@ -476,3 +476,54 @@ balance/History; question selection→CTA; writer keyboard/photos/Draft; Native 
 open/close/page restore; review subset and eligible free-rewrite label. Do not submit
 new evaluations for this UX acceptance. Rollback: revert UI/assets commit and rebuild;
 no DB rollback required.
+
+## Mobile UX phase 1 finishing fixes — 2026-10-15
+
+Owner iPhone review accepted university→exam→writer flow. This follow-up is limited
+to logo backgrounds, Hero title removal, multi-question checkboxes and navy actions.
+No writer/result layout redesign. Existing42 universities/Owner22 and Registry IDs
+remain. No DB/backend, Math, Ledger, Payment/IAP or Claude branch changes.
+
+Root cause: AppTokens.primaryInk is actually brown (#A94B00), despite older Wiki
+calling it navy. Source logo containers and explicit CTA overrides used that token.
+Use existing AppTokens.textPrimary navy (#1B2A4A) for essay CTAs, chevrons and
+selected checkboxes; result page changes only the 다시 써보기 button color.
+Photo secondary buttons retain white fill and get navy border within writer scope.
+Global brand/theme tokens and other product screens are not changed.
+
+Logo containers are white; SKKU zero-padding compensation and aspect-ratio contain
+are retained. Existing white-only assets would disappear on white, so9 official
+light-background variants replace those assets without recoloring or generating:
+Hanyang, Ewha, KNU, Seokyeong, Sookmyung, Dankook, Tukorea, Kangnam, Eulji.
+Hongik and Seoultech already have suitable colored assets and are unchanged.
+Ewha/Seokyeong/Kangnam use unmodified official admissions-office signatures (include
+입학처 wording); KNU uses the official horizontal KNU signature. Provenance JSON
+records official URLs, archive member where applicable, previous/new source hashes
+and bundle hashes. Official downloads were visually inspected; all42 decode in Flutter.
+
+Hero removes 나의 논술 LAB plus its spacing; existing History and actual server
+Credit balance remain responsive. No hardcoded balance and no purchase addition.
+Question rows are checkboxes, with selection count and no-selection CTA disabled.
+Single-question exams default selected. Selection is stored per exam; original
+rewrite question set remains fixed and foreign Registry IDs cannot be added.
+An IndexedStack keeps the existing writer for each selected question alive; a
+question selector saves before switching. Text/photo Draft keys and PDF state are
+unchanged. Review receives the whole selected set and identifies blank answers
+before execution; submit guard also names a missing question. Existing API/hash,
+1-credit policy and14-day free-rewrite contracts are unchanged.
+
+Files: source_catalog_page.dart, essay_pages.dart (one color), generated
+university_catalog.dart,9 logo PNGs/provenance, source_catalog_widget_test.dart,
+essay_logo_assets_test.dart, new essay_multi_selection_test.dart.
+Validation:25 tests PASS,4 existing private actual-result fixture tests SKIP because
+fixture is unavailable.360dp/100–200% selection/deselection/count/CTA, per-question
+Draft switch/reopen, missing-answer review, fixed rewrite set, Hero/scroll, image
+handling, Registry/PDF, request hash and14-day eligibility regression passed.
+Flutter Analyze PASS; iOS simulator debug build PASS. No Provider/Credit transaction
+or production setting/DB operation. Public HOLD.
+
+Owner remaining device check: all11 logos on white (including official admissions
+wording), SKKU scale, shorter Hero, multi-question selection→write→switch→Draft
+restore, empty-answer notice and navy buttons including 다시 써보기. No new evaluation
+submission needed. Earlier initial server cost-quote limitation remains outside
+these four fixes. Rollback: revert follow-up UI/assets commit and rebuild; no DB rollback.

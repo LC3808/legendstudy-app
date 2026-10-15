@@ -1,14 +1,15 @@
 # Current Status
 
-## 2026-10-15 — Mobile entry-to-submit UX phase 1 / PARTIAL
+## 2026-10-15 — Mobile UX phase 1 finishing fixes / LOCAL PASS
 
-Full-card university selection, bundled official42 logos (missing11 fixed), unified
-History/Credit Hero, selection-only question rows and one writer CTA, answer-first
-Native writer/PDF and concise review implemented.15 focused tests, Analyze and iOS
-simulator build PASS. Initial cost quote is absent from current server API; honest
-confirmation fallback remains. Owner physical acceptance pending. Results/History
-details and all backend/payment contracts untouched. No Provider/Credit/DB action.
-[Changes, source provenance and remaining checks](essay-lab-ui-ux-v1.md#mobile-entry-to-submit-ux-phase-1--2026-10-15).
+Owner accepted prior entry→writer flow on iPhone. Four follow-up fixes implemented:
+white logo containers +9 official color variants (11 reviewed), Hero title removed,
+checkbox multi-question selection/count and existing writers/Drafts connected,
+navy CTAs using textPrimary (primaryInk was brown). Result layout unchanged.
+25 tests PASS/4 private-fixture SKIP, Analyze and iOS simulator build PASS.
+Owner device acceptance of these four fixes pending; previous server cost-quote
+limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
+[Exact changes and device checklist](essay-lab-ui-ux-v1.md#mobile-ux-phase-1-finishing-fixes--2026-10-15).
 
 ## 2026-10-14 — iPhone usability closeout; today stopped
 

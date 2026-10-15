@@ -81,7 +81,6 @@ class _SourceSelectionState extends State<_SourceSelection> {
   late Future<SourceCatalog> data = widget.catalog ?? widget.loadCatalog();
   final included = <String, Set<String>>{};
   String? university, year, kind, track, examKey;
-  final chosenQuestions = <String, String>{};
   final catalogScroll = ScrollController();
   double catalogOffset = 0;
   void backToCatalog() {
@@ -200,11 +199,6 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          '나의 논술 LAB',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 12),
                         LayoutBuilder(
                           builder: (context, bounds) {
                             final history = TextButton(
@@ -257,9 +251,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                                 u['sourceUniversityId'] == 'skku' ? 0 : 5,
                               ),
                               decoration: BoxDecoration(
-                                color: u['logoDark'] == true
-                                    ? AppTokens.primaryInk
-                                    : Colors.white,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: u['logoAsset'] is String
@@ -293,7 +285,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                             ),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppTokens.primaryInk,
+                              color: AppTokens.textPrimary,
                             ),
                           ],
                         ),
@@ -322,6 +314,24 @@ class _SourceSelectionState extends State<_SourceSelection> {
               (exams.length == 1 ? exams.first['key'] as String : null);
           final matches = exams.where((e) => e['key'] == selected);
           final exam = matches.isEmpty ? null : matches.single;
+          final questions = (exam?['questions'] as List? ?? [])
+              .cast<Map<String, dynamic>>()
+              .where(
+                (q) =>
+                    widget.rewriteRun == null ||
+                    (widget.rewriteRun!['question_ids'] as List).contains(
+                      q['dbQuestionId'],
+                    ),
+              )
+              .toList();
+          final selection = exam == null
+              ? <String>{}
+              : included.putIfAbsent(
+                  exam['key'] as String,
+                  () => questions.length == 1
+                      ? {questions.single['key'] as String}
+                      : <String>{},
+                );
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -387,54 +397,46 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 ),
               if (exam != null) ...[
                 const Text('문항 선택'),
-                for (final q
-                    in (exam['questions'] as List)
-                        .cast<Map<String, dynamic>>()
-                        .where(
-                          (q) =>
-                              widget.rewriteRun == null ||
-                              (widget.rewriteRun!['question_ids'] as List)
-                                  .contains(q['dbQuestionId']),
-                        ))
-                  ListTile(
+                for (final q in questions)
+                  CheckboxListTile(
                     title: Text(q['label'] as String),
                     subtitle: q['lengthLabel'] == null
                         ? null
                         : Text(q['lengthLabel'] as String),
-                    leading: Icon(
-                      chosenQuestions[exam['key']] == q['key']
-                          ? Icons.radio_button_checked
-                          : Icons.radio_button_unchecked,
-                      color: AppTokens.primaryInk,
-                    ),
-                    selected: chosenQuestions[exam['key']] == q['key'],
-                    onTap: () => setState(
-                      () => chosenQuestions[exam['key'] as String] =
-                          q['key'] as String,
-                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: AppTokens.textPrimary,
+                    checkColor: Colors.white,
+                    value: selection.contains(q['key']),
+                    onChanged: widget.rewriteRun != null
+                        ? null
+                        : (checked) => setState(() {
+                            if (checked == true) {
+                              selection.add(q['key'] as String);
+                            } else {
+                              selection.remove(q['key']);
+                            }
+                          }),
                   ),
+                Text('선택한 문항 ${selection.length}개'),
                 FilledButton(
                   style: FilledButton.styleFrom(
-                    backgroundColor: AppTokens.primaryInk,
+                    backgroundColor: AppTokens.textPrimary,
                     foregroundColor: Colors.white,
                     minimumSize: const Size(48, 48),
                   ),
-                  onPressed: chosenQuestions[exam['key']] == null
+                  onPressed: selection.isEmpty
                       ? null
                       : () {
-                          final q = (exam['questions'] as List)
-                              .cast<Map<String, dynamic>>()
-                              .firstWhere(
-                                (q) => q['key'] == chosenQuestions[exam['key']],
-                              );
                           final u = c.universities.firstWhere(
                             (u) => u['sourceUniversityId'] == uni,
                           );
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute<void>(
-                              builder: (_) => _SourceWriter(
+                              builder: (_) => _SelectedAnswerWriter(
                                 owner: widget.owner,
-                                question: q,
+                                questions: questions
+                                    .where((q) => selection.contains(q['key']))
+                                    .toList(),
                                 exam: {...exam, 'universityName': u['name']},
                                 universityName: u['name'] as String?,
                                 rewriteRun: widget.rewriteRun,
@@ -454,8 +456,58 @@ class _SourceSelectionState extends State<_SourceSelection> {
   );
 }
 
+// Keep each selected question's existing writer and Draft alive when switching.
+class _SelectedAnswerWriter extends StatefulWidget {
+  const _SelectedAnswerWriter({
+    required this.owner,
+    required this.questions,
+    required this.exam,
+    this.universityName,
+    this.officialUrl,
+    this.rewriteRun,
+  });
+  final String owner;
+  final List<Map<String, dynamic>> questions;
+  final Map<String, dynamic> exam;
+  final String? universityName, officialUrl;
+  final Map<String, dynamic>? rewriteRun;
+  @override
+  State<_SelectedAnswerWriter> createState() => _SelectedAnswerWriterState();
+}
+
+class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
+  int current = 0;
+  @override
+  Widget build(BuildContext context) => IndexedStack(
+    index: current,
+    children: [
+      for (var i = 0; i < widget.questions.length; i++)
+        TickerMode(
+          enabled: i == current,
+          child: _SourceWriter(
+            key: ValueKey(widget.questions[i]['key']),
+            owner: widget.owner,
+            question: widget.questions[i],
+            exam: widget.exam,
+            universityName: widget.universityName,
+            officialUrl: widget.officialUrl,
+            rewriteRun: widget.rewriteRun,
+            selectedQuestions: widget.questions,
+            onQuestionChanged: (key) => setState(
+              () =>
+                  current = widget.questions.indexWhere((q) => q['key'] == key),
+            ),
+          ),
+        ),
+    ],
+  );
+}
+
 class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
+    super.key,
+    required this.selectedQuestions,
+    required this.onQuestionChanged,
     this.rewriteRun,
     required this.owner,
     required this.question,
@@ -467,6 +519,8 @@ class _SourceWriter extends ConsumerStatefulWidget {
   final String owner;
   final String? officialUrl, universityName;
   final Map<String, dynamic> question, exam;
+  final List<Map<String, dynamic>> selectedQuestions;
+  final ValueChanged<String> onQuestionChanged;
   @override
   ConsumerState<_SourceWriter> createState() => _SourceWriterState();
 }
@@ -635,6 +689,28 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         .where((v) => v.isNotEmpty)
                         .join(' · '),
                   ),
+                  if (widget.selectedQuestions.length > 1)
+                    DropdownButton<String>(
+                      value: widget.question['key'] as String,
+                      isExpanded: true,
+                      hint: const Text('작성할 문항'),
+                      items: [
+                        for (final q in widget.selectedQuestions)
+                          DropdownMenuItem(
+                            value: q['key'] as String,
+                            child: Text(q['label'] as String),
+                          ),
+                      ],
+                      onChanged: imageSaving || syncBusy
+                          ? null
+                          : (value) async {
+                              if (value == null) return;
+                              await c.save();
+                              if (mounted && !c.dirty && !imageDirty) {
+                                widget.onQuestionChanged(value);
+                              }
+                            },
+                    ),
                   const SizedBox(height: 16),
                   if (pdf != null)
                     TextButton.icon(
@@ -691,10 +767,22 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                     if (widget.question['inputMode'] == 'image' ||
                         photo.isNotEmpty ||
                         showOptionalImage) ...[
-                      AnswerImagesInput(
-                        values: photo,
-                        enabled: imageReady && !imageSaving,
-                        onChanged: savePhoto,
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          outlinedButtonTheme: OutlinedButtonThemeData(
+                            style: Theme.of(context).outlinedButtonTheme.style
+                                ?.copyWith(
+                                  side: const WidgetStatePropertyAll(
+                                    BorderSide(color: AppTokens.textPrimary),
+                                  ),
+                                ),
+                          ),
+                        ),
+                        child: AnswerImagesInput(
+                          values: photo,
+                          enabled: imageReady && !imageSaving,
+                          onChanged: savePhoto,
+                        ),
                       ),
                       if (imageSaving)
                         const Text('사진 저장 중')
@@ -816,11 +904,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                   ],
                   ...[
                     const SizedBox(height: 20),
-                    if ((widget.exam['questions'] as List).length > 1)
-                      const Text('다음 화면에서 이 시험의 제출 문항을 선택합니다.'),
+
                     FilledButton(
                       style: FilledButton.styleFrom(
-                        backgroundColor: AppTokens.primaryInk,
+                        backgroundColor: AppTokens.textPrimary,
                         foregroundColor: Colors.white,
                         minimumSize: const Size(48, 48),
                       ),
@@ -839,6 +926,9 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                             owner: widget.owner,
                             exam: widget.exam,
                             currentQuestion: widget.question['key'] as String,
+                            selectedQuestions: widget.selectedQuestions
+                                .map((q) => q['key'] as String)
+                                .toSet(),
                             rewriteRun: widget.rewriteRun,
                           ),
                         );
@@ -991,6 +1081,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         final store = SourceDraftGateway(widget.owner, q['key'] as String);
         final draft = await store.loadDraft();
         final images = await store.loadImages();
+        if (draft.body.trim().isEmpty && images.isEmpty) {
+          throw StateError(
+            '${q['label']}: 답안이 비어 있어요. 답안을 작성하거나 제출 선택에서 제외해 주세요.',
+          );
+        }
         if (q['dbQuestionId'] == null ||
             draft.body.trim().isEmpty ||
             images.isNotEmpty ||
@@ -1037,7 +1132,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
             ),
             FilledButton(
               style: FilledButton.styleFrom(
-                backgroundColor: AppTokens.primaryInk,
+                backgroundColor: AppTokens.textPrimary,
                 foregroundColor: Colors.white,
                 minimumSize: const Size(48, 48),
               ),
@@ -1142,7 +1237,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
         style: FilledButton.styleFrom(
-          backgroundColor: AppTokens.primaryInk,
+          backgroundColor: AppTokens.textPrimary,
           foregroundColor: Colors.white,
           minimumSize: const Size(48, 48),
         ),
@@ -1188,9 +1283,11 @@ class ExamAnswerReview extends StatefulWidget {
     required this.owner,
     required this.exam,
     required this.currentQuestion,
+    this.selectedQuestions,
     this.rewriteRun,
   });
   final String owner, currentQuestion;
+  final Set<String>? selectedQuestions;
   final Map<String, dynamic> exam;
   final Map<String, dynamic>? rewriteRun;
   @override
@@ -1199,7 +1296,10 @@ class ExamAnswerReview extends StatefulWidget {
 
 class _ExamAnswerReviewState extends State<ExamAnswerReview> {
   late final Set<String> selected = widget.rewriteRun == null
-      ? {widget.currentQuestion}
+      ? {
+          ...?widget.selectedQuestions,
+          if (widget.selectedQuestions == null) widget.currentQuestion,
+        }
       : (widget.exam['questions'] as List)
             .cast<Map<String, dynamic>>()
             .where(
@@ -1209,6 +1309,21 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
             )
             .map((q) => q['key'] as String)
             .toSet();
+  Future<List<String>> missingAnswers() async {
+    final missing = <String>[];
+    for (final q
+        in (widget.exam['questions'] as List).cast<Map<String, dynamic>>()) {
+      if (!selected.contains(q['key'])) continue;
+      final store = SourceDraftGateway(widget.owner, q['key'] as String);
+      final draft = await store.loadDraft();
+      final images = await store.loadImages();
+      if (draft.body.trim().isEmpty && images.isEmpty) {
+        missing.add(q['label'] as String);
+      }
+    }
+    return missing;
+  }
+
   @override
   Widget build(BuildContext context) => SafeArea(
     child: SingleChildScrollView(
@@ -1248,6 +1363,16 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
                       }
                     }),
             ),
+          FutureBuilder<List<String>>(
+            future: missingAnswers(),
+            builder: (context, snapshot) => snapshot.hasError
+                ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
+                : Text(
+                    (snapshot.data ?? []).isEmpty
+                        ? ''
+                        : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+                  ),
+          ),
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('답안 수정'),

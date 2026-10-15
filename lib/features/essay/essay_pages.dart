@@ -1340,7 +1340,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                   const SizedBox(height: 16),
                   FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: AppTokens.primaryInk,
+                      backgroundColor: AppTokens.textPrimary,
                       foregroundColor: Colors.white,
                       minimumSize: const Size(48, 48),
                     ),

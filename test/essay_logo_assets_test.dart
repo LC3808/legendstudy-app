@@ -6,7 +6,7 @@ import 'package:legendstudy_app/features/essay/university_catalog.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  test('all existing official logos decode natively and white variants retain contrast', () async {
+  test('all existing official logos decode natively and light-background variants retain contrast', () async {
     expect(essayUniversityCatalog.length, 42);
     for (final u in essayUniversityCatalog) {
       final bytes = await File(u['logoAsset'] as String).readAsBytes();
@@ -20,7 +20,7 @@ void main() {
       essayUniversityCatalog.singleWhere(
         (u) => u['sourceUniversityId'] == 'hanyang',
       )['logoDark'],
-      true,
+      false,
     );
   });
 }

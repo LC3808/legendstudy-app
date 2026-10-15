@@ -62,11 +62,12 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
+        expect(find.text('나의 논술 LAB'), findsNothing);
         expect(find.text('첨삭 시작하기'), findsNothing);
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.text('문제 1'));
-        await tester.tap(find.text('문제 1'));
+        // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
         await tester.ensureVisible(find.text('답안 작성하기'));
@@ -93,7 +94,7 @@ void main() {
         await tester.pageBack();
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.text('문제 1'));
-        await tester.tap(find.text('문제 1'));
+        // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
         await tester.ensureVisible(find.text('답안 작성하기'));
@@ -165,7 +166,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byIcon(Icons.edit_outlined), findsNothing);
     await tester.ensureVisible(find.text('문제 1'));
-    await tester.tap(find.text('문제 1'));
+    // Rewrite's original question set is fixed.
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsNothing);
     await tester.ensureVisible(find.text('답안 작성하기'));
@@ -181,7 +182,7 @@ void main() {
     await tester.pageBack();
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('문제 1'));
-    await tester.tap(find.text('문제 1'));
+    // Rewrite's original question set is fixed.
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsNothing);
     await tester.ensureVisible(find.text('답안 작성하기'));
@@ -233,6 +234,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('사용 가능 Credit 10개'), findsOneWidget);
       expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
+      expect(find.text('나의 논술 LAB'), findsNothing);
       expect(find.text('첨삭 시작하기'), findsNothing);
       await tester.scrollUntilVisible(find.text('대학 20'), 300);
       await tester.pumpAndSettle();

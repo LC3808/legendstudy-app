@@ -3884,3 +3884,11 @@ logos.15 focused tests/Analyze/iOS simulator build PASS; physical acceptance pen
 Server initial-cost quote missing; documented PARTIAL without changing backend.
 Result/comparison/History detail, DB, Ledger, Math, Payment/IAP unchanged.
 No Provider/Credit operation; HOLD. See essay-lab-ui-ux-v1.md for files and checks.
+
+## 2026-10-15 — Four Owner iPhone follow-up fixes
+
+White logo backgrounds/official color variants, shorter Hero, multi-question
+checkbox→existing writer/Draft and navy CTAs completed.25 tests PASS/4 existing
+private-fixture SKIP; Analyze/iOS simulator build PASS. Result structure and all
+backend/payment contracts unchanged. Owner device check pending, public HOLD.
+No Provider/Credit/DB operation. Details in essay-lab-ui-ux-v1.md.
