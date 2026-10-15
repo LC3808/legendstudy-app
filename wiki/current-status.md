@@ -3,10 +3,10 @@
 ## 2026-10-15 — APP/WEB UX and cycles / LOCAL PARTIAL
 
 UX local complete; device approval pending. Final cycles RPC preparation/local
-PostgreSQL concurrency/recovery PASS; production NOT_APPLIED. Registry234/runs2
-preserved read-only; submit/history match Rollback baseline. See
+PostgreSQL concurrency/recovery PASS; production APPLIED INACTIVE. Registry234/runs2
+and Ledger/Package hashes preserved; worker-only RPCs verified. See
 [application and verification SQL](../supabase/candidates/essay_continuous_cycles/README.md).
-No Provider/real Credit/hosted TEST writes. Inactive DB approval pending; HOLD.
+Owner-approved DB installation only; no Provider/Credit calls. HOLD.
 [Evidence and remaining gates](essay-lab-ui-ux-v1.md#appweb-result-consistency-and-paid-cycles--2026-10-15).
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION

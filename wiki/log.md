@@ -3942,3 +3942,11 @@ Synthetic PostgreSQL async/cycles integration and14 Ledger regression groups PAS
 Distinct-key concurrency and quote/preservation checks strengthened; async review
 test fixture repaired. No hosted TEST/production writes or real Provider/Credit.
 Inactive DB installation requires Owner approval; see candidate README. HOLD.
+
+## 2026-10-15 — Owner-approved inactive cycle RPC installation
+
+Migration20261015121723 applied once. Two worker-only RPCs/columns/index/trigger
+verified. Registry234/runs2/Ledger31/material revisions17 fingerprints unchanged.
+New cycle rows0; flags unchanged, no Provider/Credit calls. Public HOLD.
+Operating additional-paid E2E still requires separate approval. Candidate README
+records exact preservation evidence and rollback boundary.

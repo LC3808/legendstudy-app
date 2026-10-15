@@ -1,7 +1,8 @@
-# Continuous essay cycles — CANDIDATE / NOT APPLIED
+# Continuous essay cycles — APPLIED INACTIVE (2026-10-15)
 
-Owner Oct15 authorizes code and local tests only. No Provider, production Credit,
-DDL or execution-flag action is included. Apply only after separate approval.
+Owner approved inactive installation on Oct15 after final preparation. Applied via
+Supabase migration `20261015121723_essay_continuous_cycles`; execution flags were
+not changed. No Provider or Credit transaction is authorized by installation.
 
 ## Exact change
 
@@ -107,3 +108,24 @@ Ledger functions are unchanged. History only adds metadata; old rows remain null
 
 Approval requested only for the described inactive DB installation, not flag
 activation, hosted TEST credit postings, Provider calls or production Credit trades.
+
+## Approved inactive installation — verified 2026-10-15
+
+Applied exact approved install.sql once to stlhijzpjfgwwdgunlsd; migration history
+version20261015121723. Repository migration mirrors the applied SQL verbatim
+(the original candidate-only header is retained for byte-level traceability).
+Both RPCs: SECURITY DEFINER, empty search_path, postgres/essay_worker EXECUTE only;
+anon/authenticated/service_role denied. Two nullable columns, successor index and
+enabled insert trigger confirmed. New-cycle rows0. Existing submit/history ACLs
+preserved; private reserve/finish body hashes unchanged.
+
+Before/after fingerprints identical:
+- Registry234: db7cb8dfa3694ea1939d1a1a847ccee4
+- runs2: c748e309aec28dd9d882037a40c8f961
+- Ledger31: eb025f1d5fbf64f94f2a5a97191ca881
+- material revisions17: 85888c24a270596608c2a0243e3294c3
+
+No operating submit/quote invocation or Provider call performed. This is schema,
+ACL and preservation verification, not additional-paid operating E2E. Cloudflare
+flags unchanged; public HOLD. Future activation/Provider/Credit requires separate
+approval. Earlier NOT_APPLIED sections above describe preparation-time evidence.
