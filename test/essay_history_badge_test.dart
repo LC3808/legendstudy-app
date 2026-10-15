@@ -7,6 +7,20 @@ import 'package:legendstudy_app/features/essay/shared_history.dart';
 import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 
 void main() {
+  testWidgets('registry track/session badges wrap at360 and200%', (tester) async {
+    tester.view.physicalSize = const Size(360,800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(const MaterialApp(home: MediaQuery(
+      data: MediaQueryData(textScaler: TextScaler.linear(2)),
+      child: Scaffold(body: Padding(padding: EdgeInsets.all(20),child: EssayExamBadges(data:{'track':'인문계열','session':'오후 2'}))),
+    )));
+    expect(find.text('인문계열'),findsOneWidget);
+    expect(find.text('오후 2'),findsOneWidget);
+    expect(tester.takeException(),isNull);
+  });
+
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'History identity, free lineage and readable badges at 360/$scale',

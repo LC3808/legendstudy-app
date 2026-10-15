@@ -699,3 +699,33 @@ card geometry. Other logos, card padding/touch behavior and catalog IDs unchange
 Validation: related7 tests (all42 assets decode; real supplied assets at360px and
 100%/200% text, whole-card navigation), Flutter Analyze. iPhone final visual
 approval remains Owner action; no build/deploy/DB/Provider/Credit changes.
+
+## Result badges and speech follow-up — 2026-10-15
+
+Owner device PASS: History sorting/card and badge navigation, answer versions,
+rewrite/import/Draft preservation, Native voice playback/controls. These remain
+unchanged; SKKU/UOS assets at3f28529 also unchanged.
+
+- APP/WEB result identity uses separate Registry track/session bordered badges;
+  wraps without parsing or inventing identity from display strings.
+- Existing comparable level deltas now say 이전 첨삭보다 평가 수준이 한/두/세/네
+  단계 높아졌습니다/낮아졌습니다, or 동일한 평가 수준을 유지했습니다.
+  Secondary text: 평가 단계:3단계→4단계(5단계 기준); stars retained.
+  Previous is intentionally used because the comparator may be a later paid cycle,
+  not always the initial submission. No invented change reason or official score.
+- Speech uses separate structured-level sentences (5단계 평가 중3단계입니다),
+  never generated slash fractions. Native comparison overview first; then visible
+  summary/strengths/criteria/weaknesses/actions/checklist order. WEB follows its
+  existing report then comparison layout. Changed criteria precede unchanged.
+  Section and criterion titles lead their bodies; repeated identical lines are
+  suppressed in whole reading. Existing controls/navigation stop unchanged.
+- Folded criterion explanations remain included in whole reading; submitted
+  answer and optional rewrite examples are not automatically spoken.
+- APP files: evaluation_presentation.dart, approved_result_adapter.dart,
+  essay_pages.dart, essay_voice.dart, shared_history.dart/shared_history_page.dart.
+  WEB: my/evaluation-presentation.ts, exam-history.ts, essay-dashboard.tsx/CSS,
+  evaluation-report.tsx. Source reports/Schema/Prompt/Ledger/Draft untouched.
+- Validation: related Native32 tests including stored actual results and360px/200%
+  layout; Analyze/iOS simulator build PASS. WEB102 related tests plus
+  Lint/Typecheck/Build PASS. Actual iPhone pronunciation/reading alignment and
+  visual badges await Owner. No Provider/Credit/DB/deployment execution; HOLD.

@@ -1,3 +1,4 @@
+import 'evaluation_presentation.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -10,29 +11,37 @@ import 'approved_result_adapter.dart';
 Map<String, String> essaySpeechSections(
   EvaluationReport report, [
   EvaluationReport? before,
-]) => {
-  if (before != null && compareEvaluationReports(before, report) != null)
-    '평가 변화': compareEvaluationReports(before, report)!
-        .map(
-          (c) =>
-              '${shortCriterionTitle(c.after.name)}. 평가 단계 ${c.before.rating}/5에서 ${c.after.rating}/5. ${c.after.feedback}',
-        )
-        .join('\n'),
-  '종합 평가': report.summary,
-  '평가요소별 결과': report.rubric
-      .map(
-        (r) =>
-            '${shortCriterionTitle(r.name)}. ${r.rating == null ? r.value : '평가 단계 ${r.rating}/5.'} ${r.feedback}',
-      )
-      .join('\n'),
-  '잘한 점': report.strengths
-      .map((r) => '${r.title}. ${r.explanation}')
-      .join('\n'),
-  '보완할 점': report.weaknesses
-      .map((r) => '${r.title}. ${r.explanation}')
-      .join('\n'),
-  '수정 방향 안내': [...report.actions, ...report.nextSteps].join('\n'),
-};
+]) {
+  final changes = before == null ? null : compareEvaluationReports(before, report);
+  if (changes != null) {
+    changes.sort((a, b) => (a.direction == 'UNCHANGED' ? 1 : 0).compareTo(b.direction == 'UNCHANGED' ? 1 : 0));
+  }
+  final improved = changes?.where((c) => c.direction == 'IMPROVED').firstOrNull;
+  final resolved = report.previousReviews.where((r) => r['outcome'] == 'resolved').firstOrNull;
+  final sections = <String, String>{
+    if (changes != null)
+      '이번 답안의 변화 한눈에 보기': [
+        '좋아진 점.',
+        improved == null ? '평가에 명시된 변화가 아직 없어요.' : evaluationChangeSpeech(shortCriterionTitle(improved.after.name), improved.before.rating, improved.after.rating),
+        '아직 보완할 점.',
+        if (report.weaknesses.isEmpty) '평가에 명시된 보완 내용이 없어요.',
+        ...report.weaknesses.take(2).map((r) => '${r.title}. ${r.explanation}'),
+        '해결한 부분.',
+        resolved == null ? '이번 평가에서 확인된 항목이 없어요.' : evaluationText(resolved['reason']),
+        '다음에 확인할 부분.',
+        report.nextSteps.firstOrNull ?? '평가에 명시된 확인 항목이 없어요.',
+      ].join('\n'),
+    if (changes != null)
+      '평가 항목 변화': changes.map((c) => evaluationChangeSpeech(shortCriterionTitle(c.after.name), c.before.rating, c.after.rating)).join('\n'),
+    '종합 평가': report.summary,
+    '잘한 점': report.strengths.map((r) => '${r.title}. ${r.explanation}').join('\n'),
+    '평가 항목별 진단': report.rubric.map((r) => '${shortCriterionTitle(r.name)}. ${r.rating == null ? r.value : '5단계 평가 중 ${r.rating}단계입니다.'} ${r.feedback}').join('\n'),
+    '보완할 점': report.weaknesses.map((r) => '${r.title}. ${r.explanation}').join('\n'),
+    '먼저 고쳐야 할 부분': report.actions.join('\n'),
+    '다시 쓸 때 확인할 것': report.nextSteps.join('\n'),
+  };
+  return sections;
+}
 
 class EssayVoice extends StatefulWidget {
   static Future<void> Function()? stopActive;
@@ -82,6 +91,7 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
         await stop();
         queue = [];
         cursor = 0;
+        final seen = <String>{};
         for (final e in essaySpeechSections(
           widget.report,
           widget.before,
@@ -90,7 +100,9 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
               e.value.trim().isEmpty) {
             continue;
           }
-          final body = '${e.key}입니다. ${e.value}';
+          final lines = e.value.split('\n').where((line) => line.trim().isNotEmpty && seen.add(line.trim())).join('\n');
+          if (lines.isEmpty) continue;
+          final body = '${e.key}. $lines';
           for (var i = 0; i < body.length; i += 1500) {
             queue.add(
               MapEntry(

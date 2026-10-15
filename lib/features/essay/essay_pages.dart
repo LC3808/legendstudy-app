@@ -1,3 +1,4 @@
+import 'evaluation_presentation.dart';
 import 'math_workspace_page.dart';
 import 'essay_sentence_review.dart';
 import 'shared_history_page.dart';
@@ -987,7 +988,8 @@ class _EssayResultViewState extends State<EssayResultView> {
             Text(_levelStars(d.level)),
           ],
         ),
-        Text('평가 단계: ${d.previousLevel}/5 → ${d.level}/5'),
+        Text(evaluationChangeSentence(d.previousLevel, d.level)),
+        Text('평가 단계: ${d.previousLevel}단계 → ${d.level}단계 (5단계 기준)'),
         Text('${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}'),
         if (d.explanation.trim().isNotEmpty)
           ExpansionTile(

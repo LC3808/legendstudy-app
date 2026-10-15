@@ -3920,3 +3920,10 @@ explicit. See [feature evidence](essay-lab-ui-ux-v1.md#appweb-result-consistency
 Replaced only SKKU/UOS logos; alpha-only UOS crop, original SKKU white pixels.
 Unified100×52 centered boxes, zero internal padding for both. Related7tests and
 Analyze PASS; iPhone visual approval pending. See essay-lab-ui-ux-v1.md.
+
+## 2026-10-15 — Result badge and speech polish
+
+Owner device PASS preserved. Registry track/session badges, factual delta prose,
+spoken 단계 instead of fractions, visible section order. Native32/Web102 related
+tests, Analyze/iOS/Lint/Typecheck/Build PASS. No operational calls or migrations.
+Owner iPhone final speech/badge check pending; see essay-lab-ui-ux-v1.md.

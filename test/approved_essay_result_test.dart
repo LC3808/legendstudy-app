@@ -12,6 +12,7 @@ import 'package:legendstudy_app/features/essay/essay_pages.dart';
 import 'package:legendstudy_app/features/essay/evaluation_report.dart';
 import 'package:legendstudy_app/features/essay/university_catalog.dart';
 import 'package:legendstudy_app/features/essay/shared_history.dart';
+import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 
 void main() {
   setUpAll(() async {
@@ -91,7 +92,7 @@ void main() {
             4,
           );
           expect(e.changes['해결한 부분'], isNotEmpty);
-          tester.view.physicalSize = const Size(390, 844);
+          tester.view.physicalSize = const Size(360, 844);
           tester.view.devicePixelRatio = 1;
           addTearDown(tester.view.resetPhysicalSize);
           addTearDown(tester.view.resetDevicePixelRatio);
@@ -104,7 +105,7 @@ void main() {
               ),
               home: MediaQuery(
                 data: MediaQueryData(
-                  size: const Size(390, 844),
+                  size: const Size(360, 844),
                   textScaler: TextScaler.linear(scale),
                 ),
                 child: Scaffold(
@@ -135,7 +136,8 @@ void main() {
                         children: [
                           Text('한양대학교'),
                           Text('2024학년도 수시 논술'),
-                          Text('인문계열 · 오후 2 · 문제 1'),
+                          EssayExamBadges(data: {'track':'인문계열','session':'오후 2'}),
+                          Text('문제 1'),
                           Text('재첨삭 | 2026.10.14'),
                         ],
                       ),

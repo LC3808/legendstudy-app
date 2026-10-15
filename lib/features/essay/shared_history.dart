@@ -118,6 +118,8 @@ class SharedEssayHistory {
                   ? '모의논술'
                   : e['kind']} · ${e['track']}${e['session'] == null ? '' : ' · ${e['session']}'}',
         if (e != null) 'questions': e['questions'],
+        if (e != null) 'track': e['track'],
+        if (e != null) 'session': e['session'],
       };
     }
 

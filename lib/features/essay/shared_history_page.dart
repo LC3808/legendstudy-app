@@ -293,10 +293,7 @@ class _Result extends ConsumerWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        if (record.examLabel.contains(' · '))
-                          Text(
-                            record.examLabel.split(' · ').skip(1).join(' · '),
-                          ),
+                        EssayExamBadges(data: record.examData),
                         Text(
                           (record.examData['questions'] as List? ?? [])
                                       .cast<Map<String, dynamic>>()
@@ -344,4 +341,22 @@ class _Result extends ConsumerWidget {
           : const Center(child: Text('로그인 상태가 변경되었습니다.')),
     );
   }
+}
+
+/// Registry fields stay separate; never parse track/session from a display label.
+class EssayExamBadges extends StatelessWidget {
+  const EssayExamBadges({super.key, required this.data});
+  final Map<String, dynamic> data;
+  @override
+  Widget build(BuildContext context) => Wrap(
+    spacing: 8, runSpacing: 6,
+    children: [for (final field in ['track', 'session'])
+      if ((data[field] as String? ?? '').trim().isNotEmpty)
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          decoration: BoxDecoration(border: Border.all(color: AppTokens.textPrimary.withValues(alpha: 0.3)), borderRadius: BorderRadius.circular(6)),
+          child: Text(data[field] as String),
+        ),
+    ],
+  );
 }

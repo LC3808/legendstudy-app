@@ -1,3 +1,4 @@
+import 'evaluation_presentation.dart';
 import 'essay_models.dart';
 import 'evaluation_report.dart';
 
@@ -67,7 +68,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '좋아진 부분': [
           for (final c in changes.where((x) => x.direction == 'IMPROVED'))
-            '${shortCriterionTitle(c.after.name)}: ${c.before.rating}/5 → ${c.after.rating}/5',
+            '${shortCriterionTitle(c.after.name)}: ${evaluationChangeSentence(c.before.rating, c.after.rating)}',
         ],
       if (changes != null)
         '유지한 부분': [
@@ -77,7 +78,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '아직 확인할 부분': [
           for (final c in changes.where((x) => x.direction == 'DECLINED'))
-            '${shortCriterionTitle(c.after.name)}: ${c.before.rating}/5 → ${c.after.rating}/5',
+            '${shortCriterionTitle(c.after.name)}: ${evaluationChangeSentence(c.before.rating, c.after.rating)}',
         ],
     },
   );
