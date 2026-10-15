@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'essay_sentence_review.dart';
+
 /// growth-display-v1: read-only presentation of canonical stored evaluations.
 /// Qualitative Math grades are never converted to invented numerical stars.
 Map<String, dynamic> evaluationObject(dynamic v) =>
@@ -82,10 +84,12 @@ class EvaluationReport {
     required this.pins,
     this.priorId,
     this.previousReviews = const [],
+    this.sentenceReview,
   });
   final String id, answer, question, summary;
   final String? priorId;
   final List<Map<String, dynamic>> previousReviews;
+  final EssaySentenceReview? sentenceReview;
   final List<String> pins, actions, nextSteps;
   final List<EvaluationCriterion> rubric;
   final List<EvaluationFeedback> strengths, weaknesses;
@@ -431,6 +435,38 @@ EvaluationReport examEvaluationReport(
         .map(evaluationObject)
         .toList(),
     id: report.id,
+    sentenceReview: EssaySentenceReview(
+      evaluationId: report.id,
+      attemptId: run['id'] as String,
+      items: [
+        for (final item in evaluationList(
+          out['sentence_feedback'],
+        ).map(evaluationObject))
+          if (item['start'] is int &&
+              item['end'] is int &&
+              EssaySentenceCategory.values.any(
+                (v) => v.name == item['category'],
+              ) &&
+              EssaySentencePriority.values.any(
+                (v) => v.name == item['priority'],
+              ))
+            EssaySentenceItem(
+              id: evaluationText(item['observation_key']),
+              category: EssaySentenceCategory.values.firstWhere(
+                (v) => v.name == item['category'],
+              ),
+              priority: EssaySentencePriority.values.firstWhere(
+                (v) => v.name == item['priority'],
+              ),
+              start: item['start'] as int,
+              end: item['end'] as int,
+              quote: evaluationText(item['quote']),
+              diagnosis: evaluationText(item['diagnosis']),
+              direction: evaluationText(item['direction']),
+              example: item['example'] as String?,
+            ),
+      ],
+    ),
     answer: report.answer,
     question: report.question,
     summary: report.summary,

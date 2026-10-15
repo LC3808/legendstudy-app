@@ -156,11 +156,14 @@ class EssaySentenceSection extends StatelessWidget {
                           item.category.label,
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
-                        _field('원문', item.quote),
-                        _field('진단', item.diagnosis),
-                        _field('수정 방향', item.direction),
+                        _field('학생이 작성한 글', item.quote),
+                        _field('평가', item.diagnosis),
+                        _field('수정 방향 안내', item.direction),
                         if (item.example?.trim().isNotEmpty == true)
-                          _field('수정 예시', item.example!),
+                          ExpansionTile(
+                            title: const Text('수정 예시 펼치기'),
+                            children: [_field('수정 예시', item.example!)],
+                          ),
                       ],
                     ),
                   ),
@@ -172,8 +175,14 @@ class EssaySentenceSection extends StatelessWidget {
     );
   }
 
-  Widget _field(String label, String body) => Padding(
-    padding: const EdgeInsets.only(top: 10),
+  Widget _field(String label, String body) => Container(
+    color: label == '학생이 작성한 글'
+        ? const Color(0xFFF2F3F5)
+        : label == '수정 방향 안내'
+        ? const Color(0xFFEEF2F8)
+        : Colors.white,
+    padding: const EdgeInsets.all(12),
+    margin: const EdgeInsets.only(top: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

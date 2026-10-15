@@ -144,10 +144,15 @@ def cases(sql, root, user, account, exam, question):
     assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
     rollback=(root/'supabase/candidates/essay_exam_unit/api-rollback.sql').read_text()
     sql(rollback,'NONEMPTY_EXAM_ROLLBACK_DENIED')
+    if os.environ.get('ESSAY_TEST_CONTINUOUS_CYCLES') == '1':
+        from .continuous_cycle_validation import cases as cycle_cases
+        cycle_cases(sql,root,user,account,exam,question,initial)
     # Exact legacy Ledger facts survive account anonymization; answer/result runs do not.
     sql(f"update public.credit_accounts set user_id=null where id='{account}'")
     assert sql(f"select count(*) from essay_exam_private.runs where account_id='{account}'")=='0'
-    assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")=='2,0'
+    assert sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")==('1,0' if os.environ.get('ESSAY_TEST_CONTINUOUS_CYCLES') == '1' else '2,0')
+    if os.environ.get('ESSAY_TEST_CONTINUOUS_CYCLES') == '1':
+        sql((root/'supabase/candidates/essay_continuous_cycles/rollback.sql').read_text())
     if async_mode:
         assert sql('select count(*) from essay_exam_private.checkpoints')=='0'
         sql((root/'supabase/candidates/essay_cloudflare_execution/rollback.sql').read_text())

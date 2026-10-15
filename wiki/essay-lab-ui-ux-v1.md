@@ -599,3 +599,90 @@ Owner iPhone recheck: four official basic logos and SKKU visual size, shorter He
 with live Credit and working History, navy 최초 첨삭 / green 무료 재첨삭,
 exam identity/date, result and existing comparison navigation. No new submission.
 Rollback: revert this UI/assets commit and rebuild; no DB rollback required.
+
+## APP/WEB result consistency and paid cycles — 2026-10-15
+
+Latest Owner GO supersedes the earlier READ-ONLY paid-cycle restriction for LOCAL
+implementation only. Existing approved result/Writer/PDF components retained.
+No Provider Prompt/schema, original Package/result, Math, Ledger body, Toss/IAP,
+Claude branch, production settings or data changed. General public HOLD.
+
+### Implementation and preserved contracts
+
+- APP `shared_history*.dart`, WEB `my/essay-history.tsx` and existing report adapters:
+  full card/badge navigation, latest completion order, canonical exam + sorted exact
+  question-set grouping, thin dark dividers. Grouping does not create billing lineage.
+- Navy 최초 첨삭/추가 첨삭, green 무료 재첨삭; submission labels show Credit only at
+  request. Server `submission_index` is used when present; legacy rows retain
+  unnumbered 수정 제출 답안 rather than inferred ordinals from a paginated list.
+- Result header separates university/exam/track/type/date; existing stars retained,
+  comparisons explicitly N/5, changed first and unchanged collapsed. WEB shares APP
+  short criterion headings. Raw result remains immutable.
+- Existing contract1.3 already stores optional `sentence_feedback`; both adapters
+  now connect it to exact Unicode span checks. Only stored matching quotes and
+  optional examples appear; examples collapsed. No Prompt/schema change.
+- Rewrite drafts are isolated by account/question/source run/free-vs-additional.
+  Restore existing scoped draft; otherwise blank. Unfinished legacy local text
+  (different from submitted answer) and photos are preserved. Explicit previous
+  answer view/import with overwrite confirmation. Original history unchanged.
+  IMPORTANT: cycle-scoped drafts remain device/browser local: existing server Draft
+  has no cycle namespace. Original question Draft sync stays intact; cross-platform
+  rewrite Draft sync is NOT claimed. Submitted results/History stay shared.
+- Request replay reuses persisted key and bypasses a new eligibility quote: a
+  committed free reservation must not be blocked by its own consumed eligibility.
+  New intent obtains server quote first; unavailable quote fails closed.
+- Additional paid cycles: candidate `supabase/candidates/essay_continuous_cycles/`;
+  existing reserve/finalize reused, paid predecessor/exact set/sequence stored on
+  existing runs. New paid/free pair, four-way concurrency, failure release, quote,
+  role denial and erasure/Rollback tested locally. NOT_APPLIED. LAB extra cycle flag
+  defaults OFF. Candidate quote deployment must precede enabling new client submit.
+- Native `essay_voice.dart` + pinned flutter_tts4.2.5: section/element titles, stored
+  feedback and comparison only; full/section listen, pause/resume/stop, dispose and
+  background stop. No AI Provider. iOS uses CocoaPods fallback (SPM warning).
+  WEB existing local Korean voice controls retained, explicit stop added. Native
+  voice availability/audio and route transitions require physical acceptance.
+- Owner's new SKKU/UOS official logo files have not been supplied: no invented
+  replacement or change to currently accepted assets in this task.
+
+### Read-only operating evidence and quality preparation
+
+Read existing review account runs `5b636cda-9915-42e1-b209-9934c7c0fcb1` and
+`414a207b-2c51-48e6-97ea-2ddf49b77c9e`, and verified material revision17. Package
+`40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae` matches both.
+Actual utilitarianism3→4, four maintained. Both sentence_feedback arrays EMPTY:
+existing results cannot demonstrate populated quotation/example UX. Synthetic
+exact-quote fixtures validate rendering only, not Provider quality.
+
+10/25/25/30/10% occur in verified official criteria evidence text and copied runtime
+labels, not generated Provider levels. Structured `criterion_weights` is null;
+UI hides raw percentages pending a verified structured display binding. Official
+source provenance: existing hanyang_afternoon2_source.json, criteria guide52–53 /
+registered evaluation PDF5–8. The AI change analysis is explicitly labelled as such.
+Package model_answer has a page reference without extracted text. Reuse existing
+private PDFs; do not ask Owner to reupload all materials or claim A/B executed.
+
+`tool/essay_lab/quality_scenarios.json`: A–G types, pinned IDs/package, criteria,
+PASS/PARTIAL/FAIL/NOT_VERIFIED, required case fields and approval-gated execution
+plan. `quality_review.py` creates a private HTML from existing runs/package, with
+original/revised answers, official evidence, results and Owner notes. Real private
+inputs/output are outside Git. Quality remains NOT_VERIFIED until Owner review.
+No new admin system/table. Later test plan: at most14 Provider calls for seven
+cases with independent review, zero Credit, costs recalculated before approval.
+No repeated evaluation has been executed.
+
+### Validation and acceptance boundary
+
+- Local PostgreSQL integration/cycles PASS; only synthetic transport/fixtures.
+- Stored actual results rendered through Native and WEB adapters; no new calls.
+- APP 360dp/200% related tests, Analyze and iOS simulator build checked; final
+  counts recorded in current-status/log. Full suite exposes four pre-existing
+  account_deletion_test pumpAndSettle timeouts, reproduced on unchanged HEAD.
+- WEB complete suite, ESLint, TypeScript and production build checked on Node22.
+- Local browser 360px result rendering + native widget screenshot inspected;
+  these are render checks, not a new authenticated production E2E.
+
+Owner device checklist: card/badge result entry; canonical groups/latest sorting;
+header/question/type/date; actual3/5→4/5; answer expansions; empty/restore/import
+rewrite with photos; full/section voice pause/resume/stop and back navigation;
+200% text. New paid cycle operating activation requires separate SQL/config and
+Provider/Credit approval. Rollback is documented and refuses nonempty cycle data.

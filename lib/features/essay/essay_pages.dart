@@ -987,11 +987,12 @@ class _EssayResultViewState extends State<EssayResultView> {
             Text(_levelStars(d.level)),
           ],
         ),
+        Text('평가 단계: ${d.previousLevel}/5 → ${d.level}/5'),
         Text('${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}'),
         if (d.explanation.trim().isNotEmpty)
           ExpansionTile(
             title: Text(
-              d.previousLevel == d.level ? '평가 설명 보기' : '변화 관련 평가 보기',
+              d.previousLevel == d.level ? '평가 설명 보기' : 'AI 재첨삭 평가 설명 보기',
             ),
             children: [
               Padding(

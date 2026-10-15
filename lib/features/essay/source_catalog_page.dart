@@ -508,6 +508,11 @@ class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
   );
 }
 
+String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
+    run == null
+    ? question
+    : '$question:${run['_additional'] == true ? 'additional' : 'rewrite'}:${run['id']}';
+
 class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
     super.key,
@@ -536,9 +541,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   String? photoNotice;
   late final draft = SourceDraftGateway(
     widget.owner,
-    widget.question['key'] as String,
+    essayWritingDraftKey(widget.question['key'] as String, widget.rewriteRun),
     remote:
-        widget.owner != 'guest' &&
+        widget.rewriteRun == null &&
+            widget.owner != 'guest' &&
             widget.question['dbQuestionId'] is String &&
             widget.question['accountDraftReady'] != false &&
             ref.read(supabaseClientProvider) != null
@@ -603,8 +609,26 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   Future<void> load() async {
     try {
       final g = draft;
-      final d = await g.openSharedDraft();
-      final image = await g.loadImages();
+      var d = await g.openSharedDraft();
+      var image = await g.loadImages();
+      if (widget.rewriteRun != null &&
+          d.revision == 0 &&
+          d.body.isEmpty &&
+          image.isEmpty) {
+        final old = SourceDraftGateway(
+          widget.owner,
+          widget.question['key'] as String,
+        );
+        final legacy = await old.loadDraft();
+        final oldImages = await old.loadImages();
+        // Preserve an unfinished legacy rewrite, never prefill the submitted answer.
+        final body = legacy.body != previousAnswer ? legacy.body : '';
+        d = await g.saveLocalDraft(body, d.revision);
+        if (oldImages.isNotEmpty) {
+          await g.saveImages(oldImages);
+          image = oldImages;
+        }
+      }
       if (mounted) {
         photo = image;
         imageReady = true;
@@ -613,19 +637,44 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       controller = EssayController(g, initialBody: d.body)
         ..revision = d.revision;
       editor.text = d.body;
-      final previous = (widget.rewriteRun?['answers'] as List? ?? [])
-          .cast<Map<String, dynamic>>()
-          .where((a) => a['questionId'] == widget.question['dbQuestionId'])
-          .firstOrNull;
-      if (d.body.isEmpty && previous?['body'] is String) {
-        editor.text = previous!['body'] as String;
-        controller!.edit(editor.text);
-      }
       controller!.addListener(refresh);
       setState(() {});
     } catch (_) {
       if (mounted) setState(() => error = '저장된 답안을 불러오지 못했어요.');
     }
+  }
+
+  String get previousAnswer =>
+      (widget.rewriteRun?['answers'] as List? ?? [])
+              .cast<Map<String, dynamic>>()
+              .where((a) => a['questionId'] == widget.question['dbQuestionId'])
+              .firstOrNull?['body']
+          as String? ??
+      '';
+  Future<void> importPrevious() async {
+    if (editor.text.isNotEmpty) {
+      final accepted = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('작성 중인 답안을 바꿀까요?'),
+          content: const Text('현재 글을 이전 제출 답안으로 교체합니다. 첨부 사진은 유지됩니다.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('불러오기'),
+            ),
+          ],
+        ),
+      );
+      if (accepted != true || !mounted) return;
+    }
+    editor.text = previousAnswer;
+    controller!.edit(editor.text);
+    await controller!.save();
   }
 
   void refresh() {
@@ -810,7 +859,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       ),
                     if (widget.rewriteRun != null)
                       ExpansionTile(
-                        title: const Text('최초 답안 참고'),
+                        title: const Text('이전 답안 보기'),
                         children: [
                           for (final a
                               in (widget.rewriteRun!['answers'] as List)
@@ -822,6 +871,13 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                   ))
                             SelectableText(a['body'] as String),
                         ],
+                      ),
+                    if (widget.rewriteRun != null)
+                      TextButton(
+                        onPressed: syncBusy || previousAnswer.isEmpty
+                            ? null
+                            : importPrevious,
+                        child: const Text('이전 답안 불러오기'),
                       ),
                     TextField(
                       controller: editor,
@@ -967,6 +1023,10 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   bool ready = false, busy = false, polling = false, eligibilityLoaded = false;
   String notice = '';
   String? parentId;
+  String? get previousPaidId => widget.rewriteRun?['_additional'] == true
+      ? (widget.rewriteRun!['parent_id'] as String? ??
+            widget.rewriteRun!['id'] as String)
+      : null;
   String? submittedRun;
   Timer? statusPoll;
   int polls = 0;
@@ -1026,12 +1086,15 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
 
   SourceDraftGateway get pending => SourceDraftGateway(
     widget.owner,
-    'exam-request:${widget.exam['key']}:${parentId ?? 'initial'}',
+    'exam-request:${widget.exam['key']}:${previousPaidId == null ? parentId ?? 'initial' : 'additional:$previousPaidId'}',
   );
   @override
   void initState() {
     super.initState();
-    parentId = widget.rewriteRun?['id'] as String?;
+    parentId = previousPaidId == null
+        ? (widget.rewriteRun?['parent_id'] as String? ??
+              widget.rewriteRun?['id'] as String?)
+        : null;
     unawaited(check());
   }
 
@@ -1083,7 +1146,10 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (selected.isEmpty) throw StateError('답안을 제출할 문항을 선택해 주세요.');
       final answers = <Map<String, dynamic>>[];
       for (final q in selected) {
-        final store = SourceDraftGateway(widget.owner, q['key'] as String);
+        final store = SourceDraftGateway(
+          widget.owner,
+          essayWritingDraftKey(q['key'] as String, widget.rewriteRun),
+        );
         final draft = await store.loadDraft();
         final images = await store.loadImages();
         if (draft.body.trim().isEmpty && images.isEmpty) {
@@ -1105,51 +1171,9 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           'revision': draft.revision,
         });
       }
-      if (!mounted) return;
-      final confirmed = await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('제출할 답안 확인'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  parentId == null
-                      ? '제출 문항: ${answers.length}개 · 최초 첨삭\n사용 Credit: 서버 확인 필요'
-                      : '제출 문항: ${answers.length}개\n사용 Credit: 0개 · 무료 재첨삭',
-                ),
-                const Text(
-                  '실제 차감은 서버 정책을 따릅니다. 제출 후 처리 상태와 저장된 결과를 확인할 수 있어요.',
-                ),
-                for (var i = 0; i < answers.length; i++) ...[
-                  Text(selected[i]['label'] as String),
-                  Text(answers[i]['body'] as String),
-                ],
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('계속 작성'),
-            ),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: AppTokens.textPrimary,
-                foregroundColor: Colors.white,
-                minimumSize: const Size(48, 48),
-              ),
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text('첨삭 요청'),
-            ),
-          ],
-        ),
-      );
-      if (confirmed != true || !mounted) return;
       final fingerprint = jsonEncode({
         'parentId': parentId,
+        if (previousPaidId != null) 'previousPaidRunId': previousPaidId,
         'examId': widget.exam['dbExamId'],
         'answers': answers,
       });
@@ -1159,6 +1183,68 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           : jsonDecode(saved.body) as Map<String, dynamic>;
       if (prior != null && prior['fingerprint'] != fingerprint) {
         throw StateError('이전 제출의 처리 상태를 첨삭 기록에서 먼저 확인해 주세요.');
+      }
+      if (prior == null) {
+        final quote = await gateway()?.request({
+          'action': 'quote',
+          'examId': widget.exam['dbExamId'],
+          'questionIds': answers.map((a) => a['questionId']).toList(),
+          'parentId': parentId,
+          if (previousPaidId != null) 'previousPaidRunId': previousPaidId,
+        });
+        if (quote?['version'] != 'essay-exam-quote-v1' ||
+            quote?['credits'] != (parentId == null ? 1 : 0)) {
+          throw StateError('사용 Credit을 확인하지 못했어요. 답안은 보존됩니다.');
+        }
+        if (!mounted) return;
+        final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('제출할 답안 확인'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    parentId == null
+                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 Credit: ${quote!['credits']}개'
+                        : '제출 문항: ${answers.length}개\n사용 Credit: 0개 · 무료 재첨삭',
+                  ),
+                  const Text(
+                    '실제 차감은 서버 정책을 따릅니다. 제출 후 처리 상태와 저장된 결과를 확인할 수 있어요.',
+                  ),
+                  for (var i = 0; i < answers.length; i++) ...[
+                    Text(selected[i]['label'] as String),
+                    Text(answers[i]['body'] as String),
+                  ],
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('계속 작성'),
+              ),
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppTokens.textPrimary,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(48, 48),
+                ),
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(
+                  parentId != null
+                      ? '무료 재첨삭 요청'
+                      : previousPaidId != null
+                      ? '추가 첨삭 · 1 Credit'
+                      : '첨삭 요청 · 1 Credit',
+                ),
+              ),
+            ],
+          ),
+        );
+        if (confirmed != true || !mounted) return;
       }
       final key = prior?['key'] as String? ?? newEssayUuid();
       if (prior == null) {
@@ -1172,6 +1258,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         'examId': widget.exam['dbExamId'],
         'key': key,
         'parentId': parentId,
+        if (previousPaidId != null) 'previousPaidRunId': previousPaidId,
         'answers': answers,
       });
       if (result?['runId'] == null) {
@@ -1319,7 +1406,10 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
     for (final q
         in (widget.exam['questions'] as List).cast<Map<String, dynamic>>()) {
       if (!selected.contains(q['key'])) continue;
-      final store = SourceDraftGateway(widget.owner, q['key'] as String);
+      final store = SourceDraftGateway(
+        widget.owner,
+        essayWritingDraftKey(q['key'] as String, widget.rewriteRun),
+      );
       final draft = await store.loadDraft();
       final images = await store.loadImages();
       if (draft.body.trim().isEmpty && images.isEmpty) {

@@ -110,11 +110,11 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(find.text('문장 다듬기 · 1개'), findsOneWidget);
-        expect(find.text('원문'), findsNothing);
+        expect(find.text('학생이 작성한 글'), findsNothing);
         await tester.tap(find.byType(ExpansionTile));
         await tester.pumpAndSettle();
-        expect(find.text('원문'), findsOneWidget);
-        expect(find.text('수정 방향'), findsOneWidget);
+        expect(find.text('학생이 작성한 글'), findsOneWidget);
+        expect(find.text('수정 방향 안내'), findsOneWidget);
         expect(find.text('수정 예시'), findsNothing);
         expect(find.text(good.quote), findsOneWidget);
         expect(tester.takeException(), isNull);

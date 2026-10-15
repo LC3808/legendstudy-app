@@ -1,3 +1,4 @@
+import 'essay_voice.dart';
 import '../../core/theme/app_theme.dart';
 import 'approved_result_adapter.dart';
 import 'essay_pages.dart';
@@ -30,11 +31,49 @@ class SharedEssayHistoryPage extends ConsumerWidget {
   }
 }
 
-class _HistoryBody extends ConsumerWidget {
+class _HistoryBody extends ConsumerStatefulWidget {
   const _HistoryBody({required this.owner, super.key});
   final String owner;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_HistoryBody> createState() => _HistoryBodyState();
+}
+
+class _HistoryBodyState extends ConsumerState<_HistoryBody> {
+  bool byExam = false;
+  String get owner => widget.owner;
+  Future<void> openResult(SharedEssayRecord row, Map<String, dynamic> e) async {
+    final client = ref.read(supabaseClientProvider);
+    if (client == null) return;
+    try {
+      final result = await SharedEssayHistory(
+        client,
+        owner,
+      ).evaluationReport(row.math, e['id'] as String, exam: row.exam);
+      if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
+      // Detail stays on this owner-keyed page; account switch removes it.
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => _Result(
+            owner: owner,
+            report: result.report,
+            before: result.before,
+            record: row,
+            questionId: (e['id'] as String).split('/').last,
+          ),
+        ),
+      );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('평가를 불러오지 못했어요.')));
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final history = ref.watch(sharedEssayHistoryProvider(owner));
     return history.when(
       skipLoadingOnRefresh: false,
@@ -55,15 +94,31 @@ class _HistoryBody extends ConsumerWidget {
           padding: const EdgeInsets.all(20),
           physics: const AlwaysScrollableScrollPhysics(),
           children: [
+            SegmentedButton<bool>(
+              segments: const [
+                ButtonSegment(value: false, label: Text('최신순')),
+                ButtonSegment(value: true, label: Text('시험별')),
+              ],
+              selected: {byExam},
+              onSelectionChanged: (v) => setState(() => byExam = v.single),
+            ),
             const Text('논술·수리논술 각각 최근 답안 50개'),
             if (rows.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 24),
                 child: Text('아직 첨삭 기록이 없습니다.'),
               ),
-            for (final group in groupEssayHistory(rows)) ...[
+            for (final group in sortedEssayHistory(rows, byExam)) ...[
               for (final row in group)
                 ListTile(
+                  onTap: row.evaluations.any((e) => e['state'] == 'COMPLETED')
+                      ? () => openResult(
+                          row,
+                          row.evaluations.firstWhere(
+                            (e) => e['state'] == 'COMPLETED',
+                          ),
+                        )
+                      : null,
                   title: Text(
                     row.title,
                     style: Theme.of(context).textTheme.titleMedium,
@@ -93,54 +148,7 @@ class _HistoryBody extends ConsumerWidget {
                       for (final e in row.evaluations)
                         e['state'] == 'COMPLETED'
                             ? TextButton(
-                                onPressed: () async {
-                                  final client = ref.read(
-                                    supabaseClientProvider,
-                                  );
-                                  if (client == null) return;
-                                  try {
-                                    final result =
-                                        await SharedEssayHistory(
-                                          client,
-                                          owner,
-                                        ).evaluationReport(
-                                          row.math,
-                                          e['id'] as String,
-                                          exam: row.exam,
-                                        );
-                                    if (!context.mounted ||
-                                        ref
-                                                .read(authStateProvider)
-                                                .value
-                                                ?.userId !=
-                                            owner) {
-                                      return;
-                                    }
-                                    // Detail stays on this owner-keyed page; account switch removes it.
-                                    await Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (_) => _Result(
-                                          owner: owner,
-                                          report: result.report,
-                                          before: result.before,
-                                          record: row,
-                                          questionId: (e['id'] as String)
-                                              .split('/')
-                                              .last,
-                                        ),
-                                      ),
-                                    );
-                                  } catch (_) {
-                                    if (context.mounted) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                            const SnackBar(
-                                              content: Text('평가를 불러오지 못했어요.'),
-                                            ),
-                                          );
-                                    }
-                                  }
-                                },
+                                onPressed: () => openResult(row, e),
                                 child: Text(
                                   row.exam
                                       ? '${(row.examData['questions'] as List? ?? []).cast<Map<String, dynamic>>().where((q) => q['dbQuestionId'] == (e['id'] as String).split('/').last).firstOrNull?['label'] ?? '문항'} · 첨삭 결과 보기'
@@ -157,7 +165,7 @@ class _HistoryBody extends ConsumerWidget {
                     ],
                   ),
                 ),
-              const Divider(),
+              const Divider(color: Color(0xFF636363), thickness: 1),
             ],
           ],
         ),
@@ -173,11 +181,7 @@ class EssayHistoryBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final included = record.exam && record.examData['parent_id'] != null;
-    final label = included
-        ? '무료 재첨삭'
-        : record.rewrite
-        ? '재첨삭'
-        : '최초 첨삭';
+    final label = essayHistoryType(record);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: included
@@ -217,6 +221,40 @@ class _Result extends ConsumerWidget {
   final EvaluationReport? before;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Future<void> openWriter(bool additional) async {
+      await EssayVoice.stopActive?.call();
+      final client = ref.read(supabaseClientProvider);
+      if (client == null) return;
+      try {
+        final rows = await SharedEssayHistory(
+          client,
+          owner,
+        ).examRuns(record.id);
+        if (!context.mounted ||
+            ref.read(authStateProvider).value?.userId != owner ||
+            rows.length != 1) {
+          return;
+        }
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => SourceCatalogPage(
+              rewriteRun: {
+                ...rows.single,
+                'answers': record.examData['answers'] ?? rows.single['answers'],
+                if (additional) '_additional': true,
+              },
+            ),
+          ),
+        );
+      } catch (_) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('기존 답안을 불러오지 못했어요. 다시 시도해 주세요.')),
+          );
+        }
+      }
+    }
+
     final auth = ref.watch(authStateProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('첨삭 결과')),
@@ -238,6 +276,9 @@ class _Result extends ConsumerWidget {
                     ),
                     comparison: before != null,
                     submittedAnswer: report.answer,
+                    sentenceReview: report.sentenceReview,
+                    evaluationId: report.id,
+                    attemptId: record.id,
                     header: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -245,7 +286,17 @@ class _Result extends ConsumerWidget {
                           record.title,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Text(record.examLabel),
+                        Text(
+                          record.examLabel.split(' · ').first,
+                          style: const TextStyle(
+                            color: AppTokens.textPrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        if (record.examLabel.contains(' · '))
+                          Text(
+                            record.examLabel.split(' · ').skip(1).join(' · '),
+                          ),
                         Text(
                           (record.examData['questions'] as List? ?? [])
                                       .cast<Map<String, dynamic>>()
@@ -256,59 +307,39 @@ class _Result extends ConsumerWidget {
                                   as String? ??
                               '문항 정보 확인 중',
                         ),
-                        Text(
-                          '${record.rewrite ? '재첨삭' : '최초 첨삭'} · ${(DateTime.tryParse(record.examData['completed_at'] as String? ?? '') ?? record.at).toLocal().toString().substring(0, 16)}',
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          children: [
+                            EssayHistoryBadge(record: record),
+                            Text(
+                              essayCompletedAt(record)
+                                  .toLocal()
+                                  .toString()
+                                  .substring(0, 16),
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
                         ),
+                        if (record.examData['continuous_cycles_supported'] ==
+                            true)
+                          OutlinedButton(
+                            onPressed: () => openWriter(true),
+                            child: const Text('추가 첨삭 · 1 Credit'),
+                          ),
+                        EssayVoice(report: report, before: before),
                         ExpansionTile(
-                          title: const Text('제출 답안'),
+                          title: Text(essayAnswerVersion(record)),
                           children: [SelectableText(report.answer)],
                         ),
                         if (before != null)
                           ExpansionTile(
-                            title: const Text('최초 답안'),
+                            title: const Text('비교 대상 · 이전 제출 답안'),
                             children: [SelectableText(before!.answer)],
                           ),
                       ],
                     ),
-                    onRewrite: record.exam
-                        ? () async {
-                            final client = ref.read(supabaseClientProvider);
-                            if (client == null) return;
-                            try {
-                              final rows =
-                                  await SharedEssayHistory(
-                                    client,
-                                    owner,
-                                  ).examRuns(
-                                    record.examData['parent_id'] as String? ??
-                                        record.id,
-                                  );
-                              if (!context.mounted ||
-                                  ref.read(authStateProvider).value?.userId !=
-                                      owner ||
-                                  rows.length != 1) {
-                                return;
-                              }
-                              await Navigator.of(context).push(
-                                MaterialPageRoute<void>(
-                                  builder: (_) => SourceCatalogPage(
-                                    rewriteRun: rows.single,
-                                  ),
-                                ),
-                              );
-                            } catch (_) {
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      '기존 답안을 불러오지 못했어요. 다시 시도해 주세요.',
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
-                          }
-                        : null,
+                    onRewrite: record.exam ? () => openWriter(false) : null,
                   )
           : const Center(child: Text('로그인 상태가 변경되었습니다.')),
     );

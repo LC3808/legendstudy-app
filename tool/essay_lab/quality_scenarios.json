@@ -1,0 +1,19 @@
+{
+  "version": "owner-quality-preparation-v1",
+  "execution": "OFF",
+  "target": {"exam_id":"345d3caa-3438-58c3-8f80-62a6242179ec","question_id":"4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde","package_version":17,"package_digest":"40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae"},
+  "cases": [
+    {"type":"A","source":"official outstanding answer","status":"NOT_VERIFIED","check":"verify exact exam/question and source page; never require maximum rating"},
+    {"type":"B","source":"official model answer","status":"NOT_VERIFIED","check":"package model_answer has page reference, no extracted answer text; use existing private source, no reupload"},
+    {"type":"C","source":"existing initial E2E answer","status":"OWNER_REVIEW_PENDING","check":"balanced strengths, omissions and evidence"},
+    {"type":"D","source":"controlled error fixture","status":"NOT_RUN","check":"label synthetic; test misreading, missing premise, contradiction; never label official"},
+    {"type":"E","source":"existing included rewrite","status":"OWNER_REVIEW_PENDING","check":"utilitarianism 3 to 4 must match actual added reasoning; four unchanged criteria"},
+    {"type":"F","source":"controlled partial revision","status":"NOT_RUN","check":"only corrected issues improve; unchanged errors remain"},
+    {"type":"G","source":"identical initial answer","status":"NOT_RUN","check":"no automatic growth; repeated evaluation needs Owner approval"}
+  ],
+  "dimensions":["prompt comprehension","passage interpretation","argument consistency","official criterion identity","exact student quotation","actionable advice","example fidelity","repeatability"],
+  "verdicts":{"PASS":"core assessment and feedback supported by official evidence","PARTIAL":"core valid but specific correction needed","FAIL":"major reasoning, source or quotation error","NOT_VERIFIED":"insufficient source/execution/human review"},
+  "required_case_fields":["exam_id","question_id","package_version","package_digest","answer_type","answer_hash","source_references","stored_result","criterion_levels","strengths","weaknesses","exact_quotes","directions","optional_examples","change_evidence","verdict","reviewer_notes"],
+  "proposed_provider_test":{"calls_max":14,"scope":"one A-G evaluation plus independent review each; only after source readiness and explicit approval","cost":"recalculate using approved model current price and token caps before requesting approval","credit_transactions":0,"production_migration":false,"output":"private QA artifact, never student History","retry":"no automatic extra calls; preserve failed case evidence"},
+  "expansion":"Hanyang Owner quality review first, then existing prioritized universities; reuse private PDFs, verified packages and existing admin QA. No mass activation."
+}

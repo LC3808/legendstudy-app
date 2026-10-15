@@ -328,3 +328,50 @@ List<List<SharedEssayRecord>> groupEssayHistory(List<SharedEssayRecord> rows) {
     ..sort((a, b) => b.last.at.compareTo(a.last.at));
   return result;
 }
+
+/// Presentation grouping is not financial lineage. Missing IDs stay independent.
+String essayExamGroupKey(SharedEssayRecord row) {
+  final exam = row.examData['exam_id'];
+  final questions = row.examData['question_ids'];
+  if (!row.exam || exam is! String || questions is! List || questions.isEmpty) {
+    return '${row.math}:${row.id}';
+  }
+  return '$exam:${(questions.cast<String>().toList()..sort()).join(',')}';
+}
+
+DateTime essayCompletedAt(SharedEssayRecord row) =>
+    DateTime.tryParse(row.examData['completed_at'] as String? ?? '') ?? row.at;
+String essayHistoryType(SharedEssayRecord row) => row.exam
+    ? row.examData['parent_id'] != null
+          ? '무료 재첨삭'
+          : row.examData['previous_paid_run_id'] != null
+          ? '추가 첨삭'
+          : '최초 첨삭'
+    : row.rewrite
+    ? '재첨삭'
+    : '최초 첨삭';
+String essayAnswerVersion(SharedEssayRecord row) {
+  final number = row.examData['submission_index'];
+  if (number is int && number > 0) {
+    return number == 1 ? '최초 제출 답안' : '수정 제출 답안 ${number - 1}';
+  }
+  // Old independent runs do not carry a verified global submission sequence.
+  return row.rewrite ? '수정 제출 답안' : '최초 제출 답안';
+}
+
+List<List<SharedEssayRecord>> sortedEssayHistory(
+  List<SharedEssayRecord> rows,
+  bool byExam,
+) {
+  final sorted = [...rows]
+    ..sort((a, b) {
+      final time = essayCompletedAt(b).compareTo(essayCompletedAt(a));
+      return time != 0 ? time : b.id.compareTo(a.id);
+    });
+  if (!byExam) return sorted.map((r) => [r]).toList();
+  final groups = <String, List<SharedEssayRecord>>{};
+  for (final row in sorted) {
+    groups.putIfAbsent(essayExamGroupKey(row), () => []).add(row);
+  }
+  return groups.values.toList();
+}

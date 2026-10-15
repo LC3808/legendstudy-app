@@ -105,7 +105,7 @@ void main() {
       },
     );
   }
-  testWidgets('rewrite restores original, locks selection and respects HOLD', (
+  testWidgets('rewrite starts blank, restores scoped draft, locks selection and respects HOLD', (
     tester,
   ) async {
     final disk = <String, String>{};
@@ -174,7 +174,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(
       tester.widget<TextField>(find.byType(TextField)).controller!.text,
-      '기존 제출 답안',
+      '',
     );
     await tester.enterText(find.byType(TextField), '수정 중인 답안');
     await tester.pump(const Duration(seconds: 1));

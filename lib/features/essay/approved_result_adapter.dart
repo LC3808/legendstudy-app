@@ -4,8 +4,10 @@ import 'evaluation_report.dart';
 // Display only: immutable source labels and stored evaluations remain untouched.
 String readableEssayText(String value) =>
     value.replaceAll(RegExp(r'\s+'), ' ').trim();
+String withoutUnverifiedWeight(String value) =>
+    value.replaceAll(RegExp(r'\(?\s*\d+(?:\.\d+)?\s*%\s*\)?'), '').trim();
 String shortCriterionTitle(String value) {
-  final text = readableEssayText(value);
+  final text = readableEssayText(withoutUnverifiedWeight(value));
   final compact = String.fromCharCodes(text.runes.take(35)).replaceAll(' ', '');
   for (final pair in const [
     ('구성과전개', '구성과 전개'),
@@ -42,7 +44,7 @@ EssayEvaluation approvedEssayEvaluation(
           c.id,
           shortCriterionTitle(c.name),
           c.rating,
-          '${readableEssayText(c.name)}\n\n${c.feedback}',
+          '${readableEssayText(withoutUnverifiedWeight(c.name))}\n\n${c.feedback}',
           previousLevel: changes
               ?.where((x) => x.after.id == c.id)
               .firstOrNull
@@ -65,7 +67,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '좋아진 부분': [
           for (final c in changes.where((x) => x.direction == 'IMPROVED'))
-            '${shortCriterionTitle(c.after.name)}: ${c.before.rating} → ${c.after.rating}',
+            '${shortCriterionTitle(c.after.name)}: ${c.before.rating}/5 → ${c.after.rating}/5',
         ],
       if (changes != null)
         '유지한 부분': [
@@ -75,7 +77,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '아직 확인할 부분': [
           for (final c in changes.where((x) => x.direction == 'DECLINED'))
-            '${shortCriterionTitle(c.after.name)}: ${c.before.rating} → ${c.after.rating}',
+            '${shortCriterionTitle(c.after.name)}: ${c.before.rating}/5 → ${c.after.rating}/5',
         ],
     },
   );
