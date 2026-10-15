@@ -3876,3 +3876,11 @@ UX 개선 과제 (기록만, 이번 작업에서는 구현하지 않음):
 완료된 재첨삭을 재실행하거나 추가 Provider 호출·Credit 거래를 하지 않는다.
 실행 OFF 및 일반 사용자 공개 HOLD 유지. 코드·UI·DB·배포 변경 없음.
 
+
+## 2026-10-15 — Mobile entry-to-submit UX phase 1
+
+Implemented Owner card/Hero/selection/writer/review simplification and reused official42
+logos.15 focused tests/Analyze/iOS simulator build PASS; physical acceptance pending.
+Server initial-cost quote missing; documented PARTIAL without changing backend.
+Result/comparison/History detail, DB, Ledger, Math, Payment/IAP unchanged.
+No Provider/Credit operation; HOLD. See essay-lab-ui-ux-v1.md for files and checks.

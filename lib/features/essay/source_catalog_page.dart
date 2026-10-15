@@ -41,6 +41,9 @@ class SourceCatalogPage extends ConsumerWidget {
     if (auth.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+    // Keep the Hero balance cached while selecting an exam, so returning
+    // does not replace its content with a shorter loading state.
+    ref.watch(creditBalanceProvider);
     final owner = auth.value?.userId ?? 'guest';
     return _SourceSelection(
       key: ValueKey(owner),
@@ -78,6 +81,29 @@ class _SourceSelectionState extends State<_SourceSelection> {
   late Future<SourceCatalog> data = widget.catalog ?? widget.loadCatalog();
   final included = <String, Set<String>>{};
   String? university, year, kind, track, examKey;
+  final chosenQuestions = <String, String>{};
+  final catalogScroll = ScrollController();
+  double catalogOffset = 0;
+  void backToCatalog() {
+    setState(() {
+      university = null;
+      year = kind = track = examKey = null;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (catalogScroll.hasClients) {
+        catalogScroll.jumpTo(
+          catalogOffset.clamp(0, catalogScroll.position.maxScrollExtent),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    catalogScroll.dispose();
+    super.dispose();
+  }
+
   Widget choice(
     String label,
     String? value,
@@ -99,275 +125,331 @@ class _SourceSelectionState extends State<_SourceSelection> {
     ),
   );
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(university == null ? '논술 LAB' : '논술 첨삭 시작'),
-      actions: [
-        TextButton.icon(
-          label: const Text('나의 첨삭 기록'),
-          icon: const Icon(Icons.history),
-          onPressed: () => context.push('/lab/essay/history'),
-        ),
-      ],
-    ),
-    body: FutureBuilder<SourceCatalog>(
-      future: data,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: TextButton(
-              onPressed: () => setState(() => data = widget.loadCatalog()),
-              child: const Text('문항을 불러오지 못했어요. 다시 확인'),
+  Widget build(BuildContext context) => PopScope(
+    canPop: university == null || widget.rewriteRun != null,
+    onPopInvokedWithResult: (didPop, _) {
+      if (!didPop) backToCatalog();
+    },
+    child: Scaffold(
+      appBar: AppBar(
+        title: Text(university == null ? '논술 LAB' : '시험 선택'),
+        leading: university != null && widget.rewriteRun == null
+            ? IconButton(
+                tooltip: '대학 목록',
+                icon: const Icon(Icons.arrow_back),
+                onPressed: backToCatalog,
+              )
+            : null,
+        actions: [
+          if (university != null)
+            TextButton.icon(
+              label: const Text('나의 첨삭 기록'),
+              icon: const Icon(Icons.history),
+              onPressed: () => context.push('/lab/essay/history'),
             ),
-          );
-        }
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final c = snapshot.data!;
-        if (widget.rewriteRun != null && university == null) {
-          final matched = c.exams
-              .where((e) => e['dbExamId'] == widget.rewriteRun!['exam_id'])
-              .firstOrNull;
-          if (matched == null) {
-            return const Center(
-              child: Text('이 시험의 작성 자료를 확인하지 못했어요. 기존 첨삭 기록은 보존됩니다.'),
+        ],
+      ),
+      body: FutureBuilder<SourceCatalog>(
+        future: data,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: TextButton(
+                onPressed: () => setState(() => data = widget.loadCatalog()),
+                child: const Text('문항을 불러오지 못했어요. 다시 확인'),
+              ),
             );
           }
-          university = matched['sourceUniversityId'] as String;
-          year = '${matched['year']}';
-          kind = matched['kind'] as String;
-          track = matched['track'] as String;
-          examKey = matched['key'] as String;
-          included[examKey!] = (matched['questions'] as List)
-              .cast<Map<String, dynamic>>()
-              .where(
-                (q) => (widget.rewriteRun!['question_ids'] as List).contains(
-                  q['dbQuestionId'],
-                ),
-              )
-              .map((q) => q['key'] as String)
-              .toSet();
-        }
-        if (university == null) {
-          return ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              const CreditBalanceCard(compact: true),
-              for (final u in c.universities)
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final c = snapshot.data!;
+          if (widget.rewriteRun != null && university == null) {
+            final matched = c.exams
+                .where((e) => e['dbExamId'] == widget.rewriteRun!['exam_id'])
+                .firstOrNull;
+            if (matched == null) {
+              return const Center(
+                child: Text('이 시험의 작성 자료를 확인하지 못했어요. 기존 첨삭 기록은 보존됩니다.'),
+              );
+            }
+            university = matched['sourceUniversityId'] as String;
+            year = '${matched['year']}';
+            kind = matched['kind'] as String;
+            track = matched['track'] as String;
+            examKey = matched['key'] as String;
+            included[examKey!] = (matched['questions'] as List)
+                .cast<Map<String, dynamic>>()
+                .where(
+                  (q) => (widget.rewriteRun!['question_ids'] as List).contains(
+                    q['dbQuestionId'],
+                  ),
+                )
+                .map((q) => q['key'] as String)
+                .toSet();
+          }
+          if (university == null) {
+            return ListView(
+              key: const PageStorageKey('essay-university-list'),
+              controller: catalogScroll,
+              padding: const EdgeInsets.all(20),
+              children: [
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        if (u['logo'] is String)
-                          Image.network(
-                            'https://lab.legendstudy.com${u['logo']}',
-                            height: 48,
-                            width: 140,
-                            fit: BoxFit.contain,
-                            alignment: Alignment.centerLeft,
-                            errorBuilder: (_, _, _) =>
-                                const Icon(Icons.school_outlined),
-                          ),
                         Text(
-                          u['name'] as String,
+                          '나의 논술 LAB',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 12),
-                        FilledButton(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: AppTokens.primaryInk,
-                            foregroundColor: Colors.white,
-                            minimumSize: const Size(48, 48),
-                          ),
-                          onPressed: () => setState(
-                            () =>
-                                university = u['sourceUniversityId'] as String,
-                          ),
-                          child: const Text('첨삭 시작하기'),
+                        LayoutBuilder(
+                          builder: (context, bounds) {
+                            final history = TextButton(
+                              onPressed: () =>
+                                  context.push('/lab/essay/history'),
+                              child: const Text('나의 첨삭 기록 ›'),
+                            );
+                            const credit = CreditBalanceCard(compact: true);
+                            return MediaQuery.textScalerOf(context).scale(14) >
+                                    22
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      history,
+                                      const Divider(),
+                                      credit,
+                                    ],
+                                  )
+                                : Row(
+                                    children: [
+                                      Expanded(child: history),
+                                      const SizedBox(width: 12),
+                                      const Expanded(child: credit),
+                                    ],
+                                  );
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
-            ],
-          );
-        }
-        final uni = university;
-        final rows = c.exams
-            .where((e) => e['sourceUniversityId'] == uni)
-            .toList();
-        final years = rows.map((e) => '${e['year']}').toSet().toList()
-          ..sort((a, b) => b.compareTo(a));
-        final y = year ?? (years.length == 1 ? years.first : null);
-        final yr = rows.where((e) => '${e['year']}' == y).toList();
-        final kinds = yr.map((e) => e['kind'] as String).toSet().toList();
-        final k = kind ?? (kinds.length == 1 ? kinds.first : null);
-        final kr = yr.where((e) => e['kind'] == k).toList();
-        final tracks = kr.map((e) => e['track'] as String).toSet().toList();
-        final t = track ?? (tracks.length == 1 ? tracks.first : null);
-        final exams = kr.where((e) => e['track'] == t).toList();
-        final selected =
-            examKey ??
-            (exams.length == 1 ? exams.first['key'] as String : null);
-        final matches = exams.where((e) => e['key'] == selected);
-        final exam = matches.isEmpty ? null : matches.single;
-        return ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            const CreditBalanceCard(compact: true),
-            if (widget.rewriteRun == null)
-              TextButton(
-                onPressed: () => setState(() {
-                  university = null;
-                  year = kind = track = examKey = null;
-                }),
-                child: const Text('대학 목록'),
-              ),
-            if (widget.rewriteRun != null)
-              const Text('다시 써보기 · 최초 제출 문항을 유지합니다.'),
-            if (rows.isEmpty) const Text('이 대학의 시험 자료를 준비하고 있어요.'),
-            choice(
-              '대학',
-              uni,
-              c.universities
-                  .map((u) => u['sourceUniversityId'] as String)
-                  .toList(),
-              (v) => setState(() {
-                university = v;
-                year = kind = track = examKey = null;
-              }),
-              labels: {
                 for (final u in c.universities)
-                  u['sourceUniversityId'] as String: u['name'] as String,
-              },
-            ),
-            choice(
-              '학년도',
-              y,
-              years,
-              (v) => setState(() {
-                year = v;
-                kind = track = examKey = null;
-              }),
-            ),
-            choice(
-              '시험 유형',
-              k,
-              kinds,
-              (v) => setState(() {
-                kind = v;
-                track = examKey = null;
-              }),
-              labels: const {'mock': '모의논술', 'admission': '수시 논술'},
-            ),
-            choice(
-              '계열',
-              t,
-              tracks,
-              (v) => setState(() {
-                track = v;
-                examKey = null;
-              }),
-            ),
-            if (exams.length > 1)
-              choice(
-                '캠퍼스 · 회차',
-                selected,
-                exams.map((e) => e['key'] as String).toList(),
-                (v) => setState(() => examKey = v),
-                labels: {
-                  for (final e in exams)
-                    e['key'] as String: [
-                      e['campus'],
-                      e['session'],
-                    ].whereType<String>().join(' · '),
-                },
-              ),
-            if (exam != null) ...[
-              if (RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? ''))
-                const Text(
-                  '최초 첨삭은 시험의 선택 문항 묶음당 1 Credit입니다. 14일 이내 같은 문항 집합의 재첨삭 1회가 포함됩니다.',
-                ),
-              if (widget.rewriteRun == null &&
-                  RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? ''))
-                OutlinedButton(
-                  onPressed: () => setState(
-                    () => included[exam['key'] as String] =
-                        (exam['questions'] as List)
-                            .cast<Map<String, dynamic>>()
-                            .map((q) => q['key'] as String)
-                            .toSet(),
-                  ),
-                  child: const Text('전체 문항 선택'),
-                ),
-              for (final q
-                  in (exam['questions'] as List).cast<Map<String, dynamic>>())
-                ListTile(
-                  title: Text(q['label'] as String),
-                  subtitle: q['lengthLabel'] == null
-                      ? null
-                      : Text(q['lengthLabel'] as String),
-                  leading: RegExp('인문|언어|사회|경제|경영|상경').hasMatch(t ?? '')
-                      ? Checkbox(
-                          value:
-                              included[exam['key']]?.contains(q['key']) ??
-                              false,
-                          semanticLabel: '${q['label']} 첨삭 선택',
-                          onChanged: widget.rewriteRun != null
-                              ? null
-                              : (v) => setState(() {
-                                  final selected = included.putIfAbsent(
-                                    exam['key'] as String,
-                                    () => {},
-                                  );
-                                  if (v == true) {
-                                    selected.add(q['key'] as String);
-                                  } else {
-                                    selected.remove(q['key']);
-                                  }
-                                }),
-                        )
-                      : null,
-                  trailing: const Icon(Icons.edit_outlined),
-                  onTap: () => Navigator.of(context, rootNavigator: true).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => _SourceWriter(
-                        owner: widget.owner,
-                        question: q,
-                        universityName:
-                            c.universities
-                                    .where(
-                                      (u) => u['sourceUniversityId'] == uni,
+                  Card(
+                    child: InkWell(
+                      onTap: () {
+                        catalogOffset = catalogScroll.offset;
+                        setState(
+                          () => university = u['sourceUniversityId'] as String,
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 52,
+                              padding: EdgeInsets.all(
+                                u['sourceUniversityId'] == 'skku' ? 0 : 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: u['logoDark'] == true
+                                    ? AppTokens.primaryInk
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: u['logoAsset'] is String
+                                  ? Image.asset(
+                                      u['logoAsset'] as String,
+                                      fit: BoxFit.contain,
+                                      errorBuilder: (_, _, _) =>
+                                          const SizedBox.shrink(),
                                     )
-                                    .first['name']
-                                as String?,
-                        exam: exam,
-                        rewriteRun: widget.rewriteRun,
-                        officialUrl:
-                            c.universities
-                                    .where(
-                                      (u) => u['sourceUniversityId'] == uni,
-                                    )
-                                    .first['officialSourceUrl']
-                                as String?,
+                                  : const SizedBox.shrink(),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    u['name'] as String,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium,
+                                  ),
+                                  if (!c.exams.any(
+                                    (e) =>
+                                        e['sourceUniversityId'] ==
+                                        u['sourceUniversityId'],
+                                  ))
+                                    const Text('준비 중'),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: AppTokens.primaryInk,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              _ExamSubmit(
-                key: ValueKey('${widget.owner}:${exam['key']}'),
-                owner: widget.owner,
-                exam: exam,
-                included: included[exam['key']] ?? {},
-                rewriteRun: widget.rewriteRun,
+              ],
+            );
+          }
+          final uni = university;
+          final rows = c.exams
+              .where((e) => e['sourceUniversityId'] == uni)
+              .toList();
+          final years = rows.map((e) => '${e['year']}').toSet().toList()
+            ..sort((a, b) => b.compareTo(a));
+          final y = year ?? (years.length == 1 ? years.first : null);
+          final yr = rows.where((e) => '${e['year']}' == y).toList();
+          final kinds = yr.map((e) => e['kind'] as String).toSet().toList();
+          final k = kind ?? (kinds.length == 1 ? kinds.first : null);
+          final kr = yr.where((e) => e['kind'] == k).toList();
+          final tracks = kr.map((e) => e['track'] as String).toSet().toList();
+          final t = track ?? (tracks.length == 1 ? tracks.first : null);
+          final exams = kr.where((e) => e['track'] == t).toList();
+          final selected =
+              examKey ??
+              (exams.length == 1 ? exams.first['key'] as String : null);
+          final matches = exams.where((e) => e['key'] == selected);
+          final exam = matches.isEmpty ? null : matches.single;
+          return ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              if (widget.rewriteRun != null)
+                const Text('다시 써보기 · 최초 제출 문항을 유지합니다.'),
+              if (rows.isEmpty) const Text('이 대학의 시험 자료를 준비하고 있어요.'),
+              choice(
+                '대학',
+                uni,
+                c.universities
+                    .map((u) => u['sourceUniversityId'] as String)
+                    .toList(),
+                (v) => setState(() {
+                  university = v;
+                  year = kind = track = examKey = null;
+                }),
+                labels: {
+                  for (final u in c.universities)
+                    u['sourceUniversityId'] as String: u['name'] as String,
+                },
               ),
+              choice(
+                '학년도',
+                y,
+                years,
+                (v) => setState(() {
+                  year = v;
+                  kind = track = examKey = null;
+                }),
+              ),
+              choice(
+                '시험 유형',
+                k,
+                kinds,
+                (v) => setState(() {
+                  kind = v;
+                  track = examKey = null;
+                }),
+                labels: const {'mock': '모의논술', 'admission': '수시 논술'},
+              ),
+              choice(
+                '계열',
+                t,
+                tracks,
+                (v) => setState(() {
+                  track = v;
+                  examKey = null;
+                }),
+              ),
+              if (exams.length > 1)
+                choice(
+                  '캠퍼스 · 회차',
+                  selected,
+                  exams.map((e) => e['key'] as String).toList(),
+                  (v) => setState(() => examKey = v),
+                  labels: {
+                    for (final e in exams)
+                      e['key'] as String: [
+                        e['campus'],
+                        e['session'],
+                      ].whereType<String>().join(' · '),
+                  },
+                ),
+              if (exam != null) ...[
+                const Text('문항 선택'),
+                for (final q
+                    in (exam['questions'] as List)
+                        .cast<Map<String, dynamic>>()
+                        .where(
+                          (q) =>
+                              widget.rewriteRun == null ||
+                              (widget.rewriteRun!['question_ids'] as List)
+                                  .contains(q['dbQuestionId']),
+                        ))
+                  ListTile(
+                    title: Text(q['label'] as String),
+                    subtitle: q['lengthLabel'] == null
+                        ? null
+                        : Text(q['lengthLabel'] as String),
+                    leading: Icon(
+                      chosenQuestions[exam['key']] == q['key']
+                          ? Icons.radio_button_checked
+                          : Icons.radio_button_unchecked,
+                      color: AppTokens.primaryInk,
+                    ),
+                    selected: chosenQuestions[exam['key']] == q['key'],
+                    onTap: () => setState(
+                      () => chosenQuestions[exam['key'] as String] =
+                          q['key'] as String,
+                    ),
+                  ),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppTokens.primaryInk,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(48, 48),
+                  ),
+                  onPressed: chosenQuestions[exam['key']] == null
+                      ? null
+                      : () {
+                          final q = (exam['questions'] as List)
+                              .cast<Map<String, dynamic>>()
+                              .firstWhere(
+                                (q) => q['key'] == chosenQuestions[exam['key']],
+                              );
+                          final u = c.universities.firstWhere(
+                            (u) => u['sourceUniversityId'] == uni,
+                          );
+                          Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => _SourceWriter(
+                                owner: widget.owner,
+                                question: q,
+                                exam: {...exam, 'universityName': u['name']},
+                                universityName: u['name'] as String?,
+                                rewriteRun: widget.rewriteRun,
+                                officialUrl: u['officialSourceUrl'] as String?,
+                              ),
+                            ),
+                          );
+                        },
+                  child: const Text('답안 작성하기'),
+                ),
+              ],
             ],
-          ],
-        );
-      },
+          );
+        },
+      ),
     ),
   );
 }
@@ -452,7 +534,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   EssayController? controller;
   final editor = TextEditingController();
   String? error;
-  bool problem = false, showOptionalImage = false, syncBusy = false;
+  bool showOptionalImage = false, syncBusy = false;
   @override
   void initState() {
     super.initState();
@@ -554,20 +636,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         .join(' · '),
                   ),
                   const SizedBox(height: 16),
-                  SegmentedButton<bool>(
-                    segments: const [
-                      ButtonSegment(value: true, label: Text('문제 보기')),
-                      ButtonSegment(value: false, label: Text('답안 작성')),
-                    ],
-                    selected: {problem},
-                    onSelectionChanged: (v) =>
-                        setState(() => problem = v.first),
-                  ),
-                  const SizedBox(height: 20),
-                  if (problem && pdf != null)
+                  if (pdf != null)
                     TextButton.icon(
                       icon: const Icon(Icons.open_in_full),
-                      label: const Text('문제 PDF 열기'),
+                      label: const Text('문제 보기'),
                       onPressed: () =>
                           Navigator.of(context, rootNavigator: true).push<void>(
                             MaterialPageRoute(
@@ -610,16 +682,12 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                             ),
                           ),
                     ),
-                  if (problem) ...[
-                    const Text('대학 공식 기출자료에서 문제와 제시문을 확인하세요.'),
-                    if (widget.officialUrl != null)
-                      ExternalLinkButton(
-                        uri: Uri.tryParse(widget.officialUrl!),
-                        label: '대학 입학처 원본 자료 ↗',
-                      ),
-                    if (widget.question['sourceLocator'] != null)
-                      Text(widget.question['sourceLocator'] as String),
-                  ] else ...[
+                  if (pdf == null && widget.officialUrl != null)
+                    ExternalLinkButton(
+                      uri: Uri.tryParse(widget.officialUrl!),
+                      label: '대학 입학처 원본 자료 ↗',
+                    ),
+                  ...[
                     if (widget.question['inputMode'] == 'image' ||
                         photo.isNotEmpty ||
                         showOptionalImage) ...[
@@ -746,7 +814,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         child: const Text('저장 다시 시도'),
                       ),
                   ],
-                  if (!problem) ...[
+                  ...[
                     const SizedBox(height: 20),
                     if ((widget.exam['questions'] as List).length > 1)
                       const Text('다음 화면에서 이 시험의 제출 문항을 선택합니다.'),
@@ -787,7 +855,6 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
 
 class _ExamSubmit extends ConsumerStatefulWidget {
   const _ExamSubmit({
-    super.key,
     this.rewriteRun,
     required this.owner,
     required this.exam,
@@ -850,6 +917,18 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   }
 
   List<Map<String, dynamic>> rewrites = [];
+  bool get eligibleRewrite {
+    final row = rewrites.where((r) => r['id'] == parentId).firstOrNull;
+    if (row == null || row['question_ids'] is! List) return false;
+    final original = (row['question_ids'] as List).toSet();
+    final selected = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => widget.included.contains(q['key']))
+        .map((q) => q['dbQuestionId'])
+        .toSet();
+    return original.length == selected.length && original.containsAll(selected);
+  }
+
   SourceDraftGateway get pending => SourceDraftGateway(
     widget.owner,
     'exam-request:${widget.exam['key']}:${parentId ?? 'initial'}',
@@ -938,8 +1017,8 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
               children: [
                 Text(
                   parentId == null
-                      ? '선택한 ${answers.length}개 문항 · 최초 첨삭 · 예상 1 Credit'
-                      : '선택한 ${answers.length}개 문항 · 무료 재첨삭 · 예상 0 Credit',
+                      ? '제출 문항: ${answers.length}개 · 최초 첨삭\n사용 Credit: 서버 확인 필요'
+                      : '제출 문항: ${answers.length}개\n사용 Credit: 0개 · 무료 재첨삭',
                 ),
                 const Text(
                   '실제 차감은 서버 정책을 따릅니다. 제출 후 처리 상태와 저장된 결과를 확인할 수 있어요.',
@@ -1035,7 +1114,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           initialValue: parentId ?? '',
           decoration: const InputDecoration(labelText: '제출 방식'),
           items: [
-            const DropdownMenuItem(value: '', child: Text('새 첨삭 · 1 Credit')),
+            const DropdownMenuItem(value: '', child: Text('최초 첨삭')),
             for (final r in rewrites)
               DropdownMenuItem(
                 value: r['id'] as String,
@@ -1051,9 +1130,15 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                   notice = '';
                 }),
         ),
-      const CreditBalanceCard(compact: true),
       if (parentId != null)
         const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
+      const Divider(),
+      Text('제출 문항: ${widget.included.length}개'),
+      Text(
+        parentId != null && eligibleRewrite
+            ? '사용 Credit: 0개 · 무료 재첨삭'
+            : '사용 Credit: 서버 확인 필요',
+      ),
       if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
         style: FilledButton.styleFrom(
@@ -1065,20 +1150,18 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
             ready &&
                 submittedRun == null &&
                 !busy &&
-                (parentId == null || rewrites.any((r) => r['id'] == parentId))
+                (parentId == null || eligibleRewrite)
             ? submit
             : null,
         child: Text(
           busy
               ? '처리 중…'
               : ready
-              ? '답안 제출'
+              ? '첨삭 요청'
               : '첨삭 실행 대기',
         ),
       ),
-      if (parentId != null &&
-          eligibilityLoaded &&
-          !rewrites.any((r) => r['id'] == parentId))
+      if (parentId != null && eligibilityLoaded && !eligibleRewrite)
         const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
       if (parentId != null && !eligibilityLoaded)
         const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
@@ -1134,6 +1217,21 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
+          if (widget.exam['universityName'] != null)
+            Text(widget.exam['universityName'] as String),
+          Text(
+            [
+              if (widget.exam['year'] != null) '${widget.exam['year']}학년도',
+              widget.exam['kind'] == 'admission'
+                  ? '수시 논술'
+                  : widget.exam['kind'] == 'mock'
+                  ? '모의논술'
+                  : '',
+              widget.exam['track'],
+              widget.exam['session'],
+            ].whereType<String>().where((v) => v.isNotEmpty).join(' · '),
+          ),
+          const Divider(),
           for (final q
               in (widget.exam['questions'] as List)
                   .cast<Map<String, dynamic>>())
@@ -1150,6 +1248,10 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
                       }
                     }),
             ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('답안 수정'),
+          ),
           _ExamSubmit(
             owner: widget.owner,
             exam: widget.exam,

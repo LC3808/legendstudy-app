@@ -424,3 +424,55 @@ are expressly excluded from this closeout. No blocked implementation within the
 Rollback: revert this UI commit and rebuild; no DB/data rollback. General public
 HOLD and execution OFF maintained. Today stops after Wiki, Commit/Push/Remote Verify.
 Next resumption priority is Owner device verification only; no extra development started.
+
+## Mobile entry-to-submit UX phase 1 — 2026-10-15
+
+Owner GO scope: university → exam/question selection → writer → submission review.
+Result/comparison/History detail UX, Provider/Package/Prompt, DB/Ledger, Math,
+Toss/IAP and Claude release branch are unchanged. Public HOLD remains.
+
+Implemented using existing SourceCatalogPage, CreditBalanceCard, SourceDraftGateway,
+Native QuestionPdfViewer, image picker and ExamSubmissionGateway:
+- Entire university card opens selection; chevron replaces oversized CTA. 42 catalog
+  entries and Owner22 order retained. Back restores list scroll; Hero balance remains
+  cached during selection to prevent loading-state height shifts on return.
+- Single Hero combines explicit History access and actual credit_summary balance.
+  No purchase action; no balance repeated in selection/writer/review.
+- Question rows select only; one 답안 작성하기 CTA opens the existing writer.
+  Selected exam/question and text/photo Draft remain on return. Bundled review keeps
+  existing per-question Draft collection and subset submission; rewrite set stays fixed.
+- Writer defaults to answer input. 문제 보기 opens existing Native fullscreen PDF;
+  removed duplicated tabs, official-material instruction and external page locator.
+- Review separates exam identity, selected answers and Credit notice. Free rewrite 0
+  is shown only for server eligibility and the exact original question UUID set.
+
+Logos: all42 bundled from existing LAB official assets (read-only source shared branch
+8518db67e80973b96e0bd5abaa738460bbc2d7a6). Previously missing11 (Hanyang, Ewha,
+Hongik, Kyungpook, Seokyeong, Seoultech, Sookmyung, Dankook, Korea Polytechnic,
+Kangnam, Eulji) now use Native-decodable PNG. SVG rasterized with rsvg-convert;
+existing raster converted with sips. Official source URLs/source and bundle hashes
+are retained in assets/university-logos/provenance.json. White variants use navy
+background; proportions preserved in uniform100×52 slot. SKKU gets reduced padding
+for a larger visual footprint. No invented logo or new remote asset collection.
+
+Modified: lib/features/essay/{source_catalog_page,university_catalog}.dart,
+pubspec.yaml, assets/university-logos/, tool/essay_ux/export_catalog.mjs,
+test/source_catalog_widget_test.dart and test/essay_logo_assets_test.dart.
+
+Validation: focused15 tests PASS (360dp and100/200% text, question selection/CTA,
+Draft restore, rewrite/HOLD, Hero/scroll, image order/removal, PDF mapping,
+Registry transport, all42 logo decoding). Flutter Analyze PASS. iOS simulator debug
+build PASS; physical iPhone final acceptance remains Owner action. Tests use local
+fixtures; no new Provider call, Credit trade, production DB/config or Store action.
+
+PARTIAL: existing /api/essay/exam availability returns readiness only, no server
+charge quote. Initial confirmation therefore says 사용 Credit: 서버 확인 필요 rather
+than inventing an authoritative1-credit quote. Existing submit backend/ledger remains
+unchanged. Completing exact initial cost display requires a separately scoped server
+quote contract. Free rewrite uses existing server eligibility. No claim of new E2E.
+
+Owner iPhone check: full-card navigation/back scroll;11 logos and SKKU scale; Hero
+balance/History; question selection→CTA; writer keyboard/photos/Draft; Native PDF
+open/close/page restore; review subset and eligible free-rewrite label. Do not submit
+new evaluations for this UX acceptance. Rollback: revert UI/assets commit and rebuild;
+no DB rollback required.

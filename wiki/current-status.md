@@ -1,5 +1,15 @@
 # Current Status
 
+## 2026-10-15 — Mobile entry-to-submit UX phase 1 / PARTIAL
+
+Full-card university selection, bundled official42 logos (missing11 fixed), unified
+History/Credit Hero, selection-only question rows and one writer CTA, answer-first
+Native writer/PDF and concise review implemented.15 focused tests, Analyze and iOS
+simulator build PASS. Initial cost quote is absent from current server API; honest
+confirmation fallback remains. Owner physical acceptance pending. Results/History
+details and all backend/payment contracts untouched. No Provider/Credit/DB action.
+[Changes, source provenance and remaining checks](essay-lab-ui-ux-v1.md#mobile-entry-to-submit-ux-phase-1--2026-10-15).
+
 ## 2026-10-14 — iPhone usability closeout; today stopped
 
 Owner confirmed prior dc722315 iPhone Release, login, Credit10, first/rewrite results,
