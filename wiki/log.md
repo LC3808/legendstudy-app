@@ -3959,3 +3959,11 @@ SDK already project-scopes storage; actual prior mixing cause not proven. Connec
 installed version1 has installer=null. TEST confirmed user1/no login/profiles0/
 Ledger0.39 Mock/local tests and Analyze PASS; no actual login/grant/purchase/deploy.
 See existing IAP preparation doc. Stop after handoff; public HOLD.
+
+## 2026-10-16 — Google IAP signed TEST AAB prepared
+
+Existing Codex85e6161 + ignored Claude TEST/signing config; no source merge.
+Play internal version1 read-only verified; built signed com.legendstudy.app0.1.0+2.
+Same upload certificate, BILLING and3-ABI TEST URL/key verified. Analyze/39 tests PASS.
+See IAP preparation doc for artifact/hash. Upload and actual TEST login/purchase await
+Owner. No Credit/Provider/DB/production/Claude changes; general release HOLD.

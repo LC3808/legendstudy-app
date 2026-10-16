@@ -215,3 +215,35 @@ replay previously cancelled orders as success. Expected3+1=4 only after actual
 signup3 observation. Purchase1/dedup replay/no extra purchase must be separately
 approved; recovery uses existing verifier and grant idempotency, never manual Credit.
 Production and Claude/main untouched; public HOLD.
+
+## 2026-10-16 — Signed TEST internal-track AAB prepared
+
+Source: Codex85e6161; Claude local b97e833 read-only. Existing IAP code already
+present; no source merge or new engine. Reused ignored config/iap-test.json and
+android/key.properties, same existing upload keystore; no credentials committed.
+Recovered the existing remote branch into /private/tmp/legendstudy-app-iap-20261016
+because the prior temporary checkout was gone; protected worktrees unchanged.
+
+- Owner-authorized Play Console read-only: com.legendstudy.app internal track active,
+  versionCode1 (0.1.0), published Oct15 21:24. New artifact versionCode2/version0.1.0.
+- Command: ./tool/flutterw build appbundle --release
+  --dart-define-from-file=config/iap-test.json --build-number=2
+- Artifact: /private/tmp/legendstudy-app-iap-20261016/build/app/outputs/bundle/release/app-release.aab
+- Size:76,516,984 bytes. SHA256:66fd122b1f757f4f3b9341cdbeb335afedff301983d6b6383bd2ff2d06f9dda1.
+- jarsigner verified; certificate matches existing upload keystore:
+  C0:0F:42:60:D5:B9:5A:08:43:35:57:6C:03:BF:36:B8:91:4A:2F:33:CB:3D:A7:01:40:3E:0A:DB:AC:FB:8E:F1.
+- Release merged Manifest package/version/BILLING PASS; packaged AAB contains BILLING.
+  All3 libapp.so architectures contain the configured TEST URL and TEST publishable key.
+  APP_ENV=test config verified; Production host constant remains for the routing guard,
+  not an active Production connection. Actual device login/JWT is still NOT_VERIFIED.
+- Flutter Analyze PASS;39 related authentication/config/billing/lifetime tests PASS.
+  PDFium chromium7811 download reset: reused identical cached binaries from Claude
+  read-only. Test-generated plugin registration required normal pub regeneration;
+  final signed release build PASS. Existing Gradle/AGP/Kotlin/font warnings remain.
+- Four existing credit1/3/5/10 products retained. No Ledger, verifier, DB or UX change.
+
+Build preparation PASS; upload acceptance/device TEST authentication/purchase E2E
+pending. Next: Owner approves uploading this exact AAB to internal testing; no purchase
+included. Then install via Play, verify TEST login/balance, request separate credit1
+purchase approval. No upload, purchase, Credit grant, Provider call, Production change
+or Claude/main write performed. General release HOLD.

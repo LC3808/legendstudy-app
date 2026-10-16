@@ -1,12 +1,13 @@
 # Current Status
 
-## 2026-10-15 — IAP TEST auth preparation / LOCAL PASS
+## 2026-10-16 — IAP TEST signed AAB / BUILD PASS
 
-TEST-only host/session/JWT routing guards;39 tests and Analyze PASS.
-Actual TEST login/purchase/grant NOT_VERIFIED; connected binary authority unclear.
-No purchases, grants, DB/deploy or Claude changes. Stop pending Owner session.
-[Evidence and next gate](iap-billing-preparation-2026-10-09.md#2026-10-15--google-test-authentication-preparation-codex).
-Essay cycle RPC APPLIED INACTIVE; data preserved, public HOLD.
+Codex85e6161 TEST isolation included; versionCode2 exceeds Play internal1.
+Existing signing certificate matches; TEST URL/key embedded in all3 architectures.
+Analyze +39 related tests PASS; signed AAB PASS. No source/IAP redesign.
+Upload awaits Owner approval; device TEST login and purchase E2E NOT_VERIFIED.
+No purchase/grant/DB/deploy/Claude change. Public HOLD.
+[Artifact, hash and next gate](iap-billing-preparation-2026-10-09.md#2026-10-16--signed-test-internal-track-aab-prepared).
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 
