@@ -5,12 +5,14 @@
 Production quote additional1, review balance10/reserved0; Package17/Registry234/runs2
 preserved. Pages/Worker OFF. Deployed gateway8518db6 lacks quote/cycle routing;
 Gateway-only deployment3b99d254 SUCCESS after Owner approval; flags remainOFF.
-Awaiting review account terminal login. No Provider/Credit/DB change.
+Owner login passed; quote stopped at Cloudflare urllib403/error1010 before submit.
+Curl transport corrected; awaiting terminal re-login. OFF deployment5869f421 verified.
+No Provider/Credit/DB change.
 APP50 + actual-result6, WEB133 + actual-result1, local DB concurrency/recovery PASS;
 Analyze/iOS simulator/Lint/Typecheck/Build PASS. Claude Apple Sandbox files read-only.
 Google TEST final E2E remains PASS; Apple/Production/store integration not inferred.
 [Evidence, minimal promotion and approval plan](essay-lab-ui-ux-v1.md#oct16-launch-preflight--additional-cycle-ready-locally--operating-e2e-pending).
-Public HOLD. Owner approval needed for bounded additional-paid E2E and final release.
+Public HOLD. Bounded additional-paid E2E already approved; final release still requires Owner approval.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up
 
