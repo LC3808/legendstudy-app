@@ -1,14 +1,14 @@
 # Current Status
 
-## 2026-10-16 — New TEST IAP grant PASS / final E2E checks pending
+## 2026-10-16 — TEST IAP final state and duplicate grant verified
 
-Owner-approved new credit1 purchased13:35KST; Play processed. Auth/verifier/grant
-RPC200, Ledger+1 exactly once; balance4/reserved0/IAP grants1/transactions1.
-Owner restart balance4 PASS; server13:37 balance4/grants1/transactions1/reserved0.
-Explicit consume and same-token replay checks pending: overall PARTIAL.
-Purchase-history tab locally implemented, not installed version2. No new DB/code/
-Production change. [Evidence](iap-billing-preparation-2026-10-09.md#oct16-approved-new-test-purchase--grant-success-final-checks-pending).
-Additional purchase forbidden; public HOLD.
+Google API: purchased0/acknowledged1/consumed1/licenseTEST0, orderPROCESSED.
+Deployed duplicate RPC once returns already_processed (guarded/rolled back);
+postflight grants1/transactions1/same key1/balance4/reserved0. Owner restart4 PASS.
+13 local verifier tests PASS. Raw-token Edge HTTP replay NOT_RUN; layered duplicate
+validation PASS. No new buy/manual grant/DB mutation/Production change.
+[Evidence](iap-billing-preparation-2026-10-09.md#oct16-final-acceptance--google-states-and-duplicate-grant-verified).
+Purchase-history tab not yet in installed version2. Public HOLD; work complete.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 

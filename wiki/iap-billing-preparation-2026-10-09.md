@@ -446,3 +446,40 @@ Owner subsequently confirmed4 usable Credits after requested full restart. Serve
 13:37:35KST independently confirms balance4/reserved0/grants1/transactions1. Restart
 persistence PASS; no extra grant observed. This does not prove same-token replay
 or explicit Google consume flags. Those two final acceptance checks remain open.
+
+
+## Oct16 final acceptance — Google states and duplicate grant verified
+
+Owner authorized no-new-purchase final verification. Existing local LegendStudy
+service-account credential used only for Google OAuth + orders.get and
+purchases.products.get of the successful13:35 order. No token printed/persisted;
+order response token was passed in memory to the product GET. No acknowledge,
+consume, refund, or purchase mutation called. Google response13:43KST:
+orderState=PROCESSED, purchaseState=0, acknowledgementState=1, consumptionState=1,
+purchaseType=0 (license test),quantity1. No current cancellation/refund indicated.
+Sources: https://developers.google.com/android-publisher/api-ref/rest/v3/orders/get
+and https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.products
+
+Existing grant key confirmed as iap/google/sha256(successful orderId),not raw token.
+One grant/one transaction,+1, account hash matches Google's account binding.
+After inspecting deployed definer RPC, ran exactly one duplicate RPC validation in
+TEST BEGIN/ROLLBACK with transaction-local service_role claim, fixed successful
+order/product/purchasedAt and existing test3 account. Preconditions checked exact
+existing grant key,owner,expiry,origin,balance4; abort on mismatch. RPC returned
+already_processed; pre/post transaction counts and balance unchanged; rollback.
+Independent postflight: grants1/transactions1/original key rows1/balance4/reserved0.
+No ledger rows/schema/permissions changed. This is real deployed DB-RPC duplicate
+validation, not an end-to-end HTTP replay of the raw purchase token.
+
+Existing core_test.ts13 tests PASS without network runtime permission, including
+same-request granted→already_processed contract and revoked/cancelled/account/SKU
+mismatch rejection. This covers request contract locally; actual identical-token
+Edge HTTP replay was intentionally not run because Google state+RPC evidence
+sufficed for the approved layered validation. Do not label it HTTP replay PASS.
+
+Final acceptance: purchase/auth/server verification/grant+1/restart balance PASS
+from prior evidence; Google ACK/consume now directly PASS; duplicate grant handling
+PASS at deployed RPC plus local request contract. No remaining blocker for these
+specified checks; optional full HTTP replay requires actual TEST user session but
+is not needed to repeat purchase or consume. General production launch remains HOLD.
+No extra purchase/manual grant/Production/Claude changes. Work ends after Wiki.

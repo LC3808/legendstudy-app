@@ -4009,3 +4009,10 @@ pending; do not claim full E2E. No additional purchase/Production change; HOLD.
 
 - Follow-up: Owner restart balance4 PASS; server13:37 grants1/transactions1,
   balance4/reserved0. Explicit consume/same-token replay remain unverified.
+
+## 2026-10-16 — Final Google state / idempotence verification
+
+Google GET confirms purchase0/ack1/consume1/test0. Existing deployed RPC duplicate
+returns already_processed under guarded rollback; grant1/balance4/key unchanged.
+13 verifier tests PASS. HTTP raw-token replay not run; no further purchase/consume.
+Full evidence in IAP preparation wiki. Production unchanged, HOLD; stop work.
