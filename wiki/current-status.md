@@ -1,25 +1,21 @@
 # Current Status
 
-## 2026-10-16 — TEST IAP final state and duplicate grant verified
+## 2026-10-16 — Launch preflight / PARTIAL, additional E2E pending
 
-Google API: purchased0/acknowledged1/consumed1/licenseTEST0, orderPROCESSED.
-Deployed duplicate RPC once returns already_processed (guarded/rolled back);
-postflight grants1/transactions1/same key1/balance4/reserved0. Owner restart4 PASS.
-13 local verifier tests PASS. Raw-token Edge HTTP replay NOT_RUN; layered duplicate
-validation PASS. No new buy/manual grant/DB mutation/Production change.
-[Evidence](iap-billing-preparation-2026-10-09.md#oct16-final-acceptance--google-states-and-duplicate-grant-verified).
-Purchase-history tab not yet in installed version2. Public HOLD; work complete.
+Production quote additional1, review balance10/reserved0; Package17/Registry234/runs2
+preserved. Pages/Worker OFF. Deployed gateway8518db6 lacks quote/cycle routing;
+LAB adds bounded previous-paid E2E scope locally. No deploy/Provider/Credit/DB change.
+APP50 + actual-result6, WEB133 + actual-result1, local DB concurrency/recovery PASS;
+Analyze/iOS simulator/Lint/Typecheck/Build PASS. Claude Apple Sandbox files read-only.
+Google TEST final E2E remains PASS; Apple/Production/store integration not inferred.
+[Evidence, minimal promotion and approval plan](essay-lab-ui-ux-v1.md#oct16-launch-preflight--additional-cycle-ready-locally--operating-e2e-pending).
+Public HOLD. Owner approval needed for bounded additional-paid E2E and final release.
 
-## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
+## 2026-10-15 — iPhone logos/Hero/History follow-up
 
-Four official basic logos replace admissions signatures; SKKU display enlarged.
-Hero vertical padding reduced; History identity and navy/green textual badges added.
-Existing result/comparison/Draft/query contracts preserved.13 tests PASS,4 private
-fixture SKIP; Analyze PASS. iOS simulator debug build PASS. Owner device recheck pending.
-Paid/free pairs can reuse existing Ledger, but continuous paid-cycle lineage and
-new-intent client flow require minimal shared contract/UI work (READ-ONLY analysis).
-Additional-paid badge is deferred until reliable cycle metadata exists.
-No Provider/Credit/DB/config change. Public HOLD.
+Official logos, compact Hero, History badges implemented and locally verified.
+Later continuous-cycle implementation supersedes the initial READ-ONLY proposal.
+Details: [approved UX and evidence](essay-lab-ui-ux-v1.md). Public HOLD.
 
 ## 2026-10-15 — Mobile UX phase 1 finishing fixes / LOCAL PASS
 

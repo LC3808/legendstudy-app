@@ -743,3 +743,85 @@ Files: shared_history_page.dart, essay_voice.dart; related3 test files.
 11 related tests PASS (stored actual first/rewrite,360px/200%, badges and speech),
 Flutter Analyze PASS. No new build/deploy/WEB/Provider/Credit/DB/IAP change.
 Further UX development stopped per Owner; release preparation is next.
+
+## Oct16 launch preflight — additional cycle READY LOCALLY / operating E2E pending
+
+Owner scope: existing engine, Prompt/Schema, Package, Ledger and Payment/IAP preserved.
+No production DB/config/deployment/Provider/Credit changes in this task.
+
+Read-only production at about14:00 KST:
+- `essay_exam_quote`/`essay_exam_submit_cycle`: postgres SECURITY DEFINER;
+  essay_worker EXECUTE. Registry234, completed runs2, new cycles0.
+- review account `ddc5ae63-acbb-490b-a423-c996b811dea8`: credit_summary spendable10,
+  reserved0. Quote returns additional/1 Credit for exam
+  `345d3caa-3438-58c3-8f80-62a6242179ec`, question
+  `4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde`, previous paid run
+  `5b636cda-9915-42e1-b209-9934c7c0fcb1`. Free child
+  `414a207b-2c51-48e6-97ea-2ddf49b77c9e` remains completed.
+- Package17 digest40ef4e7bbe5295facf146946b7f1924f086ff6e540108a3def8efb22e37ba4ae;
+  VERIFIED_MANIFEST, both sources OpenAI rights approved. Stored runtime_ready=false
+  is not an activation grant; material_runtime derives readiness from evidence and
+  the separately authorized host policy. Preflight binding remains gpt-5.6-sol,
+  scaffolding-1.3-v3 / contract1.3 / hanyang-2024-afternoon2-pilot-v1.
+- Cloudflare same LegendStudy account b9d221b20fdf8b9a9a8df0971a6b2347: Pages
+  ESSAY_EXAM_RUNTIME_ENABLED=false; continuous flag absent/OFF; Worker
+  ESSAY_EXECUTION_ENABLED=false. Five existing Secret names present (values unread).
+  Previously verified Worker JWT/Queue preserved; no new Queue/auth probe repeated.
+- Production Pages canonical source8518db6 is the earlier rewrite gateway, missing
+  quote/submit_cycle. DB installation alone does not enable the new client path.
+
+Minimal implementation: LAB functions/api/essay/exam.ts extends existing single-E2E
+scope with previousPaidRunId; quote/submit must match pinned predecessor, parent,
+subject/exam and server request key. Default OFF, mixed/invalid scope denied.
+No new API/engine/UI. The existing Codex branch already has quote/submit_cycle;
+new endpoint tests cover the additional bounded E2E. Before live testing deploy
+only the reviewed gateway delta over current deployment, preserving other surfaces.
+No deployment was performed. Rollback: previous gateway deployment + all flags OFF;
+retain any completed/pending run, checkpoint, Ledger and History.
+
+APP/WEB both submit via /api/essay/exam and read essay_exam_history; both consume
+canonical credit_summary. Existing actual2 results pass both display adapters.
+Native rendering:360px and200% first/rewrite; no new result creation.
+
+IAP integration READ-ONLY: Claude local HEAD3b4e220 (newer than b97e833), unchanged.
+IAP controller matches Codex. Shared credit_summary contract unchanged. Production
+postgres and essay_executor both have internal credit_post_grant EXECUTE.
+Codex-only edits to preserve during selective integration: billing_providers.dart,
+purchase_verification.dart (TEST session guard), credit_purchase_page.dart,
+purchase_history.dart, credit_balance.dart (compact essay Hero). Claude's
+verify-iap-purchase/{core.ts,index.ts,core_test.ts} adds isolated Apple Sandbox gate;
+these protected files were not copied/changed. Do not merge whole branches.
+Google TEST success is not Apple Sandbox or Production IAP approval. Apple/refund
+acceptance and final combined signed store build remain release-owner gates.
+
+Quality: existing results reference exactPackage17, utilitarianism3→4 and four
+maintained. Official criteria include pure-pleasure total, justification strengths
+and rights criticism; revised feedback addresses these. No newly detected major
+criterion mismatch in this narrow review; NOT final quality approval. Both stored
+sentence_feedback arrays empty: quotations/examples remain NOT_VERIFIED, never
+fabricated. Existing quality_review.py regenerated private Owner review HTML at
+/private/tmp/legendstudy-launch-quality-review.html; inputs outsideGit, no Provider.
+
+Validation Oct16: APP50 related PASS (initially4 optional fixture skips); rerun actual
+stored-result6 PASS including all4 skipped render cases. Flutter Analyze clean;
+iOS simulator debug build PASS (existing flutter_tts CocoaPods fallback warning).
+WEB26 files/133 PASS + actual stored-result1 PASS; ESLint, TypeScript, Node22 build
+135 static pages PASS. Local disposable PostgreSQL continuous paid/free sequence,
+same-intent concurrency, unique successor, failure recovery, sequence immutability,
+role denial and async Package→fake Provider→Ledger→History PASS. Not live E2E.
+
+Remaining launch BLOCKERS: bounded additional-paid real E2E; operating gateway
+promotion/config approval; final APP/WEB live result comparison; Apple/Production
+IAP and protected branch integration acceptance; Owner quality/public release approval.
+Multi-question runtime synthesis and source-exam photo submission remain unsupported:
+launch must be restricted to verified single-question text exams unless completed
+and separately tested. Do not label all234 questions service-ready.
+
+Proposed next approval: review@legendstudy.com, exact exam/question/Package17 above,
+reuse existing revised text once, evaluation1+independent review1 (max2 Provider
+calls, requested capUSD2, estimateUSD0.25–0.80 based on prior same-size test plan,
+not a billing guarantee), reserve/settle1Credit (10→9). One pinned request/predecessor;
+no free follow-up or extra retry. Include recovery of only this run. Normal failure
+releases reservation; ambiguous Provider/finalization checks existing checkpoints
+without a second Provider call. Finish by disabling Pages/Worker/continuous flags.
+DB schema/RLS unchanged. Owner approval required before deploy/enable/execute.
