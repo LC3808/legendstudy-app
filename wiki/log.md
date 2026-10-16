@@ -3967,3 +3967,9 @@ Play internal version1 read-only verified; built signed com.legendstudy.app0.1.0
 Same upload certificate, BILLING and3-ABI TEST URL/key verified. Analyze/39 tests PASS.
 See IAP preparation doc for artifact/hash. Upload and actual TEST login/purchase await
 Owner. No Credit/Provider/DB/production/Claude changes; general release HOLD.
+
+## 2026-10-16 — TEST AAB upload accepted, draft saved
+
+Owner upload-only approval executed. Exact signed AAB hash rechecked; Play accepted
+version2(0.1.0) in existing internal track. Draft saved confirmation observed.
+Tester rollout not started; no purchase/Credit/DB/Production operation. Public HOLD.

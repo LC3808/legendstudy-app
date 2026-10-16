@@ -5,7 +5,8 @@
 Codex85e6161 TEST isolation included; versionCode2 exceeds Play internal1.
 Existing signing certificate matches; TEST URL/key embedded in all3 architectures.
 Analyze +39 related tests PASS; signed AAB PASS. No source/IAP redesign.
-Upload awaits Owner approval; device TEST login and purchase E2E NOT_VERIFIED.
+Owner-approved AAB uploaded; Play accepted version2 and draft saved.
+Tester rollout not started; device TEST login/purchase E2E NOT_VERIFIED.
 No purchase/grant/DB/deploy/Claude change. Public HOLD.
 [Artifact, hash and next gate](iap-billing-preparation-2026-10-09.md#2026-10-16--signed-test-internal-track-aab-prepared).
 

@@ -247,3 +247,14 @@ pending. Next: Owner approves uploading this exact AAB to internal testing; no p
 included. Then install via Play, verify TEST login/balance, request separate credit1
 purchase approval. No upload, purchase, Credit grant, Provider call, Production change
 or Claude/main write performed. General release HOLD.
+
+### Oct16 upload-only approval executed
+
+Owner approved internal-track AAB upload only. Rechecked exact SHA256 above,
+selected the signed artifact in existing LegendStudy Play Console (com.legendstudy.app).
+Play processed it successfully and displayed version2(0.1.0), API24+, target36,
+3 ABIs. Saved internal release2 as draft; Console confirmed changes saved.
+Release notes identify TEST authentication isolation/verification preparation.
+No rollout/publish action: currently available tester release remains1.
+No purchase/grant/DB/Production change. Next gate is internal tester rollout approval,
+then device TEST authentication; purchase remains separately gated.
