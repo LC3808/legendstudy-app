@@ -1,14 +1,14 @@
 # Current Status
 
-## 2026-10-16 — TEST IAP refund confirmed / purchase history added
+## 2026-10-16 — New TEST IAP grant PASS / final E2E checks pending
 
-Final read-only analysis:12:50:05 processed→12:55:06 refunded; reason code absent.
-First failure42501 at inner grant; ACL fixed. Unacknowledged TEST auto-refund is
-inferred, not proven reason. TEST13:22 balance3/IAP0. No replay; new buy needs approval.
-Purchase-history tab reads existing owner-only ledger (recent50 paid grants),
-not unverified/cancelled store orders. No DB/billing-engine change or upload.
-[Evidence, checks and next gate](iap-billing-preparation-2026-10-09.md#oct16-refunded-order-and-purchase-history-tab).
-Production/Claude unchanged; public HOLD.
+Owner-approved new credit1 purchased13:35KST; Play processed. Auth/verifier/grant
+RPC200, Ledger+1 exactly once; balance4/reserved0/IAP grants1/transactions1.
+Old refunded order untouched; ACL fix retained. Restart balance, explicit consume
+and same-token replay checks pending: overall PARTIAL, not full E2E PASS.
+Purchase-history tab locally implemented, not installed version2. No new DB/code/
+Production change. [Evidence](iap-billing-preparation-2026-10-09.md#oct16-approved-new-test-purchase--grant-success-final-checks-pending).
+Additional purchase forbidden; public HOLD.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 

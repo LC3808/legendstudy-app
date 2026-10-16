@@ -4000,3 +4000,9 @@ First failure grant42501, verifier503. Failed verification skips consumption by
 existing code; license auto-refund causal inference separated from verified facts.
 Post-fix real grant/dedup/consume remain unverified. No transaction or code change.
 See existing IAP preparation wiki; public HOLD and work stopped.
+
+## 2026-10-16 — Approved new TEST credit1 paid grant succeeds
+
+13:35 purchase processed; auth/verifier/RPC200, +1 transaction/grant1, balance4.
+Owner app charged confirmation. Restart/consume/duplicate replay acceptance still
+pending; do not claim full E2E. No additional purchase/Production change; HOLD.

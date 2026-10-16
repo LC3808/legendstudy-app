@@ -420,3 +420,24 @@ grant→balance4→consume promptly; stop on error, no additional buys/manual gr
 confirm order remains processed, one grant, dedup and restart balance. Any code/DB
 fix needs evidence and separate applicable approval. Today only Wiki changed;
 no purchase/Provider/Credit/DB/Production/Claude changes. Public HOLD; stop work.
+
+
+## Oct16 approved new TEST purchase / grant success, final checks pending
+
+Owner approved one new credit1 TEST purchase after ACL fix, then reported purchase
+complete and app charged. New Play order (distinct from refunded order):13:35:10KST,
+TEST credit1, status processed. No token copied or old order replayed. Console
+shows catalogue amount4900 and TEST product marker; do not equate displayed amount
+with actual charge. Owner was instructed to use no-charge always-approves test card.
+
+Server13:35:13 auth/user200 →13:35:14 grant RPC200 →verifier200 →credit_summary200.
+At13:35:44KST: test3 balance4/reserved0; exactly1 IAP grant and1 IAP transaction,
+purchase delta+1,reason iap_google_v1. Google verification gate passed as required
+before grant in deployed verifier. This proves real TEST grant success after fix.
+
+Not yet certified: same-token replay idempotence, explicit Google acknowledgement/
+consumption state, app restart persistence. Exactly one row alone is not a duplicate
+replay test; processed order alone is not proof of consumption. Owner asked to fully
+restart app and enter top-up without buying, report balance4 and any completion-delay
+message. No additional purchase/manual grant/Production action authorized or run.
+Keep overall E2E PARTIAL until remaining evidence arrives; public HOLD.
