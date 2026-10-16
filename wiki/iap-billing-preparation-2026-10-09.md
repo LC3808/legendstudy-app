@@ -367,3 +367,56 @@ billing_page_lifetime_test.dart. Local checks:41 relevant tests and Analyze PASS
 360px/200% widget check and tab switching/controller retention covered.
 Not yet in installed versionCode2; build/upload and physical verification pending.
 No new purchase/Credit/Provider/Production/Claude change. General release HOLD.
+
+
+## Oct16 final read-only refund analysis / work stopped
+
+Owner clarified the reported second purchase was the same12:50 purchase; no
+separate new order identified. Play order detail directly verified (KST):
+12:50:05 Order received →12:50:05 This order was processed →12:55:06 This order
+was refunded. Detail does not expose refund reason, acknowledgement or consumption
+flags. Purchase token was not copied/read/replayed. Actual duration5m01s must not
+be rewritten as3 minutes from documentation.
+
+Server evidence12:50–12:51: auth/user200 three times; grant RPC403; PostgreSQL
+42501 at iap_post_verified_purchase line22 calling credit_post_grant; verifier503
+at12:50:10,12:50:42,12:51:14. This is the first proven failure, after auth and the
+Google-verification gate. Google raw response and original purchaseStream events
+are not retained in the inspected logs; server calls demonstrate client delivery,
+not the exact purchased/restored event subtype. Current device logs cannot recover
+those original events. No new failure code after ACL fix has been observed.
+
+Installed AAB source85e6161 controller hash matches current controller. With
+pending/rejected verification, no _finish, no balance refresh; success or duplicate
+success refreshes canonical balance then Google consumePurchase. autoConsume=false.
+Consumption is the app's acknowledgement path. Thus grant failure prevents this
+path. No independent timed retry scheduler exists here; recovery depends on store
+events or entering the purchase screen (restorePurchases). A pending message is
+not evidence that background retry or delivery eventually succeeded.
+
+Most supported explanation: grant42501 → no consumption/acknowledgement → license
+TEST refund. This remains a causal inference, NOT a Google reason-code finding.
+Official Google test docs describe unacknowledged license-test auto-refund after
+3 minutes; the console actually records5m01s. Other refund reasons cannot be
+conclusively excluded without Google reason evidence.
+https://developer.android.com/google/play/billing/test
+
+Existing permission defect fixed/verified: service_role can execute public grant
+RPC; its postgres definer can execute inner grant + schemaUSAGE; executor preserved,
+PUBLIC/anon/authenticated denied, role options restored, definition unchanged.
+Latest read-only ledger check13:22KST balance3/reserved0/IAP grants0/transactions0.
+No manual grant or replay. New purchase cannot be replaced with refunded order.
+
+Remaining acceptance gates: post-fix grant execution, exactly-once +1, Google
+consume/ack success, restart balance persistence and same-token dedup in actual
+E2E. These are unverified outcomes, not proven new bugs. No-purchase checks already
+available: ACL/definition/RLS reads, code ordering and existing Mock tests (pending
+not completed/not refreshed, success completion, duplicate behavior, completion
+failure). Those tests do not prove actual Google consumption or hosted grant.
+
+Safe next procedure requires separate Owner approval:1 credit1 TEST purchase,
+no-charge always-approves test card, account test3, start from3; watch auth→verify→
+grant→balance4→consume promptly; stop on error, no additional buys/manual grant;
+confirm order remains processed, one grant, dedup and restart balance. Any code/DB
+fix needs evidence and separate applicable approval. Today only Wiki changed;
+no purchase/Provider/Credit/DB/Production/Claude changes. Public HOLD; stop work.

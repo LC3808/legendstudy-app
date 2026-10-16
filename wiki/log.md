@@ -3992,3 +3992,11 @@ Play Console confirms today's credit1 refunded/KRW0; recovery stopped, balance3/
 Owner-requested read-only purchase-history tab reuses ledger/RLS, excludes free
 credits and explains unverified/refunded order omission.41 tests/Analyze PASS;
 new app build/device confirmation pending. No purchase or DB change; public HOLD.
+
+## 2026-10-16 — Final read-only refund analysis; stop
+
+Console exact timeline12:50:05 processed→12:55:06 refunded; no reason code.
+First failure grant42501, verifier503. Failed verification skips consumption by
+existing code; license auto-refund causal inference separated from verified facts.
+Post-fix real grant/dedup/consume remain unverified. No transaction or code change.
+See existing IAP preparation wiki; public HOLD and work stopped.

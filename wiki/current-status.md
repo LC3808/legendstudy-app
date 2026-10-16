@@ -2,9 +2,9 @@
 
 ## 2026-10-16 — TEST IAP refund confirmed / purchase history added
 
-TEST inner EXECUTE fix preserved; temporary roles restored. Owner entered product
-screen; no new recovery request. Play Console today12:50 credit1 shows refunded,
-KRW0. Do not replay. TEST13:08 balance3/IAP0; new purchase needs separate approval.
+Final read-only analysis:12:50:05 processed→12:55:06 refunded; reason code absent.
+First failure42501 at inner grant; ACL fixed. Unacknowledged TEST auto-refund is
+inferred, not proven reason. TEST13:22 balance3/IAP0. No replay; new buy needs approval.
 Purchase-history tab reads existing owner-only ledger (recent50 paid grants),
 not unverified/cancelled store orders. No DB/billing-engine change or upload.
 [Evidence, checks and next gate](iap-billing-preparation-2026-10-09.md#oct16-refunded-order-and-purchase-history-tab).
