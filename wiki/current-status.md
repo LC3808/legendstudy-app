@@ -7,7 +7,7 @@ settled1Credit, spendable9/reserved0, History submission3. Existing runs2 preser
 Next free quote0 and old predecessor duplicate-cycle rejection verified read-only.
 All execution flagsOFF; final gateway deployment433141d6. Public HOLD.
 Live WEB result/balancePASS, but old operating UI mislabels additional as initial;
-latest UI promotion and APP device readback remain release gaps. Actual USD cost
+Owner confirmed APP same result and balance9 on Oct16; WEB UI promotion remains. Actual USD cost
 not present in telemetry; token usage recorded. No DB/Math/Payment/IAP changes.
 New actual-result APP/Web QA1+1 PASS; prior full build/analyze evidence retained.
 [Detailed execution and remaining gates](essay-lab-ui-ux-v1.md#oct16-additional-paid-operating-e2e--completed-public-hold).
