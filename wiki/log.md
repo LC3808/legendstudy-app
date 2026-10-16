@@ -4023,3 +4023,23 @@ LAB bounded additional scope prepared; current operating gateway older, flagsOFF
 APP/Web related+real-result adapters/local DB concurrency+recovery/Analyze/iOS/build
 PASS. No Provider/Credit/deploy/DB changes. IAP selective conflicts documented, Claude
 unchanged. Owner approval and final quality/store acceptance pending; public HOLD.
+
+### Oct16 approved bounded deployment — waiting for account login
+
+Owner approved gateway-only promotion and one additional-paid E2E (max2 Provider
+calls/USD2/1Credit plus this run recovery). Promoted only functions/api/essay/exam.ts
+from LAB14e7612 over actual deployed source8518db6; no UI/Math/Payment delta.
+Pages deployment3b99d254-692b-405d-bdf4-574e75178ab3 SUCCESS. Gateway SHA256
+d0640668a83904f966d98dd1da584734c09cad0fe4f12c7b72d3dba83a9020ab.
+Webpack build135 pages PASS (Turbopack staging symlink root restriction avoided).
+Pages/continuous/Worker all OFF; public request503 EVALUATION_UNAVAILABLE.
+Prior deployment rollback45c3935b-c8c8-4fd4-94fc-5c1e31bb51a8.
+
+No Provider or Credit submission yet. The current live UI predates additional-cycle
+controls. Owner terminal-login helper /private/tmp/legendstudy-additional-e2e.py
+uses the actual review account, keeps password/JWT only in memory, waits for an
+operator readiness marker and sends one exclusive local intent. Request key
+a4d46895-ed93-4c67-a685-902b6d5368d7 pins the already approved predecessor.
+No marker created; waiting for Owner login, no need to seek execution approval again.
+If login times out, rerun helper before submission; never remove a sent intent to
+retry. Reconcile same request from DB/checkpoints on unknown outcome. Public HOLD.
