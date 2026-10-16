@@ -3838,3 +3838,56 @@ splash can only show the centred icon (no wordmark) — the wordmark is drawn by
 the Flutter frame; with the backgrounds and symbol position now unified the
 handoff shows no flip/jump, so it reads as one brand screen (two-stage is a
 platform constraint, not a visual break). Device confirmation pending (see below).
+
+## 2026-10-16 — IAP store-refund Credit recovery (A안, additive; TEST-verified)
+Owner approved (A안) the minimal IAP refund implementation after the READ-ONLY
+policy analysis. Confirmed the existing **Toss engine already implements the
+Owner refund formula** (contract.md L49 `max(0, amount − used×4900)`,
+deduction_unit=4900, validity 3 months, manual/backend-finance, negative
+`adjustment` clawback). IAP purchases bypass `payment_orders` (grant straight
+to `credit_grants` via `iap_post_verified_purchase`), so IAP refund is additive,
+not a Toss change.
+
+Implemented (TEST project `kpqbedylxlyntrrfybpn` only; prod untouched):
+- Migration `supabase/migrations/20261016120000_iap_refund_recovery.sql`
+  (additive; recorded in TEST schema_migrations):
+  - `public.iap_refund_events` — idempotency `unique(provider,event_id)` + immutable
+    audit; RLS on, owner postgres, no client grant.
+  - `public.iap_revoke_refunded_purchase(platform,transaction,event_id,event_type,raw)`
+    — SECURITY DEFINER, owner **postgres** (credit_transactions owner=postgres,
+    force_rls=false → inserts without RLS issues; same pattern as
+    iap_post_verified_purchase), `auth.role()='service_role'` guard, EXECUTE to
+    service_role only (authenticated/anon revoked). Identifies the grant by
+    `iap/<plat>/sha256(tx)`, recovers ONLY unused credit
+    (`sum(balance_delta−reserved_delta)`) as one negative `adjustment`
+    (idempotency_key `iap_refund/<reference>` → one recovery per grant), records
+    `shortfall = granted − recovered`, handles `REFUND_REVERSED` (restore), and
+    is idempotent across redelivered notifications. Reuses the existing ledger +
+    `adjustment` type; NO schema/constraint change, NO wallet, NO Toss/iap-grant
+    RPC change. Pre-apply checks done: object/owner/RLS/grants + Rollback (drop
+    function + table) documented in the file.
+- Edge Function `supabase/functions/iap-refund-notifications/` (core/stores/index
+  + core_test): public endpoint that authenticates the STORE itself — Apple ASSN V2
+  via `SignedDataVerifier` (bad signature → 401), Google RTDN via the Pub/Sub OIDC
+  token (Google JWKS RS256 + iss/aud/email/exp checks) and `voidedPurchaseNotification`
+  (full refund only; partial → manual). Non-refund notifications are acknowledged
+  and ignored; transient/unconfigured → 503 (store redelivers). Calls the recovery
+  RPC via service_role. Gated by `IAP_REFUND_ENABLED`. Client never trusted.
+  Secrets needed at deploy: IAP_APPLE_ROOT_CERTIFICATES_BASE64 / BUNDLE_ID / APP_ID /
+  ENVIRONMENT, IAP_GOOGLE_RTDN_AUDIENCE / RTDN_SA_EMAIL / PACKAGE_ID, service-role key.
+
+Verification (rolled back — no TEST data written):
+- RPC behavior PASS: partial (10 granted/4 used → recover 6, shortfall 4),
+  duplicate-notification no-op, different-notification ALREADY_RECOVERED (no double
+  recover), UNMATCHED, full-unused (recover 5/shortfall 0), REFUND_REVERSED restores
+  +6; other paid grant (3) and free signup grant (3) untouched; service_role guard
+  enforced (authenticated has no EXECUTE).
+- Edge core tests: 10/10 deno pass; `deno check` clean.
+- Regression: existing Google IAP success grant preserved (purchase_grants=1,
+  credit_transactions=2 unchanged); iap_refund_events/refund adjustments persisted = 0.
+
+NOT done / Owner-gated: deploy `iap-refund-notifications` to TEST (needs the Apple/
+Google notification secrets + the ASSN V2 URL + Pub/Sub topic config); real Google/
+Apple refund test (separate approval); Apple Sandbox purchase E2E (signing + App
+Store Server API key still pending). Production migration/deploy requires separate
+approval. No push of the Toss engine / iap grant RPC. Codex/main untouched; HOLD.
