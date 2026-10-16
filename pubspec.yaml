@@ -41,3 +41,11 @@ flutter:
     - assets/brand/generated/legendstudy_symbol.png
     - assets/auth/google.png
     - assets/auth/kakao.png
+  fonts:
+    # Brand wordmark typeface (Pretendard, SIL OFL-1.1 — fonts/OFL.txt). Bundled
+    # so 레전드스터디⁺ renders identically on Android and iOS, replacing the
+    # per-platform system Gothic. Used by the brand splash wordmark.
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard-SemiBold.otf
+          weight: 600

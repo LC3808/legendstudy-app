@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 
 import 'brand_wordmark.dart';
 
-/// Cold-start brand experience target from process start. The Flutter brand
-/// frame runs *in parallel* with initialization: it fills the time up to this
-/// target and adds no extra delay once initialization already exceeded it.
-const brandFrameTarget = Duration(milliseconds: 1500);
+/// Cold-start brand experience target from process start (Owner 2026-10-16:
+/// ~1.8s so the logo + wordmark lockup is comfortably recognised). The Flutter
+/// brand frame runs *in parallel* with initialization: it fills the time up to
+/// this target and adds no extra delay once initialization already exceeded it,
+/// so app launch is never lengthened by simply summing native + Flutter time.
+const brandFrameTarget = Duration(milliseconds: 1800);
 // Below this remaining time the frame is skipped, so a slow start never causes a
 // sub-150ms text flash before entering the app.
 const _minShow = Duration(milliseconds: 150);
-const _fade = Duration(milliseconds: 260);
-
-const _nearBlack = Color(0xFF12161F);
+// Short, natural hand-off to the app (Owner 2026-10-16: ~150–200ms fade-out).
+const _fade = Duration(milliseconds: 180);
 
 /// How long the cold-start frame should stay visible given when the process
 /// started, or `null` to skip it entirely (initialization already consumed the
@@ -27,7 +28,7 @@ Duration? brandFrameDuration(DateTime processStart, DateTime now) {
 ///
 /// - `processStart` is captured at the top of `main()`, before initialization.
 ///   The frame is visible for `brandFrameTarget - elapsed`, so:
-///   init 0.4s → enter ~1.5s; init 1.2s → ~1.5s; init ≥1.5s → enter right after
+///   init 0.4s → enter ~1.8s; init 1.2s → ~1.8s; init ≥1.8s → enter right after
 ///   init (no extra wait). Background→foreground resume never re-shows it
 ///   (the process, and this static flag, persist).
 /// - Sits ABOVE `MaterialApp`, so it never touches the router, auth, onboarding
@@ -112,42 +113,28 @@ class _BrandGateState extends State<BrandGate> {
   }
 }
 
-/// Warm-white cold-start frame: centred orange symbol (position/size matched to
-/// the native launch symbol) + the minimal 레전드스터디⁺ wordmark (superscript +,
-/// single near-black). Owner 2026-10-08: simple splash — no tagline, no
-/// version/loading/features/ads. Continuous with the native white+orange splash.
+/// Light cold-start frame: the LegendStudy brand lockup — centred orange symbol
+/// (position/size matched to the native launch symbol) with the 레전드스터디⁺
+/// wordmark (Pretendard, navy body + orange `+`) directly beneath it. Owner
+/// 2026-10-08/10-16: one simple brand screen — no tagline, no version/loading/
+/// features/ads, no extra animation; logo and service name shown *together*.
 ///
-/// The symbol is held SOLID and pixel-matched to the native launch symbol, so
-/// the native→Flutter handoff shows no jump or flicker. Only the wordmark eases
-/// in (Owner 2026-10-09): the lockup *completes* smoothly instead of the name
-/// popping in abruptly after the orange symbol.
-class _BrandSplash extends StatefulWidget {
+/// Background is white and the symbol is held SOLID at the exact centre, matched
+/// to the native launch symbol, so the native→Flutter handoff shows no jump,
+/// flicker or background flip — the lockup simply *completes* as the wordmark
+/// appears beneath the symbol. The whole frame fades out once (see [_fade]).
+class _BrandSplash extends StatelessWidget {
   const _BrandSplash();
-  @override
-  State<_BrandSplash> createState() => _BrandSplashState();
-}
-
-class _BrandSplashState extends State<_BrandSplash> {
-  // Gentle wordmark reveal. Starts transparent and fades to 1 on first frame.
-  double _wordmarkOpacity = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) setState(() => _wordmarkOpacity = 1);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
+    return const ColoredBox(
       color: Colors.white,
       child: Stack(
         fit: StackFit.expand,
         children: [
           // Symbol centred and solid → continuous with the native splash symbol.
-          const Center(
+          Center(
             child: Image(
               image: AssetImage(
                 'assets/brand/generated/legendstudy_symbol.png',
@@ -157,15 +144,10 @@ class _BrandSplashState extends State<_BrandSplash> {
               filterQuality: FilterQuality.medium,
             ),
           ),
-          // Minimal wordmark sits just below centre and eases in.
+          // Wordmark sits just below centre, shown together with the symbol.
           Align(
-            alignment: const Alignment(0, 0.34),
-            child: AnimatedOpacity(
-              opacity: _wordmarkOpacity,
-              duration: const Duration(milliseconds: 320),
-              curve: Curves.easeOut,
-              child: const BrandWordmark(fontSize: 26, color: _nearBlack),
-            ),
+            alignment: Alignment(0, 0.34),
+            child: BrandWordmark(fontSize: 26),
           ),
         ],
       ),

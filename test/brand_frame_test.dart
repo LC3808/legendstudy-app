@@ -8,21 +8,21 @@ void main() {
     final start = DateTime(2026, 1, 1, 0, 0, 0);
     Duration? at(int ms) => brandFrameDuration(start, start.add(Duration(milliseconds: ms)));
 
-    test('fast init fills up to the ~1.5s target', () {
-      // init 0.4s → ~1.1s remaining; init 1.2s → ~0.3s remaining.
-      expect(at(400), const Duration(milliseconds: 1100));
-      expect(at(1200), const Duration(milliseconds: 300));
+    test('fast init fills up to the ~1.8s target', () {
+      // init 0.4s → 1.4s remaining; init 1.2s → 0.6s remaining.
+      expect(at(400), const Duration(milliseconds: 1400));
+      expect(at(1200), const Duration(milliseconds: 600));
     });
 
     test('init at/after the target skips the frame (no extra delay)', () {
-      expect(at(1500), isNull);
-      expect(at(1800), isNull); // 1.8s init → enter right after init
-      expect(at(3000), isNull); // 3s init → enter at 3s, no extra 1.5s
+      expect(at(1800), isNull);
+      expect(at(2400), isNull); // 2.4s init → enter right after init
+      expect(at(3000), isNull); // 3s init → enter at 3s, no extra wait
     });
 
     test('sub-150ms remainder is skipped to avoid a flash', () {
-      expect(at(1400), isNull); // 100ms remaining < 150ms floor
-      expect(at(1349), const Duration(milliseconds: 151));
+      expect(at(1700), isNull); // 100ms remaining < 150ms floor
+      expect(at(1649), const Duration(milliseconds: 151));
     });
   });
 

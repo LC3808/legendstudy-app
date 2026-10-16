@@ -3803,3 +3803,38 @@ CODEX TO FINISH (purchase↔login integration):
 
 Boundaries kept: production/secrets/DB/Git-remote untouched; no push; Codex Math runtime unchanged;
 no new Wallet; existing Ledger reused. iOS E2E not started this session.
+
+## 2026-10-16 — Brand splash: unified lockup + Pretendard wordmark + 1.8s
+Owner: Android showed the orange icon, then the name, as two separate screens.
+Root cause: the **native splash background was near-black (#12161F)** on both
+Android (values-v31 / night-v31 / pre-31 via `brand_splash_bg`) and iOS
+(LaunchScreen.storyboard), while the **Flutter brand frame was white** — a
+dark→white background flip at the native→Flutter handoff read as "two screens".
+(The code and a stale comment claiming "unified near-black" disagreed.)
+
+Changes (brand surfaces only; IAP/auth/onboarding/Supabase/DB/Ledger untouched):
+- `android/.../res/values/colors.xml`: `brand_splash_bg` #FF12161F → **#FFFFFFFF**.
+  One value flips Android 12+ system splash (bg + icon bg) and the pre-31
+  launch_background to white, so the whole native launch is light.
+- `ios/Runner/Base.lproj/LaunchScreen.storyboard`: background #12161F → white,
+  symbol (LaunchImage) stays centred — matches the Flutter frame.
+- `lib/features/brand/brand_wordmark.dart`: wordmark now renders in bundled
+  **Pretendard SemiBold** (SIL OFL), deep navy body `#17244B` + brand-orange `+`
+  `#FFA300`, tracking −0.5 — a professional, cross-platform-identical mark
+  replacing the per-platform system Gothic. Superscript `+`/Semantics preserved.
+- `fonts/Pretendard-SemiBold.otf` (+ `fonts/OFL.txt`) bundled; `pubspec.yaml`
+  `fonts:` registers family Pretendard (weight 600). AAB grew ~1 MB.
+- `lib/features/brand/brand_frame.dart`: `_BrandSplash` now a stateless lockup —
+  symbol held at exact centre (continuous with the native symbol) + wordmark
+  directly beneath, **shown together, no fade-in**. White background. Target
+  1500→**1800 ms**; fade-out 260→**180 ms**. Cold-start-only + ready-gated
+  (no infinite splash, no re-show on resume) unchanged.
+- `test/brand_frame_test.dart`: timing expectations updated to the 1800 ms target.
+
+Verify: `flutter analyze` clean; brand tests pass (6); **Android release AAB
+PASS** (signed, 75.8 MB); **iOS release build PASS** (Runner.app 34.4 MB, no
+codesign). Preview image delivered to Owner. Platform note: Android 12+ system
+splash can only show the centred icon (no wordmark) — the wordmark is drawn by
+the Flutter frame; with the backgrounds and symbol position now unified the
+handoff shows no flip/jump, so it reads as one brand screen (two-stage is a
+platform constraint, not a visual break). Device confirmation pending (see below).
