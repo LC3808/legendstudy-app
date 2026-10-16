@@ -300,3 +300,34 @@ REVOKE EXECUTE ON FUNCTION essay_private.credit_post_grant(
 ```
 No replay/manual grant/additional purchase. Owner must separately approve original
 purchase recovery after ACL fix; do not trigger restore/retry until then. Public HOLD.
+
+### Oct16 TEST ACL applied after explicit temporary-SET approval
+
+Owner confirmed app closed and approved temporary SET/restore, no purchase replay.
+Approved transaction succeeded; function ACL now includes postgres=X/essay_executor
+alongside original essay_executor=X/essay_executor. Function definition hash remains
+0df3300b46a557380e30867e061594bf. anon/authenticated/PUBLIC EXECUTE remain false.
+Postflight found GRANT had created a separate postgres-grantor membership with
+INHERIT=true (original supabase_admin grant unchanged). Removed only this newly
+created membership with REVOKE essay_executor FROM postgres GRANTED BY postgres.
+Final membership exactly restored: only supabase_admin grant, ADMIN=true,
+INHERIT=false, SET=false. Final persistent delta is target function EXECUTE only.
+Ledger check12:59 KST: balance3/reserved0/IAP grants0/transactions0. No replay.
+Google purchase/consume current state still requires existing transaction recovery;
+previous verifier reached grant before42501, but no post-fix verification executed.
+Production and Claude/main unchanged. General release HOLD.
+
+Executable rollback (TEST only, function ACL addition only; do not run now):
+```sql
+BEGIN;
+GRANT essay_executor TO postgres WITH SET TRUE, INHERIT FALSE;
+SET LOCAL ROLE essay_executor;
+REVOKE EXECUTE ON FUNCTION essay_private.credit_post_grant(
+  uuid,integer,text,text,text,text,timestamptz) FROM postgres;
+RESET ROLE;
+REVOKE essay_executor FROM postgres GRANTED BY postgres;
+COMMIT;
+```
+Read-only final checks must confirm original membership and original function ACL.
+Next approval: existing credit1 purchase recovery only, +1 at most, dedup/consume
+and restart checks; no additional purchase or manual Credit grant.

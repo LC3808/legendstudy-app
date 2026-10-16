@@ -1,14 +1,14 @@
 # Current Status
 
-## 2026-10-16 — TEST IAP purchase / GRANT BLOCKED
+## 2026-10-16 — TEST IAP grant ACL fixed / RECOVERY PENDING
 
-Owner version2 TEST login/purchase confirmed. TEST auth PASS; verifier503 caused by
-inner credit_post_grant EXECUTE missing for outer RPC owner postgres (42501).
-Balance3; IAP grants0. Approved direct grant and owner-role switch both denied;
-transactions rolled back, ACL/hash unchanged. Additional temporary SET permission
-approval needed; no role membership expansion/replay performed. Production unchanged.
-[Evidence, proposed fix and rollback](iap-billing-preparation-2026-10-09.md#2026-10-16--test-purchase-grant-failure-and-acl-change-blocked).
-Public HOLD; no further purchase/manual grant.
+Owner-approved target function postgres EXECUTE added; executor preserved and
+anon/authenticated/PUBLIC denied. Temporary grantor membership removed; original
+ADMIN=true/INHERIT=false/SET=false restored. Definition hash unchanged.
+Balance3/reserved0/IAP grants0 at postflight. No replay/manual grant/new purchase.
+Existing transaction recovery requires separate approval; Production unchanged.
+[Evidence and rollback](iap-billing-preparation-2026-10-09.md#oct16-test-acl-applied-after-explicit-temporary-set-approval).
+Public HOLD.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 

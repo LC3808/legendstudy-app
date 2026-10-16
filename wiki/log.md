@@ -3979,3 +3979,9 @@ Tester rollout not started; no purchase/Credit/DB/Production operation. Public H
 Purchase reaches grant RPC but inner EXECUTE missing (42501). Approved direct GRANT
 and SET ROLE denied; rollback/unchanged ACL+hash verified. postgres owner membership
 SET=false. Additional temporary SET approval pending; no replay or manual grant.
+
+## 2026-10-16 — TEST inner grant EXECUTE applied
+
+Owner-approved temporary role switch completed target postgres EXECUTE grant.
+Postflight removed newly created postgres-grantor membership; original role options
+fully restored. Definition/other ACLs unchanged. Balance3/IAP0; recovery not executed.
