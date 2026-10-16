@@ -4,6 +4,7 @@ import '../../core/supabase/supabase_providers.dart';
 import '../../core/config/app_config.dart';
 import '../credits/credit_balance.dart';
 import 'iap_controller.dart';
+import 'presentation/purchase_history.dart';
 import 'purchase_verification.dart';
 
 /// Server verifier (null when there is no Supabase client, e.g. a misconfigured
@@ -29,7 +30,10 @@ final iapControllerProvider = Provider.autoDispose<IapController?>((ref) {
   final controller = IapController(
     verifier: verifier,
     accountId: owner,
-    onBalanceChanged: () => ref.invalidate(creditBalanceProvider),
+    onBalanceChanged: () {
+      ref.invalidate(creditBalanceProvider);
+      ref.invalidate(purchaseHistoryProvider);
+    },
   );
   ref.onDispose(controller.dispose);
   return controller;

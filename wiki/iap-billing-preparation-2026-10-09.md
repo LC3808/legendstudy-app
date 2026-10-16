@@ -331,3 +331,39 @@ COMMIT;
 Read-only final checks must confirm original membership and original function ACL.
 Next approval: existing credit1 purchase recovery only, +1 at most, dedup/consume
 and restart checks; no additional purchase or manual Credit grant.
+
+
+## Oct16 refunded order and purchase history tab
+
+Owner clarified they were already on the product/top-up screen; the app had no
+purchase-history tab. Previous guidance about a history screen was incorrect.
+Read-only Play Console orders verified today's12:50KST credit1 test order as
+**refunded / KRW0**. No order mutation or replay performed. Google documents
+license-test auto-refund after3 minutes without acknowledgement:
+https://developer.android.com/google/play/billing/test . The actual refund is
+verified; its precise cause is not separately confirmed by an order-detail event.
+TEST13:08KST: balance3, IAP grants0, IAP transactions0. Previous grant failure42501
+and subsequent ACL correction are recorded above. Existing refund must not be
+replayed; another test purchase requires new Owner approval.
+
+Owner requested purchase history. Added top-up/history tabs to existing purchase
+page, preserving controller lifetime and restore behavior. Existing authenticated
+RLS on credit_accounts/credit_transactions is reused (owner + lifecycle guards).
+Only created_at,balance_delta,reason_code are projected for purchases, newest50.
+No tokens/order references exposed. Empty/error/loading/refresh states distinguish
+settled Credit grants from failed/pending/refunded Google orders. Free signup
+Credit is excluded. Successful purchases invalidate history and balance together.
+No new DB objects, grant calls, storage or payment engine. Read-only authenticated
+role query on TEST sees1 account,0 purchases,balance3. No privilege expansion.
+
+Preservation review: (1) display existing ledger time, (2) original transactions
+unchanged, (3) no UPDATE/history loss, (4) existing auth/account identity,
+(5) no learning/decision/outcome conflation, (6) owner-only minimal projection,
+(7) UI does not infer purchases from balance or treat store errors as grants.
+
+Files: lib/features/billing/presentation/purchase_history.dart,
+credit_purchase_page.dart, billing_providers.dart; purchase_history_test.dart and
+billing_page_lifetime_test.dart. Local checks:41 relevant tests and Analyze PASS;
+360px/200% widget check and tab switching/controller retention covered.
+Not yet in installed versionCode2; build/upload and physical verification pending.
+No new purchase/Credit/Provider/Production/Claude change. General release HOLD.

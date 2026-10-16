@@ -3985,3 +3985,10 @@ SET=false. Additional temporary SET approval pending; no replay or manual grant.
 Owner-approved temporary role switch completed target postgres EXECUTE grant.
 Postflight removed newly created postgres-grantor membership; original role options
 fully restored. Definition/other ACLs unchanged. Balance3/IAP0; recovery not executed.
+
+## 2026-10-16 — Refunded TEST order; purchase history tab
+
+Play Console confirms today's credit1 refunded/KRW0; recovery stopped, balance3/IAP0.
+Owner-requested read-only purchase-history tab reuses ledger/RLS, excludes free
+credits and explains unverified/refunded order omission.41 tests/Analyze PASS;
+new app build/device confirmation pending. No purchase or DB change; public HOLD.

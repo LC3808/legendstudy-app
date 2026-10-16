@@ -1,14 +1,14 @@
 # Current Status
 
-## 2026-10-16 — TEST IAP grant ACL fixed / RECOVERY PENDING
+## 2026-10-16 — TEST IAP refund confirmed / purchase history added
 
-Owner-approved target function postgres EXECUTE added; executor preserved and
-anon/authenticated/PUBLIC denied. Temporary grantor membership removed; original
-ADMIN=true/INHERIT=false/SET=false restored. Definition hash unchanged.
-Balance3/reserved0/IAP grants0 at postflight. No replay/manual grant/new purchase.
-Existing transaction recovery requires separate approval; Production unchanged.
-[Evidence and rollback](iap-billing-preparation-2026-10-09.md#oct16-test-acl-applied-after-explicit-temporary-set-approval).
-Public HOLD.
+TEST inner EXECUTE fix preserved; temporary roles restored. Owner entered product
+screen; no new recovery request. Play Console today12:50 credit1 shows refunded,
+KRW0. Do not replay. TEST13:08 balance3/IAP0; new purchase needs separate approval.
+Purchase-history tab reads existing owner-only ledger (recent50 paid grants),
+not unverified/cancelled store orders. No DB/billing-engine change or upload.
+[Evidence, checks and next gate](iap-billing-preparation-2026-10-09.md#oct16-refunded-order-and-purchase-history-tab).
+Production/Claude unchanged; public HOLD.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 
