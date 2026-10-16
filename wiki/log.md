@@ -3973,3 +3973,9 @@ Owner. No Credit/Provider/DB/production/Claude changes; general release HOLD.
 Owner upload-only approval executed. Exact signed AAB hash rechecked; Play accepted
 version2(0.1.0) in existing internal track. Draft saved confirmation observed.
 Tester rollout not started; no purchase/Credit/DB/Production operation. Public HOLD.
+
+## 2026-10-16 — TEST grant ACL correction blocked
+
+Purchase reaches grant RPC but inner EXECUTE missing (42501). Approved direct GRANT
+and SET ROLE denied; rollback/unchanged ACL+hash verified. postgres owner membership
+SET=false. Additional temporary SET approval pending; no replay or manual grant.

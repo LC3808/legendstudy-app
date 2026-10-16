@@ -258,3 +258,45 @@ Release notes identify TEST authentication isolation/verification preparation.
 No rollout/publish action: currently available tester release remains1.
 No purchase/grant/DB/Production change. Next gate is internal tester rollout approval,
 then device TEST authentication; purchase remains separately gated.
+
+## 2026-10-16 — TEST purchase grant failure and ACL change blocked
+
+Owner confirmed version2 TEST login and credit1 purchase. TEST JWT auth/user200;
+empty-body verifier400; unauthenticated/invalid/foreign public anon JWT401.
+Purchase verifier calls at12:50:10,12:50:42,12:51:14 KST returned503. Database errors
+42501 point to iap_post_verified_purchase line22 calling credit_post_grant.
+Outer function owner postgres has EXECUTE; inner owner essay_executor ACL contains
+only essay_executor. postgres lacks EXECUTE; account allowed=true. Thus server
+Store verification reached grant path; this is not a UI-only balance refresh issue.
+IAP grants0/transactions0, balance3/reserved0. Google acknowledge/consume state is
+not directly observed; app consumes only after granted/already_processed.
+
+Owner approved TEST-only inner-function EXECUTE to postgres, preserving all other
+ACLs. Direct GRANT failed42501; SET LOCAL ROLE essay_executor also failed42501.
+Both transactions rolled back. Verified original ACL and function definition hash
+0df3300b46a557380e30867e061594bf unchanged. Membership postgres→essay_executor is
+ADMIN=true, INHERIT=false, SET=false. No Production access/change for this operation.
+Additional approval needed for a transaction-scoped temporary membership SET enable
+before granting, then restoring SET=false before commit. No such change executed.
+
+Proposed exact TEST-only transaction (NOT EXECUTED; additional approval required):
+```sql
+BEGIN;
+GRANT essay_executor TO postgres WITH SET TRUE;
+SET LOCAL ROLE essay_executor;
+GRANT EXECUTE ON FUNCTION essay_private.credit_post_grant(
+  uuid,integer,text,text,text,text,timestamptz) TO postgres;
+RESET ROLE;
+GRANT essay_executor TO postgres WITH SET FALSE;
+COMMIT;
+```
+Final expected delta: postgres function EXECUTE only; membership SET/INHERIT remain
+false, ADMIN true; executor retained, anon/authenticated/PUBLIC denied. Check ACL,
+function definition hash and Ledger before/after. Failed transaction must ROLLBACK.
+Rollback function permission only (authorized function-owner context required):
+```sql
+REVOKE EXECUTE ON FUNCTION essay_private.credit_post_grant(
+  uuid,integer,text,text,text,text,timestamptz) FROM postgres;
+```
+No replay/manual grant/additional purchase. Owner must separately approve original
+purchase recovery after ACL fix; do not trigger restore/retry until then. Public HOLD.

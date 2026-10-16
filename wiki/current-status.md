@@ -1,14 +1,14 @@
 # Current Status
 
-## 2026-10-16 — IAP TEST signed AAB / BUILD PASS
+## 2026-10-16 — TEST IAP purchase / GRANT BLOCKED
 
-Codex85e6161 TEST isolation included; versionCode2 exceeds Play internal1.
-Existing signing certificate matches; TEST URL/key embedded in all3 architectures.
-Analyze +39 related tests PASS; signed AAB PASS. No source/IAP redesign.
-Owner-approved AAB uploaded; Play accepted version2 and draft saved.
-Tester rollout not started; device TEST login/purchase E2E NOT_VERIFIED.
-No purchase/grant/DB/deploy/Claude change. Public HOLD.
-[Artifact, hash and next gate](iap-billing-preparation-2026-10-09.md#2026-10-16--signed-test-internal-track-aab-prepared).
+Owner version2 TEST login/purchase confirmed. TEST auth PASS; verifier503 caused by
+inner credit_post_grant EXECUTE missing for outer RPC owner postgres (42501).
+Balance3; IAP grants0. Approved direct grant and owner-role switch both denied;
+transactions rolled back, ACL/hash unchanged. Additional temporary SET permission
+approval needed; no role membership expansion/replay performed. Production unchanged.
+[Evidence, proposed fix and rollback](iap-billing-preparation-2026-10-09.md#2026-10-16--test-purchase-grant-failure-and-acl-change-blocked).
+Public HOLD; no further purchase/manual grant.
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 
