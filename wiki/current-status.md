@@ -1,18 +1,16 @@
 # Current Status
 
-## 2026-10-16 — Launch preflight / PARTIAL, additional E2E pending
+## 2026-10-16 — Additional-paid operating E2E PASS; release PARTIAL
 
-Production quote additional1, review balance10/reserved0; Package17/Registry234/runs2
-preserved. Pages/Worker OFF. Deployed gateway8518db6 lacks quote/cycle routing;
-Gateway-only deployment3b99d254 SUCCESS after Owner approval; flags remainOFF.
-Owner login passed; quote stopped at Cloudflare urllib403/error1010 before submit.
-Curl transport corrected; awaiting terminal re-login. OFF deployment5869f421 verified.
-No Provider/Credit/DB change.
-APP50 + actual-result6, WEB133 + actual-result1, local DB concurrency/recovery PASS;
-Analyze/iOS simulator/Lint/Typecheck/Build PASS. Claude Apple Sandbox files read-only.
-Google TEST final E2E remains PASS; Apple/Production/store integration not inferred.
-[Evidence, minimal promotion and approval plan](essay-lab-ui-ux-v1.md#oct16-launch-preflight--additional-cycle-ready-locally--operating-e2e-pending).
-Public HOLD. Bounded additional-paid E2E already approved; final release still requires Owner approval.
+Approved single additional paid run completed14:48:27 KST. Provider1+review1,
+settled1Credit, spendable9/reserved0, History submission3. Existing runs2 preserved.
+Next free quote0 and old predecessor duplicate-cycle rejection verified read-only.
+All execution flagsOFF; final gateway deployment433141d6. Public HOLD.
+Live WEB result/balancePASS, but old operating UI mislabels additional as initial;
+latest UI promotion and APP device readback remain release gaps. Actual USD cost
+not present in telemetry; token usage recorded. No DB/Math/Payment/IAP changes.
+New actual-result APP/Web QA1+1 PASS; prior full build/analyze evidence retained.
+[Detailed execution and remaining gates](essay-lab-ui-ux-v1.md#oct16-additional-paid-operating-e2e--completed-public-hold).
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up
 
