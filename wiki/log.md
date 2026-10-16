@@ -4006,3 +4006,6 @@ See existing IAP preparation wiki; public HOLD and work stopped.
 13:35 purchase processed; auth/verifier/RPC200, +1 transaction/grant1, balance4.
 Owner app charged confirmation. Restart/consume/duplicate replay acceptance still
 pending; do not claim full E2E. No additional purchase/Production change; HOLD.
+
+- Follow-up: Owner restart balance4 PASS; server13:37 grants1/transactions1,
+  balance4/reserved0. Explicit consume/same-token replay remain unverified.

@@ -441,3 +441,8 @@ replay test; processed order alone is not proof of consumption. Owner asked to f
 restart app and enter top-up without buying, report balance4 and any completion-delay
 message. No additional purchase/manual grant/Production action authorized or run.
 Keep overall E2E PARTIAL until remaining evidence arrives; public HOLD.
+
+Owner subsequently confirmed4 usable Credits after requested full restart. Server
+13:37:35KST independently confirms balance4/reserved0/grants1/transactions1. Restart
+persistence PASS; no extra grant observed. This does not prove same-token replay
+or explicit Google consume flags. Those two final acceptance checks remain open.

@@ -4,8 +4,8 @@
 
 Owner-approved new credit1 purchased13:35KST; Play processed. Auth/verifier/grant
 RPC200, Ledger+1 exactly once; balance4/reserved0/IAP grants1/transactions1.
-Old refunded order untouched; ACL fix retained. Restart balance, explicit consume
-and same-token replay checks pending: overall PARTIAL, not full E2E PASS.
+Owner restart balance4 PASS; server13:37 balance4/grants1/transactions1/reserved0.
+Explicit consume and same-token replay checks pending: overall PARTIAL.
 Purchase-history tab locally implemented, not installed version2. No new DB/code/
 Production change. [Evidence](iap-billing-preparation-2026-10-09.md#oct16-approved-new-test-purchase--grant-success-final-checks-pending).
 Additional purchase forbidden; public HOLD.
