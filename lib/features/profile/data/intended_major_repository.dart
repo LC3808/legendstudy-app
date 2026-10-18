@@ -57,11 +57,15 @@ class SupabaseIntendedMajorRepository implements IntendedMajorRepository {
   Future<void> set(String? value) async {
     final uid = _client.auth.currentUser?.id;
     if (uid == null) throw const SignedOutException();
-    await _client.from('profiles').upsert({
-      'id': uid,
-      'intended_major': value,
-      'updated_at': DateTime.now().toUtc().toIso8601String(),
-    });
+    // Existing profile only: INSERT permission is intentionally absent for this
+    // field; updated_at belongs to the server trigger. Require one returned row
+    // so missing/filtered profiles cannot look like a successful save.
+    await _client
+        .from('profiles')
+        .update({'intended_major': value})
+        .eq('id', uid)
+        .select('id')
+        .single();
   }
 }
 

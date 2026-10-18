@@ -4131,3 +4131,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 functional RC: Owner confirms review account normal-user writes. RLS/owner-policy metadata read; baseline counts captured. IAP native controller separately gated; Analyze/39+5tests PASS. Profile1.0.0(9) installed/launched. Device actions/DB persistence pending Owner response; no operational SQL mutation/payment/evaluation.
 
 - Functional RC Owner PASS: PDF/bookmark/timer save/restart persistence. Server bookmark2/recent1/study1 confirms writes on review account. Android AAB1.0.0(9) built/not uploaded; MY school/target and rest of screen acceptance pending.
+
+- Oct18 Owner interested universities PASS; major save FAIL traced to upsert column ACL mismatch. Replaced with owner PATCH intended_major only; Analyze/11tests PASS, no DB mutation. Build10/device acceptance pending.
