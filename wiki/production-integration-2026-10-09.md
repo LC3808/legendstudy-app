@@ -234,3 +234,28 @@ Read-only boundary finding: ContentDetailPage records recent views after10s fore
 Local unsigned Archive prepared with build-name1.0/build-number6; emittedCFBundleShortVersion1.0.0/6, bundlecom.legendstudy.app, iOS15. build/ios/archive/Runner.xcarchive204MB. Existing Production read config keeps essay request/writeOFF; this is NOT a fully read-only transport. No IPA exported (no-codesign), no upload. Keychain has one usable Apple Development identity, no usable Apple Distribution identity observed. Signed export/portal certificate provisioning/TestFlight upload remain separate gates. Existing ASC version1.0 must be matched at final export; actual metadata/artifact validated then, no version edit to store here.
 
 Next device review: preserve current data and existing completed onboarding; do not reset Production profile solely to replay onboarding. Latest transition QA is local36PASS; a TEST-only signed device candidate can exercise onboarding after Owner chooses/approves its installation and TEST profile operations. No iPhone install this turn. New Production screenshots/QA cannot be reported from old installed+4.
+
+## Oct18 Production read-only device build preparation
+
+Owner authorizes local preparation only, no installation/replacement. REVIEW_READ_ONLY defaults false and is supplied only by /private/tmp/legendstudy-production-readonly.json; normal store config unchanged. tool/store-release refuses a true review flag. Build target Production only, existing TEST session isolation preserved; OAuth disabled in review config, existing email/password and refresh authentication allowed. Auth session/audit bookkeeping is inherent to the explicitly allowed login, not application data mutation.
+
+Transport boundary: core/network/review_read_only_client.dart, explicitly wired into Supabase bootstrap, separate avatar Storage client, essay catalog/exam/math clients, study/scoring shared transport, school and PDF fetch. No reliance on Flutter callback Zone inheritance. Denied request throws REVIEW_READ_ONLY_BLOCKED and prints only that constant, no URL/token/body. Redirects disabled. Unknown RPCs/Edge functions blocked including GET; only explicit existing read RPCs allowed. Cross-project Supabase rejected. No direct dart:io write transport, Realtime channel write or native push-token registration implementation found in current lib.
+
+| Path | Review behavior |
+|---|---|
+| Profile creation/update, onboarding/target major | REST writes blocked before send |
+| Recent views, bookmarks, D-Day/target university | REST writes blocked, existing SELECT retained |
+| Timer/outbox/study/mock submission | HTTP writes blocked; local draft/queue may remain, no false synced success |
+| Notifications read marking/token writes | Mutation RPC/REST blocked; list/count reads retained |
+| Essay submit/rewrite/reserve/consume | LAB POST and unknown/mutation RPC blocked |
+| Purchase restore/verify/ACK/consume | Native IAP controller not constructed; Edge blocked; purchase history SELECT retained |
+| Account request/cancel/recovery | All Edge requests blocked; deletion feature flag OFF |
+| Avatar upload and storage mutation | Separate Storage transport guarded |
+
+Read scope: existing REST data, Credit summary, essay History/results, application labels, notifications, mock read RPC and LAB Catalog. Approved read RPCs use existing server semantics. Resolver/neis/other Edge calls remain blocked: PDF needing resolver/new signed URL, school search and deletion status can be unavailable. Math multipurpose RPC blocked. Static existing PDF/object GET supported without redirects. External browser/native OS URLs are outside this HTTP guard; do not use external mutation flows during review. No system-wide no-write guarantee for arbitrary future plugins: new clients require this factory.
+
+Local SDK transport-spy tests prove blocked Production-address requests cause zero underlying sends (profile/recent/bookmark/study/day-target/target/token, essay/Ledger/deletion RPC, purchase Edge). Read requests reach spy. No real operating write probe made. Existing deletion/billing/session/study regressions retained. Device network capture/actual read acceptance remains pending installation approval. Local queued changes are not deleted: use screen/read flows only; do not complete timer/onboarding or edit profile, and inspect pending local sync before restoring a normal release build.
+
+Build/check evidence and device outcome recorded in current handoff. Production database, Provider, Credit, Store and existing installed iPhone unchanged. Public HOLD.
+
+Final local evidence: Flutter Analyze PASS;42focused transport/deletion/billing/session/study tests PASS;4review-flag ON tests PASS including native IAP null/factory enforcement; Wiki handoff PASS. Store config rejection confirmed. Development Profile build1.0.0(7),com.legendstudy.app,46.1MB PASS at build/ios/iphoneos/Runner.app. codesign deep/strict verification PASS; embedded iOS Team Provisioning Profile,teamVUKFS69GB4,get-task-allow=true,2devices. No installation. Logs:/private/tmp/rc-readonly-{analyze,test,flag-test,ios}.log. Device traffic/Owner screens NOT_VERIFIED.

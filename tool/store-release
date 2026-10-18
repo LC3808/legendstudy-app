@@ -29,6 +29,8 @@ def main():
         parser.error('Production config is missing or invalid; no values printed.')
     if not isinstance(config, dict) or config.get('APP_ENV') != 'production':
         parser.error('APP_ENV must be production in the existing local config.')
+    if str(config.get('REVIEW_READ_ONLY', False)).lower() == 'true':
+        parser.error('Review-only build configuration cannot be used for Store release.')
     config.update(REQUIRED)  # Preserve every other existing production define.
     if args.check:
         print('PRODUCTION_CONFIG_PASS: existing defines preserved; all three release flags true.')

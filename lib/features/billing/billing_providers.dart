@@ -1,3 +1,5 @@
+import '../../core/network/review_read_only_client.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
@@ -23,6 +25,9 @@ final purchaseVerifierProvider = Provider<PurchaseVerifier?>((ref) {
 /// unavailable. After a settled purchase it invalidates [creditBalanceProvider]
 /// so the balance is re-read from the canonical ledger.
 final iapControllerProvider = Provider.autoDispose<IapController?>((ref) {
+  if (reviewReadOnly) {
+    return null; // No native Store subscription/restore/purchase.
+  }
   final auth = ref.watch(authStateProvider);
   final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
   final verifier = ref.watch(purchaseVerifierProvider);

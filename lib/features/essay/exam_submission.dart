@@ -1,3 +1,4 @@
+import '../../core/network/review_read_only_client.dart';
 import '../../core/config/app_config.dart';
 
 import 'dart:convert';
@@ -21,7 +22,7 @@ class ExamSubmissionGateway {
     if (session == null || session.isExpired || session.user.id != owner) {
       throw StateError('LOGIN_REQUIRED');
     }
-    final transport = http.Client();
+    final transport = reviewHttpClient();
     try {
       final request = http.Request('POST', Uri.parse('$origin/api/essay/exam'))
         ..followRedirects = false

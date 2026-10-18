@@ -1,3 +1,5 @@
+import '../../core/network/review_read_only_client.dart';
+
 import 'dart:convert';
 import 'dart:ui' as ui;
 
@@ -94,7 +96,7 @@ final avatarRepositoryProvider = Provider<AvatarRepository?>((ref) {
     SupabaseStorageClient('${config.supabaseUrl}/storage/v1', {
       'apikey': config.supabasePublishableKey,
       'Authorization': 'Bearer ${session.accessToken}',
-    }).from(avatarBucket),
+    }, httpClient: reviewHttpClient()).from(avatarBucket),
     owner,
   );
 });

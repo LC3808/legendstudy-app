@@ -1,11 +1,16 @@
+import '../../core/network/review_read_only_client.dart';
+
 import 'dart:async';
+
 import 'scoring/scoring_repository.dart';
 import 'notifications/mock_notification.dart';
 import 'focus/focus_service.dart';
 import 'focus/study_focus_controller.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:http/http.dart' as http;
+
 import '../../core/config/app_config.dart';
 import '../../core/supabase/supabase_providers.dart';
 import 'data/study_local.dart';
@@ -29,7 +34,7 @@ final studyLocalStoreProvider = Provider<StudyLocalStore>(
   (ref) => NativeStudyLocalStore(),
 );
 final studyHttpProvider = Provider<http.Client>((ref) {
-  final client = http.Client();
+  final client = reviewHttpClient();
   ref.onDispose(client.close);
   return client;
 });

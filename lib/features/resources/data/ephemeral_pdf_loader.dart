@@ -1,3 +1,5 @@
+import '../../../core/network/review_read_only_client.dart';
+
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -14,7 +16,7 @@ final ephemeralPdfLoaderProvider = Provider<Future<Uint8List> Function(Uri)>(
 /// No disk cache, redirects, cookies or persisted URL. Bytes live only in the viewer.
 Future<Uint8List> loadEphemeralPdf(Uri uri, {http.Client? transport}) async {
   if (safeResolvedPdf(uri.toString()) == null) throw StateError('자료를 열 수 없어요.');
-  final client = transport ?? http.Client();
+  final client = transport ?? reviewHttpClient();
   Future<Uint8List> download() async {
     final request = http.Request('GET', uri)..followRedirects = false;
     final response = await client.send(request);

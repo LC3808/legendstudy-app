@@ -1,3 +1,5 @@
+import 'core/network/review_read_only_client.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -40,6 +42,7 @@ class _AppBootstrapState extends State<AppBootstrap> {
           url: config.supabaseUrl,
           publishableKey: config.supabasePublishableKey,
           debug: false,
+          httpClient: reviewHttpClient(),
           authOptions: FlutterAuthClientOptions(
             localStorage: config.environment == 'test'
                 ? IapTestSessionStorage()

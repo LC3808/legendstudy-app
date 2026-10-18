@@ -1,4 +1,6 @@
+import '../../core/network/review_read_only_client.dart';
 import '../../core/config/app_config.dart';
+
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
@@ -23,7 +25,7 @@ String mathRequestId() {
 /// Existing WEB RPCs and allowlisted worker gateway. No worker key or client billing.
 class MathGateway {
   MathGateway(this.client, this.owner, {http.Client? transport})
-    : transport = transport ?? http.Client();
+    : transport = transport ?? reviewHttpClient();
   final SupabaseClient client;
   final String owner;
   final http.Client transport;

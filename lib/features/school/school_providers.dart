@@ -1,7 +1,8 @@
+import '../../core/network/review_read_only_client.dart';
+
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 
 import '../../core/config/app_config.dart';
 import '../../core/supabase/supabase_providers.dart';
@@ -10,7 +11,7 @@ import 'data/neis_school_repository.dart';
 import 'domain/school.dart';
 
 final schoolRepositoryProvider = Provider<SchoolRepository>((ref) {
-  final client = http.Client();
+  final client = reviewHttpClient();
   ref.onDispose(client.close);
   return NeisSchoolRepository(client, ref.watch(appConfigProvider));
 });

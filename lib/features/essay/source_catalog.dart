@@ -1,3 +1,4 @@
+import '../../core/network/review_read_only_client.dart';
 import '../../core/config/app_config.dart';
 
 import 'dart:convert';
@@ -41,7 +42,7 @@ class SourceCatalog {
     AppConfig? config,
   }) async {
     final origin = (config ?? AppConfig.fromEnvironment()).essayApiOrigin;
-    final transport = client ?? http.Client();
+    final transport = client ?? reviewHttpClient();
     try {
       if (accessToken != null && accessToken.isNotEmpty) {
         final privateResponse = await transport
