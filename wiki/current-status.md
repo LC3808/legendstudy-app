@@ -1,6 +1,6 @@
 ## Oct18 selective UI integration
 
-Owner-approved be51e98 brand already present; c3ac6ec onboarding UI selectively integrated while RC intro/auth/save contracts retained. Analyze/36 tests PASS; build evidence in production-integration. HOLD; new UI device QA pending.
+be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Final prep: unsignedArchive1.0.0(6), refund TEST deployment plan ready; details in production-integration.
 
 ## Phase1 Production read-only candidate
 

@@ -4117,3 +4117,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 Owner UI integration: brand already matches be51e98; c3ac6ec onboarding animations/guards selected with RC device intro preserved. Analyze+36 tests PASS incl360px/200%, Reduce Motion, retained grade/canonical save. Build outcomes in production-integration. No backend/transaction/deploy; Android QA deferred by Owner.
 
 - Selective UI closeout: Android release APK+5 and iOS unsigned release+5 PASS; Wiki handoff PASS. No install/upload. Owner new-UI physical acceptance pending.
+
+- Oct18 final directive prep: TEST refund RPC/ACL/RLS read-only preflight PASS;10handler tests/typecheck PASS; disabled Edge deployment scope prepared, NOT deployed. Unsigned iOS Archive1.0.0(6)204MB PASS; no Distribution identity/IPA/upload. Content-detail auto-recent write discovered: broad Production readonly QA withheld, no data writes. Owner iPhone existing-result/Credit confirmation retained; Android signing closed/deferred.

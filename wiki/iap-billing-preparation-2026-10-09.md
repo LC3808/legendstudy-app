@@ -483,3 +483,15 @@ PASS at deployed RPC plus local request contract. No remaining blocker for these
 specified checks; optional full HTTP replay requires actual TEST user session but
 is not needed to repeat purchase or consume. General production launch remains HOLD.
 No extra purchase/manual grant/Production/Claude changes. Work ends after Wiki.
+
+## Oct18 final integration — TEST refund deployment preflight
+
+Owner final directive: Codex sole execution authority; existing Google E2E/transactions preserved. Apple contract handled by Owner, no purchase until active agreement and product lookup. No Production DB/deploy/transactions. Existing Store money-refund authority is Apple/Google; this code only reconciles Credit after a verified store event. It does not execute the web 3-month/used-credit4900KRW cash-refund formula at the Store.
+
+Fresh TEST kpqbedylxlyntrrfybpn metadata: public.iap_revoke_refunded_purchase(text,text,text,text,jsonb) and iap_post_verified_purchase exist, postgres SECURITY DEFINER, service_role EXECUTE true, anon/authenticated false. account_private.lock_subject(uuid) executable by postgres. iap_refund_events RLS enabled; anon/authenticated SELECT false. No RPC executed and no records modified. Last live Edge list has verifierv9 only; refund Edge absent. ASC Sandbox/Production notification URLs unset (read-only inspection). Existing refund migration must NOT be re-applied merely to deploy the Edge.
+
+Local deno test supabase/functions/iap-refund-notifications/core_test.ts:10PASS; deno check index.ts PASS. These test handler routing/idempotent-port/error behavior, NOT actual Store signatures or hosted Credit recovery. Prior Google E2E not repeated.
+
+Reviewable disabled-deployment scope (NOT EXECUTED): deploy existing supabase/functions/iap-refund-notifications/{index,core,stores}.ts ONLY to TEST. Set IAP_REFUND_ENABLED=false. Public Store webhook requires gateway verify_jwt=false for this function alone (existing purchase verifier stays true); enabled handler authenticates Apple signed JWS/environment/bundle and Google OIDC signature/issuer/audience/service-account/package. OFF handler rejects POST503 before verifier or RPC. Do not register ASSN/RTDN URLs or enable recovery in this deployment. No migration, key rotation, purchase, refund or Ledger call. After approval: inspect deployment flag/version/JWT policy and GET405/POST503 only. Rollback: retain OFF and delete only this newly-created TEST function if required, with no DB rollback.
+
+Later separate gate: validate TEST Apple Sandbox environment/root cert configuration and RTDN audience/service-account; configure TEST URLs/notification delivery and enable function only with explicit authorization. Real refund/recovery/reversal tests need a separately approved transaction; do not use preserved Google success purchase without permission. Existing RPC ignores unmatched purchases only after writing an audit row, so even unmatched probes are not read-only. Non-refund Apple TEST notifications are verified then ignored and do not prove Credit recovery.
