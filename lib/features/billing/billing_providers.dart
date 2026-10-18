@@ -25,7 +25,11 @@ final purchaseVerifierProvider = Provider<PurchaseVerifier?>((ref) {
 /// unavailable. After a settled purchase it invalidates [creditBalanceProvider]
 /// so the balance is re-read from the canonical ledger.
 final iapControllerProvider = Provider.autoDispose<IapController?>((ref) {
-  if (reviewReadOnly) {
+  if (reviewReadOnly ||
+      !const bool.fromEnvironment(
+        'IAP_TRANSACTIONS_ENABLED',
+        defaultValue: true,
+      )) {
     return null; // No native Store subscription/restore/purchase.
   }
   final auth = ref.watch(authStateProvider);

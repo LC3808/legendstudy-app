@@ -11,7 +11,11 @@ void main() {
     final client = reviewHttpClient();
     expect(client is ReviewReadOnlyClient, reviewReadOnly);
     client.close();
-    if (reviewReadOnly) {
+    if (reviewReadOnly ||
+        !const bool.fromEnvironment(
+          'IAP_TRANSACTIONS_ENABLED',
+          defaultValue: true,
+        )) {
       final container = ProviderContainer();
       expect(container.read(iapControllerProvider), isNull);
       container.dispose();

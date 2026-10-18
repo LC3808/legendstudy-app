@@ -4127,3 +4127,7 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 read-only device preparation: explicit guarded HTTP clients and native IAP start suppression, dedicated review config, Store tool rejects review flag. No installation or live write probe; detailed audit/limits in production-integration.
 
 - Oct18 Owner-approved iPhone review install:0.1.0(4)→1.0.0(7), app data7files/preferences preserved. Locked device prevented launch. Read-only Catalog POST overblocking found and narrowed; build8/device checks in progress. No operating write.
+
+- Oct18 functional RC: Owner confirms review account normal-user writes. RLS/owner-policy metadata read; baseline counts captured. IAP native controller separately gated; Analyze/39+5tests PASS. Profile1.0.0(9) installed/launched. Device actions/DB persistence pending Owner response; no operational SQL mutation/payment/evaluation.
+
+- Functional RC Owner PASS: PDF/bookmark/timer save/restart persistence. Server bookmark2/recent1/study1 confirms writes on review account. Android AAB1.0.0(9) built/not uploaded; MY school/target and rest of screen acceptance pending.
