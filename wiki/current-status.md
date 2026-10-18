@@ -1,6 +1,10 @@
+## Oct18 selective UI integration
+
+Owner-approved be51e98 brand already present; c3ac6ec onboarding UI selectively integrated while RC intro/auth/save contracts retained. Analyze/36 tests PASS; build evidence in production-integration. HOLD; new UI device QA pending.
+
 ## Phase1 Production read-only candidate
 
-Owner prioritizes Production existing-service readback; TEST API block retained. Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. Production0.1.0+4 builds prepared; device acceptance pending. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
+Owner prioritizes Production existing-service readback; TEST API block retained. Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. iPhone existing result/Credit display Owner-confirmed; Android Production device QA Owner-deferred. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
 
 ## iPhone TEST isolation follow-up
 

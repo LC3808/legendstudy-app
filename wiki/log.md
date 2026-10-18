@@ -4113,3 +4113,7 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 
 
 - Oct18 Phase1: Production profile+4 installed/launched iPhone; Android release+4 built, Play signing mismatch blocks non-destructive update. Analyze/16tests PASS. Owner screens pending, Phase1 PARTIAL; no purchase/evaluation/DB/deploy.
+
+- Oct18 Owner UI integration: brand already matches be51e98; c3ac6ec onboarding animations/guards selected with RC device intro preserved. Analyze+36 tests PASS incl360px/200%, Reduce Motion, retained grade/canonical save. Build outcomes in production-integration. No backend/transaction/deploy; Android QA deferred by Owner.
+
+- Selective UI closeout: Android release APK+5 and iOS unsigned release+5 PASS; Wiki handoff PASS. No install/upload. Owner new-UI physical acceptance pending.

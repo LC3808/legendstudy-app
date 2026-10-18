@@ -86,6 +86,7 @@ Future<GoRouter> _mount(
   String? user,
   SchoolRepository? schools,
   bool reduceMotion = false,
+  double textScale = 1,
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -108,8 +109,10 @@ Future<GoRouter> _mount(
         theme: AppTheme.light,
         routerConfig: router,
         builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(disableAnimations: reduceMotion),
+          data: MediaQuery.of(context).copyWith(
+            disableAnimations: reduceMotion,
+            textScaler: TextScaler.linear(textScale),
+          ),
           child: child!,
         ),
       ),
@@ -143,6 +146,59 @@ void main() {
           tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
           isNotNull,
         );
+      },
+    );
+  }
+
+  for (final reduced in [false, true]) {
+    testWidgets(
+      'RC 360px 200% retains grade and guards rapid navigation $reduced',
+      (tester) async {
+        tester.view.physicalSize = const Size(360, 800);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final repo = _Repo();
+        await _mount(
+          tester,
+          repo,
+          user: 'u1',
+          reduceMotion: reduced,
+          textScale: 2,
+        );
+        await tester.tap(find.text('고등학교 재학생'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('다음'));
+        await tester.pump();
+        await tester.tap(find.text('다음'));
+        await tester.pumpAndSettle();
+        expect(find.text('학년과 학교'), findsOneWidget);
+        final switcher = tester.widget<AnimatedSwitcher>(
+          find.byType(AnimatedSwitcher).first,
+        );
+        expect(
+          switcher.duration,
+          reduced ? Duration.zero : const Duration(milliseconds: 300),
+        );
+        await tester.ensureVisible(find.text('2학년'));
+        await tester.tap(find.text('2학년'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('다음'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('이전'));
+        await tester.pumpAndSettle();
+        expect(find.text('학년과 학교'), findsOneWidget);
+        await tester.tap(find.text('다음'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('나중에 설정할게요'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('설정 완료'));
+        await tester.pumpAndSettle();
+        expect(repo.grade, 2);
+        expect(repo.status, 'student');
+        expect(repo.upserts, 1);
+        expect(repo.completed, isTrue);
+        expect(tester.takeException(), isNull);
       },
     );
   }
