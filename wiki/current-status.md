@@ -1,6 +1,6 @@
 ## Oct18 selective UI integration
 
-be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Final prep: unsignedArchive1.0.0(6), refund TEST OFF installation PASS; details in production-integration.
+be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Archive1.0.0(6) unsigned; refund TEST OFF PASS. Deletion copy:2주; Analyze/10tests PASS. Device pending.
 
 ## Phase1 Production read-only candidate
 

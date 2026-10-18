@@ -182,7 +182,7 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
           Text('파기 예정 시각: ${_status!.deadline!.toLocal().toIso8601String()}'),
         if (available && normal) ...[
           const Text(
-            '요청 즉시 개인화 서비스가 제한되며, 336시간 후 개인정보를 자동 파기합니다. 로그인만으로 취소되지 않습니다.',
+            '요청 즉시 개인화 서비스가 제한되며, 2주 후 개인정보를 자동 파기합니다. 로그인만으로 취소되지 않습니다.',
           ),
           CheckboxListTile(
             value: _confirmed,

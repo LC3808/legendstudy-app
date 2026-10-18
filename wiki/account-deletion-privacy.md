@@ -226,3 +226,7 @@ correction/deletion propagation, vendors, exports and least-privilege access.
 needs separate Privacy/Legal/Governance review. No legal conclusion, consent model,
 retention period or new processing authorization is decided here. Existing account
 deletion/Apple revoke/Store gates remain OPEN; no code or Production mutation.
+
+## Oct18 Owner display-copy correction
+
+APP delete_account_page.dart request guidance now says “2주 후” instead of “336시간 후”. Search of lib/assets found no other336-hour user-facing copy. Pending receipt retains server scheduled-deletion timestamp; erasing/erased/cancellation messages unchanged. Actual336-hour/14-day grace, DB/RPC/Edge, request/cancel/cleanup contracts unchanged. Flutter Analyze PASS; existing account_deletion_test.dart10tests PASS. No real deletion, installation or deployment. Device copy acceptance pending.

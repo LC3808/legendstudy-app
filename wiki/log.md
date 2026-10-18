@@ -4121,3 +4121,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 final directive prep: TEST refund RPC/ACL/RLS read-only preflight PASS;10handler tests/typecheck PASS; disabled Edge deployment scope prepared, NOT deployed. Unsigned iOS Archive1.0.0(6)204MB PASS; no Distribution identity/IPA/upload. Content-detail auto-recent write discovered: broad Production readonly QA withheld, no data writes. Owner iPhone existing-result/Credit confirmation retained; Android signing closed/deferred.
 
 - Oct18 approved TEST refund OFF install: functionv1/JWTfalse, GET405/POST503 PASS. Purchase verifier JWTtrue/code hash retained (version now10). No Store/DB/Credit/Production action; notification activation and recovery E2E separate gate. See IAP preparation Wiki.
+
+- Oct18 Owner final release continuation: deletion request display336시간→2주 only; pending server deadline retained. Analyze/10existing deletion tests PASS. No lifecycle/backend changes. Remote APP/LAB/DOCS heads checked; generated supabase/.temp preserved uncommitted. New installation needs Owner approval; Production auto-recent/onboarding writes remain excluded.
