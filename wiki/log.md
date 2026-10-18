@@ -3891,3 +3891,15 @@ Google notification secrets + the ASSN V2 URL + Pub/Sub topic config); real Goog
 Apple refund test (separate approval); Apple Sandbox purchase E2E (signing + App
 Store Server API key still pending). Production migration/deploy requires separate
 approval. No push of the Toss engine / iap grant RPC. Codex/main untouched; HOLD.
+
+## 2026-10-18 — iOS export-compliance: ITSAppUsesNonExemptEncryption=false
+App Store 제출용 암호화 수출 규정 선언. READ-ONLY 조사 결과 앱은 **표준 OS
+HTTPS/TLS + 인증용 SHA-256/HMAC 해싱**만 사용(자체·비표준 암호화 없음,
+`crypto ^3.0.7`은 해싱 전용; Supabase/OAuth/StoreKit 모두 OS TLS) → 수출 규정
+**면제 대상**. 따라서 `ios/Runner/Info.plist`에 `ITSAppUsesNonExemptEncryption
+= false` 1개 키 추가(제출 시 수출 self-classification 자동 통과). `plutil -lint`
+OK, 기존 키(NSPhotoLibraryUsageDescription 등) 전부 보존. Runner 타깃
+`INFOPLIST_FILE = Runner/Info.plist`라 빌드 plist에 반영됨.
+같은 커밋에 Owner의 Xcode 변경(서명 `DEVELOPMENT_TEAM=VUKFS69GB4`,
+`UIApplicationSceneManifest`, scheme) 보존해 포함. 기능/서버/운영 미변경,
+Codex/main 미수정, HOLD.
