@@ -1,3 +1,4 @@
+import '../../core/config/app_config.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
@@ -10,7 +11,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 
-const mathOrigin = 'https://lab.legendstudy.com';
+String get mathOrigin => AppConfig.fromEnvironment().essayApiOrigin;
 String mathRequestId() {
   final b = List.generate(16, (_) => Random.secure().nextInt(256));
   b[6] = (b[6] & 15) | 64;

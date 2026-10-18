@@ -51,6 +51,15 @@ class AppConfig {
   );
   final String privacyUrl, termsUrl, refundUrl;
   final bool googleOAuthEnabled, appleOAuthEnabled, kakaoOAuthEnabled;
+  // No TEST Cloudflare essay gateway is configured in this candidate. Fail closed rather
+  // than sending a TEST session to Production; Supabase reads use their client.
+  String get essayApiOrigin {
+    if (environment == 'test') {
+      throw StateError('TEST_ESSAY_BACKEND_UNCONFIGURED');
+    }
+    return 'https://lab.legendstudy.com';
+  }
+
   final String environment;
   final String supabaseUrl;
   final String supabasePublishableKey;

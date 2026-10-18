@@ -1,3 +1,5 @@
+import '../../core/config/app_config.dart';
+
 import 'dart:convert';
 
 import 'university_catalog.dart';
@@ -36,13 +38,15 @@ class SourceCatalog {
   static Future<SourceCatalog> load({
     String? accessToken,
     http.Client? client,
+    AppConfig? config,
   }) async {
+    final origin = (config ?? AppConfig.fromEnvironment()).essayApiOrigin;
     final transport = client ?? http.Client();
     try {
       if (accessToken != null && accessToken.isNotEmpty) {
         final privateResponse = await transport
             .post(
-              Uri.parse('https://lab.legendstudy.com/api/essay/catalog'),
+              Uri.parse('$origin/api/essay/catalog'),
               headers: {'Authorization': 'Bearer $accessToken'},
             )
             .timeout(const Duration(seconds: 20));
@@ -51,7 +55,7 @@ class SourceCatalog {
         }
       }
       final response = await transport
-          .get(Uri.parse('https://lab.legendstudy.com/api/essay/catalog'))
+          .get(Uri.parse('$origin/api/essay/catalog'))
           .timeout(const Duration(seconds: 20));
       if (response.statusCode != 200) throw Exception('Catalog unavailable');
       return SourceCatalog.parse(utf8.decode(response.bodyBytes));

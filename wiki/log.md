@@ -4069,3 +4069,27 @@ Public HOLD. This is a transport interruption, not a completed paid E2E.
 
 ## 2026-10-18 — Independent release candidate
 Selective Claude Sandbox/refund/splash/iOS settings integration on Codex candidate; protected branches unchanged. Analyze/full1076 tests/Edge29/WEB1135 and unsigned iOS release pass; signed TEST Android release pass. Test-only native purge mock repaired. No DB/deploy/purchase/Provider/Credit. See production-integration Oct18 for provenance, build limits and remaining gates; essay Wiki for Owner22 materials. Public HOLD.
+
+
+## Oct18 iPhone TEST-only essay gateway boundary
+
+Owner approved minimal TEST Production-API block after discovering fixed operating LAB URLs. AppConfig.essayApiOrigin now rejects APP_ENV=test before transport/token transmission; Production remains https://lab.legendstudy.com. Catalog, exam quote/submit and existing Math gateway share this boundary. No TEST gateway URL is configured in this candidate; do not invent one or route TEST JWT to production. Native42-university catalog remains bundled; network-backed exam catalog cannot be certified until a TEST source endpoint is provided. Existing TEST Supabase History/results reads are unchanged; optional operating Catalog metadata enrichment is caught and stored metadata remains the fallback. Missing TEST evaluation rows must remain missing, not copied from Production or fabricated.
+
+Analyze PASS;16 focused tests PASS (no-network TEST catalog guard, unchanged Production origin, TEST auth/session, source transport, shared History, Math gateway). No IAP/Ledger/DB/Provider logic changed. Existing account deletion build flag remains absent/OFF; no deletion request permitted during this device readback. Prior full suite evidence remains scoped to ae9296f; this patch has focused regression coverage. iPhone development build/install results recorded below.
+
+
+### Preserved prior current-status evidence
+## 2026-10-16 — Additional-paid operating E2E PASS; release PARTIAL
+
+Approved single additional paid run completed14:48:27 KST. Provider1+review1,
+settled1Credit, spendable9/reserved0, History submission3. Existing runs2 preserved.
+Next free quote0 and old predecessor duplicate-cycle rejection verified read-only.
+All execution flagsOFF; final gateway deployment433141d6. Public HOLD.
+Live WEB result/balancePASS, but old operating UI mislabels additional as initial;
+Owner confirmed APP same result and balance9 on Oct16; WEB UI promotion remains. Actual USD cost
+not present in telemetry; token usage recorded. No DB/Math/Payment/IAP changes.
+New actual-result APP/Web QA1+1 PASS; prior full build/analyze evidence retained.
+[Detailed execution and remaining gates](essay-lab-ui-ux-v1.md#oct16-additional-paid-operating-e2e--completed-public-hold).
+
+
+Device follow-up: iOS Debug and Profile development-signed builds PASS, Profile46.2MB/teamVUKFS69GB4/bundlecom.legendstudy.app. Compiled defines verified APP_ENV=test and kpqbedylxlyntrrfybpn; privileged codesign verification PASS. Installed and launched on paired iPhone12ProMax via CoreDevice (after Owner unlock). iPhone17ProMax unavailable. No uninstall/data reset. Device login/balance/purchase-history/UI readback still Owner-pending; do not claim screen or authenticated RPC PASS from process launch. No purchase/evaluation/deletion executed. TEST Catalog gateway unresolved; account deletion flagOFF. Actual production answers are not copied. Wiki handoff checkPASS.

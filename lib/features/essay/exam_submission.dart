@@ -1,3 +1,5 @@
+import '../../core/config/app_config.dart';
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -14,23 +16,20 @@ class ExamSubmissionGateway {
   final SupabaseClient client;
   final String owner;
   Future<Map<String, dynamic>> request(Map<String, dynamic> payload) async {
+    final origin = AppConfig.fromEnvironment().essayApiOrigin;
     final session = client.auth.currentSession;
     if (session == null || session.isExpired || session.user.id != owner) {
       throw StateError('LOGIN_REQUIRED');
     }
     final transport = http.Client();
     try {
-      final request =
-          http.Request(
-              'POST',
-              Uri.parse('https://lab.legendstudy.com/api/essay/exam'),
-            )
-            ..followRedirects = false
-            ..headers.addAll({
-              'Authorization': 'Bearer ${session.accessToken}',
-              'Content-Type': 'application/json',
-            })
-            ..body = jsonEncode(payload);
+      final request = http.Request('POST', Uri.parse('$origin/api/essay/exam'))
+        ..followRedirects = false
+        ..headers.addAll({
+          'Authorization': 'Bearer ${session.accessToken}',
+          'Content-Type': 'application/json',
+        })
+        ..body = jsonEncode(payload);
       final response = await transport
           .send(request)
           .timeout(const Duration(seconds: 100));

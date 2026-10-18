@@ -1,20 +1,13 @@
+## iPhone TEST isolation follow-up
+
+Owner-approved minimal gateway boundary blocks TEST requests to operating LAB before network. Production routing preserved. TEST Supabase History/results remain separate; TEST exam Catalog endpoint/data readiness is unresolved. Analyze and16 focused tests PASS. Development-signed TEST Profile build installed and launched on connected iPhone12ProMax; Owner login/UI readback pending. See production-integration for details. No operating calls/transactions.
+
 # Oct18 release candidate integration
 
 Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/refund/splash/iOS settings integrated with Codex essay/session/history preserved. Local checks and release builds are recorded in [integration evidence](production-integration-2026-10-09.md#oct18-independent-release-candidate-integration). Apple Sandbox/operational refund/signing/device/public activation remain gates; public HOLD. No operating mutation. Material inventory: [existing essay Wiki](essay-lab-ui-ux-v1.md#oct18-release-candidate--material-expansion-inventory).
 
 # Current Status
 
-## 2026-10-16 — Additional-paid operating E2E PASS; release PARTIAL
-
-Approved single additional paid run completed14:48:27 KST. Provider1+review1,
-settled1Credit, spendable9/reserved0, History submission3. Existing runs2 preserved.
-Next free quote0 and old predecessor duplicate-cycle rejection verified read-only.
-All execution flagsOFF; final gateway deployment433141d6. Public HOLD.
-Live WEB result/balancePASS, but old operating UI mislabels additional as initial;
-Owner confirmed APP same result and balance9 on Oct16; WEB UI promotion remains. Actual USD cost
-not present in telemetry; token usage recorded. No DB/Math/Payment/IAP changes.
-New actual-result APP/Web QA1+1 PASS; prior full build/analyze evidence retained.
-[Detailed execution and remaining gates](essay-lab-ui-ux-v1.md#oct16-additional-paid-operating-e2e--completed-public-hold).
 
 ## 2026-10-15 — iPhone logos/Hero/History follow-up
 
