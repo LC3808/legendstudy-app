@@ -207,7 +207,10 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                           spacing: 12,
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            if (publicWebUri(item.sourceUrl) != null)
+                            if (item.contentType == 'exam')
+                              _ExamOrganizer(item.id),
+                            if (item.contentType != 'exam' &&
+                                publicWebUri(item.sourceUrl) != null)
                               Text(
                                 publicWebUri(item.sourceUrl)!.host ==
                                         'legendstudy.com'
@@ -337,4 +340,17 @@ class _ExamDetails extends ConsumerWidget {
                 );
         },
       );
+}
+
+class _ExamOrganizer extends ConsumerWidget {
+  const _ExamOrganizer(this.id);
+  final String id;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final exam = ref.watch(examMetadataProvider(id)).asData?.value[id];
+    final organizer = exam == null ? null : examOrganizer(exam);
+    return organizer == null
+        ? const SizedBox.shrink()
+        : Text('시행 기관: $organizer');
+  }
 }

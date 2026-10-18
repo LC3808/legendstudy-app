@@ -4135,3 +4135,9 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 Owner interested universities PASS; major save FAIL traced to upsert column ACL mismatch. Replaced with owner PATCH intended_major only; Analyze/11tests PASS, no DB mutation. Build10/device acceptance pending.
 
 - Oct18 build10 Owner major save/navigation persistence PASS; Production readback 자유전공·융합 at22:29:43KST confirms save. No DB/ACL change; public HOLD.
+
+- Oct18 Owner materials organizer correction: verified official2026 grade/calendar
+  cells and KICE types; unknown hides, source/PDF/storage unchanged. Analyze28tests,
+  iOSProfile11/AndroidRelease11 PASS; device label acceptance pending. Math/science,
+  WEB/TTS READ-ONLY audit recorded in existing domain docs;51mock tests PASS. No
+  DB/Provider/Credit/deployment; B–E implementation needs approval. Public HOLD.

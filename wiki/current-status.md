@@ -1,10 +1,13 @@
-## Oct18 selective UI integration
+## Oct18 organizer correction / quality audit
 
-be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Functional RC installed; read-only diagnostic retained. Details: production-integration.
+Exam organizer UI corrected; Analyze28tests/iOS11/Android Release PASS; device pending.
+Math/science quality,WEB/TTS READ-ONLY gaps: [materials](day-9-c-resource-detail.md),
+[mixed-mode](essay-mixed-mode-foundation.md),[UX](essay-lab-ui-ux-v1.md). B–E implementation
+requires Owner approval. No DB/Provider/Credit operation; public HOLD.
 
 ## Phase1 functional Production RC
 
-RC1.0.0(9): Owner PDF/bookmark/study/restart PASS; DB2/1/1. University PASS;build10 major save DEVICE+DB PASS (자유전공·융합). Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. iPhone existing result/Credit display Owner-confirmed; Android Production device QA Owner-deferred. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
+Owner PDF/bookmark/study/restart PASS;DB2/1/1. University and build10 major DEVICE+DB PASS. Review completed3/balance9/reserved0;essay/IAP OFF. Android Production QA deferred. Apple/WEB/public HOLD. Details: production-integration Oct18Phase1.
 
 ## iPhone TEST isolation follow-up
 

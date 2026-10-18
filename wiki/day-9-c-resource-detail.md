@@ -674,3 +674,42 @@ Prior direct-PDF OWNER DEVICE PASS retained; this UI correction device NOT VERIF
 [Read-only metadata evidence and display/delivery fixes](owner-device-qa-2026-09-27.md)
 cover CSAT suffixes, integrated essay CTA, stable legacy cfile PDFs and publication
 coverage gaps. No canonical resource/title rewrite or Production mutation.
+
+
+## Oct18 Owner correction — exam organizer (local verified, device pending)
+
+Supersedes the Sept25 exam source label only. Exam detail shows `시행 기관` from
+canonical exam metadata; LegendStudy is a material provider, never the organizer.
+Original URL/button, raw title/labels/source_posts, resource/PDF/bookmark/recent
+contracts are unchanged. Non-exam source attribution is unchanged.
+
+Read-only Production inspection: public.exams has no organizer field. 2026 September
+G1/G2 rows have year2026/month9/grade1 or2/type national_mock; source normalization
+notes are empty. Do not infer an institution from the source host. Existing ingestion
+coverage registry contains historical 2019–2024 QA identities, not a deployed
+organizer column; no new DB mapping table or ingestion run is added.
+
+Official source: [2026 schedule and organizers, Incheon Education Office](https://www.ice.go.kr/upload/ice/na/bbs_570/2026/04/16f9bd0249ccf5ec99fdaa3e12a5df18.pdf).
+2026 G1/G2: Mar Seoul, Jun Busan, Sep Incheon, Oct Gyeonggi.
+2026 G3 national: Mar Seoul, May Gyeonggi, Jul Incheon, Oct Seoul.
+Canonical evaluation_mock (including June/September) and csat: KICE. A calendar
+month alone never assigns an institution; academic_year is not used as calendar year.
+Unverified national-exam years/combinations/other types hide the row. Historical
+registry authority is retained; further historical display expansion needs an exact
+source-to-cell review, not extrapolation from the 2026 schedule.
+
+Files: lib/features/exams/presentation/exam_labels.dart (pure presentation resolver),
+lib/features/content/presentation/content_detail_page.dart (reuse existing metadata
+provider), test/exam_organizer_test.dart, test/day6_ui_test.dart.
+Analyze PASS;28 focused tests PASS: all2026 national grade/month cells, June/September
+KICE, CSAT, unknown-year/grade/month/type hiding,360px/200% detail, original link,
+PDF/resource and bookmark/recent regressions. No actual network writes in tests.
+Development-signed iOS Profile1.0.0(11) build PASS,46.1MB. Installation/device label
+acceptance remains pending; installed1.0.0(10) is not silently replaced. Android
+Release build result is recorded in the task closeout below. No Store upload.
+
+Android Release AAB1.0.0(11) PASS77.3MB; functional Production configuration keeps
+IAP/evaluation/deletion execution disabled. Both artifacts are verification builds,
+not Store-submitted release candidates. Existing Kotlin/FlutterTTS SPM/CupertinoIcons
+warnings remain outside this presentation-only change. No device install or live
+source/PDF operation was performed in this task; final iPhone acceptance pending.

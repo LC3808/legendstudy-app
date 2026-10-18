@@ -178,3 +178,50 @@ runtime_enabled=false/Credit actionNONE. No AI quality success implied.
 missing requirements, spoofing, cross-question/exam/year/rubric mismatch and Science.
 Existing isolated Math learning/C-D regression, Humanities legacy102 and Math
 installation regression pass. Actual provider/evaluation E2E NOT_RUN.
+
+
+## Oct18 release quality audit — READ-ONLY
+
+This is evidence inspection, not evaluator/Prompt/Schema activation. Existing
+humanities first/free/additional E2E remains preserved. No Provider call.
+
+Math: live read-only inventory =1 problem set/1 problem/1 profile/0 scoring criteria,
+12 attempts/4 extraction runs/9 evaluations. The sole problem set is explicitly
+`합성 검증 문제` (x²−5x+6=0), not a university official benchmark. Profile LEAF,
+FULL_SOLUTION,math-rubric-v1 with logical_development/computation_accuracy/
+final_conclusion. These counts do not certify9 accurate university evaluations.
+Existing university source holdings (SKKU/Yonsei etc.) are not reviewed runtime
+problem/criterion bindings. No official partial-point accuracy can be certified
+with0 scoring criteria.
+
+Reusable LAB implementation: math-input/confidence.ts and confirmation.ts preserve
+original image and append confirmed extraction versions; uncertain critical signs,
+exponents,bounds,etc. block for confirmation/re-upload. math-eval/validation.ts checks
+pinned regions,step/error/propagation links,official-reference IDs and rejects points
+without a published maximum. math-release/server/provider.ts already distinguishes
+concept/calculation/logical/propagated errors and requests human review for ambiguity.
+These are contract protections, not proof that confidently misrecognized handwriting
+cannot become a student error. Noncritical LOW-confidence prose need not block;
+HIGH-confidence wrong OCR also needs real gold-image comparison. Prior E20 test
+only proves unknown-region rejection, not semantic OCR accuracy. Minimum next
+quality gate: existing official university criterion/source binding + exact image,
+confirmed transcription,alternate valid solution,calculation/concept-error and
+partial-solution cases; Owner review before approved small Provider validation.
+No new engine, scores or production records are proposed by this audit.
+
+Science: server/science.ts supports physics/chemistry/biology/earth_science with
+reviewed question/rubric/source SHA + criterion evidence pins and owner-bound images.
+No numerical points accepted; NOT_ASSESSABLE requires human review. It asks for
+assumptions,units,formulas/diagram evidence only where reviewed criteria require them.
+Current science.test.ts is synthetic physics F=ma with mocked transport. There is no
+proven per-subject official corpus or real science quality E2E. Significant figures,
+graph/table reading,experimental conditions and domain-specific concept/calculation
+accuracy are not independently certified by the generic JSON validator. Chemistry,
+biology and earth-science quality remain NOT_VERIFIED. Medical/natural labels never
+select a fixed engine; inspect actual questions and reviewed bindings. Mixed parent
+persistence/artifact/result connection remains a separate gap; do not route science
+into humanities merely because its answer is text.
+
+Read-only local regression:51 tests/5 files PASS (math confidence/evaluation,
+science candidate,WEB voice and speech presentation); mock network only. Approval
+needed for any B–E implementation, rubric/Provider/schema changes or real evaluation.

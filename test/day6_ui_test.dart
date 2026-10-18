@@ -281,10 +281,49 @@ void main() {
     expect(find.text(raw), findsNothing);
     expect(find.textContaining('게시 '), findsNothing);
     expect(find.textContaining('원문 수정'), findsNothing);
-    expect(find.text('출처: 레전드스터디 닷컴'), findsOneWidget);
+    expect(find.text('출처: 레전드스터디 닷컴'), findsNothing);
+    expect(find.text('시행 기관: 한국교육과정평가원'), findsOneWidget);
     expect(find.text('원문 보기'), findsOneWidget);
     expect((await parents.detail())!.title, raw);
   });
+  testWidgets(
+    '2026 G1 September organizer and unknown hidden at narrow large text',
+    (tester) async {
+      tester.view.physicalSize = const Size(360, 800);
+      tester.view.devicePixelRatio = 1;
+      tester.platformDispatcher.textScaleFactorTestValue = 2;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      exams.result = () async => {
+        'parent': const ExamMetadata(
+          contentItemId: 'parent',
+          year: 2026,
+          examMonth: 9,
+          gradeLevel: 1,
+          examType: 'national_mock',
+        ),
+      };
+      final container = await mount(tester, route: '/materials/fixture');
+      await tester.pumpAndSettle();
+      expect(find.text('시행 기관: 인천광역시교육청'), findsOneWidget);
+      expect(find.text('출처: 레전드스터디 닷컴'), findsNothing);
+      expect(tester.takeException(), isNull);
+      exams.result = () async => {
+        'parent': const ExamMetadata(
+          contentItemId: 'parent',
+          year: 2025,
+          examMonth: 9,
+          gradeLevel: 1,
+          examType: 'national_mock',
+        ),
+      };
+      container.invalidate(examMetadataProvider('parent'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('시행 기관:'), findsNothing);
+      expect(find.text('원문 보기'), findsOneWidget);
+    },
+  );
   testWidgets(
     'parent error retries into general content without duplicate title',
     (tester) async {

@@ -960,3 +960,60 @@ A zero means no matched registered candidate in this snapshot, not proof that th
 Expansion order: finish Owner quality review of existing Hanyang17 first; reuse Sookmyung/SKKU holdings next per earlier first-wave policy; then retain the Owner22 order above. Match exact exam/question UUIDs and source hash/pages; inspect existing candidates before requesting only genuinely missing PDFs. Reuse automatic extraction and Owner approval workflow, never repeat approved Hanyang review.
 
 Quality gate: compare official intent/criteria/example with existing first/free/additional results; verify literal student quotes, stage rationale and no invented weights/examples. Use existing A–G fixtures (excellent/example/general/error/revised/partial/unchanged), mark absent official answers NOT_VERIFIED. Require documented PASS/PARTIAL/FAIL/NOT_VERIFIED reasons and Owner approval; Provider simulation requires separate budget/transaction approval. No new engine or production table.
+
+
+## Oct18 WEB and speech audit — READ-ONLY, implementation approval required
+
+Live anonymous browser: /essay-lab/ displays42 university catalog and logos;
+Hanyang→2024→수시 논술→인문계열 opens question1 writer. No typing,submission,
+login or account write performed. Public HOLD displays disabled 첨삭 준비 중.
+Result/rewrite/History are code-reviewed here; prior authenticated E2E is retained,
+not reported as newly exercised.
+
+WEB gaps / minimum follow-up: university name and separate 첨삭 시작하기 links
+lead to the same page; reuse existing card with one clear action. SourceExamSelection
+shows a question tab AND inclusion checkboxes; single question opens its writer but
+is not included by default. Align selection/count/답안 작성하기 flow with approved
+APP policy, keeping exact question-set contract. PDF2–3쪽 is still on writer, and
+History appears both above and below. Preserve writer/Draft/PDF and simplify only
+redundancy; do not interpret disabled public submission as a bug to activate.
+UniversityEssayStart has a separate DB-backed selection path and serial question
+reads; keep fallback identity binding and review loading/retry before UI unification.
+Existing History sort/group/card,stored-result comparison and rewrite empty/Draft/
+optional-copy components should be reused. SourceExamSelection reset and owner keys
+remain data-isolation boundaries. No WEB code change/deployment this task.
+
+Speech evidence: APP flutter_tts4.2.5→iOS AVSpeechSynthesizer, Android TextToSpeech
+(default device engine; actual installed voice quality not inspected). essay_voice.dart
+sets ko-KR but no explicit voice/rate/pitch; plugin iOS uses default speech rate and
+pitch1. APP splits at fixed1500 UTF-16 code units, potentially inside a sentence/word;
+no explicit Markdown/formula normalization or paragraph-pause scheduling. Pause
+stops speech and resumes from latest progress offset, potentially repeating a word
+or a chunk if the OS callback is delayed. Screen/lifecycle stop remains implemented.
+Native voice selection does not explicitly enforce Android offline voice even though
+code comments say device speech; confirm engine/voice network requirement before any
+claim that arbitrary installed Android engines are strictly offline.
+
+WEB voice-feedback.tsx uses browser SpeechSynthesis, first localService Korean voice,
+rate0.8/1/1.2 (default1),default pitch. Entire prepared text is one utterance; native
+pause/resume/cancel,unmount cancellation. No paragraph queue or cross-player owner
+coordination: each section player controls the shared browser synthesizer. An old
+player may display stale playing state when another section cancels it. Human
+speech builder adds section titles/deduplicates lines and speaks5단계; it has no
+Markdown/unit/formula preprocessing. Business path directly joins feedback strings.
+Existing Math voice exclusion/science gate stays in force; this audit does not enable
+formula reading. Stage values are learning levels, not official scores: preserve
+5단계 중3단계; only actual score fields may be spoken as5점 만점에3점.
+
+Code-supported causes to test: sentence-midpoint chunking,raw punctuation/Markdown,
+OS-dependent default voices,one long WEB utterance and callback-based resume. No
+fresh listening experiment was conducted, so perceived naturalness is not certified.
+Minimum proposal (approval pending): shared semantic speech policy→sentence-aware
+chunks→explicit section/paragraph boundaries→safe Markdown cleanup and known-unit
+pronunciation→unknown formula verbal fallback without interpretation→one playback
+owner and stable resume position. Preserve text/results and all controls. First test
+existing stored humanities text on both devices; use synthetic formula strings for
+normalization tests, not a paid Provider. Cloud TTS is deferred: adds network latency,
+usage cost and transmission of student answer/feedback. Compare Korean continuity,
+math/science accuracy,latency/cost/privacy/platforms only if local improvement fails;
+no vendor/pricing or API adoption decision is made here.
