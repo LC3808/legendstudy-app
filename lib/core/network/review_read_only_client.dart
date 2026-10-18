@@ -53,7 +53,8 @@ class ReviewReadOnlyClient extends http.BaseClient {
               u.path.startsWith('/storage/v1/object/'));
     }
     if (u.host == 'lab.legendstudy.com' && u.path.startsWith('/api/')) {
-      return read && u.path == '/api/essay/catalog';
+      return (read || request.method == 'POST') &&
+          u.path == '/api/essay/catalog';
     }
     return read; // Static public resources; never POST to external services.
   }

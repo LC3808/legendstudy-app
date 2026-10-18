@@ -95,6 +95,26 @@ void main() {
     );
     expect(sent, 1);
   });
+  test('catalog POST is read-only, exam POST remains blocked', () {
+    expect(
+      ReviewReadOnlyClient.allows(
+        http.Request(
+          'POST',
+          Uri.parse('https://lab.legendstudy.com/api/essay/catalog'),
+        ),
+      ),
+      true,
+    );
+    expect(
+      ReviewReadOnlyClient.allows(
+        http.Request(
+          'POST',
+          Uri.parse('https://lab.legendstudy.com/api/essay/exam'),
+        ),
+      ),
+      false,
+    );
+  });
   test('auth/environment and redirects fail closed', () async {
     for (final path in [
       '/auth/v1/signup',

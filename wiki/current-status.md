@@ -1,6 +1,6 @@
 ## Oct18 selective UI integration
 
-be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Read-only device build prepared; transport guard; install pending. See production-integration. Deletion copy:2주.
+be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; evidence in production-integration. HOLD; new UI device QA pending. Read-only installed/data preserved; locked. Catalog POST fixed; build8 installed. See production-integration. Deletion copy:2주.
 
 ## Phase1 Production read-only candidate
 

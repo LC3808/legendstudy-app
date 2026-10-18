@@ -4125,3 +4125,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Oct18 Owner final release continuation: deletion request display336시간→2주 only; pending server deadline retained. Analyze/10existing deletion tests PASS. No lifecycle/backend changes. Remote APP/LAB/DOCS heads checked; generated supabase/.temp preserved uncommitted. New installation needs Owner approval; Production auto-recent/onboarding writes remain excluded.
 
 - Oct18 read-only device preparation: explicit guarded HTTP clients and native IAP start suppression, dedicated review config, Store tool rejects review flag. No installation or live write probe; detailed audit/limits in production-integration.
+
+- Oct18 Owner-approved iPhone review install:0.1.0(4)→1.0.0(7), app data7files/preferences preserved. Locked device prevented launch. Read-only Catalog POST overblocking found and narrowed; build8/device checks in progress. No operating write.

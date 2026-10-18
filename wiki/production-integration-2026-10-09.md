@@ -259,3 +259,13 @@ Local SDK transport-spy tests prove blocked Production-address requests cause ze
 Build/check evidence and device outcome recorded in current handoff. Production database, Provider, Credit, Store and existing installed iPhone unchanged. Public HOLD.
 
 Final local evidence: Flutter Analyze PASS;42focused transport/deletion/billing/session/study tests PASS;4review-flag ON tests PASS including native IAP null/factory enforcement; Wiki handoff PASS. Store config rejection confirmed. Development Profile build1.0.0(7),com.legendstudy.app,46.1MB PASS at build/ios/iphoneos/Runner.app. codesign deep/strict verification PASS; embedded iOS Team Provisioning Profile,teamVUKFS69GB4,get-task-allow=true,2devices. No installation. Logs:/private/tmp/rc-readonly-{analyze,test,flag-test,ios}.log. Device traffic/Owner screens NOT_VERIFIED.
+
+## Oct18 approved iPhone installation — in progress
+
+Actual prior install0.1.0(4),developer/container-accessible. Copied Application Support and Preferences into mode0700 local /private/tmp/legendstudy-iphone-preinstall-20261018 (sensitive; never commit contents). Whole Library copy encountered OS saved-state protection; targeted app-data copies succeeded. Found3essay JSON/2images,0active study drafts,1unsynced study record. Native storage/session implementation unchanged since prior candidate; no cleanup/migration invoked.
+
+Installed1.0.0(7) without uninstall/reset. Before first launch all7ApplicationSupport files hash-identical and Preferences semantically identical, despite OS changing container path. Production/REVIEW_READ_ONLY=true build defines verified. Launch failed Locked/CoreDevice10002; Owner unlock requested. No device screens or live traffic PASS claimed.
+
+Found review-filter GAP: authenticated Catalog uses read-only POST; prior guard blocked it before GET fallback. Reviewed LAB catalog handler + existing essay_registered_questions SELECT contract. Narrowly allow exact Catalog POST only; exam POST stays denied. Added regression test. Corrected build1.0.0(8) prepared; outcome below. Deletion2주 copy not reachable with deletion flagOFF; onboarding already-completed local state preserved, not reset. Both remain device UX GAP.
+
+Build8 closeout: Analyze PASS;5review-flag tests PASS;development-signed Profile1.0.0(8)46.1MB build/codesign verification PASS. Updated installed app without delete/reset. Device info confirms1.0.0(8). Draft/study ApplicationSupport7files preserved after final update (hash comparison). Locked-device launch remains unresolved; no screen/voice/Credit/live-write acceptance claimed. Owner unlock and read-only screen report pending. Existing unit zero-send evidence is not device traffic measurement. No purchase/Provider/deletion/DB writes.
