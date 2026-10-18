@@ -147,3 +147,36 @@ consult current Unified Wiki; dated refs above are evidence, not a permanent HEA
   Owner action is required for subsequent OAuth/device/release QA, not to finish
   this code integration. Unified Wiki latest Math E2E evidence supersedes Oct09
   expired-token/missing-secret blockers above; no fresh runtime claim in this task.
+
+
+## Oct18 independent release candidate integration
+
+Status: local integration verified; store/public release HOLD. Branch `codex/release-candidate-20261018`, based on Codex `f62b1ee`; Claude read-only authority `2684cee` (remote matched), APP main `d07671e` untouched. LAB candidate `916b46c` contains latest remote main `8991b51`; DOCS base `d59d2ac` contains main `1664a8c`. No full branch merge.
+
+### Selected integration and preservation
+
+- Claude `9d8bce2`: verifier uses its own Supabase project, fail-closed Apple Sandbox grant allowlist and Production denial; core/index/tests selected. Existing Codex TEST session storage/strict host guard/purchase history/native draft/onboarding retained byte-for-byte. No deployed function changed.
+- Claude `0f20c76`: refund notification core/stores/index/tests and migration20261016120000 copied unchanged. This is source integration only. Prior Claude TEST SQL evidence is historical; no DB apply or live refund event in this task. Production notification configuration/deployment/migration/real refund acceptance remain separate gates. Existing grant RPC, Ledger and essay cycle contracts unchanged.
+- Claude `3b4e220`: latest1800ms brand frame, Pretendard SemiBold/OFL, navy/orange wordmark and tests selected. Existing native splash already white on both platforms; no redundant background change. Authentication initialization readiness remains tested.
+- Claude `2684cee`: encryption declaration false, existing team VUKFS69GB4 and scheme selected. Existing scene/deep-link/privacy/photo/Draft native channels retained; iOS15 minimum preserved instead of unrelated Xcode recommended-OS rewrite.
+- Rejected whole-file replacements that would remove Codex purchase history, TEST session isolation, native Draft/onboarding or essay UI. No content-detail/Math/Payment redesign. Claude worktree remains2684cee with its pre-existing untracked supabase/.temp only.
+- Sole test repair: account_deletion_test had no native essay-draft purge mock (4 pumpAndSettle timeouts). Added owner-hash/method assertions for that existing channel; no account deletion product logic changed. Focused10 and subsequent full suite pass.
+
+### Validation
+
+- Flutter3.47.6: Analyze PASS; final full suite1076 PASS/7 fixture-dependent skips. Original run1072pass/4failure/7skip exposed the missing test channel. Existing actual first/free results separately6PASS and additional paid result1PASS (including narrow/high-scale rendering). No Provider request.
+- Existing LAB: Node22.23.2 lint/typecheck/build PASS,135 static pages;141 testfiles1135tests PASS/3skips. Initial wrapper used Node24 despite PATH; full WEB checks repeated with explicit Node22. Actual stored first/free/additional result fixtures separately checked. LAB source unchanged.
+- Edge core29PASS (purchase+Sandbox gates+refund), Deno index typecheckPASS; no network permission granted to core tests, no deployment. Existing shared billing controller grants nothing locally, consumes only after server success/already_processed.
+- Android TEST signed release AAB0.1.0+3/com.legendstudy.app PASS77.6MB; existing upload key reused. Saved `/private/tmp/legendstudy-release-candidate-test-v3.aab`; SHA256 b0020834daed5ba68d7395de689fdd10c2698153e1b563796244765b292da4ca. Jarsigner reports jar verified with existing self-signed/no-timestamp and ZIP-reader warnings; Play upload not performed/certified. Production-host HOLD build also prepared (result below).
+- iOS release --no-codesign PASS35.9MB, bundle com.legendstudy.app, minimum15.0, encryption false. Artifact `build/ios/iphoneos/Runner.app`. Production public client configuration, essay writes/requests false; no account login or network operation initiated by build. Not an IPA/distribution-signed upload artifact.
+- Existing Kotlin/SDKXML warnings and flutter_tts SPM fallback are nonfatal build warnings, not upgraded in this scoped integration.
+
+### Existing E2E / release gates
+
+First/free/additional actual E2E and Owner WEB/APP confirmation remain prior accepted evidence (latest additional balance9); GoogleTEST purchase/grant/restart4/ACK1/consume1/duplicateRPC remain prior accepted evidence. No fresh balance or DB audit claimed. Existing Package17/result/History data untouched; local stored-result checks do not constitute a new service E2E or quality approval.
+
+Release blockers: Apple updated agreement/Paid Apps/tax-bank status and actual StoreKit Sandbox acceptance; refund notification operational configuration/deployment and real lifecycle acceptance; final distribution signing/store build-number availability and integrated device acceptance; WEB latest approved UI deployment and narrowly approved production IAP/essay activation (currentlyOFF). Existing tool/store-release unconditionally turns essay flags on, so this HOLD candidate deliberately used direct Flutter release builds with explicit OFF defines. Do not use the old wrapper as a HOLD build entrypoint.
+
+Owner next approvals: resolve Apple contract in Account Holder account; confirm integrated device login/onboarding/deletion-request-cancel/History and splash; separately authorize any Sandbox purchase/refund test, Production migration/deployment/activation, store upload/submission. None are performed here. No new wallet/engine, DB change, Provider or Credit/store transaction. See essay-lab-ui-ux-v1 Oct18 inventory for22-university expansion evidence and quality plan.
+
+Final build: Production-host Android signed HOLD AAB0.1.0+3 PASS77.7MB; SHA256 cf0273b8c82c88b54b6ccc1939d70c7afa6909188ad94dd391b935964a1f4bc9. Existing upload certificate, jarsigner jar verified (self-signed/no timestamp/ZIP-reader warnings remain). First Production build failed because a concurrent Flutter test regenerated integration_test plugin registration; sequential ordinary release rebuild PASS20.4s, no generated file edited. Use sequential native/test builds in the same workspace. WEB actual stored result tests2PASS. No runtime call, activation or upload.

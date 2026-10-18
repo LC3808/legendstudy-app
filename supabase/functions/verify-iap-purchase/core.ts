@@ -11,8 +11,43 @@ export type Ports = {
   verify(purchase: Purchase): Promise<VerifiedPurchase | null>;
   grant(user: string, verified: VerifiedPurchase): Promise<'granted' | 'already_processed'>;
 };
+
+/** The production Supabase project ref. Hard-denylisted for Sandbox grants so a
+ * mis-set flag in production can never post spendable Credit from a Sandbox tx. */
+export const PRODUCTION_PROJECT_REF = 'stlhijzpjfgwwdgunlsd';
+
+/** Extract the `<ref>` from `https://<ref>.supabase.co` (server-side only). */
+export function projectRef(url: string | undefined | null): string | null {
+  return url?.match(/^https:\/\/([a-z0-9]+)\.supabase\.co\/?$/)?.[1] ?? null;
+}
+
+/** Fail-closed gate for granting Credit on a **Sandbox** transaction.
+ *
+ * Requires ALL of (no single variable enables it; every input is server-side,
+ * never client-supplied):
+ *  - `IAP_ALLOW_SANDBOX_GRANT === 'true'` (off by default),
+ *  - `IAP_APPLE_ENVIRONMENT === 'Sandbox'` (verifier is pointed at Apple sandbox),
+ *  - the function's own project ref resolves AND is NOT the production ref
+ *    (denylist — production can never grant a Sandbox tx even if the flag is set),
+ *  - that same project ref equals the explicit `IAP_SANDBOX_PROJECT_REF` allowlist.
+ *
+ * Production transactions are unaffected and still grant via the normal path. */
+export function sandboxGrantAllowed(get: (key: string) => string | undefined): boolean {
+  const self = projectRef(get('SUPABASE_URL'));
+  return get('IAP_ALLOW_SANDBOX_GRANT') === 'true' &&
+    get('IAP_APPLE_ENVIRONMENT') === 'Sandbox' &&
+    self !== null &&
+    self !== PRODUCTION_PROJECT_REF &&
+    self === get('IAP_SANDBOX_PROJECT_REF');
+}
+
 const reply = (status: string, code = 200) => Response.json({ status }, { status: code, headers: { 'Cache-Control': 'no-store' } });
-export function handler(ports: Ports, enabled: boolean) {
+
+/** `sandboxGrant` (default false) is the fail-closed decision from
+ * [sandboxGrantAllowed], computed once from server env in index.ts. When false,
+ * a Sandbox transaction stays `pending` and only Production transactions grant —
+ * i.e. production behavior is identical to before. */
+export function handler(ports: Ports, enabled: boolean, sandboxGrant = false) {
   return async (request: Request): Promise<Response> => {
     if (request.method !== 'POST') return reply('rejected', 405);
     const token = request.headers.get('Authorization')?.match(/^Bearer (\S+)$/)?.[1];
@@ -37,8 +72,10 @@ export function handler(ports: Ports, enabled: boolean) {
       if (!v) return reply('pending');
       if (v.accountId !== user || v.productId !== p.product_id || v.platform !== p.platform ||
           v.transactionId !== p.transaction_id || v.revoked) return reply('rejected', 422);
-      // Sandbox never issues spendable Production Credit. No environment fallback.
-      if (v.environment !== 'Production') return reply('pending');
+      // Grant only a verified Production tx, or a Sandbox tx when the fail-closed
+      // test gate is on (isolated test project only). Any other environment, or a
+      // Sandbox tx without the gate, stays pending — never a Production grant.
+      if (v.environment !== 'Production' && !(v.environment === 'Sandbox' && sandboxGrant)) return reply('pending');
       const paid = Date.parse(v.purchasedAt);
       if (!Number.isFinite(paid) || paid > Date.now() + 60000) return reply('rejected', 422);
       return reply(await ports.grant(user, v));

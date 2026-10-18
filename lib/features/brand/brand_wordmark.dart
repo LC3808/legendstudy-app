@@ -2,24 +2,38 @@ import 'package:flutter/material.dart';
 
 /// Canonical LegendStudy brand logotype — **레전드스터디⁺**.
 ///
-/// Owner brand standard (2026-10-09):
+/// Owner brand standard (2026-10-09, refined 2026-10-16):
 /// - Korean logotype is `레전드스터디` + a **superscript `+`**.
-/// - The `+` is a *separate element* whose size and position are controlled here
-///   (never the Unicode superscript character `⁺`), sitting smaller than the
-///   body glyphs at the upper-right of the name.
+/// - Rendered in the bundled **Pretendard** (SIL OFL) typeface — a modern
+///   SemiBold sans-serif with slightly tightened tracking — so the mark reads as
+///   a professional education-brand wordmark and is **identical on Android and
+///   iOS** (never the per-platform system Gothic).
+/// - Body is a deep navy; the `+` is the brand orange, set as a *separate
+///   element* whose size and position are controlled here (never the Unicode
+///   superscript `⁺`), sitting smaller than the body glyphs at the upper-right.
 /// - Accessibility / plain text keeps the official name `레전드스터디+`.
 /// - Official English name is **LegendStudy Plus** (not `LegendStudy+`).
 ///
-/// One widget so splash, onboarding and any future logotype surface render the
-/// mark identically. Scales with [fontSize]; the `+` tracks it.
+/// One widget so splash and any future logotype surface render the mark
+/// identically. Scales with [fontSize]; the `+` tracks it.
 class BrandWordmark extends StatelessWidget {
   const BrandWordmark({
     super.key,
     this.fontSize = 26,
-    this.color = const Color(0xFF12161F),
-    this.fontWeight = FontWeight.w800,
-    this.letterSpacing = -0.2,
+    this.color = brandNavy,
+    this.plusColor = brandOrange,
+    this.fontWeight = FontWeight.w600,
+    this.letterSpacing = -0.5,
   });
+
+  /// Deep navy body — professional, trustworthy, strong on a light splash.
+  static const Color brandNavy = Color(0xFF17244B);
+
+  /// Brand orange, matching the LegendStudy symbol (`AppTokens.brand`).
+  static const Color brandOrange = Color(0xFFFFA300);
+
+  /// Bundled wordmark typeface (see pubspec `fonts:` / fonts/OFL.txt).
+  static const String fontFamily = 'Pretendard';
 
   /// Official plain-text / accessibility name.
   static const String name = '레전드스터디+';
@@ -29,13 +43,14 @@ class BrandWordmark extends StatelessWidget {
 
   final double fontSize;
   final Color color;
+  final Color plusColor;
   final FontWeight fontWeight;
   final double letterSpacing;
 
   @override
   Widget build(BuildContext context) {
     // Superscript `+`: half the body size, raised toward the cap line and set
-    // just to the right of the last glyph.
+    // just to the right of the last glyph, in the brand orange.
     final plusSize = fontSize * 0.5;
     return Semantics(
       label: name,
@@ -52,9 +67,10 @@ class BrandWordmark extends StatelessWidget {
                 child: Text(
                   '+',
                   style: TextStyle(
+                    fontFamily: fontFamily,
                     fontSize: plusSize,
-                    fontWeight: fontWeight,
-                    color: color,
+                    fontWeight: FontWeight.w600,
+                    color: plusColor,
                     height: 1,
                   ),
                 ),
@@ -63,6 +79,7 @@ class BrandWordmark extends StatelessWidget {
           ],
         ),
         style: TextStyle(
+          fontFamily: fontFamily,
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,

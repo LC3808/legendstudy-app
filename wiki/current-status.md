@@ -1,3 +1,7 @@
+# Oct18 release candidate integration
+
+Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/refund/splash/iOS settings integrated with Codex essay/session/history preserved. Local checks and release builds are recorded in [integration evidence](production-integration-2026-10-09.md#oct18-independent-release-candidate-integration). Apple Sandbox/operational refund/signing/device/public activation remain gates; public HOLD. No operating mutation. Material inventory: [existing essay Wiki](essay-lab-ui-ux-v1.md#oct18-release-candidate--material-expansion-inventory).
+
 # Current Status
 
 ## 2026-10-16 — Additional-paid operating E2E PASS; release PARTIAL

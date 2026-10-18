@@ -44,3 +44,8 @@ flutter:
     - assets/brand/generated/legendstudy_symbol.png
     - assets/auth/google.png
     - assets/auth/kakao.png
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard-SemiBold.otf
+          weight: 600

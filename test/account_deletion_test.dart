@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:legendstudy_app/features/essay/source_draft.dart';
+
 import 'package:flutter/material.dart';
 import 'package:legendstudy_app/features/study/data/study_local.dart';
 import 'package:legendstudy_app/features/study/study_providers.dart';
@@ -49,6 +51,19 @@ class MemoryStore implements StudyLocalStore {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
+          expect(call.method, 'purge');
+          expect(call.arguments, SourceDraftGateway.hash('synthetic-a'));
+          return null;
+        });
+  });
+  tearDown(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SourceDraftGateway.channel, null);
+  });
   test('restricted or unknown lifecycle cannot enter personalized routes', () {
     for (final state in ['DELETION_PENDING', 'ERASING', 'ERASED']) {
       expect(

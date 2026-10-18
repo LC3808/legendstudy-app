@@ -4065,3 +4065,7 @@ Public HOLD. This is a transport interruption, not a completed paid E2E.
 - Oct16 14:48 KST: approved additional paid run346083f3 completed, Provider1+review1, Ledger1 consume, balance9/reserved0, History3. Next-free quote0. OFF deploy433141d6; old operating WEB additional label GAP and APP device acceptance pending. Actual-result local render1+1 PASS. No DB/Math/IAP changes. See essay-lab-ui-ux-v1.
 
 - Oct16: Owner confirmed APP additional paid result (14:48 Hanyang) and balance9 match WEB. Device readback PASS; WEB type-label promotion and release approval remain pending. Documentation only; execution OFF/public HOLD.
+
+
+## 2026-10-18 — Independent release candidate
+Selective Claude Sandbox/refund/splash/iOS settings integration on Codex candidate; protected branches unchanged. Analyze/full1076 tests/Edge29/WEB1135 and unsigned iOS release pass; signed TEST Android release pass. Test-only native purge mock repaired. No DB/deploy/purchase/Provider/Credit. See production-integration Oct18 for provenance, build limits and remaining gates; essay Wiki for Owner22 materials. Public HOLD.

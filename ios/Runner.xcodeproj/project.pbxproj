@@ -474,6 +474,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = VUKFS69GB4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.legendstudy.app;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -659,6 +660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = VUKFS69GB4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.legendstudy.app;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -682,6 +684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = VUKFS69GB4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.legendstudy.app;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "$(TARGET_NAME)";

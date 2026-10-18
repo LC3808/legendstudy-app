@@ -924,3 +924,39 @@ by Owner device evidence. This supersedes the pending APP device check above.
 No new submission, Provider call, Credit transaction, deployment or DB change.
 Operating WEB additional-as-initial label GAP, measured USD cost and final release
 approval remain open. All execution flags remain OFF; general public HOLD.
+
+
+## Oct18 release candidate / material expansion inventory
+
+Local evidence: existing material-coverage.json (registered76 exams/234 questions,21 universities) and canonical Catalog42 / Owner22. This is a source-candidate inventory, not a new live database audit or approval of all234. No downloads, uploads or redistributions performed.
+
+| Owner order / University | Registered exams/questions | Source files | Intent / scoring / explanation / example candidates (exams) | Reviewed / rights |
+|---|---|---|---|---|
+| 1. 가천대학교 | 0/0 | 0 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 2. 중앙대학교 | 24/75 | 24 | 20/23/22/23 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 3. 성균관대학교 | 2/6 | 2 | 1/2/2/2 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 4. 경희대학교 | 2/7 | 2 | 0/0/2/2 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 5. 한양대학교 | 3/5 | 3 | 2/1/2/0 | Hanyang2024 afternoon2 Package17 only reviewed; two-source Provider rights recorded, student problem access scoped |
+| 6. 한국외국어대학교 | 1/3 | 1 | 1/1/1/1 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 7. 고려대학교 | 0/0 | 0 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 8. 국민대학교 | 0/0 | 0 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 9. 건국대학교 | 3/8 | 3 | 3/3/3/3 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 10. 서강대학교 | 1/1 | 1 | 1/1/1/1 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 11. 이화여자대학교 | 1/3 | 1 | 1/0/1/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 12. 숭실대학교 | 1/2 | 1 | 1/1/1/1 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 13. 인하대학교 | 3/9 | 3 | 3/3/3/3 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 14. 동국대학교 | 6/18 | 6 | 6/6/6/6 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 15. 세종대학교 | 3/9 | 3 | 2/3/3/3 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 16. 연세대학교 | 12/47 | 12 | 12/1/12/1 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 17. 홍익대학교 | 1/7 | 1 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 18. 아주대학교 | 6/12 | 6 | 0/5/1/5 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 19. 삼육대학교 | 0/0 | 0 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 20. 경북대학교 | 1/3 | 1 | 0/1/1/1 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 21. 경기대학교 | 0/0 | 0 | 0/0/0/0 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+| 22. 부산대학교 | 2/6 | 2 | 0/2/2/2 | Not certified by this inventory; redistribution/provider rights require per-source evidence |
+
+A zero means no matched registered candidate in this snapshot, not proof that the university has no official materials. `scoring_criteria` is a candidate role, not proof of an approved rubric. Official excellent-answer status is not separately attested by this manifest; example-answer candidates must not be relabelled excellent answers. Original holdings20ZIP/~1030PDF/581candidate groups are historical ingestion totals, not approved student redistribution.
+
+Expansion order: finish Owner quality review of existing Hanyang17 first; reuse Sookmyung/SKKU holdings next per earlier first-wave policy; then retain the Owner22 order above. Match exact exam/question UUIDs and source hash/pages; inspect existing candidates before requesting only genuinely missing PDFs. Reuse automatic extraction and Owner approval workflow, never repeat approved Hanyang review.
+
+Quality gate: compare official intent/criteria/example with existing first/free/additional results; verify literal student quotes, stage rationale and no invented weights/examples. Use existing A–G fixtures (excellent/example/general/error/revised/partial/unchanged), mark absent official answers NOT_VERIFIED. Require documented PASS/PARTIAL/FAIL/NOT_VERIFIED reasons and Owner approval; Provider simulation requires separate budget/transaction approval. No new engine or production table.
