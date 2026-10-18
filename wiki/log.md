@@ -3903,3 +3903,14 @@ OK, 기존 키(NSPhotoLibraryUsageDescription 등) 전부 보존. Runner 타깃
 같은 커밋에 Owner의 Xcode 변경(서명 `DEVELOPMENT_TEAM=VUKFS69GB4`,
 `UIApplicationSceneManifest`, scheme) 보존해 포함. 기능/서버/운영 미변경,
 Codex/main 미수정, HOLD.
+
+## 2026-10-18 — Brand splash: enlarge wordmark "+" (UI/UX)
+Owner UI/UX directive. Only change: `brand_wordmark.dart` `+` size 0.5×→**0.9×**
+(~1.8×) of the body font; color (brand orange #FFA300), upper-right position,
+Pretendard font, overall layout and 1.8s display all unchanged; left gap nudged
+0.04→0.06 for balance. No animation added. flutter analyze clean; brand tests
+pass (5). Preview (old vs new) delivered. brand_wordmark/brand_frame were
+IDENTICAL to Codex RC (codex/release-candidate-20261018 @ ae9296f integrated
+Claude's brand as-is) → brand is Claude-owned, no parallel authoring. READ-ONLY
+analyses (input UX / university logos / personalization) reported separately; no
+code change beyond the splash. No payment/Ledger/essay-engine/prod/Codex change.
