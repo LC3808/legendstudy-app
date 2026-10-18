@@ -4,7 +4,7 @@ be51e98/c3ac6ec selected; RC intro/auth/save preserved. Analyze/36 tests PASS; e
 
 ## Phase1 functional Production RC
 
-RC1.0.0(9): Owner PDF/bookmark/study/restart PASS; DB2/1/1. University PASS;major PATCH fix pending device. Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. iPhone existing result/Credit display Owner-confirmed; Android Production device QA Owner-deferred. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
+RC1.0.0(9): Owner PDF/bookmark/study/restart PASS; DB2/1/1. University PASS;build10 major save DEVICE+DB PASS (자유전공·융합). Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. iPhone existing result/Credit display Owner-confirmed; Android Production device QA Owner-deferred. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
 
 ## iPhone TEST isolation follow-up
 

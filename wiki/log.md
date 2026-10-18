@@ -4133,3 +4133,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Functional RC Owner PASS: PDF/bookmark/timer save/restart persistence. Server bookmark2/recent1/study1 confirms writes on review account. Android AAB1.0.0(9) built/not uploaded; MY school/target and rest of screen acceptance pending.
 
 - Oct18 Owner interested universities PASS; major save FAIL traced to upsert column ACL mismatch. Replaced with owner PATCH intended_major only; Analyze/11tests PASS, no DB mutation. Build10/device acceptance pending.
+
+- Oct18 build10 Owner major save/navigation persistence PASS; Production readback 자유전공·융합 at22:29:43KST confirms save. No DB/ACL change; public HOLD.
