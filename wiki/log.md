@@ -3914,3 +3914,23 @@ IDENTICAL to Codex RC (codex/release-candidate-20261018 @ ae9296f integrated
 Claude's brand as-is) → brand is Claude-owned, no parallel authoring. READ-ONLY
 analyses (input UX / university logos / personalization) reported separately; no
 code change beyond the splash. No payment/Ledger/essay-engine/prod/Codex change.
+
+## 2026-10-18 — Onboarding UX 2: step transitions + ambient background + nav guards
+Owner UI/UX 2nd pass. `onboarding_page.dart` only (copy/steps/save policy/backend
+contract unchanged):
+- Question transition: `AnimatedSwitcher` (keyed by `_step`) fade + 6% slide,
+  300ms easeOutCubic; Reduce Motion → instant, no transform.
+- Background: `_OnboardingBackdrop(step, reduceMotion)` keeps the gradient and adds
+  a soft brand-orange glow (max 10% alpha, IgnorePointer, ExcludeSemantics) that
+  drifts to a new alignment per step via AnimatedAlign (420ms); Reduce Motion →
+  static; moves only on step change (no infinite loop). Readability-first, low stimulus.
+- Nav/input: guarded `_advance`/`_back` (`_advancing` 320ms lock) block fast
+  double-tap step skips; selections live in State (`_status`/`_grade`) and providers
+  (school/universities/major) so moving back/forward never loses a value; Guest/Auth
+  save path unchanged.
+Verify: analyze clean; onboarding+brand tests PASS; Android debug APK + iOS build
+PASS; 360px/200%/Reduce Motion handled by design.
+University-logo reconcile (READ-ONLY): Codex RC codex/release-candidate-20261018
+ships assets/university-logos/ (42, incl. 성균관/서울시립) + pubspec; Claude branch
+has none → logos are Codex-owned, NOT duplicated here. No payment/Ledger/essay/prod/
+Codex-branch change.

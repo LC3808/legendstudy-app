@@ -62,9 +62,38 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   String? _status;
   int? _grade;
   bool _busy = false;
+  // Debounces step changes so a fast double-tap can't skip a question (the
+  // transition owns the short lock; values are untouched).
+  bool _advancing = false;
   String? _error;
   final _searchInput = TextEditingController();
   String _query = '';
+
+  // Guarded forward/back step moves. One move per transition; selections are
+  // kept in state/providers, so moving never loses an entered value.
+  void _advance() {
+    if (_busy || _advancing || _step >= 4) return;
+    setState(() {
+      _advancing = true;
+      _step += 1;
+    });
+    _unlockSoon();
+  }
+
+  void _back() {
+    if (_busy || _advancing || _step <= 1) return;
+    setState(() {
+      _advancing = true;
+      _step -= 1;
+    });
+    _unlockSoon();
+  }
+
+  void _unlockSoon() {
+    Future.delayed(const Duration(milliseconds: 320), () {
+      if (mounted) setState(() => _advancing = false);
+    });
+  }
 
   @override
   void dispose() {
@@ -154,6 +183,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
+    final reduceMotion = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     // Personalization is account-scoped; a guest has nothing to persist.
     if (auth.value?.isAuthenticated != true) {
       return Scaffold(
@@ -177,24 +207,48 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       backgroundColor: AppTokens.background,
       body: Stack(
         children: [
-          // Reusable background-layer slot. Phase 1.2 replaces the subtle
-          // gradient with the ambient identity field (moving school/university
-          // names) without restructuring the foreground.
-          const _OnboardingBackdrop(),
+          // Background layer: a subtle gradient plus a soft brand glow that
+          // drifts to a new position as the question changes (Reduce Motion →
+          // static). Decorative only; readability always wins.
+          _OnboardingBackdrop(step: _step, reduceMotion: reduceMotion),
           SafeArea(
             child: _step == 0
                 ? _BrandOnboarding(onStart: () => setState(() => _step = 1))
                 : Column(
                     children: [
                       Expanded(
-                        child: ListView(
-                          padding: const EdgeInsets.fromLTRB(
-                            AppTokens.space20,
-                            AppTokens.space24,
-                            AppTokens.space20,
-                            AppTokens.space16,
+                        // One question per screen, with a gentle fade + short
+                        // slide between steps (keyed by _step). Reduce Motion
+                        // swaps instantly with no transform.
+                        child: AnimatedSwitcher(
+                          duration: reduceMotion
+                              ? Duration.zero
+                              : const Duration(milliseconds: 300),
+                          switchInCurve: Curves.easeOutCubic,
+                          switchOutCurve: Curves.easeInCubic,
+                          transitionBuilder: (child, animation) {
+                            if (reduceMotion) return child;
+                            return FadeTransition(
+                              opacity: animation,
+                              child: SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: const Offset(0.06, 0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              ),
+                            );
+                          },
+                          child: ListView(
+                            key: ValueKey(_step),
+                            padding: const EdgeInsets.fromLTRB(
+                              AppTokens.space20,
+                              AppTokens.space24,
+                              AppTokens.space20,
+                              AppTokens.space16,
+                            ),
+                            children: _stepContent(),
                           ),
-                          children: _stepContent(),
                         ),
                       ),
                       _footer(),
@@ -411,7 +465,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               onPressed: !canAdvance || _busy
                   ? null
                   : _step < 4
-                  ? () => setState(() => _step += 1)
+                  ? _advance
                   : _finish,
               style: FilledButton.styleFrom(
                 backgroundColor: _accent,
@@ -441,7 +495,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             children: [
               if (_step > 1)
                 TextButton(
-                  onPressed: _busy ? null : () => setState(() => _step -= 1),
+                  onPressed: _busy ? null : _back,
                   child: const Text('이전'),
                 ),
               const Spacer(),
@@ -460,25 +514,68 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 }
 
-// Decorative ambient backdrop. Phase 1.1 ships a subtle gradient; Phase 1.2
-// replaces it with the moving school/university identity field. Excluded from
-// semantics so a screen reader never announces decorative content.
+// Decorative ambient backdrop: a subtle top gradient plus a soft brand glow
+// that settles into a new position as the question (step) changes, giving gentle
+// forward momentum. Low-stimulus (max ~10% alpha), moves only on step change (no
+// infinite loop), static under Reduce Motion. Excluded from semantics so a
+// screen reader never announces decorative content; IgnorePointer so it never
+// intercepts touches. Readability of the foreground always wins.
 class _OnboardingBackdrop extends StatelessWidget {
-  const _OnboardingBackdrop();
+  const _OnboardingBackdrop({this.step = 0, this.reduceMotion = false});
+  final int step;
+  final bool reduceMotion;
+
+  static const _glowAligns = <Alignment>[
+    Alignment(-0.7, -0.8),
+    Alignment(0.8, -0.7),
+    Alignment(-0.75, -0.1),
+    Alignment(0.8, 0.15),
+    Alignment(0.0, 0.5),
+  ];
+
   @override
-  Widget build(BuildContext context) => const ExcludeSemantics(
-    child: DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [_backdropTop, AppTokens.background],
-          stops: [0.0, 0.55],
-        ),
+  Widget build(BuildContext context) {
+    final align = _glowAligns[step.clamp(0, _glowAligns.length - 1)];
+    return ExcludeSemantics(
+      child: Stack(
+        children: [
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [_backdropTop, AppTokens.background],
+                stops: [0.0, 0.55],
+              ),
+            ),
+            child: SizedBox.expand(),
+          ),
+          AnimatedAlign(
+            duration: reduceMotion
+                ? Duration.zero
+                : const Duration(milliseconds: 420),
+            curve: Curves.easeOut,
+            alignment: align,
+            child: IgnorePointer(
+              child: Container(
+                width: 280,
+                height: 280,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      _accent.withValues(alpha: 0.10),
+                      _accent.withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-      child: SizedBox.expand(),
-    ),
-  );
+    );
+  }
 }
 
 class _StepProgress extends StatelessWidget {
