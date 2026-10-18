@@ -49,9 +49,10 @@ class BrandWordmark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Superscript `+`: half the body size, raised toward the cap line and set
-    // just to the right of the last glyph, in the brand orange.
-    final plusSize = fontSize * 0.5;
+    // Superscript `+`: a prominent brand mark at ~1.8× the earlier size (Owner
+    // 2026-10-18), still raised toward the cap line at the upper-right of the
+    // last glyph, in the brand orange — balanced against the body glyphs.
+    final plusSize = fontSize * 0.9;
     return Semantics(
       label: name,
       child: Text.rich(
@@ -63,7 +64,7 @@ class BrandWordmark extends StatelessWidget {
               child: Transform.translate(
                 // Tiny gap before the mark; raised so it reads as a superscript
                 // rather than sitting on the baseline.
-                offset: Offset(fontSize * 0.04, -fontSize * 0.02),
+                offset: Offset(fontSize * 0.06, -fontSize * 0.02),
                 child: Text(
                   '+',
                   style: TextStyle(

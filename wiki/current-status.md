@@ -1,3 +1,7 @@
+## Phase1 Production read-only candidate
+
+Owner prioritizes Production existing-service readback; TEST API block retained. Server essay flagsOFF and IAP disabled freshly verified. Review account completed3/balance9/reserved0. Production0.1.0+4 builds prepared; device acceptance pending. Apple Phase2/WEB UX Phase3/public HOLD. See production-integration Oct18Phase1.
+
 ## iPhone TEST isolation follow-up
 
 Owner-approved minimal gateway boundary blocks TEST requests to operating LAB before network. Production routing preserved. TEST Supabase History/results remain separate; TEST exam Catalog endpoint/data readiness is unresolved. Analyze and16 focused tests PASS. Development-signed TEST Profile build installed and launched on connected iPhone12ProMax; Owner login/UI readback pending. See production-integration for details. No operating calls/transactions.
@@ -14,17 +18,6 @@ Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/ref
 Official logos, compact Hero, History badges implemented and locally verified.
 Later continuous-cycle implementation supersedes the initial READ-ONLY proposal.
 Details: [approved UX and evidence](essay-lab-ui-ux-v1.md). Public HOLD.
-
-## 2026-10-15 — Mobile UX phase 1 finishing fixes / LOCAL PASS
-
-Owner accepted prior entry→writer flow on iPhone. Four follow-up fixes implemented:
-white logo containers +9 official color variants (11 reviewed), Hero title removed,
-checkbox multi-question selection/count and existing writers/Drafts connected,
-navy CTAs using textPrimary (primaryInk was brown). Result layout unchanged.
-25 tests PASS/4 private-fixture SKIP, Analyze and iOS simulator build PASS.
-Owner device acceptance of these four fixes pending; previous server cost-quote
-limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
-[Exact changes and device checklist](essay-lab-ui-ux-v1.md#mobile-ux-phase-1-finishing-fixes--2026-10-15).
 
 ## 2026-10-14 — iPhone usability closeout; today stopped
 

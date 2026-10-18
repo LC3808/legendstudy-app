@@ -4093,3 +4093,23 @@ New actual-result APP/Web QA1+1 PASS; prior full build/analyze evidence retained
 
 
 Device follow-up: iOS Debug and Profile development-signed builds PASS, Profile46.2MB/teamVUKFS69GB4/bundlecom.legendstudy.app. Compiled defines verified APP_ENV=test and kpqbedylxlyntrrfybpn; privileged codesign verification PASS. Installed and launched on paired iPhone12ProMax via CoreDevice (after Owner unlock). iPhone17ProMax unavailable. No uninstall/data reset. Device login/balance/purchase-history/UI readback still Owner-pending; do not claim screen or authenticated RPC PASS from process launch. No purchase/evaluation/deletion executed. TEST Catalog gateway unresolved; account deletion flagOFF. Actual production answers are not copied. Wiki handoff checkPASS.
+
+
+## Oct18 Phase1 read-only Production preparation
+Latest Owner phases recorded; server essay OFF and IAP disabled verified read-only; review prior3 results/balance9 intact. Claude be51e98 wordmark delta selected, Analyze+16 focusedPASS. Production+4 device builds prepared, actual device acceptance pending. No operating writes/Provider/Credit/purchase. See production-integration Phase1.
+
+### Archived status checkpoint (Oct18 restore-budget maintenance)
+
+## 2026-10-15 — Mobile UX phase 1 finishing fixes / LOCAL PASS
+
+Owner accepted prior entry→writer flow on iPhone. Four follow-up fixes implemented:
+white logo containers +9 official color variants (11 reviewed), Hero title removed,
+checkbox multi-question selection/count and existing writers/Drafts connected,
+navy CTAs using textPrimary (primaryInk was brown). Result layout unchanged.
+25 tests PASS/4 private-fixture SKIP, Analyze and iOS simulator build PASS.
+Owner device acceptance of these four fixes pending; previous server cost-quote
+limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
+[Exact changes and device checklist](essay-lab-ui-ux-v1.md#mobile-ux-phase-1-finishing-fixes--2026-10-15).
+
+
+- Oct18 Phase1: Production profile+4 installed/launched iPhone; Android release+4 built, Play signing mismatch blocks non-destructive update. Analyze/16tests PASS. Owner screens pending, Phase1 PARTIAL; no purchase/evaluation/DB/deploy.
