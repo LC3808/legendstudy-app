@@ -4119,3 +4119,5 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
 - Selective UI closeout: Android release APK+5 and iOS unsigned release+5 PASS; Wiki handoff PASS. No install/upload. Owner new-UI physical acceptance pending.
 
 - Oct18 final directive prep: TEST refund RPC/ACL/RLS read-only preflight PASS;10handler tests/typecheck PASS; disabled Edge deployment scope prepared, NOT deployed. Unsigned iOS Archive1.0.0(6)204MB PASS; no Distribution identity/IPA/upload. Content-detail auto-recent write discovered: broad Production readonly QA withheld, no data writes. Owner iPhone existing-result/Credit confirmation retained; Android signing closed/deferred.
+
+- Oct18 approved TEST refund OFF install: functionv1/JWTfalse, GET405/POST503 PASS. Purchase verifier JWTtrue/code hash retained (version now10). No Store/DB/Credit/Production action; notification activation and recovery E2E separate gate. See IAP preparation Wiki.
