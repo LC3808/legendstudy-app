@@ -4237,3 +4237,9 @@ Existing account holder1 added to manual Owner Internal QA;build18 Testing. No e
 testers/reupload/Store submission. iPhone17 remains installed;local backup blocked by
 auto-review pending explicit sensitive-data-copy approval. Device install/QA not claimed.
 Existing intro state preserved;new-install QA cannot be simulated by clearing it.HOLD.
+
+## 2026-10-19 — Pre-TestFlight local backup PASS
+
+Owner separately approved Application Support actual storage path.7support+1preferences
+files copied to private local backup;manifest verified,contents not exposed. iPhone17
+unchanged;Owner TestFlight18 update and data/session/feature verification pending.HOLD.

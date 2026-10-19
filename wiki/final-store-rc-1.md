@@ -409,3 +409,16 @@ existing installation. Preserve these;fresh intro cannot be validated on this ex
 state without reset. Existing isolated simulator intro PASS retained;fresh-device QA gap.
 Device feature tests await safe install:login,PDF/saved/recent,study,profile,essay/history,
 Credit read only;no purchase/new evaluation/deletion. Public HOLD.
+
+### Owner-approved preinstall backup completed
+
+Owner explicitly approved Documents/Preferences then actual Application Support path.
+Device copy succeeded:Documents0files,Preferences1file5039bytes,Application Support
+7files3959558bytes. Protected local directory0700/files0600,local SHA256 manifest
+re-read verification PASS;no file contents/auth tokens printed or uploaded. Location:
+/private/tmp/legendstudy-testflight-preinstall-20261019 (private backup,not committed).
+Earlier incorrect Documents assumption corrected from AppDelegate storage paths.
+Existing iPhone still1.0.0(17);no uninstall/reset/install performed by agent. Owner asked
+to accept internal invitation and update through TestFlight to18 without deletion,then
+verify session/Draft/study/Credit. Installation/data preservation still pending,not PASS.
+Backup covers those app-container paths,not an asserted full-device/Keychain backup.
