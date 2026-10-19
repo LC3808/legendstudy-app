@@ -4243,3 +4243,9 @@ Existing intro state preserved;new-install QA cannot be simulated by clearing it
 Owner separately approved Application Support actual storage path.7support+1preferences
 files copied to private local backup;manifest verified,contents not exposed. iPhone17
 unchanged;Owner TestFlight18 update and data/session/feature verification pending.HOLD.
+
+## 2026-10-19 — Owner confirms TestFlight18 on iPhone17ProMax
+
+Different device from USB12ProMax(build17 unchanged). Owner-confirmed install PASS;
+no data migration/reset on original device. Granular fresh-intro/feature QA not inferred.
+No rebuild/upload/purchase/evaluation/Store submission.Public HOLD.

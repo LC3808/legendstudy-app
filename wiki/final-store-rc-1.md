@@ -422,3 +422,15 @@ Existing iPhone still1.0.0(17);no uninstall/reset/install performed by agent. Ow
 to accept internal invitation and update through TestFlight to18 without deletion,then
 verify session/Draft/study/Credit. Installation/data preservation still pending,not PASS.
 Backup covers those app-container paths,not an asserted full-device/Keychain backup.
+
+### Owner device clarification: TestFlight on a different iPhone
+
+Owner confirmed TestFlight1.0.0(18) on iPhone17ProMax,not the USB-connected
+iPhone12ProMax. Installation accepted as Owner-confirmed PASS,not direct tool inspection.
+Connected12ProMax still1.0.0(17) by devicectl;this is expected and not a failed update.
+Its original app/session/local files were not replaced or reset;protected backup retained.
+Prior Owner response "confirmed" applies to their TestFlight check;do not infer a
+17-to18 data migration on12ProMax or granular fresh-onboarding/feature PASS from it.
+Per-feature fresh intro,PDF/saved/recent,study,profile,essay/history/Credit verification
+needs explicit device results where not already reported. No purchase/evaluation/deletion.
+Apple IAP contract/Sandbox blocker remains separate. Store review/public release HOLD.
