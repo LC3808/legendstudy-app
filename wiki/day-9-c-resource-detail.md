@@ -808,4 +808,6 @@ Remaining:8national-typed G3June/September rows2007–2010;2008G2May national;
 No DB writes/new table/source URL or raw-label changes. Source button remains removed.
 Analyze PASS;55related tests PASS including2025detail at360px/200%,annual2000–2025
 rounds and all47previous verified identities. PDF/listening/save code unchanged.
-iPhone16 build pending; physical2025display acceptance pending. Public HOLD.
+iPhone Profile1.0.0(16),46.1MB,build and strict/deep development signature PASS.
+Device connection unavailable(CoreDevice4016);preservation read stopped before install.
+Existing app unchanged;physical2025display acceptance pending. Public HOLD.
