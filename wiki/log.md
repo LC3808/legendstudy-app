@@ -4257,3 +4257,11 @@ Home fallback preserves restricted-route policy;manual deletion/server14days unc
 Removed redundant filter-more;Hanyang generic2025mock link replaced in display with
 verified official archive. Production catalog GET77exams/237questions;42APP universities
 preserved. Analyze/150tests PASS;candidate19 iOS Release no-codesign build PASS. No upload/DB/write.HOLD.
+
+
+## 2026-10-19 — TestFlight19 internal distribution
+
+Source2e32195 reused;Archive/IPA signature+Production/OFF checks PASS.
+Official Transporter upload accepted;Apple processed19;existing Owner group1tester,
+18+19 Testing. No iPhone12ProMax change. Owner17ProMax update/regression requested,
+device result pending,overall PARTIAL. No DB/Credit/Provider/purchase/deletion/public.

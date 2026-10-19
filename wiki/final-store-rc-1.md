@@ -472,3 +472,31 @@ iOS Release1.0.0(19) no-codesign build PASS (35.9MB);not a signed Archive/IPA. E
 Final device PASS requires next signed TestFlight candidate and Owner rerun:startup/login
 lands home;manual MY deletion only;Catalog/exam/questions;Hanyang archive;filter no button.
 No DB/Provider/Credit/purchase/deletion action. Apple IAP gate remains.Public HOLD.
+
+
+## Oct19 TestFlight19 signed release and internal distribution
+
+Owner approved Archive/IPA/upload/existing Owner group for source2e32195;remote matched
+and source tree clean. Reused Copacabana VUKFS69GB4 automatic signing and existing
+App Store profile;no certificate/profile recreation or source behavior changes.
+Archive and App Store Export PASS. IPA16,105,728bytes:
+`/private/tmp/legendstudy-ios-1.0.0-19/AppStoreExport/legendstudy_app.ipa`
+SHA256`fde1f2c19ea3135b161ed48fb2883433a3f1e55654de4a7cdbe584c6ef64cade`.
+Bundlecom.legendstudy.app,version1.0.0/build19,encryption exemption false.
+Deep/strict signature verification PASS;Store profile,get-task-allow=false,
+beta-reports-active=true,no device list. Compiled Production host stlhijzpjfgwwdgunlsd,
+APP_ENV=production,REVIEW_READ_ONLY=false. TEST host constants in validation code do
+not constitute an active TEST connection. Analyze150related tests from unchanged source
+reused. Official Transporter delivered19 at14:39KST;ASC processing observed.
+Existing18 and iPhone12ProMax17 preserved. No DB/purchase/Credit/Provider/deletion or
+Store review/public release. Processing/distribution/device outcome recorded below.
+
+Apple processing completed;build19 UUID f7cc9407-78aa-4983-8163-c9f8fc5b7eae became
+ready. Added to existing Owner Internal QA only;ASC shows1tester/2builds,19and18 Testing.
+No new testers/group;automatic distribution policy unchanged. Proof:
+`/private/tmp/legendstudy-ios-1.0.0-19/testflight-owner-distributed.png`.
+Owner iPhone17ProMax update/retest requested:startup and login home,no automatic deletion;
+manual MY deletion entry only(no execution);LAB/catalog/exam/questions/History/Credit;
+filter-more absent/search/filter;Hanyang official archive. Device result pending;overall
+PARTIAL,not final PASS. Real pending-deletion account was not changed;restriction tested
+locally only. Apple paid-contract/Sandbox remains independent release blocker.
