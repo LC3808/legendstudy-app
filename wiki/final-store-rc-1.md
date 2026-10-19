@@ -313,3 +313,35 @@ Remaining:complete Play11setup/assets/reviewer declarations;confirm Production p
 refund readiness and public disclosures under existing approval gates;approved upload then
 Play delivery/device verification. AAB local preparation PASS,release readiness PARTIAL.
 No Android TEST app replacement;no upload/review/public release. General HOLD.
+
+## Oct19 Xcode automatic distribution signing preparation
+
+Owner approved new Apple Distribution certificate, automatic App Store provisioning
+and Archive verification only;IPA Export/TestFlight upload remain separate gates.
+After Owner Xcode re-login, one Apple Distribution identity was created for Copacabana
+Co. (VUKFS69GB4),fingerprint D10347DD9621A11F38CD6923AD10BE7DB52D1E48.
+Existing Apple Development A98E1BFD3480040B968DBF7197A8A6058B04C9E2 retained;no
+revocation or key replacement. Existing com.legendstudy.app/team/project settings unchanged.
+
+Production1.0.0(18) Archive SUCCEEDED and codesign --verify --deep --strict passed:
+`/private/tmp/legendstudy-ios-1.0.0-18/Runner.xcarchive`. This archive is development
+signed (get-task-allow=true/device-limited);do not call it an exported App Store IPA.
+Automatic archive with global Apple Distribution override failed conflicting signing
+settings in Runner/dependencies;diagnostic override only,no project edits. Use normal
+automatic Archive then Organizer automatic distribution signing instead.
+
+Organizer Custom → App Store Connect → Export preparation (no final Export action),
+version management/symbol upload unchecked → Automatically manage signing generated
+`iOS Team Store Provisioning Profile: com.legendstudy.app`,UUID
+3f6105ea-0f50-45a4-9c75-44b7eb29e817,expiry2027-10-19T03:57:20Z.
+Verified team/application identifier, get-task-allow=false,no device list/no enterprise
+flag,and DeveloperCertificates matches the new Distribution identity. Existing development
+profile retained. No private key/profile bytes committed.
+
+Owner completed macOS keychain authorization. Organizer reached Review legendstudy_app.ipa
+content with Apple Distribution/App Store profile,version1.0.0(18),team/application ID
+matching,beta-reports-active=true,get-task-allow=false. Final Export button was not
+pressed;Cancel returned to Archives. Distribution preparation PASS;no exported IPA
+or upload/Store validation/approval claimed. Certificate/profile signing blocker closed;
+Apple paid-contract/Sandbox/release-policy gates remain separate.
+No Store upload/submission,DB/Provider/Credit operation. Public HOLD.

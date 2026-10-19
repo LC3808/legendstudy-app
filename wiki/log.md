@@ -4209,3 +4209,10 @@ Owner retains all3 existing slides/copy and accepts isolated iOS simulator QA.
 Onboarding removed from release blockers;fresh physical check deferred to internal
 testing. Existing iPhone untouched. Return to AAB18/Store gaps and iOS Distribution
 signing preparation;read-only identity check still Development only. Public HOLD.
+
+## 2026-10-19 — automatic iOS distribution preparation PASS
+
+Owner re-login/keychain approval;new Apple Distribution cert+matching Xcode Store
+profile ready;existing development assets retained.Production1.0.0(18)Archive/codesign
+PASS;Organizer automatic distribution review reached,Export not clicked. No upload.
+Source/settings unchanged;final-store-rc-1 has exact paths/proof/limits. Public HOLD.
