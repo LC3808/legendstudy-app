@@ -5,13 +5,12 @@ mapped after resolving10legacy/special identities;2025all15mapped.
 Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/source-button/PDF QA PASS. HOLD.
 [Evidence](day-9-c-resource-detail.md#oct19-owner-annual-organizer-authority-supersedes-historical-whitelist).
 
-## Oct19 Store release preparation — current priority
+## Oct19 Android release preparation
 
-Owner: v1 release only; Math/science quality,WEB UX,TTS,personalization/catalog expansion
-move POST_LAUNCH. Preserve device/essay/Google IAP PASS. No new feature code.
-Store inspection/build/signing findings: [release evidence](final-store-rc-1.md#oct19-v1-store-readiness).
-Apple paid policy/contract,Distribution identity,Store required fields and upload approvals
-remain gates. Production/public HOLD; no DB/Provider/Credit/purchase/refund execution.
+Production AAB1.0.0(18)built/structure/signature verified;Analyze45tests PASS.
+Play0/11setup;descriptions/assets/privacy/contact/declarations missing. Public policy
+wording needs release alignment. No upload/Production activation. Public HOLD.
+[Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
 
 ## Phase1 functional Production RC
 

@@ -264,3 +264,52 @@ Production release is locked pending initial setup. No field/track/upload change
 
 No Production DB,Provider,Credit,purchase,refund,Store upload/review/public action. Refund TEST
 OFF preserved,not redeployed/retested. LAB unchanged. General release HOLD.
+
+
+## Oct19 final Android Production AAB18 preparation
+
+Owner authorizes build/read-only Store inspection only. Source APPb18f6b5 and DOCS738d0f0
+remote heads matched;clean trees. No feature changes or repeated organizer/Google purchase E2E.
+Flutter Analyze PASS;45 billing/auth/session/environment/read-only/deletion tests PASS.
+Existing tool/store-release Android build PASS64.9s,Production config and upload key reused.
+
+Artifact: `/private/tmp/legendstudy-android-1.0.0-18/legendstudy-production-1.0.0-18.aab`
+(original build/app/outputs/bundle/release/app-release.aab),77,681,396bytes.
+SHA256:c2c732f0c634cb4be29451436f4d06875a31a7b6add53de1eb304bf3d5a4ba0d.
+Actual bundletool manifest:com.legendstudy.app,versionName1.0.0,versionCode18,minSDK24,
+targetSDK36,BILLING present. bundletool1.18.1validate PASS. jarsigner reports jar verified;
+certificateSHA256 c00f4260d5b95a084335576c03bf36b8914a2f33cb3da701403e0adbacfb8ef1
+matches the existing accepted upload key. Self-signed/no timestamp and JarInputStream ZIP
+ordering warnings recorded;no repacking/resigning/key rotation. Play acceptance remains
+unverified until separately approved upload,not inferred from local verification.
+
+Config:APP_ENV production,stlhijzpjfgwwdgunlsd,REVIEW_READ_ONLY=false. Existing Store wrapper
+sets deletion/essay-live/evaluation=true;IAP client defaulttrue. No TEST project values in
+input defines;no local config/keystore/service-role file bundled. AOT includes Production
+host,lab.legendstudy.com,privacy URL and all4existing com.legendstudy.essay.credit1/3/5/10.
+TEST host constant in isolation validator is not an active TEST connection. Production-only
+host validation/session separation tests preserved. Native account deletion enabled/tested,
+not executed. Production essay catalog origin unchanged. No server flags activated by build.
+No launch from artifact/no Provider/Credit/purchase/DB/delete operation.
+
+Fresh Play read-only:developer6807727077532562397 app4972317086113621808;latest uploaded
+versionCode2/internal active,1inactive;18higher/not shown uploaded. Production inactive.
+Initial setup0/11. App name 레전드스터디+ present;short/full descriptions blank;icon/feature
+graphic/phone screenshots absent. Privacy URL blank. Category unselected;contact email,
+phone,website blank. Login/app-access,ads,content rating,target audience,data safety,
+government,financial,health declarations incomplete. No fields saved or files uploaded.
+Closed/public tests and production show complete initial setup first. No additional numeric
+tester/day requirement shown here;do not infer this account is blocked by a generic14day rule.
+Existing Google TEST E2E preserved;production-device/store delivery is not newly verified.
+
+Public browser:privacy/support/account-deletion pages render without login. urllib request
+received403 but browser rendered normally;not recorded as site downtime. Privacy text still
+LAB/browser-centric with future payment wording;support describes web4900KRW refund formula
+without Store separation;deletion page retains preactivation/policy-pending language.
+These content/actual-release-policy mismatches need Owner-approved reconciliation before
+Store submission;no legal compliance approval claimed. Existing URLs reused,no page built.
+
+Remaining:complete Play11setup/assets/reviewer declarations;confirm Production paid-service/
+refund readiness and public disclosures under existing approval gates;approved upload then
+Play delivery/device verification. AAB local preparation PASS,release readiness PARTIAL.
+No Android TEST app replacement;no upload/review/public release. General HOLD.

@@ -4195,3 +4195,10 @@ over15,7files/preferences identical;Owner display QA pending. Public HOLD.
 Owner accepts2025SepG1/2008MayG2/2012MayG2organizers,source-button removal and PDF
 on1.0.0(17). Historical organizer display closeout;287/287mapping coverage,not287PDF
 manual checks. Code/tests unchanged;public HOLD.
+
+## 2026-10-19 — Android Production AAB18 preparation
+
+Sourceb18f6b5;Analyze45tests/release77.7MB/bundletool/signaturePASS.Production/read-onlyOFF,
+existing upload key/BILLING/products/deletion preserved. Play0/11setup;missing metadata/assets/
+privacy/contact/declarations. Public policy wording GAP. No upload/purchase/DB/Provider;HOLD.
+See final-store-rc-1 AAB18 evidence for SHA/path and local-versus-release limitations.
