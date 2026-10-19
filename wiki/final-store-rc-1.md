@@ -391,3 +391,21 @@ Transporter yellow status was app processing,not a reported signature failure.
 Local screenshot:/private/tmp/legendstudy-ios-1.0.0-18/testflight-build18-validated.png.
 ASC:https://appstoreconnect.apple.com/apps/6820826957/testflight/ios/57833805-7b4a-47f6-9aeb-4556d27f5a4e/metadata
 No DB/Provider/Credit operation. Apple IAP contract/Sandbox remains separate. Public HOLD.
+
+## Oct19 Owner internal TestFlight distribution
+
+Owner authorized existing account holder only and build18 distribution. Created internal
+Owner Internal QA(group2ac54dff-949c-4385-9f4b-9e841ff20646),automatic distribution OFF.
+Selected existing Account Holder/Administrator only;no external users or account roles
+changed. ASC confirms1tester/1build,1.0.0(18)Testing. No rebuild/reupload/review submission.
+Connected iPhone12ProMax currently1.0.0(17). Installation NOT_RUN. Attempted protected
+local Documents/Preferences backup was rejected before execution by automatic approval
+review because auth/session data could be copied without explicit backup authorization.
+Requested Owner approval for local-only protected backup;no data copied or reset.
+Same bundle/team verified;actual development-to-TestFlight data/session preservation
+remains unverified until installation checks. Do not claim lossless migration from IDs alone.
+main.dart skips intro for existing Auth;AppDelegate also treats study-state-v1.json as
+existing installation. Preserve these;fresh intro cannot be validated on this existing
+state without reset. Existing isolated simulator intro PASS retained;fresh-device QA gap.
+Device feature tests await safe install:login,PDF/saved/recent,study,profile,essay/history,
+Credit read only;no purchase/new evaluation/deletion. Public HOLD.
