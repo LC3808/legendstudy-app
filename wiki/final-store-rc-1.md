@@ -345,3 +345,27 @@ pressed;Cancel returned to Archives. Distribution preparation PASS;no exported I
 or upload/Store validation/approval claimed. Certificate/profile signing blocker closed;
 Apple paid-contract/Sandbox/release-policy gates remain separate.
 No Store upload/submission,DB/Provider/Credit operation. Public HOLD.
+
+## Oct19 approved iOS IPA Export PASS
+
+Owner authorized local App Store Connect IPA Export only. Reused previously verified
+Runner.xcarchive1.0.0(18),no rebuild. xcodebuild -exportArchive completed successfully
+with method=app-store-connect,destination=export,teamVUKFS69GB4,automatic signing,
+manageAppVersionAndBuildNumber=false,uploadSymbols=false. No TestFlight/Store upload.
+
+Artifact: `/private/tmp/legendstudy-ios-1.0.0-18/AppStoreExport/legendstudy_app.ipa`
+Size:16105966bytes (15.36MiB). SHA256:e1d3765351fb64e4c0dcffeae5205d318ee5e9a8f1c81326341692a0f61fa22b.
+Unpacked IPA:com.legendstudy.app/1.0.0/18,encryption=false. codesign deep/strict PASS;
+Apple Distribution:Copacabana Co.(VUKFS69GB4). Signed entitlements application ID/team
+match,get-task-allow=false,beta-reports-active=true. Embedded Store profile
+3f6105ea-0f50-45a4-9c75-44b7eb29e817,no device list,existing generated profile reused.
+
+Actual Archive build DART_DEFINES:APP_ENV=production,Production Supabase host,
+REVIEW_READ_ONLY=false,no TEST project value. Exported AOT contains Production host
+and lab.legendstudy.com. TEST host literal remains in environment-isolation validator;
+it is not an active TEST configuration. Diagnostic guard code retained,flag OFF.
+No p12/p8/key/jks/keystore files in IPA. No source/config contract change.
+IPA was not installed/executed;this verifies packaged configuration,not new live E2E.
+Previous Google/essay E2E preserved. Apple IAP contract/Sandbox and release-policy gates
+remain separate. Next approval is TestFlight upload;Store review/public release remain
+unapproved. No DB/Provider/Credit operation. General HOLD.

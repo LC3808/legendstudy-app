@@ -4216,3 +4216,10 @@ Owner re-login/keychain approval;new Apple Distribution cert+matching Xcode Stor
 profile ready;existing development assets retained.Production1.0.0(18)Archive/codesign
 PASS;Organizer automatic distribution review reached,Export not clicked. No upload.
 Source/settings unchanged;final-store-rc-1 has exact paths/proof/limits. Public HOLD.
+
+## 2026-10-19 — Owner-approved local IPA Export PASS
+
+Existing Archive reused;1.0.0(18)App Store IPA16,105,966bytes,Distribution signature/
+entitlements/Production defines verified. No rebuild or TestFlight upload. Static TEST
+host validator distinguished from active config;review guard OFF. Evidence/hash in
+final-store-rc-1. No code/DB/Provider/Credit action. Public HOLD.

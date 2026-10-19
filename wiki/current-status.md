@@ -10,7 +10,7 @@ Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/sour
 Production AAB1.0.0(18)verified;Analyze45tests PASS. Intro QA Owner accepted/non-blocking;
 copy unchanged;fresh iPhone check deferred to internal testing.
 Play0/11setup;metadata/policy gaps remain. iOS Distribution cert/profile+Archive18
-ready;Organizer Export review PASS,not exported/uploaded. Public HOLD.
+ready;App Store IPA18 Export/signature PASS,not uploaded. Public HOLD.
 [Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
 
 ## Phase1 functional Production RC
