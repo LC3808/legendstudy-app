@@ -313,6 +313,20 @@ void main() {
       exams.result = () async => {
         'parent': const ExamMetadata(
           contentItemId: 'parent',
+          year: 2024,
+          examMonth: 9,
+          gradeLevel: 1,
+          examType: 'national_mock',
+        ),
+      };
+      container.invalidate(examMetadataProvider('parent'));
+      await tester.pumpAndSettle();
+      expect(find.text('시행 기관: 인천광역시교육청'), findsOneWidget);
+      expect(find.text('원문 보기'), findsNothing);
+      expect(tester.takeException(), isNull);
+      exams.result = () async => {
+        'parent': const ExamMetadata(
+          contentItemId: 'parent',
           year: 2025,
           examMonth: 9,
           gradeLevel: 1,

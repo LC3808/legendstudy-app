@@ -4160,3 +4160,18 @@ See production-integration device13.
 Owner accepts Incheon organizer on device13. Removed detail 원문 보기 and obsolete prompt;
 source data/PDF/listening/search/save retained. Next build physical confirmation pending.
 See day-9-c-resource-detail Oct19. No DB/Provider/Credit/Store action.
+
+## 2026-10-19 — RC device14 installed
+
+Source62b7330 development14 built/signed/installed/launched;local7files/auth/settings
+identical,Production/read-onlyOFF/high-impact gatesOFF. New detail physical checks pending.
+See production-integration device14; no code/DB/Store action.
+
+
+## 2026-10-19 — historical organizer recovery
+
+Removed blanket pre2026 national exclusion using47existing verified identity cells.
+Registered287:97displayable,190unverifiedhidden;noDBchange. Analyze91tests + amended
+detail18 PASS. Device15 installed/launched;7files/preferences identical; Owner display QA pending.
+Onboarding state preserved, safe preview limits documented.
+Owner device14 source-button removal/2026 organizer PASS. Public HOLD.

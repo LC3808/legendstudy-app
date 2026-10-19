@@ -320,3 +320,37 @@ acceptance PENDING; no new full-flow replay. Public HOLD. No Store upload/DB/Pro
 Owner follow-up: device13 Sep2026 G1 shows 인천광역시교육청 correctly: DEVICE PASS.
 Other screen outcomes were not separately reported; no blanket acceptance inferred.
 Owner requests source button removal for next build; no reinstall in this follow-up.
+
+## Oct19 device14 source-button removal validation
+
+Remote RC62b7330 verified clean; prior Analyze54related tests PASS reused(no code change).
+Apple Development signed Profile1.0.0(14),46.1MB,codesign strict/deep PASS. Production
+host confirmed;REVIEW_READ_ONLY=false;nativeIAP/essaywrites/evaluation/deletion flagsfalse.
+Actual previous installed13;updated without uninstall/reset. Device query confirms14;
+launch succeeded. Pre/post ApplicationSupport7files hash-identical;Preferences including
+separate auth sessions semantically identical(no changed keys);Documents empty before.
+Protected local preservation copies are not committed;credentials never printed.
+
+Owner asked to verify Sep2026G1 Incheon/no-source-button/PDF/save;one named historical
+sample;English listening/saved/recent. Device14 acceptance pending. Earlier organizer
+DEVICE PASS remains valid but not substituted for new button-removal acceptance.
+Historical scope:csat/evaluation_mock KICE by existing canonical type;2026 national
+verified grade/month cells only;unverified historical national/other hide. No all-year
+mapping/coverage-count claim and no fabricated institution or DB change.
+No Store upload,Provider,Credit,purchase/deletion operation. Public HOLD.
+
+
+## Oct19 device15 historical organizer update
+
+Owner device14 reports source-button removal and2026organizer PASS; historical omission
+addressed by exact47verified identity cells. See resource-detail historical evidence/counts.
+Profile1.0.0(15),46.1MB,Apple Development/VUKFS69GB4,com.legendstudy.app;strict/deep
+signature PASS with host trust store. Analyze PASS;91related tests plus amended18detail PASS.
+Production host verified;REVIEW_READ_ONLY=false;IAP/essaywrites/evaluation/deletion=false.
+Actual installed14→15 without uninstall/reset. Support7files and Preferences1file byte/hash
+identical before/after update;Documents0both. Installed version queried;launch succeeded.
+Protected preservation copies remain local;tokens/credentials not printed/committed.
+Owner asked2024SepG1Incheon and2023NovG2(Dec administered)Gyeonggi/PDF/source-button check;
+splash restart only. Actual onboarding not forced;completion/session/Draft/study preserved.
+Device display/PDF acceptance PENDING;build/install success is not final UX PASS.
+No Store upload/DBchange/Provider/Credit operation. Public HOLD.

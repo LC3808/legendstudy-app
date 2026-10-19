@@ -1,9 +1,9 @@
-## Oct19 latest iPhone RC
+## Oct19 historical organizer recovery
 
-Device13 installed/launched over10 without uninstall.
-Draft/study/auth preserved. Production,read-onlyOFF;
-purchase/evaluation/deletion gatesOFF. Owner confirms Sep2026G1 Incheon organizer DEVICE PASS. Source button removed; next build QA pending.
-[Evidence](production-integration-2026-10-09.md#oct19-latest-rc-device13--installed-display-acceptance-pending).
+Device14: Owner source-button removal/2026 organizer PASS. Historical47verified cells
+recover48rows;287registered=97displayable/190unverified(hidden),known omissions0.
+Analyze91tests PASS; iPhone15 installed/data preserved; Owner display QA pending. No DB change; public HOLD.
+[Evidence and safe onboarding plan](day-9-c-resource-detail.md#oct19-historical-organizer-display-recovery).
 
 ## Oct19 Store release preparation — current priority
 

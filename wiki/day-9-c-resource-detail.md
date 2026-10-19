@@ -730,3 +730,62 @@ of already accepted organizer display. Historical2000+ organizer expansion is ex
 from this latest narrow instruction; existing verified mapping unchanged. Public HOLD.
 
 Validation: Flutter Analyze PASS;54 related tests PASS;Wiki handoff check PASS.
+
+
+## Oct19 historical organizer display recovery
+
+Owner device14 confirms source-button removal and Sep2026 G1 Incheon PASS; historical
+national organizer omission prompted this minimal display fix. Previous resolver returned
+null for every national_mock year except2026. Year/grade/nominal month metadata are present;
+this is a display-authority range gap, not missing parsing or a stale installed UI.
+
+Reuse VERIFIED national identity_evidence from existing
+`tool/ingestion/reference/exam-expected-coverage.json`:47 exact year/grade/month cells,
+2020G3March;10 cells2021;12 each2022/2023/2024. No month-only/year extrapolation.
+2023November remains nominalNovember despite December administration;2024G3May and
+G1/G2October retain their year exceptions. csat/evaluation_mock reuse KICE canonical type.
+2026 mapping and removed source button unchanged. No new table, DB write or source-data edit.
+
+Read-only Production inventory2000–2025:287 registered rows(285active). Previously49
+KICE rows displayed;48 national rows now recover(47identities,2020G3March duplicate).
+After:97displayable(95active),190unverified(hidden),0known verified omissions.
+2000–2006 have0registered rows, not fabricated exams. No organizer field in existing
+exams or source title_facts/normalization notes. Older national types cannot be guessed.
+2007–2010G3June/September are stored as national_mock; classification needs separate
+provenance review before claiming KICE. No data correction performed.
+
+|Year|Registered|Displayable|Unverified|
+|---|---:|---:|---:|
+|2000–2006|0|0|0|
+|2007|14|1|13|
+|2008|16|1|15|
+|2009|15|1|14|
+|2010|15|1|14|
+|2011|15|3|12|
+|2012|16|3|13|
+|2013|14|2|12|
+|2014–2018(each)|15|3|12|
+|2019|16|4|12|
+|2020|16|5|11|
+|2021|15|13|2|
+|2022|15|15|0|
+|2023|15|15|0|
+|2024|15|15|0|
+|2025|15|3|12|
+
+2025national authority is absent from verified existing coverage, so12rows remain hidden.
+Unverified190 is not reported as a successful all-year mapping. Owner may approve separate
+historical authority expansion; this task does not invent institutions or re-research verified ones.
+
+Changed code:exam_labels.dart; tests:exam_organizer_test.dart,day6_ui_test.dart.
+Analyze PASS;91 related materials/brand/onboarding tests PASS, amended detail widget18 PASS.
+Tests exhaust2000–2025×3grades×12months against existing verified identity authority, plus
+canonical KICE/2026 and 360px/200% historical display/unknown hiding/source-button absence.
+PDF/listening/bookmark/search implementation unchanged. iPhone Profile1.0.0(15) build/sign/install/launch PASS; Owner display acceptance pending.
+
+Safe onboarding QA: app-guide BrandReplayPage only displays brand slides and does not reset
+completion/auth/Draft/study. Real onboarding writes profile on selections/completion; do not
+force it on existing account. Existing isolated widget repositories verify transitions/input
+retention without Production writes. Full physical question-flow QA needs a separately
+approved write-free preview route or isolated test install; no such feature added here.
+Splash can be checked by restarting existing app. Public HOLD; no Store upload/Provider/Credit.
