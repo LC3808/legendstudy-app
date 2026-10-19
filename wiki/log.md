@@ -4249,3 +4249,11 @@ unchanged;Owner TestFlight18 update and data/session/feature verification pendin
 Different device from USB12ProMax(build17 unchanged). Owner-confirmed install PASS;
 no data migration/reset on original device. Granular fresh-intro/feature QA not inferred.
 No rebuild/upload/purchase/evaluation/Store submission.Public HOLD.
+
+## 2026-10-19 — TestFlight18 routing/link/filter fixes
+
+Owner startup/login deletion-form defect traced to loading/error lifecycle redirect.
+Home fallback preserves restricted-route policy;manual deletion/server14days unchanged.
+Removed redundant filter-more;Hanyang generic2025mock link replaced in display with
+verified official archive. Production catalog GET77exams/237questions;42APP universities
+preserved. Analyze/150tests PASS;candidate19 iOS Release no-codesign build PASS. No upload/DB/write.HOLD.

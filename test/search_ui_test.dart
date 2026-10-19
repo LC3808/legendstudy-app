@@ -44,6 +44,12 @@ Future<void> capture(WidgetTester tester, String name) async {
   });
 }
 
+class PaginatedFacetsRepository extends FakeSearchRepository {
+  @override
+  Future<SearchFacets> facets({int offset = 0}) async =>
+      const SearchFacets(years: [2026, 2025], months: [6, 9], nextOffset: 100);
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetController.hitTestWarningShouldBeFatal = true;
@@ -93,6 +99,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      expect(find.text('필터 목록 더 보기'), findsNothing);
       expect(find.text('2026 고3 모의고사'), findsOneWidget);
       expect(find.text(raw), findsNothing);
       expect(content.title, raw);
@@ -102,6 +109,29 @@ void main() {
       expect(find.text('2026 고3 모의고사'), findsOneWidget);
     },
   );
+
+  testWidgets('all filter chips remain without redundant more action', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          searchRepositoryProvider.overrideWithValue(
+            PaginatedFacetsRepository(),
+          ),
+        ],
+        child: const MaterialApp(home: MaterialsPage()),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('필터 목록 더 보기'), findsNothing);
+    for (final label in ['학년', '연도', '시행 월', '과목']) {
+      expect(find.widgetWithText(ActionChip, label), findsOneWidget);
+    }
+    await choose(tester, '연도', '2025년');
+    expect(find.widgetWithText(ActionChip, '2025년'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   for (final size in [const Size(360, 640), const Size(428, 926)]) {
     for (final scale in [1.0, 2.0]) {

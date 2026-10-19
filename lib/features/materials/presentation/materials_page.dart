@@ -299,11 +299,6 @@ class _MaterialsPageState extends ConsumerState<MaterialsPage> {
                   onPressed: () => loadFacets(more: facets.nextOffset != null),
                   child: const Text('필터 다시 불러오기'),
                 ),
-              if (facets.nextOffset != null && !facetsLoading)
-                TextButton(
-                  onPressed: () => loadFacets(more: true),
-                  child: const Text('필터 목록 더 보기'),
-                ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(

@@ -64,7 +64,7 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(SourceDraftGateway.channel, null);
   });
-  test('restricted or unknown lifecycle cannot enter personalized routes', () {
+  test('confirmed restricted lifecycle returns home, never deletion form', () {
     for (final state in ['DELETION_PENDING', 'ERASING', 'ERASED']) {
       expect(
         accountLifecycleRedirect(
@@ -73,11 +73,12 @@ void main() {
           status: AsyncData(DeletionStatus(state)),
           location: '/lab',
         ),
-        '/my/delete-account',
+        '/home',
       );
     }
     for (final status in <AsyncValue<DeletionStatus?>>[
       const AsyncLoading(),
+      const AsyncData(null),
       AsyncError(StateError('offline'), StackTrace.empty),
     ]) {
       expect(
@@ -87,7 +88,7 @@ void main() {
           status: status,
           location: '/my',
         ),
-        '/my/delete-account',
+        '/home',
       );
     }
   });
@@ -103,7 +104,12 @@ void main() {
         isNull,
       );
     }
-    for (final location in ['/my/delete-account', '/auth', '/auth/recovery']) {
+    for (final location in [
+      '/home',
+      '/my/delete-account',
+      '/auth',
+      '/auth/recovery',
+    ]) {
       expect(
         accountLifecycleRedirect(
           enabled: true,

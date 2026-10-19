@@ -434,3 +434,41 @@ Prior Owner response "confirmed" applies to their TestFlight check;do not infer 
 Per-feature fresh intro,PDF/saved/recent,study,profile,essay/history/Credit verification
 needs explicit device results where not already reported. No purchase/evaluation/deletion.
 Apple IAP contract/Sandbox blocker remains separate. Store review/public release HOLD.
+
+## Oct19 TestFlight18 Owner defect fixes — local candidate19
+
+Owner iPhone17ProMax:login/home/existing essay history/account/guide PASS;startup and
+post-login unexpectedly open deletion form. Confirmed router cause:accountLifecycleRedirect
+routed every non-NORMAL/non-CANCELLED state,including AsyncLoading/error/null,to
+/my/delete-account. The router refresh listener fires during startup/profile resolution;
+ordinary auth success already targets /home. No evidence of a new deletion request.
+Fix:home is always allowed;restricted/unknown states retain personalized-route restriction
+but return home,never automatically open deletion form. Direct MY deletion remains;
+request/cancel/server functions and14-day policy unchanged. No deep-link/stack cause claimed.
+
+Removed redundant Materials "필터 목록 더 보기" button only;existing filter arrangement,
+choices/search/reset/retry and repository contracts retained. Regression includes a
+nextOffset100 facet response,absence of button and year selection.
+
+Public Production GET /api/essay/catalog returned essay-source-registry-v1,21 source
+universities/77unique VERIFIED exams/237questions,years2021–2027. All exams nonempty.
+App merge preserves42university catalog. Current237 differs from historical234;no data
+modified. Environment Production/review-read-only OFF;TEST not used. Shared History
+contract tests pass;Owner existing results/history PASS reused,no new authenticated query
+or token extraction. No claim of live all-account History/PDF coverage.
+
+Hanyang shared university URL bn14860 is reachable but identifies2025 humanities MOCK
+essay;incorrect as a generic source for other selected exams. Verified official archive:
+https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI
+It lists2024humanities afternoon2 and other years. Display adapter uses this archive
+for Hanyang;raw registry/catalog source URL and IDs/questions remain untouched.
+Device browser-specific launch failure not independently reproduced. Owner fallback
+policy applied without DB/LAB changes. Source:https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI
+
+Validation:project Flutter3.47.6 Analyze no issues;150related tests PASS,including
+auth/login/recovery/lifecycle,search/filter,Catalog/native360dp/200%,History,environment.
+Initial PATH SDK3.8 failed dependency resolution;verified project wrapper used thereafter.
+iOS Release1.0.0(19) no-codesign build PASS (35.9MB);not a signed Archive/IPA. Existing TestFlight18 preserved;no new upload.
+Final device PASS requires next signed TestFlight candidate and Owner rerun:startup/login
+lands home;manual MY deletion only;Catalog/exam/questions;Hanyang archive;filter no button.
+No DB/Provider/Credit/purchase/deletion action. Apple IAP gate remains.Public HOLD.

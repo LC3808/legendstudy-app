@@ -7,6 +7,32 @@ import 'package:legendstudy_app/features/essay/essay_models.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test('Hanyang archive fallback preserves catalog identities and exams', () {
+    final raw = {
+      'version': 'essay-source-registry-v1',
+      'universities': [
+        {
+          'sourceUniversityId': 'hanyang',
+          'officialSourceUrl': 'https://go.hanyang.ac.kr/web/pds/pds_view.do?bn=14860&m_type=SUSI',
+        },
+      ],
+      'exams': <Object>[],
+    };
+    final catalog = SourceCatalog.parse(jsonEncode(raw));
+    expect(catalog.universities.length, 42);
+    final hanyang = catalog.universities.singleWhere(
+      (u) => u['sourceUniversityId'] == 'hanyang',
+    );
+    expect(
+      hanyang['officialSourceUrl'],
+      'https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI',
+    );
+    expect(hanyang['universityId'], '1090e1be-174e-5042-abd3-ca929c6e26f8');
+    expect(
+      (raw['universities'] as List).single['officialSourceUrl'],
+      contains('bn=14860'),
+    );
+  });
   test('server source keys are preserved; duplicates cannot merge exams', () {
     final exam = {
       'key': 'source:shared',
