@@ -4202,3 +4202,10 @@ Sourceb18f6b5;Analyze45tests/release77.7MB/bundletool/signaturePASS.Production/r
 existing upload key/BILLING/products/deletion preserved. Play0/11setup;missing metadata/assets/
 privacy/contact/declarations. Public policy wording GAP. No upload/purchase/DB/Provider;HOLD.
 See final-store-rc-1 AAB18 evidence for SHA/path and local-versus-release limitations.
+
+## 2026-10-19 — service introduction QA accepted
+
+Owner retains all3 existing slides/copy and accepts isolated iOS simulator QA.
+Onboarding removed from release blockers;fresh physical check deferred to internal
+testing. Existing iPhone untouched. Return to AAB18/Store gaps and iOS Distribution
+signing preparation;read-only identity check still Development only. Public HOLD.

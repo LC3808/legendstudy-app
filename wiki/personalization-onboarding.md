@@ -228,3 +228,28 @@ means new installation. Completion is not cleared on logout/provider switch.
 Profile onboarding starts directly at personalization for confirmed missing
 profiles. Existing shared profiles are reused; loading/error is not absence.
 [Validation and pending device gates](essay-runtime-activation-2026-10-09.md#google-auth--essay-production-user-flow--2026-10-10).
+
+## Oct19 service introduction — Owner QA acceptance
+
+Owner preserves the existing three-slide copy and composition:
+1. 레전드스터디+ — 내신 관리부터 수능, 논술 준비까지
+2. 나의 학습을 기록하고 관리하세요
+3. 내신·수능·논술을 하나로
+
+The previously reported copy-alignment question is resolved by this explicit acceptance;
+no copy/product change is required. Service introduction is NOT a release BLOCKER.
+Owner accepts isolated fresh iOS simulator QA: three slides, transitions, Start, Skip,
+real Auth choice widget/guest destination navigation, and native completion persistence.
+QA used no Supabase initialization; guest destination was an isolated test route, not
+a fresh server-backed Home E2E. Existing seven intro/splash tests also passed.
+Existing-install study-state-v1.json/completion marker continues to suppress repeats,
+including after logout. Existing physical iPhone/data/session were not modified.
+Fresh-install physical iPhone acceptance is deferred to Store internal testing, not
+reported as completed. Question onboarding remains accepted and unchanged.
+Temporary QA harness/logs are under /private/tmp, outside the release sources.
+
+Return to Android/iOS distribution preparation: Android AAB18 remains prepared, not
+uploaded; Play registration gaps remain in final-store-rc-1. Read-only signing check
+on Oct19 still finds one Apple Development identity and no Apple Distribution identity.
+Signed iOS Distribution Archive/IPA remains pending. No purchases, DB changes, Store
+upload/submission or public release; general HOLD.

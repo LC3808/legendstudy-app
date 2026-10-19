@@ -7,7 +7,8 @@ Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/sour
 
 ## Oct19 Android release preparation
 
-Production AAB1.0.0(18)built/structure/signature verified;Analyze45tests PASS.
+Production AAB1.0.0(18)verified;Analyze45tests PASS. Intro QA Owner accepted/non-blocking;
+copy unchanged;fresh iPhone check deferred to internal testing.
 Play0/11setup;descriptions/assets/privacy/contact/declarations missing. Public policy
 wording needs release alignment. No upload/Production activation. Public HOLD.
 [Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
