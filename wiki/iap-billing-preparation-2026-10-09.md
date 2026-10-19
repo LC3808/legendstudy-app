@@ -503,3 +503,40 @@ Set only TEST `IAP_REFUND_ENABLED=false`, then deployed existing `iap-refund-not
 Purchase verifier now reports v10 (preflight v9), `verify_jwt=true`, same code hash `f4e6aa2025aada3ed01145f639d71e1a52987e0cecb94cc21bc7fb4263f8a8a5`. Only refund function was named in deployment; do not claim the verifier version was unchanged. Project Secret update may refresh function versions; exact version-bump cause not independently audited. Purchase code and JWT policy unchanged by metadata evidence.
 
 No DB migration/RPC execution, URL registration, activation, refund/Credit transaction, purchase or Production change. Existing local10tests/typecheck evidence retained. Actual Store notification/signature/recovery E2E remains NOT_VERIFIED and requires separate approval. Rollback remains OFF plus removal of newly installed TEST function if needed; not executed. Public HOLD.
+
+## Oct19 Apple agreement processing and Sandbox readiness
+
+Owner reports Paid Apps terms accepted; agreement and bank account processing,
+two US tax forms active, Korea tax form pending. This is Owner-reported status,
+not confirmation that the contract is active. No StoreKit query or purchase run.
+
+Read-only ASC inspection: four consumable SKUs com.legendstudy.essay.credit1,
+credit3, credit5, credit10 exist and each shows Ready to Submit (심사 준비됨).
+Sandbox has two existing Korea testers: LegendStudyTester and TesterLegendstudy;
+no account created, reset or edited. Their device sign-in is not verified.
+
+Existing client queryProductDetails uses those four IDs. Existing path remains:
+TEST app/session -> verify-iap-purchase -> Apple Store Server API + signed
+transaction verification/account/SKU/revocation checks -> iap_post_verified_purchase
+-> shared Credit Ledger -> balance refresh -> completePurchase only on granted or
+already_processed. Pending/rejected transactions are not completed. Sandbox grants
+require the existing TEST project/environment/allowlist gates and are denied on
+Production. Live secret values and Apple server API permissions were not revalidated.
+Current TestFlight19 uses Production: do NOT use it for TEST Credit settlement;
+prepare/verify the existing isolated TEST app/session before any future purchase.
+
+Hosted TEST kpqbedylxlyntrrfybpn: verifier v10 ACTIVE, verify_jwt=true; refund v1
+ACTIVE, verify_jwt=false; hashes match Oct18 evidence. Empty JSON POST to refund
+returned HTTP503 {status:disabled}; no signed payload or purchase token sent.
+Refund notification delivery/signature/Credit recovery E2E remains unverified.
+No function deployment, DB mutation, purchase, Credit or Provider call occurred.
+
+Next: after Owner confirms contract Active, query all four products without buying;
+record returned IDs/localized prices/missing IDs/error on device. Only then prepare
+separate approved Sandbox credit1 E2E on TEST (baseline, one grant, replay, finish,
+restart). Actual purchase/refund recovery remain separately gated. Public HOLD.
+
+Additional live observation: ASC iOS1.0 shows Ready for Review/one submission draft
+and automatic release AFTER_APPROVAL selected, contrary to prior manual-release
+policy. No submission or release setting was changed. Owner should resolve the
+release-setting discrepancy before any submission/public release.

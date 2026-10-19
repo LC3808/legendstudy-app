@@ -1,3 +1,8 @@
+## Oct19 Apple Sandbox
+
+Contract/bank processing (Owner); four SKUs/two testers confirmed; TEST refund OFF.
+ASC auto-release differs from HOLD policy. [Readiness](iap-billing-preparation-2026-10-09.md#oct19-apple-agreement-processing-and-sandbox-readiness).
+
 ## Oct19 Owner annual organizer policy
 
 Owner2025schedule/annual continuity replaces historical whitelist.2000–2025:287/287
@@ -24,11 +29,10 @@ Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/ref
 # Current Status
 
 
-## 2026-10-15 — iPhone logos/Hero/History follow-up
+## 2026-10-15 — iPhone logos/History
 
-Official logos, compact Hero, History badges implemented and locally verified.
-Later continuous-cycle implementation supersedes the initial READ-ONLY proposal.
-Details: [approved UX and evidence](essay-lab-ui-ux-v1.md). Public HOLD.
+Integrated; subsequent continuous-cycle work supersedes initial proposal.
+[Evidence](essay-lab-ui-ux-v1.md). Public HOLD.
 
 ## 2026-10-14 — iPhone usability closeout; today stopped
 
@@ -163,10 +167,6 @@ Start with [Task Routing Map](index.md#task-routing-map), decisions and product 
 [Log](log.md) is chronology; [deduplicated historical status evidence](history/status-checkpoints.md)
 preserves former checkpoints without burdening the current restore path. Historical PASS statements are dated evidence.
 
-
-## Historical EOD
-
-[September25 evidence](status-archive-2026-10-09.md) is archived; latest Daily takes precedence.
 
 ## Materials rollout priority
 

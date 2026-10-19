@@ -4273,3 +4273,11 @@ Owner iPhone17ProMax confirms all requested19 regressions PASS:startup/login hom
 manual-only deletion entry,LAB queries/History/Credit,filter/search,Hanyang archive.
 Closes device-pending gate for19 only. No code/build/DB/payment/evaluation/deletion.
 Apple IAP and store release gates remain;public HOLD.
+
+## 2026-10-19 — Apple Sandbox preparation, read-only
+
+Owner contract/bank processing and tax status recorded. ASC four SKUs Ready to Submit,
+two existing testers verified. TEST verifier v10/refund v1; refund POST503 disabled.
+No purchase/DB/deploy. Production TestFlight is not a TEST settlement build.
+ASC automatic-release selection differs from manual HOLD policy; unchanged.
+See [readiness](iap-billing-preparation-2026-10-09.md#oct19-apple-agreement-processing-and-sandbox-readiness).
