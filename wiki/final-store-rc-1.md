@@ -560,3 +560,19 @@ new hosting deployment/custom domain/DNS. No DNS or operating changes made.
 HTTPS home NOT PASS; awaiting approval. Branch kept local to avoid unintentionally
 triggering existing LAB preview deployment. Rollback and exact scope in official-home/README.md.
 General public app HOLD and store preparing labels maintained.
+
+## Oct19 official homepage deployed — Gabia login pending
+
+Owner approved new Pages + home custom domain + home CNAME. Independent Pages
+legendstudy-home created, no Git integration/env/secrets/DB bindings. Static-only
+deployment4104f06d-b748-4ee0-b40f-aca5ccbd909c SUCCESS; Chrome HTTPS page rendering
+confirmed at https://legendstudy-home.pages.dev/. Existing LAB/apex untouched.
+Initial deployment auto-detected LAB-root Functions; replaced by a deployment
+from official-home/ and the initial deployment was removed. Future deployments
+MUST run from official-home/. No endpoint calls or DB operations performed.
+
+home.legendstudy.com custom domain registered; Cloudflare pending, CNAME record
+not set. Gabia login/CAPTCHA requires Owner action; login page handed off. DNS
+not modified yet, therefore requested home HTTPS completion remains pending.
+Homepage local branch commit bf9d890; static site source20cf31b. Store labels
+remain preparing, public app HOLD preserved.

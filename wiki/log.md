@@ -4290,3 +4290,5 @@ but predates three RC fixes. No repeated submission/tests or external mutations.
 [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
 
 - Oct19: official-home local20cf31b prepared/QA PASS; Gabia+new Pages approval pending; HTTPS not deployed. See final-store-rc-1.md.
+
+- Oct19: homepage Pages HTTPS rendered; home domain awaits Gabia login/CNAME. Deployment4104f06d, no existing service changes.

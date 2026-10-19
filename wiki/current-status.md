@@ -1,6 +1,6 @@
 ## Oct19 iOS submitted / official homepage
 
-Owner20:28KST:app19+4IAPs Waiting for Review;MANUAL release. Apple contract/bank/Sandbox pending;HOLD. Home20cf31b local QA PASS; DNS/deploy approval pending. [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
+Owner20:28KST:app19+4IAPs Waiting for Review;MANUAL release. Apple contract/bank/Sandbox pending;HOLD. Home Pages live; Gabia login/CNAME pending. [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
 
 ## Oct19 Owner annual organizer policy
 
