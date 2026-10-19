@@ -1,9 +1,9 @@
-## Oct19 historical organizer recovery
+## Oct19 Owner annual organizer policy
 
-Device14: Owner source-button removal/2026 organizer PASS. Historical47verified cells
-recover48rows;287registered=97displayable/190unverified(hidden),known omissions0.
-Analyze91tests PASS; iPhone15 installed/data preserved; Owner display QA pending. No DB change; public HOLD.
-[Evidence and safe onboarding plan](day-9-c-resource-detail.md#oct19-historical-organizer-display-recovery).
+Owner2025schedule/annual continuity replaces historical whitelist.2000–2025:277/287
+mapped,10exceptional identities hidden;2025all15mapped. Analyze55tests PASS.
+iPhone16 pending; no DB change/public HOLD. Device15 data preserved.
+[Evidence](day-9-c-resource-detail.md#oct19-owner-annual-organizer-authority-supersedes-historical-whitelist).
 
 ## Oct19 Store release preparation — current priority
 

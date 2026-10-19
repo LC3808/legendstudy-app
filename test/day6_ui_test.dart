@@ -335,7 +335,7 @@ void main() {
       };
       container.invalidate(examMetadataProvider('parent'));
       await tester.pumpAndSettle();
-      expect(find.textContaining('시행 기관:'), findsNothing);
+      expect(find.text('시행 기관: 인천광역시교육청'), findsOneWidget);
       expect(find.text('원문 보기'), findsNothing);
     },
   );

@@ -789,3 +789,23 @@ force it on existing account. Existing isolated widget repositories verify trans
 retention without Production writes. Full physical question-flow QA needs a separately
 approved write-free preview route or isolated test install; no such feature added here.
 Splash can be checked by restarting existing app. Public HOLD; no Store upload/Provider/Credit.
+
+
+## Oct19 Owner annual organizer authority supersedes historical whitelist
+
+Owner supplied 2025 national schedule screenshot and explicitly confirmed annual organizer
+continuity. This supersedes the previous exact47-cell display restriction. No claim that
+new historical source research was performed. Existing verified47identities all remain matched.
+2000–2025 national rounds:all grades March Seoul;G1/2June Busan,September Incheon,
+November through2023 / October from2024 Gyeonggi;G3April through2023 / May from2024
+Gyeonggi,July Incheon,October Seoul. Use nominal months, not delayed administration dates.
+2026existing mapping unchanged;canonical evaluation_mock/csat remain KICE.
+2025registered15/15 now display, including all12national rows previously hidden.
+
+Reusing the same read-only287-row inventory:277displayable(275active),10hidden.
+Remaining:8national-typed G3June/September rows2007–2010;2008G2May national;
+2012G2May preliminary. These need identity/classification evidence, not a guessed office.
+No DB writes/new table/source URL or raw-label changes. Source button remains removed.
+Analyze PASS;55related tests PASS including2025detail at360px/200%,annual2000–2025
+rounds and all47previous verified identities. PDF/listening/save code unchanged.
+iPhone16 build pending; physical2025display acceptance pending. Public HOLD.
