@@ -4182,3 +4182,10 @@ Owner2025schedule and annual continuity authorize common historical round mappin
 2025all15display;2000–2025total277/287,10exceptional identities hidden.55tests/Analyze
 PASS. No DB/raw/source/PDF/save changes. iPhone16 build/sign PASS; connection4016
 prevents install;existing app untouched. Public HOLD.
+
+## 2026-10-19 — remaining organizer identities resolved
+
+G3June/September legacy national classification→KICE;source1084Gyeonggi2008MayG2
+and source123KICE2012MayG2 verified read-only.287/287registered historical rows mapped.
+NoDB/source/PDF/save changes. Analyze56tests/build PASS;iPhone17 installed/launched
+over15,7files/preferences identical;Owner display QA pending. Public HOLD.

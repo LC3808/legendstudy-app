@@ -99,6 +99,17 @@ void main() {
     expect(organizer(2024, 3, 4, 'national_mock'), isNull);
     expect(organizer(2024, 3, 5, 'national_mock'), '경기도교육청');
   });
+  test('legacy classifications and two source-confirmed special exams', () {
+    for (var year = 2007; year <= 2010; year++) {
+      for (final month in [6, 9]) {
+        expect(organizer(year, 3, month, 'national_mock'), '한국교육과정평가원');
+      }
+    }
+    expect(organizer(2008, 2, 5, 'national_mock'), '경기도교육청');
+    expect(organizer(2012, 2, 5, 'preliminary'), '한국교육과정평가원');
+    expect(organizer(2009, 2, 5, 'national_mock'), isNull);
+    expect(organizer(2013, 2, 5, 'preliminary'), isNull);
+  });
   test('unknown year grade month type cannot invent organizer', () {
     for (final year in [null, 1999, 2027]) {
       expect(organizer(year, 1, 9, 'national_mock'), isNull);

@@ -354,3 +354,12 @@ Owner asked2024SepG1Incheon and2023NovG2(Dec administered)Gyeonggi/PDF/source-bu
 splash restart only. Actual onboarding not forced;completion/session/Draft/study preserved.
 Device display/PDF acceptance PENDING;build/install success is not final UX PASS.
 No Store upload/DBchange/Provider/Credit operation. Public HOLD.
+
+
+## Oct19 device17 full registered organizer coverage
+
+Owner annual rule plus source1084/123 resolve remaining10;287/287historical rows display.
+Analyze56tests PASS;Profile1.0.0(17)46.1MBsignaturePASS;actual15→17(no16install),no reset.
+Support7files/Preferences1 byte-identical;Documents0. Installed version queried;launchPASS.
+Production/read-onlyOFF;IAP/essay/evaluation/deletionOFF. Owner screen/PDF verification
+pending;no full device acceptance inferred. Existing onboarding state unchanged. Public HOLD.

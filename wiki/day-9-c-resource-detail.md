@@ -811,3 +811,21 @@ rounds and all47previous verified identities. PDF/listening/save code unchanged.
 iPhone Profile1.0.0(16),46.1MB,build and strict/deep development signature PASS.
 Device connection unavailable(CoreDevice4016);preservation read stopped before install.
 Existing app unchanged;physical2025display acceptance pending. Public HOLD.
+
+
+## Oct19 remaining10 organizer identities resolved
+
+Owner directs regular-round coverage for all registered exams. G3June/September is KICE
+also when legacy national_mock classification remains (8rows2007–2010). No DB type rewrite.
+Read-only inspection of the two special rows and existing source pages confirms:
+- https://legendstudy.com/1084 :2008May G2 경기도학업성취도평가→경기도교육청.
+- https://legendstudy.com/123 :2012May G2 2014학년도 예비수능,평가원 시행→한국교육과정평가원.
+These exact special identities do not generalize to all G2May or all preliminary exams.
+Source URLs/raw labels preserved. No new mapping table/DB/Provider/Credit action.
+Latest2000–2025 inventory:287/287displayable(285active),unidentified0;2000–2006no rows.
+This supersedes the previous277/10 snapshot.2025all15/2026PASS preserved.
+Analyze56related tests PASS. iOS Profile1.0.0(17),46.1MB,strict/deep Development signature
+PASS. Installed/launched over actual15 without uninstall;16was never installed. Support7
+files,Preferences1file byte-identical;Documents0before/after. Production/read-onlyOFF;
+IAP/essaywrites/evaluation/deletionOFF. Owner2025G1Sep/2008G2May/2012G2May display/PDF
+confirmation pending; no final device UX PASS. No Store upload.
