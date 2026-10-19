@@ -4148,3 +4148,9 @@ Owner moved optional quality/UX work POST_LAUNCH. Fresh RC restored; no feature 
 Analyze35tests/signed Android AAB12 PASS. ASC privacy/screenshots/build/price/manual-release
 gaps found read-only; Distribution identity and Apple policy unresolved. Play account access
 pending; no install/upload/Production transaction. See final-store-rc-1 Oct19 evidence. HOLD.
+
+## 2026-10-19 — latest RC iPhone update
+
+RC2f2eb2f built development13;installed over actual10 and launched.7data files/auth preserved;
+read-onlyOFF,high-impact executionOFF. Owner changed-screen validation pending; no Store action.
+See production-integration device13.

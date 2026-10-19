@@ -293,3 +293,26 @@ Minimal APP fix: owner-scoped PATCH intended_major only; server profiles_updated
 Build10 development Profile46.1MB/codesign PASS; installed without uninstall/reset and launched on iPhone. Owner asked to select major and navigate away/back; server-value comparison pending response. No DB/schema/ACL modification.
 
 Owner build10 acceptance: intended-major selection and persistence after screen navigation PASS. Read-only Production readback confirms review@legendstudy.com intended_major=자유전공·융합, updated_at=2026-10-18 13:29:43.64993+00 (22:29:43 KST), replacing prior 사회·상경/Oct15 timestamp. Device and DB save verified; no permission/schema changes. Earlier pending statements above are resolved by this acceptance. General public HOLD remains.
+
+## Oct19 latest RC device13 — installed; display acceptance pending
+
+Owner authorizes development build/update without uninstall; existing PASS reused.
+Remote RC2f2eb2f verified clean. Actual connected iPhone12ProMax before update was
+1.0.0(10),not assumed11. Built Profile1.0.0(13),46.1MB,Apple Development TeamVUKFS69GB4,
+com.legendstudy.app;codesign strict/deep PASS. No feature/source change since accepted
+organizer implementation5d106af; prior Analyze35tests PASS reused.
+
+Production public config; REVIEW_READ_ONLY=false. Normal per-user save functions retained.
+IAP_TRANSACTIONS_ENABLED=false,ESSAY_LIVE_WRITES_ENABLED=false,
+ESSAY_EVALUATION_REQUESTS_ENABLED=false,ACCOUNT_DELETION_ENABLED=false for this device
+verification only. Store config remains separate. No new purchase/evaluation/deletion action.
+
+Before update protected local backup: ApplicationSupport7files,Preferences1file (including
+existing separate auth sessions),Documents empty. Updated without delete/reset. Before first
+launch all7files SHA256-identical; Preferences app/auth values unchanged. Only OS StoreKit
+SKPurchaseIntentUpdatesLastChecked timestamp changed; no purchase invoked. Raw tokens/data
+not logged or committed. Device info confirms installed1.0.0(13); launch succeeded.
+
+Owner asked to check Sep2026G1 Incheon organizer plus original/PDF/saved display and only
+errors in existing History/results/MY/school/university/major/timer screens. Device screen
+acceptance PENDING; no new full-flow replay. Public HOLD. No Store upload/DB/Provider/Credit.

@@ -1,3 +1,10 @@
+## Oct19 latest iPhone RC
+
+Development Profile1.0.0(13) installed/launched without uninstall; actual prior10.
+Draft/study7files hash-identical; auth/app preferences preserved. Production,read-onlyOFF;
+purchase/evaluation/deletion gatesOFF. Organizer/MY regression Owner screen response pending.
+[Evidence](production-integration-2026-10-09.md#oct19-latest-rc-device13--installed-display-acceptance-pending).
+
 ## Oct19 Store release preparation — current priority
 
 Owner: v1 release only; Math/science quality,WEB UX,TTS,personalization/catalog expansion
