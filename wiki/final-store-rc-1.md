@@ -369,3 +369,25 @@ IPA was not installed/executed;this verifies packaged configuration,not new live
 Previous Google/essay E2E preserved. Apple IAP contract/Sandbox and release-policy gates
 remain separate. Next approval is TestFlight upload;Store review/public release remain
 unapproved. No DB/Provider/Credit operation. General HOLD.
+
+## Oct19 approved TestFlight upload
+
+Owner authorized upload of existing IPA only;SHA256 rechecked and matched
+e1d3765351fb64e4c0dcffeae5205d318ee5e9a8f1c81326341692a0f61fa22b.
+Owner installed official Apple Transporter,accepted its license and completed login.
+Transporter Copacabana Co. identified existing app6820826957,version1.0.0(18).
+Single Deliver completed Oct19 13:40 KST;Transporter shows Delivered/app processing.
+No rebuild/re-export;no tester/group additions or distribution,Store review submission.
+Apple processing completed: TestFlight iOS list shows version1.0.0/build18,
+Ready to Submit (제출 준비 완료),90-day expiry and testable-build guidance.
+Metadata: Binary Validated (검증됨),uploaded Oct19 13:41 KST,bundlecom.legendstudy.app,
+version1.0.0/build18,non-exempt encryption=false. Server-reported entitlements match
+VUKFS69GB4.com.legendstudy.app/teamVUKFS69GB4,get-task-allow=false,
+beta-reports-active=true,Apple Sign In Default. No signature/entitlement error shown.
+Build ID57833805-7b4a-47f6-9aeb-4556d27f5a4e. Internal group assignment available;
+groups0,no testers invited,no beta distribution or Store submission performed.
+Upload+Apple processing PASS;tester delivery/device test NOT_RUN pending Owner approval.
+Transporter yellow status was app processing,not a reported signature failure.
+Local screenshot:/private/tmp/legendstudy-ios-1.0.0-18/testflight-build18-validated.png.
+ASC:https://appstoreconnect.apple.com/apps/6820826957/testflight/ios/57833805-7b4a-47f6-9aeb-4556d27f5a4e/metadata
+No DB/Provider/Credit operation. Apple IAP contract/Sandbox remains separate. Public HOLD.
