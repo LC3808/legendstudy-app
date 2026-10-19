@@ -4281,3 +4281,10 @@ two existing testers verified. TEST verifier v10/refund v1; refund POST503 disab
 No purchase/DB/deploy. Production TestFlight is not a TEST settlement build.
 ASC automatic-release selection differs from manual HOLD policy; unchanged.
 See [readiness](iap-billing-preparation-2026-10-09.md#oct19-apple-agreement-processing-and-sandbox-readiness).
+
+## 2026-10-19 20:28 KST — Owner iOS review submission
+
+Owner submitted app1.0/build19 + four IAPs;all Waiting for Review;MANUAL release.
+Contract/bank/Sandbox remain pending;public HOLD. Android next;AAB18 hash matches
+but predates three RC fixes. No repeated submission/tests or external mutations.
+[Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).

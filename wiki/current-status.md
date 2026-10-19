@@ -1,7 +1,6 @@
-## Oct19 Apple Sandbox
+## Oct19 iOS submitted / Android next
 
-Contract/bank processing (Owner); four SKUs/two testers confirmed; TEST refund OFF.
-ASC auto-release differs from HOLD policy. [Readiness](iap-billing-preparation-2026-10-09.md#oct19-apple-agreement-processing-and-sandbox-readiness).
+Owner20:28KST:app19+4IAPs Waiting for Review;MANUAL release. Apple contract/bank/Sandbox pending;HOLD. Android18 predates RC fixes. [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
 
 ## Oct19 Owner annual organizer policy
 

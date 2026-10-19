@@ -516,3 +516,27 @@ verification,not a new destructive E2E. Original12ProMax app remains preserved.
 No additional build/deploy needed for this acceptance. Apple IAP contract/Sandbox and
 other store release gates remain separate;this does not authorize Store review/public
 release. Public HOLD maintained.
+
+## Oct19 20:28 KST Owner submitted iOS and four IAPs
+
+Owner confirms App Store review submission completed at 2026-10-19 20:28 KST:
+iOS app version1.0 / build1.0.0(19), and consumable credit1, credit3, credit5,
+credit10. All five items Waiting for Review. Release method MANUAL per Owner.
+This supersedes the earlier read-only observation of a submission draft and
+AFTER_APPROVAL selection; no Codex submission or setting change was performed.
+Owner report is the evidence source; no repeat submission/build/device E2E.
+
+Apple Paid Apps agreement and bank processing, Korea tax pending, and Apple
+Sandbox product/purchase E2E remain separate incomplete items. Existing US tax
+forms active per prior Owner report. Review submission is not review approval,
+contract activation, Sandbox PASS or public release. General public HOLD remains.
+
+Next priority: Android Google Play release preparation. Existing AAB18 remains
+intact:77,681,396bytes;SHA256 c2c732f0c634cb4be29451436f4d06875a31a7b6add53de1eb304bf3d5a4ba0d.
+Source b18f6b5 predates current RC changes in account_deletion.dart,
+source_catalog.dart and materials_page.dart (routing, Hanyang source link,
+filter button). It must not be represented as containing TestFlight19 fixes.
+Next action: reconcile current Play mandatory listing/policy state and prepare
+latest RC AAB when needed, preserving upload key/TEST install/Google E2E PASS.
+Prior Play0/11 is historical, not a freshly reverified current status. No rebuild,
+upload, purchase, Provider/Credit/DB operation or public release in this update.

@@ -540,3 +540,8 @@ Additional live observation: ASC iOS1.0 shows Ready for Review/one submission dr
 and automatic release AFTER_APPROVAL selected, contrary to prior manual-release
 policy. No submission or release setting was changed. Owner should resolve the
 release-setting discrepancy before any submission/public release.
+
+Oct19 20:28 KST superseding Owner report: app1.0/build19 and all four IAPs
+submitted, Waiting for Review; MANUAL release. Earlier auto-release/draft
+observation is historical. Contract/bank/Sandbox remain incomplete; public HOLD.
+[Submission handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
