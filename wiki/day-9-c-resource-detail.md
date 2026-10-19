@@ -713,3 +713,20 @@ IAP/evaluation/deletion execution disabled. Both artifacts are verification buil
 not Store-submitted release candidates. Existing Kotlin/FlutterTTS SPM/CupertinoIcons
 warnings remain outside this presentation-only change. No device install or live
 source/PDF operation was performed in this task; final iPhone acceptance pending.
+
+## Oct19 Owner device acceptance / remove original-page action
+
+Owner confirms iPhone1.0.0(13) Sep2026G1 organizer 인천광역시교육청 DEVICE PASS.
+Latest instruction is minimal detail UX: remove top 원문 보기 action. Content source URL,
+source_posts,raw labels and DB unchanged. PDF/question/answer/explanation/listening,
+bookmark and search routing retained. Source-page-only unresolved attachment no longer
+points to the removed button; shows a truthful unavailable-file message instead. No unsafe
+resource URL promoted to a direct PDF. Other detail layout unchanged.
+
+Files: content_detail_page.dart,resource_section.dart,day6_ui_test.dart. Tests retain raw
+title/source URL and assert absent action,PDF/listening/bookmark behavior and360px/200%.
+Next release build will include this; button removal device acceptance pending,not part
+of already accepted organizer display. Historical2000+ organizer expansion is excluded
+from this latest narrow instruction; existing verified mapping unchanged. Public HOLD.
+
+Validation: Flutter Analyze PASS;54 related tests PASS;Wiki handoff check PASS.

@@ -4154,3 +4154,9 @@ pending; no install/upload/Production transaction. See final-store-rc-1 Oct19 ev
 RC2f2eb2f built development13;installed over actual10 and launched.7data files/auth preserved;
 read-onlyOFF,high-impact executionOFF. Owner changed-screen validation pending; no Store action.
 See production-integration device13.
+
+## 2026-10-19 — source button removal
+
+Owner accepts Incheon organizer on device13. Removed detail 원문 보기 and obsolete prompt;
+source data/PDF/listening/search/save retained. Next build physical confirmation pending.
+See day-9-c-resource-detail Oct19. No DB/Provider/Credit/Store action.

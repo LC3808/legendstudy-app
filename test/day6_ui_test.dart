@@ -283,8 +283,9 @@ void main() {
     expect(find.textContaining('원문 수정'), findsNothing);
     expect(find.text('출처: 레전드스터디 닷컴'), findsNothing);
     expect(find.text('시행 기관: 한국교육과정평가원'), findsOneWidget);
-    expect(find.text('원문 보기'), findsOneWidget);
+    expect(find.text('원문 보기'), findsNothing);
     expect((await parents.detail())!.title, raw);
+    expect((await parents.detail())!.sourceUrl, 'https://legendstudy.com/1');
   });
   testWidgets(
     '2026 G1 September organizer and unknown hidden at narrow large text',
@@ -321,7 +322,7 @@ void main() {
       container.invalidate(examMetadataProvider('parent'));
       await tester.pumpAndSettle();
       expect(find.textContaining('시행 기관:'), findsNothing);
-      expect(find.text('원문 보기'), findsOneWidget);
+      expect(find.text('원문 보기'), findsNothing);
     },
   );
   testWidgets(
@@ -337,7 +338,7 @@ void main() {
       expect(find.text('검증용 콘텐츠'), findsOneWidget);
       expect(find.text('검증용 요약'), findsOneWidget);
       expect(find.text('이 자료에는 별도의 첨부 파일이 없어요.'), findsOneWidget);
-      expect(find.text('원문 보기'), findsOneWidget);
+      expect(find.text('원문 보기'), findsNothing);
       expect(find.text('원문 수정 2026.09.14'), findsNothing);
     },
   );
@@ -389,7 +390,7 @@ void main() {
     expect(find.text('문제 보기'), findsOneWidget);
   });
   testWidgets(
-    'unknown resources open the parent source, not the resource URL',
+    'unknown resources do not offer a removed source action or unsafe URL',
     (tester) async {
       resources.result = () async => [
         resource(
@@ -400,12 +401,9 @@ void main() {
       ];
       await mount(tester, route: '/materials/fixture');
       await tester.pumpAndSettle();
-      expect(find.text('상단 원문 보기에서 자료를 확인하세요.'), findsOneWidget);
-      await tester.ensureVisible(find.text('원문 보기'));
-      await tester.tap(find.text('원문 보기'));
-      await tester.pumpAndSettle();
-      expect(opened.toString(), 'https://legendstudy.com/1');
-      expect(opened.toString(), isNot(contains('kakaocdn')));
+      expect(find.text('이 첨부 자료는 아직 바로 열 수 없어요.'), findsOneWidget);
+      expect(find.text('원문 보기'), findsNothing);
+      expect(opened, isNull);
     },
   );
   testWidgets('landing listening resources open their own landing page', (
@@ -429,12 +427,12 @@ void main() {
     expect(opened.toString(), 'https://app.box.com/s/english-audio');
   });
   testWidgets(
-    'article with zero resources has source action without large empty card',
+    'article with zero resources has no source action or large empty card',
     (tester) async {
       parents.detail = () async => parent(type: 'education_column');
       await mount(tester, route: '/materials/fixture');
       await tester.pumpAndSettle();
-      expect(find.text('원문 보기'), findsOneWidget);
+      expect(find.text('원문 보기'), findsNothing);
       expect(find.text('이 자료에는 별도의 첨부 파일이 없어요.'), findsNothing);
       expect(find.text('첨부 자료'), findsNothing);
     },

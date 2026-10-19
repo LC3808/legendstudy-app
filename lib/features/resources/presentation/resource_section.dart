@@ -172,7 +172,7 @@ class _ResourceDeliveryActions extends StatelessWidget {
                       delivery.kind == ResourceDeliveryKind.externalFile
                   ? '앱에서 자료를 엽니다.'
                   : delivery.kind == ResourceDeliveryKind.sourcePage
-                  ? '상단 원문 보기에서 자료를 확인하세요.'
+                  ? '이 첨부 자료는 아직 바로 열 수 없어요.'
                   : delivery.description,
             ),
             if (delivery.uri != null &&

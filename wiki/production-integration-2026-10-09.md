@@ -316,3 +316,7 @@ not logged or committed. Device info confirms installed1.0.0(13); launch succeed
 Owner asked to check Sep2026G1 Incheon organizer plus original/PDF/saved display and only
 errors in existing History/results/MY/school/university/major/timer screens. Device screen
 acceptance PENDING; no new full-flow replay. Public HOLD. No Store upload/DB/Provider/Credit.
+
+Owner follow-up: device13 Sep2026 G1 shows 인천광역시교육청 correctly: DEVICE PASS.
+Other screen outcomes were not separately reported; no blanket acceptance inferred.
+Owner requests source button removal for next build; no reinstall in this follow-up.

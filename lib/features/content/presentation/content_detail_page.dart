@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/links/external_link.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../exams/exam_providers.dart';
@@ -217,11 +216,6 @@ class _ContentDetailPageState extends ConsumerState<ContentDetailPage>
                                     ? '출처: 레전드스터디 닷컴'
                                     : '출처: ${publicWebUri(item.sourceUrl)!.host}',
                               ),
-                            ExternalLinkButton(
-                              uri: publicWebUri(item.sourceUrl),
-                              label: '원문 보기',
-                              onOpenAttempted: _markMeaningfulRecent,
-                            ),
                           ],
                         ),
                         const SizedBox(height: 16),
