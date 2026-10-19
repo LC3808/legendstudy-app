@@ -2,7 +2,7 @@
 
 Owner2025schedule/annual continuity replaces historical whitelist.2000–2025:287/287
 mapped after resolving10legacy/special identities;2025all15mapped.
-Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner QA pending. HOLD.
+Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/source-button/PDF QA PASS. HOLD.
 [Evidence](day-9-c-resource-detail.md#oct19-owner-annual-organizer-authority-supersedes-historical-whitelist).
 
 ## Oct19 Store release preparation — current priority

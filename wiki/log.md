@@ -4189,3 +4189,9 @@ G3June/September legacy national classification→KICE;source1084Gyeonggi2008May
 and source123KICE2012MayG2 verified read-only.287/287registered historical rows mapped.
 NoDB/source/PDF/save changes. Analyze56tests/build PASS;iPhone17 installed/launched
 over15,7files/preferences identical;Owner display QA pending. Public HOLD.
+
+## 2026-10-19 — device17 Owner PASS
+
+Owner accepts2025SepG1/2008MayG2/2012MayG2organizers,source-button removal and PDF
+on1.0.0(17). Historical organizer display closeout;287/287mapping coverage,not287PDF
+manual checks. Code/tests unchanged;public HOLD.

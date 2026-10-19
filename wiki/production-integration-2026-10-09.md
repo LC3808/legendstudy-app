@@ -363,3 +363,14 @@ Analyze56tests PASS;Profile1.0.0(17)46.1MBsignaturePASS;actual15→17(no16instal
 Support7files/Preferences1 byte-identical;Documents0. Installed version queried;launchPASS.
 Production/read-onlyOFF;IAP/essay/evaluation/deletionOFF. Owner screen/PDF verification
 pending;no full device acceptance inferred. Existing onboarding state unchanged. Public HOLD.
+
+
+## Oct19 device17 Owner acceptance
+
+Owner replied PASS to the requested physical checks on1.0.0(17):2025SepG1 Incheon,
+2008MayG2 Gyeonggi,2012MayG2 preliminary KICE;original-source button absent and PDF opens.
+Historical organizer fix is DEVICE PASS for these representative samples, with287/287
+registered identities covered by mapping/inventory validation. Not a claim that all287
+PDFs were individually opened. Earlier2026PASS preserved. No additional onboarding/splash,
+listening,Store or payment acceptance inferred. Code unchanged;existing Analyze56tests and
+signed build results reused. Public HOLD;no new purchase/Provider/Credit/DB operation.

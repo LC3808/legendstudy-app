@@ -829,3 +829,14 @@ PASS. Installed/launched over actual15 without uninstall;16was never installed. 
 files,Preferences1file byte-identical;Documents0before/after. Production/read-onlyOFF;
 IAP/essaywrites/evaluation/deletionOFF. Owner2025G1Sep/2008G2May/2012G2May display/PDF
 confirmation pending; no final device UX PASS. No Store upload.
+
+
+## Oct19 device17 Owner acceptance
+
+Owner replied PASS to the requested physical checks on1.0.0(17):2025SepG1 Incheon,
+2008MayG2 Gyeonggi,2012MayG2 preliminary KICE;original-source button absent and PDF opens.
+Historical organizer fix is DEVICE PASS for these representative samples, with287/287
+registered identities covered by mapping/inventory validation. Not a claim that all287
+PDFs were individually opened. Earlier2026PASS preserved. No additional onboarding/splash,
+listening,Store or payment acceptance inferred. Code unchanged;existing Analyze56tests and
+signed build results reused. Public HOLD;no new purchase/Provider/Credit/DB operation.
