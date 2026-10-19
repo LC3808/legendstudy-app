@@ -500,3 +500,19 @@ manual MY deletion entry only(no execution);LAB/catalog/exam/questions/History/C
 filter-more absent/search/filter;Hanyang official archive. Device result pending;overall
 PARTIAL,not final PASS. Real pending-deletion account was not changed;restriction tested
 locally only. Apple paid-contract/Sandbox remains independent release blocker.
+
+
+### Oct19 Owner TestFlight19 device acceptance — PASS
+
+Owner reports "모두확인 완료. pass" for the requested iPhone17ProMax TestFlight19
+checklist:logged-in relaunch and completed login land home without automatic deletion;
+manual MY deletion entry;essay university/exam/question/History/Credit queries;
+filter-more removed with search/filter working;Hanyang official source archive opens.
+Archive/export/upload/Apple processing/internal distribution and this bounded device
+regression are PASS. Device evidence is Owner-reported,not remote UI instrumentation.
+No actual account deletion,purchase,new evaluation or pending-deletion account mutation
+was requested/performed;14-day and restricted-account policy retain prior code/test
+verification,not a new destructive E2E. Original12ProMax app remains preserved.
+No additional build/deploy needed for this acceptance. Apple IAP contract/Sandbox and
+other store release gates remain separate;this does not authorize Store review/public
+release. Public HOLD maintained.

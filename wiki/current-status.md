@@ -10,7 +10,7 @@ Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/sour
 Production AAB1.0.0(18)verified;Analyze45tests PASS. Intro QA Owner accepted/non-blocking;
 copy unchanged;fresh iPhone check deferred to internal testing.
 Play0/11setup;metadata/policy gaps remain. iOS Distribution cert/profile+Archive18
-ready;19 Archive/IPA/Apple processing/Owner internal distribution PASS;Analyze150tests PASS.19 device QA pending.HOLD.
+ready;19 Archive/IPA/Apple processing/Owner internal distribution PASS;Analyze150tests PASS.19 Owner device PASS.HOLD.
 [Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
 
 ## Phase1 functional Production RC

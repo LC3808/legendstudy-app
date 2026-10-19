@@ -4265,3 +4265,11 @@ Source2e32195 reused;Archive/IPA signature+Production/OFF checks PASS.
 Official Transporter upload accepted;Apple processed19;existing Owner group1tester,
 18+19 Testing. No iPhone12ProMax change. Owner17ProMax update/regression requested,
 device result pending,overall PARTIAL. No DB/Credit/Provider/purchase/deletion/public.
+
+
+## 2026-10-19 — Owner TestFlight19 device PASS
+
+Owner iPhone17ProMax confirms all requested19 regressions PASS:startup/login home,
+manual-only deletion entry,LAB queries/History/Credit,filter/search,Hanyang archive.
+Closes device-pending gate for19 only. No code/build/DB/payment/evaluation/deletion.
+Apple IAP and store release gates remain;public HOLD.
