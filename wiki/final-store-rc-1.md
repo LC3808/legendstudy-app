@@ -1,4 +1,8 @@
-# LEGENDSTUDY-APP-FINAL-STORE-RC-1 — 2026-10-07
+# LEGENDSTUDY-APP-FINAL-STORE-RC-1
+
+**Current release authority:** Oct19 v1 Store readiness below supersedes historical
+unsigned-signing, free-only/no-native-purchase and pending-major notes. Native IAP
+exists; Apple release policy is undecided. Historical checklists are not fresh PASS.
 
 ## Owner release-defines confirmation — supersedes initial config notes below
 
@@ -192,3 +196,68 @@ purchase button is included.” Finalize scope sentence before Console submissio
 READY_FOR_DEVICE_SMOKE:NO (signed install pending)
 READY_FOR_APP_STORE_CONNECT:NO
 READY_FOR_PLAY_CONSOLE:NO
+
+## Oct19 v1 Store readiness
+
+Owner switches to release-only stabilization. Math/science quality,WEB UX,TTS naturalness,
+personalized messages and university/question expansion are POST_LAUNCH, not v1 blockers.
+No app/LAB feature code changed. Existing PDF/bookmark/recent/study/restart,university/major,
+essay first/free/additional/shared History and Google TEST IAP acceptance are preserved.
+School/latest splash/onboarding/account-management final smoke is not newly claimed PASS.
+Sep2026 G1 organizer code/official source PASS; fresh iPhone display confirmation requested.
+Device is currently unavailable to CoreDevice; no installation/deletion/reset attempted.
+
+Remote source checked: APP5d106af,LAB916b46c,DOCSee4d6ce.
+Old temporary worktrees/builds were absent. Fresh RC clone under
+`/private/tmp/legendstudy-release-candidate-20261019`; restored existing public Production
+client config/upload signing/native Google callback into ignored local files only.
+No secret/new key/server configuration committed or changed. Source remains RC,not main/Claude.
+
+### Local validation and artifacts
+
+- Flutter3.47.6 Analyze PASS;35 focused organizer/auth lifecycle/deletion/billing tests PASS.
+- Android shared `tool/store-release`:1.0.0(12),com.legendstudy.app,BILLING,Production host,
+  review-only=false,three Store release flags=true. Signed AAB77.7MB,jarsigner verified;
+  upload certificateSHA256 c00f4260d5b95a084335576c03bf36b8914a2f33cb3da701403e0adbacfb8ef1
+  matches existing accepted upload key. No key rotation/Play signing investigation.
+- Artifact: `build/app/outputs/bundle/release/app-release.aab` within fresh RC clone.
+  SHA256 96246c497ccc45f906ca6c3200ede0e5993c88e2874cfce18463fc52fa6519cf.
+- First Android build failed generated integration_test registration after concurrent Flutter
+  test invocation; standard sequential release rebuild PASS without code/dependency changes.
+  Future Flutter build/test operations in the same checkout must be sequential.
+- Build12 is a local candidate; unused Store build number is NOT_VERIFIED until Console access.
+- iOS unsigned Release Archive PASS204.0MB,1.0.0(12),com.legendstudy.app,minimum15.0,
+  encryption=false. Final built Info.plist Google callback matches existing public iOS client.
+  `build/ios/archive/Runner.xcarchive` is unsigned and not uploadable; no IPA exported.
+  Distribution identity/provisioning remain BLOCKER.
+- No live request made from either artifact. Production IAP/server execution/public gates were
+  not enabled. Embedded normal release flags are not evidence that paid service is launch-ready.
+
+### Fresh App Store Connect read-only inspection
+
+App6820826957:iOS1.0 Prepare for Submission. Description/keywords/support/version/copyright
+and reviewer username applereview@legendstudy.com populated. Reviewer login usability not tested.
+Support/privacy public URLs both HTTP200; privacy URL inside ASC is blank and data-collection
+questionnaire is at Start. Selected iPhone screenshot slot0/10; other size coverage not inferred.
+No selected/uploaded build shown. Pricing screen asks Add Price;175 territories available.
+**Automatic release selected**, contrary to manual-release policy. No setting changed.
+Paid Apps contract absent; updated Developer Agreement banner remains visible. Owner handles
+contract resolution; do not infer acceptance from past status or accept agreements automatically.
+Native StoreKit/products retained; Apple paid-feature launch policy/Sandbox still unresolved.
+
+Play Console with previously authorized youngsook600405@gmail.com currently shows developer
+signup rather than existing app. No account created. Owner asked to open the existing Console;
+latest versionCode/registration requirements remain NOT_VERIFIED,not assumed from old code2.
+
+### Gates / next work
+
+1. Existing Play Console access: confirm unused12 and registration checklist before upload approval.
+2. Apple Distribution identity/provisioning: current keychain only Apple Development; no new
+   certificate generated. Signed Archive/IPA and TestFlight require completion,upload separate.
+3. ASC approved metadata completion: screenshots,privacy URL/data disclosure,price,manual release,
+   build linkage and reviewer access. Do not silently change Store fields.
+4. Apple paid-feature policy/contract/Sandbox; Production IAP/refund activation remains unapproved.
+5. Owner remaining device confirmation,including Sep G1 Incheon. Existing PASS not repeated.
+
+No Production DB,Provider,Credit,purchase,refund,Store upload/review/public action. Refund TEST
+OFF preserved,not redeployed/retested. LAB unchanged. General release HOLD.

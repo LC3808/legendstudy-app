@@ -4141,3 +4141,10 @@ limitation remains out of scope. No Provider/Credit/DB action; public HOLD.
   iOSProfile11/AndroidRelease11 PASS; device label acceptance pending. Math/science,
   WEB/TTS READ-ONLY audit recorded in existing domain docs;51mock tests PASS. No
   DB/Provider/Credit/deployment; B–E implementation needs approval. Public HOLD.
+
+## 2026-10-19 — v1 release preparation
+
+Owner moved optional quality/UX work POST_LAUNCH. Fresh RC restored; no feature code change.
+Analyze35tests/signed Android AAB12 PASS. ASC privacy/screenshots/build/price/manual-release
+gaps found read-only; Distribution identity and Apple policy unresolved. Play account access
+pending; no install/upload/Production transaction. See final-store-rc-1 Oct19 evidence. HOLD.

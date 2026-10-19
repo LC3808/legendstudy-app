@@ -1,17 +1,14 @@
-## Oct18 organizer correction / quality audit
+## Oct19 Store release preparation — current priority
 
-Exam organizer UI corrected; Analyze28tests/iOS11/Android Release PASS; device pending.
-Math/science quality,WEB/TTS READ-ONLY gaps: [materials](day-9-c-resource-detail.md),
-[mixed-mode](essay-mixed-mode-foundation.md),[UX](essay-lab-ui-ux-v1.md). B–E implementation
-requires Owner approval. No DB/Provider/Credit operation; public HOLD.
+Owner: v1 release only; Math/science quality,WEB UX,TTS,personalization/catalog expansion
+move POST_LAUNCH. Preserve device/essay/Google IAP PASS. No new feature code.
+Store inspection/build/signing findings: [release evidence](final-store-rc-1.md#oct19-v1-store-readiness).
+Apple paid policy/contract,Distribution identity,Store required fields and upload approvals
+remain gates. Production/public HOLD; no DB/Provider/Credit/purchase/refund execution.
 
 ## Phase1 functional Production RC
 
 Owner PDF/bookmark/study/restart PASS;DB2/1/1. University and build10 major DEVICE+DB PASS. Review completed3/balance9/reserved0;essay/IAP OFF. Android Production QA deferred. Apple/WEB/public HOLD. Details: production-integration Oct18Phase1.
-
-## iPhone TEST isolation follow-up
-
-Owner-approved minimal gateway boundary blocks TEST requests to operating LAB before network. Production routing preserved. TEST Supabase History/results remain separate; TEST exam Catalog endpoint/data readiness is unresolved. Analyze and16 focused tests PASS. Development-signed TEST Profile build installed and launched on connected iPhone12ProMax; Owner login/UI readback pending. See production-integration for details. No operating calls/transactions.
 
 # Oct18 release candidate integration
 
