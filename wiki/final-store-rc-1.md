@@ -225,7 +225,7 @@ No secret/new key/server configuration committed or changed. Source remains RC,n
 - First Android build failed generated integration_test registration after concurrent Flutter
   test invocation; standard sequential release rebuild PASS without code/dependency changes.
   Future Flutter build/test operations in the same checkout must be sequential.
-- Build12 is a local candidate; unused Store build number is NOT_VERIFIED until Console access.
+- Play Console latest bundle/active internal version2 (0.1.0); only1/2 listed. Local12 is higher and unused in the inspected list. iOS upload history still not independently inspected.
 - iOS unsigned Release Archive PASS204.0MB,1.0.0(12),com.legendstudy.app,minimum15.0,
   encryption=false. Final built Info.plist Google callback matches existing public iOS client.
   `build/ios/archive/Runner.xcarchive` is unsigned and not uploadable; no IPA exported.
@@ -245,13 +245,16 @@ Paid Apps contract absent; updated Developer Agreement banner remains visible. O
 contract resolution; do not infer acceptance from past status or accept agreements automatically.
 Native StoreKit/products retained; Apple paid-feature launch policy/Sandbox still unresolved.
 
-Play Console with previously authorized youngsook600405@gmail.com currently shows developer
-signup rather than existing app. No account created. Owner asked to open the existing Console;
-latest versionCode/registration requirements remain NOT_VERIFIED,not assumed from old code2.
+Owner corrected Play authority to ceo@copacabana.co.kr and opened existing Copacabana Console.
+The other email is a tester,not the developer Console authority; no account created.
+LegendStudy package com.legendstudy.app: active internal2(0.1.0),previous1 inactive,Production
+inactive. Dashboard initial setup **0/11 complete**: privacy,app access,ads,content rating,
+target audience,data safety,government,financial,health,category/contact,Store listing.
+Production release is locked pending initial setup. No field/track/upload changed.
 
 ### Gates / next work
 
-1. Existing Play Console access: confirm unused12 and registration checklist before upload approval.
+1. Play initial setup0/11: prepare concrete Store declarations/assets for Owner approval before changes/upload.
 2. Apple Distribution identity/provisioning: current keychain only Apple Development; no new
    certificate generated. Signed Archive/IPA and TestFlight require completion,upload separate.
 3. ASC approved metadata completion: screenshots,privacy URL/data disclosure,price,manual release,
