@@ -4288,3 +4288,5 @@ Owner submitted app1.0/build19 + four IAPs;all Waiting for Review;MANUAL release
 Contract/bank/Sandbox remain pending;public HOLD. Android next;AAB18 hash matches
 but predates three RC fixes. No repeated submission/tests or external mutations.
 [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
+
+- Oct19: official-home local20cf31b prepared/QA PASS; Gabia+new Pages approval pending; HTTPS not deployed. See final-store-rc-1.md.
