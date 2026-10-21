@@ -4308,3 +4308,37 @@ See [existing production plan](../supabase/verification/essay_service_contracts/
 ## 2026-10-21 — Backend recovery gate follow-up
 
 Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
+
+## 2026-10-21 residual recovery verification and Konkuk selection
+
+Prior business-data/132-policy/157-object/152-PDF verification reused, not repeated.
+Cron recovery PASS for definitions/configuration: both feedback notification and account
+ deletion dispatch jobs restored locally with exact IDs, names, schedules and command
+hashes; intentionally inactive in isolation. Live settings unchanged; no job executed.
+Vault live metadata confirms two secrets and two decryptable values (values not read).
+Ciphertext COPY restores two records locally, but decrypt-count query fails with
+`pgsodium_crypto_aead_det_decrypt_by_id: invalid ciphertext`. Therefore portable Vault
+recovery is NOT verified. Both scheduled services depend on Vault. Production Vault
+works; this is a disaster-recovery gap, not an observed Production outage.
+A verified key-preserving project restore or authorized recovery/re-provisioning source
+for these secrets is required. Current logical ciphertext alone is insufficient in the
+tested isolated environment. No root key extraction, credential reset or setting change.
+Full recovery gate PARTIAL; migrations 20261021071701 and 20261021071702 NOT_APPLIED.
+New metadata RPC/mapping postflight NOT_EXECUTED. Existing conditional approval remains
+valid but its recovery condition is unmet; no duplicate approval is required.
+
+Representative selected: Konkuk2026 수시 자연 Q1 (official maximum17).
+Existing exam25dc068b-4672-56e1-b8df-08ee8800e2f6;
+questioncea40cf3-dc05-507a-a6eb-fd5e1e1847bb. Live membership verified.
+Original separate problem PDF p1 and solution PDF p5 visually checked; supplied official
+2026 선행학습영향평가 report physical PDF pp91(problem),95(intent),97(explanation),
+98(rubric),99(model solution) visually checked. Formula/diagram and answer correspondence
+PASS for this one question. No full dataset recheck. Original references retained in
+private 건국대/fast-load/question-evidence.csv; no source contents or images in Git.
+Rubric supplies grade bands and total17, not numeric points per band: do not invent them.
+External source/usage-rights follow-up remains separate. Extraction review HOLD retained;
+original visual verification does not repair stored extracted text or activate evaluation.
+Live Math set lookup for this exam returns zero rows. Existing same-exam hierarchy and
+unique essay-question leaf contract can be used after migration and separately scoped
+mapping preparation; mapping is not created or claimed complete. No new engine/schema.
+Provider E2E, Credit and AI activation remain unexecuted/HOLD. No Production writes.

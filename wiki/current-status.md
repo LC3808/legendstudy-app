@@ -1,6 +1,8 @@
 ## Oct21 Essay service DB contracts — local only
 
-Local tests PASS. Backup predates80exams/216questions; migration NOT_APPLIED.
+Local tests PASS. Current business-data/Storage recovery verified; cron definitions restored
+inactive locally. Vault ciphertext decryption fails in isolation; full recovery PARTIAL,
+both migrations NOT_APPLIED. Konkuk2026naturalQ1 original package selected; Math mapping absent.
 Production/Provider/public HOLD. [Contract and rollback](essay-service-contracts-20261021.md).
 
 ## Oct19 Owner annual organizer policy
