@@ -50,4 +50,3 @@ Owner 별도 승인 범위14행만 Production 적용: 세트1·문제1·소문�
 기존 Math/논술 시험·문항/답안·평가/시험History/Credit·결제/Storage/근거/runtime control 및 RLS·ACL 등31개 비교 항목 건수·전체행해시 전후 동일. 정책132개 유지. 대상8테이블 anon/authenticated 직접SELECT 차단. 합성subject catalog조회는 ACCOUNT_RESTRICTED; 실제회원 조회PASS는 아님.
 
 DRAFT등록 PASS와 실제서비스 PARTIAL을 구분. Migration/Provider/실제Credit/WEB·APP배포/공개활성화 없음. 다음: 인문 운영입력 binding·검수/권리, 실제Provider 실행범위 준비. 비공개 근거 `essay-validation-2026-10/건국대/service-20261021/production-draft-postflight.json`.
-
