@@ -4296,3 +4296,11 @@ but predates three RC fixes. No repeated submission/tests or external mutations.
 - Oct21: Local metadata projection + canonical Math question mapping/frozen-input contract; 19 isolated PG17 checks PASS. Production unchanged. [Handoff](essay-service-contracts-20261021.md).
 
 - Oct21: Production read-only preflight PASS for SQL/RLS/identity; backup recovery point unverified. Exact SQL/order/postflight/rollback plan recorded; no Production writes.
+
+
+## 2026-10-21 — Conditional Production migration stopped at backup gate
+
+Actual latest daily backup01:05:11KST predates80exams/216questions; PITR disabled.
+Restore confirmation inspected and cancelled. Both migrations NOT_APPLIED; SQL unchanged.
+Policy hash/private buckets/HOLD retained. No Production writes.
+See [existing production plan](../supabase/verification/essay_service_contracts/production-plan.md#conditional-go-backup-gate--2026-10-21-1030-utc).

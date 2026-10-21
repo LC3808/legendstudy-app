@@ -128,3 +128,39 @@ SQL compatibility / current RLS / identity / rollback baseline: PASS.
 Production application readiness: PARTIAL until backup recovery point is confirmed and
 Owner approves the exact two migrations including bounded DEFINER metadata exposure.
 No confirmed SQL compatibility failure found. Existing operating service remains HOLD.
+
+
+## Conditional GO backup gate — 2026-10-21 10:30 UTC
+
+Decision: STOP / NOT_APPLIED for both exact migrations. Owner condition requires a
+recoverable preservation baseline; an older backup exists but current-state recovery
+coverage is not established. This is not an SQL execution failure.
+
+- Authenticated LegendStudy Production dashboard shows seven PHYSICAL daily backups.
+  Latest: 2026-10-20 16:05:11 UTC = 2026-10-21 01:05:11 KST.
+- Backup access verified: list readable and Restore action opens confirmation for that
+  exact timestamp. Confirmation warns of downtime and loss of all newer data.
+  Cancel was selected; restore was NOT executed. End-to-end restoration not tested.
+- Actual method: Database > Backups > Scheduled backups > chosen Restore > final
+  confirmation. Whole-database recovery only at that backup point. Incident recovery
+  remains separately approved; do not restore now.
+- Point in time page shows add-on not enabled. No verified later recovery point.
+- Storage binary objects explicitly excluded from DB backups. Files remain untouched;
+  no assertion that DB backup protects their bytes.
+- Read-only query at 10:30:46 UTC: 193 exams,616 questions,152 documents,98 reviews,
+  3 journal runs. Latest exam created 2026-10-21 06:27:39 UTC. 80 exams and216
+  questions were created AFTER the newest backup and would not survive restoration
+  to it. This establishes a concrete gap, not merely a missing backup tool.
+- Both canonical migration ledger versions remain absent. Both SQL SHA256 values
+  match the approved values above; migration SQL unchanged.
+- Existing policy hash e0b124ac537d8b45f1ef523095176ffd unchanged; both private buckets
+  still private.97 NEEDS_REVIEW cohort exams: active0, published questions0. AI HOLD.
+- No Production writes, Provider calls, Credit actions, deployment, or credential changes.
+
+Resume gate: verify a successful backup/logical recovery set covering the current
+registered data (and any subsequent legitimate writes), its usable restore method and
+access. A newer completed scheduled backup is a possible route; verify its timestamp
+and coverage before relying on it. No paid PITR add-on or new credentials were enabled.
+Then refresh preflight drift checks and apply only the two approved versions in order.
+Source for platform restore semantics: https://supabase.com/docs/guides/platform/backups
+Dashboard: https://supabase.com/dashboard/project/stlhijzpjfgwwdgunlsd/database/backups/scheduled

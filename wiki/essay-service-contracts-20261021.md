@@ -80,3 +80,7 @@ partial retry, Math confirmation and history unit tests reused in LAB.
 ## Production preflight (read-only)
 
 Live IDs/ACL/function rollback baseline verified; no migration applied. See [apply plan](../supabase/verification/essay_service_contracts/production-plan.md) and read-only SQL. Backup recovery-point confirmation remains outstanding; operating readiness PARTIAL.
+
+## Conditional GO backup result
+
+Daily backup confirmed but predates80exams/216questions; PITR not enabled. Current-state recovery not established. Both migrations NOT_APPLIED. See existing production-plan.md for timestamp, restore access/method and resume gate.
