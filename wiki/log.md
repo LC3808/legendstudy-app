@@ -1,5 +1,10 @@
 # Development Log
 
+## 2026-10-21 — Konkuk representative connection / LOCAL PARTIAL
+
+Reused existing Worker/Math/History contracts. Native pinned-leaf guard and six-image ordered partial retry added. WEB physical step enum defect corrected. Private official-input Mock +27 isolated SQL checks; Flutter8 tests/analyze and Androiddebug/iOSsimulator builds PASS. No Production writes/Provider/Credit/deploy. [Scope and gates](konkuk-service-20261021.md).
+
+
 ## 2026-10-15 — iPhone logos/Hero/History follow-up / LOCAL VALIDATION
 
 Four official basic logos replace admissions signatures; SKKU display enlarged.
@@ -4394,3 +4399,80 @@ In-progress content inventory preserved privately:36current PDFs,32new filenames
 4known files; previous report/admission-guide paths absent in current source folder.
 Existing Production Konkuk6exams18questions all inactive/unpublished. No new registration.
 Latest correction takes priority for contract comparison; expansion specification pending.
+
+
+## Oct21 compact handoff — preserved earlier status blocks
+
+## Oct21 existing-success-path correction
+
+Hanyang Oct14 real Production humanities text initial/rewrite/History/Credit success
+reused. Sookmyung Sep28–30 real private image/model-quality experiments are not deployed
+WEB/History/re-evaluation success. Konkuk math Q1 needs existing Math content/leaf/profile
+binding (live problem_sets0); no new engine/History. Math-only route can reuse existing
+schema; generic essay-question bridge remains separate. Both migrations and all Production
+writes prohibited by latest Owner correction. Konkuk Mock E2E not yet run; AI HOLD.
+
+## Oct21 Essay service DB contracts — local only
+
+Local tests PASS. Current business-data/Storage recovery verified; cron definitions restored
+inactive locally. Vault ciphertext decryption fails in isolation; full recovery PARTIAL,
+both migrations NOT_APPLIED. Konkuk2026naturalQ1 original package selected; Math mapping absent.
+Production/Provider/public HOLD. [Contract and rollback](essay-service-contracts-20261021.md).
+
+## Oct19 Owner annual organizer policy
+
+Owner2025schedule/annual continuity replaces historical whitelist.2000–2025:287/287
+mapped after resolving10legacy/special identities;2025all15mapped.
+Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/source-button/PDF QA PASS. HOLD.
+[Evidence](day-9-c-resource-detail.md#oct19-owner-annual-organizer-authority-supersedes-historical-whitelist).
+
+## Oct19 Android release preparation
+
+Production AAB1.0.0(18)verified;Analyze45tests PASS. Intro QA Owner accepted/non-blocking;
+copy unchanged;fresh iPhone check deferred to internal testing.
+Play0/11setup;metadata/policy gaps remain. iOS Distribution cert/profile+Archive18
+ready;19 Archive/IPA/Apple processing/Owner internal distribution PASS;Analyze150tests PASS.19 Owner device PASS.HOLD.
+[Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
+
+## Phase1 functional Production RC
+
+Owner PDF/bookmark/study/restart PASS;DB2/1/1. University and build10 major DEVICE+DB PASS. Review completed3/balance9/reserved0;essay/IAP OFF. Android Production QA deferred. Apple/WEB/public HOLD. Details: production-integration Oct18Phase1.
+
+# Oct18 release candidate integration
+
+Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/refund/splash/iOS settings integrated with Codex essay/session/history preserved. Local checks and release builds are recorded in [integration evidence](production-integration-2026-10-09.md#oct18-independent-release-candidate-integration). Apple Sandbox/operational refund/signing/device/public activation remain gates; public HOLD. No operating mutation. Material inventory: [existing essay Wiki](essay-lab-ui-ux-v1.md#oct18-release-candidate--material-expansion-inventory).
+
+# Current Status
+
+
+## 2026-10-15 — iPhone logos/History
+
+Integrated; subsequent continuous-cycle work supersedes initial proposal.
+[Evidence](essay-lab-ui-ux-v1.md). Public HOLD.
+
+## 2026-10-14 — iPhone usability closeout; today stopped
+
+Owner confirmed prior dc722315 iPhone Release, login, Credit10, first/rewrite results,
+comparison/stars, Native PDF and photos. New15-item UX polish implemented: tab-scoped
+PDF/CTA, writer identity, fit-width root PDF, one photo picker/confirmed × deletion,
+truthful Draft status, collapsed/deduplicated feedback, N/5 labels, empty-evidence
+hiding, changed-first comparison and consistent actions. Existing components reused.
+41 local tests, Analyze and iOS simulator build PASS. No Provider/Credit/DB operation.
+Physical recheck of these new changes remains for next workday; public HOLD retained.
+WEB/APP photo sharing and AI quality excluded. Today ends after Git/Wiki handoff.
+[Exact findings, changes, evidence and remaining device checks](essay-lab-ui-ux-v1.md#iphone-usability-closeout--2026-10-14).
+
+## Shared MY foundation — 2026-10-08
+
+[Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. Application/Study/Admin006–008 are PRODUCTION_APPLIED; Owner postflight8 RPC hashes/ACLs and2 table RLS/direct-write denial match. LAB507ed7b deployed; authenticated runtime pending. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.
+
+## APP Store RC — 2026-10-07
+
+[Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
+personalization, native LAB entry, notifications and account deletion. Owner full tests
++967 ~2 PASS; Flutter3.47.6 fresh analyze, unsigned Android AAB and iOS release PASS.
+Owner has confirmed all three release flags true; tool/store-release preserves other
+production defines for both platforms. Android local upload-key binding prepared.
+Store submission remains blocked by signing, device smoke
+and Console inputs. SDK wrapper aligned with verified3.47.6; no feature/Production change.
+Oct06 Unified Daily supersedes older APP deletion/release pending statements below.

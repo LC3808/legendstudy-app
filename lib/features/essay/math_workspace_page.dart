@@ -15,8 +15,9 @@ import 'evaluation_report_view.dart';
 import 'evaluation_report.dart';
 
 class MathWorkspacePage extends ConsumerWidget {
-  const MathWorkspacePage({this.evaluationId, super.key});
+  const MathWorkspacePage({this.evaluationId, this.requestedLeafId, super.key});
   final String? evaluationId;
+  final String? requestedLeafId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
@@ -40,27 +41,34 @@ class MathWorkspacePage extends ConsumerWidget {
               ),
             )
           : _MathWorkspace(
-              key: ValueKey('$owner/$evaluationId'),
+              key: ValueKey('$owner/$evaluationId/$requestedLeafId'),
               owner: owner,
               evaluationId: evaluationId,
+              requestedLeafId: requestedLeafId,
             ),
     );
   }
 }
 
 class _MathWorkspace extends ConsumerStatefulWidget {
-  const _MathWorkspace({super.key, required this.owner, this.evaluationId});
+  const _MathWorkspace({
+    super.key,
+    required this.owner,
+    this.evaluationId,
+    this.requestedLeafId,
+  });
   final String owner;
   final String? evaluationId;
+  final String? requestedLeafId;
   @override
   ConsumerState<_MathWorkspace> createState() => _MathWorkspaceState();
 }
 
 class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
-  final drafts=<String,({String text,Uint8List? photo})>{};
-  Uint8List? photo;
-  String? artifact;
-  bool uploaded = false;
+  final drafts = <String, ({String text, List<Uint8List> photos})>{};
+  List<Uint8List> photos = [];
+  final artifacts = <int, String>{};
+  final uploaded = <int>{};
   Map<String, dynamic>? inputState;
   final corrections = <String, String>{};
   final answer = TextEditingController();
@@ -149,7 +157,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       await resumeEvaluation();
       return;
     }
-    if (leaf == null || (answer.text.trim().isEmpty && photo == null)) return;
+    if (leaf == null || (answer.text.trim().isEmpty && photos.isEmpty)) return;
     if (!await gateway.available()) throw StateError('CLOSED');
     if (!current) return;
     // Freeze before the first request: a lost response must retry identical payload/key.
@@ -166,7 +174,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               : prior!['response_format'] == 'SHORT_ANSWER'
               ? 'SHORT_ANSWER_RESOLVE'
               : 'FULL_RESOLVE',
-          'input_kind': photo == null
+          'input_kind': photos.isEmpty
               ? 'TYPED'
               : answer.text.trim().isEmpty
               ? 'EVIDENCE'
@@ -181,28 +189,29 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       if (!current) return;
       setState(() => attempt = data['attempt_id'] as String);
     }
-    if (photo != null && !uploaded) {
-      if (artifact == null) {
+    for (var i = 0; i < photos.length; i++) {
+      if (uploaded.contains(i)) continue;
+      if (!artifacts.containsKey(i)) {
         final data = await gateway.call('math_input', 'register_evidence', {
           'attempt_id': attempt,
           'metadata': {
-            'position': 1,
-            'media_type': answerImageType(photo!),
-            'byte_size': photo!.length,
+            'position': i + 1,
+            'media_type': answerImageType(photos[i]),
+            'byte_size': photos[i].length,
           },
         });
         if (!current) return;
-        artifact = data['artifact_id'] as String;
+        artifacts[i] = data['artifact_id'] as String;
       }
-      await gateway.uploadEvidence(artifact!, photo!);
+      await gateway.uploadEvidence(artifacts[i]!, photos[i]);
       if (!current) return;
-      uploaded = true;
+      uploaded.add(i);
     }
     var input = await gateway.call('math_input', 'read_input', {
       'attempt_id': attempt,
     });
     if (!current) return;
-    if (photo != null &&
+    if (photos.isNotEmpty &&
         input['candidate'] == null &&
         input['can_request_evaluation'] != true) {
       try {
@@ -296,9 +305,9 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       return;
     }
     setState(() {
-      photo = null;
-      artifact = null;
-      uploaded = false;
+      photos = [];
+      artifacts.clear();
+      uploaded.clear();
       inputState = null;
       corrections.clear();
       prior = old;
@@ -329,7 +338,9 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       ),
       data: (rows) {
         final selected =
-            leaf ?? (rows.isEmpty ? null : rows.first['leaf_id'] as String);
+            leaf ??
+            widget.requestedLeafId ??
+            (rows.isEmpty ? null : rows.first['leaf_id'] as String);
         final match = rows.where((r) => r['leaf_id'] == selected);
         final question = match.isEmpty ? null : match.first;
         return ListView(
@@ -346,9 +357,11 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 child: Text(notice!, semanticsLabel: notice),
               ),
             if (rows.isEmpty) const Text('현재 이용 가능한 첨삭 문항이 없습니다.'),
+            if (widget.requestedLeafId != null && question == null)
+              const Text('선택한 문항은 아직 수리논술 첨삭이 준비되지 않았습니다.'),
             if (rows.isNotEmpty) ...[
               DropdownButtonFormField<String>(
-                initialValue: selected,
+                initialValue: question == null ? null : selected,
                 key: ValueKey(selected),
                 isExpanded: true,
                 decoration: const InputDecoration(labelText: '문제 선택'),
@@ -359,9 +372,24 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                       child: Text(q['label'] as String),
                     ),
                 ],
-                onChanged: busy || frozen || prior != null || evaluation != null
+                onChanged:
+                    busy ||
+                        frozen ||
+                        prior != null ||
+                        evaluation != null ||
+                        widget.requestedLeafId != null
                     ? null
-                    : (v) => setState(() {if(selected!=null)drafts[selected]=(text:answer.text,photo:photo);leaf=v;answer.text=drafts[v]?.text??'';photo=drafts[v]?.photo;}),
+                    : (v) => setState(() {
+                        if (selected != null) {
+                          drafts[selected] = (
+                            text: answer.text,
+                            photos: List.of(photos),
+                          );
+                        }
+                        leaf = v;
+                        answer.text = drafts[v]?.text ?? '';
+                        photos = List.of(drafts[v]?.photos ?? []);
+                      }),
               ),
               if (question != null) ...[
                 SelectableText(question['problem_statement'] as String? ?? ''),
@@ -369,11 +397,14 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               ],
               if (report == null &&
                   (widget.evaluationId == null || prior != null)) ...[
-                AnswerImageInput(
-                  value: photo,
+                AnswerImagesInput(
+                  values: photos,
+                  allowReorder: true,
                   enabled: !busy && !frozen,
                   onChanged: (value) async {
-                    if (current) setState(() => photo = value);
+                    if (current && !busy && !frozen && value.length <= 6) {
+                      setState(() => photos = List.of(value));
+                    }
                   },
                 ),
                 TextField(
@@ -410,7 +441,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                   ),
                 ],
                 FilledButton(
-                  onPressed: busy || !canEvaluate
+                  onPressed: busy || !canEvaluate || question == null
                       ? null
                       : () {
                           leaf = selected;
@@ -437,7 +468,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               ),
             if (evaluation != null && state?['evaluation_state'] == 'REQUESTED')
               OutlinedButton(
-                onPressed: busy || !canEvaluate
+                onPressed: busy || !canEvaluate || question == null
                     ? null
                     : () => run(resumeEvaluation),
                 child: const Text('같은 첨삭 처리 다시 요청'),

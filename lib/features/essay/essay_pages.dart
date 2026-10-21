@@ -26,6 +26,7 @@ List<RouteBase> get essayRoutes => [
         path: 'math',
         builder: (_, state) => MathWorkspacePage(
           evaluationId: state.uri.queryParameters['evaluation'],
+          requestedLeafId: state.uri.queryParameters['leaf'],
         ),
       ),
       GoRoute(

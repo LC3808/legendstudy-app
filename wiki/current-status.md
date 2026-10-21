@@ -1,76 +1,14 @@
-## Oct21 existing-success-path correction
-
-Hanyang Oct14 real Production humanities text initial/rewrite/History/Credit success
-reused. Sookmyung Sep28–30 real private image/model-quality experiments are not deployed
-WEB/History/re-evaluation success. Konkuk math Q1 needs existing Math content/leaf/profile
-binding (live problem_sets0); no new engine/History. Math-only route can reuse existing
-schema; generic essay-question bridge remains separate. Both migrations and all Production
-writes prohibited by latest Owner correction. Konkuk Mock E2E not yet run; AI HOLD.
-
-## Oct21 Essay service DB contracts — local only
-
-Local tests PASS. Current business-data/Storage recovery verified; cron definitions restored
-inactive locally. Vault ciphertext decryption fails in isolation; full recovery PARTIAL,
-both migrations NOT_APPLIED. Konkuk2026naturalQ1 original package selected; Math mapping absent.
-Production/Provider/public HOLD. [Contract and rollback](essay-service-contracts-20261021.md).
-
-## Oct19 Owner annual organizer policy
-
-Owner2025schedule/annual continuity replaces historical whitelist.2000–2025:287/287
-mapped after resolving10legacy/special identities;2025all15mapped.
-Analyze56tests/build PASS;iPhone17 installed,data preserved;Owner organizer/source-button/PDF QA PASS. HOLD.
-[Evidence](day-9-c-resource-detail.md#oct19-owner-annual-organizer-authority-supersedes-historical-whitelist).
-
-## Oct19 Android release preparation
-
-Production AAB1.0.0(18)verified;Analyze45tests PASS. Intro QA Owner accepted/non-blocking;
-copy unchanged;fresh iPhone check deferred to internal testing.
-Play0/11setup;metadata/policy gaps remain. iOS Distribution cert/profile+Archive18
-ready;19 Archive/IPA/Apple processing/Owner internal distribution PASS;Analyze150tests PASS.19 Owner device PASS.HOLD.
-[Artifact and gates](final-store-rc-1.md#oct19-final-android-production-aab18-preparation).
-
-## Phase1 functional Production RC
-
-Owner PDF/bookmark/study/restart PASS;DB2/1/1. University and build10 major DEVICE+DB PASS. Review completed3/balance9/reserved0;essay/IAP OFF. Android Production QA deferred. Apple/WEB/public HOLD. Details: production-integration Oct18Phase1.
-
-# Oct18 release candidate integration
-
-Independent `codex/release-candidate-20261018`: selective Claude IAP/Sandbox/refund/splash/iOS settings integrated with Codex essay/session/history preserved. Local checks and release builds are recorded in [integration evidence](production-integration-2026-10-09.md#oct18-independent-release-candidate-integration). Apple Sandbox/operational refund/signing/device/public activation remain gates; public HOLD. No operating mutation. Material inventory: [existing essay Wiki](essay-lab-ui-ux-v1.md#oct18-release-candidate--material-expansion-inventory).
-
 # Current Status
 
+## 2026-10-21 — 건국대 기존 엔진 연결 / LOCAL PARTIAL
 
-## 2026-10-15 — iPhone logos/History
+건국대 Production21시험58문항을 재사용. 인문2026수시2번(60점), 수리2026수시자연1번(17점)의 비공개 공식 입력을 기존 Worker/Math 계약에 연결했다. 운영 콘텐츠/권리 승인·일반 사용자 연결은 미완료, AI HOLD 유지.
 
-Integrated; subsequent continuous-cycle work supersedes initial proposal.
-[Evidence](essay-lab-ui-ux-v1.md). Public HOLD.
+Native Math는 지정 leaf 누락 시 다른 문항으로 대체하지 않으며 기존 다중 사진 컴포넌트로6장·순서·삭제·부분 업로드 재시도를 지원한다. 기존 인증/소유권/제출확정 및 History 경로 유지. WEB 물리 출력 CALCULATION→DB COMPUTATION 변환 오류는 LAB에서 수정했다.
 
-## 2026-10-14 — iPhone usability closeout; today stopped
+Flutter8테스트·analyze PASS. Android debug APK/iOS simulator build PASS; 실기기·TestFlight·운영 교차 History 미검증. 기존 스토어 빌드 유지. 인문 공식입력 Worker Mock·WEB 합성 UI 흐름, Math 격리SQL27검증/WEB 합성 UI 흐름 PASS를 실제 Provider E2E와 구분한다.
 
-Owner confirmed prior dc722315 iPhone Release, login, Credit10, first/rewrite results,
-comparison/stars, Native PDF and photos. New15-item UX polish implemented: tab-scoped
-PDF/CTA, writer identity, fit-width root PDF, one photo picker/confirmed × deletion,
-truthful Draft status, collapsed/deduplicated feedback, N/5 labels, empty-evidence
-hiding, changed-first comparison and consistent actions. Existing components reused.
-41 local tests, Analyze and iOS simulator build PASS. No Provider/Credit/DB operation.
-Physical recheck of these new changes remains for next workday; public HOLD retained.
-WEB/APP photo sharing and AI quality excluded. Today ends after Git/Wiki handoff.
-[Exact findings, changes, evidence and remaining device checks](essay-lab-ui-ux-v1.md#iphone-usability-closeout--2026-10-14).
-
-## Shared MY foundation — 2026-10-08
-
-[Shared MY/Application/Study/Student360](my-shared-foundation.md): LAB school flow 3c432cd Production deployed + Owner verified. Signup predecessor +3 closed separately. Application/Study/Admin006–008 are PRODUCTION_APPLIED; Owner postflight8 RPC hashes/ACLs and2 table RLS/direct-write denial match. LAB507ed7b deployed; authenticated runtime pending. Target unique replacement is held by Owner §74; APP Flutter regression is pending SDK access. Payment/IAP/deletion runtime/Manus visuals unchanged.
-
-## APP Store RC — 2026-10-07
-
-[Final Store RC closeout](final-store-rc-1.md): current APP authority includes completed
-personalization, native LAB entry, notifications and account deletion. Owner full tests
-+967 ~2 PASS; Flutter3.47.6 fresh analyze, unsigned Android AAB and iOS release PASS.
-Owner has confirmed all three release flags true; tool/store-release preserves other
-production defines for both platforms. Android local upload-key binding prepared.
-Store submission remains blocked by signing, device smoke
-and Console inputs. SDK wrapper aligned with verified3.47.6; no feature/Production change.
-Oct06 Unified Daily supersedes older APP deletion/release pending statements below.
+Production 변경 없음. 두71701/71702 Migration 미적용. 기존 스키마 Math DRAFT14행 등록은 별도 Owner 승인 요청 중. 상세/다음 단계: [대표 연결 검증](konkuk-service-20261021.md). 이전 상태는 [보존 로그](log.md#oct21-compact-handoff--preserved-earlier-status-blocks), 기존 계약/복구 제한은 [DB 계약](essay-service-contracts-20261021.md).
 
 ## Product state
 

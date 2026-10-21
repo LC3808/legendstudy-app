@@ -155,10 +155,12 @@ class AnswerImagesInput extends StatelessWidget {
     required this.values,
     required this.onChanged,
     this.enabled = true,
+    this.allowReorder = false,
   });
   final List<Uint8List> values;
   final Future<void> Function(List<Uint8List>) onChanged;
   final bool enabled;
+  final bool allowReorder;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,6 +176,20 @@ class AnswerImagesInput extends StatelessWidget {
       Text('첨부한 답안 사진 ${values.length}/6 · 첨부 순서 유지'),
       for (var i = 0; i < values.length; i++) ...[
         Text('답안 사진 ${i + 1}'),
+        if (allowReorder && i > 0)
+          TextButton.icon(
+            onPressed: !enabled
+                ? null
+                : () async {
+                    final changed = List<Uint8List>.of(values);
+                    final previous = changed[i - 1];
+                    changed[i - 1] = changed[i];
+                    changed[i] = previous;
+                    await onChanged(changed);
+                  },
+            icon: const Icon(Icons.arrow_upward),
+            label: Text('사진 ${i + 1} 앞으로 이동'),
+          ),
         AnswerImageInput(
           value: values[i],
           showPicker: false,
