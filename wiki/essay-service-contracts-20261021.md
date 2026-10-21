@@ -76,3 +76,7 @@ partial retry, Math confirmation and history unit tests reused in LAB.
 5. Learning input, evaluation output and billing decisions remain separate.
 6. Existing private Storage/RLS/deletion path retained; no public raw documents.
 7. No AI-derived score/insight persisted as source evidence or official criteria.
+
+## Production preflight (read-only)
+
+Live IDs/ACL/function rollback baseline verified; no migration applied. See [apply plan](../supabase/verification/essay_service_contracts/production-plan.md) and read-only SQL. Backup recovery-point confirmation remains outstanding; operating readiness PARTIAL.

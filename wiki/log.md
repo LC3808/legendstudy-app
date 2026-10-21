@@ -4294,3 +4294,5 @@ but predates three RC fixes. No repeated submission/tests or external mutations.
 - Oct19: homepage Pages HTTPS rendered; home domain awaits Gabia login/CNAME. Deployment4104f06d, no existing service changes.
 
 - Oct21: Local metadata projection + canonical Math question mapping/frozen-input contract; 19 isolated PG17 checks PASS. Production unchanged. [Handoff](essay-service-contracts-20261021.md).
+
+- Oct21: Production read-only preflight PASS for SQL/RLS/identity; backup recovery point unverified. Exact SQL/order/postflight/rollback plan recorded; no Production writes.

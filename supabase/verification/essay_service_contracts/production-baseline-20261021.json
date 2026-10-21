@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-21T07:48:54Z",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "migrationApplied": false,
+  "counts": {
+    "universities": 53,
+    "exams": 193,
+    "questions": 616,
+    "documents": 152,
+    "reviews": 98,
+    "mathLeaves": 1,
+    "mathAttempts": 12,
+    "runs": 3,
+    "creditTransactions": 35
+  },
+  "cohort": {
+    "exams": 97,
+    "questions": 382,
+    "pdfs": 150,
+    "evidence": 2484,
+    "activeExams": 0,
+    "publishedQuestions": 0
+  },
+  "fingerprints": {
+    "runs": "dc8c289bfa576b485bb99836e404c3f4",
+    "exams": "66e8103fe27117044ad41e436b3ed96b",
+    "reviews": "c5cb67b7013abb630fcc7e0a8f4ccc58",
+    "documents": "ff7a89b37f07205a9169013e6fbb7e5f",
+    "questions": "7b6f0e918925aeca2f4683e1ed4c105b",
+    "universities": "6669b9a5f53abc3f94e25b7825aed4e6",
+    "mathLeaves": "c64e5d108964852de8cc53a55a8c19a2",
+    "mathAttempts": "a22f72d03914561b01920529a0b2a81a",
+    "creditTransactions": "e0e26ef1f670d938aff29af674af6dde"
+  },
+  "policyHash": "e0b124ac537d8b45f1ef523095176ffd",
+  "functionMd5": {
+    "submit": "bdef051e18631f299bd22af91e0ed19b",
+    "cycle": "d6b1dca6f28ed668bd81c3b75a83ab1e",
+    "reserve": "ddab49ee9a5682389d0e839c058e6cfb",
+    "finish": "d97e32341f90484d1d3523265172d6a3",
+    "history": "3ad2b3594bde3944d032ae5f46d3989b"
+  },
+  "security": {
+    "anonymousMaterialObjects": 0,
+    "activeNonOperatorMaterialObjects": 1,
+    "onlyPreviouslyApprovedHanyangQuestion": true,
+    "privateDocumentsSelect": false,
+    "privateReviewsSelect": false
+  },
+  "backupRestorePoint": "NOT_ASSESSABLE: not verified via available read-only tools"
+}

@@ -1,6 +1,6 @@
 ## Oct21 Essay service DB contracts — local only
 
-Metadata browse + confirmed Math input migrations and isolated PG17 tests prepared.
+Metadata/Math local tests PASS; Production read-only preflight PASS. Backup check pending.
 Production/Provider/public activation HOLD; no data backfill. [Contract and rollback](essay-service-contracts-20261021.md).
 
 ## Oct19 Owner annual organizer policy
