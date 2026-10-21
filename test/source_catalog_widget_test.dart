@@ -13,6 +13,69 @@ import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 
 void main() {
+  testWidgets(
+    'held university keeps materials selectable but disables feedback entry',
+    (tester) async {
+      final data = SourceCatalog(
+        [
+          {
+            'sourceUniversityId': 'yonsei',
+            'name': '연세대학교',
+            'officialSourceUrl': 'https://example.org/',
+          },
+        ],
+        [
+          {
+            'sourceUniversityId': 'yonsei',
+            'key': 'held',
+            'year': 2026,
+            'kind': 'admission',
+            'track': '인문',
+            'questions': [
+              {'key': 'q', 'label': '문제 1', 'inputMode': 'text'},
+            ],
+          },
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(catalog: Future.value(data)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .onPressed,
+        isNull,
+      );
+      await tester.tap(
+        find.widgetWithText(FilledButton, '서비스 준비중'),
+        warnIfMissed: false,
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('문제 1'), findsNothing);
+      await tester.tap(find.text('연세대학교'));
+      await tester.pumpAndSettle();
+      expect(find.text('문제 1'), findsOneWidget);
+      expect(find.text('대학 입학처 원본 자료 ↗'), findsOneWidget);
+      expect(
+        tester
+            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .onPressed,
+        isNull,
+      );
+      expect(find.byType(TextField), findsNothing);
+    },
+  );
+
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'native selection, image-first and draft restore at 360dp scale $scale',

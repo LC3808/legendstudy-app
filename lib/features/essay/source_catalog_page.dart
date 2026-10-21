@@ -1,3 +1,4 @@
+import 'service_availability.dart';
 import '../../core/theme/app_theme.dart';
 import '../credits/credit_balance.dart';
 
@@ -237,12 +238,16 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 for (final u in c.universities)
                   Card(
                     child: InkWell(
-                      onTap: () {
-                        catalogOffset = catalogScroll.offset;
-                        setState(
-                          () => university = u['sourceUniversityId'] as String,
-                        );
-                      },
+                      onTap:
+                          isUniversityServicePreparing(u['sourceUniversityId'])
+                          ? null
+                          : () {
+                              catalogOffset = catalogScroll.offset;
+                              setState(
+                                () => university =
+                                    u['sourceUniversityId'] as String,
+                              );
+                            },
                       child: Padding(
                         padding: const EdgeInsets.all(12),
                         child: Row(
@@ -276,25 +281,55 @@ class _SourceSelectionState extends State<_SourceSelection> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    u['name'] as String,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
-                                  ),
+                                  if (isUniversityServicePreparing(
+                                    u['sourceUniversityId'],
+                                  ))
+                                    TextButton(
+                                      onPressed: () {
+                                        catalogOffset = catalogScroll.offset;
+                                        setState(
+                                          () => university =
+                                              u['sourceUniversityId'] as String,
+                                        );
+                                      },
+                                      child: Text(u['name'] as String),
+                                    )
+                                  else
+                                    Text(
+                                      u['name'] as String,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
                                   if (!c.exams.any(
                                     (e) =>
                                         e['sourceUniversityId'] ==
                                         u['sourceUniversityId'],
                                   ))
                                     const Text('준비 중'),
+                                  if (isUniversityServicePreparing(
+                                    u['sourceUniversityId'],
+                                  ))
+                                    FilledButton(
+                                      onPressed: null,
+                                      style: FilledButton.styleFrom(
+                                        disabledBackgroundColor:
+                                            Colors.grey.shade200,
+                                        disabledForegroundColor:
+                                            Colors.grey.shade700,
+                                      ),
+                                      child: const Text('서비스 준비중'),
+                                    ),
                                 ],
                               ),
                             ),
-                            const Icon(
-                              Icons.chevron_right,
-                              color: AppTokens.textPrimary,
-                            ),
+                            if (!isUniversityServicePreparing(
+                              u['sourceUniversityId'],
+                            ))
+                              const Icon(
+                                Icons.chevron_right,
+                                color: AppTokens.textPrimary,
+                              ),
                           ],
                         ),
                       ),
@@ -404,6 +439,15 @@ class _SourceSelectionState extends State<_SourceSelection> {
                   },
                 ),
               if (exam != null) ...[
+                if (isUniversityServicePreparing(uni))
+                  for (final u in c.universities.where(
+                    (u) => u['sourceUniversityId'] == uni,
+                  ))
+                    if (u['officialSourceUrl'] is String)
+                      ExternalLinkButton(
+                        uri: Uri.tryParse(u['officialSourceUrl'] as String),
+                        label: '대학 입학처 원본 자료 ↗',
+                      ),
                 const Text('문항 선택'),
                 for (final q in questions)
                   CheckboxListTile(
@@ -432,7 +476,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     foregroundColor: Colors.white,
                     minimumSize: const Size(48, 48),
                   ),
-                  onPressed: selection.isEmpty
+                  onPressed:
+                      isUniversityServicePreparing(uni) || selection.isEmpty
                       ? null
                       : () {
                           final u = c.universities.firstWhere(
@@ -453,7 +498,9 @@ class _SourceSelectionState extends State<_SourceSelection> {
                             ),
                           );
                         },
-                  child: const Text('답안 작성하기'),
+                  child: Text(
+                    isUniversityServicePreparing(uni) ? '서비스 준비중' : '답안 작성하기',
+                  ),
                 ),
               ],
             ],
@@ -486,29 +533,45 @@ class _SelectedAnswerWriter extends StatefulWidget {
 class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
   int current = 0;
   @override
-  Widget build(BuildContext context) => IndexedStack(
-    index: current,
-    children: [
-      for (var i = 0; i < widget.questions.length; i++)
-        TickerMode(
-          enabled: i == current,
-          child: _SourceWriter(
-            key: ValueKey(widget.questions[i]['key']),
-            owner: widget.owner,
-            question: widget.questions[i],
-            exam: widget.exam,
-            universityName: widget.universityName,
-            officialUrl: widget.officialUrl,
-            rewriteRun: widget.rewriteRun,
-            selectedQuestions: widget.questions,
-            onQuestionChanged: (key) => setState(
-              () =>
-                  current = widget.questions.indexWhere((q) => q['key'] == key),
-            ),
+  Widget build(BuildContext context) =>
+      isUniversityServicePreparing(widget.exam['sourceUniversityId'])
+      ? Scaffold(
+          appBar: AppBar(title: const Text('자료 조회')),
+          body: Column(
+            children: [
+              const FilledButton(onPressed: null, child: Text('서비스 준비중')),
+              if (widget.officialUrl != null)
+                ExternalLinkButton(
+                  uri: Uri.tryParse(widget.officialUrl!),
+                  label: '대학 입학처 원본 자료 ↗',
+                ),
+            ],
           ),
-        ),
-    ],
-  );
+        )
+      : IndexedStack(
+          index: current,
+          children: [
+            for (var i = 0; i < widget.questions.length; i++)
+              TickerMode(
+                enabled: i == current,
+                child: _SourceWriter(
+                  key: ValueKey(widget.questions[i]['key']),
+                  owner: widget.owner,
+                  question: widget.questions[i],
+                  exam: widget.exam,
+                  universityName: widget.universityName,
+                  officialUrl: widget.officialUrl,
+                  rewriteRun: widget.rewriteRun,
+                  selectedQuestions: widget.questions,
+                  onQuestionChanged: (key) => setState(
+                    () => current = widget.questions.indexWhere(
+                      (q) => q['key'] == key,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
 }
 
 String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
@@ -1139,7 +1202,11 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   }
 
   Future<void> submit() async {
-    if (busy || !ready) return;
+    if (isUniversityServicePreparing(widget.exam['sourceUniversityId']) ||
+        busy ||
+        !ready) {
+      return;
+    }
     setState(() => busy = true);
     try {
       final selected = (widget.exam['questions'] as List)
