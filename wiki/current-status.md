@@ -8,7 +8,7 @@ Native Math는 지정 leaf 누락 시 다른 문항으로 대체하지 않으며
 
 Flutter8테스트·analyze PASS. Android debug APK/iOS simulator build PASS; 실기기·TestFlight·운영 교차 History 미검증. 기존 스토어 빌드 유지. 인문 공식입력 Worker Mock·WEB 합성 UI 흐름, Math 격리SQL27검증/WEB 합성 UI 흐름 PASS를 실제 Provider E2E와 구분한다.
 
-Production 변경 없음. 두71701/71702 Migration 미적용. 기존 스키마 Math DRAFT14행 등록은 별도 Owner 승인 요청 중. 상세/다음 단계: [대표 연결 검증](konkuk-service-20261021.md). 이전 상태는 [보존 로그](log.md#oct21-compact-handoff--preserved-earlier-status-blocks), 기존 계약/복구 제한은 [DB 계약](essay-service-contracts-20261021.md).
+Production 변경 없음. 두71701/71702 Migration 미적용. 기존 스키마 Math DRAFT14행은 후속 Owner 승인으로 Production 등록 PASS(2026-10-21). 기존31개 비교항목 해시동일·비공개·DRAFT/HOLD 유지. 실제서비스는 미완료. 상세/다음 단계: [대표 연결 검증](konkuk-service-20261021.md). 이전 상태는 [보존 로그](log.md#oct21-compact-handoff--preserved-earlier-status-blocks), 기존 계약/복구 제한은 [DB 계약](essay-service-contracts-20261021.md).
 
 ## Product state
 
