@@ -41,6 +41,13 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual([n for n,_ in calls],['essay_claim','essay_record_provider_telemetry','essay_finalize_success'])
         self.assertEqual(len(requests),1);self.assertFalse(requests[0]['store'])
         self.assertNotIn('tools',requests[0]);self.assertEqual(len(saved),1)
+        # Regression: the live weak-answer response returned level 0, rejected by the existing parser.
+        level=requests[0]['text']['format']['schema']['properties']['dimensions']['items']['properties']['level']
+        self.assertEqual(level['enum'],[1,2,3,4,5])
+        props=requests[0]['text']['format']['schema']['properties']
+        submitted=json.loads(requests[0]['input'])
+        self.assertEqual(props['answer_hash']['enum'],[submitted['answer_hash']])
+        self.assertEqual(props['attempt_id']['enum'],[submitted['attempt_id']])
         self.assertNotIn('lease_token',requests[0]['input'])
         self.assertEqual(saved[0]['p_output']['contract_version'],'1.3')
 

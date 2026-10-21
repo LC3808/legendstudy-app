@@ -2,7 +2,7 @@
 from hashlib import sha256
 from pathlib import Path
 from .live_worker import output_schema
-PROMPT_VERSION = 'scaffolding-1.3-v3'
+PROMPT_VERSION = 'scaffolding-1.3-v6'
 PROMPT = (Path(__file__).parent/'prompts'/f'{PROMPT_VERSION}.txt').read_text()
 QUALITY_GATE = 'PROMPT_AND_CURATED_FIXTURE_PLUS_OWNER_REVIEW'
 

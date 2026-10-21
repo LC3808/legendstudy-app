@@ -4485,3 +4485,15 @@ production defines for both platforms. Android local upload-key binding prepared
 Store submission remains blocked by signing, device smoke
 and Console inputs. SDK wrapper aligned with verified3.47.6; no feature/Production change.
 Oct06 Unified Daily supersedes older APP deletion/release pending statements below.
+
+## 2026-10-21 — 건국대 실제 Provider 품질 검증 PARTIAL
+
+기존 OpenAI/Reviewed Worker/Math 경로로 실제25회(인문15·수리10) 실행. 완료23건 usage요율 추산$2.0007006, timeout2건 최대예약$0.62034 별도; 청구총액 미확인. 승인35회/$30 안에서 인문15회 세부한도 도달로 중단. 키체인키는 메모리만 사용, 원문/답안/키/응답은 Git미포함.
+
+인문: 우수답안 타당성 인정, 보통답안 수정후 독립검수8항목PASS. 미흡/논점이탈에서 사건순서·기억상실 과장 발견, 재작성은 이력계약PASS이나 분량불확실성 안내 검수FAIL. 전체품질PASS 아님. 실제 발견한 level0→기존1~5계약 불일치 및 Provider 답안해시 오복사에 대해 transport schema 범위/ID고정. 기존v3 보존, 로컬후보v6/독립검수2에 인용정확성·사건순서·resolved이력 연결 명시. Production미적용.
+
+수리: 정상·정답만·계산오류·부분풀이·개념오류·재작성 구분. 개념미분오류 CALCULATION 오분류는 최소prompt보완 후 CONCEPT_SELECTION 확인. 40초timeout2건은5분lease안75초로 로컬조정 후 영향사례만 성공. 합성인쇄이미지8영역 판독은 확인했지만 실제손글씨/6장실측PASS 아님. 반환된 실제수리최초/재첨삭 결과의 격리PG17 기존SQL 재생25체크PASS(저장·조회·lineage·테스트Credit1/0·중복방지·타인차단). 온라인연속E2E와 구분. 초기구버전SQL harness실패 후 기존runtime/learning SQL을 격리에 포함해 해결.
+
+Python34/WEB50 관련테스트·Typecheck·변경Lint PASS. Production쓰기·배포·Credit0, DRAFT/공개HOLD 유지. 남은BLOCKER: 인문사실정확성/분량안내, 실제손글씨·이미지확정연속흐름, 인문SQL History/WEB·APP 운영E2E, 운영package/policy 및 DRAFT제약. 유료서비스 준비PARTIAL/HOLD.
+
+비공개근거: `essay-validation-2026-10/건국대/service-20261021/quality-20261021/quality-report.md`, `call-ledger.json`, `math-actual-output-history.json`. Provider대시보드 청구액 검증 전 실제총비용확정 주장 금지.

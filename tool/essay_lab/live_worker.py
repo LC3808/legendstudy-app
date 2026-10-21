@@ -313,9 +313,14 @@ class OpenAIResponses:
         return await drive_async(self.response_steps(value),self)
 
     def response_steps(self, value):
+        schema=deepcopy(self.schema)
+        # Pin transport identity to the server input; the provider must not invent hashes or IDs.
+        for field in ('attempt_id','answer_hash'):
+            if field in schema.get('properties',{}) and isinstance(value.get(field),str):
+                schema['properties'][field]={'type':'string','enum':[value[field]]}
         payload={'model':self.model,'store':False,'max_output_tokens':12000,
                  'instructions':self.instructions,'input':encoded(value).decode(),
-                 'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':self.schema}}}
+                 'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':schema}}}
         if value.get('official_images'):
             text_value={k:v for k,v in value.items() if k!='official_images'}
             text_value['official_images']=[{k:v for k,v in image.items() if k!='data'} for image in value['official_images']]
@@ -439,7 +444,7 @@ def output_schema():
     def enum(*values):return {'type':'string','enum':list(values)}
     def array(item):return {'type':'array','items':item}
     def obj(**fields):return {'type':'object','properties':fields,'required':list(fields),'additionalProperties':False}
-    dimension=obj(criterion_id=string,level={'type':'integer'},explanation=string,evidence_ids=array(string))
+    dimension=obj(criterion_id=string,level={'type':'integer','enum':[1,2,3,4,5]},explanation=string,evidence_ids=array(string))
     issue=obj(issue_key=string,category=enum('task_fulfillment','passage_understanding','reasoning','evidence_use','structure','expression','format','other'),status=enum('open','unchanged','improved','resolved','recurred'),previous_progress_id={'type':['string','null']},title=string,explanation=string,action=string,priority={'type':'integer'},evidence_ids=array(string),claim_scope=enum('official_criterion','local_sentence'))
     sentence=obj(observation_key=string,linked_issue_key=string,category=enum('grammar','expression','structure','logic'),priority=enum('contradiction','unclear_meaning','grammar_agreement','wording'),start={'type':'integer'},end={'type':'integer'},quote=string,diagnosis=string,direction=string,example={'type':['string','null']})
     review=obj(previous_progress_id=string,outcome=enum('open','unchanged','improved','resolved','recurred','not_assessable'),reason=string)
