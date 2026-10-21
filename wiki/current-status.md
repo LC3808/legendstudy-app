@@ -1,3 +1,12 @@
+## Oct21 existing-success-path correction
+
+Hanyang Oct14 real Production humanities text initial/rewrite/History/Credit success
+reused. Sookmyung Sep28–30 real private image/model-quality experiments are not deployed
+WEB/History/re-evaluation success. Konkuk math Q1 needs existing Math content/leaf/profile
+binding (live problem_sets0); no new engine/History. Math-only route can reuse existing
+schema; generic essay-question bridge remains separate. Both migrations and all Production
+writes prohibited by latest Owner correction. Konkuk Mock E2E not yet run; AI HOLD.
+
 ## Oct21 Essay service DB contracts — local only
 
 Local tests PASS. Current business-data/Storage recovery verified; cron definitions restored

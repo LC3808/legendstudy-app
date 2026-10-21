@@ -4342,3 +4342,55 @@ Live Math set lookup for this exam returns zero rows. Existing same-exam hierarc
 unique essay-question leaf contract can be used after migration and separately scoped
 mapping preparation; mapping is not created or claimed complete. No new engine/schema.
 Provider E2E, Credit and AI activation remain unexecuted/HOLD. No Production writes.
+
+## Oct21 Owner correction: reuse proven paths before migrations
+
+Latest Owner correction prohibits all Production DB writes and both migrations for this
+step. Provider/Credit/public activation remain prohibited. No successful tests rerun.
+
+Hanyang: Oct14 Production2024 admission humanities afternoon2 Q1,
+question4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde, reviewed Package17. Text-only QA initial
+run5b636cda-9915-42e1-b209-9934c7c0fcb1 completed17:30:54KST; two real OpenAI calls
+(evaluator+independent reviewer). POST /api/essay/exam -> essay_exam_submit -> existing
+Worker/checkpoints/finalize. Exactly1Credit consumed. Included revision
+414a207b-2c51-48e6-97ea-2ddf49b77c9e completed20:28KST, two calls,0additionalCredit.
+WEB stored results/History/comparison verified; Owner initial Native result view verified.
+Evidence: APP wiki/essay-runtime-completion.md, Oct14 paid/free E2E sections. No inference
+that humanities text success proves Math or uploaded-image evaluation success.
+
+Sookmyung:2025 mock humanities Q1-1. Sep28 private blind RunA at09:09:41KST used
+ChatGPT-authenticated Codex CLI (requested gpt-6-astra), original image answer and three
+image assets; raw output/hash receipt frozen locally. Not WEB submission API or DB History.
+Sep30 OpenAI Responses gpt-5.6-sol original-answer/calibration structural and Owner
+quality acceptance recorded (Contract1.3/scaffolding-1.3-v3). Private local result storage,
+not Production Credit/History. Sep28 rewrite generation PASS is generated sample quality,
+explicitly no re-evaluation: do not describe it as deployed free-reassessment success.
+Evidence: APP wiki/essay-lab-evaluation-pilot-2025.md,
+essay-lab-model-bakeoff-l2-b.md, essay-lab-rewrite-pilot-v1.md. No new calls.
+
+Konkuk2026 admission natural Q1/17points original verification retained. Existing exam
+25dc068b-4672-56e1-b8df-08ee8800e2f6 and question
+cea40cf3-dc05-507a-a6eb-fd5e1e1847bb preserved. Live read confirms Math problem_sets0
+for this exam. Humanities essay execution accepts humanities/business only, including
+prepared migration71702; changing IDs or applying it does not create Math evaluation.
+Existing Math path: math_input -> owned attempt/confirmed extraction -> math evaluation
+worker via /api/math/evaluate -> math_learning/history and existing commercial journal.
+Existing tables already support problem_set.essay_exam_id -> problems -> leaves,
+source_artifacts, scoring_criteria, evaluation_profiles and canonical_solutions. Reuse
+that hierarchy for a reviewed representative package; do not invent an engine or History.
+Math-only route need not depend on the two new migrations. However an exact generic
+essay_question FK/snapshot bridge is absent today; do not claim an existing FK or infer
+leaf identity from display order/labels. Local explicit reviewed identity adapter and
+content package need preparation before claiming selector-to-Math E2E. Any Production
+content registration/activation remains separately approved. Official qualitative bands
+must not be turned into invented numeric grade weights.
+
+Verdict: existing services REUSABLE, direct humanities-path substitution NO; no new
+migration justified solely to run Math. Konkuk-specific Mock E2E NOT_RUN: no reviewed
+Math package/leaf binding yet. Existing generic mock tests and previous real Math path
+evidence reused, not relabeled as Konkuk. No code/DB/Provider/Credit/History mutation.
+
+In-progress content inventory preserved privately:36current PDFs,32new filenames and
+4known files; previous report/admission-guide paths absent in current source folder.
+Existing Production Konkuk6exams18questions all inactive/unpublished. No new registration.
+Latest correction takes priority for contract comparison; expansion specification pending.
