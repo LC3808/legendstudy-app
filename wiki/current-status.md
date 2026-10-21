@@ -178,3 +178,7 @@ Post-Wave1 [Personalization planning](home-personalization-and-events.md#persona
 - Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
 
 - Oct14 operating postflight: LAB/Worker Registry234 + service/user Auth PASS; Queue no-op ACK. Package rights and exam policy block evaluation; reviewer/provider bindings missing. Runs0/checkpoints0, Provider/Credit NOT_RUN, HOLD. See tool/cloudflare_essay/README.md.
+
+## 2026-10-21 — Backend recovery gate follow-up
+
+Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.

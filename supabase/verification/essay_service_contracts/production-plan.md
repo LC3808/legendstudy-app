@@ -164,3 +164,27 @@ and coverage before relying on it. No paid PITR add-on or new credentials were e
 Then refresh preflight drift checks and apply only the two approved versions in order.
 Source for platform restore semantics: https://supabase.com/docs/guides/platform/backups
 Dashboard: https://supabase.com/dashboard/project/stlhijzpjfgwwdgunlsd/database/backups/scheduled
+
+## Backend activation recovery attempt — 2026-10-21
+
+Owner-authorized logical DB/Storage backup completed in restricted local operations
+folder (not Git). Current193exams/616questions. Official CLI2.114, existing auth; no
+credential extraction or password change. Auth version drift in isolated restore fixed
+by dumping current auth/storage schemas together with service schemas. Role parameter
+grant required local supabase_admin; no Production role alteration.
+
+Isolated schema/data restore PASS:133tables;131current fingerprints identical. Two
+operational heartbeat/log tables changed after backup; student/history/Credit/payment
+and exam/question data match.132RLS policies identical at normalized search_path,
+hash e0b124ac537d8b45f1ef523095176ffd. Storage157files/77,510,456bytes paths/sizes
+match;152content-addressedPDF hashes match. Remaining5files also SHA256-manifested.
+
+Full recovery gate PARTIAL: platform Vault ciphertext2 and cron definitions2 saved,
+but Vault key dependencies/decryption and scheduled-job restoration remain unverified.
+Standard CLI dump excludes extension-owned table data even with explicit schema.
+Do not call complete current-project recovery PASS or apply migrations yet. Test
+container stopped. Private backup directory: owner development/legendstudy-private-backups/recovery-20261021.
+
+Both approved SQL hashes unchanged. Neither migration executed; no new mapping column.
+No Provider/Credit/UI deploy/Production data changes. Prior19PGcontract/235WEBtest
+evidence reused because implementation unchanged; no false fresh E2E claim.

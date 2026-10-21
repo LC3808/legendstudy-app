@@ -4304,3 +4304,7 @@ Actual latest daily backup01:05:11KST predates80exams/216questions; PITR disable
 Restore confirmation inspected and cancelled. Both migrations NOT_APPLIED; SQL unchanged.
 Policy hash/private buckets/HOLD retained. No Production writes.
 See [existing production plan](../supabase/verification/essay_service_contracts/production-plan.md#conditional-go-backup-gate--2026-10-21-1030-utc).
+
+## 2026-10-21 — Backend recovery gate follow-up
+
+Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
