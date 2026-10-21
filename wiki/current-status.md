@@ -1,6 +1,7 @@
-## Oct19 iOS submitted / official homepage
+## Oct21 Essay service DB contracts — local only
 
-Owner20:28KST:app19+4IAPs Waiting for Review;MANUAL release. Apple contract/bank/Sandbox pending;HOLD. Home Pages live; Gabia login/CNAME pending. [Handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
+Metadata browse + confirmed Math input migrations and isolated PG17 tests prepared.
+Production/Provider/public activation HOLD; no data backfill. [Contract and rollback](essay-service-contracts-20261021.md).
 
 ## Oct19 Owner annual organizer policy
 

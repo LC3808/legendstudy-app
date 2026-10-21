@@ -4292,3 +4292,5 @@ but predates three RC fixes. No repeated submission/tests or external mutations.
 - Oct19: official-home local20cf31b prepared/QA PASS; Gabia+new Pages approval pending; HTTPS not deployed. See final-store-rc-1.md.
 
 - Oct19: homepage Pages HTTPS rendered; home domain awaits Gabia login/CNAME. Deployment4104f06d, no existing service changes.
+
+- Oct21: Local metadata projection + canonical Math question mapping/frozen-input contract; 19 isolated PG17 checks PASS. Production unchanged. [Handoff](essay-service-contracts-20261021.md).

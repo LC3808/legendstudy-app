@@ -1,0 +1,28 @@
+{
+  "checks": [
+    "existing_rls_unchanged",
+    "unused_contract_rollback_reinstall",
+    "anon_authenticated_metadata_only",
+    "private_rows_and_resolver_denied",
+    "unknown_catalog_empty",
+    "six_images_ordered_confirmed_text",
+    "no_storage_path_in_snapshot",
+    "seventh_image_denied",
+    "foreign_owner_denied",
+    "client_text_override_denied",
+    "used_mapping_immutable",
+    "partial_upload_denied",
+    "activation_hold_preserved",
+    "same_key_one_reservation",
+    "replay_after_extraction_retry",
+    "stale_confirmation_denied",
+    "finish_once_local_credit",
+    "history_keeps_confirmed_input",
+    "used_contract_rollback_denied"
+  ],
+  "count": 19,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "scope": "Local real PostgreSQL, synthetic fixtures; real journal, synthetic package/model; no live Provider E2E",
+  "owner_catalog_postflight_sql": "PASS"
+}
