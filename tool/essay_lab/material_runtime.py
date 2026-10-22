@@ -96,7 +96,7 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
 
 def load_reviewed_material(package, registry, *, pinned_digest, binding, regime,
                            evaluation_type, activation_approved=False,
-                           length_requirement=None):
+                           length_requirement=None, university_profiles=None):
     """Host startup hook: all question bindings from one trusted package or none.
 
     A review request is not activation authority. The deployment passes a separately
@@ -107,7 +107,13 @@ def load_reviewed_material(package, registry, *, pinned_digest, binding, regime,
     if issues:return {},{'ready':False,'issues':issues,'activation_granted':False}
     questions={};reports=[]
     for entry in package['questions']:
-        q,report=reviewed_material_question(package,registry,entry['question_id'],
+        if university_profiles is None:
+            binder=reviewed_material_question
+        else:
+            from .university_profile import bind_material
+            def binder(pkg, reg, qid, **kwargs):
+                return bind_material(pkg,reg,qid,university_profiles,**kwargs)
+        q,report=binder(package,registry,entry['question_id'],
             pinned_digest=pinned_digest,binding=binding,regime=regime,
             evaluation_type=evaluation_type,approved_processing=activation_approved,
             length_requirement=length_requirement)

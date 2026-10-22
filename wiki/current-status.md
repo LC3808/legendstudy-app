@@ -1,8 +1,8 @@
 # Current Status
 
-## 현재: 대학별 첨삭 프로필 PHASE 1 설계 완료
+## 현재: 대학별 프로필 PHASE 2 PARTIAL
 
-[표준 및11대학 설계](university-evaluation-profile-phase1.md) 완료. 분석·문서만, Production/Provider/Credit/배포0. Owner 확인 전 PHASE2 구현 금지.
+[구현·저장·검증 결과](university-evaluation-profile-phase2.md). 30후보60revision 비공개저장, 특정문항한정3 REVIEWED/27 DRAFT. 기존엔진조립3문항·41tests PASS. 509문항공식scope검수미완료. Production/Provider/Credit/배포0, 전체활성화아님.
 
 ## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
 
@@ -10,7 +10,7 @@
 
 기존71701 적용·71702 미적용, 157시험512문항 자료보존. 전체DB237시험700문항 및133RLS·기존ID/답안/Ledger 불변. 신규테이블/결제/IAP/스토어 변경없음. Math 기존 함수2개/실행flag의 정확한1leaf 범위 변경과 롤백은 [PHASE3 상세](phase3-service-20261022.md). 신규앱 물리기기/Android의 이번변경은 미검증.
 
-다음: Owner의 프로필 PHASE1 검수 후 PHASE2 최소 구현. 기존 문항별 운영확대는 이번 분석단계에서 보류. 경희·동국 추가자료보강 HOLD. 과거완료기능/건국성공평가는 반복하지 않는다. 이전단계는 [로그](log.md)에 보존.
+다음: 나머지공식프로필검수·기존엔진호환성확장. PHASE3전체공개미착수. 경희·동국 추가자료보강 HOLD. 이전근거는 [로그](log.md)에 보존.
 
 ## Product state
 
