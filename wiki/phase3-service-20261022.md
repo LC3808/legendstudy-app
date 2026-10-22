@@ -82,3 +82,15 @@ Math Pages Provider/runtime flags는 여전히 false다. 마지막 확인 Worker
 증거: 비공개 `phase3-20261022/operating-provider-usage-current.json`, 로컬 `/private/tmp/legendstudy-app-evaluation-success.png`, `/private/tmp/legendstudy-app-cross-rewrite-success.png`. 원문·답안·키는 Git에 포함하지 않는다. 경희·동국 보강HOLD, IAP는Claude담당 유지.
 
 운영 배포 목록 재확인: Production `917b22de-95ad-48b8-8995-acbd2af31c91`, source `26f0c2a`. Wrangler 기존 OAuth refresh 후 읽기 성공(직접 API의 일시적401은 토큰 갱신으로 해소). 추가 Native 화면 확인 시 Mac 잠금으로 중단했으며, 앞서 저장한 실제 성공 증거는 유지한다. Math 인증 경로와 기기 잠금 해제 후 잔여 검증 필요.
+
+## 2026-10-23 Math 인증 경로 재확인 (읽기 전용)
+
+기존 경로 FOUND. Unified Wiki commit `67bf37d230a09a624aa39c0c521d658c17f17398`의 Oct09 Daily와 `90_HISTORY/EVIDENCE/2026-10-09-math-final-unblock.json`을 대조했다. 당시 기존 Management `GET /v1/projects/{ref}/postgrest` 경로에서 기존 서명 재료를 메모리로만 사용하고 기존 서명을 확인한 뒤, 정확히 math_extraction_worker/math_evaluation_worker 역할의 HS256 JWT(iss=supabase,iat,7일exp)를 발급했다. 새 서명키·회전·폐기 없이 기존 Pages의 두 encrypted binding만 갱신했다. 자체 null-DTO400/22023·교차역할403/42501, 실제 Math 최초1Credit/재첨삭0Credit 성공 증거가 있다. 발급 스크립트 자체는 해당 Git commit에 포함되지 않았으며 절차와 비밀을 제거한 실행 증거가 남아 있다.
+
+현재 Production `917b22de-95ad-48b8-8995-acbd2af31c91`/`26f0c2a`: 두 Worker JWT와 Provider API key binding 모두 secret_text로 존재한다. 따라서 Secret 등록 누락이 아니다. Math Enabled/Provider Calls 모두false. 익명 빈 요청 evaluate503/extract409는 현행 gate/입력 차단이며 JWT 만료의 증거가 아니다. 최근24시간 Supabase 로그 집계에서 JWT expired 및 두전용역할 문자열 발견0; 로그 부재는 인증성공 증거도 아니다.
+
+마지막 확인 exp는2026-10-16 18:57:41KST. 현재 설치 Secret의 claims/서명과 역할RPC acceptance는 마스킹 때문에 아직 미확인. **갱신 방식 부재 → 현재 설치 credential 유효성 미확인**으로 BLOCKER를 정정한다. 갱신을 위해 새 인증키나 새 권한이 필요하다는 근거는 없다. 기존 키 노출 이력은 별도 미해결이며 노출 키를 대화에서 재사용하지 않는다.
+
+이번 확인에서 서명 재료 조회/토큰 발급/Secret 교체/설정 변경/Provider/Credit 실행 없음. 다음은 기존 전용 역할 인증의 안전한 유효성 검증 및 필요 시 기존 절차의 제한적 credential 갱신이다. 키 생성·회전·service_role 대체·검증 우회는 하지 않는다. 기존 인문 실제 교차조회 성공을 반복하지 않는다.
+
+비공개 메타데이터 근거: `phase3-20261022/math-auth-readonly-20261023.json`(키·JWT 원문 없음).

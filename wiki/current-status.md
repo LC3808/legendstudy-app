@@ -154,3 +154,5 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
 ## 2026-10-23 — 실제 인문 운영 E2E
 
 건국 인문2번 APP 최초→WEB 무료 재첨삭→APP 교차 History PASS(실제 Provider). Credit1/0·실패 순차감0. 운영10호출/보수비용USD0.972644. iOS Simulator 범위이며 Android/iPhone·Math·나머지 문항 미검증. 일반 공개HOLD. Math 전역OFF, 정확한 계정/leaf의 한시적 DB 예외와4행 ACTIVE 준비, Worker 인증 갱신 여부 확인 필요. [상세·복구·증거](phase3-service-20261022.md). 결제/IAP 변경 없음.
+
+Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 실제 성공 기록 발견. 두 운영Secret 존재; 현재 유효성은 미확인, 만료 장애로 단정 금지. 인증키/Secret/운영설정 변경 없이 상세 phase3 기록 정정.
