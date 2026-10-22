@@ -94,3 +94,23 @@ Math Pages Provider/runtime flags는 여전히 false다. 마지막 확인 Worker
 이번 확인에서 서명 재료 조회/토큰 발급/Secret 교체/설정 변경/Provider/Credit 실행 없음. 다음은 기존 전용 역할 인증의 안전한 유효성 검증 및 필요 시 기존 절차의 제한적 credential 갱신이다. 키 생성·회전·service_role 대체·검증 우회는 하지 않는다. 기존 인문 실제 교차조회 성공을 반복하지 않는다.
 
 비공개 메타데이터 근거: `phase3-20261022/math-auth-readonly-20261023.json`(키·JWT 원문 없음).
+
+## 2026-10-23 Math Worker 갱신 및 실제 최초 평가
+
+기존 Oct09 절차를 재사용했다. 설치된 두 JWT를 허용된 테스트 계정의 null-DTO probe로 확인하여 모두 expired=true / HTTP401 PGRST303을 확인했다. 기존 서명키를 메모리에서만 사용하고 기존 anon 서명을 확인한 뒤 두 전용 역할 JWT만 7일 갱신했다. 키 생성·회전 없음. 만료 2026-10-30 00:30:23 KST. 기존 Pages encrypted bindings 두 개만 변경, Preview/다른 bindings 보존. 배포 후 설치된 토큰도 자체 RPC400/22023·교차역할403/42501, current=true로 확인했다. JWT·서명키는 파일/로그/Git/Wiki에 기록하지 않았다.
+
+검증 범위는 기존 한 계정·건국대 자연1번 leaf·기한(Oct24 00:00KST)으로 제한한다. 전역 DB evaluations_enabled=false는 보존한다. 기존 essay_web_runtime_status 함수에 같은 테스트 계정/기한 가용성만 반영하고 Math Pages 두 실행 플래그를 테스트 중 true로 적용했다. 다른 사용자에게는 기존 HOLD. 별도 Migration/71702 없음. 종료 시 플래그 및 한시 DB 예외 원복 예정.
+
+실제 WEB 최초 평가: 기존 합성 인쇄 이미지(실제 학생/손글씨 아님) 업로드→실제 판독→8영역 학생 확인→확정 저장→Provider 평가→결과 저장 PASS. evaluation a05ed47e-4974-4e1e-a9d1-e0b56c5592f2, attempt7a64b01f-8daf-4606-a6e3-3be62c156aa8, completed2026-10-23 00:36:51KST. 기존 Math billing binding을 통해 최초1Credit settled, balance_delta=-1/reserved_delta=0, 잔액7 확인. APP iOS Simulator History·같은 결과 렌더 PASS. 무료 재첨삭은 진행 중이며 아직 PASS 아님. Android/iPhone의 이번 평가 미검증.
+
+Native History가 imperative route로 열렸을 때 GoRouter 이동이 화면 아래로 적용되어 재첨삭 버튼이 동작하지 않는 현상을 수정했다. 기존 MathWorkspace를 같은 Navigator로 push하며 화면/제출 계약 재설계 없음. 회귀 widget test 포함6tests·Flutter analyze·Simulator build PASS, 실제 재첨삭 화면 진입 확인. Device Hub 텍스트 전달 실패로 잘못 붙여넣어진 비답안 텍스트는 제출 전 전부 삭제했다. 현재 Owner 합성 답안 입력 대기.
+
+LAB Production4f42278c-7b9f-4f38-94c7-08a715702f61 / 8a54f5f. 기존 static out 재사용, Functions만 변경. 허용계정 인증 진단과 민감정보 없는 Provider token usage 기록. Typecheck/Lint/Boundary PASS, availability6+usage1 testsPASS. 실제 Math Provider2호출(input7261/output3940), 보수 USD0.107844(캐시 할인/실청구 미반영). 기존 인문10호출/성공 결과는 반복하지 않았다.
+
+근거는 비공개 phase3-20261022/math-expired-auth-evidence.json, math-installed-auth-probe.json, math-worker-renewal-receipt.json, math-provider-usage.ndjson. APP 교차렌더 /private/tmp/legendstudy-math-app-cross-result.png. SQL원복 math-status-rollback.sql 및 math-operating-rollback.sql. 기존 답안/결과/ID/결제 보존. 전체 서비스 PARTIAL, 일반공개 HOLD.
+
+### 입력 대기 중 안전 종료 체크포인트
+
+추가 Provider 호출 없이 중단점 보존. Math Pages MATH_ENABLED/MATH_PROVIDER_CALLS_ENABLED=false로 되돌리고 기존 runtime status·evaluation_admission 함수 원문을 복구했다. 갱신 JWT·사용된 콘텐츠·학생답안·평가결과·Credit 기록은 보존한다. 입력 완료 후 같은 평가의 포함 재첨삭만 재개한다. 초기 평가를 반복하지 않는다. 다른 대학 수리 활성화는 건국대 무료 재첨삭·양방향 교차조회 완료 후 판단한다. 현재 신규 실측 Math1문항 최초평가 PASS / 무료재첨삭 미완료 / 일반공개0 HOLD.
+
+APP Math→History도 동일 Navigator로 연결해 역방향 경로를 보완했다. 왕복 widget회귀 PASS. 최종 Simulator 빌드는 입력 중인 앱을 교체하지 않고 보관한다. 기존 실행 앱은 첫 수정(History→Math) 반영 상태다.

@@ -4538,3 +4538,6 @@ DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실
 건국 인문2번 APP 최초→WEB 무료 재첨삭→APP 교차 History PASS(실제 Provider). Credit1/0·실패 순차감0. 운영10호출/보수비용USD0.972644. iOS Simulator 범위이며 Android/iPhone·Math·나머지 문항 미검증. 일반 공개HOLD. Math 전역OFF, 정확한 계정/leaf의 한시적 DB 예외와4행 ACTIVE 준비, Worker 인증 갱신 여부 확인 필요. [상세·복구·증거](phase3-service-20261022.md). 결제/IAP 변경 없음.
 
 Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 실제 성공 기록 발견. 두 운영Secret 존재; 현재 유효성은 미확인, 만료 장애로 단정 금지. 인증키/Secret/운영설정 변경 없이 상세 phase3 기록 정정.
+
+## 2026-10-23 Math 인증 복구·실제 평가
+두 전용 JWT의 실제 만료를 확인하고 기존 키로7일 갱신, 설치 후 역할 인증PASS. WEB 건국 자연1번 이미지판독·확정·실제평가·저장PASS, 최초1Credit/예약0, APP Simulator 같은결과조회PASS. Native History→Math 화면이 뒤에 열리는 문제 최소수정·회귀테스트PASS. APP 합성답안 입력 대기, 무료재첨삭/APP→WEB는 미완료이므로 전체PARTIAL. 대기 중 Math실행flagsOFF·한시DBgate/status예외원복, JWT/답안/결과보존. 기존 인문성공반복없음. [상세](phase3-service-20261022.md).

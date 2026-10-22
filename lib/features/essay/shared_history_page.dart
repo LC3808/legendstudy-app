@@ -5,7 +5,7 @@ import 'essay_pages.dart';
 import 'essay_models.dart';
 import 'source_catalog_page.dart';
 
-import 'package:go_router/go_router.dart';
+import 'math_workspace_page.dart';
 
 import 'evaluation_report.dart';
 import 'evaluation_report_view.dart';
@@ -140,8 +140,12 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody> {
                       if (row.math)
                         for (final e in row.evaluations)
                           TextButton(
-                            onPressed: () => context.push(
-                              '/lab/essay/math?evaluation=${Uri.encodeQueryComponent(e['id'] as String)}',
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => MathWorkspacePage(
+                                  evaluationId: e['id'] as String,
+                                ),
+                              ),
                             ),
                             child: const Text('처리 상태 · 재첨삭 확인'),
                           ),

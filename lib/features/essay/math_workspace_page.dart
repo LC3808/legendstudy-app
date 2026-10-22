@@ -11,6 +11,7 @@ import '../../core/supabase/supabase_providers.dart';
 import '../credits/credit_balance.dart';
 import 'math_gateway.dart';
 import 'shared_history.dart';
+import 'shared_history_page.dart';
 import 'evaluation_report_view.dart';
 import 'evaluation_report.dart';
 
@@ -29,7 +30,11 @@ class MathWorkspacePage extends ConsumerWidget {
           IconButton(
             tooltip: '나의 첨삭 기록',
             icon: const Icon(Icons.history),
-            onPressed: () => context.push('/lab/essay/history'),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const SharedEssayHistoryPage(),
+              ),
+            ),
           ),
         ],
       ),
@@ -494,7 +499,11 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 ),
             ],
             TextButton(
-              onPressed: () => context.push('/lab/essay/history'),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const SharedEssayHistoryPage(),
+                ),
+              ),
               child: const Text('나의 첨삭 기록'),
             ),
           ],
