@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+PHASE3 Essay connection: [current local integration / execution gates](phase3-service-20261022.md).
+
 Essay service implementation: [Oct11 contract-verified partial result](essay-full-service-implementation-20261011.md).
 
 Current APP branch integration: [Oct10 local closeout](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10); historical Production/IAP: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.

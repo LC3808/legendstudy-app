@@ -1,12 +1,10 @@
 # Current Status
 
-## 2026-10-22 71701만 Production 적용 PASS
+## 2026-10-22 PHASE 3 — 로컬 연결 PARTIAL / 일반 공개 HOLD
 
-Owner 조건부 승인·복구 경로 확인 후 기존 메타데이터 함수 적용. anon11대학128시험468문항, 건국guest HTTP21/58 PASS. RLS132·기존 서비스데이터 보존,71702/배포/AI 미실행. [계획·검증](../supabase/verification/essay_service_contracts/production-plan.md). 이전 미적용 기록은 시점별 이력.
+Owner iPhone 최신시험·PDF PASS 후 PHASE3 승인.157시험512문항/승인485문항153PDF 보존. Native 검수문항 기기초안 작성, 기존 Math leaf 고정·WEB 상태조회 연결. 평가자료430문항2772페이지 연결 확인; 검수된 운영 패키지·정책 미설정. Provider 추가 검증/실패 명세는 [PHASE3 기록](phase3-service-20261022.md). Production/Store/실Credit 변경 없음.
 
-## 2026-10-22 Native 자료·PDF 연결 — iPhone Owner 확인 PASS
-
-71701 운영157시험512문항/11대학, WEB과 ID 일치. 승인485문항153PDF Native 연결, 성균관27문항 권리 HOLD. 관련35tests/analyze·Android APK/iOS Simulator 빌드 PASS. Android/iOS11대학 선택·각10대표PDF 렌더 PASS; 실제 기기 전수검증 아님. 경희·동국 WEB 보강 보류. 실기기0.1.0(1)/define누락 확인→동일코드 설정보완 업데이트, Owner 최신시험·PDF 확인 PASS. AI작업 금지. [상세](native-material-pdf-20261022.md).
+71701 적용 PASS·71702 미적용 보존. 자료/PDF 실기기 근거는 [Native 기록](native-material-pdf-20261022.md), 복구·SQL 근거는 [기존 계획](../supabase/verification/essay_service_contracts/production-plan.md). 이전 AI착수 금지는 최신 Owner PHASE3 승인으로 대체; 일반 활성화는 여전히 별도 승인.
 
 ## 후순위 대학 CTA 로컬 변경
 

@@ -24,6 +24,20 @@ void main() {
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
+      final disk = <String, String>{};
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
+            if (call.method == 'read') return disk[call.arguments];
+            if (call.method == 'write') {
+              final args = call.arguments as Map;
+              disk[args['key'] as String] = args['value'] as String;
+            }
+            return null;
+          });
+      addTearDown(
+        () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMethodCallHandler(SourceDraftGateway.channel, null),
+      );
       final q = approvedStudentPdfs.values.first;
       final data = SourceCatalog(
         [
@@ -82,10 +96,36 @@ void main() {
       );
       expect(
         tester
-            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .widget<FilledButton>(find.widgetWithText(FilledButton, '답안 작성하기'))
+            .onPressed,
+        isNotNull,
+      );
+      await tester.ensureVisible(find.text('답안 작성하기'));
+      await tester.tap(find.text('답안 작성하기'));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), '검수 중 문항의 기기 내 초안');
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
+      expect(disk.values.single, contains('검수 중 문항의 기기 내 초안'));
+      expect(find.text('계정 답안 확인·저장'), findsNothing);
+      await tester.scrollUntilVisible(
+        find.text('답안 확인'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.ensureVisible(find.widgetWithText(FilledButton, '답안 확인'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('답안 확인'));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, '첨삭 서비스 준비 중'),
+            )
             .onPressed,
         isNull,
       );
+      expect(find.text('첨삭 요청 · 1 Credit'), findsNothing);
       expect(tester.takeException(), isNull);
     });
   }

@@ -394,6 +394,22 @@ class _SourceSelectionState extends State<_SourceSelection> {
                       ? {questions.single['key'] as String}
                       : <String>{},
                 );
+          final reviewDraftAvailable =
+              selection.isNotEmpty &&
+              questions
+                  .where((q) => selection.contains(q['key']))
+                  .every(
+                    (q) =>
+                        QuestionPdfAsset.parse(
+                          q['studentPdf'],
+                          q['dbQuestionId'] as String? ?? '',
+                        ) !=
+                        null,
+                  );
+          final writingBlocked =
+              isUniversityServicePreparing(uni) ||
+              (exam?['verification'] == 'REVIEW_REQUIRED' &&
+                  !reviewDraftAvailable);
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -493,10 +509,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     foregroundColor: Colors.white,
                     minimumSize: const Size(48, 48),
                   ),
-                  onPressed:
-                      exam['verification'] == 'REVIEW_REQUIRED' ||
-                          isUniversityServicePreparing(uni) ||
-                          selection.isEmpty
+                  onPressed: writingBlocked || selection.isEmpty
                       ? null
                       : () {
                           final u = c.universities.firstWhere(
@@ -517,12 +530,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                             ),
                           );
                         },
-                  child: Text(
-                    exam['verification'] == 'REVIEW_REQUIRED' ||
-                            isUniversityServicePreparing(uni)
-                        ? '서비스 준비중'
-                        : '답안 작성하기',
-                  ),
+                  child: Text(writingBlocked ? '서비스 준비중' : '답안 작성하기'),
                 ),
               ],
             ],
@@ -632,6 +640,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     essayWritingDraftKey(widget.question['key'] as String, widget.rewriteRun),
     remote:
         widget.rewriteRun == null &&
+            widget.exam['verification'] != 'REVIEW_REQUIRED' &&
             widget.owner != 'guest' &&
             widget.question['dbQuestionId'] is String &&
             widget.question['accountDraftReady'] != false &&
@@ -1082,7 +1091,11 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                           ),
                         );
                       },
-                      child: const Text('답안 확인 · 첨삭 요청'),
+                      child: Text(
+                        widget.exam['verification'] == 'REVIEW_REQUIRED'
+                            ? '답안 확인'
+                            : '답안 확인 · 첨삭 요청',
+                      ),
                     ),
                   ],
                 ],
@@ -1117,7 +1130,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       : null;
   String? submittedRun;
   Timer? statusPoll;
-  int polls = 0;
+  final submissionWait = Stopwatch();
   @override
   void dispose() {
     statusPoll?.cancel();
@@ -1135,13 +1148,16 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         client,
         widget.owner,
       ).examRuns(submittedRun);
-      if (!mounted || rows.length != 1) return;
+      if (!mounted) return;
+      if (rows.length != 1) throw StateError('Submission history pending');
       final state = rows.single['state'];
       setState(
         () => notice = switch (state) {
           'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
           'failed' => '첨삭을 완료하지 못했어요. 기록에서 처리 상태를 확인해 주세요.',
-          _ => '첨삭 중입니다. 화면을 닫아도 제출 기록은 유지됩니다.',
+          _ =>
+            '첨삭 중입니다. 화면을 닫아도 제출 기록은 유지됩니다. '
+                '${const ['오늘도 수고했어요.', '잠깐 어깨를 펴고 쉬어가세요.', '물 한 모금 마시고 오셔도 좋아요.'][(submissionWait.elapsed.inSeconds ~/ 15) % 3]}',
         },
       );
       if (state == 'completed' || state == 'failed') {
@@ -1154,8 +1170,13 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
     } finally {
       polling = false;
     }
-    if (mounted && ++polls < 100) {
+    if (mounted && submissionWait.elapsed < const Duration(seconds: 100)) {
       statusPoll = Timer(const Duration(seconds: 3), pollStatus);
+    } else if (mounted) {
+      setState(
+        () =>
+            notice = '평가 완료를 아직 확인하지 못했어요. 다시 제출하지 말고 나의 첨삭 기록에서 상태를 확인해 주세요.',
+      );
     }
   }
 
@@ -1345,6 +1366,9 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           saved.revision,
         );
       }
+      submissionWait
+        ..reset()
+        ..start();
       final result = await gateway()?.request({
         'action': 'submit',
         'examId': widget.exam['dbExamId'],
@@ -1564,12 +1588,16 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
             onPressed: () => Navigator.pop(context),
             child: const Text('답안 수정'),
           ),
-          _ExamSubmit(
-            owner: widget.owner,
-            exam: widget.exam,
-            included: selected,
-            rewriteRun: widget.rewriteRun,
-          ),
+          if (widget.exam['verification'] == 'REVIEW_REQUIRED' ||
+              widget.exam['evaluationReady'] == false)
+            const FilledButton(onPressed: null, child: Text('첨삭 서비스 준비 중'))
+          else
+            _ExamSubmit(
+              owner: widget.owner,
+              exam: widget.exam,
+              included: selected,
+              rewriteRun: widget.rewriteRun,
+            ),
         ],
       ),
     ),

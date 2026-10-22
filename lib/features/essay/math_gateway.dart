@@ -155,7 +155,7 @@ class MathGateway {
     final response = await transport
         .send(request)
         .then(http.Response.fromStream)
-        .timeout(const Duration(seconds: 60));
+        .timeout(const Duration(seconds: 100));
     checkOwner();
     if (response.statusCode != 200) throw StateError('CHECK_EXTRACTION_STATUS');
   }
@@ -175,7 +175,7 @@ class MathGateway {
     final response = await transport
         .send(request)
         .then(http.Response.fromStream)
-        .timeout(const Duration(seconds: 60));
+        .timeout(const Duration(seconds: 100));
     checkOwner();
     // Ambiguous failure is recovered by reading this SAME evaluation, never a new charge.
     if (response.statusCode != 200) throw StateError('CHECK_EVALUATION_STATUS');

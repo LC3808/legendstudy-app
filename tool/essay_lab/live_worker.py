@@ -318,6 +318,21 @@ class OpenAIResponses:
         for field in ('attempt_id','answer_hash'):
             if field in schema.get('properties',{}) and isinstance(value.get(field),str):
                 schema['properties'][field]={'type':'string','enum':[value[field]]}
+        # Registered criteria/evidence identities are data, never generated prose.
+        # A real rewrite returned a truncated criterion UUID; reject it at generation
+        # as well as the existing fail-closed validator. Review-only schemas omit these.
+        props=schema.get('properties',{})
+        for field,reference,member in (
+                ('dimensions','criteria','criterion_id'),
+                ('dimensions','evidence','evidence_ids'),
+                ('improvements','evidence','evidence_ids')):
+            target=props.get(field,{}).get('items',{}).get('properties',{})
+            if member not in target or not isinstance(value.get(reference),list):continue
+            ids=[row['reference']['id'] for row in value[reference]]
+            if not ids:continue
+            pinned={'type':'string','enum':list(dict.fromkeys(ids))}
+            if member=='evidence_ids':target[member]['items']=pinned
+            else:target[member]=pinned
         payload={'model':self.model,'store':False,'max_output_tokens':12000,
                  'instructions':self.instructions,'input':encoded(value).decode(),
                  'text':{'format':{'type':'json_schema','name':'essay_evaluation_13','strict':True,'schema':schema}}}

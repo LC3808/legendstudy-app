@@ -48,6 +48,12 @@ class RuntimeTests(unittest.TestCase):
         submitted=json.loads(requests[0]['input'])
         self.assertEqual(props['answer_hash']['enum'],[submitted['answer_hash']])
         self.assertEqual(props['attempt_id']['enum'],[submitted['attempt_id']])
+        dimensions=props['dimensions']['items']['properties']
+        self.assertEqual(dimensions['criterion_id']['enum'],
+                         [c['reference']['id'] for c in submitted['criteria']])
+        expected=[e['reference']['id'] for e in submitted['evidence']]
+        self.assertEqual(dimensions['evidence_ids']['items']['enum'],expected)
+        self.assertEqual(props['improvements']['items']['properties']['evidence_ids']['items']['enum'],expected)
         self.assertNotIn('lease_token',requests[0]['input'])
         self.assertEqual(saved[0]['p_output']['contract_version'],'1.3')
 
