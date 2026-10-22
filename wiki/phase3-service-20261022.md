@@ -148,7 +148,31 @@ Owner P0 실행 승인에 따라 기존 성공 E2E를 반복하지 않고 건국
 - 서버 설정은 정확한 인문 exam/Math leaf만 공개 허용. Math catalog/admission 기존 함수와 runtime_control만 최소 갱신. 71702/새 테이블/RLS 변경 없음. 시험237/문항700/Ledger45/Math답안14의 ID해시·133RLS·함수ACL 보존. 원복 SQL은 APP `supabase/candidates/math_konkuk_public_release/rollback.sql`; 원복은 실행 OFF/함수복구이며 답안·결과 삭제 없음.
 - WEB 선택17·서버71·Worker11·APP6 관련검사 및 Typecheck/Lint/Boundary/WEB Build/Flutter analyze/iOS Simulator Build PASS. WEB과 Simulator에서 대학→동일 canonical 문항→기존Math 화면 진입 PASS. 새APP 물리기기/Android 설치 검증은 미완료. 로그인 검증계정 API 실측을 별도 신규 일반계정 E2E로 확대하지 않음.
 - 이번 활성화 변경의 Provider 추가호출0/Credit추가거래0. 기존 운영 인문10호출/보수USD0.972644, 수리3호출/보수USD0.181868 재사용. 실청구액과 구분. 최초1/재첨삭0·양방향History 성공 근거는 앞선 기록 유지.
-- 숙명2025모의 인문1-1 기존 accepted_source_runtime 준비기를 재사용하여 공식근거4/기준7/공식이미지2를 해시대조했다. 기존 학생답안/이미지는 새입력에 포함하지 않음. 아직 Provider권리/운영policy/package 연결·E2E 미완료이므로 공개0.
+- 숙명2025모의 인문1-1 기존 accepted_source_runtime 준비기를 재사용하여 공식근거4/내부진단축7/공식이미지2를 해시대조했다. 기존 학생답안/이미지는 새입력에 포함하지 않음. 아직 Provider권리/운영policy/package 연결·E2E 미완료이므로 공개0.
 - 다른10대학 검수된 운영평가패키지·대표실제E2E 미완료. 페이지 연결만으로 공식기준검수/첨삭가능을 PASS 처리하지 않는다. 경희/동국 추가자료 HOLD, 결제/IAP/스토어 변경 없음.
 
 증거(비공개): `phase3-20261022/activation-20261023/` readiness/config/rollback, `/private/tmp/konkuk-web-canonical-math-entry.png`, `/private/tmp/konkuk-app-canonical-math-entry.png`. 실제 E2E는 기존 검증계정·WEB/iOS Simulator 범위. 전체11대학 서비스는 PARTIAL.
+
+## 2026-10-23 대학별 활성화 체크포인트
+
+평가자료 페이지 연결 수는 기존 읽기전용 감사 재사용이며 검수 완료 수가 아니다. 활성화는 서버 배포·E2E 증거가 있는 문항만 계산한다.
+
+| 대학 | 등록 문항 | 평가페이지 연결 문항 | 운영 활성화 | E2E |
+|---|---:|---:|---:|---|
+| 가천대 | 166 | 166 | 0 | HOLD |
+| 건국대 | 58 | 58 | 2 | 인문·수리 각1 PASS; WEB/iOS Simulator |
+| 경희대 | 38 | 31 | 0 | HOLD |
+| 고려대 | 30 | 30 | 0 | HOLD |
+| 동국대 | 48 | 30 | 0 | HOLD |
+| 서강대 | 28 | 13 | 0 | HOLD |
+| 성균관대 | 27 | 21 | 0 | HOLD |
+| 숙명여대 | 22 | 18 | 0 | HOLD |
+| 숭실대 | 42 | 40 | 0 | HOLD |
+| 서울여대 | 23 | 5 | 0 | HOLD |
+| 한국항공대 | 30 | 18 | 0 | HOLD |
+
+합계512문항 중2문항 활성화,510문항 HOLD. APP 최신선택연결은Simulator검증이며 Store/Android/iPhone전체검증으로확대하지않음.
+
+숙명2025모의1-1: 기존7개는 내부 진단 축으로 공식기준과 구분. 공식원문 구성3+내용3 항목 그대로 기존 material_runtime 후보에 연결, 로컬계약PASS. 실제DB review/runtime policy 없음(읽기조회확인), 운영 연결/E2E 미완료. 신규 기준 창작 없음.
+
+실패 상세는 기존 phase3-20261022/*-evaluation-holds.md를 유지하며 최신예외를 반영했다. 신규 승인대기가 아니라 실제 패키지검수·운영연결·E2E 작업 미완료다.
