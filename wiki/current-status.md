@@ -1,12 +1,16 @@
 # Current Status
 
-## PHASE 3 — 건국대 2문항 공개 연결 / 전체 PARTIAL
+## 현재: 대학별 첨삭 프로필 PHASE 1 설계 완료
 
-최신 Owner P0 승인으로 기존 운영 E2E 통과 건국 인문2/자연1의 일반 로그인 실행 범위를 연결했다. WEB 운영 화면·iOS Simulator 대학→Math 진입 PASS. 기존 실제 평가·무료재첨삭·History·Credit1/0·WEB/APP 교차조회 결과 재사용. 신규 Provider/Credit 거래0. 다른10대학은 공식 운영패키지 및 실제 E2E 미완료로 HOLD.
+[표준 및11대학 설계](university-evaluation-profile-phase1.md) 완료. 분석·문서만, Production/Provider/Credit/배포0. Owner 확인 전 PHASE2 구현 금지.
+
+## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
+
+최신 Owner P0 승인으로 기존 운영 E2E 통과 건국 인문2/자연1의 일반 로그인 실행 범위를 연결했다. WEB/Simulator Math진입 및 기존 실제평가·재첨삭·History·Credit1/0·교차조회 근거보존. 다른10대학 HOLD.
 
 기존71701 적용·71702 미적용, 157시험512문항 자료보존. 전체DB237시험700문항 및133RLS·기존ID/답안/Ledger 불변. 신규테이블/결제/IAP/스토어 변경없음. Math 기존 함수2개/실행flag의 정확한1leaf 범위 변경과 롤백은 [PHASE3 상세](phase3-service-20261022.md). 신규앱 물리기기/Android의 이번변경은 미검증.
 
-다음: 기존 숙명 accepted package를 운영문항에 연결 검증하고 대학별 실제 E2E·비용·실패명세를 확장. 경희·동국 추가자료보강 HOLD. 과거완료기능/건국성공평가는 반복하지 않는다. 이전단계는 [로그](log.md)에 보존.
+다음: Owner의 프로필 PHASE1 검수 후 PHASE2 최소 구현. 기존 문항별 운영확대는 이번 분석단계에서 보류. 경희·동국 추가자료보강 HOLD. 과거완료기능/건국성공평가는 반복하지 않는다. 이전단계는 [로그](log.md)에 보존.
 
 ## Product state
 

@@ -17,6 +17,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+University Evaluation Profile / 대학별 첨삭 프로필: [PHASE1 표준 및 Owner 게이트](university-evaluation-profile-phase1.md).
+
 PHASE3 Essay connection: [current local integration / execution gates](phase3-service-20261022.md).
 
 Essay service implementation: [Oct11 contract-verified partial result](essay-full-service-implementation-20261011.md).
