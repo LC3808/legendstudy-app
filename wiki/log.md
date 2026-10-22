@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-22 — iPhone build mismatch P0
+
+실기기0.1.0(1)과 Simulator1.0.0(2026102201) 불일치, 로컬 device build Supabase defines누락 확인. 제품코드 수정 없이96830e22+검증설정으로 재빌드/삭제 없는 업데이트. 실기기 설치버전 확인, Owner 최신목록/PDF 실측 대기. [원인·한계·재현](native-material-pdf-20261022.md#iphone-mismatch-investigation-owner-p0).
+
 ## 2026-10-22 — Native 자료·PDF 연결 및 검증용 빌드
 
 Owner가 KAU WEB 검증을 수용하고 APP 단계 승인. 기존71701·Native 선택·pdfrx·WEB 승인매핑 재사용:11대학157시험512문항,485문항153PDF 연결, 성균관27문항 권리HOLD. 기존42대학 및 WEB정렬 보존. 관련35tests/analyze·Android/iOS Simulator 빌드PASS. 플랫폼별 실제 확인 범위·테스트 도구 로그인 초기화 문제와 수정은 [상세](native-material-pdf-20261022.md). Production쓰기·Provider·Credit·스토어제출 없음. Owner실기기검수 전 AI작업 HOLD; 경희·동국 WEB보강 후속 보류.

@@ -4,9 +4,9 @@
 
 Owner 조건부 승인·복구 경로 확인 후 기존 메타데이터 함수 적용. anon11대학128시험468문항, 건국guest HTTP21/58 PASS. RLS132·기존 서비스데이터 보존,71702/배포/AI 미실행. [계획·검증](../supabase/verification/essay_service_contracts/production-plan.md). 이전 미적용 기록은 시점별 이력.
 
-## 2026-10-22 Native 자료·PDF 연결 — Owner APP 검수 대기
+## 2026-10-22 Native 자료·PDF 연결 — iPhone 실측 대기
 
-71701 운영157시험512문항/11대학, WEB과 ID 일치. 승인485문항153PDF Native 연결, 성균관27문항 권리 HOLD. 관련35tests/analyze·Android APK/iOS Simulator 빌드 PASS. Android/iOS11대학 선택·각10대표PDF 렌더 PASS; 실제 기기 전수검증 아님. 경희·동국 WEB 보강 보류. Owner APP 확인 전 AI 작업 금지. [상세](native-material-pdf-20261022.md).
+71701 운영157시험512문항/11대학, WEB과 ID 일치. 승인485문항153PDF Native 연결, 성균관27문항 권리 HOLD. 관련35tests/analyze·Android APK/iOS Simulator 빌드 PASS. Android/iOS11대학 선택·각10대표PDF 렌더 PASS; 실제 기기 전수검증 아님. 경희·동국 WEB 보강 보류. 실기기0.1.0(1)/define누락 확인→동일코드 설정보완 업데이트, Owner PDF확인 대기. AI작업 금지. [상세](native-material-pdf-20261022.md).
 
 ## 후순위 대학 CTA 로컬 변경
 

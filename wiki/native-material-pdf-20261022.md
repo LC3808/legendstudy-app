@@ -46,3 +46,17 @@ Total157 exams/512 questions,485 approved and27 rights-HOLD. API/mapping parity 
 ## Evidence and longitudinal preservation
 Private evidence: `~/development/legendstudy-materials/essay-validation-2026-10/app-connection-20261022/` (metadata-snapshot/summary, platform screenshots, builds). Do not commit originals/PDF bytes/credentials/student data.
 This is a read-only view over canonical IDs: no new history event, learning-event schema, derived DB state, backfill or identity change. Existing saved drafts/history provenance and ownership remain authoritative; browse PDF page state is local to the opened viewer and does not overwrite answer drafts. Recovery is reinstall prior verification build/code; no DB rollback needed.
+
+## iPhone mismatch investigation (Owner P0)
+
+Owner reported old UI/no latest exams/PDF on physical iPhone12 Pro Max. Device inspection found developer app `com.legendstudy.app` **0.1.0(1)**, not the tested Simulator **1.0.0(2026102201)**. Same Bundle ID means an in-place developer build replaces the app, not a second side-by-side Store app. Original installed source SHA is NOT_ASSESSABLE: no SHA embedded in that artifact. Do not infer SHA from version alone.
+
+The contemporaneous local iphoneos build was also0.1.0(1); Generated.xcconfig contained only FLUTTER_* defines, with SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY and REVIEW_READ_ONLY absent. Code evidence: AppConfig defaults URL/key empty; bootstrap does not initialize Supabase on validation errors; SourceCatalogPage's browse callback rejects a null client, leaving registry fallback. This is a concrete build configuration fault; pre-update installed runtime network/config was not captured, so exact binary-to-build provenance is not asserted. No evidence of a new RLS failure.
+
+Minimal correction: no product source change; build `96830e22b312c4b77d91c2fc5e74d8f408220e8c` main.dart for iphoneos with existing Owner local define file, REVIEW_READ_ONLY=true and explicit1.0.0/2026102201. Default Runner scheme/flavor, APP_ENV development(default), same Production Supabase project as Simulator. Existing signing team and Bundle ID retained. Direct devicectl in-place install succeeded without uninstall; device inventory now confirms1.0.0(2026102201). Flutter prebuilt launch connected successfully. No Store upload/payment/Provider/DB changes. Owner physical latest-period/PDF acceptance pending; do not mark resolved until confirmed.
+
+Reproduction (local config contains public client configuration; never print its values):
+```sh
+flutter build ios --debug --no-pub --target=lib/main.dart --build-name=1.0.0 --build-number=2026102201 --dart-define=REVIEW_READ_ONLY=true --dart-define-from-file="$HOME/legendstudy-local.json"
+```
+Use the already verified Flutter3.47.6 executable. Do not run a bare build that drops the define file. No global FVM configuration changes made by this investigation; pre-existing .gitignore/.fvmrc edits preserved. Private comparison/install evidence: `app-connection-20261022/iphone-mismatch/`. No session tokens copied or logged.
