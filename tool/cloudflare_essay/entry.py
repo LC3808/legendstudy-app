@@ -17,7 +17,8 @@ import time
 class Default(WorkerEntrypoint):
     def transport(self):
         return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
-            worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS))
+            worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS),
+            public_exams=json.loads(getattr(self.env,'ESSAY_PUBLIC_EXAMS','[]')))
 
     def configuration(self,transport,binding=None):
         # No synthetic review callback or automatic signing fallback.
@@ -51,9 +52,10 @@ class Default(WorkerEntrypoint):
             raise Unknown('RECEIPT_PERSISTENCE_REQUIRED')
         return CloudflareExamRuntime(rpc=transport.rpc,registry=REGISTRY,provider=provider,
             reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,
-            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for)
+            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for,public_exams=transport.public_exams)
 
     async def admission(self,t,subject,exam):
+        require(subject in t.allowed or exam in t.public_exams,'EXAM_ACCESS_DENIED')
         policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=exam))
         pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=exam,p_digest=policy['package_digest']))
         hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)

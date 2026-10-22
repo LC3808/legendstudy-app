@@ -162,3 +162,6 @@ Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 �
 
 ## 2026-10-23 수리 재첨삭 완료
 Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→실제Provider→결과/History→WEB교차조회PASS(iOS Simulator). 최초1/재첨삭0Credit·예약0보존. Math누적3호출/보수USD0.181868. 검증종료후Math flagsOFF·DB한시예외원복,일반공개HOLD. 실기기/다른대학전체PASS아님. 상세 phase3-service-20261022 기록참조.
+
+## 2026-10-23 공개 연결 진행
+Owner가 E2E 통과 문항 공개 승인. 건국 인문만 명시적 서버 시험 범위로 연결 중. 기존 건국 인문/수리 성공 반복 없음. 로컬 Worker11/WEB45 PASS, 운영 적용·11대학 전체는 미완료. [상세](phase3-service-20261022.md).

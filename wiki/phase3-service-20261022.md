@@ -126,3 +126,10 @@ Ledger: 최초 paid_cycle1Credit settled, 재첨삭 included_revision0Credit set
 완료 후 기존 Math runtime_status/admission 함수 원복 및 실행flagsOFF. 유효한 갱신JWT, 사용한 콘텐츠·답안·결과·History·Credit보존. 새로운서명키/71702/결제/IAP/원본PDF/시험ID변경없음. 일반공개HOLD. 다른대학은공식평가기준·Math매핑준비상태에따라후속연결하며자동공개하지않음.
 
 증거: /private/tmp/math-app-free-rewrite-success.png, /private/tmp/math-web-app-cross-rewrite-success.png, /private/tmp/math-app-history-success.png 및 비공개 phase3-20261022/math-provider-usage.ndjson. 코드변경없음(LAB8a54f5f/APPe4d8e20 재사용).
+
+## 2026-10-23 E2E 통과 문항 공개 연결
+Owner가 기존 성공 문항의 일반 사용자 활성화를 승인했다. 건국 인문/수리의 완료 E2E는 반복하지 않는다. 공통 차단은 Pages/Worker 검증 계정 allowlist 및 종료 후 Math OFF 설정이다.
+
+인문 최소 변경: Gateway의 서버 설정 `ESSAY_PUBLIC_EXAMS`에 명시된 시험만 실제 Auth 사용자를 허용한다. Worker도 같은 시험 범위와 기존 DB runtime policy/공식 패키지/소유권을 검증한다. Math·운영 진단 allowlist는 그대로다. 최초 공개 대상은 E2E 통과한 건국 인문 시험의 준비된 문항2뿐이다. 다른 문항은 DB 패키지 계약으로 HOLD. E2E 임시 고정 requestKey는 공개 경로에서 제거하고 기존 사용자 idempotency를 재사용한다.
+
+현재 로컬 WEB45·Worker11 tests, Typecheck/Lint/Boundary PASS. 운영 적용·일반 사용자 확인은 후속 증거로 구분한다. 신규 Provider 호출0, Credit 변경0. 결제/IAP/앱 UI/DB 스키마 변경 없음.

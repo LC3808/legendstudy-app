@@ -4544,3 +4544,6 @@ Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 �
 
 ## 2026-10-23 수리 재첨삭 완료
 Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→실제Provider→결과/History→WEB교차조회PASS(iOS Simulator). 최초1/재첨삭0Credit·예약0보존. Math누적3호출/보수USD0.181868. 검증종료후Math flagsOFF·DB한시예외원복,일반공개HOLD. 실기기/다른대학전체PASS아님. 상세 phase3-service-20261022 기록참조.
+
+## 2026-10-23 승인된 인문 문항 공개 경계
+기존 Auth·DB 정책을 재사용한 시험별 공개 범위 추가. Math/진단 allowlist 보존, Worker11/WEB45 회귀 PASS. 운영 검증 전 전체 서비스 PASS 아님. [상세](phase3-service-20261022.md).

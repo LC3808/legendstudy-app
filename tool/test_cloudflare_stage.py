@@ -41,3 +41,31 @@ class RuntimePolicyTests(unittest.TestCase):
         runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[subject],enabled=True,provider_factory=lambda binding: configured_binding(binding,{'model':'approved'}))
         with self.assertRaises(Invalid): asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run)))
         self.assertEqual(calls,['essay_exam_claim'])
+
+class PublicScopeTests(unittest.TestCase):
+    def test_public_consumer_rejects_unreleased_exam_before_provider(self):
+        import asyncio
+        from tool.essay_lab.cloudflare_runtime import CloudflareExamRuntime
+        from tool.essay_lab.live_worker import Invalid
+        subject='11111111-1111-4111-8111-111111111111'
+        run='22222222-2222-4222-8222-222222222222'
+        exam='33333333-3333-4333-8333-333333333333'
+        calls=[]
+        async def rpc(name,args):
+            calls.append(name)
+            return dict(state='reserved',exam_id=run)
+        runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[],public_exams=[exam],enabled=True)
+        with self.assertRaisesRegex(Invalid,'EXAM_ACCESS_DENIED'):
+            asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run)))
+        self.assertEqual(calls,['essay_exam_claim'])
+
+    def test_public_completed_redelivery_does_not_re_evaluate(self):
+        import asyncio
+        from tool.essay_lab.cloudflare_runtime import CloudflareExamRuntime
+        subject='11111111-1111-4111-8111-111111111111'
+        run='22222222-2222-4222-8222-222222222222'
+        async def rpc(name,args):
+            self.assertEqual(name,'essay_exam_claim')
+            return dict(state='completed',run_id=run)
+        runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[],public_exams=[run],enabled=True)
+        self.assertEqual(asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run))),'completed')

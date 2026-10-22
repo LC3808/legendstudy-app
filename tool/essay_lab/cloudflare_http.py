@@ -1,5 +1,6 @@
 """Cloudflare fetch adapter over unchanged Provider request/response rules."""
 import json
+from uuid import UUID
 from urllib.error import HTTPError
 from .operating_host import OperatingTransport,ORIGIN,RPCS
 from .live_worker import require,Unknown
@@ -27,7 +28,10 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
     finally:clearTimeout(timer)
 
 class AsyncOperatingTransport(OperatingTransport):
-    def __init__(self,**kwargs):super().__init__(**kwargs,open_url=lambda *_:None)
+    def __init__(self,public_exams=(),**kwargs):
+        super().__init__(**kwargs,open_url=lambda *_:None)
+        require(type(public_exams) in (list,tuple) and len(public_exams)<=42,'PUBLIC_SCOPE_INVALID')
+        self.public_exams={str(UUID(exam)) for exam in public_exams}
     async def _request(self,path,token,payload=None):
         require(isinstance(token,str) and token and not any(c.isspace() for c in token),'TOKEN_REQUIRED')
         body=None if payload is None else json.dumps(payload,allow_nan=False)
@@ -36,7 +40,8 @@ class AsyncOperatingTransport(OperatingTransport):
         except Exception:raise Unknown('BACKEND_UNAVAILABLE') from None
     async def subject(self,token):
         user=await self._request('/auth/v1/user',token)
-        require(type(user) is dict and user.get('id') in self.allowed,'ACCESS_DENIED')
+        require(type(user) is dict and (user.get('id') in self.allowed or bool(self.public_exams)),'ACCESS_DENIED')
+        require(str(UUID(user['id']))==user['id'],'ACCESS_DENIED')
         return user['id']
     async def rpc(self,name,args):
         require(name in RPCS|{'essay_exam_checkpoint'} and type(args) is dict,'RPC_DENIED')

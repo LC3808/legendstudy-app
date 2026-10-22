@@ -37,7 +37,7 @@ class ProbeTests(unittest.TestCase):
   ns={'load_reviewed_material':lambda *a,**kw:({'q':SimpleNamespace(frozen_cache={})},{'ready':True}),'REGISTRY':{},'ReviewedRuntimeWorker':Worker,'RuntimePermit':lambda *a:None,'digest':digest,'time':time,'require':require}
   exec(compile(ast.Module(body=[method],type_ignores=[]),'admission','exec'),ns)
   owner=SimpleNamespace(env=SimpleNamespace(ESSAY_REVIEW_MODE='independent_model'),configuration=lambda _, binding: runtime if binding=={'model':'test'} else forbidden())
-  result=asyncio.run(ns['admission'](owner,SimpleNamespace(rpc=rpc),'subject','exam'))
+  result=asyncio.run(ns['admission'](owner,SimpleNamespace(rpc=rpc,allowed={'subject'},public_exams=set()),'subject','exam'))
   self.assertEqual(calls,['essay_exam_preflight','essay_material_runtime_package']);self.assertEqual(authorized,['preflight'])
   self.assertTrue(result['ready']);self.assertFalse(result['provider_called'])
  def test_probe_acks_without_runtime(self):

@@ -11,10 +11,11 @@ from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
 
 class CloudflareExamRuntime:
-    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None):
+    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=()):
         self.rpc=rpc;self.registry=registry;self.provider=provider;self.reviewer=reviewer
         self.review_source=review_source;self.receipt_sink=receipt_sink
         self.allowed=set(allowed_subjects);self.enabled=enabled
+        self.public_exams={str(UUID(exam)) for exam in public_exams}
         self.provider_factory=provider_factory
 
     async def consume(self,message):
@@ -22,9 +23,10 @@ class CloudflareExamRuntime:
         require(self.enabled is True,'EVALUATION_EXECUTION_HELD')
         require(type(message) is dict and set(message)=={'subject_id','run_id'},'INVALID_JOB')
         subject=str(UUID(message['subject_id']));run=str(UUID(message['run_id']))
-        require(subject in self.allowed,'ACCESS_DENIED')
+        require(subject in self.allowed or bool(self.public_exams),'ACCESS_DENIED')
         claim=await self.rpc('essay_exam_claim',dict(p_subject=subject,p_run=run,p_dispatch=str(uuid5(NS,'dispatch/'+subject+'/'+run))))
         if claim['state'] in ('completed','failed'):return claim['state']
+        require(subject in self.allowed or claim.get('exam_id') in self.public_exams,'EXAM_ACCESS_DENIED')
         require(claim['subject_id']==subject and claim['snapshot']['ownerId']==subject,'EXAM_ACCESS_DENIED')
         journal=DatabaseCheckpoint(self.rpc,subject,run,claim['lease_token'])
         policy=claim['snapshot']['runtime']
