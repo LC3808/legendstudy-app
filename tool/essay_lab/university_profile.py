@@ -100,6 +100,29 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
             require(m.get('role') == 'criteria' and m.get('verification') == 'VERIFIED'
                     and m.get('evidenceText', '').strip() and m.get('sourceHash'), 'PROFILE_CRITERIA_INVALID')
             mappings.append(dict(deepcopy(m), questionId=question_id))
+    # Common guidance is evidence, never an additional scored criterion. Only
+    # verbatim, reviewed common clauses may travel here; question answers and
+    # point bands stay in their question mappings. An explicit content review is
+    # still required by bind_material when this changes the package.
+    for common in profile.get('common_evidence', []):
+        require(common.get('scope') == 'COMMON' and common.get('verification') == 'VERIFIED'
+                and common.get('provenance') == 'OFFICIAL'
+                and common.get('evidenceText', '').strip(), 'COMMON_EVIDENCE_REVIEW_REQUIRED')
+        require(len(common.get('sourceHash', '')) == 64
+                and type(common.get('startPage')) is int
+                and type(common.get('endPage')) is int
+                and 1 <= common['startPage'] <= common['endPage'], 'COMMON_EVIDENCE_SOURCE')
+        require(type(common.get('question_ids')) is list and common['question_ids'], 'COMMON_EVIDENCE_SCOPE')
+        if question_id not in common['question_ids']:
+            continue
+        text = ('대학 공통 평가 방향(별도 배점·감점 항목 아님). '
+                '이 문항의 공식 채점기준과 충돌하면 문항 기준을 우선한다.\n'
+                + common['evidenceText'])
+        mapping = dict(questionId=question_id, role='scoring', verification='VERIFIED',
+                       sourceHash=common['sourceHash'], startPage=common['startPage'],
+                       endPage=common['endPage'], evidenceText=text)
+        if mapping not in mappings:
+            mappings.append(mapping)
     out = deepcopy(package); out['questions'] = [entry]
     # Preserve the legacy pin for identical projected content; do not invent a
     # Postgres jsonb digest or modify a Production package from this compiler.

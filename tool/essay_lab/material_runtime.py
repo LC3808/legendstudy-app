@@ -74,7 +74,7 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
     if length_requirement is None:
         ranges=[dict(evidence_id=e['binding']['id'], quote=m.group(0))
                 for e in evidence if e['binding']['role']=='question'
-                for m in re.finditer(r'(?<![\d,])\d[\d,]*\s*[~～–-]\s*\d[\d,]*\s*자',e['text'])]
+                for m in re.finditer(r'(?<![\d,])\d[\d,]*\s*[~～–±-]\s*\d[\d,]*\s*자',e['text'])]
         if ranges:
             length_requirement={'official_question_ranges':ranges,
                 'counting_convention':None,'scoring_tolerance':None,'deduction_rule':None,

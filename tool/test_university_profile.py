@@ -50,6 +50,20 @@ class ProfileTests(unittest.TestCase):
   self.package['questions'][0]['source_page_references'][3]['verification']='NEEDS_REVIEW'
   with self.assertRaisesRegex(Invalid,'QUESTION_CRITERIA_REVIEW_REQUIRED'):compose_material(self.package,self.registry,'q',[self.profile])
 
+ def test_common_evidence_preserves_question_criteria_and_requires_review(self):
+  self.profile['common_evidence']=[dict(scope='COMMON',verification='VERIFIED',provenance='OFFICIAL',
+      evidenceText='논리적인 구성과 명확한 언어 사용',sourceHash='a'*64,startPage=1,endPage=1,question_ids=['q'])]
+  self.pin();out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  old=self.package['questions'][0]['source_page_references'];new=out['questions'][0]['source_page_references']
+  self.assertEqual([m for m in old if m['role']=='criteria'],[m for m in new if m['role']=='criteria'])
+  self.assertEqual(new[-1]['role'],'scoring');self.assertIn('문항 기준을 우선',new[-1]['evidenceText'])
+  with self.assertRaisesRegex(Invalid,'COMPILED_PACKAGE_REVIEW_REQUIRED'):
+   bind_material(self.package,self.registry,'q',[self.profile],pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+  self.profile['common_evidence'][0]['question_ids']=['other'];self.pin()
+  out,_=compose_material(self.package,self.registry,'q',[self.profile]);self.assertEqual(out,self.package)
+  self.profile['common_evidence'][0]['question_ids']=[];self.pin()
+  with self.assertRaisesRegex(Invalid,'COMMON_EVIDENCE_SCOPE'):compose_material(self.package,self.registry,'q',[self.profile])
+
 
  def test_math_profile_is_not_replaced_or_given_numeric_score(self):
   from essay_lab.university_profile import bind_math

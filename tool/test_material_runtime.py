@@ -18,6 +18,11 @@ class MaterialRuntimeTests(unittest.TestCase):
  def test_passage_range_is_not_question_requirement(self):
   self.package['questions'][0]['source_page_references'][1]['evidenceText']='인용: 100~200자'
   q,_=self.bind();self.assertIsNone(q.frozen_cache['length_requirement'])
+ def test_plus_minus_question_range_surfaces_without_assumed_penalty(self):
+  self.package['questions'][0]['source_page_references'][0]['evidenceText']='오류를 설명하시오. (300±30자)'
+  q,_=self.bind();length=q.frozen_cache['length_requirement']
+  self.assertEqual(length['official_question_ranges'][0]['quote'],'300±30자')
+  self.assertIsNone(length['counting_convention']);self.assertIsNone(length['deduction_rule'])
  def test_wrong_exam_unreviewed_or_rights_block(self):
   for mutate in [lambda p:p['exam_identity'].update(academic_year=2025),lambda p:p.update(package_digest='e'*64),lambda p:p['questions'][0]['source_page_references'][0].update(verification='NEEDS_REVIEW'),lambda p:p.update(rights_status={})]:
    p=deepcopy(self.package);mutate(p)

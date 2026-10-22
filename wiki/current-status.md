@@ -2,7 +2,7 @@
 
 ## 현재: 대학별 프로필 PHASE 2 PARTIAL
 
-[구현·저장·검증 결과](university-evaluation-profile-phase2.md). 30후보60revision 비공개저장, 특정문항한정3 REVIEWED/27 DRAFT. 기존엔진조립3문항·41tests PASS. 509문항공식scope검수미완료. Production/Provider/Credit/배포0, 전체활성화아님.
+[상세 검수](university-evaluation-profile-phase2.md). 30후보 재검토, 부분근거65/512·입력검수4. 16DRAFT 및 부분검수는 완성아님. 숙명 최종3사례 품질PASS,11호출·추정$4.117810. 43tests PASS. 운영변경0,전체활성화아님.
 
 ## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
 
