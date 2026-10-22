@@ -4547,3 +4547,34 @@ Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→
 
 ## 2026-10-23 승인된 인문 문항 공개 경계
 기존 Auth·DB 정책을 재사용한 시험별 공개 범위 추가. Math/진단 allowlist 보존, Worker11/WEB45 회귀 PASS. 운영 검증 전 전체 서비스 PASS 아님. [상세](phase3-service-20261022.md).
+
+## 2026-10-23 이전 상태 보존
+
+## 2026-10-22 PHASE 3 — 운영 검증 진행 / 일반 공개 HOLD
+
+Owner iPhone 최신시험·PDF PASS 후 PHASE3 승인.157시험512문항/승인485문항153PDF 보존. Native 검수문항 기기초안 작성, 기존 Math leaf 고정·WEB 상태조회 연결. 평가자료430문항2772페이지 연결 확인; 검수된 운영 패키지·정책 미설정. Worker배포prompt/정책라우팅/Registry누락 로컬보완(21검사PASS). 운영패키지갱신은미완료. Provider 검증/실패 명세는 [PHASE3 기록](phase3-service-20261022.md). 운영 연결 승인 후 건국 인문2번 scoped Worker·WEB 배포 및 검증계정 실제 제출 진행. 실패2건 Credit예약 반환 확인. 운영 전체E2E/Math/APP 재첨삭은 미완료. Store·결제 변경 없음.
+
+71701 적용 PASS·71702 미적용 보존. 자료/PDF 실기기 근거는 [Native 기록](native-material-pdf-20261022.md), 복구·SQL 근거는 [기존 계획](../supabase/verification/essay_service_contracts/production-plan.md). 이전 AI착수 금지는 최신 Owner PHASE3 승인으로 대체; 일반 활성화는 여전히 별도 승인.
+
+## 후순위 대학 CTA 로컬 변경
+
+Owner 지정16개 WEB/Native 서비스 준비중·진입 차단, 자료/42 Catalog 보존. Flutter8/WEB35 관련검사 PASS, 배포 미실행. 내일 작업은 계획만 기록. [상세](konkuk-service-20261021.md#owner-후순위-대학-cta--2026-10-22-실행--10-21-지시).
+
+## 2026-10-21 — 실제 Provider 품질 PARTIAL
+
+인문15·수리10 실제호출. 인문 일부 교정안 사실오류/분량안내 미해결, 공개HOLD. 실제발견한 출력범위·ID·resolved연결은 로컬최소수정. 수리 실제반환결과 격리SQL History/테스트Credit1·0/권한25체크PASS, 실제손글씨·운영E2E 미검증. Python34/WEB50테스트PASS. Production변경0. [상세](konkuk-service-20261021.md).
+
+
+## 2026-10-21 — 건국대 기존 엔진 연결 / LOCAL PARTIAL
+
+건국대 Production21시험58문항을 재사용. 인문2026수시2번(60점), 수리2026수시자연1번(17점)의 비공개 공식 입력을 기존 Worker/Math 계약에 연결했다. 운영 콘텐츠/권리 승인·일반 사용자 연결은 미완료, AI HOLD 유지.
+
+Native Math는 지정 leaf 누락 시 다른 문항으로 대체하지 않으며 기존 다중 사진 컴포넌트로6장·순서·삭제·부분 업로드 재시도를 지원한다. 기존 인증/소유권/제출확정 및 History 경로 유지. WEB 물리 출력 CALCULATION→DB COMPUTATION 변환 오류는 LAB에서 수정했다.
+
+Flutter8테스트·analyze PASS. Android debug APK/iOS simulator build PASS; 실기기·TestFlight·운영 교차 History 미검증. 기존 스토어 빌드 유지. 인문 공식입력 Worker Mock·WEB 합성 UI 흐름, Math 격리SQL27검증/WEB 합성 UI 흐름 PASS를 실제 Provider E2E와 구분한다.
+
+Production 콘텐츠 등록 외 변경 없음. 두71701/71702 Migration 미적용. 기존 스키마 Math DRAFT14행은 후속 Owner 승인으로 Production 등록 PASS(2026-10-21). 기존31개 비교항목 해시동일·비공개·DRAFT/HOLD 유지. 실제서비스는 미완료. 상세/다음 단계: [대표 연결 검증](konkuk-service-20261021.md). 이전 상태는 [보존 로그](log.md#oct21-compact-handoff--preserved-earlier-status-blocks), 기존 계약/복구 제한은 [DB 계약](essay-service-contracts-20261021.md).
+
+
+## 2026-10-23 공개 연결 체크포인트
+건국 인문2/자연1만 서버 범위 연결. WEB·Simulator canonical 진입PASS. 다른10대학 HOLD. Provider/Credit 추가0. 상세 phase3-service-20261022 참조.
