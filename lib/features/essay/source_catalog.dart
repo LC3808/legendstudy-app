@@ -4,6 +4,7 @@ import '../../core/config/app_config.dart';
 import 'dart:convert';
 
 import 'university_catalog.dart';
+import 'student_pdf_catalog.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -38,6 +39,7 @@ class SourceCatalog {
               .cast<Map<String, dynamic>>()
               .where((r) => r['sourceUniversityId'] == u['sourceUniversityId'])
               .firstOrNull,
+          if (u['universityId'] != null) 'universityId': u['universityId'],
           // Reviewed official web-page links take precedence over stale registry PDFs.
           if (const {
             'gachon',
@@ -109,7 +111,24 @@ class SourceCatalog {
           (existing['questions'] as List).every(
             (q) => questionIds.contains(q['dbQuestionId']),
           )) {
-        projected.add(existing);
+        projected.add({
+          ...existing,
+          'year': raw['year'],
+          'kind': raw['kind'],
+          'questions': [
+            for (final q
+                in (existing['questions'] as List).cast<Map<String, dynamic>>())
+              {
+                ...q,
+                if (studentPdfFor(
+                      raw['examId'] as String,
+                      q['dbQuestionId'] as String,
+                    )
+                    case final pdf?)
+                  'studentPdf': pdf,
+              },
+          ],
+        });
       } else {
         projected.add({
           'key': 'registered:${raw['examId']}',
@@ -129,6 +148,9 @@ class SourceCatalog {
                   'dbQuestionId': q['id'],
                   'label': q['label'],
                   'accountDraftReady': false,
+                  if (studentPdfFor(raw['examId'] as String, q['id'] as String)
+                      case final pdf?)
+                    'studentPdf': pdf,
                 },
               )
               .toList(),

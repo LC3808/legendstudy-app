@@ -18,6 +18,7 @@ class ReviewReadOnlyClient extends http.BaseClient {
   final http.Client inner;
   static const production = 'stlhijzpjfgwwdgunlsd.supabase.co';
   static const readRpcs = {
+    'essay_browse_catalog', // 71701: public metadata only, no mutation.
     'credit_summary',
     'essay_exam_history',
     'essay_evaluation_status',

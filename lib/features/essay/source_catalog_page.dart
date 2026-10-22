@@ -318,12 +318,6 @@ class _SourceSelectionState extends State<_SourceSelection> {
                                           .textTheme
                                           .titleMedium,
                                     ),
-                                  if (!c.exams.any(
-                                    (e) =>
-                                        e['sourceUniversityId'] ==
-                                        u['sourceUniversityId'],
-                                  ))
-                                    const Text('준비 중'),
                                   if (isUniversityServicePreparing(
                                     u['sourceUniversityId'],
                                   ))
@@ -359,13 +353,21 @@ class _SourceSelectionState extends State<_SourceSelection> {
           final rows = c.exams
               .where((e) => e['sourceUniversityId'] == uni)
               .toList();
-          final years = rows.map((e) => '${e['year']}').toSet().toList()
-            ..sort((a, b) => b.compareTo(a));
-          final y = year ?? (years.length == 1 ? years.first : null);
-          final yr = rows.where((e) => '${e['year']}' == y).toList();
-          final kinds = yr.map((e) => e['kind'] as String).toSet().toList();
-          final k = kind ?? (kinds.length == 1 ? kinds.first : null);
-          final kr = yr.where((e) => e['kind'] == k).toList();
+          final periods =
+              rows.map((e) => "${e['year']}:${e['kind']}").toSet().toList()
+                ..sort((a, b) {
+                  final yearOrder = b
+                      .split(':')
+                      .first
+                      .compareTo(a.split(':').first);
+                  return yearOrder != 0 ? yearOrder : a.compareTo(b);
+                });
+          final period = year != null && kind != null
+              ? '$year:$kind'
+              : (periods.length == 1 ? periods.single : null);
+          final kr = rows
+              .where((e) => "${e['year']}:${e['kind']}" == period)
+              .toList();
           final tracks = kr.map((e) => e['track'] as String).toSet().toList();
           final t = track ?? (tracks.length == 1 ? tracks.first : null);
           final exams = kr.where((e) => e['track'] == t).toList();
@@ -415,23 +417,18 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 },
               ),
               choice(
-                '학년도',
-                y,
-                years,
+                '학년도·시험',
+                period,
+                periods,
                 (v) => setState(() {
-                  year = v;
-                  kind = track = examKey = null;
-                }),
-              ),
-              choice(
-                '시험 유형',
-                k,
-                kinds,
-                (v) => setState(() {
-                  kind = v;
+                  year = v?.split(':').first;
+                  kind = v?.split(':').last;
                   track = examKey = null;
                 }),
-                labels: const {'mock': '모의논술', 'admission': '수시 논술'},
+                labels: {
+                  for (final p in periods)
+                    p: '${p.split(':').first}학년도 ${p.endsWith(':mock') ? '모의논술' : '수시논술'}',
+                },
               ),
               choice(
                 '계열',
@@ -467,14 +464,11 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         uri: Uri.tryParse(u['officialSourceUrl'] as String),
                         label: '공식 입학처 자료 확인 ↗',
                       ),
-                if (exam['verification'] == 'REVIEW_REQUIRED')
-                  const Text(
-                    '자료 검수 중 · 공개 승인된 문제 본문을 준비하고 있습니다. AI 첨삭은 준비 중입니다.',
-                  ),
                 const Text('문항 선택'),
                 for (final q in questions)
                   CheckboxListTile(
                     title: Text(q['label'] as String),
+                    secondary: _BrowseQuestionPdfButton(question: q),
                     subtitle: q['lengthLabel'] == null
                         ? null
                         : Text(q['lengthLabel'] as String),
@@ -1580,4 +1574,61 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
       ),
     ),
   );
+}
+
+/// Read-only entry independent of answer submission/readiness. Same native viewer
+/// and authenticated Storage transport as the existing answer writer.
+class _BrowseQuestionPdfButton extends ConsumerWidget {
+  const _BrowseQuestionPdfButton({required this.question});
+  final Map<String, dynamic> question;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asset = QuestionPdfAsset.parse(
+      question['studentPdf'],
+      question['dbQuestionId'] as String? ?? '',
+    );
+    if (asset == null) return const Text('문제 자료 준비 중');
+    return OutlinedButton(
+      onPressed: () async {
+        final client = ref.read(supabaseClientProvider);
+        final owner = client?.auth.currentUser?.id;
+        if (owner == null) {
+          await context.push('/auth', extra: true);
+          return;
+        }
+        if (!context.mounted) return;
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: Text('${question['label']} · 문제 보기')),
+              body: SafeArea(
+                child: LayoutBuilder(
+                  builder: (context, constraints) => EssayQuestionPdf(
+                    key: ValueKey('${question['dbQuestionId']}:${asset.hash}'),
+                    asset: asset,
+                    height: constraints.maxHeight,
+                    load: () async {
+                      if (client!.auth.currentUser?.id != owner) {
+                        throw StateError('로그인이 필요합니다.');
+                      }
+                      final bytes = await client.storage
+                          .from(asset.bucket)
+                          .download('${asset.id}.pdf');
+                      if (client.auth.currentUser?.id != owner) {
+                        throw StateError('로그인이 필요합니다.');
+                      }
+                      return bytes;
+                    },
+                    restorePage: () async => null,
+                    savePage: (_) async {},
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      child: const Text('문제 보기'),
+    );
+  }
 }

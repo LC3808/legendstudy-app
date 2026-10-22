@@ -104,6 +104,15 @@ void main() {
       ReviewReadOnlyClient.allows(
         http.Request(
           'POST',
+          Uri.parse('$origin/rest/v1/rpc/essay_browse_catalog'),
+        ),
+      ),
+      true,
+    );
+    expect(
+      ReviewReadOnlyClient.allows(
+        http.Request(
+          'POST',
           Uri.parse('https://lab.legendstudy.com/api/essay/catalog'),
         ),
       ),

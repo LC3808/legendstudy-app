@@ -33,7 +33,7 @@ void main() {
         catalog.universities.singleWhere(
           (u) => u['sourceUniversityId'] == 'sogang',
         )['officialSourceUrl'],
-        isNull,
+        'https://admission.sogang.ac.kr/enter/html/rolling/data.asp',
       );
     },
   );

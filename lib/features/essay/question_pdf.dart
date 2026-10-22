@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'student_pdf_catalog.dart';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +31,25 @@ class QuestionPdfAsset {
         value['startPage'] is! int) {
       return null;
     }
+    final approved = approvedStudentPdfs[questionId];
+    final manifestMatch =
+        approved != null &&
+        [
+          'examId',
+          'assetId',
+          'pageCount',
+          'startPage',
+        ].every((key) => value[key] == approved[key]) &&
+        value['sha256'] == approved['assetId'];
     final bucket = value['bucket'] ?? 'essay-student-questions';
     // Exact approved question-only source; never expose other original materials.
     if (bucket != 'essay-student-questions' &&
         !(bucket == 'essay-material-originals' &&
-            questionId == '4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde' &&
-            value['assetId'] ==
-                '4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b' &&
-            value['sha256'] == value['assetId'])) {
+            (manifestMatch ||
+                (questionId == '4cbe8b69-2ccc-5c4e-9e77-0644f90e2cde' &&
+                    value['assetId'] ==
+                        '4f3b87f2197a042c8abdd361584e3e03ab4bd4d15bc5341273dee27b7b6fc73b' &&
+                    value['sha256'] == value['assetId'])))) {
       return null;
     }
     final pages = value['pageCount'] as int, start = value['startPage'] as int;

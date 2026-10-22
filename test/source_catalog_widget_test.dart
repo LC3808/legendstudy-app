@@ -1,4 +1,7 @@
 import 'dart:io';
+
+import 'package:legendstudy_app/features/essay/student_pdf_catalog.dart';
+
 import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart';
@@ -13,6 +16,79 @@ import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 
 void main() {
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('approved PDF browse remains available on HOLD at 360/$scale', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(360, 800);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final q = approvedStudentPdfs.values.first;
+      final data = SourceCatalog(
+        [
+          {'sourceUniversityId': 'konkuk', 'name': '건국대학교'},
+        ],
+        [
+          {
+            'sourceUniversityId': 'konkuk',
+            'key': 'exam',
+            'year': 2027,
+            'kind': 'mock',
+            'track': '자연',
+            'verification': 'REVIEW_REQUIRED',
+            'questions': [
+              {
+                'key': 'q',
+                'label': '문제 1',
+                'dbQuestionId': q['questionId'],
+                'studentPdf': studentPdfFor(
+                  q['examId'] as String,
+                  q['questionId'] as String,
+                ),
+              },
+            ],
+          },
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
+              child: child!,
+            ),
+            home: SourceCatalogPage(catalog: Future.value(data)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('건국대학교'));
+      await tester.pumpAndSettle();
+      expect(find.text('2027학년도 모의논술'), findsOneWidget);
+      expect(
+        tester
+            .widget<OutlinedButton>(
+              find.widgetWithText(OutlinedButton, '문제 보기'),
+            )
+            .onPressed,
+        isNotNull,
+      );
+      expect(
+        tester
+            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .onPressed,
+        isNull,
+      );
+      expect(tester.takeException(), isNull);
+    });
+  }
   testWidgets(
     'held university keeps materials selectable but disables feedback entry',
     (tester) async {
@@ -309,95 +385,96 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
-  testWidgets('rewrite starts blank, restores scoped draft, locks selection and respects HOLD', (
-    tester,
-  ) async {
-    final disk = <String, String>{};
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
-          if (call.method == 'read') return disk[call.arguments];
-          if (call.method == 'write') {
-            final a = call.arguments as Map;
-            disk[a['key'] as String] = a['value'] as String;
-          }
-          return null;
-        });
-    final data = SourceCatalog(
-      [
-        {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
-      ],
-      [
-        {
-          'sourceUniversityId': 'fixture',
-          'key': 'exam',
-          'dbExamId': 'exam-id',
-          'year': 2024,
-          'kind': 'admission',
-          'track': '인문계열',
-          'questions': [
-            {
-              'key': 'rewrite-q',
-              'dbQuestionId': 'q-id',
-              'label': '문제 1',
-              'inputMode': 'text',
-            },
-          ],
-        },
-      ],
-    );
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          authStateProvider.overrideWith(
-            (ref) => Stream.value(const AuthStatus('owner')),
-          ),
+  testWidgets(
+    'rewrite starts blank, restores scoped draft, locks selection and respects HOLD',
+    (tester) async {
+      final disk = <String, String>{};
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
+            if (call.method == 'read') return disk[call.arguments];
+            if (call.method == 'write') {
+              final a = call.arguments as Map;
+              disk[a['key'] as String] = a['value'] as String;
+            }
+            return null;
+          });
+      final data = SourceCatalog(
+        [
+          {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
         ],
-        child: MaterialApp(
-          home: SourceCatalogPage(
-            catalog: Future.value(data),
-            rewriteRun: {
-              'id': 'parent',
-              'exam_id': 'exam-id',
-              'question_ids': ['q-id'],
-              'answers': [
-                {'questionId': 'q-id', 'body': '기존 제출 답안'},
-              ],
-            },
+        [
+          {
+            'sourceUniversityId': 'fixture',
+            'key': 'exam',
+            'dbExamId': 'exam-id',
+            'year': 2024,
+            'kind': 'admission',
+            'track': '인문계열',
+            'questions': [
+              {
+                'key': 'rewrite-q',
+                'dbQuestionId': 'q-id',
+                'label': '문제 1',
+                'inputMode': 'text',
+              },
+            ],
+          },
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(
+              catalog: Future.value(data),
+              rewriteRun: {
+                'id': 'parent',
+                'exam_id': 'exam-id',
+                'question_ids': ['q-id'],
+                'answers': [
+                  {'questionId': 'q-id', 'body': '기존 제출 답안'},
+                ],
+              },
+            ),
           ),
         ),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(find.byIcon(Icons.edit_outlined), findsNothing);
-    await tester.ensureVisible(find.text('문제 1'));
-    // Rewrite's original question set is fixed.
-    await tester.pumpAndSettle();
-    expect(find.byType(TextField), findsNothing);
-    await tester.ensureVisible(find.text('답안 작성하기'));
-    await tester.tap(find.text('답안 작성하기'));
-    await tester.pumpAndSettle();
-    expect(
-      tester.widget<TextField>(find.byType(TextField)).controller!.text,
-      '',
-    );
-    await tester.enterText(find.byType(TextField), '수정 중인 답안');
-    await tester.pump(const Duration(seconds: 1));
-    await tester.pumpAndSettle();
-    await tester.pageBack();
-    await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('문제 1'));
-    // Rewrite's original question set is fixed.
-    await tester.pumpAndSettle();
-    expect(find.byType(TextField), findsNothing);
-    await tester.ensureVisible(find.text('답안 작성하기'));
-    await tester.tap(find.text('답안 작성하기'));
-    await tester.pumpAndSettle();
-    expect(
-      tester.widget<TextField>(find.byType(TextField)).controller!.text,
-      '수정 중인 답안',
-    );
-    expect(tester.takeException(), isNull);
-  });
+      );
+      await tester.pumpAndSettle();
+      expect(find.byIcon(Icons.edit_outlined), findsNothing);
+      await tester.ensureVisible(find.text('문제 1'));
+      // Rewrite's original question set is fixed.
+      await tester.pumpAndSettle();
+      expect(find.byType(TextField), findsNothing);
+      await tester.ensureVisible(find.text('답안 작성하기'));
+      await tester.tap(find.text('답안 작성하기'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '',
+      );
+      await tester.enterText(find.byType(TextField), '수정 중인 답안');
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('문제 1'));
+      // Rewrite's original question set is fixed.
+      await tester.pumpAndSettle();
+      expect(find.byType(TextField), findsNothing);
+      await tester.ensureVisible(find.text('답안 작성하기'));
+      await tester.tap(find.text('답안 작성하기'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '수정 중인 답안',
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
   testWidgets(
     'Hero balance appears once and university back restores list position',
     (tester) async {

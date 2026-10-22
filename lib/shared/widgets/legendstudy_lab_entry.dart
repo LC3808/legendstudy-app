@@ -6,17 +6,14 @@ import '../../core/links/service_links.dart';
 import '../../core/theme/app_theme.dart';
 import 'shell_widgets.dart';
 
-/// 논술 LAB — live today, **app-first**. The primary path is the in-app native
-/// essay flow (Credit·답안·첨삭·재작성·평가); the web LAB is a secondary
-/// convenience option for a wider screen, never the required path and never a
-/// "more advanced" version — it is the same LegendStudy 논술 LAB.
+/// Native material browsing first. Feedback remains on the existing server HOLD.
 class LegendStudyLabEntry extends StatelessWidget {
   const LegendStudyLabEntry({super.key});
 
   @override
   Widget build(BuildContext context) => CompactUtilityCard(
     title: '논술 LAB',
-    body: '이용 가능 · 문제를 읽고 직접 쓰고 다시 고쳐 쓰는 논술 학습 (Credit·첨삭·재작성·평가)',
+    body: '기출문제를 선택하고 확인하세요. AI 첨삭 서비스는 준비 중입니다.',
     action: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

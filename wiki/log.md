@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-22 — Native 자료·PDF 연결 및 검증용 빌드
+
+Owner가 KAU WEB 검증을 수용하고 APP 단계 승인. 기존71701·Native 선택·pdfrx·WEB 승인매핑 재사용:11대학157시험512문항,485문항153PDF 연결, 성균관27문항 권리HOLD. 기존42대학 및 WEB정렬 보존. 관련35tests/analyze·Android/iOS Simulator 빌드PASS. 플랫폼별 실제 확인 범위·테스트 도구 로그인 초기화 문제와 수정은 [상세](native-material-pdf-20261022.md). Production쓰기·Provider·Credit·스토어제출 없음. Owner실기기검수 전 AI작업 HOLD; 경희·동국 WEB보강 후속 보류.
+
 ## 2026-10-21 — 건국대 Math DRAFT 등록 승인 적용 PASS
 
 Owner 별도 승인 범위14행만 Production 적용: 세트1·문제1·소문항1·출처4·profile1·criterion1·solution1·step4. 기존 자연2026시험/문항 ID 보존. 상태열4개 DRAFT, 시험inactive·문항unpublished 유지. 동일내용 검증 포함 단일 트랜잭션 성공. 신규ID 중복없음.
