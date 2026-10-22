@@ -222,3 +222,22 @@ Live Math set lookup for this exam returns zero rows. Existing same-exam hierarc
 unique essay-question leaf contract can be used after migration and separately scoped
 mapping preparation; mapping is not created or claimed complete. No new engine/schema.
 Provider E2E, Credit and AI activation remain unexecuted/HOLD. No Production writes.
+
+## 2026-10-22 — 71701-only conditional approval / recovery gate
+
+Owner approved only71701 after recovery conditions;71702/deployment/AI remain excluded.
+Dashboard latest successful PHYSICAL backup:2026-10-21 16:04:24UTC (Oct22 01:04:24KST). Restore confirmation for that timestamp accessible; cancelled without executing. Current208exams/656questions all created before snapshot. New credit/payment/essay-run/math-attempt rows since snapshot:0; one auth row changed, therefore fresh133-table logical COPY dump captured privately using official CLI-generated dump script and local pg_dump17 (Docker daemon unavailable). Dump18,119,055bytes SHA256 a30ae2a8a4aff980e2f975c5eb53517fc2252ca47c38b3b33a2158e76a33ad3f. Auth users included; prior schema/restore procedure reused, no new destructive restore drill. Temporary credential-bearing script removed.
+
+Supabase official Vault documentation explicitly guarantees key preservation for same-project in-place restore: https://supabase.com/docs/guides/database/vault#key-portability-and-migration . Thus supported same-project physical recovery resolves the key-portability blocker; standalone logical restore without the root key remains unsupported. No root key exported/reset. Prior cron definition recovery PASS reused; no cron execution.
+
+Storage now189objects:184originalPDF+3Math+2avatars. Prior157-object backup retained;32new PDFs copied from Owner originals with SHA256 matching content-addressed Storage paths and current sizes. Old152 PDF sizes unchanged. New32 remote byte re-download not performed; prior upload verification reused. All189 have preserved local bytes across base+addendum. Private backup directory recovery-20261022-addendum under legendstudy-private-backups; never Git.
+
+Recovery gate PASS for the approved additive metadata-only change using same-project physical recovery plus latest logical/Storage supplement; NOT a new full disaster-recovery execution PASS. Full restore would lose post-snapshot activity unless reconciled with supplemental dump. Prefer additive rollback DROP FUNCTION for this change; never automatically restore the whole DB. Baseline132RLS hash e0b124ac537d8b45f1ef523095176ffd. SQL SHA remains50ae2c213d75dd3da8d9635c6c2fd22031604bde9134f59bca4508c014b26b51.
+
+## 2026-10-22 71701 적용 결과
+
+Owner의 71701-only 조건부 승인에 따라 복구 게이트 확인 후 적용. 원문 SHA256 불변. 기존 단일 트랜잭션 executor 패턴(소유자/충돌 guard,5s lock/60s statement timeout,canonical ledger 기록,PostgREST schema reload) 재사용. Function1개/comment/ACL 및 migration ledger71701만 변경.71702 미적용.
+
+사후: anon11대학128시험/468문항 메타데이터, 모두evaluationReady=false. 문항 없는 기존14시험은 함수의 기존 필터에 따라 반환되지 않음(경희8,성균관6); 시험 삭제 아님. 건국 비로그인 HTTP200,21시험58문항. authenticated 역할21시험,unknown ID빈배열. anon/authenticated privateStorage 조회0,private evidence schema접근불가. 함수 execute anon/auth=true,service_role=false.132RLS hash e0b124ac537d8b45f1ef523095176ffd 전후 동일.133테이블 중131지문 동일; 변경2개는 기존 예약작업 account_private.ops_log/dispatch_health. 기존ID·학생답안·History·Credit·결제·Storage 메타데이터 지문 유지.
+
+DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실측 필요. Provider/Credit거래/WEB배포/APP업로드/AI활성화 없음. 복구의 실제전체실행은 하지 않았으며 supported physical restore+추가논리백업/Storage 복구경로 확인과 구분한다.

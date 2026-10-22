@@ -1,5 +1,9 @@
 # Current Status
 
+## 2026-10-22 71701만 Production 적용 PASS
+
+Owner 조건부 승인·복구 경로 확인 후 기존 메타데이터 함수 적용. anon11대학128시험468문항, 건국guest HTTP21/58 PASS. RLS132·기존 서비스데이터 보존,71702/배포/AI 미실행. [계획·검증](../supabase/verification/essay_service_contracts/production-plan.md). 이전 미적용 기록은 시점별 이력.
+
 ## 2026-10-22 자료 사용자 조회 — LOCAL PARTIAL
 
 공통 RPC 미적용 확인, APP 메타데이터 연결·검수 문항 작성 차단 로컬 구현. 12테스트/analyze/Android debug PASS. 운영 전체조회 미완료, DB·배포 변경0. [상세](material-service-connection-20261022.md).

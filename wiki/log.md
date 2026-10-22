@@ -4506,3 +4506,11 @@ WEB/Native 서비스 준비중 disabled, 자료 조회 보존. 관련검사 WEB3
 ## 2026-10-22 — 자료 조회 연결
 
 기존 RPC 소비·ID 검증·비공개 필드 제외·검수 작성 차단. 12테스트/analyze/Android debug PASS. Production 미적용/운영 E2E 미완료. [상세](material-service-connection-20261022.md).
+
+## 2026-10-22 71701 적용 결과
+
+Owner의 71701-only 조건부 승인에 따라 복구 게이트 확인 후 적용. 원문 SHA256 불변. 기존 단일 트랜잭션 executor 패턴(소유자/충돌 guard,5s lock/60s statement timeout,canonical ledger 기록,PostgREST schema reload) 재사용. Function1개/comment/ACL 및 migration ledger71701만 변경.71702 미적용.
+
+사후: anon11대학128시험/468문항 메타데이터, 모두evaluationReady=false. 문항 없는 기존14시험은 함수의 기존 필터에 따라 반환되지 않음(경희8,성균관6); 시험 삭제 아님. 건국 비로그인 HTTP200,21시험58문항. authenticated 역할21시험,unknown ID빈배열. anon/authenticated privateStorage 조회0,private evidence schema접근불가. 함수 execute anon/auth=true,service_role=false.132RLS hash e0b124ac537d8b45f1ef523095176ffd 전후 동일.133테이블 중131지문 동일; 변경2개는 기존 예약작업 account_private.ops_log/dispatch_health. 기존ID·학생답안·History·Credit·결제·Storage 메타데이터 지문 유지.
+
+DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실측 필요. Provider/Credit거래/WEB배포/APP업로드/AI활성화 없음. 복구의 실제전체실행은 하지 않았으며 supported physical restore+추가논리백업/Storage 복구경로 확인과 구분한다.
