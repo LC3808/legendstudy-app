@@ -76,6 +76,58 @@ void main() {
     },
   );
 
+  testWidgets(
+    'registered review-only metadata allows selection but blocks answer writing',
+    (tester) async {
+      final data = SourceCatalog(
+        [
+          {
+            'sourceUniversityId': 'konkuk',
+            'name': '건국대학교',
+            'officialSourceUrl': 'https://example.org/',
+          },
+        ],
+        [
+          {
+            'sourceUniversityId': 'konkuk',
+            'key': 'registered',
+            'verification': 'REVIEW_REQUIRED',
+            'year': 2026,
+            'kind': 'admission',
+            'track': '인문',
+            'questions': [
+              {'key': 'q', 'label': '문제 1', 'inputMode': 'text'},
+            ],
+          },
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(catalog: Future.value(data)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('건국대학교'));
+      await tester.pumpAndSettle();
+      expect(find.text('문제 1'), findsOneWidget);
+      expect(find.text('대학 입학처 원본 자료 ↗'), findsOneWidget);
+      expect(
+        tester
+            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .onPressed,
+        isNull,
+      );
+      expect(find.byType(TextField), findsNothing);
+    },
+  );
+
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'native selection, image-first and draft restore at 360dp scale $scale',

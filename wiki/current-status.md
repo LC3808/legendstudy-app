@@ -1,5 +1,9 @@
 # Current Status
 
+## 2026-10-22 자료 사용자 조회 — LOCAL PARTIAL
+
+공통 RPC 미적용 확인, APP 메타데이터 연결·검수 문항 작성 차단 로컬 구현. 12테스트/analyze/Android debug PASS. 운영 전체조회 미완료, DB·배포 변경0. [상세](material-service-connection-20261022.md).
+
 ## 후순위 대학 CTA 로컬 변경
 
 Owner 지정16개 WEB/Native 서비스 준비중·진입 차단, 자료/42 Catalog 보존. Flutter8/WEB35 관련검사 PASS, 배포 미실행. 내일 작업은 계획만 기록. [상세](konkuk-service-20261021.md#owner-후순위-대학-cta--2026-10-22-실행--10-21-지시).

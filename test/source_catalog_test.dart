@@ -7,6 +7,43 @@ import 'package:legendstudy_app/features/essay/essay_models.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test('registered metadata preserves IDs, rejects private fields and never enables evaluation', () {
+    const uid = '77fe30b2-f693-4612-a6d3-50e8be5c8f6c';
+    const eid = '00000000-0000-4000-8000-000000000001';
+    const qid = '00000000-0000-4000-8000-000000000002';
+    final base = SourceCatalog([
+      {'sourceUniversityId': 'konkuk', 'universityId': uid},
+    ], []);
+    final row = {
+      'examId': eid,
+      'universityId': uid,
+      'year': 2026,
+      'kind': 'admission',
+      'track': '자연',
+      'title': '수시',
+      'questionCount': 1,
+      'questions': [
+        {'id': qid, 'label': '1번', 'solution': 'PRIVATE'},
+      ],
+      'evidence': 'PRIVATE',
+    };
+    final result = base.withRegistered('konkuk', [row]);
+    expect(result.exams.single['dbExamId'], eid);
+    expect(result.exams.single['evaluationReady'], false);
+    expect(result.exams.single['verification'], 'REVIEW_REQUIRED');
+    expect(jsonEncode(result.exams), isNot(contains('PRIVATE')));
+    expect(
+      () => base.withRegistered('konkuk', [row, row]),
+      throwsFormatException,
+    );
+    expect(
+      () => base.withRegistered('konkuk', [
+        {...row, 'universityId': eid},
+      ]),
+      throwsFormatException,
+    );
+    expect(result.withRegistered('konkuk', [row]).exams.length, 1);
+  });
   test('Hanyang archive fallback preserves catalog identities and exams', () {
     final raw = {
       'version': 'essay-source-registry-v1',

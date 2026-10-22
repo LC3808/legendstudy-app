@@ -51,7 +51,16 @@ class SourceCatalogPage extends ConsumerWidget {
       owner: owner,
       catalog: catalog,
       rewriteRun: rewriteRun,
-      loadCatalog: () => SourceCatalog.load(
+      loadCatalog: (university) => SourceCatalog.load(
+        university: university,
+        browse: (id) async {
+          final client = ref.read(supabaseClientProvider);
+          if (client == null) throw StateError('Catalog unavailable');
+          return client.rpc(
+            'essay_browse_catalog',
+            params: {'p_university': id},
+          );
+        },
         accessToken: ref
             .read(supabaseClientProvider)
             ?.auth
@@ -72,18 +81,27 @@ class _SourceSelection extends StatefulWidget {
   });
   final Map<String, dynamic>? rewriteRun;
   final String owner;
-  final Future<SourceCatalog> Function() loadCatalog;
+  final Future<SourceCatalog> Function(String?) loadCatalog;
   final Future<SourceCatalog>? catalog;
   @override
   State<_SourceSelection> createState() => _SourceSelectionState();
 }
 
 class _SourceSelectionState extends State<_SourceSelection> {
-  late Future<SourceCatalog> data = widget.catalog ?? widget.loadCatalog();
+  late Future<SourceCatalog> data =
+      widget.catalog ?? widget.loadCatalog(university);
   final included = <String, Set<String>>{};
   String? university, year, kind, track, examKey;
   final catalogScroll = ScrollController();
   double catalogOffset = 0;
+  void selectUniversity(String id) {
+    setState(() {
+      university = id;
+      year = kind = track = examKey = null;
+      if (widget.catalog == null) data = widget.loadCatalog(id);
+    });
+  }
+
   void backToCatalog() {
     setState(() {
       university = null;
@@ -155,7 +173,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
           if (snapshot.hasError) {
             return Center(
               child: TextButton(
-                onPressed: () => setState(() => data = widget.loadCatalog()),
+                onPressed: () =>
+                    setState(() => data = widget.loadCatalog(university)),
                 child: const Text('문항을 불러오지 못했어요. 다시 확인'),
               ),
             );
@@ -243,9 +262,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
                           ? null
                           : () {
                               catalogOffset = catalogScroll.offset;
-                              setState(
-                                () => university =
-                                    u['sourceUniversityId'] as String,
+                              selectUniversity(
+                                u['sourceUniversityId'] as String,
                               );
                             },
                       child: Padding(
@@ -287,9 +305,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
                                     TextButton(
                                       onPressed: () {
                                         catalogOffset = catalogScroll.offset;
-                                        setState(
-                                          () => university =
-                                              u['sourceUniversityId'] as String,
+                                        selectUniversity(
+                                          u['sourceUniversityId'] as String,
                                         );
                                       },
                                       child: Text(u['name'] as String),
@@ -380,6 +397,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
             children: [
               if (widget.rewriteRun != null)
                 const Text('다시 써보기 · 최초 제출 문항을 유지합니다.'),
+              if (c.browseUnavailable)
+                const Text('등록 자료 조회를 준비하고 있습니다. 현재 목록은 기존 공개 자료입니다.'),
               if (rows.isEmpty) const Text('이 대학의 시험 자료를 준비하고 있어요.'),
               choice(
                 '대학',
@@ -387,10 +406,9 @@ class _SourceSelectionState extends State<_SourceSelection> {
                 c.universities
                     .map((u) => u['sourceUniversityId'] as String)
                     .toList(),
-                (v) => setState(() {
-                  university = v;
-                  year = kind = track = examKey = null;
-                }),
+                (v) {
+                  if (v != null) selectUniversity(v);
+                },
                 labels: {
                   for (final u in c.universities)
                     u['sourceUniversityId'] as String: u['name'] as String,
@@ -439,7 +457,8 @@ class _SourceSelectionState extends State<_SourceSelection> {
                   },
                 ),
               if (exam != null) ...[
-                if (isUniversityServicePreparing(uni))
+                if (isUniversityServicePreparing(uni) ||
+                    exam['verification'] == 'REVIEW_REQUIRED')
                   for (final u in c.universities.where(
                     (u) => u['sourceUniversityId'] == uni,
                   ))
@@ -448,6 +467,10 @@ class _SourceSelectionState extends State<_SourceSelection> {
                         uri: Uri.tryParse(u['officialSourceUrl'] as String),
                         label: '대학 입학처 원본 자료 ↗',
                       ),
+                if (exam['verification'] == 'REVIEW_REQUIRED')
+                  const Text(
+                    '자료 검수 중 · 공개 승인된 문제 본문을 준비하고 있습니다. AI 첨삭은 준비 중입니다.',
+                  ),
                 const Text('문항 선택'),
                 for (final q in questions)
                   CheckboxListTile(
@@ -477,7 +500,9 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     minimumSize: const Size(48, 48),
                   ),
                   onPressed:
-                      isUniversityServicePreparing(uni) || selection.isEmpty
+                      exam['verification'] == 'REVIEW_REQUIRED' ||
+                          isUniversityServicePreparing(uni) ||
+                          selection.isEmpty
                       ? null
                       : () {
                           final u = c.universities.firstWhere(
@@ -499,7 +524,10 @@ class _SourceSelectionState extends State<_SourceSelection> {
                           );
                         },
                   child: Text(
-                    isUniversityServicePreparing(uni) ? '서비스 준비중' : '답안 작성하기',
+                    exam['verification'] == 'REVIEW_REQUIRED' ||
+                            isUniversityServicePreparing(uni)
+                        ? '서비스 준비중'
+                        : '답안 작성하기',
                   ),
                 ),
               ],

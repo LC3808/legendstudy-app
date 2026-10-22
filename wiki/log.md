@@ -4501,3 +4501,8 @@ Python34/WEB50 관련테스트·Typecheck·변경Lint PASS. Production쓰기·�
 ## 2026-10-22 — Owner 16개 대학 CTA
 
 WEB/Native 서비스 준비중 disabled, 자료 조회 보존. 관련검사 WEB35/Flutter8 PASS. Production/DB/Provider 변경 없음. [상세 및 미실행 다음 계획](konkuk-service-20261021.md#owner-후순위-대학-cta--2026-10-22-실행--10-21-지시).
+
+
+## 2026-10-22 — 자료 조회 연결
+
+기존 RPC 소비·ID 검증·비공개 필드 제외·검수 작성 차단. 12테스트/analyze/Android debug PASS. Production 미적용/운영 E2E 미완료. [상세](material-service-connection-20261022.md).
