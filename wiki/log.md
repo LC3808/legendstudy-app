@@ -4532,3 +4532,7 @@ DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실
 - P0 실제연결: 기존Worker 배포prompt누락/정책버전충돌/정적Registry신규시험누락 보완 후보.21계약PASS, 실제Provider재실행0. 운영패키지·권리·배포·계정scope 준비중, 서비스PARTIAL.
 
 - 운영연결 확대 승인: 건국 인문2번 검수패키지·Worker·scoped WEB 반영. 운영실패2건 독립검수 차단 및 Credit예약 반환. 척도 설명/공식분량 전달 최소 수정, 29계약PASS, 운영재검증 진행. [상세](phase3-service-20261022.md).
+
+## 2026-10-23 — 실제 인문 운영 E2E
+
+건국 인문2번 APP 최초→WEB 무료 재첨삭→APP 교차 History PASS(실제 Provider). Credit1/0·실패 순차감0. 운영10호출/보수비용USD0.972644. iOS Simulator 범위이며 Android/iPhone·Math·나머지 문항 미검증. 일반 공개HOLD. Math 전역OFF, 정확한 계정/leaf의 한시적 DB 예외와4행 ACTIVE 준비, Worker 인증 갱신 여부 확인 필요. [상세·복구·증거](phase3-service-20261022.md). 결제/IAP 변경 없음.

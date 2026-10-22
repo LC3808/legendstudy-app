@@ -56,3 +56,29 @@ Owner가 운영 연결·검증계정 Provider/Credit E2E를 승인하여 위의 
 - 운영 WEB 첫 평가: 독립검수에 내부1~5 충족도 척도 설명이 없어 uncertain 차단. 설명만 전달하도록 보완, 검수 guard 유지. 두 번째 평가: 공식801~1,000자 조건이 length_requirement에 전달되지 않아 피드백 누락으로 차단. 검증된 question evidence의 명시적 범위만 전달하며 산정방식·감점 추정 금지. 29개 관련 계약테스트 PASS.
 - 실패2건 모두 reserve1/release1, balance_delta0 확인. 새로운 수정 후 WEB 제출 진행 중. APP은 로그인 세션·입력 보존, WEB 실패 History 교차조회만 확인. APP Provider 제출·무료재첨삭·Math 운영E2E는 아직 미검증.
 - 비공개 백업/SQL/호출사용량/실패근거: 기존 phase3-20261022 로컬 폴더. 롤백은 scope 비활성→기존 함수/Worker/WEB 복구; 생성 이력·학생 데이터 삭제 없음.
+
+## 2026-10-23 운영 E2E 체크포인트 — 인문 교차조회 PASS, 전체 PARTIAL
+
+Owner 통합 실행 승인에 따라 실제 테스트 계정으로 수행했다. 과거 격리 품질 성공을 반복하지 않고 기존 Essay Worker·Registry·검수 패키지·Credit·History를 재사용했다.
+
+- 건국대 2026 수시 인문 2번: iOS Simulator Native 앱 최초 제출 → 실제 Provider 평가 → 결과 저장 PASS. 최초 run `8673c80d-902c-46d4-9697-08e4c7702c29`.
+- 같은 결과를 Production WEB History에서 조회하고, WEB에서 재작성·무료 재첨삭 → 결과 저장 PASS. rewrite `d1f6dcba-c6f7-45f6-ba1d-8ec13c45963a`. APP History를 다시 열어 같은 재첨삭 결과와 비교를 실제 렌더했다. 독립검수 8항목 PASS.
+- Ledger 확인: 최초 balance_delta -1 / reserved_delta 0, 재첨삭 0 / 0. 앞선 실패 3건은 각각 reserve1/release1로 순차감0. 결제 테스트·상품 변경 없음.
+- 이번 운영 Provider 10호출(평가5/독립검수5). 사용량 기반 보수 추산 USD0.972644, 캐시 할인 미반영·실청구 미확인. 이전 격리7회/USD0.6167와 별도 기록. 성공 사례를 다시 호출하지 않는다.
+- 실패 원인: 내부 1~5 척도 설명 누락, 공식 분량의 런타임 전달 누락을 최소 수정. 세 번째 실패는 독립검수 통과 후 최종 계약 차단으로 당시 정확한 원인 미기록; 원인을 확정하지 않는다. 이후 명시적 local issue 목록과 안전한 symbolic failure code 기록을 보강했다. 다음 최초/재첨삭은 실제 성공했다.
+- WEB 재작성 화면이 정적 Registry에 없는 시험을 거부하던 문제를 수정했다. 기존71701을 먼저 조회하고 정확한 exam/question ID를 확인하며, legacy 조회는 fallback이다. 관련2 tests·Typecheck·Lint·Build·Boundary PASS. LAB `26f0c2a29b4eeef23a0d522c6488276da4076842` 배포, APP/Worker `d675a84511b5a43bac6a7d0d721dc4b570a6ce32`. Worker version `c180f7e1-8620-4ef0-ab17-4e8545fe2f3e`.
+- 첫 WEB 배포의 공개 빌드 환경 누락은 즉시 기존1638d9c로 복구한 후 기존 환경으로 재빌드하여 해결했다. 이후 로그인·실제 재첨삭으로 복구 확인. 비밀값은 기록하지 않는다.
+
+### Math 운영 준비와 남은 인증 확인
+
+기존 건국 자연1번 Math14행 중 set/problem/profile/canonical solution 4행만 DRAFT→ACTIVE로 변경했다. 상태·수정시각 외 원본 JSON 동등성4/4 PASS, ID·공식내용 보존. 기존 evaluation_admission 함수에 **기존 테스트 계정·정확한 leaf·자기 attempt·2026-10-24 00:00 KST 이전** 조건의 예외만 적용했다. 전역 evaluations_enabled=false 및 함수ACL postgres-only를 재확인했다. 기존 다른 문항은 계속 차단한다. 별도 테이블/71702 적용 없음.
+
+Math Pages Provider/runtime flags는 여전히 false다. 마지막 확인 Worker JWT 만료는10월16일이며 현재 secret은 마스킹되어 갱신 여부를 확인하지 못했다. 기존 안전한 발급/갱신 경로 확인 중이며, 키 회전·service_role 대체·권한 우회 없음. Math 실제 Provider/Credit 실행은 아직0. 기존 SQL 백업·원복은 비공개 `phase3-20261022/math-operating-backup.private.json`, `math-operating-rollback.sql`. 복구는 gate 원복으로 차단하며 기존 학생답안/결과를 삭제하지 않는다.
+
+### 판정과 범위
+
+건국 인문1문항의 테스트 계정 WEB↔iOS Simulator 평가·재첨삭·History PASS. Android/iPhone의 이번 실제 첨삭은 미검증. 나머지11개 대학 문항을 서비스PASS로 확대하지 않는다. 일반 공개0/HOLD, 건국대 외10개 대학 E2E 검증문항0. Math 및 손글씨·6장 판독은 PARTIAL/미실행. 자료157시험512문항 및 기존PDF는 보존했다. 기존 readiness 표의 페이지 연결 수는 운영 가능 문항 수가 아니다.
+
+증거: 비공개 `phase3-20261022/operating-provider-usage-current.json`, 로컬 `/private/tmp/legendstudy-app-evaluation-success.png`, `/private/tmp/legendstudy-app-cross-rewrite-success.png`. 원문·답안·키는 Git에 포함하지 않는다. 경희·동국 보강HOLD, IAP는Claude담당 유지.
+
+운영 배포 목록 재확인: Production `917b22de-95ad-48b8-8995-acbd2af31c91`, source `26f0c2a`. Wrangler 기존 OAuth refresh 후 읽기 성공(직접 API의 일시적401은 토큰 갱신으로 해소). 추가 Native 화면 확인 시 Mac 잠금으로 중단했으며, 앞서 저장한 실제 성공 증거는 유지한다. Math 인증 경로와 기기 잠금 해제 후 잔여 검증 필요.
