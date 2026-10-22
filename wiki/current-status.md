@@ -159,3 +159,6 @@ Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 �
 
 ## 2026-10-23 Math 인증 복구·실제 평가
 두 전용 JWT의 실제 만료를 확인하고 기존 키로7일 갱신, 설치 후 역할 인증PASS. WEB 건국 자연1번 이미지판독·확정·실제평가·저장PASS, 최초1Credit/예약0, APP Simulator 같은결과조회PASS. Native History→Math 화면이 뒤에 열리는 문제 최소수정·회귀테스트PASS. APP 합성답안 입력 대기, 무료재첨삭/APP→WEB는 미완료이므로 전체PARTIAL. 대기 중 Math실행flagsOFF·한시DBgate/status예외원복, JWT/답안/결과보존. 기존 인문성공반복없음. [상세](phase3-service-20261022.md).
+
+## 2026-10-23 수리 재첨삭 완료
+Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→실제Provider→결과/History→WEB교차조회PASS(iOS Simulator). 최초1/재첨삭0Credit·예약0보존. Math누적3호출/보수USD0.181868. 검증종료후Math flagsOFF·DB한시예외원복,일반공개HOLD. 실기기/다른대학전체PASS아님. 상세 phase3-service-20261022 기록참조.
