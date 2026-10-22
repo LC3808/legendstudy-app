@@ -1,4 +1,6 @@
 import 'service_availability.dart';
+import 'math_gateway.dart';
+import 'math_workspace_page.dart';
 import '../../core/theme/app_theme.dart';
 import '../credits/credit_balance.dart';
 
@@ -71,7 +73,7 @@ class SourceCatalogPage extends ConsumerWidget {
   }
 }
 
-class _SourceSelection extends StatefulWidget {
+class _SourceSelection extends ConsumerStatefulWidget {
   const _SourceSelection({
     super.key,
     required this.owner,
@@ -84,10 +86,10 @@ class _SourceSelection extends StatefulWidget {
   final Future<SourceCatalog> Function(String?) loadCatalog;
   final Future<SourceCatalog>? catalog;
   @override
-  State<_SourceSelection> createState() => _SourceSelectionState();
+  ConsumerState<_SourceSelection> createState() => _SourceSelectionState();
 }
 
-class _SourceSelectionState extends State<_SourceSelection> {
+class _SourceSelectionState extends ConsumerState<_SourceSelection> {
   late Future<SourceCatalog> data =
       widget.catalog ?? widget.loadCatalog(university);
   final included = <String, Set<String>>{};
@@ -394,6 +396,24 @@ class _SourceSelectionState extends State<_SourceSelection> {
                       ? {questions.single['key'] as String}
                       : <String>{},
                 );
+          final mathLeaf =
+              widget.rewriteRun == null &&
+                  ref
+                          .watch(mathEvaluationAvailableProvider(widget.owner))
+                          .asData
+                          ?.value ==
+                      true
+              ? releasedMathSelection(
+                  ref.watch(mathCatalogProvider(widget.owner)).asData?.value ??
+                      [],
+                  exam?['dbExamId'] as String?,
+                  questions
+                      .where((q) => selection.contains(q['key']))
+                      .map((q) => q['dbQuestionId'])
+                      .whereType<String>()
+                      .toList(),
+                )
+              : null;
           final reviewDraftAvailable =
               selection.isNotEmpty &&
               questions
@@ -512,6 +532,16 @@ class _SourceSelectionState extends State<_SourceSelection> {
                   onPressed: writingBlocked || selection.isEmpty
                       ? null
                       : () {
+                          if (mathLeaf != null) {
+                            Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => MathWorkspacePage(
+                                  requestedLeafId: mathLeaf,
+                                ),
+                              ),
+                            );
+                            return;
+                          }
                           final u = c.universities.firstWhere(
                             (u) => u['sourceUniversityId'] == uni,
                           );
@@ -530,7 +560,13 @@ class _SourceSelectionState extends State<_SourceSelection> {
                             ),
                           );
                         },
-                  child: Text(writingBlocked ? '서비스 준비중' : '답안 작성하기'),
+                  child: Text(
+                    writingBlocked
+                        ? '서비스 준비중'
+                        : mathLeaf != null
+                        ? '수리논술 첨삭하기'
+                        : '답안 작성하기',
+                  ),
                 ),
               ],
             ],

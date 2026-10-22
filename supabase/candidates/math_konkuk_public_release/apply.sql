@@ -23,7 +23,7 @@ declare result jsonb;begin
  perform math_private.require_active(array[auth.uid()]);
  if p_limit not between 1 and 50 then raise invalid_parameter_value;end if;
  select coalesce(jsonb_agg(x),'[]') into result from (
- select l.id as leaf_id,l.statement,p.statement as problem_statement,s.label,l.response_format
+ select s.essay_exam_id,'cea40cf3-dc05-507a-a6eb-fd5e1e1847bb'::uuid as essay_question_id,l.id as leaf_id,l.statement,p.statement as problem_statement,s.label,l.response_format
  from public.math_subproblems l join public.math_problems p on p.id=l.problem_id join public.math_problem_sets s on s.id=p.problem_set_id
  where l.id='3bab07d3-c047-53c2-89ad-9fa20ec7b3f3'::uuid and p.state='ACTIVE' and s.state='ACTIVE' order by s.id,p.display_order,l.display_order limit p_limit) x;
  return result;

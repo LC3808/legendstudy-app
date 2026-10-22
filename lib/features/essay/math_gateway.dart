@@ -209,3 +209,26 @@ final mathEvaluationAvailableProvider = FutureProvider.autoDispose
       final gateway = ref.watch(mathGatewayProvider(owner));
       return gateway != null && await gateway.available();
     });
+
+/// Canonical server IDs only; a label or question number cannot authorize Math.
+String? releasedMathSelection(
+  List<Map<String, dynamic>> rows,
+  String? examId,
+  List<String> questionIds,
+) {
+  if (examId == null || questionIds.length != 1) return null;
+  final matches = rows.where(
+    (r) =>
+        r['essay_exam_id'] == examId &&
+        r['essay_question_id'] == questionIds.single &&
+        r['leaf_id'] is String,
+  );
+  if (matches.length != 1) return null;
+  final leaf = matches.single['leaf_id'] as String;
+  return RegExp(
+        r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+        caseSensitive: false,
+      ).hasMatch(leaf)
+      ? leaf
+      : null;
+}

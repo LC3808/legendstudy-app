@@ -135,3 +135,7 @@ Owner가 기존 성공 문항의 일반 사용자 활성화를 승인했다. 건
 현재 로컬 WEB45·Worker11 tests, Typecheck/Lint/Boundary PASS. 운영 적용·일반 사용자 확인은 후속 증거로 구분한다. 신규 Provider 호출0, Credit 변경0. 결제/IAP/앱 UI/DB 스키마 변경 없음.
 
 수리: 기존 admission/catalog 함수2개에 건국 자연1번 leaf 범위·답안 소유권 조건, 기존 runtime_control ON. 신규 schema/migration/자료/ID 변경 없음. 기존133RLS·시험237/문항700·Ledger45/Math답안14 기준 확보. 로컬 PostgreSQL 소유권/다른문항/익명/OFF 차단 PASS, WEB71 tests PASS. Gateway 문항 제한 배포 및 실측은 별도. rollback은 기존 함수·OFF 복구이며 기록 삭제 없음.
+
+운영 인문 공개 연결: Worker9df2da12, Pages69c9799c/sourcef31440e. 건국 인문2 버튼 활성·1번 HOLD 실측. 수리 서버 scope 배포a3b6ad6c/source3360076 후 실제 Auth API human ready1문항, Math ready1leaf, 비대상 false 확인. Math catalog에 기존 논술 exam/question ID를 함께 반환해 WEB·Native 선택에서 기존 Math 화면으로 연결한다. 단순 버튼 강제 활성화 없음. 현재237시험/700문항·Ledger45·Math답안14의 ID 해시 및133RLS/ACL 전후 동일. 새 Provider0/Credit0. 기존 운영 E2E 성공 재사용.
+
+대학→수리 화면 연결 누락은 코드에서 확인해 최소 수정. WEB17 선택 회귀·APP6 관련 tests/analyze PASS, WEB Build PASS. 새 Native 빌드는 기존 세션 유지해 Simulator에서 확인한다. 다른10대학 검수 패키지 및 E2E는 아직 미완료.
