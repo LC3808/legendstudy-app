@@ -7,6 +7,37 @@ import 'package:legendstudy_app/features/essay/essay_models.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test(
+    'reviewed web pages override stale registry PDF links without changing IDs',
+    () {
+      final catalog = SourceCatalog.parse(
+        jsonEncode({
+          'version': 'essay-source-registry-v1',
+          'universities': [
+            {
+              'sourceUniversityId': 'kau',
+              'officialSourceUrl': 'https://example.com/old.pdf',
+            },
+          ],
+          'exams': <Map<String, dynamic>>[],
+        }),
+      );
+      expect(catalog.universities.length, 42);
+      expect(
+        catalog.universities.singleWhere(
+          (u) => u['sourceUniversityId'] == 'kau',
+        )['officialSourceUrl'],
+        'https://ibhak.kau.ac.kr/admission/html/rolling/previous_in_exam.asp',
+      );
+      expect(
+        catalog.universities.singleWhere(
+          (u) => u['sourceUniversityId'] == 'sogang',
+        )['officialSourceUrl'],
+        isNull,
+      );
+    },
+  );
+
   test('registered metadata preserves IDs, rejects private fields and never enables evaluation', () {
     const uid = '77fe30b2-f693-4612-a6d3-50e8be5c8f6c';
     const eid = '00000000-0000-4000-8000-000000000001';

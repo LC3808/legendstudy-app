@@ -465,7 +465,7 @@ class _SourceSelectionState extends State<_SourceSelection> {
                     if (u['officialSourceUrl'] is String)
                       ExternalLinkButton(
                         uri: Uri.tryParse(u['officialSourceUrl'] as String),
-                        label: '대학 입학처 원본 자료 ↗',
+                        label: '공식 입학처 자료 확인 ↗',
                       ),
                 if (exam['verification'] == 'REVIEW_REQUIRED')
                   const Text(
@@ -571,7 +571,7 @@ class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
               if (widget.officialUrl != null)
                 ExternalLinkButton(
                   uri: Uri.tryParse(widget.officialUrl!),
-                  label: '대학 입학처 원본 자료 ↗',
+                  label: '공식 입학처 자료 확인 ↗',
                 ),
             ],
           ),
@@ -909,7 +909,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                   if (pdf == null && widget.officialUrl != null)
                     ExternalLinkButton(
                       uri: Uri.tryParse(widget.officialUrl!),
-                      label: '대학 입학처 원본 자료 ↗',
+                      label: '공식 입학처 자료 확인 ↗',
                     ),
                   ...[
                     if (widget.question['inputMode'] == 'image' ||

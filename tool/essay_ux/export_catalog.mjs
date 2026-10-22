@@ -8,7 +8,8 @@ const logos=read('src/data/university-logos.json');
 const policy=fs.readFileSync(path.join(lab,'src/lib/essay-runtime/catalog-policy.ts'),'utf8');
 const priority=[...policy.match(/priorityUniversityIds = \[(.*?)\]/s)[1].matchAll(/'([^']+)'/g)].map(m=>m[1]);
 const group=u=>priority.includes(u.sourceUniversityId)?1:['kangnam','eulji'].includes(u.sourceUniversityId)?4:u.offerings.some(o=>o.region==='서울')?2:3;
-const rows=[...source.universities].sort((a,b)=>group(a)-group(b)||(priority.indexOf(a.sourceUniversityId)<0?999:priority.indexOf(a.sourceUniversityId))-(priority.indexOf(b.sourceUniversityId)<0?999:priority.indexOf(b.sourceUniversityId))||a.name.localeCompare(b.name,'ko-KR')).map(u=>({sourceUniversityId:u.sourceUniversityId,universityId:u.universityId,name:u.name,logo:logos[u.sourceUniversityId]?.src??null,officialSourceUrl:u.researchSources?.[0]?.url??u.offerings.flatMap(o=>o.sources)[0]??null}));
+const registered=new Set(['gachon','konkuk','kyunghee','korea','dongguk','sogang','skku','sookmyung','soongsil','swu','kau']);
+const rows=[...source.universities].sort((a,b)=>group(a)-group(b)||(priority.indexOf(a.sourceUniversityId)<0?999:priority.indexOf(a.sourceUniversityId))-(priority.indexOf(b.sourceUniversityId)<0?999:priority.indexOf(b.sourceUniversityId))||a.name.localeCompare(b.name,'ko-KR')).map(u=>({sourceUniversityId:u.sourceUniversityId,universityId:u.universityId,name:u.name,logo:logos[u.sourceUniversityId]?.src??null,officialSourceUrl:u.researchSources?.[0]?.url??(registered.has(u.sourceUniversityId)?null:u.offerings.flatMap(o=>o.sources)[0]??null)}));
 const bundled=JSON.parse(fs.readFileSync('assets/university-logos/provenance.json','utf8'));
 for(const row of rows){const m=bundled[row.sourceUniversityId];row.logoAsset=m?.asset??null;row.logoDark=m?.darkSurface===true;}
 if(rows.length!==42||priority.length!==22)throw Error('Catalog identity count changed');

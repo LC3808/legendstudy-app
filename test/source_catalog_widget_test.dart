@@ -65,7 +65,7 @@ void main() {
       await tester.tap(find.text('연세대학교'));
       await tester.pumpAndSettle();
       expect(find.text('문제 1'), findsOneWidget);
-      expect(find.text('대학 입학처 원본 자료 ↗'), findsOneWidget);
+      expect(find.text('공식 입학처 자료 확인 ↗'), findsOneWidget);
       expect(
         tester
             .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
@@ -117,7 +117,7 @@ void main() {
       await tester.tap(find.text('건국대학교'));
       await tester.pumpAndSettle();
       expect(find.text('문제 1'), findsOneWidget);
-      expect(find.text('대학 입학처 원본 자료 ↗'), findsOneWidget);
+      expect(find.text('공식 입학처 자료 확인 ↗'), findsOneWidget);
       expect(
         tester
             .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))

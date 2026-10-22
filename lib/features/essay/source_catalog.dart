@@ -38,6 +38,21 @@ class SourceCatalog {
               .cast<Map<String, dynamic>>()
               .where((r) => r['sourceUniversityId'] == u['sourceUniversityId'])
               .firstOrNull,
+          // Reviewed official web-page links take precedence over stale registry PDFs.
+          if (const {
+            'gachon',
+            'konkuk',
+            'kyunghee',
+            'korea',
+            'dongguk',
+            'sogang',
+            'skku',
+            'sookmyung',
+            'soongsil',
+            'swu',
+            'kau',
+          }.contains(u['sourceUniversityId']))
+            'officialSourceUrl': u['officialSourceUrl'],
           // This university-wide URL identifies a 2025 mock essay, not the
           // selected exam. Use the official archive without changing source data.
           if (u['sourceUniversityId'] == 'hanyang') 'officialSourceUrl': 'https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI',
