@@ -440,7 +440,11 @@ class Worker:
             payload=finalize_payload(out,contract_version='1.3',local_reviews=local)
         except Unknown:
             (yield ('rpc', ('essay_timeout',args,)));return 'reconciling'
-        except (Invalid,ProviderFailure):
+        except (Invalid,ProviderFailure) as error:
+            # Store only a symbolic boundary code; never exception/request contents.
+            code=str(error)
+            safe=code if code and len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else 'REVIEW_OR_FINALIZE_REJECTED'
+            (yield ('receipt_sink', ({'component':'validation_failure','code':safe},)))
             (yield ('rpc', ('essay_finalize_failure',args,)));return 'failed'
         # Ambiguous telemetry/finalize transport never causes a second provider invocation.
         final_args=dict(args,p_output=payload)

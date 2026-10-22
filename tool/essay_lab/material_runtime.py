@@ -2,6 +2,7 @@
 No evaluation engine, automatic approval, Provider call or database write.
 The host supplies a trusted stored package + its pinned digest and approved policy.
 """
+import re
 from hashlib import sha256
 from uuid import UUID, uuid5
 from .live_worker import require,digest
@@ -68,6 +69,16 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
             criteria.append({'binding':dict(id=str(uuid5(NS,f'{version}/{question_id}/criterion/{index}')),version=version),'label':text})
     require({e['binding']['role'] for e in evidence}=={'question','passage','exam_intent','scoring_criteria'},'EVIDENCE_COVERAGE')
     require(criteria,'OFFICIAL_CRITERIA_REQUIRED')
+    # Preserve verified host metadata; otherwise surface only literal question
+    # ranges, without assuming manuscript counting rules or deductions.
+    if length_requirement is None:
+        ranges=[dict(evidence_id=e['binding']['id'], quote=m.group(0))
+                for e in evidence if e['binding']['role']=='question'
+                for m in re.finditer(r'(?<![\d,])\d[\d,]*\s*[~～–-]\s*\d[\d,]*\s*자',e['text'])]
+        if ranges:
+            length_requirement={'official_question_ranges':ranges,
+                'counting_convention':None,'scoring_tolerance':None,'deduction_rule':None,
+                'uncertainty':'명목 분량만 확인됨. 공식 글자 수 산정 방식과 분량 충족 여부는 별도 확인이 필요합니다.'}
     cache={'contract_version':'1.3','evidence':evidence,'criteria':criteria,'length_requirement':length_requirement,
            'exam_identity':dict(university_id=exam['universityId'], exam_id=exam['examId'],
                question_id=question_id, academic_year=exam['year'], exam_type=exam['kind'],

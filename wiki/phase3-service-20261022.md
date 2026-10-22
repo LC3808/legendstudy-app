@@ -44,3 +44,15 @@ WEB Typecheck/Lint/Build PASS. Flutter analyze·Android debug APK·iOS Simulator
 격리품질재실행0. 읽기전용운영확인: 한양대revision17/정책존재, 건국인문revision1/패키지·정책없음. Worker staging은76시험정적Registry에건국신규시험누락; v3prompt만복사해현재v6 import실패가능. 기존stage자산복사와trusted Registry옵션, 서버snapshot+배포exact allowlist에의한기존prompt선택을최소수정. 기존한양대v3/기본v6보존, 후보v7별도승인필요. 모델·정책불일치차단.21개오프라인계약검증PASS, 새Provider0.
 
 건국대표공식cache를기존material runtime9연결/5기준으로투영PASS; 운영생성digest/권리/시험내다른문항검수보존은미완료. 상세비공개 `phase3-20261022/operating-connection-plan.md`와`operating-candidate-report.json`. Worker후보77시험은기존76시험보존. 아직운영쓰기·배포·Credit0. 실제운영E2E미완료. 새로운엔진/테이블/71702없음.
+
+## 2026-10-22 운영 연결 승인 후 (진행 중)
+
+Owner가 운영 연결·검증계정 Provider/Credit E2E를 승인하여 위의 “운영 변경 없음”은 이전 체크포인트가 됨. 일반 전체 공개는 유지 HOLD.
+
+- 기존 runtime 함수 3개에 검수 revision으로 고정한 건국 인문2번만 연결. 기존 exam/question·다른 문항·18개 검수 매핑 보존. revision2에 9개 공식자료/5기준 연결. ACL·RLS 유지. 한양대 기존 정책 보존.71702 없음.
+- 기존 Worker prompt 포함/Registry77시험/정책별 정확한 prompt binding 반영. 일반 공개 대신 기존 테스트 계정·시험·요청키 scope만 Pages에 허용. Native도 서버가 승인한 question ID로만 제출 허용.
+- WEB d0107bc 배포: 서버 승인 문항 제출, 실패 확정 요청의 명시적 재준비. 실패한 이력은 지우지 않으며 처리 중인 요청은 재제출하지 않음.
+- 첫 운영 배포에서 공개 빌드 환경변수 누락을 발견해 기존1638d9c로 즉시 복구. 보존한 Production public 환경으로 재빌드·재배포하여 로그인 복구. 비밀값/Binding 변경 없음.
+- 운영 WEB 첫 평가: 독립검수에 내부1~5 충족도 척도 설명이 없어 uncertain 차단. 설명만 전달하도록 보완, 검수 guard 유지. 두 번째 평가: 공식801~1,000자 조건이 length_requirement에 전달되지 않아 피드백 누락으로 차단. 검증된 question evidence의 명시적 범위만 전달하며 산정방식·감점 추정 금지. 29개 관련 계약테스트 PASS.
+- 실패2건 모두 reserve1/release1, balance_delta0 확인. 새로운 수정 후 WEB 제출 진행 중. APP은 로그인 세션·입력 보존, WEB 실패 History 교차조회만 확인. APP Provider 제출·무료재첨삭·Math 운영E2E는 아직 미검증.
+- 비공개 백업/SQL/호출사용량/실패근거: 기존 phase3-20261022 로컬 폴더. 롤백은 scope 비활성→기존 함수/Worker/WEB 복구; 생성 이력·학생 데이터 삭제 없음.

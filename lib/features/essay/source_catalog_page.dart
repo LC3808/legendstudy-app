@@ -1121,7 +1121,29 @@ class _ExamSubmit extends ConsumerStatefulWidget {
 }
 
 class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
-  bool ready = false, busy = false, polling = false, eligibilityLoaded = false;
+  bool serverReady = false,
+      busy = false,
+      polling = false,
+      eligibilityLoaded = false;
+  Set<String> admittedQuestions = {};
+  bool get ready {
+    if (!serverReady || widget.included.isEmpty) return false;
+    if (widget.exam['verification'] != 'REVIEW_REQUIRED' &&
+        widget.exam['evaluationReady'] != false) {
+      return true;
+    }
+    final questions = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>();
+    return widget.included.every(
+      (key) => questions.any(
+        (q) =>
+            q['key'] == key &&
+            q['dbQuestionId'] is String &&
+            admittedQuestions.contains(q['dbQuestionId']),
+      ),
+    );
+  }
+
   String notice = '';
   String? parentId;
   String? get previousPaidId => widget.rewriteRun?['_additional'] == true
@@ -1218,7 +1240,14 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         'action': 'availability',
         'examId': widget.exam['dbExamId'],
       });
-      if (mounted) setState(() => ready = result?['ready'] == true);
+      if (mounted) {
+        setState(() {
+          serverReady = result?['ready'] == true;
+          admittedQuestions = (result?['questionIds'] as List? ?? [])
+              .whereType<String>()
+              .toSet();
+        });
+      }
     } catch (_) {
       // Availability failure leaves execution closed, but must not hide eligibility.
     }
@@ -1461,7 +1490,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
               ? '처리 중…'
               : ready
               ? '첨삭 요청'
-              : '첨삭 실행 대기',
+              : '첨삭 서비스 준비 중',
         ),
       ),
       if (parentId != null && eligibilityLoaded && !eligibleRewrite)
@@ -1588,16 +1617,12 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
             onPressed: () => Navigator.pop(context),
             child: const Text('답안 수정'),
           ),
-          if (widget.exam['verification'] == 'REVIEW_REQUIRED' ||
-              widget.exam['evaluationReady'] == false)
-            const FilledButton(onPressed: null, child: Text('첨삭 서비스 준비 중'))
-          else
-            _ExamSubmit(
-              owner: widget.owner,
-              exam: widget.exam,
-              included: selected,
-              rewriteRun: widget.rewriteRun,
-            ),
+          _ExamSubmit(
+            owner: widget.owner,
+            exam: widget.exam,
+            included: selected,
+            rewriteRun: widget.rewriteRun,
+          ),
         ],
       ),
     ),

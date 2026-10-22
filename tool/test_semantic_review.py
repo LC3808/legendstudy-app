@@ -19,6 +19,10 @@ class ReviewTests(unittest.IsolatedAsyncioTestCase):
  async def test_separate_review_and_bound_receipt(self):
   r,v,o,seen,audit,_=self.fixture();receipt=await r('eval',v,o)
   self.assertEqual(len(seen),1);self.assertEqual(len(audit),1)
+  self.assertEqual(seen[0]['local_issue_keys_to_review'],['local-1'])
+  self.assertEqual(audit[0]['expected_local_issue_keys'],['local-1'])
+  self.assertIn('not an official university score',seen[0]['report_contract']['dimension_level']['meaning'])
+  self.assertIs(seen[0]['package'],v)
   self.assertNotIn('ssssssss',json.dumps(seen))
   SignedReview({'test-reviewer':b's'*32},clock=lambda:100).verify(receipt,'eval',v,o)
   with self.assertRaises(Invalid):SignedReview({'test-reviewer':b's'*32},clock=lambda:100).verify(receipt,'other',v,o)

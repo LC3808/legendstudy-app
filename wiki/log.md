@@ -4530,3 +4530,5 @@ DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실
 - PHASE3 승인된 격리검증 총7회/$0.6167 종료: 세 인문 실패사례 재검증PASS, 운영E2E와구분. 최종Android/iOS빌드 및로그인Simulator작성진입PASS. Production/Credit변경0.
 
 - P0 실제연결: 기존Worker 배포prompt누락/정책버전충돌/정적Registry신규시험누락 보완 후보.21계약PASS, 실제Provider재실행0. 운영패키지·권리·배포·계정scope 준비중, 서비스PARTIAL.
+
+- 운영연결 확대 승인: 건국 인문2번 검수패키지·Worker·scoped WEB 반영. 운영실패2건 독립검수 차단 및 Credit예약 반환. 척도 설명/공식분량 전달 최소 수정, 29계약PASS, 운영재검증 진행. [상세](phase3-service-20261022.md).

@@ -65,7 +65,7 @@ class Default(WorkerEntrypoint):
         source=runtime.review_source
         key_bound=bool(getattr(source,'key',None) and runtime.reviewer.keys.get(getattr(source,'reviewer_id',''))==source.key)
         if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model':require(key_bound,'REVIEW_KEY_BINDING_REQUIRED')
-        return {'ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
+        return {'ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'question_ids':sorted(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
 
     async def fetch(self,request):
         headers={'Cache-Control':'no-store'}
