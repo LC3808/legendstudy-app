@@ -133,3 +133,5 @@ Owner가 기존 성공 문항의 일반 사용자 활성화를 승인했다. 건
 인문 최소 변경: Gateway의 서버 설정 `ESSAY_PUBLIC_EXAMS`에 명시된 시험만 실제 Auth 사용자를 허용한다. Worker도 같은 시험 범위와 기존 DB runtime policy/공식 패키지/소유권을 검증한다. Math·운영 진단 allowlist는 그대로다. 최초 공개 대상은 E2E 통과한 건국 인문 시험의 준비된 문항2뿐이다. 다른 문항은 DB 패키지 계약으로 HOLD. E2E 임시 고정 requestKey는 공개 경로에서 제거하고 기존 사용자 idempotency를 재사용한다.
 
 현재 로컬 WEB45·Worker11 tests, Typecheck/Lint/Boundary PASS. 운영 적용·일반 사용자 확인은 후속 증거로 구분한다. 신규 Provider 호출0, Credit 변경0. 결제/IAP/앱 UI/DB 스키마 변경 없음.
+
+수리: 기존 admission/catalog 함수2개에 건국 자연1번 leaf 범위·답안 소유권 조건, 기존 runtime_control ON. 신규 schema/migration/자료/ID 변경 없음. 기존133RLS·시험237/문항700·Ledger45/Math답안14 기준 확보. 로컬 PostgreSQL 소유권/다른문항/익명/OFF 차단 PASS, WEB71 tests PASS. Gateway 문항 제한 배포 및 실측은 별도. rollback은 기존 함수·OFF 복구이며 기록 삭제 없음.
