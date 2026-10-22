@@ -38,3 +38,9 @@ Flutter 관련58tests/analyze PASS. Python기존Worker/공식입력/기준ID계�
 WEB Typecheck/Lint/Build PASS. Flutter analyze·Android debug APK·iOS Simulator 정상앱 빌드 PASS. 로그인 유지 iOS Simulator에서 실제71701 건국 인문2번→기존Native 작성화면 진입 PASS; 제출/계정답안쓰기 없음. 테스트 후 일반 검증앱을 삭제 없이 복원. 새 코드 iPhone실기기/운영History E2E는 미검증.
 
 추가 두 호출 원장: `approved-repair-call-ledger.json`; 원래5회 원장보존. 재작성 응답의 정확한 기준ID·기존 상호성 문제 resolved·공식 분량 확인유보 안내 확인, 독립검수8항목PASS. 세 합성사례의 격리 품질검증만PASS이며11개대학 서비스PASS아님.
+
+## Owner P0 후속 — 실제 연결 후보
+
+격리품질재실행0. 읽기전용운영확인: 한양대revision17/정책존재, 건국인문revision1/패키지·정책없음. Worker staging은76시험정적Registry에건국신규시험누락; v3prompt만복사해현재v6 import실패가능. 기존stage자산복사와trusted Registry옵션, 서버snapshot+배포exact allowlist에의한기존prompt선택을최소수정. 기존한양대v3/기본v6보존, 후보v7별도승인필요. 모델·정책불일치차단.21개오프라인계약검증PASS, 새Provider0.
+
+건국대표공식cache를기존material runtime9연결/5기준으로투영PASS; 운영생성digest/권리/시험내다른문항검수보존은미완료. 상세비공개 `phase3-20261022/operating-connection-plan.md`와`operating-candidate-report.json`. Worker후보77시험은기존76시험보존. 아직운영쓰기·배포·Credit0. 실제운영E2E미완료. 새로운엔진/테이블/71702없음.

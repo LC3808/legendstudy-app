@@ -2,7 +2,7 @@
 
 ## 2026-10-22 PHASE 3 — 로컬 연결 PARTIAL / 일반 공개 HOLD
 
-Owner iPhone 최신시험·PDF PASS 후 PHASE3 승인.157시험512문항/승인485문항153PDF 보존. Native 검수문항 기기초안 작성, 기존 Math leaf 고정·WEB 상태조회 연결. 평가자료430문항2772페이지 연결 확인; 검수된 운영 패키지·정책 미설정. Provider 추가 검증/실패 명세는 [PHASE3 기록](phase3-service-20261022.md). Production/Store/실Credit 변경 없음.
+Owner iPhone 최신시험·PDF PASS 후 PHASE3 승인.157시험512문항/승인485문항153PDF 보존. Native 검수문항 기기초안 작성, 기존 Math leaf 고정·WEB 상태조회 연결. 평가자료430문항2772페이지 연결 확인; 검수된 운영 패키지·정책 미설정. Worker배포prompt/정책라우팅/Registry누락 로컬보완(21검사PASS). 운영패키지갱신은미완료. Provider 검증/실패 명세는 [PHASE3 기록](phase3-service-20261022.md). Production/Store/실Credit 변경 없음.
 
 71701 적용 PASS·71702 미적용 보존. 자료/PDF 실기기 근거는 [Native 기록](native-material-pdf-20261022.md), 복구·SQL 근거는 [기존 계획](../supabase/verification/essay_service_contracts/production-plan.md). 이전 AI착수 금지는 최신 Owner PHASE3 승인으로 대체; 일반 활성화는 여전히 별도 승인.
 

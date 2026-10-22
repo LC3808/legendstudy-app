@@ -4528,3 +4528,5 @@ DB계약 PASS. 실제 WEB/APP 전체화면 PASS는 아님; 별도 배포/앱 실
 - 2026-10-22 PHASE3: Owner APP acceptance→local existing Essay/Math reuse.512q readonly readiness audit, native local drafts/HOLD,100s status-only wait. Actual Provider bounded approval and criterion-ID rejection/fix; [evidence and gates](phase3-service-20261022.md). Production/realCredit/Store unchanged.
 
 - PHASE3 승인된 격리검증 총7회/$0.6167 종료: 세 인문 실패사례 재검증PASS, 운영E2E와구분. 최종Android/iOS빌드 및로그인Simulator작성진입PASS. Production/Credit변경0.
+
+- P0 실제연결: 기존Worker 배포prompt누락/정책버전충돌/정적Registry신규시험누락 보완 후보.21계약PASS, 실제Provider재실행0. 운영패키지·권리·배포·계정scope 준비중, 서비스PARTIAL.

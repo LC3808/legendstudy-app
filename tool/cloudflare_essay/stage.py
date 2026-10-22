@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,shutil,json,ast
 ROOT=Path(__file__).resolve().parents[2]
 def main():
- p=argparse.ArgumentParser();p.add_argument('directory',type=Path);args=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('directory',type=Path);p.add_argument('--registry',type=Path,default=ROOT/'supabase/reviews/essay-source-registration/manifest.json');args=p.parse_args()
  target=args.directory.resolve();target.mkdir(parents=True,exist_ok=False)
  source=target/'src';source.mkdir();package=source/'essay_lab';package.mkdir()
  # Build copies are disposable; there is one maintained Runtime/Registry source.
@@ -20,9 +20,17 @@ def main():
     pending.append(node.module.split('.')[0])
  (package/'__init__.py').write_text('')
  (package/'prompts').mkdir()
- shutil.copy2(ROOT/'tool/essay_lab/prompts/scaffolding-1.3-v3.txt',package/'prompts/scaffolding-1.3-v3.txt')
+ # Keep pinned historical policies and the current module import available.
+ # Packaging assets never selects or activates a prompt version.
+ for prompt in sorted((ROOT/'tool/essay_lab/prompts').glob('*.txt')):
+  shutil.copy2(prompt,package/'prompts'/prompt.name)
  shutil.copy2(Path(__file__).with_name('entry.py'),source/'entry.py')
- registry=json.loads((ROOT/'supabase/reviews/essay-source-registration/manifest.json').read_text())
+ # Explicit local trusted metadata manifest; never fetched from student input.
+ registry=json.loads(args.registry.read_text())
+ ids=[exam['examId'] for exam in registry['exams']]
+ if len(ids)!=len(set(ids)):raise ValueError('DUPLICATE_EXAM_ID')
+ questions=[q['id'] for exam in registry['exams'] for q in exam['questions']]
+ if len(questions)!=len(set(questions)):raise ValueError('DUPLICATE_QUESTION_ID')
  (source/'registry_asset.py').write_text('REGISTRY = '+repr(registry)+'\n')
  (target/'package.json').write_text(json.dumps({'private':True,'devDependencies':{'wrangler':'4.150.0'}})+'\n')
  (target/'pyproject.toml').write_text('[project]\nname="legendstudy-essay-worker"\nversion="0.1.0"\nrequires-python=">=3.13"\ndependencies=[]\n[dependency-groups]\ndev=["workers-py==1.17.7", "workers-runtime-sdk==1.9.3"]\n')

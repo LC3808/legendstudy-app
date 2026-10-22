@@ -7,7 +7,7 @@ from workers import WorkerEntrypoint,Response,Request
 from essay_lab.live_worker import require,SignedReview,Unknown
 from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport,fetch_bytes
 from essay_lab.cloudflare_runtime import CloudflareExamRuntime
-from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit
+from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit,configured_binding
 from essay_lab.material_runtime import load_reviewed_material
 from essay_lab.semantic_review import openai_review
 from essay_lab.live_worker import digest
@@ -19,13 +19,19 @@ class Default(WorkerEntrypoint):
         return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
             worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS))
 
-    def configuration(self,transport):
+    def configuration(self,transport,binding=None):
         # No synthetic review callback or automatic signing fallback.
         mode=getattr(self.env,'ESSAY_REVIEW_MODE','service')
         require(mode in ('service','independent_model'),'REVIEW_MODE_REQUIRED')
-        binding=json.loads(self.env.ESSAY_PROVIDER_BINDING)
-        provider=reviewed_openai(self.env.ESSAY_PROVIDER_KEY,binding,transport=provider_transport)
-        provider.evaluate=provider.evaluate_async
+        legacy=json.loads(self.env.ESSAY_PROVIDER_BINDING)
+        raw=getattr(self.env,'ESSAY_PROVIDER_BINDINGS',None)
+        approved=json.loads(raw) if raw else None
+        def provider_for(policy):
+            selected=configured_binding(policy,legacy,approved)
+            result=reviewed_openai(self.env.ESSAY_PROVIDER_KEY,selected,transport=provider_transport)
+            result.evaluate=result.evaluate_async
+            return result
+        provider=provider_for(legacy if binding is None else binding)
         keys={k:v.encode() for k,v in json.loads(self.env.ESSAY_REVIEW_VERIFY_KEYS).items()}
         require(keys,'REVIEWER_BLOCKED')
         async def review(evaluation,value,output):
@@ -45,13 +51,13 @@ class Default(WorkerEntrypoint):
             raise Unknown('RECEIPT_PERSISTENCE_REQUIRED')
         return CloudflareExamRuntime(rpc=transport.rpc,registry=REGISTRY,provider=provider,
             reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,
-            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true')
+            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for)
 
     async def admission(self,t,subject,exam):
         policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=exam))
         pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=exam,p_digest=policy['package_digest']))
         hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
-        runtime=self.configuration(t)
+        runtime=self.configuration(t,policy['binding'])
         for q in hosted.values():
             worker=ReviewedRuntimeWorker(t.rpc,runtime.provider,q.frozen_cache,runtime.reviewer,runtime.review_source,runtime.receipt_sink,lambda _:None,
                 permit=RuntimePermit('preflight','unused',digest(q.frozen_cache),policy['binding'],int(time.time()+90),True))

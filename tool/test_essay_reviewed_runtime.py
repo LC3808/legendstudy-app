@@ -113,4 +113,21 @@ class RuntimeTests(unittest.TestCase):
         w,calls,requests,saved,*_=self.fixture();w.review_source=lambda *a:{}
         self.assertEqual(w.execute('evaluation'),'failed');self.assertEqual(saved,[])
 
+class PolicyRoutingTests(unittest.TestCase):
+    def test_exact_approved_binding_preserves_legacy_and_rejects_unknown(self):
+        from tool.essay_lab.reviewed_runtime import configured_binding
+        legacy=dict(provider='openai',model='fixture',model_version='fixture',prompt_version='scaffolding-1.3-v3',contract_version='1.3',policy_version='legacy')
+        candidate=dict(legacy,prompt_version='scaffolding-1.3-v7',policy_version='candidate')
+        self.assertEqual(configured_binding(legacy,legacy),legacy)
+        with self.assertRaises(Invalid): configured_binding(candidate,legacy)
+        self.assertEqual(configured_binding(candidate,legacy,[legacy,candidate]),candidate)
+        with self.assertRaises(Invalid): configured_binding(dict(candidate,model='unapproved'),legacy,[legacy,candidate])
+        for binding in (legacy,candidate):
+            provider=reviewed_openai('fixture-only',binding,transport=lambda *args: self.fail('network forbidden'))
+            self.assertEqual(provider.prompt_version,binding['prompt_version'])
+            self.assertEqual(provider.binding,binding)
+            from pathlib import Path
+            expected=Path(__file__).parent/'essay_lab/prompts'/f"{binding['prompt_version']}.txt"
+            self.assertEqual(provider.instructions,expected.read_text())
+
 if __name__=='__main__':unittest.main()

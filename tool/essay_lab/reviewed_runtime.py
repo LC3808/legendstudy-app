@@ -6,12 +6,23 @@ Missing provider-bound DB claims, reviewed evidence or independent reviewer fail
 No default model, key generation, publication, scheduler or automatic provider retry.
 """
 from copy import deepcopy
+from pathlib import Path
 from dataclasses import dataclass
 import time
 from urllib.request import build_opener,HTTPRedirectHandler
 from .live_worker import ProviderFailure
 from .live_worker import Worker, SignedReview, OpenAIResponses, output_schema, digest, provider_binding, require
 from .positive_learning import PROMPT, PROMPT_VERSION
+
+SUPPORTED_PROMPTS = frozenset({"scaffolding-1.3-v3", "scaffolding-1.3-v6", "scaffolding-1.3-v7"})
+
+def configured_binding(requested, legacy, approved=None):
+    """Exact server deployment allowlist; never authorize a client-selected model."""
+    choices = [legacy] if approved is None else approved
+    require(isinstance(choices, list) and all(isinstance(x, dict) for x in choices), "INVALID_PROVIDER_BINDINGS")
+    require(requested in choices, "PROVIDER_BINDING_NOT_CONFIGURED")
+    return deepcopy(requested)
+
 
 
 @dataclass(frozen=True)
@@ -39,7 +50,7 @@ class ReviewedRuntimeWorker(Worker):
                 'RUNTIME_PROVIDER_REQUIRED')
         require(p.binding.get('provider') not in (None,'unconfigured','synthetic'), 'PROVIDER_BLOCKED')
         require(p.binding==getattr(self.provider,'binding',None), 'ADAPTER_BINDING_MISMATCH')
-        require(p.binding.get('prompt_version')==PROMPT_VERSION and getattr(self.provider,'prompt_version',None)==PROMPT_VERSION, 'CURRENT_PROMPT_REQUIRED')
+        require(p.binding.get('prompt_version') in SUPPORTED_PROMPTS and getattr(self.provider,'prompt_version',None)==p.binding.get('prompt_version'), 'CURRENT_PROMPT_REQUIRED')
         require(isinstance(self.reviewer,SignedReview) and bool(self.reviewer.keys), 'REVIEWER_BLOCKED')
         require(all(callable(x) for x in [self.review_source,self.receipt_sink,self.checkpoint]),
                 'PERSISTENCE_BOUNDARY_REQUIRED')
@@ -92,11 +103,13 @@ def _provider_transport(request, timeout):
 
 
 def reviewed_openai(key, binding, **transport_options):
-    """Use existing current v3 positive-learning prompt; no fallback to historical v1."""
-    require(binding.get('provider')=='openai' and binding.get('prompt_version')==PROMPT_VERSION
+    """Pin an existing bundled prompt to the trusted approved policy, without fallback."""
+    require(binding.get('provider')=='openai' and binding.get('prompt_version') in SUPPORTED_PROMPTS
             and binding.get('contract_version')=='1.3', 'CURRENT_PROMPT_REQUIRED')
     transport_options.setdefault('transport',_provider_transport)
-    provider=OpenAIResponses(key,binding['model'],output_schema(),instructions=PROMPT,
-                            prompt_version=PROMPT_VERSION,**transport_options)
+    version=binding['prompt_version']
+    instructions=(Path(__file__).parent/'prompts'/f'{version}.txt').read_text()
+    provider=OpenAIResponses(key,binding['model'],output_schema(),instructions=instructions,
+                            prompt_version=version,**transport_options)
     provider.binding=deepcopy(binding)
     return provider

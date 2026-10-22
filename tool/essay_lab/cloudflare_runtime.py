@@ -11,10 +11,11 @@ from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
 
 class CloudflareExamRuntime:
-    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False):
+    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None):
         self.rpc=rpc;self.registry=registry;self.provider=provider;self.reviewer=reviewer
         self.review_source=review_source;self.receipt_sink=receipt_sink
         self.allowed=set(allowed_subjects);self.enabled=enabled
+        self.provider_factory=provider_factory
 
     async def consume(self,message):
         # Queue carries identity only, never JWT/answers/Package/provider choice.
@@ -27,6 +28,7 @@ class CloudflareExamRuntime:
         require(claim['subject_id']==subject and claim['snapshot']['ownerId']==subject,'EXAM_ACCESS_DENIED')
         journal=DatabaseCheckpoint(self.rpc,subject,run,claim['lease_token'])
         policy=claim['snapshot']['runtime']
+        provider=self.provider_factory(policy['binding']) if self.provider_factory else self.provider
         pkg=await self.rpc('essay_material_runtime_package',dict(p_exam=claim['exam_id'],p_digest=policy['package_digest']))
         questions,caches=prepare_claimed_material(claim,pkg,self.registry)
         require(len(questions)==1,'EXAM_SYNTHESIS_REQUIRED') # First Hanyang exam; no fabricated multi-question synthesis.
@@ -44,7 +46,7 @@ class CloudflareExamRuntime:
         def build(channel,checkpoint):
             q=next(q for q in questions if q['evaluationId']==channel.evaluation_id)
             cache=caches[q['questionId']]
-            return ReviewedRuntimeWorker(channel,self.provider,cache,self.reviewer,review,persist_receipt,checkpoint,
+            return ReviewedRuntimeWorker(channel,provider,cache,self.reviewer,review,persist_receipt,checkpoint,
                 permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True))
         for q in questions:
             require(q['rubricVersion']==version and q['evidenceVersion']==version,'REVIEWED_PACKAGE_PIN_REQUIRED')
