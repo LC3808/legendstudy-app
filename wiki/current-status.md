@@ -8,11 +8,9 @@
 
 서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-**Secret5개 빈 값 확정:** Production 빌드 전용 진단0cc2b617에서 Essay Registry/Service Token·Math Evaluation/Extraction/Provider 모두 EMPTY_VALUE. HTTP 호출 전 설정실패로, 401로 표현하지 않는다. 진단은 exit73으로 배포 차단; 정상 WEB a8796fb4 및 pnpm build 복원·보존 확인. Owner에게 확인된5개만 기존값 복원 요청, 카카오·토스·결제는 제외. Worker615f4825의 서울여 공개범위 추가는 유지하나 서울여 실제1/0Credit·신규History·WEB/APP는 미완료. Provider0/DB변경0. [진단 근거·복구순서](essay-p0-direct-execution-20261023.md#current-project-secret-diagnosis--2026-10-23-2111-kst).
+**JWT3개 복구 인증 PASS:** Owner가30일 JWT3개·기존 Service Token 등록 완료, Provider 키 유지 보고. Production 빌드 전용7c06ee59에서 Essay Registry HTTP200, Math Evaluation/Extraction HTTP400·22023(인증 후 입력검사) 확인. Service Token은 비어 있지 않으나 Worker 실제 인증 미검증. **현재 프로젝트 MATH_PROVIDER_API_KEY는 여전히 EMPTY_VALUE**; 현재 정상 배포 키의 실패를 뜻하지 않는다. exit73 배포차단, 정상 WEB a8796fb4·pnpm build 보존. 신규 WEB 배포는 진행하지 않았다. DB/Credit/History 변경·Provider 생성0. [사후검사](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).
 
-Owner 보유 기존 서명키로 JWT3개 재발급 절차 준비: 기존 로컬 도구 재사용, 역할/issuer/audience/HS256/유효기간 유지, 합성검사4PASS. 실제 발급·등록0. [Owner 명령·클립보드 등록·검증](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Service Token은 보관원문 유지, Math Provider key는 별도 기존값 필요.
-
-JWT30일 후보 검토: 코드상7일상한 없음, 실제30일 인증은 Owner 발급 후 확인 필요. 마지막 성공 토큰 Math만료10/30 00:30:23KST·Essay2027/10/14. eyJ토큰은 서명키가 아니다. 만료7일 전 갱신/실패알림/롤백은 설계만 완료, 자동화 미설치. [검토·실행범위](essay-jwt-lifecycle-review-20261023.md).
+Owner30일 복구 승인, 기존 issuer/role/HS256 계약 유지. JWT 실제 TTL 메타데이터는 이번 빌드 검사에서 출력/재확인하지 않았다. 자동갱신/만료알림은 설계만 완료, 미설치. [Owner 절차](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Worker615f4825 서울여 공개범위 유지; 서울여1/0Credit·신규History·WEB/APP와 전체512연결은 미완료.
 
 ## Product state
 

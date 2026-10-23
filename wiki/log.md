@@ -4679,3 +4679,11 @@ Existing local issuer reused for Essay and exact Math roles; claims/signing cont
 ## 2026-10-23 — JWT30day review, no operational change
 
 Success-log expiry/issuer/alg verified;30day override candidate preserves non-time claims,5synthetic testsPASS. Existing normal WEB/secrets unchanged; signing/DB/Provider0. Automation remains proposed, Owner registration retained. [Review and Owner actions](essay-jwt-lifecycle-review-20261023.md).
+
+## 2026-10-23 — Owner registration and independent JWT authentication
+
+Owner30day recovery approved, JWT3/Service Token registered, Provider unchanged.
+Build-only7c06ee59: Registry200; Math400/22023 each; Service nonempty but auth pending;
+Provider stillEMPTY_VALUE. Normal WEBa8796fb4 and pnpm build preserved, no deployment
+promotion/Worker/DB/Credit/History changes or Provider generation. Probe3testsPASS.
+[Evidence and remaining scope](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).

@@ -97,3 +97,30 @@ exp/iat 또는7일/30일 TTL 상수 검사가 발견되지 않았다. 이는 검
 - [Supabase Signing Keys](https://supabase.com/docs/guides/auth/signing-keys): Legacy shared secret의 영향 범위.
 
 Production DB·Credit·History 변경0, 키 생성/회전0, 실제JWT발급0, Secret변경0, WEB배포0.
+
+## Owner registration recheck
+
+2026-10-23 21:41 KST. Owner approved30day recovery and reported JWT3 + existing
+Service Token registered; Provider key unchanged. Build-only Production diagnostic
+`7c06ee59-ca09-470d-95b9-85b2924b568e` independently confirms:
+
+|Secret|Result|HTTP|
+|---|---|---|
+|ESSAY_REGISTRY_WORKER_JWT|AUTH_ACCEPTED|200|
+|MATH_EVALUATION_WORKER_JWT|AUTH_ACCEPTED; null-input validation reached|400 / 22023|
+|MATH_EXTRACTION_WORKER_JWT|AUTH_ACCEPTED; null-input validation reached|400 / 22023|
+|ESSAY_WORKER_SERVICE_TOKEN|Nonempty; actual service-binding authentication pending|not called|
+|MATH_PROVIDER_API_KEY|EMPTY_VALUE in current project build environment|not called|
+
+The existing canonical WEB `a8796fb4-cf86-4572-8822-6deb5702cac7` was preserved
+before/after. Only build_command was temporarily changed and restored to `pnpm build`;
+no env_vars PATCH, no secret write, no Worker change. Diagnostic always exits73,
+so its build failure is intentional and no serving deployment was promoted.
+Three probe tests PASS. No Provider generation or DB/Credit/History writes.
+JWT role/TTL metadata and cross-role denial were not independently measured in this
+build probe; do not present this as full E2E or Service Token PASS.
+Current project Provider key empty does not invalidate the healthy serving deployment's
+separate binding. Preserve that deployment; do not rotate/delete its key. Restoring a
+usable next-deployment Provider binding and checking service authentication remain
+required before promotion and SWU ordinary-account E2E.
+[Sanitized receipt](../tool/cloudflare_essay/secret-auth-recheck-result-20261023.json).
