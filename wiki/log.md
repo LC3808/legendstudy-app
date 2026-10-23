@@ -4590,3 +4590,30 @@ Owner전략18d5b70확인, 기존Essay/Math/DB계약SELECT대조. Unified Wiki표
 
 ## 2026-10-23 Owner 평가 아키텍처 우선순위 수정
 대학 기본체계→상속→예외 순서. 기존 resolver에 대학/유형/연도 상속 추가, 숙명 인문1기본/10문항 연결,47tests PASS. 512독립체계 제작 금지,상속≠평가준비. 추가Provider/Production0. [상세](university-evaluation-profile-phase2.md).
+
+## 2026-10-23 — IAP Production PHASE1 read-only checkpoint
+
+Exact Owner path/branch confirmed, clean baseline. Production v17/JWTtrue,
+IAP grants0, inner grant ACL available, refund stack absent; last24h21 verifier
+requests all503, v17 UNCONFIGURED2/Error2. Deployed/local source drift verified.
+Payment migrations/RPCs present; older NOT_APPLIED statements are historical.
+Specific failure cause/activation unresolved, PHASE1 PARTIAL. No runtime mutation;
+only local Wiki updated. [Evidence and boundaries](iap-production-read-only-20261023.md).
+
+
+## 2026-10-23 — Owner six-incident Credit/IAP READ-ONLY
+
+Production Google settings2 absent; IAP_ENABLED=true. Signup lifecycle active,
+NULL benefit deliveries2/eligible pending0; account creation lazy, not a universal
+signup trigger failure. School cache miss1. Admin observed RPCs200; iOS Error
+cause unresolved. Unified remote main and active Oct23 authority, Claude handoff,
+Grok Oct12 read. Only own Wiki modified, no Production/other worktree writes.
+[Six-incident evidence and PHASE2 boundary](iap-production-read-only-20261023.md#owner-six-incident-investigation--2026-10-23-follow-up).
+
+## 2026-10-23 — IAP 최신 이관 및 실구매 시각 대조
+
+Owner Master에 따라 payment-recovery 전용 Worktree로 분리. Unified Oct23 Claude/Grok brief 읽음. iOS21:04:48 503, Android11:21:58 UNCONFIGURED/503 확인(거래ID 연결 미확정). Apple WebCrypto 로컬초안·합성 Edge 검증 진행; 운영/첨삭 변경0. [상세](iap-production-read-only-20261023.md).
+
+## 2026-10-23 — 기존 Google 거래 API 확인·Apple 확장검증
+
+Google11:21/12:31 두 주문 TEST·환불·ACK0/소비0 확인. 현재 state1 거부 확정, 환불전422 원인은 로그부족으로 미확정. 패키지12:35 갱신·정확일치. Google진단·Apple WebCrypto 초안23tests 및 EC/RSA Edge PASS; v20롤백/검토패키지 준비, 운영변경0. Gemini 분석의 확정/추정 구분 기록. [상세](iap-production-read-only-20261023.md).

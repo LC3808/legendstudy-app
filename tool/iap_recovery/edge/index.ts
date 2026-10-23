@@ -1,0 +1,13 @@
+import { runCryptoCases } from "../crypto_cases.ts";
+Deno.serve(async () => {
+  try {
+    return Response.json({
+      runtime: Deno.version,
+      passed: [...await runCryptoCases(), ...await runCryptoCases(true)],
+    });
+  } catch (e) {
+    return Response.json({ error: e instanceof Error ? e.message : "FAILED" }, {
+      status: 500,
+    });
+  }
+});

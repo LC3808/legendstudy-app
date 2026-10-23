@@ -1,3 +1,4 @@
+import { AppleFailure } from './apple-crypto.ts';
 /** Store verification only; no client-supplied quantity, identity or grant. */
 export type Purchase = { platform: 'apple' | 'google'; product_id: string; transaction_id: string; verification_data: string };
 export type VerifiedPurchase = { platform: 'apple' | 'google'; productId: string; transactionId: string; accountId: string; purchasedAt: string; environment: 'Production' | 'Sandbox'; revoked: boolean };
@@ -5,7 +6,13 @@ export const products: Readonly<Record<string, number>> = Object.freeze({
   'com.legendstudy.essay.credit1': 1, 'com.legendstudy.essay.credit3': 3,
   'com.legendstudy.essay.credit5': 5, 'com.legendstudy.essay.credit10': 10,
 });
-export class Rejected extends Error {}
+export type RejectionReason = 'STORE_REJECTED' | 'GOOGLE_TOKEN_NOT_FOUND' | 'GOOGLE_TOKEN_GONE' | 'GOOGLE_PURCHASE_STATE' | 'GOOGLE_QUANTITY' | 'GOOGLE_ORDER_MISMATCH' | 'GOOGLE_ACCOUNT_MISSING' | 'GOOGLE_TIME_MISSING';
+export class Rejected extends Error {
+  constructor(readonly reason: RejectionReason = 'STORE_REJECTED') { super('PURCHASE_REJECTED'); }
+}
+export class GoogleFailure extends Error {
+  constructor(readonly stage: 'CONFIG' | 'KEY_IMPORT' | 'SIGN' | 'OAUTH' | 'PURCHASE', readonly httpStatus: number | null = null) { super('GOOGLE_UNAVAILABLE'); }
+}
 export type Ports = {
   authenticate(token: string): Promise<string | null>;
   verify(purchase: Purchase): Promise<VerifiedPurchase | null>;
@@ -80,6 +87,11 @@ export function handler(ports: Ports, enabled: boolean, sandboxGrant = false) {
       if (!Number.isFinite(paid) || paid > Date.now() + 60000) return reply('rejected', 422);
       return reply(await ports.grant(user, v));
     } catch (e) {
+      // Only bounded stage/status; never raw errors, keys, receipts or identifiers.
+      if (e instanceof GoogleFailure) console.error(JSON.stringify({event:'IAP_GOOGLE_FAILURE',stage:e.stage,httpStatus:e.httpStatus}));
+      else if (e instanceof Rejected) console.error(JSON.stringify({event:'IAP_PURCHASE_REJECTED',reason:e.reason}));
+      else if (e instanceof AppleFailure) console.error(JSON.stringify({event:'IAP_APPLE_FAILURE',stage:e.stage,httpStatus:e.httpStatus}));
+      else if (!(e instanceof Rejected) && !(e instanceof SyntaxError)) console.error(JSON.stringify({event:'IAP_VERIFY_FAIL',stage:e instanceof Error && ['UNCONFIGURED','STORE_UNCONFIGURED','STORE_UNAVAILABLE','GRANT_UNAVAILABLE'].includes(e.message) ? e.message : 'UNKNOWN'}));
       if (e instanceof Rejected || e instanceof SyntaxError) return reply('rejected', 422);
       // Store outage / auth / unconfigured credentials / ledger failure: never settle.
       return reply('pending', 503);
