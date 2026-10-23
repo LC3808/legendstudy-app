@@ -4632,3 +4632,7 @@ Five isolated answer cases and eight independent checks PASS; prior failures ret
 
 ## 2026-10-23 — SKKU v15 Worker deployed; Owner SQL ready
 Worker fef5aefd100% verified; existing80 Registry, bindings and public scope preserved, SKKU metadata added81. Exact committed adapter/prompt verified. Post-deploy read-only precheck10 true. Local SQL11 checks PASS including postcheck query contract. Owner apply/verify15 checks pending; no DB mutation. [Bundle and rollback](essay-p0-direct-execution-20261023.md).
+
+## 2026-10-23 — 성균관 Owner 적용 및 WEB 운영 검증
+
+성균관대 Q1 Owner SQL 적용·DB사후15검사PASS. WEB 최초/무료재첨삭 완료·독립검수각8PASS·Credit1/0·History/5→5비교PASS, Provider4회 추산USD0.292412. 실기기 교차조회·문제PDF 노출 미완료, 공개2 유지. 성균관은 WEB 검증1문항 추가이며 기존4대학6문항 전체 E2E 기준과 구분. [상세·실행ID·잔여](essay-p0-direct-execution-20261023.md).

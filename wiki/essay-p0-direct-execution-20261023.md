@@ -38,8 +38,9 @@ credentials excluded. Existing ignored Android signing configuration reused.
 ## Official source and Provider work
 
 Private evidence directory: `legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023`.
-All seven selected exam reviews verified at revision1/NEEDS_REVIEW, no package. Read-only baseline
-saved privately, including current policy function definitions. No Production SQL executed.
+Before application, all seven selected exam reviews were revision1/NEEDS_REVIEW with no package.
+That private read-only baseline is preserved. Owner has since applied SKKU revision2 as recorded below;
+the agent has executed no direct Production SQL mutation.
 
 SKKU candidate:2026 admission language1 Q1 (`601d62cc-a067-542d-b053-71609074da20`).
 Original explanation PDF physical1–9, official three criteria, A–F scoring preserved. Raw PDFium
@@ -92,7 +93,8 @@ Package attaches one already registered common-profile source to this exam's doc
 preserves original document references and other review metadata. Candidate digest
 `90c515fbca16a5989969ca3d6e3b6e95fb096215dbbfd2271838bcfd0a651b4a`.
 Read-only baseline:237 exam IDs/700 question IDs; selected SKKU revision1 and zero runs.
-Worker v15 deployed and verified as recorded below; Owner SQL application remains pending.50 Python adapter,
+Worker v15 deployed and verified as recorded below; Owner SQL application and fifteen read-only
+postchecks now pass.50 Python adapter,
 reviewed-runtime and packaging tests pass. Only v15 is added to supported operating prompt versions;
 v13/v14 remain failed local experiments with no approved operating binding.
 
@@ -101,7 +103,7 @@ opens. This account is distinct from earlier operator96-Credit evidence. Mirrore
 is unreliable; no physical evaluation/History cross-query completion claimed. Private screenshot
 `android-physical-my-credit-20261023.png`. iPhone installation remains verified, UI acceptance pending.
 
-## SKKU Owner apply bundle — ready after Worker verification
+## SKKU Owner apply bundle — applied and independently verified
 
 Target Production: `stlhijzpjfgwwdgunlsd`. SKKU2026 admission language1, Q1 only.
 Exam `035e5d8d-e91f-5acd-a3a3-4d321bc9f067`; question
@@ -150,4 +152,47 @@ Preservation review: versioned source/provenance remains attached; previous atte
 not overwritten; existing identity and account isolation remain; no new student fields collected;
 no new secondary-use/AI transmission purpose; rollback retains longitudinal learning records;
 public readiness is not inferred from local files. Actual first1/free0Credit, WEB/APP History and
-physical E2E for SKKU must follow Owner application and are currently pending.
+physical E2E for SKKU must follow Owner application. WEB validation is now complete below;
+physical cross-query remains pending.
+
+## SKKU Owner application verified — 2026-10-23
+
+Owner reported all fifteen postchecks true. Independent read-only execution returned the same
+fifteen true values: revision2, original review state/metadata, exact package and Q1 scope,
+runtime approval/revision, original documents plus one profile source, v15 provider binding,
+runtime digest, one selected question, all237 exam IDs and700 question IDs, all other runtime
+policies and the submit definition. Review NEEDS_REVIEW is intentionally retained for unselected
+sibling questions. No additional direct SQL mutation.
+
+Actual WEB first submission run `c98ff34c-22c5-477e-990d-88615e0dcccd` completed at
+2026-10-23 19:31:33 KST. Official answer1476 characters, three internal criterion levels5/5,
+no invented core task, eight independent quality checks PASS. Billing required1/settled,
+ledger balance delta−1/reserved delta0; WEB balance96→95 and History result rendered.
+A530-character synthetic alternative preserving the same classification and comparison was
+submitted through the free rewrite UI. Run `e5f8fc81-f12c-4f2e-91d2-12fa9f4ac6d0` completed at
+19:33:08 KST, parent points to the first run. Billing required0/included_revision/settled,
+ledger transactions0/balance delta0/reserved delta0. All three levels remain5/5, all eight
+independent quality checks PASS. The source answer and synthetic rewrite remain distinct;
+no forced score improvement or fabricated prior task is claimed.
+
+WEB History after reload shows both completed records; comparison renders5→5 for each criterion,
+0 improved/3 unchanged/0 declined. Balance remains95. Provider4 calls (evaluation2/review2),
+input48,648/output4,891 tokens; recorded-usage estimate USD0.292412, invoice unverified.
+Private evidence: `skku-operating-e2e.private.json`, `skku-operating-rewrite.txt`,
+`skku-operating-web-{first,history,comparison}.png`. No new failure/retry for these operating runs.
+
+This adds one verified WEB operating pair to the six existing E2E questions. It does not yet add
+one fully verified WEB/APP question: physical Android/iOS and same-account cross-query remain
+pending. GalaxyS8 is logged into a different account from the operator used here; Owner was asked
+for manual LAB navigation because mirrored touch does not respond. No account session was replaced.
+Inline problem PDF is not yet shown, and result detail still says no linked evidence display;
+the actual package/criteria/evidence binding is verified separately. Public count remains2.
+Next work: physical navigation and same-account History, exact problem-PDF delivery, remaining
+university case failures/alternative/rewrite checks, then Owner-scoped SQL/public rollout.
+
+Separate isolated quality ledger is now127 calls,126 completed,1 unknown; recorded-usage
+estimate USD10.487008, invoice unverified, unknown usage excluded. Latest v15 partial/wrong
+cases pass for Soongsil, SWU and Kyunghee; KAU partial passes but wrong fails EXACT_QUOTE
+offsets. Gachon alternative passes; partial fails minimal editing by revealing the missing
+answer pair, wrong remains uncertain in grounding review. These failures are retained, not
+reclassified as successful public gates. Dongguk's unknown response remains unreplayed.
