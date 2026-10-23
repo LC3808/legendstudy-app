@@ -4621,3 +4621,7 @@ Google11:21/12:31 두 주문 TEST·환불·ACK0/소비0 확인. 현재 state1 �
 ## 2026-10-23 — IAP 운영 v23·iOS 기존 1+3 복구
 
 Owner 승인 후 v21→v22진단→v23 배포. 실제 Apple OCSP P384/SHA256 Edge 미지원 재현·검증된 제한적 대체검증으로 해결. Deno24·Edge·공개 Apple OCSP PASS. iOS기기1+3·Ledger각1회/중복0/총11 확인. Android테스터확인·정식상품활성, 일반계정실결제대기. 재가입무료혜택억제 Owner확인, 관리자DB조회정상·학교캐시누락0. 첨삭/DB/Secret변경0. [상세](iap-production-read-only-20261023.md).
+
+## 2026-10-23 — Android 추가 구매도 TEST 확인
+
+13:36 Play 주문 TEST·환불·0원, Google Ledger0. Owner 제공 앱계정은 앞서 확인한 재가입 계정과 정확일치, 무료혜택 중복억제 유지. Play결제계정과 앱로그인계정 구분 안내, 일반 실결제 E2E 미완료. [상세](iap-production-read-only-20261023.md).

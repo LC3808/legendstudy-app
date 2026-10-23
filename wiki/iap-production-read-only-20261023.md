@@ -472,3 +472,19 @@ empty state, not a lookup exception. No existing Essay tabs/files altered.
 Additional Flutter billing/history/lifetime/session tests could not start: installed
 Dart3.8.0 vs package requirement^3.13.3. No Flutter PASS claim. Owner will use a
 non-license-test Google account for the final Android1-credit real purchase.
+
+### 13:41–13:43 KST Android follow-up
+
+Owner reports pending message and missing signup3. Play order list shows latest
+13:36 KST credit1 explicitly TEST, refunded, KRW0. Therefore the attempt did not
+establish a normal live-payment E2E despite intended non-tester use. Verifier
+requests13:36/13:40 HTTP200, no new failure diagnostics; Google Ledger postings0.
+Sandbox denial returns pending200 by current policy. Historical request payloads
+were not retained; exact request-to-order mapping is not inferred from time alone.
+Owner supplied app login email privately: exact DB match is Oct23 12:26:50
+re-registration, confirmed/profile present, NULL previous-claim delivery and no
+Credit account. Same account Owner earlier confirmed was deleted/re-registered.
+No new signup fault or need to bypass benefit markers established. App login
+identity and Play billing identity are separate; purchase dialog account must be
+checked before another charge. No new keys, manual grants, refunds or test-credit
+Production bypass performed. Raw email/order identifiers omitted here.
