@@ -617,3 +617,7 @@ sequence of Owner executions was not independently observed. Do NOT rerun apply 
 this successful state. Existing Q1runs remain completed and billing1/0settled, result hashes unchanged.
 Agent executed no Production write. Next: ordinary-account Q2operating validation; candidate
 qualityPASS is not individual Q2operating E2E.
+
+## Batch continuation and SWUQ2 pending-key blocker
+
+[전수 조립·다대학 SQL·배포·비용·실패명세](essay-batch-service-20261023.md#일괄-조립다대학-적용-패키지--2026-10-23-2340-kst)가 최신이다. SWUrevision3는 재실행하지 않았다. Q2일반WEB ready 이후 PENDING_CHANGED로 전송 전 차단; 기존Q1실행·Credit·History보존. 전체512서비스는 미완료.

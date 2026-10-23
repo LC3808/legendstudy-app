@@ -67,7 +67,7 @@ Owner가 Production SQL을 실행한다. 사전/전체적용/사후/롤백을 �
 현재 전체 입력 조립·분류·서비스 활성화는 **미완료**다. 서울여Q1 SQL15검사PASS는
 해당 문항 연결의 근거일 뿐512개 완료 근거가 아니다.
 
-## 읽기 전용 전수 대조 — 2026-10-23
+## 과거 읽기 전용 전수 대조 — 2026-10-23
 
 Production identity700행에서 대상512ID를 대조: 모두 일치. 최신 상속423개 전부
 profile/version/digest와 학년도·시험·유형 scope 재검증PASS. 미상속89 유지.
@@ -127,3 +127,88 @@ invalid page intervals, PDF parser failures and unassigned profiles. They are no
 criteria or silently activate DIAGNOSTIC paid evaluation. SWUQ2 existing official pages8–15/profilev6
 compiled privately with2official chart images; original wrong-answer grounding failed, split criteria
 regression passed. Q1 operating omission GAP is undergoing a private candidate check. No new SQL applied.
+
+## 일괄 조립·다대학 적용 패키지 — 2026-10-23 23:40 KST
+
+최신 Owner P0 우선순위 적용: 문항별 승인 반복을 중단하고 전체512문항을154묶음으로
+조립했다. 운영 Registry237시험/700문항 중 대상11대학157시험/512문항이며 추가문항0.
+요청연도509, 경희2021모의3은 역사적 범위로 보존한다. 초안 조립512는 검수/서비스PASS가 아니다.
+
+|대학|시험|문항|상속|공식 매핑|공식 텍스트 조립|Essay 입력PASS|FULL|DIAGNOSTIC|REVIEW|현재 공개 연결|기존 운영E2E|신규 SQL 후보|
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|동국|16|48|24|30|30|5|5|0|43|0|0|0|
+|가천|17|166|166|166|166|0|0|0|166|0|0|0|
+|한국항공|15|30|20|18|18|0|0|0|30|0|0|0|
+|건국|21|58|41|58|40|4|5|0|53|2|2|3|
+|고려|10|30|30|30|18|1|1|0|29|0|1|0|
+|경희|10|38|29|31|31|1|1|0|37|0|0|0|
+|서강|24|28|19|13|13|1|1|0|27|0|1|0|
+|숙명|8|22|22|18|18|3|3|0|19|0|2|0|
+|숭실|16|42|40|40|40|3|3|0|39|0|0|3|
+|성균관|9|27|15|21|21|2|2|0|25|1|1|1|
+|서울여|11|23|17|5|5|2|2|0|21|2|1|0|
+
+합계: 상속423/미상속89, 기존 공식자료매핑430, 실제 비어 있지 않은 공식 텍스트조립398,
+Essay 입력PASS22, 보존된 과거 Math E2E1을 더한 FULL23, DIAGNOSTIC0, REVIEW489.
+FULL은 입력 범위이며 품질·권한·일반공개 완료와 다르다. REVIEW489에는 미검수·미조립
+실행계약이 포함되므로 평가불가능489라는 결론이 아니다. 동국/경희 private 품질GAP,
+숙명 기존 활성시험의 과거 digest 조회 보존 준비 등은 입력PASS여도 이번 적용에서 제외했다.
+현재 공개 연결5는 정책/공개목록 교집합; 서울여Q2는 일반WEB 버튼 활성까지 확인했고
+실제 제출은 아래 장애로 미완료. 신규7개는 아직 공개수에 합산하지 않는다.
+
+### 자동 조립 및 검증
+
+`tool/essay_lab/batch_assembly.py`는 최신 canonical ID, 고정 profile version/digest,
+문항별 source hash/page/text를 조립한다. draft digest가 다른 검수는 거부한다. 이전 성공
+패키지를 옛 수집 매핑으로 대체하지 않는다. 인접 문항 혼입·예시답안/채점기준 혼입·PUA
+문자는 분리 사유로 기록한다. 오류는 해당 문항에 격리하고 다른 문항을 계속 조립한다.
+14개 신규 private package+8개 기존 Essay package 입력PASS, 과거Math1은 신규검사로 세지 않는다.
+의미검수35Provider호출(34응답/1결과불명), 기존 정답·근거를 line ID로 고정한 독립검수
+11문항 PASS를 재사용했다. 첫 시도의 line-selection 오류와 검수 메타데이터 오독은 폐기하고
+명시적 line ID 입력으로 수정했다. 근거텍스트를 모델이 새로 만들어 공식자료로 쓰지 않았다.
+건국2026모의Q1 도표2개는 원본PDF page1을 이미지로 포함하고 직접 시각 확인했다.
+테스트15PASS, 격리PostgreSQL pre11/post14true, baseline drift 원자적 거부·중복적용차단·
+대학별/전체 rollback·새 History보존 확인. PDF RLS는 authenticated 정확한3개만 조회되고
+범위 밖 fixture가 차단됨을 확인했다. Production writes0, 신규Credit차감0.
+
+### Owner 적용 대기 — normal-batch-01
+
+건국2026모의Q1/Q2+2025수시Q2, 성균관2026언어형2교시Q1,
+숭실2024수시Q1+2026수시Q1+2027모의Q1: **3대학/6시험/7문항**.
+기존28체계와 문항별 공식자료 재사용. 기존 성공 binding 및 숭실 대표 private 품질검수를
+재사용했으며 신규7문항 개별 운영E2E로 보고하지 않는다.
+
+실행폴더: `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023/normal-batch-01/`.
+`OWNER-README.md` → `precheck.sql`(11true) → `apply.private.sql` → `postcheck.sql`(14true).
+`rollback.sql` 및 대학별 rollback3개는 신규6시험 요청만 차단하고 저장된 결과/패키지/PDF
+조회는 보존한다. 입력 본문은 private; Git에는 manifest/hash만 보관한다.
+운영 READ-ONLY 사전11true. Production 적용은 AGENTS§4/Owner가 수행하며 응답 대기.
+기존 SWUrevision3/고려/성균1교시 SQL은 재실행·롤백하지 않는다.
+
+Worker **d1036134-ddc4-4658-b138-2cf0c627ff5e** 100% 배포 및 실제 설정대조PASS.
+기존82시험/7binding을 보존하고87시험/8binding, Worker일반scope3→9를 준비했다.
+원래 entry와 인증계약·Secret을 유지한다. 기존 WEB **ff327e92 / ca6022b** 그대로이며
+Pages 일반scope는3개 유지. Owner SQL후 해당 plain-text scope만 추가하고 기존 코드로
+배포·일반계정 확인 필요. 새 정책 미적용이므로 신규 문항은 아직 활성화되지 않았다.
+
+### 공통 장애와 잔여 작업
+
+- SWUQ2 일반계정 109Credit·ready상태에서 기존823자 답안을 입력했으나 `PENDING_CHANGED`로
+  서버 전송 전 차단. WEB requestStorage가 owner/exam/initial 단위라 기존 완료Q1 키와
+  다른Q2 fingerprint가 충돌한다. Source `essay-exam-submit.tsx`54–57에서 확인. 신규 Provider/
+  DB제출/차감0. 기존Q1/재첨삭 결과는 보존. UI 수정금지에 따라 코드변경하지 않았다.
+  수정후보: canonical 문항집합으로 pending key 분리 + 기존 불명요청 보존/이관 + 완료
+  요청 상태조회 후 정리. 단순 localStorage 삭제나 새키 재제출로 검증을 우회하지 않는다.
+- 초기 준비중 비동기 상태를 Worker장애로 오인해 임시 진단 버전을 배포했다. 실제 원인
+  확인 후 원래3922d417 버전을 복원했고 진단 entry 변경은 제거했다. 이후 위 정상 묶음
+  Worker만 배포했다. 기존 WEB 변경0, 실패 유료요청0. 불필요한 임시배포를 성공수로 세지 않는다.
+- 미검수 근거 split, 수식/도표 visual grounding, 기존 Math 경로에 맞춘 physical input,
+  profile미상속89를 묶음 처리해야 한다. PHYSICAL_MATH_OR_SPECIAL_BINDING_REQUIRED 같은
+  집계는 중복사유이며 실제 수리문항수와 같지 않다. 유료 DIAGNOSTIC은 계약 확인 전 공개하지 않는다.
+- 일반공개 42시험 allowlist 상한은 최종157시험 확대 전 공통 계약 검토가 필요하다.
+- 이번 신규 WEB/APP 운영E2E PASS0. 기존6대학8문항 운영근거를 보존; SWUQ1 최초1/재첨삭0,
+  WEB/GalaxyS8 근거·성장4→5·History는 이전 성공을 재사용한다. Q2/신규묶음 교차조회 미완료.
+
+이번 private Provider35호출: 알려진 사용량 기준 **USD6.717716 추정**, 결과불명1건 비용미확정.
+전체 private ledger199호출/197응답/2결과불명, **USD20.490748 추정**. 운영Q1의 기존4호출
+receipt 비용NULL은 별도이며0으로 계산하지 않는다. 청구서 실비미검증, 전체 서비스 미완료.

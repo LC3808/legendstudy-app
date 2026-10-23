@@ -4,13 +4,11 @@
 
 ## 2026-10-23 P0 — 11대학 서비스 연결 진행 중
 
-운영 E2E는 5대학7문항(건국2·숙명2·서강1·고려1·성균1), 일반계정 공개 확인3문항(건국2·성균1). 성균 일반계정 최초1/재첨삭0Credit·WEB/GalaxyS8 History 완료를 재사용하며 UI 추가 수정 중단. 기본체계28, 상속423/512·미상속89 유지; 과거387/125와 구분한다.
+기존6대학8문항 운영E2E 보존. 서울여revision3 Q1/Q2 Owner적용 사후10true 유지, 재실행 금지. Q1최초1/무료재첨삭0·WEB/GalaxyS8 History/성장4→5 성공 재사용. Q2일반WEB ready지만 완료Q1의 pending key와 충돌해 PENDING_CHANGED, 서버제출/차감0. UI수정금지 유지; 원인과 수정후보 기록.
 
-서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
+전체157시험512문항/154묶음 초안 조립, profile423·미상속89, 공식매핑430/텍스트398, Essay입력PASS22+보존Math1, FULL23/DIAGNOSTIC0/REVIEW489. 검수/미조립이 포함된 중간분류이며 전체서비스 미완료. 건국·성균·숭실6시험7문항 Owner SQL 묶음 준비; 격리pre11/post14·운영READ-ONLY pre11true. 신규공개0, 현재정책/공개연결5.
 
-**인증 복구 완료:** Owner가 관련4Secret 기존값 복원을 확인한 뒤 기존 WEB 소스ca6022b 그대로 Production ff327e92에 배포했다. Service Token 실제 Pages→Worker 승인 및 최초·재첨삭 처리PASS. 기존a8796fb4는 롤백 대상으로 보존, Worker615f4825·설정·결제코드 미변경. JWT3/Provider 인증 성공을 반복하지 않았다. 서울여Q1 최초/재첨삭 completed·1/0Credit settled, 일반WEB PDF·평가근거·성장비교·History 복귀 자동갱신PASS, GalaxyS8 두기록·4→5성장비교 직접확인, 근거Owner확인. 최초평가의 소문항(2)누락 품질GAP는 v17후보6답안 재검증PASS; Q1보완+Q2묶음 revision3는 Owner적용 후 독립사후10true·조회함수일치 확인. 재실행 오류는 재적용 없이 처리. Q2운영E2E는 다음 작업. Worker3922d417는 기존정책 유지+v17추가. [실행증거](essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
-
-Owner30일 복구·기존 인증계약 유지. 자동갱신/알림은 설계만 완료. 전체Registry237시험700문항과 작업집합512를 구분한다. 512 중2021경희모의3문항은 보존하되 요청연도범위는509. 전수원문182개·154묶음 검사완료, 추출통과114는 공개/입력/E2E PASS가 아니다. 전체연결은 미완료. [분류와 다음 묶음](essay-batch-service-20261023.md).
+Worker d1036134에 기존82시험/7binding 보존+87시험/8binding/공개scope9 준비. WEB ff327e92/ca6022b·Pages scope3 보존, Secret변경0. Owner SQL후 Pages scope 추가·동일코드 배포·일반계정 검증 대기. 신규 private Provider35호출/추정USD6.717716, 결과불명1; 누적199/추정USD20.490748/결과불명2. 신규 운영E2E0. 15자동검사PASS. [전수표·Owner 파일·실패명세](essay-batch-service-20261023.md#일괄-조립다대학-적용-패키지--2026-10-23-2340-kst), [기존 인증·SWU 운영근거](essay-p0-direct-execution-20261023.md).
 
 ## Product state
 

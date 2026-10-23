@@ -1,0 +1,66 @@
+{
+  "status": "OWNER_SQL_PENDING",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "scope": [
+    {
+      "university": "soongsil",
+      "exam_id": "0d4fcaa4-2be0-52a0-9590-c61f65c5f199",
+      "question_id": "5df22bef-ce93-5333-9334-023ba98468e4"
+    },
+    {
+      "university": "soongsil",
+      "exam_id": "6ee238ff-0fc8-5731-b39a-ea546e153d9a",
+      "question_id": "ea36e84f-5e61-5b38-b854-156a309e2b5b"
+    },
+    {
+      "university": "konkuk",
+      "exam_id": "87b73ea0-99bb-5fd3-a94d-93371b4f4a68",
+      "question_id": "15602cb1-5e54-5542-914b-04d3f64886e0"
+    },
+    {
+      "university": "konkuk",
+      "exam_id": "87b73ea0-99bb-5fd3-a94d-93371b4f4a68",
+      "question_id": "d0cbc320-9884-5a7d-bc15-b3083ea983f7"
+    },
+    {
+      "university": "konkuk",
+      "exam_id": "cba01fbd-3de1-5ac1-ab7b-77465ac40638",
+      "question_id": "3489d3fd-0b3b-55f8-b855-2b2c99b53e85"
+    },
+    {
+      "university": "sungkyunkwan",
+      "exam_id": "d420ef29-218a-57fd-8524-842a0e551714",
+      "question_id": "244c174e-4e71-579e-ad10-7ed48143b631"
+    },
+    {
+      "university": "soongsil",
+      "exam_id": "d53da73c-e631-5a8a-b4b5-04f1511115cd",
+      "question_id": "2532d30f-0a47-5c6a-9f6a-6ae09e75b502"
+    }
+  ],
+  "sql_sha256": {
+    "rollback-sungkyunkwan.sql": "57bc436149fb0bb6dad5b06b39d2e4ba92e00e768d1bc9ed4eea98f9b04007e0",
+    "precheck.sql": "e1d1bb112f2db60504548018df8c966f4369175c0d80235cc2000e83535a6fcc",
+    "rollback-soongsil.sql": "c38bc58d4df48fe381724e92a63f03a14777163fbb6d7b550e623fa5f9ab68bb",
+    "postcheck.sql": "1878d447c90c4320f0c7cffb740006455109e490f14895c644de9a34367f0b92",
+    "apply.private.sql": "ea97c62d1603077636fc1cabde29e74f01016be08975da1901fb24d1d37a3030",
+    "rollback-konkuk.sql": "a8c03d13bc09b4bf7821c5da39acbc8c82a2d97082ba5a8d4f79b49ae7f2b557",
+    "rollback.sql": "8cd8a7809a52fb27f6c18969e42daaf8ea34c166a8e5dce489fa66962f90f276"
+  },
+  "local_validation": {
+    "status": "PASS",
+    "scope": "isolated local PostgreSQL only",
+    "precheck": 11,
+    "postcheck": 14,
+    "atomic_baseline_drift_rejected": true,
+    "reapply_rejected": true,
+    "rollback_idempotent": true,
+    "rollback_preserves_new_history": true,
+    "all_existing_policies_restored": true,
+    "production_writes": 0
+  },
+  "worker_version": "d1036134-ddc4-4658-b138-2cf0c627ff5e",
+  "web_preserved": "ff327e92-fe15-4753-a372-99f2ad20e1c9",
+  "private_directory": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023/normal-batch-01",
+  "production_writes_by_agent": 0
+}

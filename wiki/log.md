@@ -4709,3 +4709,7 @@ Worker3922d417 v17기능추가; 기존정책 선택유지. OwnerSQL대기. Priva
 READER_BASELINE_CHANGED reported, but actual DB alreadyrevision3; post10true, candidate reader
 exact match, old Q1completed1/0settled and result hashes preserved. No SQL reapply/rollback needed.
 Agent writes0. Q2operating E2E remains next; [evidence](essay-p0-direct-execution-20261023.md#revision3-owner-application-independently-confirmed).
+
+## 2026-10-23 — 512문항 일괄 조립과 3대학 SQL 대기
+
+154묶음 초안512/Essay입력22PASS, 기존Math1 보존. 건국·성균·숭실6시험7문항 pre11/post14 격리검증/운영read-only pre11true. Worker d1036134 준비배포, WEB보존, Owner SQL 대기. SWUQ2 pending key 충돌/서버제출0. [상세·비용·실패범위](essay-batch-service-20261023.md#일괄-조립다대학-적용-패키지--2026-10-23-2340-kst).
