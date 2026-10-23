@@ -4640,3 +4640,9 @@ Worker fef5aefd100% verified; existing80 Registry, bindings and public scope pre
 ## 2026-10-23 — 성균 Q1 일반 사용자 연결 후보
 
 Owner 실기기 차단 보고를 확인. 승인PDF map 및 public-exam 범위 누락; Q1시작쪽6→2 수정. [SQL·검증·배포대기](essay-p0-direct-execution-20261023.md#skku-ordinary-account-blockage-and-scoped-fix--2026-10-23). Owner SQL 미적용, 일반계정/실기기 PASS 주장 없음.
+
+## 2026-10-23 — 성균 Q1 일반계정 연결 배포
+
+Owner PDF SQL 사후검증PASS. Worker85a7a6a5/WEB29b85199 배포, 기존 binding/ID/Credit 보존. 초기 WEB 공개환경 누락 재배포 수정. 일반계정 로그인/화면 검증 대기, 실기기 아직 미진행. [상세](essay-p0-direct-execution-20261023.md#skku-public-connection-deployed--acceptance-pending).
+
+- 2026-10-23: SKKU Q1 ordinary-account WEB PDF2/6 and 1Credit feedback availability PASS; Q2/Q3 held. GalaxyS8 build2026102302 update installed; mirrored touch remains unresponsive, Owner physical check pending. No new Provider/Credit consumption. [Evidence](essay-p0-direct-execution-20261023.md).

@@ -1,6 +1,6 @@
 # Current Status
 
-성균 Q1 일반계정 PDF/첨삭 차단 원인 확인: 승인PDF map 누락·Gateway/Worker 공개목록 제외. Q1만 연결 후보 수정, PDF시작6→2, SQL사전9·격리권한7·WEB24·APP15검사 및 WEB빌드PASS. [Owner SQL](../supabase/candidates/skku_q1_public_pdf/README.md) 적용 대기; 미배포·일반계정/실기기 미검증. 기존 운영자·Simulator5대학7문항 E2E와 일반공개2를 구분. [상세](essay-p0-direct-execution-20261023.md).
+성균 Q1 PDF SQL Owner 적용·독립사후검증PASS. WEB29b85199/Worker85a7a6a5 배포 후 일반계정 PDF2/6·첨삭1Credit 버튼PASS, Q2/Q3 준비중 보존. GalaxyS8 빌드2026102302 업데이트PASS; 미러링 터치 불응으로 실기기 PDF/버튼 Owner 확인 대기. 기존 ID/정책/Credit/History 보존. [배포 이력·증거·복구](essay-p0-direct-execution-20261023.md).
 
 ## 2026-10-23 최신 — 고려 대표 운영 E2E PASS
 

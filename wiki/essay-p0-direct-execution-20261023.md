@@ -228,3 +228,47 @@ snapshots and candidate lists saved under official-answer-quality-20261023/skku-
 Next: Owner precheck→apply→postcheck, independently verify SQL, deploy scoped client/config,
 ordinary-account PDF render and Q1 availability, then updated physical app acceptance.
 SQL/readiness passing is not ordinary-account acceptance. No new Provider call or Credit spend.
+
+## SKKU public connection deployed — acceptance pending
+
+Owner applied the PDF SELECT policy; independent read-only postcheck verifies all9 booleans
+true and exact authenticated/account_service_allowed/bucket/hash predicate. No agent SQL mutation.
+Worker `85a7a6a5-d2d9-448b-949f-d274fded510e` deployed100%; module contents exactly match
+previous v15 and all other bindings match. Only public exam list changed (Konkuk retained,
+SKKU appended). Rollback Worker `fef5aefd-380b-4185-a6d4-64e59b204048`.
+
+WEB source `f6316d5` deployed to Production Pages
+`29b85199-7b4d-43d7-9769-64deb6892c5b`; actual deployment public list includes both exams.
+Other production/preview configuration, services and compatibility preserved. Initial deployment
+`4d7602d8-5c93-4558-baa8-77f94887eed4` incorrectly omitted public build-time environment values
+in the local build, so authentication/catalog initialization failed. It was replaced after rebuilding
+with only the existing Production NEXT_PUBLIC variables; publishable key embedding checked and
+existing operator session/Credit95 display recovered in browser. This was a deployment mistake,
+not an accepted validation result. Future local WEB builds must load existing public configuration
+before build and verify embedding before upload. No server secrets enter the client build.
+
+Android release1.0.0/build2026102302 completed89.5MB with Q1 PDF map. Not installed yet:
+Owner requested ordinary-account actual rendering/feedback availability before physical testing.
+Existing browser still shows operator account. Owner asked to log into the existing ordinary
+GalaxyS8 account through normal WEB login (no password in chat). Ordinary-account PDF and
+feedback UI remain UNVERIFIED; do not count configured public activation as accepted service.
+No new Provider calls or Credit transactions in this rollout.
+
+## SKKU ordinary-account WEB acceptance — 2026-10-23
+
+Owner signed into Chrome using the ordinary GalaxyS8 account. UI shows Credit1 and no
+administrator link. Through the university selectors, 2026 regular admissions/language/first
+session/Q1 opened its actual PDF viewer at page2/6 and rendered the Q1 prompt and passage.
+Q1 resolved to enabled “첨삭 요청 · 1 Credit”. Q2 and Q3 remain “첨삭 서비스 준비 중”.
+Returning to Q1 resolves to the enabled button again after the availability request completes.
+Ordinary-account PDF delivery and feedback availability PASS; this is not a new paid Provider
+submission or ordinary-account end-to-end assessment. No new Credit spend or History write.
+Private UI evidence: skku-normal-pdf.png and skku-normal-feedback-ready.png under the existing
+official-answer-quality-20261023 evidence directory. Public configured/WEB-openable questions
+are now3 (existing Konkuk2 + SKKU Q1); physical acceptance remains separate.
+
+Only after WEB acceptance, GalaxyS8 update installation succeeded. Package com.legendstudy.app
+reports versionName0.1.0/versionCode2026102302 (corrects prior prose calling this1.0.0).
+Existing app data retained via install -r. Mirroring still does not respond to the visible app-icon
+click; Owner asked to open Q1 on the physical device and report PDF/button state. Physical
+PDF/feedback acceptance and physical History cross-query remain pending; do not mark PASS.
