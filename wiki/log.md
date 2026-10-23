@@ -4649,3 +4649,5 @@ c2f0054 local/remote service branch matched; latest material/PDF/startup/History
 ## 2026-10-23 — Corrected baseline Android release build
 
 Latest c2f0054+Credit-only candidate: signed Android1.0.0+18 release89.5MB PASS;29 regression tests PASS. Analyze1 existing info retained;1,361 tracked files unchanged after build. No install/target merge/Store action. [Evidence](iap-p0-baseline-reconciliation-20261023.md).
+
+- Owner manually installed corrected Android APK and confirmed “확인 완료.” Android confirmation recorded; iOS/final merge not inferred. See [baseline report](iap-p0-baseline-reconciliation-20261023.md).

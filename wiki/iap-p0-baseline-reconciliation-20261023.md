@@ -69,3 +69,11 @@ Artifact: build/device-validation/latest-app-credit-candidate/build/app/outputs/
 flutter-apk/app-release.apk. Not the old merge-candidate APK.
 Device installation, iOS build, target integration and Store submission NOT_RUN.
 Earlier pre-build status is historical; this section supersedes Android build only.
+
+## Owner Android confirmation
+
+Owner manually installed the corrected latest-app-credit-candidate APK using the
+provided adb install -r command and replied “확인 완료.” Record as Owner confirmation
+of the corrected Android build. No itemized new UI/PDF/balance values were supplied;
+do not invent automated physical checks or extend this to iOS/final merge. Previous
+obsolete4035592 acceptance remains withdrawn. iOS and target integration pending.
