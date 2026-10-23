@@ -1,5 +1,8 @@
 # LegendStudy Wiki Index
 
+P0 Claude 최종 인수인계(사용량5% 중단): [현재 배포·37묶음·17후보·재개순서](essay-lab-claude-handoff-20261024.md).
+
+
 This directory is the canonical long-term development knowledge base for LegendStudy.
 
 ## Read order
