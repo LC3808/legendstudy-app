@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP P0](iap-p0-device-validation-20261023.md): 빌드·iPhone PASS; Android·병합 대기.
+[IAP P0](iap-p0-device-validation-20261023.md): 양 기기·통합 PASS; SQL 미적용.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

@@ -4625,3 +4625,10 @@ Owner confirms iPhone prices returned to KRW; no currency override. Android sign
 release rebuilt PASS, package/version/signing/config preserved. Only existing Play
 SM-G950N detected; separate device/physical acceptance and merge remain pending.
 [Evidence](iap-p0-device-validation-20261023.md).
+
+
+## 2026-10-23 — Owner confirms both final payment UI device candidates
+
+Galaxy S8 reinstall explicitly authorized; source install and final candidate update PASS. iPhone12 final candidate installed; Owner confirms both devices normal. Analyze40tests PASS; scoped APP integration prepared, expiry SQL NOT_APPLIED. [Evidence](iap-p0-device-validation-20261023.md).
+
+APP target remote fast-forward verified at4035592; post-integration analyze, Android/iOS release and40 regression tests PASS. Other worktrees untouched. Expiry SQL/Store distribution remain gated.

@@ -32,7 +32,7 @@ change. Run native builds sequentially after tests.
 | Android source APK | PASS; com.legendstudy.app,1.0.0+18,89,477,950 bytes |
 | Android APK SHA256 | 89796069c07c8cd316f33a4be0ab3e3460aba666e23534b236e455f3a860dfb2 |
 | iOS source release | PASS; com.legendstudy.app, existing team/signing,36.3MB |
-| Android device | Existing SM-G950N Play build1.0.0+18; installed Play signer differs from existing upload key. No uninstall/data clear attempted. Owner selected separate test device; it has not appeared in adb yet. |
+| Android device | SM-G950N: Owner explicitly authorized removal/reinstall after signer mismatch. Uninstall found package already absent; fresh source installation and final candidate update succeeded. Owner confirmed final candidate normal. |
 | iPhone device | Owner clarified iPhone12ProMax “자유잍튜브”; install and launch PASS. Earlier iPhone17ProMax attempts failed locked and made no installation. |
 | Physical UI acceptance | Owner replied 완료 to the UI checklist; exact balance number not supplied. Owner subsequently confirmed prices returned to KRW. No new purchase; transient USD cause unproven. |
 
@@ -65,9 +65,7 @@ build/device-validation/merge-candidate; other worktrees/target refs untouched.
 Candidate analyze PASS, focused UI6 and auth/LAB regression34 PASS. Candidate Android release PASS.
 Candidate iOS release PASS (34.7MB). Both candidate builds retain existing signing.
 
-**MERGE NOT EXECUTED. MERGE SHA: none.** Owner requires physical verification first.
-Recheck target SHA before applying the patch. Source commit is not a merge commit;
-pre-merge candidate checks are not post-merge regression claims.
+Scoped integration commit published: `40355925c8cb7cc4787c6393681568e8457f0949`, parent target c3ac6ec2. Eleven UI/test files plus four Wiki files, preserving target refund/onboarding/backend. Both final candidate devices accepted by Owner. Publication and post-integration checks recorded below; other worktrees remain untouched.
 
 ## Expiry review — Production NOT_APPLIED
 
@@ -79,13 +77,17 @@ in restricted immutable audit, verifies runtime/inventory, restores grant guard,
 and keeps old/new receipt replay compatible. Isolated Postgres contract rerun PASS
 for the exact-second version. It does not mean Production apply. No DB mutation.
 
-## Remaining acceptance
+## Final device acceptance and remaining release gates
 
-1. Connect separate Android device with USB debugging/trust; install signed APK.
-2. Finish Android UI/balance/content checks; iPhone UI and restored KRW confirmed by Owner.
-3. Verify final target candidate native builds/device paths, then scoped merge only.
-4. Re-run analyze/build/regression on merged tree, push and compare remote SHA.
-5. Record final results in Unified Wiki; app distribution still needs Owner confirmation.
+Owner first confirmed source Android, then explicitly confirmed both final
+APP-target candidate devices normal. Final candidate APK update PASS; iPhone
+candidate install PASS (automated launch encountered lock; subsequent Owner
+acceptance supersedes the launch-only limitation). Login, MY/balance/buttons,
+history/back, LAB/PDF/Essay History accepted; exact numerical balance not recorded.
+No new purchase. All 1,106 tracked candidate files matched the integration index
+before Wiki-only additions. Analyze and 40 focused regression tests PASS.
+
+Remaining: Production expiry SQL is NOT_APPLIED; no Store submission/distribution.
 
 ## iPhone USD price follow-up
 
@@ -107,5 +109,20 @@ precise reason for the transient USD response remains unverified.
 
 Android release rebuild PASS with Flutter3.47.7/Dart3.13.5, existing signing,
 Production public config, com.legendstudy.app1.0.0+18. APK SHA256: `89796069c07c8cd316f33a4be0ab3e3460aba666e23534b236e455f3a860dfb2`.
-Only existing SM-G950N is connected; separate test device is still absent.
-No installation/uninstall, additional purchase, merge or Store submission.
+Historical rebuild checkpoint preceded device replacement. Owner subsequently authorized the existing SM-G950N reinstall; installation and final two-device acceptance completed as recorded above.
+
+## Final publication and post-integration verification
+
+APP target `claude/app-release-readiness-eab636` fast-forward push PASS; remote SHA
+`40355925c8cb7cc4787c6393681568e8457f0949` exactly matches scoped integration.
+Single-parent selective integration, not a whole payment-branch merge. Code11 +
+Wiki4 files; no backend/config/dependency changes. Other worktrees and their local
+checked-out branch refs were left untouched; their next update must fast-forward
+from origin normally, preserving any local work.
+
+Post-integration tree: analyze PASS, Android release PASS (87.0MB), iOS release PASS
+(34.7MB), focused regression40 PASS. Candidate tracked-content equality verified;
+build output and local public configuration remain ignored. Android candidate APK
+SHA256 `3a70bebb349c4d5f21ceb640ff4dc15055bacc75f0b29c3658fac9b445d8a666`.
+Both physical devices Owner PASS. Wiki handoff/link checks PASS. Production expiry
+SQL remains NOT_APPLIED; no Store submission.
