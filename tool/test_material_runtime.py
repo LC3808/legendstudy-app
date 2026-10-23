@@ -47,6 +47,25 @@ class MaterialRuntimeTests(unittest.TestCase):
   q,r=fetch_reviewed_material(rpc,{'exams':[self.exam]},exam_id='e',pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
   self.assertEqual(calls,[('essay_material_runtime_package',{'p_exam':'e','p_digest':'f'*64})])
   self.assertFalse(q['q'].approved_processing)
+ def image(self):
+  import base64,hashlib
+  raw=base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zl1EAAAAASUVORK5CYII=')
+  return dict(sha256=hashlib.sha256(raw).hexdigest(),data=base64.b64encode(raw).decode(),sourceHash='a'*64,startPage=1,endPage=1)
+ def test_official_images_follow_pinned_question_evidence(self):
+  self.package['questions'][0]['official_images']=[self.image()]
+  q,_=self.bind();images=q.frozen_cache['official_images']
+  self.assertEqual(len(images),1)
+  self.assertEqual(set(images[0]['evidence_ids']),{e['binding']['id'] for e in q.frozen_cache['evidence'] if e['binding']['role'] in ('question','passage')})
+  self.assertFalse(q.approved_processing)
+ def test_foreign_page_source_or_changed_image_fails_closed(self):
+  for change in [dict(sourceHash='b'*64),dict(startPage=2,endPage=2),dict(sha256='0'*64)]:
+   self.package['questions'][0]['official_images']=[dict(self.image(),**change)]
+   with self.assertRaises(Invalid):self.bind()
+ def test_official_images_cannot_point_only_to_rubric(self):
+  for m in self.package['questions'][0]['source_page_references']:
+   if m['role']=='criteria':m.update(startPage=2,endPage=2)
+  self.package['questions'][0]['official_images']=[dict(self.image(),startPage=2,endPage=2)]
+  with self.assertRaisesRegex(Invalid,'FOREIGN_OFFICIAL_IMAGE'):self.bind()
  def test_model_answer_is_not_misrepresented_as_criteria(self):
   self.package['questions'][0]['source_page_references'].append(dict(questionId='q',sourceHash='a'*64,role='model_answer',startPage=2,endPage=2,evidenceText='answer',verification='VERIFIED'))
   q,r=self.bind();self.assertEqual(r['not_forwarded_roles'],['model_answer']);self.assertEqual(len(q.frozen_cache['criteria']),1)

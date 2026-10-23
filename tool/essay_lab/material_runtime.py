@@ -83,6 +83,29 @@ def reviewed_material_question(package,registry,question_id,*,pinned_digest,bind
            'exam_identity':dict(university_id=exam['universityId'], exam_id=exam['examId'],
                question_id=question_id, academic_year=exam['year'], exam_type=exam['kind'],
                track=exam['track'], session=exam['session'], campus=exam['campus'])}
+    # Reuse the existing official-image Provider contract. Page locators belong
+    # to this pinned question; runtime evidence IDs are regenerated with its pin.
+    if entry.get('official_images'):
+        import base64
+        from .bakeoff import image_parts
+        images=entry['official_images']
+        require(type(images) is list and len(images)<=10,'OFFICIAL_IMAGE_LIMIT')
+        attached=[];total=0
+        for image in images:
+            require(type(image) is dict and set(image)=={'sha256','data','sourceHash','startPage','endPage'},'OFFICIAL_IMAGE_SHAPE')
+            require(type(image['data']) is str and len(image['data'])<=8_000_000,'OFFICIAL_IMAGE_LIMIT')
+            require(type(image['startPage']) is int and type(image['endPage']) is int and 1<=image['startPage']<=image['endPage'],'INVALID_PAGE_RANGE')
+            matches=[e['binding']['id'] for e in evidence
+                     if e['binding']['hash']==image['sourceHash'] and e['binding']['role'] in ('question','passage')
+                     and any(m['role'] in ('question','shared_passage') and m['sourceHash']==image['sourceHash']
+                             and m['startPage']<=image['startPage'] and m['endPage']>=image['endPage']
+                             and e['binding']['locator']==f"PDF {m['startPage']}-{m['endPage']}" for m in mappings)]
+            require(matches,'FOREIGN_OFFICIAL_IMAGE')
+            raw=base64.b64decode(image['data'],validate=True);total+=len(raw)
+            require(total<=12_000_000,'OFFICIAL_IMAGE_LIMIT')
+            image_parts([dict(sha256=image['sha256'],bytes=raw)])
+            attached.append(dict(sha256=image['sha256'],data=image['data'],evidence_ids=matches))
+        cache['official_images']=attached
     sources={e['binding']['hash'] for e in evidence if e['binding']['role']=='question'}
     require(len(sources)==1,'QUESTION_DOCUMENT_MISMATCH')
     assignment={k:exam[k] for k in ('examId','universityId','year','kind','track','session','campus')}

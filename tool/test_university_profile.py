@@ -53,6 +53,19 @@ class ProfileTests(unittest.TestCase):
   with self.assertRaisesRegex(Invalid,'FRAMEWORK_PROVENANCE_INVALID'):
    compose_material(self.package,self.registry,'q',[self.profile])
 
+ def test_common_sources_follow_reviewed_year_scope(self):
+  self.base_profile()
+  ref=dict(sourceHash='a'*64,startPage=1,endPage=1)
+  self.profile['inheritance_scopes'][0]['source_refs']=[ref]
+  other=dict(self.profile['common_evidence'][0],sourceHash='b'*64,evidenceText='other year direction')
+  self.profile['common_evidence'].append(other);self.pin()
+  out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  refs=out['questions'][0]['source_page_references']
+  self.assertFalse(any(m['sourceHash']=='b'*64 for m in refs))
+  self.profile['inheritance_scopes'][0]['source_refs']=[dict(ref,sourceHash='c'*64)];self.pin()
+  with self.assertRaisesRegex(Invalid,'COMMON_SCOPE_EVIDENCE_MISSING'):
+   compose_material(self.package,self.registry,'q',[self.profile])
+
  def test_reviewed_typed_set_does_not_expand_to_mixed_exam_sibling(self):
   self.base_profile();self.profile['inheritance_scopes']=[]
   self.profile['scopes']=[dict(exam_id='e',year=2024,kind='admission',track='인문',question_ids=['q'])]

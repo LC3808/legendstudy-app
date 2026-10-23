@@ -152,7 +152,18 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
     # question answers and point bands stay in question mappings. Content review is
     # still required by bind_material when this changes the package.
     framework_attached = False
-    for common in profile.get('common_evidence', []):
+    common_entries = profile.get('common_evidence', [])
+    applicable_refs = [ref for scope in profile.get('inheritance_scopes', [])
+                       if exam['year'] in scope.get('years', [])
+                       and exam['kind'] in scope.get('kinds', [])
+                       and exam['track'] in scope.get('tracks', [])
+                       for ref in scope.get('source_refs', []) if isinstance(ref, dict)]
+    if applicable_refs:
+        locators = {(r['sourceHash'], r['startPage'], r['endPage']) for r in applicable_refs}
+        common_entries = [c for c in common_entries
+                          if (c.get('sourceHash'),c.get('startPage'),c.get('endPage')) in locators]
+        require(common_entries, 'COMMON_SCOPE_EVIDENCE_MISSING')
+    for common in common_entries:
         require(common.get('scope') == 'COMMON' and common.get('verification') == 'VERIFIED'
                 and common.get('provenance') == 'OFFICIAL'
                 and common.get('evidenceText', '').strip(), 'COMMON_EVIDENCE_REVIEW_REQUIRED')

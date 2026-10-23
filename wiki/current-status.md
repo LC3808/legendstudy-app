@@ -1,14 +1,14 @@
 # Current Status
 
-## 현재: 대학별 프로필 PHASE 2 PARTIAL
+## 현재: 대학별 프로필 PHASE 3 운영 연결 진행 중
 
-[상속 구조](university-evaluation-profile-phase2.md): 기본 진단체계28개 검수(공식 파생 방향과 내부 가이드 분리), 기존150보존·237추가로387/512상속. 미상속125=평가자료 참조누락78+학년도/유형범위47. 문항별 전체 근거·조립5(기존4+서강경제경영1), 최신 기본체계 Essay4입력PASS. 49계약검사PASS, 새Provider/Production변경0. 기본체계 검수와 실제 문항평가 가능은 별개; 전체 PHASE2 PARTIAL. 기존 건국 운영2·UI/Credit/History보존.
+PHASE2는 PARTIAL로 보존: 기본 진단체계28,387/512상속,125미상속(참조78/범위47). [상속 검수](university-evaluation-profile-phase2.md).
 
-## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
+숙명2026수시 인문1·서강2026모의 경제경영의 기존 검수 revision2와 실행 정책을 연결했다. 각 시험의 기존 문항·mappings/state를 보존하고 selected_questions 1문항씩만 승인했다. 일반 공개 범위는 아직 건국 기존 시험 그대로이며 실제 신규 Provider/WEB/APP E2E는 미실행이다. 숙명2025모의는 기존 원본 등록 메타데이터 대조 중이다.
 
-기존 건국 인문2/자연1 활성·E2E·Credit1/0·교차조회 보존. [운영·복구 근거](phase3-service-20261022.md). 71701적용/71702미적용, 신규DB·결제·배포변경 없음.
+운영 변환기의 공식 도표 이미지 누락을 기존 이미지 계약으로 보완하고, 프로필 공통 근거는 해당 학년도·유형 범위로 한정했다. 관련57개 계약검사 및 Worker 관련33개 검사 PASS(중복 포함, 합산하지 않음). 격리 PostgreSQL에서 기존 정책·sibling·함수권한 보존/재실행차단/롤백 PASS. DB 연결≠서비스PASS.
 
-다음:125미상속 범위/근거연결 보완 및 새 서강 대표문항 PHASE3 준비. PHASE3전체공개미착수. 경희·동국 추가자료보강 HOLD. 이전근거는 [로그](log.md)에 보존.
+기존 건국 인문·수리 E2E/Credit1·0/History/교차조회 보존. [운영 근거](phase3-service-20261022.md). 71702·UI·결제·IAP 변경 없음. 다음: Worker 후보 검증·배포 후 신규3문항 실제 운영 E2E. 경희·동국 추가자료 HOLD.
 
 ## Product state
 
