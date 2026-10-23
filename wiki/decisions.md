@@ -662,3 +662,7 @@ balance), with server-side Campaign/Voucher/Redemption policy, per-user/total/bu
 unlimited master code; **Academic School ≠ verified B2B Organization Membership** (school
 selection alone grants no B2B eligibility and no access to student essays). B2B organization/
 membership/batch = P1. Design only, no implementation.
+
+## 2026-10-23 — 공통 UX·대학별 평가·문항별 근거 기반 전체 서비스
+
+Owner 최종 지시: 일반계정 공개를 기본으로11대학512문항을 전수분류/입력검증하고 검증된 대학·유형·학년도 묶음을 활성화한다. 기존28프로필/423상속/89보완·엔진·ID·정책·기록 보존. 대표E2E와 전수입력검증을 구분하며 개별SQL/E2E반복을 기본절차로 삼지 않는다. [기존 프로필 전략을 구체화한 범위·분류·보존 검토](essay-batch-service-20261023.md).

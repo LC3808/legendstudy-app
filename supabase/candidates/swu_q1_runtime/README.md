@@ -1,4 +1,4 @@
-# 서울여대 Q1 — Owner 적용 대기
+# 서울여대 Q1 — Owner 적용·사후검증 PASS
 
 Production `stlhijzpjfgwwdgunlsd`. 기존 시험 `6679b5ff-d797-53c9-8a2a-424375d7210c`, 문항 `a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6`만 연결한다.
 
@@ -23,3 +23,5 @@ DB 적용 후 Worker를 되돌려야 하면 먼저 위 SQL로 서울여대 신�
 일반 공개 허용 목록은 건국·성균관대 기존3문항 그대로이며 이 SQL은 일반 공개 완료를 의미하지 않는다.
 
 상세 진행/비용: [P0 Wiki](../../../wiki/essay-p0-direct-execution-20261023.md).
+
+Owner 적용 보고 후 agent가 동일 read-only15항목을 독립 실행하여 모두true 확인했다. 원본 apply SQL을 다시 실행하지 않는다. 초기 비활성 선택 해석은 잘못되었으며 실제 선택은 가능했다. Owner는 일반계정 공개 기본을 확정했다. Worker 공개범위에는 서울여가 추가됐으나 WEB 설정 오류 후 이전 배포로 복구한 상태다. Secret 복원 및 서울여 실제 E2E는 미완료이며 상세 복구 절차는 위 P0 Wiki를 따른다.

@@ -452,3 +452,46 @@ Completion checkpoint: Wiki routing/link/restore-budget checks PASS; SQL11local 
 Production precheck10true and remote Worker verification10checksPASS. No payment/Credit/MY UI
 source changes. APP/DOCS changes in this continuation document results and the Owner SQL bundle;
 WEB source remainsca6022b and physical APP remainsbuild2026102303.
+
+## SWU Owner application independently verified — 2026-10-23
+
+Owner reports all15postchecks true; agent executed the same read-only query against Production
+stlhijzpjfgwwdgunlsd and independently confirms all15true. Revision2, original review state and
+metadata/documents, exactQ1scope/approval, exactv15binding, package/runtime digest and selected1,
+237examIDs/700questionIDs, other policies and submit definition all preserved. No agent SQL mutation.
+Do not rerun the original apply transaction.
+
+The ordinary account initially displayed10Credit; a later UI observation displayed110Credit.
+No grant was performed by this agent. The earlier interpretation that disabled accessibility
+labels proved an operator-only selection gate was incorrect: browser selection worked.
+Owner explicitly superseded operator-first rollout with ordinary-account opening by default.
+No SWU operating submission/Provider/Credit transaction or new History arrival is claimed.
+
+## SWU public configuration incident and rollback — 2026-10-23
+
+Worker615f4825-0d82-46b7-adc6-cb359185bce2 deployed100% with only SWU appended to the
+public exam list; evaluator modules unchanged. During Pages configuration preparation the agent
+incorrectly replayed the complete GET deployment configuration in a PATCH. GET redacts secret_text
+values as empty strings; nine Production secret values may therefore have been overwritten with
+empty values. Masked GET equality cannot verify secret preservation. This was an agent error.
+
+New Pages0248890a-ecc4-4b94-a3d3-a723df3befd4 (unchanged WEB sourceca6022b) returned503
+WORKER_UNAVAILABLE on ordinary availability. No evaluation was submitted. Rolled back canonical
+Pages deployment to a8796fb4-cf86-4572-8822-6deb5702cac7 and observed the existing SKKU Q1
+“첨삭 요청 · 1 Credit” enabled again. Existing entry restored; all auth/payment paths were NOT
+retested. Project configuration still requires restoration before ANY new Pages deployment.
+Worker secrets and Supabase data were not changed. Existing public count remains3; SWU is not
+accepted as publicly working. No evaluation/Credit/History writes occurred in this attempt.
+
+Owner was asked to restore the existing values in Cloudflare Pages legendstudy-lab Production
+settings, without sending values in chat: ESSAY_REGISTRY_WORKER_JWT, ESSAY_WORKER_SERVICE_TOKEN,
+KAKAO_CLIENT_SECRET, MATH_EVALUATION_WORKER_JWT, MATH_EXTRACTION_WORKER_JWT,
+MATH_PROVIDER_API_KEY, PAYMENT_FINANCE_TOKEN, PAYMENT_REVIEW_SUBJECTS, TOSS_TEST_SECRET_KEY.
+No recovery confirmation received at this checkpoint. No replacement credentials generated.
+Do not redeploy until restoration; then verify affected entry paths before SWU submission.
+The minimal public-scope PATCH builder now emits only ESSAY_PUBLIC_EXAMS, never redacted secrets,
+preview settings or unrelated bindings; regression checks cover this boundary and scope limits.
+
+Independent work continues in the [512-question batch audit](essay-batch-service-20261023.md).
+Latest attempt adds0Provider calls/0known cost; prior isolated143calls/142completed/1unknown,
+USD11.763768 known-usage estimate remains unchanged and is not an invoice total.

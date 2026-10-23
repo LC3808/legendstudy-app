@@ -4656,3 +4656,11 @@ Owner PDF SQL 사후검증PASS. Worker85a7a6a5/WEB29b85199 배포, 기존 bindin
 ## 2026-10-23 — Remaining university P0 continuation
 
 Reused SKKU success; no UI edits. SWU/Soongsil new rewrite+alternative PASS; Kyunghee rewritePASS/alternativev15FAIL→v16candidatePASS; KAU wrong offsetv15FAIL→v16candidatePASS.16calls/USD1.276760 estimate; cumulative isolated143/142completed/1unknown/USD11.763768. SWU Worker80e1badb deployed, existing modules/settings/public scope preserved; Owner SQL11local/10precheckPASS, awaiting Owner application. Existing E2E5universities7questions/public3 remain; new operating History/Credit/WEBAPP pending. [Details](essay-p0-direct-execution-20261023.md).
+
+## 2026-10-23 — SWU Owner SQL accepted
+
+Owner postcheck15true independently reproduced against Production; IDs/other policies/submit preserved. WEB account10Credit observed; initial operator-gate interpretation was later corrected (see incident checkpoint). Provider/Credit0; E2E pending. [Evidence](essay-p0-direct-execution-20261023.md).
+
+## 2026-10-23 — General-account default, full inventory and deployment incident
+
+Owner scope is all512questions, ordinary-account default, grouped activation. Read-only identity512/profile423 recheck PASS; seven Essay inputs validated, one prior Math success preserved separately. No new Provider/DB writes. Agent incorrectly replayed redacted Pages secret values; new deployment503, rolled back to a8796fb4 and SKKU CTA restored. Project9secret restoration pending Owner; no further Pages deploy. Five inventory/config regression checks PASS. [Incident](essay-p0-direct-execution-20261023.md#swu-public-configuration-incident-and-rollback--2026-10-23) · [Batch scope/results](essay-batch-service-20261023.md).

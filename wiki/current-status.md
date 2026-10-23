@@ -6,9 +6,9 @@
 
 운영 E2E는 5대학7문항(건국2·숙명2·서강1·고려1·성균1), 일반계정 공개 확인3문항(건국2·성균1). 성균 일반계정 최초1/재첨삭0Credit·WEB/GalaxyS8 History 완료를 재사용하며 UI 추가 수정 중단. 기본체계28, 상속423/512·미상속89 유지; 과거387/125와 구분한다.
 
-서울여대 공식/부분/오답 기존PASS+이번 재작성/대안 v15 독립검수8항목PASS. Worker80e1badb(Registry1/binding1 추가) 배포 및 보존 대조PASS. [Q1 Owner SQL](../supabase/candidates/swu_q1_runtime/README.md) 격리11검사·운영사전10true, **Owner 적용 대기**. 신규 실제운영 History 자동반영·1/0Credit·WEB/APP는 적용 뒤 검증한다. 현재 일반계정 잔액0으로, 다음 유료 운영 검증에는 기존 잔액이 있는 검증 계정이 필요하다. Credit 지급/정책 변경하지 않는다.
+서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-나머지 우선순위: 숭실·경희 미검증 재작성/대안 → 정상대표 운영연결. 항공 오답EXACT_QUOTE, 가천부분 minimal_editing/오답grounding, 동국미확정응답은 해결 전 성공으로 집계하지 않는다. [11대학 표·호출비용·보존·배포](essay-p0-direct-execution-20261023.md). 기존 고려/서강/숙명 성공과 실패 명세는 상세 문서 및 [과거 체크포인트](history/status-checkpoints.md)에 보존했다.
+**배포 복구 필요:** Pages 환경설정 PATCH에서 agent가 마스킹된 Secret 값을 재전송한 오류. 신규 WEB의 WORKER_UNAVAILABLE 확인 후 기존 a8796fb4로 롤백했고 성균 첨삭 버튼 활성 복구를 확인했다. 다음 배포 전 Owner가 Production Secret9개를 기존값으로 복원해야 한다. Worker615f4825에는 서울여 공개범위 추가됐지만 WEB 서울여 실제평가·1/0Credit·신규History·WEB/APP는 미완료. 이번 Provider/DB변경0. [사고·복구·필요조치](essay-p0-direct-execution-20261023.md#swu-public-configuration-incident-and-rollback--2026-10-23).
 
 ## Product state
 
