@@ -4671,3 +4671,7 @@ Build-only Production0cc2b617 confirms all five Essay/Math secrets injected as e
 Expected exit73 prevented deployment; canonicala8796fb4 and originalpnpm build preserved.
 No secret/DB change, no Provider call. Exact5 restoration requested from Owner; prior9-item
 blanket restoration request corrected. Three sanitized probe tests PASS. [Evidence and recovery](essay-p0-direct-execution-20261023.md#current-project-secret-diagnosis--2026-10-23-2111-kst).
+
+## 2026-10-23 — Owner JWT recovery preparation
+
+Existing local issuer reused for Essay and exact Math roles; claims/signing contracts preserved. Four synthetic checks PASS; actual signing/secret registration0, DB/Credit/History/Provider0. [Owner procedure](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Existing service token reused; Provider key separate.

@@ -1,0 +1,6 @@
+{
+  "vars": {
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_I7yCnrTkui-UDk40heVV7g_j-75Rrzt",
+    "ESSAY_ALLOWED_SUBJECTS": "[\"ddc5ae63-acbb-490b-a423-c996b811dea8\"]"
+  }
+}

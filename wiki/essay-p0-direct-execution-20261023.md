@@ -539,3 +539,19 @@ repeat build-only checks for Registry/Math role RPCs and Provider GET models (no
 then verify service-token authentication through a protected runtime path before SWU acceptance.
 A nonempty service token alone is not an authentication PASS. SWU1/0Credit, new History arrival,
 WEB/physicalAPP and full512 service connection remain unfinished.
+
+## Owner-held signing key: renewal procedure prepared — 2026-10-23
+
+Owner retains the existing JWT signing secret and Essay service-token original. No new signing
+key authorized or created. Reused issue_worker_jwt.py; added exact Math role selection and safe
+null-DTO/cross-role probes, replaced obsolete Registry234 count with bounded array validation.
+Contracts preserved: Essay HS256/essay_worker/noiss/noaud/365days; Math HS256/exact role/
+iss=supabase/noaud/7days. Successful Production role/issuer/algorithm log aggregates corroborate
+these contracts; no JWT contents read from logs. Four synthetic regression tests PASS.
+
+[Owner commands and registration procedure](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md)
+use hidden terminal input, memory-only signing and clipboard only after read-only authentication
+acceptance. No actual minting/registration by agent. Owner registers each token into Pages
+Production; existing healthy Worker credentials unchanged. Service token restored from existing
+original, never --service-token generation. Math Provider key remains a separate existing-value
+recovery item. Production DB/Credit/History writes0, Provider calls0. Still awaiting Owner execution.

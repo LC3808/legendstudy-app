@@ -10,6 +10,8 @@
 
 **Secret5개 빈 값 확정:** Production 빌드 전용 진단0cc2b617에서 Essay Registry/Service Token·Math Evaluation/Extraction/Provider 모두 EMPTY_VALUE. HTTP 호출 전 설정실패로, 401로 표현하지 않는다. 진단은 exit73으로 배포 차단; 정상 WEB a8796fb4 및 pnpm build 복원·보존 확인. Owner에게 확인된5개만 기존값 복원 요청, 카카오·토스·결제는 제외. Worker615f4825의 서울여 공개범위 추가는 유지하나 서울여 실제1/0Credit·신규History·WEB/APP는 미완료. Provider0/DB변경0. [진단 근거·복구순서](essay-p0-direct-execution-20261023.md#current-project-secret-diagnosis--2026-10-23-2111-kst).
 
+Owner 보유 기존 서명키로 JWT3개 재발급 절차 준비: 기존 로컬 도구 재사용, 역할/issuer/audience/HS256/유효기간 유지, 합성검사4PASS. 실제 발급·등록0. [Owner 명령·클립보드 등록·검증](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Service Token은 보관원문 유지, Math Provider key는 별도 기존값 필요.
+
 ## Product state
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.
