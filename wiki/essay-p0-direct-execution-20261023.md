@@ -366,3 +366,89 @@ exactly equal their pre-fix evidence. No SQL applied; existing policies/IDs/reco
 Private screenshots: `skku-history-fix-web-evidence.png`, `skku-history-fix-galaxy-evidence.png`
 in the existing official-answer-quality-20261023 evidence directory. Native screenshot acquisition
 uses Android Studio mirroring; Owner performs touch navigation because mirror input is unresponsive.
+
+## Remaining universities resumed — 2026-10-23
+
+Owner accepts History/evidence deployment WEB ca6022b, APP f0918f0, DOCS5071c6a and
+freezes further UI changes. Reuse completed SKKU work. Preserve policy/identity/Credit/History;
+Production SQL remains Owner-executed. This section supersedes earlier counts in this chronological document.
+
+| University | Preserved operating E2E questions | Ordinary-user active questions | Current remaining work |
+|---|---:|---:|---|
+| Konkuk | 2 | 2 | Preserve prior humanities/math E2E |
+| Sookmyung | 2 | 0 | Operator/Simulator PASS; general-user release and physical acceptance pending |
+| Sogang | 1 | 0 | Operator/Simulator PASS; general-user release and physical acceptance pending |
+| Korea | 1 | 0 | v12 operator/Simulator PASS; general-user release and physical acceptance pending |
+| SKKU | 1 | 1 | Ordinary-account WEB/GalaxyS8 paid/free/History PASS; do not repeat |
+| SWU | 0 | 0 | Five isolated case types PASS; Q1 Owner SQL pending |
+| Soongsil | 0 | 0 | Five isolated case types PASS; bounded operating connection pending |
+| Kyunghee | 0 | 0 | v15 rewrite PASS, alternative FAIL; v16 candidate alternative PASS; promotion/regression/operating pending |
+| KAU | 0 | 0 | v15 wrong EXACT_QUOTE failure; v16 candidate wrong PASS; rewrite/alternative and promotion/operating pending |
+| Gachon | 0 | 0 | Official/alternative PASS; partial minimal_editing FAIL, wrong grounding UNCERTAIN |
+| Dongguk | 0 | 0 | Official request unknown/failed; usage unavailable; no replay |
+
+Total remains5universities/7questions operating E2E, public3questions. These are question counts,
+not Provider-call counts. Inheritance423/512 with89 unresolved; historical387/125 is not current.
+No new operating submission or Credit transaction in this continuation yet. The ordinary test
+account has0Credit; use an existing funded test account for the next paid operating run without
+changing grants or billing policy. Newly completed History arrival without reload remains pending;
+prior fix verified existing records on return/resume and synthetic new-record tests only.
+
+SWU: new synthetic feedback-based rewrite669characters and reordered alternative701characters,
+production v15 evaluator + independent model review all8checks PASS,4calls USD0.278548 estimate.
+Soongsil: new synthetic rewrite908characters and reordered alternative908characters, all8checks
+PASS,4calls USD0.271232 estimate. These are authored QA answers, not additional official examples.
+Previously successful official/partial/wrong runs were reused. Pricing uses recorded ledger rates;
+invoice unverified. Isolated cumulative after these two universities135calls/134completed/1unknown,
+known usage USD11.036788; exclude unknown usage and separately tracked operating runs.
+
+[SWU Owner bundle](../supabase/candidates/swu_q1_runtime/README.md): exam6679b5ff…7210c,
+Q1a69cb1c4…397f6, revision1→2 selected question package digest
+`35fef5c0f58e9d5489c85879277b403f3bebc8d8bed1ddfec1e4bd8ef6c9a8ab`.
+Local PostgreSQL11checks PASS, fresh Production precheck10true. No agent DB mutation.
+Worker `80e1badb-92cd-4e56-9ca1-92999887fac1` deployed100% (deploymentf75aab32),
+existing81Registry entries retained + one SWU exam, existing5provider bindings + exact
+`swu-humanities-reviewed-20261023-v15`. Only registry_asset module changed; all evaluator/prompt
+modules identical; other bindings/public scope/compatibility unchanged. Remote content/settings
+checks10PASS. Rollback previous85a7a6a5; after SQL application gate SWU new requests first and
+check in-flight work before Worker rollback. Public list remains Konkuk/SKKU only.
+
+Preservation review: existing immutable review revision retained, new revision carries source
+provenance; no prior answer/result overwrite; existing account ownership unchanged; no additional
+student fields/secondary-use purpose; rollback keeps learning records; deployment verified from
+actual remote content/settings, and general-public readiness is not inferred from files.
+
+KAU exact-quote investigation: all five quote strings occur once in the unchanged source answer;
+the final observation reports [191,240), but answer length and exact endpoint are239. The strict
+bounds check correctly rejects this Provider output. Original failed output retained; no automatic
+clamping, relaxed validator or successful review invented. Dongguk ledger has no saved successful
+response or usage; its unknown request is not replayed.
+
+Kyunghee new v15 synthetic rewrite817characters passes all8checks. Reordered alternative817characters
+passes the structural contract but independent grounding/root_binding/stance_preservation fails:
+the evaluator treats an analogy to fixed majority viewpoints as a claim that a character literally
+has majority social identity, despite official criteria allowing center/periphery analysis. This is
+an evaluation error, not a reason to erase the student's valid alternative. Four calls USD0.363496;
+cumulative139/138completed/1unknown, known estimate USD11.400284. Original failed result preserved.
+A private v16 candidate adds analogy-vs-identity and official alternative-credit checks, plus exact
+end-offset reminder for KAU. It is isolated only and is not an approved operating policy. No change
+to deployed v15, UI, SQL, Credit, Ledger or History. Reverification results follow below.
+
+Private v16 candidate reverification: same Kyunghee alternative and same KAU wrong answer both
+pass structural contract and all8independent review checks. Four calls USD0.363484 estimate.
+No answer modification, validator relaxation, result overwrite or Production promotion. Candidate
+still needs cross-case regression before operating support/binding; Gachon failures and Dongguk
+unknown remain. KAU rewrite/alternative are also pending. Candidate prompt SHA256: `4edccb60dccd0eeaf71508abe5e022cd0b3f240d702de9db44e1817c8da8953c`.
+
+Continuation total16calls (evaluation8/review8), USD1.276760 known-usage estimate; seven PASS
+case executions plus the preserved Kyunghee v15 failed execution. Isolated cumulative143calls,
+142completed/1unknown, USD11.763768; unknown cost excluded and invoice unverified. Operating
+Provider/Credit additions0. No SQL was applied by the agent. Owner SWU application/result pending;
+no new WEB/APP evaluation or newly arriving History record is claimed. Existing SKKU evidence
+and successful records are reused, not repeated. Next funded-account operating submission must
+verify new History arrival and first1/free0Credit across WEB/APP after SQL verification.
+
+Completion checkpoint: Wiki routing/link/restore-budget checks PASS; SQL11local checks PASS;
+Production precheck10true and remote Worker verification10checksPASS. No payment/Credit/MY UI
+source changes. APP/DOCS changes in this continuation document results and the Owner SQL bundle;
+WEB source remainsca6022b and physical APP remainsbuild2026102303.

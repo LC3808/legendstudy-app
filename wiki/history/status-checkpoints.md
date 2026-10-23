@@ -1750,3 +1750,23 @@ Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→
 
 ## 2026-10-23 공개 연결 진행
 Owner가 E2E 통과 문항 공개 승인. 건국 인문만 명시적 서버 시험 범위로 연결 중. 기존 건국 인문/수리 성공 반복 없음. 로컬 Worker11/WEB45 PASS, 운영 적용·11대학 전체는 미완료. [상세](../phase3-service-20261022.md).
+
+
+## 2026-10-23 P0 연속 실행 이전 체크포인트
+
+## 2026-10-23 최신 — 고려 대표 운영 E2E PASS
+
+고려2025수시 인문2 Owner SQL 적용 후 DB전체사후검증 PASS(revision2·단일문항·v12·기존ID/다른정책/submit 보존). WEB 최초/무료재첨삭 completed·독립검수8항목PASS, Credit1/0·잔액97→96, Native iOS Simulator History/결과/4→5비교 PASS. 새실패0, Provider4회/추산USD0.292664(기존격리59회와별도). 기존423/89·공개2 유지, 운영E2E5→6. 문항명/상세근거 표시 잔여 및 실기기 미검증. [실행ID·Ledger·품질·증거](../korea-operating-owner-sql-20261023.md).
+
+## 2026-10-23 공식 평가자료 연결 후속 — PARTIAL
+
+28개 기본체계 유지, 기존387 보존·36추가로423/512상속(미상속89). Production512문항 ID·시험·학년도·유형 대조 일치. 고려 공식해설 전달 누락을 로컬 조립에서 보완하고 v12로 공식반대/재작성2사례 독립검수 PASS; 운영 미적용. 서강2023모의 인문 공식5기준 입력·실제 품질 PASS, 수준 calibration은 별도. 관련44검사PASS. 품질 원장57회·추산USD4.691360(이번16회·USD1.312576), 실청구 미확인. 운영 변경/Credit0, 기존5 E2E·공개 건국2 보존. 문항별 근거·운영확대 미완료. [상세·89문항 실패명세](../official-answer-quality-20261023.md).
+
+
+## 현재: 대학별 프로필 PHASE 3 — 대표 3문항 실제 E2E PASS / 전체 PARTIAL
+
+숙명2025모의1-1(APP 최초·재첨삭→WEB), 숙명2026수시1·서강2026모의 경제경영(WEB 최초·재첨삭→APP)의 실제 Provider·결과·비교·History PASS. 각 최초1/재첨삭0Credit, 실패3건 추가차감0, 관리자잔액97. iOS Simulator 범위이며 Android/iPhone 신규코드·일반공개는 미검증이다.
+
+숙명2025 실패영수증/이전관측 연결 및 APP 실패request key/PDF mapping 최소 수정. 마지막 실제재첨삭 성공; 이전 미확정1건의 소급 원인은 미확정으로 보존. Worker 최종6b7593a4, WEB code ad6ffec/config배포17244d3b. 71702·Payment·IAP 불변. 기존 건국 인문·수리 E2E 보존.
+
+PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와11대학 일반서비스를 구분한다. [실제 실행·장애·비용·대학별 상태](../university-profile-production-e2e-20261023.md). 다음: 신규3문항 공개 범위/장애 관측 확인 및 나머지 공식 문항 근거·Math leaf 연결. 경희·동국 추가자료 HOLD.

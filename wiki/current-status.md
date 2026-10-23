@@ -2,22 +2,13 @@
 
 성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](essay-p0-direct-execution-20261023.md).
 
-## 2026-10-23 최신 — 고려 대표 운영 E2E PASS
+## 2026-10-23 P0 — 11대학 서비스 연결 진행 중
 
-고려2025수시 인문2 Owner SQL 적용 후 DB전체사후검증 PASS(revision2·단일문항·v12·기존ID/다른정책/submit 보존). WEB 최초/무료재첨삭 completed·독립검수8항목PASS, Credit1/0·잔액97→96, Native iOS Simulator History/결과/4→5비교 PASS. 새실패0, Provider4회/추산USD0.292664(기존격리59회와별도). 기존423/89·공개2 유지, 운영E2E5→6. 문항명/상세근거 표시 잔여 및 실기기 미검증. [실행ID·Ledger·품질·증거](korea-operating-owner-sql-20261023.md).
+운영 E2E는 5대학7문항(건국2·숙명2·서강1·고려1·성균1), 일반계정 공개 확인3문항(건국2·성균1). 성균 일반계정 최초1/재첨삭0Credit·WEB/GalaxyS8 History 완료를 재사용하며 UI 추가 수정 중단. 기본체계28, 상속423/512·미상속89 유지; 과거387/125와 구분한다.
 
-## 2026-10-23 공식 평가자료 연결 후속 — PARTIAL
+서울여대 공식/부분/오답 기존PASS+이번 재작성/대안 v15 독립검수8항목PASS. Worker80e1badb(Registry1/binding1 추가) 배포 및 보존 대조PASS. [Q1 Owner SQL](../supabase/candidates/swu_q1_runtime/README.md) 격리11검사·운영사전10true, **Owner 적용 대기**. 신규 실제운영 History 자동반영·1/0Credit·WEB/APP는 적용 뒤 검증한다. 현재 일반계정 잔액0으로, 다음 유료 운영 검증에는 기존 잔액이 있는 검증 계정이 필요하다. Credit 지급/정책 변경하지 않는다.
 
-28개 기본체계 유지, 기존387 보존·36추가로423/512상속(미상속89). Production512문항 ID·시험·학년도·유형 대조 일치. 고려 공식해설 전달 누락을 로컬 조립에서 보완하고 v12로 공식반대/재작성2사례 독립검수 PASS; 운영 미적용. 서강2023모의 인문 공식5기준 입력·실제 품질 PASS, 수준 calibration은 별도. 관련44검사PASS. 품질 원장57회·추산USD4.691360(이번16회·USD1.312576), 실청구 미확인. 운영 변경/Credit0, 기존5 E2E·공개 건국2 보존. 문항별 근거·운영확대 미완료. [상세·89문항 실패명세](official-answer-quality-20261023.md).
-
-
-## 현재: 대학별 프로필 PHASE 3 — 대표 3문항 실제 E2E PASS / 전체 PARTIAL
-
-숙명2025모의1-1(APP 최초·재첨삭→WEB), 숙명2026수시1·서강2026모의 경제경영(WEB 최초·재첨삭→APP)의 실제 Provider·결과·비교·History PASS. 각 최초1/재첨삭0Credit, 실패3건 추가차감0, 관리자잔액97. iOS Simulator 범위이며 Android/iPhone 신규코드·일반공개는 미검증이다.
-
-숙명2025 실패영수증/이전관측 연결 및 APP 실패request key/PDF mapping 최소 수정. 마지막 실제재첨삭 성공; 이전 미확정1건의 소급 원인은 미확정으로 보존. Worker 최종6b7593a4, WEB code ad6ffec/config배포17244d3b. 71702·Payment·IAP 불변. 기존 건국 인문·수리 E2E 보존.
-
-PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와11대학 일반서비스를 구분한다. [실제 실행·장애·비용·대학별 상태](university-profile-production-e2e-20261023.md). 다음: 신규3문항 공개 범위/장애 관측 확인 및 나머지 공식 문항 근거·Math leaf 연결. 경희·동국 추가자료 HOLD.
+나머지 우선순위: 숭실·경희 미검증 재작성/대안 → 정상대표 운영연결. 항공 오답EXACT_QUOTE, 가천부분 minimal_editing/오답grounding, 동국미확정응답은 해결 전 성공으로 집계하지 않는다. [11대학 표·호출비용·보존·배포](essay-p0-direct-execution-20261023.md). 기존 고려/서강/숙명 성공과 실패 명세는 상세 문서 및 [과거 체크포인트](history/status-checkpoints.md)에 보존했다.
 
 ## Product state
 

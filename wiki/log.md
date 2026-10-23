@@ -4652,3 +4652,7 @@ Owner PDF SQL 사후검증PASS. Worker85a7a6a5/WEB29b85199 배포, 기존 bindin
 - 2026-10-23: SKKU Q1 ordinary-account initial/free rewrite completed; Ledger1/0Credit, balance1→0→0; WEB History/comparison and GalaxyS8 two-record History cross-query PASS. Four Provider calls, estimateUSD0.290560; policies/IDs/prior SKKU records preserved. [Evidence](essay-p0-direct-execution-20261023.md).
 
 - 2026-10-23: History return/completion/focus/resume/visible periodic refresh and saved criterion-evidence presentation fixed. WEB Pagesa8796fb4 and GalaxyS8build2026102303 accepted; WEB4/Native26tests, builds PASS. Existing runs/IDs/policies/Ledger preserved, no new Provider/Credit. [Scope and evidence](essay-p0-direct-execution-20261023.md).
+
+## 2026-10-23 — Remaining university P0 continuation
+
+Reused SKKU success; no UI edits. SWU/Soongsil new rewrite+alternative PASS; Kyunghee rewritePASS/alternativev15FAIL→v16candidatePASS; KAU wrong offsetv15FAIL→v16candidatePASS.16calls/USD1.276760 estimate; cumulative isolated143/142completed/1unknown/USD11.763768. SWU Worker80e1badb deployed, existing modules/settings/public scope preserved; Owner SQL11local/10precheckPASS, awaiting Owner application. Existing E2E5universities7questions/public3 remain; new operating History/Credit/WEBAPP pending. [Details](essay-p0-direct-execution-20261023.md).

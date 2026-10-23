@@ -1,0 +1,146 @@
+{
+  "scope": "isolated quality only; not operating E2E",
+  "cases": [
+    {
+      "case": "swu-p0-D-rewrite-v15",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "5217f8cff4cab2eb9cff0b56879b0b2e4002e3aa4980b3c4b53145d0541ebdf4",
+      "usage_estimate_usd": 0.145724
+    },
+    {
+      "case": "swu-p0-E-alternative-v15",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "5b93370cded16ac416c40fd9df41372fdd673893e4e59f7721f4f8975af7fa43",
+      "usage_estimate_usd": 0.132824
+    },
+    {
+      "case": "soongsil-p0-D-rewrite-v15",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "da1e6bd67efed2e7b055a5dd784c12a4c95ac4c18c826962c141d429a4340856",
+      "usage_estimate_usd": 0.147732
+    },
+    {
+      "case": "soongsil-p0-E-alternative-v15",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "7240c254444e427e919bf6e5a4c5e5bc2f7c3894f7ee3620c289698e20b1430b",
+      "usage_estimate_usd": 0.1235
+    },
+    {
+      "case": "kyunghee-p0-D-rewrite-v15",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "77a73be75422f5f2446b027f9e95650869607841005c20b68084d077992c3374",
+      "usage_estimate_usd": 0.175092
+    },
+    {
+      "case": "kyunghee-p0-E-alternative-v15",
+      "contract": "PASS",
+      "independent_review": "FAIL_OR_UNCERTAIN",
+      "decisions": {
+        "grounding": "fail",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "fail",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "fail"
+      },
+      "input_sha256": "5204b679b2b148fffb7bccbf7af526110850306b16e2b95af79f4d9ec5a42ef2",
+      "usage_estimate_usd": 0.188404
+    },
+    {
+      "case": "kyunghee-p0-E-alternative-v16-candidate",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "2173d2b2310f881301345b2b0f680326c745d4545fe5b30a5796d8a3e37d6f93",
+      "usage_estimate_usd": 0.144436
+    },
+    {
+      "case": "kau-p0-C-wrong-v16-candidate",
+      "contract": "PASS",
+      "independent_review": "PASS",
+      "decisions": {
+        "grounding": "pass",
+        "length_requirement": "pass",
+        "minimal_editing": "pass",
+        "no_content_clarity_confusion": "pass",
+        "previous_task_review": "pass",
+        "root_binding": "pass",
+        "sentence_diagnosis": "pass",
+        "stance_preservation": "pass"
+      },
+      "input_sha256": "29c2025167314d2cab7300ff6237f8952794f4190b8eefc613afc17b29c63a77",
+      "usage_estimate_usd": 0.219048
+    }
+  ],
+  "provider_calls": 16,
+  "usage_estimate_usd": 1.27676,
+  "invoice_verified": false,
+  "production_credit_transactions": 0,
+  "candidate_v16_deployed": false
+}
