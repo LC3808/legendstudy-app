@@ -4625,3 +4625,7 @@ Owner 승인 후 v21→v22진단→v23 배포. 실제 Apple OCSP P384/SHA256 Edg
 ## 2026-10-23 — Android 추가 구매도 TEST 확인
 
 13:36 Play 주문 TEST·환불·0원, Google Ledger0. Owner 제공 앱계정은 앞서 확인한 재가입 계정과 정확일치, 무료혜택 중복억제 유지. Play결제계정과 앱로그인계정 구분 안내, 일반 실결제 E2E 미완료. [상세](iap-production-read-only-20261023.md).
+
+## 2026-10-23 — Owner 논술랩 문구·구매내역 뒤로가기
+
+논술LAB 설명을 Owner지정문구로 변경, 구매내역 첫뒤로가기→충전탭/다음뒤로가기→이전화면. 로컬코드·위젯회귀 추가; Dart버전불일치로 Flutter실행불가. 앱배포대기, 첨삭백엔드불변. [상세](iap-production-read-only-20261023.md#owner-ui-correction--oct23).

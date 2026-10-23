@@ -488,3 +488,19 @@ No new signup fault or need to bypass benefit markers established. App login
 identity and Play billing identity are separate; purchase dialog account must be
 checked before another charge. No new keys, manual grants, refunds or test-credit
 Production bypass performed. Raw email/order identifiers omitted here.
+
+## Owner UI correction — Oct23
+
+Within existing [native navigation](ui-ux-v1.md) and IAP scope, Owner requests
+논술 LAB description exactly: “대학별 평가 기준에 맞춰 내 답안을 점검하고, 직접 고쳐써보세요”.
+Remove the availability/technical Credit·첨삭·재작성·평가 description from this card.
+Release-readiness branch contains the reported old string; recovery branch had
+an older HOLD description at the same component. Only this branch's body changed
+to the explicit Owner text; no other worktree/Essay backend change.
+Purchase history is a local tab, so PopScope intercepts the first app-bar/system
+back to return to top-up; subsequent back leaves the page normally. Controller
+lifetime and purchase state remain unchanged. Widget regression covers app-bar
+and Android system back and eventual exit. Formatting/diff checks completed;
+Flutter execution blocked by installed Dart3.8.0 vs required^3.13.3. App release
+and device UX acceptance remain pending; these edits are not in the installed app.
+No schema, profile, learning record, transaction or Credit balance changes.
