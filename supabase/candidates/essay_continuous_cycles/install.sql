@@ -62,6 +62,16 @@ begin
  end loop;
  if p_parent is not null then
   select * into parent from essay_exam_private.runs where id=p_parent and account_id=account;
+  -- A free rewrite retains the original approved model/prompt. Current exam
+  -- approval and package remain mandatory; never rewrite the parent's snapshot.
+  if parent.id is null or parent.exam_id<>p_exam then raise exception 'REEVALUATION_NOT_INCLUDED';end if;
+  if parent.snapshot->'runtime'->>'package_digest' is distinct from policy->>'package_digest' then
+   raise exception 'FROZEN_QUESTION_SET';end if;
+  binding=essay_private.provider_policy(parent.snapshot->'runtime'->>'regime');
+  if binding is distinct from parent.snapshot->'runtime'->'binding' or
+   not essay_private.provider_binding_valid(parent.snapshot->'runtime'->>'regime',binding) then
+   raise sqlstate 'PT422' using message='MODEL_POLICY_NOT_APPROVED';end if;
+  policy=jsonb_set(policy,'{regime}',parent.snapshot->'runtime'->'regime');
   -- Cross-platform local Draft counters are not revision authority. Pin a
   -- rewrite revision to its immutable stored parent, independently of the client.
   select jsonb_agg(x||jsonb_build_object('revision',coalesce((select (a->>'revision')::bigint + case when a->>'body' is distinct from x->>'body' then 1 else 0 end from jsonb_array_elements(parent.snapshot->'answers') a where a->>'questionId'=x->>'questionId'),0)))

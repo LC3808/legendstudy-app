@@ -137,7 +137,25 @@ def cases(sql, root, user, account, exam, question):
     h=history()['runs'][0];assert h['free_rewrite_available'];assert 'local_reviews' not in h['result']['questions'][0]['evaluation']
     assert history(other)['runs']==[]
     rewritten=[dict(questionId=question,body='Rewritten answer',revision=0)]
+    # A policy rollout must not invalidate an already-paid free rewrite.
+    newer=dict(binding,policy_version='fixture-v2',prompt_version='scaffolding-1.3-v10')
+    newregime='essay-v1.3/policy/'+sql(f"select encode(sha256(convert_to(({literal(newer)})::text,'UTF8')),'hex')")
+    sql(f"create or replace function essay_private.provider_policy(p_regime text) returns jsonb language sql immutable as $$select case when p_regime='{regime}' then {literal(binding)} when p_regime='{newregime}' then {literal(newer)} else null::jsonb end$$;")
+    sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(dict(policy,regime=newregime))}$$;")
+    before_rewrite=sql(f"select count(*) from public.credit_transactions where account_id='{account}'")
+    sql(submit(rewritten,str(uuid.uuid4()),initial,subject=other),'REEVALUATION_NOT_INCLUDED')
+    sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(dict(policy,regime=newregime,package_digest='e'*64))}$$;")
+    sql(submit(rewritten,str(uuid.uuid4()),initial),'FROZEN_QUESTION_SET')
+    sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(dict(policy,regime=newregime))}$$;")
+    # Revoked historical policy must still fail closed, without reserving Credit.
+    sql(f"create or replace function essay_private.provider_policy(p_regime text) returns jsonb language sql immutable as $$select case when p_regime='{newregime}' then {literal(newer)} else null::jsonb end$$;")
+    sql(submit(rewritten,str(uuid.uuid4()),initial),'MODEL_POLICY_NOT_APPROVED')
+    assert sql(f"select count(*) from public.credit_transactions where account_id='{account}'")==before_rewrite
+    sql(f"create or replace function essay_private.provider_policy(p_regime text) returns jsonb language sql immutable as $$select case when p_regime='{regime}' then {literal(binding)} when p_regime='{newregime}' then {literal(newer)} else null::jsonb end$$;")
     second=sql(submit(rewritten,str(uuid.uuid4()),initial))
+    frozen=json.loads(sql(f"select snapshot->'runtime' from essay_exam_private.runs where id='{second}'"))
+    assert frozen['binding']==binding and frozen['regime']==regime
+    sql(f"create or replace function essay_exam_private.runtime_policy(p_exam uuid) returns jsonb language sql stable as $$select {literal(policy)}$$;")
     secondclaim=json.loads(sql(claim(second,str(uuid.uuid4()))))
     assert sql(finish(second,secondclaim['lease_token']))=='completed'
     assert not history()['runs'][0]['free_rewrite_available']
