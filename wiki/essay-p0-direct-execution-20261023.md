@@ -272,3 +272,13 @@ reports versionName0.1.0/versionCode2026102302 (corrects prior prose calling thi
 Existing app data retained via install -r. Mirroring still does not respond to the visible app-icon
 click; Owner asked to open Q1 on the physical device and report PDF/button state. Physical
 PDF/feedback acceptance and physical History cross-query remain pending; do not mark PASS.
+
+## SKKU GalaxyS8 PDF/button Owner acceptance — 2026-10-23
+
+Owner reports “문제 보임, 첨삭 버튼 눌림” on the updated GalaxyS8, following the requested
+2026 regular admissions/language/first session/Q1 path. Physical problem display and feedback
+button interaction are OWNER-VERIFIED PASS on build2026102302. Together with agent-observed
+ordinary-account WEB PDF/button acceptance, this closes the scoped PDF/public-entry blocker.
+This report does not establish a submitted Provider run, assessment completion, Credit debit,
+free rewrite, or physical History cross-query. Those remain unverified for this ordinary account;
+prior operator/Simulator E2E evidence remains unchanged. No further SQL required for this fix.

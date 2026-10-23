@@ -1,6 +1,6 @@
 # SKKU Q1 problem PDF — Owner apply bundle
 
-Project: `stlhijzpjfgwwdgunlsd`. Status: OWNER APPLIED; independent Production postcheck PASS; ordinary-account WEB PDF/feedback availability PASS; physical pending.
+Project: `stlhijzpjfgwwdgunlsd`. Status: OWNER APPLIED; independent Production postcheck PASS; ordinary-account WEB PDF/feedback availability PASS; GalaxyS8 PDF/button Owner PASS.
 
 Run `precheck.sql` (all9 true), then the complete `apply.sql`, then `postcheck.sql`.
 Agent independently queried Production: all9 prechecks true on2026-10-23.
@@ -19,7 +19,7 @@ Original is retained unmodified, including sibling question pages5–6, without 
 Q2/Q3 evaluation approval is not granted. Owner previously confirmed source-use permission.
 
 WEB/APP manifests add only Q1. Owner SQL verification passed. WEB ordinary-account PDF/feedback availability PASS; APP2026102302 installed on GalaxyS8,
-physical rendering/feedback acceptance pending.
+physical problem display/feedback button interaction Owner PASS (not a completed assessment).
 Gateway CSV and Worker JSON public-exam lists preserve the existing Konkuk entry
 and added only `035e5d8d-e91f-5acd-a3a3-4d321bc9f067`. Existing digest-pinned package
 selects only Q1. No authentication or account ownership bypass.
