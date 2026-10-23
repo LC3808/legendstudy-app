@@ -14,7 +14,7 @@ from .live_worker import ProviderFailure
 from .live_worker import Worker, SignedReview, OpenAIResponses, output_schema, digest, provider_binding, require
 from .positive_learning import PROMPT, PROMPT_VERSION
 
-SUPPORTED_PROMPTS = frozenset({"scaffolding-1.3-v3", "scaffolding-1.3-v6", "scaffolding-1.3-v7", "scaffolding-1.3-v10", "scaffolding-1.3-v12"})
+SUPPORTED_PROMPTS = frozenset({"scaffolding-1.3-v3", "scaffolding-1.3-v6", "scaffolding-1.3-v7", "scaffolding-1.3-v10", "scaffolding-1.3-v12", "scaffolding-1.3-v15"})
 
 def configured_binding(requested, legacy, approved=None):
     """Exact server deployment allowlist; never authorize a client-selected model."""

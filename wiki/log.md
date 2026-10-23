@@ -4626,3 +4626,6 @@ Worker2413fe3d 100%, 기존79Registry/설정 보존 및 고려 추가80 확인. 
 
 ## 2026-10-23 — 고려 대표 운영 E2E 완료
 고려2025수시 인문2 Owner SQL 적용 후 DB전체사후검증 PASS(revision2·단일문항·v12·기존ID/다른정책/submit 보존). WEB 최초/무료재첨삭 completed·독립검수8항목PASS, Credit1/0·잔액97→96, Native iOS Simulator History/결과/4→5비교 PASS. 새실패0, Provider4회/추산USD0.292664(기존격리59회와별도). 기존423/89·공개2 유지, 운영E2E5→6. 문항명/상세근거 표시 잔여 및 실기기 미검증. [실행ID·Ledger·품질·증거](korea-operating-owner-sql-20261023.md).
+
+## 2026-10-23 — SKKU v15 quality and bounded SQL candidate
+Five isolated answer cases and eight independent checks PASS; prior failures retained. Scoped adapter/runtime50 tests PASS, SKKU local SQL10 checks PASS. No Production SQL or new public activation. Ledger106 calls/one unknown/USD8.588736 known usage. Galaxy S8 login/MY/Credit display verified; physical E2E pending. [Details](essay-p0-direct-execution-20261023.md).

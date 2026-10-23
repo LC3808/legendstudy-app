@@ -72,3 +72,31 @@ rollback; prepare university-scoped precheck/apply/postcheck/emergency-gate SQL 
 verify Owner application, actual1/0Credit evaluations/rewrite/History and WEB/physical APP paths.
 Public activation must follow actual question verification. Existing six successful questions are
 preserved and need no duplicate Provider runs. Record costs, failures and public counts separately.
+
+## P0 quality follow-up — v15 candidate
+
+SKKU v15 corrects false total-absence claims for partial answers and prevents attributing
+student-invented claims to the source. Five cases (official, partial, wrong, alternative,
+feedback-based rewrite) all passed contract and eight independent review checks. Earlier failed
+outputs remain evidence. This is isolated quality validation, not Production E2E.
+
+Soongsil, SWU, KAU, Gachon and Kyunghee official-answer evaluation/review passed automatically
+on v14; source calibration and remaining four case types are still required. Dongguk official
+evaluation has one unknown/failed response; no automatic replay or invented success.
+Quality ledger106 calls,105 completed,1 unknown; known-usage estimate USD8.588736, invoice
+unverified and unknown-call usage excluded. Korea operating calls are tracked separately.
+
+SKKU Owner SQL candidate passed10 local PostgreSQL checks, including preserved existing runtime
+and provider policies, submit definition, repeated-apply rejection and idempotent emergency gate.
+Package attaches one already registered common-profile source to this exam's document list; it
+preserves original document references and other review metadata. Candidate digest
+`90c515fbca16a5989969ca3d6e3b6e95fb096215dbbfd2271838bcfd0a651b4a`.
+Read-only baseline:237 exam IDs/700 question IDs; selected SKKU revision1 and zero runs.
+Worker v15 is staged; deployment and Owner application are not yet claimed.50 Python adapter,
+reviewed-runtime and packaging tests pass. Only v15 is added to supported operating prompt versions;
+v13/v14 remain failed local experiments with no approved operating binding.
+
+Galaxy S8 Owner login confirmed; actual native MY shows available1 Credit and Credit history
+opens. This account is distinct from earlier operator96-Credit evidence. Mirrored touch navigation
+is unreliable; no physical evaluation/History cross-query completion claimed. Private screenshot
+`android-physical-my-credit-20261023.png`. iPhone installation remains verified, UI acceptance pending.

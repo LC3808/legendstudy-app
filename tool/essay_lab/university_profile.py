@@ -7,6 +7,21 @@ from .live_worker import digest, require
 VERSION = 'university-profile-resolver-v1'
 
 
+def _text_route(profile, exam_id, question_id):
+    if profile['engine_route'] != 'special':
+        return profile['engine_route']
+    scopes = profile.get('text_runtime_scopes', [])
+    for scope in scopes:
+        require(scope.get('review_status') == 'REVIEWED' and scope.get('source_refs')
+                and scope.get('exam_id') and scope.get('question_ids')
+                and scope.get('engine_route') in ('humanities', 'business'),
+                'TEXT_RUNTIME_SCOPE_REVIEW_REQUIRED')
+    matches = [s for s in scopes if s['exam_id'] == exam_id
+               and question_id in s['question_ids']]
+    require(len(matches) <= 1, 'TEXT_RUNTIME_SCOPE_AMBIGUOUS')
+    return matches[0]['engine_route'] if matches else 'special'
+
+
 def profile_digest(profile):
     return digest({k: v for k, v in profile.items() if k != 'content_sha256'})
 
@@ -127,7 +142,10 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
     entries = [q for q in package['questions'] if q['question_id'] == question_id]
     require(len(entries) == 1, 'QUESTION_NOT_IN_EXAM')
     profile = select(profiles, exam, question_id, pinned=pinned_profile)
-    require(profile['engine_route'] in ('humanities', 'business'), 'USE_EXISTING_MATH_RUNTIME')
+    # A reviewed, digest-pinned question scope may reuse a text engine in a
+    # mixed exam. Unscoped math/special siblings cannot inherit that route.
+    require(_text_route(profile, exam['examId'], question_id) in ('humanities', 'business'),
+            'USE_EXISTING_MATH_RUNTIME')
     entry = deepcopy(entries[0]); mappings = entry['source_page_references']
     require(all(m.get('questionId') == question_id for m in mappings), 'QUESTION_SOURCE_MISMATCH')
     official = [m for m in mappings if m['role'] == 'criteria']
@@ -221,7 +239,8 @@ def bind_material(package, registry, question_id, profiles, **runtime_args):
     from .material_runtime import reviewed_material_question
     out, manifest = compose_material(package, registry, question_id, profiles)
     selected = next(p for p in profiles if p['content_sha256'] == manifest['profile_digest'])
-    require(selected['engine_route'] == runtime_args.get('evaluation_type'), 'PROFILE_ENGINE_MISMATCH')
+    route = _text_route(selected, package['exam_id'], question_id)
+    require(route == runtime_args.get('evaluation_type'), 'PROFILE_ENGINE_MISMATCH')
     require(out == {**package, 'questions': [next(q for q in package['questions']
                     if q['question_id'] == question_id)]}, 'COMPILED_PACKAGE_REVIEW_REQUIRED')
     hosted, report = reviewed_material_question(out, registry, question_id, **runtime_args)

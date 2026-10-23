@@ -130,6 +130,28 @@ class ProfileTests(unittest.TestCase):
   with self.assertRaisesRegex(Invalid,'COMMON_EVIDENCE_SCOPE'):compose_material(self.package,self.registry,'q',[self.profile])
 
 
+ def test_language_short_reuses_text_host_without_admitting_math_sibling(self):
+  self.profile.update(profile_id='uep/gachon/language-short',engine_route='special',
+      university_id='a9e38cdc-9593-4c60-b8a6-698133f48518')
+  self.exam['universityId']=self.profile['university_id']
+  self.package['university_id']=self.profile['university_id']
+  self.profile['text_runtime_scopes']=[dict(exam_id='e',question_ids=['q'],
+      engine_route='humanities',review_status='REVIEWED',source_refs=['official-source'])]
+  self.pin()
+  host,_=bind_material(self.package,self.registry,'q',[self.profile],
+      pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+  self.assertFalse(host.approved_processing)
+  self.exam['questions'].append(dict(id='math-sibling'))
+  with self.assertRaisesRegex(Invalid,'PROFILE_MISSING'):
+   select([self.profile],self.exam,'math-sibling')
+  self.profile['text_runtime_scopes'][0]['question_ids']=['other'];self.pin()
+  with self.assertRaisesRegex(Invalid,'USE_EXISTING_MATH_RUNTIME'):
+   compose_material(self.package,self.registry,'q',[self.profile])
+  self.profile['text_runtime_scopes'][0]['question_ids']=['q']
+  self.profile['text_runtime_scopes'][0]['review_status']='DRAFT';self.pin()
+  with self.assertRaisesRegex(Invalid,'TEXT_RUNTIME_SCOPE_REVIEW_REQUIRED'):
+   compose_material(self.package,self.registry,'q',[self.profile])
+
  def test_math_profile_is_not_replaced_or_given_numeric_score(self):
   from essay_lab.university_profile import bind_math
   from essay_lab.live_worker import digest
