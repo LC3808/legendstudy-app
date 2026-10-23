@@ -18,7 +18,13 @@
   ],
   "unchanged_tracked_files": 1350,
   "essay_backend_config_assets_unchanged": true,
-  "build_run": false,
+  "build_run": true,
   "device_install_run": false,
-  "target_push_run": false
+  "target_push_run": false,
+  "android_build": "PASS",
+  "android_apk_sha256": "ff51e3a85da6831dcec8282b1ba19712d23a1251cfb582a0d2d33cc48b47f639",
+  "android_apk_bytes": 89477950,
+  "tests_passed": 29,
+  "analyze": "1 existing info: avoid_relative_lib_imports in math_canonical_selection_test.dart; no errors/warnings",
+  "post_build_tracked_tree_equal": true
 }

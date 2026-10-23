@@ -53,3 +53,19 @@ verify latest materials/PDF/startup/theme and Credit together, then integrate on
 against the rechecked latest baseline. Do not push a broad restoration into an old
 Claude branch or overwrite concurrent service changes. The old4035592 commit is
 retained as an audit trail and remains release HOLD.
+
+## Owner-requested Android build — 2026-10-23
+
+Android release APK PASS (89.5MB), Flutter3.47.7/Dart3.13.5. Existing production
+public defines and upload signing reused; com.legendstudy.app1.0.0+18 verified,
+APK signature verification PASS for device API28. No dependency upgrade.
+Source/PDF/History/account/Credit tests29 PASS. Analyze reports one pre-existing
+info in test/math_canonical_selection_test.dart (relative lib import); no compiler
+errors or warnings from analyze, but strict analyze exit1 is NOT called PASS.
+Kept that Essay test unchanged. Build warnings: existing Gradle/Kotlin/SDK/font.
+All1,361 tracked candidate files still match candidate tree after build, including
+lockfile, Essay/backend and native settings. APK hash is recorded in the manifest.
+Artifact: build/device-validation/latest-app-credit-candidate/build/app/outputs/
+flutter-apk/app-release.apk. Not the old merge-candidate APK.
+Device installation, iOS build, target integration and Store submission NOT_RUN.
+Earlier pre-build status is historical; this section supersedes Android build only.

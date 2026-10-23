@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP P0](iap-p0-device-validation-20261023.md): 기준 재확정; 빌드전 HOLD.
+[IAP P0](iap-p0-device-validation-20261023.md): 최신 Android 빌드 PASS; 기기 대기.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

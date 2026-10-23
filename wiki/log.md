@@ -4644,3 +4644,8 @@ Owner expands regression to obsolete UI/material connection. Confirmed target ba
 ## 2026-10-23 — Corrected complete APP baseline, before build
 
 c2f0054 local/remote service branch matched; latest material/PDF/startup/History lineage preserved. Isolated candidate applies payment11 files only;1,350 other tracked files identical including entire Essay/backend/config/assets. No build/install/target merge. [Exact scope and verification limits](iap-p0-baseline-reconciliation-20261023.md).
+
+
+## 2026-10-23 — Corrected baseline Android release build
+
+Latest c2f0054+Credit-only candidate: signed Android1.0.0+18 release89.5MB PASS;29 regression tests PASS. Analyze1 existing info retained;1,361 tracked files unchanged after build. No install/target merge/Store action. [Evidence](iap-p0-baseline-reconciliation-20261023.md).
