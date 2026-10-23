@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
+import '../../credits/credit_history.dart';
 
 /// Existing owner-only ledger reads. Never invokes billing or grant RPCs.
 final purchaseHistoryProvider =
@@ -18,7 +19,7 @@ final purchaseHistoryProvider =
       if (account == null) return [];
       final rows = await client
           .from('credit_transactions')
-          .select('created_at,balance_delta,reason_code')
+          .select('created_at,balance_delta,reason_code,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)')
           .eq('account_id', account['id'] as String)
           .eq('transaction_type', 'purchase')
           .order('created_at', ascending: false)
@@ -71,7 +72,7 @@ class PurchaseHistory extends ConsumerWidget {
                             'iap_google_v1' => 'Google Play',
                             'iap_apple_v1' => 'App Store',
                             _ => 'Credit 구매',
-                          }} · ${_date(row['created_at'] as String)}',
+                          }} · ${creditDate(row['created_at'] as String)}${_expiry(row)}',
                         ),
                       ),
                       const Divider(),
@@ -83,9 +84,10 @@ class PurchaseHistory extends ConsumerWidget {
     );
   }
 
-  String _date(String value) {
-    final d = DateTime.parse(value).toLocal();
-    String two(int n) => n.toString().padLeft(2, '0');
-    return '${d.year}.${two(d.month)}.${two(d.day)} ${two(d.hour)}:${two(d.minute)}';
+  String _expiry(Map<String, dynamic> row) {
+    final grant = row['credit_grants'] as Map<String, dynamic>?;
+    if (grant == null) return '';
+    final expiry = grant['expires_at'] as String?;
+    return expiry == null ? '\n만료 없음' : '\n만료일 ${creditDate(expiry)}';
   }
 }

@@ -13,7 +13,7 @@ class LegendStudyLabEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CompactUtilityCard(
     title: '논술 LAB',
-    body: '기출문제를 선택하고 확인하세요. AI 첨삭 서비스는 준비 중입니다.',
+    body: '대학별 평가 기준에 맞춰 내 답안을 점검하고, 직접 고쳐써보세요',
     action: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

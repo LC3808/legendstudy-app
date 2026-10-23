@@ -36,6 +36,7 @@ void main() {
                 'created_at': '2026-10-16T04:00:00Z',
                 'balance_delta': 1,
                 'reason_code': 'iap_google_v1',
+                'credit_grants': {'expires_at': '2027-01-16T14:59:59Z'},
               },
             ];
           }),
@@ -55,6 +56,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('1 Credit 충전'), findsOneWidget);
     expect(find.textContaining('Google Play'), findsOneWidget);
+    expect(find.textContaining('만료일 2027.01.16'), findsOneWidget);
+    expect(find.textContaining('14:59'), findsNothing);
     await tester.tap(find.text('새로고침'));
     await tester.pumpAndSettle();
     expect(reads, 2);

@@ -102,7 +102,7 @@ class ProfilePage extends ConsumerWidget {
               ),
               if (auth.value?.isAuthenticated == true) ...[
                 const LearningInfoRow(),
-                const CreditBalanceCard(showTopUp: true, compact: true),
+                const CreditBalanceCard(showTopUp: true, showHistory: true),
               ],
             ],
           ),

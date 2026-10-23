@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/features/essay/math_gateway.dart';
+import 'package:legendstudy_app/features/essay/math_gateway.dart';
 void main() {
  const leaf='3bab07d3-c047-53c2-89ad-9fa20ec7b3f3';
  final rows=<Map<String,dynamic>>[{'essay_exam_id':'exam','essay_question_id':'q1','leaf_id':leaf}];

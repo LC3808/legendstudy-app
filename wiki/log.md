@@ -4609,3 +4609,12 @@ signup trigger failure. School cache miss1. Admin observed RPCs200; iOS Error
 cause unresolved. Unified remote main and active Oct23 authority, Claude handoff,
 Grok Oct12 read. Only own Wiki modified, no Production/other worktree writes.
 [Six-incident evidence and PHASE2 boundary](iap-production-read-only-20261023.md#owner-six-incident-investigation--2026-10-23-follow-up).
+
+## 2026-10-23 — Owner P0 SDK/build/device/merge preparation
+
+Explicit Owner returns work to iap-fix. Flutter3.47.7/Dart3.13.5, analyze PASS,
+Credit26+regression49 PASS, Android/iOS source builds PASS. iPhone12 install/launch
+PASS; Owner UI checklist pending. Android Play/upload signer mismatch, separate
+device requested; no delete. Target release branch confirmed; scoped candidate
+analyze/UI6/Android PASS, merge held for device acceptance. Exact-second expiry
+SQL isolated PASS, Production unchanged. [Current report](iap-p0-device-validation-20261023.md).

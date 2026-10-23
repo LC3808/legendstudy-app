@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/config/app_config.dart';
 import '../credits/credit_balance.dart';
+import '../credits/credit_history.dart';
 import 'iap_controller.dart';
 import 'presentation/purchase_history.dart';
 import 'purchase_verification.dart';
@@ -42,6 +43,7 @@ final iapControllerProvider = Provider.autoDispose<IapController?>((ref) {
     onBalanceChanged: () {
       ref.invalidate(creditBalanceProvider);
       ref.invalidate(purchaseHistoryProvider);
+      ref.invalidate(creditHistoryProvider);
     },
   );
   ref.onDispose(controller.dispose);

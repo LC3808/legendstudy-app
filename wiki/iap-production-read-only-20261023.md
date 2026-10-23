@@ -1,3 +1,5 @@
+> Superseded checkpoint: [Owner P0 native validation](iap-p0-device-validation-20261023.md). Prior recovery successes are preserved; no payment re-investigation.
+
 # IAP Production recovery — PHASE 1 read-only checkpoint
 
 2026-10-23 KST. Owner authorized Production READ-ONLY investigation in

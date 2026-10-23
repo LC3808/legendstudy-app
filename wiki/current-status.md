@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP PHASE1](iap-production-read-only-20261023.md): Google 설정누락, 6장애 PARTIAL.
+[IAP P0](iap-p0-device-validation-20261023.md): 양OS빌드 PASS; 실기기검수·병합 대기.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

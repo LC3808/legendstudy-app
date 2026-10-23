@@ -1,0 +1,654 @@
+--- a/lib/features/billing/presentation/credit_purchase_page.dart
++++ b/lib/features/billing/presentation/credit_purchase_page.dart
+@@ -9,6 +9,7 @@
+ import '../billing_providers.dart';
+ import '../credit_product.dart';
+ import '../iap_controller.dart';
++import 'purchase_history.dart';
+ 
+ /// 논술 Credit 충전 — Apple IAP / Google Play Billing (consumable).
+ ///
+@@ -24,6 +25,7 @@
+ 
+ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
+   IapController? _controller;
++  bool _showHistory = false;
+ 
+   @override
+   Widget build(BuildContext context) {
+@@ -50,11 +52,43 @@
+       );
+     }
+ 
++    final tabs = Wrap(
++      spacing: 8,
++      children: [
++        ChoiceChip(
++          label: const Text('충전'),
++          selected: !_showHistory,
++          onSelected: (_) => setState(() => _showHistory = false),
++        ),
++        ChoiceChip(
++          label: const Text('구매내역'),
++          selected: _showHistory,
++          onSelected: (_) => setState(() => _showHistory = true),
++        ),
++      ],
++    );
++    if (_showHistory) {
++      return PopScope<Object?>(
++        canPop: false,
++        onPopInvokedWithResult: (didPop, _) {
++          if (!didPop && mounted) setState(() => _showHistory = false);
++        },
++        child: ShellPage(
++          children: [
++            const SectionHeader('Credit 충전'),
++            tabs,
++            const SizedBox(height: AppTokens.space12),
++            const PurchaseHistory(),
++          ],
++        ),
++      );
++    }
+     if (controller == null) {
+-      return const ShellPage(
++      return ShellPage(
+         children: [
+-          SectionHeader('Credit 충전'),
+-          Text('지금은 Credit 충전을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
++          const SectionHeader('Credit 충전'),
++          tabs,
++          const Text('지금은 Credit 충전을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
+         ],
+       );
+     }
+@@ -65,6 +99,7 @@
+         return ShellPage(
+           children: [
+             const SectionHeader('Credit 충전'),
++            tabs,
+             const CreditBalanceCard(),
+             const SizedBox(height: AppTokens.space12),
+             if (controller.loadingProducts)
+--- /dev/null
++++ b/lib/features/billing/presentation/purchase_history.dart
+@@ -0,0 +1,93 @@
++import 'package:flutter/material.dart';
++import 'package:flutter_riverpod/flutter_riverpod.dart';
++
++import '../../../core/supabase/supabase_providers.dart';
++import '../../credits/credit_history.dart';
++
++/// Existing owner-only ledger reads. Never invokes billing or grant RPCs.
++final purchaseHistoryProvider =
++    FutureProvider.autoDispose<List<Map<String, dynamic>>>((ref) async {
++      final auth = ref.watch(authStateProvider);
++      final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
++      final client = ref.watch(supabaseClientProvider);
++      if (owner == null || client == null) throw const SignedOutException();
++      final account = await client
++          .from('credit_accounts')
++          .select('id')
++          .eq('user_id', owner)
++          .maybeSingle();
++      if (account == null) return [];
++      final rows = await client
++          .from('credit_transactions')
++          .select('created_at,balance_delta,reason_code,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)')
++          .eq('account_id', account['id'] as String)
++          .eq('transaction_type', 'purchase')
++          .order('created_at', ascending: false)
++          .order('id', ascending: false)
++          .limit(50);
++      if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
++        return [];
++      }
++      return rows;
++    });
++
++class PurchaseHistory extends ConsumerWidget {
++  const PurchaseHistory({super.key});
++
++  @override
++  Widget build(BuildContext context, WidgetRef ref) {
++    final history = ref.watch(purchaseHistoryProvider);
++    return Column(
++      crossAxisAlignment: CrossAxisAlignment.stretch,
++      children: [
++        const Text('Credit 지급이 완료된 구매 내역 · 최근 50건'),
++        const Text('무료 지급은 포함하지 않아요. 검증 중이거나 취소된 스토어 주문은 여기에 표시되지 않아요.'),
++        Align(
++          alignment: Alignment.centerRight,
++          child: TextButton.icon(
++            onPressed: history.isLoading
++                ? null
++                : () => ref.invalidate(purchaseHistoryProvider),
++            icon: const Icon(Icons.refresh),
++            label: const Text('새로고침'),
++          ),
++        ),
++        history.when(
++          loading: () =>
++              const LinearProgressIndicator(semanticsLabel: '구매내역 조회 중'),
++          error: (_, _) => const Text('구매내역을 불러오지 못했어요. 새로고침해 주세요.'),
++          data: (rows) => rows.isEmpty
++              ? const Padding(
++                  padding: EdgeInsets.symmetric(vertical: 24),
++                  child: Text('지급 완료된 구매 내역이 없어요.'),
++                )
++              : Column(
++                  children: [
++                    for (final row in rows) ...[
++                      ListTile(
++                        contentPadding: EdgeInsets.zero,
++                        title: Text('${row['balance_delta']} Credit 충전'),
++                        subtitle: Text(
++                          '${switch (row['reason_code']) {
++                            'iap_google_v1' => 'Google Play',
++                            'iap_apple_v1' => 'App Store',
++                            _ => 'Credit 구매',
++                          }} · ${creditDate(row['created_at'] as String)}${_expiry(row)}',
++                        ),
++                      ),
++                      const Divider(),
++                    ],
++                  ],
++                ),
++        ),
++      ],
++    );
++  }
++
++  String _expiry(Map<String, dynamic> row) {
++    final grant = row['credit_grants'] as Map<String, dynamic>?;
++    if (grant == null) return '';
++    final expiry = grant['expires_at'] as String?;
++    return expiry == null ? '\n만료 없음' : '\n만료일 ${creditDate(expiry)}';
++  }
++}
+--- a/lib/features/credits/credit_balance.dart
++++ b/lib/features/credits/credit_balance.dart
+@@ -1,6 +1,8 @@
+ import 'package:flutter/material.dart';
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+ import 'package:go_router/go_router.dart';
++
++import '../../core/theme/app_theme.dart';
+ 
+ import '../../core/supabase/supabase_providers.dart';
+ 
+@@ -29,17 +31,26 @@
+   final client = ref.watch(supabaseClientProvider);
+   if (owner == null || client == null) return null;
+   final data = await client.rpc<Map<String, dynamic>>('credit_summary');
+-  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) return null;
++  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
++    return null;
++  }
+   return CreditBalance.fromJson(data);
+ });
+ 
+ class CreditBalanceCard extends ConsumerWidget {
+-  const CreditBalanceCard({super.key, this.showTopUp = false});
++  const CreditBalanceCard({
++    super.key,
++    this.showTopUp = false,
++    this.compact = false,
++    this.showHistory = false,
++  });
+ 
+   /// When true, a "충전하기" entry to the Credit purchase screen is shown below
+   /// the balance (e.g. on the LAB home). The purchase screen itself passes false
+   /// to avoid a recursive entry.
+   final bool showTopUp;
++  final bool compact;
++  final bool showHistory;
+ 
+   @override
+   Widget build(BuildContext context, WidgetRef ref) {
+@@ -56,6 +67,58 @@
+           ),
+           data: (balance) => balance == null
+               ? const SizedBox.shrink()
++              : showHistory
++              ? Column(
++                  crossAxisAlignment: CrossAxisAlignment.start,
++                  children: [
++                    Text('사용 가능 크레딧 ${balance.spendable}개'),
++                    const SizedBox(height: AppTokens.space8),
++                    Wrap(
++                      spacing: AppTokens.space8,
++                      children: [
++                        OutlinedButton(
++                          onPressed: () => context.push('/my/credits'),
++                          child: const Text('크레딧 내역'),
++                        ),
++                        if (showTopUp)
++                          OutlinedButton(
++                            onPressed: () => context.push('/lab/credits'),
++                            child: const Text('충전하기'),
++                          ),
++                      ],
++                    ),
++                  ],
++                )
++              : compact
++              ? Row(
++                  children: [
++                    Expanded(
++                      child: Text(
++                        '사용 가능 Credit ${balance.spendable}개',
++                        style: AppTokens.secondary.copyWith(
++                          color: AppTokens.textPrimary,
++                        ),
++                      ),
++                    ),
++                    if (showTopUp) ...[
++                      const SizedBox(width: AppTokens.space8),
++                      OutlinedButton(
++                        style: OutlinedButton.styleFrom(
++                          padding: const EdgeInsets.symmetric(
++                            horizontal: 8,
++                            vertical: 4,
++                          ),
++                          minimumSize: const Size(48, 28),
++                          tapTargetSize: MaterialTapTargetSize.padded,
++                          visualDensity: VisualDensity.standard,
++                          textStyle: AppTokens.caption,
++                        ),
++                        onPressed: () => context.push('/lab/credits'),
++                        child: const Text('충전하기'),
++                      ),
++                    ],
++                  ],
++                )
+               : Column(
+                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                   children: [
+@@ -63,8 +126,7 @@
+                       contentPadding: EdgeInsets.zero,
+                       title: Text('사용 가능 ${balance.spendable} Credits'),
+                       subtitle: Text(
+-                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}'
+-                        '${balance.nextExpiry == null ? '' : '\n가장 가까운 만료: ${DateTime.parse(balance.nextExpiry!).toLocal()}'}',
++                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}',
+                       ),
+                       trailing: IconButton(
+                         onPressed: () => ref.invalidate(creditBalanceProvider),
+--- /dev/null
++++ b/lib/features/credits/credit_history.dart
+@@ -0,0 +1,105 @@
++import 'package:flutter/material.dart';
++import 'package:flutter_riverpod/flutter_riverpod.dart';
++
++import '../../core/supabase/supabase_providers.dart';
++
++/// Calendar dates follow the Korean Credit policy, regardless of device zone.
++String creditDate(String value) {
++  final date = DateTime.parse(value).toUtc().add(const Duration(hours: 9));
++  String two(int value) => value.toString().padLeft(2, '0');
++  return '${date.year}.${two(date.month)}.${two(date.day)}';
++}
++
++final creditHistoryProvider =
++    FutureProvider.autoDispose<List<Map<String, dynamic>>>((ref) async {
++      final auth = ref.watch(authStateProvider);
++      final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
++      final client = ref.watch(supabaseClientProvider);
++      if (owner == null || client == null) throw const SignedOutException();
++      final account = await client
++          .from('credit_accounts')
++          .select('id')
++          .eq('user_id', owner)
++          .maybeSingle();
++      if (account == null) return [];
++      // Existing composite FK and owner RLS; no new balance or payment RPC.
++      final rows = await client
++          .from('credit_transactions')
++          .select(
++            'created_at,transaction_type,balance_delta,reserved_delta,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)',
++          )
++          .eq('account_id', account['id'] as String)
++          .order('created_at', ascending: false)
++          .order('id', ascending: false)
++          .limit(50);
++      if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
++        return [];
++      }
++      return rows;
++    });
++
++class CreditHistory extends ConsumerWidget {
++  const CreditHistory({super.key});
++
++  @override
++  Widget build(BuildContext context, WidgetRef ref) {
++    final history = ref.watch(creditHistoryProvider);
++    return ListView(
++      padding: const EdgeInsets.all(20),
++      children: [
++        const Text('충전·지급·사용 내역 · 최근 50건'),
++        const Text('만료일은 한국시간 기준이에요.'),
++        Align(
++          alignment: Alignment.centerRight,
++          child: TextButton.icon(
++            onPressed: history.isLoading
++                ? null
++                : () => ref.invalidate(creditHistoryProvider),
++            icon: const Icon(Icons.refresh),
++            label: const Text('새로고침'),
++          ),
++        ),
++        history.when(
++          loading: () => const LinearProgressIndicator(),
++          error: (_, _) => const Text('크레딧 내역을 불러오지 못했어요. 새로고침해 주세요.'),
++          data: (rows) => rows.isEmpty
++              ? const Text('크레딧 내역이 없어요.')
++              : Column(children: [for (final row in rows) _entry(row)]),
++        ),
++      ],
++    );
++  }
++
++  Widget _entry(Map<String, dynamic> row) {
++    final type = row['transaction_type'];
++    final label = switch (type) {
++      'purchase' => '구매 충전',
++      'signup_bonus' => '가입 무료 지급',
++      'reserve' => '사용 대기',
++      'release' => '사용 대기 해제',
++      'consume' => '사용',
++      'refund' => '사용 취소',
++      'expiration' => '만료',
++      'adjustment' => (row['balance_delta'] as num) < 0 ? '차감 조정' : '추가 지급',
++      _ => '지급',
++    };
++    final reserved = type == 'reserve' || type == 'release';
++    final amount = (row[reserved ? 'reserved_delta' : 'balance_delta'] as num)
++        .abs();
++    final grant = row['credit_grants'] as Map<String, dynamic>?;
++    final expiry = grant?['expires_at'] as String?;
++    return ListTile(
++      contentPadding: EdgeInsets.zero,
++      title: Text('$label · 크레딧 $amount개'),
++      subtitle: Text(
++        '${creditDate(row['created_at'] as String)}\n'
++        '${grant == null
++            ? '만료 정보 확인 불가'
++            : expiry == null
++            ? '만료 없음'
++            : '만료일 ${creditDate(expiry)}'}',
++      ),
++      isThreeLine: true,
++    );
++  }
++}
+--- /dev/null
++++ b/test/credit_history_test.dart
+@@ -0,0 +1,45 @@
++import 'package:flutter/material.dart';
++import 'package:flutter_riverpod/flutter_riverpod.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:legendstudy_app/features/credits/credit_history.dart';
++
++void main() {
++  test('Korean date does not depend on device timezone or expose time', () {
++    expect(creditDate('2027-01-23T14:59:59.999999Z'), '2027.01.23');
++    expect(creditDate('2026-10-22T16:00:00Z'), '2026.10.23');
++  });
++  testWidgets('credit history distinguishes free, paid and missing expiry', (
++    tester,
++  ) async {
++    await tester.pumpWidget(
++      ProviderScope(
++        overrides: [
++          creditHistoryProvider.overrideWith(
++            (ref) async => [
++              {
++                'created_at': '2026-10-23T05:39:20Z',
++                'transaction_type': 'purchase',
++                'balance_delta': 1,
++                'reserved_delta': 0,
++                'credit_grants': {'expires_at': '2027-01-23T14:59:59.999999Z'},
++              },
++              {
++                'created_at': '2026-10-23T05:00:00Z',
++                'transaction_type': 'signup_bonus',
++                'balance_delta': 3,
++                'reserved_delta': 0,
++                'credit_grants': {'expires_at': null},
++              },
++            ],
++          ),
++        ],
++        child: const MaterialApp(home: Scaffold(body: CreditHistory())),
++      ),
++    );
++    await tester.pumpAndSettle();
++    expect(find.text('구매 충전 · 크레딧 1개'), findsOneWidget);
++    expect(find.textContaining('만료일 2027.01.23'), findsOneWidget);
++    expect(find.textContaining('만료 없음'), findsOneWidget);
++    expect(find.textContaining('14:59'), findsNothing);
++  });
++}
+--- /dev/null
++++ b/test/purchase_history_test.dart
+@@ -0,0 +1,66 @@
++import 'package:flutter/material.dart';
++import 'package:flutter_riverpod/flutter_riverpod.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:legendstudy_app/features/billing/presentation/purchase_history.dart';
++
++void main() {
++  testWidgets('empty paid history does not claim no store purchase exists', (
++    tester,
++  ) async {
++    await tester.pumpWidget(
++      ProviderScope(
++        overrides: [purchaseHistoryProvider.overrideWith((ref) async => [])],
++        child: const MaterialApp(home: Scaffold(body: PurchaseHistory())),
++      ),
++    );
++    await tester.pumpAndSettle();
++    expect(find.text('지급 완료된 구매 내역이 없어요.'), findsOneWidget);
++    expect(find.textContaining('취소된 스토어 주문'), findsOneWidget);
++  });
++
++  testWidgets('paid record and refresh remain readable at 360px / 200%', (
++    tester,
++  ) async {
++    tester.view.physicalSize = const Size(360, 800);
++    tester.view.devicePixelRatio = 1;
++    addTearDown(tester.view.resetPhysicalSize);
++    addTearDown(tester.view.resetDevicePixelRatio);
++    var reads = 0;
++    await tester.pumpWidget(
++      ProviderScope(
++        overrides: [
++          purchaseHistoryProvider.overrideWith((ref) async {
++            reads++;
++            return [
++              {
++                'created_at': '2026-10-16T04:00:00Z',
++                'balance_delta': 1,
++                'reason_code': 'iap_google_v1',
++                'credit_grants': {'expires_at': '2027-01-16T14:59:59Z'},
++              },
++            ];
++          }),
++        ],
++        child: MaterialApp(
++          builder: (context, child) => MediaQuery(
++            data: MediaQuery.of(context)
++                .copyWith(textScaler: const TextScaler.linear(2)),
++            child: child!,
++          ),
++          home: const Scaffold(
++            body: SingleChildScrollView(child: PurchaseHistory()),
++          ),
++        ),
++      ),
++    );
++    await tester.pumpAndSettle();
++    expect(find.text('1 Credit 충전'), findsOneWidget);
++    expect(find.textContaining('Google Play'), findsOneWidget);
++    expect(find.textContaining('만료일 2027.01.16'), findsOneWidget);
++    expect(find.textContaining('14:59'), findsNothing);
++    await tester.tap(find.text('새로고침'));
++    await tester.pumpAndSettle();
++    expect(reads, 2);
++    expect(tester.takeException(), isNull);
++  });
++}
+--- a/test/billing_page_lifetime_test.dart
++++ b/test/billing_page_lifetime_test.dart
+@@ -5,6 +5,7 @@
+ import 'package:flutter_test/flutter_test.dart';
+ import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+ import 'package:legendstudy_app/features/billing/billing_providers.dart';
++import 'package:legendstudy_app/features/billing/presentation/purchase_history.dart';
+ import 'package:legendstudy_app/features/billing/iap_controller.dart';
+ import 'package:legendstudy_app/features/billing/purchase_verification.dart';
+ import 'package:legendstudy_app/features/billing/presentation/credit_purchase_page.dart';
+@@ -33,6 +34,58 @@
+ }
+ 
+ void main() {
++  testWidgets('history back returns to top-up before leaving the page', (
++    tester,
++  ) async {
++    await tester.pumpWidget(
++      ProviderScope(
++        overrides: [
++          authStateProvider.overrideWith(
++            (ref) => Stream.value(const AuthStatus('A')),
++          ),
++          iapControllerProvider.overrideWith((ref) => null),
++          purchaseHistoryProvider.overrideWith((ref) async => []),
++        ],
++        child: MaterialApp(
++          home: Builder(
++            builder: (context) => Scaffold(
++              body: TextButton(
++                onPressed: () => Navigator.of(context).push(
++                  MaterialPageRoute<void>(
++                    builder: (_) => Scaffold(
++                      appBar: AppBar(title: const Text('Credit 충전')),
++                      body: const CreditPurchasePage(),
++                    ),
++                  ),
++                ),
++                child: const Text('논술랩'),
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++    await tester.tap(find.text('논술랩'));
++    await tester.pumpAndSettle();
++    await tester.tap(find.text('구매내역'));
++    await tester.pumpAndSettle();
++    expect(find.text('지급 완료된 구매 내역이 없어요.'), findsOneWidget);
++    await tester.tap(find.byType(BackButton));
++    await tester.pumpAndSettle();
++    expect(find.byType(CreditPurchasePage), findsOneWidget);
++    expect(find.text('지급 완료된 구매 내역이 없어요.'), findsNothing);
++    await tester.tap(find.text('구매내역'));
++    await tester.pumpAndSettle();
++    await tester.binding.handlePopRoute();
++    await tester.pumpAndSettle();
++    expect(find.byType(CreditPurchasePage), findsOneWidget);
++    expect(find.text('지급 완료된 구매 내역이 없어요.'), findsNothing);
++    await tester.tap(find.byType(BackButton));
++    await tester.pumpAndSettle();
++    expect(find.byType(CreditPurchasePage), findsNothing);
++    expect(find.text('논술랩'), findsOneWidget);
++  });
++
+   testWidgets(
+     'purchase page keeps listener alive and replaces it on account switch',
+     (tester) async {
+@@ -42,6 +95,7 @@
+       await tester.pumpWidget(
+         ProviderScope(
+           overrides: [
++            purchaseHistoryProvider.overrideWith((ref) async => []),
+             authStateProvider.overrideWith((ref) => auth.stream),
+             iapControllerProvider.overrideWith((ref) {
+               final value = ref.watch(authStateProvider);
+@@ -60,6 +114,14 @@
+       await tester.pumpAndSettle();
+       expect(created.single.starts, 1);
+       expect(created.single.closed, false);
++      await tester.tap(find.text('구매내역'));
++      await tester.pumpAndSettle();
++      expect(find.text('지급 완료된 구매 내역이 없어요.'), findsOneWidget);
++      expect(created.single.starts, 1);
++      expect(created.single.closed, false);
++      await tester.tap(find.text('충전'));
++      await tester.pumpAndSettle();
++      expect(created.single.starts, 1);
+       auth.add(const AuthStatus('B'));
+       await tester.pumpAndSettle();
+       expect(created.first.closed, true);
+--- a/lib/app/router.dart
++++ b/lib/app/router.dart
+@@ -1,3 +1,4 @@
++import '../features/credits/credit_history.dart';
+ import '../features/auth/account_deletion.dart';
+ import '../features/study/trends/study_trend_page.dart';
+ import '../features/lab/score_summary.dart';
+@@ -235,6 +236,7 @@
+                 path: '/my',
+                 builder: (context, state) => const ProfilePage(),
+                 routes: [
++                  GoRoute(path: 'credits', builder: (_, _) => const NestedPage(title: '크레딧 내역', child: CreditHistory())),
+                   GoRoute(
+                     path: 'trends',
+                     builder: (_, _) => const NestedPage(
+--- a/lib/features/profile/presentation/profile_page.dart
++++ b/lib/features/profile/presentation/profile_page.dart
+@@ -1,3 +1,4 @@
++import '../../credits/credit_balance.dart';
+ import '../../lab/score_summary.dart';
+ import '../avatar.dart';
+ import '../../../core/theme/app_theme.dart';
+@@ -98,7 +99,7 @@
+                       )
+                     : GuestAccountPrompt(onLogin: () => context.push('/auth')),
+               ),
+-              if (auth.value?.isAuthenticated == true) const LearningInfoRow(),
++              if (auth.value?.isAuthenticated == true) ...[const LearningInfoRow(), const CreditBalanceCard(showTopUp: true, showHistory: true)],
+             ],
+           ),
+         ),
+--- a/lib/shared/widgets/legendstudy_lab_entry.dart
++++ b/lib/shared/widgets/legendstudy_lab_entry.dart
+@@ -16,7 +16,7 @@
+   @override
+   Widget build(BuildContext context) => CompactUtilityCard(
+     title: '논술 LAB',
+-    body: '이용 가능 · 문제를 읽고 직접 쓰고 다시 고쳐 쓰는 논술 학습 (Credit·첨삭·재작성·평가)',
++    body: '대학별 평가 기준에 맞춰 내 답안을 점검하고, 직접 고쳐써보세요',
+     action: Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+       children: [
+--- a/lib/features/billing/billing_providers.dart
++++ b/lib/features/billing/billing_providers.dart
+@@ -1,3 +1,5 @@
++import '../credits/credit_history.dart';
++import 'presentation/purchase_history.dart';
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+ 
+ import '../../core/supabase/supabase_providers.dart';
+@@ -23,7 +25,7 @@
+   final controller = IapController(
+     verifier: verifier,
+     accountId: owner,
+-    onBalanceChanged: () => ref.invalidate(creditBalanceProvider),
++    onBalanceChanged: () { ref.invalidate(creditBalanceProvider); ref.invalidate(purchaseHistoryProvider); ref.invalidate(creditHistoryProvider); },
+   );
+   ref.onDispose(controller.dispose);
+   return controller;
