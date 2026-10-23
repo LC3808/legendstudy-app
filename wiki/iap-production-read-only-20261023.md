@@ -1,8 +1,8 @@
 # IAP Production recovery — investigation and local implementation
 
-> Latest: Owner-approved v23 is deployed; iOS existing 1+3 Credit recovered and Ledger verified. Earlier READ-ONLY/HOLD notes below are historical. Android real-purchase E2E awaits a non-license-test account.
+> Latest: Owner-approved v23 is deployed; iOS existing 1+3 Credit recovered and Ledger verified. Android actual-card purchase +1 is now Owner/Production Ledger verified. MY history UI and end-of-day expiry SQL are prepared, not released/applied. Earlier READ-ONLY/HOLD notes below are historical.
 
-Current: Android two existing orders are refunded TEST purchases (API-verified); historical12:31 rejection reason unresolved. Package now matches. Apple WebCrypto draft and diagnostics locally verified; Production unchanged by this agent. Latest checkpoint at end supersedes earlier observations.
+Historical checkpoint: Android two existing orders are refunded TEST purchases (API-verified); historical12:31 rejection reason unresolved. Package now matches. Apple WebCrypto draft and diagnostics locally verified; Production unchanged by this agent. Latest checkpoint at end supersedes earlier observations.
 
 ## Initial PHASE1 checkpoint
 
@@ -504,3 +504,59 @@ and Android system back and eventual exit. Formatting/diff checks completed;
 Flutter execution blocked by installed Dart3.8.0 vs required^3.13.3. App release
 and device UX acceptance remain pending; these edits are not in the installed app.
 No schema, profile, learning record, transaction or Credit balance changes.
+
+## Credit history and end-of-day policy — Oct23
+
+Owner reports an actual-card Android purchase completed. Photo shows regular card
+checkout (not test) and purchased balance1. Fresh Production read verifies one
+Google purchase posting +1 at14:39:20.788KST, expiry Jan23 2027 14:39:15.345KST.
+Global IAP grants3 (Apple1,Apple3,Google1), duplicate external references0. This
+confirms Owner device + backend delivery; no separate bank-settlement/Google
+consumption query was made for this newest order. No additional purchase needed.
+Apple card billing was previously reported pending, not proven settled.
+
+Owner UI: remove top-up nearest-expiry text; MY balance → 크레딧 내역 / 충전하기.
+New /my/credits uses existing owner-RLS transactions/grants, bounded50 rows,
+identity-switch guard; paid/free/use/reservation/release/expiry remain distinguishable.
+Dates render KST YYYY.MM.DD only; NULL expiry means no expiry, missing grant means
+unavailable (not no-expiry). Existing purchase-only history/back behavior preserved.
+
+Owner expiry policy: KST purchase calendar date +3 months, inclusive end of day,
+stored23:59:59.999999 KST; history displays that date only. Month-end clamps to last
+day. This interprets Owner “자정/23:59” as through that day's end, not its start.
+Existing signup/free/no-expiry terms do not change.
+
+Preservation review before financial UPDATE:
+1. Purchase occurrence, Ledger posting and amendment timestamps remain separate.
+2. Existing transaction facts are untouched; amendment keeps original/new expiry.
+3. Only three verified existing IAP terms extend, never regrant or shorten.
+4. Existing auth/account/grant identity and owner RLS reused; no second wallet.
+5. Financial entitlement policy stays separate from learning/assessment outcomes.
+6. Private finance audit has grant UUID/timestamps/policy only; no keys, receipt
+   strings, email or new analytics collection; no client access granted.
+7. Balance/history are derived from canonical facts, not new authoritative totals.
+
+Actual immutable grant trigger prevents casual UPDATE. Prepared
+[Owner apply SQL](../tool/iap_recovery/expiry/owner_apply.sql) locks grants and
+transactions, verifies baseline RPC hash and exact current3-grant inventory,
+records old/new terms in restricted append-only audit, temporarily disables only
+the frozen-grant trigger inside the exclusive transaction, extends dates and
+restores that trigger. It replaces only IAP RPC expiry calculation and accepts
+exact legacy/new expiry on receipt replay; quantity/account/platform checks stay.
+No Essay function/worker changes. Any drift aborts for renewed review. Existing
+3-grant Jan22/Jan23 dates are known; no ambiguous reverse-month reconstruction.
+Future purchases calculate directly from verified purchase timestamp.
+
+Local isolated PostgreSQL17 synthetic contract PASS: amendments3/unchanged Ledger
+sum5, replay Apple1/3/Google1 returns already_processed, wrong-account/SKU conflict,
+restored grant immutability, append-only audit, new-grant end-of-day, UTC/KST
+month boundary, common/leap February. This uses minimal grant/identity stubs, not
+full Essay/payment regression or a Production deployment. Flutter targeted tests
+could not resolve SDK (installedDart3.8.0 vs required^3.13.3); format passes, widget
+execution/build/device QA pending. Existing UI fixes remain included.
+
+**Production expiry NOT_APPLIED; mobile release NOT_DEPLOYED.** AGENTS§4 assigns
+SQL execution to Owner by default; the reviewable SQL and verification/rollback
+notes are ready. Do not run old IAP rollback after changing expiry: it would reject
+replays. Before commit any failure rolls back all changes/trigger state; after
+commit preserve extended rights and fix forward, not shorten paid entitlements.

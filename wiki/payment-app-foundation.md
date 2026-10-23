@@ -80,3 +80,9 @@ LAB feature implements LIVE adapter only with exact Production origin/project, l
 Remaining external gates: fresh Production preflight, separate ADR/payment/runtime migration approval, finance signing/subject/token/config and renewal ownership, Toss/card approval, Owner activation and separately approved1c LIVE smoke. Pricing integration is an exposed runtime contract; approved pricing branch untouched/unmerged. General refunds only; statutory decisions remain authorized support policy and are not inferred from age. No Production mutation, provider calls, main merge, deployment, IAP or student data.
 
 Restricted-account compensation: finance-only payment_compensate takes only server-verified provider DONE identity/amount/paid_at and requires pending LIVE confirmation, no grant and an actually restricted/detached subject. It atomically closes confirmation and claims full refund with revoke_quantity0; existing cancellation finishes without any ledger posting. Duplicate/active-owner/browser defenses are tested. No account resurrection or statutory inference. Existing mismatch monitor intentionally flags no-grant compensated LIVE rows for bounded operator review; inspect completed cancellation before classifying a true orphan grant.
+
+## Oct23 Owner Credit UX / expiry amendment
+
+[Latest decision and implementation](iap-production-read-only-20261023.md#credit-history-and-end-of-day-policy--oct23) supersedes nearest-expiry text in the top-up card.
+MY exposes read-only canonical ledger history and top-up actions. Purchased IAP
+expiry end-of-day policy is prepared, **not deployed**; signup expiry stays NULL.

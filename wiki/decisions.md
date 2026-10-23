@@ -662,3 +662,13 @@ balance), with server-side Campaign/Voucher/Redemption policy, per-user/total/bu
 unlimited master code; **Academic School ≠ verified B2B Organization Membership** (school
 selection alone grants no B2B eligibility and no access to student essays). B2B organization/
 membership/batch = P1. Design only, no implementation.
+
+## 2026-10-23 — Credit history and purchased-credit expiry
+
+Owner refines [payment foundation](payment-app-foundation.md): remove nearest expiry
+from top-up summary; MY balance has 크레딧 내역 and 충전하기 buttons. History
+shows expiry dates only in KST. Purchased IAP credits last through the final moment
+of the KST purchase date plus three calendar months (month-end clamp); signup
+free credits remain non-expiring. Existing verified IAP expiry extensions preserve
+original terms in a private amendment audit, with no additional grant or balance
+posting. [Implementation and application boundary](iap-production-read-only-20261023.md#credit-history-and-end-of-day-policy--oct23).

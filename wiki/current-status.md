@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP](iap-production-read-only-20261023.md): iOS복구·UI수정/앱배포대기.
+[IAP](iap-production-read-only-20261023.md): 양OS 지급확인; UI·만료SQL 배포대기.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

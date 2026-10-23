@@ -4629,3 +4629,11 @@ Owner 승인 후 v21→v22진단→v23 배포. 실제 Apple OCSP P384/SHA256 Edg
 ## 2026-10-23 — Owner 논술랩 문구·구매내역 뒤로가기
 
 논술LAB 설명을 Owner지정문구로 변경, 구매내역 첫뒤로가기→충전탭/다음뒤로가기→이전화면. 로컬코드·위젯회귀 추가; Dart버전불일치로 Flutter실행불가. 앱배포대기, 첨삭백엔드불변. [상세](iap-production-read-only-20261023.md#owner-ui-correction--oct23).
+
+## 2026-10-23 — Android real purchase and MY Credit history
+
+Owner actual-card purchase/charge success; Production Ledger Google+1 at14:39:20KST,
+IAP duplicate0. MY two actions/date-only history, top-up expiry removed locally.
+Audited three-grant expiry amendment and replay-compatible RPC SQL prepared,
+isolated Postgres contract PASS; Production NOT_APPLIED. Flutter SDK mismatch
+blocks widget execution; app release pending. [Details](iap-production-read-only-20261023.md#credit-history-and-end-of-day-policy--oct23).
