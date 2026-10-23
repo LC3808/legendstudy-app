@@ -495,3 +495,47 @@ preview settings or unrelated bindings; regression checks cover this boundary an
 Independent work continues in the [512-question batch audit](essay-batch-service-20261023.md).
 Latest attempt adds0Provider calls/0known cost; prior isolated143calls/142completed/1unknown,
 USD11.763768 known-usage estimate remains unchanged and is not an invoice total.
+
+## Current project Secret diagnosis — 2026-10-23 21:11 KST
+
+Owner requested current-value authentication checks while preserving the healthy deployment.
+Old deployment/history authentication was first verified separately: current Essay availability
+HTTP200/ready:true; essay_worker preflight/package HTTP200 in Supabase logs. Historical Math
+role RPCs HTTP200, null DTO own-role400/22023 and cross-role403/42501; Provider usage proves
+historical2xx but does not record the exact HTTP code. These do NOT prove current project values.
+The earlier blanket request to restore9secrets was broader than confirmed damage and is superseded
+by the exact five-item result below. Kakao/Toss/payment settings are excluded from this task.
+
+A build-only diagnostic used the project's actual Production environment without promoting a
+new WEB runtime. Temporarily PATCHed only build_config.build_command, created Production Git
+build0cc2b617-3bf1-4f9c-8a59-f7256142096e, confirmed its command snapshot and Production scope,
+and immediately restored pnpm build. The diagnostic always exits73 (error path74; outer shell73)
+so assets cannot deploy. Cloudflare recorded expected build failure at12:11:13UTC. Canonical
+WEB remaineda8796fb4-cf86-4572-8822-6deb5702cac7 throughout the recorded checks.
+
+Production branch main and project stlhijzpjfgwwdgunlsd matched. All five named environment
+variables were injected but empty (not missing, and not merely redacted GET responses):
+
+|Secret|Current project diagnosis|HTTP|Required recovery|
+|---|---|---|---|
+|ESSAY_REGISTRY_WORKER_JWT|EMPTY_VALUE|Not sent|Existing essay_worker JWT|
+|ESSAY_WORKER_SERVICE_TOKEN|EMPTY_VALUE|Not sent|Existing value matching the healthy Essay Worker|
+|MATH_EVALUATION_WORKER_JWT|EMPTY_VALUE|Not sent|Existing math_evaluation_worker JWT|
+|MATH_EXTRACTION_WORKER_JWT|EMPTY_VALUE|Not sent|Existing math_extraction_worker JWT|
+|MATH_PROVIDER_API_KEY|EMPTY_VALUE|Not sent|Existing Math Provider API key|
+
+This establishes configuration failure for all five; do not describe it as five HTTP401s.
+No original values, fingerprints, claims, upstream response bodies or credentials were printed.
+No secret settings were PATCHed. Provider generation/auth HTTP calls0 because all values were
+empty; DB writes0, Credit/History unchanged. Three diagnostic regression tests PASS: absent vs
+empty, bounded read-only destinations/redaction, rejection/error never promoted to success.
+[Sanitized result](../tool/cloudflare_essay/secret-auth-build-result-20261023.json).
+
+Owner was asked to restore exactly these five existing values in Pages Production, without
+starting a deployment or sharing values in chat. If a value is unavailable, identify the missing
+item before considering a separately authorized replacement; do not rotate or mint credentials
+silently. Leave healthy Worker credentials and unrelated settings unchanged. After restoration,
+repeat build-only checks for Registry/Math role RPCs and Provider GET models (no generation),
+then verify service-token authentication through a protected runtime path before SWU acceptance.
+A nonempty service token alone is not an authentication PASS. SWU1/0Credit, new History arrival,
+WEB/physicalAPP and full512 service connection remain unfinished.

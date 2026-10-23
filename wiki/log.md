@@ -4664,3 +4664,10 @@ Owner postcheck15true independently reproduced against Production; IDs/other pol
 ## 2026-10-23 — General-account default, full inventory and deployment incident
 
 Owner scope is all512questions, ordinary-account default, grouped activation. Read-only identity512/profile423 recheck PASS; seven Essay inputs validated, one prior Math success preserved separately. No new Provider/DB writes. Agent incorrectly replayed redacted Pages secret values; new deployment503, rolled back to a8796fb4 and SKKU CTA restored. Project9secret restoration pending Owner; no further Pages deploy. Five inventory/config regression checks PASS. [Incident](essay-p0-direct-execution-20261023.md#swu-public-configuration-incident-and-rollback--2026-10-23) · [Batch scope/results](essay-batch-service-20261023.md).
+
+## 2026-10-23 — Current Production secrets conclusively diagnosed
+
+Build-only Production0cc2b617 confirms all five Essay/Math secrets injected as empty values.
+Expected exit73 prevented deployment; canonicala8796fb4 and originalpnpm build preserved.
+No secret/DB change, no Provider call. Exact5 restoration requested from Owner; prior9-item
+blanket restoration request corrected. Three sanitized probe tests PASS. [Evidence and recovery](essay-p0-direct-execution-20261023.md#current-project-secret-diagnosis--2026-10-23-2111-kst).

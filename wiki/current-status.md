@@ -8,7 +8,7 @@
 
 서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-**배포 복구 필요:** Pages 환경설정 PATCH에서 agent가 마스킹된 Secret 값을 재전송한 오류. 신규 WEB의 WORKER_UNAVAILABLE 확인 후 기존 a8796fb4로 롤백했고 성균 첨삭 버튼 활성 복구를 확인했다. 다음 배포 전 Owner가 Production Secret9개를 기존값으로 복원해야 한다. Worker615f4825에는 서울여 공개범위 추가됐지만 WEB 서울여 실제평가·1/0Credit·신규History·WEB/APP는 미완료. 이번 Provider/DB변경0. [사고·복구·필요조치](essay-p0-direct-execution-20261023.md#swu-public-configuration-incident-and-rollback--2026-10-23).
+**Secret5개 빈 값 확정:** Production 빌드 전용 진단0cc2b617에서 Essay Registry/Service Token·Math Evaluation/Extraction/Provider 모두 EMPTY_VALUE. HTTP 호출 전 설정실패로, 401로 표현하지 않는다. 진단은 exit73으로 배포 차단; 정상 WEB a8796fb4 및 pnpm build 복원·보존 확인. Owner에게 확인된5개만 기존값 복원 요청, 카카오·토스·결제는 제외. Worker615f4825의 서울여 공개범위 추가는 유지하나 서울여 실제1/0Credit·신규History·WEB/APP는 미완료. Provider0/DB변경0. [진단 근거·복구순서](essay-p0-direct-execution-20261023.md#current-project-secret-diagnosis--2026-10-23-2111-kst).
 
 ## Product state
 
