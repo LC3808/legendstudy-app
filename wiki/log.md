@@ -4617,3 +4617,6 @@ Owner전략18d5b70확인, 기존Essay/Math/DB계약SELECT대조. Unified Wiki표
 # 2026-10-23 — 고려대 v12 운영 연결 사전 검토
 
 Owner SQL 직접 적용 확정. 로더v12 explicit 지원·49검사, 한 문항SQL 격리8검사/입력조립 PASS, Production read-only10검사true. Worker6b7593a4 100% 확인·v12 미배포, DB/Provider/Credit 변경0. 423/89·기존5E2E 보존. [적용/검증/복구·독립검수 결과](korea-operating-owner-sql-20261023.md).
+
+## 2026-10-23 — 고려 Worker v12 배포 확인
+Worker2413fe3d 100%, 기존79Registry/설정 보존 및 고려 추가80 확인. SDK 누락 배포거부 후 pywrangler 패키징으로 해결. DB read-only10true, Owner SQL 대기·DB변경0. 서강A v12 평가/검수PASS이나 calibration 미완료; +2호출, 총59/USD4.854720. 숭실2022문제1/2 원문 기준 불일치 기록,423/89 유지. [근거](korea-operating-owner-sql-20261023.md).
