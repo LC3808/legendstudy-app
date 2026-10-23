@@ -23,8 +23,17 @@ def extract_source(path):
     try:
         raw = Path(path).read_bytes()
         reader = PdfReader(BytesIO(raw))
-        pages = [page.extract_text(extraction_mode='layout') for page in reader.pages]
-        return {'sha256': hashlib.sha256(raw).hexdigest(), 'pages': pages}
+        pages, errors = [], {}
+        for number, page in enumerate(reader.pages, 1):
+            try:
+                pages.append(page.extract_text(extraction_mode='layout'))
+            except Exception as error:
+                # One unrelated malformed page must not discard every valid
+                # question in a shared university report. Do not invent text.
+                pages.append('')
+                errors[number] = type(error).__name__
+        return {'sha256': hashlib.sha256(raw).hexdigest(), 'pages': pages,
+                'page_errors': errors}
     except Exception as error:
         # A malformed PDF must not prevent auditing the other universities.
         # Keep this source failed; extraction errors never grant readiness.
@@ -42,6 +51,8 @@ def evidence_check(ref, source):
             and all(type(n) is int for n in interval)
             and 1 <= interval[0] <= interval[1] <= len(source['pages'])):
         return {'role': ref['role'], 'problems': problems + ['INVALID_PAGE_RANGE'], 'text': ''}
+    if any(n in source.get('page_errors', {}) for n in range(interval[0], interval[1]+1)):
+        problems.append('SOURCE_PAGE_READ_FAILED')
     text = '\n'.join(source['pages'][interval[0]-1:interval[1]]).strip()
     if not text:
         problems.append('EMPTY_PAGE_TEXT')

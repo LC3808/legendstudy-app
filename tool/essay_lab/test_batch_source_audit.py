@@ -9,6 +9,19 @@ class SourceAuditTests(unittest.TestCase):
                 patch('tool.essay_lab.batch_source_audit.PdfReader', side_effect=KeyError('DescendantFonts')):
             self.assertEqual(extract_source('malformed.pdf'), {'error': 'KeyError'})
 
+    def test_unrelated_bad_page_preserves_good_pages_and_hash(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        good=Mock();good.extract_text.return_value='official question'
+        bad=Mock();bad.extract_text.side_effect=KeyError('font')
+        with patch('pathlib.Path.read_bytes', return_value=b'pdf'), patch('tool.essay_lab.batch_source_audit.PdfReader', return_value=SimpleNamespace(pages=[good,bad])):
+            source=extract_source('report.pdf')
+        clean=evidence_check(dict(role='question',source_hash=source['sha256'],pages=[1,1]),source)
+        broken=evidence_check(dict(role='question',source_hash=source['sha256'],pages=[1,2]),source)
+        self.assertEqual(clean['problems'],[])
+        self.assertIn('SOURCE_PAGE_READ_FAILED',broken['problems'])
+        self.assertEqual(len(source['pages']),2)
+
     def test_preserve_2021_and_exclude_nonmock_2027(self):
         for year, kind, expected in [(2021, 'mock', False), (2022, 'admission', True),
                                       (2027, 'mock', True), (2027, 'admission', False)]:

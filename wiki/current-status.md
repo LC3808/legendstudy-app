@@ -6,7 +6,7 @@
 
 Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7문항 일반공개 연결, 정책상 공개5→12. 숭실2026Q1 최초1/무료재첨삭0 settled·실패0 released, WEB History 복귀갱신/근거/성장2→5 확인; GalaxyS8 build2026102401 동일항목 및 성균2교시PDF Owner PASS. 기존ID/정책/Credit/History 보존. Worker c3fb54be 계약 명확화 후 독립검수8PASS. WEB87abdd6/40c5085a는 공개 빌드설정 누락 중간배포를 복구하고 일반계정 로그인/PDF 재확인. Secret 변경0.
 
-전체157시험512문항/154묶음 초안, profile423/미상속89, 공식매핑430/텍스트398, FULL23/DIAGNOSTIC0/REVIEW489 유지. 신규 대표E2E1이며 신규7개 개별E2E 아님. SWUQ2 PENDING_CHANGED, 숭실 제출화면 완료 전 대기 안내, 나머지489 검수/조립 미완료. 이번 운영Provider6회·58,587/10,493tokens·비용NULL 미확정; private199회/추정USD20.490748/불명2 별도. [현재 결과·실패명세](essay-batch-service-20261023.md#2026-10-24--normal-batch-01-적용-및-숭실-대표-운영-검증). 기존 성공SQL 재실행 금지.
+전체157시험512문항/154묶음 초안, profile423/미상속89, 공식매핑430/텍스트398, FULL23/DIAGNOSTIC0/REVIEW489 유지. 신규 대표E2E1이며 신규7개 개별E2E 아님. SWUQ2 제출키 충돌 수정·최초1Credit 완료, 무료재첨삭 품질차단/0Credit released. 대학단위 진행·다음 건국21시험58문항. 489원인 자동분류, 미상속89/37묶음 중17개 호환후보 확보(미반영), 고려12원문추출 회복(미승인). 숭실 제출화면 완료 전 대기 안내, 전체 연결 미완료. 이번 운영Provider6회·58,587/10,493tokens·비용NULL 미확정; private229회/추정USD22.987344/불명2 별도(프로필검토30회 추가). [현재 결과·실패명세](essay-batch-service-20261023.md#2026-10-24--normal-batch-01-적용-및-숭실-대표-운영-검증). 기존 성공SQL 재실행 금지.
 
 ## Product state
 
