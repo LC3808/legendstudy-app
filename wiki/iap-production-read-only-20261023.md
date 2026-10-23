@@ -462,3 +462,13 @@ or blanket account backfill performed. New first-ever-identity device E2E not ru
 References: Apple official jws_verification.ts (OCSP checks preserved), Apple PKI
 public G6/G3 certificates, noble-curves pinned API. Actual iOS E2E now PASS;
 Android real charge/credit/consume and browser Admin UI acceptance remain pending.
+
+### Browser and local app verification follow-up
+
+Existing authenticated operator, separate new LAB tab: /admin/members/ loads9
+members; configured schools render names (three rows), Oct23 re-registration
+member detail opens successfully and shows the explicit missing-Credit-account
+empty state, not a lookup exception. No existing Essay tabs/files altered.
+Additional Flutter billing/history/lifetime/session tests could not start: installed
+Dart3.8.0 vs package requirement^3.13.3. No Flutter PASS claim. Owner will use a
+non-license-test Google account for the final Android1-credit real purchase.
