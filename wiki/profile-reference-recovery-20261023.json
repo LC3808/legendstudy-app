@@ -1,0 +1,376 @@
+{
+  "schema": "profile-reference-recovery-checkpoint-v1",
+  "scope": "local-only",
+  "baseline_preserved": 387,
+  "mapped": 423,
+  "unmapped": 89,
+  "production_changes": false,
+  "profiles": [
+    {
+      "profile_id": "uep/dongguk/humanities-I",
+      "version": 5,
+      "sha256": "e1a4fb9db14a69d66eaf5103c3dd9487e3d855e1137fb81f6b7069b42f3c6d47",
+      "university": "dongguk",
+      "type": "humanities-I",
+      "years": [
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/dongguk/math",
+      "version": 4,
+      "sha256": "3371331609a78c4af25b964d347e53e9981d675f81764ca088fe03eda80ac353",
+      "university": "dongguk",
+      "type": "math",
+      "years": [
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/gachon/language-short",
+      "version": 5,
+      "sha256": "798c6a1d9512fd4df263257f3b7519e91934030301804e5a7c4bdb8498a3a440",
+      "university": "gachon",
+      "type": "language-short",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/gachon/math-short",
+      "version": 4,
+      "sha256": "f375f4f30f2dcee559d035f8015d966f8e2b271d930f0aaff87805bdadabde7f",
+      "university": "gachon",
+      "type": "math-short",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/kau/engineering",
+      "version": 6,
+      "sha256": "fb1f104c85ce8876fb40ffb05928ad49c88dce1231b22082652c790d69dd5e57",
+      "university": "kau",
+      "type": "engineering",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/kau/science",
+      "version": 6,
+      "sha256": "485e77ef0cada323e592336b897117bc15a74556eba5f502142625ce343c1ffe",
+      "university": "kau",
+      "type": "science",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/kau/social",
+      "version": 6,
+      "sha256": "23a2e74b78b1976bf892f6dcd1a651035ffbd0d587fd664ef30ec97da57ea7d0",
+      "university": "kau",
+      "type": "social",
+      "years": [
+        2022,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/konkuk/business-integrated",
+      "version": 3,
+      "sha256": "7bbf34fbe59d694a854a419e7ed4db2c76f5af66c05db67a78f736b5a15d70c9",
+      "university": "konkuk",
+      "type": "business-integrated",
+      "years": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "profile_id": "uep/konkuk/humanities",
+      "version": 7,
+      "sha256": "26f26c049da827719b610126db4ed173ffd056d12c0bad3ab7f9110246624e64",
+      "university": "konkuk",
+      "type": "humanities",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/konkuk/math",
+      "version": 6,
+      "sha256": "4e755e4dc94c23adf52ca2694f72375100c82f4411438c58f76a5be197b85865",
+      "university": "konkuk",
+      "type": "math",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/korea/humanities",
+      "version": 5,
+      "sha256": "86e620710697a3d6db1113740f6489102de9e43ff32f801425b431cc0f587957",
+      "university": "korea",
+      "type": "humanities",
+      "years": [
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/korea/math",
+      "version": 5,
+      "sha256": "987fce6041d25cdf031c9419f15250e4fa8299bf75a0de69a95b7065ec7713db",
+      "university": "korea",
+      "type": "math",
+      "years": [
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/kyunghee/humanities",
+      "version": 7,
+      "sha256": "b088c12f16ff503cd05ed9b08f799abcdad3f9c89aef4244d8a15537673124bc",
+      "university": "kyunghee",
+      "type": "humanities",
+      "years": [
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/kyunghee/math",
+      "version": 5,
+      "sha256": "6fddfe287b94589565d6c8ad73a5d016e5bbf6c071ae0207235f097ca2b8c4f6",
+      "university": "kyunghee",
+      "type": "math",
+      "years": [
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/kyunghee/medical",
+      "version": 3,
+      "sha256": "0e868ac6ab4112a42d08a9da1c169f30e03c659c75d926c467aefcc229bf9b46",
+      "university": "kyunghee",
+      "type": "medical",
+      "years": [
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/kyunghee/social",
+      "version": 4,
+      "sha256": "4477b6aa80286de1c010463aa0525d968cfd85c911de36983b001f400565519b",
+      "university": "kyunghee",
+      "type": "social",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/skku/language",
+      "version": 5,
+      "sha256": "dfd6c7730cae6522a1e4718e17965759eb5afb02b5ee85710089c22e3240d413",
+      "university": "skku",
+      "type": "language",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/skku/math",
+      "version": 3,
+      "sha256": "673fdbacb98bcaeb33db2a69df38387b5d549f75c1054c7f979ad157a169babe",
+      "university": "skku",
+      "type": "math",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/sogang/business",
+      "version": 4,
+      "sha256": "f33d7c0db8c5a93f20454176724590e121de6004bde7bf75157777423e47cac2",
+      "university": "sogang",
+      "type": "business",
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/sogang/humanities",
+      "version": 6,
+      "sha256": "fdeb2a253636cd58357c6c147518d59038fb1ac7301db13fb40e8d82e54abad3",
+      "university": "sogang",
+      "type": "humanities",
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/sogang/math",
+      "version": 4,
+      "sha256": "d0bbd98be59b1496445fb2dbcbc492b9abb213e9886fc48531e192341b20ac62",
+      "university": "sogang",
+      "type": "math",
+      "years": [
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/sookmyung/humanities",
+      "version": 6,
+      "sha256": "b45c055005697ca9bb3f042cdad34a08c9ac8cf7079c6b393308fdacae71fcbb",
+      "university": "sookmyung",
+      "type": "humanities",
+      "years": [
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/sookmyung/math",
+      "version": 4,
+      "sha256": "7e18a6a390be2051ec5211a0defb0e43581331c5712ad5938f4380599dde351f",
+      "university": "sookmyung",
+      "type": "math",
+      "years": [
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/soongsil/business",
+      "version": 5,
+      "sha256": "60f0e3b9ace666efeedbf2bbe408e0125451bd77ef08187719977532d479ce8f",
+      "university": "soongsil",
+      "type": "business",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/soongsil/humanities",
+      "version": 6,
+      "sha256": "402fe723c84bb753ea04e9184d1d7a10d9c51f888514e798a36e39069ca1d9ea",
+      "university": "soongsil",
+      "type": "humanities",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/soongsil/math",
+      "version": 3,
+      "sha256": "764307bb7a99e4d076866371d0869a0db3fc328d99b00388fb255eb94f0bcc8b",
+      "university": "soongsil",
+      "type": "math",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ]
+    },
+    {
+      "profile_id": "uep/swu/humanities",
+      "version": 6,
+      "sha256": "a8993aef196e0e2815f0b95f4bdc8b97c672645f6cf7f11cc886d24e68d6b8ab",
+      "university": "swu",
+      "type": "humanities",
+      "years": [
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "profile_id": "uep/swu/natural",
+      "version": 5,
+      "sha256": "19aa7283b7722f512349b90e92a4b37e501ba02fcd3e577d7231446aaa850277",
+      "university": "swu",
+      "type": "natural",
+      "years": [
+        2026
+      ]
+    }
+  ],
+  "new_mapping_ids": [
+    "21523136-26f9-58b4-94ae-7fa8d809b360",
+    "242baaa2-40f5-5fd3-8e3d-6727b4a607fb",
+    "2b3df597-b1eb-5c08-8d8b-b7fcd1018b30",
+    "2bab8bfb-756d-58ac-8a26-402c40904f25",
+    "3df812ba-7ac3-5737-a50e-3db7e6a2c733",
+    "3f648df7-902c-5fb0-971b-b75ac9dd3a0d",
+    "3f9cffc9-084f-5036-a29a-acb7bfa26c20",
+    "404cfc21-77d6-55da-9ba6-84198a1b3a01",
+    "4780cd20-6e74-52d9-82e5-28a6adb2de11",
+    "4a3b21a7-6fd3-521d-95bb-124049fb12ec",
+    "65c292e2-64cd-5a83-a3da-b6134d92c658",
+    "66b5a4fc-cc0c-5f18-ae9d-c6fb169487cf",
+    "707f9eea-3bcc-581e-b50e-4a5fccbdca7e",
+    "7473d880-028a-5487-abd8-de522022d7ca",
+    "7527664a-8181-51f2-86ab-702c08fd35f1",
+    "79ecf850-566c-5a6f-81ed-0794edb2e7d3",
+    "7d580dba-2c5d-5440-83aa-00063ef11813",
+    "84f6b941-8aae-5663-a6db-ac0c2e17fedf",
+    "8bb31858-ced3-5873-95d4-3ec99e18505a",
+    "8e28f97d-1eae-59ff-9077-967780b59d70",
+    "96b1ce09-4abc-540f-b8b1-5c44cda48c59",
+    "982a78ca-012f-5683-bd31-4f00bdf711e2",
+    "9ad2239f-f143-59bf-8844-21c1abec02b2",
+    "a57106d4-73bf-5843-95a2-56a37ceafad3",
+    "aae5ef51-6064-5317-bfbf-6e9cfb9e02f3",
+    "b93c0489-fc01-5c8f-b80a-27bbc4acc883",
+    "bd3b96f5-5760-5856-8c43-24cda8651867",
+    "c941c94e-2602-5c8f-a7d1-ddf8c678a68d",
+    "cfa4839f-c292-5a95-b8b0-e408aa1df009",
+    "d555e3fe-77c0-57c7-b061-3b0f551d2988",
+    "d585bfe2-d1d0-5902-ad17-74282ec9bd96",
+    "d685fdad-23c9-56bf-8f68-a372cdf3edfa",
+    "dd0aec3b-ab4a-5b5b-8839-6ef551d98762",
+    "ddae2f2e-bbc6-5769-b779-bd9b997ab202",
+    "e52f3355-e5ce-58e2-b443-2e877df1cc36",
+    "f226ff45-744a-5cae-9352-42da7f98cc67"
+  ]
+}
