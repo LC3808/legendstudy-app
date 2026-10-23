@@ -4635,4 +4635,4 @@ Worker fef5aefd100% verified; existing80 Registry, bindings and public scope pre
 
 ## 2026-10-23 — 성균관 Owner 적용 및 WEB 운영 검증
 
-성균관대 Q1 Owner SQL 적용·DB사후15검사PASS. WEB 최초/무료재첨삭 완료·독립검수각8PASS·Credit1/0·History/5→5비교PASS, Provider4회 추산USD0.292412. 실기기 교차조회·문제PDF 노출 미완료, 공개2 유지. 성균관은 WEB 검증1문항 추가이며 기존4대학6문항 전체 E2E 기준과 구분. [상세·실행ID·잔여](essay-p0-direct-execution-20261023.md).
+성균관대 Q1 Owner SQL 적용·DB사후15검사PASS. WEB 최초/무료재첨삭 완료·독립검수각8PASS·Credit1/0·History/5→5비교PASS, Provider4회 추산USD0.292412. 실기기 교차조회·문제PDF 노출 미완료, 공개2 유지. 동일계정 Native iOS Simulator History/결과/5→5비교도PASS: 기존6 보존+성균1=5대학7문항(실기기 제외). [상세·실행ID·잔여](essay-p0-direct-execution-20261023.md).

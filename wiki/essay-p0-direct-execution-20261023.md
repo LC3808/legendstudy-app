@@ -181,13 +181,15 @@ input48,648/output4,891 tokens; recorded-usage estimate USD0.292412, invoice unv
 Private evidence: `skku-operating-e2e.private.json`, `skku-operating-rewrite.txt`,
 `skku-operating-web-{first,history,comparison}.png`. No new failure/retry for these operating runs.
 
-This adds one verified WEB operating pair to the six existing E2E questions. It does not yet add
-one fully verified WEB/APP question: physical Android/iOS and same-account cross-query remain
-pending. GalaxyS8 is logged into a different account from the operator used here; Owner was asked
+Native iOS26.5 Simulator (existing logged-in LegendStudy First Run QA) subsequently rendered
+both new History records, first/rewrite three criteria5/5, and the three5→5 comparison rows.
+WEB↔Native same-account cross-query PASS at Simulator scope, matching prior E2E scope:
+existing six preserved + SKKU one = seven questions/five universities. Physical Android/iOS
+acceptance remains pending. GalaxyS8 is logged into a different account from the operator used here; Owner was asked
 for manual LAB navigation because mirrored touch does not respond. No account session was replaced.
 Inline problem PDF is not yet shown, and result detail still says no linked evidence display;
 the actual package/criteria/evidence binding is verified separately. Public count remains2.
-Next work: physical navigation and same-account History, exact problem-PDF delivery, remaining
+Next work: physical navigation and physical same-account History, exact problem-PDF delivery, remaining
 university case failures/alternative/rewrite checks, then Owner-scoped SQL/public rollout.
 
 Separate isolated quality ledger is now127 calls,126 completed,1 unknown; recorded-usage
@@ -196,3 +198,6 @@ cases pass for Soongsil, SWU and Kyunghee; KAU partial passes but wrong fails EX
 offsets. Gachon alternative passes; partial fails minimal editing by revealing the missing
 answer pair, wrong remains uncertain in grounding review. These failures are retained, not
 reclassified as successful public gates. Dongguk's unknown response remains unreplayed.
+
+Native evidence: `skku-operating-app-history.png`, `skku-operating-app-comparison.png`.
+Simulator acceptance does not imply that the newly installed physical builds passed.
