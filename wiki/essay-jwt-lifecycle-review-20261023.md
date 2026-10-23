@@ -124,3 +124,17 @@ separate binding. Preserve that deployment; do not rotate/delete its key. Restor
 usable next-deployment Provider binding and checking service authentication remain
 required before promotion and SWU ordinary-account E2E.
 [Sanitized receipt](../tool/cloudflare_essay/secret-auth-recheck-result-20261023.json).
+
+## Provider registration recheck
+
+2026-10-23 21:46 KST: Owner reported Provider API key registered. Production
+build-only diagnostic82c2e39f-347e-4e1a-8107-a7eeeaecc7ce independently returned
+MATH_PROVIDER_API_KEY AUTH_ACCEPTED / HTTP200 from OpenAI GET /v1/models.
+Registry200 and Math Evaluation/Extraction400/22023 authentication again PASS.
+This supersedes the earlier EMPTY_VALUE result, not the historical incident evidence.
+Service Token remains nonempty but service-binding authentication is pending: build
+processes cannot invoke the serving Pages Worker service binding. No all-five-PASS claim.
+Provider model-list authentication is not model-specific evaluation/permission/quota E2E.
+Diagnostic intentionally failed before deploy; canonicala8796fb4 and pnpm build preserved.
+No Worker/DB/Credit/History changes, secret export, or Provider generation calls.
+[Sanitized result](../tool/cloudflare_essay/secret-auth-provider-recovery-20261023.json).

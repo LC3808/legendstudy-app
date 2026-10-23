@@ -8,7 +8,7 @@
 
 서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-**JWT3개 복구 인증 PASS:** Owner가30일 JWT3개·기존 Service Token 등록 완료, Provider 키 유지 보고. Production 빌드 전용7c06ee59에서 Essay Registry HTTP200, Math Evaluation/Extraction HTTP400·22023(인증 후 입력검사) 확인. Service Token은 비어 있지 않으나 Worker 실제 인증 미검증. **현재 프로젝트 MATH_PROVIDER_API_KEY는 여전히 EMPTY_VALUE**; 현재 정상 배포 키의 실패를 뜻하지 않는다. exit73 배포차단, 정상 WEB a8796fb4·pnpm build 보존. 신규 WEB 배포는 진행하지 않았다. DB/Credit/History 변경·Provider 생성0. [사후검사](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).
+**JWT3개 복구 인증 PASS:** Owner가30일 JWT3개·기존 Service Token 등록 완료, Provider 키 유지 보고. Production 빌드 전용7c06ee59에서 Essay Registry HTTP200, Math Evaluation/Extraction HTTP400·22023(인증 후 입력검사) 확인. Service Token은 비어 있지 않으나 Worker 실제 인증 미검증. 후속 Owner Provider 키 등록 후 진단82c2e39f에서 **OpenAI 모델목록 HTTP200 인증PASS**. 기존 EMPTY_VALUE는 이전 체크포인트다. Service Token 실제 인증·모델별 평가 E2E는 아직 미완료. exit73 배포차단, 정상 WEB a8796fb4·pnpm build 보존. 신규 WEB 배포는 진행하지 않았다. DB/Credit/History 변경·Provider 생성0. [사후검사](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).
 
 Owner30일 복구 승인, 기존 issuer/role/HS256 계약 유지. JWT 실제 TTL 메타데이터는 이번 빌드 검사에서 출력/재확인하지 않았다. 자동갱신/만료알림은 설계만 완료, 미설치. [Owner 절차](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Worker615f4825 서울여 공개범위 유지; 서울여1/0Credit·신규History·WEB/APP와 전체512연결은 미완료.
 

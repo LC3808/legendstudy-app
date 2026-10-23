@@ -4687,3 +4687,7 @@ Build-only7c06ee59: Registry200; Math400/22023 each; Service nonempty but auth p
 Provider stillEMPTY_VALUE. Normal WEBa8796fb4 and pnpm build preserved, no deployment
 promotion/Worker/DB/Credit/History changes or Provider generation. Probe3testsPASS.
 [Evidence and remaining scope](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).
+
+## 2026-10-23 — Provider key registration independently verified
+
+Owner registration followed by build-only82c2e39f: OpenAI models HTTP200; JWT3 auth PASS. Service-binding auth pending. Normala8796fb4/pnpm build preserved, no serving deployment/DB/Worker/Credit/History changes or generation calls. [Evidence](essay-jwt-lifecycle-review-20261023.md#provider-registration-recheck).
