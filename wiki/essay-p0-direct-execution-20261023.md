@@ -282,3 +282,46 @@ ordinary-account WEB PDF/button acceptance, this closes the scoped PDF/public-en
 This report does not establish a submitted Provider run, assessment completion, Credit debit,
 free rewrite, or physical History cross-query. Those remain unverified for this ordinary account;
 prior operator/Simulator E2E evidence remains unchanged. No further SQL required for this fix.
+
+## SKKU ordinary-account paid/free operating verification — 2026-10-23
+
+Owner explicitly authorized one initial assessment and the included free rewrite on the ordinary
+account already signed into WEB and GalaxyS8. Submitted the preserved1476-character official
+example through normal WEB UI, then the distinct530-character synthetic alternative through
+“다시 써보기” (not a fabricated student improvement or another official answer).
+
+| Stage | Run ID | Completed (KST) | Credits / settlement | Ledger net |
+|---|---|---|---|---|
+| Initial | `65f29c97-bddb-400c-871e-085dd0a30082` | 19:58:28 | 1 / paid_cycle / settled | balance−1, reserved0, transactions2 |
+| Free rewrite | `02475dda-83fc-4ad3-b9bf-c0315527f529` | 19:59:54 | 0 / included_revision / settled | balance0, reserved0, transactions0 |
+
+Rewrite parent is the initial run; both belong to the same account. UI balance1→0→0;
+read-only Ledger confirms final account balance0/reserved0. No policy/SQL or client deployment
+was required. Runtime remains v15 with package90c515fb…651b4a and the existing Q1 ID.
+Both results: all3 criteria5/5 and all8 independent quality-review checks PASS. WEB History
+reload shows2completed answers/1rewrite/1completed re-evaluation; comparison shows three5→5
+rows,0improved/3unchanged/0declined. Returning within the same History page initially retained
+the old list; reload fetched both records. This observation is retained as a refresh UX limitation.
+Result evidence-display section remains empty despite verified backend evidence bindings.
+
+Actual Provider calls4 (evaluation2 + independent review2), input48,660/output4,796 tokens.
+Estimate USD0.290560 using the existing ledger rates (input4/output20 USD per million);
+invoice not verified. No new failure or retry. This is ordinary-account acceptance for the same
+Q1, not an extra university/question in the prior seven-question operator/Simulator total.
+
+Preservation postcheck9/9true: private PDF bucket/object, exactQ1package, otherStoragepolicies,
+examIDs/questionIDs, submit function, allruntimepolicies, exactauthenticatedSELECT policy.
+Previously saved SKKU operator first/rewrite records were compared to their private baseline:
+IDs/parent/state/completion/result/runtime/billing/reason/Ledger all identical. Existing records
+were retained; only the two authorized service runs and their normal billing events were added.
+
+Physical PASS: Owner opened History and the rewrite result. Agent observes GalaxyS8 native
+result screen showing matching criterion labels and5/5 for the first two visible criteria. After
+Owner returned to History, agent directly captured both rows: initial19:58 and free rewrite19:59,
+same SKKU2026language first-session title, and “최초 첨삭에 이어진 재첨삭” linkage. These match
+the DB completion timestamps and WEB records. WEB→GalaxyS8 native History cross-query PASS
+on the same ordinary account/build2026102302. Physical comparison expansion was not inspected;
+the three5→5 comparisons were verified on WEB. No Simulator result substitutes for this.
+Evidence under existing official-answer-quality-20261023 directory: skku-normal-e2e.private.json,
+skku-normal-web-first.png, skku-normal-web-history.png, skku-normal-web-comparison.png,
+skku-normal-galaxy-result.png and skku-normal-galaxy-history.png. Account identifiers/secrets are not committed.

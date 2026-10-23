@@ -4648,3 +4648,5 @@ Owner PDF SQL 사후검증PASS. Worker85a7a6a5/WEB29b85199 배포, 기존 bindin
 - 2026-10-23: SKKU Q1 ordinary-account WEB PDF2/6 and 1Credit feedback availability PASS; Q2/Q3 held. GalaxyS8 build2026102302 update installed; mirrored touch remains unresponsive, Owner physical check pending. No new Provider/Credit consumption. [Evidence](essay-p0-direct-execution-20261023.md).
 
 - 2026-10-23: Owner confirms GalaxyS8 SKKU Q1 problem visible and feedback button clickable. Scoped public PDF/entry blocker closed; ordinary-account Provider/rewrite/physical History remain separate unverified steps. [Evidence](essay-p0-direct-execution-20261023.md).
+
+- 2026-10-23: SKKU Q1 ordinary-account initial/free rewrite completed; Ledger1/0Credit, balance1→0→0; WEB History/comparison and GalaxyS8 two-record History cross-query PASS. Four Provider calls, estimateUSD0.290560; policies/IDs/prior SKKU records preserved. [Evidence](essay-p0-direct-execution-20261023.md).
