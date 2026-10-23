@@ -4691,3 +4691,15 @@ promotion/Worker/DB/Credit/History changes or Provider generation. Probe3testsPA
 ## 2026-10-23 — Provider key registration independently verified
 
 Owner registration followed by build-only82c2e39f: OpenAI models HTTP200; JWT3 auth PASS. Service-binding auth pending. Normala8796fb4/pnpm build preserved, no serving deployment/DB/Worker/Credit/History changes or generation calls. [Evidence](essay-jwt-lifecycle-review-20261023.md#provider-registration-recheck).
+
+## 2026-10-23 — Service authentication recovered, SWU technical E2E
+
+Same WEBca6022b deployed asff327e92 after Owner4Secret recovery; actual Worker Service Token PASS.
+SWU first/free rewrite completed1/0settled; WEB PDF/evidence/growth/automatic History and GalaxyS8
+two-record list observed. APP detail pending; first-partial omission is a qualityGAP, private fix being
+verified. Sourceaudit512/182PDF/154groups;114extraction-onlyPASS;5testsPASS. No ProductionSQL or
+existing policy/ID/payment code changes. [Evidence](essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
+
+서울여APP성장비교 직접확인·근거Owner확인. 소문항별 공식기준/v17후보6답안PASS.
+Q1보완+Q2추가 묶음SQL pre7/post10·롤백·이전권한보존 격리PASS, 실제사전7true.
+Worker3922d417 v17기능추가; 기존정책 선택유지. OwnerSQL대기. Private21calls USD2.009264estimate, operating4calls costNULL.

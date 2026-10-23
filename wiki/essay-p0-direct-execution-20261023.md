@@ -555,3 +555,55 @@ acceptance. No actual minting/registration by agent. Owner registers each token 
 Production; existing healthy Worker credentials unchanged. Service token restored from existing
 original, never --service-token generation. Math Provider key remains a separate existing-value
 recovery item. Production DB/Credit/History writes0, Provider calls0. Still awaiting Owner execution.
+
+## Service Token recovery and SWU operating runs
+
+2026-10-23 22:12–22:19 KST: Owner confirmed restoration of the four unrelated Production Secrets.
+Direct-uploaded the clean known WEB ca6022bcb98260005d81f8fe805825977ee328c4 source/artifacts,
+not the independently advanced remote main. Canonical Production deployment is
+ff327e92-fe15-4753-a372-99f2ad20e1c9; previousa8796fb4 preserved for rollback; pnpm build unchanged.
+No env_vars rewrite, Secret output, Worker change, new SQL, payment/Credit/MY code change.
+
+General-account SWUQ1 admission enabled: gateway only exposes ready after Worker `/exam-admission`
+success (2xx; raw HTTP numeric status not separately captured). Service Token authentication is
+confirmed further by both actual Worker evaluations completing. Earlier nonempty-only evidence is superseded.
+WEB PDF7pages rendered; existing question/exam/policy reused; no duplicate OwnerSQL.
+
+- First run28b18e34-a3fe-48c4-8bf9-33ce891704c8 completed; billing paid_cycle1settled.
+- Rewritec425da77-4d11-4dbf-891a-d8d209182767 completed, parent matches; included_revision0settled.
+- Balance110→109→109. WEB no reload: processing→completed, History return shows both new records
+  plus existing SKKU records. Saved evidence and growth4→5displayed.
+- GalaxyS8 Owner opened History; direct mirrored screenshot shows both SWU entries22:14/22:16
+  and existing SKKU. APP4→5growth and matching summary directly observed22:21; evidence display also confirmed by Owner.
+- Operating4Provider calls (2evaluation+2independentreview),42928input/5207output tokens;
+  receipt cost_amount is NULL, not0. Invoice cost unverified; no failed operating request created.
+- Quality limitation: first160-character partial answer omitted subpart(2), but result4/5only
+  discussed improvements to(1). Independent semantic reviewer accepted it; operator inspection
+  records an unresolved omission-coverage GAP. Technical completion is NOT full quality PASS.
+
+Private Q2official/partial/wrong runs added6calls, estimatedUSD0.609740; official/partial passed,
+wrong grounding failed (missing diagram mislabeled as reversed interpretation). Split official
+criteria input retained profilev6/official source and passed Q2wrong regression (+2calls).
+Q1split on unchangedv15 failed DIMENSIONS (+1call) and was never applied. Privatev17candidate
+adds exhaustive criterion coverage and omission-versus-error distinctions; Q1partial/official/rewrite and Q2official/partial/wrong all contract+independent8checksPASS. Q1partial now identifies missing(2), criterion levels4/1.
+No previous answer/result/ID/policy overwritten. Total private ledger checkpoint164calls,
+USD13.773032estimate,1historical unknown (not a new failure); operating costs separate.
+
+### SWU revision3 batch candidate — same-day continuation
+
+Q1omission repair+Q2addition retain existing profilev6, exam and question IDs. Existing two Q1
+results remain immutable. Current reader could not retrieve an older digest after revision change;
+local test caught this before Production. Candidate adds only exact SWU revision2 historical access,
+requiring current approval, exact scope, current source rights and original historical approval.
+No RLS/grant/Credit/submit change. Unknown digest and current revocation are rejected.
+Local PostgreSQL pre7/post10true, other bindings/IDs/results preserved, repeat apply rejected,
+rollback restores old Q1runtime while retaining new revision/binding. History fixture is synthetic;
+Owner queries compare actual two Production result hashes. Actual read-only pre7true.
+
+Worker3922d417-2685-41aa-ae0d-327944c7ffb8 adds v17capability; exact old policies are not selected
+to v17. Prior615f4825 retained. Owner SQL is pending; do not rerun original revision2 SQL.
+Private files: `official-answer-quality-20261023/swu-batch-revision3/`
+precheck.sql → apply.private.sql → postcheck.sql; rollback.sql restores Q1-only runtime.
+Existing WEBff327e92 remains. Backend15checks and sourceaudit5checksPASS.
+This continuation generated21private quality calls (USD2.009264estimate), plus4operating calls
+whose receipt cost is NULL; no zero-cost claim. Entire11-university activation remains incomplete.

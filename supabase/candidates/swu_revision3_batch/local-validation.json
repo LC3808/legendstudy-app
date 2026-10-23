@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "precheck": {
+    "revision2": true,
+    "review_baseline": true,
+    "exam_ids_preserved": true,
+    "question_ids_preserved": true,
+    "other_policies_preserved": true,
+    "existing_results_preserved": true,
+    "submit_preserved": true
+  },
+  "postcheck": {
+    "revision3": true,
+    "runtime_digest_matches": true,
+    "review_metadata_preserved": true,
+    "selected_two": true,
+    "exact_v17_binding": true,
+    "exam_ids_preserved": true,
+    "question_ids_preserved": true,
+    "other_policies_preserved": true,
+    "existing_results_preserved": true,
+    "submit_preserved": true
+  },
+  "old_bindings_preserved": true,
+  "reapply_rejected": true,
+  "rollback_restores_old_q1": true,
+  "history_preserved": true,
+  "foreign_digest_rejected": true,
+  "current_revocation_enforced": true,
+  "history_fixture": "synthetic two rows; actual Production hashes kept in Owner checks",
+  "production_writes": 0
+}

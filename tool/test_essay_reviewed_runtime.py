@@ -10,6 +10,18 @@ from tool.essay_lab.reviewed_runtime import RuntimePermit,ReviewedRuntimeWorker,
 from tool.essay_lab.positive_learning import PROMPT_VERSION
 
 class RuntimeTests(unittest.TestCase):
+    def test_swu_subpart_prompt_requires_exact_approval(self):
+        from tool.essay_lab.reviewed_runtime import configured_binding
+        old = dict(provider='openai', model='fixture', model_version='fixture',
+                   prompt_version='scaffolding-1.3-v15', contract_version='1.3', policy_version='old')
+        new = dict(old, prompt_version='scaffolding-1.3-v17', policy_version='swu-batch')
+        with self.assertRaises(Invalid):
+            configured_binding(new, old, [old])
+        self.assertEqual(configured_binding(old, old, [old, new]), old)
+        self.assertEqual(configured_binding(new, old, [old, new]), new)
+        provider = reviewed_openai('fixture-only', new)
+        self.assertEqual(provider.prompt_version, new['prompt_version'])
+
     def fixture(self, mode='ok'):
         claim,cache,out=fixture();claim.update(run_id='run',lease_token='lease')
         binding=dict(policy_version='reviewed-fixture',provider='openai',model='fixture-model',

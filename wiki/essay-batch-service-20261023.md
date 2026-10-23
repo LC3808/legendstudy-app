@@ -8,7 +8,7 @@ Worker를 재사용한다. 대표11문항 공개를 전체완료로 처리하지
 ## 확정 범위와 실행 순서
 
 일반 계정 공개가 기본이다. 운영 계정 선검증을 강제하지 않는다. DB의2022~2026기출,
-2027모의를 포함한11대학512문항 전체를 누락 없이 분류한다. 기존28기본체계·423상속·89미상속,
+2027모의를 대상으로 한다. 기존11대학 작업집합512에는2021경희모의3문항이 포함되어 요청연도범위509와 구분해 보존·분류한다. 기존28기본체계·423상속·89미상속,
 시험/문항ID, PDF·근거·RLS·Credit·Ledger·History, 성공E2E를 보존한다.
 
 1. 서울여Q1 진행 상태를 이어 일반계정 최초1/무료재첨삭0·신규History자동반영·WEB/APP 확인.
@@ -97,3 +97,33 @@ WEB/APP 성공은 위 기존 E2E 근거를 재사용한다. 이번 신규 교차
 조립하고 대학/유형/학년도 묶음 manifest와 Owner SQL을 생성하는 단계다.
 검사 도구: `tool/essay_lab/batch_inventory.py`; private 증거는 materials의
 `official-answer-quality-20261023/batch-inventory-512.private.json`에 보존한다.
+
+## Source audit checkpoint — 2026-10-23
+
+Live Registry237exams/700questions; legacy11-university512questions preserved, including
+Kyunghee2021mock3 outside the current requested years (509 within). Existing mapped423/unmapped89 unchanged.
+`tool/essay_lab/batch_source_audit.py` audited182existing PDFs across154 profile/year/type groups.
+Hash/page/text/font/scope/profile checks PASS114; this is NOT semantic review, input compilation,
+FULL_EVALUATION, activation or individual E2E. Existing successful packages are not demoted by an
+older manifest's extraction failure. Malformed-font exceptions remain source failures and no longer
+abort other universities;5testsPASS. Private detailed evidence remains outside Git.
+
+|University|Legacy questions|Requested years|Extraction checks PASS|
+|---|---:|---:|---:|
+|dongguk|48|48|8|
+|gachon|166|166|61|
+|kau|30|30|0|
+|konkuk|58|58|10|
+|korea|30|30|4|
+|kyunghee|38|35|4|
+|skku|27|27|5|
+|sogang|28|28|2|
+|sookmyung|22|22|4|
+|soongsil|42|42|15|
+|swu|23|23|1|
+
+Remaining failures distinguish missing role mappings, PUA/formula visual review, empty page text,
+invalid page intervals, PDF parser failures and unassigned profiles. They are not permission to invent
+criteria or silently activate DIAGNOSTIC paid evaluation. SWUQ2 existing official pages8–15/profilev6
+compiled privately with2official chart images; original wrong-answer grounding failed, split criteria
+regression passed. Q1 operating omission GAP is undergoing a private candidate check. No new SQL applied.

@@ -8,9 +8,9 @@
 
 서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-**JWT3개 복구 인증 PASS:** Owner가30일 JWT3개·기존 Service Token 등록 완료, Provider 키 유지 보고. Production 빌드 전용7c06ee59에서 Essay Registry HTTP200, Math Evaluation/Extraction HTTP400·22023(인증 후 입력검사) 확인. Service Token은 비어 있지 않으나 Worker 실제 인증 미검증. 후속 Owner Provider 키 등록 후 진단82c2e39f에서 **OpenAI 모델목록 HTTP200 인증PASS**. 기존 EMPTY_VALUE는 이전 체크포인트다. Service Token 실제 인증·모델별 평가 E2E는 아직 미완료. exit73 배포차단, 정상 WEB a8796fb4·pnpm build 보존. 신규 WEB 배포는 진행하지 않았다. DB/Credit/History 변경·Provider 생성0. [사후검사](essay-jwt-lifecycle-review-20261023.md#owner-registration-recheck).
+**인증 복구 완료:** Owner가 관련4Secret 기존값 복원을 확인한 뒤 기존 WEB 소스ca6022b 그대로 Production ff327e92에 배포했다. Service Token 실제 Pages→Worker 승인 및 최초·재첨삭 처리PASS. 기존a8796fb4는 롤백 대상으로 보존, Worker615f4825·설정·결제코드 미변경. JWT3/Provider 인증 성공을 반복하지 않았다. 서울여Q1 최초/재첨삭 completed·1/0Credit settled, 일반WEB PDF·평가근거·성장비교·History 복귀 자동갱신PASS, GalaxyS8 두기록·4→5성장비교 직접확인, 근거Owner확인. 최초평가의 소문항(2)누락 품질GAP는 v17후보6답안 재검증PASS; Q1보완+Q2묶음 revision3 SQL은 Owner적용대기. Worker3922d417는 기존정책 유지+v17추가. [실행증거](essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
 
-Owner30일 복구 승인, 기존 issuer/role/HS256 계약 유지. JWT 실제 TTL 메타데이터는 이번 빌드 검사에서 출력/재확인하지 않았다. 자동갱신/만료알림은 설계만 완료, 미설치. [Owner 절차](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Worker615f4825 서울여 공개범위 유지; 서울여1/0Credit·신규History·WEB/APP와 전체512연결은 미완료.
+Owner30일 복구·기존 인증계약 유지. 자동갱신/알림은 설계만 완료. 전체Registry237시험700문항과 작업집합512를 구분한다. 512 중2021경희모의3문항은 보존하되 요청연도범위는509. 전수원문182개·154묶음 검사완료, 추출통과114는 공개/입력/E2E PASS가 아니다. 전체연결은 미완료. [분류와 다음 묶음](essay-batch-service-20261023.md).
 
 ## Product state
 
