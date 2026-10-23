@@ -15,7 +15,7 @@ class StageTests(unittest.TestCase):
             subprocess.run([sys.executable, str(ROOT / 'tool/cloudflare_essay/stage.py'), str(target)], check=True, capture_output=True)
             script = "from essay_lab.positive_learning import PROMPT, PROMPT_VERSION; assert PROMPT; from essay_lab.reviewed_runtime import reviewed_openai"
             subprocess.run([sys.executable, '-c', script], cwd=target/'src', check=True, capture_output=True)
-            for version in ('v3','v6','v7','v10','v11'):
+            for version in ('v3','v6','v7','v10','v11','v12'):
                 name=f'scaffolding-1.3-{version}.txt'
                 self.assertEqual((target/'src/essay_lab/prompts'/name).read_bytes(), (ROOT/'tool/essay_lab/prompts'/name).read_bytes())
             config=json.loads((target/'wrangler.jsonc').read_text())

@@ -128,7 +128,10 @@ class PolicyRoutingTests(unittest.TestCase):
         scoped=dict(repair,prompt_version='scaffolding-1.3-v11',policy_version='stance-repair')
         with self.assertRaises(Invalid): configured_binding(scoped,legacy,[legacy,candidate,repair])
         with self.assertRaises(Invalid): reviewed_openai('fixture-only',scoped)
-        for binding in (legacy,candidate,repair):
+        stance=dict(repair,prompt_version='scaffolding-1.3-v12',policy_version='korea-stance-repair')
+        with self.assertRaises(Invalid): configured_binding(stance,legacy,[legacy,candidate,repair])
+        self.assertEqual(configured_binding(stance,legacy,[legacy,candidate,repair,stance]),stance)
+        for binding in (legacy,candidate,repair,stance):
             provider=reviewed_openai('fixture-only',binding,transport=lambda *args: self.fail('network forbidden'))
             self.assertEqual(provider.prompt_version,binding['prompt_version'])
             self.assertEqual(provider.binding,binding)

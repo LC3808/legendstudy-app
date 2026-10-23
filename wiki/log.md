@@ -4614,3 +4614,6 @@ Owner전략18d5b70확인, 기존Essay/Math/DB계약SELECT대조. Unified Wiki표
 
 ## 2026-10-23 — 프로필 대표3문항 운영 E2E
 숙명2025모의 재첨삭 오류 최소수정 후 실제APP→WEB PASS, 숙명2026/서강 WEB→APP 결과·비교 PASS. Credit1/0·실패차감0. Worker6b7593a4. 전체11대학 PARTIAL, 일반공개 확대 없음. [실행/복구/미완료](university-profile-production-e2e-20261023.md).
+# 2026-10-23 — 고려대 v12 운영 연결 사전 검토
+
+Owner SQL 직접 적용 확정. 로더v12 explicit 지원·49검사, 한 문항SQL 격리8검사/입력조립 PASS, Production read-only10검사true. Worker6b7593a4 100% 확인·v12 미배포, DB/Provider/Credit 변경0. 423/89·기존5E2E 보존. [적용/검증/복구·독립검수 결과](korea-operating-owner-sql-20261023.md).

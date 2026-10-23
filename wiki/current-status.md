@@ -1,5 +1,9 @@
 # Current Status
 
+## 2026-10-23 재개 — 고려대 Owner SQL 준비
+
+v12 명시 binding 로더 지원·관련49검사 PASS. 고려 한 문항 적용/검증/복구 SQL 격리 PostgreSQL8검사·실제 입력조립 PASS, Production precheck10 true. 운영Worker는6b7593a4 100%로 **v12 미배포**, DB변경0. Owner가 SQL 직접 실행하기로 확정; 배포확인 전 적용금지. 기존423/89·운영5·공개2·품질57회 보존, 추가Provider0. [정확한 대상·전체SQL 위치·gate·독립검수](korea-operating-owner-sql-20261023.md).
+
 ## 2026-10-23 공식 평가자료 연결 후속 — PARTIAL
 
 28개 기본체계 유지, 기존387 보존·36추가로423/512상속(미상속89). Production512문항 ID·시험·학년도·유형 대조 일치. 고려 공식해설 전달 누락을 로컬 조립에서 보완하고 v12로 공식반대/재작성2사례 독립검수 PASS; 운영 미적용. 서강2023모의 인문 공식5기준 입력·실제 품질 PASS, 수준 calibration은 별도. 관련44검사PASS. 품질 원장57회·추산USD4.691360(이번16회·USD1.312576), 실청구 미확인. 운영 변경/Credit0, 기존5 E2E·공개 건국2 보존. 문항별 근거·운영확대 미완료. [상세·89문항 실패명세](official-answer-quality-20261023.md).
