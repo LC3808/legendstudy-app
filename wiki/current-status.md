@@ -1,6 +1,6 @@
 # Current Status
 
-성균관대 Q1 Owner SQL 적용·DB사후15검사PASS. WEB 최초/무료재첨삭 완료·독립검수각8PASS·Credit1/0·History/5→5비교PASS, Provider4회 추산USD0.292412. 실기기 교차조회·문제PDF 노출 미완료, 공개2 유지. 동일계정 Native iOS Simulator History/결과/5→5비교도PASS: 기존6 보존+성균1=5대학7문항(실기기 제외). [상세·실행ID·잔여](essay-p0-direct-execution-20261023.md).
+성균 Q1 일반계정 PDF/첨삭 차단 원인 확인: 승인PDF map 누락·Gateway/Worker 공개목록 제외. Q1만 연결 후보 수정, PDF시작6→2, SQL사전9·격리권한7·WEB24·APP15검사 및 WEB빌드PASS. [Owner SQL](../supabase/candidates/skku_q1_public_pdf/README.md) 적용 대기; 미배포·일반계정/실기기 미검증. 기존 운영자·Simulator5대학7문항 E2E와 일반공개2를 구분. [상세](essay-p0-direct-execution-20261023.md).
 
 ## 2026-10-23 최신 — 고려 대표 운영 E2E PASS
 

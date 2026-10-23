@@ -201,3 +201,30 @@ reclassified as successful public gates. Dongguk's unknown response remains unre
 
 Native evidence: `skku-operating-app-history.png`, `skku-operating-app-comparison.png`.
 Simulator acceptance does not imply that the newly installed physical builds passed.
+
+## SKKU ordinary-account blockage and scoped fix — 2026-10-23
+
+Owner reports GalaxyS8 cannot open the problem and shows service preparing. Verified causes:
+Q1 absent from the approved client PDF map; Gateway and Worker public lists contain only
+existing Konkuk exam. Prior7-question E2E count is operator/Simulator scope, not ordinary
+account or physical release. Owner now requests Q1 PDF/public feedback first, ordinary-account
+acceptance next, physical acceptance last. Existing rights authorization above still applies.
+
+Prepared only, not deployed: exact Q1 WEB/APP PDF mapping, original6pages, startPage6→2
+correction after visual review of all pages. Problem-only original hash582f370e…826fd7eb
+matches734653-byte local source and existing Storage object metadata. Original pages5–6
+contain sibling questions, not answers; full original preserved, Q2/Q3 evaluation stays held.
+
+[Owner SQL bundle](../supabase/candidates/skku_q1_public_pdf/README.md) adds only one
+authenticated SELECT policy guarded by account_service_allowed and exact bucket/object name.
+Nine Production prechecks true; seven isolated PostgreSQL authorization/rollback checks PASS.
+Other Storage policies, IDs, runtime policies and submit hash unchanged. No direct DB mutation.
+WEB24tests/build PASS; APP15tests PASS after updating expected manifest485→486/assets153→154.
+No payment/Credit/MY source or Ledger structure changes.
+
+Gateway CSV/Worker JSON candidates preserve Konkuk and append SKKU exam only; exact v15
+package selects Q1. Current Pages deployment17244d3b remains unchanged. Private configuration
+snapshots and candidate lists saved under official-answer-quality-20261023/skku-public-*.
+Next: Owner precheck→apply→postcheck, independently verify SQL, deploy scoped client/config,
+ordinary-account PDF render and Q1 availability, then updated physical app acceptance.
+SQL/readiness passing is not ordinary-account acceptance. No new Provider call or Credit spend.

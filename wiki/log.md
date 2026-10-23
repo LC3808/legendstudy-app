@@ -4636,3 +4636,7 @@ Worker fef5aefd100% verified; existing80 Registry, bindings and public scope pre
 ## 2026-10-23 — 성균관 Owner 적용 및 WEB 운영 검증
 
 성균관대 Q1 Owner SQL 적용·DB사후15검사PASS. WEB 최초/무료재첨삭 완료·독립검수각8PASS·Credit1/0·History/5→5비교PASS, Provider4회 추산USD0.292412. 실기기 교차조회·문제PDF 노출 미완료, 공개2 유지. 동일계정 Native iOS Simulator History/결과/5→5비교도PASS: 기존6 보존+성균1=5대학7문항(실기기 제외). [상세·실행ID·잔여](essay-p0-direct-execution-20261023.md).
+
+## 2026-10-23 — 성균 Q1 일반 사용자 연결 후보
+
+Owner 실기기 차단 보고를 확인. 승인PDF map 및 public-exam 범위 누락; Q1시작쪽6→2 수정. [SQL·검증·배포대기](essay-p0-direct-execution-20261023.md#skku-ordinary-account-blockage-and-scoped-fix--2026-10-23). Owner SQL 미적용, 일반계정/실기기 PASS 주장 없음.
