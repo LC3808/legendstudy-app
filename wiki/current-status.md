@@ -1,5 +1,10 @@
 # Current Status
 
+## Payment / Credit / MY — 2026-10-23
+
+[Scoped P0 integration](iap-p0-integration-20261023.md): Android/iOS builds and both
+physical devices Owner PASS; analyze/40 tests PASS. Expiry SQL NOT_APPLIED; no Store submission.
+
 ## Production integration — Oct09 — PARTIAL
 
 [Current integration](production-integration-2026-10-09.md): Claude Release/IAP + Codex

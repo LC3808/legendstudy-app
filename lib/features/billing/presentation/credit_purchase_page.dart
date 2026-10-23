@@ -9,6 +9,7 @@ import '../../credits/credit_balance.dart';
 import '../billing_providers.dart';
 import '../credit_product.dart';
 import '../iap_controller.dart';
+import 'purchase_history.dart';
 
 /// 논술 Credit 충전 — Apple IAP / Google Play Billing (consumable).
 ///
@@ -24,6 +25,7 @@ class CreditPurchasePage extends ConsumerStatefulWidget {
 
 class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
   IapController? _controller;
+  bool _showHistory = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,43 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       );
     }
 
+    final tabs = Wrap(
+      spacing: 8,
+      children: [
+        ChoiceChip(
+          label: const Text('충전'),
+          selected: !_showHistory,
+          onSelected: (_) => setState(() => _showHistory = false),
+        ),
+        ChoiceChip(
+          label: const Text('구매내역'),
+          selected: _showHistory,
+          onSelected: (_) => setState(() => _showHistory = true),
+        ),
+      ],
+    );
+    if (_showHistory) {
+      return PopScope<Object?>(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop && mounted) setState(() => _showHistory = false);
+        },
+        child: ShellPage(
+          children: [
+            const SectionHeader('Credit 충전'),
+            tabs,
+            const SizedBox(height: AppTokens.space12),
+            const PurchaseHistory(),
+          ],
+        ),
+      );
+    }
     if (controller == null) {
-      return const ShellPage(
+      return ShellPage(
         children: [
-          SectionHeader('Credit 충전'),
-          Text('지금은 Credit 충전을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
+          const SectionHeader('Credit 충전'),
+          tabs,
+          const Text('지금은 Credit 충전을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
         ],
       );
     }
@@ -65,6 +99,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
         return ShellPage(
           children: [
             const SectionHeader('Credit 충전'),
+            tabs,
             const CreditBalanceCard(),
             const SizedBox(height: AppTokens.space12),
             if (controller.loadingProducts)

@@ -15,6 +15,8 @@ Search all Wiki with Korean/English aliases before proposing a new concept.
 Newest explicit Owner decisions supersede historical scope; record exact scope,
 not an inferred promotion of a whole roadmap. Current is not historical evidence.
 
+Payment / Credit / MY: [Oct23 scoped native integration](iap-p0-integration-20261023.md).
+
 ## Task Routing Map
 
 Current APP/Production/IAP integration: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.

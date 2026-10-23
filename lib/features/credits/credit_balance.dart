@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_theme.dart';
+
 import '../../core/supabase/supabase_providers.dart';
 
 /// Read-only canonical ledger snapshot shared with LAB credit-v1.
@@ -29,17 +31,26 @@ final creditBalanceProvider = FutureProvider.autoDispose<CreditBalance?>((
   final client = ref.watch(supabaseClientProvider);
   if (owner == null || client == null) return null;
   final data = await client.rpc<Map<String, dynamic>>('credit_summary');
-  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) return null;
+  if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
+    return null;
+  }
   return CreditBalance.fromJson(data);
 });
 
 class CreditBalanceCard extends ConsumerWidget {
-  const CreditBalanceCard({super.key, this.showTopUp = false});
+  const CreditBalanceCard({
+    super.key,
+    this.showTopUp = false,
+    this.compact = false,
+    this.showHistory = false,
+  });
 
   /// When true, a "충전하기" entry to the Credit purchase screen is shown below
   /// the balance (e.g. on the LAB home). The purchase screen itself passes false
   /// to avoid a recursive entry.
   final bool showTopUp;
+  final bool compact;
+  final bool showHistory;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,6 +67,58 @@ class CreditBalanceCard extends ConsumerWidget {
           ),
           data: (balance) => balance == null
               ? const SizedBox.shrink()
+              : showHistory
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('사용 가능 크레딧 ${balance.spendable}개'),
+                    const SizedBox(height: AppTokens.space8),
+                    Wrap(
+                      spacing: AppTokens.space8,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => context.push('/my/credits'),
+                          child: const Text('크레딧 내역'),
+                        ),
+                        if (showTopUp)
+                          OutlinedButton(
+                            onPressed: () => context.push('/lab/credits'),
+                            child: const Text('충전하기'),
+                          ),
+                      ],
+                    ),
+                  ],
+                )
+              : compact
+              ? Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '사용 가능 Credit ${balance.spendable}개',
+                        style: AppTokens.secondary.copyWith(
+                          color: AppTokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                    if (showTopUp) ...[
+                      const SizedBox(width: AppTokens.space8),
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          minimumSize: const Size(48, 28),
+                          tapTargetSize: MaterialTapTargetSize.padded,
+                          visualDensity: VisualDensity.standard,
+                          textStyle: AppTokens.caption,
+                        ),
+                        onPressed: () => context.push('/lab/credits'),
+                        child: const Text('충전하기'),
+                      ),
+                    ],
+                  ],
+                )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -63,8 +126,7 @@ class CreditBalanceCard extends ConsumerWidget {
                       contentPadding: EdgeInsets.zero,
                       title: Text('사용 가능 ${balance.spendable} Credits'),
                       subtitle: Text(
-                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}'
-                        '${balance.nextExpiry == null ? '' : '\n가장 가까운 만료: ${DateTime.parse(balance.nextExpiry!).toLocal()}'}',
+                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}',
                       ),
                       trailing: IconButton(
                         onPressed: () => ref.invalidate(creditBalanceProvider),

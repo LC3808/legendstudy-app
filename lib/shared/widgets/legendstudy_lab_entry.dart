@@ -16,7 +16,7 @@ class LegendStudyLabEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CompactUtilityCard(
     title: '논술 LAB',
-    body: '이용 가능 · 문제를 읽고 직접 쓰고 다시 고쳐 쓰는 논술 학습 (Credit·첨삭·재작성·평가)',
+    body: '대학별 평가 기준에 맞춰 내 답안을 점검하고, 직접 고쳐써보세요',
     action: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

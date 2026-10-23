@@ -3934,3 +3934,11 @@ University-logo reconcile (READ-ONLY): Codex RC codex/release-candidate-20261018
 ships assets/university-logos/ (42, incl. 성균관/서울시립) + pubspec; Claude branch
 has none → logos are Codex-owned, NOT duplicated here. No payment/Ledger/essay/prod/
 Codex-branch change.
+
+
+## 2026-10-23 — Payment / Credit / MY scoped integration
+
+Owner confirms final Galaxy S8/iPhone12 candidate normal. Eleven UI/test files
+integrated while preserving APP refund/onboarding/backend. Analyze40tests/native
+builds PASS; no new purchase, DB change or Store submission.
+[Evidence and remaining expiry gate](iap-p0-integration-20261023.md).

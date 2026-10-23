@@ -1,3 +1,4 @@
+import '../../credits/credit_balance.dart';
 import '../../lab/score_summary.dart';
 import '../avatar.dart';
 import '../../../core/theme/app_theme.dart';
@@ -98,7 +99,7 @@ class ProfilePage extends ConsumerWidget {
                       )
                     : GuestAccountPrompt(onLogin: () => context.push('/auth')),
               ),
-              if (auth.value?.isAuthenticated == true) const LearningInfoRow(),
+              if (auth.value?.isAuthenticated == true) ...[const LearningInfoRow(), const CreditBalanceCard(showTopUp: true, showHistory: true)],
             ],
           ),
         ),
