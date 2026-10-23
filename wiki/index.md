@@ -17,7 +17,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-고려대 v12 / Owner 운영 SQL: [한 문항 적용·검증·복구 및 미배포 gate](korea-operating-owner-sql-20261023.md).
+고려대 v12 / Owner 운영 SQL: [한 문항 Owner 적용·운영 E2E·검증·복구](korea-operating-owner-sql-20261023.md).
 
 University Evaluation Profile 구현: [PHASE2 결과·잔여검수](university-evaluation-profile-phase2.md).
 

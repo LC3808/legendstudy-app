@@ -2,7 +2,11 @@
 
 판정: **대표 3문항 E2E PASS, 11개 대학 전체 PARTIAL**. 관리자 검증 계정과 iOS Simulator 범위다. 신규 3문항 일반 사용자 공개·Android/iPhone 신규 코드 E2E는 미검증이다.
 
-## 실제 결과
+## 최신 추가 — 고려 운영1문항 PASS
+
+고려2025수시 인문2 WEB 최초·무료재첨삭→Native 결과/History/4→5비교 PASS. Credit1/0, 새Provider4회/USD0.292664. 기존5문항 보존·현재6문항. 상속 최신423/89이며 아래387/125는 당시 이력이다. [Owner 적용 후 실행 증거·표시잔여](korea-operating-owner-sql-20261023.md).
+
+## 당시 실제 결과
 
 | 대상 | 최초 제출 | 실제 평가·저장 | 무료 재첨삭 | Ledger 최초/재첨삭 | WEB·APP 결과/비교/History |
 |---|---|---|---|---|---|
