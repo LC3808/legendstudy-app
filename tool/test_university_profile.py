@@ -10,6 +10,37 @@ class ProfileTests(unittest.TestCase):
   self.profile=dict(schema='university-evaluation-profile-v1',profile_id='uep/u/human',version=1,university_id='u',engine_route='humanities',review_status='REVIEWED',scopes=[dict(exam_id='e',year=2024,kind='admission',track='인문',question_ids=['q'])],rules=[],criteria_mappings=[])
   self.pin()
  def pin(self):self.profile['content_sha256']=profile_digest(self.profile)
+ def base_profile(self):
+  self.profile.update(scopes=[],profile_readiness='PROFILE_READY',
+      inheritance_scopes=[dict(years=[2024,2025],kinds=['admission'],tracks=['인문'],review_status='REVIEWED',source_refs=['official-source'])],
+      diagnostic_capabilities=['logical_structure'],
+      common_evidence=[dict(scope='COMMON',verification='VERIFIED',provenance='OFFICIAL',
+          evidenceText='논리적 구성',sourceHash='a'*64,startPage=1,endPage=1,applies_to_profile=True)])
+  self.pin()
+ def test_inheritance_maps_new_question_without_asserting_evaluation_ready(self):
+  from essay_lab.university_profile import map_profile
+  self.base_profile();self.exam['questions'].append(dict(id='new'))
+  for qid in ['q','new']:
+   m=map_profile([self.profile],self.exam,qid)
+   self.assertTrue(m['PROFILE_MAPPED']);self.assertTrue(m['PROFILE_READY'])
+   self.assertEqual(m['mapping_mode'],'INHERITED');self.assertIsNone(m['QUESTION_EVIDENCE_READY'])
+   self.assertIsNone(m['EVALUATION_READY']);self.assertIsNone(m['E2E_PASS']);self.assertFalse(m['activation_granted'])
+ def test_inheritance_boundaries_and_missing_review_rejected(self):
+  self.base_profile()
+  for field,value in [('year',2027),('kind','mock'),('track','자연'),('universityId','other')]:
+   exam=deepcopy(self.exam);exam[field]=value
+   with self.assertRaisesRegex(Invalid,'PROFILE_MISSING'):select([self.profile],exam,'q')
+  self.profile['inheritance_scopes'][0]['source_refs']=[];self.pin()
+  with self.assertRaisesRegex(Invalid,'INHERITANCE_SCOPE_REVIEW_REQUIRED'):select([self.profile],self.exam,'q')
+ def test_common_inheritance_does_not_replace_question_criteria_or_admission(self):
+  self.base_profile();out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  self.assertEqual([m for m in out['questions'][0]['source_page_references'] if m['role']=='criteria'],
+      [m for m in self.package['questions'][0]['source_page_references'] if m['role']=='criteria'])
+  with self.assertRaisesRegex(Invalid,'COMPILED_PACKAGE_REVIEW_REQUIRED'):
+   bind_material(self.package,self.registry,'q',[self.profile],pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+ def test_unreviewed_base_evidence_cannot_be_ready(self):
+  self.base_profile();self.profile['common_evidence'][0]['verification']='NEEDS_REVIEW';self.pin()
+  with self.assertRaisesRegex(Invalid,'BASE_PROFILE_EVIDENCE_REQUIRED'):select([self.profile],self.exam,'q')
  def test_legacy_host_cache_and_binding_unchanged(self):
   from essay_lab.material_runtime import reviewed_material_question
   args=dict(pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')

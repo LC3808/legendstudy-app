@@ -11,6 +11,24 @@ def profile_digest(profile):
     return digest({k: v for k, v in profile.items() if k != 'content_sha256'})
 
 
+def _validate_inheritance_scope(scope):
+    require(scope.get('review_status') == 'REVIEWED' and scope.get('source_refs'),
+            'INHERITANCE_SCOPE_REVIEW_REQUIRED')
+    require(type(scope.get('years')) is list and bool(scope['years'])
+            and all(type(y) is int for y in scope['years']), 'INHERITANCE_YEARS')
+    require(type(scope.get('kinds')) is list and bool(scope['kinds'])
+            and set(scope['kinds']) <= {'admission', 'mock'}, 'INHERITANCE_KINDS')
+    require(type(scope.get('tracks')) is list and bool(scope['tracks'])
+            and all(type(t) is str and t.strip() for t in scope['tracks']), 'INHERITANCE_TRACKS')
+
+
+def _inherits(profile, exam):
+    return profile.get('profile_readiness') == 'PROFILE_READY' and any(
+        exam['year'] in s['years'] and exam['kind'] in s['kinds']
+        and exam['track'] in s['tracks']
+        for s in profile.get('inheritance_scopes', []))
+
+
 def validate(profile):
     require(profile.get('schema') == 'university-evaluation-profile-v1', 'PROFILE_SCHEMA')
     require(type(profile.get('version')) is int and profile['version'] > 0, 'PROFILE_VERSION')
@@ -23,6 +41,18 @@ def validate(profile):
     for s in scopes:
         require(type(s.get('year')) is int and s.get('kind') in ('admission', 'mock')
                 and s.get('exam_id') and s.get('question_ids'), 'PROFILE_SCOPE')
+    for scope in profile.get('inheritance_scopes', []):
+        _validate_inheritance_scope(scope)
+    if profile.get('profile_readiness') == 'PROFILE_READY':
+        require(profile['review_status'] in ('REVIEWED', 'ACTIVE')
+                and profile.get('inheritance_scopes') and profile.get('common_evidence'), 'BASE_PROFILE_EVIDENCE_REQUIRED')
+        for common in profile['common_evidence']:
+            require(common.get('scope') == 'COMMON' and common.get('verification') == 'VERIFIED'
+                    and common.get('provenance') == 'OFFICIAL' and common.get('evidenceText', '').strip()
+                    and len(common.get('sourceHash', '')) == 64
+                    and common.get('applies_to_profile') is True
+                    and type(common.get('startPage')) is int and type(common.get('endPage')) is int
+                    and 1 <= common['startPage'] <= common['endPage'], 'BASE_PROFILE_EVIDENCE_REQUIRED')
     for rule in profile.get('rules', []):
         require(rule.get('key') and rule.get('provenance') in ('OFFICIAL', 'INTERNAL_GUIDANCE'), 'PROFILE_RULE')
         if rule['provenance'] == 'OFFICIAL':
@@ -43,10 +73,26 @@ def select(profiles, exam, question_id, *, pinned=None):
             continue
         if any(s['exam_id'] == exam['examId'] and s['year'] == exam['year']
                and s['kind'] == exam['kind'] and s.get('track') == exam['track']
-               and question_id in s['question_ids'] for s in profile['scopes']):
+               and question_id in s['question_ids'] for s in profile['scopes']) or _inherits(profile, exam):
             matches.append(profile)
     require(len(matches) == 1, 'PROFILE_MISSING' if not matches else 'PROFILE_AMBIGUOUS')
     return matches[0]
+
+
+def map_profile(profiles, exam, question_id, *, pinned=None):
+    """Base inheritance is independent of question evidence and execution admission.
+    This sidecar never claims Worker readiness, correctness grading or activation.
+    """
+    profile = select(profiles, exam, question_id, pinned=pinned)
+    inherited = _inherits(profile, exam)
+    return dict(profile_id=profile['profile_id'], profile_version=profile['version'],
+                profile_digest=profile['content_sha256'], question_id=question_id,
+                exam_id=exam['examId'], mapping_mode='INHERITED' if inherited else 'LEGACY_QUESTION_PIN',
+                PROFILE_READY=profile.get('profile_readiness') == 'PROFILE_READY',
+                PROFILE_MAPPED=True, QUESTION_EVIDENCE_READY=None,
+                EVALUATION_READY=None, E2E_PASS=None, activation_granted=False,
+                diagnostic_capabilities=deepcopy(profile.get('diagnostic_capabilities', [])),
+                correctness_requires_question_evidence=True)
 
 
 def resolve_rules(profile_rules, year_rules=(), question_rules=()):
@@ -112,9 +158,12 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
                 and type(common.get('startPage')) is int
                 and type(common.get('endPage')) is int
                 and 1 <= common['startPage'] <= common['endPage'], 'COMMON_EVIDENCE_SOURCE')
-        require(type(common.get('question_ids')) is list and common['question_ids'], 'COMMON_EVIDENCE_SCOPE')
-        if question_id not in common['question_ids']:
-            continue
+        if common.get('applies_to_profile') is True:
+            require(_inherits(profile, exam), 'COMMON_INHERITANCE_SCOPE')
+        else:
+            require(type(common.get('question_ids')) is list and common['question_ids'], 'COMMON_EVIDENCE_SCOPE')
+            if question_id not in common['question_ids']:
+                continue
         text = ('대학 공통 평가 방향(별도 배점·감점 항목 아님). '
                 '이 문항의 공식 채점기준과 충돌하면 문항 기준을 우선한다.\n'
                 + common['evidenceText'])

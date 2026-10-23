@@ -2,7 +2,7 @@
 
 ## 현재: 대학별 프로필 PHASE 2 PARTIAL
 
-[상세 검수](university-evaluation-profile-phase2.md). 30후보 재검토, 부분근거65/512·입력검수4. 16DRAFT 및 부분검수는 완성아님. 숙명 최종3사례 품질PASS,11호출·추정$4.117810. 43tests PASS. 운영변경0,전체활성화아님.
+[상속 구조](university-evaluation-profile-phase2.md): 대학 기본체계 우선으로 수정. 숙명 인문 기본1·10문항 상속,47tests PASS. 상속/문항근거/실행/E2E 분리. 11대학 전체는 검수중. 기존65부분근거·4조립·운영2문항 보존.
 
 ## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
 
