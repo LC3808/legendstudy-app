@@ -9,12 +9,13 @@ class NoRedirect(HTTPRedirectHandler):
 
 ROLES={'essay_worker':('ESSAY_REGISTRY_WORKER_JWT',365),'math_evaluation_worker':('MATH_EVALUATION_WORKER_JWT',7),'math_extraction_worker':('MATH_EXTRACTION_WORKER_JWT',7)}
 
-def mint(secret,now,role='essay_worker'):
+def mint(secret,now,role='essay_worker',ttl_days=None):
  if role not in ROLES:raise ValueError('Unsupported role')
  if len(secret)<32 or secret.startswith(('sb_','eyJ')) or any(c.isspace() for c in secret):
   raise ValueError('Legacy JWT Secret을 확인하세요. 로그인 비밀번호·API 키·JWT는 사용할 수 없습니다.')
  def enc(value):return base64.urlsafe_b64encode(json.dumps(value,separators=(',',':')).encode()).rstrip(b'=')
- expires=now+ROLES[role][1]*24*60*60
+ if ttl_days not in (None,30):raise ValueError('Only reviewed 30-day override supported')
+ expires=now+(ROLES[role][1] if ttl_days is None else ttl_days)*24*60*60
  claims={'role':role,'iat':now,'exp':expires}
  if role!='essay_worker':claims['iss']='supabase'
  # Preserve existing contracts: no audience, subject or service_role claims.
@@ -62,6 +63,7 @@ def main():
  p.add_argument('--config',type=Path)
  p.add_argument('--service-token',action='store_true')
  p.add_argument('--role',choices=tuple(ROLES),default='essay_worker')
+ p.add_argument('--ttl-days',type=int,choices=(30,),help='30-day recovery candidate; preserves all non-time claims')
  a=p.parse_args()
  if a.service_token:
   subprocess.run(['pbcopy'],input=secrets.token_urlsafe(48).encode(),check=True)
@@ -71,7 +73,7 @@ def main():
  if not sys.stdin.isatty():raise ValueError('Mac 터미널에서 직접 실행하세요. Secret은 화면에 표시되지 않습니다.')
  config=json.loads(a.config.read_text())
  secret=getpass.getpass('Supabase Legacy JWT Secret (비밀번호 아님, 붙여넣기 후 Enter): ').strip()
- token,expires=mint(secret,int(time.time()),a.role);del secret
+ token,expires=mint(secret,int(time.time()),a.role,a.ttl_days);del secret
  if a.role=='essay_worker':
   count=verify(token,config)
   result=f'Registry 읽기 HTTP200 ({count}문항)'

@@ -40,6 +40,20 @@ class ExistingJwtContractTest(unittest.TestCase):
             self.assertEqual(signature,base64.urlsafe_b64encode(hmac.new(secret.encode(),head+b'.'+body,hashlib.sha256).digest()).rstrip(b'='))
         with self.assertRaises(ValueError):mint(secret,1700000000,'service_role')
 
+    def test_thirty_days_changes_only_expiry(self):
+        secret='synthetic-signing-fixture-not-production-12345'
+        for role in ('essay_worker','math_evaluation_worker','math_extraction_worker'):
+            old,_=mint(secret,1700000000,role)
+            new,expiry=mint(secret,1700000000,role,30)
+            def claims(token):
+                raw=token.split(b'.')[1]
+                return json.loads(base64.urlsafe_b64decode(raw+b'='*((-len(raw))%4)))
+            before,after=claims(old),claims(new)
+            before.pop('exp');after.pop('exp')
+            self.assertEqual(before,after)
+            self.assertEqual(expiry,1700000000+30*86400)
+        with self.assertRaises(ValueError):mint(secret,1700000000,'essay_worker',365)
+
     def test_registry_growth_does_not_break_authentication(self):
         self.assertEqual(verify(b'synthetic-token',CONFIG,Probe([(200,[{}]*700)])),700)
         with self.assertRaises(ValueError):verify(b'synthetic-token',CONFIG,Probe([(200,{'error':'fixture'})]))

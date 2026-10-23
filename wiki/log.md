@@ -4675,3 +4675,7 @@ blanket restoration request corrected. Three sanitized probe tests PASS. [Eviden
 ## 2026-10-23 — Owner JWT recovery preparation
 
 Existing local issuer reused for Essay and exact Math roles; claims/signing contracts preserved. Four synthetic checks PASS; actual signing/secret registration0, DB/Credit/History/Provider0. [Owner procedure](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Existing service token reused; Provider key separate.
+
+## 2026-10-23 — JWT30day review, no operational change
+
+Success-log expiry/issuer/alg verified;30day override candidate preserves non-time claims,5synthetic testsPASS. Existing normal WEB/secrets unchanged; signing/DB/Provider0. Automation remains proposed, Owner registration retained. [Review and Owner actions](essay-jwt-lifecycle-review-20261023.md).

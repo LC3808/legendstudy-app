@@ -12,6 +12,8 @@
 
 Owner 보유 기존 서명키로 JWT3개 재발급 절차 준비: 기존 로컬 도구 재사용, 역할/issuer/audience/HS256/유효기간 유지, 합성검사4PASS. 실제 발급·등록0. [Owner 명령·클립보드 등록·검증](../tool/cloudflare_essay/OWNER_JWT_RECOVERY.md). Service Token은 보관원문 유지, Math Provider key는 별도 기존값 필요.
 
+JWT30일 후보 검토: 코드상7일상한 없음, 실제30일 인증은 Owner 발급 후 확인 필요. 마지막 성공 토큰 Math만료10/30 00:30:23KST·Essay2027/10/14. eyJ토큰은 서명키가 아니다. 만료7일 전 갱신/실패알림/롤백은 설계만 완료, 자동화 미설치. [검토·실행범위](essay-jwt-lifecycle-review-20261023.md).
+
 ## Product state
 
 [Payment](payment-app-foundation.md): code PASS; LIVE OFF.

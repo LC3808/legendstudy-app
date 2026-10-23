@@ -15,6 +15,16 @@ Essay 기존 로컬 발급 함수와 Math Oct09/Oct23 성공 발급 계약을 �
 로그에서 audience 부재를 추측한 것이 아니라 기존 발급 계약의 claim 목록을 따른다.
 새 서명키·키 회전·학생 토큰·service_role 토큰을 만들지 않는다. 기존 Worker 설정 불변.
 
+## 30일 후보 — 최신 Owner 검토 지시
+
+아래 명령은 `--ttl-days 30`을 명시한다. 기존 계약표의365일/7일은 과거 발급 계약이며,
+이번 후보는 exp만 발급시각+30일로 변경한다. 1년을 새 운영정책으로 승인한 것이 아니다.
+**eyJ로 시작하는 토큰은 서명키가 아니다.** 기존 Legacy JWT Secret을 별도로 확보한 경우에만
+재발급한다. 이미 발급된 JWT나 Service Token에서 서명키를 복원할 수 없다.
+기존 토큰만 보유했다면 신규 발급 명령을 실행하지 말고, Supabase의 해당 프로젝트
+JWT Keys → Legacy JWT Secret에서 기존값을 Owner가 확인한다. Rotate/Revoke/Create 금지.
+이번 검토는 실제 발급·등록·배포를 수행하지 않았다.
+
 ## 실행 순서
 
 Mac 터미널에서 아래 명령을 **하나씩** 실행한다. 서명키는 프로그램의 숨김 입력에만
@@ -26,19 +36,19 @@ Mac 터미널에서 아래 명령을 **하나씩** 실행한다. 서명키는 �
 ### 1. Essay Registry
 
 ```sh
-python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role essay_worker
+python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role essay_worker --ttl-days 30
 ```
 
 ### 2. Math Evaluation
 
 ```sh
-python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role math_evaluation_worker
+python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role math_evaluation_worker --ttl-days 30
 ```
 
 ### 3. Math Extraction
 
 ```sh
-python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role math_extraction_worker
+python3 /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/issue_worker_jwt.py --config /Users/woojinchang/development/legendstudy-service-app-20261022/tool/cloudflare_essay/owner-jwt-recovery-config.json --role math_extraction_worker --ttl-days 30
 ```
 
 ### 4. 등록과 클립보드 정리
