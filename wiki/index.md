@@ -31,7 +31,7 @@ Admin member management: [directory009](admin-member-directory.md). Essay Web ac
 
 MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).
 
-Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
+Payment / IAP / purchased Credit: [Oct23 Production READ-ONLY](iap-production-read-only-20261023.md) — v17/503, grants0, cause PARTIAL. [APP payment foundation](payment-app-foundation.md) preserves historical implementation evidence; DB installation now verified, LIVE activation unverified.
 
 Account deletion / ADR-2D: [Ownership correction and Owner retry checklist](account-deletion-ownership-compatibility.md) — isolated verified; failed Production attempt rolled back; retry requires Owner review.
 

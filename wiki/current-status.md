@@ -14,7 +14,7 @@
 
 ## Product state
 
-[Payment](payment-app-foundation.md): code PASS; LIVE OFF.
+[IAP PHASE1](iap-production-read-only-20261023.md): Google 설정누락, 6장애 PARTIAL.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

@@ -545,3 +545,8 @@ Oct19 20:28 KST superseding Owner report: app1.0/build19 and all four IAPs
 submitted, Waiting for Review; MANUAL release. Earlier auto-release/draft
 observation is historical. Contract/bank/Sandbox remain incomplete; public HOLD.
 [Submission handoff](final-store-rc-1.md#oct19-2028-kst-owner-submitted-ios-and-four-iaps).
+
+
+## Oct23 Production read-only recovery
+
+[Fresh Production checkpoint](iap-production-read-only-20261023.md): v17/JWTtrue, grants0, 503 diagnostics, local/deployed drift. PHASE1 PARTIAL; no Production mutation. Earlier TEST successes remain TEST-only evidence.

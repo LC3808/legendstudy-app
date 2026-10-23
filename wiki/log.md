@@ -4590,3 +4590,22 @@ Owner전략18d5b70확인, 기존Essay/Math/DB계약SELECT대조. Unified Wiki표
 
 ## 2026-10-23 Owner 평가 아키텍처 우선순위 수정
 대학 기본체계→상속→예외 순서. 기존 resolver에 대학/유형/연도 상속 추가, 숙명 인문1기본/10문항 연결,47tests PASS. 512독립체계 제작 금지,상속≠평가준비. 추가Provider/Production0. [상세](university-evaluation-profile-phase2.md).
+
+## 2026-10-23 — IAP Production PHASE1 read-only checkpoint
+
+Exact Owner path/branch confirmed, clean baseline. Production v17/JWTtrue,
+IAP grants0, inner grant ACL available, refund stack absent; last24h21 verifier
+requests all503, v17 UNCONFIGURED2/Error2. Deployed/local source drift verified.
+Payment migrations/RPCs present; older NOT_APPLIED statements are historical.
+Specific failure cause/activation unresolved, PHASE1 PARTIAL. No runtime mutation;
+only local Wiki updated. [Evidence and boundaries](iap-production-read-only-20261023.md).
+
+
+## 2026-10-23 — Owner six-incident Credit/IAP READ-ONLY
+
+Production Google settings2 absent; IAP_ENABLED=true. Signup lifecycle active,
+NULL benefit deliveries2/eligible pending0; account creation lazy, not a universal
+signup trigger failure. School cache miss1. Admin observed RPCs200; iOS Error
+cause unresolved. Unified remote main and active Oct23 authority, Claude handoff,
+Grok Oct12 read. Only own Wiki modified, no Production/other worktree writes.
+[Six-incident evidence and PHASE2 boundary](iap-production-read-only-20261023.md#owner-six-incident-investigation--2026-10-23-follow-up).

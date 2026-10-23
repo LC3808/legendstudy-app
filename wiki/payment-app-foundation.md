@@ -1,5 +1,7 @@
 # PAYMENT APP foundation
 
+Current DB inventory: [Oct23 read-only audit](iap-production-read-only-20261023.md) confirms Payment foundation/runtime installed. NOT_APPLIED below is historical; current LIVE activation was not verified.
+
 2026-10-03: implemented and isolated verified; **Production NOT_APPLIED**. Owner authorized APP scope after LAB PAYMENT-2 identified the missing shared financial boundary. [Owner package](../supabase/verification/payments/README.md) and [exact RPC/financial contract](../supabase/verification/payments/contract.md) own implementation details. No LAB code, migration deployment, provider call or LIVE activation.
 
 Provider-neutral identity: TOSS/APPLE_IAP/GOOGLE_PLAY + mode + verified purchase ID. Only Toss runtime is enabled; IAP API/verification remains future work. Owner pre-apply amendment supersedes the prior hash without changing Ledger economics.
