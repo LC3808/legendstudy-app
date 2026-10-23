@@ -2,13 +2,11 @@
 
 성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](essay-p0-direct-execution-20261023.md).
 
-## 2026-10-23 P0 — 11대학 서비스 연결 진행 중
+## 2026-10-24 P0 — 묶음 적용·숭실 WEB/APP PASS / 전체서비스 미완료
 
-기존6대학8문항 운영E2E 보존. 서울여revision3 Q1/Q2 Owner적용 사후10true 유지, 재실행 금지. Q1최초1/무료재첨삭0·WEB/GalaxyS8 History/성장4→5 성공 재사용. Q2일반WEB ready지만 완료Q1의 pending key와 충돌해 PENDING_CHANGED, 서버제출/차감0. UI수정금지 유지; 원인과 수정후보 기록.
+Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7문항 일반공개 연결, 정책상 공개5→12. 숭실2026Q1 최초1/무료재첨삭0 settled·실패0 released, WEB History 복귀갱신/근거/성장2→5 확인; GalaxyS8 build2026102401 동일항목 및 성균2교시PDF Owner PASS. 기존ID/정책/Credit/History 보존. Worker c3fb54be 계약 명확화 후 독립검수8PASS. WEB87abdd6/40c5085a는 공개 빌드설정 누락 중간배포를 복구하고 일반계정 로그인/PDF 재확인. Secret 변경0.
 
-전체157시험512문항/154묶음 초안 조립, profile423·미상속89, 공식매핑430/텍스트398, Essay입력PASS22+보존Math1, FULL23/DIAGNOSTIC0/REVIEW489. 검수/미조립이 포함된 중간분류이며 전체서비스 미완료. 건국·성균·숭실6시험7문항 Owner SQL 묶음 준비; 격리pre11/post14·운영READ-ONLY pre11true. 신규공개0, 현재정책/공개연결5.
-
-Worker d1036134에 기존82시험/7binding 보존+87시험/8binding/공개scope9 준비. WEB ff327e92/ca6022b·Pages scope3 보존, Secret변경0. Owner SQL후 Pages scope 추가·동일코드 배포·일반계정 검증 대기. 신규 private Provider35호출/추정USD6.717716, 결과불명1; 누적199/추정USD20.490748/결과불명2. 신규 운영E2E0. 15자동검사PASS. [전수표·Owner 파일·실패명세](essay-batch-service-20261023.md#일괄-조립다대학-적용-패키지--2026-10-23-2340-kst), [기존 인증·SWU 운영근거](essay-p0-direct-execution-20261023.md).
+전체157시험512문항/154묶음 초안, profile423/미상속89, 공식매핑430/텍스트398, FULL23/DIAGNOSTIC0/REVIEW489 유지. 신규 대표E2E1이며 신규7개 개별E2E 아님. SWUQ2 PENDING_CHANGED, 숭실 제출화면 완료 전 대기 안내, 나머지489 검수/조립 미완료. 이번 운영Provider6회·58,587/10,493tokens·비용NULL 미확정; private199회/추정USD20.490748/불명2 별도. [현재 결과·실패명세](essay-batch-service-20261023.md#2026-10-24--normal-batch-01-적용-및-숭실-대표-운영-검증). 기존 성공SQL 재실행 금지.
 
 ## Product state
 

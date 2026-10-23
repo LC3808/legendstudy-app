@@ -212,3 +212,19 @@ Pages 일반scope는3개 유지. Owner SQL후 해당 plain-text scope만 추가�
 이번 private Provider35호출: 알려진 사용량 기준 **USD6.717716 추정**, 결과불명1건 비용미확정.
 전체 private ledger199호출/197응답/2결과불명, **USD20.490748 추정**. 운영Q1의 기존4호출
 receipt 비용NULL은 별도이며0으로 계산하지 않는다. 청구서 실비미검증, 전체 서비스 미완료.
+
+## 2026-10-24 — normal-batch-01 적용 및 숭실 대표 운영 검증
+
+Owner가 건국·성균·숭실 6시험7문항 SQL 적용 후 사후14true를 전달했고, Agent의 READ-ONLY 독립 검사도14true. 기존 ID/다른 정책/조회함수/원문/기록 보존. Agent Production SQL 쓰기0. 이미 적용된 이 묶음과 SWUrevision3은 재실행하지 않는다.
+
+Pages 일반 시험 scope만3→9로 확대했으며 다른 설정 비교 일치, Secret 값 전송0. 기존5+신규7=정책상 일반공개12문항. 신규7문항의 일반계정 첨삭 버튼 활성 확인. 6시험 PDF 열람 확인(건국모의 Q2는 Q1과 동일 PDF 매핑, 별도 개별 클릭 검증 아님). 성균2026언어형2교시Q1 카탈로그 승인 상태를 실제 Owner 승인/DB 적용에 맞춰 WEB·Native에 연결했다. 기존486매핑 보존, 현재487매핑/155asset. 새 UI/결제/Credit/MY 변경 없음.
+
+숭실2026수시Q1 실제 일반계정 최초 run `244aed57-d1d2-4095-9c90-18f9fffa07da` completed/1Credit settled, 재첨삭 `03b6e579-dee5-477c-9add-6f932c7ae367` completed/0Credit settled. 중간 실패 `ec9879cb-01b9-4794-a792-20b741d373f4`는0Credit released. 잔액109→108→108. 첫 부분답안2/5, 재작성5/5; WEB 근거와 성장2→5, History 복귀 시 새로고침 없이 신규기록 표시 및 과거 성균/서울여 기록 확인. Galaxy S8 build2026102401 덮어설치 성공. Owner가 숭실 최초·재첨삭 History/성장/평가근거와 성균2교시 PDF 모두 PASS 보고(실기기 조작·시각 확인은 Owner, DB/WEB 독립 확인은 Agent).
+
+실패 원인은 독립검수가 frozen prior feedback를 이전 답안 원문과 혼동한 것. 이전 과제 해소 비교는 기록된 진단과 현재 답안으로 검증하고, 미제공 과거 문구의 직접 비교/인용은 계속 거부하도록 입력 계약을 명확히 했다. 자동PASS 우회 없음. 최초평가 입력 불변, uncertain 차단 회귀검사 포함 semantic/runtime17PASS. 수정 후 실제 독립검수8항목PASS. 기존 Worker 인증·권한·binding·정책 유지. Worker `c3fb54be-2f98-40cb-8a1a-2caae786003b`100% 및 예상변수 일치 확인.
+
+WEB 소스 `87abdd6a0122617c49d0c58a5b2ee4cee5a7c1ba`, 최종 Production `40c5085a-107b-4b27-8a4a-70a3eab740db`. 중간 배포23ed95bf는 공개 인증 빌드설정 누락으로 로그인/목록이 준비상태에 머물렀다. 기존 Production의 plain-text NEXT_PUBLIC 설정6개를 그대로 사용해 다시 빌드/배포하여 복구. Secret 설정 변경 없음. 최종 일반계정108Credit/시험목록/성균PDF7페이지/숭실2024PDF7페이지 실제 확인. 기존 정상 배포는 보존된 복구 후보이며 현재 배포와 혼동하지 않는다. WEB8검사·Native3검사·WEB/APK빌드PASS.
+
+이번 운영 Provider receipt6개(평가3+독립검수3), 입력58,587/출력10,493tokens. receipt 비용6개 모두NULL: 비용미확정이며0으로 계산하지 않는다. private 재검수 준비는 전송 전 종료되어 추가호출0. 기존 private 누적199회/197응답/2불명·USD20.490748 추정은 별도 유지; 운영6회를 private 합계에 혼합하지 않는다.
+
+잔여: 숭실 재첨삭 제출 화면은 완료 전 대기 안내로 종료됐지만 History 복귀에서는 완료 결과가 표시됨(제출화면 자동완료 미PASS). SWUQ2 PENDING_CHANGED 해결은 UI수정금지 경계로 남음. 신규7개 개별 E2E를 주장하지 않으며 숭실 대표1문항 WEB/APP 학습주기만 신규PASS. 전수512 중 FULL23/DIAGNOSTIC0/NEEDS_REVIEW489 중간분류·프로필423/미상속89는 그대로이며 전체 서비스 완료 아님. 나머지 근거 분리·Math 입력·미상속 묶음 연결을 계속해야 한다.

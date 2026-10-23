@@ -31,6 +31,20 @@ class ReviewTests(unittest.IsolatedAsyncioTestCase):
    r,v,o,seen,audit,_=self.fixture(d)
    with self.assertRaises(ProviderFailure):await r('eval',v,o)
    self.assertEqual(len(seen),1);self.assertEqual(len(audit),1)
+ async def test_prior_observation_context_is_explicit_and_still_fail_closed(self):
+  for decision in ('pass','uncertain'):
+   r,v,o,seen,audit,_=self.fixture(decision)
+   v['scaffolding_context']={'items':[{'issue_key':'coverage','diagnosis':'Required passage absent'}]}
+   if decision=='pass':await r('eval',v,o)
+   else:
+    with self.assertRaises(ProviderFailure):await r('eval',v,o)
+   self.assertIn('not the prior answer text',seen[0]['previous_feedback_contract']['source'])
+   self.assertIn('Unsupported prior-answer',seen[0]['previous_feedback_contract']['limit'])
+   self.assertEqual(audit[0]['review_prompt'],VERSION+'-prior-feedback-context')
+ async def test_first_answer_review_input_remains_unchanged(self):
+  r,v,o,seen,audit,_=self.fixture();await r('eval',v,o)
+  self.assertNotIn('previous_feedback_contract',seen[0])
+  self.assertEqual(audit[0]['review_prompt'],VERSION)
  async def test_missing_checks_forged_coverage_wrong_model(self):
   for mode in ('checks','coverage','model'):
    r,v,o,seen,audit,a=self.fixture(version='wrong' if mode=='model' else 'review-model')

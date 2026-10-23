@@ -1,5 +1,5 @@
 {
-  "status": "OWNER_SQL_PENDING",
+  "status": "OWNER_APPLIED_POSTCHECK_VERIFIED",
   "project": "stlhijzpjfgwwdgunlsd",
   "scope": [
     {
@@ -59,8 +59,13 @@
     "all_existing_policies_restored": true,
     "production_writes": 0
   },
-  "worker_version": "d1036134-ddc4-4658-b138-2cf0c627ff5e",
+  "worker_version": "c3fb54be-2f98-40cb-8a1a-2caae786003b",
   "web_preserved": "ff327e92-fe15-4753-a372-99f2ad20e1c9",
   "private_directory": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023/normal-batch-01",
-  "production_writes_by_agent": 0
+  "production_writes_by_agent": 0,
+  "production_postcheck": {
+    "owner_all_14_true": true,
+    "independent_read_only_all_14_true": true
+  },
+  "web_current": "40c5085a-107b-4b27-8a4a-70a3eab740db"
 }

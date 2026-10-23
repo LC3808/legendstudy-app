@@ -9,10 +9,10 @@ void main() {
   test(
     'all approved WEB mappings preserve exact question, exam, asset and page',
     () {
-      expect(approvedStudentPdfs.length, 486);
+      expect(approvedStudentPdfs.length, 487);
       expect(
         approvedStudentPdfs.values.map((q) => q['assetId']).toSet().length,
-        154,
+        155,
       );
       for (final q in approvedStudentPdfs.values) {
         final dto = studentPdfFor(

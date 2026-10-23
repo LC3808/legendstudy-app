@@ -46,6 +46,14 @@ class SemanticReview:
    'report_contract':{'dimension_level':{
     'meaning':'Internal ordinal criterion-fulfillment aid, 1 lowest through 5 highest; not an official university score, weight or deduction.',
     'review':'Check consistency with the criterion, explanation and answer evidence. Reject unsupported or contradictory levels. The university need not supply this internal scale; never infer official points from it.'}}}
+  # Frozen previous feedback supports task-resolution comparison; it does not
+  # imply that the prior student's verbatim answer was supplied.
+  history = value.get('scaffolding_context', {}).get('items', [])
+  if history:
+   request['previous_feedback_contract'] = {
+    'source': 'Frozen prior evaluation observations in scaffolding_context.items; not the prior answer text.',
+    'permitted_comparison': 'Check whether the current answer resolves each recorded prior task. A statement that a previously diagnosed omission is now addressed may rely on the supplied prior observation plus current answer. Do not require the prior verbatim answer for this task-resolution comparison.',
+    'limit': 'Do not infer unrecorded prior content or claim direct word-for-word comparison. Unsupported prior-answer quotations or comparisons still fail or remain uncertain.'}
   if value.get('official_images'):
    request['package']={k:v for k,v in value.items() if k!='official_images'}
    request['official_images']=value['official_images']
@@ -54,7 +62,7 @@ class SemanticReview:
   usage=telemetry_payload({},result,binding)
   assessment=strict_json(result.raw)
   await self.audit({'output_sha256':digest({'evaluation':evaluation,'assessment':assessment}),
-   'component':'independent_review','reviewer':self.reviewer_id,'review_prompt':VERSION,
+   'component':'independent_review','reviewer':self.reviewer_id,'review_prompt':VERSION+'-prior-feedback-context' if history else VERSION,
    'evaluation_id':evaluation,'package_sha256':digest(value),'candidate_sha256':digest(output),
    'assessment':assessment,'telemetry':usage,'expected_local_issue_keys':local})
   shape(assessment,'checks local_issue_keys');checks=assessment['checks']
