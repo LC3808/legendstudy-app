@@ -314,6 +314,7 @@ class ReservedExamRuntime:
         return {'run_id':run_id,'state':state}
 
 def prepare_claimed_material(claimed,pkg,registry):
+    from copy import deepcopy
     from .live_worker import package as provider_package
     snap=claimed['snapshot'];policy=snap['runtime'];run_id=claimed['run_id']
     hosted, report=load_reviewed_material(pkg,registry,pinned_digest=policy['package_digest'],
@@ -331,7 +332,13 @@ def prepare_claimed_material(claimed,pkg,registry):
             out=previous[0]['evaluation'];core=set(out['core_improvement_keys'])
             for item in out['improvements']:
                 progress=str(uuid5(NS,'progress/'+claimed['parent_id']+'/'+qid+'/'+item['issue_key']))
-                context['items'].append(dict(item,progress_id=progress))
+                # Reuse the frozen prior result's local observations. The strict
+                # validator needs these when a typo is resolved and no new
+                # sentence feedback is appropriate.
+                context['items'].append(dict(item,progress_id=progress,
+                    official_evidence_ids=deepcopy(item['evidence_ids']),
+                    observation={'sentences':[deepcopy(s) for s in out['sentence_feedback']
+                        if s['linked_issue_key']==item['issue_key']]}))
                 if item['issue_key'] in core:context['previous_core_progress_ids'].append(progress)
         frozen=dict(contract_version='1.3',attempt_id=evaluation,
             answer_hash=sha256(answer['body'].encode()).hexdigest(),

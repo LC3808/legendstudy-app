@@ -1187,6 +1187,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
             widget.rewriteRun!['id'] as String)
       : null;
   String? submittedRun;
+  String? submittedRequestKey;
   Timer? statusPoll;
   final submissionWait = Stopwatch();
   @override
@@ -1218,6 +1219,17 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                 '${const ['오늘도 수고했어요.', '잠깐 어깨를 펴고 쉬어가세요.', '물 한 모금 마시고 오셔도 좋아요.'][(submissionWait.elapsed.inSeconds ~/ 15) % 3]}',
         },
       );
+      if (state == 'failed' && submittedRequestKey != null) {
+        // Only a server-confirmed terminal failure permits a new request key.
+        // Preserve answers and never retry an unknown or in-flight evaluation.
+        final saved = await pending.loadDraft();
+        final stored = saved.body.isEmpty
+            ? null
+            : jsonDecode(saved.body) as Map<String, dynamic>;
+        if (stored?['key'] == submittedRequestKey) {
+          await pending.saveLocalDraft('', saved.revision);
+        }
+      }
       if (state == 'completed' || state == 'failed') {
         ref.invalidate(sharedEssayHistoryProvider(widget.owner));
         ref.invalidate(creditBalanceProvider);
@@ -1448,6 +1460,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (mounted) {
         setState(() {
           submittedRun = result!['runId'] as String;
+          submittedRequestKey = key;
           notice = '답안을 제출했어요. 처리 상태를 확인합니다.';
         });
         unawaited(pollStatus());

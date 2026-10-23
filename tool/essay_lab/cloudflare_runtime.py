@@ -10,6 +10,18 @@ from .exam_runtime import ExamQuestionChannel
 from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
 
+def receipt_checkpoint_key(value):
+    # A rejected output has no successful Provider output receipt. Keep the
+    # symbolic failure durable so the existing failure/Credit path can finish.
+    if value.get('component')=='validation_failure':
+        require(set(value)=={'component','code'},'INVALID_FAILURE_RECEIPT')
+        code=value['code']
+        require(isinstance(code,str) and 0<len(code)<=80 and
+                all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code),
+                'INVALID_FAILURE_RECEIPT')
+        return 'validation-failure-'+digest(value)
+    return 'receipt-'+value['output_sha256']
+
 class CloudflareExamRuntime:
     def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=()):
         self.rpc=rpc;self.registry=registry;self.provider=provider;self.reviewer=reviewer
@@ -36,12 +48,21 @@ class CloudflareExamRuntime:
         require(len(questions)==1,'EXAM_SYNTHESIS_REQUIRED') # First Hanyang exam; no fabricated multi-question synthesis.
         version=f"material-{pkg['package_version']}-{policy['package_digest']}"
         async def persist_receipt(value):
-            key='receipt-'+value['output_sha256']
+            key=receipt_checkpoint_key(value)
             await journal.begin(key)
             await journal.write(key,value)
         source=self.review_source.bind_audit(persist_receipt) if hasattr(self.review_source,'bind_audit') else self.review_source
         async def review(evaluation,value,output):
-            receipt=await source(evaluation,value,output)
+            # Store only stage/error identity. Never log answers, secrets or
+            # exception messages; a missing receipt must not hide where we stopped.
+            await journal.begin('independent-review-started')
+            await journal.write('independent-review-started',{'stage':'independent_review'})
+            try:
+                receipt=await source(evaluation,value,output)
+            except Exception as error:
+                await journal.begin('independent-review-error')
+                await journal.write('independent-review-error',{'error_type':type(error).__name__})
+                raise
             await journal.begin('review-'+evaluation)
             await journal.write('review-'+evaluation,receipt)
             return receipt

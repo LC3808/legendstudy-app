@@ -130,4 +130,7 @@ class Default(WorkerEntrypoint):
                 state=await runtime.consume(json.loads(message.body))
                 if state=='reconciling':message.retry()
                 else:message.ack()
-            except Exception:message.retry() # DB intent prevents repeated Provider call.
+            except Exception as error:
+                # Symbolic class only: messages/tracebacks may contain credentials.
+                print('ESSAY_QUEUE_ERROR '+type(error).__name__)
+                message.retry() # DB intent prevents repeated Provider call.

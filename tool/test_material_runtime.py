@@ -69,4 +69,29 @@ class MaterialRuntimeTests(unittest.TestCase):
  def test_model_answer_is_not_misrepresented_as_criteria(self):
   self.package['questions'][0]['source_page_references'].append(dict(questionId='q',sourceHash='a'*64,role='model_answer',startPage=2,endPage=2,evidenceText='answer',verification='VERIFIED'))
   q,r=self.bind();self.assertEqual(r['not_forwarded_roles'],['model_answer']);self.assertEqual(len(q.frozen_cache['criteria']),1)
+ def test_rewrite_resolved_local_typo_reuses_frozen_sentence_evidence(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  from essay_lab.material_runtime import prepare_claimed_material
+  from essay_lab.live_worker import parse_provider, encoded
+  from tool.test_essay_live_worker import fixture
+  claim,cache,out=fixture()
+  prior=deepcopy(out)
+  prior['improvements'][0].update(claim_scope='local_sentence',evidence_ids=[])
+  source=deepcopy(prior)
+  frozen=dict(run_id='run',subject_id='owner',lease_token='lease',parent_id='parent',
+   parent_result={'questions':[{'questionId':'q','evaluation':prior}]},
+   snapshot={'ownerId':'owner','runtime':{'package_digest':'f'*64,'binding':{},'regime':'test','evaluation_type':'humanities'},
+    'answers':[{'questionId':'q','body':claim['answer'],'rubricVersion':'v','evidenceVersion':'v'}]})
+  with patch('essay_lab.material_runtime.load_reviewed_material',return_value=({'q':SimpleNamespace(frozen_cache=cache)},{'ready':True})):
+   questions,_=prepare_claimed_material(frozen,{}, {})
+  assembled=questions[0]['claim'];ctx=assembled['input']['scaffolding_context']
+  progress=ctx['items'][0]['progress_id']
+  out.update(attempt_id=assembled['input']['attempt_id'],core_improvement_keys=[],sentence_feedback=[],
+   previous_improvement_reviews=[{'previous_progress_id':progress,'outcome':'resolved','reason':'오탈자가 수정됨'}])
+  out['improvements'][0].update(claim_scope='local_sentence',evidence_ids=[],previous_progress_id=progress,status='resolved')
+  self.assertEqual(parse_provider(encoded(out),assembled)['improvements'][0]['status'],'resolved')
+  self.assertEqual(prior,source)
+  ctx['items'][0]['observation']['sentences']=[]
+  with self.assertRaisesRegex(Invalid,'LOCAL_WITHOUT_OBSERVATION'):parse_provider(encoded(out),assembled)
 if __name__=='__main__':unittest.main()

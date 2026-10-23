@@ -1,14 +1,12 @@
 # Current Status
 
-## 현재: 대학별 프로필 PHASE 3 운영 연결 진행 중
+## 현재: 대학별 프로필 PHASE 3 — 대표 3문항 실제 E2E PASS / 전체 PARTIAL
 
-PHASE2는 PARTIAL로 보존: 기본 진단체계28,387/512상속,125미상속(참조78/범위47). [상속 검수](university-evaluation-profile-phase2.md).
+숙명2025모의1-1(APP 최초·재첨삭→WEB), 숙명2026수시1·서강2026모의 경제경영(WEB 최초·재첨삭→APP)의 실제 Provider·결과·비교·History PASS. 각 최초1/재첨삭0Credit, 실패3건 추가차감0, 관리자잔액97. iOS Simulator 범위이며 Android/iPhone 신규코드·일반공개는 미검증이다.
 
-숙명2026수시 인문1·서강2026모의 경제경영의 기존 검수 revision2와 실행 정책을 연결했다. 각 시험의 기존 문항·mappings/state를 보존하고 selected_questions 1문항씩만 승인했다. 일반 공개 범위는 아직 건국 기존 시험 그대로이며 실제 신규 Provider/WEB/APP E2E는 미실행이다. 숙명2025모의는 기존 원본 등록 메타데이터 대조 중이다.
+숙명2025 실패영수증/이전관측 연결 및 APP 실패request key/PDF mapping 최소 수정. 마지막 실제재첨삭 성공; 이전 미확정1건의 소급 원인은 미확정으로 보존. Worker 최종6b7593a4, WEB code ad6ffec/config배포17244d3b. 71702·Payment·IAP 불변. 기존 건국 인문·수리 E2E 보존.
 
-운영 변환기의 공식 도표 이미지 누락을 기존 이미지 계약으로 보완하고, 프로필 공통 근거는 해당 학년도·유형 범위로 한정했다. 관련57개 계약검사 및 Worker 관련33개 검사 PASS(중복 포함, 합산하지 않음). 격리 PostgreSQL에서 기존 정책·sibling·함수권한 보존/재실행차단/롤백 PASS. DB 연결≠서비스PASS.
-
-기존 건국 인문·수리 E2E/Credit1·0/History/교차조회 보존. [운영 근거](phase3-service-20261022.md). 71702·UI·결제·IAP 변경 없음. 다음: Worker 후보 검증·배포 후 신규3문항 실제 운영 E2E. 경희·동국 추가자료 HOLD.
+PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와11대학 일반서비스를 구분한다. [실제 실행·장애·비용·대학별 상태](university-profile-production-e2e-20261023.md). 다음: 신규3문항 공개 범위/장애 관측 확인 및 나머지 공식 문항 근거·Math leaf 연결. 경희·동국 추가자료 HOLD.
 
 ## Product state
 
@@ -136,17 +134,4 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
 
 71701 is already applied; no DB work this task. Shared metadata selection remains HOLD-only. Canonical official page links now override stale registry PDF links for the 11 colleges; unverified Sogang/SWU links withheld. Source catalog tests 13 PASS, analyze PASS, Android debug19 and iOS Simulator debug19 builds PASS. Native/device and logged-in student E2E NOT_ASSESSABLE; no store upload. Production WEB still shows old Registry subsets. See Unified Wiki 2026-10-22-material-service-connection review.
 
-## 2026-10-23 — 실제 인문 운영 E2E
-
-건국 인문2번 APP 최초→WEB 무료 재첨삭→APP 교차 History PASS(실제 Provider). Credit1/0·실패 순차감0. 운영10호출/보수비용USD0.972644. iOS Simulator 범위이며 Android/iPhone·Math·나머지 문항 미검증. 일반 공개HOLD. Math 전역OFF, 정확한 계정/leaf의 한시적 DB 예외와4행 ACTIVE 준비, Worker 인증 갱신 여부 확인 필요. [상세·복구·증거](phase3-service-20261022.md). 결제/IAP 변경 없음.
-
-Math 인증 조사: 기존7일 전용역할 JWT 발급·갱신 경로와 Oct09 실제 성공 기록 발견. 두 운영Secret 존재; 현재 유효성은 미확인, 만료 장애로 단정 금지. 인증키/Secret/운영설정 변경 없이 상세 phase3 기록 정정.
-
-## 2026-10-23 Math 인증 복구·실제 평가
-두 전용 JWT의 실제 만료를 확인하고 기존 키로7일 갱신, 설치 후 역할 인증PASS. WEB 건국 자연1번 이미지판독·확정·실제평가·저장PASS, 최초1Credit/예약0, APP Simulator 같은결과조회PASS. Native History→Math 화면이 뒤에 열리는 문제 최소수정·회귀테스트PASS. APP 합성답안 입력 대기, 무료재첨삭/APP→WEB는 미완료이므로 전체PARTIAL. 대기 중 Math실행flagsOFF·한시DBgate/status예외원복, JWT/답안/결과보존. 기존 인문성공반복없음. [상세](phase3-service-20261022.md).
-
-## 2026-10-23 수리 재첨삭 완료
-Device Hub Send Clipboard로입력해결. 건국자연1번 APP무료재첨삭→실제Provider→결과/History→WEB교차조회PASS(iOS Simulator). 최초1/재첨삭0Credit·예약0보존. Math누적3호출/보수USD0.181868. 검증종료후Math flagsOFF·DB한시예외원복,일반공개HOLD. 실기기/다른대학전체PASS아님. 상세 phase3-service-20261022 기록참조.
-
-## 2026-10-23 공개 연결 진행
-Owner가 E2E 통과 문항 공개 승인. 건국 인문만 명시적 서버 시험 범위로 연결 중. 기존 건국 인문/수리 성공 반복 없음. 로컬 Worker11/WEB45 PASS, 운영 적용·11대학 전체는 미완료. [상세](phase3-service-20261022.md).
+기존 인문·수리 운영 이력은 [PHASE3 상세](phase3-service-20261022.md)와 [상태 이력](history/status-checkpoints.md)에 보존한다.

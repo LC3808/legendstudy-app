@@ -59,7 +59,31 @@ class SourceCatalog {
           // selected exam. Use the official archive without changing source data.
           if (u['sourceUniversityId'] == 'hanyang') 'officialSourceUrl': 'https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI',
         },
-    ], exams);
+    ],
+      [
+        for (final exam in exams)
+          {
+            ...exam,
+            // History opens the reviewed registry before a university browse RPC.
+            // Restore only the existing, approved canonical exam/question PDF.
+            'questions': [
+              for (final question
+                  in (exam['questions'] as List).cast<Map<String, dynamic>>())
+                {
+                  ...question,
+                  if (exam['dbExamId'] is String &&
+                      question['dbQuestionId'] is String)
+                    if (studentPdfFor(
+                          exam['dbExamId'] as String,
+                          question['dbQuestionId'] as String,
+                        )
+                        case final pdf?)
+                      'studentPdf': pdf,
+                },
+            ],
+          },
+      ],
+    );
   }
 
   /// Metadata-only projection; never accepts PDF/evidence/answer fields from RPC.

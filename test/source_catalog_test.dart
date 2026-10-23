@@ -8,6 +8,41 @@ import 'package:legendstudy_app/features/essay/essay_models.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   test(
+    'history registry restores approved PDF only for matching exam and question',
+    () {
+      Map<String, dynamic> exam(String id, String key) => {
+        'key': key,
+        'verification': 'VERIFIED',
+        'dbExamId': id,
+        'questions': [
+          {
+            'key': '$key:1',
+            'dbQuestionId': '1dab31d8-ea73-513f-80c3-9f871f079e2b',
+          },
+        ],
+      };
+      final catalog = SourceCatalog.parse(
+        jsonEncode({
+          'version': 'essay-source-registry-v1',
+          'universities': <Map<String, dynamic>>[],
+          'exams': [
+            exam('a6667288-75ad-50d4-b237-d2a08e2bff8b', 'matching'),
+            exam('00000000-0000-4000-8000-000000000001', 'wrong-exam'),
+          ],
+        }),
+      );
+      final pdf =
+          (catalog.exams.first['questions'] as List).single['studentPdf']
+              as Map;
+      expect(pdf['questionId'], '1dab31d8-ea73-513f-80c3-9f871f079e2b');
+      expect(pdf['startPage'], 2);
+      expect(
+        (catalog.exams.last['questions'] as List).single['studentPdf'],
+        isNull,
+      );
+    },
+  );
+  test(
     'reviewed web pages override stale registry PDF links without changing IDs',
     () {
       final catalog = SourceCatalog.parse(

@@ -25,6 +25,18 @@ class StageTests(unittest.TestCase):
 if __name__ == '__main__': unittest.main()
 
 class RuntimePolicyTests(unittest.TestCase):
+    def test_validation_failure_receipt_needs_no_provider_hash(self):
+        from tool.essay_lab.cloudflare_runtime import receipt_checkpoint_key
+        from tool.essay_lab.live_worker import Invalid
+        value={'component':'validation_failure','code':'UNKNOWN_CRITERION'}
+        self.assertTrue(receipt_checkpoint_key(value).startswith('validation-failure-'))
+        self.assertEqual(receipt_checkpoint_key(value),receipt_checkpoint_key(dict(value)))
+        self.assertEqual(receipt_checkpoint_key({'output_sha256':'abc'}),'receipt-abc')
+        with self.assertRaises(Invalid):
+            receipt_checkpoint_key(dict(value,answer='private'))
+        with self.assertRaises(Invalid):
+            receipt_checkpoint_key(dict(value,code='raw secret text'))
+
     def test_consumer_uses_frozen_policy_and_rejects_unconfigured_before_package(self):
         import asyncio
         from tool.essay_lab.cloudflare_runtime import CloudflareExamRuntime
