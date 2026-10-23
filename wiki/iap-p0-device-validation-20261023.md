@@ -1,5 +1,12 @@
 # Owner P0 — Payment / Credit / MY native validation (2026-10-23)
 
+**REOPENED:** Owner reports final Android startup deletion-form redirect and orange
+buttons. Previous final-device acceptance did not establish these regressions absent.
+Target4035592 retains pre-existing old lifecycle/theme despite newer fixes in the
+payment source branch. Scoped integration omitted those fixes. Restore existing
+2e32195 startup behavior and approved Oct10 navy/neutral CTA theme; no backend change.
+Partial correction analyze +17 tests PASS, but Owner subsequently reports broader obsolete UI/material/DB integration. Partial candidate NOT_INSTALLED and NOT_PUBLISHED; full baseline reconciliation required.
+
 Latest Owner returns work to `legendstudy-iap-fix`, branch
 `codex/iap-credit-production-recovery-20261023`. Initial dirty PHASE1 Wiki notes
 were preserved in e9722bd. UI from c603059/32eb5b7 was brought forward explicitly;
@@ -126,3 +133,24 @@ build output and local public configuration remain ignored. Android candidate AP
 SHA256 `3a70bebb349c4d5f21ceb640ff4dc15055bacc75f0b29c3658fac9b445d8a666`.
 Both physical devices Owner PASS. Wiki handoff/link checks PASS. Production expiry
 SQL remains NOT_APPLIED; no Store submission.
+
+## Baseline regression confirmed — supersedes final acceptance
+
+Owner reports obsolete UI/UX and missing material/DB-connected screens. Actual
+installed last update16:57:35 is the APP-target candidate1.0.0+18. Target base
+c3ac6ec is a divergent Oct18 Claude UI branch, not the later integrated APP base.
+4035592 selectively added payment UI onto that old base. It omits current source
+changes across60 lib files, including source_catalog/page, question_pdf,
+evaluation_report/view, math_workspace, shared_history and newer profile/startup.
+Both local build define files point to the correct Production project; this does
+not establish runtime reads and must not be described as DB disconnect proven.
+
+Existing Oct18 canonical integration explicitly based on f62b1ee and selected
+Claude changes, rejecting whole-file replacements of Codex draft/history/Essay.
+Current material-service remote c2f00540a5f18d17c6d03d2760bbce3f203aadaa preserves
+Oct22 latest-exam/PDF Owner acceptance; current payment source already includes
+much of that newer APP lineage but has differences from current service branch.
+Next: reconcile complete approved APP baseline and preserve existing payment UI,
+without overwriting the concurrent service worktree or altering Production.
+No partial-fix installation, additional merge, DB change or account deletion.
+4035592 is NOT release-ready; original device PASS claim withdrawn for full APP.

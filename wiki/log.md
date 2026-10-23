@@ -4632,3 +4632,10 @@ SM-G950N detected; separate device/physical acceptance and merge remain pending.
 Galaxy S8 reinstall explicitly authorized; source install and final candidate update PASS. iPhone12 final candidate installed; Owner confirms both devices normal. Analyze40tests PASS; scoped APP integration prepared, expiry SQL NOT_APPLIED. [Evidence](iap-p0-device-validation-20261023.md).
 
 APP target remote fast-forward verified at4035592; post-integration analyze, Android/iOS release and40 regression tests PASS. Other worktrees untouched. Expiry SQL/Store distribution remain gated.
+
+
+## 2026-10-23 — Reopen final Android acceptance
+
+Owner reports startup deletion screen/orange CTA. Scoped target integration retained old lifecycle/theme while source already had corrected behavior. Restore those existing fixes, not payment redevelopment; analyze17tests PASS, corrected device acceptance pending. [Evidence](iap-p0-device-validation-20261023.md).
+
+Owner expands regression to obsolete UI/material connection. Confirmed target base omits60 current lib-file changes; correct Production URL alone does not prove runtime reads. Partial fix not installed/published. Full APP PASS withdrawn;4035592 release HOLD pending canonical baseline reconciliation.
