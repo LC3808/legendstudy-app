@@ -68,13 +68,19 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       ],
     );
     if (_showHistory) {
-      return ShellPage(
-        children: [
-          const SectionHeader('Credit 충전'),
-          tabs,
-          const SizedBox(height: AppTokens.space12),
-          const PurchaseHistory(),
-        ],
+      return PopScope<Object?>(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop && mounted) setState(() => _showHistory = false);
+        },
+        child: ShellPage(
+          children: [
+            const SectionHeader('Credit 충전'),
+            tabs,
+            const SizedBox(height: AppTokens.space12),
+            const PurchaseHistory(),
+          ],
+        ),
       );
     }
     if (controller == null) {

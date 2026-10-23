@@ -1,3 +1,4 @@
+import '../features/credits/credit_history.dart';
 import '../features/onboarding/device_intro.dart';
 import '../features/auth/account_deletion.dart';
 import '../features/study/trends/study_trend_page.dart';
@@ -240,6 +241,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/my',
                 builder: (context, state) => const ProfilePage(),
                 routes: [
+                  GoRoute(
+                    path: 'credits',
+                    builder: (_, _) => const NestedPage(
+                      title: '크레딧 내역',
+                      child: CreditHistory(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'trends',
                     builder: (_, _) => const NestedPage(
