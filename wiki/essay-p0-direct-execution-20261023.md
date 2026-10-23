@@ -607,3 +607,13 @@ precheck.sql → apply.private.sql → postcheck.sql; rollback.sql restores Q1-o
 Existing WEBff327e92 remains. Backend15checks and sourceaudit5checksPASS.
 This continuation generated21private quality calls (USD2.009264estimate), plus4operating calls
 whose receipt cost is NULL; no zero-cost claim. Entire11-university activation remains incomplete.
+
+### Revision3 Owner application independently confirmed
+
+Owner reported READER_BASELINE_CHANGED. Read-only Production verification found revision3 already
+applied: all10postchecksTRUE, exact candidate reader definition matches, selectedQ1+Q2/v17digest
+match. This is consistent with rerunning the baseline-protected apply after success; the exact
+sequence of Owner executions was not independently observed. Do NOT rerun apply or roll back
+this successful state. Existing Q1runs remain completed and billing1/0settled, result hashes unchanged.
+Agent executed no Production write. Next: ordinary-account Q2operating validation; candidate
+qualityPASS is not individual Q2operating E2E.

@@ -1,11 +1,11 @@
-# 서울여대 Q1 보완 + Q2 묶음 (Owner 적용 대기)
+# 서울여대 Q1 보완 + Q2 묶음 (Owner 적용·사후검증 완료)
 
 프로젝트 `stlhijzpjfgwwdgunlsd`; 시험 `6679b5ff-d797-53c9-8a2a-424375d7210c`.
 Q1 `a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6`, Q2 `d0862954-4d0d-5811-9b48-5dc8e319634d`.
 
 Q1의 소문항 누락을 구분하는 공식기준 분리 및 Q2 공식자료 연결. 기존 profilev6 재사용.
 v17후보 Q1부분/공식/재작성·Q2공식/부분/오답 6개 각각 계약·독립8검수 PASS.
-기존Worker정책은 유지하며 v17기능만 추가했다. 신규정책은 Owner SQL 이후 선택된다.
+기존Worker정책은 유지하며 v17기능만 추가했다. 신규정책은 Owner SQL 적용으로 선택됐다.
 
 전체 SQL(공식자료 포함, Git 제외):
 `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023/swu-batch-revision3/`
@@ -26,4 +26,8 @@ SQL원복 후에만 Worker원복을 고려하고 진행중 요청을 먼저 확�
 
 [최신 증거](../../../wiki/essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
 
-예상 package digest: `dffdb94b185ba6e316bae052db1d5c1a92259c5cc974476ecc3c86877877a233`. 운영 SQL은 아직 실행하지 않았다.
+예상 package digest: `dffdb94b185ba6e316bae052db1d5c1a92259c5cc974476ecc3c86877877a233`. Owner 적용 후 agent 독립 사후검사10개 true를 확인했다.
+
+`READER_BASELINE_CHANGED` 보고 후 운영 조회함수가 이 후보와 일치하고 revision3/post10true임을 확인했다.
+이미 적용된 상태에서는 apply를 재실행하지 않는다. 오류만 보고 성공한 적용을 롤백하지 않는다.
+기존 Q1 두 실행은 completed 및1/0Credit settled를 유지한다. Q2운영평가는 별도 확인 대상이다.

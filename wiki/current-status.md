@@ -8,7 +8,7 @@
 
 서울여Q1 Owner 적용·독립 사후15true, 입력조립PASS. 일반계정 공개를 기본으로 전체512문항을 대학/유형별 묶음으로 연결한다. 운영계정 선검증 요구는 폐기했다. 512ID·423프로필 재대조PASS; 전체입력/공개는 미완료. [범위·전수표](essay-batch-service-20261023.md).
 
-**인증 복구 완료:** Owner가 관련4Secret 기존값 복원을 확인한 뒤 기존 WEB 소스ca6022b 그대로 Production ff327e92에 배포했다. Service Token 실제 Pages→Worker 승인 및 최초·재첨삭 처리PASS. 기존a8796fb4는 롤백 대상으로 보존, Worker615f4825·설정·결제코드 미변경. JWT3/Provider 인증 성공을 반복하지 않았다. 서울여Q1 최초/재첨삭 completed·1/0Credit settled, 일반WEB PDF·평가근거·성장비교·History 복귀 자동갱신PASS, GalaxyS8 두기록·4→5성장비교 직접확인, 근거Owner확인. 최초평가의 소문항(2)누락 품질GAP는 v17후보6답안 재검증PASS; Q1보완+Q2묶음 revision3 SQL은 Owner적용대기. Worker3922d417는 기존정책 유지+v17추가. [실행증거](essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
+**인증 복구 완료:** Owner가 관련4Secret 기존값 복원을 확인한 뒤 기존 WEB 소스ca6022b 그대로 Production ff327e92에 배포했다. Service Token 실제 Pages→Worker 승인 및 최초·재첨삭 처리PASS. 기존a8796fb4는 롤백 대상으로 보존, Worker615f4825·설정·결제코드 미변경. JWT3/Provider 인증 성공을 반복하지 않았다. 서울여Q1 최초/재첨삭 completed·1/0Credit settled, 일반WEB PDF·평가근거·성장비교·History 복귀 자동갱신PASS, GalaxyS8 두기록·4→5성장비교 직접확인, 근거Owner확인. 최초평가의 소문항(2)누락 품질GAP는 v17후보6답안 재검증PASS; Q1보완+Q2묶음 revision3는 Owner적용 후 독립사후10true·조회함수일치 확인. 재실행 오류는 재적용 없이 처리. Q2운영E2E는 다음 작업. Worker3922d417는 기존정책 유지+v17추가. [실행증거](essay-p0-direct-execution-20261023.md#service-token-recovery-and-swu-operating-runs).
 
 Owner30일 복구·기존 인증계약 유지. 자동갱신/알림은 설계만 완료. 전체Registry237시험700문항과 작업집합512를 구분한다. 512 중2021경희모의3문항은 보존하되 요청연도범위는509. 전수원문182개·154묶음 검사완료, 추출통과114는 공개/입력/E2E PASS가 아니다. 전체연결은 미완료. [분류와 다음 묶음](essay-batch-service-20261023.md).
 

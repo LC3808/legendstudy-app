@@ -4703,3 +4703,9 @@ existing policy/ID/payment code changes. [Evidence](essay-p0-direct-execution-20
 서울여APP성장비교 직접확인·근거Owner확인. 소문항별 공식기준/v17후보6답안PASS.
 Q1보완+Q2추가 묶음SQL pre7/post10·롤백·이전권한보존 격리PASS, 실제사전7true.
 Worker3922d417 v17기능추가; 기존정책 선택유지. OwnerSQL대기. Private21calls USD2.009264estimate, operating4calls costNULL.
+
+## 2026-10-23 — Owner revision3 application verified
+
+READER_BASELINE_CHANGED reported, but actual DB alreadyrevision3; post10true, candidate reader
+exact match, old Q1completed1/0settled and result hashes preserved. No SQL reapply/rollback needed.
+Agent writes0. Q2operating E2E remains next; [evidence](essay-p0-direct-execution-20261023.md#revision3-owner-application-independently-confirmed).
