@@ -1,0 +1,491 @@
+{
+  "summary": {
+    "canonical_profiles": 28,
+    "ready_base_profiles": 28,
+    "pending_profiles": 0,
+    "merged_aliases": [
+      [
+        "dongguk",
+        "humanities-II"
+      ],
+      [
+        "sookmyung",
+        "pharmacy"
+      ]
+    ],
+    "total_questions": 512,
+    "mapped_questions": 387,
+    "mapping_failures": 125,
+    "by_university": {
+      "dongguk": {
+        "total": 48,
+        "ready_profiles": 2,
+        "mapped": 24
+      },
+      "gachon": {
+        "total": 166,
+        "ready_profiles": 2,
+        "mapped": 166
+      },
+      "kau": {
+        "total": 30,
+        "ready_profiles": 3,
+        "mapped": 18
+      },
+      "konkuk": {
+        "total": 58,
+        "ready_profiles": 3,
+        "mapped": 29
+      },
+      "korea": {
+        "total": 30,
+        "ready_profiles": 2,
+        "mapped": 30
+      },
+      "kyunghee": {
+        "total": 38,
+        "ready_profiles": 4,
+        "mapped": 29
+      },
+      "skku": {
+        "total": 27,
+        "ready_profiles": 2,
+        "mapped": 15
+      },
+      "sogang": {
+        "total": 28,
+        "ready_profiles": 3,
+        "mapped": 9
+      },
+      "sookmyung": {
+        "total": 22,
+        "ready_profiles": 2,
+        "mapped": 22
+      },
+      "soongsil": {
+        "total": 42,
+        "ready_profiles": 3,
+        "mapped": 40
+      },
+      "swu": {
+        "total": 23,
+        "ready_profiles": 2,
+        "mapped": 5
+      }
+    },
+    "new_provider_calls": 0,
+    "production_changes": false
+  },
+  "profiles": [
+    {
+      "profile_id": "uep/dongguk/humanities-I",
+      "version": 5,
+      "content_sha256": "e1a4fb9db14a69d66eaf5103c3dd9487e3d855e1137fb81f6b7069b42f3c6d47",
+      "university": "dongguk",
+      "type": "humanities-I",
+      "years": [
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 18,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/dongguk/math",
+      "version": 4,
+      "content_sha256": "3371331609a78c4af25b964d347e53e9981d675f81764ca088fe03eda80ac353",
+      "university": "dongguk",
+      "type": "math",
+      "years": [
+        2025,
+        2026
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/gachon/language-short",
+      "version": 5,
+      "content_sha256": "798c6a1d9512fd4df263257f3b7519e91934030301804e5a7c4bdb8498a3a440",
+      "university": "gachon",
+      "type": "language-short",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 69,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/gachon/math-short",
+      "version": 4,
+      "content_sha256": "f375f4f30f2dcee559d035f8015d966f8e2b271d930f0aaff87805bdadabde7f",
+      "university": "gachon",
+      "type": "math-short",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 97,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kau/engineering",
+      "version": 6,
+      "content_sha256": "fb1f104c85ce8876fb40ffb05928ad49c88dce1231b22082652c790d69dd5e57",
+      "university": "kau",
+      "type": "engineering",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kau/science",
+      "version": 6,
+      "content_sha256": "485e77ef0cada323e592336b897117bc15a74556eba5f502142625ce343c1ffe",
+      "university": "kau",
+      "type": "science",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kau/social",
+      "version": 5,
+      "content_sha256": "2de8b84ec4d538e29d5a862c9e4392dd7282031911205c4cc3cd0b19a51663c6",
+      "university": "kau",
+      "type": "social",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/konkuk/business-integrated",
+      "version": 3,
+      "content_sha256": "7bbf34fbe59d694a854a419e7ed4db2c76f5af66c05db67a78f736b5a15d70c9",
+      "university": "konkuk",
+      "type": "business-integrated",
+      "years": [
+        2024,
+        2025
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/konkuk/humanities",
+      "version": 6,
+      "content_sha256": "bff79f22fa0eb89b2b44968e3f0679c19e9e5f2707ccb7a57d9625f9b5d760db",
+      "university": "konkuk",
+      "type": "humanities",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "mapped_questions": 7,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/konkuk/math",
+      "version": 5,
+      "content_sha256": "99cdeebc92b2583115a4334bf4ba8499f0034e8e87670227d31032f122853900",
+      "university": "konkuk",
+      "type": "math",
+      "years": [
+        2024,
+        2025,
+        2026
+      ],
+      "mapped_questions": 16,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/korea/humanities",
+      "version": 5,
+      "content_sha256": "86e620710697a3d6db1113740f6489102de9e43ff32f801425b431cc0f587957",
+      "university": "korea",
+      "type": "humanities",
+      "years": [
+        2025,
+        2026
+      ],
+      "mapped_questions": 10,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/korea/math",
+      "version": 5,
+      "content_sha256": "987fce6041d25cdf031c9419f15250e4fa8299bf75a0de69a95b7065ec7713db",
+      "university": "korea",
+      "type": "math",
+      "years": [
+        2025,
+        2026
+      ],
+      "mapped_questions": 20,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kyunghee/humanities",
+      "version": 7,
+      "content_sha256": "b088c12f16ff503cd05ed9b08f799abcdad3f9c89aef4244d8a15537673124bc",
+      "university": "kyunghee",
+      "type": "humanities",
+      "years": [
+        2026,
+        2027
+      ],
+      "mapped_questions": 4,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kyunghee/math",
+      "version": 5,
+      "content_sha256": "6fddfe287b94589565d6c8ad73a5d016e5bbf6c071ae0207235f097ca2b8c4f6",
+      "university": "kyunghee",
+      "type": "math",
+      "years": [
+        2026,
+        2027
+      ],
+      "mapped_questions": 10,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kyunghee/medical",
+      "version": 3,
+      "content_sha256": "0e868ac6ab4112a42d08a9da1c169f30e03c659c75d926c467aefcc229bf9b46",
+      "university": "kyunghee",
+      "type": "medical",
+      "years": [
+        2026,
+        2027
+      ],
+      "mapped_questions": 12,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/kyunghee/social",
+      "version": 4,
+      "content_sha256": "4477b6aa80286de1c010463aa0525d968cfd85c911de36983b001f400565519b",
+      "university": "kyunghee",
+      "type": "social",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 3,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/skku/language",
+      "version": 5,
+      "content_sha256": "dfd6c7730cae6522a1e4718e17965759eb5afb02b5ee85710089c22e3240d413",
+      "university": "skku",
+      "type": "language",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 6,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/skku/math",
+      "version": 3,
+      "content_sha256": "673fdbacb98bcaeb33db2a69df38387b5d549f75c1054c7f979ad157a169babe",
+      "university": "skku",
+      "type": "math",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 9,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/sogang/business",
+      "version": 3,
+      "content_sha256": "3ff0d415a0f2a192316cd3565fb4971ea0e34eeda04088f75643f3dbb7de8f11",
+      "university": "sogang",
+      "type": "business",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 1,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/sogang/humanities",
+      "version": 5,
+      "content_sha256": "30bb05cf0615af9de251506f978029c9663530405d4ba40fe14176d526a140fb",
+      "university": "sogang",
+      "type": "humanities",
+      "years": [
+        2026,
+        2027
+      ],
+      "mapped_questions": 4,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/sogang/math",
+      "version": 4,
+      "content_sha256": "d0bbd98be59b1496445fb2dbcbc492b9abb213e9886fc48531e192341b20ac62",
+      "university": "sogang",
+      "type": "math",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 4,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/sookmyung/humanities",
+      "version": 6,
+      "content_sha256": "b45c055005697ca9bb3f042cdad34a08c9ac8cf7079c6b393308fdacae71fcbb",
+      "university": "sookmyung",
+      "type": "humanities",
+      "years": [
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 10,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/sookmyung/math",
+      "version": 4,
+      "content_sha256": "7e18a6a390be2051ec5211a0defb0e43581331c5712ad5938f4380599dde351f",
+      "university": "sookmyung",
+      "type": "math",
+      "years": [
+        2026,
+        2027
+      ],
+      "mapped_questions": 12,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/soongsil/business",
+      "version": 5,
+      "content_sha256": "60f0e3b9ace666efeedbf2bbe408e0125451bd77ef08187719977532d479ce8f",
+      "university": "soongsil",
+      "type": "business",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 10,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/soongsil/humanities",
+      "version": 6,
+      "content_sha256": "402fe723c84bb753ea04e9184d1d7a10d9c51f888514e798a36e39069ca1d9ea",
+      "university": "soongsil",
+      "type": "humanities",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 10,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/soongsil/math",
+      "version": 3,
+      "content_sha256": "764307bb7a99e4d076866371d0869a0db3fc328d99b00388fb255eb94f0bcc8b",
+      "university": "soongsil",
+      "type": "math",
+      "years": [
+        2024,
+        2025,
+        2026,
+        2027
+      ],
+      "mapped_questions": 20,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/swu/humanities",
+      "version": 5,
+      "content_sha256": "5fcf27bc93c78d213b9501f8d2a6a19850d4b9cc311c1b1640ab4ad259883969",
+      "university": "swu",
+      "type": "humanities",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 2,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    },
+    {
+      "profile_id": "uep/swu/natural",
+      "version": 5,
+      "content_sha256": "19aa7283b7722f512349b90e92a4b37e501ba02fcd3e577d7231446aaa850277",
+      "university": "swu",
+      "type": "natural",
+      "years": [
+        2026
+      ],
+      "mapped_questions": 3,
+      "review_level": "BASE_DIAGNOSTIC_FRAMEWORK",
+      "production_applied": false
+    }
+  ],
+  "full_question_inputs": 5,
+  "current_essay_inputs": 4,
+  "new_provider_calls": 0,
+  "source_reference_check": {
+    "match": 384,
+    "prior_review_only_unavailable": 1
+  },
+  "private_evidence_root": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/university-profiles-20261023/final-completion"
+}

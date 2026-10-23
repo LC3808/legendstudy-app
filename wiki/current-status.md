@@ -2,15 +2,13 @@
 
 ## 현재: 대학별 프로필 PHASE 2 PARTIAL
 
-[상속 구조](university-evaluation-profile-phase2.md): 기본 진단체계19/28관리단위 검수,150/512문항 연결. 9유형 공통기준/범위 미완료. 새 기본체계 Essay3입력 조립·48검사 PASS, 기존4조립·운영2 보존. 새 Provider/운영변경0. 상속≠평가완료.
+[상속 구조](university-evaluation-profile-phase2.md): 기본 진단체계28개 검수(공식 파생 방향과 내부 가이드 분리), 기존150보존·237추가로387/512상속. 미상속125=평가자료 참조누락78+학년도/유형범위47. 문항별 전체 근거·조립5(기존4+서강경제경영1), 최신 기본체계 Essay4입력PASS. 49계약검사PASS, 새Provider/Production변경0. 기본체계 검수와 실제 문항평가 가능은 별개; 전체 PHASE2 PARTIAL. 기존 건국 운영2·UI/Credit/History보존.
 
 ## 보존 운영 상태 — 건국대 2문항 공개 / 전체 PARTIAL
 
-최신 Owner P0 승인으로 기존 운영 E2E 통과 건국 인문2/자연1의 일반 로그인 실행 범위를 연결했다. WEB/Simulator Math진입 및 기존 실제평가·재첨삭·History·Credit1/0·교차조회 근거보존. 다른10대학 HOLD.
+기존 건국 인문2/자연1 활성·E2E·Credit1/0·교차조회 보존. [운영·복구 근거](phase3-service-20261022.md). 71701적용/71702미적용, 신규DB·결제·배포변경 없음.
 
-기존71701 적용·71702 미적용, 157시험512문항 자료보존. 전체DB237시험700문항 및133RLS·기존ID/답안/Ledger 불변. 신규테이블/결제/IAP/스토어 변경없음. Math 기존 함수2개/실행flag의 정확한1leaf 범위 변경과 롤백은 [PHASE3 상세](phase3-service-20261022.md). 신규앱 물리기기/Android의 이번변경은 미검증.
-
-다음: 미완료9유형 검수. PHASE3전체공개미착수. 경희·동국 추가자료보강 HOLD. 이전근거는 [로그](log.md)에 보존.
+다음:125미상속 범위/근거연결 보완 및 새 서강 대표문항 PHASE3 준비. PHASE3전체공개미착수. 경희·동국 추가자료보강 HOLD. 이전근거는 [로그](log.md)에 보존.
 
 ## Product state
 

@@ -40,6 +40,19 @@ class ProfileTests(unittest.TestCase):
       [m for m in self.package['questions'][0]['source_page_references'] if m['role']=='criteria'])
   with self.assertRaisesRegex(Invalid,'COMPILED_PACKAGE_REVIEW_REQUIRED'):
    bind_material(self.package,self.registry,'q',[self.profile],pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+ def test_framework_provenance_separates_internal_guidance_from_official_criteria(self):
+  self.base_profile()
+  self.profile['base_framework']={'core_competencies':['논리적 구성'],'deduction_principle':'공식 근거 없는 감점 금지'}
+  self.profile['base_framework_provenance']={'core_competencies':'OFFICIAL_DERIVED','deduction_principle':'INTERNAL_GUIDANCE'}
+  self.pin();out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  refs=out['questions'][0]['source_page_references'];text=refs[-1]['evidenceText']
+  self.assertIn('공식 자료에서 도출한 진단 방향 core_competencies',text)
+  self.assertIn('내부 진단 가이드(공식 채점·감점 기준 아님) deduction_principle',text)
+  self.assertEqual([m for m in refs if m['role']=='criteria'],[m for m in self.package['questions'][0]['source_page_references'] if m['role']=='criteria'])
+  self.profile['base_framework_provenance']['deduction_principle']='OFFICIAL';self.pin()
+  with self.assertRaisesRegex(Invalid,'FRAMEWORK_PROVENANCE_INVALID'):
+   compose_material(self.package,self.registry,'q',[self.profile])
+
  def test_reviewed_typed_set_does_not_expand_to_mixed_exam_sibling(self):
   self.base_profile();self.profile['inheritance_scopes']=[]
   self.profile['scopes']=[dict(exam_id='e',year=2024,kind='admission',track='인문',question_ids=['q'])]

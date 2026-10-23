@@ -178,7 +178,13 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
                         'deduction_principle', 'answer_structure'):
                 value = framework.get(key)
                 if value:
-                    text += '\n검수된 기본체계 요약 ' + key + ': ' + (
+                    provenance = profile.get('base_framework_provenance', {}).get(key)
+                    labels = {'OFFICIAL_DERIVED': '공식 자료에서 도출한 진단 방향',
+                              'INTERNAL_GUIDANCE': '내부 진단 가이드(공식 채점·감점 기준 아님)'}
+                    require(provenance is None or provenance in labels,
+                            'FRAMEWORK_PROVENANCE_INVALID')
+                    label = labels.get(provenance, '검수된 기본체계 요약')
+                    text += '\n' + label + ' ' + key + ': ' + (
                         ' / '.join(value) if isinstance(value, list) else str(value))
 
         mapping = dict(questionId=question_id, role='scoring', verification='VERIFIED',
