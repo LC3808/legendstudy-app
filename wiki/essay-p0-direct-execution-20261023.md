@@ -86,13 +86,13 @@ evaluation has one unknown/failed response; no automatic replay or invented succ
 Quality ledger106 calls,105 completed,1 unknown; known-usage estimate USD8.588736, invoice
 unverified and unknown-call usage excluded. Korea operating calls are tracked separately.
 
-SKKU Owner SQL candidate passed10 local PostgreSQL checks, including preserved existing runtime
+SKKU Owner SQL candidate passed11 local PostgreSQL checks, including preserved existing runtime
 and provider policies, submit definition, repeated-apply rejection and idempotent emergency gate.
 Package attaches one already registered common-profile source to this exam's document list; it
 preserves original document references and other review metadata. Candidate digest
 `90c515fbca16a5989969ca3d6e3b6e95fb096215dbbfd2271838bcfd0a651b4a`.
 Read-only baseline:237 exam IDs/700 question IDs; selected SKKU revision1 and zero runs.
-Worker v15 is staged; deployment and Owner application are not yet claimed.50 Python adapter,
+Worker v15 deployed and verified as recorded below; Owner SQL application remains pending.50 Python adapter,
 reviewed-runtime and packaging tests pass. Only v15 is added to supported operating prompt versions;
 v13/v14 remain failed local experiments with no approved operating binding.
 
@@ -100,3 +100,54 @@ Galaxy S8 Owner login confirmed; actual native MY shows available1 Credit and Cr
 opens. This account is distinct from earlier operator96-Credit evidence. Mirrored touch navigation
 is unreliable; no physical evaluation/History cross-query completion claimed. Private screenshot
 `android-physical-my-credit-20261023.png`. iPhone installation remains verified, UI acceptance pending.
+
+## SKKU Owner apply bundle — ready after Worker verification
+
+Target Production: `stlhijzpjfgwwdgunlsd`. SKKU2026 admission language1, Q1 only.
+Exam `035e5d8d-e91f-5acd-a3a3-4d321bc9f067`; question
+`601d62cc-a067-542d-b053-71609074da20`. Existing IDs are reused.
+
+Worker `fef5aefd-380b-4185-a6d4-64e59b204048` deployed100%, deployment
+`3d0e81c5-0e38-44be-9f9c-41a1141cec7c` at2026-10-23 19:18:55 KST. Actual
+settings/deployments/module reads verify existing80 Registry entries preserved + one SKKU exam
+metadata entry (81 total), exact v15 binding added, all other bindings/public scope/compatibility
+unchanged. Changed existing modules are reviewed_runtime, university_profile and registry_asset,
+matching the intended tested change. Initial verifier omitted university_profile from its allowed
+module list; inspection confirmed the exact committed adapter, then corrected the verifier.
+Draft v13/v14 assets are packaged but not supported/approved as operating policies.
+Rollback Worker is previous `2413fe3d-226d-4181-92a8-0eda81e2309e`; after DB application,
+first gate SKKU new requests before reverting Worker so active new requests do not select absent v15.
+
+Private base directory:
+`/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/official-answer-quality-20261023`
+
+Owner execution order (agent never applies these mutations):
+
+1. `skku-operating-precheck.sql`: read-only10 checks, all true required.
+2. `skku-operating-candidate.private.sql`: full transaction, exact body/function guards.
+3. `skku-operating-verify.sql`: read-only15 booleans, all true required.
+4. Only on failure after commit: `skku-operating-rollback.sql` gates this exact exam policy.
+
+Mutation scope: review revision1→2, immutable revision snapshot, selected Q1 package and
+runtimeApproval, one already registered common-profile source added to the existing document list,
+one runtime-policy branch and one provider-policy branch. No new exam/question IDs, no modification
+to other policies, submit function, payment/Credit policy, Ledger structure or History. The review
+state remains NEEDS_REVIEW because unselected sibling questions remain unapproved. General public
+activation is a separate gate after actual E2E.
+
+Precheck reads, frozen baseline guards and local SQL tests protect existing metadata and policies.
+The extra common-profile document is `acec13e04c628c8ed94a25fa5776fff87e1c3628565af1bf1233b14061b858c1`,
+already registered in Production; both original review document references remain. Rights approval
+is the Owner's P0 instruction and explicit SKKU service-use clarification.
+
+Failure inside the apply transaction rolls it back. Emergency rollback after commit disables new
+SKKU requests (including new rewrite requests); keeps packages, revision2, provider binding, runs,
+Credit and History for audit and in-flight finalization. It does not delete learning records or
+restore an old body over new records. Re-enabling requires a separately verified resume change;
+do not rerun the original apply transaction after a successful commit.
+
+Preservation review: versioned source/provenance remains attached; previous attempts/results are
+not overwritten; existing identity and account isolation remain; no new student fields collected;
+no new secondary-use/AI transmission purpose; rollback retains longitudinal learning records;
+public readiness is not inferred from local files. Actual first1/free0Credit, WEB/APP History and
+physical E2E for SKKU must follow Owner application and are currently pending.
