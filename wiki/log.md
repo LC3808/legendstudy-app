@@ -4618,3 +4618,10 @@ PASS; Owner UI checklist pending. Android Play/upload signer mismatch, separate
 device requested; no delete. Target release branch confirmed; scoped candidate
 analyze/UI6/Android PASS, merge held for device acceptance. Exact-second expiry
 SQL isolated PASS, Production unchanged. [Current report](iap-p0-device-validation-20261023.md).
+
+## 2026-10-23 — Android rebuild / iPhone KRW acceptance
+
+Owner confirms iPhone prices returned to KRW; no currency override. Android signed
+release rebuilt PASS, package/version/signing/config preserved. Only existing Play
+SM-G950N detected; separate device/physical acceptance and merge remain pending.
+[Evidence](iap-p0-device-validation-20261023.md).

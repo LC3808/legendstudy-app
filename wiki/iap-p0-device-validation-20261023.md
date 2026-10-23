@@ -34,7 +34,7 @@ change. Run native builds sequentially after tests.
 | iOS source release | PASS; com.legendstudy.app, existing team/signing,36.3MB |
 | Android device | Existing SM-G950N Play build1.0.0+18; installed Play signer differs from existing upload key. No uninstall/data clear attempted. Owner selected separate test device; it has not appeared in adb yet. |
 | iPhone device | Owner clarified iPhone12ProMax “자유잍튜브”; install and launch PASS. Earlier iPhone17ProMax attempts failed locked and made no installation. |
-| Physical UI acceptance | Owner replied 완료 to the UI checklist; exact balance number not supplied. New issue: USD prices2.99/6.99/9.99/19.99. No new purchase. |
+| Physical UI acceptance | Owner replied 완료 to the UI checklist; exact balance number not supplied. Owner subsequently confirmed prices returned to KRW. No new purchase; transient USD cause unproven. |
 
 Existing signing references and production public config reused in ignored local
 files only. No new key/account/certificate. Public config targets LegendStudy
@@ -82,7 +82,7 @@ for the exact-second version. It does not mean Production apply. No DB mutation.
 ## Remaining acceptance
 
 1. Connect separate Android device with USB debugging/trust; install signed APK.
-2. Finish iPhone and Android UI/unchanged-session/balance and existing content checks.
+2. Finish Android UI/balance/content checks; iPhone UI and restored KRW confirmed by Owner.
 3. Verify final target candidate native builds/device paths, then scoped merge only.
 4. Re-run analyze/build/regression on merged tree, push and compare remote SHA.
 5. Record final results in Unified Wiki; app distribution still needs Owner confirmation.
@@ -96,9 +96,16 @@ development signing (get-task-allow=true), no local StoreKit configuration file.
 This is not the App Store-distributed binary even though Supabase is Production.
 Actual sandbox account/storefront is not yet known; Owner asked to inspect existing
 settings without changing account/country or buying. Do not force KRW strings over
-Apple's returned price. Price-region acceptance remains open.
+Apple's returned price. Owner subsequently confirmed the display returned to KRW without a code/account change; current price display accepted.
 
 Apple documents [displayPrice](https://developer.apple.com/documentation/storekit/product/displayprice)
 as storefront-localized and [development sandbox testing](https://developer.apple.com/documentation/storekit/testing-in-app-purchases-with-sandbox)
 as distinct from production distribution. Development signing is confirmed; the
-precise reason this device received USD remains unverified until storefront check.
+precise reason for the transient USD response remains unverified.
+
+## Android rebuild requested by Owner
+
+Android release rebuild PASS with Flutter3.47.7/Dart3.13.5, existing signing,
+Production public config, com.legendstudy.app1.0.0+18. APK SHA256: `89796069c07c8cd316f33a4be0ab3e3460aba666e23534b236e455f3a860dfb2`.
+Only existing SM-G950N is connected; separate test device is still absent.
+No installation/uninstall, additional purchase, merge or Store submission.
