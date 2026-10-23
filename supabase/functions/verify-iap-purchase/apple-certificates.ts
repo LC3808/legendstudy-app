@@ -5,6 +5,7 @@ import {
 } from "npm:@peculiar/x509@2.2.0";
 // ASN.1/OCSP parsing only. All signature and certificate verification uses Web Crypto.
 import js from "npm:jsrsasign@11.1.5";
+import { p384 } from "npm:@noble/curves@2.0.1/nist.js";
 import {
   AppleFailure,
   boundedBytes,
@@ -47,6 +48,24 @@ function time(s: string): number {
   ) throw Error("OCSP_DATE");
   return d;
 }
+/** Edge v1.74 cannot verify ECDSA P-384/SHA-256 (Apple delegated OCSP
+ * certificates use this valid pairing). Verify that exact pairing with pinned
+ * noble; all other certificate signatures stay on Web Crypto. No trust bypass. */
+export async function verifyCertificateSignature(
+  certificate: X509Certificate, issuer: X509Certificate, now: number,
+): Promise<boolean> {
+  if (!dates(certificate, now)) return false;
+  const algorithm = certificate.signatureAlgorithm;
+  if (algorithm.name === "ECDSA" && algorithm.hash.name === "SHA-256" &&
+      (issuer.publicKey.algorithm as EcKeyAlgorithm).namedCurve === "P-384") {
+    const tbs = unhex(ASN1HEX.getTLVbyList(hex(certificate.rawData), 0, [0]));
+    const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", tbs));
+    return p384.verify(new Uint8Array(certificate.signature), digest,
+      unhex(parsed(issuer).getSPKIValue()),
+      { prehash: false, lowS: false, format: "der" });
+  }
+  return await certificate.verify({publicKey: issuer.publicKey, date: new Date(now)}, crypto);
+}
 /** Apple online-check parity: leaf AND intermediate status, signed response,
  * issuer/delegated responder authority, CertID and freshness. Never soft fail. */
 export async function checkOcsp(
@@ -55,6 +74,8 @@ export async function checkOcsp(
   fetcher: typeof fetch = fetch,
   now = Date.now(),
 ): Promise<void> {
+  let step = "AIA";
+  let httpStatus: number | null = null;
   try {
     const c = parsed(cert);
     const uri = c.getExtAIAInfo()?.ocsp?.[0];
@@ -66,6 +87,7 @@ export async function checkOcsp(
       !(url.hostname === "apple.com" || url.hostname.endsWith(".apple.com")) ||
       url.username || url.password || url.port
     ) throw Error();
+    step = "REQUEST";
     const request = new ocsp.OCSPRequest({
       reqList: [{
         issuerCert: issuer.toString("pem"),
@@ -73,6 +95,7 @@ export async function checkOcsp(
         alg: "sha256",
       }],
     });
+    step = "FETCH";
     const response = await fetcher(url, {
       method: "POST",
       headers: { "Content-Type": "application/ocsp-request" },
@@ -80,10 +103,14 @@ export async function checkOcsp(
       redirect: "error",
       signal: AbortSignal.timeout(15000),
     });
+    httpStatus = response.status;
     if (!response.ok) throw Error();
+    step = "PARSE";
     const raw = hex(await boundedBytes(response));
     const data = new ocsp.OCSPParser().getOCSPResponse(raw);
+    step = "RESPONSE_STATUS";
     if (data.resstatus !== 0) throw Error();
+    step = "SIGNER";
     const candidates = [
       issuer,
       ...(data.certs ?? []).slice(0, 8).map((h: string) =>
@@ -103,15 +130,13 @@ export async function checkOcsp(
       if (
         !direct &&
         (candidate.issuer !== issuer.subject ||
-          !await candidate.verify({
-            publicKey: issuer.publicKey,
-            date: new Date(now),
-          }, crypto) || !x.getExtExtKeyUsage()?.array?.includes("ocspSigning"))
+          !await verifyCertificateSignature(candidate, issuer, now) || !x.getExtExtKeyUsage()?.array?.includes("ocspSigning"))
       ) continue;
       signer = candidate;
       break;
     }
     if (!signer) throw Error();
+    step = "ALGORITHM";
     const alg = /^SHA(256|384|512)with(RSA|ECDSA)$/.exec(data.alg);
     if (!alg) throw Error();
     const hash = "SHA-" + alg[1];
@@ -142,10 +167,12 @@ export async function checkOcsp(
       }
       verify = { name: "ECDSA", hash };
     }
+    step = "SIGNATURE";
     const tbsHex = ASN1HEX.getTLVbyList(raw, 0, [1, 0, 1, 0, 0]);
     if (!tbsHex) throw Error();
     const tbs = unhex(tbsHex);
     if (!await crypto.subtle.verify(verify, key, signature, tbs)) throw Error();
+    step = "CERT_ID";
     const expected = new ocsp.CertID().getParamByCerts(
       issuer.toString("pem"),
       cert.toString("pem"),
@@ -159,6 +186,7 @@ export async function checkOcsp(
       )
     );
     if (statuses.length !== 1) throw Error();
+    step = "FRESHNESS_STATUS";
     const status = statuses[0];
     if (
       status.status.status !== "good" || time(status.thisupdate) > now ||
@@ -166,6 +194,7 @@ export async function checkOcsp(
       time(status.nextupdate) < time(status.thisupdate)
     ) throw Error();
   } catch {
+    console.error(JSON.stringify({ event: "IAP_OCSP_FAILURE", step, httpStatus }));
     throw new AppleFailure("OCSP");
   }
 }
@@ -210,14 +239,8 @@ export async function verifyAppleJws(
       !intermediate.getExtension("1.2.840.113635.100.6.2.1")
     ) throw Error();
     if (
-      !await intermediate.verify({
-        publicKey: root.publicKey,
-        date: new Date(now),
-      }, crypto) ||
-      !await leaf.verify({
-        publicKey: intermediate.publicKey,
-        date: new Date(now),
-      }, crypto)
+      !await verifyCertificateSignature(intermediate, root, now) ||
+      !await verifyCertificateSignature(leaf, intermediate, now)
     ) throw Error();
   } catch {
     throw new AppleFailure("CHAIN");

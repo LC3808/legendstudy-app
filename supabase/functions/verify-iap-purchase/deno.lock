@@ -1,11 +1,21 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@noble/curves@2.0.1": "2.0.1",
     "npm:@peculiar/x509@2.2.0": "2.2.0",
     "npm:jsrsasign@11.1.5": "11.1.5",
     "npm:reflect-metadata@0.2.2": "0.2.2"
   },
   "npm": {
+    "@noble/curves@2.0.1": {
+      "integrity": "sha512-vs1Az2OOTBiP4q0pwjW5aF0xp9n4MxVrmkFBxc6EKZc6ddYx5gaZiAsZoq0uRRXWbi3AT/sBqn05eRPtn1JCPw==",
+      "dependencies": [
+        "@noble/hashes"
+      ]
+    },
+    "@noble/hashes@2.0.1": {
+      "integrity": "sha512-XlOlEbQcE9fmuXxrVTXCTlG2nlRXa9Rj3rr5Ue/+tX+nmkgbX720YHh0VR3hBF9xDvwnb8D2shVGOwNx+ulArw=="
+    },
     "@peculiar/asn1-asym-key@2.11.0": {
       "integrity": "sha512-r2957WdSZle/Zt4t9og7OMQYXNJ9/3ANXVtFwLCDJuHORlBZ4AFmDt1Qee0CzyTbHQg4ZZApBGEz5/6cFsyCRg==",
       "dependencies": [

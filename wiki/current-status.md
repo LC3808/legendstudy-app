@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP](iap-production-read-only-20261023.md): 503·설정누락. 로컬초안/운영미변경.
+[IAP](iap-production-read-only-20261023.md): v23운영·iOS1+3복구. Android실결제대기.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 

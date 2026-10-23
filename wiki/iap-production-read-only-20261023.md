@@ -1,5 +1,7 @@
 # IAP Production recovery — investigation and local implementation
 
+> Latest: Owner-approved v23 is deployed; iOS existing 1+3 Credit recovered and Ledger verified. Earlier READ-ONLY/HOLD notes below are historical. Android real-purchase E2E awaits a non-license-test account.
+
 Current: Android two existing orders are refunded TEST purchases (API-verified); historical12:31 rejection reason unresolved. Package now matches. Apple WebCrypto draft and diagnostics locally verified; Production unchanged by this agent. Latest checkpoint at end supersedes earlier observations.
 
 ## Initial PHASE1 checkpoint
@@ -402,3 +404,61 @@ does not prove its equality to deployed secret or Apple issuer/key permission.
 Implementation pushed to APP codex/payment-credit-recovery-20261023. Unified
 sanitized report pushed to docs codex/iap-recovery-evidence-20261023 (not main).
 No Production approval/application or actual Apple recovery claimed.
+
+
+## Owner-approved recovery — 2026-10-23 13:35 KST
+
+Owner explicitly authorized Production deployment, existing verified iOS recovery,
+and actual purchase E2E. Google TEST/refunded orders2 explicitly excluded.
+Only verify-iap-purchase changed; no DB/schema/Secret/Essay worker mutation.
+Production entrypoint unchanged, verify_jwt=true, exact live TS source matched.
+- v21 WebCrypto + bounded Google diagnostics deployed (baseline v20 preserved).
+- Existing iOS retry13:26:58 reached OCSP after API/chain/JWS verification.
+- v22 added bounded OCSP step/status diagnostics (no raw errors/receipts).
+- Actual Apple WWDR G6/root G3 OCSP succeeds on local Deno but Edge1.74.3 fails:
+  HTTP200, delegated responder certificate signature verification throws
+  NotSupportedError for ECDSA P-384 with SHA-256. Synthetic P256/RSA tests had
+  missed this valid mixed curve/hash pairing.
+- v23 verifies only that certificate pairing with pinned @noble/curves2.0.1;
+  remaining certificate signatures and Apple JWT/JWS stay WebCrypto. Full chain,
+  pinned roots, delegation EKU, OCSP signature/status/freshness remain mandatory.
+  No bypass, no new key, no fresh Apple purchase.
+- v23 source bundle229f53bdd7adc59c2896f481c8755d68e2658ce940f7d95ba7f13682f0e598fa.
+  v20 rollback source remains in tool/iap_recovery/rollback (restores known failure).
+- Deno24 tests PASS; pinned local Edge synthetic EC/RSA/OCSP suites and new
+  P384/SHA256 valid/wrong-key/tampered/expired cases PASS. Real Apple public
+  intermediate OCSP also PASS on Edge after fix (no purchase data in that test).
+- Owner device confirms existing1+3 charged. Production Ledger: apple delta1 x1,
+  delta3 x1, distinct grants2, duplicate external references0. Affected account1;
+  prior non-IAP grants3/net7, purchased4, reserved0, spendable11. Earlier other9
+  snapshot is historical; do not claim current balance9 or overwrite it.
+
+### Android readiness and common-issue recheck
+
+Play Console read-only: Production release100%, no unpublished changes; all
+credit1/3/5/10 have one active purchase option. License test email list
+'레전드스터디 IAP 테스트' selected, members3. Owner confirms purchaser is included.
+Developer-login email is NOT proof of purchaser identity; Owner confirmation is
+explicit evidence. Existing service-account OAuth/order/product GET succeeded;
+current package exactly com.legendstudy.app. Client consumes/completes only after
+verified grant/already_processed, autoConsume=false. Shared Ledger receipt lock,
+SKU quantity mapping, service-only role and same-account replay gates re-read.
+Owner asked to perform one real1-credit purchase with non-license-test account
+only after these checks. No new Android charge or live grant observed yet.
+
+Current read-only DB state supersedes earlier counts: configured school profiles3,
+cache2, unmatched school codes0. No school cache/profile rewrite needed now.
+Actual admin_member_search(non-UUID email) in read-only transaction with existing
+operator context returns0 rows, no cast exception. admin_member_credit on all3
+users without accounts succeeds with summary=null. This is DB-level authorized
+context verification, not browser JWT end-to-end. No proven backend lookup outage;
+frontend empty-state wording remains distinct from API error.
+Signup grants8, each3, all expiryNULL. Pending candidate count0. Sole NULL delivery
+belongs to confirmed/eligible Oct23 account without Credit account. Owner confirms
+this was deletion/re-registration with existing identity: previous-claim suppression
+matches accepted once-per-identity policy. No duplicate free grant, marker deletion,
+or blanket account backfill performed. New first-ever-identity device E2E not run.
+
+References: Apple official jws_verification.ts (OCSP checks preserved), Apple PKI
+public G6/G3 certificates, noble-curves pinned API. Actual iOS E2E now PASS;
+Android real charge/credit/consume and browser Admin UI acceptance remain pending.
