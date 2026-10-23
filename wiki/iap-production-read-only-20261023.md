@@ -391,3 +391,14 @@ verification and custom errors can lack HTTP fields. Dummy-key401 proves API rea
 not actual Production key validity. Valid synthetic PKI tests must verify signatures
 and reject arbitrary dummy JWS; accepting an unsigned dummy is never a test goal.
 The pasted analysis is review evidence, not new deployment authorization.
+
+Final supplemental probes: valid wrapped ephemeral PEM imports as EC in Edge1.74.3,
+but jsonwebtoken9.0.2 ES256 fails with the prime256v1 curve requirement;
+Node X509.verify is explicitly unimplemented; WebCrypto signing passes. This
+reproduces BOTH compatibility blockers without attributing a historical Production
+exception from generic logs alone. Existing local Apple subscription .p8 imports
+and generates a64byte WebCrypto signature in local Deno; Apple API calls0. This
+does not prove its equality to deployed secret or Apple issuer/key permission.
+Implementation pushed to APP codex/payment-credit-recovery-20261023. Unified
+sanitized report pushed to docs codex/iap-recovery-evidence-20261023 (not main).
+No Production approval/application or actual Apple recovery claimed.
