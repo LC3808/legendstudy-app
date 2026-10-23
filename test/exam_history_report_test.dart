@@ -5,6 +5,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/evaluation_report.dart';
 
 void main() {
+  test('saved evidence references retain exact criterion judgment without invented sources', () {
+    final f = jsonDecode(
+      File('test/fixtures/exam-history-v1.json').readAsStringSync(),
+    ) as Map;
+    final run = Map<String, dynamic>.from(f['before'] as Map);
+    final d =
+        run['result']['questions'][0]['evaluation']['dimensions'][0] as Map;
+    d['evidence_ids'] = ['e1', 'e1', 'e2'];
+    expect(examEvaluationReport(run, 'question').evidenceLabels, [
+      'Reasoning — Needs connection (저장된 근거 참조 2개)',
+    ]);
+    d['criterion_id'] = 'unknown';
+    expect(examEvaluationReport(run, 'question').evidenceLabels, isEmpty);
+    d['criterion_id'] = 'criterion';
+    d['evidence_ids'] = [];
+    expect(examEvaluationReport(run, 'question').evidenceLabels, isEmpty);
+  });
+
   test('same stored exam result and rewrite use existing Native report', () {
     final data = jsonDecode(
       File('test/fixtures/exam-history-v1.json').readAsStringSync(),

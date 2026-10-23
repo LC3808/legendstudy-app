@@ -84,6 +84,7 @@ class EvaluationReport {
     required this.pins,
     this.priorId,
     this.previousReviews = const [],
+    this.evidenceLabels = const [],
     this.sentenceReview,
   });
   final String id, answer, question, summary;
@@ -91,6 +92,7 @@ class EvaluationReport {
   final List<Map<String, dynamic>> previousReviews;
   final EssaySentenceReview? sentenceReview;
   final List<String> pins, actions, nextSteps;
+  final List<String> evidenceLabels;
   final List<EvaluationCriterion> rubric;
   final List<EvaluationFeedback> strengths, weaknesses;
 }
@@ -431,6 +433,20 @@ EvaluationReport examEvaluationReport(
         : '${run['parent_id']}/$questionId',
   );
   return EvaluationReport(
+    evidenceLabels: [
+      for (final d in dimensions)
+        if (evaluationText(d['explanation']).isNotEmpty &&
+            evaluationList(d['evidence_ids'])
+                .map(evaluationText)
+                .where((s) => s.isNotEmpty)
+                .isNotEmpty)
+          for (final c in criteria.where(
+            (c) =>
+                evaluationObject(c['binding'])['id'] == d['criterion_id'] &&
+                evaluationText(c['label']).isNotEmpty,
+          ))
+            "${c['label']} — ${d['explanation']} (저장된 근거 참조 ${evaluationList(d['evidence_ids']).map(evaluationText).where((s) => s.isNotEmpty).toSet().length}개)",
+    ],
     previousReviews: evaluationList(out['previous_improvement_reviews'])
         .map(evaluationObject)
         .toList(),

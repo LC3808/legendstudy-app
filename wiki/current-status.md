@@ -1,6 +1,6 @@
 # Current Status
 
-성균 Q1 일반계정 최초·무료재첨삭 completed, Ledger1/0Credit·잔액1→0→0, 두결과3기준5/5·독립8검수PASS. WEB History/5→5비교 및 GalaxyS8(build2026102302) 최초19:58·재첨삭19:59 두기록 교차조회PASS. PDF/버튼PASS 유지, 기존ID/정책/이전기록 보존검증PASS. Provider4회·추산USD0.290560. [실행ID·증거·잔여UX](essay-p0-direct-execution-20261023.md).
+성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](essay-p0-direct-execution-20261023.md).
 
 ## 2026-10-23 최신 — 고려 대표 운영 E2E PASS
 

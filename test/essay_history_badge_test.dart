@@ -7,6 +7,28 @@ import 'package:legendstudy_app/features/essay/shared_history.dart';
 import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 
 void main() {
+  testWidgets('History refreshes on resume and while visible without a pull gesture', (tester) async {
+    var reads=0;
+    await tester.pumpWidget(ProviderScope(overrides:[
+      authStateProvider.overrideWith((ref)=>Stream.value(const AuthStatus('owner'))),
+      sharedEssayHistoryProvider('owner').overrideWith((ref) async {
+        reads++;
+        return [SharedEssayRecord(id:'r',math:false,at:DateTime.utc(2026),rewrite:false,evaluations:const [],examData:{'university':'조회 $reads'})];
+      }),
+    ],child:const MaterialApp(home:SharedEssayHistoryPage())));
+    await tester.pumpAndSettle();
+    final before=reads;
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+    expect(reads,greaterThan(before));
+    final resumed=reads;
+    await tester.pump(const Duration(seconds:30));await tester.pumpAndSettle();
+    expect(reads,greaterThan(resumed));
+    expect(find.text('조회 $reads'),findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   for (final badgeScale in [1.0,2.0]) {
   testWidgets('three identity badges at360 scale $badgeScale', (tester) async {
     tester.view.physicalSize = const Size(360,800);

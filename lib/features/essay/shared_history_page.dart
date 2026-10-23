@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'essay_voice.dart';
 import '../../core/theme/app_theme.dart';
 import 'approved_result_adapter.dart';
@@ -38,7 +40,37 @@ class _HistoryBody extends ConsumerStatefulWidget {
   ConsumerState<_HistoryBody> createState() => _HistoryBodyState();
 }
 
-class _HistoryBodyState extends ConsumerState<_HistoryBody> {
+class _HistoryBodyState extends ConsumerState<_HistoryBody>
+    with WidgetsBindingObserver {
+  Timer? _refreshTimer;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _refreshTimer = Timer.periodic(const Duration(seconds: 30), (_) {
+      if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed &&
+          ModalRoute.of(context)?.isCurrent == true)
+        _refresh();
+    });
+  }
+
+  void _refresh() {
+    if (mounted && ref.read(authStateProvider).value?.userId == owner)
+      ref.invalidate(sharedEssayHistoryProvider(owner));
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) _refresh();
+  }
+
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   bool byExam = false;
   String get owner => widget.owner;
   Future<void> openResult(SharedEssayRecord row, Map<String, dynamic> e) async {
@@ -64,6 +96,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody> {
           ),
         ),
       );
+      _refresh();
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -76,7 +109,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody> {
   Widget build(BuildContext context) {
     final history = ref.watch(sharedEssayHistoryProvider(owner));
     return history.when(
-      skipLoadingOnRefresh: false,
+      skipLoadingOnRefresh: true,
       skipLoadingOnReload: false,
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (_, _) => Center(
@@ -269,6 +302,7 @@ class _Result extends ConsumerWidget {
                     isPreview: false,
                     collapsedDetails: true,
                     evaluation: approvedEssayEvaluation(report, before),
+                    evidenceLabels: report.evidenceLabels,
                     question: EssayQuestion(
                       id: questionId,
                       university: record.title,
@@ -300,7 +334,7 @@ class _Result extends ConsumerWidget {
                         EssayExamBadges(
                           data: record.examData,
                           questionLabel:
-                          (record.examData['questions'] as List? ?? [])
+                              (record.examData['questions'] as List? ?? [])
                                       .cast<Map<String, dynamic>>()
                                       .where(
                                         (q) => q['dbQuestionId'] == questionId,
@@ -355,14 +389,25 @@ class EssayExamBadges extends StatelessWidget {
   final String? questionLabel;
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: 8, runSpacing: 6,
-    children: [for (final label in [data['track'] as String?, data['session'] as String?, questionLabel])
-      if ((label ?? '').trim().isNotEmpty)
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(border: Border.all(color: AppTokens.textPrimary.withValues(alpha: 0.3)), borderRadius: BorderRadius.circular(6)),
-          child: Text(label!, style: Theme.of(context).textTheme.bodyMedium),
-        ),
+    spacing: 8,
+    runSpacing: 6,
+    children: [
+      for (final label in [
+        data['track'] as String?,
+        data['session'] as String?,
+        questionLabel,
+      ])
+        if ((label ?? '').trim().isNotEmpty)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppTokens.textPrimary.withValues(alpha: 0.3),
+              ),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(label!, style: Theme.of(context).textTheme.bodyMedium),
+          ),
     ],
   );
 }

@@ -325,3 +325,44 @@ the three5→5 comparisons were verified on WEB. No Simulator result substitutes
 Evidence under existing official-answer-quality-20261023 directory: skku-normal-e2e.private.json,
 skku-normal-web-first.png, skku-normal-web-history.png, skku-normal-web-comparison.png,
 skku-normal-galaxy-result.png and skku-normal-galaxy-history.png. Account identifiers/secrets are not committed.
+
+## History automatic refresh and saved assessment evidence — 2026-10-23
+
+Owner requested fixes after the ordinary-account E2E. The History screen retained its initial
+loaded list while the nested rewrite finished. WEB now reloads on return from detail, matching
+owner completion notification, focus/visibility restoration and every30seconds while visible.
+Owner-scoped prior data stays visible during refresh. Native reloads on return from result,
+app resume and every30seconds while its History route is visible; existing submission completion
+invalidation stays intact. No new storage, UPDATE semantics, history copies or billing rules.
+
+Evidence mapping was omitted from the exam report adapter and Native result view. Both now
+render the stored criterion label + exact stored judgment explanation + unique nonempty evidence
+reference count, only when criterion ID matches and references/explanation exist. This is saved
+assessment justification, not newly fetched source passages, invented quotations, or a claim that
+raw official documents are now exposed. Unknown criteria/missing references remain unpopulated.
+No private source package, answer key, credential or raw backend identifier is added to the bundle.
+
+Validation: WEB4tests PASS (existing filter test, adapter tests, new History refresh test covering
+return/new record/completion event/focus/unrelated-owner event). Native26distinct tests PASS
+(report/evidence/comparison/responsive History plus new resume/30second refresh regression).
+TypeScript check and WEB build PASS; Android release build PASS. Targeted Flutter analyze has
+no errors/warnings and two brace-style informational findings. Existing Kotlin/font build notices
+remain unchanged. These checks do not claim a new Production Provider run.
+
+Production WEB Pages `a8796fb4-cf86-4572-8822-6deb5702cac7`, source`ca6022b`, deployed success.
+Actual production/preview deployment configuration matches the before snapshot exactly; build
+loaded the current Production public environment. Rollback Pages`29b85199-7b4d-43d7-9769-64deb6892c5b`.
+Worker85a7a6a5 unchanged. GalaxyS8 installed build2026102303/version0.1.0, existing data retained.
+
+Agent-observed WEB: three criterion-specific evidence explanations now visible in the existing
+free-rewrite result; return to History without browser reload renders both completed records and
+balance0. Owner confirmed physical evidence expansion and return/resume with two records without
+pull-to-refresh; agent directly captured native evidence section, matching WEB wording/counts.
+Runtime used the existing two records; arrival of a newly completed record without reload is covered
+by the synthetic regression test, avoiding another paid assessment. No new Provider calls or Credits.
+Read-only postcheck9/9true; both ordinary-account stored run/result/runtime/billing/Ledger projections
+exactly equal their pre-fix evidence. No SQL applied; existing policies/IDs/records preserved.
+
+Private screenshots: `skku-history-fix-web-evidence.png`, `skku-history-fix-galaxy-evidence.png`
+in the existing official-answer-quality-20261023 evidence directory. Native screenshot acquisition
+uses Android Studio mirroring; Owner performs touch navigation because mirror input is unresponsive.
