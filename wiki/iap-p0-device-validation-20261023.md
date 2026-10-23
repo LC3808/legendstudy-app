@@ -154,3 +154,7 @@ Next: reconcile complete approved APP baseline and preserve existing payment UI,
 without overwriting the concurrent service worktree or altering Production.
 No partial-fix installation, additional merge, DB change or account deletion.
 4035592 is NOT release-ready; original device PASS claim withdrawn for full APP.
+
+## Corrected pre-build baseline
+
+[Baseline reconciliation](iap-p0-baseline-reconciliation-20261023.md): c2f0054 plus payment-only11 files; other1,350 tracked files identical. Build/install/merge not run. Latest physical verification limits are explicitly preserved.

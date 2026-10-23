@@ -1,0 +1,24 @@
+{
+  "base_branch": "codex/material-service-app-20261022",
+  "base_sha": "c2f00540a5f18d17c6d03d2760bbce3f203aadaa",
+  "source_sha": "38176947a35183dcc00a221f5897f2358e3fc0c1",
+  "candidate_tree": "a33cbb9f869bf67c9a4071335b7b4c44597429a1",
+  "changed_files": [
+    "lib/app/router.dart",
+    "lib/features/billing/billing_providers.dart",
+    "lib/features/billing/presentation/credit_purchase_page.dart",
+    "lib/features/billing/presentation/purchase_history.dart",
+    "lib/features/credits/credit_balance.dart",
+    "lib/features/credits/credit_history.dart",
+    "lib/features/profile/presentation/profile_page.dart",
+    "lib/shared/widgets/legendstudy_lab_entry.dart",
+    "test/billing_page_lifetime_test.dart",
+    "test/credit_history_test.dart",
+    "test/purchase_history_test.dart"
+  ],
+  "unchanged_tracked_files": 1350,
+  "essay_backend_config_assets_unchanged": true,
+  "build_run": false,
+  "device_install_run": false,
+  "target_push_run": false
+}

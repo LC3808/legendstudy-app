@@ -4639,3 +4639,8 @@ APP target remote fast-forward verified at4035592; post-integration analyze, And
 Owner reports startup deletion screen/orange CTA. Scoped target integration retained old lifecycle/theme while source already had corrected behavior. Restore those existing fixes, not payment redevelopment; analyze17tests PASS, corrected device acceptance pending. [Evidence](iap-p0-device-validation-20261023.md).
 
 Owner expands regression to obsolete UI/material connection. Confirmed target base omits60 current lib-file changes; correct Production URL alone does not prove runtime reads. Partial fix not installed/published. Full APP PASS withdrawn;4035592 release HOLD pending canonical baseline reconciliation.
+
+
+## 2026-10-23 — Corrected complete APP baseline, before build
+
+c2f0054 local/remote service branch matched; latest material/PDF/startup/History lineage preserved. Isolated candidate applies payment11 files only;1,350 other tracked files identical including entire Essay/backend/config/assets. No build/install/target merge. [Exact scope and verification limits](iap-p0-baseline-reconciliation-20261023.md).

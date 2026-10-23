@@ -14,7 +14,7 @@
 
 ## Product state
 
-[IAP P0](iap-p0-device-validation-20261023.md): 구형 기준 통합 오류; 배포 HOLD.
+[IAP P0](iap-p0-device-validation-20261023.md): 기준 재확정; 빌드전 HOLD.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 
