@@ -45,7 +45,8 @@ def validate(profile):
         _validate_inheritance_scope(scope)
     if profile.get('profile_readiness') == 'PROFILE_READY':
         require(profile['review_status'] in ('REVIEWED', 'ACTIVE')
-                and profile.get('inheritance_scopes') and profile.get('common_evidence'), 'BASE_PROFILE_EVIDENCE_REQUIRED')
+                and (profile.get('inheritance_scopes') or profile.get('scopes'))
+                and profile.get('common_evidence'), 'BASE_PROFILE_EVIDENCE_REQUIRED')
         for common in profile['common_evidence']:
             require(common.get('scope') == 'COMMON' and common.get('verification') == 'VERIFIED'
                     and common.get('provenance') == 'OFFICIAL' and common.get('evidenceText', '').strip()
@@ -147,9 +148,10 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
                     and m.get('evidenceText', '').strip() and m.get('sourceHash'), 'PROFILE_CRITERIA_INVALID')
             mappings.append(dict(deepcopy(m), questionId=question_id))
     # Common guidance is evidence, never an additional scored criterion. Only
-    # verbatim, reviewed common clauses may travel here; question answers and
-    # point bands stay in their question mappings. An explicit content review is
+    # reviewed common clauses and their reviewed framework summary travel here;
+    # question answers and point bands stay in question mappings. Content review is
     # still required by bind_material when this changes the package.
+    framework_attached = False
     for common in profile.get('common_evidence', []):
         require(common.get('scope') == 'COMMON' and common.get('verification') == 'VERIFIED'
                 and common.get('provenance') == 'OFFICIAL'
@@ -159,7 +161,7 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
                 and type(common.get('endPage')) is int
                 and 1 <= common['startPage'] <= common['endPage'], 'COMMON_EVIDENCE_SOURCE')
         if common.get('applies_to_profile') is True:
-            require(_inherits(profile, exam), 'COMMON_INHERITANCE_SCOPE')
+            require(profile.get('profile_readiness') == 'PROFILE_READY', 'COMMON_INHERITANCE_SCOPE')
         else:
             require(type(common.get('question_ids')) is list and common['question_ids'], 'COMMON_EVIDENCE_SCOPE')
             if question_id not in common['question_ids']:
@@ -167,6 +169,18 @@ def compose_material(package, registry, question_id, profiles, *, pinned_profile
         text = ('대학 공통 평가 방향(별도 배점·감점 항목 아님). '
                 '이 문항의 공식 채점기준과 충돌하면 문항 기준을 우선한다.\n'
                 + common['evidenceText'])
+        # A reviewed base framework is an interpretation of the cited common
+        # evidence, not question-specific truth or a new numeric scoring rubric.
+        if common.get('applies_to_profile') is True and not framework_attached:
+            framework_attached = True
+            framework = profile.get('base_framework', {})
+            for key in ('core_competencies', 'scoring_method', 'partial_credit_principle',
+                        'deduction_principle', 'answer_structure'):
+                value = framework.get(key)
+                if value:
+                    text += '\n검수된 기본체계 요약 ' + key + ': ' + (
+                        ' / '.join(value) if isinstance(value, list) else str(value))
+
         mapping = dict(questionId=question_id, role='scoring', verification='VERIFIED',
                        sourceHash=common['sourceHash'], startPage=common['startPage'],
                        endPage=common['endPage'], evidenceText=text)

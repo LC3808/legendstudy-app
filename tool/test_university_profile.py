@@ -33,11 +33,19 @@ class ProfileTests(unittest.TestCase):
   self.profile['inheritance_scopes'][0]['source_refs']=[];self.pin()
   with self.assertRaisesRegex(Invalid,'INHERITANCE_SCOPE_REVIEW_REQUIRED'):select([self.profile],self.exam,'q')
  def test_common_inheritance_does_not_replace_question_criteria_or_admission(self):
-  self.base_profile();out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  self.base_profile();self.profile['base_framework']={'core_competencies':['논리적 구성'],'scoring_method':'문항 공식 기준 우선'};self.pin()
+  out,_=compose_material(self.package,self.registry,'q',[self.profile])
+  self.assertIn('검수된 기본체계 요약 scoring_method: 문항 공식 기준 우선',out['questions'][0]['source_page_references'][-1]['evidenceText'])
   self.assertEqual([m for m in out['questions'][0]['source_page_references'] if m['role']=='criteria'],
       [m for m in self.package['questions'][0]['source_page_references'] if m['role']=='criteria'])
   with self.assertRaisesRegex(Invalid,'COMPILED_PACKAGE_REVIEW_REQUIRED'):
    bind_material(self.package,self.registry,'q',[self.profile],pinned_digest='f'*64,binding={},regime='held',evaluation_type='humanities')
+ def test_reviewed_typed_set_does_not_expand_to_mixed_exam_sibling(self):
+  self.base_profile();self.profile['inheritance_scopes']=[]
+  self.profile['scopes']=[dict(exam_id='e',year=2024,kind='admission',track='인문',question_ids=['q'])]
+  self.pin();self.exam['questions'].append(dict(id='math-sibling'))
+  out,_=compose_material(self.package,self.registry,'q',[self.profile]);self.assertGreater(len(out['questions'][0]['source_page_references']),4)
+  with self.assertRaisesRegex(Invalid,'PROFILE_MISSING'):select([self.profile],self.exam,'math-sibling')
  def test_unreviewed_base_evidence_cannot_be_ready(self):
   self.base_profile();self.profile['common_evidence'][0]['verification']='NEEDS_REVIEW';self.pin()
   with self.assertRaisesRegex(Invalid,'BASE_PROFILE_EVIDENCE_REQUIRED'):select([self.profile],self.exam,'q')

@@ -4590,3 +4590,5 @@ Owner전략18d5b70확인, 기존Essay/Math/DB계약SELECT대조. Unified Wiki표
 
 ## 2026-10-23 Owner 평가 아키텍처 우선순위 수정
 대학 기본체계→상속→예외 순서. 기존 resolver에 대학/유형/연도 상속 추가, 숙명 인문1기본/10문항 연결,47tests PASS. 512독립체계 제작 금지,상속≠평가준비. 추가Provider/Production0. [상세](university-evaluation-profile-phase2.md).
+
+- 2026-10-23: 대학 기본체계19 검수, 2공통체계 병합(28관리단위),150/512상속. 9유형 부족원본/수정방안 명세. Essay3새입력 조립·48검사PASS, 기존Math/운영2보존. Provider/Production변경0. 상세 university-evaluation-profile-phase2.md.
