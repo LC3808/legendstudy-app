@@ -176,3 +176,7 @@ Owner P0 실행 승인에 따라 기존 성공 E2E를 반복하지 않고 건국
 숙명2025모의1-1: 기존7개는 내부 진단 축으로 공식기준과 구분. 공식원문 구성3+내용3 항목 그대로 기존 material_runtime 후보에 연결, 로컬계약PASS. 실제DB review/runtime policy 없음(읽기조회확인), 운영 연결/E2E 미완료. 신규 기준 창작 없음.
 
 실패 상세는 기존 phase3-20261022/*-evaluation-holds.md를 유지하며 최신예외를 반영했다. 신규 승인대기가 아니라 실제 패키지검수·운영연결·E2E 작업 미완료다.
+
+## 2026-10-25 WEB Math 회차 연결 — 설치 확인, 화면 검증 진행
+
+기존 Owner 회차당1Credit/무료재0 정책을 수리 입력에 연결. Owner 제공 운영 함수/경계 정의에 맞춘 private session 관계와 공개4RPC를 Owner가 직접 적용했다. 검증은 RLS·권한·고정 search_path·설치 정의·기존 owner/ACL·binding UNIQUE 보존 및 임시 CREATE 제거 모두 PASS. [패키지·보존7질문·검증](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). 기존 Registry/평가 엔진/공개leaf/원본ID/경제기록/APP 소스 변경 없음. 로컬1/2/4문항1·무료0·실패만재처리·동시8·이미지확인·삭제해제와 기존Math131 PASS. 운영 공개는 기존leaf1개이며 합성 다문항 검증을 공개 확대 근거로 삼지 않는다. WEB 회차 제출/이력 연결20검사 PASS, 새 WEB 배포·실제 로그인 화면 검증 미완료. 사용 이력 발생 후 삭제rollback 금지, forward fix 필요.
