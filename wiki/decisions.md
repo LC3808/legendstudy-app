@@ -674,3 +674,7 @@ Owner 최종 지시: 일반계정 공개를 기본으로11대학512문항을 전
 ## 2026-10-24 — 대학 단위 완성과 오류 격리
 
 기존 [전체 문항 연결 결정](essay-batch-service-20261023.md#2026-10-24--대학-단위-실행-및-오류-일괄-관리)을 대학 단위로 실행한다. 하루1대학 목표(가능하면2), 전체문항 전수입력검증과 대표E2E 재사용, 정상묶음 공개 및 보류별도 기록. 보류가 있으면 대학 전체 완료 아님. 오류A공통은 즉시, B대학/유형·C개별은 정상작업과 분리. 개별오류30분 목표 후 명세와 후속방법을 남기되 Credit/Ledger/인증/개인정보/공통Worker는 예외. 기존정책·ID·기록 보존과 Owner 직접SQL 원칙 유지.
+
+## 2026-10-25 — WEB MY 표시와공유 범위
+
+Owner WEB MY 지시는 [기존 MY 공통 기반](my-shared-foundation.md)과 [학습/지원/결과 보존 전략](longitudinal-learning-admissions-data-strategy.md)을 재사용한다. 사용자 명칭은 크레딧으로 통일하되 내부 API/정산 단위를 바꾸지 않는다. 미입력 프로필은 공란, 목표 대학·학과는 한 번에 저장, 지원기록은 기존 이력 계약 유지. 공유는 대표주소와 개인식별정보·답안·내부근거를 제외한 실제 성장 PNG만 제공한다. 일반 사용자 해설/예시 공개 UI를 제거하며 평가 엔진/원본 자료는 보존한다. [Owner 원문](https://github.com/LC3808/legendstudy-docs/blob/codex/web-app-release-20261024/90_HISTORY/2026-10-25-web-my-owner-directive.md), [구현·검증](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영).

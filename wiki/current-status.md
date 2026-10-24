@@ -1,8 +1,8 @@
 # Current Status
 
-## 2026-10-24 — WEB Owner 검수 수정 진행 중
+## 2026-10-25 — WEB MY 운영 반영·관리자 조회 검수
 
-WEB Production8e3d3c8/73145355, Worker17b3bd65 100%(Oct25). Owner 관리자·인문재처리·Math회차 SQL 권한/정의 PASS. 회차1/무료재0·실패만재처리 연결, 로컬Math131/Worker42·WEB관련22/MY123검사 PASS(중복 포함). 로그인 수리 입력·기존 History/결과 조회 확인. 관리자UNAUTHORIZED로 기존 관리자 로그인 대기, Mac 잠금으로 모바일 검증 미완료. 전체 수정 진행 중이며 새 MY 재설계는 후속. [Unified](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md), [범위·배포·근거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). APP UI/Secret/평가 엔진 변경 없음.
+WEB MY source79040d6/Production7f9defb7 API 확인. 기존 관리자 로그인 후 기간·회원·크레딧·TEST결제 필터/400px PASS, 이후 MY 프로필·영역순서·성장·목표/지원 폼·local PNG 공유 구현. 400/500px 조회·대표주소 복사·PNG다운로드 PASS. Typecheck/Lint/build/boundary PASS; 전체1249PASS/기존6FAIL+빈suite1. APP 코드·DB·Worker17b3bd65·Secret 보존. 실제APP 저장동기화/넓은PC 재검수 미수행, 관리자총회원12/13 차이 GAP. [상세·검증 한계](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영), [배포 증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/my-redesign.md).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 

@@ -42,6 +42,8 @@ Current APP branch integration: [Oct10 local closeout](production-integration-20
 
 Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
 
+WEB MY Oct25: [운영 반영·보존·검증 한계](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영).
+
 MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).
 
 Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
