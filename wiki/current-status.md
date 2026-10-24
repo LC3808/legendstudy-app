@@ -2,7 +2,7 @@
 
 ## 2026-10-25 — WEB MY 운영 반영·관리자 조회 검수
 
-WEB MY source79040d6/Production7f9defb7 API 확인. 기존 관리자 로그인 후 기간·회원·크레딧·TEST결제 필터/400px PASS, 이후 MY 프로필·영역순서·성장·목표/지원 폼·local PNG 공유 구현. 400/500px 조회·대표주소 복사·PNG다운로드 PASS. Typecheck/Lint/build/boundary PASS; 전체1249PASS/기존6FAIL+빈suite1. APP 코드·DB·Worker17b3bd65·Secret 보존. 실제APP 저장동기화/넓은PC 재검수 미수행, 관리자총회원12/13 차이 GAP. [상세·검증 한계](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영), [배포 증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/my-redesign.md).
+WEB MY 배포 확인. 성장 후속은 세로막대·정확한 기준명 적용(상세 링크). 기존 관리자 로그인 후 기간·회원·크레딧·TEST결제 필터/400px PASS, 이후 MY 프로필·영역순서·성장·목표/지원 폼·local PNG 공유 구현. 400/500px 조회·대표주소 복사·PNG다운로드 PASS. Typecheck/Lint/build/boundary PASS; 전체1249PASS/기존6FAIL+빈suite1. APP 코드·DB·Worker17b3bd65·Secret 보존. 실제APP 저장동기화/넓은PC 재검수 미수행, 관리자총회원12/13 차이 GAP. [상세·검증 한계](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영), [배포 증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/my-redesign.md).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
