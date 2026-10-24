@@ -81,3 +81,19 @@ class PublicScopeTests(unittest.TestCase):
             return dict(state='completed',run_id=run)
         runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[],public_exams=[run],enabled=True)
         self.assertEqual(asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run))),'completed')
+
+class SessionTransportTests(unittest.IsolatedAsyncioTestCase):
+    async def test_session_runtime_rpc_crosses_real_transport_guard(self):
+        from unittest.mock import AsyncMock
+        from tool.essay_lab.cloudflare_http import AsyncOperatingTransport
+        from tool.essay_lab.live_worker import Invalid
+        transport=object.__new__(AsyncOperatingTransport)
+        transport.worker='synthetic-worker-token'
+        transport._request=AsyncMock(return_value='exam-session-v1')
+        for name in ('essay_exam_session_ready','essay_exam_session_claim','essay_exam_session_checkpoint'):
+            await transport.rpc(name,{})
+            transport._request.assert_awaited_with('/rest/v1/rpc/'+name,'synthetic-worker-token',{})
+        transport._request.reset_mock()
+        for name in ('admin_report','math_session_submit','unlisted_rpc'):
+            with self.assertRaises(Invalid):await transport.rpc(name,{})
+        transport._request.assert_not_awaited()

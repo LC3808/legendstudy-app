@@ -44,7 +44,7 @@ class AsyncOperatingTransport(OperatingTransport):
         require(str(UUID(user['id']))==user['id'],'ACCESS_DENIED')
         return user['id']
     async def rpc(self,name,args):
-        require(name in RPCS|{'essay_exam_checkpoint'} and type(args) is dict,'RPC_DENIED')
+        require(name in RPCS|{'essay_exam_checkpoint','essay_exam_session_ready','essay_exam_session_claim','essay_exam_session_checkpoint'} and type(args) is dict,'RPC_DENIED')
         return await self._request('/rest/v1/rpc/'+name,self.worker,args)
 
 class BufferedResponse:
