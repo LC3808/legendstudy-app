@@ -1,5 +1,9 @@
 # Current Status
 
+## 2026-10-24 — WEB Owner 검수 수정 진행 중
+
+현재 WEB Production은 a21642c/6b69acb3(통합 배포)이며 아래 인수인계의 e67a0d37은 이전 기준선이다. Owner는 관리자·작성·History·결과·성장을 한 작업으로 수정하고 회차당1Credit/무료재0 정책 복원을 확정했다. WEB 로컬 수정/검증 진행, 추가 배포 없음. Worker 단일문항 제한·실패회차 종료와 관리자 집계 계약을 확인하여 서버 변경 범위/Owner read-only SQL 결과 대기. [Unified 진행 기록](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md), [계약·검증](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). APP 코드·Worker·DB·Secret 변경 없음.
+
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
 Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존전체학습주기E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](essay-lab-claude-handoff-20261024.md).

@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-10-24 — 시험 회차 첨삭 단위 복원
+
+Owner 확정: 동일 시험 회차 전체 문항은 최초1Credit, 기존 무료재첨삭0Credit. 문항별 텍스트/이미지 Draft 저장0Credit. 최소1답안, 부분제출은 미작성 문항 안내와 명시적 동의 후 작성분만 평가한다. 중복/재처리 추가차감 금지, 성공 문항 결과 보존, History는 회차 아래 문항 연결. 최초 미제출 문항의 추후 추가는 Owner 미확정이므로 임의 유·무료 허용 금지. 기존 [시험 단위 정책](essay-lab-product-v1.md) 복원이며 새 과금정책이 아니다. Production SQL은 Owner 직접 실행. [실행 계약 및 차이](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md).
+
 ## 2026-10-01 — Quality read authority and evidence access
 
 Owner approves a narrow auth.users Quality allowlist, not admin_users/generic RBAC. Quality

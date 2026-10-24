@@ -4721,3 +4721,5 @@ Owner SQL·독립14true, 신규7문항 공개 연결. 숭실 최초1/재첨삭0�
 - 2026-10-24: Owner 대학단위/오류A·B·C/개별30분 목표 채택. 489자동원인분류·89미상속37묶음,17호환후보(미반영),PDF페이지격리12회복/500보존. SWUQ2키수정 최초1정산·무료재첨삭품질차단0해제. [상세·후속 건국 전체](essay-batch-service-20261023.md#2026-10-24--대학-단위-실행-및-오류-일괄-관리).
 
 - 2026-10-24: 주간95%사용 확인, 신규개발/Provider 중단. WEB/Worker/공개12/기존1·0정산 READ-ONLY 확인. [Claude 최종 인수인계](essay-lab-claude-handoff-20261024.md) 작성.
+
+- 2026-10-24: WEB Owner 검수 전체 수정 진행. 회차1Credit/무료재0 확정과 초기 미제출 문항 추가 미정 기록. Worker 단일문항/실패회차 종료 제약 확인, 운영 관리자 함수 정의는 Owner 읽기 전용 SQL 확인 요청. APP·Worker·DB·Secret 변경 없이 WEB 로컬 구현/검증. [실행 기록](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md).
