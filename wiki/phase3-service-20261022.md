@@ -180,3 +180,5 @@ Owner P0 실행 승인에 따라 기존 성공 E2E를 반복하지 않고 건국
 ## 2026-10-25 WEB Math 회차 연결 — 설치 확인, 화면 검증 진행
 
 기존 Owner 회차당1Credit/무료재0 정책을 수리 입력에 연결. Owner 제공 운영 함수/경계 정의에 맞춘 private session 관계와 공개4RPC를 Owner가 직접 적용했다. 검증은 RLS·권한·고정 search_path·설치 정의·기존 owner/ACL·binding UNIQUE 보존 및 임시 CREATE 제거 모두 PASS. [패키지·보존7질문·검증](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). 기존 Registry/평가 엔진/공개leaf/원본ID/경제기록/APP 소스 변경 없음. 로컬1/2/4문항1·무료0·실패만재처리·동시8·이미지확인·삭제해제와 기존Math131 PASS. 운영 공개는 기존leaf1개이며 합성 다문항 검증을 공개 확대 근거로 삼지 않는다. WEB 회차 제출/이력 연결20검사 PASS, 새 WEB 배포·실제 로그인 화면 검증 미완료. 사용 이력 발생 후 삭제rollback 금지, forward fix 필요.
+
+같은 날 운영 후속: WEB8e3d3c8/73145355 및 Worker17b3bd65(100%) 배포·API 확인. 초기 Worker 후보의 session RPC transport 허용 누락 발견→기존 버전 복구→3개 RPC만 추가·42검사 PASS→재배포. 최종70파일 해시 일치, 바인딩·Registry·SDK·평가 엔진 보존. 로그인 Math 회차 입력/기존History/기존수리상세 조회 PASS. 운영 신규 제출/Provider/Credit실행0. 관리자 UNAUTHORIZED(로그인 요청), Mac잠금으로 모바일 검증 미완료. 전체완료/새MY착수 아님.

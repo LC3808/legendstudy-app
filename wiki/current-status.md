@@ -2,7 +2,7 @@
 
 ## 2026-10-24 — WEB Owner 검수 수정 진행 중
 
-현재 WEB Production a21642c/6b69acb3 유지. Owner 전체 수정 진행 중. 미제출 문항은 새 유료회차1Credit, 기존 문항 무료재0 확정. 회차 실행·재처리만 Worker 조정 허용. Owner 관리자/재처리 SQL 적용·권한 PASS. WEB261검사/빌드, 로컬 Ledger18검사 및 다문항·실패만 재처리·동시8요청 멱등성 PASS. Math 회차 SQL Owner 설치·권한/정의/기존ACL PASS(Oct25). WEB 회차 연결·History20검사 PASS, 배포/인증화면 검증은 미완료. [Unified](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md), [항목별 계약·검증](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). APP UI/Secret/평가 엔진 변경 없음.
+WEB Production8e3d3c8/73145355, Worker17b3bd65 100%(Oct25). Owner 관리자·인문재처리·Math회차 SQL 권한/정의 PASS. 회차1/무료재0·실패만재처리 연결, 로컬Math131/Worker42·WEB관련22/MY123검사 PASS(중복 포함). 로그인 수리 입력·기존 History/결과 조회 확인. 관리자UNAUTHORIZED로 기존 관리자 로그인 대기, Mac 잠금으로 모바일 검증 미완료. 전체 수정 진행 중이며 새 MY 재설계는 후속. [Unified](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md), [범위·배포·근거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md). APP UI/Secret/평가 엔진 변경 없음.
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
