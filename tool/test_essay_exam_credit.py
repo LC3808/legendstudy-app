@@ -47,6 +47,41 @@ def main():
    snapshot={'examId':exam,'kind':'MOCK_ESSAY','answers':[{'questionId':q,'body':'Synthetic student answer','revision':1,'rubricVersion':'r1','evidenceVersion':'e1'} for q in [q1,q2]]}
    def reserve(key,s=None,parent=None,acct=account):return f"select essay_exam_private.reserve('{acct}','{exam}','{key}',{literal(json.dumps(snapshot if s is None else s))}::jsonb,{literal(parent) if parent else 'null'})"
    def balance():return sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{account}'")
+   # Owner policy: exam identity is shared; paid submission rounds remain distinct.
+   q4,q5=uid(),uid()
+   sql(f"insert into public.essay_questions(id,essay_exam_id,question_key,label,display_order,metadata_version) values('{q4}','{exam}','q4','Q4',4,'fixture'),('{q5}','{exam}','q5','Q5',5,'fixture');")
+   for size in (1,2,4):
+    round_user=uid()
+    sql(f"insert into auth.users(id) values('{round_user}');insert into public.profiles(id) values('{round_user}');")
+    round_account=sql(f"select id from public.credit_accounts where user_id='{round_user}'")
+    def round_balance():return sql(f"select sum(balance_delta)||','||sum(reserved_delta) from public.credit_transactions where account_id='{round_account}'")
+    selected=[q1,q2,q4,q5][:size]
+    round_snapshot=dict(snapshot,answers=[dict(snapshot['answers'][0],questionId=q) for q in selected])
+    round_key=uid();round_id=sql(reserve(round_key,round_snapshot,acct=round_account))
+    assert sql(reserve(round_key,round_snapshot,acct=round_account))==round_id
+    assert round_balance()=='3,1'
+    round_result={'summary':'Synthetic reviewed question summaries','questions':[{'questionId':q,'rubricVersion':'r1','evidenceVersion':'e1','evaluation':{'fixture':True}} for q in selected]}
+    final=f"select essay_exam_private.finish('{round_id}',{literal(json.dumps(round_result))}::jsonb,false)"
+    sql(final);sql(final);assert round_balance()=='2,0'
+    original=sql(f"select snapshot::text||result::text from essay_exam_private.runs where id='{round_id}'")
+    revised_snapshot=dict(round_snapshot,answers=[dict(a,body='Rewritten',revision=2) for a in round_snapshot['answers']])
+    free_id=sql(reserve(uid(),revised_snapshot,round_id,round_account))
+    sql(f"select essay_exam_private.finish('{free_id}',{literal(json.dumps(round_result))}::jsonb,false)")
+    assert round_balance()=='2,0'
+    sql(reserve(uid(),dict(round_snapshot,answers=[]),acct=round_account),'INVALID_QUESTION_SET')
+    if size==1:
+     later_snapshot=dict(snapshot,answers=[dict(snapshot['answers'][0],questionId=q2)])
+     # New question cannot enter the free parent, but is an independent paid round.
+     fresh_parent=sql(reserve(uid(),round_snapshot,acct=round_account))
+     sql(f"select essay_exam_private.finish('{fresh_parent}',{literal(json.dumps(round_result))}::jsonb,false)")
+     sql(reserve(uid(),later_snapshot,fresh_parent,round_account),'FROZEN_QUESTION_SET')
+     later_id=sql(reserve(uid(),later_snapshot,acct=round_account))
+     later_result=dict(round_result,questions=[dict(round_result['questions'][0],questionId=q2)])
+     sql(f"select essay_exam_private.finish('{later_id}',{literal(json.dumps(later_result))}::jsonb,false)")
+     assert later_id!=round_id and round_balance()=='0,0'
+     assert sql(f"select snapshot::text||result::text from essay_exam_private.runs where id='{round_id}'")==original
+     checks.append('new_question_new_paid_round_preserves_original_and_rejects_free_expansion')
+    checks.append(f'owner_{size}_question_round_one_credit_duplicate_zero_free_rewrite_zero')
    key=uid()
    # Separate psql sessions contend on the same account lock, not an in-memory fake.
    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:ids=list(pool.map(lambda _:sql(reserve(key)),range(8)))

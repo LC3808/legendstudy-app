@@ -4723,3 +4723,6 @@ Owner SQL·독립14true, 신규7문항 공개 연결. 숭실 최초1/재첨삭0�
 - 2026-10-24: 주간95%사용 확인, 신규개발/Provider 중단. WEB/Worker/공개12/기존1·0정산 READ-ONLY 확인. [Claude 최종 인수인계](essay-lab-claude-handoff-20261024.md) 작성.
 
 - 2026-10-24: WEB Owner 검수 전체 수정 진행. 회차1Credit/무료재0 확정과 초기 미제출 문항 추가 미정 기록. Worker 단일문항/실패회차 종료 제약 확인, 운영 관리자 함수 정의는 Owner 읽기 전용 SQL 확인 요청. APP·Worker·DB·Secret 변경 없이 WEB 로컬 구현/검증. [실행 기록](https://github.com/LC3808/legendstudy-docs/blob/main/90_HISTORY/2026-10-24-web-release-codex.md).
+
+### 2026-10-24 — Owner 회차 정책 및 서버 조회/재처리
+Owner 미제출 문항 새회차1Credit·무료집합고정 확정. 회차 실행·재처리 범위 Worker 조정 허용. 운영 함수/컬럼 증거 확인 후 추가 관리자 보고 RPC와 실패문항 재처리 계약 작성·로컬PG 검증, Owner 운영 적용/권한 PASS. WEB261검사·빌드, Ledger18검사 PASS. Worker/WEB 새배포 전이며 전체작업 진행 중. [정책](decisions.md#2026-10-24--시험-회차-첨삭-단위-복원), [실행 증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md).

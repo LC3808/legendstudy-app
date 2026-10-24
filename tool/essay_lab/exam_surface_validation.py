@@ -86,6 +86,7 @@ def cases(sql, root, user, account, exam, question):
     if async_mode:
         from .cloudflare_runtime import CloudflareExamRuntime
         sql((root/'supabase/candidates/essay_cloudflare_execution/install.sql').read_text())
+        sql((root/'supabase/candidates/essay_session_retry/install.sql').read_text())
         writer=str(uuid.uuid4())
         def cp(action,key='probe',writer_id=writer,payload='null',subject=user):
             return f"set role essay_worker;select public.essay_exam_checkpoint('{subject}','{initial}','{c['lease_token']}','{key}','{action}','{writer_id}',{payload})"
@@ -167,6 +168,9 @@ def cases(sql, root, user, account, exam, question):
     if os.environ.get('ESSAY_TEST_CONTINUOUS_CYCLES') == '1':
         from .continuous_cycle_validation import cases as cycle_cases
         cycle_cases(sql,root,user,account,exam,question,initial)
+    if async_mode:
+        from .session_retry_validation import cases as retry_cases
+        retry_cases(sql,root,other,exam,question,initial)
     # Exact legacy Ledger facts survive account anonymization; answer/result runs do not.
     sql(f"update public.credit_accounts set user_id=null where id='{account}'")
     assert sql(f"select count(*) from essay_exam_private.runs where account_id='{account}'")=='0'
@@ -175,6 +179,7 @@ def cases(sql, root, user, account, exam, question):
         sql((root/'supabase/candidates/essay_continuous_cycles/rollback.sql').read_text())
     if async_mode:
         assert sql('select count(*) from essay_exam_private.checkpoints')=='0'
+        sql((root/'supabase/candidates/essay_session_retry/rollback.sql').read_text())
         sql((root/'supabase/candidates/essay_cloudflare_execution/rollback.sql').read_text())
     sql(rollback)
     assert sql("select count(*) from public.credit_transactions")!='0'

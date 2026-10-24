@@ -56,6 +56,7 @@ class Default(WorkerEntrypoint):
 
     async def admission(self,t,subject,exam):
         require(subject in t.allowed or exam in t.public_exams,'EXAM_ACCESS_DENIED')
+        require(await t.rpc('essay_exam_session_ready',{})=='exam-session-v1','EXAM_SESSION_CONTRACT_REQUIRED')
         policy=await t.rpc('essay_exam_preflight',dict(p_subject=subject,p_exam=exam))
         pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=exam,p_digest=policy['package_digest']))
         hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
@@ -67,7 +68,7 @@ class Default(WorkerEntrypoint):
         source=runtime.review_source
         key_bound=bool(getattr(source,'key',None) and runtime.reviewer.keys.get(getattr(source,'reviewer_id',''))==source.key)
         if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model':require(key_bound,'REVIEW_KEY_BINDING_REQUIRED')
-        return {'ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'question_ids':sorted(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
+        return {'session_version':'exam-session-v1','ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'question_ids':sorted(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
 
     async def fetch(self,request):
         headers={'Cache-Control':'no-store'}

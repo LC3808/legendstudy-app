@@ -47,12 +47,12 @@ class RuntimePolicyTests(unittest.TestCase):
         calls=[]
         async def rpc(name,args):
             calls.append(name)
-            if name=='essay_exam_claim':
-                return dict(state='reserved',subject_id=subject,lease_token='lease',snapshot=dict(ownerId=subject,runtime=dict(binding={'model':'unapproved'})))
+            if name=='essay_exam_session_claim':
+                return dict(session_version='exam-session-v1',attempts={},state='reserved',subject_id=subject,lease_token='lease',snapshot=dict(ownerId=subject,runtime=dict(binding={'model':'unapproved'})))
             self.fail('No package/provider/finalize request after rejected policy')
         runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[subject],enabled=True,provider_factory=lambda binding: configured_binding(binding,{'model':'approved'}))
         with self.assertRaises(Invalid): asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run)))
-        self.assertEqual(calls,['essay_exam_claim'])
+        self.assertEqual(calls,['essay_exam_session_claim'])
 
 class PublicScopeTests(unittest.TestCase):
     def test_public_consumer_rejects_unreleased_exam_before_provider(self):
@@ -69,7 +69,7 @@ class PublicScopeTests(unittest.TestCase):
         runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[],public_exams=[exam],enabled=True)
         with self.assertRaisesRegex(Invalid,'EXAM_ACCESS_DENIED'):
             asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run)))
-        self.assertEqual(calls,['essay_exam_claim'])
+        self.assertEqual(calls,['essay_exam_session_claim'])
 
     def test_public_completed_redelivery_does_not_re_evaluate(self):
         import asyncio
@@ -77,7 +77,7 @@ class PublicScopeTests(unittest.TestCase):
         subject='11111111-1111-4111-8111-111111111111'
         run='22222222-2222-4222-8222-222222222222'
         async def rpc(name,args):
-            self.assertEqual(name,'essay_exam_claim')
+            self.assertEqual(name,'essay_exam_session_claim')
             return dict(state='completed',run_id=run)
         runtime=CloudflareExamRuntime(rpc=rpc,registry={},provider=None,reviewer=None,review_source=None,receipt_sink=None,allowed_subjects=[],public_exams=[run],enabled=True)
         self.assertEqual(asyncio.run(runtime.consume(dict(subject_id=subject,run_id=run))),'completed')

@@ -420,3 +420,7 @@ no new fact/balance store; shared identity and owner-only reads; learning eviden
 not admissions prediction; display derivation only; private artifacts stay private.
 Production public activation HOLD; Payment/Toss/IAP/010/005 unchanged. Android/iOS
 widget layout checks are simulations, not physical-device/store-release acceptance.
+
+## 2026-10-24 — 부분 제출과 추가 문항 Owner 확정
+
+[회차 단위 복원 결정](decisions.md#2026-10-24--시험-회차-첨삭-단위-복원)을 따른다. 동일 시험에 여러 첨삭 회차가 존재할 수 있다. 한 회차의 제출 문항 수와 관계없이 최초1Credit, 해당 문항 집합의 기존 무료 재첨삭0Credit. 최초 미제출 문항은 무료 재첨삭에 추가하지 않고 새 유료 회차1Credit으로 처리한다. 기존 회차 답안/결과는 보존한다. 부분 제출 전에 미작성 문항과 현재·추후 별도 비용을 알리고 명시적 동의를 받는다. 기존14일/1회 무료 정책을 바꾸지 않는다. 운영 reserve/quote/submit 정의는 Owner 조회 결과로 확인했으며 배포 완료를 뜻하지 않는다.

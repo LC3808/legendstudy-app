@@ -6,7 +6,7 @@ from .live_worker import require,digest
 from .exam_runtime import ExamQuestionChannel
 from .reviewed_runtime import ReviewedRuntimeWorker
 
-async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize=None):
+async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize=None,attempts=None):
     require(questions and len({q['questionId'] for q in questions})==len(questions),'INVALID_EXAM_QUESTION_SET')
     require(len({q['evaluationId'] for q in questions})==len(questions),'DUPLICATE_EXAM_CHANNEL')
     require(len(questions)==1 or callable(summarize),'EXAM_SYNTHESIS_REQUIRED')
@@ -14,10 +14,12 @@ async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize
     if final:
         if final['state']!='checkpoint':return 'reconciling'
         return await finalize(final['payload'])
-    results=[]
+    results=[]; failures=False
     # Caller validates ALL evidence/claims and authorizes ALL workers before this loop.
     for index,q in enumerate(questions):
-        key='q'+str(index);claim=q['claim'];evaluation=q['evaluationId']
+        attempt=0 if attempts is None else attempts.get(str(index),0)
+        require(type(attempt) is int and attempt>=0,'INVALID_RETRY_ATTEMPT')
+        key='q'+str(index)+(('-retry-'+str(attempt)) if attempt else '');claim=q['claim'];evaluation=q['evaluationId']
         def completed(args):
             require(args.get('p_evaluation')==evaluation and args.get('p_run')==claim['run_id'] and
                     args.get('p_token')==claim['lease_token'] and type(args.get('p_output')) is dict,'FOREIGN_EXAM_CHECKPOINT')
@@ -53,6 +55,9 @@ async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize
         else:state=channel.terminal
         if state=='reconciling':return state
         if state=='failed':
+            if attempts is not None:
+                failures=True
+                continue # Preserve every success; later explicit retry targets failures only.
             record={'result':None,'failed':True}
             await put('final',record)
             return await finalize(record)
@@ -62,6 +67,7 @@ async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize
         results.append({k:q[k] for k in ('questionId','rubricVersion','evidenceVersion')}|
             {'evaluation':channel.output,'criteria':deepcopy(q['criteria']),
              'telemetry':{k:usage['payload'].get('p_'+k) for k in ('input_tokens','output_tokens','total_tokens','latency_ms','cost_amount','currency')}})
+    if failures:return 'retryable' # No finalize/release/reserve; same decision remains reserved.
     if len(results)==1:summary=results[0]['evaluation']['summary']
     else:
         saved=await journal.read('summary')
