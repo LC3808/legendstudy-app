@@ -4784,3 +4784,7 @@ Owner Paid전환후기존70소스/바인딩보존 CPU30초배포3e31db73. 중앙
 ## 2026-10-25 — 전체 대학 STANDBY Owner 정책 반영
 
 기존 공통 연결 문서·decisions·라우팅을 갱신. 평가 품질/E2E 선행조건 폐기, 기본 연결 무결성과 승인 유지. 중앙인문10회차 WEB STANDBY / OWNER QA PENDING, 후속은 Owner확인 후. Provider/코드/DB/배포/빌드 변경0.
+
+## 2026-10-25 — 중앙2026모의 계열 누락 확인
+
+Owner지적대로인문사회·경영경제 resources4존재/시험Registry2부재. 등록SQL후보작성·운영readonly사전4true,미적용. 인문전체대상최소11/기존STANDBY10으로정정. Provider0. [상세](essay-group-1a-20261025.md#owner-지적--중앙2026모의-인문사회경영경제-registry-누락).

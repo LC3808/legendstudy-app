@@ -238,3 +238,11 @@ Provider영수증6(평가3+기존독립검수3), 입력51324/출력6510tokens. c
 ## 최신 Owner 정책 적용 — 중앙 인문 STANDBY
 
 [전체 대학 공통 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책)이 과거 중앙 실제평가 완료 선행조건을 대체한다. 기존 연결/PDF/입력/승인 증거 및 Paid Worker 복구를 재사용하여 중앙 인문10회차·30문항을 WEB STANDBY / OWNER QA PENDING으로 관리한다. 실제평가성공1회차와 구분. 새Provider호출/가상답안/시험별 재검수/SQL재적용 없음. Owner 확인 전 경영경제 착수하지 않는다. 기존 완료 후 안내문구 잔존은 알려진 표시 오류로 보존한다. APP의 미배포 카드/PDF 수정과 실기기 호환성은 이 WEB 판정에 포함하지 않는다.
+
+## Owner 지적 — 중앙2026모의 인문사회/경영경제 Registry 누락
+
+운영 DB READ-ONLY 확인: 2026mock은 자연0723cb5a만 존재. 인문사회문제711f74c6/해설fc2c55e8, 경영경제문제99533452/해설dc1e6b23 resource는 모두 active로 이미 존재. 기존 로컬 공식PDF도 존재한다. 두 회차가초기Registry선정에서빠져 기존중앙22시험 및 인문10회차조립범위에도포함되지않았다. UI가숨긴것이아니며 기존10회차를중앙인문전체자료범위완료로표현하면안된다. 인문대상은최소11회차로정정(기존10 STANDBY+2026모의1미연결).
+
+[공식 2026모의 공지](https://admission.cau.ac.kr/detail.do?board_seq=3249&menuurl=jcgylvDgJz1bdCxN45fl1g%3D%3D&pageNo=1)와 기존PDF의시험/문항단위만대조. 인문3·경영경제언어2/수리1. 평가품질검수/가상답안/Provider0.
+
+[등록보완 후보](../supabase/candidates/cau_2026_mock_missing_tracks/OWNER-README.md): 사전4true,apply/postcheck/rollback준비,NOT_APPLIED. 기존ID생성계약재사용;신규미등록시험2/문항6만추가대상. 운영SQL은이번2회차의별도승인필요. 이후정확resource를패키지/PDF/Worker에연결해야STANDBY이며등록만으로완료아님. 경영경제Math계약/공개승인우회금지.
