@@ -216,3 +216,21 @@ Owner새지시: 중앙인문10회차실서비스→Owner화면확인→경영경
 READ-ONLY 중앙runs0: 현재복구할중단요청/예약없음. 기존Worker53d20942 자원/초기화오류조사. 12:30–13:00UTC집계 success82/예외15/clientDisconnected6/exceededResources3. CPU한도30초명시 version생성 요청이 HTTP400/100328 `CPU limits are not supported for the Free plan`으로거절되어현재Free플랜확정. 후보생성/운영배포변경없음. Free CPU10ms 제약이기존Python실행부하에부적합하며개별평가품질문제와구분. 모든예외의단일원인확정이나Paid전환만으로E2E완료판정은아님.
 
 Owner에게해당계정Workers Paid전환요청. 비용발생계정작업임의실행안함. 전환후기존70소스/Secret/bindings보존하여30초CPU한도설정→기존정확10회차승인/실제제출경로확인→필요최소공식답안기반실평가→기존1/0Credit·History결과확인. 기존성공평가반복금지,새요청으로중단을우회하지않음. 운영WEB2cc8cd0a/Worker53d20942 유지. 아직중앙실서비스완료아님.
+
+### Paid 전환 후 실행 한도 반영
+
+Owner Workers Paid전환완료 후 API에서 cpu_ms30000 설정 허용 확인. 기존70모듈 변경0, 전체bindings/Secret 및호환설정 보존. Worker `3e31db73-b029-470b-8207-1a02ad7cdd91`, deployment `61af2cfb-a429-4350-83aa-7f0f964a15a8` 100%운영반영. WEB2cc8cd0a불변,DB/SQL/APP변경0. 이전Worker53d20942가복구기준.
+
+일반계정 중앙2026수시 인문사회 전체3문항 기존공식예시답안 저장,회차1Credit확인창후 요청 `23b818bd-03c0-4226-9dbf-79f1447328c8` 접수. 초기예약확인,중복제출없음. 결과/정산최종확인은아직진행중.
+
+### 중앙대 실제 회차 평가 완료 — Paid 반영 후
+
+중앙2026수시 인문사회 `23b818bd-03c0-4226-9dbf-79f1447328c8` 전체3문항 completed, 13:08:02→13:10:55UTC. 최초공식예시답안 재사용, 가상답안생성/평가품질반복0. 일반계정WEB에서 저장·3문항제출·1Credit확인창·종합평가/평가기준/근거·History완료기록·다시써보기/무료재첨삭요청 진입 확인. reserve1→consume1,잔여예약0,가용11→10. 기존ID/정산/기록변경없음.
+
+Provider영수증6(평가3+기존독립검수3), 입력51324/출력6510tokens. cost_amount는6건모두NULL이므로 실제비용미확정이며0으로보고하지않음. 무료재첨삭의신규Provider실행은없다. 기존성균회차무료0/성장비교 성공계약을재사용했고이번중앙은무료재작성자격/진입까지확인했다. 중앙재첨삭E2E신규PASS로표시하지않는다.
+
+기존10회차/30문항 전체연결·PDFhash/접근증거재사용. 이번2026수시 및 이전장애2027일반/창의 모두일반계정Worker승인복구. 전체10회차실평가를반복하지않음. 신규실제평가성공은1회차/3문항. WEBProduction2cc8cd0a(code1c6339b)불변. APP빌드/스토어0. Worker error tail 관찰중추가오류출력없음(장기무장애보장은아님).
+
+잔여표시문제: 평가결과는자동표시됐으나앞서노출된‘평가완료를아직확인하지못했어요’안내문구가함께남았다. History에는정상완료이며정산/결과저장실패아님. 별도최소표시수정대상으로기록,이번에UI/WEB재배포확대안함. Owner화면확인전경영경제작업금지.
+
+복구: 기존Worker53d20942버전으로deployment전환가능하나이전실행한도장애재현가능. 정상3e31db73유지우선. SQL재실행·Secret변경·기존요청새예약우회금지. evidence: text-expansion/central-cpu-limit-candidate.json.

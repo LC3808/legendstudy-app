@@ -4776,3 +4776,7 @@ MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·i
 - 2026-10-25: 대학카드 조회를평가Worker와분리, 서버공개목록기준1회응답·로딩/오류구분·요청역전방지. 41tests/typecheck/build,일반계정새로고침3/페이지왕복2 PASS. WEBad522cdf, Provider/Credit/DB쓰기0. [원인·재발방지](essay-group-1a-20261025.md#2026-10-25-대학-카드-공개-상태-안정화).
 
 - 2026-10-25: 중앙인문실서비스 우선. Cloudflare CPU설정요청100328으로Free플랜확정/운영배포변경0. Owner Paid전환요청. 중앙runs0/Provider0/Credit0. [장애·재개](essay-group-1a-20261025.md#2026-10-25-중앙대-인문사회-실서비스--실행-한도-장애-확인).
+
+## 2026-10-25 — 중앙대 Paid Worker 실행 복구
+
+Owner Paid전환후기존70소스/바인딩보존 CPU30초배포3e31db73. 중앙2026수시3문항실평가완료,1Credit정산·WEB결과/History·무료재작성진입확인. 신규무료재평가없음/기존성공계약재사용. APP빌드/SQL재실행0. [증거와잔여표시문제](essay-group-1a-20261025.md#중앙대-실제-회차-평가-완료--paid-반영-후).
