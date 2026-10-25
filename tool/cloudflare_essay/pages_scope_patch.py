@@ -16,7 +16,7 @@ def public_scope_patch(current, additions):
         raise ValueError('INVALID_EXAM_ID')
     # Match the current gateway/worker contract; batch rollout must explicitly
     # update this limit and its authorization tests before expanding it.
-    if not ids or len(ids) > 42:
+    if not ids or len(ids) > 64:
         raise ValueError('CURRENT_RUNTIME_SCOPE_LIMIT')
     return {'deployment_configs': {'production': {'env_vars': {
         'ESSAY_PUBLIC_EXAMS': {'type': 'plain_text', 'value': ','.join(ids)}

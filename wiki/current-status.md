@@ -2,7 +2,7 @@
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
-중앙인문 기존10회차 WEB STANDBY, 2026모의인문 PDF/실행연결 잔여. 최신 Owner 순서: 중앙경영경제→경희인문·체육→경희사회, 단계별 승인 대기 없이 연결 준비. 경희 준비자료24회차 대조, Owner 승인으로 누락16시험·기존무문항4시험에51문항 등록 완료. 신규 STANDBY0, 기존경희인문2회차 보존. 경영경제10회차는 언어/Math 단일예약 연결 미구현. [상세·재개 지점](essay-group-1a-20261025.md#연속-연결--중앙경영경제경희인문사회). [공통 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책) 유지. WEB2cc8cd0a·Worker3e31db73 보존. Provider/APP빌드0.
+Owner 승인 연속연결: 경희인문11/11(신규9), 경희사회11/13(신규11), 성균언어16/16(신규13). 총신규33·기존5=38회차 WEB STANDBY / OWNER QA PENDING. 경희2023수시오전·2025모의사회는그래프답안 단일회차연결 보류. 일반계정PDF·입력·저장UI·1Credit요청경로확인, 실제제출/Provider0. DB4묶음적용, WEB011af05b(code7cc0a6f), Workerfafe9380 100%. 공개목록한도42→64, UUID/승인검사는유지. Credit/History·Secret보존, APP빌드0. [정확한 범위·복구](essay-group-1a-20261025.md#연속-연결-최종-상태).
 
 
 

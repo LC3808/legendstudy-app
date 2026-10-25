@@ -1,0 +1,22 @@
+"""Owner-authorized local connection preparation only; no Provider or DB writes.
+Artifacts remain private; Production application is a separate scoped step.
+"""
+import json,re,hashlib,uuid,importlib.util
+from pathlib import Path
+R=Path('/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/group-1a-20261025/continuous-skku');docs=json.loads((R/'source-pages.private.json').read_text());old=json.loads((R/'registry.private.json').read_text());resources=json.loads((R/'resources.private.json').read_text());N=uuid.uuid5(uuid.NAMESPACE_URL,'https://github.com/LC3808/legendstudy-app/essay-source-registration/v1');groups={}
+for d in docs:
+ t=d['title'];y=int(t[:4]);k='mock' if '모의' in t else 'admission';match=re.search(r'(?:인문(?:계)?\(?|언어형)([123])',t);session=match[1]+'교시' if match and k=='admission' else None;groups.setdefault((y,k,session),[]).append(d)
+rows=[];pending=[]
+for (year,kind,session),ds in sorted(groups.items(),key=lambda v:str(v[0])):
+ q=[d for d in ds if '문제' in d['title']];s=[d for d in ds if '해설' in d['title'] or '답안' in d['title']];assert len(q)==len(s)==1,(year,session);qd,sd=q[0],s[0]
+ matches=[e for e in old if e['admission_year']==year and e['exam_kind']==kind and e['session_label']==session and ('인문' in e['field_or_division'] or '언어' in e['field_or_division'])];assert len(matches)<=1;e=matches[0] if matches else None
+ key='source:'+hashlib.sha256(f'skku|{year}|{kind}|언어형|{session}|None'.encode()).hexdigest();eid=e['id'] if e else str(uuid.uuid5(N,'exam/'+key));qs=e['questions'] if e else [];assert not qs or len(qs)==3
+ questions=[dict(id=x['id'],sourceKey=x['question_key'],label=x['label'],order=x['display_order']) for x in qs] if qs else [dict(id=str(uuid.uuid5(N,'question/'+key+':'+str(n))),sourceKey=key+':'+str(n),label='문제 '+str(n),order=n-1) for n in range(1,4)]
+ documents=[]
+ for d in {v['sha256']:v for v in (qd,sd)}.values():
+  rr=[x for x in resources if x['title']==d['title']];assert len(rr)<=1
+  documents.append(dict(title=d['title'],sha256=d['sha256'],local_path=d['path'],page_count=len(d['pages']),resource_id=rr[0]['id'] if rr else None))
+ row=dict(examId=eid,sourceKey=key,existingExam=bool(e),universityId=old[0]['university_id'],year=year,kind=kind,track=e['field_or_division'] if e else '언어형',session=session,campus=e['campus'] if e else None,examKey=e['exam_key'] if e else 'source-'+key[7:],name=e['exam_name'] if e else f'{year}학년도 성균관대학교 '+('모의논술' if kind=='mock' else '수시논술')+' 언어형 '+(session or ''),sourceHashes=sorted({qd['sha256'],sd['sha256']}),questions=questions,documents=documents,question_source_hash=qd['sha256'],official_source_hash=sd['sha256'],parent_count=3,active=bool(e and e['runtime']))
+ rows.append(row)
+ if not qs:pending.append(row)
+(R/'manifest.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2));spec=importlib.util.spec_from_file_location('registration','/Users/woojinchang/development/legendstudy-release-20261024/scripts/essay-materials/prepare_registration.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);sql=m.sql_document(dict(exams=pending));sql=sql.replace("and id<>eid and exam_key not like 'source-%'","and id<>eid and (field_or_division like '%인문%' or field_or_division like '%언어%') and session_label is not distinct from e->>'session'");O=R/'registry-sql';O.mkdir(exist_ok=True);(O/'apply.sql').write_text(sql);ids=','.join("'"+r['examId']+"'::uuid" for r in pending);(O/'precheck.sql').write_text(f'select not exists(select 1 from public.essay_questions where essay_exam_id in ({ids})) as candidate_questions_absent;');sets={r['examId']:sorted(q['id'] for q in r['questions']) for r in rows};literal=json.dumps(sets).replace("'","''");(O/'postcheck.sql').write_text("select not exists(select 1 from jsonb_each('"+literal+"'::jsonb) e where (select jsonb_agg(id::text order by id::text) from public.essay_questions where essay_exam_id=e.key::uuid) is distinct from e.value) as exact_question_sets;");(O/'rollback.sql').write_text('-- Do not delete added metadata or student records. No execution/public approval is created by this registry batch. Leave unused metadata in REVIEW.\nselect true as no_destructive_rollback;\n');print(json.dumps(dict(targets=len(rows),existing_active=sum(r['active'] for r in rows),new_exams=sum(not r['existingExam'] for r in pending),empty_existing=sum(r['existingExam'] for r in pending),new_questions=3*len(pending))))

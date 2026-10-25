@@ -1,0 +1,391 @@
+{
+  "batches": [
+    {
+      "name": "continuous-text",
+      "sql_path": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/group-1a-20261025/continuous-text/owner-sql",
+      "policy": "essay_khu_continuous_text_question_read",
+      "exams": [
+        {
+          "exam_id": "1d08cce9-8b71-557a-a410-294336afd42d",
+          "name": "2022학년도 경희대학교 모의논술 인문·체육계",
+          "questions": [
+            "61b83ec8-e1b2-55d2-98a7-8ed7a867bbda",
+            "973bffd4-27ca-559e-9ec2-29f1bfbee700"
+          ],
+          "revision": 1,
+          "student_pdf": "5009939ac43ef7e331432ba8affd1574685cbbd8d5e02d45ea44170ce725b629"
+        },
+        {
+          "exam_id": "9f00c51a-3169-5b9a-9e0a-0b0233df8820",
+          "name": "2023학년도 경희대학교 모의논술 인문·체육계",
+          "questions": [
+            "3e324fbf-c76d-582a-b473-d8a3a3a8b707",
+            "900949a7-5259-5b71-a6cc-fb7499d6ff98"
+          ],
+          "revision": 1,
+          "student_pdf": "de6c0ee88cef835aff3aef0a8ffd04ec949408bb9a35d9ad4ef5a5907fb7a85f"
+        },
+        {
+          "exam_id": "51e7299e-0ae7-5e6d-9d37-a46718be76bb",
+          "name": "2024학년도 경희대학교 모의논술 인문·체육계",
+          "questions": [
+            "92a9044c-9eaa-58d8-b4e9-365b2e9a02f0",
+            "abb351b6-d462-5916-a03a-956c964f6359"
+          ],
+          "revision": 1,
+          "student_pdf": "9132a43c0e08f39add57513356f09632e6d446922eef5a0847b0e6216cebef48"
+        },
+        {
+          "exam_id": "071a6834-4bc1-586b-bacd-33d89d1d39cd",
+          "name": "2025학년도 경희대학교 모의논술 인문·체육계 온라인",
+          "questions": [
+            "9a17cd35-0190-51d4-81ea-1bd2753de24b",
+            "c94c94d7-2f50-51b0-864b-8c75bf8ed50c"
+          ],
+          "revision": 1,
+          "student_pdf": "5093cab654d82c591f7770083690676345bbedb8fd69fe4173e407174460b89c"
+        },
+        {
+          "exam_id": "0aa01b3e-b640-500a-9435-4e9ee1a19a49",
+          "name": "2022학년도 경희대학교 수시논술 인문·체육계",
+          "questions": [
+            "314141de-4f7e-522c-b391-4911a8283fab",
+            "93259de7-2d2f-5c7f-908f-3df4a4057881"
+          ],
+          "revision": 1,
+          "student_pdf": "9bbe41535e196713964a6f45ec44e0e54c9ec759cf5a423cf955beceecfb2ace"
+        },
+        {
+          "exam_id": "ac996a6d-28ba-5d0b-83a1-d4c0417f05af",
+          "name": "2023학년도 경희대학교 수시논술 인문·체육계",
+          "questions": [
+            "34e0b9ed-8e8e-564b-926f-5ffb1d133739",
+            "e02e0eb9-da86-55d7-9758-ac6613ed434a"
+          ],
+          "revision": 1,
+          "student_pdf": "a32a4e80bea7c0553a421b9f8272e44edb3f20c55a293c3d1efb1713b42cec66"
+        },
+        {
+          "exam_id": "2b87063c-6753-5544-ac4d-b804c017290b",
+          "name": "2024학년도 경희대학교 수시논술 인문·체육계",
+          "questions": [
+            "6747325c-38f3-5d83-8374-39e7bdc61ed8",
+            "9314630c-7387-5347-8858-af76cacb9046"
+          ],
+          "revision": 1,
+          "student_pdf": "4bba4d2624246e90653f1acf0fa6bf94c008b3871eb7d995f4c57f4baad555b4"
+        },
+        {
+          "exam_id": "04119637-2d7b-52b4-8e84-4cbd76d0275c",
+          "name": "2025학년도 경희대학교 논술 인문·체육계 11월 16일 오전",
+          "questions": [
+            "7e7d6302-99c1-5537-9835-3fc043d6b891",
+            "8cb8766c-95b6-5ea2-a19f-acd4cd3b89a2"
+          ],
+          "revision": 1,
+          "student_pdf": "94bd8fd62d944941cd56ad8be01ad4d3f59d7debebde408dbd733813a849e95d"
+        },
+        {
+          "exam_id": "d92d46e6-4cfb-5906-9d4b-0222005829c7",
+          "name": "2026학년도 경희대학교 모의논술 인문·체육계",
+          "questions": [
+            "274e99d5-ce53-5d53-9c72-997999bdece1",
+            "a6822ef0-a9b1-5030-9485-d30515016ad2"
+          ],
+          "revision": 1,
+          "student_pdf": "7547c2dafe071baeb92decca582a8f26293abc38c62aebb0bdc0b869f024b84c"
+        },
+        {
+          "exam_id": "dd7b238e-7faf-5341-b108-2a3798bc0637",
+          "name": "경희대학교 2027학년도 모의논술 사회계",
+          "questions": [
+            "2a4aa832-c6f1-541f-9f65-4c429368a324",
+            "c4146263-4505-5629-b7f4-66123c0306d4"
+          ],
+          "revision": 2,
+          "student_pdf": "43c0bb063fcd384c4a33a748cce1a82c071dd3a0c1fe5ddd3d6e43fb1dfdd804"
+        }
+      ],
+      "applied": true
+    },
+    {
+      "name": "continuous-social",
+      "sql_path": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/group-1a-20261025/continuous-social/owner-sql",
+      "policy": "essay_khu_social_question_read",
+      "exams": [
+        {
+          "exam_id": "cdb8af01-361c-5055-9fa9-395271aa923b",
+          "name": "2022학년도 경희대학교 수시논술 사회계 오전",
+          "questions": [
+            "15928832-92d4-511d-b895-c36a1b994899",
+            "4ebaa384-3f92-57d4-80ee-216f2c6d2947",
+            "74defbf7-9abe-5ccf-ade7-706fb3339563"
+          ],
+          "revision": 1,
+          "student_pdf": "46e404de5fdc9070862438f1b2a83aa394f49f1ad2021f7e6e34a1d1a0ea4cc9"
+        },
+        {
+          "exam_id": "2dedfad1-cfe1-53e9-8a3f-502e09c61541",
+          "name": "2022학년도 경희대학교 수시논술 사회계 오후",
+          "questions": [
+            "0542d26b-a453-50d9-94c5-1bc8fddae3d3",
+            "504a4b98-14fc-5f4a-847f-2cbfaceb32d9",
+            "8706ccfc-ba1f-54d4-823c-f0308c145a9e"
+          ],
+          "revision": 1,
+          "student_pdf": "9be65070de8be5cdac9d44e549c2dbeca86dc5c33d61a10a0e6d57e4d6e1927e"
+        },
+        {
+          "exam_id": "6e2d4a41-c9f9-5f1d-81d2-404116c544a4",
+          "name": "2022학년도 경희대학교 모의논술 사회계",
+          "questions": [
+            "645d59a2-d8f3-5765-ab10-8dd3b73e0795",
+            "9606fd8f-ab33-5036-888b-6aa2235521ff",
+            "994e220e-2777-5209-99df-0fcb1ca4abbd"
+          ],
+          "revision": 1,
+          "student_pdf": "901a08b3c970031bc9e5be97f8f98d01963767000e2af3bddf74374596f6e48f"
+        },
+        {
+          "exam_id": "12e7dcbe-718b-549c-910c-811696bf10c9",
+          "name": "2023학년도 경희대학교 수시논술 사회계 오후",
+          "questions": [
+            "5adf4fcd-a227-54ea-892e-9477256e78d3",
+            "836fabdf-2003-5ebb-a769-aea3bb578f2b",
+            "9bd293c0-91fc-566c-97d3-54b520ec3f44"
+          ],
+          "revision": 1,
+          "student_pdf": "03f5abfb0564cc9911b86b07678fdb3b06064d5378a1e9c0d48b12ea0781ebe9"
+        },
+        {
+          "exam_id": "fb4fd9a8-5b2d-5bd2-b225-484954c7f8e6",
+          "name": "2023학년도 경희대학교 모의논술 사회계",
+          "questions": [
+            "0ba1c845-788a-5857-8135-f92148660000",
+            "a9c4ef49-d452-5323-850f-d67ed4b26678",
+            "ec326a57-d051-5c90-9134-dd5c2745d692"
+          ],
+          "revision": 1,
+          "student_pdf": "9f0e3c7c5b16064d85327ed4e529efecbfb63cd085aee0847b74c97b56bcd52d"
+        },
+        {
+          "exam_id": "e47ca1c1-af30-5e1c-87f6-34de776c4a92",
+          "name": "2024학년도 경희대학교 수시논술 사회계",
+          "questions": [
+            "130ac85c-cf60-59df-a784-5e070bcc27d7",
+            "1d2e8199-1805-56ce-8e50-c94fdeae55af",
+            "8da98e9f-ca6c-5d51-ae47-815e77c49733"
+          ],
+          "revision": 1,
+          "student_pdf": "be681462877ed0e318c6d9443a7a1cc1a8e3e5b5e9da2d0c75c055089bb89ebd"
+        },
+        {
+          "exam_id": "7667ab3b-8599-5485-a2ae-51d550b93413",
+          "name": "2024학년도 경희대학교 모의논술 사회계",
+          "questions": [
+            "b00f1247-4381-5d63-8028-36e5e6ec3148",
+            "c46e3d2a-c99d-5a8e-88de-e7e526a2970a",
+            "df8c3f27-37af-570e-806c-dbf4b2c74445"
+          ],
+          "revision": 1,
+          "student_pdf": "2c9be3354d1416915f92771c9a1bf4b3d8d5f1d5ba4af1fb8a1037bb1d0d632f"
+        },
+        {
+          "exam_id": "0b3faf34-a53d-5a9e-8ffd-c270783f4d26",
+          "name": "2025학년도 경희대학교 논술 사회계 11월 17일 오후",
+          "questions": [
+            "15154488-55c3-52d2-a581-655fa60ee881",
+            "7cbe5bd6-0215-5b7e-97a9-43f3fb77caae",
+            "f33839ba-8d6b-57d8-a4b6-29fc5fa6e0cf"
+          ],
+          "revision": 1,
+          "student_pdf": "c370cd42f0a921c0bfd81d06db8579738a54597f9cd848333a5c5d95bf2092e1"
+        },
+        {
+          "exam_id": "16f86daa-e01a-5691-b5f1-a7c8c286608f",
+          "name": "경희대학교 2026학년도 수시 논술 사회계",
+          "questions": [
+            "5416be3c-6d69-5426-b9ab-2a65c21d9c14",
+            "bbf32b17-3152-5bc9-93e2-bead7f497bac",
+            "c1860307-b3af-5510-9d23-8ecde5a6ec32"
+          ],
+          "revision": 2,
+          "student_pdf": "dd466389dc079f12cc9d9722616e4d14fea18fae0d40e4d375c71aaf409f5f44"
+        },
+        {
+          "exam_id": "bc77b204-e68e-52e4-be6b-94544ec14932",
+          "name": "2026학년도 경희대학교 모의논술 사회계",
+          "questions": [
+            "84d53769-553c-5f08-892d-fc932acd96f7",
+            "ab767366-a986-55dc-bec3-d5ed43d4bbb7",
+            "d52e349a-6afb-5e66-b333-24959de05a64"
+          ],
+          "revision": 1,
+          "student_pdf": "b34b3baaa9f45c44db56e8631d62bd8b7dabcc9437752ccf6ed0b97246725fd4"
+        }
+      ],
+      "applied": true
+    },
+    {
+      "name": "continuous-skku/batch-a",
+      "sql_path": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/group-1a-20261025/continuous-skku/batch-a/owner-sql",
+      "policy": "essay_skku_language_a_read",
+      "exams": [
+        {
+          "exam_id": "1215710d-423e-5120-8dcd-5dfac97c13ce",
+          "name": "2022학년도 성균관대학교 수시논술 언어형 1교시",
+          "questions": [
+            "03f08657-e5dd-5e6b-b4ec-dfeec8a601d8",
+            "6d82773b-a93d-5a91-bf87-b834c11d8138",
+            "9fb959c8-23e4-5366-bcc1-44c2abcb4371"
+          ],
+          "revision": 1,
+          "student_pdf": "06f5321a9b4f4607f07dd11d0c9c23c8e5d9393982bcf6e4f94c3403dda44465"
+        },
+        {
+          "exam_id": "f810243f-78b2-5788-bd32-390ab88b014a",
+          "name": "2022학년도 성균관대학교 수시논술 언어형 2교시",
+          "questions": [
+            "5379cece-4c21-5ff9-81e3-349aa8914503",
+            "8365da1a-5c67-5f53-8c51-f104f8f249da",
+            "9a549ecc-31c1-5fdc-9f3b-5b777df4f4bf"
+          ],
+          "revision": 1,
+          "student_pdf": "3e1f2369ad6097c0e84d105a0f697211e800eafbdcb3495b0501fd1f65749ed1"
+        },
+        {
+          "exam_id": "c93b8d24-708d-574b-834a-ed2005c2b1ad",
+          "name": "2022학년도 성균관대학교 수시논술 언어형 3교시",
+          "questions": [
+            "473001a8-a130-51d2-a4c1-e8d248813951",
+            "4c84888c-0d3a-58b0-ab25-24e72bef107c",
+            "8101380e-93b2-5b14-abf8-971ac7df6bce"
+          ],
+          "revision": 1,
+          "student_pdf": "f4eb3cf1d86a6ef309637d60a6d4de588fef712870d33c75908dd3b0c307fc55"
+        },
+        {
+          "exam_id": "33e83d06-171f-552a-b205-296c5bdcb2e6",
+          "name": "2022학년도 성균관대학교 모의논술 언어형 ",
+          "questions": [
+            "32c3ba82-0b36-5cbb-aaab-64dad9eb1b69",
+            "66785a9a-c073-52af-aaa3-f15031cf7ea6",
+            "d860dd75-255c-5c88-a216-973dea9f916b"
+          ],
+          "revision": 1,
+          "student_pdf": "5d4011c69a37a051c36c9244b9fc7fc3a58cc32e7eaa2e475229435d1e449c64"
+        },
+        {
+          "exam_id": "f60dfe3a-efae-565e-9b0d-7d34f8a638e8",
+          "name": "2023학년도 성균관대학교 수시논술 언어형 1교시",
+          "questions": [
+            "08509adf-246d-52da-ad89-f2cc1f33a7d7",
+            "ca9d3395-ce39-5530-9f39-013a7ae044eb",
+            "deeb8daf-33f1-57a2-8fbd-8e8d6a34c7c5"
+          ],
+          "revision": 1,
+          "student_pdf": "75f2d9e649defe32701f9eac41133a07c1a6e275b1c987cab874a5f941007884"
+        },
+        {
+          "exam_id": "2ef0cf80-41f6-5b6c-a6f8-344c1b8d5ff6",
+          "name": "2023학년도 성균관대학교 수시논술 언어형 2교시",
+          "questions": [
+            "4a1a05ec-ae6d-596a-8143-943cc3012ca9",
+            "58e78789-e834-5c4a-b6dd-04aaa0379aa9",
+            "70766410-79e1-51b7-a3e2-13239071fb1b"
+          ],
+          "revision": 1,
+          "student_pdf": "1a6c753e6355d847589cacba56b289d24b3c09b24a20851d7af1b29529d44910"
+        },
+        {
+          "exam_id": "b40ede85-d48c-5ec2-9303-4848b3bd816b",
+          "name": "2023학년도 성균관대학교 모의논술 언어형 ",
+          "questions": [
+            "5b5aba24-9c85-55ce-97d4-76312494c8a8",
+            "e85c6735-91cc-5e4a-aabe-51facbf49140",
+            "f51d1900-d041-5403-9bdb-9e49c18b53f8"
+          ],
+          "revision": 1,
+          "student_pdf": "1bb112f7223e9513fd520434f681db37a6d8af522ef008980d9492e4833bbc31"
+        }
+      ],
+      "applied": true
+    },
+    {
+      "name": "continuous-skku/batch-b",
+      "sql_path": "/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/group-1a-20261025/continuous-skku/batch-b/owner-sql",
+      "policy": "essay_skku_language_b_read",
+      "exams": [
+        {
+          "exam_id": "1953f0b7-9321-500d-be9b-c7c8bc50257a",
+          "name": "2024학년도 성균관대학교 수시논술 언어형 1교시",
+          "questions": [
+            "1fd63fe5-7926-5e2b-bb83-840a2fafb5cc",
+            "73f944ab-28ba-5d52-ba09-87a67f701873",
+            "c2198cb9-1f78-5391-80d0-1809fd1180e4"
+          ],
+          "revision": 1,
+          "student_pdf": "a1111f52838e1623081aa12b6ad5421238f367638f07434a2ae8a4322e966119"
+        },
+        {
+          "exam_id": "cda0ed2d-21a7-59d7-b856-25f7f6e8b310",
+          "name": "2024학년도 성균관대학교 수시논술 언어형 2교시",
+          "questions": [
+            "3fc8ca7b-3273-5a70-828f-a1d772f9d48d",
+            "d8963391-fa80-532c-bccf-bb23db79e516",
+            "e0ebf953-0479-5e89-acfd-3b10a65f8eb2"
+          ],
+          "revision": 1,
+          "student_pdf": "720818357a84780f6f104af233ada057d483d00d23fda4ceb607ebc4f51afb2c"
+        },
+        {
+          "exam_id": "e15a43a8-5a50-501a-8a60-a632316240e8",
+          "name": "2025학년도 성균관대학교 논술 언어형 1교시",
+          "questions": [
+            "60675867-2eb6-56ca-94cd-69700254473d",
+            "69057251-f2a5-550a-a5f9-0e9daf11e204",
+            "8513f154-49ee-550f-8e42-3cc5cd600c27"
+          ],
+          "revision": 1,
+          "student_pdf": "787f34552b9582b565f8c40f2f006e99be73ff65dc7a23656836223915ff7194"
+        },
+        {
+          "exam_id": "306ac6e2-572a-59f1-bf2f-cb0394ec04f1",
+          "name": "2025학년도 성균관대학교 논술 언어형 2교시",
+          "questions": [
+            "4b29bf40-eddf-5dd9-8252-385fc5318dcb",
+            "8a198ecd-dc22-545d-80ff-7ef5cfaf261f",
+            "c9e13788-ebe1-5598-92cd-784c2f85315a"
+          ],
+          "revision": 1,
+          "student_pdf": "7cbf3638fd1e7d53ce11e2cbdff8bb92799d7719ac60128e8889ef46497cf9d5"
+        },
+        {
+          "exam_id": "ef67de3d-7c9f-505a-90dd-339a8658dc3a",
+          "name": "2025학년도 성균관대학교 모의논술 언어 논술",
+          "questions": [
+            "2d99ddee-421a-5294-b414-bd7cb5484dd4",
+            "f8051416-cc71-51f9-8dc7-ed191d56ee74",
+            "fe49a034-32a8-5673-bdf7-0f336583337a"
+          ],
+          "revision": 1,
+          "student_pdf": "bffaeaf054429cc8353be8c224805c21dc60bc15e11d36d7d758618b46eda13f"
+        },
+        {
+          "exam_id": "37c78d49-42bd-5c3d-8f17-4e39da312a02",
+          "name": "2026학년도 성균관대학교 모의논술 언어형 ",
+          "questions": [
+            "2101a2fa-8229-5bd4-a292-dab388d97bc3",
+            "2d740cec-af91-5d7e-8021-6e48b8077017",
+            "925ab0b9-ccc8-54d1-8cc2-5401ca9ed1a3"
+          ],
+          "revision": 1,
+          "student_pdf": "8b6088407a91d56fea980634018c630388fd85c4b2b4862f33fc45461f214530"
+        }
+      ],
+      "applied": true
+    }
+  ],
+  "provider_calls": 0,
+  "owner_qa": "PENDING"
+}

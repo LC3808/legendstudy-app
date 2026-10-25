@@ -21,12 +21,15 @@ def assemble(root, manifest_path, output):
     rows=read(manifest_path)
     registry=deepcopy(read(root/'text-expansion/central-worker-registry.private.json'))
     active={e['id'] for e in read(root/'continuous-inventory.private.json')['exams'] if e['runtime']}
-    packages, reports={},[]
+    packages=read(output/'packages.private.json') if (output/'packages.private.json').exists() else {}
+    reports=[]
     for row in rows:
         if row['examId'] in active:
             reports.append(dict(exam_id=row['examId'],status='PRESERVED_ACTIVE')); continue
         if row['parent_count']!=2:
             reports.append(dict(exam_id=row['examId'],status='SUBANSWER_CONNECTION_PENDING')); continue
+        if row['examId'] in packages:
+            reports.append(dict(exam_id=row['examId'],status='INPUT_CONNECTED_NOT_DEPLOYED',question_count=len(packages[row['examId']]['questions']),reused=True,provider_calls=0));continue
         try:
             qd,sd=docs[row['question_source_hash']],docs[row['official_source_hash']]
             qt,st='\n'.join(qd['pages']),'\n'.join(sd['pages'])
@@ -36,8 +39,14 @@ def assemble(root, manifest_path, output):
             intents=list(re.finditer(heading+r'(?:출제\s*의도|문항\s*해설)',st))
             scores=list(re.finditer(heading+r'채점\s*기준',st))
             examples=list(re.finditer(heading+r'예시\s*답안',st))
+            shared_explanation=None
             if len(scores)!=2 or len(examples)!=2:
-                raise ValueError('COMMON_PROFILE_SCOPE_CONNECTION_REQUIRED')
+                # Older official mock booklets use one exam-wide explanation,
+                # not two per-question scoring chapters. Reuse its literal task
+                # requirements and explanation; never invent numeric rubrics.
+                shared=re.search(heading+r'문항\s*해설',st)
+                if row['kind']!='mock' or not shared:raise ValueError('OFFICIAL_EXPLANATION_REQUIRED')
+                shared_explanation=(shared.end(),len(st))
             e=next((e for e in registry['exams'] if e['examId']==row['examId']),None)
             if e is None:
                 e={k:row[k] for k in ('examId','universityId','year','kind','track','name','session','campus','questions','sourceHashes')}
@@ -52,6 +61,19 @@ def assemble(root, manifest_path, output):
                 prompt_match=re.search(r'\[\s*논제\s*'+numeral+r'\s*\]\s*(.*?)\[([^\[\]]*(?:배점|자\s*이하)[^\[\]]*)\]',qt,re.S)
                 if not prompt_match: raise ValueError('EXACT_PROMPT_SPAN_REQUIRED')
                 prompt=prompt_match.group(0)
+                if shared_explanation is not None:
+                    a,b=shared_explanation
+                    def page_at(d,pos):
+                        offset=0
+                        for i,text in enumerate(d['pages'],1):
+                            offset+=len(text)+1
+                            if pos<offset:return i
+                        return len(d['pages'])
+                    refs=[]
+                    for role,text,d,start,end in [('question',prompt,qd,prompt_match.start(),prompt_match.end()),('shared_passage',qt,qd,0,len(qt)),('intent',st[a:b],sd,a,b),('criteria',prompt,qd,prompt_match.start(),prompt_match.end())]:
+                        refs.append(dict(questionId=q['id'],sourceHash=d['sha256'],startPage=page_at(d,start),endPage=page_at(d,end-1),role=role,verification='VERIFIED',evidenceText=text.strip()))
+                    p['questions'].append(dict(question_id=q['id'],source_key=q['sourceKey'],source_page_references=refs,criteria_basis='OFFICIAL_TASK_REQUIREMENTS_WITH_EXAM_EXPLANATION',numeric_rubric_inferred=False))
+                    continue
                 score=scores[n]; example=next((m for m in examples if m.start()>score.end()),None)
                 if example is None: raise ValueError('OFFICIAL_SCORING_END_REQUIRED')
                 scoring=st[score.end():example.start()].strip()
@@ -67,7 +89,7 @@ def assemble(root, manifest_path, output):
                 body=window[content.end():]
                 boundary=re.search(r'※|<\s*예시\s*답안|'+heading+r'예시\s*답안',body)
                 if boundary:body=body[:boundary.start()]
-                criteria=[s.strip() for s in re.split(r'[①②③④⑤⑥⑦⑧⑨⑩⓸]',body)[1:] if len(s.strip())>=15]
+                criteria=[s.strip() for s in re.split(r'[①②③④⑤⑥⑦⑧⑨⑩⓸]|(?<![0-9])\d\)',body)[1:] if len(s.strip())>=15]
                 if not criteria: raise ValueError('OFFICIAL_CRITERIA_SPANS_REQUIRED')
                 intent_candidates=[m for m in intents if (scores[n-1].end() if n else 0)<m.start()<score.start()]
                 if not intent_candidates: raise ValueError('EXACT_INTENT_SPAN_REQUIRED')
@@ -100,6 +122,13 @@ def assemble(root, manifest_path, output):
             reports.append(dict(exam_id=row['examId'],status='INPUT_CONNECTED_NOT_DEPLOYED',question_count=len(hosted),provider_calls=0))
         except ValueError as error:
             reports.append(dict(exam_id=row['examId'],status='CONNECTION_PENDING',reason=str(error)))
+    for row in rows:
+        if row['examId'] not in packages:continue
+        existing=next((e for e in registry['exams'] if e['examId']==row['examId']),None)
+        if existing is None:
+            registry['exams'].append({k:row[k] for k in ('examId','universityId','year','kind','track','name','session','campus','questions','sourceHashes')})
+        else:
+            existing['sourceHashes']=sorted(set(existing['sourceHashes'])|set(row['sourceHashes']))
     output.mkdir(parents=True,exist_ok=True)
     (output/'packages.private.json').write_text(json.dumps(packages,ensure_ascii=False))
     (output/'registry.private.json').write_text(json.dumps(registry,ensure_ascii=False))

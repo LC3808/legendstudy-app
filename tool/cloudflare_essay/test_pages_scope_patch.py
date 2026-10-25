@@ -30,7 +30,7 @@ class PagesScopePatchTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             public_scope_patch(current, ['not-a-uuid'])
         with self.assertRaisesRegex(ValueError, 'CURRENT_RUNTIME_SCOPE_LIMIT'):
-            public_scope_patch(current, [str(UUID(int=i)) for i in range(1, 44)])
+            public_scope_patch(current, [str(UUID(int=i)) for i in range(1, 66)])
 
 
 if __name__ == '__main__':
