@@ -19,8 +19,14 @@ class Default(WorkerEntrypoint):
         require(getattr(self.env,'ESSAY_MIXED_SESSION_ENABLED','false')=='true','MATH_CHILD_UNAVAILABLE')
         secret=getattr(self.env,'ESSAY_WORKER_SERVICE_TOKEN','')
         require(len(secret)>=32,'MATH_CHILD_UNAVAILABLE')
-        return json.loads(await fetch_bytes('https://lab.legendstudy.com/api/essay/math-session',
-            {'Content-Type':'application/json','X-Essay-Service-Token':secret},json.dumps(payload),timeout=110,limit=1500000))
+        try:
+            # global_fetch_strictly_public routes this call to Pages (not the zone origin).
+            # Authentication and the parent-lease fence still apply on this route.
+            return json.loads(await fetch_bytes('https://lab.legendstudy.com/api/essay/math-session',
+                {'Content-Type':'application/json','X-Essay-Service-Token':secret},json.dumps(payload),timeout=110,limit=1500000))
+        except HTTPError as error:
+            print('MATH_CHILD_HTTP_STATUS '+str(error.code))
+            raise
 
     def transport(self):
         return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,

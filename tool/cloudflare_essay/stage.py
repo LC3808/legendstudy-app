@@ -35,7 +35,7 @@ def main():
  (target/'package.json').write_text(json.dumps({'private':True,'devDependencies':{'wrangler':'4.150.0'}})+'\n')
  (target/'pyproject.toml').write_text('[project]\nname="legendstudy-essay-worker"\nversion="0.1.0"\nrequires-python=">=3.13"\ndependencies=[]\n[dependency-groups]\ndev=["workers-py==1.17.7", "workers-runtime-sdk==1.9.3"]\n')
  (target/'wrangler.jsonc').write_text(json.dumps({'name':'legendstudy-essay-reviewed','main':'src/entry.py',
-  'compatibility_date':'2026-10-13','compatibility_flags':['python_workers'],'workers_dev':False,
+  'compatibility_date':'2026-10-13','compatibility_flags':['python_workers','global_fetch_strictly_public'],'workers_dev':False,
   'vars':{'ESSAY_EXECUTION_ENABLED':'false'},'observability':{'enabled':False},
   'queues':{'producers':[{'binding':'ESSAY_QUEUE','queue':'legendstudy-essay-exams'}],
     'consumers':[{'queue':'legendstudy-essay-exams','max_batch_size':1,'max_retries':3,'dead_letter_queue':'legendstudy-essay-exams-dlq'}]},

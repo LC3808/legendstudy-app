@@ -6,6 +6,20 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from essay_lab.prepare_standby_connection_sql import prepare
 
+def math_content_sql(rows):
+    quote=lambda v:"'"+str(v).replace("'","''")+"'"
+    sql=''
+    for row in rows:
+        p=row['profile'];c=row['criteria'][0];s=row['source'];dims="array['logical_development','computation_accuracy','final_conclusion']::text[]"
+        sql+=f"insert into public.math_problem_sets(id,essay_exam_id,logical_id,version,label,state) values({quote(row['problem_set_id'])},{quote(row['exam_id'])},{quote(row['problem_set_id'])},1,{quote(row['name'])},'ACTIVE');\n"
+        sql+=f"insert into public.math_problems(id,problem_set_id,logical_id,version,display_order,statement,state) values({quote(row['problem_id'])},{quote(row['problem_set_id'])},{quote(row['problem_id'])},1,1,{quote(row['statement'])},'ACTIVE');\n"
+        sql+=f"insert into public.math_subproblems(id,problem_id,leaf_key,display_order,statement,response_format,essay_question_id) values({quote(row['leaf_id'])},{quote(row['problem_id'])},'whole-question',0,{quote(row['statement'])},'FULL_SOLUTION',{quote(row['question_id'])});\n"
+        resource=quote(s['resource_id'])+'::uuid' if s['resource_id'] else 'null'
+        sql+=f"insert into public.math_source_artifacts(id,problem_id,resource_id,source_role,source_url,locator,provenance,verification,content_sha256) values({quote(s['id'])},{quote(row['problem_id'])},{resource},'SCORING',{quote(s['source_url'])},{quote(s['locator'])},'OFFICIAL','HASH_VERIFIED',{quote(s['content_sha256'])});\n"
+        sql+=f"insert into public.math_scoring_criteria(id,leaf_id,source_id,criterion_key,description,official_points,rubric_dimensions) values({quote(c['id'])},{quote(row['leaf_id'])},{quote(s['id'])},{quote(c['criterion_key'])},{quote(c['description'])},null,{dims});\n"
+        sql+=f"insert into public.math_evaluation_profiles(id,logical_id,version,scope,essay_exam_id,response_format,rubric_version,required_dimensions,optional_dimensions,reasoning_required,state) values({quote(p['id'])},{quote(p['logical_id'])},1,'EXAM',{quote(row['exam_id'])},'FULL_SOLUTION','math-rubric-v1',{dims},'{{}}',true,'DRAFT');select math_private.activate_profile({quote(p['id'])});\n"
+    return sql
+
 def build(root,app):
     out=root/'owner-sql'
     prepare(root,root/'manifest.json',root/'assets.private.json',out,'hanyang_mixed_20261026_problem_read')
@@ -19,15 +33,7 @@ def build(root,app):
     sql+=additions
     rows=json.loads((root/'math-content.private.json').read_text())
     if len(rows)!=8:raise ValueError('EXACT_EIGHT_EXAMS_REQUIRED')
-    for row in rows:
-        p=row['profile'];c=row['criteria'][0];s=row['source'];dims="array['logical_development','computation_accuracy','final_conclusion']::text[]"
-        sql+=f"insert into public.math_problem_sets(id,essay_exam_id,logical_id,version,label,state) values({quote(row['problem_set_id'])},{quote(row['exam_id'])},{quote(row['problem_set_id'])},1,{quote(row['name'])},'ACTIVE');\n"
-        sql+=f"insert into public.math_problems(id,problem_set_id,logical_id,version,display_order,statement,state) values({quote(row['problem_id'])},{quote(row['problem_set_id'])},{quote(row['problem_id'])},1,1,{quote(row['statement'])},'ACTIVE');\n"
-        sql+=f"insert into public.math_subproblems(id,problem_id,leaf_key,display_order,statement,response_format,essay_question_id) values({quote(row['leaf_id'])},{quote(row['problem_id'])},'whole-q2',0,{quote(row['statement'])},'FULL_SOLUTION',{quote(row['question_id'])});\n"
-        resource=quote(s['resource_id'])+'::uuid' if s['resource_id'] else 'null'
-        sql+=f"insert into public.math_source_artifacts(id,problem_id,resource_id,source_role,source_url,locator,provenance,verification,content_sha256) values({quote(s['id'])},{quote(row['problem_id'])},{resource},'SCORING',{quote(s['source_url'])},{quote(s['locator'])},'OFFICIAL','HASH_VERIFIED',{quote(s['content_sha256'])});\n"
-        sql+=f"insert into public.math_scoring_criteria(id,leaf_id,source_id,criterion_key,description,official_points,rubric_dimensions) values({quote(c['id'])},{quote(row['leaf_id'])},{quote(s['id'])},'official-q2',{quote(c['description'])},null,{dims});\n"
-        sql+=f"insert into public.math_evaluation_profiles(id,logical_id,version,scope,essay_exam_id,response_format,rubric_version,required_dimensions,optional_dimensions,reasoning_required,state) values({quote(p['id'])},{quote(p['logical_id'])},1,'EXAM',{quote(row['exam_id'])},'FULL_SOLUTION','math-rubric-v1',{dims},'{{}}',true,'DRAFT');select math_private.activate_profile({quote(p['id'])});\n"
+    sql+=math_content_sql(rows)
     definitions=json.loads((root/'functions.private.json').read_text())
     for name in ['essay_exam_submit','essay_exam_submit_cycle']:
         definition=next(r['definition'] for r in definitions if r['signature'].startswith(name+'('))
