@@ -682,3 +682,7 @@ Owner WEB MY 지시는 [기존 MY 공통 기반](my-shared-foundation.md)과 [�
 ### 2026-10-25 — 성장 그래프 후속 표시 결정
 
 위 WEB MY 결정의 후속 Owner 지시: 성장 변화는 최초·최근 세로 막대로 표시하고 평가 항목1/2 대신 저장된 평가 기준의 정확한 의미를 담은 명칭을 사용한다. 짧은 원래 제목은 보존하고 긴 평가 질문은 근거 있는 표시 별칭으로만 요약한다. 문항별 기준을 획일적인 역량명으로 바꾸거나 원본 평가/점수를 수정하지 않는다. 화면·PNG 동일 규칙.
+
+## 2026-10-25 — 통합 WEB 마무리 범위
+
+기존 회차1Credit·원래 문항 집합 무료재첨삭 정책을 유지한다. MY 목표는 프로필 내부 통합, 공유는 레이아웃을 밀지 않는 패널. 관리자 auth계정/profile·legacy문항/회차·게시플래그/실행승인·TEST/LIVE 지표를 구분한다. 기존 [PHASE3 결정](phase3-service-20261022.md#2026-10-25-web-통합-배포-및-집계-정정)에 연결하며 APP 코드·신규 대학·엔진·결제 변경은 범위 밖. [Owner 통합 지시와 실제 증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/integrated-release-20261025/README.md).

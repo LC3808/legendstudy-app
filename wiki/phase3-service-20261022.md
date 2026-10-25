@@ -190,3 +190,9 @@ Owner P0 실행 승인에 따라 기존 성공 E2E를 반복하지 않고 건국
 보존 검토7과 상세 검증은 [WEB 기록](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/my-redesign.md). 기존 [MY 공통 저장 기반](my-shared-foundation.md), [장기 데이터 전략](longitudinal-learning-admissions-data-strategy.md), [Owner 결정](decisions.md#2026-10-25--web-my-표시와공유-범위)을 유지한다. Typecheck/Lint/build/boundary PASS. 전체1249PASS/기존catalog6FAIL/빈suite1, 최종관련49PASS/2skip. 실제400/500px 조회/프로필편집취소/clipboard/PNG다운로드 확인; 신규운영쓰기·Provider0. APP 실제 저장동기화·넓은PC 재검수 미수행. 관리자dashboard12/directory13 GAP, 양수만료수량은 현재계정이없어 단위검사만. 전체 평가서비스 품질보류/LIVE OFF 해소를 의미하지 않는다.
 
 후속 Owner 요청: WEB651479b/운영eba32637은 성장 비교와PNG를 세로 막대로 변경하고 실제 기준명 의미를 보존한 제목을 사용한다. 번호 fallback 제거, 확인된19항목 실계정/1752px 및PNG렌더 PASS. 관련90PASS/2skip·타입·린트·빌드 PASS. 기존7가지 보존 검토 유지(표시전용/원본수정0). [결정](decisions.md#2026-10-25--성장-그래프-후속-표시-결정).
+
+## 2026-10-25 WEB 통합 배포 및 집계 정정
+
+WEB `e5106e3` / Production `f73a03d0-6fa7-4969-9e93-d099fb513a1c` canonical API 확인. Essay Worker17b3bd65 유지, Math는 같은 WEB Pages Functions. MY 목표 통합·공유 팝오버·공통 관리자 디자인 반영. Owner가 추가 조회 RPC 적용, 실화면 회원13/profiles12·인문30회·실행승인10시험12문항 확인. 0건 원인은 legacy 단일문항 집계 누락, 공개0은 is_published와 runtime scope 차이. 관련244PASS/3skip·타입/Lint/boundary/buildPASS. 기존 catalog6FAIL+빈suite, 신규 실운영 다문항Math·Native실기기 미검증은 남김. Provider/과금/Secret/APP코드 변경0. 롤백WEB eba32637; Worker 과거 단일문항 버전 rollback 금지.
+
+[Owner 지시·7개 보존 검토·12시나리오 검증 범위·복구](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/integrated-release-20261025/README.md). 기존 MY/회차 정책을 재사용하며 신규 대학과 Native UI는 다음 Owner 지시를 기다린다.
