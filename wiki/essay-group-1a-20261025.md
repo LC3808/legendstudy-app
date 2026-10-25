@@ -194,3 +194,17 @@ Worker `4e90d13b-763b-47a3-8d04-0648fb76608d`(registry_asset.py만 변경, 기�
 `text-expansion/central-owner-sql/`의 네SQL·README, central-storage-result/central-production-postcheck/central-sql-isolation-result/central-worker-version/central-web-deployment.json에 현재 증거 보존. 이미 적용한3+10회차 SQL재실행금지. DBrollback은 해당신규case·PDF정책만제거하고review/revision/결과/원본보존. 중앙확대 직전WEB1455ed8b/Workerc9470a54로복구가능하며 공개목록은 해당10개만제거. 학생요청을 새예약으로우회하지않는다.
 
 남은 중앙12회차는 수리/혼합 답안단위·기존Math회차연결, 성균12/경희15는 빈Registry/자료정확연결/수리·혼합계약으로 구분해 이어간다. 대표Provider실행을 공개상한으로 삼지 않는다. 이번후속Provider0/추가평가비용0, 기존15영수증비용NULL은미확정유지.
+
+## 2026-10-25 대학 카드 공개 상태 안정화
+
+Owner가 새로고침마다 카드 활성/비활성 전환을 보고했다. 원인: 기존 `/api/essay/service-status`는 공개22시험마다 Worker admission을 호출하고, 브라우저는42대학 metadata를 다시 조회했다. 로딩/HTTP실패/checked=false/metadata실패가 모두 빈Set으로 합쳐져 준비중으로 표시됐다. focus중복요청의 순서보호도 없어 늦은 이전응답이 최신상태를 덮을 수 있었다.
+
+운영근거(KST21:30–21:38): Worker집계 success82/clientDisconnected6/scriptThrewException4/exceededResources3. tail21:36:07,21:37:22,21:37:24 admission ErrnoError 확인. 이번 tail에서 `Cannot enter a promising task` 원문 재현은 없으며 이전 오류와 동일원인이라고 단정하지 않는다. Supabase해당12:30–12:45UTC창의 essay/math조회는 수집된범위 모두200; 429/5xx증거없음. Worker종료·시간초과/클라이언트취소·자원초과는 구분하며 HTTP429로 추정하지 않는다.
+
+수정: 카드전용 `/api/essay/public-service-status`에서 기존 서버 ESSAY_PUBLIC_EXAMS와 Math공개정책을 기존공개metadata RPC로 대조하여 대학ID목록을 한 응답으로 반환한다. 클라이언트1요청, 서버Auth/기존Math조회+최대42대학메타데이터조회; DB일괄RPC를새로만든것은아님. PythonWorker/Provider/quote/submit/정산 호출0. 공개정책목록22개불변. 카드공개와 실제평가승인은 분리; 기존exam/Worker/DB권한·Credit검사는 제출시 그대로 수행한다. 기존관리자 runtime 집계endpoint 의미는 바꾸지 않았다.
+
+상태4종: 확인중/첨삭시작/준비중/일시오류·다시시도. 잘못된응답/정책누락metadata/20초timeout/조회실패를준비중으로처리하지않는다. focus자동중복조회제거, 재시도·계정변경·unmount시 이전요청취소와active세대확인. 계정간응답역전/오류복구 테스트 포함41PASS, TypeScript/135경로buildPASS.
+
+WEB commit b3a1c6dd7120459dd1e4f2a3dcb8bf0be16bce74, Production ad522cdf-1bbf-4961-827d-be1a1253b40f 성공확인. 일반계정 새로고침3회/타페이지왕복2회/목록2페이지왕복: 건국·경희·서울여·성균·숭실·중앙6대학 동일활성,1-A3대학보존. 로딩문구확인,잔액11유지. 오류UI는 자동테스트로검증했고 운영장애를인위적으로일으키지않음. 실제Provider0/차감0/SQL쓰기0/APP수정0/Worker배포0/Secret변경0.
+
+보존검토7: 기존발생시각불변; ID/원본정책재현; 학습History UPDATE0; 같은Auth identity검증; 공개표시와학습/금융사실분리; 신규개인정보/권한확대0; 카드공개표시를실제평가성공으로해석금지. Worker자원/초기화문제는 별도잔여이며 카드안정화가평가엔진장애완치를뜻하지않는다. 재발시카드endpoint503은오류UI, 평가Worker장애는기존요청/예약보존하여별도복구. 이전WEB497ea786으로롤백가능하지만 카드문제도복귀하므로정상수정본유지권장.
