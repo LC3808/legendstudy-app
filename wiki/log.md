@@ -4742,3 +4742,7 @@ Owner 미제출 문항 새회차1Credit·무료집합고정 확정. 회차 실�
 ## 2026-10-25 관리자 구매 정정 및 스토어 준비
 
 WEB8261d17/7ff387f2 배포·운영5행/모바일3건5크레딧 확인. Owner 읽기RPC 적용, Ledger불변. 구매잔액4=지급5-사용1. WEB관련102/APP구매12PASS, 양플랫폼설정검사PASS. 스토어콘솔로그인대기·업로드미실행. [상세](payment-app-foundation.md#2026-10-25-관리자-모바일-구매-집계-정정스토어-준비).
+
+## 2026-10-25 사용자 원장 표시 수정
+
+Owner빌드중단후 APP/WEB reserve/release숨김·동일decision consume합산·논술첨삭 표기. APP15/WEB80PASS(2skip),분석·타입·Lint·경계PASS. 잔액/정산/관리자원장불변. 빌드·배포미실행,로컬commit. [정책](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).

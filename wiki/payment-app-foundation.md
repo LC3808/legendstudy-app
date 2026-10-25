@@ -84,3 +84,15 @@ Restricted-account compensation: finance-only payment_compensate takes only serv
 과거 TEST-only/미적용 체크포인트는 당시 기록이다. 현재 Production IAP verify v23 ACTIVE, Google1건1크레딧·Apple2건4크레딧 지급 확인. 구매5중사용1로가용4. 웹 payment_orders는 Toss만 집계해 모바일이 빠졌다. Owner가 새 관리자 읽기 RPC를 적용했고 WEB8261d17/Production7ff387f2에서 모바일 집계/5행 페이지/한국어 예약·확정 표시 확인. 원장/지급함수/결제설정 변경0. 금액·통화·환경 저장이 없어 IAP매출은 추정하지 않는다. [SQL·보존7항·검증·rollback](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/admin-purchases-20261025/README.md).
 
 스토어 준비: 기존 ignored production config를 `--config`로 전달하여 양 플랫폼 wrapper --check PASS. 구매·크레딧4파일12테스트PASS. 최신 앱 소스의 Android서명설정 존재, iOS Auth.local.xcconfig 부재. 콘솔은Apple로그인/Play기존개발자계정전환 필요. 최신 배포번호/심사상태 미확인으로 업로드번호 확정·서명빌드·스토어 제출은 미실행. 기존1.0/build19,Android18과 실기기2026102401은 역사적 증거로 구분한다. 다음: 콘솔의현재버전→기존Auth설정 확인→중복없는번호의통합RC→기기검증→업로드. 새구매/수동지급/Secret교체 금지.
+
+## 2026-10-25 사용자 크레딧 내역 표시 정책
+
+Owner 추가지침: Android/iOS/WEB 사용자 거래 목록은 reserve/release를 표시하지 않는다. consume 확정은 동일 billing decision의 grant별 postings를 합쳐 `논술 첨삭 · -1 크레딧`처럼 실제 balance_delta 부호로 표시한다. 구매/지급/실제환불·회수/만료 내역은 보존한다. 예약은 가용잔액에 계속 반영하며 관리자Ledger 원본은 그대로 표시한다.
+
+APP은 owner RLS 조회에서 reserve/release를 제외한 뒤 최근50기록을 읽고, 선택한consume decision의 모든postings를 다시 읽어 페이지경계의 일부금액만 표시하지 않도록 한다. UI에서도 예약행을제외한다. WEB은 기존숨김/합산방식 유지,명칭·단위를APP과통일하고decision없는legacyconsume도유지한다. 잔액은기존credit_summary/credit-v1을소비하며내역으로재계산하지않는다. 대학·시험명은현재크레딧조회에없으므로추정표시하지않는다.
+
+보존검토: (1) 기존발생시각을표시하고새사실을기록하지않음; (2) immutable Ledger로재구성가능; (3) UPDATE/삭제없음; (4) 기존owner계정/RLS유지; (5) 금융사용내역이며Learning/Decision/Outcome를새로만들지않음; (6) 기존본인조회권한·보존기간불변/추가PII없음; (7) 합산은화면projection일뿐원장을대체하지않음.
+
+검증: APP구매/Credit15PASS·변경Dart analyze문제0; WEB관련80PASS/2skip·typecheck/Lint/boundaryPASS. 원장입력불변/다중grant합산/예약만있는경우/실제환불·회수/예약중잔액유지 확인. 실기기·운영배포는미실행. DB·Ledger·정산·관리자코드변경0.
+
+Owner가앞선조기빌드중단지시: Android1.0.1(20) 후보는이번수정이전산출물이므로업로드대상아님; iOS빌드중단/스토어업로드0. 현재스토어실측Android1.0.0(18)전체출시/iOS1.0(build19)배포준비됨. 모든앱수정을마친뒤새빌드·검증·업데이트한다. 이번수정은로컬commit이며push/CI·빌드·배포도보류한다.

@@ -1,8 +1,8 @@
 # Current Status
 
-## 2026-10-25 — WEB 관리자 구매 정정·스토어 준비
+## 2026-10-25 — 사용자 크레딧 내역 수정 (로컬)
 
-WEB8261d17/Production7ff387f2 운영확인. Owner 모바일 조회RPC 적용, IAP Google1건1+Apple2건4=3건5크레딧, 사용1후잔액4. Toss와분리·목록5행·예약/확정 한국어 표시. 관련102검사/타입/Lint/boundary/buildPASS, APP구매12검사PASS. 스토어 production config검사PASS, 콘솔로그인·최신빌드번호 확인대기. 기존 통합 MY/공유/admin 집계 완료 유지, Math실운영다문항·Native신규검증 미완료. [상세·복귀·스토어 잔여](payment-app-foundation.md#2026-10-25-관리자-모바일-구매-집계-정정스토어-준비).
+APP/WEB 예약·해제숨김/확정사용합산·논술첨삭 명칭통일. 잔액RPC·Ledger·관리자원장불변. APP15/WEB80검사PASS(2skip),analyze/typecheck/Lint/boundaryPASS. Owner지시로빌드·push·배포보류. 앞선Android20은수정전후보/사용금지,iOS중단·업로드0. 현재스토어Android18/iOS19확인. 기존WEB관리자8261d17/7ff387f2운영완료(모바일3건5지급/사용후4). [정책·검증·잔여](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
