@@ -1,5 +1,8 @@
 # Current Status
 
+마감·내일 재개: [Owner QA 대상·미완료·재실행 금지 SQL·복구](essay-handoff-20261025-final.md). 추가 개발 중단, Mac 종료는 Owner 담당.
+
+
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
 성균언어16회차 문제 확인 버튼 표시, 2025수시1교시 stale PDF승인행3개 수정·렌더 확인. 한양 준비된 인문13회차 STANDBY, 상경8회차는 수리 혼합 단일예약 경로 부재로 보류. 추가2025모의2회차 원본미확보. Provider/차감/APP빌드0·잔액10. WEB f5cebe5/Production d4037191, Worker238ab93f100%. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
