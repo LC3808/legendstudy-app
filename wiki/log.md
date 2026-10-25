@@ -4758,3 +4758,7 @@ Android/iOS 새 Release 빌드·기존 데이터 보존 설치/실행. Owner iPh
 MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·iOS IPA1.0.1(20) 빌드 PASS, 양 기기 재설치·실행 PASS. 상세 실제 거래/전체 시나리오는 미확인, 스토어 미제출.
 
 - 2026-10-25: APP MY복원코드/검증/양기기재설치이력확인후APP개발중단. 1-A READ-ONLY54시험131문항/전체회차승인0 확인,중앙기존139자료후보발견. [실행명세·APP UI보류](essay-group-1a-20261025.md). 신규SQL/배포/Provider0.
+
+- 2026-10-25: Owner SQL직접실행 추가승인. 성균2026언어1·2교시 전체6문항 revision3 적용,사후13true·기존Q1/과거조회/다른정책보존. WEB 일반공개/E2E미확인,Provider0. [실행·복구](essay-group-1a-20261025.md).
+
+- 2026-10-25 1-A 후속: 성균 두 회차 DB 전체연결·WEB PDF배포, 실제3문항 요청의 부분성공/품질차단/pending 발견. 문항별 큐 continuation13PASS 및 Worker e6ffbdb4 배포. 예약Credit/기존결과 보존, pending복구와 일반계정E2E 미완료. [상태·복구](essay-group-1a-20261025.md).

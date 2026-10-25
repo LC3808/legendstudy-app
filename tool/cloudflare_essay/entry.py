@@ -129,7 +129,12 @@ class Default(WorkerEntrypoint):
                     continue
                 t=self.transport();runtime=self.configuration(t)
                 state=await runtime.consume(json.loads(message.body))
-                if state=='reconciling':message.retry()
+                if state=='continue':
+                    # Durable question checkpoints make duplicate delivery safe.
+                    # Send before ACK so a lost enqueue never loses the exam.
+                    await self.env.ESSAY_QUEUE.send(message.body)
+                    message.ack()
+                elif state=='reconciling':message.retry()
                 else:message.ack()
             except Exception as error:
                 # Symbolic class only: messages/tracebacks may contain credentials.

@@ -83,4 +83,4 @@ class CloudflareExamRuntime:
             # Presentation only: verbatim reviewed summaries, no new score/evaluation.
             return '\n\n'.join(result['evaluation']['summary'] for result in results)
         return await execute_async_exam(questions=questions,journal=journal,build_worker=build,finalize=finish,
-            summarize=summarize,attempts=claim['attempts'])
+            summarize=summarize,attempts=claim['attempts'],max_new_questions=1)

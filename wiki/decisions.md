@@ -698,3 +698,8 @@ Owner가 새 iPhone 앱을 확인한 뒤 MY를 기존 UI/UX로 되돌리도록 �
 ## 2026-10-25 — APP 복원 후 1-A 시험 회차 우선
 
 Owner지정중앙·성균·경희의2022이후준비된인문/언어·수리·혼합형전체시험을대상으로한다. APP MY복원후UI/빌드/스토어중단. 첨삭결과UI원인은미확정으로기록하고3대학연결후Native기준일괄개선. 전체문항공식근거/입력을연결한회차를묶음공개하고부분문항성공을전체시험완료로보지않는다. 기존회차1/무료0Credit·기간·횟수·ID·History보존,Production SQL Owner직접실행. [실행명세](essay-group-1a-20261025.md).
+
+
+### 2026-10-25 — 1-A 작업의 Production SQL 직접 실행 승인
+
+Owner 추가 지시로 이번 1-A 작업은 Codex가 사전검사·격리검증·복구경로를 확보한 후 Production SQL까지 직접 실행한다. 기존 Owner 직접 적용 원칙의 이번 범위 예외이며, ID·Credit·Ledger·History·권한 보존과 APP UI/스토어 중단은 유지. [범위·실행 증거](essay-group-1a-20261025.md).

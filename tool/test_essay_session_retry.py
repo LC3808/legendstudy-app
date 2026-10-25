@@ -17,7 +17,7 @@ class Journal:
         self.rows[key]=dict(state='checkpoint',payload=deepcopy(value))
 
 class SessionRetryTests(unittest.IsolatedAsyncioTestCase):
-    def prepare(self,modes,journal,attempts,settled,lost=False):
+    def prepare(self,modes,journal,attempts,settled,lost=False,budget=None):
         questions=[];workers={};requests=[]
         for index,mode in enumerate(modes):
             worker,_,req,_,claim,_=fixtures.RuntimeTests().fixture(mode)
@@ -38,7 +38,7 @@ class SessionRetryTests(unittest.IsolatedAsyncioTestCase):
             if lost:raise Unknown()
             return 'completed'
         async def summary(results):return '\n\n'.join(q['evaluation']['summary'] for q in results)
-        async def run():return await execute_async_exam(questions=questions,journal=journal,build_worker=build,finalize=finish,summarize=summary,attempts=attempts)
+        async def run():return await execute_async_exam(questions=questions,journal=journal,build_worker=build,finalize=finish,summarize=summary,attempts=attempts,max_new_questions=budget)
         return run,requests
 
     async def test_failure_preserves_success_and_only_failed_question_reexecutes(self):
@@ -53,6 +53,28 @@ class SessionRetryTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(all(j.rows[k]==v for k,v in original.items()))
         self.assertEqual(len(settled[0]['result']['questions']),3)
         self.assertFalse(settled[0]['failed'])
+
+    async def test_bounded_delivery_preserves_success_and_advances_without_rebilling(self):
+        j=Journal();settled=[]
+        for index in range(4):
+            run,requests=self.prepare(['ok']*4,j,{},settled,budget=1)
+            self.assertEqual(await run(),'completed' if index==3 else 'continue')
+            self.assertEqual([len(r) for r in requests],[int(i==index) for i in range(4)])
+            self.assertEqual(len(settled),int(index==3))
+        run,requests=self.prepare(['ok']*4,j,{},settled,budget=1)
+        self.assertEqual(await run(),'completed')
+        self.assertEqual([len(r) for r in requests],[0]*4)
+        self.assertEqual(settled[0],settled[1])
+
+    async def test_bounded_failure_does_not_block_later_question_or_repeat_success(self):
+        j=Journal();settled=[]
+        for expected in ['continue','continue','retryable']:
+            run,_=self.prepare(['ok','invalid','ok'],j,{},settled,budget=1)
+            self.assertEqual(await run(),expected)
+        self.assertEqual(settled,[])
+        run,requests=self.prepare(['ok']*3,j,{'1':1},settled,budget=1)
+        self.assertEqual(await run(),'completed')
+        self.assertEqual([len(r) for r in requests],[0,1,0])
 
     async def test_unknown_does_not_dispatch_again_or_finalize(self):
         j=Journal();settled=[]

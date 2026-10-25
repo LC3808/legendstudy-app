@@ -6,7 +6,7 @@ from .live_worker import require,digest
 from .exam_runtime import ExamQuestionChannel
 from .reviewed_runtime import ReviewedRuntimeWorker
 
-async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize=None,attempts=None):
+async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize=None,attempts=None,max_new_questions=None):
     require(questions and len({q['questionId'] for q in questions})==len(questions),'INVALID_EXAM_QUESTION_SET')
     require(len({q['evaluationId'] for q in questions})==len(questions),'DUPLICATE_EXAM_CHANNEL')
     require(len(questions)==1 or callable(summarize),'EXAM_SYNTHESIS_REQUIRED')
@@ -14,7 +14,8 @@ async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize
     if final:
         if final['state']!='checkpoint':return 'reconciling'
         return await finalize(final['payload'])
-    results=[]; failures=False
+    require(max_new_questions is None or (type(max_new_questions) is int and max_new_questions>0),'INVALID_EXECUTION_BUDGET')
+    results=[]; failures=False; dispatched=0
     # Caller validates ALL evidence/claims and authorizes ALL workers before this loop.
     for index,q in enumerate(questions):
         attempt=0 if attempts is None else attempts.get(str(index),0)
@@ -47,6 +48,8 @@ async def execute_async_exam(*,questions,journal,build_worker,finalize,summarize
         elif reviewed and reviewed['state']=='checkpoint':channel.restore(completed(reviewed['payload']))
         elif saved:return 'reconciling' # Dispatch may have occurred. Never steal/retry.
         if not channel.claimed:
+            if max_new_questions is not None and dispatched>=max_new_questions:return 'continue'
+            dispatched+=1
             worker=build_worker(channel,checkpoint)
             require(isinstance(worker,ReviewedRuntimeWorker) and worker.checkpoint is checkpoint,'EXISTING_REVIEWED_WORKER_REQUIRED')
             # The same channel state machine with awaitable event persistence.
