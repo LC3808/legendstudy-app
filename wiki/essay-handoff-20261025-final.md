@@ -89,3 +89,15 @@ DB 복구가 필요하면 최신 runtime과 예약 상태를 먼저 읽고 위 �
 - `production-current.json` SHA256 `74d5ecf9f872b0ee9c8be95bd5a7a5d0529784f3bfb2d6d1b1910f68cd895381`.
 
 `deployment-result.json`의 web_deployed=false는 Worker단계 시점 영수증이다. 이후 완료 상태는 `production-current.json`과 위 canonical API 재조회가 우선한다. Secret·JWT·학생답안 원문을 Wiki/인수인계에 복사하지 않는다.
+
+## 2026-10-26 재개 — Owner 추가 지시
+
+첨부 지시서(0972bb9c-739c-4c88-a849-43201a4a67eb)의 추가 작업으로 이전 종료 상태를 해제했다. 순서: 한양 상경8 → 경희 → 중앙 → 성균 → 한양 누락 점검. 평가 Provider 호출/가상답안/품질검수 금지, 기존 성공 SQL 재실행 금지. 해당 회차 Registry·공식근거·기존 Worker/PDF/STANDBY SQL은 제한 승인됨. 기존 Credit/History/Ledger/Secret과 정상 공개를 보존한다.
+
+설계 보존 검토: (1) 새 제출 사실은 기존 회차 run에 남기고 원본/기록 시점을 분리한다. (2) 공식 PDF SHA 및 확정한 수리 입력 provenance를 고정한다. (3) 기존 학생 run/checkpoint/결과를 덮어쓰지 않는다. (4) 동일 Auth subject와 기존 소유권 검사를 사용한다. (5) 입력·평가는 Learning이며 합격/Outcome로 간주하지 않는다. (6) 기존 owner-only 이미지/OCR 경계를 유지하고 별도 공개답안 저장소를 만들지 않는다. (7) STANDBY를 평가 성공으로 표기하지 않는다. 단일 기존 예약/정산을 재사용하며 두 유료 submit의 결합은 금지한다.
+
+현재 조사: Production confirmed_answers/Math leaf→Essay 문항 매핑은 미설치. 기존 로컬 migration은 후보일 뿐 배포 완료가 아니다. 4대학 Production Registry read-only: 중앙24시험75문항/runtime10, 경희33/86/runtime22, 성균25/63/runtime16, 한양23/31/runtime13. 자연계열 포함 총량이며 대상/공개 수와 다르다. 실제 누락 대조 결과 및 완료 상태는 후속 갱신한다.
+
+한양 상경8용 작업 파일은 `legendstudy-materials/essay-validation-2026-10/mixed-standby-20261026/`에 저장한다. `hanyang-source-units.private.json`은 기존16문항 ID와 공식 문제/기준 페이지, `packages.private.json`은 Essay Q1/Math Q2 pinned 입력, `owner-sql/`은 신규 묶음 사전/적용/사후/롤백이다. 기존 적용 SQL과 별개다. 현재 로컬 SQL 사전22/사후11, 적용/연결범위 롤백 확인; 학생 답안 fixture/Provider0. 원본16개는 기존 로컬 파일 SHA로 신규 private Storage 저장(동일 hash 기존객체 없음), 문제8개만 추후 SELECT 승인 대상. 실제 운영 적용/배포 영수증 확인 전까지 미완료다.
+
+혼합 구현은 기존 Essay parent reserve/finish를 변경하지 않는다. Math child는 기존 Math candidate/validator/physical projection을 호출하고 기존 회차 checkpoint에 결과를 저장한다. 전송 상태 불명은 reconciling으로 보존하며 자동 재호출/추가예약하지 않는다. 기존 Math 사진 확인만 재사용하며 독립 Math 유료 submit은 호출하지 않는다. 신규 Math 결과는 기존 WEB Math report를 재사용한다. APP 변경 없음; Native 혼합 결과 표시/제출 호환성은 GAP으로 남는다.

@@ -140,6 +140,21 @@ def load_reviewed_material(package, registry, *, pinned_digest, binding, regime,
             pinned_digest=pinned_digest,binding=binding,regime=regime,
             evaluation_type=evaluation_type,approved_processing=activation_approved,
             length_requirement=length_requirement)
+        if entry.get('evaluation_engine') == 'math':
+            from types import SimpleNamespace
+            from copy import deepcopy
+            context=entry.get('math_context')
+            require(type(context) is dict and context.get('question_id')==entry['question_id'] and
+                    context.get('exam_id')==package['exam_id'] and
+                    context.get('leaf',{}).get('response_format') in ('FULL_SOLUTION','PROOF','SHORT_REASONING','SHORT_ANSWER') and
+                    type(context.get('profile',{}).get('reasoning_required')) is bool and
+                    context.get('criteria') and context.get('provider_binding',{}).get('model'),
+                    'MATH_CONTEXT_REQUIRED')
+            require(all(isinstance(c.get('description'),str) and c['description'].strip() and
+                        str(UUID(c['id']))==c['id'] for c in context['criteria']), 'MATH_CRITERIA_REQUIRED')
+            cache=deepcopy(context)
+            cache['evaluation_engine']='math'
+            q=SimpleNamespace(question_id=entry['question_id'],frozen_cache=cache)
         questions[q.question_id]=q;reports.append(report)
     return questions,{'ready':True,'issues':[],'activation_granted':activation_approved,
                       'questions':reports}
@@ -325,6 +340,13 @@ def prepare_claimed_material(claimed,pkg,registry):
     for answer in snap['answers']:
         qid=answer['questionId'];cache=hosted[qid].frozen_cache;caches[qid]=cache
         evaluation=str(uuid5(NS,'evaluation/'+run_id+'/'+qid))
+        if cache.get('evaluation_engine')=='math':
+            # The Math endpoint independently reads the same pinned parent lease.
+            claim=dict(run_id=run_id,lease_token=claimed['lease_token'],answer=answer['body'],
+                input=dict(package_digest=policy['package_digest'],question_id=qid,engine='math'))
+            questions.append(dict(questionId=qid,rubricVersion=answer['rubricVersion'],
+                evidenceVersion=answer['evidenceVersion'],evaluationId=evaluation,claim=claim,engine='math'))
+            continue
         context={'items':[],'previous_core_progress_ids':[]}
         if claimed.get('parent_id'):
             previous=[q for q in parent['questions'] if q['questionId']==qid]

@@ -9,6 +9,7 @@ from .reviewed_runtime import ReviewedRuntimeWorker,RuntimePermit
 from .exam_runtime import ExamQuestionChannel
 from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
+from .mixed_math_runtime import MixedMathWorker
 
 def receipt_checkpoint_key(value):
     # A rejected output has no successful Provider output receipt. Keep the
@@ -23,12 +24,13 @@ def receipt_checkpoint_key(value):
     return 'receipt-'+value['output_sha256']
 
 class CloudflareExamRuntime:
-    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=()):
+    def __init__(self,*,rpc,registry,provider,reviewer,review_source,receipt_sink,allowed_subjects,enabled=False,provider_factory=None,public_exams=(),math_child=None):
         self.rpc=rpc;self.registry=registry;self.provider=provider;self.reviewer=reviewer
         self.review_source=review_source;self.receipt_sink=receipt_sink
         self.allowed=set(allowed_subjects);self.enabled=enabled
         self.public_exams={str(UUID(exam)) for exam in public_exams}
         self.provider_factory=provider_factory
+        self.math_child=math_child
 
     async def consume(self,message):
         # Queue carries identity only, never JWT/answers/Package/provider choice.
@@ -50,6 +52,12 @@ class CloudflareExamRuntime:
         def build(channel,checkpoint):
             index=next(i for i,q in enumerate(questions) if q['evaluationId']==channel.evaluation_id)
             q=questions[index];cache=caches[q['questionId']]
+            if q.get('engine')=='math':
+                require(callable(self.math_child),'MATH_CHILD_UNAVAILABLE')
+                async def evaluate(evaluation):
+                    return await self.math_child(dict(action='evaluate',subjectId=subject,runId=run,
+                        token=claim['lease_token'],questionId=q['questionId'],evaluationId=evaluation))
+                return MixedMathWorker(channel,checkpoint,evaluate)
             attempt=claim['attempts'].get(str(index),0)
             prefix='q'+str(index)+'-a'+str(attempt)+'-'
             async def persist_receipt(value):
@@ -73,6 +81,11 @@ class CloudflareExamRuntime:
                 permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True))
         for q in questions:
             require(q['rubricVersion']==version and q['evidenceVersion']==version,'REVIEWED_PACKAGE_PIN_REQUIRED')
+            if q.get('engine')=='math':
+                require(callable(self.math_child),'MATH_CHILD_UNAVAILABLE')
+                q['criteria']=[dict(binding=dict(id=c['id'],version=version),label=c['description'])
+                               for c in caches[q['questionId']]['criteria']]
+                continue
             provider_package(q['claim'],caches[q['questionId']])
             probe=ExamQuestionChannel(q['evaluationId'],q['claim'],lambda *_:None)
             build(probe,lambda _:None).authorize(q['evaluationId'])

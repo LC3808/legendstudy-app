@@ -57,7 +57,8 @@ def prepare(root,manifest,assets,output,policy_name):
             sql+=f"insert into essay_material_private.revisions(exam_id,revision,state,body,reviewer) values({lit(e)},rev,r.state,b,r.reviewer);update essay_material_private.reviews set revision=rev,body=b,updated_at=now() where exam_id={lit(e)};\n"
         else:
             sql+=f"insert into essay_material_private.reviews(exam_id,revision,state,body,approval_requested) values({lit(e)},rev,'NEEDS_REVIEW',b,false);insert into essay_material_private.revisions(exam_id,revision,state,body) values({lit(e)},rev,'NEEDS_REVIEW',b);\n"
-        sql+=f"clause:=format(' when p_exam=%L::uuid then %L::jsonb ',{lit(e)},jsonb_build_object('regime',{lit(REGIME)},'package_digest',p->>'package_digest','evaluation_type','humanities')::text);\n"
+        evaluation_type='business' if any(q.get('evaluation_engine')=='math' for q in package['questions']) else 'humanities'
+        sql+=f"clause:=format(' when p_exam=%L::uuid then %L::jsonb ',{lit(e)},jsonb_build_object('regime',{lit(REGIME)},'package_digest',p->>'package_digest','evaluation_type',{lit(evaluation_type)})::text);\n"
         sql+="if position('else null::jsonb end' in definition)=0 then raise exception 'POLICY_FORMAT_CHANGED';end if;definition:=replace(definition,'else null::jsonb end',clause||'else null::jsonb end');\n"
     sql+='execute definition;end $apply$;\n'
     sql+=f"create policy {policy_name} on storage.objects for select to authenticated using ((select public.account_service_allowed()) and bucket_id='essay-material-originals' and name=any(array[{','.join(lit(x) for x in pdfs)}]::text[]));\ncommit;\n"

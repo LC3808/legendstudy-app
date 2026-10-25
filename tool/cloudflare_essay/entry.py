@@ -15,6 +15,13 @@ from registry_asset import REGISTRY
 import time
 
 class Default(WorkerEntrypoint):
+    async def math_child(self,payload):
+        require(getattr(self.env,'ESSAY_MIXED_SESSION_ENABLED','false')=='true','MATH_CHILD_UNAVAILABLE')
+        secret=getattr(self.env,'ESSAY_WORKER_SERVICE_TOKEN','')
+        require(len(secret)>=32,'MATH_CHILD_UNAVAILABLE')
+        return json.loads(await fetch_bytes('https://lab.legendstudy.com/api/essay/math-session',
+            {'Content-Type':'application/json','X-Essay-Service-Token':secret},json.dumps(payload),timeout=110,limit=1500000))
+
     def transport(self):
         return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
             worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS),
@@ -52,7 +59,8 @@ class Default(WorkerEntrypoint):
             raise Unknown('RECEIPT_PERSISTENCE_REQUIRED')
         return CloudflareExamRuntime(rpc=transport.rpc,registry=REGISTRY,provider=provider,
             reviewer=SignedReview(keys),review_source=review,receipt_sink=receipt,
-            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for,public_exams=transport.public_exams)
+            allowed_subjects=transport.allowed,enabled=self.env.ESSAY_EXECUTION_ENABLED=='true',provider_factory=provider_for,public_exams=transport.public_exams,
+            math_child=self.math_child if getattr(self.env,'ESSAY_MIXED_SESSION_ENABLED','false')=='true' else None)
 
     async def admission(self,t,subject,exam):
         require(subject in t.allowed or exam in t.public_exams,'EXAM_ACCESS_DENIED')
@@ -61,14 +69,22 @@ class Default(WorkerEntrypoint):
         pkg=await t.rpc('essay_material_runtime_package',dict(p_exam=exam,p_digest=policy['package_digest']))
         hosted,report=load_reviewed_material(pkg,REGISTRY,pinned_digest=policy['package_digest'],binding=policy['binding'],regime=policy['regime'],evaluation_type=policy['evaluation_type'],activation_approved=True)
         runtime=self.configuration(t,policy['binding'])
+        math_questions={}
+        math_status=None
         for q in hosted.values():
+            if q.frozen_cache.get('evaluation_engine')=='math':
+                if math_status is None:math_status=await self.math_child({'action':'availability'})
+                require(math_status.get('ready') is True and math_status.get('contract')=='essay-math-child-v1' and
+                    math_status.get('model')==q.frozen_cache['provider_binding']['model'],'MATH_CHILD_UNAVAILABLE')
+                math_questions[q.question_id]=q.frozen_cache['leaf']['id']
+                continue
             worker=ReviewedRuntimeWorker(t.rpc,runtime.provider,q.frozen_cache,runtime.reviewer,runtime.review_source,runtime.receipt_sink,lambda _:None,
                 permit=RuntimePermit('preflight','unused',digest(q.frozen_cache),policy['binding'],int(time.time()+90),True))
             worker.authorize('preflight')
         source=runtime.review_source
         key_bound=bool(getattr(source,'key',None) and runtime.reviewer.keys.get(getattr(source,'reviewer_id',''))==source.key)
         if getattr(self.env,'ESSAY_REVIEW_MODE','service')=='independent_model':require(key_bound,'REVIEW_KEY_BINDING_REQUIRED')
-        return {'session_version':'exam-session-v1','ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'question_ids':sorted(hosted),'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
+        return {'session_version':'exam-session-v1','ready':bool(report['ready'] and hosted),'package_version':pkg['package_version'],'package_digest':policy['package_digest'],'question_count':len(hosted),'question_ids':sorted(hosted),'math_questions':math_questions,'model':policy['binding']['model'],'review_key_binding':'PASS' if key_bound else 'EXTERNAL_SERVICE','provider_called':False}
 
     async def fetch(self,request):
         headers={'Cache-Control':'no-store'}
@@ -114,7 +130,10 @@ class Default(WorkerEntrypoint):
             # structured-clone encoding preserves this JSON string on delivery.
             await self.env.ESSAY_QUEUE.send(json.dumps({'subject_id':subject,'run_id':payload['run_id']}))
             return Response.json({'run_id':payload['run_id'],'state':'queued'},status=202,headers=headers)
-        except Exception:
+        except Exception as error:
+            code=str(error)
+            safe=code if 0<len(code)<=80 and all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code) else type(error).__name__
+            print('ESSAY_REQUEST_FAILURE '+safe)
             return Response.json({'code':'RUNTIME_UNAVAILABLE'},status=503,headers=headers)
 
     async def queue(self,batch,*_context):

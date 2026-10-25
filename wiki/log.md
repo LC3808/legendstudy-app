@@ -4808,3 +4808,5 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 - 2026-10-25: 성균PDF manifest/버튼수정·한양인문13 STANDBY Production 반영. 상경8 혼합route·2025모의2 원본보류. Provider/차감0. [결과](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
 
 - 2026-10-25 마감: Production WEB/Worker read-only 재조회 및 구현 SHA 원격 일치 확인. [최종 인수인계](essay-handoff-20261025-final.md) 작성. 추가 개발/Provider/SQL/배포/Mac종료0.
+
+- 2026-10-26 재개: 한양 상경8/16답안 단위 공식자료 조립, 기존 Math 입력·평가를 Essay 회차 예약에 연결하는 코드/SQL 준비. Provider0. 운영 반영/WEB 확인 전이며 STANDBY 추가 완료로 계산하지 않음. [작업 상태](essay-handoff-20261025-final.md#2026-10-26-재개--owner-추가-지시).

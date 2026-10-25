@@ -1,6 +1,6 @@
 # Current Status
 
-마감·내일 재개: [Owner QA 대상·미완료·재실행 금지 SQL·복구](essay-handoff-20261025-final.md). 추가 개발 중단, Mac 종료는 Owner 담당.
+2026-10-26 Owner 추가 지시로 재개: 한양 상경8 혼합 단일예약 연결 → 4대학 누락 점검. [현재 작업·기존 완료·복구](essay-handoff-20261025-final.md#2026-10-26-재개--owner-추가-지시). Provider 호출 금지, APP/스토어 작업 없음.
 
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
