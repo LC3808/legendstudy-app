@@ -101,3 +101,66 @@ DB 복구가 필요하면 최신 runtime과 예약 상태를 먼저 읽고 위 �
 한양 상경8용 작업 파일은 `legendstudy-materials/essay-validation-2026-10/mixed-standby-20261026/`에 저장한다. `hanyang-source-units.private.json`은 기존16문항 ID와 공식 문제/기준 페이지, `packages.private.json`은 Essay Q1/Math Q2 pinned 입력, `owner-sql/`은 신규 묶음 사전/적용/사후/롤백이다. 기존 적용 SQL과 별개다. 현재 로컬 SQL 사전22/사후11, 적용/연결범위 롤백 확인; 학생 답안 fixture/Provider0. 원본16개는 기존 로컬 파일 SHA로 신규 private Storage 저장(동일 hash 기존객체 없음), 문제8개만 추후 SELECT 승인 대상. 실제 운영 적용/배포 영수증 확인 전까지 미완료다.
 
 혼합 구현은 기존 Essay parent reserve/finish를 변경하지 않는다. Math child는 기존 Math candidate/validator/physical projection을 호출하고 기존 회차 checkpoint에 결과를 저장한다. 전송 상태 불명은 reconciling으로 보존하며 자동 재호출/추가예약하지 않는다. 기존 Math 사진 확인만 재사용하며 독립 Math 유료 submit은 호출하지 않는다. 신규 Math 결과는 기존 WEB Math report를 재사용한다. APP 변경 없음; Native 혼합 결과 표시/제출 호환성은 GAP으로 남는다.
+
+
+## 2026-10-26 최종 추가 작업 — STANDBY 82회차
+
+이 절이 위 2026-10-25 종료/상경 보류 및 2026-10-26 준비 중 기록을 대체한다. 최신 Owner 첨부 `0972bb9c-739c-4c88-a849-43201a4a67eb`의 범위 승인으로 진행했다. [공통 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책)을 재사용하며 **STANDBY / OWNER QA PENDING**이다. 실제 평가 성공이나 E2E PASS가 아니다.
+
+| 대학 | Registry 전체(2022+) | 이번 인문·사회·상경 대상 | 기존 STANDBY | 신규 | 최종 WEB STANDBY | 미완료 |
+|---|---:|---:|---:|---:|---:|---:|
+| 중앙 | 24 | 21 | 10 | 11 | 21 | 0 |
+| 경희 | 33 | 24 | 22 | 2 | 24 | 0 |
+| 성균관 | 25 | 16 | 16 | 0 | 16 | 0 |
+| 한양 | 23 | 23* | 13 | 8 | 21 | 2 |
+| 합계 | 105 | 84* | 61 | 21 | 82 | 2 |
+
+*한양 대상23은 Registry 내 인문·상경22 + resource에만 있는 2025모의 상경1. Registry 전체23에는 제외 대상 자연1이 포함된다. 4대학의 모든 자연/과학 회차를 완료했다는 의미가 아니다. 준비 자료가 확인되지 않은 연도·회차를 임의 생성하지 않았으며, 성균2024모의·한양2022/2023모의 등의 자료 범위 GAP은 종전 기록대로 남는다. DB 집계와 명시적 공개 scope를 대조했다. 공개scope89/Worker Registry145는 다른 대학과 비공개 메타데이터를 포함하므로 82와 혼용하지 않는다.
+
+### 오늘 완료 범위와 실제 WEB 확인
+
+- 한양 상경8: 2022수시,2023수시,2024모의/수시,2025수시,2026모의/수시,2027모의. 각 언어Q1+수리Q2 전체16문항. 기존 문항 ID와 공식 문제/출제의도/채점기준을 연결했다.
+- 중앙 신규11: 2026모의 인문사회1 + 경영경제10(2022모의,2023모의,2024모의/수시,2025모의/수시,2026모의/수시,2027모의 일반/창의). 전체33문항, 경영경제Q3만 기존 Math 경로에 연결했다. 인문사회는 기존10+신규1=11, 경영경제10이다.
+- 경희 신규2: 2023수시 사회 오전,2025모의 사회 온라인. 각 전체3논제, 논제III의 함수/그래프와 서술을 기존 Math 경로에 연결했다. 인문·체육11/사회13으로 총24.
+- 성균 언어16과 기존 PDF 버튼 복구는 변경하지 않았다. 이번 새 Provider/E2E 실적에 포함하지 않는다.
+
+일반 계정 운영 WEB에서 신규21회차 각각 선택·전체 문항·입력/저장 UI·서버 admission 후 `첨삭 요청 · 1 크레딧` 표시를 확인했다. 빈 답안 버튼 비활성은 정상이다. 한양2027모의,중앙2026모의 경영경제,경희2025모의 사회에서 전체 문항에 **평가용 답안이 아닌 입력 확인 문구**를 브라우저에만 저장해 실제 서버의 **회차 전체 1 Credit 안내창**을 확인하고 취소했다. 기존 초안은 복원했고 최종 `첨삭 진행하기`는 누르지 않았다. 새 SQL 범위의 Production runs는0, 화면 잔액10 유지.
+
+PDF 실제 렌더 확인: 한양2027상경(2p),중앙2026모의 인문(7p)/2027창의 경영(7p),경희2025모의 사회(4p)/2023수시 사회 오전(문제만7p). 나머지는 전수 원본hash/Storage 객체·정확한 SELECT·문항별 PDF manifest 연결 및 실제 선택 화면 기준이다. 전 회차의 모든 PDF 페이지를 수동 판독했다고 주장하지 않는다. 사진·수식 첨부 UI와 기존 확인입력 경로를 연결했으나 실제 사진 OCR·평가는 Provider 금지에 따라 Owner QA 대기다.
+
+### 현재 Production 및 구현
+
+- WEB: `a8f3ba51-4c00-4bd7-8896-72f233d17817`, source `a6accdf90e7f0d3b9842687413be8cf1e985301f`, Cloudflare canonical success.
+- Worker: `5fe85e6c-2ba4-4562-8943-b2d2ead9eb6b` 100%, deployment `b65bcbe0-2398-4bc9-a5d0-135b8d032a7a`. APP/Worker 구현 Git `1e3cae8` 및 직전 `3746703`/`cee5d51`.
+- DB: `stlhijzpjfgwwdgunlsd`. 신규21회차·55문항, 그중 Math child20. Worker 기존 CPU30000/queue/인증과 다른 공개 scope 보존.
+- 기존 Essay parent 예약/정산·checkpoint를 사용한다. 언어/Math 각각 별도 유료 submit을 호출하지 않는다. Math는 기존 candidate/validator/report 및 확정 이미지 입력을 재사용한다. 기존 무료0, 추가 회차1, 실패 재처리 추가예약0 계약을 유지한다.
+- `essay_exam_private.reserve`/`finish` 정의 MD5는 이전과 동일하다. submit은 기존 소유권·멱등성 검사 안에서 확정 Math 입력만 해석하는 최소 호환 패치다. 새 내부 Math context RPC는 소유자·실행lease·문항·고정패키지 확인 후 읽기만 하며 essay_worker에만 허용한다.
+- Worker→Pages 연결의 HTTP522를 실제 로그에서 확인했고 `global_fetch_strictly_public`로 해결했다. 고정 URL·기존 Service Token·parent lease 검사는 유지한다. 이 flag를 후속 배포에서 제거하지 않는다. [Cloudflare fetch 계약](https://developers.cloudflare.com/workers/runtime-apis/fetch/).
+- Pages 변경은 공개 exam/Math leaf 목록과 혼합 활성 plain 설정만 patch. Secret 원문 읽기/재전송/변경0. 기존 결제·MY UI·Native APP 수정/빌드/스토어0. **Native APP의 혼합 회차 제출·결과 호환성은 미확인 GAP**이며 WEB STANDBY 수를 APP 완료로 확대하지 않는다.
+
+### 적용 SQL / 재실행 금지 / 복구
+
+로컬 루트 `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/`:
+
+| 적용 패키지 | 적용 결과 | 재실행 금지 |
+|---|---|---|
+| `mixed-standby-20261026/owner-sql/` | 한양8, 사전22/사후11 true | `apply.private.sql` |
+| `central-missing-20261026/batch-0`…`batch-4/owner-sql/` | 각2회차, 각 사전16/사후8 true | 각 `apply.private.sql` |
+| `central-missing-20261026/batch-5/owner-sql/` | 1회차, 사전15/사후8 true | `apply.private.sql` |
+| `khu-missing-20261026/owner-sql/` | 2회차, 사전16/사후8 true | `apply.private.sql` |
+
+각 디렉터리의 `.result.private.json`이 실제 영수증이다. 중앙 원래 `owner-sql/` 및 `batch-a/`는 HTTP413으로 실행 전 거절된 **폐기 후보**이며 적용 대기가 아니다. 최종 적용은 `batch-0`…`batch-5`만이다. 경희 최초 시도는 statement 길이 제약으로 transaction rollback, 다음 NUL 포함 요청은 protocol 오류; 미적용(runtime0/Mathmapping0)을 확인한 뒤 공식 문제 PDF만 제시문으로 사용하고 NUL을 제거해 최종 적용했다. 기존 정상 SQL 재실행은 없다. 한양 기존 Registry/batch-a/batch-b,중앙10,경희continuous,성균continuous 및 이전 revision SQL도 재실행 금지.
+
+문제 발생 시 해당 신규 exam ID만 Pages/Worker 공개 scope에서 제외하고 나머지를 보존한다. 현재 진행 중 run이 있는지 먼저 확인한다. 필요하면 각 **적용 패키지**의 `rollback.sql`로 해당 runtime/PDF 접근만 제한한다(중앙은 batch5→0). Math 원문/프로필·학생기록·확정입력 helper는 보존한다. 혼합 예약이 남아 있으면 처리 가능한 Worker를 유지하고 helper/정산 코드를 제거하지 않는다. 전체 복구는 이전 WEB `d4037191-2000-4266-a5cf-a43a8cc156e5` / Worker `238ab93f-49d1-4c5f-a660-4920fe92d5f5` / 공개scope68을 함께 맞추되 **신규 혼합 요청이 없거나 기존 정책으로 정산 완료된 이후에만** 고려한다. 현재는 롤백하지 않았다.
+
+### 미완료와 내일 Owner 검수
+
+한양2025모의 인문: 기존 exam `66ad79a8-7ea9-525d-a8f7-dc8c0e92b3e5`는 문항0, 실행 미연결. `Downloads/2025학년도 한양대 모의논술_인문 문제.pdf`를 찾았다(SHA `200f46ed0b070299b0eb247eb57eef096222dcb0f1fde4f211f4956f9287fb4a`). 다만 `2025학년도 한양대 모의논술_인문 출제의도.pdf` 및 `인문 예시답안.pdf` 로컬 원본을 찾지 못했다. 상경은 resource만 있고 시험 Registry 미생성; `2025학년도 한양대 모의논술_상경 문제.pdf`, `상경 출제의도.pdf`, `상경 예시답안.pdf` 원본 미확보. Downloads/기존 materials/개발 폴더와 기존 ZIP 목록을 조사했으며 재수집·임의 자료 생성은 하지 않았다. 실행 가능한 미적용 SQL이 있는 상태가 아니다.
+
+내일 순서:
+1. 이 절과 현재 Git/Production 영수증부터 읽는다. 오늘 적용 SQL·기존 성공평가를 반복하지 않는다.
+2. Owner 일반 계정에서 [한양](https://lab.legendstudy.com/essay-lab/universities/hanyang/) 상경2027모의 또는2026수시, [중앙](https://lab.legendstudy.com/essay-lab/universities/cau/) 2026모의 인문/경영 또는2027일반/창의, [경희](https://lab.legendstudy.com/essay-lab/universities/kyunghee/) 2023수시사회오전/2025모의사회를 선택해 실제 답안으로 임의 검수한다. 전체/부분 제출,사진 확정입력,최초1/무료0,결과·성장·History는 Owner 실제 실행 결과로 추가 기록한다.
+3. Owner가 지적한 오류의 exam/question/run ID만 최소 수정한다. 상태 불명 Math 호출을 자동 반복하지 말고 기존 checkpoint를 보존한다.
+4. 한양2025모의의 위 미확보 공식 자료를 Owner가 제공하면 기존 resource/시험 ID를 재사용해 연결한다. 승인 없는 재수집·자연/과학 확대·APP UI/스토어 작업을 하지 않는다.
+
+이번 Provider 호출0/비용0/평가 제출0/예약·차감0. 기존 학생 답안·평가·History·Ledger UPDATE/DELETE0, 전수 학생행 hash를 대조했다는 뜻은 아니다. 신규 코드의 경계 확인과 기존 SQL 적용·복구 검사는 로컬에서 수행했고 Production 확인은 연결/조회/quote에 한정했다. 기존 APP 미커밋 Flutter/테스트 변경은 별도 작업이므로 stage/reset/clean하지 않는다. 작업 종료 후 추가 개발과 Mac 종료 명령을 실행하지 않는다.
