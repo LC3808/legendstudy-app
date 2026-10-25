@@ -4804,3 +4804,5 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 ## 2026-10-25 — 경희·성균33회차 신규 STANDBY
 
 경희인문9/사회11·성균언어13 신규,기존5보존=38/40회차. 사회그래프2보류. DB4묶음적용/WEB011af05b/Workerfafe9380, 일반계정PDF/입력/요청경로확인. Provider0/APP빌드0, Credit·History보존. 공개목록42제한을64로맞추고중간장애버전복귀후최종반영. [최종범위·복구](essay-group-1a-20261025.md#연속-연결-최종-상태).
+
+- 2026-10-25: 성균PDF manifest/버튼수정·한양인문13 STANDBY Production 반영. 상경8 혼합route·2025모의2 원본보류. Provider/차감0. [결과](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).

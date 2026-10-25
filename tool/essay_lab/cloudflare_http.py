@@ -30,7 +30,7 @@ async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
 class AsyncOperatingTransport(OperatingTransport):
     def __init__(self,public_exams=(),**kwargs):
         super().__init__(**kwargs,open_url=lambda *_:None)
-        require(type(public_exams) in (list,tuple) and len(public_exams)<=64,'PUBLIC_SCOPE_INVALID')
+        require(type(public_exams) in (list,tuple) and len(public_exams)<=128,'PUBLIC_SCOPE_INVALID')
         self.public_exams={str(UUID(exam)) for exam in public_exams}
     async def _request(self,path,token,payload=None):
         require(isinstance(token,str) and token and not any(c.isspace() for c in token),'TOKEN_REQUIRED')

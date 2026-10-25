@@ -348,3 +348,31 @@ Owner 최종 기준을 적용해 Production 일반계정에서 **38회차 각각
 조회 상태 최소 수정: EssayExamSubmit/ScopedExamSubmit은 조회 중 `첨삭 가능 여부 확인 중`, 실패는 오류와 재시도를 표시한다. Gateway availability의 Worker5xx/429는503 ADMISSION_UNAVAILABLE,401은 LOGIN_REQUIRED로 전달한다. 조회 실패를200/ready=false로 숨기지 않는다. 명시적 미승인은 기존 준비 중 유지, 승인·submit·정산 조건 변경 없음.
 
 WEB commit `0465161282b7ad4c8702dc78a311d081793c9e8a`, Production `fd558454-b9bd-4bae-8078-3ac307353428` success를 Cloudflare canonical API로 확인. 필요한 WEB 컴파일/정적 export 완료. APP빌드·Worker배포·SQL·Secret 변경0. Worker fafe9380 유지. WEB복구는 직전 정상011af05b이며 이번 수정만 제거되고 기존38회차 연결은 유지된다. 경희 사회2회차의 보류 원인/후속은 위 기록 그대로이며 이번 확인으로 완료 처리하지 않는다.
+
+## 2026-10-25 최종 범위 — 성균 PDF 수정·한양 STANDBY
+
+Owner 최종 지시: 성균 언어형 PDF 버튼과 한양 인문·상경만 처리 후 종료. 기존 [전체 대학 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책)을 재사용한다. 실제 Provider/평가 제출/품질 검수/APP UI·빌드·스토어는 수행하지 않았다.
+
+| 범위 | 준비된 대상 | STANDBY/버튼 복구 | 보류 |
+|---|---:|---:|---:|
+| 성균 언어형 | 16회차·48문항 | 버튼 표시16, 기존 STANDBY 유지 | 0 |
+| 한양 인문 | 13회차·13문항 | STANDBY13 | 0 |
+| 한양 상경 | 8회차·16문항 | 0 | 8 |
+
+자료 확보 범위와 전체 학년도 수를 혼동하지 않는다. 한양2025모의 인문·상경2회차는 기존 resource에 있으나 로컬 원본 미확보·기존 URL 다운로드 실패여서 위 준비된21회차 밖의 추가 미완료다. 알려진 대상까지 포함하면 인문14 중13/보류1, 상경9 중0/보류9. 2022/2023모의와 성균2024모의는 자료 미확보로 완료 주장하지 않는다.
+
+성균 원인: 2025수시1교시3문항 WEB manifest가 이전 b099a709 PDF와 VISUAL_REVIEWED/PENDING에 남아 있어 asset gate에서 탈락했다. 기존 운영 Storage 정책 essay_skku_language_b_read는 이미 정확한 문제전용787f3455 PDF를 승인하고 있었다. 3행을 기존7페이지PDF·문항시작1/5/7로 정정. 정확한 exam/question ID fallback과 입력영역 상단 ‘문제 확인’ 표시를 추가했다. 새 PDF 업로드/성균 SQL/권한 변경0. Owner가 본 모든 회차 누락 현상 전체의 원인까지 재현·확정한 것은 아니다.
+
+실제 일반계정 Production: 성균16회차에서3개 문항 탭과 문제 확인 버튼 표시, 문제누락이 재현됐던2025수시1교시PDF7페이지 렌더 확인. 한양13회차 전체에1개 답안 단위·PDF버튼·입력·브라우저저장·첨삭요청 활성 확인, 임시 UI 문구는 이전값으로 복원. 한양2027모의PDF3페이지와 실제 서버1Credit quote 확인 후 취소. 전체13회차의 PDF 모든 페이지/quote를 반복 확인한 것은 아니다. 입력 gate 확인용 문구만 사용, 가상 평가답안 생성0. [회차별 화면 증거](../supabase/candidates/hanyang_standby_20261025/web-ui-evidence.json). Provider0/비용0/평가제출0, 화면Credit10 유지. 새 E2E PASS 아님. 기존 무료재첨삭0/History/성장/Credit 계약은 변경하지 않았다.
+
+한양 상경8회차 모두 수리Q2 포함. 기존 Essay package는 humanities/business 텍스트 route이고 Math session은 별도 예약이다. 동일 회차의 기존1Credit 예약을 공유하는 혼합 route가 없어 상경 전체를 보류했다. 수리문항을 humanities로 위장하거나 별도 Math 예약으로 중복 과금하지 않는다. Registry와 전체 문항은 연결됐지만 PDF 공개·실행 정책·STANDBY 완료 아님. 다음 작업은 이 혼합 route의 재사용 가능한 기존 계약 확인 및 최소 연결이며 정산 계약 변경이 필요하면 별도 승인.
+
+Production 적용: 승인된 Registry19시험·26문항 추가(기존2시험/3문항 보존), 인문12회차 신규 runtime+기존1회차 공개. 기존123 Worker registry entries 보존+12=135. 원본Storage23추가/1재사용, 덮어쓰기0. Registry 사전1/사후1true, 인문A6+B6 각각 사전16/사후7true. 기존ID/다른정책/학생답안/History/Ledger 보존. 원본/검수 패키지는 비공개 로컬 경로에만 유지.
+
+WEB `f5cebe5541a74988d0be6d6f396b5bf1cd03ed16`, Production `d4037191-2000-4266-a5cf-a43a8cc156e5` success. Worker `238ab93f-49d1-4c5f-a660-4920fe92d5f5`100%. Cloudflare canonical/deployments API 실측. 공개범위55→68의 명시UUID만 유지하면서 Gateway/Worker/설정도구 capacity64→128 일치. 이는 서버승인 우회가 아니다. Worker는 registry_asset/cloudflare_http2모듈만 변경, 나머지모듈/Secret/bindings/CPU30000 보존. Pages patch는 ESSAY_PUBLIC_EXAMS plain필드만 사용. 배포에 필요한 WEB compile/export와 scope patch2검사 PASS, APP빌드0.
+
+SQL 경로(모두 적용완료, 재실행금지): `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/hanyang-standby-20261025/`의 `registry-sql/`, `batch-a/owner-sql/`, `batch-b/owner-sql/`. 각 precheck→apply→postcheck 영수증 보존. Registry apply는 apply.sql, runtime은 apply.private.sql. [공개 명세·복구](../supabase/candidates/hanyang_standby_20261025/README.md).
+
+복구: 한양 신규공개13 ID만 양쪽 공개scope에서 제외하고 WEB 재배포하면 기존55 공개 유지. runtime rollback은 최신 상태를 읽고 B→A 순서로 각 rollback.sql 적용; 신규case/PDF SELECT만 제거하며 기존학생결과/리뷰는 보존. Registry는 삭제하지 않는다. Worker 이전fafe9380+WEB 이전fd558454로 복구하려면 public scope도이전55로 함께 복구해야 한다(cap64). 전체설정/마스킹Secret 재전송 금지. 성균 manifest 수정만 되돌리면 누락이 재발하므로 정상수정 유지 권장. 복구실행은 이번 작업에서 수행하지 않았다.
+
+보존7문항: (1) 원본시점과 이번연결일 분리, (2) 원본SHA와추출근거 유지, (3) 기존평가/리뷰 덮어쓰기 없음, (4) 기존auth identity 그대로, (5) 공식자료와학생Learning/Decision/Outcome 분리, (6) 정확한 문제PDF만authenticated SELECT·해설비공개, (7) STANDBY를평가성공/실력향상 사실로기록하지 않음. 오늘 범위 종료; 다음 Owner QA 오류에 최소 대응하고 다른 대학 확대하지 않는다.

@@ -728,3 +728,5 @@ Owner는대학카드의활성표시를기존서버공개정책으로결정하고
 ## 2026-10-25 — 경희·성균 연속 STANDBY SQL 사전 승인
 
 기존 [전체 대학 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책)의 실행 순서를 경희인문·체육→경희사회→성균언어로 지정한다. Owner는 해당 범위의 기존자료·필요신규Registry·revision·Worker·정확PDF 접근·공개승인 SQL을 사전검사/적용/사후검사 조건으로 Codex 직접 실행 승인했다. 단계별 재승인 대기 없이 정상회차를 연결한다. 학생데이터삭제·Credit/Ledger/결제변경·광범위권한변경·기존정상실행정책변경은 제외. Provider호출/가상답안/APP빌드0 원칙, 실제평가는Owner QA. [실제 반영·보류](essay-group-1a-20261025.md#경희-신규10회차-운영-연결).
+
+- 2026-10-25 Owner 최종범위: 기존 STANDBY 원칙으로 성균PDF·한양인문/상경만 처리 후 종료. 한양 Registry/공식근거/runtime/정확PDF권한/공개 SQL 제한승인; 학생ID·Credit·History 변경불가. Provider와APP빌드0, 상경수리미연결은보류. [적용결과](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
