@@ -250,3 +250,44 @@ Provider영수증6(평가3+기존독립검수3), 입력51324/출력6510tokens. c
 ### 누락2회차 등록 적용 — Owner 승인 후
 
 Owner ‘누락2회차 Registry 보완SQL 실행 승인’ 후 사전4true→apply성공→사후4true. 신규인문 c7e17f5e-9037-5a78-8e77-7878a98230ca / 경영경제53bdd6f5-78be-548f-ac1b-23081f9bf74c, 각3문항. 기존 자연/4resource/정책/ID/기록보존. 일반계정운영WEB에서2026모의3계열선택과신규두계열각3문항입력/저장버튼표시확인. PDF원문준비중/첨삭준비중은아직남아있으며후속실행연결대상. 이번승인은등록메타데이터범위이며추가공개정책변경승인아님. Provider/차감/WEB재배포0.
+
+
+## 연속 연결 — 중앙경영경제·경희인문·사회
+
+최신 Owner 지시: 중앙 경영경제 → 경희 인문·체육 → 경희 사회를 단계별 진행 승인 대기 없이 준비한다. 별도 범위 Production SQL/권한 변경은 승인 필요. 기존 STANDBY 정책을 재사용하며 Provider 호출·가상 답안·품질 반복검수·APP 빌드/수정은 하지 않는다.
+
+| 범위 | 확인된 대상 | 현재 신규 STANDBY | 보존한 기존 공개 | 남은 연결 |
+|---|---:|---:|---:|---|
+| 중앙 경영경제 | Registry 10회차·30문항 | 0 | 0 | 언어2+Math1 단일 회차 제출/정산 연결 |
+| 경희 인문·체육 | 보관 자료 11회차 | 0 | 2회차 | 신규9회차 PDF/공식자료/실행 승인 |
+| 경희 사회 | 보관 자료 13회차 | 0 | 0 | 12회차 소답안 연결, 2027 모의2논제 공식자료/실행 승인 |
+
+중앙10은 현재 Registry 기준이며 2022~2027 모든 보관 자료의 누락 없음까지 확정한 수치가 아니다. 경희24는 보관된 문제·해설36개 기준이며 2027 수시는 대상 자료에 없다. 2022/2023 사회 수시 오전·오후는 별도 회차다.
+
+### 실제 반영
+
+[Registry 묶음](../supabase/candidates/khu_continuous_registry/OWNER-README.md): Owner 「누락 Registry 묶음 SQL 실행 승인」 후 Production stlhijzpjfgwwdgunlsd에 신규16시험 및 기존무문항4시험의 총51문항 추가. 사전2true, 사후 exact_question_sets=true. 기존 문항 있는4회차 수정0. 승인된 메타데이터 추가만 적용했으며 실행 승인/Storage 정책/학생 답안/Credit/Ledger/History 쓰기0. 재실행 금지.
+
+### 후속 연결 산출물
+
+`tool/essay_lab/prepare_khu_registry_expansion.py`는 기존 exam/question/resource ID를 재사용하고 신규 ID만 기존 source-registration-v1 계약으로 생성한다. 2027 모의 사회 공식 문제·해설은2논제이므로 과거3부모/5응답 형식을 소급하지 않는다.
+
+`tool/essay_lab/prepare_khu_text_connections.py`는 기존 material_runtime 입력 계약을 사용한다. 현재 신규5회차10문항의 공식문제/출제의도/채점기준 패키지 조립 완료, 미배포. 경희 인문 수시2022/2023/2024, 모의2026 및 사회 모의2027이다. 나머지 인문 모의2022~2025는 공통 프로필 범위 연결, 수시2025는 숫자목록형 기준 추출 연결이 남았다. 이를 평가 품질 실패로 분류하지 않는다. 기존 공개 인문2회차 패키지는 다시 조립하지 않는다.
+
+기존자료 디렉터리 `legendstudy-materials/essay-validation-2026-10/group-1a-20261025/`의 `continuous-inventory.private.json`, `continuous-source-pages.private.json`, `continuous-storage.private.json`, `continuous-submission-contracts.private.json`, `continuous-text/`가 후속 입력이다. 신규 조립 패키지와 공개 상태를 혼동하지 않는다. 36개 원본 중30개는 해당 해시의 private Storage 객체가 없으며 기존 resource/local PDF가 존재한다. 중복 업로드 금지; 문제/해설 합본의 학생 노출 범위는 기존 정책대로 분리해야 한다.
+
+### 중앙 혼합형 공통 계약 GAP
+
+실제 Production `essay_exam_submit`은 questionId/body/revision 텍스트만 수용하고 단일 Essay reserve를 사용한다. `math_session_submit`은 소유권 확인된 Math attempt 목록을 받으며 별도 session/billing reserve를 생성한다. WEB ScopedExamSubmit은 Essay 또는 Math 한 경로만 선택한다. 따라서 양쪽 함수를 순차 호출해 혼합형을 연결하면 회차1Credit 계약을 보장할 수 없다. 임의 호출/버튼 강제 활성화는 하지 않았다. 기존 Math 이미지/OCR 확인 및 Essay 평가를 재사용하되 하나의 예약 소유자 아래 문항별 실행/완료를 연결하는 최소 계약 수정이 필요하다. 정산 변경 SQL은 별도 승인 대상. APP 이미지 회차 호환은 미완료이며 이번 작업 범위 밖이다.
+
+보존 검토7항: 원본 답안/시각 유지, 과거 결과 불변, 기존 사용자/시험/문항 ID 유지, 공식자료와 파생 패키지 구분, 목적/권한 유지, 최소 메타데이터 추가만, 학습 결과 추정 생성 없음. 이번 적용은 학생 저장 구조를 바꾸지 않았다.
+
+### 다음 실행 순서
+
+1. 이미 적용한 Registry SQL을 반복하지 않는다.
+2. 중앙 혼합 단일예약 연결을 기존 함수/Worker 경계에서 준비한다. 서로 독립인 두 유료 submit 호출 금지.
+3. 경희 신규 회차 공식자료·문제 PDF·실행 승인 패키지를 묶어 준비한다. 이번 Registry 승인을 공개/Storage 권한 승인으로 확대하지 않는다.
+4. 사회12회차는 기존 부모 ID 아래 공식 소답안 입력 단위를 연결한다. 2027 모의2논제는 기존 text 경로 재사용.
+5. 승인된 연결을 운영 반영 후 일반계정 선택/PDF/입력/버튼만 확인한다. Owner가 실제 평가를 검수한다.
+
+운영 WEB code1c6339b / deployment2cc8cd0a, Worker3e31db73(100%, CPU30000ms) 보존. 신규 WEB/Worker 배포0, Provider0, 추가비용0, APP빌드0. 기존 중앙2026수시 실평가1회차 성공은 재호출하지 않았다.

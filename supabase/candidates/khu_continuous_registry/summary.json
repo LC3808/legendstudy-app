@@ -1,0 +1,15 @@
+{
+  "target_exams": 24,
+  "new_exams": 16,
+  "existing_empty_exams": 4,
+  "new_questions": 51,
+  "production_applied": true,
+  "provider_calls": 0,
+  "precheck": {
+    "existing_empty_exams_preserved": true,
+    "new_ids_absent": true
+  },
+  "postcheck": {
+    "exact_question_sets": true
+  }
+}
