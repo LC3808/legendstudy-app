@@ -1,6 +1,6 @@
 # 중앙대 2026 모의논술 누락 계열 — 등록 보완 후보
 
-상태: NOT_APPLIED / OWNER_APPROVAL_PENDING. Project stlhijzpjfgwwdgunlsd.
+상태: APPLIED_METADATA_ONLY / STANDBY_PENDING. Project stlhijzpjfgwwdgunlsd.
 
 원인: 인문사회·경영경제 공식 문제/해설 resource 4개는 이미 존재하지만 해당 두 시험 Registry가 없다. 자연계열만 등록되어 UI도 그 계열만 표시했다. 기존 source-registration-v1 ID 생성 규칙을 그대로 재사용한다. 기존 자연 ID가 동일 규칙으로 재현됨을 확인했다.
 
@@ -13,3 +13,7 @@
 rollback.sql은 별도 승인이 필요한 미사용 후보 복구용이다. 수정되거나 참조된 행은 삭제하지 않으며 FK/CASCADE 우회 금지. 운영 공개/학생 기록 생성 후에는 전진 수정만 준비한다.
 
 문항별 평가 테스트/Provider 호출/DB 쓰기 실행 없음. 이 패키지는 기존 적용 완료 10회차 SQL과 별개다.
+
+## 운영 적용 결과
+
+Owner가 누락2회차 Registry 보완SQL 실행 승인. precheck4true → apply성공 → postcheck4true. 일반계정WEB2026모의 선택에 경영경제·인문사회·자연계열 표시, 두신규계열 각3문항/입력/저장버튼 표시확인. PDF와Worker실행승인은아직미연결이며 STANDBY완료가아니다. SQL재실행불필요. Provider/차감/WEB배포0.

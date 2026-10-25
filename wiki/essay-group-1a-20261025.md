@@ -246,3 +246,7 @@ Provider영수증6(평가3+기존독립검수3), 입력51324/출력6510tokens. c
 [공식 2026모의 공지](https://admission.cau.ac.kr/detail.do?board_seq=3249&menuurl=jcgylvDgJz1bdCxN45fl1g%3D%3D&pageNo=1)와 기존PDF의시험/문항단위만대조. 인문3·경영경제언어2/수리1. 평가품질검수/가상답안/Provider0.
 
 [등록보완 후보](../supabase/candidates/cau_2026_mock_missing_tracks/OWNER-README.md): 사전4true,apply/postcheck/rollback준비,NOT_APPLIED. 기존ID생성계약재사용;신규미등록시험2/문항6만추가대상. 운영SQL은이번2회차의별도승인필요. 이후정확resource를패키지/PDF/Worker에연결해야STANDBY이며등록만으로완료아님. 경영경제Math계약/공개승인우회금지.
+
+### 누락2회차 등록 적용 — Owner 승인 후
+
+Owner ‘누락2회차 Registry 보완SQL 실행 승인’ 후 사전4true→apply성공→사후4true. 신규인문 c7e17f5e-9037-5a78-8e77-7878a98230ca / 경영경제53bdd6f5-78be-548f-ac1b-23081f9bf74c, 각3문항. 기존 자연/4resource/정책/ID/기록보존. 일반계정운영WEB에서2026모의3계열선택과신규두계열각3문항입력/저장버튼표시확인. PDF원문준비중/첨삭준비중은아직남아있으며후속실행연결대상. 이번승인은등록메타데이터범위이며추가공개정책변경승인아님. Provider/차감/WEB재배포0.
