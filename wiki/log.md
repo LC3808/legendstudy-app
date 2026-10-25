@@ -4774,3 +4774,5 @@ MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·i
 - 2026-10-25: Owner 승인 중앙10회차/30문항 SQL사전11·사후8PASS, PDF20원본연결·해설비공개. 1-A 일반WEB공개경로 중앙10/성균3/경희2 확인. Pyodide초기화장애 동일소스재배포·목록순차조회로 증상복구, 다중사용자 안정성 잔여. Provider0·Credit/History/ID보존. [현재근거](essay-group-1a-20261025.md#2026-10-25-최신--승인-묶음-적용회차-서비스-확대).
 
 - 2026-10-25: 대학카드 조회를평가Worker와분리, 서버공개목록기준1회응답·로딩/오류구분·요청역전방지. 41tests/typecheck/build,일반계정새로고침3/페이지왕복2 PASS. WEBad522cdf, Provider/Credit/DB쓰기0. [원인·재발방지](essay-group-1a-20261025.md#2026-10-25-대학-카드-공개-상태-안정화).
+
+- 2026-10-25: 중앙인문실서비스 우선. Cloudflare CPU설정요청100328으로Free플랜확정/운영배포변경0. Owner Paid전환요청. 중앙runs0/Provider0/Credit0. [장애·재개](essay-group-1a-20261025.md#2026-10-25-중앙대-인문사회-실서비스--실행-한도-장애-확인).
