@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-25 — 1-A Manus 구조 대조·3시험 SQL 준비
+
+Manus 실제38회차와 운영54시험131문항 대조, 중앙누락자연6시험 기존자료12개 연결후보 확보. 경희2/성균1 전체7문항 입력·격리SQL(10/12)·운영사전PASS, Owner승인대기. 중앙인문10시험은 구조초안PASS/의미검수·공개미완료. 신규Provider·DB쓰기·배포0, 기존1/0Credit·History 보존. [상세](essay-group-1a-20261025.md).
+
 ## 2026-10-25 — Native APP 통합 업데이트 진행
 
 Owner 최신 지시로 APP 수정 후 빌드 재개, 제출 승인 별도. MY 공유 계약·Math 회차·고객 Credit·성장/내보내기 구현. WEB e9f1d4a/e6af7b54 고객 내역 배포 실측, 원장 원본 유지. [상세·미완료](app-release-20261025.md).
