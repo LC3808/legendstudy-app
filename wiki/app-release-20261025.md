@@ -54,3 +54,7 @@ APP rollback: 기존 출시 Android18(1.0.0)/iOS19(1.0.0) 유지, 신규 store s
 - `build/ios/ipa/legendstudy_app.ipa` SHA256 `0063d184aee48f77800031eca80b09604c5108d785657a61a1710921d35728b5`
 
 빌드 로그: `/tmp/app-ios-restored.log`, `/tmp/app-android-restored.log`, `/tmp/app-android-restored-apk.log`. 자동 검증 `/tmp/app-restored-analyze.log`, `/tmp/app-restored-tests.log`. Kotlin/SDK metadata/Flutter TTS SPM/Cupertino font 경고는 빌드 실패 아님; 도구/의존성 정책 변경 안 함.
+
+## Owner 후속 — APP 작업 중단 / 1-A 우선
+
+MY복원완료상태를유지하고추가APP UI개발·빌드·스토어업데이트중단. 첨삭결과UI문제는Owner보고/회귀여부미확정이며현재수정하지않는다. 중앙·성균·경희전체시험연결후Native모바일기준일괄개선. [지정범위·보존·재개조건](essay-group-1a-20261025.md).

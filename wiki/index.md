@@ -20,6 +20,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+논술 LAB 1-A(중앙·성균·경희), APP 중단: [시험 회차 전체 연결·보류·원본 명세](essay-group-1a-20261025.md).
+
 2026-10-25 Native APP 통합 업데이트: [Owner 범위·현재 검증·실기기·스토어 승인 경계](app-release-20261025.md).
 
 사용자 Credit 내역: [예약 숨김·사용 확정·빌드 보류](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).

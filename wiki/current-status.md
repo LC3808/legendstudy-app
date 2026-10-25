@@ -1,8 +1,8 @@
 # Current Status
 
-## 2026-10-25 — Native APP 통합 수정·검증 진행
+## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
-Owner iPhone 검수 후 MY UI 재설계 철회, 기존 화면 복원. Credit 내역·만료 수량, 결과 성장/공유, Math 회차/부분 제출/실패 재처리 유지. MY 복원본 Analyze/1123검사 PASS(7skip), Android2026102501/iOS20 Release 빌드 PASS. 실기기 상세 검수 미완료. WEB e9f1d4a/e6af7b54 Production·고객 내역/관리자 원장 확인, remote 일치. 스토어 제출은 최종 승인 필요. [범위·검증·잔여·롤백](app-release-20261025.md).
+MY Native 복원·양기기재설치 기존완료증거확인. APP UI/빌드/스토어중단,첨삭결과UI문제는회귀여부미확정·후속보류. Owner지정중앙/성균/경희54시험131문항(빈시험14),전체문항실행승인0;기존성균부분2문항보존. 시험별입력/자료연결명세작성,신규공개0·SQL/Provider0. WEB/결제/Credit/History보존. [1-A 상태·범위·다음실행](essay-group-1a-20261025.md), [기존복원증거](app-release-20261025.md).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 

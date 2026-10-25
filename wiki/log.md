@@ -4756,3 +4756,5 @@ Owner빌드중단후 APP/WEB reserve/release숨김·동일decision consume합산
 Android/iOS 새 Release 빌드·기존 데이터 보존 설치/실행. Owner iPhone12 Pro Max 확인 후 MY 기존 UI 복원 요청: 이번 MY 재설계 철회, Credit·회차·결과 개선 유지. 복원본 재검증/재빌드 중, 스토어 제출 없음. [결정·범위](app-release-20261025.md).
 
 MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·iOS IPA1.0.1(20) 빌드 PASS, 양 기기 재설치·실행 PASS. 상세 실제 거래/전체 시나리오는 미확인, 스토어 미제출.
+
+- 2026-10-25: APP MY복원코드/검증/양기기재설치이력확인후APP개발중단. 1-A READ-ONLY54시험131문항/전체회차승인0 확인,중앙기존139자료후보발견. [실행명세·APP UI보류](essay-group-1a-20261025.md). 신규SQL/배포/Provider0.
