@@ -1,6 +1,6 @@
 # 논술 LAB 1-A — 시험 회차 전체 연결 / 2026-10-25
 
-상태: 성균2026 언어2교시 전체3문항 최초·무료 재첨삭 운영 완료(관리자 계정). 일반계정에서 2교시 세 문항·PDF·1Credit 견적 확인. 일반계정 실제 Provider 제출은 반복하지 않음. APP 작업 중단 유지. 최신 Manus 구조 대조 및 신규 인문3시험 SQL 승인 대기는 문서 말미 참조.
+상태: 성균2026 언어2교시 전체3문항 최초·무료 재첨삭 운영 완료(관리자 계정). 일반계정에서 2교시 세 문항·PDF·1Credit 견적 확인. 일반계정 실제 Provider 제출은 반복하지 않음. APP 작업 중단 유지. 최신 승인된 인문3회차·중앙10회차 연결 상태는 문서 말미 참조. 이전 승인대기 기록은 당시 이력이다.
 
 ## Owner 범위와 복구 확인
 
@@ -155,3 +155,42 @@ Production READ-ONLY 재조회: 1-A 54시험131문항 유지. 조사 ZIP2의 실
 현재 공개 성과는 이전과 동일: 중앙0/22, 성균 일반접근 검증1/15(2교시), 경희0/17. 성균 DB전체연결2시험·6문항과 회차실평가1시험을 구분한다. 기존최초1/무료0Credit·History·성장비교 결과 재사용. 이 후속작업 Provider0회/추가비용0, 과거 비용NULL은 미확정 유지. 운영WEB b08beb10/Worker e6ffbdb4 보존, 새배포·Secret변경·APP빌드0.
 
 다음: 승인된3시험SQL만 적용→기존소스/설정보존 배포→일반계정공개검증. 중앙 인문 전체 의미/전달 연결과 누락자연6회차의 기존자료 조립은 병행 가능한 독립작업. 수리/혼합형은 부모ID보존·답안단위별근거·단일회차1Credit 계약을 먼저 연결하며 두 평가엔진에 각각Credit을 예약하지 않는다.
+
+
+## 2026-10-25 최신 — 승인 묶음 적용·회차 서비스 확대
+
+Owner 긴급 지시로 문항별 가상답안/Provider 품질 반복을 중단했다. 시험 전체 ID·공식자료·입력·PDF·기존 정산/History 연결만 확인한다. 과거 중앙 “전체 의미검수 대기”는 공개 선행조건에서 제거했다. 공식자료 오연결·권한·정산 무결성은 계속 차단한다.
+
+### 경희2·성균1 회차 적용 및 실제 공개
+
+Owner 승인 후 text-expansion/owner-sql 사전10→적용→사후12 모두true. 기존14runtime 정책 독립비교 보존. Worker c9470a54/WEB1455ed8b 배포, 기존69개 실행모듈·bindings·Secret 보존. 일반계정(잔액11)에서 경희2026수시 인문체육2문항·경희2027모의 인문체육2문항·성균2027모의 언어3문항 모두 선택/입력란/PDF실제렌더/1Credit 요청경로 표시 확인. 답안 생성·제출 없음. 기존 성균2026언어1교시도3문항/PDF6쪽/1Credit 경로 확인하여 성균의 전체 공개3회차를 확인했다. 기존2교시 성공 E2E 재실행 없음.
+
+### 중앙 인문10회차 승인 및 DB/배포 연결
+
+Owner “중앙대 10회차 묶음 SQL 실행 승인” 후 central-owner-sql 사전11true→적용→사후8true. 2022모의,2023수시/모의,2024수시/모의,2025수시/모의,2026수시,2027모의 일반/창의 인문사회: 전체30문항. 기존 시험/문항/resource ID를 보존했다. 기존 공식PDF20개를 원본 hash로 private Storage에 저장 후 다운로드 SHA25620/20일치. 기존 객체 덮어쓰기0, 공개문제10개만 exact SELECT, 해설10개 비공개. 문서20연결/review10/revision10/runtime case10추가. reader·제출/정산/auth/History/Ledger 함수 변경0. 자료 추출 NUL구분자는 공백으로 정규화, 원본PDF불변.
+
+격리PostgreSQL 사전11/사후8, 입력30PASS, 기존정책/완료기록보존·중복/진행중적용차단·롤백멱등·과거package조회 PASS. 실제 배포코드/Registry에도 전체입력30PASS. 기존 binding 그대로 사용했고 Provider호출0. 운영사후8true 및 provider_binding_valid10true.
+
+Worker `4e90d13b-763b-47a3-8d04-0648fb76608d`(registry_asset.py만 변경, 기존80시험과69모듈보존). 공개목록에 중앙10개만추가. WEB `13008e1b-296b-4209-a0ac-5b804fa82756`, 코드 `6e740c2`, PDF manifest30행 추가/기존512행보존. 관련17tests/Next135경로buildPASS. Pages는 ESSAY_PUBLIC_EXAMS만 PATCH, 다른Secret/설정 원문 재전송 없음.
+
+중앙 일반계정에서 10회차 모두 전체3문항 탭·답안 입력란·문제보기·서버 승인 후 1Credit 요청 경로를 확인했다. 답안이 비어 있어 버튼은 disabled이며 유료제출은 하지 않았다. 2025수시 PDF7쪽·2026수시 PDF10쪽·2027창의 PDF7쪽 실제렌더도 확인했다. 전수 원본20개 hash/정책검증과 실제 PDF 렌더 검증 범위는 구분한다.
+
+공통 장애: 중앙2027 두회차 이용가능 조회가 준비중으로 남았으며 운영 tail에서 Python initPyInstance의 `Cannot enter a promising task` 오류 확인. [Cloudflare workerd #7814](https://github.com/cloudflare/workerd/issues/7814)에 같은 증상 보고가 있으나 우리환경의 CPU초과 원인은 미확정이다. 기존70모듈·bindings·runtime설정 전부 동일한 새 Worker `53d20942-24cd-4286-b18b-ff6e254a6e2f`로 런타임 재생성, deployment `90e1d89e-b190-415d-b33e-033dcdb8ec83`. WEB 목록의 admission 병렬3개를 순차조회로 변경하여 자체 동시초기화 부담을 줄였다. 회차 제출·평가·정산 경로는 변경0. 관련31tests PASS, WEB `6a9b716`, Production `497ea786-6dc8-42a9-aeeb-7db20a1d9fa0` 성공. 두2027회차 모두 일반계정 첨삭경로 정상전환 확인. 이는 증상 복구/부담 완화이며 Cloudflare 원천버그 해결 또는 다중사용자 부하검증 완료가 아니다. 재발 시 신규 유료요청을 늘리지 말고 tail의 초기화/CPU오류와 기존 요청 상태부터 확인한다.
+
+|대학|대상시험|전체연결|일반WEB 공개경로 확인|보류/미완료|
+|---|---:|---:|---:|---:|
+|중앙|22|10|10|12|
+|성균관|15|3|3|12|
+|경희|17|2|2|15|
+
+총15회차의 일반 사용자 접근·전체답안·첨삭 admission 확인. 실제 Provider 회차 E2E는 기존 성균언어2교시1회차 성공만 재사용하며 신규15회차 실평가PASS로 확대 해석하지 않는다. 나머지39회차 미완료, 대학전체완료 아님.
+
+### APP 호환성 GAP 및 보존
+
+현 Native코드는 /api/essay/exam availability/quote/submit, 전체/부분 텍스트답안·기존무료재첨삭·추가미제출회차 계약을 구현한다. 입력저장0, 최초1/무료0 계약은 기존 성공 회차 증거를 재사용한다. 이미지가 있는 답안은 Native회차submit에서 명시 차단되므로 수리/혼합 회차 호환 완료 아님. 고정 student_pdf_catalog에는 경희 신규2회차가 있으나 성균2027언어와 중앙10회차가 없다. 앱에서 동일PDF/새회차 전체사용가능이라고 보고하지 않는다. APP 코드/빌드/스토어변경0.
+
+### 재개·복구
+
+`text-expansion/central-owner-sql/`의 네SQL·README, central-storage-result/central-production-postcheck/central-sql-isolation-result/central-worker-version/central-web-deployment.json에 현재 증거 보존. 이미 적용한3+10회차 SQL재실행금지. DBrollback은 해당신규case·PDF정책만제거하고review/revision/결과/원본보존. 중앙확대 직전WEB1455ed8b/Workerc9470a54로복구가능하며 공개목록은 해당10개만제거. 학생요청을 새예약으로우회하지않는다.
+
+남은 중앙12회차는 수리/혼합 답안단위·기존Math회차연결, 성균12/경희15는 빈Registry/자료정확연결/수리·혼합계약으로 구분해 이어간다. 대표Provider실행을 공개상한으로 삼지 않는다. 이번후속Provider0/추가평가비용0, 기존15영수증비용NULL은미확정유지.

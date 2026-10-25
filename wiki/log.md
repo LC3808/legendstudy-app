@@ -4768,3 +4768,7 @@ MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·i
 - 2026-10-25 1-A 후속: 성균 두 회차 DB 전체연결·WEB PDF배포, 실제3문항 요청의 부분성공/품질차단/pending 발견. 문항별 큐 continuation13PASS 및 Worker e6ffbdb4 배포. 예약Credit/기존결과 보존, pending복구와 일반계정E2E 미완료. [상태·복구](essay-group-1a-20261025.md).
 
 - 2026-10-25: Owner 승인 후 성균2교시 중단run 원본보존 복구, 최초3문항/1Credit 및 무료재첨삭3문항/0Credit 완료. WEB History·성장비교 확인(admin). 일반계정2교시 전체3문항·PDF·1Credit견적PASS, 실평가는 관리자범위. 중앙44PDF 재사용/경희9시험 초안조립. [증거·재개](essay-group-1a-20261025.md).
+
+- 2026-10-25: Owner 승인 인문3회차(경희2/성균1) 및 중앙인문10회차 SQL적용·WEB/Worker연결. 신규3회차 일반WEB PASS, 중앙10회차 실제접근확인진행. 가상답안/Provider0, 기존Credit/History보존. [상태·복구·Native GAP](essay-group-1a-20261025.md#2026-10-25-최신--승인-묶음-적용회차-서비스-확대).
+
+- 2026-10-25: Owner 승인 중앙10회차/30문항 SQL사전11·사후8PASS, PDF20원본연결·해설비공개. 1-A 일반WEB공개경로 중앙10/성균3/경희2 확인. Pyodide초기화장애 동일소스재배포·목록순차조회로 증상복구, 다중사용자 안정성 잔여. Provider0·Credit/History/ID보존. [현재근거](essay-group-1a-20261025.md#2026-10-25-최신--승인-묶음-적용회차-서비스-확대).

@@ -1,0 +1,664 @@
+{
+  "central-production-postcheck.json": [
+    {
+      "whole_question_sets": true,
+      "all_ten_packages_readable": true,
+      "exact_bindings": true,
+      "ten_initial_revisions": true,
+      "reader_unchanged": true,
+      "private_bucket": true,
+      "documents_connected": true,
+      "question_select_only": true
+    }
+  ],
+  "central-sql-isolation-result.json": {
+    "status": "PASS",
+    "exams": 10,
+    "questions": 30,
+    "prechecks": 11,
+    "postchecks": 8,
+    "postgres_digest_input_pass": 30,
+    "other_policies_preserved": true,
+    "completed_history_preserved": true,
+    "ledger_fixture_preserved": true,
+    "duplicate_blocked": true,
+    "active_run_blocked": true,
+    "rollback_idempotent": true,
+    "rollback_keeps_packages": true,
+    "production_writes": 0
+  },
+  "central-worker-version.json": {
+    "old_version": "c9470a54-3c27-4db2-9f81-63d10fa1b5ec",
+    "candidate_version": "4e90d13b-763b-47a3-8d04-0648fb76608d",
+    "bindings_preserved_except_approved_public_scope": true,
+    "runtime_settings_preserved": true,
+    "changed_modules": [
+      "registry_asset.py"
+    ],
+    "source_modules": 70,
+    "deployed": true,
+    "deployment_id": "9abf38fa-40ee-4be8-9ce2-a80ffed755cc",
+    "diagnostic_version_retired": true
+  },
+  "central-web-deployment.json": {
+    "id": "13008e1b-296b-4209-a0ac-5b804fa82756",
+    "environment": "production",
+    "stage": "success",
+    "url": "https://13008e1b.legendstudy-lab.pages.dev"
+  },
+  "production-postcheck.json": [
+    {
+      "exam_1_all_readable": true,
+      "exam_1_metadata_preserved": true,
+      "exam_1_binding_preserved": true,
+      "exam_2_all_readable": true,
+      "exam_2_metadata_preserved": true,
+      "exam_2_binding_preserved": true,
+      "exam_3_all_readable": true,
+      "exam_3_metadata_preserved": true,
+      "exam_3_binding_preserved": true,
+      "whole_question_sets": true,
+      "reader_unchanged": true,
+      "exact_storage_select": true
+    }
+  ],
+  "worker-version.json": {
+    "old_version": "e6ffbdb4-5024-4420-b335-d3c146022564",
+    "candidate_version": "c9470a54-3c27-4db2-9f81-63d10fa1b5ec",
+    "bindings_preserved_except_approved_public_scope": true,
+    "runtime_settings_preserved": true,
+    "changed_modules": [
+      "registry_asset.py"
+    ],
+    "source_modules": 70,
+    "deployed": true,
+    "deployment_id": "ae541a30-1813-417d-b9d4-eb43632a6e8b"
+  },
+  "web-deployment.json": {
+    "id": "1455ed8b-041f-4ff8-9bf6-d27895832f94",
+    "environment": "production",
+    "url": "https://1455ed8b.legendstudy-lab.pages.dev",
+    "stage": "success"
+  },
+  "central_manifest": {
+    "exams": [
+      {
+        "exam_id": "e9b09cc6-9cd5-5007-b49c-484da64f2007",
+        "year": 2022,
+        "kind": "mock",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "e7f93737-f8d5-56c5-82c7-cb6329919a20",
+        "year": 2023,
+        "kind": "mock",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "e5b2613b-c245-529c-bfc9-37259da65b91",
+        "year": 2023,
+        "kind": "admission",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "fa511a8e-1071-5751-be81-6498cbdad93e",
+        "year": 2024,
+        "kind": "admission",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "f96e5ea4-97f1-5b48-99de-8e594341bdf5",
+        "year": 2024,
+        "kind": "mock",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "ef7651da-30b5-5d33-9620-3751e0f217ad",
+        "year": 2025,
+        "kind": "admission",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "1d4e08ac-f3eb-5c1c-a99d-1ab9871fea12",
+        "year": 2025,
+        "kind": "mock",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "f3c52b3d-8768-5a11-a64a-fc93be3317c0",
+        "year": 2026,
+        "kind": "admission",
+        "track": "인문사회",
+        "question_count": 3
+      },
+      {
+        "exam_id": "d4b2fa8a-4ae6-5332-a99b-9020718233c5",
+        "year": 2027,
+        "kind": "mock",
+        "track": "인문사회(창의)",
+        "question_count": 3
+      },
+      {
+        "exam_id": "488edd8c-e6b6-50e0-a219-305c9fbf8f2b",
+        "year": 2027,
+        "kind": "mock",
+        "track": "인문계열(일반)",
+        "question_count": 3
+      }
+    ],
+    "documents": {
+      "1b5b3bb1b041de3ab0a8824402d41cf9ab0f4cb0a589c06adc97d157d7eee014": {
+        "resource_id": "0a3f0037-2d7d-5cdb-a192-9514d43e4656",
+        "source_hash": "1b5b3bb1b041de3ab0a8824402d41cf9ab0f4cb0a589c06adc97d157d7eee014",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "e9b09cc6-9cd5-5007-b49c-484da64f2007",
+        "title": "중앙 2022 mock 인문사회 question"
+      },
+      "32807e47bcd2c96ba98aa51a7ae9674a49bf1cd0cd55484cac7a5191ed3668c0": {
+        "resource_id": "3e3413c4-9ee2-5040-986b-7cbdd40ebce3",
+        "source_hash": "32807e47bcd2c96ba98aa51a7ae9674a49bf1cd0cd55484cac7a5191ed3668c0",
+        "role": "official_solution",
+        "page_count": 17,
+        "question_marker_pages": {
+          "1": [
+            7,
+            11,
+            13,
+            14
+          ],
+          "2": [
+            7,
+            11,
+            14,
+            15
+          ],
+          "3": [
+            7,
+            11,
+            16,
+            17
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "e9b09cc6-9cd5-5007-b49c-484da64f2007",
+        "title": "중앙 2022 mock 인문사회 official_solution"
+      },
+      "3825eab0707d5327040b5363514d5eae691360e56daae58a4a67f561e126084b": {
+        "resource_id": "9c2c2c34-338a-577b-9758-9ee0446b1715",
+        "source_hash": "3825eab0707d5327040b5363514d5eae691360e56daae58a4a67f561e126084b",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "e7f93737-f8d5-56c5-82c7-cb6329919a20",
+        "title": "중앙 2023 mock 인문사회 question"
+      },
+      "107693afab9dceb4643e6b1a28f19faeacfe8d2e88c7fda0fc7e58ce65ede77e": {
+        "resource_id": "9586889b-7e30-5076-be8c-1a38e5ff37f3",
+        "source_hash": "107693afab9dceb4643e6b1a28f19faeacfe8d2e88c7fda0fc7e58ce65ede77e",
+        "role": "official_solution",
+        "page_count": 12,
+        "question_marker_pages": {
+          "1": [
+            5,
+            7,
+            8
+          ],
+          "2": [
+            5,
+            8,
+            9
+          ],
+          "3": [
+            5,
+            10,
+            11
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "e7f93737-f8d5-56c5-82c7-cb6329919a20",
+        "title": "중앙 2023 mock 인문사회 official_solution"
+      },
+      "752c6d044546f6d20b45c3e8af4a6d248a165f1b79c26d4fcb178e63ae1e8f04": {
+        "resource_id": "e1762e4b-dbbe-5003-9cdd-70fe0d505821",
+        "source_hash": "752c6d044546f6d20b45c3e8af4a6d248a165f1b79c26d4fcb178e63ae1e8f04",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "e5b2613b-c245-529c-bfc9-37259da65b91",
+        "title": "중앙 2023 admission 인문사회 question"
+      },
+      "9ce9e17905c05e3b997fe616bfb96b8dad8a6243485b29c8c36560019be69955": {
+        "resource_id": "977715f0-42cc-53a5-bc41-9b7019c8dbac",
+        "source_hash": "9ce9e17905c05e3b997fe616bfb96b8dad8a6243485b29c8c36560019be69955",
+        "role": "official_solution",
+        "page_count": 24,
+        "question_marker_pages": {
+          "1": [
+            1,
+            8
+          ],
+          "2": [
+            10,
+            18
+          ],
+          "3": [
+            20,
+            24
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "e5b2613b-c245-529c-bfc9-37259da65b91",
+        "title": "중앙 2023 admission 인문사회 official_solution"
+      },
+      "fffff50031b381b9418eb34580fe617ee2ee8c5fb2ae86de8e1b9c04fd74dce5": {
+        "resource_id": "d01a10a3-9f80-5b53-8a56-feb635e8108f",
+        "source_hash": "fffff50031b381b9418eb34580fe617ee2ee8c5fb2ae86de8e1b9c04fd74dce5",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "fa511a8e-1071-5751-be81-6498cbdad93e",
+        "title": "중앙 2024 admission 인문사회 question"
+      },
+      "523508bdf2ae45f3ff1cd3e9e19b825df6cc4eb6589620eed60ad7f46d373719": {
+        "resource_id": "f8ea6442-d7a7-5a5f-b68a-78af0c23237a",
+        "source_hash": "523508bdf2ae45f3ff1cd3e9e19b825df6cc4eb6589620eed60ad7f46d373719",
+        "role": "official_solution",
+        "page_count": 24,
+        "question_marker_pages": {
+          "1": [
+            1,
+            7,
+            8
+          ],
+          "2": [
+            10,
+            17,
+            18
+          ],
+          "3": [
+            19,
+            23,
+            24
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "fa511a8e-1071-5751-be81-6498cbdad93e",
+        "title": "중앙 2024 admission 인문사회 official_solution"
+      },
+      "243fb50db83b4bbe0a7faa5d52f22e590ea9c15b10e2bed39be82ad9b8d0196b": {
+        "resource_id": "6c18c0d0-2ce8-54dd-9d3e-f38f8cba65c2",
+        "source_hash": "243fb50db83b4bbe0a7faa5d52f22e590ea9c15b10e2bed39be82ad9b8d0196b",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "f96e5ea4-97f1-5b48-99de-8e594341bdf5",
+        "title": "중앙 2024 mock 인문사회 question"
+      },
+      "cf4c81df9bc636ae7468d84ee6f42331983bfa6414c61710b9e7a41d693b94c9": {
+        "resource_id": "fb970be5-083b-5b53-9140-43d05389717c",
+        "source_hash": "cf4c81df9bc636ae7468d84ee6f42331983bfa6414c61710b9e7a41d693b94c9",
+        "role": "official_solution",
+        "page_count": 12,
+        "question_marker_pages": {
+          "1": [
+            5,
+            7,
+            8
+          ],
+          "2": [
+            5,
+            9,
+            10
+          ],
+          "3": [
+            5,
+            11,
+            12
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "f96e5ea4-97f1-5b48-99de-8e594341bdf5",
+        "title": "중앙 2024 mock 인문사회 official_solution"
+      },
+      "8bcebbe5b5458c5a1b5c304b45c13ddcdc468863162a196b12b9dccabf69688f": {
+        "resource_id": "21f69d4f-6560-5c78-bd98-ee4de03384b0",
+        "source_hash": "8bcebbe5b5458c5a1b5c304b45c13ddcdc468863162a196b12b9dccabf69688f",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "ef7651da-30b5-5d33-9620-3751e0f217ad",
+        "title": "중앙 2025 admission 인문사회 question"
+      },
+      "033f1d4bb892161d77187234c34cf75cfc83417270b52308efedc3c5ed226b89": {
+        "resource_id": "a673d454-9019-5f5c-8e70-100376c6faee",
+        "source_hash": "033f1d4bb892161d77187234c34cf75cfc83417270b52308efedc3c5ed226b89",
+        "role": "official_solution",
+        "page_count": 6,
+        "question_marker_pages": {
+          "1": [
+            1,
+            3,
+            4
+          ],
+          "2": [
+            1,
+            3,
+            5
+          ],
+          "3": [
+            1,
+            3,
+            6
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "ef7651da-30b5-5d33-9620-3751e0f217ad",
+        "title": "중앙 2025 admission 인문사회 official_solution"
+      },
+      "ae7f0fc58b4d0fa445b288e5819ba66264c0bfa24710c3d0cced7ba665f72038": {
+        "resource_id": "65024822-9331-5aae-aac5-a0b5c163dc3e",
+        "source_hash": "ae7f0fc58b4d0fa445b288e5819ba66264c0bfa24710c3d0cced7ba665f72038",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            7
+          ],
+          "2": [
+            7
+          ],
+          "3": [
+            7
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "1d4e08ac-f3eb-5c1c-a99d-1ab9871fea12",
+        "title": "중앙 2025 mock 인문사회 question"
+      },
+      "595b353e6dcce99f033dfce994602a42fff12ca3a26c2d957dec7ecf6d0dc8fe": {
+        "resource_id": "c0d76041-b41e-5c78-85da-1c118c17427e",
+        "source_hash": "595b353e6dcce99f033dfce994602a42fff12ca3a26c2d957dec7ecf6d0dc8fe",
+        "role": "official_solution",
+        "page_count": 12,
+        "question_marker_pages": {
+          "1": [
+            5,
+            7,
+            8
+          ],
+          "2": [
+            5,
+            9,
+            10
+          ],
+          "3": [
+            5,
+            11,
+            12
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "1d4e08ac-f3eb-5c1c-a99d-1ab9871fea12",
+        "title": "중앙 2025 mock 인문사회 official_solution"
+      },
+      "44c6026eaccde7437d02f957ff6a029973d2a5cb3df55db9e364640a69b9e0fe": {
+        "resource_id": "a52b305f-4245-5a83-a104-cb7cbf6127ea",
+        "source_hash": "44c6026eaccde7437d02f957ff6a029973d2a5cb3df55db9e364640a69b9e0fe",
+        "role": "question",
+        "page_count": 10,
+        "question_marker_pages": {
+          "1": [
+            8
+          ],
+          "2": [
+            8
+          ],
+          "3": [
+            8
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "f3c52b3d-8768-5a11-a64a-fc93be3317c0",
+        "title": "중앙 2026 admission 인문사회 question"
+      },
+      "17a75a5832c76cb8edda87e729ebd4c55a5c05472583bd88da65ad2d938d7705": {
+        "resource_id": "b151c1b5-f7e7-5e8c-a996-564d2e3f900a",
+        "source_hash": "17a75a5832c76cb8edda87e729ebd4c55a5c05472583bd88da65ad2d938d7705",
+        "role": "official_solution",
+        "page_count": 6,
+        "question_marker_pages": {
+          "1": [
+            1,
+            3,
+            4
+          ],
+          "2": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "3": [
+            1,
+            3,
+            5,
+            6
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "f3c52b3d-8768-5a11-a64a-fc93be3317c0",
+        "title": "중앙 2026 admission 인문사회 official_solution"
+      },
+      "b74427eb3f00e1edca79ea804d7219b55b86d4e701be7879a985cf9249d3055c": {
+        "resource_id": "4304518c-773f-5594-9b7e-bf5e7d601124",
+        "source_hash": "b74427eb3f00e1edca79ea804d7219b55b86d4e701be7879a985cf9249d3055c",
+        "role": "question",
+        "page_count": 7,
+        "question_marker_pages": {
+          "1": [
+            2
+          ],
+          "2": [
+            2
+          ],
+          "3": [
+            5
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "d4b2fa8a-4ae6-5332-a99b-9020718233c5",
+        "title": "중앙 2027 mock 인문사회(창의) question"
+      },
+      "bb529acb8ff513f5ad7bfd088e1d6dc157d1581c52fcb0355c6220539f552863": {
+        "resource_id": "cf8bf9a1-5630-558a-adac-0e6617dcb17d",
+        "source_hash": "bb529acb8ff513f5ad7bfd088e1d6dc157d1581c52fcb0355c6220539f552863",
+        "role": "official_solution",
+        "page_count": 5,
+        "question_marker_pages": {
+          "1": [
+            2,
+            3
+          ],
+          "2": [
+            2,
+            4
+          ],
+          "3": [
+            2,
+            4,
+            5
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "d4b2fa8a-4ae6-5332-a99b-9020718233c5",
+        "title": "중앙 2027 mock 인문사회(창의) official_solution"
+      },
+      "c663f67a99d6851a4a18bd1fda33d5c4f4fc59e25b0fc934952aa861dbe694c1": {
+        "resource_id": "0b5d3402-bf79-57fa-9abc-935691315e36",
+        "source_hash": "c663f67a99d6851a4a18bd1fda33d5c4f4fc59e25b0fc934952aa861dbe694c1",
+        "role": "question",
+        "page_count": 11,
+        "question_marker_pages": {
+          "1": [
+            9
+          ],
+          "2": [
+            9
+          ],
+          "3": [
+            9
+          ]
+        },
+        "has_intent": false,
+        "has_criteria": true,
+        "exam_id": "488edd8c-e6b6-50e0-a219-305c9fbf8f2b",
+        "title": "중앙 2027 mock 인문계열(일반) question"
+      },
+      "84780cf0bc9856f3d97c77000eb7be35bec86e94d92ae2a00e05e8d87ab2709c": {
+        "resource_id": "71c1e3bf-8a8e-5bdb-88f7-9c4193372a5d",
+        "source_hash": "84780cf0bc9856f3d97c77000eb7be35bec86e94d92ae2a00e05e8d87ab2709c",
+        "role": "official_solution",
+        "page_count": 6,
+        "question_marker_pages": {
+          "1": [
+            2,
+            3,
+            4
+          ],
+          "2": [
+            2,
+            4,
+            5
+          ],
+          "3": [
+            3,
+            5,
+            6
+          ]
+        },
+        "has_intent": true,
+        "has_criteria": true,
+        "exam_id": "488edd8c-e6b6-50e0-a219-305c9fbf8f2b",
+        "title": "중앙 2027 mock 인문계열(일반) official_solution"
+      }
+    },
+    "question_pdf_objects": [
+      "1b5b3bb1b041de3ab0a8824402d41cf9ab0f4cb0a589c06adc97d157d7eee014.pdf",
+      "243fb50db83b4bbe0a7faa5d52f22e590ea9c15b10e2bed39be82ad9b8d0196b.pdf",
+      "3825eab0707d5327040b5363514d5eae691360e56daae58a4a67f561e126084b.pdf",
+      "44c6026eaccde7437d02f957ff6a029973d2a5cb3df55db9e364640a69b9e0fe.pdf",
+      "752c6d044546f6d20b45c3e8af4a6d248a165f1b79c26d4fcb178e63ae1e8f04.pdf",
+      "8bcebbe5b5458c5a1b5c304b45c13ddcdc468863162a196b12b9dccabf69688f.pdf",
+      "ae7f0fc58b4d0fa445b288e5819ba66264c0bfa24710c3d0cced7ba665f72038.pdf",
+      "b74427eb3f00e1edca79ea804d7219b55b86d4e701be7879a985cf9249d3055c.pdf",
+      "c663f67a99d6851a4a18bd1fda33d5c4f4fc59e25b0fc934952aa861dbe694c1.pdf",
+      "fffff50031b381b9418eb34580fe617ee2ee8c5fb2ae86de8e1b9c04fd74dce5.pdf"
+    ],
+    "production_applied": true
+  },
+  "additional_provider_calls": 0,
+  "existing_credit_history_contract": "PRESERVED",
+  "public_confirmation": {
+    "central": 10,
+    "skku": 3,
+    "khu": 2,
+    "scope": "ordinary web whole-question input, PDF connection and admission; not new Provider E2E",
+    "remaining_exams": 39
+  },
+  "latest_worker": "53d20942-24cd-4286-b18b-ff6e254a6e2f",
+  "latest_web": "497ea786-6dc8-42a9-aeeb-7db20a1d9fa0",
+  "runtime_risk": "Observed Pyodide init failure recovered with unchanged source redeploy; catalog serialized; multi-user recurrence not ruled out"
+}
