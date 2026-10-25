@@ -2,7 +2,7 @@
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
-Owner 승인 연속연결: 경희인문11/11(신규9), 경희사회11/13(신규11), 성균언어16/16(신규13). 총신규33·기존5=38회차 WEB STANDBY / OWNER QA PENDING. 경희2023수시오전·2025모의사회는그래프답안 단일회차연결 보류. 일반계정PDF·입력·저장UI·1Credit요청경로확인, 실제제출/Provider0. DB4묶음적용, WEB011af05b(code7cc0a6f), Workerfafe9380 100%. 공개목록한도42→64, UUID/승인검사는유지. Credit/History·Secret보존, APP빌드0. [정확한 범위·복구](essay-group-1a-20261025.md#연속-연결-최종-상태).
+경희 인문11/11·사회11/13, 성균언어16/16: 총38/40회차 STANDBY / OWNER QA PENDING. 일반계정에서38회차 각각 입력·브라우저저장·버튼활성·서버1Credit quote 확인 후 취소/초안복원, Provider/평가제출/차감0·잔액10. PDF는연결승인38/대표렌더확인. 사회그래프2회차 단일예약이미지연결보류. WEB0465161/fd558454: 조회중·오류를준비중과구분. Workerfafe9380·기존Credit/History/Secret유지, SQL/APP빌드0. [회차별증거·복구](essay-group-1a-20261025.md#standby-실제-입력서버-견적-확인).
 
 
 
