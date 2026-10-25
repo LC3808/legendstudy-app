@@ -234,3 +234,7 @@ Provider영수증6(평가3+기존독립검수3), 입력51324/출력6510tokens. c
 잔여표시문제: 평가결과는자동표시됐으나앞서노출된‘평가완료를아직확인하지못했어요’안내문구가함께남았다. History에는정상완료이며정산/결과저장실패아님. 별도최소표시수정대상으로기록,이번에UI/WEB재배포확대안함. Owner화면확인전경영경제작업금지.
 
 복구: 기존Worker53d20942버전으로deployment전환가능하나이전실행한도장애재현가능. 정상3e31db73유지우선. SQL재실행·Secret변경·기존요청새예약우회금지. evidence: text-expansion/central-cpu-limit-candidate.json.
+
+## 최신 Owner 정책 적용 — 중앙 인문 STANDBY
+
+[전체 대학 공통 STANDBY 정책](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책)이 과거 중앙 실제평가 완료 선행조건을 대체한다. 기존 연결/PDF/입력/승인 증거 및 Paid Worker 복구를 재사용하여 중앙 인문10회차·30문항을 WEB STANDBY / OWNER QA PENDING으로 관리한다. 실제평가성공1회차와 구분. 새Provider호출/가상답안/시험별 재검수/SQL재적용 없음. Owner 확인 전 경영경제 착수하지 않는다. 기존 완료 후 안내문구 잔존은 알려진 표시 오류로 보존한다. APP의 미배포 카드/PDF 수정과 실기기 호환성은 이 WEB 판정에 포함하지 않는다.
