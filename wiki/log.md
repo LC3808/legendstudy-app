@@ -4738,3 +4738,7 @@ Owner 미제출 문항 새회차1Credit·무료집합고정 확정. 회차 실�
 - 2026-10-25: 기존 관리자 조회 검수 완료 후 WEB MY 재설계 운영7f9defb7/source79040d6 반영. 400/500px·clipboard·PNG PASS, APP코드/DB/Worker/Secret 변경0. 기존catalog6FAIL/빈suite1 및 실제APP동기화·넓은PC 재검수 미완료. [상세](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영).
 
 - 2026-10-25: Owner 후속 성장 비교 세로막대/정확한 평가명 WEB651479b·운영eba32637 반영. 관련90PASS/2skip, 타입·린트·빌드 및1752px 실제19항목/PNG 확인. DB/APP/Worker 변경0. [상세](phase3-service-20261022.md#2026-10-25-web-my-재설계-운영-반영).
+
+## 2026-10-25 관리자 구매 정정 및 스토어 준비
+
+WEB8261d17/7ff387f2 배포·운영5행/모바일3건5크레딧 확인. Owner 읽기RPC 적용, Ledger불변. 구매잔액4=지급5-사용1. WEB관련102/APP구매12PASS, 양플랫폼설정검사PASS. 스토어콘솔로그인대기·업로드미실행. [상세](payment-app-foundation.md#2026-10-25-관리자-모바일-구매-집계-정정스토어-준비).

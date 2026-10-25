@@ -1,8 +1,8 @@
 # Current Status
 
-## 2026-10-25 — WEB 통합 운영 배포
+## 2026-10-25 — WEB 관리자 구매 정정·스토어 준비
 
-WEB `e5106e3` / Production `f73a03d0-6fa7-4969-9e93-d099fb513a1c` API 확인. Worker17b3bd65 유지. MY 목표 통합·공유 팝오버·공통 관리자 디자인 반영. Owner 조회 RPC 적용, 회원13/profiles12·인문30회·실행승인10시험12문항 확인. 0건 원인은 legacy 단일문항 집계 누락, 공개0은 is_published와 runtime scope 차이. 관련244PASS/3skip·타입/Lint/boundary/buildPASS. 기존 catalog6FAIL+빈suite, 신규 실운영 다문항Math·Native실기기 미검증은 남김. Provider/과금/Secret/APP코드 변경0. 롤백WEB eba32637; Worker 과거 단일문항 버전 rollback 금지. [상세·검증 한계](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/integrated-release-20261025/README.md).
+WEB8261d17/Production7ff387f2 운영확인. Owner 모바일 조회RPC 적용, IAP Google1건1+Apple2건4=3건5크레딧, 사용1후잔액4. Toss와분리·목록5행·예약/확정 한국어 표시. 관련102검사/타입/Lint/boundary/buildPASS, APP구매12검사PASS. 스토어 production config검사PASS, 콘솔로그인·최신빌드번호 확인대기. 기존 통합 MY/공유/admin 집계 완료 유지, Math실운영다문항·Native신규검증 미완료. [상세·복귀·스토어 잔여](payment-app-foundation.md#2026-10-25-관리자-모바일-구매-집계-정정스토어-준비).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 

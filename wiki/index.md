@@ -48,7 +48,7 @@ WEB MY Oct25: [운영 반영·보존·검증 한계](phase3-service-20261022.md#
 
 MY/Application/Study/Student360 Oct08 follow-up: [shared foundation](my-shared-foundation.md) (006–008 Production-applied; authenticated acceptance pending;005 HELD).
 
-Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — isolated verified; TEST records only, Production NOT_APPLIED.
+Payment / Toss / purchased Credit: [APP payment foundation](payment-app-foundation.md) — [Oct25 모바일 구매 운영 집계·스토어 준비](payment-app-foundation.md#2026-10-25-관리자-모바일-구매-집계-정정스토어-준비); 이전 TEST-only 기록은 역사적 상태.
 
 Account deletion / ADR-2D: [Ownership correction and Owner retry checklist](account-deletion-ownership-compatibility.md) — isolated verified; failed Production attempt rolled back; retry requires Owner review.
 
