@@ -116,7 +116,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       if (current) {
         setState(
           () => notice = error is PostgrestException && error.code == 'PT402'
-              ? '사용 가능한 Credit 또는 포함 재첨삭 조건을 확인해 주세요.'
+              ? '사용 가능한 크레딧 또는 포함 재첨삭 조건을 확인해 주세요.'
               : '처리 결과를 확인하지 못했어요. 같은 요청으로 다시 확인해 주세요. 새 답안의 첨삭을 중복 요청하지 마세요.',
         );
       }
@@ -149,7 +149,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     } else if (current) {
       setState(
         () => notice = next['evaluation_state'] == 'FAILED'
-            ? '첨삭이 완료되지 않았어요. Credit 잔액과 기록을 확인해 주세요.'
+            ? '첨삭이 완료되지 않았어요. 크레딧 잔액과 기록을 확인해 주세요.'
             : '첨삭 처리 중이거나 결과 확인이 필요해요. 잠시 후 다시 확인해 주세요.',
       );
     }
@@ -353,7 +353,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
           children: [
             const CreditBalanceCard(),
             const Text(
-              '1 Credit으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. ',
+              '1 크레딧으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. ',
             ),
             if (!canEvaluate) const Text('문항을 확인할 수 있어요. 현재 첨삭은 이용할 수 없습니다.'),
             if (notice != null)
@@ -469,7 +469,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
             if (evaluation != null)
               OutlinedButton(
                 onPressed: busy ? null : () => run(refresh),
-                child: const Text('결과·Credit 다시 확인'),
+                child: const Text('결과·크레딧 다시 확인'),
               ),
             if (evaluation != null && state?['evaluation_state'] == 'REQUESTED')
               OutlinedButton(

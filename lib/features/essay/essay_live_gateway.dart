@@ -46,7 +46,7 @@ class EssayClientError implements Exception {
   final String code;
   String get message => switch (code) {
     'PT401' => '로그인이 필요해요. 다시 로그인해 주세요.',
-    'PT402' => '이 첨삭에 사용할 수 있는 첨삭권이나 포함된 재첨삭 권리가 없어요.',
+    'PT402' => '이 첨삭에 사용할 수 있는 크레딧이나 포함된 재첨삭 권리가 없어요.',
     'PT403' => '이 학습 기록에 접근할 수 없어요.',
     'PT404' => '학습 기록을 찾을 수 없어요.',
     'PT409' => '저장 내용이나 요청 상태가 변경됐어요. 최신 기록을 확인해 주세요.',
@@ -103,18 +103,18 @@ class EssayServerStatus {
     'reconciling' => '처리 상태를 확인하고 있어요.\n다시 요청하지 않아도 됩니다.',
     'failed' =>
       noCreditConsumed
-          ? '첨삭을 완료하지 못했어요.\n첨삭권은 차감되지 않았습니다.'
-          : '첨삭을 완료하지 못했어요. 첨삭권 처리 상태를 확인해 주세요.',
+          ? '첨삭을 완료하지 못했어요.\n크레딧은 차감되지 않았습니다.'
+          : '첨삭을 완료하지 못했어요. 크레딧 처리 상태를 확인해 주세요.',
     _ => '첨삭이 완료됐어요.',
   };
   String? get creditMessage => state == 'reconciling'
       ? null
       : switch (creditState) {
-          'included' => '이번 재첨삭은 추가 첨삭권 없이 이용할 수 있어요.',
-          'reserved' => '첨삭권 1회가 예약됐어요. 첨삭 완료 시 사용됩니다.',
+          'included' => '이번 재첨삭은 추가 크레딧 없이 이용할 수 있어요.',
+          'reserved' => '크레딧 1회가 예약됐어요. 첨삭 완료 시 사용됩니다.',
           'settled' =>
-            creditMode == 'included' ? '추가 첨삭권 없이 완료됐어요.' : '첨삭권 사용이 확정됐어요.',
-          'released' => noCreditConsumed ? '첨삭권 예약이 해제됐어요.' : null,
+            creditMode == 'included' ? '추가 크레딧 없이 완료됐어요.' : '크레딧 사용이 확정됐어요.',
+          'released' => noCreditConsumed ? '크레딧 예약이 해제됐어요.' : null,
           _ => null,
         };
 }

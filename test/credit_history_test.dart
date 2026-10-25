@@ -107,7 +107,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('사용 가능 4 Credits'), findsOneWidget);
+      expect(find.text('사용 가능 4 크레딧'), findsOneWidget);
       expect(find.text('크레딧 내역이 없어요.'), findsOneWidget);
       expect(find.textContaining('사용 대기'), findsNothing);
     },

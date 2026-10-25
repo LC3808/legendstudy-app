@@ -71,6 +71,7 @@ void main() {
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
         final cta = find.widgetWithText(FilledButton, '답안 작성하기');
+        await tester.scrollUntilVisible(cta,200,scrollable:find.byType(Scrollable).last);
         expect(tester.widget<FilledButton>(cta).onPressed, isNull);
         for (final label in ['문제 1', '문제 2']) {
           await tester.ensureVisible(find.text(label));

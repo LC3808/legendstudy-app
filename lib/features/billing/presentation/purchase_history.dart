@@ -39,7 +39,7 @@ class PurchaseHistory extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text('Credit 지급이 완료된 구매 내역 · 최근 50건'),
+        const Text('크레딧 지급이 완료된 구매 내역 · 최근 50건'),
         const Text('무료 지급은 포함하지 않아요. 검증 중이거나 취소된 스토어 주문은 여기에 표시되지 않아요.'),
         Align(
           alignment: Alignment.centerRight,
@@ -65,12 +65,12 @@ class PurchaseHistory extends ConsumerWidget {
                     for (final row in rows) ...[
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: Text('${row['balance_delta']} Credit 충전'),
+                        title: Text('${row['balance_delta']} 크레딧 구매'),
                         subtitle: Text(
                           '${switch (row['reason_code']) {
                             'iap_google_v1' => 'Google Play',
                             'iap_apple_v1' => 'App Store',
-                            _ => 'Credit 구매',
+                            _ => '크레딧 구매',
                           }} · ${_date(row['created_at'] as String)}',
                         ),
                       ),

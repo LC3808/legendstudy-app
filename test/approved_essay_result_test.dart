@@ -30,14 +30,11 @@ void main() {
   });
   test('full existing catalog and independent history cycles preserved', () {
     expect(essayUniversityCatalog.length, 42);
-    expect(essayUniversityCatalog.map((u) => u['sourceUniversityId']).take(3), [
-      'gachon',
-      'cau',
-      'skku',
-    ]);
+    // Display order follows live admission; catalog identity remains complete.
+    expect(essayUniversityCatalog.map((u) => u['sourceUniversityId']).toSet(),
+      containsAll(['gachon', 'cau', 'skku']));
     expect(
       essayUniversityCatalog
-          .take(22)
           .any((u) => u['sourceUniversityId'] == 'pnu'),
       isTrue,
     );

@@ -445,7 +445,7 @@ EvaluationReport examEvaluationReport(
                 evaluationObject(c['binding'])['id'] == d['criterion_id'] &&
                 evaluationText(c['label']).isNotEmpty,
           ))
-            "${c['label']} — ${d['explanation']} (저장된 근거 참조 ${evaluationList(d['evidence_ids']).map(evaluationText).where((s) => s.isNotEmpty).toSet().length}개)",
+            "${c['label']} — ${d['explanation']}",
     ],
     previousReviews: evaluationList(out['previous_improvement_reviews'])
         .map(evaluationObject)

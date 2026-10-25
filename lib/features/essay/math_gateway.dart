@@ -67,6 +67,29 @@ class MathGateway {
     return value['types']['math'] == true || (browsing && canBrowse);
   }
 
+  Future<Set<String>> serviceExams() async {
+    checkOwner();
+    final request =
+        http.Request('GET', Uri.parse('$mathOrigin/api/essay/service-status'))
+          ..followRedirects = false
+          ..headers['Authorization'] =
+              'Bearer ${client.auth.currentSession!.accessToken}';
+    final response = await transport
+        .send(request)
+        .then(http.Response.fromStream)
+        .timeout(const Duration(seconds: 30));
+    checkOwner();
+    final data = jsonDecode(response.body);
+    if (response.statusCode != 200 ||
+        data is! Map ||
+        data['version'] != 'essay-service-status-v1' ||
+        data['checked'] != true ||
+        data['exams'] is! List) {
+      throw const FormatException('SERVICE_STATUS');
+    }
+    return (data['exams'] as List).map((e) => e['examId'] as String).toSet();
+  }
+
   Future<List<Map<String, dynamic>>> catalog() async {
     checkOwner();
     if (!await available(browsing: true)) return [];
@@ -109,6 +132,23 @@ class MathGateway {
       throw const FormatException('INVALID_RESPONSE');
     }
     return Map<String, dynamic>.from(value['result'] as Map);
+  }
+
+  Future<dynamic> session(String name, Map<String, dynamic> params) async {
+    checkOwner();
+    if (!{
+      'math_session_submit',
+      'math_session_read',
+      'math_session_history',
+      'math_session_retry',
+    }.contains(name)) {
+      throw ArgumentError('RPC');
+    }
+    final data = await client
+        .rpc<dynamic>(name, params: params)
+        .timeout(const Duration(seconds: 25));
+    checkOwner();
+    return data;
   }
 
   Future<void> uploadEvidence(String artifact, Uint8List bytes) async {
@@ -232,3 +272,10 @@ String? releasedMathSelection(
       ? leaf
       : null;
 }
+
+final serviceExamIdsProvider = FutureProvider.autoDispose
+    .family<Set<String>, String>((ref, owner) async {
+      final gateway = ref.watch(mathGatewayProvider(owner));
+      if (gateway == null) return <String>{};
+      return gateway.serviceExams();
+    });

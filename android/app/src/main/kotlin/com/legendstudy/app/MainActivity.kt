@@ -10,6 +10,22 @@ import java.io.File
 import java.util.UUID
 
 class MainActivity : FlutterActivity() {
+    private var exportBytes: ByteArray? = null
+    private var exportResult: MethodChannel.Result? = null
+    @Deprecated("Android activity result callback")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != 9261) return
+        val reply = exportResult ?: return
+        val bytes = exportBytes
+        exportResult = null; exportBytes = null
+        try {
+            val uri = data?.data
+            if (resultCode != RESULT_OK || uri == null || bytes == null) { reply.success(false); return }
+            checkNotNull(contentResolver.openOutputStream(uri)).use { it.write(bytes) }
+            reply.success(true)
+        } catch (_: Exception) { reply.error("EXPORT_FAILED", "Unable to save file", null) }
+    }
     private var mockNotifications: MockNotificationBridge? = null
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -21,6 +37,24 @@ class MainActivity : FlutterActivity() {
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/export").setMethodCallHandler { call, result ->
+            if (call.method != "save") { result.notImplemented(); return@setMethodCallHandler }
+            if (exportResult != null) { result.error("BUSY", "A save is in progress", null); return@setMethodCallHandler }
+            try {
+                val args = call.arguments as Map<*, *>
+                val bytes = args["bytes"] as ByteArray
+                val name = args["name"] as String
+                val mime = args["mime"] as String
+                require(bytes.isNotEmpty() && bytes.size <= 20971520)
+                require(name.matches(Regex("[a-zA-Z0-9_-]+\\.(png|pdf)")))
+                require(mime == "image/png" || mime == "application/pdf")
+                exportBytes = bytes; exportResult = result
+                startActivityForResult(android.content.Intent(android.content.Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(android.content.Intent.CATEGORY_OPENABLE); type = mime
+                    putExtra(android.content.Intent.EXTRA_TITLE, name)
+                }, 9261)
+            } catch (_: Exception) { exportBytes = null; exportResult = null; result.error("EXPORT_FAILED", "Unable to save file", null) }
+        }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/essay-draft")
             .setMethodCallHandler { call, result ->
                 try {

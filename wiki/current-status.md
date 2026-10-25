@@ -1,8 +1,8 @@
 # Current Status
 
-## 2026-10-25 — 사용자 크레딧 내역 수정 (로컬)
+## 2026-10-25 — Native APP 통합 수정·검증 진행
 
-APP/WEB 예약·해제숨김/확정사용합산·논술첨삭 명칭통일. 잔액RPC·Ledger·관리자원장불변. APP15/WEB80검사PASS(2skip),analyze/typecheck/Lint/boundaryPASS. Owner지시로빌드·push·배포보류. 앞선Android20은수정전후보/사용금지,iOS중단·업로드0. 현재스토어Android18/iOS19확인. 기존WEB관리자8261d17/7ff387f2운영완료(모바일3건5지급/사용후4). [정책·검증·잔여](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).
+Owner iPhone 검수 후 MY UI 재설계 철회, 기존 화면 복원. Credit 내역·만료 수량, 결과 성장/공유, Math 회차/부분 제출/실패 재처리 유지. MY 복원본 Analyze/1123검사 PASS(7skip), Android2026102501/iOS20 Release 빌드 PASS. 실기기 상세 검수 미완료. WEB e9f1d4a/e6af7b54 Production·고객 내역/관리자 원장 확인, remote 일치. 스토어 제출은 최종 승인 필요. [범위·검증·잔여·롤백](app-release-20261025.md).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 

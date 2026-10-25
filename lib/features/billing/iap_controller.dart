@@ -205,12 +205,12 @@ class IapController extends ChangeNotifier {
       case VerificationStatus.alreadyProcessed:
         _processed.add(txId);
         phase = BillingPhase.success;
-        message = '${product.credits} Credit이 충전되었어요.';
+        message = '${product.credits} 크레딧이 충전되었어요.';
         onBalanceChanged(); // re-read canonical ledger
         await _finish(p); // settle the store transaction
       case VerificationStatus.pending:
         phase = BillingPhase.pending;
-        message = '구매가 확인되면 Credit이 자동으로 충전돼요.';
+        message = '구매가 확인되면 크레딧이 자동으로 충전돼요.';
       // Do NOT complete — keep it open so the store re-delivers for retry.
       case VerificationStatus.rejected:
         phase = BillingPhase.error;
@@ -244,7 +244,7 @@ class IapController extends ChangeNotifier {
         if (result.responseCode != BillingResponse.ok &&
             result.responseCode != BillingResponse.itemNotOwned) {
           phase = BillingPhase.pending;
-          message = 'Credit은 반영되었어요. 구매 완료 확인을 다시 시도해 주세요.';
+          message = '크레딧은 반영되었어요. 구매 완료 확인을 다시 시도해 주세요.';
           return;
         }
         return; // Consumption acknowledges the consumable.

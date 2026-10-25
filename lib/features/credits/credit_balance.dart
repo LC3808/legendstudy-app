@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'credit_expiry.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,9 +60,9 @@ class CreditBalanceCard extends ConsumerWidget {
     return ref
         .watch(creditBalanceProvider)
         .when(
-          loading: () => const ListTile(title: Text('Credit 조회 중')),
+          loading: () => const ListTile(title: Text('크레딧 조회 중')),
           error: (_, _) => ListTile(
-            title: const Text('Credit을 확인하지 못했어요.'),
+            title: const Text('크레딧을 확인하지 못했어요.'),
             trailing: IconButton(
               onPressed: () => ref.invalidate(creditBalanceProvider),
               icon: const Icon(Icons.refresh),
@@ -83,7 +86,7 @@ class CreditBalanceCard extends ConsumerWidget {
                         if (showTopUp)
                           OutlinedButton(
                             onPressed: () => context.push('/lab/credits'),
-                            child: const Text('충전하기'),
+                            child: const Text('크레딧 구매'),
                           ),
                       ],
                     ),
@@ -94,7 +97,7 @@ class CreditBalanceCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        '사용 가능 Credit ${balance.spendable}개',
+                        '사용 가능 크레딧 ${balance.spendable}개',
                         style: AppTokens.secondary.copyWith(
                           color: AppTokens.textPrimary,
                         ),
@@ -114,7 +117,7 @@ class CreditBalanceCard extends ConsumerWidget {
                           textStyle: AppTokens.caption,
                         ),
                         onPressed: () => context.push('/lab/credits'),
-                        child: const Text('충전하기'),
+                        child: const Text('크레딧 구매'),
                       ),
                     ],
                   ],
@@ -124,7 +127,7 @@ class CreditBalanceCard extends ConsumerWidget {
                   children: [
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('사용 가능 ${balance.spendable} Credits'),
+                      title: Text('사용 가능 ${balance.spendable} 크레딧'),
                       subtitle: Text(
                         '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}',
                       ),
@@ -133,10 +136,16 @@ class CreditBalanceCard extends ConsumerWidget {
                         icon: const Icon(Icons.refresh),
                       ),
                     ),
+                    if (balance.nextExpiry != null)
+                      CreditExpiry(at: balance.nextExpiry!),
+                    OutlinedButton(
+                      onPressed: () => context.push('/my/credits'),
+                      child: const Text('구매·사용 내역'),
+                    ),
                     if (showTopUp)
                       OutlinedButton(
                         onPressed: () => context.push('/lab/credits'),
-                        child: const Text('충전하기'),
+                        child: const Text('크레딧 구매'),
                       ),
                   ],
                 ),

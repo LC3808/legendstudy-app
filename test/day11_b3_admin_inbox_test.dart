@@ -117,7 +117,7 @@ void main() {
     }
   });
 
-  testWidgets('admin MY shows the server-derived admin menu', (tester) async {
+  testWidgets('admin console remains WEB-only in MY', (tester) async {
     await tester.pumpWidget(
       testApp(
         child: const ProfilePage(),
@@ -126,8 +126,8 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('관리자'), findsOneWidget);
-    expect(find.text('문의 관리'), findsOneWidget);
+    expect(find.text('관리자'), findsNothing);
+    expect(find.text('문의 관리'), findsNothing);
   });
 
   testWidgets('direct admin page denies normal users before list access', (

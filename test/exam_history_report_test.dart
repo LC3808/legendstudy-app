@@ -14,12 +14,12 @@ void main() {
         run['result']['questions'][0]['evaluation']['dimensions'][0] as Map;
     d['evidence_ids'] = ['e1', 'e1', 'e2'];
     expect(examEvaluationReport(run, 'question').evidenceLabels, [
-      'Reasoning — Needs connection (저장된 근거 참조 2개)',
+      'Reasoning — Needs connection',
     ]);
     d['criterion_id'] = 'unknown';
     expect(examEvaluationReport(run, 'question').evidenceLabels, isEmpty);
     d['criterion_id'] = 'criterion';
-    d['evidence_ids'] = [];
+    d['evidence_ids'] = <String>[];
     expect(examEvaluationReport(run, 'question').evidenceLabels, isEmpty);
   });
 

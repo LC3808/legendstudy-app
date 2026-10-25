@@ -690,3 +690,7 @@ Owner WEB MY 지시는 [기존 MY 공통 기반](my-shared-foundation.md)과 [�
 ## 2026-10-25 — 사용자 Credit 내역과 내부 정산 분리
 
 Owner확정: APP/WEB 사용자내역에서reserve/release숨김,consume은동일decision별합산한논술첨삭사용으로표시. 구매·지급·실제환불/회수보존,예약반영가용잔액및관리자원장불변. DB계약변경없음. 앱수정완료전빌드/업데이트하지않음. [구현·보존검토](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).
+
+## 2026-10-25 — APP MY 재설계 철회
+
+Owner가 새 iPhone 앱을 확인한 뒤 MY를 기존 UI/UX로 되돌리도록 지시. APP의 프로필·목표·학습·LAB 카드 구성은 이전 화면 유지. 이는 위 WEB MY 결정의 철회가 아니라 APP 화면에 대한 후속 결정이다. 사용자 Credit 내역 중복 표시 개선과 논술 회차·결과·성장 기능은 유지한다. [복원 범위와 검증](app-release-20261025.md).

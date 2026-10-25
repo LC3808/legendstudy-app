@@ -1,3 +1,8 @@
+import 'result_pdf.dart';
+import 'growth_bars.dart';
+import 'growth_share.dart';
+import 'essay_voice.dart';
+
 import 'package:flutter/material.dart';
 
 import 'evaluation_report.dart';
@@ -47,6 +52,18 @@ class EvaluationReportView extends StatelessWidget {
         SelectableText(
           report.summary.isEmpty ? '종합 평가가 저장되어 있지 않습니다.' : report.summary,
         ),
+        EssayVoice(report: report, before: before),
+        ResultPdfButton(report:report),
+        OutlinedButton(
+          onPressed: () => showGrowthShare(
+            context,
+            completed: 1,
+            rewrites: before == null ? 0 : 1,
+            report: report,
+            before: before,
+          ),
+          child: const Text('성장 기록 공유'),
+        ),
         heading('평가 기준별 분석'),
         for (final c in report.rubric)
           Padding(
@@ -76,27 +93,33 @@ class EvaluationReportView extends StatelessWidget {
         heading('다음 답안에서 확인할 점'),
         if (report.nextSteps.isEmpty) const Text('별도의 다음 학습 방향은 저장되어 있지 않습니다.'),
         for (final s in report.nextSteps) SelectableText(s),
-        heading('최초 첨삭과 재첨삭 비교'),
-        if (before == null)
-          const Text('재작성 후 다시 첨삭받으면 답안이 어떻게 달라졌는지 비교할 수 있어요.')
-        else if (changes == null)
-          const Text('평가 기준이 다르거나 비교에 필요한 정보가 없어 직접 비교하기 어렵습니다.')
-        else ...[
-          for (final c in changes)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Text(
-                '${c.after.name}\n최초 ${c.before.display}\n재첨삭 ${c.after.display}\n${const {'IMPROVED': '향상', 'UNCHANGED': '동일', 'DECLINED': '하락', 'UNAVAILABLE': '비교 불가'}[c.direction]}',
+        ExpansionTile(
+          title: const Text('최초 첨삭·재첨삭 비교'),
+          children: [
+            heading('최초 첨삭과 재첨삭 비교'),
+            if (before == null)
+              const Text('재작성 후 다시 첨삭받으면 답안이 어떻게 달라졌는지 비교할 수 있어요.')
+            else if (changes == null)
+              const Text('평가 기준이 다르거나 비교에 필요한 정보가 없어 직접 비교하기 어렵습니다.')
+            else ...[
+              for (final c in changes)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    '${c.after.name}\n최초 ${c.before.display}\n재첨삭 ${c.after.display}\n${const {'IMPROVED': '향상', 'UNCHANGED': '동일', 'DECLINED': '하락', 'UNAVAILABLE': '비교 불가'}[c.direction]}',
+                  ),
+                ),
+              heading('성장 과정 요약'),
+              Text(
+                '${changes.where((c) => c.direction == 'IMPROVED').length}개 항목 향상 · ${changes.where((c) => c.direction == 'UNCHANGED').length}개 동일 · ${changes.where((c) => c.direction == 'DECLINED').length}개 하락 · ${changes.where((c) => c.direction == 'UNAVAILABLE').length}개 비교 불가',
               ),
-            ),
-          heading('성장 과정 요약'),
-          Text(
-            '${changes.where((c) => c.direction == 'IMPROVED').length}개 항목 향상 · ${changes.where((c) => c.direction == 'UNCHANGED').length}개 동일 · ${changes.where((c) => c.direction == 'DECLINED').length}개 하락 · ${changes.where((c) => c.direction == 'UNAVAILABLE').length}개 비교 불가',
-          ),
-          const Text(
-            '동일한 문제·평가 기준의 결과만 비교합니다. 등급 변화만으로 어떤 수정이 변화의 원인인지 단정하지 않습니다.',
-          ),
-        ],
+              const Text(
+                '동일한 문제·평가 기준의 결과만 비교합니다. 등급 변화만으로 어떤 수정이 변화의 원인인지 단정하지 않습니다.',
+              ),
+            ],
+            if (before != null) GrowthBars(before: before!, after: report),
+          ],
+        ),
         if (before != null) ...[
           heading('최초 답안'),
           SelectableText(

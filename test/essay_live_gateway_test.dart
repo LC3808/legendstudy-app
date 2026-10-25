@@ -590,7 +590,7 @@ void main() {
     );
     expect(find.textContaining('표시 예시'), findsNothing);
     expect(find.textContaining('미리보기'), findsNothing);
-    expect(find.text('첨삭을 반영한 예시답안 보기'), findsNothing);
+    expect(find.text('재작성 연습 참고 보기'), findsNothing);
   });
   testWidgets('unsaved live text requires explicit discard on leaving', (
     tester,

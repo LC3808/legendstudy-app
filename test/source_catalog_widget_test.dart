@@ -125,7 +125,7 @@ void main() {
             .onPressed,
         isNull,
       );
-      expect(find.text('첨삭 요청 · 1 Credit'), findsNothing);
+      expect(find.text('첨삭 요청 · 1 크레딧'), findsNothing);
       expect(tester.takeException(), isNull);
     });
   }
@@ -553,7 +553,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('사용 가능 Credit 10개'), findsOneWidget);
+      expect(find.text('사용 가능 크레딧 10개'), findsOneWidget);
       expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
       expect(find.text('나의 논술 LAB'), findsNothing);
       expect(find.text('첨삭 시작하기'), findsNothing);
@@ -564,7 +564,7 @@ void main() {
       final y = tester.getTopLeft(find.text('대학 20')).dy;
       await tester.tap(find.text('대학 20'));
       await tester.pumpAndSettle();
-      expect(find.text('사용 가능 Credit 10개'), findsNothing);
+      expect(find.text('사용 가능 크레딧 10개'), findsNothing);
       await tester.tap(find.byTooltip('대학 목록'));
       await tester.pumpAndSettle();
       expect(tester.getTopLeft(find.text('대학 20')).dy, closeTo(y, 1));

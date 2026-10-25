@@ -568,7 +568,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
               ? '입력한 글을 평가하지 않습니다. 제출 후에는 미리 준비된 결과 예시가 표시됩니다.'
               : live!.canRequest
               ? '차감 여부는 서버에서 확인합니다. 같은 요청을 반복 제출하지 않아도 됩니다.'
-              : '실제 AI 첨삭 연결을 준비하고 있어요. 현재 첨삭 요청은 비활성화되어 있습니다.',
+              : '논술 첨삭 연결을 준비하고 있어요. 현재 첨삭 요청은 비활성화되어 있습니다.',
           style: AppTokens.caption,
         ),
         if (!widget.question.availability.canEvaluate)
@@ -908,6 +908,8 @@ class EssayResultView extends StatefulWidget {
     required this.onRewrite,
     this.isPreview = true,
     this.header,
+    this.summaryActions,
+    this.growthChart,
     this.collapsedDetails = false,
     this.evidenceLabels = const [],
     this.sentenceReview,
@@ -924,7 +926,7 @@ class EssayResultView extends StatefulWidget {
   final EssayQuestion question;
   final bool comparison;
   final VoidCallback? onRewrite;
-  final Widget? header;
+  final Widget? header, summaryActions, growthChart;
   final bool collapsedDetails;
   @override
   State<EssayResultView> createState() => _EssayResultViewState();
@@ -1249,33 +1251,21 @@ class _EssayResultViewState extends State<EssayResultView> {
                     ),
                   if (widget.header != null) widget.header!,
                   _answerOverview(e),
-                  if (widget.comparison) ...[
-                    if (!e.comparable)
-                      const Text('평가 조건이 달라 직접적인 향상으로 비교하기 어려워요.')
-                    else ...[
-                      _resultHeader('평가 항목 변화'),
-                      Text(
-                        '변화한 항목 ${e.dimensions.where((d) => d.previousLevel != d.level).length}개',
-                      ),
-                      for (final d in e.dimensions.where(
-                        (d) => d.previousLevel != d.level,
-                      ))
-                        comparisonDimension(d),
-                      if (e.dimensions.any((d) => d.previousLevel == d.level))
-                        ExpansionTile(
-                          title: Text(
-                            '유지된 항목 ${e.dimensions.where((d) => d.previousLevel == d.level).length}개 · 상세 비교',
-                          ),
-                          children: [
-                            for (final d in e.dimensions.where(
-                              (d) => d.previousLevel == d.level,
-                            ))
-                              comparisonDimension(d),
-                          ],
-                        ),
-                    ],
-                  ],
+                  if (widget.comparison)
+                    ExpansionTile(
+                      title: const Text('최초 첨삭·재첨삭 비교'),
+                      initiallyExpanded: false,
+                      children: [
+                        if (!e.comparable)
+                          const Text('평가 조건이 달라 직접 비교하기 어려워요.')
+                        else ...[
+                          if (widget.growthChart != null) widget.growthChart!,
+                          for (final d in e.dimensions) comparisonDimension(d),
+                        ],
+                      ],
+                    ),
                   section('종합 평가', [e.summary], diagnostic: true),
+                  if (widget.summaryActions != null) widget.summaryActions!,
                   if (e.uncertainty != null)
                     section('판단을 보류한 부분', [e.uncertainty!]),
                   section('잘한 점', e.strengths, diagnostic: true),
@@ -1360,15 +1350,15 @@ class _EssayResultViewState extends State<EssayResultView> {
                       ),
                     ),
                   const SizedBox(height: 12),
-                  if (widget.isPreview || e.example.isNotEmpty)
+                  if (widget.isPreview && e.example.isNotEmpty)
                     OutlinedButton(
                       onPressed: example
                           ? () => setState(() => example = false)
                           : openExample,
-                      child: Text(example ? '예시 답안 접기' : '첨삭을 반영한 예시답안 보기'),
+                      child: Text(example ? '예시 답안 접기' : '재작성 연습 참고 보기'),
                     ),
                   if (example) ...[
-                    _resultHeader('첨삭을 반영한 예시 답안 · AI 생성'),
+                    _resultHeader('재작성 연습 참고'),
                     Text(
                       widget.isPreview
                           ? 'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.'

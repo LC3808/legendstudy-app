@@ -53,7 +53,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('1 Credit 충전'), findsOneWidget);
+    expect(find.text('1 크레딧 구매'), findsOneWidget);
     expect(find.textContaining('Google Play'), findsOneWidget);
     await tester.tap(find.text('새로고침'));
     await tester.pumpAndSettle();

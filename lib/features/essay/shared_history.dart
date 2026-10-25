@@ -1,3 +1,4 @@
+import 'math_exam_session.dart';
 import 'source_catalog.dart';
 import 'evaluation_report.dart';
 
@@ -93,8 +94,19 @@ class SharedEssayHistory {
       results[1] as List,
     );
     final exams = await examRuns();
+    final mathData = await client.rpc<dynamic>('math_session_history');
+    checkOwner();
+    if (mathData is! Map ||
+        mathData['version'] != 'math-session-history-v1' ||
+        mathData['runs'] is! List) {
+      throw const FormatException('MATH_HISTORY');
+    }
+    final mathRuns = (mathData['runs'] as List).map(parseMathSession).toList();
+    final covered = mathRuns
+        .expand((r) => (r['questions'] as List).map((q) => q['attempt_id']))
+        .toSet();
     SourceCatalog? catalog;
-    if (exams.isNotEmpty) {
+    if (exams.isNotEmpty || mathRuns.isNotEmpty) {
       try {
         catalog = await SourceCatalog.load(
           accessToken: client.auth.currentSession?.accessToken,
@@ -111,6 +123,10 @@ class SharedEssayHistory {
       return {
         ...r,
         if (e != null)
+          'university': catalog?.universities
+              .where((u) => u['sourceUniversityId'] == e['sourceUniversityId'])
+              .firstOrNull?['name'],
+        if (e != null)
           'displayExam':
               '${e['year']}학년도 ${e['kind'] == 'admission'
                   ? '수시 논술'
@@ -124,7 +140,23 @@ class SharedEssayHistory {
     }
 
     final records = [
-      ...legacy,
+      ...legacy.where((r) => !r.math || !covered.contains(r.id)),
+      for (final r in mathRuns)
+        SharedEssayRecord(
+          id: r['run_id'] as String,
+          math: true,
+          examData: {...metadata(r), 'mathSession': r},
+          at: DateTime.parse(r['created_at'] as String),
+          rewrite: r['parent_id'] != null,
+          evaluations: [
+            for (final q in r['questions'] as List)
+              {
+                'id': q['evaluation_id'],
+                'state': q['state'],
+                'question_id': q['question_id'],
+              },
+          ],
+        ),
       for (final r in exams)
         SharedEssayRecord(
           id: r['id'] as String,

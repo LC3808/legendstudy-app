@@ -14,7 +14,6 @@ import '../../personal/personal_providers.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
-import '../../feedback/feedback_providers.dart';
 
 const _myCardPadding = EdgeInsets.symmetric(
   horizontal: AppTokens.space16,
@@ -27,12 +26,7 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     final profile = ref.watch(currentProfileProvider);
-    final admin = ref.watch(adminAccessProvider);
     final currentUserId = auth.value?.userId;
-    final showAdminMenu =
-        currentUserId != null &&
-        admin.value?.userId == currentUserId &&
-        admin.value?.isAdmin == true;
     return ShellPage(
       children: [
         Row(
@@ -161,18 +155,6 @@ class ProfilePage extends ConsumerWidget {
               ],
             ),
           ),
-          if (showAdminMenu) ...[
-            const Divider(),
-            const SectionHeader('관리자'),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.inbox_outlined),
-              title: const Text('문의 관리'),
-              subtitle: const Text('접수된 문의를 확인하고 상태를 관리해요.'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.push('/my/admin/feedback'),
-            ),
-          ],
         ],
       ],
     );

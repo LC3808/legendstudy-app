@@ -11,7 +11,7 @@ import '../credit_product.dart';
 import '../iap_controller.dart';
 import 'purchase_history.dart';
 
-/// 논술 Credit 충전 — Apple IAP / Google Play Billing (consumable).
+/// 논술 크레딧 구매 — Apple IAP / Google Play Billing (consumable).
 ///
 /// The screen only *starts* a store purchase and shows its state; Credit is
 /// granted server-side and the balance is re-read from `credit_summary`. On a
@@ -44,8 +44,8 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
     if (!authed) {
       return ShellPage(
         children: [
-          const SectionHeader('Credit 충전'),
-          const Text('Credit은 계정에 적립돼요. 먼저 로그인해 주세요.'),
+          const SectionHeader('크레딧 구매'),
+          const Text('크레딧은 계정에 적립돼요. 먼저 로그인해 주세요.'),
           const SizedBox(height: AppTokens.space16),
           GuestAccountPrompt(onLogin: () => context.push('/auth')),
         ],
@@ -75,7 +75,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
         },
         child: ShellPage(
           children: [
-            const SectionHeader('Credit 충전'),
+            const SectionHeader('크레딧 구매'),
             tabs,
             const SizedBox(height: AppTokens.space12),
             const PurchaseHistory(),
@@ -86,9 +86,9 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
     if (controller == null) {
       return ShellPage(
         children: [
-          const SectionHeader('Credit 충전'),
+          const SectionHeader('크레딧 구매'),
           tabs,
-          const Text('지금은 Credit 충전을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
+          const Text('지금은 크레딧 구매을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
         ],
       );
     }
@@ -98,7 +98,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       builder: (context, _) {
         return ShellPage(
           children: [
-            const SectionHeader('Credit 충전'),
+            const SectionHeader('크레딧 구매'),
             tabs,
             const CreditBalanceCard(),
             const SizedBox(height: AppTokens.space12),
@@ -110,7 +110,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
             else if (!controller.available)
               const LsCard(
                 child: Text(
-                  '현재 이 기기에서는 Credit 충전을 사용할 수 없어요. '
+                  '현재 이 기기에서는 크레딧 구매을 사용할 수 없어요. '
                   '스토어 결제가 가능한 기기에서 다시 시도해 주세요.',
                 ),
               )
@@ -146,7 +146,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
                 const SizedBox(height: AppTokens.space12),
               ],
               const Text(
-                '결제 후 Credit은 서버 확인을 거쳐 자동으로 충전돼요. 충전이 지연되면 '
+                '결제 후 크레딧은 서버 확인을 거쳐 자동으로 충전돼요. 충전이 지연되면 '
                 '잠시 기다리거나 문의·건의로 알려주세요.',
                 style: TextStyle(color: AppTokens.textSecondary, fontSize: 12),
               ),
@@ -179,7 +179,7 @@ class _ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${product.credits} Credit', style: AppTokens.cardTitle),
+                Text('${product.credits} 크레딧', style: AppTokens.cardTitle),
                 const SizedBox(height: 2),
                 Text(product.answerSummary, style: AppTokens.secondary),
                 const SizedBox(height: 2),

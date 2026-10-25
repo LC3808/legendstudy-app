@@ -1,3 +1,8 @@
+import 'result_pdf.dart';
+import 'round_history_actions.dart';
+import 'growth_bars.dart';
+import 'growth_share.dart';
+
 import 'dart:async';
 
 import 'essay_voice.dart';
@@ -49,14 +54,16 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
     WidgetsBinding.instance.addObserver(this);
     _refreshTimer = Timer.periodic(const Duration(seconds: 30), (_) {
       if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed &&
-          ModalRoute.of(context)?.isCurrent == true)
+          ModalRoute.of(context)?.isCurrent == true) {
         _refresh();
+      }
     });
   }
 
   void _refresh() {
-    if (mounted && ref.read(authStateProvider).value?.userId == owner)
+    if (mounted && ref.read(authStateProvider).value?.userId == owner) {
       ref.invalidate(sharedEssayHistoryProvider(owner));
+    }
   }
 
   @override
@@ -72,6 +79,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
   }
 
   bool byExam = false;
+  String query = '', kind = 'all';
   String get owner => widget.owner;
   Future<void> openResult(SharedEssayRecord row, Map<String, dynamic> e) async {
     final client = ref.read(supabaseClientProvider);
@@ -135,13 +143,39 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               selected: {byExam},
               onSelectionChanged: (v) => setState(() => byExam = v.single),
             ),
-            const Text('논술·수리논술 각각 최근 답안 50개'),
+            TextField(
+              decoration: const InputDecoration(
+                labelText: '대학·시험 검색',
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (v) => setState(() => query = v.trim()),
+            ),
+            DropdownButtonFormField<String>(
+              initialValue: kind,
+              items: const [
+                DropdownMenuItem(value: 'all', child: Text('전체 기록')),
+                DropdownMenuItem(value: 'initial', child: Text('최초 첨삭')),
+                DropdownMenuItem(value: 'rewrite', child: Text('재첨삭')),
+              ],
+              onChanged: (v) => setState(() => kind = v ?? 'all'),
+            ),
+            const Text('최근 조회한 논술·수리논술 회차와 기존 답안 기록'),
             if (rows.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 24),
                 child: Text('아직 첨삭 기록이 없습니다.'),
               ),
-            for (final group in sortedEssayHistory(rows, byExam)) ...[
+            for (final group in sortedEssayHistory(
+              rows
+                  .where(
+                    (r) =>
+                        (query.isEmpty ||
+                            '${r.title} ${r.examLabel}'.contains(query)) &&
+                        (kind == 'all' || (kind == 'rewrite') == r.rewrite),
+                  )
+                  .toList(),
+              byExam,
+            )) ...[
               for (final row in group)
                 ListTile(
                   onTap: row.evaluations.any((e) => e['state'] == 'COMPLETED')
@@ -159,7 +193,8 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (row.exam) Text(row.examLabel),
+                      if (row.exam || row.examData['mathSession'] != null)
+                        Text(row.examLabel),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         child: EssayHistoryBadge(record: row),
@@ -170,7 +205,14 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                       if (row.examData['parent_id'] != null)
                         const Text('최초 첨삭에 이어진 재첨삭'),
                       if (row.evaluations.isEmpty) const Text('평가 요청 전'),
-                      if (row.math)
+                      if ((row.exam || row.examData['mathSession'] != null) &&
+                          row.examData['state'] == 'reserved')
+                        RoundHistoryActions(
+                          key: ValueKey(row.id),
+                          owner: owner,
+                          record: row,
+                        ),
+                      if (row.math && row.examData['mathSession'] == null)
                         for (final e in row.evaluations)
                           TextButton(
                             onPressed: () => Navigator.of(context).push(
@@ -300,6 +342,25 @@ class _Result extends ConsumerWidget {
                 ? EvaluationReportView(report: report, before: before)
                 : EssayResultView(
                     isPreview: false,
+                    growthChart: before == null
+                        ? null
+                        : GrowthBars(before: before!, after: report),
+                    summaryActions: Column(
+                      children: [
+                        EssayVoice(report: report, before: before),
+                        ResultPdfButton(report: report),
+                        OutlinedButton(
+                          onPressed: () => showGrowthShare(
+                            context,
+                            completed: 1,
+                            rewrites: before == null ? 0 : 1,
+                            report: report,
+                            before: before,
+                          ),
+                          child: const Text('성장 기록 공유'),
+                        ),
+                      ],
+                    ),
                     collapsedDetails: true,
                     evaluation: approvedEssayEvaluation(report, before),
                     evidenceLabels: report.evidenceLabels,
@@ -363,7 +424,7 @@ class _Result extends ConsumerWidget {
                             onPressed: () => openWriter(true),
                             child: const Text('추가 첨삭 · 1 Credit'),
                           ),
-                        EssayVoice(report: report, before: before),
+
                         ExpansionTile(
                           title: Text(essayAnswerVersion(record)),
                           children: [SelectableText(report.answer)],

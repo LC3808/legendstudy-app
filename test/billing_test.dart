@@ -251,7 +251,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Credit은 계정에 적립돼요. 먼저 로그인해 주세요.'), findsOneWidget);
+    expect(find.text('크레딧은 계정에 적립돼요. 먼저 로그인해 주세요.'), findsOneWidget);
     expect(find.text('로그인'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

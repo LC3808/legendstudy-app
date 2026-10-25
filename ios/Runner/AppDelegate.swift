@@ -20,6 +20,32 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let export = FlutterMethodChannel(name: "com.legendstudy.app/export", binaryMessenger: binaryMessenger)
+    export.setMethodCallHandler { call, result in
+      guard call.method == "save" else { result(FlutterMethodNotImplemented); return }
+      guard let args = call.arguments as? [String: Any], let typed = args["bytes"] as? FlutterStandardTypedData,
+            let name = args["name"] as? String, name.range(of: "^[a-zA-Z0-9_-]+\\.(png|pdf)$", options: .regularExpression) != nil,
+            typed.data.count > 0, typed.data.count <= 20971520 else { result(FlutterError(code: "INVALID_EXPORT", message: "Invalid file", details: nil)); return }
+      do {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let url = folder.appendingPathComponent(name)
+        try typed.data.write(to: url, options: .atomic)
+        guard var presenter = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).flatMap({ $0.windows }).first(where: { $0.isKeyWindow })?.rootViewController else {
+          try? FileManager.default.removeItem(at: folder)
+          result(FlutterError(code: "EXPORT_FAILED", message: "No active window", details: nil)); return
+        }
+        while let current = presenter.presentedViewController { presenter = current }
+        let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        sheet.popoverPresentationController?.sourceView = presenter.view
+        sheet.popoverPresentationController?.sourceRect = CGRect(x: presenter.view.bounds.midX, y: presenter.view.bounds.midY, width: 1, height: 1)
+        sheet.completionWithItemsHandler = { _, completed, _, error in
+          try? FileManager.default.removeItem(at: folder)
+          if error != nil { result(FlutterError(code: "EXPORT_FAILED", message: "Unable to save file", details: nil)) } else { result(completed) }
+        }
+        presenter.present(sheet, animated: true)
+      } catch { result(FlutterError(code: "EXPORT_FAILED", message: "Unable to save file", details: nil)) }
+    }
     let essayDraft = FlutterMethodChannel(name: "com.legendstudy.app/essay-draft", binaryMessenger: binaryMessenger)
     essayDraft.setMethodCallHandler { call, result in
       do {

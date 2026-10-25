@@ -198,7 +198,7 @@ void main() {
       await tapVisible(tester, find.text('제출하고 첨삭 화면 살펴보기'));
       expect(c.stage, EssayStage.result);
       expect(find.text('종합 평가'), findsOneWidget);
-      expect(find.text('첨삭을 반영한 예시 답안 · AI 생성'), findsNothing);
+      expect(find.text('재작성 연습 참고'), findsNothing);
       await preview.capture(tester, 'essay-result-mobile');
       await tapVisible(tester, find.text('다시 써보기'));
       expect(find.text('내 첫 답안'), findsOneWidget);
@@ -213,12 +213,14 @@ void main() {
       expect(c.stage, EssayStage.comparison);
       expect(gateway.submitted, [previewAnswer, '수정한 새로운 답안']);
       expect(find.text('이번 답안의 변화 한눈에 보기'), findsOneWidget);
-      expect(find.text('→'), findsNWidgets(2));
-      await tapVisible(tester, find.text('유지된 항목 1개 · 상세 비교'));
+      expect(find.text('→'), findsNothing);
+      await tapVisible(tester,find.text('최초 첨삭·재첨삭 비교'));
+      expect(find.text('→'), findsNWidgets(3));
+
       expect(find.text('→'), findsNWidgets(3));
       expect(find.textContaining('길어진 문장'), findsWidgets);
       await preview.capture(tester, 'essay-comparison-mobile');
-      await tapVisible(tester, find.text('첨삭을 반영한 예시답안 보기'));
+      await tapVisible(tester, find.text('재작성 연습 참고 보기'));
       expect(find.textContaining('대학의 공식 답안이 아닙니다'), findsOneWidget);
       await close(tester);
     },
@@ -238,7 +240,7 @@ void main() {
       ),
     );
     expect(find.text(firstPreviewEvaluation.example), findsNothing);
-    await tapVisible(tester, find.text('첨삭을 반영한 예시답안 보기'));
+    await tapVisible(tester, find.text('재작성 연습 참고 보기'));
     expect(find.text('직접 다시 써보기'), findsOneWidget);
     await tester.tap(find.text('그래도 예시 답안 보기'));
     await tester.pumpAndSettle();

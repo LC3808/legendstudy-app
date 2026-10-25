@@ -182,10 +182,11 @@ void main() {
         expect(find.textContaining('외부 링크를 열지 못했어요'), findsOneWidget);
         expect(find.text('자료를 불러오지 못했어요.'), findsNothing);
         await capture(tester, 'delivery-$scale-failure');
-        await tester.ensureVisible(find.text('원문 보기'));
-        await tester.tap(find.text('원문 보기'));
+        await tester.ensureVisible(find.text('문제 보기'));
+        await tester.tap(find.text('문제 보기'));
         await tester.pumpAndSettle();
-        expect(opened.last.toString(), first.content.sourceUrl);
+        // Current UI retries the attachment; source-page buttons were removed.
+        expect(opened.last.toString(), 'https://files.example.test/paper');
         final detailScroll = tester.state<ScrollableState>(
           find
               .descendant(
@@ -217,9 +218,9 @@ void main() {
           isTrue,
         );
         expect(detailScroll.position.pixels, detailOffset);
-        await tester.ensureVisible(find.text('원문 보기'));
-        await capture(tester, 'delivery-$scale-source');
-        await tester.tap(find.text('원문 보기'));
+        await tester.ensureVisible(find.text('문제 보기'));
+        await capture(tester, 'delivery-$scale-retry');
+        await tester.tap(find.text('문제 보기'));
         await tester.pumpAndSettle();
         expect(opened.length, 3);
         await tester.tap(find.byType(BackButton));

@@ -1,5 +1,9 @@
 # Development Log
 
+## 2026-10-25 — Native APP 통합 업데이트 진행
+
+Owner 최신 지시로 APP 수정 후 빌드 재개, 제출 승인 별도. MY 공유 계약·Math 회차·고객 Credit·성장/내보내기 구현. WEB e9f1d4a/e6af7b54 고객 내역 배포 실측, 원장 원본 유지. [상세·미완료](app-release-20261025.md).
+
 ## 2026-10-25 — Owner 통합 WEB·ADMIN 배포
 
 WEB `e5106e3` / Production `f73a03d0-6fa7-4969-9e93-d099fb513a1c` canonical API 확인. Essay Worker17b3bd65 유지, Math는 같은 WEB Pages Functions. MY 목표 통합·공유 팝오버·공통 관리자 디자인 반영. Owner가 추가 조회 RPC 적용, 실화면 회원13/profiles12·인문30회·실행승인10시험12문항 확인. 0건 원인은 legacy 단일문항 집계 누락, 공개0은 is_published와 runtime scope 차이. 관련244PASS/3skip·타입/Lint/boundary/buildPASS. 기존 catalog6FAIL+빈suite, 신규 실운영 다문항Math·Native실기기 미검증은 남김. Provider/과금/Secret/APP코드 변경0. 롤백WEB eba32637; Worker 과거 단일문항 버전 rollback 금지. [증거](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/integrated-release-20261025/README.md).
@@ -4746,3 +4750,9 @@ WEB8261d17/7ff387f2 배포·운영5행/모바일3건5크레딧 확인. Owner 읽
 ## 2026-10-25 사용자 원장 표시 수정
 
 Owner빌드중단후 APP/WEB reserve/release숨김·동일decision consume합산·논술첨삭 표기. APP15/WEB80PASS(2skip),분석·타입·Lint·경계PASS. 잔액/정산/관리자원장불변. 빌드·배포미실행,로컬commit. [정책](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).
+
+## 2026-10-25 — Owner 실기기 검수 후 MY 복원
+
+Android/iOS 새 Release 빌드·기존 데이터 보존 설치/실행. Owner iPhone12 Pro Max 확인 후 MY 기존 UI 복원 요청: 이번 MY 재설계 철회, Credit·회차·결과 개선 유지. 복원본 재검증/재빌드 중, 스토어 제출 없음. [결정·범위](app-release-20261025.md).
+
+MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·iOS IPA1.0.1(20) 빌드 PASS, 양 기기 재설치·실행 PASS. 상세 실제 거래/전체 시나리오는 미확인, 스토어 미제출.

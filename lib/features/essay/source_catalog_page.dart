@@ -1,6 +1,6 @@
 import 'service_availability.dart';
 import 'math_gateway.dart';
-import 'math_workspace_page.dart';
+import 'math_exam_session.dart';
 import '../../core/theme/app_theme.dart';
 import '../credits/credit_balance.dart';
 
@@ -256,7 +256,10 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                     ),
                   ),
                 ),
-                for (final u in c.universities)
+                for (final u in orderedServiceUniversities(
+                  c,
+                  ref.watch(serviceExamIdsProvider(widget.owner)).value ?? {},
+                ))
                   Card(
                     child: InkWell(
                       onTap:
@@ -396,24 +399,6 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                       ? {questions.single['key'] as String}
                       : <String>{},
                 );
-          final mathLeaf =
-              widget.rewriteRun == null &&
-                  ref
-                          .watch(mathEvaluationAvailableProvider(widget.owner))
-                          .asData
-                          ?.value ==
-                      true
-              ? releasedMathSelection(
-                  ref.watch(mathCatalogProvider(widget.owner)).asData?.value ??
-                      [],
-                  exam?['dbExamId'] as String?,
-                  questions
-                      .where((q) => selection.contains(q['key']))
-                      .map((q) => q['dbQuestionId'])
-                      .whereType<String>()
-                      .toList(),
-                )
-              : null;
           final reviewDraftAvailable =
               selection.isNotEmpty &&
               questions
@@ -532,16 +517,6 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                   onPressed: writingBlocked || selection.isEmpty
                       ? null
                       : () {
-                          if (mathLeaf != null) {
-                            Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => MathWorkspacePage(
-                                  requestedLeafId: mathLeaf,
-                                ),
-                              ),
-                            );
-                            return;
-                          }
                           final u = c.universities.firstWhere(
                             (u) => u['sourceUniversityId'] == uni,
                           );
@@ -560,13 +535,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                             ),
                           );
                         },
-                  child: Text(
-                    writingBlocked
-                        ? '서비스 준비중'
-                        : mathLeaf != null
-                        ? '수리논술 첨삭하기'
-                        : '답안 작성하기',
-                  ),
+                  child: Text(writingBlocked ? '서비스 준비중' : '답안 작성하기'),
                 ),
               ],
             ],
@@ -1384,13 +1353,17 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         });
         if (quote?['version'] != 'essay-exam-quote-v1' ||
             quote?['credits'] != (parentId == null ? 1 : 0)) {
-          throw StateError('사용 Credit을 확인하지 못했어요. 답안은 보존됩니다.');
+          throw StateError('사용 크레딧을 확인하지 못했어요. 답안은 보존됩니다.');
         }
         if (!mounted) return;
         final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('제출할 답안 확인'),
+            title: Text(
+              selected.length < (widget.exam['questions'] as List).length
+                  ? '작성하지 않은 답안이 있습니다'
+                  : '제출할 답안 확인',
+            ),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -1398,12 +1371,14 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                 children: [
                   Text(
                     parentId == null
-                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 Credit: ${quote!['credits']}개'
-                        : '제출 문항: ${answers.length}개\n사용 Credit: 0개 · 무료 재첨삭',
+                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 크레딧: ${quote!['credits']}개'
+                        : '제출 문항: ${answers.length}개\n사용 크레딧: 0개 · 무료 재첨삭',
                   ),
-                  const Text(
-                    '실제 차감은 서버 정책을 따릅니다. 제출 후 처리 상태와 저장된 결과를 확인할 수 있어요.',
-                  ),
+                  if (selected.length <
+                      (widget.exam['questions'] as List).length)
+                    Text(
+                      '${(widget.exam['questions'] as List).cast<Map<String, dynamic>>().where((q) => !widget.included.contains(q['key'])).map((q) => q['label']).join(', ')} 문항은 이번 첨삭에 포함되지 않습니다. 나중에 미제출 문항을 첨삭받으면 별도 회차로 1 크레딧이 사용됩니다.',
+                    ),
                   for (var i = 0; i < answers.length; i++) ...[
                     Text(selected[i]['label'] as String),
                     Text(answers[i]['body'] as String),
@@ -1427,8 +1402,8 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                   parentId != null
                       ? '무료 재첨삭 요청'
                       : previousPaidId != null
-                      ? '추가 첨삭 · 1 Credit'
-                      : '첨삭 요청 · 1 Credit',
+                      ? '추가 첨삭 · 1 크레딧'
+                      : '첨삭 요청 · 1 크레딧',
                 ),
               ),
             ],
@@ -1474,7 +1449,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         setState(
           () => notice = error is ExamSubmissionRejected
               ? (error.code == 'INSUFFICIENT_CREDIT'
-                    ? '첨삭권이 부족합니다.'
+                    ? '크레딧이 부족합니다.'
                     : '제출 조건을 확인해 주세요.')
               : error is StateError
               ? error.message.toString()
@@ -1517,8 +1492,8 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       Text('제출 문항: ${widget.included.length}개'),
       Text(
         parentId != null && eligibleRewrite
-            ? '사용 Credit: 0개 · 무료 재첨삭'
-            : '사용 Credit: 서버 확인 필요',
+            ? '사용 크레딧: 0개 · 무료 재첨삭'
+            : '사용 크레딧: 서버 확인 필요',
       ),
       if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
@@ -1563,7 +1538,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
 }
 
 /// Review the existing per-question drafts before using the same exam submission API.
-class ExamAnswerReview extends StatefulWidget {
+class ExamAnswerReview extends ConsumerStatefulWidget {
   const ExamAnswerReview({
     super.key,
     required this.owner,
@@ -1577,10 +1552,10 @@ class ExamAnswerReview extends StatefulWidget {
   final Map<String, dynamic> exam;
   final Map<String, dynamic>? rewriteRun;
   @override
-  State<ExamAnswerReview> createState() => _ExamAnswerReviewState();
+  ConsumerState<ExamAnswerReview> createState() => _ExamAnswerReviewState();
 }
 
-class _ExamAnswerReviewState extends State<ExamAnswerReview> {
+class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
   late final Set<String> selected = widget.rewriteRun == null
       ? {
           ...?widget.selectedQuestions,
@@ -1666,7 +1641,7 @@ class _ExamAnswerReviewState extends State<ExamAnswerReview> {
             onPressed: () => Navigator.pop(context),
             child: const Text('답안 수정'),
           ),
-          _ExamSubmit(
+          _RoundSubmitRouter(
             owner: widget.owner,
             exam: widget.exam,
             included: selected,
@@ -1733,4 +1708,68 @@ class _BrowseQuestionPdfButton extends ConsumerWidget {
       child: const Text('문제 보기'),
     );
   }
+}
+
+class _RoundSubmitRouter extends ConsumerWidget {
+  const _RoundSubmitRouter({
+    required this.owner,
+    required this.exam,
+    required this.included,
+    this.rewriteRun,
+  });
+  final String owner;
+  final Map<String, dynamic> exam;
+  final Set<String> included;
+  final Map<String, dynamic>? rewriteRun;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final catalog = ref.watch(mathCatalogProvider(owner));
+    final leaves = <String, String>{
+      for (final row in catalog.value ?? <Map<String, dynamic>>[])
+        if (row['essay_exam_id'] == exam['dbExamId'] &&
+            row['essay_question_id'] is String &&
+            row['leaf_id'] is String)
+          row['essay_question_id'] as String: row['leaf_id'] as String,
+    };
+    final selected = (exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => included.contains(q['key']))
+        .toList();
+    if (selected.isNotEmpty &&
+        selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
+      return MathExamSession(
+        key: ValueKey(
+          '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
+        ),
+        owner: owner,
+        exam: exam,
+        selected: included,
+        leaves: leaves,
+      );
+    }
+    return _ExamSubmit(
+      owner: owner,
+      exam: exam,
+      included: included,
+      rewriteRun: rewriteRun,
+    );
+  }
+}
+
+List<Map<String, dynamic>> orderedServiceUniversities(
+  SourceCatalog catalog,
+  Set<String> admitted,
+) {
+  final active = catalog.exams
+      .where((e) => admitted.contains(e['dbExamId']))
+      .map((e) => e['sourceUniversityId'])
+      .toSet();
+  final indexed = catalog.universities.indexed.toList();
+  indexed.sort((a, b) {
+    final priority =
+        (active.contains(b.$2['sourceUniversityId']) ? 1 : 0) -
+        (active.contains(a.$2['sourceUniversityId']) ? 1 : 0);
+    return priority != 0 ? priority : a.$1.compareTo(b.$1);
+  });
+  return indexed.map((e) => e.$2).toList();
 }

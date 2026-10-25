@@ -20,6 +20,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+2026-10-25 Native APP 통합 업데이트: [Owner 범위·현재 검증·실기기·스토어 승인 경계](app-release-20261025.md).
+
 사용자 Credit 내역: [예약 숨김·사용 확정·빌드 보류](payment-app-foundation.md#2026-10-25-사용자-크레딧-내역-표시-정책).
 
 JWT 복구/30일·자동갱신 검토: [계약·만료·Owner 절차·장기 설계](essay-jwt-lifecycle-review-20261023.md).

@@ -34,7 +34,7 @@ void main() {
     final value = CreditBalance.fromJson({'dto_version':'credit-v1','spendable':8,'paid':5,'free':3,'other':0,'next_expiry':null});
     await tester.pumpWidget(ProviderScope(overrides:[creditBalanceProvider.overrideWith((ref) async => value)], child: const MaterialApp(home: Scaffold(body: CreditBalanceCard()))));
     await tester.pumpAndSettle();
-    expect(find.text('사용 가능 8 Credits'), findsOneWidget);
+    expect(find.text('사용 가능 8 크레딧'), findsOneWidget);
     expect(find.text('구매 5 · 가입 무료 3 · 기타 0'), findsOneWidget);
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpWidget(ProviderScope(overrides:[creditBalanceProvider.overrideWith((ref) async => null)], child: const MaterialApp(home: Scaffold(body: CreditBalanceCard()))));

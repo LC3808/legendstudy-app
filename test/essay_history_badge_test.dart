@@ -18,7 +18,11 @@ void main() {
     ],child:const MaterialApp(home:SharedEssayHistoryPage())));
     await tester.pumpAndSettle();
     final before=reads;
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pumpAndSettle();
     expect(reads,greaterThan(before));
@@ -92,6 +96,8 @@ void main() {
             ),
           ),
         );
+        await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView),const Offset(0,-220));
         await tester.pumpAndSettle();
         expect(find.text('한양대학교'), findsNWidgets(2));
         expect(find.text('최초 첨삭'), findsOneWidget);

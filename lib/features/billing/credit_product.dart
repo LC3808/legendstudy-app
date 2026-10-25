@@ -29,7 +29,7 @@ class CreditProduct {
   /// One 1-Credit unit = one first review + one re-review of the same answer
   /// (re-review window 14 days). Shown concisely on the card.
   String get answerSummary =>
-      '답안 $credits개 첨삭 (답안당 재첨삭 1회 포함)';
+      '논술 첨삭 $credits회 (회차당 재첨삭 1회 포함)';
 }
 
 /// The launch catalog. 20-Credit is intentionally excluded this release.
