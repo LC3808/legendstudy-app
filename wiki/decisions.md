@@ -703,3 +703,7 @@ Owner지정중앙·성균·경희의2022이후준비된인문/언어·수리·�
 ### 2026-10-25 — 1-A 작업의 Production SQL 직접 실행 승인
 
 Owner 추가 지시로 이번 1-A 작업은 Codex가 사전검사·격리검증·복구경로를 확보한 후 Production SQL까지 직접 실행한다. 기존 Owner 직접 적용 원칙의 이번 범위 예외이며, ID·Credit·Ledger·History·권한 보존과 APP UI/스토어 중단은 유지. [범위·실행 증거](essay-group-1a-20261025.md).
+
+### 2026-10-25 — Owner 복귀: SQL 개별 승인 복원
+
+위 포괄 SQL 실행 예외는 후속 “SQL은 오너 승인 하에 진행” 지시로 종료. 이번 중단요청 복구 SQL과 같은요청 재개만 추가 승인받아 실행. 예약해제 rollback은 승인대상 밖. 기존1-A전체회차·1/0Credit·APP중단 결정은 유지. [실행과미완료](essay-group-1a-20261025.md).

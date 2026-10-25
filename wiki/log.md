@@ -4762,3 +4762,5 @@ MY 복원본 Analyze/전체1123 PASS(7skip), Android AAB/APK1.0.1(2026102501)·i
 - 2026-10-25: Owner SQL직접실행 추가승인. 성균2026언어1·2교시 전체6문항 revision3 적용,사후13true·기존Q1/과거조회/다른정책보존. WEB 일반공개/E2E미확인,Provider0. [실행·복구](essay-group-1a-20261025.md).
 
 - 2026-10-25 1-A 후속: 성균 두 회차 DB 전체연결·WEB PDF배포, 실제3문항 요청의 부분성공/품질차단/pending 발견. 문항별 큐 continuation13PASS 및 Worker e6ffbdb4 배포. 예약Credit/기존결과 보존, pending복구와 일반계정E2E 미완료. [상태·복구](essay-group-1a-20261025.md).
+
+- 2026-10-25: Owner 승인 후 성균2교시 중단run 원본보존 복구, 최초3문항/1Credit 및 무료재첨삭3문항/0Credit 완료. WEB History·성장비교 확인(admin). 일반계정2교시 전체3문항·PDF·1Credit견적PASS, 실평가는 관리자범위. 중앙44PDF 재사용/경희9시험 초안조립. [증거·재개](essay-group-1a-20261025.md).
