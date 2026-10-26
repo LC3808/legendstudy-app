@@ -4907,3 +4907,5 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 2026-10-26 WEB 기록 상단5개/접기·전체너비 결과·인쇄/공유: 82fec56 / Pages50b64a7f, 운영표시 확인·8검사 PASS. [후속](essay-growth-history-ui-20261026.md#2226-후속--전체-너비-결과-및-내보내기).
 
 2026-10-26 WEB e669cbc: 기록 버튼4개 한 줄·중복 검색창 제거·시험 목록 PC한 줄. 운영표시 및 UI5/Build PASS. [기록](essay-growth-history-ui-20261026.md).
+
+2026-10-26 관리자 Credit P0: 승인 조회RPC 적용·사후7true, WEB584a914/Pages89246b7e production success. 서버목록/검색/정렬/상세/지급폼 운영확인, 지급0. 48검사·타입·Lint·Build PASS. [P1 검토·복구](admin-credit-directory-20261026.md).

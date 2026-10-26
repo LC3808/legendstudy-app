@@ -1,0 +1,25 @@
+set test.admin='true';
+do $$declare d jsonb;e jsonb;begin
+ d:=admin_credit_member_list();assert jsonb_array_length(d->'items')=10;assert (d->>'total')::int=55;
+ e:=admin_credit_member_list('',10,10);assert not exists(select 1 from jsonb_array_elements(d->'items') a join jsonb_array_elements(e->'items') b on a->>'account_id'=b->>'account_id');
+ assert jsonb_array_length(admin_credit_member_list('',20)->'items')=20;
+ assert jsonb_array_length(admin_credit_member_list('',50)->'items')=50;
+ assert (admin_credit_member_list('member1@')->>'total')::int=1;
+ assert (admin_credit_member_list(md5('1')::uuid::text)->>'total')::int=1;
+ assert (admin_credit_member_list('%')->>'total')::int=0;
+ update credit_transactions set balance_delta=30 where account_id=md5('1')::uuid;
+ assert admin_credit_member_list()->'items'->0->>'account_id'=md5('1')::uuid::text;
+ assert admin_credit_member_list('',10,0,'balance_asc')->'items'->0->>'account_id'<>md5('1')::uuid::text;
+ update credit_transactions set reserved_delta=5 where account_id=md5('1')::uuid;
+ assert (admin_credit_member_list(md5('1')::uuid::text)->'items'->0->'summary'->>'spendable')::int=25;
+ insert into payment_orders values(md5('1')::uuid,'CANCEL_PENDING');
+ assert (admin_credit_member_list(md5('1')::uuid::text)->'items'->0->'summary'->>'spendable')::int=0;
+ update credit_grants set expires_at=now()-interval '1 day' where id=md5('2')::uuid;
+ assert (admin_credit_member_list(md5('2')::uuid::text)->'items'->0->'summary'->>'spendable')::int=0;
+ perform admin_credit_member_list('',10,0,'granted_desc');perform admin_credit_member_list('',10,0,'used_desc');perform admin_credit_member_list('',10,0,'joined_desc');
+ begin perform admin_credit_member_list('',100);raise exception 'invalid limit accepted';exception when invalid_parameter_value then null;end;
+end$$;
+set role authenticated;set test.admin='false';
+do $$begin begin perform public.admin_credit_member_list();raise exception 'normal user accepted';exception when insufficient_privilege then null;end;end$$;
+reset role;
+do $$begin assert not has_function_privilege('anon','public.admin_credit_member_list(text,integer,integer,text)','execute');assert not has_function_privilege('service_role','public.admin_credit_member_list(text,integer,integer,text)','execute');end$$;

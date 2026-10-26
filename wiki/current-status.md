@@ -1,12 +1,12 @@
 # Current Status
 
-[WEB 전체폭](essay-growth-history-ui-20261026.md).
+[WEB 전체폭](essay-growth-history-ui-20261026.md). [관리자 Credit](admin-credit-directory-20261026.md).
 
-2026-10-26 고려 평가 의심: Owner 오입력 확인·공식 예시답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 같은 회차 Q2·Q3 복구·3문항완료·History 확인, 기존예약1Credit만 settled/Q1보존. 과거 거절조건 미확정. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
+고려 평가 의심: Owner 오입력·공식답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 같은 회차 Q2·Q3 복구·3문항완료·History 확인, 기존예약1Credit만 settled/Q1보존. 과거 거절조건 미확정. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
-과거 종료 기록(현재 상태는 위 2026-10-26 절): 성균언어16 PDF복구·한양인문13 STANDBY. 당시 한양상경8 미연결은 후속 작업으로 해소. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
+과거 기록: 성균언어16 PDF복구·한양인문13 STANDBY. 당시 한양상경8 미연결은 후속 작업으로 해소. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
 
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
