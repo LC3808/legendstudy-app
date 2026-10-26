@@ -1,7 +1,6 @@
 # Current Status
 
-2026-10-26 마감: 중앙21·경희24·성균16·한양21, 총82회차 WEB STANDBY(신규21). 한양2025모의2회차 공식자료 부족. Provider/신규run/차감0, APP 혼합 호환 GAP. WEB a8f3ba51·Worker5fe85e6c100%. [현황·SQL 재실행 금지·Owner QA·복구](essay-handoff-20261025-final.md#2026-10-26-최종-추가-작업--standby-82회차).
-
+2026-10-26 확대 마감: 외대20·건국12·서강22 **신규54회차 STANDBY**. 건국2026수시1 기존 제출 확인 보류, 기존 건국/서강각1 및 4대학82 보존. WEB aedbf200/source c01caf0·Worker a99a7cfc100%. Provider/새평가/차감0, APP 변경0. [회차 목록·보류·SQL 재실행 금지·복구·Owner QA](essay-standby-expansion-20261026.md). 추가 개발 종료.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

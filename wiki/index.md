@@ -1,6 +1,6 @@
 # LegendStudy Wiki Index
 
-마감·내일 재개: [Owner QA 대상·미완료·재실행 금지 SQL·복구](essay-handoff-20261025-final.md). 추가 개발 중단, Mac 종료는 Owner 담당.
+최신 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
 
 
 P0 Claude 최종 인수인계(사용량5% 중단): [현재 배포·37묶음·17후보·재개순서](essay-lab-claude-handoff-20261024.md).

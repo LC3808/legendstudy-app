@@ -10,14 +10,19 @@ def public_scope_patch(current, additions):
     value = current['deployment_configs']['production']['env_vars']['ESSAY_PUBLIC_EXAMS']
     if value.get('type') != 'plain_text':
         raise ValueError('PUBLIC_SCOPE_MUST_BE_PLAIN_TEXT')
-    existing = [part.strip() for part in value['value'].split(',') if part.strip()]
+    existing = [str(UUID(part.strip())) for part in value['value'].split(',') if part.strip()]
     ids = list(dict.fromkeys(existing + list(additions)))
     if any(str(UUID(item)) != item for item in ids):
         raise ValueError('INVALID_EXAM_ID')
     # Match the current gateway/worker contract; batch rollout must explicitly
     # update this limit and its authorization tests before expanding it.
-    if not ids or len(ids) > 128:
+    if not ids or len(ids) > 256:
         raise ValueError('CURRENT_RUNTIME_SCOPE_LIMIT')
+    encoded = ','.join(ids)
+    if len(encoded.encode()) > 5000:
+        encoded = ','.join(UUID(item).hex for item in ids)
+    if len(encoded.encode()) > 5000:
+        raise ValueError('HOSTING_BINDING_SIZE_LIMIT')
     return {'deployment_configs': {'production': {'env_vars': {
-        'ESSAY_PUBLIC_EXAMS': {'type': 'plain_text', 'value': ','.join(ids)}
+        'ESSAY_PUBLIC_EXAMS': {'type': 'plain_text', 'value': encoded}
     }}}}
