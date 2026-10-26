@@ -1,3 +1,7 @@
+## 2026-10-26 — 완료 결과 전용 URL 통합
+
+WEB ce433f8/Production bb120a6a. History 공통 결과 재사용·전체 완료 자동 이동·4단계 제거·비교 없는 성장영역 숨김. 기존 한양 결과와 0Credit재작성 UI 확인, 새평가/차감0. [검사·복구](essay-web-studio-ui-20261026.md).
+
 ## 2026-10-26 — WEB 작성·진행 UI 배포
 
 네이비 히어로·전체 문항 카드·회차 제출·실제 상태 진행 모달·History 목록 반영. Production93aaf61c, Provider/SQL0, APP·결과 상세·Worker 불변. [검사·복구·Owner 확인](essay-web-studio-ui-20261026.md).
