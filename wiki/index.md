@@ -65,7 +65,7 @@ Essay service implementation: [Oct11 contract-verified partial result](essay-ful
 
 Current APP branch integration: [Oct10 local closeout](production-integration-2026-10-09.md#local-app-branch-integration--2026-10-10); historical Production/IAP: [Oct09 integration](production-integration-2026-10-09.md), superseding prior SDK/access and IAP-server-missing checkpoints.
 
-Admin Credit: [목록·회수/환불 검토](admin-credit-directory-20261026.md). Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
+Admin Credit: [목록](admin-credit-directory-20261026.md) → [만료일 지급·회수](admin-credit-operations-20261027.md). Admin member management: [directory009](admin-member-directory.md). Essay Web activation: [current activation](essay-runtime-activation-2026-10-09.md) → [four-type gap/contract](essay-mixed-mode-foundation.md); no provider activation.
 
 WEB 통합 Oct25: [배포·집계 정정](phase3-service-20261022.md#2026-10-25-web-통합-배포-및-집계-정정).
 

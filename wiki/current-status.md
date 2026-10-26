@@ -1,6 +1,6 @@
 # Current Status
 
-[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit](admin-credit-directory-20261026.md) · [MY 대학관리 배포](my-college-management-20261026.md).
+[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [MY 대학관리 배포](my-college-management-20261026.md).
 
 고려 의심 해소·평가변경 금지: [Owner 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 
