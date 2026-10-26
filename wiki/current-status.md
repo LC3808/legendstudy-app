@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEBd03f4f4 고려대 재작성 전체문항·미작성 안내 수정. 앞선 ea7768c/Pages185a0fb9: 재처리 진행 모달·하단 붉은0Credit 버튼 배포. [UI·검사·복구](essay-web-studio-ui-20261026.md). 인하 사진8장·확인3건 보존, 기존 요청 평가완료 미확정. [추출 복구](inha-photo-extraction-20261026.md). Worker e85c587b·APP 보존.
+2026-10-26 WEB 결과 화면 브랜드·6개 섹션·문항접기·서버 무료재작성 가능상태 반영. [UI·검사·복구·미완료](essay-web-studio-ui-20261026.md). 고려 재작성 전체문항/재처리 모달 보존. 원본사진 결과 미리보기는 후속 필요. 인하 기존 평가실패 원인은 별도 미해결. [추출 복구](inha-photo-extraction-20261026.md). Worker·APP·DB·Credit 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

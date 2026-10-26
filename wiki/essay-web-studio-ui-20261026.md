@@ -125,3 +125,16 @@ ExamRewrite는 최초 제출 문항 모두를 동시에 표시하며 기존 draf
 WEB d03f4f4, typecheck/build·관련20검사 PASS, 변경 코드 lint 오류/경고0. 실제 Provider/최종 제출/차감0. 복구는 이전 Pages7d350495-8266-4df6-a064-7e12edcc9cae.
 Pages 7e8db0c7-0b28-4701-a546-17e41be731c9 production/success 확인.
 운영 동일 계정/회차 재작성에서 두 textarea 동시 표시, 기존 문제1 749자 복원·문제2 빈 초안 유지, 문제2 준비 안내 및 버튼 비활성 확인. 학생 답안 입력/이전답안 불러오기/최종 제출은 대신 실행하지 않았다.
+
+## 2026-10-26 — 완료 결과 화면 브랜드·섹션 통합
+
+Owner 결과 화면 전면 개선 지시를 기존 ‘완료 직후/History 공통 결과’ 결정에 연결했다. ExamDetail의 동일 owner-scoped Report를 ExamResultLayout에서 표시하며 EvaluationReport·EvaluationComparison·VoiceFeedback·UniversityLogo·기존 브랜드 설정을 재사용한다. 대학 히어로, 실제 제출 문항 수/날짜/최초·재첨삭 구분, 6개 섹션 탐색, Registry ID 기반 문항명·순서, 첫 문항 기본 펼침과 나머지 접기, 강점/보완/우선수정 색상 구분, 제출 정보와 다음 단계 영역을 추가했다. 새 요약/종합 점수/기준/기한은 생성하지 않는다. 무료 재작성은 서버 free_rewrite_available=true일 때만 활성화하며 기존 ExamRewrite/0Credit 경로를 유지한다.
+
+보존 검토7항목: 기존 원본 답안·결과와 발생시각 유지; 학습 기록 append/update 없음; UI 선택 상태만 메모리 보관; 기존 owner 조회/RLS 유지; UI 표시를 성과 데이터로 저장하지 않음; 수집·권한 범위 확대 없음; 없는 평가/기한/이미지를 생성하지 않음. DB/Worker/Secret/APP/정산 변경0. Provider/첨삭 제출/차감0.
+
+Typecheck·변경 파일 ESLint·관련11 UI 검사·Production Build PASS. 문항 정렬/배지 대비 보완 후 관련2검사·Typecheck/build PASS. 운영 일반계정 고려2026수시 인문 오전 기존 재첨삭 결과(3ce8cbdb…) 2문항·서버 무료재첨삭 불가·문항별 접기·성장 비교2개 확인. PC와 모바일400px 단일열, scrollWidth=innerWidth=400 확인. 기존 결과의 내용은 변경하지 않았다. 최초/재첨삭 공통 컴포넌트 경로를 유지하며 새 평가 검증은 수행하지 않았다.
+
+제한: 회차 결과 조회 응답에는 원본 사진 미리보기 URL이 없어 Math 결과의 저장된 수식·텍스트를 표시하고 원본 사진 미제공을 안내한다. 사진 확대/순서 미리보기는 미완료이며 기존 소유권 검증된 사진 조회 경로를 재사용하는 후속 작업이 필요하다. 사진을 재업로드하거나 로컬 초안을 결과 원본으로 대체하지 않았다.
+
+WEB 7b5a7c4461fdc08b2ca51d39e9fd83ff8dad0c13 Push/Remote 일치. 복구는 직전 정상 Pages7e8db0c7-0b28-4701-a546-17e41be731c9 / WEBd03f4f4. SQL 적용/재실행/롤백 없음.
+최종 Production Pages f6e70e92-7296-47f9-a26b-b054ba01afdb production/success, branch main/WEB7b5a7c4 확인. 중간 preview0c3ace1b는 운영 배포로 계산하지 않았다. 최종 운영 재조회에서 문제1→문제2 순서, 문제1 펼침/문제2 접힘, 재첨삭 배지 브랜드색 대비 확인.
