@@ -1,8 +1,8 @@
 # Current Status
 
-[전체 대학 연결·미완료](essay-all-university-standby-20261026.md). [관리자 Credit](admin-credit-directory-20261026.md).
+[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit](admin-credit-directory-20261026.md) · [MY 대학관리 배포](my-college-management-20261026.md).
 
-고려 평가 의심: Owner 오입력·공식답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 같은 회차 Q2·Q3 복구·3문항완료·History 확인, 기존예약1Credit만 settled/Q1보존. 과거 거절조건 미확정. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
+고려 의심 해소·평가변경 금지: [Owner 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

@@ -74,3 +74,7 @@ admin_student360 all return401/42501. Owner authenticated Application/Study/Admi
 acceptance is pending; availability/ACL verification is not read/write acceptance.
 Target005 still requires Owner §74 resolution and APP Flutter regression (NOT_RUN).
 No migration history, Payment/Toss, IAP, signup worker or deletion runtime changed.
+
+## 2026-10-26 Owner P1 — WEB presentation
+
+[프로필·대학관리 통합](my-college-management-20261026.md)은 기존 목표/지원/결과 분리를 유지한다. 관심에서 지원 폼을 미리 채울 수 있으나 명시적 저장 전 지원을 생성하지 않는다. 기존 저장·정정·소유자 계약을 보존한다.
