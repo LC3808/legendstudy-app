@@ -4897,3 +4897,5 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 ## 2026-10-26 — WEB 촬영 버튼 제거
 
 [이미지 첨부 단일화](essay-web-studio-ui-20261026.md) c728eee / Pages8ce7a7fe 운영 성공. UI7·타입·Lint·Build PASS, 원격 일치. APP/평가/학생데이터 변경0.
+
+2026-10-26 WEB 첨부 버튼 크기 보완: 5da2d0e, Build PASS·운영 화면 작은 왼쪽 버튼 확인. [상세](essay-web-studio-ui-20261026.md).

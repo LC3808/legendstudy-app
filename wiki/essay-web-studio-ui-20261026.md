@@ -146,3 +146,7 @@ Owner 승인: PC·모바일·태블릿 WEB 모두 ‘답안 이미지 첨부’ 
 WEB c728eee84d9c6c4d96b8271a47444c81a950c05d Push/Remote 일치. Pages 8ce7a7fe-7c3d-4dd3-8036-bbb3821f5fe4 production/success 및 해당 commit을 API로 확인했다. 관련 UI7검사·Typecheck·변경파일 ESLint·Production Build PASS. 로컬 Node24와 선언된22 차이 경고는 있었으며 검사는 통과했다. 실제 카메라/파일 선택창의 기기별 수동 확인은 수행하지 않았다. Provider 호출·Credit 처리·DB/Worker/Secret/APP 변경0.
 
 복구: 직전 WEB f45e40b / Pages ca6a181e-a7b1-4fab-a759-75629cae3ac2. SQL 없음. 학생 사진/답안/History는 수정하거나 삭제하지 않았다.
+
+### 첨부 버튼 크기 보완
+
+Owner 화면 피드백에 따라 전체 폭 첨부 버튼을 내용 너비·왼쪽 정렬·높이44px 버튼으로 축소했다. 아이콘/문구 한 줄, 안내문 보통 굵기/회색 적용. CSS만 변경, Production Build PASS. WEB5da2d0e Push 후 Pagesd8c01203 운영 배포. 실제 운영 인하2024수시 자연 오전 화면에서 작은 버튼·안내문 확인, 사진/답안 입력·제출하지 않았다. 기능/APP/DB/평가/Credit 변경0. 복구는 WEBc728eee / Pages8ce7a7fe.
