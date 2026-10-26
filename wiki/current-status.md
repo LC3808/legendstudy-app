@@ -1,6 +1,6 @@
 # Current Status
 
-[WEB 통합](essay-growth-history-ui-20261026.md).
+[WEB 전체폭](essay-growth-history-ui-20261026.md).
 
 2026-10-26 고려 평가 의심: Owner 오입력 확인·공식 예시답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 같은 회차 Q2·Q3 복구·3문항완료·History 확인, 기존예약1Credit만 settled/Q1보존. 과거 거절조건 미확정. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
 
