@@ -1,3 +1,7 @@
+## 2026-10-26 — WEB 작성·진행 UI 배포
+
+네이비 히어로·전체 문항 카드·회차 제출·실제 상태 진행 모달·History 목록 반영. Production93aaf61c, Provider/SQL0, APP·결과 상세·Worker 불변. [검사·복구·Owner 확인](essay-web-studio-ui-20261026.md).
+
 ## 2026-10-26 — 고려4회차 운영 공개·서강 예약 해제
 
 Owner 승인SQL 사전18/사후7 true. 고려4회차 PDF·입력·버튼 확인, 추가 Provider0. 서강 release1/consume0. 한양 사진확인 대기. [배포·미완료·복구](commerce-korea-20261026.md).

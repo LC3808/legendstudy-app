@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+WEB 작성·사진·회차 제출·진행 모달·History 목록: [2026-10-26 UI 배포/검사/복구](essay-web-studio-ui-20261026.md).
+
 상경 정책·고려 자료 업데이트: [운영 상태·대표평가·승인대기](commerce-korea-20261026.md).
 
 한양2027모의 상경 혼합형 장애: [사진 확인 복원·예약 상태·Owner 다음 단계](hanyang-mixed-incident-20261026.md).

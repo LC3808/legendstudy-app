@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-10-26 — WEB 작성·진행 UI 범위 승인
+
+Owner는 네이비 히어로·문항 카드·전체회차 제출·실제 서버 상태 진행 모달·History 목록 표현 변경을 승인했다. 기존 UI 동결 지시보다 이 범위만 우선한다. APP 및 결과 상세는 불변. 기존 회차 1/0 Credit 정책과 부분 제출·사진 명시 확인·멱등성은 유지한다. 가짜 진행률 금지, Provider 반복 호출 없이 UI 검사한다. [구현·배포·제한](essay-web-studio-ui-20261026.md).
+
 ## 2026-10-24 — 시험 회차 첨삭 단위 복원
 
 Owner 확정: 동일 시험 회차 전체 문항은 최초1Credit, 기존 무료재첨삭0Credit. 문항별 텍스트/이미지 Draft 저장0Credit. 최소1답안, 부분제출은 미작성 문항 안내와 명시적 동의 후 작성분만 평가한다. 중복/재처리 추가차감 금지, 성공 문항 결과 보존, History는 회차 아래 문항 연결. Owner 추가 확정: 시험 ID와 제출 회차 ID를 구분한다. 미제출 문항을 나중에 첨삭받는 경우 새 유료 회차1Credit이며 기존 무료재첨삭에 추가하지 않는다. 각 회차의 실제 제출 문항 집합을 보존하고 부분제출 모달에서 현재1Credit/추후 새회차1Credit을 안내한다. 기존 [시험 단위 정책](essay-lab-product-v1.md) 복원이며 새 과금정책이 아니다. Owner는 회차 실행·재처리 계약에 한해 Worker 조정을 허용했다. 평가 엔진·프로필·Secret 변경은 범위 밖이다. Production SQL은 Owner 직접 실행. [실행 계약 및 차이](https://github.com/LC3808/legendstudy-lab/blob/codex/web-app-release-20261024/docs/owner-review-20261024/README.md).
