@@ -4893,3 +4893,7 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 ## 2026-10-26 — Math 기술 검토 (조사만)
 
 [현행 코드·인하 G/H/I 미확정·4대안·수식 렌더링/CAS·출시 의견](math-technical-review-20261026.md). 기존 실패 응답 미보존으로 정확한 거절필드 확정 불가. 단기 기존 Worker 출력 계약 보완, 중기 원본 병행 권고. 코드/DB/Production 변경·Provider 호출·Credit 처리0. 출시 범위 변경 없음.
+
+## 2026-10-26 — WEB 촬영 버튼 제거
+
+[이미지 첨부 단일화](essay-web-studio-ui-20261026.md) c728eee / Pages8ce7a7fe 운영 성공. UI7·타입·Lint·Build PASS, 원격 일치. APP/평가/학생데이터 변경0.

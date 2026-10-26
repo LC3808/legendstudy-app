@@ -138,3 +138,11 @@ Typecheck·변경 파일 ESLint·관련11 UI 검사·Production Build PASS. 문�
 
 WEB 7b5a7c4461fdc08b2ca51d39e9fd83ff8dad0c13 Push/Remote 일치. 복구는 직전 정상 Pages7e8db0c7-0b28-4701-a546-17e41be731c9 / WEBd03f4f4. SQL 적용/재실행/롤백 없음.
 최종 Production Pages f6e70e92-7296-47f9-a26b-b054ba01afdb production/success, branch main/WEB7b5a7c4 확인. 중간 preview0c3ace1b는 운영 배포로 계산하지 않았다. 최종 운영 재조회에서 문제1→문제2 순서, 문제1 펼침/문제2 접힘, 재첨삭 배지 브랜드색 대비 확인.
+
+## 2026-10-26 — WEB 사진 입력을 이미지 첨부로 통일
+
+Owner 승인: PC·모바일·태블릿 WEB 모두 ‘답안 이미지 첨부’ 하나로 제공한다. 기존 사진 촬영 버튼과 capture 속성을 제거하고 촬영 후 사진 선택 안내를 추가했다. 기존 파일 검증·미리보기·교체/삭제·순서·초안·추출/사용자 확인은 유지한다. APP 촬영/첨부 UI는 변경하지 않는다. 이전 WEB 촬영 버튼 결정은 이 범위에서 대체한다.
+
+WEB c728eee84d9c6c4d96b8271a47444c81a950c05d Push/Remote 일치. Pages 8ce7a7fe-7c3d-4dd3-8036-bbb3821f5fe4 production/success 및 해당 commit을 API로 확인했다. 관련 UI7검사·Typecheck·변경파일 ESLint·Production Build PASS. 로컬 Node24와 선언된22 차이 경고는 있었으며 검사는 통과했다. 실제 카메라/파일 선택창의 기기별 수동 확인은 수행하지 않았다. Provider 호출·Credit 처리·DB/Worker/Secret/APP 변경0.
+
+복구: 직전 WEB f45e40b / Pages ca6a181e-a7b1-4fab-a759-75629cae3ac2. SQL 없음. 학생 사진/답안/History는 수정하거나 삭제하지 않았다.
