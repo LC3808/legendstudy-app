@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 인하 자연 사진 추출의 다중사진 읽기순번 중복 오류 수정·WEB3e2e0e4/Pages00f8c3a8 Production 반영. 기존 사진8장·확인3건 보존. 기존3문항 요청 접수/1Credit예약·완료 미확정. [복구·Owner 확인·배포](inha-photo-extraction-20261026.md). [브랜드42개](university-brand-hero-20261026.md)·[재진입 UX](essay-web-studio-ui-20261026.md)·[인하34회차](inha-standby-20261026.md)·Worker e85c587b 보존.
+2026-10-26 WEB ea7768c/Pages185a0fb9: 재처리 진행 모달·하단 붉은0Credit 버튼 배포. [UI·검사·복구](essay-web-studio-ui-20261026.md). 인하 사진8장·확인3건 보존, 기존 요청 평가완료 미확정. [추출 복구](inha-photo-extraction-20261026.md). Worker e85c587b·APP 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
