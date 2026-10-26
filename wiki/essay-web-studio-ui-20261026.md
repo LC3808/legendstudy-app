@@ -78,3 +78,27 @@ Production: https://lab.legendstudy.com/essay-lab/
 UI 복구는 Pages의 직전 정상 배포 `758c9a18-f1a2-49b3-87f9-bd0b9e52b8ba` (WEB `225cc2dd1a3641fc0b4ea54c464e6ba314a0a3bb`)로 복귀한다. DB SQL·Worker·Secret 복구를 실행하지 않는다. 배포 설정 전체 덮어쓰기 금지.
 
 Owner는 일반 계정에서 작성/사진 확인/제출 진행 화면을 확인한다. 결과 상세 및 APP UI는 이번 변경 대상이 아니다. 추가 Provider 호출·앱 빌드·스토어 배포는 수행하지 않았다.
+
+
+## 2026-10-26 — 기존 첨삭 시험 재진입과 독립 초안
+
+Owner 최신 결정: 시험 선택만으로 완료 결과로 이동하지 않는다. exact exam ID에 기존 평가 기록이 있으면 작성 화면 위 확인 모달을 표시한다. ‘네, 기록 확인’은 해당 시험만 필터한 기존 History, ‘아니오, 새로 작성’은 독립 빈 초안이다. 기존 결과에서 재작성하는 무료 경로와 구분한다.
+
+- `ExamReentryGate`가 로그인 주체/시험 ID로 기존 Essay·Math 기록을 읽는다. 조회 실패는 재시도이며 기록 없음으로 취급하지 않는다. 비동기 조회는 unmount 시 무효화한다.
+- 새 UUID 작성 세션을 owner/exam별 로컬 index에 보관한다. 텍스트(localStorage), 사진(기존 IndexedDB), Essay 접수/멱등키, Math 입력/접수 키가 같은 세션 namespace를 사용한다. 기존 key 삭제/덮어쓰기 없음. 보관된 작성 세션 메뉴에서 기존/별도 초안을 다시 열 수 있다.
+- 독립 초안은 기존 단일 계정 초안 자동 동기화를 사용하지 않는다. 브라우저 저장임을 명시한다. 기존 계정 초안과 무료 재작성 경로는 유지한다. 새 초안은 parent 없는 1 Credit, 기존 결과의 rewrite는 parent 있는 0 Credit 견적을 사용한다.
+- 저장된 완료 영수증의 복원만으로 자동 이동하지 않는다. 이번 화면에서 실제 접수한 요청의 전체 완료 자동 이동은 유지한다. 이전 미완료 요청/정산/재처리는 기존 ID 그대로 보관한다.
+- History query `?exam=<UUID>`는 exact ID 필터이며 다른 시험 성장 요약을 노출하지 않는다. 기존 결과 페이지/부모 연결은 수정하지 않는다. Legacy Essay 조회에도 기존 exam ID를 읽어 문자열 추측을 피한다.
+
+보존 질문 7개: (1) 새로 발생하는 것은 브라우저 작성 세션/생성시각이며 평가 사실 아님. (2) 기존 제출/평가 원본과 key 보존. (3) 기존 초안 UPDATE 대신 독립 namespace. (4) auth owner+exam ID 격리. (5) Learning 작성 흐름이며 Decision/Outcome 아님. (6) 기존 사용자 브라우저 저장 범위, 신규 서버 수집/권한 확대 없음. (7) UI 선택/초안 index를 점수·성장 사실로 저장하지 않음. [장기 데이터 원칙](longitudinal-learning-admissions-data-strategy.md), [기존 회차 정책](decisions.md) 유지.
+
+검사: typecheck PASS, lint 오류0/기존 Math effect 경고2, 관련 9파일37검사 PASS, Production build PASS. 합성 테스트에서 기존 초안 보존·독립 세션 복원·시험 ID 필터·오류 재시도·신규1/재작성0 견적 분리 확인. Provider/평가submit/SQL/Worker/Secret/APP 변경0. 실제 운영 화면 확인과 배포 정보는 아래에 기록한다.
+
+복구 기준: 직전 정상 Pages `48b95117-75fe-488e-a7bc-6fb243778da1` / WEB `b62b123`. DB/Worker 롤백 불필요. 신규 초안 key는 삭제하지 않으며 구버전 UI에서는 별도 초안 조회 메뉴가 없으므로 복구 시 그 한계를 안내한다. 최신 uuid64 공개범위 parser가 없는 더 오래된 WEB으로 복귀하지 않는다.
+
+
+운영 확인 결과: WEB `b49d52f2f482e4412052a30064d21f3e097d6812`, Pages `460e65a3-30fc-4300-9c1a-71bbfff1aa48` production/success. WEB Push·Remote SHA 일치. Worker `e85c587b-46fe-4abd-b871-3c84eb4305d7`는 이번 작업 변경 없음.
+
+대표 일반계정에서 한양2026수시 인문 **오후1**(exam `e4969922-c133-5f7d-ae8d-fc50ba389066`)을 확인했다. Owner 문구 ‘오전1’은 현재 운영 선택 목록에 없어 임의 명칭/ID 수정 없이 이 차이를 기록한다. 자동 이동 없이 모달, exact exam History 기존run `798712a6-29b5-4220-b214-11a088cab176` 한 건, 같은 결과 페이지, 기존 재작성0Credit 표시를 확인했다. ‘새로 작성’ 빈 입력→로컬 저장→서버 신규1Credit 확인창→취소(최종 제출 없음). 기존 작성 세션에서 원래1,314자 답안/완료 접수 영수증 복원, 자동 결과 이동 없음 확인. 확인용19자 문구는 신규초안에서만 사용한 뒤 빈 값으로 복원했다. 기존 기록/답안 미변경, Credit7→7. 400px 모바일과 PC 모달 배치 확인. 실기기 APP/새Provider E2E는 수행하지 않았다.
+
+추가 초안 전환 보완 후 gate3검사·Production build PASS. 새 UUID 초안은 같은 브라우저에서만 복원하며 계정 간/기기 간 신규 초안 동기화는 추가하지 않았다. 운영 증거는 materials `essay-validation-2026-10/exam-reentry-20261026/{web-checks.json,deployment-final.json,web-build.log}`. SQL 적용/재실행할 항목 없음. Owner 다음 확인: 위 한양 시험 재선택→새로 작성/기록 확인. 기존 인하34회차 STANDBY와 다른 대학 공개 상태는 유지한다.
