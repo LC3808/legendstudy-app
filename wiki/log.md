@@ -4901,3 +4901,5 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 2026-10-26 WEB 첨부 버튼 크기 보완: 5da2d0e, Build PASS·운영 화면 작은 왼쪽 버튼 확인. [상세](essay-web-studio-ui-20261026.md).
 
 2026-10-26 21:19 KST: [인하 기존 Math 회차 복구](inha-photo-extraction-20261026.md#2026-10-26-2119-kst--기존-math-회차-운영-복구). Q1보존·Q2/Q3완료·History·원예약1Credit consume1건. Provider2호출, 코드/배포/직접SQL0. 과거 출력 거절조건 미확정; 재발 해결 완료로 보고하지 않음. 계약검사74PASS.
+
+2026-10-26 WEB 성장·기록·결과 통합: 52fbe54 / Pages24c0341c production success. 24검사·타입·Lint·Build PASS, PC/400px 및 기존 결과 조회. Provider/DB/Credit쓰기0. [검증 제한·복구](essay-growth-history-ui-20261026.md).

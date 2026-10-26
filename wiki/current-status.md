@@ -1,6 +1,6 @@
 # Current Status
 
-[WEB 첨부 단일화](essay-web-studio-ui-20261026.md).
+[WEB 통합](essay-growth-history-ui-20261026.md).
 
 2026-10-26 고려 평가 의심: Owner 오입력 확인·공식 예시답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 같은 회차 Q2·Q3 복구·3문항완료·History 확인, 기존예약1Credit만 settled/Q1보존. 과거 거절조건 미확정. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
 
@@ -9,11 +9,9 @@
 과거 종료 기록(현재 상태는 위 2026-10-26 절): 성균언어16 PDF복구·한양인문13 STANDBY. 당시 한양상경8 미연결은 후속 작업으로 해소. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
 
 
-
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
 Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존전체학습주기E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](essay-lab-claude-handoff-20261024.md).
-
 
 성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](essay-p0-direct-execution-20261023.md).
 
@@ -121,14 +119,12 @@ Ledger21; L1 PASS. [L2-C3](essay-lab-model-bakeoff-l2-b.md): S/H + Gate D Owner 
 Multi D-Day: applied/Owner PASS; ACL correction Owner-applied/verified.
 Home customization and Analytics/Achievement/Notification backends remain planned.
 
-
 ## Handoff
 
 Start with [Task Routing Map](index.md#task-routing-map), decisions and product scope.
 [Policy audit](mobile-policy-audit.md) owns code/test evidence and remaining gaps.
 [Log](log.md) is chronology; [deduplicated historical status evidence](history/status-checkpoints.md)
 preserves former checkpoints without burdening the current restore path. Historical PASS statements are dated evidence.
-
 
 ## Materials rollout priority
 
