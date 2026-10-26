@@ -9,6 +9,15 @@ def parse_public_exams(raw):
     """Read legacy JSON or compact UUID CSV without broadening authorization."""
     require(isinstance(raw,str),'PUBLIC_SCOPE_INVALID')
     value=raw.strip()
+    if value.startswith('uuid64:'):
+        import base64
+        encoded=value[7:]
+        require(len(encoded)<=5464,'PUBLIC_SCOPE_INVALID')
+        data=base64.b64decode(encoded,validate=True)
+        require(data and len(data)%16==0 and len(data)<=4096 and base64.b64encode(data).decode()==encoded,'PUBLIC_SCOPE_INVALID')
+        items=[str(UUID(bytes=data[i:i+16])) for i in range(0,len(data),16)]
+        require(len(set(items))==len(items),'PUBLIC_SCOPE_INVALID')
+        return items
     items=json.loads(value) if value.startswith('[') else value.split(',') if value else []
     require(type(items) is list and len(items)<=256,'PUBLIC_SCOPE_INVALID')
     require(all(isinstance(item,str) and item.strip() for item in items),'PUBLIC_SCOPE_INVALID')
