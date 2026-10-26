@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEB 결과 화면 브랜드·6개 섹션·문항접기·서버 무료재작성 가능상태 반영. [UI·검사·복구·미완료](essay-web-studio-ui-20261026.md). 고려 재작성 전체문항/재처리 모달 보존. 원본사진 결과 미리보기는 후속 필요. 인하 기존 평가실패 원인은 별도 미해결. [추출 복구](inha-photo-extraction-20261026.md). Worker·APP·DB·Credit 보존.
+2026-10-26 고려 평가 의심: Owner 오입력 확인·공식 예시답안 Q1=4/5,Q2=5/5로 해소. [정정](commerce-korea-20261026.md). 평가 설정 변경 금지. P0 인하 Math: 기존1Credit 예약·Q1완료/Q2·Q3실패 보존, 상세 거절코드 미기록으로 원인확정 대기. [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md), Worker·APP 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

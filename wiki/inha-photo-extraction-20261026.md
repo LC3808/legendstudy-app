@@ -43,3 +43,15 @@ Owner가 세 문항 확인 완료를 회신했다. 운영 DB에서 동일 attemp
 후속 화면 확인 시 이미 전체3문항 요청 `fe6a3c4b-2f91-41cc-9e0b-d9490bd34dd1`이 2026-10-26 09:41:47 UTC에 접수돼 있었다. 이번 후속 작업에서 agent는 제출·재추출·재처리를 누르지 않았다. 요청 reserved, billing reserved, credits_required1, Ledger reserve1/balance_delta0이며 사용 확정은 아직 없다. q0/q1 checkpoint와 q2 pending을 확인했으며 평가 완료로 보고하지 않는다. 현재 요청 버튼 비활성화는 사진 미확인이 아니라 기존 요청 진행 상태에 따른 것이다.
 
 기존 요청을 보존하고 중복 확인창/신규 요청을 만들지 않았다. 1Credit 안내창의 직접 UI 확인과 모바일 화면 확인은 미수행이며, 서버의 실제3문항 접수·1Credit 예약을 별도 증거로 기록한다. 위 유료평가0/Credit7은 복구 작업 당시 기준이다. 이미 접수된 요청의 평가 비용·최종 정산·History 완료는 아직 미확정이다. 다음에는 동일 요청의 완료 상태만 확인하고 신규 제출하지 않는다.
+
+## 2026-10-26 — Math 실패 후속 조사 (미복구)
+
+기존 요청fe6a3c4b… READ-ONLY 재확인: state/billing_status=reserved, completed_at=null, lease 만료. q0 completed, q1/q2 및 각각retry1·2 failed. 성공 결과와 최초1Credit 예약은 유지되며 이번 작업은 신규 요청·재처리·정산을 실행하지 않았다. 기존 실패 checkpoint output=null이라 과거 생성 결과를 다시 검증할 수 없다.
+
+WEB functions/api/essay/math-session.ts는 Provider 응답 이후 evaluateExamMath의 validateMathEval 또는 physicalFinalize 거절을 모두 INVALID_MATH_OUTPUT으로 축약한다. 따라서 확정 범위는 ‘Provider 응답 이후 출력 계약 검증 거절’이며 구체적 기준/수식/근거 오류라고 단정하지 않는다. context.extraction=[] 전달도 확인했으나 실제 실패 원인이라는 증거는 없어 수정하지 않았다.
+
+최소 진단 보완: exam-bridge에서 구조/domain/physical 실패 단계와 고정 검증 코드만 console.warn에 남긴다. 원문 오류message/학생답안/공식자료/ID/Secret은 기록하지 않는다. 기존 검증 거절·정산·인문경로 불변, 실패 결과를 강제 통과시키지 않는다. WEB f45e40b, 관련1검사·Typecheck·ESLint·Production Build PASS. 다음 기존 실패문항 재처리 시 안전한 로그를 수집해 정확한 거절코드에 해당하는 최소 수정만 수행한다. 기존 성공q0 재평가 금지, 추가 예약/차감 금지. 복구 완료로 보고하지 않는다.
+
+보존 검토: 원본시각/ID·사진·초안·성공checkpoint 유지, DB UPDATE/신규 수집 없음, 기존 owner/Worker 인증범위 불변, 진단코드를 학습성과로 기록하지 않음, 원문 개인정보를 로그로 추가 전송하지 않음. 고려대 Owner정정과 무관한 Math 진단만 다루며 고려 엔진/프롬프트/기준/Registry 변경0. 롤백은 WEB7b5a7c4 / Pagesf6e70e92-7296-47f9-a26b-b054ba01afdb, DB SQL 없음.
+
+진단 보완 Production Pages ca6a181e-a7b1-4fab-a759-75629cae3ac2 success, WEB f45e40ba73738302db72475ec19d51eb4e80b74f 원격 일치 확인. 새 Provider 호출0.
