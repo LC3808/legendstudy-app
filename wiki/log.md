@@ -1,3 +1,7 @@
+## 2026-10-26 — 인하 사진 Owner 확인 후
+
+동일 attempt3개 CONFIRMED·사진8장 보존. 후속 확인 시 기존3문항 요청이 이미 접수/1Credit예약 상태. 추가 제출·재추출0, 사용확정/평가완료 미확정. [현재 증거](inha-photo-extraction-20261026.md#owner-확인-후-읽기-전용-확인).
+
 ## 2026-10-26 — 인하 자연 다중 사진 추출 복구
 
 Postgres reading_order unique 충돌 확인, 사진 순서에 따라 문항 단위 순번 연결. 기존 attempt 재개/복원·촬영/첨부/History 버튼 개선. WEB3e2e0e4/Pages00f8c3a8 Production. 학생 사진 확인 전 확정/유료평가 없음. [상세와 완료 범위](inha-photo-extraction-20261026.md).
