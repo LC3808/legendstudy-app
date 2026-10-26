@@ -1,5 +1,7 @@
 # 수리논술 기술 검토 — 2026-10-26
 
+후속: [기존 인하 회차 Q2·Q3 복구 완료·원인 미확정](inha-photo-extraction-20261026.md#2026-10-26-2119-kst--기존-math-회차-운영-복구). 아래는 당시 조사 기록이다.
+
 상태: **조사·설계 제안만**. 코드/DB/Worker/Production 변경·Provider 호출·Credit 처리 없음. 출시/공개 상태도 변경하지 않았다.
 
 기존 결정: [상경 공통 회차](commerce-korea-20261026.md), [인하 추출 복구 및 Math 미복구](inha-photo-extraction-20261026.md), [Math 공유 계약](math-essay-shared-integration-contract.md), [WEB 입력·결과 UI](essay-web-studio-ui-20261026.md). 고려 인문 Owner 공식답안 Q1 4/5·Q2 5/5 정정은 유지하며 평가 설정 변경 대상에서 제외한다.
