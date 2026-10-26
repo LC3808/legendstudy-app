@@ -10,6 +10,7 @@ from .exam_runtime import ExamQuestionChannel
 from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
 from .mixed_math_runtime import MixedMathWorker
+from .evaluation_policy import question_engine, policy_family
 
 def receipt_checkpoint_key(value):
     # A rejected output has no successful Provider output receipt. Keep the
@@ -48,6 +49,9 @@ class CloudflareExamRuntime:
         provider=self.provider_factory(policy['binding']) if self.provider_factory else self.provider
         pkg=await self.rpc('essay_material_runtime_package',dict(p_exam=claim['exam_id'],p_digest=policy['package_digest']))
         questions,caches=prepare_claimed_material(claim,pkg,self.registry)
+        family=policy_family(policy['evaluation_type'],pkg['exam_identity'])
+        for question in questions:
+            question_engine(family, question.get('engine', 'essay'))
         version=f"material-{pkg['package_version']}-{policy['package_digest']}"
         def build(channel,checkpoint):
             index=next(i for i,q in enumerate(questions) if q['evaluationId']==channel.evaluation_id)

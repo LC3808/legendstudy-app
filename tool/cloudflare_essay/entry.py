@@ -11,6 +11,7 @@ from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,Run
 from essay_lab.material_runtime import load_reviewed_material
 from essay_lab.semantic_review import openai_review
 from essay_lab.live_worker import digest
+from essay_lab.evaluation_policy import question_engine, policy_family
 from registry_asset import REGISTRY
 import time
 
@@ -77,8 +78,9 @@ class Default(WorkerEntrypoint):
         runtime=self.configuration(t,policy['binding'])
         math_questions={}
         math_status=None
+        family=policy_family(policy['evaluation_type'],pkg['exam_identity'])
         for q in hosted.values():
-            if q.frozen_cache.get('evaluation_engine')=='math':
+            if question_engine(family,q.frozen_cache.get('evaluation_engine','essay'))=='math':
                 if math_status is None:math_status=await self.math_child({'action':'availability'})
                 require(math_status.get('ready') is True and math_status.get('contract')=='essay-math-child-v1' and
                     math_status.get('model')==q.frozen_cache['provider_binding']['model'],'MATH_CHILD_UNAVAILABLE')
