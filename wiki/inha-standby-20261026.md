@@ -110,3 +110,5 @@ Registry `registry-apply.sql`: 적용 완료, 재실행 금지. 신규32·기존
 3. UI만 복구할 경우 parser를 포함하는 Pages `16a832e5-6b73-44ca-bff7-0d1b2c4ce6e5`(1597c21)로 되돌릴 수 있다. 공개scope가uuid64인 동안 과거0704f33으로 곧바로 롤백하지 않는다.
 4. 인하 연결 전체 복구는 먼저 인하34개만 공개scope에서 제거하는 최소plain_text PATCH/WEB재배포, 필요 시 해당batch rollback.sql로 runtime/PDF정책 차단. Worker 이전버전 `65fd5977-fbac-460a-bfc9-a38d836f6357`는 기존scope형식으로 함께 복구할 때만 사용. 현재 인하run0이지만 복구 실행 직전 진행 요청을 재확인한다. Registry·Math원본·학생기록을 삭제하지 않는다.
 5. 이번 작업 이후 새 대학 개발/APP 빌드·스토어 작업은 진행하지 않았다. APP은 이번 WEB 회차 계약의 실기기 검증 대상이 아니며 호환을 새로 보증하지 않는다.
+
+Owner 실사용 후속2026-10-26: 자연2026오전 다중사진 추출 저장 충돌을 [사진 복구 기록](inha-photo-extraction-20261026.md)에 기록한다. 기존 텍스트 STANDBY와 이미지 추출 성공을 혼동하지 않는다.

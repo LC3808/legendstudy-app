@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEB 브랜드42개 설정/화이트 히어로 Production86282c7/e8def797. Manus27·Claude33 매칭, 원문A1/B11 적용·C5/D2/E23 임시색 구분, 경희RGB 정정. PC/400px·선택/입력/일정 확인, Provider/SQL/차감0. [근거·보류·복구](university-brand-hero-20261026.md). [재진입 UX](essay-web-studio-ui-20261026.md)·인하34회차/92문항·Worker e85c587b 보존. [인하/Owner QA](inha-standby-20261026.md).
+2026-10-26 인하 자연 사진 추출의 다중사진 읽기순번 중복 오류 수정·WEB3e2e0e4/Pages00f8c3a8 Production 반영. 기존 attempt·사진 재사용, 유료평가/차감0. [복구·Owner 확인·배포](inha-photo-extraction-20261026.md). [브랜드42개](university-brand-hero-20261026.md)·[재진입 UX](essay-web-studio-ui-20261026.md)·[인하34회차](inha-standby-20261026.md)·Worker e85c587b 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

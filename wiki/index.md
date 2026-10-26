@@ -228,3 +228,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - [APP release closeout / Store handoff](app-release-closeout.md) — current local evidence, privacy map and remaining RC gates.
 
 - [Essay runtime completion follow-up](essay-runtime-completion.md) — PARTIAL / gated.
+
+- 인하 다중 사진 추출 장애/재개/사진 UI: [운영 복구](inha-photo-extraction-20261026.md).

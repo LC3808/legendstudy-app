@@ -1,3 +1,7 @@
+## 2026-10-26 — 인하 자연 다중 사진 추출 복구
+
+Postgres reading_order unique 충돌 확인, 사진 순서에 따라 문항 단위 순번 연결. 기존 attempt 재개/복원·촬영/첨부/History 버튼 개선. WEB3e2e0e4/Pages00f8c3a8 Production. 학생 사진 확인 전 확정/유료평가 없음. [상세와 완료 범위](inha-photo-extraction-20261026.md).
+
 ## 2026-10-26 — 42대학 브랜드 히어로
 
 WEB86282c7 / Pages e8def797 Production success. Manus27/Claude33 매칭, A1/B11 공식색·C5/D2/E23 임시색 구분. 경희 원문B22 환산정정, 인하·건국 원문 접근 보류. PC/400px 확인·관련7검사/typecheck/build PASS·lint 기존2경고. DB/Worker/APP/Provider 변경0. [근거·검사범위·복구](university-brand-hero-20261026.md).
