@@ -5,6 +5,15 @@ from urllib.error import HTTPError
 from .operating_host import OperatingTransport,ORIGIN,RPCS
 from .live_worker import require,Unknown
 
+def parse_public_exams(raw):
+    """Read legacy JSON or compact UUID CSV without broadening authorization."""
+    require(isinstance(raw,str),'PUBLIC_SCOPE_INVALID')
+    value=raw.strip()
+    items=json.loads(value) if value.startswith('[') else value.split(',') if value else []
+    require(type(items) is list and len(items)<=256,'PUBLIC_SCOPE_INVALID')
+    require(all(isinstance(item,str) and item.strip() for item in items),'PUBLIC_SCOPE_INVALID')
+    return [str(UUID(item.strip())) for item in items]
+
 async def fetch_bytes(url,headers,body=None,timeout=25,limit=8388608):
     from workers import fetch
     from js import AbortController,setTimeout,clearTimeout

@@ -5,7 +5,7 @@ from urllib.error import HTTPError
 from urllib.parse import urlparse
 from workers import WorkerEntrypoint,Response,Request
 from essay_lab.live_worker import require,SignedReview,Unknown
-from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport,fetch_bytes
+from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport,fetch_bytes,parse_public_exams
 from essay_lab.cloudflare_runtime import CloudflareExamRuntime
 from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit,configured_binding
 from essay_lab.material_runtime import load_reviewed_material
@@ -32,7 +32,7 @@ class Default(WorkerEntrypoint):
     def transport(self):
         return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
             worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS),
-            public_exams=json.loads(getattr(self.env,'ESSAY_PUBLIC_EXAMS','[]')))
+            public_exams=parse_public_exams(getattr(self.env,'ESSAY_PUBLIC_EXAMS','[]')))
 
     def configuration(self,transport,binding=None):
         # No synthetic review callback or automatic signing fallback.
