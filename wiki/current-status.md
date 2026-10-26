@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEB 문항 토글·TEXT/Math 입력 분리 배포3909b32a/8cb9342. 운영 한양상경 기존답안·사진복원/CTA 확인, Provider0. 이전 결과전용화면 유지. [UI·건국Math 성공범위·복구](essay-web-studio-ui-20261026.md). [고려·상경 상태](commerce-korea-20261026.md).
+2026-10-26 WEB 문항 토글·TEXT/Math 입력 분리 배포069e9c29/0704f33(미제공 CTA 안내 포함). 운영 한양상경 기존답안·사진복원/CTA 확인, Provider0. 이전 결과전용화면 유지. [UI·건국Math 성공범위·복구](essay-web-studio-ui-20261026.md). [고려·상경 상태](commerce-korea-20261026.md).
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
