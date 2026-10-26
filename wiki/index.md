@@ -23,6 +23,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+42개 대학 브랜드 히어로/공식색 근거: [분류·설정·배포·복구](university-brand-hero-20261026.md).
 인하대 인문·자연·의예 STANDBY/대학별 브랜드 히어로: [대상·연결·배포·복구](inha-standby-20261026.md).
 WEB 작성·사진·회차 제출·진행 모달·History/시험 재진입·독립 초안: [2026-10-26 UI 배포/검사/복구](essay-web-studio-ui-20261026.md).
 
