@@ -74,3 +74,7 @@ Preservation review: (1) audit time is separate from historical learning events;
 3. 숙명/숭실 부분 패키지를 공식자료로 전체 회차 보완, 항공/광운/동국 신규 실행 패키지 준비. 기존 SQL 재실행 금지.
 4. 자연 Math 독립 legacy 요청 경로의 신규 예약 차단 범위 확인. 기존 예약/재처리는 보존.
 복구: WEB 이전 Pages `89246b7e-c283-499b-a849-5e1f1e6dbb3d`/commit584a914로 복귀 가능하나 Math 보류 정책이 사라지므로 Owner와 범위를 확인한다. Native 동적 PDF 실패는 기존 pinned 승인 목록으로 fallback. 이번 직접 SQL 없음, DB rollback 없음.
+
+## 일반 계정 운영 확인 (2026-10-27 00:11 KST)
+Owner 일반 계정 로그인 후 관리자 메뉴 없음/잔액104 확인. Production 대학 목록에서 서강·고려·건국·경희·서울여·성균·중앙·외대·한양·인하 첨삭 시작 링크 표시. 중앙2026모의 인문사회 선택 시3문항/문항별 작성·저장/기존 1Credit 안내/회차 제출 컴포넌트 표시, 실제 PDF7페이지 뷰어 열람 확인. 답안0자인 상태로 버튼 비활성은 정상. 가상 답안 생성 없이 종료했으므로 답안 입력 후 버튼 활성·서버 quote 확인창은 아직 미확인이며 STANDBY 완료로 계산하지 않는다. 실제 제출/Provider/Credit변동0.
+Native 코드 commit db71238. WEB commit730d74a 원격 일치 확인. APP 대학 카드 공통 상태 연동 관련 기존 미커밋 변경은 별도로 보존했고 이번 commit에 섞지 않음; 개발용 빌드는 작업 폴더 전체 기준이므로 해당 변경을 포함한다. 배포용 APK로 취급하지 않는다.
