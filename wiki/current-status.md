@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEB ea7768c/Pages185a0fb9: 재처리 진행 모달·하단 붉은0Credit 버튼 배포. [UI·검사·복구](essay-web-studio-ui-20261026.md). 인하 사진8장·확인3건 보존, 기존 요청 평가완료 미확정. [추출 복구](inha-photo-extraction-20261026.md). Worker e85c587b·APP 보존.
+2026-10-26 WEB2b1368d 고려대 카드 문구 삭제. 앞선 ea7768c/Pages185a0fb9: 재처리 진행 모달·하단 붉은0Credit 버튼 배포. [UI·검사·복구](essay-web-studio-ui-20261026.md). 인하 사진8장·확인3건 보존, 기존 요청 평가완료 미확정. [추출 복구](inha-photo-extraction-20261026.md). Worker e85c587b·APP 보존.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

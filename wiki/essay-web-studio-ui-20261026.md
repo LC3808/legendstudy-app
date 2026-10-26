@@ -110,3 +110,8 @@ Owner 추가 요청: 결과 화면에서 기존0Credit 재처리를 누르면 �
 보존 검토7항목: 기존 실행·관찰시각 유지; 원본 checkpoint 재사용; 저장 UPDATE 추가 없음; 기존 사용자 소유 조회; UI 상태를 학습 성과로 저장하지 않음; 기존 인증 범위 유지; 서버 상태 외 가짜 진행률/완료 생성 없음. 기존 회차 정책/완료 결과 통합 결정을 따른다.
 
 WEB ea7768c3243eeb603900ae9f97f500a06bfc1940, 원격 일치. Pages185a0fb9-60ec-4014-8760-67ada1e312b3 production/success 확인. Typecheck/build 및 관련17검사 PASS. Lint 오류0, 기존 effect2경고 및 테스트 미사용인자2경고. 일반계정 기존 인하 요청 결과에서 모달 열기·1/3완료·실패2문항·0Credit 버튼 실제 표시 확인. 실제 재처리 클릭/Provider 호출/추가 Credit 예약0; 요청 전송 중 모달은 합성 UI 검사로 확인. 모바일 실제 확인은 미수행. 복구는 직전 Pages00f8c3a8-b101-42d1-a112-bc74396da892, DB/Worker 복구 불필요.
+
+## 고려대 카드 안내 삭제 — 2026-10-26
+
+Owner 요청으로 대학 목록 고려대 카드의 ‘인문 4회차 · 2025 수시 오후는 문제 2만 공개’ 문구만 삭제. 실제 시험 공개 범위·서버 승인·첨삭 연결 불변. WEB2b1368d, Production build PASS.
+Pages 7d350495-8266-4df6-a064-7e12edcc9cae production/success API 확인.
