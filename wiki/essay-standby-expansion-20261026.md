@@ -144,3 +144,15 @@ Worker `0c72d75c-8fa7-4423-8045-f3eb6d8533db`, WEB Production `030c7b86-80d8-496
 | 서강대 | 2026 | 수시 | 인문계열(인문사회)  | 2 | STANDBY / OWNER QA PENDING | `0dddefe1-624d-56e4-bf4f-3311c4784185` |
 | 서강대 | 2026 | 모의 | 인문계열(인문사회) 1차 | 1 | STANDBY / OWNER QA PENDING | `58bdce90-d241-5aab-b78a-fab8339d1d80` |
 | 서강대 | 2027 | 모의 | 인문계열  | 1 | STANDBY / OWNER QA PENDING | `a0d96e4b-a066-5be4-86d1-79a8f26a4cc1` |
+
+## 서강·고려 카드 우선 배치 / 고려 1문항 예외 — Owner 2026-10-26
+
+Owner가 서강·고려 카드 활성화/앞쪽 배치를 요청하고, 고려는 ‘현재 승인된 1문항만 예외 공개’를 명시 선택했다. 이전 고려 작업 보류 중 **이 시험의 공개 연결만** 해제한다. 전체 회차 STANDBY 정책의 일반 변경이 아니다.
+
+서강 기존23회차는 이미 공개 중이며 그대로 보존한다. 기본 목록은 서강→고려를 먼저 배치하되 카드 활성화는 서버 공개 상태를 계속 따른다. 고려는 2025수시 인문 오후 `942c1c43-914f-5b99-9a30-e6474c363f6f`의 **문제2** `c1f90870-3ad9-59f8-afe3-c26d665f292f`만 공개한다. 문제1은 미승인 유지. 기존 runtime package digest `9afbeece5b9348c5402430f3bd215a9d8acf2c1ce0add6b38fffab78f7229ea4`와 PDF를 재사용한다. 전체 회차 evidence에 넣지 않고 별도 partial release manifest로 관리한다. 카드/시험 화면에 문제2 부분공개 표시. 신규54/기존82 전체회차 STANDBY 수에 더하지 않는다.
+
+Pages·Worker 공개 allowlist에 기존 시험 ID1개 추가(142→143). Worker `57dfa6c1-6bc8-4616-8dbe-78e516df727c`. Worker Registry/평가 소스·기존 bindings·Secret·DB runtime 정책 그대로. DB SQL 쓰기0, Provider/평가제출/차감0. 서버 preflight/고정digest/문항 ID 검사 유지, 임의 버튼 강제 활성화 아님. 연결 증거는 `three-universities-20261026/korea-card-exception/`.
+
+복구는 해당 ID만 공개 allowlist에서 제외하고 partial manifest/우선배치 변경을 되돌린다. DB 기존 평가·문항·Credit·History 삭제나 이전 성공 SQL 재실행은 하지 않는다.
+
+WEB Production `c244b76f-aafa-4301-bdb7-70b922b4cc3c` (source `2fbde34`) 배포 success. 일반 사용자 운영 화면에서 기본 순서 서강→고려, 양쪽 ‘첨삭 시작하기’ 링크 및 고려 문제2 부분공개 문구 확인. 연결 검사 9개 PASS. Provider 호출·답안 제출 없음.

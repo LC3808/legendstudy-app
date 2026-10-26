@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 한양2027모의 상경: 사진 추출 완료/학생확인 대기, 평가·예약0. 기존 사진 확인 자동복원 WEB2737bf18/d861586 반영. Worker/DB 불변. [장애·Owner 확인·복구](hanyang-mixed-incident-20261026.md). [외대·건국·서강 신규54 STANDBY 및 기존82 보존](essay-standby-expansion-20261026.md).
+2026-10-26 서강·고려 카드 우선배치/활성화 완료. 고려는 Owner 승인 2025수시 인문오후 문제2만 예외 공개(전체회차 완료 아님). WEB c244b76f/2fbde34·Worker57dfa6c1, 일반계정 표시 확인. DB쓰기·평가호출0. [범위·복구](essay-standby-expansion-20261026.md). 한양상경 사진확인 대기/평가·예약0은 [기존 장애기록](hanyang-mixed-incident-20261026.md) 유지.
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
