@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+전체 대학 WEB/APP 공개 연결: [42개 대학 현황·플랫폼 GAP·Math 보류](essay-all-university-standby-20261026.md).
+
 수리논술 기술 한계/대안·출시 검토: [현재 코드·실패 경계·권고 (조사만)](math-technical-review-20261026.md).
 
 42개 대학 브랜드 히어로/공식색 근거: [분류·설정·배포·복구](university-brand-hero-20261026.md).

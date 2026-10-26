@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'student_pdf_catalog.dart';
+import 'server_student_pdfs.dart';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,12 @@ class QuestionPdfAsset {
         value['startPage'] is! int) {
       return null;
     }
-    final approved = approvedStudentPdfs[questionId];
+    final approved =
+        serverStudentPdfFor(
+          value['examId'] is String ? value['examId'] as String : '',
+          questionId,
+        ) ??
+        approvedStudentPdfs[questionId];
     final manifestMatch =
         approved != null &&
         [

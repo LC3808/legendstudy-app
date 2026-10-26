@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'university_catalog.dart';
 import 'student_pdf_catalog.dart';
+import 'server_student_pdfs.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -31,35 +32,38 @@ class SourceCatalog {
         throw const FormatException('Invalid essay catalog');
       }
     }
-    return SourceCatalog([
-      for (final u in essayUniversityCatalog)
-        {
-          ...u,
-          ...?(data['universities'] as List)
-              .cast<Map<String, dynamic>>()
-              .where((r) => r['sourceUniversityId'] == u['sourceUniversityId'])
-              .firstOrNull,
-          if (u['universityId'] != null) 'universityId': u['universityId'],
-          // Reviewed official web-page links take precedence over stale registry PDFs.
-          if (const {
-            'gachon',
-            'konkuk',
-            'kyunghee',
-            'korea',
-            'dongguk',
-            'sogang',
-            'skku',
-            'sookmyung',
-            'soongsil',
-            'swu',
-            'kau',
-          }.contains(u['sourceUniversityId']))
-            'officialSourceUrl': u['officialSourceUrl'],
-          // This university-wide URL identifies a 2025 mock essay, not the
-          // selected exam. Use the official archive without changing source data.
-          if (u['sourceUniversityId'] == 'hanyang') 'officialSourceUrl': 'https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI',
-        },
-    ],
+    return SourceCatalog(
+      [
+        for (final u in essayUniversityCatalog)
+          {
+            ...u,
+            ...?(data['universities'] as List)
+                .cast<Map<String, dynamic>>()
+                .where(
+                  (r) => r['sourceUniversityId'] == u['sourceUniversityId'],
+                )
+                .firstOrNull,
+            if (u['universityId'] != null) 'universityId': u['universityId'],
+            // Reviewed official web-page links take precedence over stale registry PDFs.
+            if (const {
+              'gachon',
+              'konkuk',
+              'kyunghee',
+              'korea',
+              'dongguk',
+              'sogang',
+              'skku',
+              'sookmyung',
+              'soongsil',
+              'swu',
+              'kau',
+            }.contains(u['sourceUniversityId']))
+              'officialSourceUrl': u['officialSourceUrl'],
+            // This university-wide URL identifies a 2025 mock essay, not the
+            // selected exam. Use the official archive without changing source data.
+            if (u['sourceUniversityId'] == 'hanyang') 'officialSourceUrl': 'https://go.hanyang.ac.kr/web/pds/pds_list.do?ct02=ns01&m_type=SUSI',
+          },
+      ],
       [
         for (final exam in exams)
           {
@@ -199,7 +203,47 @@ class SourceCatalog {
     Future<SourceCatalog> connect(SourceCatalog base) async {
       if (university == null || browse == null) return base;
       try {
-        return base.withRegistered(university, await browse(university));
+        final connected = base.withRegistered(
+          university,
+          await browse(university),
+        );
+        if (accessToken != null && accessToken.isNotEmpty) {
+          try {
+            final response = await transport
+                .get(
+                  Uri.parse('$origin/api/essay/student-pdfs'),
+                  headers: {'Authorization': 'Bearer $accessToken'},
+                )
+                .timeout(const Duration(seconds: 20));
+            if (response.statusCode == 200) {
+              installServerStudentPdfs(
+                jsonDecode(utf8.decode(response.bodyBytes)),
+              );
+            }
+          } catch (_) {
+            /* Existing pinned PDFs remain available offline. */
+          }
+        }
+        return SourceCatalog(connected.universities, [
+          for (final exam in connected.exams)
+            {
+              ...exam,
+              'questions': [
+                for (final raw in exam['questions'] as List)
+                  {
+                    ...Map<String, dynamic>.from(raw as Map),
+                    if (exam['dbExamId'] is String &&
+                        raw['dbQuestionId'] is String)
+                      if (serverStudentPdfFor(
+                            exam['dbExamId'] as String,
+                            raw['dbQuestionId'] as String,
+                          )
+                          case final pdf?)
+                        'studentPdf': pdf,
+                  },
+              ],
+            },
+        ]);
       } catch (_) {
         return SourceCatalog(
           base.universities,
