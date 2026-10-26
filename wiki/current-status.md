@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 WEB 완료→History 공통 결과 전용 화면 자동이동 배포bb120a6a/ce433f8. 4단계 제거, 비교 없는 성장영역 숨김. 기존 결과·0Credit재작성 확인, APP·DB·Worker 불변/Provider0. [UI·검사·복구](essay-web-studio-ui-20261026.md). [고려·상경 상태](commerce-korea-20261026.md).
+2026-10-26 WEB 문항 토글·TEXT/Math 입력 분리 배포3909b32a/8cb9342. 운영 한양상경 기존답안·사진복원/CTA 확인, Provider0. 이전 결과전용화면 유지. [UI·건국Math 성공범위·복구](essay-web-studio-ui-20261026.md). [고려·상경 상태](commerce-korea-20261026.md).
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
