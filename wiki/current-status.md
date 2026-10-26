@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-26 확대 마감: 외대20·건국12·서강22 **신규54회차 STANDBY**. 건국2026수시1 기존 제출 확인 보류, 기존 건국/서강각1 및 4대학82 보존. WEB aedbf200/source c01caf0·Worker a99a7cfc100%. Provider/새평가/차감0, APP 변경0. [회차 목록·보류·SQL 재실행 금지·복구·Owner QA](essay-standby-expansion-20261026.md). 추가 개발 종료.
+2026-10-26 한양2027모의 상경: 사진 추출 완료/학생확인 대기, 평가·예약0. 기존 사진 확인 자동복원 WEB2737bf18/d861586 반영. Worker/DB 불변. [장애·Owner 확인·복구](hanyang-mixed-incident-20261026.md). [외대·건국·서강 신규54 STANDBY 및 기존82 보존](essay-standby-expansion-20261026.md).
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 

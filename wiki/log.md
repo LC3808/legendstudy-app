@@ -1,5 +1,10 @@
 # Development Log
 
+## 2026-10-26 — 한양 상경 사진 입력 확인 복원
+
+실제 요청 조사: 후보추출 완료/CONFIRMED0, 회차·평가·예약0. 해당 시험만 기존 사진 입력 자동조회 및 안내 수정, WEB2737bf18/d861586. 9회귀 검사·배포 build 및 운영 자동복원 확인. Provider/DB쓰기0, 실제 사진 확인 이후 제출은 Owner 대기. [상세·복구](hanyang-mixed-incident-20261026.md).
+
+
 ## 2026-10-26 — 외대·건국·서강 STANDBY 확대 마감
 
 Owner 승인 SQL·기존 Worker 재사용으로 신규54회차(20/12/22) WEB 입력·저장·PDF·서버1Credit 안내 확인. 건국2026수시1 기존 제출 확인 보류. 기존82·기존ID·91runtime·금융/reader5함수 보존. Provider/새평가/차감0. WEB aedbf200/c01caf0·Worker a99a7cfc100%. [회차·배포·SQL·복구·Owner QA](essay-standby-expansion-20261026.md). 추가 개발 종료.

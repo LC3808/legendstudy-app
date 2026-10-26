@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+한양2027모의 상경 혼합형 장애: [사진 확인 복원·예약 상태·Owner 다음 단계](hanyang-mixed-incident-20261026.md).
+
 논술 전체 대학 최신 기준: [STANDBY / OWNER QA PENDING — 실제 평가 호출 없이 연결](essay-batch-service-20261023.md#2026-10-25--전체-대학-standby-공통-정책). 이전 평가 검수 선행 지시보다 우선.
 
 논술 최종 성균PDF·한양 STANDBY 및 1-A(중앙·성균·경희), APP 중단: [시험 회차 전체 연결·보류·원본 명세](essay-group-1a-20261025.md).
