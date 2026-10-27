@@ -103,3 +103,8 @@ WEB `6a3592924c51640025944d7646e77d0b417e4d8b` 최초 배포 `83bb60ca-383f-4a30
 - Worker registry-only 버전 `036cd19e-0789-4ad3-aaba-242661e160c4`. 기존 비Registry 코드·Secret binding 보존. 숙명2026수시1의 공개 scope 누락을 추가 발견하여 기존 전체문항 Registry/실행 코드와 모든 다른 binding을 보존한 scope-only Worker `7ae670f6-dc10-4f6b-bd14-6ffce69639cf`로 반영했다.
 
 최종 WEB `4a95387a2e534a68013fc7948916d5196913474e`, Pages `eb6de62a-54d4-465a-afd9-28a7bb40a659` success 확인. 4확장 회차 모두 공개 scope 포함. 관련9검사·Typecheck·Production Build PASS. 일반계정 숭실2026수시 인문2문항/입력·저장/1Credit 안내 표시 확인, 실제 제출 없음. 기존 잔액104 유지. 광운 신규 연결 및 전체 WEB/APP STANDBY 미완료.
+
+### 일반 계정 최종 확인 추가
+숙명2026수시 인문1회차: 소문항1-1·1-2/2-1·2-2를 포함한 전체2답안단위, PDF4페이지, 텍스트 입력·수동 저장·다음 문항 펼침, 첨삭 버튼 활성, 서버 quote 기반1Credit·부분제출 확인창까지 실제 WEB에서 확인했다. 가상 학생 답안 대신 UI 연결 확인용 문구42자를 빈 초안에 입력했고 최종 ‘첨삭 진행하기’는 누르지 않았다. 확인창 취소 후 직접 입력한 문구만 제거하여 원래 빈 초안으로 복원했다. Provider 호출·예약·차감 없음. 이 회차는 WEB STANDBY 확인, APP 및 Owner 평가 QA는 미확인이다. 현재 adb 연결 기기0으로 APP 실기기 검증은 진행하지 못했다.
+
+Git 원격 확인: WEB `4a95387a2e534a68013fc7948916d5196913474e`, SQL/Wiki 선행 commit `392fb950f463e7c4cd69f585a560a2f0befced62` 각각 origin branch와 일치했다. 본 추가 기록의 최종 SHA는 Git을 따른다.
