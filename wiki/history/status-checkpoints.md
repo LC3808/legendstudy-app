@@ -1770,3 +1770,9 @@ Owner가 E2E 통과 문항 공개 승인. 건국 인문만 명시적 서버 시�
 숙명2025 실패영수증/이전관측 연결 및 APP 실패request key/PDF mapping 최소 수정. 마지막 실제재첨삭 성공; 이전 미확정1건의 소급 원인은 미확정으로 보존. Worker 최종6b7593a4, WEB code ad6ffec/config배포17244d3b. 71702·Payment·IAP 불변. 기존 건국 인문·수리 E2E 보존.
 
 PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와11대학 일반서비스를 구분한다. [실제 실행·장애·비용·대학별 상태](../university-profile-production-e2e-20261023.md). 다음: 신규3문항 공개 범위/장애 관측 확인 및 나머지 공식 문항 근거·Math leaf 연결. 경희·동국 추가자료 HOLD.
+
+## Preserved Oct14 backend probe evidence
+
+- Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
+
+- Oct14 operating postflight: LAB/Worker Registry234 + service/user Auth PASS; Queue no-op ACK. Package rights and exam policy block evaluation; reviewer/provider bindings missing. Runs0/checkpoints0, Provider/Credit NOT_RUN, HOLD. See tool/cloudflare_essay/README.md.

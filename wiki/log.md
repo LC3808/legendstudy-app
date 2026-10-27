@@ -4923,3 +4923,6 @@ Owner승인후중앙2026모의누락2회차/6문항등록적용,사후4true. WEB
 2026-10-26 관리자 Credit P0: 승인 조회RPC 적용·사후7true, WEB584a914/Pages89246b7e production success. 서버목록/검색/정렬/상세/지급폼 운영확인, 지급0. 48검사·타입·Lint·Build PASS. [P1 검토·복구](admin-credit-directory-20261026.md).
 
 2026-10-27 전체 대학 연결 감사: 42Catalog/공개조회후보126, WEB730d74a·Pages62435975 성공. Native 동적 PDF/API 통합·개발APK PASS, 실기기 미확인. 신규 대학 확대 미완료, Provider/SQL/Credit쓰기0. [상세](essay-all-university-standby-20261026.md).
+
+## 2026-10-27 — 미완료 대학 실행 연결 및 로그인 복구
+동국·숙명·숭실 신규9회차24문항, 기존 부분4회차8문항 확장 적용. Owner 승인 historical-reader 정확한4digest 호환 적용. WEB 공개 빌드 설정 누락 로그인 장애를 기존 설정 재빌드로 복구, 일반 계정 카드/PDF 확인. Provider/Credit0, 전체 STANDBY 미완료. [상태·재실행 금지 SQL·복구](essay-all-university-standby-20261026.md#2026-10-27--동국숙명숭실-미완료-연결-복구-진행-중).

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": 22,
+  "exact_historical_digest": true,
+  "current_approval_required": true,
+  "current_rights_required": true,
+  "provider_calls": 0,
+  "production_applied": false
+}

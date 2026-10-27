@@ -78,3 +78,28 @@ Preservation review: (1) audit time is separate from historical learning events;
 ## 일반 계정 운영 확인 (2026-10-27 00:11 KST)
 Owner 일반 계정 로그인 후 관리자 메뉴 없음/잔액104 확인. Production 대학 목록에서 서강·고려·건국·경희·서울여·성균·중앙·외대·한양·인하 첨삭 시작 링크 표시. 중앙2026모의 인문사회 선택 시3문항/문항별 작성·저장/기존 1Credit 안내/회차 제출 컴포넌트 표시, 실제 PDF7페이지 뷰어 열람 확인. 답안0자인 상태로 버튼 비활성은 정상. 가상 답안 생성 없이 종료했으므로 답안 입력 후 버튼 활성·서버 quote 확인창은 아직 미확인이며 STANDBY 완료로 계산하지 않는다. 실제 제출/Provider/Credit변동0.
 Native 코드 commit db71238. WEB commit730d74a 원격 일치 확인. APP 대학 카드 공통 상태 연동 관련 기존 미커밋 변경은 별도로 보존했고 이번 commit에 섞지 않음; 개발용 빌드는 작업 폴더 전체 기준이므로 해당 변경을 포함한다. 배포용 APK로 취급하지 않는다.
+
+## 2026-10-27 — 동국·숙명·숭실 미완료 연결 복구 (진행 중)
+
+Owner 2026-10-27 P0/P1 지시에 따라 전체 회차 연결을 진행한다. Provider 평가·학생 제출·Credit 차감 0. 아직 전체 STANDBY 완료가 아니다.
+
+- 신규 실행 연결 9회차/24문항 적용: 동국 인문6회차/18문항, 숙명2026수시2·2027모의2회차/4문항, 숭실2025모의1회차/2문항. 운영 사전23/사후7 true; 격리 중복·진행중 적용 차단 및 롤백 검사 통과.
+- Owner 별도 승인한 과거 패키지 reader 호환 변경 적용: 숙명2026수시1 revision3, 숭실2024수시·2026수시·2027모의 revision2의 정확한 digest만 추가 허용. 기존 서울여·성균 허용 및 현재 승인/자료 권한 검사는 유지. 격리22검사, 운영 baseline/exact_reader true.
+- 위 기존 부분 연결4회차/8문항의 전체 문항 패키지 확장 적용. 기존 자료 rights/documents를 병합하여 과거 평가자료 조회 보존. 격리 사전18/사후8·중복/진행중 차단·롤백 통과. 운영 사전18/사후8 true(과거4패키지 조회 포함). 제출/예약/정산 함수 불변 확인. WEB 공개 evidence 배포는 아래 최종 상태를 따른다.
+- 광운대: 기존 Registry1회차는 자연2022모의이며 인문 회차 없음. 기존 공식 인문 PDF22개(중복/분할 포함)를 확보했지만 신규 인문 Registry·실행 연결은 아직 미완료. 가천 시범 및 국민/상명/경북/을지 자산 점검도 미완료.
+
+### 로그인 장애와 복구
+WEB `6a3592924c51640025944d7646e77d0b417e4d8b` 최초 배포 `83bb60ca-383f-4a30-adcd-8f4d7fdd9c0c`에서 NEXT_PUBLIC 인증 빌드 설정을 빠뜨려 로그인 화면이 작동하지 않았다. 기존 Production 공개 설정으로 Node22 재빌드 후 `d73911d3-7085-40b2-a478-8a339096e134`에 재배포해 복구했다. Owner 일반 계정 로그인 완료, 관리자 메뉴 없음·잔액104·논술 LAB 카드 확인. Secret 재설정 없음. 앞으로 배포 전 올바른 Supabase 공개 URL/키 존재 검사와 빌드 산출물 확인을 수행한다. 잘못된83bb 배포로 롤백하지 않는다.
+
+일반 계정에서 동국·숙명·숭실 카드가 `첨삭 시작하기`로 표시됨. 동국2027모의 인문 전체3문항, 입력·저장 영역, 문제 PDF7페이지 뷰어 확인. 빈 답안으로 제출 버튼 비활성은 정상. 가상 답안/실제 제출 없이 확인했으므로 입력 후 버튼 활성·서버 quote 완료로 확대 보고하지 않는다. APP 실기기 미확인.
+
+### 적용 파일·재실행 금지·복구
+자료 작업 폴더: `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/incomplete-recovery-20261027/humanities/`.
+
+- `new-connections/owner-sql/apply.private.sql`: 적용 완료, 재실행 금지. 해당 `rollback.sql`은 이번9회차 신규 실행만 차단하며 revisions/학생 기록 보존.
+- `historical-reader/apply.sql`: 적용 완료, 재실행 금지. **부분 패키지 확장 후 reader만 롤백 금지** — 기존 요청의 과거 digest 조회가 필요하다.
+- `partial-expansion/owner-sql/apply.private.sql`: 적용 완료, 재실행 금지. 해당 `rollback.sql`은 정확한 기존4실행 정책으로 복귀하고 revisions·학생 기록 보존. 새 reader 호환성은 유지한다.
+- 각 폴더 `APPLIED.json`, `isolation-result.json`, 사전/사후 SQL 참조. 후속자가 기존 성공 적용을 반복하지 않는다.
+- Worker registry-only 버전 `036cd19e-0789-4ad3-aaba-242661e160c4`. 기존 비Registry 코드·Secret binding 보존. 숙명2026수시1의 공개 scope 누락을 추가 발견하여 기존 전체문항 Registry/실행 코드와 모든 다른 binding을 보존한 scope-only Worker `7ae670f6-dc10-4f6b-bd14-6ffce69639cf`로 반영했다.
+
+최종 WEB `4a95387a2e534a68013fc7948916d5196913474e`, Pages `eb6de62a-54d4-465a-afd9-28a7bb40a659` success 확인. 4확장 회차 모두 공개 scope 포함. 관련9검사·Typecheck·Production Build PASS. 일반계정 숭실2026수시 인문2문항/입력·저장/1Credit 안내 표시 확인, 실제 제출 없음. 기존 잔액104 유지. 광운 신규 연결 및 전체 WEB/APP STANDBY 미완료.

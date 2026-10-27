@@ -1,5 +1,7 @@
 # Current Status
 
+2026-10-27: 동국6·숙명2·숭실1 신규 연결 및 숙명1·숭실3 부분 패키지 확장 적용. 로그인 복구·일반 계정 카드 확인, 전체 WEB/APP STANDBY는 미완료. [복구·SQL·재개 지점](essay-all-university-standby-20261026.md#2026-10-27--동국숙명숭실-미완료-연결-복구-진행-중).
+
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 출시준비 후.
 
 고려 정정: [Owner 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
@@ -132,10 +134,6 @@ The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the olde
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
-
-- Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
-
-- Oct14 operating postflight: LAB/Worker Registry234 + service/user Auth PASS; Queue no-op ACK. Package rights and exam policy block evaluation; reviewer/provider bindings missing. Runs0/checkpoints0, Provider/Credit NOT_RUN, HOLD. See tool/cloudflare_essay/README.md.
 
 ## Historical: 2026-10-21 — Backend recovery gate follow-up
 
