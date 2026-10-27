@@ -76,3 +76,19 @@ Owner 최종 지시를 적용했다. 기존 2차 보정과 위 7문항 보존 �
 WEB `49fee2419493c12f95a9aa939804cf51c957ac70`, branch `codex/web-app-release-20261024`, Commit·Push 후 Remote SHA 확인. Production Pages `0c033b52-c4b6-4e8e-98d0-764b46ad9357`, source `49fee24`, `https://lab.legendstudy.com/account/` 반영 확인. APP Native·DB·RPC·Worker·Credit·Ledger·History·Secret 변경0, Provider/차감0.
 
 롤백: 직전 Pages `7eea1b34-3926-4fcd-a695-aeb5a3b4b3ea` (WEB `a0b1bcf266c890556b81a1059e4fb90214bb219e`)로 복구하거나 이번 WEB commit만 revert 후 기존 배포 절차 사용. SQL 적용/재실행 없음. 기존 대학 STANDBY 및 APP GAP 상태는 별도 기록을 유지한다.
+
+## 2026-10-27 — 프로필 라디오·학교 독립·관심 대학 제한 안내
+
+Owner 최종 보정. 기존 통합 카드와 위 보존 검토 7문항을 계승한다. 원본 지원 이벤트/시간/식별자/이력, 본인 권한, 관심≠지원≠결과 구분, 기존 수집 범위는 유지한다. 지원 영역 노출은 저장하지 않는 파생 UI이며 실제 학생 데이터 변경 테스트는 하지 않았다.
+
+- 학년은 정확히 5개 라디오: 1학년/2학년/3학년/재수/N수생/해당 없음. 기존 student+grade 1~3, retaker+null, other+null로 매핑. 레거시 상태 미설정은 명시 선택 없이 저장할 때 기존 null을 유지한다.
+- 학교 선택/해제는 학교 식별자만 변경한다. 학교 존재로 student를 강제하던 WEB 저장 보정을 제거하여 재수/N수생·해당 없음에서도 학교 검색/선택/수정 가능. 기존 DB 제약 읽기 확인: 학교와 상태의 독립 저장이 허용되어 Migration 불필요.
+- 지원 현황은 student+3 또는 retaker에만 표시하고 저장 후 갱신한다. 기존 지원 기록은 그대로 유지한다.
+- 관심 대학 5개에서 추가 버튼 클릭 시 입력폼 대신 붉은 안내를 4초 표시. 반복 클릭은 동일 메시지 타이머만 갱신. PC 오른쪽/모바일 아래. 기존 서버 최대5 제한 유지.
+- 희망 전공 한 줄, 통합 카드/입력/구분선 대비·절제된 그림자·compact radio와 목록 적용.
+
+검증: 관련 4파일 45 tests PASS, Typecheck PASS, Lint 오류0/기존 무관 경고4, Production Build 136 routes PASS. 저장/복원·5개 상태 매핑·학교 유지·2→3→2 노출·반복 클릭/4초 제거는 mock 테스트로 확인. 운영 일반 계정 PC와 Chrome 400px 모바일 미리보기에서 라디오 5개, 재수 선택 후 학교 유지, 취소, 관심5개 안내 PC 오른쪽/모바일 아래를 확인했다. 실제 기기 검증과 구분한다. 운영 프로필 저장/관심 변경/Provider/Credit 차감0.
+
+WEB commits `fd209f9`, `a5ec76dd2e7dcebefc691b704e258a9d8a744533`, branch `codex/web-app-release-20261024`. Commit·Push·Remote SHA 일치. 최종 Pages Production `a68022fe` (`https://a68022fe.legendstudy-lab.pages.dev`), canonical `https://lab.legendstudy.com/account/` 실제 화면 확인. APP Native·DB/RPC·Worker·Credit·Ledger·History·Secret 변경 없음.
+
+롤백: 두 WEB commit을 역순 revert 후 기존 공개 환경 주입 배포, 또는 직전 Pages `db3fdb12`/WEB `0edff64ccac42806f78970ad427d71f111c08a58`로 복구. SQL 적용/재실행 없음. 학생 데이터 복구 작업 불필요. 다른 대학 STANDBY·APP GAP은 기존 별도 문서 상태 유지.

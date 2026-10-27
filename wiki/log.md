@@ -4981,3 +4981,8 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 - WEB 공통 계열 바로가기 추가. 광운 자연2022모의1회차2문항 확인, 인문16회차 보존. 인하 자연 목록·문제보기·비활성 버튼 운영 확인.
 - 관련22테스트/Typecheck/Lint/Build PASS. WEB `0edff64` push/remote 일치, Pages `db3fdb12` 배포. DB·Worker·APP·Credit 변경 없음.
 - [정책·운영 증거·복구](essay-all-university-standby-20261026.md#2026-10-27--자연계열-시험-목록과-첨삭-공개-분리).
+
+### 2026-10-27 — MY 프로필·관심 대학 최종 보정
+- 학년 라디오5/학교 독립 저장/학년별 지원 노출, 관심5개 4초 안내, 카드·구분선·여백 개선. 기존 데이터 보존.
+- 45 tests·Typecheck·Build PASS, Lint 오류0/기존 경고4. Production PC/400px 확인, 실제 학생 저장·차감0.
+- WEB `a5ec76d` push/remote 일치, Pages `a68022fe`. [정책·검증·롤백](my-college-management-20261026.md#2026-10-27--프로필-라디오학교-독립관심-대학-제한-안내).
