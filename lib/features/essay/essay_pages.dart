@@ -712,7 +712,7 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
               ),
               Text(
                 live == null
-                    ? '중복으로 제출하지 않아도 됩니다. 실제 AI 호출은 없습니다.'
+                    ? '중복으로 제출하지 않아도 됩니다. 실제 첨삭 요청은 없습니다.'
                     : live!.serverStatus?.creditMessage ??
                           '서버의 처리 결과를 기다리고 있어요.',
                 textAlign: TextAlign.center,
@@ -997,7 +997,7 @@ class _EssayResultViewState extends State<EssayResultView> {
         if (d.explanation.trim().isNotEmpty)
           ExpansionTile(
             title: Text(
-              d.previousLevel == d.level ? '평가 설명 보기' : 'AI 재첨삭 평가 설명 보기',
+              d.previousLevel == d.level ? '평가 설명 보기' : '재첨삭 평가 설명 보기',
             ),
             children: [
               Padding(
@@ -1361,8 +1361,8 @@ class _EssayResultViewState extends State<EssayResultView> {
                     _resultHeader('재작성 연습 참고'),
                     Text(
                       widget.isPreview
-                          ? 'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.'
-                          : 'AI가 첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.',
+                          ? '첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.\n실제 서비스에 표시할 안내 문구입니다. 현재 본문은 화면 검토용 창작 예시입니다.'
+                          : '첨삭 내용을 반영해 만든 예시이며, 대학의 공식 답안이 아닙니다.',
                       style: AppTokens.caption,
                     ),
                     const SizedBox(height: 16),
