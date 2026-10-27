@@ -191,3 +191,18 @@ Claude 검토에는 로컬 한국어 TTS만 사용하고 Math 음성을 초기 �
 - [ ] WEB 실제 동작 및 APP 후속 호환성 확인
 
 이번 작업은 자료 대조와 후속 순서 기록만 수행했다. Production 변경·Provider 호출·Credit 처리 0. 기존 성공 결과·Registry·History·Ledger·Worker는 변경하지 않았다.
+
+## 2026-10-27 — 상경 수학 코칭 Owner 실행 범위 확정
+
+최신 지시는 **구현해야 할 후속 과제**이며, 종전 ‘계획 기록만’ 범위를 갱신한다. 단 [5대학 P0 인수인계](essay-all-university-standby-20261026.md#2026-10-27--상경-코칭-착수-전-p0-인수인계)의 선행 작업은 미완료다. 이번에는 인수인계를 정리했으며 코칭 코드 변경을 시작하지 않았다. [Issue #6](https://github.com/LC3808/legendstudy-lab/issues/6)은 OPEN 재확인; 완료로 처리하지 않는다.
+
+대표 대상은 한양2027모의 상경 Q1 Essay/Q2 Math. 서강은 실제 수학문항이 있는 회차만 추가한다. 인하·건국의 과거 성공 결과는 재사용 근거이며 상경 코칭 E2E 성공을 대신하지 않는다.
+
+착수 후 최소 변경 범위:
+1. 기존 시험·문항·확인된 입력 → Math 결과 → MATH-5 학습 상태/힌트/수정 풀이 → History → MATH-6 재작성/성장을 읽기 전용으로 추적한다. 저장된 성공 결과를 재평가하지 않는다.
+2. WEB 기존 learning-guidance와 learning runtime을 공통 결과 화면에서 재사용한다. L0/L1/L2와 정답 누설 게이트를 보존하고 수정 풀이 기본 접힘·원본 대비·LaTeX 표시를 연결한다. 실제 데이터가 없으면 생성된 것처럼 표시하지 않는다.
+3. 현재 WEB `functions/api/essay/math-session.ts`는 `data.answer.input`을 confirmed_input으로 전달하고 selected_extraction_id는 null이다. 이를 곧바로 장애로 단정하지 않는다. 원본 이미지·추출버전·학생 확인의 참조가 하위 경로에서 유지되는지 먼저 확인한다. 원본 이미지를 Provider에 추가 전달하는 변경이 필요하면 최소 Worker 변경안과 영향을 먼저 보고한다.
+4. 한 회차/한 예약/한 History를 유지한다. Math 하위 예약 추가 금지, 부분 실패는 성공 checkpoint를 보존한다. 기존 무료 재첨삭의 실제 횟수/14일 자격을 그대로 사용한다.
+5. 오프라인 계약·UI 검사 후 완성/누락/중단/계산오류/개념오류/대안정답의 품질 검증을 별도 구분한다. 실제 Provider는 사전 승인된 범위만 사용한다.
+
+Production SQL·Worker 변경은 별도 최소안 보고 후 진행한다. 이번 단계의 Production 변경·Provider 호출·Credit 차감은 0이며, 적용 SQL과 코드 롤백은 없다. 기존 학생 답안·평가 결과·History·Ledger 불변. APP 코칭 호환성은 미확인이다.

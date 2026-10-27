@@ -1,3 +1,7 @@
+## 2026-10-27 — 상경 수학 코칭 선행 조건·P0 인수인계
+
+5대학 P0 미완료 범위와 재개·재실행 금지·복구 경로 정리. 한양2027상경 대표 및 기존 MATH-4/5/6 재사용 범위 기록, Issue6 OPEN 확인. 코칭 코드/Production/Provider/Credit 변경0. [P0 인수인계](essay-all-university-standby-20261026.md#2026-10-27--상경-코칭-착수-전-p0-인수인계) · [후속 실행 범위](math-technical-review-20261026.md#2026-10-27--상경-수학-코칭-owner-실행-범위-확정).
+
 ## 2026-10-27 — WEB MY 2차 압축 보정
 
 프로필·관심 목록 압축, 관리 ⋯ 메뉴, 지원 상태/단계별 합격 요약 분리. UI15/타입/변경파일 lint/build PASS, Production efe137e9/WEB780eff8 반영·remote 일치. 운영 쓰기0, 모바일 재확인·APP 별도 미완료. [상세/복구](my-college-management-20261026.md#2026-10-27--2차-밀도관리-메뉴-보정).

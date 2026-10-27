@@ -4,7 +4,7 @@ MY 압축 배포·모바일 확인 대기. [MY](my-college-management-20261026.m
 
 2026-10-27: 한국항공 사회4회차 WEB STANDBY 확인·배포. 동국6·숙명3·숭실4 전체 연결 적용, 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
-[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 출시준비 후.
+[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 5대학 마감 후 상경 코칭 착수.
 
 고려 정정: [Owner 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 
