@@ -1,0 +1,1 @@
+select md5(pg_get_functiondef('essay_exam_private.reserve(uuid,uuid,uuid,jsonb,uuid)'::regprocedure))='8594ce9fcb3bf1824b6b13d082a6accb' as baseline_matches, not exists(select 1 from essay_beta_private.campaigns where enabled) as campaign_inactive, to_regprocedure('public.essay_exam_quote_source(uuid,uuid,uuid[],uuid,uuid)') is null as new_quote_absent;

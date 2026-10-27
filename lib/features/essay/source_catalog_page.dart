@@ -1,3 +1,4 @@
+import '../credits/essay_credit_source.dart';
 import 'service_availability.dart';
 import 'math_gateway.dart';
 import 'math_exam_session.dart';
@@ -1343,6 +1344,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (prior != null && prior['fingerprint'] != fingerprint) {
         throw StateError('이전 제출의 처리 상태를 첨삭 기록에서 먼저 확인해 주세요.');
       }
+      EssayCreditSource? creditSource;
       if (prior == null) {
         final quote = await gateway()?.request({
           'action': 'quote',
@@ -1354,6 +1356,9 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         if (quote?['version'] != 'essay-exam-quote-v1' ||
             quote?['credits'] != (parentId == null ? 1 : 0)) {
           throw StateError('사용 크레딧을 확인하지 못했어요. 답안은 보존됩니다.');
+        }
+        if (quote!.containsKey('credit_source')) {
+          creditSource = EssayCreditSource.parse(quote['credit_source'], quote['credits'] as int);
         }
         if (!mounted) return;
         final confirmed = await showDialog<bool>(
@@ -1371,9 +1376,18 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                 children: [
                   Text(
                     parentId == null
-                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 크레딧: ${quote!['credits']}개'
+                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 크레딧: ${quote['credits']}개'
                         : '제출 문항: ${answers.length}개\n사용 크레딧: 0개 · 무료 재첨삭',
                   ),
+                  if (creditSource != null) ...[
+                    Text('베타 Credit 잔액: ${creditSource.beta}개'),
+                    Text('신규가입 무료 Credit 잔액: ${creditSource.signup}개'),
+                    Text('유료 Credit 잔액: ${creditSource.paid}개'),
+                    if (creditSource.other > 0) Text('기타 지급 Credit 잔액: ${creditSource.other}개'),
+                    Text('이번 사용: ${creditSource.label} · ${quote['credits']}개'),
+                    if (parentId == null && creditSource.source != 'beta')
+                      const Text('베타 Credit 대신 위 출처의 Credit을 사용합니다. 동의한 경우에만 진행해 주세요.'),
+                  ],
                   if (selected.length <
                       (widget.exam['questions'] as List).length)
                     Text(
@@ -1381,7 +1395,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                     ),
                   for (var i = 0; i < answers.length; i++) ...[
                     Text(selected[i]['label'] as String),
-                    Text(answers[i]['body'] as String),
+                    Text(answers[i]['body'] as String? ?? '확인한 사진·수식 답안'),
                   ],
                 ],
               ),
@@ -1414,7 +1428,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       final key = prior?['key'] as String? ?? newEssayUuid();
       if (prior == null) {
         await pending.saveLocalDraft(
-          jsonEncode({'fingerprint': fingerprint, 'key': key}),
+          jsonEncode({'fingerprint': fingerprint, 'key': key, if (creditSource != null) 'expectedGrant': creditSource.grantId}),
           saved.revision,
         );
       }
@@ -1425,6 +1439,8 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         'action': 'submit',
         'examId': widget.exam['dbExamId'],
         'key': key,
+        if (prior?.containsKey('expectedGrant') == true) 'expectedGrant': prior!['expectedGrant']
+        else if (creditSource != null) 'expectedGrant': creditSource.grantId,
         'parentId': parentId,
         if (previousPaidId != null) 'previousPaidRunId': previousPaidId,
         'answers': answers,
@@ -1448,7 +1464,9 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (mounted) {
         setState(
           () => notice = error is ExamSubmissionRejected
-              ? (error.code == 'INSUFFICIENT_CREDIT'
+              ? (['CREDIT_SOURCE_CHANGED','CREDIT_SOURCE_CONFIRMATION_REQUIRED'].contains(error.code)
+                    ? '사용할 Credit 출처가 변경됐습니다. 답안은 보존됩니다. 다시 요청하여 출처를 확인해 주세요.'
+                    : error.code == 'INSUFFICIENT_CREDIT'
                     ? '크레딧이 부족합니다.'
                     : '제출 조건을 확인해 주세요.')
               : error is StateError

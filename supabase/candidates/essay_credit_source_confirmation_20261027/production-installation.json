@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-27",
+  "executor": "Owner",
+  "codex_sql_mutations": 0,
+  "independent_postchecks": {
+    "reserve_matches": true,
+    "campaign_inactive": true,
+    "worker_quote": true,
+    "client_submit_blocked": true,
+    "anon_quote_blocked": true
+  },
+  "apply_sha256": "7a5d3b483c92c75e85f2b3035b8f0a813dfff9c92f3d898ebcf8f6829b3d3099",
+  "campaign_activated": false
+}

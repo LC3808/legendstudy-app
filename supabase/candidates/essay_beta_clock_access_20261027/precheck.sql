@@ -1,0 +1,1 @@
+select not has_function_privilege('postgres','essay_private.clock()','EXECUTE') needs_clock_access, not pg_has_role('postgres','essay_executor','SET') role_baseline, not exists(select 1 from essay_beta_private.campaigns where enabled) campaign_inactive;

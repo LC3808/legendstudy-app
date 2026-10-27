@@ -46,7 +46,13 @@ class ExamSubmissionGateway {
       final value = jsonDecode(utf8.decode(bytes));
       if (value is! Map) throw const FormatException('INVALID_RESPONSE');
       if (response.statusCode < 200 || response.statusCode >= 300) {
-        if (response.statusCode == 402 || response.statusCode == 422) {
+        if (response.statusCode == 402 ||
+            response.statusCode == 422 ||
+            (response.statusCode == 409 &&
+                [
+                  'CREDIT_SOURCE_CHANGED',
+                  'CREDIT_SOURCE_CONFIRMATION_REQUIRED',
+                ].contains(value['code']))) {
           throw ExamSubmissionRejected(
             value['code'] as String? ?? 'SUBMISSION_REJECTED',
           );

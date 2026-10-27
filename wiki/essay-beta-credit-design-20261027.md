@@ -1,6 +1,6 @@
 # 논술 LAB 무료 베타 Credit — 계약 분석·최소 변경안
 
-2026-10-27 Owner P1. **A 설계 완료 / B 정책 함수 격리 시제품만 완료 / Production 미적용.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
+2026-10-27 Owner P1. **현재: DB·출처확인 WEB 배포 완료, 캠페인 비활성. 운영 clock 권한 오류로 마감 보류. 아래 초기 설계 기록은 역사적 근거이며 최신 상태는 마지막 절을 따른다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
 
 ## 확인 근거 — 운영 읽기 전용
 
@@ -140,3 +140,22 @@ Owner의 한시 역할 권한 승인 후 migration `20261027040022` (`essay_beta
 Security advisor: beta private3테이블 RLS/no policy INFO는 클라이언트 접근 차단 의도와 일치. authenticated claim SECURITY DEFINER 경고는 auth.uid/account.allowed 검증을 거치는 본인 지급용으로 의도된 공개 RPC이며 익명 실행/직접테이블 접근 차단 확인. 나머지 전체 프로젝트 경고는 이번 작업에서 변경하지 않았다.
 
 **DB 설치만 완료. WEB·APP 배포/운영 베타 활성화 완료가 아니다.** 사용 출처 quote-submit 확인과 캠페인 기간/대상 확정이 남는다. 복구는 후보 rollback.sql 캠페인 중지이며 기존 원장/예약/정산 유지. 정확한 적용 파일 hash와 결과는 `production-installation.json`에 보존.
+
+
+## 2026-10-27 — 출처 확인 연결 및 운영 권한 GAP
+
+Owner가 출처확인 SQL을 적용하고 사후5 true를 전달했으며, 동일 readonly 검사5 true를 독립 확인했다. `essay_credit_source_confirmation_20261027/apply.sql`과 기존 beta runtime SQL은 **재실행 금지**. 확인한 grant ID와 예약 시 선택 grant가 다르면 PT409/재확인, 추가 예약 없이 기존 답안 보존. 기존 무료재첨삭0 및 멱등 replay 유지.
+
+- WEB: quote→출처/베타·가입·유료·기타 잔액 표시→명시 확인→동일 grant submit. 변경 시 확인창 재조회. Production `04aa7a8ac4ff47cec370afb1eb3c441b1cc2c285`, Pages `b9e9fc31-691b-4e02-ad75-6952a42c6f3a`. `ESSAY_CREDIT_SOURCE_ENABLED=true`; 다른 운영 환경설정 보존 확인.
+- APP: 동일 source DTO/확인창/expected grant/409 재확인 구현. DTO·beta6 PASS, 변경파일 analyze PASS, debug APK build PASS. 개발 빌드는 운영 설정 미포함이며 실기기 베타 동작·스토어 배포 확인 아님.
+- 검증: 기존 beta37 + source22 격리검사 PASS. 동시 요청4개/잔액3개→예약3·출처변경1, 실패해제 복구 검증. WEB70+13검사 PASS, typecheck/build PASS, lint 오류0(기존 경고4). 실제 운영 지급·예약·Provider 호출0.
+- **운영에서 발견한 차단:** 일반 계정 LAB에 `베타 첨삭권을 확인하지 못했습니다` 표시. Postgres 로그 `permission denied for function clock` 확인. claim 소유자 postgres는 essay_executor 소유 `essay_private.clock()` EXECUTE 권한이 없다. 기존 격리 privileged fixture가 이 ACL 차이를 놓쳤다. 다른 claim/source 의존 함수는 postgres 실행권한 정상.
+- 최소 보완 후보: `supabase/candidates/essay_beta_clock_access_20261027/`의 precheck/apply/postcheck. 서버 postgres에 clock 실행권한 한 개만 추가, 한시 SET membership 원복. **미적용·Owner 승인 대기**, 클라이언트 권한/함수 내용 변경 없음.
+- 캠페인 비활성 유지. 운영 출처 확인창 전체 동작 확인은 권한 보완 후 재개. WEB/APP 연결 마감·E2E 성공으로 보고하지 않는다. 운영 회원 Credit과 History 변경 없음.
+
+### 재개·활성화·롤백
+
+1. clock 권한 보완 승인 후 사전→적용→사후 검사, 비활성 claim 실제 UI 재확인.
+2. 기존 답안으로 quote 확인창까지만 확인(최종 제출 금지). 운영 사진/학생 답안 임의확정 금지.
+3. 캠페인 시작·종료일, 승인된 전체 회차 allowlist와 수리 QA 근거를 Owner가 확정하고 별도로 활성화 승인해야 한다. 현재 자동 지급 대상 없음.
+4. WEB 복구는 이전 배포 c1465e956ea0c974331ed77e040fc6619a4c3915 또는 해당 코드 기반 재배포. 베타 이력이 생긴 뒤에는 서버 출처검증/대상차단을 제거하지 않는다. 캠페인 중지 SQL만 사용하며 기존 grant/예약/원장/History는 보존한다. APP은 이번 source 변경만 revert 가능.

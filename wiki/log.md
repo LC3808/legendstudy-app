@@ -1,3 +1,7 @@
+## 2026-10-27 — 베타 출처확인 WEB 배포 / clock 권한 보완 대기
+
+Owner 적용 source SQL 사후5 true 독립 확인. WEB04aa7a8 배포, Native DTO/analyze/debug build PASS. 격리37+22·WEB70+13 PASS. 일반계정 운영에서 clock EXECUTE 누락 확인; 최소 권한 SQL 별도 승인 요청, 캠페인 비활성·회원Credit/Provider0. [상태·재개·롤백](essay-beta-credit-design-20261027.md#2026-10-27--출처-확인-연결-및-운영-권한-gap).
+
 ## 2026-10-27 — 베타 Credit DB 비활성 설치 완료
 
 Owner 한시역할승인 후 migration20261027040022 성공. 사전7/사후11/권한·owner5/기존grant·finish2 true. 캠페인 비활성·지급0, 실제Provider0. 적용SQL 재실행 금지; 출처확인·클라이언트운영·캠페인 활성화 미완료. [설치·복구](essay-beta-credit-design-20261027.md#production-비활성-설치-완료--2026-10-27).
