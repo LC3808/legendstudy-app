@@ -148,3 +148,46 @@ Registry·공식자료·프로필 pin, 사진 artifact·학생 확인, parent �
 현실적인 권고는 **전략 A: 실제 성공 범위의 인문·사회 우선 출시, Math 의존 자연·혼합형은 핵심 장애 해소 후**다. 인하의1/3 부분 성공을 다문항 Math 서비스 완료로 볼 수 없다. 이는 수리 서비스 불가능 판단이 아니라 출력 계약·복구·정산의 미확인 위험을 출시 일정에서 분리하자는 의견이다.
 
 전략 B는 G/H/I 원인 확정·기존 실패 회차 복구·최초/무료/실패 정산과 혼합형 통합이 확인된 뒤 가능하다. 현재 상태만으로 동시 출시 일정을 약속할 수 없다. 공개 범위·버튼·가격은 이번에 변경하지 않았다. 최종 출시 결정은 Owner에게 있다.
+
+## 2026-10-27 — Owner 필수 후속: AI 풀이 코칭·성장
+
+**상태: 필수 후속 개발 / 미착수.** 인문·사회·적격 상경 출시 준비를 먼저 완료한다. [전체 대학 STANDBY 감사](essay-all-university-standby-20261026.md)는 아직 미완료이며, 이번 문서 정리를 출시 준비 또는 수리 코칭 구현 완료로 계산하지 않는다. 동일 코드의 다른 개발과 동시에 수정하지 않는다.
+
+### 확인한 근거와 한계
+
+- [Unified Wiki의 기존 필수 후속 결정](https://github.com/LC3808/legendstudy-docs/blob/HEAD/90_HISTORY/2026-10-26-math-coaching-math5-math6-followup-mandatory.md)을 재사용한다.
+- [LAB Issue #6](https://github.com/LC3808/legendstudy-lab/issues/6)은 OPEN 확인. 완료 조건 충족 전 닫지 않는다.
+- Claude 별도 브랜치 f496c20의 [코칭 기술 검토](https://github.com/LC3808/legendstudy-lab/blob/f496c20/docs/MATH_COACHING_PIVOT_TECH_REVIEW.md)와 [기존 평가 기술 검토](https://github.com/LC3808/legendstudy-lab/blob/f496c20/docs/MATH_ESSAY_EVALUATION_TECH_REVIEW.md)를 확인했다. MATH-4 steps/errors, MATH-5 CORE·L0/L1/L2·generated_solution, MATH-6 resolve/delta가 코드에 있다는 검토 결과다. 현재 Production 생성·저장·화면 동작 확인과 구분한다.
+- 해당 검토의 ‘라이브 모델 미연결’은 조사한 브랜치의 범위다. [인하 기존 회차 복구 기록](inha-photo-extraction-20261026.md)이 있으므로 이를 현재 전체 서비스의 Provider 미연결로 일반화하지 않는다. 과거 INVALID_OUTPUT 세부 원인에 대한 추정도 확정 원인으로 승격하지 않는다.
+- [기존 learning runtime](math-essay-learning-runtime.md)의 read_learning_state/reveal_hint/reveal_solution/create_resolve_attempt/request_reevaluation/read_learning_history 계약을 먼저 재사용한다. 과거 NOT_APPLIED 표기는 당시 기록이며 현재 운영 적용 여부는 착수 시 읽기 전용으로 확인한다.
+
+### 출시 준비 후 재개 순서
+
+1. 당시 WEB·APP·Worker 배포와 운영 계약을 확인한다. 인하 2026 수시 자연 오전 기존 3문항 성공 결과를 우선 읽고 건국대 성공 기록과 비교한다. 재평가나 새로운 예약을 만들지 않는다.
+2. Math 결과 → CORE → 단계별 힌트 → 수정 풀이 → History → WEB 표시 → 재작성 → 성장 비교의 8단계를 추적한다. 각 단계는 `존재/없음/미연결/비활성/정책차단/미확인`과 근거를 기록한다. 현재 이 8단계의 코칭 운영 연결은 미확인이다.
+3. 확인된 누락에 대해서만 최소 변경안을 제시한다. 새 엔진을 만들지 않으며 이번 지시만으로 Production DB·Worker·정산 계약을 변경하지 않는다.
+4. 기존 UI/계약으로 학생 풀이 인용 → 오류·누락·막힌 지점 → 원인 → 다음 방향 → L0/L1/L2 힌트 → 수정 풀이 → 재작성을 연결한다. 학생 답안에 없는 오류를 생성하지 않는다.
+5. `[수정된 풀이 보기 ▼]`는 기본 접힘이며 기존 힌트 공개 조건을 따른다. AI 생성 참고 풀이와 공식 해설, 학생 원본을 구분한다. 원본 이미지·추출 텍스트·LaTeX를 비교할 수 있게 하고 근거 없는 좌표 마킹은 하지 않는다.
+6. 기존 MATH-6 최초/재작성 비교와 14일 무료 재첨삭 자격을 서버 계약대로 연결한다. WEB 실제 동작과 APP Native 후속 호환성을 별도 기록한다.
+7. 부분 완성·중간에 막힘·계산 오류·개념 오류·논리 근거 누락의 코칭을 공식 해설과 대조한다. 기존 성공 평가 반복을 피하고 필요한 검증 범위·호출 승인을 확인한다.
+
+### 음성·출시 경계
+
+Claude 검토에는 로컬 한국어 TTS만 사용하고 Math 음성을 초기 출시에서 제외한 정책이 있다. 최신 운영 정책을 먼저 대조한 뒤 수식의 한국어 읽기·발음·문장 호흡·띄어 읽기 개선안을 검토한다. 외부 유료 TTS는 별도 Owner 승인 대상이다.
+
+자연·의예·과학논술의 정식 유료 공개는 보류한다. 코칭 품질 개선 후 수리 무료 베타를 별도로 검토하며, 인문 베타 일일 2 Credit을 자동 적용하지 않는다.
+
+### 보존 검토 및 완료 조건
+
+[장기 학습 이력 전략](longitudinal-learning-admissions-data-strategy.md)의 일곱 질문에 대한 이번 후속 원칙: (1) 제출/평가/정정 시점 구분, (2) 원본 답안·이미지 및 당시 평가 재현, (3) 수정 풀이로 원본 UPDATE 금지, (4) 기존 canonical 사용자 ID 유지, (5) Learning 사실과 선택/Outcome 구분, (6) 기존 접근권한·보존/삭제 정책 유지 및 공개 로그에 답안 미기록, (7) 성장 delta·AI 판단을 원본 사실로 취급하지 않음. 이번에는 새 저장소나 UPDATE 의미를 선택하지 않는다.
+
+완료 전까지 다음 항목은 모두 미완료로 유지한다.
+
+- [ ] 운영 MATH-5 데이터 생성·저장·조회·표시 연결
+- [ ] 실제 학생 풀이 근거 코칭 및 단계별 힌트
+- [ ] 수정 풀이 접힘 토글·LaTeX 렌더링·원본 비교
+- [ ] MATH-6 재작성·무료 재첨삭·성장 연결
+- [ ] 미완성/오류 풀이 코칭 정확성 검증
+- [ ] WEB 실제 동작 및 APP 후속 호환성 확인
+
+이번 작업은 자료 대조와 후속 순서 기록만 수행했다. Production 변경·Provider 호출·Credit 처리 0. 기존 성공 결과·Registry·History·Ledger·Worker는 변경하지 않았다.

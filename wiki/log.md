@@ -1,3 +1,7 @@
+## 2026-10-27 — 수리 코칭 필수 후속 재개 기준 연결
+
+Unified Wiki·Issue #6 OPEN·Claude f496c20 기술 검토 대조. 코드 자산과 운영 연결 확인을 분리하고 출시 준비 후 8단계 읽기 전용 추적, MATH-5/6 재사용 및 완료 조건 기록. Production/Provider/Credit 변경0. [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장).
+
 ## 2026-10-27 — 관리자 사용기한 지급·지급 건별 회수
 
 Owner 승인 RPC 3개 및 시각 함수 보완 운영 적용. 격리30/UI59 검사·타입·빌드 PASS, 운영 사후8 true. WEB41bd8f6/Pages1517370e, 실제 지급·회수0. PC 모달 확인, 모바일 에뮬레이션 조작 시간 초과는 미확인으로 기록. [구현·운영·복구](admin-credit-operations-20261027.md).
