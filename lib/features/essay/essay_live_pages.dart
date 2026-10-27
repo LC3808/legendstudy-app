@@ -1,4 +1,5 @@
 import 'source_catalog_page.dart';
+import '../credits/essay_beta_credit.dart';
 
 import 'dart:async';
 
@@ -28,7 +29,8 @@ class EssayLiveHome extends ConsumerStatefulWidget {
 
 class _EssayLiveHomeState extends ConsumerState<EssayLiveHome> {
   @override
-  Widget build(BuildContext context) => const SourceCatalogPage();
+  Widget build(BuildContext context) =>
+      const EssayBetaCreditEntry(child: SourceCatalogPage());
 }
 
 class EssayLiveWorkspace extends ConsumerStatefulWidget {

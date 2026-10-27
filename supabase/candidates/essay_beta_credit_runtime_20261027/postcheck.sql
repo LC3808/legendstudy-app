@@ -1,0 +1,11 @@
+select md5(pg_get_functiondef('public.math_session_submit(uuid,uuid,uuid[],uuid)'::regprocedure))='b4b592e12240af3d87efda7b8e03aa71' as allocator_1,
+md5(pg_get_functiondef('essay_private.scaffold_legacy_essay_request_evaluation(uuid,uuid,text)'::regprocedure))='763f80fc1cf13a7eca79dff5d9dfcc15' as allocator_2,
+md5(pg_get_functiondef('essay_private.scaffold_request_v13(uuid,uuid,text)'::regprocedure))='55e99c79841301e48436a8edc1ee0a28' as allocator_3,
+md5(pg_get_functiondef('essay_private.credit_request_v2(uuid,uuid,text)'::regprocedure))='71257b5b41e532270100430bfcb70b12' as allocator_4,
+md5(pg_get_functiondef('math_private.authorize_billing(uuid)'::regprocedure))='3026c4744a65f23403c63c12581877d4' as allocator_5,
+md5(pg_get_functiondef('essay_exam_private.reserve(uuid,uuid,uuid,jsonb,uuid)'::regprocedure))='8594ce9fcb3bf1824b6b13d082a6accb' as allocator_6,
+not exists(select 1 from essay_beta_private.campaigns where enabled) as campaign_inactive,
+not exists(select 1 from essay_beta_private.daily_grants) as no_grants_issued,
+has_function_privilege('authenticated','public.essay_beta_daily_claim()','EXECUTE') as self_claim_access,
+not has_function_privilege('anon','public.essay_beta_daily_claim()','EXECUTE') as anonymous_blocked,
+not has_schema_privilege('authenticated','essay_beta_private','USAGE') as private_tables_hidden;

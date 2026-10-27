@@ -105,3 +105,24 @@ LAB 진입에 WEB/Native가 동일 claim RPC 호출 후 기존 credit_summary �
 ## 운영·롤백
 
 Production 변경0, 실제 지급/회수/예약/Provider0. WEB·APP 배포 없음. 지금 적용할 Production SQL은 없으며 prototype은 실행 승인용 파일이 아니다. 코드 롤백은 이 설계/시제품 commit만 revert하면 된다. 후속 출시 rollback은 신규지급·보상을 먼저 off하되 기존 예약finish/release 및14일재첨삭은 유지한다. **베타 grant가 남아 있으면 예전 무제한 allocator로 되돌리지 않는다**; 범위 차단을 유지하며 지급내역/History를 삭제하지 않는다. 이미 지급된 feedback 보상30일 권리도 보존한다.
+
+
+## 2026-10-27 — 일일 지급 런타임 구현, 운영 승인 대기
+
+Owner P0-1에 따라 설계를 실제 SQL 및 WEB/Native 코드로 구현했다. Production 미적용·캠페인 미활성 상태이며 베타 출시 완료가 아니다.
+
+- SQL: `supabase/candidates/essay_beta_credit_runtime_20261027/README.md`. private 관계3개, 본인 claim RPC1개, 기존 allocator6곳의 선택부만 수정. 기존 non-beta 지급분끼리 순서는 그대로 유지한다. 캠페인/회차를 임의 활성화하지 않는다.
+- 일일 사용자+KST일 unique, 계정 잠금, 기존 grant/원장 재사용, 다음날00시 만료, exact exam/runtime/full-question scope, 미지원 legacy/Math에서 beta 제외. 기존 reserve/finish의 재시도·실패해제·만료후 예약 정산 보존.
+- WEB: LAB layout의 self-scoped claim, 계정 전환 응답 격리, 자정/포커스/잔액 변경 갱신, RPC 미설치·캠페인 비활성 시 숨김.
+- APP: 기존 Native LAB 진입에 동일 RPC 연결, 서버 잔액 표시·복귀/자정/잔액 변경 갱신. APP 배포/실기기 확인은 미완료.
+- 격리 PostgreSQL17 합성 계정34검사 PASS(100동시claim 포함), 운영 read-only 사전7 true. 실제 운영 회원 지급/예약/차감/Provider 호출0. Legacy/Math5경로는 변경된 SELECT 직접 실행 검사이며 엔진 E2E가 아니다.
+- WEB 관련17검사·타입·변경파일 lint·Node22 build PASS. Native DTO3검사·변경파일 analyze PASS. 운영 화면 확인 및 배포는 아직 하지 않았다.
+
+### 활성화 전 남은 항목
+
+1. 신규 Production SQL Owner 승인 및 적용/사후검사. 승인 요청된 패키지는 캠페인 비활성 설치만 포함한다.
+2. 기존 설계의 **quote에 실제 사용 출처 표시 및 quote→submit 출처 변경 시 재확인**은 미구현. 가입·유료로 자동 전환되는 혼동을 막기 위해 이를 연결하기 전 캠페인을 활성화하지 않는다. 추가 RPC 의미 변경은 별도 영향/승인 필요.
+3. 실제 캠페인 시작·종료일과 허용 시험 범위 확정, WEB/APP 실제 연결 확인. 피드백 보상은 이번 최소 구현에 포함하지 않는다.
+4. 5대학 STANDBY 선행 미완료는 [현황](essay-all-university-standby-20261026.md) 그대로 유지. 코칭/537표시명 완료로 간주하지 않는다.
+
+복구는 후보 `rollback.sql`로 캠페인 중지. 기존 지급/원장/예약은 보존하며 beta 지급 이력이 있으면 무제한 구 allocator로 복귀하지 않는다. 미적용 후보이므로 재실행 금지 적용 이력은 아직 없다.

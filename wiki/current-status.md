@@ -1,21 +1,21 @@
 # Current Status
 
-[베타 Credit 설계·미적용](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[베타 Credit 코드·격리34검사/SQL승인·출처확인 미완료](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 P0 광운/APP 미완료. 추가 이화·부산·덕성 자료 대기; 단답 시범 가천·국민·경북. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 5대학 마감 후 상경 코칭 착수.
 
-고려 정정: [Owner 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
+[고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 
 ## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
 
-과거 기록: 성균언어16 PDF복구·한양인문13 STANDBY. 당시 한양상경8 미연결은 후속 작업으로 해소. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
+과거 기록: 성균언어16 PDF복구·한양인문13 STANDBY. 한양상경8 후속 연결. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
 
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
-Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존전체학습주기E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](essay-lab-claude-handoff-20261024.md).
+Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](essay-lab-claude-handoff-20261024.md).
 
 성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](essay-p0-direct-execution-20261023.md).
 

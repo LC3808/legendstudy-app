@@ -1,3 +1,7 @@
+## 2026-10-27 — 베타 일일 Credit 구현 후보
+
+기존 grant/finish 재사용 SQL·WEB/Native claim 연결 구현. 격리34/WEB17/Native3검사, 타입·lint·build·analyze PASS. 운영 SQL/배포/캠페인 활성화 미수행. 출처 확인 quote-submit 연결 미완료로 출시 차단. [구현·승인·재개](essay-beta-credit-design-20261027.md#2026-10-27--일일-지급-런타임-구현-운영-승인-대기).
+
 ## 2026-10-27 — 무료 베타 Credit 운영 설계
 
 운영 지급/회차예약/정산/잔액 함수 읽기전용 대조. 만료일우선과 가입무료 우선 충돌, 기존 grant 시험제한 부재 확인. 기존 promotion 원장 재사용안 및 피드백/권한/rollback 기록. 순수 정책 SQL 격리23검사 PASS; 지급/동시성/정산 통합·WEB/APP 미구현. Production/학생거래 변경0. [설계와 남은 구현](essay-beta-credit-design-20261027.md).
