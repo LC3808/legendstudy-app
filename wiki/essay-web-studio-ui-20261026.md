@@ -166,3 +166,17 @@ Owner 19시 화면 제보에 따라 기존 TEXT/Math 입력 정책과 자연계�
 WEB 3b4cc9bf8f06b0deca1ea462985aa0f7ceb4f367 Push/Remote 일치. Pages 808ef7c7 Production success. 롤백: 직전 WEB a5ec76d / Pages a68022fe. 이번 작업 SQL 없음; 과거 연결 SQL 재실행 금지. APP 변경/검증 없음.
 
 미완료 구분: 광운 자연은 운영 Registry에 2022 모의 1회차만 존재한다. 2023~2027 자연 시험을 임의 생성하지 않았다. 숙명은 인문 3회차(2026 수시1·2, 2027모의) 연결, 2025모의 4문항 회차는 전체 평가 패키지/실행 연결 미완료다. materials에는 2022~2027 인문 자료가 더 있으므로 자료 부재로 설명하면 안 된다. 자료 등록·전체 패키지·실행 연결 작업이 끝나지 않은 것이며 전체 STANDBY 완료가 아니다. 이 UI 수정은 숙명 추가 회차 연결 완료로 계산하지 않는다. [기존 연결/SQL/잔여](essay-all-university-standby-20261026.md).
+
+## 2026-10-27 — 전체 Registry 입력 유형 전수 보완
+
+Owner 긴급 보완에 따라 기존 Math/혼합형 입력 계약을 우선 재사용했다. 직전 부분 복원의 원인은 미등록 입력 메타데이터가 TEXT로 기본 처리되고 ready availability의 Math 계약에 의존하던 공통 판정이었다. 이제 WEB `src/lib/essay-runtime/input-mode.ts`가 공개 상태와 무관하게 `src/data/essay-question-inputs.json`의 정확한 exam ID + question ID를 먼저 조회한다. ID 조합 불일치나 미등록·불명 유형은 unknown으로 처리하며 TEXT로 추정하지 않는다. 알려진 입력 계약을 서비스 비활성 응답으로 덮어쓰지 않는다. 기존 draft key, 저장/복원, 사진 순서, 사용자 확인, 부분 제출 계약은 변경하지 않았다.
+
+권한 있는 유형 근거: 기존 실행 패키지/Math 입력 계약/문항 메타데이터 928문항 재사용. 남은 86문항만 기존 패키지 및 필요한 공식 PDF의 문제·해설을 대조했다. 전체 1,014문항 PDF 재분석은 하지 않았다. 기존 `batch-assembled-512.private.json`, `essay-image-inputs.json` 및 기존 source 입력 계약을 재사용했으며, 공개 audit에는 문항·시험 ID와 근거 식별자/해시/페이지만 남기고 학생 답안·해설 본문은 포함하지 않았다. 출처 및 전수검사 자료: WEB `scripts/audits/essay-input-registry-20261027.json`.
+
+전수 범위: Catalog 42대학, Production Registry 시험 보유 26대학/363회차, 문항 보유 25대학/1,014문항. 사진·수식 입력 483문항, TEXT 531문항. 보류/availability 미제공 시 기존 공통 함수와 비교한 입력 불일치 241건 → 수정 후 0건, 미확정 0건. 자연계열이라는 이유로 모두 Math로 분류하지 않았으며 과학 서술 TEXT 및 상경 혼합형의 문항별 차이를 유지했다. 전체 ID 쌍을 공통 판정 함수에 적용하고 잘못된 ID 쌍·unknown·혼합형을 자동 검사했다.
+
+안내는 시험 선택 직후 붉은 테두리 안에 ‘수리논술 첨삭 서비스 준비 중’, 진한 회색 본문 ‘더 정확한 풀이 분석과 단계별 코칭을 제공하기 위해 서비스를 개선하고 있습니다. 현재 답안 작성·저장은 가능하며, 첨삭 기능은 추후 제공됩니다.’로 변경했다. 모바일에서는 줄바꿈을 허용하며 하단 첨삭 버튼은 기존 비활성 정책을 유지한다.
+
+검증: 관련 8파일 26 tests PASS, Typecheck PASS, Lint 오류0/기존경고4, Production Build PASS. 테스트는 저장/복원·사진 순서·입력 모드·보류 제출 차단 경로를 포함한다. 새 Provider 호출/유료 제출/학생 사진 확정은 하지 않았다. Production 일반계정에서 고려2026 수시 자연 오전의 사진·수식 입력 및 새 보류 안내, 한양2027 모의 상경의 문제1 TEXT/문제2 사진·수식 입력과 비활성 제출을 확인했다. 이번 최종 배포의 모바일 실기기 검사는 수행하지 않았으며 반응형 CSS와 관련 테스트 확인 범위다.
+
+WEB commit/push/remote 일치: `2f838c29fa25c38c399a6a43f9d567dd89053ffc`. Pages Production(main): `f9e0e83f-6f93-470d-a1e0-0c711607c53c`; 배포 목록의 Source 2f838c2 및 실제 lab.legendstudy.com 화면 확인. 복구: 직전 WEB `3b4cc9bf8f06b0deca1ea462985aa0f7ceb4f367` / Pages `808ef7c7`. DB·Worker·Credit·Ledger·APP 변경0, SQL 적용/재실행0. 기존 학생 데이터/History 변경0. 이 작업은 입력 UI 복구이며 수리 평가 품질 검수나 유료 공개 승인이 아니다.
