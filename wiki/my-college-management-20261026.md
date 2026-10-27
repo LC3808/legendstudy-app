@@ -61,3 +61,18 @@ Owner 2차 지시에 따라 기존 데이터/handler를 유지한 WEB UI 변경.
 WEB `780eff88e4d3509774ea0eea9c4644e06bec02f4` commit/push/remote SHA 일치. Pages Production `efe137e9-cac7-43b6-a10c-bad56a7d679b`: canonical deployment success와 commit metadata 일치, `/account/` 실제 반영 확인. DB/RPC/Worker/Secret/APP 변경0, Provider 호출/학생 Credit 변경0.
 
 복구: 직전 정상 Pages `d1249daa-0305-4352-ab2c-680c9adbdf2d` (WEB `91c19ea5c679bc07f2788c76a784499cccc90811`) 또는 이번 WEB commit만 revert 후 기존 공개환경 주입 배포. SQL 없음. Secret 설정 변경 금지. 한국항공대 APP은 기기 연결만 확인했으며 일반 계정 로그인 및 실사용 확인은 별도 미완료로 유지한다.
+
+## 2026-10-27 — 최종 MY 통합·학년별 노출·성장 요약
+
+Owner 최종 지시를 적용했다. 기존 2차 보정과 위 7문항 보존 검토를 계승한다. 프로필과 대학 관리를 하나의 외곽 카드로 통합하고, 내부 중첩 카드를 제거했다.
+
+- 지원 현황/관심 대학의 지원 추가는 기존 상태 `student`+3학년 또는 `retaker`에만 표시한다. 1·2학년/학년 미설정/기타·상태 미설정은 관심 대학 전체 너비이며 숨김 안내를 추가하지 않는다. 기존 retaker 분류를 사용하며 N수 연차를 새로 추정하지 않는다.
+- 프로필 편집 저장 후 같은 조회 상태를 갱신하여 즉시 노출을 재계산한다. 숨겨진 지원 기록을 삭제하거나 변경하지 않는다.
+- MY 성장 요약은 기존 시험·문항 선택, 평가 횟수, 실제 그래프·범례, 전용 LAB 상세 이동만 남긴다. 기간/통계/긴 기준 원문/전체 이력 목록/잘한 점·보완점은 MY에서 제거하고 전용 상세 화면에 보존한다.
+- 1회 막대·2회 비교 막대·3회 이상 전체 이력 꺾은선, 점수 공백·하락·기준/척도 분리 및 결과 링크는 기존 계약 그대로다.
+
+검증: 관련 UI 27 tests PASS, Typecheck PASS, Lint 오류0/기존 무관 경고4, Production Build 136 routes PASS. 프로필 저장 2→3→2 전환과 상태별 노출은 mock UI 테스트로 확인했다. 실제 운영 일반 계정(고2)의 PC·Chrome 400px 모바일 미리보기에서 지원 영역/지원 추가 숨김, 관심5개·긴 이름·단일 카드·3회 성장 그래프·상세 링크를 확인했다. 운영 프로필/지원 데이터 저장·삭제 테스트는 하지 않았다. 실제 모바일 기기 검증과 구분한다.
+
+WEB `49fee2419493c12f95a9aa939804cf51c957ac70`, branch `codex/web-app-release-20261024`, Commit·Push 후 Remote SHA 확인. Production Pages `0c033b52-c4b6-4e8e-98d0-764b46ad9357`, source `49fee24`, `https://lab.legendstudy.com/account/` 반영 확인. APP Native·DB·RPC·Worker·Credit·Ledger·History·Secret 변경0, Provider/차감0.
+
+롤백: 직전 Pages `7eea1b34-3926-4fcd-a695-aeb5a3b4b3ea` (WEB `a0b1bcf266c890556b81a1059e4fb90214bb219e`)로 복구하거나 이번 WEB commit만 revert 후 기존 배포 절차 사용. SQL 적용/재실행 없음. 기존 대학 STANDBY 및 APP GAP 상태는 별도 기록을 유지한다.

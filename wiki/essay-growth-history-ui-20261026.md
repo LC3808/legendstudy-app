@@ -74,3 +74,7 @@ Typecheck PASS, Lint 오류0/기존경고4, 관련7파일53검사 PASS 후 표�
 WEB c1465e956ea0c974331ed77e040fc6619a4c3915 commit/push/remote 일치. Cloudflare canonical Production 1a61c3f7-935f-4bac-88de-370289fb766f success, 동일SHA·dirty=false 확인. Worker 배포·SQL·Provider·Credit차감0. 기존 정상 결과와 정산 변경0(쓰기 없음).
 
 롤백: 직전 Pages efe137e9-cac7-43b6-a10c-bad56a7d679b / WEB780eff88e4d3509774ea0eea9c4644e06bec02f4로 WEB만 복귀. Secret·DB·Worker 복구 불필요. 재실행 SQL 없음. 다음: Owner 저장결과 화면 확인, 검수대기 별칭 보완, 50회차 초과 조회 필요시 최소 서버 변경안 별도 보고.
+
+## 2026-10-27 — MY 전용 간결한 성장 요약
+
+공통 그래프에 compact 표시 옵션만 추가했다. MY에서는 시험·문항 선택/횟수/실제 그래프/범례/상세 이동을 표시하며 긴 기준 원문·이력 목록·피드백은 전용 논술 LAB에 유지한다. 기존 점수/기준 매칭/결과 링크 및 1·2·3회 이상 그래프 계약은 보존한다. [학년별 노출·검증·배포·복구](my-college-management-20261026.md#2026-10-27--최종-my-통합학년별-노출성장-요약). 기존 전체 평가기준 short_label 검수 GAP를 완료로 바꾸지 않는다.
