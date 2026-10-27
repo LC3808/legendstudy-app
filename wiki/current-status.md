@@ -1,5 +1,7 @@
 # Current Status
 
+MY 2차 압축·⋯ 메뉴 Production 반영; 모바일 재확인 남음. [상태/복구](my-college-management-20261026.md#2026-10-27--2차-밀도관리-메뉴-보정).
+
 2026-10-27: 한국항공 사회4회차 WEB STANDBY 확인·배포. 동국6·숙명3·숭실4 전체 연결 적용, 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 출시준비 후.

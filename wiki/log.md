@@ -1,3 +1,7 @@
+## 2026-10-27 — WEB MY 2차 압축 보정
+
+프로필·관심 목록 압축, 관리 ⋯ 메뉴, 지원 상태/단계별 합격 요약 분리. UI15/타입/변경파일 lint/build PASS, Production efe137e9/WEB780eff8 반영·remote 일치. 운영 쓰기0, 모바일 재확인·APP 별도 미완료. [상세/복구](my-college-management-20261026.md#2026-10-27--2차-밀도관리-메뉴-보정).
+
 ## 2026-10-27 — 수리 코칭 필수 후속 재개 기준 연결
 
 Unified Wiki·Issue #6 OPEN·Claude f496c20 기술 검토 대조. 코드 자산과 운영 연결 확인을 분리하고 출시 준비 후 8단계 읽기 전용 추적, MATH-5/6 재사용 및 완료 조건 기록. Production/Provider/Credit 변경0. [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장).

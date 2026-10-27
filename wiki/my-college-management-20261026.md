@@ -45,3 +45,19 @@ Cloudflare Pages Production `30bfbe41-f1c3-4988-bf46-e01c3582ae05`, canonical de
 ## 별도 미완료
 
 이 P1 화면 개편은 [전체 대학 STANDBY P0](essay-all-university-standby-20261026.md)의 신규 대학 연결·APP PDF GAP 완료를 의미하지 않는다. 해당 상태와 재개 순서는 기존 기록 유지.
+
+## 2026-10-27 — 2차 밀도·관리 메뉴 보정
+
+Owner 2차 지시에 따라 기존 데이터/handler를 유지한 WEB UI 변경. 위 보존 검토 7문항을 그대로 적용하며 저장 구조·수정 의미 변경 없음.
+
+- 프로필의 빈 필드 공간 제거, 실제 이름/이메일·재학·학교·학년·전공과 편집 유지.
+- 관심 대학: 대학/학과/지원 추가/⋯ 한 행(긴 이름 줄바꿈). 변경·삭제는 ⋯로 이동.
+- 지원 현황: 대학·학과/상태/⋯ 및 학년도·모집·전형의 두 줄. 기존 변경/진행 기록/이력/삭제 확인 연결 유지.
+- PC 두 카드 높이는 콘텐츠별 독립, 모바일 한 열 CSS. 관리 메뉴 Escape/포커스 이탈 닫기 및 터치 영역 적용.
+- 요약은 필터된 지원 기록 건수와 최신 이벤트 기준 최종 합격(accepted/additional_acceptance), 1단계 합격(stage_pass)을 분리. registered를 최종 합격으로 추정하지 않으며 대학 수/결과 대기 수를 임의 산출하지 않음. 관심→실지원 상태는 정확한 관계가 없어 생략.
+
+검사: Typecheck, 변경 파일 ESLint, 관련 UI 15개, Production build(136 routes), diff check PASS. 운영 일반 계정 관심5/지원0에서 압축 목록·독립 높이·긴 이름·관리 메뉴·편집 진입/취소 확인. 학생 데이터 저장·삭제 테스트 없음. 지원 상태/이력은 mock UI 검사로 확인했으며 운영 계정에 지원 내역은 없음. 이번 2차 변경의 모바일 실화면 재확인은 미완료(반응형 CSS 적용, 1차 400px 확인과 구분).
+
+WEB `780eff88e4d3509774ea0eea9c4644e06bec02f4` commit/push/remote SHA 일치. Pages Production `efe137e9-cac7-43b6-a10c-bad56a7d679b`: canonical deployment success와 commit metadata 일치, `/account/` 실제 반영 확인. DB/RPC/Worker/Secret/APP 변경0, Provider 호출/학생 Credit 변경0.
+
+복구: 직전 정상 Pages `d1249daa-0305-4352-ab2c-680c9adbdf2d` (WEB `91c19ea5c679bc07f2788c76a784499cccc90811`) 또는 이번 WEB commit만 revert 후 기존 공개환경 주입 배포. SQL 없음. Secret 설정 변경 금지. 한국항공대 APP은 기기 연결만 확인했으며 일반 계정 로그인 및 실사용 확인은 별도 미완료로 유지한다.
