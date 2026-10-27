@@ -4986,3 +4986,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 - 학년 라디오5/학교 독립 저장/학년별 지원 노출, 관심5개 4초 안내, 카드·구분선·여백 개선. 기존 데이터 보존.
 - 45 tests·Typecheck·Build PASS, Lint 오류0/기존 경고4. Production PC/400px 확인, 실제 학생 저장·차감0.
 - WEB `a5ec76d` push/remote 일치, Pages `a68022fe`. [정책·검증·롤백](my-college-management-20261026.md#2026-10-27--프로필-라디오학교-독립관심-대학-제한-안내).
+
+### 2026-10-27 — 수리 사진 입력 회귀 복구
+- 공개 승인과 사진 입력 capability 분리, KAU 공학/이학 보류 정리, 상단 붉은 안내/하단 비활성 버튼, 대학 찾기 외곽선·그림자. WEB3b4cc9b / Pages808ef7c7 배포·remote일치.
+- 관련23검사·Typecheck·Build PASS/Lint기존4경고. 운영 광운·KAU·인하·한양 입력 확인. Provider/차감/DB쓰기0. 숙명 전체 확장 미완료를 명시. [근거·롤백](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리).

@@ -1,5 +1,7 @@
 # Current Status
 
+[수리 사진 입력 복원·공개보류 선행 안내 운영 확인](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
+
 [베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 [광운 인문16 공개·자연1 목록/첨삭보류, APP 대기](essay-kwangwoon-standby-20261027.md). [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
@@ -8,10 +10,7 @@
 
 [고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 
-## 2026-10-25 — APP 복원 확인·중단 / 1-A 회차 연결 착수
-
-과거 기록: 성균언어16 PDF복구·한양인문13 STANDBY. 한양상경8 후속 연결. [최종범위·SQL·복구·실측](essay-group-1a-20261025.md#2026-10-25-최종-범위--성균-pdf-수정한양-standby).
-
+[2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
