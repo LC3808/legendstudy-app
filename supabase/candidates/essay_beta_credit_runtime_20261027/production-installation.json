@@ -1,0 +1,15 @@
+{
+  "project_id": "stlhijzpjfgwwdgunlsd",
+  "migration_version": "20261027040022",
+  "migration_name": "essay_beta_credit_runtime_20261027",
+  "applied_file": "apply-with-temporary-role.sql",
+  "sha256": "8040bc9eab0f8674c565a689e4de694c073bbbc56a8db790970695d127f3e88e",
+  "precheck_pass": 7,
+  "postcheck_pass": 11,
+  "ownership_and_role_pass": 5,
+  "existing_grant_and_finish_preserved": true,
+  "campaign_active": false,
+  "beta_grants_issued": 0,
+  "provider_calls": 0,
+  "reexecute": false
+}

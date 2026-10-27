@@ -1,6 +1,6 @@
 # 일일 베타 Credit 런타임 — Production 승인 요청 후보
 
-**미적용. 신규 지급·캠페인 활성화 없음.** 기존 `essay-beta-credit-design-20261027.md`의 일일 지급 부분을 구현한다. 피드백 보상은 이번 최소 SQL에 포함하지 않는다.
+**Production 설치 완료: 20261027040022. 신규 지급·캠페인 활성화 없음. 적용 SQL 재실행 금지.** 기존 `essay-beta-credit-design-20261027.md`의 일일 지급 부분을 구현한다. 피드백 보상은 이번 최소 SQL에 포함하지 않는다.
 
 ## 변경 범위
 
@@ -41,3 +41,9 @@ Owner가 본 패키지 설치를 승인했으나 운영 함수4개 owner는 essa
 역할 재현 격리37검사 PASS. is_beta는 내부 executor만 호출 가능한 boolean SECURITY DEFINER로 보완(학생/서비스 역할 접근 금지, 테이블 직접 접근 금지). 내부 함수 소유자 보존 및 schema CREATE는 transaction 내 부여/회수.
 
 추가 승인 대상 `apply-with-temporary-role.sql`: postgres가 자기 grantor로 essay_executor SET membership만 transaction 내 추가하고, 기존6함수 변경 후 자기 membership만 revoke한다. 기존 supabase_admin grantor의 ADMIN=true/INHERIT=false/SET=false 행은 보존한다. 오류 시 전체 rollback. 격리 비슈퍼유저 CREATEROLE/admin membership으로 임시SET=true→원복false 및 원본membership 보존 확인. **권한 변경이므로 기존 SQL 승인에 포함했다고 가정하지 않고 별도 승인 대기.**
+
+## 최종 설치 결과 — 2026-10-27
+
+Owner가 한시 SET 권한 보완까지 승인한 후 `apply-with-temporary-role.sql` 적용 성공. migration `20261027040022`. 사전7/사후11/권한·owner5/기존 grant·finish2 모두 true. 임시 SET membership 제거, 기존 supabase_admin membership 및 내부 함수 소유자 보존. 캠페인 비활성·지급0. 앞의 차단 기록은 이 성공 적용 이전 이력이다.
+
+`apply.sql`, `apply-with-temporary-role.sql` 모두 다시 실행하지 않는다. 증거 `production-installation.json`. `rollback.sql`은 캠페인 중지 경로만 제공하며 원장 삭제나 구 allocator 복원을 하지 않는다. 실제 베타 시작·허용 회차·출처 확인 연결은 별도 미완료다.

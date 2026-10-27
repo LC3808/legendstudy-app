@@ -132,3 +132,11 @@ Owner P0-1에 따라 설계를 실제 SQL 및 WEB/Native 코드로 구현했다.
 Owner SQL 설치 승인 수신. 운영 사전7 true 이후 apply_migration 두 시도는 owner/SET ROLE 권한 오류로 모두 rollback. 다시 사전7 true, 신규schema 부재 확인. 운영 기능 설치·지급·캠페인 활성화0.
 
 실제 원인: postgres는 essay_executor ADMIN membership을 갖지만 INHERIT=false/SET=false. 내부 owner 유지/테이블 직접 접근 차단을 보완한 격리37검사 PASS. 한시 SET membership을 같은 transaction 안에서 부여/자기 grantor만 회수하는 정확한 파일 `apply-with-temporary-role.sql` 준비. 기존 supabase_admin membership 유지 검증. 이 권한 변경은 별도 Owner 승인 요청이며 아직 실행하지 않았다. 기존 출처 quote-submit GAP도 유지.
+
+### Production 비활성 설치 완료 — 2026-10-27
+
+Owner의 한시 역할 권한 승인 후 migration `20261027040022` (`essay_beta_credit_runtime_20261027`) 성공. 적용 파일 `supabase/candidates/essay_beta_credit_runtime_20261027/apply-with-temporary-role.sql`, 재실행 금지. 사전7·사후11·역할/소유자5·기존 credit_post_grant/finish2 모두 true. 임시 SET/CREATE 권한 원복 및 기존 supabase_admin membership 보존. 신규 캠페인0/베타지급0, 운영 회원 지급·차감·Provider 호출0. 기존 History 테이블 변경 없음.
+
+Security advisor: beta private3테이블 RLS/no policy INFO는 클라이언트 접근 차단 의도와 일치. authenticated claim SECURITY DEFINER 경고는 auth.uid/account.allowed 검증을 거치는 본인 지급용으로 의도된 공개 RPC이며 익명 실행/직접테이블 접근 차단 확인. 나머지 전체 프로젝트 경고는 이번 작업에서 변경하지 않았다.
+
+**DB 설치만 완료. WEB·APP 배포/운영 베타 활성화 완료가 아니다.** 사용 출처 quote-submit 확인과 캠페인 기간/대상 확정이 남는다. 복구는 후보 rollback.sql 캠페인 중지이며 기존 원장/예약/정산 유지. 정확한 적용 파일 hash와 결과는 `production-installation.json`에 보존.
