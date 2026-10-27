@@ -2,7 +2,7 @@
 
 [베타 Credit 설계·미적용](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
-한국항공 사회4 WEB확인, 동국6·숙명3·숭실4 연결. 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
+P0 광운/APP 미완료. 추가 이화·부산·덕성 자료 대기; 단답 시범 가천·국민·경북. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 5대학 마감 후 상경 코칭 착수.
 
