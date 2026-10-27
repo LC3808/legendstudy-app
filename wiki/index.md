@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+무료 베타 Credit: [일일 지급·만료·범위·보상 설계/격리 시제품](essay-beta-credit-design-20261027.md) — 운영 미적용.
+
 WEB MY 프로필·관심 대학·지원 현황: [대학 관리 통합·배포·복구](my-college-management-20261026.md).
 
 전체 대학 WEB/APP 공개 연결: [42개 대학 현황·플랫폼 GAP·Math 보류](essay-all-university-standby-20261026.md).

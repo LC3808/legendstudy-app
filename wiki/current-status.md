@@ -1,6 +1,6 @@
 # Current Status
 
-MY 압축 배포·모바일 확인 대기. [MY](my-college-management-20261026.md). 성장1/2/3회 그래프 배포, 별칭537검수/최근50한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[베타 Credit 설계·미적용](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 2026-10-27: 한국항공 사회4회차 WEB STANDBY 확인·배포. 동국6·숙명3·숭실4 전체 연결 적용, 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 

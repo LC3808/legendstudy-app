@@ -1,3 +1,7 @@
+## 2026-10-27 — 무료 베타 Credit 운영 설계
+
+운영 지급/회차예약/정산/잔액 함수 읽기전용 대조. 만료일우선과 가입무료 우선 충돌, 기존 grant 시험제한 부재 확인. 기존 promotion 원장 재사용안 및 피드백/권한/rollback 기록. 순수 정책 SQL 격리23검사 PASS; 지급/동시성/정산 통합·WEB/APP 미구현. Production/학생거래 변경0. [설계와 남은 구현](essay-beta-credit-design-20261027.md).
+
 ## 2026-10-27 — 상경 수학 코칭 선행 조건·P0 인수인계
 
 5대학 P0 미완료 범위와 재개·재실행 금지·복구 경로 정리. 한양2027상경 대표 및 기존 MATH-4/5/6 재사용 범위 기록, Issue6 OPEN 확인. 코칭 코드/Production/Provider/Credit 변경0. [P0 인수인계](essay-all-university-standby-20261026.md#2026-10-27--상경-코칭-착수-전-p0-인수인계) · [후속 실행 범위](math-technical-review-20261026.md#2026-10-27--상경-수학-코칭-owner-실행-범위-확정).
