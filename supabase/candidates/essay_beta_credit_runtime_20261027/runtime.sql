@@ -43,7 +43,7 @@ create trigger beta_daily_immutable before update or delete on essay_beta_privat
  for each row execute function essay_beta_private.immutable();
 
 create function essay_beta_private.is_beta(p_grant uuid) returns boolean
-language sql stable set search_path='' as $$
+language sql stable security definer set search_path='' as $$
  select exists(select 1 from essay_beta_private.daily_grants where grant_id=p_grant)
 $$;
 
@@ -106,3 +106,7 @@ end $$;
 revoke all on all functions in schema essay_beta_private from public,anon,authenticated,service_role;
 revoke all on function public.essay_beta_daily_claim() from public,anon,service_role;
 grant execute on function public.essay_beta_daily_claim() to authenticated;
+
+-- Existing legacy allocators execute as this non-login internal role.
+grant usage on schema essay_beta_private to essay_executor;
+grant execute on function essay_beta_private.is_beta(uuid) to essay_executor;

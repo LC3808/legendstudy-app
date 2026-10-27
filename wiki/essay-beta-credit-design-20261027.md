@@ -126,3 +126,9 @@ Owner P0-1에 따라 설계를 실제 SQL 및 WEB/Native 코드로 구현했다.
 4. 5대학 STANDBY 선행 미완료는 [현황](essay-all-university-standby-20261026.md) 그대로 유지. 코칭/537표시명 완료로 간주하지 않는다.
 
 복구는 후보 `rollback.sql`로 캠페인 중지. 기존 지급/원장/예약은 보존하며 beta 지급 이력이 있으면 무제한 구 allocator로 복귀하지 않는다. 미적용 후보이므로 재실행 금지 적용 이력은 아직 없다.
+
+### 승인 후 적용 시도 — 내부 역할 차단
+
+Owner SQL 설치 승인 수신. 운영 사전7 true 이후 apply_migration 두 시도는 owner/SET ROLE 권한 오류로 모두 rollback. 다시 사전7 true, 신규schema 부재 확인. 운영 기능 설치·지급·캠페인 활성화0.
+
+실제 원인: postgres는 essay_executor ADMIN membership을 갖지만 INHERIT=false/SET=false. 내부 owner 유지/테이블 직접 접근 차단을 보완한 격리37검사 PASS. 한시 SET membership을 같은 transaction 안에서 부여/자기 grantor만 회수하는 정확한 파일 `apply-with-temporary-role.sql` 준비. 기존 supabase_admin membership 유지 검증. 이 권한 변경은 별도 Owner 승인 요청이며 아직 실행하지 않았다. 기존 출처 quote-submit GAP도 유지.

@@ -54,7 +54,7 @@ create trigger beta_daily_immutable before update or delete on essay_beta_privat
  for each row execute function essay_beta_private.immutable();
 
 create function essay_beta_private.is_beta(p_grant uuid) returns boolean
-language sql stable set search_path='' as $$
+language sql stable security definer set search_path='' as $$
  select exists(select 1 from essay_beta_private.daily_grants where grant_id=p_grant)
 $$;
 
@@ -117,6 +117,13 @@ end $$;
 revoke all on all functions in schema essay_beta_private from public,anon,authenticated,service_role;
 revoke all on function public.essay_beta_daily_claim() from public,anon,service_role;
 grant execute on function public.essay_beta_daily_claim() to authenticated;
+
+-- Existing legacy allocators execute as this non-login internal role.
+grant usage on schema essay_beta_private to essay_executor;
+grant execute on function essay_beta_private.is_beta(uuid) to essay_executor;
+
+grant create on schema essay_private,math_private to essay_executor;
+reset role;
 CREATE OR REPLACE FUNCTION public.math_session_submit(p_exam uuid, p_key uuid, p_attempts uuid[], p_parent uuid DEFAULT NULL::uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -178,7 +185,9 @@ begin
  return rid;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.scaffold_legacy_essay_request_evaluation(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -231,7 +240,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.scaffold_request_v13(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -285,7 +296,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.credit_request_v2(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -343,7 +356,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION math_private.authorize_billing(uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -390,7 +405,9 @@ begin
  return decision;
 end$function$
 ;
+reset role;
 
+reset role;
 CREATE OR REPLACE FUNCTION essay_exam_private.reserve(p_account uuid, p_exam uuid, p_key uuid, p_snapshot jsonb, p_parent uuid DEFAULT NULL::uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -457,4 +474,6 @@ begin
  return rid;
 end $function$
 ;
+reset role;
+revoke create on schema essay_private,math_private from essay_executor;
 commit;

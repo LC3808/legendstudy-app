@@ -29,13 +29,14 @@ for row in rows:
   replacement=anchor+' and not essay_beta_private.is_beta(g.id)'
  assert after.count(anchor)==1,(row['name'],after.count(anchor))
  after=after.replace(anchor,replacement)
- patches.append(after+';'); baseline.append(before+';')
+ owner_role = 'essay_executor' if row['name'] in {'scaffold_legacy_essay_request_evaluation','scaffold_request_v13','credit_request_v2','authorize_billing'} else 'postgres'
+ patches.append(('set local role essay_executor;\n' if owner_role=='essay_executor' else 'reset role;\n')+after+';\nreset role;'); baseline.append(before+';')
  manifest.append({'function':reg,'before_md5':digest,'after_md5':hashlib.md5(after.encode()).hexdigest()})
 assert len(patches)==6
 (root/'allocators.sql').write_text('\n\n'.join(patches)+'\n')
 (root/'allocators-baseline.sql').write_text('\n\n'.join(baseline)+'\n')
 (root/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 (root/'precheck.sql').write_text('select '+',\n'.join(f"md5(pg_get_functiondef('{m['function']}'::regprocedure))='{m['before_md5']}' as allocator_{i+1}" for i,m in enumerate(manifest))+",\nto_regnamespace('essay_beta_private') is null as new_schema_absent;\n")
-(root/'apply.sql').write_text("-- NOT APPLIED. Owner approval required. No campaign activation or real grants.\nbegin;\nset local lock_timeout='5s';\ndo $guard$ begin\n"+'\n'.join(guards)+"\nend $guard$;\n"+(root/'runtime.sql').read_text()+'\n\n'.join(patches)+'\ncommit;\n')
+(root/'apply.sql').write_text("-- NOT APPLIED. Owner approval required. No campaign activation or real grants.\nbegin;\nset local lock_timeout='5s';\ndo $guard$ begin\n"+'\n'.join(guards)+"\nend $guard$;\n"+(root/'runtime.sql').read_text()+'\ngrant create on schema essay_private,math_private to essay_executor;\n'+'\n\n'.join(patches)+'\nrevoke create on schema essay_private,math_private from essay_executor;\ncommit;\n')
 (root/'rollback.sql').write_text("-- Safe shutdown preserves existing grants and reservation settlement.\n-- Do NOT restore old unscoped allocators while any beta grants remain.\nbegin;\nupdate essay_beta_private.campaigns set enabled=false where enabled;\ncommit;\n")
 print('Generated six exact allocator patches; candidate remains inactive.')

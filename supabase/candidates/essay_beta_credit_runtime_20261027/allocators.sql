@@ -1,3 +1,4 @@
+reset role;
 CREATE OR REPLACE FUNCTION public.math_session_submit(p_exam uuid, p_key uuid, p_attempts uuid[], p_parent uuid DEFAULT NULL::uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -59,7 +60,9 @@ begin
  return rid;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.scaffold_legacy_essay_request_evaluation(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -112,7 +115,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.scaffold_request_v13(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -166,7 +171,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION essay_private.credit_request_v2(p_attempt uuid, p_key uuid, p_regime text DEFAULT 'essay-v1.2'::text)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -224,7 +231,9 @@ begin
  return e.id;
 end$function$
 ;
+reset role;
 
+set local role essay_executor;
 CREATE OR REPLACE FUNCTION math_private.authorize_billing(uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -271,7 +280,9 @@ begin
  return decision;
 end$function$
 ;
+reset role;
 
+reset role;
 CREATE OR REPLACE FUNCTION essay_exam_private.reserve(p_account uuid, p_exam uuid, p_key uuid, p_snapshot jsonb, p_parent uuid DEFAULT NULL::uuid)
  RETURNS uuid
  LANGUAGE plpgsql
@@ -338,3 +349,4 @@ begin
  return rid;
 end $function$
 ;
+reset role;

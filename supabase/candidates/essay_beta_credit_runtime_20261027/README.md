@@ -33,3 +33,11 @@
 ## 생성/감사
 
 `build_candidate.py`는 읽기 전용 추출 `baseline.private.json`에서 정확히 6개의 선택부만 수정한다. `manifest.json`에 전후 hash를 보존한다. 전체 apply는 별도 Owner 승인 전 실행 금지.
+
+## 2026-10-27 승인 후 실제 적용 차단
+
+Owner가 본 패키지 설치를 승인했으나 운영 함수4개 owner는 essay_executor이고 postgres membership의 SET=false/INHERIT=false다. 첫 시도 owner 오류, 역할 전환 보완 후 두 번째 시도 SET ROLE 오류. 두 번 모두 transaction rollback 및 사전7 true로 원상태 확인. **현재 운영 미적용.**
+
+역할 재현 격리37검사 PASS. is_beta는 내부 executor만 호출 가능한 boolean SECURITY DEFINER로 보완(학생/서비스 역할 접근 금지, 테이블 직접 접근 금지). 내부 함수 소유자 보존 및 schema CREATE는 transaction 내 부여/회수.
+
+추가 승인 대상 `apply-with-temporary-role.sql`: postgres가 자기 grantor로 essay_executor SET membership만 transaction 내 추가하고, 기존6함수 변경 후 자기 membership만 revoke한다. 기존 supabase_admin grantor의 ADMIN=true/INHERIT=false/SET=false 행은 보존한다. 오류 시 전체 rollback. 격리 비슈퍼유저 CREATEROLE/admin membership으로 임시SET=true→원복false 및 원본membership 보존 확인. **권한 변경이므로 기존 SQL 승인에 포함했다고 가정하지 않고 별도 승인 대기.**

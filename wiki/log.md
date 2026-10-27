@@ -1,3 +1,7 @@
+## 2026-10-27 — 승인된 베타 SQL 적용 권한 차단
+
+운영 apply2시도 owner/SET권한 오류로 전부 rollback, 사전7 true 재확인. postgres→essay_executor SET=false. 격리37검사 및 한시역할원복 재현 PASS; 별도 권한 승인 대기. 신규 캠페인/지급0. [상세](essay-beta-credit-design-20261027.md#승인-후-적용-시도--내부-역할-차단).
+
 ## 2026-10-27 — 베타 일일 Credit 구현 후보
 
 기존 grant/finish 재사용 SQL·WEB/Native claim 연결 구현. 격리34/WEB17/Native3검사, 타입·lint·build·analyze PASS. 운영 SQL/배포/캠페인 활성화 미수행. 출처 확인 quote-submit 연결 미완료로 출시 차단. [구현·승인·재개](essay-beta-credit-design-20261027.md#2026-10-27--일일-지급-런타임-구현-운영-승인-대기).

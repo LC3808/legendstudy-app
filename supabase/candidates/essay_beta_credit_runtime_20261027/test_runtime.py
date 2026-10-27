@@ -20,6 +20,7 @@ U='00000000-0000-4000-8000-000000000002'
 E='10000000-0000-4000-8000-000000000001'; Q='20000000-0000-4000-8000-000000000001'
 C='30000000-0000-4000-8000-000000000001'
 sql("do $$begin if not exists(select 1 from pg_roles where rolname='authenticated') then create role authenticated;create role anon;create role service_role;create role essay_worker;end if;end $$;")
+sql("do $$begin if not exists(select 1 from pg_roles where rolname='essay_executor') then create role essay_executor;end if;end $$;")
 sql((root.parent/'admin_credit_operations_20261027/isolated-fixture.sql').read_text())
 sql('''create schema essay_exam_private;create schema math_private;
 create table public.essay_exams(id uuid primary key);
@@ -34,7 +35,12 @@ for row in base:
  if row['name'] in ('credit_post_grant','finish'): sql(row['definition'])
 # Install all actual allocator definitions without invoking unrelated engines.
 sql('set check_function_bodies=off;'+(root/'allocators-baseline.sql').read_text())
+sql('grant usage,create on schema essay_private,math_private to essay_executor;')
+for m in json.loads((root/'manifest.json').read_text()):
+ if not m['function'].startswith(('public.','essay_exam_private.')): sql('alter function '+m['function']+' owner to essay_executor;')
+sql('revoke create on schema essay_private,math_private from essay_executor;')
 sql('set check_function_bodies=off;'+(root/'apply.sql').read_text())
+ok('internal schema CREATE restored to false',sql("select not has_schema_privilege('essay_executor','essay_private','CREATE') and not has_schema_privilege('essay_executor','math_private','CREATE')")=='t')
 ok('all eleven initial postchecks', all(v=='t' for v in sql((root/'postcheck.sql').read_text()).split('|')))
 ok('guarded apply rejects duplicate schema/modified baseline', sql("select to_regnamespace('essay_beta_private') is not null")=='t')
 sql('set check_function_bodies=off;'+(root/'apply.sql').read_text(),fail='BASELINE_CHANGED')
@@ -43,6 +49,9 @@ sql(f"insert into public.essay_exams values('{E}');insert into public.essay_ques
 with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
  responses=list(pool.map(lambda _:json.loads(actor('select public.essay_beta_daily_claim()')),range(100)))
 G=responses[0]['grant_id']
+ok('internal executor identifies beta without table access',sql(f"set role essay_executor;select essay_beta_private.is_beta('{G}');")=='t')
+sql('set role essay_executor;select * from essay_beta_private.daily_grants;',fail='permission denied')
+ok('internal executor cannot read private grant rows',True)
 ok('100 concurrent claims produce one grant',len({x['grant_id'] for x in responses})==1)
 ok('exactly two credits posted',sql(f"select sum(balance_delta) from public.credit_transactions where grant_id='{G}'")=='2')
 ok('KST next midnight exclusive',sql(f"select expires_at=((created_at at time zone 'Asia/Seoul')::date+1)::timestamp at time zone 'Asia/Seoul' from public.credit_grants where id='{G}'")=='t')
