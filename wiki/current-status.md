@@ -1,6 +1,6 @@
 # Current Status
 
-[베타 출처확인 배포·캠페인 비활성/clock 권한 승인 대기](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 P0 광운/APP 미완료. 추가 이화·부산·덕성 자료 대기; 단답 시범 가천·국민·경북. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 

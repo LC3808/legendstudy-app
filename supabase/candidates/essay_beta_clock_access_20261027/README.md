@@ -1,4 +1,4 @@
-# Beta clock access — NOT APPLIED
+# Beta clock access — APPLIED / DO NOT RERUN
 
 Production browser exposed `permission denied for function clock`; claim owner postgres lacks EXECUTE on essay_executor-owned read-only clock. Existing tests used a privileged isolated role and missed this production ACL difference. Other claim/source dependencies were checked and are executable by postgres.
 
@@ -7,3 +7,5 @@ Approval scope: EXECUTE on exactly essay_private.clock() to server role postgres
 Run precheck.sql → apply.sql → postcheck.sql once after Owner approval. Prior beta/source SQL must not be rerun. Rollback requires the same temporary role mechanism and `revoke execute on function essay_private.clock() from postgres` as essay_executor; it restores the known claim error and is not a service recovery path. Campaign remains inactive throughout.
 
 Validation: isolated PostgreSQL non-superuser postgres reproduction, 6 assertions PASS (before denied, after allowed, SET restored, authenticated/anon blocked, actual clock call). Fixture rolls back completely.
+
+Owner approved; Production migration 20261027045140 applied 2026-10-27. Precheck3/postcheck5 all true. General-user WEB claim error cleared; source confirmation modal verified without final submit. Campaign inactive.

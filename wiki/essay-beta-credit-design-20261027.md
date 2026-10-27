@@ -1,6 +1,6 @@
 # 논술 LAB 무료 베타 Credit — 계약 분석·최소 변경안
 
-2026-10-27 Owner P1. **현재: DB·출처확인 WEB 배포 완료, 캠페인 비활성. 운영 clock 권한 오류로 마감 보류. 아래 초기 설계 기록은 역사적 근거이며 최신 상태는 마지막 절을 따른다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
+2026-10-27 Owner P1. **현재: DB·출처확인 WEB 운영 확인 완료, APP 개발검증 완료. 캠페인 비활성·활성화 별도 승인. 아래 초기 설계 기록은 역사적 근거이며 최신 상태는 마지막 절을 따른다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
 
 ## 확인 근거 — 운영 읽기 전용
 
@@ -159,3 +159,12 @@ Owner가 출처확인 SQL을 적용하고 사후5 true를 전달했으며, 동�
 2. 기존 답안으로 quote 확인창까지만 확인(최종 제출 금지). 운영 사진/학생 답안 임의확정 금지.
 3. 캠페인 시작·종료일, 승인된 전체 회차 allowlist와 수리 QA 근거를 Owner가 확정하고 별도로 활성화 승인해야 한다. 현재 자동 지급 대상 없음.
 4. WEB 복구는 이전 배포 c1465e956ea0c974331ed77e040fc6619a4c3915 또는 해당 코드 기반 재배포. 베타 이력이 생긴 뒤에는 서버 출처검증/대상차단을 제거하지 않는다. 캠페인 중지 SQL만 사용하며 기존 grant/예약/원장/History는 보존한다. APP은 이번 source 변경만 revert 가능.
+
+
+## 2026-10-27 — clock 권한 복구 및 WEB 출처 확인 완료
+
+Owner 승인 후 migration `20261027045140` (`essay_beta_clock_access_20261027`) 적용. 사전3·사후5 true: postgres clock 실행, 한시 SET 원복, authenticated/anon 차단, 캠페인 비활성. 앞 절의 clock 승인 대기 GAP은 해소됐다. 적용SQL 재실행 금지. 함수 본문/소유자·클라이언트 권한·학생 데이터 변경 없음.
+
+Production 일반 계정에서 재조회 오류 소멸, 한양2027모의인문 quote 확인창의 베타0/가입0/유료0/기타104, 이번 사용 관리자 지급1 및 명시적 동의 안내 확인. 독립 로컬 점검 입력으로 확인창만 열고 취소했으며 점검 문구는 비웠다. 최종 제출0·Provider0·Credit차감0, 기존 기록/초안 보존. WEB SHA는 `04aa7a8ac4ff47cec370afb1eb3c441b1cc2c285` 그대로이며 DB 권한 보완이라 재배포 불필요.
+
+WEB 운영 출처 확인 완료. APP 구현/6테스트/analyze/debug APK 완료는 개발환경 범위이며 실기기 베타 활성 캠페인 확인·스토어 배포는 미수행. 실제 지급/소진/자정/실패복구는 앞 절의 격리검사 근거이며 운영 E2E로 표시하지 않는다. 캠페인은 비활성 유지; Owner의 기간·대상 회차 확정 및 최종 활성화 승인이 남는다. 롤백/기존 원장 보존 규칙은 위 절 유지.
