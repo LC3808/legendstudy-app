@@ -1,6 +1,6 @@
 # Current Status
 
-2026-10-27: 동국6·숙명2·숭실1 신규 연결 및 숙명1·숭실3 부분 패키지 확장 적용. 로그인 복구·일반 계정 카드 확인, 전체 WEB/APP STANDBY는 미완료. [복구·SQL·재개 지점](essay-all-university-standby-20261026.md#2026-10-27--동국숙명숭실-미완료-연결-복구-진행-중).
+2026-10-27: 한국항공 사회4회차 WEB STANDBY 확인·배포. 동국6·숙명3·숭실4 전체 연결 적용, 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 출시준비 후.
 
