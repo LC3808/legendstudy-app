@@ -1,6 +1,6 @@
 # Current Status
 
-MY 2차 압축·⋯ 메뉴 Production 반영; 모바일 재확인 남음. [상태/복구](my-college-management-20261026.md#2026-10-27--2차-밀도관리-메뉴-보정).
+MY 압축 배포·모바일 확인 대기. [MY](my-college-management-20261026.md). 성장1/2/3회 그래프 배포, 별칭537검수/최근50한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 2026-10-27: 한국항공 사회4회차 WEB STANDBY 확인·배포. 동국6·숙명3·숭실4 전체 연결 적용, 광운/APP 미완료. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
