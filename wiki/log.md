@@ -1,3 +1,7 @@
+## 2026-10-27 — 광운 인문 WEB STANDBY 공개
+
+16회차32문항 Registry·공식자료·Essay 실행 연결, 운영 사전26/사후7 true. WEB a0b1bcf/Worker 202f8f62 배포. 일반계정 16회차 문항 표시·대표 PDF/저장/1Credit 출처확인 후 취소, Provider/차감0. APP 기기 없어 미확인. [적용SQL·복구·검증범위](essay-kwangwoon-standby-20261027.md).
+
 ## 2026-10-27 — 베타 clock 권한 복구·운영 출처 확인
 
 Owner 승인 migration20261027045140 적용, 사전3/사후5 true. 일반계정 조회 오류 해소·실제 출처확인창 확인 후 취소. 캠페인 비활성·차감/Provider0. [완료 범위·활성화 조건](essay-beta-credit-design-20261027.md#2026-10-27--clock-권한-복구-및-web-출처-확인-완료).

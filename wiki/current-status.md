@@ -2,9 +2,9 @@
 
 [베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 모바일 대기](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계/실화면 대기. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
-P0 광운/APP 미완료. 추가 이화·부산·덕성 자료 대기; 단답 시범 가천·국민·경북. [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
+[광운 인문 WEB 16회차·32문항 공개, APP 실기기 대기](essay-kwangwoon-standby-20261027.md). [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
-[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장) — 5대학 마감 후 상경 코칭 착수.
+[대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장).
 
 [고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 UI·미완료](essay-web-studio-ui-20261026.md).
 

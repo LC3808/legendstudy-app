@@ -1,0 +1,151 @@
+{
+  "applied": {
+    "appliedAt": "2026-10-27T05:33:33.262774+00:00",
+    "prechecks": 26,
+    "postchecks": 7,
+    "examCount": 16,
+    "providerCalls": 0
+  },
+  "deployment": {
+    "worker_version": "202f8f62-83ad-4ae8-9cc7-b4a576226e3b",
+    "worker_deployment": {
+      "id": "5e6ec397-86b6-4a0f-a85e-e0a69d0171c9"
+    },
+    "unchanged_bindings": true,
+    "pages_other_settings_preserved": true,
+    "web_deployed": true,
+    "registry_entries": 261,
+    "public_scope": 211,
+    "web": {
+      "id": "7eea1b34-3926-4fcd-a695-aeb5a3b4b3ea",
+      "stage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-27T05:35:54.444482Z",
+        "status": "success"
+      },
+      "commit": "a0b1bcf266c890556b81a1059e4fb90214bb219e"
+    }
+  },
+  "files": {
+    "registry.sql": "44a24f3d2a8614db8d2037975ebfbed4b861bff1450a5b0712c256584fe28d7b",
+    "owner-sql/precheck.sql": "a3bb883c54c5a2238521faa05ef5ff733c0c8d2b96185df6227a0e836c98de32",
+    "owner-sql/apply.private.sql": "86d531fd448460746c4e9dd01836b700ccfec767d40536eb73bfc490cc023884",
+    "owner-sql/postcheck.sql": "ff68976f63c665ba17a009ebfc3dacdc2e7744e99fee48301e3c955912b33217",
+    "owner-sql/rollback.sql": "b675a5552d27d71fdf9071f4ef95df688aa43fc115423760cc62666e39103338"
+  },
+  "exams": [
+    {
+      "examId": "de46f947-c033-5ec8-82ef-963f1742879e",
+      "year": 2022,
+      "kind": "admission",
+      "session": "1교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "ab5c4937-b96d-598e-97aa-ede8c3b2c79f",
+      "year": 2022,
+      "kind": "admission",
+      "session": "2교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "453ef860-10b8-5006-b9c1-a6f23570e1a3",
+      "year": 2022,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    },
+    {
+      "examId": "499fc506-e77a-5b43-8e6e-53cc12b70b24",
+      "year": 2023,
+      "kind": "admission",
+      "session": "1교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "19cd4b49-0485-5be2-8493-976bf3571a95",
+      "year": 2023,
+      "kind": "admission",
+      "session": "2교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "95d7e221-ca1d-58e3-8021-0f83a4e350e3",
+      "year": 2023,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    },
+    {
+      "examId": "5fb16b6a-1fa3-59b0-afed-c3125ec32908",
+      "year": 2024,
+      "kind": "admission",
+      "session": "1교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "d64c8d28-44d9-57be-91e0-2670f5151c63",
+      "year": 2024,
+      "kind": "admission",
+      "session": "2교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "1875970c-8310-5e9f-8936-aabadb8f6c37",
+      "year": 2024,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    },
+    {
+      "examId": "ebf16e22-1367-558c-96fe-7f12df395743",
+      "year": 2025,
+      "kind": "admission",
+      "session": "1교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "86fe45b6-60d4-59e4-a7d7-2f8da353e52e",
+      "year": 2025,
+      "kind": "admission",
+      "session": "2교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "65e879cd-0f1d-57cd-8735-77f8f988fa39",
+      "year": 2025,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    },
+    {
+      "examId": "cc5dfe4e-63ec-5877-be9a-8bdafbb97e8d",
+      "year": 2026,
+      "kind": "admission",
+      "session": "1교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "6a3cd3be-25b0-5431-98ad-eb2003ce841d",
+      "year": 2026,
+      "kind": "admission",
+      "session": "2교시",
+      "questionCount": 2
+    },
+    {
+      "examId": "b86df57f-a88e-5a11-a230-db15ee9a4f8e",
+      "year": 2026,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    },
+    {
+      "examId": "95487036-722b-5f90-bd14-106312f16c43",
+      "year": 2027,
+      "kind": "mock",
+      "session": null,
+      "questionCount": 2
+    }
+  ]
+}

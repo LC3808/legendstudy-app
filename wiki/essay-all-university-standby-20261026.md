@@ -180,3 +180,7 @@ APP은 위 5대학 모두 실기기 완료 근거가 없어 미확인으로 유�
 작업 파일: `/Users/woojinchang/development/legendstudy-materials/essay-validation-2026-10/incomplete-recovery-20261027/kwangwoon/source-groups.private.json`. 원본 경로·SHA256·페이지 수·의도/기준/해설 위치를 기록했고 원본을 수정하지 않았다. Registry ID·평가 패키지·학생용 문제 PDF 확정은 아직 남아 있다.
 
 일반 계정 Chrome에서 잔액104·논술 LAB 링크를 확인했으나 이후 브라우저 조회가 중단되어 추가 회차 STANDBY 증거를 확보하지 못했다. 기존 한국항공4·숙명1 WEB 증거는 위 기록대로 보존한다. APP 추가 확인 없음. 이번 Production SQL/배포/Provider/Credit 변경0. 배포 버전은 기존 마지막 확인 기록을 따르며 Git만으로 갱신을 추정하지 않는다. 기존 적용 SQL 재실행 금지·롤백 경로는 앞 절을 그대로 따른다.
+
+## 2026-10-27 — 광운대 인문 운영 연결 완료
+
+이전 광운대 미완료 상태를 갱신한다. 인문 수시10+모의6=16회차32문항을 실제 WEB 공개했다. 기존 자연1회차 보류 유지. 일반계정 전체 회차 표시 및 대표 PDF·저장·Credit 확인창 확인, Provider/차감0. APP 실기기는 기기 미연결로 미완료. [상세·SQL 재실행 금지·롤백](essay-kwangwoon-standby-20261027.md).
