@@ -12,6 +12,10 @@
 
 [2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
+## 2026-10-28 — APP 2차 검수 step 1: 자연·수리논술 첨삭 준비 중 안내
+
+자연·수리논술(사진·수식) 시험을 선택하면 답안 작성까지 진입한 뒤에야 첨삭 불가를 알게 되던 문제 수정. `_SourceWriter` 작성 영역 상단에 차분한 붉은 안내('수리논술 첨삭 서비스 준비 중', 'AI' 문구 미사용)를 추가. 노출 판정은 대학·계열명이 아닌 기존 공개 정책(`mathEvaluationAvailableProvider` + published `leaf_id`, Registry 문항 ID 기준)으로, 사진·수식(`inputMode=='image'`) 문항이 공개 전일 때만 표시. 입력 유형과 공개 상태 분리로 TEXT·혼합 시험 정책 불변. 제출 차단은 기존 서버/`_ExamSubmit`/`MathExamSession` 계약 유지(안내만 선제). `fvm flutter analyze` 0·`fvm flutter test` 1138 PASS/0 fail. WEB·DB·Worker·Credit·History 변경0. 코드 커밋 0fc745e. **Worker 장애·APP 상태관리(§12) 후속; Owner 승인 전 step 2(아코디언) 미진행, Codex 브랜치 미병합.** [로그](log.md#2026-10-28--app-2차-검수-step-1-자연수리논술-첨삭-준비-중-안내).
+
 ## 2026-10-28 — APP 실기기 검수 1차 수정 (논술 LAB 메인·시험 선택)
 
 Owner 실기기 검수 2번 항목 한정 수정: 시험 선택 후 문항 미선택 CTA '문제 선택' 표시(REVIEW_REQUIRED 오표기 '서비스 준비중' 수정; 첨삭 불가는 '첨삭 서비스 준비 중', 대학 전체 보류는 기존 유지), 논술 LAB 상단 '나의 논술랩'(→ `/lab/essay/growth`) 추가, Credit 문구 '현재 크레딧 N개'. 공개 판정·조회/계산 로직 불변. `fvm flutter analyze` 0·`fvm flutter test` 1136 PASS/0 fail. WEB·DB·Worker·Credit·History 변경0. 코드 커밋 68d89ff. **Owner 승인 전 답안 작성 화면(다음 단계) 미진행, Codex 브랜치 미병합.** [로그](log.md#2026-10-28--app-실기기-검수-1차-수정-논술-lab-메인시험-선택).

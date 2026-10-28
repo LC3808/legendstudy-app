@@ -5002,3 +5002,12 @@ Claude APP 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 733bad7
 Owner 실기기 검수 2번 항목 한정. (1) 시험 선택 후 문항 미선택 CTA를 '문제 선택'으로 표시 — REVIEW_REQUIRED 시험이 문항 선택 전 '서비스 준비중'으로 오표기되던 문제 수정. 문항 선택+첨삭 불가는 '첨삭 서비스 준비 중', 대학 전체 보류(isUniversityServicePreparing)는 기존 '서비스 준비중' 유지. 공개 판정은 기존 isUniversityServicePreparing+verification 계약 그대로, 특정 대학 수정 없음. (2) 논술 LAB 상단 메뉴에 '나의 논술랩'(→ `/lab/essay/growth`, 기존 성장 분석 화면 재사용) 추가. (3) Credit 표시 '사용 가능 크레딧 N개'→'현재 크레딧 N개'(조회·계산 로직 불변).
 수정: `lib/features/essay/source_catalog_page.dart`, `lib/features/credits/credit_balance.dart`. 테스트 갱신: `test/{source_catalog_widget,essay_multi_selection,ux_cleanup}_test.dart`.
 검증: `fvm flutter analyze` 0건, `fvm flutter test` 1136 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. BETA 배지·대학 목록·답안 작성·임시저장·제출·정산·결과·성장 그래프 미변경. 코드 커밋 68d89ff. Owner 실기기 검수·승인 전 다음 단계(답안 작성 화면) 미진행, Codex 브랜치 미병합.
+
+### 2026-10-28 — APP 2차 검수 step 1: 자연·수리논술 첨삭 준비 중 안내
+- 발견 문제: 자연·수리논술(사진·수식 답안) 시험을 선택하면 답안 작성 화면까지 진입해 작성한 뒤에야 첨삭이 불가능함을 알게 됨(건국 Worker 장애와 별개의 APP UX 결함).
+- 원인: 사진·수식 문항의 첨삭 공개 여부(Math 평가 공개)가 작성 영역에 안내되지 않음. WEB은 [공개 승인과 사진 입력 capability 분리·상단 붉은 안내](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리) 정책을 이미 적용. APP은 미반영.
+- 수정: `_SourceWriter`(문항별 작성 위젯) 작성 영역 상단에 차분한 붉은 안내(연한 붉은 배경·붉은 테두리·진한 붉은 제목) 추가. 제목 "수리논술 첨삭 서비스 준비 중", 본문 "더 정확한 풀이 분석과 단계별 코칭을 위해 서비스를 개선하고 있습니다. 첨삭 서비스는 준비가 완료되면 제공됩니다."(사용자 화면 'AI' 문구 미사용 정책 준수). 노출 조건은 대학·계열명이 아니라 기존 공개 정책 — `mathEvaluationAvailableProvider`(gateway.available) + 해당 Registry 문항 ID의 published `leaf_id` — 로 판단하며, 사진·수식(`inputMode=='image'`) 문항이 공개 전일 때만 표시. 입력 유형과 첨삭 공개 상태를 분리하여 TEXT 문항·혼합(상경) 시험의 입력 계약·공개 정책은 불변. 제출 차단은 기존 서버/`_ExamSubmit`/`MathExamSession` 계약 그대로 두고 안내만 선제 노출.
+- 수정 파일: `lib/features/essay/source_catalog_page.dart`(안내 위젯 `_ServicePreparingNotice` + 공개 정책 감지). 테스트: 신규 `test/essay_service_preparing_test.dart`(image 문항 안내 노출·text 문항 미노출), `test/source_catalog_widget_test.dart` image-first 재진입 복원 검증에 스크롤 보강(안내로 작성 영역이 길어진 레이아웃 대응).
+- 검증: `fvm flutter analyze` 0건, `fvm flutter test` 1138 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지.
+- Codex 통합 주의: `source_catalog_page.dart`는 Claude 담당 UI. Worker 장애(건국 등)와 APP 상태 관리 개선(지시서 §12: 100초 폴링·runId 복원·완료 후 결과 연결)은 후속 단계로, 이번 커밋에 미포함.
+- 코드 커밋 0fc745e. 롤백: `git revert 0fc745e`. Owner 실기기 검수·승인 전 step 2(문항별 아코디언) 미진행, Codex 브랜치 미병합.
