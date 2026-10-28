@@ -1450,11 +1450,13 @@ class _ExamSubmit extends ConsumerStatefulWidget {
   ConsumerState<_ExamSubmit> createState() => _ExamSubmitState();
 }
 
-class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
+class _ExamSubmitState extends ConsumerState<_ExamSubmit>
+    with WidgetsBindingObserver {
   bool serverReady = false,
       busy = false,
       polling = false,
-      eligibilityLoaded = false;
+      eligibilityLoaded = false,
+      foreground = true;
   Set<String> admittedQuestions = {};
   bool get ready {
     if (!serverReady || widget.included.isEmpty) return false;
@@ -1487,9 +1489,28 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   final submissionWait = Stopwatch();
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     statusPoll?.cancel();
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Pause status polling while backgrounded; resume (an immediate check) on
+    // return. The server evaluation keeps running regardless.
+    final resumed = state == AppLifecycleState.resumed;
+    foreground = resumed;
+    if (!resumed) {
+      statusPoll?.cancel();
+    } else if (submittedRun != null &&
+        runState != 'completed' &&
+        runState != 'failed') {
+      unawaited(pollStatus());
+    }
+  }
+
+  bool get runPending =>
+      submittedRun != null && runState != 'completed' && runState != 'failed';
 
   Future<void> pollStatus() async {
     if (polling) return;
@@ -1510,9 +1531,9 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         () => notice = switch (state) {
           'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
           'failed' => '첨삭을 완료하지 못했어요. 기록에서 처리 상태를 확인해 주세요.',
-          _ =>
-            '첨삭 중입니다. 화면을 닫아도 제출 기록은 유지됩니다. '
-                '${const ['오늘도 수고했어요.', '잠깐 어깨를 펴고 쉬어가세요.', '물 한 모금 마시고 오셔도 좋아요.'][(submissionWait.elapsed.inSeconds ~/ 15) % 3]}',
+          // Progress view shows the fixed "잠시 쉬어가세요" guidance instead of a
+          // per-poll notice, so no rotating or fabricated progress text here.
+          _ => '',
         },
       );
       if (state == 'failed' && submittedRequestKey != null) {
@@ -1536,13 +1557,18 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
     } finally {
       polling = false;
     }
-    if (mounted && submissionWait.elapsed < const Duration(seconds: 100)) {
-      statusPoll = Timer(const Duration(seconds: 3), pollStatus);
-    } else if (mounted) {
-      setState(
-        () =>
-            notice = '평가 완료를 아직 확인하지 못했어요. 다시 제출하지 말고 나의 첨삭 기록에서 상태를 확인해 주세요.',
-      );
+    // Keep checking while the screen is active and the run is still pending —
+    // no fixed 100s give-up — but back the interval off so a long evaluation is
+    // not polled at high frequency. Background pause/resume is handled in
+    // didChangeAppLifecycleState.
+    if (mounted && foreground && runPending) {
+      final elapsed = submissionWait.elapsed;
+      final interval = elapsed < const Duration(seconds: 30)
+          ? const Duration(seconds: 3)
+          : elapsed < const Duration(minutes: 2)
+          ? const Duration(seconds: 10)
+          : const Duration(seconds: 30);
+      statusPoll = Timer(interval, pollStatus);
     }
   }
 
@@ -1566,11 +1592,38 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     parentId = previousPaidId == null
         ? (widget.rewriteRun?['parent_id'] as String? ??
               widget.rewriteRun?['id'] as String?)
         : null;
     unawaited(check());
+    unawaited(restoreInFlightRun());
+  }
+
+  /// Re-attach to an evaluation that is still running when the student reopens
+  /// this screen, using the runId persisted alongside the submission key. Never
+  /// creates a new request or resubmits — it only resumes status polling.
+  Future<void> restoreInFlightRun() async {
+    try {
+      final saved = await pending.loadDraft();
+      if (saved.body.isEmpty || !mounted) return;
+      final stored = jsonDecode(saved.body) as Map<String, dynamic>;
+      final runId = stored['runId'];
+      if (runId is! String) return;
+      setState(() {
+        submittedRun = runId;
+        submittedRequestKey = stored['key'] as String?;
+        runState = 'processing';
+        notice = '';
+      });
+      submissionWait
+        ..reset()
+        ..start();
+      await pollStatus();
+    } catch (_) {
+      /* No resumable run; leave the form ready. */
+    }
   }
 
   ExamSubmissionGateway? gateway() {
@@ -1811,11 +1864,23 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         throw StateError('제출 상태를 확인하지 못했어요. 같은 답안으로 다시 확인해 주세요.');
       }
       if (mounted) {
+        final runId = result!['runId'] as String;
+        // Persist the runId beside the submission key so reopening this screen
+        // resumes polling the same run instead of losing it.
+        final saved = await pending.loadDraft();
+        if (saved.body.isNotEmpty) {
+          final stored = jsonDecode(saved.body) as Map<String, dynamic>;
+          await pending.saveLocalDraft(
+            jsonEncode({...stored, 'runId': runId}),
+            saved.revision,
+          );
+        }
+        if (!mounted) return;
         setState(() {
-          submittedRun = result!['runId'] as String;
+          submittedRun = runId;
           submittedRequestKey = key;
           runState = 'processing';
-          notice = '답안을 제출했어요. 처리 상태를 확인합니다.';
+          notice = '';
         });
         unawaited(pollStatus());
       }
@@ -1842,86 +1907,194 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
     }
   }
 
+  void _openHistory() => Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => const SharedEssayHistoryPage()),
+  );
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      if (widget.rewriteRun == null && rewrites.isNotEmpty)
-        DropdownButtonFormField<String>(
-          initialValue: parentId ?? '',
-          decoration: const InputDecoration(labelText: '제출 방식'),
-          items: [
-            const DropdownMenuItem(value: '', child: Text('최초 첨삭')),
-            for (final r in rewrites)
-              DropdownMenuItem(
-                value: r['id'] as String,
-                child: Text(
-                  '무료 재첨삭 · ${r['created_at'].toString().substring(0, 10)}',
-                ),
+    children: submittedRun == null
+        ? _preSubmit()
+        : _progress(context),
+  );
+
+  // Pre-submit: choose 제출 방식, confirm 문항 수, request 첨삭.
+  List<Widget> _preSubmit() => [
+    if (widget.rewriteRun == null && rewrites.isNotEmpty)
+      DropdownButtonFormField<String>(
+        initialValue: parentId ?? '',
+        decoration: const InputDecoration(labelText: '제출 방식'),
+        items: [
+          const DropdownMenuItem(value: '', child: Text('최초 첨삭')),
+          for (final r in rewrites)
+            DropdownMenuItem(
+              value: r['id'] as String,
+              child: Text(
+                '무료 재첨삭 · ${r['created_at'].toString().substring(0, 10)}',
               ),
-          ],
-          onChanged: busy || submittedRun != null
-              ? null
-              : (v) => setState(() {
-                  parentId = v == '' ? null : v;
-                  notice = '';
-                }),
-        ),
-      if (parentId != null)
-        const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
-      const Divider(),
-      Text('제출 문항: ${widget.included.length}개'),
-      if (parentId != null && eligibleRewrite)
-        const Text('무료 재첨삭 · 추가 Credit 없음'),
-      if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
-      FilledButton(
-        style: FilledButton.styleFrom(
-          backgroundColor: AppTokens.textPrimary,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(48, 48),
-        ),
-        onPressed:
-            ready &&
-                submittedRun == null &&
-                !busy &&
-                (parentId == null || eligibleRewrite)
-            ? submit
-            : null,
-        child: Text(
-          busy
-              ? '처리 중…'
-              : ready
-              ? '첨삭 요청'
-              : '첨삭 서비스 준비 중',
+            ),
+        ],
+        onChanged: busy
+            ? null
+            : (v) => setState(() {
+                parentId = v == '' ? null : v;
+                notice = '';
+              }),
+      ),
+    if (parentId != null)
+      const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
+    const Divider(),
+    Text('제출 문항: ${widget.included.length}개'),
+    if (parentId != null && eligibleRewrite)
+      const Text('무료 재첨삭 · 추가 Credit 없음'),
+    if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
+    FilledButton(
+      style: FilledButton.styleFrom(
+        backgroundColor: AppTokens.textPrimary,
+        foregroundColor: Colors.white,
+        minimumSize: const Size(48, 48),
+      ),
+      onPressed: ready && !busy && (parentId == null || eligibleRewrite)
+          ? submit
+          : null,
+      child: Text(
+        busy
+            ? '처리 중…'
+            : ready
+            ? '첨삭 요청'
+            : '첨삭 서비스 준비 중',
+      ),
+    ),
+    if (parentId != null && eligibilityLoaded && !eligibleRewrite)
+      const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
+    if (parentId != null && !eligibilityLoaded)
+      const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
+    if (notice.isNotEmpty)
+      Padding(
+        padding: const EdgeInsets.only(top: AppTokens.space8),
+        child: Text(notice),
+      ),
+  ];
+
+  // Post-submit progress: the status is the primary information. Real server
+  // state only — no fabricated percentage or ETA.
+  List<Widget> _progress(BuildContext context) {
+    final failed = runState == 'failed';
+    final completed = runState == 'completed';
+    final included = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => widget.included.contains(q['key']));
+    return [
+      const SizedBox(height: AppTokens.space8),
+      Text(
+        failed
+            ? '첨삭을 완료하지 못했어요'
+            : completed
+            ? '첨삭이 완료됐어요'
+            : '첨삭을 진행하고 있어요',
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: AppTokens.textPrimary,
         ),
       ),
-      if (parentId != null && eligibilityLoaded && !eligibleRewrite)
-        const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
-      if (parentId != null && !eligibilityLoaded)
-        const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
-      if (submittedRun != null && runState != 'failed')
+      if (!failed) ...[
+        const SizedBox(height: AppTokens.space8),
+        Text(
+          completed ? '저장된 결과를 확인할 수 있어요.' : '답안을 분석하고 피드백을 준비하고 있습니다.',
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppTokens.space12),
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space16),
           child: StepProgressBar(
-            steps: const ['제출', '첨삭 중', '결과'],
-            activeIndex: runState == 'completed' ? 2 : 1,
-            done: runState == 'completed',
+            steps: const ['제출 완료', '첨삭 중', '결과 준비'],
+            activeIndex: completed ? 2 : 1,
+            done: completed,
           ),
         ),
-      if (notice.isNotEmpty) Text(notice),
-      if (submittedRun != null)
-        TextButton(onPressed: pollStatus, child: const Text('처리 상태 새로고침')),
-      if (notice.isNotEmpty)
-        TextButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const SharedEssayHistoryPage(),
+      ],
+      // 문제별 진행 상태 (구분선으로 구분).
+      for (final q in included) ...[
+        const Divider(height: 1),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(q['label'] as String, style: AppTokens.body),
+              ),
+              Text(
+                failed
+                    ? '재처리 필요'
+                    : completed
+                    ? '완료'
+                    : runState == 'processing'
+                    ? '첨삭 중'
+                    : '대기 중',
+                style: AppTokens.caption.copyWith(
+                  color: failed ? AppTokens.dangerInk : AppTokens.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+      const Divider(height: 1),
+      const SizedBox(height: AppTokens.space12),
+      if (failed)
+        Text(
+          notice.isEmpty ? '기록에서 처리 상태를 확인해 주세요.' : notice,
+          style: AppTokens.body.copyWith(color: AppTokens.dangerInk),
+        ),
+      if (completed)
+        Text(
+          notice.isEmpty ? '저장된 결과를 확인하세요.' : notice,
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
+      if (!failed && !completed) ...[
+        Text(
+          '잠시 쉬어가세요. 결과가 준비되면 확인할 수 있어요.',
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
+        if (notice.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: AppTokens.space4),
+            child: Text(
+              notice,
+              style: AppTokens.caption.copyWith(color: AppTokens.dangerInk),
             ),
           ),
-          child: const Text('나의 첨삭 기록'),
-        ),
-    ],
-  );
+      ],
+      const SizedBox(height: AppTokens.space4),
+      Text(
+        '화면을 닫아도 첨삭은 계속 진행됩니다.',
+        style: AppTokens.caption.copyWith(color: AppTokens.textTertiary),
+      ),
+      const SizedBox(height: AppTokens.space12),
+      Wrap(
+        spacing: AppTokens.space8,
+        runSpacing: AppTokens.space8,
+        children: [
+          OutlinedButton.icon(
+            onPressed: polling ? null : pollStatus,
+            icon: const Icon(Icons.refresh, size: AppTokens.iconDense),
+            label: const Text('처리 상태 새로고침'),
+          ),
+          if (completed)
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppTokens.textPrimary,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: _openHistory,
+              child: const Text('첨삭 결과 보기'),
+            ),
+          TextButton(onPressed: _openHistory, child: const Text('나의 첨삭 기록')),
+        ],
+      ),
+    ];
+  }
 }
 
 /// Review the existing per-question drafts before using the same exam submission API.
