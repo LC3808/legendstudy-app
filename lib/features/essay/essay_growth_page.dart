@@ -6,6 +6,7 @@ import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/shell_widgets.dart';
 import 'evaluation_report.dart';
 import 'growth_bars.dart';
+import 'growth_timeline.dart';
 import 'shared_history.dart';
 import 'shared_history_page.dart';
 
@@ -26,7 +27,7 @@ class EssayGrowthPage extends ConsumerWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Text('성장 분석'),
+            Text('나의 논술랩'),
             SizedBox(width: AppTokens.space8),
             LabBetaBadge(),
           ],
@@ -51,7 +52,7 @@ class _GrowthBody extends ConsumerStatefulWidget {
 
 class _GrowthBodyState extends ConsumerState<_GrowthBody> {
   // Render exams newest-first, five at a time; scrolling near the bottom loads
-  // the next five. The underlying history read stays capped at 50.
+  // the next five. Owner history pages are read before numbering rounds.
   static const _page = 5;
   int visible = _page;
   int _groupCount = 0;
@@ -89,7 +90,7 @@ class _GrowthBodyState extends ConsumerState<_GrowthBody> {
         ),
       ),
       data: (rows) {
-        // Only explicit parent lineage; independent submissions never merge.
+        // Presentation follows canonical learning identity, independently of billing.
         final groups = groupEssayHistory(rows)
             .where((g) => g.any((r) => r.evaluations.any(_completed)))
             .toList();
@@ -105,12 +106,12 @@ class _GrowthBodyState extends ConsumerState<_GrowthBody> {
             padding: const EdgeInsets.all(AppTokens.pagePadding),
             physics: const AlwaysScrollableScrollPhysics(),
             children: [
-              const Text(
-                '같은 문제·평가 기준으로 다시 첨삭받은 회차를 비교해 성장 변화를 보여드려요.',
-              ),
+              const Text('같은 문제·평가 기준으로 다시 첨삭받은 회차를 비교해 성장 변화를 보여드려요.'),
               const SizedBox(height: AppTokens.space8),
-              const Text(
-                '최근 50회차까지의 기록을 보여드려요. 서로 다른 시험의 점수는 평균하지 않아요.',
+              Text(
+                rows.any((r) => r.examData['_historyTruncated'] == true)
+                    ? '서버 조회 확장이 필요해 최근 50회차만 표시합니다. 전체 회차 번호는 표시하지 않아요.'
+                    : '시험별 성장 기록 · 서로 다른 시험의 점수는 평균하지 않아요.',
                 style: AppTokens.caption,
               ),
               const SizedBox(height: AppTokens.space16),
@@ -164,7 +165,47 @@ class _GrowthGroupCard extends ConsumerStatefulWidget {
 class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
   // Memoized so scrolling or a parent rebuild never re-fires the report read;
   // only loaded once the card is expanded.
-  Future<({EvaluationReport report, EvaluationReport? before})>? _report;
+  Future<Map<String, List<EvaluationReport?>>>? _report;
+
+  Future<Map<String, List<EvaluationReport?>>> loadReports(
+    SharedEssayHistory history,
+    List<SharedEssayRecord> rounds,
+  ) async {
+    final result = <String, List<EvaluationReport?>>{};
+    for (final row in rounds) {
+      if (row.exam) {
+        final values = await history.examRuns(row.id);
+        if (values.length != 1) throw StateError('HISTORY_UNAVAILABLE');
+        for (final q in row.examData['question_ids'] as List) {
+          final key = q as String;
+          EvaluationReport? report;
+          try {
+            report = examEvaluationReport(values.single, key);
+          } on FormatException {
+            /* Missing score stays missing. */
+          }
+          result.putIfAbsent(key, () => []).add(report);
+        }
+      } else {
+        final e = row.evaluations.firstWhere(_completed);
+        final report = await history.evaluationReport(
+          row.math,
+          e['id'] as String,
+        );
+        result.putIfAbsent('legacy', () => []).add(report.report);
+      }
+    }
+    return result;
+  }
+
+  @override
+  void didUpdateWidget(covariant _GrowthGroupCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    String fingerprint(List<SharedEssayRecord> rows) => rows.map((r) =>
+      '${r.id}:${r.examData['state']}:${r.examData['completed_at']}').join('|');
+    if (fingerprint(oldWidget.group) != fingerprint(widget.group)) _report = null;
+  }
+
   late bool expanded = widget.initiallyExpanded;
 
   @override
@@ -177,16 +218,11 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
         .where((r) => r.evaluations.any(_completed))
         .toList();
     final latest = completedRounds.last;
-    final latestEval = latest.evaluations.firstWhere(_completed);
     final client = ref.read(supabaseClientProvider);
     if (expanded) {
       _report ??= client == null
           ? null
-          : SharedEssayHistory(client, owner).evaluationReport(
-              latest.math,
-              latestEval['id'] as String,
-              exam: latest.exam,
-            );
+          : loadReports(SharedEssayHistory(client, owner), completedRounds);
     }
     final title = latest.examLabel.isEmpty
         ? latest.title
@@ -204,10 +240,7 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
                 children: [
                   Expanded(child: Text(title, style: AppTokens.cardTitle)),
                   const SizedBox(width: AppTokens.space8),
-                  Text(
-                    '${completedRounds.length}회차',
-                    style: AppTokens.caption,
-                  ),
+                  Text('${completedRounds.length}회차', style: AppTokens.caption),
                   Icon(
                     expanded ? Icons.expand_less : Icons.expand_more,
                     color: AppTokens.textTertiary,
@@ -221,9 +254,7 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
             if (_report == null)
               const Text('서버 연결을 준비하고 있어요.', style: AppTokens.caption)
             else
-              FutureBuilder<
-                ({EvaluationReport report, EvaluationReport? before})
-              >(
+              FutureBuilder<Map<String, List<EvaluationReport?>>>(
                 future: _report,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
@@ -238,28 +269,31 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
                       style: AppTokens.caption,
                     );
                   }
-                  final data = snapshot.data!;
-                  if (data.before != null) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text('최근 회차의 변화', style: AppTokens.secondary),
-                        const SizedBox(height: AppTokens.space8),
-                        GrowthBars(before: data.before!, after: data.report),
-                      ],
-                    );
-                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text('이번 회차 결과', style: AppTokens.secondary),
-                      const SizedBox(height: AppTokens.space8),
-                      _SingleRoundLevels(report: data.report),
-                      const SizedBox(height: AppTokens.space8),
-                      const Text(
-                        '같은 문제로 다시 첨삭받으면 회차별 성장 변화를 비교해 볼 수 있어요.',
-                        style: AppTokens.caption,
-                      ),
+                      for (final entry in snapshot.data!.entries) ...[
+                        Text(
+                          latest.exam
+                              ? essayExamQuestionLabel(completedRounds.firstWhere((r) => (r.examData['question_ids'] as List? ?? []).contains(entry.key)), entry.key)
+                              : '성장 요약',
+                          style: AppTokens.cardTitle,
+                        ),
+                        const SizedBox(height: 8),
+                        if (entry.value.length == 1 &&
+                            entry.value.single != null)
+                          _SingleRoundLevels(report: entry.value.single!)
+                        else if (entry.value.length == 2 &&
+                            entry.value.every((r) => r != null))
+                          GrowthBars(
+                            before: entry.value.first!,
+                            after: entry.value.last!,
+                            learning: true,
+                          )
+                        else
+                          GrowthTimeline(reports: entry.value),
+                        const SizedBox(height: 16),
+                      ],
                     ],
                   );
                 },
@@ -362,19 +396,36 @@ class _RoundList extends ConsumerWidget {
                   ),
                 ],
               ),
+              subtitle: row.exam
+                  ? Wrap(
+                      children: [
+                        Text(essayBillingType(row)),
+                        for (final e in row.evaluations.where(_completed))
+                          TextButton(
+                            onPressed: () => openSharedEssayResult(
+                              context,
+                              ref,
+                              owner,
+                              row,
+                              e,
+                            ),
+                            child: Text(
+                              '${essayExamQuestionLabel(row, (e['id'] as String).split('/').last)} 결과',
+                            ),
+                          ),
+                      ],
+                    )
+                  : null,
               trailing: row.evaluations.any(_completed)
                   ? const Icon(Icons.chevron_right, size: AppTokens.iconDense)
-                  : Text(
-                      switch ((row.evaluations
-                              .map((e) => (e['state'] as String?)?.toUpperCase())
-                              .firstOrNull)) {
-                        'PROCESSING' => '첨삭 중',
-                        'QUEUED' => '대기 중',
-                        'FAILED' => '첨삭 실패',
-                        _ => '진행 중',
-                      },
-                      style: AppTokens.caption,
-                    ),
+                  : Text(switch ((row.evaluations
+                        .map((e) => (e['state'] as String?)?.toUpperCase())
+                        .firstOrNull)) {
+                      'PROCESSING' => '첨삭 중',
+                      'QUEUED' => '대기 중',
+                      'FAILED' => '첨삭 실패',
+                      _ => '진행 중',
+                    }, style: AppTokens.caption),
               onTap: row.evaluations.any(_completed)
                   ? () => openSharedEssayResult(
                       context,

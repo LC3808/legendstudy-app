@@ -23,7 +23,10 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-사진 답안 OCR → TEXT 입력 보조: [기술 비교·로컬 인쇄 PoC·Claude 연동 설계](essay-photo-ocr-design-20261028.md) — 설계만, 손글씨/APP 미검증.
+APP 전체 인수 / 재작성 / paid learning round / 성장 / 사진 OCR: [최종 통합·검증·운영 적용 게이트](app-final-integration-20261028.md) → [성장 기존 정책](essay-growth-history-ui-20261026.md) → [사진 OCR 설계](essay-photo-ocr-design-20261028.md).
+
+
+사진 답안 OCR → TEXT 입력 보조: [기술 비교·로컬 인쇄 PoC·Claude 연동 설계](essay-photo-ocr-design-20261028.md) — [10/28 APP 구현·검증범위](app-final-integration-20261028.md), 실제 학생 손글씨 미검증.
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 

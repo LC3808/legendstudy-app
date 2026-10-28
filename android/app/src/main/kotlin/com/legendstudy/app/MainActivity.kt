@@ -37,6 +37,7 @@ class MainActivity : FlutterActivity() {
     }
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        AnswerOcrBridge(flutterEngine.dartExecutor.binaryMessenger)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/export").setMethodCallHandler { call, result ->
             if (call.method != "save") { result.notImplemented(); return@setMethodCallHandler }
             if (exportResult != null) { result.error("BUSY", "A save is in progress", null); return@setMethodCallHandler }

@@ -243,7 +243,8 @@ Future<void> openSharedEssayResult(
       client,
       owner,
     ).evaluationReport(row.math, e['id'] as String, exam: row.exam);
-    if (!context.mounted || ref.read(authStateProvider).value?.userId != owner) {
+    if (!context.mounted ||
+        ref.read(authStateProvider).value?.userId != owner) {
       return;
     }
     // Detail stays owner-scoped; an account switch removes the caller's page.
@@ -260,9 +261,8 @@ Future<void> openSharedEssayResult(
     );
   } catch (_) {
     if (context.mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('평가를 불러오지 못했어요.')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('평가를 불러오지 못했어요.')));
     }
   }
 }
@@ -331,9 +331,10 @@ class _Result extends ConsumerWidget {
         await Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (_) => SourceCatalogPage(
+              rewriteOwner: owner,
               rewriteRun: {
                 ...rows.single,
-                'answers': record.examData['answers'] ?? rows.single['answers'],
+                'answers': rows.single['answers'],
                 if (additional) '_additional': true,
               },
             ),

@@ -291,10 +291,11 @@ class EvaluationChange {
 
 List<EvaluationChange>? compareEvaluationReports(
   EvaluationReport before,
-  EvaluationReport after,
-) {
+  EvaluationReport after, {
+  bool requireLineage = true,
+}) {
   if (before.id.isEmpty ||
-      after.priorId != before.id ||
+      (requireLineage && after.priorId != before.id) ||
       before.pins.isEmpty ||
       before.pins.length != after.pins.length) {
     return null;

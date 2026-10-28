@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import Vision
+import ImageIO
 import Darwin
 import UserNotifications
 
@@ -20,6 +22,40 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let ocr = FlutterMethodChannel(name: "com.legendstudy.app/answer-ocr", binaryMessenger: binaryMessenger)
+    ocr.setMethodCallHandler { call, result in
+      guard call.method == "recognize" else { result(FlutterMethodNotImplemented); return }
+      guard let args = call.arguments as? [String: Any],
+            let typed = args["bytes"] as? FlutterStandardTypedData,
+            !typed.data.isEmpty, typed.data.count <= 20971520 else {
+        result(FlutterError(code: "INVALID_IMAGE", message: "Invalid image", details: nil)); return
+      }
+      DispatchQueue.global(qos: .userInitiated).async {
+        do {
+          guard let source = CGImageSourceCreateWithData(typed.data as CFData, nil),
+                let props = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+                let width = props[kCGImagePropertyPixelWidth] as? Int,
+                let height = props[kCGImagePropertyPixelHeight] as? Int,
+                width > 0, height > 0, Double(width) * Double(height) <= 20000000 else {
+            throw NSError(domain: "OCR", code: 1)
+          }
+          let request = VNRecognizeTextRequest()
+          request.recognitionLevel = .accurate
+          request.usesLanguageCorrection = false
+          let languages = try request.supportedRecognitionLanguages()
+          guard languages.contains("ko-KR") else { throw NSError(domain: "OCR", code: 2) }
+          request.recognitionLanguages = ["ko-KR", "en-US"]
+          try VNImageRequestHandler(data: typed.data, options: [:]).perform([request])
+          let lines: [[String: Any]] = (request.results ?? []).compactMap { observation in
+            guard let text = observation.topCandidates(1).first?.string else { return nil }
+            return ["text": text, "top": 1 - observation.boundingBox.maxY, "height": observation.boundingBox.height]
+          }
+          DispatchQueue.main.async { result(["engine": "ios-vision", "lines": lines]) }
+        } catch {
+          DispatchQueue.main.async { result(FlutterError(code: "OCR_FAILED", message: "Unable to recognize image", details: nil)) }
+        }
+      }
+    }
     let export = FlutterMethodChannel(name: "com.legendstudy.app/export", binaryMessenger: binaryMessenger)
     export.setMethodCallHandler { call, result in
       guard call.method == "save" else { result(FlutterMethodNotImplemented); return }

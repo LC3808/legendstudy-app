@@ -3,11 +3,21 @@ import 'package:flutter/material.dart';
 import 'evaluation_report.dart';
 
 class GrowthBars extends StatelessWidget {
-  const GrowthBars({required this.before, required this.after, super.key});
+  const GrowthBars({
+    required this.before,
+    required this.after,
+    this.learning = false,
+    super.key,
+  });
+  final bool learning;
   final EvaluationReport before, after;
   @override
   Widget build(BuildContext context) {
-    final changes = compareEvaluationReports(before, after);
+    final changes = compareEvaluationReports(
+      before,
+      after,
+      requireLineage: !learning,
+    );
     if (changes == null) {
       return const Text('같은 문제·평가 기준으로 비교할 수 있는 기록이 아직 부족해요.');
     }

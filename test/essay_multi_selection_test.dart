@@ -1,3 +1,4 @@
+import 'package:legendstudy_app/features/essay/math_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,11 +38,12 @@ void main() {
         ];
         final catalog = SourceCatalog(
           [
-            {'sourceUniversityId': 'u', 'name': '시험 대학'},
+            {'sourceUniversityId': 'u', 'universityId': 'u', 'name': '시험 대학'},
           ],
           [
             {
               'sourceUniversityId': 'u',
+              'universityId': 'u',
               'key': 'exam',
               'year': 2024,
               'kind': 'admission',
@@ -53,6 +55,9 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
+              publicServiceUniversitiesProvider.overrideWith(
+                (ref, owner) async => {'u'},
+              ),
               authStateProvider.overrideWith(
                 (ref) => Stream.value(const AuthStatus('owner')),
               ),

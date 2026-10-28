@@ -1,3 +1,5 @@
+import 'package:legendstudy_app/features/essay/math_gateway.dart';
+
 import 'dart:io';
 
 import 'package:legendstudy_app/features/essay/student_pdf_catalog.dart';
@@ -41,11 +43,16 @@ void main() {
       final q = approvedStudentPdfs.values.first;
       final data = SourceCatalog(
         [
-          {'sourceUniversityId': 'konkuk', 'name': '건국대학교'},
+          {
+            'sourceUniversityId': 'konkuk',
+            'universityId': 'konkuk',
+            'name': '건국대학교',
+          },
         ],
         [
           {
             'sourceUniversityId': 'konkuk',
+            'universityId': 'konkuk',
             'key': 'exam',
             'year': 2027,
             'kind': 'mock',
@@ -68,6 +75,17 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -136,6 +154,7 @@ void main() {
         [
           {
             'sourceUniversityId': 'yonsei',
+            'universityId': 'yonsei',
             'name': '연세대학교',
             'officialSourceUrl': 'https://example.org/',
           },
@@ -143,6 +162,7 @@ void main() {
         [
           {
             'sourceUniversityId': 'yonsei',
+            'universityId': 'yonsei',
             'key': 'held',
             'year': 2026,
             'kind': 'admission',
@@ -156,6 +176,17 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -168,26 +199,13 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         tester
-            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .widget<TextButton>(find.widgetWithText(TextButton, '첨삭 서비스 준비 중'))
             .onPressed,
         isNull,
       );
-      await tester.tap(
-        find.widgetWithText(FilledButton, '서비스 준비중'),
-        warnIfMissed: false,
-      );
+      await tester.tap(find.text('연세대학교'), warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(find.text('문제 1'), findsNothing);
-      await tester.tap(find.text('연세대학교'));
-      await tester.pumpAndSettle();
-      expect(find.text('문제 1'), findsOneWidget);
-      expect(find.text('공식 입학처 자료 확인 ↗'), findsOneWidget);
-      expect(
-        tester
-            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
-            .onPressed,
-        isNull,
-      );
       expect(find.byType(TextField), findsNothing);
     },
   );
@@ -199,6 +217,7 @@ void main() {
         [
           {
             'sourceUniversityId': 'konkuk',
+            'universityId': 'konkuk',
             'name': '건국대학교',
             'officialSourceUrl': 'https://example.org/',
           },
@@ -206,6 +225,7 @@ void main() {
         [
           {
             'sourceUniversityId': 'konkuk',
+            'universityId': 'konkuk',
             'key': 'registered',
             'verification': 'REVIEW_REQUIRED',
             'year': 2026,
@@ -220,6 +240,17 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -268,11 +299,16 @@ void main() {
             });
         final data = SourceCatalog(
           [
-            {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
+            {
+              'sourceUniversityId': 'fixture',
+              'universityId': 'fixture',
+              'name': '시험 대학',
+            },
           ],
           [
             {
               'sourceUniversityId': 'fixture',
+              'universityId': 'fixture',
               'key': 'exam',
               'year': 2025,
               'kind': 'admission',
@@ -286,6 +322,17 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
+              publicServiceUniversitiesProvider.overrideWith(
+                (ref, owner) async => {
+                  'konkuk',
+                  'fixture',
+                  for (var i = 0; i < 42; i++) 'u$i',
+                  ...essayUniversityCatalog
+                      .where((u) => u['sourceUniversityId'] != 'yonsei')
+                      .map((u) => u['universityId'])
+                      .whereType<String>(),
+                },
+              ),
               authStateProvider.overrideWith(
                 (ref) => Stream.value(const AuthStatus('owner')),
               ),
@@ -375,6 +422,17 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -441,7 +499,7 @@ void main() {
     });
   }
   testWidgets(
-    'rewrite starts blank, restores scoped draft, locks selection and respects HOLD',
+    'rewrite restores submitted answer and scoped draft, locks selection and respects HOLD',
     (tester) async {
       final disk = <String, String>{};
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -455,11 +513,16 @@ void main() {
           });
       final data = SourceCatalog(
         [
-          {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
+          {
+            'sourceUniversityId': 'fixture',
+            'universityId': 'fixture',
+            'name': '시험 대학',
+          },
         ],
         [
           {
             'sourceUniversityId': 'fixture',
+            'universityId': 'fixture',
             'key': 'exam',
             'dbExamId': 'exam-id',
             'year': 2024,
@@ -479,6 +542,17 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -486,6 +560,7 @@ void main() {
           child: MaterialApp(
             home: SourceCatalogPage(
               catalog: Future.value(data),
+              rewriteOwner: 'owner',
               rewriteRun: {
                 'id': 'parent',
                 'exam_id': 'exam-id',
@@ -509,7 +584,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         tester.widget<TextField>(find.byType(TextField)).controller!.text,
-        '',
+        '기존 제출 답안',
       );
       await tester.enterText(find.byType(TextField), '수정 중인 답안');
       await tester.pump(const Duration(seconds: 1));
@@ -539,11 +614,26 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       final universities = List.generate(
         42,
-        (i) => <String, dynamic>{'sourceUniversityId': 'u$i', 'name': '대학 $i'},
+        (i) => <String, dynamic>{
+          'sourceUniversityId': 'u$i',
+          'universityId': 'u$i',
+          'name': '대학 $i',
+        },
       );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => {
+                'konkuk',
+                'fixture',
+                for (var i = 0; i < 42; i++) 'u$i',
+                ...essayUniversityCatalog
+                    .where((u) => u['sourceUniversityId'] != 'yonsei')
+                    .map((u) => u['universityId'])
+                    .whereType<String>(),
+              },
+            ),
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
@@ -574,7 +664,6 @@ void main() {
       expect(find.text('첨삭 시작하기'), findsNothing);
       await tester.scrollUntilVisible(find.text('대학 20'), 300);
       await tester.pumpAndSettle();
-      await tester.drag(find.byType(ListView), const Offset(0, 180));
       await tester.pumpAndSettle();
       final y = tester.getTopLeft(find.text('대학 20')).dy;
       await tester.tap(find.text('대학 20'));

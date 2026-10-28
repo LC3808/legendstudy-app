@@ -1,3 +1,7 @@
+## 2026-10-28 — Codex APP 인수·추가4과제 통합 및 Release 후보
+
+별도 worktree에서 Codex 미커밋 보존0ebad6e→Claude eedd28f merge777911e. owner 이력 기반 재작성 metadata/답안 복원, runId 복귀·완료 결과 자동열기, 과금 분리 학습회차·전체 성장 그래프·5시험 표시, iOS Vision/Android ML Kit Korean OCR→확인TEXT→기존 draft 구현. 원본 두 작업트리 보존. Analyze0, 전체1158PASS/7skip+최종23대상PASS, 격리SQL123행 pagination/owner/redaction PASS. Android AAB/APK1.0.1(2026102802), iOSIPA1.0.1(21) 성공. 운영페이지SQL은 Owner 적용 대기; 실기기·손글씨·실정산 미검증, Provider/운영쓰기/Store업로드0. [구현·산출물·게이트](app-final-integration-20261028.md).
+
 ## 2026-10-28 — 논술 사진 OCR 설계·격리 인쇄 PoC
 
 iOS Vision/Android ML Kit 우선 후보, 실필기 미검증. Mac 합성3장×3회 CER/WER0·문단빈줄 유실, 실기기 일반화 금지. OCR사진과 기존 평가첨부 분리·학생확인 후 TEXT 저장 설계. APP/Claude/운영 변경·Provider0. [설계·출처·실측](essay-photo-ocr-design-20261028.md).

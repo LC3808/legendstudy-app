@@ -1,5 +1,11 @@
 # Durable Decisions
 
+## 2026-10-28 — APP 학습 회차와 과금 분리·사진 OCR 입력 보조
+
+Owner는 동일 canonical 시험·문항의 유료 후속 첨삭도 연속된 학습 성장으로 표시하도록 확정했다. 첫/2차/3차 첨삭 표시는 파생 UI이며 parent/paid lineage·무료14일·Credit 원장을 수정하지 않는다. 최신 시험 기본 펼침·이전 접힘·5개씩 표시, 동일 평가 pin만 비교하고 3회 이상 전체 꺾은선을 제공한다. 기존 [성장 정책](essay-growth-history-ui-20261026.md)을 확장한다.
+
+[사진 OCR 연구](essay-photo-ocr-design-20261028.md)의 APP 통합을 승인: iOS Vision/Android ML Kit Korean 기기 내 인식 → 학생 확인·수정 → 명시 합치기/교체 → 기존 TEXT 초안 저장. 이는 10/26 TEXT 사진 첨부 금지의 평가 입력 계약을 변경하지 않는다. OCR 사진은 평가 첨부가 아니며 자동제출/유료 API/실제 Provider 검증은 금지. Claude eedd28f 작업을 보존해 별도 Worktree에서 통합한다. [구현 및 남은 게이트](app-final-integration-20261028.md).
+
 ## 2026-10-27 — MY 지원 현황 노출 및 성장 요약
 
 지원 현황은 기존 student 3학년/retaker에게만 노출한다. 다른 상태에서는 관심 대학만 표시하며 지원 기록은 보존한다. 프로필 저장 후 즉시 재계산한다. MY는 간결한 성장 그래프, 상세 평가·이력·피드백은 전용 LAB에서 제공한다. [기존 MY 정책을 계승한 최종 적용](my-college-management-20261026.md#2026-10-27--최종-my-통합학년별-노출성장-요약).

@@ -177,7 +177,7 @@ class SharedEssayHistory {
         ),
     ];
     records.sort((a, b) => b.at.compareTo(a.at));
-    return records;
+    return numberEssayLearningRounds(records);
   }
 
   Future<({EvaluationReport report, EvaluationReport? before})>
@@ -256,6 +256,48 @@ class SharedEssayHistory {
 
   Future<List<Map<String, dynamic>>> examRuns([String? id]) async {
     checkOwner();
+    if (id == null) {
+      final rows = <Map<String, dynamic>>[];
+      final ids = <String>{};
+      Map<String, dynamic>? cursor;
+      try {
+        do {
+          final page = await client.rpc<dynamic>(
+            'essay_exam_history_page',
+            params: {
+              'p_before_at': cursor?['at'],
+              'p_before_id': cursor?['id'],
+              'p_limit': 50,
+            },
+          );
+          checkOwner();
+          if (page is! Map ||
+              page['version'] != 'essay-exam-history-page-v1' ||
+              page['runs'] is! List) {
+            throw const FormatException('INVALID_HISTORY_PAGE');
+          }
+          for (final value in page['runs'] as List) {
+            final row = Map<String, dynamic>.from(value as Map);
+            if (row['id'] is! String || !ids.add(row['id'] as String)) {
+              throw const FormatException('REPEATED_HISTORY_PAGE');
+            }
+            rows.add(row);
+          }
+          final next = page['next'];
+          if (next != null &&
+              ((page['runs'] as List).isEmpty ||
+                  next is! Map ||
+                  next['id'] == cursor?['id'])) {
+            throw const FormatException('INVALID_HISTORY_CURSOR');
+          }
+          cursor = next == null ? null : Map<String, dynamic>.from(next as Map);
+        } while (cursor != null);
+        return rows;
+      } on PostgrestException catch (e) {
+        if (e.code != 'PGRST202' || rows.isNotEmpty) rethrow;
+        // Older deployments stay usable, but never pretend 50 rows is complete.
+      }
+    }
     dynamic data;
     try {
       data = await client.rpc<dynamic>(
@@ -273,7 +315,13 @@ class SharedEssayHistory {
       throw const FormatException('INVALID_RESPONSE');
     }
     return (data['runs'] as List)
-        .map((r) => Map<String, dynamic>.from(r as Map))
+        .map(
+          (r) => <String, dynamic>{
+            ...Map<String, dynamic>.from(r as Map),
+            if (id == null && (data['runs'] as List).length == 50)
+              '_historyTruncated': true,
+          },
+        )
         .toList();
   }
 
@@ -346,20 +394,24 @@ final sharedEssayHistoryProvider = FutureProvider.autoDispose
       return SharedEssayHistory(client, owner).read();
     });
 
-/// Group only explicit parent lineage; independent submissions never merge by exam.
+/// Learning presentation joins canonical exam/question sets, never billing rows.
 List<List<SharedEssayRecord>> groupEssayHistory(List<SharedEssayRecord> rows) {
   final groups = <String, List<SharedEssayRecord>>{};
   for (final row in rows) {
-    final root = row.exam
-        ? row.examData['parent_id'] as String? ?? row.id
-        : row.id;
-    groups.putIfAbsent('${row.math}:$root', () => []).add(row);
+    final exam = row.examData['exam_id'];
+    final key = row.exam && exam is String && exam.isNotEmpty ? 'exam:$exam' : essayExamGroupKey(row);
+    groups.putIfAbsent(key, () => []).add(row);
   }
   for (final group in groups.values) {
-    group.sort((a, b) => a.at.compareTo(b.at));
+    group.sort((a, b) {
+      final time = a.at.compareTo(b.at);
+      return time == 0 ? a.id.compareTo(b.id) : time;
+    });
   }
   final result = groups.values.toList()
-    ..sort((a, b) => b.last.at.compareTo(a.last.at));
+    ..sort(
+      (a, b) => essayCompletedAt(b.last).compareTo(essayCompletedAt(a.last)),
+    );
   return result;
 }
 
@@ -368,22 +420,54 @@ String essayExamGroupKey(SharedEssayRecord row) {
   final exam = row.examData['exam_id'];
   final questions = row.examData['question_ids'];
   if (!row.exam || exam is! String || questions is! List || questions.isEmpty) {
-    return '${row.math}:${row.id}';
+    return '${row.math}:${row.examData['parent_id'] ?? row.id}';
   }
   return '$exam:${(questions.cast<String>().toList()..sort()).join(',')}';
 }
 
 DateTime essayCompletedAt(SharedEssayRecord row) =>
     DateTime.tryParse(row.examData['completed_at'] as String? ?? '') ?? row.at;
-String essayHistoryType(SharedEssayRecord row) => row.exam
-    ? row.examData['parent_id'] != null
-          ? '무료 재첨삭'
-          : row.examData['previous_paid_run_id'] != null
-          ? '추가 첨삭'
-          : '최초 첨삭'
-    : row.rewrite
-    ? '재첨삭'
-    : '최초 첨삭';
+
+/// Derived only after the full owner-scoped read; failed requests are not rounds.
+List<SharedEssayRecord> numberEssayLearningRounds(
+  List<SharedEssayRecord> rows,
+) {
+  final numbers = <String, int>{};
+  for (final group in groupEssayHistory(rows)) {
+    if (group.any((r) => r.examData['_historyTruncated'] == true)) continue;
+    var round = 0;
+    for (final row in group) {
+      if (row.exam && row.examData['state'] == 'completed') {
+        numbers[row.id] = ++round;
+      }
+    }
+  }
+  return [
+    for (final row in rows)
+      SharedEssayRecord(
+        id: row.id,
+        math: row.math,
+        exam: row.exam,
+        at: row.at,
+        rewrite: row.rewrite,
+        evaluations: row.evaluations,
+        examData: {
+          ...row.examData,
+          if (numbers[row.id] != null) 'learning_round': numbers[row.id],
+        },
+      ),
+  ];
+}
+
+String essayHistoryType(SharedEssayRecord row) {
+  final round = row.examData['learning_round'];
+  if (round is int) return round == 1 ? '첫 첨삭' : '$round차 첨삭';
+  if (row.exam) return '첨삭 기록';
+  return row.rewrite ? '재첨삭' : '최초 첨삭';
+}
+
+String essayBillingType(SharedEssayRecord row) =>
+    row.examData['parent_id'] != null ? '무료 재첨삭' : 'Credit 첨삭';
 String essayAnswerVersion(SharedEssayRecord row) {
   final number = row.examData['submission_index'];
   if (number is int && number > 0) {
@@ -401,7 +485,9 @@ String essayExamQuestionLabel(SharedEssayRecord row, String questionId) {
   final questions = (row.examData['questions'] as List?)
       ?.cast<Map<String, dynamic>>();
   final label =
-      questions?.where((q) => q['dbQuestionId'] == questionId).firstOrNull?['label']
+      questions
+              ?.where((q) => q['dbQuestionId'] == questionId)
+              .firstOrNull?['label']
           as String?;
   if (label != null && label.isNotEmpty) return label;
   final ids = (row.examData['question_ids'] as List?)?.cast<String>();

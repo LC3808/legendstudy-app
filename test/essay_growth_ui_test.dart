@@ -34,7 +34,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('성장 분석'), findsOneWidget);
+      expect(find.text('나의 논술랩'), findsOneWidget);
       expect(find.byType(LabBetaBadge), findsOneWidget);
       expect(find.text('BETA'), findsOneWidget);
       expect(

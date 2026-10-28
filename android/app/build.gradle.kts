@@ -67,4 +67,7 @@ flutter {
 }
 
 // JVM tests cover owned activation lease decisions; OS DND still needs a device.
-dependencies { testImplementation("junit:junit:4.12") }
+dependencies {
+    testImplementation("junit:junit:4.12")
+    implementation("com.google.mlkit:text-recognition-korean:16.0.1")
+}

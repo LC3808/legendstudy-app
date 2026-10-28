@@ -71,6 +71,7 @@ void main() {
           at: DateTime.utc(2026, 10, 14),
           evaluations: const [],
           examData: {
+            'learning_round': parent == null ? 1 : 2,
             'university': '한양대학교',
             'displayExam': '2024 수시 논술 · 인문 오후 2',
             if (parent != null) 'parent_id': parent,
@@ -100,8 +101,8 @@ void main() {
         await tester.drag(find.byType(ListView),const Offset(0,-220));
         await tester.pumpAndSettle();
         expect(find.text('한양대학교'), findsNWidgets(2));
-        expect(find.text('최초 첨삭'), findsOneWidget);
-        expect(find.text('무료 재첨삭'), findsOneWidget);
+        expect(find.text('첫 첨삭'), findsOneWidget);
+        expect(find.text('2차 첨삭'), findsOneWidget);
         expect(find.text('추가 유료 첨삭'), findsNothing);
         final tiles = find.byType(ListTile);
         expect(
@@ -110,7 +111,7 @@ void main() {
                 find.descendant(of: tiles.first, matching: find.text('한양대학교')),
               )
               .dy,
-          lessThan(tester.getTopLeft(find.text('최초 첨삭')).dy),
+          lessThan(tester.getTopLeft(find.text('첫 첨삭')).dy),
         );
         final badge = tester.widget<DecoratedBox>(
           find.descendant(
@@ -124,7 +125,7 @@ void main() {
           (badge.decoration as BoxDecoration).color,
           AppTokens.textPrimary,
         );
-        await tester.ensureVisible(find.text('무료 재첨삭'));
+        await tester.ensureVisible(find.text('2차 첨삭'));
         expect(tester.takeException(), isNull);
       },
     );

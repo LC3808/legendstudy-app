@@ -15,25 +15,35 @@ import 'package:legendstudy_app/features/essay/source_draft.dart';
 void main() {
   Widget host(SourceCatalog catalog, Set<String> serviceable) {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async => null);
+        .setMockMethodCallHandler(
+          SourceDraftGateway.channel,
+          (call) async => null,
+        );
     return ProviderScope(
       overrides: [
+        publicServiceUniversitiesProvider.overrideWith(
+          (ref, owner) async => {'u'},
+        ),
         authStateProvider.overrideWith(
           (ref) => Stream.value(const AuthStatus('owner')),
         ),
-        serviceExamIdsProvider('owner').overrideWith((ref) async => serviceable),
+        serviceExamIdsProvider('owner')
+            .overrideWith((ref) async => serviceable),
       ],
-      child: MaterialApp(home: SourceCatalogPage(catalog: Future.value(catalog))),
+      child: MaterialApp(
+        home: SourceCatalogPage(catalog: Future.value(catalog)),
+      ),
     );
   }
 
   SourceCatalog catalogFor() => SourceCatalog(
     [
-      {'sourceUniversityId': 'u', 'name': '시험 대학'},
+      {'sourceUniversityId': 'u', 'universityId': 'u', 'name': '시험 대학'},
     ],
     [
       {
         'sourceUniversityId': 'u',
+        'universityId': 'u',
         'key': 'exam',
         'dbExamId': 'exam-db-1',
         'year': 2026,

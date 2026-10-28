@@ -191,6 +191,68 @@ class SourceCatalog {
     ]);
   }
 
+  /// Called only with a freshly owner-authorized history row. Browse metadata
+  /// never grants evaluation rights; retain only this run's canonical IDs.
+  static Future<SourceCatalog> forHistory(
+    Map<String, dynamic> run,
+    Future<SourceCatalog> Function(String?) load,
+  ) async {
+    final ids = (run['question_ids'] as List?)?.whereType<String>().toSet();
+    final answers = (run['answers'] as List?)?.cast<Map<String, dynamic>>();
+    if (run['state'] != 'completed' ||
+        run['id'] is! String ||
+        run['exam_id'] is! String ||
+        ids == null ||
+        ids.isEmpty ||
+        ids.length != (run['question_ids'] as List).length ||
+        answers == null ||
+        answers.length != ids.length ||
+        answers.map((a) => a['questionId']).toSet().length != ids.length ||
+        !answers.every(
+          (a) => ids.contains(a['questionId']) && a['body'] is String,
+        )) {
+      throw const FormatException('INVALID_HISTORY_IDENTITY');
+    }
+    final base = await load(null);
+    final universities = base.universities
+        .where(
+          (u) => run['universityId'] != null
+              ? u['universityId'] == run['universityId']
+              : u['name'] == run['university'],
+        )
+        .toList();
+    if (universities.length != 1) {
+      throw const FormatException('AMBIGUOUS_HISTORY_UNIVERSITY');
+    }
+    final source = universities.single['sourceUniversityId'] as String;
+    final catalog = await load(source);
+    final matches = catalog.exams
+        .where(
+          (e) =>
+              e['dbExamId'] == run['exam_id'] &&
+              e['sourceUniversityId'] == source,
+        )
+        .toList();
+    if (catalog.browseUnavailable || matches.length != 1) {
+      throw const FormatException('HISTORY_EXAM_UNAVAILABLE');
+    }
+    final exam = matches.single;
+    final questions = (exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => ids.contains(q['dbQuestionId']))
+        .toList();
+    if (questions.length != ids.length ||
+        questions.map((q) => q['dbQuestionId']).toSet().length != ids.length) {
+      throw const FormatException('HISTORY_QUESTION_MISMATCH');
+    }
+    return SourceCatalog(
+      [universities.single],
+      [
+        {...exam, 'questions': questions, 'historyRunId': run['id']},
+      ],
+    );
+  }
+
   static Future<SourceCatalog> load({
     String? accessToken,
     String? university,

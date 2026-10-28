@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+"""Run history pagination against a new, temporary LOCAL PostgreSQL cluster only."""
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+root = Path(__file__).resolve().parent.parent
+pg = Path(os.environ.get('PG_BIN', '/opt/homebrew/opt/postgresql@17/bin'))
+with tempfile.TemporaryDirectory(prefix='legendstudy-history-test-') as folder:
+    data = Path(folder) / 'data'
+    subprocess.run([str(pg / 'initdb'), '-D', str(data), '-A', 'trust'], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([str(pg / 'pg_ctl'), '-D', str(data), '-l', str(Path(folder)/'server.log'), '-o', f"-h '' -k {folder} -p 55439", 'start'], check=True)
+    try:
+        subprocess.run([str(pg / 'psql'), '-h', folder, '-p', '55439', '-d', 'postgres', '-v', 'ON_ERROR_STOP=1',
+            '-f', str(root/'test/sql/essay_history_fixture.sql'),
+            '-f', str(root/'supabase/migrations/20261028120000_essay_history_pagination.sql'),
+            '-f', str(root/'test/sql/essay_history_check.sql')], check=True)
+    finally:
+        subprocess.run([str(pg / 'pg_ctl'), '-D', str(data), 'stop'], check=True)

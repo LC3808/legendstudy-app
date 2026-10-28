@@ -1,0 +1,13 @@
+create role anon;
+create role authenticated;
+create schema auth;
+create schema math_private;
+create schema essay_exam_private;
+create function auth.uid() returns uuid language sql as $$select nullif(current_setting('fixture.user',true),'')::uuid$$;
+create function math_private.require_active(uuid[]) returns void language plpgsql as $$begin if auth.uid() is null then raise exception 'ACCOUNT_UNAVAILABLE';end if;end$$;
+create table public.credit_accounts(id uuid,user_id uuid);
+create table essay_exam_private.runs(id uuid primary key,created_at timestamptz,account_id uuid);
+create function public.essay_exam_history(p_run uuid) returns jsonb language sql as $$ select jsonb_build_object('runs',coalesce(jsonb_agg(jsonb_build_object('id',r.id,'created_at',r.created_at,'answers','private','result','private')), '[]')) from essay_exam_private.runs r join public.credit_accounts a on a.id=r.account_id where r.id=p_run and a.user_id=auth.uid() $$;
+insert into credit_accounts values ('00000000-0000-0000-0000-000000000001','00000000-0000-0000-0000-000000000001'),('00000000-0000-0000-0000-000000000002','00000000-0000-0000-0000-000000000002');
+insert into essay_exam_private.runs select lpad(to_hex(i),32,'0')::uuid,'2026-10-28','00000000-0000-0000-0000-000000000001' from generate_series(1,123)i;
+insert into essay_exam_private.runs values ('ffffffff-ffff-ffff-ffff-ffffffffffff','2026-10-29','00000000-0000-0000-0000-000000000002');

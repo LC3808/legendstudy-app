@@ -1,6 +1,6 @@
 # 논술 LAB 사진 → TEXT 입력 보조 설계 — 2026-10-28
 
-상태: **설계 + macOS 합성 인쇄 PoC만 완료. APP 통합/실제 손글씨 검증/출시 승인 아님.**
+상태: 이 문서는 초기 설계·macOS 합성 인쇄 PoC 근거다. 이후 Owner 추가 지시로 [APP 온디바이스 OCR 구현·Release 빌드](app-final-integration-20261028.md)를 완료했다. 실제 학생 손글씨·실기기 QA·스토어 출시 검증은 미완료. 아래 ‘설계만/미통합’ 표현은 초기 조사 시점 기록이다.
 Owner 10/28 지시를 기존 [TEXT/공유 Gateway](phase3-service-20261022.md),
 [입력 축·사진 원본 원칙](roadmap-essay-lab.md),
 [Math 사진 추출 검토](math-technical-review-20261026.md),

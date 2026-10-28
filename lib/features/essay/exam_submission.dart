@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/supabase/supabase_providers.dart';
 import '../../core/network/review_read_only_client.dart';
 import '../../core/config/app_config.dart';
 
@@ -65,3 +68,9 @@ class ExamSubmissionGateway {
     }
   }
 }
+
+final examSubmissionGatewayProvider =
+    Provider.family<ExamSubmissionGateway?, String>((ref, owner) {
+      final client = ref.watch(supabaseClientProvider);
+      return client == null ? null : ExamSubmissionGateway(client, owner);
+    });
