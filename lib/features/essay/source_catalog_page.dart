@@ -464,30 +464,20 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
               isUniversityServicePreparing(uni) ||
               (exam?['verification'] == 'REVIEW_REQUIRED' &&
                   !reviewDraftAvailable);
-          // 사진·수식(수리·자연논술) 문항의 첨삭 공개 여부는 대학·계열 이름이 아니라
-          // 기존 공개 정책(Math 평가 공개 + 해당 Registry 문항 ID의 published leaf)
-          // 으로 판단한다. 공개 전인 사진·수식 문항이 있으면 시험·계열 선택 직후
-          // (문항 선택·작성 전)에 준비 중 안내를 표시한다. 입력 유형과 공개 상태는
-          // 분리하여 공개된 TEXT 문항은 그대로 이용할 수 있다.
-          final mathAvailable = ref
-              .watch(mathEvaluationAvailableProvider(widget.owner))
-              .value;
-          final mathLeaves =
-              ref.watch(mathCatalogProvider(widget.owner)).value ??
-              const <Map<String, dynamic>>[];
-          bool questionFeedbackHeld(Map<String, dynamic> q) {
-            if (q['inputMode'] != 'image') return false;
-            final published = mathLeaves.any(
-              (r) =>
-                  r['essay_exam_id'] == exam?['dbExamId'] &&
-                  r['essay_question_id'] == q['dbQuestionId'] &&
-                  r['leaf_id'] is String,
-            );
-            return !(mathAvailable == true && published);
-          }
-
+          // 첨삭 공개 보류(준비 중) 판정은 대학·계열 이름이나 inputMode(browse 투영에
+          // 없어 누락됨)가 아니라, 서버의 서비스 가능 시험 집합(service-status)을
+          // 기준으로 한다. 들어갈 수 있는(대학 보류·REVIEW_REQUIRED 아님) 시험인데
+          // 서비스 가능 집합에 없으면 아직 첨삭이 공개되지 않은 것이므로, 문항 선택·
+          // 작성 전에 준비 중 안내를 표시한다. 집합을 아직 받지 못했으면(로딩/오류)
+          // 거짓양성을 피하려 표시하지 않는다. 안내는 비차단 정보이므로 공개된 TEXT
+          // 문항의 작성·제출을 막지 않는다.
+          final serviceExams = ref.watch(serviceExamIdsProvider(widget.owner));
           final feedbackPreparing =
-              exam != null && questions.any(questionFeedbackHeld);
+              exam != null &&
+              !writingBlocked &&
+              exam['dbExamId'] is String &&
+              serviceExams.hasValue &&
+              !serviceExams.value!.contains(exam['dbExamId']);
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -1441,11 +1431,20 @@ class _ExamSubmit extends ConsumerStatefulWidget {
     required this.owner,
     required this.exam,
     required this.included,
+    this.onEdit,
+    this.onSubmittedChanged,
   });
   final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
+
+  /// Return to the writer to edit answers (shown beside 첨삭 요청).
+  final VoidCallback? onEdit;
+
+  /// Fires when a run becomes in-flight (or clears) so the review sheet can
+  /// switch to a progress-only view instead of keeping the answer-confirm UI.
+  final ValueChanged<bool>? onSubmittedChanged;
   @override
   ConsumerState<_ExamSubmit> createState() => _ExamSubmitState();
 }
@@ -1617,6 +1616,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit>
         runState = 'processing';
         notice = '';
       });
+      widget.onSubmittedChanged?.call(true);
       submissionWait
         ..reset()
         ..start();
@@ -1882,6 +1882,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit>
           runState = 'processing';
           notice = '';
         });
+        widget.onSubmittedChanged?.call(true);
         unawaited(pollStatus());
       }
     } catch (error) {
@@ -1949,22 +1950,43 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit>
     if (parentId != null && eligibleRewrite)
       const Text('무료 재첨삭 · 추가 Credit 없음'),
     if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
-    FilledButton(
-      style: FilledButton.styleFrom(
-        backgroundColor: AppTokens.textPrimary,
-        foregroundColor: Colors.white,
-        minimumSize: const Size(48, 48),
-      ),
-      onPressed: ready && !busy && (parentId == null || eligibleRewrite)
-          ? submit
-          : null,
-      child: Text(
-        busy
-            ? '처리 중…'
-            : ready
-            ? '첨삭 요청'
-            : '첨삭 서비스 준비 중',
-      ),
+    // [답안 수정] [첨삭 요청] 나란히 배치.
+    Row(
+      children: [
+        if (widget.onEdit != null) ...[
+          Expanded(
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppTokens.textPrimary,
+                side: const BorderSide(color: AppTokens.majorSurfaceBorder),
+                minimumSize: const Size(0, 48),
+              ),
+              onPressed: busy ? null : widget.onEdit,
+              child: const Text('답안 수정'),
+            ),
+          ),
+          const SizedBox(width: AppTokens.space12),
+        ],
+        Expanded(
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: AppTokens.textPrimary,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(0, 48),
+            ),
+            onPressed: ready && !busy && (parentId == null || eligibleRewrite)
+                ? submit
+                : null,
+            child: Text(
+              busy
+                  ? '처리 중…'
+                  : ready
+                  ? '첨삭 요청'
+                  : '첨삭 서비스 준비 중',
+            ),
+          ),
+        ),
+      ],
     ),
     if (parentId != null && eligibilityLoaded && !eligibleRewrite)
       const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
@@ -2148,69 +2170,100 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
     return missing;
   }
 
+  // Once a run is in flight the sheet switches to a progress-only view (the
+  // submit router renders the progress); the answer-confirm UI is hidden so the
+  // exam name, 답안 수정 and the checklist are not stacked under the progress.
+  bool submitting = false;
+
+  String get _examMeta {
+    final kind = widget.exam['kind'];
+    final kindLabel = kind == 'admission'
+        ? '수시논술'
+        : kind == 'mock'
+        ? '모의논술'
+        : '${kind ?? ''}';
+    return [
+      '${widget.exam['year'] ?? ''}학년도 $kindLabel'.trim(),
+      if (widget.exam['track'] is String) widget.exam['track'] as String,
+      if (widget.exam['session'] is String) widget.exam['session'] as String,
+    ].where((v) => v.trim().isNotEmpty).join(' · ');
+  }
+
   @override
-  Widget build(BuildContext context) => SafeArea(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
-          if (widget.exam['universityName'] != null)
-            Text(widget.exam['universityName'] as String),
-          Text(
-            [
-              if (widget.exam['year'] != null) '${widget.exam['year']}학년도',
-              widget.exam['kind'] == 'admission'
-                  ? '수시 논술'
-                  : widget.exam['kind'] == 'mock'
-                  ? '모의논술'
-                  : '',
-              widget.exam['track'],
-              widget.exam['session'],
-            ].whereType<String>().where((v) => v.isNotEmpty).join(' · '),
-          ),
-          const Divider(),
-          for (final q
-              in (widget.exam['questions'] as List)
-                  .cast<Map<String, dynamic>>())
-            CheckboxListTile(
-              title: Text(q['label'] as String),
-              value: selected.contains(q['key']),
-              onChanged: widget.rewriteRun != null
-                  ? null
-                  : (v) => setState(() {
-                      if (v == true) {
-                        selected.add(q['key'] as String);
-                      } else {
-                        selected.remove(q['key']);
-                      }
-                    }),
-            ),
-          FutureBuilder<List<String>>(
-            future: missingAnswers(),
-            builder: (context, snapshot) => snapshot.hasError
-                ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
-                : Text(
-                    (snapshot.data ?? []).isEmpty
-                        ? ''
-                        : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+  Widget build(BuildContext context) {
+    final questions = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>();
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (!submitting) ...[
+              // 시험명은 한 번만: 대학명 + 한 줄 요약.
+              Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
+              if (widget.exam['universityName'] != null) ...[
+                const SizedBox(height: AppTokens.space8),
+                Text(
+                  widget.exam['universityName'] as String,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ],
+              if (_examMeta.isNotEmpty)
+                Text(
+                  _examMeta,
+                  style: AppTokens.secondary.copyWith(
+                    color: AppTokens.textSecondary,
                   ),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('답안 수정'),
-          ),
-          _RoundSubmitRouter(
-            owner: widget.owner,
-            exam: widget.exam,
-            included: selected,
-            rewriteRun: widget.rewriteRun,
-          ),
-        ],
+                ),
+              const Divider(),
+              for (final (i, q) in questions.indexed) ...[
+                if (i > 0)
+                  const Divider(color: Color(0xFF636363), height: 1),
+                CheckboxListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(q['label'] as String),
+                  value: selected.contains(q['key']),
+                  onChanged: widget.rewriteRun != null
+                      ? null
+                      : (v) => setState(() {
+                          if (v == true) {
+                            selected.add(q['key'] as String);
+                          } else {
+                            selected.remove(q['key']);
+                          }
+                        }),
+                ),
+              ],
+              FutureBuilder<List<String>>(
+                future: missingAnswers(),
+                builder: (context, snapshot) => snapshot.hasError
+                    ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
+                    : Text(
+                        (snapshot.data ?? []).isEmpty
+                            ? ''
+                            : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+                      ),
+              ),
+              const SizedBox(height: AppTokens.space8),
+            ],
+            // [답안 수정]은 제출 라우터가 [첨삭 요청]과 나란히 렌더한다.
+            _RoundSubmitRouter(
+              owner: widget.owner,
+              exam: widget.exam,
+              included: selected,
+              rewriteRun: widget.rewriteRun,
+              onEdit: () => Navigator.pop(context),
+              onSubmittedChanged: (value) {
+                if (mounted) setState(() => submitting = value);
+              },
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Read-only entry independent of answer submission/readiness. Same native viewer
@@ -2276,11 +2329,15 @@ class _RoundSubmitRouter extends ConsumerWidget {
     required this.exam,
     required this.included,
     this.rewriteRun,
+    this.onEdit,
+    this.onSubmittedChanged,
   });
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
   final Map<String, dynamic>? rewriteRun;
+  final VoidCallback? onEdit;
+  final ValueChanged<bool>? onSubmittedChanged;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final catalog = ref.watch(mathCatalogProvider(owner));
@@ -2297,14 +2354,31 @@ class _RoundSubmitRouter extends ConsumerWidget {
         .toList();
     if (selected.isNotEmpty &&
         selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      return MathExamSession(
-        key: ValueKey(
-          '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
-        ),
-        owner: owner,
-        exam: exam,
-        selected: included,
-        leaves: leaves,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (onEdit != null)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppTokens.textPrimary,
+                  side: const BorderSide(color: AppTokens.majorSurfaceBorder),
+                ),
+                onPressed: onEdit,
+                child: const Text('답안 수정'),
+              ),
+            ),
+          MathExamSession(
+            key: ValueKey(
+              '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
+            ),
+            owner: owner,
+            exam: exam,
+            selected: included,
+            leaves: leaves,
+          ),
+        ],
       );
     }
     return _ExamSubmit(
@@ -2312,6 +2386,8 @@ class _RoundSubmitRouter extends ConsumerWidget {
       exam: exam,
       included: included,
       rewriteRun: rewriteRun,
+      onEdit: onEdit,
+      onSubmittedChanged: onSubmittedChanged,
     );
   }
 }

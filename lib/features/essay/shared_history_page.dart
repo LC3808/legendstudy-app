@@ -408,15 +408,11 @@ class _Result extends ConsumerWidget {
                         ),
                         EssayExamBadges(
                           data: record.examData,
-                          questionLabel:
-                              (record.examData['questions'] as List? ?? [])
-                                      .cast<Map<String, dynamic>>()
-                                      .where(
-                                        (q) => q['dbQuestionId'] == questionId,
-                                      )
-                                      .firstOrNull?['label']
-                                  as String? ??
-                              '문항 정보 확인 중',
+                          // Registry label, else the run's real question number;
+                          // never a stuck "문항 정보 확인 중".
+                          questionLabel: record.exam
+                              ? essayExamQuestionLabel(record, questionId)
+                              : '문항',
                         ),
                         Wrap(
                           spacing: 8,
