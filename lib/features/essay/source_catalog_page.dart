@@ -642,6 +642,55 @@ String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
     ? question
     : '$question:${run['_additional'] == true ? 'additional' : 'rewrite'}:${run['id']}';
 
+/// Calm red "service preparing" banner shown above the answer area when a
+/// photo/math (수리·자연논술) question's feedback is not yet published. Keeps the
+/// existing navy/grey system; red is reserved for this held-service notice.
+class _ServicePreparingNotice extends StatelessWidget {
+  const _ServicePreparingNotice();
+  @override
+  Widget build(BuildContext context) => Semantics(
+    container: true,
+    label: '수리논술 첨삭 서비스 준비 중 안내',
+    child: Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: AppTokens.space8),
+      padding: const EdgeInsets.all(AppTokens.space16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFDECEE),
+        border: Border.all(color: AppTokens.danger),
+        borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(Icons.schedule, size: 18, color: AppTokens.dangerInk),
+              SizedBox(width: AppTokens.space8),
+              Expanded(
+                child: Text(
+                  '수리논술 첨삭 서비스 준비 중',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: AppTokens.dangerInk,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppTokens.space8),
+          Text(
+            '더 정확한 풀이 분석과 단계별 코칭을 위해 서비스를 개선하고 있습니다. '
+            '첨삭 서비스는 준비가 완료되면 제공됩니다.',
+            style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
     super.key,
@@ -835,6 +884,27 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       widget.question['dbQuestionId'] as String? ?? '',
     );
     final positionKey = 'essay-pdf:${widget.owner}:${pdf?.id}:${pdf?.hash}';
+    // 첨삭 공개 정책(대학·계열 이름이 아닌 Registry 문항 ID 기준): 사진·수식 답안
+    // (수리·자연논술) 문항은 Math 첨삭이 공개(available)되고 해당 문항 leaf가
+    // published일 때만 첨삭할 수 있다. 아직 공개 전이면 답안 작성 전에 준비 중임을
+    // 알려, 학생이 작성을 마친 뒤에야 첨삭 불가를 발견하지 않도록 한다. 입력 유형과
+    // 첨삭 공개 상태는 분리하며, TEXT 문항·혼합 시험의 공개 정책은 그대로 둔다.
+    final mathAvailable = ref.watch(
+      mathEvaluationAvailableProvider(widget.owner),
+    );
+    final mathLeaves = ref.watch(mathCatalogProvider(widget.owner));
+    final questionLeafPublished =
+        (mathLeaves.value ?? const <Map<String, dynamic>>[]).any(
+          (r) =>
+              r['essay_exam_id'] == widget.exam['dbExamId'] &&
+              r['essay_question_id'] == widget.question['dbQuestionId'] &&
+              r['leaf_id'] is String,
+        );
+    final feedbackPreparing =
+        widget.question['inputMode'] == 'image' &&
+        mathAvailable.hasValue &&
+        mathLeaves.hasValue &&
+        !(mathAvailable.value == true && questionLeafPublished);
     return PopScope(
       canPop:
           (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
@@ -895,6 +965,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                               }
                             },
                     ),
+                  if (feedbackPreparing) const _ServicePreparingNotice(),
                   const SizedBox(height: 16),
                   if (pdf != null)
                     TextButton.icon(

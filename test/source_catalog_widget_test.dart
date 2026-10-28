@@ -340,6 +340,13 @@ void main() {
         await tester.ensureVisible(find.text('답안 작성하기'));
         await tester.tap(find.text('답안 작성하기'));
         await tester.pumpAndSettle();
+        // The 수리·자연논술 준비 중 안내가 작성 영역 상단에 들어가 화면이 길어지므로,
+        // 지연 빌드되는 ListView에서 복원된 답안 입력란을 먼저 보이게 한 뒤 확인한다.
+        await tester.scrollUntilVisible(
+          find.byType(TextField),
+          250,
+          scrollable: find.byType(Scrollable).first,
+        );
         expect(find.text('풀이 보충 설명'), findsOneWidget);
         expect(tester.takeException(), isNull);
       },
