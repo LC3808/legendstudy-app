@@ -652,47 +652,154 @@ class _SelectedAnswerWriter extends StatefulWidget {
 }
 
 class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
+  // The single expanded question (0 = 문제 1 on entry); -1 = all collapsed.
   int current = 0;
+  final Map<String, bool> written = {};
+
+  String get _examMeta => [
+    if (widget.exam['year'] != null) '${widget.exam['year']}학년도',
+    if (widget.exam['kind'] != null)
+      widget.exam['kind'] == 'admission'
+          ? '수시 논술'
+          : widget.exam['kind'] == 'mock'
+          ? '모의논술'
+          : widget.exam['kind'].toString(),
+    widget.exam['track'],
+    widget.exam['session'],
+    widget.exam['campus'],
+  ].whereType<String>().where((v) => v.isNotEmpty).join(' · ');
+
   @override
-  Widget build(BuildContext context) =>
-      isUniversityServicePreparing(widget.exam['sourceUniversityId'])
-      ? Scaffold(
-          appBar: AppBar(title: const Text('자료 조회')),
-          body: Column(
-            children: [
-              const FilledButton(onPressed: null, child: Text('서비스 준비중')),
-              if (widget.officialUrl != null)
-                ExternalLinkButton(
-                  uri: Uri.tryParse(widget.officialUrl!),
-                  label: '공식 입학처 자료 확인 ↗',
-                ),
-            ],
-          ),
-        )
-      : IndexedStack(
-          index: current,
+  Widget build(BuildContext context) {
+    if (isUniversityServicePreparing(widget.exam['sourceUniversityId'])) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('자료 조회')),
+        body: Column(
           children: [
-            for (var i = 0; i < widget.questions.length; i++)
-              TickerMode(
-                enabled: i == current,
+            const FilledButton(onPressed: null, child: Text('서비스 준비중')),
+            if (widget.officialUrl != null)
+              ExternalLinkButton(
+                uri: Uri.tryParse(widget.officialUrl!),
+                label: '공식 입학처 자료 확인 ↗',
+              ),
+          ],
+        ),
+      );
+    }
+    final questions = widget.questions;
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.universityName ?? '답안 작성')),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppTokens.space20,
+            AppTokens.space16,
+            AppTokens.space20,
+            AppTokens.space24,
+          ),
+          children: [
+            if (_examMeta.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppTokens.space12),
+                child: Text(
+                  _examMeta,
+                  style: AppTokens.secondary.copyWith(
+                    color: AppTokens.textSecondary,
+                  ),
+                ),
+              ),
+            for (var i = 0; i < questions.length; i++)
+              _AccordionItem(
+                key: ValueKey('panel-${questions[i]['key']}'),
+                title: questions[i]['label'] as String,
+                expanded: current == i,
+                written: written[questions[i]['key'] as String] ?? false,
+                // One panel open at a time; tapping the open one collapses it.
+                onTap: () => setState(() => current = current == i ? -1 : i),
                 child: _SourceWriter(
-                  key: ValueKey(widget.questions[i]['key']),
+                  key: ValueKey(questions[i]['key']),
                   owner: widget.owner,
-                  question: widget.questions[i],
+                  question: questions[i],
                   exam: widget.exam,
                   universityName: widget.universityName,
                   officialUrl: widget.officialUrl,
                   rewriteRun: widget.rewriteRun,
-                  selectedQuestions: widget.questions,
-                  onQuestionChanged: (key) => setState(
-                    () => current = widget.questions.indexWhere(
-                      (q) => q['key'] == key,
-                    ),
-                  ),
+                  selectedQuestions: questions,
+                  onContentChanged: (has) {
+                    if (mounted) {
+                      setState(
+                        () => written[questions[i]['key'] as String] = has,
+                      );
+                    }
+                  },
                 ),
               ),
           ],
-        );
+        ),
+      ),
+    );
+  }
+}
+
+/// One accordion question: a touchable header (문항 번호 + concise completion
+/// mark) over a body that stays mounted — so each question's answer, drafts and
+/// photos are preserved while switching — and is only shown while expanded.
+class _AccordionItem extends StatelessWidget {
+  const _AccordionItem({
+    super.key,
+    required this.title,
+    required this.expanded,
+    required this.written,
+    required this.onTap,
+    required this.child,
+  });
+  final String title;
+  final bool expanded, written;
+  final VoidCallback onTap;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      InkWell(
+        onTap: onTap,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 52),
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppTokens.body.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppTokens.textPrimary,
+                  ),
+                ),
+              ),
+              if (written) ...[
+                const Icon(
+                  Icons.check_circle,
+                  size: 18,
+                  color: AppTokens.success,
+                ),
+                const SizedBox(width: AppTokens.space8),
+              ],
+              Icon(
+                expanded ? Icons.expand_less : Icons.expand_more,
+                color: AppTokens.textTertiary,
+              ),
+            ],
+          ),
+        ),
+      ),
+      Offstage(
+        offstage: !expanded,
+        child: TickerMode(enabled: expanded, child: child),
+      ),
+      const Divider(height: 1),
+    ],
+  );
 }
 
 String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
@@ -753,7 +860,7 @@ class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
     super.key,
     required this.selectedQuestions,
-    required this.onQuestionChanged,
+    this.onContentChanged,
     this.rewriteRun,
     required this.owner,
     required this.question,
@@ -766,7 +873,11 @@ class _SourceWriter extends ConsumerStatefulWidget {
   final String? officialUrl, universityName;
   final Map<String, dynamic> question, exam;
   final List<Map<String, dynamic>> selectedQuestions;
-  final ValueChanged<String> onQuestionChanged;
+
+  /// Reports whether this question now has written content (text or photo), so
+  /// the accordion header can show a concise completion mark. Content-presence
+  /// only; never the saved/submitted state.
+  final ValueChanged<bool>? onContentChanged;
   @override
   ConsumerState<_SourceWriter> createState() => _SourceWriterState();
 }
@@ -815,6 +926,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       if (mounted) setState(() => photoNotice = '사진을 저장하지 못했어요. 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => imageSaving = false);
+      _notifyContent();
     }
   }
 
@@ -914,6 +1026,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       editor.text = d.body;
       controller!.addListener(refresh);
       setState(() {});
+      _notifyContent();
     } catch (_) {
       if (mounted) setState(() => error = '저장된 답안을 불러오지 못했어요.');
     }
@@ -956,6 +1069,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     if (mounted) setState(() {});
   }
 
+  void _notifyContent() => widget.onContentChanged?.call(
+    editor.text.trim().isNotEmpty || photo.isNotEmpty,
+  );
+
   @override
   void dispose() {
     controller?.removeListener(refresh);
@@ -982,67 +1099,29 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     final positionKey = 'essay-pdf:${widget.owner}:${pdf?.id}:${pdf?.hash}';
     // The 수리·자연논술 준비 중 안내는 시험·계열 선택 화면(답안 작성 진입 전)에서
     // 노출한다. 작성 화면 내부에서는 중복 표시하지 않는다.
+    // Embedded body for the accordion: no Scaffold/AppBar and no 문항 드롭다운
+    // (the accordion header carries the question number and switching). The
+    // exam/university meta is shown once above the accordion. Each panel keeps
+    // its own PopScope so an unsaved answer still blocks a back-gesture.
     return PopScope(
       canPop:
           (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
-      child: Scaffold(
-        appBar: AppBar(title: Text(widget.question['label'] as String)),
-        body: c == null
-            ? Center(child: Text(error ?? '답안을 불러오고 있어요.'))
-            : ListView(
-                padding: const EdgeInsets.all(20),
+      child: c == null
+          ? Padding(
+              padding: const EdgeInsets.all(AppTokens.space20),
+              child: Text(error ?? '답안을 불러오고 있어요.'),
+            )
+          : Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppTokens.space16,
+                AppTokens.space4,
+                AppTokens.space16,
+                AppTokens.space16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (widget.universityName != null)
-                    Text(
-                      widget.universityName!,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  Text(
-                    [
-                      if (widget.exam['year'] != null)
-                        '${widget.exam['year']}학년도',
-                      if (widget.exam['kind'] != null)
-                        widget.exam['kind'] == 'admission'
-                            ? '수시 논술'
-                            : widget.exam['kind'] == 'mock'
-                            ? '모의논술'
-                            : widget.exam['kind'].toString(),
-                    ].join(' '),
-                  ),
-                  Text(
-                    [
-                          widget.exam['track'],
-                          widget.exam['session'],
-                          widget.exam['campus'],
-                          widget.question['label'],
-                        ]
-                        .whereType<String>()
-                        .where((v) => v.isNotEmpty)
-                        .join(' · '),
-                  ),
-                  if (widget.selectedQuestions.length > 1)
-                    DropdownButton<String>(
-                      value: widget.question['key'] as String,
-                      isExpanded: true,
-                      hint: const Text('작성할 문항'),
-                      items: [
-                        for (final q in widget.selectedQuestions)
-                          DropdownMenuItem(
-                            value: q['key'] as String,
-                            child: Text(q['label'] as String),
-                          ),
-                      ],
-                      onChanged: imageSaving || syncBusy
-                          ? null
-                          : (value) async {
-                              if (value == null) return;
-                              await c.save();
-                              if (mounted && !c.dirty && !imageDirty) {
-                                widget.onQuestionChanged(value);
-                              }
-                            },
-                    ),
-                  const SizedBox(height: 16),
                   if (pdf != null)
                     TextButton.icon(
                       icon: const Icon(Icons.open_in_full),
@@ -1166,6 +1245,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                       maxLength: 30000,
                       onChanged: (value) {
                         c.edit(value);
+                        _notifyContent();
                         // Editing invalidates the previous manual-save result.
                         if (manualSaveNotice != null) {
                           setState(() => manualSaveNotice = null);
