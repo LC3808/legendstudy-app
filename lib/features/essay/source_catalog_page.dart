@@ -18,6 +18,7 @@ import 'answer_image.dart';
 import 'question_pdf.dart';
 
 import '../../core/links/external_link.dart';
+import '../../shared/widgets/shell_widgets.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -1017,6 +1018,25 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                     if (draft.syncNotice != null &&
                         (draft.syncConflict || draft.remoteBody != c.body))
                       Text(draft.syncNotice!),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: OutlinedButton.icon(
+                        onPressed:
+                            syncBusy || c.draftStatus == DraftStatus.saving
+                            ? null
+                            : () async {
+                                await c.save();
+                                if (imageDirty && !imageSaving) {
+                                  await savePhoto(photo);
+                                }
+                              },
+                        icon: const Icon(
+                          Icons.save_outlined,
+                          size: AppTokens.iconDense,
+                        ),
+                        label: const Text('임시저장'),
+                      ),
+                    ),
                     const Text('아직 첨삭 요청 전입니다.'),
                     if (draft.remote != null)
                       TextButton(
@@ -1059,11 +1079,6 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                 }
                               },
                         child: const Text('계정 답안 확인·저장'),
-                      ),
-                    if (c.dirty)
-                      TextButton(
-                        onPressed: c.save,
-                        child: const Text('저장 다시 시도'),
                       ),
                   ],
                   ...[
@@ -1158,6 +1173,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       : null;
   String? submittedRun;
   String? submittedRequestKey;
+  String? runState;
   Timer? statusPoll;
   final submissionWait = Stopwatch();
   @override
@@ -1180,6 +1196,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (!mounted) return;
       if (rows.length != 1) throw StateError('Submission history pending');
       final state = rows.single['state'];
+      runState = state as String?;
       setState(
         () => notice = switch (state) {
           'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
@@ -1361,49 +1378,32 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           creditSource = EssayCreditSource.parse(quote['credit_source'], quote['credits'] as int);
         }
         if (!mounted) return;
+        // Minimal confirmation: what is submitted + the server-confirmed Credit
+        // source in one line. Pressing 첨삭 시작 is the student's consent to that
+        // source; the server still re-checks the grant and fence on submit.
+        final creditLine = (quote['credits'] as int) == 0
+            ? '추가 Credit이 사용되지 않아요'
+            : creditSource?.usageLabel;
         final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
-              selected.length < (widget.exam['questions'] as List).length
-                  ? '작성하지 않은 답안이 있습니다'
-                  : '제출할 답안 확인',
-            ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    parentId == null
-                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 크레딧: ${quote['credits']}개'
-                        : '제출 문항: ${answers.length}개\n사용 크레딧: 0개 · 무료 재첨삭',
+            title: const Text('첨삭을 시작할까요?'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('작성 문항: ${answers.length}개'),
+                if (creditLine != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppTokens.space8),
+                    child: Text(creditLine),
                   ),
-                  if (creditSource != null) ...[
-                    Text('베타 Credit 잔액: ${creditSource.beta}개'),
-                    Text('신규가입 무료 Credit 잔액: ${creditSource.signup}개'),
-                    Text('유료 Credit 잔액: ${creditSource.paid}개'),
-                    if (creditSource.other > 0) Text('기타 지급 Credit 잔액: ${creditSource.other}개'),
-                    Text('이번 사용: ${creditSource.label} · ${quote['credits']}개'),
-                    if (parentId == null && creditSource.source != 'beta')
-                      const Text('베타 Credit 대신 위 출처의 Credit을 사용합니다. 동의한 경우에만 진행해 주세요.'),
-                  ],
-                  if (selected.length <
-                      (widget.exam['questions'] as List).length)
-                    Text(
-                      '${(widget.exam['questions'] as List).cast<Map<String, dynamic>>().where((q) => !widget.included.contains(q['key'])).map((q) => q['label']).join(', ')} 문항은 이번 첨삭에 포함되지 않습니다. 나중에 미제출 문항을 첨삭받으면 별도 회차로 1 크레딧이 사용됩니다.',
-                    ),
-                  for (var i = 0; i < answers.length; i++) ...[
-                    Text(selected[i]['label'] as String),
-                    Text(answers[i]['body'] as String? ?? '확인한 사진·수식 답안'),
-                  ],
-                ],
-              ),
+              ],
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('계속 작성'),
+                child: const Text('돌아가기'),
               ),
               FilledButton(
                 style: FilledButton.styleFrom(
@@ -1412,13 +1412,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
                   minimumSize: const Size(48, 48),
                 ),
                 onPressed: () => Navigator.pop(context, true),
-                child: Text(
-                  parentId != null
-                      ? '무료 재첨삭 요청'
-                      : previousPaidId != null
-                      ? '추가 첨삭 · 1 크레딧'
-                      : '첨삭 요청 · 1 크레딧',
-                ),
+                child: const Text('첨삭 시작'),
               ),
             ],
           ),
@@ -1452,6 +1446,7 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         setState(() {
           submittedRun = result!['runId'] as String;
           submittedRequestKey = key;
+          runState = 'processing';
           notice = '답안을 제출했어요. 처리 상태를 확인합니다.';
         });
         unawaited(pollStatus());
@@ -1508,11 +1503,8 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
       const Divider(),
       Text('제출 문항: ${widget.included.length}개'),
-      Text(
-        parentId != null && eligibleRewrite
-            ? '사용 크레딧: 0개 · 무료 재첨삭'
-            : '사용 크레딧: 서버 확인 필요',
-      ),
+      if (parentId != null && eligibleRewrite)
+        const Text('무료 재첨삭 · 추가 Credit 없음'),
       if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
       FilledButton(
         style: FilledButton.styleFrom(
@@ -1539,6 +1531,15 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
       if (parentId != null && !eligibilityLoaded)
         const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
+      if (submittedRun != null && runState != 'failed')
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space12),
+          child: StepProgressBar(
+            steps: const ['제출', '첨삭 중', '결과'],
+            activeIndex: runState == 'completed' ? 2 : 1,
+            done: runState == 'completed',
+          ),
+        ),
       if (notice.isNotEmpty) Text(notice),
       if (submittedRun != null)
         TextButton(onPressed: pollStatus, child: const Text('처리 상태 새로고침')),

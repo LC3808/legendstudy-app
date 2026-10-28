@@ -2,6 +2,7 @@ import 'evaluation_presentation.dart';
 import 'math_workspace_page.dart';
 import 'essay_sentence_review.dart';
 import 'shared_history_page.dart';
+import 'essay_growth_page.dart';
 import 'essay_live_pages.dart';
 import 'essay_live_controller.dart';
 
@@ -32,6 +33,10 @@ List<RouteBase> get essayRoutes => [
       GoRoute(
         path: 'history',
         builder: (_, _) => const SharedEssayHistoryPage(),
+      ),
+      GoRoute(
+        path: 'growth',
+        builder: (_, _) => const EssayGrowthPage(),
       ),
       GoRoute(
         path: 'write/:question',
@@ -697,27 +702,34 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 20),
-              Semantics(
-                liveRegion: true,
-                child: Text(
-                  live == null
-                      ? '첨삭 화면 예시를 준비하고 있어요.'
-                      : live!.message ?? '답안을 분석하고 있어요.',
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const StepProgressBar(
+                  steps: ['제출', '첨삭 중', '결과'],
+                  activeIndex: 1,
                 ),
-              ),
-              Text(
-                live == null
-                    ? '중복으로 제출하지 않아도 됩니다. 실제 AI 호출은 없습니다.'
-                    : live!.serverStatus?.creditMessage ??
-                          '서버의 처리 결과를 기다리고 있어요.',
-                textAlign: TextAlign.center,
-              ),
-            ],
+                const SizedBox(height: 20),
+                Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    live == null
+                        ? '첨삭 화면 예시를 준비하고 있어요.'
+                        : live!.message ?? '답안을 분석하고 있어요.',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Text(
+                  live == null
+                      ? '중복으로 제출하지 않아도 됩니다. 실제 AI 호출은 없습니다.'
+                      : live!.serverStatus?.creditMessage ??
+                            '서버의 처리 결과를 기다리고 있어요.',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -1250,6 +1262,10 @@ class _EssayResultViewState extends State<EssayResultView> {
                       style: AppTokens.caption,
                     ),
                   if (widget.header != null) widget.header!,
+                  // Lead with the overall assessment and its actions, then the
+                  // at-a-glance overview, then section-by-section detail.
+                  section('종합 평가', [e.summary], diagnostic: true),
+                  if (widget.summaryActions != null) widget.summaryActions!,
                   _answerOverview(e),
                   if (widget.comparison)
                     ExpansionTile(
@@ -1264,8 +1280,6 @@ class _EssayResultViewState extends State<EssayResultView> {
                         ],
                       ],
                     ),
-                  section('종합 평가', [e.summary], diagnostic: true),
-                  if (widget.summaryActions != null) widget.summaryActions!,
                   if (e.uncertainty != null)
                     section('판단을 보류한 부분', [e.uncertainty!]),
                   section('잘한 점', e.strengths, diagnostic: true),

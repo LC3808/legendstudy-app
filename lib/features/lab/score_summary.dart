@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../study/study_providers.dart';
 import '../study/scoring/scoring_models.dart';
 import '../study/scoring/scoring_pages.dart';
+import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/shell_widgets.dart';
 
 String mockScoreSummary(List<ScoringAttempt> attempts) {
@@ -55,10 +56,16 @@ class MyScoreSummary extends ConsumerWidget {
         ListTile(
           key: const Key('my-essay-lab'),
           contentPadding: EdgeInsets.zero,
-          title: const Text('논술 LAB'),
-          subtitle: const Text('내 답안과 첨삭 기록'),
+          title: Row(
+            children: const [
+              Flexible(child: Text('논술 LAB')),
+              SizedBox(width: AppTokens.space8),
+              LabBetaBadge(),
+            ],
+          ),
+          subtitle: const Text('성장 분석과 첨삭 기록'),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.push('/lab/essay'),
+          onTap: () => context.push('/lab/essay/growth'),
         ),
         const Divider(),
         ListTile(

@@ -129,7 +129,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
               child: ListTile(
                 title: Text('오늘 남은 베타 첨삭권 ${value.available}개'),
                 subtitle: const Text(
-                  '매일 첫 LAB 접속 시 2개 · 한국시간 자정 만료\n베타 대상 시험 전용 · 가입·구매 크레딧 별도 유지',
+                  '매일 첫 접속 시 2개 지급 · 자정 만료 · 베타 대상 시험 전용',
                 ),
               ),
             ),
