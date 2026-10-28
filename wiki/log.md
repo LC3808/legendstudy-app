@@ -5036,3 +5036,18 @@ Owner 최종 지시로 단계별 검수 절차를 폐기하고 전체 요구사�
 **Codex 통합 주의:** 모든 변경은 `claude/essay-app-beta-uiux-20261028` 한정, Codex 폴더/브랜치 미수정·미병합. Worker 복구와 충돌 가능 지점 없음(APP UI·상태조회·화면이동만, 기존 Gateway/RPC 계약 유지). 충돌 가능 파일: `source_catalog_page.dart`(Claude 담당 UI). 최종 통합은 Codex.
 
 **Commit:** 0fc745e(§3 1차) → d6fdd6e(wiki) → ebdc058(§3 재배치·§5·§6·§9·§11) → aeea9a0(§4) → fcafb83(§7·§8) → c61a898(§10). **롤백:** 범위별 `git revert <sha>` 또는 `git reset --hard 5eca473`(이번 일괄 작업 전체 되돌림, 로컬 한정). Owner 실기기 검수 대기.
+
+### 2026-10-28 — APP 실기기 검수 후속 수정 (2차 일괄)
+Owner iPhone 실기기 검수에서 발견된 P0/P1을 일괄 수정. 기존 PASS 기능(상단 메뉴·아코디언·임시저장·간결 Credit 확인창·문항 번호·사진 크롭 등) 미변경. WEB·DB·Worker·Credit·History·Registry·인증 계약 변경 0.
+
+- **§1 (P0) 자연·수리논술 준비 중 안내 전수 불일치** — 발견: 건국 모의 자연만 안내 표시되고 건국 수시 자연·동국·경희·고려 자연은 미표시. 원인: 1차 판정이 `inputMode=='image'`에 의존했으나 `inputMode`는 UI 선호값이며 **Registry browse 투영에 없어** 다수 시험에서 누락(WEB에서도 동일했던 버그). 수정: 판정을 서버 **서비스 가능 시험 집합(`serviceExamIdsProvider` = service-status)** 기준으로 변경 — 들어갈 수 있으나(대학 보류·REVIEW_REQUIRED 아님) 서비스 가능 집합에 없는 시험은 준비 중으로 안내. 집합 미수신(로딩/오류) 시 거짓양성 방지로 미표시. 대학·계열명·inputMode 비의존. 안내는 비차단(공개 TEXT 문항 작성/제출 유지).
+- **§2 (P0) 첨삭 진행 화면 분리** — 첨삭 요청이 접수되면(run in-flight) 리뷰 Bottom Sheet를 **진행 전용 뷰로 전환**(답안 확인·시험명·답안 수정 숨김). Bottom Sheet 중첩 없음. runId 복원·backoff 폴링·생명주기(§8) 유지.
+- **§3 (P0) 답안 확인 화면 정리** — 시험명 1회만(대학명 + "2025학년도 수시논술 · 인문사회Ⅰ" 한 줄), 문항 간 진회색 구분선, [답안 수정][첨삭 요청] 나란히(제출 라우터가 렌더; math 경로는 답안 수정 상단 배치).
+- **§4 (P0) 다시 써보기·재첨삭 연결** — 결과 화면 라벨 '문항 정보 확인 중' → `essayExamQuestionLabel`(Registry 라벨/실제 문항 번호)로 수정(APP). **재작성 진입 '작성 자료 확인 못함'은 Backend 범위**: `essay_exam_history` run이 `sourceUniversityId`/universityId를 포함하지 않고 STANDBY/보류 시험이 기본 `/api/essay/catalog`에 없어 APP이 재작성용 시험을 해석할 수 없음. 필요한 Backend 변경(Codex): run 페이로드에 대학 식별자(또는 시험 메타/문항) 포함하거나 사용자 보유 이력 시험을 카탈로그에 포함. APP은 DB/Worker 미변경, 기존 답안·lineage·Credit 보존.
+- **§5 (P1) 성장 분석 UI** — 시험별 접이식 카드(제목 "대학명 · 시험명"), 최신 시험 펼침·이전 접힘, 펼칠 때만 비교 리포트 지연 로드. 5개씩 렌더·하단 스크롤 시 +5(이력 조회는 기존 50 상한). 동일 시험 다회차 한 카드. 실제 평가만·시험 간 혼합 없음·빈 상태 정직.
+
+**수정 파일:** `source_catalog_page.dart`(§1·§2·§3), `shared_history_page.dart`(§4 라벨), `essay_growth_page.dart`(§5). 테스트: `essay_service_preparing_test`(serviceExams 기반 재작성), `essay_growth_ui_test`(카드·페이지네이션) 갱신.
+**검증:** `fvm flutter analyze` 0건, `fvm flutter test` 1142 PASS / 7 skip / 0 fail.
+**자동화 미검증(실기기 QA):** 시험 제출/상태조회 HTTP(§2 전환·§8 폴링), 크롭 래스터화. §4 재작성 Backend 해결 전까지 STANDBY 시험 재작성은 안내 메시지로 graceful 유지.
+**Codex 통합 주의:** `source_catalog_page.dart`는 Claude UI. §4 재작성은 Backend(run 페이로드/카탈로그 범위) 선행 필요 — Worker 복구와 함께 검토. 기존 Gateway/RPC 계약 유지.
+**Commit:** 6a0f040(§1·§2·§3·§4 라벨) → 04ea3a5(§5). 롤백: 범위별 `git revert <sha>`. Owner 실기기 재검수 대기.
