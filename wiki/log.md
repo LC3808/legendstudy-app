@@ -4992,3 +4992,8 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 - 관련23검사·Typecheck·Build PASS/Lint기존4경고. 운영 광운·KAU·인하·한양 입력 확인. Provider/차감/DB쓰기0. 숙명 전체 확장 미완료를 명시. [근거·롤백](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리).
 
 - 2026-10-27: WEB 입력유형/공개상태 독립 공통 수정. Registry26대학363회차1,014문항(IMAGE483/TEXT531), 불일치241→0/미확정0. 기존928계약 재사용·잔여86대조. 관련26검사/Typecheck/Lint/Build 통과. WEB2f838c2/Pagesf9e0e83f 운영 확인. DB/Worker/APP/SQL/Provider 변경·실행0. [근거·검증 범위·롤백](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완).
+
+
+## 2026-10-28 — 건국 Worker claim 이후 장애 재현·수정 준비
+
+운영 건국2024인문사회Ⅰ reserved/2문항/checkpoint0/1Credit예약 유지 확인. 배포202f8f62와 동일 코드+고정package에서 공식기준4576자가4000제한으로 Invalid TEXT 재현. 입력기준만 공식근거와같은100000상한, 원문/출력검증/정산불변. Mock65·격리Credit18 PASS, 실제Provider/운영쓰기0. 로그비활성으로당시예외/호출영수증미확인. Production배포/기존run복구/APP통합별도승인대기. [근거·제한·롤백](essay-worker-incident-20261028.md).

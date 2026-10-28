@@ -118,7 +118,11 @@ def package(claim, cache):
     for ref in snap['criteria']:
         matches = [v for v in cache['criteria'] if v['binding'] == ref]
         require(len(matches) == 1, 'CRITERION_VERSION')
-        text(matches[0]['label']); criteria.append({'reference':ref, 'label':matches[0]['label']})
+        # Reviewed material criteria can contain the full official rubric text.
+        # Use the same input bound as official evidence; never truncate the pinned
+        # source or relax the separate student-facing output text limits.
+        text(matches[0]['label'], 100000)
+        criteria.append({'reference':ref, 'label':matches[0]['label']})
     # Server identity and only the frozen prior observations; no moving latest reads.
     result = {'contract_version':'1.3','attempt_id':snap['attempt_id'],'answer_hash':snap['answer_hash'],
             'answer':answer,'criteria':criteria,'evidence':evidence,

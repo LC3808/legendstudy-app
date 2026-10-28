@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
+
 무료 베타 Credit: [일일 지급 DB설치·비활성/클라이언트](essay-beta-credit-design-20261027.md) — 캠페인 비활성.
 
 WEB MY 프로필·관심 대학·지원 현황: [대학 관리 통합·배포·복구](my-college-management-20261026.md).

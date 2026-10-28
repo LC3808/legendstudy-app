@@ -1,5 +1,7 @@
 # Current Status
 
+[10/28 건국 Worker P0](essay-worker-incident-20261028.md): 공식기준4576자/입력4000제한 오류 재현, 최소수정·Mock65/격리Credit18 PASS. Production 미적용·기존run reserved/1예약 보존. 배포 승인 대기, APP 통합 별도 승인.
+
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 
 [베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
@@ -140,8 +142,6 @@ Post-Wave1 [Personalization planning](home-personalization-and-events.md#persona
 
 Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
 
-## 2026-10-22 — Student material browsing
-
-71701 is already applied; no DB work this task. Shared metadata selection remains HOLD-only. Canonical official page links now override stale registry PDF links for the 11 colleges; unverified Sogang/SWU links withheld. Source catalog tests 13 PASS, analyze PASS, Android debug19 and iOS Simulator debug19 builds PASS. Native/device and logged-in student E2E NOT_ASSESSABLE; no store upload. Production WEB still shows old Registry subsets. See Unified Wiki 2026-10-22-material-service-connection review.
+[Oct22 자료 탐색 검증 이력](history/status-checkpoints.md#2026-10-22--student-material-browsing).
 
 기존 인문·수리 운영 이력은 [PHASE3 상세](phase3-service-20261022.md)와 [상태 이력](history/status-checkpoints.md)에 보존한다.

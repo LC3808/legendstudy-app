@@ -1776,3 +1776,8 @@ PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와1
 - Oct14: HOLD-only private connection probe added to existing Cloudflare entry: fixed Registry/Package/policy reads and nonce-only Queue ACK; no runtime/Provider/Ledger path. Two queue boundary checks PASS; operating verification pending.
 
 - Oct14 operating postflight: LAB/Worker Registry234 + service/user Auth PASS; Queue no-op ACK. Package rights and exam policy block evaluation; reviewer/provider bindings missing. Runs0/checkpoints0, Provider/Credit NOT_RUN, HOLD. See tool/cloudflare_essay/README.md.
+
+
+## 2026-10-22 — Student material browsing
+
+71701 is already applied; no DB work this task. Shared metadata selection remains HOLD-only. Canonical official page links now override stale registry PDF links for the 11 colleges; unverified Sogang/SWU links withheld. Source catalog tests 13 PASS, analyze PASS, Android debug19 and iOS Simulator debug19 builds PASS. Native/device and logged-in student E2E NOT_ASSESSABLE; no store upload. Production WEB still shows old Registry subsets. See Unified Wiki 2026-10-22-material-service-connection review.
