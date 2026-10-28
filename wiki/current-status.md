@@ -12,6 +12,10 @@
 
 [2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
+## 2026-10-28 — APP 인문논술 LAB UI/UX 개선 (BETA)
+
+Claude APP 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 733bad7, Flutter 3.47.6/fvm)에서 논술 LAB 첨삭 UI/UX 11건 개선: 제출 확인창 간소화(서버 확정 Credit 출처 1줄 표시, 잔액·수량·중복 안내 제거), 명시적 임시저장 버튼, 첨삭 진행 프로그레스바, 전용 성장 분석 화면 `/lab/essay/growth`(MY에서 진입; 기존 비교 계약 재사용·임의 수치 없음·50회차 범위 고지), 차분한 네이비 BETA 배지, 결과 화면 재구성·중복 문구 제거, 베타 Credit 안내 축약. `fvm flutter analyze` 0건·`fvm flutter test` 1136 PASS/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. **Owner 실기기 검수 대기, Codex 브랜치 미병합.** 코드 커밋 4985818. [로그](log.md#2026-10-28--app-인문논술-lab-uiux-개선-beta).
+
 ## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
 
 Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](essay-lab-claude-handoff-20261024.md).

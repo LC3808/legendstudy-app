@@ -4992,3 +4992,8 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 - 관련23검사·Typecheck·Build PASS/Lint기존4경고. 운영 광운·KAU·인하·한양 입력 확인. Provider/차감/DB쓰기0. 숙명 전체 확장 미완료를 명시. [근거·롤백](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리).
 
 - 2026-10-27: WEB 입력유형/공개상태 독립 공통 수정. Registry26대학363회차1,014문항(IMAGE483/TEXT531), 불일치241→0/미확정0. 기존928계약 재사용·잔여86대조. 관련26검사/Typecheck/Lint/Build 통과. WEB2f838c2/Pagesf9e0e83f 운영 확인. DB/Worker/APP/SQL/Provider 변경·실행0. [근거·검증 범위·롤백](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완).
+
+## 2026-10-28 — APP 인문논술 LAB UI/UX 개선 (BETA)
+Claude APP 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 733bad7, Flutter 3.47.6/fvm). 11개 UI/UX 개선: 제출 확인창 간소화(제목+작성 문항 수+서버 확정 Credit 출처 1줄+[돌아가기]/[첨삭 시작]; quote/expectedGrant/409 재확인·예약·차감 계약 보존), 명시적 임시저장 버튼, 첨삭 진행 프로그레스바(제출→첨삭 중→결과), 전용 성장 분석 화면 `/lab/essay/growth`(기존 before→after 비교 계약 재사용·임의 수치/시험 간 평균 없음·최근 50회차 범위 고지), MY→성장 분석 이동, 차분한 네이비 BETA 배지(논술 LAB 진입·MY·성장 분석), 결과 화면 종합 평가 선두 재구성·중복 문구 제거·결과 오프너 공유, 베타 Credit 안내 축약.
+수정 파일: `lib/shared/widgets/shell_widgets.dart`, `legendstudy_lab_entry.dart`, `lib/features/lab/score_summary.dart`, `lib/features/credits/{essay_credit_source,essay_beta_credit}.dart`, `lib/features/essay/{essay_pages,source_catalog_page,shared_history_page}.dart`, 신규 `lib/features/essay/essay_growth_page.dart`. 테스트: 신규 `test/essay_growth_ui_test.dart`, `test/essay_credit_source_test.dart` 보강.
+검증: `fvm flutter analyze` 0건, `fvm flutter test` 1136 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. Owner 실기기 검수 전 Codex 브랜치 미병합. 코드 커밋 4985818. [설계 맥락](essay-growth-history-ui-20261026.md) · [베타 Credit](essay-beta-credit-design-20261027.md).
