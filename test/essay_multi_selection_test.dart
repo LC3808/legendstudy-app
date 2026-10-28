@@ -71,8 +71,15 @@ void main() {
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
         final cta = find.widgetWithText(FilledButton, '답안 작성하기');
-        await tester.scrollUntilVisible(cta,200,scrollable:find.byType(Scrollable).last);
-        expect(tester.widget<FilledButton>(cta).onPressed, isNull);
+        // Before any question is picked the CTA prompts 문제 선택 (disabled),
+        // not an unavailable-service message.
+        final pickPrompt = find.widgetWithText(FilledButton, '문제 선택');
+        await tester.scrollUntilVisible(
+          pickPrompt,
+          200,
+          scrollable: find.byType(Scrollable).last,
+        );
+        expect(tester.widget<FilledButton>(pickPrompt).onPressed, isNull);
         for (final label in ['문제 1', '문제 2']) {
           await tester.ensureVisible(find.text(label));
           await tester.tap(find.text(label));

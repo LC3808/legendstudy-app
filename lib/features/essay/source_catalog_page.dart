@@ -233,6 +233,11 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                   context.push('/lab/essay/history'),
                               child: const Text('나의 첨삭 기록 ›'),
                             );
+                            final lab = TextButton(
+                              onPressed: () =>
+                                  context.push('/lab/essay/growth'),
+                              child: const Text('나의 논술랩 ›'),
+                            );
                             const credit = CreditBalanceCard(compact: true);
                             return MediaQuery.textScalerOf(context).scale(14) >
                                     22
@@ -241,15 +246,24 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       history,
+                                      lab,
                                       const Divider(),
                                       credit,
                                     ],
                                   )
-                                : Row(
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: [
-                                      Expanded(child: history),
-                                      const SizedBox(width: 12),
-                                      const Expanded(child: credit),
+                                      Row(
+                                        children: [
+                                          Expanded(child: history),
+                                          const SizedBox(width: 12),
+                                          Expanded(child: lab),
+                                        ],
+                                      ),
+                                      const Divider(),
+                                      credit,
                                     ],
                                   );
                           },
@@ -537,7 +551,19 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                             ),
                           );
                         },
-                  child: Text(writingBlocked ? '서비스 준비중' : '답안 작성하기'),
+                  // Distinguish "pick a question" from an actually unavailable
+                  // service: only a held university / blocked feedback reads as
+                  // 준비 중. Publication is still judged by the existing
+                  // isUniversityServicePreparing + verification contract.
+                  child: Text(
+                    isUniversityServicePreparing(uni)
+                        ? '서비스 준비중'
+                        : selection.isEmpty
+                        ? '문제 선택'
+                        : writingBlocked
+                        ? '첨삭 서비스 준비 중'
+                        : '답안 작성하기',
+                  ),
                 ),
               ],
             ],
