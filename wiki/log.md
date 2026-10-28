@@ -4997,3 +4997,8 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-10-28 — 건국 Worker claim 이후 장애 재현·수정 준비
 
 운영 건국2024인문사회Ⅰ reserved/2문항/checkpoint0/1Credit예약 유지 확인. 배포202f8f62와 동일 코드+고정package에서 공식기준4576자가4000제한으로 Invalid TEXT 재현. 입력기준만 공식근거와같은100000상한, 원문/출력검증/정산불변. Mock65·격리Credit18 PASS, 실제Provider/운영쓰기0. 로그비활성으로당시예외/호출영수증미확인. Production배포/기존run복구/APP통합별도승인대기. [근거·제한·롤백](essay-worker-incident-20261028.md).
+
+
+## 2026-10-28 — Owner 승인 Worker 입력검증 Production 배포
+
+코드e934240 Push, 기존72모듈 중live_worker.py만 교체·71동일. Worker451b8cae/배포775f74de100% 확인, bindings14/Secret5상속/runtime설정보존. 회귀65PASS·재다운로드코드4576자2문항/답안hash/출력제한PASS. 기존run reserved/checkpoint0/1예약동일, DB쓰기·Provider·평가·APP변경0. rollback202f8f62조회가능, 미실행. [배포근거·다음승인](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28).

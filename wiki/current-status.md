@@ -1,6 +1,6 @@
 # Current Status
 
-[10/28 건국 Worker P0](essay-worker-incident-20261028.md): 공식기준4576자/입력4000제한 오류 재현, 최소수정·Mock65/격리Credit18 PASS. Production 미적용·기존run reserved/1예약 보존. 배포 승인 대기, APP 통합 별도 승인.
+[10/28 건국 Worker P0](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28): Owner승인 입력검증만451b8cae100%배포·65회귀PASS. 기존run reserved/checkpoint0/1예약 보존·재실행0. 기존run복구·APP통합 별도승인.
 
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 

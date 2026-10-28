@@ -2,7 +2,8 @@
 
 ## 현재 결론과 승인 경계
 
-**재현된 입력 검증 오류 수정 완료 / Production 미적용 / 기존 run 복구 미실행.**
+**Owner 승인 범위 Production 배포 완료 / 기존 run 복구 미실행.**
+최신 배포·사후검증은 아래 [Production 적용](#production-적용--owner-승인-2026-10-28)을 따른다. 이전 조사·승인 대기 기록은 시점별 근거다.
 Owner 지시의 A단계만 수행. APP UI는 Claude 담당이며 통합·빌드·스토어 제출은
 Claude 완료/Commit·Push/테스트/Owner 실기기 승인/Worker 결과 확인 및 별도 Owner 승인 후다.
 운영 배포, 기존 run 재실행·상태 변경·예약 해제·환불, 실제 Provider/Credit E2E는 각각 승인 전 금지.
@@ -130,3 +131,46 @@ UI 변경/1136테스트 및 실기기 승인 대기/미병합으로 기록돼 �
 Owner 검수 완료나 통합 승인으로 대체하지 않았다. APP 코드·Claude 브랜치 변경0.
 
 관련 10/28 선행 읽기 전용 진단의 핵심 증거와 한계는 위 운영 표와 원인 절에 보존했다.
+
+
+## Production 적용 — Owner 승인 2026-10-28
+
+Owner가 입력 검증 수정·Commit/Push·Worker 배포·사후 확인을 명시 승인했다.
+기존 run 재실행, 신규 요청, 실제 Provider, Credit/DB/History 변경, APP/Claude 통합은 금지 유지.
+
+- 적용 시각: **2026-10-28 16:26:19 KST**.
+- Production version: `451b8cae-f603-48e9-9ca9-8ccc16b4e3d4` **100%**.
+- Deployment: `775f74de-8d13-496e-905c-2e0ee21333be`.
+- 수정 코드 Commit/Remote: `e934240e15584178993bcbd25cbc891859076d76` Push 완료.
+  후속 배포 기록 커밋은 문서/검증 기록만 포함하며 Worker 코드는 동일하다.
+- [비밀값 없는 배포 검증 기록](../tool/cloudflare_essay/criteria-input-deployment-20261028.json).
+
+### 배포 범위 및 검증
+
+직전 active version `202f8f62`와 설정을 재조회하고 배포된72파일을 Content v2로
+다운로드해 원래 MIME/SDK/Registry/프롬프트를 보존했다. `essay_lab/live_worker.py`만
+승인된 commit의 bytes로 교체했다. 새 버전 업로드 시 Secret5개는 기존 binding 상속,
+나머지 binding은 동일값으로 유지. 버전 업로드 검증 후100% 배포했다.
+
+배포 후 다시 가져온72파일의 이름·MIME·SHA256을 모두 비교: **승인파일1개 변경/71개 동일**.
+bindings14개·compatibility date/flags·CPU30000ms·handlers·그 외 설정·workers.dev/preview
+설정 동일. Secret 값은 조회/출력/교체하지 않았다. 큐 producer/consumer 설정 변경 요청 없음.
+Worker API가 업로드/배포 성공을 반환했고 active deployment/version100%를 독립 재조회했다.
+
+관련65개 회귀검사 재실행 PASS. 앞 단계 격리Credit18 PASS 근거 유지(이번 DB코드변경0).
+**배포본을 재다운로드한 코드**에서 기존 공식 package + 합성 답안을 순수 로컬 실행:
+두 문항4576자 원문 조립 PASS, 변조 답안 hash 차단 PASS, 출력 길이 제한 차단 PASS.
+이는 실제 Provider/운영 평가 E2E가 아니며 호출 없이 검증했다.
+
+배포 전/후 해당 run SELECT 동일: reserved, result=NULL, checkpoint0, billing reserved,
+reserve1개(balance_delta0/reserved_delta1). consume/release/refund 없음.
+운영 DB쓰기0·신규 평가0·Provider0·기존run 재실행0·APP변경0·Claude병합0.
+
+### 롤백과 남은 작업
+
+이전 version `202f8f62-83ad-4ae8-9cc7-b4a576226e3b` 조회 가능 및 binding/runtime
+동일성 확인. 배포검증 문제 없어 실제 rollback은 하지 않았다. 문제 발생 시 후속 변경과
+진행 요청을 확인하고 해당 버전100% Worker deployment로 복귀하며 DB/Credit/History는 보존한다.
+
+**기존 건국 run은 복구되지 않았다.** 재개·실패해제·환불 여부는 별도 Owner 승인 후 결정.
+APP 통합/빌드/스토어 준비는 별도 승인과 기존 선행조건 충족 전까지 보류한다.

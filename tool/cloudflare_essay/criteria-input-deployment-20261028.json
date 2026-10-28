@@ -1,0 +1,39 @@
+{
+  "version": "451b8cae-f603-48e9-9ca9-8ccc16b4e3d4",
+  "deployment": "775f74de-8d13-496e-905c-2e0ee21333be",
+  "created_on": "2026-10-28T07:26:19.049956Z",
+  "traffic_percent": 100,
+  "modules": 72,
+  "changed_modules": [
+    "essay_lab/live_worker.py"
+  ],
+  "unchanged_modules": 71,
+  "settings_preserved": true,
+  "bindings_preserved": true,
+  "subdomain_preserved": true,
+  "rollback_version_available": true,
+  "verification": "downloaded Production modules executed locally only",
+  "criteria_4576_both_questions": "PASS",
+  "student_answer_hash_validation": "PASS",
+  "output_limit_validation": "PASS",
+  "provider_calls": 0,
+  "evaluation_requests": 0,
+  "code_commit": "e934240e15584178993bcbd25cbc891859076d76",
+  "rollback_version": "202f8f62-83ad-4ae8-9cc7-b4a576226e3b",
+  "regression_tests": 65,
+  "regression_result": "PASS",
+  "existing_run": {
+    "id": "2998c8ba-9226-4dea-8bd0-ca34daa3744d",
+    "state": "reserved",
+    "checkpoints": 0,
+    "result_saved": false,
+    "credit_state": "reserved",
+    "reserved_credits": 1,
+    "postings": [
+      "reserve"
+    ],
+    "unchanged": true
+  },
+  "production_db_writes": 0,
+  "app_changes": 0
+}
