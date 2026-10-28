@@ -18,6 +18,7 @@ import 'answer_image.dart';
 import 'question_pdf.dart';
 
 import '../../core/links/external_link.dart';
+import '../../shared/widgets/shell_widgets.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -231,14 +232,44 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        LayoutBuilder(
-                          builder: (context, bounds) {
-                            final history = TextButton(
-                              onPressed: () =>
-                                  context.push('/lab/essay/history'),
-                              child: const Text('나의 첨삭 기록 ›'),
+                        Builder(
+                          builder: (context) {
+                            TextButton menu(String label, String route) =>
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppTokens.space8,
+                                    ),
+                                    minimumSize: const Size(0, 44),
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    foregroundColor: AppTokens.textPrimary,
+                                  ),
+                                  onPressed: () => context.push(route),
+                                  child: Text(label),
+                                );
+                            final history = menu(
+                              '나의 첨삭 기록 ›',
+                              '/lab/essay/history',
                             );
-                            const credit = CreditBalanceCard(compact: true);
+                            final lab = menu('나의 논술랩 ›', '/lab/essay/growth');
+                            final balance = ref
+                                .watch(creditBalanceProvider)
+                                .value;
+                            // 서버 잔액만 사용하고 조회 전에는 임의 숫자를 보이지 않는다.
+                            final Widget credit = balance == null
+                                ? const SizedBox.shrink()
+                                : Text(
+                                    '현재 크레딧 ${balance.spendable}개',
+                                    style: AppTokens.secondary.copyWith(
+                                      color: AppTokens.textPrimary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                            // 세 항목을 한 줄로: 왼쪽 메뉴 그룹 + 오른쪽 현재 크레딧.
+                            // 아주 큰 글자 배율에서는 접근성을 위해 2행 세로 배치로
+                            // 떨어뜨리고, 그 외 모바일 폭에서는 FittedBox로 균일
+                            // 축소해 가로 넘침·글자 잘림을 방지한다.
                             return MediaQuery.textScalerOf(context).scale(14) >
                                     22
                                 ? Column(
@@ -246,15 +277,32 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       history,
-                                      const Divider(),
-                                      credit,
+                                      lab,
+                                      const SizedBox(height: AppTokens.space8),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: credit,
+                                      ),
                                     ],
                                   )
                                 : Row(
                                     children: [
-                                      Expanded(child: history),
-                                      const SizedBox(width: 12),
-                                      const Expanded(child: credit),
+                                      Flexible(
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [history, lab],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: AppTokens.space8),
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerRight,
+                                        child: credit,
+                                      ),
                                     ],
                                   );
                           },
@@ -416,6 +464,20 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
               isUniversityServicePreparing(uni) ||
               (exam?['verification'] == 'REVIEW_REQUIRED' &&
                   !reviewDraftAvailable);
+          // 첨삭 공개 보류(준비 중) 판정은 대학·계열 이름이나 inputMode(browse 투영에
+          // 없어 누락됨)가 아니라, 서버의 서비스 가능 시험 집합(service-status)을
+          // 기준으로 한다. 들어갈 수 있는(대학 보류·REVIEW_REQUIRED 아님) 시험인데
+          // 서비스 가능 집합에 없으면 아직 첨삭이 공개되지 않은 것이므로, 문항 선택·
+          // 작성 전에 준비 중 안내를 표시한다. 집합을 아직 받지 못했으면(로딩/오류)
+          // 거짓양성을 피하려 표시하지 않는다. 안내는 비차단 정보이므로 공개된 TEXT
+          // 문항의 작성·제출을 막지 않는다.
+          final serviceExams = ref.watch(serviceExamIdsProvider(widget.owner));
+          final feedbackPreparing =
+              exam != null &&
+              !writingBlocked &&
+              exam['dbExamId'] is String &&
+              serviceExams.hasValue &&
+              !serviceExams.value!.contains(exam['dbExamId']);
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -476,6 +538,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                   },
                 ),
               if (exam != null) ...[
+                if (feedbackPreparing) const _ServicePreparingNotice(),
                 if (isUniversityServicePreparing(uni) ||
                     exam['verification'] == 'REVIEW_REQUIRED')
                   for (final u in c.universities.where(
@@ -536,7 +599,19 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                             ),
                           );
                         },
-                  child: Text(writingBlocked ? '서비스 준비중' : '답안 작성하기'),
+                  // Distinguish "pick a question" from an actually unavailable
+                  // service: only a held university / blocked feedback reads as
+                  // 준비 중. Publication is still judged by the existing
+                  // isUniversityServicePreparing + verification contract.
+                  child: Text(
+                    isUniversityServicePreparing(uni)
+                        ? '서비스 준비중'
+                        : selection.isEmpty
+                        ? '문제 선택'
+                        : writingBlocked
+                        ? '첨삭 서비스 준비 중'
+                        : '답안 작성하기',
+                  ),
                 ),
               ],
             ],
@@ -567,47 +642,154 @@ class _SelectedAnswerWriter extends StatefulWidget {
 }
 
 class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
+  // The single expanded question (0 = 문제 1 on entry); -1 = all collapsed.
   int current = 0;
+  final Map<String, bool> written = {};
+
+  String get _examMeta => [
+    if (widget.exam['year'] != null) '${widget.exam['year']}학년도',
+    if (widget.exam['kind'] != null)
+      widget.exam['kind'] == 'admission'
+          ? '수시 논술'
+          : widget.exam['kind'] == 'mock'
+          ? '모의논술'
+          : widget.exam['kind'].toString(),
+    widget.exam['track'],
+    widget.exam['session'],
+    widget.exam['campus'],
+  ].whereType<String>().where((v) => v.isNotEmpty).join(' · ');
+
   @override
-  Widget build(BuildContext context) =>
-      isUniversityServicePreparing(widget.exam['sourceUniversityId'])
-      ? Scaffold(
-          appBar: AppBar(title: const Text('자료 조회')),
-          body: Column(
-            children: [
-              const FilledButton(onPressed: null, child: Text('서비스 준비중')),
-              if (widget.officialUrl != null)
-                ExternalLinkButton(
-                  uri: Uri.tryParse(widget.officialUrl!),
-                  label: '공식 입학처 자료 확인 ↗',
-                ),
-            ],
-          ),
-        )
-      : IndexedStack(
-          index: current,
+  Widget build(BuildContext context) {
+    if (isUniversityServicePreparing(widget.exam['sourceUniversityId'])) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('자료 조회')),
+        body: Column(
           children: [
-            for (var i = 0; i < widget.questions.length; i++)
-              TickerMode(
-                enabled: i == current,
+            const FilledButton(onPressed: null, child: Text('서비스 준비중')),
+            if (widget.officialUrl != null)
+              ExternalLinkButton(
+                uri: Uri.tryParse(widget.officialUrl!),
+                label: '공식 입학처 자료 확인 ↗',
+              ),
+          ],
+        ),
+      );
+    }
+    final questions = widget.questions;
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.universityName ?? '답안 작성')),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppTokens.space20,
+            AppTokens.space16,
+            AppTokens.space20,
+            AppTokens.space24,
+          ),
+          children: [
+            if (_examMeta.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppTokens.space12),
+                child: Text(
+                  _examMeta,
+                  style: AppTokens.secondary.copyWith(
+                    color: AppTokens.textSecondary,
+                  ),
+                ),
+              ),
+            for (var i = 0; i < questions.length; i++)
+              _AccordionItem(
+                key: ValueKey('panel-${questions[i]['key']}'),
+                title: questions[i]['label'] as String,
+                expanded: current == i,
+                written: written[questions[i]['key'] as String] ?? false,
+                // One panel open at a time; tapping the open one collapses it.
+                onTap: () => setState(() => current = current == i ? -1 : i),
                 child: _SourceWriter(
-                  key: ValueKey(widget.questions[i]['key']),
+                  key: ValueKey(questions[i]['key']),
                   owner: widget.owner,
-                  question: widget.questions[i],
+                  question: questions[i],
                   exam: widget.exam,
                   universityName: widget.universityName,
                   officialUrl: widget.officialUrl,
                   rewriteRun: widget.rewriteRun,
-                  selectedQuestions: widget.questions,
-                  onQuestionChanged: (key) => setState(
-                    () => current = widget.questions.indexWhere(
-                      (q) => q['key'] == key,
-                    ),
-                  ),
+                  selectedQuestions: questions,
+                  onContentChanged: (has) {
+                    if (mounted) {
+                      setState(
+                        () => written[questions[i]['key'] as String] = has,
+                      );
+                    }
+                  },
                 ),
               ),
           ],
-        );
+        ),
+      ),
+    );
+  }
+}
+
+/// One accordion question: a touchable header (문항 번호 + concise completion
+/// mark) over a body that stays mounted — so each question's answer, drafts and
+/// photos are preserved while switching — and is only shown while expanded.
+class _AccordionItem extends StatelessWidget {
+  const _AccordionItem({
+    super.key,
+    required this.title,
+    required this.expanded,
+    required this.written,
+    required this.onTap,
+    required this.child,
+  });
+  final String title;
+  final bool expanded, written;
+  final VoidCallback onTap;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      InkWell(
+        onTap: onTap,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 52),
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppTokens.body.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppTokens.textPrimary,
+                  ),
+                ),
+              ),
+              if (written) ...[
+                const Icon(
+                  Icons.check_circle,
+                  size: 18,
+                  color: AppTokens.success,
+                ),
+                const SizedBox(width: AppTokens.space8),
+              ],
+              Icon(
+                expanded ? Icons.expand_less : Icons.expand_more,
+                color: AppTokens.textTertiary,
+              ),
+            ],
+          ),
+        ),
+      ),
+      Offstage(
+        offstage: !expanded,
+        child: TickerMode(enabled: expanded, child: child),
+      ),
+      const Divider(height: 1),
+    ],
+  );
 }
 
 String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
@@ -615,11 +797,60 @@ String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
     ? question
     : '$question:${run['_additional'] == true ? 'additional' : 'rewrite'}:${run['id']}';
 
+/// Calm red "service preparing" banner shown above the answer area when a
+/// photo/math (수리·자연논술) question's feedback is not yet published. Keeps the
+/// existing navy/grey system; red is reserved for this held-service notice.
+class _ServicePreparingNotice extends StatelessWidget {
+  const _ServicePreparingNotice();
+  @override
+  Widget build(BuildContext context) => Semantics(
+    container: true,
+    label: '수리논술 첨삭 서비스 준비 중 안내',
+    child: Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: AppTokens.space8),
+      padding: const EdgeInsets.all(AppTokens.space16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFDECEE),
+        border: Border.all(color: AppTokens.danger),
+        borderRadius: BorderRadius.circular(AppTokens.radiusSm),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(Icons.schedule, size: 18, color: AppTokens.dangerInk),
+              SizedBox(width: AppTokens.space8),
+              Expanded(
+                child: Text(
+                  '수리논술 첨삭 서비스 준비 중',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: AppTokens.dangerInk,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppTokens.space8),
+          Text(
+            '더 정확한 풀이 분석과 단계별 코칭을 위해 서비스를 개선하고 있습니다. '
+            '첨삭 서비스는 준비가 완료되면 제공됩니다.',
+            style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 class _SourceWriter extends ConsumerStatefulWidget {
   const _SourceWriter({
     super.key,
     required this.selectedQuestions,
-    required this.onQuestionChanged,
+    this.onContentChanged,
     this.rewriteRun,
     required this.owner,
     required this.question,
@@ -632,7 +863,11 @@ class _SourceWriter extends ConsumerStatefulWidget {
   final String? officialUrl, universityName;
   final Map<String, dynamic> question, exam;
   final List<Map<String, dynamic>> selectedQuestions;
-  final ValueChanged<String> onQuestionChanged;
+
+  /// Reports whether this question now has written content (text or photo), so
+  /// the accordion header can show a concise completion mark. Content-presence
+  /// only; never the saved/submitted state.
+  final ValueChanged<bool>? onContentChanged;
   @override
   ConsumerState<_SourceWriter> createState() => _SourceWriterState();
 }
@@ -641,6 +876,11 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   List<Uint8List> photo = [];
   bool imageReady = false, imageSaving = false, imageDirty = false;
   String? photoNotice;
+  // Manual "임시저장" feedback, kept separate from the passive auto-save state so
+  // a "저장됨" message never shows before the student presses the button, and is
+  // cleared as soon as the answer is edited again.
+  bool manualSaving = false;
+  String? manualSaveNotice;
   late final draft = SourceDraftGateway(
     widget.owner,
     essayWritingDraftKey(widget.question['key'] as String, widget.rewriteRun),
@@ -676,6 +916,40 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       if (mounted) setState(() => photoNotice = '사진을 저장하지 못했어요. 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => imageSaving = false);
+      _notifyContent();
+    }
+  }
+
+  /// Explicit button save (text draft + any dirty photo). Reports its own
+  /// success/failure feedback below the button; the underlying auto-save and
+  /// save/restore contracts are unchanged.
+  Future<void> saveManually() async {
+    final ctrl = controller;
+    if (ctrl == null || manualSaving || syncBusy) return;
+    setState(() {
+      manualSaving = true;
+      manualSaveNotice = null;
+    });
+    try {
+      await ctrl.save();
+      if (imageDirty && !imageSaving) await savePhoto(photo);
+      if (!mounted) return;
+      final saved = ctrl.draftStatus == DraftStatus.saved;
+      setState(() {
+        manualSaveNotice = !saved
+            ? '저장하지 못했어요. 다시 시도해 주세요.'
+            : (draft.remote != null &&
+                      !draft.syncConflict &&
+                      draft.remoteBody == ctrl.body)
+            ? '계정에 임시 저장됨'
+            : '이 기기에 임시 저장됨';
+      });
+    } catch (_) {
+      if (mounted) {
+        setState(() => manualSaveNotice = '저장하지 못했어요. 다시 시도해 주세요.');
+      }
+    } finally {
+      if (mounted) setState(() => manualSaving = false);
     }
   }
 
@@ -742,6 +1016,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       editor.text = d.body;
       controller!.addListener(refresh);
       setState(() {});
+      _notifyContent();
     } catch (_) {
       if (mounted) setState(() => error = '저장된 답안을 불러오지 못했어요.');
     }
@@ -784,6 +1059,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
     if (mounted) setState(() {});
   }
 
+  void _notifyContent() => widget.onContentChanged?.call(
+    editor.text.trim().isNotEmpty || photo.isNotEmpty,
+  );
+
   @override
   void dispose() {
     controller?.removeListener(refresh);
@@ -808,67 +1087,31 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       widget.question['dbQuestionId'] as String? ?? '',
     );
     final positionKey = 'essay-pdf:${widget.owner}:${pdf?.id}:${pdf?.hash}';
+    // The 수리·자연논술 준비 중 안내는 시험·계열 선택 화면(답안 작성 진입 전)에서
+    // 노출한다. 작성 화면 내부에서는 중복 표시하지 않는다.
+    // Embedded body for the accordion: no Scaffold/AppBar and no 문항 드롭다운
+    // (the accordion header carries the question number and switching). The
+    // exam/university meta is shown once above the accordion. Each panel keeps
+    // its own PopScope so an unsaved answer still blocks a back-gesture.
     return PopScope(
       canPop:
           (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
-      child: Scaffold(
-        appBar: AppBar(title: Text(widget.question['label'] as String)),
-        body: c == null
-            ? Center(child: Text(error ?? '답안을 불러오고 있어요.'))
-            : ListView(
-                padding: const EdgeInsets.all(20),
+      child: c == null
+          ? Padding(
+              padding: const EdgeInsets.all(AppTokens.space20),
+              child: Text(error ?? '답안을 불러오고 있어요.'),
+            )
+          : Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppTokens.space16,
+                AppTokens.space4,
+                AppTokens.space16,
+                AppTokens.space16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (widget.universityName != null)
-                    Text(
-                      widget.universityName!,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  Text(
-                    [
-                      if (widget.exam['year'] != null)
-                        '${widget.exam['year']}학년도',
-                      if (widget.exam['kind'] != null)
-                        widget.exam['kind'] == 'admission'
-                            ? '수시 논술'
-                            : widget.exam['kind'] == 'mock'
-                            ? '모의논술'
-                            : widget.exam['kind'].toString(),
-                    ].join(' '),
-                  ),
-                  Text(
-                    [
-                          widget.exam['track'],
-                          widget.exam['session'],
-                          widget.exam['campus'],
-                          widget.question['label'],
-                        ]
-                        .whereType<String>()
-                        .where((v) => v.isNotEmpty)
-                        .join(' · '),
-                  ),
-                  if (widget.selectedQuestions.length > 1)
-                    DropdownButton<String>(
-                      value: widget.question['key'] as String,
-                      isExpanded: true,
-                      hint: const Text('작성할 문항'),
-                      items: [
-                        for (final q in widget.selectedQuestions)
-                          DropdownMenuItem(
-                            value: q['key'] as String,
-                            child: Text(q['label'] as String),
-                          ),
-                      ],
-                      onChanged: imageSaving || syncBusy
-                          ? null
-                          : (value) async {
-                              if (value == null) return;
-                              await c.save();
-                              if (mounted && !c.dirty && !imageDirty) {
-                                widget.onQuestionChanged(value);
-                              }
-                            },
-                    ),
-                  const SizedBox(height: 16),
                   if (pdf != null)
                     TextButton.icon(
                       icon: const Icon(Icons.open_in_full),
@@ -990,7 +1233,14 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                           : 12,
                       maxLines: null,
                       maxLength: 30000,
-                      onChanged: c.edit,
+                      onChanged: (value) {
+                        c.edit(value);
+                        _notifyContent();
+                        // Editing invalidates the previous manual-save result.
+                        if (manualSaveNotice != null) {
+                          setState(() => manualSaveNotice = null);
+                        }
+                      },
                       decoration: InputDecoration(
                         labelText: widget.question['inputMode'] == 'image'
                             ? '추가 설명 (선택)'
@@ -998,21 +1248,90 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         alignLabelWithHint: true,
                       ),
                     ),
-                    Text(
-                      syncBusy
-                          ? '저장 중'
-                          : switch (c.draftStatus) {
-                              DraftStatus.saved =>
-                                draft.remote != null &&
-                                        !draft.syncConflict &&
-                                        draft.remoteBody == c.body
-                                    ? '계정에 저장됨'
-                                    : '이 기기에 임시 저장됨',
-                              DraftStatus.saving => '저장 중…',
-                              DraftStatus.failed => '저장하지 못했어요. 다시 시도해 주세요.',
-                              DraftStatus.conflict =>
-                                '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
-                            },
+                    // 버튼이 먼저, 상태 메시지는 버튼 아래. 기본 회색 테두리,
+                    // 누르는 동안 네이비 채움. 누르기 전에는 '저장됨'을 표시하지 않는다.
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: manualSaving
+                          ? FilledButton.icon(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: AppTokens.textPrimary,
+                                foregroundColor: Colors.white,
+                                minimumSize: const Size(0, 44),
+                              ),
+                              onPressed: null,
+                              icon: const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              label: const Text('저장 중…'),
+                            )
+                          : OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: AppTokens.textPrimary,
+                                side: const BorderSide(
+                                  color: AppTokens.majorSurfaceBorder,
+                                ),
+                                minimumSize: const Size(0, 44),
+                              ),
+                              onPressed:
+                                  syncBusy ||
+                                      c.draftStatus == DraftStatus.saving
+                                  ? null
+                                  : saveManually,
+                              icon: const Icon(
+                                Icons.save_outlined,
+                                size: AppTokens.iconDense,
+                              ),
+                              label: const Text('임시저장'),
+                            ),
+                    ),
+                    Builder(
+                      builder: (_) {
+                        final status = manualSaving
+                            ? '저장 중…'
+                            : manualSaveNotice ??
+                                  (c.draftStatus == DraftStatus.conflict
+                                      ? '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.'
+                                      : c.draftStatus == DraftStatus.failed
+                                      ? '저장하지 못했어요. 다시 시도해 주세요.'
+                                      : null);
+                        if (status == null) return const SizedBox.shrink();
+                        final success =
+                            !manualSaving && (manualSaveNotice?.contains('저장됨') ?? false);
+                        final problem =
+                            status.contains('못') ||
+                            status.contains('변경됐어요');
+                        return Padding(
+                          padding: const EdgeInsets.only(top: AppTokens.space4),
+                          child: Row(
+                            children: [
+                              if (success) ...[
+                                const Icon(
+                                  Icons.check_circle,
+                                  size: 16,
+                                  color: AppTokens.success,
+                                ),
+                                const SizedBox(width: AppTokens.space4),
+                              ],
+                              Flexible(
+                                child: Text(
+                                  status,
+                                  style: AppTokens.caption.copyWith(
+                                    color: problem
+                                        ? AppTokens.dangerInk
+                                        : AppTokens.textSecondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                     if (draft.syncNotice != null &&
                         (draft.syncConflict || draft.remoteBody != c.body))
@@ -1059,11 +1378,6 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                 }
                               },
                         child: const Text('계정 답안 확인·저장'),
-                      ),
-                    if (c.dirty)
-                      TextButton(
-                        onPressed: c.save,
-                        child: const Text('저장 다시 시도'),
                       ),
                   ],
                   ...[
@@ -1117,20 +1431,31 @@ class _ExamSubmit extends ConsumerStatefulWidget {
     required this.owner,
     required this.exam,
     required this.included,
+    this.onEdit,
+    this.onSubmittedChanged,
   });
   final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
+
+  /// Return to the writer to edit answers (shown beside 첨삭 요청).
+  final VoidCallback? onEdit;
+
+  /// Fires when a run becomes in-flight (or clears) so the review sheet can
+  /// switch to a progress-only view instead of keeping the answer-confirm UI.
+  final ValueChanged<bool>? onSubmittedChanged;
   @override
   ConsumerState<_ExamSubmit> createState() => _ExamSubmitState();
 }
 
-class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
+class _ExamSubmitState extends ConsumerState<_ExamSubmit>
+    with WidgetsBindingObserver {
   bool serverReady = false,
       busy = false,
       polling = false,
-      eligibilityLoaded = false;
+      eligibilityLoaded = false,
+      foreground = true;
   Set<String> admittedQuestions = {};
   bool get ready {
     if (!serverReady || widget.included.isEmpty) return false;
@@ -1158,13 +1483,33 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       : null;
   String? submittedRun;
   String? submittedRequestKey;
+  String? runState;
   Timer? statusPoll;
   final submissionWait = Stopwatch();
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     statusPoll?.cancel();
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Pause status polling while backgrounded; resume (an immediate check) on
+    // return. The server evaluation keeps running regardless.
+    final resumed = state == AppLifecycleState.resumed;
+    foreground = resumed;
+    if (!resumed) {
+      statusPoll?.cancel();
+    } else if (submittedRun != null &&
+        runState != 'completed' &&
+        runState != 'failed') {
+      unawaited(pollStatus());
+    }
+  }
+
+  bool get runPending =>
+      submittedRun != null && runState != 'completed' && runState != 'failed';
 
   Future<void> pollStatus() async {
     if (polling) return;
@@ -1180,13 +1525,14 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
       if (!mounted) return;
       if (rows.length != 1) throw StateError('Submission history pending');
       final state = rows.single['state'];
+      runState = state as String?;
       setState(
         () => notice = switch (state) {
           'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
           'failed' => '첨삭을 완료하지 못했어요. 기록에서 처리 상태를 확인해 주세요.',
-          _ =>
-            '첨삭 중입니다. 화면을 닫아도 제출 기록은 유지됩니다. '
-                '${const ['오늘도 수고했어요.', '잠깐 어깨를 펴고 쉬어가세요.', '물 한 모금 마시고 오셔도 좋아요.'][(submissionWait.elapsed.inSeconds ~/ 15) % 3]}',
+          // Progress view shows the fixed "잠시 쉬어가세요" guidance instead of a
+          // per-poll notice, so no rotating or fabricated progress text here.
+          _ => '',
         },
       );
       if (state == 'failed' && submittedRequestKey != null) {
@@ -1210,13 +1556,18 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
     } finally {
       polling = false;
     }
-    if (mounted && submissionWait.elapsed < const Duration(seconds: 100)) {
-      statusPoll = Timer(const Duration(seconds: 3), pollStatus);
-    } else if (mounted) {
-      setState(
-        () =>
-            notice = '평가 완료를 아직 확인하지 못했어요. 다시 제출하지 말고 나의 첨삭 기록에서 상태를 확인해 주세요.',
-      );
+    // Keep checking while the screen is active and the run is still pending —
+    // no fixed 100s give-up — but back the interval off so a long evaluation is
+    // not polled at high frequency. Background pause/resume is handled in
+    // didChangeAppLifecycleState.
+    if (mounted && foreground && runPending) {
+      final elapsed = submissionWait.elapsed;
+      final interval = elapsed < const Duration(seconds: 30)
+          ? const Duration(seconds: 3)
+          : elapsed < const Duration(minutes: 2)
+          ? const Duration(seconds: 10)
+          : const Duration(seconds: 30);
+      statusPoll = Timer(interval, pollStatus);
     }
   }
 
@@ -1240,11 +1591,39 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     parentId = previousPaidId == null
         ? (widget.rewriteRun?['parent_id'] as String? ??
               widget.rewriteRun?['id'] as String?)
         : null;
     unawaited(check());
+    unawaited(restoreInFlightRun());
+  }
+
+  /// Re-attach to an evaluation that is still running when the student reopens
+  /// this screen, using the runId persisted alongside the submission key. Never
+  /// creates a new request or resubmits — it only resumes status polling.
+  Future<void> restoreInFlightRun() async {
+    try {
+      final saved = await pending.loadDraft();
+      if (saved.body.isEmpty || !mounted) return;
+      final stored = jsonDecode(saved.body) as Map<String, dynamic>;
+      final runId = stored['runId'];
+      if (runId is! String) return;
+      setState(() {
+        submittedRun = runId;
+        submittedRequestKey = stored['key'] as String?;
+        runState = 'processing';
+        notice = '';
+      });
+      widget.onSubmittedChanged?.call(true);
+      submissionWait
+        ..reset()
+        ..start();
+      await pollStatus();
+    } catch (_) {
+      /* No resumable run; leave the form ready. */
+    }
   }
 
   ExamSubmissionGateway? gateway() {
@@ -1361,64 +1740,100 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
           creditSource = EssayCreditSource.parse(quote['credit_source'], quote['credits'] as int);
         }
         if (!mounted) return;
+        // Minimal confirmation: what is submitted + the server-confirmed Credit
+        // source in one line. Pressing 첨삭 시작 is the student's consent to that
+        // source; the server still re-checks the grant and fence on submit.
+        final creditLine = (quote['credits'] as int) == 0
+            ? '추가 Credit이 사용되지 않아요'
+            : creditSource?.usageLabel;
         final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
-              selected.length < (widget.exam['questions'] as List).length
-                  ? '작성하지 않은 답안이 있습니다'
-                  : '제출할 답안 확인',
+            titlePadding: const EdgeInsets.fromLTRB(
+              AppTokens.space24,
+              AppTokens.space24,
+              AppTokens.space24,
+              AppTokens.space12,
             ),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    parentId == null
-                        ? '제출 문항: ${answers.length}개 · ${previousPaidId == null ? '최초 첨삭' : '추가 첨삭'}\n사용 크레딧: ${quote['credits']}개'
-                        : '제출 문항: ${answers.length}개\n사용 크레딧: 0개 · 무료 재첨삭',
-                  ),
-                  if (creditSource != null) ...[
-                    Text('베타 Credit 잔액: ${creditSource.beta}개'),
-                    Text('신규가입 무료 Credit 잔액: ${creditSource.signup}개'),
-                    Text('유료 Credit 잔액: ${creditSource.paid}개'),
-                    if (creditSource.other > 0) Text('기타 지급 Credit 잔액: ${creditSource.other}개'),
-                    Text('이번 사용: ${creditSource.label} · ${quote['credits']}개'),
-                    if (parentId == null && creditSource.source != 'beta')
-                      const Text('베타 Credit 대신 위 출처의 Credit을 사용합니다. 동의한 경우에만 진행해 주세요.'),
-                  ],
-                  if (selected.length <
-                      (widget.exam['questions'] as List).length)
-                    Text(
-                      '${(widget.exam['questions'] as List).cast<Map<String, dynamic>>().where((q) => !widget.included.contains(q['key'])).map((q) => q['label']).join(', ')} 문항은 이번 첨삭에 포함되지 않습니다. 나중에 미제출 문항을 첨삭받으면 별도 회차로 1 크레딧이 사용됩니다.',
-                    ),
-                  for (var i = 0; i < answers.length; i++) ...[
-                    Text(selected[i]['label'] as String),
-                    Text(answers[i]['body'] as String? ?? '확인한 사진·수식 답안'),
-                  ],
-                ],
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppTokens.space24,
+            ),
+            actionsPadding: const EdgeInsets.fromLTRB(
+              AppTokens.space16,
+              AppTokens.space12,
+              AppTokens.space16,
+              AppTokens.space16,
+            ),
+            title: const Text(
+              '첨삭을 시작할까요?',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: AppTokens.textPrimary,
               ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.edit_note,
+                      size: 20,
+                      color: AppTokens.textTertiary,
+                    ),
+                    const SizedBox(width: AppTokens.space8),
+                    Text(
+                      '작성 문항: ${answers.length}개',
+                      style: AppTokens.body.copyWith(
+                        color: AppTokens.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+                if (creditLine != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppTokens.space12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.account_balance_wallet_outlined,
+                          size: 20,
+                          color: AppTokens.textTertiary,
+                        ),
+                        const SizedBox(width: AppTokens.space8),
+                        Flexible(
+                          child: Text(
+                            creditLine,
+                            style: AppTokens.body.copyWith(
+                              color: AppTokens.textSecondary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
             actions: [
               TextButton(
+                style: TextButton.styleFrom(
+                  minimumSize: const Size(0, 48),
+                  foregroundColor: AppTokens.textSecondary,
+                ),
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('계속 작성'),
+                child: const Text('돌아가기'),
               ),
+              const SizedBox(width: AppTokens.space8),
               FilledButton(
                 style: FilledButton.styleFrom(
                   backgroundColor: AppTokens.textPrimary,
                   foregroundColor: Colors.white,
-                  minimumSize: const Size(48, 48),
+                  minimumSize: const Size(96, 48),
                 ),
                 onPressed: () => Navigator.pop(context, true),
-                child: Text(
-                  parentId != null
-                      ? '무료 재첨삭 요청'
-                      : previousPaidId != null
-                      ? '추가 첨삭 · 1 크레딧'
-                      : '첨삭 요청 · 1 크레딧',
-                ),
+                child: const Text('첨삭 시작'),
               ),
             ],
           ),
@@ -1449,11 +1864,25 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         throw StateError('제출 상태를 확인하지 못했어요. 같은 답안으로 다시 확인해 주세요.');
       }
       if (mounted) {
+        final runId = result!['runId'] as String;
+        // Persist the runId beside the submission key so reopening this screen
+        // resumes polling the same run instead of losing it.
+        final saved = await pending.loadDraft();
+        if (saved.body.isNotEmpty) {
+          final stored = jsonDecode(saved.body) as Map<String, dynamic>;
+          await pending.saveLocalDraft(
+            jsonEncode({...stored, 'runId': runId}),
+            saved.revision,
+          );
+        }
+        if (!mounted) return;
         setState(() {
-          submittedRun = result!['runId'] as String;
+          submittedRun = runId;
           submittedRequestKey = key;
-          notice = '답안을 제출했어요. 처리 상태를 확인합니다.';
+          runState = 'processing';
+          notice = '';
         });
+        widget.onSubmittedChanged?.call(true);
         unawaited(pollStatus());
       }
     } catch (error) {
@@ -1479,80 +1908,215 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
     }
   }
 
+  void _openHistory() => Navigator.of(context).push(
+    MaterialPageRoute<void>(builder: (_) => const SharedEssayHistoryPage()),
+  );
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      if (widget.rewriteRun == null && rewrites.isNotEmpty)
-        DropdownButtonFormField<String>(
-          initialValue: parentId ?? '',
-          decoration: const InputDecoration(labelText: '제출 방식'),
-          items: [
-            const DropdownMenuItem(value: '', child: Text('최초 첨삭')),
-            for (final r in rewrites)
-              DropdownMenuItem(
-                value: r['id'] as String,
-                child: Text(
-                  '무료 재첨삭 · ${r['created_at'].toString().substring(0, 10)}',
-                ),
+    children: submittedRun == null
+        ? _preSubmit()
+        : _progress(context),
+  );
+
+  // Pre-submit: choose 제출 방식, confirm 문항 수, request 첨삭.
+  List<Widget> _preSubmit() => [
+    if (widget.rewriteRun == null && rewrites.isNotEmpty)
+      DropdownButtonFormField<String>(
+        initialValue: parentId ?? '',
+        decoration: const InputDecoration(labelText: '제출 방식'),
+        items: [
+          const DropdownMenuItem(value: '', child: Text('최초 첨삭')),
+          for (final r in rewrites)
+            DropdownMenuItem(
+              value: r['id'] as String,
+              child: Text(
+                '무료 재첨삭 · ${r['created_at'].toString().substring(0, 10)}',
               ),
-          ],
-          onChanged: busy || submittedRun != null
-              ? null
-              : (v) => setState(() {
-                  parentId = v == '' ? null : v;
-                  notice = '';
-                }),
-        ),
-      if (parentId != null)
-        const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
-      const Divider(),
-      Text('제출 문항: ${widget.included.length}개'),
-      Text(
-        parentId != null && eligibleRewrite
-            ? '사용 크레딧: 0개 · 무료 재첨삭'
-            : '사용 크레딧: 서버 확인 필요',
+            ),
+        ],
+        onChanged: busy
+            ? null
+            : (v) => setState(() {
+                parentId = v == '' ? null : v;
+                notice = '';
+              }),
       ),
-      if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
-      FilledButton(
-        style: FilledButton.styleFrom(
-          backgroundColor: AppTokens.textPrimary,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(48, 48),
-        ),
-        onPressed:
-            ready &&
-                submittedRun == null &&
-                !busy &&
-                (parentId == null || eligibleRewrite)
-            ? submit
-            : null,
-        child: Text(
-          busy
-              ? '처리 중…'
-              : ready
-              ? '첨삭 요청'
-              : '첨삭 서비스 준비 중',
-        ),
-      ),
-      if (parentId != null && eligibilityLoaded && !eligibleRewrite)
-        const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
-      if (parentId != null && !eligibilityLoaded)
-        const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
-      if (notice.isNotEmpty) Text(notice),
-      if (submittedRun != null)
-        TextButton(onPressed: pollStatus, child: const Text('처리 상태 새로고침')),
-      if (notice.isNotEmpty)
-        TextButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const SharedEssayHistoryPage(),
+    if (parentId != null)
+      const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
+    const Divider(),
+    Text('제출 문항: ${widget.included.length}개'),
+    if (parentId != null && eligibleRewrite)
+      const Text('무료 재첨삭 · 추가 Credit 없음'),
+    if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
+    // [답안 수정] [첨삭 요청] 나란히 배치.
+    Row(
+      children: [
+        if (widget.onEdit != null) ...[
+          Expanded(
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppTokens.textPrimary,
+                side: const BorderSide(color: AppTokens.majorSurfaceBorder),
+                minimumSize: const Size(0, 48),
+              ),
+              onPressed: busy ? null : widget.onEdit,
+              child: const Text('답안 수정'),
             ),
           ),
-          child: const Text('나의 첨삭 기록'),
+          const SizedBox(width: AppTokens.space12),
+        ],
+        Expanded(
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: AppTokens.textPrimary,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(0, 48),
+            ),
+            onPressed: ready && !busy && (parentId == null || eligibleRewrite)
+                ? submit
+                : null,
+            child: Text(
+              busy
+                  ? '처리 중…'
+                  : ready
+                  ? '첨삭 요청'
+                  : '첨삭 서비스 준비 중',
+            ),
+          ),
         ),
-    ],
-  );
+      ],
+    ),
+    if (parentId != null && eligibilityLoaded && !eligibleRewrite)
+      const Text('현재 무료 재첨삭 자격이 없습니다. 작성한 답안은 보존됩니다.'),
+    if (parentId != null && !eligibilityLoaded)
+      const Text('재첨삭 자격을 아직 확인하지 못했어요. 답안은 계속 작성할 수 있습니다.'),
+    if (notice.isNotEmpty)
+      Padding(
+        padding: const EdgeInsets.only(top: AppTokens.space8),
+        child: Text(notice),
+      ),
+  ];
+
+  // Post-submit progress: the status is the primary information. Real server
+  // state only — no fabricated percentage or ETA.
+  List<Widget> _progress(BuildContext context) {
+    final failed = runState == 'failed';
+    final completed = runState == 'completed';
+    final included = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => widget.included.contains(q['key']));
+    return [
+      const SizedBox(height: AppTokens.space8),
+      Text(
+        failed
+            ? '첨삭을 완료하지 못했어요'
+            : completed
+            ? '첨삭이 완료됐어요'
+            : '첨삭을 진행하고 있어요',
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: AppTokens.textPrimary,
+        ),
+      ),
+      if (!failed) ...[
+        const SizedBox(height: AppTokens.space8),
+        Text(
+          completed ? '저장된 결과를 확인할 수 있어요.' : '답안을 분석하고 피드백을 준비하고 있습니다.',
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space16),
+          child: StepProgressBar(
+            steps: const ['제출 완료', '첨삭 중', '결과 준비'],
+            activeIndex: completed ? 2 : 1,
+            done: completed,
+          ),
+        ),
+      ],
+      // 문제별 진행 상태 (구분선으로 구분).
+      for (final q in included) ...[
+        const Divider(height: 1),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(q['label'] as String, style: AppTokens.body),
+              ),
+              Text(
+                failed
+                    ? '재처리 필요'
+                    : completed
+                    ? '완료'
+                    : runState == 'processing'
+                    ? '첨삭 중'
+                    : '대기 중',
+                style: AppTokens.caption.copyWith(
+                  color: failed ? AppTokens.dangerInk : AppTokens.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+      const Divider(height: 1),
+      const SizedBox(height: AppTokens.space12),
+      if (failed)
+        Text(
+          notice.isEmpty ? '기록에서 처리 상태를 확인해 주세요.' : notice,
+          style: AppTokens.body.copyWith(color: AppTokens.dangerInk),
+        ),
+      if (completed)
+        Text(
+          notice.isEmpty ? '저장된 결과를 확인하세요.' : notice,
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
+      if (!failed && !completed) ...[
+        Text(
+          '잠시 쉬어가세요. 결과가 준비되면 확인할 수 있어요.',
+          style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
+        ),
+        if (notice.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: AppTokens.space4),
+            child: Text(
+              notice,
+              style: AppTokens.caption.copyWith(color: AppTokens.dangerInk),
+            ),
+          ),
+      ],
+      const SizedBox(height: AppTokens.space4),
+      Text(
+        '화면을 닫아도 첨삭은 계속 진행됩니다.',
+        style: AppTokens.caption.copyWith(color: AppTokens.textTertiary),
+      ),
+      const SizedBox(height: AppTokens.space12),
+      Wrap(
+        spacing: AppTokens.space8,
+        runSpacing: AppTokens.space8,
+        children: [
+          OutlinedButton.icon(
+            onPressed: polling ? null : pollStatus,
+            icon: const Icon(Icons.refresh, size: AppTokens.iconDense),
+            label: const Text('처리 상태 새로고침'),
+          ),
+          if (completed)
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppTokens.textPrimary,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: _openHistory,
+              child: const Text('첨삭 결과 보기'),
+            ),
+          TextButton(onPressed: _openHistory, child: const Text('나의 첨삭 기록')),
+        ],
+      ),
+    ];
+  }
 }
 
 /// Review the existing per-question drafts before using the same exam submission API.
@@ -1606,69 +2170,100 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
     return missing;
   }
 
+  // Once a run is in flight the sheet switches to a progress-only view (the
+  // submit router renders the progress); the answer-confirm UI is hidden so the
+  // exam name, 답안 수정 and the checklist are not stacked under the progress.
+  bool submitting = false;
+
+  String get _examMeta {
+    final kind = widget.exam['kind'];
+    final kindLabel = kind == 'admission'
+        ? '수시논술'
+        : kind == 'mock'
+        ? '모의논술'
+        : '${kind ?? ''}';
+    return [
+      '${widget.exam['year'] ?? ''}학년도 $kindLabel'.trim(),
+      if (widget.exam['track'] is String) widget.exam['track'] as String,
+      if (widget.exam['session'] is String) widget.exam['session'] as String,
+    ].where((v) => v.trim().isNotEmpty).join(' · ');
+  }
+
   @override
-  Widget build(BuildContext context) => SafeArea(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
-          if (widget.exam['universityName'] != null)
-            Text(widget.exam['universityName'] as String),
-          Text(
-            [
-              if (widget.exam['year'] != null) '${widget.exam['year']}학년도',
-              widget.exam['kind'] == 'admission'
-                  ? '수시 논술'
-                  : widget.exam['kind'] == 'mock'
-                  ? '모의논술'
-                  : '',
-              widget.exam['track'],
-              widget.exam['session'],
-            ].whereType<String>().where((v) => v.isNotEmpty).join(' · '),
-          ),
-          const Divider(),
-          for (final q
-              in (widget.exam['questions'] as List)
-                  .cast<Map<String, dynamic>>())
-            CheckboxListTile(
-              title: Text(q['label'] as String),
-              value: selected.contains(q['key']),
-              onChanged: widget.rewriteRun != null
-                  ? null
-                  : (v) => setState(() {
-                      if (v == true) {
-                        selected.add(q['key'] as String);
-                      } else {
-                        selected.remove(q['key']);
-                      }
-                    }),
-            ),
-          FutureBuilder<List<String>>(
-            future: missingAnswers(),
-            builder: (context, snapshot) => snapshot.hasError
-                ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
-                : Text(
-                    (snapshot.data ?? []).isEmpty
-                        ? ''
-                        : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+  Widget build(BuildContext context) {
+    final questions = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>();
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (!submitting) ...[
+              // 시험명은 한 번만: 대학명 + 한 줄 요약.
+              Text('답안 확인', style: Theme.of(context).textTheme.titleLarge),
+              if (widget.exam['universityName'] != null) ...[
+                const SizedBox(height: AppTokens.space8),
+                Text(
+                  widget.exam['universityName'] as String,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ],
+              if (_examMeta.isNotEmpty)
+                Text(
+                  _examMeta,
+                  style: AppTokens.secondary.copyWith(
+                    color: AppTokens.textSecondary,
                   ),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('답안 수정'),
-          ),
-          _RoundSubmitRouter(
-            owner: widget.owner,
-            exam: widget.exam,
-            included: selected,
-            rewriteRun: widget.rewriteRun,
-          ),
-        ],
+                ),
+              const Divider(),
+              for (final (i, q) in questions.indexed) ...[
+                if (i > 0)
+                  const Divider(color: Color(0xFF636363), height: 1),
+                CheckboxListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(q['label'] as String),
+                  value: selected.contains(q['key']),
+                  onChanged: widget.rewriteRun != null
+                      ? null
+                      : (v) => setState(() {
+                          if (v == true) {
+                            selected.add(q['key'] as String);
+                          } else {
+                            selected.remove(q['key']);
+                          }
+                        }),
+                ),
+              ],
+              FutureBuilder<List<String>>(
+                future: missingAnswers(),
+                builder: (context, snapshot) => snapshot.hasError
+                    ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
+                    : Text(
+                        (snapshot.data ?? []).isEmpty
+                            ? ''
+                            : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+                      ),
+              ),
+              const SizedBox(height: AppTokens.space8),
+            ],
+            // [답안 수정]은 제출 라우터가 [첨삭 요청]과 나란히 렌더한다.
+            _RoundSubmitRouter(
+              owner: widget.owner,
+              exam: widget.exam,
+              included: selected,
+              rewriteRun: widget.rewriteRun,
+              onEdit: () => Navigator.pop(context),
+              onSubmittedChanged: (value) {
+                if (mounted) setState(() => submitting = value);
+              },
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Read-only entry independent of answer submission/readiness. Same native viewer
@@ -1734,11 +2329,15 @@ class _RoundSubmitRouter extends ConsumerWidget {
     required this.exam,
     required this.included,
     this.rewriteRun,
+    this.onEdit,
+    this.onSubmittedChanged,
   });
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
   final Map<String, dynamic>? rewriteRun;
+  final VoidCallback? onEdit;
+  final ValueChanged<bool>? onSubmittedChanged;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final catalog = ref.watch(mathCatalogProvider(owner));
@@ -1755,14 +2354,31 @@ class _RoundSubmitRouter extends ConsumerWidget {
         .toList();
     if (selected.isNotEmpty &&
         selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      return MathExamSession(
-        key: ValueKey(
-          '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
-        ),
-        owner: owner,
-        exam: exam,
-        selected: included,
-        leaves: leaves,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (onEdit != null)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppTokens.textPrimary,
+                  side: const BorderSide(color: AppTokens.majorSurfaceBorder),
+                ),
+                onPressed: onEdit,
+                child: const Text('답안 수정'),
+              ),
+            ),
+          MathExamSession(
+            key: ValueKey(
+              '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
+            ),
+            owner: owner,
+            exam: exam,
+            selected: included,
+            leaves: leaves,
+          ),
+        ],
       );
     }
     return _ExamSubmit(
@@ -1770,6 +2386,8 @@ class _RoundSubmitRouter extends ConsumerWidget {
       exam: exam,
       included: included,
       rewriteRun: rewriteRun,
+      onEdit: onEdit,
+      onSubmittedChanged: onSubmittedChanged,
     );
   }
 }

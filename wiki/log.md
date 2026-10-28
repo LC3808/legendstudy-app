@@ -5014,3 +5014,61 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-10-28 — Owner 승인 Worker 입력검증 Production 배포
 
 코드e934240 Push, 기존72모듈 중live_worker.py만 교체·71동일. Worker451b8cae/배포775f74de100% 확인, bindings14/Secret5상속/runtime설정보존. 회귀65PASS·재다운로드코드4576자2문항/답안hash/출력제한PASS. 기존run reserved/checkpoint0/1예약동일, DB쓰기·Provider·평가·APP변경0. rollback202f8f62조회가능, 미실행. [배포근거·다음승인](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28).
+## 2026-10-28 — APP 인문논술 LAB UI/UX 개선 (BETA)
+Claude APP 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 733bad7, Flutter 3.47.6/fvm). 11개 UI/UX 개선: 제출 확인창 간소화(제목+작성 문항 수+서버 확정 Credit 출처 1줄+[돌아가기]/[첨삭 시작]; quote/expectedGrant/409 재확인·예약·차감 계약 보존), 명시적 임시저장 버튼, 첨삭 진행 프로그레스바(제출→첨삭 중→결과), 전용 성장 분석 화면 `/lab/essay/growth`(기존 before→after 비교 계약 재사용·임의 수치/시험 간 평균 없음·최근 50회차 범위 고지), MY→성장 분석 이동, 차분한 네이비 BETA 배지(논술 LAB 진입·MY·성장 분석), 결과 화면 종합 평가 선두 재구성·중복 문구 제거·결과 오프너 공유, 베타 Credit 안내 축약.
+수정 파일: `lib/shared/widgets/shell_widgets.dart`, `legendstudy_lab_entry.dart`, `lib/features/lab/score_summary.dart`, `lib/features/credits/{essay_credit_source,essay_beta_credit}.dart`, `lib/features/essay/{essay_pages,source_catalog_page,shared_history_page}.dart`, 신규 `lib/features/essay/essay_growth_page.dart`. 테스트: 신규 `test/essay_growth_ui_test.dart`, `test/essay_credit_source_test.dart` 보강.
+검증: `fvm flutter analyze` 0건, `fvm flutter test` 1136 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. Owner 실기기 검수 전 Codex 브랜치 미병합. 코드 커밋 4985818. [설계 맥락](essay-growth-history-ui-20261026.md) · [베타 Credit](essay-beta-credit-design-20261027.md).
+
+### 2026-10-28 — APP 실기기 검수 1차 수정 (논술 LAB 메인·시험 선택)
+Owner 실기기 검수 2번 항목 한정. (1) 시험 선택 후 문항 미선택 CTA를 '문제 선택'으로 표시 — REVIEW_REQUIRED 시험이 문항 선택 전 '서비스 준비중'으로 오표기되던 문제 수정. 문항 선택+첨삭 불가는 '첨삭 서비스 준비 중', 대학 전체 보류(isUniversityServicePreparing)는 기존 '서비스 준비중' 유지. 공개 판정은 기존 isUniversityServicePreparing+verification 계약 그대로, 특정 대학 수정 없음. (2) 논술 LAB 상단 메뉴에 '나의 논술랩'(→ `/lab/essay/growth`, 기존 성장 분석 화면 재사용) 추가. (3) Credit 표시 '사용 가능 크레딧 N개'→'현재 크레딧 N개'(조회·계산 로직 불변).
+수정: `lib/features/essay/source_catalog_page.dart`, `lib/features/credits/credit_balance.dart`. 테스트 갱신: `test/{source_catalog_widget,essay_multi_selection,ux_cleanup}_test.dart`.
+검증: `fvm flutter analyze` 0건, `fvm flutter test` 1136 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. BETA 배지·대학 목록·답안 작성·임시저장·제출·정산·결과·성장 그래프 미변경. 코드 커밋 68d89ff. Owner 실기기 검수·승인 전 다음 단계(답안 작성 화면) 미진행, Codex 브랜치 미병합.
+
+### 2026-10-28 — APP 2차 검수 step 1: 자연·수리논술 첨삭 준비 중 안내
+- 발견 문제: 자연·수리논술(사진·수식 답안) 시험을 선택하면 답안 작성 화면까지 진입해 작성한 뒤에야 첨삭이 불가능함을 알게 됨(건국 Worker 장애와 별개의 APP UX 결함).
+- 원인: 사진·수식 문항의 첨삭 공개 여부(Math 평가 공개)가 작성 영역에 안내되지 않음. WEB은 [공개 승인과 사진 입력 capability 분리·상단 붉은 안내](essay-web-studio-ui-20261026.md#2026-10-27--첨삭-보류와-사진-입력-계약-분리) 정책을 이미 적용. APP은 미반영.
+- 수정: `_SourceWriter`(문항별 작성 위젯) 작성 영역 상단에 차분한 붉은 안내(연한 붉은 배경·붉은 테두리·진한 붉은 제목) 추가. 제목 "수리논술 첨삭 서비스 준비 중", 본문 "더 정확한 풀이 분석과 단계별 코칭을 위해 서비스를 개선하고 있습니다. 첨삭 서비스는 준비가 완료되면 제공됩니다."(사용자 화면 'AI' 문구 미사용 정책 준수). 노출 조건은 대학·계열명이 아니라 기존 공개 정책 — `mathEvaluationAvailableProvider`(gateway.available) + 해당 Registry 문항 ID의 published `leaf_id` — 로 판단하며, 사진·수식(`inputMode=='image'`) 문항이 공개 전일 때만 표시. 입력 유형과 첨삭 공개 상태를 분리하여 TEXT 문항·혼합(상경) 시험의 입력 계약·공개 정책은 불변. 제출 차단은 기존 서버/`_ExamSubmit`/`MathExamSession` 계약 그대로 두고 안내만 선제 노출.
+- 수정 파일: `lib/features/essay/source_catalog_page.dart`(안내 위젯 `_ServicePreparingNotice` + 공개 정책 감지). 테스트: 신규 `test/essay_service_preparing_test.dart`(image 문항 안내 노출·text 문항 미노출), `test/source_catalog_widget_test.dart` image-first 재진입 복원 검증에 스크롤 보강(안내로 작성 영역이 길어진 레이아웃 대응).
+- 검증: `fvm flutter analyze` 0건, `fvm flutter test` 1138 PASS/7 skip/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지.
+- Codex 통합 주의: `source_catalog_page.dart`는 Claude 담당 UI. Worker 장애(건국 등)와 APP 상태 관리 개선(지시서 §12: 100초 폴링·runId 복원·완료 후 결과 연결)은 후속 단계로, 이번 커밋에 미포함.
+- 코드 커밋 0fc745e. 롤백: `git revert 0fc745e`. Owner 실기기 검수·승인 전 step 2(문항별 아코디언) 미진행, Codex 브랜치 미병합.
+
+### 2026-10-28 — APP UI/UX 전체 구현 (단계별 승인 폐기, 일괄 구현)
+Owner 최종 지시로 단계별 검수 절차를 폐기하고 전체 요구사항을 일괄 구현했다. Claude 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 5eca473)에서만 작업, Worker 장애는 Codex 담당이라 미수정. WEB·DB·Worker·Credit·History·Registry·인증 계약 변경 0, Flutter Native UI 유지.
+
+**구현(§ = 지시서 항목):**
+- **§3 자연·수리논술 준비 중 안내** — 작성 화면 내부 배너를 폐기하고, 시험·계열 선택 직후(문항 선택·작성 전) `_SourceSelection`에 붉은 안내를 노출. 판정은 대학·계열명이 아니라 기존 공개 정책(`mathEvaluationAvailableProvider` + 해당 Registry 문항 ID의 published `leaf_id`)으로, 사진·수식(`inputMode=='image'`) 문항이 공개 전일 때만. 입력유형↔공개상태 분리로 TEXT·혼합 시험 정상. 문구 'AI' 미사용.
+- **§4 문항별 아코디언** — 작성 화면의 문항 드롭다운 폐기, 아코디언으로 교체(`_SelectedAnswerWriter`+`_AccordionItem`). 문제 1 기본 펼침·동시 하나만·전환 시 답안/드래프트/사진 보존(Offstage로 마운트 유지)·문항별 자동/수동 저장 유지·완료 체크 표시·헤더 52dp. 평가/제출 데이터 구조 불변.
+- **§5 임시저장 UI** — 버튼이 먼저, 상태는 버튼 아래. 기본 회색 테두리→누르는 동안 네이비 채움, 성공/실패 피드백, 누르기 전 '저장됨' 미표시, 편집 시 갱신. 자동 저장·복원 계약 유지.
+- **§6 제출 확인창** — 정보구조 유지(제목+작성 문항 수+Credit 출처 1줄), 제목 위계·아이콘·여백·버튼 크기/간격 개선. Credit 계약 불변.
+- **§7 첨삭 진행 화면** — 상태를 핵심으로 재구성: 큰 제목 '첨삭을 진행하고 있어요', 단계바 [제출 완료]→[첨삭 중]→[결과 준비], '잠시 쉬어가세요', 문제별 상태+구분선, 시험명 중복 제거, [처리 상태 새로고침]/[나의 첨삭 기록]/(완료 시)[첨삭 결과 보기]. 실제 서버 상태만, 임의 진행률/완료시간 없음.
+- **§8 APP 상태 관리** — 제출 시 runId를 제출키와 함께 보존, 재진입 시 `restoreInFlightRun`으로 동일 run 폴링 재개(재요청·재제출 없음). 100초 컷오프 제거→3s/10s/30s backoff, `WidgetsBindingObserver`로 백그라운드 일시중지·복귀 시 즉시 조회. 완료→결과 연결, 실패→기존 서버 계약.
+- **§9 첨삭 기록 문항 번호** — Registry 라벨 우선, 없으면 run의 `question_ids` 실제 순번 '문항 N'(임의 번호 금지). 공용 헬퍼 `essayExamQuestionLabel`.
+- **§10 사진 크롭** — 로컬 크롭 화면(`answer_image_crop.dart`, dart:ui만, 패키지/이미지 API 추가 없음): 촬영/선택→자유비율 크롭(코너 핸들)→미리보기→[다시 자르기]/[다시 촬영]/[첨부하기], 취소 시 기존 보존. 원본 해상도·방향 유지, PNG 출력. 기존 저장·업로드 계약·AnswerImagesInput 유지. 카메라/갤러리 모두 적용. OCR/Math 엔진 불변.
+- **§11 논술 LAB 상단 메뉴 한 줄** — [나의 첨삭 기록][나의 논술랩] 왼쪽 + 현재 크레딧 오른쪽, FittedBox 균일 축소로 넘침·잘림 방지, 아주 큰 배율만 2행 폴백. 서버 잔액 사용(조회 전 숨김). 이동 경로·BETA 배지·대학 목록 유지.
+- **§12 성장 분석 보존** — 기존 `/lab/essay/growth`·MY→성장·상단 '나의 논술랩'→성장 이동 유지(재생성 없음).
+
+**수정 파일:** `lib/features/essay/source_catalog_page.dart`(§3·4·5·6·7·8·9·11), `shared_history.dart`·`shared_history_page.dart`·`round_history_actions.dart`(§9), `answer_image.dart`·신규 `answer_image_crop.dart`(§10). 테스트: 신규 `test/{essay_service_preparing,answer_image_crop}_test.dart`, 갱신 `test/{source_catalog_widget,essay_multi_selection}_test.dart`.
+
+**검증:** `fvm flutter analyze` 0건, `fvm flutter test` 1141 PASS / 7 skip / 0 fail. 360/390/430 레이아웃·아코디언 전환·저장/복원·TEXT/IMAGE 분리·준비 중 안내 전체 흐름·문항 번호 회귀 포함.
+
+**자동화 미검증(실기기 QA 필요):** (a) 시험 제출/상태조회 HTTP 경로(ExamSubmissionGateway)는 기존 모킹 하네스가 없어 §7 진행·§8 runId 복원은 코드리뷰/analyze로만 확인. (b) 크롭 래스터화(적용→미리보기→첨부 PNG 인코딩)는 headless 엔진 미지원으로 열림·컨트롤·다시 촬영·취소만 테스트. (c) Google·Apple 로그인 버튼 미노출은 별도 후속(인증 구조 미변경).
+
+**Codex 통합 주의:** 모든 변경은 `claude/essay-app-beta-uiux-20261028` 한정, Codex 폴더/브랜치 미수정·미병합. Worker 복구와 충돌 가능 지점 없음(APP UI·상태조회·화면이동만, 기존 Gateway/RPC 계약 유지). 충돌 가능 파일: `source_catalog_page.dart`(Claude 담당 UI). 최종 통합은 Codex.
+
+**Commit:** 0fc745e(§3 1차) → d6fdd6e(wiki) → ebdc058(§3 재배치·§5·§6·§9·§11) → aeea9a0(§4) → fcafb83(§7·§8) → c61a898(§10). **롤백:** 범위별 `git revert <sha>` 또는 `git reset --hard 5eca473`(이번 일괄 작업 전체 되돌림, 로컬 한정). Owner 실기기 검수 대기.
+
+### 2026-10-28 — APP 실기기 검수 후속 수정 (2차 일괄)
+Owner iPhone 실기기 검수에서 발견된 P0/P1을 일괄 수정. 기존 PASS 기능(상단 메뉴·아코디언·임시저장·간결 Credit 확인창·문항 번호·사진 크롭 등) 미변경. WEB·DB·Worker·Credit·History·Registry·인증 계약 변경 0.
+
+- **§1 (P0) 자연·수리논술 준비 중 안내 전수 불일치** — 발견: 건국 모의 자연만 안내 표시되고 건국 수시 자연·동국·경희·고려 자연은 미표시. 원인: 1차 판정이 `inputMode=='image'`에 의존했으나 `inputMode`는 UI 선호값이며 **Registry browse 투영에 없어** 다수 시험에서 누락(WEB에서도 동일했던 버그). 수정: 판정을 서버 **서비스 가능 시험 집합(`serviceExamIdsProvider` = service-status)** 기준으로 변경 — 들어갈 수 있으나(대학 보류·REVIEW_REQUIRED 아님) 서비스 가능 집합에 없는 시험은 준비 중으로 안내. 집합 미수신(로딩/오류) 시 거짓양성 방지로 미표시. 대학·계열명·inputMode 비의존. 안내는 비차단(공개 TEXT 문항 작성/제출 유지).
+- **§2 (P0) 첨삭 진행 화면 분리** — 첨삭 요청이 접수되면(run in-flight) 리뷰 Bottom Sheet를 **진행 전용 뷰로 전환**(답안 확인·시험명·답안 수정 숨김). Bottom Sheet 중첩 없음. runId 복원·backoff 폴링·생명주기(§8) 유지.
+- **§3 (P0) 답안 확인 화면 정리** — 시험명 1회만(대학명 + "2025학년도 수시논술 · 인문사회Ⅰ" 한 줄), 문항 간 진회색 구분선, [답안 수정][첨삭 요청] 나란히(제출 라우터가 렌더; math 경로는 답안 수정 상단 배치).
+- **§4 (P0) 다시 써보기·재첨삭 연결** — 결과 화면 라벨 '문항 정보 확인 중' → `essayExamQuestionLabel`(Registry 라벨/실제 문항 번호)로 수정(APP). **재작성 진입 '작성 자료 확인 못함'은 Backend 범위**: `essay_exam_history` run이 `sourceUniversityId`/universityId를 포함하지 않고 STANDBY/보류 시험이 기본 `/api/essay/catalog`에 없어 APP이 재작성용 시험을 해석할 수 없음. 필요한 Backend 변경(Codex): run 페이로드에 대학 식별자(또는 시험 메타/문항) 포함하거나 사용자 보유 이력 시험을 카탈로그에 포함. APP은 DB/Worker 미변경, 기존 답안·lineage·Credit 보존.
+- **§5 (P1) 성장 분석 UI** — 시험별 접이식 카드(제목 "대학명 · 시험명"), 최신 시험 펼침·이전 접힘, 펼칠 때만 비교 리포트 지연 로드. 5개씩 렌더·하단 스크롤 시 +5(이력 조회는 기존 50 상한). 동일 시험 다회차 한 카드. 실제 평가만·시험 간 혼합 없음·빈 상태 정직.
+
+**수정 파일:** `source_catalog_page.dart`(§1·§2·§3), `shared_history_page.dart`(§4 라벨), `essay_growth_page.dart`(§5). 테스트: `essay_service_preparing_test`(serviceExams 기반 재작성), `essay_growth_ui_test`(카드·페이지네이션) 갱신.
+**검증:** `fvm flutter analyze` 0건, `fvm flutter test` 1142 PASS / 7 skip / 0 fail.
+**자동화 미검증(실기기 QA):** 시험 제출/상태조회 HTTP(§2 전환·§8 폴링), 크롭 래스터화. §4 재작성 Backend 해결 전까지 STANDBY 시험 재작성은 안내 메시지로 graceful 유지.
+**Codex 통합 주의:** `source_catalog_page.dart`는 Claude UI. §4 재작성은 Backend(run 페이로드/카탈로그 범위) 선행 필요 — Worker 복구와 함께 검토. 기존 Gateway/RPC 계약 유지.
+**Commit:** 6a0f040(§1·§2·§3·§4 라벨) → 04ea3a5(§5). 롤백: 범위별 `git revert <sha>`. Owner 실기기 재검수 대기.

@@ -28,6 +28,31 @@ void main() {
     );
     expect(() => EssayCreditSource.parse(fixture(), 0), throwsFormatException);
   });
+  test('usageLabel names the server-confirmed source in one line', () {
+    expect(EssayCreditSource.parse(fixture(), 1).usageLabel, '유료 Credit 사용');
+    expect(
+      EssayCreditSource.parse({...fixture(), 'source': 'beta'}, 1).usageLabel,
+      '베타 테스트 Credit 사용',
+    );
+    expect(
+      EssayCreditSource.parse(
+        {...fixture(), 'source': 'signup_bonus'},
+        1,
+      ).usageLabel,
+      '무료 Credit 사용',
+    );
+    expect(
+      EssayCreditSource.parse(
+        {...fixture(), 'source': 'admin_grant'},
+        1,
+      ).usageLabel,
+      '관리자 지급 Credit 사용',
+    );
+    // Every known source maps to a usage label (confirmation never shows a blank).
+    for (final source in EssayCreditSource.labels.keys) {
+      expect(EssayCreditSource.usageLabels[source], isNotNull);
+    }
+  });
   test('invalid source or balance fails closed', () {
     for (final patch in [
       {'source': 'unknown'},

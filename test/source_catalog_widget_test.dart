@@ -234,9 +234,13 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('문제 1'), findsOneWidget);
       expect(find.text('공식 입학처 자료 확인 ↗'), findsOneWidget);
+      // Registered but review-blocked (single question auto-selected, no draft):
+      // feedback is unavailable, so the CTA reads 첨삭 서비스 준비 중.
       expect(
         tester
-            .widget<FilledButton>(find.widgetWithText(FilledButton, '서비스 준비중'))
+            .widget<FilledButton>(
+              find.widgetWithText(FilledButton, '첨삭 서비스 준비 중'),
+            )
             .onPressed,
         isNull,
       );
@@ -302,7 +306,14 @@ void main() {
         expect(find.text('첨삭 시작하기'), findsNothing);
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
-        await tester.ensureVisible(find.text('문제 1'));
+        // This synthetic image exam has no Math leaf/availability in tests, so
+        // the 준비 중 안내가 선택 화면에 노출되어 목록이 길어진다. 지연 빌드되는
+        // 체크박스를 스크롤로 띄운 뒤 확인한다.
+        await tester.scrollUntilVisible(
+          find.text('문제 1'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
         // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
@@ -329,7 +340,11 @@ void main() {
         expect(tester.takeException(), isNull);
         await tester.pageBack();
         await tester.pumpAndSettle();
-        await tester.ensureVisible(find.text('문제 1'));
+        await tester.scrollUntilVisible(
+          find.text('문제 1'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
         // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
@@ -553,7 +568,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('사용 가능 크레딧 10개'), findsOneWidget);
+      expect(find.text('현재 크레딧 10개'), findsOneWidget);
       expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
       expect(find.text('나의 논술 LAB'), findsNothing);
       expect(find.text('첨삭 시작하기'), findsNothing);
@@ -564,7 +579,7 @@ void main() {
       final y = tester.getTopLeft(find.text('대학 20')).dy;
       await tester.tap(find.text('대학 20'));
       await tester.pumpAndSettle();
-      expect(find.text('사용 가능 크레딧 10개'), findsNothing);
+      expect(find.text('현재 크레딧 10개'), findsNothing);
       await tester.tap(find.byTooltip('대학 목록'));
       await tester.pumpAndSettle();
       expect(tester.getTopLeft(find.text('대학 20')).dy, closeTo(y, 1));

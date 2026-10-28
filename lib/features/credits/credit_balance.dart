@@ -74,7 +74,7 @@ class CreditBalanceCard extends ConsumerWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('사용 가능 크레딧 ${balance.spendable}개'),
+                    Text('현재 크레딧 ${balance.spendable}개'),
                     const SizedBox(height: AppTokens.space8),
                     Wrap(
                       spacing: AppTokens.space8,
@@ -97,7 +97,7 @@ class CreditBalanceCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        '사용 가능 크레딧 ${balance.spendable}개',
+                        '현재 크레딧 ${balance.spendable}개',
                         style: AppTokens.secondary.copyWith(
                           color: AppTokens.textPrimary,
                         ),

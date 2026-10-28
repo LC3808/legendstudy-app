@@ -204,24 +204,140 @@ class GuestAccountPrompt extends StatelessWidget {
   );
 }
 
+/// A small, calm "BETA" badge for 논술 LAB surfaces. Navy text on a soft
+/// grey-blue fill, text-labelled (never color-only) and deliberately low-key so
+/// it reads as a quiet status, not an orange emphasis.
+class LabBetaBadge extends StatelessWidget {
+  const LabBetaBadge({super.key, this.label = 'BETA'});
+  final String label;
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: '$label · 베타 서비스',
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        color: AppTokens.primarySoft,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: AppTokens.cardBorder),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.5,
+          color: AppTokens.info,
+        ),
+      ),
+    ),
+  );
+}
+
 class CompactUtilityCard extends StatelessWidget {
   const CompactUtilityCard({
     required this.title,
     required this.body,
     this.action,
+    this.titleBadge,
     super.key,
   });
   final String title, body;
   final Widget? action;
+
+  /// Optional small badge shown next to the title (e.g. a [LabBetaBadge]).
+  final Widget? titleBadge;
   @override
   Widget build(BuildContext context) => LsCard(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        titleBadge == null
+            ? Text(title, style: Theme.of(context).textTheme.titleMedium)
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  const SizedBox(width: AppTokens.space8),
+                  titleBadge!,
+                ],
+              ),
         const SizedBox(height: AppTokens.smallGap),
         Text(body),
         if (action != null) ...[const SizedBox(height: 8), action!],
+      ],
+    ),
+  );
+}
+
+/// A calm, labelled step indicator for multi-stage server work (제출 → 첨삭 중 →
+/// 결과) where no percentage is available. The active stage is named so progress
+/// never relies on color alone; an indeterminate bar runs until [done].
+class StepProgressBar extends StatelessWidget {
+  const StepProgressBar({
+    required this.steps,
+    required this.activeIndex,
+    this.done = false,
+    super.key,
+  });
+  final List<String> steps;
+  final int activeIndex;
+  final bool done;
+  @override
+  Widget build(BuildContext context) => Semantics(
+    liveRegion: true,
+    label: done
+        ? '${steps.last} 완료'
+        : '${steps[activeIndex.clamp(0, steps.length - 1)]} 진행 중',
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            for (var i = 0; i < steps.length; i++) ...[
+              if (i > 0) const SizedBox(width: 6),
+              Expanded(
+                child: Container(
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: i <= activeIndex
+                        ? AppTokens.info
+                        : AppTokens.primarySoft,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+        const SizedBox(height: AppTokens.space8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            for (var i = 0; i < steps.length; i++)
+              Text(
+                steps[i],
+                style: AppTokens.caption.copyWith(
+                  color: i == activeIndex && !done
+                      ? AppTokens.info
+                      : i <= activeIndex
+                      ? AppTokens.textPrimary
+                      : AppTokens.textTertiary,
+                  fontWeight: i == activeIndex
+                      ? FontWeight.w700
+                      : FontWeight.w400,
+                ),
+              ),
+          ],
+        ),
+        if (!done) ...[
+          const SizedBox(height: AppTokens.space12),
+          const LinearProgressIndicator(minHeight: 3),
+        ],
       ],
     ),
   );

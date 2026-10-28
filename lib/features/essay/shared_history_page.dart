@@ -82,35 +82,8 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
   String query = '', kind = 'all';
   String get owner => widget.owner;
   Future<void> openResult(SharedEssayRecord row, Map<String, dynamic> e) async {
-    final client = ref.read(supabaseClientProvider);
-    if (client == null) return;
-    try {
-      final result = await SharedEssayHistory(
-        client,
-        owner,
-      ).evaluationReport(row.math, e['id'] as String, exam: row.exam);
-      if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
-        return;
-      }
-      // Detail stays on this owner-keyed page; account switch removes it.
-      await Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => _Result(
-            owner: owner,
-            report: result.report,
-            before: result.before,
-            record: row,
-            questionId: (e['id'] as String).split('/').last,
-          ),
-        ),
-      );
-      _refresh();
-    } catch (_) {
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('평가를 불러오지 못했어요.')));
-      }
-    }
+    await openSharedEssayResult(context, ref, owner, row, e);
+    _refresh();
   }
 
   @override
@@ -230,7 +203,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                                 onPressed: () => openResult(row, e),
                                 child: Text(
                                   row.exam
-                                      ? '${(row.examData['questions'] as List? ?? []).cast<Map<String, dynamic>>().where((q) => q['dbQuestionId'] == (e['id'] as String).split('/').last).firstOrNull?['label'] ?? '문항'} · 첨삭 결과 보기'
+                                      ? '${essayExamQuestionLabel(row, (e['id'] as String).split('/').last)} · 첨삭 결과 보기'
                                       : '첨삭 결과 보기',
                                 ),
                               )
@@ -250,6 +223,47 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
         ),
       ),
     );
+  }
+}
+
+/// Opens a stored evaluation result on the current navigator. Shared by the
+/// history list and the growth-analysis screen so both use one owner-scoped
+/// read path and the same `_Result` detail view.
+Future<void> openSharedEssayResult(
+  BuildContext context,
+  WidgetRef ref,
+  String owner,
+  SharedEssayRecord row,
+  Map<String, dynamic> e,
+) async {
+  final client = ref.read(supabaseClientProvider);
+  if (client == null) return;
+  try {
+    final result = await SharedEssayHistory(
+      client,
+      owner,
+    ).evaluationReport(row.math, e['id'] as String, exam: row.exam);
+    if (!context.mounted || ref.read(authStateProvider).value?.userId != owner) {
+      return;
+    }
+    // Detail stays owner-scoped; an account switch removes the caller's page.
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => _Result(
+          owner: owner,
+          report: result.report,
+          before: result.before,
+          record: row,
+          questionId: (e['id'] as String).split('/').last,
+        ),
+      ),
+    );
+  } catch (_) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('평가를 불러오지 못했어요.')));
+    }
   }
 }
 
@@ -394,15 +408,11 @@ class _Result extends ConsumerWidget {
                         ),
                         EssayExamBadges(
                           data: record.examData,
-                          questionLabel:
-                              (record.examData['questions'] as List? ?? [])
-                                      .cast<Map<String, dynamic>>()
-                                      .where(
-                                        (q) => q['dbQuestionId'] == questionId,
-                                      )
-                                      .firstOrNull?['label']
-                                  as String? ??
-                              '문항 정보 확인 중',
+                          // Registry label, else the run's real question number;
+                          // never a stuck "문항 정보 확인 중".
+                          questionLabel: record.exam
+                              ? essayExamQuestionLabel(record, questionId)
+                              : '문항',
                         ),
                         Wrap(
                           spacing: 8,

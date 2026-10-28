@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'answer_image_crop.dart';
+
 String? answerImageType(List<int> bytes) {
   if (bytes.length < 12 || bytes.length > 20971520) return null;
   if (bytes[0] == 255 && bytes[1] == 216 && bytes[2] == 255) {
@@ -53,8 +55,19 @@ class _AnswerImageInputState extends State<AnswerImageInput> {
       final file = await ImagePicker().pickImage(source: source);
       if (file == null || !mounted) return;
       if (await file.length() > 20971520) throw const FormatException('size');
-      final bytes = await file.readAsBytes();
+      var bytes = await file.readAsBytes();
       if (!mounted) return;
+      if (answerImageType(bytes) == null) throw const FormatException('format');
+      // 촬영/선택 후 크롭 → 미리보기 → 첨부. 취소하면 기존 첨부를 유지하고, 다시
+      // 촬영을 고르면 같은 소스로 재촬영한다. 로컬 전처리만 수행한다.
+      final outcome = await cropAnswerImage(context, bytes);
+      if (!mounted || outcome == null) return;
+      if (outcome.retake) {
+        await pick(source);
+        return;
+      }
+      bytes = outcome.bytes ?? bytes;
+      if (bytes.length > 20971520) throw const FormatException('size');
       if (answerImageType(bytes) == null) throw const FormatException('format');
       await widget.onChanged(bytes);
       if (mounted) setState(() => error = null);

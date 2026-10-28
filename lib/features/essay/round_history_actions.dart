@@ -122,7 +122,7 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions> {
       if (status != null)
         for (final q in status!['questions'] as List)
           Text(
-            '${(widget.record.examData['questions'] as List? ?? []).cast<Map<String, dynamic>>().where((v) => v['dbQuestionId'] == q['question_id']).firstOrNull?['label'] ?? '문항'} · ${const {'completed': '완료', 'failed': '재처리 필요', 'processing': '진행 중', 'waiting': '대기 중', 'requested': '대기 중', 'reconciling': '처리 확인 중'}['${q['state']}'.toLowerCase()] ?? '처리 확인 중'}',
+            '${essayExamQuestionLabel(widget.record, q['question_id'] as String)} · ${const {'completed': '완료', 'failed': '재처리 필요', 'processing': '진행 중', 'waiting': '대기 중', 'requested': '대기 중', 'reconciling': '처리 확인 중'}['${q['state']}'.toLowerCase()] ?? '처리 확인 중'}',
           ),
       TextButton(
         onPressed: busy ? null : () => work(false),

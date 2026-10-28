@@ -21,7 +21,21 @@ class EssayCreditSource {
     'b2b_program': '학교 지급 Credit',
     'included': '무료 재첨삭',
   };
+
+  /// Single-line "which Credit is being used" text for the submit confirmation,
+  /// built from the server-confirmed deduction source only — never inferred.
+  static const usageLabels = {
+    'beta': '베타 테스트 Credit 사용',
+    'signup_bonus': '무료 Credit 사용',
+    'purchase': '유료 Credit 사용',
+    'admin_grant': '관리자 지급 Credit 사용',
+    'promotion': '프로모션 Credit 사용',
+    'compensation': '보상 Credit 사용',
+    'b2b_program': '학교 지급 Credit 사용',
+    'included': '추가 Credit이 사용되지 않아요',
+  };
   String get label => labels[source]!;
+  String get usageLabel => usageLabels[source]!;
   factory EssayCreditSource.parse(dynamic raw, int credits) {
     if (raw is! Map ||
         raw['version'] != 'essay-credit-source-v1' ||
