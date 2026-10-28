@@ -8,7 +8,7 @@ Owner 전체 인수 지시와 추가4과제가 기존 APP 보류/OCR 설계만 �
 
 - 별도 managed worktree `app-final-integration-20261028/legendstudy-service-app-20261022`, 브랜치 `codex/app-final-integration-20261028`.
 - Codex 원본 d5714b8, Claude eedd28f63be9214ad2803bb66999911969d13829. 원본 두 폴더의 미커밋 변경·브랜치 보존.
-- Codex pending 작업 보존 commit 0ebad6e, Claude merge 777911e. 충돌은 wiki/log 양쪽 원문 보존. 기존 PDF487 동일+37추가=524, asset166 확인. 원본 작업트리는 수정하지 않았다.
+- 구현 commit `58ef17476342ea8bdda56f68368dd3f47df5bba3` (이후 문서 영수증 commit 별도). Codex pending 작업 보존 commit 0ebad6e, Claude merge 777911e. 충돌은 wiki/log 양쪽 원문 보존. 기존 PDF487 동일+37추가=524, asset166 확인. 원본 작업트리는 수정하지 않았다.
 - [통합 전 상태 원문](app-claude-status-archive-20261028.md). Claude 아코디언·크롭·임시저장·접수/진행·브랜드·음성·인증 UI 유지.
 
 ## 보존 검토 7항
