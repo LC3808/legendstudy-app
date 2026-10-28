@@ -42,11 +42,43 @@ class EssayGrowthPage extends ConsumerWidget {
 bool _completed(Map<String, dynamic> e) =>
     (e['state'] as String?)?.toUpperCase() == 'COMPLETED';
 
-class _GrowthBody extends ConsumerWidget {
+class _GrowthBody extends ConsumerStatefulWidget {
   const _GrowthBody({required this.owner, super.key});
   final String owner;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_GrowthBody> createState() => _GrowthBodyState();
+}
+
+class _GrowthBodyState extends ConsumerState<_GrowthBody> {
+  // Render exams newest-first, five at a time; scrolling near the bottom loads
+  // the next five. The underlying history read stays capped at 50.
+  static const _page = 5;
+  int visible = _page;
+  int _groupCount = 0;
+  final _scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scroll.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (visible < _groupCount &&
+        _scroll.position.pixels >= _scroll.position.maxScrollExtent - 240) {
+      setState(() => visible += _page);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final owner = widget.owner;
     final history = ref.watch(sharedEssayHistoryProvider(owner));
     return history.when(
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -61,12 +93,15 @@ class _GrowthBody extends ConsumerWidget {
         final groups = groupEssayHistory(rows)
             .where((g) => g.any((r) => r.evaluations.any(_completed)))
             .toList();
+        _groupCount = groups.length;
+        final shown = groups.take(visible).toList();
         return RefreshIndicator(
           onRefresh: () async {
             ref.invalidate(sharedEssayHistoryProvider(owner));
             await ref.read(sharedEssayHistoryProvider(owner).future);
           },
           child: ListView(
+            controller: _scroll,
             padding: const EdgeInsets.all(AppTokens.pagePadding),
             physics: const AlwaysScrollableScrollPhysics(),
             children: [
@@ -84,10 +119,26 @@ class _GrowthBody extends ConsumerWidget {
                   padding: EdgeInsets.symmetric(vertical: 24),
                   child: Text('아직 완료된 첨삭 기록이 없어요. 첨삭을 받으면 성장 변화를 볼 수 있어요.'),
                 ),
-              for (final group in groups) ...[
-                _GrowthGroupCard(owner: owner, group: group),
+              // Newest exam expanded, earlier exams collapsed.
+              for (final (i, group) in shown.indexed) ...[
+                _GrowthGroupCard(
+                  key: ValueKey(group.first.id),
+                  owner: owner,
+                  group: group,
+                  initiallyExpanded: i == 0,
+                ),
                 const SizedBox(height: AppTokens.space12),
               ],
+              if (visible < groups.length)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppTokens.space16),
+                  child: Center(
+                    child: Text(
+                      '아래로 내리면 이전 시험을 더 볼 수 있어요.',
+                      style: AppTokens.caption,
+                    ),
+                  ),
+                ),
             ],
           ),
         );
@@ -97,16 +148,24 @@ class _GrowthBody extends ConsumerWidget {
 }
 
 class _GrowthGroupCard extends ConsumerStatefulWidget {
-  const _GrowthGroupCard({required this.owner, required this.group});
+  const _GrowthGroupCard({
+    required this.owner,
+    required this.group,
+    this.initiallyExpanded = false,
+    super.key,
+  });
   final String owner;
   final List<SharedEssayRecord> group;
+  final bool initiallyExpanded;
   @override
   ConsumerState<_GrowthGroupCard> createState() => _GrowthGroupCardState();
 }
 
 class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
-  // Memoized so scrolling or a parent rebuild never re-fires the report read.
+  // Memoized so scrolling or a parent rebuild never re-fires the report read;
+  // only loaded once the card is expanded.
   Future<({EvaluationReport report, EvaluationReport? before})>? _report;
+  late bool expanded = widget.initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -120,77 +179,94 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
     final latest = completedRounds.last;
     final latestEval = latest.evaluations.firstWhere(_completed);
     final client = ref.read(supabaseClientProvider);
-    _report ??= client == null
-        ? null
-        : SharedEssayHistory(client, owner).evaluationReport(
-            latest.math,
-            latestEval['id'] as String,
-            exam: latest.exam,
-          );
+    if (expanded) {
+      _report ??= client == null
+          ? null
+          : SharedEssayHistory(client, owner).evaluationReport(
+              latest.math,
+              latestEval['id'] as String,
+              exam: latest.exam,
+            );
+    }
+    final title = latest.examLabel.isEmpty
+        ? latest.title
+        : '${latest.title} · ${latest.examLabel}';
     return LsCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(latest.title, style: AppTokens.cardTitle),
-          if (latest.examLabel.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Text(latest.examLabel, style: AppTokens.secondary),
-            ),
-          Padding(
-            padding: const EdgeInsets.only(top: AppTokens.space8),
-            child: Text(
-              '완료된 첨삭 ${completedRounds.length}회차',
-              style: AppTokens.caption,
+          // Collapsed header: 대학명 · 시험명 + 회차 수.
+          InkWell(
+            onTap: () => setState(() => expanded = !expanded),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppTokens.space4),
+              child: Row(
+                children: [
+                  Expanded(child: Text(title, style: AppTokens.cardTitle)),
+                  const SizedBox(width: AppTokens.space8),
+                  Text(
+                    '${completedRounds.length}회차',
+                    style: AppTokens.caption,
+                  ),
+                  Icon(
+                    expanded ? Icons.expand_less : Icons.expand_more,
+                    color: AppTokens.textTertiary,
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: AppTokens.space12),
-          if (_report == null)
-            const Text('서버 연결을 준비하고 있어요.', style: AppTokens.caption)
-          else
-            FutureBuilder<({EvaluationReport report, EvaluationReport? before})>(
-              future: _report,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: LinearProgressIndicator(minHeight: 3),
-                  );
-                }
-                if (snapshot.hasError || !snapshot.hasData) {
-                  return const Text(
-                    '성장 기록을 불러오지 못했어요. 각 회차 결과는 아래에서 확인할 수 있어요.',
-                    style: AppTokens.caption,
-                  );
-                }
-                final data = snapshot.data!;
-                if (data.before != null) {
+          if (expanded) ...[
+            const SizedBox(height: AppTokens.space12),
+            if (_report == null)
+              const Text('서버 연결을 준비하고 있어요.', style: AppTokens.caption)
+            else
+              FutureBuilder<
+                ({EvaluationReport report, EvaluationReport? before})
+              >(
+                future: _report,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: LinearProgressIndicator(minHeight: 3),
+                    );
+                  }
+                  if (snapshot.hasError || !snapshot.hasData) {
+                    return const Text(
+                      '성장 기록을 불러오지 못했어요. 각 회차 결과는 아래에서 확인할 수 있어요.',
+                      style: AppTokens.caption,
+                    );
+                  }
+                  final data = snapshot.data!;
+                  if (data.before != null) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text('최근 회차의 변화', style: AppTokens.secondary),
+                        const SizedBox(height: AppTokens.space8),
+                        GrowthBars(before: data.before!, after: data.report),
+                      ],
+                    );
+                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text('최근 회차의 변화', style: AppTokens.secondary),
+                      const Text('이번 회차 결과', style: AppTokens.secondary),
                       const SizedBox(height: AppTokens.space8),
-                      GrowthBars(before: data.before!, after: data.report),
+                      _SingleRoundLevels(report: data.report),
+                      const SizedBox(height: AppTokens.space8),
+                      const Text(
+                        '같은 문제로 다시 첨삭받으면 회차별 성장 변화를 비교해 볼 수 있어요.',
+                        style: AppTokens.caption,
+                      ),
                     ],
                   );
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Text('이번 회차 결과', style: AppTokens.secondary),
-                    const SizedBox(height: AppTokens.space8),
-                    _SingleRoundLevels(report: data.report),
-                    const SizedBox(height: AppTokens.space8),
-                    const Text(
-                      '같은 문제로 다시 첨삭받으면 회차별 성장 변화를 비교해 볼 수 있어요.',
-                      style: AppTokens.caption,
-                    ),
-                  ],
-                );
-              },
-            ),
-          const SizedBox(height: AppTokens.space8),
-          _RoundList(owner: owner, group: group),
+                },
+              ),
+            const SizedBox(height: AppTokens.space8),
+            _RoundList(owner: owner, group: group),
+          ],
         ],
       ),
     );

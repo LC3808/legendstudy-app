@@ -78,9 +78,58 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('한양대학교'), findsOneWidget);
-    expect(find.text('완료된 첨삭 1회차'), findsOneWidget);
+    // Card title is now "대학명 · 시험명"; the newest exam is expanded by default.
+    expect(find.textContaining('한양대학교'), findsOneWidget);
+    expect(find.text('1회차'), findsOneWidget);
     expect(find.text('회차별 결과 보기 (1)'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('growth paginates exams 5 at a time and expands only the newest', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(const AuthStatus('owner')),
+          ),
+          sharedEssayHistoryProvider('owner').overrideWith(
+            (ref) async => [
+              for (var i = 0; i < 7; i++)
+                SharedEssayRecord(
+                  id: 'run-$i',
+                  math: false,
+                  exam: true,
+                  at: DateTime.utc(2026, 10, 20 - i),
+                  rewrite: false,
+                  examData: {
+                    'university': '대학$i',
+                    'displayExam': '2026 수시',
+                    'completed_at': '2026-10-${20 - i}T01:00:00Z',
+                  },
+                  evaluations: const [
+                    {'id': 'placeholder/q1', 'state': 'COMPLETED'},
+                  ],
+                ),
+            ],
+          ),
+        ],
+        child: const MaterialApp(home: EssayGrowthPage()),
+      ),
+    );
+    await tester.pumpAndSettle();
+    // Accordion: only the newest exam's round list is expanded.
+    expect(find.textContaining('회차별 결과 보기'), findsOneWidget);
+    // Pagination: the 6th/7th oldest exams are not rendered on the first page
+    // of five (they load as the student scrolls).
+    expect(find.textContaining('대학5'), findsNothing);
+    expect(find.textContaining('대학6'), findsNothing);
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
   });
