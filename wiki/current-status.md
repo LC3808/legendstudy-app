@@ -12,6 +12,10 @@
 
 [2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
+## 2026-10-28 — APP 실기기 검수 1차 수정 (논술 LAB 메인·시험 선택)
+
+Owner 실기기 검수 2번 항목 한정 수정: 시험 선택 후 문항 미선택 CTA '문제 선택' 표시(REVIEW_REQUIRED 오표기 '서비스 준비중' 수정; 첨삭 불가는 '첨삭 서비스 준비 중', 대학 전체 보류는 기존 유지), 논술 LAB 상단 '나의 논술랩'(→ `/lab/essay/growth`) 추가, Credit 문구 '현재 크레딧 N개'. 공개 판정·조회/계산 로직 불변. `fvm flutter analyze` 0·`fvm flutter test` 1136 PASS/0 fail. WEB·DB·Worker·Credit·History 변경0. 코드 커밋 68d89ff. **Owner 승인 전 답안 작성 화면(다음 단계) 미진행, Codex 브랜치 미병합.** [로그](log.md#2026-10-28--app-실기기-검수-1차-수정-논술-lab-메인시험-선택).
+
 ## 2026-10-28 — APP 인문논술 LAB UI/UX 개선 (BETA)
 
 Claude APP 전용 worktree(`claude/essay-app-beta-uiux-20261028`, 기준 733bad7, Flutter 3.47.6/fvm)에서 논술 LAB 첨삭 UI/UX 11건 개선: 제출 확인창 간소화(서버 확정 Credit 출처 1줄 표시, 잔액·수량·중복 안내 제거), 명시적 임시저장 버튼, 첨삭 진행 프로그레스바, 전용 성장 분석 화면 `/lab/essay/growth`(MY에서 진입; 기존 비교 계약 재사용·임의 수치 없음·50회차 범위 고지), 차분한 네이비 BETA 배지, 결과 화면 재구성·중복 문구 제거, 베타 Credit 안내 축약. `fvm flutter analyze` 0건·`fvm flutter test` 1136 PASS/0 fail. WEB·DB·Worker·Credit·History 변경0, Flutter Native UI 유지. **Owner 실기기 검수 대기, Codex 브랜치 미병합.** 코드 커밋 4985818. [로그](log.md#2026-10-28--app-인문논술-lab-uiux-개선-beta).
