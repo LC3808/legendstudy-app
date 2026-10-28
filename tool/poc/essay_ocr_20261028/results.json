@@ -1,0 +1,65 @@
+{
+  "scope": "synthetic printed only; macOS; no Provider",
+  "os": "Version 26.6.1 (Build 25G76)",
+  "revision": 3,
+  "normalization": "NFC; whitespace folded to one space; punctuation/case retained; paragraph check separate",
+  "results": [
+    {
+      "case": "printed",
+      "reference_characters": 53,
+      "character_errors": 0,
+      "CER": 0.0,
+      "reference_words": 13,
+      "word_errors": 0,
+      "WER": 0.0,
+      "line_count_reference": 2,
+      "line_count_output": 2,
+      "blank_paragraph_boundary_preserved": null,
+      "seconds": [
+        0.4911362916609505,
+        0.11318620833480963,
+        0.10513183333387133
+      ],
+      "median_seconds": 0.11318620833480963,
+      "repeat_text_identical": true
+    },
+    {
+      "case": "paragraphs",
+      "reference_characters": 110,
+      "character_errors": 0,
+      "CER": 0.0,
+      "reference_words": 29,
+      "word_errors": 0,
+      "WER": 0.0,
+      "line_count_reference": 4,
+      "line_count_output": 4,
+      "blank_paragraph_boundary_preserved": false,
+      "seconds": [
+        0.12609524999425048,
+        0.12204770833341172,
+        0.12156949999916833
+      ],
+      "median_seconds": 0.12204770833341172,
+      "repeat_text_identical": true
+    },
+    {
+      "case": "mixed",
+      "reference_characters": 92,
+      "character_errors": 0,
+      "CER": 0.0,
+      "reference_words": 23,
+      "word_errors": 0,
+      "WER": 0.0,
+      "line_count_reference": 3,
+      "line_count_output": 3,
+      "blank_paragraph_boundary_preserved": null,
+      "seconds": [
+        0.10013687500031665,
+        0.09445204166695476,
+        0.10155349999695318
+      ],
+      "median_seconds": 0.10013687500031665,
+      "repeat_text_identical": true
+    }
+  ]
+}

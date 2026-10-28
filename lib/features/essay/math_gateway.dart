@@ -67,6 +67,40 @@ class MathGateway {
     return value['types']['math'] == true || (browsing && canBrowse);
   }
 
+  Future<Set<String>> publicServiceUniversities() async {
+    checkOwner();
+    final request =
+        http.Request(
+            'GET',
+            Uri.parse('$mathOrigin/api/essay/public-service-status'),
+          )
+          ..followRedirects = false
+          ..headers['Authorization'] =
+              'Bearer ${client.auth.currentSession!.accessToken}';
+    final response = await transport
+        .send(request)
+        .then(http.Response.fromStream)
+        .timeout(const Duration(seconds: 20));
+    checkOwner();
+    final data = jsonDecode(response.body);
+    if (response.statusCode != 200 ||
+        data is! Map ||
+        data['version'] != 'essay-public-service-v1' ||
+        data['checked'] != true ||
+        data['universityIds'] is! List) {
+      throw const FormatException('PUBLIC_SERVICE_STATUS');
+    }
+    final ids = data['universityIds'] as List;
+    final uuid = RegExp(
+      r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      caseSensitive: false,
+    );
+    if (ids.any((id) => id is! String || !uuid.hasMatch(id))) {
+      throw const FormatException('PUBLIC_SERVICE_IDS');
+    }
+    return ids.cast<String>().toSet();
+  }
+
   Future<Set<String>> serviceExams() async {
     checkOwner();
     final request =
@@ -278,4 +312,11 @@ final serviceExamIdsProvider = FutureProvider.autoDispose
       final gateway = ref.watch(mathGatewayProvider(owner));
       if (gateway == null) return <String>{};
       return gateway.serviceExams();
+    });
+
+final publicServiceUniversitiesProvider = FutureProvider.autoDispose
+    .family<Set<String>, String>((ref, owner) async {
+      final gateway = ref.watch(mathGatewayProvider(owner));
+      if (gateway == null) throw StateError('LOGIN_REQUIRED');
+      return gateway.publicServiceUniversities();
     });

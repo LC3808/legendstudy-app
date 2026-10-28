@@ -1,6 +1,8 @@
 # Current Status
 
-[10/28 건국 Worker P0](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28): Owner승인 입력검증만451b8cae100%배포·65회귀PASS. 기존run reserved/checkpoint0/1예약 보존·재실행0. 기존run복구·APP통합 별도승인.
+[사진OCR 설계·Mac 인쇄PoC](essay-photo-ocr-design-20261028.md): 기기내 우선. 손글씨/APP 미검증·통합미승인.
+
+[10/28 건국 Worker P0](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28): 451b8cae100%·65회귀PASS. Owner승인 기존finish로 run failed/1Credit예약 released. 답안2·History 보존, 순차감0·중복해제0. 새요청키 재제출 계약 가능·실제제출0.
 
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 

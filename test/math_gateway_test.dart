@@ -47,6 +47,42 @@ void main() {
   });
   tearDown(() async => client.dispose());
   test(
+    'shared public status returns university IDs and rejects errors',
+    () async {
+      final gateway = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient((request) async {
+          expect(request.method, 'GET');
+          expect(request.url.path, '/api/essay/public-service-status');
+          expect(request.followRedirects, false);
+          return http.Response(
+            jsonEncode({
+              'version': 'essay-public-service-v1',
+              'checked': true,
+              'universityIds': ['33333333-3333-4333-8333-333333333333'],
+            }),
+            200,
+          );
+        }),
+      );
+      expect(await gateway.publicServiceUniversities(), {
+        '33333333-3333-4333-8333-333333333333',
+      });
+      gateway.close();
+      final failed = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient((_) async => http.Response('{}', 503)),
+      );
+      await expectLater(
+        failed.publicServiceUniversities(),
+        throwsFormatException,
+      );
+      failed.close();
+    },
+  );
+  test(
     'closed allowlist gate never loads catalog; account mismatch sends nothing',
     () async {
       final gateway = MathGateway(
@@ -127,20 +163,36 @@ void main() {
     await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
   });
   test('native photo uses existing multipart and extract endpoints without billing', () async {
-    final paths=<String>[];
-    final gateway=MathGateway(client,'fixture-a',transport:MockClient((r)async{
-      paths.add(r.url.path);expect(r.followRedirects,false);expect(r.headers['Origin'],mathOrigin);
-      expect(r.headers['Authorization'],startsWith('Bearer '));
-      if(r.url.path.endsWith('upload')){expect(r.headers['content-type'],startsWith('multipart/form-data'));expect(r.bodyBytes,isNotEmpty);}
-      else {expect(jsonDecode(r.body),{'attempt_id':'same-attempt'});}
-      return http.Response('{}',200);
-    }));
-    await gateway.uploadEvidence('same-artifact',Uint8List.fromList([137,80,78,71,13,10,26,10,0,0,0,0]));
+    final paths = <String>[];
+    final gateway = MathGateway(
+      client,
+      'fixture-a',
+      transport: MockClient((r) async {
+        paths.add(r.url.path);
+        expect(r.followRedirects, false);
+        expect(r.headers['Origin'], mathOrigin);
+        expect(r.headers['Authorization'], startsWith('Bearer '));
+        if (r.url.path.endsWith('upload')) {
+          expect(r.headers['content-type'], startsWith('multipart/form-data'));
+          expect(r.bodyBytes, isNotEmpty);
+        } else {
+          expect(jsonDecode(r.body), {'attempt_id': 'same-attempt'});
+        }
+        return http.Response('{}', 200);
+      }),
+    );
+    await gateway.uploadEvidence(
+      'same-artifact',
+      Uint8List.fromList([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]),
+    );
     await gateway.extract('same-attempt');
-    expect(paths,['/api/math/upload','/api/math/extract']);
-    await expectLater(gateway.uploadEvidence('x',Uint8List(12)),throwsFormatException);
-    expect(paths.length,2);gateway.close();
-    await expectLater(gateway.extract('same-attempt'),throwsStateError);
+    expect(paths, ['/api/math/upload', '/api/math/extract']);
+    await expectLater(
+      gateway.uploadEvidence('x', Uint8List(12)),
+      throwsFormatException,
+    );
+    expect(paths.length, 2);
+    gateway.close();
+    await expectLater(gateway.extract('same-attempt'), throwsStateError);
   });
-
 }

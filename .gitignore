@@ -52,3 +52,6 @@ android/.kotlin/
 # Daily Sync operator artifacts (accepted-state, bootstrap/preflight reports).
 # Local, environment-specific; never commit operator run output.
 .local/
+
+# FVM Version Cache
+.fvm/

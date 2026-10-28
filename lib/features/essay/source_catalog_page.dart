@@ -211,6 +211,12 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                 .toSet();
           }
           if (university == null) {
+            final service = ref.watch(
+              publicServiceUniversitiesProvider(widget.owner),
+            );
+            final ready = service.isLoading || service.hasError
+                ? <String>{}
+                : service.asData?.value ?? <String>{};
             return ListView(
               key: const PageStorageKey('essay-university-list'),
               controller: catalogScroll,
@@ -257,21 +263,17 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                     ),
                   ),
                 ),
-                for (final u in orderedServiceUniversities(
-                  c,
-                  ref.watch(serviceExamIdsProvider(widget.owner)).value ?? {},
-                ))
+                for (final u in orderedServiceUniversities(c, ready))
                   Card(
                     child: InkWell(
-                      onTap:
-                          isUniversityServicePreparing(u['sourceUniversityId'])
-                          ? null
-                          : () {
+                      onTap: ready.contains(u['universityId'])
+                          ? () {
                               catalogOffset = catalogScroll.offset;
                               selectUniversity(
                                 u['sourceUniversityId'] as String,
                               );
-                            },
+                            }
+                          : null,
                       child: Padding(
                         padding: const EdgeInsets.all(12),
                         child: Row(
@@ -305,44 +307,42 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if (isUniversityServicePreparing(
-                                    u['sourceUniversityId'],
-                                  ))
-                                    TextButton(
-                                      onPressed: () {
-                                        catalogOffset = catalogScroll.offset;
-                                        selectUniversity(
-                                          u['sourceUniversityId'] as String,
-                                        );
-                                      },
-                                      child: Text(u['name'] as String),
-                                    )
-                                  else
-                                    Text(
-                                      u['name'] as String,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium,
+                                  Text(
+                                    u['name'] as String,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium,
+                                  ),
+                                  TextButton(
+                                    onPressed: service.hasError
+                                        ? () => ref.invalidate(
+                                            publicServiceUniversitiesProvider(
+                                              widget.owner,
+                                            ),
+                                          )
+                                        : ready.contains(u['universityId'])
+                                        ? () {
+                                            catalogOffset =
+                                                catalogScroll.offset;
+                                            selectUniversity(
+                                              u['sourceUniversityId'] as String,
+                                            );
+                                          }
+                                        : null,
+                                    child: Text(
+                                      service.isLoading
+                                          ? '서비스 확인 중'
+                                          : service.hasError
+                                          ? '일시적으로 확인할 수 없습니다 · 다시 시도'
+                                          : ready.contains(u['universityId'])
+                                          ? '첨삭 시작하기 →'
+                                          : '첨삭 서비스 준비 중',
                                     ),
-                                  if (isUniversityServicePreparing(
-                                    u['sourceUniversityId'],
-                                  ))
-                                    FilledButton(
-                                      onPressed: null,
-                                      style: FilledButton.styleFrom(
-                                        disabledBackgroundColor:
-                                            Colors.grey.shade200,
-                                        disabledForegroundColor:
-                                            Colors.grey.shade700,
-                                      ),
-                                      child: const Text('서비스 준비중'),
-                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            if (!isUniversityServicePreparing(
-                              u['sourceUniversityId'],
-                            ))
+                            if (ready.contains(u['universityId']))
                               const Icon(
                                 Icons.chevron_right,
                                 color: AppTokens.textPrimary,
@@ -1778,15 +1778,12 @@ List<Map<String, dynamic>> orderedServiceUniversities(
   SourceCatalog catalog,
   Set<String> admitted,
 ) {
-  final active = catalog.exams
-      .where((e) => admitted.contains(e['dbExamId']))
-      .map((e) => e['sourceUniversityId'])
-      .toSet();
+  final active = admitted;
   final indexed = catalog.universities.indexed.toList();
   indexed.sort((a, b) {
     final priority =
-        (active.contains(b.$2['sourceUniversityId']) ? 1 : 0) -
-        (active.contains(a.$2['sourceUniversityId']) ? 1 : 0);
+        (active.contains(b.$2['universityId']) ? 1 : 0) -
+        (active.contains(a.$2['universityId']) ? 1 : 0);
     return priority != 0 ? priority : a.$1.compareTo(b.$1);
   });
   return indexed.map((e) => e.$2).toList();

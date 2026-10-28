@@ -2,8 +2,9 @@
 
 ## 현재 결론과 승인 경계
 
-**Owner 승인 범위 Production 배포 완료 / 기존 run 복구 미실행.**
-최신 배포·사후검증은 아래 [Production 적용](#production-적용--owner-승인-2026-10-28)을 따른다. 이전 조사·승인 대기 기록은 시점별 근거다.
+**Production 배포 완료 / 기존 중단 run failed 종료·1 Credit 예약 해제 완료.**
+최신 결과는 [중단 run 종료 및 예약 해제](#중단-run-종료-및-예약-해제--2026-10-28)를 따른다.
+배포·사후검증은 아래 [Production 적용](#production-적용--owner-승인-2026-10-28)을 따른다. 이전 조사·승인 대기 기록은 시점별 근거다.
 Owner 지시의 A단계만 수행. APP UI는 Claude 담당이며 통합·빌드·스토어 제출은
 Claude 완료/Commit·Push/테스트/Owner 실기기 승인/Worker 결과 확인 및 별도 Owner 승인 후다.
 운영 배포, 기존 run 재실행·상태 변경·예약 해제·환불, 실제 Provider/Credit E2E는 각각 승인 전 금지.
@@ -174,3 +175,109 @@ reserve1개(balance_delta0/reserved_delta1). consume/release/refund 없음.
 
 **기존 건국 run은 복구되지 않았다.** 재개·실패해제·환불 여부는 별도 Owner 승인 후 결정.
 APP 통합/빌드/스토어 준비는 별도 승인과 기존 선행조건 충족 전까지 보류한다.
+
+
+## 기존 run 복구 사전검증 — 2026-10-28
+
+Owner는 기존 run의 안전한 재개를 승인했고, 기존 경로로 재개 불가능하거나 안전성을
+확인할 수 없으면 중단 후 실패/예약복구 방안을 제시하도록 지시했다. 해당 중단 조건을
+적용했다. 승인 부재로 복구 요청 전체를 거절한 것이 아니라 **운영 retry 계약 미충족**이다.
+
+### 운영 읽기 전용 확인
+
+- 대상 `2998c8ba-9226-4dea-8bd0-ca34daa3744d`: reserved, result=NULL,
+  completed_at=NULL, 두 문항, checkpoint0, retry_requests0.
+- 원본 snapshot MD5 `46db0a50d62b3e76ba2b5201f5766428` 기록. 학생 답안 원문은
+  조회/출력하지 않았으며 snapshot/History 변경 작업 없음.
+- claim/lease token 존재. 원래 lease는 2026-10-28 14:33:27.522615 KST 만료.
+  billing reserved/credits_required1, 원장 reserve1건(balance_delta0/reserved_delta1).
+  consume/release/refund 없음. 추가 예약·차감 없음.
+- Cloudflare active deployment 재조회: `775f74de-8d13-496e-905c-2e0ee21333be`,
+  Worker `451b8cae-f603-48e9-9ca9-8ccc16b4e3d4` 100% 유지.
+- 과거 Provider 호출/과금은 앞선 입력검증 재현상 호출 이전 실패 경로이며 checkpoint0.
+  외부 Provider 감사기록으로 과거 호출0을 확정한 것은 아니다. 이번 확인 중 Provider0.
+
+### 기존 경로로 재개할 수 없는 근거
+
+Production 함수 정의를 직접 SELECT해 확인했다.
+
+1. `public.essay_exam_claim`: 이미 있는 동일 dispatch의 lease를 갱신하지 않는다.
+   다른 dispatch는 `RECONCILIATION_REQUIRED`로 차단한다.
+2. `public.essay_exam_session_checkpoint`: begin 시 원래 lease 또는 retry lease가
+   유효해야 한다. 현재 상태로 큐만 재전송하면 `DISPATCH_LEASE_EXPIRED`다.
+3. `public.essay_exam_retry`: 모든 문항에 completed/failed checkpoint가 있어야 하며,
+   적어도 하나가 failed여야 한다. 대상은 checkpoint0이라
+   `RECONCILIATION_REQUIRED` 조건에 해당한다. 실패할 RPC를 실제 호출하지 않았다.
+4. 중복 실행 방지는 account/run 행 잠금, 불변 lease token, append-only checkpoint
+   key/writer 및 retry request key 멱등성으로 유지된다. 이 조건을 우회하지 않았다.
+
+[10/25 복구 선례](essay-group-1a-20261025.md#2026-10-25-최신--승인된-중단-요청-복구무료-재첨삭-완료)의
+`essay_run_recovery_20261025`는 다른 run 전용 SQL 개별승인이며 재사용할 수 없다.
+기존 pending 삭제, 가짜 failed checkpoint 생성, lease 직접 연장, 큐 재전송 모두 미실행.
+운영 SQL은 SELECT만 사용했다. 새 run/Provider/정산/코드변경/배포 없음.
+
+### 후속 방안과 조회 한계
+
+- **재개 우선안:** 해당 run 전용 사전조건·잠금·변경 감지·중복거절·감사기록을 갖춘
+  recovery SQL 후보를 별도로 준비·격리검증한 뒤 개별 승인받아 기존 retry generation
+  계약으로 연결하는 방안. 아직 후보 작성·안전성 검증·운영 적용하지 않았다.
+  기존 snapshot/예약/원본 lease token을 보존하고 동일 identity만 dispatch해야 한다.
+- **실패 종료 대안:** 모든 원래/retry lease 만료와 진행/완료 checkpoint 부재를 잠금
+  아래 재확인한 후 기존 `essay_exam_private.finish(run,NULL,true)` 계약을 사용한다.
+  이 함수는 run failed/billing released 및 기존 예약의 release 원장으로 처리하며
+  추가 지급/환불 거래를 만드는 방식이 아니다. 대상·원장·snapshot 불변 조건과
+  재실행 멱등성을 검증한 실행안에 별도 승인을 받아야 한다. 이번에는 미실행.
+- 현재 두 문항 평가 결과는 없고 Backend 복구 미완료다. WEB/APP 결과 조회 성공으로
+  보고할 수 없다. 화면 실기기 재검증은 하지 않았으며 APP 폴링/복원 문제와 별개다.
+  기존 History 저장행은 보존되어 있다.
+
+Unified Wiki만 갱신하고 추가 조사를 종료한다.
+
+
+## 중단 run 종료 및 예약 해제 — 2026-10-28
+
+Owner가 대상 run 실패 종료와 기존 예약 해제를 명시 승인했다. 기존 계약으로 안전한
+경우만 실행하며 Provider/Worker 재실행/새 평가/새 Credit 지급/다른 run 변경은 금지했다.
+기존 [예약·실패 처리 정책](phase3-service-20261022.md) 및
+[원래 grant로 release하는 계약](essay-beta-credit-design-20261027.md)을 그대로 적용했다.
+
+### 실행 및 검증
+
+- 대상 `2998c8ba-9226-4dea-8bd0-ca34daa3744d`만 기존
+  `essay_exam_private.finish(run,NULL,true)` 호출. 직접 UPDATE/DELETE나 새 함수/정책 없음.
+- account → run → billing 행 잠금, lock_timeout5초/statement_timeout20초.
+  reserved/result NULL/완료시각 NULL, lease 만료2분 초과, snapshot 고정 해시,
+  답안2개/checkpoint0/retry0/billing reserved1, reserve 원장 정확1건 조건을 확인했다.
+- 처리 후 snapshot 포함 run의 상태·결과·완료시각 외 모든 필드 동일, 기존 reserve 행
+  동일, 같은 grant에 release1건(balance_delta0/reserved_delta-1), billing released 확인.
+  조건 불일치 시 예외로 전체 rollback하도록 한 트랜잭션으로 실행했다.
+- 같은 finish를 한 번 더 호출해 failed 반환/원장2행 유지 확인: 중복 release 없음.
+  같은 계정의 다른 run/대상 외 원장/전체 credit_grants 사전·사후 JSON 비교 동일.
+  설치 함수는 정확 대상 run/decision만 변경하며 다른 계정 대상으로 쓰는 구문이 없다.
+- 실행 전 기존 격리 PostgreSQL 복구 검사 PASS: pre8/post6, 진행 lease 차단,
+  기존 checkpoint 보존, 새 예약0, fallback release 멱등. 운영 함수 정의도 직접 대조했다.
+
+### 독립 사후 SELECT 결과
+
+2026-10-28 **16:47:01.938391 KST** release 기록:
+
+|항목|확인 결과|
+|---|---|
+|run / billing|failed / released|
+|원장|reserve1 + release1, consume/refund/신규지급0|
+|순차감 / 잔여예약|0 / 0|
+|기존 학생 답안|2개 보존, snapshot MD5 `46db0a50d62b3e76ba2b5201f5766428` 동일|
+|History|소유자 문맥의 `essay_exam_history(run)` 조회1건, failed, 답안 원본 일치|
+|checkpoint|0 유지|
+|해제된 원천|유효기간 내·해당시험 사용가능·구매취소중 아님, 원천 가용수량2|
+|다른 run/Credit|잠금 트랜잭션 내 같은 계정 비교 동일; 대상 외 변경 없음|
+
+`reserve`는 같은 request_key를 재사용하면 기존 failed run을 반환한다. 재제출은 기존
+새 요청 준비 흐름에서 **새 request_key**로 가능하며, 정상 제출 시 기존1Credit 정책을
+적용한다. 현재 사용가능한 원천 잔액도 확인했다. 기존 실패 run을 재개하거나 삭제하지
+않는다. 실제 새 요청/Provider 호출/예약은 생성하지 않았으며 WEB/APP 실화면 클릭 E2E는
+실시하지 않았다. APP의 폴링·재진입 UI 문제는 별도 작업이다.
+
+운영 정리는 완료됐으며 추가 DB/Credit 조치는 필요 없다. History 확인은 실제 로그인
+브라우저가 아니라 읽기 전용 트랜잭션에서 대상 소유자 JWT sub 문맥으로 RPC를 조회한
+검증이다. 코드/배포/권한/Worker/APP 변경 없음.

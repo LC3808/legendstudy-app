@@ -1,3 +1,15 @@
+## 2026-10-28 — 논술 사진 OCR 설계·격리 인쇄 PoC
+
+iOS Vision/Android ML Kit 우선 후보, 실필기 미검증. Mac 합성3장×3회 CER/WER0·문단빈줄 유실, 실기기 일반화 금지. OCR사진과 기존 평가첨부 분리·학생확인 후 TEXT 저장 설계. APP/Claude/운영 변경·Provider0. [설계·출처·실측](essay-photo-ocr-design-20261028.md).
+
+## 2026-10-28 — 건국 중단 run 종료·예약 해제 완료
+
+Owner 승인 기존finish로 대상 run failed/billing released(16:47KST). reserve1/release1, 순차감0·잔여예약0. snapshot/답안2/History RPC 보존, 동일계정 다른run·원장·grant 불변, finish 재호출 중복해제0. 새요청키 재제출 계약 가능·실제제출/Provider0. [잠금조건·독립검증](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28).
+
+## 2026-10-28 — 건국 기존 run 복구 사전검증 후 중단
+
+Owner 기존run 재개 요청에 따라 운영 함수를 SELECT 대조. reserved/checkpoint0/만료lease는 기존 retry 조건 미충족. Worker451b8cae100% 유지, 학생snapshot/History/1Credit예약 보존, Provider·운영쓰기0. 전용복구 후보 또는 기존finish 실패/예약해제 실행안 별도 검토·승인 필요. [근거·후속안](essay-worker-incident-20261028.md#기존-run-복구-사전검증--2026-10-28).
+
 ## 2026-10-27 — MY 최종 UI 보정 Production 완료
 
 WEB 49fee24: 프로필/대학 통합 카드, 고3·retaker 지원 노출, MY 성장 간결화. UI27/Typecheck/Build PASS, Lint 오류0. 일반 고2 계정 PC·400px 실화면 확인, 운영 데이터 변경0. [배포·보존·복구](my-college-management-20261026.md#2026-10-27--최종-my-통합학년별-노출성장-요약).
