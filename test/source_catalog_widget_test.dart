@@ -306,7 +306,14 @@ void main() {
         expect(find.text('첨삭 시작하기'), findsNothing);
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
-        await tester.ensureVisible(find.text('문제 1'));
+        // This synthetic image exam has no Math leaf/availability in tests, so
+        // the 준비 중 안내가 선택 화면에 노출되어 목록이 길어진다. 지연 빌드되는
+        // 체크박스를 스크롤로 띄운 뒤 확인한다.
+        await tester.scrollUntilVisible(
+          find.text('문제 1'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
         // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
@@ -333,20 +340,17 @@ void main() {
         expect(tester.takeException(), isNull);
         await tester.pageBack();
         await tester.pumpAndSettle();
-        await tester.ensureVisible(find.text('문제 1'));
+        await tester.scrollUntilVisible(
+          find.text('문제 1'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
         // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
         await tester.ensureVisible(find.text('답안 작성하기'));
         await tester.tap(find.text('답안 작성하기'));
         await tester.pumpAndSettle();
-        // The 수리·자연논술 준비 중 안내가 작성 영역 상단에 들어가 화면이 길어지므로,
-        // 지연 빌드되는 ListView에서 복원된 답안 입력란을 먼저 보이게 한 뒤 확인한다.
-        await tester.scrollUntilVisible(
-          find.byType(TextField),
-          250,
-          scrollable: find.byType(Scrollable).first,
-        );
         expect(find.text('풀이 보충 설명'), findsOneWidget);
         expect(tester.takeException(), isNull);
       },

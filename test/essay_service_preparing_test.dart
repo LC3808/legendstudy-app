@@ -6,18 +6,16 @@ import 'package:legendstudy_app/features/essay/source_catalog.dart';
 import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 
-/// Step 1 — 자연·수리논술 첨삭 공개 보류 안내.
-/// The notice is keyed on the existing publication policy (Math evaluation
-/// availability + published leaf), not the university or track name, so a held
-/// photo/math question warns before the student writes, while a TEXT question
-/// in the same flow stays untouched.
+/// §3 자연·수리논술 첨삭 공개 보류 안내.
+/// Verifies the whole flow the Owner asked for: select exam/track → publication
+/// state is read from the existing policy (Math evaluation availability +
+/// published leaf, by Registry question id, never by name) → the preparing
+/// notice shows on the SELECTION screen, before any question is picked or
+/// written. A published TEXT question in the same flow shows no notice.
 void main() {
   Widget host(SourceCatalog catalog) {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
-          if (call.method == 'read') return null;
-          return null;
-        });
+        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async => null);
     return ProviderScope(
       overrides: [
         authStateProvider.overrideWith(
@@ -52,40 +50,30 @@ void main() {
     ],
   );
 
-  Future<void> openWriter(WidgetTester tester) async {
-    tester.view.physicalSize = const Size(360, 800);
+  Future<void> openSelection(WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 840);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.pumpAndSettle();
     await tester.tap(find.text('시험 대학'));
     await tester.pumpAndSettle();
-    // A single-question exam auto-selects its only question, so the CTA is ready.
-    final cta = find.widgetWithText(FilledButton, '답안 작성하기');
-    await tester.scrollUntilVisible(
-      cta,
-      200,
-      scrollable: find.byType(Scrollable).last,
-    );
-    await tester.tap(cta);
-    await tester.pumpAndSettle();
   }
 
-  testWidgets('photo/math question shows the preparing notice before writing', (
-    tester,
-  ) async {
+  testWidgets('photo/math exam shows the preparing notice on the selection '
+      'screen before picking a question', (tester) async {
     await tester.pumpWidget(host(catalogWith('image')));
-    await openWriter(tester);
+    await openSelection(tester);
+    // Shown right after exam/track selection, above 문항 선택 — not inside the
+    // writer and not gated behind picking a question.
     expect(find.text('수리논술 첨삭 서비스 준비 중'), findsOneWidget);
     expect(find.textContaining('준비가 완료되면 제공됩니다'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('text question keeps the existing flow without the notice', (
-    tester,
-  ) async {
+  testWidgets('published text exam shows no preparing notice', (tester) async {
     await tester.pumpWidget(host(catalogWith('text')));
-    await openWriter(tester);
+    await openSelection(tester);
     expect(find.text('수리논술 첨삭 서비스 준비 중'), findsNothing);
     expect(tester.takeException(), isNull);
   });

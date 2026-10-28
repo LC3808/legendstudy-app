@@ -393,6 +393,22 @@ String essayAnswerVersion(SharedEssayRecord row) {
   return row.rewrite ? '수정 제출 답안' : '최초 제출 답안';
 }
 
+/// Registry label for an exam question (e.g. "문제 1"). When the source catalog
+/// is not loaded, falls back to the question's real 1-based position in the
+/// run's own `question_ids`, so the record still shows a number instead of a
+/// bare "문항". Never fabricates a number for a question not in the run.
+String essayExamQuestionLabel(SharedEssayRecord row, String questionId) {
+  final questions = (row.examData['questions'] as List?)
+      ?.cast<Map<String, dynamic>>();
+  final label =
+      questions?.where((q) => q['dbQuestionId'] == questionId).firstOrNull?['label']
+          as String?;
+  if (label != null && label.isNotEmpty) return label;
+  final ids = (row.examData['question_ids'] as List?)?.cast<String>();
+  final index = ids?.indexOf(questionId) ?? -1;
+  return index >= 0 ? '문항 ${index + 1}' : '문항';
+}
+
 List<List<SharedEssayRecord>> sortedEssayHistory(
   List<SharedEssayRecord> rows,
   bool byExam,

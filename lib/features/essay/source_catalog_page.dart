@@ -226,19 +226,44 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        LayoutBuilder(
-                          builder: (context, bounds) {
-                            final history = TextButton(
-                              onPressed: () =>
-                                  context.push('/lab/essay/history'),
-                              child: const Text('나의 첨삭 기록 ›'),
+                        Builder(
+                          builder: (context) {
+                            TextButton menu(String label, String route) =>
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppTokens.space8,
+                                    ),
+                                    minimumSize: const Size(0, 44),
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    foregroundColor: AppTokens.textPrimary,
+                                  ),
+                                  onPressed: () => context.push(route),
+                                  child: Text(label),
+                                );
+                            final history = menu(
+                              '나의 첨삭 기록 ›',
+                              '/lab/essay/history',
                             );
-                            final lab = TextButton(
-                              onPressed: () =>
-                                  context.push('/lab/essay/growth'),
-                              child: const Text('나의 논술랩 ›'),
-                            );
-                            const credit = CreditBalanceCard(compact: true);
+                            final lab = menu('나의 논술랩 ›', '/lab/essay/growth');
+                            final balance = ref
+                                .watch(creditBalanceProvider)
+                                .value;
+                            // 서버 잔액만 사용하고 조회 전에는 임의 숫자를 보이지 않는다.
+                            final Widget credit = balance == null
+                                ? const SizedBox.shrink()
+                                : Text(
+                                    '현재 크레딧 ${balance.spendable}개',
+                                    style: AppTokens.secondary.copyWith(
+                                      color: AppTokens.textPrimary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                            // 세 항목을 한 줄로: 왼쪽 메뉴 그룹 + 오른쪽 현재 크레딧.
+                            // 아주 큰 글자 배율에서는 접근성을 위해 2행 세로 배치로
+                            // 떨어뜨리고, 그 외 모바일 폭에서는 FittedBox로 균일
+                            // 축소해 가로 넘침·글자 잘림을 방지한다.
                             return MediaQuery.textScalerOf(context).scale(14) >
                                     22
                                 ? Column(
@@ -247,23 +272,31 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                     children: [
                                       history,
                                       lab,
-                                      const Divider(),
-                                      credit,
+                                      const SizedBox(height: AppTokens.space8),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: credit,
+                                      ),
                                     ],
                                   )
-                                : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                : Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Expanded(child: history),
-                                          const SizedBox(width: 12),
-                                          Expanded(child: lab),
-                                        ],
+                                      Flexible(
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [history, lab],
+                                          ),
+                                        ),
                                       ),
-                                      const Divider(),
-                                      credit,
+                                      const SizedBox(width: AppTokens.space8),
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerRight,
+                                        child: credit,
+                                      ),
                                     ],
                                   );
                           },
@@ -431,6 +464,30 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
               isUniversityServicePreparing(uni) ||
               (exam?['verification'] == 'REVIEW_REQUIRED' &&
                   !reviewDraftAvailable);
+          // 사진·수식(수리·자연논술) 문항의 첨삭 공개 여부는 대학·계열 이름이 아니라
+          // 기존 공개 정책(Math 평가 공개 + 해당 Registry 문항 ID의 published leaf)
+          // 으로 판단한다. 공개 전인 사진·수식 문항이 있으면 시험·계열 선택 직후
+          // (문항 선택·작성 전)에 준비 중 안내를 표시한다. 입력 유형과 공개 상태는
+          // 분리하여 공개된 TEXT 문항은 그대로 이용할 수 있다.
+          final mathAvailable = ref
+              .watch(mathEvaluationAvailableProvider(widget.owner))
+              .value;
+          final mathLeaves =
+              ref.watch(mathCatalogProvider(widget.owner)).value ??
+              const <Map<String, dynamic>>[];
+          bool questionFeedbackHeld(Map<String, dynamic> q) {
+            if (q['inputMode'] != 'image') return false;
+            final published = mathLeaves.any(
+              (r) =>
+                  r['essay_exam_id'] == exam?['dbExamId'] &&
+                  r['essay_question_id'] == q['dbQuestionId'] &&
+                  r['leaf_id'] is String,
+            );
+            return !(mathAvailable == true && published);
+          }
+
+          final feedbackPreparing =
+              exam != null && questions.any(questionFeedbackHeld);
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -491,6 +548,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                   },
                 ),
               if (exam != null) ...[
+                if (feedbackPreparing) const _ServicePreparingNotice(),
                 if (isUniversityServicePreparing(uni) ||
                     exam['verification'] == 'REVIEW_REQUIRED')
                   for (final u in c.universities.where(
@@ -717,6 +775,11 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
   List<Uint8List> photo = [];
   bool imageReady = false, imageSaving = false, imageDirty = false;
   String? photoNotice;
+  // Manual "임시저장" feedback, kept separate from the passive auto-save state so
+  // a "저장됨" message never shows before the student presses the button, and is
+  // cleared as soon as the answer is edited again.
+  bool manualSaving = false;
+  String? manualSaveNotice;
   late final draft = SourceDraftGateway(
     widget.owner,
     essayWritingDraftKey(widget.question['key'] as String, widget.rewriteRun),
@@ -752,6 +815,39 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       if (mounted) setState(() => photoNotice = '사진을 저장하지 못했어요. 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => imageSaving = false);
+    }
+  }
+
+  /// Explicit button save (text draft + any dirty photo). Reports its own
+  /// success/failure feedback below the button; the underlying auto-save and
+  /// save/restore contracts are unchanged.
+  Future<void> saveManually() async {
+    final ctrl = controller;
+    if (ctrl == null || manualSaving || syncBusy) return;
+    setState(() {
+      manualSaving = true;
+      manualSaveNotice = null;
+    });
+    try {
+      await ctrl.save();
+      if (imageDirty && !imageSaving) await savePhoto(photo);
+      if (!mounted) return;
+      final saved = ctrl.draftStatus == DraftStatus.saved;
+      setState(() {
+        manualSaveNotice = !saved
+            ? '저장하지 못했어요. 다시 시도해 주세요.'
+            : (draft.remote != null &&
+                      !draft.syncConflict &&
+                      draft.remoteBody == ctrl.body)
+            ? '계정에 임시 저장됨'
+            : '이 기기에 임시 저장됨';
+      });
+    } catch (_) {
+      if (mounted) {
+        setState(() => manualSaveNotice = '저장하지 못했어요. 다시 시도해 주세요.');
+      }
+    } finally {
+      if (mounted) setState(() => manualSaving = false);
     }
   }
 
@@ -884,27 +980,8 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       widget.question['dbQuestionId'] as String? ?? '',
     );
     final positionKey = 'essay-pdf:${widget.owner}:${pdf?.id}:${pdf?.hash}';
-    // 첨삭 공개 정책(대학·계열 이름이 아닌 Registry 문항 ID 기준): 사진·수식 답안
-    // (수리·자연논술) 문항은 Math 첨삭이 공개(available)되고 해당 문항 leaf가
-    // published일 때만 첨삭할 수 있다. 아직 공개 전이면 답안 작성 전에 준비 중임을
-    // 알려, 학생이 작성을 마친 뒤에야 첨삭 불가를 발견하지 않도록 한다. 입력 유형과
-    // 첨삭 공개 상태는 분리하며, TEXT 문항·혼합 시험의 공개 정책은 그대로 둔다.
-    final mathAvailable = ref.watch(
-      mathEvaluationAvailableProvider(widget.owner),
-    );
-    final mathLeaves = ref.watch(mathCatalogProvider(widget.owner));
-    final questionLeafPublished =
-        (mathLeaves.value ?? const <Map<String, dynamic>>[]).any(
-          (r) =>
-              r['essay_exam_id'] == widget.exam['dbExamId'] &&
-              r['essay_question_id'] == widget.question['dbQuestionId'] &&
-              r['leaf_id'] is String,
-        );
-    final feedbackPreparing =
-        widget.question['inputMode'] == 'image' &&
-        mathAvailable.hasValue &&
-        mathLeaves.hasValue &&
-        !(mathAvailable.value == true && questionLeafPublished);
+    // The 수리·자연논술 준비 중 안내는 시험·계열 선택 화면(답안 작성 진입 전)에서
+    // 노출한다. 작성 화면 내부에서는 중복 표시하지 않는다.
     return PopScope(
       canPop:
           (c == null || !c.dirty) && !imageSaving && !imageDirty && !syncBusy,
@@ -965,7 +1042,6 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                               }
                             },
                     ),
-                  if (feedbackPreparing) const _ServicePreparingNotice(),
                   const SizedBox(height: 16),
                   if (pdf != null)
                     TextButton.icon(
@@ -1088,7 +1164,13 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                           : 12,
                       maxLines: null,
                       maxLength: 30000,
-                      onChanged: c.edit,
+                      onChanged: (value) {
+                        c.edit(value);
+                        // Editing invalidates the previous manual-save result.
+                        if (manualSaveNotice != null) {
+                          setState(() => manualSaveNotice = null);
+                        }
+                      },
                       decoration: InputDecoration(
                         labelText: widget.question['inputMode'] == 'image'
                             ? '추가 설명 (선택)'
@@ -1096,44 +1178,94 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         alignLabelWithHint: true,
                       ),
                     ),
-                    Text(
-                      syncBusy
-                          ? '저장 중'
-                          : switch (c.draftStatus) {
-                              DraftStatus.saved =>
-                                draft.remote != null &&
-                                        !draft.syncConflict &&
-                                        draft.remoteBody == c.body
-                                    ? '계정에 저장됨'
-                                    : '이 기기에 임시 저장됨',
-                              DraftStatus.saving => '저장 중…',
-                              DraftStatus.failed => '저장하지 못했어요. 다시 시도해 주세요.',
-                              DraftStatus.conflict =>
-                                '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.',
-                            },
+                    // 버튼이 먼저, 상태 메시지는 버튼 아래. 기본 회색 테두리,
+                    // 누르는 동안 네이비 채움. 누르기 전에는 '저장됨'을 표시하지 않는다.
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: manualSaving
+                          ? FilledButton.icon(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: AppTokens.textPrimary,
+                                foregroundColor: Colors.white,
+                                minimumSize: const Size(0, 44),
+                              ),
+                              onPressed: null,
+                              icon: const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              label: const Text('저장 중…'),
+                            )
+                          : OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: AppTokens.textPrimary,
+                                side: const BorderSide(
+                                  color: AppTokens.majorSurfaceBorder,
+                                ),
+                                minimumSize: const Size(0, 44),
+                              ),
+                              onPressed:
+                                  syncBusy ||
+                                      c.draftStatus == DraftStatus.saving
+                                  ? null
+                                  : saveManually,
+                              icon: const Icon(
+                                Icons.save_outlined,
+                                size: AppTokens.iconDense,
+                              ),
+                              label: const Text('임시저장'),
+                            ),
+                    ),
+                    Builder(
+                      builder: (_) {
+                        final status = manualSaving
+                            ? '저장 중…'
+                            : manualSaveNotice ??
+                                  (c.draftStatus == DraftStatus.conflict
+                                      ? '저장된 답안이 변경됐어요. 작성 내용을 복사해 주세요.'
+                                      : c.draftStatus == DraftStatus.failed
+                                      ? '저장하지 못했어요. 다시 시도해 주세요.'
+                                      : null);
+                        if (status == null) return const SizedBox.shrink();
+                        final success =
+                            !manualSaving && (manualSaveNotice?.contains('저장됨') ?? false);
+                        final problem =
+                            status.contains('못') ||
+                            status.contains('변경됐어요');
+                        return Padding(
+                          padding: const EdgeInsets.only(top: AppTokens.space4),
+                          child: Row(
+                            children: [
+                              if (success) ...[
+                                const Icon(
+                                  Icons.check_circle,
+                                  size: 16,
+                                  color: AppTokens.success,
+                                ),
+                                const SizedBox(width: AppTokens.space4),
+                              ],
+                              Flexible(
+                                child: Text(
+                                  status,
+                                  style: AppTokens.caption.copyWith(
+                                    color: problem
+                                        ? AppTokens.dangerInk
+                                        : AppTokens.textSecondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                     if (draft.syncNotice != null &&
                         (draft.syncConflict || draft.remoteBody != c.body))
                       Text(draft.syncNotice!),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: OutlinedButton.icon(
-                        onPressed:
-                            syncBusy || c.draftStatus == DraftStatus.saving
-                            ? null
-                            : () async {
-                                await c.save();
-                                if (imageDirty && !imageSaving) {
-                                  await savePhoto(photo);
-                                }
-                              },
-                        icon: const Icon(
-                          Icons.save_outlined,
-                          size: AppTokens.iconDense,
-                        ),
-                        label: const Text('임시저장'),
-                      ),
-                    ),
                     const Text('아직 첨삭 요청 전입니다.'),
                     if (draft.remote != null)
                       TextButton(
@@ -1484,29 +1616,88 @@ class _ExamSubmitState extends ConsumerState<_ExamSubmit> {
         final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('첨삭을 시작할까요?'),
+            titlePadding: const EdgeInsets.fromLTRB(
+              AppTokens.space24,
+              AppTokens.space24,
+              AppTokens.space24,
+              AppTokens.space12,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppTokens.space24,
+            ),
+            actionsPadding: const EdgeInsets.fromLTRB(
+              AppTokens.space16,
+              AppTokens.space12,
+              AppTokens.space16,
+              AppTokens.space16,
+            ),
+            title: const Text(
+              '첨삭을 시작할까요?',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: AppTokens.textPrimary,
+              ),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('작성 문항: ${answers.length}개'),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.edit_note,
+                      size: 20,
+                      color: AppTokens.textTertiary,
+                    ),
+                    const SizedBox(width: AppTokens.space8),
+                    Text(
+                      '작성 문항: ${answers.length}개',
+                      style: AppTokens.body.copyWith(
+                        color: AppTokens.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
                 if (creditLine != null)
                   Padding(
-                    padding: const EdgeInsets.only(top: AppTokens.space8),
-                    child: Text(creditLine),
+                    padding: const EdgeInsets.only(top: AppTokens.space12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.account_balance_wallet_outlined,
+                          size: 20,
+                          color: AppTokens.textTertiary,
+                        ),
+                        const SizedBox(width: AppTokens.space8),
+                        Flexible(
+                          child: Text(
+                            creditLine,
+                            style: AppTokens.body.copyWith(
+                              color: AppTokens.textSecondary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
               ],
             ),
             actions: [
               TextButton(
+                style: TextButton.styleFrom(
+                  minimumSize: const Size(0, 48),
+                  foregroundColor: AppTokens.textSecondary,
+                ),
                 onPressed: () => Navigator.pop(context, false),
                 child: const Text('돌아가기'),
               ),
+              const SizedBox(width: AppTokens.space8),
               FilledButton(
                 style: FilledButton.styleFrom(
                   backgroundColor: AppTokens.textPrimary,
                   foregroundColor: Colors.white,
-                  minimumSize: const Size(48, 48),
+                  minimumSize: const Size(96, 48),
                 ),
                 onPressed: () => Navigator.pop(context, true),
                 child: const Text('첨삭 시작'),

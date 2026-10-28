@@ -203,7 +203,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                                 onPressed: () => openResult(row, e),
                                 child: Text(
                                   row.exam
-                                      ? '${(row.examData['questions'] as List? ?? []).cast<Map<String, dynamic>>().where((q) => q['dbQuestionId'] == (e['id'] as String).split('/').last).firstOrNull?['label'] ?? '문항'} · 첨삭 결과 보기'
+                                      ? '${essayExamQuestionLabel(row, (e['id'] as String).split('/').last)} · 첨삭 결과 보기'
                                       : '첨삭 결과 보기',
                                 ),
                               )
