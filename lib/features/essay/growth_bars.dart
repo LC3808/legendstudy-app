@@ -68,18 +68,39 @@ class GrowthBars extends StatelessWidget {
                 GrowthCriterionTitle(name: c.after.name),
                 const SizedBox(height: 8),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     bar(c.before.rating!, beforeLabel, Colors.blueGrey),
                     bar(c.after.rating!, afterLabel, const Color(0xFFFFAC14)),
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(
-                  c.before.rating == c.after.rating
-                      ? '평가 단계 유지 · ${c.after.rating}단계'
-                      : '평가 단계 ${c.before.rating} → ${c.after.rating}',
-                  style: AppTokens.body,
-                  textAlign: TextAlign.left,
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color:
+                        (c.after.rating! < c.before.rating!
+                                ? const Color(0xFF9E344A)
+                                : c.after.rating! > c.before.rating!
+                                ? EssayDesign.accent
+                                : Colors.blueGrey)
+                            .withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    c.before.rating == c.after.rating
+                        ? '평가 단계 유지 · ${c.after.rating}단계'
+                        : '평가 단계 ${c.before.rating} → ${c.after.rating}',
+                    style: AppTokens.body.copyWith(
+                      color: c.after.rating! < c.before.rating!
+                          ? const Color(0xFF9E344A)
+                          : c.after.rating! > c.before.rating!
+                          ? const Color(0xFF8A4B00)
+                          : AppTokens.textSecondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
               ],
             ),

@@ -109,6 +109,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
           physics: const AlwaysScrollableScrollPhysics(),
           children: [
             SegmentedButton<bool>(
+              style: EssayDesign.segmentStyle,
               segments: const [
                 ButtonSegment(value: false, label: Text('최신순')),
                 ButtonSegment(value: true, label: Text('시험별')),
@@ -143,81 +144,110 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               byExam,
             )) ...[
               for (final row in group)
-                ListTile(
-                  onTap: row.evaluations.any((e) => e['state'] == 'COMPLETED')
-                      ? () => openResult(
-                          row,
-                          orderedEssayEvaluations(row)
-                              .firstWhere((e) => e['state'] == 'COMPLETED'),
-                        )
-                      : null,
-                  title: Text(
-                    row.title,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (row.exam || row.examData['mathSession'] != null)
-                        Text(row.examLabel),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Wrap(
-                          spacing: 12,
-                          runSpacing: 8,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            EssayHistoryBadge(record: row),
-                            Text(essayShortDate(row)),
-                          ],
-                        ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: EssaySurface(
+                    padding: EdgeInsets.zero,
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      onTap:
+                          row.evaluations.any((e) => e['state'] == 'COMPLETED')
+                          ? () => openResult(
+                              row,
+                              orderedEssayEvaluations(row)
+                                  .firstWhere((e) => e['state'] == 'COMPLETED'),
+                            )
+                          : null,
+                      title: Text(
+                        row.title,
+                        style: AppTokens.cardTitle.copyWith(fontSize: 19),
                       ),
-                      if (row.examData['parent_id'] != null)
-                        const Text('최초 첨삭에 이어진 재첨삭'),
-                      if (row.evaluations.isEmpty) const Text('평가 요청 전'),
-                      if ((row.exam || row.examData['mathSession'] != null) &&
-                          row.examData['state'] == 'reserved')
-                        RoundHistoryActions(
-                          key: ValueKey(row.id),
-                          owner: owner,
-                          record: row,
-                        ),
-                      if (row.math && row.examData['mathSession'] == null)
-                        for (final e in row.evaluations)
-                          TextButton(
-                            onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => MathWorkspacePage(
-                                  evaluationId: e['id'] as String,
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (row.exam || row.examData['mathSession'] != null)
+                            Text(row.examLabel, style: AppTokens.secondary),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Wrap(
+                              spacing: 12,
+                              runSpacing: 8,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                EssayHistoryBadge(record: row),
+                                Text(
+                                  essayShortDate(row),
+                                  style: AppTokens.caption,
                                 ),
-                              ),
+                              ],
                             ),
-                            child: const Text('처리 상태 · 재첨삭 확인'),
                           ),
-                      for (final e in orderedEssayEvaluations(row).where(
-                        (e) =>
-                            !(row.exam && row.examData['state'] == 'reserved'),
-                      ))
-                        e['state'] == 'COMPLETED'
-                            ? TextButton(
-                                onPressed: () => openResult(row, e),
-                                child: Text(
-                                  row.exam
-                                      ? '${essayExamQuestionLabel(row, (e['id'] as String).split('/').last)} · 첨삭 결과 보기'
-                                      : '첨삭 결과 보기',
+                          if (row.examData['parent_id'] != null)
+                            const Text('최초 첨삭에 이어진 재첨삭'),
+                          if (row.evaluations.isEmpty) const Text('평가 요청 전'),
+                          if ((row.exam ||
+                                  row.examData['mathSession'] != null) &&
+                              row.examData['state'] == 'reserved')
+                            RoundHistoryActions(
+                              key: ValueKey(row.id),
+                              owner: owner,
+                              record: row,
+                            ),
+                          if (row.math && row.examData['mathSession'] == null)
+                            for (final e in row.evaluations)
+                              TextButton(
+                                onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => MathWorkspacePage(
+                                      evaluationId: e['id'] as String,
+                                    ),
+                                  ),
                                 ),
-                              )
-                            : Text(switch (e['state']) {
-                                'PROCESSING' => '첨삭 중',
-                                'QUEUED' => '대기 중',
-                                'FAILED' => '첨삭 실패',
-                                'INVALIDATED' => '평가 확인 필요',
-                                _ => '상태 확인 필요',
-                              }),
-                    ],
+                                child: const Text('처리 상태 · 재첨삭 확인'),
+                              ),
+                          for (final e in orderedEssayEvaluations(row).where(
+                            (e) =>
+                                !(row.exam &&
+                                    row.examData['state'] == 'reserved'),
+                          ))
+                            e['state'] == 'COMPLETED'
+                                ? Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        minimumSize: const Size.fromHeight(48),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 12,
+                                        ),
+                                      ),
+                                      onPressed: () => openResult(row, e),
+                                      child: Text(
+                                        row.exam
+                                            ? '${essayExamQuestionLabel(row, (e['id'] as String).split('/').last)} · 첨삭 결과 보기'
+                                            : '첨삭 결과 보기',
+                                      ),
+                                    ),
+                                  )
+                                : Text(
+                                    switch (e['state']) {
+                                      'PROCESSING' => '첨삭 중',
+                                      'QUEUED' => '대기 중',
+                                      'FAILED' => '첨삭 실패',
+                                      'INVALIDATED' => '평가 확인 필요',
+                                      _ => '상태 확인 필요',
+                                    },
+                                    style: AppTokens.secondary.copyWith(
+                                      color: e['state'] == 'FAILED'
+                                          ? AppTokens.dangerInk
+                                          : AppTokens.textSecondary,
+                                    ),
+                                  ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              const Divider(color: Color(0xFF636363), thickness: 1),
             ],
           ],
         ),
@@ -539,7 +569,7 @@ class EssayResultHeader extends StatelessWidget {
         Text(
           record.title,
           style: const TextStyle(
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
             color: AppTokens.textPrimary,
           ),

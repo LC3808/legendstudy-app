@@ -1098,8 +1098,9 @@ class _EssayResultViewState extends State<EssayResultView> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: color(entry.key).withValues(alpha: 0.045),
-                    border: Border(
-                      left: BorderSide(color: color(entry.key), width: 2),
+                    borderRadius: BorderRadius.circular(EssayDesign.radius),
+                    border: Border.all(
+                      color: color(entry.key).withValues(alpha: 0.15),
                     ),
                   ),
                   child: Column(

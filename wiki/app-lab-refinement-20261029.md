@@ -46,3 +46,20 @@ Info.plist의1.0.1/27/com.legendstudy.app, codesign deep/strict PASS. Generated.
 26 보존: `build/ios/qa-swu-rewrite-26/Runner.app`, App.framework SHA256 `9001c075b0da3314f38cecae7ad5345291d85068f9360e460efcd3319a823bee`. 문제 시 26 앱으로 되돌릴 수 있으며 uninstall/기기 데이터 삭제를 하지 않는다. 소스는 기준3754bbd로 별도 복구 커밋 가능. 이미 생성된 Owner 무료 child/History/Credit을 되돌리는 조치는 포함하지 않는다.
 
 남은 검증: Owner iPhone에서 세 화면 실제 조작·PDF 저장/음성·대규모 실제 이력·큰 글씨 확인. 운영 History가50회차로 제한되는 계정의 무제한 전체 조회는 이번 APP UI 작업으로 해결했다고 보고하지 않는다.
+
+
+## Owner 디자인 Addendum — 2026-10-29
+
+27번 기능 수정 위에 디자인만 추가한다. 예시 대학/점수/날짜를 운영 데이터로 사용하지 않는다. 위 일곱 보존 질문의 답변은 동일: 새 데이터 수집·저장·원장 UPDATE 없으며 기존 ID/결과/권한/맥락을 유지하는 화면 투영이다. DB·Worker·Provider·Credit·History·Registry·OCR·PDF 생성·로그인·Observation 계산/계약 변경 없음.
+
+- `result_disclosure.dart / EssayDesign, EssaySurface, ResultAccordion`: LAB 범위 네이비 선택면·#FFAC14 강조, 화이트 Material 카드, 연한 border, radius14, 내부16, 아코디언 좌우16/최소 터치 영역/동일 접힘·펼침 테두리. Material 사용으로 ListTile 및 InkWell의 눌림 피드백을 보존. 글로벌 앱 테마를 바꾸지 않는다.
+- `shared_history_page.dart`: 네이비/화이트 Segmented Control, 카드12dp 간격·대학19sp·시험14sp·날짜12sp, 결과 버튼48dp 이상·8dp 간격, 실패 상태는 기존 문자열+붉은색으로 표시. 결과 대학명20sp. 필터/공식 문항 순서/결과 조회/재첨삭 경로는 그대로.
+- `essay_pages.dart`: 녹색/붉은색 원문 카드에 radius14와 연한 border 적용. 단일 Text 접힘/전문 정책·원문 유지.
+- `essay_growth_page.dart`: 펼친 카드1dp 오렌지, 접힌 카드 중립 border. 대학19/시험14/회차12, 본문 왼쪽. 기존5개 이전·다음 유지, 현재페이지 네이비 강조. `EssayQuestionGrid`는 가용680dp 이상·글씨1.25배 이하에서2열, 나머지는 세로. 긴 실제 평가기준/여러 요소를 단일 가짜 점수로 합치지 않는다.
+- `growth_bars.dart`: 최초 블루그레이/최근 브랜드 오렌지, 실제1~5값 유지. 두 막대 상단을 맞춰 긴 라벨의 줄바꿈이 기준선을 왜곡하지 않도록 함. 실제 변화에 따라 개선 오렌지/유지 회색/하락 붉은 강조. 1회 막대와3회이상 선도 동일 강조색 사용. 계산·criterion match는 불변.
+
+시안과의 차이: 기존 정책에 없는 성장화면 정렬 컨트롤·검색창은 추가하지 않음. 번호 나열 대신 이전/현재/다음. 휴대폰은 정확한 기준별 장문/큰 글씨를 위해 문항을 세로 표시. 최신이 무조건 개선된다는 예시 문구를 복제하지 않음. SafeArea/하단 네비게이션 구조 불변.
+
+검증: 320/360/390/430dp × 글씨1/2배의 세 화면 widget 검증, 320/800dp 그래프 배치, 기존 단일본문/공식문항순서/paid필터/5개페이지 검사. 합성 fixture PNG는 결과·History·성장카드 및 별도 실제 fixture 그래프 렌더이며 실기기/E2E가 아니다. 성장카드 캡처는 서버 연결 없는 레이아웃 상태로, 데이터 연결 PASS의 근거로 사용하지 않는다. 스크린샷은 시각 확인이며 baseline pixel golden 비교는 미구현.
+
+최종 Analyze0 issues·전체 Flutter1217 PASS/7 SKIP. 디자인/기존 targeted24 PASS. 서명 iOS1.0.1(28) 결과는 아래 배포 영수증으로 후속 기록한다. 26/27 앱 보존, 설치/스토어 제출 없음. 남은 검증은 실제 iPhone 화면·PDF/음성·인증 흐름이며, 서버50회차 제한은 이번 디자인 범위 밖이다.

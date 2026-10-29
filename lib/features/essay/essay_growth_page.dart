@@ -1,11 +1,11 @@
 import 'result_disclosure.dart';
+import '../../shared/widgets/shell_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/theme/app_theme.dart';
-import '../../shared/widgets/shell_widgets.dart';
 import 'evaluation_report.dart';
 import 'growth_bars.dart';
 import 'growth_timeline.dart';
@@ -154,6 +154,9 @@ class _GrowthBodyState extends ConsumerState<_GrowthBody> {
                         truncated
                             ? '${current + 1}페이지 · 조회 범위'
                             : '${current + 1} / $pages',
+                        style: AppTokens.cardTitle.copyWith(
+                          color: AppTokens.textPrimary,
+                        ),
                       ),
                       OutlinedButton(
                         key: const ValueKey('growth-next'),
@@ -267,7 +270,8 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
           : loadReports(SharedEssayHistory(client, owner), completedRounds);
     }
 
-    return LsCard(
+    return EssaySurface(
+      highlighted: expanded,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -293,12 +297,15 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(latest.title, style: AppTokens.cardTitle),
+                        Text(
+                          latest.title,
+                          style: AppTokens.cardTitle.copyWith(fontSize: 19),
+                        ),
                         if (latest.examLabel.isNotEmpty)
                           Text(
                             latest.examLabel,
                             textAlign: TextAlign.left,
-                            style: AppTokens.body.copyWith(height: 1.5),
+                            style: AppTokens.secondary,
                           ),
                       ],
                     ),
@@ -307,7 +314,9 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
                   Text('${completedRounds.length}회차', style: AppTokens.caption),
                   Icon(
                     expanded ? Icons.expand_less : Icons.expand_more,
-                    color: AppTokens.textTertiary,
+                    color: expanded
+                        ? EssayDesign.accent
+                        : AppTokens.textSecondary,
                   ),
                 ],
               ),
@@ -333,41 +342,46 @@ class _GrowthGroupCardState extends ConsumerState<_GrowthGroupCard> {
                       style: AppTokens.caption,
                     );
                   }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  return EssayQuestionGrid(
                     children: [
-                      for (final entry in snapshot.data!.entries) ...[
-                        Text(
-                          latest.exam
-                              ? essayExamQuestionLabel(
-                                  completedRounds.firstWhere(
-                                    (r) =>
-                                        (r.examData['question_ids'] as List? ??
-                                                [])
-                                            .contains(entry.key),
-                                  ),
-                                  entry.key,
-                                )
-                              : '성장 요약',
-                          style: AppTokens.cardTitle,
+                      for (final entry in snapshot.data!.entries)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              latest.exam
+                                  ? essayExamQuestionLabel(
+                                      completedRounds.firstWhere(
+                                        (r) =>
+                                            (r.examData['question_ids']
+                                                        as List? ??
+                                                    [])
+                                                .contains(entry.key),
+                                      ),
+                                      entry.key,
+                                    )
+                                  : '성장 요약',
+                              style: AppTokens.cardTitle,
+                            ),
+                            const SizedBox(height: 8),
+                            if (entry.value.length == 1 &&
+                                entry.value.single != null)
+                              _SingleRoundLevels(report: entry.value.single!)
+                            else if (entry.value.length == 2 &&
+                                entry.value.every((r) => r != null))
+                              GrowthBars(
+                                before: entry.value.first!,
+                                after: entry.value.last!,
+                                learning: true,
+                                beforeLabel: '최초 첨삭',
+                                afterLabel: essayBillingType(
+                                  completedRounds.last,
+                                ),
+                              )
+                            else
+                              GrowthTimeline(reports: entry.value),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        if (entry.value.length == 1 &&
-                            entry.value.single != null)
-                          _SingleRoundLevels(report: entry.value.single!)
-                        else if (entry.value.length == 2 &&
-                            entry.value.every((r) => r != null))
-                          GrowthBars(
-                            before: entry.value.first!,
-                            after: entry.value.last!,
-                            learning: true,
-                            beforeLabel: '최초 첨삭',
-                            afterLabel: essayBillingType(completedRounds.last),
-                          )
-                        else
-                          GrowthTimeline(reports: entry.value),
-                        const SizedBox(height: 16),
-                      ],
                     ],
                   );
                 },
@@ -420,6 +434,7 @@ class _SingleRoundLevels extends StatelessWidget {
                               minHeight: 6,
                               value: c.rating! / 5,
                               backgroundColor: AppTokens.primarySoft,
+                              color: EssayDesign.accent,
                               valueColor: const AlwaysStoppedAnimation(
                                 AppTokens.info,
                               ),

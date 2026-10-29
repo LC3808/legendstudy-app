@@ -44,21 +44,24 @@ class ResultAccordion extends StatelessWidget {
   final String title;
   final Widget child;
   @override
-  Widget build(BuildContext context) => ExpansionTile(
-    tilePadding: EdgeInsets.zero,
-    childrenPadding: const EdgeInsets.only(bottom: 16),
-    expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-    shape: const Border(bottom: BorderSide(color: AppTokens.cardBorder)),
-    collapsedShape: const Border(
-      bottom: BorderSide(color: AppTokens.cardBorder),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: ExpansionTile(
+      tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      backgroundColor: AppTokens.surface,
+      collapsedBackgroundColor: AppTokens.surface,
+      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+      shape: EssayDesign.shape,
+      collapsedShape: EssayDesign.shape,
+      title: Text(title, textAlign: TextAlign.left, style: AppTokens.cardTitle),
+      children: [
+        DefaultTextStyle.merge(
+          style: AppTokens.body.copyWith(height: 1.6),
+          child: child,
+        ),
+      ],
     ),
-    title: Text(title, textAlign: TextAlign.left),
-    children: [
-      DefaultTextStyle.merge(
-        style: AppTokens.body.copyWith(height: 1.6),
-        child: child,
-      ),
-    ],
   );
 }
 
@@ -77,4 +80,77 @@ class GrowthCriterionTitle extends StatelessWidget {
       child: Text(name, textAlign: TextAlign.left),
     );
   }
+}
+
+/// Scoped LAB presentation tokens; the rest of the app keeps its current theme.
+abstract final class EssayDesign {
+  static const accent = Color(0xFFFFAC14);
+  static const radius = 14.0;
+  static final shape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(radius),
+    side: const BorderSide(color: AppTokens.cardBorder),
+  );
+  static final segmentStyle = ButtonStyle(
+    minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (states) => states.contains(WidgetState.selected)
+          ? AppTokens.textPrimary
+          : AppTokens.surface,
+    ),
+    foregroundColor: WidgetStateProperty.resolveWith(
+      (states) => states.contains(WidgetState.selected)
+          ? Colors.white
+          : AppTokens.textPrimary,
+    ),
+    side: const WidgetStatePropertyAll(BorderSide(color: AppTokens.cardBorder)),
+  );
+}
+
+class EssaySurface extends StatelessWidget {
+  const EssaySurface({
+    super.key,
+    required this.child,
+    this.highlighted = false,
+    this.padding = const EdgeInsets.all(16),
+  });
+  final Widget child;
+  final bool highlighted;
+  final EdgeInsetsGeometry padding;
+  @override
+  Widget build(BuildContext context) => Material(
+    color: AppTokens.surface,
+    clipBehavior: Clip.antiAlias,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(EssayDesign.radius),
+      side: BorderSide(
+        color: highlighted ? EssayDesign.accent : AppTokens.cardBorder,
+      ),
+    ),
+    child: Padding(padding: padding, child: child),
+  );
+}
+
+/// Never compress multiple criteria into one synthetic question score.
+class EssayQuestionGrid extends StatelessWidget {
+  const EssayQuestionGrid({super.key, required this.children});
+  final List<Widget> children;
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, box) {
+      final columns =
+          box.maxWidth >= 680 &&
+          MediaQuery.textScalerOf(context).scale(16) <= 20;
+      return Wrap(
+        spacing: 16,
+        runSpacing: 16,
+        children: [
+          for (final child in children)
+            SizedBox(
+              width: columns ? (box.maxWidth - 16) / 2 : box.maxWidth,
+              child: child,
+            ),
+        ],
+      );
+    },
+  );
 }

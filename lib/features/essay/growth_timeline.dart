@@ -39,11 +39,7 @@ class GrowthTimeline extends StatelessWidget {
           SizedBox(
             height: 120,
             child: CustomPaint(
-              painter: _TimelinePainter(
-                reports,
-                entry.key,
-                Theme.of(context).colorScheme.primary,
-              ),
+              painter: _TimelinePainter(reports, entry.key, EssayDesign.accent),
             ),
           ),
           Wrap(

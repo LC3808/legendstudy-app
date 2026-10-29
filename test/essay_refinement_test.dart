@@ -55,6 +55,7 @@ Widget app(
     sharedEssayHistoryProvider('owner').overrideWith((ref) async => rows),
   ],
   child: MaterialApp(
+    theme: AppTheme.light,
     home: MediaQuery(
       data: MediaQueryData(textScaler: TextScaler.linear(scale)),
       child: page,
@@ -71,6 +72,135 @@ List<Key> cardKeys(WidgetTester tester) =>
         .toList();
 
 void main() {
+  for (final width in [320.0, 360.0, 390.0, 430.0]) {
+    for (final scale in [1.0, 2.0]) {
+      testWidgets('design three surfaces $width at $scale', (tester) async {
+        tester.view.physicalSize = Size(width, 900);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        await tester.pumpWidget(
+          app(
+            [row(1, round: 2), row(2)],
+            page: const SharedEssayHistoryPage(),
+            scale: scale,
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        final segment = tester.widget<SegmentedButton<bool>>(
+          find.byType(SegmentedButton<bool>),
+        );
+        expect(
+          segment.style!.backgroundColor!.resolve({WidgetState.selected}),
+          AppTokens.textPrimary,
+        );
+        expect(find.byType(EssaySurface), findsWidgets);
+        await tester.pumpWidget(
+          app(List.generate(6, (i) => row(i)), scale: scale),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(EssaySurface), findsWidgets);
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.light,
+            home: MediaQuery(
+              data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+              child: Scaffold(
+                body: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      EssayResultHeader(
+                        record: row(1, round: 2),
+                        questionId: 'z',
+                      ),
+                      const ResultAccordion(
+                        title: '비교 대상 · 이전 제출 답안',
+                        child: Text('기존 답안을 보존합니다.'),
+                      ),
+                      EssayResultView(
+                        evaluation: secondPreviewEvaluation,
+                        question: essayPreviewQuestions.first,
+                        onRewrite: () {},
+                        comparison: true,
+                        collapsedDetails: true,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        await tester.tap(find.text('비교 대상 · 이전 제출 답안'));
+        await tester.pumpAndSettle();
+        expect(find.text('기존 답안을 보존합니다.'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+        final fixture = jsonDecode(
+          File('test/fixtures/exam-history-v1.json').readAsStringSync(),
+        ) as Map;
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.light,
+            home: MediaQuery(
+              data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+              child: Scaffold(
+                body: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: GrowthBars(
+                    before: examEvaluationReport(
+                      Map<String, dynamic>.from(fixture['before'] as Map),
+                      'question',
+                    ),
+                    after: examEvaluationReport(
+                      Map<String, dynamic>.from(fixture['after'] as Map),
+                      'question',
+                    ),
+                    beforeLabel: '최초 첨삭',
+                    afterLabel: '무료 재첨삭',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
+  testWidgets('question charts stack on phones and pair on wide screens', (
+    tester,
+  ) async {
+    for (final width in [320.0, 800.0]) {
+      tester.view.physicalSize = Size(width, 900);
+      tester.view.devicePixelRatio = 1;
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: EssayQuestionGrid(
+              children: [
+                SizedBox(key: ValueKey('a'), height: 100),
+                SizedBox(key: ValueKey('b'), height: 100),
+              ],
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final a = tester.getRect(find.byKey(const ValueKey('a'))),
+          b = tester.getRect(find.byKey(const ValueKey('b')));
+      expect(width < 680 ? b.top > a.top : b.left > a.left, isTrue);
+      expect(tester.takeException(), isNull);
+    }
+    tester.view.resetPhysicalSize();
+    tester.view.resetDevicePixelRatio();
+  });
   testWidgets('Native result and chart presentation at phone widths', (
     tester,
   ) async {
@@ -120,7 +250,9 @@ void main() {
         ),
       ),
       home: Scaffold(
-        appBar: AppBar(title: const Text('첨삭 결과')),
+        appBar: child is SharedEssayHistoryPage || child is EssayGrowthPage
+            ? null
+            : AppBar(title: const Text('첨삭 결과')),
         body: RepaintBoundary(
           key: const ValueKey('capture'),
           child: Material(color: AppTokens.background, child: child),
@@ -171,6 +303,28 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('평가 단계 2 → 3'), findsOneWidget);
     await capture('chart');
+    for (final (name, page) in <(String, Widget)>[
+      ('history', const SharedEssayHistoryPage()),
+      ('growth', const EssayGrowthPage()),
+    ]) {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+            supabaseClientProvider.overrideWithValue(null),
+            sharedEssayHistoryProvider(
+              'owner',
+            ).overrideWith((ref) async => [row(1, round: 2), row(2), row(3)]),
+          ],
+          child: frame(page),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      await capture(name);
+    }
     expect(tester.takeException(), isNull);
   });
 
