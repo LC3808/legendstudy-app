@@ -23,7 +23,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-APP 결과·History·성장 UI / 중복 문장 / 5개 이전·다음 페이지: [최종 UI 정리·디자인 Addendum·검수 빌드](app-lab-refinement-20261029.md).
+APP 결과·History·성장 UI / TTS / 본문 펼침 / 페이지 전환: [28 실기기 후속 수정](app-device-followup-20261030.md). 기존 UI / 5개 이전·다음 페이지: [최종 UI 정리·디자인 Addendum·검수 빌드](app-lab-refinement-20261029.md).
 
 논술 P0 / 경희2024 반복실패 / 서울여 재첨삭 응답 / 문항 상태 동기화 / partial result / 요청키 복구: [근거·운영 RPC·Worker 배포·Observation iOS25·경희복구기록·서울여무료경로수정·iOS26·롤백](essay-evaluation-stability-p0-20261029.md).
 

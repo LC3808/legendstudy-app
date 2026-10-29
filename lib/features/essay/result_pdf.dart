@@ -145,6 +145,11 @@ class _ResultPdfButtonState extends State<ResultPdfButton> {
   bool busy = false;
   @override
   Widget build(BuildContext context) => OutlinedButton(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: const Color(0xFF1C2B4B),
+      backgroundColor: const Color(0xFFFFF2D9),
+      side: const BorderSide(color: Color(0xFFFFAC14)),
+    ),
     onPressed: busy
         ? null
         : () async {

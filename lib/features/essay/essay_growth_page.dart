@@ -66,7 +66,7 @@ class _GrowthBodyState extends ConsumerState<_GrowthBody> {
   void changePage(int next) {
     setState(() {
       page = next;
-      expandedId = null;
+      expandedId = '';
     });
     if (_scroll.hasClients) _scroll.jumpTo(0);
   }

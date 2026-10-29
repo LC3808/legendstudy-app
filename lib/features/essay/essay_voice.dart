@@ -4,6 +4,7 @@ import 'evaluation_presentation.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import 'evaluation_report.dart';
@@ -93,32 +94,81 @@ Map<String, String> essaySpeechSections(
 
 class EssayVoice extends StatefulWidget {
   static Future<void> Function()? stopActive;
-  const EssayVoice({super.key, required this.report, this.before});
+  const EssayVoice({super.key, required this.report, this.before, this.engine});
   final EvaluationReport report;
   final EvaluationReport? before;
+  @visibleForTesting
+  final FlutterTts? engine;
   @override
   State<EssayVoice> createState() => _EssayVoiceState();
 }
 
 class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
-  final tts = FlutterTts();
+  late final FlutterTts tts;
   String selected = '전체 결과', current = '', text = '';
-  bool playing = false, paused = false;
+  bool playing = false, paused = false, preparing = false;
+  Timer? startWatchdog;
+  Completer<void>? utterance;
+  bool starting = false, finished = false;
   int generation = 0;
   String? error;
   @override
   void initState() {
     super.initState();
+    tts = widget.engine ?? FlutterTts();
     WidgetsBinding.instance.addObserver(this);
     EssayVoice.stopActive = stop;
+    tts.setStartHandler(() {
+      startWatchdog?.cancel();
+      if (mounted && preparing) {
+        setState(() {
+          playing = true;
+          preparing = false;
+          paused = false;
+        });
+      }
+    });
+    tts.setCancelHandler(() {
+      if (!playing && !preparing) return;
+      generation++;
+      startWatchdog?.cancel();
+      if (utterance?.isCompleted == false) utterance!.complete();
+      if (mounted) {
+        setState(() {
+          playing = false;
+          preparing = false;
+          current = '';
+        });
+      }
+    });
+    tts.setCompletionHandler(() {
+      if (utterance?.isCompleted == false) utterance!.complete();
+    });
+    tts.setErrorHandler((message) {
+      unawaited(fail());
+    });
+  }
+
+  Future<void> fail() async {
+    await stop();
+    if (mounted) {
+      setState(
+        () => error = '음성을 재생하지 못했어요. 기기 음량과 연결된 오디오 장치를 확인한 뒤 다시 시도해 주세요.',
+      );
+    }
   }
 
   Future<void> stop() async {
     generation++;
-    await tts.stop();
+    if (utterance?.isCompleted == false) utterance!.complete();
+    startWatchdog?.cancel();
+    try {
+      await tts.stop();
+    } catch (_) {}
     if (mounted) {
       setState(() {
         playing = false;
+        preparing = false;
         paused = false;
         current = '';
       });
@@ -133,6 +183,11 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
   List<MapEntry<String, String>> queue = [];
   int cursor = 0, progress = 0;
   Future<void> speak() async {
+    if (starting) return;
+    setState(() {
+      starting = true;
+      finished = false;
+    });
     try {
       final resuming = paused;
       if (!resuming) {
@@ -165,14 +220,24 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
         }
       }
       final token = ++generation;
+      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+        await tts.setSharedInstance(true);
+        await tts.setIosAudioCategory(
+          IosTextToSpeechAudioCategory.playback,
+          [],
+          IosTextToSpeechAudioMode.defaultMode,
+        );
+      }
       await tts.setLanguage('ko-KR');
-      await tts.awaitSpeakCompletion(true);
+      await tts.setVolume(1.0);
+      await tts.setSpeechRate(0.45);
+      await tts.awaitSpeakCompletion(false);
       tts.setProgressHandler((_, start, end, word) {
         progress = start;
       });
       if (!mounted || token != generation) return;
       setState(() {
-        playing = true;
+        preparing = true;
         paused = false;
         error = null;
       });
@@ -181,28 +246,41 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
         text = queue[cursor].value;
         progress = 0;
         setState(() => current = queue[cursor].key);
-        await tts.speak(text);
+        setState(() {
+          preparing = true;
+          playing = false;
+        });
+        startWatchdog?.cancel();
+        startWatchdog = Timer(const Duration(seconds: 8), () {
+          if (mounted && token == generation && preparing) unawaited(fail());
+        });
+        utterance = Completer<void>();
+        final result = await tts
+            .speak(text)
+            .timeout(const Duration(seconds: 15));
+        if (result == 0) throw StateError('TTS rejected speech');
+        await utterance!.future.timeout(const Duration(minutes: 10));
+        startWatchdog?.cancel();
         if (token != generation) return;
       }
       if (mounted) {
         setState(() {
           playing = false;
+          preparing = false;
           current = '';
+          finished = true;
         });
       }
     } catch (_) {
-      if (mounted) {
-        setState(() {
-          playing = false;
-          paused = false;
-          error = '기기 음성을 사용할 수 없어요.';
-        });
-      }
+      await fail();
+    } finally {
+      if (mounted) setState(() => starting = false);
     }
   }
 
   Future<void> pause() async {
     generation++;
+    if (utterance?.isCompleted == false) utterance!.complete();
     if (cursor < queue.length) {
       queue[cursor] = MapEntry(
         current,
@@ -210,12 +288,20 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
       );
     }
     await tts.stop();
-    if (mounted) setState(() => paused = true);
+    if (mounted) {
+      setState(() {
+        paused = true;
+        playing = false;
+        preparing = false;
+      });
+    }
   }
 
   @override
   void dispose() {
     generation++;
+    if (utterance?.isCompleted == false) utterance!.complete();
+    startWatchdog?.cancel();
     EssayVoice.stopActive = null;
     WidgetsBinding.instance.removeObserver(this);
     unawaited(tts.stop());
@@ -235,14 +321,27 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
             '전체 결과',
             ...essaySpeechSections(widget.report, widget.before).keys,
           ].map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
-          onChanged: playing ? null : (v) => setState(() => selected = v!),
+          onChanged: playing || preparing
+              ? null
+              : (v) => setState(() => selected = v!),
         ),
         if (current.isNotEmpty) Text('듣는 항목: $current'),
+        Text(
+          preparing
+              ? '음성 준비 중'
+              : paused
+              ? '일시정지'
+              : playing
+              ? '재생 중'
+              : finished
+              ? '재생 완료'
+              : '재생 대기',
+        ),
         Wrap(
           spacing: 8,
           children: [
             TextButton(
-              onPressed: playing && !paused ? null : speak,
+              onPressed: playing || preparing || starting ? null : speak,
               child: Text(paused ? '재개' : '듣기'),
             ),
             TextButton(
@@ -250,7 +349,9 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
               child: const Text('일시정지'),
             ),
             TextButton(
-              onPressed: playing ? stop : null,
+              onPressed: playing || paused || preparing || starting
+                  ? stop
+                  : null,
               child: const Text('중지'),
             ),
           ],

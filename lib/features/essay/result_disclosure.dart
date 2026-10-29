@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
@@ -22,7 +24,7 @@ class _ResultTextDisclosureState extends State<ResultTextDisclosure> {
         children: [
           Expanded(
             child: Text(
-              widget.text,
+              displayEssayText(widget.text),
               maxLines: expanded ? null : 3,
               overflow: expanded ? TextOverflow.visible : TextOverflow.ellipsis,
               textAlign: TextAlign.left,
@@ -49,8 +51,10 @@ class ResultAccordion extends StatelessWidget {
     child: ExpansionTile(
       tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      backgroundColor: AppTokens.surface,
-      collapsedBackgroundColor: AppTokens.surface,
+      backgroundColor: const Color(0xFFF8FAFC),
+      collapsedBackgroundColor: title == '음성으로 듣기'
+          ? const Color(0xFFFFF8EB)
+          : const Color(0xFFF8FAFC),
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
       shape: EssayDesign.shape,
       collapsedShape: EssayDesign.shape,
@@ -71,13 +75,16 @@ class GrowthCriterionTitle extends StatelessWidget {
   final String name;
   @override
   Widget build(BuildContext context) {
-    if (name.runes.length <= 70) {
-      return Text(name, textAlign: TextAlign.left, style: AppTokens.body);
-    }
     final first = name.split('\n').first.trim();
+    final titled = name.contains('\n') && first.isNotEmpty && first.length < 60;
     return ResultAccordion(
-      title: first.isNotEmpty && first.length < 60 ? first : '평가 기준 자세히 보기',
-      child: Text(name, textAlign: TextAlign.left),
+      title: titled ? first : '평가 기준 자세히 보기',
+      child: Text(
+        displayEssayText(
+          titled ? name.substring(name.indexOf('\n') + 1) : name,
+        ),
+        textAlign: TextAlign.left,
+      ),
     );
   }
 }
@@ -152,5 +159,80 @@ class EssayQuestionGrid extends StatelessWidget {
         ],
       );
     },
+  );
+}
+
+/// Presentation only. Keep blank paragraphs, markers, formulas and table rows.
+String displayEssayText(String source) {
+  final lines = source.replaceAll('\r\n', '\n').split('\n');
+  final out = <String>[];
+  final structured = RegExp(
+    r'^\s*(?:[•●▶①-⑳]|[-*] |\d+[.)]|\[|준거|평가 영역|채점|문항|하위|[|]|.*[=<>∑√])',
+  );
+  for (final line in lines) {
+    if (out.isNotEmpty &&
+        out.last.trim().length >= 20 &&
+        line.trim().isNotEmpty &&
+        !RegExp(r'[.!?。:]$').hasMatch(out.last.trim()) &&
+        !structured.hasMatch(line) &&
+        !line.contains('  ') &&
+        !out.last.contains('|') &&
+        !out.last.contains('  ') &&
+        !RegExp(r'[=<>∑√]').hasMatch(out.last)) {
+      out[out.length - 1] = '${out.last.trimRight()} ${line.trimLeft()}';
+    } else {
+      out.add(line);
+    }
+  }
+  return out.join('\n');
+}
+
+class ProcessingGuidance extends StatefulWidget {
+  const ProcessingGuidance({super.key, required this.active});
+  final bool active;
+  @override
+  State<ProcessingGuidance> createState() => _ProcessingGuidanceState();
+}
+
+class _ProcessingGuidanceState extends State<ProcessingGuidance> {
+  Timer? timer;
+  int index = 0;
+  static const messages = ['첨삭 결과를 기다리고 있어요.', '잠시 쉬어가세요. 결과가 준비되면 확인할 수 있어요.'];
+  void schedule() {
+    timer?.cancel();
+    if (widget.active) {
+      timer = Timer.periodic(const Duration(seconds: 6), (_) {
+        if (mounted) setState(() => index = (index + 1) % messages.length);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    schedule();
+  }
+
+  @override
+  void didUpdateWidget(covariant ProcessingGuidance old) {
+    super.didUpdateWidget(old);
+    if (old.active != widget.active) schedule();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AnimatedSwitcher(
+    duration: const Duration(milliseconds: 250),
+    child: Text(
+      widget.active ? messages[index] : '접수된 답안의 처리 상태를 확인하고 있어요.',
+      key: ValueKey(widget.active ? index : -1),
+      textAlign: TextAlign.center,
+      style: AppTokens.secondary,
+    ),
   );
 }

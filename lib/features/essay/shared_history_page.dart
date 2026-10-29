@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import 'result_pdf.dart';
 import 'round_history_actions.dart';
 import 'growth_bars.dart';
@@ -426,7 +428,16 @@ class _Result extends ConsumerWidget {
             : null) ??
         record;
     return Scaffold(
-      appBar: AppBar(title: const Text('첨삭 결과')),
+      appBar: AppBar(
+        title: const Text('첨삭 결과'),
+        actions: [
+          IconButton(
+            tooltip: '나의 첨삭 기록',
+            onPressed: () => goToEssayHistory(context),
+            icon: const Icon(Icons.history),
+          ),
+        ],
+      ),
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
           ? record.math
                 ? EvaluationReportView(report: report, before: before)
@@ -470,6 +481,7 @@ class _Result extends ConsumerWidget {
                           onOpen: openWriter,
                         ),
 
+                        const SizedBox(height: 16),
                         ResultAccordion(
                           title: essayAnswerVersion(record).startsWith('수정')
                               ? '수정 제출 답안'
@@ -598,4 +610,11 @@ class EssayResultHeader extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// Clear imperative detail/writer routes before selecting the canonical list.
+void goToEssayHistory(BuildContext context) {
+  final router = GoRouter.of(context);
+  Navigator.of(context).popUntil((route) => route.isFirst);
+  router.go('/lab/essay/history');
 }

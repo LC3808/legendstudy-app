@@ -440,7 +440,7 @@ void main() {
         expect(cardKeys(tester).length, (count - 5).clamp(0, 5));
         final list = tester.widget<ListView>(find.byType(ListView));
         expect(list.controller!.offset, 0);
-        expect(find.textContaining('회차별 결과 보기'), findsOneWidget);
+        expect(find.textContaining('회차별 결과 보기'), findsNothing);
         if (count > 10) {
           await tester.scrollUntilVisible(
             find.byKey(const ValueKey('growth-next')),
@@ -462,6 +462,7 @@ void main() {
         );
         await tester.tap(find.byKey(const ValueKey('growth-previous')));
         await tester.pumpAndSettle();
+        expect(find.textContaining('회차별 결과 보기'), findsNothing);
         expect(cardKeys(tester).length, 5);
       }
       expect(tester.takeException(), isNull);

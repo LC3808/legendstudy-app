@@ -1,3 +1,4 @@
+import 'result_disclosure.dart';
 import 'exam_presentation.dart';
 import 'exam_session_status.dart';
 import 'exam_session_store.dart';
@@ -2524,17 +2525,20 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         ),
         if (!completed) ...[
           const SizedBox(height: AppTokens.space8),
-          const Text(
-            '결과가 준비되면 확인할 수 있어요.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, color: AppTokens.textSecondary),
+          ProcessingGuidance(
+            active:
+                runState == 'processing' ||
+                questionStates.values.contains('processing'),
           ),
         ],
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppTokens.space16),
           child: StepProgressBar(
             steps: const ['제출 완료', '첨삭 중', '결과 준비'],
-            showActivity: false,
+            showActivity:
+                !completed &&
+                (runState == 'processing' ||
+                    questionStates.values.contains('processing')),
             activeIndex: completed
                 ? 2
                 : ((confirmedRunState && runState == 'processing') ||

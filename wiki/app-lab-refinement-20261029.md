@@ -1,5 +1,7 @@
 # APP 논술 LAB 최종 UI 정리 — 2026-10-29
 
+현재 후속: [빌드28 실기기 수정·TTS·페이지 전환 접힘](app-device-followup-20261030.md). 아래 기록은27/28 당시 검증이며, 페이지별 자동 펼침 정책은 후속 Owner 지시로 대체됐다.
+
 Owner IMG_1299–1306, 22:08/22:13 iPhone 및 22:15 WEB 참고. [기존 P0/무료 재첨삭 복구](essay-evaluation-stability-p0-20261029.md), [성장 정책](essay-growth-history-ui-20261026.md), [Native 디자인](design-system.md)을 계승한다. 이번 지시는 이전 결과 화면 개편 보류와 무한 스크롤 정책을 대체한다. 실제 운영 제출·Worker·DB 구조·과금 정책은 범위 밖이다.
 
 ## 기준 및 보존 검토

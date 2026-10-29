@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 LAB UI·디자인](app-lab-refinement-20261029.md): 단일본문/간결헤더·3종필터·공식문항순서·5개페이지 보존. 화이트카드/네이비선택·#FFAC14/반응형 보완,320~430dp·글씨2배 검사. Analyze0·Flutter1217PASS/7SKIP. iOS28서명·설정검증 완료,26/27보존·미설치. Owner서울여2차 완료·원본보존·추가원장없음은 이전 SELECT근거; 이번 운영접근0.
+[10/30 APP 후속 검수](app-device-followup-20261030.md): 평가 전문 전달·TTS playback/콜백·표시 줄바꿈·기록 직접 이동·processing 애니메이션·성장 페이지 전환 접힘 수정. Analyze0·Flutter1226PASS/7SKIP. iOS29 준비,28보존. 음향 실기기 미검증·운영 접근0. [28 디자인 이력](app-lab-refinement-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 

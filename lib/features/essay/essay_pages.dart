@@ -874,7 +874,7 @@ Widget _diagnosis(String text) => Row(
     const SizedBox(width: 8),
     Expanded(
       child: Text(
-        text,
+        displayEssayText(text),
         textAlign: TextAlign.left,
         style: AppTokens.body.copyWith(height: 1.65, color: _resultInk),
       ),

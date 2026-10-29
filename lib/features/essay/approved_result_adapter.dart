@@ -68,7 +68,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '좋아진 부분': [
           for (final c in changes.where((x) => x.direction == 'IMPROVED'))
-            '${shortCriterionTitle(c.after.name)}: ${evaluationChangeSentence(c.before.rating, c.after.rating)}',
+            '${c.after.name}\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n${c.after.feedback}',
         ],
       if (changes != null)
         '유지한 부분': [
@@ -78,7 +78,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '아직 확인할 부분': [
           for (final c in changes.where((x) => x.direction == 'DECLINED'))
-            '${shortCriterionTitle(c.after.name)}: ${evaluationChangeSentence(c.before.rating, c.after.rating)}',
+            '${c.after.name}\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n${c.after.feedback}',
         ],
     },
   );
