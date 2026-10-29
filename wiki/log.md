@@ -1,5 +1,9 @@
 ## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
 
+## 2026-10-29 — Owner 승인 경희 실제 재처리 및 최소 APP 수정
+
+공식 WEB 재처리1회→g13/ProviderHTTP429실패, 2회차미실행. 논제2checkpoint7/답안/History/원장 해시불변, 예약1유지·정산0. 서울여 read-only quote included0·새run0, 과거HTTP원인미확정. APP시험명중복 및 HTTP진단코드 덮어쓰기 수정. Analyze0·Flutter1190PASS/7SKIP·Worker74·격리Credit18/async보존 PASS. iPhone25이미설치 확인·신규빌드/Worker/DB배포0. [실제결과·코드SHA·남은문제·롤백](essay-evaluation-stability-p0-20261029.md#owner-authorized-recovery-attempt--2026-10-29-2056-kst).
+
 Owner APP-only 승인. 별도 ignored QA config에서 flag ON·기본config/fvmrc 보존. 컴파일define 검증/영수증 기록, 기존24 해시보존. Analyze0·전체1188PASS/7SKIP·핵심ON/OFF25각PASS·빌드설정4PASS. 코드9188c9b로 서명 iOS1.0.1(25), Bundle/URL/entitlements 유지·미설치/미제출. 운영읽기3RPC 재확인, DB/Worker/Provider/재실행/Credit변경0. [산출물·검증·롤백](essay-evaluation-stability-p0-20261029.md#observation-v1-ios-qa-build-25--2026-10-29).
 
 ## 2026-10-29 — P0 읽기 RPC 운영 검증·Worker 배포 완료

@@ -172,3 +172,41 @@ Preserved24 receipt/hash verified unchanged (`73aad5741141eee7a63a6737dca5ca967a
 Rollback the APP by reinstalling preserved24 (flag OFF), or rebuild using the unchanged default config and a new appropriate build number. No DB function drop, Worker rollback or data repair is needed for an APP-only rollback. Existing failed KHU question and SWU historical HTTP cause remain unresolved; this is observability activation, not successful re-evaluation evidence.
 
 Build warning: existing flutter_tts Swift Package Manager adoption warning is nonblocking; no dependency upgrade was made.
+
+
+## Owner-authorized recovery attempt — 2026-10-29 20:56 KST
+
+**Actual recovery: FAIL; preservation: PASS.** This section supersedes the earlier “no retry performed” status for this later Owner directive only. Existing product/ownership/Credit preservation decisions above remain unchanged. Owner authorized one KHU retry, and at most one further retry **after fixing the cause**. SWU submission and additional Worker/DB/RPC deployment were not authorized.
+
+### Existing KHU run and actual execution
+
+- Same run `4e26b5b6-e605-4c87-a6ad-ce5ed70c31f1`, exam `51e7299e-0ae7-5e6d-9d37-a46718be76bb`. Before execution, generations 10–12 already existed and each recorded `PROVIDER_REJECTED`, stage `provider`, HTTP **429**. This does not establish the cause of older generations without diagnostics.
+- Used the signed-in Owner's official WEB **다시 시도 · 0 크레딧** action, not SQL impersonation or direct state edits. One request created generation **13** at `2026-10-29T11:56:49.185520Z`, attempts `{"1":13}`. Snapshot index1 is official **논제1** (`abb351b6-d462-5916-a03a-956c964f6359`); index0 is **논제2** (`92a9044c-9eaa-58d8-b4e9-365b2e9a02f0`).
+- `q1-a13-execution-failure`: `PROVIDER_REJECTED / provider / http_status=429 / provider_call=possible`; `q1-retry-13` is failed. The deployed adapter makes one HTTP request and raises on429 without an automatic retry. This task therefore attempted **one Provider generation request**, obtained no successful evaluation response/usage receipt and made **zero independent-review requests**. Provider billing is not established by this receipt. No second recovery attempt was made.
+- Failure occurred before exact-quote validation and independent review; no input-validation failure or checkpoint-write failure was recorded for this attempt. HTTP429's quota/rate-limit subtype is **unconfirmed**: the deployed adapter retains status but not the Provider error body/code. Do not label this as an inaccurate-quote or reviewer-rejection case. No quality checks were removed.
+- Owner-scoped `essay_exam_observation` returns generation13, run **reserved**, 논제1 **failed**, 논제2 **completed**, `retry_allowed=true`. Contract eligibility does not mean the Provider fault is fixed; retry2 is withheld.
+- All **7** existing `q0`/`q0-*` checkpoint payload hashes are unchanged, including q0 `aaeeaf44823695d0dd3d0f24b0e096d6`, q0-reviewed `e462a0333948e3bc2a9783d819bbb0d5`, usage `844849d7cdfd45f66ebae0a49e574d8e`. No completed question was reevaluated.
+- Run row hash `104f7d4e9dcf200727f1ed8494a9a0fd`, frozen answer hash `5d3eb9db1e9e886d14bd03ddc2a77003`, owner History hash `bd60a973a047828fbb3f199c2d7d78ed`, owner Ledger hash `489c7b005bd994072909fcf1e4a62836` are unchanged. Same exam has one run. Only authorized retry/claim/failure checkpoint facts were appended.
+- Credit remains exactly **one reserve (+1 reserved, 0 balance delta)**, no consume/release/refund/new Credit. Required completion/one settlement was **not achieved**.
+
+### SWU diagnosis and bounded APP fix
+
+- Existing run `6ef28b49-12a5-4825-886d-548f0d9897df` remains completed; frozen answers/result/checkpoints/History hashes unchanged, one reserve and one consume, same exam one run. No SWU submission or Provider request.
+- Read-only transaction invoking the current `essay_exam_quote` with this exact owned parent and its frozen canonical question set returned `essay-exam-quote-v1`, **included / 0 credits**. Both canonical IDs are `a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6`, `d0862954-4d0d-5811-9b48-5dc8e319634d`. Current preflight/package/parent/14-day/free-use checks pass. This is not a successful HTTP submit or Worker acceptance test.
+- Read-only device inspection confirms iPhone12ProMax already has **1.0.1(25)**. No matching SWU availability/quote/submit diagnostic files were found in its native draft directory; no matching registered-exam parent pending file was found. Do not infer that no request ever happened: older builds or alternate catalog keys may lack this evidence. No app data was overwritten and no reinstall was performed.
+- Traced APP parent-relative revision + exact frozen set -> quote -> durable key -> submit; WEB gateway validates parent, revisions, session readiness and source consent. Original failing HTTP status/body/key is unavailable. The Owner symptom's **historical root cause remains unconfirmed**; request revision/payload at that moment cannot be reconstructed from current state alone.
+- Reproduced a separate diagnostic defect: HTTP409/503 symbolic server codes were overwritten by generic `REQUEST_UNCONFIRMED` in `ExamSubmissionGateway.request()`. Preserve the safe server code while retaining the unconfirmed phase and pending key; no retry, reservation or submission policy changes. Tests cover one HTTP request, retained key/code/status, and no answer/token leakage. This improves evidence, **not a claim that SWU submission is repaired**.
+
+### History display fix
+
+- `SharedEssayHistory.read()` metadata composition appended Registry's complete official title as `session`, duplicating university/year/kind/track. `essayHistoryExamTitle()` in `exam_presentation.dart` now normalizes only display fields. `shared_history.dart` uses it with resolved university (stored university fallback).
+- KHU `2024학년도 모의논술 · 인문·체육계`, SWU `2026학년도 수시논술 · 인문사회계열`, Konkuk `2023학년도 수시논술 · 인문사회Ⅰ`; distinct HUFS T2 / Kwangwoon1교시 remain. Registry, official IDs/order, answers, rounds, dates and states unchanged. Existing writer-title rendering is untouched.
+- Changed APP files: `exam_presentation.dart`, `shared_history.dart`, `exam_submission.dart`; tests: `exam_presentation_test.dart`, `essay_stability_p0_test.dart`. No Worker, Gateway, SQL or Auth configuration changes.
+
+### Verification and remaining work
+
+Code commit: `53ec2d2583c92d7db0529f8f241b07d9b37bfa7b`. Flutter Analyze **PASS / zero issues**; full Flutter **1190 PASS / 7 existing SKIP**, Observation flag ON; focused presentation/status/rewrite tests **28 PASS**. Worker synthetic regression **74 PASS**. Isolated PostgreSQL Credit **18 PASS** and async retry/observation suite **PASS** (8-concurrent-key single generation, successful checkpoint preservation, exactly-one settlement, free rewrite, owner/read security, rollback). Production completion and settlement **FAIL/not achieved**; SWU real submit and device validation of these new APP changes **NOT TESTED**. Existing builds24/25 and untracked `.fvmrc` are preserved. No new build/store submission in this task. The display/diagnostic fixes need a subsequent QA build before device validation.
+
+The remaining operational blocker is Provider HTTP429; inspect the active Provider project's billing/quota/rate-limit evidence before choosing a fix. Current logs cannot distinguish these causes. Changes to Provider limits/billing or another Worker deployment are outside this directive's authorized operation. If bounded Provider error subtype instrumentation is required, prepare/test that separate change for approval; do not add automatic retries. One further KHU retry remains within the Owner cap only **after cause correction**, never as a blind repeat. SWU real submission still requires separate approval.
+
+Rollback: revert only this task's APP code commit on the working branch; retain installed build25 until a new approved QA build. Do not delete retry13 or alter History/Ledger to undo an operational attempt. Worker remains `a462a9a8-4842-4bf9-84d7-7dc9210cedba`; no DB/RPC rollback is indicated.
