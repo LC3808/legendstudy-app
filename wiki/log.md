@@ -1,3 +1,7 @@
+## 2026-10-29 — 논술 P0 상태 동기화·실패 진단 / 운영 미적용
+
+별도 essay-evaluation-stability-p0 브랜치. 경희 실제 논제2 완료/논제1 최초+명시재처리9회 실패 확인, UUID순번 표시·중복 PROCESSING 수정. 공통상태·응답유실 키조회·완료문항 조회 후보 및 초기 Worker 실패진단 보강. 실제 고정입력은 transport 직전까지 PASS; 기존 실패코드/서울여 HTTP 원인은 미확정. Analyze0·Flutter1186PASS/7SKIP·Worker74·격리Credit18 및 읽기권한/부분결과/롤백 PASS. 운영쓰기·Provider·기존run재실행0, 경희1Credit예약 보존. 코드94d9f4d 기반 iOS1.0.1(24) 서명빌드·미설치, 기존23 보존. [상세·적용승인대기](essay-evaluation-stability-p0-20261029.md).
+
 ## 2026-10-29 — APP 실기기 2차 수정·서명 검수 빌드
 
 기준 LOCAL/REMOTE80a5ab4d 확인, 별도 app-device-qa-fixes 브랜치. 서울여 완료/명시적재처리1/1Credit정산, 광운 published gate, iPhone0.1.0(1) 설치 확인. APP 상태/재처리/재첨삭 계약·작성/선택 UX 수정, Worker 품질거절 피드백 및 좁은 Draft 권한 SQL 후보 준비. Analyze0, Flutter1178PASS/7SKIP, offline28·격리Credit18·Draft6PASS. 코드a65cc76 기반 iOS1.0.1(23) 서명빌드·기기provision 확인, 미설치. 운영 변경·실평가0. [근거·검증·승인 대기](app-device-qa-fixes-20261029.md).
