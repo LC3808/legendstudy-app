@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md#swu-free-rewrite-routing-fix--2026-10-29): 서울여 quote422 ADDITIONAL_CYCLE_UNAVAILABLE 확인: 무료자격 무시한 유료진입. 무료우선·기존답안복원 수정, Analyze0/Flutter1193PASS·7SKIP/격리Credit18PASS. 새빌드 미생성·운영무료제출 승인대기, 최초결과/원장보존. 별도관측 경희g15완료/1Credit정산(Codex실행아님). Workera462a9a8·설치25 유지. [이전 APP2차](app-device-qa-fixes-20261029.md).
+[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md#swu-ios-qa-build-26--2026-10-29): 서울여 무료경로·답안복원 수정본 ded2daf2로 서명 iOS1.0.1(26) 준비·미설치. Observation/소셜ON·25보존. Analyze0/Flutter1193PASS·7SKIP/실답안 격리복원PASS. 실제무료제출은 Owner iPhone1회 전담, Codex제출0·후속읽기검증대기. 경희g15완료/1Credit정산 별도관측. [이전 APP2차](app-device-qa-fixes-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 

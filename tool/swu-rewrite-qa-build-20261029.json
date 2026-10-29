@@ -1,0 +1,33 @@
+{
+  "source_sha": "ded2daf2a853c02b92bc26373e41daecfca1584e",
+  "branch": "codex/essay-evaluation-stability-p0-20261029",
+  "version": "1.0.1",
+  "build": "26",
+  "observation_v1_enabled": true,
+  "social_providers": [
+    "google",
+    "apple",
+    "kakao"
+  ],
+  "bundle_id": "com.legendstudy.app",
+  "framework_sha256": "9001c075b0da3314f38cecae7ad5345291d85068f9360e460efcd3319a823bee",
+  "artifact": "build/ios/qa-swu-rewrite-26/Runner.app",
+  "installed": false,
+  "uploaded": false,
+  "previous_build_25_preserved": true,
+  "native_url_schemes_preserved": true,
+  "entitlements_preserved": true,
+  "compiled_flags_verified": [
+    "ESSAY_OBSERVATION_V1_ENABLED",
+    "GOOGLE_OAUTH_ENABLED",
+    "APPLE_OAUTH_ENABLED",
+    "KAKAO_OAUTH_ENABLED"
+  ],
+  "flutter_analyze": "PASS",
+  "flutter_tests": {
+    "passed": 1193,
+    "skipped": 7
+  },
+  "private_draft_restore_test": "PASS: two TEXT edits, in-memory destination only",
+  "production_submission": false
+}

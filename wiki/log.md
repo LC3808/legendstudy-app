@@ -1,5 +1,9 @@
 ## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
 
+## 2026-10-29 — 서울여 무료 재첨삭 iOS26 서명 검수 빌드
+
+소스ded2daf2 고정·Flutter3.47.6·Observation/소셜ON·Bundle/URL/entitlements동일. Analyze0/Flutter1193PASS·7SKIP/QA설정4PASS/실제수정답안2 격리복원1PASS. 서명1.0.1(26) qa-swu-rewrite-26/Runner.app 보존, 기존25해시불변·미설치/미제출. Owner가직접무료1회제출, Codex운영실행0·이후읽기검증. [전체경로·영수증·롤백](essay-evaluation-stability-p0-20261029.md#swu-ios-qa-build-26--2026-10-29).
+
 ## 2026-10-29 — 서울여 무료 재첨삭 경로 오류 수정
 
 iPhone21:27 quote422 ADDITIONAL_CYCLE_UNAVAILABLE/parentnull 확인, submit0. APP상단 유료진입 vs 무료자격·Gateway유료flagfalse 충돌. 무료우선+fresh자격확인·기존additional TEXT답안 비파괴 복원·진단 predecessor 기록 수정. Analyze0·Flutter1193PASS/7SKIP·격리Credit18/async PASS. 운영제출/Provider/DB/Worker변경0, 최초run/result/원장보존. 별도 경희g15완료관측(Codex실행아님). [근거·코드SHA·검증·승인대기](essay-evaluation-stability-p0-20261029.md#swu-free-rewrite-routing-fix--2026-10-29).
