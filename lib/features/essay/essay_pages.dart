@@ -1,3 +1,4 @@
+import 'result_disclosure.dart';
 import 'evaluation_presentation.dart';
 import 'math_workspace_page.dart';
 import 'essay_sentence_review.dart';
@@ -34,10 +35,7 @@ List<RouteBase> get essayRoutes => [
         path: 'history',
         builder: (_, _) => const SharedEssayHistoryPage(),
       ),
-      GoRoute(
-        path: 'growth',
-        builder: (_, _) => const EssayGrowthPage(),
-      ),
+      GoRoute(path: 'growth', builder: (_, _) => const EssayGrowthPage()),
       GoRoute(
         path: 'write/:question',
         builder: (_, state) =>
@@ -877,6 +875,7 @@ Widget _diagnosis(String text) => Row(
     Expanded(
       child: Text(
         text,
+        textAlign: TextAlign.left,
         style: AppTokens.body.copyWith(height: 1.65, color: _resultInk),
       ),
     ),
@@ -979,10 +978,7 @@ class _EssayResultViewState extends State<EssayResultView> {
       ],
     );
     return widget.collapsedDetails
-        ? ExpansionTile(
-            title: Text(title),
-            children: [Padding(padding: const EdgeInsets.all(12), child: body)],
-          )
+        ? ResultAccordion(title: title, child: body)
         : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [_resultHeader(title), body],
@@ -1008,9 +1004,7 @@ class _EssayResultViewState extends State<EssayResultView> {
         Text('${_levelLabel(d.previousLevel)} → ${_levelLabel(d.level)}'),
         if (d.explanation.trim().isNotEmpty)
           ExpansionTile(
-            title: Text(
-              d.previousLevel == d.level ? '평가 설명 보기' : 'AI 재첨삭 평가 설명 보기',
-            ),
+            title: Text('평가 근거 자세히 보기'),
             children: [
               Padding(
                 padding: const EdgeInsets.all(12),
@@ -1028,7 +1022,6 @@ class _EssayResultViewState extends State<EssayResultView> {
       final selected = values
           .where((value) => value.trim().isNotEmpty)
           .take(limit)
-          .map(essaySummaryExcerpt)
           .toList();
       return selected.isEmpty ? [empty] : selected;
     }
@@ -1060,13 +1053,6 @@ class _EssayResultViewState extends State<EssayResultView> {
             '가장 먼저 고칠 것': firstTwo(e.priorities, '평가에 명시된 우선순위가 없어요.'),
             '다시 쓸 때 확인': firstTwo(e.checklist, '평가에 명시된 확인 항목이 없어요.'),
           };
-    final seen = <String>{};
-    content.removeWhere((key, values) {
-      values.removeWhere(
-        (v) => !seen.add(v.replaceAll(RegExp(r'\s+'), ' ').trim()),
-      );
-      return values.isEmpty;
-    });
     return Column(
       key: const ValueKey('answer-overview'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1159,31 +1145,8 @@ class _EssayResultViewState extends State<EssayResultView> {
                       for (final line in entry.value)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 6),
-                          child:
-                              widget.collapsedDetails && line.runes.length > 120
-                              ? Material(
-                                  type: MaterialType.transparency,
-                                  child: ExpansionTile(
-                                    tilePadding: EdgeInsets.zero,
-                                    title: Text(
-                                      '${String.fromCharCodes(line.runes.take(100))}…',
-                                      style: AppTokens.body.copyWith(
-                                        color: _resultInk,
-                                        height: 1.65,
-                                      ),
-                                    ),
-                                    children: [
-                                      Text(
-                                        line,
-                                        textAlign: TextAlign.left,
-                                        style: AppTokens.body.copyWith(
-                                          color: _resultInk,
-                                          height: 1.65,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                          child: widget.collapsedDetails
+                              ? ResultTextDisclosure(text: line)
                               : Text(
                                   line,
                                   textAlign: TextAlign.left,
@@ -1234,13 +1197,10 @@ class _EssayResultViewState extends State<EssayResultView> {
   @override
   Widget build(BuildContext context) {
     final e = widget.evaluation;
-    final shown = <String>{};
-    List<String> unique(List<String> lines) => lines
-        .where((line) => shown.add(line.replaceAll(RegExp(r'\s+'), ' ').trim()))
-        .toList();
-    final improvements = unique(e.improvements),
-        priorities = unique(e.priorities),
-        checklist = unique(e.checklist);
+    // Preserve repeated stored entries; fix duplication in disclosure layout only.
+    final improvements = e.improvements,
+        priorities = e.priorities,
+        checklist = e.checklist;
     return Material(
       color: const Color(0xFFFFFEFC),
       child: DefaultTextStyle.merge(

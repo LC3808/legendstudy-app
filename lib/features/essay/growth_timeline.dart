@@ -1,3 +1,5 @@
+import 'result_disclosure.dart';
+
 import 'package:flutter/material.dart';
 
 import 'evaluation_report.dart';
@@ -22,7 +24,7 @@ class GrowthTimeline extends StatelessWidget {
         const Text('전체 성장 과정 · 1~5단계 (누락·기준 변경 구간은 연결하지 않아요)'),
         for (final entry in names.entries) ...[
           const SizedBox(height: 12),
-          Text(entry.value),
+          GrowthCriterionTitle(name: entry.value),
           if (reports.first != null &&
               reports.last != null &&
               compareEvaluationReports(

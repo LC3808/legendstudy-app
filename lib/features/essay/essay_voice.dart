@@ -1,4 +1,6 @@
+import 'result_disclosure.dart';
 import 'evaluation_presentation.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -12,12 +14,20 @@ Map<String, String> essaySpeechSections(
   EvaluationReport report, [
   EvaluationReport? before,
 ]) {
-  final changes = before == null ? null : compareEvaluationReports(before, report);
+  final changes = before == null
+      ? null
+      : compareEvaluationReports(before, report);
   if (changes != null) {
-    changes.sort((a, b) => (a.direction == 'UNCHANGED' ? 1 : 0).compareTo(b.direction == 'UNCHANGED' ? 1 : 0));
+    changes.sort(
+      (a, b) => (a.direction == 'UNCHANGED' ? 1 : 0).compareTo(
+        b.direction == 'UNCHANGED' ? 1 : 0,
+      ),
+    );
   }
   final improved = changes?.where((c) => c.direction == 'IMPROVED').firstOrNull;
-  final resolved = report.previousReviews.where((r) => r['outcome'] == 'resolved').firstOrNull;
+  final resolved = report.previousReviews
+      .where((r) => r['outcome'] == 'resolved')
+      .firstOrNull;
   final sections = <String, String>{
     if (before == null)
       '내 답안 한눈에 보기': [
@@ -35,21 +45,46 @@ Map<String, String> essaySpeechSections(
     if (changes != null)
       '이번 답안의 변화 한눈에 보기': [
         '좋아진 점.',
-        improved == null ? '평가에 명시된 변화가 아직 없어요.' : evaluationChangeSpeech(shortCriterionTitle(improved.after.name), improved.before.rating, improved.after.rating),
+        improved == null
+            ? '평가에 명시된 변화가 아직 없어요.'
+            : evaluationChangeSpeech(
+                shortCriterionTitle(improved.after.name),
+                improved.before.rating,
+                improved.after.rating,
+              ),
         '아직 보완할 점.',
         if (report.weaknesses.isEmpty) '평가에 명시된 보완 내용이 없어요.',
         ...report.weaknesses.take(2).map((r) => '${r.title}. ${r.explanation}'),
         '해결한 부분.',
-        resolved == null ? '이번 평가에서 확인된 항목이 없어요.' : evaluationText(resolved['reason']),
+        resolved == null
+            ? '이번 평가에서 확인된 항목이 없어요.'
+            : evaluationText(resolved['reason']),
         '다음에 확인할 부분.',
         report.nextSteps.firstOrNull ?? '평가에 명시된 확인 항목이 없어요.',
       ].join('\n'),
     if (changes != null)
-      '평가 항목 변화': changes.map((c) => evaluationChangeSpeech(shortCriterionTitle(c.after.name), c.before.rating, c.after.rating)).join('\n'),
+      '평가 항목 변화': changes
+          .map(
+            (c) => evaluationChangeSpeech(
+              shortCriterionTitle(c.after.name),
+              c.before.rating,
+              c.after.rating,
+            ),
+          )
+          .join('\n'),
     '종합 평가': report.summary,
-    '잘한 점': report.strengths.map((r) => '${r.title}. ${r.explanation}').join('\n'),
-    '평가 항목별 진단': report.rubric.map((r) => '${shortCriterionTitle(r.name)}. ${r.rating == null ? r.value : '5단계 평가 중 ${r.rating}단계입니다.'} ${r.feedback}').join('\n'),
-    '보완할 점': report.weaknesses.map((r) => '${r.title}. ${r.explanation}').join('\n'),
+    '잘한 점': report.strengths
+        .map((r) => '${r.title}. ${r.explanation}')
+        .join('\n'),
+    '평가 항목별 진단': report.rubric
+        .map(
+          (r) =>
+              '${shortCriterionTitle(r.name)}. ${r.rating == null ? r.value : '5단계 평가 중 ${r.rating}단계입니다.'} ${r.feedback}',
+        )
+        .join('\n'),
+    '보완할 점': report.weaknesses
+        .map((r) => '${r.title}. ${r.explanation}')
+        .join('\n'),
     '먼저 고쳐야 할 부분': report.actions.join('\n'),
     '다시 쓸 때 확인할 것': report.nextSteps.join('\n'),
   };
@@ -113,7 +148,10 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
               e.value.trim().isEmpty) {
             continue;
           }
-          final lines = e.value.split('\n').where((line) => line.trim().isNotEmpty && seen.add(line.trim())).join('\n');
+          final lines = e.value
+              .split('\n')
+              .where((line) => line.trim().isNotEmpty && seen.add(line.trim()))
+              .join('\n');
           if (lines.isEmpty) continue;
           final body = '${e.key}. $lines';
           for (var i = 0; i < body.length; i += 1500) {
@@ -185,34 +223,40 @@ class _EssayVoiceState extends State<EssayVoice> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) => ExpansionTile(
-    title: const Text('음성으로 듣기'),
-    children: [
-      DropdownButton<String>(
-        isExpanded: true,
-        value: selected,
-        items: [
-          '전체 결과',
-          ...essaySpeechSections(widget.report, widget.before).keys,
-        ].map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
-        onChanged: playing ? null : (v) => setState(() => selected = v!),
-      ),
-      if (current.isNotEmpty) Text('듣는 항목: $current'),
-      Wrap(
-        spacing: 8,
-        children: [
-          TextButton(
-            onPressed: playing && !paused ? null : speak,
-            child: Text(paused ? '재개' : '듣기'),
-          ),
-          TextButton(
-            onPressed: playing && !paused ? pause : null,
-            child: const Text('일시정지'),
-          ),
-          TextButton(onPressed: playing ? stop : null, child: const Text('중지')),
-        ],
-      ),
-      if (error != null) Text(error!),
-    ],
+  Widget build(BuildContext context) => ResultAccordion(
+    title: '음성으로 듣기',
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        DropdownButton<String>(
+          isExpanded: true,
+          value: selected,
+          items: [
+            '전체 결과',
+            ...essaySpeechSections(widget.report, widget.before).keys,
+          ].map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
+          onChanged: playing ? null : (v) => setState(() => selected = v!),
+        ),
+        if (current.isNotEmpty) Text('듣는 항목: $current'),
+        Wrap(
+          spacing: 8,
+          children: [
+            TextButton(
+              onPressed: playing && !paused ? null : speak,
+              child: Text(paused ? '재개' : '듣기'),
+            ),
+            TextButton(
+              onPressed: playing && !paused ? pause : null,
+              child: const Text('일시정지'),
+            ),
+            TextButton(
+              onPressed: playing ? stop : null,
+              child: const Text('중지'),
+            ),
+          ],
+        ),
+        if (error != null) Text(error!),
+      ],
+    ),
   );
 }

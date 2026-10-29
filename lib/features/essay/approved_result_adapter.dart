@@ -45,7 +45,7 @@ EssayEvaluation approvedEssayEvaluation(
           c.id,
           shortCriterionTitle(c.name),
           c.rating,
-          '${readableEssayText(withoutUnverifiedWeight(c.name))}\n\n${c.feedback}',
+          '${withoutUnverifiedWeight(c.name)}\n\n${c.feedback}',
           previousLevel: changes
               ?.where((x) => x.after.id == c.id)
               .firstOrNull

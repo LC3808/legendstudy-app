@@ -24,7 +24,9 @@ class SharedEssayRecord {
   String get examLabel =>
       (examData['displayExam'] as String? ?? examData['title'] as String? ?? '')
           .replaceAll('admission', '수시 논술')
-          .replaceAll('mock', '모의논술');
+          .replaceAll('mock', '모의논술')
+          .replaceAll(title, '')
+          .trim();
   final String id;
   final bool math, rewrite, exam;
   final DateTime at;
@@ -545,4 +547,38 @@ List<List<SharedEssayRecord>> sortedEssayHistory(
     groups.putIfAbsent(essayExamGroupKey(row), () => []).add(row);
   }
   return groups.values.toList();
+}
+
+/// Learning sequence is independent of whether a Credit was charged.
+bool essayIsFollowup(SharedEssayRecord row) =>
+    (row.examData['learning_round'] is int &&
+        (row.examData['learning_round'] as int) > 1) ||
+    row.rewrite ||
+    row.examData['parent_id'] != null ||
+    row.examData['previous_paid_run_id'] != null;
+
+String essayShortDate(SharedEssayRecord row) {
+  final d = essayCompletedAt(row).toLocal();
+  String two(int n) => n.toString().padLeft(2, '0');
+  return '${two(d.month)}.${two(d.day)} ${two(d.hour)}:${two(d.minute)}';
+}
+
+/// Stable projection in Registry order. Unknown metadata retains source order.
+List<Map<String, dynamic>> orderedEssayEvaluations(SharedEssayRecord row) {
+  final questions = row.examData['questions'] as List? ?? const [];
+  final order = <String, int>{
+    for (final (i, q) in questions.indexed)
+      if (q is Map && q['dbQuestionId'] is String)
+        q['dbQuestionId'] as String: i,
+  };
+  final indexed = row.evaluations.indexed.toList();
+  indexed.sort((a, b) {
+    String id(Map<String, dynamic> e) =>
+        '${e['question_id'] ?? e['id']}'.split('/').last;
+    final compared = (order[id(a.$2)] ?? questions.length).compareTo(
+      order[id(b.$2)] ?? questions.length,
+    );
+    return compared == 0 ? a.$1.compareTo(b.$1) : compared;
+  });
+  return indexed.map((e) => e.$2).toList();
 }

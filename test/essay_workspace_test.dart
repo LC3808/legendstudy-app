@@ -214,7 +214,7 @@ void main() {
       expect(gateway.submitted, [previewAnswer, '수정한 새로운 답안']);
       expect(find.text('이번 답안의 변화 한눈에 보기'), findsOneWidget);
       expect(find.text('→'), findsNothing);
-      await tapVisible(tester,find.text('최초 첨삭·재첨삭 비교'));
+      await tapVisible(tester, find.text('최초 첨삭·재첨삭 비교'));
       expect(find.text('→'), findsNWidgets(3));
 
       expect(find.text('→'), findsNWidgets(3));
@@ -359,17 +359,14 @@ void main() {
           findsOneWidget,
         );
         for (final text in e.checklist.take(1)) {
-          expect(within(essaySummaryExcerpt(text)), findsOneWidget);
+          expect(within(text), findsOneWidget);
         }
         expect(within(e.checklist[2]), findsNothing);
         expect(
           find.text(e.checklist[2]),
           findsOneWidget,
         ); // Detailed result preserved.
-        expect(
-          within(essaySummaryExcerpt(e.improvements.first)),
-          findsOneWidget,
-        );
+        expect(within(e.improvements.first), findsOneWidget);
         if (comparison) {
           expect(within('이번 평가에서 확인된 항목이 없어요.'), findsOneWidget);
           expect(find.text('무엇이 달라졌나요?'), findsNothing);
@@ -378,15 +375,9 @@ void main() {
             tester.widget<Text>(within('해결한 부분')).style!.color,
             const Color(0xFF5C6269),
           );
-          expect(
-            within(essaySummaryExcerpt(e.changes['좋아진 부분']!.first)),
-            findsOneWidget,
-          );
+          expect(within(e.changes['좋아진 부분']!.first), findsOneWidget);
         } else {
-          expect(
-            within(essaySummaryExcerpt(e.priorities.first)),
-            findsOneWidget,
-          );
+          expect(within(e.priorities.first), findsOneWidget);
           expect(
             tester.getTopLeft(within('잘한 점')).dy,
             tester.getTopLeft(within('보완할 점')).dy,

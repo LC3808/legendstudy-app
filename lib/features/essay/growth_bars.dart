@@ -1,3 +1,6 @@
+import 'result_disclosure.dart';
+import '../../core/theme/app_theme.dart';
+
 import 'package:flutter/material.dart';
 
 import 'evaluation_report.dart';
@@ -7,9 +10,12 @@ class GrowthBars extends StatelessWidget {
     required this.before,
     required this.after,
     this.learning = false,
+    this.beforeLabel = '이전',
+    this.afterLabel = '최근',
     super.key,
   });
   final bool learning;
+  final String beforeLabel, afterLabel;
   final EvaluationReport before, after;
   @override
   Widget build(BuildContext context) {
@@ -57,22 +63,23 @@ class GrowthBars extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  c.after.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+                GrowthCriterionTitle(name: c.after.name),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    bar(c.before.rating!, '이전', Colors.blueGrey),
-                    bar(
-                      c.after.rating!,
-                      '최근',
-                      Theme.of(context).colorScheme.primary,
-                    ),
+                    bar(c.before.rating!, beforeLabel, Colors.blueGrey),
+                    bar(c.after.rating!, afterLabel, const Color(0xFFFFAC14)),
                   ],
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  c.before.rating == c.after.rating
+                      ? '평가 단계 유지 · ${c.after.rating}단계'
+                      : '평가 단계 ${c.before.rating} → ${c.after.rating}',
+                  style: AppTokens.body,
+                  textAlign: TextAlign.left,
                 ),
               ],
             ),

@@ -1,5 +1,9 @@
 ## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
 
+## 2026-10-29 — APP 논술 LAB 결과·기록·성장 일괄 정리
+
+결과 펼침 단일본문/원문보존·간결헤더·공통아코디언·PDF유지/개별성장공유제거, History 검색제거·학습회차3종필터/공식문항순서, 성장 시험5개 이전/다음·단일펼침/긴기준상세. Analyze0·전체1207PASS/7SKIP. Owner서울여 child6fe629cb완료/원본해시동일/추가Credit posting없음 읽기확인. iOS27 후속서명,26보존. [함수·검증·운영보존·롤백](app-lab-refinement-20261029.md).
+
 ## 2026-10-29 — 서울여 무료 재첨삭 iOS26 서명 검수 빌드
 
 소스ded2daf2 고정·Flutter3.47.6·Observation/소셜ON·Bundle/URL/entitlements동일. Analyze0/Flutter1193PASS·7SKIP/QA설정4PASS/실제수정답안2 격리복원1PASS. 서명1.0.1(26) qa-swu-rewrite-26/Runner.app 보존, 기존25해시불변·미설치/미제출. Owner가직접무료1회제출, Codex운영실행0·이후읽기검증. [전체경로·영수증·롤백](essay-evaluation-stability-p0-20261029.md#swu-ios-qa-build-26--2026-10-29).

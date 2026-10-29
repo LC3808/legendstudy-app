@@ -1,7 +1,7 @@
 import 'result_pdf.dart';
 import 'round_history_actions.dart';
 import 'growth_bars.dart';
-import 'growth_share.dart';
+import 'result_disclosure.dart';
 
 import 'dart:async';
 
@@ -79,7 +79,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
   }
 
   bool byExam = false;
-  String query = '', kind = 'all';
+  String kind = 'all';
   String get owner => widget.owner;
   Future<void> openResult(SharedEssayRecord row, Map<String, dynamic> e) async {
     await openSharedEssayResult(context, ref, owner, row, e);
@@ -116,13 +116,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               selected: {byExam},
               onSelectionChanged: (v) => setState(() => byExam = v.single),
             ),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: '대학·시험 검색',
-                prefixIcon: Icon(Icons.search),
-              ),
-              onChanged: (v) => setState(() => query = v.trim()),
-            ),
+            const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               initialValue: kind,
               items: const [
@@ -132,7 +126,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               ],
               onChanged: (v) => setState(() => kind = v ?? 'all'),
             ),
-            const Text('최근 조회한 논술·수리논술 회차와 기존 답안 기록'),
+            const SizedBox(height: 16),
             if (rows.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 24),
@@ -142,9 +136,8 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               rows
                   .where(
                     (r) =>
-                        (query.isEmpty ||
-                            '${r.title} ${r.examLabel}'.contains(query)) &&
-                        (kind == 'all' || (kind == 'rewrite') == r.rewrite),
+                        (kind == 'all' ||
+                        (kind == 'rewrite') == essayIsFollowup(r)),
                   )
                   .toList(),
               byExam,
@@ -154,9 +147,8 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                   onTap: row.evaluations.any((e) => e['state'] == 'COMPLETED')
                       ? () => openResult(
                           row,
-                          row.evaluations.firstWhere(
-                            (e) => e['state'] == 'COMPLETED',
-                          ),
+                          orderedEssayEvaluations(row)
+                              .firstWhere((e) => e['state'] == 'COMPLETED'),
                         )
                       : null,
                   title: Text(
@@ -169,11 +161,16 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                       if (row.exam || row.examData['mathSession'] != null)
                         Text(row.examLabel),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: EssayHistoryBadge(record: row),
-                      ),
-                      Text(
-                        '평가 ${((DateTime.tryParse(row.examData['completed_at'] as String? ?? '') ?? row.at).toLocal()).toString().substring(0, 16)}',
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Wrap(
+                          spacing: 12,
+                          runSpacing: 8,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            EssayHistoryBadge(record: row),
+                            Text(essayShortDate(row)),
+                          ],
+                        ),
                       ),
                       if (row.examData['parent_id'] != null)
                         const Text('최초 첨삭에 이어진 재첨삭'),
@@ -197,7 +194,7 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                             ),
                             child: const Text('처리 상태 · 재첨삭 확인'),
                           ),
-                      for (final e in row.evaluations.where(
+                      for (final e in orderedEssayEvaluations(row).where(
                         (e) =>
                             !(row.exam && row.examData['state'] == 'reserved'),
                       ))
@@ -389,6 +386,15 @@ class _Result extends ConsumerWidget {
     }
 
     final auth = ref.watch(authStateProvider);
+    final displayRecord =
+        (!auth.isLoading && !auth.hasError && auth.value?.userId == owner
+            ? ref
+                  .watch(sharedEssayHistoryProvider(owner))
+                  .value
+                  ?.where((r) => r.id == record.id)
+                  .firstOrNull
+            : null) ??
+        record;
     return Scaffold(
       appBar: AppBar(title: const Text('첨삭 결과')),
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
@@ -403,16 +409,6 @@ class _Result extends ConsumerWidget {
                       children: [
                         EssayVoice(report: report, before: before),
                         ResultPdfButton(report: report),
-                        OutlinedButton(
-                          onPressed: () => showGrowthShare(
-                            context,
-                            completed: 1,
-                            rewrites: before == null ? 0 : 1,
-                            report: report,
-                            before: before,
-                          ),
-                          child: const Text('성장 기록 공유'),
-                        ),
                       ],
                     ),
                     collapsedDetails: true,
@@ -433,53 +429,33 @@ class _Result extends ConsumerWidget {
                     evaluationId: report.id,
                     attemptId: record.id,
                     header: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          record.title,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        Text(
-                          record.examLabel.split(' · ').first,
-                          style: const TextStyle(
-                            color: AppTokens.textPrimary,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        EssayExamBadges(
-                          data: record.examData,
-                          // Only Registry metadata supplies a question number.
-                          questionLabel: record.exam
-                              ? essayExamQuestionLabel(record, questionId)
-                              : '문항',
-                        ),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 4,
-                          children: [
-                            EssayHistoryBadge(record: record),
-                            Text(
-                              essayCompletedAt(record)
-                                  .toLocal()
-                                  .toString()
-                                  .substring(0, 16),
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
+                        EssayResultHeader(
+                          record: displayRecord,
+                          questionId: questionId,
                         ),
                         EssayFollowupAction(
                           run: record.examData,
                           onOpen: openWriter,
                         ),
 
-                        ExpansionTile(
-                          title: Text(essayAnswerVersion(record)),
-                          children: [SelectableText(report.answer)],
+                        ResultAccordion(
+                          title: essayAnswerVersion(record).startsWith('수정')
+                              ? '수정 제출 답안'
+                              : '최초 제출 답안',
+                          child: SelectableText(
+                            report.answer,
+                            textAlign: TextAlign.left,
+                          ),
                         ),
                         if (before != null)
-                          ExpansionTile(
-                            title: const Text('비교 대상 · 이전 제출 답안'),
-                            children: [SelectableText(before!.answer)],
+                          ResultAccordion(
+                            title: '비교 대상 · 이전 제출 답안',
+                            child: SelectableText(
+                              before!.answer,
+                              textAlign: TextAlign.left,
+                            ),
                           ),
                       ],
                     ),
@@ -543,5 +519,53 @@ class EssayExamBadges extends StatelessWidget {
             child: Text(label!, style: Theme.of(context).textTheme.bodyMedium),
           ),
     ],
+  );
+}
+
+class EssayResultHeader extends StatelessWidget {
+  const EssayResultHeader({
+    super.key,
+    required this.record,
+    required this.questionId,
+  });
+  final SharedEssayRecord record;
+  final String questionId;
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          record.title,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            color: AppTokens.textPrimary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          record.examLabel,
+          textAlign: TextAlign.left,
+          style: AppTokens.body,
+        ),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Chip(
+              label: Text(
+                record.exam ? essayExamQuestionLabel(record, questionId) : '문항',
+              ),
+            ),
+            EssayHistoryBadge(record: record),
+            Text(essayShortDate(record), style: AppTokens.caption),
+          ],
+        ),
+      ],
+    ),
   );
 }

@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md#swu-ios-qa-build-26--2026-10-29): 서울여 무료경로·답안복원 수정본 ded2daf2로 서명 iOS1.0.1(26) 준비·미설치. Observation/소셜ON·25보존. Analyze0/Flutter1193PASS·7SKIP/실답안 격리복원PASS. 실제무료제출은 Owner iPhone1회 전담, Codex제출0·후속읽기검증대기. 경희g15완료/1Credit정산 별도관측. [이전 APP2차](app-device-qa-fixes-20261029.md).
+[10/29 LAB UI](app-lab-refinement-20261029.md): 결과 단일본문·헤더/아코디언, History 학습회차필터·공식문항순서, 성장 단일펼침·5개 이전/다음 구현. Analyze0/Flutter1207PASS·7SKIP. iOS27서명 준비,26보존. [P0](essay-evaluation-stability-p0-20261029.md) 무료경로 유지; Owner서울여2차 child완료·원본해시동일·추가원장없음 SELECT확인. Codex실평가/운영변경0.
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 
