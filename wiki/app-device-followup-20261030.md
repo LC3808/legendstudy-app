@@ -30,6 +30,10 @@ Owner 2026-10-29 지시, 기준 iOS 1.0.1(28). 기존 [LAB 디자인·결과 정
 
 ## 빌드·롤백·남은 검수
 
-서명된 다음 검수 빌드29 준비 중. 28 보존. 완료 영수증과 정확한 소스 SHA/경로는 빌드 검증 후 이 절에 기록한다.
+iOS **1.0.1(29)** 서명 빌드 완료. Flutter3.47.6, 소스 **c6ecdff3783b5d74e29219f9aa849b2e39862b7d**, 브랜치 `codex/essay-evaluation-stability-p0-20261029`. [빌드 영수증](../tool/app-device-followup-qa-build-20261030.json).
+
+설치 산출물 전체 경로: `/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-device-followup-29/Runner.app`.
+
+codesign deep/strict 검증 PASS. Bundle `com.legendstudy.app`, 기존 URL Scheme/Entitlements 동일. Observation V1 및 Google/Apple/Kakao true를 실제 Generated.xcconfig DART_DEFINES에서 확인했고 Supabase/로그인 클라이언트 설정이 기존 로컬 QA config와 일치함을 값 노출 없이 검증했다. App.framework SHA256 `d87c1a7d59ed4270ae14fc0f2ef3455f11a9ad58a9a1c1e7ca9f9541b13404ac`. 28의 기존 hash `2167472c948463186a0ef567d890853d0d35c571b6c42273c3d9faafe0b289d3` 불변,27도 기존 receipt와 일치. 아티팩트 폴더에 합성 PNG4개 보존. 설치/스토어 제출 없음. flutter_tts Swift Package Manager 미지원 경고는 기존 plugin 경로로 빌드 성공했으며 패키지 변경은 하지 않았다.
 
 롤백은 보존한28 앱을 동일 Bundle ID로 업데이트 설치하거나 이번 소스 변경만 별도 revert한다. 앱 삭제/로그아웃/기기 데이터 초기화/운영 복구 SQL은 필요하지 않다. 실제 음향, 실기기 반복 펼침·큰 글자·PDF 저장·외부 오디오 장치 확인은 Owner 검수 대상이다. 불확실한 PDF 문단/단어 경계와 준거 삽입은 의미를 추정해 고치지 않았다.

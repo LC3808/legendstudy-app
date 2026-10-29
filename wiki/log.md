@@ -2,7 +2,7 @@
 
 ## 2026-10-30 — 빌드28 실기기 후속 수정
 
-전문 전달/단일 펼침·TTS iOS playback/콜백/중지 대기 해제·표시 줄바꿈/제목중복·기록직행·processing 전용 애니메이션·페이지전환 접힘. Analyze0/전체1226PASS·7SKIP, 실음향 미검증. 29검수 빌드 준비, 운영 접근/평가0. [상세·보존·롤백](app-device-followup-20261030.md).
+전문 전달/단일 펼침·TTS iOS playback/콜백/중지 대기 해제·표시 줄바꿈/제목중복·기록직행·processing 전용 애니메이션·페이지전환 접힘. Analyze0/전체1226PASS·7SKIP, 실음향 미검증. 29서명 빌드·소스c6ecdff·Observation/소셜ON·서명/설정동일,28해시보존·미설치. 운영 접근/평가0. [상세·보존·롤백](app-device-followup-20261030.md).
 
 기존 기능/데이터 계약을 유지하고 결과·기록·성장3면의 카드/타입/간격/네이비선택/오렌지강조 반영. 320/360/390/430dp·글씨1/2배, 넓은 화면 문항2열, 합성 Native PNG 검증. Analyze0·전체1217PASS/7SKIP·targeted24PASS. iOS1.0.1(28)서명 완료·소스bde72b4·Observation/소셜ON·scheme/entitlements동일,26/27보존·미설치; 운영 접근/평가/스토어 제출0. [변경·시안 차이·검증·롤백](app-lab-refinement-20261029.md#owner-디자인-addendum--2026-10-29).
 

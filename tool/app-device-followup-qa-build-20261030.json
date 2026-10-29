@@ -1,0 +1,31 @@
+{
+  "source_sha": "c6ecdff3783b5d74e29219f9aa849b2e39862b7d",
+  "branch": "codex/essay-evaluation-stability-p0-20261029",
+  "version": "1.0.1",
+  "build": "29",
+  "observation_v1_enabled": true,
+  "social_providers": [
+    "google",
+    "apple",
+    "kakao"
+  ],
+  "bundle_id": "com.legendstudy.app",
+  "framework_sha256": "d87c1a7d59ed4270ae14fc0f2ef3455f11a9ad58a9a1c1e7ca9f9541b13404ac",
+  "artifact": "/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-device-followup-29/Runner.app",
+  "installed": false,
+  "uploaded": false,
+  "analyze": "0 issues",
+  "flutter_test": {
+    "pass": 1226,
+    "skip": 7
+  },
+  "device_followup_tests": 9,
+  "entitlements_unchanged": true,
+  "url_schemes_unchanged": true,
+  "qa_defines_verified": true,
+  "previous_builds_preserved": [
+    28
+  ],
+  "device_validation": "not performed; native acoustic output, silent mode and Bluetooth require iPhone QA",
+  "wiki_check": "PASS"
+}
