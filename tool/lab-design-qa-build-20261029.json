@@ -1,0 +1,41 @@
+{
+  "source_sha": "bde72b4aa2c9f8fffd7a72c6f9360f01e18da5f3",
+  "branch": "codex/essay-evaluation-stability-p0-20261029",
+  "version": "1.0.1",
+  "build": "28",
+  "observation_v1_enabled": true,
+  "social_providers": [
+    "google",
+    "apple",
+    "kakao"
+  ],
+  "bundle_id": "com.legendstudy.app",
+  "framework_sha256": "2167472c948463186a0ef567d890853d0d35c571b6c42273c3d9faafe0b289d3",
+  "artifact": "build/ios/qa-design-addendum-28/Runner.app",
+  "installed": false,
+  "uploaded": false,
+  "analyze": "0 issues",
+  "flutter_test": {
+    "pass": 1217,
+    "skip": 7
+  },
+  "design_tests": 24,
+  "responsive_widths": [
+    320,
+    360,
+    390,
+    430
+  ],
+  "text_scales": [
+    1,
+    2
+  ],
+  "entitlements_unchanged": true,
+  "url_schemes_unchanged": true,
+  "qa_defines_verified": true,
+  "previous_builds_preserved": [
+    26,
+    27
+  ],
+  "device_validation": "not performed"
+}

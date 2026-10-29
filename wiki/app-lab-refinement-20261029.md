@@ -62,4 +62,6 @@ Info.plist의1.0.1/27/com.legendstudy.app, codesign deep/strict PASS. Generated.
 
 검증: 320/360/390/430dp × 글씨1/2배의 세 화면 widget 검증, 320/800dp 그래프 배치, 기존 단일본문/공식문항순서/paid필터/5개페이지 검사. 합성 fixture PNG는 결과·History·성장카드 및 별도 실제 fixture 그래프 렌더이며 실기기/E2E가 아니다. 성장카드 캡처는 서버 연결 없는 레이아웃 상태로, 데이터 연결 PASS의 근거로 사용하지 않는다. 스크린샷은 시각 확인이며 baseline pixel golden 비교는 미구현.
 
-최종 Analyze0 issues·전체 Flutter1217 PASS/7 SKIP. 디자인/기존 targeted24 PASS. 서명 iOS1.0.1(28) 결과는 아래 배포 영수증으로 후속 기록한다. 26/27 앱 보존, 설치/스토어 제출 없음. 남은 검증은 실제 iPhone 화면·PDF/음성·인증 흐름이며, 서버50회차 제한은 이번 디자인 범위 밖이다.
+최종 Analyze0 issues·전체 Flutter1217 PASS/7 SKIP. 디자인/기존 targeted24 PASS. 서명 **iOS1.0.1(28)** 완료. 소스 `bde72b4aa2c9f8fffd7a72c6f9360f01e18da5f3`, Flutter3.47.6. [28번 빌드 영수증](../tool/lab-design-qa-build-20261029.json). Info.plist/codesign deep strict PASS, 실제 DART_DEFINES 전체를 기존 QA config와 대조(Observation/Google/Apple/Kakao ON),27과 URL schemes/Entitlements 동일.26/27 App.framework hash 불변 확인.
+
+설치 경로: `/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-design-addendum-28/Runner.app`. 같은 폴더에 `result-fixture.png`, `history-fixture.png`, `growth-fixture.png`, `chart-fixture.png` 보존. PNG는 합성 테스트 캡처로 실기기 결과가 아님. 롤백은 보존한27 앱 또는 디자인 소스bde72b4의 별도 revert 커밋이며 앱 삭제/기기 데이터 초기화/운영 DB 복구가 필요하지 않다. 26/27 앱 보존, 설치/스토어 제출 없음. 남은 검증은 실제 iPhone 화면·PDF/음성·인증 흐름이며, 서버50회차 제한은 이번 디자인 범위 밖이다.
