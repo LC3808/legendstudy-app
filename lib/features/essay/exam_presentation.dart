@@ -56,7 +56,7 @@ String essayServiceAreaLabel(Map<String, dynamic> exam) =>
       EssayServiceArea.humanities => '인문논술',
       EssayServiceArea.socialBusiness => '사회·상경논술 · 수리 문항 포함 가능',
       EssayServiceArea.science => '자연·공학·이학·의예논술 · 첨삭 공개 보류',
-      null => '논술 계열 확인 필요 · 공개 상태는 별도 확인',
+      null => '논술',
     };
 
 String essayQuestionAvailability(
@@ -69,24 +69,14 @@ String essayQuestionAvailability(
       admission?['ready'] == true &&
       (admission?['questionIds'] as List? ?? []).contains(id);
   final math = (admission?['mathQuestions'] as Map? ?? {}).containsKey(id);
-  final input = switch (question['inputMode']) {
-    'text' => 'TEXT',
-    'image' => 'IMAGE',
-    _ => '입력 유형 확인 필요',
-  };
-  final engine = math
-      ? 'Math'
-      : admitted
-      ? 'Essay(TEXT)'
-      : '평가 경로 확인 필요';
-  final status = essayServiceArea(exam) == EssayServiceArea.science
-      ? '공개 보류 · 실행 불가'
-      : essayServiceArea(exam) == null && math
-      ? '계열 확인 전 Math 제출 보류'
-      : admission == null || !admission.containsKey('ready')
-      ? '공개·실행 상태 확인 필요'
-      : admitted
-      ? '문항 실행 승인 · 선택 조합은 별도 확인'
-      : '현재 첨삭 이용 불가';
-  return '$input · $engine\n$status';
+  if (essayServiceArea(exam) == EssayServiceArea.science) {
+    return '이 시험은 아직 첨삭을 이용할 수 없어요.';
+  }
+  if (essayServiceArea(exam) == null && math) {
+    return '시험 정보를 확인한 뒤 첨삭을 이용할 수 있어요.';
+  }
+  if (admission == null || !admission.containsKey('ready')) {
+    return '첨삭 가능 여부를 확인하고 있어요.';
+  }
+  return admitted ? '' : '현재 이 문항은 첨삭을 이용할 수 없어요.';
 }

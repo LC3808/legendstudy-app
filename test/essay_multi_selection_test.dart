@@ -85,6 +85,7 @@ void main() {
         expect(tester.widget<FilledButton>(pickPrompt).onPressed, isNull);
         for (final label in ['문제 1', '문제 2']) {
           await tester.ensureVisible(find.text(label));
+          await tester.pumpAndSettle();
           await tester.tap(find.text(label));
           await tester.pumpAndSettle();
         }
@@ -158,8 +159,13 @@ void main() {
         await tester.pageBack();
         await tester.pumpAndSettle();
         expect(find.text('선택한 문항 2개'), findsOneWidget);
-        await tester.ensureVisible(cta);
-        await tester.tap(cta);
+        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pumpAndSettle();
+        final resume = find.widgetWithText(FilledButton, '답안 이어쓰기');
+        await tester.ensureVisible(resume);
+        await tester.pumpAndSettle();
+        expect(resume.hitTestable(), findsOneWidget);
+        await tester.tap(resume);
         await tester.pumpAndSettle();
         await tester.ensureVisible(find.byType(TextField));
         expect(

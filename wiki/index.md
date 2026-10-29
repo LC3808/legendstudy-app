@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+APP 10/29 실기기 **2차** / 실패 재처리·재첨삭·Draft·Push·소문항: [2차 수정·운영 승인 대기](app-device-qa-fixes-20261029.md).
+
 APP 10/29 실기기 오류 / 소셜 버튼 / 계열·진행 / 광운 Draft: [수정·운영 근거·미완료](app-owner-fixes-20261029.md).
 
 APP 전체 인수 / 재작성 / paid learning round / 성장 / 사진 OCR: [최종 통합·검증·운영 적용 게이트](app-final-integration-20261028.md) → [성장 기존 정책](essay-growth-history-ui-20261026.md) → [사진 OCR 설계](essay-photo-ocr-design-20261028.md).

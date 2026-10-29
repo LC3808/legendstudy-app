@@ -328,6 +328,34 @@ class _Result extends ConsumerWidget {
             rows.length != 1) {
           return;
         }
+        if (!additional && rows.single['free_rewrite_available'] != true) {
+          final paid = await showDialog<bool>(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('무료 재첨삭을 사용할 수 없어요'),
+              content: const Text(
+                '무료 기간이 지났거나 이미 사용한 기록입니다. 추가 첨삭은 기존 정책에 따라 1 Credit을 사용합니다. 답안을 다시 작성할까요?',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: const Text('돌아가기'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: const Text('추가 첨삭 답안 작성'),
+                ),
+              ],
+            ),
+          );
+          if (paid != true ||
+              !context.mounted ||
+              ref.read(authStateProvider).value?.userId != owner) {
+            return;
+          }
+          additional =
+              true; // Explicit choice only; never silently spend Credit.
+        }
         await Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (_) => SourceCatalogPage(

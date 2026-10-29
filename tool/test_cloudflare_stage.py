@@ -13,7 +13,7 @@ class StageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder) / 'worker'
             subprocess.run([sys.executable, str(ROOT / 'tool/cloudflare_essay/stage.py'), str(target)], check=True, capture_output=True)
-            script = "from essay_lab.positive_learning import PROMPT, PROMPT_VERSION; assert PROMPT; from essay_lab.reviewed_runtime import reviewed_openai"
+            script = "from essay_lab.positive_learning import PROMPT, PROMPT_VERSION; assert PROMPT; from essay_lab.reviewed_runtime import reviewed_openai; from essay_lab.retry_feedback import feedback; assert feedback('EXACT_QUOTE')['code'] == 'EXACT_QUOTE'"
             subprocess.run([sys.executable, '-c', script], cwd=target/'src', check=True, capture_output=True)
             for version in ('v3','v6','v7','v10','v11','v12'):
                 name=f'scaffolding-1.3-{version}.txt'

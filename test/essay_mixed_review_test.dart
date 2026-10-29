@@ -87,10 +87,10 @@ void main() {
         expect(
           find.textContaining(
             !mathPublished
-                ? '기존 평가 경로를 확인하지 못했어요'
+                ? '현재 이 수리 문항은 첨삭을 이용할 수 없어요'
                 : track == '통합'
-                ? '계열 확인 전에는 Math 문항 제출이 보류'
-                : '현재 APP에서 혼합 문항을 한 회차로 제출할 수 없어',
+                ? '시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요'
+                : '글쓰기 문항과 수리 문항을 함께 제출하는 기능을 준비 중이에요',
           ),
           findsOneWidget,
         );
@@ -106,8 +106,8 @@ void main() {
         expect(find.textContaining('첨삭 요청 ·'), findsNothing);
         expect(find.text('시험대학교'), findsOneWidget);
         expect(find.text('2026학년도 수시논술 사회·상경'), findsOneWidget);
-        expect(find.textContaining('TEXT · Essay(TEXT)'), findsOneWidget);
-        expect(find.textContaining('IMAGE · Math'), findsOneWidget);
+        expect(find.textContaining('TEXT · Essay(TEXT)'), findsNothing);
+        expect(find.textContaining('IMAGE · Math'), findsNothing);
         expect(find.text('답안 수정'), findsOneWidget);
         expect(t.takeException(), isNull);
       },

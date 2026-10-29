@@ -9,6 +9,7 @@ from .reviewed_runtime import ReviewedRuntimeWorker,RuntimePermit
 from .exam_runtime import ExamQuestionChannel
 from .db_checkpoint import DatabaseCheckpoint
 from .async_exam import execute_async_exam
+from .retry_feedback import previous_feedback, feedback
 from .mixed_math_runtime import MixedMathWorker
 from .evaluation_policy import question_engine, policy_family
 
@@ -53,6 +54,10 @@ class CloudflareExamRuntime:
         for question in questions:
             question_engine(family, question.get('engine', 'essay'))
         version=f"material-{pkg['package_version']}-{policy['package_digest']}"
+        retry_contexts = {}
+        for index, question in enumerate(questions):
+            if question.get('engine') != 'math':
+                retry_contexts[index] = await previous_feedback(journal, index, claim['attempts'].get(str(index), 0))
         def build(channel,checkpoint):
             index=next(i for i,q in enumerate(questions) if q['evaluationId']==channel.evaluation_id)
             q=questions[index];cache=caches[q['questionId']]
@@ -64,10 +69,19 @@ class CloudflareExamRuntime:
                 return MixedMathWorker(channel,checkpoint,evaluate)
             attempt=claim['attempts'].get(str(index),0)
             prefix='q'+str(index)+'-a'+str(attempt)+'-'
+            rejected_assessment = None
             async def persist_receipt(value):
+                nonlocal rejected_assessment
+                if value.get('component') == 'independent_review':
+                    rejected_assessment = value.get('assessment')
                 key=prefix+receipt_checkpoint_key(value)
                 await journal.begin(key)
                 await journal.write(key,value)
+                if value.get('component') == 'validation_failure':
+                    context = feedback(value.get('code'), rejected_assessment)
+                    if context is not None:
+                        await journal.begin(prefix+'validation-feedback')
+                        await journal.write(prefix+'validation-feedback', context)
             source=self.review_source.bind_audit(persist_receipt) if hasattr(self.review_source,'bind_audit') else self.review_source
             async def review(evaluation,value,output):
                 await journal.begin(prefix+'independent-review-started')
@@ -82,7 +96,8 @@ class CloudflareExamRuntime:
                 await journal.write(prefix+'review',receipt)
                 return receipt
             return ReviewedRuntimeWorker(channel,provider,cache,self.reviewer,review,persist_receipt,checkpoint,
-                permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True))
+                permit=RuntimePermit(channel.evaluation_id,digest(channel.claim['input']),digest(cache),policy['binding'],int(time.time()+90),True),
+                retry_feedback=retry_contexts.get(index))
         for q in questions:
             require(q['rubricVersion']==version and q['evidenceVersion']==version,'REVIEWED_PACKAGE_PIN_REQUIRED')
             if q.get('engine')=='math':

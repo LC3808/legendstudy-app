@@ -282,11 +282,12 @@ class StepProgressBar extends StatelessWidget {
     required this.steps,
     required this.activeIndex,
     this.done = false,
+    this.showActivity = true,
     super.key,
   });
   final List<String> steps;
   final int activeIndex;
-  final bool done;
+  final bool done, showActivity;
   @override
   Widget build(BuildContext context) => Semantics(
     liveRegion: true,
@@ -334,7 +335,7 @@ class StepProgressBar extends StatelessWidget {
               ),
           ],
         ),
-        if (!done) ...[
+        if (!done && showActivity) ...[
           const SizedBox(height: AppTokens.space12),
           const LinearProgressIndicator(minHeight: 3),
         ],

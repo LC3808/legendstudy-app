@@ -395,6 +395,9 @@ class Worker:
     def check_result_identity(self, result):
         require(result.provider == 'synthetic', 'SYNTHETIC_IDENTITY')
 
+    def prepare_input(self, claim):
+        return package(claim, self.cache)
+
     def execute(self,evaluation):
         from .runtime_effects import drive_sync
         return drive_sync(self.execution_steps(evaluation),self)
@@ -411,7 +414,7 @@ class Worker:
         binding=None
         try:
             binding=self.bind_claim(claim)
-            value=package(claim,self.cache)
+            value=self.prepare_input(claim)
             result=(yield ('provider.evaluate', (value,)))
             self.check_result_identity(result)
         except (Unknown,ProviderFailure) as error:

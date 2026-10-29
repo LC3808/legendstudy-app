@@ -1,3 +1,7 @@
+## 2026-10-29 — APP 실기기 2차 수정·검수 빌드 준비
+
+기준 LOCAL/REMOTE80a5ab4d 확인, 별도 app-device-qa-fixes 브랜치. 서울여 완료/명시적재처리1/1Credit정산, 광운 published gate, iPhone0.1.0(1) 설치 확인. APP 상태/재처리/재첨삭 계약·작성/선택 UX 수정, Worker 품질거절 피드백 및 좁은 Draft 권한 SQL 후보 준비. Analyze0, Flutter1178PASS/7SKIP, offline28·격리Credit18·Draft6PASS. 운영 변경·실평가0. [근거·검증·승인 대기](app-device-qa-fixes-20261029.md).
+
 ## 2026-10-29 — APP 실기기 수정·새 Release 산출물
 
 별도 수정 브랜치에서 카드 CTA 제거·제목 정규화·3계열/문항별 실행 상태·혼합 안전 제한·실제 checkpoint 진행/실패 표시·계정 Draft 오류 구분·OAuth build guard 반영. 운영 SELECT: 외대/건국2023 반복 실패는 인용/독립검토 거절, 두 run completed·각1Credit 정산. 광운 legacy Draft 공개flag 계약 GAP 확인; 운영 수정/실평가0. Analyze0, Flutter1165PASS/7skip, Worker mock13·격리Credit18·release config2PASS, iOS1.0.1(22)/Android1.0.1(2026102901) 빌드·서명확인. Worker 반복거절·광운 서버저장·혼합 일괄제출·공식 계열metadata·실기기 재검수 미완료. [근거·파일·해시·롤백](app-owner-fixes-20261029.md).

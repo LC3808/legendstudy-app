@@ -33,22 +33,25 @@ Android plugins require NDK 28.2.13676358; no signing changes are made here.
 ./tool/flutterw build ios --simulator
 ```
 
-For Owner iPhone profile acceptance, connect/unlock the physical iPhone first:
+For Owner iPhone acceptance, run from the current QA checkout with the existing
+ignored `config/store-rc.local.json` and native signing configuration:
 
 ```sh
-cd /Users/woojinchang/development/legendstudy-app
-./tool/flutterw run --profile --dart-define-from-file=/Users/woojinchang/legendstudy-local.json
+./tool/device-qa --check
+./tool/device-qa --build-name 1.0.1 --build-number 23
 ```
 
-Select the actual physical iPhone if prompted; do not select the simulator for
-profile mode. No physical device was connected at this audit, so no device ID is
-invented. The existing external config path was verified without printing its
-contents; provider enablement/E2E is not inferred from its existence. Xcode Owner
-signing remains intact. Disconnected Debug home-screen relaunch restrictions do
-not test session restore; Owner iPhone Profile session restore E2E has since passed; new UI acceptance is separate.
+Commit APP source first. This creates a signed Release `Runner.app` and
+`build/ios/device-qa-receipt.json` with its source SHA and binary hash. It does not
+install, launch, authenticate or upload the app. Use that artifact for the next
+Owner device review; the generic development commands above do not identify a
+configured acceptance build. The build guard checks all three social-provider
+flags and the existing Google native URL scheme without printing credentials.
+Real social authentication and device acceptance remain separate checks. See
+[device QA evidence and pending approvals](wiki/app-device-qa-fixes-20261029.md).
 
 The app opens 홈 / 자료 / 학습 / LAB / MY. Materials remain guest-accessible;
-Study supports timers and mock exam scoring; LAB opens the existing Web service;
+Study supports timers and mock exam scoring; LAB provides native essay writing and history;
 MY holds the user profile, learning information and saved/recent materials. Read
 [UI/UX v1.1](wiki/ui-ux-v1.md) before UI implementation.
 Public reads require no login. Local configuration for backend access:

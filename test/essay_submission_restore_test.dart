@@ -177,11 +177,11 @@ void main() {
         await tester.pump();
         expect(find.text('첨삭을 진행하고 있어요'), findsOneWidget);
         expect(find.text('완료'), findsOneWidget);
-        expect(find.text('잠시 쉬어가세요.\n결과가 준비되면 확인할 수 있어요.'), findsOneWidget);
+        expect(find.text('잠시 쉬어가세요 ☕'), findsOneWidget);
         questionState = 'failed';
         await tester.pump(const Duration(seconds: 3));
         await tester.pump();
-        expect(find.text('문항 재처리가 필요해요'), findsOneWidget);
+        expect(find.text('일부 문항의 첨삭이 완료되지 않았어요.'), findsOneWidget);
         expect(find.text('화면을 닫아도 첨삭은 계속 진행됩니다.'), findsNothing);
         questionState = 'completed';
         for (var i = 0; i < 41; i++) {

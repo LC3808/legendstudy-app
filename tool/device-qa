@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Prepare a signed iPhone QA app with verified existing config; never install/upload."""
+import argparse
+import hashlib
+import json
+import plistlib
+import os
+from pathlib import Path
+import subprocess
+import tempfile
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def validate(config):
+    if not isinstance(config, dict) or config.get('APP_ENV') != 'production':
+        raise ValueError('The existing production config is required.')
+    for flag in ('GOOGLE_OAUTH_ENABLED', 'APPLE_OAUTH_ENABLED', 'KAKAO_OAUTH_ENABLED',
+                 'ESSAY_LIVE_WRITES_ENABLED', 'ESSAY_EVALUATION_REQUESTS_ENABLED'):
+        if str(config.get(flag, False)).lower() != 'true':
+            raise ValueError('Required login/evaluation build settings are missing: ' + flag)
+    for key in ('GOOGLE_SERVER_CLIENT_ID', 'GOOGLE_IOS_CLIENT_ID', 'SUPABASE_PUBLISHABLE_KEY'):
+        if not isinstance(config.get(key), str) or not config[key].strip():
+            raise ValueError('Required public build configuration is missing: ' + key)
+    if config.get('SUPABASE_URL', '').rstrip('/') != 'https://stlhijzpjfgwwdgunlsd.supabase.co':
+        raise ValueError('The existing LegendStudy backend must be preserved.')
+    if str(config.get('REVIEW_READ_ONLY', False)).lower() == 'true':
+        raise ValueError('A read-only review build cannot be used for device acceptance.')
+
+
+def validate_native(config, root=ROOT):
+    expected = 'com.googleusercontent.apps.' + config['GOOGLE_IOS_CLIENT_ID'].removesuffix('.apps.googleusercontent.com')
+    try:
+        lines = (root/'ios/Flutter/Auth.local.xcconfig').read_text().splitlines()
+        schemes = [line.split('=', 1)[1].strip() for line in lines if line.startswith('GOOGLE_REVERSED_CLIENT_ID=')]
+        if schemes != [expected]:
+            raise ValueError('Google native URL scheme does not match the selected public config.')
+        for mode in ('Debug', 'Release'):
+            if 'Auth.local.xcconfig' not in (root/f'ios/Flutter/{mode}.xcconfig').read_text():
+                raise ValueError('Native login config must be included in both Debug and Release.')
+    except OSError:
+        raise ValueError('Existing native login configuration is missing; do not invent new client IDs.') from None
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--config', type=Path, default=ROOT/'config/store-rc.local.json')
+    parser.add_argument('--check', action='store_true')
+    parser.add_argument('--build-name', default='1.0.1')
+    parser.add_argument('--build-number', default='23')
+    args = parser.parse_args()
+    try:
+        config = json.loads(args.config.read_text())
+        validate(config)
+        validate_native(config)
+    except (OSError, ValueError) as error:
+        parser.error(str(error) if isinstance(error, ValueError) and not isinstance(error, json.JSONDecodeError)
+                     else 'Local config is missing/invalid; no values printed.')
+    sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    if args.check:
+        print('DEVICE_QA_CONFIG_PASS: Google/Apple/Kakao enabled; existing backend preserved; SHA=' + sha)
+        return 0
+    dirty = subprocess.check_output(['git', 'status', '--porcelain', '--',
+        'lib', 'ios', 'android', 'assets', 'pubspec.yaml', 'pubspec.lock', 'tool/device-qa'], cwd=ROOT, text=True)
+    if dirty:
+        print('DEVICE_QA_BUILD_BLOCKED: commit the APP source before recording a build SHA.', file=sys.stderr)
+        return 2
+    fd, name = tempfile.mkstemp(prefix='legendstudy-device-qa-', suffix='.json')
+    try:
+        with os.fdopen(fd, 'w') as output:
+            json.dump(config, output)
+        code = subprocess.call([str(ROOT/'tool/flutterw'), 'build', 'ios', '--release',
+            '--build-name=' + args.build_name, '--build-number=' + args.build_number,
+            '--dart-define-from-file=' + name], cwd=ROOT)
+        if code == 0:
+            app = ROOT/'build/ios/iphoneos/Runner.app'
+            with (app/'Info.plist').open('rb') as file:
+                info = plistlib.load(file)
+            if (info.get('CFBundleIdentifier') != 'com.legendstudy.app' or
+                info.get('CFBundleShortVersionString') != args.build_name or
+                info.get('CFBundleVersion') != args.build_number):
+                raise RuntimeError('Compiled iOS identity/version does not match the QA receipt.')
+            subprocess.check_call(['codesign','--verify','--deep','--strict', str(app)])
+            receipt = ROOT/'build/ios/device-qa-receipt.json'
+            receipt.write_text(json.dumps(dict(source_sha=sha,
+                branch=subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip(),
+                version=args.build_name, build=args.build_number, social_providers=['google', 'apple', 'kakao'],
+                bundle_id=info['CFBundleIdentifier'],
+                framework_sha256=hashlib.sha256((ROOT/'build/ios/iphoneos/Runner.app/Frameworks/App.framework/App').read_bytes()).hexdigest(),
+                artifact='build/ios/iphoneos/Runner.app', installed=False, uploaded=False), indent=2)+'\n')
+        return code
+    finally:
+        Path(name).unlink(missing_ok=True)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

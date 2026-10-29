@@ -36,10 +36,17 @@ class RuntimePermit:
 
 
 class ReviewedRuntimeWorker(Worker):
-    def __init__(self, *args, permit: RuntimePermit, clock=time.time, **kwargs):
+    def __init__(self, *args, permit: RuntimePermit, clock=time.time, retry_feedback=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.permit=deepcopy(permit)
         self.clock=clock
+        self.retry_feedback=deepcopy(retry_feedback)
+
+    def prepare_input(self, claim):
+        value = super().prepare_input(claim)
+        if self.retry_feedback is not None:
+            value['retry_validation_context'] = deepcopy(self.retry_feedback)
+        return value
 
     def authorize(self, evaluation):
         p=self.permit

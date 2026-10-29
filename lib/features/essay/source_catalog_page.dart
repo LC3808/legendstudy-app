@@ -1,4 +1,11 @@
 import 'exam_presentation.dart';
+import 'exam_session_status.dart';
+import 'exam_rewrite.dart';
+import 'exam_draft_actions.dart';
+import 'answer_sections.dart';
+
+import 'package:flutter/cupertino.dart';
+
 import 'answer_ocr.dart';
 import '../credits/essay_credit_source.dart';
 import 'service_availability.dart';
@@ -101,7 +108,11 @@ class _SourceSelection extends ConsumerStatefulWidget {
     required this.loadCatalog,
     this.catalog,
     this.rewriteRun,
+    this.initialUniversity,
+    this.selectionMemory,
   });
+  final Map<String, _SelectionSnapshot>? selectionMemory;
+  final String? initialUniversity;
   final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Future<SourceCatalog> Function(String?) loadCatalog;
@@ -110,22 +121,97 @@ class _SourceSelection extends ConsumerStatefulWidget {
   ConsumerState<_SourceSelection> createState() => _SourceSelectionState();
 }
 
+class _SelectionSnapshot {
+  _SelectionSnapshot(
+    this.year,
+    this.kind,
+    this.track,
+    this.examKey,
+    this.included,
+  );
+  final String? year, kind, track, examKey;
+  final Map<String, Set<String>> included;
+}
+
 class _SourceSelectionState extends ConsumerState<_SourceSelection> {
   late Future<SourceCatalog> data =
       widget.catalog ?? widget.loadCatalog(university);
   final included = <String, Set<String>>{};
-  String? university, year, kind, track, examKey;
+  late final selectionMemory =
+      widget.selectionMemory ?? <String, _SelectionSnapshot>{};
+  bool pushingUniversity = false;
+  late String? university = widget.initialUniversity;
+  String? year, kind, track, examKey;
   final catalogScroll = ScrollController();
   double catalogOffset = 0;
+  @override
+  void initState() {
+    super.initState();
+    restoreSelection();
+  }
+
+  void saveSelection() {
+    if (university != null) {
+      selectionMemory[university!] = _SelectionSnapshot(
+        year,
+        kind,
+        track,
+        examKey,
+        {
+          for (final e in included.entries) e.key: {...e.value},
+        },
+      );
+    }
+  }
+
+  void restoreSelection() {
+    final saved = selectionMemory[university];
+    year = saved?.year;
+    kind = saved?.kind;
+    track = saved?.track;
+    examKey = saved?.examKey;
+    included.clear();
+    if (saved != null) {
+      included.addAll({
+        for (final e in saved.included.entries) e.key: {...e.value},
+      });
+    }
+  }
+
   void selectUniversity(String id) {
+    if (pushingUniversity) return;
+    if (university == null) {
+      final page = _SourceSelection(
+        owner: widget.owner,
+        catalog: widget.catalog,
+        loadCatalog: widget.loadCatalog,
+        initialUniversity: id,
+        selectionMemory: selectionMemory,
+      );
+      pushingUniversity = true;
+      Navigator.of(context)
+          .push<void>(
+            Theme.of(context).platform == TargetPlatform.iOS
+                ? CupertinoPageRoute(builder: (_) => page)
+                : MaterialPageRoute(builder: (_) => page),
+          )
+          .whenComplete(() => pushingUniversity = false);
+      return;
+    }
+    saveSelection();
     setState(() {
       university = id;
-      year = kind = track = examKey = null;
+      restoreSelection();
       if (widget.catalog == null) data = widget.loadCatalog(id);
     });
   }
 
   void backToCatalog() {
+    if (widget.initialUniversity != null) {
+      saveSelection();
+      Navigator.of(context).pop();
+      return;
+    }
     setState(() {
       university = null;
       year = kind = track = examKey = null;
@@ -141,6 +227,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
 
   @override
   void dispose() {
+    saveSelection();
     catalogScroll.dispose();
     super.dispose();
   }
@@ -166,10 +253,27 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
     ),
   );
   @override
-  Widget build(BuildContext context) => PopScope(
-    canPop: university == null || widget.rewriteRun != null,
+  Widget build(BuildContext context) {
+    final auth = ref.watch(authStateProvider);
+    if (auth.isLoading ||
+        auth.hasError ||
+        (auth.value?.userId ?? 'guest') != widget.owner) {
+      return const Scaffold(body: Center(child: Text('로그인 상태를 확인해 주세요.')));
+    }
+    return buildSelection(context);
+  }
+
+  Widget buildSelection(BuildContext context) => PopScope(
+    canPop:
+        university == null ||
+        widget.rewriteRun != null ||
+        widget.initialUniversity != null,
     onPopInvokedWithResult: (didPop, _) {
-      if (!didPop) backToCatalog();
+      if (didPop) {
+        saveSelection();
+      } else {
+        backToCatalog();
+      }
     },
     child: Scaffold(
       appBar: AppBar(
@@ -578,47 +682,66 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                           }),
                   ),
                 Text('선택한 문항 ${selection.length}개'),
-                FilledButton(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppTokens.textPrimary,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(48, 48),
+                if (writingBlocked || selection.isEmpty)
+                  FilledButton(
+                    onPressed: null,
+                    child: Text(
+                      !ownedHistory && isUniversityServicePreparing(uni)
+                          ? '서비스 준비중'
+                          : selection.isEmpty
+                          ? '문제 선택'
+                          : '첨삭 서비스 준비 중',
+                    ),
+                  )
+                else
+                  ExamDraftActions(
+                    key: ValueKey(
+                      '${widget.owner}:${exam['key']}:${(selection.toList()..sort()).join(',')}',
+                    ),
+                    owner: widget.owner,
+                    rewriteRun: widget.rewriteRun,
+                    questions: questions
+                        .where((q) => selection.contains(q['key']))
+                        .toList(),
+                    onWrite: () async {
+                      final u = c.universities.firstWhere(
+                        (u) => u['sourceUniversityId'] == uni,
+                      );
+                      await Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).push<void>(
+                        MaterialPageRoute(
+                          builder: (_) => _SelectedAnswerWriter(
+                            owner: widget.owner,
+                            questions: questions
+                                .where((q) => selection.contains(q['key']))
+                                .toList(),
+                            exam: {...exam, 'universityName': u['name']},
+                            universityName: u['name'] as String?,
+                            rewriteRun: widget.rewriteRun,
+                            officialUrl: u['officialSourceUrl'] as String?,
+                          ),
+                        ),
+                      );
+                    },
+                    onReview: () async {
+                      final u = c.universities.firstWhere(
+                        (u) => u['sourceUniversityId'] == uni,
+                      );
+                      await showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (_) => ExamAnswerReview(
+                          owner: widget.owner,
+                          exam: {...exam, 'universityName': u['name']},
+                          currentQuestion: selection.first,
+                          selectedQuestions: {...selection},
+                          rewriteRun: widget.rewriteRun,
+                        ),
+                      );
+                    },
                   ),
-                  onPressed: writingBlocked || selection.isEmpty
-                      ? null
-                      : () {
-                          final u = c.universities.firstWhere(
-                            (u) => u['sourceUniversityId'] == uni,
-                          );
-                          Navigator.of(context, rootNavigator: true).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => _SelectedAnswerWriter(
-                                owner: widget.owner,
-                                questions: questions
-                                    .where((q) => selection.contains(q['key']))
-                                    .toList(),
-                                exam: {...exam, 'universityName': u['name']},
-                                universityName: u['name'] as String?,
-                                rewriteRun: widget.rewriteRun,
-                                officialUrl: u['officialSourceUrl'] as String?,
-                              ),
-                            ),
-                          );
-                        },
-                  // Distinguish "pick a question" from an actually unavailable
-                  // service: only a held university / blocked feedback reads as
-                  // 준비 중. Publication is still judged by the existing
-                  // isUniversityServicePreparing + verification contract.
-                  child: Text(
-                    !ownedHistory && isUniversityServicePreparing(uni)
-                        ? '서비스 준비중'
-                        : selection.isEmpty
-                        ? '문제 선택'
-                        : writingBlocked
-                        ? '첨삭 서비스 준비 중'
-                        : '답안 작성하기',
-                  ),
-                ),
               ],
             ],
           );
@@ -1264,29 +1387,49 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                         icon: const Icon(Icons.document_scanner_outlined),
                         label: const Text('사진으로 답안 입력'),
                       ),
-                    TextField(
-                      controller: editor,
-                      enabled: !syncBusy,
-                      minLines: widget.question['inputMode'] == 'image'
-                          ? 3
-                          : 12,
-                      maxLines: null,
-                      maxLength: 30000,
-                      onChanged: (value) {
-                        c.edit(value);
-                        _notifyContent();
-                        // Editing invalidates the previous manual-save result.
-                        if (manualSaveNotice != null) {
-                          setState(() => manualSaveNotice = null);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        labelText: widget.question['inputMode'] == 'image'
-                            ? '추가 설명 (선택)'
-                            : '내 답안',
-                        alignLabelWithHint: true,
+                    if (essayAnswerSections(
+                      widget.exam['dbExamId'] as String?,
+                      widget.question['dbQuestionId'] as String?,
+                    ).isNotEmpty)
+                      SectionedAnswerInput(
+                        controller: editor,
+                        labels: essayAnswerSections(
+                          widget.exam['dbExamId'] as String?,
+                          widget.question['dbQuestionId'] as String?,
+                        ),
+                        enabled: !syncBusy,
+                        onChanged: (value) {
+                          c.edit(value);
+                          _notifyContent();
+                          if (manualSaveNotice != null) {
+                            setState(() => manualSaveNotice = null);
+                          }
+                        },
+                      )
+                    else
+                      TextField(
+                        controller: editor,
+                        enabled: !syncBusy,
+                        minLines: widget.question['inputMode'] == 'image'
+                            ? 3
+                            : 12,
+                        maxLines: null,
+                        maxLength: 30000,
+                        onChanged: (value) {
+                          c.edit(value);
+                          _notifyContent();
+                          // Editing invalidates the previous manual-save result.
+                          if (manualSaveNotice != null) {
+                            setState(() => manualSaveNotice = null);
+                          }
+                        },
+                        decoration: InputDecoration(
+                          labelText: widget.question['inputMode'] == 'image'
+                              ? '추가 설명 (선택)'
+                              : '내 답안',
+                          alignLabelWithHint: true,
+                        ),
                       ),
-                    ),
                     // 버튼이 먼저, 상태 메시지는 버튼 아래. 기본 회색 테두리,
                     // 누르는 동안 네이비 채움. 누르기 전에는 '저장됨'을 표시하지 않는다.
                     Align(
@@ -1529,6 +1672,8 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   Map<String, dynamic>? completedRun;
   Map<String, String> questionStates = {};
   bool confirmedRunState = false;
+  ExamSessionStatus? sessionStatus;
+  bool retrying = false;
   Timer? statusPoll;
   final submissionWait = Stopwatch();
   @override
@@ -1559,12 +1704,14 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   bool get runPending =>
       submittedRun != null && runState != 'completed' && runState != 'failed';
 
-  Future<void> pollStatus() async {
+  Future<void> pollStatus({bool manual = false}) async {
     if (polling) return;
     statusPoll?.cancel();
     final client = ref.read(supabaseClientProvider);
     if (client == null || submittedRun == null || !mounted) return;
-    polling = true;
+    setState(() => polling = true);
+    final before = jsonEncode([runState, questionStates]);
+    bool detailFailed = false;
     try {
       final rows = await SharedEssayHistory(
         client,
@@ -1573,25 +1720,18 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       if (!mounted) return;
       if (rows.length != 1) throw StateError('Submission history pending');
       try {
-        final detail = await client
-            .rpc<dynamic>(
-              'essay_exam_session_status',
-              params: {'p_run': submittedRun},
-            )
-            .timeout(const Duration(seconds: 5));
-        if (!mounted || client.auth.currentUser?.id != widget.owner) return;
-        if (detail is Map &&
-            detail['version'] == 'exam-session-v1' &&
-            detail['questions'] is List &&
-            mounted) {
-          questionStates = {
-            for (final q in detail['questions'] as List)
-              if (q['question_id'] is String && q['state'] is String)
-                q['question_id'] as String: q['state'] as String,
-          };
-        }
+        final detail = await readExamSessionStatus(
+          client,
+          widget.owner,
+          submittedRun!,
+        );
+        if (!mounted) return;
+        sessionStatus = detail;
+        questionStates = detail.questions;
       } catch (_) {
-        /* Unknown status is not a Worker failure. */
+        detailFailed = true;
+        sessionStatus =
+            null; // Failed refresh must never leave retry permission stale.
       }
 
       if (!mounted) return;
@@ -1604,7 +1744,17 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           'failed' => '첨삭을 완료하지 못했어요. 기록에서 처리 상태를 확인해 주세요.',
           // Progress view shows the fixed "잠시 쉬어가세요" guidance instead of a
           // per-poll notice, so no rotating or fabricated progress text here.
-          _ => '',
+          _ =>
+            manual
+                ? detailFailed
+                      ? '문항별 상태를 확인하지 못했어요. 다시 확인해 주세요.'
+                      : before == jsonEncode([runState, questionStates])
+                      ? '아직 처리 상태에 변화가 없습니다.'
+                      : '최신 처리 상태를 확인했어요.'
+                : notice == '아직 처리 상태에 변화가 없습니다.' &&
+                      before != jsonEncode([runState, questionStates])
+                ? '처리 상태가 업데이트됐어요.'
+                : notice,
         },
       );
       if (state == 'failed' && submittedRequestKey != null) {
@@ -1631,9 +1781,14 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         return;
       }
     } catch (_) {
-      if (mounted) setState(() => notice = '처리 상태를 확인하지 못했어요. 제출 기록은 보존됩니다.');
+      if (mounted) {
+        setState(() {
+          sessionStatus = null;
+          notice = '처리 상태를 확인하지 못했어요. 제출 기록은 보존됩니다.';
+        });
+      }
     } finally {
-      polling = false;
+      if (mounted) setState(() => polling = false);
     }
     // Keep checking while the screen is active and the run is still pending —
     // no fixed 100s give-up — but back the interval off so a long evaluation is
@@ -1647,6 +1802,43 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           ? const Duration(seconds: 10)
           : const Duration(seconds: 30);
       statusPoll = Timer(interval, pollStatus);
+    }
+  }
+
+  Future<void> retryFailedQuestions() async {
+    if (retrying ||
+        polling ||
+        sessionStatus?.canRetry != true ||
+        submittedRun == null) {
+      return;
+    }
+    setState(() => retrying = true);
+    try {
+      final client = ref.read(supabaseClientProvider);
+      final api = gateway();
+      if (client == null || api == null) throw StateError('로그인 상태를 확인해 주세요.');
+      await retryExistingExam(
+        client: client,
+        gateway: api,
+        owner: widget.owner,
+        run: submittedRun!,
+        exam: widget.exam['dbExamId'] as String,
+      );
+      if (!mounted) return;
+      setState(() => notice = '실패 문항 재처리가 접수됐어요. 완료된 문항은 보존됩니다.');
+      await pollStatus();
+    } catch (error) {
+      if (mounted) {
+        setState(
+          () => notice =
+              error is StateError &&
+                  !RegExp(r'^[A-Z_]+$').hasMatch(error.message.toString())
+              ? error.message.toString()
+              : '재처리 접수를 확인하지 못했어요. 상태를 새로고침해 주세요. 기존 답안과 결과는 보존됩니다.',
+        );
+      }
+    } finally {
+      if (mounted) setState(() => retrying = false);
     }
   }
 
@@ -1731,7 +1923,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     try {
       final client = ref.read(supabaseClientProvider);
       if (client != null) {
-        final rows = await SharedEssayHistory(client, widget.owner).examRuns();
+        final rows = await SharedEssayHistory(
+          client,
+          widget.owner,
+        ).examRuns(parentId);
         if (mounted) setState(() => eligibilityLoaded = true);
         if (mounted) {
           setState(
@@ -1764,7 +1959,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           .where((q) => widget.included.contains(q['key']))
           .toList();
       if (selected.isEmpty) throw StateError('답안을 제출할 문항을 선택해 주세요.');
-      final answers = <Map<String, dynamic>>[];
+      var answers = <Map<String, dynamic>>[];
       for (final q in selected) {
         final store = SourceDraftGateway(
           widget.owner,
@@ -1785,11 +1980,38 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
             '선택한 문항의 텍스트 답안을 확인해 주세요. 사진 포함 답안은 아직 이 시험에서 제출할 수 없습니다.',
           );
         }
+        final missing = missingAnswerSections(
+          draft.body,
+          essayAnswerSections(
+            widget.exam['dbExamId'] as String?,
+            q['dbQuestionId'] as String?,
+          ),
+        );
+        if (missing.isNotEmpty) {
+          throw StateError('${missing.join(', ')} 답안을 작성해 주세요.');
+        }
         answers.add({
           'questionId': q['dbQuestionId'],
           'body': draft.body,
           'revision': draft.revision,
         });
+      }
+      if (parentId != null) {
+        final client = ref.read(supabaseClientProvider);
+        if (client == null) throw StateError('로그인 상태를 확인해 주세요.');
+        // Resolve this exact parent; a latest-50 list cannot authorize an old run.
+        final parents = await SharedEssayHistory(
+          client,
+          widget.owner,
+        ).examRuns(parentId);
+        if (parents.length != 1 ||
+            parents.single['exam_id'] != widget.exam['dbExamId'] ||
+            parents.single['free_rewrite_available'] != true) {
+          throw StateError(
+            '무료 재첨삭 기간이 지났거나 이미 사용한 기록입니다. 추가 첨삭은 결과 화면에서 선택해 주세요. 답안은 보존됩니다.',
+          );
+        }
+        answers = examRewriteAnswers(answers, parents.single);
       }
       final fingerprint = jsonEncode({
         'parentId': parentId,
@@ -1990,9 +2212,13 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
                     ? '사용할 Credit 출처가 변경됐습니다. 답안은 보존됩니다. 다시 요청하여 출처를 확인해 주세요.'
                     : error.code == 'INSUFFICIENT_CREDIT'
                     ? '크레딧이 부족합니다.'
-                    : '제출 조건을 확인해 주세요.')
+                    : error.code == 'QUOTE_UNAVAILABLE'
+                    ? '서버에서 재첨삭 조건을 확인하지 못했어요. 답안은 보존됩니다. 기록에서 이용 가능 여부를 다시 확인해 주세요.'
+                    : '서버에서 제출을 승인하지 않았어요. 답안은 보존됩니다. 잠시 후 다시 확인해 주세요.')
               : error is StateError
-              ? error.message.toString()
+              ? RegExp(r'^[A-Z_]+$').hasMatch(error.message.toString())
+                    ? '요청 상태를 확인하지 못했어요. 로그인과 연결 상태를 확인해 주세요.'
+                    : error.message.toString()
               : '연결을 확인하지 못했어요. 답안과 제출 정보는 보존됩니다.',
         );
       }
@@ -2038,7 +2264,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       return const SizedBox.shrink();
     }
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: submittedRun == null ? _preSubmit() : _progress(context),
     );
   }
@@ -2068,11 +2294,11 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       ),
     if (parentId != null)
       const Text('최초 제출과 동일한 문항을 선택하고 답안을 수정해 주세요. 재첨삭 가능 여부는 서버에서 확인합니다.'),
-    const Divider(),
+    const Divider(color: AppTokens.majorSurfaceBorder, height: 16),
     Text('제출 문항: ${widget.included.length}개'),
     if (parentId != null && eligibleRewrite)
       const Text('무료 재첨삭 · 추가 Credit 없음'),
-    if (!ready) const Text('현재 첨삭 실행은 비공개 검증 중입니다. 답안 작성과 저장은 계속할 수 있어요.'),
+    if (!ready) const Text('현재 이 문항은 첨삭을 이용할 수 없어요. 답안 작성과 저장은 계속할 수 있어요.'),
     // [답안 수정] [첨삭 요청] 나란히 배치.
     Row(
       children: [
@@ -2139,7 +2365,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       Text(
         failed
             ? questionFailure
-                  ? '문항 재처리가 필요해요'
+                  ? '일부 문항의 첨삭이 완료되지 않았어요.'
                   : '첨삭을 완료하지 못했어요'
             : completed
             ? '첨삭이 완료됐어요'
@@ -2154,7 +2380,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       if (!failed) ...[
         const SizedBox(height: AppTokens.space8),
         Text(
-          completed ? '저장된 결과를 확인할 수 있어요.' : '잠시 쉬어가세요.\n결과가 준비되면 확인할 수 있어요.',
+          completed ? '저장된 결과를 확인할 수 있어요.' : '잠시 쉬어가세요 ☕',
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 22,
@@ -2162,10 +2388,19 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
             color: AppTokens.textPrimary,
           ),
         ),
+        if (!completed) ...[
+          const SizedBox(height: AppTokens.space8),
+          const Text(
+            '결과가 준비되면 확인할 수 있어요.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: AppTokens.textSecondary),
+          ),
+        ],
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppTokens.space16),
           child: StepProgressBar(
             steps: const ['제출 완료', '첨삭 중', '결과 준비'],
+            showActivity: false,
             activeIndex: completed
                 ? 2
                 : ((confirmedRunState && runState == 'processing') ||
@@ -2178,10 +2413,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           ),
         ),
       ],
-      const Divider(height: 16, thickness: 2, color: Color(0xFF303030)),
+      const SizedBox(height: AppTokens.space8),
       // 문제별 진행 상태 (구분선으로 구분).
       for (final q in included) ...[
-        const Divider(height: 1, color: Color(0xFF808080)),
+        const Divider(height: 1, color: AppTokens.majorSurfaceBorder),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
           child: Row(
@@ -2203,12 +2438,13 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           ),
         ),
       ],
-      const Divider(height: 1, color: Color(0xFF808080)),
+      const Divider(height: 1, color: AppTokens.majorSurfaceBorder),
       const SizedBox(height: AppTokens.space12),
       if (failed)
         Text(
           notice.isEmpty
-              ? '완료 문항은 보존됩니다. 기록에서 실패 문항의 재처리 가능 여부를 확인해 주세요.'
+              ? sessionStatus?.retryExplanation ??
+                    '상태를 새로고침해 재처리 가능 여부를 확인해 주세요. 완료 문항은 보존됩니다.'
               : notice,
           style: AppTokens.body.copyWith(color: AppTokens.dangerInk),
         ),
@@ -2227,6 +2463,11 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
             ),
           ),
       ],
+      if (!completed && questionStates.values.contains('completed'))
+        const Text(
+          '완료된 결과는 보존되며, 전체 문항의 처리가 끝나면 조회할 수 있어요.',
+          style: TextStyle(fontSize: 13, color: AppTokens.textSecondary),
+        ),
       const SizedBox(height: AppTokens.space4),
       if (!failed && !completed)
         Text(
@@ -2239,10 +2480,25 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         runSpacing: AppTokens.space8,
         children: [
           OutlinedButton.icon(
-            onPressed: polling ? null : pollStatus,
+            onPressed: polling || retrying
+                ? null
+                : () => pollStatus(manual: true),
             icon: const Icon(Icons.refresh, size: AppTokens.iconDense),
             label: const Text('처리 상태 새로고침'),
           ),
+          if (questionStates.values.contains('failed'))
+            FilledButton(
+              onPressed: retrying || polling || sessionStatus?.canRetry != true
+                  ? null
+                  : retryFailedQuestions,
+              child: Text(
+                sessionStatus?.canRetry == true
+                    ? '실패한 문항 다시 처리 · 0 Credit'
+                    : '실패한 문항 다시 처리',
+              ),
+            ),
+          if (!completed && questionStates.values.contains('completed'))
+            const OutlinedButton(onPressed: null, child: Text('완료된 결과 보기')),
           if (completed)
             FilledButton(
               style: FilledButton.styleFrom(
@@ -2250,7 +2506,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
                 foregroundColor: Colors.white,
               ),
               onPressed: openCompletedResult,
-              child: const Text('첨삭 결과 보기'),
+              child: const Text('완료된 결과 보기'),
             ),
           TextButton(onPressed: _openHistory, child: const Text('나의 첨삭 기록')),
         ],
@@ -2305,6 +2561,16 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
       final images = await store.loadImages();
       if (draft.body.trim().isEmpty && images.isEmpty) {
         missing.add(q['label'] as String);
+      } else {
+        missing.addAll(
+          missingAnswerSections(
+            draft.body,
+            essayAnswerSections(
+              widget.exam['dbExamId'] as String?,
+              q['dbQuestionId'] as String?,
+            ),
+          ),
+        );
       }
     }
     return missing;
@@ -2356,15 +2622,23 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
                     color: AppTokens.textSecondary,
                   ),
                 ),
-              const Divider(),
+              const Divider(color: AppTokens.majorSurfaceBorder, height: 16),
               for (final (i, q) in questions.indexed) ...[
-                if (i > 0) const Divider(color: Color(0xFF636363), height: 1),
+                if (i > 0)
+                  const Divider(color: AppTokens.majorSurfaceBorder, height: 1),
                 CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(q['label'] as String),
-                  subtitle: Text(
-                    essayQuestionAvailability(widget.exam, q, admission),
-                  ),
+                  subtitle:
+                      essayQuestionAvailability(
+                        widget.exam,
+                        q,
+                        admission,
+                      ).isEmpty
+                      ? null
+                      : Text(
+                          essayQuestionAvailability(widget.exam, q, admission),
+                        ),
                   value: selected.contains(q['key']),
                   onChanged: widget.rewriteRun != null
                       ? null
@@ -2381,10 +2655,10 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
                 future: missingAnswers(),
                 builder: (context, snapshot) => snapshot.hasError
                     ? const Text('답안 저장 상태를 확인하지 못했어요. 다시 확인해 주세요.')
+                    : (snapshot.data ?? []).isEmpty
+                    ? const SizedBox.shrink()
                     : Text(
-                        (snapshot.data ?? []).isEmpty
-                            ? ''
-                            : '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
+                        '${snapshot.data!.join(', ')}: 답안이 비어 있어요. 작성하거나 제출 선택에서 제외해 주세요.',
                       ),
               ),
               const SizedBox(height: AppTokens.space8),
@@ -2528,20 +2802,14 @@ class _RoundSubmitRouter extends ConsumerWidget {
       return unavailable('자연·공학·이학·의예논술 첨삭은 베타 공개 보류 중입니다. 작성한 답안은 유지됩니다.');
     }
     if (area == null && mathSelected.isNotEmpty) {
-      return unavailable(
-        '이 시험의 계열 확인 전에는 Math 문항 제출이 보류됩니다. TEXT 문항의 기존 공개 상태는 별도로 확인하며 선택 문항을 자동 제외하지 않습니다. 작성한 답안은 유지됩니다.',
-      );
+      return unavailable('시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요. 작성한 답안은 보존됩니다.');
     }
     if (mathSelected.isNotEmpty && mathSelected.length != selected.length) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '혼합형 시험입니다. TEXT 문항과 수리 문항의 평가 경로가 다릅니다. 현재 APP에서 혼합 문항을 한 회차로 제출할 수 없어 요청하지 않습니다. 작성한 답안은 유지됩니다.',
-          ),
-          const Text(
-            'TEXT 문항만 선택하는 경우에도 기존 부분 제출 안내와 시험 회차 Credit 조건을 확인해야 합니다. 선택 문항을 자동 제외하지 않습니다.',
-          ),
+          const Text('글쓰기 문항과 수리 문항을 함께 제출하는 기능을 준비 중이에요. 작성한 답안은 보존됩니다.'),
+          const Text('일부 문항만 제출하려면 답안 확인에서 직접 선택하고 사용 Credit을 확인해 주세요.'),
           if (onEdit != null)
             OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
         ],
@@ -2549,9 +2817,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
     }
     if (mathSelected.isNotEmpty &&
         !selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      return unavailable(
-        '수리 문항의 기존 평가 경로를 확인하지 못했어요. 첨삭 요청은 보류하며 작성한 답안은 유지됩니다.',
-      );
+      return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
     }
     if (selected.isNotEmpty &&
         selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {

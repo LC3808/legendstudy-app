@@ -9,7 +9,7 @@ C=R/'supabase/candidates/essay_exam_unit'
 def uid():return str(uuid.uuid4())
 def literal(value):return "'"+str(value).replace("'","''")+"'"
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--pg-bin',type=Path,required=True);ap.add_argument('--surface-only',action='store_true');args=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--pg-bin',type=Path,required=True);ap.add_argument('--surface-only',action='store_true');ap.add_argument('--draft-access-only',action='store_true');args=ap.parse_args()
  env={k:v for k,v in os.environ.items() if not k.startswith('PG')};env['LC_ALL']='C'
  def run(command,**kwargs):return subprocess.run(list(map(str,command)),env=env,text=True,capture_output=True,**kwargs)
  versions=next(ast.literal_eval(n.value) for n in ast.parse((R/'tool/test_math_ownership_bootstrap.py').read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSIONS' for t in n.targets))
@@ -40,6 +40,10 @@ def main():
    sql(f"insert into auth.users(id) values('{user}');insert into public.profiles(id) values('{user}');")
    account=sql(f"select id from public.credit_accounts where user_id='{user}'")
    sql(f"insert into public.universities(id,slug,name) values('{university}','fixture','Fixture');insert into public.essay_exams(id,university_id,admission_year,exam_key,exam_name,exam_kind) values('{exam}','{university}',2025,'fixture','Fixture','mock'),('{otherexam}','{university}',2025,'other','Other','mock');insert into public.essay_questions(id,essay_exam_id,question_key,label,display_order,metadata_version) values('{q1}','{exam}','q1','Q1',1,'fixture'),('{q2}','{exam}','q2','Q2',2,'fixture'),('{q3}','{otherexam}','q3','Q3',1,'fixture');")
+   if args.draft_access_only:
+    from essay_lab.draft_access_validation import cases
+    cases(sql, R, user, exam, q1)
+    return
    if args.surface_only:
     from essay_lab.exam_surface_validation import cases
     cases(sql, R, user, account, exam, q1)

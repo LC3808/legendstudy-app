@@ -396,8 +396,8 @@ void main() {
         // Single question is selected by default and retained on return.
         await tester.pumpAndSettle();
         expect(find.byType(TextField), findsNothing);
-        await tester.ensureVisible(find.text('답안 작성하기'));
-        await tester.tap(find.text('답안 작성하기'));
+        await tester.ensureVisible(find.text('답안 이어쓰기'));
+        await tester.tap(find.text('답안 이어쓰기'));
         await tester.pumpAndSettle();
         expect(find.text('풀이 보충 설명'), findsOneWidget);
         expect(tester.takeException(), isNull);
@@ -580,8 +580,8 @@ void main() {
       // Rewrite's original question set is fixed.
       await tester.pumpAndSettle();
       expect(find.byType(TextField), findsNothing);
-      await tester.ensureVisible(find.text('답안 작성하기'));
-      await tester.tap(find.text('답안 작성하기'));
+      await tester.ensureVisible(find.text('답안 이어쓰기'));
+      await tester.tap(find.text('답안 이어쓰기'));
       await tester.pumpAndSettle();
       expect(
         tester.widget<TextField>(find.byType(TextField)).controller!.text,
@@ -596,8 +596,8 @@ void main() {
       // Rewrite's original question set is fixed.
       await tester.pumpAndSettle();
       expect(find.byType(TextField), findsNothing);
-      await tester.ensureVisible(find.text('답안 작성하기'));
-      await tester.tap(find.text('답안 작성하기'));
+      await tester.ensureVisible(find.text('답안 이어쓰기'));
+      await tester.tap(find.text('답안 이어쓰기'));
       await tester.pumpAndSettle();
       expect(
         tester.widget<TextField>(find.byType(TextField)).controller!.text,
