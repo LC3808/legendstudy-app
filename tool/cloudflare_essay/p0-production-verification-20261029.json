@@ -1,0 +1,184 @@
+{
+  "baseline": [
+    {
+      "id": "4e26b5b6-e605-4c87-a6ad-ce5ed70c31f1",
+      "state": "reserved",
+      "completed_at": null,
+      "run_hash": "104f7d4e9dcf200727f1ed8494a9a0fd",
+      "answer_hash": "5d3eb9db1e9e886d14bd03ddc2a77003",
+      "result_hash": "37a6259cc0c1dae299a7866489dff0bd",
+      "same_exam_runs": 1,
+      "owner_history_hash": "bd60a973a047828fbb3f199c2d7d78ed",
+      "checkpoints_hash": "918a66d8bd16a442d1fcdec0d8e33529",
+      "retries_hash": "0058ddbd607b9017e01d4b5aefea9b1d",
+      "owner_ledger_hash": "489c7b005bd994072909fcf1e4a62836",
+      "postings": [
+        {
+          "type": "reserve",
+          "balance_delta": 0,
+          "reserved_delta": 1
+        }
+      ]
+    },
+    {
+      "id": "6ef28b49-12a5-4825-886d-548f0d9897df",
+      "state": "completed",
+      "completed_at": "2026-10-29 03:41:38.016616+00",
+      "run_hash": "198f944d1a45904f25490271b5ba5322",
+      "answer_hash": "042f9a6a3c3418644430884bb233b936",
+      "result_hash": "1e596b01ba5b48f17b8c14a07d360041",
+      "same_exam_runs": 1,
+      "owner_history_hash": "bd60a973a047828fbb3f199c2d7d78ed",
+      "checkpoints_hash": "653029d0f5726874086079c6ed79a778",
+      "retries_hash": "f99e231ff8afba0230c91b36bf8abb0d",
+      "owner_ledger_hash": "489c7b005bd994072909fcf1e4a62836",
+      "postings": [
+        {
+          "type": "reserve",
+          "balance_delta": 0,
+          "reserved_delta": 1
+        },
+        {
+          "type": "consume",
+          "balance_delta": -1,
+          "reserved_delta": -1
+        }
+      ]
+    }
+  ],
+  "after": [
+    {
+      "id": "4e26b5b6-e605-4c87-a6ad-ce5ed70c31f1",
+      "state": "reserved",
+      "completed_at": null,
+      "run_hash": "104f7d4e9dcf200727f1ed8494a9a0fd",
+      "answer_hash": "5d3eb9db1e9e886d14bd03ddc2a77003",
+      "result_hash": "37a6259cc0c1dae299a7866489dff0bd",
+      "same_exam_runs": 1,
+      "owner_history_hash": "bd60a973a047828fbb3f199c2d7d78ed",
+      "checkpoints_hash": "918a66d8bd16a442d1fcdec0d8e33529",
+      "retries_hash": "0058ddbd607b9017e01d4b5aefea9b1d",
+      "owner_ledger_hash": "489c7b005bd994072909fcf1e4a62836",
+      "postings": [
+        {
+          "type": "reserve",
+          "balance_delta": 0,
+          "reserved_delta": 1
+        }
+      ]
+    },
+    {
+      "id": "6ef28b49-12a5-4825-886d-548f0d9897df",
+      "state": "completed",
+      "completed_at": "2026-10-29 03:41:38.016616+00",
+      "run_hash": "198f944d1a45904f25490271b5ba5322",
+      "answer_hash": "042f9a6a3c3418644430884bb233b936",
+      "result_hash": "1e596b01ba5b48f17b8c14a07d360041",
+      "same_exam_runs": 1,
+      "owner_history_hash": "bd60a973a047828fbb3f199c2d7d78ed",
+      "checkpoints_hash": "653029d0f5726874086079c6ed79a778",
+      "retries_hash": "f99e231ff8afba0230c91b36bf8abb0d",
+      "owner_ledger_hash": "489c7b005bd994072909fcf1e4a62836",
+      "postings": [
+        {
+          "type": "reserve",
+          "balance_delta": 0,
+          "reserved_delta": 1
+        },
+        {
+          "type": "consume",
+          "balance_delta": -1,
+          "reserved_delta": -1
+        }
+      ]
+    }
+  ],
+  "unchanged": true,
+  "rpc": [
+    {
+      "name": "essay_exam_observation",
+      "args": "p_run uuid",
+      "security_definer": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "authenticated": true,
+      "anon": false,
+      "service_role": false,
+      "approved_body_exact": true
+    },
+    {
+      "name": "essay_exam_question_result",
+      "args": "p_run uuid, p_question uuid",
+      "security_definer": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "authenticated": true,
+      "anon": false,
+      "service_role": false,
+      "approved_body_exact": true
+    },
+    {
+      "name": "essay_exam_request_status",
+      "args": "p_key uuid, p_exam uuid",
+      "security_definer": true,
+      "search_path": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "authenticated": true,
+      "anon": false,
+      "service_role": false,
+      "approved_body_exact": true
+    }
+  ],
+  "validation_method": "Production SQL SELECT; authenticated role and transaction-local claims; no browser login or Provider",
+  "owner_reads": "PASS",
+  "foreign_reads": "PT404; request lookup found=false",
+  "failed_result": "PT409",
+  "anon": "42501",
+  "service_role": "42501",
+  "private_result_fields_absent": true,
+  "worker": {
+    "previous_version": "451b8cae-f603-48e9-9ca9-8ccc16b4e3d4",
+    "version": "a462a9a8-4842-4bf9-84d7-7dc9210cedba",
+    "deployment": "15f1d547-bd9b-4549-976e-19663864c2df",
+    "created_on": "2026-10-29T11:25:25.03993Z",
+    "percentage": 100,
+    "code_sha": "2af8f6706a0346721815faaf5ec52ec1b5bfccac",
+    "changed_modules": [
+      "essay_lab/reviewed_runtime.py",
+      "essay_lab/live_worker.py",
+      "essay_lab/cloudflare_runtime.py"
+    ],
+    "added_modules": [
+      "essay_lab/retry_feedback.py"
+    ],
+    "unchanged_modules": 69,
+    "settings_preserved": true,
+    "bindings_preserved": 14,
+    "secret_bindings_inherited": 5,
+    "queues_preserved": true,
+    "rollback_version_available": true,
+    "downloaded_bundle_tests": 74,
+    "downloaded_bundle_tests_result": "PASS",
+    "runtime_evaluation_calls": 0
+  },
+  "sql_files_sha256": {
+    "install.sql": "24204da576c40b7fc61d88c470f7b03d50b38ded7baf623631be4fa9881ace17",
+    "verify.sql": "ea6f130bf84a5136e7a6a75f834346a98da51382c772043ea808bd2f72cfcf07",
+    "rollback.sql": "2499c774f6365dfa092b09dd690368201492094c6478c34f6211f38d79e85f68"
+  },
+  "app_observation_flag": false,
+  "app_built": false,
+  "codex_ddl_executed": false,
+  "owner_install_sequence": [
+    "install",
+    "verify",
+    "rollback",
+    "install"
+  ]
+}

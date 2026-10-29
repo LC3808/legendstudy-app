@@ -1,6 +1,6 @@
 # Essay evaluation stability P0 — 2026-10-29
 
-Status: PARTIAL — local corrections verified; original evaluator/HTTP causes unresolved; Production changes BLOCKED on Owner approval. Branch `codex/essay-evaluation-stability-p0-20261029`, starting from `14bbc5cbf228c5c6ee26a9cb0524084924ce9ecc`. Latest Owner urgent directive and IMG_1292–1295 supersede the earlier device QA handoff for this scope. No Production deployment, evaluation, Credit mutation or History repair is authorized.
+Status: Production read RPC verification and approved Worker deployment PASS (20:25 KST); APP activation/retry acceptance still pending. Original evaluator/HTTP causes remain unresolved. See the operating closeout below. Historical predeployment status follows. Branch `codex/essay-evaluation-stability-p0-20261029`, starting from `14bbc5cbf228c5c6ee26a9cb0524084924ce9ecc`. Latest Owner urgent directive and IMG_1292–1295 supersede the earlier device QA handoff for this scope. At the initial implementation stage, Production deployment, evaluation, Credit mutation and History repair were not authorized. The later explicit Owner deployment authorization below supersedes only the deployment gate.
 
 ## Preservation review before implementation
 
@@ -55,7 +55,7 @@ SWU: original HTTP dispatch/response code/body, client timeout and rejected payl
 
 Prior retry feedback candidate is retained: only EXACT_QUOTE/INDEPENDENT_REVIEW_NOT_ACCEPTED, same question/previous attempt, whitelisted bounded review reasons as untrusted data; original evidence, exact Unicode quotation, student grounding and signed independent review unchanged. Legacy checkpoints can recover symbolic codes, **not missing detailed reasons**. KHU's unrecorded early failures cannot be repaired by assuming review feedback applies.
 
-## Approval package — NOT APPLIED
+## Approval package — historical predeployment state
 
 - [Install](../supabase/candidates/essay_observation_p0/install.sql), [verify SELECT](../supabase/candidates/essay_observation_p0/verify.sql), [rollback](../supabase/candidates/essay_observation_p0/rollback.sql).
 - Three additive authenticated-owner read APIs: `essay_exam_request_status`, `essay_exam_observation`, `essay_exam_question_result`. No tables, RLS changes, activation, reservation, refund, dispatch or historical writes.
@@ -95,3 +95,48 @@ python3 tool/check_wiki_handoff.py
 ```
 
 One old restore fixture incorrectly transitioned a completed question back to failed. It now exercises the valid processing → failed → completed sequence; the new stability test explicitly rejects completed-result regression. Concurrent pre-retry reads are drained before the acknowledged retry's fresh observation. Private input/package replay files were removed after the bounded offline preflight. Existing `.fvmrc` and all earlier branches/worktrees are preserved. No store upload or release-branch merge.
+
+
+## Production verification and deployment — 2026-10-29 20:25 KST
+
+Owner explicitly assigned Codex the operating verification/deployment and clarified the SQL order: **install → verify → rollback → install**. The final install was already present when Codex connected. No SQL reinstall, rollback, migration, RLS change, APP build or evaluation was executed by Codex. Existing [quality and scope decisions](decisions.md) and the seven preservation answers above remain unchanged.
+
+### Read RPCs — PASS
+
+All three exact signatures exist in LegendStudy `stlhijzpjfgwwdgunlsd`: `essay_exam_request_status(uuid,uuid)`, `essay_exam_observation(uuid)`, `essay_exam_question_result(uuid,uuid)`. Every `pg_proc.prosrc` body matches the approved install file byte for byte. All use owner `postgres`, SECURITY DEFINER and empty fixed search_path. Authenticated EXECUTE=true; anon/service_role=false. Existing lifecycle gate and account owner checks remain in every body.
+
+Ran all four SELECT statements in verify.sql. Production functional probes used SELECT calls with transaction-local auth claims and the actual authenticated database role; this tests live SQL authorization, **not a browser login/JWT transport or iPhone test**. Owner request-key lookup returned the existing KHU run. Observation returned official **논제 1 failed / 논제 2 completed**, generation9. The completed-question API returned exactly one answer/result for 논제2, with run state still reserved and local review/telemetry fields absent. Failed 논제1 returned PT409. A different active account returned PT404 for observation/result and found=false for request lookup. Anonymous and service role execution returned 42501.
+
+Supabase advisor reports the intentional authenticated SECURITY DEFINER exposure of these APIs; the explicit owner/lifecycle predicate and denied anon/service grants are verified rather than removing the intended API. No broader advisor remediation was performed. [Advisor explanation](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
+
+### Data invariance — PASS within this execution window
+
+Pre/post deployment hashes are identical for both complete run rows, frozen snapshots, results, all checkpoints, retry requests, the owner's run history and full owner Credit ledger. This comparison begins after Owner's final install; it does not claim a pre-install byte snapshot existed.
+
+- KHU `4e26b5b6-e605-4c87-a6ad-ce5ed70c31f1`: reserved, 논제1 failed, 논제2 completed, original failure plus9 explicit retry generations preserved. Exactly one reserve (balance0/reserved+1), no consume/release/refund. Lease expired; no active retry lease. Same owner/exam run count1.
+- SWU `6ef28b49-12a5-4825-886d-548f0d9897df`: completed, existing result preserved; one reserve and one consume (net1 Credit used), same owner/exam run count1, no accepted follow-up run observed. Original rejected submission HTTP cause remains unknown.
+- No new evaluation, retry, claim, refund, reservation release or Provider call was issued. Neither incident was repaired by changing its stored state.
+
+[Redacted verification receipt and invariant hashes](../tool/cloudflare_essay/p0-production-verification-20261029.json) contains no answer text, authentication material or Provider output.
+
+### Worker deployment — PASS
+
+Actual predeployment API version: `451b8cae-f603-48e9-9ca9-8ccc16b4e3d4` at100%; fetched before upload, not inferred from Wiki. New version **`a462a9a8-4842-4bf9-84d7-7dc9210cedba`**, deployment **`15f1d547-bd9b-4549-976e-19663864c2df`**, **2026-10-29 20:25:25 KST / 100%**. Source bytes pinned to approved Git `2af8f6706a0346721815faaf5ec52ec1b5bfccac` (code94d9f4d; prior retry feedback included).
+
+Downloaded the complete existing Production72-module bundle. Replaced only `essay_lab/live_worker.py`, `essay_lab/reviewed_runtime.py`, `essay_lab/cloudflare_runtime.py`; added `essay_lab/retry_feedback.py`. **69 existing modules unchanged, 3 changed, 1 added =73**. This preserves the full Production Registry, prompts, evaluator contracts, entry/queue handlers and SDK. New diagnostics append through existing lease/writer fences; bounded same-question prior validation feedback does not alter acceptance thresholds, Provider dispatch count or settlement. Unknown transport still reconciles. Existing successful checkpoints are not retried.
+
+All14 bindings preserved;5 secret bindings inherited without reading/replacing their values. Compatibility date2026-10-13, Python flags, CPU30000ms, runtime/handlers, placement, tags, tail/log settings, queue settings and disabled workers.dev/preview unchanged. Only version/deployment descriptive annotations changed as expected. Deployment guard initially detected that expected annotation change after upload; field-by-field comparison confirmed no operating setting drift before activation.
+
+Independent postdeployment API read confirmed100%; re-downloaded all73 modules and matched names/MIME/SHA256 against the exact intended bundle. Ran **74 tests again against the downloaded Production Python modules**, all PASS with synthetic transports only. Predeployment74 tests and isolated PostgreSQL async/Credit/read-API/security/rollback suite also PASS. Old version remains retrievable. No real Provider, evaluation endpoint, queue probe or forced queue retry was used; live evaluation acceptance is NOT TESTED. APP and WEB retain their shared Backend and unchanged Gateway/Credit/History contracts.
+
+### APP activation and rollback
+
+`ESSAY_OBSERVATION_V1_ENABLED` is a compile-time Dart flag, currently false in the preserved local build config and iOS24 build. RPC prerequisites are now verified. Existing-key recovery can use its installed RPC; richer observations/partial-result actions require a **new APP build** with the flag true. No flag/build/store change occurred in this task.
+
+After separate build authorization, copy the existing private config to another ignored local config, set only `ESSAY_OBSERVATION_V1_ENABLED=true`, then run `./tool/device-qa --config <that-local-config> --check` and `./tool/device-qa --config <that-local-config> --build-name 1.0.1 --build-number <next-unused-number>`. Preserve existing identifiers/signing/settings, record source SHA and run real device read-only acceptance before any separately approved retry. Do not publish config secrets or submit to stores automatically.
+
+Worker rollback target is the **live-pinned previous version `451b8cae-f603-48e9-9ca9-8ccc16b4e3d4`**. POST the existing Cloudflare script deployments endpoint with `{"strategy":"percentage","versions":[{"version_id":"451b8cae-f603-48e9-9ca9-8ccc16b4e3d4","percentage":100}]}`, then independently verify active version/settings. Do not run rollback for healthy deployment. This changes no DB data.
+
+RPC rollback uses only the existing rollback.sql after disabling the APP flag (currently already OFF); because it is compile-time, any future enabled deployed APP must first be replaced/disabled appropriately. Never run install/verify/rollback as a normal three-step installation. No rollback was necessary or executed.
+
+Remaining: KHU 논제1 retry needs separate Owner approval; historical failure reason cannot be reconstructed from missing receipts. SWU original HTTP failure remains unresolved. APP flag-enabled rebuild/device acceptance and real evaluation acceptance are not performed. Git follow-up contains deployment evidence/Wiki only; existing `.fvmrc` preserved, no release merge.

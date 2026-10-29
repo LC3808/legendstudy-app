@@ -1,3 +1,7 @@
+## 2026-10-29 — P0 읽기 RPC 운영 검증·Worker 배포 완료
+
+Owner 최종 install 재실행 후 RPC3 존재/정의일치/권한·본인/타인/실패문항 거절 직접 확인. Codex SQL재설치0. 실제 Worker451b8cae→a462a9a8 100%, 기존3모듈수정+1추가/69불변·설정/Secret/Registry보존. 재다운로드74tests·격리DB PASS. 경희/서울여 run·답안·checkpoint·원장·History해시 불변, Provider/기존run재실행0. APPflag OFF·빌드0, 재처리와 실기기 별도단계. [배포·보안·롤백](essay-evaluation-stability-p0-20261029.md#production-verification-and-deployment--2026-10-29-2025-kst).
+
 ## 2026-10-29 — 논술 P0 상태 동기화·실패 진단 / 운영 미적용
 
 별도 essay-evaluation-stability-p0 브랜치. 경희 실제 논제2 완료/논제1 최초+명시재처리9회 실패 확인, UUID순번 표시·중복 PROCESSING 수정. 공통상태·응답유실 키조회·완료문항 조회 후보 및 초기 Worker 실패진단 보강. 실제 고정입력은 transport 직전까지 PASS; 기존 실패코드/서울여 HTTP 원인은 미확정. Analyze0·Flutter1186PASS/7SKIP·Worker74·격리Credit18 및 읽기권한/부분결과/롤백 PASS. 운영쓰기·Provider·기존run재실행0, 경희1Credit예약 보존. 코드94d9f4d 기반 iOS1.0.1(24) 서명빌드·미설치, 기존23 보존. [상세·적용승인대기](essay-evaluation-stability-p0-20261029.md).
