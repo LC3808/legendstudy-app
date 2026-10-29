@@ -21,6 +21,7 @@ import 'package:legendstudy_app/features/essay/source_catalog.dart';
 import 'package:legendstudy_app/features/essay/math_gateway.dart';
 
 import 'package:legendstudy_app/features/essay/shared_history.dart';
+import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 import 'package:legendstudy_app/features/essay/round_history_actions.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
 
@@ -211,6 +212,89 @@ void main() {
     },
   );
 
+  testWidgets(
+    'eligible result action selects included lineage even when paid cycles are supported',
+    (t) async {
+      bool? paid;
+      await t.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: EssayFollowupAction(
+              run: {...parent(), 'continuous_cycles_supported': true},
+              onOpen: (v) async {
+                paid = v;
+              },
+            ),
+          ),
+        ),
+      );
+      expect(find.text('추가 첨삭 · 1 Credit'), findsNothing);
+      await t.tap(find.text('다시 써보기 · 무료 재첨삭'));
+      expect(paid, false);
+      await t.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: EssayFollowupAction(
+              run: {
+                ...parent(),
+                'free_rewrite_available': false,
+                'continuous_cycles_supported': true,
+              },
+              onOpen: (v) async {
+                paid = v;
+              },
+            ),
+          ),
+        ),
+      );
+      await t.tap(find.text('추가 첨삭 · 1 Credit'));
+      expect(paid, true);
+    },
+  );
+
+  test('draft recovery never overwrites edits or copies an unresolved paid submission', () async {
+    final source = SourceDraftGateway('owner', 'q1:additional:parent');
+    await source.saveLocalDraft('이전 경로에서 수정한 답안', 0);
+    final target = SourceDraftGateway('owner', 'q1:rewrite:parent');
+    await target.saveLocalDraft('이미 작성 중인 무료 답안', 0);
+    expect(
+      await recoverIncludedEssayDraft('owner', 'exam', 'q1', parent()),
+      false,
+    );
+    expect((await target.loadDraft()).body, '이미 작성 중인 무료 답안');
+    expect((await source.loadDraft()).body, '이전 경로에서 수정한 답안');
+    await SourceDraftGateway(
+      'owner',
+      'q2:additional:parent',
+    ).saveLocalDraft('보존할 답안', 0);
+    await SourceDraftGateway(
+      'owner',
+      'exam-request:exam:additional:parent',
+    ).saveLocalDraft('{"key":"unconfirmed"}', 0);
+    expect(
+      await recoverIncludedEssayDraft('owner', 'exam', 'q2', parent()),
+      false,
+    );
+    expect(
+      (await SourceDraftGateway('owner', 'q2:rewrite:parent').loadDraft()).body,
+      '',
+    );
+    expect(
+      await recoverIncludedEssayDraft('owner', 'other', 'q2', {
+        ...parent(),
+        'free_rewrite_available': false,
+      }),
+      false,
+    );
+    expect(
+      await recoverIncludedEssayDraft('owner', 'other', 'q2', {
+        ...parent(),
+        '_additional': true,
+      }),
+      false,
+    );
+  });
+
   for (final additional in [false, true]) {
     testWidgets(
       '${additional ? 'paid followup' : 'free rewrite'} quote and submit preserve canonical IDs and Credit consent',
@@ -280,8 +364,21 @@ void main() {
         for (var i = 1; i <= 2; i++) {
           await SourceDraftGateway(
             owner,
-            essayWritingDraftKey('q$i', source),
+            essayWritingDraftKey('q$i', {...source, '_additional': true}),
           ).saveLocalDraft(i == 1 ? '수정 1' : '원본 2', 0);
+          if (!additional) {
+            expect(
+              await recoverIncludedEssayDraft(owner, 'exam', 'q$i', source),
+              true,
+            );
+            expect(
+              (await SourceDraftGateway(
+                owner,
+                essayWritingDraftKey('q$i', {...source, '_additional': true}),
+              ).loadDraft()).body,
+              i == 1 ? '수정 1' : '원본 2',
+            );
+          }
         }
         await mount(
           t,
@@ -312,6 +409,8 @@ void main() {
           (p) => p['action'] == 'submit',
         );
         expect(quote['questionIds'], ['q1', 'q2']);
+        expect(quote['parentId'], additional ? null : 'parent');
+        expect(quote['previousPaidRunId'], additional ? 'parent' : null);
         expect(submit['parentId'], additional ? null : 'parent');
         expect(submit['previousPaidRunId'], additional ? 'parent' : null);
         expect(

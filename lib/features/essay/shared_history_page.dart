@@ -337,6 +337,8 @@ class _Result extends ConsumerWidget {
           );
           return;
         }
+        // Prefer the current server entitlement over a stale paid-action label.
+        if (rows.single['free_rewrite_available'] == true) additional = false;
         if (!additional && rows.single['free_rewrite_available'] != true) {
           final paid = await showDialog<bool>(
             context: context,
@@ -465,13 +467,10 @@ class _Result extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        if (record.examData['state'] == 'completed' &&
-                            record.examData['continuous_cycles_supported'] ==
-                                true)
-                          OutlinedButton(
-                            onPressed: () => openWriter(true),
-                            child: const Text('추가 첨삭 · 1 Credit'),
-                          ),
+                        EssayFollowupAction(
+                          run: record.examData,
+                          onOpen: openWriter,
+                        ),
 
                         ExpansionTile(
                           title: Text(essayAnswerVersion(record)),
@@ -490,6 +489,29 @@ class _Result extends ConsumerWidget {
                         : null,
                   )
           : const Center(child: Text('로그인 상태가 변경되었습니다.')),
+    );
+  }
+}
+
+/// Server eligibility takes precedence over the optional paid-cycle action.
+class EssayFollowupAction extends StatelessWidget {
+  const EssayFollowupAction({
+    super.key,
+    required this.run,
+    required this.onOpen,
+  });
+  final Map<String, dynamic> run;
+  final Future<void> Function(bool additional) onOpen;
+  @override
+  Widget build(BuildContext context) {
+    if (run['state'] != 'completed') return const SizedBox.shrink();
+    final included = run['free_rewrite_available'] == true;
+    if (!included && run['continuous_cycles_supported'] != true) {
+      return const SizedBox.shrink();
+    }
+    return OutlinedButton(
+      onPressed: () => onOpen(!included),
+      child: Text(included ? '다시 써보기 · 무료 재첨삭' : '추가 첨삭 · 1 Credit'),
     );
   }
 }

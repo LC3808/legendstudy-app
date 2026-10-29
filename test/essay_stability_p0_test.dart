@@ -327,6 +327,44 @@ void main() {
       );
     },
   );
+  test('SWU paid quote rejection preserves exact code and predecessor without submit', () async {
+    final c = await client((_) async => throw StateError('unexpected RPC'));
+    final events = <Map<String, dynamic>>[];
+    var calls = 0;
+    final gateway = ExamSubmissionGateway(
+      c,
+      'fixture-a',
+      diagnostic: (v) async => events.add(v),
+      transportOverride: MockClient((r) async {
+        calls++;
+        final payload = jsonDecode(r.body) as Map;
+        expect(payload['action'], 'quote');
+        expect(payload['parentId'], isNull);
+        expect(payload['previousPaidRunId'], 'parent');
+        return http.Response('{"code":"ADDITIONAL_CYCLE_UNAVAILABLE"}', 422);
+      }),
+    );
+    await expectLater(
+      gateway.request({
+        'action': 'quote',
+        'examId': 'exam',
+        'parentId': null,
+        'previousPaidRunId': 'parent',
+        'questionIds': ['q1', 'q2'],
+      }),
+      throwsA(
+        isA<ExamSubmissionRejected>().having(
+          (e) => e.code,
+          'exact code',
+          'ADDITIONAL_CYCLE_UNAVAILABLE',
+        ),
+      ),
+    );
+    expect(calls, 1);
+    expect(events.last['http_status'], 422);
+    expect(events.last['code'], 'ADDITIONAL_CYCLE_UNAVAILABLE');
+    expect(events.last['previousPaidRunId'], 'parent');
+  });
   test(
     'uncertain HTTP response preserves symbolic code without retrying',
     () async {

@@ -39,6 +39,7 @@ class ExamSubmissionGateway {
       'examId': payload['examId'],
       'key': payload['key'],
       'parentId': payload['parentId'],
+      'previousPaidRunId': payload['previousPaidRunId'],
       'phase': phase,
       'http_status': status,
       'code': code != null && RegExp(r'^[A-Z_0-9]{1,80}$').hasMatch(code)

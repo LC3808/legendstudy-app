@@ -1,3 +1,41 @@
+import 'source_draft.dart';
+
+/// Recover TEXT edits from the old paid entry only into an empty included draft.
+/// The source is retained; image drafts and existing destination edits are untouched.
+Future<bool> recoverIncludedEssayDraft(
+  String owner,
+  String examKey,
+  String questionKey,
+  Map<String, dynamic> run,
+) async {
+  if (run['_additional'] == true ||
+      run['free_rewrite_available'] != true ||
+      run['parent_id'] != null ||
+      run['id'] is! String) {
+    return false;
+  }
+  final pending = await SourceDraftGateway(
+    owner,
+    'exam-request:$examKey:additional:${run['id']}',
+  ).loadDraft();
+  if (pending.body.isNotEmpty) return false;
+  final target = SourceDraftGateway(owner, '$questionKey:rewrite:${run['id']}');
+  final old = await target.loadDraft();
+  if (old.body.isNotEmpty || (await target.loadImages()).isNotEmpty) {
+    return false;
+  }
+  final source = SourceDraftGateway(
+    owner,
+    '$questionKey:additional:${run['id']}',
+  );
+  final draft = await source.loadDraft();
+  if (draft.body.isEmpty || (await source.loadImages()).isNotEmpty) {
+    return false;
+  }
+  await target.saveLocalDraft(draft.body, old.revision);
+  return true;
+}
+
 /// Frozen question set and parent-relative TEXT revisions, shared with the Web
 /// submission contract. This does not grant eligibility or mutate a saved draft.
 List<Map<String, dynamic>> examRewriteAnswers(

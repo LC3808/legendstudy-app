@@ -78,7 +78,7 @@ class SourceCatalogPage extends ConsumerWidget {
       owner: owner,
       catalog: catalog,
       rewriteRun: rewriteRun,
-      loadCatalog: (university) {
+      loadCatalog: (university) async {
         Future<SourceCatalog> load(String? university) => SourceCatalog.load(
           university: university,
           browse: (id) async {
@@ -96,7 +96,22 @@ class SourceCatalogPage extends ConsumerWidget {
               ?.accessToken,
         );
         if (rewriteRun == null) return load(university);
-        return SourceCatalog.forHistory(rewriteRun!, load);
+        final restored = await SourceCatalog.forHistory(rewriteRun!, load);
+        for (final exam in restored.exams) {
+          for (final q
+              in (exam['questions'] as List).cast<Map<String, dynamic>>()) {
+            if (ref.read(authStateProvider).value?.userId != owner) {
+              throw StateError('ACCOUNT_CHANGED');
+            }
+            await recoverIncludedEssayDraft(
+              owner,
+              exam['key'] as String,
+              q['key'] as String,
+              rewriteRun!,
+            );
+          }
+        }
+        return restored;
       },
     );
   }
@@ -2263,6 +2278,8 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
                     ? '크레딧이 부족합니다.'
                     : error.code == 'QUOTE_UNAVAILABLE'
                     ? '서버에서 재첨삭 조건을 확인하지 못했어요. 답안은 보존됩니다. 기록에서 이용 가능 여부를 다시 확인해 주세요.'
+                    : error.code == 'ADDITIONAL_CYCLE_UNAVAILABLE'
+                    ? '추가 첨삭은 현재 이용할 수 없어요. 답안은 보존됩니다. 첨삭 결과에서 재첨삭 가능 여부를 확인해 주세요.'
                     : '서버에서 제출을 승인하지 않았어요. 답안은 보존됩니다. 잠시 후 다시 확인해 주세요.')
               : error is StateError
               ? RegExp(r'^[A-Z_]+$').hasMatch(error.message.toString())
