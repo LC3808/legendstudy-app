@@ -582,3 +582,15 @@ List<Map<String, dynamic>> orderedEssayEvaluations(SharedEssayRecord row) {
   });
   return indexed.map((e) => e.$2).toList();
 }
+
+/// A truncated history is not evidence that an independent paid run was first.
+bool essayHistoryMatchesKind(SharedEssayRecord row, String kind) {
+  if (kind == 'all') return true;
+  if (essayIsFollowup(row)) return kind == 'rewrite';
+  if (row.exam &&
+      row.examData['_historyTruncated'] == true &&
+      row.examData['learning_round'] != 1) {
+    return false;
+  }
+  return kind == 'initial';
+}

@@ -127,19 +127,19 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
               onChanged: (v) => setState(() => kind = v ?? 'all'),
             ),
             const SizedBox(height: 16),
+            if (rows.isNotEmpty &&
+                !rows.any((r) => essayHistoryMatchesKind(r, kind)))
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: Text('해당 분류의 첨삭 기록이 없어요.'),
+              ),
             if (rows.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 24),
                 child: Text('아직 첨삭 기록이 없습니다.'),
               ),
             for (final group in sortedEssayHistory(
-              rows
-                  .where(
-                    (r) =>
-                        (kind == 'all' ||
-                        (kind == 'rewrite') == essayIsFollowup(r)),
-                  )
-                  .toList(),
+              rows.where((r) => essayHistoryMatchesKind(r, kind)).toList(),
               byExam,
             )) ...[
               for (final row in group)

@@ -15,7 +15,7 @@ Owner IMG_1299–1306, 22:08/22:13 iPhone 및 22:15 WEB 참고. [기존 P0/무�
 - `ResultAccordion`: 동일 하단 구분선·왼쪽 제목·오른쪽 아이콘·본문16sp/1.6행간. 제출/이전 답안, 종합 평가, `essay_voice.dart` 음성 영역에 재사용. 음성 동작은 변경하지 않음. `comparisonDimension`의 사용자 문구는 **평가 근거 자세히 보기**로 통일.
 - `shared_history_page.dart / EssayResultHeader`: 대학1회/시험1회, 문항·학습 회차·짧은 날짜를 Wrap 그룹으로 배치. T2/오후/교시 등 구분은 보존하며 기존 중복 track/session Chip 묶음을 결과 헤더에서 제거. 완료 직후 단일 run record에 없는 표시 metadata/학습 회차는 같은 owner의 history record를 활용한다. 알 수 없는 회차를 최초로 추정하지 않는다.
 - `_Result`: 개별 결과의 성장 기록 공유 버튼만 제거. PDF 저장 및 다른 성장 기능은 유지. 무료/유료 작성 action·fresh entitlement 재확인·명시적 Credit 동의는 기존 코드 유지.
-- `_HistoryBody`: 대학·시험 검색 입력과 긴 설명 삭제. 최신순/시험별 유지. 전체/최초/재첨삭 필터에서 `essayIsFollowup`이 learning_round>1 및 실제 lineage를 사용하여 유료3차도 재첨삭에 포함. 상태/실패재처리/완료문항 조회 유지.
+- `_HistoryBody`: 대학·시험 검색 입력과 긴 설명 삭제. 최신순/시험별 유지. 전체/최초/재첨삭 필터에서 `essayIsFollowup`이 learning_round>1 및 실제 lineage를 사용하여 유료3차도 재첨삭에 포함. 불완전 조회에서 순번이 확인되지 않는 독립 유료 요청은 최초로 분류하지 않고 전체 기록에 보존하며, 필터에 해당 기록이 없으면 안내한다. 상태/실패재처리/완료문항 조회 유지.
 - `shared_history.dart / orderedEssayEvaluations`: Registry `questions` 순서를 사용하며 metadata 미확인 항목은 원래 순서 유지. UUID로 문항 번호를 만들지 않음. History/회차 목록의 렌더링 및 기본 결과 진입 순서에 적용. 날짜·examLabel은 표시용이며 원본값 변경 없음.
 - `essay_growth_page.dart`: 소개는 **논술 작성 후, 성장 변화를 보여드려요.** 한 줄. 대학/시험명을 분리한 카드. 부모가 expandedId 하나만 관리하여 최신1개 기본 펼침·다른 카드 선택 시 이전 접힘. 펼칠 때 기존 owner 결과를 읽고 캐시. 새 페이지 첫 카드만 기본 펼침, 이동 시 scroll0.
 - 기존 무한 스크롤 제거. **시험 그룹 최대5개/페이지**, 이전/다음·첫/끝 disable, 5개 이하 버튼 숨김. 기존 History server cursor 소비 계약 유지. `_historyTruncated`이면 조회범위 경고와 현재 페이지 번호만 표시하여 전체 페이지 수를 만들지 않음. Production 서버 페이지네이션 신규 설치/확장은 하지 않음.
@@ -31,7 +31,7 @@ Owner IMG_1299–1306, 22:08/22:13 iPhone 및 22:15 WEB 참고. [기존 P0/무�
 
 - 대상 widget/회귀36 PASS: 320px·글씨2배, 반복 원문 보존/단일본문, 제목·회차·T2·교시, 공식문항순서, paid3차필터, 0/1/5/6/10/11개 시험, 이전/다음/scroll0/단일펼침/불완전조회 총페이지 숨김.
 - 합성 fixture의390px Native 결과/그래프 PNG 렌더 확인. 운영 답안이나 평가를 생성하지 않음. 테스트 폰트/렌더와 실제 iPhone 화면은 구분한다.
-- 최종 Flutter Analyze **0 issues**. 전체 Flutter Test **1207 PASS / 7 SKIP** (기존 운영 fixture/외부 검증 관련 SKIP 유지). 이전 요약 어미 변환을 기대하던 테스트는 원문 그대로 표시하는 Owner 정책에 맞춰 전문 보존 검사로 갱신. 초기 검증 실패를 숨기지 않고 수정 후 전체 재검사 PASS.
+- 최종 Flutter Analyze **0 issues**. 전체 Flutter Test **1208 PASS / 7 SKIP** (기존 운영 fixture/외부 검증 관련 SKIP 유지). 이전 요약 어미 변환을 기대하던 테스트는 원문 그대로 표시하는 Owner 정책에 맞춰 전문 보존 검사로 갱신. 초기 검증 실패를 숨기지 않고 수정 후 전체 재검사 PASS.
 - 무료 재첨삭/Observation·요청키복구·실패문항재처리·완료결과·OCR·Credit계약·PDF는 전체 회귀 대상. 실제 운영 평가 호출이나 소셜 로그인, iPhone PDF 공유 sheet 조작은 하지 않는다.
 
 ## 빌드 및 롤백

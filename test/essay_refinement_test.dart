@@ -186,6 +186,23 @@ void main() {
       'run/a',
     ); // Original remains unchanged.
   });
+  test('incomplete history is not classified as a first paid cycle', () {
+    final unknown = SharedEssayRecord(
+      id: 'old',
+      math: false,
+      exam: true,
+      at: DateTime(2026),
+      rewrite: false,
+      evaluations: const [],
+      examData: const {'_historyTruncated': true},
+    );
+    expect(essayHistoryMatchesKind(unknown, 'all'), isTrue);
+    expect(essayHistoryMatchesKind(unknown, 'initial'), isFalse);
+    expect(
+      essayHistoryMatchesKind(row(1, round: 3, truncated: true), 'rewrite'),
+      isTrue,
+    );
+  });
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'one body on collapse and expansion, preserving repeated source ($scale)',
