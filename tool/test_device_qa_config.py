@@ -1,5 +1,6 @@
 """No signing/build/Auth network call: complete and incomplete synthetic configs."""
 import runpy
+import base64
 import tempfile
 from pathlib import Path
 import unittest
@@ -26,6 +27,14 @@ class DeviceQaConfigTests(unittest.TestCase):
         for changes in ({'REVIEW_READ_ONLY':True}, {'APPLE_OAUTH_ENABLED':'false'},
                         {'APP_ENV':'test'}, {'SUPABASE_URL':'https://other.supabase.co'}):
             with self.assertRaises(ValueError): module['validate'](self.fixture() | changes)
+
+    def test_observation_compiler_define_matches_build_config(self):
+        line = 'DART_DEFINES=' + base64.b64encode(b'ESSAY_OBSERVATION_V1_ENABLED=true').decode()
+        verify = module['verify_observation_define']
+        self.assertTrue(verify({'ESSAY_OBSERVATION_V1_ENABLED': True}, line))
+        self.assertFalse(verify({}, ''))
+        with self.assertRaises(RuntimeError): verify({'ESSAY_OBSERVATION_V1_ENABLED': True}, '')
+        with self.assertRaises(RuntimeError): verify({}, line)
 
     def test_native_scheme_and_both_modes_must_match(self):
         with tempfile.TemporaryDirectory() as directory:

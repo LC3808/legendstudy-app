@@ -235,7 +235,11 @@ void main() {
                   : <Map<String, dynamic>>[],
             });
           }
-          if (r.url.path.endsWith('essay_exam_session_status')) {
+          if (r.url.path.endsWith(
+            const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+                ? 'essay_exam_observation'
+                : 'essay_exam_session_status',
+          )) {
             return json({
               'version': 'exam-session-v1',
               'state': 'reserved',
@@ -466,7 +470,11 @@ void main() {
       var retryAccepted = false;
       var statusFails = false;
       final api = await client(t, (r) async {
-        if (r.url.path.endsWith('essay_exam_session_status')) {
+        if (r.url.path.endsWith(
+          const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+              ? 'essay_exam_observation'
+              : 'essay_exam_session_status',
+        )) {
           if (statusFails) {
             return http.Response(
               '{"code":"PT500","message":"fixture read failure"}',
@@ -526,7 +534,12 @@ void main() {
       );
       await t.pumpAndSettle();
       final completed = find.widgetWithText(OutlinedButton, '완료된 결과 보기');
-      expect(t.widget<OutlinedButton>(completed).onPressed, isNull);
+      expect(
+        t.widget<OutlinedButton>(completed).onPressed,
+        const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+            ? isNotNull
+            : isNull,
+      );
       expect(find.text('실패한 문항 다시 처리 · 0 Credit'), findsOneWidget);
       await t.tap(find.text('처리 상태 새로고침'));
       await t.pumpAndSettle();

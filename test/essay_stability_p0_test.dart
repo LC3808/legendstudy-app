@@ -158,6 +158,46 @@ void main() {
     return c;
   }
 
+  test('compiled observation flag selects the RPC and preserves all server states', () async {
+    final c = await client((r) async {
+      expect(
+        r.url.path,
+        '/rest/v1/rpc/${const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED') ? 'essay_exam_observation' : 'essay_exam_session_status'}',
+      );
+      expect(jsonDecode(r.body), {'p_run': 'run'});
+      return http.Response(
+        jsonEncode({
+          'version': 'exam-session-v1',
+          'run_id': 'run',
+          'state': 'reserved',
+          'retry_allowed': true,
+          'questions': [
+            for (final s in [
+              'waiting',
+              'processing',
+              'completed',
+              'failed',
+              'reconciling',
+            ])
+              {'question_id': s, 'label': s, 'state': s},
+          ],
+        }),
+        200,
+        headers: {'content-type': 'application/json'},
+      );
+    });
+    final value = await readExamSessionStatus(c, 'fixture-a', 'run');
+    expect(value.questions.values, [
+      'waiting',
+      'processing',
+      'completed',
+      'failed',
+      'reconciling',
+    ]);
+    expect(value.canRetry, isFalse);
+    expect(value.terminal, isFalse);
+  });
+
   test(
     'partial result reuses Native report without marking the run completed',
     () {
@@ -179,6 +219,76 @@ void main() {
       expect(() => examEvaluationReport(row, id), throwsStateError);
     },
   );
+
+  test('reserved run reads only the requested completed result and propagates denial', () async {
+    final fixture = jsonDecode(
+      File('test/fixtures/exam-history-v1.json').readAsStringSync(),
+    ) as Map;
+    final row = Map<String, dynamic>.from(fixture['before'] as Map)
+      ..['state'] = 'reserved';
+    final paths = <String>[];
+    var denied = false;
+    final c = await client((r) async {
+      paths.add(r.url.path);
+      if (r.url.path.endsWith('essay_exam_history')) {
+        return http.Response(
+          jsonEncode({
+            'version': 'essay-exam-history-v1',
+            'runs': [row],
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }
+      expect(r.url.path, '/rest/v1/rpc/essay_exam_question_result');
+      expect(jsonDecode(r.body), {'p_run': 'first', 'p_question': 'question'});
+      if (denied) {
+        return http.Response(
+          jsonEncode({
+            'code': 'PT409',
+            'message': 'QUESTION_RESULT_UNAVAILABLE',
+          }),
+          409,
+          headers: {'content-type': 'application/json'},
+        );
+      }
+      return http.Response(
+        jsonEncode({
+          ...row,
+          'result_scope': 'completed_question',
+          'question_state': 'completed',
+        }),
+        200,
+        headers: {'content-type': 'application/json'},
+      );
+    });
+    final history = SharedEssayHistory(c, 'fixture-a');
+    final result = await history.evaluationReport(
+      false,
+      'first/question',
+      exam: true,
+    );
+    expect(result.report.answer, 'First answer');
+    expect(row['state'], 'reserved');
+    expect(paths, [
+      '/rest/v1/rpc/essay_exam_history',
+      '/rest/v1/rpc/essay_exam_question_result',
+    ]);
+    denied = true;
+    await expectLater(
+      history.evaluationReport(false, 'first/question', exam: true),
+      throwsA(isA<PostgrestException>()),
+    );
+    final reads = paths.length;
+    await expectLater(
+      SharedEssayHistory(
+        c,
+        'foreign',
+      ).evaluationReport(false, 'first/question', exam: true),
+      throwsStateError,
+    );
+    expect(paths.length, reads);
+  });
 
   test(
     'submit rejection records HTTP/code without student answer or token',

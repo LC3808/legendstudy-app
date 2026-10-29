@@ -63,7 +63,11 @@ void main() {
                 request: request,
               );
             }
-            if (request.url.path.endsWith('essay_exam_session_status')) {
+            if (request.url.path.endsWith(
+              const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+                  ? 'essay_exam_observation'
+                  : 'essay_exam_session_status',
+            )) {
               return http.Response(
                 jsonEncode({
                   'version': 'exam-session-v1',
