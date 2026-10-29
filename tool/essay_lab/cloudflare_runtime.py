@@ -23,6 +23,12 @@ def receipt_checkpoint_key(value):
                 all(c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789' for c in code),
                 'INVALID_FAILURE_RECEIPT')
         return 'validation-failure-'+digest(value)
+    if value.get('component')=='execution_failure':
+        from .live_worker import execution_failure, ProviderFailure
+        require(value.get('stage') in ('binding','input','provider','identity','telemetry'), 'INVALID_FAILURE_RECEIPT')
+        canonical=execution_failure(ProviderFailure(value.get('code'),http_status=value.get('http_status')),value['stage'])
+        require(value==canonical,'INVALID_FAILURE_RECEIPT')
+        return 'execution-failure'
     return 'receipt-'+value['output_sha256']
 
 class CloudflareExamRuntime:

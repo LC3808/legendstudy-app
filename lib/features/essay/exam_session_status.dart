@@ -47,11 +47,19 @@ class ExamSessionStatus {
 Future<ExamSessionStatus> readExamSessionStatus(
   SupabaseClient client,
   String owner,
-  String run,
-) async {
+  String run, {
+  bool observationEnabled = const bool.fromEnvironment(
+    'ESSAY_OBSERVATION_V1_ENABLED',
+  ),
+}) async {
   final history = SharedEssayHistory(client, owner)..checkOwner();
   final value = await client
-      .rpc<dynamic>('essay_exam_session_status', params: {'p_run': run})
+      .rpc<dynamic>(
+        observationEnabled
+            ? 'essay_exam_observation'
+            : 'essay_exam_session_status',
+        params: {'p_run': run},
+      )
       .timeout(const Duration(seconds: 10));
   history.checkOwner();
   if (value is! Map) throw const FormatException('INVALID_EXAM_STATUS');

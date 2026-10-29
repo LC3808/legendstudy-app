@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'exam_session_status.dart';
+import 'exam_session_store.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,7 @@ import 'exam_submission.dart';
 import 'math_gateway.dart';
 import 'math_exam_session.dart';
 import 'shared_history.dart';
+import 'shared_history_page.dart' show openSharedEssayResult;
 import 'source_draft.dart';
 
 class RoundHistoryActions extends ConsumerStatefulWidget {
@@ -47,6 +49,7 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
 
   Map<String, dynamic>? status;
   bool busy = false;
+  bool statusFresh = false;
   String? notice;
   bool get current =>
       mounted && ref.read(authStateProvider).value?.userId == widget.owner;
@@ -121,11 +124,14 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
                   params: {'p_run': widget.record.id},
                 )
                 .timeout(const Duration(seconds: 10))
-          : (await readExamSessionStatus(
-              client,
-              widget.owner,
-              widget.record.id,
-            )).data;
+          : (await (retry
+                    ? ref
+                          .read(examSessionStoreProvider(widget.owner))
+                          .refreshAfterRetry(widget.record.id)
+                    : ref
+                          .read(examSessionStoreProvider(widget.owner))
+                          .refresh(widget.record.id)))
+                .data;
       history.checkOwner();
       if (data is! Map ||
           data['version'] !=
@@ -136,6 +142,7 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
       if (current) {
         setState(() {
           status = Map<String, dynamic>.from(data);
+          statusFresh = true;
           if (retry) {
             notice = '실패 문항 재처리가 접수됐어요. 완료된 문항은 보존됩니다.';
           } else if (data['state'] == 'completed') {
@@ -155,7 +162,9 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
     } catch (_) {
       if (current) {
         setState(() {
-          status = null;
+          statusFresh = false;
+          // Preserve the last confirmed state on a failed refresh. A retry
+          // always performs its own fresh server authorization before dispatch.
           notice = retry
               ? '재처리 접수를 확인하지 못했어요. 상태를 새로고침해 주세요. 기존 답안과 결과는 보존됩니다.'
               : '처리 상태를 확인하지 못했어요. 연결을 확인하고 다시 시도해 주세요.';
@@ -177,6 +186,22 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.record.math) {
+      ref.listen(
+        examSessionObservationProvider((
+          owner: widget.owner,
+          run: widget.record.id,
+        )),
+        (_, next) {
+          if (current && next.value != null) {
+            setState(() {
+              status = next.value!.data;
+              statusFresh = true;
+            });
+          }
+        },
+      );
+    }
     ref.listen(authStateProvider, (_, next) {
       if (next.value?.userId == widget.owner && status == null && !busy) {
         unawaited(work(false));
@@ -191,13 +216,40 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
         if (status != null)
           for (final q in status!['questions'] as List)
             Text(
-              '${essayExamQuestionLabel(widget.record, q['question_id'] as String)} · ${const {'completed': '완료', 'failed': '재처리 필요', 'processing': '진행 중', 'waiting': '대기 중', 'requested': '대기 중', 'reconciling': '처리 확인 중'}['${q['state']}'.toLowerCase()] ?? '처리 확인 중'}',
+              '${q['label'] is String ? q['label'] : essayExamQuestionLabel(widget.record, q['question_id'] as String)} · ${const {'completed': '완료', 'failed': '재처리 필요', 'processing': '진행 중', 'waiting': '대기 중', 'requested': '대기 중', 'reconciling': '처리 확인 중'}['${q['state']}'.toLowerCase()] ?? '처리 확인 중'}',
             ),
+        if (!widget.record.math && status != null)
+          for (final q in status!['questions'] as List)
+            if (q['state'] == 'completed')
+              TextButton(
+                onPressed:
+                    const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+                    ? () => openSharedEssayResult(
+                        context,
+                        ref,
+                        widget.owner,
+                        widget.record,
+                        {
+                          'id': '${widget.record.id}/${q['question_id']}',
+                          'state': 'COMPLETED',
+                        },
+                      )
+                    : null,
+                child: Text(
+                  '${q['label'] is String ? q['label'] : essayExamQuestionLabel(widget.record, q['question_id'] as String)} · 완료된 결과 보기',
+                ),
+              ),
+        if (!widget.record.math &&
+            status != null &&
+            !const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED') &&
+            ExamSessionStatus(status!).questions.values.contains('completed'))
+          const Text('완료된 문항의 결과는 보존됩니다. 문항별 결과 조회는 준비 중입니다.'),
         TextButton(
           onPressed: busy ? null : () => work(false, manual: true),
           child: const Text('회차 처리 상태 확인'),
         ),
-        if (status != null &&
+        if (statusFresh &&
+            status != null &&
             (widget.record.math
                 ? mathSessionRetryable(status!)
                 : ExamSessionStatus(status!).canRetry))

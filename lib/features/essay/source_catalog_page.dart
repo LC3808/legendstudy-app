@@ -1,5 +1,6 @@
 import 'exam_presentation.dart';
 import 'exam_session_status.dart';
+import 'exam_session_store.dart';
 import 'exam_rewrite.dart';
 import 'exam_draft_actions.dart';
 import 'answer_sections.dart';
@@ -1670,6 +1671,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   String? runState;
   bool resultOpened = false;
   Map<String, dynamic>? completedRun;
+  Map<String, dynamic>? observedRun;
   Map<String, String> questionStates = {};
   bool confirmedRunState = false;
   ExamSessionStatus? sessionStatus;
@@ -1704,7 +1706,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   bool get runPending =>
       submittedRun != null && runState != 'completed' && runState != 'failed';
 
-  Future<void> pollStatus({bool manual = false}) async {
+  Future<void> pollStatus({
+    bool manual = false,
+    bool afterRetry = false,
+  }) async {
     if (polling) return;
     statusPoll?.cancel();
     final client = ref.read(supabaseClientProvider);
@@ -1720,11 +1725,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       if (!mounted) return;
       if (rows.length != 1) throw StateError('Submission history pending');
       try {
-        final detail = await readExamSessionStatus(
-          client,
-          widget.owner,
-          submittedRun!,
-        );
+        final store = ref.read(examSessionStoreProvider(widget.owner));
+        final detail = await (afterRetry
+            ? store.refreshAfterRetry(submittedRun!)
+            : store.refresh(submittedRun!));
         if (!mounted) return;
         sessionStatus = detail;
         questionStates = detail.questions;
@@ -1735,6 +1739,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       }
 
       if (!mounted) return;
+      observedRun = rows.single;
       final state = rows.single['state'];
       runState = state as String?;
       confirmedRunState = true;
@@ -1826,7 +1831,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       );
       if (!mounted) return;
       setState(() => notice = '실패 문항 재처리가 접수됐어요. 완료된 문항은 보존됩니다.');
-      await pollStatus();
+      await pollStatus(afterRetry: true);
     } catch (error) {
       if (mounted) {
         setState(
@@ -1879,8 +1884,25 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       final saved = await pending.loadDraft();
       if (saved.body.isEmpty || !mounted) return;
       final stored = jsonDecode(saved.body) as Map<String, dynamic>;
-      final runId = stored['runId'];
-      if (runId is! String) return;
+      var runId = stored['runId'] as String?;
+      if (runId == null && stored['key'] is String) {
+        final client = ref.read(supabaseClientProvider);
+        if (client == null) return;
+        runId = await recoverExamRequest(
+          client,
+          widget.owner,
+          key: stored['key'] as String,
+          exam: widget.exam['dbExamId'] as String,
+          parent: parentId,
+          previousPaid: previousPaidId,
+        );
+        if (runId == null) return;
+        await pending.saveLocalDraft(
+          jsonEncode({...stored, 'runId': runId}),
+          saved.revision,
+        );
+      }
+      if (runId == null || !mounted) return;
       setState(() {
         submittedRun = runId;
         submittedRequestKey = stored['key'] as String?;
@@ -1954,6 +1976,33 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     }
     setState(() => busy = true);
     try {
+      // An earlier lost response is resolved read-only BEFORE checking whether
+      // its parent is still eligible. An accepted child consumes eligibility.
+      final unresolved = await pending.loadDraft();
+      if (unresolved.body.isNotEmpty) {
+        final old = jsonDecode(unresolved.body) as Map<String, dynamic>;
+        final client = ref.read(supabaseClientProvider);
+        if (client == null) throw StateError('로그인 상태를 확인해 주세요.');
+        final recovered =
+            old['runId'] as String? ??
+            await recoverExamRequest(
+              client,
+              widget.owner,
+              key: old['key'] as String,
+              exam: widget.exam['dbExamId'] as String,
+              parent: parentId,
+              previousPaid: previousPaidId,
+            );
+        if (recovered != null) {
+          await pending.saveLocalDraft(
+            jsonEncode({...old, 'runId': recovered}),
+            unresolved.revision,
+          );
+          await restoreInFlightRun();
+          return;
+        }
+        // Confirmed absent: only the existing key and exact payload may replay.
+      }
       final selected = (widget.exam['questions'] as List)
           .cast<Map<String, dynamic>>()
           .where((q) => widget.included.contains(q['key']))
@@ -2230,13 +2279,20 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
   Future<void> openCompletedResult() async {
     final row = completedRun;
     if (!mounted || row == null) return;
-    final questions = (row['question_ids'] as List).cast<String>();
+    final ids = (row['question_ids'] as List).cast<String>().toSet();
+    final questions = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .map((q) => q['dbQuestionId'])
+        .whereType<String>()
+        .where(ids.contains)
+        .toList();
+    if (questions.isEmpty) questions.addAll(ids);
     if (questions.isEmpty) return;
     final record = SharedEssayRecord(
       id: row['id'] as String,
       math: false,
       exam: true,
-      examData: row,
+      examData: {...row, 'questions': widget.exam['questions']},
       at: DateTime.parse(row['created_at'] as String),
       rewrite: row['parent_id'] != null,
       evaluations: [
@@ -2253,6 +2309,53 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     );
   }
 
+  Future<void> openAvailableQuestionResults() async {
+    final row = observedRun;
+    if (row == null || !mounted) return;
+    final choices = (widget.exam['questions'] as List)
+        .cast<Map<String, dynamic>>()
+        .where((q) => questionStates[q['dbQuestionId']] == 'completed')
+        .toList();
+    if (choices.isEmpty) return;
+    final id = choices.length == 1
+        ? choices.single['dbQuestionId'] as String
+        : await showModalBottomSheet<String>(
+            context: context,
+            builder: (context) => SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final q in choices)
+                    ListTile(
+                      title: Text('${q['label']} · 완료된 결과 보기'),
+                      onTap: () =>
+                          Navigator.pop(context, q['dbQuestionId'] as String),
+                    ),
+                ],
+              ),
+            ),
+          );
+    if (!mounted || id == null) return;
+    final record = SharedEssayRecord(
+      id: row['id'] as String,
+      math: false,
+      exam: true,
+      examData: {...row, 'questions': widget.exam['questions']},
+      at: DateTime.parse(row['created_at'] as String),
+      rewrite: row['parent_id'] != null,
+      evaluations: [
+        {'id': '${row['id']}/$id', 'state': 'COMPLETED'},
+      ],
+    );
+    await openSharedEssayResult(
+      context,
+      ref,
+      widget.owner,
+      record,
+      record.evaluations.single,
+    );
+  }
+
   void _openHistory() => Navigator.of(context).push(
     MaterialPageRoute<void>(builder: (_) => const SharedEssayHistoryPage()),
   );
@@ -2262,6 +2365,20 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     final auth = ref.watch(authStateProvider);
     if (auth.isLoading || auth.hasError || auth.value?.userId != widget.owner) {
       return const SizedBox.shrink();
+    }
+    if (submittedRun case final run?) {
+      ref.listen(
+        examSessionObservationProvider((owner: widget.owner, run: run)),
+        (_, next) {
+          final observed = next.value;
+          if (mounted && observed != null && submittedRun == run) {
+            setState(() {
+              sessionStatus = observed;
+              questionStates = observed.questions;
+            });
+          }
+        },
+      );
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2465,7 +2582,9 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       ],
       if (!completed && questionStates.values.contains('completed'))
         const Text(
-          '완료된 결과는 보존되며, 전체 문항의 처리가 끝나면 조회할 수 있어요.',
+          bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+              ? '완료된 문항의 결과를 먼저 확인할 수 있어요.'
+              : '완료된 결과는 보존되며, 전체 문항의 처리가 끝나면 조회할 수 있어요.',
           style: TextStyle(fontSize: 13, color: AppTokens.textSecondary),
         ),
       const SizedBox(height: AppTokens.space4),
@@ -2498,7 +2617,13 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
               ),
             ),
           if (!completed && questionStates.values.contains('completed'))
-            const OutlinedButton(onPressed: null, child: Text('완료된 결과 보기')),
+            OutlinedButton(
+              onPressed:
+                  const bool.fromEnvironment('ESSAY_OBSERVATION_V1_ENABLED')
+                  ? openAvailableQuestionResults
+                  : null,
+              child: const Text('완료된 결과 보기'),
+            ),
           if (completed)
             FilledButton(
               style: FilledButton.styleFrom(

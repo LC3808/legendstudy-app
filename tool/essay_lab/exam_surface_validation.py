@@ -171,6 +171,9 @@ def cases(sql, root, user, account, exam, question):
     if async_mode:
         from .session_retry_validation import cases as retry_cases
         retry_cases(sql,root,other,exam,question,initial)
+    if async_mode and os.environ.get('ESSAY_TEST_OBSERVATION') == '1':
+        from .observation_validation import cases as observation_cases
+        observation_cases(sql,root,user,account,exam,question,initial)
     # Exact legacy Ledger facts survive account anonymization; answer/result runs do not.
     sql(f"update public.credit_accounts set user_id=null where id='{account}'")
     assert sql(f"select count(*) from essay_exam_private.runs where account_id='{account}'")=='0'

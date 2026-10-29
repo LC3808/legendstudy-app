@@ -115,6 +115,27 @@ class SharedEssayHistory {
         /* Stored title is the fallback. */
       }
       checkOwner();
+      if (catalog != null) {
+        // The base catalog does not contain every Registry exam. Resolve only
+        // universities represented by owned history, using the existing browse
+        // policy. UUID sort order is never an official question number.
+        final universities = catalog.universities.where(
+          (u) => exams.any((r) => r['university'] == u['name']),
+        );
+        for (final university in universities.toList()) {
+          final source = university['sourceUniversityId'] as String;
+          try {
+            final raw = await client.rpc<dynamic>(
+              'essay_browse_catalog',
+              params: {'p_university': source},
+            );
+            checkOwner();
+            catalog = catalog!.withRegistered(source, raw);
+          } catch (_) {
+            checkOwner(); // Retain stored history when metadata is unavailable.
+          }
+        }
+      }
     }
     Map<String, dynamic> metadata(Map<String, dynamic> r) {
       final e = catalog?.exams
@@ -170,7 +191,7 @@ class SharedEssayHistory {
               {
                 'id': '${r['id']}/$q',
                 'state': r['state'] == 'reserved'
-                    ? 'PROCESSING'
+                    ? 'UNKNOWN'
                     : (r['state'] as String).toUpperCase(),
               },
           ],
@@ -188,7 +209,22 @@ class SharedEssayHistory {
       if (parts.length != 2) throw const FormatException('INVALID_EXAM_ID');
       final rows = await examRuns(parts[0]);
       if (rows.length != 1) throw StateError('READ_FAILED');
-      final row = rows.single;
+      var row = rows.single;
+      if (row['state'] == 'reserved') {
+        final result = await client.rpc<dynamic>(
+          'essay_exam_question_result',
+          params: {'p_run': parts[0], 'p_question': parts[1]},
+        );
+        checkOwner();
+        if (result is! Map ||
+            result['id'] != parts[0] ||
+            (result['state'] != 'completed' &&
+                (result['result_scope'] != 'completed_question' ||
+                    result['question_state'] != 'completed'))) {
+          throw const FormatException('INVALID_PARTIAL_RESULT');
+        }
+        row = Map<String, dynamic>.from(result);
+      }
       final report = examEvaluationReport(row, parts[1]);
       EvaluationReport? before;
       if (row['parent_id'] is String) {
@@ -399,7 +435,9 @@ List<List<SharedEssayRecord>> groupEssayHistory(List<SharedEssayRecord> rows) {
   final groups = <String, List<SharedEssayRecord>>{};
   for (final row in rows) {
     final exam = row.examData['exam_id'];
-    final key = row.exam && exam is String && exam.isNotEmpty ? 'exam:$exam' : essayExamGroupKey(row);
+    final key = row.exam && exam is String && exam.isNotEmpty
+        ? 'exam:$exam'
+        : essayExamGroupKey(row);
     groups.putIfAbsent(key, () => []).add(row);
   }
   for (final group in groups.values) {
@@ -477,22 +515,15 @@ String essayAnswerVersion(SharedEssayRecord row) {
   return row.rewrite ? '수정 제출 답안' : '최초 제출 답안';
 }
 
-/// Registry label for an exam question (e.g. "문제 1"). When the source catalog
-/// is not loaded, falls back to the question's real 1-based position in the
-/// run's own `question_ids`, so the record still shows a number instead of a
-/// bare "문항". Never fabricates a number for a question not in the run.
+/// Only canonical Registry metadata can supply an official question label.
+/// History question_ids are UUID-sorted, not an official display order.
 String essayExamQuestionLabel(SharedEssayRecord row, String questionId) {
   final questions = (row.examData['questions'] as List?)
       ?.cast<Map<String, dynamic>>();
-  final label =
-      questions
-              ?.where((q) => q['dbQuestionId'] == questionId)
-              .firstOrNull?['label']
-          as String?;
-  if (label != null && label.isNotEmpty) return label;
-  final ids = (row.examData['question_ids'] as List?)?.cast<String>();
-  final index = ids?.indexOf(questionId) ?? -1;
-  return index >= 0 ? '문항 ${index + 1}' : '문항';
+  final label = questions
+      ?.where((q) => q['dbQuestionId'] == questionId)
+      .firstOrNull?['label'];
+  return label is String && label.isNotEmpty ? label : '문항';
 }
 
 List<List<SharedEssayRecord>> sortedEssayHistory(

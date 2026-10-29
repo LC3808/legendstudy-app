@@ -38,7 +38,9 @@ void main() {
       'saved run polls beyond 100s, pauses, resumes and handles $terminal',
       (tester) async {
         var state = 'reserved';
-        var questionState = 'completed';
+        // A reviewed success cannot later become failed. Exercise the legitimate
+        // processing -> failed -> completed lifecycle here.
+        var questionState = 'processing';
         final fixture = jsonDecode(
           File('test/fixtures/exam-history-v1.json')
               .readAsStringSync()
@@ -176,7 +178,7 @@ void main() {
         await tester.pump();
         await tester.pump();
         expect(find.text('첨삭을 진행하고 있어요'), findsOneWidget);
-        expect(find.text('완료'), findsOneWidget);
+        expect(find.text('완료'), findsNothing);
         expect(find.text('잠시 쉬어가세요 ☕'), findsOneWidget);
         questionState = 'failed';
         await tester.pump(const Duration(seconds: 3));

@@ -367,7 +367,12 @@ EvaluationReport examEvaluationReport(
   Map<String, dynamic> run,
   String questionId,
 ) {
-  if (run['state'] != 'completed') throw StateError('EVALUATION_NOT_COMPLETED');
+  if (run['state'] != 'completed' &&
+      !(run['state'] == 'reserved' &&
+          run['result_scope'] == 'completed_question' &&
+          run['question_state'] == 'completed')) {
+    throw StateError('EVALUATION_NOT_COMPLETED');
+  }
   final questions = evaluationList(evaluationObject(run['result'])['questions'])
       .map(evaluationObject);
   final matches = questions

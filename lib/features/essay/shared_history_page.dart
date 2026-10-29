@@ -197,7 +197,10 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
                             ),
                             child: const Text('처리 상태 · 재첨삭 확인'),
                           ),
-                      for (final e in row.evaluations)
+                      for (final e in row.evaluations.where(
+                        (e) =>
+                            !(row.exam && row.examData['state'] == 'reserved'),
+                      ))
                         e['state'] == 'COMPLETED'
                             ? TextButton(
                                 onPressed: () => openResult(row, e),
@@ -328,6 +331,12 @@ class _Result extends ConsumerWidget {
             rows.length != 1) {
           return;
         }
+        if (rows.single['state'] != 'completed') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('현재 회차의 처리가 끝난 뒤 다시 작성할 수 있어요.')),
+          );
+          return;
+        }
         if (!additional && rows.single['free_rewrite_available'] != true) {
           final paid = await showDialog<bool>(
             context: context,
@@ -437,8 +446,7 @@ class _Result extends ConsumerWidget {
                         ),
                         EssayExamBadges(
                           data: record.examData,
-                          // Registry label, else the run's real question number;
-                          // never a stuck "문항 정보 확인 중".
+                          // Only Registry metadata supplies a question number.
                           questionLabel: record.exam
                               ? essayExamQuestionLabel(record, questionId)
                               : '문항',
@@ -457,8 +465,9 @@ class _Result extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        if (record.examData['continuous_cycles_supported'] ==
-                            true)
+                        if (record.examData['state'] == 'completed' &&
+                            record.examData['continuous_cycles_supported'] ==
+                                true)
                           OutlinedButton(
                             onPressed: () => openWriter(true),
                             child: const Text('추가 첨삭 · 1 Credit'),
@@ -475,7 +484,10 @@ class _Result extends ConsumerWidget {
                           ),
                       ],
                     ),
-                    onRewrite: record.exam ? () => openWriter(false) : null,
+                    onRewrite:
+                        record.exam && record.examData['state'] == 'completed'
+                        ? () => openWriter(false)
+                        : null,
                   )
           : const Center(child: Text('로그인 상태가 변경되었습니다.')),
     );
