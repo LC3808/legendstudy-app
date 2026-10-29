@@ -1,6 +1,6 @@
-## 2026-10-29 — APP 실기기 2차 수정·검수 빌드 준비
+## 2026-10-29 — APP 실기기 2차 수정·서명 검수 빌드
 
-기준 LOCAL/REMOTE80a5ab4d 확인, 별도 app-device-qa-fixes 브랜치. 서울여 완료/명시적재처리1/1Credit정산, 광운 published gate, iPhone0.1.0(1) 설치 확인. APP 상태/재처리/재첨삭 계약·작성/선택 UX 수정, Worker 품질거절 피드백 및 좁은 Draft 권한 SQL 후보 준비. Analyze0, Flutter1178PASS/7SKIP, offline28·격리Credit18·Draft6PASS. 운영 변경·실평가0. [근거·검증·승인 대기](app-device-qa-fixes-20261029.md).
+기준 LOCAL/REMOTE80a5ab4d 확인, 별도 app-device-qa-fixes 브랜치. 서울여 완료/명시적재처리1/1Credit정산, 광운 published gate, iPhone0.1.0(1) 설치 확인. APP 상태/재처리/재첨삭 계약·작성/선택 UX 수정, Worker 품질거절 피드백 및 좁은 Draft 권한 SQL 후보 준비. Analyze0, Flutter1178PASS/7SKIP, offline28·격리Credit18·Draft6PASS. 코드a65cc76 기반 iOS1.0.1(23) 서명빌드·기기provision 확인, 미설치. 운영 변경·실평가0. [근거·검증·승인 대기](app-device-qa-fixes-20261029.md).
 
 ## 2026-10-29 — APP 실기기 수정·새 Release 산출물
 

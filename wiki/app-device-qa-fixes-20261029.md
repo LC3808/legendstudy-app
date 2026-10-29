@@ -1,6 +1,6 @@
 # APP 2026-10-29 실기기 2차 수정
 
-상태: APP 구현·자동 검증 완료, iOS 검수 빌드 준비 중. 운영 Worker/광운 Draft 및 실제 인증·재첨삭 검증은 대기. 기존 [1차 수정](app-owner-fixes-20261029.md)과 구분한다.
+상태: APP 구현·자동 검증 완료, iOS 검수 빌드 완료(미설치). 운영 Worker/광운 Draft 및 실제 인증·재첨삭 검증은 대기. 기존 [1차 수정](app-owner-fixes-20261029.md)과 구분한다.
 기준 `codex/app-owner-fixes-20261029` LOCAL/REMOTE `80a5ab4dbeb331fb9278d4a1888a15d6ab9ae39e` 확인 후 별도 `codex/app-device-qa-fixes-20261029` 생성. 기존 통합 worktree, 원본 APP/Claude 브랜치, 미추적 `.fvmrc` 보존. 운영 변경·Provider 평가·Credit 쓰기·스토어 제출 없음.
 
 ## Owner 범위 및 보존 검토
@@ -12,8 +12,8 @@
 2. run snapshot·공식 패키지·기존 checkpoint·답안은 변경하지 않는다.
 3. 새 Draft 권한 후보는 사용자·문항·만료·승인 사유만 별도 기록한다. 기존 이력 UPDATE/삭제나 전체 공개 변경은 없다.
 4. 동일 Auth UID와 기존 WEB/APP session/Draft RPC·RLS를 사용한다.
-5. 학습 사실, 과금 유형, 재첨삭 권리, 실패 재처리를 혼합하지 않는다.
-6. 운영 조회는 지정 사례/관련 함수/소규모 권한 정보에 한정한다. 학생 원문·JWT·키는 저장소에 기록하지 않는다.
+5. 답안/재작성은 Learning, 저장 권한 승인은 운영 Decision이다. 입시 Outcome 수집은 없다. 학습 사실·과금 유형·재첨삭 권리·실패 재처리를 혼합하지 않는다.
+6. 운영 조회는 지정 사례/관련 함수/소규모 권한 정보에 한정한다. 학생 원문·JWT·키는 저장소에 기록하지 않는다. 권한 후보는 효력14일·Auth 사용자 삭제 시 cascade이며 기존 답안은 기존 삭제 정책을 따른다.
 7. UI 파생 상태는 원장 사실로 저장하지 않는다. 테스트는 합성 입력·격리 DB/HTTP이며 운영 성공으로 계산하지 않는다.
 
 이 범위는 [Native 디자인](design-system.md), [앱 통합 결정](app-final-integration-20261028.md), [기존 Credit/학습 회차 분리](essay-growth-history-ui-20261026.md)를 유지하는 구현이다. 수리 IMAGE와 OCR TEXT 입력은 분리한다.
@@ -96,7 +96,19 @@ baseline 함수 source MD5 `3c3dbdc274623c96f25836b9508840af`을 검사한다. �
 
 ### Commit 및 iOS 산출물
 
-APP 코드 Commit / iOS 1.0.1(23) / 원격 SHA는 빌드 후 이 절에 기록한다. 최종 문서 정리만 후속 commit으로 분리한다.
+- APP 코드/테스트/후보 Commit: `a65cc760a2d3319066e3a0cd1e69ee20763aa26f` (`fix(app): repair device QA retry, rewrite and draft flows`). 이 SHA의 tracked APP source clean 상태에서 빌드.
+- 브랜치: `codex/app-device-qa-fixes-20261029`. 아래 빌드 근거를 기록한 후속 commit은 문서만 변경하며, 실제 최종 LOCAL/REMOTE SHA는 Owner 최종 보고에 별도로 제공한다. 코드 SHA와 문서 HEAD를 혼동하지 않는다.
+- `./tool/device-qa --build-name 1.0.1 --build-number 23`: PASS. Xcode 60.0초, signed Release `build/ios/iphoneos/Runner.app` 36.7 MB. `codesign --verify --deep --strict` PASS.
+- `com.legendstudy.app` / `1.0.1(23)` 실제 plist 확인. Google scheme 일치, app callback 보존, Apple entitlement `Default`, development provisioning 및 검수 iPhone 12 Pro Max 포함 확인. 프로파일 만료 2027-09-21.
+- `App.framework/App` SHA-256: `5a993801bf937496a587344baa3880f92a562161138339511e0d212beb785aae`.
+- 로컬 receipt: `build/ios/device-qa-receipt.json`, native 검증: `build/ios/device-qa-native-verification.json`. build 폴더는 Git 제외. 실제 기기 설치/실행/인증/스토어 업로드 **미실행**. 이번 빌드는 현재 기기의 `0.1.0(1)`과 다르며 Owner 검수 전 새 artifact 설치가 필요하다.
+- 기존 `flutter_tts` Swift Package Manager 미지원 경고는 남아 있으나 빌드는 성공했다. SDK·의존성·Signing·Bundle ID·IAP·Auth 설정 변경 없음.
+- 이전 `build/ios/ipa/legendstudy_app.ipa`의 SHA-256 `0d4e9d54852a2c183f934a67229186b750f55310c091f814325f955d87d6950c`가 1차 기록과 일치함을 재확인. 덮어쓰거나 삭제하지 않았다.
+- Wiki handoff: PASS, current-status 12 KB 미만. 기존 `.fvmrc` 미추적 파일 보존. Release/Claude 브랜치 병합 없음.
+
+### Owner 최종 판정 기준
+
+APP 수정/자동 검증/빌드/커밋은 PASS. 실제 재첨삭·소셜 인증·기기 화면은 NOT TESTED이며 과거 제출 거절 원인은 미확정이므로 해당 P0의 최종 운영 판정은 PARTIAL이다. Worker 안정성 개선과 광운 계정 저장은 검증된 후보까지 준비했지만 운영 적용은 BLOCKED(별도 승인). 실패 중인 회차의 완료 문항 중간 결과 조회는 현행 공개 DTO 한계로 미구현이다. 기존 정상 결과와 History는 보존한다.
 
 ## 롤백 및 미검증
 

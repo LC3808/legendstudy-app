@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 APP 2차 수정](app-device-qa-fixes-20261029.md): 재처리/상태·재첨삭 payload·Push·소문항·기존답안/모달 개선. Analyze0·Flutter1178PASS/7SKIP·offline28·Credit18·Draft6PASS. iOS23 준비. Worker/광운 SQL 미배포·승인 대기, 과거 제출거절 원인·실인증/기기 미확정. [1차 기록](app-owner-fixes-20261029.md).
+[10/29 APP 2차 수정](app-device-qa-fixes-20261029.md): 재처리/상태·재첨삭 payload·Push·소문항·기존답안/모달 개선. Analyze0·Flutter1178PASS/7SKIP·offline28·Credit18·Draft6PASS. iOS1.0.1(23) 서명빌드·미설치. Worker/광운 SQL 미배포·승인 대기, 과거 제출거절 원인·실인증/기기 미확정. [1차 기록](app-owner-fixes-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 
