@@ -136,12 +136,8 @@ void main() {
       await tester.tap(find.text('답안 확인'));
       await tester.pumpAndSettle();
       expect(
-        tester
-            .widget<FilledButton>(
-              find.widgetWithText(FilledButton, '첨삭 서비스 준비 중'),
-            )
-            .onPressed,
-        isNull,
+        find.textContaining('자연·공학·이학·의예논술 첨삭은 베타 공개 보류 중'),
+        findsOneWidget,
       );
       expect(find.text('첨삭 요청 · 1 크레딧'), findsNothing);
       expect(tester.takeException(), isNull);
@@ -199,8 +195,13 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         tester
-            .widget<TextButton>(find.widgetWithText(TextButton, '첨삭 서비스 준비 중'))
-            .onPressed,
+            .widget<InkWell>(
+              find.ancestor(
+                of: find.text('연세대학교'),
+                matching: find.byType(InkWell),
+              ),
+            )
+            .onTap,
         isNull,
       );
       await tester.tap(find.text('연세대학교'), warnIfMissed: false);

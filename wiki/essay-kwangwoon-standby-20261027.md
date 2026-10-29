@@ -1,5 +1,7 @@
 # 광운대학교 인문 STANDBY — 2026-10-27
 
+10/29 APP Draft 별도 GAP: legacy essay_open_session의 is_published 검사와 광운 서비스 공개 상태 불일치 확인. [운영 근거·기기 답안 보존·서버 미수정](app-owner-fixes-20261029.md#광운대-계정-답안-저장). WEB 공개와 APP 계정 저장 성공은 별도로 검증해야 한다.
+
 ## 현재 결과
 
 Owner의 “광운대 진행해”에 따라 기존 [전체 대학 연결 정책](essay-all-university-standby-20261026.md)을 실행했다. 대학 카드 비활성 원인은 인문 자료가 있어도 Registry/실행 연결이 없고 기존 등록은 자연 2022 모의 1회차뿐이었던 것이다. 버튼 강제 활성화가 아닌 인문 회차 전체 연결로 해결했다.

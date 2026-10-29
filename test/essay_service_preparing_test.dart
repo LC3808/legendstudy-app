@@ -76,7 +76,7 @@ void main() {
       'picking a question', (tester) async {
     await tester.pumpWidget(host(catalogFor(), const <String>{}));
     await openSelection(tester);
-    expect(find.text('수리논술 첨삭 서비스 준비 중'), findsOneWidget);
+    expect(find.text('첨삭 서비스 준비 중'), findsOneWidget);
     expect(find.textContaining('준비가 완료되면 제공됩니다'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
@@ -84,7 +84,7 @@ void main() {
   testWidgets('a serviceable exam shows no preparing notice', (tester) async {
     await tester.pumpWidget(host(catalogFor(), const {'exam-db-1'}));
     await openSelection(tester);
-    expect(find.text('수리논술 첨삭 서비스 준비 중'), findsNothing);
+    expect(find.text('첨삭 서비스 준비 중'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 }

@@ -1,5 +1,7 @@
 # App Native Auth and Shared Account — Owner Acceptance
 
+10/29 APP 재검수: 운영 Google/Apple/Kakao enabled 확인, 로컬 iOS define 누락 및 release validator 보강. [증거·새 산출물·실기기 미검증 범위](app-owner-fixes-20261029.md#소셜-로그인). 기존 계정/인증 계약은 유지한다.
+
 ## 2026-09-28 — Kakao shared identity Owner PASS
 
 Owner logged into App and LAB with the same actual Kakao account and directly confirmed that

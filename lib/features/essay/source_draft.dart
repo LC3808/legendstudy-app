@@ -38,6 +38,12 @@ class SourceDraftGateway implements EssayGateway {
           : local.body == server.body
           ? '계정의 답안과 연결됐습니다.'
           : '기기에 보관된 답안입니다. 계정에 저장해 주세요.';
+    } on EssayClientError catch (error) {
+      syncNotice = error.code == 'PT422'
+          ? '이 문항은 계정 답안 저장이 아직 지원되지 않습니다. 답안은 기기에 보관됩니다.'
+          : error.code == 'PT401'
+          ? '로그인 상태를 다시 확인해 주세요. 기기의 답안은 유지됩니다.'
+          : '계정 답안을 확인하지 못했어요. 기기의 답안은 유지됩니다.';
     } catch (_) {
       syncNotice = '계정 답안을 확인하지 못했어요. 기기의 답안은 유지됩니다.';
     }
@@ -47,7 +53,7 @@ class SourceDraftGateway implements EssayGateway {
   Future<void> sync(String body) async {
     if (remote == null) return;
     if (syncConflict || remoteRevision == null) {
-      syncNotice = '계정 답안을 먼저 확인해 주세요. 기기의 답안은 유지됩니다.';
+      syncNotice ??= '계정 답안을 먼저 확인해 주세요. 기기의 답안은 유지됩니다.';
       return;
     }
     if (body.length > 20000) {

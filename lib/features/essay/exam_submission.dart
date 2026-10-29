@@ -74,3 +74,17 @@ final examSubmissionGatewayProvider =
       final client = ref.watch(supabaseClientProvider);
       return client == null ? null : ExamSubmissionGateway(client, owner);
     });
+
+/// Read-only admission check shared by review and submission; reserves no Credit.
+final examAvailabilityProvider = FutureProvider.autoDispose
+    .family<Map<String, dynamic>, ({String owner, String examId})>((
+      ref,
+      scope,
+    ) async {
+      final gateway = ref.watch(examSubmissionGatewayProvider(scope.owner));
+      if (gateway == null) return {};
+      return gateway.request({
+        'action': 'availability',
+        'examId': scope.examId,
+      });
+    });

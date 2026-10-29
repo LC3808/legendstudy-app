@@ -31,6 +31,12 @@ def main():
         parser.error('APP_ENV must be production in the existing local config.')
     if str(config.get('REVIEW_READ_ONLY', False)).lower() == 'true':
         parser.error('Review-only build configuration cannot be used for Store release.')
+    for flag in ('GOOGLE_OAUTH_ENABLED', 'APPLE_OAUTH_ENABLED', 'KAKAO_OAUTH_ENABLED'):
+        if str(config.get(flag, False)).lower() != 'true':
+            parser.error('Approved social login flags are missing; use the complete local production config.')
+    for name in ('GOOGLE_SERVER_CLIENT_ID', 'GOOGLE_IOS_CLIENT_ID'):
+        if not isinstance(config.get(name), str) or not config[name].strip():
+            parser.error('Google public client configuration is missing; values are not printed.')
     config.update(REQUIRED)  # Preserve every other existing production define.
     if args.check:
         print('PRODUCTION_CONFIG_PASS: existing defines preserved; all three release flags true.')

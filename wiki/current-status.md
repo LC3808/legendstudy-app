@@ -1,5 +1,7 @@
 # Current Status
 
+[10/29 APP 검수 수정](app-owner-fixes-20261029.md): 카드·제목·계열·진행·OAuth 빌드 검증 보강. 두 실패run 최종완료/각1Credit 정산 확인. Worker 품질 반복거절·광운 계정Draft 서버계약·혼합 일괄제출 미해결, 운영 변경0. Analyze0/Flutter1165PASS·7skip, iOS22·Android2026102901 빌드 성공.
+
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 
 [10/28 건국 Worker P0](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28): 451b8cae100%·65회귀PASS. Owner승인 기존finish로 run failed/1Credit예약 released. 답안2·History 보존, 순차감0·중복해제0. 새요청키 재제출 계약 가능·실제제출0.

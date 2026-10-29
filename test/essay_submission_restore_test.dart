@@ -38,6 +38,7 @@ void main() {
       'saved run polls beyond 100s, pauses, resumes and handles $terminal',
       (tester) async {
         var state = 'reserved';
+        var questionState = 'completed';
         final fixture = jsonDecode(
           File('test/fixtures/exam-history-v1.json')
               .readAsStringSync()
@@ -53,7 +54,25 @@ void main() {
               return http.Response(jsonEncode(fixtureSession()), 200);
             }
             if (request.url.path.endsWith('essay_exam_history_page')) {
-              return http.Response(jsonEncode({'code': 'PGRST202', 'message': 'not deployed'}), 404, headers: {'content-type':'application/json'}, request: request);
+              return http.Response(
+                jsonEncode({'code': 'PGRST202', 'message': 'not deployed'}),
+                404,
+                headers: {'content-type': 'application/json'},
+                request: request,
+              );
+            }
+            if (request.url.path.endsWith('essay_exam_session_status')) {
+              return http.Response(
+                jsonEncode({
+                  'version': 'exam-session-v1',
+                  'questions': [
+                    {'question_id': 'q', 'state': questionState},
+                  ],
+                }),
+                200,
+                headers: {'content-type': 'application/json'},
+                request: request,
+              );
             }
             if (request.url.path.endsWith('essay_exam_history')) {
               final id = jsonDecode(request.body)['p_run'];
@@ -157,6 +176,14 @@ void main() {
         await tester.pump();
         await tester.pump();
         expect(find.text('첨삭을 진행하고 있어요'), findsOneWidget);
+        expect(find.text('완료'), findsOneWidget);
+        expect(find.text('잠시 쉬어가세요.\n결과가 준비되면 확인할 수 있어요.'), findsOneWidget);
+        questionState = 'failed';
+        await tester.pump(const Duration(seconds: 3));
+        await tester.pump();
+        expect(find.text('문항 재처리가 필요해요'), findsOneWidget);
+        expect(find.text('화면을 닫아도 첨삭은 계속 진행됩니다.'), findsNothing);
+        questionState = 'completed';
         for (var i = 0; i < 41; i++) {
           await tester.pump(const Duration(seconds: 3));
           await tester.pump();

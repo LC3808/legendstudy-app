@@ -57,25 +57,24 @@ void main() {
       await tester.pump();
       await tester.pump();
       await tester.pump();
-      expect(find.text('서비스 확인 중'), findsNWidgets(3));
+      expect(find.text('서비스 확인 중'), findsOneWidget);
       expect(find.text('첨삭 서비스 준비 중'), findsNothing);
       pending.completeError(StateError('network'));
       await tester.pumpAndSettle();
-      expect(find.text('일시적으로 확인할 수 없습니다 · 다시 시도'), findsNWidgets(3));
+      expect(find.text('일시적으로 확인할 수 없습니다 · 다시 시도'), findsOneWidget);
       await tester.tap(find.text('일시적으로 확인할 수 없습니다 · 다시 시도').first);
       await tester.pumpAndSettle();
-      expect(find.text('첨삭 시작하기 →'), findsNWidgets(2));
-      expect(find.text('첨삭 서비스 준비 중'), findsOneWidget);
+      expect(find.text('첨삭 시작하기 →'), findsNothing);
+      expect(find.text('첨삭 서비스 준비 중'), findsNothing);
       expect(
         tester.getTopLeft(find.text('공개 대학')).dy,
         lessThan(tester.getTopLeft(find.text('준비 대학')).dy),
       );
-      expect(
-        tester
-            .widget<TextButton>(find.widgetWithText(TextButton, '첨삭 서비스 준비 중'))
-            .onPressed,
-        isNull,
+      final heldCard = find.ancestor(
+        of: find.text('준비 대학'),
+        matching: find.byType(InkWell),
       );
+      expect(tester.widget<InkWell>(heldCard).onTap, isNull);
       expect(calls, 2);
       expect(tester.takeException(), isNull);
     },

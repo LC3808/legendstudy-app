@@ -1,3 +1,7 @@
+## 2026-10-29 — APP 실기기 수정·새 Release 산출물
+
+별도 수정 브랜치에서 카드 CTA 제거·제목 정규화·3계열/문항별 실행 상태·혼합 안전 제한·실제 checkpoint 진행/실패 표시·계정 Draft 오류 구분·OAuth build guard 반영. 운영 SELECT: 외대/건국2023 반복 실패는 인용/독립검토 거절, 두 run completed·각1Credit 정산. 광운 legacy Draft 공개flag 계약 GAP 확인; 운영 수정/실평가0. Analyze0, Flutter1165PASS/7skip, Worker mock13·격리Credit18·release config2PASS, iOS1.0.1(22)/Android1.0.1(2026102901) 빌드·서명확인. Worker 반복거절·광운 서버저장·혼합 일괄제출·공식 계열metadata·실기기 재검수 미완료. [근거·파일·해시·롤백](app-owner-fixes-20261029.md).
+
 ## 2026-10-28 — Codex APP 인수·추가4과제 통합 및 Release 후보
 
 별도 worktree에서 Codex 미커밋 보존0ebad6e→Claude eedd28f merge777911e. owner 이력 기반 재작성 metadata/답안 복원, runId 복귀·완료 결과 자동열기, 과금 분리 학습회차·전체 성장 그래프·5시험 표시, iOS Vision/Android ML Kit Korean OCR→확인TEXT→기존 draft 구현. 원본 두 작업트리 보존. Analyze0, 전체1158PASS/7skip+최종23대상PASS, 격리SQL123행 pagination/owner/redaction PASS. Android AAB/APK1.0.1(2026102802), iOSIPA1.0.1(21) 성공. 운영페이지SQL은 Owner 적용 대기; 실기기·손글씨·실정산 미검증, Provider/운영쓰기/Store업로드0. [구현·산출물·게이트](app-final-integration-20261028.md).

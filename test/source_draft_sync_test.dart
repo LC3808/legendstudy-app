@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 import 'package:legendstudy_app/features/essay/essay_live_gateway.dart';
@@ -26,6 +28,21 @@ void main() {
     'source:question',
     remote: SupabaseEssayGateway(store, questionId: 'q', writesEnabled: true),
   );
+  test('unpublished question rejection preserves local answer and classified notice', () async {
+    final store = FakeEssayStore();
+    store.handler = (_, _) async => throw const PostgrestException(
+      message: 'INVALID_QUESTION',
+      code: 'PT422',
+    );
+    final draft = subject(store);
+    await draft.saveLocalDraft('보존 답안', 0);
+    expect((await draft.openSharedDraft()).body, '보존 답안');
+    expect(draft.syncNotice, contains('계정 답안 저장이 아직 지원되지'));
+    await draft.saveDraft('수정 답안', 1);
+    expect((await draft.loadDraft()).body, '수정 답안');
+    expect(draft.syncNotice, contains('계정 답안 저장이 아직 지원되지'));
+    expect(store.calls, ['essay_open_session']);
+  });
   test(
     'server draft restores locally without loading results or billing',
     () async {
