@@ -1,3 +1,7 @@
+## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
+
+Owner APP-only 승인. 별도 ignored QA config에서 flag ON·기본config/fvmrc 보존. 컴파일define 검증/영수증 기록, 기존24 해시보존. Analyze0·전체1188PASS/7SKIP·핵심ON/OFF25각PASS·빌드설정4PASS. 코드9188c9b로 서명 iOS1.0.1(25), Bundle/URL/entitlements 유지·미설치/미제출. 운영읽기3RPC 재확인, DB/Worker/Provider/재실행/Credit변경0. [산출물·검증·롤백](essay-evaluation-stability-p0-20261029.md#observation-v1-ios-qa-build-25--2026-10-29).
+
 ## 2026-10-29 — P0 읽기 RPC 운영 검증·Worker 배포 완료
 
 Owner 최종 install 재실행 후 RPC3 존재/정의일치/권한·본인/타인/실패문항 거절 직접 확인. Codex SQL재설치0. 실제 Worker451b8cae→a462a9a8 100%, 기존3모듈수정+1추가/69불변·설정/Secret/Registry보존. 재다운로드74tests·격리DB PASS. 경희/서울여 run·답안·checkpoint·원장·History해시 불변, Provider/기존run재실행0. APPflag OFF·빌드0, 재처리와 실기기 별도단계. [배포·보안·롤백](essay-evaluation-stability-p0-20261029.md#production-verification-and-deployment--2026-10-29-2025-kst).

@@ -1,6 +1,6 @@
 # Essay evaluation stability P0 — 2026-10-29
 
-Status: Production read RPC verification and approved Worker deployment PASS (20:25 KST); APP activation/retry acceptance still pending. Original evaluator/HTTP causes remain unresolved. See the operating closeout below. Historical predeployment status follows. Branch `codex/essay-evaluation-stability-p0-20261029`, starting from `14bbc5cbf228c5c6ee26a9cb0524084924ce9ecc`. Latest Owner urgent directive and IMG_1292–1295 supersede the earlier device QA handoff for this scope. At the initial implementation stage, Production deployment, evaluation, Credit mutation and History repair were not authorized. The later explicit Owner deployment authorization below supersedes only the deployment gate.
+Status: Production read RPC verification and approved Worker deployment PASS (20:25 KST); Observation V1 iOS25 QA build now ready; installation/retry acceptance still pending. Original evaluator/HTTP causes remain unresolved. See the operating closeout below. Historical predeployment status follows. Branch `codex/essay-evaluation-stability-p0-20261029`, starting from `14bbc5cbf228c5c6ee26a9cb0524084924ce9ecc`. Latest Owner urgent directive and IMG_1292–1295 supersede the earlier device QA handoff for this scope. At the initial implementation stage, Production deployment, evaluation, Credit mutation and History repair were not authorized. The later explicit Owner deployment authorization below supersedes only the deployment gate.
 
 ## Preservation review before implementation
 
@@ -140,3 +140,35 @@ Worker rollback target is the **live-pinned previous version `451b8cae-f603-48e9
 RPC rollback uses only the existing rollback.sql after disabling the APP flag (currently already OFF); because it is compile-time, any future enabled deployed APP must first be replaced/disabled appropriately. Never run install/verify/rollback as a normal three-step installation. No rollback was necessary or executed.
 
 Remaining: KHU 논제1 retry needs separate Owner approval; historical failure reason cannot be reconstructed from missing receipts. SWU original HTTP failure remains unresolved. APP flag-enabled rebuild/device acceptance and real evaluation acceptance are not performed. Git follow-up contains deployment evidence/Wiki only; existing `.fvmrc` preserved, no release merge.
+
+
+## Observation V1 iOS QA build 25 — 2026-10-29
+
+Owner subsequently approved APP-only Observation activation, full regression and signed iOS **1.0.1(25)**. This supersedes the OFF/build-pending statement for the new QA artifact only. Default config remains unchanged. No operating SQL/Worker/Credit/History mutation, existing-run retry, Provider call, device installation or store submission occurred.
+
+- Dedicated ignored `config/observation-v1-qa.local.json` copies the existing private config and changes only `ESSAY_OBSERVATION_V1_ENABLED=true`. Existing `config/store-rc.local.json` and `.fvmrc` are preserved. No credentials committed.
+- `tool/device-qa::verify_observation_define` checks the base64 Flutter `DART_DEFINES` in Generated.xcconfig against the selected config and records the verified flag in the receipt. Compiled Observation/Google/Apple/Kakao=true. Existing Bundle ID `com.legendstudy.app`, signing team, native URL schemes and entitlements match preserved24.
+- No production UI source rewrite. Existing shared observation store, canonical labels, completed-only result actions and server-authorized failed-only retry are enabled. Whole reserved run remains reserved; failed refresh preserves confirmed success. Request-key recovery performs its read lookup before any replay.
+- Updated three APP test files to exercise the selected flag path and the formerly disabled result action. Added all-five-state preservation, completed partial-result RPC, failed-result denial and pre-request account mismatch checks. Existing restore/duplicate-submit/Credit consent/native UI/OCR/growth tests remain in the full suite.
+- Live read-only DB functions rechecked: same KHU run restored by key; **논제1 failed / 논제2 completed** in official order; 논제2 completed_question projection. Previous operating ACL/foreign/anon/failed-result tests remain PASS. SQL role/claims verification is not real iPhone Auth/HTTP acceptance. Post-read run/snapshot/result/checkpoint/retry/history/ledger hashes still match the earlier Production baseline.
+- Production Worker stays `a462a9a8-4842-4bf9-84d7-7dc9210cedba`; no deployment in this APP task.
+
+### Verification and artifact
+
+Flutter **3.47.6 stable**. Analyze **0 issues**. Full Flutter suite with Observation=true: **1188 PASS / 7 existing SKIP / 0 FAIL**. Focused ON25/OFF25 PASS; Python build-config4 PASS. The initial ON run exposed the old OFF-only disabled-button assertion; the fixture now checks the expected state in both modes, followed by a clean full rerun. Skipped optional fixtures/live checks are not counted as PASS.
+
+Build source SHA: **`9188c9bd9aaa242efdea59a4e7f0813affd5f7cd`**, same P0 branch. `./tool/device-qa --config config/observation-v1-qa.local.json --build-name 1.0.1 --build-number 25`; Xcode47.9s, signed artifact36.7MB; codesign deep/strict verification PASS. Build tool records source SHA before compilation; following documentation commits do not change the built APP.
+
+Stable install artifact:
+`/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-observation-25/Runner.app`
+
+Receipt: same directory `device-qa-receipt.json`; [committed sanitized receipt](../tool/observation-v1-qa-build-20261029.json). App.framework SHA256: `bcce277563d9dcca5f95079d59e9c14a9cc16b3cd9314ecdd016cf703cd61363`. Standard `build/ios/iphoneos/Runner.app` also contains25.
+
+Preserved24:
+`/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-preserved-24/Runner.app`
+
+Preserved24 receipt/hash verified unchanged (`73aad5741141eee7a63a6737dca5ca967add882d7c7b8bd58affbca0197aca09`). Install25 with Xcode Devices and Simulators on an already provisioned device. No IPA/store upload is implied. Real iPhone result navigation, resume and social authentication remain **NOT TESTED**. Do not tap retry or submit an evaluation without the separate Owner approval for that operation.
+
+Rollback the APP by reinstalling preserved24 (flag OFF), or rebuild using the unchanged default config and a new appropriate build number. No DB function drop, Worker rollback or data repair is needed for an APP-only rollback. Existing failed KHU question and SWU historical HTTP cause remain unresolved; this is observability activation, not successful re-evaluation evidence.
+
+Build warning: existing flutter_tts Swift Package Manager adoption warning is nonblocking; no dependency upgrade was made.

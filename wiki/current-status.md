@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md): RPC3 운영정의·권한·본인/타인 조회 PASS, Worker a462a9a8 100% 배포·재다운로드74tests PASS. 경희 reserved/논제1실패·논제2완료/1Credit예약·서울여 completed 및 답안·History·원장 해시 불변. APP 관찰flag OFF·새빌드0, 기존run 재처리 별도승인/원인 미확정. [이전 APP2차](app-device-qa-fixes-20261029.md).
+[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md): RPC3·Worker a462a9a8 100% 검증, run/원장 불변. Observation ON iOS1.0.1(25) 서명 QA 준비·미설치, 기존24 보존. Analyze0·Flutter1188PASS/7SKIP·ON/OFF25각PASS. 경희 논제1실패/논제2완료/1Credit예약 유지·재처리 별도승인. [이전 APP2차](app-device-qa-fixes-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 

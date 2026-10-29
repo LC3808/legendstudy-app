@@ -1,0 +1,34 @@
+{
+  "source_sha": "9188c9bd9aaa242efdea59a4e7f0813affd5f7cd",
+  "branch": "codex/essay-evaluation-stability-p0-20261029",
+  "version": "1.0.1",
+  "build": "25",
+  "observation_v1_enabled": true,
+  "social_providers": [
+    "google",
+    "apple",
+    "kakao"
+  ],
+  "bundle_id": "com.legendstudy.app",
+  "framework_sha256": "bcce277563d9dcca5f95079d59e9c14a9cc16b3cd9314ecdd016cf703cd61363",
+  "artifact": "/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-observation-25/Runner.app",
+  "installed": false,
+  "uploaded": false,
+  "flutter": "3.47.6",
+  "analyze": "PASS: zero issues",
+  "flutter_test": {
+    "pass": 1188,
+    "skip": 7,
+    "fail": 0,
+    "observation_v1_enabled": true
+  },
+  "focused_tests": {
+    "flag_on": 25,
+    "flag_off": 25
+  },
+  "build_config_tests": 4,
+  "build24_preserved": "/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-preserved-24/Runner.app",
+  "native_configuration_preserved": true,
+  "production_mutations": 0,
+  "provider_calls": 0
+}

@@ -23,7 +23,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-논술 P0 / 경희2024 반복실패 / 서울여 재첨삭 응답 / 문항 상태 동기화 / partial result / 요청키 복구: [근거·운영 RPC 검증·Worker 배포·롤백](essay-evaluation-stability-p0-20261029.md).
+논술 P0 / 경희2024 반복실패 / 서울여 재첨삭 응답 / 문항 상태 동기화 / partial result / 요청키 복구: [근거·운영 RPC·Worker 배포·Observation iOS25·롤백](essay-evaluation-stability-p0-20261029.md).
 
 APP 10/29 실기기 **2차** / 실패 재처리·재첨삭·Draft·Push·소문항: [2차 수정·운영 승인 대기](app-device-qa-fixes-20261029.md).
 
