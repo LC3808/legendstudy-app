@@ -327,6 +327,47 @@ void main() {
       );
     },
   );
+  test(
+    'uncertain HTTP response preserves symbolic code without retrying',
+    () async {
+      for (final status in [409, 503]) {
+        final c = await client((_) async => throw StateError('unexpected RPC'));
+        final events = <Map<String, dynamic>>[];
+        var calls = 0;
+        final gateway = ExamSubmissionGateway(
+          c,
+          'fixture-a',
+          diagnostic: (v) async => events.add(v),
+          transportOverride: MockClient((r) async {
+            calls++;
+            return http.Response('{"code":"REQUEST_UNAVAILABLE"}', status);
+          }),
+        );
+        await expectLater(
+          gateway.request({
+            'action': 'submit',
+            'examId': 'exam',
+            'key': 'same-key',
+            'parentId': 'parent',
+            'answers': [
+              {'body': 'PRIVATE'},
+            ],
+          }),
+          throwsStateError,
+        );
+        expect(calls, 1);
+        expect(events.last['phase'], 'unconfirmed');
+        expect(events.last['http_status'], status);
+        expect(events.last['code'], 'REQUEST_UNAVAILABLE');
+        expect(events.last['key'], 'same-key');
+        expect(jsonEncode(events), isNot(contains('PRIVATE')));
+        expect(
+          jsonEncode(events),
+          isNot(contains(c.auth.currentSession!.accessToken)),
+        );
+      }
+    },
+  );
   test('lost acknowledgement recovers same run by owner/key with no evaluation POST', () async {
     final paths = <String>[];
     final c = await client((r) async {

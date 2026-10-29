@@ -3,6 +3,64 @@ import 'package:legendstudy_app/features/essay/exam_presentation.dart';
 
 void main() {
   test(
+    'History removes repeated official titles and preserves distinct sessions',
+    () {
+      for (final fixture in [
+        [
+          '경희대학교',
+          2024,
+          'mock',
+          '인문·체육계',
+          '2024학년도 경희대학교 모의논술 인문·체육계',
+          '2024학년도 모의논술 · 인문·체육계',
+        ],
+        [
+          '서울여자대학교',
+          2026,
+          'admission',
+          '인문사회계열',
+          '서울여자대학교 2026학년도 수시 논술 인문사회계열',
+          '2026학년도 수시논술 · 인문사회계열',
+        ],
+        [
+          '건국대학교',
+          2023,
+          'admission',
+          '2023학년도 건국대학교 수시논술 인문사회Ⅰ',
+          '2023학년도 건국대학교 수시논술 인문사회Ⅰ',
+          '2023학년도 수시논술 · 인문사회Ⅰ',
+        ],
+        [
+          '한국외국어대학교',
+          2026,
+          'admission',
+          '사회계',
+          '2026학년도 한국외국어대학교 수시논술 사회계 T2',
+          '2026학년도 수시논술 · 사회계 · T2',
+        ],
+        [
+          '광운대학교',
+          2026,
+          'admission',
+          '인문계열',
+          '1교시',
+          '2026학년도 수시논술 · 인문계열 · 1교시',
+        ],
+      ]) {
+        final exam = <String, dynamic>{
+          'universityName': fixture[0],
+          'year': fixture[1],
+          'kind': fixture[2],
+          'track': fixture[3],
+          'session': fixture[4],
+        };
+        final before = Map.of(exam);
+        expect(essayHistoryExamTitle(exam), fixture[5]);
+        expect(exam, before);
+      }
+    },
+  );
+  test(
     'full browse title does not repeat university year track or session',
     () {
       final exam = {

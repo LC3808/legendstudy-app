@@ -43,6 +43,51 @@ String essayExamTitle(Map<String, dynamic> exam) {
   }.where((s) => s.isNotEmpty).join(' · ');
 }
 
+/// History metadata can contain an entire Registry title as its session.
+/// Remove only repeated display fields; retain distinct sessions such as T2.
+String essayHistoryExamTitle(Map<String, dynamic> exam) {
+  final university = '${exam['universityName'] ?? ''}';
+  final year = '${exam['year'] ?? ''}';
+  final kind = switch (exam['kind']) {
+    'admission' => '수시논술',
+    'mock' => '모의논술',
+    final Object value => '$value',
+    _ => '',
+  };
+  String clean(Object? value) {
+    var text = '${value ?? ''}';
+    for (final field in [university, if (year.isNotEmpty) '$year학년도', kind]) {
+      if (field.isEmpty) continue;
+      final pattern = field.runes
+          .where((r) => !RegExp(r'\s').hasMatch(String.fromCharCode(r)))
+          .map((r) => RegExp.escape(String.fromCharCode(r)))
+          .join(r'\s*');
+      text = text.replaceAll(RegExp(pattern), '');
+    }
+    return text
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .replaceAll(RegExp(r'^[ ·]+|[ ·]+$'), '')
+        .trim();
+  }
+
+  final track = clean(exam['track']);
+  var session = clean(exam['session']);
+  if (track.isNotEmpty && session.startsWith(track)) {
+    final rest = session.substring(track.length);
+    if (rest.isEmpty || RegExp(r'^[\s·]').hasMatch(rest)) {
+      session = rest.replaceAll(RegExp(r'^[ ·]+'), '');
+    }
+  }
+  return {
+    [
+      if (year.isNotEmpty) '$year학년도',
+      kind,
+    ].where((s) => s.isNotEmpty).join(' '),
+    track,
+    session,
+  }.where((s) => s.isNotEmpty).join(' · ');
+}
+
 String essayQuestionStatus(Object? state) => switch ('$state'.toLowerCase()) {
   'completed' => '완료',
   'failed' => '재처리 필요',

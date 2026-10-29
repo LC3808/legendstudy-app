@@ -72,6 +72,7 @@ class ExamSubmissionGateway {
     }
     final transport = transportOverride ?? reviewHttpClient();
     int? responseStatus;
+    String? responseCode;
     try {
       final request = http.Request('POST', Uri.parse('$origin/api/essay/exam'))
         ..followRedirects = false
@@ -96,6 +97,7 @@ class ExamSubmissionGateway {
       }
       final value = jsonDecode(utf8.decode(bytes));
       if (value is! Map) throw const FormatException('INVALID_RESPONSE');
+      responseCode = value['code'] is String ? value['code'] as String : null;
       await record(
         payload,
         'response',
@@ -123,7 +125,9 @@ class ExamSubmissionGateway {
           payload,
           'unconfirmed',
           status: responseStatus,
-          code: 'REQUEST_UNCONFIRMED',
+          // Keep the server's symbolic failure while retaining the pending key.
+          // A received 503/409 must not be overwritten by a generic diagnostic.
+          code: responseCode ?? 'REQUEST_UNCONFIRMED',
         );
       }
       rethrow;

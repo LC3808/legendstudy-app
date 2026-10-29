@@ -1,6 +1,7 @@
 import 'math_exam_session.dart';
 import 'source_catalog.dart';
 import 'evaluation_report.dart';
+import 'exam_presentation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -141,19 +142,22 @@ class SharedEssayHistory {
       final e = catalog?.exams
           .where((e) => e['dbExamId'] == r['exam_id'])
           .firstOrNull;
+      final university = e == null
+          ? r['university']
+          : catalog?.universities
+                    .where(
+                      (u) => u['sourceUniversityId'] == e['sourceUniversityId'],
+                    )
+                    .firstOrNull?['name'] ??
+                r['university'];
       return {
         ...r,
+        if (e != null) 'university': university,
         if (e != null)
-          'university': catalog?.universities
-              .where((u) => u['sourceUniversityId'] == e['sourceUniversityId'])
-              .firstOrNull?['name'],
-        if (e != null)
-          'displayExam':
-              '${e['year']}학년도 ${e['kind'] == 'admission'
-                  ? '수시 논술'
-                  : e['kind'] == 'mock'
-                  ? '모의논술'
-                  : e['kind']} · ${e['track']}${e['session'] == null ? '' : ' · ${e['session']}'}',
+          'displayExam': essayHistoryExamTitle({
+            ...e,
+            'universityName': university,
+          }),
         if (e != null) 'questions': e['questions'],
         if (e != null) 'track': e['track'],
         if (e != null) 'session': e['session'],
