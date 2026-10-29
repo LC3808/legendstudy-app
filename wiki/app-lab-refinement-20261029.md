@@ -36,7 +36,12 @@ Owner IMG_1299–1306, 22:08/22:13 iPhone 및 22:15 WEB 참고. [기존 P0/무�
 
 ## 빌드 및 롤백
 
-로컬 QA receipt에서 최대26 확인, 27 산출물 경로 없음 확인. 다음 **1.0.1(27)** 계획. 소스 커밋 후 기존 QA config로 서명하여 source SHA를 분리 기록한다. Observation V1 및 Google/Apple/Kakao ON, com.legendstudy.app·기존 signing/환경 유지. 스토어 제출/기기 설치는 수행하지 않는다.
+**서명 iOS 1.0.1(27) 생성·검증 완료**. Flutter3.47.6, 소스 `a9412ded49a41addec796972fa277941dcd772ca` (앞선 UI 구현 `1503bd2`). [빌드 영수증](../tool/lab-refinement-qa-build-20261029.json)에 source와 산출물 framework SHA256을 고정한다. 이후 문서 커밋은 앱 바이너리 소스와 구분한다.
+
+설치용 전체 경로:
+`/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-lab-refinement-27/Runner.app`
+
+Info.plist의1.0.1/27/com.legendstudy.app, codesign deep/strict PASS. Generated.xcconfig의 실제 DART_DEFINES를 기존 QA config 전체 키와 대조하여 Observation V1·Google/Apple/Kakao ON 및 Supabase/client 설정 전달 확인. 26과 URL scheme/queries scheme·서명 entitlements 동일. 26 framework hash 불변 확인. 기존 개발 기본 설정/`.fvmrc` 보존. 자동 기기 설치·스토어 제출 없음.
 
 26 보존: `build/ios/qa-swu-rewrite-26/Runner.app`, App.framework SHA256 `9001c075b0da3314f38cecae7ad5345291d85068f9360e460efcd3319a823bee`. 문제 시 26 앱으로 되돌릴 수 있으며 uninstall/기기 데이터 삭제를 하지 않는다. 소스는 기준3754bbd로 별도 복구 커밋 가능. 이미 생성된 Owner 무료 child/History/Credit을 되돌리는 조치는 포함하지 않는다.
 
