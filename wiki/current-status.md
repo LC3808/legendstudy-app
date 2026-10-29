@@ -1,6 +1,6 @@
 # Current Status
 
-[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md#funded-provider-recovery-attempt--2026-10-29-2117-kst): API잔액99.81확인 후 승인재처리1회(g14), 429해소·답안인용 EXACT_QUOTE 실패. 논제2/답안/History/원장 보존·예약1유지·추가차감0. 재반복0. 서울여 과거HTTP원인미확정. APP표시/진단수정 Analyze0·Flutter1190PASS/7SKIP·Worker74PASS. 설치25/Workera462a9a8 유지. [이전 APP2차](app-device-qa-fixes-20261029.md).
+[10/29 논술 P0](essay-evaluation-stability-p0-20261029.md#swu-free-rewrite-routing-fix--2026-10-29): 서울여 quote422 ADDITIONAL_CYCLE_UNAVAILABLE 확인: 무료자격 무시한 유료진입. 무료우선·기존답안복원 수정, Analyze0/Flutter1193PASS·7SKIP/격리Credit18PASS. 새빌드 미생성·운영무료제출 승인대기, 최초결과/원장보존. 별도관측 경희g15완료/1Credit정산(Codex실행아님). Workera462a9a8·설치25 유지. [이전 APP2차](app-device-qa-fixes-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 

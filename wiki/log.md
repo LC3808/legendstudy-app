@@ -1,5 +1,9 @@
 ## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
 
+## 2026-10-29 — 서울여 무료 재첨삭 경로 오류 수정
+
+iPhone21:27 quote422 ADDITIONAL_CYCLE_UNAVAILABLE/parentnull 확인, submit0. APP상단 유료진입 vs 무료자격·Gateway유료flagfalse 충돌. 무료우선+fresh자격확인·기존additional TEXT답안 비파괴 복원·진단 predecessor 기록 수정. Analyze0·Flutter1193PASS/7SKIP·격리Credit18/async PASS. 운영제출/Provider/DB/Worker변경0, 최초run/result/원장보존. 별도 경희g15완료관측(Codex실행아님). [근거·코드SHA·검증·승인대기](essay-evaluation-stability-p0-20261029.md#swu-free-rewrite-routing-fix--2026-10-29).
+
 ## 2026-10-29 — API 충전 후 경희 추가 승인 재처리1회
 
 잔액99.81/운영키Owner확인·Worker설정불변. 공식 WEB1회→g14, Provider생성성공(12897/5530tokens)·429재발0, 학생답안 인용/offset EXACT_QUOTE 거절. 논제1failed/논제2completed/runreserved, checkpoint7·답안·History·원장불변. 예약1유지/추가차감0/재반복0. WEB실패상태·APP RPC논제2조회 확인, 실기기추가검수0. [실제결과·남은조치](essay-evaluation-stability-p0-20261029.md#funded-provider-recovery-attempt--2026-10-29-2117-kst).

@@ -232,3 +232,38 @@ The same KHU run `4e26b5b6-e605-4c87-a6ad-ce5ed70c31f1` was reserved with canoni
 ### Handoff
 
 No APP code/build/install, Worker, DB schema/RPC or Auth change. Seoul Women's University untouched. No store submission. The old HTTP429 did not recur after funding, which is consistent with the Owner's balance explanation but does not retroactively prove its exact subtype. Remaining recovery work is the student-answer quotation/offset failure: inspect/reproduce the validation issue without weakening quality, then obtain the appropriate approval for any Worker deployment and another real retry. The one retry authorized here is exhausted. Never undo generation14 by editing History or Ledger; preserve the existing reservation/result. Documentation-only handoff check required; no new code regression suite needed.
+
+
+## SWU free rewrite routing fix — 2026-10-29
+
+**Root cause confirmed for the 21:27 device failure; APP fix/tests PASS; operating free submission NOT TESTED / awaiting Owner approval.** This new evidence supersedes the earlier unknown-cause status for this specific later request only. It does not identify the older “server not responding” event.
+
+### Exact operating evidence
+
+Read-only iPhone25 native diagnostics: availability at `12:26:59.554162Z` returned HTTP200. **quote** at `12:27:01.295148Z` returned **HTTP422 / ADDITIONAL_CYCLE_UNAVAILABLE**, `parentId=null`, no request key. There was no submit diagnostic and no new SWU run. This is a quote rejection before evaluation submission/key creation, not a Provider failure. The installed25 diagnostic did not capture previousPaidRunId or full payload. Its presence is established by the only Gateway branch returning this error and the APP `_additional` route; the exact predecessor is reconstructed from the owned run and its local draft namespace, not claimed as a captured raw HTTP body.
+
+Actual Production Pages project `legendstudy-lab` / `lab.legendstudy.com` has `ESSAY_CONTINUOUS_CYCLES_ENABLED=false`, `ESSAY_CREDIT_SOURCE_ENABLED=true` (Cloudflare API read only). Shared Gateway `functions/api/essay/exam.ts` rejects non-null previousPaidRunId when paid continuous cycles are disabled. Meanwhile DB history returns `continuous_cycles_supported=true` (DB capability) and `free_rewrite_available=true`. APP's upper result button previously used the first flag alone and always called `openWriter(true)`, selecting `_additional=true`, parentId=null and previousPaidRunId=root. **Available free eligibility was ignored by that prominent entry.** The lower existing “다시 써보기” action used false, so the two entries had inconsistent billing routes. No server flag was enabled to bypass this.
+
+SWU parent remains `6ef28b49-12a5-4825-886d-548f0d9897df`, exam `6679b5ff-d797-53c9-8a2a-424375d7210c`, completed03:41:38Z, parent_id null. Canonical questions `a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6` / `d0862954-4d0d-5811-9b48-5dc8e319634d`, original revisions **1/1**. Device has edited TEXT drafts in this parent's **additional** namespace, revisions **9/17**, lengths **1682/1660**, both hashes differ from original answers. No corresponding included/rewrite drafts were found. Student text is not committed or printed in the report.
+
+A current read-only transaction calls the existing quote contract with exact parent+question set: **included / 0 Credit**. The 14-day limit, one-free-use eligibility, owner, frozen canonical set and runtime preflight pass. Corrected free requests retain that parent, omit previousPaidRunId, and use existing parent-relative revision conversion (**2/2** for these two changed bodies), not local edit counters9/17. No actual submit or new run was issued to verify this.
+
+### Minimal changes
+
+Code commit **9929b95febda9360fdfa6b240f41bf41264c060e**:
+
+- `lib/features/essay/shared_history_page.dart`: `EssayFollowupAction` shows **다시 써보기 · 무료 재첨삭** when free eligibility exists. `_Result.build/openWriter` refreshes owner History and prefers the newly confirmed included entitlement even if the initial button was stale. Existing explicit paid confirmation remains for ineligible users; the server still decides final rights.
+- `lib/features/essay/exam_rewrite.dart`: `recoverIncludedEssayDraft` copies stranded TEXT edits from the same parent's additional namespace only into an empty included namespace. It retains the source, refuses image drafts, existing destination edits, ineligible/paid routes and any unresolved paid-request key. Existing `examRewriteAnswers` still enforces exact question set and original-relative revisions.
+- `lib/features/essay/source_catalog_page.dart`: `SourceCatalogPage.loadCatalog` invokes recovery after owned History catalog validation, checks active owner, and restores both canonical questions before writing/review. `ExamSubmissionPanelState.submit` rejection copy identifies unavailable paid followups rather than implying a generic submit failure. Existing quote/consent/idempotency Gateway flow unchanged.
+- `lib/features/essay/exam_submission.dart`: `record` also retains safe previousPaidRunId to distinguish free/paid routing in subsequent diagnostics. No student text/token added.
+- `test/device_qa_second_test.dart`, `test/essay_stability_p0_test.dart`: free-over-paid action, stranded draft recovery/source preservation, no destination overwrite, unresolved-key refusal, free/paid payloads, parent/canonical/revision, exact HTTP422 quote code/predecessor and no submit.
+
+### Verification, preservation and release boundary
+
+Flutter Analyze **PASS / zero issues**. Full Flutter with Observation ON: **1193 PASS / 7 existing SKIP**. Focused suite before the final diagnostic test:26PASS; final diagnostic test included in full suite. Isolated PostgreSQL Credit **18 PASS**; async/observation contract suite **PASS**, including included rewrite, exactly-once settlement, duplicate keys, original-result preservation and result retrieval through synthetic Provider transport. These are isolated acceptance tests, not Production submission. No Worker code changed, so its prior74PASS is not reported as newly run here.
+
+SWU before/after run hash `198f944d1a45904f25490271b5ba5322`, snapshot `042f9a6a3c3418644430884bb233b936`, result `1e596b01ba5b48f17b8c14a07d360041`, checkpoints `653029d0f5726874086079c6ed79a778` unchanged. Same exam one run; original reserve1+consume1 retained, no new Credit operation. Device reads only; no draft migration executed on the actual iPhone, no new build/install, Provider call, DB/RPC/Worker/Auth change or store submission. Existing builds and `.fvmrc` preserved.
+
+Separate observation while comparing the existing incident records: KHU now has **generation15** created12:23:28Z and completed12:24:23Z, one reserve/consume. This was **not executed by this Codex task**; the initiator is not established by the inspected records. Consequently the whole-account History/Ledger hashes differ from earlier snapshots; only the SWU-specific unchanged hashes are asserted here. The earlier g14 failure report remains valid at its observation time. No KHU follow-up action was taken.
+
+Remaining: create/install a QA build containing this code, then obtain explicit approval for **one actual free SWU rewrite** using the preserved two revised answers and original parent. Until then, server submission acceptance/new child round/Provider completion/device result navigation remain NOT TESTED. Paid followup deployment remains separate: DB capability is not proof that the Gateway feature flag is enabled. No APP-specific evaluation bypass was introduced. Rollback by reverting this APP code commit and retaining the installed25 build; copied local drafts should be retained, not deleted.
