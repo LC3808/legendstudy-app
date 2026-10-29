@@ -1,5 +1,9 @@
 ## 2026-10-29 — Observation V1 APP 활성화·iOS25 검수 빌드
 
+## 2026-10-29 — API 충전 후 경희 추가 승인 재처리1회
+
+잔액99.81/운영키Owner확인·Worker설정불변. 공식 WEB1회→g14, Provider생성성공(12897/5530tokens)·429재발0, 학생답안 인용/offset EXACT_QUOTE 거절. 논제1failed/논제2completed/runreserved, checkpoint7·답안·History·원장불변. 예약1유지/추가차감0/재반복0. WEB실패상태·APP RPC논제2조회 확인, 실기기추가검수0. [실제결과·남은조치](essay-evaluation-stability-p0-20261029.md#funded-provider-recovery-attempt--2026-10-29-2117-kst).
+
 ## 2026-10-29 — Owner 승인 경희 실제 재처리 및 최소 APP 수정
 
 공식 WEB 재처리1회→g13/ProviderHTTP429실패, 2회차미실행. 논제2checkpoint7/답안/History/원장 해시불변, 예약1유지·정산0. 서울여 read-only quote included0·새run0, 과거HTTP원인미확정. APP시험명중복 및 HTTP진단코드 덮어쓰기 수정. Analyze0·Flutter1190PASS/7SKIP·Worker74·격리Credit18/async보존 PASS. iPhone25이미설치 확인·신규빌드/Worker/DB배포0. [실제결과·코드SHA·남은문제·롤백](essay-evaluation-stability-p0-20261029.md#owner-authorized-recovery-attempt--2026-10-29-2056-kst).
