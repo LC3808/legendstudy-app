@@ -48,7 +48,7 @@
 수정(최소): `lib/main.dart`(부트스트랩 override+app_open), `lib/core/config/app_config.dart`(`analyticsEnabled`), `lib/app/router.dart`(라우트), `lib/features/feedback/presentation/admin_feedback_page.dart`(진입 카드), `lib/features/lab/lab_page.dart`, `lib/features/essay/essay_growth_page.dart`, `lib/features/billing/presentation/credit_purchase_page.dart`(이벤트 호출), `pubspec.yaml`/`pubspec.lock`(firebase_core ^5.1.0, firebase_analytics ^13.0.1 + transitive만).
 
 ## 13. 최종 SHA
-커밋 후 본 문서 하단/로그에 기록.
+`ccae6bd31e029efd385fcef694753b0fb8651d02` (+ 본 SHA 기록 docs 후속 커밋). 브랜치 `claude/legendstudy-analytics-v1-9a315b`, origin push 완료.
 
 ## 14. Codex 통합 방법 · 충돌 가능성
 - **충돌 위험 파일(Codex 핫):** `pubspec.yaml`/`pubspec.lock`(firebase 6패키지 추가만, 기존 핀 불변), `lib/app/router.dart`(admin 라우트 1개 추가), `lib/features/feedback/presentation/admin_feedback_page.dart`(카드 1개), `lib/features/lab/lab_page.dart`·`essay_growth_page.dart`·`credit_purchase_page.dart`(이벤트 호출). 모두 **추가 위주**, 로직 변경 없음 → 충돌 시 추가분만 재적용하면 됨.

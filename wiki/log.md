@@ -5134,3 +5134,5 @@ Owner iPhone 실기기 검수에서 발견된 P0/P1을 일괄 수정. 기존 PAS
 **검증:** `fvm flutter analyze` 0건, `fvm flutter test` 1241 PASS / 7 skip / 0 fail. GA4 실수신=미검증(Firebase 미연결).
 **범위 준수:** 평가 엔진·Worker·Provider·Credit 정산·결제 계약·History 원장·기존 UI/UX·수리 엔진 불변. 운영 DB 미적용(Owner 적용 패키지). 새 평가 실행0. Codex 브랜치 직접 commit 없음.
 **Codex 통합 주의:** 핫 파일(`pubspec*`,`router.dart`,`admin_feedback_page.dart`,`lab_page.dart`,`essay_growth_page.dart`,`credit_purchase_page.dart`)은 추가 위주 → 충돌 시 추가분만 재적용. 미완료 행동 이벤트는 1줄 패턴으로 보완(구현 문서 §2).
+
+**Commit:** `ccae6bd` (구현) → 본 SHA 기록 docs 후속. 롤백: `git revert <sha>` 또는 브랜치 폐기. Owner 적용 대기: 집계 SQL 패키지·Firebase 연결.
