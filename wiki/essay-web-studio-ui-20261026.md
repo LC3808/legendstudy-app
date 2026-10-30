@@ -180,3 +180,7 @@ Owner 긴급 보완에 따라 기존 Math/혼합형 입력 계약을 우선 재�
 검증: 관련 8파일 26 tests PASS, Typecheck PASS, Lint 오류0/기존경고4, Production Build PASS. 테스트는 저장/복원·사진 순서·입력 모드·보류 제출 차단 경로를 포함한다. 새 Provider 호출/유료 제출/학생 사진 확정은 하지 않았다. Production 일반계정에서 고려2026 수시 자연 오전의 사진·수식 입력 및 새 보류 안내, 한양2027 모의 상경의 문제1 TEXT/문제2 사진·수식 입력과 비활성 제출을 확인했다. 이번 최종 배포의 모바일 실기기 검사는 수행하지 않았으며 반응형 CSS와 관련 테스트 확인 범위다.
 
 WEB commit/push/remote 일치: `2f838c29fa25c38c399a6a43f9d567dd89053ffc`. Pages Production(main): `f9e0e83f-6f93-470d-a1e0-0c711607c53c`; 배포 목록의 Source 2f838c2 및 실제 lab.legendstudy.com 화면 확인. 복구: 직전 WEB `3b4cc9bf8f06b0deca1ea462985aa0f7ceb4f367` / Pages `808ef7c7`. DB·Worker·Credit·Ledger·APP 변경0, SQL 적용/재실행0. 기존 학생 데이터/History 변경0. 이 작업은 입력 UI 복구이며 수리 평가 품질 검수나 유료 공개 승인이 아니다.
+
+## 2026-10-30 — 결과·근거·재작성 표시 후속
+
+[원인·수정·검증·미배포·복구](essay-web-result-refinement-20261030.md). 평가/정산 계약 보존, WEB 표시만 변경.
