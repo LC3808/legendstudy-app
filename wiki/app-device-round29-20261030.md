@@ -37,7 +37,11 @@ LegendStudy `stlhijzpjfgwwdgunlsd`에서 제한된 SELECT와 READ ONLY 트랜잭
 - 기존320/360/390/430dp×글씨1/2배 UI, 무료 재첨삭·Credit·History·OCR·PDF·TTS mock 회귀 포함. 실기기 음향/실제 재처리/실제 촬영은 NOT TESTED.7 SKIP을 PASS에 포함하지 않음.
 - 합성 결과 화면 PNG 렌더를 확인하여 네이비 테두리/본문 정렬을 점검. pixel golden 비교/운영 화면 캡처는 아님.
 - Wiki handoff/link/budget 검사 PASS. 기존29 framework hash `d87c1a7d59ed4270ae14fc0f2ef3455f11a9ad58a9a1c1e7ca9f9541b13404ac` 보존.
-- 서명30 빌드 결과는 아래에 기록. 실기기 설치/스토어 업로드 없음.
+- iOS **1.0.1(30)** Release 서명 빌드 PASS (Flutter3.47.6). 소스 `8c58961a4cc2125a9c2bbc12356a8726e1b7bc1c`.
+- 산출물: `/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-device-round29-30/Runner.app`. 설치/스토어 업로드 없음.
+- App.framework SHA256 `65be78b376219ed14bbcf729e9bff350ca393ff66ed1af08ed87c85a20ec7a82`. codesign deep/strict PASS. Bundle ID `com.legendstudy.app`, 29와 Entitlements/URL Schemes 일치, 기존29 hash 불변.
+- 실제 Generated.xcconfig에 전달된 QA 설정을 private config 전체와 대조 PASS: Observation V1 true, Google/Apple/Kakao 유지. 설정 값/키 원문은 기록하지 않음.
+- [빌드 receipt](../tool/app-device-round29-qa-build-20261030.json). 기존 flutter_tts SwiftPM 지원 경고는 남지만 CocoaPods 기반 빌드 성공. 의존성 변경 없음.
 
 ## 롤백
 
