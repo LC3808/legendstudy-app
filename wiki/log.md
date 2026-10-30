@@ -5124,3 +5124,13 @@ Owner iPhone 실기기 검수에서 발견된 P0/P1을 일괄 수정. 기존 PAS
 **자동화 미검증(실기기 QA):** 시험 제출/상태조회 HTTP(§2 전환·§8 폴링), 크롭 래스터화. §4 재작성 Backend 해결 전까지 STANDBY 시험 재작성은 안내 메시지로 graceful 유지.
 **Codex 통합 주의:** `source_catalog_page.dart`는 Claude UI. §4 재작성은 Backend(run 페이로드/카탈로그 범위) 선행 필요 — Worker 복구와 함께 검토. 기존 Gateway/RPC 계약 유지.
 **Commit:** 6a0f040(§1·§2·§3·§4 라벨) → 04ea3a5(§5). 롤백: 범위별 `git revert <sha>`. Owner 실기기 재검수 대기.
+
+## 2026-10-30 — Analytics v1.0 (Claude, 독립 신규 과제)
+
+베이스 `codex/essay-evaluation-stability-p0-20261029`(`21f1569`, 최신 안정). GA4=행동·퍼널 / PostgreSQL=공식 집계 역할 분리([P0 계약](analytics-p0-launch-contract.md) 준수, Owner 2026-10-30 확정). 상세: [구현 문서](analytics-v1-implementation-20261030.md).
+**신규:** `lib/features/analytics/**`(추상 AnalyticsService·Noop·Firebase·providers·guard·events·대시보드 domain/data/providers/presentation), `supabase/candidates/analytics_admin_reporting_20261030/**`(관리자 전용 집계 RPC 8개+precheck/postcheck/rollback, pglast PASS, 미적용), `test/analytics_event_test.dart`·`test/analytics_dashboard_gate_test.dart`.
+**수정(최소):** `main.dart`·`app_config.dart`(ANALYTICS_ENABLED 플래그·부트스트랩 override·app_open), `router.dart`(`/my/admin/analytics`), `admin_feedback_page.dart`(진입 카드), `lab_page.dart`·`essay_growth_page.dart`·`credit_purchase_page.dart`(이벤트 호출만), `pubspec`(firebase_core ^5.1.0·firebase_analytics ^13.0.1+transitive만, 기존 핀 불변).
+**개인정보:** sanitizer allowlist+forbidden 제거·100자 cap, 답안/평가/인증/PII 미전송, fire-and-forget(제출 미차단), Noop 기본.
+**검증:** `fvm flutter analyze` 0건, `fvm flutter test` 1241 PASS / 7 skip / 0 fail. GA4 실수신=미검증(Firebase 미연결).
+**범위 준수:** 평가 엔진·Worker·Provider·Credit 정산·결제 계약·History 원장·기존 UI/UX·수리 엔진 불변. 운영 DB 미적용(Owner 적용 패키지). 새 평가 실행0. Codex 브랜치 직접 commit 없음.
+**Codex 통합 주의:** 핫 파일(`pubspec*`,`router.dart`,`admin_feedback_page.dart`,`lab_page.dart`,`essay_growth_page.dart`,`credit_purchase_page.dart`)은 추가 위주 → 충돌 시 추가분만 재적용. 미완료 행동 이벤트는 1줄 패턴으로 보완(구현 문서 §2).

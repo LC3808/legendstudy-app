@@ -1,5 +1,7 @@
 # Current Status
 
+[10/30 Analytics v1.0 개발](analytics-v1-implementation-20261030.md): GA4(행동·퍼널)/PostgreSQL(공식 집계) 역할 분리. 클라이언트 analytics 레이어(Noop 기본·`ANALYTICS_ENABLED` 뒤 Firebase)·관리자 대시보드(`/my/admin/analytics`, 기존 admin 게이트 재사용)·관리자 전용 집계 RPC 8개(Owner 적용 패키지, pglast PASS). Analyze0·Flutter1241PASS/7SKIP. 평가/Worker/Credit/결제/History 불변, 운영 DB 미적용, 새 평가 실행0. GA4 실수신·일부 행동 이벤트 계측·Firebase 네이티브 설정 미완(Owner 선행). Claude 브랜치 전용.
+
 [10/30 APP 후속 검수](app-device-followup-20261030.md): 평가 전문 전달·TTS playback/콜백·표시 줄바꿈·기록 직접 이동·processing 애니메이션·성장 페이지 전환 접힘 수정. Analyze0·Flutter1226PASS/7SKIP. iOS29서명·설정검증 완료,28보존·미설치. 음향 실기기 미검증·운영 접근0. [28 디자인 이력](app-lab-refinement-20261029.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).

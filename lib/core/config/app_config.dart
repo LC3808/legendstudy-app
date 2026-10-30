@@ -17,6 +17,7 @@ class AppConfig {
     this.googleOAuthEnabled = false,
     this.appleOAuthEnabled = false,
     this.kakaoOAuthEnabled = false,
+    this.analyticsEnabled = false,
   });
   factory AppConfig.fromEnvironment() => const AppConfig(
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
@@ -48,9 +49,18 @@ class AppConfig {
     googleOAuthEnabled: bool.fromEnvironment('GOOGLE_OAUTH_ENABLED'),
     appleOAuthEnabled: bool.fromEnvironment('APPLE_OAUTH_ENABLED'),
     kakaoOAuthEnabled: bool.fromEnvironment('KAKAO_OAUTH_ENABLED'),
+    // Off until the Owner connects a Firebase project and adds the native
+    // config files. A build without it uses the no-op analytics service and
+    // ships normally; see wiki/analytics-v1-implementation-20261030.md.
+    analyticsEnabled: bool.fromEnvironment('ANALYTICS_ENABLED'),
   );
   final String privacyUrl, termsUrl, refundUrl;
   final bool googleOAuthEnabled, appleOAuthEnabled, kakaoOAuthEnabled;
+
+  /// Behavioural analytics (GA4/Firebase). Gated so the app ships without a
+  /// Firebase project; GA4 carries behaviour events only, never official DB
+  /// facts (credit/revenue/completion stay in PostgreSQL).
+  final bool analyticsEnabled;
   // No TEST Cloudflare essay gateway is configured in this candidate. Fail closed rather
   // than sending a TEST session to Production; Supabase reads use their client.
   String get essayApiOrigin {

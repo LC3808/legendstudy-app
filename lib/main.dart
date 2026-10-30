@@ -1,5 +1,6 @@
 import 'core/network/review_read_only_client.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -8,6 +9,11 @@ import 'app/legendstudy_app.dart';
 import 'core/config/app_config.dart';
 import 'core/supabase/supabase_providers.dart';
 import 'core/supabase/test_session_storage.dart';
+import 'features/analytics/analytics_providers.dart';
+import 'features/analytics/data/firebase_analytics_service.dart';
+import 'features/analytics/data/noop_analytics_service.dart';
+import 'features/analytics/domain/analytics_events.dart';
+import 'features/analytics/domain/analytics_service.dart';
 import 'features/auth/identity_diagnostic.dart';
 import 'features/brand/brand_frame.dart';
 import 'features/onboarding/device_intro.dart';
@@ -61,16 +67,35 @@ class _AppBootstrapState extends State<AppBootstrap> {
     return (client: client, issue: issue);
   }
 
+  /// Behavioural analytics is off unless the Owner has connected a Firebase
+  /// project and the build sets ANALYTICS_ENABLED. Any failure falls back to
+  /// the no-op service so the app always starts.
+  Future<AnalyticsService> _initAnalytics(AppConfig config) async {
+    if (!config.analyticsEnabled) return const NoopAnalyticsService();
+    try {
+      await Firebase.initializeApp();
+      final analytics = FirebaseAnalyticsService();
+      analytics.logEvent(AnalyticsEvents.appOpen, {
+        AnalyticsParamKeys.platform: analyticsPlatform(),
+      });
+      return analytics;
+    } catch (_) {
+      return const NoopAnalyticsService();
+    }
+  }
+
   Future<Widget> _initialize(AppConfig config) async {
     final introStore = DeviceIntroStore();
     bool introDone;
     SupabaseClient? client;
     String? issue;
+    AnalyticsService analytics = const NoopAnalyticsService();
     try {
       introDone = await introStore.completed();
       final backend = await connection;
       client = backend.client;
       issue = backend.issue;
+      analytics = await _initAnalytics(widget.config);
       if (!introDone && client?.auth.currentUser != null) {
         await introStore.complete();
         introDone = true;
@@ -97,6 +122,7 @@ class _AppBootstrapState extends State<AppBootstrap> {
         appConfigProvider.overrideWithValue(config),
         supabaseClientProvider.overrideWithValue(client),
         backendIssueProvider.overrideWithValue(issue),
+        analyticsServiceProvider.overrideWithValue(analytics),
       ],
       child: const LegendStudyApp(),
     );

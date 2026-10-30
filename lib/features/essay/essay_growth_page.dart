@@ -6,6 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/theme/app_theme.dart';
+import '../analytics/analytics_guard.dart';
+import '../analytics/analytics_providers.dart';
+import '../analytics/domain/analytics_events.dart';
 import 'evaluation_report.dart';
 import 'growth_bars.dart';
 import 'growth_timeline.dart';
@@ -24,6 +27,10 @@ class EssayGrowthPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
+    // Behaviour event (GA4), once per session; never the official growth record.
+    ref
+        .read(analyticsServiceProvider)
+        .logEventOnce('growth_view', AnalyticsEvents.essayGrowthView);
     return Scaffold(
       appBar: AppBar(
         title: Row(
