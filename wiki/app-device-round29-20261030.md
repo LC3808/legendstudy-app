@@ -46,3 +46,7 @@ LegendStudy `stlhijzpjfgwwdgunlsd`에서 제한된 SELECT와 READ ONLY 트랜잭
 ## 롤백
 
 운영 롤백은 필요 없다. 이전 검수용 `build/ios/qa-device-followup-29/Runner.app`를 보존하며 앱 삭제 없이 동일 Bundle ID로 덮어 설치할 수 있다. 기기에서 낮은 빌드 설치가 제한되면 이전 소스로 더 높은 검수 번호를 만들어야 한다. 코드 롤백은 이번 소스 커밋을 후속 revert하고 새 검수 빌드를 만든다. reset/clean/원장 정정은 사용하지 않는다.
+
+## Pre-release follow-up 2026-10-30
+
+[Source PDF audit, separate candidate, full test failure analysis and display contract](pre-release-stabilization-20261030.md). Prior execution results above remain historical evidence. No Production deployment in this follow-up.

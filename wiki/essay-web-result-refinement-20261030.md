@@ -29,3 +29,7 @@ WEB `src/lib/my/exam-history.ts:examReports`는 같은 `dimensions.explanation`�
 WEB `/Users/woojinchang/development/legendstudy-release-20261024`, branch `codex/web-app-release-20261024`, commit `0ae9e2f0153807b6379a67c6f22b6a0b94d8d694`. Commit/Push 및 LOCAL=REMOTE 확인. 기준 `2f838c29fa25c38c399a6a43f9d567dd89053ffc`. 기존 checkout clean 확인 후 이 7파일만 commit. 신규 배포 없음. DB/Worker/Provider/Credit/History 변경0. APP 기존 `.fvmrc` 보존.
 
 롤백은 WEB 변경 commit을 revert한 별도 commit으로 가능; DB/원장 rollback 없음. 미완료: 불명확 기준의 의미별 별칭 검수, 기존 전체 테스트 실패 정리, 실제 계정/실기기 및 운영 반영 후 확인. 원문 손상·순서 오류를 UI가 추론으로 고치지 않는다.
+
+## Pre-release follow-up 2026-10-30
+
+[Source PDF audit, separate candidate, full test failure analysis and display contract](pre-release-stabilization-20261030.md). Prior execution results above remain historical evidence. No Production deployment in this follow-up.

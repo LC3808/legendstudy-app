@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+출시 전 안정화 / 원문 정정 후보 / WEB18실패 / APP·WEB 표시 계약: [10/30 검증·위험·복구](pre-release-stabilization-20261030.md).
+
 APP 29 실기기 / 평가 원문 구조 / 재처리 애니메이션 / 답안 확인 동선: [Round29 수정·원본 진단](app-device-round29-20261030.md).
 
 APP 결과·History·성장 UI / TTS / 본문 펼침 / 페이지 전환: [28 실기기 후속 수정](app-device-followup-20261030.md). 기존 UI / 5개 이전·다음 페이지: [최종 UI 정리·디자인 Addendum·검수 빌드](app-lab-refinement-20261029.md).

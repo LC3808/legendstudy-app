@@ -1,0 +1,81 @@
+[
+  {
+    "exam_id": "6679b5ff-d797-53c9-8a2a-424375d7210c",
+    "university_id": "eba1d65c-5bb6-5454-afd4-82a18c57262a",
+    "package_version": 3,
+    "package_digest": "dffdb94b185ba6e316bae052db1d5c1a92259c5cc974476ecc3c86877877a233",
+    "note": "Candidates only. Columns, omissions and semantic order require visual PDF review.",
+    "university": "swu",
+    "counts": {
+      "ABNORMAL_LINE_BREAK": 198,
+      "D_POSSIBLE_SPLIT_WORD": 183,
+      "C_MID_SENTENCE_LABEL": 6
+    },
+    "by_question": {
+      "a69cb1c4-d6a4-5ae6-a68b-1bcec4a397f6": {
+        "ABNORMAL_LINE_BREAK": 87,
+        "D_POSSIBLE_SPLIT_WORD": 82,
+        "C_MID_SENTENCE_LABEL": 1
+      },
+      "d0862954-4d0d-5811-9b48-5dc8e319634d": {
+        "D_POSSIBLE_SPLIT_WORD": 101,
+        "ABNORMAL_LINE_BREAK": 111,
+        "C_MID_SENTENCE_LABEL": 5
+      }
+    }
+  },
+  {
+    "exam_id": "51e7299e-0ae7-5e6d-9d37-a46718be76bb",
+    "university_id": "b401cc24-dd17-575e-8ac6-0fd8c9c8405d",
+    "package_version": 1,
+    "package_digest": "55b0f040abda62fbe4919424c1410aa55bd4d8fab055947cbe30bea41560382d",
+    "note": "Candidates only. Columns, omissions and semantic order require visual PDF review.",
+    "university": "kyunghee",
+    "counts": {
+      "ABNORMAL_LINE_BREAK": 86,
+      "D_POSSIBLE_SPLIT_WORD": 76
+    },
+    "by_question": {
+      "92a9044c-9eaa-58d8-b4e9-365b2e9a02f0": {
+        "ABNORMAL_LINE_BREAK": 43,
+        "D_POSSIBLE_SPLIT_WORD": 38
+      },
+      "abb351b6-d462-5916-a03a-956c964f6359": {
+        "ABNORMAL_LINE_BREAK": 43,
+        "D_POSSIBLE_SPLIT_WORD": 38
+      }
+    }
+  },
+  {
+    "exam_id": "e75f643f-034b-5dc0-afc2-0a0ddeabc3dc",
+    "university_id": "cd1ba908-2b5f-4063-a111-2da53d7d358b",
+    "package_version": 2,
+    "package_digest": "8401b5cfc9eb9a8f649dddf234d5349ef5eab313fbe7f640f1cc69b10f2d09f2",
+    "note": "Candidates only. Columns, omissions and semantic order require visual PDF review.",
+    "university": "dongguk",
+    "counts": {
+      "D_POSSIBLE_SPLIT_WORD": 249,
+      "ABNORMAL_LINE_BREAK": 255,
+      "F_REPEATED_SENTENCE": 4,
+      "B_FLATTENED_TABLE": 5
+    },
+    "by_question": {
+      "09cdd3fa-a044-531a-bbcd-6b6789fb874e": {
+        "D_POSSIBLE_SPLIT_WORD": 79,
+        "ABNORMAL_LINE_BREAK": 77
+      },
+      "67b9faa8-a781-5d9f-956b-030f033396a0": {
+        "D_POSSIBLE_SPLIT_WORD": 97,
+        "ABNORMAL_LINE_BREAK": 109,
+        "F_REPEATED_SENTENCE": 2,
+        "B_FLATTENED_TABLE": 2
+      },
+      "e7b04480-638e-56ad-9d15-1201007bd461": {
+        "D_POSSIBLE_SPLIT_WORD": 73,
+        "ABNORMAL_LINE_BREAK": 69,
+        "F_REPEATED_SENTENCE": 2,
+        "B_FLATTENED_TABLE": 3
+      }
+    }
+  }
+]

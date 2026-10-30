@@ -1,3 +1,7 @@
+## 2026-10-30 — 출시 전 안정화
+
+[공식 PDF 추출 오류·SWU 별도 후보·품질 도구·WEB18실패 분석·APP/WEB 계약](pre-release-stabilization-20261030.md). APP9e555ac/WEB93b3741. Analyze0·APP1233PASS/7SKIP·WEB1393PASS/0FAIL/4SKIP·TS/buildPASS·Lint0오류/4경고·Python32PASS. 운영 쓰기/Provider/기기설치0. 기존 기록·버전 보존.
+
 ## 2026-10-30 — WEB 결과 표시 개선
 
 WEB0ae9e2f push/remote일치. 설명/근거 중복 통합·누락 안내·검수 별칭 재사용·비교 단계별 배치·문장/재작성 카드 개선. Typecheck/Lint/build PASS, 5너비 offline 검증. 전체1373PASS/18FAIL/4SKIP+파일로딩1실패; baseline 동일실패. 운영 배포/데이터 쓰기/Provider0. [상세·제한·복구](essay-web-result-refinement-20261030.md).

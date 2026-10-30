@@ -14,7 +14,7 @@
 
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장).
 
-[고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [WEB 결과 표시 개선·미배포/기존 테스트 실패](essay-web-result-refinement-20261030.md).
+[고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [출시 전 안정화·미배포/정정 후보·검증](pre-release-stabilization-20261030.md).
 
 [2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
