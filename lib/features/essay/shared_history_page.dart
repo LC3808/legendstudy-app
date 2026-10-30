@@ -430,13 +430,19 @@ class _Result extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('첨삭 결과'),
-        actions: [
-          IconButton(
-            tooltip: '나의 첨삭 기록',
-            onPressed: () => goToEssayHistory(context),
-            icon: const Icon(Icons.history),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.textScalerOf(context).scale(16) + 32,
           ),
-        ],
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              onPressed: () => goToEssayHistory(context),
+              icon: const Icon(Icons.history),
+              label: const Text('나의 첨삭 기록'),
+            ),
+          ),
+        ),
       ),
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
           ? record.math

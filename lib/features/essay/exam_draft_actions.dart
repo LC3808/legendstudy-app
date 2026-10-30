@@ -155,6 +155,7 @@ class _ExamDraftActionsState extends ConsumerState<ExamDraftActions> {
                     : '답안 작성하기',
               ),
             ),
+            if (count > 0) const SizedBox(height: 16),
             if (count > 0)
               OutlinedButton(
                 onPressed: busy ? null : () => open(widget.onReview),

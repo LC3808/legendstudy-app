@@ -791,6 +791,46 @@ class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
   // The single expanded question (0 = 문제 1 on entry); -1 = all collapsed.
   int current = 0;
   final Map<String, bool> written = {};
+  final writerKeys = <String, GlobalKey<_SourceWriterState>>{};
+  bool reviewing = false;
+
+  Future<void> reviewAnswers() async {
+    if (reviewing) return;
+    setState(() => reviewing = true);
+    try {
+      // All panels remain mounted. Flush every editor before reading the drafts.
+      for (final question in widget.questions) {
+        final writer = writerKeys[question['key']]?.currentState;
+        if (writer == null || !await writer.saveForReview()) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('답안 저장 상태를 확인해 주세요. 작성한 내용은 유지됩니다.'),
+              ),
+            );
+          }
+          return;
+        }
+      }
+      if (!mounted) return;
+      await showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => ExamAnswerReview(
+          owner: widget.owner,
+          exam: widget.exam,
+          currentQuestion:
+              widget.questions[current < 0 ? 0 : current]['key'] as String,
+          selectedQuestions: widget.questions
+              .map((q) => q['key'] as String)
+              .toSet(),
+          rewriteRun: widget.rewriteRun,
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => reviewing = false);
+    }
+  }
 
   String get _examMeta => essayExamTitle(widget.exam);
 
@@ -816,51 +856,72 @@ class _SelectedAnswerWriterState extends State<_SelectedAnswerWriter> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.universityName ?? '답안 작성')),
       body: SafeArea(
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(
             AppTokens.space20,
             AppTokens.space16,
             AppTokens.space20,
             AppTokens.space24,
           ),
-          children: [
-            if (_examMeta.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(bottom: AppTokens.space12),
-                child: Text(
-                  _examMeta,
-                  style: AppTokens.secondary.copyWith(
-                    color: AppTokens.textSecondary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_examMeta.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: AppTokens.space12),
+                  child: Text(
+                    _examMeta,
+                    style: AppTokens.secondary.copyWith(
+                      color: AppTokens.textSecondary,
+                    ),
                   ),
                 ),
-              ),
-            for (var i = 0; i < questions.length; i++)
-              _AccordionItem(
-                key: ValueKey('panel-${questions[i]['key']}'),
-                title: questions[i]['label'] as String,
-                expanded: current == i,
-                written: written[questions[i]['key'] as String] ?? false,
-                // One panel open at a time; tapping the open one collapses it.
-                onTap: () => setState(() => current = current == i ? -1 : i),
-                child: _SourceWriter(
-                  key: ValueKey(questions[i]['key']),
-                  owner: widget.owner,
-                  question: questions[i],
-                  exam: widget.exam,
-                  universityName: widget.universityName,
-                  officialUrl: widget.officialUrl,
-                  rewriteRun: widget.rewriteRun,
-                  selectedQuestions: questions,
-                  onContentChanged: (has) {
-                    if (mounted) {
-                      setState(
-                        () => written[questions[i]['key'] as String] = has,
-                      );
-                    }
-                  },
+              for (var i = 0; i < questions.length; i++)
+                _AccordionItem(
+                  key: ValueKey('panel-${questions[i]['key']}'),
+                  title: questions[i]['label'] as String,
+                  expanded: current == i,
+                  written: written[questions[i]['key'] as String] ?? false,
+                  // One panel open at a time; tapping the open one collapses it.
+                  onTap: () => setState(() => current = current == i ? -1 : i),
+                  child: _SourceWriter(
+                    key: writerKeys.putIfAbsent(
+                      questions[i]['key'] as String,
+                      () => GlobalKey<_SourceWriterState>(),
+                    ),
+                    owner: widget.owner,
+                    question: questions[i],
+                    exam: widget.exam,
+                    universityName: widget.universityName,
+                    officialUrl: widget.officialUrl,
+                    rewriteRun: widget.rewriteRun,
+                    selectedQuestions: questions,
+                    onContentChanged: (has) {
+                      if (mounted) {
+                        setState(
+                          () => written[questions[i]['key'] as String] = has,
+                        );
+                      }
+                    },
+                  ),
+                ),
+              const SizedBox(height: 20),
+              FilledButton(
+                key: const ValueKey('review-all-answers'),
+                onPressed: reviewing ? null : reviewAnswers,
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppTokens.textPrimary,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(48, 48),
+                ),
+                child: Text(
+                  widget.exam['verification'] == 'REVIEW_REQUIRED'
+                      ? '답안 확인'
+                      : '답안 확인 · 첨삭 요청',
                 ),
               ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -1034,6 +1095,18 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
           )
         : null,
   );
+  Future<bool> saveForReview() async {
+    final ctrl = controller;
+    if (ctrl == null || !imageReady || imageSaving || syncBusy) return false;
+    await ctrl.save();
+    if (imageDirty && !imageSaving) await savePhoto(photo);
+    return mounted &&
+        !ctrl.dirty &&
+        ctrl.draftStatus == DraftStatus.saved &&
+        !imageSaving &&
+        !imageDirty;
+  }
+
   Future<void> savePhoto(List<Uint8List> bytes) async {
     setState(() {
       photo = bytes;
@@ -1578,44 +1651,6 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                               },
                         child: const Text('계정 답안 확인·저장'),
                       ),
-                  ],
-                  ...[
-                    const SizedBox(height: 20),
-
-                    FilledButton(
-                      style: FilledButton.styleFrom(
-                        backgroundColor: AppTokens.textPrimary,
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(48, 48),
-                      ),
-                      onPressed: () async {
-                        await c.save();
-                        if (!context.mounted ||
-                            c.dirty ||
-                            imageSaving ||
-                            imageDirty) {
-                          return;
-                        }
-                        await showModalBottomSheet<void>(
-                          context: context,
-                          isScrollControlled: true,
-                          builder: (_) => ExamAnswerReview(
-                            owner: widget.owner,
-                            exam: widget.exam,
-                            currentQuestion: widget.question['key'] as String,
-                            selectedQuestions: widget.selectedQuestions
-                                .map((q) => q['key'] as String)
-                                .toSet(),
-                            rewriteRun: widget.rewriteRun,
-                          ),
-                        );
-                      },
-                      child: Text(
-                        widget.exam['verification'] == 'REVIEW_REQUIRED'
-                            ? '답안 확인'
-                            : '답안 확인 · 첨삭 요청',
-                      ),
-                    ),
                   ],
                 ],
               ),

@@ -25,6 +25,9 @@ import 'package:legendstudy_app/features/essay/shared_history_page.dart';
 import 'package:legendstudy_app/features/essay/round_history_actions.dart';
 import 'package:legendstudy_app/core/theme/app_theme.dart';
 
+import 'package:legendstudy_app/shared/widgets/shell_widgets.dart';
+import 'package:legendstudy_app/features/essay/result_disclosure.dart';
+
 import 'auth_lifecycle_sdk_test.dart' show fixtureSession;
 
 class QaGateway extends ExamSubmissionGateway {
@@ -516,6 +519,11 @@ void main() {
       await t.pumpAndSettle();
       expect(find.text('선택한 2문항 중 1문항에 저장된 답안이 있어요.'), findsOneWidget);
       expect(find.text('답안 이어쓰기'), findsOneWidget);
+      expect(
+        t.getTopLeft(find.widgetWithText(OutlinedButton, '답안 확인하기')).dy -
+            t.getBottomLeft(find.widgetWithText(FilledButton, '답안 이어쓰기')).dy,
+        16,
+      );
       await t.tap(find.text('답안 확인하기'));
       await t.pumpAndSettle();
       expect(reviews, 1);
@@ -792,14 +800,22 @@ void main() {
       await t.tap(find.text('회차 처리 상태 확인'));
       await t.pumpAndSettle();
       expect(find.text('아직 처리 상태에 변화가 없습니다.'), findsOneWidget);
+      expect(find.byType(ProcessingGuidance), findsNothing);
       await t.tap(find.text('실패 문항만 재처리 · 0 크레딧'));
-      await t.pumpAndSettle();
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 300));
+      expect(find.byType(ProcessingGuidance), findsOneWidget);
+      expect(
+        t.widget<StepProgressBar>(find.byType(StepProgressBar)).showActivity,
+        isTrue,
+      );
       expect(find.text('실패 문항 재처리가 접수됐어요. 완료된 문항은 보존됩니다.'), findsOneWidget);
       phase = 2;
       await t.pump(const Duration(seconds: 10));
       await t.pumpAndSettle();
       expect(find.text('첨삭이 완료됐어요. 저장된 결과를 확인하세요.'), findsOneWidget);
       expect(gateway.calls.length, 1);
+      expect(find.byType(ProcessingGuidance), findsNothing);
       expect(find.text('실패 문항만 재처리 · 0 크레딧'), findsNothing);
     },
   );

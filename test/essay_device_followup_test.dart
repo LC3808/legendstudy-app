@@ -47,6 +47,56 @@ void main() {
       );
     },
   );
+  test('flat grade criteria remain ordered raw lines rather than an invented table', () {
+    const raw =
+        '1. 공식 항목의 충족을 충분히 자세하게 기술한 경우 10\nS 1, 2, 3을 모두 올바르게 제시하였음\n상\nA 1, 2, 3을 모두 제시했으나 논리가 부족함\n중 C 1, 2를 올바르게 제시하였음';
+    expect(displayEssayText(raw), raw);
+  });
+  test('stored mid-word criterion markers are never reordered or removed', () {
+    const raw = '이유를 제시하\n준거 1 는 것이다.\n\n엄청난 힘을 지닌 인\n준거 2 공 지능이';
+    expect(displayEssayText(raw), raw);
+  });
+  test(
+    'explicit feedback action receives one paragraph gap without invention',
+    () {
+      expect(
+        displayEssayText('평가 문장입니다.\n개선 방법: 근거를 확인하세요.'),
+        '평가 문장입니다.\n\n개선 방법: 근거를 확인하세요.',
+      );
+      expect(
+        displayEssayText('평가 문장입니다.\n\n개선 방법: 확인하세요.'),
+        '평가 문장입니다.\n\n개선 방법: 확인하세요.',
+      );
+      expect(displayEssayText('개선 방법이 없습니다.'), '개선 방법이 없습니다.');
+    },
+  );
+  test('criterion change and stored feedback have independent paragraphs', () {
+    final text = approvedEssayEvaluation(
+      after,
+      before,
+    ).changes['좋아진 부분']!.first;
+    expect(text, startsWith('평가 기준\n'));
+    expect(text, contains('\n\n평가 변화\n'));
+    expect(text, contains('\n\n평가 설명\n${after.rubric.first.feedback}'));
+    expect(displayEssayText(text), contains('\n\n평가 설명\n'));
+  });
+  testWidgets('accordion has a visible restrained navy border', (t) async {
+    await t.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: ResultAccordion(title: '종합 평가', child: Text('원문')),
+        ),
+      ),
+    );
+    final tile = t.widget<ExpansionTile>(find.byType(ExpansionTile));
+    expect(
+      (tile.collapsedShape as RoundedRectangleBorder).side.color,
+      const Color(0xFF9CAABE),
+    );
+    await t.tap(find.text('종합 평가'));
+    await t.pumpAndSettle();
+    expect(find.text('원문'), findsOneWidget);
+  });
   for (final text in [
     '짧은 평가',
     List.filled(40, '긴 평가 문장입니다.').join(' '),

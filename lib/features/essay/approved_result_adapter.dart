@@ -35,7 +35,7 @@ EssayEvaluation approvedEssayEvaluation(
     f.explanation,
     if (f.evidence.isNotEmpty) '답안 근거: ${f.evidence}',
     if (f.action.isNotEmpty) '개선 방법: ${f.action}',
-  ].where((s) => s.isNotEmpty).join('\n');
+  ].where((s) => s.isNotEmpty).join('\n\n');
   return EssayEvaluation(
     summary: report.summary,
     strengths: report.strengths.map(feedback).toList(),
@@ -68,7 +68,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '좋아진 부분': [
           for (final c in changes.where((x) => x.direction == 'IMPROVED'))
-            '${c.after.name}\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n${c.after.feedback}',
+            '평가 기준\n${c.after.name}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
         ],
       if (changes != null)
         '유지한 부분': [
@@ -78,7 +78,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '아직 확인할 부분': [
           for (final c in changes.where((x) => x.direction == 'DECLINED'))
-            '${c.after.name}\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n${c.after.feedback}',
+            '평가 기준\n${c.after.name}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
         ],
     },
   );

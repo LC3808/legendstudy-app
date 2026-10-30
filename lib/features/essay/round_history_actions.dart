@@ -15,6 +15,8 @@ import 'math_exam_session.dart';
 import 'shared_history.dart';
 import 'shared_history_page.dart' show openSharedEssayResult;
 import 'source_draft.dart';
+import 'result_disclosure.dart';
+import '../../shared/widgets/shell_widgets.dart';
 
 class RoundHistoryActions extends ConsumerStatefulWidget {
   const RoundHistoryActions({
@@ -213,6 +215,18 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (!widget.record.math &&
+            status != null &&
+            ExamSessionStatus(status!).questions.values
+                .contains('processing')) ...[
+          const ProcessingGuidance(active: true),
+          const SizedBox(height: 12),
+          const StepProgressBar(
+            steps: ['제출 완료', '첨삭 중', '결과 준비'],
+            activeIndex: 1,
+          ),
+          const SizedBox(height: 12),
+        ],
         if (status != null)
           for (final q in status!['questions'] as List)
             Text(

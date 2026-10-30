@@ -1,6 +1,6 @@
 # Current Status
 
-[10/30 APP 후속 검수](app-device-followup-20261030.md): 평가 전문 전달·TTS playback/콜백·표시 줄바꿈·기록 직접 이동·processing 애니메이션·성장 페이지 전환 접힘 수정. Analyze0·Flutter1226PASS/7SKIP. iOS29서명·설정검증 완료,28보존·미설치. 음향 실기기 미검증·운영 접근0. [28 디자인 이력](app-lab-refinement-20261029.md).
+[APP Round29 후속](app-device-round29-20261030.md): 문단·원문 경계/기록 텍스트 버튼/재처리 processing 애니메이션/답안 확인 하단 이동. 준거 삽입은 운영 고정 자료 패키지에도 존재, 임의 재구성 없음. 표 구조·숫자형 종합 단계 없음 확인. 자동검증·iOS30 준비 중,29보존. [29 이전 기록](app-device-followup-20261030.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 

@@ -56,8 +56,8 @@ class ResultAccordion extends StatelessWidget {
           ? const Color(0xFFFFF8EB)
           : const Color(0xFFF8FAFC),
       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-      shape: EssayDesign.shape,
-      collapsedShape: EssayDesign.shape,
+      shape: EssayDesign.accordionShape,
+      collapsedShape: EssayDesign.accordionShape,
       title: Text(title, textAlign: TextAlign.left, style: AppTokens.cardTitle),
       children: [
         DefaultTextStyle.merge(
@@ -96,6 +96,10 @@ abstract final class EssayDesign {
   static final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(radius),
     side: const BorderSide(color: AppTokens.cardBorder),
+  );
+  static final accordionShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(radius),
+    side: const BorderSide(color: Color(0xFF9CAABE)),
   );
   static final segmentStyle = ButtonStyle(
     minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
@@ -167,7 +171,7 @@ String displayEssayText(String source) {
   final lines = source.replaceAll('\r\n', '\n').split('\n');
   final out = <String>[];
   final structured = RegExp(
-    r'^\s*(?:[•●▶①-⑳]|[-*] |\d+[.)]|\[|준거|평가 영역|채점|문항|하위|[|]|.*[=<>∑√])',
+    r'^\s*(?:[•●▶①-⑳]|[-*] |\d+[.)]|\[|(?:상|중|하)?\s*[SABCDEF]\s+\d|준거|평가 기준|평가 변화|평가 설명|개선 방법:|평가 영역|채점|문항|하위|[|]|.*[=<>∑√])',
   );
   for (final line in lines) {
     if (out.isNotEmpty &&
@@ -176,6 +180,8 @@ String displayEssayText(String source) {
         !RegExp(r'[.!?。:]$').hasMatch(out.last.trim()) &&
         !structured.hasMatch(line) &&
         !line.contains('  ') &&
+        !RegExp(r'^\s*(?:\d+[.)]|(?:상|중|하)?\s*[SABCDEF]\s+\d)')
+            .hasMatch(out.last) &&
         !out.last.contains('|') &&
         !out.last.contains('  ') &&
         !RegExp(r'[=<>∑√]').hasMatch(out.last)) {
@@ -184,7 +190,9 @@ String displayEssayText(String source) {
       out.add(line);
     }
   }
-  return out.join('\n');
+  return out
+      .join('\n')
+      .replaceAllMapped(RegExp(r'(?<!\n)\n(?=개선 방법:)'), (_) => '\n\n');
 }
 
 class ProcessingGuidance extends StatefulWidget {
@@ -197,7 +205,12 @@ class ProcessingGuidance extends StatefulWidget {
 class _ProcessingGuidanceState extends State<ProcessingGuidance> {
   Timer? timer;
   int index = 0;
-  static const messages = ['첨삭 결과를 기다리고 있어요.', '잠시 쉬어가세요. 결과가 준비되면 확인할 수 있어요.'];
+  static const messages = [
+    '첨삭 결과를 기다리고 있어요.',
+    '잠시 쉬어가세요. 결과가 준비되면 확인할 수 있어요.',
+    '스트레칭을 하고 와도 좋아요.',
+    '조금만 기다려 주세요.',
+  ];
   void schedule() {
     timer?.cancel();
     if (widget.active) {

@@ -214,6 +214,7 @@ void main() {
           expect(jsonDecode(disk[key]!)['body'], '');
         } else {
           expect(find.text('첨삭 결과'), findsOneWidget);
+          expect(find.widgetWithText(TextButton, '나의 첨삭 기록'), findsOneWidget);
           expect(
             jsonDecode(jsonDecode(disk[key]!)['body'] as String)['runId'],
             'run',
