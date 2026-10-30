@@ -50,6 +50,16 @@ class _AdminFeedbackPageState extends ConsumerState<AdminFeedbackPage> {
     return ShellPage(
       children: [
         const AppHeader(title: '문의 관리', subtitle: '최신 문의부터 확인하고 상태를 관리해요.'),
+        Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ListTile(
+            leading: const Icon(Icons.insights),
+            title: const Text('Analytics 대시보드'),
+            subtitle: const Text('베타 전환·운영 성과 집계'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/my/admin/analytics'),
+          ),
+        ),
         _FilterBar(
           selected: _filter,
           onChanged: (value) => setState(() => _filter = value),

@@ -1,3 +1,6 @@
+import '../analytics/analytics_providers.dart';
+import '../analytics/domain/analytics_events.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -116,6 +119,8 @@ class _AnswerOcrPageState extends ConsumerState<AnswerOcrPage> {
 
   Future<void> recognize() async {
     if (photo == null) return;
+    final analytics = ref.read(analyticsServiceProvider);
+    analytics.logEvent(AnalyticsEvents.essayOcrStart);
     setState(() {
       busy = true;
       error = null;
@@ -123,12 +128,18 @@ class _AnswerOcrPageState extends ConsumerState<AnswerOcrPage> {
     try {
       final text = await AnswerOcrEngine().recognize(photo!);
       if (!activeOwner) return;
+      analytics.logEvent(
+        text.trim().isEmpty
+            ? AnalyticsEvents.essayOcrFailure
+            : AnalyticsEvents.essayOcrSuccess,
+      );
       if (text.trim().isEmpty) {
         setState(() => error = '글자를 찾지 못했어요. 사진을 확인하고 다시 시도해 주세요.');
       } else {
         editor.text = text;
       }
     } catch (_) {
+      analytics.logEvent(AnalyticsEvents.essayOcrFailure);
       if (mounted) setState(() => error = '텍스트를 인식하지 못했어요. 사진과 기존 답안은 유지됩니다.');
     } finally {
       if (mounted) setState(() => busy = false);

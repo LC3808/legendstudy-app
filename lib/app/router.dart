@@ -26,6 +26,7 @@ import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
+import '../features/analytics/presentation/admin_analytics_page.dart';
 import '../features/auth/auth_errors.dart';
 import '../features/auth/presentation/auth_page.dart';
 import '../features/auth/presentation/owner_auth_check_page.dart';
@@ -319,6 +320,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                         ),
                       ),
                     ],
+                  ),
+                  GoRoute(
+                    path: 'admin/analytics',
+                    builder: (_, _) => const NestedPage(
+                      title: 'Analytics',
+                      child: AdminAnalyticsPage(),
+                    ),
                   ),
                 ],
               ),

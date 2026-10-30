@@ -1,3 +1,7 @@
+import '../analytics/presentation/analytics_view.dart';
+import '../analytics/analytics_providers.dart';
+import '../analytics/domain/analytics_events.dart';
+
 import 'package:go_router/go_router.dart';
 
 import 'result_pdf.dart';
@@ -396,6 +400,10 @@ class _Result extends ConsumerWidget {
           additional =
               true; // Explicit choice only; never silently spend Credit.
         }
+        ref.read(analyticsServiceProvider).logEvent(
+          AnalyticsEvents.essayRewriteStart,
+          {'is_free': !additional},
+        );
         await Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (_) => SourceCatalogPage(
@@ -478,6 +486,7 @@ class _Result extends ConsumerWidget {
                     header: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        const AnalyticsView(AnalyticsEvents.essayResultView),
                         EssayResultHeader(
                           record: displayRecord,
                           questionId: questionId,

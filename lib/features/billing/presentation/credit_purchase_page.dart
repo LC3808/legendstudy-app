@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/shell_widgets.dart';
+import '../../analytics/analytics_guard.dart';
+import '../../analytics/analytics_providers.dart';
+import '../../analytics/domain/analytics_events.dart';
 import '../../credits/credit_balance.dart';
 import '../billing_providers.dart';
 import '../credit_product.dart';
@@ -26,6 +29,16 @@ class CreditPurchasePage extends ConsumerStatefulWidget {
 class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
   IapController? _controller;
   bool _showHistory = false;
+  BillingPhase? _lastPhase;
+
+  @override
+  void initState() {
+    super.initState();
+    // Behaviour event: viewing the credit pricing screen (GA4). Not a purchase.
+    ref
+        .read(analyticsServiceProvider)
+        .logEventOnce('credit_pricing_view', AnalyticsEvents.creditPricingView);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +48,17 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
         !auth.hasError &&
         auth.value?.isAuthenticated == true;
     final controller = ref.watch(iapControllerProvider);
+    // Behaviour signal only; the server ledger remains the official record of a
+    // completed purchase and revenue, never this GA4 event.
+    if (controller != null && controller.phase != _lastPhase) {
+      _lastPhase = controller.phase;
+      final analytics = ref.read(analyticsServiceProvider);
+      if (controller.phase == BillingPhase.success) {
+        analytics.logEvent(AnalyticsEvents.creditPurchaseSuccess);
+      } else if (controller.phase == BillingPhase.error) {
+        analytics.logEvent(AnalyticsEvents.creditPurchaseFailed);
+      }
+    }
     if (!identical(controller, _controller)) {
       _controller = controller;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -141,7 +165,13 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
                       controller.storeProducts.containsKey(product.id) &&
                       controller.phase != BillingPhase.purchasing &&
                       controller.phase != BillingPhase.pending,
-                  onBuy: () => controller.buy(product),
+                  onBuy: () {
+                    ref.read(analyticsServiceProvider).log(
+                      AnalyticsEvents.creditPurchaseStart,
+                      params: {AnalyticsParamKeys.productId: product.id},
+                    );
+                    controller.buy(product);
+                  },
                 ),
                 const SizedBox(height: AppTokens.space12),
               ],

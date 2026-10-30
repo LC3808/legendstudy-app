@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/theme/app_theme.dart';
+import '../analytics/domain/analytics_events.dart';
+import '../analytics/presentation/analytics_view.dart';
 import '../credits/credit_balance.dart';
 import '../../shared/widgets/shell_widgets.dart';
 import '../../shared/widgets/legendstudy_lab_entry.dart';
@@ -15,6 +17,7 @@ class LabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ShellPage(
     children: [
+      const AnalyticsView(AnalyticsEvents.essayLabView, onceKey: 'lab_view'),
       const AppHeader(title: 'LAB'),
       const CreditBalanceCard(showTopUp: true, compact: true),
       // Owner order (2026-10-09): 논술 LAB first (live, primary CTA), then

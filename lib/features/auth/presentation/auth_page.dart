@@ -1,3 +1,6 @@
+import '../../analytics/analytics_providers.dart';
+import '../../analytics/domain/analytics_events.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +51,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     }
     final profile = ref.read(profileRepositoryProvider);
     final signingUp = _signUp;
+    ref.read(analyticsServiceProvider).logEvent(
+      signingUp ? AnalyticsEvents.signUp : AnalyticsEvents.login,
+      {'source': 'email', 'status': 'started'},
+    );
     FocusScope.of(context).unfocus();
     setState(() {
       _busy = true;
@@ -93,6 +100,10 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       _message('지금은 소셜 로그인을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.');
       return;
     }
+    ref.read(analyticsServiceProvider).logEvent(AnalyticsEvents.login, {
+      'source': provider.name,
+      'status': 'started',
+    });
     setState(() => _busy = true);
     try {
       // Browser success only means opened; native success includes token exchange.

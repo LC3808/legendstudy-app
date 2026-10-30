@@ -1,3 +1,5 @@
+import '../analytics/analytics_providers.dart';
+import '../analytics/domain/analytics_events.dart';
 import 'result_disclosure.dart';
 import 'exam_presentation.dart';
 import 'exam_session_status.dart';
@@ -197,6 +199,9 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
 
   void selectUniversity(String id) {
     if (pushingUniversity) return;
+    ref
+        .read(analyticsServiceProvider)
+        .logEvent(AnalyticsEvents.universitySelect);
     if (university == null) {
       final page = _SourceSelection(
         owner: widget.owner,
@@ -266,7 +271,14 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
         for (final x in options)
           DropdownMenuItem(value: x, child: Text(labels?[x] ?? x)),
       ],
-      onChanged: options.isEmpty || widget.rewriteRun != null ? null : change,
+      onChanged: options.isEmpty || widget.rewriteRun != null
+          ? null
+          : (value) {
+              ref
+                  .read(analyticsServiceProvider)
+                  .logEvent(AnalyticsEvents.examSelect);
+              change(value);
+            },
     ),
   );
   @override
@@ -691,6 +703,14 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                     onChanged: widget.rewriteRun != null
                         ? null
                         : (checked) => setState(() {
+                            ref.read(analyticsServiceProvider).logEvent(
+                              AnalyticsEvents.questionSelect,
+                              {
+                                'status': checked == true
+                                    ? 'selected'
+                                    : 'deselected',
+                              },
+                            );
                             if (checked == true) {
                               selection.add(q['key'] as String);
                             } else {
@@ -1144,6 +1164,10 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       if (imageDirty && !imageSaving) await savePhoto(photo);
       if (!mounted) return;
       final saved = ctrl.draftStatus == DraftStatus.saved;
+      ref.read(analyticsServiceProvider).logEvent(
+        AnalyticsEvents.essayDraftSave,
+        {'status': saved ? 'saved' : 'failed'},
+      );
       setState(() {
         manualSaveNotice = !saved
             ? '저장하지 못했어요. 다시 시도해 주세요.'
@@ -1225,6 +1249,9 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       controller = EssayController(g, initialBody: d.body)
         ..revision = d.revision;
       editor.text = d.body;
+      ref
+          .read(analyticsServiceProvider)
+          .logEvent(AnalyticsEvents.essayEditorOpen);
       controller!.addListener(refresh);
       setState(() {});
       _notifyContent();
@@ -1270,6 +1297,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       return;
     }
     editor.text = value;
+    ref.read(analyticsServiceProvider).logEvent(AnalyticsEvents.essayOcrApply);
     controller!.edit(value);
     _notifyContent();
     await controller!.save();
@@ -2257,6 +2285,13 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           saved.revision,
         );
       }
+      // Behavioural send intent, not a ledger/completion event. No bodies or IDs.
+      ref.read(analyticsServiceProvider).logEvent(
+        parentId == null
+            ? AnalyticsEvents.essaySubmitStart
+            : AnalyticsEvents.essayRewriteSubmit,
+        {'is_free': parentId != null, 'question_count': answers.length},
+      );
       submissionWait
         ..reset()
         ..start();
