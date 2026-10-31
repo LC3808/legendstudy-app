@@ -173,3 +173,6 @@ Rollback: revert this task's commits individually on the corresponding branches.
 - Push completed; LOCAL/REMOTE equality verified for APP `8fe2cdb86b8411862657e717de880cfc32bdef55` and WEB `93b37419105835fb9b793f285c85cf27ab649bb4`. This receipt is recorded in the following documentation-only commit. No Production deployment inferred from commits.
 - Durable private execution logs copied under the private candidate folder `verification/`; no user answers or secrets added to Git.
 - Rollback WEB commits in reverse order (`93b3741`, then `f7c9dbd`); APP offline code `9e555ac` can be reverted independently of this documentation record. Never run old operating rollback SQL for this offline change.
+
+
+10/31 후속: [숭실 공식 표·정정 후보·표시 분리·6대학 검사](rubric-structure-fix-20261031.md). 기존 후보와 운영 미적용 경계 유지.

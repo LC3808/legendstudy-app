@@ -1,3 +1,7 @@
+## 2026-10-31 — 공식 채점기준 구조
+
+[숭실 PDF 열 혼합 재현·v3 별도 후보·6대학 제한 검사·APP/WEB 표시 분리](rubric-structure-fix-20261031.md). 운영 교체/과거 결과 변경 없이 검수본 전용 optional 읽기모델 준비. APP2419808/WEBe809969. Analyze0·APP1267PASS/7SKIP·WEB1395PASS/4SKIP·TS/buildPASS·Lint0오류/4기존경고·Python9PASS. 로컬 5너비 확인, 운영/Provider/설치0.
+
 ## 2026-10-30 — 출시 전 안정화
 
 [공식 PDF 추출 오류·SWU 별도 후보·품질 도구·WEB18실패 분석·APP/WEB 계약](pre-release-stabilization-20261030.md). APP9e555ac/WEB93b3741. Analyze0·APP1233PASS/7SKIP·WEB1393PASS/0FAIL/4SKIP·TS/buildPASS·Lint0오류/4경고·Python32PASS. 운영 쓰기/Provider/기기설치0. 기존 기록·버전 보존.
