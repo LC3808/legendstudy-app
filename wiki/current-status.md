@@ -1,5 +1,7 @@
 # Current Status
 
+[공통 공지·관리·읽음](notices-system.md): APP/WEB 구현·격리 검증. SQL/운영 미적용.
+
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 
 [최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
@@ -9,8 +11,6 @@
 [10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
-
-[10/28 건국 Worker 복구·예약 해제 이력](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28).
 
 [1,014문항 검사·WEB 배포·숙명/광운 후속](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완).
 

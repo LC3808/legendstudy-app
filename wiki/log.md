@@ -1,3 +1,7 @@
+## 2026-10-31 — TASK 01 공통 공지사항
+
+[공통 콘텐츠·읽음·관리자 계약 및 검증](notices-system.md). 기존 개인 알림을 유지하고 APP 종/MY·WEB 목록/상세/관리자 연결. SQL은 Owner 승인 후보, 운영 미적용. 격리 PostgreSQL에서 권한/기간/채널/공유 읽음/충돌/보관/롤백 보존 검증.
+
 ## 2026-10-31 — Owner 검수 조건부 배포 재검증·롤백
 
 [실계정 권한 실패와 롤백](web-safe-owner-preview-20261031.md): ef5c635/94ae321b 확인, 권한11PASS·anonymous401. Owner 신규 로그인/기존49기록 정상이나 검수 API403 ADMIN_REQUIRED. 승인 조건 미충족으로 기존f9e0e83f로 실제 롤백 확인. DB/Auth/평가Worker/Credit/History 변경 없음. 해당 계정 관리자 권한 확인 후 재배포 필요.
