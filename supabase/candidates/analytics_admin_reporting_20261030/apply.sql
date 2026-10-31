@@ -246,7 +246,7 @@ begin
     select coalesce(sum(op.amount),0) as refunded
       from public.payment_operations op
       join public.payment_orders po on po.id=op.order_id
-      where op.kind='CANCEL' and op.state='SUCCEEDED' 
+      where op.kind='CANCEL' and op.state='SUCCEEDED'
         and po.mode='LIVE' and po.currency='KRW' and op.completed_at>=p_from and op.completed_at<p_to
   ),
   by_sku as (

@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK07 출시 검수 HOLD](essay-beta-release-readiness-task07-20261101.md): SQL·GA4·실기기 검증 대기.
+[TASK08 통합 PARTIAL/HOLD](essay-beta-integration-task08-20261101.md): 격리 SQL·Analytics 보완/자동검증, 로컬 WEB·TEST iOS33. 공통 E2E 환경·Owner 검수 미완료.
 
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 
@@ -21,8 +21,6 @@
 [대학 STANDBY 미완료](essay-all-university-standby-20261026.md) · [관리자 Credit 지급·회수](admin-credit-operations-20261027.md) · [수리 코칭 필수 후속](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장).
 
 [고려 정정](commerce-korea-20261026.md). 인하 Math 같은 회차3문항·기존1Credit 정산/Q1보존, 과거 거절조건 미확정: [복구](inha-photo-extraction-20261026.md). [출시 전 안정화·미배포/정정 후보·검증](pre-release-stabilization-20261030.md).
-
-[2026-10-25 APP 복원·1-A 연결 이력](essay-group-1a-20261025.md).
 
 [통합 전 Claude 검수·Codex 운영 상태 원문 보존](app-claude-status-archive-20261028.md).
 

@@ -1,5 +1,6 @@
 # LegendStudy Wiki Index
 
+[TASK08 통합·격리 검수·Analytics 계약·Owner 대기/HOLD](essay-beta-integration-task08-20261101.md).
 [2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
 
 [10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.

@@ -206,3 +206,7 @@ Owner 후속 작업:
 - WEB: `src/lib/analytics/{events,client,client.test}.ts`와 auth/forms, source selection/writer, submit, progress/retry, result, rewrite, growth 기존 화면의 계측 지점. 구현 커밋 `d5cd458`.
 - SQL 후보: apply/precheck의 token 열 수정, 격리 schema/contract fixtures. 운영 적용본 아님.
 - Wiki handoff 검사 PASS (current-status 11,962 bytes). APP과 WEB 코드의 실제 수신/운영 집계는 위 제한대로 후속 검증한다. 이 절의 TASK03 기록이 과거 §2/§14의 미계측/미실행 상태보다 최신이다.
+
+## TASK08 aggregation candidate correction
+
+Modern exam-level scope, KRW revenue/refund and separate Credit recovery, USD ACTUAL/ESTIMATED/UNKNOWN corrected and tested in isolation; no production apply. [Details and remaining gates](essay-beta-integration-task08-20261101.md).
