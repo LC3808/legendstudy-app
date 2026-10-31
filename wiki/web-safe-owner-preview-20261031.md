@@ -71,3 +71,16 @@ Owner 승인: 기존 운영 화면 보존, 동일 도메인 관리자 전용 읽
 Owner가 위 URL에서 실제 계정 결과를 검수한 뒤 **전체 운영 페이지 교체를 별도 승인**해야 한다. 현재 수정본 전체는 미배포 상태이며 승인 후 최종 branch diff·운영 설정·기존 API 호환성을 다시 확인하고 교체한다. 배포 직후 로그인·기록·결과 조회 확인 실패 시 기존 실제 배포로 복귀한다. 이번에는 additive preview만 운영 반영했다. 스토어 제출·실기기 설치 없음.
 
 WEB commit/push: `8a4d3cb` 및 `ef5c635`, LOCAL/REMOTE SHA 일치 확인. 배포 기록은 이 Unified Wiki에 별도 commit한다.
+
+
+## Owner 조건부 배포 승인 후 재검증 및 롤백 (2026-10-31)
+
+최종 재검증에서 WEB LOCAL/REMOTE `ef5c635865e7801f6086602ef2c10e0ccb7174f3` 일치, 실제 canonical `94ae321b-9471-418b-b0a2-d72d21a252ef` success 확인. 이미 배포된 동일 검수본은 중복 배포하지 않았다. 권한 회귀 11/11 PASS, 비로그인 실제 GET은 401 LOGIN_REQUIRED/no-store. 기존 관리자 세션은 실기록 15건과 3문항 parent 비교를 정상 조회했다.
+
+Owner가 직접 다른 계정으로 신규 로그인한 뒤 기존 운영 History 49건과 서울여대 무료 재첨삭 `6fe629cb-7bfd-4907-b144-439b299cfdc3`가 확인됐다. 그러나 같은 세션의 검수 페이지는 **HTTP 403 ADMIN_REQUIRED**를 반환했다. 로그인 성공과 관리자 권한을 구분한다. 서버 권한 gate를 우회하거나 admin_users/Auth/DB를 수정하지 않았다. 이 계정의 Owner 검수 접근 조건은 FAIL이며 신규 관리자 로그인 PASS로 보고하지 않는다.
+
+Owner 지시의 ‘문제 발생 시 기존 운영 배포로 롤백’에 따라 Cloudflare rollback 실행: API success, canonical이 **f9e0e83f-6f93-470d-a1e0-0c711607c53c**로 복귀함을 확인했다. 현재 운영 SHA는 **2f838c29fa25c38c399a6a43f9d567dd89053ffc**다. 검수 후보 ef5c635와 배포94ae321b는 보존된다. 이전 섹션의 검수 경로 배포 상태는 이 최신 롤백 기록으로 대체한다.
+
+비공개 증빙: `owner-approval-reverification.json`, `owner-conditional-rollback.json` (기존 백업 디렉터리). 이번 변경은 Pages rollback과 Wiki 기록뿐이다. DB/평가 Worker/Credit/History 변경 및 Provider/평가 요청 없음. 일반 사용자 차단은 이번 실제 비관리자 세션 403으로도 확인됐다. 서울여대 **검수본** 결과/이전 회차는 권한 차단으로 미검증. 재배포 전에 해당 Owner 계정의 관리자 자격 확인 및 필요한 권한 변경에 대한 별도 승인이 필요하다. 기존 관리자 접근 계정으로는 다른 계정 소유 기록을 대신 조회할 수 없다.
+
+롤백 후 브라우저 reload 검증: 기존 서울여대 결과에서 문제1·문제2와 무료 재첨삭 내용, 로그인 세션, Credit95 표시 정상/alert 없음. 검수 API는 404로 회수됨을 확인(기존 브라우저에 남은 shell은 조회 실패를 표시). Python 기본 User-Agent HTTP 재대조는403으로 완료하지 못했으나 curl anonymous401과 브라우저 정상 조회를 별도로 확인했다.

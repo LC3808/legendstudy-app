@@ -1,3 +1,7 @@
+## 2026-10-31 — Owner 검수 조건부 배포 재검증·롤백
+
+[실계정 권한 실패와 롤백](web-safe-owner-preview-20261031.md): ef5c635/94ae321b 확인, 권한11PASS·anonymous401. Owner 신규 로그인/기존49기록 정상이나 검수 API403 ADMIN_REQUIRED. 승인 조건 미충족으로 기존f9e0e83f로 실제 롤백 확인. DB/Auth/평가Worker/Credit/History 변경 없음. 해당 계정 관리자 권한 확인 후 재배포 필요.
+
 ## 2026-10-31 — WEB 동일 도메인 안전 검수
 
 [관리자 읽기 검수·실계정 결과·실제 배포/백업/롤백](web-safe-owner-preview-20261031.md). 기존959asset/20API/설정 보존, 검수3asset/1GET 추가. UI1390452·구현ef5c635·Pages94ae321b. 전체1420PASS/4SKIP/0FAIL. 기존 인증 세션·15기록·3문항/parent 및 일반 운영 결과 확인. 전체 운영 페이지 교체 승인 대기; DB/평가Worker/Provider/Credit/History 변경 없음.

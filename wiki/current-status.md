@@ -1,6 +1,6 @@
 # Current Status
 
-[WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): 검수 경로만 추가. 운영 페이지 교체 승인 대기.
+[WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 
 [최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
 
