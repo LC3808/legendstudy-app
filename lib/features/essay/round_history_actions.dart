@@ -1,3 +1,5 @@
+import '../credits/essay_beta_credit.dart';
+
 import 'dart:convert';
 import 'dart:async';
 
@@ -160,6 +162,7 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
           (before != jsonEncode(data) && data['state'] == 'completed')) {
         ref.invalidate(sharedEssayHistoryProvider(widget.owner));
         ref.invalidate(creditBalanceProvider);
+        ref.invalidate(essayBetaCreditProvider);
       }
     } catch (_) {
       if (current) {

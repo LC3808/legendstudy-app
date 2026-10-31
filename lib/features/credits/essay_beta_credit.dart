@@ -2,32 +2,80 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/supabase/supabase_providers.dart';
 import 'credit_balance.dart';
 
 class EssayBetaCredit {
-  const EssayBetaCredit(this.available, this.expiresAt);
+  const EssayBetaCredit(
+    this.available,
+    this.expiresAt, {
+    this.ended = false,
+    this.endsAt,
+    this.campaignId,
+    this.policyVersion,
+    this.noticeId,
+    this.noticeSeen = true,
+  });
   final int available;
   final DateTime expiresAt;
+  final bool ended;
+  final DateTime? endsAt;
+  final String? campaignId, policyVersion, noticeId;
+  final bool noticeSeen;
   static EssayBetaCredit? parse(Map<String, dynamic> data) {
-    if (data['version'] != 'essay-beta-credit-v1') {
+    if (data['version'] != 'essay-beta-credit-v2') {
       throw const FormatException('Unknown beta credit contract');
     }
-    if (data['active'] == false) return null;
+    if (data['active'] == false && data['status'] == 'inactive') return null;
+    final end = DateTime.tryParse(data['ends_at']?.toString() ?? '');
+    if (data['active'] == false && data['status'] == 'ended' && end != null) {
+      return EssayBetaCredit(0, end, ended: true, endsAt: end);
+    }
     final count = data['available'];
     final expiry = DateTime.tryParse(data['expires_at']?.toString() ?? '');
     if (data['active'] != true ||
+        data['status'] != 'active' ||
         count is! int ||
         count < 0 ||
-        count > 2 ||
-        expiry == null) {
+        count > 1 ||
+        expiry == null ||
+        end == null ||
+        data['campaign_id'] is! String ||
+        data['policy_version'] is! String ||
+        data['notice_seen'] is! bool) {
       throw const FormatException('Invalid beta credit balance');
     }
-    return EssayBetaCredit(count, expiry);
+    return EssayBetaCredit(
+      count,
+      expiry,
+      endsAt: end,
+      campaignId: data['campaign_id'] as String,
+      policyVersion: data['policy_version'] as String,
+      noticeId: data['notice_id'] as String?,
+      noticeSeen: data['notice_seen'] as bool,
+    );
   }
 }
+
+String betaEndDate(DateTime end) {
+  final lastDay = end
+      .toUtc()
+      .add(const Duration(hours: 9))
+      .subtract(const Duration(days: 1));
+  return '${lastDay.year}년 ${lastDay.month}월 ${lastDay.day}일';
+}
+
+String betaPolicyText(DateTime end) =>
+    '인문논술 베타 대상 시험에서 매일 무료 첨삭 1회를 이용할 수 있어요. '
+    '매일 00:00 KST에 갱신되며 미사용분은 이월되지 않습니다.\n\n'
+    '베타는 ${betaEndDate(end)}까지 운영됩니다. 베타 무료 첨삭의 무료 재첨삭은 '
+    '최초 완료 후 최대 14일 이내, 베타 종료 전까지 1회 가능합니다. '
+    '가입·구매 Credit의 기존 정책은 유지됩니다.\n\n'
+    '사용 중 불편한 점은 MY 설정의 문의·건의사항 경로로 알려주세요. '
+    '공지사항에서 안내를 다시 확인할 수 있어요.';
 
 final essayBetaCreditProvider = FutureProvider.autoDispose<EssayBetaCredit?>((
   ref,
@@ -37,14 +85,13 @@ final essayBetaCreditProvider = FutureProvider.autoDispose<EssayBetaCredit?>((
   if (owner == null || client == null) return null;
   try {
     final data = await client.rpc<Map<String, dynamic>>(
-      'essay_beta_daily_claim',
+      'essay_beta_daily_claim_v2',
     );
     if (!ref.mounted || ref.read(authStateProvider).value?.userId != owner) {
       return null;
     }
     final result = EssayBetaCredit.parse(data);
-    if (result != null) {
-      ref.invalidate(creditBalanceProvider);
+    if (result != null && !result.ended) {
       final wait = result.expiresAt.difference(DateTime.now());
       final timer = Timer(
         wait.isNegative
@@ -75,6 +122,37 @@ class EssayBetaCreditEntry extends ConsumerStatefulWidget {
 
 class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
     with WidgetsBindingObserver {
+  final Set<String> _shown = {};
+  Future<void> _showPolicy(EssayBetaCredit value, String owner) async {
+    final key = '$owner:${value.campaignId}:${value.policyVersion}';
+    if (value.ended || value.noticeSeen || !_shown.add(key)) return;
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('논술 LAB 베타 무료 이용 안내'),
+        scrollable: true,
+        content: Text(betaPolicyText(value.endsAt!)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('확인'),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || ref.read(authStateProvider).value?.userId != owner) return;
+    try {
+      await ref
+          .read(supabaseClientProvider)
+          ?.rpc<void>(
+            'essay_beta_notice_ack',
+            params: {'p_campaign': value.campaignId},
+          );
+    } catch (_) {
+      // Do not force the dialog repeatedly in this session when saving fails.
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -107,6 +185,14 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
     });
     final state = ref.watch(essayBetaCreditProvider);
     final value = state.value;
+    final owner = ref.watch(authStateProvider).value?.userId;
+    if (value != null && !value.ended && owner != null && !value.noticeSeen) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+          unawaited(_showPolicy(value, owner));
+        }
+      });
+    }
     return Column(
       children: [
         if (state.hasError)
@@ -122,14 +208,31 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
               ),
             ),
           )
-        else if (value != null && value.expiresAt.isAfter(DateTime.now()))
+        else if (value != null &&
+            (value.ended || value.expiresAt.isAfter(DateTime.now())))
           Material(
             child: SafeArea(
               bottom: false,
               child: ListTile(
-                title: Text('오늘 남은 베타 첨삭권 ${value.available}개'),
-                subtitle: const Text(
-                  '매일 첫 접속 시 2개 지급 · 자정 만료 · 베타 대상 시험 전용',
+                title: Text(
+                  value.ended
+                      ? '베타 무료 첨삭 제공이 종료되었습니다.'
+                      : value.available == 1
+                      ? '오늘의 무료 첨삭 · 1회 남음'
+                      : '오늘의 무료 첨삭을 모두 사용했습니다.',
+                ),
+                subtitle: Text(
+                  value.ended
+                      ? '가입·구매 Credit은 기존 정책대로 이용할 수 있어요.'
+                      : '매일 00:00 KST 갱신 · 이월 없음\n${value.available == 0 && value.expiresAt.isBefore(value.endsAt!) ? '다음 이용: 내일 00:00 KST · ' : ''}${betaEndDate(value.endsAt!)}까지',
+                ),
+                trailing: TextButton(
+                  onPressed: () => context.push(
+                    value.noticeId == null
+                        ? '/notices'
+                        : '/notices/${value.noticeId}',
+                  ),
+                  child: const Text('공지'),
                 ),
               ),
             ),

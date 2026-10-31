@@ -1,3 +1,7 @@
+## 2026-10-31 — TASK 02 베타 일일 무료 이용
+
+[베타 v2 정책·SQL 후보·동시성·APP/WEB 검증](essay-beta-daily-v2.md). Owner 종료 경계 확정, 기존 원장 재사용·별도 표시·실패 1회 복구·재첨삭 cutoff. Production SELECT만 수행, 캠페인/공지/평가 실행 없음.
+
 ## 2026-10-31 — TASK 01 공통 공지사항
 
 [공통 콘텐츠·읽음·관리자 계약 및 검증](notices-system.md). 기존 개인 알림을 유지하고 APP 종/MY·WEB 목록/상세/관리자 연결. SQL은 Owner 승인 후보, 운영 미적용. 격리 PostgreSQL에서 권한/기간/채널/공유 읽음/충돌/보관/롤백 보존 검증.

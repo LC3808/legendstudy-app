@@ -1,3 +1,4 @@
+import '../credits/essay_beta_credit.dart';
 import '../analytics/analytics_providers.dart';
 import '../analytics/domain/analytics_events.dart';
 import 'result_disclosure.dart';
@@ -1868,6 +1869,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       if (state == 'completed' || state == 'failed') {
         ref.invalidate(sharedEssayHistoryProvider(widget.owner));
         ref.invalidate(creditBalanceProvider);
+        ref.invalidate(essayBetaCreditProvider);
         return;
       }
     } catch (_) {
@@ -2335,6 +2337,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           runState = 'processing';
           notice = '';
         });
+        ref.invalidate(essayBetaCreditProvider);
         widget.onSubmittedChanged?.call(true);
         unawaited(pollStatus());
       }
