@@ -30,10 +30,12 @@ void main() {
     Map<String, dynamic>.from(fixture['after'] as Map),
     'question',
   );
-  test('comparison overview carries full stored criterion and feedback', () {
+  test('comparison overview separates concise criterion from feedback and preserves raw source', () {
     final e = approvedEssayEvaluation(after, before);
     final body = e.changes['좋아진 부분']!.join();
-    expect(body, contains(after.rubric.first.name));
+    expect(e.dimensions.first.officialCriterion, after.rubric.first.name);
+    expect(e.dimensions.first.explanation, after.rubric.first.feedback);
+    expect(body, contains(e.dimensions.first.label));
     expect(body, contains(after.rubric.first.feedback));
   });
   test(

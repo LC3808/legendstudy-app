@@ -7,7 +7,7 @@ String readableEssayText(String value) =>
     value.replaceAll(RegExp(r'\s+'), ' ').trim();
 String withoutUnverifiedWeight(String value) =>
     value.replaceAll(RegExp(r'\(?\s*\d+(?:\.\d+)?\s*%\s*\)?'), '').trim();
-String shortCriterionTitle(String value) {
+String? reviewedCriterionAlias(String value) {
   final text = readableEssayText(withoutUnverifiedWeight(value));
   final compact = String.fromCharCodes(text.runes.take(35)).replaceAll(' ', '');
   for (final pair in const [
@@ -19,10 +19,26 @@ String shortCriterionTitle(String value) {
   ]) {
     if (compact.contains(pair.$1)) return pair.$2;
   }
+  return null;
+}
+
+String shortCriterionTitle(String value) {
+  final alias = reviewedCriterionAlias(value);
+  if (alias != null) return alias;
+  final text = readableEssayText(withoutUnverifiedWeight(value));
   return text.runes.length > 38
       ? '${String.fromCharCodes(text.runes.take(38))}…'
       : text;
 }
+
+bool isRubricTable(String text) =>
+    RegExp(r'(채점\s*기준|평가\s*기준)[\s\S]*배점').hasMatch(text);
+
+String resultCriterionTitle(String name, {required int criterionCount}) =>
+    reviewedCriterionAlias(name) ??
+    (criterionCount == 1 && isRubricTable(name)
+        ? '문항별 채점기준'
+        : shortCriterionTitle(name));
 
 EssayEvaluation approvedEssayEvaluation(
   EvaluationReport report,
@@ -43,9 +59,10 @@ EssayEvaluation approvedEssayEvaluation(
       for (final c in report.rubric)
         EssayDimension(
           c.id,
-          shortCriterionTitle(c.name),
+          resultCriterionTitle(c.name, criterionCount: report.rubric.length),
           c.rating,
-          '${withoutUnverifiedWeight(c.name)}\n\n${c.feedback}',
+          c.feedback,
+          officialCriterion: c.name,
           previousLevel: changes
               ?.where((x) => x.after.id == c.id)
               .firstOrNull
@@ -68,7 +85,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '좋아진 부분': [
           for (final c in changes.where((x) => x.direction == 'IMPROVED'))
-            '평가 기준\n${c.after.name}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
+            '평가 기준\n${resultCriterionTitle(c.after.name, criterionCount: report.rubric.length)}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
         ],
       if (changes != null)
         '유지한 부분': [
@@ -78,7 +95,7 @@ EssayEvaluation approvedEssayEvaluation(
       if (changes != null)
         '아직 확인할 부분': [
           for (final c in changes.where((x) => x.direction == 'DECLINED'))
-            '평가 기준\n${c.after.name}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
+            '평가 기준\n${resultCriterionTitle(c.after.name, criterionCount: report.rubric.length)}\n\n평가 변화\n${evaluationChangeSentence(c.before.rating, c.after.rating)}\n\n평가 설명\n${c.after.feedback}',
         ],
     },
   );

@@ -1,3 +1,4 @@
+import 'official_rubric.dart';
 import 'result_disclosure.dart';
 import 'evaluation_presentation.dart';
 import 'math_workspace_page.dart';
@@ -1198,6 +1199,15 @@ class _EssayResultViewState extends State<EssayResultView> {
   @override
   Widget build(BuildContext context) {
     final e = widget.evaluation;
+    final remainingEvidence = widget.evidenceLabels
+        .where(
+          (line) => !e.dimensions.any(
+            (d) =>
+                d.officialCriterion != null &&
+                line == '${d.officialCriterion} — ${d.explanation}',
+          ),
+        )
+        .toList();
     // Preserve repeated stored entries; fix duplication in disclosure layout only.
     final improvements = e.improvements,
         priorities = e.priorities,
@@ -1266,7 +1276,29 @@ class _EssayResultViewState extends State<EssayResultView> {
                               style: AppTokens.caption,
                             ),
                           const SizedBox(height: 8),
-                          if (widget.collapsedDetails)
+                          if (d.officialCriterion != null) ...[
+                            _diagnosis(
+                              d.explanation.trim().isEmpty
+                                  ? '상세 평가 설명이 제공되지 않았습니다.'
+                                  : d.explanation,
+                            ),
+                            ResultAccordion(
+                              title: '공식 채점기준 자세히 보기',
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  if (d.officialRubric != null)
+                                    OfficialRubricView(
+                                      rubric: d.officialRubric!,
+                                    ),
+                                  Text(
+                                    d.officialCriterion!,
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ] else if (widget.collapsedDetails)
                             ExpansionTile(
                               title: const Text('상세 평가'),
                               children: [
@@ -1291,7 +1323,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                   section('보완할 점', improvements, diagnostic: true),
                   section('먼저 고쳐야 할 부분', priorities, diagnostic: true),
                   section('다시 쓸 때 확인할 것', checklist, diagnostic: true),
-                  if (widget.isPreview || widget.evidenceLabels.isNotEmpty)
+                  if (widget.isPreview || remainingEvidence.isNotEmpty)
                     section(
                       '평가 근거',
                       widget.isPreview
@@ -1299,7 +1331,7 @@ class _EssayResultViewState extends State<EssayResultView> {
                               '${widget.question.origin.label} · 표시 예시',
                               '가상 제시문과 문제 요구를 바탕으로 구성한 화면 검토 자료입니다.',
                             ]
-                          : widget.evidenceLabels,
+                          : remainingEvidence,
                     ),
                   if (widget.question.officialSource != null)
                     ExternalLinkButton(

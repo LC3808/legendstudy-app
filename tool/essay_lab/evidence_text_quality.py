@@ -29,6 +29,15 @@ def text_findings(text):
             flag('D_POSSIBLE_SPLIT_WORD', i+1)
         if before and len(before) > 30 and not re.search(r'[.!?。]$', before) and line.strip():
             flag('ABNORMAL_LINE_BREAK', i+1)
+        if re.search(r'[가-힣]\s+\d+\s*[~–-]\s*\d+\s+[가-힣]', line) or (
+                before and re.fullmatch(r'\s*\d+\s*[~–-]\s*\d+\s*', line)
+                and re.search(r'[가-힣]$', before)):
+            flag('B_SCORE_IN_SENTENCE', i+1)
+        for low, high in re.findall(r'(\d+)\s*[~–-]\s*(\d+)', line):
+            if int(low) > int(high):
+                flag('INVALID_SCORE_RANGE', i+1)
+        if re.search(r'[가-힣]\s+[SABCDEF]\s+[가-힣]', line):
+            flag('B_GRADE_IN_SENTENCE', i+1)
         if re.fullmatch(r'\s*(?:하위|문항|배점|채점 기준 배점|평가 영역 평가 항목 내용)\s*', line):
             flag('B_FLATTENED_TABLE', i+1)
     counts = Counter(re.sub(r'\s+', ' ', s).strip() for s in re.split(r'(?<=[.!?])\s+|\n', text))

@@ -26,6 +26,13 @@ class EvidenceQualityTests(unittest.TestCase):
         self.assertIn('E_SUBQUESTION_ORDER', self.codes('[문항 1]의 (2)\n[문항 1]의 (1)'))
         self.assertNotIn('E_SUBQUESTION_ORDER', self.codes('[문항 1]의 (2)\n[문항 2]의 (1)'))
 
+    def test_score_and_grade_insertion_are_flags_not_repairs(self):
+        for text in ['이해를 논\n8~10\n리적으로', '다소 미흡 6~7 한 경우']:
+            self.assertIn('B_SCORE_IN_SENTENCE', self.codes(text))
+        self.assertIn('INVALID_SCORE_RANGE', self.codes('배점 10~8'))
+        self.assertIn('B_GRADE_IN_SENTENCE', self.codes('설명 S 우수함'))
+        self.assertNotIn('INVALID_SCORE_RANGE', self.codes('배점 8~10'))
+
     def package(self):
         return dict(exam_id='e', package_version=3, package_digest='prior', questions=[
             dict(question_id='q', source_page_references=[dict(role='criteria', startPage=6,

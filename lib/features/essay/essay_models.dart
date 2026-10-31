@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'official_rubric.dart';
+
 enum EssayStage { writing, processing, result, revising, comparison, failed }
 
 enum DraftStatus { saved, saving, conflict, failed }
@@ -64,8 +66,12 @@ class EssayDimension {
     this.explanation, {
     this.previousLevel,
     this.officialWeight,
+    this.officialCriterion,
+    this.officialRubric,
   });
   final String key, label, explanation;
+  final String? officialCriterion;
+  final OfficialRubric? officialRubric;
   final int? level, previousLevel;
   final num? officialWeight;
 }
