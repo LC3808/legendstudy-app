@@ -276,3 +276,23 @@
   as provisional future UI work. Source/generated image bytes and all code unchanged.
 - Documentation-only follow-up after 9abbb08; diff/scope checks PASS. Flutter tests
   and builds not rerun. No DB/Supabase changes, push or merge.
+
+
+## 2026-11-01 — 베타 출시 마케팅 & 논술 LAB 정비 (Claude, 기획·디자인·검토)
+
+- Owner FINAL INTEGRATED INSTRUCTION(§4~§17) 대응. 별도 브랜치
+  `claude/relaxed-stonebraker-027081`(main 기반). 기존 서비스 코드/운영 DB/Registry
+  미수정, Codex 브랜치 미접근. 산출물 = 문서·배너 자산·staging 템플릿만.
+- 런타임 실측: legendstudy.com = 티스토리(메인 `.ls-slider`), lab.legendstudy.com =
+  커스텀 LAB(대학 상세 `/essay-lab/universities/{sourceUniversityId}/`). 서강=인문
+  (경제경영)·11회차 등록, 건국=통합·수리 킬스위치(`math_evaluations_enabled`).
+- 생성: `wiki/beta-launch-marketing-20261101.md`(마스터·§17 보고), 슬라이더 수정
+  (`web-main-slider-fix-20261101.md`), 지원상태 UX(`essay-support-status-ux-20261101.md`),
+  일정 입력·검증(`essay-schedule-intake-20261101.md`), 마케팅 Analytics
+  (`marketing-analytics-events-20261101.md`). 자산 `assets/marketing/banners/`(배너
+  5키 WebP@1x/@2x + PNG 폴백 + SVG + gen.py), `assets/essay-schedule/`(CSV/JSON/validate.py).
+- 배너 렌더 PASS(모바일 320–430 잘림 0), validate.py PASS(2 rows 0 invalid). 서비스
+  코드 미변경이라 Flutter/WEB 빌드·테스트 해당 없음. 운영 DB 미반영.
+- 미완료(대기): §6-1 배너 카피 원문, 대학별 실제 일정 Owner 자료 순차 제공, 서강
+  경제경영 검증 게이트(DB SELECT/실평가), GA4 크로스도메인·Firebase, 베타 종료 시각
+  화면 문구 확정, 실제 티스토리 스킨 편집·배포(Codex/Owner).
