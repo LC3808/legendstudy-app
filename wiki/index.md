@@ -29,6 +29,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+WEB 안전 검수 / 동일 도메인 / 관리자 실계정 / 배포 백업·롤백: [Owner 읽기 검수 경로·실제 배포·권한·검증](web-safe-owner-preview-20261031.md).
+
 채점기준 표 / 숭실 배점 혼합 / 공식 근거 / 정정 후보 / APP·WEB: [10/31 구조 복원·숭실 최종 검증: 내용 PASS / 운영 기준 불일치 BLOCKED](rubric-structure-fix-20261031.md#숭실-v3-최종-검증--2026-10-31).
 
 출시 전 안정화 / 원문 정정 후보 / WEB18실패 / APP·WEB 표시 계약: [10/30 검증·위험·복구](pre-release-stabilization-20261030.md).

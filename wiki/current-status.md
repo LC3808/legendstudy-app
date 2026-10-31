@@ -1,6 +1,8 @@
 # Current Status
 
-[최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현, 운영 변경 없음. 실계정 WEB/실기기·출력 확장 승인 별도.
+[WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): 검수 경로만 추가. 운영 페이지 교체 승인 대기.
+
+[최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
 
 [Analytics 통합·기본OFF·SQL미적용·검증](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
 
@@ -10,7 +12,7 @@
 
 [10/28 건국 Worker 복구·예약 해제 이력](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28).
 
-[전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
+[1,014문항 검사·WEB 배포·숙명/광운 후속](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완).
 
 [베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 

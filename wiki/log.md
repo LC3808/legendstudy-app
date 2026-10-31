@@ -1,3 +1,7 @@
+## 2026-10-31 — WEB 동일 도메인 안전 검수
+
+[관리자 읽기 검수·실계정 결과·실제 배포/백업/롤백](web-safe-owner-preview-20261031.md). 기존959asset/20API/설정 보존, 검수3asset/1GET 추가. UI1390452·구현ef5c635·Pages94ae321b. 전체1420PASS/4SKIP/0FAIL. 기존 인증 세션·15기록·3문항/parent 및 일반 운영 결과 확인. 전체 운영 페이지 교체 승인 대기; DB/평가Worker/Provider/Credit/History 변경 없음.
+
 ## 2026-10-31 — 공식 채점기준 구조
 
 [10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.
