@@ -1,4 +1,5 @@
 import 'result_disclosure.dart';
+import 'approved_result_adapter.dart';
 import '../../core/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -10,11 +11,12 @@ class GrowthBars extends StatelessWidget {
     required this.before,
     required this.after,
     this.learning = false,
+    this.studentLabels = false,
     this.beforeLabel = '이전',
     this.afterLabel = '최근',
     super.key,
   });
-  final bool learning;
+  final bool learning, studentLabels;
   final String beforeLabel, afterLabel;
   final EvaluationReport before, after;
   @override
@@ -65,7 +67,13 @@ class GrowthBars extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                GrowthCriterionTitle(name: c.after.name),
+                if (studentLabels)
+                  Text(
+                    reviewedCriterionAlias(c.after.name) ??
+                        '평가 항목 ${after.rubric.indexOf(c.after) + 1}',
+                  )
+                else
+                  GrowthCriterionTitle(name: c.after.name),
                 const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +116,9 @@ class GrowthBars extends StatelessWidget {
         for (final c in changes.where(
           (c) => c.before.rating == null || c.after.rating == null,
         ))
-          Text('${c.after.name} · ${c.before.display} → ${c.after.display}'),
+          Text(
+            '${studentLabels ? (reviewedCriterionAlias(c.after.name) ?? '평가 항목 ${after.rubric.indexOf(c.after) + 1}') : c.after.name} · ${c.before.display} → ${c.after.display}',
+          ),
       ],
     );
   }

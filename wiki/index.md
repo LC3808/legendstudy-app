@@ -1,5 +1,9 @@
 # LegendStudy Wiki Index
 
+## 학생 결과 표시·작성 가이드 라우팅
+
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) (APP/WEB 결과·기존 데이터 매핑·출력 확장 설계·검수 환경)
+
 최신 마감: [외대·건국·서강 신규54 STANDBY / Owner QA·미완료·SQL·복구](essay-standby-expansion-20261026.md). [기존4대학82 인수인계](essay-handoff-20261025-final.md) 보존. 추가 개발 중단, Mac 종료는 Owner 담당.
 
 

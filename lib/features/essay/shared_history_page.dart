@@ -6,16 +6,13 @@ import 'package:go_router/go_router.dart';
 
 import 'result_pdf.dart';
 import 'round_history_actions.dart';
-import 'growth_bars.dart';
 import 'result_disclosure.dart';
 
 import 'dart:async';
 
 import 'essay_voice.dart';
 import '../../core/theme/app_theme.dart';
-import 'approved_result_adapter.dart';
-import 'essay_pages.dart';
-import 'essay_models.dart';
+import 'student_feedback.dart';
 import 'source_catalog_page.dart';
 
 import 'math_workspace_page.dart';
@@ -455,34 +452,15 @@ class _Result extends ConsumerWidget {
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
           ? record.math
                 ? EvaluationReportView(report: report, before: before)
-                : EssayResultView(
-                    isPreview: false,
-                    growthChart: before == null
-                        ? null
-                        : GrowthBars(before: before!, after: report),
-                    summaryActions: Column(
+                : StudentFeedbackView(
+                    report: report,
+                    before: before,
+                    actions: Column(
                       children: [
                         EssayVoice(report: report, before: before),
                         ResultPdfButton(report: report),
                       ],
                     ),
-                    collapsedDetails: true,
-                    evaluation: approvedEssayEvaluation(report, before),
-                    evidenceLabels: report.evidenceLabels,
-                    question: EssayQuestion(
-                      id: questionId,
-                      university: record.title,
-                      exam: record.examLabel,
-                      title: '',
-                      prompt: '',
-                      passages: const [],
-                      origin: CriteriaOrigin.officialExam,
-                    ),
-                    comparison: before != null,
-                    submittedAnswer: report.answer,
-                    sentenceReview: report.sentenceReview,
-                    evaluationId: report.id,
-                    attemptId: record.id,
                     header: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -491,12 +469,6 @@ class _Result extends ConsumerWidget {
                           record: displayRecord,
                           questionId: questionId,
                         ),
-                        EssayFollowupAction(
-                          run: record.examData,
-                          onOpen: openWriter,
-                        ),
-
-                        const SizedBox(height: 16),
                         ResultAccordion(
                           title: essayAnswerVersion(record).startsWith('수정')
                               ? '수정 제출 답안'
@@ -516,10 +488,10 @@ class _Result extends ConsumerWidget {
                           ),
                       ],
                     ),
-                    onRewrite:
-                        record.exam && record.examData['state'] == 'completed'
-                        ? () => openWriter(false)
-                        : null,
+                    rewrite: EssayFollowupAction(
+                      run: record.examData,
+                      onOpen: openWriter,
+                    ),
                   )
           : const Center(child: Text('로그인 상태가 변경되었습니다.')),
     );

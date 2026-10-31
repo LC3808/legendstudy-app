@@ -1,12 +1,14 @@
 # Current Status
 
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) 학생 결과 표시 개편, 운영 변경 없음. 새 가이드 출력·실평가 품질 검수는 별도 승인/검증 필요.
+
 [Analytics 통합·기본OFF·SQL미적용·검증](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
 
 [10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 
-[10/28 건국 Worker P0](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28): 451b8cae100%·65회귀PASS. Owner승인 기존finish로 run failed/1Credit예약 released. 답안2·History 보존, 순차감0·중복해제0. 새요청키 재제출 계약 가능·실제제출0.
+[10/28 건국 Worker 복구·예약 해제 이력](essay-worker-incident-20261028.md#중단-run-종료-및-예약-해제--2026-10-28).
 
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 

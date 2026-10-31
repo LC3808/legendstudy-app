@@ -1,4 +1,5 @@
 import 'official_rubric.dart';
+import 'student_feedback.dart';
 import 'result_disclosure.dart';
 import 'evaluation_presentation.dart';
 import 'math_workspace_page.dart';
@@ -750,6 +751,44 @@ class _EssayWorkspacePageState extends State<EssayWorkspacePage> {
               ),
             ],
           ),
+        ),
+      );
+    }
+    if (live != null) {
+      return StudentFeedbackView(
+        actions: c.evaluation!.uncertainty == null
+            ? null
+            : ResultAccordion(
+                title: '판단을 보류한 부분',
+                child: SelectableText(c.evaluation!.uncertainty!),
+              ),
+        comparison: c.stage == EssayStage.comparison
+            ? StudentWorkspaceComparison(c.evaluation!)
+            : null,
+        report: studentWorkspaceReport(
+          c.evaluation!,
+          live!.live.submittedAnswer,
+          live!.live.evaluationId ?? '',
+          live!.live.sentenceReview,
+        ),
+        header: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(widget.question.university, style: AppTokens.cardTitle),
+            Text(widget.question.exam),
+            ResultAccordion(
+              title: '제출 답안',
+              child: SelectableText(live!.live.submittedAnswer),
+            ),
+          ],
+        ),
+        rewrite: FilledButton(
+          onPressed: () {
+            c.rewrite();
+            started = DateTime.now();
+            setState(() => problem = false);
+          },
+          child: const Text('답안 다시 작성하기'),
         ),
       );
     }

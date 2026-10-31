@@ -33,3 +33,7 @@ WEB `/Users/woojinchang/development/legendstudy-release-20261024`, branch `codex
 ## Pre-release follow-up 2026-10-30
 
 [Source PDF audit, separate candidate, full test failure analysis and display contract](pre-release-stabilization-20261030.md). Prior execution results above remain historical evidence. No Production deployment in this follow-up.
+
+## 후속 학생 표시 정책
+
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md)에 따라 학생 결과의 공식 원문 기본 노출을 대체한다. 본 문서의 내부 자료·정정 후보·기존 시행 기록은 보존한다.
