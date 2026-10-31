@@ -127,6 +127,7 @@ Monetization / B2B 설계는 아래 상위 Longitudinal Strategy를 먼저 읽�
 
 | Task / aliases | Required canonical reading |
 |---|---|
+| 평가 비용 / 장애 / monitoring / TASK06 | [운영 모니터링](essay-operations-monitoring.md) → [관리자 베타](admin-beta-operations.md) → [Analytics](analytics-v1-implementation-20261030.md) |
 | LAB 피드백 / 오류 신고 / satisfaction / feedback TASK05 | [피드백·오류 신고](essay-feedback-reports.md) → [기존 Inbox](day-11-b3-admin-inbox.md) → [장기 데이터](longitudinal-learning-admissions-data-strategy.md) |
 | BETA / 베타 운영 / 무료 이용 현황 / 복구 / 매일 무료 첨삭 / KST 자정 / beta daily | [관리자 베타 운영](admin-beta-operations.md) → [베타 v2](essay-beta-daily-v2.md) → [기존 원장](essay-beta-credit-design-20261027.md) → [공지](notices-system.md) → [데이터 보존](longitudinal-learning-admissions-data-strategy.md) |
 | NOTICES / 공지사항 / 알림 종 / 공지 읽음 / notice admin | [공통 공지사항](notices-system.md) → [데이터 보존 전략](longitudinal-learning-admissions-data-strategy.md) → [관리자 접근](admin-member-directory.md) |

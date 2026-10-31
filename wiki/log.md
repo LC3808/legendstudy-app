@@ -5189,3 +5189,6 @@ Claude 0047186/ccae6bd를 최신 APP에 통합, UI 보존. 행동 이벤트/Noop
 ## 2026-10-31 — TASK05 LAB feedback
 
 기존 feedback 원장 재사용, APP/WEB 제출·관리자 처리·통계·Owner 검수 연결 및 SQL 승인 후보. [검증/제약/활성화](essay-feedback-reports.md). 운영 적용·Provider 호출 없음.
+
+## 2026-11-01 — TASK06 비용·장애 모니터링
+기존 관리자 운영 화면에 5탭·공식 관리자 RPC·Credit 원장 조회·불변 추정 단가·내부 경고 후보. 운영 source SELECT 확인, 로컬 권한/불변/동시 경고/롤백 검증. 운영 SQL·WEB 미적용. [상세/검증/잔여](essay-operations-monitoring.md).

@@ -1,6 +1,6 @@
 # Current Status
 
-[공통 공지·관리·읽음](notices-system.md): APP/WEB 구현·격리 검증. SQL/운영 미적용.
+[공지](notices-system.md)·[TASK06 비용/장애](essay-operations-monitoring.md): 구현·격리 검증, 운영 승인 대기.
 
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 
