@@ -11,6 +11,10 @@ begin
   if to_regprocedure('account_private.allowed(uuid)') is null then
     raise exception 'MISSING dependency: account_private.allowed(uuid)';
   end if;
+  if to_regclass('essay_exam_private.runs') is null or to_regclass('essay_exam_private.checkpoints') is null
+     or to_regclass('essay_exam_private.retry_requests') is null or to_regclass('essay_ops_private.calls') is null then
+    raise exception 'MISSING exam runtime / TASK06 operations candidate (install operations before analytics)';
+  end if;
   -- Required tables.
   perform 1 from information_schema.tables where table_schema='public' and table_name in (
     'profiles','universities','essay_exams','essay_questions','essay_practice_sessions',
@@ -25,7 +29,7 @@ begin
   if not found then raise exception 'essay_evaluations columns changed'; end if;
   perform 1 from information_schema.columns where table_schema='public' and table_name='essay_ai_processing_runs' and column_name in ('run_no','latency_ms','cost_amount','cost_basis','input_tokens','output_tokens','provider','model_name') having count(*)=8;
   if not found then raise exception 'essay_ai_processing_runs columns changed'; end if;
-  perform 1 from information_schema.columns where table_schema='public' and table_name='payment_orders' and column_name in ('state','mode','sku','amount','paid_at','subject_id') having count(*)=6;
+  perform 1 from information_schema.columns where table_schema='public' and table_name='payment_orders' and column_name in ('state','mode','sku','amount','paid_at','subject_id','currency') having count(*)=7;
   if not found then raise exception 'payment_orders columns changed'; end if;
   raise notice 'precheck OK';
 end $$;

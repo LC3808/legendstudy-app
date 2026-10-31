@@ -4,6 +4,29 @@
 -- security definer with an empty search_path. PostgreSQL stays the official SoT.
 begin;
 
+-- TASK08: one exam run is one request, never one request per answer/checkpoint.
+-- Projection only. Source rows, snapshots, ledgers and identities stay immutable.
+create schema if not exists analytics_private;
+revoke all on schema analytics_private from public,anon,authenticated,service_role;
+create or replace view analytics_private.sessions as
+ select s.id,s.user_id,s.question_id,s.created_at from public.essay_practice_sessions s
+ where not exists(select 1 from essay_exam_private.runs r where r.id=s.id)
+ union all select r.id,a.user_id,null::uuid,r.created_at from essay_exam_private.runs r
+ join public.credit_accounts a on a.id=r.account_id;
+create or replace view analytics_private.attempts as
+ select a.id,a.session_id,a.attempt_no,a.submitted_at from public.essay_attempts a
+ where not exists(select 1 from essay_exam_private.runs r where r.id=a.id)
+ union all select r.id,r.id,case when r.parent_id is null then 1 else 2 end,r.created_at from essay_exam_private.runs r;
+create or replace view analytics_private.evaluations as
+ select e.id,e.attempt_id,e.session_id,e.question_id,e.status::text,e.request_kind::text,e.requested_at,e.completed_at,e.error_code::text
+ from public.essay_evaluations e where not exists(select 1 from essay_exam_private.runs r where r.id=e.id)
+ union all select r.id,r.id,r.id,null::uuid,r.state::text,'student',r.created_at,r.completed_at,
+ (select case when count(distinct c.payload->>'code')=1 then max(c.payload->>'code') end from essay_exam_private.checkpoints c where c.run_id=r.id and c.state='checkpoint'
+   and c.payload->>'component' in ('execution_failure','validation_failure')
+   and c.payload->>'code' ~ '^[A-Z_0-9]{1,80}$')
+ from essay_exam_private.runs r;
+revoke all on all tables in schema analytics_private from public,anon,authenticated,service_role;
+
 -- Caller gate helper, mirroring the existing operational admin surface
 -- (public.admin_member_list). Reused by the Flutter dashboard for its entry gate.
 create or replace function public.analytics_admin_check() returns boolean
@@ -28,39 +51,39 @@ begin
   end if;
   with activity as (
     select s.user_id, a.submitted_at as ts
-      from public.essay_attempts a join public.essay_practice_sessions s on s.id=a.session_id
+      from analytics_private.attempts a join analytics_private.sessions s on s.id=a.session_id
     union all
     select s.user_id, e.completed_at as ts
-      from public.essay_evaluations e join public.essay_practice_sessions s on s.id=e.session_id
+      from analytics_private.evaluations e join analytics_private.sessions s on s.id=e.session_id
       where e.status='completed' and e.request_kind='student' and e.completed_at is not null
   ),
   completed as (
     select distinct s.user_id
-      from public.essay_evaluations e join public.essay_practice_sessions s on s.id=e.session_id
+      from analytics_private.evaluations e join analytics_private.sessions s on s.id=e.session_id
       where e.status='completed' and e.request_kind='student'
         and e.completed_at>=p_from and e.completed_at<p_to
   ),
   free_completed as (
     select distinct s.user_id
-      from public.essay_evaluations e join public.essay_practice_sessions s on s.id=e.session_id
+      from analytics_private.evaluations e join analytics_private.sessions s on s.id=e.session_id
       where e.status='completed' and e.request_kind='student'
         and e.completed_at>=p_from and e.completed_at<p_to
         and (
-          exists(select 1 from public.essay_billing_decisions d where d.evaluation_id=e.id and d.reason='included_revision')
+          exists(select 1 from public.essay_billing_decisions d where (d.evaluation_id=e.id or d.id=(select r.decision_id from essay_exam_private.runs r where r.id=e.id)) and d.reason='included_revision')
           or exists(
             select 1 from public.essay_billing_decisions d
               join public.credit_transactions t on t.decision_id=d.id and t.transaction_type='consume'
               join public.credit_grants g on g.id=t.grant_id
-             where d.evaluation_id=e.id and g.origin in ('signup_bonus','promotion','compensation','b2b_program')
+             where (d.evaluation_id=e.id or d.id=(select r.decision_id from essay_exam_private.runs r where r.id=e.id)) and g.origin in ('signup_bonus','promotion','compensation','b2b_program','essay_beta_daily')
           )
         )
   ),
   paid as (
     select subject_id, amount from public.payment_orders
-     where state='PAID' and mode='LIVE' and paid_at>=p_from and paid_at<p_to and subject_id is not null
+     where paid_at is not null and currency='KRW' and mode='LIVE' and paid_at>=p_from and paid_at<p_to and subject_id is not null
   ),
   student_evals as (
-    select status from public.essay_evaluations
+    select status from analytics_private.evaluations
      where request_kind='student' and requested_at>=p_from and requested_at<p_to
   )
   select jsonb_build_object(
@@ -103,30 +126,36 @@ begin
   ),
   first_submit as (
     select distinct s.user_id
-      from public.essay_attempts a join public.essay_practice_sessions s on s.id=a.session_id
+      from analytics_private.attempts a join analytics_private.sessions s on s.id=a.session_id
       join signups u on u.user_id=s.user_id
   ),
   first_completed as (
     select distinct s.user_id
-      from public.essay_evaluations e join public.essay_practice_sessions s on s.id=e.session_id
+      from analytics_private.evaluations e join analytics_private.sessions s on s.id=e.session_id
       join signups u on u.user_id=s.user_id
       where e.status='completed' and e.request_kind='student'
   ),
   rewrote as (
     select distinct s.user_id
-      from public.essay_attempts a join public.essay_practice_sessions s on s.id=a.session_id
+      from analytics_private.attempts a join analytics_private.sessions s on s.id=a.session_id
       join signups u on u.user_id=s.user_id
       where a.attempt_no>=2
   ),
   full_loop as (
     -- first attempt completed, then a later attempt (>=2) in the same session completed
     select distinct s1.user_id
-      from public.essay_practice_sessions s1
+      from analytics_private.sessions s1
       join signups u on u.user_id=s1.user_id
-      join public.essay_attempts a1 on a1.session_id=s1.id and a1.attempt_no=1
-      join public.essay_evaluations e1 on e1.attempt_id=a1.id and e1.status='completed' and e1.request_kind='student'
-      join public.essay_attempts a2 on a2.session_id=s1.id and a2.attempt_no>=2
-      join public.essay_evaluations e2 on e2.attempt_id=a2.id and e2.status='completed' and e2.request_kind='student'
+      join analytics_private.attempts a1 on a1.session_id=s1.id and a1.attempt_no=1
+      join analytics_private.evaluations e1 on e1.attempt_id=a1.id and e1.status='completed' and e1.request_kind='student'
+      join analytics_private.attempts a2 on a2.session_id=s1.id and a2.attempt_no>=2
+      join analytics_private.evaluations e2 on e2.attempt_id=a2.id and e2.status='completed' and e2.request_kind='student'
+    union
+    select ca.user_id from essay_exam_private.runs child
+    join essay_exam_private.runs parent on parent.id=child.parent_id and parent.account_id=child.account_id and parent.exam_id=child.exam_id
+    join public.credit_accounts ca on ca.id=child.account_id join signups u on u.user_id=ca.user_id
+    where parent.state='completed' and child.state='completed'
+
   )
   select jsonb_build_object(
     'version','analytics-funnel-v1','as_of',statement_timestamp(),'from',p_from,'to',p_to,
@@ -181,7 +210,7 @@ begin
     select distinct ca.id as account_id
       from public.payment_orders po
       join public.credit_accounts ca on ca.user_id=po.subject_id
-      where po.state='PAID' and po.mode='LIVE'
+      where po.paid_at is not null and po.mode='LIVE'
   )
   select jsonb_build_object(
     'version','analytics-free-credit-v1','as_of',statement_timestamp(),'from',p_from,'to',p_to,
@@ -211,14 +240,14 @@ begin
   end if;
   with paid as (
     select id, subject_id, sku, amount from public.payment_orders
-     where state='PAID' and mode='LIVE' and paid_at>=p_from and paid_at<p_to
+     where paid_at is not null and currency='KRW' and mode='LIVE' and paid_at>=p_from and paid_at<p_to
   ),
   refunds as (
     select coalesce(sum(op.amount),0) as refunded
       from public.payment_operations op
       join public.payment_orders po on po.id=op.order_id
-      where op.kind='CANCEL' and op.state='SUCCEEDED' and op.reason='GENERAL_REFUND'
-        and po.mode='LIVE' and op.completed_at>=p_from and op.completed_at<p_to
+      where op.kind='CANCEL' and op.state='SUCCEEDED' 
+        and po.mode='LIVE' and po.currency='KRW' and op.completed_at>=p_from and op.completed_at<p_to
   ),
   by_sku as (
     select sku, count(*) as orders, coalesce(sum(amount),0) as revenue
@@ -231,6 +260,10 @@ begin
   select jsonb_build_object(
     'version','analytics-revenue-v1','as_of',statement_timestamp(),'from',p_from,'to',p_to,
     'currency','KRW','mode','LIVE',
+    'currency_policy','KRW only; no FX conversion. Other currencies excluded.',
+    'excluded_currency_orders',(select count(*) from public.payment_orders where mode='LIVE' and paid_at>=p_from and paid_at<p_to and currency is distinct from 'KRW'),
+    'credit_released_units',(select coalesce(-sum(reserved_delta),0) from public.credit_transactions where transaction_type='release' and created_at>=p_from and created_at<p_to),
+    'credit_refunded_units',(select coalesce(sum(balance_delta),0) from public.credit_transactions where transaction_type='refund' and created_at>=p_from and created_at<p_to),
     'gross_revenue',(select coalesce(sum(amount),0) from paid),
     'paid_orders',(select count(*) from paid),
     'buyers',(select n from buyers),
@@ -257,12 +290,12 @@ begin
     raise sqlstate '22023' using message='INVALID_WINDOW';
   end if;
   with ev as (
-    select * from public.essay_evaluations
+    select * from analytics_private.evaluations
      where request_kind='student' and requested_at>=p_from and requested_at<p_to
   ),
   runs as (
     select r.* from public.essay_ai_processing_runs r
-      join public.essay_evaluations e on e.id=r.evaluation_id
+      join analytics_private.evaluations e on e.id=r.evaluation_id
       where e.requested_at>=p_from and e.requested_at<p_to
   ),
   fail_by_question as (
@@ -284,16 +317,21 @@ begin
     'completed',(select count(*) from ev where status='completed'),
     'failed',(select count(*) from ev where status='failed'),
     'cancelled',(select count(*) from ev where status='cancelled'),
-    'processing',(select count(*) from ev where status in ('requested','processing')),
-    'reprocess_requested',(select count(*) from runs where run_no>1),
-    'reprocess_success',(select count(*) from runs where run_no>1 and status='completed'),
+    'processing',(select count(*) from ev where status in ('requested','processing','reserved')),
+    'reprocess_requested',(select count(*) from runs where run_no>1 and not exists(select 1 from essay_exam_private.runs x where x.id=runs.evaluation_id)) + (select count(*) from essay_exam_private.retry_requests rr join ev on ev.id=rr.run_id),
+    'exam_reprocess_outcome','Individual generation success not inferred from current run state',
+    'reprocess_success',(select count(*) from runs where run_no>1 and status='completed' and not exists(select 1 from essay_exam_private.runs x where x.id=runs.evaluation_id)),
+    'exam_runs_completed_after_retry',(select count(*) from ev where status='completed' and exists(select 1 from essay_exam_private.retry_requests rr where rr.run_id=ev.id)),
+    'latency_scope','legacy provider calls only; use operations dashboard for exam run duration',
+    'question_failure_scope','legacy evaluations only; exam checkpoint failures are in operations dashboard',
+    'error_code_scope','exam diagnostic code only when unambiguous across recorded failures',
     'latency_ms_p50',(select percentile_cont(0.5) within group (order by latency_ms) from runs where status='completed' and latency_ms is not null),
     'latency_ms_p95',(select percentile_cont(0.95) within group (order by latency_ms) from runs where status='completed' and latency_ms is not null),
     'failures_by_question',(select coalesce(jsonb_agg(jsonb_build_object('exam',exam_key,'question',question_key,'failures',failures)),'[]'::jsonb) from fail_by_question),
     'error_types',(select coalesce(jsonb_agg(jsonb_build_object('code',code,'count',n) order by n desc),'[]'::jsonb) from err),
     'credit_integrity', jsonb_build_object(
       'A_failed_but_settled',(select count(*) from ev e where e.status='failed'
-        and exists(select 1 from public.essay_billing_decisions d where d.evaluation_id=e.id and d.status='settled')),
+        and exists(select 1 from public.essay_billing_decisions d where (d.evaluation_id=e.id or d.id=(select r.decision_id from essay_exam_private.runs r where r.id=e.id)) and d.status='settled')),
       'E_included_but_consumed',(select count(*) from public.essay_billing_decisions d
         where d.reason='included_revision' and d.created_at>=p_from and d.created_at<p_to
         and exists(select 1 from public.credit_transactions t where t.decision_id=d.id and t.transaction_type='consume')),
@@ -317,8 +355,12 @@ begin
     raise sqlstate '22023' using message='INVALID_WINDOW';
   end if;
   with runs as (
-    select * from public.essay_ai_processing_runs
-     where started_at>=p_from and started_at<p_to
+    select c.*,c.model model_name,c.attempt run_no,c.cost_usd cost_amount,
+      case when c.cost_status='ACTUAL' then 'provider_reported' else c.cost_status end cost_basis,
+      c.called_at started_at, case when r.parent_id is not null then r.id end rewrite_id
+    from essay_ops_private.calls c left join essay_exam_private.runs r on r.id=c.evaluation_id
+    where (c.called_at>=p_from and c.called_at<p_to)
+       or (c.called_at is null and r.created_at>=p_from and r.created_at<p_to)
   ),
   by_model as (
     select provider, model_name,
@@ -332,14 +374,20 @@ begin
       from runs group by provider, model_name
   ),
   daily as (
-    select date_trunc('day', started_at) as day,
+    select date_trunc('day', started_at at time zone 'Asia/Seoul') as day,
       sum(cost_amount) filter (where cost_basis='provider_reported') as reported_cost,
       count(*) as calls
-      from runs group by date_trunc('day', started_at) order by day
+      from runs where started_at is not null group by date_trunc('day', started_at at time zone 'Asia/Seoul') order by day
   )
   select jsonb_build_object(
     'version','analytics-api-cost-v1','as_of',statement_timestamp(),'from',p_from,'to',p_to,
-    'note','cost_basis=provider_reported is actual; estimate/null is not billed truth. No evaluation is executed by this report.',
+    'currency','USD',
+    'note','ACTUAL/ESTIMATED known USD subtotals only; UNKNOWN is not zero. Undated exam receipts use request cohort, not daily call date.',
+    'actual_calls',(select count(*) from runs where cost_status='ACTUAL'),
+    'estimated_calls',(select count(*) from runs where cost_status='ESTIMATED'),
+    'unknown_calls',(select count(*) from runs where cost_status='UNKNOWN'),
+    'undated_calls',(select count(*) from runs where started_at is null),
+    'total_estimated_cost',(select sum(cost_amount) from runs where cost_status='ESTIMATED'),
     'eval_calls',(select count(*) from runs where evaluation_id is not null),
     'rewrite_calls',(select count(*) from runs where rewrite_id is not null),
     'reprocess_calls',(select count(*) from runs where run_no>1),
@@ -366,21 +414,23 @@ begin
   if p_from is null or p_to is null or p_to<=p_from or p_to-p_from>interval '400 days' then
     raise sqlstate '22023' using message='INVALID_WINDOW';
   end if;
-  with usage as (
-    select u.id as university_id, u.name as university_name,
-      count(distinct s.id) as sessions,
-      count(distinct a.id) as attempts,
-      count(distinct e.id) filter (where e.status='completed' and e.request_kind='student') as completed
-      from public.essay_practice_sessions s
-      join public.essay_questions q on q.id=s.question_id
-      join public.essay_exams ex on ex.id=q.essay_exam_id
-      join public.universities u on u.id=ex.university_id
-      left join public.essay_attempts a on a.session_id=s.id and a.submitted_at>=p_from and a.submitted_at<p_to
-      left join public.essay_evaluations e on e.session_id=s.id and e.completed_at>=p_from and e.completed_at<p_to
-      where s.created_at>=p_from-interval '400 days'
-      group by u.id, u.name
-      having count(distinct a.id) > 0 or count(distinct e.id) > 0
-      order by attempts desc limit 60
+  with source_usage as (
+    select u.id university_id,u.name university_name,count(distinct s.id) sessions,count(distinct a.id) attempts,
+      count(distinct e.id) filter(where e.status='completed' and e.request_kind='student') completed
+    from public.essay_practice_sessions s join public.essay_questions q on q.id=s.question_id
+    join public.essay_exams ex on ex.id=q.essay_exam_id join public.universities u on u.id=ex.university_id
+    left join analytics_private.attempts a on a.session_id=s.id and a.submitted_at>=p_from and a.submitted_at<p_to
+    left join analytics_private.evaluations e on e.session_id=s.id and e.completed_at>=p_from and e.completed_at<p_to
+    group by u.id,u.name having count(distinct a.id)>0 or count(distinct e.id)>0
+    union all
+    select u.id,u.name,count(*),count(*) filter(where r.created_at>=p_from and r.created_at<p_to),
+      count(*) filter(where r.state='completed' and r.completed_at>=p_from and r.completed_at<p_to)
+    from essay_exam_private.runs r join public.essay_exams ex on ex.id=r.exam_id join public.universities u on u.id=ex.university_id
+    where (r.created_at>=p_from and r.created_at<p_to) or (r.completed_at>=p_from and r.completed_at<p_to)
+    group by u.id,u.name
+  ), usage as (
+    select university_id,university_name,sum(sessions) sessions,sum(attempts) attempts,sum(completed) completed
+    from source_usage group by university_id,university_name order by attempts desc limit 60
   )
   select jsonb_build_object(
     'version','analytics-university-usage-v1','as_of',statement_timestamp(),'from',p_from,'to',p_to,

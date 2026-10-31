@@ -297,6 +297,9 @@ class _RevenueSection extends StatelessWidget {
               _Tile('객단가', _won(m['aov'])),
               _Tile('ARPPU', _won(m['arppu'])),
               _Tile('환불', _won(m['refunded'])),
+              _Tile('다른 통화 주문 (별도)', _n(m['excluded_currency_orders'])),
+              _Tile('예약 해제 (Credit)', _n(m['credit_released_units'])),
+              _Tile('환불 복구 (Credit)', _n(m['credit_refunded_units'])),
             ],
           ),
           if (bySku.isNotEmpty) ...[
@@ -340,9 +343,13 @@ class _ReliabilitySection extends StatelessWidget {
               _Tile('완료', _n(m['completed'])),
               _Tile('실패', _n(m['failed'])),
               _Tile('재처리 요청', _n(m['reprocess_requested'])),
-              _Tile('재처리 성공', _n(m['reprocess_success'])),
-              _Tile('p50(ms)', _n(m['latency_ms_p50'])),
-              _Tile('p95(ms)', _n(m['latency_ms_p95'])),
+              _Tile('기존 문항 재처리 성공', _n(m['reprocess_success'])),
+              _Tile(
+                '재처리 이력이 있는 완료 시험',
+                _n(m['exam_runs_completed_after_retry']),
+              ),
+              _Tile('기존 문항 호출 p50(ms)', _n(m['latency_ms_p50'])),
+              _Tile('기존 문항 호출 p95(ms)', _n(m['latency_ms_p95'])),
             ],
           ),
           const SizedBox(height: 12),
@@ -393,7 +400,9 @@ class _ApiCostSection extends StatelessWidget {
             children: [
               _Tile('평가 호출', _n(m['eval_calls'])),
               _Tile('재처리 호출', _n(m['reprocess_calls'])),
-              _Tile('실측 비용', _n(m['total_reported_cost'])),
+              _Tile('확인된 실측 비용 (USD)', _n(m['total_reported_cost'])),
+              _Tile('추정 비용 (USD)', _n(m['total_estimated_cost'])),
+              _Tile('비용 확인 불가', _n(m['unknown_calls'])),
               _Tile('비용 누락', _n(m['cost_missing_runs'])),
             ],
           ),
@@ -406,7 +415,7 @@ class _ApiCostSection extends StatelessWidget {
                 _KeyValueRow(
                   label: '${r['provider']}/${r['model']}',
                   value:
-                      '호출 ${_n(r['calls'])} · 토큰 ${_n(r['total_tokens'])} · 실측 ${_n(r['reported_cost'])}',
+                      '호출 ${_n(r['calls'])} · 토큰 ${_n(r['total_tokens'])} · 실측 USD ${_n(r['reported_cost'])}',
                 ),
           const Padding(
             padding: EdgeInsets.only(top: 8),

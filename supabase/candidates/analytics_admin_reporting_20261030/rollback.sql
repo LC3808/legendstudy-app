@@ -9,4 +9,8 @@ drop function if exists public.analytics_free_credit(timestamptz,timestamptz);
 drop function if exists public.analytics_funnel(timestamptz,timestamptz);
 drop function if exists public.analytics_kpi_overview(timestamptz,timestamptz);
 drop function if exists public.analytics_admin_check();
+drop view if exists analytics_private.evaluations;
+drop view if exists analytics_private.attempts;
+drop view if exists analytics_private.sessions;
+drop schema if exists analytics_private;
 commit;

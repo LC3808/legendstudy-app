@@ -1,3 +1,5 @@
+> TASK08: isolated integration verified; NOT APPLIED to production. This candidate now requires TASK06 `essay_ops_private.calls` and current exam runtime. See the TASK08 integration report for exact verification and remaining gates. Earlier TASK03 results below are historical, not deployment evidence.
+
 > TASK03 2026-10-31: **NOT deployment-ready**. Production precheck passed, but no analytics RPC is installed. Local PostgreSQL 17 execution/ACL tests pass with synthetic auth. Exam-run coverage, cohort/NSM meaning, currency/refund semantics still need review before Owner approval. See [verification](../../../wiki/analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
 
 > Codex integration review (2026-10-30): **NOT APPLIED**. 관리자 gate/ACL 정적 검증만 완료.
@@ -64,10 +66,11 @@ revenue. GA4 carries behaviour events only and is never the official count.
   `grant_id → credit_grants.origin`. Free = `signup_bonus` (also `promotion`,
   `compensation`, `b2b_program`); paid = `purchase`. Signup +3 = the single
   `origin='signup_bonus'` grant per account (`credit_signup_once_per_account`).
-- **Revenue = `payment_orders` with `state='PAID'` and `mode='LIVE'`** (TEST
-  excluded). Amount/quantity/sku come from the row; refund = `payment_operations`
-  `kind='CANCEL', state='SUCCEEDED', reason='GENERAL_REFUND'`. Prices are read
-  from `amount`, never hard-coded.
+- **Revenue:** LIVE/KRW orders with a recorded `paid_at` in the half-open window. Keep original gross revenue after cancellation. Successful CANCEL operations in the operation completion window reduce cash net; reason is not limited to GENERAL_REFUND. Non-KRW orders are counted separately, never converted or summed into KRW. Credit release/refund quantities are separate unit metrics, not cash refunds.
+- **Costs:** TASK06 call projection, USD only. ACTUAL and ESTIMATED sums separate, unknown amounts remain null. Undated exam receipts are counted in their run-request cohort and excluded from daily cost curves; this is not a fabricated call time.
+- **Exam scope:** one run = one request, independent of number of questions/checkpoints; retries do not add initial requests. Completed child/parent with same exam/account count toward full loop. Exact legacy identifier mirrors are excluded. Legacy provider-call latency/question-failure breakdowns remain explicitly labelled legacy; exam per-question diagnostics are in the operations dashboard. Multiple differing exam failure codes are unknown rather than arbitrarily selected.
+- **Retry outcome:** completed run with retries is distinct from an individual successful generation; no per-generation success is inferred.
+- **New dependency:** current `essay_exam_private.runs/checkpoints/retry_requests`, and TASK06 `essay_ops_private.calls`. Apply analytics last; roll it back before TASK06.
 - **Reprocess** = provider retry rows (`run_no>1`); reprocess success = those
   `status='completed'`. Provider error buckets from `error_code`; unknown codes
   are reported as `other` and never invented (directive §9).
@@ -81,12 +84,13 @@ revenue. GA4 carries behaviour events only and is never the official count.
 - `public.admin_operator()` definition is Owner-applied (outside the tree);
   `precheck.sql` asserts its presence.
 
-## TASK03 local reproduction
+## Local reproduction (TASK08)
 
-Use a disposable local PostgreSQL cluster on port 55439 only. Create global test roles `authenticated`, `anon`, `service_role` without LOGIN if absent, then fresh database `analytics_task03`. Never use an existing application database.
+Use the guarded integration harness, which bootstraps the existing local candidate fixtures, installs the six candidates in order and checks aggregate/ACL/rollback contracts:
 
 ```sh
-psql -h 127.0.0.1 -p 55439 -U postgres -d analytics_task03 -v ON_ERROR_STOP=1 -f local_schema_fixture.sql -f precheck.sql -f apply.sql -f postcheck.sql -f local_contract_test.sql
+BETA_TEST_DB=task08_integration python3 supabase/candidates/essay_beta_admin_v1/test_runtime.py
+TASK08_DB=task08_integration python3 supabase/candidates/beta_integration_task08/test_integration.py
 ```
 
-The fixtures contain metadata and synthetic UUIDs only; no production rows. `local_contract_test.sql` rolls back its seed. The synthetic auth functions do not prove production role membership, account restrictions or REST JWT behavior. Runtime report smoke checks cover all seven reports, admin/non-admin/no-JWT gate, ACL, invalid windows, token aggregation and no ledger/evaluation mutation. The nonexistent `essay_ai_processing_runs.total_tokens` dependency was replaced with `input_tokens + output_tokens`; unknown partial totals stay null.
+Requires local PostgreSQL 17 at 127.0.0.1:55439 and psycopg. Synthetic data only. TASK03 `local_schema_fixture.sql` / `local_contract_test.sql` remain historical unit fixtures; alone they no longer satisfy exam/operations dependencies. Do not use the historical bootstrap as a production migration.
