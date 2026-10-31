@@ -1,3 +1,5 @@
+> TASK03 2026-10-31: **NOT deployment-ready**. Production precheck passed, but no analytics RPC is installed. Local PostgreSQL 17 execution/ACL tests pass with synthetic auth. Exam-run coverage, cohort/NSM meaning, currency/refund semantics still need review before Owner approval. See [verification](../../../wiki/analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
+
 > Codex integration review (2026-10-30): **NOT APPLIED**. 관리자 gate/ACL 정적 검증만 완료.
 > 운영 적용 승인 전 현행 exam run/checkpoint 포함 여부, 가입 코호트와 주간 NSM 정의,
 > 결제 환불/비용 통화 및 실제 스키마를 대조해야 한다. 아래 READY 표기는 승인용 후보
@@ -78,3 +80,13 @@ revenue. GA4 carries behaviour events only and is never the official count.
   verification gate.
 - `public.admin_operator()` definition is Owner-applied (outside the tree);
   `precheck.sql` asserts its presence.
+
+## TASK03 local reproduction
+
+Use a disposable local PostgreSQL cluster on port 55439 only. Create global test roles `authenticated`, `anon`, `service_role` without LOGIN if absent, then fresh database `analytics_task03`. Never use an existing application database.
+
+```sh
+psql -h 127.0.0.1 -p 55439 -U postgres -d analytics_task03 -v ON_ERROR_STOP=1 -f local_schema_fixture.sql -f precheck.sql -f apply.sql -f postcheck.sql -f local_contract_test.sql
+```
+
+The fixtures contain metadata and synthetic UUIDs only; no production rows. `local_contract_test.sql` rolls back its seed. The synthetic auth functions do not prove production role membership, account restrictions or REST JWT behavior. Runtime report smoke checks cover all seven reports, admin/non-admin/no-JWT gate, ACL, invalid windows, token aggregation and no ledger/evaluation mutation. The nonexistent `essay_ai_processing_runs.total_tokens` dependency was replaced with `input_tokens + output_tokens`; unknown partial totals stay null.

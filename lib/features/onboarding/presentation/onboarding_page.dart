@@ -1,4 +1,6 @@
 import '../device_intro.dart';
+import '../../analytics/analytics_providers.dart';
+import '../../analytics/domain/analytics_events.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -120,6 +122,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     });
     try {
       await ref.read(profileRepositoryProvider).markOnboardingComplete();
+      ref.read(analyticsServiceProvider).logEvent(
+        AnalyticsEvents.onboardingComplete,
+        {'status': 'completed'},
+      );
       await _leave();
     } catch (_) {
       if (mounted) {
@@ -145,6 +151,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         clearGrade: !_isStudent || _grade == null,
       );
       await repo.markOnboardingComplete();
+      ref.read(analyticsServiceProvider).logEvent(
+        AnalyticsEvents.onboardingComplete,
+        {'status': 'completed'},
+      );
       await _leave();
     } catch (_) {
       if (mounted) {
@@ -185,7 +195,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
-    final reduceMotion = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     // Personalization is account-scoped; a guest has nothing to persist.
     if (auth.value?.isAuthenticated != true) {
       return Scaffold(

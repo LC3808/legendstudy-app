@@ -6,7 +6,7 @@
 
 [최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
 
-[Analytics 통합·기본OFF·SQL미적용·검증](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
+[Analytics TASK03·APP/WEB 계측·GA4미설정·SQL집계승인대기](analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
 
 [10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 

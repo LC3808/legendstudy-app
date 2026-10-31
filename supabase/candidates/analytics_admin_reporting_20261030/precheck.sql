@@ -23,7 +23,7 @@ begin
   -- Columns the functions depend on (spot checks).
   perform 1 from information_schema.columns where table_schema='public' and table_name='essay_evaluations' and column_name in ('request_kind','status','completed_at','requested_at','error_code') having count(*)=5;
   if not found then raise exception 'essay_evaluations columns changed'; end if;
-  perform 1 from information_schema.columns where table_schema='public' and table_name='essay_ai_processing_runs' and column_name in ('run_no','latency_ms','cost_amount','cost_basis','total_tokens','input_tokens','output_tokens','provider','model_name') having count(*)=9;
+  perform 1 from information_schema.columns where table_schema='public' and table_name='essay_ai_processing_runs' and column_name in ('run_no','latency_ms','cost_amount','cost_basis','input_tokens','output_tokens','provider','model_name') having count(*)=8;
   if not found then raise exception 'essay_ai_processing_runs columns changed'; end if;
   perform 1 from information_schema.columns where table_schema='public' and table_name='payment_orders' and column_name in ('state','mode','sku','amount','paid_at','subject_id') having count(*)=6;
   if not found then raise exception 'payment_orders columns changed'; end if;

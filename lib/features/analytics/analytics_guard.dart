@@ -6,14 +6,14 @@ import 'domain/analytics_service.dart';
 final Set<String> _firedOnce = <String>{};
 
 extension AnalyticsOnce on AnalyticsService {
-  /// Log [name] only the first time this [onceKey] is seen in the process.
+  /// Log [name] only the first time this event and [onceKey] is seen in the process.
   /// Use for entry/funnel-step events that should count once per session.
   void logEventOnce(
     String onceKey,
     String name, [
     Map<String, Object?>? params,
   ]) {
-    if (!_firedOnce.add(onceKey)) return;
+    if (!_firedOnce.add('$name:$onceKey')) return;
     logEvent(name, params);
   }
 }

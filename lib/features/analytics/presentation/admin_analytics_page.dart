@@ -7,7 +7,7 @@ import '../admin_analytics_providers.dart';
 import '../domain/analytics_dashboard.dart';
 
 /// Admin Analytics dashboard. All figures are the official PostgreSQL
-/// aggregates (completion/credit/revenue). Missing values render as '데이터 없음',
+/// aggregates (completion/credit/revenue), subject to the documented v1 scope. Missing values render as '데이터 없음',
 /// never fabricated. Access is operational-admin only.
 class AdminAnalyticsPage extends ConsumerWidget {
   const AdminAnalyticsPage({super.key});
@@ -43,6 +43,9 @@ class AdminAnalyticsPage extends ConsumerWidget {
         const AppHeader(
           title: 'Analytics',
           subtitle: '공식 집계는 PostgreSQL 기준입니다. 행동 지표(GA4)는 별도예요.',
+        ),
+        const Text(
+          'v1 집계는 기존 단일 문항 평가 데이터 기준입니다. 시험 단위 첨삭 전체와 주간 NSM을 대표하지 않습니다. 매출·비용은 통화 및 환불 계약 검증 전 운영 지표로 사용하지 마세요.',
         ),
         _PeriodBar(period: period),
         const SizedBox(height: 12),
@@ -225,7 +228,7 @@ class _FunnelSection extends StatelessWidget {
         'first_submit': '첫 제출',
         'first_eval_completed': '첫 평가 완료',
         'rewrite_submit': '재첨삭 제출',
-        'full_loop_nsm': '전체 루프(NSM)',
+        'full_loop_nsm': '가입 코호트 전체 루프',
       };
       final base = _toNum(
         stages.first is Map ? (stages.first as Map)['count'] : 0,

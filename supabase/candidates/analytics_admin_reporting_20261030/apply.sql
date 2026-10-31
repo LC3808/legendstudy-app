@@ -326,7 +326,7 @@ begin
       sum(case when run_no>1 then 1 else 0 end) as reprocess_calls,
       sum(coalesce(input_tokens,0)) as input_tokens,
       sum(coalesce(output_tokens,0)) as output_tokens,
-      sum(coalesce(total_tokens,0)) as total_tokens,
+      sum(input_tokens + output_tokens) as total_tokens,
       sum(cost_amount) filter (where cost_basis='provider_reported') as reported_cost,
       count(*) filter (where cost_amount is null) as cost_missing
       from runs group by provider, model_name

@@ -79,6 +79,19 @@ void main() {
     });
   });
 
+  test('same request replay does not lose a different funnel stage', () {
+    resetAnalyticsOnce();
+    final svc = _Recording();
+    for (var i = 0; i < 3; i++) {
+      svc.logEventOnce('request', AnalyticsEvents.essaySubmitStart);
+      svc.logEventOnce('request', AnalyticsEvents.essaySubmitAccepted);
+    }
+    expect(svc.events, [
+      AnalyticsEvents.essaySubmitStart,
+      AnalyticsEvents.essaySubmitAccepted,
+    ]);
+  });
+
   test('NoopAnalyticsService never throws', () {
     const svc = NoopAnalyticsService();
     expect(() {

@@ -1,4 +1,7 @@
 import '../credits/essay_beta_credit.dart';
+import '../analytics/analytics_providers.dart';
+import '../analytics/analytics_guard.dart';
+import '../analytics/domain/analytics_events.dart';
 
 import 'dart:convert';
 import 'dart:async';
@@ -78,6 +81,10 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
         'round-retry:${widget.record.id}',
       );
       if (retry && !widget.record.math) {
+        ref.read(analyticsServiceProvider).logEvent(
+          AnalyticsEvents.essayRetryRequested,
+          {'source': 'history', 'status': 'started'},
+        );
         final api = ref.read(examSubmissionGatewayProvider(widget.owner));
         if (api == null) throw StateError('로그인 상태를 확인해 주세요.');
         await retryExistingExam(
@@ -142,6 +149,27 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
               (widget.record.math ? 'math-session-v1' : 'exam-session-v1') ||
           data['questions'] is! List) {
         throw const FormatException('STATUS');
+      }
+      if (!widget.record.math && current) {
+        final analytics = ref.read(analyticsServiceProvider);
+        final state = data['state'];
+        if (state == 'completed' || state == 'failed') {
+          analytics.logEventOnce(
+            'terminal:${widget.record.id}:$state',
+            state == 'completed'
+                ? AnalyticsEvents.essayCompleted
+                : AnalyticsEvents.essayFailed,
+            {'status': state, 'source': 'client_observation'},
+          );
+          if (state == 'completed' &&
+              widget.record.examData['parent_id'] != null) {
+            analytics.logEventOnce(
+              'rewrite-completed:${widget.record.id}',
+              AnalyticsEvents.essayRewriteCompleted,
+              {'status': 'completed', 'source': 'client_observation'},
+            );
+          }
+        }
       }
       if (current) {
         setState(() {

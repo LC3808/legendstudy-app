@@ -1,4 +1,5 @@
 import '../credits/essay_beta_credit.dart';
+import '../analytics/analytics_guard.dart';
 import '../analytics/analytics_providers.dart';
 import '../analytics/domain/analytics_events.dart';
 import 'result_disclosure.dart';
@@ -1829,6 +1830,27 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       final state = rows.single['state'];
       runState = state as String?;
       confirmedRunState = true;
+      if (state == 'completed' || state == 'failed') {
+        ref.read(analyticsServiceProvider).logEventOnce(
+          'terminal:$submittedRun:$state',
+          state == 'completed'
+              ? AnalyticsEvents.essayCompleted
+              : AnalyticsEvents.essayFailed,
+          {'status': state, 'source': 'client_observation'},
+        );
+        if (state == 'completed' && rows.single['parent_id'] != null) {
+          ref.read(analyticsServiceProvider).logEventOnce(
+            'rewrite-completed:$submittedRun',
+            AnalyticsEvents.essayRewriteCompleted,
+            {'status': 'completed', 'source': 'client_observation'},
+          );
+        }
+      }
+      ref.read(analyticsServiceProvider).logEventOnce(
+        'processing:$submittedRun',
+        AnalyticsEvents.essayProcessingView,
+        {'status': 'observed'},
+      );
       setState(
         () => notice = switch (state) {
           'completed' => '첨삭이 완료됐어요. 저장된 결과를 확인하세요.',
@@ -1909,6 +1931,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       final client = ref.read(supabaseClientProvider);
       final api = gateway();
       if (client == null || api == null) throw StateError('로그인 상태를 확인해 주세요.');
+      ref.read(analyticsServiceProvider).logEvent(
+        AnalyticsEvents.essayRetryRequested,
+        {'source': 'progress', 'status': 'started'},
+      );
       await retryExistingExam(
         client: client,
         gateway: api,
@@ -2293,8 +2319,9 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           saved.revision,
         );
       }
-      // Behavioural send intent, not a ledger/completion event. No bodies or IDs.
-      ref.read(analyticsServiceProvider).logEvent(
+      // Behavioural intent; request key is local dedupe only, never transmitted.
+      ref.read(analyticsServiceProvider).logEventOnce(
+        key,
         parentId == null
             ? AnalyticsEvents.essaySubmitStart
             : AnalyticsEvents.essayRewriteSubmit,
@@ -2320,6 +2347,15 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       }
       {
         final runId = result!['runId'] as String;
+        ref.read(analyticsServiceProvider).logEventOnce(
+          'accepted:$key',
+          AnalyticsEvents.essaySubmitAccepted,
+          {
+            'is_free': parentId != null,
+            'question_count': answers.length,
+            'status': 'accepted',
+          },
+        );
         // Persist the runId beside the submission key so reopening this screen
         // resumes polling the same run instead of losing it.
         final saved = await pending.loadDraft();
@@ -2343,6 +2379,10 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       }
     } catch (error) {
       if (error is ExamSubmissionRejected) {
+        ref.read(analyticsServiceProvider).logEvent(
+          AnalyticsEvents.essaySubmitRejected,
+          {'status': 'rejected'},
+        );
         final saved = await pending.loadDraft();
         await pending.saveLocalDraft('', saved.revision);
       }
