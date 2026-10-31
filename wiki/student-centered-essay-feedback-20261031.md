@@ -68,7 +68,7 @@ WEB 새 테스트: A–L 동일 입력/제목순서/원문 비노출/단계/immu
 ## 검수 환경·롤백
 
 WEB 합성 화면 `http://127.0.0.1:8898/` (실계정 없음); production export 로컬 `http://127.0.0.1:8899/my/essays/` (로그인 UI 포함, 실제 계정 인증 미실행). 외부 Preview URL 없음. 합성 화면은 네트워크/평가 요청 없이 결과·비교를 확인하는 정적 HTML이다. 본 시스템의 실제 History 결과는 Owner 로그인 이후 읽기 조회가 필요하다.
-APP 빌드 예정 1.0.1(31), 기존23–30 보존, install/store upload 안 함. 검수 빌드의 기존 Observation/소셜로그인/Bundle/서명 설정 유지. 새 빌드에서 실제 평가 버튼을 자동 실행하지 않는다.
+APP 최종 서명 빌드 1.0.1(31), 기존23–30 보존, install/store upload 안 함. 검수 빌드의 기존 Observation/소셜로그인/Bundle/서명 설정 유지. 새 빌드에서 실제 평가 버튼을 자동 실행하지 않는다.
 롤백: 이번 UI 커밋을 역순 revert하여 검증·재빌드한다. 미커밋 변경 삭제/reset하지 않는다. 기기 설치는 Owner 별도 지시, 기존 보존30 빌드를 사용 가능. WEB은 미배포이므로 운영 롤백 불필요; 로컬/승인 후 배포 소스를 이전 WEB SHA로 되돌린다. DB/Worker rollback.sql은 실행하지 않는다.
 
 ## WEB 완료 기록
@@ -88,3 +88,20 @@ Firebase Flutter만 정확히 core4.15.2/analytics12.6.1로 고정하여 둘 다
 의존성 조정 후 Analyze0 및 전체1,285PASS/7SKIP/0FAIL 재확인 (`/tmp/legend-student-analyze-native.log`, `/tmp/legend-student-tests-native.log`).
 
 호환 버전의 첫 네이티브 빌드는 성공했으나 receipt 검사에서 기본 local config의 Observation=false를 확인했다. 이 산출물은 검수용으로 인계하지 않는다. 기존 local config 자체를 변경하지 않고, 같은 설정의 private QA 사본에서 `ESSAY_OBSERVATION_V1_ENABLED=true`만 설정하여 최종 재빌드한다. Google/Apple/Kakao 및 Supabase 값 그대로. 해결된 두 SwiftPM lock을 커밋한 후 해당 SHA로 다시 생성하여 소스 추적을 일치시킨다. 최종 receipt의 Observation=true 확인이 완료 기준이다.
+
+## 최종 검수 빌드·인계
+
+- iOS **1.0.1(31)** 서명 build PASS, `codesign --verify --deep --strict` PASS.
+- 빌드 소스 SHA: `3368e2c6012b0d80e12e091e1e396fd8c3a0727c`. 이후 문서 기록 커밋은 바이너리 소스와 구분한다.
+- 설치용 전체 경로: `/Users/woojinchang/.codex/worktrees/app-final-integration-20261028/legendstudy-service-app-20261022/build/ios/qa-student-feedback-31/Runner.app`.
+- receipt: `build/ios/qa-student-feedback-31/receipt.json`; framework SHA256 `75b3763fda3007234110fe40d90d35d3faeaa69d1369875a0d991866fe346458`.
+- Observation V1 **true**를 실제 generated dart-define/receipt에서 확인, Google/Apple/Kakao enabled, Bundle `com.legendstudy.app`, 기존 서명 설정 유지. 별도 QA config 사본만 사용, 기존 local config는 불변.
+- 기존30 `build/ios/qa-device-round29-30/Runner.app`의 App.framework SHA256 사전/사후 일치. 기존23–30 폴더 보존.
+- 기기 설치/실행/스토어 업로드 없음. 실제 로그인/음성/PDF 사용자 조작/GA4 수신은 NOT TESTED. flutter_tts의 기존 CocoaPods fallback 유지(SwiftPM 미지원 경고); 음성 기능 제거 없음.
+- APP UI commit `5f8b0d4`, Firebase 호환 pin `77c9785`, native resolve `3368e2c`. WEB 최종 `ff78af5eef2133cf9b78f6163ea7591c8188fdc1`, push 및 remote 일치.
+- APP/WEB 자동 검증 PASS 범위는 위 기록과 같다. APP `.fvmrc` 보존/untracked; WEB clean. Wiki link/task routing 검사 PASS.
+- 로컬 검수 두 URL HTTP200 확인, 외부 Preview/운영 WEB 배포 없음.
+
+### 남은 승인·검수
+
+학생 표시 계층 구현·기존 결과 호환·자동 검증·검수 환경 준비 완료. 새 높은 평가 조건/권장 전개 생성은 PARTIAL(현재 데이터에 없음). 별도 출력 계약/Worker/DB/Provider 적용은 Owner 승인 전 금지. 실제 공식 자료·학생 답안과 새 가이드의 교육적 적합성은 NOT TESTED이며 서비스 품질 최종 PASS가 아니다. 기존 평가자료 정정 후보의 운영 교체도 계속 별도 승인 대상이다. 운영 데이터 hash 재조회 없이 불변을 단정하지 않고, 이번 작업은 저장 로직/운영 호출 변경 없음으로 범위를 한정한다.

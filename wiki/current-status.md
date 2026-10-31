@@ -1,6 +1,6 @@
 # Current Status
 
-[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) 학생 결과 표시 개편, 운영 변경 없음. 새 가이드 출력·실평가 품질 검수는 별도 승인/검증 필요.
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) 학생 결과 개편·iOS31 서명, 운영 변경 없음. 새 가이드 출력·실평가 품질 검수는 별도 승인/검증 필요.
 
 [Analytics 통합·기본OFF·SQL미적용·검증](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
 

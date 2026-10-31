@@ -2,7 +2,7 @@
 
 ## 2026-10-31 — 학생 중심 결과 개편
 
-[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) APP/WEB 공통 저장 피드백으로 결과·가이드·강점·개선·재작성 연결. 합성 A–L 회귀, 실평가 품질은 미검증. 운영 적용 없음.
+[학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) APP/WEB 공통 저장 피드백으로 결과·가이드·강점·개선·재작성 연결. 합성 A–L 회귀, APP1285PASS/7SKIP·Analyze0, WEB1408PASS/4SKIP·TS/Lint0error/buildPASS. iOS31(3368e2c) 서명/ObservationON·30보존. 실평가 품질 미검증·운영 적용 없음.
 
 [숭실 PDF 열 혼합 재현·v3 별도 후보·6대학 제한 검사·APP/WEB 표시 분리](rubric-structure-fix-20261031.md). 운영 교체/과거 결과 변경 없이 검수본 전용 optional 읽기모델 준비. APP2419808/WEBe809969. Analyze0·APP1267PASS/7SKIP·WEB1395PASS/4SKIP·TS/buildPASS·Lint0오류/4기존경고·Python9PASS. 로컬 5너비 확인, 운영/Provider/설치0.
 
