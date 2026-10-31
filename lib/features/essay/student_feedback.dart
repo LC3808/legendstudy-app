@@ -22,12 +22,13 @@ class StudentFeedbackView extends StatelessWidget {
     this.before,
     this.header,
     this.actions,
+    this.voice,
     this.rewrite,
     this.comparison,
   });
   final EvaluationReport report;
   final EvaluationReport? before;
-  final Widget? header, actions, rewrite, comparison;
+  final Widget? header, actions, rewrite, comparison, voice;
 
   Widget text(String value) => SelectableText(
     value,
@@ -35,7 +36,7 @@ class StudentFeedbackView extends StatelessWidget {
     style: AppTokens.body.copyWith(height: 1.7),
   );
   Widget card(String title, List<Widget> children, {Color? color}) => Container(
-    margin: const EdgeInsets.only(bottom: 16),
+    margin: const EdgeInsets.only(bottom: 24),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
       color: color ?? Colors.white,
@@ -64,19 +65,21 @@ class StudentFeedbackView extends StatelessWidget {
     items.isEmpty
         ? [text('이 기록에는 해당 피드백이 저장되어 있지 않습니다.')]
         : [
-            for (final f in items) ...[
-              if (f.title.isNotEmpty && f.title != title)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(f.title, style: AppTokens.cardTitle),
+            for (final (index, f) in items.indexed) ...[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  '${index + 1}. ${f.title.isEmpty || f.title == title ? title : f.title}',
+                  style: AppTokens.cardTitle,
                 ),
+              ),
               ...paragraphs([f.explanation]),
               if (f.evidence.isNotEmpty && report.answer.contains(f.evidence))
                 card('학생이 작성한 글', [
                   text(f.evidence),
                 ], color: const Color(0xFFF2F4F6)),
               if (f.action.isNotEmpty)
-                card('개선 방법', [text(f.action)], color: const Color(0xFFEDF3F9)),
+                card('개선 방법', [text(f.action)], color: const Color(0xFFFFF5E4)),
               const SizedBox(height: 8),
             ],
           ],
@@ -109,6 +112,7 @@ class StudentFeedbackView extends StatelessWidget {
                   report.summary.isEmpty ? '저장된 종합 평가가 없습니다.' : report.summary,
                 ),
               ]),
+              if (voice != null) ...[voice!, const SizedBox(height: 24)],
               card('높은 평가를 위한 작성 가이드', [
                 text(
                   '이 문항에 저장된 수정 방향과 확인 항목입니다. 보완 사유와 연결된 개선 방법은 아래에서 확인하세요.',
@@ -206,7 +210,7 @@ class StudentFeedbackView extends StatelessWidget {
                   ),
                 ),
               if (comparison != null) comparison!,
-              if (actions != null) actions!,
+              if (actions != null) ...[actions!, const SizedBox(height: 24)],
               card('다시 써보기', [
                 text('이번 첨삭에서 확인한 개선 방향을 적용해 답안을 다시 작성해 보세요.'),
                 const SizedBox(height: 12),

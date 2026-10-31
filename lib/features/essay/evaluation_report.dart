@@ -248,6 +248,15 @@ EvaluationReport humanEvaluationReport(dynamic value, {String? priorId}) {
           ),
     ],
     actions: progress
+        .where(
+          (p) =>
+              p['status'] != 'resolved' &&
+              (v['contract_version'] != '1.3' ||
+                  evaluationObject(
+                        p['scaffolding_observation'],
+                      )['core_focus'] ==
+                      true),
+        )
         .map((p) => evaluationText(p['next_action']))
         .where((s) => s.isNotEmpty)
         .toList(),
@@ -411,7 +420,16 @@ EvaluationReport examEvaluationReport(
       'strengths': out['strengths'],
       'rewrite_checklist': out['checklist'],
       'essay_improvement_progress': [
-        for (final i in progress) {...i, 'next_action': i['action']},
+        for (final i in progress)
+          {
+            ...i,
+            'next_action': i['action'],
+            'scaffolding_observation': {
+              ...evaluationObject(i['scaffolding_observation']),
+              'core_focus': evaluationList(out['core_improvement_keys'])
+                  .contains(i['issue_key']),
+            },
+          },
       ],
       'essay_evaluation_dimensions': [
         for (var i = 0; i < dimensions.length; i++)

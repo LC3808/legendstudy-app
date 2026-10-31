@@ -455,12 +455,8 @@ class _Result extends ConsumerWidget {
                 : StudentFeedbackView(
                     report: report,
                     before: before,
-                    actions: Column(
-                      children: [
-                        EssayVoice(report: report, before: before),
-                        ResultPdfButton(report: report),
-                      ],
-                    ),
+                    voice: EssayVoice(report: report, before: before),
+                    actions: ResultPdfButton(report: report),
                     header: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [

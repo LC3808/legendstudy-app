@@ -1,5 +1,7 @@
 ## 2026-10-31 — 공식 채점기준 구조
 
+[10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.
+
 ## 2026-10-31 — 학생 중심 결과 개편
 
 [학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) APP/WEB 공통 저장 피드백으로 결과·가이드·강점·개선·재작성 연결. 합성 A–L 회귀, APP1285PASS/7SKIP·Analyze0, WEB1408PASS/4SKIP·TS/Lint0error/buildPASS. iOS31(3368e2c) 서명/ObservationON·30보존. 실평가 품질 미검증·운영 적용 없음.

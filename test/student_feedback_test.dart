@@ -69,31 +69,56 @@ void main() {
     );
   }
   for (final width in [320.0, 360.0, 390.0, 430.0]) {
-    testWidgets('learning feedback width $width large text', (t) async {
-      t.view.physicalSize = Size(width, 900);
-      t.view.devicePixelRatio = 1;
-      addTearDown(t.view.resetPhysicalSize);
-      addTearDown(t.view.resetDevicePixelRatio);
-      final c = {
-        ...cases[1],
-        'explanation': List.filled(8, cases[1]['explanation']).join('\n\n'),
-      };
-      await t.pumpWidget(
-        MaterialApp(
-          builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context)
-                .copyWith(textScaler: TextScaler.linear(1.8)),
-            child: child!,
+    for (final scale in [1.0, 2.0]) {
+      testWidgets('learning feedback width $width scale $scale', (t) async {
+        t.view.physicalSize = Size(width, 900);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.resetPhysicalSize);
+        addTearDown(t.view.resetDevicePixelRatio);
+        final c = {
+          ...cases[1],
+          'explanation': List.filled(8, cases[1]['explanation']).join('\n\n'),
+        };
+        await t.pumpWidget(
+          MaterialApp(
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
+              child: child!,
+            ),
+            home: Scaffold(
+              body: StudentFeedbackView(
+                report: report(c),
+                voice: const Text('음성 영역'),
+                actions: const SizedBox(key: ValueKey('pdf'), height: 48),
+                rewrite: const Text('재작성 행동'),
+              ),
+            ),
           ),
-          home: Scaffold(body: StudentFeedbackView(report: report(c))),
-        ),
-      );
-      for (var i = 0; i < 8; i++) {
-        await t.drag(find.byType(SingleChildScrollView), const Offset(0, -600));
-        await t.pump();
-        expect(t.takeException(), isNull);
-      }
-    });
+        );
+        expect(
+          t.getTopLeft(find.text('음성 영역')).dy,
+          lessThan(t.getTopLeft(find.text('높은 평가를 위한 작성 가이드')).dy),
+        );
+        expect(
+          t.getTopLeft(find.text('음성 영역')).dy,
+          greaterThan(t.getTopLeft(find.text('종합 평가')).dy),
+        );
+        expect(
+          t.getTopLeft(find.text('다시 써보기')).dy -
+              t.getBottomLeft(find.byKey(const ValueKey('pdf'))).dy,
+          greaterThanOrEqualTo(24),
+        );
+        for (var i = 0; i < 8; i++) {
+          await t.drag(
+            find.byType(SingleChildScrollView),
+            const Offset(0, -600),
+          );
+          await t.pump();
+          expect(t.takeException(), isNull);
+        }
+      });
+    }
   }
   test('exact evidence fallback retains distinct feedback but excludes raw unmatched source', () {
     final r = EvaluationReport(
@@ -125,6 +150,43 @@ void main() {
     );
     expect(r.evidenceLabels.last, '공식 원문만');
   });
+  test(
+    'core action mapping matches WEB and excludes resolved/non-core priorities',
+    () {
+      final report = humanEvaluationReport({
+        'id': 'fixture',
+        'contract_version': '1.3',
+        'attempt': {'body': '원본'},
+        'overall_summary': '종합',
+        'strengths': ['실제 강점'],
+        'rewrite_checklist': ['저장된 점검'],
+        'essay_improvement_progress': [
+          {
+            'status': 'unresolved',
+            'title': '핵심',
+            'explanation': '설명',
+            'next_action': '핵심 행동',
+            'scaffolding_observation': {'core_focus': true},
+          },
+          {
+            'status': 'unresolved',
+            'title': '추가',
+            'explanation': '추가 설명',
+            'next_action': '추가 행동',
+          },
+          {
+            'status': 'resolved',
+            'next_action': '해결된 행동',
+            'scaffolding_observation': {'core_focus': true},
+          },
+        ],
+      });
+      expect(report.actions, ['핵심 행동']);
+      expect(report.weaknesses.map((f) => f.action), ['핵심 행동', '추가 행동']);
+      expect(report.nextSteps, ['저장된 점검']);
+      expect(report.summary, '종합');
+    },
+  );
   test('different rubric and paid parent do not produce false growth', () {
     final a = report(cases[0]);
     final b = EvaluationReport(

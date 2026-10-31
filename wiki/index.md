@@ -1,5 +1,7 @@
 # LegendStudy Wiki Index
 
+[10/31 최종 피드백 UX·빈 재작성·명시적 원본 불러오기·Draft 보존·검증/미완료](final-feedback-ux-refinement-20261031.md). 학생 중심 결과 정책의 후속이며 평가·과금·이력은 유지한다.
+
 ## 학생 결과 표시·작성 가이드 라우팅
 
 [학생 중심 첨삭 결과 정책·구현·검증·미완료](student-centered-essay-feedback-20261031.md) (APP/WEB 결과·기존 데이터 매핑·출력 확장 설계·검수 환경)

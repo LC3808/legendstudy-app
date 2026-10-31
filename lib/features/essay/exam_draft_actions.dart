@@ -37,25 +37,30 @@ class _ExamDraftActionsState extends ConsumerState<ExamDraftActions> {
       );
       var local = await store.loadDraft();
       var images = await store.loadImages();
-      if (local.body.isEmpty && images.isEmpty) {
+      if (local.body.isEmpty &&
+          images.isEmpty &&
+          (widget.rewriteRun == null || local.revision == 0)) {
         String body = '';
         if (widget.rewriteRun != null) {
-          body =
+          final original =
               ((widget.rewriteRun!['answers'] as List?) ?? [])
                       .where((a) => a['questionId'] == q['dbQuestionId'])
                       .firstOrNull?['body']
                   as String? ??
               '';
           // Same migration order as the writer: unfinished local edits take
-          // priority over seeding from an already submitted history answer.
+          // priority. Submitted originals are never automatically copied.
           final legacyStore = SourceDraftGateway(
             widget.owner,
             q['key'] as String,
           );
           final legacy = await legacyStore.loadDraft();
-          if (legacy.body.isNotEmpty && legacy.body != body) body = legacy.body;
+          if (legacy.body.isNotEmpty && legacy.body != original) {
+            body = legacy.body;
+          }
           final legacyImages = await legacyStore.loadImages();
-          if (legacyImages.isNotEmpty &&
+          if (body.isNotEmpty &&
+              legacyImages.isNotEmpty &&
               mounted &&
               ref.read(authStateProvider).value?.userId == widget.owner) {
             images = await store.loadImages();

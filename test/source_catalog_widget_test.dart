@@ -500,7 +500,7 @@ void main() {
     });
   }
   testWidgets(
-    'rewrite restores submitted answer and scoped draft, locks selection and respects HOLD',
+    'rewrite starts blank, explicitly imports original, restores edited draft and locks selection',
     (tester) async {
       final disk = <String, String>{};
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -580,8 +580,15 @@ void main() {
       // Rewrite's original question set is fixed.
       await tester.pumpAndSettle();
       expect(find.byType(TextField), findsNothing);
-      await tester.ensureVisible(find.text('답안 이어쓰기'));
-      await tester.tap(find.text('답안 이어쓰기'));
+      await tester.ensureVisible(find.text('답안 작성하기'));
+      await tester.tap(find.text('답안 작성하기'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '',
+      );
+      await tester.ensureVisible(find.text('이전 답안 불러오기'));
+      await tester.tap(find.text('이전 답안 불러오기'));
       await tester.pumpAndSettle();
       expect(
         tester.widget<TextField>(find.byType(TextField)).controller!.text,
@@ -590,6 +597,15 @@ void main() {
       await tester.enterText(find.byType(TextField), '수정 중인 답안');
       await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('이전 답안 불러오기'));
+      await tester.tap(find.text('이전 답안 불러오기'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('취소'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        '수정 중인 답안',
+      );
       await tester.pageBack();
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('문제 1'));

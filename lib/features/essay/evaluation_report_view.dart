@@ -32,9 +32,9 @@ class EvaluationReportView extends StatelessWidget {
           ),
       ],
     ),
+    voice: EssayVoice(report: report, before: before),
     actions: Column(
       children: [
-        EssayVoice(report: report, before: before),
         ResultPdfButton(report: report),
         OutlinedButton(
           onPressed: () => showGrowthShare(

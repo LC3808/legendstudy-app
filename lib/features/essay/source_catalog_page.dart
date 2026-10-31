@@ -1231,12 +1231,12 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
         );
         final legacy = await old.loadDraft();
         final oldImages = await old.loadImages();
-        // Preserve unfinished edits; seed only a brand-new draft from owned history.
+        // Preserve legacy modified text, but never seed a new rewrite from History.
         final body = legacy.body.isNotEmpty && legacy.body != previousAnswer
             ? legacy.body
-            : previousAnswer;
+            : '';
         d = await g.saveLocalDraft(body, d.revision);
-        if (oldImages.isNotEmpty) {
+        if (body.isNotEmpty && oldImages.isNotEmpty) {
           await g.saveImages(oldImages);
           image = oldImages;
         }
@@ -1324,8 +1324,14 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       );
       if (accepted != true || !mounted) return;
     }
+    if (!mounted ||
+        controller == null ||
+        ref.read(authStateProvider).value?.userId != widget.owner) {
+      return;
+    }
     editor.text = previousAnswer;
     controller!.edit(editor.text);
+    _notifyContent();
     await controller!.save();
   }
 
