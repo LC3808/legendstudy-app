@@ -107,7 +107,7 @@ Claude 역할 = 기획·디자인·자료 분석·구조화·검토. 실제 WEB/
 
 ## §17. 최종 보고 (21개 항목)
 1. **작업 브랜치**: `claude/relaxed-stonebraker-027081`(main 기반). Codex 브랜치 미변경.
-2. **최종 SHA**: 커밋/푸시 후 기록(본 문서 하단 갱신 + 보고 메시지).
+2. **최종 SHA**: 구현 커밋 `ad83b06889e2125804babdbc7c4a69366451add5` (+ 본 SHA 기록 docs 후속 커밋). 브랜치 `claude/relaxed-stonebraker-027081`, origin push 완료.
 3. **배너 4종 자산**: `assets/marketing/banners/`에 5키(ios-launch, android-launch, lab-beta, univ-post-sogang[지원], univ-post-comingsoon[준비중]) × {pc/mobile}×{@1x webp, @2x webp} + png 폴백 + svg 소스. ✅
 4. **PC/모바일 디자인 명세**: §A + 배너 README(규격·토큰·반응형 `<picture>`). ✅
 5. **슬라이더 개선안**: [web-main-slider-fix](web-main-slider-fix-20261101.md) — 원인(고정높이+overflow, 프레임/트랙 2px, flex/translate 취약) + CSS/JS 수정 + 검수. ✅
