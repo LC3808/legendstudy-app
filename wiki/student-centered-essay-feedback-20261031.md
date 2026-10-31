@@ -78,3 +78,11 @@ WEB commit `ff78af5` (변경 11파일). 최종 전체 1,408 PASS / 4 SKIP / 0 FA
 ## APP 자동 검증 완료
 
 최종 Analyze **0 issues**, 전체 Flutter Test **1,285 PASS / 7 SKIP / 0 FAIL**. 새 학생 결과 테스트 18 PASS. 기존 7 SKIP은 PASS에 포함하지 않음. 최종 로그 `/tmp/legend-student-analyze-final.log`, `/tmp/legend-student-app-verified.log`. 작업 중 데모 분기에 삽입된 잘못된 named parameter를 발견·수정했으며 겹친 테스트 실행을 종료하고 단일 전체 실행으로 재확인했다. 기존 기능 계약을 완화하거나 테스트를 삭제하지 않았다. Wiki handoff PASS/current-status 11,905 bytes. iOS 생성 이후 빌드 receipt를 별도로 기록한다.
+
+## iOS 의존성 충돌 발견과 최소 조정
+
+첫 빌드(소스 `5f8b0d4`)는 SwiftPM resolve에서 실패: 기존 firebase_core5.1.0/analytics13.0.1이 Firebase iOS13.1.1의 AppCheck12를 요구하지만 기존 GoogleSignIn9 계열은 AppCheck11을 요구한다. 운영/로그인 설정 문제나 평가 기능 실패가 아니다.
+Firebase Flutter만 정확히 core4.15.2/analytics12.6.1로 고정하여 둘 다 Firebase iOS12.19.3을 사용하도록 조정한다. 기존 Google 로그인 플러그인·네이티브 URL scheme·Bundle·서명·iOS15 target은 유지한다. 관련 Firebase 6개 lock entry만 변경, Analytics 이벤트/Noop/수집 동의/GA4 설정은 변경 없음. SwiftPM cache를 직접 수정하거나 Firebase를 제거하지 않는다.
+공식 의존성 근거: [GoogleSignIn Flutter Package](https://raw.githubusercontent.com/flutter/packages/main/packages/google_sign_in/google_sign_in_ios/darwin/google_sign_in_ios/Package.swift), [Firebase12.19.3 Package](https://raw.githubusercontent.com/firebase/firebase-ios-sdk/12.19.3/Package.swift) (AppCheck11.3..<12). 사용 Flutter package의 배포 archive도 확인했다. 조정 후 Analyze/전체 Test/서명 build를 다시 확인한다. 실제 Google/Apple/Kakao 로그인·GA4 수신은 실기기 미검증.
+
+의존성 조정 후 Analyze0 및 전체1,285PASS/7SKIP/0FAIL 재확인 (`/tmp/legend-student-analyze-native.log`, `/tmp/legend-student-tests-native.log`).
