@@ -1,3 +1,5 @@
+import '../essay_feedback.dart';
+
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -85,6 +87,7 @@ class _FeedbackPageState extends ConsumerState<FeedbackPage> {
   Widget build(BuildContext context) => ShellPage(
     children: [
       const SectionHeader('문의·건의사항'),
+      const EssayFeedback(bugOnly: true),
       const Text('비밀번호, 주민등록번호 등 민감한 개인정보는 입력하지 마세요.'),
       const SizedBox(height: 16),
       DropdownButtonFormField<FeedbackCategory>(

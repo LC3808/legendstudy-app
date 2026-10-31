@@ -18,24 +18,27 @@ extension FeedbackCategoryLabel on FeedbackCategory {
   };
 }
 
-enum FeedbackStatus { newStatus, reviewing, resolved }
+enum FeedbackStatus { newStatus, reviewing, resolved, closed }
 
 extension FeedbackStatusContract on FeedbackStatus {
   String get value => switch (this) {
     FeedbackStatus.newStatus => 'new',
     FeedbackStatus.reviewing => 'reviewing',
     FeedbackStatus.resolved => 'resolved',
+    FeedbackStatus.closed => 'closed',
   };
   String get label => switch (this) {
     FeedbackStatus.newStatus => '신규',
     FeedbackStatus.reviewing => '확인중',
     FeedbackStatus.resolved => '처리완료',
+    FeedbackStatus.closed => '종료',
   };
 
   static FeedbackStatus fromValue(String value) => switch (value) {
     'new' => FeedbackStatus.newStatus,
     'reviewing' => FeedbackStatus.reviewing,
     'resolved' => FeedbackStatus.resolved,
+    'closed' => FeedbackStatus.closed,
     _ => throw FormatException('Unknown feedback status'),
   };
 }

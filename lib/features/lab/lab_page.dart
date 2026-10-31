@@ -1,3 +1,5 @@
+import '../feedback/essay_feedback.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,6 +25,7 @@ class LabPage extends StatelessWidget {
       // Owner order (2026-10-09): 논술 LAB first (live, primary CTA), then
       // 내신 LAB, then 수능 LAB.
       const LegendStudyLabEntry(),
+      const EssayFeedback(bugOnly: true),
       const SizedBox(height: 12),
       const _LabServiceCard(
         icon: Icons.school_outlined,

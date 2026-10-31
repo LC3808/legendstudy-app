@@ -1,3 +1,5 @@
+import '../feedback/essay_feedback.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_theme.dart';
@@ -211,6 +213,7 @@ class StudentFeedbackView extends StatelessWidget {
                 ),
               if (comparison != null) comparison!,
               if (actions != null) ...[actions!, const SizedBox(height: 24)],
+              EssayFeedback(evaluationRef: report.id),
               card('다시 써보기', [
                 text('이번 첨삭에서 확인한 개선 방향을 적용해 답안을 다시 작성해 보세요.'),
                 const SizedBox(height: 12),

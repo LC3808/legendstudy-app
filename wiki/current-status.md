@@ -76,7 +76,7 @@ exact auth.uid()/avatar.png, SELECT/INSERT/UPDATE/DELETE owner-only SQL PASS.
 [Database](database.md) owns schema evidence and prior deployment inventory;
 [Study storage](day-8-study-storage-proposal.md), [school storage](day-7-school-storage-proposal.md),
 [scoring storage](day-8-scoring-storage-proposal.md) retain original acceptance.
-Feedback/admin/email-worker prior Production acceptance: [operations](day-11-account-personal-feedback.md).
+[TASK05 피드백·신고](essay-feedback-reports.md): 구현·로컬 검증, 운영 승인 대기.
 Owner reports resolver quota migration20260925000100 applied/runtime PASS:
 RLS/grants/definer/search_path, calls1–12/13 limit, resource isolation, minute reset.
 [Exact evidence and scope](day-9-c-resource-detail.md#production-activation-preparation--2026-09-25).
