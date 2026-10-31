@@ -1,3 +1,4 @@
+import '../features/notices/notices.dart';
 import '../features/credits/credit_history.dart';
 import '../features/onboarding/device_intro.dart';
 import '../features/auth/account_deletion.dart';
@@ -141,6 +142,18 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/auth/new-password',
         builder: (_, _) =>
             const NestedPage(title: '새 비밀번호 설정', child: NewPasswordPage()),
+      ),
+      GoRoute(
+        path: '/notices',
+        builder: (_, _) =>
+            const NestedPage(title: '공지사항', child: NoticesPage()),
+      ),
+      GoRoute(
+        path: '/notices/:id',
+        builder: (_, state) => NestedPage(
+          title: '공지사항',
+          child: NoticeDetailPage(id: state.pathParameters['id']!),
+        ),
       ),
       GoRoute(
         path: '/notifications',

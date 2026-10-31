@@ -14,66 +14,81 @@ class NotificationsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final feed = ref.watch(notificationFeedProvider);
-    return feed.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, _) => _Centered(
-        children: [
-          const Text('알림을 불러오지 못했어요.', style: AppTokens.body),
-          const SizedBox(height: AppTokens.space12),
-          OutlinedButton(
-            onPressed: () => ref.read(notificationFeedProvider.notifier).refresh(),
-            child: const Text('다시 시도'),
-          ),
-        ],
-      ),
-      data: (data) {
-        if (data.items.isEmpty) {
-          return const _Centered(
-            children: [
-              Icon(
-                Icons.notifications_none,
-                size: 40,
-                color: AppTokens.textTertiary,
-              ),
-              SizedBox(height: AppTokens.space12),
-              Text('받은 알림이 없어요.', style: AppTokens.secondary),
-            ],
-          );
-        }
-        final hasUnread = data.items.any((n) => !n.isRead);
-        return RefreshIndicator(
-          onRefresh: () =>
-              ref.read(notificationFeedProvider.notifier).refresh(),
-          child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: AppTokens.space8),
-            children: [
-              if (hasUnread)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    AppTokens.space16,
-                    AppTokens.space4,
-                    AppTokens.space8,
-                    AppTokens.space4,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () => ref
-                          .read(notificationFeedProvider.notifier)
-                          .markAllRead(),
-                      child: const Text('모두 읽음'),
+    return Column(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.campaign_outlined),
+          title: const Text('공지사항'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => context.push('/notices'),
+        ),
+        Expanded(
+          child: feed.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (_, _) => _Centered(
+              children: [
+                const Text('알림을 불러오지 못했어요.', style: AppTokens.body),
+                const SizedBox(height: AppTokens.space12),
+                OutlinedButton(
+                  onPressed: () =>
+                      ref.read(notificationFeedProvider.notifier).refresh(),
+                  child: const Text('다시 시도'),
+                ),
+              ],
+            ),
+            data: (data) {
+              if (data.items.isEmpty) {
+                return const _Centered(
+                  children: [
+                    Icon(
+                      Icons.notifications_none,
+                      size: 40,
+                      color: AppTokens.textTertiary,
                     ),
+                    SizedBox(height: AppTokens.space12),
+                    Text('받은 알림이 없어요.', style: AppTokens.secondary),
+                  ],
+                );
+              }
+              final hasUnread = data.items.any((n) => !n.isRead);
+              return RefreshIndicator(
+                onRefresh: () =>
+                    ref.read(notificationFeedProvider.notifier).refresh(),
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppTokens.space8,
                   ),
+                  children: [
+                    if (hasUnread)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          AppTokens.space16,
+                          AppTokens.space4,
+                          AppTokens.space8,
+                          AppTokens.space4,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () => ref
+                                .read(notificationFeedProvider.notifier)
+                                .markAllRead(),
+                            child: const Text('모두 읽음'),
+                          ),
+                        ),
+                      ),
+                    for (final item in data.items)
+                      _NotificationTile(
+                        item: item,
+                        onTap: () => _openNotification(context, ref, item),
+                      ),
+                  ],
                 ),
-              for (final item in data.items)
-                _NotificationTile(
-                  item: item,
-                  onTap: () => _openNotification(context, ref, item),
-                ),
-            ],
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 
@@ -169,10 +184,7 @@ class _Centered extends StatelessWidget {
   Widget build(BuildContext context) => Center(
     child: Padding(
       padding: const EdgeInsets.all(AppTokens.space24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: children,
-      ),
+      child: Column(mainAxisSize: MainAxisSize.min, children: children),
     ),
   );
 }

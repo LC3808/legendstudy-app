@@ -101,6 +101,11 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
         ),
+        LsListRow(
+          title: '공지사항',
+          icon: Icons.campaign_outlined,
+          onTap: () => context.push('/notices'),
+        ),
         if (!auth.isLoading &&
             !auth.hasError &&
             auth.value?.isAuthenticated == true) ...[

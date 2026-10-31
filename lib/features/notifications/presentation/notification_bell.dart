@@ -1,3 +1,5 @@
+import '../../notices/notices.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +9,7 @@ import '../../../core/theme/app_theme.dart';
 import '../application/notification_providers.dart';
 
 /// Home bell. The unread badge is the server-authoritative count (never counted
-/// locally); signed-out shows a plain bell that routes to sign-in.
+/// locally); signed-out shows a plain bell that opens public notices.
 class NotificationBell extends ConsumerWidget {
   const NotificationBell({super.key});
 
@@ -16,7 +18,8 @@ class NotificationBell extends ConsumerWidget {
     final auth = ref.watch(authStateProvider).asData?.value;
     final signedIn = auth?.isAuthenticated == true;
     final count = signedIn
-        ? (ref.watch(unreadNotificationCountProvider).asData?.value ?? 0)
+        ? ((ref.watch(unreadNotificationCountProvider).asData?.value ?? 0) +
+              (ref.watch(noticeUnreadProvider).asData?.value ?? 0))
         : 0;
     final label = count > 0 ? '알림, 안 읽음 $count개' : '알림';
 
@@ -31,7 +34,7 @@ class NotificationBell extends ConsumerWidget {
             if (signedIn) {
               context.push('/notifications');
             } else {
-              context.go('/auth');
+              context.push('/notices');
             }
           },
           child: SizedBox(
@@ -56,8 +59,13 @@ class NotificationBell extends ConsumerWidget {
                       constraints: const BoxConstraints(minWidth: 18),
                       decoration: BoxDecoration(
                         color: AppTokens.danger,
-                        borderRadius: BorderRadius.circular(AppTokens.radiusPill),
-                        border: Border.all(color: AppTokens.surface, width: 1.5),
+                        borderRadius: BorderRadius.circular(
+                          AppTokens.radiusPill,
+                        ),
+                        border: Border.all(
+                          color: AppTokens.surface,
+                          width: 1.5,
+                        ),
                       ),
                       child: Text(
                         count > 99 ? '99+' : '$count',
