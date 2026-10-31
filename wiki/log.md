@@ -5154,3 +5154,5 @@ Owner iPhone 실기기 검수에서 발견된 P0/P1을 일괄 수정. 기존 PAS
 ## 2026-10-30 — Codex Analytics v1 integration
 
 Claude 0047186/ccae6bd를 최신 APP에 통합, UI 보존. 행동 이벤트/Noop/관리자 fail-closed 보강. 운영 SQL은 미적용 후보. [검토·검증·미검증·롤백](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
+
+- 2026-10-31 숭실 v3 최종 검증: PDF5행/가점 PASS; 현재 운영은 별도 v3 두 문항으로 로컬 v2 기반 후보 직접 적용 BLOCKED. run4/checkpoint40/Credit4 해시 불변. 전체 APP1267/WEB1395 PASS(SKIP 별도), 적용·역사본 보존·롤백 절차 기록. [상세](rubric-structure-fix-20261031.md#숭실-v3-최종-검증--2026-10-31).

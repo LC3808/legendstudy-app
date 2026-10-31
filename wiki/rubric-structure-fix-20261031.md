@@ -1,5 +1,7 @@
 # 평가 근거·공식 채점기준 구조 — 2026-10-31
 
+> 최신 판정: [숭실 v3 최종 검증](#숭실-v3-최종-검증--2026-10-31) — PDF 내용 PASS, 실제 운영 v3와 후보의 기준·digest가 달라 직접 적용 BLOCKED. 앞선 보관본 기반 적용 대기 판단을 대체한다.
+
 Owner 10/31 지시. **APP/WEB 표시 수정 및 오프라인 정정 후보 준비. 운영 적용 아님.**
 기존 [출시 전 안정화](pre-release-stabilization-20261030.md), [APP Round29](app-device-round29-20261030.md), [WEB 표시 개선](essay-web-result-refinement-20261030.md), [공식 근거 보존](essay-lab-data-foundation.md#official-evidence-archive-strategy--owner-decision-2026-09-30)을 이어간다.
 
@@ -107,3 +109,84 @@ CUA 실제 브라우저 320/375/390/768/1024px에서 document/body scrollWidth =
 - Python 품질/정정 후보 테스트 **9 PASS**. Wiki handoff PASS, current-status 11,809 bytes (<12KB), 내부 링크 검사 통과.
 - 로그: `/tmp/rubric-app-analyze-final.log`, `/tmp/rubric-app-final.log`, `/tmp/rubric-web-{final,typecheck-final,lint-final,build-final}.log`, `/tmp/rubric-wiki-check.log`.
 - 로컬 표/펼침/5너비 검증 PASS. 새 iOS 빌드/실기기/실계정 API·로그인/운영 배포·GA4 수신 NOT TESTED. 원본 표 정정 후보는 미적용이므로 운영 표 구조 복원 완료로 보고하지 않음.
+
+
+## 숭실 v3 최종 검증 — 2026-10-31
+
+**결론: PDF 내용 PASS / 기존 후보 그대로 운영 적용 BLOCKED.** 아래 실제 운영 조회가 앞선 보관본 기반 기록보다 우선한다. 이번 검증은 운영 SELECT만 사용했고 Package/Worker/Credit/History 변경과 Provider 호출은 없다.
+
+### 공식 PDF·내용 검증
+
+2026학년도 숭실대학교 수시 논술 인문계열 문제 1(1-1). PDF 첫 페이지의 문항 식별과 운영 `essay_exams` 식별 일치. 시험 `0d4fcaa4-2be0-52a0-9590-c61f65c5f199`, 문항 `5df22bef-ce93-5333-9334-023ba98468e4`.
+PDF 물리 6쪽 / 인쇄 21쪽, SHA256 `dd97f6d0b480955f80fd2568c3b59bd8e04f2e918895ce7061e1cb2e143441ff`.
+원본은 위 비공개 산출물 폴더의 `source.private.json`에 정확한 절대 경로 보관. 페이지 렌더 시각 확인 + 독립적인 좌표별 좌측 설명/우측 배점 추출로 대조했다.
+
+| 행 | 배점 | 대조 |
+|---|---|---|
+| 1 | 8~10 | 설명 전체 문자 순서·행 연결 일치 |
+| 2 | 6~7 | 설명 일치; PDF의 `상품화.` 마침표도 보존 |
+| 3 | 4~5 | 설명 일치 |
+| 4 | 1~3 | 설명 일치 |
+| 5 | 0 | 설명 일치 |
+
+가점 `※ 글쓰기 능력이 뛰어난 답안의 경우 1점 가점 부여 가능` 별도 보존. 누락·중복·설명 중간 배점 없음. 공백/줄바꿈만 무시한 셀 문자 비교이며 문장 의미를 추론해 수정하지 않았다. 문제·예시답안·다른 근거는 후보에서 동일하다.
+재현 도구: [`tool/verify_soongsil_rubric_candidate.py`](../tool/verify_soongsil_rubric_candidate.py), `--pdf <source.private.json의 path> --artifacts <위 비공개 산출물 폴더>`; pdfplumber 설치된 Python 사용. 네트워크/DB 접근과 파일 수정 없음.
+
+### 실제 Package 상태와 후보 차이
+
+Package에 별도 UUID ID 필드는 없다. 식별자는 exam ID + package_version + digest이며 DB revision과 함께 기록한다.
+
+| 구분 | 버전 / revision | digest |
+|---|---|---|
+| 후보가 기초로 삼은 보관본 | v2 / 2 | `2b05d2d4e04ad1a39ae035feb21ac5dab8e764765e9043039e1da10d3f468fd7` |
+| 로컬 정정 후보 | v3 / DB 미등록 | `092c10cd691b0ea7d49df4b7d96fbe3f602657bc97dbe05047ee7c9b6a30f6c0` |
+| **현재 운영본** | **v3 / 3** | **`d5f609e1e11cc11c77b356c0aada574ce4fd24bba618faee3e20ef33d60306a5`** |
+
+운영 `reviews`는 `NEEDS_REVIEW`, scoped runtimeApproval APPROVED 경로를 사용한다. `runtime_policy`도 현재 운영 v3 digest를 선택하며, v2와 v3 모두 DB jsonb digest 재계산 일치. 최신 운영 v3는 q1/q2 **두 문항**, 후보는 **q1만 포함**한다. 기존 공식 이미지·근거 구성·권리 purpose도 보관 v2와 달라 단순 교체는 최신 변경을 되돌릴 위험이 있다. 현재 q1 criteria는 reference index 2이며 보관 v2의 index 4가 아니다. 현재 운영 q1에도 원래 배점 혼합 문자열이 남아 있다.
+
+보관 v2→로컬 후보의 정확한 변경 필드:
+- `questions[0].source_page_references[4].evidenceText`
+- 같은 reference의 `verification` → CANDIDATE_OWNER_REVIEW
+- 최상위 `verification_status`, `package_version`, `package_digest`
+
+그 외 필드는 recursive 비교 동일. 후보 ID는 위 exam/v3/local digest이며 운영 revision 번호를 할당하지 않았다.
+
+**기존 평가 엔진에 바로 투입 불가:** 후보는 의도적으로 CANDIDATE_OWNER_REVIEW라 runtime의 VERIFIED_MANIFEST/VERIFIED 검사를 통과하지 않는다. 또한 후보 digest는 sorted compact JSON 산출물 체크섬으로 운영 `jsonb::text` digest가 아니다. 같은 후보를 SELECT로만 계산한 PostgreSQL digest는 `b2cb46b3b9421f3e816ea73457c1fe2980daed2ed09c6a6be21e3a933135329a`. 승인 상태/버전/기준 Package를 바꾸면 digest도 다시 계산해야 한다. 원래 평가 엔진 검증은 완화하지 않는다.
+
+### 기존 결과·Credit·History 보존
+
+대상 시험으로 제한한 시작/종료 SELECT 비교: **run 4건, checkpoint 40건, 관련 credit_transactions 4건 모두 동일**. run 전체 행, snapshot(학생 답안 포함), result(평가 단계/설명/근거 포함), checkpoint 전체 행, Credit 전체 행의 해시를 비교했다. 새 run 없음. History 원천 run/result/parent도 불변이다. 별도 과거 시점의 무변경을 소급 인증하는 검사는 아니다.
+
+| run | 상태 | 평가 당시 digest |
+|---|---|---|
+| 03b6e579-dee5-477c-9add-6f932c7ae367 | completed | 보관 v2 |
+| 244aed57-d1d2-4095-9c90-18f9fffa07da | completed | 보관 v2 |
+| 2d7a4abf-a787-4b15-a716-a939ccfde8bf | completed | **현재 운영 v3** |
+| ec9879cb-01b9-4794-a792-20b741d373f4 | failed | 보관 v2 |
+
+비공개 검증 원장: 같은 산출물 폴더의 `production-preservation-final.private.json`(답안 없이 해시), `production-material-final.private.json`(Package/승인/읽기 함수 스냅샷). 기존 결과에 정정본 연결 없음. 공개·계정 UI를 직접 호출한 검증은 아니다.
+
+### APP·WEB Fixture 및 자동 검증
+
+- APP: 설명 우선, 원문 접힘, 별도 배점 5행/가점, candidate/다른 digest 차단, 원문 보존. 전체 **1267 PASS / 7 SKIP / 0 FAIL**, Flutter Analyze **0 issues** (3.47.6).
+- WEB: 같은 숭실 source Fixture로 5행/가점 표시; 전체 **1395 PASS / 4 SKIP / 0 FAIL**. TypeScript PASS, Production Build PASS, Lint **0 errors / 기존 4 warnings**.
+- Python 품질/후보 회귀 **9 PASS**, 새 PDF 좌표 대조 PASS.
+- 실제 로컬 브라우저 320/375/390/768/1024px에서 document/body 폭=viewport; 390px 표·줄바꿈 시각 확인. 실제 학생 결과가 아닌 합성 평가와 공식 표 Fixture.
+- 새 iOS 빌드/실기기/실계정 APP·WEB 결과 UI는 NOT TESTED. 운영 producer가 구조화 모델을 제공하지 않으므로 **운영 구조화 표 활성화는 미완료**. candidate를 VERIFIED로 바꾸는 일은 Fixture에서만 하며 운영 활성화로 간주하지 않는다.
+- 로그 `/tmp/ssu-final-{analyze,app-tests,web-tests,ts,lint,build,pdf-audit}.log`. 테스트 SKIP을 PASS로 집계하지 않음.
+
+### Owner 승인용 적용 절차 — 실행 SQL 아님
+
+1. **현재 후보의 직접 적용은 금지.** 현재 운영 v3 전체를 기준으로 신규 정정 후보를 별도로 준비한다. 다음 사용 가능한 버전은 재조회하여 결정(현재 기준 v4). q2/공식 이미지/rights/문제/답안/기타 근거 모두 보존하고 q1의 정확한 sourceHash/page/role/before hash로 수정 범위를 고정한다. 인덱스만으로 변경하지 않는다.
+2. 신규 후보를 공식 PDF와 다시 대조하고 Owner에게 전체 diff·두 문항 보존·최종 digest·반영 범위 승인을 받는다. 이번 작업에서는 신규 v4를 생성하거나 승인 상태를 바꾸지 않았다.
+3. 승인 후 실행 직전 `reviews.revision=3`, digest=`d5f609…`, runtime_policy/RPC 정의·rights·두 문항 집합·진행 중 run 유무를 재확인한다. 불일치 시 중단한다. 현재 review body/runtime policy/역사 revisions를 비공개 백업한다.
+4. 기존 운영 등록 계약으로 **새 revision 추가**와 현재 review 포인터/승인/pin을 한 트랜잭션에서 변경하는 한정 SQL을 준비한다. digest는 승인된 최종 body에서 PostgreSQL 방식으로 계산한다. v2/v3 revisions를 UPDATE/DELETE하지 않는다. Worker·평가 규칙·Registry·Credit 변경은 포함하지 않는다.
+5. 현재 `essay_material_runtime_package`는 숭실의 역사적 fallback을 **revision2/v2 digest만 명시 허용**한다. 새 버전 적용 시 지금의 v3도 역사본으로 조회 가능하도록 정확한 v2/v3 digest 허용을 보존하는 RPC 변경안이 필요하다. 이는 **별도 운영 RPC 승인 대상**이다. 이 조건 없이 활성화하지 않는다.
+6. 적용 후 SELECT로 신/구 Package digest, 두 문항, rights/approval, 신규 pin, v2/v3 과거 읽기 가능 여부와 run/checkpoint/Credit 해시를 검증한다. Provider 호출 없이 검증하고 실제 평가는 별도 승인 없이는 실행하지 않는다.
+7. 신규 요청만 새 pin을 사용한다. 기존 요청/재처리는 snapshot의 당시 digest 유지. 과거 결과의 단계·설명·근거를 재작성하지 않는다. 정정 원문 표시가 필요하면 별도 출처/정정 버전임을 명시하는 읽기모델 및 producer 승인 후 연결한다. 새 자료가 예전 평가에 사용된 것처럼 표시하지 않는다.
+
+### 롤백 절차
+
+이번에는 운영 변경이 없어 운영 롤백이 필요하지 않다. 향후 승인 적용 시: 신규 요청 pin을 배포 직전 실제 운영 v3 digest로 되돌리되 기존 v2/v3와 새 버전으로 이미 접수된 요청의 역사본 읽기를 계속 보존한다. 새 revision 삭제 금지. 아직 새 요청이 없을 때만 백업 review/policy/RPC 복원 조건을 사용할 수 있고, 이미 새 digest run이 생겼다면 역사 fallback을 제거하는 무조건 복원은 금지한다. 모든 롤백은 적용 digest/현재 상태 guard 및 Owner 승인 하에 실행한다. run/Credit/History 수동 변경 없음.
+
+승인 필요: 최신 운영 v3 기반 재정정 후보 준비·검수 → 한정 적용 SQL 및 역사 fallback RPC 검토 → 별도 운영 적용 승인. **현재 판정은 자료 내용 검증 완료이며, 현 후보의 배포 승인 권고가 아니다.**

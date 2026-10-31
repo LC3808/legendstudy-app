@@ -2,7 +2,7 @@
 
 [Analytics 통합·기본OFF·SQL미적용·검증](analytics-v1-implementation-20261030.md#codex-integration-review--2026-10-30).
 
-[10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 v3 정정 후보·표 읽기모델 준비. 운영 연결/교체는 승인 대기. [Round29·iOS30 보존](app-device-round29-20261030.md).
+[10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 
 [APP 전체 인수·추가4과제](app-final-integration-20261028.md): Claude 최종 통합, 재작성 복원·회차 연결·전체 성장 그래프·온디바이스 OCR 구현. 운영 History 페이지네이션 SQL은 Owner 적용 대기. 실기기·실평가·스토어 미검증/미제출. [OCR 근거](essay-photo-ocr-design-20261028.md).
 
