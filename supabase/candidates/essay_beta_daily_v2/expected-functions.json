@@ -1,0 +1,92 @@
+[
+  {
+    "identity": "essay_beta_private.immutable()",
+    "digest": "0ffb77850a4935c162c7b8fd0cef6c52",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.is_beta(uuid)",
+    "digest": "846c12982684247d8ce489aabfa9521f",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,essay_executor=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_daily_claim()",
+    "digest": "6eb583ecf72be97f14118afcc2a21d1a",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.eligible(uuid,uuid)",
+    "digest": "5cc8547ed15874d932d84e6d74009552",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.credit_source(uuid,uuid)",
+    "digest": "09fc9d66ee9286fac0f6bfed03046d3b",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_exam_private.finish(uuid,jsonb,boolean)",
+    "digest": "d97e32341f90484d1d3523265172d6a3",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "credit_summary()",
+    "digest": "07b273f5d16b6167e9f2a976ab9b0fb4",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+  },
+  {
+    "identity": "essay_exam_history(uuid)",
+    "digest": "1f7646fc89f40d667768176fbcb4551d",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.freeze_campaign()",
+    "digest": "30705c5e5a25677772bb967bde914d42",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.revision_open(uuid)",
+    "digest": "d2d2c080836b7ba044bd447f7df21cc2",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_private.revision_deadline(uuid)",
+    "digest": "ce1e0ce85dc963163145c6ea7fc231a6",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_notice_ack(uuid)",
+    "digest": "ac8338cd5db69a6bba393ccb455c2cc5",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+  },
+  {
+    "identity": "essay_beta_daily_claim_v2()",
+    "digest": "d42554948c9ef2a483ea5466fbd3a6f7",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+  },
+  {
+    "identity": "essay_exam_private.reserve(uuid,uuid,uuid,jsonb,uuid)",
+    "digest": "d4bea07158bfa3a7c772a075c84f66af",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}"
+  },
+  {
+    "identity": "essay_exam_quote(uuid,uuid,uuid[],uuid,uuid)",
+    "digest": "d29c78f391a3da8297729c32b4e971de",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,essay_worker=X/postgres}"
+  }
+]
