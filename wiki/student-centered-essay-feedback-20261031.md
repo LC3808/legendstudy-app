@@ -86,3 +86,5 @@ Firebase Flutter만 정확히 core4.15.2/analytics12.6.1로 고정하여 둘 다
 공식 의존성 근거: [GoogleSignIn Flutter Package](https://raw.githubusercontent.com/flutter/packages/main/packages/google_sign_in/google_sign_in_ios/darwin/google_sign_in_ios/Package.swift), [Firebase12.19.3 Package](https://raw.githubusercontent.com/firebase/firebase-ios-sdk/12.19.3/Package.swift) (AppCheck11.3..<12). 사용 Flutter package의 배포 archive도 확인했다. 조정 후 Analyze/전체 Test/서명 build를 다시 확인한다. 실제 Google/Apple/Kakao 로그인·GA4 수신은 실기기 미검증.
 
 의존성 조정 후 Analyze0 및 전체1,285PASS/7SKIP/0FAIL 재확인 (`/tmp/legend-student-analyze-native.log`, `/tmp/legend-student-tests-native.log`).
+
+호환 버전의 첫 네이티브 빌드는 성공했으나 receipt 검사에서 기본 local config의 Observation=false를 확인했다. 이 산출물은 검수용으로 인계하지 않는다. 기존 local config 자체를 변경하지 않고, 같은 설정의 private QA 사본에서 `ESSAY_OBSERVATION_V1_ENABLED=true`만 설정하여 최종 재빌드한다. Google/Apple/Kakao 및 Supabase 값 그대로. 해결된 두 SwiftPM lock을 커밋한 후 해당 SHA로 다시 생성하여 소스 추적을 일치시킨다. 최종 receipt의 Observation=true 확인이 완료 기준이다.
