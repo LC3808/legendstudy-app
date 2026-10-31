@@ -1,5 +1,7 @@
 ## 2026-10-31 — TASK 02 베타 일일 무료 이용
 
+[2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
+
 ## 2026-10-31 — TASK04 관리자 베타 운영
 
 [기존 v2 확장·설정/이용/실패 복구·권한/감사/승인/롤백](admin-beta-operations.md). 다음 KST 자정 한도, 공식 admin+별도 승인 UUID, 과거 grant/결과 보존. APP/WEB quota 호환, 전체 자동 검증. 운영 미적용·실계정 검수 대기.

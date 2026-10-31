@@ -1,6 +1,6 @@
 # Current Status
 
-[공지](notices-system.md)·[TASK06 비용/장애](essay-operations-monitoring.md): 구현·격리 검증, 운영 승인 대기.
+[TASK07 출시 검수 HOLD](essay-beta-release-readiness-task07-20261101.md): SQL·GA4·실기기 검증 대기.
 
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 

@@ -1,0 +1,401 @@
+{
+  "date": "2026-11-01 KST",
+  "app_source": "16a6191c4b70f4dede9c25682bb3c79aef913d7c",
+  "web_source": "a4e16c48af3d708a6ccf2979baf67d8523a255ca",
+  "recommendation": "HOLD",
+  "counts": {
+    "PASS": 21,
+    "FAIL": 0,
+    "SKIP": 1,
+    "BLOCKED": 15,
+    "NOT_TESTED": 7
+  },
+  "note": "Counts are explicit QA groups, not all directive bullets or automated assertions. PASS is scoped by evidence. Actual device flow is not PASS.",
+  "automation": {
+    "app": {
+      "pass": 1306,
+      "skip": 7,
+      "fail": 0
+    },
+    "web": {
+      "pass": 1460,
+      "skip": 4,
+      "fail": 0
+    },
+    "worker": 24,
+    "payment_sql": 117,
+    "exam_credit_sql": 18
+  },
+  "rows": [
+    {
+      "id": "QA-001",
+      "domain": "APP Analyze",
+      "status": "PASS",
+      "scope": "isolated automation: 0 issues",
+      "evidence": "/tmp/task07-app-analyze.log"
+    },
+    {
+      "id": "QA-002",
+      "domain": "APP Flutter Test",
+      "status": "PASS",
+      "scope": "isolated automation: 1306 PASS / 7 SKIP / 0 FAIL",
+      "evidence": "/tmp/task07-app-tests.log"
+    },
+    {
+      "id": "QA-003",
+      "domain": "WEB TypeScript",
+      "status": "PASS",
+      "scope": "isolated automation: exit 0",
+      "evidence": "/tmp/task07-web-tsc.log"
+    },
+    {
+      "id": "QA-004",
+      "domain": "WEB Lint",
+      "status": "PASS",
+      "scope": "isolated automation: 0 errors / 5 warnings",
+      "evidence": "/tmp/task07-web-lint.log"
+    },
+    {
+      "id": "QA-005",
+      "domain": "WEB Build",
+      "status": "PASS",
+      "scope": "isolated automation: production build exit 0",
+      "evidence": "/tmp/task07-web-build.log"
+    },
+    {
+      "id": "QA-006",
+      "domain": "WEB Test",
+      "status": "PASS",
+      "scope": "isolated automation: 1460 PASS / 4 SKIP / 0 FAIL",
+      "evidence": "/tmp/task07-web-tests.log"
+    },
+    {
+      "id": "QA-007",
+      "domain": "Worker fixture",
+      "status": "PASS",
+      "scope": "isolated automation: 24 tests; retry/quote/review/error diagnostics",
+      "evidence": "/tmp/task07-worker-tests.log"
+    },
+    {
+      "id": "QA-008",
+      "domain": "Payment SQL",
+      "status": "PASS",
+      "scope": "isolated automation: 117 contracts; canonical isolated PG17 ledger",
+      "evidence": "/tmp/task07-payment-tests.log"
+    },
+    {
+      "id": "QA-009",
+      "domain": "Exam Credit SQL",
+      "status": "PASS",
+      "scope": "isolated automation: 18 contracts; idempotency/race/rewrite/recovery",
+      "evidence": "/tmp/task07-credit-tests.log"
+    },
+    {
+      "id": "QA-010",
+      "domain": "Notices SQL",
+      "status": "PASS",
+      "scope": "isolated automation: schedule/expiry/channel/read revision/ACL/rollback",
+      "evidence": "/tmp/task07-notices-sql.log"
+    },
+    {
+      "id": "QA-011",
+      "domain": "Beta/Admin SQL",
+      "status": "PASS",
+      "scope": "isolated automation: 30 concurrent claims; midnight/cutoff/capability/audit/restore",
+      "evidence": "/tmp/task07-beta-sql.log"
+    },
+    {
+      "id": "QA-012",
+      "domain": "Feedback SQL",
+      "status": "PASS",
+      "scope": "isolated automation: owner scope/idempotency/CAS/admin/review link/concurrency",
+      "evidence": "/tmp/task07-feedback-sql.log"
+    },
+    {
+      "id": "QA-013",
+      "domain": "Operations SQL",
+      "status": "PASS",
+      "scope": "isolated automation: cost basis/ACL/filter/audit; 8 concurrent alert checks",
+      "evidence": "/tmp/task07-operations-sql.log"
+    },
+    {
+      "id": "QA-014",
+      "domain": "Analytics SQL",
+      "status": "PASS",
+      "scope": "isolated automation: fixture/apply/contracts/postcheck 8 RPC ACL",
+      "evidence": "/tmp/task07-analytics-sql.log"
+    },
+    {
+      "id": "QA-015",
+      "domain": "Analytics event contract",
+      "status": "PASS",
+      "scope": "APP/WEB 31 events / 14 parameter allowlist match",
+      "evidence": "tool/check_analytics_contract.py --web-root WEB"
+    },
+    {
+      "id": "QA-016",
+      "domain": "Chrome existing login/history",
+      "status": "PASS",
+      "scope": "existing session; 49 records; 5/page; balance UI 95",
+      "evidence": "Production Chrome /my/essays/; no new login"
+    },
+    {
+      "id": "QA-017",
+      "domain": "Chrome stored SWU result",
+      "status": "PASS",
+      "scope": "two completed questions; summary/strength/action rendered",
+      "evidence": "6fe629cb-7bfd-4907-b144-439b299cfdc3"
+    },
+    {
+      "id": "QA-018",
+      "domain": "Chrome prior comparison",
+      "status": "PASS",
+      "scope": "Q1 two criteria 1→5, +4; stored explanations and graph",
+      "evidence": "Production result rewrite tab; no evaluation initiated"
+    },
+    {
+      "id": "QA-019",
+      "domain": "Stored parent/credit",
+      "status": "PASS",
+      "scope": "three selected runs completed; SWU child parent correct; no child credit transaction",
+      "evidence": "Read-only SELECT; bounded observations below"
+    },
+    {
+      "id": "QA-020",
+      "domain": "Observation RPC metadata",
+      "status": "PASS",
+      "scope": "3 exact signatures; SECURITY DEFINER; fixed search_path; auth only",
+      "evidence": "Live pg_proc/has_function_privilege SELECT; NOT full JWT proof"
+    },
+    {
+      "id": "QA-021",
+      "domain": "Build32 artifact",
+      "status": "PASS",
+      "scope": "1.0.1(32), com.legendstudy.app; receipt hash and codesign verify",
+      "evidence": "Older artifact only; not current TASK01–06 code"
+    },
+    {
+      "id": "QA-022",
+      "domain": "Notices real APP/WEB sync",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "notices_private absent; no production create/read mutation"
+    },
+    {
+      "id": "QA-023",
+      "domain": "Beta daily live policy",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "campaigns empty; new configuration not installed"
+    },
+    {
+      "id": "QA-024",
+      "domain": "Admin beta production",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "essay_beta_admin_private absent; approval required"
+    },
+    {
+      "id": "QA-025",
+      "domain": "Feedback production",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "essay_feedback_private absent; feature enable/deploy pending"
+    },
+    {
+      "id": "QA-026",
+      "domain": "Monitoring production",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "essay_operations_private absent; legacy RPC is not new reporting surface"
+    },
+    {
+      "id": "QA-027",
+      "domain": "GA4 real receipt",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "Firebase config missing/default disabled; WEB collection loader/setup pending"
+    },
+    {
+      "id": "QA-028",
+      "domain": "Analytics real admin reporting",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "new RPC install pending plus modern-run/cohort/currency semantic gaps"
+    },
+    {
+      "id": "QA-029",
+      "domain": "Current deployment/Worker identity",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "Cloudflare readonly API 401; historical version is not live verification"
+    },
+    {
+      "id": "QA-030",
+      "domain": "Current version device E2E",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "available signed build32 predates TASK01–06; no verified latest installation"
+    },
+    {
+      "id": "QA-031",
+      "domain": "New evaluation/free rewrite E2E",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "Provider requests prohibited; stored reads cannot substitute new submission"
+    },
+    {
+      "id": "QA-032",
+      "domain": "Cross-platform actual sync/concurrency",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "no authorized local device+browser+staging deployed pair"
+    },
+    {
+      "id": "QA-033",
+      "domain": "Admin/user/anonymous live JWT matrix",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "synthetic ACL tests do not substitute deployed real-role verification"
+    },
+    {
+      "id": "QA-034",
+      "domain": "IAP store purchasability",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "Apple/Google product console and signed sandbox purchase not verified"
+    },
+    {
+      "id": "QA-035",
+      "domain": "Toss actual TEST approval",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "no checkout/payment executed; isolated transaction tests only"
+    },
+    {
+      "id": "QA-036",
+      "domain": "Performance thresholds/live API timing",
+      "status": "BLOCKED",
+      "scope": "release prerequisite",
+      "evidence": "no approved benchmark baseline or complete device/network measurement"
+    },
+    {
+      "id": "QA-037",
+      "domain": "iOS/Android device OCR accuracy and rotated photo",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-038",
+      "domain": "iOS/Android actual TTS/PDF output",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-039",
+      "domain": "Safari/mobile Safari/mobile Chrome flows",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-040",
+      "domain": "Slow/offline/background/kill/session-expiry/device concurrency",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-041",
+      "domain": "Store metadata/privacy review account/Data Safety",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-042",
+      "domain": "Actual APP home/materials/saved/D-Day/MY regression",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-043",
+      "domain": "Actual approved-admin setting audit and feedback assignment workflow",
+      "status": "NOT_TESTED",
+      "scope": "actual user/device verification",
+      "evidence": "Automated fixtures do not establish this result"
+    },
+    {
+      "id": "QA-044",
+      "domain": "Production deployment/store submission/payment/provider",
+      "status": "SKIP",
+      "scope": "explicitly prohibited operations",
+      "evidence": "Owner approval required; no execution"
+    }
+  ],
+  "local_log_digests": {
+    "/tmp/task07-app-analyze.log": {
+      "sha256": "7ef1ce51a4c73e7858278b8cab0480a6ab3f5d23fb18ab2445bf8fb67ef03286",
+      "bytes": 96
+    },
+    "/tmp/task07-app-tests.log": {
+      "sha256": "1cec0f0dc538d9f6c207f235833eb949e46f2066da334a1f5cde5ef7a5130923",
+      "bytes": 297178
+    },
+    "/tmp/task07-web-tsc.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/task07-web-lint.log": {
+      "sha256": "f06b453bd6f9ce85e789fba55a735c004425106c90d915b3a8ed49337b32eff5",
+      "bytes": 1266
+    },
+    "/tmp/task07-web-build.log": {
+      "sha256": "c64a19b0ca31ded7db04acb8dda7f5b8744875480d895afecf8dea25cd24eab0",
+      "bytes": 2633
+    },
+    "/tmp/task07-web-tests.log": {
+      "sha256": "ae5d5f3871692c069be676f99f2ae357a54ccc3e8db5fbc24522fe0383b110eb",
+      "bytes": 541
+    },
+    "/tmp/task07-worker-tests.log": {
+      "sha256": "0b927e7e364e3902740860944d4f146a1718dab3deb6935f2cf3668b75bb1fcf",
+      "bytes": 123
+    },
+    "/tmp/task07-payment-tests.log": {
+      "sha256": "f9e24283988972753fcc4a017cc65e1ba5395cc6fd21c4066980810a2697434b",
+      "bytes": 8567
+    },
+    "/tmp/task07-credit-tests.log": {
+      "sha256": "4ac7b069d6c8482c0cee126da43938c3dca4b3a3ab1dc5d1105ec3afd73c3ae1",
+      "bytes": 1234
+    },
+    "/tmp/task07-notices-sql.log": {
+      "sha256": "aeebc043265867b4fdc5b59cf41945dfe51a126a31c9dec59f228dad2958a434",
+      "bytes": 2709
+    },
+    "/tmp/task07-beta-sql.log": {
+      "sha256": "978d77e74b7b3897551f74faf65f78b5cad4a573b086147b6c7ac4bd5a1bdc89",
+      "bytes": 1239
+    },
+    "/tmp/task07-feedback-sql.log": {
+      "sha256": "6dec34bbc74eaaf99d444b1f24a833b1aaa37e048ef57d362c4c169e80e2607f",
+      "bytes": 2069
+    },
+    "/tmp/task07-operations-sql.log": {
+      "sha256": "be9fd01022a2451a82a6459d5353d616ec3d3969ed32e8f1c6f440677c7045f3",
+      "bytes": 972
+    },
+    "/tmp/task07-analytics-sql.log": {
+      "sha256": "db183e86cd04ca4914c8e9de235554671db5551d348b6114c879a9549f37c19f",
+      "bytes": 633
+    }
+  },
+  "production_writes": 0,
+  "provider_calls": 0,
+  "payment_calls": 0,
+  "deployments": 0
+}
