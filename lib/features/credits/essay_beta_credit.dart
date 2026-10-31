@@ -13,6 +13,7 @@ class EssayBetaCredit {
     this.available,
     this.expiresAt, {
     this.ended = false,
+    this.dailyLimit = 1,
     this.endsAt,
     this.campaignId,
     this.policyVersion,
@@ -20,6 +21,7 @@ class EssayBetaCredit {
     this.noticeSeen = true,
   });
   final int available;
+  final int dailyLimit;
   final DateTime expiresAt;
   final bool ended;
   final DateTime? endsAt;
@@ -35,12 +37,16 @@ class EssayBetaCredit {
       return EssayBetaCredit(0, end, ended: true, endsAt: end);
     }
     final count = data['available'];
+    final limit = data['daily_limit'] ?? 1;
     final expiry = DateTime.tryParse(data['expires_at']?.toString() ?? '');
     if (data['active'] != true ||
         data['status'] != 'active' ||
         count is! int ||
         count < 0 ||
-        count > 1 ||
+        limit is! int ||
+        limit < 1 ||
+        limit > 100 ||
+        count > limit ||
         expiry == null ||
         end == null ||
         data['campaign_id'] is! String ||
@@ -51,6 +57,7 @@ class EssayBetaCredit {
     return EssayBetaCredit(
       count,
       expiry,
+      dailyLimit: limit,
       endsAt: end,
       campaignId: data['campaign_id'] as String,
       policyVersion: data['policy_version'] as String,
@@ -64,12 +71,16 @@ String betaEndDate(DateTime end) {
   final lastDay = end
       .toUtc()
       .add(const Duration(hours: 9))
-      .subtract(const Duration(days: 1));
+      .subtract(const Duration(milliseconds: 1));
+  if (lastDay.hour != 23 || lastDay.minute != 59) {
+    final exact = end.toUtc().add(const Duration(hours: 9));
+    return '${exact.year}년 ${exact.month}월 ${exact.day}일 ${exact.hour.toString().padLeft(2, '0')}:${exact.minute.toString().padLeft(2, '0')} KST';
+  }
   return '${lastDay.year}년 ${lastDay.month}월 ${lastDay.day}일';
 }
 
-String betaPolicyText(DateTime end) =>
-    '인문논술 베타 대상 시험에서 매일 무료 첨삭 1회를 이용할 수 있어요. '
+String betaPolicyText(DateTime end, [int limit = 1]) =>
+    '인문논술 베타 대상 시험에서 매일 무료 첨삭 $limit회를 이용할 수 있어요. '
     '매일 00:00 KST에 갱신되며 미사용분은 이월되지 않습니다.\n\n'
     '베타는 ${betaEndDate(end)}까지 운영됩니다. 베타 무료 첨삭의 무료 재첨삭은 '
     '최초 완료 후 최대 14일 이내, 베타 종료 전까지 1회 가능합니다. '
@@ -131,7 +142,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
       builder: (context) => AlertDialog(
         title: const Text('논술 LAB 베타 무료 이용 안내'),
         scrollable: true,
-        content: Text(betaPolicyText(value.endsAt!)),
+        content: Text(betaPolicyText(value.endsAt!, value.dailyLimit)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -217,8 +228,8 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
                 title: Text(
                   value.ended
                       ? '베타 무료 첨삭 제공이 종료되었습니다.'
-                      : value.available == 1
-                      ? '오늘의 무료 첨삭 · 1회 남음'
+                      : value.available > 0
+                      ? '오늘의 무료 첨삭 · ${value.available}회 남음'
                       : '오늘의 무료 첨삭을 모두 사용했습니다.',
                 ),
                 subtitle: Text(

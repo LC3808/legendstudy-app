@@ -14,7 +14,7 @@
 
 [1,014문항 검사·WEB 배포·숙명/광운 후속](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완).
 
-[베타 1회/일·11/11 00시 종료·격리 검증/운영 미적용](essay-beta-daily-v2.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[베타 v2](essay-beta-daily-v2.md)·[TASK04 관리자 설정/집계·SQL 승인 대기](admin-beta-operations.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 [광운 인문16 공개·자연1 목록/첨삭보류, APP 대기](essay-kwangwoon-standby-20261027.md). [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 

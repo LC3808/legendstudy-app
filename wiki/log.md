@@ -1,5 +1,10 @@
 ## 2026-10-31 — TASK 02 베타 일일 무료 이용
 
+## 2026-10-31 — TASK04 관리자 베타 운영
+
+[기존 v2 확장·설정/이용/실패 복구·권한/감사/승인/롤백](admin-beta-operations.md). 다음 KST 자정 한도, 공식 admin+별도 승인 UUID, 과거 grant/결과 보존. APP/WEB quota 호환, 전체 자동 검증. 운영 미적용·실계정 검수 대기.
+
+
 - 2026-10-31 TASK03: Claude Analytics 기존 통합 확인, APP/WEB v1 이벤트 보완·중복/PII guard·31/14 계약 검사. 로컬 SQL ACL/토큰 검증, 운영 미적용·집계 범위/통화 GAP. [상세/테스트/Owner 설정](analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
 
 [베타 v2 정책·SQL 후보·동시성·APP/WEB 검증](essay-beta-daily-v2.md). Owner 종료 경계 확정, 기존 원장 재사용·별도 표시·실패 1회 복구·재첨삭 cutoff. Production SELECT만 수행, 캠페인/공지/평가 실행 없음.

@@ -16,6 +16,24 @@ void main() {
     'notice_seen': false,
     'expires_at': '2026-10-27T15:00:00Z',
   };
+  test('server configured allowance and exact end time', () {
+    final v = EssayBetaCredit.parse({
+      ...fixture(),
+      'available': 2,
+      'daily_limit': 2,
+    })!;
+    expect(v.available, 2);
+    expect(v.dailyLimit, 2);
+    expect(
+      () => EssayBetaCredit.parse({...fixture(), 'available': 2}),
+      throwsFormatException,
+    );
+    expect(betaPolicyText(v.endsAt!, v.dailyLimit), contains('매일 무료 첨삭 2회'));
+    expect(
+      betaEndDate(DateTime.parse('2026-11-10T12:30:00Z')),
+      contains('21:30 KST'),
+    );
+  });
   testWidgets('first entry policy once and exhausted banner', (tester) async {
     await tester.pumpWidget(
       ProviderScope(

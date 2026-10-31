@@ -55,3 +55,8 @@ notice_receipts는 정책 최초 안내 확인이며 기존 notice_reads(공지 
 Owner가 guarded precheck→install→verify를 검수/적용해야 한다. 공지 SQL/관리자 게시 및 인문시험 exact scope, 새 클라이언트 배포 준비가 선행이다. starts_on은 아직 활성화 날짜가 정해지지 않아 placeholder로 남겼으며 종료만 확정했다. activate.sql은 관리자·게시공지·scope·시작일·승인참조 미충족 시 실패한다. 출처 확인을 우회하거나 임의 Production scope를 만들지 않았다.
 
 롤백은 campaign disable로 신규 사용을 중단하고 이미 접수된 처리·원장·cutoff·History 보존. 기존 구형 무범위 allocator 복원/원장 삭제 금지. Client rollback은 각 repo 변경 commit revert로 하되 활성 캠페인부터 중단하여 옛 2/day 문구가 다시 안내되지 않게 한다. 새 실평가/운영 DB 변경은 이번 작업에서 실행하지 않았다.
+
+
+## TASK04 후속 관리자 운영
+
+[관리자 설정·조회·권한·감사와 별도 승인 패키지](admin-beta-operations.md). v2 기본 1회는 유지하며, 후속 후보는 서버 설정 한도를 다음 KST 자정에 적용한다. 기존 발급 cutoff/원장은 불변. 운영 미적용.
