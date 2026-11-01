@@ -5234,3 +5234,7 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 
 ## 2026-11-01 — TASK12 공식 홈페이지 출시 전환
 - 기존 정적 홈페이지·브랜드 재사용, 스토어 CTA/인문논술 안내/안전 Analytics 적용. WEB1523 PASS/4 SKIP, TS/lint/build 검증. 운영 배포 HOLD, GA4/실기기 미검증. [변경·URL·복구·Owner 검수](official-home-launch-task12.md).
+
+## 2026-11-01 — TASK11-G 관리자 운영 배포
+- Owner read-only 승인: 보고9RPC/기존 admin helper 연결, 원장/Worker/Credit 정책 보존. WEB 관리자만 overlay,30메뉴 실제 클릭 검증. legacy last_24h 호환·sticky 긴 메뉴 수정. WEB1525PASS/4SKIP, TS/build PASS, lint기존5warnings.
+- 실제 운영 배포9c505258, WEB9f29bb8; 학생 페이지 hash/설정 불변. 베타·공지·피드백 쓰기SQL/GA/성적/인사이트 승인 미완료로 PARTIAL. [메뉴표·권한·증적·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01).

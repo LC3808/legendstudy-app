@@ -288,4 +288,4 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 
 - [TASK09 공통 TEST / 비공개 Preview / 선행 스키마·Gateway 차단](essay-shared-test-task09-20261101.md) — TASK08 후속, PARTIAL/HOLD.
 
-- Admin analytics / 학습·입시 빅데이터 TASK11: [통합 현황·집계 정의·검수](admin-data-task11.md)
+- Admin analytics / 학습·입시 빅데이터 TASK11: [통합 현황·집계 정의·검수·TASK11-G 운영 배포](admin-data-task11.md#task11-g-production-integration--2026-11-01)

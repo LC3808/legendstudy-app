@@ -2,18 +2,18 @@
 
 [TASK12 공식 홈페이지](official-home-launch-task12.md): 출시 안내·스토어 CTA·로컬 검수 완료. WEB1523 PASS/4 SKIP. 운영 배포 HOLD, GA4 실수신·실기기 미검증.
 
-## TASK11-F 관리자 최종 검증 — 2026-11-01
-PARTIAL/HOLD: 30개 경로 Chrome PC/390px·학생/비로그인 차단 확인. TEST 기존 보고 SQL3개 연결, RPC48·격리DB45 검사 PASS. Student360 오류 격리/모바일 표 수정. TEST 로그인 signup +3 자동 지급으로 원장 불변 FAIL(운영 영향 없음). 별도 검수권한·legacy RPC·실평가/GA 미검증. [메뉴표·검증·Preview·롤백](admin-data-task11.md#task11-f-final-integration--2026-11-01).
+## TASK11-G 관리자 운영 배포 — 2026-11-01
+PARTIAL: 운영 /admin/ 6그룹30메뉴 클릭·렌더링, 기존 원장 보고9RPC read-only 연결. 원래 학생 페이지/배포설정 보존. WEB1525PASS/4SKIP·TS/build PASS·lint0errors/5기존warnings. 베타/공지/피드백 쓰기SQL·GA/Firebase·성적/인사이트 승인 미완료. [배포 증적·메뉴별 상태·권한·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01). TASK11-F TEST 기록은 같은 문서의 이전 절 참조.
 
 [TASK10 통합 분석 PARTIAL](admin-integrated-analytics-task10.md): 별도 브랜치, 기존 RPC WEB 연결·선택형 만족도 후보. GA4 기존 속성396674471 확인/LAB 미확인; WEB 안전한 GA bootstrap/수집 상태 구현·APP1306/WEB1509 테스트 PASS(제외 별도). 실제 GA/Firebase 설정·수신/서버 조회 대기. native 빌드·운영 미적용.
 
 [TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): TEST 관리자 6개 메뉴 연결·WEB 검증 완료. Analytics WEB/평가 Gateway 미완료; build33 보존.
 
-[WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
+[WEB 이전 검수·롤백 이력](web-safe-owner-preview-20261031.md). TASK11-G에서 현재 관리자 세션의 Owner 읽기 검수·성균관대 이전 회차 조회 확인; 서울여대 해당 계정 검수 미완료.
 
 [최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
 
-[Analytics TASK03·APP/WEB 계측·GA4미설정·SQL집계승인대기](analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
+[Analytics TASK03·APP/WEB 계측·GA4미설정·SQL집계이력](analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
 
 [10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 

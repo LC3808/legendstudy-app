@@ -199,3 +199,97 @@ WEB 빌드는 성공했고 private TEST 검수 가능. APP analyze/test 통과·
 WEB 수정은 해당 커밋 revert 또는 이전 private Preview `013a8264`로 복귀 가능. 각 기존 SQL 패키지 rollback.sql로 보고 접근 회수/함수 제거; source facts 보존. operations rollback은 감사/비용 보조자료 보존 여부를 원문 확인 후 실행. 이번에는 실제 TEST rollback 미실행(격리 DB 검증만 수행). 자동 가입 지급은 기록 보존하며 무단 회수하지 않음.
 
 운영 DB/Worker/Provider/Credit/결제/WEB/APP/스토어 변경 없음. 공유 TEST report schema와 private branch Preview만 변경. canonical 상태는 이 문서와 current-status/log에 기록한다.
+
+## TASK11-G production integration — 2026-11-01
+
+### 최종 범위와 상태
+
+Owner TASK11-G §16 승인 범위에서 관리자 Pages와 검증된 read-only 보고 RPC만 운영 반영. **PARTIAL / 관리자 배포 완료**이며 전체 베타 출시 완료가 아니다. 실제 운영 진입점은 https://lab.legendstudy.com/admin/ . TASK11-F TEST 결과와 아래 PRODUCTION 결과를 혼동하지 않는다. TASK12 홈페이지는 HOLD 유지.
+
+- WEB source: `9f29bb8f0fa2d69e83dadb8d47e457be206b1545`, branch `codex/admin-production-task11g`.
+- APP 기준 source `910cd9a3bdea9a6391a1f681fd0e59f8be7c8b0b`; Native 코드·버전·build 미변경. 이 브랜치에는 SQL 후보 및 Wiki만 추가.
+- 원래 운영 배포 `f9e0e83f-6f93-470d-a1e0-0c711607c53c`, source `2f838c29fa25c38c399a6a43f9d567dd89053ffc` 보존.
+- 실제 배포 ID와 검증 시각은 아래 최종 배포 증적 참조. 초기 배포 후 발견한 legacy 응답/긴 메뉴 결함을 수정해 최종 재배포했다.
+
+### 보호된 배포 방식
+
+`legendstudy-lab/scripts/deployment/admin-preserved.mjs`는 기존 운영 asset manifest를 기준으로 `/admin/*` HTML/RSC와 신규 content-hashed 자산만 overlay한다. 기존 non-admin 페이지 및 공유 자산 hash 불변을 검사하고 충돌/현재 배포 변경 시 중단한다. 기존 Pages Functions 20개 원문 보존 + 이미 검토된 Owner read-only API 1개 연결. 기존 배포 설정·service binding·redirect 보존. Owner 전용 정적 검수 페이지 3개 추가, private/no-store/noindex 적용. 학생 결과/결제/로그인 코드를 최신 개발본으로 일괄 교체하지 않았다.
+
+백업(비공개, credential 출력/commit 금지): `/Users/woojinchang/.codex/legendstudy-backups/task11g/`, 후속 `task11g-fix/`, `task11g-nav/`. 각 project/files/plan/manifest/compiled functions 및 배포 응답 보존. 기존 rollback asset/source는 `web-safe-preview-20261031/`에 보존.
+
+### 운영 RPC — additive read-only
+
+운영 project `stlhijzpjfgwwdgunlsd`, migration `admin_analytics_readonly_task11g` 적용 성공. TEST는 `kpqbedylxlyntrrfybpn`과 명확히 구분.
+
+1. [읽기 전용 운영 집계](../supabase/candidates/admin_production_task11g/operations_readonly.sql): TASK06 기존 run/call projection 재사용. 신규 테이블/비용 추정 저장/경고 실행/감사 쓰기 제외. `read_only=true`; 해당 WEB 버튼 비활성.
+2. 기존 [Analytics reporting](../supabase/candidates/analytics_admin_reporting_20261030/apply.sql): 시험 회차/legacy 분리, LIVE KRW 매출·환불/예약 해제 구분, USD 비용 UNKNOWN 보존.
+3. 기존 [학습 집계](../supabase/candidates/admin_learning_task11/install.sql): 최소 cohort5·학습시간 중복 union 및 기간 clipping.
+
+합본 SHA256 `c2b246a1048f3919b73e77b1ddd9f8cbf9eaf66a751980d7b008f60af341a4ac`. 9개 보고 RPC + 기존 형식의 관리자 check helper; private view5개. 기존 3인자 운영 RPC overload 보존. 기존 admin_operator/account gate, UUID/RLS/원장 정책 미변경. STABLE SECURITY DEFINER, empty search_path, authenticated만 execute; 실제 관리자 판정은 서버 내부. private schema 직접 접근 불허.
+
+운영 [사후 검증](../supabase/candidates/admin_production_task11g/verify_readonly.sql): Owner 보고9개 READ ONLY transaction 실행 PASS, 일반 사용자9개 거부 PASS, anonymous/service role execute 없음, 기존 overload 보존, 비용/감사 쓰기 저장소 미생성. 검증 claims는 transaction local+rollback, 계정·권한을 변경하지 않음. 보안 advisor 전후 동일 5개 경고 분류; 기존 Auth leaked-password/pg_net/catalog anon 경고는 별도 기존 항목. 신규 authenticated definer는 위 gate/ACL로 별도 검증.
+
+### 운영 메뉴 30개 검증표
+
+공통: IMPLEMENTED는 화면 구현, TESTED는 실제 운영 Chrome 렌더링/조회, CONNECTED는 실제 원장 RPC 응답. 미설치 RPC를 EMPTY 또는0으로 표시하지 않는다. 일반 사용자 권한은 운영 SQL role 검사와 자동 테스트, 비로그인은 실제 별도 브라우저 차단으로 검증. 일반 사용자 운영 브라우저 로그인은 NOT_TESTED(신규가입 Credit 부작용 방지). 모든 쓰기 버튼 조작은 제외.
+
+| 그룹 | 메뉴·실제 경로 | 운영 조회 결과 |
+|---|---|---|
+| 기본 | 대시보드 `/admin/` | CONNECTED: 회차54/완료43/실패10 및 기존 운영 원장 |
+| 기본 | 회원 `/admin/members/` | CONNECTED: 기존 회원 목록 |
+| 기본 | 크레딧 `/admin/credit/` | CONNECTED: 기존 목록, 지급/차감 미실행 |
+| 기본 | 결제 `/admin/payment/` | CONNECTED: 선택 조건 EMPTY, 결제 미실행 |
+| 기본 | 1:1 문의 `/admin/inquiries/` | CONNECTED: EMPTY |
+| 기본 | 첨삭 품질 `/ql/` | 기존 독립 콘솔 렌더링/EMPTY; 시험 회차 Owner 검수는 별도 |
+| 기본 | 논술 자료 검수 `/admin/materials/` | CONNECTED: 기존349시험/1014문항 검수 목록 |
+| 서비스 | 통합 분석 `/admin/data/overview/` | CONNECTED: 서버 학습·평가·매출; GA 별도 미연결 |
+| 서비스 | 방문자·유입 `/admin/data/visitors/` | NOT_CONFIGURED: GA 읽기/수집 미연결 |
+| 서비스 | 사용자 행동 `/admin/analytics/` | CONNECTED: 기존 서버 보고; GA 실수신 NOT_TESTED |
+| 서비스 | 가입·전환 `/admin/data/conversion/` | CONNECTED: 가입 코호트, 익명 방문 연결 불가 명시 |
+| 서비스 | 앱 설치 유입 `/admin/data/installs/` | NOT_AVAILABLE: 설치 완료 미측정 |
+| 학습 | 종합 현황 `/admin/data/learning/` | CONNECTED: cohort<5 SUPPRESSED,0으로 대체 안 함 |
+| 학습 | 대학 선호도 `/admin/data/universities/` | CONNECTED: SUPPRESSED |
+| 학습 | 시험·자료 `/admin/data/materials-data/` | CONNECTED: SUPPRESSED, 저장≠열람 |
+| 학습 | 공부 시간 `/admin/data/study/` | CONNECTED: SUPPRESSED |
+| 학습 | 성적 `/admin/data/scores/` | NOT_IMPLEMENTED 안내, 가상 분포 없음 |
+| 학습 | 실제 지원 `/admin/data/applications/` | CONNECTED: SUPPRESSED, 희망 대학과 분리 |
+| 학습 | Student 360 `/admin/data/students/` | CONNECTED: 기존 회원 목록·선택 상세/첨삭 회차/학습 조회, 쓰기 미실행 |
+| 학습 | 인사이트 `/admin/data/insights/` | PARTIAL: DRAFT preview, 승인 영속 저장/자동 노출 없음 |
+| LAB | 이용 현황 `/admin/data/essay-usage/` | CONNECTED: 선택7일 대학10행, 실회차·문항 집계 정의 표시 |
+| LAB | 답안 샘플 `/admin/data/samples/` | 기존 Owner 검수 연결·저장된 성균관대 결과/이전 회차 표시 |
+| LAB | 만족도 `/admin/data/satisfaction/` | NOT_CONNECTED: 피드백 RPC 미설치 |
+| LAB | 평가·비용 `/admin/operations/` | CONNECTED:5개 탭 실제 조회, 비용UNKNOWN 명시 |
+| 베타 | 설정 `/admin/beta/` | NOT_CONNECTED: admin beta RPC 미설치 |
+| 베타 | 이용 `/admin/beta/usage/` | NOT_CONNECTED: admin beta RPC 미설치 |
+| 베타 | 검증 결과 `/admin/data/verification/` | NOT_TESTED 인수 상태 안내 |
+| 베타 | 피드백 `/admin/essay-feedback/` | NOT_CONNECTED: 조회 후 RPC 미설치 안내 |
+| 베타 | 공지 `/admin/notices/` | NOT_CONNECTED: 관리 RPC 미설치 |
+| 관련 | 실패·복구 `/admin/beta/failures/` | NOT_CONNECTED: beta report RPC 미설치; 기존 운영 탭 조회 가능 |
+
+미설치 쓰기 패키지는 테이블/쓰기 RPC/정책 설치가 필요하므로 이번 read-only 승인에 포함하지 않았다. 이 상태를 전체 관리자 운영 완료로 판정하지 않는다. 기존 운영 모니터링5탭은 최근30일 요청54/성공43/실패10/예약1·무료재첨삭20을 조회. 토큰/영수증175건에 가격·호출시각이 없어 비용UNKNOWN 유지. 일부 오래된 평가유형도UNKNOWN으로 표시. 재처리32회는 차감28건과 다른 단위.
+
+### 결함 수정·브라우저 회귀
+
+- 기존 단일 평가/수리 목록 RPC는 `last_24h`를 반환하지 않음. WEB이 필수 numeric으로 파싱해 MALFORMED 오류 발생. nullable로 호환, 임의0 생성 없이 기존 목록 복구. 회귀 테스트 추가.
+- 6개 그룹을 모두 열면 sticky nav 하단이 viewport 밖으로 고정되어 메뉴 클릭 불가. PC max-height/overflow-y 적용, 모바일 static 구조 유지. 실제 하단 클릭 재검증.
+- 기존 로그인 세션으로 운영 관리자 접근. 기존 `/my/essays/` 목록과 관리자 왕복 확인. Owner 검수에서 저장된 성균관대3문항·이전 답안·최초/재첨삭 비교 렌더링. 현재 계정 목록15건에는 서울여대 없음: 그 실기록 품질 검수 NOT_TESTED. 원문/점수 수정·실제 평가 없음.
+- Chrome desktop 및 좁은 viewport(실제 innerWidth433) 메뉴 접기/펼치기·화면폭/새로고침/뒤로가기 검증. 390px 요청은 Chrome 창 최소폭 때문에 실제433px이므로390px로 보고하지 않음. Safari/iOS/Android 실기기 NOT_TESTED.
+
+### 자동 검증·잔여 사항
+
+- WEB 전체 **1525 PASS /4 SKIP** (212개 test file PASS/3 SKIP), TypeScript PASS, production build PASS, lint0 errors/기존5 warnings. 마지막 nav CSS 변경은 build 및 실제 브라우저 회귀 추가. APP Native 미변경으로 이번 Flutter 실행 SKIP; TASK11-F 결과를 신규 실행으로 보고하지 않음.
+- 격리PG17 TASK08 통합SQL/동시성/베타경계/결제TEST-LIVE·통화·환불/21권한거부/원장 fingerprint/rollback-reinstall PASS. 학습 cohort/타이머 union/clipping/privacy PASS. 신규 readonly operations rate/P95/retry/429redaction/권한/ledger 필터 PASS. TEST schema-only clone 설치 PASS.
+- GA4/Firebase 실제 수신·Data API 권한 NOT_TESTED/NOT_CONFIGURED. 성적·인사이트 영속승인·만족도v2·베타 공지 피드백 운영SQL 별도 승인 대기. 실평가/OCR/결제/APP빌드·스토어 검수 없음.
+- 기존 원장·History·학생 답안·Worker·Provider·Credit·결제 정책 변경 없음. 승인된 보고 함수/view 및 관리자 Pages 배포만 운영 변경. 기존 원문 결과를 재생성하지 않음.
+
+### 롤백
+
+Cloudflare Pages `legendstudy-lab`에서 원래 production deployment `f9e0e83f-6f93-470d-a1e0-0c711607c53c`로 Rollback. API는 `/accounts/{account}/pages/projects/legendstudy-lab/deployments/{deployment_id}/rollback` POST. 실제 rollback은 실행하지 않았으며 배포/원본 asset 존재 및 복구 자료 확인. 이후 관리자/로그인/기록 읽기 재확인. 보고 RPC 접근 회수는 [rollback.sql](../supabase/candidates/admin_production_task11g/rollback.sql)로 새 함수만 REVOKE; 기존 overload/원장/결과/History 삭제 없음. 운영 데이터 restore 불필요. 후속 승인 없는 쓰기 패키지 적용 금지.
+
+### 최종 배포 증적
+
+- Cloudflare Pages production **9c505258-4a49-468a-83ae-2326173fb870**, source **9f29bb8f0fa2d69e83dadb8d47e457be206b1545**. 실제 운영 URL https://lab.legendstudy.com/admin/ . 배포 permalink https://9c505258.legendstudy-lab.pages.dev (Owner API는 운영 origin만 허용).
+- 최종 canonical deployment success 재확인. 원래959개 asset 중 non-admin 변경0, production settings 동일, 기존 rollback deployment 존재 확인. 최종 Cloudflare manifest1120개. 기존 Pages Function20개 보존 검사는 배포 도구에서 강제.
+- 최종 CSS 수정 후 30/30 실제 메뉴 클릭→경로→제목 확인. 하단 Student360/공지/실패 메뉴 접근 복구. 모바일433px 하단 메뉴 클릭, document scrollWidth433 일치. Student360 기존 계정 상세 로딩/alert없음 확인.
+- 최종 로컬 증적 `/tmp/task11g-menu-final.json`, `/tmp/task11g-admin-desktop.png`, `/tmp/task11g-admin-mobile.png`. 원문 답안/계정정보는 Wiki에 복제하지 않음.
+- 운영 보고 연결은 완료, 전체 베타 운영 기능은 **PARTIAL**. 일반 사용자 운영 browser login·Safari·실기기 APP NOT_TESTED. Owner 검수 페이지 현재 계정 범위 내 결과만 조회; 다른 학생 전체 답안 접근 확장은 이번 작업에 없음.
