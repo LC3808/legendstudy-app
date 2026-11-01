@@ -579,3 +579,40 @@ remain preparing, public app HOLD preserved.
 
 ## 2026-11-01 — 공식 홈페이지 출시 전환 후속
 기존 준비 홈페이지와 배포 이력은 보존한다. Owner TASK12 출시 문구·스토어 CTA 변경 및 검증은 [공식 홈페이지 출시 보고](official-home-launch-task12.md) 참조. 운영 배포는 별도 승인 대기다.
+
+
+## TASK14 — beta store release candidate 2026-11-01
+
+Owner explicitly authorized iOS/Android build, upload and review submission, prioritizing release over administrator expansion. Submission remains gated by actual core-function verification; this does not authorize Production beta/Credit changes. Existing native implementation and bundle/package `com.legendstudy.app` preserved.
+
+### Source and automated checks
+
+- Source: `b4dea2fed42df574b363f054e7da84ca7d15393c`; branch `codex/beta-store-release-task14`. Documentation commit after build is not the binary source SHA.
+- `./tool/flutterw` Flutter 3.47.5 / Dart 3.13.4; analyze PASS (no issues), full tests **1306 PASS / 7 SKIP / 0 FAIL**. No source edits or weakened tests.
+- Existing Production Observation V1 / social-login configuration reused via ignored local files; secrets and signing material not committed. Analytics remains safe Noop without configuration.
+- Both versions **1.0.1 (34)** supplied explicitly through release wrapper. Existing TEST build 33 and previous artifacts preserved.
+- iOS signed App Store IPA: `build/ios/ipa/legendstudy_app.ipa`; SHA256 `3b878dc5b952f61e66f3b0035d151d9cef7e951b8cff0f4869fc8db5ec2f33d7`.
+- Android signed AAB: `build/app/outputs/bundle/release/app-release.aab`; SHA256 `0963d33aabfa9209c7681880bbcbeebb8905e940aab2cab95c0824e53ff44a23`. Existing upload certificate preserved; min SDK24 / target36.
+- Local logs: `/tmp/task14-analyze.log`, `/tmp/task14-test.log`, `/tmp/task14-ios-build.log`, `/tmp/task14-android-build.log`. Build warnings: future Kotlin upgrade, SDK XML compatibility and CupertinoIcons reference; no build failure.
+
+### Actual store and device evidence
+
+- App Store Connect app6820826957: existing public version1.0/build19 retained. Transporter upload **SUCCESS**, 2026-11-01 22:03 KST; Processing completed; **1.0.1(34)** linked to existing **Owner Internal QA** group (1 tester), test instructions saved. Upload/internal group assignment is not review submission.
+- Google Play app4972317086113621808: AAB34 accepted in internal track4701319249543191162, draft release4. Preview recognizes bundle/version/signing, with one APK size-increase warning (23.4MB install, +6.98MB; supported devices unchanged). Internal release not published; Production18 unchanged. Existing account payment-attention alert remains unverified and financial settings untouched.
+- Connected iPhone12ProMax: build34 installed over build32 without uninstall/data wipe. Launch attempt blocked by locked device. Owner asked to unlock and test existing login/search/PDF/save/timer/results only; actual functionality NOT_TESTED pending response. Installation is not functional acceptance.
+- Android physical-device/internal-track runtime verification NOT_TESTED. Apple/Google reauthentication completed by Owner.
+
+### Production release blockers — verified read-only
+
+1. **Beta v2 missing**: APP calls `essay_beta_daily_claim_v2`; Production has no v2 RPC. Existing v1 claim would grant2/day when configured; campaign table is empty, so no active beta. Do not invoke old claim or change its policy. Required1/day/KST/end/rewrite contract cannot be claimed verified in Production. Existing `supabase/candidates/essay_beta_daily_v2/precheck.sql` executed in read-only transaction and **PASS** (definition/ACL baseline, no legacy campaign/grant history); migration/activation NOT executed. Reviewed candidate is preparation, not deployment evidence.
+2. **Notices missing**: no notice tables/RPC; actual anonymous read-only `notice_list` returned HTTP404/PGRST202. Mandatory notice feature is not ready against this backend.
+3. **Actual device acceptance incomplete**, including Apple/Android login, deletion, sync, OCR, evaluation/rewrite/result flow. No Provider calls, new evaluations or purchases performed to fake E2E success.
+4. Account deletion is NOT classified as missing: deployed delete-account v28 and account-deletion-worker v38 ACTIVE; SQL and active dispatch cron exist. OPTIONS204 proves enabled handler, not successful deletion/revocation. Destructive acceptance remains NOT_TESTED.
+
+Production DB/Worker/Provider/Credit/History/payment policies unchanged. Only read-only DB/catalog/API checks. No actual evaluation, grant, charge, purchase or deletion. Backend blockers require a separate reviewed operational approval under TASK14 restrictions, including existing notices installation and beta-v2 installation/activation dependencies, exact start/scope/Owner/notice identifiers. [Beta candidate policy](essay-beta-daily-v2.md), [notices contract](notices-system.md), [shared TEST limitations](essay-shared-test-task09-20261101.md).
+
+### Handoff and rollback
+
+**BUILD SUCCESS / UPLOAD SUCCESS; REVIEW BLOCKED.** Do not report SUBMITTED FOR REVIEW or IN REVIEW. Existing public binaries remain unchanged. Keep uploaded34 and internal draft for continuation; never reuse34 for different binaries. After backend readiness and actual-device acceptance, confirm Apple compliance, existing review metadata/account/privacy/IAP and Play account alert, then submit with existing settings. Do not roll out a draft with known core blockers.
+
+No Production rollback required: no public release or backend mutation. Retain previous public iOS19 / Android18 and build33 TEST; do not wipe user data or delete uploaded evidence. Local release configuration is ignored; source rollback remains Git-based. Existing homepage history above is superseded by the linked TASK12-B deployment report.

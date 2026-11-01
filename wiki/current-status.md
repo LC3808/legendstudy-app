@@ -1,11 +1,13 @@
 # Current Status
 
+[TASK14 릴리스](final-store-rc-1.md#task14--beta-store-release-candidate-2026-11-01): iOS/Android1.0.1(34) 빌드·업로드 SUCCESS, APP1306PASS/7SKIP·analyze PASS. TestFlight Owner QA/Play 내부 초안. 운영 beta-v2·공지 RPC 미설치, 실기기 미검증으로 REVIEW BLOCKED. 공개 출시·운영 원장 변경 없음.
+
 [TASK12-B 공식 홈페이지](official-home-launch-task12.md): Owner 승인 운영 배포·PC/모바일 viewport 검증 완료(1b3063af, source442baf9). GA4 실수신·실기기 미검증.
 
 ## TASK11-G 관리자 운영 배포 — 2026-11-01
 PARTIAL: 운영 /admin/ 6그룹30메뉴 클릭·렌더링, 기존 원장 보고9RPC read-only 연결. 원래 학생 페이지/배포설정 보존. WEB1525PASS/4SKIP·TS/build PASS·lint0errors/5기존warnings. 베타/공지/피드백 쓰기SQL·GA/Firebase·성적/인사이트 승인 미완료. [배포 증적·메뉴별 상태·권한·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01). TASK11-F TEST 기록은 같은 문서의 이전 절 참조.
 
-[TASK10 통합 분석 PARTIAL](admin-integrated-analytics-task10.md): 별도 브랜치, 기존 RPC WEB 연결·선택형 만족도 후보. GA4 기존 속성396674471 확인/LAB 미확인; WEB 안전한 GA bootstrap/수집 상태 구현·APP1306/WEB1509 테스트 PASS(제외 별도). 실제 GA/Firebase 설정·수신/서버 조회 대기. native 빌드·운영 미적용.
+[TASK10 통합 분석·GA/Firebase 미연결·자동 검증·잔여 설정](admin-integrated-analytics-task10.md). 실제 수신 미검증; 기존 구현 보존.
 
 [TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): TEST 관리자 6개 메뉴 연결·WEB 검증 완료. Analytics WEB/평가 Gateway 미완료; build33 보존.
 

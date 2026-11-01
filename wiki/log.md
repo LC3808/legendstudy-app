@@ -5241,3 +5241,7 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 
 ## 2026-11-01 — TASK12-B 공식 홈페이지 승인 운영 배포
 - Owner 명시 승인으로 home만 배포: source442baf9 → production1b3063af-ea6f-4189-9ac5-7ad478004974. 기존4104f06d 보존, home설정/LAB배포 불변 대조. 정적 build/verify 및 운영 Chrome PC/모바일·스토어·LAB·정책 링크 PASS. GA4실수신/실기기 미검증. [배포·근거·롤백](official-home-launch-task12.md).
+
+## 2026-11-01 — TASK14 beta store release
+- source b4dea2f, iOS/Android1.0.1(34) signed builds/upload SUCCESS; 1306PASS/7SKIP/analyze PASS. Apple processing completed, existing Owner Internal QA group linked; Play internal draft with size warning. iPhone installation PASS, runtime pending.
+- Production beta-v2/notices absent (read-only verified), beta candidate precheck PASS only. Review BLOCKED; no public release or operational policy mutation. [Artifacts, runtime evidence, blockers and rollback](final-store-rc-1.md#task14--beta-store-release-candidate-2026-11-01).
