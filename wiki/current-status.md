@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK12 공식 홈페이지](official-home-launch-task12.md): 출시 안내·스토어 CTA·로컬 검수 완료. WEB1523 PASS/4 SKIP. 운영 배포 HOLD, GA4 실수신·실기기 미검증.
+[TASK12-B 공식 홈페이지](official-home-launch-task12.md): Owner 승인 운영 배포·PC/모바일 viewport 검증 완료(1b3063af, source442baf9). GA4 실수신·실기기 미검증.
 
 ## TASK11-G 관리자 운영 배포 — 2026-11-01
 PARTIAL: 운영 /admin/ 6그룹30메뉴 클릭·렌더링, 기존 원장 보고9RPC read-only 연결. 원래 학생 페이지/배포설정 보존. WEB1525PASS/4SKIP·TS/build PASS·lint0errors/5기존warnings. 베타/공지/피드백 쓰기SQL·GA/Firebase·성적/인사이트 승인 미완료. [배포 증적·메뉴별 상태·권한·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01). TASK11-F TEST 기록은 같은 문서의 이전 절 참조.

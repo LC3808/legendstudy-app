@@ -5238,3 +5238,6 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 ## 2026-11-01 — TASK11-G 관리자 운영 배포
 - Owner read-only 승인: 보고9RPC/기존 admin helper 연결, 원장/Worker/Credit 정책 보존. WEB 관리자만 overlay,30메뉴 실제 클릭 검증. legacy last_24h 호환·sticky 긴 메뉴 수정. WEB1525PASS/4SKIP, TS/build PASS, lint기존5warnings.
 - 실제 운영 배포9c505258, WEB9f29bb8; 학생 페이지 hash/설정 불변. 베타·공지·피드백 쓰기SQL/GA/성적/인사이트 승인 미완료로 PARTIAL. [메뉴표·권한·증적·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01).
+
+## 2026-11-01 — TASK12-B 공식 홈페이지 승인 운영 배포
+- Owner 명시 승인으로 home만 배포: source442baf9 → production1b3063af-ea6f-4189-9ac5-7ad478004974. 기존4104f06d 보존, home설정/LAB배포 불변 대조. 정적 build/verify 및 운영 Chrome PC/모바일·스토어·LAB·정책 링크 PASS. GA4실수신/실기기 미검증. [배포·근거·롤백](official-home-launch-task12.md).

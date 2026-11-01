@@ -1,6 +1,6 @@
 # TASK12 — 공식 홈페이지 출시 전환 (2026-11-01)
 
-상태: **READY FOR OWNER REVIEW / 운영 배포 HOLD**. 홈페이지 코드·로컬 검수 완료와 운영 공개를 구분한다. GA4 실제 수집은 미설정/NOT_TESTED.
+상태: **DEPLOYED / VERIFIED** — Owner TASK12-B 명시 승인에 따라 2026-11-01 21:25 KST 운영 배포 완료. 실제 운영 URL의 Chrome PC·모바일 viewport 검증 완료. GA4 실제 수집과 모바일 실기기는 NOT_TESTED.
 
 ## 기준 및 기존 결정 재사용
 
@@ -90,23 +90,67 @@ Chrome 실제 브라우저로 로컬 최종 산출물을 확인했다. 가로 �
 
 스크린샷은 WEB의 ignored official-home/qa/task12-desktop.png 및 task12-mobile.png. 로컬 검수 URL: http://127.0.0.1:4312/ (현재 Mac 서버 실행 동안만 접근 가능). 공개 Preview는 배포하지 않았다.
 
-## 배포·백업·롤백
+## TASK12 당시 배포·백업·롤백 (이력)
 
 Wrangler 읽기 조회로 확인한 기존 production:
 - Cloudflare Pages project: legendstudy-home (LAB와 별도 static direct upload)
 - deployment ID: 4104f06d-b748-4ee0-b40f-aca5ccbd909c
 - source: 20cf31b / branch codex/official-home-20261019
 - immutable URL: https://4104f06d.legendstudy-home.pages.dev
-- 현재 home.legendstudy.com은 이전 준비 페이지 그대로다. TASK12 운영 배포 없음.
+- TASK12 당시 home.legendstudy.com은 이전 준비 페이지였다. 이후 TASK12-B 배포는 아래 기록 참조.
 
 승인 후에도 먼저 최신 배포 ID와 production branch를 다시 확인한다. official-home 디렉터리에서만 dist를 legendstudy-home 프로젝트로 명시 업로드한다. LAB root Functions 또는 Next out을 홈페이지로 배포하지 않는다. 배포 후 store/LAB/legal 링크 및 모바일 재검수. 이상 시 Cloudflare Pages의 기존 deployment에 Rollback한다. DNS/DB/Worker 변경 없음.
 
 보조 복구 파일 official-home/qa/rollback-production-4104f06d.tar.gz는 20cf31b와 당시 business-info로 재빌드한 정적 산출물이다. 해시는 rollback-verification.json. 원격 raw HTTP byte 대조는403으로 불가했으며, 운영에서 직접 내려받은 완전 동일 백업이라고 주장하지 않는다. 기존 immutable 배포 보존이 주 롤백 수단이다. 롤백을 실행하지 않았다.
 
-## Owner 검수 및 잔여 항목
+## TASK12-B 승인 운영 배포 — 2026-11-01
 
-1. 로컬 URL에서 출시 문구, 두 스토어, LAB 정책 표현 확인.
-2. 실제 모바일/Safari 검수는 별도 필요.
-3. GA4 수집을 원하면 실제 홈페이지 측정 ID와 개인정보 설정 검토 필요. 미설정 Noop이어도 다운로드는 정상 동작.
-4. **운영 배포는 별도 승인 대기**. 이번 Push는 production 교체가 아니다.
-5. 운영 DB·Worker·Provider·Credit·결제·LAB 배포·APP 배포·스토어 제출 변경 모두 없음.
+Owner가 home.legendstudy.com 하나의 운영 배포를 명시 승인했다. 신규 홈페이지 개발·LAB 재배포 없이 승인된 정적 산출물만 업로드했다.
+
+| 항목 | 검증된 값 |
+|---|---|
+| 실제 운영 URL | https://home.legendstudy.com/ |
+| Pages project / custom domain | legendstudy-home / home.legendstudy.com active |
+| 신규 production deployment | 1b3063af-ea6f-4189-9ac5-7ad478004974 (success) |
+| 배포 source SHA | 442baf9d5f0d710f7f9ac50e7b8096d96d6b6af3 |
+| production branch | codex/official-home-20261019 (기존 설정 보존) |
+| 배포 시각 | 2026-11-01T12:25:50.688892Z / 21:25 KST |
+| 이전 production / 롤백 대상 | 4104f06d-b748-4ee0-b40f-aca5ccbd909c (success, 보존 확인) |
+| LAB 배포 전후 | 9c505258-4a49-468a-83ae-2326173fb870 동일 |
+
+시작 WEB HEAD 9f29bb8, APP Wiki HEAD edfcbf6. WEB 현재 HEAD와 442baf9의 official-home 및 빌드 입력 ga4.ts/business-info.ts diff가 비어 있음을 확인했다. 정확한 442baf9의 해당 경로만 git archive로 /tmp/task12b-source에 추출, Node22로 HOME_ANALYTICS_ENABLED=false build 및 verify 재실행 PASS. 13개 정적 파일과 _headers를 격리된 official-home 디렉터리에서 프로젝트/branch/SHA 명시하여 업로드했다. Next out·LAB Functions·API·DB는 포함하지 않았다.
+
+Cloudflare 프로젝트·도메인·기존 배포 파일 manifest·LAB 기준 배포 설정을 /Users/woojinchang/.codex/legendstudy-backups/task12b/에 비공개 백업(디렉터리700, 설정파일600)했다. 원격 기존 immutable deployment가 주 롤백 수단이다. 배포 후 API로 home production canonical ID/source/success, custom domain active, home 설정 불변, LAB deployment/config 불변을 대조했다. 토큰·설정 원문은 Git에 저장하지 않는다.
+
+### 운영 URL 실검증
+
+| 항목 | 결과 / 근거 |
+|---|---|
+| 출시 준비 문구 제거·앱 출시 안내 | PASS: 운영 DOM 및 화면 확인 |
+| App Store / Google Play CTA | PASS: PC 및 390px 실제 클릭, 각각 레전드스터디+ 상품명 렌더링 확인 |
+| 논술 LAB | PASS: CTA 클릭 후 실제 LAB 홈 렌더링 |
+| 고객지원·약관·개인정보·환불 | PASS: 각 링크 클릭 후 해당 제목·본문 렌더링 |
+| 기존 기출자료 사이트·계정 삭제 안내 | PASS: 실제 링크 클릭 후 기존 사이트·안내 본문 확인 |
+| PC | PASS: Chrome1857px Hero·브랜드 이미지 확인, scrollWidth=innerWidth |
+| 모바일 | PASS: Chrome390px Hero/LAB/다운로드 레이아웃·앵커·CTA 확인 |
+| 작은 화면 / Android·Tablet 폭 | PASS: 320/412/768px scrollWidth=innerWidth, 이미지 로드 확인 |
+| 자산 | PASS: 운영 이미지 모두 complete/naturalWidth>0 |
+| 실제 iPhone·Android·Safari | NOT_TESTED: viewport 검증과 구분 |
+| 실제 설치·결제 | NOT_TESTED: 실행하지 않음 |
+| 실제 GA4 수신 | NOT_TESTED: 기존 opt-in 설정 없으므로 Noop 보존 |
+
+이번 재실행은 정적 build/verify와 운영 브라우저 검증이다. 배포 입력 코드가 TASK12 검증 버전과 동일하므로 위 TypeScript/전체 Lint/Next build/전체1523 PASS·4 SKIP 결과를 재사용했다. 새 전체 테스트 실행으로 주장하지 않는다. 배포 후 변경은 README/Wiki 기록뿐이며 배포 source SHA는 442baf9다.
+
+스크린샷: WEB ignored official-home/qa/task12b-production-desktop.png, task12b-production-mobile.png, task12b-production-mobile-download.png. 로컬 Preview가 아닌 실제 https://home.legendstudy.com 화면이다.
+
+### 롤백 및 영향
+
+Cloudflare Pages → legendstudy-home → Deployments → 기존 production 4104f06d-b748-4ee0-b40f-aca5ccbd909c → Rollback to this deployment. API 대안은 해당 프로젝트 deployments/{기존ID}/rollback에 승인된 계정으로 POST. 다른 프로젝트 또는 DNS를 변경하지 않는다. 이후 canonical ID·운영 URL·스토어/정책/모바일을 다시 확인한다. 롤백 실행은 필요하지 않았으며 이번에 실행하지 않았다. 기존 배포가 success 상태로 조회됨을 확인한 준비 검증이다.
+
+운영 변경은 home 정적 홈페이지에만 한정. legendstudy.com·LAB 배포·APP·Supabase DB·Worker·Credit·결제·Provider·스토어 제출 변경 없음. 신규 평가·결제 실행 없음.
+
+## Owner 화면 검수 및 잔여 항목
+
+1. https://home.legendstudy.com/ 에서 실제 출시 화면을 확인한다. 운영 배포 승인 대기 상태가 아니다.
+2. 실제 모바일/Safari 검수 및 GA4 실수신은 미검증으로 유지한다. 홈페이지 배포 차단 사유가 아니다.
+3. GA4 연결 시 실제 홈페이지 측정 ID와 기존 개인정보 설정 검토가 필요하다. 임의 ID/프로젝트 생성 없음.
