@@ -1,0 +1,7 @@
+{
+  "test_project": "kpqbedylxlyntrrfybpn",
+  "absent_dependency": "public.math_session_submit(uuid,uuid,uuid[],uuid)",
+  "math_allocator_before_md5": "3a7a3e7a33636d6a01295dfad9734e04",
+  "math_allocator_after_md5": "cb9ea11fdf486ca60eb1494f21d5dc9b",
+  "policy": "Existing math allocator excludes beta; absent math session is not installed; campaigns remain inactive."
+}

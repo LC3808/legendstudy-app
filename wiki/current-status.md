@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): 비공개 WEB·Auth·공지/피드백 검증. 베타 선행 스키마·Gateway·실기기 E2E 차단; build33 보존.
+[TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): TEST 공지/피드백·베타 SQL 검증 완료. Gateway·평가 E2E 미완료; build33 보존.
 
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 

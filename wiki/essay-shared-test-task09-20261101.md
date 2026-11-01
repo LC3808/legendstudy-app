@@ -55,3 +55,15 @@ Preview can be disabled/its access secret rotated without production impact. Ret
 Implementation: APP `supabase/candidates/task09_shared_test/`; WEB `cloudflare/test-preview-access.ts`, its10 tests, `functions/_middleware.ts`, `scripts/prepare-private-test-preview.mjs`, TEST-only root banner. UI runtime source identical to verified build apart from subsequent documentation. Credentials never committed.
 
 Owner final release approval remains pending. This report distinguishes working notice/feedback Preview from unfinished full-service acceptance environment.
+
+## TASK09-B — humanities prerequisite separation (2026-11-01)
+
+Status remains **PARTIAL / HOLD**, not Owner evaluation-ready. Earlier TASK09 beta-schema blocker above is resolved by the following TEST-only installation; Gateway and evaluation acceptance are still incomplete.
+
+The historical beta precursor requires absent math-only `math_session_submit`; humanities reservation does not depend on it. Reproducible candidate removes that missing entry point while retaining the existing TEST math allocator with only beta exclusion. No math session installed or user math access enabled. [Candidate, exact order, tests and rollback limitations](../supabase/candidates/task09_shared_test/beta_humanities/README.md).
+
+Owner-preserving local TEST clone validated precursor → source confirmation → beta v2 → canonical humanities session retry → beta admin. Same sequence applied only to `kpqbedylxlyntrrfybpn`. Exact ACL order adapter preserves privilege semantics. Real authenticated smoke found an additional clock helper EXECUTE omission (403); scoped postgres EXECUTE fixed it without granting clients access or changing the clock. Canonical verification SQL passes. Real Auth admin config Owner200/student403/anonymous401; student beta claim returns inactive. Campaigns0, grants0, runs0. Credit transactions3/full fingerprint `9fa7f6d704237ce9eb628c6d43b10d17` unchanged after verification. No production mutation, Provider call, evaluation submission or credit issuance.
+
+Offline candidate checks4 PASS and existing retry/failure/Cloudflare-stage tests20 PASS. APP/WEB UI source unchanged in this step; prior full-suite results are historical, not rerun claims. No new native build made; build33 and restricted Preview above remain available for their existing non-evaluation scope only.
+
+Remaining: TEST Gateway/queue/worker credential/provider configuration; supported immutable Registry/package test data; native TEST API origin; shared first/rewrite/results/growth E2E; new signed build. Do not substitute production endpoints/credentials or report SQL install as E2E. Before any real Provider call, report intended count/cost and obtain separate Owner approval. The beta grant remains disabled pending complete isolated wiring. Production contracts and existing notices/feedback/admin are preserved.

@@ -5202,3 +5202,7 @@ Analytics exam/currency/refund/recovery contract corrected; isolated SQL19 group
 ## 2026-11-01 TASK09
 
 Shared TEST notices/feedback/admin and restricted Cloudflare Preview verified; original TEST Credit rows unchanged, standard TEST signup +3 observed. Beta predecessor schema and TEST Gateway/E2E incomplete, HOLD. No production mutation. [Evidence](essay-shared-test-task09-20261101.md).
+
+## 2026-11-01 TASK09-B
+
+Math-only session dependency separated from TEST beta installation; canonical v2/retry/admin installed inactive after local owner-preserving clone validation. Real Auth found/fixed clock helper ACL omission; Owner200/student403/anon401, disabled claim verified, Credit fingerprint unchanged. Gateway/evaluation/build incomplete; HOLD. [Evidence](essay-shared-test-task09-20261101.md#task09-b--humanities-prerequisite-separation-2026-11-01).

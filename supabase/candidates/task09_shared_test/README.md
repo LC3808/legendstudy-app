@@ -34,3 +34,7 @@ Existing TEST lacks math_session_submit and its modern session tables. The canon
 Do not run destructive rollback on the preexisting IAP sandbox. Disable TEST Preview/build flags first. Retain test accounts, feedback and notice audit data until reviewed; use individual canonical package rollback only after dependency/inventory review. There is no all-in-one drop-schema rollback. Adapter provider bodies are unchanged; retain ownership/ACL evidence before reversing API migrations. Production rollback is unnecessary: it was not modified.
 
 Canonical status and Owner instructions: `wiki/essay-shared-test-task09-20261101.md`.
+
+## TASK09-B superseding beta prerequisite status
+
+The missing math-session prerequisite recorded above is now separated and beta v2 plus canonical humanities retry/admin are installed only in TEST, inactive. See [exact candidate and evidence](beta_humanities/README.md). TEST Gateway and real evaluation acceptance remain incomplete. No production installation is authorized by this package.
