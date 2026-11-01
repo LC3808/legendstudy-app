@@ -576,3 +576,6 @@ not set. Gabia login/CAPTCHA requires Owner action; login page handed off. DNS
 not modified yet, therefore requested home HTTPS completion remains pending.
 Homepage local branch commit bf9d890; static site source20cf31b. Store labels
 remain preparing, public app HOLD preserved.
+
+## 2026-11-01 — 공식 홈페이지 출시 전환 후속
+기존 준비 홈페이지와 배포 이력은 보존한다. Owner TASK12 출시 문구·스토어 CTA 변경 및 검증은 [공식 홈페이지 출시 보고](official-home-launch-task12.md) 참조. 운영 배포는 별도 승인 대기다.

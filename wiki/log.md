@@ -5231,3 +5231,6 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 ## 2026-11-01 — TASK11-F 관리자 실제 연결 검수
 - TEST 기존 operations/analytics/release 보고 SQL 재사용; 30메뉴 PC/모바일·학생/비로그인 차단 확인, RPC48·격리DB45 PASS. Student360 legacy 실패 격리 및 모바일 grid 수정. APP1306/7SKIP, WEB1519/4SKIP.
 - TEST 학생 로그인 profile bootstrap의 가입 +3 자동 지급 발견: 원장 불변 FAIL, 기록 보존. 운영 미변경. 검수 권한·legacy RPC·GA/실평가 대기로 HOLD. [상세 및 메뉴표](admin-data-task11.md#task11-f-final-integration--2026-11-01).
+
+## 2026-11-01 — TASK12 공식 홈페이지 출시 전환
+- 기존 정적 홈페이지·브랜드 재사용, 스토어 CTA/인문논술 안내/안전 Analytics 적용. WEB1523 PASS/4 SKIP, TS/lint/build 검증. 운영 배포 HOLD, GA4/실기기 미검증. [변경·URL·복구·Owner 검수](official-home-launch-task12.md).

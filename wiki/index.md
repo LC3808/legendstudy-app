@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+공식 홈페이지 / home.legendstudy.com / 앱 출시·스토어 CTA: [TASK12 구현·검수·배포 HOLD·롤백](official-home-launch-task12.md).
+
 통합 분석 / GA4 두 속성 / 만족도 1~5 / 품질 검수: [TASK10 단계별 구현·연결·검증·미완료](admin-integrated-analytics-task10.md).
 
 WEB 안전 검수 / 동일 도메인 / 관리자 실계정 / 배포 백업·롤백: [Owner 읽기 검수 경로·실제 배포·권한·검증](web-safe-owner-preview-20261031.md).

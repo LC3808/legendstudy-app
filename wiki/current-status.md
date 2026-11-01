@@ -1,5 +1,7 @@
 # Current Status
 
+[TASK12 공식 홈페이지](official-home-launch-task12.md): 출시 안내·스토어 CTA·로컬 검수 완료. WEB1523 PASS/4 SKIP. 운영 배포 HOLD, GA4 실수신·실기기 미검증.
+
 ## TASK11-F 관리자 최종 검증 — 2026-11-01
 PARTIAL/HOLD: 30개 경로 Chrome PC/390px·학생/비로그인 차단 확인. TEST 기존 보고 SQL3개 연결, RPC48·격리DB45 검사 PASS. Student360 오류 격리/모바일 표 수정. TEST 로그인 signup +3 자동 지급으로 원장 불변 FAIL(운영 영향 없음). 별도 검수권한·legacy RPC·실평가/GA 미검증. [메뉴표·검증·Preview·롤백](admin-data-task11.md#task11-f-final-integration--2026-11-01).
 
