@@ -71,3 +71,71 @@ Owner는 기존 레전드스터디닷컴과 LAB 전용 GA4를 모두 조회하�
 WEB는 `NEXT_PUBLIC_ESSAY_SATISFACTION_V2_ENABLED` 기본 OFF. 별도 SQL 승인/검증 전 기존 binary UI 유지. 사용자가 버튼을 눌러야 모달이 열리고, 임의 자동 표시 없음. 새 rating과 기존 binary를 분리해 집계한다. 대학/시험/사유별 SQL 집계는 후보에 포함되지만 관리자 화면의 세부 표시 및 APP 모달은 남아 있다.
 
 롤백: WEB 이전 artifact 또는 본 WEB 커밋 revert, 신규 flag OFF. SQL은 flag OFF 후 reviewed rollback.sql로 기존 submit 복원/report 접근 회수; 컬럼·제출 기록 보존. 이 문서는 운영 적용 승인이나 자동 실행 지시가 아니다. GA4 연결·품질 검수 추가 계약·만족도 활성화가 베타 TASK09의 선행 조건이 되지 않도록 별도 유지한다.
+
+## TASK10 GA4 integration / pre-build readiness — 2026-11-01
+
+### 결과와 범위
+
+**PARTIAL / HOLD**. 기존 31개 행동 이벤트·14개 속성 allowlist를 재사용해 WEB 수집 bootstrap을 구현했다. 새 분석 원장·이벤트 체계·평가 엔진은 만들지 않았다. APP Firebase/Noop 및 관리자 원장 집계/품질 검수 연결은 기존 구현을 재사용한다. 운영 DB/Worker/배포·결제·Provider 호출 없음. 최종 native APP 빌드/스토어 제출도 실행하지 않았다. WEB production build는 로컬 컴파일 검증만 수행했다.
+
+Owner의 LAB 운영 태그 미설치 설명을 기준으로 수집은 **미연결**로 취급한다. 기존 레전드스터디닷컴 속성 396674471은 읽기 화면에서 확인됐으나, 접근 가능한 계정의 LAB 속성은 확인되지 않았다. 모든 계정에 LAB 속성이 없다고 단정하지 않는다. 속성 ID는 웹 측정 ID(G-...)와 다르다. 저장소 설정 조사에서 LAB 측정 ID/활성 설정 및 APP Firebase 플랫폼 설정 파일을 찾지 못했다. 임의 ID나 Firebase 프로젝트를 생성하지 않았다.
+
+### 구현과 보호
+
+- WEB `src/lib/analytics/ga4.ts`: 허용 origin·경로 및 설정 검증 후 한 번만 SDK 로드. 자동 page_view를 끄고 pathname 전환으로 수동 page_view를 전송한다. StrictMode 동일 경로 중복은 막고 정상 재방문은 센다. page_view는 GA 표준 이벤트이며 v1 업무 이벤트 31개에 새 이름을 추가하지 않는다.
+- `src/components/analytics-collection.tsx`, root layout: SPA 방문 연결. 기존 `client.ts`의 이벤트 이름/속성 필터를 그대로 사용한다. 전송 함수 예외 시 dedupe 키를 소진하지 않는다.
+- URL query/hash, 동적 평가/문항 ID, 실제 document title은 전송하지 않는다. 알려진 public route만 사용하고 referrer는 허용된 도메인의 origin만 보낸다. 관리자·Owner 검수·인증 복구 경로는 수집하지 않는다. 광고 관련 consent는 denied, Google Signals/광고 개인화는 false다. 이 설정은 사용자 동의 관리 자체를 대체하지 않는다.
+- 이미 gtag/GTM이 설치돼 있으면 소유권을 탈취하거나 두 번째 태그를 삽입하지 않는다. 기존 태그가 있는 환경은 별도 연결 검토가 필요하다. 로드 실패/설정 누락은 안전하게 전송을 중단하고 평가·로그인·결제 흐름을 막지 않는다.
+- `admin-analytics.tsx`: LAB 수집 준비 상태와 기존 GA4 보고서 읽기 연결 상태를 분리한다. 설정 존재만으로 실제 수신 완료를 표시하지 않는다. 기존 KST 필터/RPC/권한/원장 수치/품질·피드백 링크를 유지한다.
+- 기존 만족도 피드백은 Postgres 원장으로 집계한다. 31개 allowlist에 없는 만족도/배너 이벤트를 임의 추가하지 않는다. banner impression/설치 완료/연결되지 않은 유입은 측정 완료로 표시하지 않는다.
+
+### WEB 설정 및 외부 작업
+
+다음은 승인된 TEST 환경에서 사용할 설정이다. 실제 값은 저장소에 추가하지 않았다.
+
+| 설정 | 요구 조건 |
+|---|---|
+| NEXT_PUBLIC_ANALYTICS_ENABLED | 명시적으로 true일 때만 수집 |
+| NEXT_PUBLIC_GA4_MEASUREMENT_ID | 기존 LAB 웹 스트림의 실제 G-... ID |
+| NEXT_PUBLIC_GA4_ALLOWED_ORIGINS | 허용 TEST origin 정확한 목록, 쉼표 구분; wildcard 불가 |
+| NEXT_PUBLIC_GA4_PRIVACY_REVIEWED | 아래 Enhanced Measurement·동의/개인정보 검토가 끝난 뒤 true |
+
+Next public 설정은 빌드 시 반영된다. 현재 기본은 비활성이다. 기존 legendstudy.com 스트림 ID를 LAB ID로 추정하거나 자동 복사하지 않는다.
+
+**활성화 전:** GA 관리 → 해당 LAB 속성 → 데이터 스트림 → 웹 스트림에서 ID를 확인한다. 기존 LAB 속성이 있으면 재사용한다. 없으면 신규 속성/스트림 생성이 필요하다는 사실을 Owner에게 보고하고 별도 진행한다. 이 수동 계측과 중복되거나 개인정보가 포함될 수 있는 **Enhanced Measurement 전체를 해당 LAB 스트림에서 비활성화**하고 검토한다. `send_page_view:false`만으로 Enhanced Measurement 수집이 모두 중단되지 않는다. Google 문서: https://developers.google.com/analytics/devguides/collection/ga4/views 및 https://developers.google.com/analytics/devguides/collection/ga4/reference/config . 기존 본사이트 설정은 변경하지 않는다.
+
+보고서 조회는 별도다. 기존 본사이트/LAB **숫자 속성 ID**, 각 속성의 승인된 서버 identity **Viewer 권한**, Analytics Data API 읽기 인증(`analytics.readonly`) 연결이 필요하다. 비밀 인증값은 브라우저 public env나 Git에 넣지 않는다. 정적 WEB에서 Data API 비밀키를 직접 사용하지 않는다. 서버 reporting adapter/배포는 별도 승인·연결 대기다. 크로스도메인·UTM/배너 실측은 실제 설정/수신 전까지 미검증이다.
+
+APP은 기존 Firebase AnalyticsService/bootstrap을 유지한다. 필요한 플랫폼 Firebase 앱 등록 및 `GoogleService-Info.plist`/`google-services.json`(또는 기존 초기화 경로에 맞는 FirebaseOptions), 실제 Bundle/Application ID 일치, ANALYTICS_ENABLED 설정이 필요하다. 현재 미설정 Noop을 유지한다. 신규 프로젝트/최종 APP 빌드는 수행하지 않았다. pubspec 선언은 `0.1.0+1`, 기존 QA 버전은 override 기록을 따르며 build33 산출물을 교체하지 않았다.
+
+### 검증 증거
+
+| 검사 | 이번 실행 결과 |
+|---|---|
+| Flutter 3.47.6 analyze | PASS, 0 issues |
+| Flutter 전체 test | 1306 PASS / 7 SKIP / 0 FAIL |
+| APP/WEB Analytics 계약 검사 | PASS, 31 events / 14 params |
+| WEB Node 22 TypeScript | PASS |
+| WEB Node 22 production build | PASS, 로컬 컴파일만 |
+| WEB Node 22 lint | 0 errors / 기존 5 warnings |
+| WEB 전체 Vitest | 1509 PASS / 4 SKIP / 0 FAIL; 209 files PASS / 3 SKIP |
+| Analytics/bootstrap/admin 집중 테스트 | 27 PASS: 설정/host/PII/중복/예외/권한/로그아웃/미설치 |
+| 실제 GA4 DebugView/Realtime 및 Data API | NOT_TESTED, ID/권한 미연결 |
+| Firebase 실수신·실기기·실계정 관리자 RPC | NOT_TESTED, 이번 자동 테스트와 구분 |
+| 운영 데이터 전후 직접 대조 | NOT_TESTED; 운영 쓰기/평가 호출은 수행하지 않음 |
+
+첫 pnpm 래퍼 실행은 Node24를 선택해 지원 버전 경고가 발생했다. Node22 바이너리로 TS/lint/build/전체 테스트를 다시 실행했다. 테스트 SKIP는 PASS로 계산하지 않았다. 기존 명시적 통합/외부 Fixture 게이트를 해제하지 않았다. 공지·베타 KST/한도·재첨삭·Credit·History·OCR·피드백·결제/관리자 권한 관련 기존 자동 회귀를 포함하지만 운영 E2E/실결제/실평가 증거를 대체하지 않는다.
+
+### Owner 검수 및 다음 단계
+
+1. 외부 설정 확보 전: TEST에서 GA SDK 요청이 없고 평가/로그인/공지·피드백 화면이 유지되는지 확인한다.
+2. LAB 실제 스트림/Enhanced Measurement 및 개인정보 검토 후 TEST origin만 허용해 승인된 빌드에 설정한다.
+3. 로그인/대학 선택/작성/저장된 결과 조회의 이벤트를 Realtime 또는 Tag Assistant/DebugView로 대조한다. 답안/OCR 원문·query·token·동적 ID가 전송되지 않는지 Network payload에서 확인한다. 테스트를 위해 실제 평가/결제를 호출하지 않는다.
+4. 관리자에서 수집 준비와 보고서 조회를 각각 확인한다. 일반/비로그인 접근 차단, 계정 전환 데이터 제거를 실계정으로 확인한다.
+5. Firebase 플랫폼 설정 후 APP 별도 검수 빌드 승인을 받는다. 양 플랫폼 수신 검증 전에는 연결 완료/출시 완료로 판정하지 않는다.
+
+TASK01~09는 현재 코드/기존 보고서를 재사용했다. TEST Gateway·SQL 설치·계정/실기기 등 잔여 게이트는 [TASK09 현황](essay-shared-test-task09-20261101.md)과 [TASK07 판정](essay-beta-release-readiness-task07-20261101.md)을 유지한다. 이번 변경으로 베타 사용량, Credit, 결제, History, Worker, Analytics SQL을 변경하지 않았다. TASK10 원래 범위의 GA reporting/6항목 수치 품질평가/APP 5점 만족도 확장은 여전히 미완료이며 기존 데이터로 값을 추정하지 않는다.
+
+롤백: 설정 활성화 전에는 SDK 미로드. 코드 문제 시 이번 WEB 커밋만 revert하고 재검증한다. 배포된 환경에서 향후 수집을 끄려면 public flag=false로 승인된 재빌드/배포가 필요하며, 브라우저 신규 로드부터 적용된다. DB 롤백은 필요 없다. 기존 본사이트 GA4와 Analytics 원장은 수정하지 않는다.
+
+구현 기준: APP baseline `8f3279b782cbe3e80119ddb447d3b72ac29e7eca`, WEB baseline `37850ec1534ee93f974e42cd8061da7c99336a41`. WEB 수집/검증 커밋 `017ecd3` (TASK10 별도 브랜치). APP 이번 변경은 Wiki 현행화이며 native source 변경 없음. 최종 SHA/원격 일치는 handoff 시 Git에서 확인한다.
