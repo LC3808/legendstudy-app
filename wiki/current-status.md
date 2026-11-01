@@ -1,7 +1,7 @@
 # Current Status
 
-## TASK11 관리자 데이터 연결 — 2026-11-01
-PARTIAL/HOLD: 별도 브랜치에서 30개 메뉴·기존 화면 재사용 및 학습 집계 RPC 후보. TEST만 적용, Owner 조회/일반 사용자 차단 검증. 성적·인사이트 승인 저장·GA4 실수신 미완료. [구현·검증·Preview·롤백](admin-data-task11.md). 운영 변경 없음.
+## TASK11-F 관리자 최종 검증 — 2026-11-01
+PARTIAL/HOLD: 30개 경로 Chrome PC/390px·학생/비로그인 차단 확인. TEST 기존 보고 SQL3개 연결, RPC48·격리DB45 검사 PASS. Student360 오류 격리/모바일 표 수정. TEST 로그인 signup +3 자동 지급으로 원장 불변 FAIL(운영 영향 없음). 별도 검수권한·legacy RPC·실평가/GA 미검증. [메뉴표·검증·Preview·롤백](admin-data-task11.md#task11-f-final-integration--2026-11-01).
 
 [TASK10 통합 분석 PARTIAL](admin-integrated-analytics-task10.md): 별도 브랜치, 기존 RPC WEB 연결·선택형 만족도 후보. GA4 기존 속성396674471 확인/LAB 미확인; WEB 안전한 GA bootstrap/수집 상태 구현·APP1306/WEB1509 테스트 PASS(제외 별도). 실제 GA/Firebase 설정·수신/서버 조회 대기. native 빌드·운영 미적용.
 

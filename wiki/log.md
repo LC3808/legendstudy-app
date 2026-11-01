@@ -5227,3 +5227,7 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 기존31/14 계약 재사용, WEB opt-in/host·PII guard/manual pageview 및 관리자 수집/조회 상태 분리. APP analyze0,1306PASS/7SKIP; WEB TS/build PASS,lint0errors/5기존warnings,1509PASS/4SKIP. 실제 GA/Firebase 수신 및 reporting 미연결: PARTIAL/HOLD. 운영/DB/Provider/결제/native최종빌드 없음. [설정·증거·Owner 체크리스트·롤백](admin-integrated-analytics-task10.md#task10-ga4-integration--pre-build-readiness--2026-11-01).
 
 - 2026-11-01 TASK11: 관리자 메뉴·학습 읽기 집계·Student360 재사용, TEST 권한 검증. 운영 변경 없음. 전체 요구 PARTIAL/HOLD; [상세](admin-data-task11.md).
+
+## 2026-11-01 — TASK11-F 관리자 실제 연결 검수
+- TEST 기존 operations/analytics/release 보고 SQL 재사용; 30메뉴 PC/모바일·학생/비로그인 차단 확인, RPC48·격리DB45 PASS. Student360 legacy 실패 격리 및 모바일 grid 수정. APP1306/7SKIP, WEB1519/4SKIP.
+- TEST 학생 로그인 profile bootstrap의 가입 +3 자동 지급 발견: 원장 불변 FAIL, 기록 보존. 운영 미변경. 검수 권한·legacy RPC·GA/실평가 대기로 HOLD. [상세 및 메뉴표](admin-data-task11.md#task11-f-final-integration--2026-11-01).
