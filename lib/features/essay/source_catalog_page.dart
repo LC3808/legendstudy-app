@@ -523,6 +523,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                         .textTheme
                                         .titleMedium,
                                   ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    service.isLoading
+                                        ? '서비스 확인 중'
+                                        : service.hasError
+                                        ? '서비스 상태 확인 필요'
+                                        : ready.contains(u['universityId'])
+                                        ? '첨삭 가능'
+                                        : '서비스 준비 중',
+                                  ),
                                 ],
                               ),
                             ),

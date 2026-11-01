@@ -15,7 +15,7 @@ begin
  end if;
  if starts>date '2026-11-10' or starts<(clock_timestamp() at time zone 'Asia/Seoul')::date then raise exception 'INVALID_START_DATE';end if;
  perform set_config('request.jwt.claim.sub',owner_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated')::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated','exp',extract(epoch from statement_timestamp()+interval '5 minutes')::bigint)::text,true);
  if public.admin_operator() is not true or account_private.allowed(owner_id) is not true then raise exception 'ACTIVE_ADMIN_REQUIRED';end if;
  if not exists(select 1 from notice_private.notices n where n.notice_id=notice and n.category='beta' and n.status='published' and n.is_public and n.show_app and n.show_web and n.published_at<=clock_timestamp() and (n.expires_at is null or n.expires_at>=timestamptz '2026-11-11 00:00:00+09')) then raise exception 'PUBLISHED_BETA_NOTICE_REQUIRED';end if;
  if exists(select 1 from essay_beta_private.campaigns) then raise exception 'CAMPAIGN_ALREADY_EXISTS_REVIEW_INSTEAD_OF_REAPPLY';end if;

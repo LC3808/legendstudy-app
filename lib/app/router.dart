@@ -25,6 +25,7 @@ import '../features/content/presentation/content_detail_page.dart';
 import '../features/resources/presentation/pdf_viewer_page.dart';
 import '../features/study/presentation/study_page.dart';
 import '../features/profile/presentation/school_page.dart';
+import '../features/profile/presentation/aspirations_page.dart';
 import '../features/feedback/presentation/feedback_page.dart';
 import '../features/feedback/presentation/admin_feedback_page.dart';
 import '../features/analytics/presentation/admin_analytics_page.dart';
@@ -289,6 +290,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'grade',
                     redirect: (context, state) => '/my/school',
+                  ),
+                  GoRoute(
+                    path: 'aspirations',
+                    builder: (_, _) => const NestedPage(
+                      title: '희망대학·학과',
+                      child: AspirationsPage(),
+                    ),
                   ),
                   GoRoute(
                     path: 'school',

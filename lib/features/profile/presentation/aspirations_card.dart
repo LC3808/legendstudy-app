@@ -89,7 +89,7 @@ class AspirationsCard extends ConsumerWidget {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () => context.push('/my/school'),
+              onPressed: () => context.push('/my/aspirations'),
               child: Text(empty ? '설정하기' : '관리하기'),
             ),
           ),

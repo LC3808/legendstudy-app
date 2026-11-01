@@ -616,3 +616,40 @@ Production DB/Worker/Provider/Credit/History/payment policies unchanged. Only re
 **BUILD SUCCESS / UPLOAD SUCCESS; REVIEW BLOCKED.** Do not report SUBMITTED FOR REVIEW or IN REVIEW. Existing public binaries remain unchanged. Keep uploaded34 and internal draft for continuation; never reuse34 for different binaries. After backend readiness and actual-device acceptance, confirm Apple compliance, existing review metadata/account/privacy/IAP and Play account alert, then submit with existing settings. Do not roll out a draft with known core blockers.
 
 No Production rollback required: no public release or backend mutation. Retain previous public iOS19 / Android18 and build33 TEST; do not wipe user data or delete uploaded evidence. Local release configuration is ignored; source rollback remains Git-based. Existing homepage history above is superseded by the linked TASK12-B deployment report.
+
+## TASK14-B — scoped backend installation and Owner UX defects
+
+2026-11-01 Owner authorized beta-v2/notices Production installation and review submission only after mandatory gates. This supersedes TASK14's missing-RPC status, not its unverified-device gates.
+
+### Production evidence
+
+- Project `stlhijzpjfgwwdgunlsd`: migrations `20261101133219/notices_v1_task14b` and `20261101133227/essay_beta_daily_v2_task14b` installed from existing candidates. Both postchecks passed, including beta function owner/ACL/digest manifest. Campaign activation is still pending; installation alone does not establish active daily free use.
+- Fresh private PG17 custom backup before installation: `development/legendstudy-private-backups/task14b-20261101/database.dump`, 120113137 bytes, SHA256 `0dfdcc0eeab3c27fff9eb642143e0e7e96894774a17c46bb291e01fd3691c9e7`. TOC and full archive decode verified; no full restore rehearsal. Storage objects unchanged and not included in SQL archive.
+- Before/after row counts and ordered content hashes unchanged for credit_accounts (15), credit_grants (23), credit_transactions (112), payment_orders (11), payment_operations (3), payment_events (17), essay_billing_decisions (72), runs (54), checkpoints (708). No Provider/evaluation/payment/credit action executed.
+- Isolated localhost PostgreSQL17 port55445: existing notices contract PASS; beta-v2 runtime suite 33 assertion groups PASS (60 concurrent claims, 30 reservations/callbacks, midnight/end/rewrite/failure/paid isolation). Production time was not changed.
+- Existing authenticated admin published two public pinned APP+WEB notices: `284919ef-fcbf-411e-a17f-df8bc4f2b7da` 앱 출시; `fdeb9d5d-b075-4b2c-9950-cf8fe8c21656` 논술 LAB 베타. Existing beta draft/policy reused; no duplicate existing notice. Published list verified through real admin browser.
+- Scope preparation intersected live Pages ESSAY_PUBLIC_EXAMS with existing full release evidence, exact Production runtime policy/package and full question IDs: 160 humanities exams. Partial-release exam excluded. Scope is prepared, not active. No Registry publish flag changes.
+- Activation template now supplies a transaction-local five-minute exp claim for the existing hardened admin gate; administrator authorization itself is unchanged. Activation has NOT been executed. Live `/essay-lab/` chunk `3kuh09-194c3f.js` still invokes legacy claim and hard-codes ‘매일 첫 논술 LAB 접속 시 2개가 지급’. v1 compatibility wrapper returns v2 allowance safely, but the visible policy is wrong. Existing source v2 student page needs a separately approved scoped Production WEB release before campaign activation. Current task's SQL permission is not treated as blanket WEB replacement authorization.
+
+### Owner device findings and preservation review
+
+Owner reported LAB entry PASS but MY aspirations incorrectly opens high-school editor, accidental school removal, mixed school/aspirations form and indistinguishable university service state. This is not confirmation of separate Apple/Google/signup/deletion/Android tests. Do not ask Owner to repeat the same submitted report.
+
+Seven preservation answers ([canonical review](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review)):
+1. Navigation/display changes create no new historical fact; school changes retain existing explicit-save repository semantics.
+2. Existing backend remains truth. Previously removed school cannot be inferred or reconstructed from this screenshot.
+3. No storage UPDATE contract changes; add removal confirmation and separate aspirations to prevent unrelated edits.
+4. Existing authenticated identity/provider isolation retained, including identity recheck after confirmation.
+5. Aspirations are Decision data, not actual admissions/outcomes; application read-only summary retained.
+6. Existing own-profile access/retention applies; no additional collection or analytics payload.
+7. Service labels derive from existing server availability; no stored derived state or inferred eligibility.
+
+Implementation: `/my/aspirations` reuses existing university/major editors; `/my/school` contains school/status/grade only. Search explicitly says high school. Existing saved school removal requires confirmation; cancel writes nothing. LAB cards display available/preparing/unknown states from existing provider; unavailable universities remain disabled. Existing nickname/photo editor preserved. These native source edits require a new build; uploaded34 cannot incorporate them and is not submitted as the fixed release.
+
+Rollback: UI changes are isolated Git changes; preserve34 artifacts. Notices can be archived through existing admin contract. Beta rollback must use candidate guarded procedure and retain any newly accepted runs/grants; never restore the whole DB over later user writes. Original backup is emergency evidence, not an automatic rollback operation.
+
+### UX automated validation
+
+Project SDK analyze PASS. Full run:1309 PASS /1 FAIL /7 SKIP; the sole failure expected one global loading label, whereas the new per-university states correctly rendered four. Updated the assertion to verify each of three cards plus list status, error states and 2 available/1 preparing cards; targeted rerun PASS. New actual-router and school-removal cancellation tests PASS. Final full rerun: **1310 PASS /7 SKIP /0 FAIL**. System PATH Flutter3.8 cannot resolve this project; all valid checks use `./tool/flutterw`.
+
+Published beta notice explicitly states activation is pending; future policy is not advertised as already usable. UI source and verification are separate from the remaining WEB/activation/device gates.

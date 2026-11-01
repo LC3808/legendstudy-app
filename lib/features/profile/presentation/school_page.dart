@@ -10,8 +10,6 @@ import '../../../shared/widgets/shell_widgets.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
 import 'academic_status_field.dart';
-import 'intended_major_field.dart';
-import '../../universities/presentation/interested_universities_field.dart';
 
 class SchoolPage extends ConsumerStatefulWidget {
   const SchoolPage({super.key});
@@ -42,6 +40,28 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
 
   Future<bool> _saveSchool() async {
     if (!_edited) return true;
+    final owner = ref.read(authStateProvider).value?.userId;
+    if (_draft == null && ref.read(schoolSelectionProvider).value != null) {
+      final remove = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('저장한 고등학교를 해제할까요?'),
+          content: const Text('학교 정보를 유지하려면 취소를 눌러 주세요.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('학교 해제'),
+            ),
+          ],
+        ),
+      );
+      if (!mounted || remove != true) return false;
+    }
+    if (ref.read(authStateProvider).value?.userId != owner) return false;
     final applied = await ref
         .read(schoolSelectionProvider.notifier)
         .select(_draft);
@@ -105,7 +125,8 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           maxLength: 100,
           textInputAction: TextInputAction.search,
           decoration: const InputDecoration(
-            hintText: '학교 이름을 검색해 주세요',
+            labelText: '재학 중인 고등학교',
+            hintText: '고등학교 이름을 검색해 주세요',
             prefixIcon: Icon(Icons.search),
             counterText: '',
           ),
@@ -223,14 +244,6 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             onSavingChanged: (value) => setState(() => _saving = value),
             onSaved: _finish,
           ),
-          const SizedBox(height: 24),
-          const SectionHeader('관심 대학'),
-          const SizedBox(height: 8),
-          const InterestedUniversitiesField(source: 'my'),
-          const SizedBox(height: 24),
-          const SectionHeader('희망 학과·관심 전공'),
-          const SizedBox(height: 8),
-          const IntendedMajorField(),
         ],
         if (auth.value?.isAuthenticated != true)
           FilledButton(

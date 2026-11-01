@@ -72,6 +72,35 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  for (final ready in [true, false]) {
+    testWidgets('university card shows server availability $ready', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            publicServiceUniversitiesProvider.overrideWith(
+              (ref, owner) async => ready ? {'u'} : <String>{},
+            ),
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(catalog: Future.value(catalogFor())),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text(ready ? '첨삭 가능' : '서비스 준비 중'), findsOneWidget);
+      final card = find
+          .ancestor(of: find.text('시험 대학'), matching: find.byType(InkWell))
+          .first;
+      expect(tester.widget<InkWell>(card).onTap != null, ready);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   testWidgets('a non-serviceable exam shows the preparing notice before '
       'picking a question', (tester) async {
     await tester.pumpWidget(host(catalogFor(), const <String>{}));
