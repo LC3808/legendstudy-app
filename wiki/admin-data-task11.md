@@ -91,3 +91,5 @@ Use existing private access code at local `~/.codex/legendstudy-task09-test/prev
 Only shared TEST received one read-only RPC and private TEST project received a separate branch Preview/access secret. TEST main config was compared unchanged. No production DB/Worker/Provider/Credit/payment/WEB/APP/store changes; no evaluation execution.
 
 Before any production approval: review aggregate privacy (small cohort differencing), existing SQL package dependencies, production schema precheck, statement budget and performance; resolve missing RPCs and score/insight contracts. `rollback.sql` revokes RPC access without deleting facts. Revert WEB commit for menu rollback. Preview alias can be redeployed from prior artifact; production was never replaced.
+
+HTTP handoff verified: five unauthenticated private routes/assets/API paths returned 401; private access form returned 200 with TEST banner; all 16 new deep links returned 200; no-store header confirmed. This does not substitute for authenticated browser layout/click/back tests. WEB source commit `4b963ae418f72c7f8b81bb91db5f4cbaff071e41`; both task branches pushed and local/remote equality confirmed.
