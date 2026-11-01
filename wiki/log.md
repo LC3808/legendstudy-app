@@ -5288,3 +5288,8 @@ APP75495ee settings simplified and pre-purchase policy links retained/added; nex
 ## 2026-11-02 — TASK14-F final candidate and November priorities
 
 Source freeze for39 includes settings refund changes; removes unnecessary transitive advertising-ID permissions while collection remains disabled. Analyze0/full1317PASS7SKIP. Actual ASC38/Play37-emptydraft checked; final builds/uploads/device acceptance still pending. Owner November strategy preserves beta cutoff and separates type development from production paid activation. [Release evidence](final-store-rc-1.md#task14-f-final-candidate--2026-11-02).
+
+
+## 2026-11-02 — TASK14-F signed39 internal distribution
+
+Same a0aa618 source built/uploaded for both platforms; TestFlight39 associated with Owner Internal QA and Play internal release6 active39, existing testers unchanged. Production review remains pending physical acceptance. Android device available per Owner; checklist and internal opt-in sent. Existing37 PASS preserved, no production data/Provider/payment mutation. [Evidence and gates](final-store-rc-1.md#task14-f-internal-distribution-checkpoint).

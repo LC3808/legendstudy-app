@@ -764,3 +764,31 @@ Owner directed removal of standalone refund entries in APP Settings and LAB WEB 
 ## TASK14-F final candidate — 2026-11-02
 
 Owner requests frozen 1.0.1(39) release from integrated TASK14-C including settings refund navigation. ASC UI latest38 and Play internal draft excludes prior37, has no uploaded bundle;39 selected. Preserve Owner37 four-case PASS; do not extend it to new39 or Android. Manifest removes transitive AD_ID/ACCESS_ADSERVICES_AD_ID permissions: existing Firebase collection and ad-ID collection remain disabled, no ad SDK/application ad identifier use. Existing signing/public production configuration passes store-release --check for both platforms. Flutter analyze no issues; full test **1317 PASS /7 SKIP /0 FAIL** (/tmp/task14f-analyze.log,/tmp/task14f-full-test.log). Build/artifact/upload/device and review gates pending. No production policy/database/Worker/Credit/payment/Provider changes. November strategy is recorded in [decisions](decisions.md): beta cutoff unchanged; type expansion must not delay submission, paid activation separately approved.
+
+
+TASK14-F build checkpoint: source `a0aa6184fedc4b20c2bc6909af20eee8cf9aa231` pushed; signed iOS39 IPA and Android39 AAB built successfully with existing identifiers/signatures. IPA codesign deep/strict PASS; AAB jarsigner PASS. Merged Android39 manifest has neither AD_ID nor ACCESS_ADSERVICES_AD_ID; existing Play declaration is No (read-only UI confirmed). Artifact directory `/Users/woojinchang/development/legendstudy-private-backups/task14b-20261101/build39/` preserves prior artifacts. IPA SHA256 `e28c33bcdad0f72b57efa9e7ae3a6f9daad6296bd70c34d167cb9c3d75e7cc19`; AAB `aa118d8e20958556b05c1d665d7ae13bf774affe945c6873d1f91eefedbbfb8f`. Logs `/tmp/task14f-build39-ios.log`, `/tmp/task14f-build39-android.log`. Existing Kotlin/SPM/font warnings are not new fatal build failures.
+
+Production read-only query confirms campaign cfc56a2b-8fbd-4c2a-a200-e55b509ad972 enabled, daily_limit1, starts_on2026-11-01/ends_on2026-11-10, daily-v2; status and claim RPC installed. Actual revision_deadline body retains least(completion+14days, funding-ledger beta cutoff). No grant/claim/submission invoked. Owner confirms Android physical testing is available; no Android device currently attached by adb. New39 physical acceptance remains pending.
+
+
+### TASK14-F internal distribution checkpoint
+
+- iOS39 upload/processing SUCCESS; ASC build `197c283c-6158-407a-99be-e59622a2e95c` shows 제출 준비 완료 and existing Owner Internal QA association. Existing37 group/tester permissions preserved. 1.0.1 review draft prepared with existing metadata/credentials, beta notes and manual release; build39 attached, saved and reload-persistence verified. No review submission executed.
+- Android39 upload SUCCESS; existing internal track4701319249543191162 release6 explicitly **활성 / 최신 출시 버전39(1.0.1) / 내부 테스터에게 제공됨**. Signed bundle39 accepted; supported-device counts unchanged from37. Existing tester permissions preserved. Link: https://play.google.com/apps/internaltest/4701319249543191162 . Internal distribution is not Production review submission. Production18 unchanged.
+- Native file picker resolved extension file-URL restriction without changing extension/security settings. No additional Owner setup needed for upload.
+- Evidence screenshots `/tmp/task14f-play39-internal.png`, `/tmp/task14f-ios39-internal.png`. Play opt-in/install availability on a physical device is still Owner QA pending; console availability alone is not installation PASS.
+
+| Release gate | Verified status |
+|---|---|
+| Flutter Analyze / full tests | PASS: 0 issues;1317 PASS,7 SKIP,0 FAIL |
+| Signed iOS/Android39 same source | PASS: a0aa6184fedc4b20c2bc6909af20eee8cf9aa231 |
+| Android advertising ID declaration consistency | PASS: actual signed AAB permissions absent; existing console No |
+| Upload / existing internal distribution | PASS in both consoles; physical installation pending |
+| Existing iOS34/37 Owner acceptance | Preserved only for previously confirmed cases |
+| iOS39 settings/profile/interests/LAB delta | NOT_TESTED on device; Owner request sent |
+| Android39 core device flows | NOT_TESTED; Owner confirms device available, internal link/checklist sent |
+| Signup/delete/OAuth and full APP/WEB sync matrix | NOT_TESTED where no explicit device evidence; disposable-account-only deletion |
+| Beta production policy | Read-only installed campaign/function verification; no claim/Provider run; server boundary tests covered by suite |
+| Store production review | BLOCKED pending required physical acceptance, not SUBMITTED |
+
+No production DB/Worker/Provider/Credit/payment policy changes. No purchase, credit grant/claim, or evaluation executed. New academic-type expansion remains separate from this release. Rollback keeps prior store production versions; internal testers may return to preserved prior TestFlight builds, and code rollback for uploaded Android requires a higher versionCode. No ledger or user-data restoration.

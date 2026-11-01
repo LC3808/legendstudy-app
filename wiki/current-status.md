@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-F](final-store-rc-1.md#task14-f-final-candidate--2026-11-02): 최종39후보·환불설정통합·광고ID권한제거. Analyze/1317PASS·7SKIP. 37OwnerPASS보존;39빌드/업로드/실기기/심사 진행. 베타11/11 00KST고정·유형확장은출시와분리. WEB환불푸터9b7a63ba 유지.
+[TASK14-F](final-store-rc-1.md#task14-f-final-candidate--2026-11-02): 동일소스a0aa618·서명39빌드/양스토어업로드완료. Play내부39배포·iOS Owner QA연결. Analyze0/1317PASS·7SKIP. 37OwnerPASS보존;39실기기검수대기·심사미제출. 베타11/11 00KST고정. WEB환불푸터9b7a63ba 유지.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
