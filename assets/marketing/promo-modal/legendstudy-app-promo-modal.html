@@ -1,0 +1,266 @@
+<!-- ============================================================= -->
+<!-- LegendStudy+ 모바일 웹 앱 홍보 모달  (TASK 15 / Claude)        -->
+<!-- 삽입 위치: 티스토리 스킨 HTML 편집 → 맨 아래 </body> 바로 앞  -->
+<!-- 기존 HTML/CSS 미수정. 이 블록만 추가하면 됨.                   -->
+<!-- 제거(롤백): 아래 주석 시작~끝 블록 전체 삭제.                 -->
+<!-- ============================================================= -->
+<!-- LS-APP-PROMO-MODAL:START -->
+<style id="lsapm-style">
+.lsapm-overlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+  padding:20px;background:rgba(25,43,73,.48);opacity:0;transition:opacity .2s ease;
+  -webkit-font-smoothing:antialiased;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;box-sizing:border-box}
+.lsapm-overlay.lsapm-on{opacity:1}
+.lsapm-overlay *,.lsapm-overlay *::before,.lsapm-overlay *::after{box-sizing:border-box}
+.lsapm-card{position:relative;width:100%;max-width:340px;background:#fff;border-radius:18px;
+  box-shadow:0 12px 40px rgba(25,43,73,.22);padding:28px 22px 22px;text-align:center;
+  transform:translateY(8px);transition:transform .2s ease}
+.lsapm-overlay.lsapm-on .lsapm-card{transform:translateY(0)}
+.lsapm-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;background:transparent;
+  color:#9AA3B2;font-size:20px;line-height:36px;cursor:pointer;border-radius:10px}
+.lsapm-close:active{background:#F2F4F7}
+.lsapm-brand{display:inline-block;font-size:22px;font-weight:800;letter-spacing:-.02em;color:#192B49;margin:2px 0 14px}
+.lsapm-brand b{color:#FFAC14;font-weight:800}
+.lsapm-tag{font-size:16px;font-weight:700;color:#192B49;margin:0 0 14px;letter-spacing:-.01em}
+.lsapm-body{font-size:14px;line-height:1.6;color:#4A5568;margin:0 0 6px;letter-spacing:-.01em}
+.lsapm-body + .lsapm-body{margin-top:12px}
+.lsapm-note{font-size:11px;line-height:1.5;color:#9AA3B2;margin:14px 0 18px;letter-spacing:-.01em}
+.lsapm-cta{display:block;width:100%;border:0;border-radius:12px;background:#FFAC14;color:#192B49;
+  font-size:16px;font-weight:800;letter-spacing:-.01em;padding:15px 16px;cursor:pointer;
+  text-decoration:none;box-shadow:0 2px 0 rgba(233,149,0,.35)}
+.lsapm-cta:active{transform:translateY(1px);box-shadow:none}
+.lsapm-snooze{display:block;width:100%;border:0;background:transparent;color:#8A94A6;
+  font-size:13px;font-weight:600;padding:12px 8px 2px;cursor:pointer;letter-spacing:-.01em}
+.lsapm-snooze:active{color:#5B6066}
+@media (prefers-reduced-motion: reduce){
+  .lsapm-overlay,.lsapm-overlay .lsapm-card{transition:none}
+}
+</style>
+<script id="lsapm-script">
+(function(){
+  "use strict";
+  if (window.__lsAppPromoInit) return;        // 중복 주입 방지
+  window.__lsAppPromoInit = true;
+
+  /* ===== 설정 ===== */
+  var CFG = {
+    delayMs: 6000,                              // 진입 6초 후 노출
+    hideOnCloseMs: 24 * 60 * 60 * 1000,         // X: 24시간 숨김
+    hideOnClickMs: 30 * 24 * 60 * 60 * 1000,    // 다운로드: 30일 숨김
+    iosUrl: "https://apps.apple.com/us/app/%EB%A0%88%EC%A0%84%EB%93%9C%EC%8A%A4%ED%84%B0%EB%94%94/id6820826957",
+    androidUrl: "https://play.google.com/store/apps/details?id=com.legendstudy.app",
+    KEY_HIDE: "ls_appmodal_hide_until",         // 숨김 만료 타임스탬프
+    KEY_SESSION: "ls_appmodal_shown_session",   // 세션 1회 노출 플래그
+    COOKIE_SESSION: "ls_appmodal_sess"          // 스토리지 실패 시 세션 폴백
+  };
+
+  /* ===== 안전한 스토리지 래퍼 (실패해도 던지지 않음) ===== */
+  var mem = {};                                 // 스토리지 전면 실패 시 메모리 폴백
+  function lsGet(k){ try{ return window.localStorage.getItem(k); }catch(e){ return (k in mem)?mem[k]:null; } }
+  function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
+  function ssGet(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return (k in mem)?mem[k]:null; } }
+  function ssSet(k,v){ try{ window.sessionStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
+  function cookieHas(name){ try{ return document.cookie.indexOf(name+"=1")>-1; }catch(e){ return false; } }
+  function cookieSetSession(name){ try{ document.cookie = name+"=1; path=/; SameSite=Lax"; }catch(e){} }
+
+  /* ===== GA4 안전 전송 (미설정 시 조용히 무시) ===== */
+  function track(name, params){
+    params = params || {};
+    try{
+      if (typeof window.gtag === "function"){ window.gtag("event", name, params); return; }
+      if (window.dataLayer && typeof window.dataLayer.push === "function"){
+        window.dataLayer.push(["event", name, params]); return;  // gtag와 동일한 shape
+      }
+    }catch(e){}
+  }
+
+  /* ===== 환경 판별 ===== */
+  var UA = navigator.userAgent || "";
+  function isIOS(){ return /iPhone|iPad|iPod/.test(UA) || (/Macintosh/.test(UA) && (navigator.maxTouchPoints||0) > 1); }
+  function isMobile(){
+    var uaMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Mobile|Silk/i.test(UA);
+    var coarse = window.matchMedia && window.matchMedia("(pointer:coarse)").matches;
+    var narrow = Math.min(window.innerWidth||9999, (window.screen&&window.screen.width)||9999) <= 820;
+    return uaMobile || (coarse && narrow) || isIOS();
+  }
+  function isInAppWebView(){
+    try{
+      if (window.flutter_inappwebview || window.__LS_APP__ || window.ReactNativeWebView) return true;
+      if (/;\s*wv\)/.test(UA) || /\bwv\b/.test(UA)) return true;        // Android System WebView
+      if (/iPhone|iPad|iPod/.test(UA) && !/Safari/.test(UA)) return true; // iOS 인앱(WKWebView)
+    }catch(e){}
+    return false;
+  }
+  function isPdfViewerActive(){
+    try{
+      if (document.contentType === "application/pdf") return true;
+      if (document.querySelector('embed[type="application/pdf"],object[type="application/pdf"],iframe[src*=".pdf"]')) return true;
+    }catch(e){}
+    return false;
+  }
+  function isKeyboardOpen(){
+    var el = document.activeElement;
+    if (!el) return false;
+    var tag = (el.tagName || "").toLowerCase();
+    return tag === "input" || tag === "textarea" || tag === "select" || el.isContentEditable === true;
+  }
+  function storeUrl(){ return isIOS() ? CFG.iosUrl : CFG.androidUrl; }
+  function storeName(){ return isIOS() ? "appstore" : "googleplay"; }
+  function platform(){ return isIOS() ? "ios" : "android"; }
+
+  /* ===== 노출 가능 여부 ===== */
+  function alreadyHidden(){
+    var until = parseInt(lsGet(CFG.KEY_HIDE) || "0", 10);
+    return !isNaN(until) && until > Date.now();
+  }
+  function shownThisSession(){
+    return ssGet(CFG.KEY_SESSION) === "1" || cookieHas(CFG.COOKIE_SESSION);
+  }
+  function eligibleToSchedule(){
+    return isMobile() && !isInAppWebView() && !alreadyHidden() && !shownThisSession();
+  }
+
+  /* ===== 스크롤 잠금/복원 ===== */
+  var savedScrollY = 0, scrollLocked = false;
+  function lockScroll(){
+    savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var b = document.body;
+    b.style.position = "fixed"; b.style.top = (-savedScrollY) + "px";
+    b.style.left = "0"; b.style.right = "0"; b.style.width = "100%"; b.style.overflow = "hidden";
+    scrollLocked = true;
+  }
+  function unlockScroll(){
+    if (!scrollLocked) return;
+    var b = document.body;
+    b.style.position = ""; b.style.top = ""; b.style.left = ""; b.style.right = ""; b.style.width = ""; b.style.overflow = "";
+    window.scrollTo(0, savedScrollY);
+    scrollLocked = false;
+  }
+
+  /* ===== 모달 DOM ===== */
+  var overlay = null, lastFocus = null, keydownHandler = null;
+
+  function buildDom(){
+    overlay = document.createElement("div");
+    overlay.className = "lsapm-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-labelledby", "lsapm-brand");
+    overlay.setAttribute("aria-describedby", "lsapm-desc");
+    overlay.innerHTML =
+      '<div class="lsapm-card">' +
+        '<button type="button" class="lsapm-close" aria-label="닫기">×</button>' +
+        '<div class="lsapm-brand" id="lsapm-brand">LegendStudy<b>+</b></div>' +
+        '<p class="lsapm-tag">가능성을 좀 더 선명하게.</p>' +
+        '<div id="lsapm-desc">' +
+          '<p class="lsapm-body">모의고사·수능 기출부터<br>내신 준비, 논술 첨삭까지.</p>' +
+          '<p class="lsapm-body">레전드스터디+에서<br>나만의 학습을 시작하세요.</p>' +
+        '</div>' +
+        '<p class="lsapm-note">논술 첨삭은 지원 대학에 한해 제공됩니다.</p>' +
+        '<a class="lsapm-cta" href="#" rel="noopener">앱 다운로드하기 &rarr;</a>' +
+        '<button type="button" class="lsapm-snooze">오늘은 그만 보기</button>' +
+      '</div>';
+
+    overlay.querySelector(".lsapm-close").addEventListener("click", function(){ dismiss("close"); });
+    overlay.querySelector(".lsapm-snooze").addEventListener("click", snooze);
+    overlay.querySelector(".lsapm-cta").addEventListener("click", onCta);
+    overlay.addEventListener("click", function(e){ if (e.target === overlay) dismiss("backdrop"); });
+    return overlay;
+  }
+
+  /* ===== 열기/닫기 ===== */
+  function show(){
+    if (overlay) return;
+    lastFocus = document.activeElement;
+    document.body.appendChild(buildDom());
+    lockScroll();
+    // 세션 1회 + 비노출 폴백 기록
+    ssSet(CFG.KEY_SESSION, "1");
+    cookieSetSession(CFG.COOKIE_SESSION);
+    // reflow 후 페이드인
+    void overlay.offsetWidth;
+    overlay.classList.add("lsapm-on");
+    var cta = overlay.querySelector(".lsapm-cta");
+    if (cta) cta.focus();
+    trapFocus();
+    track("app_promo_impression", { platform: platform(), placement: "mobile_web" });
+  }
+
+  function teardown(){
+    if (!overlay) return;
+    overlay.classList.remove("lsapm-on");
+    if (keydownHandler){ document.removeEventListener("keydown", keydownHandler, true); keydownHandler = null; }
+    var node = overlay; overlay = null;
+    setTimeout(function(){ if (node && node.parentNode) node.parentNode.removeChild(node); }, 220);
+    unlockScroll();
+    try{ if (lastFocus && lastFocus.focus) lastFocus.focus(); }catch(e){}
+  }
+
+  function setHide(ms){ lsSet(CFG.KEY_HIDE, String(Date.now() + ms)); }
+  function nextMidnightMs(){
+    var d = new Date(); d.setHours(24,0,0,0); return d.getTime() - Date.now();
+  }
+
+  function dismiss(reason){
+    setHide(CFG.hideOnCloseMs);                 // X/배경/ESC: 24시간
+    track("app_promo_dismiss", { platform: platform(), reason: reason || "close" });
+    teardown();
+  }
+  function snooze(){
+    setHide(nextMidnightMs());                  // 오늘은 그만 보기: 당일 재노출 방지
+    track("app_promo_snooze", { platform: platform() });
+    teardown();
+  }
+  function onCta(e){
+    if (e) e.preventDefault();
+    setHide(CFG.hideOnClickMs);                 // 다운로드: 30일
+    track("app_promo_click", { platform: platform(), store: storeName() });
+    var url = storeUrl();
+    teardown();
+    // 이벤트 전송 여유 후 스토어 이동
+    setTimeout(function(){ try{ window.location.assign(url); }catch(err){ window.location.href = url; } }, 80);
+  }
+
+  /* ===== 접근성: 포커스 트랩 + ESC ===== */
+  function trapFocus(){
+    keydownHandler = function(e){
+      if (!overlay) return;
+      if (e.key === "Escape" || e.keyCode === 27){ e.preventDefault(); dismiss("escape"); return; }
+      if (e.key !== "Tab" && e.keyCode !== 9) return;
+      var f = overlay.querySelectorAll('button,a[href],[tabindex]:not([tabindex="-1"])');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", keydownHandler, true);
+  }
+
+  /* ===== 스케줄링 (6초 + 키보드 회피) ===== */
+  function attempt(){
+    if (!eligibleToSchedule()) return;          // 재확인(그 사이 숨김/세션 변동 대비)
+    if (isPdfViewerActive()){ return; }          // PDF 뷰어 중 미노출
+    if (isKeyboardOpen()){
+      // 키보드 입력 중이면 blur 후 1회 재시도
+      var once = function(){
+        document.removeEventListener("focusout", once, true);
+        setTimeout(function(){ if (eligibleToSchedule() && !isPdfViewerActive() && !isKeyboardOpen()) show(); }, 400);
+      };
+      document.addEventListener("focusout", once, true);
+      return;
+    }
+    show();
+  }
+
+  function start(){
+    if (!eligibleToSchedule()) return;
+    setTimeout(attempt, CFG.delayMs);
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive"){
+    start();
+  } else {
+    document.addEventListener("DOMContentLoaded", start);
+  }
+})();
+</script>
+<!-- LS-APP-PROMO-MODAL:END -->

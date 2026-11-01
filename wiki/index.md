@@ -32,6 +32,7 @@ This directory is the canonical long-term development knowledge base for LegendS
 - `essay-schedule-intake-20261101.md` — 논술 일정 입력 양식·검증(`assets/essay-schedule/`)
 - `marketing-analytics-events-20261101.md` — 마케팅 Analytics(기존 v1 재사용·확장)
 - `banner-handover-manus-20261101.md` — 배너 작업 Manus 인계서(확정 재료 `assets/marketing/handover/`)
+- `app-promo-modal-20261101.md` — TASK 15 모바일 웹 앱 홍보 모달(드롭인 코드 `assets/marketing/promo-modal/`)
 
 ## Canonical-source rule
 
