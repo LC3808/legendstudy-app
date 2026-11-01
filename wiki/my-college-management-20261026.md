@@ -92,3 +92,7 @@ Owner 최종 보정. 기존 통합 카드와 위 보존 검토 7문항을 계승
 WEB commits `fd209f9`, `a5ec76dd2e7dcebefc691b704e258a9d8a744533`, branch `codex/web-app-release-20261024`. Commit·Push·Remote SHA 일치. 최종 Pages Production `a68022fe` (`https://a68022fe.legendstudy-lab.pages.dev`), canonical `https://lab.legendstudy.com/account/` 실제 화면 확인. APP Native·DB/RPC·Worker·Credit·Ledger·History·Secret 변경 없음.
 
 롤백: 두 WEB commit을 역순 revert 후 기존 공개 환경 주입 배포, 또는 직전 Pages `db3fdb12`/WEB `0edff64ccac42806f78970ad427d71f111c08a58`로 복구. SQL 적용/재실행 없음. 학생 데이터 복구 작업 불필요. 다른 대학 STANDBY·APP GAP은 기존 별도 문서 상태 유지.
+
+## 2026-11-01 — Owner device UX correction
+
+MY 희망대학·학과 진입은 `/my/aspirations`로 분리하고 기존 대학/학과 편집기를 재사용한다. `/my/school`은 고등학교·현재 상태·학년만 표시한다. 고등학교 검색 명시 및 저장된 학교 해제 확인을 추가한다. 기존 nickname/photo, 자기 프로필 권한, 저장 계약과 관심 대학 원장은 보존한다. [TASK14-B 구현·검증·build35·실기기 대기](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects).

@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-B](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects): 운영 beta-v2·공지 SQL 설치/검증, 공지2건 게시. Credit/결제/평가9원장 불변. 베타 활성화 대기. Owner MY/LAB UX 결함 수정·신규 빌드 검증 중;34 심사 미제출. Android/추가 실기기 미검증.
+[TASK14-B](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects): 운영 beta-v2·공지 설치, 공지2건 게시. 기존9원장 보존(동시 가입+3 별도). MY/LAB 수정·35 양 플랫폼 빌드/업로드;1310PASS/7SKIP. WEB2회 안내·베타 활성화·추가 실기기 차단, 심사 미제출.
 
 [TASK12-B 공식 홈페이지](official-home-launch-task12.md): Owner 승인 운영 배포·PC/모바일 viewport 검증 완료(1b3063af, source442baf9). GA4 실수신·실기기 미검증.
 

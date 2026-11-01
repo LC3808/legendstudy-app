@@ -1,5 +1,8 @@
 # 공통 공지사항 — TASK 01
 
+
+2026-11-01 TASK14-B: Production 설치·검증 완료. 공지2건 게시, 베타 campaign은 미활성(운영 WEB에 이전 2회 안내 잔존). [설치·권한·백업·잔여 차단 근거](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects).
+
 2026-10-31 Owner 요청. **구현·격리 검증 완료 / 운영 SQL·WEB·APP 릴리스 미적용**.
 기존 [홈/개인화](home-personalization-and-events.md), [MY](core-app-improvements.md),
 [관리자 권한](admin-member-directory.md), [데이터 보존 전략](longitudinal-learning-admissions-data-strategy.md)을 확장한다.

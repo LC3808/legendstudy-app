@@ -1,5 +1,8 @@
 # 베타 매일 무료 첨삭 v2 — 2026-10-31
 
+
+2026-11-01 TASK14-B: Production 설치·검증 완료. 공지2건 게시, 베타 campaign은 미활성(운영 WEB에 이전 2회 안내 잔존). [설치·권한·백업·잔여 차단 근거](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects).
+
 ## 상태와 Owner 결정
 
 TASK 02 구현·격리 검증 완료 후보. **운영 SQL·캠페인·공지 게시·APP/WEB 배포 미적용. 실제 평가/Provider 호출 없음.** TASK 01 [공지 시스템](notices-system.md)과 연결한다. 기존 [베타 출처·원장 설계](essay-beta-credit-design-20261027.md), [결제 기반](payment-app-foundation.md), [장기 데이터 보존](longitudinal-learning-admissions-data-strategy.md)을 재사용한다.
