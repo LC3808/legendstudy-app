@@ -8,6 +8,7 @@ void main() {
   test('Korean date does not depend on device timezone or expose time', () {
     expect(creditDate('2027-01-23T14:59:59.999999Z'), '2027.01.23');
     expect(creditDate('2026-10-22T16:00:00Z'), '2026.10.23');
+    expect(creditDateTime('2026-10-22T16:07:00Z'), '2026.10.23 01:07');
   });
   Map<String, dynamic> row(String type, int amount, {String? decision}) => {
     'created_at': '2026-10-23T05:00:00Z',

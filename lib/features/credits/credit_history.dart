@@ -10,6 +10,13 @@ String creditDate(String value) {
   return '${date.year}.${two(date.month)}.${two(date.day)}';
 }
 
+/// Ledger occurrence time in KST; expiry retains its existing calendar display.
+String creditDateTime(String value) {
+  final date = DateTime.parse(value).toUtc().add(const Duration(hours: 9));
+  String two(int value) => value.toString().padLeft(2, '0');
+  return '${creditDate(value)} ${two(date.hour)}:${two(date.minute)}';
+}
+
 /// User-facing projection only; never used to calculate the wallet balance.
 List<Map<String, dynamic>> userCreditHistory(List<Map<String, dynamic>> rows) {
   final visible = <Map<String, dynamic>>[];
@@ -103,7 +110,7 @@ class CreditHistory extends ConsumerWidget {
       padding: const EdgeInsets.all(20),
       children: [
         const Text('충전·지급·사용 내역 · 최근 50건'),
-        const Text('만료일은 한국시간 기준이에요.'),
+        const Text('지급·사용 시각과 만료일은 한국시간 기준이에요.'),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton.icon(
@@ -147,9 +154,9 @@ class CreditHistory extends ConsumerWidget {
       contentPadding: EdgeInsets.zero,
       title: Text('$label · ${amount > 0 ? '+' : ''}$amount 크레딧'),
       subtitle: type == 'consume'
-          ? Text(creditDate(row['created_at'] as String))
+          ? Text(creditDateTime(row['created_at'] as String))
           : Text(
-              '${creditDate(row['created_at'] as String)}\n'
+              '${creditDateTime(row['created_at'] as String)}\n'
               '${grant == null
                   ? '만료 정보 확인 불가'
                   : expiry == null

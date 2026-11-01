@@ -77,17 +77,16 @@ String betaEndDate(DateTime end) {
     final exact = end.toUtc().add(const Duration(hours: 9));
     return '${exact.year}년 ${exact.month}월 ${exact.day}일 ${exact.hour.toString().padLeft(2, '0')}:${exact.minute.toString().padLeft(2, '0')} KST';
   }
-  return '${lastDay.year}년 ${lastDay.month}월 ${lastDay.day}일';
+  return '${lastDay.year}년 ${lastDay.month}월 ${lastDay.day}일 23:59';
 }
 
 String betaPolicyText(DateTime end, [int limit = 1]) =>
-    '대학별 평가 기준으로 답안을 분석하고 다시 쓰며 성장하는 논술 LAB 베타 서비스입니다.\n\n'
-    '인문논술 베타 대상 시험에서 매일 무료 첨삭 $limit회를 이용할 수 있어요. '
-    '매일 00:00 KST에 갱신되며 미사용분은 이월되지 않습니다.\n\n'
-    '베타 종료: ${end.toUtc().add(const Duration(hours: 9)).toString().substring(0, 16)} KST. 베타 무료 첨삭의 무료 재첨삭은 '
-    '최초 완료 후 최대 14일 이내, 베타 종료 전까지 1회 가능합니다. '
-    '가입·구매 Credit의 기존 정책은 유지됩니다.\n\n'
-    '사용 중 불편한 점은 MY 설정의 문의·건의사항 경로로 알려주세요. '
+    '인문논술 서비스를 매일 무료 첨삭 $limit회 이용할 수 있어요.\n\n'
+    '매일 0시(자정, 한국 시간)에 무료 첨삭 이용 횟수가 갱신되며 미사용분은 소멸돼요.\n\n'
+    '베타 서비스는 ${betaEndDate(end)}까지 운영돼요. '
+    '베타 무료 첨삭권과 무료 재첨삭은 베타 서비스 기간 동안만 이용할 수 있어요.\n\n'
+    '가입 축하 무료 크레딧(3개)과 구매 크레딧은 기존 정책대로 이용할 수 있어요.\n\n'
+    '사용 중 불편한 점은 MY 설정의 문의·건의사항으로 알려주세요. '
     '공지사항에서 안내를 다시 확인할 수 있어요.';
 
 final essayBetaCreditProvider = FutureProvider.autoDispose<EssayBetaCredit?>((
@@ -153,7 +152,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
       context: context,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, update) => AlertDialog(
-          title: const Text('논술 LAB 베타 무료 이용 안내'),
+          title: const Text('논술 LAB 베타 서비스 안내'),
           scrollable: true,
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -170,7 +169,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
           actions: [
             TextButton(
               onPressed: busy ? null : () => Navigator.pop(context),
-              child: const Text('나중에'),
+              child: const Text('확인/닫기'),
             ),
             FilledButton(
               onPressed: busy
@@ -215,7 +214,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
                         }
                       }
                     },
-              child: Text(busy ? '확인 중…' : '베타 테스트 시작하기'),
+              child: Text(busy ? '확인 중…' : '무료 첨삭 이용하러 가기'),
             ),
           ],
         ),
@@ -306,7 +305,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
                 subtitle: Text(
                   value.ended
                       ? '가입·구매 Credit은 기존 정책대로 이용할 수 있어요.'
-                      : '매일 00:00 KST 갱신 · 이월 없음\n${value.available == 0 && value.expiresAt.isBefore(value.endsAt!) ? '다음 이용: 내일 00:00 KST · ' : ''}${betaEndDate(value.endsAt!)}까지',
+                      : '매일 00시(자정, 한국 시간) 갱신 · 이월 없음\n${value.available == 0 && value.expiresAt.isBefore(value.endsAt!) ? '다음 이용: 내일 00:00 KST · ' : ''}${betaEndDate(value.endsAt!)}까지',
                 ),
                 trailing: TextButton(
                   onPressed: () => context.push(

@@ -58,10 +58,10 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('논술 LAB 베타 무료 이용 안내'), findsOneWidget);
-    await tester.tap(find.text('나중에'));
+    expect(find.text('논술 LAB 베타 서비스 안내'), findsOneWidget);
+    await tester.tap(find.text('확인/닫기'));
     await tester.pumpAndSettle();
-    expect(find.text('논술 LAB 베타 무료 이용 안내'), findsNothing);
+    expect(find.text('논술 LAB 베타 서비스 안내'), findsNothing);
     expect(find.text('오늘의 무료 첨삭을 모두 사용했습니다.'), findsOneWidget);
     expect(find.textContaining('내일 00:00 KST'), findsOneWidget);
     expect(tester.takeException(), isNull);
@@ -93,8 +93,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(Checkbox));
       await tester.pump();
-      await tester.ensureVisible(find.text('베타 테스트 시작하기'));
-      await tester.tap(find.text('베타 테스트 시작하기'));
+      await tester.ensureVisible(find.text('무료 첨삭 이용하러 가기'));
+      await tester.tap(find.text('무료 첨삭 이용하러 가기'));
       await tester.pumpAndSettle();
       expect(reads, 2);
       expect(find.byType(AlertDialog), findsNothing);
@@ -169,9 +169,9 @@ void main() {
       'ends_at': '2026-11-10T15:00:00Z',
     })!;
     expect(value.ended, true);
-    expect(betaEndDate(value.endsAt!), '2026년 11월 10일');
-    expect(betaPolicyText(value.endsAt!), contains('최대 14일'));
-    expect(betaPolicyText(value.endsAt!), contains('베타 종료 전까지 1회'));
+    expect(betaEndDate(value.endsAt!), '2026년 11월 10일 23:59');
+    expect(betaPolicyText(value.endsAt!), contains('무료 재첨삭은 베타 서비스 기간 동안만'));
+    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 크레딧(3개)'));
   });
   test('invalid balance and expiry never displayed', () {
     for (final count in [-1, 2, 3, 1.5, '1']) {

@@ -159,7 +159,7 @@ void main() {
       expect(find.byKey(const Key('my-mock-lab')), findsOneWidget);
     });
   }
-  testWidgets('five destinations and MY saved route retain branch stacks', (
+  testWidgets('five destinations and MY tab always returns to profile', (
     tester,
   ) async {
     final container = await mount(tester);
@@ -179,9 +179,8 @@ void main() {
     expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
     await tab(tester, 2);
     await tab(tester, 4);
-    expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsOneWidget);
-    await tester.tap(find.byType(BackButton));
-    await tester.pumpAndSettle();
+    expect(container.read(routerProvider).canPop(), isFalse);
+    expect(find.text('로그인하면 이 기능을 이용할 수 있어요.'), findsNothing);
     expect(find.widgetWithText(OutlinedButton, '로그인'), findsOneWidget);
   });
   testWidgets(

@@ -34,6 +34,12 @@ class ProfilePage extends ConsumerWidget {
           children: [
             const Expanded(child: AppHeader(title: 'MY')),
             IconButton(
+              tooltip: '공지사항',
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              onPressed: () => context.push('/notices'),
+              icon: const Icon(Icons.campaign_outlined),
+            ),
+            IconButton(
               tooltip: '설정',
               constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
               onPressed: () => context.push('/my/settings'),
@@ -100,11 +106,6 @@ class ProfilePage extends ConsumerWidget {
               ],
             ],
           ),
-        ),
-        LsListRow(
-          title: '공지사항',
-          icon: Icons.campaign_outlined,
-          onTap: () => context.push('/notices'),
         ),
         if (!auth.isLoading &&
             !auth.hasError &&
