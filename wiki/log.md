@@ -296,3 +296,9 @@
 - 미완료(대기): §6-1 배너 카피 원문, 대학별 실제 일정 Owner 자료 순차 제공, 서강
   경제경영 검증 게이트(DB SELECT/실평가), GA4 크로스도메인·Firebase, 베타 종료 시각
   화면 문구 확정, 실제 티스토리 스킨 편집·배포(Codex/Owner).
+- 리뷰용 PR #10(base main) 생성(자동병합 OFF). Owner 배너 디자인 v1 반려 → 미니멀
+  재디자인·공식 앱 아이콘/스토어 배지 방향 지시. Claude 시안도 반려.
+- **배너 시각 디자인 작업을 Manus로 이관**(Owner 지시). 인계서
+  `wiki/banner-handover-manus-20261101.md` + 확정 재료 `assets/marketing/handover/`
+  (공식 아이콘·App Store/Google Play 배지·실제 앱 화면·SOURCES.md) 작성. 명세·Analytics·
+  일정·지원상태 문서는 유지. v1 자산 미덮어쓰기, 최종 자산 미제작(Owner 승인 게이트).
