@@ -2200,6 +2200,11 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       }
       EssayCreditSource? creditSource;
       if (prior == null) {
+        if (parentId == null) {
+          await ref
+              .read(supabaseClientProvider)
+              ?.rpc<Map<String, dynamic>>('essay_beta_daily_claim_v2');
+        }
         final quote = await gateway()?.request({
           'action': 'quote',
           'examId': widget.exam['dbExamId'],

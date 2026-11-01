@@ -63,3 +63,17 @@ Owner가 guarded precheck→install→verify를 검수/적용해야 한다. 공�
 ## TASK04 후속 관리자 운영
 
 [관리자 설정·조회·권한·감사와 별도 승인 패키지](admin-beta-operations.md). v2 기본 1회는 유지하며, 후속 후보는 서버 설정 한도를 다음 KST 자정에 적용한다. 기존 발급 cutoff/원장은 불변. 운영 미적용.
+
+## TASK14-B onboarding addendum — 2026-11-01
+
+Owner approved APP/WEB beta introduction and WEB Production rollout. First LAB entry offers the introduction, daily1/reset00:00KST/exclusive2026-11-11 00:00KST cutoff, optional `다음부터 보지 않기` and `베타 테스트 시작하기`. The latter rechecks auth and **read-only** `essay_beta_daily_status_v2`; no claim, grant, reservation or Provider call. Display preference is device/browser-local, account/campaign/policy scoped; hiding it never hides daily availability. Guest start goes to existing login. Inactive/exhausted/ended responses cannot promise free access.
+
+The existing v2 claim previously ran on entry and creates a tagged beta grant. It now runs only within the validated initial-submission flow before the existing source quote/confirmation; rewrites and ambiguous retries preserve their existing path. Grant creation is idempotent by user/KSTday; reservation/settlement/failure recovery remain unchanged. Beta remains excluded from `credit_summary` and separate from signup/paid balances. Cancelling the submission confirmation may leave an unused daily allowance but never a debit. No parallel credit ledger.
+
+Additive migration `20261101140810_essay_beta_readonly_onboarding.sql` installed in Production after isolated checks. Status reads existing campaigns/scope/grants/transactions; no account or grant creation. It also respects the optional existing admin operations configuration when present; that extension remains separately managed. The public self-scoped authenticated RPC has no user-id parameter, fixed search_path and revoked anonymous/PUBLIC/service_role execute; internal helper stays in the unexposed schema. Production authenticated read-only transaction returns inactive before activation. Original15function definitions remain unchanged.
+
+Preservation review: (1) no new learning fact on entry/start; (2) original grants/runs/transactions remain authoritative; (3) only local display preference changes, no learning-history UPDATE; (4) existing auth identity and per-user preference keys; (5) UI preference vs entitlement/read model vs evaluation facts separated; (6) self-scoped reads, no new PII collection; (7) unissued allowance is a server-derived potential limit, never posted as a paid balance or stored as evaluation fact.
+
+Verification: isolated read-only transaction, inactive/end boundary, KST rollover, existing used/unused allowance, unissued allowance without account creation, ledger counts preserved. See `supabase/candidates/essay_beta_daily_v2/verify-onboarding-isolated.sql` (disposable local fixture only). WEB full1526PASS/4SKIP; APP full1310PASS/7SKIP plus expanded focused9PASS. Analyze0issues; WEB TypeScript/buildPASS/lint0errors5existingwarnings. Actual Provider/E2E and new APP physical-device checks are NOT_TESTED. Build34/35 cannot include changed APP source; new artifact required.
+
+Rollback: restore previous LAB Pages deployment9c505258-4a49-468a-83ae-2326173fb870 and disable the beta campaign before rolling back to old entry-claim UX. Preserve all grants/history. Read-only RPC can remain installed; do not reinstall old beta allocation. Detailed deployment/artifact outcome is tracked in [release report](final-store-rc-1.md).

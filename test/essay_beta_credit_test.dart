@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/credits/essay_beta_credit.dart';
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
   Map<String, dynamic> fixture() => {
     'version': 'essay-beta-credit-v2',
     'active': true,
@@ -57,13 +59,53 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('논술 LAB 베타 무료 이용 안내'), findsOneWidget);
-    await tester.tap(find.text('확인'));
+    await tester.tap(find.text('나중에'));
     await tester.pumpAndSettle();
     expect(find.text('논술 LAB 베타 무료 이용 안내'), findsNothing);
     expect(find.text('오늘의 무료 첨삭을 모두 사용했습니다.'), findsOneWidget);
     expect(find.textContaining('내일 00:00 KST'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+  testWidgets(
+    'start refreshes availability and hide only suppresses the modal',
+    (tester) async {
+      var reads = 0;
+      Widget app() => ProviderScope(
+        overrides: [
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(const AuthStatus('owner')),
+          ),
+          essayBetaCreditProvider.overrideWith((ref) async {
+            reads++;
+            return EssayBetaCredit.parse({
+              ...fixture(),
+              'available': 1,
+              'expires_at': '2099-01-01T15:00:00Z',
+              'ends_at': '2099-01-02T15:00:00Z',
+            });
+          }),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(body: EssayBetaCreditEntry(child: Text('workspace'))),
+        ),
+      );
+      await tester.pumpWidget(app());
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(Checkbox));
+      await tester.pump();
+      await tester.ensureVisible(find.text('베타 테스트 시작하기'));
+      await tester.tap(find.text('베타 테스트 시작하기'));
+      await tester.pumpAndSettle();
+      expect(reads, 2);
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(find.text('오늘의 무료 첨삭 · 1회 남음'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(app());
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(find.text('오늘의 무료 첨삭 · 1회 남음'), findsOneWidget);
+    },
+  );
   testWidgets('final day never promises another free day', (tester) async {
     await tester.pumpWidget(
       ProviderScope(

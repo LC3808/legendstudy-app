@@ -31,8 +31,9 @@ dependencies:
   firebase_analytics: 12.6.1
   uuid: 4.6.0
 
+  shared_preferences: 2.5.5 # Existing SDK storage; beta display preference.
+
 dev_dependencies:
-  shared_preferences: 2.5.5 # Existing SDK storage; isolated restoration tests.
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0

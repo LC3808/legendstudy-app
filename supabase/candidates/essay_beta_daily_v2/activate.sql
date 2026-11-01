@@ -33,4 +33,4 @@ begin
  update essay_beta_private.campaigns set enabled=true where id=campaign;
 end $activate$;
 commit;
--- Does not issue a grant or create/evaluate a run. First authorized LAB entry claims.
+-- Does not issue a grant or create/evaluate a run. Updated clients claim in initial submission, never on onboarding start.

@@ -816,3 +816,7 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 ## 2026-10-30 — 빌드28 후속: 성장 페이지 펼침 정책 보완
 
 Owner 10/29 실기기 후속 지시로 위 10/29의 “페이지별 최신1개 기본 펼침”을 대체한다. 최초1페이지 진입만 최신1개 펼침, 모든 이전/다음 전환은 전체 접힘, 이후 사용자가 직접 펼친 카드만 펼침. 5개페이지·학습회차·동일기준 비교는 유지. 종합단계는 실제 저장 계약이 있을 때만 표시하며 항목평균으로 만들지 않는다. [원인·검증·기존 정책 연결](app-device-followup-20261030.md).
+
+## 2026-11-01 — Beta entry is read-only; allowance at submission
+
+Owner TASK14-B addendum: beta introduction/start must not grant or spend Credit. Start authenticates and reads availability; display dismissal changes only the modal preference. Existing server-owned daily limit, KST reset, 2026-11-11 00:00KST cutoff and signup/paid isolation remain. Reuse the existing daily allocator only in initial submission, preserving quote consent and idempotency. [Contract and preservation review](essay-beta-daily-v2.md#task14-b-onboarding-addendum--2026-11-01).
