@@ -112,6 +112,8 @@ void main() {
       );
       auth.add(const AuthStatus('A'));
       await tester.pumpAndSettle();
+      expect(find.text('이용약관'), findsOneWidget);
+      expect(find.text('환불 조건'), findsOneWidget);
       expect(created.single.starts, 1);
       expect(created.single.closed, false);
       await tester.tap(find.text('구매내역'));

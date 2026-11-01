@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/config/app_config.dart';
+import '../../../core/links/external_link.dart';
+import '../../resources/domain/content_resource.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../../analytics/analytics_guard.dart';
 import '../../analytics/analytics_providers.dart';
@@ -42,6 +45,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
 
   @override
   Widget build(BuildContext context) {
+    final config = ref.watch(appConfigProvider);
     final auth = ref.watch(authStateProvider);
     final authed =
         !auth.isLoading &&
@@ -125,6 +129,20 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
             const SectionHeader('크레딧 구매'),
             tabs,
             const CreditBalanceCard(),
+            const Text('구매 전 이용약관과 환불 조건을 확인해 주세요.'),
+            Wrap(
+              spacing: 12,
+              children: [
+                ExternalLinkButton(
+                  uri: publicWebUri(config.termsUrl),
+                  label: '이용약관',
+                ),
+                ExternalLinkButton(
+                  uri: publicWebUri(config.refundUrl),
+                  label: '환불 조건',
+                ),
+              ],
+            ),
             const SizedBox(height: AppTokens.space12),
             if (controller.loadingProducts)
               const Padding(
@@ -166,10 +184,12 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
                       controller.phase != BillingPhase.purchasing &&
                       controller.phase != BillingPhase.pending,
                   onBuy: () {
-                    ref.read(analyticsServiceProvider).log(
-                      AnalyticsEvents.creditPurchaseStart,
-                      params: {AnalyticsParamKeys.productId: product.id},
-                    );
+                    ref
+                        .read(analyticsServiceProvider)
+                        .log(
+                          AnalyticsEvents.creditPurchaseStart,
+                          params: {AnalyticsParamKeys.productId: product.id},
+                        );
                     controller.buy(product);
                   },
                 ),
