@@ -1,0 +1,8 @@
+{
+  "target": "kpqbedylxlyntrrfybpn",
+  "status": "PARTIAL_HOLD",
+  "files": {
+    "exam_api_test_adaptation.sql": "eca646f0e69ae239ee358d1464ceafc094aefe8edfc462965f53cb9516d682eb",
+    "admin_gate.sql": "bf649850d7eb1ca545794d7498198e009eb827b939b56612e412d5b17233aafa"
+  }
+}

@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK08 통합 PARTIAL/HOLD](essay-beta-integration-task08-20261101.md): 격리 SQL·Analytics 보완/자동검증, 로컬 WEB·TEST iOS33. 공통 E2E 환경·Owner 검수 미완료.
+[TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): 비공개 WEB·Auth·공지/피드백 검증. 베타 선행 스키마·Gateway·실기기 E2E 차단; build33 보존.
 
 [WEB 관리자 실계정 검수·배포·롤백](web-safe-owner-preview-20261031.md): Owner 계정 403으로 검수 배포 롤백. 권한 확인 대기.
 
