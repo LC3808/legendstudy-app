@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-C](final-store-rc-1.md#task14-c-build38--store-handoff--2026-11-02): 38 양OS 빌드PASS·iOS업로드완료. 브라우저연결로 내부그룹/Android업로드 차단; 광고ID선언·38실기기·심사 대기. Flutter1317PASS/7SKIP. 37 Owner deltaPASS 유지.
+[TASK14-C](final-store-rc-1.md#task14-c-refund-navigation-addenda--2026-11-02): APP설정 환불메뉴 제거·구매정책링크 소스통합(38미포함). WEB푸터 운영9b7a63ba·정책본문/URL 보존·브라우저검증, Owner검수대기. 38iOS업로드/Android업로드·광고ID·신규실기기·심사 잔여; 37PASS유지.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 

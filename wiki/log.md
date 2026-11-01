@@ -5278,3 +5278,8 @@ Owner37four-case device PASS recorded. Existing profile/targets and service API 
 ## 2026-11-02 — TASK14-C signed38 upload checkpoint
 
 Both signed38 artifacts built from80d135a, iOS processed successfully in ASC; Android upload/internal rollout blocked by browser file access/attachment. No review submission. Play ad-ID declaration remains unresolved; new38 device QA pending, Owner37 PASS preserved. Artifacts/hashes, exact build ID, limitations and rollback recorded in [release handoff](final-store-rc-1.md#task14-c-build38--store-handoff--2026-11-02). No runtime code or production data change in this checkpoint.
+
+
+## 2026-11-02 — TASK14-C refund navigation addenda
+
+APP75495ee settings simplified and pre-purchase policy links retained/added; next final binary required. WEB843f3a8 footer-only Production9b7a63ba verified, previous119ffdb7 rollback preserved. Terms/refund/pricing/support bodies unchanged; Owner acceptance pending. Analyze/87APP regressions and1529WEB tests pass; no ledger/DB changes. [Evidence and rollback](final-store-rc-1.md#task14-c-refund-navigation-addenda--2026-11-02).
