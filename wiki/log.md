@@ -5266,3 +5266,7 @@ Entry/start changed to read-only status; existing claim moved to initial-submit 
 Reused supplied prototype and existing official assets. Admin30routes/mobile drawer/dated searchable notices deployed119ffdb7; homeofficialbadges37497d5b; Copasinglebanner37255312. Live desktop/mobile and actualstore/policy pages verified; scoped asset/config preservation. [Admin evidence/rollback](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02), [home/company](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02). No new DB/Provider/Credit/payment operation.
 
 APP2298eac MYroot/noticeicon/KSTcreditdates/betacopy; AnalyzePASS,1312PASS/7SKIP; signed37bothplatforms. Android37existinginternaltrackpublished; iOS37upload+existingOwnergroup confirmed; deviceacceptance tracked in [build37](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02). WEB1529PASS/4SKIP,TS/buildPASS,lint0errors/5existingwarnings. No Production store review claim.
+
+## 2026-11-02 — TASK12-B badge follow-up
+
+Fresh production already contained four official images; old text display not reproduced. Corrected lower inherited image margin/radius and versioned CSS, added four-image artifact assertion. WEB c492334 pushed, home production5442b621 deployed/PC+mobile verified; other services unchanged. [Evidence, limits and rollback](official-home-launch-task12.md#task12-b-badge-deployment-follow-up--2026-11-02).

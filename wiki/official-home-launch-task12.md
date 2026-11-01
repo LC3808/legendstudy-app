@@ -168,3 +168,14 @@ At start home production1b3063af/source442baf9 contained text download buttons, 
 - Proof: .codex/legendstudy-backups/task11h-12b-13/screenshots/{home-desktop,home-mobile,copa-desktop,copa-mobile}.png. Tistory/legendstudy.com banner placement was not changed (Owner said screenshot sent by mistake).
 
 Related admin rollout: [TASK11-H](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02). App P0 follow-up: [release record](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02).
+
+## TASK12-B badge deployment follow-up — 2026-11-02
+
+Owner reported old text CTAs. Fresh production browser and Cloudflare inspection showed all four official images already present on 37497d5b; the reported text view was not reproduced, so cache is not asserted as the cause. Found a real inherited `.download img` style adding 25px bottom margin and 17px corner radius: lower link boxes were73px while images were48px. Removed that decoration for badge images; all four link/image heights now48px. Stylesheet URL revision ensures the corrected CSS is fetched independently of the old URL.
+
+- WEB source/remote **c492334a28657c1c7469d3249b7e1f4e46a58566**, branch codex/official-home-production-task12b. Changed official-home/site/index.html, style.css, verify.mjs, README.md. Existing official asset bytes, original store hrefs, analytics attributes and policies preserved.
+- Actual production project legendstudy-home / home.legendstudy.com deployment **5442b621-1005-4697-a062-436c5e1a1392**, success, source matches above,15 staticfiles, noFunctions. Deployed from official-home/dist. Existing production environment unchanged.
+- PASS: staticbuild and artifactverify including allfour image CTAs; actualChrome production PC1708px/mobile390px (scrollWidth=innerWidth), loaded images and allfour48px heights/margin0/radius0, upper/lower visual render. Store URLs unchanged: Appleid6820826957 and Androidcom.legendstudy.app. Existing policy/support links retained. This is responsive browser verification, not physical iPhone/Android/Safari or GA4 reception; those remain NOT_TESTED. No new fullNext/Flutter run claimed for this static-only change; prior results above retained.
+- Private proof: /Users/woojinchang/.codex/legendstudy-backups/home-badge-followup-20261102/{desktop,mobile,mobile-download}.png; before-project.json and before-files.json retained privately.
+- Rollback: Pages legendstudy-home → prior successful37497d5b-4c02-4cd4-baa4-8fd5b8ded0ab → rollback; verify canonicalID and liveCTAs. Not executed.
+- No changes to LAB deployment119ffdb7, Copa37255312, APP build37, DB, Worker, Provider, Credit, payments or store submission. TASK14 deviceacceptance/review work remains separately tracked in final-store-rc-1.md.

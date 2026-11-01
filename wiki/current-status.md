@@ -2,7 +2,7 @@
 
 [TASK14-B build37](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02): Owner36 지적 MY복귀/공지위치/Credit시각/베타문구 수정. APP1312PASS/7SKIP, signed37 양플랫폼; Android 내부테스트·iOS Owner TestFlight 제공, 실기기delta/심사 대기. 기존 daily1·160시험·공지2건 유지.
 
-[TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home37497d5b, Copa출시배너37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
+[TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
 [TASK11-H](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02): prototype콘솔/30메뉴/공지시각·검색정렬 운영119ffdb7. WEB1529PASS/4SKIP·TS/buildPASS·lint0errors/5기존warnings. 베타/공지RPC는14B기설치; 피드백쓰기·GA/Firebase·성적/인사이트승인 잔여. 운영환경/기존Functions·범위외자산 보존.
 
