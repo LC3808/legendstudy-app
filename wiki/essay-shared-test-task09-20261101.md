@@ -40,7 +40,7 @@ Build source72d53a0; preserved unchanged. Both target same TEST Supabase, but wr
 
 ## Remaining blockers and next work
 
-1. **TEST schema predecessor gap:** canonical old-beta allocator install requires `math_session_submit` and session tables missing from this sandbox. Exact definition checks stop installation. Need reconstruct/review full canonical predecessor DDL/ownership/RLS, replay on ownership-equivalent local clone, then shared TEST. Never use test stubs or bypass financial guards. Daily-v2, admin-beta, Analytics reporting and operations integration not installed here.
+1. **Historical TEST schema predecessor gap (resolved in TASK09-B below):** canonical old-beta allocator install requires `math_session_submit` and session tables missing from this sandbox. Exact definition checks stop installation. Need reconstruct/review full canonical predecessor DDL/ownership/RLS, replay on ownership-equivalent local clone, then shared TEST. Never use test stubs or bypass financial guards. Daily-v2, admin-beta, Analytics reporting and operations integration not installed here.
 2. **Gateway:** no isolated TEST Worker/queue/provider configuration deployed. Existing APP guard rejects TEST evaluation. Production-bound WEB/Gateway host configuration needs scoped TEST configuration review. Verified Registry/packages must be seeded separately without personal answer/history copying. No synthetic results used to claim E2E.
 3. **Provider approval:** no actual call made. Only after Gateway/package ready, calculate concrete run/model/token/call budget and request Owner approval. No blanket cost estimate asserted.
 4. **APP build:** existing33 preserved; enable allowed TEST writes and scoped Gateway in a new build only after backend prerequisites verified. Physical iOS/Android, OCR, Draft/result sync NOT_TESTED.
@@ -67,3 +67,29 @@ Owner-preserving local TEST clone validated precursor → source confirmation �
 Offline candidate checks4 PASS and existing retry/failure/Cloudflare-stage tests20 PASS. APP/WEB UI source unchanged in this step; prior full-suite results are historical, not rerun claims. No new native build made; build33 and restricted Preview above remain available for their existing non-evaluation scope only.
 
 Remaining: TEST Gateway/queue/worker credential/provider configuration; supported immutable Registry/package test data; native TEST API origin; shared first/rewrite/results/growth E2E; new signed build. Do not substitute production endpoints/credentials or report SQL install as E2E. Before any real Provider call, report intended count/cost and obtain separate Owner approval. The beta grant remains disabled pending complete isolated wiring. Production contracts and existing notices/feedback/admin are preserved.
+
+
+## TASK09-B addendum — administrator navigation (2026-11-01)
+
+WEB implementation `1cdcb3a` on `codex/web-app-release-20261024`, pushed. TEST Preview updated to https://2b56f66b.legendstudy-task09.pages.dev (branch alias https://legendstudy-task09.pages.dev). Private access cookie and separate TEST login remain required. Production unchanged.
+
+| Korean menu | Existing route / status |
+|---|---|
+| 사용자 행동 분석 | `/admin/analytics/`: guarded connection-information page only; original Analytics dashboard exists in Flutter `/my/admin/analytics`, not WEB. No fabricated metrics or duplicate dashboard. PARTIAL. |
+| 베타 테스트 관리 | `/admin/beta/`: existing settings and audit history |
+| 베타 이용 현황 | `/admin/beta/usage/`: existing usage page |
+| 평가·비용 모니터링 | `/admin/operations/`: existing five tabs retained |
+| 피드백·오류 신고 | `/admin/essay-feedback/`: existing management page |
+| 공지사항 관리 | `/admin/notices/`: existing notice editor/list |
+
+Failure/recovery `/admin/beta/failures/` remains under related operations. Existing basic administrator menus retained without duplicates. Entire navigation and content now sit inside existing AdminGate; navigation visibility does not grant backend or approved beta-setting UUID permissions. Read failures distinguish denied access, missing RPC, connection error and actual empty data. No SQL, financial, payment, evaluation or Worker change in this addendum.
+
+Files: `src/components/admin/admin-surface.tsx`, `src/app/admin/analytics/page.tsx`, `src/app/admin-ql.css`, `src/lib/admin/errors.ts`, existing admin-beta/admin-essay-monitoring/admin-essay-feedback/admin-notices components, navigation regression test and two updated error fixtures. Main changes: AdminSurface/AdminNavigation/describeError; existing read handlers reuse error mapping. No new event collection or dashboard.
+
+Preservation review (longitudinal strategy): (1) event time unchanged, (2) historical evidence unchanged, (3) no UPDATE/storage additions, (4) stable user/run IDs unchanged, (5) Learning/Decision/Outcome boundaries unchanged, (6) existing least-privilege access retained, (7) no new collection/retention/export semantics. Menu-only change preserves all seven concerns.
+
+Validation: full WEB suite **1478 PASS / 4 SKIP / 0 FAIL**, TypeScript PASS, production build PASS, lint 0 errors/5 pre-existing warnings, diff whitespace check PASS. Navigation regression verifies six ordered links, active menu, retained routes, guest/nonadmin hidden content and safe error states. Live TEST Chrome Owner session: group and all six link navigation, beta settings empty-campaign state, notices stored test notice and monitoring five tabs/missing-RPC notice verified. Reload retains feedback path. Mobile viewport390x844: document scrollWidth390, active notice link correct. These are browser checks, not physical-device/Safari claims. TEST beta RPC read check Owner200/student403/anonymous401; inactive beta claim, no allowance issued. General-user/guest menu hiding is automated, not a fresh browser login claim. Back-button full journey and every page's data operations NOT_TESTED.
+
+Remaining: WEB Analytics dashboard absent; monitoring/reporting RPC absent in TEST; no campaign configured. TASK09-B Gateway/package/native-build and evaluation E2E blockers above remain. Existing iOS33/APK preserved; no new APP build for this WEB-only addendum. **PARTIAL / HOLD for full Owner evaluation acceptance**, menu review available. No Provider calls, evaluation submissions, production deployment, Credit/History mutation.
+
+Rollback: redeploy prior TEST Preview `095d922a-7301-48ac-b23f-2063b7d30518` or rebuild previous WEB `b971a65`; preserve TEST data and access secret. No production rollback needed. Canonical Owner scope links to TASK09-B above and existing admin-beta/Analytics decisions; navigation does not authorize additional operational changes.
