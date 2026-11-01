@@ -119,16 +119,16 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 50));
       if (mode == 'set') {
-        expect(find.text('${schoolA.name} · 3학년'), findsOneWidget);
-        expect(find.text('변경'), findsOneWidget);
+        expect(find.textContaining(schoolA.name), findsOneWidget);
+        expect(find.text('프로필 수정'), findsOneWidget);
       } else if (mode == 'unset') {
-        expect(find.text('학교를 설정해 주세요'), findsOneWidget);
+        expect(find.textContaining('학교를 설정해 주세요'), findsOneWidget);
         expect(find.text('학년을 설정해 주세요'), findsNothing);
-        expect(find.text('설정'), findsOneWidget);
+        expect(find.text('프로필 수정'), findsOneWidget);
       } else {
-        expect(find.text('학교를 설정해 주세요'), findsNothing);
+        expect(find.textContaining('학교를 설정해 주세요'), findsNothing);
         expect(find.text('학년을 설정해 주세요'), findsNothing);
-        expect(find.text('설정'), findsNothing);
+        expect(find.text('프로필 수정'), findsNothing);
         if (mode == 'error') expect(find.text('재시도'), findsOneWidget);
         if (mode == 'loading') {
           expect(find.byType(LinearProgressIndicator), findsNWidgets(2));

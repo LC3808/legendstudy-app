@@ -5270,3 +5270,6 @@ APP2298eac MYroot/noticeicon/KSTcreditdates/betacopy; AnalyzePASS,1312PASS/7SKIP
 ## 2026-11-02 — TASK12-B badge follow-up
 
 Fresh production already contained four official images; old text display not reproduced. Corrected lower inherited image margin/radius and versioned CSS, added four-image artifact assertion. WEB c492334 pushed, home production5442b621 deployed/PC+mobile verified; other services unchanged. [Evidence, limits and rollback](official-home-launch-task12.md#task12-b-badge-deployment-follow-up--2026-11-02).
+
+## 2026-11-02 — TASK14-C profile safety / availability
+Owner37four-case device PASS recorded. Existing profile/targets and service API reused; draft status, department/priority editing and truthful exam counts/refresh. Production metadata read-only, no schema/data/provider/credit mutation. [Evidence and release gates](final-store-rc-1.md#task14-c-my-profile-and-lab-availability--2026-11-02).

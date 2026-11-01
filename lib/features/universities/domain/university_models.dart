@@ -43,7 +43,9 @@ class InterestedUniversity {
 
   factory InterestedUniversity.fromJson(Map<String, dynamic> json) {
     final uni = json['universities'];
-    final embedded = uni is Map<String, dynamic> ? uni : const <String, dynamic>{};
+    final embedded = uni is Map<String, dynamic>
+        ? uni
+        : const <String, dynamic>{};
     return InterestedUniversity(
       id: json['id'] as String,
       universityId: json['university_id'] as String,

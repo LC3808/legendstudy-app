@@ -42,6 +42,9 @@ void main() {
             authStateProvider.overrideWith(
               (ref) => Stream.value(const AuthStatus('owner')),
             ),
+            publicServiceExamCountsProvider.overrideWith(
+              (ref, owner) async => {'ready-id': 2, 'ready2-id': 1},
+            ),
             publicServiceUniversitiesProvider.overrideWith((ref, owner) {
               calls++;
               return calls == 1
@@ -59,13 +62,13 @@ void main() {
       await tester.pump();
       // One list status plus one truthful state on each university card.
       expect(find.text('서비스 확인 중'), findsNWidgets(4));
-      expect(find.text('서비스 준비 중'), findsNothing);
+      expect(find.text('첨삭 준비 중'), findsNothing);
       expect(find.text('첨삭 서비스 준비 중'), findsNothing);
       pending.completeError(StateError('network'));
       await tester.pumpAndSettle();
       expect(find.text('일시적으로 확인할 수 없습니다 · 다시 시도'), findsOneWidget);
       expect(find.text('서비스 상태 확인 필요'), findsNWidgets(3));
-      expect(find.text('서비스 준비 중'), findsNothing);
+      expect(find.text('첨삭 준비 중'), findsNothing);
       await tester.tap(find.text('일시적으로 확인할 수 없습니다 · 다시 시도').first);
       await tester.pumpAndSettle();
       expect(find.text('첨삭 시작하기 →'), findsNothing);
@@ -79,8 +82,10 @@ void main() {
         matching: find.byType(InkWell),
       );
       expect(tester.widget<InkWell>(heldCard).onTap, isNull);
-      expect(find.text('첨삭 가능'), findsNWidgets(2));
-      expect(find.text('서비스 준비 중'), findsOneWidget);
+      expect(find.text('베타 첨삭 가능'), findsNWidgets(2));
+      expect(find.text('이용 가능한 시험 2개'), findsOneWidget);
+      expect(find.text('이용 가능한 시험 1개'), findsOneWidget);
+      expect(find.text('첨삭 준비 중'), findsOneWidget);
       expect(calls, 2);
       expect(tester.takeException(), isNull);
     },

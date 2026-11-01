@@ -246,7 +246,7 @@ void main() {
       final c = await mount(tester, repo, profiles: profile);
       await tester.tap(find.text('학교 설정'));
       await tester.pumpAndSettle();
-      expect(find.text('학교·학년 설정'), findsOneWidget);
+      expect(find.text('프로필 수정'), findsOneWidget);
       await tester.enterText(find.byType(TextField), '테스트');
       await tester.pumpAndSettle();
       expect(repo.searches, 0);
@@ -286,7 +286,7 @@ void main() {
     repo.results = [];
     await tester.tap(find.text('다시 시도'));
     await tester.pumpAndSettle();
-    expect(find.text('검색 결과가 없어요.'), findsOneWidget);
+    expect(find.text('검색 결과가 없습니다.'), findsOneWidget);
   });
   testWidgets(
     'Home no school, loading, empty and error retry stay inside card',

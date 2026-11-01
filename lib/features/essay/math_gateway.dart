@@ -67,7 +67,10 @@ class MathGateway {
     return value['types']['math'] == true || (browsing && canBrowse);
   }
 
-  Future<Set<String>> publicServiceUniversities() async {
+  Future<Set<String>> publicServiceUniversities() async =>
+      (await publicServiceExamCounts()).keys.toSet();
+
+  Future<Map<String, int>> publicServiceExamCounts() async {
     checkOwner();
     final request =
         http.Request(
@@ -98,7 +101,31 @@ class MathGateway {
     if (ids.any((id) => id is! String || !uuid.hasMatch(id))) {
       throw const FormatException('PUBLIC_SERVICE_IDS');
     }
-    return ids.cast<String>().toSet();
+    if (data['exams'] is! List) {
+      throw const FormatException('PUBLIC_SERVICE_EXAMS');
+    }
+    final counts = <String, int>{};
+    final seen = <String>{};
+    for (final row in data['exams'] as List) {
+      if (row is! Map ||
+          row['examId'] is! String ||
+          !uuid.hasMatch(row['examId'] as String) ||
+          !ids.contains(row['universityId']) ||
+          row['questionIds'] is! List ||
+          (row['questionIds'] as List).isEmpty ||
+          (row['questionIds'] as List).any(
+            (id) => id is! String || !uuid.hasMatch(id),
+          ) ||
+          !seen.add(row['examId'] as String)) {
+        throw const FormatException('PUBLIC_SERVICE_EXAMS');
+      }
+      final university = row['universityId'] as String;
+      counts[university] = (counts[university] ?? 0) + 1;
+    }
+    if (ids.any((id) => !counts.containsKey(id))) {
+      throw const FormatException('PUBLIC_SERVICE_EMPTY_UNIVERSITY');
+    }
+    return counts;
   }
 
   Future<Set<String>> serviceExams() async {
@@ -314,9 +341,16 @@ final serviceExamIdsProvider = FutureProvider.autoDispose
       return gateway.serviceExams();
     });
 
-final publicServiceUniversitiesProvider = FutureProvider.autoDispose
-    .family<Set<String>, String>((ref, owner) async {
+final publicServiceExamCountsProvider = FutureProvider.autoDispose
+    .family<Map<String, int>, String>((ref, owner) async {
       final gateway = ref.watch(mathGatewayProvider(owner));
       if (gateway == null) throw StateError('LOGIN_REQUIRED');
-      return gateway.publicServiceUniversities();
+      return gateway.publicServiceExamCounts();
     });
+
+final publicServiceUniversitiesProvider = FutureProvider.autoDispose
+    .family<Set<String>, String>(
+      (ref, owner) async =>
+          (await ref.watch(publicServiceExamCountsProvider(owner).future)).keys
+              .toSet(),
+    );

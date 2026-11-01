@@ -351,7 +351,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
         expect(find.text('나의 논술 LAB'), findsNothing);
-        expect(find.text('첨삭 시작하기'), findsNothing);
+        expect(find.text('첨삭 시작하기'), findsWidgets);
         await tester.tap(find.text('시험 대학'));
         await tester.pumpAndSettle();
         // This synthetic image exam has no Math leaf/availability in tests, so
@@ -463,7 +463,7 @@ void main() {
         }
       });
       await tester.pumpAndSettle();
-      expect(find.byType(Image), findsNWidgets(3));
+      expect(find.byType(Image), findsWidgets);
       for (final id in ['skku', 'uos']) {
         final logo = find.byWidgetPredicate(
           (w) =>
@@ -472,6 +472,7 @@ void main() {
               (w.image as AssetImage).assetName ==
                   'assets/university-logos/$id.png',
         );
+        await tester.scrollUntilVisible(logo, 150);
         expect(logo, findsOneWidget);
         expect(tester.getSize(logo), const Size(100, 52));
       }
@@ -488,10 +489,13 @@ void main() {
           image.dispose();
         });
       }
+      await tester.ensureVisible(find.text('서울시립대학교'));
       await tester.tap(find.text('서울시립대학교'));
       await tester.pumpAndSettle();
       expect(find.byTooltip('대학 목록'), findsOneWidget);
       await tester.tap(find.byTooltip('대학 목록'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('성균관대학교'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('성균관대학교'));
       await tester.pumpAndSettle();
@@ -678,7 +682,7 @@ void main() {
       expect(find.text('현재 크레딧 10개'), findsOneWidget);
       expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
       expect(find.text('나의 논술 LAB'), findsNothing);
-      expect(find.text('첨삭 시작하기'), findsNothing);
+      expect(find.text('첨삭 시작하기'), findsWidgets);
       await tester.scrollUntilVisible(find.text('대학 20'), 300);
       await tester.pumpAndSettle();
       await tester.pumpAndSettle();

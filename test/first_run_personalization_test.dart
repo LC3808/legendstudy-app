@@ -11,39 +11,65 @@ import 'package:legendstudy_app/features/profile/data/intended_major_repository.
 import 'package:legendstudy_app/features/profile/presentation/intended_major_field.dart';
 
 class _FakeUniversityRepo implements UniversityRepository {
-  _FakeUniversityRepo({List<University>? catalog, List<InterestedUniversity>? interested})
-      : _catalog = catalog ?? const [],
-        _interested = [...(interested ?? const [])];
+  _FakeUniversityRepo({
+    List<University>? catalog,
+    List<InterestedUniversity>? interested,
+  }) : _catalog = catalog ?? const [],
+       _interested = [...(interested ?? const [])];
   final List<University> _catalog;
   final List<InterestedUniversity> _interested;
   int addCalls = 0;
   int removeCalls = 0;
+  int editCalls = 0;
 
   @override
-  Future<List<University>> searchCatalog(String query, {int limit = 20}) async =>
-      _catalog
-          .where((u) => u.name.contains(query.trim()))
-          .take(limit)
-          .toList();
+  Future<List<University>> searchCatalog(
+    String query, {
+    int limit = 20,
+  }) async =>
+      _catalog.where((u) => u.name.contains(query.trim())).take(limit).toList();
 
   @override
   Future<List<InterestedUniversity>> listInterested() async =>
       List.unmodifiable(_interested);
 
   @override
-  Future<void> addInterested(String universityId,
-      {required String source, int? priority}) async {
+  Future<void> addInterested(
+    String universityId, {
+    required String source,
+    int? priority,
+  }) async {
     addCalls++;
     final uni = _catalog.firstWhere(
       (u) => u.id == universityId,
       orElse: () => University(id: universityId, name: 'U-$universityId'),
     );
-    _interested.add(InterestedUniversity(
-      id: 'row-${_interested.length + 1}',
-      universityId: universityId,
-      name: uni.name,
+    _interested.add(
+      InterestedUniversity(
+        id: 'row-${_interested.length + 1}',
+        universityId: universityId,
+        name: uni.name,
+        priority: priority,
+      ),
+    );
+  }
+
+  @override
+  Future<void> editInterested(
+    String rowId, {
+    required String? division,
+    required int? priority,
+  }) async {
+    editCalls++;
+    final i = _interested.indexWhere((row) => row.id == rowId);
+    final row = _interested[i];
+    _interested[i] = InterestedUniversity(
+      id: row.id,
+      universityId: row.universityId,
+      name: row.name,
+      intendedDivision: division,
       priority: priority,
-    ));
+    );
   }
 
   @override
@@ -103,9 +129,67 @@ Future<String?> _majorFuture(ProviderContainer c) {
 }
 
 void main() {
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('per-university department and priority edit at 360px/$scale', (
+      t,
+    ) async {
+      t.view.physicalSize = const Size(360, 640);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      final repo = _FakeUniversityRepo(
+        interested: [
+          const InterestedUniversity(
+            id: 'row',
+            universityId: 'u',
+            name: '희망대학교',
+            priority: 1,
+          ),
+        ],
+      );
+      final c = _container(signedIn: true, uni: repo);
+      addTearDown(c.dispose);
+      await t.pumpWidget(
+        UncontrolledProviderScope(
+          container: c,
+          child: MaterialApp(
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
+              child: child!,
+            ),
+            home: const Scaffold(
+              body: SingleChildScrollView(
+                child: InterestedUniversitiesField(source: 'my'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.byTooltip('학과·우선순위 수정'));
+      await t.tap(find.byTooltip('학과·우선순위 수정'));
+      await t.pumpAndSettle();
+      await t.enterText(find.byType(TextFormField).first, '컴퓨터공학과');
+      await t.enterText(find.byType(TextFormField).last, '2');
+      await t.ensureVisible(find.text('저장'));
+      await t.tap(find.text('저장'));
+      await t.pumpAndSettle();
+      expect(repo.editCalls, 1);
+      final row = (await repo.listInterested()).single;
+      expect(row.intendedDivision, '컴퓨터공학과');
+      expect(row.priority, 2);
+      expect(t.takeException(), isNull);
+    });
+  }
+
   group('university models', () {
     test('University + InterestedUniversity parse embedded catalog', () {
-      final u = University.fromJson({'id': 'a', 'name': '레전드대학교', 'slug': 'legend'});
+      final u = University.fromJson({
+        'id': 'a',
+        'name': '레전드대학교',
+        'slug': 'legend',
+      });
       expect(u.name, '레전드대학교');
       final i = InterestedUniversity.fromJson({
         'id': 'row1',
@@ -143,9 +227,11 @@ void main() {
     test('interested list is empty when signed out', () async {
       final c = _container(
         signedIn: false,
-        uni: _FakeUniversityRepo(interested: [
-          const InterestedUniversity(id: 'r1', universityId: 'a', name: 'A'),
-        ]),
+        uni: _FakeUniversityRepo(
+          interested: [
+            const InterestedUniversity(id: 'r1', universityId: 'a', name: 'A'),
+          ],
+        ),
       );
       await c.read(authStateProvider.future);
       expect(await _interestedFuture(c), isEmpty);
@@ -167,13 +253,16 @@ void main() {
       expect(list.length, maxInterested); // capped at 5
       // duplicate is ignored
       await notifier.add('u1', source: 'onboarding');
-      expect(c.read(interestedUniversitiesProvider).value!.length, maxInterested);
+      expect(
+        c.read(interestedUniversitiesProvider).value!.length,
+        maxInterested,
+      );
     });
 
     test('remove deletes the selection row', () async {
-      final repo = _FakeUniversityRepo(catalog: [
-        const University(id: 'u1', name: '대학1'),
-      ]);
+      final repo = _FakeUniversityRepo(
+        catalog: [const University(id: 'u1', name: '대학1')],
+      );
       final c = _container(signedIn: true, uni: repo);
       await c.read(authStateProvider.future);
       await _interestedFuture(c);
@@ -201,11 +290,14 @@ void main() {
   group('UI', () {
     Widget host(Widget child, ProviderContainer c) => UncontrolledProviderScope(
       container: c,
-      child: MaterialApp(home: Scaffold(body: SingleChildScrollView(child: child))),
+      child: MaterialApp(
+        home: Scaffold(body: SingleChildScrollView(child: child)),
+      ),
     );
 
-    testWidgets('interested-universities field shows the cap hint at 360px',
-        (t) async {
+    testWidgets('interested-universities field shows the cap hint at 360px', (
+      t,
+    ) async {
       t.view.physicalSize = const Size(360, 720);
       t.view.devicePixelRatio = 1.0;
       addTearDown(t.view.resetPhysicalSize);
@@ -217,10 +309,7 @@ void main() {
       );
       await t.pumpAndSettle();
       expect(find.textContaining('최대 5개'), findsWidgets);
-      expect(
-        find.text('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.'),
-        findsOneWidget,
-      );
+      expect(find.text('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.'), findsOneWidget);
     });
 
     testWidgets('major field marks undecided when unset', (t) async {

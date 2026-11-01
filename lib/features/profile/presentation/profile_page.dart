@@ -142,7 +142,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           const SectionHeader('LAB'),
           const LsCard(padding: _myCardPadding, child: MyScoreSummary()),
-          const SectionHeader('희망대학·학과'),
+          const SectionHeader('관심 대학·학과'),
           const AspirationsCard(),
           const SectionHeader('나의 자료'),
           LsCard(

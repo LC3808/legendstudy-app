@@ -19,8 +19,12 @@ class AcademicStatusField extends ConsumerStatefulWidget {
     this.enabled = true,
     this.onSavingChanged,
     this.onResult,
+    this.onChanged,
+    this.draftStatus,
   });
   final bool enabled;
+  final ValueChanged<String?>? onChanged;
+  final String? draftStatus;
   final ValueChanged<bool>? onSavingChanged, onResult;
   @override
   ConsumerState<AcademicStatusField> createState() =>
@@ -63,7 +67,9 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
   @override
   Widget build(BuildContext context) {
     final profile = ref.watch(currentProfileProvider);
-    final current = profile.value?.academicStatus;
+    final current = widget.onChanged == null
+        ? profile.value?.academicStatus
+        : widget.draftStatus;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -83,7 +89,9 @@ class _AcademicStatusFieldState extends ConsumerState<AcademicStatusField> {
                   selected: current == entry.key,
                   onSelected: _saving || !widget.enabled
                       ? null
-                      : (_) => _save(entry.key, current),
+                      : (_) => widget.onChanged != null
+                            ? widget.onChanged!(entry.key)
+                            : _save(entry.key, current),
                 ),
             ],
           ),

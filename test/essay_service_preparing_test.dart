@@ -92,7 +92,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text(ready ? '첨삭 가능' : '서비스 준비 중'), findsOneWidget);
+      expect(find.text(ready ? '베타 첨삭 가능' : '첨삭 준비 중'), findsOneWidget);
       final card = find
           .ancestor(of: find.text('시험 대학'), matching: find.byType(InkWell))
           .first;

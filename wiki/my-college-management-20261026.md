@@ -96,3 +96,19 @@ WEB commits `fd209f9`, `a5ec76dd2e7dcebefc691b704e258a9d8a744533`, branch `codex
 ## 2026-11-01 — Owner device UX correction
 
 MY 희망대학·학과 진입은 `/my/aspirations`로 분리하고 기존 대학/학과 편집기를 재사용한다. `/my/school`은 고등학교·현재 상태·학년만 표시한다. 고등학교 검색 명시 및 저장된 학교 해제 확인을 추가한다. 기존 nickname/photo, 자기 프로필 권한, 저장 계약과 관심 대학 원장은 보존한다. [TASK14-B 구현·검증·build35·실기기 대기](final-store-rc-1.md#task14-b--scoped-backend-installation-and-owner-ux-defects).
+
+
+## TASK14-C Native profile and interests — 2026-11-02
+
+Extends the existing separated WEB/APP MY contract; reuses profiles and student_target_universities. No new collection, schema, RPC, analytics, or admission semantics. Profile school/status/grade edits are drafts until Save; cancel/search do not write. `/my/aspirations` lists saved targets first and edits existing intended_division/priority with owner scope. General intended-major legacy field is preserved separately; interest never means an application. Settings nickname/photo editor is explicitly labelled to distinguish it from school/status/grade.
+
+Preservation review (the seven questions from [longitudinal strategy](longitudinal-learning-admissions-data-strategy.md)):
+1. Existing row identities and timestamps remain; navigation and drafts create no history.
+2. No past school or target chronology is fabricated. Current schema lacks school-change history; recovery is a documented GAP.
+3. Existing current-state UPDATE semantics are reused for division/priority; new history storage needs separate design/approval. Search alone cannot overwrite state.
+4. Profile and targets use separate payloads; target edit/delete are constrained by id, user_id and interested status. Existing RLS and lifecycle gates preserved.
+5. Interest, intended major, actual application and outcome remain distinct; no conversion to application records.
+6. Own-account scope only, no telemetry of school/department/answer text, no added public access or sensitive collection.
+7. LAB availability/counts are derived from the shared verified service API and never persisted as user history; refresh/resume recomputes. Credit/History/Provider contracts unchanged.
+
+Production metadata inspection confirmed existing division/priority columns, target uniqueness, priority positive constraint and ownership RLS; no logo/location fields in university catalog, so no fabricated metadata is shown. Max-five/duplicate UI policy reused. Mock HTTP regression proves target CRUD cannot send school/status/grade and profile update cannot send target fields. 360px 1x/2x department editor validation passes. Actual device acceptance is tracked in [release record](final-store-rc-1.md#task14-c-my-profile-and-lab-availability--2026-11-02).

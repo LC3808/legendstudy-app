@@ -52,7 +52,7 @@ class SettingsPage extends ConsumerWidget {
               title: '프로필',
               children: [
                 LsListRow(
-                  title: '프로필 수정',
+                  title: '닉네임·사진 수정',
                   onTap: () => context.push('/my/edit'),
                 ),
               ],

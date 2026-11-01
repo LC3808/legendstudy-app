@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-B build37](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02): Owner36 지적 MY복귀/공지위치/Credit시각/베타문구 수정. APP1312PASS/7SKIP, signed37 양플랫폼; Android 내부테스트·iOS Owner TestFlight 제공, 실기기delta/심사 대기. 기존 daily1·160시험·공지2건 유지.
+[TASK14-C](final-store-rc-1.md#task14-c-my-profile-and-lab-availability--2026-11-02): 프로필 임시저장·관심 학과/순위·LAB 실제 시험 수/상태 갱신 구현, 검증/새 빌드 진행. 37번 MY·공지·Credit시각·베타 delta Owner 실기기PASS. Android/새 delta·심사 대기. 기존 정책 유지.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 

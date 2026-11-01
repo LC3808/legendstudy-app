@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import 'grade_page.dart';
+import '../../personal/personal_providers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,9 @@ class SchoolPage extends ConsumerStatefulWidget {
 class _SchoolPageState extends ConsumerState<SchoolPage> {
   final _input = TextEditingController();
   String _query = '';
-  bool _saving = false, _statusSaving = false, _statusFailed = false;
+  bool _saving = false;
+  bool _statusEdited = false;
+  String? _statusDraft;
   @override
   void dispose() {
     _input.dispose();
@@ -108,8 +111,8 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
       _saving = false;
       _edited = false;
       _completed = false;
-      _statusSaving = false;
-      _statusFailed = false;
+      _statusEdited = false;
+      _statusDraft = null;
     }
     final school = _edited
         ? _draft
@@ -125,9 +128,9 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           maxLength: 100,
           textInputAction: TextInputAction.search,
           decoration: const InputDecoration(
-            labelText: '재학 중인 고등학교',
+            labelText: '고등학교 검색',
             hintText: '고등학교 이름을 검색해 주세요',
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: Icon(Icons.school_outlined),
             counterText: '',
           ),
           onChanged: (value) {
@@ -150,7 +153,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             data: (schools) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (schools.isEmpty) const EmptyState('검색 결과가 없어요.'),
+                if (schools.isEmpty) const EmptyState('검색 결과가 없습니다.'),
                 if (schools.length >= 100)
                   const Text('결과가 많아요. 학교 이름을 더 자세히 입력해 주세요.'),
                 for (final result in schools)
@@ -219,27 +222,28 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           ),
         ],
         if (auth.value?.isAuthenticated == true) ...[
-          if (_edited && _draft != null)
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [SectionHeader('현재 상태'), Text('재학생 · 저장 전')],
-            )
-          else
-            AcademicStatusField(
-              key: ValueKey('academic-status:${auth.value?.userId}'),
-              enabled: !_saving && !_completed,
-              onSavingChanged: (value) => setState(() => _statusSaving = value),
-              onResult: (success) => setState(() => _statusFailed = !success),
-            ),
-          if (_statusFailed) const Text('현재 상태를 다시 저장한 뒤 완료해 주세요.'),
+          AcademicStatusField(
+            key: ValueKey('academic-status:${auth.value?.userId}'),
+            enabled: !_saving && !_completed,
+            draftStatus: _statusEdited
+                ? _statusDraft
+                : ref.watch(currentProfileProvider).value?.academicStatus,
+            onChanged: (value) => setState(() {
+              _statusEdited = true;
+              _statusDraft = value;
+            }),
+          ),
           GradePage(
             key: ValueKey(auth.value?.userId),
             enabled:
                 !selection.isLoading &&
                 !selection.hasError &&
                 !_completed &&
-                !_statusSaving &&
-                !_statusFailed,
+                !ref.watch(currentProfileProvider).isLoading &&
+                !ref.watch(currentProfileProvider).hasError,
+            statusDraft: () => _statusEdited
+                ? _statusDraft
+                : ref.read(currentProfileProvider).value?.academicStatus,
             beforeSave: _saveSchool,
             onSavingChanged: (value) => setState(() => _saving = value),
             onSaved: _finish,

@@ -13,11 +13,13 @@ class GradePage extends ConsumerStatefulWidget {
     this.onSaved,
     this.onSavingChanged,
     this.enabled = true,
+    this.statusDraft,
   });
   final Future<bool> Function()? beforeSave;
   final VoidCallback? onSaved;
   final ValueChanged<bool>? onSavingChanged;
   final bool enabled;
+  final String? Function()? statusDraft;
   @override
   ConsumerState<GradePage> createState() => _GradePageState();
 }
@@ -84,6 +86,7 @@ class _GradePageState extends ConsumerState<GradePage> {
     final id = ref.read(authStateProvider).value?.userId;
     if (saving || !widget.enabled || id == null || id != owner) return;
     final request = generation;
+    final status = widget.statusDraft?.call();
     setState(() {
       saving = true;
       error = null;
@@ -102,7 +105,12 @@ class _GradePageState extends ConsumerState<GradePage> {
             gradeLevel: selected,
             clearGrade: selected == null,
             // Selecting a school grade explicitly establishes current enrollment.
-            academicStatus: selected != null ? 'student' : null,
+            academicStatus: widget.statusDraft != null
+                ? status
+                : selected != null
+                ? 'student'
+                : null,
+            clearAcademicStatus: widget.statusDraft != null && status == null,
           );
       if (!mounted ||
           request != generation ||

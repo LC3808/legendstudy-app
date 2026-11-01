@@ -308,7 +308,7 @@ void main() {
     await tester.tap(find.text('학교 설정'));
     await tester.pumpAndSettle();
     expect(container.read(routerProvider).canPop(), isTrue);
-    expect(find.text('학교·학년 설정'), findsOneWidget);
+    expect(find.text('프로필 수정'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.text('로그인'), findsNothing);
   });

@@ -61,6 +61,13 @@ void main() {
               'version': 'essay-public-service-v1',
               'checked': true,
               'universityIds': ['33333333-3333-4333-8333-333333333333'],
+              'exams': [
+                {
+                  'examId': '11111111-1111-4111-8111-111111111111',
+                  'universityId': '33333333-3333-4333-8333-333333333333',
+                  'questionIds': ['22222222-2222-4222-8222-222222222222'],
+                },
+              ],
             }),
             200,
           );
@@ -82,6 +89,52 @@ void main() {
       failed.close();
     },
   );
+  test(
+    'service counts require approved nonempty question sets and unique exams',
+    () async {
+      const uni = '33333333-3333-4333-8333-333333333333';
+      final row = {
+        'examId': '11111111-1111-4111-8111-111111111111',
+        'universityId': uni,
+        'questionIds': ['22222222-2222-4222-8222-222222222222'],
+      };
+      for (final exams in <List<Map<String, Object>>>[
+        [],
+        [row, row],
+        [
+          {...row, 'questionIds': <String>[]},
+        ],
+        [row],
+      ]) {
+        final gateway = MathGateway(
+          client,
+          'fixture-a',
+          transport: MockClient(
+            (_) async => http.Response(
+              jsonEncode({
+                'version': 'essay-public-service-v1',
+                'checked': true,
+                'universityIds': [uni],
+                'exams': exams,
+              }),
+              200,
+            ),
+          ),
+        );
+        if (exams.length == 1 &&
+            (exams.first as Map)['questionIds'] == row['questionIds']) {
+          expect(await gateway.publicServiceExamCounts(), {uni: 1});
+        } else {
+          await expectLater(
+            gateway.publicServiceExamCounts(),
+            throwsFormatException,
+          );
+        }
+        gateway.close();
+      }
+    },
+  );
+
   test(
     'closed allowlist gate never loads catalog; account mismatch sends nothing',
     () async {

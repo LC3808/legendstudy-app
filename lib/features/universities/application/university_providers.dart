@@ -43,7 +43,8 @@ class InterestedUniversitiesController
     final repo = ref.read(universityRepositoryProvider);
     if (repo == null) return;
     if (!canAdd || contains(universityId)) return;
-    final nextPriority = _current.fold<int>(
+    final nextPriority =
+        _current.fold<int>(
           0,
           (max, u) => (u.priority ?? 0) > max ? (u.priority ?? 0) : max,
         ) +
@@ -53,6 +54,20 @@ class InterestedUniversitiesController
       source: source,
       priority: nextPriority,
     );
+    ref.invalidateSelf();
+    await future;
+  }
+
+  Future<void> edit(
+    String rowId, {
+    required String? division,
+    required int? priority,
+  }) async {
+    final repo = ref.read(universityRepositoryProvider);
+    if (repo == null || !_current.any((row) => row.id == rowId)) {
+      throw StateError('INTEREST_UNAVAILABLE');
+    }
+    await repo.editInterested(rowId, division: division, priority: priority);
     ref.invalidateSelf();
     await future;
   }

@@ -706,6 +706,30 @@ Builds: signed iOS1.0.1(37)/Android1.0.1 versionCode37, com.legendstudy.app, exi
 
 Android37 upload accepted; existing internal track release5 published2026-11-02 00:16KST, console explicitly “내부 테스터에게 제공됨”. Version37/min24/target36; supported devices unchanged. Native macOS file picker resolved extension file-URL limitation without changing browser security settings. Existing tester eligibility unchanged; opt-in https://play.google.com/apps/internaltest/4701319249543191162 . This is INTERNAL TEST availability, not Production review submission.
 
-iOS37 uploaded at2026-11-02 00:17KST and processing completed. ASC build709cad3b-dd2d-49a5-a73b-041bf8c67fd7 linked to existing Owner Internal QA(1tester); delta test notes saved and group(1) verified. Owner37delta and Android device validation remain NOT_TESTED. Production review submission not executed until release gates satisfied.
+iOS37 uploaded at2026-11-02 00:17KST and processing completed. ASC build709cad3b-dd2d-49a5-a73b-041bf8c67fd7 linked to existing Owner Internal QA(1tester); delta test notes saved and group(1) verified. Owner37delta was confirmed PASS (2026-11-02: “확인 완료. 이상 없음”) for logout/relogin→MY root, notice megaphone, Credit date+HH:mm, beta wording/buttons/quota. Android device validation remains NOT_TESTED. Production review submission not executed until release gates satisfied.
 
 Owner delta checklist: logout/relogin→MY root; notice icon beforegear; Credit grant/usage HH:mm; beta new title/buttons and daily allowance remains after hide; notice2records; WEB notice link. No new evaluation or purchase requested. Full Android/login/account-deletion/sync matrix remains pending, not silently passed. UI rollback requires next signed build using preserved source, not overwriting ledger or reusing an uploaded build number.
+
+
+## TASK14-C MY profile and LAB availability — 2026-11-02
+
+Owner attachment TASK14-C is the active P0 delta after build37. Build37 acceptance remains valid for its four requested cases; it is not acceptance of later code or Android. See [feature/preservation review](my-college-management-20261026.md#task14-c-native-profile-and-interests--2026-11-02).
+
+- Reuse Native routes `/my/school` and `/my/aspirations`: profile draft-only school/status/grade; independent interests, existing rows before search, per-university department/priority edit and confirmed removal. Nickname/photo remains separately identified.
+- Existing `public-service-status` response now provides APP per-university available-exam counts. `베타 첨삭 가능`/`첨삭 준비 중`, start CTA, disabled preparing cards, ready-first ordering; refresh button and app-resume refresh. Unknown/loading/error remain distinct. No catalog-membership-only availability.
+- Production read-only schema/RLS/trigger and preflight inspection: owner-scoped profiles/targets; existing target division/priority fields, unique target key; preflight validates active user, runtime policy, approved Provider binding and exact Package. Existing WEB also checks runtime enable/launch HOLD/public question scope. No SQL or Provider request applied.
+- School restoration GAP: no school-history table/trigger found in inspected current profile contracts. No guessed restoration, no profile bulk update. Existing backup is not presumed to identify the correct historical school.
+- WEB unchanged at `c492334a28657c1c7469d3249b7e1f4e46a58566`; existing target edits and public availability contract reused. Targeted WEB `my/data` + `public-service-status`: 25 PASS. No WEB deployment needed for this APP delta.
+
+| TASK14-C case | Evidence/status |
+|---|---|
+| A/B interests route, no school search | router widget regression PASS |
+| C high-school label | school widgets PASS |
+| D search/cancel/empty results preserve school | draft widget + no-write assertions PASS |
+| E/F interests add/edit/remove cannot touch profile; profile cannot touch targets | captured mock HTTP payloads and owner filters PASS; no live user mutation |
+| G logout/relogin MY root | build37 Owner device PASS; router regression PASS |
+| H/I available/preparing separation | widget + strict status parser PASS |
+| J/K/L ready navigation, preparing disabled, error distinct | source catalog/public service/preparing regressions PASS |
+| M APP/WEB same availability source | shared API code + 25 WEB contract tests PASS; new APP live sync/device delta NOT_TESTED |
+
+Analyze: 0 issues. Full Flutter suite: 1,317 PASS / 7 SKIP / 0 FAIL (`/tmp/task14c-full-test-final.log`); WEB targeted 25 PASS. Build artifacts recorded below after completion. New code requires a new signed build; uploaded37 is preserved. No new Provider/credit/payment flow or production review has been executed in this delta. Rollback: revert this APP delta and issue a higher build number; never overwrite user rows or reuse uploaded versionCodes.

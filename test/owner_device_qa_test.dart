@@ -71,15 +71,18 @@ void main() {
     expect(find.text('답안 보기'), findsOneWidget);
     expect(find.text('정답 보기'), findsNothing);
   });
-  testWidgets('school final save waits for status and failed status retry', (
+  testWidgets('school status remains draft; failed final save permits retry', (
     t,
   ) async {
     final repo = Saves()..fail = true;
     final pops = Pops();
     await mountEditor(t, const SchoolPage(), repo, pops);
-    expect(find.text('출처: 교육부·시도교육청 NEIS'), findsNothing);
     await t.ensureVisible(find.text('N수·검정고시 등'));
     await t.tap(find.text('N수·검정고시 등'));
+    await t.pump();
+    expect(repo.writes, 0);
+    await t.ensureVisible(find.text('저장'));
+    await t.tap(find.text('저장'));
     await t.pump();
     expect(
       t.widget<FilledButton>(find.byType(FilledButton).last).onPressed,
@@ -90,12 +93,9 @@ void main() {
     expect(pops.count, 0);
     expect(
       t.widget<FilledButton>(find.byType(FilledButton).last).onPressed,
-      isNull,
+      isNotNull,
     );
     repo.fail = false;
-    await t.tap(find.text('N수·검정고시 등'));
-    await t.pumpAndSettle();
-    await t.ensureVisible(find.text('저장'));
     await t.tap(find.text('저장'));
     await t.pumpAndSettle();
     expect(pops.count, 1);

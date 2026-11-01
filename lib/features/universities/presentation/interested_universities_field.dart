@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/supabase/supabase_providers.dart';
 import '../../../shared/widgets/shell_widgets.dart';
 import '../application/university_providers.dart';
 import '../domain/university_models.dart';
@@ -47,6 +48,7 @@ class _InterestedUniversitiesFieldState
       await ref
           .read(interestedUniversitiesProvider.notifier)
           .add(uni.id, source: widget.source);
+      _snack('관심 대학이 저장되었습니다.');
     } catch (_) {
       _snack('대학을 추가하지 못했어요. 다시 시도해 주세요.');
     } finally {
@@ -56,11 +58,115 @@ class _InterestedUniversitiesFieldState
 
   Future<void> _remove(String rowId) async {
     if (_busy) return;
+    final owner = ref.read(authStateProvider).value?.userId;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('관심 대학을 삭제할까요?'),
+        content: const Text('학교·현재 상태·학년 정보는 변경되지 않습니다.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('삭제'),
+          ),
+        ],
+      ),
+    );
+    if (!mounted ||
+        confirmed != true ||
+        owner != ref.read(authStateProvider).value?.userId) {
+      return;
+    }
     setState(() => _busy = true);
     try {
       await ref.read(interestedUniversitiesProvider.notifier).remove(rowId);
+      _snack('관심 대학이 저장되었습니다.');
     } catch (_) {
       _snack('대학을 제거하지 못했어요. 다시 시도해 주세요.');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _edit(InterestedUniversity row) async {
+    if (_busy) return;
+    final owner = ref.read(authStateProvider).value?.userId;
+    final division = TextEditingController(text: row.intendedDivision ?? '');
+    final priority = TextEditingController(
+      text: row.priority?.toString() ?? '',
+    );
+    final key = GlobalKey<FormState>();
+    final route = DialogRoute<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        scrollable: true,
+        title: Text(row.name),
+        content: Form(
+          key: key,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: division,
+                maxLength: 100,
+                decoration: const InputDecoration(labelText: '관심 학과 (선택)'),
+              ),
+              TextFormField(
+                controller: priority,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: '우선순위 (선택)',
+                  helperText: '작은 숫자부터 표시됩니다.',
+                ),
+                validator: (v) =>
+                    v == null ||
+                        v.trim().isEmpty ||
+                        (int.tryParse(v.trim()) != null &&
+                            int.parse(v.trim()) >= 1 &&
+                            int.parse(v.trim()) <= 32767)
+                    ? null
+                    : '1 이상 32767 이하의 숫자를 입력해 주세요.',
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () {
+              if (key.currentState!.validate()) Navigator.pop(context, true);
+            },
+            child: const Text('저장'),
+          ),
+        ],
+      ),
+    );
+    final accepted = await Navigator.of(context).push(route);
+    final divisionValue = division.text;
+    final priorityValue = int.tryParse(priority.text.trim());
+    await route.completed;
+    division.dispose();
+    priority.dispose();
+    if (!mounted ||
+        accepted != true ||
+        owner != ref.read(authStateProvider).value?.userId) {
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      await ref
+          .read(interestedUniversitiesProvider.notifier)
+          .edit(row.id, division: divisionValue, priority: priorityValue);
+      _snack('관심 대학이 저장되었습니다.');
+    } catch (_) {
+      _snack('관심 대학을 저장하지 못했어요. 다시 시도해 주세요.');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -86,14 +192,40 @@ class _InterestedUniversitiesFieldState
           style: AppTokens.caption.copyWith(color: AppTokens.textTertiary),
         ),
         const SizedBox(height: AppTokens.space8),
+        if (interested.isLoading) const LinearProgressIndicator(),
+        if (interested.hasError)
+          ErrorState(
+            message: '관심 대학을 불러오지 못했어요.',
+            onRetry: () => ref.invalidate(interestedUniversitiesProvider),
+          ),
+        if (!interested.isLoading && !interested.hasError && selected.isEmpty)
+          const EmptyState('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.')
+        else
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final uni in selected)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: AppTokens.space8),
+                  child: _SelectedUniversityCard(
+                    name: uni.displayLabel,
+                    priority: uni.priority,
+                    onEdit: _busy ? null : () => _edit(uni),
+                    onRemove: _busy ? null : () => _remove(uni.id),
+                  ),
+                ),
+            ],
+          ),
+        const SizedBox(height: AppTokens.space12),
         TextField(
           controller: _input,
-          enabled: !_busy && !atCap,
+          enabled:
+              !_busy && !atCap && !interested.isLoading && !interested.hasError,
           maxLength: 60,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             hintText: atCap ? '최대 $maxInterested개까지 선택했어요' : '대학 이름을 검색해 주세요',
-            prefixIcon: const Icon(Icons.search),
+            prefixIcon: const Icon(Icons.account_balance_outlined),
             counterText: '',
           ),
           onChanged: (v) {
@@ -118,14 +250,17 @@ class _InterestedUniversitiesFieldState
               final available = list
                   .where((u) => !selected.any((s) => s.universityId == u.id))
                   .toList();
-              if (list.isEmpty) return const EmptyState('검색 결과가 없어요.');
+              if (list.isEmpty) return const EmptyState('검색 결과가 없습니다.');
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   for (final uni in available)
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: _UniversityAvatar(name: uni.name, selected: false),
+                      leading: _UniversityAvatar(
+                        name: uni.name,
+                        selected: false,
+                      ),
                       title: Text(uni.name),
                       trailing: const Icon(Icons.add_circle_outline),
                       onTap: _busy ? null : () => _add(uni),
@@ -135,22 +270,6 @@ class _InterestedUniversitiesFieldState
             },
           ),
         const SizedBox(height: AppTokens.space12),
-        if (selected.isEmpty)
-          const EmptyState('아직 선택한 관심 대학이 없어요. 나중에 설정해도 괜찮아요.')
-        else
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              for (final uni in selected)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppTokens.space8),
-                  child: _SelectedUniversityCard(
-                    name: uni.displayLabel,
-                    onRemove: _busy ? null : () => _remove(uni.id),
-                  ),
-                ),
-            ],
-          ),
       ],
     );
   }
@@ -188,7 +307,14 @@ class _UniversityAvatar extends StatelessWidget {
 }
 
 class _SelectedUniversityCard extends StatelessWidget {
-  const _SelectedUniversityCard({required this.name, required this.onRemove});
+  const _SelectedUniversityCard({
+    required this.name,
+    required this.onRemove,
+    required this.onEdit,
+    this.priority,
+  });
+  final int? priority;
+  final VoidCallback? onEdit;
   final String name;
   final VoidCallback? onRemove;
   @override
@@ -220,6 +346,12 @@ class _SelectedUniversityCard extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
               ),
+            ),
+            if (priority != null) Text('$priority순위'),
+            IconButton(
+              onPressed: onEdit,
+              icon: const Icon(Icons.edit_outlined),
+              tooltip: '학과·우선순위 수정',
             ),
             IconButton(
               onPressed: onRemove,

@@ -294,14 +294,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'aspirations',
                     builder: (_, _) => const NestedPage(
-                      title: '희망대학·학과',
+                      title: '관심 대학·학과 설정',
                       child: AspirationsPage(),
                     ),
                   ),
                   GoRoute(
                     path: 'school',
                     builder: (_, _) => const NestedPage(
-                      title: '학교·학년 설정',
+                      title: '프로필 수정',
                       child: SchoolPage(),
                     ),
                   ),

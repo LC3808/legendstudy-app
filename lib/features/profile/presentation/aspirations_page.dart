@@ -11,7 +11,7 @@ class AspirationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const ShellPage(
     children: [
-      SectionHeader('희망 대학'),
+      SectionHeader('관심 대학·학과'),
       InterestedUniversitiesField(source: 'my'),
       SizedBox(height: 24),
       SectionHeader('희망 학과·관심 전공'),

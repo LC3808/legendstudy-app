@@ -154,7 +154,8 @@ class _SelectionSnapshot {
   final Map<String, Set<String>> included;
 }
 
-class _SourceSelectionState extends ConsumerState<_SourceSelection> {
+class _SourceSelectionState extends ConsumerState<_SourceSelection>
+    with WidgetsBindingObserver {
   late Future<SourceCatalog> data =
       widget.catalog ?? widget.loadCatalog(university);
   final included = <String, Set<String>>{};
@@ -169,6 +170,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
   void initState() {
     super.initState();
     restoreSelection();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ref.invalidate(publicServiceExamCountsProvider(widget.owner));
+      ref.invalidate(publicServiceUniversitiesProvider(widget.owner));
+      ref.invalidate(serviceExamIdsProvider(widget.owner));
+    }
   }
 
   void saveSelection() {
@@ -251,6 +262,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     saveSelection();
     catalogScroll.dispose();
     super.dispose();
@@ -317,6 +329,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
               )
             : null,
         actions: [
+          if (university == null)
+            IconButton(
+              tooltip: '서비스 상태 새로고침',
+              icon: const Icon(Icons.refresh),
+              onPressed: () {
+                ref.invalidate(publicServiceExamCountsProvider(widget.owner));
+                ref.invalidate(publicServiceUniversitiesProvider(widget.owner));
+                ref.invalidate(serviceExamIdsProvider(widget.owner));
+              },
+            ),
           if (university != null)
             TextButton.icon(
               label: const Text('나의 첨삭 기록'),
@@ -468,9 +490,14 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                 if (service.isLoading) const Text('서비스 확인 중'),
                 if (service.hasError)
                   TextButton(
-                    onPressed: () => ref.invalidate(
-                      publicServiceUniversitiesProvider(widget.owner),
-                    ),
+                    onPressed: () {
+                      ref.invalidate(
+                        publicServiceExamCountsProvider(widget.owner),
+                      );
+                      ref.invalidate(
+                        publicServiceUniversitiesProvider(widget.owner),
+                      );
+                    },
                     child: const Text('일시적으로 확인할 수 없습니다 · 다시 시도'),
                   ),
                 for (final u in orderedServiceUniversities(c, ready))
@@ -530,9 +557,24 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection> {
                                         : service.hasError
                                         ? '서비스 상태 확인 필요'
                                         : ready.contains(u['universityId'])
-                                        ? '첨삭 가능'
-                                        : '서비스 준비 중',
+                                        ? '베타 첨삭 가능'
+                                        : '첨삭 준비 중',
                                   ),
+                                  if (ready.contains(u['universityId'])) ...[
+                                    if (ref
+                                            .watch(
+                                              publicServiceExamCountsProvider(
+                                                widget.owner,
+                                              ),
+                                            )
+                                            .asData
+                                            ?.value[u['universityId']]
+                                        case final int count)
+                                      Text('이용 가능한 시험 $count개'),
+                                    const Text('첨삭 시작하기'),
+                                  ] else if (!service.isLoading &&
+                                      !service.hasError)
+                                    const Text('준비 중'),
                                 ],
                               ),
                             ),

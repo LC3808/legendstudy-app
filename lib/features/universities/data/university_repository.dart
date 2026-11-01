@@ -18,6 +18,11 @@ abstract class UniversityRepository {
     int? priority,
   });
   Future<void> removeInterested(String rowId);
+  Future<void> editInterested(
+    String rowId, {
+    required String? division,
+    required int? priority,
+  });
 }
 
 class SupabaseUniversityRepository implements UniversityRepository {
@@ -69,8 +74,40 @@ class SupabaseUniversityRepository implements UniversityRepository {
   }
 
   @override
+  Future<void> editInterested(
+    String rowId, {
+    required String? division,
+    required int? priority,
+  }) async {
+    final owner = _client.auth.currentUser?.id;
+    if (owner == null) throw const SignedOutException();
+    final value = division?.trim();
+    if ((value?.length ?? 0) > 100 ||
+        (priority != null && (priority < 1 || priority > 32767))) {
+      throw const FormatException('Invalid interest details');
+    }
+    await _client
+        .from('student_target_universities')
+        .update({
+          'intended_division': value == null || value.isEmpty ? null : value,
+          'priority': priority,
+        })
+        .eq('id', rowId)
+        .eq('user_id', owner)
+        .eq('status', 'interested');
+    if (_client.auth.currentUser?.id != owner) throw const SignedOutException();
+  }
+
+  @override
   Future<void> removeInterested(String rowId) async {
-    await _client.from('student_target_universities').delete().eq('id', rowId);
+    final owner = _client.auth.currentUser?.id;
+    if (owner == null) throw const SignedOutException();
+    await _client
+        .from('student_target_universities')
+        .delete()
+        .eq('id', rowId)
+        .eq('user_id', owner)
+        .eq('status', 'interested');
   }
 }
 

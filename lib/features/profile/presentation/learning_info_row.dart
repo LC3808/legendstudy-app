@@ -19,15 +19,22 @@ class LearningInfoRow extends ConsumerWidget {
     final grade = profile.value?.gradeLevel;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: const Text('학교·학년'),
+      title: const Text('내 프로필'),
       subtitle: loading
           ? const LinearProgressIndicator(semanticsLabel: '학교·학년 불러오는 중')
           : Text(
               failed
                   ? '학교·학년 정보를 불러오지 못했어요.'
-                  : name == null
-                  ? '학교를 설정해 주세요'
-                  : '$name${grade == null ? '' : ' · $grade학년'}',
+                  : [
+                      name ?? '학교를 설정해 주세요',
+                      switch (profile.value?.academicStatus) {
+                        'student' => '재학생',
+                        'retaker' => 'N수·검정고시 등',
+                        'other' => '기타',
+                        _ => '현재 상태 설정 안 함',
+                      },
+                      if (grade != null) '$grade학년',
+                    ].join(' · '),
             ),
       trailing: loading
           ? null
@@ -42,9 +49,9 @@ class LearningInfoRow extends ConsumerWidget {
               child: Text(
                 failed
                     ? '재시도'
-                    : name == null
-                    ? '설정'
-                    : '변경',
+                    : auth.value?.userId == null
+                    ? '학교 설정'
+                    : '프로필 수정',
               ),
             ),
     );
