@@ -1,11 +1,10 @@
 # Current Status
 
-[TASK14-B](final-store-rc-1.md#task14-b-addendum--read-only-onboarding-and-daily-beta-activation): 베타1/일·160시험 활성화, 공지2건, WEB 안내 배포. 시작/조회 원장 불변. APP36 양 플랫폼 빌드·iOS 업로드; 실기기/심사 대기. APP1311PASS/7SKIP·WEB1527PASS/4SKIP.
+[TASK14-B build37](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02): Owner36 지적 MY복귀/공지위치/Credit시각/베타문구 수정. APP1312PASS/7SKIP, signed37 양플랫폼; Android 내부테스트·iOS Owner TestFlight 제공, 실기기delta/심사 대기. 기존 daily1·160시험·공지2건 유지.
 
-[TASK12-B 공식 홈페이지](official-home-launch-task12.md): Owner 승인 운영 배포·PC/모바일 viewport 검증 완료(1b3063af, source442baf9). GA4 실수신·실기기 미검증.
+[TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home37497d5b, Copa출시배너37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
-## TASK11-G 관리자 운영 배포 — 2026-11-01
-PARTIAL: 운영 /admin/ 6그룹30메뉴 클릭·렌더링, 기존 원장 보고9RPC read-only 연결. 원래 학생 페이지/배포설정 보존. WEB1525PASS/4SKIP·TS/build PASS·lint0errors/5기존warnings. 베타/공지/피드백 쓰기SQL·GA/Firebase·성적/인사이트 승인 미완료. [배포 증적·메뉴별 상태·권한·롤백](admin-data-task11.md#task11-g-production-integration--2026-11-01). TASK11-F TEST 기록은 같은 문서의 이전 절 참조.
+[TASK11-H](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02): prototype콘솔/30메뉴/공지시각·검색정렬 운영119ffdb7. WEB1529PASS/4SKIP·TS/buildPASS·lint0errors/5기존warnings. 베타/공지RPC는14B기설치; 피드백쓰기·GA/Firebase·성적/인사이트승인 잔여. 운영환경/기존Functions·범위외자산 보존.
 
 [TASK10 통합 분석·GA/Firebase 미연결·자동 검증·잔여 설정](admin-integrated-analytics-task10.md). 실제 수신 미검증; 기존 구현 보존.
 

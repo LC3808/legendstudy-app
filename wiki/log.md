@@ -5259,3 +5259,10 @@ Owner 승인 범위의 Production beta-v2/notices 후보 설치·postcheck PASS,
 Entry/start changed to read-only status; existing claim moved to initial-submit quote flow. APP/WEB optional hide preference retains quota display. Additive status RPC isolated-tested and installed; no Provider or manual Credit writes. WEB1526PASS/4SKIP, APP1310PASS/7SKIP plus focused9PASS. [Canonical contract/rollback](essay-beta-daily-v2.md#task14-b-onboarding-addendum--2026-11-01). WEB scoped deployment and APP artifact follow-up recorded in final-store-rc-1.
 
 - 2026-11-01 TASK14-B addendum: readonly-status RPC 설치, 승인된 humanities160scope·daily1 campaign 활성화, 공지 활성화 문구 갱신, WEB LAB-only 배포·시작/숨김/원장불변 확인. APP36 서명빌드·iOS 업로드. [검증·남은 gates·롤백](final-store-rc-1.md#task14-b-addendum--read-only-onboarding-and-daily-beta-activation).
+
+
+## 2026-11-02 — Owner feedback, TASK11-H/12-B/13 live rollout
+
+Reused supplied prototype and existing official assets. Admin30routes/mobile drawer/dated searchable notices deployed119ffdb7; homeofficialbadges37497d5b; Copasinglebanner37255312. Live desktop/mobile and actualstore/policy pages verified; scoped asset/config preservation. [Admin evidence/rollback](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02), [home/company](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02). No new DB/Provider/Credit/payment operation.
+
+APP2298eac MYroot/noticeicon/KSTcreditdates/betacopy; AnalyzePASS,1312PASS/7SKIP; signed37bothplatforms. Android37existinginternaltrackpublished; iOS37upload+existingOwnergroup confirmed; deviceacceptance tracked in [build37](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02). WEB1529PASS/4SKIP,TS/buildPASS,lint0errors/5existingwarnings. No Production store review claim.

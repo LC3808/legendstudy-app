@@ -687,3 +687,25 @@ This section supersedes the earlier inactive-campaign/WEB-blocked/build35 notes.
 - NOT_TESTED: new36device delta, Android physical scenarios, actual Provider-backed beta submit/rewrite, full social-login/signup/deletion/sync matrix. Prior Owner34PASS remains scoped to reported existing flows. No actual Provider/payment invocation by this task.
 
 Final WEB check: Production canonical2e88fc75 verified successful; sourcef14e8ac. Existing non-LAB manifest hashes and Production settings exactly preserved. PC and390x844browser viewport dialog rendered; mobile dialog358px wide,16px inset,459px height, no content overflow. Guest start navigated to existing `/login/?next=%2Fessay-lab%2F`. Authenticated hide/reload retained daily1 and did not claim. These are browser checks, not iOS/Android device PASS. Proof `/tmp/task14b-beta-final-desktop.png`, `/tmp/task14b-beta-final-mobile.png`, `/tmp/task14b-beta-live-quota.png`. Build36IPA/AAB preserved privately under `development/legendstudy-private-backups/task14b-20261101/build36/`.
+
+
+## Owner device feedback build37 — 2026-11-02
+
+Owner36device feedback: profile/aspiration split and home notice N PASS; MY after relogin retained Settings, notice row placement, Credit timestamps and beta copy required fixes. Prior34reported PASS remains scoped; it does not establish all OAuth/signup/deletion/Android scenarios.
+
+APP source **2298eaceea5c15340cb1dc80eb1a8778b5f6962b**, branchcodex/beta-store-release-task14. MY tab always returns its root; notice megaphone moved immediately before Settings; usage/grants show KST date+HH:mm, expiry policy unchanged. Beta title/buttons/copy now match Owner request and end inclusiveNov10 23:59 (=exclusiveNov11 00:00KST). Daily quota and existing signup/purchased credit policies untouched. WEB copy deployed with admin follow-up119ffdb7/source91216e8; root/account notice links included.
+
+Modified APP files: lib/app/navigation_shell.dart; lib/features/profile/presentation/profile_page.dart; lib/features/credits/{credit_history,essay_beta_credit}.dart; tests credit_history,essay_beta_credit,day5_shell and newmy_tab_reset. Existing MY stack test changed to explicit Owner root-navigation requirement; actual router regression added.
+
+Automatic: Flutter Analyze0issues; full1312PASS/7SKIP/0FAIL. WEB1529PASS/4SKIP, TS/buildPASS, lint0errors/5existingwarnings. Existing DB policy/allocation functions unchanged; no new DB/Provider/payment/Credit action this follow-up. Production Chrome quota shows daily1 with new KST/end text; balance is read-only. IAB anonymous LAB availability requests failed while Chrome operational; anonymous LAB runtime is not marked PASS from that browser.
+
+Builds: signed iOS1.0.1(37)/Android1.0.1 versionCode37, com.legendstudy.app, existing Observation V1 Production config/signing retained. iOS codesign deep/strictPASS. Artifacts:
+- build/ios/ipa/legendstudy_app.ipa SHA256498dedb98b7c82083a2e38cfb3583792d618dae6e8a6b8b6a43430a867198377
+- build/app/outputs/bundle/release/app-release.aab SHA256b78c5013d520921b473a3d8caec1809f1a137db358fe5bd6adee9cafb20a603f
+- Private copies development/legendstudy-private-backups/task14b-20261101/build37;34–36preserved. Logs/tmp/task14b-build37-{ios,android}.log and owner-analyze/test-final logs.
+
+Android37 upload accepted; existing internal track release5 published2026-11-02 00:16KST, console explicitly “내부 테스터에게 제공됨”. Version37/min24/target36; supported devices unchanged. Native macOS file picker resolved extension file-URL limitation without changing browser security settings. Existing tester eligibility unchanged; opt-in https://play.google.com/apps/internaltest/4701319249543191162 . This is INTERNAL TEST availability, not Production review submission.
+
+iOS37 uploaded at2026-11-02 00:17KST and processing completed. ASC build709cad3b-dd2d-49a5-a73b-041bf8c67fd7 linked to existing Owner Internal QA(1tester); delta test notes saved and group(1) verified. Owner37delta and Android device validation remain NOT_TESTED. Production review submission not executed until release gates satisfied.
+
+Owner delta checklist: logout/relogin→MY root; notice icon beforegear; Credit grant/usage HH:mm; beta new title/buttons and daily allowance remains after hide; notice2records; WEB notice link. No new evaluation or purchase requested. Full Android/login/account-deletion/sync matrix remains pending, not silently passed. UI rollback requires next signed build using preserved source, not overwriting ledger or reusing an uploaded build number.

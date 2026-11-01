@@ -154,3 +154,17 @@ Cloudflare Pages → legendstudy-home → Deployments → 기존 production 4104
 1. https://home.legendstudy.com/ 에서 실제 출시 화면을 확인한다. 운영 배포 승인 대기 상태가 아니다.
 2. 실제 모바일/Safari 검수 및 GA4 실수신은 미검증으로 유지한다. 홈페이지 배포 차단 사유가 아니다.
 3. GA4 연결 시 실제 홈페이지 측정 ID와 기존 개인정보 설정 검토가 필요하다. 임의 ID/프로젝트 생성 없음.
+
+
+## TASK12-B official badges and TASK13 company banner — 2026-11-02
+
+At start home production1b3063af/source442baf9 contained text download buttons, not official image badges. Copa production4f0afe01/sourcef9ff33c had no launch banner. The requested files were not yet implemented/deployed; existing launch copy alone was insufficient. Owner explicitly authorized both production rollouts.
+
+- Home: reused official App Store SVG/Google Play artwork already in the company repository; four download anchors retain original store URLs/analytics attributes. Height48px and aspect ratio retained. Files official-home/site/index.html, style.css, assets/app-store-badge.svg, assets/google-play-badge-tight.png; README. WEB feature commit7da7871, deployment sourceccf0201. Projectlegendstudy-home production **37497d5b-4c02-4cd4-baa4-8fd5b8ded0ab**; https://home.legendstudy.com/ . Static15files, functionsfalse, settings unchanged.
+- Copa: branchcodex/legendstudy-launch-banner, source **3f0c355**, pushed. Filesindex.html, assets/site.css, README.md. One existing-brand launch banner above hero, existing app icon and https://home.legendstudy.com CTA; no Muselry section change. Projectcopacabana-homepage production **37255312-d737-4ef1-81b0-3322f43670a0**, https://www.copacabana.co.kr/ . Static225files, functionsfalse, settings unchanged.
+- Home staticbuild/verifyPASS; WEB TS/buildPASS, lint0errors/5existingwarnings,1529PASS/4SKIP. Copa3inlineJSsyntax/local-assets checksPASS; no package-based test suite exists. Actual production desktop/mobile390CSSpx screenshots: badges and banner load, no overflow. Mobile heading wrap adjusted before final deployment. Store destination pages each render 레전드스터디+; support/privacy/terms/refund actual destination headings verified. No purchase/install performed. GA4 actual reception and physical Safari/Android NOT_TESTED.
+- Deployment correction: initial home attempt from WEB repo root discovered unrelated Functions (ba7944f2). Immediately redeployed from static dist; final37497d5b is functionsfalse. Use final deployment only. No LAB function/config changes from this correction.
+- Rollback: home→1b3063af-ea6f-4189-9ac5-7ad478004974; Copa→4f0afe01-f878-45e1-a541-ed169184b22d using respective Pages rollback, then live CTA/layout checks. Original successful deployment IDs and settings/manifests privately backed up; rollback not needed/executed.
+- Proof: .codex/legendstudy-backups/task11h-12b-13/screenshots/{home-desktop,home-mobile,copa-desktop,copa-mobile}.png. Tistory/legendstudy.com banner placement was not changed (Owner said screenshot sent by mistake).
+
+Related admin rollout: [TASK11-H](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02). App P0 follow-up: [release record](final-store-rc-1.md#owner-device-feedback-build37--2026-11-02).

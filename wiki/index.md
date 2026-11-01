@@ -34,7 +34,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 스토어 빌드·업로드·TASK14 심사 차단: [릴리스 후보·검증·운영 격차·후속](final-store-rc-1.md#task14--beta-store-release-candidate-2026-11-01).
 
-공식 홈페이지 / home.legendstudy.com / 앱 출시·스토어 CTA: [TASK12/B 구현·운영 배포·검수·롤백](official-home-launch-task12.md).
+공식 홈페이지 / home.legendstudy.com / Copa 출시 배너 / 공식 스토어 배지: [TASK12/B 구현·운영 배포·검수·롤백](official-home-launch-task12.md).
 
 통합 분석 / GA4 두 속성 / 만족도 1~5 / 품질 검수: [TASK10 단계별 구현·연결·검증·미완료](admin-integrated-analytics-task10.md).
 

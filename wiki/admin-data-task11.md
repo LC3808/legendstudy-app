@@ -293,3 +293,57 @@ Cloudflare Pages `legendstudy-lab`에서 원래 production deployment `f9e0e83f-
 - 최종 CSS 수정 후 30/30 실제 메뉴 클릭→경로→제목 확인. 하단 Student360/공지/실패 메뉴 접근 복구. 모바일433px 하단 메뉴 클릭, document scrollWidth433 일치. Student360 기존 계정 상세 로딩/alert없음 확인.
 - 최종 로컬 증적 `/tmp/task11g-menu-final.json`, `/tmp/task11g-admin-desktop.png`, `/tmp/task11g-admin-mobile.png`. 원문 답안/계정정보는 Wiki에 복제하지 않음.
 - 운영 보고 연결은 완료, 전체 베타 운영 기능은 **PARTIAL**. 일반 사용자 운영 browser login·Safari·실기기 APP NOT_TESTED. Owner 검수 페이지 현재 계정 범위 내 결과만 조회; 다른 학생 전체 답안 접근 확장은 이번 작업에 없음.
+
+
+## TASK11-H production design follow-up — 2026-11-02
+
+Owner screenshots confirmed the old console spacing and notices without sequence/date. At start WEB f14e8ac had 6 groups/30 routes and restored notice RPCs, but the supplied admin-prototype.html design and dated table were not applied. This was a presentation/deployment gap, not missing notice records. Reused the prototype layout/colors and existing real APIs; no sample numbers from the prototype were copied.
+
+Implemented toolbar, 245px sidebar, mobile drawer/backdrop/Escape/navigation close, restrained KPI cards, and removal of the duplicated long body navigation. Existing routes/permissions remain. Notice list now shows sequence, Korean status, created/updated KST HH:mm, scoped search/sort with URL persistence. Common aggregate rank tables reuse the same component. Search is explicitly limited to server-returned rows (not a claim of global search); notice server pagination remains20. No student or answer search terms enter these table query parameters.
+
+Files (WEB): src/components/admin/{admin-surface,admin-dashboard-view,admin-notices,admin-data-page,admin-data-table}.tsx; src/app/admin/page.tsx; src/app/admin-ql.css; two table/notice test files; scripts/deployment/admin-notices-preserved.mjs. Commits08f6ed2, b17624e, final91216e852ecd9fb8e8f64b919da1a5982ce4c854. Reused existing read/write notice RPCs without executing writes.
+
+Production deployment: **119ffdb7-f1c2-4669-b5fa-b66df37e9bed**, projectlegendstudy-lab, https://lab.legendstudy.com/admin/. Earlier same-task deployment51e67134 preserved. All existing21Functions and environment/config preserved; final1170manifest entries; out-of-scope old asset changes0. Scope/admin/, /essay-lab/, /notices/, /account/, root and content-hashed assets only. WEB header notice link is now deployed. No DB/Worker/Provider/Credit/payment change in this follow-up.
+
+Validation: TypeScript/buildPASS; lint0errors/5existingwarnings; WEB1529PASS/4SKIP. Actual Owner Chrome30menu clicks→correctroute→renderedheading; mobile433CSSpx drawer/navigation and no horizontal document overflow. Notice2realrows show KST dates; search→reload restores query; chronological sort verified. Guest admin UI blocks with UNAUTHENTICATED. Full normal-user browser matrix not rerun; existing automated authorization tests passed. GA4 NOT_CONNECTED, score NOT_IMPLEMENTED, small-cohort suppression/EMPTY and beta-verification NOT_TESTED remain honest; this visual release does not complete those external dependencies. Search/pagination unit tests cover null/numeric sort, invalid query and URL restoration.
+
+Rollback: Pages legendstudy-lab → pretask2e88fc75-7ee4-4c10-b3c2-2752f86ce1d6 (or immediate51e67134) → rollback; verify canonical, login/notice/LAB reads. No DB restore. Private original/project/functions/manifest backups under .codex/legendstudy-backups/task11h-12b-13, follow-up baseline under table-followup. Do not commit environment backup JSON.
+
+Preservation review: (1) display existing timestamps, no new facts; (2) immutable Credit/History preserved; (3) no schema/UPDATE; (4) same auth identifiers; (5) Learning/Decision/Outcome unchanged; (6) existing role/cohort gates and minimum data; (7) unknown and zero distinguished, no fabricated statistics.
+
+### Menu click/render evidence
+
+The following PASS is UI click→route→render only, not all unavailable data sources being connected.
+
+| Menu | Production path | UI | Observed data state |
+|---|---|---|---|
+| 대시보드 | /admin/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 회원 | /admin/members/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 크레딧 | /admin/credit/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 결제 | /admin/payment/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 1:1 문의 | /admin/inquiries/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 첨삭 품질 | /ql/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 논술 자료 검수 | /admin/materials/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 통합 분석 대시보드 | /admin/data/overview/ | PASS |   - definition: 데이터 없음;   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성;   - definition: 전용 GA4 속성 확인 필요 · 보고서 미연결;     - listitem: 실시간 방문자·세션·페이지뷰 — 미연결;     - listitem: 신규·재방문자·참여 시간·기기·지역 — 미연결;     - listitem: 유입 경로·배너 실제 노출·클릭·전환 — 미연결 |
+| 방문자·유입 분석 | /admin/data/visitors/ | PASS |   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성;   - definition: 전용 GA4 속성 확인 필요 · 보고서 미연결;     - listitem: 실시간 방문자·세션·페이지뷰 — 미연결;     - listitem: 신규·재방문자·참여 시간·기기·지역 — 미연결;     - listitem: 유입 경로·배너 실제 노출·클릭·전환 — 미연결;     - listitem: 인기 페이지·콘텐츠 — 미연결 |
+| 사용자 행동 분석 | /admin/analytics/ | PASS |   - definition: 데이터 없음;   - definition: 데이터 없음;   - definition: 데이터 없음;   - table "데이터 없음":;     - caption: 데이터 없음;   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성 |
+| 가입·전환 분석 | /admin/data/conversion/ | PASS |   - definition: 데이터 없음;   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성;   - definition: 전용 GA4 속성 확인 필요 · 보고서 미연결;     - listitem: 실시간 방문자·세션·페이지뷰 — 미연결;     - listitem: 신규·재방문자·참여 시간·기기·지역 — 미연결;     - listitem: 유입 경로·배너 실제 노출·클릭·전환 — 미연결 |
+| 앱 설치 유입 분석 | /admin/data/installs/ | PASS |   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성;   - definition: 전용 GA4 속성 확인 필요 · 보고서 미연결;     - listitem: 실시간 방문자·세션·페이지뷰 — 미연결;     - listitem: 신규·재방문자·참여 시간·기기·지역 — 미연결;     - listitem: 유입 경로·배너 실제 노출·클릭·전환 — 미연결;     - listitem: 인기 페이지·콘텐츠 — 미연결 |
+| 학습·입시 종합 현황 | /admin/data/learning/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 대학 선호도 분석 | /admin/data/universities/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 인기 시험·학습자료 분석 | /admin/data/materials-data/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 공부 시간 분석 | /admin/data/study/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 성적·학습 분석 | /admin/data/scores/ | PASS |   - paragraph: 성적·학습 분석 — NOT_IMPLEMENTED |
+| 입시 지원 분석 | /admin/data/applications/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 학생 통합 분석 (Student 360) | /admin/data/students/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 개인화 인사이트 관리 | /admin/data/insights/ | PASS |   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - strong: 미집계 / 표본 부족;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다.;   - paragraph: EMPTY 또는 표본 부족 — 순위를 제공하지 않습니다. |
+| 논술 LAB 이용 현황 | /admin/data/essay-usage/ | PASS |   - definition: 데이터 없음;   - definition: 데이터 없음;   - table "데이터 없음":;     - caption: 데이터 없음;   - paragraph: GA4 보고서 데이터 연결이 필요합니다. 아래 지표는 미연결 상태이며 서버 학습 기록으로 대체하지 않습니다.;   - definition: 미연결 · 수집 비활성;   - definition: 전용 GA4 속성 확인 필요 · 보고서 미연결 |
+| 사용자 답안 샘플 검수 | /admin/data/samples/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 만족도·피드백 분석 | /admin/data/satisfaction/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 평가·비용 모니터링 | /admin/operations/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 베타 테스트 관리 | /admin/beta/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 베타 이용 현황 | /admin/beta/usage/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 베타 검증 결과 | /admin/data/verification/ | PASS |   - paragraph: 베타 검증 — NOT_TESTED |
+| 피드백·오류 신고 | /admin/essay-feedback/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 공지사항 관리 | /admin/notices/ | PASS | Existing source screen rendered; not an all-metric PASS |
+| 평가 실패·복구 내역 | /admin/beta/failures/ | PASS | Existing source screen rendered; not an all-metric PASS |
