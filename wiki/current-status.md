@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-C](final-store-rc-1.md#task14-c-my-profile-and-lab-availability--2026-11-02): 프로필 임시저장·관심 학과/순위·LAB 실제 시험 수/상태 갱신 구현, 검증/새 빌드 진행. 37번 MY·공지·Credit시각·베타 delta Owner 실기기PASS. Android/새 delta·심사 대기. 기존 정책 유지.
+[TASK14-C](final-store-rc-1.md#task14-c-build38--store-handoff--2026-11-02): 38 양OS 빌드PASS·iOS업로드완료. 브라우저연결로 내부그룹/Android업로드 차단; 광고ID선언·38실기기·심사 대기. Flutter1317PASS/7SKIP. 37 Owner deltaPASS 유지.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 

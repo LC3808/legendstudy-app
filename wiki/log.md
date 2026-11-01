@@ -5273,3 +5273,8 @@ Fresh production already contained four official images; old text display not re
 
 ## 2026-11-02 — TASK14-C profile safety / availability
 Owner37four-case device PASS recorded. Existing profile/targets and service API reused; draft status, department/priority editing and truthful exam counts/refresh. Production metadata read-only, no schema/data/provider/credit mutation. [Evidence and release gates](final-store-rc-1.md#task14-c-my-profile-and-lab-availability--2026-11-02).
+
+
+## 2026-11-02 — TASK14-C signed38 upload checkpoint
+
+Both signed38 artifacts built from80d135a, iOS processed successfully in ASC; Android upload/internal rollout blocked by browser file access/attachment. No review submission. Play ad-ID declaration remains unresolved; new38 device QA pending, Owner37 PASS preserved. Artifacts/hashes, exact build ID, limitations and rollback recorded in [release handoff](final-store-rc-1.md#task14-c-build38--store-handoff--2026-11-02). No runtime code or production data change in this checkpoint.
