@@ -5283,3 +5283,8 @@ Both signed38 artifacts built from80d135a, iOS processed successfully in ASC; An
 ## 2026-11-02 — TASK14-C refund navigation addenda
 
 APP75495ee settings simplified and pre-purchase policy links retained/added; next final binary required. WEB843f3a8 footer-only Production9b7a63ba verified, previous119ffdb7 rollback preserved. Terms/refund/pricing/support bodies unchanged; Owner acceptance pending. Analyze/87APP regressions and1529WEB tests pass; no ledger/DB changes. [Evidence and rollback](final-store-rc-1.md#task14-c-refund-navigation-addenda--2026-11-02).
+
+
+## 2026-11-02 — TASK14-F final candidate and November priorities
+
+Source freeze for39 includes settings refund changes; removes unnecessary transitive advertising-ID permissions while collection remains disabled. Analyze0/full1317PASS7SKIP. Actual ASC38/Play37-emptydraft checked; final builds/uploads/device acceptance still pending. Owner November strategy preserves beta cutoff and separates type development from production paid activation. [Release evidence](final-store-rc-1.md#task14-f-final-candidate--2026-11-02).

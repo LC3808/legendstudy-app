@@ -820,3 +820,8 @@ Owner 10/29 실기기 후속 지시로 위 10/29의 “페이지별 최신1개 �
 ## 2026-11-01 — Beta entry is read-only; allowance at submission
 
 Owner TASK14-B addendum: beta introduction/start must not grant or spend Credit. Start authenticates and reads availability; display dismissal changes only the modal preference. Existing server-owned daily limit, KST reset, 2026-11-11 00:00KST cutoff and signup/paid isolation remain. Reuse the existing daily allocator only in initial submission, preserving quote consent and idempotency. [Contract and preservation review](essay-beta-daily-v2.md#task14-b-onboarding-addendum--2026-11-01).
+
+
+## 2026-11-02 — November release and paid transition priorities
+
+Owner RELEASE STRATEGY UPDATE fixes the beta cutoff at **2026-11-11 00:00 KST**, with no extension. Preserve [daily beta contract](essay-beta-daily-v2.md) and [existing commerce/type boundaries](commerce-korea-20261026.md). Store review submission remains immediate P0 and must not wait for additional features. Humanities stability, commerce/social and mathematics development, paid Credit/payment validation and November11 paid transition preparation are parallel product priorities, not authorization to enable unverified types or production payments. Keep official university criteria and type-specific evaluation boundaries; unverified types display 준비 중. Enable verified types sequentially only under the applicable Owner production activation approval; preserve existing free/purchased Credit policies. Development completion and paid activation are separate gates. Owner target is verified paid types from November11 and expanded coverage before the stated November19 examination period; this records the Owner planning dates, not external calendar verification.

@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK14-C](final-store-rc-1.md#task14-c-refund-navigation-addenda--2026-11-02): APP설정 환불메뉴 제거·구매정책링크 소스통합(38미포함). WEB푸터 운영9b7a63ba·정책본문/URL 보존·브라우저검증, Owner검수대기. 38iOS업로드/Android업로드·광고ID·신규실기기·심사 잔여; 37PASS유지.
+[TASK14-F](final-store-rc-1.md#task14-f-final-candidate--2026-11-02): 최종39후보·환불설정통합·광고ID권한제거. Analyze/1317PASS·7SKIP. 37OwnerPASS보존;39빌드/업로드/실기기/심사 진행. 베타11/11 00KST고정·유형확장은출시와분리. WEB환불푸터9b7a63ba 유지.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
