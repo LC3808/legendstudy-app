@@ -26,8 +26,10 @@
 .lsapm-body{font-size:14px;line-height:1.6;color:#4A5568;margin:0 0 6px;letter-spacing:-.01em}
 .lsapm-body + .lsapm-body{margin-top:12px}
 .lsapm-cta{display:block;width:100%;margin-top:22px;border:0;border-radius:12px;background:#1A1D21;color:#fff;
-  font-size:16px;font-weight:800;letter-spacing:-.01em;padding:15px 16px;cursor:pointer;
-  text-decoration:none}
+  font-family:inherit;font-size:16px;font-weight:800;letter-spacing:-.01em;padding:15px 16px;cursor:pointer;
+  text-align:center;text-decoration:none;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+.lsapm-cta:focus{outline:none}
+.lsapm-cta:focus-visible{outline:2px solid #1A1D21;outline-offset:2px}
 .lsapm-cta:active{transform:translateY(1px);opacity:.92}
 .lsapm-snooze{display:block;width:100%;border:0;background:transparent;color:#8A94A6;
   font-size:13px;font-weight:600;padding:12px 8px 2px;cursor:pointer;letter-spacing:-.01em}
@@ -139,6 +141,7 @@
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-labelledby", "lsapm-brand");
     overlay.setAttribute("aria-describedby", "lsapm-desc");
+    overlay.setAttribute("tabindex", "-1");
     overlay.innerHTML =
       '<div class="lsapm-card">' +
         '<button type="button" class="lsapm-close" aria-label="닫기">×</button>' +
@@ -148,7 +151,7 @@
           '<p class="lsapm-body">모의고사·수능 기출부터<br>내신 준비, 논술 첨삭까지.</p>' +
           '<p class="lsapm-body">레전드스터디+에서<br>나만의 학습을 시작하세요.</p>' +
         '</div>' +
-        '<a class="lsapm-cta" href="#" rel="noopener">앱 다운로드하기 &rarr;</a>' +
+        '<button type="button" class="lsapm-cta">앱 다운로드하기 &rarr;</button>' +
         '<button type="button" class="lsapm-snooze">오늘은 그만 보기</button>' +
       '</div>';
 
@@ -168,8 +171,7 @@
     // reflow 후 페이드인
     void overlay.offsetWidth;
     overlay.classList.add("lsapm-on");
-    var cta = overlay.querySelector(".lsapm-cta");
-    if (cta) cta.focus();
+    overlay.focus();
     trapFocus();
     track("app_promo_impression", { platform: platform(), placement: "mobile_web" });
   }

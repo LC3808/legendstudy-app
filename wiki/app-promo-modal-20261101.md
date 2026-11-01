@@ -59,6 +59,7 @@ CTA "앱 다운로드하기 →" / 보조 "오늘은 그만 보기" / 닫기 "X"
 - 배경 스크롤 잠금(position:fixed + top offset) → 닫을 때 스크롤 위치 복원.
 - `role="dialog"` `aria-modal="true"` `aria-labelledby`/`aria-describedby`, 포커스 트랩, ESC 닫기, 닫은 뒤 이전 포커스 복원.
 - `prefers-reduced-motion` 존중, 애니메이션 최소(페이드/슬라이드 ~0.2s).
+- CTA는 `<button>`으로 구현(링크 `<a>`의 스킨 링크색·밑줄 오염 방지 — 이동은 JS `location.assign`). 모달 오픈 시 포커스는 CTA가 아닌 다이얼로그 컨테이너(tabindex=-1)에 둬 자동 포커스 외곽선(파란 링) 미노출.
 
 ## 8. 충돌/보존 검증(실측 2026-11-01)
 - 라이브 스캔: `lsapm` 클래스/ID 0건, 전역 `__lsAppPromoInit` 미존재, `ls_appmodal_*` 스토리지 키 미사용, 겹치는 fixed/sticky 오버레이 없음.
