@@ -32,16 +32,17 @@ legendstudy.com(**티스토리 스킨**) 모바일 방문자에게 앱 설치를
 | 항목 | 동작 |
 |---|---|
 | 노출 대상 | 모바일 웹 브라우저만 (PC·앱 내부 WebView 미노출) |
-| 노출 시점 | 진입 **6초 후**, 세션 1회 |
+| 노출 시점 | 진입 **5초 후** (세션 1회 제한 없음 — 새로고침/재접속마다 노출) |
 | 기기별 링크 | iOS → App Store, Android/기타 → Google Play (UA 자동 판별) |
-| `X` / 배경 / ESC | **24시간** 숨김 (`app_promo_dismiss`) |
+| `X` / 배경 / ESC | **지속 숨김 없음** — 닫아도 재접속/새로고침 시 다시 노출 (`app_promo_dismiss`) |
 | 오늘은 그만 보기 | **당일**(자정까지) 숨김 (`app_promo_snooze`) |
-| 앱 다운로드하기 | **30일** 숨김 후 스토어 이동 (`app_promo_click`) |
+| 앱 다운로드하기 | **15일** 숨김 후 스토어 이동 (`app_promo_click`) |
 | 미노출 상황 | PDF 뷰어 중 · 키보드 입력 중(입력 끝나면 1회 재시도) · 인앱 WebView |
-| 상태 저장 | `localStorage`(+세션은 `sessionStorage`, 실패 시 쿠키/메모리 폴백) |
+| 상태 저장 | `localStorage ls_appmodal_hide_until` (오늘그만/다운로드 숨김만 기록) |
 
-- 모든 상태 키는 `ls_appmodal_*` 전용 네임스페이스 → 기존 숨김 정책과 충돌 없음.
-- 스토리지 접근 실패해도 오류 없이 동작(try/catch), 동일 세션 반복 노출 방지(쿠키/메모리 폴백).
+- 상태 키는 `ls_appmodal_*` 전용 네임스페이스 → 기존 숨김 정책과 충돌 없음.
+- X/배경/ESC는 **숨김을 기록하지 않음** → 닫거나 아무것도 안 누르고 새로고침하면 재접속 시 5초 후 다시 노출.
+- 스토리지 접근 실패해도 오류 없이 동작(try/catch, 메모리 폴백). 숨김 기록 실패 시 노출 쪽으로 동작(과억제 방지).
 - GA4(`G-295EQHYTCK`) 미설정이어도 오류 없이 무음 처리.
 
 ## 3. 분석 이벤트 (GA4)
@@ -53,15 +54,16 @@ legendstudy.com(**티스토리 스킨**) 모바일 방문자에게 앱 설치를
 ## 4. 설정 변경 지점
 
 `legendstudy-app-promo-modal.html` 상단 `CFG` 객체:
-`delayMs`(노출 지연), `hideOnCloseMs`(X 숨김), `hideOnClickMs`(다운로드 숨김), `iosUrl`, `androidUrl`.
-스토어 URL은 **공식 URL 고정**(변경 금지 대상). 바꾸지 말 것.
+`delayMs`(노출 지연, 기본 5000), `hideOnClickMs`(다운로드 숨김, 기본 15일), `iosUrl`, `androidUrl`.
+X/배경/ESC는 지속 숨김이 없으므로 별도 설정 없음. 스토어 URL은 **공식 URL 고정**(변경 금지 대상). 바꾸지 말 것.
 
 ## 5. 검증 체크리스트
 
-- [ ] iPhone Safari / iPhone Chrome / Android Chrome / Samsung Internet: 6초 후 노출
+- [ ] iPhone Safari / iPhone Chrome / Android Chrome / Samsung Internet: **5초 후** 노출
 - [ ] iOS=App Store, Android=Google Play로 이동
-- [ ] X=24h / 오늘 그만보기=당일 / 다운로드=30일 재노출 안 됨
-- [ ] 페이지 이동(게시글→홈 등) 후 **같은 세션 재노출 안 됨**
+- [ ] X 닫기 / 배경 / ESC 후 **새로고침·재접속 시 다시 노출**(지속 숨김 없음)
+- [ ] 아무 버튼 안 누르고 새로고침 → **다시 노출**
+- [ ] 오늘 그만보기=당일(자정까지) / 다운로드=15일 동안 재노출 안 됨
 - [ ] PC Chrome / PC Safari: **미노출**
 - [ ] 기존 게시글·검색·카테고리·사이드바·인기글·홈 슬라이더·광고·PDF 다운로드·댓글·게시글 내부 배너 정상
 - [ ] 모달 열림 중 배경 스크롤 잠김, 닫으면 스크롤 위치 복원

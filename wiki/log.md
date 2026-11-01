@@ -309,10 +309,12 @@
   Owner가 붙여넣을 **드롭인 블록 1개** 제공. 산출물 `assets/marketing/promo-modal/`
   (`legendstudy-app-promo-modal.html` 코드 + `README.md` 적용 가이드), 명세
   `wiki/app-promo-modal-20261101.md`.
-- 동작: 모바일 전용(PC·인앱 WebView 미노출), 진입 6초 후 세션 1회, iOS→App Store /
-  Android→Google Play(공식 URL). 숨김 X=24h·오늘그만=당일·다운로드=30일(`ls_appmodal_*`
-  네임스페이스). PDF뷰어·키보드 입력 중 미노출, 배경 스크롤 잠금/복원, role=dialog·포커스
+- 동작(Owner 수정 반영): 모바일 전용(PC·인앱 WebView 미노출), 진입 **5초 후**, **세션 1회
+  제한 없음**(새로고침/재접속마다 노출). iOS→App Store / Android→Google Play(공식 URL).
+  숨김 X/배경/ESC=**지속 숨김 없음**(재접속 재노출)·오늘그만=당일(자정)·다운로드=**15일**
+  (`ls_appmodal_*`). PDF뷰어·키보드 입력 중 미노출, 배경 스크롤 잠금/복원, role=dialog·포커스
   트랩·ESC. GA4 신규 이벤트 `app_promo_impression/click/dismiss/snooze`(미설정 시 무오류).
+  ※ Owner 탑재본의 CTA `+` 구문오류(다운로드 버튼 NaN 소실)·누락 안내문구 복원.
 - 문구 Owner 승인(원문 유지) — "논술 첨삭은 지원 대학에 한해 제공됩니다."는 Codex가 개발 중인
   지원/미지원 대학 구분·순차 제공 정책 반영이라 유지(임의 변경 금지).
 - 검증: JS `node --check` PASS, 라이브 모바일 렌더 확인, 스킨 충돌 스캔 0건(`lsapm` 클래스/ID·
