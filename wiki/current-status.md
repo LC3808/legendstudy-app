@@ -1,5 +1,8 @@
 # Current Status
 
+## TASK11 관리자 데이터 연결 — 2026-11-01
+PARTIAL/HOLD: 별도 브랜치에서 30개 메뉴·기존 화면 재사용 및 학습 집계 RPC 후보. TEST만 적용, Owner 조회/일반 사용자 차단 검증. 성적·인사이트 승인 저장·GA4 실수신 미완료. [구현·검증·Preview·롤백](admin-data-task11.md). 운영 변경 없음.
+
 [TASK10 통합 분석 PARTIAL](admin-integrated-analytics-task10.md): 별도 브랜치, 기존 RPC WEB 연결·선택형 만족도 후보. GA4 기존 속성396674471 확인/LAB 미확인; WEB 안전한 GA bootstrap/수집 상태 구현·APP1306/WEB1509 테스트 PASS(제외 별도). 실제 GA/Firebase 설정·수신/서버 조회 대기. native 빌드·운영 미적용.
 
 [TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): TEST 관리자 6개 메뉴 연결·WEB 검증 완료. Analytics WEB/평가 Gateway 미완료; build33 보존.

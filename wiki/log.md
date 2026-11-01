@@ -5225,3 +5225,5 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 ## 2026-11-01 — TASK10 GA4 pre-build readiness
 
 기존31/14 계약 재사용, WEB opt-in/host·PII guard/manual pageview 및 관리자 수집/조회 상태 분리. APP analyze0,1306PASS/7SKIP; WEB TS/build PASS,lint0errors/5기존warnings,1509PASS/4SKIP. 실제 GA/Firebase 수신 및 reporting 미연결: PARTIAL/HOLD. 운영/DB/Provider/결제/native최종빌드 없음. [설정·증거·Owner 체크리스트·롤백](admin-integrated-analytics-task10.md#task10-ga4-integration--pre-build-readiness--2026-11-01).
+
+- 2026-11-01 TASK11: 관리자 메뉴·학습 읽기 집계·Student360 재사용, TEST 권한 검증. 운영 변경 없음. 전체 요구 PARTIAL/HOLD; [상세](admin-data-task11.md).

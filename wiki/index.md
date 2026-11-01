@@ -285,3 +285,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](essay-growth-history-ui-20261026.md).
 
 - [TASK09 공통 TEST / 비공개 Preview / 선행 스키마·Gateway 차단](essay-shared-test-task09-20261101.md) — TASK08 후속, PARTIAL/HOLD.
+
+- Admin analytics / 학습·입시 빅데이터 TASK11: [통합 현황·집계 정의·검수](admin-data-task11.md)
