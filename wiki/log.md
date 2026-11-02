@@ -5335,3 +5335,6 @@ Owner 신규 LAB/home ID를 기존 속성396674471에 연결하는 설정 후보
 
 ## 2026-11-02 — GA4 server authentication decision
 Owner EM유지, reader/Viewer설정 확인 전달. Data API 활성 콘솔확인. WIF현재기반 없음, 기존 JWT+Cloudflare Secret 권고·Owner JSON생성 절차 기록. 키/운영배포/실수신 없음. [상세](admin-integrated-analytics-task10.md#enhanced-measurement-and-server-authentication-decision--2026-11-02).
+
+## 2026-11-02 — GA4 credential and real report verification
+Owner JSON으로 기존 인증/실보고서200 확인. Cloudflare Production 신규2binding등록·기존43개/Preview/배포보존. 관리자25testsPASS; 실관리자운영화면/모달수신 미검증, 배포승인대기. [결과·범위·롤백](admin-integrated-analytics-task10.md#ga4-credential-and-real-report-verification--2026-11-02).
