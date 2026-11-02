@@ -23,8 +23,8 @@
 .lsapm-brand{display:inline-block;font-size:21px;font-weight:800;letter-spacing:-.02em;color:#192B49;line-height:1.3;margin:2px 0 14px}
 .lsapm-plus{font-size:.62em;font-weight:800;vertical-align:.42em;margin-left:1px;letter-spacing:0}
 .lsapm-tag{font-size:16px;font-weight:700;color:#192B49;margin:0 0 14px;letter-spacing:-.01em}
-.lsapm-feat{font-size:15px;line-height:1.6;color:#1E7A4D;font-weight:800;margin:0 0 14px;letter-spacing:-.01em}
-.lsapm-body{font-size:14px;line-height:1.6;color:#4A5568;margin:0 0 6px;letter-spacing:-.01em}
+.lsapm-feat{font-size:15px;line-height:1.6;color:#1E7A4D;font-weight:800;margin:0 0 14px;letter-spacing:-.01em;text-wrap:balance;word-break:keep-all}
+.lsapm-body{font-size:14px;line-height:1.6;color:#4A5568;margin:0 0 6px;letter-spacing:-.01em;word-break:keep-all}
 .lsapm-em{color:#192B49;font-weight:800}
 .lsapm-cta{display:block;width:100%;margin-top:22px;border:0;border-radius:12px;background:#1A1D21;color:#fff;
   font-family:inherit;font-size:16px;font-weight:800;letter-spacing:-.01em;padding:15px 16px;cursor:pointer;
@@ -48,11 +48,15 @@
   /* ===== 설정 ===== */
   var CFG = {
     delayMs: 5000,                              // 진입 5초 후 노출
+    maxPerSession: 3,                           // 세션(탭)당 최대 노출 횟수
     hideOnClickMs: 15 * 24 * 60 * 60 * 1000,    // 다운로드: 15일 숨김
     iosUrl: "https://apps.apple.com/us/app/%EB%A0%88%EC%A0%84%EB%93%9C%EC%8A%A4%ED%84%B0%EB%94%94/id6820826957",
     androidUrl: "https://play.google.com/store/apps/details?id=com.legendstudy.app",
-    KEY_HIDE: "ls_appmodal_hide_until"          // 숨김 만료 타임스탬프(오늘그만/다운로드만 기록)
+    KEY_HIDE: "ls_appmodal_hide_until",         // 숨김 만료 타임스탬프(오늘그만/다운로드만 기록)
+    KEY_COUNT: "ls_appmodal_count"              // 세션당 노출 횟수(sessionStorage)
   };
+  // 테스트용: URL에 ?lsapm=test (또는 ?promo=1) 붙이면 빈도·숨김 무시하고 매번 노출
+  var TEST = /[?&](lsapm|promo)=(test|always|1)/i.test(location.search || "");
   // 노출 정책: 세션 1회 제한 없음. 새로고침/재접속 시 숨김창이 없으면 5초 후 재노출.
   //   X/배경/ESC = 숨김 기록 안 함(재접속 재노출), 오늘그만 = 자정까지, 다운로드 = 15일.
 
@@ -60,6 +64,8 @@
   var mem = {};                                 // 스토리지 실패 시 메모리 폴백
   function lsGet(k){ try{ return window.localStorage.getItem(k); }catch(e){ return (k in mem)?mem[k]:null; } }
   function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
+  function ssGet(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return (k in mem)?mem[k]:null; } }
+  function ssSet(k,v){ try{ window.sessionStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
 
   /* ===== GA4 안전 전송 (미설정 시 조용히 무시) ===== */
   function track(name, params){
@@ -111,8 +117,14 @@
     var until = parseInt(lsGet(CFG.KEY_HIDE) || "0", 10);
     return !isNaN(until) && until > Date.now();
   }
+  function sessionCount(){ var n = parseInt(ssGet(CFG.KEY_COUNT) || "0", 10); return isNaN(n) ? 0 : n; }
+  function bumpCount(){ ssSet(CFG.KEY_COUNT, String(sessionCount() + 1)); }
   function eligibleToSchedule(){
-    return isMobile() && !isInAppWebView() && !alreadyHidden();
+    if (!isMobile() || isInAppWebView()) return false;
+    if (TEST) return true;                      // 테스트 URL: 빈도·숨김 무시하고 매번 노출
+    if (alreadyHidden()) return false;
+    if (sessionCount() >= CFG.maxPerSession) return false;  // 세션당 N회 제한
+    return true;
   }
 
   /* ===== 스크롤 잠금/복원 ===== */
@@ -149,7 +161,7 @@
         '<div class="lsapm-brand" id="lsapm-brand">레전드스터디<span class="lsapm-plus">+</span> 앱 출시!</div>' +
         '<p class="lsapm-tag">가능성을 좀 더 선명하게.</p>' +
         '<div id="lsapm-desc">' +
-          '<p class="lsapm-feat">모의고사·수능 기출부터<br>내신 준비, 논술 첨삭까지.</p>' +
+          '<p class="lsapm-feat">모의고사·수능 기출부터 내신 준비, 논술 첨삭까지.</p>' +
           '<p class="lsapm-body">레전드스터디+ 앱에서<br><span class="lsapm-em">나의 성공을 만들어가세요.</span></p>' +
         '</div>' +
         '<button type="button" class="lsapm-cta">앱 다운로드하기 &rarr;</button>' +
@@ -174,6 +186,7 @@
     overlay.classList.add("lsapm-on");
     overlay.focus();
     trapFocus();
+    bumpCount();                                 // 세션 노출 횟수 +1
     track("app_promo_impression", { platform: platform(), placement: "mobile_web" });
   }
 
