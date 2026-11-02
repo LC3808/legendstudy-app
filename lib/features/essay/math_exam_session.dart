@@ -13,6 +13,7 @@ import '../credits/credit_balance.dart';
 import 'answer_image.dart';
 import 'math_gateway.dart';
 import 'source_draft.dart';
+import 'source_catalog_page.dart' show essayWritingDraftKey;
 import 'shared_history.dart';
 
 Map<String, dynamic> parseMathSession(dynamic value) {
@@ -50,12 +51,14 @@ class MathExamSession extends ConsumerStatefulWidget {
     required this.exam,
     required this.selected,
     required this.leaves,
+    this.rewriteRun,
     super.key,
   });
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> selected;
   final Map<String, String> leaves;
+  final Map<String, dynamic>? rewriteRun;
   @override
   ConsumerState<MathExamSession> createState() => _MathExamSessionState();
 }
@@ -81,6 +84,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
   @override
   void initState() {
     super.initState();
+    parent = widget.rewriteRun?['id'] as String?;
     Future.microtask(() => work(load));
   }
 
@@ -118,9 +122,15 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
         .where(
           (r) =>
               r['exam_id'] == widget.exam['dbExamId'] &&
-              r['free_rewrite_available'] == true,
+              r['state'] == 'completed' &&
+              r['continuous_cycles_supported'] == true,
         )
         .toList();
+    final continued = (history['runs'] as List)
+        .map((r) => (r as Map)['previous_run_id'])
+        .whereType<String>()
+        .toSet();
+    parents.removeWhere((r) => continued.contains(r['run_id']));
     final saved = await store.loadDraft();
     pending = saved.body.isEmpty
         ? null
@@ -149,7 +159,10 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
     if (selected.isEmpty) return;
     final rows = <Map<String, dynamic>>[];
     for (final q in selected) {
-      final draft = SourceDraftGateway(widget.owner, q['key'] as String);
+      final draft = SourceDraftGateway(
+        widget.owner,
+        essayWritingDraftKey(q['key'] as String, widget.rewriteRun),
+      );
       final body = (await draft.loadDraft()).body;
       final images = await draft.loadImages();
       if (body.trim().isEmpty && images.isEmpty) throw StateError('EMPTY');
@@ -326,6 +339,13 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
       )) {
         return;
       }
+      final quote = parent == null
+          ? <String, dynamic>{'credits_required': 1}
+          : await gateway.session('math_session_quote', {'p_previous': parent});
+      if (quote is! Map || ![0, 1].contains(quote['credits_required'])) {
+        throw const FormatException('CHARGE_QUOTE_REQUIRED');
+      }
+      final credits = quote['credits_required'] as int;
       final missing = questions
           .where((q) => !widget.selected.contains(q['key']))
           .map((q) => q['label'])
@@ -336,7 +356,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
         builder: (c) => AlertDialog(
           title: Text(missing.isEmpty ? '시험 회차 첨삭' : '작성하지 않은 답안이 있습니다'),
           content: Text(
-            '${missing.isEmpty ? '' : '$missing 문항은 이번 첨삭에 포함되지 않습니다.\n'}이번 첨삭에는 ${parent == null ? 1 : 0} 크레딧이 사용됩니다.\n미제출 문항을 나중에 첨삭받으면 별도 회차로 1 크레딧이 사용됩니다.',
+            '${missing.isEmpty ? '' : '$missing 문항은 이번 첨삭에 포함되지 않습니다.\n'}이번 첨삭에는 $credits개의 이용권이 사용됩니다.\n미제출 문항을 나중에 첨삭받으면 별도 회차로 1 크레딧이 사용됩니다.',
           ),
           actions: [
             TextButton(
@@ -345,23 +365,25 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
             ),
             FilledButton(
               onPressed: () => Navigator.pop(c, true),
-              child: Text('${parent == null ? 1 : 0} 크레딧 사용하고 첨삭하기'),
+              child: Text(credits == 0 ? '무료 재첨삭하기' : '이용권 1개 사용하고 첨삭하기'),
             ),
           ],
         ),
       );
       if (yes != true || !current) return;
+      pending!['expectedCredits'] = credits;
       pending!['submitted'] = true;
       await persist();
     }
     if (pending!['runId'] == null) {
-      final id = await gateway.session('math_session_submit', {
+      final id = await gateway.session('math_session_continue', {
         'p_exam': widget.exam['dbExamId'],
         'p_key': pending!['key'],
         'p_attempts': selected
             .map((q) => (pending!['attempts'] as Map)[q['key']])
             .toList(),
-        'p_parent': parent,
+        'p_previous': parent,
+        'p_expected_credits': pending!['expectedCredits'],
       });
       if (id is! String) throw const FormatException('RUN');
       pending!['runId'] = id;
@@ -402,7 +424,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
                 DropdownMenuItem(
                   value: p['run_id'] as String,
                   child: Text(
-                    '무료 재첨삭 · ${(p['created_at'] as String).substring(0, 10)}',
+                    '${(p['next_quote'] as Map?)?['credits_required'] == 0 ? '무료 재첨삭' : '다음 첨삭 · 이용권 1개'} · ${(p['created_at'] as String).substring(0, 10)}',
                   ),
                 ),
             ],
@@ -456,7 +478,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
             child: Text(
               pending!['submitted'] == true
                   ? '같은 회차 처리 확인'
-                  : '논술 첨삭하기 · ${parent == null ? 1 : 0} 크레딧',
+                  : '논술 첨삭하기 · 이용권 확인',
             ),
           ),
         if (accepted != null) ...[

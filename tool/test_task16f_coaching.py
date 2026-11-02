@@ -2,7 +2,7 @@
 """Disposable Unix-only PG17. Existing physical Math contracts + candidate projection/bypass checks.
 No network DSN, Provider, production account or real student writes.
 """
-import json,copy
+import json,copy,os
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 ns={'__file__':str(R/'tool/test_math_learning.py'),'__name__':'task16f_fixture'}
@@ -13,7 +13,7 @@ def cases(c,rpc,new,scalar,A,B,OP,ev,at,cl,out,p,leaf,pr,profile,sock):
  prior=base(c,rpc,new,scalar,A,B,OP,ev,at,cl,out,p,leaf,pr,profile,sock)
  with ns['psycopg'].connect(host=str(sock),user='supabase_admin',dbname='postgres',autocommit=True) as admin:
   m.o.execute_as_production(c,admin,(R/'supabase/migrations/20261002000300_math_learning_runtime.sql').read_text())
-  m.o.execute_as_production(c,admin,(candidate/'001_coaching.sql').read_text())
+  m.o.execute_as_production(c,admin,((R/'supabase/candidates/task16g_learning_loop/coaching.test.sql') if os.getenv('TASK16G_HOSTED_COACHING')=='1' else (candidate/'001_coaching.sql')).read_text())
   m.o.execute_as_production(c,admin,(candidate/'002_disclosure_boundary.sql').read_text())
  checks=[]
  def ok(label,condition):assert condition,label;checks.append(label)
@@ -55,6 +55,9 @@ def cases(c,rpc,new,scalar,A,B,OP,ev,at,cl,out,p,leaf,pr,profile,sock):
  ok('reveal_idempotent',scalar('select count(*) from math_private.coaching_disclosures where evaluation_id=%s',(eid,))==1)
  ok('history_same_lineage',call('history',{'evaluation_id':eid})['lineage_id']==revealed['lineage_id'])
  ok('credit_ledger_unchanged',before==scalar('select jsonb_agg(to_jsonb(t) order by id) from public.credit_transactions t'))
+ if os.getenv('TASK16G_HOSTED_COACHING')=='1':
+  from task16g_mixed_checks import verify
+  verify(c,rpc,new,scalar,A,B,ns,m,sock,R)
  with ns['psycopg'].connect(host=str(sock),user='supabase_admin',dbname='postgres',autocommit=True) as admin:
   m.o.execute_as_production(c,admin,(candidate/'rollback.sql').read_text())
  ok('rollback_preserves_disclosure_event',scalar('select count(*) from math_private.coaching_disclosures where evaluation_id=%s',(eid,))==1)

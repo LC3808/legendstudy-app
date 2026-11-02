@@ -27,7 +27,7 @@ class RoundGateway extends MathGateway {
     if (name == 'math_session_history') {
       return {'version': 'math-session-history-v1', 'runs': <dynamic>[]};
     }
-    if (name == 'math_session_submit') {
+    if (name == 'math_session_continue') {
       submissions.add(params);
       if (lose) {
         lose = false;
@@ -150,13 +150,15 @@ void main() {
       await t.tap(find.text('저장한 답안 입력 확인 · 0 크레딧'));
       await t.pumpAndSettle();
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('논술 첨삭하기 · 1 크레딧'));
+      await t.tap(find.text('논술 첨삭하기 · 이용권 확인'));
       await t.pumpAndSettle();
       expect(find.text('작성하지 않은 답안이 있습니다'), findsOneWidget);
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('1 크레딧 사용하고 첨삭하기'));
+      await t.tap(find.text('이용권 1개 사용하고 첨삭하기'));
       await t.pumpAndSettle();
       expect(fake.submissions, hasLength(1));
+      expect(fake.submissions.single['p_expected_credits'], 1);
+      expect(fake.submissions.single['p_previous'], isNull);
       await t.pumpWidget(const SizedBox());
       await t.pumpAndSettle();
       await mount();

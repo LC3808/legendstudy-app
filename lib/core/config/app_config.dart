@@ -6,6 +6,7 @@ class AppConfig {
     this.environment = 'development',
     this.supabaseUrl = '',
     this.supabasePublishableKey = '',
+    this.testEssayApiOrigin = '',
     this.recoveryRedirectUrl = '',
     this.signupRedirectUrl = '',
     this.googleServerClientId = '',
@@ -22,6 +23,7 @@ class AppConfig {
     environment: String.fromEnvironment('APP_ENV', defaultValue: 'development'),
     supabaseUrl: String.fromEnvironment('SUPABASE_URL'),
     supabasePublishableKey: String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY'),
+    testEssayApiOrigin: String.fromEnvironment('TEST_ESSAY_API_ORIGIN'),
     // Empty means "not configured": Supabase then uses the project Site URL.
     // The production recovery redirect is a pending Owner configuration, so no
     // URL is invented here. See wiki/auth-recovery.md.
@@ -51,10 +53,14 @@ class AppConfig {
   );
   final String privacyUrl, termsUrl, refundUrl;
   final bool googleOAuthEnabled, appleOAuthEnabled, kakaoOAuthEnabled;
-  // No TEST Cloudflare essay gateway is configured in this candidate. Fail closed rather
-  // than sending a TEST session to Production; Supabase reads use their client.
+  // TEST must opt in to the dedicated gateway AND matching isolated database.
+  // Never send a TEST Auth session to Production.
   String get essayApiOrigin {
     if (environment == 'test') {
+      if (testEssayApiOrigin == 'https://legendstudy-task16b.pages.dev' &&
+          supabaseUrl == 'https://kpqbedylxlyntrrfybpn.supabase.co') {
+        return testEssayApiOrigin;
+      }
       throw StateError('TEST_ESSAY_BACKEND_UNCONFIGURED');
     }
     return 'https://lab.legendstudy.com';
@@ -63,6 +69,7 @@ class AppConfig {
   final String environment;
   final String supabaseUrl;
   final String supabasePublishableKey;
+  final String testEssayApiOrigin;
 
   /// Empty until the Owner registers a redirect URL in the Supabase dashboard.
   final String recoveryRedirectUrl;

@@ -813,3 +813,8 @@ Owner 확정: 높은 인식 신뢰도는 원문 일치 보장이 아니다. UNCE
 ## 2026-11-02 — TASK16-F Native Academic Purple / 공통 공개 계약
 
 [TASK16-C/E 결정](task16e-recognition-disclosure-p0-20261102.md)을 계승한다. Owner 최종 명세는 Flutter Native 수학 화면에 Academic Purple을 적용하며 WEB UI는 별도 작업이다. 최대 5개 실제 개선 과제, 기본 개념 탭, 학생 확인과 명시적 전체 풀이 공개를 제공한다. 임의 점수/완성도는 금지한다. 공개 제어는 UI뿐 아니라 WEB/APP 공통 서버 응답에 적용해야 한다. 이용권 1개+무료 1회 반복, 기존 14일/베타 종료 정책을 유지하되 운영 금융 로직 변경은 별도 승인한다. 기존 History/엔진 재사용, 별도 worktree, APP1.0.1(41) 및 운영 보호. [구현·후보·남은 검증](task16f-native-math-ux-20261102.md).
+
+
+## 2026-11-02 — TASK16-G 디자인 PASS / 학습 루프 통합
+
+Owner가 [TASK16-F Native UI/UX](task16f-native-math-ux-20261102.md)를 PASS 처리했다. 현재 Academic Purple 화면을 유지하고 디자인 개편하지 않는다. 서버 공개 제어·반복 1유료+1무료·같은 History·시험 단위 차감·실제 TEST 제출을 [TASK16-G](task16g-learning-loop-20261102.md)에서 통합한다. 무료는 각 유료 사이클 완료 후 14일/기존 베타 종료 제한, 중복 차감 방지. 운영 DB/Credit/Ledger/결제/릴리스 적용은 별도 승인이다.

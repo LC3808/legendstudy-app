@@ -1763,6 +1763,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
         exam: exam,
         selected: included,
         leaves: leaves,
+        rewriteRun: rewriteRun,
       );
     }
     return _ExamSubmit(

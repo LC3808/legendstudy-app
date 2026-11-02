@@ -1,5 +1,7 @@
 # TASK16-F — Native 수리논술 UX / Academic Purple
 
+Owner TASK16-G 결정: 모바일 UI/UX PASS, 추가 디자인 개편 없음. 전체 서비스/운영 승인은 아님. [후속 통합](task16g-learning-loop-20261102.md).
+
 2026-11-02. **Native 구현·로컬 회귀/실기기 검수 빌드 제공. 서비스 전체 완료 아님. 운영 HOLD.**
 
 ## 근거와 작업 경계

@@ -95,6 +95,36 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
         if (mounted) _refresh();
         return;
       }
+      if (row.exam) {
+        final parts = (e['id'] as String).split('/');
+        final runs = await SharedEssayHistory(
+          client,
+          owner,
+        ).examRuns(parts.first);
+        if (!mounted || ref.read(authStateProvider).value?.userId != owner) {
+          return;
+        }
+        if (runs.length != 1) throw StateError('RUN_NOT_FOUND');
+        final q =
+            evaluationList(evaluationObject(runs.single['result'])['questions'])
+                .map(evaluationObject)
+                .where((q) => q['questionId'] == parts.last)
+                .firstOrNull;
+        final contract = evaluationObject(q?['evaluation'])['contract_version'];
+        if (contract == 'math-coaching-v1' || contract == 'math-eval-v1') {
+          await Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => MathCoachingPage(
+                evaluationId: parts.last,
+                runId: parts.first,
+                questionId: parts.last,
+              ),
+            ),
+          );
+          if (mounted) _refresh();
+          return;
+        }
+      }
       final result = await SharedEssayHistory(
         client,
         owner,

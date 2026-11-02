@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-G / Math 학습 루프: [서버 공개·반복 사이클·TEST 실제 검증·미완료](task16g-learning-loop-20261102.md).
+
 TASK16-F / Flutter 수리논술 UX: [Native 구현·실기기·공통 계약 후보·검증·차단](task16f-native-math-ux-20261102.md).
 
 TASK16-E: [손글씨·정답 공개 P0 수정/검증/잔여 차단](task16e-recognition-disclosure-p0-20261102.md).

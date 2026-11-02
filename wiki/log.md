@@ -5074,3 +5074,9 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 ## 2026-11-02 — TASK16-C 수학 인식·스캐폴딩 PARTIAL
 
 건국 합성사진/재첨삭·한양 계산오류 성공 재사용. WEB512e06f/Nativea9921bb 수식·원문·불확실확인·힌트/접힌참고풀이 연결, Previewa591fefb. 신규 정답·개념오류 Provider2회PASS/33,383tokens, 실제 손글씨·전체 학습E2E 미완료. WEB1550+영향24/Native29+신규2+최종영향24검사PASS, 운영/DB/Credit변경0. [범위·증거·차단](task16c-math-recognition-scaffolding-20261102.md).
+
+## 2026-11-03 TASK16-G 진행
+
+[TASK16-G](task16g-learning-loop-20261102.md): 격리 TEST 서버 공개 제어/반복 회차 설치. 한양2024 Q1/Q2 최초·무료 실제 AI 완료, 원장1→0·공개 History 확인. 3회차 저장결과 재생으로1차감, 다음 무료 견적 검증. 저장 계약/timeout 및 TEST Secret 설정 사고 복구. Native/WEB 화면 통합 검수 중, 운영 HOLD.
+
+TASK16-G Owner 접속 코드 전달 누락 정정: 기존 TASK16-B 로컬 보관 코드/현재 gate 일치 검증, 안전한 파일 경로·2단계 접속 안내. 새 코드·인증 설정 변경 없음.

@@ -53,7 +53,20 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
         ],
       ),
     );
-    if (confirmed == true) await widget.onRewrite(!snapshot.free);
+    if (confirmed != true || !mounted) return;
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await widget.onRewrite(!snapshot.free);
+    } catch (_) {
+      if (mounted) {
+        setState(() => error = '수정 답안을 열지 못했어요. 기존 기록은 보존됩니다. 다시 시도해 주세요.');
+      }
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
   }
 
   Future<void> reveal() async {

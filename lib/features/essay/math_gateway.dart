@@ -108,12 +108,17 @@ class MathGateway {
     Map<String, dynamic> payload,
   ) async {
     checkOwner();
-    if (!['math_input', 'math_learning', 'math_coaching'].contains(fn)) {
+    if (![
+      'math_input',
+      'math_learning',
+      'math_coaching',
+      'essay_math_coaching',
+    ].contains(fn)) {
       throw ArgumentError('RPC');
     }
     final dto = fn == 'math_input'
         ? 'math-input-v1'
-        : fn == 'math_coaching'
+        : (fn == 'math_coaching' || fn == 'essay_math_coaching')
         ? 'math-coaching-v1'
         : 'math-learning-v1';
     final value = await client
@@ -142,6 +147,8 @@ class MathGateway {
     checkOwner();
     if (!{
       'math_session_submit',
+      'math_session_quote',
+      'math_session_continue',
       'math_session_read',
       'math_session_history',
       'math_session_retry',
