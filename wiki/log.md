@@ -5313,3 +5313,8 @@ Owner-approved five NEIS-verified display-cache inserts; Production unresolved5�
 ## 2026-11-02 — TASK18 build41 internal delivery
 
 Owner-authorized39 config recovery: signed41, boolean-only embedded config/signature verification, Analyze0/auth36PASS. Transporter13:06KST delivered; ASC Owner Internal QA41 “테스트 중” verified. No auth code/Production changes or review resubmission. [Evidence](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02).
+
+
+## 2026-11-02 — Build41 Owner login PASS
+
+Owner confirms all four login methods PASS on41; email/Apple/Google/Kakao acceptance recorded, resolving reported login blocker. No additional device/feature PASS inferred and no review resubmission performed. [Acceptance](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02).

@@ -2,7 +2,7 @@
 
 [관리자 학교명](admin-member-directory.md): Owner승인 NEIS캐시5건반영·미해결0. 프로필보존; 새학교 자동갱신은미구현.
 
-[TASK18 41내부배포](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02):39설정복원1.0.1(41)서명·업로드·Owner Internal QA테스트중확인.Analyze0/auth36PASS.로그인코드/Auth불변;Owner로그인검수대기·심사미재제출.
+[TASK18 41내부배포](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02):39설정복원1.0.1(41)서명·업로드·Owner Internal QA테스트중확인.Analyze0/auth36PASS.로그인코드/Auth불변;Owner실기기4종로그인PASS·로그인차단해소·심사미재제출.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 

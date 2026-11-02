@@ -844,3 +844,8 @@ Owner explicitly authorizes same39 settings → signed41 → existing Owner Inte
 - Flutter Analyze0 issues; authentication regression36 PASS. Prior full1317 PASS/7SKIP and finalUI18 PASS retained as historical tests, not newly rerun full suite.
 - IPA SHA256 `5bc282c86d154fb24d46a45d7db1c2823cb66f2c592ce300d71ee31acb86cf5c`. Private artifact: `/Users/woojinchang/development/legendstudy-private-backups/task14b-20261101/build41/legendstudy_app.ipa`; build log preserved beside it.
 - Transporter delivered41 at13:06KST. ASC processing completed, build `01906f69-27a8-464c-8f5e-b37592017827`. Existing Owner Internal QA group (one tester) connected; group build list explicitly shows1.0.1(41) “테스트 중”. Test instructions saved. Console distribution PASS; physical login remains Owner acceptance pending. Proof `/tmp/task18-testflight41-owner.png`. No review submission, Production Auth/DB/Worker/Credit/Provider changes; login installation acceptance pending Owner.
+
+
+### TASK18 build41 Owner login acceptance — 2026-11-02
+
+Owner reports “로그인 방법 4개 모두 pass” after41 internal distribution. Record **Owner-reported physical-device PASS** for email/password, Apple, Google and Kakao login on1.0.1(41). This resolves the reported build40 missing-configuration login blocker for41 without login-code or Production Auth changes. Do not infer separate iPad, signup/deletion, payment, or full regression acceptance from this report. Store review resubmission has not been performed; internal delivery and Owner acceptance are distinct from Apple review approval. Prior39/37 acceptance remains preserved.
