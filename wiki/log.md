@@ -5318,3 +5318,7 @@ Owner-authorized39 config recovery: signed41, boolean-only embedded config/signa
 ## 2026-11-02 — Build41 Owner login PASS
 
 Owner confirms all four login methods PASS on41; email/Apple/Google/Kakao acceptance recorded, resolving reported login blocker. No additional device/feature PASS inferred and no review resubmission performed. [Acceptance](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02).
+
+## 2026-11-02 — Notice formatting and image editor
+
+Existing notice contract extended with paragraph formatting/private image candidate; APP41 plain fallback preserved. WEB1546PASS/4SKIP, TS/build/lint and isolated RLS/rollback PASS. Production SQL/Storage E2E/mobile/deployment pending. [Contract and rollback](notices-system.md#notice-rich-editor-candidate--2026-11-02).
