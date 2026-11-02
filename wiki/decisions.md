@@ -783,3 +783,7 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 
 ### 2026-10-27 — 자연계열 등록 목록과 실행 승인 분리
 등록된 자연계열 시험은 학년도·계열 선택에 노출한다. AI 첨삭은 기존 보류, PDF는 기존 공개 권한 유지. 미등록 시험 생성·버튼만 강제 활성화 금지. [공통 구현·근거](essay-all-university-standby-20261026.md#2026-10-27--자연계열-시험-목록과-첨삭-공개-분리).
+
+## 2026-11-02 — 전용 결제 심사 권한
+
+기존 REVIEW/TEST 결제를 payment@legendstudy.com의 인증된 user_id에만 허용한다. 기존 review@와 분리하고 admin권한은 부여하지 않는다. 기존 /pricing/·가격·TEST_RECORDED·미지급 정책과 일반사용자/관리자 HOLD 유지. 서버 전용 UUID allowlist를 payment_review 권한으로 재사용하며 이메일·클라이언트flag는 권한근거가 아니다. 심사종료 시권한회수/TEST경로·기록보존. LIVE는 별도Owner승인 전금지. [기존 결제계약을 계승한 TASK17](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02).

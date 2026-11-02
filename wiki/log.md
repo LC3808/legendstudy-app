@@ -5010,3 +5010,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 환경 정정·기존 TEST 재사용
 
 [결제 환경 재확인](payment-app-foundation.md#task17-기존-test-환경-재확인--2026-11-02): TEST프로젝트 runtime200/주문생성/카드인증창, LAB503 별도. 키재등록 보류, Owner 인증대기. 운영·TEST Credit해시 보존확인/승인은미완료. 설정·Secret·배포변경0.
+
+## 2026-11-02 — TASK17 전용권한 배포·Finance 누락 확인
+
+[심사권한](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02): 기존 payment Auth UUID만 allowlist 설정, 운영ed3c8c8b/자산1178보존.140테스트/typecheck PASS. 진단상 finance token 비어있음; 키교체 없이 운영credential 복구대기. 원래원장해시보존, 신규signup+6별도. Owner로그인확인/실제승인미완료.

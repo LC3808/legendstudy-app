@@ -106,3 +106,11 @@ Owner가앞선조기빌드중단지시: Android1.0.1(20) 후보는이번수정�
 ### TASK17 기존 TEST 환경 재확인 — 2026-11-02
 
 Owner 최신지시로 앞선 키재등록 요청은 보류/대체한다. Cloudflare 실측 payment-test는 TEST/전용pages.dev/테스트DB wsnrwklplnunjktyfmbr이고, LAB만 REVIEW/운영도메인/운영DB다. TASK17 배포는 LAB2b5b0656, 기존TEST배포bb59b083(Oct06). 기존TEST runtime200·동일클라이언트키·1Credit TEST주문생성·Toss 카드인증창 진입 확인. Secret 유효성/승인성공은 아직 미검증, Owner 카드인증 대기. LAB runtime503은 별도이며 신규키·설정변경·배포 없이 기존TEST 경로를 우선 재사용한다. 09:43KST 운영 주문11/LIVE0·Credit grants35/transactions124 해시 전부 사전과 동일, TEST grants2/transactions2 해시 동일·지급연결0. 승인 이후 재검증 필요. 재심사는 실제 서비스도메인 결제경로 확인까지 NOT_READY. [WEB 비교·증빙](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 payment_review 전용 계정 — 2026-11-02
+
+Owner 확정: payment@legendstudy.com만 기존 /pricing/에서 TEST 결제, 일반/review@/관리자는 HOLD. 가격4900/11900/17900/29900 불변. 기존 confirmed Auth user6eda61e2-be13-4793-a094-5500309b5b4d/non-admin 재사용. 서버 PAYMENT_REVIEW_SUBJECTS를 이 UUID 하나로 PATCH하여 payment_review 권한을 구현한다. 이메일·user_metadata·관리자 권한으로 우회하지 않으며 기존 auth/v1/user 검증이 매 REVIEW 요청에 적용된다. 새테이블·인증·admin권한 없음.
+
+운영배포 ed3c8c8b-4dfb-4373-b63b-aff40afa307b/source d326e67: 정적자산1178개 전부 보존, 설정검사 함수에 값 없는 boolean 진단만 추가. 실제503 원인은 PAYMENT_FINANCE_TOKEN 누락/빈값으로 확인; TEST키형식/MID/공개설정 PASS. 새Toss키 불필요, 기존 운영용 finance credential 복구 필요(TEST DB토큰·service_role 대체금지).140테스트/typecheck PASS, Owner payment로그인 확인. 실제 A/B/C/D 권한수용·승인E2E는 설정오류로미완료.
+
+09:57KST 기존35 grants/124 transactions 해시 보존, TEST주문11/LIVE0/TEST지급연결0 유지. 전체는37/126이며 증가2건은 signup_bonus_v1+6; 총Credit불변으로 오기하지 않는다. 결제귀속지급0. 심사종료: PAYMENT_ENABLED=false 및 허용목록비움→재배포→서버차단 확인; TEST기록보존. [WEB 실제설정·배포·인수인계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
