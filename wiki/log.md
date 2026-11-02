@@ -5303,3 +5303,8 @@ Owner directs removal only of ready-university beta label, preserving counts/act
 ## 2026-11-02 — Admin school names restored
 
 Owner-approved five NEIS-verified display-cache inserts; Production unresolved5→0, cache2→7, school-set profiles9 preserved. No profile/Credit/code/deploy changes. [Evidence](admin-member-directory.md#2026-11-02--owner-approved-school-display-cache-refresh).
+
+
+## 2026-11-02 — TASK18 build configuration diagnosis
+
+39/40 binary comparison confirms local40 missing connection/OAuth defines; Apple review error matches null auth-service path. Matching native entitlements/schemes; config precheck PASS. No auth/code change;41 procedure recorded, device reproduction pending. [Evidence and procedure](final-store-rc-1.md#task18-build-configuration-diagnosis--2026-11-02).

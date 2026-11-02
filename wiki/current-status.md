@@ -2,7 +2,7 @@
 
 [관리자 학교명](admin-member-directory.md): Owner승인 NEIS캐시5건반영·미해결0. 프로필보존; 새학교 자동갱신은미구현.
 
-[TASK14 최종UI](final-store-rc-1.md#final-app-ui-patch-and-freeze--2026-11-02): 대학카드 가능문구만제거·UI동결. iOS39요청항목OwnerPASS;Android18설치로39검수차단. 변경반영은새서명빌드필요·심사미제출. 39원본a0aa618보존·베타11/11 00KST유지.
+[TASK18 빌드진단](final-store-rc-1.md#task18-build-configuration-diagnosis--2026-11-02): 로컬40 연결/OAuth dart-define누락·Apple40로그인거절확인.39설정복원41절차기록;TestFlight40재현대기.로그인코드/Auth불변·OwnerXcode변경보존.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 

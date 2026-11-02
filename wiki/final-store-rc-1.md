@@ -801,3 +801,35 @@ Owner final scope: remove only ready-university “베타 첨삭 가능”; reta
 Owner explicitly confirmed iOS39 requested delta checks, preserved without extending to unreported signup/delete/OAuth/sync. Android Owner downloaded1.0.0(18), so actual39 installation/device QA remains BLOCKED despite console internal39 availability. This new UI source is not contained in either uploaded39 binary. **A new signed iOS/Android build is required before submitting this change**; next number must be checked against stores (40 candidate, not reserved). No build/upload/submission performed in this narrow patch. Preserve39 artifacts/source a0aa618; subsequent APP UI changes frozen by Owner. Only release verification/build/submission and confirmed blocker fixes continue.
 
 Validation: Flutter Analyze0 issues; card/service-state6 + catalog/navigation/Registry12 =18 PASS,0 FAIL. Wiki handoff PASS (current-status11829 bytes). Logs /tmp/task14-final-ui-{analyze,test,navigation}.log. No new physical-device acceptance claimed. Rollback is reverting this single display patch before a new build; no DB/credit/Provider rollback.
+
+
+## TASK18 build configuration diagnosis — 2026-11-02
+
+Scope: read-only artifact/config/source inspection; no login-code or Production Auth change. Owner's uncommitted Xcode project edits and `supabase/.temp/` preserved.
+
+### Evidence
+
+- Preserved39 IPA is 1.0.1(39), source a0aa618; local `build/ios/ipa/legendstudy_app.ipa` is 1.0.1(40).
+- Exact configured SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, GOOGLE_SERVER_CLIENT_ID and GOOGLE_IOS_CLIENT_ID occur in39 App.framework binary and do not occur in40. Compared internally without logging values.
+- Current Generated.xcconfig build40 DART_DEFINES contains only eight Flutter-generated metadata keys; all application connection/OAuth defines are absent.
+- AppConfig defaults URL/key/client IDs to empty and OAuth flags to false. main skips Supabase initialization on invalid configuration; emailAuthServiceProvider is null; auth_page displays “현재 로그인할 수 없어요. 잠시 후 다시 시도해 주세요.” before attempting a network login.
+- Both IPA bundle IDs, URL schemes, application/team entitlements and Apple sign-in entitlement match. GIDClientID/GIDServerClientID plist fields absent in both: this app obtains IDs from Dart defines, so their plist absence is not a new regression.
+- Actual ASC review submission efd80130-07aa-4ea3-a1a4-11f7d5d06254: 1.0.1(40), build fa43dcf2-4cae-402f-b2b9-833488bc985d, rejected 2.1.0; Apple reports that same login error on iPhone17 Pro Max/iPad Air11(M3), iOS27.0.1. Read only; no reply/resubmission.
+- Conclusion: missing build-time configuration is established for the local40 artifact and consistent with Apple's failure. Uploaded binary byte identity and independent40 TestFlight device reproduction NOT_TESTED; Owner asked to verify without uninstalling.
+- Original40 command not recovered from shell history. Do not invent its exact invocation. Existing39 log path is no longer present; preserve historical command evidence separately from available artifact evidence.
+- Existing config passes `python3 tool/store-release ios --config config/observation-v1-qa.local.json --check`.
+
+### Existing39 command and41 recovery procedure
+
+39 used `python3 tool/store-release ios --config config/observation-v1-qa.local.json --build-name=1.0.1 --build-number=39 --export-options-plist=/tmp/task14-export.plist`.
+
+Use the same wrapper and config; preserved39 ExportOptions replaces the ephemeral /tmp file. Run from APP repository root after preserving40 IPA/archive and confirming41 is unused in ASC:
+
+```sh
+python3 tool/store-release ios --config config/observation-v1-qa.local.json --check
+python3 tool/store-release ios --config config/observation-v1-qa.local.json --build-name=1.0.1 --build-number=41 --export-options-plist=/Users/woojinchang/development/legendstudy-private-backups/task14b-20261101/build39/ExportOptions.plist
+```
+
+Wrapper invokes Flutter `build ipa --release --dart-define-from-file=<temporary validated config>` and preserves the existing production/OAuth/Observation settings. Do not substitute a bare Flutter build or Xcode Archive with missing generated defines. No secrets in command arguments/output.
+
+Before upload, verify41 Info.plist/version/signature and binary inclusion of the same four configured values using boolean-only comparisons. Then TestFlight login on fresh session and update path, including iPad, before resubmission. This investigation did not build/upload41 or alter Auth settings. Existing39 Owner PASS remains valid only for39.
