@@ -5322,3 +5322,7 @@ Owner confirms all four login methods PASS on41; email/Apple/Google/Kakao accept
 ## 2026-11-02 — Notice formatting and image editor
 
 Existing notice contract extended with paragraph formatting/private image candidate; APP41 plain fallback preserved. WEB1546PASS/4SKIP, TS/build/lint and isolated RLS/rollback PASS. Production SQL/Storage E2E/mobile/deployment pending. [Contract and rollback](notices-system.md#notice-rich-editor-candidate--2026-11-02).
+
+## 2026-11-02 — 공지 편집기 운영 적용 및 학교명 자동 해결
+
+Owner 요청으로 rich notice SQL/Storage와 additive member RPC 적용, WEB8a3afe3/productionbd8f7da4 배포. 기존 공지2건/프로필/환경/Functions 보존. 실제 이미지 업로드·서식 저장/재조회/보관 및 신규3학교 자동조회PASS; WEB1572PASS/4SKIP. 모바일visual미검증·APP41텍스트호환. [공지/롤백](notices-system.md#production-rich-editor-rollout--2026-11-02), [학교명/보존검토](admin-member-directory.md#automatic-school-name-resolution--2026-11-02).

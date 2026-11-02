@@ -1,10 +1,10 @@
 # Current Status
 
-[관리자 학교명](admin-member-directory.md): Owner승인 NEIS캐시5건반영·미해결0. 프로필보존; 새학교 자동갱신은미구현.
+[관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
 
 [APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02): Owner 4종 로그인PASS; 심사 미재제출.
 
-[공지 편집기](notices-system.md#notice-rich-editor-candidate--2026-11-02): WEB 서식·이미지/격리SQL 검증. 운영 미적용; APP41 텍스트 보존.
+[공지 편집기](notices-system.md#production-rich-editor-rollout--2026-11-02): 운영bd8f7da4 저장PASS·1572PASS/4SKIP. APP41텍스트; 모바일미검증.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
