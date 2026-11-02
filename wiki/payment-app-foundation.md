@@ -144,7 +144,7 @@ Production 빌드전용 진단77cc3c43에서 앱실행 전 process.env에도 fin
 
 ### TASK17 Toss 최종심사 준비 — 2026-11-02 오후
 
-Owner가Toss회신을근거로WEB결제화면Credit→이용권,구매횟수만큼AI논술첨삭명시,기존review@재사용을지시했다. 앞선payment@전용결정을대체한다. review기존Auth UUID ddc5ae63-acbb-490b-a423-c996b811dea8만서버허용목록;관리자권한부여없음. WEB요금/결제/환불/해당header명칭만변경,가격4900/11900/17900/29900·DB·APP·MY/학습화면Credit구조보존. 홈페이지전체명칭변경완료라고보고하지않는다.
+Owner가Toss회신을근거로WEB결제화면Credit→이용권,구매횟수만큼논술첨삭명시,기존review@재사용을지시했다. 앞선payment@전용결정을대체한다. review기존Auth UUID ddc5ae63-acbb-490b-a423-c996b811dea8만서버허용목록;관리자권한부여없음. WEB요금/결제/환불/해당header명칭만변경,가격4900/11900/17900/29900·DB·APP·MY/학습화면Credit구조보존. 홈페이지전체명칭변경완료라고보고하지않는다.
 
 기존키/subject로24h Finance갱신,read-only PT404 PASS후Cloudflare 두Secret(finance/reviewer)만반영. DB서명키/ACL변경0. 만료2026-11-03 13:21:09 KST,심사일정전갱신필요/자동갱신없음. 최종운영9459776f-fecf-47ca-8f01-35f2f661813a/source ecd8ffc,REVIEW/TEST200,consumer_purchase=false(비로그인). 중간정적빌드공개Auth환경누락으로결제페이지로그인이해제되어보이는문제는기존NEXT_PUBLIC설정재빌드및배포preflight추가로수정했다. 운영984개비결제자산동일.
 
@@ -156,3 +156,8 @@ Owner review로그인→1회TEST주문 f1f36979-33fa-4ee2-971d-7646d6e367f8→�
 ### TASK17 TEST 성공 승인 확정 — 2026-11-02 13:30 KST
 
 Owner카드인증후완료화면의논술랩이용하기/마이페이지이동확인·논술LAB이동. Owner제공Toss TEST API로그는confirm HTTP200/DONE,승인13:30:30 KST. 동일주문 f1f36979-33fa-4ee2-971d-7646d6e367f8 운영DB PAID/TEST_RECORDED/grant NULL/CONFIRM SUCCEEDED정확히1건을독립조회확인. TEST성공승인E2E PASS,이전승인대기기록대체. 기존50grants/139transactions해시동일,LIVE0/TEST지급연결0. 전체51/140증가1건은동시signup_bonus_v1+3이며결제귀속지급0. 실제카드사거절callback/승인후환불은미검증. 재심사안내서갱신,외부전송0/추가배포0.
+
+
+### TASK17 상품 명칭 정정 — 2026-11-02
+
+Owner는기존합의대로사용자노출AI명칭제거를지시했다. 앞선Toss회신의서비스분류를상품명AI표기로확대한것은Agent오류이며Owner결정이아니다. WEB요금/환불/상품설명/Toss새주문상품명/재심사안내서에서AI제거. 기존승인거래의원래상품명은감사기록으로보존,결제원장수정없음.

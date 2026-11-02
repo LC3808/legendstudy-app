@@ -790,4 +790,4 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 
 ## 2026-11-02 — Toss 최종심사 WEB 이용권·기존 review 계정
 
-앞선전용결제심사권한결정의계정을review@legendstudy.com으로대체한다. 인증된기존user_id만TEST허용,일반/관리자HOLD. WEB결제관련사용자명칭은이용권,구매횟수만큼AI논술첨삭임을명시한다. APP/DB Credit구조·가격·지급정책변경없음,LIVE금지. [기존계약을계승한최종심사준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후).
+앞선전용결제심사권한결정의계정을review@legendstudy.com으로대체한다. 인증된기존user_id만TEST허용,일반/관리자HOLD. WEB결제관련사용자명칭은이용권,구매횟수만큼논술첨삭임을명시한다. 사용자노출상품명·설명에AI를붙이지않는다(Owner재확인;앞선AI표현은Agent의잘못된확대해석). APP/DB Credit구조·가격·지급정책변경없음,LIVE금지. [기존계약을계승한최종심사준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후).

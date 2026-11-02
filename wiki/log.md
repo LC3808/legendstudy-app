@@ -5034,3 +5034,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 TEST 승인 E2E PASS
 
 [승인확정](payment-app-foundation.md#task17-test-성공-승인-확정--2026-11-02-1330-kst):Toss200/DONE·DB TEST_RECORDED/승인1/지급0,Owner완료화면확인.기존원장해시보존,동시가입+3별도.실거절/승인후환불미검증.
+
+## 2026-11-02 — TASK17 AI 상품표기 정정
+
+[명칭정정](payment-app-foundation.md#task17-상품-명칭-정정--2026-11-02):Owner합의위반인AI접두어제거.기존승인기록보존.
