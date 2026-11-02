@@ -796,3 +796,7 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 ### 2026-11-02 — WEB 이용권 명칭 전체 통일
 
 [최종심사 명칭 결정](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후)을 WEB 전체로확장. Owner가관리자제외를철회하여관리자도이용권으로통일한다. APP/DB/내부식별자/기존거래원문은변경하지않으며금액·지급·LIVE HOLD정책불변.
+
+## 2026-11-02 — 논술·수학 Provider 키 분리
+
+Owner 확정: 논술 LAB `ESSAY_PROVIDER_KEY`와 수학 분석 `MATH_PROVIDER_API_KEY`는 별도 키로 운영한다. 기존 운영 Secret은 변경·삭제하지 않는다. [기존 TASK16-B 격리 정책과 실제 검증](task16b-commerce-social-integration-20261102.md#2026-11-02--수학-전용-provider-e2e-pass)을 계승하며, 키를 채팅/로그/Git/보고서에 출력하지 않는다. TEST 성공은 운영 활성화 승인이 아니다.

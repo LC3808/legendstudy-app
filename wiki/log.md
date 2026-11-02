@@ -5060,3 +5060,7 @@ Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 
 ## 2026-11-02 — TASK16-B Provider 설정 재확인
 
 TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 실측. 기존 math-test는 키가 있으나 운영 DB 연결이므로 재사용 금지. Owner 대시보드 직접 등록 선택·로그인 인계, 값노출/Provider호출/운영변경0. [실측·재개](task16b-commerce-social-integration-20261102.md#2026-11-02--provider-등록-상태-재확인).
+
+## 2026-11-02 — TASK16-B 수학 Provider 실제 호출 PASS
+
+전용 Pages 신규 수학 Secret으로 한양2026상경Q2 1회: HTTP200/기존검증PASS, 12,815+4,412tokens,33.47초,$0.1395추정. 마지막 덧셈오류 정확히 판별. 임시진단삭제·a09fe8de복원, DB/Credit/결제/APP변경0. 전체학생E2E 미실행. [결과·범위](task16b-commerce-social-integration-20261102.md#2026-11-02--수학-전용-provider-e2e-pass).

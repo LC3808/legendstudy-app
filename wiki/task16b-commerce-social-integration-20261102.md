@@ -59,7 +59,7 @@
 | 실제 Provider 최초 첨삭·재첨삭·결과·History | **NOT_VERIFIED / 미실행** |
 | 운영 활성화 | **금지 / 변경 없음** |
 
-현재 차단은 **Provider API 키**다. 기존 Cloudflare Secret은 읽어 복사할 수 없고 로컬에서 확인된 TEST 자격증명에는 Provider 키가 없다. Owner에게 안전한 기존 저장 위치 또는 TEST 직접 등록을 요청했다. `legendstudy-essay-task16b`의 `ESSAY_PROVIDER_KEY`와 `legendstudy-task16b` Pages의 `MATH_PROVIDER_API_KEY`가 필요하다. 키는 채팅/Git에 보내지 않는다. Worker execution, Pages evaluation/provider-call 스위치는 비활성이다. 웹 화면 접근이나 DB 설치를 실제 첨삭 완료로 보고하지 않는다.
+초기 구성 당시 차단은 **Provider API 키**였다. 최신 등록·수학 호출 결과는 아래 11/2 Provider E2E 기록을 따른다. 기존 Cloudflare Secret은 읽어 복사할 수 없고 로컬에서 확인된 TEST 자격증명에는 Provider 키가 없다. Owner에게 안전한 기존 저장 위치 또는 TEST 직접 등록을 요청했다. `legendstudy-essay-task16b`의 `ESSAY_PROVIDER_KEY`와 `legendstudy-task16b` Pages의 `MATH_PROVIDER_API_KEY`가 필요하다. 키는 채팅/Git에 보내지 않는다. Worker execution, Pages evaluation/provider-call 스위치는 비활성이다. 웹 화면 접근이나 DB 설치를 실제 첨삭 완료로 보고하지 않는다.
 
 재개: 키 등록 → TEST에만 실행 활성화 → Q1/Q2 전체 최초 제출 → 두 자식 완료/저장 평가 확인 → 피드백 기반 재작성 → 같은 두 문항 무료 재첨삭 → History/비교 UI 검증. 최초3회+재첨삭3회, 총 최대6회 Provider 요청 계획(언어 생성·독립 검수·Math 각1), 실패 자동 재시도 금지. Q2-3 합성 최초 답안은 최종 덧셈 오류를 의도적으로 포함하며, 개념 오류와 구별하는지 확인한다. 정답/과정/보완점의 실제 품질은 아직 판정하지 않았다.
 
@@ -88,3 +88,18 @@ Owner는 TEST Secret을 Cloudflare 대시보드에 직접 등록하는 방식을
 전용 TEST Pages의 Production은 그 프로젝트의 기본 배포 환경 이름이며 LegendStudy 운영 서비스가 아니다. 기존 sandbox DB를 재사용해도 Cloudflare Provider Secret이 자동 공유되지 않는다. 별도 두 서비스에 등록해야 한다.
 
 Cloudflare 대시보드는 현재 브라우저 로그인이 필요하여 Owner 로그인·Secret 입력을 인계했다. 운영 Secret/DB/결제/Credit 원장/APP 릴리스 변경0, Provider 요청0. Secret 미등록 상태에서는 실제 AI E2E를 진행할 수 없으므로 계속 **NOT_VERIFIED**다. 등록 완료 회신 후 이름·배포 반영 상태를 다시 확인하고 TEST 실행을 재개한다.
+
+## 2026-11-02 — 수학 전용 Provider E2E PASS
+
+Owner가 신규 수학 전용 OpenAI 키를 TEST Pages `MATH_PROVIDER_API_KEY`에 등록하고 실제 호출을 지시했다. 논술 키 `ESSAY_PROVIDER_KEY`와 수학 키를 분리 운영한다. Secret 값은 읽기·복사·로그·Git 출력하지 않았다. Worker의 Essay Secret도 이름 등록은 확인했으나 이번에 Essay 호출은 하지 않았다.
+
+- 실측: 전용 Pages Production에 수학 Secret 등록, Preview 분기에는 미등록. 기본 TEST 주소에서 새 배포에 반영해 검증했다. Secret API의 빈 value는 미등록이 아니라 **값 비공개**다.
+- 범위: 한양2026 상경 Q2 공식 Package·이미지·기존 합성 답안 → TEST Pages Secret → OpenAI Responses → 기존 `openAiCandidate` → `evaluateExamMath` 검증·결과 변환. 임시 고정 fixture 서버 진단 경로는 정확한 TEST host/DB 식별자, 기존 비공개 cookie·서비스 토큰, 30분 만료로 제한했다. DB/원장 client 없음, 학생 개인정보 전송 없음.
+- 호출 **1회**, HTTP **200**, API status **completed**, model **gpt-5.6-sol**, 기존 결과 validator **PASS**, 33,470ms. 실패 재시도0.
+- 토큰: input **12,815**, output **4,412**(reasoning1,011 포함), total **17,227**, cached input0. API가 별도로 보고한 cache_write_tokens12,812는 총입력에 다시 더하지 않았다.
+- 정가 예상 비용: 입력 $0.051260 + 출력 $0.088240 = **USD0.139500**. 2026-11-02 확인 [공식 모델 가격](https://developers.openai.com/api/docs/models/gpt-5.6-sol)의 입력 $4/백만·출력 $20/백만 적용. 실제 청구 확정액·세금·계약 할인은 미확인.
+- 분석: Q2-1 -32, Q2-2 98 및 접근/과정 인정. Q2-3 예금1,197,900+구슬196,000의 최종 합을1,393,000으로 쓴 산술오류를 발견하고 **1,393,900원**으로 수정 안내. 개념오류가 아닌 CALCULATION ROOT와 후속 결론오류로 구분. 공식 풀이와 다른 행렬식 넓이 접근도 타당하다고 판단했다. 총12단계(VALID10, CALCULATION_ERROR1, PROPAGATED_ERROR1), 전체 PARTIALLY_CORRECT / ANSWER_INCORRECT_APPROACH_MOSTLY_VALID. 수치 부분점수 생성 없음.
+- 임시 진단 배포 `1da7ada9`는 실행 후 삭제. 진단 소스 제거·기존 WEB `27b9593` 복원 배포 **a09fe8de-7b8e-4ecd-a398-0c75a9465ee0** 확인. 일반 Math Provider/Essay 실행 스위치는 비활성 유지.
+- 증거: 비공개 로컬 `/Users/woojinchang/.codex/legendstudy-task16b-test/math-provider-result.json`(응답·토큰·분석), `math-probe-fixture.json`, `provider-check.ts.private`. 키 원문 없음.
+
+이 PASS는 **수학 Provider 경로**에 한정한다. 학생 제출·Credit 정산·저장·재첨삭·History 전체 E2E는 실행하지 않았으며 TASK16-B 전체 완료가 아니다. 이번 운영/TEST DB쓰기·Credit·결제·APP 릴리스 변경0. 일반 품질은1개 답안으로 일반화하지 않는다.
