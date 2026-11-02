@@ -151,3 +151,8 @@ Owner가Toss회신을근거로WEB결제화면Credit→이용권,구매횟수만�
 Owner review로그인→1회TEST주문 f1f36979-33fa-4ee2-971d-7646d6e367f8→실제Toss창표시PASS. 창취소→취소되었습니다PASS. 비로그인orders/confirm/status/cancel401,관리자결제disabled. 일반계정실제로그인/실제거절callback/승인후환불은미검증;로컬권한회귀PASS. 실패페이지실접근PASS. Owner카드인증후승인성공E2E/TEST_RECORDED확인대기. 실제성공으로과장금지.
 
 회귀175+계정잔액15/TS/lint/build PASS. 04:21:29Z기준50grants·139transactions해시보존(6b878f50751867093aa02d3a2eed9f3f / 8650fb83ce93cf837b37a801c1d15e79),LIVE0/TEST지급0. 이전오전35/124와다른기준이며동시가입증가를결제지급으로해석하지않는다. [심사안내서·미완료구분](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TOSS_FINAL_REVIEW_GUIDE_TASK17.md). 외부메일/재심사제출0,LIVE HOLD.
+
+
+### TASK17 TEST 성공 승인 확정 — 2026-11-02 13:30 KST
+
+Owner카드인증후완료화면의논술랩이용하기/마이페이지이동확인·논술LAB이동. Owner제공Toss TEST API로그는confirm HTTP200/DONE,승인13:30:30 KST. 동일주문 f1f36979-33fa-4ee2-971d-7646d6e367f8 운영DB PAID/TEST_RECORDED/grant NULL/CONFIRM SUCCEEDED정확히1건을독립조회확인. TEST성공승인E2E PASS,이전승인대기기록대체. 기존50grants/139transactions해시동일,LIVE0/TEST지급연결0. 전체51/140증가1건은동시signup_bonus_v1+3이며결제귀속지급0. 실제카드사거절callback/승인후환불은미검증. 재심사안내서갱신,외부전송0/추가배포0.
