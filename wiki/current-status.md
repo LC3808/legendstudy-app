@@ -1,7 +1,7 @@
 # Current Status
 
 
-[GA4 운영복구](admin-integrated-analytics-task10.md#ga4-production-report-rollout--2026-11-02): aaf80a93·실관리자/KST필터PASS. Workers수정26testsPASS; 기존설정보존. 모달/LAB/home수신 후속, APP41 불변.
+[GA4 운영복구](admin-integrated-analytics-task10.md#ga4-production-report-rollout--2026-11-02): aaf80a93·실관리자/KST필터PASS. [Phase2](admin-integrated-analytics-task10.md#phase2-collection-and-lab-settings--2026-11-03): LAB선택옵션 저장·전송중복2→1, 실수신 미확인. home0ed6d9df. APP41불변.
 [관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
 
 [APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02): Owner 4종 로그인PASS; 심사 미재제출.

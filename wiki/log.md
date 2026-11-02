@@ -5341,3 +5341,7 @@ Owner JSON으로 기존 인증/실보고서200 확인. Cloudflare Production 신
 
 ## 2026-11-02 — GA4 reporting production deployment
 Owner 승인369b7d9 기반, Workers redirect오류 롤백/최소수정c9bda91 후 aaf80a93 배포. 실관리자5KPI/일별/채널/페이지·기간필터PASS,26testsPASS. 기존자산1236/설정보존, 수집활성화없음. [검증·롤백·미완료](admin-integrated-analytics-task10.md#ga4-production-report-rollout--2026-11-02).
+
+
+## 2026-11-03 — Analytics Phase2 / LAB selective settings
+Owner-approved LAB history/search/forms/outbound/download OFF, page/scroll/video ON saved and reopened. Isolated transport duplicate2→1; GA4 LAB/home receipt unconfirmed. Home0ed6d9df collection flags enabled, LABaaf80a93 unchanged. WEB431a635 tests1602PASS/4SKIP; Tistory code-only handoff. Details: [Phase2](admin-integrated-analytics-task10.md#phase2-collection-and-lab-settings--2026-11-03). No APP41/DB/Auth/Credit/payment changes.
