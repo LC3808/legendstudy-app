@@ -787,3 +787,7 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 ## 2026-11-02 — 전용 결제 심사 권한
 
 기존 REVIEW/TEST 결제를 payment@legendstudy.com의 인증된 user_id에만 허용한다. 기존 review@와 분리하고 admin권한은 부여하지 않는다. 기존 /pricing/·가격·TEST_RECORDED·미지급 정책과 일반사용자/관리자 HOLD 유지. 서버 전용 UUID allowlist를 payment_review 권한으로 재사용하며 이메일·클라이언트flag는 권한근거가 아니다. 심사종료 시권한회수/TEST경로·기록보존. LIVE는 별도Owner승인 전금지. [기존 결제계약을 계승한 TASK17](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02).
+
+## 2026-11-02 — Toss 최종심사 WEB 이용권·기존 review 계정
+
+앞선전용결제심사권한결정의계정을review@legendstudy.com으로대체한다. 인증된기존user_id만TEST허용,일반/관리자HOLD. WEB결제관련사용자명칭은이용권,구매횟수만큼AI논술첨삭임을명시한다. APP/DB Credit구조·가격·지급정책변경없음,LIVE금지. [기존계약을계승한최종심사준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후).

@@ -140,3 +140,14 @@ Production 빌드전용 진단77cc3c43에서 앱실행 전 process.env에도 fin
 서버경로: Pages context.env→cloudflare/payments.ts rpc finance Authorization→Supabase PostgREST 서명·만료·role검증→public.payment_process→essay_private.uid()/account_private.allowed. 실제운영authenticator→essay_finance는SET=true/INHERIT=false/ADMIN=false;finance NOLOGIN/NOBYPASSRLS, payment_process EXECUTE 허용·anon/authenticated/service_role거부. 결제Edge Function이나원문대조테이블을쓰지않는다. JWT는payment-only가아닌기존finance권한이므로브라우저배포금지.
 
 안전갱신: 기존키/기존subject/issuer/role를그대로재사용하고iat/exp만갱신,초기검증TTL1시간권장. 서버키·DB권한변경불필요. 새0600파일에만저장→운영RPC get/nonexistent UUID PT404확인→Cloudflare PAYMENT_FINANCE_TOKEN 단일Secret복원→보존재배포→REVIEW권한/TEST E2E. 서명키를Cloudflare에넣지않는다. Secret삭제는이미유출된JWT의암호학적폐기가아니며신규요청차단은HOLD/권한회수로별도검증한다. 원본이발견되어이번요청의“없다면새발급절차”조건은만료토큰갱신절차로대체;실제발급/설정/DB쓰기0. [실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#original-token-found--2026-11-02).
+
+
+### TASK17 Toss 최종심사 준비 — 2026-11-02 오후
+
+Owner가Toss회신을근거로WEB결제화면Credit→이용권,구매횟수만큼AI논술첨삭명시,기존review@재사용을지시했다. 앞선payment@전용결정을대체한다. review기존Auth UUID ddc5ae63-acbb-490b-a423-c996b811dea8만서버허용목록;관리자권한부여없음. WEB요금/결제/환불/해당header명칭만변경,가격4900/11900/17900/29900·DB·APP·MY/학습화면Credit구조보존. 홈페이지전체명칭변경완료라고보고하지않는다.
+
+기존키/subject로24h Finance갱신,read-only PT404 PASS후Cloudflare 두Secret(finance/reviewer)만반영. DB서명키/ACL변경0. 만료2026-11-03 13:21:09 KST,심사일정전갱신필요/자동갱신없음. 최종운영9459776f-fecf-47ca-8f01-35f2f661813a/source ecd8ffc,REVIEW/TEST200,consumer_purchase=false(비로그인). 중간정적빌드공개Auth환경누락으로결제페이지로그인이해제되어보이는문제는기존NEXT_PUBLIC설정재빌드및배포preflight추가로수정했다. 운영984개비결제자산동일.
+
+Owner review로그인→1회TEST주문 f1f36979-33fa-4ee2-971d-7646d6e367f8→실제Toss창표시PASS. 창취소→취소되었습니다PASS. 비로그인orders/confirm/status/cancel401,관리자결제disabled. 일반계정실제로그인/실제거절callback/승인후환불은미검증;로컬권한회귀PASS. 실패페이지실접근PASS. Owner카드인증후승인성공E2E/TEST_RECORDED확인대기. 실제성공으로과장금지.
+
+회귀175+계정잔액15/TS/lint/build PASS. 04:21:29Z기준50grants·139transactions해시보존(6b878f50751867093aa02d3a2eed9f3f / 8650fb83ce93cf837b37a801c1d15e79),LIVE0/TEST지급0. 이전오전35/124와다른기준이며동시가입증가를결제지급으로해석하지않는다. [심사안내서·미완료구분](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TOSS_FINAL_REVIEW_GUIDE_TASK17.md). 외부메일/재심사제출0,LIVE HOLD.

@@ -5026,3 +5026,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 원본 Finance 토큰·키 발견
 
 [원본확인](payment-app-foundation.md#task17-원본-finance-토큰서명키-발견--2026-11-02):홈의기존0600 JWT/ES256키확인.현재JWKS서명PASS·Oct14만료·기존gateway allowed.원격Oct07운영발급기찾음/합성회귀PASS.기존키재사용갱신가능,실제발급·설정변경0.
+
+## 2026-11-02 — TASK17 이용권 표시·review 계정 TEST 복구
+
+[최종심사 준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후):기존키24h갱신/운영9459776f·결제관련이용권명칭.실제review TEST창/취소PASS,승인인증대기.984비결제자산/원장50·139해시보존,LIVE0.
