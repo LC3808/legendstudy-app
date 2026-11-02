@@ -53,3 +53,18 @@ Supabase `kpqbedylxlyntrrfybpn`에서 함수 정의만 읽었다. math_confirm_e
 6. Native는 코드·widget 검증이며 APP 릴리스·기기 배포 없음. 원본 영역 대응은 실제 Owner 사진 선택으로 추가 확인 필요.
 
 운영 DB·Credit·결제·APP 릴리스 브랜치 변경 없음. Owner 검수 전 운영 활성화 금지.
+
+## 최종 배포·검증 기록
+
+- WEB 구현 SHA: `847a14166c792d81d87cabb9891f88d518469d25`.
+- Native 구현 SHA: `68d8bbb` (feature branch만). Wiki restore budget 보존: `914aa9d`.
+- 고정 Preview: https://2356c0f7.legendstudy-task16b.pages.dev/internal/math-recognition-preview/
+- 기본 TEST Preview: https://legendstudy-task16b.pages.dev/internal/math-recognition-preview/
+- 배포 메타데이터의 commit_hash 일치. 인증 후 두 URL HTTP200/검수 제목 확인, 비인증 기본 URL401, no-store/noindex 확인.
+- Provider 호출 스위치 false, Essay 실행 스위치 false, TEST Supabase ref 일치. 실행 활성화·Secret 변경 없음.
+- WEB 전체 1,557 PASS/4 skip 후 마지막 확인 버튼 변경 관련 5 PASS. TypeScript·정적 빌드 PASS. Native 29 PASS 및 변경5파일 analyze 무경고. Wiki 링크/Task Routing/12KB budget 검사 PASS.
+- 브라우저 UI 제어는 `browser.user is unavailable`로 실행 불가. 실제 배포는 HTTP/Cloudflare 메타데이터 확인, 동작은 DOM/widget 회귀 검증이다. Owner 실브라우저 검수는 남아 있다.
+
+주요 수정 파일(WEB 저장소): `functions/api/math/extract.ts`, `src/lib/math-eval/runtime/physical-contract.ts`, `src/lib/math-input/recognition-safety.ts`, `src/lib/math-input/runtime/mapping.ts`, `src/components/math-input/math-input-flow.tsx`, `src/components/math-input/source-region.tsx`, `src/components/math-learning/answer-disclosure.tsx`, `src/components/math-learning/learning-guidance.tsx`, `src/components/math-release/student-route.tsx`, `src/components/my/evaluation-report.tsx`, `src/components/my/essay-history-growth.tsx`, `src/app/internal/math-recognition-preview/` 및 회귀 fixture/tests.
+
+주요 수정 파일(APP 저장소): `lib/features/essay/math_answer_disclosure.dart`, `evaluation_report_view.dart`, `math_learning_panel.dart`, `math_workspace_page.dart`, `shared_history_page.dart`, `test/evaluation_report_test.dart` 및 Wiki. 기존 미커밋 파일은 별도 보존했다. 원본 이미지·Secret·개인 인증 파일은 Git에 추가하지 않았다.
