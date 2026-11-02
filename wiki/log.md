@@ -5338,3 +5338,6 @@ Owner EM유지, reader/Viewer설정 확인 전달. Data API 활성 콘솔확인.
 
 ## 2026-11-02 — GA4 credential and real report verification
 Owner JSON으로 기존 인증/실보고서200 확인. Cloudflare Production 신규2binding등록·기존43개/Preview/배포보존. 관리자25testsPASS; 실관리자운영화면/모달수신 미검증, 배포승인대기. [결과·범위·롤백](admin-integrated-analytics-task10.md#ga4-credential-and-real-report-verification--2026-11-02).
+
+## 2026-11-02 — GA4 reporting production deployment
+Owner 승인369b7d9 기반, Workers redirect오류 롤백/최소수정c9bda91 후 aaf80a93 배포. 실관리자5KPI/일별/채널/페이지·기간필터PASS,26testsPASS. 기존자산1236/설정보존, 수집활성화없음. [검증·롤백·미완료](admin-integrated-analytics-task10.md#ga4-production-report-rollout--2026-11-02).
