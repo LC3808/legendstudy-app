@@ -32,6 +32,43 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
   String? owner;
   Future<CoachingSnapshot>? future;
   final keys = <String, String>{};
+  final sources = <String, Uint8List>{};
+  String? initialOwner;
+
+  Future<CoachingSnapshot> load() async {
+    final identity = owner;
+    final snapshot = CoachingSnapshot(
+      await request('read', {'evaluation_id': widget.evaluationId}),
+    );
+    final gateway = ref.read(mathGatewayProvider(identity!));
+    final loaded = <String, Uint8List>{
+      if (initialOwner == identity) ...widget.sources,
+    };
+    final artifacts = snapshot.tasks
+        .expand((task) => objects(task['source_regions']))
+        .map((region) => region['artifact_id'])
+        .whereType<String>()
+        .toSet();
+    for (final id in artifacts.take(6)) {
+      if (loaded.containsKey(id)) continue;
+      try {
+        if (gateway != null) loaded[id] = await gateway.readEvidence(id);
+      } catch (_) {
+        // A missing original must not hide feedback or invent a replacement image.
+      }
+      if (!mounted || ref.read(authStateProvider).value?.userId != identity) {
+        throw StateError('ACCOUNT_CHANGED');
+      }
+    }
+    if (!mounted || ref.read(authStateProvider).value?.userId != identity) {
+      throw StateError('ACCOUNT_CHANGED');
+    }
+    sources
+      ..clear()
+      ..addAll(loaded);
+    return snapshot;
+  }
+
   Future<void> openSessionWriter(CoachingSnapshot snapshot, bool paid) async {
     if (owner == null) throw StateError('ACCOUNT_CHANGED');
     final gateway = ref.read(mathGatewayProvider(owner!));
@@ -141,12 +178,14 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
     if (user == null) {
       return const Scaffold(body: Center(child: Text('로그인 후 확인할 수 있습니다.')));
     }
+    // Keep the auto-disposed gateway alive while async History reads are pending.
+    ref.watch(mathGatewayProvider(user));
     if (owner != user) {
+      initialOwner ??= user;
       owner = user;
+      sources.clear();
       keys.clear();
-      future = request('read', {
-        'evaluation_id': widget.evaluationId,
-      }).then(CoachingSnapshot.new);
+      future = load();
     }
     return FutureBuilder<CoachingSnapshot>(
       key: ValueKey(user),
@@ -156,7 +195,7 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
           return MathCoachingScreen(
             key: ValueKey('$owner/${widget.evaluationId}'),
             snapshot: state.data!,
-            sources: widget.sources,
+            sources: sources,
             request: request,
             onRewrite: (paid) => openSessionWriter(state.data!, paid),
           );
@@ -175,11 +214,7 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
                             '안전한 첨삭 결과를 확인하지 못했습니다. 서버 공개 계약이 준비되면 다시 확인할 수 있습니다.',
                           ),
                           TextButton(
-                            onPressed: () => setState(
-                              () => future = request('read', {
-                                'evaluation_id': widget.evaluationId,
-                              }).then(CoachingSnapshot.new),
-                            ),
+                            onPressed: () => setState(() => future = load()),
                             child: const Text('다시 확인'),
                           ),
                         ],

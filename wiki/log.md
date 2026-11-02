@@ -1,3 +1,7 @@
+## 2026-11-03 — TASK16-G 재개 / History 원본 연결
+
+기존 private Storage와 active-owner RPC 재사용 원본 이미지 조회; TEST Q1/Q2 SHA-256 일치/미인증401/미등록404. Native Gateway 수명 유지 및 전사본 prose/TeX 구분. Simulator 저장 실제 Q1/Q2 결과·개념·History, 다음 무료 재작성 화면 PASS; 추가 Provider·평가·차감0. TEST RPC 표시명을 공식 문항명으로 연결, 평가6건 표시명/조회시각 외 동일. Owner iPhone 로그인 화면 확인, 전체 실기기 E2E는 진행 중. [공통 계약·검증 수준·남은 GAP](task16g-learning-loop-20261102.md#2026-11-03-재개--원본-조회-및-공통-계약). 운영 HOLD.
+
 ## 2026-11-03 — TASK16-G Owner 요청 작업 정리
 
 Mobile First 결정 기록: F 디자인 유지, 모바일 E2E 우선, PC WEB UX는 G 완료 후 H. 공통 계약/양방향 History는 G 범위. Owner 휴식 요청으로 실기기 검증 중단; 기기 열기 요청 보류. 저장 API 결과 재사용, History 원본 이미지 연결 조사부터 재개. 추가 Provider·배포·DB 변경 없이 문서 체크포인트만 저장. [검증 결과와 재개 순서](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03). 운영 HOLD.

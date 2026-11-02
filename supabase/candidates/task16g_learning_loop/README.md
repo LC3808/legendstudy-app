@@ -14,6 +14,8 @@ This is a reviewed TEST candidate, **not an automatic Production migration**. Do
 8. `question_storage.test.sql`: authenticated read of the exact official question PDF hash only. No scoring PDF/student-photo permission.
 9. `mixed_history.test.sql`: incremental RPC-only upgrade for installations that already have mixed tables. Fresh installs use the updated `mixed_learning.sql`; do not run both unnecessarily.
 
+10. `coaching_labels.test.sql`: incremental canonical question display label on the existing coaching wrapper; no new grants or ledger changes. Fresh installs use the updated `coaching_cycles.sql`.
+
 Installation is not idempotent by design: existing objects or changed baseline fail closed. Do not replay a successful migration blindly. No provider/API Secret belongs in these files. TEST API-key role bindings and runtime switches are external configuration; never PATCH secret placeholders obtained from a GET back into the environment.
 
 ## Verification

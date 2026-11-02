@@ -162,6 +162,43 @@ class MathGateway {
     return data;
   }
 
+  Future<Uint8List> readEvidence(String artifact) async {
+    checkOwner();
+    final request =
+        http.Request('POST', Uri.parse('$mathOrigin/api/math/artifact'))
+          ..followRedirects = false
+          ..headers.addAll({
+            'Authorization':
+                'Bearer ${client.auth.currentSession!.accessToken}',
+            'Origin': mathOrigin,
+            'Content-Type': 'application/json',
+          })
+          ..body = jsonEncode({'artifact_id': artifact});
+    final response = await transport
+        .send(request)
+        .timeout(const Duration(seconds: 25));
+    checkOwner();
+    if (response.statusCode != 200 ||
+        (response.contentLength ?? 0) > 20971520) {
+      throw StateError('ARTIFACT_UNAVAILABLE');
+    }
+    final bytes = BytesBuilder(copy: false);
+    await for (final chunk in response.stream.timeout(
+      const Duration(seconds: 25),
+    )) {
+      if (bytes.length + chunk.length > 20971520) {
+        throw StateError('ARTIFACT_UNAVAILABLE');
+      }
+      bytes.add(chunk);
+    }
+    checkOwner();
+    final result = bytes.takeBytes();
+    if (answerImageType(result) == null) {
+      throw const FormatException('INVALID_IMAGE');
+    }
+    return result;
+  }
+
   Future<void> uploadEvidence(String artifact, Uint8List bytes) async {
     checkOwner();
     final type = answerImageType(bytes);

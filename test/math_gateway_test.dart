@@ -127,20 +127,64 @@ void main() {
     await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
   });
   test('native photo uses existing multipart and extract endpoints without billing', () async {
-    final paths=<String>[];
-    final gateway=MathGateway(client,'fixture-a',transport:MockClient((r)async{
-      paths.add(r.url.path);expect(r.followRedirects,false);expect(r.headers['Origin'],mathOrigin);
-      expect(r.headers['Authorization'],startsWith('Bearer '));
-      if(r.url.path.endsWith('upload')){expect(r.headers['content-type'],startsWith('multipart/form-data'));expect(r.bodyBytes,isNotEmpty);}
-      else {expect(jsonDecode(r.body),{'attempt_id':'same-attempt'});}
-      return http.Response('{}',200);
-    }));
-    await gateway.uploadEvidence('same-artifact',Uint8List.fromList([137,80,78,71,13,10,26,10,0,0,0,0]));
+    final paths = <String>[];
+    final gateway = MathGateway(
+      client,
+      'fixture-a',
+      transport: MockClient((r) async {
+        paths.add(r.url.path);
+        expect(r.followRedirects, false);
+        expect(r.headers['Origin'], mathOrigin);
+        expect(r.headers['Authorization'], startsWith('Bearer '));
+        if (r.url.path.endsWith('upload')) {
+          expect(r.headers['content-type'], startsWith('multipart/form-data'));
+          expect(r.bodyBytes, isNotEmpty);
+        } else {
+          expect(jsonDecode(r.body), {'attempt_id': 'same-attempt'});
+        }
+        return http.Response('{}', 200);
+      }),
+    );
+    await gateway.uploadEvidence(
+      'same-artifact',
+      Uint8List.fromList([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]),
+    );
     await gateway.extract('same-attempt');
-    expect(paths,['/api/math/upload','/api/math/extract']);
-    await expectLater(gateway.uploadEvidence('x',Uint8List(12)),throwsFormatException);
-    expect(paths.length,2);gateway.close();
-    await expectLater(gateway.extract('same-attempt'),throwsStateError);
+    expect(paths, ['/api/math/upload', '/api/math/extract']);
+    await expectLater(
+      gateway.uploadEvidence('x', Uint8List(12)),
+      throwsFormatException,
+    );
+    expect(paths.length, 2);
+    gateway.close();
+    await expectLater(gateway.extract('same-attempt'), throwsStateError);
   });
 
+  test('history original download uses authenticated endpoint and rejects invalid image', () async {
+    var valid = true;
+    final image = [137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0];
+    final gateway = MathGateway(
+      client,
+      'fixture-a',
+      transport: MockClient((r) async {
+        expect(r.url.path, '/api/math/artifact');
+        expect(r.followRedirects, false);
+        expect(r.headers['Origin'], mathOrigin);
+        expect(r.headers['Authorization'], startsWith('Bearer '));
+        expect(jsonDecode(r.body), {'artifact_id': 'stored-original'});
+        return http.Response.bytes(valid ? image : [1, 2, 3], 200);
+      }),
+    );
+    expect(await gateway.readEvidence('stored-original'), image);
+    valid = false;
+    await expectLater(
+      gateway.readEvidence('stored-original'),
+      throwsFormatException,
+    );
+    gateway.close();
+    await expectLater(
+      gateway.readEvidence('stored-original'),
+      throwsStateError,
+    );
+  });
 }

@@ -205,7 +205,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                     fontSize: 12,
                   ),
                 ),
-                MathText('\\[${strength['student_formula']}\\]'),
+                MathStudentText(strength['student_formula'] as String),
               ],
             ],
           ),
@@ -275,7 +275,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                 ),
                 if (task['student_formula'] is String &&
                     (task['student_formula'] as String).isNotEmpty)
-                  MathText('\\[${task['student_formula']}\\]'),
+                  MathStudentText(task['student_formula'] as String),
                 const SizedBox(height: 8),
                 Text(
                   task['direction'] as String? ?? '사용한 조건과 계산을 확인하세요.',
@@ -472,7 +472,9 @@ class _MathTaskPageState extends State<MathTaskPage> {
                     ),
                   ),
                 const Text('학생이 작성한 수식'),
-                MathText('\\[${widget.task['student_formula'] ?? ''}\\]'),
+                MathStudentText(
+                  widget.task['student_formula'] as String? ?? '',
+                ),
                 const SizedBox(height: 8),
                 Text(
                   widget.task['source_note'] as String? ??

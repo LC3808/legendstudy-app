@@ -42,3 +42,23 @@ class MathText extends StatelessWidget {
     return Text.rich(TextSpan(children: spans));
   }
 }
+
+/// Confirmed student evidence can be a formula or a full prose transcript.
+/// Keep prose/line breaks intact; only wrap an isolated, undelimited expression.
+class MathStudentText extends StatelessWidget {
+  const MathStudentText(this.text, {super.key});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    final hasDelimiters =
+        text.contains(r'$') || text.contains(r'\[') || text.contains(r'\(');
+    final isolatedFormula =
+        !hasDelimiters &&
+        !text.contains('\n') &&
+        !RegExp(r'[가-힣]').hasMatch(text) &&
+        !RegExp(r'[A-Za-z]{3,}')
+            .hasMatch(text.replaceAll(RegExp(r'\\[A-Za-z]+'), '')) &&
+        RegExp(r'\\[a-zA-Z]+|[=^_∫]').hasMatch(text);
+    return MathText(isolatedFormula ? '\\[$text\\]' : text);
+  }
+}

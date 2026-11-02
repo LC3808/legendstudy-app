@@ -71,3 +71,54 @@ Owner 추가 결정은 기존 F 디자인 승인/G 통합 정책을 보완한다
 5. 혼합형 실제 Worker E2E 미완료를 별도 추적하고 필요한 최소 검증만 수행한다. Flutter analyze 최종 재확인 및 변경 범위 회귀 후 Owner 검수 보고.
 
 기준 구현 Native `3cd7853`, WEB `9551f8f`; 직전 문서 체크포인트 `29556d5`. TEST Preview/기존 접속 절차는 위 안내를 유지한다. 현재 설치된 Profile은 G 실제 TEST 연동 앱이며 F 오프라인 예제와 다르다. 운영 DB·Credit·Ledger·결제·APP 릴리스 브랜치 변경 금지 및 운영 HOLD 유지.
+
+
+## 2026-11-03 재개 — 원본 조회 및 공통 계약
+
+Owner 재개 지시로 Mobile First 통합 검증을 계속한다. PC 화면 확장은 H에 유지한다. 기존 7가지 보존 검토를 계승: 새 저장 구조/원본 수정 없이 기존 artifact와 소유권을 사용하며, 확인된 영역만 표시한다.
+
+`POST /api/math/artifact`에 artifact_id만 전달한다. 서버는 Auth 사용자→기존 math_artifact_storage describe의 active/owner 검증→공개 leaf 범위(설정 시)→PRESENT/image/크기/서명/SHA-256을 확인한다. private bytes만 no-store 반환하며 storage key·Worker credential·signed URL은 반환하지 않는다. Native History는 source_regions의 artifact를 기존 MathGateway로 읽고, 없는 영역을 추정하지 않는다. 결과 화면이 떠 있는 동안 autoDispose Gateway를 구독해 비동기 읽기 수명을 유지한다. DB schema/원장/Provider 변경 없음.
+
+TEST WEB 서버 `52f62a6`, 배포 https://9ffd0510.legendstudy-task16b.pages.dev. 저장 Q1/Q2 원본 두 장 HTTP200 및 SHA-256 일치, 브라우저형/Dart User-Agent 모두 확인. Python 기본 User-Agent는 Cloudflare1010으로 차단되어 초기 검사 실패였으며 보안 설정은 변경하지 않았다. Native 관련16검사, 서버/접근 경계20검사 PASS; 타입검사/Analyze PASS. 실제 화면 검증은 별도 진행 중이다.
+
+### APP / WEB 공통 계약과 H 인계
+
+| 대상 | G에서 사용하는 계약 | 검증/남은 사항 |
+|---|---|---|
+| 사용자·시험·문항 | 같은 Auth user, canonical exam_id/question_id/leaf_id | TEST 한양2024 Q1/Q2 연결, 플랫폼 별 복제 ID 없음 |
+| 원본·전사 | artifact_id + confirmed extraction/regions; 원본 이미지 인증 조회 | 기존 후보와 학생 확인본 보존. 실제 단계의 source_regions가 없으면 위치 미확정 안내; 임의 연결 금지 |
+| 평가 결과 | math-coaching-v1 read; 최대5 tasks, concepts, source_regions | 정답 포함 raw fallback 금지. 검수 개념 미연결/일반 힌트는 품질 GAP로 유지 |
+| 공개·힌트 | 같은 coaching hint/reveal 및 History 이벤트 | 명시 공개 후 full_solution. 인문 결과 비간섭, 혼합 Math만 적용 |
+| 반복 첨삭 | math_session quote/continue, previous_run_id, 기존 client_submission_id | 시험 단위1/0 반복·중복 방지. 클라이언트 예상 비용은 서버 견적/동의 기준 |
+| 기록 | 같은 math_session_history/read, math_learning/coaching history, 기존 mixed History | HTTP/RPC 저장·재조회 PASS와 실제 APP↔WEB UI 교차조회는 구분. 양방향 UI 검증 미완료 |
+| H WEB 표현 | 기존 LaTeX/원문 fallback와 서버 DTO 재사용 | 원본·결과·개념 PC 동시 비교 및 긴 수식/행렬/적분 viewport는 H 검증 대상; G 완료로 간주하지 않음 |
+
+현재 무료 재첨삭 샘플은 typed 답안이어서 source_regions가 빈 배열이다. 원본 이미지 API 성공을 이 샘플의 오류 위치 자동 연결 성공으로 확대하지 않는다. Provider 단계가 확인본 region을 연결한 경우에만 해당 영역을 강조한다.
+
+
+### Native 실제 저장 결과 UI 검증
+
+iOS Simulator에서 기존 TEST 계정으로 로그인하여 저장된 실제 한양2024 Q1/Q2 결과를 `MathCoachingPage`로 조회했다. 결과·최대5과제·기본 개념·History 실제 RPC/화면 연결, 원본 이미지 두 장 인증 다운로드 PASS. 기존 3회차 결과에서 4회차 무료 재첨삭 안내→시험/문항 고정→수정 답안 작성 화면까지 PASS. 제출 버튼은 누르지 않았으며 Provider0/새 평가0/원장 변경0이다. 이 검사는 전체17단계 신규 사진 제출 E2E와 구별한다.
+
+실제 캡처 검토에서 학생 전사본 전체를 강제로 TeX 수식으로 감싼 문제가 확인되어 `MathStudentText`로 보완했다. 일반 설명·줄바꿈과 명시적 LaTeX 구분자를 유지하고, 고립된 수식만 수식 렌더러에 전달한다. 새 디자인/전사 수정/평가 재호출 없음. 원문·혼합문장·분수·중복 delimiter 방지 회귀 포함 Native18검사 PASS. 초기 캡처 driver가 reportData를 덮어써 파일을 저장하지 못한 것은 수정 후 재검증했다.
+
+Owner iPhone12ProMax는 로그인 화면 진입을 확인했다. 기존 TEST 계정 로그인 후 홈 화면 확인은 진행 중이다. 임시 서명 설정 파일이 재부팅 후 없어져 첫 재서명 빌드가 실패했으며, 전용 TEST bundle/URL scheme과 별도 임시 설정을 복원해 다시 빌드한다. 운영 앱 설정 파일을 수정하지 않는다.
+
+캡처에서 발견한 제목의 내부 leaf_key는 아래 후속 패치로 수정했다. 남은 품질 GAP: 일반 힌트/개념은 대학별 검수 개념과 동등하지 않음; typed 수정 답안은 사진 영역이 없음; 전체 사진 제출/확인/평가/재첨삭 실기기 연속 검증과 WEB 교차 화면·혼합형 실제 Worker 검증은 미완료. Source 조회 성공을 이들 품질 PASS로 확대하지 않는다.
+
+
+최종 화면 재검증 기록:
+
+- 전사 표시 수정 후 Simulator 실네트워크 UI 재검증 PASS: Q1/Q2 결과·개념·History, 원본2장, 다음 무료 수정 작성 화면. 테스트의 첫 Scrollable이 탭 가로 스크롤을 가리켜 긴 전사본에서 탐색에 실패한 것은 실제 세로 ListView 지정 후 PASS. 앱 예외를 숨기거나 제출 단계를 생략해 통과한 것으로 처리하지 않는다(제출은 애초 이 읽기 검증 범위 밖).
+- 실제 화면은 Git 외부 `~/.codex/legendstudy-task16g-test/native-captures/`에 q1/q2-result, q1/q2-history, next-free-rewrite PNG로 보존. 학생 원본 이미지를 Git에 넣지 않는다.
+- 추가 회귀: 일반 설명/영문 등식 포함 설명은 원문으로, 고립 수식/명시 구분자는 수식으로 유지. 기존 전체 회귀 결과는 앞선 기록을 재사용하고 영향 범위18검사와 후속 prose2검사/Analyze를 실행했다.
+
+
+최종 빌드: Native Profile 재빌드/서명 PASS, iPhone12ProMax의 `com.legendstudy.app.task16f` / `LS Math TEST`에 설치 및 devicectl 실행 PASS. 검수 앱은 테스트 엔트리 대신 `lib/main.dart`이고 TEST DB·Pages 설정만 사용한다. 운영 앱의 bundle/URL scheme과 별개이며 Provider 키/계정 비밀번호는 빌드에 넣지 않았다. Owner 로그인 후 홈/실제 상세 화면 확인은 대기 중이다.
+
+
+### 공식 문항 표시명 / TEST RPC 후속
+
+`coaching_labels.test.sql`은 이미 설치된 coaching wrapper의 표시명만 보완한다. 기존 소유권/공개 검증 뒤 canonical Registry question FK로 문제1/2를 연결하며 새 권한·테이블·금융 변경은 없다. 신규 설치는 갱신된 `coaching_cycles.sql`을 사용한다. TEST에서 transaction rollback dry-run 후 적용하고, 기존 평가6건의 실제 인증 API 응답을 비교했다. `exam_label`과 원래 매 조회 갱신되는 `rewrite_policy.as_of` 외 모든 필드 동일, 함수 owner/search_path/ACL 보존 PASS. 운영 미적용. 이전 함수 원문은 비공개 TEST ops 디렉터리에 보존했다.
+
+History 위젯 회귀 추가 PASS: 여러 과제가 같은 artifact를 참조해도 한 번만 읽고, 이미지 조회가 끝날 때까지 gateway를 유지하며 화면 종료 시 해제한다. Widget mock에 실제 SDK 타이머를 만들던 테스트 구성은 순수 mock으로 교체했으며 실제 Auth/Storage는 앞선 Simulator·HTTP 검증으로 분리했다.
