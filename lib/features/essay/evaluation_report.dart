@@ -82,11 +82,13 @@ class EvaluationReport {
     required this.actions,
     required this.nextSteps,
     required this.pins,
+    this.isMath = false,
     this.priorId,
     this.previousReviews = const [],
     this.evidenceLabels = const [],
     this.sentenceReview,
   });
+  final bool isMath;
   final String id, answer, question, summary;
   final String? priorId;
   final List<Map<String, dynamic>> previousReviews;
@@ -132,6 +134,7 @@ EvaluationReport mathEvaluationReport(dynamic value) {
         ),
   ];
   return EvaluationReport(
+    isMath: true,
     id: evaluationText(v['evaluation_id']),
     answer: evaluationText(v['typed_answer']),
     question: evaluationText(evaluationObject(v['problem'])['statement']),

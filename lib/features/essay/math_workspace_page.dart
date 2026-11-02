@@ -1,3 +1,6 @@
+import 'math_text.dart';
+import 'math_learning_panel.dart';
+
 import 'dart:typed_data';
 
 import 'answer_image.dart';
@@ -128,6 +131,10 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       }
     }
   }
+
+  final exposureKeys = <String, String>{};
+  String exposureKey(String key) =>
+      exposureKeys.putIfAbsent(key, mathRequestId);
 
   Future<void> refresh() async {
     final id = evaluation;
@@ -352,9 +359,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
           padding: const EdgeInsets.all(20),
           children: [
             const CreditBalanceCard(),
-            const Text(
-              '1 크레딧으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. ',
-            ),
+            const Text('1 크레딧으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. '),
             if (!canEvaluate) const Text('문항을 확인할 수 있어요. 현재 첨삭은 이용할 수 없습니다.'),
             if (notice != null)
               Padding(
@@ -397,8 +402,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                       }),
               ),
               if (question != null) ...[
-                SelectableText(question['problem_statement'] as String? ?? ''),
-                SelectableText(question['statement'] as String? ?? ''),
+                MathText(question['problem_statement'] as String? ?? ''),
+                MathText(question['statement'] as String? ?? ''),
               ],
               if (report == null &&
                   (widget.evaluationId == null || prior != null)) ...[
@@ -479,6 +484,45 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 child: const Text('같은 첨삭 처리 다시 요청'),
               ),
             if (report != null) ...[
+              if (state != null && evaluation != null)
+                MathLearningPanel(
+                  key: ValueKey(evaluation),
+                  state: state!,
+                  onRewrite: rewrite,
+                  revealHint: (hint) async {
+                    final value = await gateway.call(
+                      'math_learning',
+                      'reveal_hint',
+                      {
+                        'evaluation_id': evaluation,
+                        'hint_id': hint['hint_id'],
+                        'level': hint['level'],
+                        'client_submission_id': exposureKey(
+                          '$evaluation/hint/${hint['hint_id']}',
+                        ),
+                      },
+                    );
+                    await refresh();
+                    return value['body'] as String;
+                  },
+                  revealSolution: (target) async {
+                    final value = await gateway.call(
+                      'math_learning',
+                      'reveal_solution',
+                      {
+                        'evaluation_id': evaluation,
+                        'target': target['target'],
+                        if (target['target'] == 'REFERENCE')
+                          'solution_id': target['solution_id'],
+                        'client_submission_id': exposureKey(
+                          '$evaluation/solution/${target['target']}/${target['solution_id']}',
+                        ),
+                      },
+                    );
+                    await refresh();
+                    return value;
+                  },
+                ),
               OutlinedButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(

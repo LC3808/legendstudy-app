@@ -1,3 +1,4 @@
+import 'math_text.dart';
 import 'result_pdf.dart';
 import 'growth_bars.dart';
 import 'growth_share.dart';
@@ -13,6 +14,7 @@ class EvaluationReportView extends StatelessWidget {
   final EvaluationReport? before;
   @override
   Widget build(BuildContext context) {
+    Widget bodyText(String text) => report.isMath ? MathText(text) : SelectableText(text);
     final changes = before == null
         ? null
         : compareEvaluationReports(before!, report);
@@ -30,9 +32,9 @@ class EvaluationReportView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(f.title, style: Theme.of(context).textTheme.titleSmall),
-              SelectableText(f.explanation),
-              if (f.evidence.isNotEmpty) SelectableText('답안 근거\n${f.evidence}'),
-              if (f.action.isNotEmpty) SelectableText('이렇게 고쳐보세요\n${f.action}'),
+              bodyText(f.explanation),
+              if (f.evidence.isNotEmpty) bodyText('답안 근거\n${f.evidence}'),
+              if (f.action.isNotEmpty) bodyText('이렇게 고쳐보세요\n${f.action}'),
             ],
           ),
         ),
@@ -42,14 +44,14 @@ class EvaluationReportView extends StatelessWidget {
       children: [
         if (report.question.isNotEmpty) ...[
           heading('문제'),
-          SelectableText(report.question),
+          bodyText(report.question),
         ],
         heading('제출 답안'),
-        SelectableText(
+        bodyText(
           report.answer.isEmpty ? '첨부 답안 · 비공개 보관' : report.answer,
         ),
         heading('종합 평가'),
-        SelectableText(
+        bodyText(
           report.summary.isEmpty ? '종합 평가가 저장되어 있지 않습니다.' : report.summary,
         ),
         EssayVoice(report: report, before: before),
@@ -76,7 +78,7 @@ class EvaluationReportView extends StatelessWidget {
                   label: c.rating == null ? null : '5단계 중 ${c.rating}단계',
                   child: Text(c.display),
                 ),
-                if (c.feedback.isNotEmpty) SelectableText(c.feedback),
+                if (c.feedback.isNotEmpty) bodyText(c.feedback),
               ],
             ),
           ),
@@ -89,10 +91,10 @@ class EvaluationReportView extends StatelessWidget {
         heading('구체적인 개선 방법'),
         if (report.actions.isEmpty)
           const Text('이 기록에는 구체적인 개선 방법이 저장되어 있지 않습니다.'),
-        for (final s in report.actions) SelectableText(s),
+        for (final s in report.actions) bodyText(s),
         heading('다음 답안에서 확인할 점'),
         if (report.nextSteps.isEmpty) const Text('별도의 다음 학습 방향은 저장되어 있지 않습니다.'),
-        for (final s in report.nextSteps) SelectableText(s),
+        for (final s in report.nextSteps) bodyText(s),
         ExpansionTile(
           title: const Text('최초 첨삭·재첨삭 비교'),
           children: [
@@ -122,11 +124,11 @@ class EvaluationReportView extends StatelessWidget {
         ),
         if (before != null) ...[
           heading('최초 답안'),
-          SelectableText(
+          bodyText(
             before!.answer.isEmpty ? '첨부 답안 · 비공개 보관' : before!.answer,
           ),
           heading('최초 종합 평가'),
-          SelectableText(before!.summary),
+          bodyText(before!.summary),
         ],
       ],
     );
