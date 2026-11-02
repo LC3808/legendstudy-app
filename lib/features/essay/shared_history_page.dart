@@ -1,3 +1,4 @@
+import 'math_mobile/math_coaching_page.dart';
 import 'result_pdf.dart';
 import 'round_history_actions.dart';
 import 'growth_bars.dart';
@@ -85,6 +86,15 @@ class _HistoryBodyState extends ConsumerState<_HistoryBody>
     final client = ref.read(supabaseClientProvider);
     if (client == null) return;
     try {
+      if (row.math && !row.exam) {
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => MathCoachingPage(evaluationId: e['id'] as String),
+          ),
+        );
+        if (mounted) _refresh();
+        return;
+      }
       final result = await SharedEssayHistory(
         client,
         owner,

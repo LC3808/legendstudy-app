@@ -1,0 +1,33 @@
+{
+  "task16f_checks": [
+    "safe_response_no_full_solution",
+    "other_owner_denied",
+    "forged_owner_denied",
+    "anonymous_denied",
+    "legacy_read_result_no_raw",
+    "private_legacy_not_callable",
+    "all_generated_fields_excluded",
+    "maximum_five_tasks",
+    "student_work_visible",
+    "undetermined_is_not_no_error",
+    "missing_hint_level_denied",
+    "explicit_reveal_full_response",
+    "disclosure_durable",
+    "reveal_idempotent",
+    "history_same_lineage",
+    "credit_ledger_unchanged",
+    "rollback_preserves_disclosure_event",
+    "rollback_restores_legacy_rpc"
+  ],
+  "count": 18,
+  "runtime_regressions": 131,
+  "production_writes": 0,
+  "provider_calls": 0,
+  "scope": "Disposable Unix-only PG17; no cloud deployment",
+  "sql_sha256": {
+    "002_disclosure_boundary.sql": "544c28d8c2b5a6b3e482028663a928220614719e215e3b74998f747660c9377d",
+    "postflight.sql": "d8a9c5b8caa54cc994373ae84f85fd2ef676ff7989c2f38c3f2da5792bb9b343",
+    "001_coaching.sql": "ad6b6c5b217801e3ead71babe4272ac7a3b377d73d0c57f7b87da8009b9bd721",
+    "rollback.sql": "f5d3d3f838365d2ec77af1f6c0c17402331565c1d29486ed2b9775aa1d83d9c3"
+  }
+}

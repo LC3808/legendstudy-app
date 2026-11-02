@@ -1,5 +1,9 @@
+import 'math_mobile/math_recognition_panel.dart';
+import 'math_mobile/academic_purple.dart';
+import 'math_mobile/math_formula_editor.dart';
+import 'math_mobile/math_image_tools.dart';
+import 'math_mobile/math_coaching_page.dart';
 import 'math_text.dart';
-import 'math_learning_panel.dart';
 
 import 'dart:typed_data';
 
@@ -15,7 +19,6 @@ import '../credits/credit_balance.dart';
 import 'math_gateway.dart';
 import 'shared_history.dart';
 import 'shared_history_page.dart';
-import 'evaluation_report_view.dart';
 import 'evaluation_report.dart';
 
 class MathWorkspacePage extends ConsumerWidget {
@@ -26,34 +29,36 @@ class MathWorkspacePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authStateProvider);
     final owner = auth.isLoading || auth.hasError ? null : auth.value?.userId;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('수리논술'),
-        actions: [
-          IconButton(
-            tooltip: '나의 첨삭 기록',
-            icon: const Icon(Icons.history),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => const SharedEssayHistoryPage(),
+    return MathMobileTheme(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('수리논술'),
+          actions: [
+            IconButton(
+              tooltip: '나의 첨삭 기록',
+              icon: const Icon(Icons.history),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const SharedEssayHistoryPage(),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+        body: owner == null
+            ? Center(
+                child: TextButton(
+                  onPressed: () => context.push('/auth'),
+                  child: const Text('로그인 후 내 답안을 작성하세요.'),
+                ),
+              )
+            : _MathWorkspace(
+                key: ValueKey('$owner/$evaluationId/$requestedLeafId'),
+                owner: owner,
+                evaluationId: evaluationId,
+                requestedLeafId: requestedLeafId,
+              ),
       ),
-      body: owner == null
-          ? Center(
-              child: TextButton(
-                onPressed: () => context.push('/auth'),
-                child: const Text('로그인 후 내 답안을 작성하세요.'),
-              ),
-            )
-          : _MathWorkspace(
-              key: ValueKey('$owner/$evaluationId/$requestedLeafId'),
-              owner: owner,
-              evaluationId: evaluationId,
-              requestedLeafId: requestedLeafId,
-            ),
     );
   }
 }
@@ -148,10 +153,10 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       leaf = next['leaf_id'] as String? ?? leaf;
     });
     if (next['valid_evaluation_available'] == true) {
-      final data = await SharedEssayHistory(
-        gateway.client,
-        widget.owner,
-      ).evaluationReport(true, id);
+      final data = (
+        report: mathEvaluationReport({'evaluation_id': id}),
+        before: null as EvaluationReport?,
+      );
       if (current) setState(() => report = data);
     } else if (current) {
       setState(
@@ -263,25 +268,20 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     }
   }
 
-  Widget sourceRegion(Map<String, dynamic> r) {
-    final matches = artifacts.entries.where((entry) => entry.value == r['artifact_id']);
-    if(matches.isEmpty || matches.first.key >= photos.length) return const Text('해당 원본 사진을 다시 확인해 주세요.');
-    double number(String key) => (r[key] as num?)?.toDouble() ?? double.nan;
-    final x=number('x'), y=number('y'), w=number('width'), h=number('height');
-    final valid=[x,y,w,h].every((v)=>v.isFinite) && x>=0 && y>=0 && w>0 && h>0 && x+w<=1 && y+h<=1;
-    return Column(children: [Stack(children: [
-      Image.memory(photos[matches.first.key]),
-      if(valid) Positioned.fill(child: LayoutBuilder(builder:(context,box)=>Stack(children:[Positioned(left:x*box.maxWidth,top:y*box.maxHeight,width:w*box.maxWidth,height:h*box.maxHeight,child:IgnorePointer(child:DecoratedBox(decoration:BoxDecoration(border:Border.all(color:Colors.deepOrange,width:3)))))]))),
-    ]), Text(valid ? '강조 영역과 전사본을 비교하세요.' : '영역 좌표 불확실 · 전체 원본을 확인하세요.')]);
-  }
-
   Future<void> confirmInput() async {
     final candidate = inputState?['candidate'] as Map?;
     final regions = (inputState?['candidate_regions'] as List? ?? [])
         .cast<Map<String, dynamic>>();
     if (candidate == null || regions.isEmpty) throw StateError('NO_EXTRACTION');
-    final unresolved = RegExp(r'UNCERTAIN|UNREADABLE|판독\s*불가|불명확|\[\s*\?[^\]]*\]|�', caseSensitive: false);
-    if (regions.any((r) => unresolved.hasMatch(corrections['${r['region_id'] ?? r['id']}'] ?? '${r['raw_text']} ${r['normalized_math']}'))) {
+
+    if (regions.any(
+      (r) => unresolvedMath(
+        corrections['${r['region_id'] ?? r['id']}'] ??
+            ((r['normalized_math'] as String? ?? '').isNotEmpty
+                ? r['normalized_math'] as String
+                : r['raw_text'] as String? ?? ''),
+      ),
+    )) {
       throw StateError('MATH_RECOGNITION_UNRESOLVED');
     }
     await gateway.call('math_input', 'confirm_extraction', {
@@ -374,6 +374,14 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
         return ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            if (inputState == null) const MathInputProgress(stage: 0),
+            const SizedBox(height: 20),
+            const Text(
+              '답안 제출',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            const Text('문제 풀이를 사진으로 촬영하거나 이미지를 선택해 주세요.'),
             const CreditBalanceCard(),
             const Text('1 크레딧으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. '),
             if (!canEvaluate) const Text('문항을 확인할 수 있어요. 현재 첨삭은 이용할 수 없습니다.'),
@@ -423,9 +431,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
               ],
               if (report == null &&
                   (widget.evaluationId == null || prior != null)) ...[
-                AnswerImagesInput(
+                MathImageInput(
                   values: photos,
-                  allowReorder: true,
                   enabled: !busy && !frozen,
                   onChanged: (value) async {
                     if (current && !busy && !frozen && value.length <= 6) {
@@ -442,33 +449,22 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                   decoration: InputDecoration(labelText: '추가 설명 또는 텍스트 답안'),
                 ),
                 if (inputState != null &&
-                    inputState!['can_request_evaluation'] != true) ...[
-                  const Text('사진에서 읽은 답안 확인 · 신뢰도와 무관하게 부호·지수·분수·괄호·부등호·적분 구간·숫자·단위를 원본과 대조하세요. 불명확한 기호는 임의로 보충하지 마세요.'),
-                  for (final r
-                      in (inputState!['candidate_regions'] as List? ?? [])
-                          .cast<Map<String, dynamic>>()) ...[
-                    sourceRegion(r),
-                    Text('최초 인식 원문: ${r['raw_text'] ?? ''}'),
-                    TextFormField(
-                      key: ValueKey(
-                        '${inputState!['candidate']}:${r['region_id'] ?? r['id']}',
-                      ),
-                      initialValue: (r['normalized_math'] as String? ?? '').isNotEmpty ? r['normalized_math'] as String : r['raw_text'] as String? ?? '',
-                      maxLines: null,
-                      maxLength: 10000,
-                      enabled: !busy,
-                      decoration: const InputDecoration(
-                        labelText: '판독된 내용 (직접 수정 가능)',
-                      ),
-                      onChanged: (v) =>
-                          corrections['${r['region_id'] ?? r['id']}'] = v,
-                    ),
-                    ],
-                  OutlinedButton(
-                    onPressed: busy ? null : () => run(confirmInput),
-                    child: const Text('판독 내용 확인·저장'),
+                    inputState!['can_request_evaluation'] != true)
+                  MathRecognitionPanel(
+                    key: ValueKey(inputState!['candidate'].toString()),
+                    regions: (inputState!['candidate_regions'] as List? ?? [])
+                        .cast<Map<String, dynamic>>(),
+                    sources: {
+                      for (final entry in artifacts.entries)
+                        if (entry.key < photos.length)
+                          entry.value: photos[entry.key],
+                    },
+                    busy: busy,
+                    onConfirm: (values) async {
+                      corrections.addAll(values);
+                      await run(confirmInput);
+                    },
                   ),
-                ],
                 FilledButton(
                   onPressed: busy || !canEvaluate || question == null
                       ? null
@@ -503,63 +499,35 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 child: const Text('같은 첨삭 처리 다시 요청'),
               ),
             if (report != null) ...[
-              if (state != null && evaluation != null)
-                MathLearningPanel(
-                  key: ValueKey(evaluation),
-                  state: state!,
-                  onRewrite: rewrite,
-                  revealHint: (hint) async {
-                    final value = await gateway.call(
-                      'math_learning',
-                      'reveal_hint',
-                      {
-                        'evaluation_id': evaluation,
-                        'hint_id': hint['hint_id'],
-                        'level': hint['level'],
-                        'client_submission_id': exposureKey(
-                          '$evaluation/hint/${hint['hint_id']}',
-                        ),
-                      },
-                    );
-                    await refresh();
-                    return value['body'] as String;
-                  },
-                  revealSolution: (target) async {
-                    final value = await gateway.call(
-                      'math_learning',
-                      'reveal_solution',
-                      {
-                        'evaluation_id': evaluation,
-                        'target': target['target'],
-                        if (target['target'] == 'REFERENCE')
-                          'solution_id': target['solution_id'],
-                        'client_submission_id': exposureKey(
-                          '$evaluation/solution/${target['target']}/${target['solution_id']}',
-                        ),
-                      },
-                    );
-                    await refresh();
-                    return value;
-                  },
-                ),
-              OutlinedButton(
+              FilledButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (_) => Scaffold(
-                      appBar: AppBar(title: const Text('첨삭 결과')),
-                      body: _OwnerReport(owner: widget.owner, report: report!),
+                    builder: (_) => MathCoachingPage(
+                      evaluationId: evaluation!,
+                      sources: {
+                        for (final entry in artifacts.entries)
+                          if (entry.key < photos.length)
+                            entry.value: photos[entry.key],
+                      },
+                      onRewrite: (paid) async {
+                        if (paid) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                '새 이용권 첨삭은 시험 선택에서 이용 조건을 확인해 주세요.',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+                        rewrite();
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ),
                 ),
-                child: const Text('첨삭 결과 · 성장 분석 보기'),
+                child: const Text('수리논술 첨삭 결과 보기'),
               ),
-              if ((state?['included_reevaluation'] as Map?)?['eligible'] ==
-                      true &&
-                  rows.isNotEmpty)
-                FilledButton(
-                  onPressed: busy ? null : rewrite,
-                  child: const Text('다시 작성하기 · 포함 재첨삭'),
-                ),
             ],
             TextButton(
               onPressed: () => Navigator.of(context).push(
@@ -573,18 +541,5 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
         );
       },
     );
-  }
-}
-
-class _OwnerReport extends ConsumerWidget {
-  const _OwnerReport({required this.owner, required this.report});
-  final String owner;
-  final ({EvaluationReport report, EvaluationReport? before}) report;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(authStateProvider);
-    return !auth.isLoading && !auth.hasError && auth.value?.userId == owner
-        ? EvaluationReportView(report: report.report, before: report.before)
-        : const Center(child: Text('로그인 상태가 변경되었습니다.'));
   }
 }

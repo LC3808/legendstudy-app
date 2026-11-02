@@ -1,3 +1,5 @@
+import 'math_mobile/math_recognition_panel.dart';
+import 'math_mobile/math_formula_editor.dart';
 import '../../core/supabase/supabase_providers.dart';
 
 import 'dart:convert';
@@ -242,6 +244,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
               },
             },
           );
+          sourceImages[artifact['artifact_id'] as String] = images[i];
           await gateway.uploadEvidence(
             artifact['artifact_id'] as String,
             images[i],
@@ -259,8 +262,16 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
     }
   }
 
+  final sourceImages = <String, Uint8List>{};
+
   Future<void> confirm(String key) async {
     final input = inputs[key]!;
+    for (final r in input['candidate_regions'] as List) {
+      final text =
+          corrections['${r['region_id'] ?? r['id']}'] ??
+          '${r['normalized_math'] ?? r['raw_text'] ?? ''}';
+      if (unresolvedMath(text)) throw StateError('MATH_RECOGNITION_UNRESOLVED');
+    }
     await gateway.call('math_input', 'confirm_extraction', {
       'attempt_id': (pending!['attempts'] as Map)[key],
       'run_id':
@@ -414,23 +425,21 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
             if (inputs[q['key']]!['can_request_evaluation'] == true)
               const Text('첨삭 요청 준비 완료')
             else ...[
-              for (final r
-                  in inputs[q['key']]!['candidate_regions'] as List? ?? [])
-                TextFormField(
-                  key: ValueKey(r['region_id'] ?? r['id']),
-                  initialValue:
-                      '${r['normalized_math'] ?? r['raw_text'] ?? ''}',
-                  maxLines: null,
-                  decoration: const InputDecoration(labelText: '사진에서 읽은 내용'),
-                  onChanged: (v) =>
-                      corrections['${r['region_id'] ?? r['id']}'] = v,
-                ),
               if (inputs[q['key']]!['input_state'] == 'CONFIRMATION_REQUIRED')
-                OutlinedButton(
-                  onPressed: busy
-                      ? null
-                      : () => work(() => confirm(q['key'] as String)),
-                  child: const Text('이 내용으로 확인'),
+                MathRecognitionPanel(
+                  key: ValueKey(
+                    '${q['key']}/${inputs[q['key']]!['candidate']}',
+                  ),
+                  regions:
+                      (inputs[q['key']]!['candidate_regions'] as List? ?? [])
+                          .map((r) => Map<String, dynamic>.from(r as Map))
+                          .toList(),
+                  sources: sourceImages,
+                  busy: busy,
+                  onConfirm: (values) async {
+                    corrections.addAll(values);
+                    await work(() => confirm(q['key'] as String));
+                  },
                 ),
             ],
           ],

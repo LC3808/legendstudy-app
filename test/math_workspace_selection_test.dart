@@ -68,6 +68,11 @@ void main() {
     tester,
   ) async {
     await mount(tester, 'selected', false);
+    await tester.scrollUntilVisible(
+      find.text('첨삭 진행'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('선택 내용'), findsOneWidget);
     expect(find.text('첫 문항'), findsNothing);
     expect(

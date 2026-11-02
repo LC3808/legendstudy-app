@@ -1,5 +1,7 @@
 # Current Status
 
+[TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
+
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
 
 [TASK16-C](task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.

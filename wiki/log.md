@@ -1,3 +1,7 @@
+## 2026-11-02 — TASK16-F Native 검수 빌드 / 운영 HOLD
+
+Academic Purple, 사진 보정·전사 확인, 결과/과제/개념/힌트/공개 화면 및 공통 서버 후보. Analyze PASS, Flutter 1,141 PASS/7 skip, 로컬 SQL18+131/학습L01–40. iPhone12 Pro Max 별도 LS Math TEST 설치, Debug 홈 실행 제한은 Profile 교체. 운영/Provider 호출0, mixed 공개 경계·반복 이용권·실제 E2E 미완료. [화면·인계](task16f-native-math-ux-20261102.md).
+
 ## 2026-10-27 — MY 최종 UI 보정 Production 완료
 
 - 2026-11-02 TASK16-E: Q1 기호 오류 확인 분류·UNCERTAIN Worker 차단·WEB/Native 상세 공개 gate. API 재호출0/DB변경0. [검증·잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
