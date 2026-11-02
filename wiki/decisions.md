@@ -804,3 +804,7 @@ Owner 확정: 논술 LAB `ESSAY_PROVIDER_KEY`와 수학 분석 `MATH_PROVIDER_AP
 ## 2026-11-02 — TASK16-C 인식·스캐폴딩 우선
 
 Owner는 신규 엔진 대신 손글씨·수식 인식/학생확인, 단계별 오류, 점진 힌트·수정 비교, 정확한 수식/표/그래프 시각화를 우선한다. [기존 필수 코칭 결정](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장)을 계승한다. 기존 통과 검증은 반복하지 않고 실제 구현과 품질 검증을 구분한다. AI 생성 이미지는 수학적 정답 근거가 아니다. [구현·검수·미완료](task16c-math-recognition-scaffolding-20261102.md), 운영은 Owner Preview 검수 후 별도 결정한다.
+
+## 2026-11-02 — TASK16-E 원본 확인과 정답 공개
+
+Owner 확정: 높은 인식 신뢰도는 원문 일치 보장이 아니다. UNCERTAIN을 임의 보충하지 않고 기존 Math 확인본 구조로 학생 확인을 거친다. 정답·완성 풀이 포함 출력은 학생의 명시적 공개 요청 뒤 표시한다. 기존 엔진/History를 재사용한다. [TASK16-E 구현과 남은 서버 공개 계약](task16e-recognition-disclosure-p0-20261102.md), [기존 수학 코칭 정책](math-technical-review-20261026.md). 운영 활성화 승인은 포함하지 않는다.

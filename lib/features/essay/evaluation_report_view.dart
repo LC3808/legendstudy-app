@@ -1,3 +1,4 @@
+import 'math_answer_disclosure.dart';
 import 'math_text.dart';
 import 'result_pdf.dart';
 import 'growth_bars.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 
 import 'evaluation_report.dart';
 
-class EvaluationReportView extends StatelessWidget {
-  const EvaluationReportView({required this.report, this.before, super.key});
+class _ReportBody extends StatelessWidget {
+  const _ReportBody({required this.report, this.before});
   final EvaluationReport report;
   final EvaluationReport? before;
   @override
@@ -132,5 +133,17 @@ class EvaluationReportView extends StatelessWidget {
         ],
       ],
     );
+  }
+}
+
+class EvaluationReportView extends StatelessWidget {
+  const EvaluationReportView({required this.report, this.before, super.key});
+  final EvaluationReport report;
+  final EvaluationReport? before;
+  @override
+  Widget build(BuildContext context) {
+    final body = _ReportBody(report: report, before: before);
+    return report.isMath || before?.isMath == true
+      ? MathAnswerDisclosure(key: ObjectKey(report), child: body) : body;
   }
 }

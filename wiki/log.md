@@ -1,5 +1,7 @@
 ## 2026-10-27 — MY 최종 UI 보정 Production 완료
 
+- 2026-11-02 TASK16-E: Q1 기호 오류 확인 분류·UNCERTAIN Worker 차단·WEB/Native 상세 공개 gate. API 재호출0/DB변경0. [검증·잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
+
 WEB 49fee24: 프로필/대학 통합 카드, 고3·retaker 지원 노출, MY 성장 간결화. UI27/Typecheck/Build PASS, Lint 오류0. 일반 고2 계정 PC·400px 실화면 확인, 운영 데이터 변경0. [배포·보존·복구](my-college-management-20261026.md#2026-10-27--최종-my-통합학년별-노출성장-요약).
 
 ## 2026-10-27 — 광운 인문 WEB STANDBY 공개

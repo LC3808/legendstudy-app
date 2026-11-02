@@ -338,7 +338,7 @@ class _Result extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('첨삭 결과')),
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
-          ? record.math
+          ? record.math || report.isMath
                 ? EvaluationReportView(report: report, before: before)
                 : EssayResultView(
                     isPreview: false,

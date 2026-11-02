@@ -263,11 +263,27 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     }
   }
 
+  Widget sourceRegion(Map<String, dynamic> r) {
+    final matches = artifacts.entries.where((entry) => entry.value == r['artifact_id']);
+    if(matches.isEmpty || matches.first.key >= photos.length) return const Text('해당 원본 사진을 다시 확인해 주세요.');
+    double number(String key) => (r[key] as num?)?.toDouble() ?? double.nan;
+    final x=number('x'), y=number('y'), w=number('width'), h=number('height');
+    final valid=[x,y,w,h].every((v)=>v.isFinite) && x>=0 && y>=0 && w>0 && h>0 && x+w<=1 && y+h<=1;
+    return Column(children: [Stack(children: [
+      Image.memory(photos[matches.first.key]),
+      if(valid) Positioned.fill(child: LayoutBuilder(builder:(context,box)=>Stack(children:[Positioned(left:x*box.maxWidth,top:y*box.maxHeight,width:w*box.maxWidth,height:h*box.maxHeight,child:IgnorePointer(child:DecoratedBox(decoration:BoxDecoration(border:Border.all(color:Colors.deepOrange,width:3)))))]))),
+    ]), Text(valid ? '강조 영역과 전사본을 비교하세요.' : '영역 좌표 불확실 · 전체 원본을 확인하세요.')]);
+  }
+
   Future<void> confirmInput() async {
     final candidate = inputState?['candidate'] as Map?;
     final regions = (inputState?['candidate_regions'] as List? ?? [])
         .cast<Map<String, dynamic>>();
     if (candidate == null || regions.isEmpty) throw StateError('NO_EXTRACTION');
+    final unresolved = RegExp(r'UNCERTAIN|UNREADABLE|판독\s*불가|불명확|\[\s*\?[^\]]*\]|�', caseSensitive: false);
+    if (regions.any((r) => unresolved.hasMatch(corrections['${r['region_id'] ?? r['id']}'] ?? '${r['raw_text']} ${r['normalized_math']}'))) {
+      throw StateError('MATH_RECOGNITION_UNRESOLVED');
+    }
     await gateway.call('math_input', 'confirm_extraction', {
       'attempt_id': attempt,
       'run_id': candidate['run_id'] ?? candidate['id'],
@@ -427,15 +443,17 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 ),
                 if (inputState != null &&
                     inputState!['can_request_evaluation'] != true) ...[
-                  const Text('사진에서 읽은 답안 확인'),
+                  const Text('사진에서 읽은 답안 확인 · 신뢰도와 무관하게 부호·지수·분수·괄호·부등호·적분 구간·숫자·단위를 원본과 대조하세요. 불명확한 기호는 임의로 보충하지 마세요.'),
                   for (final r
                       in (inputState!['candidate_regions'] as List? ?? [])
-                          .cast<Map<String, dynamic>>())
+                          .cast<Map<String, dynamic>>()) ...[
+                    sourceRegion(r),
+                    Text('최초 인식 원문: ${r['raw_text'] ?? ''}'),
                     TextFormField(
                       key: ValueKey(
                         '${inputState!['candidate']}:${r['region_id'] ?? r['id']}',
                       ),
-                      initialValue: r['raw_text'] as String? ?? '',
+                      initialValue: (r['normalized_math'] as String? ?? '').isNotEmpty ? r['normalized_math'] as String : r['raw_text'] as String? ?? '',
                       maxLines: null,
                       maxLength: 10000,
                       enabled: !busy,
@@ -445,6 +463,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                       onChanged: (v) =>
                           corrections['${r['region_id'] ?? r['id']}'] = v,
                     ),
+                    ],
                   OutlinedButton(
                     onPressed: busy ? null : () => run(confirmInput),
                     child: const Text('판독 내용 확인·저장'),

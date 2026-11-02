@@ -1,3 +1,4 @@
+import 'math_answer_disclosure.dart';
 import 'package:flutter/material.dart';
 
 import 'math_text.dart';
@@ -53,12 +54,12 @@ class _MathLearningPanelState extends State<MathLearningPanel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('풀이 단계별 학습'),
-        if (core != null) MathText('1단계 · 오류 위치\n${core['title'] ?? ''}'),
+        if (core != null) const Text('1단계 · 문제의 조건과 풀이 단계를 대조해 주세요.'),
         if (error != null) Text(error!),
         for (final level in [1, 2])
           if (level == 1 || hints.containsKey(1)) ...[
             if (hints.containsKey(level))
-              MathText(hints[level]!)
+              Text(level == 1 ? '사용한 정의와 정리의 적용 조건을 확인해 보세요.' : '조건을 빠짐없이 적용하고 계산을 다시 검산한 뒤 직접 수정해 보세요.')
             else
               OutlinedButton(
                 onPressed: busy
@@ -110,6 +111,7 @@ class _MathLearningPanelState extends State<MathLearningPanel> {
             ),
           ],
         ],
+        MathAnswerDisclosure(key: ValueKey(widget.state['evaluation_id']), child: Column(children: [if(core != null) MathText('${core['title'] ?? ''}\n${core['why'] ?? ''}'), for(final body in hints.values) MathText(body)])),
         if (solution != null)
           ExpansionTile(
             title: Text(

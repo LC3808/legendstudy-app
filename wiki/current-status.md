@@ -1,5 +1,7 @@
 # Current Status
 
+[TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
+
 [TASK16-C](task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.
 
 [TASK16-B 격리 Preview](task16b-commerce-social-integration-20261102.md): 수학전용 Provider 1회 PASS·17,227tokens/$0.1395 추정. 전체 제출·재첨삭 E2E 미완료·운영미활성.
