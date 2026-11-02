@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-B / 상경·사회 실제 첨삭 통합: [격리 Preview·대표 시험·검증·차단 요소](task16b-commerce-social-integration-20261102.md).
+
 TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).

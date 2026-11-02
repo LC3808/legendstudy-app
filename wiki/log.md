@@ -5042,3 +5042,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 결제 확인 대기 카드
 
 [대기화면](payment-app-foundation.md#task17-결제-확인-대기-화면--2026-11-02):운영e081a02c,완료카드와통일·처리중중복버튼숨김,17테스트/build PASS.
+
+## 2026-11-02 — TASK16-B 격리 TEST 통합 진행
+
+Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 재사용. 한양2026상경 Q1/Q2 공식근거·TEST preflight/PDF·브라우저 작성 검증. LAB 결과 누락/중복차단·일부/전체·Math 과정/최종답안 분리. Provider키 미확보로 실제 E2E/재첨삭 미실행, 전용 TEST 실행비활성·운영 변경0. [보고·재개](task16b-commerce-social-integration-20261102.md).
