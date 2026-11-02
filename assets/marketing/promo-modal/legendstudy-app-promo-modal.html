@@ -71,15 +71,28 @@
   function ssGet(k){ try{ return window.sessionStorage.getItem(k); }catch(e){ return (k in mem)?mem[k]:null; } }
   function ssSet(k,v){ try{ window.sessionStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
 
-  /* ===== GA4 안전 전송 (미설정 시 조용히 무시) ===== */
+  /* ===== GA4 안전 전송 (gtag 우선 → dataLayer 폴백, 미설정 시 무오류) =====
+     기존 track() 교체본(Codex analytics-phase1). send_to는 블로그 GA4(G-295EQHYTCK)로 명시 라우팅.
+     전제: 페이지에 gtag.js로 G-295EQHYTCK가 설정돼 있어야 함(wiki §2 확인). */
+  var lsPromoTracked = {}; // 이벤트명당 1회(페이지 로드 단위). 모달은 로드당 1회 표시 → 세션 3회 노출은 각 재노출=새 로드에서 정상 집계
   function track(name, params){
+    var allowed = ["app_promo_impression","app_promo_click","app_promo_dismiss","app_promo_snooze"];
+    if (allowed.indexOf(name) === -1 || lsPromoTracked[name]) return;
+    var clean = { send_to: "G-295EQHYTCK" };
     params = params || {};
-    try{
-      if (typeof window.gtag === "function"){ window.gtag("event", name, params); return; }
-      if (window.dataLayer && typeof window.dataLayer.push === "function"){
-        window.dataLayer.push(["event", name, params]); return;  // gtag와 동일한 shape
+    if (["ios","android","other","web"].indexOf(params.platform) >= 0) clean.platform = params.platform;
+    if (params.placement === "mobile_web") clean.placement = "mobile_web";
+    if (["ios","android","appstore","googleplay","app_store","google_play"].indexOf(params.store) >= 0) clean.store = params.store;
+    if (["close","backdrop","escape"].indexOf(params.reason) >= 0) clean.reason = params.reason;
+    try {
+      if (typeof window.gtag === "function"){
+        window.gtag("event", name, clean);
+      } else {
+        window.dataLayer = window.dataLayer || [];
+        (function(){ window.dataLayer.push(arguments); })("event", name, clean); // gtag와 동일: arguments 객체를 push
       }
-    }catch(e){}
+      lsPromoTracked[name] = true;
+    } catch (e) { /* 모달·스토어 이동을 막지 않음; 다음 발화에서 재시도 가능 */ }
   }
 
   /* ===== 환경 판별 ===== */

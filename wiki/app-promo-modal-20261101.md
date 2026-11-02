@@ -56,6 +56,7 @@ CTA "앱 다운로드하기 →" / 보조 "오늘은 그만 보기" / 닫기 "X"
 `app_promo_impression` / `app_promo_click` / `app_promo_dismiss` / `app_promo_snooze`.
 파라미터: `platform`(ios/android), `placement`(mobile_web), `store`(appstore/googleplay), `reason`.
 기존 GA4 이벤트명과 중복 없음. GA4 미설정이어도 무오류.
+- 2026-11-03 `track()` 교체(Codex analytics-phase1, Claude 검수): 파라미터 화이트리스트 + `send_to: G-295EQHYTCK` 명시 + `dataLayer.push(arguments)`(정석 gtag) + 이름당 1회 dedup. 호환성 위해 `catch(e)` 유지. 이벤트별 발화·세션 3회 노출 정책 불변 검증. CTA는 80ms 지연 후 이동(비콘 여유), 배지는 sendBeacon 의존(수신 확정은 GA4 Realtime). 전제: 페이지에 gtag.js로 G-295EQHYTCK 설정돼 있어야 함.
 
 ## 7. UX 안전성 / 접근성
 - 배경 스크롤 잠금(position:fixed + top offset) → 닫을 때 스크롤 위치 복원.
