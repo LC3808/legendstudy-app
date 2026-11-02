@@ -833,3 +833,14 @@ python3 tool/store-release ios --config config/observation-v1-qa.local.json --bu
 Wrapper invokes Flutter `build ipa --release --dart-define-from-file=<temporary validated config>` and preserves the existing production/OAuth/Observation settings. Do not substitute a bare Flutter build or Xcode Archive with missing generated defines. No secrets in command arguments/output.
 
 Before upload, verify41 Info.plist/version/signature and binary inclusion of the same four configured values using boolean-only comparisons. Then TestFlight login on fresh session and update path, including iPad, before resubmission. This investigation did not build/upload41 or alter Auth settings. Existing39 Owner PASS remains valid only for39.
+
+
+### TASK18 build41 Owner internal recovery — 2026-11-02
+
+Owner explicitly authorizes same39 settings → signed41 → existing Owner Internal QA. Owner reports TestFlight only39; actual console confirms40 had no internal group. No further40 device reproduction claimed.
+
+- Build source HEAD `03b73e293ef08e0a8f87f105af60ebbecc3d831a`, with pre-existing Owner Xcode project patch retained byte-for-byte (private backup). No auth/application source edits. Existing40 IPA/archive preserved privately under build40 before build41.
+- 1.0.1(41), com.legendstudy.app, same39 config/export options/wrapper. Generated defines confirm Supabase URL/key, Google IDs and all three OAuth flags match39 config. Signed IPA confirms four connection/Google values embedded (boolean-only checks); codesign deep/strict PASS.
+- Flutter Analyze0 issues; authentication regression36 PASS. Prior full1317 PASS/7SKIP and finalUI18 PASS retained as historical tests, not newly rerun full suite.
+- IPA SHA256 `5bc282c86d154fb24d46a45d7db1c2823cb66f2c592ce300d71ee31acb86cf5c`. Private artifact: `/Users/woojinchang/development/legendstudy-private-backups/task14b-20261101/build41/legendstudy_app.ipa`; build log preserved beside it.
+- Transporter delivered41 at13:06KST. ASC processing completed, build `01906f69-27a8-464c-8f5e-b37592017827`. Existing Owner Internal QA group (one tester) connected; group build list explicitly shows1.0.1(41) “테스트 중”. Test instructions saved. Console distribution PASS; physical login remains Owner acceptance pending. Proof `/tmp/task18-testflight41-owner.png`. No review submission, Production Auth/DB/Worker/Credit/Provider changes; login installation acceptance pending Owner.

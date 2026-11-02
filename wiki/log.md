@@ -5308,3 +5308,8 @@ Owner-approved five NEIS-verified display-cache inserts; Production unresolved5�
 ## 2026-11-02 — TASK18 build configuration diagnosis
 
 39/40 binary comparison confirms local40 missing connection/OAuth defines; Apple review error matches null auth-service path. Matching native entitlements/schemes; config precheck PASS. No auth/code change;41 procedure recorded, device reproduction pending. [Evidence and procedure](final-store-rc-1.md#task18-build-configuration-diagnosis--2026-11-02).
+
+
+## 2026-11-02 — TASK18 build41 internal delivery
+
+Owner-authorized39 config recovery: signed41, boolean-only embedded config/signature verification, Analyze0/auth36PASS. Transporter13:06KST delivered; ASC Owner Internal QA41 “테스트 중” verified. No auth code/Production changes or review resubmission. [Evidence](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02).
