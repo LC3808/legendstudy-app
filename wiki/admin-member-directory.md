@@ -95,3 +95,12 @@ Merged final suite539 PASS. Owner actual authenticated acceptance PASS before
 ordinal-only follow-up; no new runtime authorization claim from fixture tests.
 Live deployed code with isolated fixture RPCs:8 role/viewport cases plus ordinal1/26
 PASS; this is frontend verification, separate from Owner actual DB/session acceptance.
+
+
+## 2026-11-02 — Owner-approved school display cache refresh
+
+Actual Production read-only diagnosis:9 profiles have school codes,5 unresolved pairs; cache held only2 original schools. Existing NEIS proxy exact office/code lookups verified 행신고등학교(J10/7530135), 민족사관고등학교(K10/7801132), 신평고등학교(N10/8140094), 군산제일고등학교(P10/8321115), 점촌고등학교(R10/8750127). This is a missing display cache, not lost student school data.
+
+Owner explicitly approved “반영해”. Applied only5 missing verified metadata entries with ON CONFLICT DO NOTHING in a repeatable-read transaction; before/after full profiles fingerprint assertion passed inside the transaction (no raw profile data exported). Committed postcheck: cache7, configured profiles9, unresolved0, exact new NEIS matches5. Existing cache rows untouched. SQL reference: [bounded refresh](../supabase/verification/admin_members/school_cache_refresh_20261102.sql). Actual apply additionally checked profile preservation atomically.
+
+Seven preservation answers unchanged: current identity/time facts preserved; no school history fabricated; metadata-only INSERT; same office/code identity; no learning/admission/outcome changes; no new collection/access; display names derived solely from verified NEIS. No APP/WEB code, RPC/RLS, Credit, payment, Provider or user profile changes. No deployment required. Admin browser after-refresh acceptance not yet reported. New unknown schools still need verified refresh; automatic synchronization is not implemented by this hotfix. Existing confirmed rows can remain; rollback must not remove legitimate user selections or other cache entries.

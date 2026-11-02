@@ -5298,3 +5298,8 @@ Same a0aa618 source built/uploaded for both platforms; TestFlight39 associated w
 ## 2026-11-02 — Final APP UI freeze
 
 Owner directs removal only of ready-university beta label, preserving counts/actions/status. Existing39 cannot contain this new source; new signed build required. iOS39 requested delta acceptance recorded; Android39 device verification blocked by Owner receiving18. [Scope and release gate](final-store-rc-1.md#final-app-ui-patch-and-freeze--2026-11-02).
+
+
+## 2026-11-02 — Admin school names restored
+
+Owner-approved five NEIS-verified display-cache inserts; Production unresolved5→0, cache2→7, school-set profiles9 preserved. No profile/Credit/code/deploy changes. [Evidence](admin-member-directory.md#2026-11-02--owner-approved-school-display-cache-refresh).
