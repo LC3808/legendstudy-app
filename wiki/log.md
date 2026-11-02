@@ -5326,3 +5326,6 @@ Existing notice contract extended with paragraph formatting/private image candid
 ## 2026-11-02 — 공지 편집기 운영 적용 및 학교명 자동 해결
 
 Owner 요청으로 rich notice SQL/Storage와 additive member RPC 적용, WEB8a3afe3/productionbd8f7da4 배포. 기존 공지2건/프로필/환경/Functions 보존. 실제 이미지 업로드·서식 저장/재조회/보관 및 신규3학교 자동조회PASS; WEB1572PASS/4SKIP. 모바일visual미검증·APP41텍스트호환. [공지/롤백](notices-system.md#production-rich-editor-rollout--2026-11-02), [학교명/보존검토](admin-member-directory.md#automatic-school-name-resolution--2026-11-02).
+
+## 2026-11-02 — Analytics Phase1 history re-audit
+Claude ccae6bd/Codex049d307 통합 확인. 운영7보고RPC+check와 migration20261101115715 읽기확인. 기존 GA4속성1스트림 확인, LAB/home 생성증거 없음. WEB서버읽기/모달패치1600PASS/4SKIP, TS/buildPASS·lint0errors/5기존warnings; 실수신 미검증, 운영설정/배포 없음. APP41불변. [상세/Owner 방향/권한 게이트](admin-integrated-analytics-task10.md#analytics-phase1-recovery-and-history-re-audit--2026-11-02).

@@ -139,3 +139,47 @@ TASK01~09는 현재 코드/기존 보고서를 재사용했다. TEST Gateway·SQ
 롤백: 설정 활성화 전에는 SDK 미로드. 코드 문제 시 이번 WEB 커밋만 revert하고 재검증한다. 배포된 환경에서 향후 수집을 끄려면 public flag=false로 승인된 재빌드/배포가 필요하며, 브라우저 신규 로드부터 적용된다. DB 롤백은 필요 없다. 기존 본사이트 GA4와 Analytics 원장은 수정하지 않는다.
 
 구현 기준: APP baseline `8f3279b782cbe3e80119ddb447d3b72ac29e7eca`, WEB baseline `37850ec1534ee93f974e42cd8061da7c99336a41`. WEB 수집/검증 커밋 `017ecd3` (TASK10 별도 브랜치). APP 이번 변경은 Wiki 현행화이며 native source 변경 없음. 최종 SHA/원격 일치는 handoff 시 Git에서 확인한다.
+
+
+## Analytics phase1 recovery and history re-audit — 2026-11-02
+
+**PARTIAL / HOLD. No production change.** APP41 release branch untouched; documentation is on a separate worktree/branch. Owner requested historical verification before stream/settings decisions.
+
+### Verified existing implementation vs activation
+| Layer | Evidence | Current classification |
+|---|---|---|
+| Claude original | Git ccae6bd31e029efd385fcef694753b0fb8651d02, 31 files; AnalyticsService/Noop/Firebase, 31 events/14 parameters, native admin dashboard, reporting SQL candidate | IMPLEMENTED |
+| Codex integration | Git 049d3073dc8ea0d4f8e1339acbe0f5460efdaaea is ancestor of release HEAD; 40 files, bootstrap/auth/OCR/catalog integration; historical tests 1255 PASS/7 SKIP in v1 Wiki | INTEGRATED; not proof of receipt |
+| Native dashboard | lib/features/analytics/presentation/admin_analytics_page.dart, /my/admin/analytics; data/supabase_analytics_repository.dart | Existing RPC consumer; unchanged |
+| Flutter collection | analytics_bootstrap.dart + main.dart; ANALYTICS_ENABLED defaults false, Firebase initialization failure falls back to Noop | Implemented, activation/config pending; APP41 unchanged |
+| WEB collection | src/lib/analytics/{client,events,ga4}.ts; existing host/privacy/measurement flag checks, pageview dedup and allowlist | Implemented, production collection not configured |
+| WEB admin ledger | src/components/admin/admin-analytics.tsx + src/lib/admin/analytics.ts; kpi/funnel/revenue/cost/university map to existing analytics_* RPC | Reused/connected; separate from GA4 visitors |
+| Official home | official-home build/runtime reuses createGa4Runtime and banner_click; HOME_* flags | Implemented, measurement activation pending |
+| GA4 server reading | Before Phase1 no Google token exchange/runReport implementation; only readiness text | Phase1 implementation now local-tested, not deployed/authenticated |
+
+Claude branch names `claude/legendstudy-analytics-v1-20261030` and `...-9a315b` both exist locally. Original commit's own Wiki names `...-9a315b`; identity is verified by SHA rather than branch spelling. Do not remerge/reimplement.
+
+### Current production RPC check (read only)
+Live project stlhijzpjfgwwdgunlsd pg_proc confirms analytics_admin_check and seven reports: analytics_kpi_overview, analytics_funnel, analytics_free_credit, analytics_revenue, analytics_reliability, analytics_api_cost, analytics_university_usage. All seven accept p_from/p_to timestamptz. Live migration history confirms **20261101115715 admin_analytics_readonly_task11g**. This agrees with [TASK11-G](admin-data-task11.md#task11-g-production-integration--2026-11-01). Earlier v1 sections saying SQL not applied describe Oct30, not current production. No migrations/reinstalls/writes performed. Current inspection verifies installation, not every live metric or role response; prior role evidence remains dated TASK11-G.
+
+### Wiki vs actual GA4 configuration
+Full wiki search for GA4/Firebase/measurement/stream IDs covered v1, P0 contract, architecture review, TASK07/08/09/10/11/12, current-status/log and related routing documents.
+- [v1 history](analytics-v1-implementation-20261030.md): original service implemented, Firebase/GA configuration explicitly pending; no completed LAB/home stream ID.
+- This document's Nov1 GA4 section: existing property **396674471**, accessible LAB property not found; no stream creation performed.
+- [Home TASK12](official-home-launch-task12.md): HOME_ANALYTICS_ENABLED/HOME_GA4_MEASUREMENT_ID/HOME_GA4_PRIVACY_REVIEWED default OFF; actual receipt NOT_TESTED. Deployment success did not establish Analytics activation.
+- Nov2 live GA4 account47366112/property396674471 **All streams** lists exactly one: legendstudy.com, stream **5829568136**, existing measurement **G-295EQHYTCK** (Owner and audit confirmed). List shows recent48h traffic. No LAB/home/iOS/Android stream in this property. Other accounts cannot be ruled out.
+- Existing Google Cloud **legendstudy / 559697965317** enabled API list has no Analytics Data API (Analytics Hub is different); Credentials page shows no service accounts. Existing login OAuth clients preserved.
+
+Thus the missing activation is not absent Analytics v1 code: Firebase platform/build configuration, WEB measurement/privacy flags, and server GA4 read identity/API permission were never closed. Existing PostgreSQL reporting was installed separately.
+
+### Owner direction and remaining gates
+Nov2 Owner overrides earlier new-property candidate: reuse any verified existing stream; if absent, prepare **two web streams within396674471**, LAB and home. Do not create either stream or change operational settings before explicit approval. Preserve main stream. Do not claim cross-stream identity/installation attribution from this arrangement.
+Server read setup candidate: enable analyticsdata.googleapis.com in legendstudy; dedicated read service account + GA Viewer only; server-only GA4_SERVICE_ACCOUNT_EMAIL/GA4_PRIVATE_KEY in approved Cloudflare environment. No keys in chat/Git/public env. None of these changes has been executed.
+
+### Phase1 code prepared and verified
+WEB branch codex/analytics-phase1-recovery reuses existing UI/period/RPC gate. New Cloudflare /api/admin/ga4 reads fixed property/stream/host; admin_operator enforced server-side; readonly Google scope; date/header/response validation, timeout and error states. Returning users use filtered totalUsers, not new-user subtraction. Daily/channel/page and four existing promotion events supported; installation remains NOT_AVAILABLE. Existing ledger SQL untouched.
+TASK15 transport patch replaces only track(): proper arguments queue, existing gtag, existing event names and per-document dedup. Owner must apply skin patch; live Tistory untouched. Replacement and exact location are in WEB docs/analytics-phase1/README.md and promo-track-replacement.js.
+WEB: TypeScript/build PASS;1600 tests PASS/4 SKIP;lint0errors/5existingwarnings. Live Data API receipt, mobile promo receipt, LAB/home receipt remain BLOCKED/NOT_TESTED. Flutter tests not rerun: no APP code change. Existing signup/evaluation aggregate code unchanged; this is not a new live aggregate accuracy certification.
+
+Preservation seven answers: marketing eventtime vs serverfacts; GA property/stream/time source; no UPDATE/delete/backfill; admin auth only/no student join; marketing is not learning outcome; readonly/no PII/unchanged consent; transient derived report not second ledger. Existing longitudinal strategy applies.
+Rollback: before deployment revert WEB change; after future approved deployment restore prior Pages artifact and restore Owner skin backup if applied. Never reset/delete GA history. Production deploy and settings await Owner review.
