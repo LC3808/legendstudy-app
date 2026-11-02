@@ -12,7 +12,6 @@
 
 [TASK11-H](admin-data-task11.md#task11-h-production-design-follow-up--2026-11-02): prototype콘솔/30메뉴/공지시각·검색정렬 운영119ffdb7. WEB1529PASS/4SKIP·TS/buildPASS·lint0errors/5기존warnings. 베타/공지RPC는14B기설치; 피드백쓰기·GA/Firebase·성적/인사이트승인 잔여. 운영환경/기존Functions·범위외자산 보존.
 
-[TASK10 통합 분석·GA/Firebase 미연결·자동 검증·잔여 설정](admin-integrated-analytics-task10.md). 실제 수신 미검증; 기존 구현 보존.
 
 [TASK09 공통 TEST PARTIAL/HOLD](essay-shared-test-task09-20261101.md): TEST 관리자 6개 메뉴 연결·WEB 검증 완료. Analytics WEB/평가 Gateway 미완료; build33 보존.
 
@@ -20,7 +19,6 @@
 
 [최종 결과 UX·빈 재작성·검증/빌드](final-feedback-ux-refinement-20261031.md) APP/WEB 구현. 전체 운영 페이지 미교체; 실계정 WEB 읽기 검수는 위 후속 기록 참조. 실기기·출력 확장 별도.
 
-[Analytics TASK03·APP/WEB 계측·GA4미설정·SQL집계이력](analytics-v1-implementation-20261030.md#task03-existing-integration-verification--2026-10-31).
 
 [10/31 채점기준 구조](rubric-structure-fix-20261031.md): APP/WEB 설명·공식 원문 분리, 숭실 후보 PDF PASS. 실제 운영 v3와 기준/digest 불일치로 직접 적용 BLOCKED(최종 검증 참조). [Round29·iOS30 보존](app-device-round29-20261030.md).
 
