@@ -1,6 +1,6 @@
 # TASK 15 — 모바일 웹 앱 홍보 모달 (legendstudy.com) · 2026-11-01
 
-상태: **CODE COMPLETE / OWNER DEPLOYMENT PENDING**
+상태: **CONFIRMED (Owner, 2026-11-02)** — 최종 디자인·배지 폰 확인 후 확정. 운영 스킨 반영은 Owner 수행.
 담당: Claude(UI/UX·지원 코딩). 대상: `legendstudy.com`(**티스토리 스킨**).
 산출물: `assets/marketing/promo-modal/` — [`legendstudy-app-promo-modal.html`](../assets/marketing/promo-modal/legendstudy-app-promo-modal.html)(드롭인 코드), [`README.md`](../assets/marketing/promo-modal/README.md)(적용 가이드).
 
@@ -79,4 +79,5 @@ CTA "앱 다운로드하기 →" / 보조 "오늘은 그만 보기" / 닫기 "X"
 ## 10. 미결(Owner)
 - 실제 티스토리 스킨 수정 권한·배포 수행(Claude 권한 없음 → 코드·위치 제공으로 대체).
 - 적용 후 iPhone Safari/Chrome·Android Chrome·삼성인터넷·PC 교차 검증.
-- 정상 작동 확인 후 TASK 15 완료 처리.
+- 2026-11-02 Owner 폰 확인 후 최종 디자인 **확정**. 운영 반영/교차검증 결과는 Owner가 최종 확인.
+- 후속(별건): 모달 전환율(app_promo_click/impression) 관찰 → 노출 타이밍·빈도 A/B, 가입→논술 체험→결제 퍼널 개선.
