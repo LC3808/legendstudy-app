@@ -800,3 +800,7 @@ Owner 최신 지시로 기존 최초·최신 비교를 확장: 1회 막대, 2회
 ## 2026-11-02 — 논술·수학 Provider 키 분리
 
 Owner 확정: 논술 LAB `ESSAY_PROVIDER_KEY`와 수학 분석 `MATH_PROVIDER_API_KEY`는 별도 키로 운영한다. 기존 운영 Secret은 변경·삭제하지 않는다. [기존 TASK16-B 격리 정책과 실제 검증](task16b-commerce-social-integration-20261102.md#2026-11-02--수학-전용-provider-e2e-pass)을 계승하며, 키를 채팅/로그/Git/보고서에 출력하지 않는다. TEST 성공은 운영 활성화 승인이 아니다.
+
+## 2026-11-02 — TASK16-C 인식·스캐폴딩 우선
+
+Owner는 신규 엔진 대신 손글씨·수식 인식/학생확인, 단계별 오류, 점진 힌트·수정 비교, 정확한 수식/표/그래프 시각화를 우선한다. [기존 필수 코칭 결정](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장)을 계승한다. 기존 통과 검증은 반복하지 않고 실제 구현과 품질 검증을 구분한다. AI 생성 이미지는 수학적 정답 근거가 아니다. [구현·검수·미완료](task16c-math-recognition-scaffolding-20261102.md), 운영은 Owner Preview 검수 후 별도 결정한다.
