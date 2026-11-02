@@ -82,7 +82,8 @@ void main() {
         matching: find.byType(InkWell),
       );
       expect(tester.widget<InkWell>(heldCard).onTap, isNull);
-      expect(find.text('베타 첨삭 가능'), findsNWidgets(2));
+      expect(find.text('베타 첨삭 가능'), findsNothing);
+      expect(find.text('첨삭 시작하기'), findsNWidgets(2));
       expect(find.text('이용 가능한 시험 2개'), findsOneWidget);
       expect(find.text('이용 가능한 시험 1개'), findsOneWidget);
       expect(find.text('첨삭 준비 중'), findsOneWidget);

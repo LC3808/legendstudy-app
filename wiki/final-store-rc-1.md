@@ -792,3 +792,12 @@ Production read-only query confirms campaign cfc56a2b-8fbd-4c2a-a200-e55b509ad97
 | Store production review | BLOCKED pending required physical acceptance, not SUBMITTED |
 
 No production DB/Worker/Provider/Credit/payment policy changes. No purchase, credit grant/claim, or evaluation executed. New academic-type expansion remains separate from this release. Rollback keeps prior store production versions; internal testers may return to preserved prior TestFlight builds, and code rollback for uploaded Android requires a higher versionCode. No ledger or user-data restoration.
+
+
+### Final APP UI patch and freeze — 2026-11-02
+
+Owner final scope: remove only ready-university “베타 첨삭 가능”; retain official logo/name, available-exam count, start label and chevron. Pending/error/loading labels, card readiness/onTap, Registry/Package/service API and counts unchanged. Remove the ready-only Text node rather than leave an empty line; the existing title-to-content spacing remains. No storage/update/event/identity/access semantics changed.
+
+Owner explicitly confirmed iOS39 requested delta checks, preserved without extending to unreported signup/delete/OAuth/sync. Android Owner downloaded1.0.0(18), so actual39 installation/device QA remains BLOCKED despite console internal39 availability. This new UI source is not contained in either uploaded39 binary. **A new signed iOS/Android build is required before submitting this change**; next number must be checked against stores (40 candidate, not reserved). No build/upload/submission performed in this narrow patch. Preserve39 artifacts/source a0aa618; subsequent APP UI changes frozen by Owner. Only release verification/build/submission and confirmed blocker fixes continue.
+
+Validation: Flutter Analyze0 issues; card/service-state6 + catalog/navigation/Registry12 =18 PASS,0 FAIL. Wiki handoff PASS (current-status11829 bytes). Logs /tmp/task14-final-ui-{analyze,test,navigation}.log. No new physical-device acceptance claimed. Rollback is reverting this single display patch before a new build; no DB/credit/Provider rollback.

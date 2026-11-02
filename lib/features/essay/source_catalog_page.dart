@@ -551,15 +551,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                                         .titleMedium,
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    service.isLoading
-                                        ? '서비스 확인 중'
-                                        : service.hasError
-                                        ? '서비스 상태 확인 필요'
-                                        : ready.contains(u['universityId'])
-                                        ? '베타 첨삭 가능'
-                                        : '첨삭 준비 중',
-                                  ),
+                                  if (service.isLoading ||
+                                      service.hasError ||
+                                      !ready.contains(u['universityId']))
+                                    Text(
+                                      service.isLoading
+                                          ? '서비스 확인 중'
+                                          : service.hasError
+                                          ? '서비스 상태 확인 필요'
+                                          : '첨삭 준비 중',
+                                    ),
                                   if (ready.contains(u['universityId'])) ...[
                                     if (ref
                                             .watch(
