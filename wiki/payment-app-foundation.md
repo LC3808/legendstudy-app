@@ -120,3 +120,12 @@ Owner 확정: payment@legendstudy.com만 기존 /pricing/에서 TEST 결제, 일
 Owner Secret삭제·교체금지. Dashboard/API 등록확인; 앞선 “미등록/누락” 표현을 정정한다. 운영88a28465-0c5f-46ad-b76c-9323b3dfd606/source fccff25에서 finance_key_present=true/is_string=true/is_empty_string=true 실측. reviewer는존재/비어있지않음. TEST키형식·MID검사PASS. context.env는변경없이전달되며 설정검사에서Supabase호출전503; 서명/만료/권한오류401과다르다.
 
 Production설정전체·자산1178불변재배포로도동일. 암호화저장값이빈것인지Cloudflare전달문제인지는redacted metadata로구분불가; 원인단정·새키요청안함. 기존설정재사용검증은수행했으나복구는미완료. Supabase payment_process는essay_finance만EXECUTE,유효identity필수,DB함수/ACL불변.141테스트/typecheck PASS. 별도TEST runtime200/승인미완료,운영TEST주문11/LIVE0/지급연결0/기존원장해시동일. Secret·DB쓰기0. [상세진단](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+
+### TASK17 Finance 최종 원인 구분·복구 절차 — 2026-11-02
+
+Production 빌드전용 진단77cc3c43에서 앱실행 전 process.env에도 finance present/string/empty=true, reviewer nonempty=true. exit73으로 배포 전 종료, pnpm build복원·환경설정동일·운영88a28465보존. 따라서 코드기본값·Functions전용접근오류가 아닌 Cloudflare 제공설정 문제다. [10/23 Secret replay 사고](essay-p0-direct-execution-20261023.md)에 Finance 영향이 명시돼 있고 이후 Finance 복원근거는 발견하지 못했다. 이는 현재빈값과일치하는유력원인이며 암호화저장상태/정확한과거쓰기의증명은아니다.
+
+기존운영토큰은API로읽어복구할수없음. Owner 안전저장소의원본→운영DB read-only get/nonexistent검증(PT404)→Owner 승인복원→보존재배포 우선. 만료/분실시 기존Production발급주체·essay_finance·기존gateway subject를확인한뒤 제한만료토큰재발급; TEST/service_role/worker대체·새서명키·ACL변경금지. 현재issuer/subject미확인으로임의발급안함. Dashboard위치·오류구분·재검증순서는 [WEB 실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#safe-owner-recovery-procedure-not-executed).
+
+최종운영runtime503/별도TEST200, 기존35grants·124transactions해시동일/LIVE0/TEST지급연결0. Secret교체·DB쓰기0. 승인E2E·복구·재심사제출은미완료이며운영LIVE HOLD유지. 앞선저장/전달원인미확정기록은위빌드전증거로좁혀졌다.
