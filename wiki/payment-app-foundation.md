@@ -114,3 +114,9 @@ Owner 확정: payment@legendstudy.com만 기존 /pricing/에서 TEST 결제, 일
 운영배포 ed3c8c8b-4dfb-4373-b63b-aff40afa307b/source d326e67: 정적자산1178개 전부 보존, 설정검사 함수에 값 없는 boolean 진단만 추가. 실제503 원인은 PAYMENT_FINANCE_TOKEN 누락/빈값으로 확인; TEST키형식/MID/공개설정 PASS. 새Toss키 불필요, 기존 운영용 finance credential 복구 필요(TEST DB토큰·service_role 대체금지).140테스트/typecheck PASS, Owner payment로그인 확인. 실제 A/B/C/D 권한수용·승인E2E는 설정오류로미완료.
 
 09:57KST 기존35 grants/124 transactions 해시 보존, TEST주문11/LIVE0/TEST지급연결0 유지. 전체는37/126이며 증가2건은 signup_bonus_v1+6; 총Credit불변으로 오기하지 않는다. 결제귀속지급0. 심사종료: PAYMENT_ENABLED=false 및 허용목록비움→재배포→서버차단 확인; TEST기록보존. [WEB 실제설정·배포·인수인계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 Finance 바인딩 진단 정정 — 2026-11-02
+
+Owner Secret삭제·교체금지. Dashboard/API 등록확인; 앞선 “미등록/누락” 표현을 정정한다. 운영88a28465-0c5f-46ad-b76c-9323b3dfd606/source fccff25에서 finance_key_present=true/is_string=true/is_empty_string=true 실측. reviewer는존재/비어있지않음. TEST키형식·MID검사PASS. context.env는변경없이전달되며 설정검사에서Supabase호출전503; 서명/만료/권한오류401과다르다.
+
+Production설정전체·자산1178불변재배포로도동일. 암호화저장값이빈것인지Cloudflare전달문제인지는redacted metadata로구분불가; 원인단정·새키요청안함. 기존설정재사용검증은수행했으나복구는미완료. Supabase payment_process는essay_finance만EXECUTE,유효identity필수,DB함수/ACL불변.141테스트/typecheck PASS. 별도TEST runtime200/승인미완료,운영TEST주문11/LIVE0/지급연결0/기존원장해시동일. Secret·DB쓰기0. [상세진단](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).

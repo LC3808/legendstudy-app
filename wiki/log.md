@@ -5014,3 +5014,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 전용권한 배포·Finance 누락 확인
 
 [심사권한](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02): 기존 payment Auth UUID만 allowlist 설정, 운영ed3c8c8b/자산1178보존.140테스트/typecheck PASS. 진단상 finance token 비어있음; 키교체 없이 운영credential 복구대기. 원래원장해시보존, 신규signup+6별도. Owner로그인확인/실제승인미완료.
+
+## 2026-11-02 — TASK17 Finance 빈 runtime 문자열 확정
+
+[진단정정](payment-app-foundation.md#task17-finance-바인딩-진단-정정--2026-11-02):등록은존재하며runtime property/string/empty=true. 설정보존재배포88a28465로재현,141검사PASS. Supabase검증이전503; 저장/전달원인미확정·Secret변경금지준수·복구미완료.
