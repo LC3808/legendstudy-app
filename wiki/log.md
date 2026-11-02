@@ -1,3 +1,7 @@
+## 2026-11-03 — TASK16-G Owner 요청 작업 정리
+
+Mobile First 결정 기록: F 디자인 유지, 모바일 E2E 우선, PC WEB UX는 G 완료 후 H. 공통 계약/양방향 History는 G 범위. Owner 휴식 요청으로 실기기 검증 중단; 기기 열기 요청 보류. 저장 API 결과 재사용, History 원본 이미지 연결 조사부터 재개. 추가 Provider·배포·DB 변경 없이 문서 체크포인트만 저장. [검증 결과와 재개 순서](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03). 운영 HOLD.
+
 ## 2026-11-02 — TASK16-F Native 검수 빌드 / 운영 HOLD
 
 Academic Purple, 사진 보정·전사 확인, 결과/과제/개념/힌트/공개 화면 및 공통 서버 후보. Analyze PASS, Flutter 1,141 PASS/7 skip, 로컬 SQL18+131/학습L01–40. iPhone12 Pro Max 별도 LS Math TEST 설치, Debug 홈 실행 제한은 Profile 교체. 운영/Provider 호출0, mixed 공개 경계·반복 이용권·실제 E2E 미완료. [화면·인계](task16f-native-math-ux-20261102.md).

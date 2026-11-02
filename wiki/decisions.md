@@ -818,3 +818,8 @@ Owner 확정: 높은 인식 신뢰도는 원문 일치 보장이 아니다. UNCE
 ## 2026-11-02 — TASK16-G 디자인 PASS / 학습 루프 통합
 
 Owner가 [TASK16-F Native UI/UX](task16f-native-math-ux-20261102.md)를 PASS 처리했다. 현재 Academic Purple 화면을 유지하고 디자인 개편하지 않는다. 서버 공개 제어·반복 1유료+1무료·같은 History·시험 단위 차감·실제 TEST 제출을 [TASK16-G](task16g-learning-loop-20261102.md)에서 통합한다. 무료는 각 유료 사이클 완료 후 14일/기존 베타 종료 제한, 중복 차감 방지. 운영 DB/Credit/Ledger/결제/릴리스 적용은 별도 승인이다.
+
+
+## 2026-11-03 — TASK16-G Mobile First / TASK16-H WEB 분리
+
+[기존 F 승인·G 학습 루프 결정](#2026-11-02--task16-g-디자인-pass--학습-루프-통합)을 유지한다. G는 모바일 실제 학습 루프와 E2E를 우선하며 디자인 개편하지 않는다. G 완료 후 H에서 원본 답안·첨삭 결과·기본 개념 동시 비교 PC 전용 WEB UX, LaTeX 수식 표시와 오류 영역 연결을 개발한다. G에서 공통 Backend/평가/History/이용권/재첨삭 계약 및 APP↔WEB 제출 조회를 정리한다. 별도 시스템을 만들거나 G 범위를 PC 레이아웃으로 확대하지 않는다. Owner 검수 전 운영 활성화 금지. [재개 체크포인트](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03).

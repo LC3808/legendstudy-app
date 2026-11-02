@@ -55,3 +55,19 @@ Owner 절차: 로컬 `/Users/woojinchang/.codex/legendstudy-task16b-test/owner-a
 사후 ACL: 새 공개 RPC anon/service deny, authenticated allow, raw 이전 함수 authenticated deny, 빈 search_path 확인. Supabase advisor의 private-table no-policy INFO는 의도된 직접 접근 차단이다. authenticated security-definer 경고는 owner검증 RPC별 검토 대상이다([설명](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable)). 기존 TEST leaked-password protection 경고는 변경하지 않았다([설명](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection)). 전체 보안 감사 통과로 확대 해석하지 않는다.
 
 검수 체크포인트: Native 구현 `3cd7853`, WEB `9551f8f`; TEST 배포 https://43cdc8cf.legendstudy-task16b.pages.dev (canonical 로그인 주소 유지). iPhone12ProMax에 동일한 별도 bundle `com.legendstudy.app.task16f` Profile 설치 완료. 실행은 기기 잠금으로 거절되어 런타임 화면 PASS로 세지 않는다. Owner가 잠금 해제 후 LS Math TEST의 TEST 로그인을 진행해야 한다. 새 브라우저에서는 위 기존 접속 코드가 필요하며 코드 전달 누락을 정정했다. 전체 UI E2E·혼합형 실제 Provider 검증은 아직 미완료다.
+
+
+## Mobile First 결정 및 작업 중단 체크포인트 — 2026-11-03
+
+Owner 요청으로 오늘 작업을 정리하고 다음 작업은 Owner 재개 후 이어간다. 기기 잠금 해제 요청은 지금 수행할 필요 없다. 이 체크포인트에서 추가 Provider 호출·배포·DB 변경은 하지 않는다. TASK16-G 완료 또는 운영 활성화로 처리하지 않는다.
+
+Owner 추가 결정은 기존 F 디자인 승인/G 통합 정책을 보완한다. **Mobile First**: 승인된 Academic Purple 유지 → 모바일 실제 학습 루프/E2E 우선 → G 완료 후 TASK16-H WEB UX. WEB은 모바일 확대가 아닌 원본 답안·첨삭 결과·기본 개념 동시 비교 PC 레이아웃, LaTeX 긴 수식·분수·행렬·적분 표시, 개선 과제와 원본 오류 위치 연결을 요구한다. PC 레이아웃 구현은 G 범위에서 제외한다. 공통 Backend·평가 결과·History·이용권·재첨삭 정책과 APP↔WEB 제출 조회 계약 정리는 G 범위다. [기존 결정](decisions.md#2026-11-02--task16-g-디자인-pass--학습-루프-통합).
+
+재개 순서:
+1. 현재 worktree/TEST 상태 확인 후 iPhone 12 Pro Max의 LS Math TEST 로그인·실제 화면 검증. 기존 성공 API/Provider 호출은 반복하지 않는다. 저장된 한양 Q1/Q2 결과부터 재사용한다.
+2. History 재진입 시 원본 이미지 연결 보완 여부 확인. 현재 coaching의 `source_regions`에는 artifact/좌표가 있지만 Native History 진입은 원본 이미지 bytes를 넘기지 않는 것으로 확인했다. 기존 업로드/Storage 소유자 검증을 재사용하는 인증 조회 경로를 조사 중이며 해결 완료로 표시하지 않는다.
+3. 실제 모바일 전사 확인→평가 결과→힌트→명시 공개→수정→무료 재첨삭→History 17단계를 확인한다. 서버 HTTP/RPC PASS와 실기기 UI PASS를 구분한다.
+4. APP/WEB 동일 사용자·exam/question/run/parent 식별자, 확정 전사와 원본 artifact/영역, math-coaching-v1 공개 경계, 회차 견적/중복 요청 키, History 조회를 공통 계약으로 정리하고 양방향 조회를 검증한다. PC 레이아웃과 수식 표시 확장은 H로 넘긴다.
+5. 혼합형 실제 Worker E2E 미완료를 별도 추적하고 필요한 최소 검증만 수행한다. Flutter analyze 최종 재확인 및 변경 범위 회귀 후 Owner 검수 보고.
+
+기준 구현 Native `3cd7853`, WEB `9551f8f`; 직전 문서 체크포인트 `29556d5`. TEST Preview/기존 접속 절차는 위 안내를 유지한다. 현재 설치된 Profile은 G 실제 TEST 연동 앱이며 F 오프라인 예제와 다르다. 운영 DB·Credit·Ledger·결제·APP 릴리스 브랜치 변경 금지 및 운영 HOLD 유지.
