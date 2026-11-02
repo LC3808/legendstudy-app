@@ -171,3 +171,8 @@ Owner스크린샷의대기화면을완료카드와통일.시계아이콘/진행�
 ### TASK17 약관·개인정보 용어 통일 — 2026-11-02
 
 Owner가지정한/terms/·/privacy/의크레딧을이용권으로변경한다. 공용정책본문·약관metadata·두경로header표시포함.금액/기간/환불/개인정보처리조건·DB/APP변경없음.관련20테스트/build PASS.
+
+
+### TASK17 WEB 전체 용어 점검 — 2026-11-02
+
+Owner의전체점검요청:56페이지엔트리/전체src문자열/정적export155운영URL GET200 확인. 공개HTML잔여는/support/,/essay-lab/,/account/credits/ 및관리자credit/내부connection. 소스문자열잔여42파일146조각(사용자공용23/83,관리자18/62,내부1/1);문장수/노출횟수아님. 로그인후모달·오류분기는소스확인,실제전체실행아님. 사용자세션로그아웃상태,자유입력공지DB전체는미조사. [전체위치·범위·한계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TASK17_WEB_TERMINOLOGY_AUDIT.md). 이번은점검만,코드/배포/DB변경0.

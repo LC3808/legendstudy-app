@@ -5050,3 +5050,7 @@ Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 
 ## 2026-11-02 — TASK17 정책문서 이용권 통일
 
 [약관·개인정보](payment-app-foundation.md#task17-약관개인정보-용어-통일--2026-11-02):Owner지정두문서용어만변경,조건불변.20테스트/build PASS.
+
+## 2026-11-02 — TASK17 전체 WEB 잔여 용어 점검
+
+[전체점검](payment-app-foundation.md#task17-web-전체-용어-점검--2026-11-02):155공개URL/56페이지소스.사용자공용23파일잔여확인,로그인분기는소스검사.변경/배포0.
