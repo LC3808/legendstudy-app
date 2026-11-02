@@ -183,3 +183,8 @@ WEB: TypeScript/build PASS;1600 tests PASS/4 SKIP;lint0errors/5existingwarnings.
 
 Preservation seven answers: marketing eventtime vs serverfacts; GA property/stream/time source; no UPDATE/delete/backfill; admin auth only/no student join; marketing is not learning outcome; readonly/no PII/unchanged consent; transient derived report not second ledger. Existing longitudinal strategy applies.
 Rollback: before deployment revert WEB change; after future approved deployment restore prior Pages artifact and restore Owner skin backup if applied. Never reset/delete GA history. Production deploy and settings await Owner review.
+
+
+## Owner-created LAB and home streams — 2026-11-02
+Owner confirms new web streams in existing396674471: LAB G-MVHZ7HS214/16254992877; home G-S4JZMP0141/16255062112. Existing main G-295EQHYTCK/5829568136 preserved. This supersedes the earlier one-stream observation. Both new streams Enhanced Measurement ON, collection inactive warning. Browser reconnect failed during independent recheck; creation details are Owner-confirmed, not independently verified receipt.
+Existing manual page_view runtime requires automatic enhanced measurement disabled and privacy review before collection. Approval requested for only the two new streams; no console setting changed. WEB config candidates record exact IDs/origins with flags OFF; existing admin text now references LAB stream rather than nonexistent separate-property requirement. No duplicate runtime or event names. Data API still needs API/Viewer/server credential setup. Live tag/page_view/business events NOT_TESTED, not PASS. Production deployment requires Owner review; APP41/DB/Credit/payment unchanged.

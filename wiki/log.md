@@ -5329,3 +5329,6 @@ Owner 요청으로 rich notice SQL/Storage와 additive member RPC 적용, WEB8a3
 
 ## 2026-11-02 — Analytics Phase1 history re-audit
 Claude ccae6bd/Codex049d307 통합 확인. 운영7보고RPC+check와 migration20261101115715 읽기확인. 기존 GA4속성1스트림 확인, LAB/home 생성증거 없음. WEB서버읽기/모달패치1600PASS/4SKIP, TS/buildPASS·lint0errors/5기존warnings; 실수신 미검증, 운영설정/배포 없음. APP41불변. [상세/Owner 방향/권한 게이트](admin-integrated-analytics-task10.md#analytics-phase1-recovery-and-history-re-audit--2026-11-02).
+
+## 2026-11-02 — GA4 stream configuration handoff
+Owner 신규 LAB/home ID를 기존 속성396674471에 연결하는 설정 후보 기록. 자동측정ON과 기존 수동계측 계약 충돌 확인, 두 스트림 EM비활성 승인대기. 운영변경/실수신검증 없음. [상세](admin-integrated-analytics-task10.md#owner-created-lab-and-home-streams--2026-11-02).

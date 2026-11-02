@@ -1,7 +1,7 @@
 # Current Status
 
 
-[Analytics Phase1 재감사](admin-integrated-analytics-task10.md#analytics-phase1-recovery-and-history-re-audit--2026-11-02): v1·운영7RPC 확인. GA4 1스트림, LAB/home 미확인. 로컬1600PASS; 설정·배포 승인대기, APP41 불변.
+[Analytics Phase1 재감사](admin-integrated-analytics-task10.md#analytics-phase1-recovery-and-history-re-audit--2026-11-02): v1·운영7RPC 확인. Owner LAB/home 스트림 생성. EM검토·수신 미완료. 로컬1600PASS; 설정·배포 승인대기, APP41 불변.
 [관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
 
 [APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02): Owner 4종 로그인PASS; 심사 미재제출.
