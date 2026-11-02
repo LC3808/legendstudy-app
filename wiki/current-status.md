@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-B 격리 Preview](task16b-commerce-social-integration-20261102.md): 한양2026상경 Q1/Q2 공식패키지·TEST연결/UI검증. 실제 첨삭·재첨삭 E2E는 Provider키 대기, 운영미활성.
+[TASK16-B 격리 Preview](task16b-commerce-social-integration-20261102.md): 한양2026상경 Q1/Q2 공식패키지·TEST연결/UI검증. TEST Provider Secret 미등록 실측·Owner 대시보드 등록대기. 실제 E2E 미완료·운영미활성.
 
 [10/28 건국 Worker P0](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28): Owner승인 입력검증만451b8cae100%배포·65회귀PASS. 기존run reserved/checkpoint0/1예약 보존·재실행0. 기존run복구·APP통합 별도승인.
 

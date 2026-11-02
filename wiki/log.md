@@ -5056,3 +5056,7 @@ Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 
 [전체점검](payment-app-foundation.md#task17-web-전체-용어-점검--2026-11-02):155공개URL/56페이지소스.사용자공용23파일잔여확인,로그인분기는소스검사.변경/배포0.
 
 - 2026-11-02 TASK17: Owner 후속지시로 관리자포함 WEB 표시용어 이용권통일.1552테스트/TS/build PASS,Functions·Secret·DB불변. [상세](payment-app-foundation.md#task17-web-전체-이용권-통일--2026-11-02).
+
+## 2026-11-02 — TASK16-B Provider 설정 재확인
+
+TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 실측. 기존 math-test는 키가 있으나 운영 DB 연결이므로 재사용 금지. Owner 대시보드 직접 등록 선택·로그인 인계, 값노출/Provider호출/운영변경0. [실측·재개](task16b-commerce-social-integration-20261102.md#2026-11-02--provider-등록-상태-재확인).

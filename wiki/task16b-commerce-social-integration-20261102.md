@@ -74,3 +74,17 @@
 7. 판정과 raw 답안, 일부/전체 평가, 검증/미검증을 분리한다.
 
 복구는 전용 TEST Pages/Worker 실행 비활성화부터 수행한다. 재사용 sandbox에는 다른 TASK09/IAP 자료가 있으므로 DB·schema 전체 삭제 금지. 기존 TEST·운영 금융 정책, 운영 배포, APP 릴리스 브랜치를 보존한다.
+
+## 2026-11-02 — Provider 등록 상태 재확인
+
+Owner는 TEST Secret을 Cloudflare 대시보드에 직접 등록하는 방식을 선택했다. API로 Secret **이름과 유형만** 조회하고 코드 소비 지점을 대조했다.
+
+| 대상 | Provider Secret | 실측 상태 | 환경 차이 |
+|---|---|---|---|
+| `legendstudy-essay-task16b` Worker | `ESSAY_PROVIDER_KEY` | 미등록 | TEST DB 선택 true, execution false |
+| `legendstudy-task16b` Pages Production·Preview | `MATH_PROVIDER_API_KEY` | 두 환경 모두 미등록 | TEST DB `kpqbedylxlyntrrfybpn`, OPENAI, runtime/provider calls false |
+| 기존 `legendstudy-lab-math-test` Pages Production | `MATH_PROVIDER_API_KEY` | 이름·Secret 유형 확인, 값 조회 없음 | 운영 DB `stlhijzpjfgwwdgunlsd`, OPENAI, provider calls true; 이번 격리 E2E에 사용하지 않음 |
+
+전용 TEST Pages의 Production은 그 프로젝트의 기본 배포 환경 이름이며 LegendStudy 운영 서비스가 아니다. 기존 sandbox DB를 재사용해도 Cloudflare Provider Secret이 자동 공유되지 않는다. 별도 두 서비스에 등록해야 한다.
+
+Cloudflare 대시보드는 현재 브라우저 로그인이 필요하여 Owner 로그인·Secret 입력을 인계했다. 운영 Secret/DB/결제/Credit 원장/APP 릴리스 변경0, Provider 요청0. Secret 미등록 상태에서는 실제 AI E2E를 진행할 수 없으므로 계속 **NOT_VERIFIED**다. 등록 완료 회신 후 이름·배포 반영 상태를 다시 확인하고 TEST 실행을 재개한다.
