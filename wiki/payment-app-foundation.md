@@ -129,3 +129,14 @@ Production 빌드전용 진단77cc3c43에서 앱실행 전 process.env에도 fin
 기존운영토큰은API로읽어복구할수없음. Owner 안전저장소의원본→운영DB read-only get/nonexistent검증(PT404)→Owner 승인복원→보존재배포 우선. 만료/분실시 기존Production발급주체·essay_finance·기존gateway subject를확인한뒤 제한만료토큰재발급; TEST/service_role/worker대체·새서명키·ACL변경금지. 현재issuer/subject미확인으로임의발급안함. Dashboard위치·오류구분·재검증순서는 [WEB 실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#safe-owner-recovery-procedure-not-executed).
 
 최종운영runtime503/별도TEST200, 기존35grants·124transactions해시동일/LIVE0/TEST지급연결0. Secret교체·DB쓰기0. 승인E2E·복구·재심사제출은미완료이며운영LIVE HOLD유지. 앞선저장/전달원인미확정기록은위빌드전증거로좁혀졌다.
+
+
+### TASK17 원본 Finance 토큰·서명키 발견 — 2026-11-02
+
+앞선 원본/issuer/subject 미확인 기록을 정정한다. 범위를홈디렉터리까지확장해 기존 review-finance-token.jwt와 review-signing-key.jwk를발견했다(둘다0600,Git밖). 토큰원문/키/subject는기록하지않았다. 기존JWT는Production issuer·essay_finance·nonnull sub, 발급2026-10-07 08:37:24Z/만료2026-10-14 08:37:24Z. 현재Production JWKS로서명검증PASS;보관private JWK의공개부분/kid도현재검증키와일치. DB조회로기존gateway Auth계정존재/allowed=true 확인. 원본은존재하지만만료되어그대로복원불가.
+
+발급코드최초Git근거9ea7e2a7(Oct03 TEST),실제TEST발급/검증Oct04; Production REVIEW확장은원격 origin/manus/payment-review-signer-1의 ed5a53a92dbad83970ad3f36d1b276f826ceda90(Oct07). 현재작업브랜치에는TEST전용이어서놓쳤던이력이다. 해당커밋의 mint-finance-token.mjs는명시옵트인/정확한운영project/ES256/essay_finance/최대7일,0600새파일,원문출력없음. 당시운영토큰을누가어떤명령으로생성했는지실행로그는미확인이나동일claim/기간·서명키·Oct07실제승인기록이있다. 합성키로해당커밋회귀PASS.
+
+서버경로: Pages context.env→cloudflare/payments.ts rpc finance Authorization→Supabase PostgREST 서명·만료·role검증→public.payment_process→essay_private.uid()/account_private.allowed. 실제운영authenticator→essay_finance는SET=true/INHERIT=false/ADMIN=false;finance NOLOGIN/NOBYPASSRLS, payment_process EXECUTE 허용·anon/authenticated/service_role거부. 결제Edge Function이나원문대조테이블을쓰지않는다. JWT는payment-only가아닌기존finance권한이므로브라우저배포금지.
+
+안전갱신: 기존키/기존subject/issuer/role를그대로재사용하고iat/exp만갱신,초기검증TTL1시간권장. 서버키·DB권한변경불필요. 새0600파일에만저장→운영RPC get/nonexistent UUID PT404확인→Cloudflare PAYMENT_FINANCE_TOKEN 단일Secret복원→보존재배포→REVIEW권한/TEST E2E. 서명키를Cloudflare에넣지않는다. Secret삭제는이미유출된JWT의암호학적폐기가아니며신규요청차단은HOLD/권한회수로별도검증한다. 원본이발견되어이번요청의“없다면새발급절차”조건은만료토큰갱신절차로대체;실제발급/설정/DB쓰기0. [실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#original-token-found--2026-11-02).

@@ -5022,3 +5022,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 Finance 설정원인 구분
 
 [최종진단·복원절차](payment-app-foundation.md#task17-finance-최종-원인-구분복구-절차--2026-11-02):빌드전부터빈값확인,코드기본값원인제외.10/23사고근거연결·Owner원본우선복구절차작성.운영배포/Secret/원장보존,E2E미완료.
+
+## 2026-11-02 — TASK17 원본 Finance 토큰·키 발견
+
+[원본확인](payment-app-foundation.md#task17-원본-finance-토큰서명키-발견--2026-11-02):홈의기존0600 JWT/ES256키확인.현재JWKS서명PASS·Oct14만료·기존gateway allowed.원격Oct07운영발급기찾음/합성회귀PASS.기존키재사용갱신가능,실제발급·설정변경0.
