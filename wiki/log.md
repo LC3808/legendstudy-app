@@ -5006,3 +5006,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-11-02 — TASK17 TEST 복구 재개 사전검증
 
 [결제 복구](payment-app-foundation.md#task17--2026-11-02-test-결제-복구): 전용 WEB worktree/Cloudflare 배포 확인, runtime503 재현. Owner 직접키등록 위치 안내; TEST DB·Credit 비교기준 확보/123회귀PASS/심사URL200. 키등록·실제승인·재제출 미완료. DB쓰기·키교체·LIVE활성화0.
+
+## 2026-11-02 — TASK17 환경 정정·기존 TEST 재사용
+
+[결제 환경 재확인](payment-app-foundation.md#task17-기존-test-환경-재확인--2026-11-02): TEST프로젝트 runtime200/주문생성/카드인증창, LAB503 별도. 키재등록 보류, Owner 인증대기. 운영·TEST Credit해시 보존확인/승인은미완료. 설정·Secret·배포변경0.

@@ -23,7 +23,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-TASK17 Toss TEST 복구: [현재 설정·Owner 직접키등록·검증대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
+TASK17 Toss TEST 복구: [기존 TEST 재사용·Owner 카드인증대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 

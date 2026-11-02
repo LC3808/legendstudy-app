@@ -102,3 +102,7 @@ Owner가앞선조기빌드중단지시: Android1.0.1(20) 후보는이번수정�
 기존 REVIEW/TEST 정책을 유지한다. Owner는 새 TEST API 키를 채팅에 보내지 않고 Cloudflare `legendstudy-lab` Settings → Variables and Secrets → Production에 직접 등록한다. `TOSS_TEST_CLIENT_KEY`와 encrypted `TOSS_TEST_SECRET_KEY`만 교체하며 REVIEW를 plain TEST/LIVE로 바꾸지 않는다. 전용 WEB 브랜치 `codex/toss-test-task17`의 기존 배포2b5b0656을 Cloudflare API로 재확인했고 runtime503 PAYMENT_NOT_CONFIGURED가 지속된다. 실제 키 유효성은 metadata로 확인 불가.
 
 운영DB 읽기검증: configuration TEST, TEST주문11/정상기록3/지급연결0, LIVE주문0. 기존Credit grants35/transactions124의 비교해시 확보. 결제123회귀PASS·심사10URL HTTP200은 실제승인 증거가 아니다. 새키등록→보존배포→심사계정 TEST요청/승인/성공·실패→지급0/운영원장보존→재제출보고서 순서로 진행한다. 키등록과 후속은 미완료; 운영Credit·LIVE활성화 금지. [WEB 실행·설정·증빙 기록](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 기존 TEST 환경 재확인 — 2026-11-02
+
+Owner 최신지시로 앞선 키재등록 요청은 보류/대체한다. Cloudflare 실측 payment-test는 TEST/전용pages.dev/테스트DB wsnrwklplnunjktyfmbr이고, LAB만 REVIEW/운영도메인/운영DB다. TASK17 배포는 LAB2b5b0656, 기존TEST배포bb59b083(Oct06). 기존TEST runtime200·동일클라이언트키·1Credit TEST주문생성·Toss 카드인증창 진입 확인. Secret 유효성/승인성공은 아직 미검증, Owner 카드인증 대기. LAB runtime503은 별도이며 신규키·설정변경·배포 없이 기존TEST 경로를 우선 재사용한다. 09:43KST 운영 주문11/LIVE0·Credit grants35/transactions124 해시 전부 사전과 동일, TEST grants2/transactions2 해시 동일·지급연결0. 승인 이후 재검증 필요. 재심사는 실제 서비스도메인 결제경로 확인까지 NOT_READY. [WEB 비교·증빙](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
