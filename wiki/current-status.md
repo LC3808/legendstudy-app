@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-G](task16g-learning-loop-20261102.md): API 첨삭/차감 PASS. 모바일 E2E 재개·원본 조회 보완. WEB UX는 H·운영 HOLD.
+[TASK16-G](task16g-learning-loop-20261102.md): API 첨삭/차감 PASS. Simulator 저장결과 루프 PASS·신규 제출 미완료. WEB UX는 H·운영 HOLD.
 
 [TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
 

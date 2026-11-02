@@ -48,6 +48,28 @@ void main() {
         expect(run['state'], 'completed');
         final questions = run['questions'] as List;
         expect(questions.length, 2);
+        Future<void> settle() => tester.pumpAndSettle(
+          const Duration(milliseconds: 100),
+          EnginePhase.sendSemanticsUpdate,
+          const Duration(seconds: 90),
+        );
+        Future<void> show(String text) async {
+          final target = find.text(text);
+          final scrollable = find
+              .descendant(
+                of: find.byType(ListView).first,
+                matching: find.byType(Scrollable),
+              )
+              .first;
+          for (var i = 0; target.evaluate().isEmpty && i < 100; i++) {
+            await tester.drag(scrollable, const Offset(0, -350));
+            await tester.pumpAndSettle();
+          }
+          expect(target, findsWidgets);
+          await tester.ensureVisible(target.first);
+          await tester.pumpAndSettle();
+        }
+
         for (final q in questions) {
           await tester.pumpWidget(
             ProviderScope(
@@ -73,6 +95,29 @@ void main() {
           expect(screen.snapshot.id, q['evaluation_id']);
           if (const bool.fromEnvironment('TASK16G_CAPTURE')) {
             await binding.takeScreenshot('q${questions.indexOf(q) + 1}-result');
+          }
+          if (screen.snapshot.tasks.isNotEmpty) {
+            final title = screen.snapshot.tasks.first['title'] as String;
+            await show(title);
+            await tester.tap(find.text(title).first);
+            await settle();
+            await show('개념 힌트 보기');
+            await tester.tap(find.text('개념 힌트 보기'));
+            await settle();
+            expect(find.text('힌트를 확인하지 못했습니다. 다시 요청해 주세요.'), findsNothing);
+            await show('해결 방향 보기');
+            await tester.tap(find.text('해결 방향 보기'));
+            await settle();
+            expect(find.text('힌트를 확인하지 못했습니다. 다시 요청해 주세요.'), findsNothing);
+            expect(
+              find.text('조건을 적용한 각 계산을 검산하고 수정한 풀이를 원래 풀이와 비교하세요.'),
+              findsOneWidget,
+            );
+            if (const bool.fromEnvironment('TASK16G_CAPTURE')) {
+              await binding.takeScreenshot('q2-step-hints');
+            }
+            await tester.pageBack();
+            await settle();
           }
           await tester.tap(find.text('기본 개념 확인'));
           await tester.pumpAndSettle();
@@ -105,7 +150,9 @@ void main() {
         final nextRun = await gateway.session('math_session_read', {
           'p_run': data['rewrite_run_id'],
         });
-        final nextQuestion = (nextRun['questions'] as List).first as Map;
+        final nextQuestion = (nextRun['questions'] as List).singleWhere(
+          (q) => q['question_id'] == '42ebe3b3-2b04-5a21-80a3-75d332611f8b',
+        ) as Map;
         await tester.pumpWidget(
           ProviderScope(
             overrides: [supabaseClientProvider.overrideWithValue(client)],
@@ -121,6 +168,48 @@ void main() {
           EnginePhase.sendSemanticsUpdate,
           const Duration(seconds: 90),
         );
+        final beforeReveal = await gateway.call('math_coaching', 'read', {
+          'evaluation_id': nextQuestion['evaluation_id'],
+        });
+        if (beforeReveal['disclosed'] == false) {
+          expect(beforeReveal.containsKey('full_solution'), false);
+        }
+        await show('전체 풀이 및 해설 보기');
+        await tester.tap(find.text('전체 풀이 및 해설 보기'));
+        await settle();
+        expect(find.byType(MathSolutionPage), findsNothing);
+        await tester.tap(find.text('조금 더 풀어볼게요'));
+        await settle();
+        final afterCancel = await gateway.call('math_coaching', 'read', {
+          'evaluation_id': nextQuestion['evaluation_id'],
+        });
+        expect(afterCancel['disclosed'], beforeReveal['disclosed']);
+        await tester.tap(find.text('전체 풀이 및 해설 보기'));
+        await settle();
+        await tester.tap(find.text('정답·해설 공개'));
+        await settle();
+        expect(find.byType(MathSolutionPage), findsOneWidget);
+        final revealed = await gateway.call('math_coaching', 'read', {
+          'evaluation_id': nextQuestion['evaluation_id'],
+        });
+        expect(revealed['disclosed'], true);
+        expect(revealed.containsKey('full_solution'), true);
+        final history = await gateway.call('math_coaching', 'history', {
+          'evaluation_id': nextQuestion['evaluation_id'],
+        });
+        expect(
+          (history['attempts'] as List).any(
+            (r) =>
+                r['evaluation_id'] == nextQuestion['evaluation_id'] &&
+                r['solution_revealed'] == true,
+          ),
+          true,
+        );
+        if (const bool.fromEnvironment('TASK16G_CAPTURE')) {
+          await binding.takeScreenshot('explicit-solution-reveal');
+        }
+        await tester.pageBack();
+        await settle();
         await tester.scrollUntilVisible(
           find.text('수정 답안 작성하기'),
           350,
@@ -174,6 +263,9 @@ void main() {
           'scope':
               'existing Q1/Q2 native render/History and private original reads',
           'questions': 2,
+          'hintLevels': [1, 2],
+          'explicitRevealAndHistory': true,
+          'preDisclosureObserved': beforeReveal['disclosed'] == false,
           'providerCalls': 0,
           'newSubmissions': 0,
           'creditMutations': 0,

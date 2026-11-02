@@ -122,3 +122,14 @@ Owner iPhone12ProMax는 로그인 화면 진입을 확인했다. 기존 TEST 계
 `coaching_labels.test.sql`은 이미 설치된 coaching wrapper의 표시명만 보완한다. 기존 소유권/공개 검증 뒤 canonical Registry question FK로 문제1/2를 연결하며 새 권한·테이블·금융 변경은 없다. 신규 설치는 갱신된 `coaching_cycles.sql`을 사용한다. TEST에서 transaction rollback dry-run 후 적용하고, 기존 평가6건의 실제 인증 API 응답을 비교했다. `exam_label`과 원래 매 조회 갱신되는 `rewrite_policy.as_of` 외 모든 필드 동일, 함수 owner/search_path/ACL 보존 PASS. 운영 미적용. 이전 함수 원문은 비공개 TEST ops 디렉터리에 보존했다.
 
 History 위젯 회귀 추가 PASS: 여러 과제가 같은 artifact를 참조해도 한 번만 읽고, 이미지 조회가 끝날 때까지 gateway를 유지하며 화면 종료 시 해제한다. Widget mock에 실제 SDK 타이머를 만들던 테스트 구성은 순수 mock으로 교체했으며 실제 Auth/Storage는 앞선 Simulator·HTTP 검증으로 분리했다.
+
+
+## 2026-11-03 Owner — Simulator로 검증 계속
+
+Owner가 휴대폰 긴 비밀번호 직접 입력 대신 시뮬레이션 검증 진행을 지시했다. 실기기 로그인 요청을 더 진행하지 않고 기존 TEST 계정의 Simulator 자동 인증을 사용한다. 비밀번호 단순화/재설정·인증 우회·운영 Auth 변경은 하지 않는다. 계정 비밀은 기존 one-shot loopback runner로 전달하며 코드/빌드 defines/로그에 넣지 않는다. 실기기 검수 미확인을 Simulator PASS로 바꾸어 기록하지 않는다.
+
+로그인 진단은 TEST 로그의 invalid_credentials와 안내 파일 계정의 인증 성공, 설치 Profile의 TEST DB/Pages 설정 일치를 확인한 범위다. 어느 입력값이 달랐는지는 확인하지 못했다. 계정 원문을 보고서에 남기지 않는다.
+
+Simulator 실네트워크 검증 PASS: 기존 실제 Q1/Q2 평가 재사용, 단계별 힌트1/2, 공개 취소 시 비공개 유지, 명시 공개 후 full_solution 및 History 공개 기록, 다음 무료 재작성 화면. 최초 실행에서 공개 전 disclosed=false/full_solution 없음과 공개 후 상태를 확인했다. 공개 기록을 지우지 않고 보존하며 재실행은 이미 공개된 상태를 사용한다. TEST 학습 열람 이력만 추가되었으며 새 평가·Provider 호출·차감은0이다. 비공개 증거 simulator-learning-loop-first.json과 native-captures/에 보존한다.
+
+전체 풀이의 단계 representation도 전사본과 같은 MathStudentText를 재사용하여 한글 설명을 강제로 TeX 처리하지 않도록 보완했다. 기존 History 탭은 힌트/공개 후 재조회 시 갱신됨을 회귀 테스트로 확인했으므로 별도 캐시 구조 변경은 하지 않았다. 영향 범위 위젯11검사/Analyze PASS. 표시 수정 후 Simulator 실네트워크 재실행 PASS 및 전체 풀이 화면 한글·수식 구분 확인. Wiki handoff 2110링크/11982bytes PASS. 일반 힌트의 대학별 품질, 새로운 사진부터 재첨삭까지 전체17단계, 실기기 로그인 이후 검수는 여전히 미완료다.

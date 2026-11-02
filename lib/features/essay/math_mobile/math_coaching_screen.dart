@@ -612,7 +612,7 @@ class MathSolutionPage extends StatelessWidget {
                     '풀이 ${step['position']}단계',
                     style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  MathText('\\[${step['representation'] ?? ''}\\]'),
+                  MathStudentText(step['representation'] as String? ?? ''),
                   MathText(step['explanation'] as String? ?? ''),
                 ],
               ),

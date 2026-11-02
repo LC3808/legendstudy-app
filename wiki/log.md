@@ -1,3 +1,7 @@
+## 2026-11-03 — TASK16-G Simulator 전환
+
+Owner가 휴대폰 수동 비밀번호 입력 대신 Simulator 진행을 지시. 실기기 로그인 요청 중단, 기존 계정/인증 설정 유지. 저장된 실제 평가로 힌트·명시 공개·History·무료 재작성 화면 Simulator PASS. 전체 풀이 한글/수식 구분 보완, 위젯11검사 PASS. Provider/새평가/차감0; 전체 신규 제출 E2E 미완료. [범위](task16g-learning-loop-20261102.md#2026-11-03-owner--simulator로-검증-계속).
+
 ## 2026-11-03 — TASK16-G 재개 / History 원본 연결
 
 기존 private Storage와 active-owner RPC 재사용 원본 이미지 조회; TEST Q1/Q2 SHA-256 일치/미인증401/미등록404. Native Gateway 수명 유지 및 전사본 prose/TeX 구분. Simulator 저장 실제 Q1/Q2 결과·개념·History, 다음 무료 재작성 화면 PASS; 추가 Provider·평가·차감0. TEST RPC 표시명을 공식 문항명으로 연결, 평가6건 표시명/조회시각 외 동일. Owner iPhone 로그인 화면 확인, 전체 실기기 E2E는 진행 중. [공통 계약·검증 수준·남은 GAP](task16g-learning-loop-20261102.md#2026-11-03-재개--원본-조회-및-공통-계약). 운영 HOLD.

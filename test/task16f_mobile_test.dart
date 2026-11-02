@@ -312,7 +312,13 @@ void main() {
                 'body': r'\[\frac{1}{2}+\int_0^1 x^2 dx\]',
               },
             ],
-            'steps': <dynamic>[],
+            'steps': [
+              {
+                'position': 1,
+                'representation': 'W=k/l의 확률분포를 구한다.',
+                'explanation': '조건을 확인한다.',
+              },
+            ],
             'paths': <dynamic>[],
           },
         ),
@@ -320,6 +326,7 @@ void main() {
     );
     await t.pumpAndSettle();
     expect(t.takeException(), isNull);
+    expect(find.text('W=k/l의 확률분포를 구한다.'), findsOneWidget);
     await screenshot(t, 'solution');
     await t.pumpWidget(
       host(
