@@ -176,3 +176,8 @@ Owner가지정한/terms/·/privacy/의크레딧을이용권으로변경한다. �
 ### TASK17 WEB 전체 용어 점검 — 2026-11-02
 
 Owner의전체점검요청:56페이지엔트리/전체src문자열/정적export155운영URL GET200 확인. 공개HTML잔여는/support/,/essay-lab/,/account/credits/ 및관리자credit/내부connection. 소스문자열잔여42파일146조각(사용자공용23/83,관리자18/62,내부1/1);문장수/노출횟수아님. 로그인후모달·오류분기는소스확인,실제전체실행아님. 사용자세션로그아웃상태,자유입력공지DB전체는미조사. [전체위치·범위·한계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TASK17_WEB_TERMINOLOGY_AUDIT.md). 이번은점검만,코드/배포/DB변경0.
+
+
+### TASK17 WEB 전체 이용권 통일 — 2026-11-02
+
+Owner 최신지시로 관리자까지포함하여 WEB 고정표시명칭 크레딧/Credit→이용권 통일. MY·논술/수리·제출/오류/모달·관리자·공용header·metadata포함. DB/RPC/APP/기존원장/과거기록불변. 전체회귀1552PASS/4skipped,TS/build PASS. 기존Functions/Secret보존배포. 로그인후모든상태수동검증은아니며소스/회귀로보완. [WEB 변경·실접근검증](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TASK17_WEB_TERMINOLOGY_AUDIT.md).

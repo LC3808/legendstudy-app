@@ -149,3 +149,5 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
 기존 인문·수리 운영 이력은 [PHASE3 상세](phase3-service-20261022.md)와 [상태 이력](history/status-checkpoints.md)에 보존한다.
 
 [TASK17 승인PASS](payment-app-foundation.md).
+
+WEB 명칭: 관리자포함 이용권통일(11/2),APP/DB불변. [검증](payment-app-foundation.md#task17-web-전체-이용권-통일--2026-11-02).

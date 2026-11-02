@@ -5054,3 +5054,5 @@ Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 
 ## 2026-11-02 — TASK17 전체 WEB 잔여 용어 점검
 
 [전체점검](payment-app-foundation.md#task17-web-전체-용어-점검--2026-11-02):155공개URL/56페이지소스.사용자공용23파일잔여확인,로그인분기는소스검사.변경/배포0.
+
+- 2026-11-02 TASK17: Owner 후속지시로 관리자포함 WEB 표시용어 이용권통일.1552테스트/TS/build PASS,Functions·Secret·DB불변. [상세](payment-app-foundation.md#task17-web-전체-이용권-통일--2026-11-02).
