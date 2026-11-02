@@ -96,3 +96,9 @@ APP은 owner RLS 조회에서 reserve/release를 제외한 뒤 최근50기록을
 검증: APP구매/Credit15PASS·변경Dart analyze문제0; WEB관련80PASS/2skip·typecheck/Lint/boundaryPASS. 원장입력불변/다중grant합산/예약만있는경우/실제환불·회수/예약중잔액유지 확인. 실기기·운영배포는미실행. DB·Ledger·정산·관리자코드변경0.
 
 Owner가앞선조기빌드중단지시: Android1.0.1(20) 후보는이번수정이전산출물이므로업로드대상아님; iOS빌드중단/스토어업로드0. 현재스토어실측Android1.0.0(18)전체출시/iOS1.0(build19)배포준비됨. 모든앱수정을마친뒤새빌드·검증·업데이트한다. 이번수정은로컬commit이며push/CI·빌드·배포도보류한다.
+
+## TASK17 — 2026-11-02 TEST 결제 복구
+
+기존 REVIEW/TEST 정책을 유지한다. Owner는 새 TEST API 키를 채팅에 보내지 않고 Cloudflare `legendstudy-lab` Settings → Variables and Secrets → Production에 직접 등록한다. `TOSS_TEST_CLIENT_KEY`와 encrypted `TOSS_TEST_SECRET_KEY`만 교체하며 REVIEW를 plain TEST/LIVE로 바꾸지 않는다. 전용 WEB 브랜치 `codex/toss-test-task17`의 기존 배포2b5b0656을 Cloudflare API로 재확인했고 runtime503 PAYMENT_NOT_CONFIGURED가 지속된다. 실제 키 유효성은 metadata로 확인 불가.
+
+운영DB 읽기검증: configuration TEST, TEST주문11/정상기록3/지급연결0, LIVE주문0. 기존Credit grants35/transactions124의 비교해시 확보. 결제123회귀PASS·심사10URL HTTP200은 실제승인 증거가 아니다. 새키등록→보존배포→심사계정 TEST요청/승인/성공·실패→지급0/운영원장보존→재제출보고서 순서로 진행한다. 키등록과 후속은 미완료; 운영Credit·LIVE활성화 금지. [WEB 실행·설정·증빙 기록](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).

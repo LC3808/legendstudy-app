@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK17 Toss TEST 복구: [현재 설정·Owner 직접키등록·검증대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
+
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 
 무료 베타 Credit: [일일 지급 DB설치·비활성/클라이언트](essay-beta-credit-design-20261027.md) — 캠페인 비활성.

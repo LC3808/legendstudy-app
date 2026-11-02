@@ -5002,3 +5002,7 @@ Owner 추가 범위를 기존 전체 대학 문서에 반영. 운영 Registry �
 ## 2026-10-28 — Owner 승인 Worker 입력검증 Production 배포
 
 코드e934240 Push, 기존72모듈 중live_worker.py만 교체·71동일. Worker451b8cae/배포775f74de100% 확인, bindings14/Secret5상속/runtime설정보존. 회귀65PASS·재다운로드코드4576자2문항/답안hash/출력제한PASS. 기존run reserved/checkpoint0/1예약동일, DB쓰기·Provider·평가·APP변경0. rollback202f8f62조회가능, 미실행. [배포근거·다음승인](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28).
+
+## 2026-11-02 — TASK17 TEST 복구 재개 사전검증
+
+[결제 복구](payment-app-foundation.md#task17--2026-11-02-test-결제-복구): 전용 WEB worktree/Cloudflare 배포 확인, runtime503 재현. Owner 직접키등록 위치 안내; TEST DB·Credit 비교기준 확보/123회귀PASS/심사URL200. 키등록·실제승인·재제출 미완료. DB쓰기·키교체·LIVE활성화0.
