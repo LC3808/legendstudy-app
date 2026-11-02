@@ -5332,3 +5332,6 @@ Claude ccae6bd/Codex049d307 통합 확인. 운영7보고RPC+check와 migration20
 
 ## 2026-11-02 — GA4 stream configuration handoff
 Owner 신규 LAB/home ID를 기존 속성396674471에 연결하는 설정 후보 기록. 자동측정ON과 기존 수동계측 계약 충돌 확인, 두 스트림 EM비활성 승인대기. 운영변경/실수신검증 없음. [상세](admin-integrated-analytics-task10.md#owner-created-lab-and-home-streams--2026-11-02).
+
+## 2026-11-02 — GA4 server authentication decision
+Owner EM유지, reader/Viewer설정 확인 전달. Data API 활성 콘솔확인. WIF현재기반 없음, 기존 JWT+Cloudflare Secret 권고·Owner JSON생성 절차 기록. 키/운영배포/실수신 없음. [상세](admin-integrated-analytics-task10.md#enhanced-measurement-and-server-authentication-decision--2026-11-02).
