@@ -54,7 +54,7 @@ class AsyncOperatingTransport(OperatingTransport):
         require(isinstance(token,str) and token and not any(c.isspace() for c in token),'TOKEN_REQUIRED')
         body=None if payload is None else json.dumps(payload,allow_nan=False)
         require(body is None or len(body.encode())<=8388608,'REQUEST_TOO_LARGE')
-        try:return json.loads(await fetch_bytes(ORIGIN+path,{'apikey':self.key,'Authorization':'Bearer '+token,'Content-Type':'application/json'},body))
+        try:return json.loads(await fetch_bytes(self.origin+path,{'apikey':self.key,'Authorization':'Bearer '+token,'Content-Type':'application/json'},body))
         except Exception:raise Unknown('BACKEND_UNAVAILABLE') from None
     async def subject(self,token):
         user=await self._request('/auth/v1/user',token)

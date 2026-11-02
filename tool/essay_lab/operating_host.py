@@ -14,6 +14,7 @@ from .runtime_host import RuntimeHost
 from .reviewed_runtime import reviewed_openai
 
 ORIGIN='https://stlhijzpjfgwwdgunlsd.supabase.co'
+TEST_ORIGIN='https://kpqbedylxlyntrrfybpn.supabase.co'
 RPCS=frozenset(('essay_registered_questions','essay_material_runtime_package',
     'essay_exam_preflight','essay_exam_claim','essay_exam_finish'))
 
@@ -22,8 +23,9 @@ class NoRedirect(HTTPRedirectHandler):
         raise URLError('REDIRECT_DENIED')
 
 class OperatingTransport:
-    def __init__(self,*,origin,publishable_key,worker_jwt,allowed_subjects,open_url=None):
-        require(origin==ORIGIN,'PROJECT_MISMATCH')
+    def __init__(self,*,origin,publishable_key,worker_jwt,allowed_subjects,open_url=None,test_backend=False):
+        require(origin==(TEST_ORIGIN if test_backend else ORIGIN),'PROJECT_MISMATCH')
+        self.origin=origin
         require(isinstance(publishable_key,str) and publishable_key.startswith('sb_publishable_'),'PUBLIC_KEY_REQUIRED')
         require(isinstance(worker_jwt,str) and len(worker_jwt.split('.'))==3 and not any(c.isspace() for c in worker_jwt),'WORKER_CREDENTIAL_REQUIRED')
         try:
@@ -41,7 +43,7 @@ class OperatingTransport:
         require(isinstance(token,str) and bool(token) and not any(c.isspace() for c in token),'TOKEN_REQUIRED')
         body=None if payload is None else json.dumps(payload,allow_nan=False).encode()
         require(body is None or len(body)<=8_388_608,'REQUEST_TOO_LARGE')
-        request=Request(ORIGIN+path,data=body,headers={'apikey':self.key,
+        request=Request(self.origin+path,data=body,headers={'apikey':self.key,
             'Authorization':'Bearer '+token,'Content-Type':'application/json'})
         try:
             with self.open_url(request,timeout=25) as response:

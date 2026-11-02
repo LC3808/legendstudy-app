@@ -44,4 +44,26 @@ class Tests(unittest.TestCase):
             with self.assertRaises(Invalid):
                 OperatingTransport(origin=ORIGIN,publishable_key='sb_publishable_fixture',worker_jwt=credential,allowed_subjects=[SUBJECT])
 
+
+class TestBackendBoundary(unittest.TestCase):
+    def test_explicit_test_mode_never_accepts_production_or_another_project(self):
+        from tool.essay_lab.operating_host import TEST_ORIGIN
+        for origin,enabled in [(ORIGIN,True),(TEST_ORIGIN,False),('https://other.supabase.co',True)]:
+            with self.assertRaisesRegex(Invalid,'PROJECT_MISMATCH'):
+                OperatingTransport(origin=origin,test_backend=enabled,publishable_key='sb_publishable_fixture',worker_jwt=fixture(),allowed_subjects=[SUBJECT])
+        calls=[]
+        t=OperatingTransport(origin=TEST_ORIGIN,test_backend=True,publishable_key='sb_publishable_fixture',worker_jwt=fixture(),allowed_subjects=[SUBJECT],open_url=lambda req,**kw:(calls.append(req.full_url) or Response({'id':SUBJECT})))
+        t.subject('student-fixture')
+        self.assertEqual(calls,[TEST_ORIGIN+'/auth/v1/user'])
+
+class AsyncTestBackendBoundary(unittest.IsolatedAsyncioTestCase):
+    async def test_async_fetch_uses_only_the_selected_test_origin(self):
+        from tool.essay_lab.operating_host import TEST_ORIGIN
+        from tool.essay_lab.cloudflare_http import AsyncOperatingTransport
+        from unittest.mock import AsyncMock,patch
+        t=AsyncOperatingTransport(origin=TEST_ORIGIN,test_backend=True,publishable_key='sb_publishable_fixture',worker_jwt=fixture(),allowed_subjects=[SUBJECT])
+        with patch('tool.essay_lab.cloudflare_http.fetch_bytes',new=AsyncMock(return_value=json.dumps({'id':SUBJECT}).encode())) as fetch:
+            self.assertEqual(await t.subject('student-fixture'),SUBJECT)
+            self.assertEqual(fetch.call_args.args[0],TEST_ORIGIN+'/auth/v1/user')
+
 if __name__=='__main__':unittest.main()

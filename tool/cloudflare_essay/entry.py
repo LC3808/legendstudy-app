@@ -5,6 +5,7 @@ from urllib.error import HTTPError
 from urllib.parse import urlparse
 from workers import WorkerEntrypoint,Response,Request
 from essay_lab.live_worker import require,SignedReview,Unknown
+from essay_lab.operating_host import TEST_ORIGIN
 from essay_lab.cloudflare_http import AsyncOperatingTransport,ORIGIN,provider_transport,fetch_bytes,parse_public_exams
 from essay_lab.cloudflare_runtime import CloudflareExamRuntime
 from essay_lab.reviewed_runtime import reviewed_openai,ReviewedRuntimeWorker,RuntimePermit,configured_binding
@@ -23,14 +24,17 @@ class Default(WorkerEntrypoint):
         try:
             # global_fetch_strictly_public routes this call to Pages (not the zone origin).
             # Authentication and the parent-lease fence still apply on this route.
-            return json.loads(await fetch_bytes('https://lab.legendstudy.com/api/essay/math-session',
-                {'Content-Type':'application/json','X-Essay-Service-Token':secret},json.dumps(payload),timeout=110,limit=1500000))
+            test=getattr(self.env,'ESSAY_TEST_BACKEND_ENABLED','false')=='true'
+            url='https://legendstudy-task16b.pages.dev' if test else 'https://lab.legendstudy.com'
+            return json.loads(await fetch_bytes(url+'/api/essay/math-session',
+                {'Content-Type':'application/json','X-Essay-Service-Token':secret,**({'X-Test-Preview-Access':self.env.TEST_PREVIEW_ACCESS_KEY} if test else {})},json.dumps(payload),timeout=110,limit=1500000))
         except HTTPError as error:
             print('MATH_CHILD_HTTP_STATUS '+str(error.code))
             raise
 
     def transport(self):
-        return AsyncOperatingTransport(origin=ORIGIN,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
+        test=getattr(self.env,'ESSAY_TEST_BACKEND_ENABLED','false')=='true'
+        return AsyncOperatingTransport(origin=TEST_ORIGIN if test else ORIGIN,test_backend=test,publishable_key=self.env.SUPABASE_PUBLISHABLE_KEY,
             worker_jwt=self.env.ESSAY_REGISTRY_WORKER_JWT,allowed_subjects=json.loads(self.env.ESSAY_ALLOWED_SUBJECTS),
             public_exams=parse_public_exams(getattr(self.env,'ESSAY_PUBLIC_EXAMS','[]')))
 
