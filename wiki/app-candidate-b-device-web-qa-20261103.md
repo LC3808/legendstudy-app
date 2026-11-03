@@ -283,3 +283,10 @@ Owner가 B55 동작을 정정했다. 요청은 미체크 영역 안내가 아니
 TEST56 signed Release **1.0.1(56)** 빌드 PASS. deep/strict 서명·AOT·TEST bundle/표시명·격리 Supabase/Pages 및 새 문구 포함 확인. iPhone12ProMax 설치 성공, 설치 목록의 TEST56/정식 A48 보존 확인. 기기 잠금으로 자동 실행은 `Locked` 거절되어 미확인이다. Owner에게 잠금 해제 후 앱에서 전체 체크/미인식 번호/완료 활성화를 확인하도록 요청했다. 실기기 사용자 동작 PASS는 아직 선언하지 않는다.
 
 산출물·로그·캡처는 private `app-review-integration-20261103/candidate-b/test56/`에 보존. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/Store 변경 및 Provider 호출 없음. 기존 OCR 정확도·수학 품질·전체 루프/혼합형 P0와 운영 HOLD는 유지한다.
+
+
+### B56 전체 체크 Owner 실기기 PASS
+
+2026-11-03, Owner가 iPhone12ProMax의 `LS Math TEST`1.0.1(56) 검수 요청에 “확인 완료 pass”로 응답했다. 검수 대상 소스는 `6f31ac5`. 읽힌 영역 전체 체크, 미인식 영역만 번호 안내, 미인식이 없을 때 마지막 확인/답안 입력 완료 활성화의 요청 범위를 **Owner 실기기 PASS**로 기록한다. 설치 직후 기기 잠금으로 자동 실행이 거절됐던 이력은 보존하며, 현재 앱 접근 차단으로 취급하지 않는다.
+
+이번 요청은 실제 평가 제출 없이 UI 동작을 확인하는 절차였다. 신규 Provider OCR/평가 정확도·실기기 전체 제출/재첨삭/History·Native 혼합 신규 제출·운영 활성화 PASS로 확대하지 않는다. 코드·빌드·DB·운영·Provider 호출 변경 없이 검수 기록만 갱신했다. 다음 미확인 표시 범위는 B54의 긴 학생 답안 근거 펼침/접기·문단/수식 배치다.
