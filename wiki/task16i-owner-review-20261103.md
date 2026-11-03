@@ -57,3 +57,7 @@ Owner는 위 항목의 수용/보완 우선순위를 결정한다. 이번 기능
 - 로컬 증거: `/Users/woojinchang/.codex/legendstudy-task16i-owner-review/`의 `browser.json`, `writer.json`, `preflight.json`, `test-grant.private.json`; 화면 `q1.png`, `q2-tasks.png`, `q1-corrected.png`, `q2-corrected.png`, `mixed.png`, `natural-history.png`, `new-photo-entry.png`, `prepared-entry.png`. 인증/답안/이미지 Git 제외.
 - 기존 I 코드 테스트/실제 Provider 성공을 재사용했다. 이번 문서·접속 준비 때문에 전체 회귀/Provider를 반복하지 않았다. Wiki handoff PASS(내부 링크2147, current-status 11955bytes), diff 검사 PASS.
 - 실행 코드 기준 APP `a9017f7`, WEB `e3efa29`, 배포 `e22dd7a8`. 이번에 새 APP 빌드/WEB 배포 없음. 운영 DB/Auth/Credit/Ledger/결제·APP1.0.1(41) 불변.
+
+## TASK16-J 후속
+
+[출시 준비·접속 도우미·기능별 판정](task16j-beta-release-readiness-20261103.md). 기존 결과와 계정을 재사용한다. 직접 코드/비밀번호 입력 대신 로컬 자동 접속 도우미 또는 선택한 항목만 클립보드에 복사하는 도우미를 사용한다. 코드 재발급/인증 해제 없음. 기능 PASS 유지, 품질·실기기·운영 연결은 미완료다.

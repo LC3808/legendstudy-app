@@ -1,20 +1,14 @@
 # Current Status
 
-[TASK16-I Owner 검수](task16i-owner-review-20261103.md): 기능 PASS 인정·검수 경로/TEST2개 준비. 품질·운영 HOLD.
+[TASK16-J 출시 준비](task16j-beta-release-readiness-20261103.md): **NOT_READY**. TEST 접근 도우미·시험 선택 연결 보완, WEB1591PASS/4skip. 기존 I 기능 PASS 유지, 실기기·OCR/해설 품질·수리 베타/운영 RPC 연결 미완료. 운영 HOLD.
 
-[TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
-
-[TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
-
-[TASK16-C](task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.
-
-[TASK16-B 격리 Preview](task16b-commerce-social-integration-20261102.md): 수학전용 Provider 1회 PASS·17,227tokens/$0.1395 추정. 전체 제출·재첨삭 E2E 미완료·운영미활성.
+[C/E/F/G/H/I 검증 이력·Owner 결과 경로](task16i-owner-review-20261103.md). Simulator 학습 루프 PASS는 실기기 제출 PASS가 아님.
 
 [10/28 건국 Worker P0](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28): Owner승인 입력검증만451b8cae100%배포·65회귀PASS. 기존run reserved/checkpoint0/1예약 보존·재실행0. 기존run복구·APP통합 별도승인.
 
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 
-[베타 출처확인 WEB 확인·APP 개발검증/캠페인 비활성](essay-beta-credit-design-20261027.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[베타 11/3 실측: 활성·하루1/160시험·수리0·11/11 00KST 종료](essay-beta-credit-design-20261027.md#2026-11-03--task16-j-운영-읽기-전용-정정). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 [광운 인문16 공개·자연1 목록/첨삭보류, APP 대기](essay-kwangwoon-standby-20261027.md). [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 

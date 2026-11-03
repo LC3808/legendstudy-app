@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-J / 수리·상경 베타 출시 준비: [NOT_READY·Owner 접속·기능 판정·운영/TEST 차이·적용 목록](task16j-beta-release-readiness-20261103.md).
+
 TASK16-I / 수리논술 통합 품질: [Owner 검수 경로·접속·기지 문제](task16i-owner-review-20261103.md) → [실제 WEB·혼합·교차 조회·A–J 판정](task16i-integration-quality-20261103.md).
 
 TASK16-H / WEB 수리논술 UX: [구현·실제 TEST·교차 조회·미완료](task16h-web-math-ux-20261103.md).
@@ -43,7 +45,7 @@ TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 
-무료 베타 Credit: [일일 지급 DB설치·비활성/클라이언트](essay-beta-credit-design-20261027.md) — 캠페인 비활성.
+무료 베타 Credit: [11/3 실측·기존 설계](essay-beta-credit-design-20261027.md#2026-11-03--task16-j-운영-읽기-전용-정정) — 운영 활성/하루1, 인문160시험·수리0. 수리 베타 연결 미검증.
 
 WEB MY 프로필·관심 대학·지원 현황: [대학 관리 통합·배포·복구](my-college-management-20261026.md).
 

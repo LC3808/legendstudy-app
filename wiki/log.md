@@ -5112,3 +5112,7 @@ WEB e3efa29/Preview e22dd7a8. 자연계 사진→실제 최초2/무료2 완료, 
 ## 2026-11-03 — TASK16-I Owner 검수 준비
 
 Owner 기능 PASS 인정/품질·운영 HOLD. 기존 TEST 결과6경로·로그인·신규 입력 준비 버튼 조회, 오류0/Provider0. 기존 관리자 RPC로 검수 TEST2개 지급, 잔액2/예약0. 로그인된 별도 검수 브라우저와 로컬 재접속 도우미, 화면별 기지 문제/판단표 제공. 운영/APP릴리스/기존 공개 이력 불변. [검수 안내](task16i-owner-review-20261103.md).
+
+## 2026-11-03 — TASK16-J 베타 출시 준비 NOT_READY
+
+기존 C–I 기능 PASS 재사용. TEST 기존 코드·계정 로그인/결과 조회와 로컬 자동·클립보드 접근 도우미 확인, 인증 해제0. LAB b2e85be/TEST9b47d9b8: TEST 상태503·자연 사진 metadata/HOLD 연결 보완, 중간 상경 목록 누락을 등록 목록 보존으로 수정. WEB1591PASS/4skip, 타입/lint/build PASS. 운영 읽기 전용: F/G 신규 RPC/loop 없음, 베타 활성160시험/수리0/대표2시험0·하루1·11/11 00KST 종료. 기존 ‘비활성’ Wiki 정정. Provider0/신규차감0/TEST잔액2예약0/운영·APP릴리스변경0. OCR·힌트/해설 품질·실기기·베타 연결/증분 migration은 미완료. [판정표·운영 적용 목록·Owner 검수](task16j-beta-release-readiness-20261103.md).
