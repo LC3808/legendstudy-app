@@ -5546,3 +5546,8 @@ Release42/iPhone12ProMax에서 기존 정보 정상·빠진 정보만 안내 확
 ## 2026-11-03 — 후보 A 학교 검색 Owner PASS
 
 Release42/iPhone12ProMax MY 학교 검색·카드·선택 확인 버튼 정상 응답 기록. 실제 프로필 저장/신규 온보딩은 미검증. [근거](app-release-integration-20261103.md#후보-a-학교-검색-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
+
+
+## 2026-11-03 — 후보 A 기존 PDF·인문논술 조회 Owner PASS
+
+Release42/iPhone12ProMax PDF·인문논술 History·결과·뒤로 이동 정상 응답 기록. 신규 평가/차감 검증으로 확대하지 않음. [근거](app-release-integration-20261103.md#후보-a-기존-자료인문논술-조회-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
