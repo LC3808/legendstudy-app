@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+Kakao iOS 외부 브라우저 / App Review Guideline4 / 시스템 인증 세션: [11/3 수정·검수·릴리스 통합](kakao-ios-system-auth-20261103.md).
+
 온보딩 프로필 누락 / MY 정보 보완 / 학교 검색 V2 / 고등학교 기본·중학교 명시: [최종 통합 준비·측정·실기기 검수](onboarding-v2-final-integration-20261103.md) → [11/3 구현·A–R·최종 리뷰 보완·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix) → [Claude 원문 진단](onboarding-profile-integrity-20261103.md).
 
 스토어 빌드·업로드·TASK14 심사 차단: [릴리스 후보·검증·운영 격차·후속](final-store-rc-1.md#task14--beta-store-release-candidate-2026-11-01).

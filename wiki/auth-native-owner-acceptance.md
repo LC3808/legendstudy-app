@@ -1,5 +1,7 @@
 # App Native Auth and Shared Account — Owner Acceptance
 
+11/3 후속: [Kakao iOS 시스템 인증 세션 구현·Owner 검수 대기](kakao-ios-system-auth-20261103.md). 아래9/22 externalApplication은 APP41까지의 역사적 경로이며, 다음 릴리스 후보는 ASWebAuthenticationSession으로 대체한다. 운영/APP41은 미변경.
+
 10/29 APP 재검수: 운영 Google/Apple/Kakao enabled 확인, 로컬 iOS define 누락 및 release validator 보강. [증거·새 산출물·실기기 미검증 범위](app-owner-fixes-20261029.md#소셜-로그인). 기존 계정/인증 계약은 유지한다.
 
 ## 2026-09-28 — Kakao shared identity Owner PASS
@@ -40,6 +42,8 @@ This is Web-only evidence, not App native or cross-platform identity evidence.
 LAB repository/console configuration was not changed or independently inspected.
 
 ## Kakao iOS browser handoff — 2026-09-22 (current)
+
+이 절은9/22 당시 current 및 APP41 이력이다. 다음 후보는 [11/3 시스템 세션](kakao-ios-system-auth-20261103.md) 참조.
 
 Owner reports Kakao authorization, email-only scope, Supabase callback/exchange and
 session creation **PASS**. After manually closing browser X, App is authenticated.

@@ -8,7 +8,7 @@ import 'native_auth_test.dart' show FakeIdentity;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  for (final platform in [TargetPlatform.iOS, TargetPlatform.android]) {
+  for (final platform in [TargetPlatform.android]) {
     test(
       'Kakao SDK browser URL uses email-only override on $platform',
       () async {

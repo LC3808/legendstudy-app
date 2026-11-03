@@ -1,5 +1,7 @@
 # Current Status
 
+[Kakao iOS 시스템 인증](kakao-ios-system-auth-20261103.md): ASWebAuthenticationSession 후보 구현·실기기 검수 대기. APP41 보존·미배포.
+
 [11/3 온보딩 최종 통합 준비](onboarding-v2-final-integration-20261103.md): V2 보존·MY 누락 안내 추가. 별도 브랜치/APP41 보존·실기기/릴리스 승인 대기; 미배포.
 
 [관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.

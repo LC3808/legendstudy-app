@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/supabase/supabase_providers.dart';
 import '../../core/config/app_config.dart';
 import 'native_auth.dart';
+import 'ios_web_auth_session.dart';
 import 'apple_auth_diagnostics.dart';
 
 /// Where a social provider returns after consent.
@@ -18,7 +19,8 @@ const oauthCallbackUrl = 'com.legendstudy.app://login-callback';
 
 /// Starting an OAuth flow, behind a seam.
 ///
-/// Browser paths return launch success; native paths exchange an ID token first.
+/// Android browser paths return launch success; iOS Kakao and native providers
+/// wait for the SDK session exchange.
 /// UI navigation always follows Supabase auth events, never this bool alone.
 /// Widget tests replace the service and do not invoke native or browser auth.
 abstract class OAuthService {
@@ -31,17 +33,24 @@ class SupabaseOAuthService implements OAuthService {
     required this.native,
     required this.platform,
     this.appleDiagnostics = const AppleAuthDiagnostics(),
+    this.webAuthSession = const IosWebAuthSession(),
   });
   final SupabaseClient _client;
   final NativeIdentityProvider native;
   final TargetPlatform platform;
   final AppleAuthDiagnostics appleDiagnostics;
+  final IosWebAuthSession webAuthSession;
   bool _busy = false;
+  // PKCE storage is shared even if a provider rebuild creates another service.
+  static bool _iosKakaoBusy = false;
 
   @override
   Future<bool> startSignIn(OAuthProvider provider) async {
-    if (_busy) return false;
+    final iosKakao =
+        provider == OAuthProvider.kakao && platform == TargetPlatform.iOS;
+    if (_busy || _iosKakaoBusy) return false;
     _busy = true;
+    if (iosKakao) _iosKakaoBusy = true;
     final nativeApple =
         provider == OAuthProvider.apple && platform == TargetPlatform.iOS;
     var appleStage = AppleAuthStage.nativeCredential;
@@ -72,18 +81,47 @@ class SupabaseOAuthService implements OAuthService {
         if (nativeApple) appleDiagnostics.report(appleStage, complete: true);
         return true;
       }
-      // Kakao keeps the approved browser/PKCE path; Android Apple also retains
-      // its browser path. No native Kakao token-to-identity assumptions.
+      if (iosKakao) {
+        final response = await _client.auth.getOAuthSignInUrl(
+          provider: provider,
+          redirectTo: oauthCallbackUrl,
+          queryParams: const {'scope': 'account_email'},
+        );
+        if (_client.auth.currentUser?.id != startingOwner) {
+          throw const NativeAuthCancelled();
+        }
+        final callback = await webAuthSession.authenticate(response.url);
+        if (_client.auth.currentUser?.id != startingOwner) {
+          throw const NativeAuthCancelled();
+        }
+        // ASWebAuthenticationSession consumes this callback; do not forward it
+        // into app_links or call getSessionFromUrl a second time.
+        final expected = Uri.parse(oauthCallbackUrl);
+        final codes = callback.queryParametersAll['code'];
+        if (callback.scheme != expected.scheme ||
+            callback.host != expected.host ||
+            callback.path != expected.path ||
+            callback.hasPort ||
+            callback.userInfo.isNotEmpty ||
+            callback.fragment.isNotEmpty ||
+            callback.queryParameters.containsKey('error') ||
+            callback.queryParameters.containsKey('error_code') ||
+            codes == null ||
+            codes.length != 1 ||
+            codes.single.isEmpty) {
+          throw const AuthException(
+            'Invalid authentication callback',
+            code: 'unexpected_failure',
+          );
+        }
+        await _client.auth.exchangeCodeForSession(codes.single);
+        return true;
+      }
+      // Android browser OAuth remains SDK-managed.
       return await _client.auth.signInWithOAuth(
         provider,
         redirectTo: oauthCallbackUrl,
-        // iOS platformDefault presents SFSafariViewController. That sheet is
-        // not dismissed by Supabase's signedIn event, hiding authenticated Home.
-        // Let the browser hand the custom scheme back to the app without a sheet.
-        authScreenLaunchMode:
-            provider == OAuthProvider.kakao && platform == TargetPlatform.iOS
-            ? LaunchMode.externalApplication
-            : LaunchMode.platformDefault,
+        authScreenLaunchMode: LaunchMode.platformDefault,
         // `scopes` appends to the Auth server's Kakao defaults (including
         // profile scopes). Singular OAuth `scope` replaces the final parameter
         // via the SDK's official queryParams passthrough. Keep email only.
@@ -99,6 +137,7 @@ class SupabaseOAuthService implements OAuthService {
       rethrow;
     } finally {
       _busy = false;
+      if (iosKakao) _iosKakaoBusy = false;
     }
   }
 }

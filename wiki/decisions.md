@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-03 — Kakao iOS App Review 인증 UX
+
+Owner는 APP41 외부 브라우저 경로를 다음 릴리스에서 시스템 인증 세션으로 대체하도록 결정했다. 9/22 Safari창 종료 실패로 단순 롤백은 금지. 기존 Supabase PKCE/정체성·Google/Apple/이메일 보존, 실기기 승인 후 통합. [구현/검수](kakao-ios-system-auth-20261103.md).
+
 ## 2026-11-03 — 온보딩 프로필 정합성 및 학교 검색
 
 Owner 후속: 기존 회원에게 MY 선택형 누락 안내만 제공한다. 상태 우선, 재학생 학교/학년 누락별 안내, 비재학생 학교 권유 없음. 완성 시 숨김·기존 편집기 재사용·추정 backfill/강제 온보딩 금지. [최종 통합 준비](onboarding-v2-final-integration-20261103.md).

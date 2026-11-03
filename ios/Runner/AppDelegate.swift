@@ -1,3 +1,4 @@
+import AuthenticationServices
 import Flutter
 import UIKit
 import Vision
@@ -7,6 +8,7 @@ import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
+  private let kakaoWebAuth = KakaoWebAuthSession()
   private let processClockIdentity = "process:" + UUID().uuidString
 
   override func application(
@@ -22,6 +24,14 @@ import UserNotifications
   }
 
   private func configureChannels(binaryMessenger: FlutterBinaryMessenger) {
+    let webAuth = FlutterMethodChannel(name: "com.legendstudy.app/web-auth", binaryMessenger: binaryMessenger)
+    webAuth.setMethodCallHandler { [weak self] call, result in
+      guard call.method == "authenticate" else { result(FlutterMethodNotImplemented); return }
+      guard let self = self else {
+        result(FlutterError(code: "AUTH_UNAVAILABLE", message: "Authentication unavailable", details: nil)); return
+      }
+      self.kakaoWebAuth.authenticate(call.arguments, result: result)
+    }
     let ocr = FlutterMethodChannel(name: "com.legendstudy.app/answer-ocr", binaryMessenger: binaryMessenger)
     ocr.setMethodCallHandler { call, result in
       guard call.method == "recognize" else { result(FlutterMethodNotImplemented); return }
@@ -233,5 +243,65 @@ import UserNotifications
         }
       } catch { result(FlutterError(code: "STUDY_LOCAL_IO", message: "Local study operation failed", details: nil)) }
     }
+  }
+}
+
+// Separate from SFSafariViewController: the OS dismisses the authentication
+// session when it intercepts the callback, including cancellation. No Safari fallback.
+private final class KakaoWebAuthSession: NSObject, ASWebAuthenticationPresentationContextProviding {
+  private var session: ASWebAuthenticationSession?
+  private var anchor: UIWindow?
+  private var pending: FlutterResult?
+  private var generation = UUID()
+
+  func authenticate(_ arguments: Any?, result: @escaping FlutterResult) {
+    guard pending == nil else {
+      result(FlutterError(code: "AUTH_BUSY", message: "Authentication in progress", details: nil)); return
+    }
+    guard let raw = arguments as? String, let url = URL(string: raw),
+          url.scheme == "https", url.host != nil, url.user == nil, url.password == nil,
+          url.path == "/auth/v1/authorize",
+          let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
+          items.first(where: { $0.name == "provider" })?.value == "kakao",
+          items.first(where: { $0.name == "redirect_to" })?.value == "com.legendstudy.app://login-callback",
+          let window = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .filter({ $0.activationState == .foregroundActive })
+            .flatMap({ $0.windows }).first(where: { $0.isKeyWindow }) else {
+      result(FlutterError(code: "AUTH_UNAVAILABLE", message: "Authentication unavailable", details: nil)); return
+    }
+    let request = UUID()
+    generation = request
+    anchor = window
+    pending = result
+    let auth = ASWebAuthenticationSession(url: url, callbackURLScheme: "com.legendstudy.app") { [weak self] callback, error in
+      DispatchQueue.main.async {
+        guard let self = self, self.generation == request, self.pending != nil else { return }
+        if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
+          self.finish(FlutterError(code: "AUTH_CANCELLED", message: "Authentication cancelled", details: nil))
+        } else if error != nil || callback == nil {
+          self.finish(FlutterError(code: "AUTH_FAILED", message: "Authentication failed", details: nil))
+        } else {
+          self.finish(callback!.absoluteString)
+        }
+      }
+    }
+    auth.presentationContextProvider = self
+    session = auth // Retain until callback/cancel. Never launch an external browser on failure.
+    if !auth.start() {
+      finish(FlutterError(code: "AUTH_UNAVAILABLE", message: "Authentication unavailable", details: nil))
+    }
+  }
+
+  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+    return anchor! // Validated before start and retained until completion.
+  }
+
+  private func finish(_ value: Any?) {
+    let completion = pending
+    pending = nil
+    session = nil
+    anchor = nil
+    completion?(value)
   }
 }

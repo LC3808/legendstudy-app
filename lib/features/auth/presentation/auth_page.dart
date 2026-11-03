@@ -106,7 +106,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     });
     setState(() => _busy = true);
     try {
-      // Browser success only means opened; native success includes token exchange.
+      // Android browser success means opened; iOS/native success includes exchange.
       // Both navigate only through the Supabase event handled by _onAuthStatus.
       final opened = await service.startSignIn(provider);
       if (!opened) {
