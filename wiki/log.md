@@ -5676,3 +5676,13 @@ Owner 승인 후 기존 SHA25660deffda SQL을 kpq 격리 TEST에 적용. migrati
 ## 2026-11-04 — 최종 운영 연결·APP58 설치 및 실제 검수 착수
 
 최종 WEB source45bd519/Pages2a794c31, Worker d03763e8 공개 scope212 연결 완료. expansion42·Math72·Math/cycles=true 및 기존 설정/Secret 보존 확인. 기존 Archive로 iPhone12ProMax 본앱58 설치·별도TEST56/Store산출물 유지, Owner 인하2027자연 답안 화면 “열림” PASS. 인하 공식 인쇄 답안 OCR10영역/uncertain9/좌표오류0, 원본 대조·표현4곳 수정 후 확정하여 beta1개 출처 최초 평가 요청. 서강 Essay도 다른 이용권1개 출처로 요청 중이며 완료·실제 차감/Provider 성공은 아직 미확인. 렌더러 후속 변경은 별도 배포 대기, Store실행0. [범위·증거·미완료](app58-expanded-production-connection-20261104.md).
+
+
+## 2026-11-04 — 실제 사진 무료 재첨삭·혼합형 검수 마감
+
+WEB0cc5350/Pages98c8e200에 확정 사진 입력 투영·모순 방어·동적 Registry History 연결 배포(설정/이전결과 보존). 인하2027 공식 인쇄답안 사진 무료 재첨삭은 prompt4 CORRECT/풀이8단계/오류0·included_revision settled0·추가Ledger0, WEB History 학교·연도/최초·재첨삭 연결 PASS. 최초 보류 결과는 유지했다. 해설 공개 기록1건이나 공식/생성 해설 payload 없어 PARTIAL. 서강 Essay 실제 완료/이용권1개 소비. 중앙 혼합형 Q1/Q3 성공·Q2독립검토 거절, 추가0 UI재시도1회도 grounding 거절. 전체reserved·최초reserve1/consume0/추가예약0·전체E2E PARTIAL, 추가 실행 종료. APP58 Owner History “제목만/본문 공백”은 계정·항목·응답 미대조 P0; 기존Widget3PASS를 실기기 해결로 보고하지 않으며 추정수정/APP59생성0. APP58 코드·IPA/AAB해시 보존·Store0. [최종 검수·재개 순서](app58-expanded-production-connection-20261104.md).
+
+
+## 2026-11-04 — 최종 WEB 표시 배포·APP58 문서 마감
+
+WEB9a8fb9f/Pagesbfb80aef 최종 표시 배포·실 asset/hash/홈200·보호API401·설정46binding보존 PASS. API는0cc5350과byte-identical, 집중25PASS/기존통합1734PASS·4SKIP 재사용. APP 코드5b5e5a8·버전58·IPA/AAB해시 동일, 새 빌드/Store0. APP Wiki 최신상태·실제영수증·잔여P0·재개순서 인계, 로컬 빌드/테스트 프로세스 종료 확인. 중앙 실패회차reserved1은 보존하며 자동재호출0. [최종 판정·인계](app58-expanded-production-connection-20261104.md).

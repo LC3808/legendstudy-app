@@ -4,7 +4,7 @@
 
 Owner 최신 결정에 따라 App Store Connect와 Google Play Console의 업로드·심사 제출·게시를 Owner가 직접 진행한다. Codex는 코드 통합, IPA/AAB 빌드, 서명·인증 설정 검증, Backend 연결, 산출물과 절차 인계를 담당한다. 별도 명시 요청 없이 스토어 작업을 실행하지 않는다. 이전 업로드 승인은 이 역할 정정으로 대체한다.
 
-이번 조사 중 **IPA 업로드 0 / AAB 업로드 0 / 심사 제출 0 / 게시 0**이다. Transporter의 기존 계정 및 Console 접근 상태만 확인했다. 기존 APP41과 APP58 산출물을 보존했고 재빌드·기기 덮어쓰기를 하지 않았다.
+이번 조사 중 **IPA 업로드 0 / AAB 업로드 0 / 심사 제출 0 / 게시 0**이다. Transporter의 기존 계정 및 Console 접근 상태만 확인했다. 기존 APP41과 APP58 산출물은 보존했다. 이후 Owner 승인 실기기 검수에서 기존 서명된 APP58 Archive를 iPhone12ProMax 본앱에 설치했으며 추가 재빌드는 없다. 별도 LS Math TEST56은 그대로다.
 
 ## 최종 빌드 산출물
 
@@ -56,6 +56,6 @@ Owner 최신 결정에 따라 App Store Connect와 Google Play Console의 업로
 
 ## 서비스 연결 경계
 
-수리·상경 운영 연결과 공개 범위 확대는 [통합 보고서](app-math-commerce-integration-report-20261103.md) 및 [현재 상태](current-status.md)의 별도 작업이다. Store 산출물 PASS가 운영 RPC·Provider·공개 설정·실제 E2E 완료를 뜻하지 않는다. Owner는 최초16시험으로 제한하지 않는 연결을 지시했다. 검증된 전체 scope를 다시 산정하고, 자료가 불완전한 시험은 자동 공개하지 않는다.
+수리·상경 운영 연결과 공개 범위 확대는 [통합 보고서](app-math-commerce-integration-report-20261103.md) 및 [현재 상태](current-status.md)의 별도 작업이다. Store 산출물 PASS가 운영 RPC·Provider·공개 설정·실제 E2E 완료를 뜻하지 않는다. Owner 지시에 따라 전체363시험을 조사해15대학202시험464문항을 기존 Registry와 평가 엔진에 연결했다. [최신 운영 연결·실제 검증·남은 P0](app58-expanded-production-connection-20261104.md)를 제출 전 확인한다. 서강 Essay와 인하 사진 무료 재첨삭은 실제 결과가 있으나, APP58 History 본문 공백·혼합형 전체 완료·전체 해설 payload는 검수 차단 요소다. 산출물 빌드 PASS가 이 품질 문제의 해결을 뜻하지 않는다.
 
 업데이트 안내 정책은 격리 TEST disabled 적용 완료, 운영 미적용/비활성이다. 스토어 출시 확인 전58을 최신 공개 버전으로 안내하거나 REQUIRED를 켜지 않는다. [업데이트 정책](app-update-check-20261104.md).

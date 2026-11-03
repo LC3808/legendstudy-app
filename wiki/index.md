@@ -217,6 +217,8 @@ is preserved; historical checkpoints are accessed only when evidence is needed.
 
 ## Latest end-of-day handoff
 
+- [2026-11-04 APP58 운영 연결·실제 검수 마감](app58-expanded-production-connection-20261104.md) — 15대학202시험 연결, 인하 사진 무료 재첨삭/서강 Essay 결과, APP58 본문 공백·전체 해설·혼합형 P0와 재개 순서. [Owner Store 인계](app58-store-handoff-20261104.md); APP58 원본 보존·Codex Store0.
+
 - [2026-09-25 EOD closeout](eod-2026-09-25.md) — Materials PDF Owner PASS, Daily Sync Phase1 closeout, OAuth local runtime recovery, Multi D-Day/Home/Analytics planned state, deferred UI polish, and Owner top-level minimum-cost/simple/lightweight engineering rule.
 
 ## Product/platform canonical entry points
