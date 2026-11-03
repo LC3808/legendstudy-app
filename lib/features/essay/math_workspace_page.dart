@@ -230,7 +230,8 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     if (!current) return;
     if (photos.isNotEmpty &&
         (input['candidate'] == null ||
-            (input['candidate'] is Map && (input['candidate'] as Map)['state'] == 'FAILED')) &&
+            (input['candidate'] is Map &&
+                (input['candidate'] as Map)['state'] == 'FAILED')) &&
         input['can_request_evaluation'] != true) {
       try {
         await gateway.extract(attempt!);
@@ -492,20 +493,30 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                 ),
               ],
             ],
-            if (evaluation != null)
-              OutlinedButton(
-                onPressed: busy ? null : () => run(refresh),
-                child: const Text('결과·크레딧 다시 확인'),
+            if (evaluation != null) ...[
+              const SizedBox(height: 16),
+              Tooltip(
+                message: '접수한 첨삭의 최신 상태를 조회합니다. 새 첨삭 요청이나 이용권 차감은 없습니다.',
+                child: OutlinedButton.icon(
+                  onPressed: busy ? null : () => run(refresh),
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('첨삭 상태 새로고침'),
+                ),
               ),
-            if (evaluation != null && state?['evaluation_state'] == 'REQUESTED')
+              const SizedBox(height: 12),
+            ],
+            if (evaluation != null &&
+                state?['evaluation_state'] == 'REQUESTED') ...[
               OutlinedButton(
                 onPressed: busy || !canEvaluate || question == null
                     ? null
                     : () => run(resumeEvaluation),
-                child: const Text('같은 첨삭 처리 다시 요청'),
+                child: const Text('접수한 첨삭 다시 처리'),
               ),
+              const SizedBox(height: 12),
+            ],
             if (report != null) ...[
-              FilledButton(
+              FilledButton.icon(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
                     builder: (_) => MathCoachingPage(
@@ -532,9 +543,11 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
                     ),
                   ),
                 ),
-                child: const Text('수리논술 첨삭 결과 보기'),
+                icon: const Icon(Icons.assignment_outlined),
+                label: const Text('첨삭 결과 보기'),
               ),
             ],
+            const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<void>(

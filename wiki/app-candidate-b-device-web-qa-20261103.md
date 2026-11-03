@@ -6,7 +6,7 @@
 
 ## 검수 빌드와 격리
 
-- 브랜치 `codex/app-review-candidate-b-20261103`, 실행 소스 기준 `82373a1`. 이번 작업은 검수 및 문서 기록이며 제품 코드 변경 없음.
+- 브랜치 `codex/app-review-candidate-b-20261103`, 초기 TEST49 실행 소스 기준 `82373a1`. 초기 검수 단계는 제품 코드 변경이 없었으며 TEST50/51의 Owner UI 후속 수정은 아래에 별도로 기록한다.
 - 최신 통합 소스 Flutter 전체 **1,402 PASS / 7 SKIP**, Analyze **No issues found**. 이전 B43의 1,383 PASS와 최신 온보딩 통합 후 결과를 구분한다.
 - iPhone 12 Pro Max에 **LS Math TEST 1.0.1(49)** signed Release 설치·실행 성공. 실제 설치 버전 49, Release AOT, 서명 확인.
 - TEST bundle `com.legendstudy.app.task16f`. 기존 정식 앱 `com.legendstudy.app` 후보 A48 및 APP41 기준선은 보존한다.
@@ -94,6 +94,30 @@ Owner는 요청한 화면에 대해 “화면은 모두 구현 됨”이라고 �
 - Flutter Analyze PASS; Wiki 링크/라우팅/current-status 예산 및 diff 검사 PASS.
 - **LS Math TEST 1.0.1(50) signed Release** 빌드·서명·AOT·TEST 서버 설정·새 UI 코드 포함 확인. 한글 AOT 문자열은 UTF-16LE로 확인.
 - iPhone 12 Pro Max에 업데이트 설치·실행 성공, 기기 설치 목록 50 확인. 기존 `레전드스터디+` A48도 동일 목록에서 보존 확인.
-- 기존 Q2 evaluation 딥링크로 실행을 요청하고 Owner에게 간격·구분·잘림 재검수를 요청했다. **새 가독성 Owner 수용은 대기**, 신규 평가·재첨삭 실기기 전체 E2E는 별도 미완료다.
+- 기존 Q2 evaluation 딥링크로 실행을 요청하고 Owner에게 간격·구분·잘림 재검수를 요청했다. **후속 Owner: 제출 화면 버튼을 제외한 가독성 수정 수용**, 신규 평가·재첨삭 실기기 전체 E2E는 별도 미완료다.
 - 산출물/로그: private `app-review-integration-20261103/candidate-b/test50/`. 화면 예제: `.codex/legendstudy-candidate-b-qa-20261103/b50-after/` (`concepts-1.0.png`, `task-actions-1.0.png`, `solution-2.0.png` 등).
 - Provider 추가 호출 0, DB/Auth/Credit/Ledger/결제/WEB/APP41/A48 변경 및 Store 제출 없음. Android 신규 빌드는 이번 iPhone 가독성 검수 범위에 포함하지 않았다.
+
+
+## B50 가독성 수용·제출 버튼 정리 — 2026-11-03
+
+Owner는 “답안 제출 화면의 버튼 간격이 없어서 붙어 있는 것 말곤 적절히 수정됨”이라고 확인했다. 결과/과제/개념/힌트/풀이/기록의 가독성 보완은 해당 확인 범위에서 수용으로 기록하고, 제출 화면 버튼 간격·모호한 용어는 별도 후속으로 수정한다. 전체 E2E·OCR 품질·운영 활성화 승인이 아니다.
+
+기존 버튼과 실제 함수의 연결을 확인한 뒤 표현만 바꿨다.
+
+| 표시 문구 | 실제 역할 | 이번 변경 |
+|---|---|---|
+| 첨삭 상태 새로고침 | 기존 evaluation의 `read_learning_state` 조회, 잔액·History 표시 갱신. 새 첨삭 요청/차감 없음 | `결과·크레딧 다시 확인` 대체. 새로고침 아이콘·설명 툴팁 |
+| 첨삭 결과 보기 | 기존 `MathCoachingPage`로 이동하여 진단·과제·힌트·해설 조회 | `수리논술 첨삭 결과 보기`를 간결하게 정리. 결과 아이콘 |
+| 접수한 첨삭 다시 처리 | REQUESTED 상태에서 기존 evaluation ID로 처리를 재개. 단순 조회와 구별 | `같은 첨삭 처리 다시 요청` 대체. 기존 조건·handler 유지 |
+
+기존 새로고침 함수는 잔액을 **조회**하는 `credit_summary`를 다시 불러오므로 버튼에 ‘크레딧’이 들어가 있었으나, 학생이 해야 할 행동은 첨삭 상태 조회다. 잔액 확인·차감 동작으로 오인하지 않도록 주된 역할을 이름으로 표시했다. APP 전체 Credit 명칭이나 금융 계약을 변경하지 않았다.
+
+- `lib/features/essay/math_workspace_page.dart`만 제품 코드 변경. 조회·재처리·결과 이동·History 버튼 사이 12px, 입력 영역과 조회 영역 사이 16px 간격.
+- 기존 버튼의 실행 함수와 활성화 조건을 유지했다. 평가·RPC·잔액/원장·Provider 코드 변경 없음.
+- 관련 기존 검사 **16 PASS**, Analyze PASS. B50 전체1,404PASS/7SKIP는 이전 통합 기준 증거로 유지하며 이번 작은 표현 수정 후 전체 재실행으로 보고하지 않는다.
+- [보존 검토 7문항](#보존-검토-7문항)을 그대로 적용한다. 저장·정정·새 데이터 수집은 없다.
+- TEST51 signed Release 빌드·서명·AOT·TEST 설정·새 버튼 문구 포함 확인 PASS. iPhone12ProMax 업데이트 설치·실행 및 설치 버전51 확인, 기존 A48 보존. Q2 기존 결과 경로로 실행을 요청했고 Owner 버튼 간격·새로고침/결과 이동 확인은 대기다. 운영/WEB/APP41/A48/Store 변경 없음.
+
+
+TEST51 산출물·검사·설치 로그는 private `app-review-integration-20261103/candidate-b/test51/`에 보존했다. Wiki handoff/diff 검사 PASS. 이번 후속의 Provider 호출·새 평가·차감은 0이며 기존 TEST 기록을 재사용한다.
