@@ -116,4 +116,4 @@
 
 준비 기록: `/tmp/app58-device-readiness.md`, `/tmp/app58-archive-code-equivalence.json`. 같은 Archive의 이미 서명된 앱을 직접 설치하거나 기존 A48 ExportOptions로 별도 device export할 수 있다. 소스·버전 재빌드나 Store IPA/AAB 변경은 필요 없다. 이 조사에서 export/설치/실행/스토어 업로드는 모두0이다.
 
-기기 목록에는 iPhone12ProMax가 연결된 것으로 확인됐으나 설치 앱 조회가 CoreDeviceService 초기화 제한시간을 초과했다. 따라서 현재 설치 버전과 APP58 실제 실행은 미검증이다. 설치하면 동일 bundle인 A48 앱을58로 업데이트하므로 기존 로그인·데이터 보존도 실제 확인해야 한다. 별도 LS Math TEST와 APP41 소스/산출물을 보존한다. A48·TEST56·Simulator 검증을 APP58 실기기 PASS로 전용하지 않는다.
+iPhone12ProMax 연결을 확인했다. 최초 sandbox 내 설치 앱 조회는 CoreDeviceService 초기화 제한시간을 초과했으나 읽기 전용 권한으로 재조회에 성공했다. 현재 본앱 `com.legendstudy.app`는1.0.1(48), 별도 `com.legendstudy.app.task16f`는1.0.1(56)이다. APP58은 아직 미설치·실행 미검증이다. 설치하면 동일 bundle인 A48 앱을58로 업데이트하므로 기존 로그인·데이터 보존도 실제 확인해야 한다. 별도 LS Math TEST와 APP41 소스/산출물을 보존한다. A48·TEST56·Simulator 검증을 APP58 실기기 PASS로 전용하지 않는다.
