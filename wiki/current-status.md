@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-K 베타 준비](task16k-beta-activation-20261103.md): Owner WEB E2E/이용권·History·크롭 PASS. 실기기 Q1 OCR 차단 복구·52영역, 원본 비교·전사 수정 표시 PASS. 키보드 닫기33검사/빌드·TEST 설치/실행 PASS, Owner 재검수 대기. 오독·누락/전체 전사 확정·실기기 전체 루프/운영RPC·베타·자연 identity는 P0. 혼합 WEB 무료 두 문항/0차감·History PASS. 운영 NOT_READY/HOLD.
+[TASK16-K 베타 준비](task16k-beta-activation-20261103.md): Owner WEB E2E/이용권·History·크롭 PASS. 실기기 Q1 OCR 차단 복구·52영역, 원본 비교·전사 수정 표시 PASS. 키보드 닫기·하단 확인 접근 Owner 실기기 PASS(33검사). 오독·누락/전체 전사 확정·실기기 전체 루프/운영RPC·베타·자연 identity는 P0. 혼합 WEB 무료 두 문항/0차감·History PASS. 운영 NOT_READY/HOLD.
 
 [C/E/F/G/H/I 검증 이력·Owner 결과 경로](task16i-owner-review-20261103.md). Simulator 학습 루프 PASS는 실기기 제출 PASS가 아님.
 

@@ -5155,3 +5155,8 @@ Owner 키보드가 하단 확인을 가리는 문제 보고. 기존 Math 입력�
 ## 2026-11-03 — TASK16-K 키보드 수정 TEST 설치
 
 Owner ‘지금 업데이트’ 승인 후 ff68fa6 Profile을 별도 LS Math TEST bundle에 업데이트 설치/실행 성공. 키보드 닫기 사용성 Owner 확인 대기, 앱 삭제/Provider/서버 기록/운영 변경0. [설치 범위](task16k-beta-activation-20261103.md#owner-승인-후-키보드-수정-test-설치).
+
+
+## 2026-11-03 — TASK16-K 키보드 가림 실기기 마감
+
+Owner ‘키보드가 닫히고 확인 버튼이 보임’ 확인. ff68fa6 전사 키보드 닫기/하단 확인 접근 실기기 PASS. 전체 전사 확정·평가 승인 아님, OCR 품질/전체 루프/운영 HOLD 유지. [검수 범위](task16k-beta-activation-20261103.md#owner-키보드-닫기하단-확인-접근-pass).
