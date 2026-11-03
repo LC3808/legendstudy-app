@@ -2,7 +2,7 @@
 
 ## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 
-현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출은 미실행이다.
+현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험은 최초검증 범위이며, Owner 지시에 따라 운영 Registry 전체에서 상경·사회·수리 공개 범위를 다시 조사 중이다.
 
 - APP `codex/app-review-candidate-b-20261103`: 후보 A 인증·온보딩·MY·선택형 닉네임 + B 수리 UX 통합. 자연계 일괄 차단 대신 정확한 공개 Catalog와 서버 실행 상태를 확인한다. 혼합형 사진은 기존 Math 인식/확인 후 Essay 시험 회차 하나에 제출한다. 입력이 바뀌면 확인본 재사용 차단.
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.

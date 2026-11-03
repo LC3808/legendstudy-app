@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+APP58 IPA/AAB / Owner Store 업로드·심사·게시 인계: [최종 산출물·서명/설정·절차·미실행 범위](app58-store-handoff-20261104.md).
+
 APP·수리·상경 기존 서비스 통합 / 차단 해제 / 배포 빌드 / 앱 이용권 용어: [Owner·ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md).
 
 APP 업데이트 확인 / OPTIONAL·REQUIRED / 스토어 공개 버전 / 24시간 미루기: [Native 구현·정책·검증](app-update-check-20261104.md) → [비활성 SQL 후보](../supabase/candidates/app_update_policy_20261104/README.md).

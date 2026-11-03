@@ -944,3 +944,8 @@ Owner 후속: `전체 내용 확인`을 누르면 가능한 영역을 일괄 체
 운영 업데이트 정책은 초기 비활성이다. 심사·TestFlight·내부 후보는 공개 최신 버전이 아니다. 새 Migration은 먼저 작성하여 Owner 승인을 받고, 운영 DB/Auth/Credit/Ledger/결제 및 APP41은 보존한다. 실제 공개 확인과 필수 승인 근거를 별도로 저장하며 일반 사용자는 읽기 RPC만 사용한다. 기존 APP41에는 이 클라이언트 기능을 소급 추가할 수 없다. [구현·검증·제한](app-update-check-20261104.md), [후보 SQL](../supabase/candidates/app_update_policy_20261104/README.md).
 
 후속 범위 승인(2026-11-04): Owner가 “업데이트 정책 TEST 적용은 승인”으로 기존 비활성 SQL의 격리 TEST 설치를 허용했다. 운영 적용·공개 버전 등록·필수 업데이트 활성화로 확대하지 않는다. [실제 적용·검증](app-update-check-20261104.md#2026-11-04--owner-승인-후-격리-test-비활성-적용).
+
+
+## 2026-11-04 — Store 배포는 Owner 직접 실행
+
+이전 APP58 업로드 승인은 Owner 최신 역할 정정으로 대체한다. Codex는 APP 개발·통합·빌드·서명/인증 검증·Backend 연결·산출물/절차 인계까지 담당한다. Store 업로드·심사 제출·최종 게시를 별도 명시 요청 없이 실행하지 않는다. APP41/58 산출물 보존, 수리·상경 운영 연결은 기존 확대 지시에 따라 계속한다. [APP58 인계](app58-store-handoff-20261104.md), [통합 정책](app-math-commerce-integration-report-20261103.md).

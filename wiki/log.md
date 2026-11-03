@@ -5661,3 +5661,8 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 ## 2026-11-04 — 업데이트 정책 TEST 비활성 적용
 
 Owner 승인 후 기존 SHA25660deffda SQL을 kpq 격리 TEST에 적용. migration20261103154005, 함수2개 정의/ACL/RLS·양 플랫폼 disabled/OPTIONAL·anon/auth 읽기·실제 HTTP200/null PASS. 기존11종 count 동일. 운영/정책 활성화/Provider/스토어 변경0, 앱 코드·signed58 동일. [상세·영수증·미검수](app-update-check-20261104.md#2026-11-04--owner-승인-후-격리-test-비활성-적용).
+
+
+## 2026-11-04 — APP58 산출물 재검증·Store 역할 정정
+
+실제5b5e5a8 빌드 IPA/AAB의 버전·서명·운영 인증 설정과 receipt hash PASS, 미활성 UI 집중33PASS. Store 업로드/제출/게시0. Owner 직접 실행 결정에 따라 [산출물·절차](app58-store-handoff-20261104.md)를 인계하며 Backend 전체 공개 범위 조사는 계속한다.
