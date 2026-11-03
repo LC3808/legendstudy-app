@@ -8,7 +8,7 @@
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.
 - 현재 운영 읽기 확인: 기존16시험(인하 자연15·한양2026 상경1)의 canonical46문항과 공식 평가 패키지 조회 PASS. legacy 건국1leaf를 보존한47leaf 초기 공개 후보. 의예/미연결/합성 문제와 TEST 전용 한양2024 자연 ID는 제외. 시험 데이터 신규 생성/복제 없음.
 - 운영에는 coaching/혼합 coaching/quote/continue 증분 RPC가 아직 없다. 운영 함수 원문·권한·run-table 구조를 보존한 증분 SQL 후보3개를 로컬 PG17에서 검증했으며 운영 미적용이다. 별도 격리 TEST 증분은 적용·6함수 postflight·기존 데이터10종 count 보존 PASS. 실제 무료0 견적/익명 거절 PASS, 유료 견적은 잔액0으로 NOT_VERIFIED다. 일일 베타 이용권을 제외하던 Math 선택 조건도 기존 claim/credit_source/eligible 계약으로 연결한다. 임의 유료 대체 없이 서버 선택 출처를 확인·동의한다.
-- APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 정식58 빌드 영수증은 종합 보고서 실행 마감 절에서 확정한다.
+- APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 동일소스5b5e5a8의 정식1.0.1(58) iOS IPA/Archive·Android AAB 서명/실제버전/운영설정 PASS. 스토어 업로드·기기58 설치0. 산출물/해시는 종합 보고서에 기록했다.
 - 기존 APP41 소스·IPA·브랜치 및 A48 정식 설치 앱, TEST56 별도 앱 보존. 운영 DB/Auth/Credit/Ledger/결제/Provider/WEB 변경과 Store 제출을 완료했다고 주장하지 않는다.
 
 ## Owner 추가 결정 — 이용권 용어 통일

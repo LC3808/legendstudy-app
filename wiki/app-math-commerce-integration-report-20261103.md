@@ -1,6 +1,6 @@
 # LegendStudy+ APP·수리·상경논술 통합 작업 보고서
 
-기준일: 2026-11-03 · 대상: Owner / ChatGPT 검토
+최종 갱신: 2026-11-04 KST · 대상: Owner / ChatGPT 검토
 
 **후보 A의 인증·온보딩·MY 개선과 후보 B의 수리논술 학습 화면을 통합했으며, iPhone에서 일괄 체크와 긴 답안 근거 표시까지 Owner 검수를 통과했다.** 기존 Essay·Math 평가 기능과 Registry·Evidence Package·Credit·Ledger·History를 재사용했다. 다만 저장 결과 조회·UI 검수의 통과를 신규 사진 제출 전체 실기기 E2E나 OCR·첨삭 품질 전체 통과로 확대하지 않는다.
 
@@ -176,7 +176,7 @@ TASK16-K의 운영 읽기 감사 스냅샷에는 기존 **363시험/1,014문항/
 - Math 초기/반복 사이클은 공통 일일 베타 claim과 서버 quote의 이용권 출처를 사용한다. 학생 동의한 grant를 저장해 요청에 고정한다. 응답 유실은 같은 키/출처 재시도, 서버의 금액/출처 변경 거절은 재동의, 이전 앱의 출처 없는 요청은 기존 서버 회차 복구만 허용한다. 무료 재첨삭에서는 일일 claim을 호출하지 않는다.
 - 앱 모든 사용자 표시 크레딧/Credit을 **이용권**으로 통일했다. 구매 상품1/3/5/10개, 잔액·사용/구매 내역·만료·첨삭/오류/출처·접근성 표시를 포함한다. 약관·환불조건 및 자동 지급/지연 문의 안내는 상품 구매 버튼 아래에 모았다. 내부 API/DB 이름·IAP 상품 ID·가격·영수증 처리는 유지했다.
 - APP 전체 **1,434 PASS / 7 SKIP**. 이후 서버 거절 재동의·이전 요청 복구의 추가 보완은 **집중9 PASS**. 첫 통합1431PASS와 이후 표시/출처 연결 결과를 구분한다. 새 mixed 테스트의 fake-clock 종료 문제와 기존 hold문구 기대값, 무료 rewrite fixture 누락을 정정했다. 실제 Provider 호출·iPhone 신규 제출 PASS로 계산하지 않는다.
-- WEB은 실제 운영 c9bda913을 기반으로 기존 Math23개 커밋을 선택 통합했다. 운영 Analytics/관리/결제 파일 보존, 시험 전체 admission·공식 PDF·최대5개 과제·수식/힌트·서버 공개·History 재사용. 최초 최종1704PASS/4SKIP·lint/type/Next/Cloudflare Functions 빌드 PASS; 후속 거절 코드 처리는 최종 영수증에서 확정한다.
+- WEB은 실제 운영 c9bda913을 기반으로 기존 Math23개 커밋을 선택 통합했다. 운영 Analytics/관리/결제 파일 보존, 시험 전체 admission·공식 PDF·최대5개 과제·수식/힌트·서버 공개·History 재사용. 최종1705PASS/4SKIP·lint/type/Next/Cloudflare Functions 빌드 PASS.
 
 ### 기존 DB·공식 근거 재확인
 
@@ -192,18 +192,96 @@ TASK16-K의 운영 읽기 감사 스냅샷에는 기존 **363시험/1,014문항/
 
 로컬 PG17: 운영 함수11개 원문·ACL 재현, canonical Math131회귀, 중간3지점 실패 atomic rollback,6회1/0반복·중복/실패·14일/beta기한, 정답 마스킹/명시 공개·History·인문 결과 byte동일을 검사했다. 독립 리뷰의 동시 힌트 키 충돌·1단계 전2단계 공개·공개 전후 재작성 시점flag도 후속 보완했다. scope/beta는 synthetic47문항 동작 검사와 실제 운영16패키지 읽기 근거를 구분한다. TEST/운영 원격 적용·실제 사용자 E2E와 같은 증거는 아니다.
 
-### 배포 영수증 — 최종 갱신 대상
+### 실제 격리 TEST 증분 적용
 
-<!-- RELEASE57_RECEIPTS -->
+TEST 전용 원문9함수 guard와 독립 리뷰를 통과한 증분만 `kpqbedylxlyntrrfybpn`에 적용했다. 신규/변경6함수의 정의·owner·ACL·search_path가 기대값과 일치하고, 기존 답안·평가·회차·원장·공개/힌트 기록10종의 행 수가 동일했다. 운영 SQL 후보3개는 적용하지 않았다.
 
-| 항목 | 현재 상태 |
+실제 HTTP: 기존 계정 로그인, 무료 재첨삭 이용권0개/included 견적, 익명 신규RPC 접근 거절 PASS. 기존 계정 잔액0으로 자연/상경 최초 견적은 `INSUFFICIENT_CREDIT`이므로 유료 출처와 출처 변경 거절은 원격 NOT_VERIFIED다. 원장·History 전후 동일, Provider/신규 평가/일일 지급 호출0. 전체 실제 smoke는 **PARTIAL**이며 로컬 PG17 유료/무료/재시도 검증과 구분한다. 캠페인·scope가 없는 TEST에 일일 beta나 이용권을 새로 지급하지 않았다.
+
+검토 패키지: WEB 저장소 `supabase/candidates/release57_math_commerce_20261103/`. core/scope/beta 후보, exact postflight, HOLD-only 복구, 로컬 검증 로그, TEST 실제 적용/HTTP 영수증을 포함한다. 웹 패키지 문서·SQL commit은 `3ac8269`, 실행 코드 artifact는 `c9fafea`다.
+
+### 배포 영수증
+
+<!-- RELEASE58_RECEIPTS -->
+
+| 항목 | 상태 |
 |---|---|
-| APP 통합 소스 | 현재 B 통합 브랜치, 최종 코드 commit/서명 빌드 영수증 갱신 예정 |
-| WEB 통합 소스 | 운영 기반 별도 codex/math-commerce-release-20261103, 최종 artifact 갱신 중 |
-| iOS1.0.1(57) | 1차 signed Archive/App Store IPA PASS; 추가 이용권 UI/출처 연결 후 재빌드 대상 |
-| Android1.0.1(57) | 최종 AAB 빌드 대기 |
-| 운영 SQL/공개 설정 | 작성·로컬 검증, 원격 미적용 |
-| TEST source RPC | 기존 TEST 미설치 확인, 별도 증분 연결 필요 |
-| Store 업로드·제출 | 미실행 |
+| APP 실행 소스 | `5b5e5a859a772f8f6af2716f1a1f3cec46a156d5`, `codex/app-review-candidate-b-20261103` |
+| WEB 실행 소스 | `c9fafeace47dbab7b58af19ea0d5e636f681ad0e`, production 기반 `codex/math-commerce-release-20261103`; SQL/증거 후속 `3ac8269` |
+| APP 전체 회귀 | **1,480 PASS / 기존7 SKIP / 0 FAIL**, Analyze0, Wiki handoff PASS |
+| WEB 전체 회귀 | **1,705 PASS / 기존4 SKIP**,233파일 PASS/3 SKIP; Next/TypeScript/Functions/경계 PASS; lint0오류·기존2 warning |
+| iOS1.0.1(57) | 이용권 표시/출처 연결까지 소스8542a49의 signed IPA·Archive 완료·보존. 긴급 요청으로 중단하지 않음 |
+| iOS1.0.1(58) | 업데이트 기능 포함 signed App Store IPA·Archive PASS, codesign deep/strict·Apple로그인 entitlement·debug금지·실제AOT운영 인증값 PASS |
+| Android1.0.1(58) | signed AAB PASS(99,632,168bytes), jarsigner·실제AAB protobuf package/version58·merged release manifest/기존권한·운영AOT인증값 PASS |
+| WEB artifact | 운영 public config 포함 production tar.gz 준비; 실제 운영/TEST 배포0 |
+| Math TEST 증분 | 실제 적용·postflight PASS, 실제 source smoke PARTIAL(기존 잔액0), Provider0 |
+| 운영 수리/상경 증분·공개 플래그 | 준비·로컬 검증, **운영 미적용** |
+| 업데이트 정책 Migration | 후보·로컬69 PASS, **운영·TEST 모두 미적용/비활성** |
+| 스토어 업로드/제출·58 기기 설치 | 미실행 |
 
-현재 판정은 **배포 후보 준비 진행 / 운영 활성화 미완료**다. 운영 활성화는 위 DB·설정 적용 후 실제 결과로 갱신하며, 차단 해제 코드와 빌드 성공만으로 학생 이용 가능을 선언하지 않는다. 최종 보고에는 남은 실행 단계와 적용 전후의 정확한 SHA/URL/검수 범위를 명시한다.
+최종 산출물 보관 폴더: `/Users/woojinchang/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/release58/`. 기존 APP41·A48·TEST56·release57과 원래 브랜치는 보존했다. 빌드 산출물은 정식 서명된 배포 후보이며 스토어 제출/심사 승인/운영 활성화 완료가 아니다.
+
+초기 전체 회귀에서 업데이트 조회 timeout 타이머가 외부 ProviderContainer보다 먼저 닫힌 화면에 남아50개 shell 검사가 실패했다. gate/controller 종료 시 소유한 deadline을 취소하도록 수정하고 기존 테스트를 숨기거나 비활성화하지 않은 채 전체1,480PASS로 마감했다. Android 최초 `--no-pub` 빌드에서는 이전 개발용 integration_test 등록 파일이 남아 compileReleaseJava가 실패했다. 로컬 Flutter SDK의 해당 옵션이 플랫폼 재생성을 생략함을 확인했고, 생성 파일 수동 편집/의존성 업그레이드 없이 기본 릴리스 생성 절차로 재빌드하여 PASS했다. PDFium 다운로드 오류는 이번 최종 빌드에 없었다.
+
+앱 표시의 이용권 통일은 Native UI·오류·접근성·수량을 대상으로 확인했다. App Store Connect/Play Console의 상품 ID·가격·상품명 자체는 변경하지 않았으므로 OS 결제창의 스토어 등록 상품명은 별도 확인 대상이다.
+
+## 10. 긴급 추가 — 앱 업데이트 확인
+
+[상세 구현·A–K 검증](app-update-check-20261104.md), [비활성 Migration/검증/적용 절차](../supabase/candidates/app_update_policy_20261104/README.md).
+
+기존 설정 조사에서 재사용 가능한 앱 버전 정책은 없었다. 결제용 설정을 변경하지 않고 최소 private 플랫폼 정책 후보와 공개 읽기 RPC를 작성했다. 기존 Native 설치 버전 채널, Supabase 클라이언트, SharedPreferences, 디자인/라우터/공식 스토어 링크를 재사용하며 별도 WebView·외부 업데이트 SDK는 추가하지 않았다.
+
+- iOS/Android별 숫자 version/build 비교. 실제 공개 확인 tuple·시각·근거가 최신 tuple과 일치할 때만 안내한다. 심사/TestFlight/내부57·58을 최신 출시로 지정하지 않았다.
+- OPTIONAL 기본: 나중에/업데이트하기. 같은 공개 tuple은24시간 미루고 새 tuple은 다시 안내한다.
+- REQUIRED: Owner 승인된 minimum tuple과 시각/근거가 있을 때 minimum 미만만 차단한다. 초기 양 플랫폼은 disabled/OPTIONAL/latest·minimum 미설정이다.
+- 정책 조회3초 timeout·오류·미설치·잘못된 값은 정상 앱 이용. 인증/온보딩은 미루고, legacy/WEB 프로필도 기존 규칙대로 인정한다. 앱 복귀/중복/늦은 비동기 응답/화면 종료 경합을 방어한다.
+- 기존 APP41에는 이 클라이언트 기능이 소급 설치되지 않는다. 새 기능 포함 버전부터 동작하며 APP41을 운영 서버에서 강제로 차단하는 별도 변경은 하지 않았다.
+
+집중 검사는 업데이트45개+온보딩13개+기존 기기 QA fixture10개 = **68 PASS**. 전체 회귀1,480PASS에 포함되며 합산하지 않는다. SQL은 별도 로컬 PostgreSQL17 비슈퍼유저69개 PASS, 재현 스크립트와 RLS/권한/원복 증거 포함. 공개RPC는 anon/authenticated 읽기만 허용하고 private 직접 읽기/쓰기를 차단한다. 운영/TEST에 정책은 설치하지 않았다.
+
+Mock Native 화면 `optional-mock.png` / `required-mock.png`는 위 보관 폴더에 있다. 390×844 실제 위젯 렌더와320×568/글자1.5배 overflow를 확인했다. 화면의1.0.2는 fixture이며 실제 출시 버전이 아니다. 실제 iOS/Android 기기의 팝업·스토어 이동, 실제 공개 버전 설정은 **NOT_VERIFIED**다.
+
+변경 파일: `lib/core/config/app_information.dart`, `lib/features/app_update/`3파일, `lib/app/legendstudy_app.dart`, `lib/features/onboarding/onboarding_gate.dart`, `test/app_update_test.dart`, 위 정책 후보와 Wiki. 수리/상경 통합에서는 기존 Math gateway/session, mixed preparation, Essay selection/admission, 공통 이용권 표시와 billing UI를 변경했고 기존 평가 엔진·가격·상품 ID는 보존했다.
+
+## 11. 운영 반영 순서와 판정
+
+1. Owner가 운영용 수리/상경 core → scope → beta 증분 후보3개를 검토·승인하고 정확한 기존 DB 상태에서 적용·postflight한다. 기존 History/원장과 인문 결과를 보존한다. TEST install/seed를 운영에 복사하지 않는다.
+2. 승인 범위16시험의 `ESSAY_BETA_EXPANSION_EXAMS`, 보존 legacy를 포함한47leaf의 `MATH_PUBLIC_LEAVES`, `ESSAY_CONTINUOUS_CYCLES_ENABLED=true` 설정 후보를 적용하고 WEB production artifact를 배포한다. 기존 EXAM_RUNTIME/MIXED_SESSION/Math 실행값은 유지한다. 이번 경로에서 사용하지 않는 `ESSAY_REVIEWED_RUNTIME_ENABLED`는 추가하지 않아 별도 단일 문항 경로를 임의 개방하지 않는다. 가려진 Secret을 저장하거나 기존211 공개시험 allowlist를 통째로 교체하지 않는다. 실제 인문 회귀·유료1/무료1·History·혼합 전체 완료를 확인한다.
+3. APP58 동일 Backend로 실제 기기 신규 사진→OCR확인→평가→재첨삭→History 및 혼합형을 검수한다. 기존 저장결과/UI PASS와 전체 실기기 신규 제출 PASS는 구분한다.
+4. 업데이트 정책 Migration은 별도 승인 후 disabled 상태로 적용·postflight한다. 실제 Store 공개를 확인한 exact tuple만 등록한다. REQUIRED는 다시 Owner의 명시적 최소 버전 승인 대상이다.
+5. 남은 실기기/품질·운영 연결을 검수한 뒤 Owner가 스토어 제출·베타 활성화 여부를 결정한다. 현재 업로드/제출/운영 활성화0이다.
+
+**현재 판정: 통합 코드·배포 후보 준비, 운영 활성화 및 스토어 제출 HOLD.** 신규 업데이트 정책의 원격 적용은 Owner가 이번 지시9항에서 먼저 승인을 받도록 명시했고, [AGENTS.md4항](../AGENTS.md)의 기본 DB 적용 절차도 따른다. 운영 DB/Auth/Credit/Ledger/결제 변경 금지 조건을 지키며 SQL 후보까지만 준비했다. 수리/상경의 실제 운영 차단 해제는 아직 완료하지 않았다. 남은 P0는 운영 증분/설정·실제기기 전체 루프·OCR/공식 힌트/해설 품질과 실제 업데이트 안내 검수다.
+
+
+## 부록 A. 최종 배포 산출물
+
+- iOS: `legendstudy-1.0.1-58.ipa`, 33,981,223bytes, SHA256 `88ecaf7e91dd9fe05b79113e5e0119295bb9dbeac2f043a2592a87261a28a01e`. 같은 폴더 `Runner.xcarchive` 보존.
+- Android: `legendstudy-1.0.1-58.aab`, 99,632,168bytes, SHA256 `5ac0a0448a9f65c49d90f69cf4c0b393e9cd655ee2514d77e424fc6d1e5c7987`.
+- WEB: `web/legendstudy-web-c9fafea-production.tar.gz`, SHA256 `a83ef963b39814d5141de8e5e4264131e6cfec3c5b4403853a484f1ee63de504`. 운영 public config artifact이므로 TEST에 그대로 배포하지 않는다.
+- `manifest.json`, 플랫폼별 receipt, 빌드/검증 로그, `SHA256SUMS`, Native Mock PNG 포함. App Store/Play 업로드0, 실제 기기58 설치0.
+
+## 부록 B. 기존 Registry 기반 최초 공개 후보
+
+아래16시험은 문항 연결/공식 평가 Package의 읽기 조회 PASS 범위다. 실제 운영 신규 평가·전문가 품질 검수 PASS를 뜻하지 않는다. 자료 연결은 PASS지만 현재 실제 서비스 상태는 모두 **BLOCKED(운영 RPC·공개 설정 미적용)**, 첨삭 품질은 **NEEDS_REVIEW**다. 운영 적용 후 학생 제출/저장까지 확인해야 서비스 READY로 전환한다. legacy 건국1문항은 별도로 보존한다.
+
+| 기존 시험 | 경로/문항 |
+|---|---|
+| 2022학년도 인하대학교 모의논술 자연계열 | Math 3문항 |
+| 2022학년도 인하대학교 수시논술 자연계열 오전 | Math 3문항 |
+| 2022학년도 인하대학교 수시논술 자연계열 오후 | Math 3문항 |
+| 2023학년도 인하대학교 모의논술 자연계열 | Math 3문항 |
+| 2023학년도 인하대학교 수시논술 자연계열 오전 | Math 3문항 |
+| 2023학년도 인하대학교 수시논술 자연계열 오후 | Math 3문항 |
+| 2024학년도 인하대학교 모의논술 자연계열 | Math 3문항 |
+| 2024학년도 인하대학교 수시논술 자연계열 오전 | Math 3문항 |
+| 2024학년도 인하대학교 수시논술 자연계열 오후 | Math 3문항 |
+| 2025학년도 인하대학교 수시논술 자연계열 오전 | Math 3문항 |
+| 2025학년도 인하대학교 수시논술 자연계열 오후 | Math 3문항 |
+| 2026학년도 인하대학교 모의논술 자연계열 | Math 3문항 |
+| 2026학년도 인하대학교 수시논술 자연계열 오전 | Math 3문항 |
+| 2026학년도 인하대학교 수시논술 자연계열 오후 | Math 3문항 |
+| 2026학년도 한양대학교 수시논술 상경계열 | Q1 Essay + Q2 Math |
+| 2027학년도 인하대학교 모의논술 자연계열 | Math 3문항 |
+
+정확한 exam/question/leaf ID와 package digest는 WEB `src/data/essay-beta-expansion.json`, SQL 범위 검증은 `supabase/candidates/release57_math_commerce_20261103/scope-contract.json`에 고정했다. 미연결/합성/의예·그 밖의 미검수 시험은 무조건 공개하지 않는다.
