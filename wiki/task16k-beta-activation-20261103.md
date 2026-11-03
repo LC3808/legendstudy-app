@@ -219,3 +219,8 @@ Owner가 전사 수정 후 iOS 키보드가 닫히지 않아 화면 하단 확�
 기존 인식 확인 회귀 검사에 키보드 열림→닫기→수정값 유지→자동 확정0→명시 확인 가능을 추가했다. Native14검사 PASS·관련3파일 정적분석0문제. 서버/Provider/DB/차감/운영 변경0. 키보드 닫기는 로컬 수정값을 보존하지만, 현재 미확정 전사 편집의 앱 재시작 복구는 별도 미구현이다. Profile 빌드/TEST 설치 상태는 후속 기록으로 구분한다.
 
 키보드 수정 검증 마감: Native14 + 기존 공통 catalog/답안 회귀19 =33 PASS, 정적분석0문제, iPhone용 TEST Profile 빌드 성공. 설치 파일 `/tmp/task16k-native-owner/Build/Products/Profile-iphoneos/Runner.app`의 TEST bundle을 확인한 뒤 업데이트한다. 설치 시 실행 중인 화면이 재시작되어 아직 서버에 확정하지 않은 영역6 편집은 재입력이 필요하다. 사진/기존 서버 후보·결과/계정 기록은 그대로다. 따라서 현재 편집을 닫아도 되는지 Owner에게 설치 시점을 확인하며, 설치 전 상태를 실기기 검수 PASS로 기록하지 않는다.
+
+
+### Owner 승인 후 키보드 수정 TEST 설치
+
+2026-11-03 Owner가 ‘지금 TEST 앱 업데이트’를 선택하여 미확정 편집 재입력이 필요한 점을 확인한 뒤 설치를 승인했다. 코드 `ff68fa6`의 Profile 빌드를 iPhone12ProMax에 기존 `com.legendstudy.app.task16f` bundle 업데이트로 설치하고 `devicectl` 실행 성공을 확인했다. uninstall/계정 변경/Provider 호출/서버 기록 변경/운영 릴리스 변경0. 원본 사진과 OCR 서버 결과를 다시 만들지 않았다. 키보드 닫기 버튼·스크롤 해제의 실제 기기 사용성은 Owner 재검수 대기이며 설치 성공과 구분한다.

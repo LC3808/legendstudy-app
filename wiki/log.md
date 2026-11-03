@@ -5150,3 +5150,8 @@ Owner가 영역6 -1/5→-1/6 수정 후 수식 표시 반영 확인. 로컬 편�
 Owner 키보드가 하단 확인을 가리는 문제 보고. 기존 Math 입력에 닫기/바깥 터치, 답안 확인 sheet·Math 목록에 드래그 해제 추가. 수정값 보존·자동 확정 없음 포함14검사/분석 PASS. Provider·운영 변경0, 설치/실기기 재검수는 별도 기록. [동작·미확정 편집 보존 한계](task16k-beta-activation-20261103.md#owner-전사-편집-후-키보드-가림--닫기-동작-보완).
 
 키보드 후속 마감: 기존 catalog/답안19회귀 추가 PASS(총33), Profile 빌드 성공. 미확정 전사 로컬 편집이 앱 재시작 시 보존되지 않아 TEST 업데이트 설치 시점 Owner 확인. 사진/서버 기록 보존, 아직 설치/실기기 재검수 PASS 아님.
+
+
+## 2026-11-03 — TASK16-K 키보드 수정 TEST 설치
+
+Owner ‘지금 업데이트’ 승인 후 ff68fa6 Profile을 별도 LS Math TEST bundle에 업데이트 설치/실행 성공. 키보드 닫기 사용성 Owner 확인 대기, 앱 삭제/Provider/서버 기록/운영 변경0. [설치 범위](task16k-beta-activation-20261103.md#owner-승인-후-키보드-수정-test-설치).
