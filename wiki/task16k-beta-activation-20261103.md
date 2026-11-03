@@ -194,3 +194,10 @@ OCR 원본 대조 결과는 여전히 PARTIAL/FAIL: Q1 e^{-x} 부호·이차식 
 검사 최신: WEB 전체1617PASS/4skip(추가 수학 ? 방어3건은 별도83개 focused 검사에 포함), Native25PASS·분석0문제·Profile build/설치/launch PASS, Wiki handoff PASS. 운영 변경0. 실기기 화면 응답을 받으면 전사 확인 이후의 실제 평가/무료재첨삭/History를 이어서 검증한다.
 
 마감 Git/Preview: Native 실행 코드 `e645c38`(동일 TEST bundle Profile 설치), LAB `968aa5f`·배포 `f9d0fdc7`, [격리 TEST](https://legendstudy-task16b.pages.dev). Native 사진 상태 복구25검사/분석0문제/Profile build/업데이트 설치·launch PASS; 마지막 WEB 수학 ? guard83개 focused 검사·빌드 PASS. 이전 전체1617PASS는 marker3건 추가 전 실행이라는 범위를 유지한다. 원본 학생 전사 확인/실기기 평가·재첨삭은 Owner 응답 대기이며 임의 진행하지 않는다.
+
+
+### Owner 실기기 확인 — 인식 수식·원본 비교 화면 PASS
+
+2026-11-03 Owner가 업데이트된 iPhone LS Math TEST에서 ‘저장한 답안 입력 확인’ 후 **인식 수식·원본 비교 화면이 열림**을 확인했다. 실제 카메라 촬영·크롭·업로드와 복구된 OCR 결과 조회까지의 구간을 PASS로 기록한다. 서버 복구 개입이 있었으므로 처음부터 중단 없는 전체 E2E 성공으로 확대하지 않는다. 전사 내용의 정확성/학생 수정/확정/평가·무료재첨삭·History는 별도 미완료다.
+
+다음 실기기 확인은 영역6의 -1/5를 원본 -1/6으로 수정하여 표시 반영 여부를 확인하는 단계다. 다른 오독·누락이 남아 전체 확정/평가를 먼저 요청하지 않았다. 이번 확인 기록에서는 Provider 호출·TEST 평가·차감·운영 변경0.
