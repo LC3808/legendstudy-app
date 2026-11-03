@@ -9,10 +9,10 @@ import 'package:go_router/go_router.dart';
 import '../../../core/supabase/supabase_providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../brand/brand_wordmark.dart';
-import '../../../shared/widgets/shell_widgets.dart';
 import '../../personal/personal_providers.dart';
 import '../../school/domain/school.dart';
 import '../../school/school_providers.dart';
+import '../../school/presentation/school_search_picker.dart';
 import '../../universities/application/university_providers.dart';
 import '../../universities/presentation/interested_universities_field.dart';
 import '../../profile/presentation/intended_major_field.dart';
@@ -23,7 +23,7 @@ import '../../profile/presentation/intended_major_field.dart';
 // aids scanning; the single orange accent expresses selection everywhere.
 // See wiki/personalization-onboarding.md.
 const _ink = Color(0xFF0D1730); // near-black navy: high-emphasis question
-const _accent = Color(0xFFF97A2F); // warm, lively orange (brand-aligned)
+const _accent = Color(0xFFFFAC14); // warm, lively orange (brand-aligned)
 const _accentSoft = Color(0xFFFFF1E6); // selected card tint
 const _fresh = Color(0xFF2F86D6); // fresh blue: progress + student icon
 const _mint = Color(0xFF1F9D57); // mint: "other" icon
@@ -70,39 +70,70 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   // transition owns the short lock; values are untouched).
   bool _advancing = false;
   String? _error;
-  final _searchInput = TextEditingController();
-  String _query = '';
+  School? _schoolDraft;
+  bool _statusDirty = false, _gradeDirty = false, _hydrated = false;
+  String? _owner;
+
+  bool _sameOwner(String? owner) =>
+      mounted &&
+      owner != null &&
+      ref.read(authStateProvider).value?.userId == owner;
+
+  Future<void> _persistDraft(String? owner) async {
+    if (!_sameOwner(owner)) throw StateError('Account changed');
+    if (!_statusDirty && !_gradeDirty) return;
+    await ref
+        .read(profileRepositoryProvider)
+        .upsertCurrentProfile(
+          academicStatus: _statusDirty ? _status : null,
+          gradeLevel: _gradeDirty && _isStudent ? _grade : null,
+          clearGrade:
+              (_statusDirty && !_isStudent) || (_gradeDirty && _grade == null),
+        );
+    if (!_sameOwner(owner)) throw StateError('Account changed');
+    _statusDirty = _gradeDirty = false;
+    ref.invalidate(currentProfileProvider);
+  }
+
+  Future<void> _move(int delta) async {
+    if (_busy || _advancing) return;
+    final owner = ref.read(authStateProvider).value?.userId;
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    try {
+      await _persistDraft(owner);
+      if (delta > 0 && _step == 2 && _isStudent && _schoolDraft != null) {
+        final applied = await ref
+            .read(schoolSelectionProvider.notifier)
+            .select(_schoolDraft);
+        if (!applied) throw StateError('School was not saved');
+      }
+      if (!_sameOwner(owner)) return;
+      setState(() {
+        _schoolDraft = null;
+        _step += delta;
+        _advancing = true;
+      });
+      _unlockSoon();
+    } catch (_) {
+      if (_sameOwner(owner)) setState(() => _error = '저장하지 못했어요. 다시 시도해 주세요.');
+    } finally {
+      if (_sameOwner(owner)) setState(() => _busy = false);
+    }
+  }
 
   // Guarded forward/back step moves. One move per transition; selections are
   // kept in state/providers, so moving never loses an entered value.
-  void _advance() {
-    if (_busy || _advancing || _step >= 4) return;
-    setState(() {
-      _advancing = true;
-      _step += 1;
-    });
-    _unlockSoon();
-  }
+  void _advance() => _move(1);
 
-  void _back() {
-    if (_busy || _advancing || _step <= 1) return;
-    setState(() {
-      _advancing = true;
-      _step -= 1;
-    });
-    _unlockSoon();
-  }
+  void _back() => _move(-1);
 
   void _unlockSoon() {
     Future.delayed(const Duration(milliseconds: 320), () {
       if (mounted) setState(() => _advancing = false);
     });
-  }
-
-  @override
-  void dispose() {
-    _searchInput.dispose();
-    super.dispose();
   }
 
   bool get _isStudent => _status == 'student';
@@ -120,19 +151,63 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _busy = true;
       _error = null;
     });
+    final owner = ref.read(authStateProvider).value?.userId;
     try {
+      var draftSaved = false;
+      try {
+        await _persistDraft(owner);
+        draftSaved = true;
+      } catch (_) {
+        // Skip is best effort: completion is independent of optional fields.
+      }
+      if (!_sameOwner(owner)) return;
       await ref.read(profileRepositoryProvider).markOnboardingComplete();
+      if (!_sameOwner(owner)) return;
+      while (!draftSaved) {
+        if (!mounted) return;
+        final retry = await showDialog<bool>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+            title: const Text('일부 정보를 저장하지 못했어요'),
+            content: const Text(
+              '온보딩 완료는 기록했지만 상태·학년은 저장되지 않았어요. 입력한 값으로 다시 저장하거나, 나중에 MY에서 설정할 수 있어요.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('저장 없이 계속'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('다시 저장'),
+              ),
+            ],
+          ),
+        );
+        if (!_sameOwner(owner)) return;
+        if (retry != true) break;
+        try {
+          await _persistDraft(owner);
+          draftSaved = true;
+        } catch (_) {
+          if (!_sameOwner(owner)) return;
+        }
+      }
+      if (!_sameOwner(owner)) return;
       ref.read(analyticsServiceProvider).logEvent(
         AnalyticsEvents.onboardingComplete,
         {'status': 'completed'},
       );
       await _leave();
     } catch (_) {
-      if (mounted) {
-        setState(() => _error = '잠시 후 다시 시도해 주세요.');
+      if (_sameOwner(owner)) {
+        setState(
+          () => _error = '온보딩 완료를 기록하지 못했어요. 입력값은 유지되어 있어요. 다시 시도해 주세요.',
+        );
       }
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (_sameOwner(owner)) setState(() => _busy = false);
     }
   }
 
@@ -142,59 +217,45 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _busy = true;
       _error = null;
     });
+    final owner = ref.read(authStateProvider).value?.userId;
     try {
       final repo = ref.read(profileRepositoryProvider);
-      await repo.upsertCurrentProfile(
-        academicStatus: _status,
-        // Non-students never carry a grade; clear any stale value.
-        gradeLevel: _isStudent ? _grade : null,
-        clearGrade: !_isStudent || _grade == null,
-      );
+      await _persistDraft(owner);
       await repo.markOnboardingComplete();
+      if (!_sameOwner(owner)) return;
       ref.read(analyticsServiceProvider).logEvent(
         AnalyticsEvents.onboardingComplete,
         {'status': 'completed'},
       );
       await _leave();
     } catch (_) {
-      if (mounted) {
+      if (_sameOwner(owner)) {
         setState(() => _error = '저장하지 못했어요. 다시 시도해 주세요.');
       }
     } finally {
-      if (mounted) setState(() => _busy = false);
-    }
-  }
-
-  // The single school-search action. Both the on-screen 검색 button and the
-  // keyboard search key call this — never a second search path. Searching only
-  // sets the query the existing schoolSearchProvider reacts to; it never
-  // finishes onboarding or navigates.
-  void _runSearch() {
-    final query = _searchInput.text.trim();
-    if (_busy || query.isEmpty || query == _query) return;
-    FocusScope.of(context).unfocus();
-    setState(() => _query = query);
-  }
-
-  Future<void> _selectSchool(School? school) async {
-    if (_busy) return;
-    setState(() => _busy = true);
-    try {
-      await ref.read(schoolSelectionProvider.notifier).select(school);
-    } catch (_) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('학교를 저장하지 못했어요. 다시 시도해 주세요.')),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _busy = false);
+      if (_sameOwner(owner)) setState(() => _busy = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
+    if (_owner != auth.value?.userId) {
+      _owner = auth.value?.userId;
+      _step = 1;
+      _status = null;
+      _grade = null;
+      _hydrated = false;
+      _statusDirty = _gradeDirty = _busy = _advancing = false;
+      _schoolDraft = null;
+    }
+    final profileState = ref.watch(currentProfileProvider);
+    if (!_hydrated && profileState.hasValue && !profileState.isLoading) {
+      final profile = profileState.asData?.value;
+      if (!_statusDirty) _status = profile?.academicStatus;
+      if (!_gradeDirty) _grade = profile?.gradeLevel;
+      _hydrated = true;
+    }
     final reduceMotion =
         MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     // Personalization is account-scoped; a guest has nothing to persist.
@@ -336,12 +397,18 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           icon: icon,
           tint: tint,
           selected: _status == value,
-          onTap: _busy ? null : () => setState(() => _status = value),
+          onTap: _busy
+              ? null
+              : () => setState(() {
+                  _status = value;
+                  _statusDirty = true;
+                }),
         ),
       ),
   ];
 
   List<Widget> _detailStep() {
+    ref.watch(schoolSelectionProvider);
     if (!_isStudent) {
       return [
         _header(
@@ -350,11 +417,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         ),
       ];
     }
-    final selection = ref.watch(schoolSelectionProvider);
-    final school = selection.value;
-    final results = ref.watch(schoolSearchProvider(_query));
+
     return [
-      _header('학년과 학교', '선택 사항이에요. 비워두고 나중에 설정해도 괜찮아요.'),
+      _header('학년과 학교', '학교와 학년을 설정해 주세요. 학교별 학습 정보와 맞춤형 서비스를 제공하는 데 활용됩니다.'),
       const _FieldLabel('학년'),
       const SizedBox(height: AppTokens.space12),
       Wrap(
@@ -365,84 +430,23 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             _SelectChip(
               label: grade == null ? '설정 안 함' : '$grade학년',
               selected: _grade == grade,
-              onTap: _busy ? null : () => setState(() => _grade = grade),
+              onTap: _busy
+                  ? null
+                  : () => setState(() {
+                      _grade = grade;
+                      _gradeDirty = true;
+                    }),
             ),
         ],
       ),
       const SizedBox(height: AppTokens.space24),
       const _FieldLabel('학교'),
       const SizedBox(height: AppTokens.space12),
-      TextField(
-        controller: _searchInput,
+      SchoolSearchPicker(
+        key: ValueKey('onboarding-school:$_owner'),
         enabled: !_busy,
-        maxLength: 100,
-        textInputAction: TextInputAction.search,
-        decoration: const InputDecoration(
-          hintText: '학교 이름을 검색해 주세요',
-          prefixIcon: Icon(Icons.search),
-          counterText: '',
-        ),
-        onChanged: (value) {
-          if (value.trim().isEmpty && _query.isNotEmpty) {
-            setState(() => _query = '');
-          }
-        },
-        // Keyboard search key uses the exact same action as the 검색 button.
-        onSubmitted: (_) => _runSearch(),
+        onChanged: (school) => setState(() => _schoolDraft = school),
       ),
-      const SizedBox(height: AppTokens.space8),
-      _SchoolSearchButton(
-        controller: _searchInput,
-        // A search for the current query is still in flight.
-        loading: _query.isNotEmpty && results.isLoading,
-        onSearch: _busy ? null : _runSearch,
-      ),
-      if (_query.isNotEmpty)
-        results.when(
-          skipLoadingOnRefresh: false,
-          skipLoadingOnReload: false,
-          loading: () => const Padding(
-            padding: EdgeInsets.all(AppTokens.space16),
-            child: Center(child: CircularProgressIndicator()),
-          ),
-          error: (_, _) => ErrorState(
-            message: '학교를 불러오지 못했어요.',
-            onRetry: () => ref.invalidate(schoolSearchProvider(_query)),
-          ),
-          data: (schools) => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (schools.isEmpty) const EmptyState('검색 결과가 없어요.'),
-              if (schools.length >= 100)
-                const Text('결과가 많아요. 학교 이름을 더 자세히 입력해 주세요.'),
-              for (final result in schools)
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(result.name),
-                  subtitle: Text(
-                    [
-                      result.schoolType,
-                      result.address,
-                    ].where((s) => s.isNotEmpty).join(' · '),
-                  ),
-                  selected: result.identity == school?.identity,
-                  trailing: result.identity == school?.identity
-                      ? const Icon(Icons.check, semanticLabel: '선택됨')
-                      : null,
-                  onTap: _busy ? null : () => _selectSchool(result),
-                ),
-            ],
-          ),
-        ),
-      if (school != null) ...[
-        const SizedBox(height: AppTokens.space12),
-        // Selected school rises into a foreground confirmation card — the seed
-        // of the Phase 1.2 "my school becomes my information" metaphor.
-        _SelectedSchoolCard(
-          name: school.name,
-          onClear: _busy ? null : () => _selectSchool(null),
-        ),
-      ],
     ];
   }
 
@@ -474,17 +478,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             ),
             const SizedBox(height: AppTokens.space8),
           ],
-          SizedBox(
-            height: 52,
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
             child: FilledButton(
-              onPressed: !canAdvance || _busy
+              onPressed: !canAdvance || _busy || _advancing
                   ? null
                   : _step < 4
                   ? _advance
                   : _finish,
               style: FilledButton.styleFrom(
                 backgroundColor: _accent,
-                foregroundColor: Colors.white,
+                foregroundColor: _ink,
                 disabledBackgroundColor: AppTokens.disabled,
                 textStyle: const TextStyle(
                   fontSize: 16,
@@ -497,6 +501,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
               child: Text(
                 _busy
                     ? '저장 중…'
+                    : _step == 2 && _isStudent && _schoolDraft != null
+                    ? '${_schoolDraft!.name}로 설정하기'
                     : interestedEmpty
                     ? '나중에 설정할게요'
                     : _step < 4
@@ -510,7 +516,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             children: [
               if (_step > 1)
                 TextButton(
-                  onPressed: _busy ? null : _back,
+                  onPressed: _busy || _advancing ? null : _back,
                   child: const Text('이전'),
                 ),
               const Spacer(),
@@ -736,59 +742,6 @@ class _SelectDot extends StatelessWidget {
   }
 }
 
-// Explicit on-screen search CTA. Separated from the footer's 설정 완료 button so
-// a user searching for a school never accidentally finishes onboarding. Enabled
-// only when the field is non-empty; shows a spinner while a search is in flight.
-class _SchoolSearchButton extends StatelessWidget {
-  const _SchoolSearchButton({
-    required this.controller,
-    required this.loading,
-    required this.onSearch,
-  });
-  final TextEditingController controller;
-  final bool loading;
-  final VoidCallback? onSearch;
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<TextEditingValue>(
-      valueListenable: controller,
-      builder: (context, value, _) {
-        final hasQuery = value.text.trim().isNotEmpty;
-        final enabled = hasQuery && !loading && onSearch != null;
-        return SizedBox(
-          height: 48,
-          child: OutlinedButton.icon(
-            onPressed: enabled ? onSearch : null,
-            icon: loading
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.search, size: 20),
-            label: Text(loading ? '검색 중…' : '검색'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: _accent,
-              disabledForegroundColor: AppTokens.disabled,
-              side: BorderSide(
-                color: enabled ? _accent : AppTokens.cardBorder,
-                width: 1.5,
-              ),
-              textStyle: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
 class _SelectChip extends StatelessWidget {
   const _SelectChip({
     required this.label,
@@ -836,45 +789,6 @@ class _SelectChip extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _SelectedSchoolCard extends StatelessWidget {
-  const _SelectedSchoolCard({required this.name, required this.onClear});
-  final String name;
-  final VoidCallback? onClear;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(
-        AppTokens.space16,
-        AppTokens.space12,
-        AppTokens.space8,
-        AppTokens.space12,
-      ),
-      decoration: BoxDecoration(
-        color: _accentSoft,
-        borderRadius: BorderRadius.circular(AppTokens.radiusMd),
-        border: Border.all(color: _accent, width: 1.5),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.check_circle_rounded, color: _accent, size: 22),
-          const SizedBox(width: AppTokens.space12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('선택한 학교', style: AppTokens.caption),
-                const SizedBox(height: 2),
-                Text(name, style: AppTokens.cardTitle.copyWith(color: _ink)),
-              ],
-            ),
-          ),
-          TextButton(onPressed: onClear, child: const Text('선택 해제')),
-        ],
       ),
     );
   }
@@ -1048,7 +962,7 @@ class BrandOnboardingState extends State<BrandOnboarding> {
                         ),
                   style: FilledButton.styleFrom(
                     backgroundColor: _accent,
-                    foregroundColor: Colors.white,
+                    foregroundColor: _ink,
                     textStyle: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,

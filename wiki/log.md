@@ -5308,3 +5308,50 @@ Owner-approved five NEIS-verified display-cache inserts; Production unresolved5�
 ## 2026-11-02 — TASK18 build configuration diagnosis
 
 39/40 binary comparison confirms local40 missing connection/OAuth defines; Apple review error matches null auth-service path. Matching native entitlements/schemes; config precheck PASS. No auth/code change;41 procedure recorded, device reproduction pending. [Evidence and procedure](final-store-rc-1.md#task18-build-configuration-diagnosis--2026-11-02).
+
+
+## 2026-11-02 — TASK18 build41 internal delivery
+
+Owner-authorized39 config recovery: signed41, boolean-only embedded config/signature verification, Analyze0/auth36PASS. Transporter13:06KST delivered; ASC Owner Internal QA41 “테스트 중” verified. No auth code/Production changes or review resubmission. [Evidence](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02).
+
+
+## 2026-11-02 — Build41 Owner login PASS
+
+Owner confirms all four login methods PASS on41; email/Apple/Google/Kakao acceptance recorded, resolving reported login blocker. No additional device/feature PASS inferred and no review resubmission performed. [Acceptance](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02).
+
+## 2026-11-02 — Notice formatting and image editor
+
+Existing notice contract extended with paragraph formatting/private image candidate; APP41 plain fallback preserved. WEB1546PASS/4SKIP, TS/build/lint and isolated RLS/rollback PASS. Production SQL/Storage E2E/mobile/deployment pending. [Contract and rollback](notices-system.md#notice-rich-editor-candidate--2026-11-02).
+
+## 2026-11-02 — 공지 편집기 운영 적용 및 학교명 자동 해결
+
+Owner 요청으로 rich notice SQL/Storage와 additive member RPC 적용, WEB8a3afe3/productionbd8f7da4 배포. 기존 공지2건/프로필/환경/Functions 보존. 실제 이미지 업로드·서식 저장/재조회/보관 및 신규3학교 자동조회PASS; WEB1572PASS/4SKIP. 모바일visual미검증·APP41텍스트호환. [공지/롤백](notices-system.md#production-rich-editor-rollout--2026-11-02), [학교명/보존검토](admin-member-directory.md#automatic-school-name-resolution--2026-11-02).
+
+
+## Historical: 2026-10-21 — Backend recovery gate follow-up
+
+Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
+
+## 2026-11-03 — Onboarding profile integrity & school search V2
+
+- 별도 `codex/onboarding-school-search-v2`, release367bfab 기반. APP41/운영/Auth/결제 보존.
+- 상태·학년 수정분 단계/skip 저장, 학교 임시선택→명시확인, 고등학교 기본/중학교 접미 판별,
+  공식학교급 필터/관련도/카드/동명 구분/Reduce Motion placeholder. MY 공통 적용.
+- 전체1328PASS/7기존SKIP, 최종대상23PASS, 분석PASS, iOS simulator debug PASS,
+  관리자7PASS, 실제NEIS8읽기PASS, 시각/위키/차이검사PASS. DB 쓰기/배포/push 없음.
+- 실계정 신규가입·재실행·관리자 E2E 및 신규 Store 빌드 Owner 대기.
+  [A–R·변경파일·복구](onboarding-school-search-v2-20261103.md). Claude d0fab09 진단 원문 보존.
+
+## 2026-11-03 — Onboarding School Search V2 final review fix
+
+- d00ec696 기반 별도 `codex/onboarding-school-search-v2-review-fix`.
+- Skip의 optional 상태/학년 best-effort와 완료 기록을 분리. 완료 실패는 화면 유지,
+  완료만 성공하면 미저장 안내·입력값 재시도/계속. 일반 finish는 기존 strict 저장 유지.
+- MY 학교 미설정 확인·코드쌍 NULL 복원, 상태/학년/닉네임 보존. 학교명 CTA/긴 이름 줄바꿈.
+- 전체1334PASS/기존7SKIP, 대상58PASS, analyzePASS, iOS simulator debugPASS. 운영 쓰기/APP41 변경/통합/배포/push 없음.
+  [최신 계약·검증·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix).
+
+
+## 2026-11-03 — 온보딩 V2 최종 통합 준비·기존 회원 정보 보완
+
+[후속 보고](onboarding-v2-final-integration-20261103.md): 74815f64 계승, MY 누락별 선택형 안내·상태 우선·비재학생 제외·완성 숨김. 운영 읽기 집계100계정/재학생43/학교설정18; 쓰기 없음. 별도 브랜치·APP41 보존, 수리14파일 dry merge 충돌·미통합. 로컬 빌드/자동 검사와 실기기 미검증 구분, Push/배포 없음.

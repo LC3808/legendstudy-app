@@ -72,7 +72,7 @@ void main() {
   });
 
   testWidgets(
-    'school deletion requires explicit confirmation; cancel preserves school',
+    'school editor has no clear action and saving grade preserves existing school',
     (t) async {
       final repo = Saves()
         ..value = UserProfile(
@@ -84,18 +84,15 @@ void main() {
       await mountEditor(t, const SchoolPage(), repo, Pops());
       expect(find.text('희망 학과·관심 전공'), findsNothing);
       expect(find.text('관심 대학'), findsNothing);
-      await t.ensureVisible(find.text('선택 해제'));
-      await t.tap(find.text('선택 해제'));
-      await t.pumpAndSettle();
+      expect(find.text('선택 해제'), findsNothing);
       expect(repo.schoolWrites, 0);
       await t.ensureVisible(find.text('저장'));
       await t.tap(find.text('저장'));
-      await t.pump(const Duration(milliseconds: 400));
-      expect(find.text('저장한 고등학교를 해제할까요?'), findsOneWidget);
-      await t.tap(find.text('취소'));
+      repo.pending.complete();
       await t.pumpAndSettle();
       expect(repo.schoolWrites, 0);
-      expect(repo.writes, 0);
+      expect(repo.writes, 1);
+      expect(repo.value.neisSchoolCode, schoolA.schoolCode);
     },
   );
 }

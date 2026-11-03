@@ -1,8 +1,12 @@
 # Current Status
 
-[관리자 학교명](admin-member-directory.md): Owner승인 NEIS캐시5건반영·미해결0. 프로필보존; 새학교 자동갱신은미구현.
+[11/3 온보딩 최종 통합 준비](onboarding-v2-final-integration-20261103.md): V2 보존·MY 누락 안내 추가. 별도 브랜치/APP41 보존·실기기/릴리스 승인 대기; 미배포.
 
-[TASK18 빌드진단](final-store-rc-1.md#task18-build-configuration-diagnosis--2026-11-02): 로컬40 연결/OAuth dart-define누락·Apple40로그인거절확인.39설정복원41절차기록;TestFlight40재현대기.로그인코드/Auth불변·OwnerXcode변경보존.
+[관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
+
+[APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02): Owner 4종 로그인PASS; 심사 미재제출.
+
+[공지 편집기](notices-system.md#production-rich-editor-rollout--2026-11-02): 운영bd8f7da4 저장PASS·1572PASS/4SKIP. APP41텍스트; 모바일미검증.
 
 [TASK12-B/13](official-home-launch-task12.md#task12-b-official-badges-and-task13-company-banner--2026-11-02): 공식 배지/home5442b621(하단여백수정), Copa37255312 운영배포·PC/모바일 검증. GA4수신/실기기 미검증.
 
@@ -147,10 +151,6 @@ The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the olde
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
-
-## Historical: 2026-10-21 — Backend recovery gate follow-up
-
-Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
 
 [Oct22 자료 탐색 검증 이력](history/status-checkpoints.md#2026-10-22--student-material-browsing).
 

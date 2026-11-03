@@ -124,18 +124,26 @@ void main() {
             );
             expect(
               t.getTopLeft(find.text(schoolB.name)).dy,
-              lessThan(t.getTopLeft(find.text('저장')).dy),
+              lessThan(
+                t
+                    .getTopLeft(
+                      find.text(school ? '${schoolA.name}로 설정하기' : '저장'),
+                    )
+                    .dy,
+              ),
             );
             await t.tap(find.text(schoolB.name));
             await t.pumpAndSettle();
-            expect(find.text(schoolB.name), findsNWidgets(2));
+            expect(find.text(schoolB.name), findsOneWidget);
             expect(repo.schoolWrites, 0); // Selection is a draft until Save.
             // Two '설정 안 함' chips now exist (현재 상태 / 학년); the last is grade.
             await t.ensureVisible(find.text('설정 안 함').last);
             await t.tap(find.text('설정 안 함').last);
           }
-          await t.ensureVisible(find.text('저장'));
-          await t.tap(find.text('저장'));
+          await t.ensureVisible(
+            find.text(school ? '${schoolB.name}로 설정하기' : '저장'),
+          );
+          await t.tap(find.text(school ? '${schoolB.name}로 설정하기' : '저장'));
           await t.pump();
           expect(pops.count, 0);
           final button = t.widget<FilledButton>(find.byType(FilledButton).last);
@@ -159,8 +167,8 @@ void main() {
     await t.pumpAndSettle();
     await t.tap(find.text(schoolA.name));
     await t.pumpAndSettle();
-    await t.ensureVisible(find.text('저장'));
-    await t.tap(find.text('저장'));
+    await t.ensureVisible(find.text('${schoolA.name}로 설정하기'));
+    await t.tap(find.text('${schoolA.name}로 설정하기'));
     await t.pumpAndSettle();
     expect(repo.writes, 0);
     expect(pops.count, 0);
@@ -242,20 +250,17 @@ void main() {
       await t.showKeyboard(find.byType(TextField).first);
       await t.testTextInput.receiveAction(TextInputAction.search);
       await t.pumpAndSettle();
-      expect(
-        t.getTopLeft(find.text(longSchool.name)).dy,
-        lessThan(t.getTopLeft(find.text('선택한 학교')).dy),
-      );
+      expect(find.text('선택한 학교'), findsNothing);
       await t.ensureVisible(find.text(longSchool.name));
       await t.tap(find.text(longSchool.name));
       await t.pumpAndSettle();
-      expect(find.text(longSchool.name), findsNWidgets(2));
-      await t.ensureVisible(find.text('저장'));
+      expect(find.text(longSchool.name), findsOneWidget);
+      await t.ensureVisible(find.text('${longSchool.name}로 설정하기'));
       await t.pump();
       expect(t.takeException(), isNull);
       expect(
         t.getTopLeft(find.text(longSchool.name).first).dy,
-        lessThan(t.getTopLeft(find.text('저장')).dy),
+        lessThan(t.getTopLeft(find.text('${longSchool.name}로 설정하기')).dy),
       );
     },
   );

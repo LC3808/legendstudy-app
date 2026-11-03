@@ -104,8 +104,8 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        expect(find.text('선택한 학교'), findsOneWidget);
-        expect(find.text(schoolA.name), findsOneWidget);
+        expect(find.text('선택한 학교'), findsNothing);
+        expect(find.text(schoolA.name), findsNothing);
         expect(
           find.text('학교·급식 정보 출처: 교육부·시도교육청 / 나이스 교육정보 개방 포털'),
           findsNothing,

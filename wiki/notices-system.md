@@ -115,3 +115,49 @@ Owner SQL 승인·적용, 실제 관리자 계정 E2E, WEB 배포/APP 검수 빌
 ## 코드 식별
 
 APP 구현 `3d562dc`, WEB 구현 `fb7f7df`. 문서 커밋은 별도이며 최종 LOCAL/REMOTE 확인 결과는 완료 보고에 기재한다.
+
+## Notice rich editor candidate — 2026-11-02
+
+Owner requested bold, underline, font sizes and images. WEB branch `codex/notices-rich-editor` extends the existing admin editor/detail, not a second notice system. Production read-only inspection confirmed `content_document` and `notice-media` absent. **IMPLEMENTED / locally TESTED / Production NOT_CONNECTED**. No production migration, upload, notice publication or deployment performed.
+
+### Editing and compatibility
+
+Paragraph blocks support bold, underline and 16/18/22/28px; paragraph/image reordering, removal and preview. This is paragraph formatting, not character-range rich text. PNG/JPEG/WebP input: 5MB each, max8; browser decodes/re-encodes WebP (max2000px), removes original metadata. Required image description becomes `[이미지: 설명]` in legacy text. APP41 remains unchanged and displays plain text/descriptions; native rich image rendering requires a later approved APP update. Existing plain notices remain readable/editable.
+
+WEB files: `src/components/admin/notice-editor.tsx`, `admin-notices.tsx`, `src/components/notice-content.tsx`, `notices.tsx`, `src/lib/notices/{document,media,client}.ts` plus tests. Capability RPC gates rich editing; absent capability keeps the existing plain editor, with connection status. Rich documents cannot be overwritten through that fallback. HTML is not interpreted; only explicit JSON blocks/styles are rendered.
+
+### SQL and storage — Owner apply candidate only
+
+[Install](../supabase/candidates/notice_rich_v1/install.sql), [isolated test](../supabase/candidates/notice_rich_v1/local_test.sql), [rollback](../supabase/candidates/notice_rich_v1/rollback.sql).
+
+Order: back up current notice table/revisions/function definitions and storage policies; verify existing save function hash `d28fcae4ef35b592fea0f2da73ca2c32`; apply candidate in approved environment; test real Storage API and anonymous/member/admin visibility; deploy WEB only after those checks. Candidate rejects schema drift/reinstallation. Existing `notice_admin_save` remains; additive `notice_admin_save_rich` derives plain text server-side, checks official admin/account policy, optimistic timestamp and appends existing revisions. Old-client text changes invalidate stale rich formatting.
+
+Private `notice-media` bucket; immutable UUID paths; admin-only inserts, no client update/delete. Restrictive policies also constrain broader existing Storage policies. Readers access only images referenced by currently published, time-valid, permitted public/member notices. Signed URLs last120s, refreshed90s: already issued links can remain usable up to120s after hiding a notice. No public bucket or external image URL embedding. Orphan uploads retained; cleanup is a separate audited maintenance task, not automatic deletion.
+
+Rollback revokes rich RPCs/capability and blocks new media inserts, preserving existing content, revisions, objects and read policies. No Credit/History/evaluation/payment changes. No new APP binary.
+
+### Preservation review (seven questions)
+
+1. Existing created/updated/published timestamps retained; no new student observation.
+2. Plain and structured content share existing revision snapshots.
+3. Historical snapshots and immutable image objects preserved, no destructive replacement.
+4. Existing auth UID/admin identity only; no new identity mapping.
+5. Editorial content, not educational outcome or inferred student behavior.
+6. Admin writes, audience-aware private image reads; minimum metadata and short signed access. Retention cleanup remains pending explicit review.
+7. No new Analytics events, causal claims or student statistics.
+
+### Verification and remaining work
+
+WEB full suite **1546PASS /4SKIP**, TypeScript PASS, production build PASS, changed-file ESLint PASS. Isolated PostgreSQL17 roles/RLS tests PASS: general/disabled-user denial, draft/member/expired image restrictions, malicious document rejection, legacy fallback, optimistic conflict, audit and rollback preservation. Auth/Storage base contracts are local stubs: this is **not** real Supabase Storage HTTP E2E. Production read-only inspection only.
+
+Desktop browser fixture verified bold/underline/title selection and rendering. Local synthetic preview: `http://127.0.0.1:4186/` while local server runs; no real saving or production upload. Screenshot `/tmp/notice-editor-desktop.png`. Mobile visual/device verification and real Storage upload/signed URL refresh are NOT_TESTED. Owner production SQL approval/application and subsequent WEB deployment remain pending. Existing release APP41 and dirty Xcode project preserved.
+
+## Production rich editor rollout — 2026-11-02
+
+Owner explicitly requested production application. Supersedes the candidate's NOT_CONNECTED status above. Applied `notice_rich_editor_private_media` after function-hash guard, schema/policy inspection, private backup and isolated PostgreSQL17 role/RLS/rollback tests. Production private Storage upload, signed image display, bold/underline/22px preview, rich draft save/reopen and archive were verified using the actual administrator session. One QA notice remains archived with public/APP/WEB exposure disabled; the original two published notices and timestamps remain unchanged. Anonymous media-read guard returned false for the QA image. General-user write denial was tested in isolated SQL, not via a separate production user login.
+
+WEB source `8a3afe3420c362806794d571db487c5507225c37`; Cloudflare `legendstudy-lab` production deployment `bd8f7da4-9565-49aa-bec5-8fc8cbe69c4d`, https://lab.legendstudy.com/admin/notices/. Latest live source9abde0b was merged first to preserve TASK17 wording. Scoped overlay changes only notice/member routes and new hashed assets; existing compiled Functions and production environment are preserved. Verified canonical deployment/domain and unchanged deployment configuration after release.
+
+Full WEB suite1572 PASS/4 SKIP; TypeScript/build PASS, lint0 errors/5 existing warnings. Actual desktop production browser PASS; mobile viewport override did not take effect (1495px remained), so mobile visual acceptance NOT_TESTED. APP41 remains plain-text/image-description compatible; native image rendering is not part of this release. Signed links can survive hiding for120s. No payment, Credit, Provider, APP binary or login change.
+
+Rollback: restore Cloudflare deployment `e2021b03-eccb-47b0-8993-cfd0ffd35945`; if necessary use the existing notice-rich rollback SQL to revoke editor writes while preserving content/media/revisions. Private baseline DB definitions, notices/revisions, policies, deployment manifest/config/compiled Functions are under `/Users/woojinchang/.codex/legendstudy-backups/notice-school-20261102` (not Git). WEB deploy script `scripts/deployment/notice-school-preserved.mjs` checks the exact baseline and rejects collisions.

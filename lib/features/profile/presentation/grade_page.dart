@@ -14,7 +14,9 @@ class GradePage extends ConsumerStatefulWidget {
     this.onSavingChanged,
     this.enabled = true,
     this.statusDraft,
+    this.saveLabel,
   });
+  final String? saveLabel;
   final Future<bool> Function()? beforeSave;
   final VoidCallback? onSaved;
   final ValueChanged<bool>? onSavingChanged;
@@ -193,7 +195,7 @@ class _GradePageState extends ConsumerState<GradePage> {
                   ? '저장 중…'
                   : widget.beforeSave == null
                   ? '학년 저장'
-                  : '저장',
+                  : widget.saveLabel ?? '저장',
             ),
           ),
         ],

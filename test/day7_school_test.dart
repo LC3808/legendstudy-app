@@ -256,17 +256,10 @@ void main() {
       await tester.tap(find.text(schoolA.name));
       await tester.pumpAndSettle();
       expect(c.read(schoolSelectionProvider).value, isNull);
-      expect(find.text(schoolA.name), findsNWidgets(2));
+      expect(find.text(schoolA.name), findsOneWidget);
       expect(profile.writes, 0);
-      await tester.ensureVisible(find.text('학교 설정 저장'));
-      await tester.tap(find.text('학교 설정 저장'));
-      await tester.pumpAndSettle();
-      expect(find.text('로그인하면 학교 설정을 저장할 수 있어요.'), findsOneWidget);
-      // Let the transient login guidance stop covering the final Save button.
-      await tester.pump(const Duration(seconds: 5));
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(find.text('저장'));
-      await tester.tap(find.text('저장'));
+      await tester.ensureVisible(find.text('${schoolA.name}로 설정하기'));
+      await tester.tap(find.text('${schoolA.name}로 설정하기'));
       await tester.pumpAndSettle();
       expect(c.read(schoolSelectionProvider).value?.identity, schoolA.identity);
       expect(find.text('D-DAY'), findsOneWidget);
@@ -286,7 +279,7 @@ void main() {
     repo.results = [];
     await tester.tap(find.text('다시 시도'));
     await tester.pumpAndSettle();
-    expect(find.text('검색 결과가 없습니다.'), findsOneWidget);
+    expect(find.text('검색 결과가 없어요.'), findsOneWidget);
   });
   testWidgets(
     'Home no school, loading, empty and error retry stay inside card',
@@ -348,7 +341,10 @@ void main() {
       // Onboarded returning user, so the first-login gate keeps the app on Home
       // where the meal card keeps schoolSelectionProvider subscribed.
       final profiles = Profiles()
-        ..profile = UserProfile(id: 'owner-a', onboardingCompletedAt: DateTime(2026));
+        ..profile = UserProfile(
+          id: 'owner-a',
+          onboardingCompletedAt: DateTime(2026),
+        );
       final repo = Schools();
       final c = await mount(
         tester,
