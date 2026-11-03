@@ -5116,3 +5116,10 @@ Owner 기능 PASS 인정/품질·운영 HOLD. 기존 TEST 결과6경로·로그�
 ## 2026-11-03 — TASK16-J 베타 출시 준비 NOT_READY
 
 기존 C–I 기능 PASS 재사용. TEST 기존 코드·계정 로그인/결과 조회와 로컬 자동·클립보드 접근 도우미 확인, 인증 해제0. LAB b2e85be/TEST9b47d9b8: TEST 상태503·자연 사진 metadata/HOLD 연결 보완, 중간 상경 목록 누락을 등록 목록 보존으로 수정. WEB1591PASS/4skip, 타입/lint/build PASS. 운영 읽기 전용: F/G 신규 RPC/loop 없음, 베타 활성160시험/수리0/대표2시험0·하루1·11/11 00KST 종료. 기존 ‘비활성’ Wiki 정정. Provider0/신규차감0/TEST잔액2예약0/운영·APP릴리스변경0. OCR·힌트/해설 품질·실기기·베타 연결/증분 migration은 미완료. [판정표·운영 적용 목록·Owner 검수](task16j-beta-release-readiness-20261103.md).
+
+
+## 2026-11-03 — TASK16-K 수리·상경 베타 준비
+
+[기존 DB/시험별 판정·수학 문서/사진 보정·신규 WEB E2E·실기기·운영 차단](task16k-beta-activation-20261103.md). 운영363시험/1014문항, Math50개 기존 연결 확인. WEB TEST e1e8095/c36d5cf1, 신규Q1/Q2 OCR2·평가4, 최초1/무료0/다음1·동일키 원장 불변, History/공개 제어 확인. iPhone12ProMax 저장 결과/공통 데이터 PASS, 정상 Profile 설치 후 Owner 로그인 실패 보고, SDK 세션 인계 추가 검증. WEB1599/Native13 PASS. 실제 촬영 전체·OCR/해설 품질·운영RPC/beta 연결은 남아 NOT_READY/HOLD. 운영 변경0, 기존1.0.1(41)보존. 수리scope0은 데이터 부재가 아닌 Owner 공개정책임을 J에 정정.
+
+K Owner 로그인 후속: drive 기본 teardown의 TEST 앱 uninstall이 세션을 삭제했음. --keep-app-running·실제 AppBootstrap/SDK 검사 후 정상 Profile 설치/재실행에서도 TEST 세션 유지 확인. 사용자 암호·운영 Auth 변경0, Owner 홈/사진 확인 대기.

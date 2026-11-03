@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-K / 수리·상경 베타 활성화 준비: [기존 DB·시험별 판정·수학 답안 표시·실기기·운영 승인 경계](task16k-beta-activation-20261103.md).
+
 TASK16-J / 수리·상경 베타 출시 준비: [NOT_READY·Owner 접속·기능 판정·운영/TEST 차이·적용 목록](task16j-beta-release-readiness-20261103.md).
 
 TASK16-I / 수리논술 통합 품질: [Owner 검수 경로·접속·기지 문제](task16i-owner-review-20261103.md) → [실제 WEB·혼합·교차 조회·A–J 판정](task16i-integration-quality-20261103.md).

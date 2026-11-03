@@ -2,6 +2,8 @@
 
 2026-11-03. **최종 출시 판정: NOT_READY.** 핵심 기능 PASS를 재사용하지만 실제 학생의 전체 이용/품질·실기기·운영 공통 계약이 모두 통과하지 않았다. Owner 별도 승인 전 운영 활성화 금지. [I 기능 인정](task16i-owner-review-20261103.md), [I 실제 검증](task16i-integration-quality-20261103.md), [H](task16h-web-math-ux-20261103.md), [G](task16g-learning-loop-20261102.md), [F](task16f-native-math-ux-20261102.md), [E](task16e-recognition-disclosure-p0-20261102.md), [C 실제 필기](task16c-hanyang2024-handwriting-validation-20261102.md)를 교차 확인했다. 신규 평가 엔진/디자인 개편 없음.
 
+**TASK16-K Owner 정정:** 공개 scope의 수리0은 임시 정책이며 시험 DB 부재가 아니다. 아래 J 당시의 ‘자연2024 최소 등록’ 문구는 신규 구축 지시가 아니다. 기존 Registry/공식자료/identity를 먼저 대조하며 [K 실측·시험별 판정](task16k-beta-activation-20261103.md)을 따른다.
+
 ## Owner 접근 복구 A–F
 
 | 항목 | 확인 결과 |

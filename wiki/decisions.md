@@ -843,3 +843,7 @@ Owner는 실제 통합 E2E의 기능 PASS를 인정하되 전체 품질과 운�
 ## 2026-11-03 — TASK16-J 출시 준비로 전환
 
 [I 기능 인정과 품질 검수](#task16-i-기능-인정과-owner-품질-검수)를 계승한다. Owner는 수리·상경 핵심 기능 개발을 일단 마무리하고 실제 학생 이용·출시 차단·필요 연결 검증을 우선한다. 디자인/엔진 재설계 없이 기존 PASS를 재사용하며 Simulator를 실기기 PASS로 취급하지 않는다. 하루1회/00KST/이월0·11월11일00KST 종료, 유료1+무료1 반복·무료14일 및 베타 종료 제한은 유지한다. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP1.0.1(41) 변경과 활성화는 별도 승인 대상이다. [출시 판정·TEST 접근·미완료](task16j-beta-release-readiness-20261103.md).
+
+## 2026-11-03 — TASK16-K 수리·상경 베타 준비
+
+Owner는 다음 WEB/APP 업데이트의 수리·상경 베타 준비를 승인했다. 기존 Registry/공식자료/평가/원장/History 재사용, 기존 공개 scope의 수리0을 데이터 부재로 해석하지 않는다. 기본 답안은 수학 문서 표시·원본 비교·학생 확인 후 평가, Academic Purple/명시 해설 공개와1/0반복·14일·11/11 00KST 종료 유지. 운영 활성화는 별도 최종 승인, 기존 APP1.0.1(41) 보존. [K 검증·적용 경계](task16k-beta-activation-20261103.md), [J 정책/환경](task16j-beta-release-readiness-20261103.md), [G 공통 계약](task16g-learning-loop-20261102.md).
