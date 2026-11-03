@@ -5576,3 +5576,8 @@ Owner 신규 온보딩 학교 검색 후 화면 이동 보고. 검색어 미확�
 ## 2026-11-03 — 후보 A45 학교 입력 수정본 설치
 
 A1362PASS/7SKIP·Analyze PASS, B집중47PASS. A45 signed IPA/AAB·설정/서명 PASS, iPhone12ProMax 업데이트 설치/실행. 기존 onboarding route 열기 요청, 실제 화면은 Owner 대기. [증거·산출물·HOLD](app-release-integration-20261103.md#release45-빌드설치-마감--2026-11-03). 운영/Store 변경 없음.
+
+
+## 2026-11-03 — A45 학교 검색 PASS·관심 대학 검색 후속
+
+Owner 학교 검색 정상 확인. 관심 대학도 inline 검색 요청 및 나중에 설정 오인 보고. 공용 검색 버튼/온보딩 keyboard footer숨김·미검색 이동 차단, 기존 저장·선택권 유지. 집중42PASS. [범위·보존](app-release-integration-20261103.md#관심-대학-검색-동선-후속--2026-11-03). 새46 준비, 운영/Store HOLD.

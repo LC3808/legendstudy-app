@@ -72,6 +72,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   String? _error;
   School? _schoolDraft;
   bool _schoolSearchPending = false;
+  bool _universitySearchPending = false;
   bool _statusDirty = false, _gradeDirty = false, _hydrated = false;
   String? _owner;
 
@@ -99,6 +100,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Future<void> _move(int delta) async {
     if (_busy || _advancing) return;
     if (delta > 0 && _step == 2 && _isStudent && _schoolSearchPending) return;
+    if (delta > 0 && _step == 3 && _universitySearchPending) return;
     final owner = ref.read(authStateProvider).value?.userId;
     setState(() {
       _busy = true;
@@ -115,7 +117,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       if (!_sameOwner(owner)) return;
       setState(() {
         _schoolDraft = null;
-        _schoolSearchPending = false;
+        _schoolSearchPending = _universitySearchPending = false;
         _step += delta;
         _advancing = true;
       });
@@ -251,7 +253,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _hydrated = false;
       _statusDirty = _gradeDirty = _busy = _advancing = false;
       _schoolDraft = null;
-      _schoolSearchPending = false;
+      _schoolSearchPending = _universitySearchPending = false;
     }
     final profileState = ref.watch(currentProfileProvider);
     if (!_hydrated && profileState.hasValue && !profileState.isLoading) {
@@ -329,10 +331,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                           ),
                         ),
                       ),
-                      // Do not put a step-changing CTA above the school
+                      // Do not put a step-changing CTA above a search
                       // keyboard where users expect the search action.
-                      if (!(_step == 2 &&
-                          _isStudent &&
+                      if (!(((_step == 2 && _isStudent) || _step == 3) &&
                           MediaQuery.viewInsetsOf(context).bottom > 0))
                         _footer(),
                     ],
@@ -381,7 +382,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       '관심 있는 대학을 선택해 주세요',
       '아직 지원 대학을 정하지 않았어도 괜찮아요. 관심 대학을 바탕으로 필요한 입시 정보를 보여드릴게요.',
     ),
-    const InterestedUniversitiesField(source: 'onboarding'),
+    InterestedUniversitiesField(
+      source: 'onboarding',
+      onSearchPendingChanged: (pending) =>
+          setState(() => _universitySearchPending = pending),
+    ),
   ];
 
   List<Widget> _majorStep() => [
@@ -467,7 +472,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Widget _footer() {
     final canAdvance = _step == 1
         ? _status != null
-        : !(_step == 2 && _isStudent && _schoolSearchPending);
+        : !((_step == 2 && _isStudent && _schoolSearchPending) ||
+              (_step == 3 && _universitySearchPending));
     // 관심 대학은 0개도 허용 — 선택이 없으면 이 단계를 건너뛰는 CTA를 보여준다.
     final interestedEmpty =
         _step == 3 &&
@@ -489,6 +495,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         children: [
           if (_step == 2 && _isStudent && _schoolSearchPending) ...[
             const Text('학교를 검색하고 결과를 확인해 주세요. 나중에 설정하려면 건너뛰기를 눌러 주세요.'),
+            const SizedBox(height: AppTokens.space8),
+          ],
+          if (_step == 3 && _universitySearchPending) ...[
+            const Text('입력창의 검색 버튼으로 대학을 찾아 주세요.'),
             const SizedBox(height: AppTokens.space8),
           ],
           if (_error != null) ...[

@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 
 import 'core_ux_test.dart' as preview;
 
+import 'package:legendstudy_app/features/universities/application/university_providers.dart';
+import 'package:legendstudy_app/features/universities/domain/university_models.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -115,6 +118,7 @@ Future<GoRouter> _mount(
   SchoolRepository? schools,
   bool reduceMotion = false,
   double textScale = 1,
+  List<University> universityResults = const [],
 }) async {
   final router = GoRouter(
     initialLocation: '/onboarding',
@@ -132,6 +136,9 @@ Future<GoRouter> _mount(
         authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
         profileRepositoryProvider.overrideWithValue(repo),
         schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
+        universitySearchProvider.overrideWith(
+          (ref, query) async => query.isEmpty ? const [] : universityResults,
+        ),
       ],
       child: MaterialApp.router(
         theme: const bool.fromEnvironment('CORE_RENDER')
@@ -563,6 +570,63 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
       await preview.capture(tester, 'school-result-$scale');
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('university inline search prevents keyboard skip at $scale', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(scale == 1 ? 428 : 360, 926);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetViewInsets);
+      final repo = _Repo();
+      final router = await _mount(
+        tester,
+        repo,
+        user: 'u1',
+        textScale: scale,
+        universityResults: const [University(id: 'uni', name: '검수대학교')],
+      );
+      await tester.tap(find.text('고등학교 재학생'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('다음'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('다음'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byType(TextField));
+      await tester.enterText(find.byType(TextField), '검수');
+      await tester.pumpAndSettle();
+      final skip = find.widgetWithText(FilledButton, '나중에 설정할게요');
+      expect(tester.widget<FilledButton>(skip).onPressed, isNull);
+      tester.view.viewInsets = const FakeViewPadding(bottom: 336);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byType(TextField));
+      await tester.pumpAndSettle();
+      final search = find.widgetWithText(OutlinedButton, '검색');
+      expect(
+        tester
+            .getRect(find.byType(TextField))
+            .contains(tester.getCenter(search)),
+        isTrue,
+      );
+      expect(find.text('나중에 설정할게요'), findsNothing);
+      await preview.capture(tester, 'university-keyboard-$scale');
+      await tester.tap(search);
+      await tester.pumpAndSettle();
+      tester.view.resetViewInsets();
+      await tester.pumpAndSettle();
+      expect(find.text('검수대학교'), findsOneWidget);
+      expect(repo.completed, isFalse);
+      expect(router.routeInformationProvider.value.uri.path, '/onboarding');
+      expect(tester.widget<FilledButton>(skip).onPressed, isNotNull);
+      await preview.capture(tester, 'university-result-$scale');
+      await tester.tap(skip);
+      await tester.pumpAndSettle();
+      expect(find.text('어떤 전공에 관심이 있나요?'), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
   }

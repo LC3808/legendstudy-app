@@ -129,6 +129,41 @@ Future<String?> _majorFuture(ProviderContainer c) {
 }
 
 void main() {
+  testWidgets('inline search only searches, explicit result selection saves', (
+    t,
+  ) async {
+    final repo = _FakeUniversityRepo(
+      catalog: const [University(id: 'u', name: '검수대학교')],
+    );
+    final c = _container(signedIn: true, uni: repo);
+    await t.pumpWidget(
+      UncontrolledProviderScope(
+        container: c,
+        child: const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: InterestedUniversitiesField(source: 'onboarding'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await t.pumpAndSettle();
+    final search = find.widgetWithText(OutlinedButton, '검색');
+    expect(t.widget<OutlinedButton>(search).onPressed, isNull);
+    await t.enterText(find.byType(TextField), '검수');
+    await t.pumpAndSettle();
+    await t.tap(search);
+    await t.pumpAndSettle();
+    expect(find.text('검수대학교'), findsOneWidget);
+    expect(repo.addCalls, 0);
+    await t.tap(find.text('검수대학교'));
+    await t.pumpAndSettle();
+    expect(repo.addCalls, 1);
+    expect(find.byTooltip('제거'), findsOneWidget);
+    expect(t.takeException(), isNull);
+  });
+
   for (final scale in [1.0, 2.0]) {
     testWidgets('per-university department and priority edit at 360px/$scale', (
       t,

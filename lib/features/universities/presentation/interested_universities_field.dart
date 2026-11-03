@@ -12,7 +12,12 @@ import '../domain/university_models.dart';
 /// universities rise into an emphasized foreground list and can be removed.
 /// Selection state is never color-only (check icon + weight + border + label).
 class InterestedUniversitiesField extends ConsumerStatefulWidget {
-  const InterestedUniversitiesField({super.key, required this.source});
+  const InterestedUniversitiesField({
+    super.key,
+    required this.source,
+    this.onSearchPendingChanged,
+  });
+  final ValueChanged<bool>? onSearchPendingChanged;
 
   /// `'onboarding'` or `'my'` — recorded on each selection row.
   final String source;
@@ -36,9 +41,10 @@ class _InterestedUniversitiesFieldState
 
   void _runSearch() {
     final q = _input.text.trim();
-    if (_busy || q.isEmpty || q == _query) return;
+    if (_busy || q.isEmpty) return;
     FocusScope.of(context).unfocus();
-    setState(() => _query = q);
+    if (q != _query) setState(() => _query = q);
+    widget.onSearchPendingChanged?.call(false);
   }
 
   Future<void> _add(University uni) async {
@@ -225,13 +231,29 @@ class _InterestedUniversitiesFieldState
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             hintText: atCap ? '최대 $maxInterested개까지 선택했어요' : '대학 이름을 검색해 주세요',
-            prefixIcon: const Icon(Icons.account_balance_outlined),
+            suffixIcon: Padding(
+              padding: const EdgeInsets.all(4),
+              child: OutlinedButton(
+                onPressed:
+                    !_busy &&
+                        !atCap &&
+                        !interested.isLoading &&
+                        !interested.hasError &&
+                        _input.text.trim().isNotEmpty
+                    ? _runSearch
+                    : null,
+                child: const Text('검색'),
+              ),
+            ),
             counterText: '',
           ),
           onChanged: (v) {
-            if (v.trim().isEmpty && _query.isNotEmpty) {
-              setState(() => _query = '');
-            }
+            setState(() {
+              if (v.trim().isEmpty) _query = '';
+            });
+            widget.onSearchPendingChanged?.call(
+              v.trim().isNotEmpty && v.trim() != _query,
+            );
           },
           onSubmitted: (_) => _runSearch(),
         ),

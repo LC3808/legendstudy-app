@@ -295,3 +295,17 @@ Owner의 한 줄 학년·입력창 내 검색 제안을 적용했다. 학년 라
 - private 산출물 `candidate-a/release45/`, Store IPA SHA256 `2bbebbc720a77f9364cfb8540908035d92a9bb9f6ffddb815dc1a0568965a09f`, 기기 IPA `06727721db270a9a0cfcb05399d5c6cfca6c553dfd9e9fa7ea13b94cb52f6d7b`, AAB `454bbcd0f7291790a21fa8cd8904e28d7ee45c15536c77aaacf1406a2e2070a6`.
 - 로그 `/tmp/app-review-a45-{ios,android,device-export,android-signature}.log`, 테스트 `/tmp/app-review-school-layout-{tests,full,analyze}.log`, B `/tmp/app-review-b-school-layout-focused.log`. Private logs에 사본 보관, 기존42/44 산출물 보존.
 - 후보 A DEVICE_QA_PENDING, B BETA_HOLD, Store HOLD. 운영 DB/Auth 설정/Credit/Ledger/결제/WEB 변경·Store 업로드0.
+
+
+## 관심 대학 검색 동선 후속 — 2026-11-03
+
+Owner가 A45 실기기에서 “학교 검색 잘 되었음”을 확인했다. 학교 검색 정상 **Owner 관찰 PASS**로 기록하며 신규 온보딩 전체 저장/완료 PASS로 확대하지 않는다. 이어 관심 대학에서도 `[대학 이름 [검색]]` 형태를 요청했고 하단 `나중에 설정할게요`를 무의식적으로 누르는 문제를 보고했다. 기존 학교 검색 분리 정책의 동일 적용이다.
+
+- 공용 `InterestedUniversitiesField` 입력창 오른쪽에 검색 버튼 추가. 키보드 검색과 기존 `_runSearch`/검색 provider를 재사용한다. 입력 변경 시 버튼 상태 갱신, 빈 입력/저장 중/최대 개수/관심 목록 로딩·오류에서는 비활성. 동일 검색어 재검색에서도 키보드는 닫힌다.
+- 온보딩 관심 대학 단계도 키보드 동안 footer 숨김. 미검색 입력이 있으면 앞으로 이동을 차단하고 입력창 검색 안내. 검색 실행/입력 삭제 시 잠금 해제; 실제 선택은 기존 결과 행 탭으로만 저장한다. 검색으로 임의 저장/자동 선택하지 않는다. 기존 관심0개 허용·명시적 skip·최대개수·source/priority/학과·MY 저장 계약 유지.
+- 집중42PASS: 입력창 안 검색 버튼, 검색만으로 쓰기0·명시 선택 시 쓰기1, 기존 관심 편집/삭제/계정계약, 428/360폭·글씨100/200% 키보드 footer숨김·미검색 CTA차단·검색이동없음/선택안하고 다음 허용. fake repository 검사이며 실기기 대학 검색 수정본은 대기.
+- 변경: onboarding_page.dart, interested_universities_field.dart, onboarding_page_test.dart, first_run_personalization_test.dart 및 Wiki. 새46 빌드 준비. 45학교 PASS와46대학 미검증을 구분한다.
+
+보존 검토7항목: (1) 새 발생/기록 시점 없음, (2) 학교·학습 원본 불변, (3) 관심 대학 기존 저장 payload·이력 변경 없음/UI pending만 추가, (4) 동일 owner/provider 사용, (5) 관심은 실제 지원/합격 결과와 구분, (6) 새 수집·권한·보존기간 없음, (7) 검색 결과를 자동 선택/실제 관심으로 추정해 저장하지 않음. 기존 [관심 대학 계약](personalization-onboarding.md)·[상위 보존 원칙](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review) 유지. 운영 설정/DB/Credit/Store 변경 없음.
+
+최종검사: 전체1365PASS/7SKIP, Analyze PASS, 집중42PASS, mock 렌더2PASS(100/200%). `/private/tmp/legendstudy-core-ui/university-{keyboard,result}-{1.0,2.0}.png` 시각 확인: 입력창 내 검색·키보드 때 footer없음. 렌더 첫 실행은 전체 검사와 native PDFium 산출물 경합으로 실패했고 순차 재실행 PASS; 코드 오류와 구분.
