@@ -192,3 +192,5 @@ OCR 원본 대조 결과는 여전히 PARTIAL/FAIL: Q1 e^{-x} 부호·이차식 
 52영역 전체가 확인 대상으로 분류되어 학생 확인 부담도 남는다. 누락 문장을 수학적 정답에 맞춰 채워 넣거나 대리 확인하지 않았다. **기능 복구 PASS / 실제 OCR 품질 PARTIAL(오독 확인) / 실기기 전체 학습 루프 PARTIAL / 베타 NOT_READY**. 원본·후보·확정본 분리와 서버 차단 유지.
 
 검사 최신: WEB 전체1617PASS/4skip(추가 수학 ? 방어3건은 별도83개 focused 검사에 포함), Native25PASS·분석0문제·Profile build/설치/launch PASS, Wiki handoff PASS. 운영 변경0. 실기기 화면 응답을 받으면 전사 확인 이후의 실제 평가/무료재첨삭/History를 이어서 검증한다.
+
+마감 Git/Preview: Native 실행 코드 `e645c38`(동일 TEST bundle Profile 설치), LAB `968aa5f`·배포 `f9d0fdc7`, [격리 TEST](https://legendstudy-task16b.pages.dev). Native 사진 상태 복구25검사/분석0문제/Profile build/업데이트 설치·launch PASS; 마지막 WEB 수학 ? guard83개 focused 검사·빌드 PASS. 이전 전체1617PASS는 marker3건 추가 전 실행이라는 범위를 유지한다. 원본 학생 전사 확인/실기기 평가·재첨삭은 Owner 응답 대기이며 임의 진행하지 않는다.
