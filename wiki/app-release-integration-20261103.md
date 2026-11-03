@@ -349,3 +349,21 @@ Owner가 전공 다음 마지막 선택형 닉네임 단계 추가, 기존 저�
 - private `candidate-a/release47/`: Store IPA SHA256 `d5470af6dab1ef90bb289c8ef9a2c72b6fed4386e1d44f364e1e60f08e89af55`, 기기 IPA `4a23f77c75777e434d61ee3c55cf457a3f974eaf19a030a819e7a4f4a58f5d98`, AAB `0fc90734662ee02f5ef7597210e2c8d077727cfe6234d8c230512e8467bd9520`. Archive/로그 private 보존. 기존46/APP41 산출물 보존.
 - 로그 `/tmp/app-review-a47-{ios,android,device-export,android-signature}.log`, `/tmp/app-review-nickname-{all,analyze,focused,render}.log`, `/tmp/app-review-b-nickname-focused.log`. Wiki handoff/link 검사 A/B PASS.
 - 후보 A 닉네임 DEVICE_QA_PENDING, B BETA_HOLD·운영 활성화 HOLD. 운영 DB/Auth 설정/Credit/Ledger/결제/WEB 변경 및 Store 업로드/제출 없음. APP41 HEAD `367bfab`와 기존 dirty Xcode 파일/untracked supabase temp 그대로 보존 확인.
+
+
+### A47 진행 문제 보고·재빌드 요청 — 2026-11-03
+
+Owner가 닉네임 검수에 “진행 문제 있음 재빌드”로 응답했다. 기기 설치 목록으로 1.0.1(47)을 확인했고 온보딩/프로필 집중63PASS를 재확인했다. 구체적인 실패 화면/오류는 아직 식별하지 못했으므로 닉네임 실기기 검수는 PASS가 아니다. Owner 후속 “db에서 아이디 삭제 후 다시 진행”은 이미 직접 삭제했는지 또는 삭제 요청인지·대상 환경/계정이 불명확하여 확인 중이며 에이전트는 계정을 삭제/초기화하지 않았다. 기존 `/onboarding` 경로는 계정 삭제 없이 재진입 가능하다.
+
+Owner 요청에 따라 동일 기능 소스를 iOS1.0.1(48) Release로 재빌드한다. 원인 확인 전 임의 기능 변경/DB/Auth 변경은 하지 않는다. 재빌드 자체를 오류 해결로 간주하지 않으며 설치 후 실제 진입/저장 검수가 필요하다. Android47 및 기존1375PASS/7SKIP·Analyze 결과는 기능 소스가 같은 기존 증거로 유지한다.
+
+Owner는 후속 선택지2(“내가 이미 계정을 삭제했음”)로 확인했다. Owner 직접 삭제 신고이며 실제 삭제 범위/DB 상태를 에이전트가 검증한 것은 아니다. 에이전트 추가 삭제/초기화 없음. 48 설치 후 이전 세션이 남으면 Owner 로그아웃→의도한 로그인 방식으로 재로그인/가입→온보딩 검수한다. 기존 계정의 정보 보존 테스트와 새 계정 온보딩 테스트를 혼동하지 않는다.
+
+
+### Release48 재빌드·재로그인 검수 — 2026-11-03
+
+- 앱 기능 소스는47의 `a14a23c`와 동일(재빌드 기준 A HEAD `b2eb647`). 실패 증상 미확정으로 임의 코드 변경 없음. 온보딩/프로필 집중63PASS 재확인. 전체1375PASS/7SKIP·Analyze는 동일 기능 소스의47 결과를 재사용한다.
+- iOS1.0.1(48) signed Release Archive/App Store IPA·기기 export PASS. provisioning/AOT/codesign deep-strict PASS, 실제 binary 기존 Supabase/Google 인증 설정 포함 확인(값 미출력). Android는 동일 기능의47 AAB를 유지하며 이번 iPhone 재검수에서 재빌드하지 않았다.
+- iPhone12ProMax 업데이트 설치·실행 후 설치 목록에서 build48 확인. `/auth` URL로 로그인 화면 열기 요청. Owner 직접 계정 삭제 신고에 따라 재로그인→신규 온보딩→닉네임 저장→홈/MY→재실행을 요청했다. 화면/저장 확인은 응답 대기, 원인/해결 및 실기기 PASS 미확정.
+- private `candidate-a/release48/` Archive/로그/IPA 보존. Store IPA SHA256 `8fb1ce106ea477a60a0743e5bde4ff5c76869bba77f76f639cd8f2efdb546925`, device IPA `d18ab6203d4978f28bf9821de6d09aac305ce802ceafdbc60b7e3e993b8de590`. 로그 `/tmp/app-review-a48-{ios,device-export,preflight-tests}.log`.
+- 에이전트 운영 DB/Auth 설정/계정 삭제·초기화/Credit/Ledger/결제/WEB/Store 변경 없음. 기존 APP41 및47 산출물 보존. 후보 A DEVICE_QA_PENDING, 후보 B 베타/운영 HOLD 유지.
