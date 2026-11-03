@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-I](task16i-integration-quality-20261103.md): WEB 실제 평가·무료/혼합 서버 PASS, OCR·힌트·해설 PARTIAL. 운영 HOLD.
+[TASK16-I Owner 검수](task16i-owner-review-20261103.md): 기능 PASS 인정·검수 경로/TEST2개 준비. 품질·운영 HOLD.
 
 [TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
 
