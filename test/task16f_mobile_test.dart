@@ -723,7 +723,7 @@ void main() {
   }
   for (final uncertain in [false, true]) {
     testWidgets(
-      'bulk recognition confirmation keeps final consent and uncertainty gate: $uncertain',
+      'bulk recognition checks all readable boxes and preserves unreadable gate: $uncertain',
       (t) async {
         await t.binding.setSurfaceSize(const Size(393, 852));
         addTearDown(() => t.binding.setSurfaceSize(null));
@@ -750,15 +750,15 @@ void main() {
           ),
         );
         await t.pumpAndSettle();
-        await t.ensureVisible(find.text('전체 내용 확인'));
-        await t.tap(find.text('전체 내용 확인'));
+        await t.ensureVisible(find.text('전체 내용 체크'));
+        await t.tap(find.text('전체 내용 체크'));
         await t.pumpAndSettle();
         var checks = t
             .widgetList<CheckboxListTile>(find.byType(CheckboxListTile))
             .toList();
         expect(checks[0].value, isTrue);
         expect(checks[1].value, !uncertain);
-        expect(checks.last.value, isFalse);
+        expect(checks.last.value, !uncertain);
         expect(saves, 0);
         expect(
           t
@@ -766,20 +766,9 @@ void main() {
                 find.widgetWithText(FilledButton, '답안 입력 완료'),
               )
               .onPressed,
-          isNull,
+          uncertain ? isNull : isNotNull,
         );
         if (!uncertain) {
-          await t.ensureVisible(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));
-          await t.tap(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));
-          await t.pumpAndSettle();
-          expect(
-            t
-                .widget<FilledButton>(
-                  find.widgetWithText(FilledButton, '답안 입력 완료'),
-                )
-                .onPressed,
-            isNotNull,
-          );
           // A correction invalidates its individual check and the final consent.
           await t.ensureVisible(find.text('전사 내용 수정').first);
           await t.tap(find.text('전사 내용 수정').first);

@@ -51,9 +51,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       : r['normalized_math'] as String? ?? '';
   List<String> get bulkConfirmable => [
     for (final r in widget.regions)
-      if (r['uncertain'] != true &&
-          !unresolvedMath(edits[id(r)] ?? original(r)))
-        id(r),
+      if (!needsCorrection(r)) id(r),
   ];
   String regionLabel(Map<String, dynamic> region) =>
       '영역 ${region['reading_order'] ?? widget.regions.indexOf(region) + 1}';
@@ -83,13 +81,14 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
 
   void confirmAvailableRegions() {
     setState(() {
-      // An explicit bulk action only adds eligible checks. Repeated taps never
-      // undo checks or confirm uncertain/missing symbols on the student's behalf.
-      final added = bulkConfirmable
-          .where((key) => !checked.contains(key))
-          .toList();
-      checked.addAll(added);
-      if (added.isNotEmpty) finalCheck = false;
+      // The student's explicit bulk confirmation covers readable regions,
+      // including generic symbol-review flags. Unreadable content still blocks.
+      checked.addAll(bulkConfirmable);
+      finalCheck =
+          widget.regions.isNotEmpty &&
+          widget.regions.every(
+            (r) => !needsCorrection(r) && checked.contains(id(r)),
+          );
       bulkRequested = true;
     });
     // Review links added above the action change the scroll extent. Keep the
@@ -136,12 +135,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
         .where((r) => !checked.contains(id(r)))
         .toList();
     final corrections = remaining.where(needsCorrection).toList();
-    final comparisons = remaining
-        .where((r) => !needsCorrection(r) && r['uncertain'] == true)
-        .toList();
-    final unchecked = remaining
-        .where((r) => !needsCorrection(r) && r['uncertain'] != true)
-        .toList();
+    final unchecked = remaining.where((r) => !needsCorrection(r)).toList();
     return Container(
       key: confirmationSummaryKey,
       child: Column(
@@ -151,11 +145,11 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
             key: const ValueKey('confirm-recognized-regions'),
             onPressed: widget.busy ? null : confirmAvailableRegions,
             icon: const Icon(Icons.done_all),
-            label: const Text('전체 내용 확인'),
+            label: const Text('전체 내용 체크'),
           ),
           const SizedBox(height: 8),
           const Text(
-            '원본과 대조한 영역을 한 번에 체크해요. 불확실한 영역은 별도 확인이 필요해요.',
+            '미인식 부분을 제외한 답안을 모두 확인한 것으로 체크해요.',
             style: TextStyle(
               fontSize: 13,
               height: 1.5,
@@ -175,16 +169,14 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
               ),
             ),
             if (remaining.isEmpty)
-              const Text('모든 영역을 체크했어요. 아래에서 최종 확인해 주세요.')
+              const Text('모두 체크했어요. 답안 입력을 완료할 수 있어요.')
             else ...[
               if (bulkConfirmable.isEmpty)
-                const Text('일괄 체크 가능한 영역이 없어요. 아래 번호를 눌러 직접 확인해 주세요.')
+                const Text('모든 영역에 미인식 내용이 있어요. 번호를 눌러 수정해 주세요.')
               else
                 const Text('남은 영역 번호를 누르면 해당 위치로 이동해요.'),
               if (corrections.isNotEmpty)
-                requiredGroup('반드시 수정 · 미식별 내용이 남아 있어요', corrections),
-              if (comparisons.isNotEmpty)
-                requiredGroup('반드시 확인 · 원본의 기호·값을 대조해 주세요', comparisons),
+                requiredGroup('미인식 영역 · 수정이 필요해요', corrections),
               if (unchecked.isNotEmpty)
                 requiredGroup('체크가 해제된 영역 · 다시 확인해 주세요', unchecked),
             ],

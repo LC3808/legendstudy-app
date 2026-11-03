@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/academic_purple.dart';
+import 'package:legendstudy_app/features/essay/math_mobile/math_formula_editor.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_recognition_panel.dart';
 
 void main() {
@@ -42,7 +43,7 @@ void main() {
       );
       final image = await boundary.toImage(pixelRatio: 2);
       final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-      final folder = Directory('/private/tmp/legendstudy-b55-screens');
+      final folder = Directory('/private/tmp/legendstudy-b56-screens');
       await folder.create(recursive: true);
       await File('${folder.path}/$name.png')
           .writeAsBytes(bytes!.buffer.asUint8List());
@@ -145,15 +146,18 @@ void main() {
         await tap(t, bulk);
         expect(checked(t, 'a'), isTrue);
         expect(checked(t, 'b'), isTrue);
-        for (final id in ['c', 'd', 'e']) {
+        expect(
+          checked(t, 'd'),
+          isTrue,
+        ); // A readable symbol-review flag is eligible.
+        for (final id in ['c', 'e']) {
           expect(checked(t, id), isFalse);
         }
-        expect(find.text('확인 완료 2개 · 남은 영역 3개'), findsOneWidget);
-        expect(find.text('확인 완료 2개 · 남은 영역 3개').hitTestable(), findsOneWidget);
-        expect(find.text('반드시 수정 · 미식별 내용이 남아 있어요'), findsOneWidget);
-        expect(find.text('반드시 확인 · 원본의 기호·값을 대조해 주세요'), findsOneWidget);
+        expect(find.text('확인 완료 3개 · 남은 영역 2개'), findsOneWidget);
+        expect(find.text('확인 완료 3개 · 남은 영역 2개').hitTestable(), findsOneWidget);
+        expect(find.text('미인식 영역 · 수정이 필요해요'), findsOneWidget);
         expect(find.widgetWithText(ActionChip, '영역 6'), findsOneWidget);
-        expect(find.widgetWithText(ActionChip, '영역 11'), findsOneWidget);
+        expect(find.widgetWithText(ActionChip, '영역 11'), findsNothing);
         expect(find.widgetWithText(ActionChip, '영역 5'), findsOneWidget);
         expect(confirmButton(t).onPressed, isNull);
         await screenshot(t, 'bulk-result-$scale');
@@ -167,15 +171,14 @@ void main() {
         await screenshot(t, 'jump-region-$scale');
         await tap(t, back('c'));
         expect(bulk.hitTestable(), findsOneWidget);
-        await tap(t, jump('d'));
-        expect(find.text('영역 11 · 원본 대조 필요').hitTestable(), findsOneWidget);
+        // A manual uncheck remains visible until the student bulk checks again.
         await tap(t, checkbox('d'));
         await tap(t, back('d'));
-        expect(find.text('확인 완료 3개 · 남은 영역 2개'), findsOneWidget);
-        expect(
-          jump('d'),
-          findsNothing,
-        ); // Individually reviewed rows leave the list.
+        expect(find.text('확인 완료 2개 · 남은 영역 3개'), findsOneWidget);
+        expect(jump('d'), findsOneWidget);
+        await tap(t, bulk);
+        expect(checked(t, 'd'), isTrue);
+        expect(jump('d'), findsNothing);
         expect(saves, 0);
         expect(t.takeException(), isNull);
       },
@@ -183,39 +186,57 @@ void main() {
   }
 
   testWidgets(
-    'all-uncertain and all-unreadable inputs explain zero bulk checks with every number',
+    'readable flagged rows become ready in one action while unreadable rows remain blocked',
     (t) async {
       for (final unreadable in [false, true]) {
-        await mount(t, [
-          for (var i = 1; i <= 18; i++)
-            {
-              'id': 'r$i',
-              'reading_order': i,
-              'raw_text': unreadable ? 'x=?' : 'x=$i',
-              'uncertain': true,
-            },
-        ]);
+        var saves = 0;
+        await mount(
+          t,
+          [
+            for (var i = 1; i <= 18; i++)
+              {
+                'id': 'r$i',
+                'reading_order': i,
+                'raw_text': unreadable ? 'x=?' : 'x=$i',
+                'uncertain': true,
+              },
+          ],
+          onConfirm: (_) async {
+            saves++;
+          },
+        );
         expect(t.widget<OutlinedButton>(bulk).onPressed, isNotNull);
         await tap(t, bulk);
-        expect(find.text('확인 완료 0개 · 남은 영역 18개'), findsOneWidget);
-        expect(find.text('확인 완료 0개 · 남은 영역 18개').hitTestable(), findsOneWidget);
-        expect(
-          find.text('일괄 체크 가능한 영역이 없어요. 아래 번호를 눌러 직접 확인해 주세요.'),
-          findsOneWidget,
-        );
+        final summary = unreadable
+            ? '확인 완료 0개 · 남은 영역 18개'
+            : '확인 완료 18개 · 남은 영역 0개';
+        expect(find.text(summary).hitTestable(), findsOneWidget);
         for (var i = 1; i <= 18; i++) {
-          expect(checked(t, 'r$i'), isFalse);
-          expect(find.widgetWithText(ActionChip, '영역 $i'), findsOneWidget);
+          expect(checked(t, 'r$i'), !unreadable);
+          expect(
+            find.widgetWithText(ActionChip, '영역 $i'),
+            unreadable ? findsOneWidget : findsNothing,
+          );
         }
-        expect(confirmButton(t).onPressed, isNull);
-        await tap(t, jump('r18'));
+        expect(confirmButton(t).onPressed, unreadable ? isNull : isNotNull);
         expect(
-          find
-              .text('영역 18 · ${unreadable ? '내용 수정 필요' : '원본 대조 필요'}')
-              .hitTestable(),
-          findsOneWidget,
+          t
+              .widget<CheckboxListTile>(
+                find.widgetWithText(CheckboxListTile, consent),
+              )
+              .value,
+          !unreadable,
         );
-        await tap(t, back('r18'));
+        if (unreadable) {
+          expect(
+            find.text('모든 영역에 미인식 내용이 있어요. 번호를 눌러 수정해 주세요.'),
+            findsOneWidget,
+          );
+          await tap(t, jump('r18'));
+          expect(find.text('영역 18 · 내용 수정 필요').hitTestable(), findsOneWidget);
+          await tap(t, back('r18'));
+        }
+        expect(saves, 0); // Bulk selection never persists or evaluates.
         await screenshot(t, 'all-required-$unreadable');
         await t.pumpWidget(const SizedBox());
         await t.pumpAndSettle();
@@ -224,7 +245,7 @@ void main() {
   );
 
   testWidgets(
-    'correcting an unreadable region still requires individual review and final consent',
+    'corrected unreadable region can be bulk checked and saved only by explicit completion',
     (t) async {
       Map<String, String>? submitted;
       await mount(
@@ -254,13 +275,11 @@ void main() {
       await t.pumpAndSettle();
       await tap(t, find.byTooltip('키보드 닫기').last);
       await tap(t, back('b'));
-      expect(find.text('반드시 수정 · 미식별 내용이 남아 있어요'), findsNothing);
-      expect(find.text('반드시 확인 · 원본의 기호·값을 대조해 주세요'), findsOneWidget);
-      await tap(t, bulk);
+      expect(find.text('미인식 영역 · 수정이 필요해요'), findsNothing);
       expect(checked(t, 'b'), isFalse);
-      await tap(t, jump('b'));
-      await tap(t, checkbox('b'));
-      await tap(t, back('b'));
+      expect(confirmButton(t).onPressed, isNull);
+      await tap(t, bulk);
+      expect(checked(t, 'b'), isTrue);
       expect(find.text('확인 완료 2개 · 남은 영역 0개'), findsOneWidget);
       expect(
         find
@@ -269,9 +288,8 @@ void main() {
             .where((e) => e.widget.key.toString().contains('review-region-')),
         isEmpty,
       );
-      expect(confirmButton(t).onPressed, isNull);
-      await tap(t, find.text(consent));
       expect(confirmButton(t).onPressed, isNotNull);
+      expect(submitted, isNull);
       await tap(t, bulk); // Idempotent, even after final consent.
       expect(confirmButton(t).onPressed, isNotNull);
       await tap(t, find.text('답안 입력 완료'));
@@ -292,7 +310,7 @@ void main() {
       await mount(t, regions);
       await tap(t, bulk);
       expect(find.text('확인 완료 2개 · 남은 영역 0개'), findsOneWidget);
-      expect(confirmButton(t).onPressed, isNull);
+      expect(confirmButton(t).onPressed, isNotNull);
       await mount(t, [
         regions.first,
         {...regions.last, 'raw_text': 'x=3'},
@@ -301,6 +319,26 @@ void main() {
       expect(checked(t, 'b'), isFalse);
       expect(find.textContaining('확인 완료 2개'), findsNothing);
       expect(confirmButton(t).onPressed, isNull);
+    },
+  );
+
+  testWidgets(
+    'empty and blank answers cannot become ready through bulk check',
+    (t) async {
+      await mount(t, []);
+      expect(bulk, findsNothing);
+      expect(confirmButton(t).onPressed, isNull);
+      await mount(t, [
+        {'id': 'a', 'raw_text': '  ', 'uncertain': false},
+        {'id': 'b', 'raw_text': 'x=2', 'uncertain': true},
+      ]);
+      await tap(t, bulk);
+      expect(checked(t, 'a'), isFalse);
+      expect(checked(t, 'b'), isTrue);
+      expect(jump('a'), findsOneWidget);
+      expect(jump('b'), findsNothing);
+      expect(confirmButton(t).onPressed, isNull);
+      expect(t.takeException(), isNull);
     },
   );
 
@@ -318,13 +356,24 @@ void main() {
         await mount(t, regions);
         await tap(t, bulk);
         expect(jsonEncode(regions), originalJson);
-        expect(find.byType(ActionChip), findsNWidgets(regions.length));
+        String text(Map<String, dynamic> r) =>
+            (r['raw_text'] as String? ?? '').trim().isNotEmpty
+            ? r['raw_text'] as String
+            : r['normalized_math'] as String? ?? '';
+        final unreadable = regions
+            .where((r) => unresolvedMath(text(r)))
+            .toList();
+        expect(unreadable.length, 2);
+        expect(unreadable.map((r) => r['reading_order']), [3, 7]);
+        expect(find.byType(ActionChip), findsNWidgets(unreadable.length));
+        expect(find.text('확인 완료 16개 · 남은 영역 2개'), findsOneWidget);
         for (final region in regions) {
+          final blocked = unresolvedMath(text(region));
           expect(
             find.widgetWithText(ActionChip, '영역 ${region['reading_order']}'),
-            findsOneWidget,
+            blocked ? findsOneWidget : findsNothing,
           );
-          expect(checked(t, '${region['id']}'), isFalse);
+          expect(checked(t, '${region['id']}'), !blocked);
         }
         expect(confirmButton(t).onPressed, isNull);
         await screenshot(t, 'stored-hanyang-required');
