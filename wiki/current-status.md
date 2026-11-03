@@ -11,7 +11,7 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - Flutter Analyze PASS; 전체 1,356 PASS / 7 SKIP. iOS 1.0.1(42) signed Archive/IPA 및 Android42 signed AAB PASS.
 - 바이너리 Supabase/Google 설정 포함, Apple entitlement/서명 확인. Store 업로드/재제출 없음.
 - 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색·카드·선택 확인 버튼도 Owner PASS. 기존 PDF·인문논술 History·결과 조회·뒤로 이동도 Owner PASS. 기존 이메일 로그인·홈·MY도 Owner PASS. 이메일 재실행 세션·오입력 차단/오류 안내·정상 재시도도 Owner PASS. A48 Apple 로그인·온보딩·재실행은 아래 Owner PASS. Google 기존 계정 취소·재시도·홈/MY·재실행 세션도 Owner PASS(기존 결과 재사용). 전체 Provider별 신규 가입/기타 미확인 항목은 별도. A46 온보딩 후속 결과는 아래 참조. MY 실제 학교 저장·재실행 복원·안내 해제는 Owner PASS.
-- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, 통합 기준 전체1,404 PASS/7 SKIP·Analyze PASS, 제출 버튼 후속16PASS. 기존 signed iOS43 Archive/IPA·Android43 AAB PASS. 가독성·제출 버튼 및 LAB 진입·원본 대조 높이/테두리 보완 TEST54 signed Release를 별도 LS Math TEST에 설치·실행, 기존 A48 보존. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
+- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, 통합 기준 전체1,404 PASS/7 SKIP·Analyze PASS, 제출 버튼 후속16PASS. 기존 signed iOS43 Archive/IPA·Android43 AAB PASS. 가독성·제출 버튼 및 LAB 진입·원본 대조·일괄 확인/필수 번호 보완 TEST55 signed Release를 별도 LS Math TEST에 설치·실행, 기존 A48 보존. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
 - TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 정식 빌드 지시로 후보 A42를 iPhone12ProMax에 업데이트 설치·실행 PASS. A46 온보딩 후속 결과는 아래 참조.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
 
@@ -23,7 +23,9 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 
 Owner 요청으로 원본 대조 고정230 높이를 실제 수식/본문 높이(기본96~최대320)로 조절하고 Primary 1.5px 테두리·기존 원본 전체 화면 확대 연결. 관련25PASS·Analyze/Wiki PASS, TEST53 signed Release·iPhone 설치/실행 확인(A48 보존), 대조 높이/테두리/확대 복귀 Owner PASS. 문제 원문 PDF 미연결은 별도 GAP. [B53 범위](app-candidate-b-device-web-qa-20261103.md#b53-원본-대조-높이테두리-보완--2026-11-03).
 
-[B54](app-candidate-b-device-web-qa-20261103.md#b54-답안-확인진행-표시결과-근거-정리--2026-11-03): 인문 진행 바 보라색 재사용·실제 OCR/첨삭 상태 읽기 폴링·간결한 버튼/완료 결과 연결·학생 근거 문단/수식/펼침·정상 영역 일괄 확인 구현. 불확실 영역 개별 확인/최종 동의 유지, Provider0. 전체1,418PASS/7SKIP·Analyze/Wiki PASS·TEST54 signed Release iPhone 설치/실행(A48 보존), 실제 Owner 새 UI 검수 대기.
+[B54](app-candidate-b-device-web-qa-20261103.md#b54-답안-확인진행-표시결과-근거-정리--2026-11-03): 인문 진행 바 보라색 재사용·실제 OCR/첨삭 상태 읽기 폴링·간결한 버튼/완료 결과 연결·학생 근거 문단/수식/펼침·정상 영역 일괄 확인 구현. 불확실 영역 개별 확인/최종 동의 유지, Provider0. 전체1,418PASS/7SKIP·Analyze/Wiki PASS·TEST54 signed Release iPhone 설치/실행(A48 보존), B54 일괄 확인 무반응 Owner 보고로 아래 B55 후속 진행; 나머지 새 UI 전체 검수는 별도 대기.
+
+[B55](app-candidate-b-device-web-qa-20261103.md#b55-일괄-확인-동작필수-영역-번호--2026-11-03): 일괄 확인 가능0개에서도 실행 결과·필수 번호 표시, 미식별 수정/기호·값 대조 구분, 번호 이동/복귀·남은 개수 갱신·반복 클릭 체크 보존. 관련24PASS(저장 한양대 재현 포함)·Analyze/Wiki PASS, TEST55 signed Release iPhone 설치·실행(A48 보존). 불확실 영역 개별 확인/최종 동의 유지·Provider0. 번호 표시/이동 실기기 Owner 확인 대기.
 
 B51 일반 LAB 복귀 시 한양대 `서비스 확인 중` 정체: 두 상태조회 API가 TEST gate에서 HTML401을 반환함을 확인. TEST WEB `8939034`/Pages `626fa92d`로 정확한 인증 GET 경로만 연결, 실제 두 조회200·익명/잘못된 JWT 거절·환경 설정 보존 확인. Native 실패 자동 재시도 대신 기존 오류/재시도 표시, 관련29PASS·WEB31PASS·Analyze/type/build PASS. TEST52 signed Release·iPhone 설치/실행 확인(A48 보존), 일반 LAB→한양대→기존 Q2 결과 조회 Owner PASS. 제출 버튼 간격·동작도 Owner PASS, 단독 입력 화면 문제 원문 표시 연결은 보완 필요. [상세](app-candidate-b-device-web-qa-20261103.md#b51-lab-대학-진입-실패test-연결-수정--2026-11-03).
 
@@ -47,4 +49,4 @@ Owner 사진으로 학년 버튼 세로 확장→검색 버튼이 아래로 밀�
 
 기존 수집·공개 상태는 [통합 전 스냅샷](history/app-review-candidate-a-input-20261103.md#daily-sync-status)과 [자료 최종 마감](materials-final-closeout-2026-09-27.md)에 보존. 이번 릴리스 통합에서 ingestion/공개 데이터는 변경하지 않았다.
 
-이전 A42 설치·검수 시작 기록은 [통합 보고서](app-release-integration-20261103.md#후보-a-release-재빌드실기기-설치--2026-11-03)에 보존한다. 현재 A48/B53 검수 상태는 위 항목을 따른다. Store HOLD.
+이전 A42 설치·검수 시작 기록은 [통합 보고서](app-release-integration-20261103.md#후보-a-release-재빌드실기기-설치--2026-11-03)에 보존한다. 현재 A48/B55 검수 상태는 위 항목을 따른다. Store HOLD.

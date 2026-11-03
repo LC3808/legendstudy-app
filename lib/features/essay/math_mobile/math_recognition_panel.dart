@@ -27,7 +27,9 @@ class MathRecognitionPanel extends StatefulWidget {
 
 class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
   final edits = <String, String>{}, checked = <String>{};
-  bool finalCheck = false;
+  bool finalCheck = false, bulkRequested = false;
+  final regionKeys = <String, GlobalKey>{};
+  final confirmationSummaryKey = GlobalKey();
   String? error;
   @override
   void didUpdateWidget(covariant MathRecognitionPanel oldWidget) {
@@ -36,6 +38,8 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       edits.clear();
       checked.clear();
       finalCheck = false;
+      bulkRequested = false;
+      regionKeys.clear();
       error = null;
     }
   }
@@ -51,6 +55,146 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
           !unresolvedMath(edits[id(r)] ?? original(r)))
         id(r),
   ];
+  String regionLabel(Map<String, dynamic> region) =>
+      '영역 ${region['reading_order'] ?? widget.regions.indexOf(region) + 1}';
+
+  bool needsCorrection(Map<String, dynamic> region) =>
+      unresolvedMath(edits[id(region)] ?? original(region));
+
+  String reviewLabel(Map<String, dynamic> region) =>
+      checked.contains(id(region))
+      ? '확인 완료'
+      : needsCorrection(region)
+      ? '내용 수정 필요'
+      : '원본 대조 필요';
+
+  Future<void> reveal(GlobalKey key) async {
+    FocusScope.of(context).unfocus();
+    final target = key.currentContext;
+    if (target == null) return;
+    await Scrollable.ensureVisible(
+      target,
+      alignment: 0.05,
+      duration: MediaQuery.disableAnimationsOf(context)
+          ? Duration.zero
+          : const Duration(milliseconds: 250),
+    );
+  }
+
+  void confirmAvailableRegions() {
+    setState(() {
+      // An explicit bulk action only adds eligible checks. Repeated taps never
+      // undo checks or confirm uncertain/missing symbols on the student's behalf.
+      final added = bulkConfirmable
+          .where((key) => !checked.contains(key))
+          .toList();
+      checked.addAll(added);
+      if (added.isNotEmpty) finalCheck = false;
+      bulkRequested = true;
+    });
+    // Review links added above the action change the scroll extent. Keep the
+    // outcome in view after layout, including when no rows can be bulk checked.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && bulkRequested) reveal(confirmationSummaryKey);
+    });
+  }
+
+  Widget requiredGroup(String title, List<Map<String, dynamic>> regions) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              color: AcademicPurple.ink,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final region in regions)
+                ActionChip(
+                  key: ValueKey('review-region-${id(region)}'),
+                  tooltip: '${regionLabel(region)} 확인하러 이동',
+                  label: Text(regionLabel(region)),
+                  avatar: const Icon(Icons.arrow_upward, size: 16),
+                  onPressed: widget.busy
+                      ? null
+                      : () => reveal(regionKeys[id(region)]!),
+                ),
+            ],
+          ),
+        ],
+      );
+
+  Widget bulkConfirmation() {
+    final remaining = widget.regions
+        .where((r) => !checked.contains(id(r)))
+        .toList();
+    final corrections = remaining.where(needsCorrection).toList();
+    final comparisons = remaining
+        .where((r) => !needsCorrection(r) && r['uncertain'] == true)
+        .toList();
+    final unchecked = remaining
+        .where((r) => !needsCorrection(r) && r['uncertain'] != true)
+        .toList();
+    return Container(
+      key: confirmationSummaryKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          OutlinedButton.icon(
+            key: const ValueKey('confirm-recognized-regions'),
+            onPressed: widget.busy ? null : confirmAvailableRegions,
+            icon: const Icon(Icons.done_all),
+            label: const Text('전체 내용 확인'),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            '원본과 대조한 영역을 한 번에 체크해요. 불확실한 영역은 별도 확인이 필요해요.',
+            style: TextStyle(
+              fontSize: 13,
+              height: 1.5,
+              color: AcademicPurple.secondary,
+            ),
+          ),
+          if (bulkRequested) ...[
+            const SizedBox(height: 12),
+            Semantics(
+              liveRegion: true,
+              child: Text(
+                '확인 완료 ${checked.length}개 · 남은 영역 ${remaining.length}개',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: AcademicPurple.dark,
+                ),
+              ),
+            ),
+            if (remaining.isEmpty)
+              const Text('모든 영역을 체크했어요. 아래에서 최종 확인해 주세요.')
+            else ...[
+              if (bulkConfirmable.isEmpty)
+                const Text('일괄 체크 가능한 영역이 없어요. 아래 번호를 눌러 직접 확인해 주세요.')
+              else
+                const Text('남은 영역 번호를 누르면 해당 위치로 이동해요.'),
+              if (corrections.isNotEmpty)
+                requiredGroup('반드시 수정 · 미식별 내용이 남아 있어요', corrections),
+              if (comparisons.isNotEmpty)
+                requiredGroup('반드시 확인 · 원본의 기호·값을 대조해 주세요', comparisons),
+              if (unchecked.isNotEmpty)
+                requiredGroup('체크가 해제된 영역 · 다시 확인해 주세요', unchecked),
+            ],
+          ],
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,6 +213,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       const SizedBox(height: 16),
       for (final region in widget.regions)
         MathCard(
+          key: regionKeys.putIfAbsent(id(region), GlobalKey.new),
           tinted: region['uncertain'] == true,
           border: const BorderSide(color: AcademicPurple.primary, width: 1.5),
           child: Column(
@@ -87,7 +232,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '영역 ${region['reading_order'] ?? ''} · 원본 대조 필요',
+                      '${regionLabel(region)} · ${reviewLabel(region)}',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -103,7 +248,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                                 child: Scaffold(
                                   appBar: AppBar(
                                     title: Text(
-                                      '영역 ${region['reading_order'] ?? ''} · 원본 대조',
+                                      '${regionLabel(region)} · 원본 대조',
                                     ),
                                   ),
                                   body: SafeArea(
@@ -145,6 +290,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                 ],
               ),
               CheckboxListTile(
+                key: ValueKey('confirm-region-${id(region)}'),
                 contentPadding: EdgeInsets.zero,
                 value: checked.contains(id(region)),
                 title: Text(
@@ -167,41 +313,22 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
               ),
               if (unresolvedMath(edits[id(region)] ?? original(region)))
                 const Text(
-                  'UNCERTAIN · 불명확한 기호를 확인하거나 사진을 다시 준비해 주세요.',
+                  '읽지 못한 기호가 남아 있어요. 원본을 대조해 수정하거나 사진을 다시 준비해 주세요.',
                   style: TextStyle(color: AcademicPurple.error),
+                ),
+              if (bulkRequested)
+                TextButton.icon(
+                  key: ValueKey('return-to-confirmation-${id(region)}'),
+                  onPressed: widget.busy
+                      ? null
+                      : () => reveal(confirmationSummaryKey),
+                  icon: const Icon(Icons.checklist, size: 18),
+                  label: const Text('남은 확인 목록으로'),
                 ),
             ],
           ),
         ),
-      if (widget.regions.length > 1)
-        CheckboxListTile(
-          key: const ValueKey('confirm-recognized-regions'),
-          contentPadding: EdgeInsets.zero,
-          tristate: true,
-          value:
-              bulkConfirmable.isNotEmpty &&
-                  bulkConfirmable.every(checked.contains)
-              ? true
-              : bulkConfirmable.any(checked.contains)
-              ? null
-              : false,
-          title: const Text('전체 내용 확인'),
-          subtitle: Text(
-            bulkConfirmable.length == widget.regions.length
-                ? '원본과 대조한 모든 영역을 한 번에 체크해요.'
-                : '불확실한 영역을 제외하고 체크해요. 해당 영역은 개별 확인해 주세요.',
-          ),
-          onChanged: widget.busy || bulkConfirmable.isEmpty
-              ? null
-              : (_) => setState(() {
-                  if (bulkConfirmable.every(checked.contains)) {
-                    checked.removeAll(bulkConfirmable);
-                  } else {
-                    checked.addAll(bulkConfirmable);
-                  }
-                  finalCheck = false;
-                }),
-        ),
+      if (widget.regions.length > 1) bulkConfirmation(),
       CheckboxListTile(
         contentPadding: EdgeInsets.zero,
         value: finalCheck,
