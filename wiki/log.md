@@ -5586,3 +5586,8 @@ Owner 학교 검색 정상 확인. 관심 대학도 inline 검색 요청 및 나
 ## 2026-11-03 — 후보 A46 관심 대학 검색 수정본 설치
 
 A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 signed IPA/AAB·설정/서명 PASS, iPhone 업데이트 설치/실행. [근거·산출물](app-release-integration-20261103.md#release46-관심-대학-수정본-설치--2026-11-03). Owner 전체 온보딩 저장/재실행 검수 대기, 운영/Store 변경 없음.
+
+
+## 2026-11-03 — A46 온보딩 Owner PASS·닉네임 검토
+
+대학 검색·선택→전공→완료·MY/재실행 정보 유지 Owner PASS. 마지막 닉네임 단계 추가 의견에 기존 선택형 display_name/MY/커뮤니티 정책 확인, 코드 추가 없이 권고안 검토. [근거](app-release-integration-20261103.md#a46-온보딩-전체-흐름-owner-pass닉네임-제안--2026-11-03). Store 승인 아님.

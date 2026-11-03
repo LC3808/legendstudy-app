@@ -318,3 +318,10 @@ A 기능 소스 `9092d4e`, B `d528a62`에 동일 수정 포함. A전체1365PASS/
 iPhone12ProMax 업데이트 설치/실행 PASS. 기존 onboarding route 열기를 요청하고 Owner에게 대학 검색·선택→전공→완료→MY·재실행 정보 유지 검수를 요청했다. 46 실제 화면/저장 검수는 답변 대기이며 설치 성공만으로 UI PASS를 선언하지 않는다. 앱 삭제·신규 계정 생성·profile 초기화·Store 업로드 없음.
 
 private `candidate-a/release46/`: Store IPA SHA256 `7003ecd0aec0c35a285112b70ccaaf146697b87121aab40c12809481e3991d83`, device IPA `38b9d7fecd8f66258f9c323d8d0a55fe8f22a2c8764ac963b69473a896122427`, AAB `fa0e201ad49f9c9ff1498df2b40b3fdada2e32e84e03430562a09323e1ad2786`. `/tmp/app-review-a46-*.log`, `/tmp/app-review-university-*.log`, `/tmp/app-review-b-university-focused.log`를 private logs에 보존. 기존45/APP41 산출물 보존. 후보 A Owner 검수/Store HOLD, 후보 B 베타 HOLD 유지.
+
+
+### A46 온보딩 전체 흐름 Owner PASS·닉네임 제안 — 2026-11-03
+
+Owner는 A46 대학 입력창 검색/키보드 footer숨김→대학 선택→희망 전공→설정 완료→MY·완전 종료/재실행 후 학교·학년·대학·전공 유지 질문에 “1)pass.”로 답했다. 해당 기기·계정에서 요청한 흐름 **Owner 관찰 PASS**. 같은 응답이 두 메시지로 전달됐으며 독립된 두 차례 검증으로 세지 않는다. 새46에서 다른 모든 Provider 신규 가입/다른 기기/Store 심사까지 PASS로 확대하지 않는다.
+
+Owner는 마지막 닉네임 온보딩 추가의 적절성을 질문했다. 제안 검토이며 아직 신규 코드 구현/빌드 또는 필수 입력 정책 확정이 아니다. 기존 [프로필 닉네임](core-app-improvements.md)과 [향후 커뮤니티 identity](product-platform-boundaries.md)에 따르면 `profiles.display_name`은 직접 입력하는 선택형·중복 허용 닉네임이며 MY 편집/저장/홈 표시가 이미 있다. 커뮤니티 작성자는 같은 닉네임을 재사용할 계획이나 공개 조회/API·게시판은 현재 제공 기능이 아니다. 권고: 전공 다음 마지막 선택 단계, 기존 이름 복원·변경분만 기존 저장 계약으로 저장, 저장 성공 후 완료, 건너뛰기 시 기존 이름 보존, MY에서 변경 가능. 새 DB/중복 확인/커뮤니티 구현은 이번 제안에 포함하지 않는다.
