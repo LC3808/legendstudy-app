@@ -115,7 +115,7 @@ Owner는 APP58에서 “기록은 있으나, 내용은 없음”, 이어 “제�
 
 ## 사진 평가 입력 보완·실제 무료 재첨삭 후속
 
-확정 사진 전사를 Provider의 student_answer에 명시하는 투영과, 비어 있지 않은 확정 답안에 NOT_ATTEMPTED 또는 근거 없는 단계가 반환되는 모순을 방어하는 수정이 WEB source `0cc53505ed3aac856a19089af9c6bafe2d31ba08`, Pages `98c8e200-b8e2-41c0-83b3-8c96f42d36fe`로 배포됐다. [고정 배포](https://98c8e200.legendstudy-lab.pages.dev). API bundle은 이 입력 연결을 위해 재컴파일했고 Pages 전체 설정·배포 환경 binding은 그대로다. 전체1,734PASS/기존4SKIP 및 TS/lint/build/Functions/boundaries PASS. 기존 평가 원문·결제 판단·서버 공개 계약을 변경하는 새 엔진은 아니다.
+확정 사진 전사를 Provider의 student_answer에 명시하는 투영과, 비어 있지 않은 확정 답안에 NOT_ATTEMPTED와 근거 있는 평가 부재가 함께 나타나는 허위 미제출 판정을 차단하는 수정이 WEB source `0cc53505ed3aac856a19089af9c6bafe2d31ba08`, Pages `98c8e200-b8e2-41c0-83b3-8c96f42d36fe`로 배포됐다. [고정 배포](https://98c8e200.legendstudy-lab.pages.dev). API bundle은 이 입력 연결을 위해 재컴파일했고 Pages 전체 설정·배포 환경 binding은 그대로다. 전체1,734PASS/기존4SKIP 및 TS/lint/build/Functions/boundaries PASS. 기존 평가 원문·결제 판단·서버 공개 계약을 변경하는 새 엔진은 아니다. 무관하거나 불완전한 답안도 근거 있는 INVALID/NOT_ASSESSABLE 평가는 허용한다.
 
 같이 적용한 History/rewrite 보완은 고정 catalog에 없는 시험을 정확한 Registry ID로 해석한다. 실제 인하2027 WEB History 조회, 같은 시험의 무료 재첨삭 진입, 확정 전사 불러오기 PASS. History의 학교/2027 표기와 최초·재첨삭2개 기록 보존도 실제 확인했으며, 이전 고정 catalog 기준의 잘못된 제목을 수정했다. APP의 별도 title-only 증상을 이 WEB 수정으로 해결했다고 보고하지 않는다. 배포 자체는 Provider·DB변경0, 실제 검수에 따른 기록/차감은 별도다. 배포 영수증: `/tmp/legendstudy-photo-history-deployment-receipt.json`.
 
@@ -132,7 +132,7 @@ Owner는 APP58에서 “기록은 있으나, 내용은 없음”, 이어 “제�
 
 회차 `7b3b724a-6c90-4bcd-95c0-9f894d934c44`, billing `6ce59fa8-8ca6-4649-9ad0-370c3b3d2e63`. 공식 예시답안3문항을 제출했다. 최초 처리에서 Q1 Essay·Q3 Math는 completed, Q2 Essay는 INDEPENDENT_REVIEW_NOT_ACCEPTED로 실패했다. 내용 오류를 단순 설명 부족으로 분류한 평가에 대해 독립 검토가 거절했다. 이 시점에는 전체 run reserved, 이용권 reserve1·consume0으로 전체 완료/전체 차감을 처리하지 않았다.
 
-첫5회 Provider receipt 합계 입력114,833/출력11,473/총126,306토큰이며 비용 필드가NULL이므로 미확인이다. root가 기존 UI의 “실패한 문항 다시 처리 · 추가 이용권 없음”으로 Q2만1회 재시도했으나 독립 검토 grounding fail로 다시 실패했다. 성공 Q1/Q3 checkpoint는 보존했고 최종 전체 run/billing은 reserved, Ledger는 최초 reserve1만 존재하며 consume0·추가 reserve0이다. 재시도2회 Provider 합계46,345토큰(입력41,762/출력4,583), 중앙 누적172,651토큰이며 비용은 미확인이다. 추가 자동 Provider 실행은 없고 동일 예약의 명시 재처리 대기 상태다. 혼합형 전체 E2E는 PARTIAL이며 오늘 추가 재시도는 하지 않는다. 추가 유료 승인3개 중 서강 사용1·중앙 예약1로2개만 사용/예약했고 인하 무료 재첨삭은0개다.
+첫5회 Provider receipt 합계 입력114,833/출력11,473/총126,306토큰이며 비용 필드가NULL이므로 미확인이다. root가 기존 UI의 “실패한 문항 다시 처리 · 추가 이용권 없음”으로 Q2만1회 재시도했으나 독립 검토 grounding fail로 다시 실패했다. 성공 Q1/Q3 checkpoint는 보존했고 최종 전체 run/billing은 reserved, Ledger는 최초 reserve1만 존재하며 consume0·추가 reserve0이다. 명시 재시도1회에서 평가+독립 검토2호출 합계46,345토큰(입력41,762/출력4,583), 중앙 누적172,651토큰이며 비용은 미확인이다. 추가 자동 Provider 실행은 없고 동일 예약의 명시 재처리 대기 상태다. 혼합형 전체 E2E는 PARTIAL이며 오늘 추가 재시도는 하지 않는다. 추가 유료 승인3개 중 서강 사용1·중앙 예약1로2개만 사용/예약했고 인하 무료 재첨삭은0개다.
 
 위 실제 결과의 안전한 영수증은 `/tmp/legendstudy-expanded-postfix-e2e-safe-receipt-20261104.json`이다. 새 Provider 호출로 과거 PASS를 반복하지 않았으며 기존 원본·최초 실패·History·Ledger를 삭제하지 않는다.
 
@@ -147,7 +147,7 @@ Owner는 APP58에서 “기록은 있으나, 내용은 없음”, 이어 “제�
 
 ## 최종 WEB 표시 배포·작업 종료
 
-최종 운영 표시 source `9a8fb9fdacb8efe95df1d74a73037ebf753158b9`, Pages `bfb80aef-8d88-4bbe-91c0-03b376fc856f` 배포·확인을 마쳤다. [운영 LAB](https://lab.legendstudy.com), [고정 배포](https://bfb80aef.legendstudy-lab.pages.dev). artifact SHA256 `a980cff580c90617a70161d11d572806e5ce1fa8bf73c41e3a059c1a96c58dca`. API bundle은 입력보완0cc5350과 byte-identical, 전체 Pages 설정·46개 환경 binding 동일, 실제 renderer hash 일치·홈200/보호API401을 확인했다. 이전 통합1,734PASS/기존4SKIP를 재사용했고 집중 표시/입력/History25PASS·TS/lint/build/boundaries PASS. 이 표시 배포의 추가 Provider·DB변경0이며 최종 영수증은 `/tmp/legendstudy-superscript-root-deployment-receipt.json`이다.
+최종 운영 표시 source `9a8fb9fdacb8efe95df1d74a73037ebf753158b9`, Pages `bfb80aef-8d88-4bbe-91c0-03b376fc856f` 배포·확인을 마쳤다. [운영 LAB](https://lab.legendstudy.com), [고정 배포](https://bfb80aef.legendstudy-lab.pages.dev). artifact SHA256 `a980cff580c90617a70161d11d572806e5ce1fa8bf73c41e3a059c1a96c58dca`. API bundle은 입력보완0cc5350과 byte-identical, 전체 Pages 설정·46개 환경 binding 동일, 실제 renderer hash 일치·홈200/보호API401을 확인했다. 이전 통합1,734PASS/기존4SKIP를 재사용했고 최종 renderer 집중25PASS·TS/lint/build/boundaries PASS. 앞선 입력 보완124PASS와 History31PASS는 별도 집중 검사이며25개에 합쳐 보고하지 않는다. 이 표시 배포의 추가 Provider·DB변경0이며 최종 영수증은 `/tmp/legendstudy-superscript-root-deployment-receipt.json`이다.
 
 최종 판정은 **CONDITIONAL_READY: 운영 연결은 완료했으나 전체 품질/실기기 검수 완료는 아니다.** 인하 무료 사진 재첨삭과 서강 Essay의 확인된 범위는 PASS, 중앙 혼합형·전체 해설·APP58 본문 조회는 PARTIAL이다. 이 판정을 스토어 심사 제출 승인이나 모든 대학 평가 품질 보증으로 해석하지 않는다.
 
