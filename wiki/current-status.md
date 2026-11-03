@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-G](task16g-learning-loop-20261102.md): Simulator 신규 사진→평가→무료 재첨삭→History PASS. 혼합형·품질 GAP, 운영 HOLD.
+[G 품질/H 준비](task16g-quality-closeout-task16h-preparation-20261103.md): 기능 Owner PASS, OCR·힌트·혼합형 GAP. H 설계 가능·운영 HOLD.
 
 [TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
 

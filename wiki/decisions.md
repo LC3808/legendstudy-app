@@ -823,3 +823,7 @@ Owner가 [TASK16-F Native UI/UX](task16f-native-math-ux-20261102.md)를 PASS 처
 ## 2026-11-03 — TASK16-G Mobile First / TASK16-H WEB 분리
 
 [기존 F 승인·G 학습 루프 결정](#2026-11-02--task16-g-디자인-pass--학습-루프-통합)을 유지한다. G는 모바일 실제 학습 루프와 E2E를 우선하며 디자인 개편하지 않는다. G 완료 후 H에서 원본 답안·첨삭 결과·기본 개념 동시 비교 PC 전용 WEB UX, LaTeX 수식 표시와 오류 영역 연결을 개발한다. G에서 공통 Backend/평가/History/이용권/재첨삭 계약 및 APP↔WEB 제출 조회를 정리한다. 별도 시스템을 만들거나 G 범위를 PC 레이아웃으로 확대하지 않는다. Owner 검수 전 운영 활성화 금지. [재개 체크포인트](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03).
+
+## 2026-11-03 — TASK16-G 기능 승인 / 품질 및 H 준비
+
+Owner는 `b52ab42` Simulator 신규 사진·실제 평가·무료 재첨삭·History를 기능 PASS로 인정했다. 전체 품질/운영 활성화 승인은 아니다. [Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승해 이번 H 범위는 공통 데이터 계약과 좌측 원본·중앙 결과·우측 개념/힌트/해설 PC UX 준비다. 기존 실제 결과 재사용, Provider 최소화, TEST만 사용한다. [품질·착수 조건](task16g-quality-closeout-task16h-preparation-20261103.md).

@@ -1,3 +1,7 @@
+## 2026-11-03 — TASK16-G 품질 검수 / H 준비
+
+Owner 기능 PASS 기록. 기존 실제 OCR/평가·공식4PDF 재검수, Provider0. Q1 OCR FAIL/Q2 PARTIAL, 구체 힌트·공식 해설·WEB 공통 표시 GAP. TEST 혼합형503/잔액0·Native gate401로 실제 Worker 미검증. WEB60·Native15·로컬SQL131+18/mixed PASS. [P0·공통 계약·PC UX 준비](task16g-quality-closeout-task16h-preparation-20261103.md). 운영 HOLD.
+
 ## 2026-11-03 — TASK16-G 신규 사진 학습 루프
 
 Simulator 실제 사진→전사 확인/수정→Q1/Q2 실제 평가→무료 재첨삭→History PASS. TEST 최초1/무료0차감·중복 요청 무차감·기존 기록 보존. Math 사진 보정 연결/원본 재조회/재작성 legacy 사진 복사 수정, 영향25+인문·History49검사 PASS. OCR6+평가4회; OCR 정확도/일반 힌트 품질·혼합형·APP↔WEB 검증 GAP 유지. [검증 범위·증거](task16g-learning-loop-20261102.md#최종-결과). 운영 HOLD.

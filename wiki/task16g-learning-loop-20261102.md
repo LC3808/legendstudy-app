@@ -1,6 +1,6 @@
 # TASK16-G — 학습 루프 통합
 
-2026-11-02 · 구현/TEST 검증 진행 중, 운영 HOLD. 기준 Native SHA `787987f`.
+2026-11-02 시작 · 11/3 기능 E2E Owner PASS, 품질 PARTIAL/운영 HOLD. [품질 검수·H 준비](task16g-quality-closeout-task16h-preparation-20261103.md). 기준 Native SHA `787987f`.
 
 Owner는 [TASK16-F](task16f-native-math-ux-20261102.md)의 모바일 UI/UX를 PASS 처리했다. Academic Purple과 승인 화면 구조를 유지하며 추가 디자인 개편은 하지 않는다. 이는 F 전체 완료·운영 활성화 승인이 아니다. [C](task16c-math-recognition-scaffolding-20261102.md)/[E](task16e-recognition-disclosure-p0-20261102.md)의 입력/공개 방어를 재사용한다.
 
