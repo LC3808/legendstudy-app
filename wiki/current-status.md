@@ -1,6 +1,6 @@
 # Current Status
 
-[11/3 온보딩·학교 검색 V2](onboarding-school-search-v2-20261103.md): 별도 브랜치 구현·미배포. APP41/운영 보존. 신규 빌드와 Owner 재실행·관리자 E2E 검수 필요.
+[11/3 온보딩 V2 최종 리뷰](onboarding-school-search-v2-20261103.md#final-review-fix): best-effort skip·MY 미설정 확인·학교명 CTA 보완. 별도 브랜치·APP41/운영 보존. Owner 실기기 검수 전 통합/배포 금지.
 
 [관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
 

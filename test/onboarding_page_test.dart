@@ -23,6 +23,8 @@ class _Repo implements ProfileRepository {
   int upserts = 0;
   int schoolWrites = 0;
   bool failWrite = false;
+  bool failComplete = false;
+  int completionAttempts = 0;
   @override
   Future<UserProfile?> fetchCurrentProfile() async =>
       initial ??
@@ -55,6 +57,8 @@ class _Repo implements ProfileRepository {
 
   @override
   Future<void> markOnboardingComplete() async {
+    completionAttempts++;
+    if (failComplete) throw StateError('offline completion');
     completed = true;
   }
 }
@@ -364,7 +368,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('선택한 학교'), findsNothing);
     expect(find.text('선택 해제'), findsNothing);
-    expect(find.text('이 학교로 설정하기'), findsOneWidget);
+    expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
     expect(find.text('레전드고등학교'), findsWidgets);
   });
 
@@ -390,7 +394,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
     await tester.pumpAndSettle();
-    expect(find.text('이 학교로 설정하기'), findsOneWidget);
+    expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
     expect(repo.schoolWrites, 0);
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
@@ -408,31 +412,85 @@ void main() {
     await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
     await tester.pumpAndSettle();
     repo.failWrite = true;
-    await tester.tap(find.text('이 학교로 설정하기'));
+    await tester.tap(find.text('레전드고등학교로 설정하기'));
     await tester.pumpAndSettle();
     expect(find.text('학년과 학교'), findsOneWidget);
     expect(repo.completed, isFalse);
     expect(repo.schoolWrites, 0);
     repo.failWrite = false;
-    await tester.tap(find.text('이 학교로 설정하기'));
+    await tester.tap(find.text('레전드고등학교로 설정하기'));
     await tester.pumpAndSettle();
     expect(repo.schoolWrites, 1);
     expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
   });
 
-  testWidgets('skip cannot mark complete when draft save fails', (
+  testWidgets('skip independently completes and reports unsaved fields', (
     tester,
   ) async {
     final repo = _Repo();
-    await _mount(tester, repo, user: 'u1');
+    final router = await _mount(tester, repo, user: 'u1');
     await tester.tap(find.text('고등학교 재학생'));
     await tester.pumpAndSettle();
     repo.failWrite = true;
     await tester.tap(find.text('건너뛰기'));
     await tester.pumpAndSettle();
-    expect(repo.completed, isFalse);
-    expect(find.text('지금의 나를 알려주세요'), findsOneWidget);
+    expect(repo.completed, isTrue);
+    expect(repo.status, isNull);
+    expect(find.text('일부 정보를 저장하지 못했어요'), findsOneWidget);
+    await tester.tap(find.text('저장 없이 계속'));
+    await tester.pumpAndSettle();
+    expect(router.routeInformationProvider.value.uri.path, '/home');
+    expect(repo.status, isNull);
   });
+
+  testWidgets('best effort skip preserves grade draft for repeated retry', (
+    tester,
+  ) async {
+    final (repo, router) = await toSchoolStep(tester);
+    await tester.tap(find.text('2학년'));
+    repo.failWrite = true;
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다시 저장'));
+    await tester.pumpAndSettle();
+    expect(find.text('일부 정보를 저장하지 못했어요'), findsOneWidget);
+    expect(repo.grade, isNull);
+    repo.failWrite = false;
+    await tester.tap(find.text('다시 저장'));
+    await tester.pumpAndSettle();
+    expect(repo.grade, 2);
+    expect(repo.status, 'student');
+    expect(repo.completionAttempts, 1);
+    expect(router.routeInformationProvider.value.uri.path, '/home');
+  });
+
+  for (final draftFails in [false, true]) {
+    testWidgets(
+      'completion failure stays and retries; draft fails $draftFails',
+      (tester) async {
+        final repo = _Repo();
+        final router = await _mount(tester, repo, user: 'u1');
+        await tester.tap(find.text('고등학교 재학생'));
+        await tester.pumpAndSettle();
+        repo.failWrite = draftFails;
+        repo.failComplete = true;
+        await tester.tap(find.text('건너뛰기'));
+        await tester.pumpAndSettle();
+        expect(repo.completed, isFalse);
+        expect(repo.completionAttempts, 1);
+        expect(router.routeInformationProvider.value.uri.path, '/onboarding');
+        expect(find.textContaining('온보딩 완료를 기록하지 못했어요'), findsOneWidget);
+        expect(find.text('저장 없이 계속'), findsNothing);
+        repo.failWrite = repo.failComplete = false;
+        await tester.tap(find.text('건너뛰기'));
+        await tester.pumpAndSettle();
+        expect(repo.status, 'student');
+        expect(repo.completed, isTrue);
+        expect(router.routeInformationProvider.value.uri.path, '/home');
+      },
+    );
+  }
+
   testWidgets('resumed profile values survive an untouched skip', (
     tester,
   ) async {

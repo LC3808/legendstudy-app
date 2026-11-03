@@ -125,7 +125,11 @@ void main() {
             expect(
               t.getTopLeft(find.text(schoolB.name)).dy,
               lessThan(
-                t.getTopLeft(find.text(school ? '이 학교로 설정하기' : '저장')).dy,
+                t
+                    .getTopLeft(
+                      find.text(school ? '${schoolA.name}로 설정하기' : '저장'),
+                    )
+                    .dy,
               ),
             );
             await t.tap(find.text(schoolB.name));
@@ -136,8 +140,10 @@ void main() {
             await t.ensureVisible(find.text('설정 안 함').last);
             await t.tap(find.text('설정 안 함').last);
           }
-          await t.ensureVisible(find.text(school ? '이 학교로 설정하기' : '저장'));
-          await t.tap(find.text(school ? '이 학교로 설정하기' : '저장'));
+          await t.ensureVisible(
+            find.text(school ? '${schoolB.name}로 설정하기' : '저장'),
+          );
+          await t.tap(find.text(school ? '${schoolB.name}로 설정하기' : '저장'));
           await t.pump();
           expect(pops.count, 0);
           final button = t.widget<FilledButton>(find.byType(FilledButton).last);
@@ -161,8 +167,8 @@ void main() {
     await t.pumpAndSettle();
     await t.tap(find.text(schoolA.name));
     await t.pumpAndSettle();
-    await t.ensureVisible(find.text('이 학교로 설정하기'));
-    await t.tap(find.text('이 학교로 설정하기'));
+    await t.ensureVisible(find.text('${schoolA.name}로 설정하기'));
+    await t.tap(find.text('${schoolA.name}로 설정하기'));
     await t.pumpAndSettle();
     expect(repo.writes, 0);
     expect(pops.count, 0);
@@ -249,12 +255,12 @@ void main() {
       await t.tap(find.text(longSchool.name));
       await t.pumpAndSettle();
       expect(find.text(longSchool.name), findsOneWidget);
-      await t.ensureVisible(find.text('이 학교로 설정하기'));
+      await t.ensureVisible(find.text('${longSchool.name}로 설정하기'));
       await t.pump();
       expect(t.takeException(), isNull);
       expect(
         t.getTopLeft(find.text(longSchool.name).first).dy,
-        lessThan(t.getTopLeft(find.text('이 학교로 설정하기')).dy),
+        lessThan(t.getTopLeft(find.text('${longSchool.name}로 설정하기')).dy),
       );
     },
   );

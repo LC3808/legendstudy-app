@@ -32,7 +32,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
-온보딩 프로필 누락 / 학교 검색 V2 / 고등학교 기본·중학교 명시: [11/3 구현·A–R 검증·Owner 검수](onboarding-school-search-v2-20261103.md) → [Claude 원문 진단](onboarding-profile-integrity-20261103.md).
+온보딩 프로필 누락 / 학교 검색 V2 / 고등학교 기본·중학교 명시: [11/3 구현·A–R·최종 리뷰 보완·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix) → [Claude 원문 진단](onboarding-profile-integrity-20261103.md).
 
 스토어 빌드·업로드·TASK14 심사 차단: [릴리스 후보·검증·운영 격차·후속](final-store-rc-1.md#task14--beta-store-release-candidate-2026-11-01).
 

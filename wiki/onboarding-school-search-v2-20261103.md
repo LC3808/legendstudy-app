@@ -17,6 +17,8 @@
 
 ## 저장 계약
 
+**아래 최초 V2 설명의 건너뛰기 실패 차단과 MY 미설정 제거는 [최종 리뷰 보완](#final-review-fix)의 최신 Owner 정책으로 대체한다.**
+
 상태/학년의 사용자 수정분만 기존 `upsertCurrentProfile`로 단계 이동(이전 포함),
 건너뛰기, 최종 완료 **전에 await 저장**한다. 수정하지 않은 값은 요청에서 제외한다.
 초기 읽기 값은 초안으로 복원하며 명시적 비재학생 선택은 기존대로 학년을 해제한다.
@@ -143,3 +145,81 @@ PASS는 아래 명시된 자동/읽기 검증 범위이며 실기기 운영 E2E�
 신규 APP 바이너리 필요. 1.0.1(41) 버전과 운영 배포는 보존했다. Store용 새 빌드번호/
 서명/배포는 Owner 검수 이후 별도 수행한다. 복구는 기존 APP41 유지 또는 이 브랜치
 앱 변경만 되돌리면 된다. DB 롤백/과거 누락값 삭제는 필요하지 않다.
+
+
+## Final review fix
+
+2026-11-03.
+
+Owner가 Claude의 d00ec696 리뷰를 확인한 후 승인한 세 가지 보완이다.
+`codex/onboarding-school-search-v2-review-fix`를 d00ec696에서 생성했다.
+릴리스 브랜치 통합/운영 배포/APP41 교체는 하지 않는다.
+
+### 최신 계약
+
+- 건너뛰기는 상태·학년 저장 실패와 무관하게 완료 기록을 **별도로 시도**한다.
+  완료 기록까지 실패하면 현재 화면/입력값을 유지하며 오류·재시도를 제공한다.
+- 완료 기록만 성공하면 “상태·학년은 저장되지 않았어요”를 명확히 안내하고
+  **다시 저장 / 저장 없이 계속**을 제공한다. 다시 저장은 기존 입력값을 사용하며,
+  반복 실패해도 값을 지우지 않고 재시도할 수 있다. 완료 기록을 반복 호출하지 않는다.
+  사용자가 저장 없이 계속을 선택하면 Home으로 이동한다. 이 경우 미저장 초안은
+  서버에 없으며, 화면을 나간 뒤 다시 설정하려면 MY에서 입력한다. 새 offline queue나
+  자동 background 저장을 추가한 것이 아니다. 정상 skip에는 추가 조작이 없다.
+- `설정 완료`와 일반 단계 이동은 기존 저장 성공 조건을 유지한다. 실패하면 재시도하거나
+  별도 건너뛰기 경로를 이용할 수 있다. 완료 처리 실패를 성공으로 표시하지 않는다.
+- MY에만 **학교 미설정으로 변경** 액션을 복원한다. 취소는 쓰기0,
+  확인은 기존 select(null) → 단일 upsert에서 NEIS 코드 두 개 NULL.
+  닉네임/현재 상태/학년은 보존한다. 실패는 기존 학교를 유지하고 재시도한다.
+  학교명 조회가 실패해도 저장된 profile 코드로 미설정 액션을 제공한다.
+  검색 결과의 선택 해제 버튼은 계속 제거 상태다.
+- 온보딩·MY 하단 확인 버튼을 **선택한 학교명 + 로 설정하기**로 변경했다.
+  첫 결과 자동 선택/다른 카드 선택과 함께 문구가 갱신된다. 확인 전 학교 쓰기0.
+  긴 이름/큰 글씨의 줄바꿈을 위해 온보딩 버튼은 고정52 높이 대신 최소52 높이다.
+- 고등학교 기본/명시적 중학교/초등학교 제외/주소 기본 숨김/카드/placeholder는 그대로다.
+
+### 보존 검토
+
+기존 [상위 전략](longitudinal-learning-admissions-data-strategy.md)의 7문항 적용:
+(1) 현재 자기보고 프로필 정정이며 새 시점 컬럼 없음,
+(2) 기존 학습/지원 원본 불변, 과거 학교 복원 가능성을 새로 주장하지 않음,
+(3) 명시적 Owner 승인 학교 해제만 기존 current projection에 적용, history 설계는 미구현 유지,
+(4) 동일 인증 owner, 계정 변경 후 후속 저장/이동 차단,
+(5) Learning/Decision/Outcome 데이터 변경 없음,
+(6) 권한/수집/retention/외부 공유 변경 없음,
+(7) 추정/파생값을 저장하지 않음. 운영 DB·schema·Auth·Credit·결제 변경0.
+
+### 변경 파일
+
+- 구현: `lib/features/onboarding/presentation/onboarding_page.dart`,
+  `lib/features/profile/presentation/school_page.dart`.
+- 테스트: `test/onboarding_page_test.dart`, `test/school_review_fix_test.dart`,
+  `test/day7_school_test.dart`, `test/device_second_corrections_test.dart`.
+- 위키: 본 문서, personalization-onboarding, decisions, current-status, log, index.
+
+### Owner 실기기 검수
+
+1. 상태/학년 저장 실패 상황에서 건너뛰기: 완료 기록 성공 시 미저장 안내 확인.
+   다시 저장으로 기존 입력 복구, 또는 저장 없이 계속으로 Home 진입 확인.
+2. 완료 기록도 실패하면 Home으로 이동하지 않고 입력값과 오류가 남는지 확인.
+   네트워크 복구 후 건너뛰기 재시도. 일반 설정 완료 실패도 허위 성공 없어야 한다.
+3. MY 기존 회원: 학교 미설정 → 취소 시 그대로, 확인 시 학교만 미설정.
+   현재 상태·학년·닉네임 유지, 실패 시 재시도 확인.
+4. 검색 첫 결과/다른 카드 선택 시 하단 학교명과 체크가 일치하는지 확인.
+   버튼 확인 후 학교 변경, 앱 재실행 후 유지, 긴 이름/큰 글씨 확인.
+
+실제 운영 쓰기/신규 실계정/실기기 재실행은 미실행이며 Owner 검수 대기다.
+신규 Store 빌드·릴리스 통합·배포는 Owner 검수 전 금지. DB migration 불필요.
+
+
+### 최종 리뷰 검증 결과
+
+- 전체 `flutter test --no-pub`: **1334 PASS / 기존7 SKIP / 0 FAIL**.
+
+- 수정 관련 Flutter 58 PASS: 건너뛰기 partial failure/반복 재시도/완료 실패,
+  MY 미설정 확인·취소·실패 재시도, 첫/다른 학교 CTA, fresh provider container 복원.
+- `dart analyze lib test`: PASS, no issues. 이전 기록과 동일한 Flutter3.47.6 SDK 사용.
+- iOS simulator debug/no-codesign 빌드 PASS. 실기기 설치·서명·스토어/Android 빌드 미실행.
+- 위키 라우팅/링크·current-status12KB 예산 PASS, `git diff --check` PASS.
+- 학교 pair repository/API/NEIS 검색 정책/플랫폼·의존성·버전 파일 변경 없음.
+- 실제 운영 회원 데이터 읽기/쓰기 없이 fake repository 및 기존 transport tests 검증.
+  앱 강제종료 후 실계정 복원은 PARTIAL: Owner 검수 항목이다.

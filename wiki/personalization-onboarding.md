@@ -4,6 +4,8 @@
 
 [현재 4단계 저장·학교 검색 V2](onboarding-school-search-v2-20261103.md): 상태/학년 수정분은 단계 이동과 건너뛰기 전에 저장한다. 학교는 검색 결과의 임시 선택 후 명시적 확인으로만 저장한다. 아래 마지막 완료에만 저장/학교 즉시 저장/2단계 설명은 과거 기록이다. 운영 배포는 별도이며 APP41 보존.
 
+[최종 리뷰 보완](onboarding-school-search-v2-20261103.md#final-review-fix): 건너뛰기는 상태·학년 저장 실패에도 완료 기록을 별도 시도한다. 완료 성공/필드 실패는 미저장 안내와 재시도·계속을 제공한다. 완료 실패는 이동하지 않는다. MY 학교 미설정 확인 및 학교명 확인 CTA 복원.
+
 Status: **COMPLETE — Production migration APPLIED, Owner validation PASS.**
 Date: 2026-09-27. Scope: Phase 1 only. Canonical design/implementation doc.
 

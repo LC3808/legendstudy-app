@@ -26,6 +26,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
   School? _draft;
   bool _edited = false, _completed = false;
   String? _owner;
+  int _pickerGeneration = 0;
 
   void _choose(School? school) {
     setState(() {
@@ -42,6 +43,68 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
     if (!mounted || !applied) return false;
     _edited = false;
     return true;
+  }
+
+  Future<void> _unsetSchool() async {
+    final auth = ref.read(authStateProvider);
+    final owner = auth.value?.userId;
+    if (_saving ||
+        _completed ||
+        auth.isLoading ||
+        auth.hasError ||
+        owner == null) {
+      return;
+    }
+    setState(() => _saving = true);
+    try {
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('학교를 미설정으로 변경할까요?'),
+          content: const Text('저장한 학교 정보만 해제돼요. 현재 상태와 학년은 유지됩니다.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('미설정으로 변경'),
+            ),
+          ],
+        ),
+      );
+      if (!mounted ||
+          confirmed != true ||
+          ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
+      final applied = await ref
+          .read(schoolSelectionProvider.notifier)
+          .select(null);
+      if (!mounted ||
+          !applied ||
+          ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
+      setState(() {
+        _draft = null;
+        _edited = false;
+        _pickerGeneration++;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('학교를 미설정으로 변경했어요.')));
+    } catch (_) {
+      if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('학교를 변경하지 못했어요. 다시 시도해 주세요.')),
+        );
+      }
+    } finally {
+      if (mounted && ref.read(authStateProvider).value?.userId == owner) {
+        setState(() => _saving = false);
+      }
+    }
   }
 
   void _finish() {
@@ -77,6 +140,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
   Widget build(BuildContext context) {
     final auth = ref.watch(authStateProvider);
     final selection = ref.watch(schoolSelectionProvider);
+    final profile = ref.watch(currentProfileProvider);
     if (_owner != auth.value?.userId) {
       _owner = auth.value?.userId;
       _saving = false;
@@ -89,7 +153,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
     return ShellPage(
       children: [
         SchoolSearchPicker(
-          key: ValueKey('my-school:$_owner'),
+          key: ValueKey('my-school:$_owner:$_pickerGeneration'),
           enabled: !_saving,
           onChanged: _choose,
         ),
@@ -106,6 +170,18 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             onRetry: () => ref.invalidate(schoolSelectionProvider),
           ),
         if (auth.value?.isAuthenticated == true) ...[
+          if (profile.asData?.value?.neisSchoolCode != null ||
+              selection.asData?.value != null)
+            OutlinedButton(
+              onPressed:
+                  _saving ||
+                      _completed ||
+                      selection.isLoading ||
+                      profile.isLoading
+                  ? null
+                  : _unsetSchool,
+              child: const Text('학교 미설정으로 변경'),
+            ),
           AcademicStatusField(
             key: ValueKey('academic-status:${auth.value?.userId}'),
             enabled: !_saving && !_completed,
@@ -122,6 +198,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
           GradePage(
             key: ValueKey(auth.value?.userId),
             enabled:
+                !_saving &&
                 !selection.isLoading &&
                 !selection.hasError &&
                 !_completed &&
@@ -132,7 +209,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
                 : _draft != null
                 ? 'student'
                 : ref.read(currentProfileProvider).value?.academicStatus,
-            saveLabel: _draft != null ? '이 학교로 설정하기' : '저장',
+            saveLabel: _draft != null ? '${_draft!.name}로 설정하기' : '저장',
             beforeSave: _saveSchool,
             onSavingChanged: (value) => setState(() => _saving = value),
             onSaved: _finish,
@@ -143,7 +220,7 @@ class _SchoolPageState extends ConsumerState<SchoolPage> {
             onPressed: _saving || selection.isLoading || selection.hasError
                 ? null
                 : _saveGuest,
-            child: Text(_draft != null ? '이 학교로 설정하기' : '저장'),
+            child: Text(_draft != null ? '${_draft!.name}로 설정하기' : '저장'),
           ),
       ],
     );

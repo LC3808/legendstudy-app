@@ -5341,3 +5341,12 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
   관리자7PASS, 실제NEIS8읽기PASS, 시각/위키/차이검사PASS. DB 쓰기/배포/push 없음.
 - 실계정 신규가입·재실행·관리자 E2E 및 신규 Store 빌드 Owner 대기.
   [A–R·변경파일·복구](onboarding-school-search-v2-20261103.md). Claude d0fab09 진단 원문 보존.
+
+## 2026-11-03 — Onboarding School Search V2 final review fix
+
+- d00ec696 기반 별도 `codex/onboarding-school-search-v2-review-fix`.
+- Skip의 optional 상태/학년 best-effort와 완료 기록을 분리. 완료 실패는 화면 유지,
+  완료만 성공하면 미저장 안내·입력값 재시도/계속. 일반 finish는 기존 strict 저장 유지.
+- MY 학교 미설정 확인·코드쌍 NULL 복원, 상태/학년/닉네임 보존. 학교명 CTA/긴 이름 줄바꿈.
+- 전체1334PASS/기존7SKIP, 대상58PASS, analyzePASS, iOS simulator debugPASS. 운영 쓰기/APP41 변경/통합/배포/push 없음.
+  [최신 계약·검증·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix).

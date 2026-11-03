@@ -153,8 +153,47 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     });
     final owner = ref.read(authStateProvider).value?.userId;
     try {
-      await _persistDraft(owner);
+      var draftSaved = false;
+      try {
+        await _persistDraft(owner);
+        draftSaved = true;
+      } catch (_) {
+        // Skip is best effort: completion is independent of optional fields.
+      }
+      if (!_sameOwner(owner)) return;
       await ref.read(profileRepositoryProvider).markOnboardingComplete();
+      if (!_sameOwner(owner)) return;
+      while (!draftSaved) {
+        if (!mounted) return;
+        final retry = await showDialog<bool>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+            title: const Text('일부 정보를 저장하지 못했어요'),
+            content: const Text(
+              '온보딩 완료는 기록했지만 상태·학년은 저장되지 않았어요. 입력한 값으로 다시 저장하거나, 나중에 MY에서 설정할 수 있어요.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('저장 없이 계속'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('다시 저장'),
+              ),
+            ],
+          ),
+        );
+        if (!_sameOwner(owner)) return;
+        if (retry != true) break;
+        try {
+          await _persistDraft(owner);
+          draftSaved = true;
+        } catch (_) {
+          if (!_sameOwner(owner)) return;
+        }
+      }
       if (!_sameOwner(owner)) return;
       ref.read(analyticsServiceProvider).logEvent(
         AnalyticsEvents.onboardingComplete,
@@ -163,7 +202,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       await _leave();
     } catch (_) {
       if (_sameOwner(owner)) {
-        setState(() => _error = '잠시 후 다시 시도해 주세요.');
+        setState(
+          () => _error = '온보딩 완료를 기록하지 못했어요. 입력값은 유지되어 있어요. 다시 시도해 주세요.',
+        );
       }
     } finally {
       if (_sameOwner(owner)) setState(() => _busy = false);
@@ -437,8 +478,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             ),
             const SizedBox(height: AppTokens.space8),
           ],
-          SizedBox(
-            height: 52,
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 52),
             child: FilledButton(
               onPressed: !canAdvance || _busy || _advancing
                   ? null
@@ -461,7 +502,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 _busy
                     ? '저장 중…'
                     : _step == 2 && _isStudent && _schoolDraft != null
-                    ? '이 학교로 설정하기'
+                    ? '${_schoolDraft!.name}로 설정하기'
                     : interestedEmpty
                     ? '나중에 설정할게요'
                     : _step < 4

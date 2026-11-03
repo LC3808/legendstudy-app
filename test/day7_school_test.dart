@@ -258,8 +258,8 @@ void main() {
       expect(c.read(schoolSelectionProvider).value, isNull);
       expect(find.text(schoolA.name), findsOneWidget);
       expect(profile.writes, 0);
-      await tester.ensureVisible(find.text('이 학교로 설정하기'));
-      await tester.tap(find.text('이 학교로 설정하기'));
+      await tester.ensureVisible(find.text('${schoolA.name}로 설정하기'));
+      await tester.tap(find.text('${schoolA.name}로 설정하기'));
       await tester.pumpAndSettle();
       expect(c.read(schoolSelectionProvider).value?.identity, schoolA.identity);
       expect(find.text('D-DAY'), findsOneWidget);
