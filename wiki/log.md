@@ -1,6 +1,6 @@
 ## 2026-11-03 — APP review candidate B integration
 
-[통합 보고](app-release-integration-20261103.md): APP41+A에서 TASK16-K d7d5bb1 병합, 14충돌 해결. 인문 최신 UI/Analytics·수리 UI/수식·owner 보호 보존. Math rewrite migration/계정 전달 충돌 수정. Analyze/전체1383 PASS7SKIP. 운영 활성화·Store 제출 없음, Owner 설치 보류. 서명 빌드 진행 중.
+[통합 보고](app-release-integration-20261103.md): APP41+A에서 TASK16-K d7d5bb1 병합, 14충돌 해결. 인문 최신 UI/Analytics·수리 UI/수식·owner 보호 보존. Math rewrite migration/계정 전달 충돌 수정. Analyze/전체1383 PASS7SKIP. 운영 활성화·Store 제출 없음, Owner 설치 보류. iOS43 signed Archive/IPA18.7MB·Android43 signed AAB99.3MB PASS, 실제 binary 설정·서명·AD_ID 부재 확인. B Native 혼합 사진 제출은 BLOCKED/운영 NOT_READY.
 
 ## 2026-10-31 — TASK 02 베타 일일 무료 이용
 

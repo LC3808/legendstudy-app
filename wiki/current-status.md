@@ -9,7 +9,7 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - Flutter Analyze PASS; 전체 1,356 PASS / 7 SKIP. iOS 1.0.1(42) signed Archive/IPA 및 Android42 signed AAB PASS.
 - 바이너리 Supabase/Google 설정 포함, Apple entitlement/서명 확인. Store 업로드/재제출 없음.
 - 실제 Kakao 가입·취소·복귀·세션 유지 및 4방식 로그인은 후보42 실기기 미검수. 기존41 Owner PASS를42 PASS로 확장하지 않는다.
-- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, Analyze 및 전체1,383 PASS/7 SKIP. signed build 진행 중. 운영 수리·상경 활성화 HOLD.
+- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, Analyze 및 전체1,383 PASS/7 SKIP. signed iOS43 Archive/IPA·Android43 AAB PASS. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
 - TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner가 설치는 나중으로 보류. 실기기 검수 미실시.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
 
@@ -17,7 +17,7 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 
 1. [Kakao 구현·검수 항목](kakao-ios-system-auth-20261103.md), [온보딩 V2](onboarding-v2-final-integration-20261103.md).
 2. [APP41 배포 이력·정의 복구](final-store-rc-1.md#task18-build41-owner-internal-recovery--2026-11-02).
-3. 후보 A 실제 iPhone 검수, 후보 B 충돌/전체 회귀/빌드 완료 후 별도 출시 판단.
+3. 후보 A 실제 iPhone 검수, 후보 B Native 혼합 제출·OCR 품질·운영 연결 보완 후 별도 출시 판단.
 4. Owner 승인 없이 운영 DB/Auth/Credit/Ledger/결제·WEB·Store 변경 금지.
 
 ## 기존 상태 보존
