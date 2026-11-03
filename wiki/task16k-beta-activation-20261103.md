@@ -115,3 +115,16 @@ APP 변경: `lib/features/essay/math_text.dart`, `test/math_student_text_test.da
 Owner 로그인 장애 원인: Flutter drive의 기본 종료는 TEST 앱 **uninstall**을 수행한다. 서버 TEST 설정/계정은 정상이나 검사 후 설치한 일반 앱에는 삭제된 세션이 없었다. `--keep-app-running`으로 검사 종료 후 앱/데이터를 유지하고 실제 AppBootstrap/SDK 세션 저장을 검증한 뒤 일반 Profile 앱을 덮어 설치한다. 운영 Auth/비밀번호를 변경해서 해결하지 않는다.
 
 로그인 복구 실측: 실제 AppBootstrap/Supabase SDK 로그인·TEST 저장소 assertion PASS. `--keep-app-running` 종료 후 TEST 앱 Preferences에 세션 존재, 정상 `lib/main.dart` Profile 덮어 설치·launch 후에도 같은 TEST 세션 보존 확인. 비밀번호/Auth 설정 변경0. `login-run-preserved.log`, `device-prefs-preserved/normal` 비공개 증거. 이전 `Failed to stop app` 로그 뒤 기본 drive가 uninstall했던 것이 원인이며 앱 로그인 기능의 실패로 일반화하지 않는다. Owner에게 무입력 홈 진입·카메라/Photos 확인을 다시 요청했다. 화면 검수 최종 PASS는 Owner 응답 전 보류.
+
+### Owner 실기기 사진 검수 후속 — 인문논술 자르기 방식 재사용
+
+Owner가 iPhone 12 Pro Max에서 로그인 후 사진 **자르기까지 완료**했다고 확인했다. 이어 수리 자르기가 인문논술과 달라 불편하다고 지적했다. 이는 사진 입력 단계 확인이며 실제 기기 신규 평가·무료 재첨삭 전체 PASS를 의미하지 않는다.
+
+- 원인: TASK16-F MathPhotoEditor는 가로/세로 RangeSlider, 기존 인문 APP은 이미지 위 모서리 핸들·영역 이동 방식이었다.
+- 재사용 근거: `legendstudy-app-claude-20261028`의 `c61a898` (`answer_image_crop.dart`, 기존 §10 사진 크롭) 구현/테스트를 현재 개발 브랜치로 가져왔다. 기존 인문 화면 연결·운영 앱은 변경하지 않았다.
+- Math는 같은 드래그 자르기 → 적용 → 미리보기 → 첨부 흐름을 사용한다. 기존 `transformMathPhoto` 회전/PNG 사본과 원본 복원을 유지하고 미리보기 원본 비교를 제공한다. 슬라이더 제거, 하단 버튼은 작은 폭에서 줄바꿈한다. 원본 메모리 보존/취소 시 기존 첨부 유지, 서버 저장 계약 불변. 재촬영은 기존 사진 입력 화면에서 진행한다.
+- 회전/원본 복원 직후 적용 버튼이 layout 전 crop-null 상태를 읽어 비활성화되는 문제도 회귀 테스트로 확인 후 수정했다. 이미지 codec/picture 해제 및 좁은 사진의 드래그 최소 크기 경계도 보완했다.
+- 코드 검사: crop 5 + 기존 Math UI/수학 문서 13 = **18 PASS**, 영향 4파일 analyze 0 issues. 기존 사진 루프 integration의 적용→첨부 셀렉터 갱신만 했으며 실제 Provider E2E는 재실행하지 않았다.
+- 기존 한양 Q1 이미지로 428×926 로컬 Flutter 화면을 렌더링하여 드래그/미리보기를 검수했다. 이 캡처는 실기기 스크린샷 또는 새 OCR 검증으로 계산하지 않는다. 원본·캡처는 Git에 넣지 않았다.
+- 별도 `com.legendstudy.app.task16f` Profile 빌드/설치/실행 PASS. 앱 삭제 없이 덮어 설치하여 기존 앱 데이터와 로그인 세션을 보존한다. 새 자르기 방식의 Owner 실기기 사용성 확인은 대기한다.
+- 변경 파일: `lib/features/essay/answer_image_crop.dart`, `lib/features/essay/math_mobile/math_image_tools.dart`, `test/answer_image_crop_test.dart`, `integration_test/task16g_photo_loop_test.dart` 및 본문/current-status/log. Provider0, DB/Auth/Credit/Ledger/결제 변경0, WEB 변경0, APP1.0.1(41) 브랜치 변경0. 기존 F 디자인 유지 결정 및 K 실기기 검수의 좁은 사용성 보완이며 운영 HOLD는 유지한다.

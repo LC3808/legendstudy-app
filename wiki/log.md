@@ -5123,3 +5123,8 @@ Owner 기능 PASS 인정/품질·운영 HOLD. 기존 TEST 결과6경로·로그�
 [기존 DB/시험별 판정·수학 문서/사진 보정·신규 WEB E2E·실기기·운영 차단](task16k-beta-activation-20261103.md). 운영363시험/1014문항, Math50개 기존 연결 확인. WEB TEST e1e8095/c36d5cf1, 신규Q1/Q2 OCR2·평가4, 최초1/무료0/다음1·동일키 원장 불변, History/공개 제어 확인. iPhone12ProMax 저장 결과/공통 데이터 PASS, 정상 Profile 설치 후 Owner 로그인 실패 보고, SDK 세션 인계 추가 검증. WEB1599/Native13 PASS. 실제 촬영 전체·OCR/해설 품질·운영RPC/beta 연결은 남아 NOT_READY/HOLD. 운영 변경0, 기존1.0.1(41)보존. 수리scope0은 데이터 부재가 아닌 Owner 공개정책임을 J에 정정.
 
 K Owner 로그인 후속: drive 기본 teardown의 TEST 앱 uninstall이 세션을 삭제했음. --keep-app-running·실제 AppBootstrap/SDK 검사 후 정상 Profile 설치/재실행에서도 TEST 세션 유지 확인. 사용자 암호·운영 Auth 변경0, Owner 홈/사진 확인 대기.
+
+
+## 2026-11-03 — TASK16-K Owner 크롭 불편 개선
+
+Owner iPhone 로그인 후 사진 자르기 완료 확인(전체 실기기 평가 PASS 아님). 기존 인문 APP c61a898 드래그 핸들/미리보기 재사용, Math 슬라이더 제거·회전/원본 복원 유지·원본 비교. 18테스트/analyze/Profile 빌드·별도 TEST 설치 PASS, Provider0/운영변경0. 새 사용성 Owner 확인 대기. [원인·재사용 출처·검증 범위](task16k-beta-activation-20261103.md#owner-실기기-사진-검수-후속--인문논술-자르기-방식-재사용). F 디자인 유지/K 실기기 검수 보완, 운영 HOLD.

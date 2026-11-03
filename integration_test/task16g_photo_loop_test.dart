@@ -220,7 +220,8 @@ void main() {
           await tap('오른쪽으로 90° 회전');
           await tap('원본으로 되돌리기');
           await binding.takeScreenshot('new-photo-${i + 1}-correction');
-          await tap('보정 사본 적용');
+          await tap('적용');
+          await tap('첨부하기');
           await until(() => find.text('사진 저장 중').evaluate().isEmpty);
         }
       }
