@@ -5541,3 +5541,8 @@ Release42/iPhone12ProMax 완전 종료·재실행 후 홈·MY 동일 계정 유�
 ## 2026-11-03 — 후보 A MY 정보·누락 안내 Owner PASS
 
 Release42/iPhone12ProMax에서 기존 정보 정상·빠진 정보만 안내 확인. 학교 검색/저장·완성 계정 카드 숨김·신규 온보딩은 별도 검수. [근거](app-release-integration-20261103.md#후보-a-my-누락-안내-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
+
+
+## 2026-11-03 — 후보 A 학교 검색 Owner PASS
+
+Release42/iPhone12ProMax MY 학교 검색·카드·선택 확인 버튼 정상 응답 기록. 실제 프로필 저장/신규 온보딩은 미검증. [근거](app-release-integration-20261103.md#후보-a-학교-검색-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.

@@ -8,7 +8,7 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - 후보 A: 지정 온보딩 V2 `30edf235` 병합, Kakao 시스템 인증 수정 `2c3ce78` 재사용, MY 미설정 안내 포함.
 - Flutter Analyze PASS; 전체 1,356 PASS / 7 SKIP. iOS 1.0.1(42) signed Archive/IPA 및 Android42 signed AAB PASS.
 - 바이너리 Supabase/Google 설정 포함, Apple entitlement/서명 확인. Store 업로드/재제출 없음.
-- 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색/저장·신규 온보딩·다른 로그인 방식은 검수 대기.
+- 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색·카드·선택 확인 버튼도 Owner PASS. 실제 프로필 저장·신규 온보딩·다른 로그인 방식·기존 자료/LAB 조회는 검수 대기.
 - 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, Analyze 및 전체1,383 PASS/7 SKIP. signed iOS43 Archive/IPA·Android43 AAB PASS. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
 - TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 지시로 A42 Release 설치·실행 및 Kakao 기본 흐름 검수 완료. B 실기기 검수 대기.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
