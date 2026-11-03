@@ -1,0 +1,63 @@
+# 후보 B 실기기·WEB 검수
+
+기준일: 2026-11-03 KST. Owner의 “A 검수 보고서 작성, B 실기기 및 WEB 검수 시작” 요청에 따른 기록.
+
+후보 A의 확정된 검수는 [ChatGPT 전달용 A 보고서](app-candidate-a-owner-qa-report-20261103.md)로 분리한다. 후보 B는 **TEST 검수 진행 중 / 전체 출시 HOLD**다. 이번 자동 검사·설치·저장 결과 조회를 실제 신규 사진 전체 E2E PASS로 확대하지 않는다.
+
+## 검수 빌드와 격리
+
+- 브랜치 `codex/app-review-candidate-b-20261103`, 실행 소스 기준 `82373a1`. 이번 작업은 검수 및 문서 기록이며 제품 코드 변경 없음.
+- 최신 통합 소스 Flutter 전체 **1,402 PASS / 7 SKIP**, Analyze **No issues found**. 이전 B43의 1,383 PASS와 최신 온보딩 통합 후 결과를 구분한다.
+- iPhone 12 Pro Max에 **LS Math TEST 1.0.1(49)** signed Release 설치·실행 성공. 실제 설치 버전 49, Release AOT, 서명 확인.
+- TEST bundle `com.legendstudy.app.task16f`. 기존 정식 앱 `com.legendstudy.app` 후보 A48 및 APP41 기준선은 보존한다.
+- 런타임은 기존 격리 TEST Supabase와 `legendstudy-task16b.pages.dev`. 바이너리의 TEST 연결 및 publishable 설정 포함 확인. Provider Secret·계정 비밀번호를 빌드에 추가하지 않았다.
+- TEST 전용 Info.plist/xcconfig/entitlements는 private 빌드 디렉터리에만 생성. 저장소의 정식 앱 식별자·Xcode 설정을 수정하지 않았다. TEST49는 기기 검수용이며 Store 제출 IPA가 아니다.
+- 산출물 및 검사 로그: 로컬 private 백업 `app-review-integration-20261103/candidate-b/test49/`. Browser 화면 증거는 `.codex/legendstudy-candidate-b-qa-20261103/`에 보존하며 Git에 원본 답안 이미지를 추가하지 않는다.
+
+## 이번 WEB 실제 화면 확인
+
+기존 비공개 접속 코드와 TEST 계정으로 로그인했다. 인증 제한 해제·코드 발급·비밀번호 변경은 하지 않았다. Provider 재호출·새 평가·이용권 차감 없이 기존 결과를 재사용했다.
+
+| 확인 항목 | 결과와 범위 |
+|---|---|
+| TEST 접근 | PASS — 비공개 gate 및 기존 TEST 계정 로그인 후 결과 조회 |
+| 자연계 Q1 | PASS(조회) — 원본/영역별 인식·확정 전사, 학생 수정 흔적, 기존 종합 진단 표시. OCR 정확도 전체 PASS 의미 아님 |
+| 자연계 Q2 | PASS(조회) — 개선 과제 1개, 연결 원본 영역, 기본 개념, 이미 공개한 힌트 재조회, 공개된 풀이 단계 및 History |
+| 자연계 회차 | PASS(조회) — 기존 무료 재첨삭 회차에서 Q1·Q2 결과 확인. `확정 판정 불가` 안내와 우선 과제 0개를 정답 판정으로 바꾸지 않음 |
+| 자연계 재작성 진입 | PASS(진입만) — 기존 회차에서 재작성 화면 진입, Q1·Q2 이전 답안 불러오기 및 수학 입력 준비 버튼 확인. 새 제출·다음 이용권 차감은 미실행 |
+| 상경 최초 결과 | PASS(조회) — 2026 한양 상경, Q1 Essay + Q2 Math, 2문항 완료, 문항별 결과 통합 표시 |
+| 상경 무료 재첨삭 | PASS(조회) — 기존 재첨삭의 두 문항 결과 및 완료 표시. 무료 재첨삭 현재 사용 불가/추가 첨삭 1 Credit 안내. 이번에 무료 요청을 새로 수행한 것은 아님 |
+| 해설 공개 제어 | 기존 공개 상태 조회 PASS. 이번 세션에서 미공개 결과의 서버 응답 및 새 공개 기록은 재검증하지 않음 |
+| APP↔WEB | 기존 공유 데이터 계약 재사용. 같은 Q2 evaluation 경로를 B49에 요청했으며 실제 iPhone 화면은 Owner 확인 대기 |
+
+상경 재첨삭으로 전환한 직후의 임시 `전체 문항 여부 미확인`은 자료 로딩 완료 후 `문제 1/2 · 전체 문항 첨삭 완료`로 정상 변경됐다. 지속적인 데이터 오류로 기록하지 않는다.
+
+## 화면에서 확인된 품질·사용성 문제
+
+1. **수식 표현 PARTIAL:** Q2 기존 공개 풀이 단계 7의 `b-a=10/sqrt(n), d-c=6/sqrt(n)`이 일반 텍스트로 남는다. 다른 LaTeX 구간과 함께 보이며 전체 해설 수식 표시 PASS가 아니다.
+2. **힌트 품질 PARTIAL:** Q2의 `결론과 경계 조건` 과제에 `동치 변형과 적용 조건`, `a=b ⇒ a+c=b+c`와 일반적인 조건 대조 안내가 연결된다. 문제별 수정 방향의 구체성이 부족하다. 과거 전사 누락에서 유래한 과제를 실제 우수 답안의 수학 오류로 간주하지 않는다.
+3. **History 메타데이터 PARTIAL:** 자연계 회차 목록은 `대학 정보 미제공/수리논술 회차`로 나타나고 문항 상세에는 한양2024자연오전 정보가 표시된다. 목록 식별 개선 필요.
+4. **빈 재작성 안내 UX:** 최초 빈 답안 상태에서 `첨삭 서비스 제공 예정`이 나온다. 기존 두 답안을 불러오면 수학 입력 준비로 바뀌므로 서버 활성화 실패로 판정하지 않는다. `ScopedExamSubmit`의 빈 included 분기와 실제 화면을 대조했다. 텍스트만 불러온 경우에도 준비 버튼명이 `사진에서 답안 추출하기`로 표시되어 입력 유형 안내가 부정확하다.
+5. **단독 학습 화면 재작성:** 개별 evaluation의 독립 화면에서는 이용 조건 확인 버튼이 비활성이다. 회차 History에서는 재작성 화면 진입이 가능하다. 단독 화면에서 회차 경로를 찾기 쉬운지 Owner 검수 필요.
+
+위 문제는 검수 발견 사항이다. 운영 플래그 변경·평가 엔진 수정·임의 데이터 정정으로 우회하지 않았다.
+
+## 실기기 검수 순서와 미완료
+
+1. B49에서 기존 Q2 결과 → 원본/전사 → 개선 과제 → 개념/힌트 → 공개된 풀이 → History를 우선 확인하도록 Owner에게 요청했다. 로그인 오류가 있으면 기존 TEST 세션 연결부터 복구한다.
+2. 읽기 흐름 확인 후 기존 카메라 답안의 미확정 오독을 원본과 대조하고 수정·확정한다. 불명확한 수식을 에이전트가 임의 확정하지 않는다.
+3. 자연계 실제 기기 확인→평가→무료 재첨삭→History는 이번 검수에서 아직 미완료다. 과거 카메라·크롭·OCR 복구·수정·키보드 닫기 Owner PASS를 반복하지 않는다.
+4. **Native 상경 신규 사진 제출은 기존 BLOCKED 항목**이다. 저장 결과 조회나 WEB 혼합 E2E를 Native 전체 제출 PASS로 대체하지 않는다.
+5. 운영 RPC·Provider·Registry 공개 범위 및 출시 승인은 [통합 보고서](app-release-integration-20261103.md), [TASK16-K](task16k-beta-activation-20261103.md)의 HOLD와 격차를 유지한다.
+
+## Owner WEB 검수 경로
+
+현재 Chrome 검수 탭은 기존 TEST 계정으로 열어 두었다. 기존 접속 코드 원문은 문서에 적지 않는다.
+
+- [자연계 Q1 원본·확정 전사](https://legendstudy-task16b.pages.dev/math-review/?evaluation=480055c9-1966-4067-9e78-f6792cccb360)
+- [자연계 Q2 개선 과제·힌트·공개 풀이](https://legendstudy-task16b.pages.dev/math-review/?evaluation=24fee771-ea23-4cb3-93cc-62f4aeada9a6)
+- [자연계 무료 재첨삭 회차](https://legendstudy-task16b.pages.dev/my/essays/result/?source=math&id=20ff28c3-3a18-4bc0-a5a1-faf6ffab5513)
+- [상경 최초 통합 결과](https://legendstudy-task16b.pages.dev/my/essays/result/?source=exam&id=7fd28980-cf88-4382-baf9-4434ca7556b1)
+- [상경 무료 재첨삭 통합 결과](https://legendstudy-task16b.pages.dev/my/essays/result/?source=exam&id=dd5b335f-4a08-4025-993e-c4482b7bdbf2)
+
+운영 DB/Auth/Credit/Ledger/결제/WEB/APP41 및 Store 제출은 변경하지 않았다. WEB에서 이전 답안 불러오기로 생성한 재작성 초안은 현재 브라우저 로컬 저장 범위이며 새 서버 평가를 요청하지 않았다.

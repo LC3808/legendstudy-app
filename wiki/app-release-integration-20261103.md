@@ -397,3 +397,8 @@ Owner는 Google 기존 계정의 인증 취소→재시도→홈/MY 확인→앱
 현재 확인된 실기기 범위: Kakao 시스템 인증 취소/재시도/복귀·세션, 이메일 기존 로그인·오입력 방어/재시도·세션, Apple48 온보딩·닉네임 저장·재실행, Google 기존 인증·세션, 학교/대학 검색·프로필 유지 및 기존 PDF/인문 결과 조회. 이 흐름은 중복 검수하지 않는다. 별도 미확인 범위는 Provider별 신규 가입의 상세 경우, Apple 취소/재시도, Android/iPad 실제 기기, 후보 B 수리·상경 전체 기기 흐름이다. 전체 릴리스/운영 활성화 및 Store 제출 승인으로 확대하지 않는다.
 
 이번 변경은 Wiki 검수 결과 갱신만이며 기존 자동 테스트/빌드 결과를 재사용한다. 운영 DB/Auth/Credit/Ledger/결제·WEB·APP41·Store 변경 없음.
+
+
+## 후보 A 보고서·B 검수 시작 — 2026-11-03
+
+Owner 요청으로 [ChatGPT 전달용 A 검수 보고서](app-candidate-a-owner-qa-report-20261103.md)를 분리했다. B는 [TEST49 실기기·WEB 검수 기록](app-candidate-b-device-web-qa-20261103.md)에 설치/격리/자동1402PASS/저장 결과 UI/미완료 및 Owner 경로를 기록한다. 기존 PASS를 재호출하지 않으며 A 수용이 B 출시·운영 승인을 뜻하지 않는다.

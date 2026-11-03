@@ -5605,3 +5605,8 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner가 A48 정상 온보딩의 로그인 방식을 선택지1(Apple)로 확인. Apple 로그인→온보딩·닉네임 저장→재실행 Owner PASS로 Provider 명시. Google 기존 검수 범위 구분 대기, 코드/환경 변경 없음. [상세](app-release-integration-20261103.md#a48-온보딩닉네임-실기기-owner-pass--2026-11-03).
 
 - 2026-11-03: Google 기존 계정 인증 취소·재시도·홈/MY·재실행 세션에 Owner “Google도 모두 정상 확인함”. 해당 흐름 PASS·재검수 없음. 전체 릴리스/후보B/Store 승인은 별도. [검수 범위](app-release-integration-20261103.md#google-기존-계정-인증-검수-owner-pass--2026-11-03).
+
+
+- 2026-11-03: Owner 요청으로 [ChatGPT 전달용 후보 A 검수 보고서](app-candidate-a-owner-qa-report-20261103.md) 작성. A48/Android47 산출물, Provider별 Owner PASS·자동 검사·미검증/Store HOLD를 종합. 코드/운영/제출 변경 없음.
+
+- 2026-11-03: [후보 B 실기기·WEB 검수 시작](app-candidate-b-device-web-qa-20261103.md). 최신 전체1402PASS/7SKIP·Analyze PASS, TEST49 signed Release를 LS Math TEST에 설치·실행(A48 보존). WEB 저장 결과/상경 최초·무료/자연계 재작성 진입 확인, 원시 수식·일반 힌트·History 메타데이터·빈 입력 안내 PARTIAL. Provider/차감/운영/Store 변경 없음. iPhone 결과 화면 Owner 확인 대기.
