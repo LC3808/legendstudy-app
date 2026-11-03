@@ -5610,3 +5610,7 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner 요청으로 [ChatGPT 전달용 후보 A 검수 보고서](app-candidate-a-owner-qa-report-20261103.md) 작성. A48/Android47 산출물, Provider별 Owner PASS·자동 검사·미검증/Store HOLD를 종합. 코드/운영/제출 변경 없음.
 
 - 2026-11-03: [후보 B 실기기·WEB 검수 시작](app-candidate-b-device-web-qa-20261103.md). 최신 전체1402PASS/7SKIP·Analyze PASS, TEST49 signed Release를 LS Math TEST에 설치·실행(A48 보존). WEB 저장 결과/상경 최초·무료/자연계 재작성 진입 확인, 원시 수식·일반 힌트·History 메타데이터·빈 입력 안내 PARTIAL. Provider/차감/운영/Store 변경 없음. iPhone 결과 화면 Owner 확인 대기.
+
+- 2026-11-03: B49 저장 결과 화면 표시 Owner 확인·가독성 보완 요청. Academic Purple/구조 유지, Native 본문·소제목/공식 영역/카드/버튼 간격/History 표시 보완. 화면·입력/공개 방어11검사 PASS, 전체 회귀·TEST50 Release 진행. [범위·보존 검토](app-candidate-b-device-web-qa-20261103.md#b49-owner-화면-확인가독성-보완--2026-11-03). 운영/Provider/WEB 변경 없음.
+
+- 2026-11-03: [B50 Native 가독성 수정본](app-candidate-b-device-web-qa-20261103.md#test50-빌드설치-결과) 전체1404PASS/7SKIP·집중15PASS·Analyze PASS. TEST50 Release 서명/AOT/TEST 설정·설치·launch 및 기기 버전 확인(A48 보존). Q2 결과 딥링크·Owner 간격/구분 재검수 요청. 운영/WEB/Provider/Store 변경 없음.

@@ -137,41 +137,61 @@ void main() {
       await screenshot(t, 'concepts-$scale');
     });
   }
-  testWidgets('task hints accumulate without exposing final solution', (
-    t,
-  ) async {
-    t.view.physicalSize = const Size(393, 852);
-    t.view.devicePixelRatio = 1;
-    addTearDown(t.view.resetPhysicalSize);
-    addTearDown(t.view.resetDevicePixelRatio);
-    final data = mathMobilePreviewSnapshot(), calls = <int>[];
-    await t.pumpWidget(
-      host(
-        MathTaskPage(
-          task: objects(data['tasks']).first,
-          concepts: objects(data['concepts']),
-          evaluationId: 'e',
-          onRewrite: () async {},
-          request: (a, p) async {
-            calls.add(p['level'] as int);
-            return {
-              'body': p['level'] == 1 ? 'SAFE_HINT_ONE' : 'SAFE_HINT_TWO',
-            };
-          },
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('task hints and rewrite remain reachable at $scale text', (
+      t,
+    ) async {
+      t.view.physicalSize = const Size(393, 852);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      final data = mathMobilePreviewSnapshot(), calls = <int>[];
+      var rewritten = false;
+      await t.pumpWidget(
+        host(
+          MathTaskPage(
+            task: objects(data['tasks']).first,
+            concepts: objects(data['concepts']),
+            evaluationId: 'e',
+            onRewrite: () async {
+              rewritten = true;
+            },
+            request: (a, p) async {
+              calls.add(p['level'] as int);
+              return {
+                'body': p['level'] == 1 ? 'SAFE_HINT_ONE' : 'SAFE_HINT_TWO',
+              };
+            },
+          ),
+          scale: scale,
         ),
-      ),
-    );
-    await t.pumpAndSettle();
-    await screenshot(t, 'task');
-    await t.tap(find.text('개념 힌트 보기'));
-    await t.pumpAndSettle();
-    await t.ensureVisible(find.text('해결 방향 보기'));
-    await t.tap(find.text('해결 방향 보기'));
-    await t.pumpAndSettle();
-    expect(calls, [1, 2]);
-    expect(find.text('SAFE_HINT_ONE'), findsOneWidget);
-    expect(find.text('SAFE_HINT_TWO'), findsOneWidget);
-  });
+      );
+      await t.pumpAndSettle();
+      await screenshot(t, 'task-$scale');
+      await t.scrollUntilVisible(
+        find.text('개념 힌트 보기'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await t.tap(find.text('개념 힌트 보기'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('해결 방향 보기'));
+      await t.tap(find.text('해결 방향 보기'));
+      await t.pumpAndSettle();
+      expect(calls, [1, 2]);
+      expect(find.text('SAFE_HINT_ONE'), findsOneWidget);
+      expect(find.text('SAFE_HINT_TWO'), findsOneWidget);
+      await t.scrollUntilVisible(
+        find.text('직접 풀이 수정하기'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await screenshot(t, 'task-actions-$scale');
+      await t.tap(find.text('직접 풀이 수정하기'));
+      expect(rewritten, isTrue);
+      expect(t.takeException(), isNull);
+    });
+  }
   testWidgets(
     'explicit full-solution request is required and server failure remains closed',
     (t) async {
@@ -316,65 +336,84 @@ void main() {
       });
     },
   );
-  testWidgets('full solution and history render only supplied source facts', (
-    t,
-  ) async {
-    await t.pumpWidget(
-      host(
-        const MathSolutionPage(
-          solution: {
-            'references': [
-              {
-                'origin': 'OFFICIAL',
-                'body': r'\[\frac{1}{2}+\int_0^1 x^2 dx\]',
-              },
-            ],
-            'steps': [
-              {
-                'position': 1,
-                'representation': 'W=k/l의 확률분포를 구한다.',
-                'explanation': '조건을 확인한다.',
-              },
-            ],
-            'paths': <dynamic>[],
-          },
-        ),
-      ),
-    );
-    await t.pumpAndSettle();
-    expect(t.takeException(), isNull);
-    expect(
-      find.byWidgetPredicate(
-        (w) => w is MathText && w.text == r'\(W=k/l\)의 확률분포를 구한다.',
-      ),
-      findsOneWidget,
-    );
-    await screenshot(t, 'solution');
-    await t.pumpWidget(
-      host(
-        Scaffold(
-          body: MathCoachingHistory(
-            snapshot: CoachingSnapshot(mathMobilePreviewSnapshot()),
-            request: (a, p) async => {
-              'attempts': [
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('solution and history facts remain readable at $scale text', (
+      t,
+    ) async {
+      t.view.physicalSize = const Size(393, 852);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await t.pumpWidget(
+        host(
+          const MathSolutionPage(
+            solution: {
+              'references': [
                 {
-                  'resolve_kind': 'INITIAL',
-                  'completed_at': '2026-11-02',
-                  'evaluation_state': 'COMPLETED',
-                  'exposed_hint_levels': [1, 2],
-                  'solution_revealed': true,
-                  'credit_label': '검수 예제 · 실제 차감 없음',
+                  'origin': 'OFFICIAL',
+                  'body': r'\[\frac{1}{2}+\int_0^1 x^2 dx\]',
                 },
               ],
+              'steps': [
+                {
+                  'position': 1,
+                  'representation': 'W=k/l의 확률분포를 구한다.',
+                  'explanation': '조건을 확인한다.',
+                },
+              ],
+              'paths': <dynamic>[],
             },
           ),
+          scale: scale,
         ),
-      ),
-    );
-    await t.pumpAndSettle();
-    await screenshot(t, 'history');
-    expect(find.text('전체 해설 공개됨'), findsOneWidget);
-  });
+      );
+      await t.pumpAndSettle();
+      await t.scrollUntilVisible(
+        find.text('단계 설명'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(t.takeException(), isNull);
+      expect(
+        find.byWidgetPredicate(
+          (w) => w is MathText && w.text == r'\(W=k/l\)의 확률분포를 구한다.',
+        ),
+        findsOneWidget,
+      );
+      await screenshot(t, 'solution-$scale');
+      await t.pumpWidget(
+        host(
+          Scaffold(
+            body: MathCoachingHistory(
+              snapshot: CoachingSnapshot(mathMobilePreviewSnapshot()),
+              request: (a, p) async => {
+                'attempts': [
+                  {
+                    'resolve_kind': 'INITIAL',
+                    'completed_at': '2026-11-02',
+                    'evaluation_state': 'COMPLETED',
+                    'exposed_hint_levels': [1, 2],
+                    'solution_revealed': true,
+                    'credit_label': '검수 예제 · 실제 차감 없음',
+                  },
+                ],
+              },
+            ),
+          ),
+          scale: scale,
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.scrollUntilVisible(
+        find.text('학습 안내'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await screenshot(t, 'history-$scale');
+      expect(t.takeException(), isNull);
+      expect(find.text('전체 해설 공개됨'), findsOneWidget);
+    });
+  }
   testWidgets(
     'Q2 confirmation preserves conclusion omitted by normalized math',
     (t) async {

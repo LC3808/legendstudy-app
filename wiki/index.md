@@ -34,7 +34,7 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 후보 A ChatGPT 보고 / iPhone 검수 종합: [A 검수 보고서](app-candidate-a-owner-qa-report-20261103.md).
 
-후보 B TEST49 / 실기기·WEB 검수: [설치·결과 조회·품질 문제·Owner 경로](app-candidate-b-device-web-qa-20261103.md).
+후보 B TEST49·50 / 실기기·WEB 검수·Native 가독성: [설치·결과 조회·품질 문제·Owner 경로](app-candidate-b-device-web-qa-20261103.md).
 
 APP41 심사 수정 / 온보딩 V2 / TASK16 통합 후보 A·B: [빌드·실기기·제출 게이트](app-release-integration-20261103.md).
 

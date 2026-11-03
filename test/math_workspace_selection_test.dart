@@ -58,6 +58,11 @@ void main() {
     await mount(tester, 'missing', true);
     expect(find.text('선택한 문항은 아직 수리논술 첨삭이 준비되지 않았습니다.'), findsOneWidget);
     expect(find.text('첫 문항'), findsNothing);
+    await tester.scrollUntilVisible(
+      find.text('첨삭 진행'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
     final submit = tester.widget<FilledButton>(
       find.widgetWithText(FilledButton, '첨삭 진행'),
     );

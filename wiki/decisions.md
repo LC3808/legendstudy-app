@@ -908,3 +908,8 @@ Owner는 다음 WEB/APP 업데이트의 수리·상경 베타 준비를 승인�
 ## 2026-11-03 — APP 심사 수정과 베타 확장 후보 분리
 
 Owner는 APP41을 보존한 별도 릴리스 통합을 승인했다. 후보 A는 Kakao 시스템 인증+온보딩 V2+MY 정보 보완, 후보 B는 A+수리·상경 기능이다. 기존 인문 서비스·Academic Purple 유지, A 우선 안정화, B 전체 E2E와 Owner 승인이 있어야 B 제출. 이번 승인은 운영 DB/Auth/Credit/Ledger/결제·WEB·Store 활성화가 아니다. [기존 11월 전략](#2026-11-02--november-release-and-paid-transition-priorities)과 베타11/11 종료를 유지한다. [검증·차단](app-release-integration-20261103.md).
+
+
+### 2026-11-03 — 후보 B 실기기 가독성 보완
+
+[기존 Academic Purple/F·G 구조 유지](#2026-11-02--task16-g-디자인-pass--학습-루프-통합)를 계승한다. Owner가 B49 결과 화면 표시를 확인한 뒤 가독성·버튼 간격·줄 간격·설명 강조·소제목/본문/항목 구분 보완을 요청했다. Native 표현 정리 범위로 적용하며 평가 내용·공개 정책·History·Credit 및 WEB 디자인 개편을 포함하지 않는다. [구현·검수](app-candidate-b-device-web-qa-20261103.md#b49-owner-화면-확인가독성-보완--2026-11-03). 전체 품질/출시 승인은 별도다.

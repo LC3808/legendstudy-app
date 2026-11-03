@@ -11,13 +11,13 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - Flutter Analyze PASS; 전체 1,356 PASS / 7 SKIP. iOS 1.0.1(42) signed Archive/IPA 및 Android42 signed AAB PASS.
 - 바이너리 Supabase/Google 설정 포함, Apple entitlement/서명 확인. Store 업로드/재제출 없음.
 - 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색·카드·선택 확인 버튼도 Owner PASS. 기존 PDF·인문논술 History·결과 조회·뒤로 이동도 Owner PASS. 기존 이메일 로그인·홈·MY도 Owner PASS. 이메일 재실행 세션·오입력 차단/오류 안내·정상 재시도도 Owner PASS. A48 Apple 로그인·온보딩·재실행은 아래 Owner PASS. Google 기존 계정 취소·재시도·홈/MY·재실행 세션도 Owner PASS(기존 결과 재사용). 전체 Provider별 신규 가입/기타 미확인 항목은 별도. A46 온보딩 후속 결과는 아래 참조. MY 실제 학교 저장·재실행 복원·안내 해제는 Owner PASS.
-- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, 최신 Analyze 및 전체1,402 PASS/7 SKIP. 기존 signed iOS43 Archive/IPA·Android43 AAB PASS. TEST49 signed Release를 별도 LS Math TEST에 설치·실행, 기존 A48 보존. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
+- 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, 최신 Analyze 및 전체1,404 PASS/7 SKIP. 기존 signed iOS43 Archive/IPA·Android43 AAB PASS. 가독성 보완 TEST50 signed Release를 별도 LS Math TEST에 설치·실행, 기존 A48 보존. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
 - TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 정식 빌드 지시로 후보 A42를 iPhone12ProMax에 업데이트 설치·실행 PASS. A46 온보딩 후속 결과는 아래 참조.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
 
 ## 후보 B TEST 검수 시작
 
-[실기기·WEB 검수 기록과 Owner 경로](app-candidate-b-device-web-qa-20261103.md). TEST WEB 로그인·Q1/Q2 저장 결과·원본/전사·과제/힌트/공개 풀이·상경 최초/무료 결과 조회 및 자연계 재작성 진입 확인. 새 Provider/차감 없음. 수식 일반 텍스트 잔존·일반적 힌트·목록 메타데이터·빈 입력 안내 문제는 PARTIAL. B49 iPhone 실제 화면 Owner 확인 대기; Native 혼합 신규 사진 제출 및 전체 루프 미완료, 운영 HOLD.
+[실기기·WEB 검수 기록과 Owner 경로](app-candidate-b-device-web-qa-20261103.md). TEST WEB 로그인·Q1/Q2 저장 결과·원본/전사·과제/힌트/공개 풀이·상경 최초/무료 결과 조회 및 자연계 재작성 진입 확인. 새 Provider/차감 없음. 수식 일반 텍스트 잔존·일반적 힌트·목록 메타데이터·빈 입력 안내 문제는 PARTIAL. B49 저장 결과 화면 표시 Owner 확인, 가독성·버튼/줄 간격·소제목 구분 보완 요청→Native 표현 보완·TEST50 설치/실행 및 집중15/전체1404PASS, 새 가독성 Owner 확인 대기; Native 혼합 신규 사진 제출 및 전체 루프 미완료, 운영 HOLD.
 
 ## P0 실기기 신규 발견
 

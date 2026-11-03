@@ -121,14 +121,15 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
     child: Text(
       text,
       style: const TextStyle(
-        fontSize: 19,
+        fontSize: 21,
         fontWeight: FontWeight.w700,
+        height: 1.4,
         color: AcademicPurple.ink,
       ),
     ),
   );
   Widget result() => ListView(
-    padding: const EdgeInsets.all(20),
+    padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
     children: [
       MathCard(
         tinted: true,
@@ -146,7 +147,8 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                   child: Text(
                     '이번 답안의 종합 진단',
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
                       color: AcademicPurple.primary,
                     ),
                   ),
@@ -157,19 +159,24 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
             Text(
               snapshot.diagnosis,
               style: const TextStyle(
-                fontSize: 19,
-                height: 1.55,
+                fontSize: 18,
+                height: 1.65,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 12),
             const Text(
               '공식 배점과 연결되지 않은 점수는 표시하지 않습니다.',
-              style: TextStyle(fontSize: 12, color: AcademicPurple.secondary),
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.5,
+                color: AcademicPurple.secondary,
+              ),
             ),
           ],
         ),
       ),
+      const SizedBox(height: 8),
       heading('잘한 점'),
       if (objects(snapshot.data['strengths']).isEmpty)
         const MathCard(child: Text('검증된 강점 근거가 아직 제공되지 않았습니다.')),
@@ -188,7 +195,11 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                   Expanded(
                     child: Text(
                       strength['title'] as String? ?? '풀이 과정의 강점',
-                      style: const TextStyle(fontWeight: FontWeight.w700),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        height: 1.4,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ],
@@ -198,18 +209,19 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
               if (strength['student_formula'] is String &&
                   (strength['student_formula'] as String).isNotEmpty) ...[
                 const SizedBox(height: 12),
-                const Text(
-                  '학생 답안 근거',
-                  style: TextStyle(
-                    color: AcademicPurple.secondary,
-                    fontSize: 12,
+                MathContentSection(
+                  label: '학생 답안 근거',
+                  child: MathFormulaSurface(
+                    child: MathStudentText(
+                      strength['student_formula'] as String,
+                    ),
                   ),
                 ),
-                MathStudentText(strength['student_formula'] as String),
               ],
             ],
           ),
         ),
+      const SizedBox(height: 8),
       heading('우선 개선할 부분'),
       if (snapshot.tasks.isEmpty)
         const MathCard(child: Text('현재 답안에서 우선 개선할 부분이 확인되지 않았습니다.')),
@@ -253,6 +265,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
+                          height: 1.45,
                         ),
                       ),
                     ),
@@ -265,6 +278,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
+                  runSpacing: 8,
                   children: [
                     Chip(
                       label: Text(task['importance'] as String? ?? '확인 필요'),
@@ -275,13 +289,17 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                 ),
                 if (task['student_formula'] is String &&
                     (task['student_formula'] as String).isNotEmpty)
-                  MathStudentText(task['student_formula'] as String),
-                const SizedBox(height: 8),
-                Text(
-                  task['direction'] as String? ?? '사용한 조건과 계산을 확인하세요.',
-                  style: const TextStyle(
-                    color: AcademicPurple.secondary,
-                    height: 1.5,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: MathFormulaSurface(
+                      child: MathStudentText(task['student_formula'] as String),
+                    ),
+                  ),
+                const SizedBox(height: 16),
+                MathContentSection(
+                  label: '수정 방향',
+                  child: Text(
+                    task['direction'] as String? ?? '사용한 조건과 계산을 확인하세요.',
                   ),
                 ),
               ],
@@ -292,6 +310,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
         Text(
           '추가 과제 ${snapshot.data['remaining_task_count']}개는 상세 공개 후 확인할 수 있습니다.',
         ),
+      const SizedBox(height: 8),
       FilledButton.icon(
         onPressed: busy || (!snapshot.free && !snapshot.paid) ? null : rewrite,
         icon: const Icon(Icons.edit_outlined),
@@ -321,7 +340,9 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: !widget.embedded,
+          toolbarHeight: 76 * MediaQuery.textScalerOf(context).scale(1),
           title: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -333,9 +354,12 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
               ),
               Text(
                 snapshot.data['exam_label'] as String? ?? '수리논술 첨삭 결과',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
+                  height: 1.35,
                 ),
               ),
             ],
@@ -385,16 +409,28 @@ class MathConceptList extends StatelessWidget {
         MathCard(
           child: ExpansionTile(
             tilePadding: EdgeInsets.zero,
+            shape: const Border(),
+            collapsedShape: const Border(),
             title: Text(
               c['name'] as String? ?? '개념 확인',
-              style: const TextStyle(fontWeight: FontWeight.w700),
+              style: const TextStyle(
+                fontSize: 18,
+                height: 1.4,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  MathText('\\[${c['formula'] ?? ''}\\]'),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
+                  MathContentSection(
+                    label: '핵심 공식',
+                    child: MathFormulaSurface(
+                      child: MathText('\\[${c['formula'] ?? ''}\\]'),
+                    ),
+                  ),
+                  const Divider(),
                   for (final field in const [
                     ('설명', 'description'),
                     ('적용 조건', 'condition'),
@@ -402,8 +438,11 @@ class MathConceptList extends StatelessWidget {
                     ('현재 문항과의 관계', 'relation'),
                   ])
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Text('${field.$1}\n${c[field.$2] ?? '근거 미제공'}'),
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: MathContentSection(
+                        label: field.$1,
+                        child: MathText('${c[field.$2] ?? '근거 미제공'}'),
+                      ),
                     ),
                 ],
               ),
@@ -447,7 +486,11 @@ class _MathTaskPageState extends State<MathTaskPage> {
         children: [
           Text(
             widget.task['title'] as String? ?? '풀이 단계 점검',
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+            style: const TextStyle(
+              fontSize: 24,
+              height: 1.4,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 16),
           MathCard(
@@ -464,30 +507,56 @@ class _MathTaskPageState extends State<MathTaskPage> {
                 ),
                 const SizedBox(height: 14),
                 for (final region in objects(widget.task['source_regions']))
-                  SizedBox(
-                    height: 240,
-                    child: MathSourceRegion(
-                      region: region,
-                      bytes: widget.sources['${region['artifact_id']}'],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: SizedBox(
+                      height: 240,
+                      child: MathSourceRegion(
+                        region: region,
+                        bytes: widget.sources['${region['artifact_id']}'],
+                      ),
                     ),
                   ),
-                const Text('학생이 작성한 수식'),
-                MathStudentText(
-                  widget.task['student_formula'] as String? ?? '',
+                MathContentSection(
+                  label: '학생이 작성한 수식',
+                  child: MathStudentText(
+                    widget.task['student_formula'] as String? ?? '',
+                  ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 Text(
                   widget.task['source_note'] as String? ??
                       '원본 사진은 답안 인식 확인 화면에서 대조할 수 있습니다.',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    height: 1.5,
+                    color: AcademicPurple.secondary,
+                  ),
                 ),
               ],
             ),
           ),
-          Text(
-            widget.task['description'] as String? ?? '',
-            style: const TextStyle(height: 1.6),
+          MathCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                MathContentSection(
+                  label: '점검할 내용',
+                  child: MathText(widget.task['description'] as String? ?? ''),
+                ),
+                if ((widget.task['direction'] as String? ?? '').isNotEmpty) ...[
+                  const Divider(),
+                  MathContentSection(
+                    label: '수정 방향',
+                    child: MathText(widget.task['direction'] as String),
+                  ),
+                ],
+              ],
+            ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 8),
+          Text('단계별 힌트', style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: 12),
           for (final level in [1, 2])
             if (level == 1 || hints.containsKey(1))
               MathCard(
@@ -495,13 +564,15 @@ class _MathTaskPageState extends State<MathTaskPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      level == 1 ? '개념·조건 점검' : '해결 방향',
+                      level == 1 ? '1단계 · 개념·조건 점검' : '2단계 · 해결 방향',
                       style: const TextStyle(
+                        fontSize: 17,
+                        height: 1.45,
                         color: AcademicPurple.primary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 16),
                     if (hints.containsKey(level))
                       MathText(hints[level]!)
                     else
@@ -543,6 +614,7 @@ class _MathTaskPageState extends State<MathTaskPage> {
               ),
           if (error != null)
             Text(error!, style: const TextStyle(color: AcademicPurple.error)),
+          const SizedBox(height: 8),
           OutlinedButton(
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
@@ -556,10 +628,12 @@ class _MathTaskPageState extends State<MathTaskPage> {
             ),
             child: const Text('관련 기본 개념 확인'),
           ),
+          const SizedBox(height: 12),
           FilledButton(
             onPressed: busy ? null : widget.onRewrite,
             child: const Text('직접 풀이 수정하기'),
           ),
+          const SizedBox(height: 12),
         ],
       ),
     ),
@@ -588,6 +662,8 @@ class MathSolutionPage extends StatelessWidget {
                         ? '검수된 참고 풀이'
                         : 'AI 생성 해설 · 검수되지 않음',
                     style: const TextStyle(
+                      fontSize: 18,
+                      height: 1.4,
                       color: AcademicPurple.primary,
                       fontWeight: FontWeight.w700,
                     ),
@@ -610,10 +686,24 @@ class MathSolutionPage extends StatelessWidget {
                 children: [
                   Text(
                     '풀이 ${step['position']}단계',
-                    style: const TextStyle(fontWeight: FontWeight.w700),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      height: 1.4,
+                      color: AcademicPurple.dark,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                  MathStudentText(step['representation'] as String? ?? ''),
-                  MathText(step['explanation'] as String? ?? ''),
+                  const SizedBox(height: 16),
+                  MathFormulaSurface(
+                    child: MathStudentText(
+                      step['representation'] as String? ?? '',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  MathContentSection(
+                    label: '단계 설명',
+                    child: MathText(step['explanation'] as String? ?? ''),
+                  ),
                 ],
               ),
             ),
@@ -624,8 +714,13 @@ class MathSolutionPage extends StatelessWidget {
                 children: [
                   const Text(
                     '대안 풀이 검토',
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                      fontSize: 18,
+                      height: 1.4,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
+                  const SizedBox(height: 12),
                   MathText(
                     path['explanation'] as String? ??
                         path['reason'] as String? ??
@@ -683,22 +778,52 @@ class _MathCoachingHistoryState extends State<MathCoachingHistory> {
                 children: [
                   Text(
                     row['resolve_kind'] == 'INITIAL' ? '최초 첨삭' : '수정 답안 첨삭',
-                    style: const TextStyle(fontWeight: FontWeight.w700),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      height: 1.4,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     '${row['completed_at'] ?? row['created_at'] ?? '시각 미확인'}',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      height: 1.5,
+                      color: AcademicPurple.secondary,
+                    ),
                   ),
-                  Text('상태: ${row['evaluation_state'] ?? '확인 중'}'),
-                  Text('힌트 사용: ${row['exposed_hint_levels'] ?? <int>[]}'),
-                  Text(
-                    row['solution_revealed'] == true
-                        ? '전체 해설 공개됨'
-                        : '전체 해설 비공개',
+                  const Divider(),
+                  MathContentSection(
+                    label: '첨삭 상태',
+                    child: Text('${row['evaluation_state'] ?? '확인 중'}'),
                   ),
-                  Text(row['credit_label'] as String? ?? '이용권 내역 미제공'),
-                  Text(
-                    row['progress_label'] as String? ??
-                        '개선 과제 해결 여부는 저장된 비교 결과에서 확인합니다.',
+                  const SizedBox(height: 20),
+                  MathContentSection(
+                    label: '힌트 사용',
+                    child: Text('${row['exposed_hint_levels'] ?? <int>[]}'),
+                  ),
+                  const SizedBox(height: 20),
+                  MathContentSection(
+                    label: '해설 공개 상태',
+                    child: Text(
+                      row['solution_revealed'] == true
+                          ? '전체 해설 공개됨'
+                          : '전체 해설 비공개',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  MathContentSection(
+                    label: '이용권',
+                    child: Text(row['credit_label'] as String? ?? '이용권 내역 미제공'),
+                  ),
+                  const Divider(),
+                  MathContentSection(
+                    label: '학습 안내',
+                    child: Text(
+                      row['progress_label'] as String? ??
+                          '개선 과제 해결 여부는 저장된 비교 결과에서 확인합니다.',
+                    ),
                   ),
                 ],
               ),

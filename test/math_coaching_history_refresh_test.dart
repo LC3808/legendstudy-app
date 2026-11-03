@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:legendstudy_app/features/essay/math_mobile/academic_purple.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/coaching_contract.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_coaching_screen.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_mobile_preview.dart';
@@ -64,7 +65,13 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('학습 기록'));
       await tester.pumpAndSettle();
-      expect(find.text('힌트 사용: []'), findsOneWidget);
+      Finder hintUsage(String value) => find.descendant(
+        of: find.byWidgetPredicate(
+          (w) => w is MathContentSection && w.label == '힌트 사용',
+        ),
+        matching: find.text(value),
+      );
+      expect(hintUsage('[]'), findsOneWidget);
       await tester.tap(find.text('첨삭 결과'));
       await tester.pumpAndSettle();
       final task = find.text('합성함수 미분의 적용 조건');
@@ -79,7 +86,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('학습 기록'));
       await tester.pumpAndSettle();
-      expect(find.text('힌트 사용: [1]'), findsOneWidget);
+      expect(hintUsage('[1]'), findsOneWidget);
       await tester.tap(find.text('첨삭 결과'));
       await tester.pumpAndSettle();
       final reveal = find.text('전체 풀이 및 해설 보기');

@@ -4,6 +4,8 @@ Owner TASK16-G 결정: 모바일 UI/UX PASS, 추가 디자인 개편 없음. 전
 
 2026-11-02. **Native 구현·로컬 회귀/실기기 검수 빌드 제공. 서비스 전체 완료 아님. 운영 HOLD.**
 
+후속 2026-11-03: 후보 B 실기기 Owner 요청으로 [구조를 유지한 가독성·간격·소제목 보완](app-candidate-b-device-web-qa-20261103.md#b49-owner-화면-확인가독성-보완--2026-11-03)을 진행했다. 신규 디자인 개편/서비스 전체 승인과 구분한다.
+
 ## 근거와 작업 경계
 
 Owner의 `TASK16-F_모바일_통합_최종_지시서.md` (SHA-256 `a742b31fb5d026dc57d696782fb8ffb15f1812b6fe3688ef7f5b0c34af0af169`) 전체 0–25절 및 추가 화면 이미지가 공식 명세다. 작업 브랜치는 `codex/math-scaffolding-mobile-task16f`, 별도 Codex worktree. 기존 APP 작업 폴더의 미커밋 변경과 APP 1.0.1(41) 릴리스는 변경하지 않았다. WEB UI/운영 DB/Credit/Ledger/결제/Provider 설정 변경 없음. 새 Provider 호출 0회.
