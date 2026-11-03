@@ -5622,3 +5622,5 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner B51 일반 LAB 한양대 `서비스 확인 중` 정체 신고. Native 두 상태조회가 TEST gate의 HTML401로 차단됨을 재현. TEST WEB8939034/Pages626fa92d에서 기존 JWT handler 연결·설정 보존, 실 API200·미인증 거절 확인. Native 두 provider 자동 재시도 중지·기존 오류/수동 재시도 유지. Flutter29/WEB31PASS·Analyze/type/build/Wiki PASS. TEST52 signed Release iPhone12ProMax 설치·실행(A48 보존), 일반 LAB→한양대→기존 결과 Owner 확인 대기. Provider/평가/차감/운영/Store 변경 없음. [근거·범위](app-candidate-b-device-web-qa-20261103.md#b51-lab-대학-진입-실패test-연결-수정--2026-11-03).
 
 - 2026-11-03: Owner B52 iPhone12ProMax “한양대 진입·기존 결과 조회 정상” 확인. 일반 LAB→한양대 시험 선택→기존 Q2 결과 조회 실기기 PASS, B51 진입 차단 해소. 제출 버튼 간격·동작 및 신규 사진 전체 루프는 별도 미확인. Wiki만 갱신, 재빌드/운영/Provider/차감 없음. [확인 범위](app-candidate-b-device-web-qa-20261103.md#b52-일반-lab-진입기존-결과-조회-owner-pass).
+
+- 2026-11-03: Owner B52 제출 화면 새로고침/결과 보기의 간격·역할·기존 결과 조회 “정상” 확인, 해당 실기기 PASS. 문제 텍스트 나열 질문에 MathWorkspace의 problem_statement/statement 직접 출력과 기존 PDF 뷰어 미연결 확인. 문제 원문 표시 GAP 기록, 코드/재빌드/운영/Provider/차감 변경 없음. [범위·원인](app-candidate-b-device-web-qa-20261103.md#b52-제출-버튼-owner-pass문제-본문-표시-gap).
