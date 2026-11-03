@@ -416,15 +416,22 @@ final serviceExamIdsProvider = FutureProvider.autoDispose
     });
 
 final publicServiceExamCountsProvider = FutureProvider.autoDispose
-    .family<Map<String, int>, String>((ref, owner) async {
-      final gateway = ref.watch(mathGatewayProvider(owner));
-      if (gateway == null) throw StateError('LOGIN_REQUIRED');
-      return gateway.publicServiceExamCounts();
-    });
+    .family<Map<String, int>, String>(
+      (ref, owner) async {
+        final gateway = ref.watch(mathGatewayProvider(owner));
+        if (gateway == null) throw StateError('LOGIN_REQUIRED');
+        return gateway.publicServiceExamCounts();
+      },
+      // The request is already bounded. Surface failure and let the existing
+      // retry control recover, rather than hiding auth/contract failures behind
+      // Riverpod's automatic backoff loading state.
+      retry: (_, _) => null,
+    );
 
 final publicServiceUniversitiesProvider = FutureProvider.autoDispose
     .family<Set<String>, String>(
       (ref, owner) async =>
           (await ref.watch(publicServiceExamCountsProvider(owner).future)).keys
               .toSet(),
+      retry: (_, _) => null,
     );

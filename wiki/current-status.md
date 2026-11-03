@@ -21,6 +21,8 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 
 ## P0 실기기 신규 발견
 
+B51 일반 LAB 복귀 시 한양대 `서비스 확인 중` 정체: 두 상태조회 API가 TEST gate에서 HTML401을 반환함을 확인. TEST WEB `8939034`/Pages `626fa92d`로 정확한 인증 GET 경로만 연결, 실제 두 조회200·익명/잘못된 JWT 거절·환경 설정 보존 확인. Native 실패 자동 재시도 대신 기존 오류/재시도 표시, 관련29PASS·WEB31PASS·Analyze/type/build PASS. TEST52 signed Release·iPhone 설치/실행 확인(A48 보존), 일반 LAB 진입 Owner 확인 대기. [상세](app-candidate-b-device-web-qa-20261103.md#b51-lab-대학-진입-실패test-연결-수정--2026-11-03).
+
 Owner 사진으로 학년 버튼 세로 확장→검색 버튼이 아래로 밀림→키보드 위 `다음`을 검색으로 오인하는 동선 확인. 학년 한 줄·입력창 내 검색·학교 키보드 동안 footer 숨김·미확정 검색어 이동 차단 적용. A전체1362PASS/7SKIP·Analyze PASS·집중32PASS/렌더2PASS, B집중47PASS. A45 signed iOS/Android PASS·iPhone 업데이트 설치/실행 PASS. A45 학교 검색 정상 Owner PASS. 관심 대학에서도 하단 나중에 설정 오인 보고→입력창 검색·키보드 footer숨김·미검색 단계이동 방어 적용, 전체1365PASS/7SKIP·Analyze PASS·집중42PASS·mock렌더2PASS. A46 signed iOS/Android PASS·iPhone 설치/실행 PASS. A46 대학 검색→선택→전공→완료·MY/재실행 정보 유지 Owner PASS. Owner 승인으로 마지막 선택형 닉네임 5단계 추가·기존 저장/검증 재사용. 빈값/skip은 기존 이름 보존, 집중63PASS·전체1375PASS/7SKIP·Analyze PASS·mock렌더2PASS. A47 signed iOS/Android PASS·iPhone12ProMax 설치/실행 PASS, B 집중63PASS. Owner A47 진행 문제·재빌드 요청 후 동일 기능 iOS48 Release 빌드·서명·iPhone 설치/실행 확인. Owner 직접 계정 삭제 신고 확인(에이전트 삭제 없음). A48 Apple 로그인 후 온보딩·닉네임 저장·홈/MY·재실행 유지 Owner PASS(Owner 로그인 방식1 확인). A47 원인 미확정·동일 코드 재빌드이며 Provider별 인증 matrix는 PARTIAL. 기존42 MY 학교 저장·재실행 복원·누락 안내 해제와 안내 화면 계정 유지 Owner PASS. [상세](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03).
 
 

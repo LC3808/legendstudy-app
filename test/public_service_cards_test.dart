@@ -8,6 +8,16 @@ import 'package:legendstudy_app/features/essay/math_gateway.dart';
 import 'package:legendstudy_app/features/essay/source_catalog.dart';
 import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 
+class _RecoveringStatusGateway extends Fake implements MathGateway {
+  int requests = 0;
+  @override
+  Future<Map<String, int>> publicServiceExamCounts() async {
+    requests++;
+    if (requests == 1) throw const FormatException('PUBLIC_SERVICE_STATUS');
+    return {'ready-id': 2};
+  }
+}
+
 void main() {
   final catalog = SourceCatalog([
     {'sourceUniversityId': 'held', 'universityId': 'held-id', 'name': '준비 대학'},
@@ -31,6 +41,45 @@ void main() {
       ['ready', 'ready2', 'held'],
     );
   });
+  testWidgets(
+    'real status providers expose failure without retry loading and recover on explicit retry',
+    (tester) async {
+      final gateway = _RecoveringStatusGateway();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+            mathGatewayProvider.overrideWith((ref, owner) => gateway),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(catalog: Future.value(catalog)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final retry = find.text('일시적으로 확인할 수 없습니다 · 다시 시도');
+      expect(retry, findsOneWidget);
+      expect(find.text('서비스 확인 중'), findsNothing);
+      expect(find.text('첨삭 시작하기'), findsNothing);
+      await tester.pump(const Duration(seconds: 3));
+      expect(gateway.requests, 1);
+      expect(retry, findsOneWidget);
+      await tester.tap(retry);
+      await tester.pumpAndSettle();
+      expect(gateway.requests, 2);
+      expect(retry, findsNothing);
+      expect(find.text('이용 가능한 시험 2개'), findsOneWidget);
+      expect(find.text('첨삭 시작하기'), findsOneWidget);
+      final ready = find.ancestor(
+        of: find.text('공개 대학'),
+        matching: find.byType(InkWell),
+      );
+      expect(tester.widget<InkWell>(ready).onTap, isNotNull);
+      expect(tester.takeException(), isNull);
+    },
+  );
   testWidgets(
     'loading and error are not preparing; retry uses same backend provider',
     (tester) async {

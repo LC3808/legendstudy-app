@@ -121,3 +121,26 @@ Owner는 “답안 제출 화면의 버튼 간격이 없어서 붙어 있는 것
 
 
 TEST51 산출물·검사·설치 로그는 private `app-review-integration-20261103/candidate-b/test51/`에 보존했다. Wiki handoff/diff 검사 PASS. 이번 후속의 Provider 호출·새 평가·차감은 0이며 기존 TEST 기록을 재사용한다.
+
+## B51 LAB 대학 진입 실패·TEST 연결 수정 — 2026-11-03
+
+Owner가 결과 화면을 벗어나 일반 논술 LAB으로 돌아왔을 때 한양대 카드가 `서비스 확인 중`으로 잠기는 문제를 보고했다. 제출 버튼 간격·역할의 Owner 확인은 아직 대기이며, 딥링크 결과 조회 성공을 일반 진입 성공으로 대신하지 않는다.
+
+### 확인된 원인과 수정
+
+- 실제 TEST 계정 JWT로 브라우저 cookie 없이 조회: `public-service-status`와 `service-status`는 **HTTP401 / 접속 코드 HTML**, `availability`는 **HTTP200 / 정상 Math JSON**이었다. 공개 범위·평가 Provider 실패가 아니라 Native 조회 경로가 TEST gate의 기존 API 허용 경로에서 빠져 있었다.
+- WEB `cloudflare/test-preview-access.ts`: 정확한 `legendstudy-task16b.pages.dev` 호스트의 두 GET 경로만 기존 Bearer 인증 handler로 전달한다. 실제 JWT와 시험 공개 근거 검증은 기존 handler가 수행한다. 접속 코드/Secret/환경 설정, 일반 브라우저 gate 및 운영 경로는 변경하지 않았다.
+- APP `math_gateway.dart`: 공개 대학·시험 수의 두 FutureProvider가 실패 후 자동 재시도하며 로딩을 유지하지 않도록 했다. 기존 실패 안내와 사용자의 `다시 시도`/상단 새로고침을 재사용한다. 서버에서 승인한 ID만 진입을 허용하며 하드코딩 활성화는 없다.
+- 이 변경도 위 [보존 검토 7문항](#보존-검토-7문항)을 따른다. 기존 세션·원본/전사·평가·History·공개 기록/시각·원장은 변경하지 않는다. 신규 저장·DB UPDATE·수집·과금 로직이 없다.
+
+### 검증과 TEST 배포
+
+- Native **29 PASS**: 실제 provider chain에서 오류 즉시 표시, 자동 반복 요청 없음, 명시적 재시도 후 카드 활성화; 기존 gateway/카탈로그/인문 준비중·선택 동작 포함. Analyze PASS.
+- WEB **31 PASS**: gate 경로·호스트·메서드·토큰 형태 제한, handler 인증 거절 보존, 공개 시험/문항/근거 검증, 기존 서비스 상태 계약. TypeScript 및 격리 TEST static build PASS.
+- WEB 소스 **`8939034`**, TEST Pages **`626fa92d-84f9-41d4-8f2b-5c15cc0b2308`**. 기존 `f9d0fdc7`에서 TEST만 갱신. 배포 전후 `deployment_configs` 동일성 확인, Secret/설정 재저장 없음.
+- 실제 API: Native 방식의 두 상태 조회 **200 / checked=true**, 한양대 기존 상경 시험·문항 ID 반환. Math availability도 **200**, 기존 자연2024오전 Q1/Q2 및 상경 Q2 allowlist 유지. 익명 상태 조회·사이트 접근은 **401**, 잘못된 JWT는 **checked=false**로 거절된다.
+- 시험 수 응답은 기존 전체 시험 공개 정책의 범위다. 이 변경에서 자연계 시험을 임의로 공개 목록에 추가하지 않았다. 자연계 Math 평가 경로는 기존 별도 allowlist를 유지한다.
+- Provider 새 호출·평가 요청·이용권 차감 0. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/스토어 변경 없음.
+- 실제 API 증거: private `.codex/legendstudy-candidate-b-qa-20261103/b52-live-discovery.json`.
+- TEST52 signed Release 빌드·서명·Release AOT·TEST Supabase/Pages 설정 확인 PASS. iPhone12ProMax의 별도 `LS Math TEST` 업데이트 설치·실행 및 버전52 확인, 기존 정식 A48 보존. 기존 결과 딥링크 대신 `/lab/essay` 일반 대학 목록을 열도록 요청했다. 일반 LAB → 한양대 시험 선택 → 기존 결과 조회의 Owner 확인 대기이며 실기기 PASS로 선기록하지 않는다.
+- 빌드/검사/설치/launch 로그와 바이너리 확인은 private `app-review-integration-20261103/candidate-b/test52/`에 보존. 전체 신규 사진 E2E 및 기존 B 품질·운영 HOLD는 그대로다.
