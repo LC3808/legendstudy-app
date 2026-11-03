@@ -142,5 +142,11 @@ Owner가 결과 화면을 벗어나 일반 논술 LAB으로 돌아왔을 때 한
 - 시험 수 응답은 기존 전체 시험 공개 정책의 범위다. 이 변경에서 자연계 시험을 임의로 공개 목록에 추가하지 않았다. 자연계 Math 평가 경로는 기존 별도 allowlist를 유지한다.
 - Provider 새 호출·평가 요청·이용권 차감 0. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/스토어 변경 없음.
 - 실제 API 증거: private `.codex/legendstudy-candidate-b-qa-20261103/b52-live-discovery.json`.
-- TEST52 signed Release 빌드·서명·Release AOT·TEST Supabase/Pages 설정 확인 PASS. iPhone12ProMax의 별도 `LS Math TEST` 업데이트 설치·실행 및 버전52 확인, 기존 정식 A48 보존. 기존 결과 딥링크 대신 `/lab/essay` 일반 대학 목록을 열도록 요청했다. 일반 LAB → 한양대 시험 선택 → 기존 결과 조회의 Owner 확인 대기이며 실기기 PASS로 선기록하지 않는다.
+- TEST52 signed Release 빌드·서명·Release AOT·TEST Supabase/Pages 설정 확인 PASS. iPhone12ProMax의 별도 `LS Math TEST` 업데이트 설치·실행 및 버전52 확인, 기존 정식 A48 보존. 기존 결과 딥링크 대신 `/lab/essay` 일반 대학 목록을 열도록 요청했다. 후속 Owner 응답으로 일반 LAB → 한양대 시험 선택 → 기존 결과 조회 PASS 확인(아래).
 - 빌드/검사/설치/launch 로그와 바이너리 확인은 private `app-review-integration-20261103/candidate-b/test52/`에 보존. 전체 신규 사진 E2E 및 기존 B 품질·운영 HOLD는 그대로다.
+
+### B52 일반 LAB 진입·기존 결과 조회 Owner PASS
+
+Owner가 iPhone12ProMax `LS Math TEST` 1.0.1(52)에서 “한양대 진입·기존 결과 조회 정상”이라고 확인했다. 일반 논술 LAB의 한양대 카드 → 시험 선택 → 나의 첨삭 기록의 기존 Q2 결과 조회를 **실기기 PASS**로 기록한다. B51의 대학 진입 차단은 이 검수 범위에서 해소됐다.
+
+다음은 미확인 제출 화면의 `첨삭 상태 새로고침`/`첨삭 결과 보기` 간격과 역할, 기존 결과 재조회 확인이다. 새 평가·무료 재첨삭·OCR 품질까지 PASS로 확대하지 않는다. 이번 응답 반영은 Wiki 기록이며 재빌드·서버/DB 변경은 없다.
