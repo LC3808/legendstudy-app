@@ -1,6 +1,6 @@
 # APP58·WEB — 수리·상경·사회 운영 연결 확대
 
-기준일: 2026-11-04 KST. **운영 연결 진행 중이며 실제 Provider·실기기 전체 E2E 완료 보고가 아니다.** 최신 Owner 지시에 따라 기존16시험으로 범위를 제한하지 않고 기존 Registry 전체를 재조사했다. Store 업로드·심사·게시는 Owner 직접 실행이며 Codex 실행0이다.
+기준일: 2026-11-04 KST. **운영 연결·APP58 설치는 완료했으며 실제 Provider·실기기 전체 E2E 검수는 진행 중이다.** 최신 Owner 지시에 따라 기존16시험으로 범위를 제한하지 않고 기존 Registry 전체를 재조사했다. Store 업로드·심사·게시는 Owner 직접 실행이며 Codex 실행0이다.
 
 연결 근거: [전체 Registry 감사](app58-expanded-registry-audit-20261104.md), [APP58 빌드 인계](app58-store-handoff-20261104.md), [기존 통합 보고](app-math-commerce-integration-report-20261103.md), [Owner 결정](decisions.md).
 
@@ -33,15 +33,25 @@
 
 호환 WEB을 먼저 Math HOLD로 배포했다: deployment `d8b0d2de-72aa-4ba0-ac76-a9a8fc2ddb84`, source `172c5e153b541f87689fef1918678974f8ff535a`. 이 단계는 MATH_ENABLED=false만 변경하고 기존 public211/Math99/cyclesfalse 및 모든 Secret·다른 설정을 유지했다. 홈페이지200, 인증 API의 익명401, 기존 관리 route 보존을 확인했다.
 
-최종42scope/72Math/반복사이클 연결 및 실사용 검증은 아래 후속 실행 영수증에 추가한다. APP58 소스·IPA·AAB는5b5e5a8 그대로 보존한다. 서버가 APP58의 고정 catalog50 요청에 승인된72개를 완전 반환하며 응답 배열 계약은 동일하다. 별도 엔진/시험 DB/APP 재빌드는 없다.
+최종 운영 WEB은 source `45bd519f724d11f15900f8abe60a03c0904df7b9`, Pages deployment `2a794c31-217b-42d6-81a6-d2ae79d873e7`로 배포했다. [운영 LAB](https://lab.legendstudy.com), [고정 배포](https://2a794c31.legendstudy-lab.pages.dev). 실제 배포와 현재 설정의 공개 scope212·추가 beta scope42·Math leaf72, `MATH_ENABLED=true`, `ESSAY_CONTINUOUS_CYCLES_ENABLED=true`를 확인했다. DB의 beta202시험과 자료 공개212시험은 서로 다른 범위다.
+
+Worker는 active version `d03763e8-dcf7-4644-ac59-b7440cee87d7` 100%, deployment `2ac31b16-7a28-4053-bb97-72c0f04dcb39`에서 공개 scope212 연결을 확인했다. Worker 소스나 Provider Secret은 변경하지 않았다. Pages는 허용된5개 plaintext 설정만 변경하고, Worker는 기존13개 binding을 inherit하며 공개 scope만 수정했다. 다른 binding·Secret·Preview·비환경 설정 보존 검사를 통과했다.
+
+공개 홈페이지200, 익명 availability의 `checked=false`, public-status/admin/Owner-review의 익명401을 확인했다. 이는 설정·익명 경계 스모크이며 인증 사용자 평가 성공을 의미하지 않는다. 실행 근거는 로컬 `/tmp/legendstudy-expanded-final-deployment-receipt.json`, `/tmp/legendstudy-expanded-final-worker-receipt.json`과 WEB Wiki의 운영 연결 보고서다.
+
+APP58 소스·IPA·AAB는5b5e5a8 그대로 보존한다. 서버가 APP58의 고정 catalog50 요청에 승인된72개를 완전 반환하며 응답 배열 계약은 동일하다. 별도 엔진/시험 DB/APP 재빌드는 없다. 기존 서명된 Archive의 Release AOT 앱을 iPhone12ProMax에 직접 설치했고, 설치 목록에서 본앱 `com.legendstudy.app` 1.0.1(58), 별도 LS Math TEST 1.0.1(56)을 확인했다. Store IPA·AAB 해시도 기존 영수증과 동일하다. 자동 실행은 당시 기기 잠금으로 차단됐으나, 이후 Owner가 APP58에서 인하2027자연 답안 작성 화면이 “열림”을 확인했다. **설치·해당 답안 화면 진입만 실기기 PASS**이며 전체 제출/재첨삭/History PASS는 아니다.
+
+수식 렌더러의 후속 표시 보완은 별도 검토·배포 대기 항목이다. 해당 후속 변경을 위45bd519 운영 배포에 포함된 것으로 보고하지 않는다. 평가 엔진이나 Provider 결과 변경으로 확대하지 않는다.
 
 ## 실제 검증 — 진행 중
 
 - 새 WEB + 서버 core 적용 후 Owner의 기존 성균관2026언어2교시 재첨삭 History와3문항 결과를 실제 브라우저에서 정상 조회했다. 새 Provider 호출 없이 기존 PASS를 재사용했다.
 - Owner는 현재 로그인 계정의 운영 검수를 승인했다. 일일 무료를 우선하고 추가 이용권은 최대3개만 사용한다. 테스트 기록은 실제 History/Ledger에 남기며 삭제하지 않는다.
 - 대표 신규군: 서강2026모의경제경영 Essay, 인하2027자연 Math, 중앙2026경영경제 Essay+Math. 기존 공식 문제/평가자료/예시답안을 재사용한다. 공식예시답안 평가는 실제 학생 손글씨 OCR 정확도와 구분한다.
-- 적용 직후 현재 신규 Provider/이용권 차감0. 실제 결과·사용량·차감·무료 재첨삭·교차 조회는 실행 후 기록한다.
-- APP58 실기기 설치/학습루프는 아직 미검증. 현재 iPhone12ProMax 본앱48·별도TEST56이며, 동일 Archive의 Release AOT58 앱은 서명/코드동일성 검증을 마쳐 재빌드 없이 설치할 수 있다.
+- 실제 WEB 인하2027자연 검수 시작: 대학 공식 인쇄 예시답안을 입력했고 OCR 결과10영역 중9영역이 uncertain, 잘못된 영역 좌표0건이었다. 원본 대조와 수식 표현4곳 수정을 거쳐 전사를 확정했다. 이 결과는 공식 인쇄 자료 검수이며 학생 손글씨 정확도 PASS나 수치화된 OCR 정확도 주장으로 사용하지 않는다.
+- 인하 최초 평가는 일일 beta 이용권1개 출처로 요청했다. 서강2026모의경제경영 최초 Essay 평가도 다른 이용권1개 출처로 요청한 상태다. **두 요청 모두 완료 결과·실제 Provider 성공·최종 차감은 아직 확인하지 않았다.** 견적/선택 출처와 실제 차감, 요청 접수와 완료를 구분한다.
+- 실제 평가 결과·사용량·이용권 원장·무료 재첨삭·History 재조회·APP↔WEB 교차 조회는 후속 확인 후 기록한다. 추가 이용권 최대3개 승인 범위는 그대로 유지한다.
+- APP58 설치·인하2027자연 답안 화면 진입 Owner PASS. 동일 실제 기기의 사진 제출부터 평가·무료 재첨삭·History까지는 미완료다. 이전 A48/TEST56·Simulator PASS를 전용하지 않는다.
 
 ## 검증 범위·보안·잔여 항목
 

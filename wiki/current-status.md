@@ -8,9 +8,9 @@
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.
 - 전체 데이터 READY211/NEEDS_REVIEW73/BLOCKED79. 기존160+신규42=15대학202시험464문항 연결 범위다. 신규42는 혼합26·Math15·서강Essay1. 의예9/부분승인2는 신규 전체시험 활성화 제외, 기존ID·review·자료 보존.
 - 운영 core/scope/beta/혼합전체문항 guard4개 적용·postflight PASS. 기존 보호13테이블 count/hash 동일, beta160행/캠페인 그대로 보존하고42행만 추가. Math catalog72·APP58 limit50호환, coaching/quote/continue·일일무료 출처·무료1회 반복 연결. 신규 혼합26은 일부문항 제출을 차감 전에 차단한다.
-- 호환 WEB d8b0d2de/소스172c5e1을 Math HOLD로 선배포, 기존 인문 History3문항 실조회 PASS. 최종 공개설정/Worker/WEB 연결 및 신규 Provider 실제 검수 진행 중. 운영 설정 완료를 실제 첨삭 품질 PASS로 보고하지 않는다.
-- APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 동일소스5b5e5a8의 정식1.0.1(58) iOS IPA/Archive·Android AAB 서명/실제버전/운영설정 PASS. 스토어 업로드·기기58 설치0. 산출물/해시는 종합 보고서에 기록했다.
-- 기존 APP41/58 산출물 및 A48 설치 앱·별도TEST56 보존. 운영 Auth·결제·기존 이용권/History 사실 변경0, Store업로드/제출/게시0. Owner계정 실제검수 승인: 일일무료 우선·추가최대3개, 아직 신규차감0.
+- 호환 WEB Math HOLD 선배포 후 최종 소스45bd519/Pages2a794c31 배포, Worker d03763e8 연결 완료. 실제 설정 public212/expansion42/Math72·Math/cycles=true 확인. 기존 인문 History3문항 실조회 PASS. 렌더러 후속 보완은 별도 배포 대기이며 운영 설정 완료를 실제 첨삭 품질 PASS로 보고하지 않는다.
+- APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 동일소스5b5e5a8의 정식1.0.1(58) iOS IPA/Archive·Android AAB 서명/실제버전/운영설정 PASS. 기존 Archive로 iPhone12ProMax 본앱58 설치·버전 확인, 재빌드/스토어 업로드0. 산출물/해시는 종합 보고서에 기록했다.
+- APP41/58 산출물·별도TEST56 보존, iPhone 본앱 A48→58 업데이트. 운영 Auth·결제 설정 및 기존 이력 삭제/수정0, Store업로드/제출/게시0. Owner계정 실제검수는 일일무료 우선·추가최대3개. 인하 OCR10영역/uncertain9/좌표오류0·원본 대조/표현4곳 수정 후 확정, beta1개 출처로 최초 평가 요청. 서강 Essay도 다른 이용권1개 출처로 요청 중이며 완료·실제 차감은 미확인이다.
 
 ## Owner 추가 결정 — 이용권 용어 통일
 
@@ -22,13 +22,14 @@
 
 ## 이미 확인된 실기기 범위
 
+- APP58 iPhone12ProMax 설치·실제 버전 확인, Owner가 인하2027자연 답안 작성 화면 “열림” 확인. 이 진입 범위만 PASS이며 전체 학습 루프와 별개다. [운영 연결·실제 검수](app58-expanded-production-connection-20261104.md).
 - [후보 A 검수](app-candidate-a-owner-qa-report-20261103.md): Kakao 시스템 인증 취소/재시도/홈·세션, 이메일 오류·재시도·세션, Google 기존 흐름, Apple48 온보딩·닉네임·재실행 PASS. 학교·대학·전공·MY 미설정·기존 PDF/인문 결과 조회 PASS. 모든 신규 가입 조합·iPad/Android 전체 PASS는 아님.
 - [후보 B 검수](app-candidate-b-device-web-qa-20261103.md): TEST56 전체 체크(읽힌 uncertain 포함·미인식만 제외) Owner PASS. 긴 Q1 학생 근거 펼침/접기·문단/수식·개선 과제 복귀 Owner PASS. 현재 표시 구조 수용, 추가 실제 사례로 점진 개선 확정.
 - 실제 카메라 촬영/크롭/원본 대조·전사 수정·키보드 닫기까지 확인. 동일 실제 사진의 확정→평가→무료 재첨삭→History 전체 실기기, 신규 Native 혼합 사진 전체 Provider E2E는 아직 별도다. WEB/Simulator 과거 PASS로 대체하지 않는다.
 
 ## 운영·품질 잔여
 
-OCR 부호·지수·분수·수치 정확도, 공식 근거별 힌트/완성 해설 품질, 실제 기기 전체 제출, 최종 공개 설정 후 신규 Provider 운영 스모크가 남아 있다. 미검증을 PASS로 올리지 않는다. 학습 정책은 하루1회·00KST·이월0, 유료1+무료1 반복·무료14일, 베타 종료2026-11-11 00KST를 유지한다.
+OCR 부호·지수·분수·수치 정확도, 공식 근거별 힌트/완성 해설 품질, 실제 기기 전체 제출, 진행 중인 운영 평가의 완료·이용권 원장·History 및 교차 조회 검증이 남아 있다. 미검증을 PASS로 올리지 않는다. 학습 정책은 하루1회·00KST·이월0, 유료1+무료1 반복·무료14일, 베타 종료2026-11-11 00KST를 유지한다.
 
 ## 재개·보존 경로
 

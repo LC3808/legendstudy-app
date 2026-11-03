@@ -5671,3 +5671,8 @@ Owner 승인 후 기존 SHA25660deffda SQL을 kpq 격리 TEST에 적용. migrati
 ## 2026-11-04 — 수리·상경 전체 공개 범위 재검증 및 운영 증분
 
 기존363시험/공식runtime213을 읽기 조사하여 기존160+신규42=202시험464문항 범위 확정. root가 검증된 core/scope/beta/혼합전체문항 guard를 운영 적용, 함수20/ACL·scope·기존보호13종hash 보존 PASS. 호환 WEB Math HOLD 선배포 및 기존인문 History 실조회 PASS. 최종 설정·실제 Provider/실기기 검수 진행 중, Store실행0. [실행 보고](app58-expanded-production-connection-20261104.md).
+
+
+## 2026-11-04 — 최종 운영 연결·APP58 설치 및 실제 검수 착수
+
+최종 WEB source45bd519/Pages2a794c31, Worker d03763e8 공개 scope212 연결 완료. expansion42·Math72·Math/cycles=true 및 기존 설정/Secret 보존 확인. 기존 Archive로 iPhone12ProMax 본앱58 설치·별도TEST56/Store산출물 유지, Owner 인하2027자연 답안 화면 “열림” PASS. 인하 공식 인쇄 답안 OCR10영역/uncertain9/좌표오류0, 원본 대조·표현4곳 수정 후 확정하여 beta1개 출처 최초 평가 요청. 서강 Essay도 다른 이용권1개 출처로 요청 중이며 완료·실제 차감/Provider 성공은 아직 미확인. 렌더러 후속 변경은 별도 배포 대기, Store실행0. [범위·증거·미완료](app58-expanded-production-connection-20261104.md).
