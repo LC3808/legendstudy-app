@@ -1,7 +1,10 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import '../../../core/config/app_config.dart';
 import '../domain/school.dart';
+import '../domain/school_search_policy.dart';
 
 class SchoolServiceException implements Exception {
   const SchoolServiceException();
@@ -46,7 +49,12 @@ class NeisSchoolRepository implements SchoolRepository {
     final q = query.trim();
     if (q.isEmpty) return [];
     if (q.length > 100) throw const FormatException('Search is too long.');
-    return (await _rows({'action': 'search', 'q': q})).map(_school).toList();
+    return rankSchoolResults(
+      q,
+      (await _rows({'action': 'search', 'q': schoolSearchQuery(q)}))
+          .map(_school)
+          .toList(),
+    );
   }
 
   @override

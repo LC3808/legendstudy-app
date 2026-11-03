@@ -104,3 +104,10 @@ Materials Pilot iPhone/PDF acceptance remains PASS. No school code change or fix
 attempt in this task. Investigate NEIS/profile/persistence/auth separately without
 assuming a cause. School identity is important for personalization/admissions;
 this is not merely cosmetic.
+
+## 2026-11-03 — School search V2 (APP, not deployed)
+
+[검색·카드·확인 저장 계약](onboarding-school-search-v2-20261103.md)이 기존 모든 학교급
+검색/주소 기본 노출 UX를 대체한다. 프록시/학교 lookup/급식 API/DB는 그대로다.
+고등학교 기본, 명시적 중학교 접미어, 공식 학교급 필터, 초등학교 제외 및 관련도 정렬.
+기존 100행 프록시 상한은 유지한다. Owner 실기기 검수 전 운영 배포 없음.

@@ -1,5 +1,7 @@
 # Current Status
 
+[11/3 온보딩·학교 검색 V2](onboarding-school-search-v2-20261103.md): 별도 브랜치 구현·미배포. APP41/운영 보존. 신규 빌드와 Owner 재실행·관리자 E2E 검수 필요.
+
 [관리자 학교명](admin-member-directory.md#automatic-school-name-resolution--2026-11-02): 운영 자동조회3학교PASS·프로필보존.
 
 [APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02): Owner 4종 로그인PASS; 심사 미재제출.
@@ -149,10 +151,6 @@ The [final closeout](materials-final-closeout-2026-09-27.md) supersedes the olde
 wave rollout gate. Owner device QA then Essay LAB; maintenance only for real defects.
 
 Post-Wave1 [Personalization planning](home-personalization-and-events.md#personalization-package-after-wave1--owner-direction-2026-09-27) is preserved, not implemented.
-
-## Historical: 2026-10-21 — Backend recovery gate follow-up
-
-Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
 
 [Oct22 자료 탐색 검증 이력](history/status-checkpoints.md#2026-10-22--student-material-browsing).
 

@@ -30,8 +30,9 @@ void main() {
       await t.enterText(find.byType(TextField).first, '존재하지 않는 대학');
       await t.testTextInput.receiveAction(TextInputAction.search);
       await t.pumpAndSettle();
-      expect(find.text('검색 결과가 없습니다.'), findsOneWidget);
-      expect(find.text(schoolA.name), findsOneWidget);
+      expect(find.text('검색 결과가 없어요.'), findsOneWidget);
+      expect(find.text(schoolA.name), findsNothing);
+      expect(repo.value.neisSchoolCode, schoolA.schoolCode);
       await t.ensureVisible(find.text('N수·검정고시 등'));
       await t.tap(find.text('N수·검정고시 등'));
       await t.pumpAndSettle();

@@ -15,19 +15,27 @@ import 'package:legendstudy_app/features/school/school_providers.dart';
 // Phase 1.1 restyle guard: the onboarding visuals changed but the FUNCTION must
 // not. These tests exercise the flow through the redesigned widgets.
 class _Repo implements ProfileRepository {
+  UserProfile? initial;
   String? status;
   int? grade;
   bool clearedGrade = false;
   bool completed = false;
   int upserts = 0;
+  int schoolWrites = 0;
+  bool failWrite = false;
   @override
   Future<UserProfile?> fetchCurrentProfile() async =>
-      const UserProfile(id: 'u1');
+      initial ??
+      UserProfile(id: 'u1', academicStatus: status, gradeLevel: grade);
   @override
   Future<void> updateSchoolSelection({
     String? officeCode,
     String? schoolCode,
-  }) async {}
+  }) async {
+    if (failWrite) throw StateError('offline');
+    schoolWrites++;
+  }
+
   @override
   Future<void> upsertCurrentProfile({
     String? displayName,
@@ -36,9 +44,12 @@ class _Repo implements ProfileRepository {
     String? academicStatus,
     bool clearAcademicStatus = false,
   }) async {
+    if (failWrite) throw StateError('offline');
     upserts++;
-    status = academicStatus;
-    grade = gradeLevel;
+    if (academicStatus != null) status = academicStatus;
+    if (gradeLevel != null || clearGrade) {
+      grade = clearGrade ? null : gradeLevel;
+    }
     clearedGrade = clearGrade;
   }
 
@@ -196,7 +207,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(repo.grade, 2);
         expect(repo.status, 'student');
-        expect(repo.upserts, 1);
+        expect(repo.upserts, greaterThanOrEqualTo(2));
         expect(repo.completed, isTrue);
         expect(tester.takeException(), isNull);
       },
@@ -351,7 +362,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('레전드고등학교'));
     await tester.pumpAndSettle();
-    expect(find.text('선택한 학교'), findsOneWidget);
+    expect(find.text('선택한 학교'), findsNothing);
+    expect(find.text('선택 해제'), findsNothing);
+    expect(find.text('이 학교로 설정하기'), findsOneWidget);
     expect(find.text('레전드고등학교'), findsWidgets);
   });
 
@@ -360,10 +373,82 @@ void main() {
   ) async {
     final (repo, router) = await toSchoolStep(tester, schools: _NoSchools());
     await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
     await tester.pumpAndSettle();
     expect(repo.completed, isFalse);
-    expect(repo.upserts, 0);
+    expect(repo.upserts, 1);
     expect(router.routeInformationProvider.value.uri.path, '/onboarding');
+  });
+  testWidgets('skip saves chosen status and grade but never temporary school', (
+    tester,
+  ) async {
+    final (repo, _) = await toSchoolStep(tester, schools: _OneSchool());
+    expect(repo.status, 'student');
+    await tester.tap(find.text('2학년'));
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pumpAndSettle();
+    expect(find.text('이 학교로 설정하기'), findsOneWidget);
+    expect(repo.schoolWrites, 0);
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+    expect(repo.grade, 2);
+    expect(repo.completed, isTrue);
+    expect(repo.schoolWrites, 0);
+  });
+
+  testWidgets('school confirmation waits for save and failure stays on step', (
+    tester,
+  ) async {
+    final (repo, _) = await toSchoolStep(tester, schools: _OneSchool());
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pumpAndSettle();
+    repo.failWrite = true;
+    await tester.tap(find.text('이 학교로 설정하기'));
+    await tester.pumpAndSettle();
+    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(repo.completed, isFalse);
+    expect(repo.schoolWrites, 0);
+    repo.failWrite = false;
+    await tester.tap(find.text('이 학교로 설정하기'));
+    await tester.pumpAndSettle();
+    expect(repo.schoolWrites, 1);
+    expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+  });
+
+  testWidgets('skip cannot mark complete when draft save fails', (
+    tester,
+  ) async {
+    final repo = _Repo();
+    await _mount(tester, repo, user: 'u1');
+    await tester.tap(find.text('고등학교 재학생'));
+    await tester.pumpAndSettle();
+    repo.failWrite = true;
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+    expect(repo.completed, isFalse);
+    expect(find.text('지금의 나를 알려주세요'), findsOneWidget);
+  });
+  testWidgets('resumed profile values survive an untouched skip', (
+    tester,
+  ) async {
+    final repo = _Repo()
+      ..initial = const UserProfile(
+        id: 'u1',
+        academicStatus: 'student',
+        gradeLevel: 3,
+        neisOfficeCode: 'B10',
+        neisSchoolCode: '7010001',
+      );
+    await _mount(tester, repo, user: 'u1');
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+    expect(repo.upserts, 0);
+    expect(repo.schoolWrites, 0);
+    expect(repo.completed, isTrue);
   });
 }

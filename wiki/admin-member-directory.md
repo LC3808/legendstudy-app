@@ -118,3 +118,10 @@ Actual production administrator browser: first page 강릉문성고등학교/서
 Preservation review: (1) no student fact/timestamp changed; (2) existing profile/history retained; (3) read-only metadata resolution, no destructive updates; (4) existing office/code identity; (5) no inferred outcomes; (6) public school metadata only and existing admin boundary; (7) no new statistical metric or causal claim.
 
 WEB source8a3afe3, deploymentbd8f7da4-9565-49aa-bec5-8fc8cbe69c4d. Rollback frontend to e2021b03-eccb-47b0-8993-cfd0ffd35945; additive RPC fields are backward compatible and may remain. If reverting RPC is necessary, restore the exact pre-apply function definition from the private DB backup after checking for subsequent changes. No user records need restoration. See [notice rollout](notices-system.md#production-rich-editor-rollout--2026-11-02) for shared deployment/backup evidence.
+
+## 2026-11-03 — Onboarding V2 compatibility review
+
+[APP V2](onboarding-school-search-v2-20261103.md)에서도 기존 NEIS 코드쌍과
+profiles 상태/학년 계약을 유지한다. 별도 LAB checkout 기존 표시/parsing 7 tests PASS,
+학교명 실패 경로의 프로필 쓰기 없음 확인. 관리자 소스/운영 DB 변경 없음.
+이번 APP 신규 가입·운영 관리자 반영 E2E는 Owner 검수 대기다.

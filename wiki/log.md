@@ -5326,3 +5326,18 @@ Existing notice contract extended with paragraph formatting/private image candid
 ## 2026-11-02 — 공지 편집기 운영 적용 및 학교명 자동 해결
 
 Owner 요청으로 rich notice SQL/Storage와 additive member RPC 적용, WEB8a3afe3/productionbd8f7da4 배포. 기존 공지2건/프로필/환경/Functions 보존. 실제 이미지 업로드·서식 저장/재조회/보관 및 신규3학교 자동조회PASS; WEB1572PASS/4SKIP. 모바일visual미검증·APP41텍스트호환. [공지/롤백](notices-system.md#production-rich-editor-rollout--2026-11-02), [학교명/보존검토](admin-member-directory.md#automatic-school-name-resolution--2026-11-02).
+
+
+## Historical: 2026-10-21 — Backend recovery gate follow-up
+
+Private logical DB/Storage backup and isolated service-data restore verified. Full recovery remains PARTIAL pending Vault/cron restoration; exact two Production migrations not applied. Existing contract tests reused, no app/code/Provider/Credit changes. See supabase/verification/essay_service_contracts/production-plan.md.
+
+## 2026-11-03 — Onboarding profile integrity & school search V2
+
+- 별도 `codex/onboarding-school-search-v2`, release367bfab 기반. APP41/운영/Auth/결제 보존.
+- 상태·학년 수정분 단계/skip 저장, 학교 임시선택→명시확인, 고등학교 기본/중학교 접미 판별,
+  공식학교급 필터/관련도/카드/동명 구분/Reduce Motion placeholder. MY 공통 적용.
+- 전체1328PASS/7기존SKIP, 최종대상23PASS, 분석PASS, iOS simulator debug PASS,
+  관리자7PASS, 실제NEIS8읽기PASS, 시각/위키/차이검사PASS. DB 쓰기/배포/push 없음.
+- 실계정 신규가입·재실행·관리자 E2E 및 신규 Store 빌드 Owner 대기.
+  [A–R·변경파일·복구](onboarding-school-search-v2-20261103.md). Claude d0fab09 진단 원문 보존.
