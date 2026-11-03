@@ -39,48 +39,56 @@ class _MathFormulaEditorState extends State<MathFormulaEditor> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      if (controller.text.isNotEmpty)
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: MathStudentText(controller.text),
+  Widget build(BuildContext context) => TextFieldTapRegion(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (controller.text.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: MathStudentText(controller.text),
+          ),
+        Wrap(
+          spacing: 6,
+          children: [
+            for (final item in const [
+              ('분수', r'\frac{}{}'),
+              ('지수', '^{}'),
+              ('첨자', '_{}'),
+              ('적분', r'\int_{}^{}'),
+              ('괄호', r'\left(\right)'),
+              ('부등호', r'\leq'),
+              ('±', r'\pm'),
+            ])
+              ActionChip(
+                label: Text(item.$1),
+                onPressed: widget.enabled ? () => insert(item.$2) : null,
+              ),
+          ],
         ),
-      Wrap(
-        spacing: 6,
-        children: [
-          for (final item in const [
-            ('분수', r'\frac{}{}'),
-            ('지수', '^{}'),
-            ('첨자', '_{}'),
-            ('적분', r'\int_{}^{}'),
-            ('괄호', r'\left(\right)'),
-            ('부등호', r'\leq'),
-            ('±', r'\pm'),
-          ])
-            ActionChip(
-              label: Text(item.$1),
-              onPressed: widget.enabled ? () => insert(item.$2) : null,
+        TextField(
+          controller: controller,
+          enabled: widget.enabled,
+          onTapOutside: (_) => FocusScope.of(context).unfocus(),
+          minLines: 2,
+          maxLines: 8,
+          maxLength: 10000,
+          decoration: InputDecoration(
+            labelText: widget.label,
+            suffixIcon: IconButton(
+              tooltip: '키보드 닫기',
+              icon: const Icon(Icons.keyboard_hide_outlined),
+              onPressed: () => FocusScope.of(context).unfocus(),
             ),
-        ],
-      ),
-      TextField(
-        controller: controller,
-        enabled: widget.enabled,
-        minLines: 2,
-        maxLines: 8,
-        maxLength: 10000,
-        decoration: InputDecoration(
-          labelText: widget.label,
-          helperText: '기호를 넣은 뒤 빈칸을 채워 주세요. 원문은 별도로 보존됩니다.',
+            helperText: '기호를 넣은 뒤 빈칸을 채워 주세요. 원문은 별도로 보존됩니다.',
+          ),
+          onChanged: (v) {
+            widget.onChanged(v);
+            setState(() {});
+          },
         ),
-        onChanged: (v) {
-          widget.onChanged(v);
-          setState(() {});
-        },
-      ),
-    ],
+      ],
+    ),
   );
 }
 

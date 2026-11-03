@@ -377,6 +377,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
         final match = rows.where((r) => r['leaf_id'] == selected);
         final question = match.isEmpty ? null : match.first;
         return ListView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.all(20),
           children: [
             if (inputState == null) const MathInputProgress(stage: 0),

@@ -253,6 +253,16 @@ void main() {
       await t.pumpAndSettle();
       await t.enterText(find.byType(TextField), r'e^{-x}');
       await t.pumpAndSettle();
+      expect(t.testTextInput.isVisible, isTrue);
+      await t.ensureVisible(find.byTooltip('키보드 닫기'));
+      await t.tap(find.byTooltip('키보드 닫기'));
+      await t.pumpAndSettle();
+      expect(t.testTextInput.isVisible, isFalse);
+      expect(
+        t.widget<TextField>(find.byType(TextField)).controller!.text,
+        r'e^{-x}',
+      );
+      expect(saved, 0); // Closing the keyboard does not confirm or evaluate.
       await Scrollable.ensureVisible(
         t.element(find.text('원본을 대조했고 수정한 기호·값을 확인했어요')),
         alignment: 0.3,

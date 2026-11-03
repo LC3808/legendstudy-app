@@ -1623,6 +1623,7 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
   @override
   Widget build(BuildContext context) => SafeArea(
     child: SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: const EdgeInsets.all(24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
