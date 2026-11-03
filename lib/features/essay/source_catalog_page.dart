@@ -2934,6 +2934,23 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
               .asData
               ?.value
         : null;
+    final isolatedTest = ref.watch(appConfigProvider).isolatedEssayTestEnabled;
+    final mathRows =
+        ref.watch(mathCatalogProvider(widget.owner)).asData?.value ?? [];
+    String availability(Map<String, dynamic> q) {
+      if (isolatedTest &&
+          essayServiceArea(widget.exam) == EssayServiceArea.science &&
+          mathRows.any(
+            (r) =>
+                r['essay_exam_id'] == widget.exam['dbExamId'] &&
+                r['essay_question_id'] == q['dbQuestionId'] &&
+                r['leaf_id'] is String,
+          )) {
+        return '수리논술 · 답안 확인 후 첨삭';
+      }
+      return essayQuestionAvailability(widget.exam, q, admission);
+    }
+
     final questions = (widget.exam['questions'] as List)
         .cast<Map<String, dynamic>>();
     return SafeArea(
@@ -2968,16 +2985,9 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
                 CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(q['label'] as String),
-                  subtitle:
-                      essayQuestionAvailability(
-                        widget.exam,
-                        q,
-                        admission,
-                      ).isEmpty
+                  subtitle: availability(q).isEmpty
                       ? null
-                      : Text(
-                          essayQuestionAvailability(widget.exam, q, admission),
-                        ),
+                      : Text(availability(q)),
                   value: selected.contains(q['key']),
                   onChanged: widget.rewriteRun != null
                       ? null
@@ -3162,32 +3172,17 @@ class _RoundSubmitRouter extends ConsumerWidget {
     }
     if (selected.isNotEmpty &&
         selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (onEdit != null)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppTokens.textPrimary,
-                  side: const BorderSide(color: AppTokens.majorSurfaceBorder),
-                ),
-                onPressed: onEdit,
-                child: const Text('답안 수정'),
-              ),
-            ),
-          MathExamSession(
-            key: ValueKey(
-              '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
-            ),
-            owner: owner,
-            exam: exam,
-            selected: included,
-            leaves: leaves,
-            rewriteRun: rewriteRun,
-          ),
-        ],
+      return MathExamSession(
+        key: ValueKey(
+          '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
+        ),
+        owner: owner,
+        exam: exam,
+        selected: included,
+        leaves: leaves,
+        rewriteRun: rewriteRun,
+        onEdit: onEdit,
+        onSubmittedChanged: onSubmittedChanged,
       );
     }
     return ExamSubmissionPanel(

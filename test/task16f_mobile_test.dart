@@ -7,6 +7,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/math_text.dart';
+import 'package:legendstudy_app/features/essay/math_mobile/math_answer_evidence.dart';
+import 'package:legendstudy_app/shared/widgets/shell_widgets.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/academic_purple.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/coaching_contract.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_coaching_screen.dart';
@@ -618,4 +620,223 @@ void main() {
       isNull,
     );
   });
+  for (final scale in [1.0, 2.0]) {
+    testWidgets(
+      'submission progress and structured evidence capture at $scale',
+      (t) async {
+        await t.binding.setSurfaceSize(const Size(393, 852));
+        addTearDown(() => t.binding.setSurfaceSize(null));
+        await t.pumpWidget(
+          host(
+            Scaffold(
+              appBar: AppBar(title: const Text('답안 확인')),
+              body: ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  const Text(
+                    '한양대학교 · 문제 1',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('수식과 문장을 인식하고 있어요'),
+                  const SizedBox(height: 16),
+                  const StepProgressBar(
+                    steps: ['답안 준비', '입력 인식', '내용 확인'],
+                    activeIndex: 1,
+                    activeColor: AcademicPurple.primary,
+                    trackColor: AcademicPurple.emphasis,
+                  ),
+                ],
+              ),
+            ),
+            scale: scale,
+          ),
+        );
+        await t.pump(const Duration(milliseconds: 400));
+        await screenshot(t, 'b54-progress-$scale');
+        expect(t.takeException(), isNull);
+        await t.pumpWidget(
+          host(
+            Scaffold(
+              appBar: AppBar(title: const Text('첨삭 결과')),
+              body: ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  const Text(
+                    '잘한 점',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 16),
+                  const MathCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          '타당한 풀이 단계의 유지',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        Text('학생이 확인한 답안에서 풀이 과정을 확인해 보세요.'),
+                        SizedBox(height: 16),
+                        MathContentSection(
+                          label: '학생 답안 근거',
+                          child: MathAnswerEvidence(
+                            '문제 1\ni) a > 0, r < 0일 때\n'
+                            r'\(a_n = ar^{n-1}\)'
+                            '\n'
+                            '주어진 조건을 적용한다.\n'
+                            r'\[\frac{a}{1-r}=200\]'
+                            '\n'
+                            r'\[r=-\frac{1}{6}\]'
+                            '\n'
+                            'ii) a < 0, r > 0일 때\n'
+                            r'\[a_n=-ar^{n-1}\]'
+                            '\n'
+                            '부호와 조건을 다시 대조한다.\n마지막 문장',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Text(
+                    '우선 개선할 부분',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
+            scale: scale,
+          ),
+        );
+        await t.pumpAndSettle();
+        await screenshot(t, 'b54-evidence-collapsed-$scale');
+        await t.ensureVisible(find.text('답안 근거 전체 보기'));
+        await t.tap(find.text('답안 근거 전체 보기'));
+        await t.pumpAndSettle();
+        await screenshot(t, 'b54-evidence-expanded-$scale');
+        expect(t.takeException(), isNull);
+      },
+    );
+  }
+  for (final uncertain in [false, true]) {
+    testWidgets(
+      'bulk recognition confirmation keeps final consent and uncertainty gate: $uncertain',
+      (t) async {
+        await t.binding.setSurfaceSize(const Size(393, 852));
+        addTearDown(() => t.binding.setSurfaceSize(null));
+        var saves = 0;
+        await t.pumpWidget(
+          host(
+            Scaffold(
+              body: SingleChildScrollView(
+                child: MathRecognitionPanel(
+                  regions: [
+                    {'id': 'a', 'raw_text': 'x=1', 'uncertain': false},
+                    {
+                      'id': 'b',
+                      'raw_text': uncertain ? 'e^{?}' : 'r=-1/6',
+                      'uncertain': uncertain,
+                    },
+                  ],
+                  onConfirm: (_) async {
+                    saves++;
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+        await t.pumpAndSettle();
+        await t.ensureVisible(find.text('전체 내용 확인'));
+        await t.tap(find.text('전체 내용 확인'));
+        await t.pumpAndSettle();
+        var checks = t
+            .widgetList<CheckboxListTile>(find.byType(CheckboxListTile))
+            .toList();
+        expect(checks[0].value, isTrue);
+        expect(checks[1].value, !uncertain);
+        expect(checks.last.value, isFalse);
+        expect(saves, 0);
+        expect(
+          t
+              .widget<FilledButton>(
+                find.widgetWithText(FilledButton, '답안 입력 완료'),
+              )
+              .onPressed,
+          isNull,
+        );
+        if (!uncertain) {
+          await t.ensureVisible(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));
+          await t.tap(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));
+          await t.pumpAndSettle();
+          expect(
+            t
+                .widget<FilledButton>(
+                  find.widgetWithText(FilledButton, '답안 입력 완료'),
+                )
+                .onPressed,
+            isNotNull,
+          );
+          // A correction invalidates its individual check and the final consent.
+          await t.ensureVisible(find.text('전사 내용 수정').first);
+          await t.tap(find.text('전사 내용 수정').first);
+          await t.pumpAndSettle();
+          await t.enterText(find.byType(TextField).first, 'x=2');
+          await t.pumpAndSettle();
+          checks = t
+              .widgetList<CheckboxListTile>(find.byType(CheckboxListTile))
+              .toList();
+          expect(checks.first.value, isFalse);
+          expect(checks.last.value, isFalse);
+        } else {
+          expect(checks.last.onChanged, isNull);
+        }
+        expect(saves, 0);
+        expect(t.takeException(), isNull);
+      },
+    );
+  }
+  const storedEvidence = String.fromEnvironment('MATH_STORED_COACHING');
+  if (capture && storedEvidence.isNotEmpty) {
+    testWidgets('stored Hanyang evidence renders without new Provider calls', (
+      t,
+    ) async {
+      await t.binding.setSurfaceSize(const Size(393, 852));
+      addTearDown(() => t.binding.setSurfaceSize(null));
+      final saved = jsonDecode(
+        File(storedEvidence).readAsStringSync(),
+      ) as Map<String, dynamic>;
+      final evidence =
+          (saved['strengths'] as List).first['student_formula'] as String;
+      expect(mathAnswerBlocks(evidence).join(), evidence);
+      await t.pumpWidget(
+        host(
+          Scaffold(
+            appBar: AppBar(title: const Text('학생 답안 근거')),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: MathAnswerEvidence(evidence),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      await screenshot(t, 'b54-stored-hanyang-collapsed');
+      await t.tap(find.text('답안 근거 전체 보기'));
+      await t.pumpAndSettle();
+      await screenshot(t, 'b54-stored-hanyang-expanded');
+      await t.scrollUntilVisible(
+        find.text('답안 근거 접기'),
+        400,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(t.takeException(), isNull);
+      await t.pumpAndSettle();
+      expect(find.text('답안 근거 접기').hitTestable(), findsOneWidget);
+      await screenshot(t, 'b54-stored-hanyang-end');
+    });
+  }
 }

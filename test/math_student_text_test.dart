@@ -51,10 +51,11 @@ void main() {
         );
         expect(
           tester
-              .widget<MathText>(find.byType(MathText))
-              .text
-              .replaceAll(r'\[', '')
-              .replaceAll(r'\]', ''),
+              .widgetList<MathText>(find.byType(MathText))
+              .map(
+                (part) => part.text.replaceAll(r'\[', '').replaceAll(r'\]', ''),
+              )
+              .join('\n'),
           source,
         );
         expect(tester.takeException(), isNull);

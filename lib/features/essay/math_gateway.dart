@@ -31,19 +31,21 @@ void requireMathExtractionResult(Map<String, dynamic> input) {
       (input['candidate_regions'] as List? ?? []).isNotEmpty) {
     return;
   }
-  throw StateError(state == 'FAILED'
-      ? 'MATH_EXTRACTION_FAILED'
-      : state == 'PROCESSING'
-      ? 'MATH_EXTRACTION_PROCESSING'
-      : 'CHECK_EXTRACTION_STATUS');
+  throw StateError(
+    state == 'FAILED'
+        ? 'MATH_EXTRACTION_FAILED'
+        : state == 'PROCESSING'
+        ? 'MATH_EXTRACTION_PROCESSING'
+        : 'CHECK_EXTRACTION_STATUS',
+  );
 }
 
 String? mathExtractionNotice(Object error) {
   if (error is! StateError) return null;
   return switch (error.message) {
-    'MATH_EXTRACTION_FAILED' => '사진은 저장됐지만 수식 인식에 실패했어요. 저장한 답안 입력 확인을 눌러 다시 시도해 주세요. 평가와 이용권 차감은 진행되지 않았습니다.',
-    'MATH_EXTRACTION_PROCESSING' => '저장한 사진의 수식을 인식하고 있어요. 잠시 후 저장한 답안 입력 확인을 눌러 결과를 확인해 주세요. 사진을 다시 올릴 필요는 없습니다.',
-    'CHECK_EXTRACTION_STATUS' => '수식 인식 상태를 확인하지 못했어요. 저장된 사진은 유지됩니다. 잠시 후 입력 상태를 다시 확인해 주세요.',
+    'MATH_EXTRACTION_FAILED' => '수식 인식에 실패했어요. 저장한 답안을 다시 확인해 주세요.',
+    'MATH_EXTRACTION_PROCESSING' => '수식을 인식하고 있어요. 잠시 후 저장한 답안을 다시 확인해 주세요.',
+    'CHECK_EXTRACTION_STATUS' => '인식 상태를 확인하지 못했어요. 저장된 사진은 유지됩니다.',
     _ => null,
   };
 }

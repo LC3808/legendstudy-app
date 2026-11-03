@@ -174,3 +174,42 @@ Owner가 한양대 답안의 원본 대조 영역이 커서 스크롤 부담이 
 검증: 관련 **25 PASS**, Flutter Analyze PASS. 기본/2배 글자의 짧은 분수·여러 줄 수식·긴 본문, 탭 동일 높이, 전체 원본 확대 후 복귀, 긴 본문 끝까지 스크롤, 전사 수정에 따른 높이 증감, 기존 UNCERTAIN/수정 후 확인 취소·Q2 결론 보존·사진/History/선택 회귀를 포함한다. 초기 검사의 이미지 디코드 대기 타이밍과 줄바꿈 없는 수식 fixture를 고쳐 실제 비동기 이미지 로딩/여러 줄 수식으로 검증했다. 화면 캡처는 Widget 예제이며 실제 OCR 정확도 재검증이 아니다.
 
 검수 화면 예제는 private `.codex/legendstudy-candidate-b-qa-20261103/b53-adaptive/`에 보존. TEST53 signed Release 빌드·서명·AOT·TEST Supabase/Pages 설정·새 adaptive widget/확대 레이블 포함 확인 PASS. iPhone12ProMax `LS Math TEST` 업데이트 설치·실행 및 버전53 확인, 기존 정식 A48 보존. 일반 LAB에서 기존 답안 대조 화면으로 진입해 높이·테두리·확대 복귀를 확인하도록 Owner에게 요청했다. 실제 iPhone 가독성/스크롤 부담은 Owner 확인 대기이며 선제 PASS로 기록하지 않는다. 산출물/로그는 private `app-review-integration-20261103/candidate-b/test53/`에 보존. Provider 추가 호출·새 평가·차감 및 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/Store 변경 없음.
+
+
+## B54 답안 확인·진행 표시·결과 근거 정리 — 2026-11-03
+
+Owner IMG_1341~1350 실제 화면에서 입력/첨삭 진행 표시 누락, 중복·모호한 버튼, `0 크레딧` 및 긴 안내, 학생 답안 근거 전문 나열을 지적했다. 기존 [인문 진행 표시 정책](app-device-followup-20261030.md)과 [Academic Purple 유지 결정](decisions.md#2026-11-02--task16-g-디자인-pass--학습-루프-통합)을 재사용한 Native 후속이다. 작업 중 Owner가 B53 대조 높이·테두리·확대 복귀 “정상”을 확인했고, 전체 내용 한 번에 체크를 추가 요청했다. **B53 해당 실기기 PASS**, OCR 정확도/전체 신규 제출 PASS 의미는 아니다.
+
+### 반영
+
+- 기존 인문 `StepProgressBar`를 재사용해 Math 경로만 Primary/Lavender를 지정한다. 사진 준비·입력 인식·내용 확인, 제출 완료·첨삭 중·결과 준비를 실제 호출/서버 상태로 표시한다. 예상 퍼센트나 시간을 생성하지 않는다. 큰 글자에서도 레이블을 줄바꿈한다. 인문 기본 색/처리 정책은 유지한다.
+- `math_session_read`와 기존 `read_input`을 foreground에서3→10→30초 간격으로 조회한다. 완료/조회 오류/백그라운드/화면 폐기 시 중지한다. 단순 폴링과 `첨삭 상태 새로고침`은 평가·차감 요청을 호출하지 않는다. 기존 request/run/evaluation ID, 응답 유실 후 같은 키로 이어가기 및 실패 문항 재처리를 유지한다.
+- `저장한 답안 확인`을 주 동작, `답안 수정`을 보조 동작으로 동일 너비/16dp 간격에 배치한다. `0 크레딧`과 불필요한 입력 과금 설명을 제거했다. 실제 이용권 사용/무료 여부는 기존 서버 quote와 제출 확인창에서 명확히 안내한다.
+- 처리 중/접수 후에는 준비 화면·선택 목록을 숨겨 중복 출력을 줄인다. 완료 시 `문제 N 첨삭 결과 보기`로 직접 기존 MathCoachingPage를 연다. 혼동되던 `새 답안 준비`는 제거하며 다음 사이클은 기존 History/수정 답안 경로를 사용한다. 미제출 답안 수정은 준비 키만 초기화하고 서버 원본·기존 기록을 삭제하지 않는다.
+- 격리 TEST의 실제 Math catalog에 연결된 자연 문항만 `수리논술 · 답안 확인 후 첨삭`으로 안내한다. 인문용 운영 보류 문구가 TEST Math 가능 상태와 함께 표시되던 충돌을 수정했다. 운영 공개 제한/Registry/RPC를 해제하지 않았다.
+- `MathStudentText`는 원래 줄·빈 문단·번호/경우 구분을 보존해 별도 줄로 렌더링한다. 여러 줄의 일반 수식이 단일 TeX로 합쳐지던 표시를 수정했다. 명시 TeX 환경/행렬/표는 분리하지 않으며, 긴 식 가로 스크롤/오류 시 원문 보존은 유지한다. `mathAnswerBlocks(...).join()`은 원문과 정확히 일치한다. 숫자·부호·조건을 수정하거나 미확정 값을 추정하지 않는다.
+- 강점의 긴 `학생 답안 근거`는 미리보기와 `답안 근거 전체 보기/접기`로 제공한다. 전체 본문·표·마지막 문장까지 펼쳐 읽을 수 있으며, 같은 원문을 요약하거나 별도 평가 결과로 생성하지 않는다. 저장된 한양대 근거 재사용 렌더 검수와 예제 캡처를 구분한다.
+- 2개 이상 인식 영역에 `전체 내용 확인` 체크를 추가했다. 원본 대조 후 일반 영역을 한 번에 체크/해제한다. `uncertain=true` 또는 불명확 기호가 남은 영역은 일괄 체크에서 제외하고 개별 대조/수정이 필요하다. 최종 동의와 `답안 입력 완료`는 별도이며, 전사 수정 시 해당 체크와 최종 동의를 취소한다. 신뢰도 수치로 원본 일치를 보장하지 않는다.
+
+### 보존 검토 7문항
+
+1. 기존 입력/평가/학생 확인 facts와 시각을 유지하며 새 사실을 합성하지 않는다.
+2. 사진·최초 OCR·확정 전사·공식 근거는 원래 저장소/ID에서 재현한다.
+3. DB UPDATE/새 migration/삭제 없음. 문단 나누기와 펼침 상태는 로컬 표시값이다.
+4. 기존 Auth owner/attempt/run/lineage 연결을 유지한다.
+5. Learning 표시만 보완하며 평가 오류를 학생의 영구 특성이나 입시 결과로 바꾸지 않는다.
+6. 새 수집·권한·전송 없음. 실제 답안/인증정보/원본 이미지를 Git에 넣지 않는다.
+7. 진행 단계는 실제 호출·서버 상태, 형식 분리는 문자열 경계다. AI 품질·완료율을 추정하거나 원본에 저장하지 않는다.
+
+### 검증 및 인계
+
+- 집중 회귀32PASS: OCR 처리 중 표시/읽기 전용 폴링, 불확실 전사 평가 차단, 일부 문항 미완료, 오류 후 수동 복구, background pause/resume, 완료 후 정지, 재시도 동일 키, 일괄 확인/최종 동의/수정 무효화, 원문 보존·표·여러 줄/긴 수식·1배/2배 레이아웃.
+- 전체 회귀/Analyze/TEST54 Release·실기기 설치 결과는 아래 최종 영수증에 기록한다. 최초 전체 실행의 유일 실패는 기존 테스트가 `MathText` 1개를 가정한 부분이며, 새 문단별 출력의 전체 원문 일치 검증으로 갱신 후 집중 회귀 통과했다. 미검증을 PASS로 숨기지 않는다.
+- 화면 캡처는 private `.codex/legendstudy-candidate-b-qa-20261103/b54/`에 보존한다. Widget 예제는 인식/평가 품질 증거가 아니고, 기존 한양대 저장 근거 렌더는 Provider 재호출이 아니다.
+- 변경: `math_exam_session.dart`, `math_gateway.dart`(안내만), `source_catalog_page.dart`, `math_text.dart`, `math_mobile/math_coaching_screen.dart`, `math_mobile/math_answer_evidence.dart`, `math_mobile/math_recognition_panel.dart`, 공통 `shell_widgets.dart`(진행 색상 옵션/줄바꿈) 및 관련 테스트.
+- Provider 추가 호출/새 평가/이용권 차감0. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/Store 변경 없음. 신규 사진 전체 실기기 루프, Native 혼합 신규 제출, 실제 OCR 의미 오류·대학별 첨삭/힌트 품질, 단독 입력 화면의 공식 문제 PDF 연결은 기존 P0/GAP으로 남는다. 이번 표현 보완을 전체 품질/출시 승인으로 확대하지 않는다.
+
+
+최종 영수증: **전체 Flutter Test1,418PASS / 기존7SKIP / 0FAIL**, Analyze0issues, Wiki handoff PASS. 기본/2배 Widget 캡처2PASS와 기존 한양대 저장 근거 렌더1PASS(끝까지 스크롤/원문 동일성 포함). 최초 전체 검사1건의 단일 위젯 가정 수정 후 전체 suite를 다시 통과했다. 이는 코드/표시 검증이며 새 Provider OCR/평가 E2E가 아니다. 저장된 한양대 근거에는 원래의 인식 손상/일반 텍스트 수식이 남아 있으며 형식 보완으로 OCR 정확도 PASS를 선언하지 않는다.
+
+TEST54 signed Release1.0.1(54) 빌드·codesign deep/strict·AOT·격리 Supabase/Pages 설정·신규 UI 코드 포함 검증 PASS. iPhone12ProMax 설치·실행/일반 LAB 열기 요청 및 설치 목록의 **LS Math TEST54 / 기존 레전드스터디+ A48** 확인. 산출물·검사 로그는 private `app-review-integration-20261103/candidate-b/test54/`. Owner에게 기존 한양대 저장 답안의 짧은 확인 버튼·일괄 확인·근거 펼침/문단 검수를 요청했다. B54 실제 가독성/진행 바 전체 사용자 검수는 아직 대기다. 운영/Store/HOLD와 기존 품질 P0는 유지한다.

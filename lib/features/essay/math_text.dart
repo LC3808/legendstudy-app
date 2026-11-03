@@ -52,6 +52,51 @@ class MathText extends StatelessWidget {
   }
 }
 
+/// Lossless layout boundaries. Never split a TeX environment/display expression
+/// or an explicit table. Joining the blocks reproduces every source character.
+List<String> mathAnswerBlocks(String text) {
+  final blocks = <String>[];
+  final token = RegExp(
+    r'\\\[|\\\]|\\\(|\\\)|(?<!\\)\$\$|(?<!\\)\$|\\begin\{[^}]+\}|\\end\{[^}]+\}|\n',
+  );
+  String? delimiter;
+  var environments = 0, start = 0;
+  bool tableLine(String line) =>
+      line.contains(' | ') ||
+      (line.trim().startsWith('|') && line.trim().endsWith('|'));
+  for (final m in token.allMatches(text)) {
+    final value = m[0]!;
+    if (value.startsWith(r'\begin')) {
+      environments++;
+      continue;
+    }
+    if (value.startsWith(r'\end')) {
+      if (environments > 0) environments--;
+      continue;
+    }
+    if (value == '\n') {
+      if (delimiter != null || environments > 0) continue;
+      final nextEnd = text.indexOf('\n', m.end);
+      final next = text.substring(m.end, nextEnd < 0 ? text.length : nextEnd);
+      final line = text.substring(start, m.start).split('\n').last;
+      if (tableLine(line) && tableLine(next)) continue;
+      blocks.add(text.substring(start, m.end));
+      start = m.end;
+    } else if (delimiter == null) {
+      delimiter = switch (value) {
+        r'\[' => r'\]',
+        r'\(' => r'\)',
+        r'\]' || r'\)' => null,
+        _ => value,
+      };
+    } else if (value == delimiter) {
+      delimiter = null;
+    }
+  }
+  if (start < text.length) blocks.add(text.substring(start));
+  return blocks.isEmpty ? [text] : blocks;
+}
+
 /// Confirmed student evidence can be a formula or a full prose transcript.
 /// Keep prose/line breaks intact; only wrap an isolated, undelimited expression.
 class MathStudentText extends StatelessWidget {
@@ -96,6 +141,32 @@ class MathStudentText extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: segments,
+      );
+    }
+    final blocks = mathAnswerBlocks(text);
+    if (blocks.length > 1) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (final block in blocks)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: MathStudentText(block.replaceFirst(RegExp(r'\r?\n$'), '')),
+            ),
+        ],
+      );
+    }
+    final marker = RegExp(
+      r'^(\s*(?:\([ivx]+\)|[ivx]+\)|\(?\d+\)|\d+\.(?=\s))\s*)([\s\S]+)$',
+    ).firstMatch(text);
+    if (marker != null) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(marker[1]!),
+          const SizedBox(width: 6),
+          Expanded(child: MathStudentText(marker[2]!)),
+        ],
       );
     }
     if (hasDelimiters) return MathText(text);

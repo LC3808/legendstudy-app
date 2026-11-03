@@ -283,11 +283,14 @@ class StepProgressBar extends StatelessWidget {
     required this.activeIndex,
     this.done = false,
     this.showActivity = true,
+    this.activeColor,
+    this.trackColor,
     super.key,
   });
   final List<String> steps;
   final int activeIndex;
   final bool done, showActivity;
+  final Color? activeColor, trackColor;
   @override
   Widget build(BuildContext context) => Semantics(
     liveRegion: true,
@@ -306,8 +309,8 @@ class StepProgressBar extends StatelessWidget {
                   height: 6,
                   decoration: BoxDecoration(
                     color: i <= activeIndex
-                        ? AppTokens.info
-                        : AppTokens.primarySoft,
+                        ? activeColor ?? AppTokens.info
+                        : trackColor ?? AppTokens.primarySoft,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
@@ -320,24 +323,30 @@ class StepProgressBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             for (var i = 0; i < steps.length; i++)
-              Text(
-                steps[i],
-                style: AppTokens.caption.copyWith(
-                  color: i == activeIndex && !done
-                      ? AppTokens.info
-                      : i <= activeIndex
-                      ? AppTokens.textPrimary
-                      : AppTokens.textTertiary,
-                  fontWeight: i == activeIndex
-                      ? FontWeight.w700
-                      : FontWeight.w400,
+              Flexible(
+                child: Text(
+                  steps[i],
+                  style: AppTokens.caption.copyWith(
+                    color: i == activeIndex && !done
+                        ? activeColor ?? AppTokens.info
+                        : i <= activeIndex
+                        ? AppTokens.textPrimary
+                        : AppTokens.textTertiary,
+                    fontWeight: i == activeIndex
+                        ? FontWeight.w700
+                        : FontWeight.w400,
+                  ),
                 ),
               ),
           ],
         ),
         if (!done && showActivity) ...[
           const SizedBox(height: AppTokens.space12),
-          const LinearProgressIndicator(minHeight: 3),
+          LinearProgressIndicator(
+            minHeight: 3,
+            color: activeColor,
+            backgroundColor: trackColor,
+          ),
         ],
       ],
     ),

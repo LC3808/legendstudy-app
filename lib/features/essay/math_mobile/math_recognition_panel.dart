@@ -45,6 +45,12 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       (r['raw_text'] as String? ?? '').trim().isNotEmpty
       ? r['raw_text'] as String
       : r['normalized_math'] as String? ?? '';
+  List<String> get bulkConfirmable => [
+    for (final r in widget.regions)
+      if (r['uncertain'] != true &&
+          !unresolvedMath(edits[id(r)] ?? original(r)))
+        id(r),
+  ];
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -166,6 +172,35 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                 ),
             ],
           ),
+        ),
+      if (widget.regions.length > 1)
+        CheckboxListTile(
+          key: const ValueKey('confirm-recognized-regions'),
+          contentPadding: EdgeInsets.zero,
+          tristate: true,
+          value:
+              bulkConfirmable.isNotEmpty &&
+                  bulkConfirmable.every(checked.contains)
+              ? true
+              : bulkConfirmable.any(checked.contains)
+              ? null
+              : false,
+          title: const Text('전체 내용 확인'),
+          subtitle: Text(
+            bulkConfirmable.length == widget.regions.length
+                ? '원본과 대조한 모든 영역을 한 번에 체크해요.'
+                : '불확실한 영역을 제외하고 체크해요. 해당 영역은 개별 확인해 주세요.',
+          ),
+          onChanged: widget.busy || bulkConfirmable.isEmpty
+              ? null
+              : (_) => setState(() {
+                  if (bulkConfirmable.every(checked.contains)) {
+                    checked.removeAll(bulkConfirmable);
+                  } else {
+                    checked.addAll(bulkConfirmable);
+                  }
+                  finalCheck = false;
+                }),
         ),
       CheckboxListTile(
         contentPadding: EdgeInsets.zero,

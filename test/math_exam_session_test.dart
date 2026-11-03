@@ -160,6 +160,9 @@ void main() {
           find.byType(MathExamSession),
           isolated ? findsOneWidget : findsNothing,
         );
+        if (isolated) {
+          expect(find.text('이 시험은 아직 첨삭을 이용할 수 없어요.'), findsNothing);
+        }
         expect(fake.submissions, isEmpty);
         expect(fake.evaluated, isEmpty);
         expect(t.takeException(), isNull);
@@ -236,10 +239,10 @@ void main() {
       }
 
       await mount();
-      await t.tap(find.text('저장한 답안 입력 확인 · 0 크레딧'));
+      await t.tap(find.text('저장한 답안 확인'));
       await t.pumpAndSettle();
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('논술 첨삭하기 · 이용권 확인'));
+      await t.tap(find.text('첨삭 요청하기'));
       await t.pumpAndSettle();
       expect(find.text('작성하지 않은 답안이 있습니다'), findsOneWidget);
       expect(fake.submissions, isEmpty);
@@ -251,14 +254,15 @@ void main() {
       await t.pumpWidget(const SizedBox());
       await t.pumpAndSettle();
       await mount();
-      await t.tap(find.text('같은 회차 처리 확인'));
+      await t.tap(find.text('접수한 첨삭 계속하기'));
       await t.pumpAndSettle();
       expect(fake.creates, 1);
       expect(fake.submissions, hasLength(2));
       expect(jsonEncode(fake.submissions[0]), jsonEncode(fake.submissions[1]));
       expect(fake.evaluated, ['e']);
-      await t.tap(find.text('같은 회차 상태 확인'));
-      await t.pumpAndSettle();
+      expect(find.text('문제 1 첨삭 결과 보기'), findsOneWidget);
+      expect(find.text('첨삭 상태 새로고침'), findsNothing);
+      expect(find.text('새 답안 준비'), findsNothing);
       expect(fake.evaluated, ['e']);
     },
   );

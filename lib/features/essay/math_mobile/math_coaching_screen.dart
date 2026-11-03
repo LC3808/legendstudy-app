@@ -1,3 +1,5 @@
+import 'math_answer_evidence.dart';
+
 import 'dart:typed_data';
 
 import 'math_recognition_panel.dart';
@@ -211,10 +213,8 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
                 const SizedBox(height: 12),
                 MathContentSection(
                   label: '학생 답안 근거',
-                  child: MathFormulaSurface(
-                    child: MathStudentText(
-                      strength['student_formula'] as String,
-                    ),
+                  child: MathAnswerEvidence(
+                    strength['student_formula'] as String,
                   ),
                 ),
               ],
