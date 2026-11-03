@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-H / WEB 수리논술 UX: [구현·실제 TEST·교차 조회·미완료](task16h-web-math-ux-20261103.md).
+
 TASK16-G 품질 마감 / TASK16-H 준비: [실제 품질·혼합형 차단·공통 계약·PC UX 명세](task16g-quality-closeout-task16h-preparation-20261103.md).
 
 TASK16-G / Mobile First 학습 루프 (WEB UX는 후속 H): [서버 공개·반복 사이클·TEST 실제 검증·미완료](task16g-learning-loop-20261102.md).

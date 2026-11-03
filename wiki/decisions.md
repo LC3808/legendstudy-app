@@ -827,3 +827,7 @@ Owner가 [TASK16-F Native UI/UX](task16f-native-math-ux-20261102.md)를 PASS 처
 ## 2026-11-03 — TASK16-G 기능 승인 / 품질 및 H 준비
 
 Owner는 `b52ab42` Simulator 신규 사진·실제 평가·무료 재첨삭·History를 기능 PASS로 인정했다. 전체 품질/운영 활성화 승인은 아니다. [Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승해 이번 H 범위는 공통 데이터 계약과 좌측 원본·중앙 결과·우측 개념/힌트/해설 PC UX 준비다. 기존 실제 결과 재사용, Provider 최소화, TEST만 사용한다. [품질·착수 조건](task16g-quality-closeout-task16h-preparation-20261103.md).
+
+## 2026-11-03 — TASK16-H WEB 구현 승인
+
+[기존 Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승하여 Owner가 G `bdfea00` 기준 WEB 구현을 승인했다. Academic Purple과 PC 원본/결과/개념 3열→2열→1열, 동일 Backend·공개·History·반복 첨삭 계약을 사용한다. 평가 엔진/운영 LAB/금융/APP 릴리스는 변경하지 않는다. OCR·품질·혼합형 PARTIAL 및 운영 HOLD는 유지한다. [구현·검증](task16h-web-math-ux-20261103.md).

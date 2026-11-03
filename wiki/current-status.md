@@ -1,6 +1,6 @@
 # Current Status
 
-[G 품질/H 준비](task16g-quality-closeout-task16h-preparation-20261103.md): 기능 Owner PASS, OCR·힌트·혼합형 GAP. H 설계 가능·운영 HOLD.
+[TASK16-H](task16h-web-math-ux-20261103.md): WEB 3/2/1열·교차조회 TEST PASS. 신규 WEB 평가·OCR·혼합형 PARTIAL, 운영 HOLD.
 
 [TASK16-F](task16f-native-math-ux-20261102.md): Native Purple·iPhone 검수 빌드, 1,141 테스트 PASS. 서버/반복 사이클 E2E 미완료·운영 HOLD.
 

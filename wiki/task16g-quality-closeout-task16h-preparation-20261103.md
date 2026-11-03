@@ -125,3 +125,7 @@ Q2 수치는 L의 초기하분포와 k의 균등분포를 정수조합/Fraction�
 검사: WEB60개 PASS(공개·수식·혼합 회차/결과·인문 경계), Native15개 PASS(320px 수식 추가 포함), disposable PG runtime131+coaching18 및 mixed 공개/힌트/History/인문 불변 PASS. 기존 PASS인 Provider를 반복하지 않았다. 최초 Native 실행의 없는 테스트 파일 지정·SQL 실행 Python의 psycopg 미설치는 올바른 기존 파일/LegendStudy venv로 정정했다. 행렬 자동 인식 실패는 숨기지 않고 5절 GAP로 기록한다. Analyze PASS, Wiki handoff 2,122링크/11,980bytes PASS, git diff --check PASS.
 
 수정 범위: 이 Wiki·index/current-status/decisions/log, `tool/audit_task16g_saved_quality.py`, `test/math_student_text_test.dart`. LAB 소스/TEST 서버 배포는 변경하지 않았다. 현재 TEST Preview `https://legendstudy-task16b.pages.dev`, backend SHA `52f62a6`/배포 `9ffd0510` 유지. 운영 DB/Credit/Ledger/결제·APP1.0.1(41) 릴리스 브랜치 변경 없음.
+
+## TASK16-H 후속
+
+Owner의 WEB 구현 승인 이후 [TASK16-H 구현·검증](task16h-web-math-ux-20261103.md)을 수행했다. G 품질 PARTIAL과 운영 HOLD를 유지하며 WEB 화면/교차조회 성공과 신규 평가 E2E를 구분한다.

@@ -40,6 +40,30 @@ void main() {
         );
         final owner = client.auth.currentUser!.id;
         final gateway = MathGateway(client, owner);
+        // TASK16-H optional cross-platform inputs. Reads only; no evaluation.
+        for (final id in (data['web_attempt_ids'] as List? ?? [])) {
+          final input = await gateway.call('math_input', 'read_input', {
+            'attempt_id': id,
+          });
+          expect(input['attempt']['attempt_id'] ?? input['attempt']['id'], id);
+          expect((input['attempt']['typed_answer'] as String).isNotEmpty, true);
+          expect(input['artifacts'], isEmpty);
+        }
+        if (data['web_revealed_evaluation'] != null) {
+          final shared = await gateway.call('math_coaching', 'read', {
+            'evaluation_id': data['web_revealed_evaluation'],
+          });
+          expect(shared['disclosed'], true);
+          expect(shared.containsKey('full_solution'), true);
+          final history = await gateway.call('math_coaching', 'history', {
+            'evaluation_id': data['web_revealed_evaluation'],
+          });
+          final current = (history['attempts'] as List).cast<Map<String, dynamic>>().singleWhere(
+            (a) => a['evaluation_id'] == data['web_revealed_evaluation'],
+          );
+          expect(current['solution_revealed'], true);
+          expect(current['exposed_hint_levels'], containsAll([1, 2]));
+        }
         final rows = await gateway.session('math_session_history', {});
         expect((rows['runs'] as List).length, greaterThanOrEqualTo(3));
         final run = await gateway.session('math_session_read', {

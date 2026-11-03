@@ -5100,3 +5100,7 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 [TASK16-G](task16g-learning-loop-20261102.md): 격리 TEST 서버 공개 제어/반복 회차 설치. 한양2024 Q1/Q2 최초·무료 실제 AI 완료, 원장1→0·공개 History 확인. 3회차 저장결과 재생으로1차감, 다음 무료 견적 검증. 저장 계약/timeout 및 TEST Secret 설정 사고 복구. Native/WEB 화면 통합 검수 중, 운영 HOLD.
 
 TASK16-G Owner 접속 코드 전달 누락 정정: 기존 TASK16-B 로컬 보관 코드/현재 gate 일치 검증, 안전한 파일 경로·2단계 접속 안내. 새 코드·인증 설정 변경 없음.
+
+## 2026-11-03 — TASK16-H TEST WEB 구현
+
+WEB6f5d726/Preview4aaecbbc: 3/2/1열·원본/전사·누적 힌트·명시 공개·기존 재작성기 연결. 전체1578PASS/4skip, 최종영향18PASS, 실제 브라우저/Simulator 교차조회PASS. WEB 입력2개 미평가 보존, 다음 견적1 확인 후 취소, Provider0/신규차감0. OCR·품질·혼합형·신규WEB평가E2E 미완료, 운영 HOLD. [상세](task16h-web-math-ux-20261103.md).
