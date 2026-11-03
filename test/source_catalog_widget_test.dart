@@ -301,8 +301,9 @@ void main() {
           ],
           child: MaterialApp(
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaler: TextScaler.linear(scale)),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(scale)),
               child: child!,
             ),
             home: SourceCatalogPage(catalog: Future.value(data)),
@@ -345,10 +346,10 @@ void main() {
       await tester.tap(find.text('답안 확인'));
       await tester.pumpAndSettle();
       expect(
-        find.textContaining('자연·공학·이학·의예논술 첨삭은 베타 공개 보류 중'),
+        find.textContaining('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.'),
         findsOneWidget,
       );
-      expect(find.text('첨삭 요청 · 1 크레딧'), findsNothing);
+      expect(find.text('첨삭 요청 · 1 이용권'), findsNothing);
       expect(tester.takeException(), isNull);
     });
   }
@@ -549,8 +550,9 @@ void main() {
             ],
             child: MaterialApp(
               builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: TextScaler.linear(scale)),
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: TextScaler.linear(scale)),
                 child: child!,
               ),
               home: SourceCatalogPage(catalog: Future.value(data)),
@@ -649,8 +651,9 @@ void main() {
           ],
           child: MaterialApp(
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaler: TextScaler.linear(scale)),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(scale)),
               child: child!,
             ),
             home: RepaintBoundary(
@@ -693,8 +696,9 @@ void main() {
                       as RenderRepaintBoundary)
                   .toImage();
           final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-          await File('/private/tmp/essay-owner-logos-$scale.png')
-              .writeAsBytes(bytes!.buffer.asUint8List());
+          await File(
+            '/private/tmp/essay-owner-logos-$scale.png',
+          ).writeAsBytes(bytes!.buffer.asUint8List());
           image.dispose();
         });
       }
@@ -888,7 +892,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('현재 크레딧 10개'), findsOneWidget);
+      expect(find.text('현재 이용권 10개'), findsOneWidget);
       expect(find.text('나의 첨삭 기록 ›'), findsOneWidget);
       expect(find.text('나의 논술 LAB'), findsNothing);
       expect(find.text('첨삭 시작하기'), findsWidgets);
@@ -898,7 +902,7 @@ void main() {
       final y = tester.getTopLeft(find.text('대학 20')).dy;
       await tester.tap(find.text('대학 20'));
       await tester.pumpAndSettle();
-      expect(find.text('현재 크레딧 10개'), findsNothing);
+      expect(find.text('현재 이용권 10개'), findsNothing);
       await tester.tap(find.byTooltip('대학 목록'));
       await tester.pumpAndSettle();
       expect(tester.getTopLeft(find.text('대학 20')).dy, closeTo(y, 1));

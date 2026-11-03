@@ -12,27 +12,27 @@ class EssayCreditSource {
   final String source;
   final int beta, signup, paid, other;
   static const labels = {
-    'beta': '일일 베타 Credit',
-    'signup_bonus': '신규가입 무료 Credit',
-    'purchase': '유료 Credit',
-    'admin_grant': '관리자 지급 Credit',
-    'promotion': '프로모션 Credit',
-    'compensation': '보상 Credit',
-    'b2b_program': '학교 지급 Credit',
+    'beta': '일일 베타 이용권',
+    'signup_bonus': '신규가입 무료 이용권',
+    'purchase': '유료 이용권',
+    'admin_grant': '관리자 지급 이용권',
+    'promotion': '프로모션 이용권',
+    'compensation': '보상 이용권',
+    'b2b_program': '학교 지급 이용권',
     'included': '무료 재첨삭',
   };
 
   /// Single-line "which Credit is being used" text for the submit confirmation,
   /// built from the server-confirmed deduction source only — never inferred.
   static const usageLabels = {
-    'beta': '베타 테스트 Credit 사용',
-    'signup_bonus': '무료 Credit 사용',
-    'purchase': '유료 Credit 사용',
-    'admin_grant': '관리자 지급 Credit 사용',
-    'promotion': '프로모션 Credit 사용',
-    'compensation': '보상 Credit 사용',
-    'b2b_program': '학교 지급 Credit 사용',
-    'included': '추가 Credit이 사용되지 않아요',
+    'beta': '베타 테스트 이용권 사용',
+    'signup_bonus': '무료 이용권 사용',
+    'purchase': '유료 이용권 사용',
+    'admin_grant': '관리자 지급 이용권 사용',
+    'promotion': '프로모션 이용권 사용',
+    'compensation': '보상 이용권 사용',
+    'b2b_program': '학교 지급 이용권 사용',
+    'included': '추가 이용권이 사용되지 않아요',
   };
   String get label => labels[source]!;
   String get usageLabel => usageLabels[source]!;

@@ -231,7 +231,7 @@ void main() {
           ),
         ),
       );
-      expect(find.text('추가 첨삭 · 1 Credit'), findsNothing);
+      expect(find.text('추가 첨삭 · 이용권 1개'), findsNothing);
       await t.tap(find.text('다시 써보기 · 무료 재첨삭'));
       expect(paid, false);
       await t.pumpWidget(
@@ -250,7 +250,7 @@ void main() {
           ),
         ),
       );
-      await t.tap(find.text('추가 첨삭 · 1 Credit'));
+      await t.tap(find.text('추가 첨삭 · 이용권 1개'));
       expect(paid, true);
     },
   );
@@ -647,7 +647,7 @@ void main() {
             ? isNotNull
             : isNull,
       );
-      expect(find.text('실패한 문항 다시 처리 · 0 Credit'), findsOneWidget);
+      expect(find.text('실패한 문항 다시 처리 · 추가 이용권 없음'), findsOneWidget);
       await t.tap(find.text('처리 상태 새로고침'));
       await t.pumpAndSettle();
       expect(find.text('아직 처리 상태에 변화가 없습니다.'), findsOneWidget);
@@ -659,7 +659,7 @@ void main() {
       await t.tap(find.text('처리 상태 새로고침'));
       await t.pumpAndSettle();
       expect(find.text('문항별 상태를 확인하지 못했어요. 다시 확인해 주세요.'), findsOneWidget);
-      expect(find.text('실패한 문항 다시 처리 · 0 Credit'), findsNothing);
+      expect(find.text('실패한 문항 다시 처리 · 추가 이용권 없음'), findsNothing);
       expect(
         gateway.calls.where((c) => c['action'] != 'availability'),
         isEmpty,
@@ -667,8 +667,8 @@ void main() {
       statusFails = false;
       await t.tap(find.text('처리 상태 새로고침'));
       await t.pumpAndSettle();
-      await t.tap(find.text('실패한 문항 다시 처리 · 0 Credit'));
-      await t.tap(find.text('실패한 문항 다시 처리 · 0 Credit'));
+      await t.tap(find.text('실패한 문항 다시 처리 · 추가 이용권 없음'));
+      await t.tap(find.text('실패한 문항 다시 처리 · 추가 이용권 없음'));
       await t.pumpAndSettle();
       expect(gateway.calls.where((c) => c['action'] == 'retry').length, 1);
       expect(find.text('실패 문항 재처리가 접수됐어요. 완료된 문항은 보존됩니다.'), findsOneWidget);
@@ -801,7 +801,7 @@ void main() {
       await t.pumpAndSettle();
       expect(find.text('아직 처리 상태에 변화가 없습니다.'), findsOneWidget);
       expect(find.byType(ProcessingGuidance), findsNothing);
-      await t.tap(find.text('실패 문항만 재처리 · 0 크레딧'));
+      await t.tap(find.text('실패 문항만 재처리 · 추가 이용권 없음'));
       await t.pump();
       await t.pump(const Duration(milliseconds: 300));
       expect(find.byType(ProcessingGuidance), findsOneWidget);
@@ -816,7 +816,7 @@ void main() {
       expect(find.text('첨삭이 완료됐어요. 저장된 결과를 확인하세요.'), findsOneWidget);
       expect(gateway.calls.length, 1);
       expect(find.byType(ProcessingGuidance), findsNothing);
-      expect(find.text('실패 문항만 재처리 · 0 크레딧'), findsNothing);
+      expect(find.text('실패 문항만 재처리 · 추가 이용권 없음'), findsNothing);
     },
   );
 

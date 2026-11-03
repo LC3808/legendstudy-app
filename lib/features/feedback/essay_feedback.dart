@@ -22,7 +22,7 @@ const bugCategories = <String, String>{
   'evaluation': '평가 실패',
   'result': '평가 결과 오류',
   'rewrite': '재첨삭 오류',
-  'credit': 'Credit 오류',
+  'credit': '이용권 오류',
   'display': '화면 표시 오류',
   'other': '기타',
 };

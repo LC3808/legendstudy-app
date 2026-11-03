@@ -5644,3 +5644,7 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner B56 `전체 내용 체크` 실기기 검수 “확인 완료 pass”. 읽힌 전체 영역 체크·미인식 번호·완료 활성화 요청 범위 PASS(소스6f31ac5, iPhone12ProMax/TEST56). 신규 평가/품질/출시 PASS 아님. 기록만 갱신, 코드·재빌드·Provider·운영 변경 없음. [확인 범위](app-candidate-b-device-web-qa-20261103.md#b56-전체-체크-owner-실기기-pass).
 
 - 2026-11-03: Owner TEST56 Q1 긴 학생 답안 근거 펼침/접기·문단/수식 가독성·개선 과제 복귀 PASS, 추가 데이터 축적 시 점진 개선 방향 확정. 이 표시 범위 검수 마감, 코드/재빌드/Provider/운영 변경 없음. 전체 품질·학습 루프·출시 PASS 아님. [범위·결정](app-candidate-b-device-web-qa-20261103.md#b56-답안-근거-가독성-owner-pass점진-개선-확정).
+
+- 2026-11-03: Owner 종합 보고·기존 서비스 통합·수리/상경 차단 해제·배포 빌드 지시. 운영 원문/설정 읽기 감사로 신규 공통RPC4개 미설치·단일 Math leaf 제한·베타 Math 제외 확인. 기존16시험46canonical문항 공식 Package runtime 조회 PASS, legacy1 보존47leaf 후보. APP 정확한 Catalog/서버 admission 및 Native 혼합 Math 확인→Essay 단일 회차 연결, 전체1431PASS/7SKIP·Analyze0·iOS57 1차 signed 빌드. 신규 이용권 출처 동의·일일 베타 연결 검증 중; 원격 적용/Provider 호출0. [종합 보고](app-math-commerce-integration-report-20261103.md).
+
+- 2026-11-03: Owner 구매 안내/약관 하단 배치와 앱 모든 크레딧/Credit의 이용권 표시 통일 확정. 내부 IAP ID/가격/서버 계약 유지, 상품1/3/5/10개. 후속 최종 회귀·동일57 재빌드 대상. [결정·실행](app-math-commerce-integration-report-20261103.md).

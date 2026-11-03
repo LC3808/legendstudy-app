@@ -206,7 +206,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'credits',
                     builder: (_, _) => const NestedPage(
-                      title: 'Credit 충전',
+                      title: '이용권 구매',
                       child: CreditPurchasePage(),
                     ),
                   ),
@@ -259,7 +259,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'credits',
                     builder: (_, _) => const NestedPage(
-                      title: '크레딧 내역',
+                      title: '이용권 내역',
                       child: CreditHistory(),
                     ),
                   ),

@@ -161,25 +161,23 @@ void main() {
       wrong.close();
     },
   );
-  test(
-    'approved catalog remains readable with evaluation gate closed',
-    () async {
-      final gateway = MathGateway(
-        client,
-        'fixture-a',
-        transport: MockClient(
-          (request) async => http.Response(
-            '{"version":"essay-web-v1","catalog":{"math":true},"types":{"math":false}}',
-            200,
-          ),
+  test('approved catalog remains readable with evaluation gate closed', () async {
+    final gateway = MathGateway(
+      client,
+      'fixture-a',
+      transport: MockClient(
+        (request) async => http.Response(
+          '{"version":"essay-web-v1","catalog":{"math":true},"types":{"math":false}}',
+          200,
         ),
-      );
-      expect(await gateway.available(), isFalse);
-      await gateway.catalog();
-      expect(calls.single.url.path, endsWith('math_catalog'));
-      gateway.close();
-    },
-  );
+      ),
+    );
+    expect(await gateway.available(), isFalse);
+    await gateway.catalog();
+    expect(calls.single.url.path, endsWith('math_catalog'));
+    expect(jsonDecode(calls.single.body)['p_limit'], 50);
+    gateway.close();
+  });
   test('RPC retries retain caller idempotency key and shared DTO', () async {
     final gateway = MathGateway(client, 'fixture-a');
     final payload = {
@@ -198,116 +196,133 @@ void main() {
     );
     gateway.close();
   });
-  test('native gateway pins origin, forbids redirects and recovers ambiguous response', () async {
-    final gateway = MathGateway(
-      client,
-      'fixture-a',
-      transport: MockClient((request) async {
-        expect(request.url.toString(), '$mathOrigin/api/math/evaluate');
-        expect(request.headers['Origin'], mathOrigin);
-        expect(request.followRedirects, false);
-        expect(jsonDecode(request.body), {'evaluation_id': 'same-evaluation'});
-        expect(request.headers['Authorization'], startsWith('Bearer '));
-        return http.Response('', 504);
-      }),
-    );
-    await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
-    gateway.close();
-    await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
-  });
-  test('OCR failure and in-progress states block evaluation with distinct recovery notices', () {
-    for (final state in ['FAILED', 'PROCESSING']) {
-      try {
-        requireMathExtractionResult({
-          'candidate': {'state': state},
-          'candidate_regions': <Map<String, dynamic>>[],
-        });
-        fail('unfinished extraction accepted');
-      } on StateError catch (e) {
-        expect(
-          mathExtractionNotice(e),
-          contains(state == 'FAILED' ? '실패' : '인식하고'),
-        );
-      }
-    }
-    expect(
-      () => requireMathExtractionResult({
-        'candidate': {'state': 'COMPLETED'},
-        'candidate_regions': <Map<String, dynamic>>[],
-      }),
-      throwsStateError,
-    );
-    expect(
-      () => requireMathExtractionResult({
-        'candidate': {'state': 'COMPLETED'},
-        'candidate_regions': <Map<String, dynamic>>[{}],
-      }),
-      returnsNormally,
-    );
-    expect(
-      () => requireMathExtractionResult({'can_request_evaluation': true}),
-      returnsNormally,
-    );
-  });
-  test('native photo uses existing multipart and extract endpoints without billing', () async {
-    final paths = <String>[];
-    final gateway = MathGateway(
-      client,
-      'fixture-a',
-      transport: MockClient((r) async {
-        paths.add(r.url.path);
-        expect(r.followRedirects, false);
-        expect(r.headers['Origin'], mathOrigin);
-        expect(r.headers['Authorization'], startsWith('Bearer '));
-        if (r.url.path.endsWith('upload')) {
-          expect(r.headers['content-type'], startsWith('multipart/form-data'));
-          expect(r.bodyBytes, isNotEmpty);
-        } else {
-          expect(jsonDecode(r.body), {'attempt_id': 'same-attempt'});
+  test(
+    'native gateway pins origin, forbids redirects and recovers ambiguous response',
+    () async {
+      final gateway = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient((request) async {
+          expect(request.url.toString(), '$mathOrigin/api/math/evaluate');
+          expect(request.headers['Origin'], mathOrigin);
+          expect(request.followRedirects, false);
+          expect(jsonDecode(request.body), {
+            'evaluation_id': 'same-evaluation',
+          });
+          expect(request.headers['Authorization'], startsWith('Bearer '));
+          return http.Response('', 504);
+        }),
+      );
+      await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
+      gateway.close();
+      await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
+    },
+  );
+  test(
+    'OCR failure and in-progress states block evaluation with distinct recovery notices',
+    () {
+      for (final state in ['FAILED', 'PROCESSING']) {
+        try {
+          requireMathExtractionResult({
+            'candidate': {'state': state},
+            'candidate_regions': <Map<String, dynamic>>[],
+          });
+          fail('unfinished extraction accepted');
+        } on StateError catch (e) {
+          expect(
+            mathExtractionNotice(e),
+            contains(state == 'FAILED' ? '실패' : '인식하고'),
+          );
         }
-        return http.Response('{}', 200);
-      }),
-    );
-    await gateway.uploadEvidence(
-      'same-artifact',
-      Uint8List.fromList([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]),
-    );
-    await gateway.extract('same-attempt');
-    expect(paths, ['/api/math/upload', '/api/math/extract']);
-    await expectLater(
-      gateway.uploadEvidence('x', Uint8List(12)),
-      throwsFormatException,
-    );
-    expect(paths.length, 2);
-    gateway.close();
-    await expectLater(gateway.extract('same-attempt'), throwsStateError);
-  });
+      }
+      expect(
+        () => requireMathExtractionResult({
+          'candidate': {'state': 'COMPLETED'},
+          'candidate_regions': <Map<String, dynamic>>[],
+        }),
+        throwsStateError,
+      );
+      expect(
+        () => requireMathExtractionResult({
+          'candidate': {'state': 'COMPLETED'},
+          'candidate_regions': <Map<String, dynamic>>[{}],
+        }),
+        returnsNormally,
+      );
+      expect(
+        () => requireMathExtractionResult({'can_request_evaluation': true}),
+        returnsNormally,
+      );
+    },
+  );
+  test(
+    'native photo uses existing multipart and extract endpoints without billing',
+    () async {
+      final paths = <String>[];
+      final gateway = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient((r) async {
+          paths.add(r.url.path);
+          expect(r.followRedirects, false);
+          expect(r.headers['Origin'], mathOrigin);
+          expect(r.headers['Authorization'], startsWith('Bearer '));
+          if (r.url.path.endsWith('upload')) {
+            expect(
+              r.headers['content-type'],
+              startsWith('multipart/form-data'),
+            );
+            expect(r.bodyBytes, isNotEmpty);
+          } else {
+            expect(jsonDecode(r.body), {'attempt_id': 'same-attempt'});
+          }
+          return http.Response('{}', 200);
+        }),
+      );
+      await gateway.uploadEvidence(
+        'same-artifact',
+        Uint8List.fromList([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]),
+      );
+      await gateway.extract('same-attempt');
+      expect(paths, ['/api/math/upload', '/api/math/extract']);
+      await expectLater(
+        gateway.uploadEvidence('x', Uint8List(12)),
+        throwsFormatException,
+      );
+      expect(paths.length, 2);
+      gateway.close();
+      await expectLater(gateway.extract('same-attempt'), throwsStateError);
+    },
+  );
 
-  test('history original download uses authenticated endpoint and rejects invalid image', () async {
-    var valid = true;
-    final image = [137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0];
-    final gateway = MathGateway(
-      client,
-      'fixture-a',
-      transport: MockClient((r) async {
-        expect(r.url.path, '/api/math/artifact');
-        expect(r.followRedirects, false);
-        expect(r.headers['Origin'], mathOrigin);
-        expect(r.headers['Authorization'], startsWith('Bearer '));
-        expect(jsonDecode(r.body), {'artifact_id': 'stored-original'});
-        return http.Response.bytes(valid ? image : [1, 2, 3], 200);
-      }),
-    );
-    expect(await gateway.readEvidence('stored-original'), image);
-    valid = false;
-    await expectLater(
-      gateway.readEvidence('stored-original'),
-      throwsFormatException,
-    );
-    gateway.close();
-    await expectLater(
-      gateway.readEvidence('stored-original'),
-      throwsStateError,
-    );
-  });
+  test(
+    'history original download uses authenticated endpoint and rejects invalid image',
+    () async {
+      var valid = true;
+      final image = [137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0];
+      final gateway = MathGateway(
+        client,
+        'fixture-a',
+        transport: MockClient((r) async {
+          expect(r.url.path, '/api/math/artifact');
+          expect(r.followRedirects, false);
+          expect(r.headers['Origin'], mathOrigin);
+          expect(r.headers['Authorization'], startsWith('Bearer '));
+          expect(jsonDecode(r.body), {'artifact_id': 'stored-original'});
+          return http.Response.bytes(valid ? image : [1, 2, 3], 200);
+        }),
+      );
+      expect(await gateway.readEvidence('stored-original'), image);
+      valid = false;
+      await expectLater(
+        gateway.readEvidence('stored-original'),
+        throwsFormatException,
+      );
+      gateway.close();
+      await expectLater(
+        gateway.readEvidence('stored-original'),
+        throwsStateError,
+      );
+    },
+  );
 }

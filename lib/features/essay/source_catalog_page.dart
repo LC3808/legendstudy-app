@@ -1,4 +1,3 @@
-import '../../core/config/app_config.dart';
 import '../credits/essay_beta_credit.dart';
 import '../analytics/analytics_guard.dart';
 import '../analytics/analytics_providers.dart';
@@ -19,6 +18,7 @@ import '../credits/essay_credit_source.dart';
 import 'service_availability.dart';
 import 'math_gateway.dart';
 import 'math_exam_session.dart';
+import 'prepared_math_input.dart';
 import '../../core/theme/app_theme.dart';
 import '../credits/credit_balance.dart';
 
@@ -438,7 +438,7 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                             final Widget credit = balance == null
                                 ? const SizedBox.shrink()
                                 : Text(
-                                    '현재 크레딧 ${balance.spendable}개',
+                                    '현재 이용권 ${balance.spendable}개',
                                     style: AppTokens.secondary.copyWith(
                                       color: AppTokens.textPrimary,
                                       fontWeight: FontWeight.w600,
@@ -548,9 +548,9 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                                 children: [
                                   Text(
                                     u['name'] as String,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.titleMedium,
                                   ),
                                   const SizedBox(height: 4),
                                   if (service.isLoading ||
@@ -1772,11 +1772,15 @@ class ExamSubmissionPanel extends ConsumerStatefulWidget {
     required this.included,
     this.onEdit,
     this.onSubmittedChanged,
+    this.preparedMathInputs = const {},
+    this.inputBlocked = false,
   });
   final Map<String, dynamic>? rewriteRun;
   final String owner;
   final Map<String, dynamic> exam;
   final Set<String> included;
+  final Map<String, PreparedMathInput> preparedMathInputs;
+  final bool inputBlocked;
 
   /// Return to the writer to edit answers (shown beside 첨삭 요청).
   final VoidCallback? onEdit;
@@ -1797,8 +1801,11 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
       eligibilityLoaded = false,
       foreground = true;
   Set<String> admittedQuestions = {};
+  Set<String> admittedMathQuestions = {};
   bool get ready {
-    if (!serverReady || widget.included.isEmpty) return false;
+    if (widget.inputBlocked || !serverReady || widget.included.isEmpty) {
+      return false;
+    }
     if (widget.exam['verification'] != 'REVIEW_REQUIRED' &&
         widget.exam['evaluationReady'] != false) {
       return true;
@@ -2118,6 +2125,9 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
           admittedQuestions = (result['questionIds'] as List? ?? [])
               .whereType<String>()
               .toSet();
+          admittedMathQuestions = (result['mathQuestions'] as Map? ?? {}).keys
+              .whereType<String>()
+              .toSet();
         });
       }
     } catch (_) {
@@ -2197,6 +2207,21 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         );
         final draft = await store.loadDraft();
         final images = await store.loadImages();
+        final math = widget.preparedMathInputs[q['key']];
+        if (math != null) {
+          if (!admittedQuestions.contains(q['dbQuestionId']) ||
+              !admittedMathQuestions.contains(q['dbQuestionId']) ||
+              !isMathInputReference(math.reference) ||
+              !math.matches(draft.body, images)) {
+            throw StateError('${q['label']}: 변경한 답안의 인식 내용을 다시 확인해 주세요.');
+          }
+          answers.add({
+            'questionId': q['dbQuestionId'],
+            'revision': draft.revision,
+            'mathInput': math.reference,
+          });
+          continue;
+        }
         if (draft.body.trim().isEmpty && images.isEmpty) {
           throw StateError(
             '${q['label']}: 답안이 비어 있어요. 답안을 작성하거나 제출 선택에서 제외해 주세요.',
@@ -2205,7 +2230,8 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         if (q['dbQuestionId'] == null ||
             draft.body.trim().isEmpty ||
             images.isNotEmpty ||
-            q['inputMode'] == 'image') {
+            (q['inputMode'] == 'image' &&
+                !admittedMathQuestions.contains(q['dbQuestionId']))) {
           throw StateError(
             '선택한 문항의 텍스트 답안을 확인해 주세요. 사진 포함 답안은 아직 이 시험에서 제출할 수 없습니다.',
           );
@@ -2272,7 +2298,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         });
         if (quote?['version'] != 'essay-exam-quote-v1' ||
             quote?['credits'] != (parentId == null ? 1 : 0)) {
-          throw StateError('사용 크레딧을 확인하지 못했어요. 답안은 보존됩니다.');
+          throw StateError('사용 이용권을 확인하지 못했어요. 답안은 보존됩니다.');
         }
         if (quote!.containsKey('credit_source')) {
           creditSource = EssayCreditSource.parse(
@@ -2285,7 +2311,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
         // source in one line. Pressing 첨삭 시작 is the student's consent to that
         // source; the server still re-checks the grant and fence on submit.
         final creditLine = (quote['credits'] as int) == 0
-            ? '추가 Credit이 사용되지 않아요'
+            ? '추가 이용권이 사용되지 않아요'
             : creditSource?.usageLabel;
         final confirmed = await showDialog<bool>(
           context: context,
@@ -2466,9 +2492,9 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
                       'CREDIT_SOURCE_CHANGED',
                       'CREDIT_SOURCE_CONFIRMATION_REQUIRED',
                     ].contains(error.code)
-                    ? '사용할 Credit 출처가 변경됐습니다. 답안은 보존됩니다. 다시 요청하여 출처를 확인해 주세요.'
+                    ? '사용할 이용권 출처가 변경됐습니다. 답안은 보존됩니다. 다시 요청하여 출처를 확인해 주세요.'
                     : error.code == 'INSUFFICIENT_CREDIT'
-                    ? '크레딧이 부족합니다.'
+                    ? '이용권이 부족합니다.'
                     : error.code == 'QUOTE_UNAVAILABLE'
                     ? '서버에서 재첨삭 조건을 확인하지 못했어요. 답안은 보존됩니다. 기록에서 이용 가능 여부를 다시 확인해 주세요.'
                     : error.code == 'ADDITIONAL_CYCLE_UNAVAILABLE'
@@ -2624,8 +2650,11 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
     const Divider(color: AppTokens.majorSurfaceBorder, height: 16),
     Text('제출 문항: ${widget.included.length}개'),
     if (parentId != null && eligibleRewrite)
-      const Text('무료 재첨삭 · 추가 Credit 없음'),
-    if (!ready) const Text('현재 이 문항은 첨삭을 이용할 수 없어요. 답안 작성과 저장은 계속할 수 있어요.'),
+      const Text('무료 재첨삭 · 추가 이용권 없음'),
+    if (widget.inputBlocked)
+      const Text('수리 문항의 인식 내용을 확인하면 전체 시험 첨삭을 요청할 수 있어요.')
+    else if (!ready)
+      const Text('현재 이 문항은 첨삭을 이용할 수 없어요. 답안 작성과 저장은 계속할 수 있어요.'),
     // [답안 수정] [첨삭 요청] 나란히 배치.
     Row(
       children: [
@@ -2825,7 +2854,7 @@ class ExamSubmissionPanelState extends ConsumerState<ExamSubmissionPanel>
                   : retryFailedQuestions,
               child: Text(
                 sessionStatus?.canRetry == true
-                    ? '실패한 문항 다시 처리 · 0 Credit'
+                    ? '실패한 문항 다시 처리 · 추가 이용권 없음'
                     : '실패한 문항 다시 처리',
               ),
             ),
@@ -2934,11 +2963,16 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
               .asData
               ?.value
         : null;
-    final isolatedTest = ref.watch(appConfigProvider).isolatedEssayTestEnabled;
     final mathRows =
         ref.watch(mathCatalogProvider(widget.owner)).asData?.value ?? [];
+    final mathAvailable =
+        ref
+            .watch(mathEvaluationAvailableProvider(widget.owner))
+            .asData
+            ?.value ==
+        true;
     String availability(Map<String, dynamic> q) {
-      if (isolatedTest &&
+      if (mathAvailable &&
           essayServiceArea(widget.exam) == EssayServiceArea.science &&
           mathRows.any(
             (r) =>
@@ -3127,7 +3161,6 @@ class _RoundSubmitRouter extends ConsumerWidget {
         .cast<Map<String, dynamic>>()
         .where((q) => included.contains(q['key']))
         .toList();
-    final isolatedTest = ref.watch(appConfigProvider).isolatedEssayTestEnabled;
     final area = essayServiceArea(exam);
     final mathSelected = selected
         .where(
@@ -3148,30 +3181,53 @@ class _RoundSubmitRouter extends ConsumerWidget {
           OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
       ],
     );
-    if (!isolatedTest && area == EssayServiceArea.science) {
-      return unavailable('자연·공학·이학·의예논술 첨삭은 베타 공개 보류 중입니다. 작성한 답안은 유지됩니다.');
+    if (area == EssayServiceArea.science &&
+        (selected.isEmpty ||
+            !selected.every((q) => leaves.containsKey(q['dbQuestionId'])))) {
+      return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
     }
     if (area == null && mathSelected.isNotEmpty) {
       return unavailable('시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요. 작성한 답안은 보존됩니다.');
     }
     if (mathSelected.isNotEmpty && mathSelected.length != selected.length) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text('글쓰기 문항과 수리 문항을 함께 제출하는 기능을 준비 중이에요. 작성한 답안은 보존됩니다.'),
-          const Text('일부 문항만 제출하려면 답안 확인에서 직접 선택하고 사용 Credit을 확인해 주세요.'),
-          if (onEdit != null)
-            OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
-        ],
+      final mathAdmission = admission?['mathQuestions'] as Map? ?? {};
+      if (admission?['ready'] != true ||
+          !selected.every(
+            (q) => (admission?['questionIds'] as List? ?? []).contains(
+              q['dbQuestionId'],
+            ),
+          ) ||
+          !mathSelected.every(
+            (q) =>
+                leaves[q['dbQuestionId']] != null &&
+                mathAdmission[q['dbQuestionId']] == leaves[q['dbQuestionId']],
+          )) {
+        return unavailable('이 시험의 문항 연결을 확인하고 있어요. 작성한 답안은 보존됩니다.');
+      }
+      return _MixedExamSubmissionPanel(
+        key: ValueKey(
+          '$owner/${exam['dbExamId']}/${rewriteRun?['id']}/${(included.toList()..sort()).join(',')}',
+        ),
+        owner: owner,
+        exam: exam,
+        included: included,
+        mathSelected: mathSelected.map((q) => q['key'] as String).toSet(),
+        leaves: leaves,
+        rewriteRun: rewriteRun,
+        onEdit: onEdit,
+        onSubmittedChanged: onSubmittedChanged,
       );
     }
-    if (!isolatedTest &&
-        mathSelected.isNotEmpty &&
+    if (mathSelected.isNotEmpty &&
         !selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
       return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
     }
     if (selected.isNotEmpty &&
         selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
+      if (ref.watch(mathEvaluationAvailableProvider(owner)).asData?.value !=
+          true) {
+        return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
+      }
       return MathExamSession(
         key: ValueKey(
           '$owner/${exam['dbExamId']}/${(included.toList()..sort()).join(',')}',
@@ -3194,6 +3250,105 @@ class _RoundSubmitRouter extends ConsumerWidget {
       onSubmittedChanged: onSubmittedChanged,
     );
   }
+}
+
+/// One mixed exam parent owns all evaluation, Credit, rewrite and History.
+/// Math input preparation cannot submit or charge a separate Math round.
+class _MixedExamSubmissionPanel extends StatefulWidget {
+  const _MixedExamSubmissionPanel({
+    super.key,
+    required this.owner,
+    required this.exam,
+    required this.included,
+    required this.mathSelected,
+    required this.leaves,
+    this.rewriteRun,
+    this.onEdit,
+    this.onSubmittedChanged,
+  });
+  final String owner;
+  final Map<String, dynamic> exam;
+  final Set<String> included, mathSelected;
+  final Map<String, String> leaves;
+  final Map<String, dynamic>? rewriteRun;
+  final VoidCallback? onEdit;
+  final ValueChanged<bool>? onSubmittedChanged;
+  @override
+  State<_MixedExamSubmissionPanel> createState() =>
+      _MixedExamSubmissionPanelState();
+}
+
+class _MixedExamSubmissionPanelState extends State<_MixedExamSubmissionPanel> {
+  Map<String, PreparedMathInput> inputs = {};
+  Set<String> photoQuestions = {};
+  bool photosLoaded = false;
+  bool preparing = false, submitted = false;
+  @override
+  void initState() {
+    super.initState();
+    unawaited(loadPhotoQuestions());
+  }
+
+  Future<void> loadPhotoQuestions() async {
+    try {
+      final photos = <String>{};
+      for (final key in widget.mathSelected) {
+        final draft = SourceDraftGateway(
+          widget.owner,
+          essayWritingDraftKey(key, widget.rewriteRun),
+        );
+        if ((await draft.loadImages()).isNotEmpty) photos.add(key);
+      }
+      if (mounted) {
+        setState(() {
+          photoQuestions = photos;
+          photosLoaded = true;
+        });
+      }
+    } catch (_) {
+      // No unconfirmed photo may fall back to the text submission path.
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      if (!submitted && photoQuestions.isNotEmpty) ...[
+        MathExamSession(
+          owner: widget.owner,
+          exam: widget.exam,
+          selected: photoQuestions,
+          leaves: widget.leaves,
+          rewriteRun: widget.rewriteRun,
+          onEdit: widget.onEdit,
+          onInputsReady: (value) {
+            if (mounted) setState(() => inputs = value);
+          },
+          onSubmittedChanged: (value) {
+            if (mounted) setState(() => preparing = value);
+          },
+        ),
+        const SizedBox(height: 16),
+      ],
+      ExamSubmissionPanel(
+        owner: widget.owner,
+        exam: widget.exam,
+        included: widget.included,
+        rewriteRun: widget.rewriteRun,
+        preparedMathInputs: inputs,
+        inputBlocked:
+            !photosLoaded ||
+            preparing ||
+            !photoQuestions.every(inputs.containsKey),
+        onEdit: photoQuestions.isEmpty ? widget.onEdit : null,
+        onSubmittedChanged: (value) {
+          if (mounted) setState(() => submitted = value);
+          widget.onSubmittedChanged?.call(value);
+        },
+      ),
+    ],
+  );
 }
 
 List<Map<String, dynamic>> orderedServiceUniversities(

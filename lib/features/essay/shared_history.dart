@@ -511,7 +511,7 @@ String essayHistoryType(SharedEssayRecord row) {
 }
 
 String essayBillingType(SharedEssayRecord row) =>
-    row.examData['parent_id'] != null ? '무료 재첨삭' : 'Credit 첨삭';
+    row.examData['parent_id'] != null ? '무료 재첨삭' : '이용권 첨삭';
 String essayAnswerVersion(SharedEssayRecord row) {
   final number = row.examData['submission_index'];
   if (number is int && number > 0) {

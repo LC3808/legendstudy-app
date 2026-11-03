@@ -32,7 +32,7 @@ void main() {
             {'grant_id': 'free', 'balance_delta': 1, 'reserved_delta': 0},
           ],
         ),
-        {'구매 크레딧': 1, '무료 크레딧': 1},
+        {'구매 이용권': 1, '무료 이용권': 1},
       );
     },
   );

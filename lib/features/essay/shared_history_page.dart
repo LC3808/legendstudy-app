@@ -416,7 +416,7 @@ class _Result extends ConsumerWidget {
             builder: (context) => AlertDialog(
               title: const Text('무료 재첨삭을 사용할 수 없어요'),
               content: const Text(
-                '무료 기간이 지났거나 이미 사용한 기록입니다. 추가 첨삭은 기존 정책에 따라 1 Credit을 사용합니다. 답안을 다시 작성할까요?',
+                '무료 기간이 지났거나 이미 사용한 기록입니다. 추가 첨삭은 기존 정책에 따라 이용권 1개를 사용합니다. 답안을 다시 작성할까요?',
               ),
               actions: [
                 TextButton(
@@ -553,7 +553,7 @@ class EssayFollowupAction extends StatelessWidget {
     }
     return OutlinedButton(
       onPressed: () => onOpen(!included),
-      child: Text(included ? '다시 써보기 · 무료 재첨삭' : '추가 첨삭 · 1 Credit'),
+      child: Text(included ? '다시 써보기 · 무료 재첨삭' : '추가 첨삭 · 이용권 1개'),
     );
   }
 }

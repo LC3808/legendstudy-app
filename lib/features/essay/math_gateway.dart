@@ -184,7 +184,9 @@ class MathGateway {
     if (!await available(browsing: true)) return [];
     final data = await client.rpc<dynamic>(
       'math_catalog',
-      params: {'p_limit': 20},
+      // Existing RPC accepts 1..50 and has no offset parameter. Request its
+      // full supported window so an approved binding after row 20 is visible.
+      params: {'p_limit': 50},
     );
     checkOwner();
     if (data is! List) throw const FormatException('INVALID_RESPONSE');
@@ -232,12 +234,22 @@ class MathGateway {
     return Map<String, dynamic>.from(value['result'] as Map);
   }
 
+  Future<void> claimDailyBeta() async {
+    checkOwner();
+    await client
+        .rpc<dynamic>('essay_beta_daily_claim_v2')
+        .timeout(const Duration(seconds: 25));
+    checkOwner();
+  }
+
   Future<dynamic> session(String name, Map<String, dynamic> params) async {
     checkOwner();
     if (!{
       'math_session_submit',
       'math_session_quote',
       'math_session_continue',
+      'math_session_quote_source',
+      'math_session_continue_source',
       'math_session_read',
       'math_session_history',
       'math_session_retry',

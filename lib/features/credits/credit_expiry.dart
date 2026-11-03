@@ -23,10 +23,10 @@ Map<String, int> expiryQuantities(
     if (n < 0) throw const FormatException('INVALID_LEDGER');
     if (n == 0) continue;
     final label = g['origin'] == 'purchase'
-        ? '구매 크레딧'
+        ? '구매 이용권'
         : g['origin'] == 'signup_bonus'
-        ? '무료 크레딧'
-        : '기타 지급 크레딧';
+        ? '무료 이용권'
+        : '기타 지급 이용권';
     result[label] = (result[label] ?? 0) + n;
   }
   return result;
@@ -73,7 +73,7 @@ class CreditExpiry extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ref
       .watch(creditExpiryProvider(at))
       .when(
-        loading: () => const Text('만료 예정 크레딧 확인 중'),
+        loading: () => const Text('만료 예정 이용권 확인 중'),
         error: (_, _) => TextButton(
           onPressed: () => ref.invalidate(creditExpiryProvider(at)),
           child: const Text('만료 수량 다시 확인'),

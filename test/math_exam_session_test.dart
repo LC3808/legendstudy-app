@@ -19,7 +19,12 @@ class NoClient implements SupabaseClient {
 }
 
 class RoundGateway extends MathGateway {
-  RoundGateway() : super(NoClient(), 'owner');
+  RoundGateway({this.free = false, this.changeSource = false})
+    : super(NoClient(), 'owner');
+  final bool free;
+  bool changeSource;
+  int betaClaims = 0, sourceQuotes = 0;
+  String grant = '11111111-1111-4111-8111-111111111111';
   int creates = 0;
   bool lose = true;
   final submissions = <Map<String, dynamic>>[];
@@ -27,12 +32,61 @@ class RoundGateway extends MathGateway {
   @override
   void checkOwner() {}
   @override
+  Future<void> claimDailyBeta() async => betaClaims++;
+  @override
   Future<dynamic> session(String name, Map<String, dynamic> params) async {
     if (name == 'math_session_history') {
-      return {'version': 'math-session-history-v1', 'runs': <dynamic>[]};
+      return {
+        'version': 'math-session-history-v1',
+        'runs': <dynamic>[
+          if (free)
+            {
+              'version': 'math-session-v1',
+              'run_id': 'previous',
+              'exam_id': 'exam',
+              'state': 'completed',
+              'continuous_cycles_supported': true,
+              'created_at': '2026-11-03T00:00:00Z',
+              'next_quote': {'credits_required': 0},
+              'questions': [
+                {
+                  'evaluation_id': 'previous-e',
+                  'attempt_id': 'previous-a',
+                  'question_id': 'q1',
+                  'state': 'COMPLETED',
+                },
+              ],
+            },
+        ],
+      };
     }
-    if (name == 'math_session_continue') {
+    if (name == 'math_session_quote') {
+      return {'credits_required': free ? 0 : 1};
+    }
+    if (name == 'math_session_quote_source') {
+      sourceQuotes++;
+      return {
+        'version': 'math-session-quote-v1',
+        'credits_required': free ? 0 : 1,
+        'credit_source': {
+          'version': 'essay-credit-source-v1',
+          'grant_id': free ? null : grant,
+          'source': free ? 'included' : 'beta',
+          'beta': free ? 0 : 1,
+          'signup_bonus': 0,
+          'purchase': 0,
+          'other': 0,
+        },
+      };
+    }
+    if (name == 'math_session_continue_source') {
       submissions.add(params);
+      if (changeSource) {
+        changeSource = false;
+        lose = false;
+        grant = '22222222-2222-4222-8222-222222222222';
+        throw const PostgrestException(message: 'CHARGE_SOURCE_CHANGED');
+      }
       if (lose) {
         lose = false;
         throw StateError('lost response');
@@ -81,9 +135,14 @@ class RoundGateway extends MathGateway {
 }
 
 void main() {
-  for (final isolated in [false, true]) {
+  for (final (isolated, enabled) in [
+    (false, false),
+    (false, true),
+    (true, false),
+    (true, true),
+  ]) {
     testWidgets(
-      'release preserves natural submission hold; isolated TEST routes Math: $isolated',
+      'natural submission requires runtime admission in both environments: test=$isolated enabled=$enabled',
       (t) async {
         final fake = RoundGateway();
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -122,6 +181,8 @@ void main() {
                 ],
               ),
               mathGatewayProvider('owner').overrideWithValue(fake),
+              mathEvaluationAvailableProvider('owner')
+                  .overrideWith((ref) async => enabled),
               examAvailabilityProvider((owner: 'owner', examId: 'exam'))
                   .overrideWith(
                     (ref) async => {
@@ -158,11 +219,9 @@ void main() {
         await t.pumpAndSettle();
         expect(
           find.byType(MathExamSession),
-          isolated ? findsOneWidget : findsNothing,
+          enabled ? findsOneWidget : findsNothing,
         );
-        if (isolated) {
-          expect(find.text('이 시험은 아직 첨삭을 이용할 수 없어요.'), findsNothing);
-        }
+        expect(find.text('이 시험은 아직 첨삭을 이용할 수 없어요.'), findsNothing);
         expect(fake.submissions, isEmpty);
         expect(fake.evaluated, isEmpty);
         expect(t.takeException(), isNull);
@@ -181,13 +240,19 @@ void main() {
     );
     expect(mathSessionRetryable(r(['COMPLETED'])), isFalse);
   });
-  testWidgets(
-    'partial consent and lost response reuse one round key across remount',
-    (t) async {
+  for (final mode in [
+    'lost response',
+    'legacy replay',
+    'source changed',
+    'free rewrite',
+  ]) {
+    testWidgets('source consent and durable round retry: $mode', (t) async {
       await t.binding.setSurfaceSize(const Size(700, 1600));
       addTearDown(() => t.binding.setSurfaceSize(null));
       final disk = <String, String>{};
-      final fake = RoundGateway();
+      final free = mode == 'free rewrite';
+      final changed = mode == 'source changed';
+      final fake = RoundGateway(free: free, changeSource: changed);
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
             if (call.method == 'read') return disk[call.arguments];
@@ -197,7 +262,10 @@ void main() {
             }
             return null;
           });
-      await SourceDraftGateway('owner', 'draft1').saveLocalDraft('저장한 풀이', 0);
+      await SourceDraftGateway(
+        'owner',
+        essayWritingDraftKey('draft1', free ? {'id': 'previous'} : null),
+      ).saveLocalDraft('저장한 풀이', 0);
       Future<void> mount() async {
         await t.pumpWidget(
           ProviderScope(
@@ -212,6 +280,12 @@ void main() {
                 body: SingleChildScrollView(
                   child: MathExamSession(
                     owner: 'owner',
+                    rewriteRun: free
+                        ? {
+                            'id': 'previous',
+                            'free_rewrite_until': '2026-11-10T15:00:00Z',
+                          }
+                        : null,
                     exam: {
                       'dbExamId': 'exam',
                       'questions': [
@@ -246,24 +320,67 @@ void main() {
       await t.pumpAndSettle();
       expect(find.text('작성하지 않은 답안이 있습니다'), findsOneWidget);
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('이용권 1개 사용하고 첨삭하기'));
+      await t.tap(find.text(free ? '무료 재첨삭하기' : '이용권 1개 사용하고 첨삭하기'));
       await t.pumpAndSettle();
       expect(fake.submissions, hasLength(1));
-      expect(fake.submissions.single['p_expected_credits'], 1);
-      expect(fake.submissions.single['p_previous'], isNull);
+      expect(fake.submissions.single['p_expected_credits'], free ? 0 : 1);
+      expect(fake.submissions.single['p_previous'], free ? 'previous' : null);
+      expect(
+        fake.submissions.single['p_expected_grant'],
+        free ? null : '11111111-1111-4111-8111-111111111111',
+      );
+      expect(fake.betaClaims, free ? 0 : 1);
+      if (mode == 'legacy replay') {
+        for (final key in disk.keys.toList()) {
+          final draft = jsonDecode(disk[key]!) as Map<String, dynamic>;
+          final body = draft['body'];
+          if (body is! String || !body.contains('expectedGrant')) continue;
+          final saved = jsonDecode(body) as Map<String, dynamic>;
+          saved.remove('expectedGrant');
+          saved.remove('sourceConsent');
+          draft['body'] = jsonEncode(saved);
+          disk[key] = jsonEncode(draft);
+        }
+      }
       await t.pumpWidget(const SizedBox());
       await t.pumpAndSettle();
       await mount();
-      await t.tap(find.text('접수한 첨삭 계속하기'));
+      if (changed) {
+        await t.tap(find.text('저장한 답안 확인'));
+        await t.pumpAndSettle();
+        await t.tap(find.text('첨삭 요청하기'));
+        await t.pumpAndSettle();
+        expect(fake.submissions, hasLength(1));
+        await t.tap(find.text('이용권 1개 사용하고 첨삭하기'));
+      } else {
+        await t.tap(find.text('접수한 첨삭 계속하기'));
+      }
       await t.pumpAndSettle();
       expect(fake.creates, 1);
       expect(fake.submissions, hasLength(2));
-      expect(jsonEncode(fake.submissions[0]), jsonEncode(fake.submissions[1]));
+      if (changed) {
+        expect(fake.submissions[0]['p_key'], fake.submissions[1]['p_key']);
+        expect(fake.submissions[1]['p_expected_grant'], fake.grant);
+        expect(fake.sourceQuotes, 2);
+        expect(fake.betaClaims, 2);
+      } else if (mode == 'legacy replay') {
+        expect(fake.submissions[1]['p_key'], fake.submissions[0]['p_key']);
+        expect(fake.submissions[1]['p_expected_grant'], isNull);
+        expect(fake.sourceQuotes, 1);
+        expect(fake.betaClaims, 1);
+      } else {
+        expect(
+          jsonEncode(fake.submissions[0]),
+          jsonEncode(fake.submissions[1]),
+        );
+        expect(fake.sourceQuotes, 1);
+        expect(fake.betaClaims, free ? 0 : 1);
+      }
       expect(fake.evaluated, ['e']);
       expect(find.text('문제 1 첨삭 결과 보기'), findsOneWidget);
       expect(find.text('첨삭 상태 새로고침'), findsNothing);
       expect(find.text('새 답안 준비'), findsNothing);
       expect(fake.evaluated, ['e']);
-    },
-  );
+    });
+  }
 }

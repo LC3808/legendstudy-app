@@ -7,10 +7,10 @@ import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 
 void main() {
-  for (final (track, selected, mathPublished) in [
-    ('사회·상경', {'text', 'math'}, true),
-    ('통합', {'text', 'math'}, true),
-    ('사회·상경', {'math'}, false),
+  for (final (track, selected, mathPublished, serverReady) in [
+    ('사회·상경', {'text', 'math'}, true, false),
+    ('통합', {'text', 'math'}, true, true),
+    ('사회·상경', {'math'}, false, true),
   ]) {
     testWidgets(
       'mixed review preserves choices without unsafe submission: $track $selected',
@@ -32,7 +32,7 @@ void main() {
               examAvailabilityProvider((owner: 'owner', examId: 'exam'))
                   .overrideWith(
                     (ref) async => {
-                      'ready': true,
+                      'ready': serverReady,
                       'questionIds': ['text-q', 'math-q'],
                       'mathQuestions': {'math-q': 'approved-leaf'},
                     },
@@ -90,7 +90,7 @@ void main() {
                 ? '현재 이 수리 문항은 첨삭을 이용할 수 없어요'
                 : track == '통합'
                 ? '시험 정보를 확인하기 전에는 이 수리 문항을 제출할 수 없어요'
-                : '글쓰기 문항과 수리 문항을 함께 제출하는 기능을 준비 중이에요',
+                : '이 시험의 문항 연결을 확인하고 있어요',
           ),
           findsOneWidget,
         );

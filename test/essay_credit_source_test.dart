@@ -13,7 +13,7 @@ void main() {
   };
   test('paid fallback preserves server selected grant and balances', () {
     final source = EssayCreditSource.parse(fixture(), 1);
-    expect(source.label, '유료 Credit');
+    expect(source.label, '유료 이용권');
     expect(source.paid, 3);
     expect(source.grantId, fixture()['grant_id']);
   });
@@ -29,24 +29,24 @@ void main() {
     expect(() => EssayCreditSource.parse(fixture(), 0), throwsFormatException);
   });
   test('usageLabel names the server-confirmed source in one line', () {
-    expect(EssayCreditSource.parse(fixture(), 1).usageLabel, '유료 Credit 사용');
+    expect(EssayCreditSource.parse(fixture(), 1).usageLabel, '유료 이용권 사용');
     expect(
       EssayCreditSource.parse({...fixture(), 'source': 'beta'}, 1).usageLabel,
-      '베타 테스트 Credit 사용',
+      '베타 테스트 이용권 사용',
     );
     expect(
       EssayCreditSource.parse(
         {...fixture(), 'source': 'signup_bonus'},
         1,
       ).usageLabel,
-      '무료 Credit 사용',
+      '무료 이용권 사용',
     );
     expect(
       EssayCreditSource.parse(
         {...fixture(), 'source': 'admin_grant'},
         1,
       ).usageLabel,
-      '관리자 지급 Credit 사용',
+      '관리자 지급 이용권 사용',
     );
     // Every known source maps to a usage label (confirmation never shows a blank).
     for (final source in EssayCreditSource.labels.keys) {

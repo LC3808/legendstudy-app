@@ -72,8 +72,8 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
     if (!authed) {
       return ShellPage(
         children: [
-          const SectionHeader('크레딧 구매'),
-          const Text('크레딧은 계정에 적립돼요. 먼저 로그인해 주세요.'),
+          const SectionHeader('이용권 구매'),
+          const Text('이용권은 계정에 적립돼요. 먼저 로그인해 주세요.'),
           const SizedBox(height: AppTokens.space16),
           GuestAccountPrompt(onLogin: () => context.push('/auth')),
         ],
@@ -84,7 +84,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       spacing: 8,
       children: [
         ChoiceChip(
-          label: const Text('충전'),
+          label: const Text('구매'),
           selected: !_showHistory,
           onSelected: (_) => setState(() => _showHistory = false),
         ),
@@ -103,7 +103,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
         },
         child: ShellPage(
           children: [
-            const SectionHeader('크레딧 구매'),
+            const SectionHeader('이용권 구매'),
             tabs,
             const SizedBox(height: AppTokens.space12),
             const PurchaseHistory(),
@@ -114,9 +114,9 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
     if (controller == null) {
       return ShellPage(
         children: [
-          const SectionHeader('크레딧 구매'),
+          const SectionHeader('이용권 구매'),
           tabs,
-          const Text('지금은 크레딧 구매을 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
+          const Text('지금은 이용권 구매를 사용할 수 없어요. 잠시 후 다시 시도해 주세요.'),
         ],
       );
     }
@@ -126,23 +126,9 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
       builder: (context, _) {
         return ShellPage(
           children: [
-            const SectionHeader('크레딧 구매'),
+            const SectionHeader('이용권 구매'),
             tabs,
             const CreditBalanceCard(),
-            const Text('구매 전 이용약관과 환불 조건을 확인해 주세요.'),
-            Wrap(
-              spacing: 12,
-              children: [
-                ExternalLinkButton(
-                  uri: publicWebUri(config.termsUrl),
-                  label: '이용약관',
-                ),
-                ExternalLinkButton(
-                  uri: publicWebUri(config.refundUrl),
-                  label: '환불 조건',
-                ),
-              ],
-            ),
             const SizedBox(height: AppTokens.space12),
             if (controller.loadingProducts)
               const Padding(
@@ -152,7 +138,7 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
             else if (!controller.available)
               const LsCard(
                 child: Text(
-                  '현재 이 기기에서는 크레딧 구매을 사용할 수 없어요. '
+                  '현재 이 기기에서는 이용권 구매를 사용할 수 없어요. '
                   '스토어 결제가 가능한 기기에서 다시 시도해 주세요.',
                 ),
               )
@@ -195,12 +181,28 @@ class _CreditPurchasePageState extends ConsumerState<CreditPurchasePage> {
                 ),
                 const SizedBox(height: AppTokens.space12),
               ],
-              const Text(
-                '결제 후 크레딧은 서버 확인을 거쳐 자동으로 충전돼요. 충전이 지연되면 '
-                '잠시 기다리거나 문의·건의로 알려주세요.',
-                style: TextStyle(color: AppTokens.textSecondary, fontSize: 12),
-              ),
             ],
+            const SizedBox(height: AppTokens.space12),
+            const Text('구매 전 이용약관과 환불 조건을 확인해 주세요.'),
+            Wrap(
+              spacing: 12,
+              children: [
+                ExternalLinkButton(
+                  uri: publicWebUri(config.termsUrl),
+                  label: '이용약관',
+                ),
+                ExternalLinkButton(
+                  uri: publicWebUri(config.refundUrl),
+                  label: '환불 조건',
+                ),
+              ],
+            ),
+            const SizedBox(height: AppTokens.space8),
+            const Text(
+              '결제 확인 후 이용권이 자동으로 지급돼요. 반영이 늦어지면 '
+              '잠시 기다리거나 문의·건의로 알려주세요.',
+              style: TextStyle(color: AppTokens.textSecondary, fontSize: 12),
+            ),
           ],
         );
       },
@@ -229,7 +231,7 @@ class _ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${product.credits} 크레딧', style: AppTokens.cardTitle),
+                Text('이용권 ${product.credits}개', style: AppTokens.cardTitle),
                 const SizedBox(height: 2),
                 Text(product.answerSummary, style: AppTokens.secondary),
                 const SizedBox(height: 2),

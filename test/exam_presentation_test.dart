@@ -3,6 +3,34 @@ import 'package:legendstudy_app/features/essay/exam_presentation.dart';
 
 void main() {
   test(
+    'science availability uses server admission rather than a blanket area hold',
+    () {
+      final science = <String, dynamic>{'track': '자연계열'};
+      final question = <String, dynamic>{'dbQuestionId': 'q'};
+      expect(essayServiceAreaLabel(science), '자연·공학·이학·의예논술');
+      expect(
+        essayQuestionAvailability(science, question, {
+          'ready': true,
+          'questionIds': ['q'],
+          'mathQuestions': {'q': 'leaf'},
+        }),
+        '',
+      );
+      expect(
+        essayQuestionAvailability(science, question, {
+          'ready': false,
+          'questionIds': ['q'],
+          'mathQuestions': {'q': 'leaf'},
+        }),
+        '현재 이 문항은 첨삭을 이용할 수 없어요.',
+      );
+      expect(
+        essayQuestionAvailability(science, question, null),
+        '첨삭 가능 여부를 확인하고 있어요.',
+      );
+    },
+  );
+  test(
     'History removes repeated official titles and preserves distinct sessions',
     () {
       for (final fixture in [
@@ -174,11 +202,14 @@ void main() {
       }
     },
   );
-  test('completed question stays completed while another fails; unknown is not failed', () {
-    expect(essayQuestionStatus('completed'), '완료');
-    expect(essayQuestionStatus('failed'), '재처리 필요');
-    expect(essayQuestionStatus('processing'), '첨삭 중');
-    expect(essayQuestionStatus(null), '상태 확인 중');
-    expect(essayQuestionStatus('reserved'), '상태 확인 중');
-  });
+  test(
+    'completed question stays completed while another fails; unknown is not failed',
+    () {
+      expect(essayQuestionStatus('completed'), '완료');
+      expect(essayQuestionStatus('failed'), '재처리 필요');
+      expect(essayQuestionStatus('processing'), '첨삭 중');
+      expect(essayQuestionStatus(null), '상태 확인 중');
+      expect(essayQuestionStatus('reserved'), '상태 확인 중');
+    },
+  );
 }

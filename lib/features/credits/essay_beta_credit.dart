@@ -85,7 +85,7 @@ String betaPolicyText(DateTime end, [int limit = 1]) =>
     '매일 0시(자정, 한국 시간)에 무료 첨삭 이용 횟수가 갱신되며 미사용분은 소멸돼요.\n\n'
     '베타 서비스는 ${betaEndDate(end)}까지 운영돼요. '
     '베타 무료 첨삭권과 무료 재첨삭은 베타 서비스 기간 동안만 이용할 수 있어요.\n\n'
-    '가입 축하 무료 크레딧(3개)과 구매 크레딧은 기존 정책대로 이용할 수 있어요.\n\n'
+    '가입 축하 무료 이용권(3개)과 구매 이용권은 기존 정책대로 이용할 수 있어요.\n\n'
     '사용 중 불편한 점은 MY 설정의 문의·건의사항으로 알려주세요. '
     '공지사항에서 안내를 다시 확인할 수 있어요.';
 
@@ -304,7 +304,7 @@ class _EssayBetaCreditEntryState extends ConsumerState<EssayBetaCreditEntry>
                 ),
                 subtitle: Text(
                   value.ended
-                      ? '가입·구매 Credit은 기존 정책대로 이용할 수 있어요.'
+                      ? '가입·구매 이용권은 기존 정책대로 이용할 수 있어요.'
                       : '매일 00시(자정, 한국 시간) 갱신 · 이월 없음\n${value.available == 0 && value.expiresAt.isBefore(value.endsAt!) ? '다음 이용: 내일 00:00 KST · ' : ''}${betaEndDate(value.endsAt!)}까지',
                 ),
                 trailing: TextButton(

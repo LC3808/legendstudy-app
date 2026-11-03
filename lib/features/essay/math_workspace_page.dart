@@ -124,7 +124,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
       if (current) {
         setState(
           () => notice = error is PostgrestException && error.code == 'PT402'
-              ? '사용 가능한 크레딧 또는 포함 재첨삭 조건을 확인해 주세요.'
+              ? '사용 가능한 이용권 또는 포함 재첨삭 조건을 확인해 주세요.'
               : mathExtractionNotice(error) ?? '처리 결과를 확인하지 못했어요. 같은 요청으로 다시 확인해 주세요. 새 답안의 첨삭을 중복 요청하지 마세요.',
         );
       }
@@ -161,7 +161,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     } else if (current) {
       setState(
         () => notice = next['evaluation_state'] == 'FAILED'
-            ? '첨삭이 완료되지 않았어요. 크레딧 잔액과 기록을 확인해 주세요.'
+            ? '첨삭이 완료되지 않았어요. 이용권 잔액과 기록을 확인해 주세요.'
             : '첨삭 처리 중이거나 결과 확인이 필요해요. 잠시 후 다시 확인해 주세요.',
       );
     }
@@ -390,7 +390,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
             const SizedBox(height: 8),
             const Text('문제 풀이를 사진으로 촬영하거나 이미지를 선택해 주세요.'),
             const CreditBalanceCard(),
-            const Text('1 크레딧으로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. '),
+            const Text('이용권 1개로 최초 첨삭 1회와 14일 이내 같은 답안의 재첨삭 1회를 이용할 수 있어요. '),
             if (!canEvaluate) const Text('문항을 확인할 수 있어요. 현재 첨삭은 이용할 수 없습니다.'),
             if (notice != null)
               Padding(

@@ -253,7 +253,7 @@ class _FreeCreditSection extends StatelessWidget {
   final AnalyticsPeriod period;
   @override
   Widget build(BuildContext context) => _SectionFrame(
-    title: '무료 Credit 사용 현황',
+    title: '무료 이용권 사용 현황',
     section: AnalyticsSection.freeCredit,
     period: period,
     builder: (context, m) => Wrap(
@@ -298,8 +298,8 @@ class _RevenueSection extends StatelessWidget {
               _Tile('ARPPU', _won(m['arppu'])),
               _Tile('환불', _won(m['refunded'])),
               _Tile('다른 통화 주문 (별도)', _n(m['excluded_currency_orders'])),
-              _Tile('예약 해제 (Credit)', _n(m['credit_released_units'])),
-              _Tile('환불 복구 (Credit)', _n(m['credit_refunded_units'])),
+              _Tile('예약 해제 (이용권)', _n(m['credit_released_units'])),
+              _Tile('환불 복구 (이용권)', _n(m['credit_refunded_units'])),
             ],
           ),
           if (bySku.isNotEmpty) ...[
@@ -360,7 +360,7 @@ class _ReliabilitySection extends StatelessWidget {
               _KeyValueRow(label: '${e['code']}', value: _n(e['count'])),
           const SizedBox(height: 8),
           Text(
-            'Credit 정합성(목표 0)',
+            '이용권 정합성(목표 0)',
             style: Theme.of(context).textTheme.labelLarge,
           ),
           _KeyValueRow(

@@ -171,7 +171,7 @@ void main() {
     expect(value.ended, true);
     expect(betaEndDate(value.endsAt!), '2026년 11월 10일 23:59');
     expect(betaPolicyText(value.endsAt!), contains('무료 재첨삭은 베타 서비스 기간 동안만'));
-    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 크레딧(3개)'));
+    expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 이용권(3개)'));
   });
   test('invalid balance and expiry never displayed', () {
     for (final count in [-1, 2, 3, 1.5, '1']) {

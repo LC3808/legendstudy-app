@@ -60,9 +60,9 @@ class CreditBalanceCard extends ConsumerWidget {
     return ref
         .watch(creditBalanceProvider)
         .when(
-          loading: () => const ListTile(title: Text('크레딧 조회 중')),
+          loading: () => const ListTile(title: Text('이용권 조회 중')),
           error: (_, _) => ListTile(
-            title: const Text('크레딧을 확인하지 못했어요.'),
+            title: const Text('이용권을 확인하지 못했어요.'),
             trailing: IconButton(
               onPressed: () => ref.invalidate(creditBalanceProvider),
               icon: const Icon(Icons.refresh),
@@ -74,19 +74,19 @@ class CreditBalanceCard extends ConsumerWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('현재 크레딧 ${balance.spendable}개'),
+                    Text('현재 이용권 ${balance.spendable}개'),
                     const SizedBox(height: AppTokens.space8),
                     Wrap(
                       spacing: AppTokens.space8,
                       children: [
                         OutlinedButton(
                           onPressed: () => context.push('/my/credits'),
-                          child: const Text('크레딧 내역'),
+                          child: const Text('이용권 내역'),
                         ),
                         if (showTopUp)
                           OutlinedButton(
                             onPressed: () => context.push('/lab/credits'),
-                            child: const Text('크레딧 구매'),
+                            child: const Text('이용권 구매'),
                           ),
                       ],
                     ),
@@ -97,7 +97,7 @@ class CreditBalanceCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        '현재 크레딧 ${balance.spendable}개',
+                        '현재 이용권 ${balance.spendable}개',
                         style: AppTokens.secondary.copyWith(
                           color: AppTokens.textPrimary,
                         ),
@@ -117,7 +117,7 @@ class CreditBalanceCard extends ConsumerWidget {
                           textStyle: AppTokens.caption,
                         ),
                         onPressed: () => context.push('/lab/credits'),
-                        child: const Text('크레딧 구매'),
+                        child: const Text('이용권 구매'),
                       ),
                     ],
                   ],
@@ -127,9 +127,9 @@ class CreditBalanceCard extends ConsumerWidget {
                   children: [
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('사용 가능 ${balance.spendable} 크레딧'),
+                      title: Text('사용 가능한 이용권 ${balance.spendable}개'),
                       subtitle: Text(
-                        '구매 ${balance.paid} · 가입 무료 ${balance.free} · 기타 ${balance.other}',
+                        '구매 ${balance.paid}개 · 가입 무료 ${balance.free}개 · 기타 ${balance.other}개',
                       ),
                       trailing: IconButton(
                         onPressed: () => ref.invalidate(creditBalanceProvider),
@@ -145,7 +145,7 @@ class CreditBalanceCard extends ConsumerWidget {
                     if (showTopUp)
                       OutlinedButton(
                         onPressed: () => context.push('/lab/credits'),
-                        child: const Text('크레딧 구매'),
+                        child: const Text('이용권 구매'),
                       ),
                   ],
                 ),

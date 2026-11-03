@@ -71,7 +71,7 @@ void main() {
           ),
         );
         await t.pumpAndSettle();
-        expect(find.text('현재 크레딧 6개'), findsOneWidget);
+        expect(find.text('현재 이용권 6개'), findsOneWidget);
         expect(find.textContaining('가입 무료'), findsNothing);
         expect(t.takeException(), isNull);
       });

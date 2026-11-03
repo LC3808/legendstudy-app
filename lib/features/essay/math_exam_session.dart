@@ -15,13 +15,16 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../credits/credit_balance.dart';
+import '../credits/essay_credit_source.dart';
 import 'answer_image.dart';
 import 'math_gateway.dart';
 import 'source_draft.dart';
 import 'source_catalog_page.dart' show essayWritingDraftKey;
 import 'shared_history.dart';
+import 'prepared_math_input.dart';
 
 Map<String, dynamic> parseMathSession(dynamic value) {
   if (value is! Map ||
@@ -61,6 +64,7 @@ class MathExamSession extends ConsumerStatefulWidget {
     this.rewriteRun,
     this.onEdit,
     this.onSubmittedChanged,
+    this.onInputsReady,
     super.key,
   });
   final String owner;
@@ -70,6 +74,10 @@ class MathExamSession extends ConsumerStatefulWidget {
   final Map<String, dynamic>? rewriteRun;
   final VoidCallback? onEdit;
   final ValueChanged<bool>? onSubmittedChanged;
+
+  /// Mixed exams prepare Math evidence here, then submit through the existing
+  /// Essay exam parent. This mode must never reserve a Math financial round.
+  final ValueChanged<Map<String, PreparedMathInput>>? onInputsReady;
   @override
   ConsumerState<MathExamSession> createState() => _MathExamSessionState();
 }
@@ -147,10 +155,12 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
   }
 
   bool busy = false, loaded = false;
+  bool get preparationOnly => widget.onInputsReady != null;
   String? notice, parent;
   Map<String, dynamic>? pending, accepted;
   final inputs = <String, Map<String, dynamic>>{},
       corrections = <String, String>{};
+  final preparedAnswers = <String, ({String body, List<String> hashes})>{};
   List<Map<String, dynamic>> parents = [];
   MathGateway get gateway => ref.read(mathGatewayProvider(widget.owner))!;
   List<Map<String, dynamic>> get questions =>
@@ -159,7 +169,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
       questions.where((q) => widget.selected.contains(q['key'])).toList();
   SourceDraftGateway get store => SourceDraftGateway(
     widget.owner,
-    'math-session:${widget.exam['dbExamId']}:${parent ?? 'initial'}:${(widget.selected.toList()..sort()).join(',')}',
+    '${preparationOnly ? 'mixed-math-input' : 'math-session'}:${widget.exam['dbExamId']}:${preparationOnly && widget.rewriteRun?['_additional'] == true ? 'additional:' : ''}${parent ?? 'initial'}:${(widget.selected.toList()..sort()).join(',')}',
   );
   bool get current =>
       mounted && ref.read(authStateProvider).value?.userId == widget.owner;
@@ -198,6 +208,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
     } finally {
       if (mounted) {
         setState(() => busy = false);
+        publishPreparedInputs();
         notifyParent();
         schedulePoll();
       }
@@ -205,31 +216,33 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
   }
 
   Future<void> load() async {
-    final history = await gateway.session('math_session_history', {});
-    if (history is! Map ||
-        history['version'] != 'math-session-history-v1' ||
-        history['runs'] is! List) {
-      throw const FormatException('HISTORY');
+    if (!preparationOnly) {
+      final history = await gateway.session('math_session_history', {});
+      if (history is! Map ||
+          history['version'] != 'math-session-history-v1' ||
+          history['runs'] is! List) {
+        throw const FormatException('HISTORY');
+      }
+      parents = (history['runs'] as List)
+          .map(parseMathSession)
+          .where(
+            (r) =>
+                r['exam_id'] == widget.exam['dbExamId'] &&
+                r['state'] == 'completed' &&
+                r['continuous_cycles_supported'] == true,
+          )
+          .toList();
+      final continued = (history['runs'] as List)
+          .map((r) => (r as Map)['previous_run_id'])
+          .whereType<String>()
+          .toSet();
+      parents.removeWhere((r) => continued.contains(r['run_id']));
     }
-    parents = (history['runs'] as List)
-        .map(parseMathSession)
-        .where(
-          (r) =>
-              r['exam_id'] == widget.exam['dbExamId'] &&
-              r['state'] == 'completed' &&
-              r['continuous_cycles_supported'] == true,
-        )
-        .toList();
-    final continued = (history['runs'] as List)
-        .map((r) => (r as Map)['previous_run_id'])
-        .whereType<String>()
-        .toSet();
-    parents.removeWhere((r) => continued.contains(r['run_id']));
     final saved = await store.loadDraft();
     pending = saved.body.isEmpty
         ? null
         : Map<String, dynamic>.from(jsonDecode(saved.body) as Map);
-    if (pending?['runId'] is String) {
+    if (!preparationOnly && pending?['runId'] is String) {
       accepted = parseMathSession(
         await gateway.session('math_session_read', {
           'p_run': pending!['runId'],
@@ -251,6 +264,8 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
 
   Future<void> prepare() async {
     if (selected.isEmpty) return;
+    widget.onInputsReady?.call({});
+    preparedAnswers.clear();
     updateActivity('저장한 답안을 불러오고 있어요', stage: 0);
     final rows = <Map<String, dynamic>>[];
     for (final q in selected) {
@@ -292,7 +307,8 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
     await persist();
     if (pending!['submitted'] == true) return;
     final prior = parents.where((r) => r['run_id'] == parent).firstOrNull;
-    if (parent != null &&
+    if (!preparationOnly &&
+        parent != null &&
         (prior == null ||
             (prior['questions'] as List).length != selected.length)) {
       throw StateError('FROZEN_SET');
@@ -306,7 +322,13 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
           .cast<Map<String, dynamic>>()
           .where((p) => p['question_id'] == q['dbQuestionId'])
           .firstOrNull;
-      if (parent != null && previous == null) throw StateError('FROZEN_SET');
+      if (!preparationOnly && parent != null && previous == null) {
+        throw StateError('FROZEN_SET');
+      }
+      preparedAnswers[key] = (
+        body: body,
+        hashes: (row['hashes'] as List).cast<String>(),
+      );
       final keys = pending!['attemptKeys'] as Map,
           attempts = pending!['attempts'] as Map;
       keys[key] ??= mathRequestId();
@@ -417,6 +439,33 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
 
   final sourceImages = <String, Uint8List>{};
 
+  void publishPreparedInputs() {
+    if (!preparationOnly || !current) return;
+    final refs = <String, PreparedMathInput>{};
+    for (final q in selected) {
+      final key = q['key'] as String;
+      final snapshot = preparedAnswers[key];
+      final input = inputs[key];
+      final value = {
+        'attemptId': (pending?['attempts'] as Map?)?[key],
+        'confirmedRunId': input?['selected_extraction_id'],
+      };
+      if (snapshot == null ||
+          input?['can_request_evaluation'] != true ||
+          !isMathInputReference(value)) {
+        widget.onInputsReady?.call({});
+        return;
+      }
+      refs[key] = PreparedMathInput(
+        attemptId: value['attemptId'] as String,
+        confirmedRunId: value['confirmedRunId'] as String,
+        body: snapshot.body,
+        imageHashes: snapshot.hashes,
+      );
+    }
+    widget.onInputsReady?.call(refs);
+  }
+
   Future<void> confirm(String key) async {
     final input = inputs[key]!;
     for (final r in input['candidate_regions'] as List) {
@@ -494,11 +543,14 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
     pending = null;
     inputs.clear();
     corrections.clear();
+    preparedAnswers.clear();
+    widget.onInputsReady?.call({});
     await persist();
     if (current) widget.onEdit?.call();
   }
 
   Future<void> submit() async {
+    if (preparationOnly) return;
     if (pending == null) return;
     if (pending!['submitted'] != true) {
       await prepare();
@@ -507,13 +559,24 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
       )) {
         return;
       }
-      final quote = parent == null
-          ? <String, dynamic>{'credits_required': 1}
+      // Reuse the shared daily allowance only for an initial/paid cycle.
+      // The server quote, not the local history, chooses the actual source.
+      final priorQuote = parent == null
+          ? null
           : await gateway.session('math_session_quote', {'p_previous': parent});
+      if (parent == null ||
+          (priorQuote is Map && priorQuote['credits_required'] == 1)) {
+        await gateway.claimDailyBeta();
+      }
+      final quote = await gateway.session('math_session_quote_source', {
+        'p_exam': widget.exam['dbExamId'],
+        'p_previous': parent,
+      });
       if (quote is! Map || ![0, 1].contains(quote['credits_required'])) {
         throw const FormatException('CHARGE_QUOTE_REQUIRED');
       }
       final credits = quote['credits_required'] as int;
+      final source = EssayCreditSource.parse(quote['credit_source'], credits);
       final missing = questions
           .where((q) => !widget.selected.contains(q['key']))
           .map((q) => q['label'])
@@ -524,7 +587,7 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
         builder: (c) => AlertDialog(
           title: Text(missing.isEmpty ? '시험 회차 첨삭' : '작성하지 않은 답안이 있습니다'),
           content: Text(
-            '${missing.isEmpty ? '' : '$missing 문항은 포함되지 않아요. 나중에 제출하면 별도 이용권이 필요해요.\n\n'}${credits == 0 ? '이번 재첨삭은 무료예요.' : '이용권 1개로 선택한 문항을 첨삭해요.'}',
+            '${missing.isEmpty ? '' : '$missing 문항은 포함되지 않아요. 나중에 제출하면 별도 이용권이 필요해요.\n\n'}${credits == 0 ? '이번 재첨삭은 무료예요.' : '${source.usageLabel}\n이용권 1개로 선택한 문항을 첨삭해요.'}',
           ),
           actions: [
             TextButton(
@@ -540,21 +603,46 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
       );
       if (yes != true || !current) return;
       pending!['expectedCredits'] = credits;
+      pending!['expectedGrant'] = source.grantId;
+      pending!['sourceConsent'] = true;
       pending!['submitted'] = true;
       notifyParent();
       await persist();
     }
     updateActivity('첨삭 요청을 접수하고 있어요');
     if (pending!['runId'] == null) {
-      final id = await gateway.session('math_session_continue', {
-        'p_exam': widget.exam['dbExamId'],
-        'p_key': pending!['key'],
-        'p_attempts': selected
-            .map((q) => (pending!['attempts'] as Map)[q['key']])
-            .toList(),
-        'p_previous': parent,
-        'p_expected_credits': pending!['expectedCredits'],
-      });
+      dynamic id;
+      try {
+        id = await gateway.session('math_session_continue_source', {
+          'p_exam': widget.exam['dbExamId'],
+          'p_key': pending!['key'],
+          'p_attempts': selected
+              .map((q) => (pending!['attempts'] as Map)[q['key']])
+              .toList(),
+          'p_previous': parent,
+          'p_expected_credits': pending!['expectedCredits'],
+          'p_expected_grant': pending!['expectedGrant'],
+        });
+      } on PostgrestException catch (error) {
+        if ({
+          'CHARGE_SOURCE_CHANGED',
+          'CHARGE_CHANGED',
+          'EXPECTED_CREDIT_SOURCE_REQUIRED',
+        }.contains(error.message)) {
+          // This explicit server rejection rolls back the reservation. Keep
+          // the immutable input/key, but require fresh consent to a new source.
+          pending!['submitted'] = false;
+          pending!.remove('expectedCredits');
+          pending!.remove('expectedGrant');
+          pending!.remove('sourceConsent');
+          await persist();
+          if (current) {
+            setState(() => notice = '사용할 이용권이 변경됐어요. 첨삭 요청을 눌러 다시 확인해 주세요.');
+          }
+          return;
+        }
+        rethrow;
+      }
       if (id is! String) throw const FormatException('RUN');
       pending!['runId'] = id;
       await persist();
@@ -717,7 +805,11 @@ class _MathExamSessionState extends ConsumerState<MathExamSession>
                   ),
               ],
             ),
-      if (!busy && pending != null && accepted == null && (submitted || ready))
+      if (!preparationOnly &&
+          !busy &&
+          pending != null &&
+          accepted == null &&
+          (submitted || ready))
         FilledButton(
           onPressed: () => work(submit, label: '첨삭 요청을 확인하고 있어요'),
           child: Text(submitted ? '접수한 첨삭 계속하기' : '첨삭 요청하기'),

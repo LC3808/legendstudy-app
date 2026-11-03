@@ -37,7 +37,7 @@ class ExamSessionStatus {
   bool get terminal =>
       data['state'] == 'completed' || data['state'] == 'failed';
   String get retryExplanation => canRetry
-      ? '완료된 문항의 결과는 보존됩니다. 실패한 문항만 추가 Credit 없이 다시 처리합니다.'
+      ? '완료된 문항의 결과는 보존됩니다. 실패한 문항만 추가 이용권 없이 다시 처리합니다.'
       : questions.values.any((s) => s != 'completed' && s != 'failed')
       ? '다른 문항의 처리가 끝난 뒤 재처리 가능 여부를 확인할 수 있어요.'
       : '현재 서버에서 재처리를 허용하지 않습니다. 기존 답안과 결과는 보존됩니다.';

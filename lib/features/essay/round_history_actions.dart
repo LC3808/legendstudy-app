@@ -300,7 +300,7 @@ class _RoundHistoryActionsState extends ConsumerState<RoundHistoryActions>
                 : ExamSessionStatus(status!).canRetry))
           OutlinedButton(
             onPressed: busy ? null : () => work(true),
-            child: const Text('실패 문항만 재처리 · 0 크레딧'),
+            child: const Text('실패 문항만 재처리 · 추가 이용권 없음'),
           ),
         if (!widget.record.math &&
             status != null &&

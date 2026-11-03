@@ -100,7 +100,7 @@ String essayServiceAreaLabel(Map<String, dynamic> exam) =>
     switch (essayServiceArea(exam)) {
       EssayServiceArea.humanities => '인문논술',
       EssayServiceArea.socialBusiness => '사회·상경논술 · 수리 문항 포함 가능',
-      EssayServiceArea.science => '자연·공학·이학·의예논술 · 첨삭 공개 보류',
+      EssayServiceArea.science => '자연·공학·이학·의예논술',
       null => '논술',
     };
 
@@ -114,9 +114,6 @@ String essayQuestionAvailability(
       admission?['ready'] == true &&
       (admission?['questionIds'] as List? ?? []).contains(id);
   final math = (admission?['mathQuestions'] as Map? ?? {}).containsKey(id);
-  if (essayServiceArea(exam) == EssayServiceArea.science) {
-    return '이 시험은 아직 첨삭을 이용할 수 없어요.';
-  }
   if (essayServiceArea(exam) == null && math) {
     return '시험 정보를 확인한 뒤 첨삭을 이용할 수 있어요.';
   }
