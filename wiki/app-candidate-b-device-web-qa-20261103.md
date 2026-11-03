@@ -158,3 +158,19 @@ Owner가 iPhone12ProMax `LS Math TEST` 1.0.1(52)에서 “한양대 진입·기�
 동시에 “답안 입력 화면에서(첨삭 내용 확인) 왜 문제가 텍스트로 나열되어 있는가”를 질문했다. 방금 검수용으로 연 `MathWorkspacePage`의 실제 코드는 `math_catalog`의 `problem_statement`와 `statement`를 연속 `MathText`로 출력한다. 명시적인 LaTeX 구분자가 있는 수식만 렌더링하며, 문제 원본의 PDF 배치·표·그림을 재현하는 화면이 아니다. 기존 `SourceCatalogPage`에는 승인된 학생용 문제 자료를 사용하는 `EssayQuestionPdf` 연결이 있으나 이 단독 입력 화면에는 연결되지 않았다.
 
 따라서 **문제 원문 표시 연결 GAP**으로 기록한다. OCR로 읽은 학생 답안과 시험 문제 본문은 별개다. 기존 문제 보기/PDF 기능을 재사용하는 보완 대상으로, 원본에 없는 수식·그림을 생성하거나 평가자료/해설을 문제 자료 대신 노출하면 안 된다. 이번 턴은 원인 확인과 검수 기록이며 UI 수정·재빌드·배포를 수행한 것은 아니다. 신규 사진 전체 E2E 및 품질·운영 HOLD는 유지한다.
+
+## B53 원본 대조 높이·테두리 보완 — 2026-11-03
+
+Owner가 한양대 답안의 원본 대조 영역이 커서 스크롤 부담이 크다고 보고하고, 인식 수식 길이에 맞춘 크기 조절과 진한 테두리를 요청했다. 기존 [Academic Purple/F·G 구조 유지 결정](decisions.md#2026-11-02--task16-g-디자인-pass--학습-루프-통합)과 영역별 학생 확인 정책을 유지한 Native 표현 보완이다. 위 문제 원문 PDF 연결 GAP과는 별개다.
+
+- `MathRecognitionPanel`의 영역별 고정 높이230을 제거했다. 실제 렌더링된 수식·본문 높이를 측정하므로 줄바꿈/분수/여러 줄 수식/글자 확대를 반영한다. 기본 글자 크기의 최소96, 최대320 안에서 조절하며 긴 내용은 내부 스크롤로 끝까지 읽을 수 있다. 학생이 전사를 수정하면 높이도 다시 측정한다.
+- 인식 수식/원본 이미지 탭은 동일 높이를 사용하고 기존 탭 전환·스와이프를 유지한다. 큰 글자에서는 탭 레이블도 잘리지 않도록 조절한다.
+- 각 대조 카드에 기존 Primary `#6340C8` 1.5px 테두리를 적용했다. 다른 MathCard는 기존 테두리를 유지한다.
+- 각 영역의 확대 아이콘 `원본 크게 보기`는 기존 `MathSourceRegion`을 전체 화면에서 재사용한다. 원본 bytes·유효한 영역 좌표 강조·확대 기능을 유지하며, 닫으면 기존 확인 화면으로 돌아온다. 원본이 없으면 버튼을 비활성으로 둔다. 원본 이미지/좌표를 새로 생성하거나 변경하지 않는다.
+- 수정 파일: `math_recognition_panel.dart`, `academic_purple.dart`, 기존 `task16f_mobile_test.dart`의 회귀 보완. 평가/확인 DTO, 불명확 기호 차단, 원본/최초인식/학생 수정본 저장 및 이용권 계약은 그대로다.
+
+보존 검토 7문항: (1) 새 학습/정정 사실을 만들지 않는 화면 크기 조절, (2) 기존 원본 bytes/전사/좌표 보존, (3) DB UPDATE·삭제·새 저장 없음, (4) 기존 사용자/attempt identity 유지, (5) Learning 표시만 변경, (6) 새 수집·권한·전송 없음, (7) 계산한 높이는 로컬 표시값이며 평가 사실로 저장하지 않는다.
+
+검증: 관련 **25 PASS**, Flutter Analyze PASS. 기본/2배 글자의 짧은 분수·여러 줄 수식·긴 본문, 탭 동일 높이, 전체 원본 확대 후 복귀, 긴 본문 끝까지 스크롤, 전사 수정에 따른 높이 증감, 기존 UNCERTAIN/수정 후 확인 취소·Q2 결론 보존·사진/History/선택 회귀를 포함한다. 초기 검사의 이미지 디코드 대기 타이밍과 줄바꿈 없는 수식 fixture를 고쳐 실제 비동기 이미지 로딩/여러 줄 수식으로 검증했다. 화면 캡처는 Widget 예제이며 실제 OCR 정확도 재검증이 아니다.
+
+검수 화면 예제는 private `.codex/legendstudy-candidate-b-qa-20261103/b53-adaptive/`에 보존. TEST53 signed Release 빌드·서명·AOT·TEST Supabase/Pages 설정·새 adaptive widget/확대 레이블 포함 확인 PASS. iPhone12ProMax `LS Math TEST` 업데이트 설치·실행 및 버전53 확인, 기존 정식 A48 보존. 일반 LAB에서 기존 답안 대조 화면으로 진입해 높이·테두리·확대 복귀를 확인하도록 Owner에게 요청했다. 실제 iPhone 가독성/스크롤 부담은 Owner 확인 대기이며 선제 PASS로 기록하지 않는다. 산출물/로그는 private `app-review-integration-20261103/candidate-b/test53/`에 보존. Provider 추가 호출·새 평가·차감 및 운영 DB/Auth/Credit/Ledger/결제/WEB/APP41/A48/Store 변경 없음.

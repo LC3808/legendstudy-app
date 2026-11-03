@@ -5624,3 +5624,7 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner B52 iPhone12ProMax “한양대 진입·기존 결과 조회 정상” 확인. 일반 LAB→한양대 시험 선택→기존 Q2 결과 조회 실기기 PASS, B51 진입 차단 해소. 제출 버튼 간격·동작 및 신규 사진 전체 루프는 별도 미확인. Wiki만 갱신, 재빌드/운영/Provider/차감 없음. [확인 범위](app-candidate-b-device-web-qa-20261103.md#b52-일반-lab-진입기존-결과-조회-owner-pass).
 
 - 2026-11-03: Owner B52 제출 화면 새로고침/결과 보기의 간격·역할·기존 결과 조회 “정상” 확인, 해당 실기기 PASS. 문제 텍스트 나열 질문에 MathWorkspace의 problem_statement/statement 직접 출력과 기존 PDF 뷰어 미연결 확인. 문제 원문 표시 GAP 기록, 코드/재빌드/운영/Provider/차감 변경 없음. [범위·원인](app-candidate-b-device-web-qa-20261103.md#b52-제출-버튼-owner-pass문제-본문-표시-gap).
+
+- 2026-11-03: Owner 원본 대조 스크롤 부담·진한 테두리 요청. 고정230 대신 실제 렌더링 높이 기반96~320, 동일 탭 높이/스와이프·긴 내용 스크롤, 기존 원본 확대 재사용·Primary1.5px 카드 경계. 관련25PASS·Analyze PASS, TEST53 준비. 원본/전사/확인/평가/원장 불변·Provider0·운영/Store HOLD. [범위·보존 검토](app-candidate-b-device-web-qa-20261103.md#b53-원본-대조-높이테두리-보완--2026-11-03).
+
+- 2026-11-03: 원본 대조 보완 TEST53 signed Release·서명/AOT/TEST 설정/신규 표시 코드 확인, iPhone12ProMax 별도 LS Math TEST 설치·실행/버전53 확인(A48 보존). 기존 답안의 높이·테두리·전체 원본 확대 복귀 Owner 검수 요청. 관련25PASS·Analyze/Wiki PASS, 신규 평가·차감·운영·Store 변경 없음. [상세](app-candidate-b-device-web-qa-20261103.md#b53-원본-대조-높이테두리-보완--2026-11-03).

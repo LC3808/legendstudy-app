@@ -137,12 +137,24 @@ class MathMobileTheme extends StatelessWidget {
 }
 
 class MathCard extends StatelessWidget {
-  const MathCard({required this.child, this.tinted = false, super.key});
+  const MathCard({
+    required this.child,
+    this.tinted = false,
+    this.border,
+    super.key,
+  });
   final Widget child;
   final bool tinted;
+  final BorderSide? border;
   @override
   Widget build(BuildContext context) => Card(
     color: tinted ? AcademicPurple.soft : AcademicPurple.card,
+    shape: border == null
+        ? null
+        : RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: border!,
+          ),
     child: Padding(padding: const EdgeInsets.all(20), child: child),
   );
 }

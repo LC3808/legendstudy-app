@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../math_text.dart';
 import 'academic_purple.dart';
@@ -63,6 +64,7 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       for (final region in widget.regions)
         MathCard(
           tinted: region['uncertain'] == true,
+          border: const BorderSide(color: AcademicPurple.primary, width: 1.5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -83,37 +85,43 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
-                ],
-              ),
-              DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    const TabBar(
-                      tabs: [
-                        Tab(text: '인식 수식'),
-                        Tab(text: '원본 이미지'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 230,
-                      child: TabBarView(
-                        children: [
-                          SingleChildScrollView(
-                            padding: const EdgeInsets.all(16),
-                            child: MathStudentText(
-                              edits[id(region)] ?? original(region),
+                  IconButton(
+                    tooltip: '원본 크게 보기',
+                    icon: const Icon(Icons.zoom_in, color: AcademicPurple.dark),
+                    onPressed:
+                        widget.sources['${region['artifact_id']}'] == null
+                        ? null
+                        : () => Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => MathMobileTheme(
+                                child: Scaffold(
+                                  appBar: AppBar(
+                                    title: Text(
+                                      '영역 ${region['reading_order'] ?? ''} · 원본 대조',
+                                    ),
+                                  ),
+                                  body: SafeArea(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: MathSourceRegion(
+                                        region: region,
+                                        bytes: widget
+                                            .sources['${region['artifact_id']}'],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          MathSourceRegion(
-                            region: region,
-                            bytes: widget.sources['${region['artifact_id']}'],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              _RecognitionComparison(
+                key: ValueKey(id(region)),
+                text: edits[id(region)] ?? original(region),
+                region: region,
+                bytes: widget.sources['${region['artifact_id']}'],
               ),
               ExpansionTile(
                 title: const Text('전사 내용 수정'),
@@ -195,6 +203,111 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
       ),
     ],
   );
+}
+
+/// Measure the rendered formula/prose, including wrapping and accessibility
+/// scale. Both tabs share this height; long answers remain scrollable in full.
+class _RecognitionComparison extends StatefulWidget {
+  const _RecognitionComparison({
+    required this.text,
+    required this.region,
+    required this.bytes,
+    super.key,
+  });
+  final String text;
+  final Map<String, dynamic> region;
+  final Uint8List? bytes;
+  @override
+  State<_RecognitionComparison> createState() => _RecognitionComparisonState();
+}
+
+class _RecognitionComparisonState extends State<_RecognitionComparison> {
+  double contentHeight = 96;
+  @override
+  Widget build(BuildContext context) {
+    final minimum = MediaQuery.textScalerOf(context)
+        .scale(64)
+        .clamp(96.0, 192.0);
+    final tabHeight = MediaQuery.textScalerOf(context).scale(14) * 2.8;
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          TabBar(
+            labelStyle: const TextStyle(
+              fontSize: 14,
+              height: 1.3,
+              fontWeight: FontWeight.w600,
+            ),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+            tabs: [
+              for (final label in ['인식 수식', '원본 이미지'])
+                Tab(
+                  height: tabHeight < 48 ? 48 : tabHeight,
+                  child: Text(
+                    label,
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(
+            height: contentHeight.clamp(minimum, 320.0),
+            child: TabBarView(
+              children: [
+                SingleChildScrollView(
+                  child: _ContentHeightObserver(
+                    onChanged: (height) {
+                      if (mounted && (contentHeight - height).abs() > 0.5) {
+                        setState(() => contentHeight = height);
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: MathStudentText(widget.text),
+                    ),
+                  ),
+                ),
+                MathSourceRegion(region: widget.region, bytes: widget.bytes),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ContentHeightObserver extends SingleChildRenderObjectWidget {
+  const _ContentHeightObserver({required this.onChanged, required super.child});
+  final ValueChanged<double> onChanged;
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderContentHeightObserver(onChanged);
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    _RenderContentHeightObserver renderObject,
+  ) {
+    renderObject.onChanged = onChanged;
+  }
+}
+
+class _RenderContentHeightObserver extends RenderProxyBox {
+  _RenderContentHeightObserver(this.onChanged);
+  ValueChanged<double> onChanged;
+  double? previousHeight;
+  @override
+  void performLayout() {
+    super.performLayout();
+    final height = size.height;
+    if (!height.isFinite || previousHeight == height) return;
+    previousHeight = height;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (attached) onChanged(height);
+    });
+  }
 }
 
 class MathInputProgress extends StatelessWidget {

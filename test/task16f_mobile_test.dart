@@ -447,4 +447,175 @@ void main() {
       );
     },
   );
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets(
+      'recognition comparison fits content and preserves original zoom at $scale',
+      (t) async {
+        t.view.physicalSize = const Size(393, 852);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.resetPhysicalSize);
+        addTearDown(t.view.resetDevicePixelRatio);
+        final Uint8List bytes = (await t.runAsync(() async {
+          final recorder = ui.PictureRecorder();
+          final canvas = Canvas(recorder);
+          canvas.drawColor(Colors.white, BlendMode.src);
+          canvas.drawRect(
+            const Rect.fromLTWH(20, 40, 240, 50),
+            Paint()..color = Colors.black,
+          );
+          final picture = recorder.endRecording();
+          final image = await picture.toImage(300, 200);
+          final data = await image.toByteData(format: ui.ImageByteFormat.png);
+          image.dispose();
+          picture.dispose();
+          return data!.buffer.asUint8List();
+        }))!;
+        final texts = [
+          r'\frac{x^2+1}{x-1}',
+          r'\begin{aligned} a&=1\\ b&=2\\ c&=3\\ d&=4\\ e&=5\end{aligned}',
+          List.generate(
+            30,
+            (i) => '조건 $i 를 확인하고 풀이의 근거를 원본과 대조합니다.',
+          ).join('\n'),
+        ];
+        var confirmed = false;
+        await t.pumpWidget(
+          host(
+            Scaffold(
+              body: ListView(
+                children: [
+                  MathRecognitionPanel(
+                    regions: [
+                      for (var i = 0; i < texts.length; i++)
+                        {
+                          'id': 'r$i',
+                          'reading_order': i + 1,
+                          'artifact_id': 'photo',
+                          'raw_text': texts[i],
+                          'x': 0.05,
+                          'y': 0.15,
+                          'width': 0.85,
+                          'height': 0.4,
+                        },
+                    ],
+                    sources: {'photo': bytes},
+                    onConfirm: (_) async => confirmed = true,
+                  ),
+                ],
+              ),
+            ),
+            scale: scale,
+          ),
+        );
+        await t.pumpAndSettle();
+        final panels = find.byType(TabBarView);
+        final shortHeight = t.getSize(panels.at(0)).height;
+        final multilineHeight = t.getSize(panels.at(1)).height;
+        expect(shortHeight, lessThan(230));
+        expect(multilineHeight, greaterThan(shortHeight));
+        expect(t.getSize(panels.at(2)).height, lessThanOrEqualTo(320));
+        expect(
+          t.getSize(panels.at(2)).height,
+          greaterThanOrEqualTo(multilineHeight),
+        );
+        final card = t.widget<Card>(find.byType(Card).first);
+        expect(
+          (card.shape! as RoundedRectangleBorder).side.color,
+          AcademicPurple.primary,
+        );
+        await screenshot(t, 'recognition-adaptive-$scale');
+        await t.tap(find.text('원본 이미지').first);
+        await t.pump();
+        await t.pump(const Duration(milliseconds: 400));
+        await t.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 50)),
+        );
+        await t.pumpAndSettle();
+        expect(t.getSize(panels.at(0)).height, shortHeight);
+        await t.tap(find.byTooltip('원본 크게 보기').first);
+        await t.pump();
+        await t.pump(const Duration(milliseconds: 400));
+        await t.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 50)),
+        );
+        await t.pumpAndSettle();
+        expect(find.text('영역 1 · 원본 대조'), findsOneWidget);
+        expect(
+          t.getSize(find.byType(MathSourceRegion).last).height,
+          greaterThan(500),
+        );
+        expect(
+          t.widget<MathSourceRegion>(find.byType(MathSourceRegion).last).bytes,
+          same(bytes),
+        );
+        await t.tap(find.byType(BackButton));
+        await t.pumpAndSettle();
+        await t.tap(find.text('인식 수식').first);
+        await t.pumpAndSettle();
+        // The full long transcript remains reachable, rather than being truncated.
+        await t.ensureVisible(panels.at(2));
+        await t.pumpAndSettle();
+        final inner = find
+            .descendant(
+              of: panels.at(2),
+              matching: find.byType(SingleChildScrollView),
+            )
+            .first;
+        await t.drag(inner, const Offset(0, -2500));
+        await t.pumpAndSettle();
+        final scroll = t.state<ScrollableState>(
+          find.descendant(of: inner, matching: find.byType(Scrollable)).first,
+        );
+        expect(scroll.position.pixels, greaterThan(0));
+        scroll.position.jumpTo(scroll.position.maxScrollExtent);
+        await t.pumpAndSettle();
+        expect(scroll.position.extentAfter, 0);
+        expect(t.takeException(), isNull);
+        expect(confirmed, isFalse);
+      },
+    );
+  }
+
+  testWidgets('editing transcription grows and shrinks its comparison area', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      host(
+        Scaffold(
+          body: ListView(
+            children: [
+              MathRecognitionPanel(
+                regions: const [
+                  {'id': 'r1', 'raw_text': 'x=1'},
+                ],
+                onConfirm: (_) async {},
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await t.pumpAndSettle();
+    final panel = find.byType(TabBarView);
+    final shortHeight = t.getSize(panel).height;
+    await t.tap(find.text('전사 내용 수정'));
+    await t.pumpAndSettle();
+    await t.enterText(
+      find.byType(TextField),
+      r'\begin{aligned} a&=1\\ b&=2\\ c&=3\\ d&=4\\ e&=5\end{aligned}',
+    );
+    await t.pumpAndSettle();
+    expect(t.getSize(panel).height, greaterThan(shortHeight));
+    await t.enterText(find.byType(TextField), 'x=2');
+    await t.pumpAndSettle();
+    expect(t.getSize(panel).height, shortHeight);
+    expect(t.takeException(), isNull);
+    expect(
+      t
+          .widget<FilledButton>(find.widgetWithText(FilledButton, '답안 입력 완료'))
+          .onPressed,
+      isNull,
+    );
+  });
 }
