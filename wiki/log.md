@@ -5593,3 +5593,5 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 대학 검색·선택→전공→완료·MY/재실행 정보 유지 Owner PASS. 마지막 닉네임 단계 추가 의견에 기존 선택형 display_name/MY/커뮤니티 정책 확인, 코드 추가 없이 권고안 검토. [근거](app-release-integration-20261103.md#a46-온보딩-전체-흐름-owner-pass닉네임-제안--2026-11-03). Store 승인 아님.
 
 - 2026-11-03: Owner 승인으로 마지막 선택형 닉네임 온보딩 구현. 기존 MY 검증/저장 재사용·빈값/skip 기존값 보존·실패 재시도·owner guard, 집중63PASS. Release47 전체 검사·빌드·설치 진행, 운영 DB/Store 미변경. [상세](app-release-integration-20261103.md#마지막-선택형-닉네임-승인구현--2026-11-03).
+
+- 2026-11-03: 닉네임 온보딩 A47 Release 빌드·iPhone12ProMax 설치/실행 완료. A전체1375PASS/7SKIP·Analyze PASS·B집중63PASS, iOS/AAB 서명·인증 설정 포함 PASS. Owner 닉네임 저장/MY/재실행 검수 요청. 운영/Store HOLD. [빌드·증거](app-release-integration-20261103.md#release47-닉네임-온보딩-빌드설치--2026-11-03).

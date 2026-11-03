@@ -339,3 +339,13 @@ Owner가 전공 다음 마지막 선택형 닉네임 단계 추가, 기존 저�
 보존 검토7항목: (1) 새 사건/시점 수집 없음, (2) 기존 학습/답안 사실 불변, (3) 기존 자기보고 현재 닉네임 필드만 기존 sparse 저장 경로로 갱신·이력 생성 없음, (4) 동일 로그인 owner guard, (5) 닉네임을 실제 성명·지원·합격 사실로 추정하지 않음, (6) 새 개인정보 종류/공개 권한/보존기간 없음, (7) 빈값·skip을 삭제/추정 backfill로 해석하지 않음. [기존 닉네임 정책](core-app-improvements.md), [플랫폼 경계](product-platform-boundaries.md), [보존 전략](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review)을 계승한다.
 
 최종 로컬 검증: 전체 Flutter **1375PASS/7SKIP**, Analyze PASS, 집중63PASS, mock 키보드 렌더2PASS(100/200%). 로그 `/tmp/app-review-nickname-{all,analyze,focused,render}.log`; 화면 `/private/tmp/legendstudy-core-ui/nickname-keyboard-{1.0,2.0}.png`. OS 키보드/실기기 캡처가 아닌 widget viewInsets 검사다. mock 캡처의 명시적 버튼 TextStyle은 테스트 기본 폰트 때문에 한글이 사각 문자로 표시되는 한계가 있다. 버튼 문구·터치·layout은 widget assertions로 검증했으며 실제 글리프 표시는 Owner 기기에서 확인한다. 제품 폰트는 변경하지 않았다. Release47 및 Owner 실제 저장 검수 대기.
+
+
+### Release47 닉네임 온보딩 빌드·설치 — 2026-11-03
+
+- 기능 소스 A `a14a23c`, B `541a335`. B에도 동일 수정 병합, 집중63PASS. A 전체1375PASS/7SKIP·Analyze PASS·집중63PASS·mock렌더2PASS. B 이전 전체1383은 이번 닉네임 변경 전 검사이므로 구분한다.
+- A iOS1.0.1(47) signed Release Archive/App Store IPA 및 같은 Archive의 기기 export PASS. Android47 AAB95.5MB·jarsigner PASS. codesign deep/strict·기기 provisioning·Release AOT PASS. 실제 iOS binary에 기존 Supabase URL/publishable·Google server/iOS ID 포함을 값 출력 없이 검증.
+- iPhone12ProMax `com.legendstudy.app` 업데이트 설치·실행 PASS, 기존 `/onboarding` URL 전달. 앱 삭제·계정/profile 초기화 없음. 실제 열린 화면 및 닉네임 입력→저장→홈/MY→완전 종료·재실행 복원은 Owner 응답 대기. 설치/launch 성공을 실제 UI·저장 PASS로 확대하지 않는다.
+- private `candidate-a/release47/`: Store IPA SHA256 `d5470af6dab1ef90bb289c8ef9a2c72b6fed4386e1d44f364e1e60f08e89af55`, 기기 IPA `4a23f77c75777e434d61ee3c55cf457a3f974eaf19a030a819e7a4f4a58f5d98`, AAB `0fc90734662ee02f5ef7597210e2c8d077727cfe6234d8c230512e8467bd9520`. Archive/로그 private 보존. 기존46/APP41 산출물 보존.
+- 로그 `/tmp/app-review-a47-{ios,android,device-export,android-signature}.log`, `/tmp/app-review-nickname-{all,analyze,focused,render}.log`, `/tmp/app-review-b-nickname-focused.log`. Wiki handoff/link 검사 A/B PASS.
+- 후보 A 닉네임 DEVICE_QA_PENDING, B BETA_HOLD·운영 활성화 HOLD. 운영 DB/Auth 설정/Credit/Ledger/결제/WEB 변경 및 Store 업로드/제출 없음. APP41 HEAD `367bfab`와 기존 dirty Xcode 파일/untracked supabase temp 그대로 보존 확인.
