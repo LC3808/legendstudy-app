@@ -329,7 +329,12 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                           ),
                         ),
                       ),
-                      _footer(),
+                      // Do not put a step-changing CTA above the school
+                      // keyboard where users expect the search action.
+                      if (!(_step == 2 &&
+                          _isStudent &&
+                          MediaQuery.viewInsetsOf(context).bottom > 0))
+                        _footer(),
                     ],
                   ),
           ),
@@ -424,30 +429,33 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
     return [
       _header('학년과 학교', '학교와 학년을 설정해 주세요. 학교별 학습 정보와 맞춤형 서비스를 제공하는 데 활용됩니다.'),
-      const _FieldLabel('학년'),
-      const SizedBox(height: AppTokens.space12),
-      Wrap(
-        spacing: AppTokens.space8,
-        runSpacing: AppTokens.space8,
+      Row(
         children: [
-          for (final grade in [null, 1, 2, 3])
-            _SelectChip(
-              label: grade == null ? '설정 안 함' : '$grade학년',
-              selected: _grade == grade,
-              onTap: _busy
-                  ? null
-                  : () => setState(() {
-                      _grade = grade;
-                      _gradeDirty = true;
-                    }),
+          const _FieldLabel('학년'),
+          const SizedBox(width: AppTokens.space12),
+          for (final grade in [1, 2, 3]) ...[
+            if (grade > 1) const SizedBox(width: AppTokens.space8),
+            Expanded(
+              child: _SelectChip(
+                label: '$grade학년',
+                selected: _grade == grade,
+                onTap: _busy
+                    ? null
+                    : () => setState(() {
+                        _grade = _grade == grade ? null : grade;
+                        _gradeDirty = true;
+                      }),
+              ),
             ),
+          ],
         ],
       ),
-      const SizedBox(height: AppTokens.space24),
+      const SizedBox(height: AppTokens.space16),
       const _FieldLabel('학교'),
       const SizedBox(height: AppTokens.space12),
       SchoolSearchPicker(
         key: ValueKey('onboarding-school:$_owner'),
+        inlineSearch: true,
         enabled: !_busy,
         onChanged: (school) => setState(() => _schoolDraft = school),
         onSearchPendingChanged: (pending) =>
@@ -779,9 +787,9 @@ class _SelectChip extends StatelessWidget {
             duration: reduceMotion
                 ? Duration.zero
                 : const Duration(milliseconds: 140),
-            constraints: const BoxConstraints(minHeight: 42),
+            constraints: const BoxConstraints(minHeight: 44),
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 18),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
             decoration: BoxDecoration(
               color: selected ? _accent : AppTokens.surface,
               borderRadius: BorderRadius.circular(AppTokens.radiusPill),

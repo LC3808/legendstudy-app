@@ -268,3 +268,18 @@ Owner는 Google/Apple 질문에 “1) 정상, 애플로그인 새로 가입으�
 ### 보존 검토
 
 기존 [상위 전략](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review) 및 V2 정책 유지: (1) 새 시점/사실 수집 없음, (2) 기존 답안·학습 원본 불변, (3) UI 임시 상태만 추가하며 프로필 UPDATE payload/history 변경 없음, (4) 기존 owner guard 유지, (5) 자기보고 프로필을 학습/입시 결과와 합치지 않음, (6) 새 개인정보/권한/retention 없음, (7) 미설정 학교 추정·backfill 및 미확정 결과 자동 저장 없음.
+
+
+### Owner 화면 근거·배치 수정 및 후속 검수 — 2026-11-03
+
+Owner 설명과 `/Users/woojinchang/Desktop/IMG_1336.PNG`에서 학년 선택4개가 각 전체 너비로 세로 배치되어 있고, 키보드 위 고정 `다음`이 학교 입력 바로 아래에 표시되는 것을 확인했다. 실제 검색 버튼은 아래 스크롤 영역에 있어 검색 대신 `다음`을 누르는 동선이었다. 검색 네트워크가 자동으로 단계를 이동시킨 사건이 아니다. `AnimatedContainer(alignment: center)`가 Wrap의 가용 폭으로 늘어나는 코드와 화면이 일치한다. 기존 전체 학교 누락 통계의 원인까지 입증한 것은 아니다. Owner 원본 사진은 Git에 추가하지 않았다.
+
+Owner의 한 줄 학년·입력창 내 검색 제안을 적용했다. 학년 라벨+1/2/3학년을 Row/Expanded로 배치, 선택한 학년을 다시 누르면 미설정으로 돌아가 선택권을 유지한다. 학교를 바로 아래에 두고 온보딩 picker만 `inlineSearch`로 입력창 오른쪽에 검색을 표시한다. 기존 MY picker 배치는 유지한다. 학교 단계에서 키보드가 열린 동안 하단 다음/이전/건너뛰기 footer를 숨겨 입력창 검색과 혼동하지 않게 했다. 키보드 닫힘 후 선택 학교명 확인 CTA 또는 명시적 건너뛰기를 사용한다. 앞선 pending 이동 차단도 유지한다. 수리 UX/전역 디자인 변경 없음.
+
+- 집중32PASS: iPhone428×926·360폭/글씨200%에서 학년3개 같은 y, 검색 버튼이 입력창 사각형 안, 키보드 동안 다음/skip 없음, 검색 후 확인 전 학교쓰기0.
+- mock 화면 캡처2PASS: `/private/tmp/legendstudy-core-ui/school-{compact,keyboard,result}-{1.0,2.0}.png`. 실기기 스크린샷/OS 키보드 이미지가 아니며 widget viewInsets를 사용한 렌더 검사다.
+- Owner는 기존42에서 “안내·홈 복귀·계정 및 프로필 유지 정상”, “학교·학년 유지, 학교 미설정 안내 사라짐” 응답. 안내 흐름 및 MY 실제 학교 저장→재실행 복원·카드 갱신 **Owner 관찰 PASS**. 설정 메뉴에 안내 진입이 없다고 한 에이전트 설명은 철회했다. `/app-guide` route는 있으나 사용한 정확한 진입 위치는 미확인이다.
+- 신규 온보딩 수정 화면의 실기기 확인은 별도 대기. 신규 계정/기존 profile 초기화는 수행하지 않는다.
+- 방어 수정만 있던44 빌드는 새 배치가 없어 검수 대상에서 제외. 새45 Release로 준비하며 기존42 실기기 PASS를 새45 전체 PASS로 자동 이전하지 않는다.
+
+최종 배치 수정 후 전체 Flutter1362PASS/7SKIP·Analyze PASS. 이전1359/집중32/렌더2와 실행 범위를 구분한다.

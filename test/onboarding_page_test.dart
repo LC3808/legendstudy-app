@@ -1,4 +1,9 @@
 import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+
+import 'core_ux_test.dart' as preview;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -129,14 +134,23 @@ Future<GoRouter> _mount(
         schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
       ],
       child: MaterialApp.router(
-        theme: AppTheme.light,
+        theme: const bool.fromEnvironment('CORE_RENDER')
+            ? AppTheme.light.copyWith(
+                textTheme: AppTheme.light.textTheme.apply(
+                  fontFamily: 'CorePreview',
+                ),
+              )
+            : AppTheme.light,
         routerConfig: router,
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            disableAnimations: reduceMotion,
-            textScaler: TextScaler.linear(textScale),
+        builder: (context, child) => RepaintBoundary(
+          key: preview.frame,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              disableAnimations: reduceMotion,
+              textScaler: TextScaler.linear(textScale),
+            ),
+            child: child!,
           ),
-          child: child!,
         ),
       ),
     ),
@@ -146,6 +160,19 @@ Future<GoRouter> _mount(
 }
 
 void main() {
+  setUpAll(() async {
+    if (const bool.fromEnvironment('CORE_RENDER')) {
+      await (FontLoader(
+        'MaterialIcons',
+      )..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf'))).load();
+      final font = File('/System/Library/Fonts/AppleSDGothicNeo.ttc');
+      if (font.existsSync()) {
+        await (FontLoader(
+          'CorePreview',
+        )..addFont(font.readAsBytes().then(ByteData.sublistView))).load();
+      }
+    }
+  });
   for (final reduced in [false, true]) {
     testWidgets(
       'existing status selection animation honors Reduce Motion $reduced',
@@ -487,6 +514,58 @@ void main() {
     expect(repo.completed, isFalse);
     expect(tester.takeException(), isNull);
   });
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('compact school keyboard layout at text scale $scale', (
+      tester,
+    ) async {
+      tester.view.physicalSize = Size(scale == 1 ? 428 : 360, 926);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetViewInsets);
+      final repo = _Repo();
+      await _mount(
+        tester,
+        repo,
+        user: 'u1',
+        schools: _OneSchool(),
+        textScale: scale,
+      );
+      await tester.tap(find.text('고등학교 재학생'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('다음'));
+      await tester.pumpAndSettle();
+      final gradeY = tester.getCenter(find.text('1학년')).dy;
+      expect(tester.getCenter(find.text('2학년')).dy, closeTo(gradeY, 1));
+      expect(tester.getCenter(find.text('3학년')).dy, closeTo(gradeY, 1));
+      await preview.capture(tester, 'school-compact-$scale');
+      tester.view.viewInsets = const FakeViewPadding(bottom: 336);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byType(TextField));
+      await tester.enterText(find.byType(TextField), '레전드');
+      await tester.pumpAndSettle();
+      final search = find.widgetWithText(OutlinedButton, '검색');
+      expect(
+        tester
+            .getRect(find.byType(TextField))
+            .contains(tester.getCenter(search)),
+        isTrue,
+      );
+      expect(find.text('다음'), findsNothing);
+      expect(find.text('건너뛰기'), findsNothing);
+      await preview.capture(tester, 'school-keyboard-$scale');
+      await tester.tap(search);
+      await tester.pumpAndSettle();
+      expect(repo.completed, isFalse);
+      expect(repo.schoolWrites, 0);
+      tester.view.resetViewInsets();
+      await tester.pumpAndSettle();
+      expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
+      await preview.capture(tester, 'school-result-$scale');
+      expect(tester.takeException(), isNull);
+    });
+  }
 
   testWidgets('skip saves chosen status and grade but never temporary school', (
     tester,

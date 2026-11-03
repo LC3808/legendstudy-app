@@ -8,14 +8,15 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - 후보 A: 지정 온보딩 V2 `30edf235` 병합, Kakao 시스템 인증 수정 `2c3ce78` 재사용, MY 미설정 안내 포함.
 - Flutter Analyze PASS; 전체 1,356 PASS / 7 SKIP. iOS 1.0.1(42) signed Archive/IPA 및 Android42 signed AAB PASS.
 - 바이너리 Supabase/Google 설정 포함, Apple entitlement/서명 확인. Store 업로드/재제출 없음.
-- 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색·카드·선택 확인 버튼도 Owner PASS. 기존 PDF·인문논술 History·결과 조회·뒤로 이동도 Owner PASS. 기존 이메일 로그인·홈·MY도 Owner PASS. 이메일 재실행 세션·오입력 차단/오류 안내·정상 재시도도 Owner PASS. Google/Apple·실제 프로필 저장·신규 온보딩은 검수 대기.
+- 후보 A42 iPhone12ProMax: Owner 확인으로 Kakao 인증창→취소·재시도→로그인·홈 복귀 및 앱 완전 종료 후 홈·MY 동일 계정 유지 PASS. MY 기존 정보 유지·빠진 정보만 안내도 Owner PASS. 학교 검색·카드·선택 확인 버튼도 Owner PASS. 기존 PDF·인문논술 History·결과 조회·뒤로 이동도 Owner PASS. 기존 이메일 로그인·홈·MY도 Owner PASS. 이메일 재실행 세션·오입력 차단/오류 안내·정상 재시도도 Owner PASS. Google/Apple 전체 인증 matrix·신규 온보딩 수정본은 검수 대기. MY 실제 학교 저장·재실행 복원·안내 해제는 Owner PASS.
 - 현재 worktree는 후보 B `codex/app-review-candidate-b-20261103`. TASK16-K 후속 `d7d5bb1` 통합, 14개 충돌 해결, Analyze 및 전체1,383 PASS/7 SKIP. signed iOS43 Archive/IPA·Android43 AAB PASS. Native 혼합 신규 사진 제출·실기기 전체 loop는 미완료. 운영 수리·상경 활성화 HOLD.
-- TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 지시로 A42 Release 설치·실행 및 Kakao 기본 흐름 검수 완료. B 실기기 검수 대기.
+- TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 정식 빌드 지시로 후보 A42를 iPhone12ProMax에 업데이트 설치·실행 PASS. 신규 온보딩 수정본 검수 대기.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
 
 ## P0 실기기 신규 발견
 
-Apple 신규 가입 후 학교 검색을 누르자 학교 확정 없이 화면 이동했다는 Owner 보고. 신규 온보딩 FAIL/원인 조사 중. 미확정 검색어의 다음 이동 경로는 재현·방어 수정; 전체1359PASS/7SKIP·최종집중30PASS·Analyze PASS. 검색 버튼 자체 이동은 미재현, 이동 목적지 답변·수정본 실기기 재검수 대기. 기존 MY 검색 PASS와 구분. [상세](app-release-integration-20261103.md#apple-신규-온보딩-학교-단계-이탈-보고--2026-11-03).
+Owner 사진으로 학년 버튼 세로 확장→검색 버튼이 아래로 밀림→키보드 위 `다음`을 검색으로 오인하는 동선 확인. 학년 한 줄·입력창 내 검색·학교 키보드 동안 footer 숨김·미확정 검색어 이동 차단 적용. 집중32PASS/렌더2PASS, 신규45 Release·수정본 실기기 검수 준비. 기존42 MY 학교 저장·재실행 복원·누락 안내 해제와 안내 화면 계정 유지 Owner PASS. [상세](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03).
+
 
 ## 재개 경로
 

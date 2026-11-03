@@ -5566,3 +5566,8 @@ Release42/iPhone12ProMax 재실행 동일 계정·잘못된 비밀번호 차단/
 ## 2026-11-03 — 신규 Apple 온보딩 학교 이탈 P0
 
 Owner 신규 온보딩 학교 검색 후 화면 이동 보고. 검색어 미확정 상태의 다음 이동은 재현 후 차단; 검색 버튼 자체 이탈은 미재현. 전체1359PASS/7SKIP·집중30PASS·Analyze PASS. [범위·미해결](app-release-integration-20261103.md#apple-신규-온보딩-학교-단계-이탈-보고--2026-11-03). 운영 수정/Store 제출 없음.
+
+
+## 2026-11-03 — Owner 사진 기반 온보딩 배치 수정
+
+학년 세로 확장·검색 버튼 밀림·키보드 위 다음 오인을 확인. 학년3개 한 줄/inline검색/키보드 footer숨김 적용. 집중32PASS·mock렌더2PASS. 기존42 MY 저장/재실행/누락안내 해제 및 안내 계정유지 Owner PASS. [근거·검수](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03). 새45 준비, Store HOLD.

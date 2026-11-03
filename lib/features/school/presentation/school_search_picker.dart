@@ -13,9 +13,11 @@ class SchoolSearchPicker extends ConsumerStatefulWidget {
     required this.onChanged,
     this.enabled = true,
     this.onSearchPendingChanged,
+    this.inlineSearch = false,
   });
   final ValueChanged<School?> onChanged;
   final bool enabled;
+  final bool inlineSearch;
 
   /// An entered query must be resolved before the parent can confirm a school.
   final ValueChanged<bool>? onSearchPendingChanged;
@@ -143,7 +145,21 @@ class _SchoolSearchPickerState extends ConsumerState<SchoolSearchPicker> {
         decoration: InputDecoration(
           labelText: '학교 검색',
           counterText: '',
-          prefixIcon: const Icon(Icons.search),
+          prefixIcon: widget.inlineSearch ? null : const Icon(Icons.search),
+          suffixIcon: widget.inlineSearch
+              ? Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: OutlinedButton(
+                    onPressed:
+                        widget.enabled &&
+                            !_loading &&
+                            _input.text.trim().isNotEmpty
+                        ? _search
+                        : null,
+                    child: Text(_loading ? '검색 중…' : '검색'),
+                  ),
+                )
+              : null,
           hint: ExcludeSemantics(
             child: AnimatedSwitcher(
               duration: _touched || MediaQuery.disableAnimationsOf(context)
@@ -151,20 +167,25 @@ class _SchoolSearchPickerState extends ConsumerState<SchoolSearchPicker> {
                   : const Duration(milliseconds: 350),
               child: Text(
                 _touched ? '학교 이름을 검색해 주세요' : _examples[_example],
+                maxLines: widget.inlineSearch ? 1 : null,
+                overflow: widget.inlineSearch ? TextOverflow.ellipsis : null,
                 key: ValueKey(_touched ? -1 : _example),
               ),
             ),
           ),
         ),
       ),
-      const SizedBox(height: 8),
-      OutlinedButton.icon(
-        onPressed: widget.enabled && !_loading && _input.text.trim().isNotEmpty
-            ? _search
-            : null,
-        icon: const Icon(Icons.search),
-        label: Text(_loading ? '검색 중…' : '검색'),
-      ),
+      if (!widget.inlineSearch) ...[
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          onPressed:
+              widget.enabled && !_loading && _input.text.trim().isNotEmpty
+              ? _search
+              : null,
+          icon: const Icon(Icons.search),
+          label: Text(_loading ? '검색 중…' : '검색'),
+        ),
+      ],
       if (_searched || _loading)
         const Padding(padding: EdgeInsets.only(top: 16), child: Text('검색 결과')),
       if (_loading) const Center(child: CircularProgressIndicator()),
