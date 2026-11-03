@@ -5556,3 +5556,8 @@ Release42/iPhone12ProMax PDF·인문논술 History·결과·뒤로 이동 정상
 ## 2026-11-03 — 후보 A 이메일 로그인 Owner PASS
 
 Release42/iPhone12ProMax 기존 이메일 로그인·홈·MY 정상 응답 기록. 재실행/오입력 재시도·다른 Provider는 별도 검수. [근거](app-release-integration-20261103.md#후보-a-이메일-로그인-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
+
+
+## 2026-11-03 — 후보 A 이메일 세션·오입력 재시도 Owner PASS
+
+Release42/iPhone12ProMax 재실행 동일 계정·잘못된 비밀번호 차단/오류 안내·정상 비밀번호 재시도 확인. [근거](app-release-integration-20261103.md#후보-a-이메일-세션오입력-재시도-owner-확인--2026-11-03). Google/Apple 등 잔여 검수 및 Store HOLD 유지.
