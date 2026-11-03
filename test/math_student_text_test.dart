@@ -85,6 +85,8 @@ void main() {
       r'\int_0^\alpha (x^2-11x+18)\,dx',
       r'\bar{x}-2.5\frac{2}{\sqrt n}\le m\le\bar{x}+2.5\frac{2}{\sqrt n}',
       'b-a=10/√n, d-c=6/√n',
+      'f(t)=t⁴-1, f′(t)=4t³',
+      'f′(-2)=-32.',
       '1<10/√n, 6/√n<6/5',
       r'\begin{pmatrix}x_1^2&x_2^2&x_3^2&x_4^2&x_5^2&x_6^2\\1&2&3&4&5&6\end{pmatrix}',
     ]) {

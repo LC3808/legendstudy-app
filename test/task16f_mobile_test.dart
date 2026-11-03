@@ -96,6 +96,9 @@ void main() {
       );
       expect(unresolvedMath(r'e^{?}'), isTrue);
       expect(unresolvedMath('[이하 일부 판독 불명]'), isTrue);
+      expect(unresolvedMath('[분수식]'), isTrue);
+      expect(unresolvedMath('[ 분수식 ]'), isTrue);
+      expect(unresolvedMath('분수식의 분모는 0이 아니다.'), isFalse);
       expect(unresolvedMath('[판독 불확실: x 또는 -x]'), isTrue);
       expect(unresolvedMath('[인식 불가]'), isTrue);
       expect(unresolvedMath(r'\frac{}{}'), isTrue);

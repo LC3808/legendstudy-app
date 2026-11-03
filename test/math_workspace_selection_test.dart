@@ -180,7 +180,7 @@ class _UploadGateway extends MathGateway {
     if (action == 'read_input') {
       return {
         'can_request_evaluation': false,
-        'candidate': extracts > 0 ? 'candidate' : null,
+        'candidate': extracts > 0 ? {'state': 'COMPLETED'} : null,
         'candidate_regions': <Map<String, dynamic>>[],
       };
     }

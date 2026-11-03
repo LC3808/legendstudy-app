@@ -128,3 +128,67 @@ Owner가 iPhone 12 Pro Max에서 로그인 후 사진 **자르기까지 완료**
 - 기존 한양 Q1 이미지로 428×926 로컬 Flutter 화면을 렌더링하여 드래그/미리보기를 검수했다. 이 캡처는 실기기 스크린샷 또는 새 OCR 검증으로 계산하지 않는다. 원본·캡처는 Git에 넣지 않았다.
 - 별도 `com.legendstudy.app.task16f` Profile 빌드/설치/실행 PASS. 앱 삭제 없이 덮어 설치하여 기존 앱 데이터와 로그인 세션을 보존한다. 새 자르기 방식의 Owner 실기기 사용성 확인은 대기한다.
 - 변경 파일: `lib/features/essay/answer_image_crop.dart`, `lib/features/essay/math_mobile/math_image_tools.dart`, `test/answer_image_crop_test.dart`, `integration_test/task16g_photo_loop_test.dart` 및 본문/current-status/log. Provider0, DB/Auth/Credit/Ledger/결제 변경0, WEB 변경0, APP1.0.1(41) 브랜치 변경0. 기존 F 디자인 유지 결정 및 K 실기기 검수의 좁은 사용성 보완이며 운영 HOLD는 유지한다.
+
+
+## FINAL BETA READINESS — 11월 3일 실기기 차단 조사와 보완
+
+Owner는 기존 WEB 전체 E2E·이용권/History와 iPhone 크롭 사용성 개선을 인정했다. 신규 디자인/엔진 개발 없이 실제 카메라 학습 루프와 운영 연결 차단을 마감한다. 이 승인은 운영 활성화 승인이 아니다.
+
+### 실기기 OCR 차단: 화면 진입과 인식 성공을 구분
+
+Owner의 ‘OCR 결과 화면까지 완료’ 보고 이후 서버를 대조한 결과, 실제로는 ‘저장한 답안 입력 확인’ → ‘처리 중’ → ‘처리 상태를 확인하지 못했어요’였다. Q1 두 장은 원본 왼쪽/오른쪽 촬영본이며 11,417,229 + 14,218,771 bytes로 개별 업로드는 PRESENT이나 합계25,636,000 bytes가 OCR 요청 합계20MiB 제한을 초과했다. 최초 실패 run은 INPUT_FAILED, Provider 이전 Storage 읽기 단계에서 중단했다. 원본/실패 기록은 보존했다.
+
+- LAB `extractInBatches`: 원본 bytes를 축소하지 않고 기존 OCR Provider에 요청당20MiB 이하로 순차 전달. artifact ID·원본 순서를 유지하며 전부 성공한 경우에만 단일 extraction 결과를 finalize한다. 외부 artifact/사진 누락/부분 실패/합계100영역 초과는 완료로 취급하지 않는다. 이 수정은 OCR 모델 정확도 개선이 아니다.
+- APP는 실패/처리 중/응답 불명을 구분하고 같은 attempt를 조회한다. 실패 시 저장 사진 재시도, 처리 중에는 중복 OCR/평가 요청을 하지 않는다. 응답 유실 후 실제 COMPLETED 결과가 있으면 해당 결과로 복구한다.
+- `[분수식]`처럼 값이 빠진 OCR placeholder를 서버·Native 공통 불확실 입력으로 차단했다. 평범한 ‘분수식의 분모’ 문장은 차단하지 않는다. 기존 부호·지수·UNCERTAIN 확인 gate와 공개 정책 유지.
+- 저장 Q1 실기기 사진에 대한 실제 재시도와 Owner 전사 확인은 아래 후속 결과로 기록한다. 카메라/크롭/업로드 확인을 전체 평가·무료 재첨삭 PASS로 확대하지 않는다.
+
+### 혼합형 WEB 실제 무료 재첨삭
+
+기존 paid run `7fd28980-cf88-4382-baf9-4434ca7556b1`을 재사용하여 브라우저에서 이전 답안 불러오기 → Q1 논증/Q2 계산 수정 → 두 문항 저장 → 무료 재첨삭 0 이용권 명시 확인 → 제출 → 두 결과/History 재조회를 실행했다. 새 run `dd5b335f-4a08-4025-993e-c4482b7bdbf2`, previous=기존 paid, submission_index2, 두 문항 COMPLETED. Q2 계산 합계1,393,900을 인정, 우선 과제0; Q1 수정된 논증 개선을 인정하되 글자 수 검토가 남는다. 일부 완료를 시험 전체 완료로 표시하지 않았다.
+
+실제 Math/Essay/독립 검토 receipt가 있으며 무료 실행 이후 새 Credit 거래0, 가용 잔액1 유지. Math20,056tokens(17,187/2,869), Essay generation18,210tokens(16,187/2,023)은 확인된 두 호출만의 수치이며 독립 검토를 포함한 총량/금액이 아니다. 비용 NULL을0으로 보고하지 않는다. 합성 검수용 텍스트이며 실제 상경 합격자 손글씨 품질 검증으로 해석하지 않는다. 혼합형 실제 기기 전체 제출은 미완료다.
+
+### 수식/원문 대조
+
+실제 상경 결과의 `f′(t)` Unicode prime이 strict renderer에서 실패하는 문제를 표시 단계에서만 ASCII prime으로 정규화했다. 저장 답안/수치/공식은 변경하지 않는다. TEST 실제 혼합 결과17개 수식 fallback0, 공개 상태 재조회 유지. 기존 자연 Q1/Q2 무료 결과의 workspace 전체 수식74/39개 fallback0,390px 문서 가로 넘침0. 숫자는 해설만의 개수가 아니다. Q2 화면에서 원본/중앙/해설 3열과 수식 표시를 시각 확인했다.
+
+OCR 원본 대조 결과는 여전히 PARTIAL/FAIL: Q1 e^{-x} 부호·이차식 계수, Q2 l/q 및 표의12/13 위치 오독. 독립 정답 전사 집합이 없어 정확도 %를 만들지 않는다. 정상 최종값만으로 중간표 OCR 정확성을 인정하지 않는다. 공식 예시답안이 연결되지 않은 공개 화면은 AI 평가 단계라고 표시하며 모범해설 수준 완성을 선언하지 않는다. Q1/Q2 저장 결과는 answer_status=CORRECT이나 review_status=HUMAN_REVIEW_REQUIRED이므로 화면의 확정 판정 보류는 서버 정책과 일치한다. 이를 자동 해제하지 않는다. 힌트의 구체성과 검수 보류 해소는 품질 gate다.
+
+### 운영 읽기 전용 재확인과 적용 순서
+
+운영363시험/1,014문항/52 Math set 유지. 대표 상경 기존2문항을 재사용한다. 한양2024자연 오전 TEST와 동일한 운영 ID는 없고 운영2024자연 모의는 별개다. `is_active=false`만으로 차단 원인을 단정하지 않는다(기존 인문에도 같은 값 존재). 실제 WEB launch hold/public scope/Worker admission을 함께 확인한다.
+
+운영 미설치 RPC4개: `math_coaching`, `essay_math_coaching`, `math_session_quote`, `math_session_continue`. 기존 `authorize_billing`, `evaluation_admission`, `learning_eligibility`, `essay_exam_history`는 TEST와 함수 정의가 다르다. 운영 Provider enabled만으로 공개 가능하지 않으며 admission의 leaf 단일 제한이 남는다. TEST continuous_cycles=true/운영false, 별도 Provider Secret과 Storage/계정 경계 유지. 운영 beta는 활성 하루1·scope160·수리0·종료11/11 00KST이며 TEST admin grant는 이 정책 검증을 대체하지 않는다.
+
+승인 전 준비/적용 순서:
+1. 기존 함수/ACL·Registry·beta scope·Credit/History 보존 기준 확보, 실제 READY 시험의 ID·공식 Package manifest 확정.
+2. F/G 후보를 운영 현황에 맞춘 비파괴 증분 migration/복구 SQL로 정리하고 격리 환경에서 검증. 전체 install/seed 실행 금지.
+3. 새 제출 gate는 닫은 채 Provider/RPC/Storage·공개 응답과 기존 인문 회귀 확인.
+4. TEST에서 베타 하루1/00KST/이월0/14일과11/11종료 경계 및1/0반복·동시 요청 검증.
+5. WEB 후보 + 별도 APP 신규 업데이트 빌드의 실기기 전체 루프/Owner 화면 검수.
+6. Owner 최종 승인 후 READY scope만 단계 활성화. 장애 시 새 제출 gate를 닫되 완료 결과·이용권 원장·History를 삭제하거나 재작성하지 않는다.
+
+현 판정 **NOT_READY / 운영 HOLD**. 실기기 전사 확인 이후 평가·무료 재첨삭·History, OCR/수학적 피드백 품질, 운영 증분 계약/베타 연결/대표 자연 identity, Owner 최종 검수가 P0다. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP1.0.1(41) 변경0.
+
+검증: WEB1610 PASS/4skip, Native25 PASS. TEST LAB 배포 `1ee87b1` (`e0a5fb6a`), 이전 prime 표시 수정 `fe23ea3`. APP Git/분석/빌드·실기기 후속은 마감 기록으로 보완한다. 비공개 사진·세션·실행 증거는 `/Users/woojinchang/.codex/legendstudy-task16k-final-test/`에 두며 Git 제외.
+
+실기기 복구 추가 발견: 첫 분할 OCR은 Provider2회(입력17,687/출력10,087,총27,774tokens) 응답 후 DB의 `math_extraction_regions_check`(bbox 영역 경계)에서23514로 거절됐다. 저장되지 않은 OCR을 성공으로 처리하지 않는다. TEST 로그로 원인을 확정했으며 같은 run을 기존 worker fail RPC로 INVALID_OUTPUT 처리했다(원본/실패 이력 보존, 평가0). bbox 양수·이미지 경계와 필드 검증을 저장 전에 추가하고 Provider에 extents 계약을 명시했다. 좌표를 임의 clipping/재생성하지 않는다. 확정 SQL validation reject만 실패 처리하며, 응답 유실은 완료 가능성이 있으므로 lease를 무조건 실패시키지 않는다. 해당 경계 테스트18 PASS, 서버66 PASS 후 추가3경계 PASS. 후속 TEST배포 `86f5fe5` / `c018c076`, 실제 재시도 결과는 이어 기록한다. Native 정적분석0문제/Profile build·동일 TEST bundle 업데이트 설치·launch 성공.
+
+
+### 실기기 원본 OCR 복구 결과 (최종 조회)
+
+동일 attempt의 새 후보 `8e7c62df-4d2f-43e2-a571-800b01eb1263`는 COMPLETED/52영역, 상태 CONFIRMATION_REQUIRED, 평가 가능false·평가 기록0. 원본 사진을 다시 촬영/업로드하거나 자동 확정하지 않았다. 호출 대기 연결은 timeout이었지만 서버는 성공해 동일 attempt 재조회로 복구했다. 모바일의 ‘저장한 답안 입력 확인’으로 결과를 재조회하도록 Owner에게 안내했으며 화면 도달/수정·평가 이후 전체 실기기 PASS는 아직 미확인이다. 이번 복구는 Q1의 좌우 사진이며 Q2 신규 실기기 촬영 완료로 계산하지 않는다.
+
+최종 재시도2 Provider 호출: 입력18,007/출력9,586=27,593tokens. 앞선 bbox 실패까지 복구 과정 총4호출55,367tokens. 성공 인식은 재호출하지 않는다. 금액은 실제 과금 영수증/가격 검증 없이 추정하지 않는다.
+
+실물과 비교한 신규 품질 문제:
+- 영역6: 원본 -1/6을 -1/5로 인식. 자동 계산으로 원문을 고치지 않는다.
+- 영역24: 왼쪽 하단 |f(x)|의 미분 불가 지점·이차식·접선 논증·그래프 설명이 크게 누락/오독됨. ‘최고차항 x⁴, x=6’ 전사는 원본과 다르다.
+- 영역27/28: 적분 상한/α를 x로 읽는 문제.
+- 영역45: `2n+?`처럼 미해결 기호를 포함. APP의 기존 ? 차단 유지, WEB/worker에서도 수학 연산식의 ?/？을 차단하도록 공통 인식 안전 규칙 보완(일반 한국어 질문의 ?는 허용).
+- 지수 부호를 이번에 맞게 읽은 일부 구간이 있어도 전체 정확도 PASS로 확대하지 않는다. 작은/흐린 기호·원본 자체의 불명확성은 원본 대조/학생 수정 필요.
+
+52영역 전체가 확인 대상으로 분류되어 학생 확인 부담도 남는다. 누락 문장을 수학적 정답에 맞춰 채워 넣거나 대리 확인하지 않았다. **기능 복구 PASS / 실제 OCR 품질 PARTIAL(오독 확인) / 실기기 전체 학습 루프 PARTIAL / 베타 NOT_READY**. 원본·후보·확정본 분리와 서버 차단 유지.
+
+검사 최신: WEB 전체1617PASS/4skip(추가 수학 ? 방어3건은 별도83개 focused 검사에 포함), Native25PASS·분석0문제·Profile build/설치/launch PASS, Wiki handoff PASS. 운영 변경0. 실기기 화면 응답을 받으면 전사 확인 이후의 실제 평가/무료재첨삭/History를 이어서 검증한다.

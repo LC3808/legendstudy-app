@@ -98,10 +98,10 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
       await ref.read(authStateProvider.future);
       gateway.checkOwner();
       await action();
-    } catch (_) {
+    } catch (error) {
       if (current) {
         setState(
-          () => notice =
+          () => notice = mathExtractionNotice(error) ??
               '처리 상태를 확인하지 못했어요. 저장한 답안과 요청은 유지됩니다. 같은 요청으로 다시 확인해 주세요.',
         );
       }
@@ -263,11 +263,17 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
             images[i],
           );
         }
-        await gateway.extract(id as String);
+        try {
+          await gateway.extract(id as String);
+        } catch (_) {
+          // A lost/late response must read this attempt, not create a new one.
+        }
         input = await gateway.call('math_input', 'read_input', {
           'attempt_id': id,
         });
       }
+      inputs[key] = input;
+      if (images.isNotEmpty) requireMathExtractionResult(input);
       // Reopening a prepared attempt must retain the original comparison UI.
       // Reuse the authenticated artifact gateway; never invent a replacement.
       for (final artifact

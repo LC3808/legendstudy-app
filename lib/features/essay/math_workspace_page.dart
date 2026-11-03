@@ -125,7 +125,7 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
         setState(
           () => notice = error is PostgrestException && error.code == 'PT402'
               ? '사용 가능한 크레딧 또는 포함 재첨삭 조건을 확인해 주세요.'
-              : '처리 결과를 확인하지 못했어요. 같은 요청으로 다시 확인해 주세요. 새 답안의 첨삭을 중복 요청하지 마세요.',
+              : mathExtractionNotice(error) ?? '처리 결과를 확인하지 못했어요. 같은 요청으로 다시 확인해 주세요. 새 답안의 첨삭을 중복 요청하지 마세요.',
         );
       }
     } finally {
@@ -229,10 +229,13 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
     });
     if (!current) return;
     if (photos.isNotEmpty &&
-        input['candidate'] == null &&
+        (input['candidate'] == null ||
+            (input['candidate'] is Map && (input['candidate'] as Map)['state'] == 'FAILED')) &&
         input['can_request_evaluation'] != true) {
       try {
         await gateway.extract(attempt!);
+      } catch (_) {
+        // Resolve ambiguous transport failure using the stored attempt.
       } finally {
         if (current) {
           input = await gateway.call('math_input', 'read_input', {
@@ -241,10 +244,12 @@ class _MathWorkspaceState extends ConsumerState<_MathWorkspace> {
           if (current) setState(() => inputState = input);
         }
       }
+      requireMathExtractionResult(input);
       if (current) setState(() => notice = '사진에서 읽은 답안을 확인해 주세요.');
       return;
     }
     if (input['can_request_evaluation'] != true) {
+      if (photos.isNotEmpty) requireMathExtractionResult(input);
       setState(() {
         inputState = input;
         notice = '사진에서 읽은 답안을 확인해 주세요.';

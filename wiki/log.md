@@ -5128,3 +5128,8 @@ K Owner 로그인 후속: drive 기본 teardown의 TEST 앱 uninstall이 세션�
 ## 2026-11-03 — TASK16-K Owner 크롭 불편 개선
 
 Owner iPhone 로그인 후 사진 자르기 완료 확인(전체 실기기 평가 PASS 아님). 기존 인문 APP c61a898 드래그 핸들/미리보기 재사용, Math 슬라이더 제거·회전/원본 복원 유지·원본 비교. 18테스트/analyze/Profile 빌드·별도 TEST 설치 PASS, Provider0/운영변경0. 새 사용성 Owner 확인 대기. [원인·재사용 출처·검증 범위](task16k-beta-activation-20261103.md#owner-실기기-사진-검수-후속--인문논술-자르기-방식-재사용). F 디자인 유지/K 실기기 검수 보완, 운영 HOLD.
+
+
+## 2026-11-03 — TASK16-K 최종 베타 준비 후속
+
+Owner WEB/이용권·History/크롭 PASS 인정. 실기기 Q1 25.6MB 업로드 후 OCR 합계20MiB 차단 확인, 기존 Provider 분할/단일 최종 결과와 앱 상태 복구 보완. 혼합형 실제 WEB 무료 재첨삭 두 문항 완료·0차감/History, Unicode prime 표시·미해결 분수 placeholder 방어. 운영 읽기 전용 차이 재확인, 신규 활성화0. [상세·실기기 후속·운영 순서](task16k-beta-activation-20261103.md#final-beta-readiness--11월-3일-실기기-차단-조사와-보완).

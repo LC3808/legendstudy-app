@@ -1,6 +1,6 @@
 # Current Status
 
-[TASK16-K 베타 준비](task16k-beta-activation-20261103.md): 기존 DB363시험/1014문항·연결 Math50개 재확인. 공개 scope 수리0은 종전 정책. 정돈된 수학 답안·사진 보정 TEST, WEB1599PASS/4skip·실기기 저장 결과/History PASS. TEST 로그인 복구·Owner 사진 자르기 확인. 인문 방식 드래그 크롭 재사용/18검사 PASS·TEST 설치, 사용성 재검수 대기. 신규 촬영·품질·운영RPC/베타 연결은 별도 gate, 운영 HOLD.
+[TASK16-K 베타 준비](task16k-beta-activation-20261103.md): Owner WEB E2E/이용권·History/크롭 인정. 실기기 Q1 25.6MB OCR 차단·bbox 저장 실패 수정,52영역 인식 완료/학생 확인 대기. 오독·누락 남음. 혼합형 WEB 무료 두 문항/0차감·History PASS. WEB1617PASS/4skip·Native25PASS. 실기기 전체 루프·OCR 품질·운영RPC/베타·자연 identity는 P0, NOT_READY/운영 HOLD.
 
 [C/E/F/G/H/I 검증 이력·Owner 결과 경로](task16i-owner-review-20261103.md). Simulator 학습 루프 PASS는 실기기 제출 PASS가 아님.
 

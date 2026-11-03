@@ -87,6 +87,6 @@ class _MathFormulaEditorState extends State<MathFormulaEditor> {
 bool unresolvedMath(String text) =>
     text.trim().isEmpty ||
     RegExp(
-      r'UNCERTAIN|UNREADABLE|판독\s*(?:불가|불명|불확실)|인식\s*(?:불명|불가|불확실)|불명확|불확실|\?|？|�|\{\s*\}',
+      r'UNCERTAIN|UNREADABLE|판독\s*(?:불가|불명|불확실)|인식\s*(?:불명|불가|불확실)|불명확|불확실|\[\s*분수식\s*\]|\?|？|�|\{\s*\}',
       caseSensitive: false,
     ).hasMatch(text);

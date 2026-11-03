@@ -3,14 +3,12 @@ import 'package:flutter_math_fork/flutter_math.dart';
 
 /// Lossless glyph spelling for the renderer; never modifies stored evidence.
 String displayMathSource(String source) => source
+    .replaceAll('′', "'")
     .replaceAllMapped(
       RegExp(r'√([A-Za-zα-ωΑ-Ω]|[0-9]+)'),
       (m) => '\\sqrt{${m[1]}}',
     )
-    .replaceAllMapped(
-      RegExp('([A-Za-z])\u0304'),
-      (m) => '\\bar{${m[1]}}',
-    );
+    .replaceAllMapped(RegExp('([A-Za-z])\u0304'), (m) => '\\bar{${m[1]}}');
 
 /// Rendering is a projection only; malformed TeX remains selectable source text.
 class MathText extends StatelessWidget {
