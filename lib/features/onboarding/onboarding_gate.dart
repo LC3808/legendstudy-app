@@ -4,6 +4,10 @@ import '../personal/domain/personal_models.dart';
 
 const onboardingRoute = '/onboarding';
 
+/// Any existing shared profile is valid, including pre-APP/WEB accounts.
+bool onboardingProfileReady(AsyncValue<UserProfile?> profile) =>
+    !profile.isLoading && !profile.hasError && profile.value != null;
+
 /// First-login routing decision. Kept pure so the gate can be unit-tested
 /// without a router: given the auth/profile state and the current location,
 /// return the path to redirect to, or null to stay.
@@ -24,7 +28,6 @@ String? onboardingRedirect({
   if (!authed) return null;
   if (location == onboardingRoute || location.startsWith('/auth')) return null;
   if (profile.isLoading || profile.hasError) return null;
-  final value = profile.value;
-  if (value != null) return null;
+  if (onboardingProfileReady(profile)) return null;
   return onboardingRoute;
 }

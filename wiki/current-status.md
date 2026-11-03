@@ -1,19 +1,23 @@
 # Current Status
 
-## APP·수리·상경 기존 서비스 통합 — 2026-11-03
+## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 
 현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출은 미실행이다.
 
 - APP `codex/app-review-candidate-b-20261103`: 후보 A 인증·온보딩·MY·선택형 닉네임 + B 수리 UX 통합. 자연계 일괄 차단 대신 정확한 공개 Catalog와 서버 실행 상태를 확인한다. 혼합형 사진은 기존 Math 인식/확인 후 Essay 시험 회차 하나에 제출한다. 입력이 바뀌면 확인본 재사용 차단.
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.
 - 현재 운영 읽기 확인: 기존16시험(인하 자연15·한양2026 상경1)의 canonical46문항과 공식 평가 패키지 조회 PASS. legacy 건국1leaf를 보존한47leaf 초기 공개 후보. 의예/미연결/합성 문제와 TEST 전용 한양2024 자연 ID는 제외. 시험 데이터 신규 생성/복제 없음.
-- 운영에는 coaching/혼합 coaching/quote/continue 증분 RPC가 아직 없다. 운영 함수 원문·권한·run-table 구조를 보존한 증분 SQL을 로컬 PG17에서 검증 중이며 원격 미적용이다. 일일 베타 이용권을 제외하던 Math 선택 조건도 기존 claim/credit_source/eligible 계약으로 연결한다. 임의 유료 대체 없이 서버 선택 출처를 확인·동의한다.
-- APP 통합1차 전체1,431PASS/7SKIP·Analyze0, signed iOS57 1차 빌드 성공. 이후 이용권 출처 연결·아래 용어 변경을 포함한 최종 회귀/배포 빌드는 종합 보고서 실행 마감 절에서 확정한다.
+- 운영에는 coaching/혼합 coaching/quote/continue 증분 RPC가 아직 없다. 운영 함수 원문·권한·run-table 구조를 보존한 증분 SQL 후보3개를 로컬 PG17에서 검증했으며 운영 미적용이다. 별도 격리 TEST 증분은 적용·6함수 postflight·기존 데이터10종 count 보존 PASS. 실제 무료0 견적/익명 거절 PASS, 유료 견적은 잔액0으로 NOT_VERIFIED다. 일일 베타 이용권을 제외하던 Math 선택 조건도 기존 claim/credit_source/eligible 계약으로 연결한다. 임의 유료 대체 없이 서버 선택 출처를 확인·동의한다.
+- APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 정식58 빌드 영수증은 종합 보고서 실행 마감 절에서 확정한다.
 - 기존 APP41 소스·IPA·브랜치 및 A48 정식 설치 앱, TEST56 별도 앱 보존. 운영 DB/Auth/Credit/Ledger/결제/Provider/WEB 변경과 Store 제출을 완료했다고 주장하지 않는다.
 
 ## Owner 추가 결정 — 이용권 용어 통일
 
 앱 전체 사용자 표시의 크레딧/Credit을 **이용권**으로 통일한다. 상품은 이용권1개·3개·5개·10개. 상품 구매 버튼 아래에 서버 확인/충전 지연 안내와 이용약관·환불조건 링크를 모으며 구매 전 같은 화면에서 접근 가능해야 한다. 내부 API/DB 필드, 상품 ID, 가격, 결제/영수증 계약은 유지한다. [종합 보고서](app-math-commerce-integration-report-20261103.md).
+
+## 긴급 추가 — 앱 업데이트 확인
+
+[Native 업데이트 확인](app-update-check-20261104.md)을 통합했다. 플랫폼별 숫자 버전/build, 공개 확인된 정책만 안내, OPTIONAL24시간 미루기, 승인된 minimum 미만 REQUIRED, 조회3초 timeout/fail-open·인증/온보딩 지연을 구현했다. 집중68PASS, SQL69PASS. 새 private 정책 후보는 Owner 승인 전 운영·TEST 모두 미적용/비활성이다. 스토어 실제 공개 tuple과 실제기기 팝업/이동은 아직 미검수. 기존APP41에는 소급 적용되지 않는다.
 
 ## 이미 확인된 실기기 범위
 

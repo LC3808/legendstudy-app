@@ -34,6 +34,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 APP·수리·상경 기존 서비스 통합 / 차단 해제 / 배포 빌드 / 앱 이용권 용어: [Owner·ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md).
 
+APP 업데이트 확인 / OPTIONAL·REQUIRED / 스토어 공개 버전 / 24시간 미루기: [Native 구현·정책·검증](app-update-check-20261104.md) → [비활성 SQL 후보](../supabase/candidates/app_update_policy_20261104/README.md).
+
 후보 A ChatGPT 보고 / iPhone 검수 종합: [A 검수 보고서](app-candidate-a-owner-qa-report-20261103.md).
 
 후보 B 실기기·WEB 검수 / Native 가독성·제출 버튼·원본 대조·진행 표시/일괄 확인·필수 확인 영역 번호·결과 근거 문단·LAB 서비스 조회 복구: [설치·결과 조회·품질 문제·Owner 경로](app-candidate-b-device-web-qa-20261103.md).

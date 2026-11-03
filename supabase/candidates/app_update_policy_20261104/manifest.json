@@ -1,0 +1,37 @@
+{
+  "status": "CANDIDATE_DISABLED_NOT_APPLIED",
+  "files": [
+    {
+      "path": "20261103151245_app_update_policy_disabled_candidate.sql",
+      "sha256": "60deffda38777433a3a2aaffae0482a945c5c09462fdf86d5d8b25b03e7a9b48"
+    },
+    {
+      "path": "README.md",
+      "sha256": "32da0d63734580f1b63071ffb2d4ae0b9e19c9293c85ae927d873dcd10e300dc"
+    },
+    {
+      "path": "expected-postflight.json",
+      "sha256": "b0b69f732dd01698170876c167d935a4eb2fbe5412ade606426efead3e98d305"
+    },
+    {
+      "path": "hold-only.sql",
+      "sha256": "0644b3e2e06f7ee0fc23195fb5886682858ba3ddaabc216aff02cb0e94e95e39"
+    },
+    {
+      "path": "postflight.sql",
+      "sha256": "c971a7dc97faba70c97aace9bec074af0cfc3118cd4d286640f7c55fe6f352fd"
+    },
+    {
+      "path": "validation.log",
+      "sha256": "aaf3680e4b6d0e5c05df9eb7310680db15eafed75cc79c8bb26e1f4064bb9332"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "aafd6bb1fa3a808d8ba18e4f6d0ebfa2eee5c08c99c08a6c7aa211add2dd0718"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "519c0a33ddbc67cc2ce940fc9edb89725c60a131a7822b46a0c3ffc0760f93f4"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "schema": "app_release_private",
+    "function": "version_key",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres}",
+    "config": [
+      "search_path=\"\""
+    ],
+    "definition_md5": "c15d3c30e6ac2daf1aa867ac81d8bcf5"
+  },
+  {
+    "schema": "public",
+    "function": "app_update_policy",
+    "owner": "postgres",
+    "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+    "config": [
+      "search_path=\"\""
+    ],
+    "definition_md5": "c12e3f85eff3cf8ae648de6d4986fe5a"
+  }
+]

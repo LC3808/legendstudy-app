@@ -5648,3 +5648,9 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner 종합 보고·기존 서비스 통합·수리/상경 차단 해제·배포 빌드 지시. 운영 원문/설정 읽기 감사로 신규 공통RPC4개 미설치·단일 Math leaf 제한·베타 Math 제외 확인. 기존16시험46canonical문항 공식 Package runtime 조회 PASS, legacy1 보존47leaf 후보. APP 정확한 Catalog/서버 admission 및 Native 혼합 Math 확인→Essay 단일 회차 연결, 전체1431PASS/7SKIP·Analyze0·iOS57 1차 signed 빌드. 신규 이용권 출처 동의·일일 베타 연결 검증 중; 원격 적용/Provider 호출0. [종합 보고](app-math-commerce-integration-report-20261103.md).
 
 - 2026-11-03: Owner 구매 안내/약관 하단 배치와 앱 모든 크레딧/Credit의 이용권 표시 통일 확정. 내부 IAP ID/가격/서버 계약 유지, 상품1/3/5/10개. 후속 최종 회귀·동일57 재빌드 대상. [결정·실행](app-math-commerce-integration-report-20261103.md).
+
+- 2026-11-04: 이용권 표시/출처 연결 소스8542a49 signed iOS1.0.1(57) 완료·보존. WEB 코드c9fafea production artifact/1705PASS·4SKIP, SQL·TEST 영수증3ac8269. 별도 Math TEST 증분 적용·postflight6함수/기존 데이터10종 count 보존 PASS, 실제무료0견적/익명거절 PASS·유료잔액0 PARTIAL. 운영 적용0·Provider0. [통합 보고](app-math-commerce-integration-report-20261103.md).
+
+- 2026-11-04: Owner 긴급 업데이트 확인을 Native 공통 root에 통합. 공개검증/플랫폼 숫자비교/OPTIONAL24시간/승인minimum REQUIRED/3초fail-open, 기존프로필 판정 재사용. 초기전체회귀에서 새조회deadline 종료누락을 발견해 gate/controller종료취소 보완, 집중68PASS. 비활성 SQL후보69PASS, 운영/TEST정책 미적용. 전체회귀/정식58 재빌드 진행. [상세](app-update-check-20261104.md).
+
+- 2026-11-04: 업데이트 gate/controller 종료 deadline 정리 후 최종 전체1,480PASS/기존7SKIP·Analyze0·Wiki handoff PASS. 앱 표시 이용권 통일/혼합 사진/공통 출처 동의/업데이트 기능을 같은 소스에서 검증. 초기 실패50건은 같은 신규 timer 종료 누락을 수정하여 해소. 정식1.0.1(58) iOS/Android 빌드 준비, 스토어 제출/운영 활성화 미실행. [최종 보고](app-math-commerce-integration-report-20261103.md).
