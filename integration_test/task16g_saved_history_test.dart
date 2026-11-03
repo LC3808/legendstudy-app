@@ -1,6 +1,7 @@
 // Opt-in isolated TEST only. Reuses existing evaluations; no new Provider/credit work.
 // Credentials arrive through a one-shot loopback runner, never Dart defines/assets.
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 
@@ -12,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:legendstudy_app/core/config/app_config.dart';
 import 'package:legendstudy_app/core/supabase/supabase_providers.dart';
+import 'package:legendstudy_app/core/supabase/test_session_storage.dart';
 import 'package:legendstudy_app/features/essay/math_gateway.dart';
 import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_coaching_page.dart';
@@ -25,11 +27,36 @@ void main() {
       final config = AppConfig.fromEnvironment();
       expect(config.supabaseUrl, 'https://kpqbedylxlyntrrfybpn.supabase.co');
       expect(config.essayApiOrigin, 'https://legendstudy-task16b.pages.dev');
-      final uri = Uri.parse(const String.fromEnvironment('SMOKE_CONFIG_URL'));
-      expect(uri.host, '127.0.0.1');
-      expect(uri.scheme, 'http');
-      final response = await http.get(uri);
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final Map<String, dynamic> data;
+      const usbPort = int.fromEnvironment('SMOKE_USB_CONFIG_PORT');
+      if (usbPort != 0) {
+        // Physical device: host forwards only localhost over paired USB.
+        // Never place account secrets in defines, assets, or a LAN server.
+        final server = await HttpServer.bind(
+          InternetAddress.loopbackIPv4,
+          usbPort,
+        );
+        try {
+          final request = await server.first.timeout(
+            const Duration(minutes: 2),
+          );
+          expect(request.method, 'POST');
+          expect(request.uri.path, '/config');
+          expect(request.contentLength, inInclusiveRange(1, 65536));
+          final body = await utf8.decoder.bind(request).join();
+          data = jsonDecode(body) as Map<String, dynamic>;
+          request.response.statusCode = HttpStatus.noContent;
+          await request.response.close();
+        } finally {
+          await server.close(force: true);
+        }
+      } else {
+        final uri = Uri.parse(const String.fromEnvironment('SMOKE_CONFIG_URL'));
+        expect(uri.host, '127.0.0.1');
+        expect(uri.scheme, 'http');
+        final response = await http.get(uri);
+        data = jsonDecode(response.body) as Map<String, dynamic>;
+      }
       final client = SupabaseClient(
         config.supabaseUrl,
         config.supabasePublishableKey,
@@ -40,6 +67,15 @@ void main() {
           email: data['email'] as String,
           password: data['password'] as String,
         );
+        if (usbPort != 0 && data['persist_owner_test_session'] == true) {
+          expect(config.environment, 'test');
+          expect(isIapTestToken(client.auth.currentSession?.accessToken), true);
+          final storage = IapTestSessionStorage();
+          await storage.initialize();
+          await storage.persistSession(
+            jsonEncode(client.auth.currentSession!.toJson()),
+          );
+        }
         final owner = client.auth.currentUser!.id;
         final gateway = MathGateway(client, owner);
         // TASK16-H optional cross-platform inputs. Reads only; no evaluation.

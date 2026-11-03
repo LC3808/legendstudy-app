@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:legendstudy_app/features/essay/math_text.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/academic_purple.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/coaching_contract.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_coaching_screen.dart';
@@ -329,7 +330,12 @@ void main() {
     );
     await t.pumpAndSettle();
     expect(t.takeException(), isNull);
-    expect(find.text('W=k/l의 확률분포를 구한다.'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is MathText && w.text == r'\(W=k/l\)의 확률분포를 구한다.',
+      ),
+      findsOneWidget,
+    );
     await screenshot(t, 'solution');
     await t.pumpWidget(
       host(

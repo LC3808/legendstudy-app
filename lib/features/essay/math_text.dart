@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
+/// Lossless glyph spelling for the renderer; never modifies stored evidence.
+String displayMathSource(String source) => source
+    .replaceAllMapped(
+      RegExp(r'√([A-Za-zα-ωΑ-Ω]|[0-9]+)'),
+      (m) => '\\sqrt{${m[1]}}',
+    )
+    .replaceAllMapped(
+      RegExp('([A-Za-z])\u0304'),
+      (m) => '\\bar{${m[1]}}',
+    );
+
 /// Rendering is a projection only; malformed TeX remains selectable source text.
 class MathText extends StatelessWidget {
   const MathText(this.text, {super.key});
@@ -28,7 +39,7 @@ class MathText extends StatelessWidget {
               ? SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Math.tex(
-                    source,
+                    displayMathSource(source),
                     onErrorFallback: (_) => SelectableText(match.group(0)!),
                   ),
                 )
@@ -52,13 +63,100 @@ class MathStudentText extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasDelimiters =
         text.contains(r'$') || text.contains(r'\[') || text.contains(r'\(');
-    final isolatedFormula =
-        !hasDelimiters &&
-        !text.contains('\n') &&
-        !RegExp(r'[가-힣]').hasMatch(text) &&
-        !RegExp(r'[A-Za-z]{3,}')
-            .hasMatch(text.replaceAll(RegExp(r'\\[A-Za-z]+'), '')) &&
-        RegExp(r'\\[a-zA-Z]+|[=^_∫]').hasMatch(text);
-    return MathText(isolatedFormula ? '\\[$text\\]' : text);
+    bool formula(String value) {
+      final words = value
+          .replaceAll(
+            RegExp(
+              r'\\[A-Za-z]+|\{(?:p|b|B|v|V)?matrix\}|\{(?:aligned|cases|array)\}',
+            ),
+            '',
+          )
+          .replaceAll(
+            RegExp(r'\b(sin|cos|tan|log|ln|lim|max|min|exp|det|dx|dy|dt)\b'),
+            '',
+          );
+      return !RegExp(r'[가-힣]|[A-Za-z]{2,}').hasMatch(words) &&
+          RegExp(r'\\[A-Za-z]+|[=^_∫≤≥<>]').hasMatch(value);
+    }
+
+    final tables = RegExp(
+      r'^[^\n]*[ \t]\|[ \t][^\n]*(?:\n[^\n]*[ \t]\|[ \t][^\n]*)+',
+      multiLine: true,
+    ).allMatches(text).toList();
+    if (tables.isNotEmpty &&
+        (tables.first.start != 0 || tables.first.end != text.length)) {
+      final segments = <Widget>[];
+      var end = 0;
+      for (final table in tables) {
+        if (end < table.start) {
+          segments.add(MathStudentText(text.substring(end, table.start)));
+        }
+        segments.add(MathStudentText(table.group(0)!));
+        end = table.end;
+      }
+      if (end < text.length) segments.add(MathStudentText(text.substring(end)));
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: segments,
+      );
+    }
+    if (hasDelimiters) return MathText(text);
+    final lines = text.split('\n');
+    if (lines.length > 1 &&
+        lines.every(
+          (l) =>
+              l.contains(' | ') ||
+              (l.trim().length >= 2 &&
+                  l.trim().startsWith('|') &&
+                  l.trim().endsWith('|')),
+        )) {
+      final rows = lines
+          .map(
+            (l) => l
+                .trim()
+                .replaceFirst(RegExp(r'^\|'), '')
+                .replaceFirst(RegExp(r'\|$'), '')
+                .split('|')
+                .map((c) => c.trim())
+                .toList(),
+          )
+          .toList();
+      if (rows.first.length > 1 &&
+          rows.every((r) => r.length == rows.first.length)) {
+        final header = rows[1].every((c) => RegExp(r'^:?-{3,}:?$').hasMatch(c));
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Table(
+            defaultColumnWidth: const IntrinsicColumnWidth(),
+            border: TableBorder.all(color: const Color(0xFFDCD5F1)),
+            children: [
+              for (var i = 0; i < rows.length; i++)
+                if (!header || i != 1)
+                  TableRow(
+                    children: [
+                      for (final cell in rows[i])
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: MathStudentText(cell),
+                        ),
+                    ],
+                  ),
+            ],
+          ),
+        );
+      }
+    }
+    if (formula(text)) return MathText(r'\[' + text + r'\]');
+    // Display delimiters only: keep all source characters and line breaks.
+    final rendered = lines
+        .map((line) {
+          if (formula(line)) return r'\[' + line + r'\]';
+          final parts = line.split(RegExp(r'(?=[가-힣])|(?<=[가-힣])'));
+          return parts
+              .map((part) => formula(part) ? r'\(' + part + r'\)' : part)
+              .join();
+        })
+        .join('\n');
+    return MathText(rendered);
   }
 }
