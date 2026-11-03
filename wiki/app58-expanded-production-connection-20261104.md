@@ -88,3 +88,26 @@ APP58 소스·IPA·AAB는5b5e5a8 그대로 보존한다. 서버가 APP58의 고�
 운영 Auth·OAuth·결제 상품/가격·Store 정책·업데이트 REQUIRED 설정은 변경하지 않는다. 기존 APP41/58 산출물 보존. 출시 전 실제 Provider 품질, 실제 기기 전체 제출, WEB↔APP 결과 조회, OCR 부호·지수·분수 정확도 등 미검증 항목을 PASS 처리하지 않는다.
 
 공식 package42개 전체본문의 로컬 fixture 반출은 자동 승인 검토에서 proprietary payload 대량 반출을 사유로 거절했다. 반출·우회 없이 운영 pin 읽기 검증과 합성 검증을 사용했다. scope/beta 전체 target transaction은 로컬 NOT_RUN이었고, 운영 적용의 transaction guard 및 사후검사는 실제 통과했다.
+
+
+## APP58 History 실기기 후속 — PARTIAL
+
+Owner는 APP58에서 “기록은 있으나, 내용은 없음”, 이어 “제목만 있고 내용이 비어 있음”을 보고했다. 이 증상은 미해결이며 APP↔WEB 동일 결과 조회 PASS로 처리하지 않는다. 당시 APP 로그인 계정과 브라우저 검수 계정의 동일성, 선택한 History 항목·evaluation ID·실제 진입 화면은 아직 대조하지 못했다. Owner가 휴식에 들어가 추가 질문이나 기기 조작을 진행하지 않았다.
+
+정확한 APP58 소스5b5e5a8과 현재 `lib/` 차이는0이다. 읽기 점검에서 [History 모델](../lib/features/essay/shared_history.dart)은 순수 Math session의 evaluation_id를 [History 화면](../lib/features/essay/shared_history_page.dart)의 MathCoachingPage로 전달한다. [coaching 페이지](../lib/features/essay/math_mobile/math_coaching_page.dart)는 `math_coaching/read`의 math-coaching-v1 응답을 읽고 실패 시 오류 안내를 표시한다. [결과 화면](../lib/features/essay/math_mobile/math_coaching_screen.dart)은 tasks/strengths가 비어도 종합 진단, 근거 없음 안내, 수정·해설 버튼을 렌더링한다. 배포 SQL의 coaching_projection은 NOT_DETERMINABLE 결과에 문자열 판정보류 진단을 반환한다. 따라서 인하 결과의 풀이단계0만으로 제목만 표시된 실기기 현상을 단정할 수 없다. 실제 APP 응답을 인증 우회나 다른 계정 impersonation으로 조회하지 않았으며, 확인되지 않은 원인에 대한 서버/APP 수정도 하지 않았다.
+
+기존 Flutter3.47.6 로컬 회귀3개 PASS: `math_coaching_history_sources_test.dart`의 원본 조회 중 gateway 수명, `math_coaching_history_refresh_test.dart`의 공개 후 History 갱신, `task16f_mobile_test.dart`의 빈 tasks/strengths 및 명시 공개·실패 차단 단일 사례. Mock/Widget 검사이며 실제 기기 재현 성공을 뜻하지 않는다. 다음 검수에서는 동일 계정·History 항목·화면명을 먼저 대조한 뒤 해당 읽기 응답과 UI를 확인한다. 새 평가나 이용권 차감은 이 원인 확인에 필요하지 않다.
+
+최종 읽기 해시 재확인: 기존 release58 IPA SHA256 `88ecaf7e91dd9fe05b79113e5e0119295bb9dbeac2f043a2592a87261a28a01e`, AAB SHA256 `5ac0a0448a9f65c49d90f69cf4c0b393e9cd655ee2514d77e424fc6d1e5c7987`. 기존 영수증과 일치하며 추가 빌드·스토어 작업은 없다.
+
+## 평가 입력 보완의 seven preservation review
+
+[기존 장기 학습자료 보존 정책](longitudinal-learning-admissions-data-strategy.md)의 검토를 인하 입력 연결 보완에 적용한다. 이는 별도 배포 완료 주장이 아니며, 실제 배포·후속 평가 결과는 WEB 보고서와 실행 영수증에서 확인한다.
+
+1. 최초 실패/보류 평가와 발생·기록 시각을 유지하고 후속 검증은 별도 재첨삭으로 남긴다.
+2. student_answer는 확정 OCR 또는 typed 원문에서 재현 가능한 투영으로 만들며 원문을 임의 보충하지 않는다.
+3. 기존 결과·원본·Ledger의 UPDATE 또는 삭제를 수행하지 않는다.
+4. 동일 Auth identity 및 기존 소유권 RPC 계약을 유지한다.
+5. Learning 평가 입력의 연결만 보완하며 결제 판단과 분리한다.
+6. 기존 허용 Provider·전송 권한·retention 범위를 유지하고 신규 개인정보 수집을 추가하지 않는다.
+7. student_answer는 원문을 명시하는 파생 투영이며 새로운 학생 사실로 취급하지 않는다. prompt_version 후보4는 후속 새 평가에만 기록한다. 새 평가 엔진·스키마를 만들지 않고 APP58을 보존한다.
