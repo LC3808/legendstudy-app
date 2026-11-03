@@ -5571,3 +5571,8 @@ Owner 신규 온보딩 학교 검색 후 화면 이동 보고. 검색어 미확�
 ## 2026-11-03 — Owner 사진 기반 온보딩 배치 수정
 
 학년 세로 확장·검색 버튼 밀림·키보드 위 다음 오인을 확인. 학년3개 한 줄/inline검색/키보드 footer숨김 적용. 집중32PASS·mock렌더2PASS. 기존42 MY 저장/재실행/누락안내 해제 및 안내 계정유지 Owner PASS. [근거·검수](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03). 새45 준비, Store HOLD.
+
+
+## 2026-11-03 — 후보 A45 학교 입력 수정본 설치
+
+A1362PASS/7SKIP·Analyze PASS, B집중47PASS. A45 signed IPA/AAB·설정/서명 PASS, iPhone12ProMax 업데이트 설치/실행. 기존 onboarding route 열기 요청, 실제 화면은 Owner 대기. [증거·산출물·HOLD](app-release-integration-20261103.md#release45-빌드설치-마감--2026-11-03). 운영/Store 변경 없음.

@@ -283,3 +283,15 @@ Owner의 한 줄 학년·입력창 내 검색 제안을 적용했다. 학년 라
 - 방어 수정만 있던44 빌드는 새 배치가 없어 검수 대상에서 제외. 새45 Release로 준비하며 기존42 실기기 PASS를 새45 전체 PASS로 자동 이전하지 않는다.
 
 최종 배치 수정 후 전체 Flutter1362PASS/7SKIP·Analyze PASS. 이전1359/집중32/렌더2와 실행 범위를 구분한다.
+
+
+### Release45 빌드·설치 마감 — 2026-11-03
+
+- A 기능 소스 `f5c6da4`, B 동일 수정 `1189dc7`. B current-status 충돌1건은 B 기존 통합/HOLD 기록과 A 최신 QA를 함께 보존하여 해결.
+- A 전체1362PASS/7SKIP, Analyze PASS, 집중32PASS·mock렌더2PASS. B 온보딩/학교/MY 집중47PASS; 이전 B 전체1383은 수정 전 결과이므로 구분한다.
+- A iOS1.0.1(45) signed Release Archive/App Store IPA·기기용 export PASS, codesign deep/strict PASS, iPhone12ProMax provisioning/AOT 포함 확인. 실제 binary에 Supabase URL/publishable·Google server/iOS ID 포함을 값 출력 없이 검사.
+- Android1.0.1(45) AAB PASS(95.5MB), jarsigner verify PASS. Android 실기기 설치는 미실시.
+- iPhone12ProMax `com.legendstudy.app` 업데이트 설치·실행 PASS. 앱 삭제·프로필 초기화 없음. 기존 `/onboarding` route에 custom-scheme URL을 전달했으나 실제 열린 화면과 수정 UI는 Owner 확인 대기. URL launch 성공을 route/UI 성공으로 간주하지 않는다.
+- private 산출물 `candidate-a/release45/`, Store IPA SHA256 `2bbebbc720a77f9364cfb8540908035d92a9bb9f6ffddb815dc1a0568965a09f`, 기기 IPA `06727721db270a9a0cfcb05399d5c6cfca6c553dfd9e9fa7ea13b94cb52f6d7b`, AAB `454bbcd0f7291790a21fa8cd8904e28d7ee45c15536c77aaacf1406a2e2070a6`.
+- 로그 `/tmp/app-review-a45-{ios,android,device-export,android-signature}.log`, 테스트 `/tmp/app-review-school-layout-{tests,full,analyze}.log`, B `/tmp/app-review-b-school-layout-focused.log`. Private logs에 사본 보관, 기존42/44 산출물 보존.
+- 후보 A DEVICE_QA_PENDING, B BETA_HOLD, Store HOLD. 운영 DB/Auth 설정/Credit/Ledger/결제/WEB 변경·Store 업로드0.
