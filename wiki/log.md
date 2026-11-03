@@ -5551,3 +5551,8 @@ Release42/iPhone12ProMax MY 학교 검색·카드·선택 확인 버튼 정상 �
 ## 2026-11-03 — 후보 A 기존 PDF·인문논술 조회 Owner PASS
 
 Release42/iPhone12ProMax PDF·인문논술 History·결과·뒤로 이동 정상 응답 기록. 신규 평가/차감 검증으로 확대하지 않음. [근거](app-release-integration-20261103.md#후보-a-기존-자료인문논술-조회-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
+
+
+## 2026-11-03 — 후보 A 이메일 로그인 Owner PASS
+
+Release42/iPhone12ProMax 기존 이메일 로그인·홈·MY 정상 응답 기록. 재실행/오입력 재시도·다른 Provider는 별도 검수. [근거](app-release-integration-20261103.md#후보-a-이메일-로그인-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
