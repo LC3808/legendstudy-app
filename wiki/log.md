@@ -5536,3 +5536,8 @@ iPhone12ProMax Release42에서 인증창→취소·재시도→로그인·홈 �
 ## 2026-11-03 — 후보 A 앱 재실행 세션 Owner PASS
 
 Release42/iPhone12ProMax 완전 종료·재실행 후 홈·MY 동일 계정 유지 확인. MY/온보딩 등 잔여 검수 계속. [근거](app-release-integration-20261103.md#후보-a-재실행-세션-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
+
+
+## 2026-11-03 — 후보 A MY 정보·누락 안내 Owner PASS
+
+Release42/iPhone12ProMax에서 기존 정보 정상·빠진 정보만 안내 확인. 학교 검색/저장·완성 계정 카드 숨김·신규 온보딩은 별도 검수. [근거](app-release-integration-20261103.md#후보-a-my-누락-안내-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
