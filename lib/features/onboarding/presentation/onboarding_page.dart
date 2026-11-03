@@ -16,6 +16,7 @@ import '../../school/presentation/school_search_picker.dart';
 import '../../universities/application/university_providers.dart';
 import '../../universities/presentation/interested_universities_field.dart';
 import '../../profile/presentation/intended_major_field.dart';
+import '../../profile/nickname_validation.dart';
 
 // Onboarding-only palette (Phase 1.1). The app keeps its navy/orange identity;
 // onboarding is allowed a slightly livelier, fresher feel. Accents mark
@@ -63,6 +64,16 @@ class OnboardingPage extends ConsumerStatefulWidget {
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   int _step = 1;
+  final _nickname = TextEditingController();
+  String? _savedNickname;
+  bool _nicknameDirty = false;
+
+  @override
+  void dispose() {
+    _nickname.dispose();
+    super.dispose();
+  }
+
   String? _status;
   int? _grade;
   bool _busy = false;
@@ -217,7 +228,16 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Future<void> _finish() async {
-    if (_busy || _status == null) return;
+    if (_busy || _advancing || _status == null || !_hydrated) return;
+    final nickname = _nickname.text.trim();
+    final validationError = nickname.isEmpty
+        ? null
+        : nicknameValidationError(nickname);
+    if (validationError != null) {
+      setState(() => _error = validationError);
+      return;
+    }
+    FocusScope.of(context).unfocus();
     setState(() {
       _busy = true;
       _error = null;
@@ -226,6 +246,14 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
     try {
       final repo = ref.read(profileRepositoryProvider);
       await _persistDraft(owner);
+      if (nickname.isNotEmpty && nickname != _savedNickname) {
+        await repo.upsertCurrentProfile(displayName: nickname);
+        if (!_sameOwner(owner)) return;
+        _savedNickname = nickname;
+        _nicknameDirty = false;
+        ref.invalidate(currentProfileProvider);
+      }
+      if (!_sameOwner(owner)) return;
       await repo.markOnboardingComplete();
       if (!_sameOwner(owner)) return;
       ref.read(analyticsServiceProvider).logEvent(
@@ -235,7 +263,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       await _leave();
     } catch (_) {
       if (_sameOwner(owner)) {
-        setState(() => _error = '저장하지 못했어요. 다시 시도해 주세요.');
+        setState(() => _error = '완료하지 못했어요. 입력값은 유지되어 있어요. 다시 시도해 주세요.');
       }
     } finally {
       if (_sameOwner(owner)) setState(() => _busy = false);
@@ -250,6 +278,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       _step = 1;
       _status = null;
       _grade = null;
+      _nickname.clear();
+      _savedNickname = null;
+      _nicknameDirty = false;
       _hydrated = false;
       _statusDirty = _gradeDirty = _busy = _advancing = false;
       _schoolDraft = null;
@@ -260,6 +291,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       final profile = profileState.asData?.value;
       if (!_statusDirty) _status = profile?.academicStatus;
       if (!_gradeDirty) _grade = profile?.gradeLevel;
+      _savedNickname = profile?.displayName;
+      if (!_nicknameDirty) _nickname.text = _savedNickname ?? '';
       _hydrated = true;
     }
     final reduceMotion =
@@ -347,7 +380,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   Widget _header(String title, String description) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _StepProgress(step: _step - 1, total: 4),
+      _StepProgress(step: _step - 1, total: 5),
       const SizedBox(height: AppTokens.space16),
       Text(
         title,
@@ -372,8 +405,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         return _detailStep();
       case 3:
         return _universitiesStep();
-      default:
+      case 4:
         return _majorStep();
+      default:
+        return _nicknameStep();
     }
   }
 
@@ -395,6 +430,40 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
       '관심 있는 전공 계열을 선택해 주세요. 아직 정하지 못했다면 나중에 MY에서 언제든 바꿀 수 있어요.',
     ),
     const IntendedMajorField(),
+  ];
+
+  List<Widget> _nicknameStep() => [
+    _header('어떤 이름으로 불러드릴까요?', '실명 대신 사용할 닉네임을 입력해 주세요. MY에서 언제든 변경할 수 있어요.'),
+    if (!_hydrated) ...[
+      const Text('기존 닉네임 정보를 불러오는 중이에요.'),
+      if (ref.watch(currentProfileProvider).hasError)
+        TextButton(
+          onPressed: () => ref.invalidate(currentProfileProvider),
+          child: const Text('다시 불러오기'),
+        ),
+    ],
+    TextField(
+      controller: _nickname,
+      enabled: !_busy && _hydrated,
+      maxLength: 80,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        labelText: '닉네임 (선택)',
+        hintText: '사용할 닉네임',
+        helperText: '비워두거나 나중에 설정해도 기존 닉네임은 유지돼요.',
+        helperMaxLines: 3,
+        suffixIcon: IconButton(
+          tooltip: '키보드 닫기',
+          onPressed: () => FocusScope.of(context).unfocus(),
+          icon: const Icon(Icons.keyboard_hide_outlined),
+        ),
+      ),
+      onChanged: (_) => setState(() {
+        _nicknameDirty = true;
+        _error = null;
+      }),
+      onSubmitted: (_) => _finish(),
+    ),
   ];
 
   List<Widget> _statusStep() => [
@@ -470,7 +539,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   }
 
   Widget _footer() {
-    final canAdvance = _step == 1
+    final canAdvance = _step == 5
+        ? _hydrated
+        : _step == 1
         ? _status != null
         : !((_step == 2 && _isStudent && _schoolSearchPending) ||
               (_step == 3 && _universitySearchPending));
@@ -513,7 +584,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             child: FilledButton(
               onPressed: !canAdvance || _busy || _advancing
                   ? null
-                  : _step < 4
+                  : _step < 5
                   ? _advance
                   : _finish,
               style: FilledButton.styleFrom(
@@ -535,9 +606,11 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     ? '${_schoolDraft!.name}로 설정하기'
                     : interestedEmpty
                     ? '나중에 설정할게요'
-                    : _step < 4
+                    : _step < 5
                     ? '다음'
-                    : '설정 완료',
+                    : _nickname.text.trim().isEmpty
+                    ? '시작하기'
+                    : '저장하고 시작하기',
               ),
             ),
           ),
@@ -549,13 +622,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   onPressed: _busy || _advancing ? null : _back,
                   child: const Text('이전'),
                 ),
-              const Spacer(),
-              TextButton(
-                onPressed: _busy ? null : _skip,
-                style: TextButton.styleFrom(
-                  foregroundColor: AppTokens.textSecondary,
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: _busy ? null : _skip,
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppTokens.textSecondary,
+                    ),
+                    child: Text(_step == 5 ? '나중에 설정하기' : '건너뛰기'),
+                  ),
                 ),
-                child: const Text('건너뛰기'),
               ),
             ],
           ),

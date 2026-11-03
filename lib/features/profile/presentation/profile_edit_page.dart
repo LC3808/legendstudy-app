@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 import '../avatar.dart';
+import '../nickname_validation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,10 +38,9 @@ class _ProfileEditPageState extends ConsumerState<ProfileEditPage> {
       return;
     }
     final value = name.text.trim();
-    if (value.isEmpty ||
-        value.runes.length > 80 ||
-        value.contains(RegExp(r'[\x00-\x1f\x7f]'))) {
-      setState(() => error = '닉네임은 공백을 제외한 1~80자로 입력해 주세요.');
+    final validationError = nicknameValidationError(value);
+    if (validationError != null) {
+      setState(() => error = validationError);
       return;
     }
     setState(() {

@@ -1,5 +1,9 @@
 # Durable Decisions
 
+## 2026-11-03 — 마지막 선택형 닉네임 온보딩
+
+Owner는 전공 다음 마지막 선택형 닉네임 단계를 승인했다. 기존 [MY 닉네임](core-app-improvements.md)·[개인화](personalization-onboarding.md) 계약 재사용: 직접 입력·중복 허용·1~80자, 빈값/나중에 설정하기는 기존값 보존, 변경분 저장 성공 후 완료, MY에서 수정. 미래 커뮤니티 공개 기능/새 DB/고유성 정책을 추가하지 않는다. [구현·보존 검토·검수](app-release-integration-20261103.md#마지막-선택형-닉네임-승인구현--2026-11-03).
+
 ## 2026-11-03 — Kakao iOS App Review 인증 UX
 
 Owner는 APP41 외부 브라우저 경로를 다음 릴리스에서 시스템 인증 세션으로 대체하도록 결정했다. 9/22 Safari창 종료 실패로 단순 롤백은 금지. 기존 Supabase PKCE/정체성·Google/Apple/이메일 보존, 실기기 승인 후 통합. [구현/검수](kakao-ios-system-auth-20261103.md).

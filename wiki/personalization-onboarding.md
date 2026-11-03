@@ -259,3 +259,8 @@ uploaded; Play registration gaps remain in final-store-rc-1. Read-only signing c
 on Oct19 still finds one Apple Development identity and no Apple Distribution identity.
 Signed iOS Distribution Archive/IPA remains pending. No purchases, DB changes, Store
 upload/submission or public release; general HOLD.
+
+
+## 2026-11-03 — 선택형 닉네임 마지막 단계
+
+기존 상태→학교/학년→관심 대학→희망 전공 뒤 5번째 선택형 닉네임을 추가한다. 기존 `profiles.display_name` 저장/검증과 MY 편집을 재사용한다. 현재 닉네임 복원, 빈값/나중에 설정하기/미변경은 닉네임 쓰기 없음, 입력 변경분 저장 성공 후 완료, 실패 시 입력 유지·재시도. 학교·학년·대학·전공 저장 계약은 유지한다. 기존 회원 강제 온보딩·닉네임 필수화/유일성/공개 커뮤니티는 추가하지 않는다. [Owner 결정·보존 검토·실행 결과](app-release-integration-20261103.md#마지막-선택형-닉네임-승인구현--2026-11-03).

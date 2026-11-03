@@ -325,3 +325,17 @@ private `candidate-a/release46/`: Store IPA SHA256 `7003ecd0aec0c35a285112b70cca
 Owner는 A46 대학 입력창 검색/키보드 footer숨김→대학 선택→희망 전공→설정 완료→MY·완전 종료/재실행 후 학교·학년·대학·전공 유지 질문에 “1)pass.”로 답했다. 해당 기기·계정에서 요청한 흐름 **Owner 관찰 PASS**. 같은 응답이 두 메시지로 전달됐으며 독립된 두 차례 검증으로 세지 않는다. 새46에서 다른 모든 Provider 신규 가입/다른 기기/Store 심사까지 PASS로 확대하지 않는다.
 
 Owner는 마지막 닉네임 온보딩 추가의 적절성을 질문했다. 제안 검토이며 아직 신규 코드 구현/빌드 또는 필수 입력 정책 확정이 아니다. 기존 [프로필 닉네임](core-app-improvements.md)과 [향후 커뮤니티 identity](product-platform-boundaries.md)에 따르면 `profiles.display_name`은 직접 입력하는 선택형·중복 허용 닉네임이며 MY 편집/저장/홈 표시가 이미 있다. 커뮤니티 작성자는 같은 닉네임을 재사용할 계획이나 공개 조회/API·게시판은 현재 제공 기능이 아니다. 권고: 전공 다음 마지막 선택 단계, 기존 이름 복원·변경분만 기존 저장 계약으로 저장, 저장 성공 후 완료, 건너뛰기 시 기존 이름 보존, MY에서 변경 가능. 새 DB/중복 확인/커뮤니티 구현은 이번 제안에 포함하지 않는다.
+
+
+### 마지막 선택형 닉네임 승인·구현 — 2026-11-03
+
+Owner가 전공 다음 마지막 선택형 닉네임 단계 추가, 기존 저장 기능 재사용, 테스트·정식 빌드·iPhone 설치 및 실기기 검수 계속을 승인했다. 앞선 제안 상태를 대체한다. 운영 DB 변경·Store 제출은 금지한다.
+
+- 기존 4단계 뒤 5단계 닉네임 추가. 기존 이름을 복원하고, 빈 입력/나중에 설정하기/변경 없는 이름은 닉네임을 쓰거나 삭제하지 않는다. 명시적으로 입력한 변경분만 기존 `upsertCurrentProfile(displayName:)`로 저장한다. 저장 성공 후 기존 온보딩 완료 처리를 한다. MY에서 계속 변경 가능.
+- MY와 온보딩의 기존 1~80 rune·제어문자 금지 검증을 공용 helper로 재사용한다. 중복 허용·선택형 유지. 기존 저장 payload/DB/API/권한 변경 없음. 사회 로그인 이름 자동 복사, 닉네임 중복 확인, 커뮤니티 공개/API 구현은 추가하지 않았다.
+- 저장 실패 시 입력 유지·재시도; 닉네임 저장 후 완료 기록만 실패하면 재시도 시 닉네임 중복 저장 없음. 중복 탭 방지·계정 전환 owner guard 유지. 키보드 닫기 제공. 작은 폭/큰 글씨에서 마지막 보조 버튼이 줄바꿈되도록 footer 조정.
+- 변경 파일: `onboarding_page.dart`, `profile_edit_page.dart`, 신규 `nickname_validation.dart`, `onboarding_page_test.dart` 및 Wiki. fake repository 집중63PASS: 빈값/skip/기존값 보존, 실패/재시도/중복 탭/계정 전환, 키보드100/200%, 잘못된 입력 차단. 초기 360폭·글씨200% footer overflow를 재현 후 수정했으며 최종 집중 검사 통과. 전체 회귀·Release47 빌드 및 실기기 결과는 후속 기록한다.
+
+보존 검토7항목: (1) 새 사건/시점 수집 없음, (2) 기존 학습/답안 사실 불변, (3) 기존 자기보고 현재 닉네임 필드만 기존 sparse 저장 경로로 갱신·이력 생성 없음, (4) 동일 로그인 owner guard, (5) 닉네임을 실제 성명·지원·합격 사실로 추정하지 않음, (6) 새 개인정보 종류/공개 권한/보존기간 없음, (7) 빈값·skip을 삭제/추정 backfill로 해석하지 않음. [기존 닉네임 정책](core-app-improvements.md), [플랫폼 경계](product-platform-boundaries.md), [보존 전략](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review)을 계승한다.
+
+최종 로컬 검증: 전체 Flutter **1375PASS/7SKIP**, Analyze PASS, 집중63PASS, mock 키보드 렌더2PASS(100/200%). 로그 `/tmp/app-review-nickname-{all,analyze,focused,render}.log`; 화면 `/private/tmp/legendstudy-core-ui/nickname-keyboard-{1.0,2.0}.png`. OS 키보드/실기기 캡처가 아닌 widget viewInsets 검사다. mock 캡처의 명시적 버튼 TextStyle은 테스트 기본 폰트 때문에 한글이 사각 문자로 표시되는 한계가 있다. 버튼 문구·터치·layout은 widget assertions로 검증했으며 실제 글리프 표시는 Owner 기기에서 확인한다. 제품 폰트는 변경하지 않았다. Release47 및 Owner 실제 저장 검수 대기.

@@ -35,10 +35,17 @@ class _Repo implements ProfileRepository {
   bool failWrite = false;
   bool failComplete = false;
   int completionAttempts = 0;
+  String? nickname;
+  int nicknameWrites = 0;
+  bool failNickname = false;
+  Completer<void>? nicknameGate;
   @override
-  Future<UserProfile?> fetchCurrentProfile() async =>
-      initial ??
-      UserProfile(id: 'u1', academicStatus: status, gradeLevel: grade);
+  Future<UserProfile?> fetchCurrentProfile() async => UserProfile(
+    id: initial?.id ?? 'u1',
+    displayName: nickname ?? initial?.displayName,
+    academicStatus: status ?? initial?.academicStatus,
+    gradeLevel: clearedGrade ? null : grade ?? initial?.gradeLevel,
+  );
   @override
   Future<void> updateSchoolSelection({
     String? officeCode,
@@ -57,6 +64,12 @@ class _Repo implements ProfileRepository {
     bool clearAcademicStatus = false,
   }) async {
     if (failWrite) throw StateError('offline');
+    if (displayName != null) {
+      if (failNickname) throw StateError('nickname offline');
+      await nicknameGate?.future;
+      nickname = displayName;
+      nicknameWrites++;
+    }
     upserts++;
     if (academicStatus != null) status = academicStatus;
     if (gradeLevel != null || clearGrade) {
@@ -115,6 +128,7 @@ Future<GoRouter> _mount(
   WidgetTester tester,
   _Repo repo, {
   String? user,
+  Stream<AuthStatus>? authStream,
   SchoolRepository? schools,
   bool reduceMotion = false,
   double textScale = 1,
@@ -133,7 +147,9 @@ Future<GoRouter> _mount(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        authStateProvider.overrideWith((ref) => Stream.value(AuthStatus(user))),
+        authStateProvider.overrideWith(
+          (ref) => authStream ?? Stream.value(AuthStatus(user)),
+        ),
         profileRepositoryProvider.overrideWithValue(repo),
         schoolRepositoryProvider.overrideWithValue(schools ?? _NoSchools()),
         universitySearchProvider.overrideWith(
@@ -249,7 +265,9 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text('나중에 설정할게요'));
         await tester.pumpAndSettle();
-        await tester.tap(find.text('설정 완료'));
+        await tester.tap(find.text('다음'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('시작하기'));
         await tester.pumpAndSettle();
         expect(repo.grade, 2);
         expect(repo.status, 'student');
@@ -258,6 +276,190 @@ void main() {
         expect(tester.takeException(), isNull);
       },
     );
+  }
+
+  Future<void> toNickname(
+    WidgetTester tester,
+    _Repo repo, {
+    Stream<AuthStatus>? authStream,
+    double scale = 1,
+  }) async {
+    tester.view.physicalSize = const Size(428, 926);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await _mount(
+      tester,
+      repo,
+      user: 'u1',
+      authStream: authStream,
+      textScale: scale,
+    );
+    if (repo.initial?.academicStatus == null) {
+      await tester.tap(find.text('고등학교 재학생'));
+      await tester.pumpAndSettle();
+    }
+    for (var step = 1; step <= 4; step++) {
+      await tester.tap(find.text(step == 3 ? '나중에 설정할게요' : '다음'));
+      await tester.pumpAndSettle();
+    }
+    expect(find.text('어떤 이름으로 불러드릴까요?'), findsOneWidget);
+    expect(find.text('5 / 5'), findsOneWidget);
+    expect(repo.completed, isFalse);
+  }
+
+  testWidgets('optional blank nickname completes without a nickname write', (
+    t,
+  ) async {
+    final repo = _Repo();
+    await toNickname(t, repo);
+    await t.tap(find.text('시작하기'));
+    await t.pumpAndSettle();
+    expect(repo.completed, isTrue);
+    expect(repo.nicknameWrites, 0);
+  });
+
+  for (final action in ['later', 'blank', 'unchanged']) {
+    testWidgets('existing nickname is preserved with $action', (t) async {
+      final repo = _Repo()
+        ..initial = const UserProfile(
+          id: 'u1',
+          academicStatus: 'student',
+          displayName: '기존별명',
+          gradeLevel: 2,
+        );
+      await toNickname(t, repo);
+      expect(
+        t.widget<TextField>(find.byType(TextField)).controller!.text,
+        '기존별명',
+      );
+      if (action != 'unchanged') {
+        await t.enterText(
+          find.byType(TextField),
+          action == 'blank' ? '' : '저장하지않을별명',
+        );
+      }
+      await t.pumpAndSettle();
+      await t.tap(
+        find.text(
+          action == 'later'
+              ? '나중에 설정하기'
+              : action == 'blank'
+              ? '시작하기'
+              : '저장하고 시작하기',
+        ),
+      );
+      await t.pumpAndSettle();
+      expect(repo.completed, isTrue);
+      expect(repo.nicknameWrites, 0);
+      expect((await repo.fetchCurrentProfile())!.displayName, '기존별명');
+      expect((await repo.fetchCurrentProfile())!.gradeLevel, 2);
+    });
+  }
+
+  testWidgets('nickname failure keeps input and completion waits for save', (
+    t,
+  ) async {
+    final repo = _Repo();
+    await toNickname(t, repo);
+    await t.enterText(find.byType(TextField), '  새별명  ');
+    await t.pumpAndSettle();
+    repo.failNickname = true;
+    await t.tap(find.text('저장하고 시작하기'));
+    await t.pumpAndSettle();
+    expect(repo.completionAttempts, 0);
+    expect(
+      t.widget<TextField>(find.byType(TextField)).controller!.text,
+      '  새별명  ',
+    );
+    expect(find.textContaining('완료하지 못했어요'), findsOneWidget);
+    repo.failNickname = false;
+    repo.failComplete = true;
+    await t.tap(find.text('저장하고 시작하기'));
+    await t.pumpAndSettle();
+    expect(repo.nickname, '새별명');
+    expect(repo.nicknameWrites, 1);
+    expect(repo.completed, isFalse);
+    repo.failComplete = false;
+    await t.tap(find.text('저장하고 시작하기'));
+    await t.pumpAndSettle();
+    expect(repo.completed, isTrue);
+    expect(repo.nicknameWrites, 1);
+  });
+
+  testWidgets('invalid nickname cannot save or complete', (t) async {
+    final repo = _Repo();
+    await toNickname(t, repo);
+    await t.enterText(find.byType(TextField), '별명\u0000');
+    await t.pumpAndSettle();
+    await t.tap(find.text('저장하고 시작하기'));
+    await t.pumpAndSettle();
+    expect(repo.nicknameWrites, 0);
+    expect(repo.completionAttempts, 0);
+    expect(find.textContaining('1~80자로'), findsOneWidget);
+  });
+
+  testWidgets('nickname duplicate taps save and finish only once', (t) async {
+    final repo = _Repo()..nicknameGate = Completer<void>();
+    await toNickname(t, repo);
+    await t.enterText(find.byType(TextField), '새별명');
+    await t.pumpAndSettle();
+    final save = find.text('저장하고 시작하기');
+    await t.tap(save);
+    await t.tap(save);
+    await t.pump();
+    expect(repo.completed, isFalse);
+    repo.nicknameGate!.complete();
+    await t.pumpAndSettle();
+    expect(repo.nicknameWrites, 1);
+    expect(repo.completionAttempts, 1);
+  });
+
+  testWidgets(
+    'nickname completion from previous owner does not finish new account',
+    (t) async {
+      final auth = StreamController<AuthStatus>();
+      addTearDown(auth.close);
+      final repo = _Repo()..nicknameGate = Completer<void>();
+      auth.add(const AuthStatus('u1'));
+      await toNickname(t, repo, authStream: auth.stream);
+      await t.enterText(find.byType(TextField), '이전계정별명');
+      await t.pumpAndSettle();
+      await t.tap(find.text('저장하고 시작하기'));
+      await t.pump();
+      auth.add(const AuthStatus(null));
+      await t.pumpAndSettle();
+      repo.nicknameGate!.complete();
+      await t.pumpAndSettle();
+      expect(repo.completionAttempts, 0);
+      expect(find.text('이전계정별명'), findsNothing);
+      expect(t.takeException(), isNull);
+    },
+  );
+
+  for (final scale in [1.0, 2.0]) {
+    testWidgets('nickname keyboard stays usable at $scale', (t) async {
+      final repo = _Repo();
+      await toNickname(t, repo, scale: scale);
+      t.view.viewInsets = const FakeViewPadding(bottom: 336);
+      addTearDown(t.view.resetViewInsets);
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.byType(TextField));
+      await t.enterText(find.byType(TextField), '레전드학생');
+      await t.pumpAndSettle();
+      await preview.capture(t, 'nickname-keyboard-$scale');
+      expect(find.byTooltip('키보드 닫기'), findsOneWidget);
+      await t.tap(find.byTooltip('키보드 닫기'));
+      await t.pumpAndSettle();
+      expect(t.testTextInput.isVisible, isFalse);
+      t.view.resetViewInsets();
+      await t.pumpAndSettle();
+      await t.tap(find.text('저장하고 시작하기'));
+      await t.pumpAndSettle();
+      expect(repo.nickname, '레전드학생');
+      expect(repo.completed, isTrue);
+      expect(t.takeException(), isNull);
+    });
   }
 
   testWidgets('guest cannot personalize', (tester) async {
@@ -289,7 +491,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
     await tester.pumpAndSettle();
-    await tester.tap(find.text('설정 완료'));
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('시작하기'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'student');
@@ -315,7 +519,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('나중에 설정할게요')); // 관심 대학(0개) → 희망 전공
     await tester.pumpAndSettle();
-    await tester.tap(find.text('설정 완료'));
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('시작하기'));
     await tester.pumpAndSettle();
 
     expect(repo.status, 'retaker');
