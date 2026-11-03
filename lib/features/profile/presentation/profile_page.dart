@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'learning_info_row.dart';
+import 'profile_completion_card.dart';
 import 'aspirations_card.dart';
 import '../../study/study_providers.dart';
 import '../../personal/personal_providers.dart';
@@ -110,6 +111,7 @@ class ProfilePage extends ConsumerWidget {
         if (!auth.isLoading &&
             !auth.hasError &&
             auth.value?.isAuthenticated == true) ...[
+          const ProfileCompletionCard(),
           const SectionHeader('학습'),
           Consumer(
             builder: (context, ref, _) {

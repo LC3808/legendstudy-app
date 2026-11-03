@@ -2,6 +2,8 @@
 
 상태: 구현·자동 검증 완료 / 운영 미배포. Owner 검수 후 별도 신규 APP 빌드·배포가 필요하다.
 
+후속: [MY 미설정 정보 보완·최종 통합 준비·실측 지표](onboarding-v2-final-integration-20261103.md). 기존 V2 계약은 유지한다.
+
 ## 기준과 범위
 
 - 원격 `codex/beta-store-release-task14`의 `367bfab`에서 현재 작업 폴더에

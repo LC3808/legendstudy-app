@@ -5350,3 +5350,8 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
 - MY 학교 미설정 확인·코드쌍 NULL 복원, 상태/학년/닉네임 보존. 학교명 CTA/긴 이름 줄바꿈.
 - 전체1334PASS/기존7SKIP, 대상58PASS, analyzePASS, iOS simulator debugPASS. 운영 쓰기/APP41 변경/통합/배포/push 없음.
   [최신 계약·검증·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix).
+
+
+## 2026-11-03 — 온보딩 V2 최종 통합 준비·기존 회원 정보 보완
+
+[후속 보고](onboarding-v2-final-integration-20261103.md): 74815f64 계승, MY 누락별 선택형 안내·상태 우선·비재학생 제외·완성 숨김. 운영 읽기 집계100계정/재학생43/학교설정18; 쓰기 없음. 별도 브랜치·APP41 보존, 수리14파일 dry merge 충돌·미통합. 로컬 빌드/자동 검사와 실기기 미검증 구분, Push/배포 없음.

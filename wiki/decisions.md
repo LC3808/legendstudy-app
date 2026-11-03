@@ -2,6 +2,8 @@
 
 ## 2026-11-03 — 온보딩 프로필 정합성 및 학교 검색
 
+Owner 후속: 기존 회원에게 MY 선택형 누락 안내만 제공한다. 상태 우선, 재학생 학교/학년 누락별 안내, 비재학생 학교 권유 없음. 완성 시 숨김·기존 편집기 재사용·추정 backfill/강제 온보딩 금지. [최종 통합 준비](onboarding-v2-final-integration-20261103.md).
+
 [기존 개인화](personalization-onboarding.md)를 계승하여 고등학교 기본, 접미 학교급 지정 시 중학교, 초등학교 제외를 확정한다. 검색 첫 결과는 임시 선택이고 명시적 확인에만 저장한다. 상태/학년은 단계 이동·건너뛰기로 유실시키지 않는다. 학교 필수화/과거 누락값 추정은 금지. [V2 계약·보존 검토](onboarding-school-search-v2-20261103.md).
 
 Owner 최종 리뷰: 건너뛰기 optional-field best-effort와 완료 기록 성공을 분리한다. 미저장값 안내·재시도 유지, 완료 실패 허위 성공 금지. MY 학교 미설정 확인 후 코드쌍 NULL 허용, 검색 해제 버튼 제거 유지. 확인 CTA는 선택 학교명 표시. [정확한 계약](onboarding-school-search-v2-20261103.md#final-review-fix).
