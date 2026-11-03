@@ -1,6 +1,6 @@
 # APP Release Integration — 2026-11-03
 
-상태: **후보 A BUILD_PASS / DEVICE_QA_PENDING; 후보 B CODE_PASS / BETA_HOLD; STORE_HOLD**.
+상태: **후보 A BUILD_PASS / ONBOARDING_OWNER_PASS / 잔여 인증·기기 검수 PARTIAL; 후보 B CODE_PASS / BETA_HOLD; STORE_HOLD**.
 이번 Owner 승인은 병합/검증/신규 빌드까지이며 Store 제출·운영 베타 활성화 승인이 아니다.
 [기존 APP41](final-store-rc-1.md#task18-build41-owner-login-acceptance--2026-11-02),
 [온보딩 V2](onboarding-v2-final-integration-20261103.md), [Kakao 시스템 인증](kakao-ios-system-auth-20261103.md)의 통합 후속.
@@ -367,3 +367,21 @@ Owner는 후속 선택지2(“내가 이미 계정을 삭제했음”)로 확인
 - iPhone12ProMax 업데이트 설치·실행 후 설치 목록에서 build48 확인. `/auth` URL로 로그인 화면 열기 요청. Owner 직접 계정 삭제 신고에 따라 재로그인→신규 온보딩→닉네임 저장→홈/MY→재실행을 요청했다. 화면/저장 확인은 응답 대기, 원인/해결 및 실기기 PASS 미확정.
 - private `candidate-a/release48/` Archive/로그/IPA 보존. Store IPA SHA256 `8fb1ce106ea477a60a0743e5bde4ff5c76869bba77f76f639cd8f2efdb546925`, device IPA `d18ab6203d4978f28bf9821de6d09aac305ce802ceafdbc60b7e3e993b8de590`. 로그 `/tmp/app-review-a48-{ios,device-export,preflight-tests}.log`.
 - 에이전트 운영 DB/Auth 설정/계정 삭제·초기화/Credit/Ledger/결제/WEB/Store 변경 없음. 기존 APP41 및47 산출물 보존. 후보 A DEVICE_QA_PENDING, 후보 B 베타/운영 HOLD 유지.
+
+
+### A48 온보딩·닉네임 실기기 Owner PASS — 2026-11-03
+
+Owner는 iPhone12ProMax Release1.0.1(48) 재로그인 후 상태→학교/학년→관심 대학→전공→닉네임 저장→홈/MY→완전 종료·재실행 확인 요청에 “온보딩·닉네임 저장·재실행 모두 정상”으로 응답했다. 요청한 온보딩 및 닉네임 저장/표시·재실행 유지 흐름을 해당 기기·계정의 **Owner 관찰 PASS**로 기록한다. 로그인 Provider는 이번 응답에 명시되지 않았으므로 특정 Provider 신규 가입 PASS로 추정하지 않는다.
+
+A47 진행 문제의 원인은 확인되지 않았으며48은 동일 코드 재빌드다. Owner 직접 계정 삭제 후 다시 수행한 흐름의 성공이고, 재빌드가 A47 문제를 코드 수정으로 해결했다거나 삭제 전 기록 보존을 검증했다고 주장하지 않는다. 현재 닉네임 진행 차단은 재보고되지 않았다. 코드/빌드 변경 없이 검수 기록만 갱신했다.
+
+| 구분 | 확인 상태 / 다음 범위 |
+|---|---|
+| 온보딩 학교·대학 검색 / 닉네임 저장·재실행 | A45/46/48 Owner PASS. 불필요한 재검수 없음 |
+| Kakao 취소·재시도·홈 복귀·세션 / 이메일 오류·재시도 | A42 Owner PASS. 기능 변경 없음, 기존 결과 재사용 |
+| Google·Apple 각 취소/재시도/계정·세션 및 Provider별 신규 가입 | 이전 정상 응답의 Provider별 범위가 불명확해 전체 matrix PARTIAL. 새 계정 삭제/가입을 강요하지 않고 사용한 방식부터 구분 |
+| 기존 PDF·인문논술 History·결과 조회 | A42 Owner PASS. 신규 평가/차감 E2E와 구분 |
+| Android/iPad 실제 기기 | 미검증; 빌드/위젯 검사와 구분 |
+| 후보 B 수리·상경 / 운영·스토어 | 기존 BETA_HOLD 및 별도 Owner 승인 유지 |
+
+기존 전체1375PASS/7SKIP·Analyze, 집중63PASS·iOS48/Android47 서명 빌드 증거 재사용. 에이전트 DB/Auth 설정/계정 삭제/운영/Store 변경 없음.
