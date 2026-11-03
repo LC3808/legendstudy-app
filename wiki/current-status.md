@@ -2,14 +2,15 @@
 
 ## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 
-현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험은 최초검증 범위이며, Owner 지시에 따라 운영 Registry 전체에서 상경·사회·수리 공개 범위를 다시 조사 중이다.
+현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험으로 제한하지 않고 전체363시험을 조사했다. [확대 감사](app58-expanded-registry-audit-20261104.md), [운영 연결 실행](app58-expanded-production-connection-20261104.md)이 최신 근거다.
 
 - APP `codex/app-review-candidate-b-20261103`: 후보 A 인증·온보딩·MY·선택형 닉네임 + B 수리 UX 통합. 자연계 일괄 차단 대신 정확한 공개 Catalog와 서버 실행 상태를 확인한다. 혼합형 사진은 기존 Math 인식/확인 후 Essay 시험 회차 하나에 제출한다. 입력이 바뀌면 확인본 재사용 차단.
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.
-- 현재 운영 읽기 확인: 기존16시험(인하 자연15·한양2026 상경1)의 canonical46문항과 공식 평가 패키지 조회 PASS. legacy 건국1leaf를 보존한47leaf 초기 공개 후보. 의예/미연결/합성 문제와 TEST 전용 한양2024 자연 ID는 제외. 시험 데이터 신규 생성/복제 없음.
-- 운영에는 coaching/혼합 coaching/quote/continue 증분 RPC가 아직 없다. 운영 함수 원문·권한·run-table 구조를 보존한 증분 SQL 후보3개를 로컬 PG17에서 검증했으며 운영 미적용이다. 별도 격리 TEST 증분은 적용·6함수 postflight·기존 데이터10종 count 보존 PASS. 실제 무료0 견적/익명 거절 PASS, 유료 견적은 잔액0으로 NOT_VERIFIED다. 일일 베타 이용권을 제외하던 Math 선택 조건도 기존 claim/credit_source/eligible 계약으로 연결한다. 임의 유료 대체 없이 서버 선택 출처를 확인·동의한다.
+- 전체 데이터 READY211/NEEDS_REVIEW73/BLOCKED79. 기존160+신규42=15대학202시험464문항 연결 범위다. 신규42는 혼합26·Math15·서강Essay1. 의예9/부분승인2는 신규 전체시험 활성화 제외, 기존ID·review·자료 보존.
+- 운영 core/scope/beta/혼합전체문항 guard4개 적용·postflight PASS. 기존 보호13테이블 count/hash 동일, beta160행/캠페인 그대로 보존하고42행만 추가. Math catalog72·APP58 limit50호환, coaching/quote/continue·일일무료 출처·무료1회 반복 연결. 신규 혼합26은 일부문항 제출을 차감 전에 차단한다.
+- 호환 WEB d8b0d2de/소스172c5e1을 Math HOLD로 선배포, 기존 인문 History3문항 실조회 PASS. 최종 공개설정/Worker/WEB 연결 및 신규 Provider 실제 검수 진행 중. 운영 설정 완료를 실제 첨삭 품질 PASS로 보고하지 않는다.
 - APP 이용권 표시/출처 연결까지 전체1,434PASS/7SKIP, signed iOS57 완료·보존. 11/4 업데이트 확인을 포함한 최종 전체1,480PASS/기존7SKIP·Analyze0. 동일소스5b5e5a8의 정식1.0.1(58) iOS IPA/Archive·Android AAB 서명/실제버전/운영설정 PASS. 스토어 업로드·기기58 설치0. 산출물/해시는 종합 보고서에 기록했다.
-- 기존 APP41 소스·IPA·브랜치 및 A48 정식 설치 앱, TEST56 별도 앱 보존. 운영 DB/Auth/Credit/Ledger/결제/Provider/WEB 변경과 Store 제출을 완료했다고 주장하지 않는다.
+- 기존 APP41/58 산출물 및 A48 설치 앱·별도TEST56 보존. 운영 Auth·결제·기존 이용권/History 사실 변경0, Store업로드/제출/게시0. Owner계정 실제검수 승인: 일일무료 우선·추가최대3개, 아직 신규차감0.
 
 ## Owner 추가 결정 — 이용권 용어 통일
 
@@ -27,7 +28,7 @@
 
 ## 운영·품질 잔여
 
-OCR 부호·지수·분수·수치 정확도, 공식 근거별 힌트/완성 해설 품질, 실제 기기 전체 제출, 최신 DB 증분/공개 설정 적용 후 기존 인문 회귀와 운영 스모크가 남아 있다. 미검증을 PASS로 올리지 않는다. 학습 정책은 하루1회·00KST·이월0, 유료1+무료1 반복·무료14일, 베타 종료2026-11-11 00KST를 유지한다.
+OCR 부호·지수·분수·수치 정확도, 공식 근거별 힌트/완성 해설 품질, 실제 기기 전체 제출, 최종 공개 설정 후 신규 Provider 운영 스모크가 남아 있다. 미검증을 PASS로 올리지 않는다. 학습 정책은 하루1회·00KST·이월0, 유료1+무료1 반복·무료14일, 베타 종료2026-11-11 00KST를 유지한다.
 
 ## 재개·보존 경로
 

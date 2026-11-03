@@ -5666,3 +5666,8 @@ Owner 승인 후 기존 SHA25660deffda SQL을 kpq 격리 TEST에 적용. migrati
 ## 2026-11-04 — APP58 산출물 재검증·Store 역할 정정
 
 실제5b5e5a8 빌드 IPA/AAB의 버전·서명·운영 인증 설정과 receipt hash PASS, 미활성 UI 집중33PASS. Store 업로드/제출/게시0. Owner 직접 실행 결정에 따라 [산출물·절차](app58-store-handoff-20261104.md)를 인계하며 Backend 전체 공개 범위 조사는 계속한다.
+
+
+## 2026-11-04 — 수리·상경 전체 공개 범위 재검증 및 운영 증분
+
+기존363시험/공식runtime213을 읽기 조사하여 기존160+신규42=202시험464문항 범위 확정. root가 검증된 core/scope/beta/혼합전체문항 guard를 운영 적용, 함수20/ACL·scope·기존보호13종hash 보존 PASS. 호환 WEB Math HOLD 선배포 및 기존인문 History 실조회 PASS. 최종 설정·실제 Provider/실기기 검수 진행 중, Store실행0. [실행 보고](app58-expanded-production-connection-20261104.md).
