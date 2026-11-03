@@ -309,3 +309,12 @@ Owner가 A45 실기기에서 “학교 검색 잘 되었음”을 확인했다. 
 보존 검토7항목: (1) 새 발생/기록 시점 없음, (2) 학교·학습 원본 불변, (3) 관심 대학 기존 저장 payload·이력 변경 없음/UI pending만 추가, (4) 동일 owner/provider 사용, (5) 관심은 실제 지원/합격 결과와 구분, (6) 새 수집·권한·보존기간 없음, (7) 검색 결과를 자동 선택/실제 관심으로 추정해 저장하지 않음. 기존 [관심 대학 계약](personalization-onboarding.md)·[상위 보존 원칙](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review) 유지. 운영 설정/DB/Credit/Store 변경 없음.
 
 최종검사: 전체1365PASS/7SKIP, Analyze PASS, 집중42PASS, mock 렌더2PASS(100/200%). `/private/tmp/legendstudy-core-ui/university-{keyboard,result}-{1.0,2.0}.png` 시각 확인: 입력창 내 검색·키보드 때 footer없음. 렌더 첫 실행은 전체 검사와 native PDFium 산출물 경합으로 실패했고 순차 재실행 PASS; 코드 오류와 구분.
+
+
+### Release46 관심 대학 수정본 설치 — 2026-11-03
+
+A 기능 소스 `9092d4e`, B `d528a62`에 동일 수정 포함. A전체1365PASS/7SKIP·Analyze PASS·집중42PASS·mock렌더2PASS, B집중42PASS. A iOS1.0.1(46) signed Release Archive/App Store IPA·기기 export·codesign PASS, Android46 signed AAB95.4MB·jarsigner PASS. iOS 실제 AOT에 기존 Supabase URL/publishable·Google server/iOS ID 포함을 값 출력 없이 확인. 새 키/권한/환경 변경 없음.
+
+iPhone12ProMax 업데이트 설치/실행 PASS. 기존 onboarding route 열기를 요청하고 Owner에게 대학 검색·선택→전공→완료→MY·재실행 정보 유지 검수를 요청했다. 46 실제 화면/저장 검수는 답변 대기이며 설치 성공만으로 UI PASS를 선언하지 않는다. 앱 삭제·신규 계정 생성·profile 초기화·Store 업로드 없음.
+
+private `candidate-a/release46/`: Store IPA SHA256 `7003ecd0aec0c35a285112b70ccaaf146697b87121aab40c12809481e3991d83`, device IPA `38b9d7fecd8f66258f9c323d8d0a55fe8f22a2c8764ac963b69473a896122427`, AAB `fa0e201ad49f9c9ff1498df2b40b3fdada2e32e84e03430562a09323e1ad2786`. `/tmp/app-review-a46-*.log`, `/tmp/app-review-university-*.log`, `/tmp/app-review-b-university-focused.log`를 private logs에 보존. 기존45/APP41 산출물 보존. 후보 A Owner 검수/Store HOLD, 후보 B 베타 HOLD 유지.

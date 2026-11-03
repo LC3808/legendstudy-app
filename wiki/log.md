@@ -5581,3 +5581,8 @@ A1362PASS/7SKIP·Analyze PASS, B집중47PASS. A45 signed IPA/AAB·설정/서명 
 ## 2026-11-03 — A45 학교 검색 PASS·관심 대학 검색 후속
 
 Owner 학교 검색 정상 확인. 관심 대학도 inline 검색 요청 및 나중에 설정 오인 보고. 공용 검색 버튼/온보딩 keyboard footer숨김·미검색 이동 차단, 기존 저장·선택권 유지. 집중42PASS. [범위·보존](app-release-integration-20261103.md#관심-대학-검색-동선-후속--2026-11-03). 새46 준비, 운영/Store HOLD.
+
+
+## 2026-11-03 — 후보 A46 관심 대학 검색 수정본 설치
+
+A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 signed IPA/AAB·설정/서명 PASS, iPhone 업데이트 설치/실행. [근거·산출물](app-release-integration-20261103.md#release46-관심-대학-수정본-설치--2026-11-03). Owner 전체 온보딩 저장/재실행 검수 대기, 운영/Store 변경 없음.

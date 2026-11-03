@@ -15,7 +15,7 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 
 ## P0 실기기 신규 발견
 
-Owner 사진으로 학년 버튼 세로 확장→검색 버튼이 아래로 밀림→키보드 위 `다음`을 검색으로 오인하는 동선 확인. 학년 한 줄·입력창 내 검색·학교 키보드 동안 footer 숨김·미확정 검색어 이동 차단 적용. A전체1362PASS/7SKIP·Analyze PASS·집중32PASS/렌더2PASS, B집중47PASS. A45 signed iOS/Android PASS·iPhone 업데이트 설치/실행 PASS. A45 학교 검색 정상 Owner PASS. 관심 대학에서도 하단 나중에 설정 오인 보고→입력창 검색·키보드 footer숨김·미검색 단계이동 방어 적용, 전체1365PASS/7SKIP·Analyze PASS·집중42PASS·mock렌더2PASS. 46 수정본 검수 준비. 기존42 MY 학교 저장·재실행 복원·누락 안내 해제와 안내 화면 계정 유지 Owner PASS. [상세](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03).
+Owner 사진으로 학년 버튼 세로 확장→검색 버튼이 아래로 밀림→키보드 위 `다음`을 검색으로 오인하는 동선 확인. 학년 한 줄·입력창 내 검색·학교 키보드 동안 footer 숨김·미확정 검색어 이동 차단 적용. A전체1362PASS/7SKIP·Analyze PASS·집중32PASS/렌더2PASS, B집중47PASS. A45 signed iOS/Android PASS·iPhone 업데이트 설치/실행 PASS. A45 학교 검색 정상 Owner PASS. 관심 대학에서도 하단 나중에 설정 오인 보고→입력창 검색·키보드 footer숨김·미검색 단계이동 방어 적용, 전체1365PASS/7SKIP·Analyze PASS·집중42PASS·mock렌더2PASS. A46 signed iOS/Android PASS·iPhone 설치/실행 PASS. 대학 검색→선택→전공→완료·MY/재실행 Owner 검수 대기. 기존42 MY 학교 저장·재실행 복원·누락 안내 해제와 안내 화면 계정 유지 Owner PASS. [상세](app-release-integration-20261103.md#owner-화면-근거배치-수정-및-후속-검수--2026-11-03).
 
 
 ## 재개 경로
