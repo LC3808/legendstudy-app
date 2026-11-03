@@ -216,7 +216,7 @@ TEST 전용 원문9함수 guard와 독립 리뷰를 통과한 증분만 `kpqbedy
 | WEB artifact | 운영 public config 포함 production tar.gz 준비; 실제 운영/TEST 배포0 |
 | Math TEST 증분 | 실제 적용·postflight PASS, 실제 source smoke PARTIAL(기존 잔액0), Provider0 |
 | 운영 수리/상경 증분·공개 플래그 | 준비·로컬 검증, **운영 미적용** |
-| 업데이트 정책 Migration | 후보·로컬69 PASS, **운영·TEST 모두 미적용/비활성** |
+| 업데이트 정책 Migration | 로컬69 PASS, **Owner 승인 후 TEST 비활성 적용·HTTP/권한 PASS, 운영 미적용** |
 | 스토어 업로드/제출·58 기기 설치 | 미실행 |
 
 최종 산출물 보관 폴더: `/Users/woojinchang/development/legendstudy-private-backups/app-review-integration-20261103/candidate-b/release58/`. 기존 APP41·A48·TEST56·release57과 원래 브랜치는 보존했다. 빌드 산출물은 정식 서명된 배포 후보이며 스토어 제출/심사 승인/운영 활성화 완료가 아니다.
@@ -237,7 +237,7 @@ TEST 전용 원문9함수 guard와 독립 리뷰를 통과한 증분만 `kpqbedy
 - 정책 조회3초 timeout·오류·미설치·잘못된 값은 정상 앱 이용. 인증/온보딩은 미루고, legacy/WEB 프로필도 기존 규칙대로 인정한다. 앱 복귀/중복/늦은 비동기 응답/화면 종료 경합을 방어한다.
 - 기존 APP41에는 이 클라이언트 기능이 소급 설치되지 않는다. 새 기능 포함 버전부터 동작하며 APP41을 운영 서버에서 강제로 차단하는 별도 변경은 하지 않았다.
 
-집중 검사는 업데이트45개+온보딩13개+기존 기기 QA fixture10개 = **68 PASS**. 전체 회귀1,480PASS에 포함되며 합산하지 않는다. SQL은 별도 로컬 PostgreSQL17 비슈퍼유저69개 PASS, 재현 스크립트와 RLS/권한/원복 증거 포함. 공개RPC는 anon/authenticated 읽기만 허용하고 private 직접 읽기/쓰기를 차단한다. 운영/TEST에 정책은 설치하지 않았다.
+집중 검사는 업데이트45개+온보딩13개+기존 기기 QA fixture10개 = **68 PASS**. 전체 회귀1,480PASS에 포함되며 합산하지 않는다. SQL은 별도 로컬 PostgreSQL17 비슈퍼유저69개 PASS, 재현 스크립트와 RLS/권한/원복 증거 포함. 공개RPC는 anon/authenticated 읽기만 허용하고 private 직접 읽기/쓰기를 차단한다. 후속 Owner 승인으로 TEST 비활성 설치·함수 정의/권한·실제 HTTP200/null·기존11종 count 보존을 확인했다. 운영에는 미설치다. [TEST 적용 기록](app-update-check-20261104.md#2026-11-04--owner-승인-후-격리-test-비활성-적용).
 
 Mock Native 화면 `optional-mock.png` / `required-mock.png`는 위 보관 폴더에 있다. 390×844 실제 위젯 렌더와320×568/글자1.5배 overflow를 확인했다. 화면의1.0.2는 fixture이며 실제 출시 버전이 아니다. 실제 iOS/Android 기기의 팝업·스토어 이동, 실제 공개 버전 설정은 **NOT_VERIFIED**다.
 
@@ -248,10 +248,10 @@ Mock Native 화면 `optional-mock.png` / `required-mock.png`는 위 보관 폴�
 1. Owner가 운영용 수리/상경 core → scope → beta 증분 후보3개를 검토·승인하고 정확한 기존 DB 상태에서 적용·postflight한다. 기존 History/원장과 인문 결과를 보존한다. TEST install/seed를 운영에 복사하지 않는다.
 2. 승인 범위16시험의 `ESSAY_BETA_EXPANSION_EXAMS`, 보존 legacy를 포함한47leaf의 `MATH_PUBLIC_LEAVES`, `ESSAY_CONTINUOUS_CYCLES_ENABLED=true` 설정 후보를 적용하고 WEB production artifact를 배포한다. 기존 EXAM_RUNTIME/MIXED_SESSION/Math 실행값은 유지한다. 이번 경로에서 사용하지 않는 `ESSAY_REVIEWED_RUNTIME_ENABLED`는 추가하지 않아 별도 단일 문항 경로를 임의 개방하지 않는다. 가려진 Secret을 저장하거나 기존211 공개시험 allowlist를 통째로 교체하지 않는다. 실제 인문 회귀·유료1/무료1·History·혼합 전체 완료를 확인한다.
 3. APP58 동일 Backend로 실제 기기 신규 사진→OCR확인→평가→재첨삭→History 및 혼합형을 검수한다. 기존 저장결과/UI PASS와 전체 실기기 신규 제출 PASS는 구분한다.
-4. 업데이트 정책 Migration은 별도 승인 후 disabled 상태로 적용·postflight한다. 실제 Store 공개를 확인한 exact tuple만 등록한다. REQUIRED는 다시 Owner의 명시적 최소 버전 승인 대상이다.
+4. 업데이트 정책은 Owner 승인 후 TEST에 disabled 상태로 적용·postflight 완료했다. 운영 적용은 별도 승인 대상이다. 실제 Store 공개를 확인한 exact tuple만 등록한다. REQUIRED는 다시 Owner의 명시적 최소 버전 승인 대상이다.
 5. 남은 실기기/품질·운영 연결을 검수한 뒤 Owner가 스토어 제출·베타 활성화 여부를 결정한다. 현재 업로드/제출/운영 활성화0이다.
 
-**현재 판정: 통합 코드·배포 후보 준비, 운영 활성화 및 스토어 제출 HOLD.** 신규 업데이트 정책의 원격 적용은 Owner가 이번 지시9항에서 먼저 승인을 받도록 명시했고, [AGENTS.md4항](../AGENTS.md)의 기본 DB 적용 절차도 따른다. 운영 DB/Auth/Credit/Ledger/결제 변경 금지 조건을 지키며 SQL 후보까지만 준비했다. 수리/상경의 실제 운영 차단 해제는 아직 완료하지 않았다. 남은 P0는 운영 증분/설정·실제기기 전체 루프·OCR/공식 힌트/해설 품질과 실제 업데이트 안내 검수다.
+**현재 판정: 통합 코드·배포 후보 준비, 운영 활성화 및 스토어 제출 HOLD.** 신규 업데이트 정책의 원격 적용은 Owner가 이번 지시9항에서 먼저 승인을 받도록 명시했고, [AGENTS.md4항](../AGENTS.md)의 기본 DB 적용 절차도 따른다. 운영 DB/Auth/Credit/Ledger/결제 변경 금지 조건을 지키며 운영용 SQL 후보를 준비했다. 업데이트 정책만 후속 승인된 TEST에 비활성 적용했으며 운영 승인으로 확대하지 않았다. 수리/상경의 실제 운영 차단 해제는 아직 완료하지 않았다. 남은 P0는 운영 증분/설정·실제기기 전체 루프·OCR/공식 힌트/해설 품질과 실제 업데이트 안내 검수다.
 
 
 ## 부록 A. 최종 배포 산출물

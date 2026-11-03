@@ -1,6 +1,6 @@
 # APP 업데이트 확인 — Native 통합 및 비활성 정책 후보
 
-기준일: 2026-11-04. Owner의 업데이트 확인 지시를 후보 B 통합 브랜치에 구현했다. 기능·정책 코드 검증을 완료했고, 실제 스토어에 공개된 최신 버전 확인과 정책 활성화, 실기기 스토어 이동 검수는 남아 있다. 후보 57/58이나 TestFlight 빌드를 최신 공개 버전으로 지정하지 않았다. 운영·TEST 정책 DB는 변경하지 않았다.
+기준일: 2026-11-04. Owner의 업데이트 확인 지시를 후보 B 통합 브랜치에 구현했다. 기능·정책 코드 검증을 완료했고, 실제 스토어에 공개된 최신 버전 확인과 정책 활성화, 실기기 스토어 이동 검수는 남아 있다. 후보 57/58이나 TestFlight 빌드를 최신 공개 버전으로 지정하지 않았다. 후속 Owner 승인으로 격리 TEST에만 비활성 정책을 적용·검증했다. 운영 DB는 변경하지 않았다.
 
 상위 기록: [릴리스 통합](app-release-integration-20261103.md), [수리·상경 통합 보고](app-math-commerce-integration-report-20261103.md), [기존 공유 프로필·온보딩](personalization-onboarding.md), [공식 스토어 링크](official-home-launch-task12.md).
 
@@ -30,7 +30,7 @@
 
 root Navigator의 단일 route로 중복 팝업을 막는다. 필수형은 뒤로가기와 다른 서비스 경로 이동으로 해제되지 않는다. root 표시 위젯 또는 controller 해제 시 진행 중 deadline 타이머도 취소한다. 앱 복귀 시 정책을 새로 조회하며, 실패·timeout이면 오래된 필수 안내를 남기지 않는다. 스토어 실행도 3초 제한을 두고 실패 시 다시 시도할 수 있다. 선택형 스토어 이동의 비동기 완료가 background 전환 뒤 도착해도 성공을 기억한다. 느린 설정 읽기 중 ‘나중에’를 눌렀을 때 안내가 다시 생기거나, 이전 스토어 실행이 새 버전 안내를 숨기거나 같은 버전에 새로 승인된 필수 안내를 해제하는 경합도 차단했다.
 
-## 서버 계약과 미적용 SQL
+## 서버 계약과 TEST 적용 SQL
 
 [비활성 정책 후보 패키지](../supabase/candidates/app_update_policy_20261104/README.md)에 SQL, 읽기 postflight, 기대값, HOLD-only 중단 SQL, 로컬 검증 결과를 보관한다.
 
@@ -42,7 +42,7 @@ root Navigator의 단일 route로 중복 팝업을 막는다. 필수형은 뒤�
 - 공식 App Store/Google Play URL만 허용한다. 임의 URL·query/token을 제공하지 않는다.
 - 초기 iOS/Android 모두 `enabled=false`, OPTIONAL, latest/minimum 미설정이다. 실행 권한은 anon/authenticated의 읽기 RPC로 제한하며 private 직접 읽기/쓰기는 막는다.
 
-SQL은 설치만으로 안내를 활성화하지 않는다. 새 DB 객체 적용과 실제 공개 tuple 설정은 Owner 확인 후 별도 작업이며, 이번 구현에서 실행하지 않았다. 현재 RPC가 없어도 앱은 기존 서비스 이용을 계속한다. 공개 최신 버전을 확인하기 전에는 정책을 활성화하지 않는다.
+SQL은 설치만으로 안내를 활성화하지 않는다. 새 DB 객체는 후속 Owner 승인에 따라 TEST에만 비활성으로 설치했다. 운영 적용과 실제 공개 tuple 설정은 별도 승인 대상이다. 운영 RPC가 없어도 앱은 기존 서비스 이용을 계속한다. 공개 최신 버전을 확인하기 전에는 정책을 활성화하지 않는다.
 
 ## 검증 결과와 한계
 
@@ -86,3 +86,21 @@ Native Mock 화면은 390×844에서 실제 위젯을 렌더링해 한글·간�
 - `test/app_update_test.dart`: 숫자 비교·정책·라이프사이클·프로필·화면 회귀.
 
 최종 통합 전체1,480PASS/기존7SKIP·Analyze0, 동일소스5b5e5a8의 정식 iOS IPA/Archive·Android AAB1.0.1(58) 및 서명/운영설정 검증 PASS. Git SHA와 파일 산출물은 [수리·상경 통합 보고](app-math-commerce-integration-report-20261103.md)에 기록한다. 실제 기기 안내·공식 스토어 이동은 정책 후보 적용과 실제 공개 정보 확인 이후 검수한다. 기존 APP41에는 이 클라이언트 기능이 없어 안내·필수 업데이트가 소급 설치되지 않는다. 해당 코드를 포함한 버전부터 작동하며, 기존 APP41을 서버에서 강제로 제한하는 별도 정책은 이번 범위가 아니다. 스토어 제출과 운영 활성화는 이번 작업의 완료로 간주하지 않는다.
+
+
+## 2026-11-04 — Owner 승인 후 격리 TEST 비활성 적용
+
+Owner는 SQL 검토 보류 후 “업데이트 정책 TEST 적용은 승인”으로 변경했다. 승인 범위는 기존 비활성 후보의 격리 TEST 설치이며, 운영 적용·공개 버전 등록·OPTIONAL/REQUIRED 활성화는 포함하지 않는다. [기존 정책 결정](decisions.md#2026-11-04--app-업데이트-확인과-정책-승인-분리)을 유지한다.
+
+- 대상: `legendstudy-iap-sandbox` / `kpqbedylxlyntrrfybpn`. 프로젝트 목록과 기존 객체 미존재를 확인한 뒤 적용.
+- 동일 SQL SHA256: `60deffda38777433a3a2aaffae0482a945c5c09462fdf86d5d8b25b03e7a9b48`. 원문은 변경하지 않았다.
+- 원격 migration: `20261103154005_app_update_policy_disabled_candidate_test_20261104`. 시각 식별자는 Supabase UTC 기록이며 보고일은 KST 11월4일.
+- 두 함수 정의 MD5·owner·ACL·빈 search_path가 로컬 기대값과 일치. RLS/FORCE RLS PASS.
+- iOS/Android 모두 `enabled=false`, `OPTIONAL`, latest/minimum NULL, 공개/필수 승인 false.
+- 실제 공개 HTTP RPC: iOS/Android 각각 **200 + null**. DB `anon`/`authenticated` 역할의 읽기 실행도 null. private schema/table/helper 직접 접근 권한은 모두 없음.
+- 기존 이용권·결제·프로필·수리 History 등 11종 테이블의 전후 row count 동일. 이는 건수 보존 확인이며 전체 행내용 동일성 검사는 아니다. SQL은 이 테이블들을 변경하지 않는다. Auth 쓰기·Provider 호출·운영 DB 접속/변경 없음.
+- [적용·검증 영수증](../supabase/candidates/app_update_policy_20261104/test-applied-postflight.json). 앱 코드 변경 없음, signed1.0.1(58)은 그대로이며 재빌드하지 않았다.
+
+Security Advisor에는 새 private table의 RLS/no-policy INFO와 공개 읽기 SECURITY DEFINER의 anon/auth WARN이 나타났다. private 기본 거절과 로그인 전 읽기 전용 정책 제공을 위한 의도된 구성이다. 본문에 학생정보/쓰기 경로가 없고 빈 search_path·명시적 ACL·실제 역할 응답을 확인했다. 이를 경고0으로 보고하지 않는다. [함수 권한 지침](https://supabase.com/docs/guides/database/functions), [anon 진단](https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable), [authenticated 진단](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable), [private 기본 거절 진단](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy). 기존 무관한 진단/설정은 변경하지 않았다.
+
+실제 기기 팝업·스토어 이동·24시간 재표시 검수는 이번 비활성 적용에 포함되지 않는다. 공개되지 않은 후보를 최신 스토어 버전으로 등록하지 않았다.

@@ -1,0 +1,224 @@
+{
+  "status": "TEST_APPLIED_DISABLED_VERIFIED",
+  "date_kst": "2026-11-04",
+  "project_ref": "kpqbedylxlyntrrfybpn",
+  "project_name": "legendstudy-iap-sandbox",
+  "authorization": "Owner explicitly approved update policy TEST application only after initial review hold.",
+  "sql_sha256": "60deffda38777433a3a2aaffae0482a945c5c09462fdf86d5d8b25b03e7a9b48",
+  "source_commit": "5b5e5a859a772f8f6af2716f1a1f3cec46a156d5",
+  "preflight": {
+    "policy_schema_exists": false,
+    "policy_rpc_exists": false,
+    "policy_migrations": []
+  },
+  "postflight": {
+    "rls": {
+      "acl": "{postgres=arwdDxtm/postgres}",
+      "forced": true,
+      "enabled": true
+    },
+    "rpc": {
+      "ios": null,
+      "android": null,
+      "invalid": null
+    },
+    "policies": [
+      {
+        "enabled": false,
+        "platform": "android",
+        "update_type": "OPTIONAL",
+        "latest_build": null,
+        "latest_version": null,
+        "required_approved": false,
+        "store_release_verified": false,
+        "minimum_supported_build": null,
+        "minimum_supported_version": null
+      },
+      {
+        "enabled": false,
+        "platform": "ios",
+        "update_type": "OPTIONAL",
+        "latest_build": null,
+        "latest_version": null,
+        "required_approved": false,
+        "store_release_verified": false,
+        "minimum_supported_build": null,
+        "minimum_supported_version": null
+      }
+    ],
+    "functions": [
+      {
+        "acl": "{postgres=X/postgres}",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "app_release_private",
+        "function": "version_key",
+        "definition_md5": "c15d3c30e6ac2daf1aa867ac81d8bcf5",
+        "security_definer": false
+      },
+      {
+        "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres}",
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "public",
+        "function": "app_update_policy",
+        "definition_md5": "c12e3f85eff3cf8ae648de6d4986fe5a",
+        "security_definer": true
+      }
+    ],
+    "migration": [
+      {
+        "name": "app_update_policy_disabled_candidate_test_20261104",
+        "version": "20261103154005"
+      }
+    ],
+    "privileges": [
+      {
+        "rpc": true,
+        "role": "anon",
+        "private_read": false,
+        "private_delete": false,
+        "private_helper": false,
+        "private_insert": false,
+        "private_schema": false,
+        "private_update": false
+      },
+      {
+        "rpc": true,
+        "role": "authenticated",
+        "private_read": false,
+        "private_delete": false,
+        "private_helper": false,
+        "private_insert": false,
+        "private_schema": false,
+        "private_update": false
+      },
+      {
+        "rpc": false,
+        "role": "service_role",
+        "private_read": false,
+        "private_delete": false,
+        "private_helper": false,
+        "private_insert": false,
+        "private_schema": false,
+        "private_update": false
+      }
+    ]
+  },
+  "protected_counts_before": {
+    "profiles": 3,
+    "credit_grants": 6,
+    "payment_events": 0,
+    "payment_orders": 0,
+    "credit_accounts": 3,
+    "math_session_runs": 10,
+    "payment_operations": 0,
+    "credit_transactions": 20,
+    "math_session_members": 20,
+    "essay_billing_decisions": 12,
+    "math_session_evaluations": 24
+  },
+  "protected_counts_after": {
+    "profiles": 3,
+    "credit_grants": 6,
+    "payment_events": 0,
+    "payment_orders": 0,
+    "credit_accounts": 3,
+    "math_session_runs": 10,
+    "payment_operations": 0,
+    "credit_transactions": 20,
+    "math_session_members": 20,
+    "essay_billing_decisions": 12,
+    "math_session_evaluations": 24
+  },
+  "protected_count_comparison": "PASS_COUNTS_ONLY",
+  "role_checks": [
+    {
+      "caller": "anon",
+      "ios": null,
+      "android": null
+    },
+    {
+      "caller": "authenticated",
+      "ios": null,
+      "android": null
+    }
+  ],
+  "anonymous_http": [
+    {
+      "platform": "ios",
+      "http_status": 200,
+      "policy_is_null": true
+    },
+    {
+      "platform": "android",
+      "http_status": 200,
+      "policy_is_null": true
+    }
+  ],
+  "advisor_delta": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+      "findings": [
+        {
+          "detail": "Table \\`app_release_private.platform_policy\\` has RLS enabled, but no policies exist",
+          "metadata": {
+            "name": "platform_policy",
+            "type": "table",
+            "schema": "app_release_private"
+          },
+          "observed_at": "2026-11-03T15:40:24.023Z"
+        }
+      ]
+    },
+    {
+      "name": "anon_security_definer_function_executable",
+      "level": "WARN",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable",
+      "findings": [
+        {
+          "detail": "Function `public.app_update_policy(p_platform text)` can be executed by the `anon` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/app_update_policy`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional.",
+          "metadata": {
+            "name": "app_update_policy",
+            "schema": "public",
+            "language": "plpgsql",
+            "arguments": "p_platform text",
+            "security_definer": true
+          },
+          "observed_at": "2026-11-03T15:40:24.023Z"
+        }
+      ]
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "level": "WARN",
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "findings": [
+        {
+          "detail": "Function `public.app_update_policy(p_platform text)` can be executed by the `authenticated` role as a `SECURITY DEFINER` function via `/rest/v1/rpc/app_update_policy`. Revoke `EXECUTE` or switch it to `SECURITY INVOKER` if that is not intentional.",
+          "metadata": {
+            "name": "app_update_policy",
+            "schema": "public",
+            "language": "plpgsql",
+            "arguments": "p_platform text",
+            "security_definer": true
+          },
+          "observed_at": "2026-11-03T15:40:24.023Z"
+        }
+      ]
+    }
+  ],
+  "advisor_review": "Intentional readonly non-sensitive release-policy projection; anonymous and authenticated SECURITY DEFINER warnings accepted for exact pinned search_path/ACL/body. Private forced RLS with no policies intentionally denies direct client access. No user-data/write operation exposed. Existing unrelated findings unchanged.",
+  "production_changes": 0,
+  "policy_activations": 0,
+  "required_activations": 0,
+  "provider_calls": 0,
+  "auth_writes": 0,
+  "device_popup_check": "NOT_VERIFIED"
+}

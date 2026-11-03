@@ -1,5 +1,5 @@
 {
-  "status": "CANDIDATE_DISABLED_NOT_APPLIED",
+  "status": "TEST_APPLIED_DISABLED_PRODUCTION_NOT_APPLIED",
   "files": [
     {
       "path": "20261103151245_app_update_policy_disabled_candidate.sql",
@@ -7,7 +7,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "32da0d63734580f1b63071ffb2d4ae0b9e19c9293c85ae927d873dcd10e300dc"
+      "sha256": "b5967c1d44596ff8cc1dfaf5e67fea54f431850876a69d9736e1dfb85547d754"
     },
     {
       "path": "expected-postflight.json",
@@ -32,6 +32,16 @@
     {
       "path": "verify.py",
       "sha256": "519c0a33ddbc67cc2ce940fc9edb89725c60a131a7822b46a0c3ffc0760f93f4"
+    },
+    {
+      "path": "test-applied-postflight.json",
+      "sha256": "fc97c5aa97f2e603f7bb0473676deb22ed9adb7350e8fdd89ab23290f675e8b0"
     }
-  ]
+  ],
+  "test_application": {
+    "project_ref": "kpqbedylxlyntrrfybpn",
+    "migration_version": "20261103154005",
+    "receipt": "test-applied-postflight.json",
+    "enabled": false
+  }
 }

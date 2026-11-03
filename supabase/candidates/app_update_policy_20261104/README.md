@@ -1,8 +1,8 @@
 # APP 업데이트 정책 — 비활성 SQL 후보
 
-**상태: 후보 작성·로컬 PG17 69개 검사 PASS. 운영 DB 및 격리 TEST DB에는 적용하지 않았다.**
+**상태: 로컬 PG17 69개 검사 PASS. 2026-11-04 Owner 승인 후 격리 TEST에 초기 비활성 적용·postflight·실제 HTTP 조회 PASS. 운영 DB 미적용.**
 
-Owner의 APP 업데이트 확인 범위를 위해 기존 결제 설정과 분리한 최소 릴리스 정책을 준비했다. 신규 DB 객체가 필요하므로 실제 적용은 Owner 검토·승인 대상이다. 이 SQL은 설치만으로 업데이트 안내나 필수 업데이트를 활성화하지 않는다. 후보 빌드 57/58을 스토어 최신 버전으로 지정하지 않았다.
+Owner의 APP 업데이트 확인 범위를 위해 기존 결제 설정과 분리한 최소 릴리스 정책을 준비했다. 신규 DB 객체의 TEST 적용은 Owner 승인 완료, 운영 적용은 별도 검토·승인 대상이다. 이 SQL은 설치만으로 업데이트 안내나 필수 업데이트를 활성화하지 않는다. 후보 빌드 57/58을 스토어 최신 버전으로 지정하지 않았다.
 
 ## 계약
 
@@ -56,3 +56,8 @@ Owner의 APP 업데이트 확인 범위를 위해 기존 결제 설정과 분리
 ## 적용·중단
 
 Owner 승인 후 신규 후보 파일을 적용하고 `postflight.sql` 및 `expected-postflight.json`을 확인한다. 설치 직후 두 플랫폼 RPC 결과는 null이어야 한다. 실제 공개 버전과 최소 지원 정책 승인 전에는 활성화하지 않는다. 문제 시 `hold-only.sql`의 disabled 전환으로 안내를 중단하고 정책 근거를 보존한다. 이 패키지 작성 중에는 해당 SQL도 실행하지 않았다.
+
+
+## 실제 TEST 적용 영수증
+
+[11/4 TEST 적용·검증 결과](test-applied-postflight.json), [Wiki 상세](../../../wiki/app-update-check-20261104.md#2026-11-04--owner-승인-후-격리-test-비활성-적용). 대상은 `kpqbedylxlyntrrfybpn`, 원격 migration은 `20261103154005_app_update_policy_disabled_candidate_test_20261104`. 승인된 원본 SQL의 SHA256은 그대로다. 두 플랫폼 disabled/OPTIONAL, RPC HTTP200/null, 함수 정의/ACL/RLS 일치, 기존11종 데이터 건수 보존을 확인했다. 운영 적용·정책 활성화·실제 기기 팝업 검수는 하지 않았다.

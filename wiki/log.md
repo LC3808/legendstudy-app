@@ -5656,3 +5656,8 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-04: 업데이트 gate/controller 종료 deadline 정리 후 최종 전체1,480PASS/기존7SKIP·Analyze0·Wiki handoff PASS. 앱 표시 이용권 통일/혼합 사진/공통 출처 동의/업데이트 기능을 같은 소스에서 검증. 초기 실패50건은 같은 신규 timer 종료 누락을 수정하여 해소. 정식1.0.1(58) iOS/Android 빌드 준비, 스토어 제출/운영 활성화 미실행. [최종 보고](app-math-commerce-integration-report-20261103.md).
 
 - 2026-11-04: source5b5e5a8 정식1.0.1(58) iOS Archive/IPA·Android AAB PASS, 실제서명·버전·운영AOT인증값/TEST opt-in off 확인. Android --no-pub 생성파일 잔재 실패는 기본release재생성으로 해결(소스/의존성변경0). 전체1480PASS/7SKIP·Analyze0·Wiki PASS. 종합보고/정책후보/산출물 SHA256 보존. 운영DB·WEB·Store·정책활성화0, 실기기58미설치. [최종 보고](app-math-commerce-integration-report-20261103.md).
+
+
+## 2026-11-04 — 업데이트 정책 TEST 비활성 적용
+
+Owner 승인 후 기존 SHA25660deffda SQL을 kpq 격리 TEST에 적용. migration20261103154005, 함수2개 정의/ACL/RLS·양 플랫폼 disabled/OPTIONAL·anon/auth 읽기·실제 HTTP200/null PASS. 기존11종 count 동일. 운영/정책 활성화/Provider/스토어 변경0, 앱 코드·signed58 동일. [상세·영수증·미검수](app-update-check-20261104.md#2026-11-04--owner-승인-후-격리-test-비활성-적용).

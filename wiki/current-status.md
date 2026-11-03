@@ -17,7 +17,7 @@
 
 ## 긴급 추가 — 앱 업데이트 확인
 
-[Native 업데이트 확인](app-update-check-20261104.md)을 통합했다. 플랫폼별 숫자 버전/build, 공개 확인된 정책만 안내, OPTIONAL24시간 미루기, 승인된 minimum 미만 REQUIRED, 조회3초 timeout/fail-open·인증/온보딩 지연을 구현했다. 집중68PASS, SQL69PASS. 새 private 정책 후보는 Owner 승인 전 운영·TEST 모두 미적용/비활성이다. 스토어 실제 공개 tuple과 실제기기 팝업/이동은 아직 미검수. 기존APP41에는 소급 적용되지 않는다.
+[Native 업데이트 확인](app-update-check-20261104.md)을 통합했다. 플랫폼별 숫자 버전/build, 공개 확인된 정책만 안내, OPTIONAL24시간 미루기, 승인된 minimum 미만 REQUIRED, 조회3초 timeout/fail-open·인증/온보딩 지연을 구현했다. 집중68PASS, SQL69PASS. Owner의 TEST 적용 승인 후 기존 후보와 동일한 SQL을 격리 TEST에 설치했다. 양 플랫폼 disabled/OPTIONAL, 실제 HTTP200·null 및 anon/auth 읽기 권한·private 차단·기존 데이터11종 count 보존 PASS. 운영 미적용·안내/필수 정책 비활성이다. 스토어 실제 공개 tuple과 실제기기 팝업/이동은 아직 미검수. 기존APP41에는 소급 적용되지 않는다.
 
 ## 이미 확인된 실기기 범위
 
