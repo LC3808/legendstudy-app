@@ -55,7 +55,7 @@ Owner 승인 이후: 새 빌드 업로드/처리 → 기존1.0.1의 Build를 새
 격리 TEST 공개 Auth settings read: Kakao/Google/Apple=false, email=true.
 기존 APP41 Auth settings read: 네 방식=true. 설정/redirect/Secret 변경 없음.
 따라서 TEST에서 실제 소셜 E2E PASS를 주장하지 않는다.
-후보 A 실제 기기 검수는 기존 서비스 인증 설정으로 수행하며 **Owner가 이번 설치를 보류하고 빌드·통합 계속을 선택함**. 직접 설치용 export는 준비했으나 설치하지 않았다.
+후보 A 실제 기기 검수는 기존 서비스 인증 설정으로 수행하며 초기에는 Owner가 설치를 보류했다. 이후 정식 빌드·실기기 검수를 지시하여 아래 기록처럼 후보 A를 설치했다.
 기존41 IPA·branch 보존. 회원 삭제/계정 통합/임의 신규 회원 생성 없음.
 
 필수 Owner 검수: Kakao 기존 로그인/신규 가입/취소/인증창 자동 닫힘/앱 복귀/동일 세션 재실행,
@@ -187,3 +187,25 @@ Wiki handoff/internal links PASS, current-status 약2.5KB. 옮겨진 TASK16 감�
 Owner 검수 재개: A의 별도 development-signed export로 지정 iPhone에 설치한 후 본문의 인증/온보딩 matrix 진행.
 Owner가 이번 설치를 보류했으므로 기기 업데이트/로그인/신규 가입/Store 메시지·업로드·재제출0.
 B TEST Preview는 기존 https://legendstudy-task16b.pages.dev 를 유지하며 이번 WEB 배포0.
+
+
+## 후보 A Release 재빌드·실기기 설치 — 2026-11-03
+
+Owner가 설치 보류 이후 실제 검수와 정식 빌드를 지시하여 후보 A를 재빌드했다.
+A 소스 기준 `6ab5010`; 앱 기능 변경 없이 `tool/store-release`와 기존 검증 설정으로
+1.0.1(42) signed Release Archive/App Store IPA 생성 PASS.
+같은 Release archive를 기기 설치용 development signing으로 export했다.
+Flutter Debug 빌드가 아니며 AOT 포함/kernel_blob 없음, codesign deep/strict,
+iPhone12ProMax provisioning 포함을 확인했다.
+
+- iPhone12ProMax 기존 `com.legendstudy.app` 업데이트 설치 및 devicectl 실행 **PASS**.
+- 기존 앱 삭제 없음. 실제 사용자 데이터 유지·Kakao 인증창·취소·복귀·세션 유지 판단은 Owner 검수 대기.
+- 기존 APP41 소스/백업과 별도 LS Math TEST 유지. Store 업로드/심사 제출·운영 설정 변경 없음.
+- 후보 B 설치/실기기 검수로 간주하지 않는다. B 베타 차단은 그대로다.
+- 재빌드 산출물은 기존 산출물을 덮어쓰지 않고 private `candidate-a/device-release-rebuild/`에 보관.
+- App Store IPA SHA256: `4bd63ee9858677bd05dc028004e6d39a7e8ddd9492af61ff1af1bc72feebf208`.
+- 기기용 IPA SHA256: `17090f42a5079dfc6d231cc0e9b130ff3720bd6d49dcd091cde39f8aa32027ba`.
+- 기존 A 전체1356PASS/7SKIP 재사용. 이번 변경은 재빌드/설치/기록이며 테스트 PASS를 실기기 인증 PASS로 확대하지 않는다.
+
+첫 검수: Kakao 시스템 인증창 → 취소 → 재시도 → 로그인 → 창 자동 종료/홈 복귀.
+후속: 앱 재실행 세션, Google/Apple/이메일, 신규 계정 온보딩 및 MY, 기존 인문 LAB.

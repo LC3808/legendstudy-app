@@ -29,3 +29,5 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 ## Daily Sync status
 
 기존 수집·공개 상태는 [통합 전 스냅샷](history/app-review-candidate-a-input-20261103.md#daily-sync-status)과 [자료 최종 마감](materials-final-closeout-2026-09-27.md)에 보존. 이번 릴리스 통합에서 ingestion/공개 데이터는 변경하지 않았다.
+
+후속: Owner 정식 빌드 지시로 A42 Release를 iPhone12ProMax에 업데이트 설치·실행 PASS. Kakao/온보딩 실기기 검수 대기, B 미설치·Store HOLD. [기록](app-release-integration-20261103.md#후보-a-release-재빌드실기기-설치--2026-11-03).

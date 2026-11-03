@@ -5521,3 +5521,8 @@ Owner ‘지금 업데이트’ 승인 후 ff68fa6 Profile을 별도 LS Math TES
 ## 2026-11-03 — TASK16-K 키보드 가림 실기기 마감
 
 Owner ‘키보드가 닫히고 확인 버튼이 보임’ 확인. ff68fa6 전사 키보드 닫기/하단 확인 접근 실기기 PASS. 전체 전사 확정·평가 승인 아님, OCR 품질/전체 루프/운영 HOLD 유지. [검수 범위](task16k-beta-activation-20261103.md#owner-키보드-닫기하단-확인-접근-pass).
+
+
+## 2026-11-03 — 후보 A Release 실기기 검수 시작
+
+Owner 정식 빌드·실기기 지시에 따라 A1.0.1(42) Release 재빌드/서명 검증 후 iPhone12ProMax 업데이트 설치·실행 PASS. 앱 삭제/Store 업로드 없음. Kakao 취소·로그인·복귀·온보딩은 Owner 검수 대기. [산출물·검수 범위](app-release-integration-20261103.md#후보-a-release-재빌드실기기-설치--2026-11-03).
