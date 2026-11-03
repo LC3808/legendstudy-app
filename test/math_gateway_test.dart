@@ -215,6 +215,40 @@ void main() {
     gateway.close();
     await expectLater(gateway.evaluate('same-evaluation'), throwsStateError);
   });
+  test('OCR failure and in-progress states block evaluation with distinct recovery notices', () {
+    for (final state in ['FAILED', 'PROCESSING']) {
+      try {
+        requireMathExtractionResult({
+          'candidate': {'state': state},
+          'candidate_regions': <Map<String, dynamic>>[],
+        });
+        fail('unfinished extraction accepted');
+      } on StateError catch (e) {
+        expect(
+          mathExtractionNotice(e),
+          contains(state == 'FAILED' ? '실패' : '인식하고'),
+        );
+      }
+    }
+    expect(
+      () => requireMathExtractionResult({
+        'candidate': {'state': 'COMPLETED'},
+        'candidate_regions': <Map<String, dynamic>>[],
+      }),
+      throwsStateError,
+    );
+    expect(
+      () => requireMathExtractionResult({
+        'candidate': {'state': 'COMPLETED'},
+        'candidate_regions': <Map<String, dynamic>>[{}],
+      }),
+      returnsNormally,
+    );
+    expect(
+      () => requireMathExtractionResult({'can_request_evaluation': true}),
+      returnsNormally,
+    );
+  });
   test('native photo uses existing multipart and extract endpoints without billing', () async {
     final paths = <String>[];
     final gateway = MathGateway(
@@ -247,5 +281,33 @@ void main() {
     expect(paths.length, 2);
     gateway.close();
     await expectLater(gateway.extract('same-attempt'), throwsStateError);
+  });
+
+  test('history original download uses authenticated endpoint and rejects invalid image', () async {
+    var valid = true;
+    final image = [137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0];
+    final gateway = MathGateway(
+      client,
+      'fixture-a',
+      transport: MockClient((r) async {
+        expect(r.url.path, '/api/math/artifact');
+        expect(r.followRedirects, false);
+        expect(r.headers['Origin'], mathOrigin);
+        expect(r.headers['Authorization'], startsWith('Bearer '));
+        expect(jsonDecode(r.body), {'artifact_id': 'stored-original'});
+        return http.Response.bytes(valid ? image : [1, 2, 3], 200);
+      }),
+    );
+    expect(await gateway.readEvidence('stored-original'), image);
+    valid = false;
+    await expectLater(
+      gateway.readEvidence('stored-original'),
+      throwsFormatException,
+    );
+    gateway.close();
+    await expectLater(
+      gateway.readEvidence('stored-original'),
+      throwsStateError,
+    );
   });
 }

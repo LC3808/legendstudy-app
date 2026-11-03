@@ -1,3 +1,7 @@
+## 2026-11-03 — APP review candidate B integration
+
+[통합 보고](app-release-integration-20261103.md): APP41+A에서 TASK16-K d7d5bb1 병합, 14충돌 해결. 인문 최신 UI/Analytics·수리 UI/수식·owner 보호 보존. Math rewrite migration/계정 전달 충돌 수정. Analyze/전체1383 PASS7SKIP. 운영 활성화·Store 제출 없음, Owner 설치 보류. 서명 빌드 진행 중.
+
 ## 2026-10-31 — TASK 02 베타 일일 무료 이용
 
 [2026-11-01 TASK07 최종 통합 검수·HOLD·버전/자동/실환경 구분](essay-beta-release-readiness-task07-20261101.md).
@@ -108,8 +112,33 @@ Owner 승인 기존finish로 대상 run failed/billing released(16:47KST). reser
 ## 2026-10-28 — 건국 기존 run 복구 사전검증 후 중단
 
 Owner 기존run 재개 요청에 따라 운영 함수를 SELECT 대조. reserved/checkpoint0/만료lease는 기존 retry 조건 미충족. Worker451b8cae100% 유지, 학생snapshot/History/1Credit예약 보존, Provider·운영쓰기0. 전용복구 후보 또는 기존finish 실패/예약해제 실행안 별도 검토·승인 필요. [근거·후속안](essay-worker-incident-20261028.md#기존-run-복구-사전검증--2026-10-28).
+## 2026-11-03 — TASK16-G 품질 검수 / H 준비
+
+Owner 기능 PASS 기록. 기존 실제 OCR/평가·공식4PDF 재검수, Provider0. Q1 OCR FAIL/Q2 PARTIAL, 구체 힌트·공식 해설·WEB 공통 표시 GAP. TEST 혼합형503/잔액0·Native gate401로 실제 Worker 미검증. WEB60·Native15·로컬SQL131+18/mixed PASS. [P0·공통 계약·PC UX 준비](task16g-quality-closeout-task16h-preparation-20261103.md). 운영 HOLD.
+
+## 2026-11-03 — TASK16-G 신규 사진 학습 루프
+
+Simulator 실제 사진→전사 확인/수정→Q1/Q2 실제 평가→무료 재첨삭→History PASS. TEST 최초1/무료0차감·중복 요청 무차감·기존 기록 보존. Math 사진 보정 연결/원본 재조회/재작성 legacy 사진 복사 수정, 영향25+인문·History49검사 PASS. OCR6+평가4회; OCR 정확도/일반 힌트 품질·혼합형·APP↔WEB 검증 GAP 유지. [검증 범위·증거](task16g-learning-loop-20261102.md#최종-결과). 운영 HOLD.
+
+## 2026-11-03 — TASK16-G Simulator 전환
+
+Owner가 휴대폰 수동 비밀번호 입력 대신 Simulator 진행을 지시. 실기기 로그인 요청 중단, 기존 계정/인증 설정 유지. 저장된 실제 평가로 힌트·명시 공개·History·무료 재작성 화면 Simulator PASS. 전체 풀이 한글/수식 구분 보완, 위젯11검사 PASS. Provider/새평가/차감0; 전체 신규 제출 E2E 미완료. [범위](task16g-learning-loop-20261102.md#2026-11-03-owner--simulator로-검증-계속).
+
+## 2026-11-03 — TASK16-G 재개 / History 원본 연결
+
+기존 private Storage와 active-owner RPC 재사용 원본 이미지 조회; TEST Q1/Q2 SHA-256 일치/미인증401/미등록404. Native Gateway 수명 유지 및 전사본 prose/TeX 구분. Simulator 저장 실제 Q1/Q2 결과·개념·History, 다음 무료 재작성 화면 PASS; 추가 Provider·평가·차감0. TEST RPC 표시명을 공식 문항명으로 연결, 평가6건 표시명/조회시각 외 동일. Owner iPhone 로그인 화면 확인, 전체 실기기 E2E는 진행 중. [공통 계약·검증 수준·남은 GAP](task16g-learning-loop-20261102.md#2026-11-03-재개--원본-조회-및-공통-계약). 운영 HOLD.
+
+## 2026-11-03 — TASK16-G Owner 요청 작업 정리
+
+Mobile First 결정 기록: F 디자인 유지, 모바일 E2E 우선, PC WEB UX는 G 완료 후 H. 공통 계약/양방향 History는 G 범위. Owner 휴식 요청으로 실기기 검증 중단; 기기 열기 요청 보류. 저장 API 결과 재사용, History 원본 이미지 연결 조사부터 재개. 추가 Provider·배포·DB 변경 없이 문서 체크포인트만 저장. [검증 결과와 재개 순서](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03). 운영 HOLD.
+
+## 2026-11-02 — TASK16-F Native 검수 빌드 / 운영 HOLD
+
+Academic Purple, 사진 보정·전사 확인, 결과/과제/개념/힌트/공개 화면 및 공통 서버 후보. Analyze PASS, Flutter 1,141 PASS/7 skip, 로컬 SQL18+131/학습L01–40. iPhone12 Pro Max 별도 LS Math TEST 설치, Debug 홈 실행 제한은 Profile 교체. 운영/Provider 호출0, mixed 공개 경계·반복 이용권·실제 E2E 미완료. [화면·인계](task16f-native-math-ux-20261102.md).
 
 ## 2026-10-27 — MY 최종 UI 보정 Production 완료
+
+- 2026-11-02 TASK16-E: Q1 기호 오류 확인 분류·UNCERTAIN Worker 차단·WEB/Native 상세 공개 gate. API 재호출0/DB변경0. [검증·잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
 
 WEB 49fee24: 프로필/대학 통합 카드, 고3·retaker 지원 노출, MY 성장 간결화. UI27/Typecheck/Build PASS, Lint 오류0. 일반 고2 계정 PC·400px 실화면 확인, 운영 데이터 변경0. [배포·보존·복구](my-college-management-20261026.md#2026-10-27--최종-my-통합학년별-노출성장-요약).
 
@@ -5360,3 +5389,135 @@ Private logical DB/Storage backup and isolated service-data restore verified. Fu
 ## 2026-11-03 — Kakao iOS 시스템 인증 세션 후보
 
 [후속 구현](kakao-ios-system-auth-20261103.md): APP41 감사의 externalApplication 확인 → ASWebAuthenticationSession, 기존 SDK PKCE/세션 유지. 취소/재시도/중복/계정·callback 가드 추가, 다른 Provider 보존. 별도 브랜치·APP41/운영 무변경. 실기기 NOT_RUN, Owner 검수/릴리스 통합/배포 대기.
+
+## 2026-11-02 — TASK17 TEST 복구 재개 사전검증
+
+[결제 복구](payment-app-foundation.md#task17--2026-11-02-test-결제-복구): 전용 WEB worktree/Cloudflare 배포 확인, runtime503 재현. Owner 직접키등록 위치 안내; TEST DB·Credit 비교기준 확보/123회귀PASS/심사URL200. 키등록·실제승인·재제출 미완료. DB쓰기·키교체·LIVE활성화0.
+
+## 2026-11-02 — TASK17 환경 정정·기존 TEST 재사용
+
+[결제 환경 재확인](payment-app-foundation.md#task17-기존-test-환경-재확인--2026-11-02): TEST프로젝트 runtime200/주문생성/카드인증창, LAB503 별도. 키재등록 보류, Owner 인증대기. 운영·TEST Credit해시 보존확인/승인은미완료. 설정·Secret·배포변경0.
+
+## 2026-11-02 — TASK17 전용권한 배포·Finance 누락 확인
+
+[심사권한](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02): 기존 payment Auth UUID만 allowlist 설정, 운영ed3c8c8b/자산1178보존.140테스트/typecheck PASS. 진단상 finance token 비어있음; 키교체 없이 운영credential 복구대기. 원래원장해시보존, 신규signup+6별도. Owner로그인확인/실제승인미완료.
+
+## 2026-11-02 — TASK17 Finance 빈 runtime 문자열 확정
+
+[진단정정](payment-app-foundation.md#task17-finance-바인딩-진단-정정--2026-11-02):등록은존재하며runtime property/string/empty=true. 설정보존재배포88a28465로재현,141검사PASS. Supabase검증이전503; 저장/전달원인미확정·Secret변경금지준수·복구미완료.
+
+## 2026-11-02 — TASK17 Finance 설정원인 구분
+
+[최종진단·복원절차](payment-app-foundation.md#task17-finance-최종-원인-구분복구-절차--2026-11-02):빌드전부터빈값확인,코드기본값원인제외.10/23사고근거연결·Owner원본우선복구절차작성.운영배포/Secret/원장보존,E2E미완료.
+
+## 2026-11-02 — TASK17 원본 Finance 토큰·키 발견
+
+[원본확인](payment-app-foundation.md#task17-원본-finance-토큰서명키-발견--2026-11-02):홈의기존0600 JWT/ES256키확인.현재JWKS서명PASS·Oct14만료·기존gateway allowed.원격Oct07운영발급기찾음/합성회귀PASS.기존키재사용갱신가능,실제발급·설정변경0.
+
+## 2026-11-02 — TASK17 이용권 표시·review 계정 TEST 복구
+
+[최종심사 준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후):기존키24h갱신/운영9459776f·결제관련이용권명칭.실제review TEST창/취소PASS,승인인증대기.984비결제자산/원장50·139해시보존,LIVE0.
+
+## 2026-11-02 — TASK17 TEST 승인 E2E PASS
+
+[승인확정](payment-app-foundation.md#task17-test-성공-승인-확정--2026-11-02-1330-kst):Toss200/DONE·DB TEST_RECORDED/승인1/지급0,Owner완료화면확인.기존원장해시보존,동시가입+3별도.실거절/승인후환불미검증.
+
+## 2026-11-02 — TASK17 AI 상품표기 정정
+
+[명칭정정](payment-app-foundation.md#task17-상품-명칭-정정--2026-11-02):Owner합의위반인AI접두어제거.기존승인기록보존.
+
+## 2026-11-02 — TASK17 결제 확인 대기 카드
+
+[대기화면](payment-app-foundation.md#task17-결제-확인-대기-화면--2026-11-02):운영e081a02c,완료카드와통일·처리중중복버튼숨김,17테스트/build PASS.
+
+## 2026-11-02 — TASK16-B 격리 TEST 통합 진행
+
+Owner 격리환경 승인 후 기존 TEST sandbox·Essay/Math·Registry/Package 재사용. 한양2026상경 Q1/Q2 공식근거·TEST preflight/PDF·브라우저 작성 검증. LAB 결과 누락/중복차단·일부/전체·Math 과정/최종답안 분리. Provider키 미확보로 실제 E2E/재첨삭 미실행, 전용 TEST 실행비활성·운영 변경0. [보고·재개](task16b-commerce-social-integration-20261102.md).
+
+## 2026-11-02 — TASK17 정책문서 이용권 통일
+
+[약관·개인정보](payment-app-foundation.md#task17-약관개인정보-용어-통일--2026-11-02):Owner지정두문서용어만변경,조건불변.20테스트/build PASS.
+
+## 2026-11-02 — TASK17 전체 WEB 잔여 용어 점검
+
+[전체점검](payment-app-foundation.md#task17-web-전체-용어-점검--2026-11-02):155공개URL/56페이지소스.사용자공용23파일잔여확인,로그인분기는소스검사.변경/배포0.
+
+- 2026-11-02 TASK17: Owner 후속지시로 관리자포함 WEB 표시용어 이용권통일.1552테스트/TS/build PASS,Functions·Secret·DB불변. [상세](payment-app-foundation.md#task17-web-전체-이용권-통일--2026-11-02).
+
+## 2026-11-02 — TASK16-B Provider 설정 재확인
+
+TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 실측. 기존 math-test는 키가 있으나 운영 DB 연결이므로 재사용 금지. Owner 대시보드 직접 등록 선택·로그인 인계, 값노출/Provider호출/운영변경0. [실측·재개](task16b-commerce-social-integration-20261102.md#2026-11-02--provider-등록-상태-재확인).
+
+## 2026-11-02 — TASK16-B 수학 Provider 실제 호출 PASS
+
+전용 Pages 신규 수학 Secret으로 한양2026상경Q2 1회: HTTP200/기존검증PASS, 12,815+4,412tokens,33.47초,$0.1395추정. 마지막 덧셈오류 정확히 판별. 임시진단삭제·a09fe8de복원, DB/Credit/결제/APP변경0. 전체학생E2E 미실행. [결과·범위](task16b-commerce-social-integration-20261102.md#2026-11-02--수학-전용-provider-e2e-pass).
+
+## 2026-11-02 — TASK16-C 수학 인식·스캐폴딩 PARTIAL
+
+건국 합성사진/재첨삭·한양 계산오류 성공 재사용. WEB512e06f/Nativea9921bb 수식·원문·불확실확인·힌트/접힌참고풀이 연결, Previewa591fefb. 신규 정답·개념오류 Provider2회PASS/33,383tokens, 실제 손글씨·전체 학습E2E 미완료. WEB1550+영향24/Native29+신규2+최종영향24검사PASS, 운영/DB/Credit변경0. [범위·증거·차단](task16c-math-recognition-scaffolding-20261102.md).
+
+## 2026-11-03 TASK16-G 진행
+
+[TASK16-G](task16g-learning-loop-20261102.md): 격리 TEST 서버 공개 제어/반복 회차 설치. 한양2024 Q1/Q2 최초·무료 실제 AI 완료, 원장1→0·공개 History 확인. 3회차 저장결과 재생으로1차감, 다음 무료 견적 검증. 저장 계약/timeout 및 TEST Secret 설정 사고 복구. Native/WEB 화면 통합 검수 중, 운영 HOLD.
+
+TASK16-G Owner 접속 코드 전달 누락 정정: 기존 TASK16-B 로컬 보관 코드/현재 gate 일치 검증, 안전한 파일 경로·2단계 접속 안내. 새 코드·인증 설정 변경 없음.
+
+## 2026-11-03 — TASK16-H TEST WEB 구현
+
+WEB6f5d726/Preview4aaecbbc: 3/2/1열·원본/전사·누적 힌트·명시 공개·기존 재작성기 연결. 전체1578PASS/4skip, 최종영향18PASS, 실제 브라우저/Simulator 교차조회PASS. WEB 입력2개 미평가 보존, 다음 견적1 확인 후 취소, Provider0/신규차감0. OCR·품질·혼합형·신규WEB평가E2E 미완료, 운영 HOLD. [상세](task16h-web-math-ux-20261103.md).
+
+## 2026-11-03 — TASK16-I 실제 통합 검증
+
+WEB e3efa29/Preview e22dd7a8. 자연계 사진→실제 최초2/무료2 완료, 혼합 Essay+Math 완료. TEST admin grant2→시험2소비/무료0/잔액0예약0, 동일키 원장불변. OCR raw 대비 normalized 결론 소실 수정, 판독 불명 차단/영역확인 재사용. WEB1586PASS/4skip·Native9·Simulator교차조회PASS. 품질PARTIAL/운영HOLD. [상세·미완료](task16i-integration-quality-20261103.md).
+
+## 2026-11-03 — TASK16-I Owner 검수 준비
+
+Owner 기능 PASS 인정/품질·운영 HOLD. 기존 TEST 결과6경로·로그인·신규 입력 준비 버튼 조회, 오류0/Provider0. 기존 관리자 RPC로 검수 TEST2개 지급, 잔액2/예약0. 로그인된 별도 검수 브라우저와 로컬 재접속 도우미, 화면별 기지 문제/판단표 제공. 운영/APP릴리스/기존 공개 이력 불변. [검수 안내](task16i-owner-review-20261103.md).
+
+## 2026-11-03 — TASK16-J 베타 출시 준비 NOT_READY
+
+기존 C–I 기능 PASS 재사용. TEST 기존 코드·계정 로그인/결과 조회와 로컬 자동·클립보드 접근 도우미 확인, 인증 해제0. LAB b2e85be/TEST9b47d9b8: TEST 상태503·자연 사진 metadata/HOLD 연결 보완, 중간 상경 목록 누락을 등록 목록 보존으로 수정. WEB1591PASS/4skip, 타입/lint/build PASS. 운영 읽기 전용: F/G 신규 RPC/loop 없음, 베타 활성160시험/수리0/대표2시험0·하루1·11/11 00KST 종료. 기존 ‘비활성’ Wiki 정정. Provider0/신규차감0/TEST잔액2예약0/운영·APP릴리스변경0. OCR·힌트/해설 품질·실기기·베타 연결/증분 migration은 미완료. [판정표·운영 적용 목록·Owner 검수](task16j-beta-release-readiness-20261103.md).
+
+
+## 2026-11-03 — TASK16-K 수리·상경 베타 준비
+
+[기존 DB/시험별 판정·수학 문서/사진 보정·신규 WEB E2E·실기기·운영 차단](task16k-beta-activation-20261103.md). 운영363시험/1014문항, Math50개 기존 연결 확인. WEB TEST e1e8095/c36d5cf1, 신규Q1/Q2 OCR2·평가4, 최초1/무료0/다음1·동일키 원장 불변, History/공개 제어 확인. iPhone12ProMax 저장 결과/공통 데이터 PASS, 정상 Profile 설치 후 Owner 로그인 실패 보고, SDK 세션 인계 추가 검증. WEB1599/Native13 PASS. 실제 촬영 전체·OCR/해설 품질·운영RPC/beta 연결은 남아 NOT_READY/HOLD. 운영 변경0, 기존1.0.1(41)보존. 수리scope0은 데이터 부재가 아닌 Owner 공개정책임을 J에 정정.
+
+K Owner 로그인 후속: drive 기본 teardown의 TEST 앱 uninstall이 세션을 삭제했음. --keep-app-running·실제 AppBootstrap/SDK 검사 후 정상 Profile 설치/재실행에서도 TEST 세션 유지 확인. 사용자 암호·운영 Auth 변경0, Owner 홈/사진 확인 대기.
+
+
+## 2026-11-03 — TASK16-K Owner 크롭 불편 개선
+
+Owner iPhone 로그인 후 사진 자르기 완료 확인(전체 실기기 평가 PASS 아님). 기존 인문 APP c61a898 드래그 핸들/미리보기 재사용, Math 슬라이더 제거·회전/원본 복원 유지·원본 비교. 18테스트/analyze/Profile 빌드·별도 TEST 설치 PASS, Provider0/운영변경0. 새 사용성 Owner 확인 대기. [원인·재사용 출처·검증 범위](task16k-beta-activation-20261103.md#owner-실기기-사진-검수-후속--인문논술-자르기-방식-재사용). F 디자인 유지/K 실기기 검수 보완, 운영 HOLD.
+
+
+## 2026-11-03 — TASK16-K 최종 베타 준비 후속
+
+Owner WEB/이용권·History/크롭 PASS 인정. 실기기 Q1 25.6MB 업로드 후 OCR 합계20MiB 차단 확인, 기존 Provider 분할/단일 최종 결과와 앱 상태 복구 보완. 혼합형 실제 WEB 무료 재첨삭 두 문항 완료·0차감/History, Unicode prime 표시·미해결 분수 placeholder 방어. 운영 읽기 전용 차이 재확인, 신규 활성화0. [상세·실기기 후속·운영 순서](task16k-beta-activation-20261103.md#final-beta-readiness--11월-3일-실기기-차단-조사와-보완).
+
+
+## 2026-11-03 — TASK16-K Owner OCR 비교 화면 PASS
+
+Owner iPhone LS Math TEST의 저장 답안 인식 수식·원본 비교 화면 도달 확인. 복구된 OCR 결과 조회까지 PASS, 원문 정확도/수정·평가 이후 실기기 루프는 미완료. 영역6 숫자 수정 UX 확인을 이어간다. Provider/평가/차감/운영변경0. [검수 범위](task16k-beta-activation-20261103.md#owner-실기기-확인--인식-수식원본-비교-화면-pass).
+
+
+## 2026-11-03 — TASK16-K Owner 전사 수정 UI PASS
+
+Owner가 영역6 -1/5→-1/6 수정 후 수식 표시 반영 확인. 로컬 편집 UI PASS이며 서버 확정/사진 평가 이후 루프는 미완료. 원본의 나머지 오독·누락과52영역 확인 부담 P0 유지, Provider/평가/차감/운영 변경0. [검수 범위](task16k-beta-activation-20261103.md#owner-실기기-확인--전사-수정-표시-pass).
+
+
+## 2026-11-03 — TASK16-K 전사 키보드 닫기 보완
+
+Owner 키보드가 하단 확인을 가리는 문제 보고. 기존 Math 입력에 닫기/바깥 터치, 답안 확인 sheet·Math 목록에 드래그 해제 추가. 수정값 보존·자동 확정 없음 포함14검사/분석 PASS. Provider·운영 변경0, 설치/실기기 재검수는 별도 기록. [동작·미확정 편집 보존 한계](task16k-beta-activation-20261103.md#owner-전사-편집-후-키보드-가림--닫기-동작-보완).
+
+키보드 후속 마감: 기존 catalog/답안19회귀 추가 PASS(총33), Profile 빌드 성공. 미확정 전사 로컬 편집이 앱 재시작 시 보존되지 않아 TEST 업데이트 설치 시점 Owner 확인. 사진/서버 기록 보존, 아직 설치/실기기 재검수 PASS 아님.
+
+
+## 2026-11-03 — TASK16-K 키보드 수정 TEST 설치
+
+Owner ‘지금 업데이트’ 승인 후 ff68fa6 Profile을 별도 LS Math TEST bundle에 업데이트 설치/실행 성공. 키보드 닫기 사용성 Owner 확인 대기, 앱 삭제/Provider/서버 기록/운영 변경0. [설치 범위](task16k-beta-activation-20261103.md#owner-승인-후-키보드-수정-test-설치).
+
+
+## 2026-11-03 — TASK16-K 키보드 가림 실기기 마감
+
+Owner ‘키보드가 닫히고 확인 버튼이 보임’ 확인. ff68fa6 전사 키보드 닫기/하단 확인 접근 실기기 PASS. 전체 전사 확정·평가 승인 아님, OCR 품질/전체 루프/운영 HOLD 유지. [검수 범위](task16k-beta-activation-20261103.md#owner-키보드-닫기하단-확인-접근-pass).

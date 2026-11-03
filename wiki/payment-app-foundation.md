@@ -96,3 +96,88 @@ APP은 owner RLS 조회에서 reserve/release를 제외한 뒤 최근50기록을
 검증: APP구매/Credit15PASS·변경Dart analyze문제0; WEB관련80PASS/2skip·typecheck/Lint/boundaryPASS. 원장입력불변/다중grant합산/예약만있는경우/실제환불·회수/예약중잔액유지 확인. 실기기·운영배포는미실행. DB·Ledger·정산·관리자코드변경0.
 
 Owner가앞선조기빌드중단지시: Android1.0.1(20) 후보는이번수정이전산출물이므로업로드대상아님; iOS빌드중단/스토어업로드0. 현재스토어실측Android1.0.0(18)전체출시/iOS1.0(build19)배포준비됨. 모든앱수정을마친뒤새빌드·검증·업데이트한다. 이번수정은로컬commit이며push/CI·빌드·배포도보류한다.
+
+## TASK17 — 2026-11-02 TEST 결제 복구
+
+기존 REVIEW/TEST 정책을 유지한다. Owner는 새 TEST API 키를 채팅에 보내지 않고 Cloudflare `legendstudy-lab` Settings → Variables and Secrets → Production에 직접 등록한다. `TOSS_TEST_CLIENT_KEY`와 encrypted `TOSS_TEST_SECRET_KEY`만 교체하며 REVIEW를 plain TEST/LIVE로 바꾸지 않는다. 전용 WEB 브랜치 `codex/toss-test-task17`의 기존 배포2b5b0656을 Cloudflare API로 재확인했고 runtime503 PAYMENT_NOT_CONFIGURED가 지속된다. 실제 키 유효성은 metadata로 확인 불가.
+
+운영DB 읽기검증: configuration TEST, TEST주문11/정상기록3/지급연결0, LIVE주문0. 기존Credit grants35/transactions124의 비교해시 확보. 결제123회귀PASS·심사10URL HTTP200은 실제승인 증거가 아니다. 새키등록→보존배포→심사계정 TEST요청/승인/성공·실패→지급0/운영원장보존→재제출보고서 순서로 진행한다. 키등록과 후속은 미완료; 운영Credit·LIVE활성화 금지. [WEB 실행·설정·증빙 기록](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 기존 TEST 환경 재확인 — 2026-11-02
+
+Owner 최신지시로 앞선 키재등록 요청은 보류/대체한다. Cloudflare 실측 payment-test는 TEST/전용pages.dev/테스트DB wsnrwklplnunjktyfmbr이고, LAB만 REVIEW/운영도메인/운영DB다. TASK17 배포는 LAB2b5b0656, 기존TEST배포bb59b083(Oct06). 기존TEST runtime200·동일클라이언트키·1Credit TEST주문생성·Toss 카드인증창 진입 확인. Secret 유효성/승인성공은 아직 미검증, Owner 카드인증 대기. LAB runtime503은 별도이며 신규키·설정변경·배포 없이 기존TEST 경로를 우선 재사용한다. 09:43KST 운영 주문11/LIVE0·Credit grants35/transactions124 해시 전부 사전과 동일, TEST grants2/transactions2 해시 동일·지급연결0. 승인 이후 재검증 필요. 재심사는 실제 서비스도메인 결제경로 확인까지 NOT_READY. [WEB 비교·증빙](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 payment_review 전용 계정 — 2026-11-02
+
+Owner 확정: payment@legendstudy.com만 기존 /pricing/에서 TEST 결제, 일반/review@/관리자는 HOLD. 가격4900/11900/17900/29900 불변. 기존 confirmed Auth user6eda61e2-be13-4793-a094-5500309b5b4d/non-admin 재사용. 서버 PAYMENT_REVIEW_SUBJECTS를 이 UUID 하나로 PATCH하여 payment_review 권한을 구현한다. 이메일·user_metadata·관리자 권한으로 우회하지 않으며 기존 auth/v1/user 검증이 매 REVIEW 요청에 적용된다. 새테이블·인증·admin권한 없음.
+
+운영배포 ed3c8c8b-4dfb-4373-b63b-aff40afa307b/source d326e67: 정적자산1178개 전부 보존, 설정검사 함수에 값 없는 boolean 진단만 추가. 실제503 원인은 PAYMENT_FINANCE_TOKEN 누락/빈값으로 확인; TEST키형식/MID/공개설정 PASS. 새Toss키 불필요, 기존 운영용 finance credential 복구 필요(TEST DB토큰·service_role 대체금지).140테스트/typecheck PASS, Owner payment로그인 확인. 실제 A/B/C/D 권한수용·승인E2E는 설정오류로미완료.
+
+09:57KST 기존35 grants/124 transactions 해시 보존, TEST주문11/LIVE0/TEST지급연결0 유지. 전체는37/126이며 증가2건은 signup_bonus_v1+6; 총Credit불변으로 오기하지 않는다. 결제귀속지급0. 심사종료: PAYMENT_ENABLED=false 및 허용목록비움→재배포→서버차단 확인; TEST기록보존. [WEB 실제설정·배포·인수인계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+### TASK17 Finance 바인딩 진단 정정 — 2026-11-02
+
+Owner Secret삭제·교체금지. Dashboard/API 등록확인; 앞선 “미등록/누락” 표현을 정정한다. 운영88a28465-0c5f-46ad-b76c-9323b3dfd606/source fccff25에서 finance_key_present=true/is_string=true/is_empty_string=true 실측. reviewer는존재/비어있지않음. TEST키형식·MID검사PASS. context.env는변경없이전달되며 설정검사에서Supabase호출전503; 서명/만료/권한오류401과다르다.
+
+Production설정전체·자산1178불변재배포로도동일. 암호화저장값이빈것인지Cloudflare전달문제인지는redacted metadata로구분불가; 원인단정·새키요청안함. 기존설정재사용검증은수행했으나복구는미완료. Supabase payment_process는essay_finance만EXECUTE,유효identity필수,DB함수/ACL불변.141테스트/typecheck PASS. 별도TEST runtime200/승인미완료,운영TEST주문11/LIVE0/지급연결0/기존원장해시동일. Secret·DB쓰기0. [상세진단](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md).
+
+
+### TASK17 Finance 최종 원인 구분·복구 절차 — 2026-11-02
+
+Production 빌드전용 진단77cc3c43에서 앱실행 전 process.env에도 finance present/string/empty=true, reviewer nonempty=true. exit73으로 배포 전 종료, pnpm build복원·환경설정동일·운영88a28465보존. 따라서 코드기본값·Functions전용접근오류가 아닌 Cloudflare 제공설정 문제다. [10/23 Secret replay 사고](essay-p0-direct-execution-20261023.md)에 Finance 영향이 명시돼 있고 이후 Finance 복원근거는 발견하지 못했다. 이는 현재빈값과일치하는유력원인이며 암호화저장상태/정확한과거쓰기의증명은아니다.
+
+기존운영토큰은API로읽어복구할수없음. Owner 안전저장소의원본→운영DB read-only get/nonexistent검증(PT404)→Owner 승인복원→보존재배포 우선. 만료/분실시 기존Production발급주체·essay_finance·기존gateway subject를확인한뒤 제한만료토큰재발급; TEST/service_role/worker대체·새서명키·ACL변경금지. 현재issuer/subject미확인으로임의발급안함. Dashboard위치·오류구분·재검증순서는 [WEB 실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#safe-owner-recovery-procedure-not-executed).
+
+최종운영runtime503/별도TEST200, 기존35grants·124transactions해시동일/LIVE0/TEST지급연결0. Secret교체·DB쓰기0. 승인E2E·복구·재심사제출은미완료이며운영LIVE HOLD유지. 앞선저장/전달원인미확정기록은위빌드전증거로좁혀졌다.
+
+
+### TASK17 원본 Finance 토큰·서명키 발견 — 2026-11-02
+
+앞선 원본/issuer/subject 미확인 기록을 정정한다. 범위를홈디렉터리까지확장해 기존 review-finance-token.jwt와 review-signing-key.jwk를발견했다(둘다0600,Git밖). 토큰원문/키/subject는기록하지않았다. 기존JWT는Production issuer·essay_finance·nonnull sub, 발급2026-10-07 08:37:24Z/만료2026-10-14 08:37:24Z. 현재Production JWKS로서명검증PASS;보관private JWK의공개부분/kid도현재검증키와일치. DB조회로기존gateway Auth계정존재/allowed=true 확인. 원본은존재하지만만료되어그대로복원불가.
+
+발급코드최초Git근거9ea7e2a7(Oct03 TEST),실제TEST발급/검증Oct04; Production REVIEW확장은원격 origin/manus/payment-review-signer-1의 ed5a53a92dbad83970ad3f36d1b276f826ceda90(Oct07). 현재작업브랜치에는TEST전용이어서놓쳤던이력이다. 해당커밋의 mint-finance-token.mjs는명시옵트인/정확한운영project/ES256/essay_finance/최대7일,0600새파일,원문출력없음. 당시운영토큰을누가어떤명령으로생성했는지실행로그는미확인이나동일claim/기간·서명키·Oct07실제승인기록이있다. 합성키로해당커밋회귀PASS.
+
+서버경로: Pages context.env→cloudflare/payments.ts rpc finance Authorization→Supabase PostgREST 서명·만료·role검증→public.payment_process→essay_private.uid()/account_private.allowed. 실제운영authenticator→essay_finance는SET=true/INHERIT=false/ADMIN=false;finance NOLOGIN/NOBYPASSRLS, payment_process EXECUTE 허용·anon/authenticated/service_role거부. 결제Edge Function이나원문대조테이블을쓰지않는다. JWT는payment-only가아닌기존finance권한이므로브라우저배포금지.
+
+안전갱신: 기존키/기존subject/issuer/role를그대로재사용하고iat/exp만갱신,초기검증TTL1시간권장. 서버키·DB권한변경불필요. 새0600파일에만저장→운영RPC get/nonexistent UUID PT404확인→Cloudflare PAYMENT_FINANCE_TOKEN 단일Secret복원→보존재배포→REVIEW권한/TEST E2E. 서명키를Cloudflare에넣지않는다. Secret삭제는이미유출된JWT의암호학적폐기가아니며신규요청차단은HOLD/권한회수로별도검증한다. 원본이발견되어이번요청의“없다면새발급절차”조건은만료토큰갱신절차로대체;실제발급/설정/DB쓰기0. [실행절차](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/wiki/toss-test-task17.md#original-token-found--2026-11-02).
+
+
+### TASK17 Toss 최종심사 준비 — 2026-11-02 오후
+
+Owner가Toss회신을근거로WEB결제화면Credit→이용권,구매횟수만큼논술첨삭명시,기존review@재사용을지시했다. 앞선payment@전용결정을대체한다. review기존Auth UUID ddc5ae63-acbb-490b-a423-c996b811dea8만서버허용목록;관리자권한부여없음. WEB요금/결제/환불/해당header명칭만변경,가격4900/11900/17900/29900·DB·APP·MY/학습화면Credit구조보존. 홈페이지전체명칭변경완료라고보고하지않는다.
+
+기존키/subject로24h Finance갱신,read-only PT404 PASS후Cloudflare 두Secret(finance/reviewer)만반영. DB서명키/ACL변경0. 만료2026-11-03 13:21:09 KST,심사일정전갱신필요/자동갱신없음. 최종운영9459776f-fecf-47ca-8f01-35f2f661813a/source ecd8ffc,REVIEW/TEST200,consumer_purchase=false(비로그인). 중간정적빌드공개Auth환경누락으로결제페이지로그인이해제되어보이는문제는기존NEXT_PUBLIC설정재빌드및배포preflight추가로수정했다. 운영984개비결제자산동일.
+
+Owner review로그인→1회TEST주문 f1f36979-33fa-4ee2-971d-7646d6e367f8→실제Toss창표시PASS. 창취소→취소되었습니다PASS. 비로그인orders/confirm/status/cancel401,관리자결제disabled. 일반계정실제로그인/실제거절callback/승인후환불은미검증;로컬권한회귀PASS. 실패페이지실접근PASS. Owner카드인증후승인성공E2E/TEST_RECORDED확인대기. 실제성공으로과장금지.
+
+회귀175+계정잔액15/TS/lint/build PASS. 04:21:29Z기준50grants·139transactions해시보존(6b878f50751867093aa02d3a2eed9f3f / 8650fb83ce93cf837b37a801c1d15e79),LIVE0/TEST지급0. 이전오전35/124와다른기준이며동시가입증가를결제지급으로해석하지않는다. [심사안내서·미완료구분](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TOSS_FINAL_REVIEW_GUIDE_TASK17.md). 외부메일/재심사제출0,LIVE HOLD.
+
+
+### TASK17 TEST 성공 승인 확정 — 2026-11-02 13:30 KST
+
+Owner카드인증후완료화면의논술랩이용하기/마이페이지이동확인·논술LAB이동. Owner제공Toss TEST API로그는confirm HTTP200/DONE,승인13:30:30 KST. 동일주문 f1f36979-33fa-4ee2-971d-7646d6e367f8 운영DB PAID/TEST_RECORDED/grant NULL/CONFIRM SUCCEEDED정확히1건을독립조회확인. TEST성공승인E2E PASS,이전승인대기기록대체. 기존50grants/139transactions해시동일,LIVE0/TEST지급연결0. 전체51/140증가1건은동시signup_bonus_v1+3이며결제귀속지급0. 실제카드사거절callback/승인후환불은미검증. 재심사안내서갱신,외부전송0/추가배포0.
+
+
+### TASK17 상품 명칭 정정 — 2026-11-02
+
+Owner는기존합의대로사용자노출AI명칭제거를지시했다. 앞선Toss회신의서비스분류를상품명AI표기로확대한것은Agent오류이며Owner결정이아니다. WEB요금/환불/상품설명/Toss새주문상품명/재심사안내서에서AI제거. 기존승인거래의원래상품명은감사기록으로보존,결제원장수정없음.
+
+
+### TASK17 결제 확인 대기 화면 — 2026-11-02
+
+Owner스크린샷의대기화면을완료카드와통일.시계아이콘/진행안내,처리중재확인·이동버튼숨김,오류시복구버튼표시.초기busy로버튼깜빡임방지.API승인흐름불변.17테스트/build PASS,운영e081a02c/source8180124의대기안내·복구카드실접근확인.추가결제/원장/설정변경0.
+
+
+### TASK17 약관·개인정보 용어 통일 — 2026-11-02
+
+Owner가지정한/terms/·/privacy/의크레딧을이용권으로변경한다. 공용정책본문·약관metadata·두경로header표시포함.금액/기간/환불/개인정보처리조건·DB/APP변경없음.관련20테스트/build PASS.
+
+
+### TASK17 WEB 전체 용어 점검 — 2026-11-02
+
+Owner의전체점검요청:56페이지엔트리/전체src문자열/정적export155운영URL GET200 확인. 공개HTML잔여는/support/,/essay-lab/,/account/credits/ 및관리자credit/내부connection. 소스문자열잔여42파일146조각(사용자공용23/83,관리자18/62,내부1/1);문장수/노출횟수아님. 로그인후모달·오류분기는소스확인,실제전체실행아님. 사용자세션로그아웃상태,자유입력공지DB전체는미조사. [전체위치·범위·한계](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TASK17_WEB_TERMINOLOGY_AUDIT.md). 이번은점검만,코드/배포/DB변경0.
+
+
+### TASK17 WEB 전체 이용권 통일 — 2026-11-02
+
+Owner 최신지시로 관리자까지포함하여 WEB 고정표시명칭 크레딧/Credit→이용권 통일. MY·논술/수리·제출/오류/모달·관리자·공용header·metadata포함. DB/RPC/APP/기존원장/과거기록불변. 전체회귀1552PASS/4skipped,TS/build PASS. 기존Functions/Secret보존배포. 로그인후모든상태수동검증은아니며소스/회귀로보완. [WEB 변경·실접근검증](https://github.com/LC3808/legendstudy-lab/blob/codex/toss-test-task17/docs/TASK17_WEB_TERMINOLOGY_AUDIT.md).

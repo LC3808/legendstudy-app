@@ -62,12 +62,12 @@ void main() {
           ),
         ),
       );
+      expect(find.text('종합 평가'), findsNothing);
+      await tester.tap(find.text('정답 포함 상세 평가 공개'));
+      await tester.pumpAndSettle();
       expect(find.text('종합 평가'), findsOneWidget);
       expect(tester.takeException(), isNull);
-      await tester.drag(
-        find.byType(SingleChildScrollView),
-        const Offset(0, -1800),
-      );
+      await tester.drag(find.byType(ListView), const Offset(0, -1800));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });

@@ -1781,3 +1781,11 @@ PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와1
 ## 2026-10-22 — Student material browsing
 
 71701 is already applied; no DB work this task. Shared metadata selection remains HOLD-only. Canonical official page links now override stale registry PDF links for the 11 colleges; unverified Sogang/SWU links withheld. Source catalog tests 13 PASS, analyze PASS, Android debug19 and iOS Simulator debug19 builds PASS. Native/device and logged-in student E2E NOT_ASSESSABLE; no store upload. Production WEB still shows old Registry subsets. See Unified Wiki 2026-10-22-material-service-connection review.
+
+## TASK16 보존 — 2026-10-24 중단 체크포인트
+
+## 2026-10-24 — 5% 잔여, 신규개발·Provider 중단
+
+Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](../essay-lab-claude-handoff-20261024.md).
+
+성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](../essay-p0-direct-execution-20261023.md).

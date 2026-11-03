@@ -837,3 +837,70 @@ Owner TASK14-B addendum: beta introduction/start must not grant or spend Credit.
 ## 2026-11-02 — November release and paid transition priorities
 
 Owner RELEASE STRATEGY UPDATE fixes the beta cutoff at **2026-11-11 00:00 KST**, with no extension. Preserve [daily beta contract](essay-beta-daily-v2.md) and [existing commerce/type boundaries](commerce-korea-20261026.md). Store review submission remains immediate P0 and must not wait for additional features. Humanities stability, commerce/social and mathematics development, paid Credit/payment validation and November11 paid transition preparation are parallel product priorities, not authorization to enable unverified types or production payments. Keep official university criteria and type-specific evaluation boundaries; unverified types display 준비 중. Enable verified types sequentially only under the applicable Owner production activation approval; preserve existing free/purchased Credit policies. Development completion and paid activation are separate gates. Owner target is verified paid types from November11 and expanded coverage before the stated November19 examination period; this records the Owner planning dates, not external calendar verification.
+## 2026-11-02 — 전용 결제 심사 권한
+
+기존 REVIEW/TEST 결제를 payment@legendstudy.com의 인증된 user_id에만 허용한다. 기존 review@와 분리하고 admin권한은 부여하지 않는다. 기존 /pricing/·가격·TEST_RECORDED·미지급 정책과 일반사용자/관리자 HOLD 유지. 서버 전용 UUID allowlist를 payment_review 권한으로 재사용하며 이메일·클라이언트flag는 권한근거가 아니다. 심사종료 시권한회수/TEST경로·기록보존. LIVE는 별도Owner승인 전금지. [기존 결제계약을 계승한 TASK17](payment-app-foundation.md#task17-payment_review-전용-계정--2026-11-02).
+
+## 2026-11-02 — Toss 최종심사 WEB 이용권·기존 review 계정
+
+앞선전용결제심사권한결정의계정을review@legendstudy.com으로대체한다. 인증된기존user_id만TEST허용,일반/관리자HOLD. WEB결제관련사용자명칭은이용권,구매횟수만큼논술첨삭임을명시한다. 사용자노출상품명·설명에AI를붙이지않는다(Owner재확인;앞선AI표현은Agent의잘못된확대해석). APP/DB Credit구조·가격·지급정책변경없음,LIVE금지. [기존계약을계승한최종심사준비](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후).
+
+
+### 2026-11-02 — WEB 이용권 명칭 전체 통일
+
+[최종심사 명칭 결정](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후)을 WEB 전체로확장. Owner가관리자제외를철회하여관리자도이용권으로통일한다. APP/DB/내부식별자/기존거래원문은변경하지않으며금액·지급·LIVE HOLD정책불변.
+
+## 2026-11-02 — 논술·수학 Provider 키 분리
+
+Owner 확정: 논술 LAB `ESSAY_PROVIDER_KEY`와 수학 분석 `MATH_PROVIDER_API_KEY`는 별도 키로 운영한다. 기존 운영 Secret은 변경·삭제하지 않는다. [기존 TASK16-B 격리 정책과 실제 검증](task16b-commerce-social-integration-20261102.md#2026-11-02--수학-전용-provider-e2e-pass)을 계승하며, 키를 채팅/로그/Git/보고서에 출력하지 않는다. TEST 성공은 운영 활성화 승인이 아니다.
+
+## 2026-11-02 — TASK16-C 인식·스캐폴딩 우선
+
+Owner는 신규 엔진 대신 손글씨·수식 인식/학생확인, 단계별 오류, 점진 힌트·수정 비교, 정확한 수식/표/그래프 시각화를 우선한다. [기존 필수 코칭 결정](math-technical-review-20261026.md#2026-10-27--owner-필수-후속-ai-풀이-코칭성장)을 계승한다. 기존 통과 검증은 반복하지 않고 실제 구현과 품질 검증을 구분한다. AI 생성 이미지는 수학적 정답 근거가 아니다. [구현·검수·미완료](task16c-math-recognition-scaffolding-20261102.md), 운영은 Owner Preview 검수 후 별도 결정한다.
+
+## 2026-11-02 — TASK16-E 원본 확인과 정답 공개
+
+Owner 확정: 높은 인식 신뢰도는 원문 일치 보장이 아니다. UNCERTAIN을 임의 보충하지 않고 기존 Math 확인본 구조로 학생 확인을 거친다. 정답·완성 풀이 포함 출력은 학생의 명시적 공개 요청 뒤 표시한다. 기존 엔진/History를 재사용한다. [TASK16-E 구현과 남은 서버 공개 계약](task16e-recognition-disclosure-p0-20261102.md), [기존 수학 코칭 정책](math-technical-review-20261026.md). 운영 활성화 승인은 포함하지 않는다.
+
+
+## 2026-11-02 — TASK16-F Native Academic Purple / 공통 공개 계약
+
+[TASK16-C/E 결정](task16e-recognition-disclosure-p0-20261102.md)을 계승한다. Owner 최종 명세는 Flutter Native 수학 화면에 Academic Purple을 적용하며 WEB UI는 별도 작업이다. 최대 5개 실제 개선 과제, 기본 개념 탭, 학생 확인과 명시적 전체 풀이 공개를 제공한다. 임의 점수/완성도는 금지한다. 공개 제어는 UI뿐 아니라 WEB/APP 공통 서버 응답에 적용해야 한다. 이용권 1개+무료 1회 반복, 기존 14일/베타 종료 정책을 유지하되 운영 금융 로직 변경은 별도 승인한다. 기존 History/엔진 재사용, 별도 worktree, APP1.0.1(41) 및 운영 보호. [구현·후보·남은 검증](task16f-native-math-ux-20261102.md).
+
+
+## 2026-11-02 — TASK16-G 디자인 PASS / 학습 루프 통합
+
+Owner가 [TASK16-F Native UI/UX](task16f-native-math-ux-20261102.md)를 PASS 처리했다. 현재 Academic Purple 화면을 유지하고 디자인 개편하지 않는다. 서버 공개 제어·반복 1유료+1무료·같은 History·시험 단위 차감·실제 TEST 제출을 [TASK16-G](task16g-learning-loop-20261102.md)에서 통합한다. 무료는 각 유료 사이클 완료 후 14일/기존 베타 종료 제한, 중복 차감 방지. 운영 DB/Credit/Ledger/결제/릴리스 적용은 별도 승인이다.
+
+
+## 2026-11-03 — TASK16-G Mobile First / TASK16-H WEB 분리
+
+[기존 F 승인·G 학습 루프 결정](#2026-11-02--task16-g-디자인-pass--학습-루프-통합)을 유지한다. G는 모바일 실제 학습 루프와 E2E를 우선하며 디자인 개편하지 않는다. G 완료 후 H에서 원본 답안·첨삭 결과·기본 개념 동시 비교 PC 전용 WEB UX, LaTeX 수식 표시와 오류 영역 연결을 개발한다. G에서 공통 Backend/평가/History/이용권/재첨삭 계약 및 APP↔WEB 제출 조회를 정리한다. 별도 시스템을 만들거나 G 범위를 PC 레이아웃으로 확대하지 않는다. Owner 검수 전 운영 활성화 금지. [재개 체크포인트](task16g-learning-loop-20261102.md#mobile-first-결정-및-작업-중단-체크포인트--2026-11-03).
+
+## 2026-11-03 — TASK16-G 기능 승인 / 품질 및 H 준비
+
+Owner는 `b52ab42` Simulator 신규 사진·실제 평가·무료 재첨삭·History를 기능 PASS로 인정했다. 전체 품질/운영 활성화 승인은 아니다. [Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승해 이번 H 범위는 공통 데이터 계약과 좌측 원본·중앙 결과·우측 개념/힌트/해설 PC UX 준비다. 기존 실제 결과 재사용, Provider 최소화, TEST만 사용한다. [품질·착수 조건](task16g-quality-closeout-task16h-preparation-20261103.md).
+
+## 2026-11-03 — TASK16-H WEB 구현 승인
+
+[기존 Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승하여 Owner가 G `bdfea00` 기준 WEB 구현을 승인했다. Academic Purple과 PC 원본/결과/개념 3열→2열→1열, 동일 Backend·공개·History·반복 첨삭 계약을 사용한다. 평가 엔진/운영 LAB/금융/APP 릴리스는 변경하지 않는다. OCR·품질·혼합형 PARTIAL 및 운영 HOLD는 유지한다. [구현·검증](task16h-web-math-ux-20261103.md).
+
+## 2026-11-03 — TASK16-I 통합 품질 검증
+
+[H 승인](#2026-11-03--task16-h-web-구현-승인)을 계승하여 Owner가 실제 APP/WEB 학습 루프·혼합형·OCR/첨삭 품질 검증을 승인했다. Academic Purple과 구조를 유지하고 새 엔진 없이 기존 TEST·공식 자료·성공 결과를 재사용한다. 실제 Provider와 이용권 결과를 분리하며 운영 DB/Auth/금융/WEB/APP 릴리스 변경 및 운영 활성화는 승인하지 않았다. [A–J 결과와 차단](task16i-integration-quality-20261103.md).
+
+### TASK16-I 기능 인정과 Owner 품질 검수
+
+Owner는 실제 통합 E2E의 기능 PASS를 인정하되 전체 품질과 운영 활성화 HOLD를 유지했다. 기존 결과·원본 비교·학습 단계·혼합형·신규 제출/무료 재첨삭의 [검수 경로](task16i-owner-review-20261103.md)를 준비하고, 이미 확인된 결함과 Owner 판단 항목을 분리한다. 후속 품질 개선 범위는 Owner 검수 이후 확정하며 디자인/엔진 재설계나 운영 적용 승인으로 해석하지 않는다.
+
+## 2026-11-03 — TASK16-J 출시 준비로 전환
+
+[I 기능 인정과 품질 검수](#task16-i-기능-인정과-owner-품질-검수)를 계승한다. Owner는 수리·상경 핵심 기능 개발을 일단 마무리하고 실제 학생 이용·출시 차단·필요 연결 검증을 우선한다. 디자인/엔진 재설계 없이 기존 PASS를 재사용하며 Simulator를 실기기 PASS로 취급하지 않는다. 하루1회/00KST/이월0·11월11일00KST 종료, 유료1+무료1 반복·무료14일 및 베타 종료 제한은 유지한다. 운영 DB/Auth/Credit/Ledger/결제/WEB/APP1.0.1(41) 변경과 활성화는 별도 승인 대상이다. [출시 판정·TEST 접근·미완료](task16j-beta-release-readiness-20261103.md).
+
+## 2026-11-03 — TASK16-K 수리·상경 베타 준비
+
+Owner는 다음 WEB/APP 업데이트의 수리·상경 베타 준비를 승인했다. 기존 Registry/공식자료/평가/원장/History 재사용, 기존 공개 scope의 수리0을 데이터 부재로 해석하지 않는다. 기본 답안은 수학 문서 표시·원본 비교·학생 확인 후 평가, Academic Purple/명시 해설 공개와1/0반복·14일·11/11 00KST 종료 유지. 운영 활성화는 별도 최종 승인, 기존 APP1.0.1(41) 보존. [K 검증·적용 경계](task16k-beta-activation-20261103.md), [J 정책/환경](task16j-beta-release-readiness-20261103.md), [G 공통 계약](task16g-learning-loop-20261102.md).
+
+## 2026-11-03 — APP 심사 수정과 베타 확장 후보 분리
+
+Owner는 APP41을 보존한 별도 릴리스 통합을 승인했다. 후보 A는 Kakao 시스템 인증+온보딩 V2+MY 정보 보완, 후보 B는 A+수리·상경 기능이다. 기존 인문 서비스·Academic Purple 유지, A 우선 안정화, B 전체 E2E와 Owner 승인이 있어야 B 제출. 이번 승인은 운영 DB/Auth/Credit/Ledger/결제·WEB·Store 활성화가 아니다. [기존 11월 전략](#2026-11-02--november-release-and-paid-transition-priorities)과 베타11/11 종료를 유지한다. [검증·차단](app-release-integration-20261103.md).

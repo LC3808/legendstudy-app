@@ -1,3 +1,7 @@
+import 'package:legendstudy_app/features/essay/exam_submission.dart';
+import 'package:legendstudy_app/core/config/app_config.dart';
+import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -27,7 +31,7 @@ class RoundGateway extends MathGateway {
     if (name == 'math_session_history') {
       return {'version': 'math-session-history-v1', 'runs': <dynamic>[]};
     }
-    if (name == 'math_session_submit') {
+    if (name == 'math_session_continue') {
       submissions.add(params);
       if (lose) {
         lose = false;
@@ -77,6 +81,91 @@ class RoundGateway extends MathGateway {
 }
 
 void main() {
+  for (final isolated in [false, true]) {
+    testWidgets(
+      'release preserves natural submission hold; isolated TEST routes Math: $isolated',
+      (t) async {
+        final fake = RoundGateway();
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMethodCallHandler(
+              SourceDraftGateway.channel,
+              (_) async => null,
+            );
+        addTearDown(
+          () => TestDefaultBinaryMessengerBinding
+              .instance
+              .defaultBinaryMessenger
+              .setMockMethodCallHandler(SourceDraftGateway.channel, null),
+        );
+        await t.pumpWidget(
+          ProviderScope(
+            overrides: [
+              appConfigProvider.overrideWithValue(
+                AppConfig(
+                  environment: isolated ? 'test' : 'production',
+                  supabaseUrl: isolated
+                      ? 'https://kpqbedylxlyntrrfybpn.supabase.co'
+                      : 'https://stlhijzpjfgwwdgunlsd.supabase.co',
+                  testEssayApiOrigin: 'https://legendstudy-task16b.pages.dev',
+                ),
+              ),
+              authStateProvider.overrideWith(
+                (ref) => Stream.value(const AuthStatus('owner')),
+              ),
+              mathCatalogProvider('owner').overrideWith(
+                (ref) async => [
+                  {
+                    'essay_exam_id': 'exam',
+                    'essay_question_id': 'q1',
+                    'leaf_id': 'leaf',
+                  },
+                ],
+              ),
+              mathGatewayProvider('owner').overrideWithValue(fake),
+              examAvailabilityProvider((owner: 'owner', examId: 'exam'))
+                  .overrideWith(
+                    (ref) async => {
+                      'ready': true,
+                      'questionIds': ['q1'],
+                      'mathQuestions': {'q1': 'leaf'},
+                    },
+                  ),
+            ],
+            child: MaterialApp(
+              home: Scaffold(
+                body: ExamAnswerReview(
+                  owner: 'owner',
+                  currentQuestion: 'q1',
+                  selectedQuestions: const {'q1'},
+                  exam: {
+                    'key': 'exam',
+                    'dbExamId': 'exam',
+                    'track': '자연계열',
+                    'questions': [
+                      {
+                        'key': 'q1',
+                        'dbQuestionId': 'q1',
+                        'label': '문제 1',
+                        'inputMode': 'image',
+                      },
+                    ],
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+        await t.pumpAndSettle();
+        expect(
+          find.byType(MathExamSession),
+          isolated ? findsOneWidget : findsNothing,
+        );
+        expect(fake.submissions, isEmpty);
+        expect(fake.evaluated, isEmpty);
+        expect(t.takeException(), isNull);
+      },
+    );
+  }
   test('retry preserves successful questions and rejects in-flight rounds', () {
     Map<String, dynamic> r(List<String> states) => {
       'state': 'reserved',
@@ -150,13 +239,15 @@ void main() {
       await t.tap(find.text('저장한 답안 입력 확인 · 0 크레딧'));
       await t.pumpAndSettle();
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('논술 첨삭하기 · 1 크레딧'));
+      await t.tap(find.text('논술 첨삭하기 · 이용권 확인'));
       await t.pumpAndSettle();
       expect(find.text('작성하지 않은 답안이 있습니다'), findsOneWidget);
       expect(fake.submissions, isEmpty);
-      await t.tap(find.text('1 크레딧 사용하고 첨삭하기'));
+      await t.tap(find.text('이용권 1개 사용하고 첨삭하기'));
       await t.pumpAndSettle();
       expect(fake.submissions, hasLength(1));
+      expect(fake.submissions.single['p_expected_credits'], 1);
+      expect(fake.submissions.single['p_previous'], isNull);
       await t.pumpWidget(const SizedBox());
       await t.pumpAndSettle();
       await mount();

@@ -4,6 +4,7 @@ import '../analytics/domain/analytics_events.dart';
 
 import 'package:go_router/go_router.dart';
 
+import 'math_mobile/math_coaching_page.dart';
 import 'result_pdf.dart';
 import 'round_history_actions.dart';
 import 'result_disclosure.dart';
@@ -272,6 +273,46 @@ Future<void> openSharedEssayResult(
   final client = ref.read(supabaseClientProvider);
   if (client == null) return;
   try {
+    if (row.math && !row.exam) {
+      await Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => MathCoachingPage(evaluationId: e['id'] as String),
+        ),
+      );
+
+      return;
+    }
+    if (row.exam) {
+      final parts = (e['id'] as String).split('/');
+      final runs = await SharedEssayHistory(
+        client,
+        owner,
+      ).examRuns(parts.first);
+      if (!context.mounted ||
+          ref.read(authStateProvider).value?.userId != owner) {
+        return;
+      }
+      if (runs.length != 1) throw StateError('RUN_NOT_FOUND');
+      final q =
+          evaluationList(evaluationObject(runs.single['result'])['questions'])
+              .map(evaluationObject)
+              .where((q) => q['questionId'] == parts.last)
+              .firstOrNull;
+      final contract = evaluationObject(q?['evaluation'])['contract_version'];
+      if (contract == 'math-coaching-v1' || contract == 'math-eval-v1') {
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => MathCoachingPage(
+              evaluationId: parts.last,
+              runId: parts.first,
+              questionId: parts.last,
+            ),
+          ),
+        );
+
+        return;
+      }
+    }
     final result = await SharedEssayHistory(
       client,
       owner,
@@ -450,7 +491,7 @@ class _Result extends ConsumerWidget {
         ),
       ),
       body: !auth.isLoading && !auth.hasError && auth.value?.userId == owner
-          ? record.math
+          ? record.math || report.isMath
                 ? EvaluationReportView(report: report, before: before)
                 : StudentFeedbackView(
                     report: report,

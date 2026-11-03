@@ -169,11 +169,13 @@ class AnswerImagesInput extends StatelessWidget {
     required this.onChanged,
     this.enabled = true,
     this.allowReorder = false,
+    this.onEdit,
   });
   final List<Uint8List> values;
   final Future<void> Function(List<Uint8List>) onChanged;
   final bool enabled;
   final bool allowReorder;
+  final Future<void> Function(int index)? onEdit;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -189,6 +191,12 @@ class AnswerImagesInput extends StatelessWidget {
       Text('첨부한 답안 사진 ${values.length}/6 · 첨부 순서 유지'),
       for (var i = 0; i < values.length; i++) ...[
         Text('답안 사진 ${i + 1}'),
+        if (onEdit != null)
+          TextButton.icon(
+            onPressed: enabled ? () => onEdit!(i) : null,
+            icon: const Icon(Icons.crop_rotate),
+            label: const Text('확대 · 회전 · 자르기'),
+          ),
         if (allowReorder && i > 0)
           TextButton.icon(
             onPressed: !enabled

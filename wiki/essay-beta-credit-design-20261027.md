@@ -3,6 +3,7 @@
 > 2026-10-31 후속: 일일 1회·11/11 00시 종료의 [Owner 확정 v2](essay-beta-daily-v2.md)가 아래 예전 캠페인 정책을 대체합니다. 아래는 기존 구현/운영 증거이며 새 정책 활성화 증거가 아닙니다.
 
 2026-10-27 Owner P1. **현재: DB·출처확인 WEB 운영 확인 완료, APP 개발검증 완료. 캠페인 비활성·활성화 별도 승인. 아래 초기 설계 기록은 역사적 근거이며 최신 상태는 마지막 절을 따른다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
+2026-10-27 Owner P1. **현재 상태는 마지막 TASK16-J 실측 절을 따른다. 아래 10월27일 설계·비활성 기록은 역사적 근거다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
 
 ## 확인 근거 — 운영 읽기 전용
 
@@ -170,3 +171,9 @@ Owner 승인 후 migration `20261027045140` (`essay_beta_clock_access_20261027`)
 Production 일반 계정에서 재조회 오류 소멸, 한양2027모의인문 quote 확인창의 베타0/가입0/유료0/기타104, 이번 사용 관리자 지급1 및 명시적 동의 안내 확인. 독립 로컬 점검 입력으로 확인창만 열고 취소했으며 점검 문구는 비웠다. 최종 제출0·Provider0·Credit차감0, 기존 기록/초안 보존. WEB SHA는 `04aa7a8ac4ff47cec370afb1eb3c441b1cc2c285` 그대로이며 DB 권한 보완이라 재배포 불필요.
 
 WEB 운영 출처 확인 완료. APP 구현/6테스트/analyze/debug APK 완료는 개발환경 범위이며 실기기 베타 활성 캠페인 확인·스토어 배포는 미수행. 실제 지급/소진/자정/실패복구는 앞 절의 격리검사 근거이며 운영 E2E로 표시하지 않는다. 캠페인은 비활성 유지; Owner의 기간·대상 회차 확정 및 최종 활성화 승인이 남는다. 롤백/기존 원장 보존 규칙은 위 절 유지.
+
+## 2026-11-03 — TASK16-J 운영 읽기 전용 정정
+
+운영 `stlhijzpjfgwwdgunlsd` 실측: campaigns enabled=true, starts_on=2026-11-01, ends_on=2026-11-10, daily_limit=1. 일일 지급 함수의 cutoff는 `(ends_on+1)` KST이므로 **2026-11-11 00:00 KST 종료**다. exam_scope160개 중 has_math0, TASK16 대표 자연/상경2시험 포함0. 과거 ‘캠페인 비활성’ 문구는 현재와 달라 정정한다. 이번 작업에서 활성화하거나 설정을 변경하지 않았다.
+
+Owner 최신 정책 하루1회/00KST초기화/이월0/기간연장없음, 각 최초 첨삭당 무료재첨삭1회·14일 및 베타 종료 제한을 유지한다. 초기 문서의 하루2개 등 제안은 현재 정책이 아니다. TEST에는 캠페인0·daily_status_v2 미설치이며 관리자 지급 E2E는 실제 일일 베타 E2E를 증명하지 않는다. 수리/혼합 지원 scope와 반복·공개 계약의 승격은 별도 TEST 검증/Owner 승인 대상이다. [운영 차이·필요 작업·NOT_READY 판정](task16j-beta-release-readiness-20261103.md).

@@ -15,19 +15,29 @@ class ReleaseConfigTests(unittest.TestCase):
             return subprocess.run([str(SCRIPT), 'ios', '--check', '--config', str(path)], capture_output=True, text=True)
 
     def fixture(self):
-        return dict(APP_ENV='production', GOOGLE_OAUTH_ENABLED=True, APPLE_OAUTH_ENABLED=True,
+        return dict(SUPABASE_URL='https://stlhijzpjfgwwdgunlsd.supabase.co',
+                    SUPABASE_PUBLISHABLE_KEY='sb_publishable_synthetic', APP_ENV='production', GOOGLE_OAUTH_ENABLED=True, APPLE_OAUTH_ENABLED=True,
                     KAKAO_OAUTH_ENABLED=True, GOOGLE_SERVER_CLIENT_ID='synthetic-server', GOOGLE_IOS_CLIENT_ID='synthetic-ios')
 
     def test_all_existing_social_settings_required(self):
         good = self.fixture()
         self.assertEqual(self.check(good).returncode, 0)
         for name in ('GOOGLE_OAUTH_ENABLED', 'APPLE_OAUTH_ENABLED', 'KAKAO_OAUTH_ENABLED',
-                     'GOOGLE_SERVER_CLIENT_ID', 'GOOGLE_IOS_CLIENT_ID'):
+                     'GOOGLE_SERVER_CLIENT_ID', 'GOOGLE_IOS_CLIENT_ID', 'SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY'):
             missing = dict(good)
             del missing[name]
             result = self.check(missing)
             self.assertNotEqual(result.returncode, 0, name)
             self.assertNotIn('synthetic-server', result.stderr)
+
+    def test_foreign_database_or_private_key_cannot_build(self):
+        for name, value in [('SUPABASE_URL', 'https://example.supabase.co'),
+                            ('SUPABASE_PUBLISHABLE_KEY', 'sb_secret_do-not-embed')]:
+            config = self.fixture()
+            config[name] = value
+            result = self.check(config)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertNotIn(value, result.stderr)
 
     def test_false_string_is_not_truthy(self):
         config = self.fixture()

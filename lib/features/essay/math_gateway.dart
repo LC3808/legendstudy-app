@@ -22,6 +22,32 @@ String mathRequestId() {
   return '${s.substring(0, 8)}-${s.substring(8, 12)}-${s.substring(12, 16)}-${s.substring(16, 20)}-${s.substring(20)}';
 }
 
+/// Canonical OCR state, never a timeout interpreted as permission to evaluate.
+void requireMathExtractionResult(Map<String, dynamic> input) {
+  if (input['can_request_evaluation'] == true) return;
+  final candidate = input['candidate'];
+  final state = candidate is Map ? candidate['state'] : null;
+  if (state == 'COMPLETED' &&
+      (input['candidate_regions'] as List? ?? []).isNotEmpty) {
+    return;
+  }
+  throw StateError(state == 'FAILED'
+      ? 'MATH_EXTRACTION_FAILED'
+      : state == 'PROCESSING'
+      ? 'MATH_EXTRACTION_PROCESSING'
+      : 'CHECK_EXTRACTION_STATUS');
+}
+
+String? mathExtractionNotice(Object error) {
+  if (error is! StateError) return null;
+  return switch (error.message) {
+    'MATH_EXTRACTION_FAILED' => '사진은 저장됐지만 수식 인식에 실패했어요. 저장한 답안 입력 확인을 눌러 다시 시도해 주세요. 평가와 이용권 차감은 진행되지 않았습니다.',
+    'MATH_EXTRACTION_PROCESSING' => '저장한 사진의 수식을 인식하고 있어요. 잠시 후 저장한 답안 입력 확인을 눌러 결과를 확인해 주세요. 사진을 다시 올릴 필요는 없습니다.',
+    'CHECK_EXTRACTION_STATUS' => '수식 인식 상태를 확인하지 못했어요. 저장된 사진은 유지됩니다. 잠시 후 입력 상태를 다시 확인해 주세요.',
+    _ => null,
+  };
+}
+
 /// Existing WEB RPCs and allowlisted worker gateway. No worker key or client billing.
 class MathGateway {
   MathGateway(this.client, this.owner, {http.Client? transport})
@@ -169,10 +195,19 @@ class MathGateway {
     Map<String, dynamic> payload,
   ) async {
     checkOwner();
-    if (!['math_input', 'math_learning'].contains(fn)) {
+    if (![
+      'math_input',
+      'math_learning',
+      'math_coaching',
+      'essay_math_coaching',
+    ].contains(fn)) {
       throw ArgumentError('RPC');
     }
-    final dto = fn == 'math_input' ? 'math-input-v1' : 'math-learning-v1';
+    final dto = fn == 'math_input'
+        ? 'math-input-v1'
+        : (fn == 'math_coaching' || fn == 'essay_math_coaching')
+        ? 'math-coaching-v1'
+        : 'math-learning-v1';
     final value = await client
         .rpc<dynamic>(
           fn,
@@ -199,6 +234,8 @@ class MathGateway {
     checkOwner();
     if (!{
       'math_session_submit',
+      'math_session_quote',
+      'math_session_continue',
       'math_session_read',
       'math_session_history',
       'math_session_retry',
@@ -210,6 +247,43 @@ class MathGateway {
         .timeout(const Duration(seconds: 25));
     checkOwner();
     return data;
+  }
+
+  Future<Uint8List> readEvidence(String artifact) async {
+    checkOwner();
+    final request =
+        http.Request('POST', Uri.parse('$mathOrigin/api/math/artifact'))
+          ..followRedirects = false
+          ..headers.addAll({
+            'Authorization':
+                'Bearer ${client.auth.currentSession!.accessToken}',
+            'Origin': mathOrigin,
+            'Content-Type': 'application/json',
+          })
+          ..body = jsonEncode({'artifact_id': artifact});
+    final response = await transport
+        .send(request)
+        .timeout(const Duration(seconds: 25));
+    checkOwner();
+    if (response.statusCode != 200 ||
+        (response.contentLength ?? 0) > 20971520) {
+      throw StateError('ARTIFACT_UNAVAILABLE');
+    }
+    final bytes = BytesBuilder(copy: false);
+    await for (final chunk in response.stream.timeout(
+      const Duration(seconds: 25),
+    )) {
+      if (bytes.length + chunk.length > 20971520) {
+        throw StateError('ARTIFACT_UNAVAILABLE');
+      }
+      bytes.add(chunk);
+    }
+    checkOwner();
+    final result = bytes.takeBytes();
+    if (answerImageType(result) == null) {
+      throw const FormatException('INVALID_IMAGE');
+    }
+    return result;
   }
 
   Future<void> uploadEvidence(String artifact, Uint8List bytes) async {

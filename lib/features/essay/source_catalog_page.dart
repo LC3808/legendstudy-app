@@ -1,3 +1,4 @@
+import '../../core/config/app_config.dart';
 import '../credits/essay_beta_credit.dart';
 import '../analytics/analytics_guard.dart';
 import '../analytics/analytics_providers.dart';
@@ -13,6 +14,7 @@ import 'answer_sections.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'answer_ocr.dart';
+import 'math_mobile/math_image_tools.dart';
 import '../credits/essay_credit_source.dart';
 import 'service_availability.dart';
 import 'math_gateway.dart';
@@ -1277,6 +1279,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       var d = await g.openSharedDraft();
       var image = await g.loadImages();
       if (widget.rewriteRun != null &&
+          widget.rewriteRun!['math_session_run_id'] == null &&
           d.revision == 0 &&
           d.body.isEmpty &&
           image.isEmpty) {
@@ -1416,6 +1419,12 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
         body: Center(child: Text('계정이 변경됐어요. 문항을 다시 열어 주세요.')),
       );
     }
+    final mathPhoto = (ref.watch(mathCatalogProvider(widget.owner)).value ?? [])
+        .any(
+          (r) =>
+              r['essay_exam_id'] == widget.exam['dbExamId'] &&
+              r['essay_question_id'] == widget.question['dbQuestionId'],
+        );
     final c = controller;
     final pdf = QuestionPdfAsset.parse(
       widget.question['studentPdf'],
@@ -1513,11 +1522,17 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                 ),
                           ),
                         ),
-                        child: AnswerImagesInput(
-                          values: photo,
-                          enabled: imageReady && !imageSaving,
-                          onChanged: savePhoto,
-                        ),
+                        child: mathPhoto
+                            ? MathImageInput(
+                                values: photo,
+                                enabled: imageReady && !imageSaving,
+                                onChanged: savePhoto,
+                              )
+                            : AnswerImagesInput(
+                                values: photo,
+                                enabled: imageReady && !imageSaving,
+                                onChanged: savePhoto,
+                              ),
                       ),
                       if (imageSaving)
                         const Text('사진 저장 중')
@@ -2923,6 +2938,7 @@ class _ExamAnswerReviewState extends ConsumerState<ExamAnswerReview> {
         .cast<Map<String, dynamic>>();
     return SafeArea(
       child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -3101,6 +3117,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
         .cast<Map<String, dynamic>>()
         .where((q) => included.contains(q['key']))
         .toList();
+    final isolatedTest = ref.watch(appConfigProvider).isolatedEssayTestEnabled;
     final area = essayServiceArea(exam);
     final mathSelected = selected
         .where(
@@ -3121,7 +3138,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
           OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
       ],
     );
-    if (area == EssayServiceArea.science) {
+    if (!isolatedTest && area == EssayServiceArea.science) {
       return unavailable('자연·공학·이학·의예논술 첨삭은 베타 공개 보류 중입니다. 작성한 답안은 유지됩니다.');
     }
     if (area == null && mathSelected.isNotEmpty) {
@@ -3138,7 +3155,8 @@ class _RoundSubmitRouter extends ConsumerWidget {
         ],
       );
     }
-    if (mathSelected.isNotEmpty &&
+    if (!isolatedTest &&
+        mathSelected.isNotEmpty &&
         !selected.every((q) => leaves.containsKey(q['dbQuestionId']))) {
       return unavailable('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.');
     }
@@ -3167,6 +3185,7 @@ class _RoundSubmitRouter extends ConsumerWidget {
             exam: exam,
             selected: included,
             leaves: leaves,
+            rewriteRun: rewriteRun,
           ),
         ],
       );

@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+APP41 심사 수정 / 온보딩 V2 / TASK16 통합 후보 A·B: [빌드·실기기·제출 게이트](app-release-integration-20261103.md).
+
 Kakao iOS 외부 브라우저 / App Review Guideline4 / 시스템 인증 세션: [11/3 수정·검수·릴리스 통합](kakao-ios-system-auth-20261103.md).
 
 온보딩 프로필 누락 / MY 정보 보완 / 학교 검색 V2 / 고등학교 기본·중학교 명시: [최종 통합 준비·측정·실기기 검수](onboarding-v2-final-integration-20261103.md) → [11/3 구현·A–R·최종 리뷰 보완·Owner 검수](onboarding-school-search-v2-20261103.md#final-review-fix) → [Claude 원문 진단](onboarding-profile-integrity-20261103.md).
@@ -68,6 +70,31 @@ APP 전체 인수 / 재작성 / paid learning round / 성장 / 사진 OCR: [최�
 [관리자 베타 운영 TASK04·설정/권한/집계/승인 패키지](admin-beta-operations.md).
 
 무료 베타 Credit: [일일 1회 v2·11/11 종료·Owner SQL 후보](essay-beta-daily-v2.md) — 운영 비활성; [기존 출처 계약](essay-beta-credit-design-20261027.md).
+TASK16-K / 수리·상경 베타 활성화 준비: [기존 DB·시험별 판정·수학 답안 표시·실기기·운영 승인 경계](task16k-beta-activation-20261103.md).
+
+TASK16-J / 수리·상경 베타 출시 준비: [NOT_READY·Owner 접속·기능 판정·운영/TEST 차이·적용 목록](task16j-beta-release-readiness-20261103.md).
+
+TASK16-I / 수리논술 통합 품질: [Owner 검수 경로·접속·기지 문제](task16i-owner-review-20261103.md) → [실제 WEB·혼합·교차 조회·A–J 판정](task16i-integration-quality-20261103.md).
+
+TASK16-H / WEB 수리논술 UX: [구현·실제 TEST·교차 조회·미완료](task16h-web-math-ux-20261103.md).
+
+TASK16-G 품질 마감 / TASK16-H 준비: [실제 품질·혼합형 차단·공통 계약·PC UX 명세](task16g-quality-closeout-task16h-preparation-20261103.md).
+
+TASK16-G / Mobile First 학습 루프 (WEB UX는 후속 H): [서버 공개·반복 사이클·TEST 실제 검증·미완료](task16g-learning-loop-20261102.md).
+
+TASK16-F / Flutter 수리논술 UX: [Native 구현·실기기·공통 계약 후보·검증·차단](task16f-native-math-ux-20261102.md).
+
+TASK16-E: [손글씨·정답 공개 P0 수정/검증/잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
+
+TASK16-C / 수학 인식·스캐폴딩·수식: [재사용·Preview·품질 검증과 미완료](task16c-math-recognition-scaffolding-20261102.md).
+
+TASK16-B / 상경·사회 실제 첨삭 통합: [격리 Preview·대표 시험·검증·차단 요소](task16b-commerce-social-integration-20261102.md).
+
+TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
+
+건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
+
+무료 베타 Credit: [11/3 실측·기존 설계](essay-beta-credit-design-20261027.md#2026-11-03--task16-j-운영-읽기-전용-정정) — 운영 활성/하루1, 인문160시험·수리0. 수리 베타 연결 미검증.
 
 WEB MY 프로필·관심 대학·지원 현황: [대학 관리 통합·배포·복구](my-college-management-20261026.md).
 

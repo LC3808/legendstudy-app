@@ -39,6 +39,7 @@ class _ExamDraftActionsState extends ConsumerState<ExamDraftActions> {
       var images = await store.loadImages();
       if (local.body.isEmpty &&
           images.isEmpty &&
+          widget.rewriteRun?['math_session_run_id'] == null &&
           (widget.rewriteRun == null || local.revision == 0)) {
         String body = '';
         if (widget.rewriteRun != null) {

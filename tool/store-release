@@ -37,6 +37,11 @@ def main():
     for name in ('GOOGLE_SERVER_CLIENT_ID', 'GOOGLE_IOS_CLIENT_ID'):
         if not isinstance(config.get(name), str) or not config[name].strip():
             parser.error('Google public client configuration is missing; values are not printed.')
+    if config.get('SUPABASE_URL') != 'https://stlhijzpjfgwwdgunlsd.supabase.co':
+        parser.error('Verified LegendStudy production Supabase URL is required.')
+    public_key = config.get('SUPABASE_PUBLISHABLE_KEY')
+    if not isinstance(public_key, str) or not public_key.startswith('sb_publishable_'):
+        parser.error('Existing public Supabase publishable key is required; secrets are forbidden.')
     config.update(REQUIRED)  # Preserve every other existing production define.
     if args.check:
         print('PRODUCTION_CONFIG_PASS: existing defines preserved; all three release flags true.')

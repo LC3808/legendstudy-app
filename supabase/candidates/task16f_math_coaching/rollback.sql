@@ -1,0 +1,20 @@
+-- REVIEWED TEST ONLY, routes disabled first. Retains disclosure audit rows.
+begin;
+grant math_executor to postgres with admin false,inherit false,set true granted by postgres;
+grant create on schema public to math_executor;
+set role math_executor;
+drop function public.math_coaching(jsonb);
+drop function public.math_evaluation_detail(uuid);
+alter function public.math_evaluation_detail_task16f_legacy(uuid) rename to math_evaluation_detail;
+grant execute on function public.math_evaluation_detail(uuid) to authenticated,postgres;
+drop function public.math_reveal_hint(uuid,uuid);
+alter function public.math_reveal_hint_task16f_legacy(uuid,uuid) rename to math_reveal_hint;
+grant execute on function public.math_reveal_hint(uuid,uuid) to authenticated,postgres;
+reset role;
+drop function public.math_learning(jsonb);
+alter function public.math_learning_task16f_legacy(jsonb) rename to math_learning;
+revoke execute on function public.math_learning(jsonb) from math_executor;
+grant execute on function public.math_learning(jsonb) to authenticated;
+revoke create on schema public from math_executor;
+revoke math_executor from postgres granted by postgres;
+commit;

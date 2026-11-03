@@ -23,23 +23,36 @@ Future<AnswerCropOutcome?> cropAnswerImage(
 ) => Navigator.of(context, rootNavigator: true).push<AnswerCropOutcome>(
   MaterialPageRoute<AnswerCropOutcome>(
     fullscreenDialog: true,
-    builder: (_) => _CropScreen(source: source),
+    builder: (_) => AnswerImageCropScreen(source: source),
   ),
 );
 
-class _CropScreen extends StatefulWidget {
-  const _CropScreen({required this.source});
+class AnswerImageCropScreen extends StatefulWidget {
+  const AnswerImageCropScreen({
+    required this.source,
+    this.transform,
+    this.onAttach,
+    this.allowRetake = true,
+    super.key,
+  });
+
+  /// Optional rotation/copy implementation; existing Math processing is reused.
+  final Future<Uint8List> Function(int turns, Rect normalizedCrop)? transform;
+  final void Function(Uint8List)? onAttach;
+  final bool allowRetake;
   final Uint8List source;
   @override
-  State<_CropScreen> createState() => _CropScreenState();
+  State<AnswerImageCropScreen> createState() => _AnswerImageCropScreenState();
 }
 
 enum _Drag { none, move, tl, tr, bl, br }
 
-class _CropScreenState extends State<_CropScreen> {
+class _AnswerImageCropScreenState extends State<AnswerImageCropScreen> {
   ui.Image? image;
   String? error;
   bool working = false;
+  int turns = 0;
+  bool compareOriginal = false;
   // Crop rectangle and the fitted image rectangle, both in layout coordinates.
   Rect? crop;
   Rect imageRect = Rect.zero;
@@ -57,8 +70,16 @@ class _CropScreenState extends State<_CropScreen> {
   Future<void> _decode() async {
     try {
       final codec = await ui.instantiateImageCodec(widget.source);
-      final frame = await codec.getNextFrame();
-      if (mounted) setState(() => image = frame.image);
+      try {
+        final frame = await codec.getNextFrame();
+        if (mounted) {
+          setState(() => image = frame.image);
+        } else {
+          frame.image.dispose();
+        }
+      } finally {
+        codec.dispose();
+      }
     } catch (_) {
       if (mounted) setState(() => error = '사진을 불러오지 못했어요. 다시 시도해 주세요.');
     }
@@ -74,14 +95,16 @@ class _CropScreenState extends State<_CropScreen> {
     // Recompute the fitted (BoxFit.contain) image rect and reset the crop box to
     // the full image when the layout size changes.
     if (box == boxSize && crop != null) return;
-    final scale = math.min(box.width / img.width, box.height / img.height);
-    final w = img.width * scale, h = img.height * scale;
+    final width = turns.isEven ? img.width : img.height;
+    final height = turns.isEven ? img.height : img.width;
+    final scale = math.min(box.width / width, box.height / height);
+    final w = width * scale, h = height * scale;
     imageRect = Rect.fromLTWH((box.width - w) / 2, (box.height - h) / 2, w, h);
     boxSize = box;
     crop = imageRect;
   }
 
-  double get _min => 48;
+  double get _min => math.min(48, math.min(imageRect.width, imageRect.height));
 
   void _onStart(Offset p) {
     final r = crop;
@@ -137,6 +160,19 @@ class _CropScreenState extends State<_CropScreen> {
     if (img == null || r == null || imageRect.width <= 0) return;
     setState(() => working = true);
     try {
+      if (widget.transform != null) {
+        final bytes = await widget.transform!(
+          turns,
+          Rect.fromLTRB(
+            ((r.left - imageRect.left) / imageRect.width).clamp(0, 1),
+            ((r.top - imageRect.top) / imageRect.height).clamp(0, 1),
+            ((r.right - imageRect.left) / imageRect.width).clamp(0, 1),
+            ((r.bottom - imageRect.top) / imageRect.height).clamp(0, 1),
+          ),
+        );
+        if (mounted) setState(() => preview = bytes);
+        return;
+      }
       // Map the layout-space crop to source pixels and rasterize losslessly.
       final scale = img.width / imageRect.width;
       final src = Rect.fromLTRB(
@@ -154,7 +190,9 @@ class _CropScreenState extends State<_CropScreen> {
         Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
         Paint()..filterQuality = FilterQuality.high,
       );
-      final out = await recorder.endRecording().toImage(w, h);
+      final picture = recorder.endRecording();
+      final out = await picture.toImage(w, h);
+      picture.dispose();
       final data = await out.toByteData(format: ui.ImageByteFormat.png);
       out.dispose();
       if (!mounted) return;
@@ -183,7 +221,7 @@ class _CropScreenState extends State<_CropScreen> {
           tooltip: '취소',
           icon: const Icon(Icons.close),
           // Cancel preserves any existing attachment.
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: working ? null : () => Navigator.of(context).pop(),
         ),
       ),
       body: error != null
@@ -200,6 +238,13 @@ class _CropScreenState extends State<_CropScreen> {
 
   Widget _cropBody(ui.Image img) => Column(
     children: [
+      const Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(
+          '모서리를 끌어 자르고, 영역 안을 끌어 위치를 옮기세요.',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       Expanded(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -207,18 +252,19 @@ class _CropScreenState extends State<_CropScreen> {
             _layout(box, img);
             final r = crop ?? imageRect;
             return GestureDetector(
-              onPanDown: (e) => _onStart(e.localPosition),
-              onPanUpdate: (e) => _onUpdate(e.delta),
+              key: const ValueKey('answer-crop-canvas'),
+              behavior: HitTestBehavior.opaque,
+              onPanDown: working ? null : (e) => _onStart(e.localPosition),
+              onPanUpdate: working ? null : (e) => _onUpdate(e.delta),
               onPanEnd: (_) => drag = _Drag.none,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Center(
-                    child: RawImage(
-                      image: img,
-                      fit: BoxFit.contain,
-                      width: box.width,
-                      height: box.height,
+                  Positioned.fromRect(
+                    rect: imageRect,
+                    child: RotatedBox(
+                      quarterTurns: turns,
+                      child: RawImage(image: img, fit: BoxFit.fill),
                     ),
                   ),
                   CustomPaint(
@@ -230,12 +276,36 @@ class _CropScreenState extends State<_CropScreen> {
           },
         ),
       ),
+      if (widget.transform != null)
+        _bar([
+          _action(
+            Icons.rotate_right,
+            '오른쪽으로 90° 회전',
+            working
+                ? null
+                : () => setState(() {
+                    turns = (turns + 1) % 4;
+                    crop = null;
+                  }),
+          ),
+          _action(
+            Icons.restore,
+            '원본으로 되돌리기',
+            working
+                ? null
+                : () => setState(() {
+                    turns = 0;
+                    crop = null;
+                  }),
+          ),
+        ]),
       _bar([
-        _action(Icons.replay, '다시 촬영', working ? null : _retake),
+        if (widget.allowRetake)
+          _action(Icons.replay, '다시 촬영', working ? null : _retake),
         _action(
           Icons.crop,
           '적용',
-          working || crop == null ? null : _apply,
+          working ? null : _apply,
           primary: true,
         ),
       ]),
@@ -247,19 +317,38 @@ class _CropScreenState extends State<_CropScreen> {
       Expanded(
         child: Center(
           child: InteractiveViewer(
-            child: Image.memory(bytes, fit: BoxFit.contain),
+            maxScale: 6,
+            child: Image.memory(
+              compareOriginal ? widget.source : bytes,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
       _bar([
-        _action(Icons.crop_rotate, '다시 자르기', () => setState(() => preview = null)),
-        _action(Icons.replay, '다시 촬영', _retake),
         _action(
-          Icons.check,
-          '첨부하기',
-          () => Navigator.of(context).pop(AnswerCropOutcome(bytes: bytes)),
-          primary: true,
+          Icons.compare,
+          compareOriginal ? '보정본 보기' : '원본 비교',
+          () => setState(() => compareOriginal = !compareOriginal),
         ),
+      ]),
+      _bar([
+        _action(
+          Icons.crop_rotate,
+          '다시 자르기',
+          () => setState(() {
+            preview = null;
+            compareOriginal = false;
+          }),
+        ),
+        if (widget.allowRetake) _action(Icons.replay, '다시 촬영', _retake),
+        _action(Icons.check, '첨부하기', () {
+          if (widget.onAttach != null) {
+            widget.onAttach!(bytes);
+          } else {
+            Navigator.of(context).pop(AnswerCropOutcome(bytes: bytes));
+          }
+        }, primary: true),
       ]),
     ],
   );
@@ -271,15 +360,21 @@ class _CropScreenState extends State<_CropScreen> {
     top: false,
     child: Padding(
       padding: const EdgeInsets.all(AppTokens.space12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
         children: children,
       ),
     ),
   );
 
-  Widget _action(IconData icon, String label, VoidCallback? onTap,
-      {bool primary = false}) {
+  Widget _action(
+    IconData icon,
+    String label,
+    VoidCallback? onTap, {
+    bool primary = false,
+  }) {
     final style = TextButton.styleFrom(
       foregroundColor: primary ? AppTokens.textPrimary : Colors.white,
       backgroundColor: primary ? Colors.white : Colors.transparent,
