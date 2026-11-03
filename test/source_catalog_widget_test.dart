@@ -1,3 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:legendstudy_app/features/essay/math_gateway.dart';
+import 'package:legendstudy_app/features/essay/math_mobile/math_image_tools.dart';
+
 import 'dart:io';
 
 import 'package:legendstudy_app/features/essay/student_pdf_catalog.dart';
@@ -16,6 +22,190 @@ import 'package:legendstudy_app/features/essay/source_catalog_page.dart';
 import 'package:legendstudy_app/features/essay/source_draft.dart';
 
 void main() {
+  testWidgets('Math rewrite never imports submitted legacy photos or text', (
+    tester,
+  ) async {
+    final disk = <String, String>{}, images = <String, Uint8List>{};
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SourceDraftGateway.channel, (call) async {
+          if (call.method == 'read') return disk[call.arguments];
+          if (call.method == 'readImage') return images[call.arguments];
+          final a = call.arguments as Map;
+          if (call.method == 'write') {
+            disk[a['key'] as String] = a['value'] as String;
+          }
+          if (call.method == 'writeImage') {
+            images[a['key'] as String] = a['value'] as Uint8List;
+          }
+          return null;
+        });
+    addTearDown(
+      () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(SourceDraftGateway.channel, null),
+    );
+    final old = SourceDraftGateway('owner', 'question');
+    await old.saveLocalDraft('이전 사진의 추가 설명', 0);
+    await old.loadImages();
+    await old.saveImages([
+      base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRf8AAAAASUVORK5CYII=',
+      ),
+    ]);
+    final data = SourceCatalog(
+      [
+        {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
+      ],
+      [
+        {
+          'sourceUniversityId': 'fixture',
+          'key': 'exam',
+          'dbExamId': 'exam-id',
+          'year': 2024,
+          'kind': 'admission',
+          'track': '자연계열',
+          'questions': [
+            {
+              'key': 'question',
+              'dbQuestionId': 'question-id',
+              'label': '문제 1',
+              'inputMode': 'image',
+              'accountDraftReady': false,
+            },
+          ],
+        },
+      ],
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authStateProvider.overrideWith(
+            (ref) => Stream.value(const AuthStatus('owner')),
+          ),
+          mathCatalogProvider('owner').overrideWith(
+            (ref) async => [
+              {
+                'essay_exam_id': 'exam-id',
+                'essay_question_id': 'question-id',
+                'leaf_id': 'leaf',
+              },
+            ],
+          ),
+        ],
+        child: MaterialApp(
+          home: SourceCatalogPage(
+            catalog: Future.value(data),
+            rewriteRun: {
+              'id': 'paid-run',
+              'math_session_run_id': 'paid-run',
+              'exam_id': 'exam-id',
+              'question_ids': ['question-id'],
+              'answers': [
+                {'questionId': 'question-id', 'body': '확인한 이전 전사본'},
+              ],
+            },
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('답안 작성하기'));
+    await tester.tap(find.text('답안 작성하기'));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<MathImageInput>(find.byType(MathImageInput)).values,
+      isEmpty,
+    );
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      isEmpty,
+    );
+    expect(await old.loadImages(), hasLength(1));
+    expect((await old.loadDraft()).body, '이전 사진의 추가 설명');
+    await tester.enterText(find.byType(TextField), '새 수정 풀이');
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('답안 작성하기'));
+    await tester.tap(find.text('답안 작성하기'));
+    await tester.pumpAndSettle();
+    expect(find.text('새 수정 풀이'), findsOneWidget);
+    expect(
+      tester.widget<MathImageInput>(find.byType(MathImageInput)).values,
+      isEmpty,
+    );
+  });
+  for (final math in [true, false]) {
+    testWidgets('photo correction follows canonical Math selection: $math', (
+      tester,
+    ) async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+            SourceDraftGateway.channel,
+            (_) async => null,
+          );
+      addTearDown(
+        () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMethodCallHandler(SourceDraftGateway.channel, null),
+      );
+      final data = SourceCatalog(
+        [
+          {'sourceUniversityId': 'fixture', 'name': '시험 대학'},
+        ],
+        [
+          {
+            'sourceUniversityId': 'fixture',
+            'key': 'exam',
+            'dbExamId': 'exam-id',
+            'year': 2024,
+            'kind': 'admission',
+            'track': '자연계열',
+            'questions': [
+              {
+                'key': 'question',
+                'dbQuestionId': 'question-id',
+                'label': '문제 1',
+                'inputMode': 'image',
+                'accountDraftReady': false,
+              },
+            ],
+          },
+        ],
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authStateProvider.overrideWith(
+              (ref) => Stream.value(const AuthStatus('owner')),
+            ),
+            mathCatalogProvider('owner').overrideWith(
+              (ref) async => math
+                  ? [
+                      {
+                        'essay_exam_id': 'exam-id',
+                        'essay_question_id': 'question-id',
+                        'leaf_id': 'leaf',
+                      },
+                    ]
+                  : [],
+            ),
+          ],
+          child: MaterialApp(
+            home: SourceCatalogPage(catalog: Future.value(data)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('시험 대학'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('답안 작성하기'));
+      await tester.tap(find.text('답안 작성하기'));
+      await tester.pumpAndSettle();
+      expect(find.byType(MathImageInput), math ? findsOneWidget : findsNothing);
+      expect(find.text('이미지 첨부'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+  }
   for (final scale in [1.0, 2.0]) {
     testWidgets('approved PDF browse remains available on HOLD at 360/$scale', (
       tester,

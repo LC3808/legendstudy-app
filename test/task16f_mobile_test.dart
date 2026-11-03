@@ -247,11 +247,11 @@ void main() {
       await t.enterText(find.byType(TextField), r'e^{-x}');
       await t.pumpAndSettle();
       await Scrollable.ensureVisible(
-        t.element(find.text('원본과 기호·값이 일치함을 확인했어요')),
+        t.element(find.text('원본을 대조했고 수정한 기호·값을 확인했어요')),
         alignment: 0.3,
       );
       await t.pumpAndSettle();
-      await t.tap(find.text('원본과 기호·값이 일치함을 확인했어요'));
+      await t.tap(find.text('원본을 대조했고 수정한 기호·값을 확인했어요'));
       await t.pumpAndSettle();
       await t.ensureVisible(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));
       await t.tap(find.text('모든 영역을 확인했으며 이 전사본으로 첨삭을 요청합니다.'));

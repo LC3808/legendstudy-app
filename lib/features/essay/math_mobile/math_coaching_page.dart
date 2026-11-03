@@ -125,6 +125,7 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
         builder: (_) => SourceCatalogPage(
           rewriteRun: {
             'id': sessionId,
+            'math_session_run_id': sessionId,
             'exam_id': run['exam_id'],
             'question_ids': (run['questions'] as List)
                 .map((q) => (q as Map)['question_id'])

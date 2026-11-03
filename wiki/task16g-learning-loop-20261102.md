@@ -133,3 +133,35 @@ Owner가 휴대폰 긴 비밀번호 직접 입력 대신 시뮬레이션 검증 
 Simulator 실네트워크 검증 PASS: 기존 실제 Q1/Q2 평가 재사용, 단계별 힌트1/2, 공개 취소 시 비공개 유지, 명시 공개 후 full_solution 및 History 공개 기록, 다음 무료 재작성 화면. 최초 실행에서 공개 전 disclosed=false/full_solution 없음과 공개 후 상태를 확인했다. 공개 기록을 지우지 않고 보존하며 재실행은 이미 공개된 상태를 사용한다. TEST 학습 열람 이력만 추가되었으며 새 평가·Provider 호출·차감은0이다. 비공개 증거 simulator-learning-loop-first.json과 native-captures/에 보존한다.
 
 전체 풀이의 단계 representation도 전사본과 같은 MathStudentText를 재사용하여 한글 설명을 강제로 TeX 처리하지 않도록 보완했다. 기존 History 탭은 힌트/공개 후 재조회 시 갱신됨을 회귀 테스트로 확인했으므로 별도 캐시 구조 변경은 하지 않았다. 영향 범위 위젯11검사/Analyze PASS. 표시 수정 후 Simulator 실네트워크 재실행 PASS 및 전체 풀이 화면 한글·수식 구분 확인. Wiki handoff 2110링크/11982bytes PASS. 일반 힌트의 대학별 품질, 새로운 사진부터 재첨삭까지 전체17단계, 실기기 로그인 이후 검수는 여전히 미완료다.
+
+## 2026-11-03 — 신규 사진 Simulator E2E
+
+Owner가 격리 TEST에서 신규 사진→실제 평가→무료 재첨삭→History까지 이어서 검증하도록 지시했다. 기존 7가지 보존 검토를 유지하고 새 schema/엔진/금융 시스템을 만들지 않는다. 원본 자료·이전 시도·확인 후보를 삭제하거나 덮어쓰지 않는다.
+
+검증 경계: iPhone16Pro Simulator/iOS18.6, 기존 TEST 계정 자동 로그인, 실제 Registry의 한양2024 자연 오전 Q1/Q2로 선택 목록을 제한한 Native 화면. OS 사진 선택 결과만 실제 준비 사진 bytes로 공급한다. 카메라 하드웨어/시스템 Photos 선택기 검증은 아니다. 업로드·인식·확인·평가·History는 실제 TEST 서버를 사용한다.
+
+발견·수정:
+- 시험 작성 화면이 일반 `AnswerImagesInput`만 사용하던 연결 누락: canonical Math exam/question 매칭에 한해 기존 `MathImageInput` 보정·순서 UI 재사용. 인문 사진 입력 유지, 신규 디자인 없음.
+- 준비된 입력 재진입 시 `sourceImages`가 비어 원본 대조 불가: 기존 인증 artifact 읽기로 후보 영역의 원본 재조회. 조회 실패 시 입력 확인을 진행하지 않으며 기존 요청/답안을 유지한다.
+- 인식/수정 미리보기의 한글을 강제 TeX 처리하던 부분은 기존 `MathStudentText`로 통일. 학생 수정 후 확인 문구는 원본 인식의 정확성 확정과 구별한다.
+
+사진·인식 단계 PASS. 첫 OCR Q1/Q2 13/17영역, 학생 확인 전 평가 차단. Simulator drive 재설치로 로컬 요청이 초기화되어 후속 빌드에서 OCR2회가 추가 실행됐다(합계4회). 두 번째 후보는17/18영역. 이후 runner가 TEST 저장 체크포인트·인증 원본 bytes를 복원하고, 준비 체크포인트가 있으면 신규 OCR 실행을 거절한다. 사용되지 않은 첫 시도도 삭제하지 않는다. 검수 전사 ID가 바뀐 것을 테스트가 탐지해 확인/평가 전에 중단했다.
+
+Q1 숫자·지수·그래프 교점 오인식, Q2 표의22/140→20/140 및13/140→15/140 오인식을 확인했다. 기존 검수 전사와 원본을 대조해 수정한다. Q1의 판독이 확정되지 않은 도함수/일반항은 TEST 검증자 직접 수정본임을 명시하며 원문 판독 성공으로 세지 않는다. Q2의 실제 수치 오류도 원본과 비교한 후 수정한다. 자동 OCR 품질 PASS가 아니라 오인식 확인/수정 흐름의 검증이다.
+
+### 최종 결과
+
+신규 사진→보정(회전/복원/적용)→인식→전사 수정·확정→실제 평가→결과·개념·명시 공개→수정 답안→무료 재첨삭→History 저장/재조회 Simulator PASS. 빌드 재시작 사이에는 같은 저장 요청·시도를 복원했으므로 단일 무중단 실행으로 해석하지 않는다. 원본과 개인 runner/인증 정보/원시 결과는 Git 외부 TEST 디렉터리(0600)에 보관한다.
+
+- 최초 run `a2dadaaa-5e4a-4354-8a69-dae035209ec4`: Q1/Q2 실제 AI 완료, TEST 이용권1개. Q1만 완료/Q2처리 중일 때 전체 run은 reserved로 유지됨을 관찰했다.
+- 무료 run `3aad2966-68c4-44d3-93d3-b164bdd4fb96`: Q1/Q2 실제 AI 완료, 최초 run 연결, 이용권0개·원장 거래 없음. 다음 견적1개.
+- 두 완료 요청을 동일 키/시도로 재전송해 같은 run 반환·원장 무변경. 기존 원장행/이전3run 보존, 이번 balance delta−1, 미정산 예약0. `sim-final-verification.json`에 증거 보존.
+- 실제 Provider는 이번 작업에서 OCR6회+평가4회=10회. 재설치 추가OCR2회 외에 Math 재작성의 legacy 초안 이관이 이전 사진을 복사하여 OCR2회가 더 발생했다. 확인 전 차단되어 이 미사용 시도에 평가는 실행되지 않았다. `math_session_run_id`로 Math 재작성을 식별해 legacy 자동 복사를 제외하고 새 작성/기존 자기 초안 복원을 회귀 검증했다. 미사용 시도는 보존한다.
+- 평가4회 관측 토큰은 입력25,020/출력19,743(합44,763). 최초 OCR4회 사용량은 수집하지 못해 전체 토큰·비용은 확정하지 않는다. 평가 재호출0.
+- 새 무료 결과 읽기 전용 Simulator 후속 PASS: Q1/Q2 결과·개념·History·원본, Q2 힌트1/2 표시. 이 후속 Provider/차감0. Q2는 기존 TEST 경계값 오류 샘플이며 원본 합격자 오류로 해석하지 않는다.
+
+검증: 영향 범위 Native25검사, 인문/History49검사 PASS. 신규 사진 학습 루프와 저장된 새 결과 조회 모두 Simulator 실네트워크 PASS. Analyze PASS; Wiki handoff 2,111링크/11,975bytes PASS. 실행 로그는 `/tmp/task16g-new-evaluate7.log`, `/tmp/task16g-new-history.log`; 실제 화면은 `~/.codex/legendstudy-task16g-test/native-photo-captures/`, `native-new-history-captures/`에 보존한다.
+
+남은 GAP: OCR 자체 정확도 미통과, Q1 일부 수식은 검증자 직접 수정본. 새 최초 결과 과제0개이며 Q2 오류 샘플 힌트는 일반적인 개념/조건 점검 수준이다. History 화면의 이용권 내역 미제공/미완료 시도 표시도 남아 있다(차감은 원장으로 별도 검증). 단계별 원본 영역 연결 미확정, 대학별 구체적 힌트·공식 전체 해설 품질, 혼합형 Worker 실제 E2E, APP↔WEB 실제 UI 교차 검증 및 실기기 입력 검수는 별도다. 이 PASS는 TASK16-G 전체 완료/운영 승인으로 해석하지 않는다.
+
+이번 변경은 APP 개발 브랜치와 TEST 학생 요청에 한정한다. backend 배포·schema·운영 DB/Credit/Ledger/결제·APP 릴리스 변경 없음. 기존 TEST Preview는 `https://legendstudy-task16b.pages.dev` (배포 `9ffd0510`)를 유지한다. Owner 검수 전 운영 HOLD.

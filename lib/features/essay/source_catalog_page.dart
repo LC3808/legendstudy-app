@@ -1,3 +1,4 @@
+import 'math_mobile/math_image_tools.dart';
 import '../credits/essay_credit_source.dart';
 import 'service_availability.dart';
 import 'math_gateway.dart';
@@ -715,6 +716,7 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
       var d = await g.openSharedDraft();
       var image = await g.loadImages();
       if (widget.rewriteRun != null &&
+          widget.rewriteRun!['math_session_run_id'] == null &&
           d.revision == 0 &&
           d.body.isEmpty &&
           image.isEmpty) {
@@ -802,6 +804,12 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
         body: Center(child: Text('계정이 변경됐어요. 문항을 다시 열어 주세요.')),
       );
     }
+    final mathPhoto = (ref.watch(mathCatalogProvider(widget.owner)).value ?? [])
+        .any(
+          (r) =>
+              r['essay_exam_id'] == widget.exam['dbExamId'] &&
+              r['essay_question_id'] == widget.question['dbQuestionId'],
+        );
     final c = controller;
     final pdf = QuestionPdfAsset.parse(
       widget.question['studentPdf'],
@@ -935,11 +943,17 @@ class _SourceWriterState extends ConsumerState<_SourceWriter> {
                                 ),
                           ),
                         ),
-                        child: AnswerImagesInput(
-                          values: photo,
-                          enabled: imageReady && !imageSaving,
-                          onChanged: savePhoto,
-                        ),
+                        child: mathPhoto
+                            ? MathImageInput(
+                                values: photo,
+                                enabled: imageReady && !imageSaving,
+                                onChanged: savePhoto,
+                              )
+                            : AnswerImagesInput(
+                                values: photo,
+                                enabled: imageReady && !imageSaving,
+                                onChanged: savePhoto,
+                              ),
                       ),
                       if (imageSaving)
                         const Text('사진 저장 중')

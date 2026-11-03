@@ -1,3 +1,7 @@
+## 2026-11-03 — TASK16-G 신규 사진 학습 루프
+
+Simulator 실제 사진→전사 확인/수정→Q1/Q2 실제 평가→무료 재첨삭→History PASS. TEST 최초1/무료0차감·중복 요청 무차감·기존 기록 보존. Math 사진 보정 연결/원본 재조회/재작성 legacy 사진 복사 수정, 영향25+인문·History49검사 PASS. OCR6+평가4회; OCR 정확도/일반 힌트 품질·혼합형·APP↔WEB 검증 GAP 유지. [검증 범위·증거](task16g-learning-loop-20261102.md#최종-결과). 운영 HOLD.
+
 ## 2026-11-03 — TASK16-G Simulator 전환
 
 Owner가 휴대폰 수동 비밀번호 입력 대신 Simulator 진행을 지시. 실기기 로그인 요청 중단, 기존 계정/인증 설정 유지. 저장된 실제 평가로 힌트·명시 공개·History·무료 재작성 화면 Simulator PASS. 전체 풀이 한글/수식 구분 보완, 위젯11검사 PASS. Provider/새평가/차감0; 전체 신규 제출 E2E 미완료. [범위](task16g-learning-loop-20261102.md#2026-11-03-owner--simulator로-검증-계속).

@@ -268,6 +268,18 @@ class _MathExamSessionState extends ConsumerState<MathExamSession> {
           'attempt_id': id,
         });
       }
+      // Reopening a prepared attempt must retain the original comparison UI.
+      // Reuse the authenticated artifact gateway; never invent a replacement.
+      for (final artifact
+          in (input['candidate_regions'] as List? ?? [])
+              .map((r) => (r as Map)['artifact_id'])
+              .whereType<String>()
+              .toSet()
+              .take(6)) {
+        if (!sourceImages.containsKey(artifact)) {
+          sourceImages[artifact] = await gateway.readEvidence(artifact);
+        }
+      }
       inputs[key] = input;
     }
     if (current) {

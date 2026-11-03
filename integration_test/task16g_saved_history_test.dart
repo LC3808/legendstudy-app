@@ -147,6 +147,17 @@ void main() {
             greaterThan(1000),
           );
         }
+        if (data['history_only'] == true) {
+          gateway.close();
+          binding.reportData = {
+            ...?binding.reportData,
+            'scope': 'new actual reevaluations: result, hints and History',
+            'questions': 2,
+            'providerCalls': 0,
+            'newSubmissions': 0,
+          };
+          return;
+        }
         final nextRun = await gateway.session('math_session_read', {
           'p_run': data['rewrite_run_id'],
         });

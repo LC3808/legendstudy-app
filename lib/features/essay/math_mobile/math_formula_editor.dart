@@ -45,7 +45,7 @@ class _MathFormulaEditorState extends State<MathFormulaEditor> {
       if (controller.text.isNotEmpty)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: MathText('\\[${controller.text}\\]'),
+          child: MathStudentText(controller.text),
         ),
       Wrap(
         spacing: 6,

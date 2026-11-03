@@ -101,8 +101,8 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
                         children: [
                           SingleChildScrollView(
                             padding: const EdgeInsets.all(16),
-                            child: MathText(
-                              '\\[${edits[id(region)] ?? original(region)}\\]',
+                            child: MathStudentText(
+                              edits[id(region)] ?? original(region),
                             ),
                           ),
                           MathSourceRegion(
@@ -133,7 +133,11 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
               CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 value: checked.contains(id(region)),
-                title: const Text('원본과 기호·값이 일치함을 확인했어요'),
+                title: Text(
+                  edits.containsKey(id(region))
+                      ? '원본을 대조했고 수정한 기호·값을 확인했어요'
+                      : '원본과 기호·값이 일치함을 확인했어요',
+                ),
                 onChanged:
                     widget.busy ||
                         unresolvedMath(edits[id(region)] ?? original(region))
