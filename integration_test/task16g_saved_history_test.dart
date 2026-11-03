@@ -2,6 +2,8 @@
 // Credentials arrive through a one-shot loopback runner, never Dart defines/assets.
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,6 +50,12 @@ void main() {
           expect(input['attempt']['attempt_id'] ?? input['attempt']['id'], id);
           expect((input['attempt']['typed_answer'] as String).isNotEmpty, true);
           expect(input['artifacts'], isEmpty);
+          if (data['expected_web_answers'] != null) {
+            expect(
+              input['attempt']['typed_answer'],
+              data['expected_web_answers'][id],
+            );
+          }
         }
         if (data['web_revealed_evaluation'] != null) {
           final shared = await gateway.call('math_coaching', 'read', {
@@ -58,11 +66,22 @@ void main() {
           final history = await gateway.call('math_coaching', 'history', {
             'evaluation_id': data['web_revealed_evaluation'],
           });
-          final current = (history['attempts'] as List).cast<Map<String, dynamic>>().singleWhere(
-            (a) => a['evaluation_id'] == data['web_revealed_evaluation'],
-          );
+          final current = (history['attempts'] as List)
+              .cast<Map<String, dynamic>>()
+              .singleWhere(
+                (a) => a['evaluation_id'] == data['web_revealed_evaluation'],
+              );
           expect(current['solution_revealed'], true);
           expect(current['exposed_hint_levels'], containsAll([1, 2]));
+        }
+        if (data['web_free_run_id'] != null) {
+          final free = await gateway.session('math_session_read', {
+            'p_run': data['web_free_run_id'],
+          });
+          expect(free['state'], 'completed');
+          expect(free['credits_required'], 0);
+          expect(free['parent_id'], data['run_id']);
+          expect(free['free_rewrite_available'], false);
         }
         final rows = await gateway.session('math_session_history', {});
         expect((rows['runs'] as List).length, greaterThanOrEqualTo(3));
@@ -166,10 +185,14 @@ void main() {
         }
         // Verify the original bytes over the same gateway used by History, not a public URL.
         for (final artifact in data['artifacts'] as List) {
-          expect(
-            (await gateway.readEvidence(artifact as String)).length,
-            greaterThan(1000),
-          );
+          final bytes = await gateway.readEvidence(artifact as String);
+          expect(bytes.length, greaterThan(1000));
+          if (data['artifact_sha256'] != null) {
+            expect(
+              sha256.convert(bytes).toString(),
+              data['artifact_sha256'][artifact],
+            );
+          }
         }
         if (data['history_only'] == true) {
           gateway.close();

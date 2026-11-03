@@ -41,9 +41,9 @@ class _MathRecognitionPanelState extends State<MathRecognitionPanel> {
 
   String id(Map<String, dynamic> r) => '${r['region_id'] ?? r['id']}';
   String original(Map<String, dynamic> r) =>
-      (r['normalized_math'] as String? ?? '').isNotEmpty
-      ? r['normalized_math'] as String
-      : r['raw_text'] as String? ?? '';
+      (r['raw_text'] as String? ?? '').trim().isNotEmpty
+      ? r['raw_text'] as String
+      : r['normalized_math'] as String? ?? '';
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,

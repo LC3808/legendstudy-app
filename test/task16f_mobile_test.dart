@@ -94,6 +94,9 @@ void main() {
         '이용권 1개 사용',
       );
       expect(unresolvedMath(r'e^{?}'), isTrue);
+      expect(unresolvedMath('[이하 일부 판독 불명]'), isTrue);
+      expect(unresolvedMath('[판독 불확실: x 또는 -x]'), isTrue);
+      expect(unresolvedMath('[인식 불가]'), isTrue);
       expect(unresolvedMath(r'\frac{}{}'), isTrue);
       expect(unresolvedMath(r'e^{-x}'), isFalse);
     },
@@ -353,4 +356,37 @@ void main() {
     await screenshot(t, 'history');
     expect(find.text('전체 해설 공개됨'), findsOneWidget);
   });
+  testWidgets(
+    'Q2 confirmation preserves conclusion omitted by normalized math',
+    (t) async {
+      await t.pumpWidget(
+        host(
+          Scaffold(
+            body: ListView(
+              children: [
+                MathRecognitionPanel(
+                  regions: [
+                    {
+                      'id': 'q2',
+                      'raw_text': '25<n<100 (최댓값 99, 최솟값 26)',
+                      'normalized_math': '25<n<100',
+                      'uncertain': true,
+                    },
+                  ],
+                  onConfirm: (_) async {},
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.tap(find.text('전사 내용 수정'));
+      await t.pumpAndSettle();
+      expect(
+        t.widget<TextField>(find.byType(TextField)).controller!.text,
+        contains('최댓값 99, 최솟값 26'),
+      );
+    },
+  );
 }

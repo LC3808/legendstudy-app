@@ -831,3 +831,7 @@ Owner는 `b52ab42` Simulator 신규 사진·실제 평가·무료 재첨삭·His
 ## 2026-11-03 — TASK16-H WEB 구현 승인
 
 [기존 Mobile First/H 분리](#2026-11-03--task16-g-mobile-first--task16-h-web-분리)를 계승하여 Owner가 G `bdfea00` 기준 WEB 구현을 승인했다. Academic Purple과 PC 원본/결과/개념 3열→2열→1열, 동일 Backend·공개·History·반복 첨삭 계약을 사용한다. 평가 엔진/운영 LAB/금융/APP 릴리스는 변경하지 않는다. OCR·품질·혼합형 PARTIAL 및 운영 HOLD는 유지한다. [구현·검증](task16h-web-math-ux-20261103.md).
+
+## 2026-11-03 — TASK16-I 통합 품질 검증
+
+[H 승인](#2026-11-03--task16-h-web-구현-승인)을 계승하여 Owner가 실제 APP/WEB 학습 루프·혼합형·OCR/첨삭 품질 검증을 승인했다. Academic Purple과 구조를 유지하고 새 엔진 없이 기존 TEST·공식 자료·성공 결과를 재사용한다. 실제 Provider와 이용권 결과를 분리하며 운영 DB/Auth/금융/WEB/APP 릴리스 변경 및 운영 활성화는 승인하지 않았다. [A–J 결과와 차단](task16i-integration-quality-20261103.md).

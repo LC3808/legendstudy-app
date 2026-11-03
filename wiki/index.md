@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK16-I / 수리논술 통합 품질: [실제 WEB·혼합·교차 조회·A–J 판정](task16i-integration-quality-20261103.md).
+
 TASK16-H / WEB 수리논술 UX: [구현·실제 TEST·교차 조회·미완료](task16h-web-math-ux-20261103.md).
 
 TASK16-G 품질 마감 / TASK16-H 준비: [실제 품질·혼합형 차단·공통 계약·PC UX 명세](task16g-quality-closeout-task16h-preparation-20261103.md).
