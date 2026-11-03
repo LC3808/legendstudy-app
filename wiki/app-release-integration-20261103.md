@@ -185,7 +185,7 @@ Wiki handoff/internal links PASS, current-status 약2.5KB. 옮겨진 TASK16 감�
 실제 존재하는 로컬 자료 절대 경로로 수정했으며 원문 내용·자료 파일은 변경하지 않았다.
 
 Owner 검수 재개: A의 별도 development-signed export로 지정 iPhone에 설치한 후 본문의 인증/온보딩 matrix 진행.
-Owner가 이번 설치를 보류했으므로 기기 업데이트/로그인/신규 가입/Store 메시지·업로드·재제출0.
+초기 마감 당시 설치 보류였으며 이후 후보 A 업데이트·Owner 로그인 검수는 아래 후속 기록을 따른다. Store 메시지·업로드·재제출0.
 B TEST Preview는 기존 https://legendstudy-task16b.pages.dev 를 유지하며 이번 WEB 배포0.
 
 
@@ -209,3 +209,12 @@ iPhone12ProMax provisioning 포함을 확인했다.
 
 첫 검수: Kakao 시스템 인증창 → 취소 → 재시도 → 로그인 → 창 자동 종료/홈 복귀.
 후속: 앱 재실행 세션, Google/Apple/이메일, 신규 계정 온보딩 및 MY, 기존 인문 LAB.
+
+
+### 후보 A Kakao 실기기 Owner 확인 — 2026-11-03
+
+기기 iPhone12ProMax, Release1.0.1(42). Owner 응답: “인증창 → 취소·재시도 → 로그인·홈 복귀 정상”.
+질문에 포함한 외부 Safari 대신 앱 위 인증창 표시·취소·재시도·인증창 자동 종료·홈 복귀를 **Owner 관찰 PASS**로 기록한다.
+서버 로그/녹화 독립 검증으로 표기하지 않는다. 실제 신규 가입 여부·강제 종료 후 세션 유지·Google/Apple/이메일·온보딩/MY·iPad는 아직 미검증.
+다음 확인은 앱 완전 종료 → 홈 아이콘 재실행 → MY 동일 계정 유지다.
+후보 A 전체 QA 및 Store 제출 승인을 뜻하지 않으며 후보 B/운영 베타 HOLD 유지.
