@@ -5531,3 +5531,8 @@ Owner 정식 빌드·실기기 지시에 따라 A1.0.1(42) Release 재빌드/서
 ## 2026-11-03 — 후보 A Kakao Owner 실기기 PASS
 
 iPhone12ProMax Release42에서 인증창→취소·재시도→로그인·홈 복귀 정상이라는 Owner 응답 기록. 재실행 세션·신규 가입·다른 인증/온보딩은 대기. 코드/운영 설정/Store 변경 없음. [검수 범위](app-release-integration-20261103.md#후보-a-kakao-실기기-owner-확인--2026-11-03).
+
+
+## 2026-11-03 — 후보 A 앱 재실행 세션 Owner PASS
+
+Release42/iPhone12ProMax 완전 종료·재실행 후 홈·MY 동일 계정 유지 확인. MY/온보딩 등 잔여 검수 계속. [근거](app-release-integration-20261103.md#후보-a-재실행-세션-owner-확인--2026-11-03). 코드·운영 설정·배포 변경 없음.
