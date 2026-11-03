@@ -5601,3 +5601,5 @@ A전체1365PASS/7SKIP·Analyze PASS·집중42/렌더2PASS, B집중42PASS. A46 si
 - 2026-11-03: Owner가 직접 계정을 삭제했다고 확인(에이전트 삭제 없음). 동일 코드 iOS48 signed Release 재빌드·iPhone12ProMax 설치/실행 및 설치 버전 확인, 로그인 화면 열기 요청. 신규 온보딩·닉네임 저장·재실행 실제 검수 대기. [결과](app-release-integration-20261103.md#release48-재빌드재로그인-검수--2026-11-03).
 
 - 2026-11-03: Owner A48 iPhone12ProMax “온보딩·닉네임 저장·재실행 모두 정상” 확인. 해당 흐름 Owner PASS, Provider별 인증/기타기기 및 후보B·Store는 별도. 코드/재빌드/DB 변경 없이 검수 기록 갱신. [검수 범위](app-release-integration-20261103.md#a48-온보딩닉네임-실기기-owner-pass--2026-11-03).
+
+- 2026-11-03: Owner가 A48 정상 온보딩의 로그인 방식을 선택지1(Apple)로 확인. Apple 로그인→온보딩·닉네임 저장→재실행 Owner PASS로 Provider 명시. Google 기존 검수 범위 구분 대기, 코드/환경 변경 없음. [상세](app-release-integration-20261103.md#a48-온보딩닉네임-실기기-owner-pass--2026-11-03).
