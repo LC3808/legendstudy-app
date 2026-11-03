@@ -23,11 +23,13 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 
 Owner 요청으로 원본 대조 고정230 높이를 실제 수식/본문 높이(기본96~최대320)로 조절하고 Primary 1.5px 테두리·기존 원본 전체 화면 확대 연결. 관련25PASS·Analyze/Wiki PASS, TEST53 signed Release·iPhone 설치/실행 확인(A48 보존), 대조 높이/테두리/확대 복귀 Owner PASS. 문제 원문 PDF 미연결은 별도 GAP. [B53 범위](app-candidate-b-device-web-qa-20261103.md#b53-원본-대조-높이테두리-보완--2026-11-03).
 
-[B54](app-candidate-b-device-web-qa-20261103.md#b54-답안-확인진행-표시결과-근거-정리--2026-11-03): 인문 진행 바 보라색 재사용·실제 OCR/첨삭 상태 읽기 폴링·간결한 버튼/완료 결과 연결·학생 근거 문단/수식/펼침·정상 영역 일괄 확인 구현. 불확실 영역 개별 확인/최종 동의 유지, Provider0. 전체1,418PASS/7SKIP·Analyze/Wiki PASS·TEST54 signed Release iPhone 설치/실행(A48 보존), B54 일괄 확인 무반응 Owner 보고로 아래 B55 후속 진행; 나머지 새 UI 전체 검수는 별도 대기.
+[B54](app-candidate-b-device-web-qa-20261103.md#b54-답안-확인진행-표시결과-근거-정리--2026-11-03): 인문 진행 바 보라색 재사용·실제 OCR/첨삭 상태 읽기 폴링·간결한 버튼/완료 결과 연결·학생 근거 문단/수식/펼침·정상 영역 일괄 확인 구현. 불확실 영역 개별 확인/최종 동의 유지, Provider0. 전체1,418PASS/7SKIP·Analyze/Wiki PASS·TEST54 signed Release iPhone 설치/실행(A48 보존), B54 일괄 확인 무반응 Owner 보고로 아래 B55 후속 진행; 긴 답안 근거 펼침/접기·문단/수식 가독성은 아래 B56에서 Owner PASS; 처리 중 진행 바 실기기 확인은 별도.
 
 [B55](app-candidate-b-device-web-qa-20261103.md#b55-일괄-확인-동작필수-영역-번호--2026-11-03): 일괄 확인 가능0개에서도 실행 결과·필수 번호 표시, 미식별 수정/기호·값 대조 구분, 번호 이동/복귀·남은 개수 갱신·반복 클릭 체크 보존. 관련24PASS(저장 한양대 재현 포함)·Analyze/Wiki PASS, TEST55 signed Release iPhone 설치·실행(A48 보존). 불확실 영역 개별 확인/최종 동의 유지·Provider0. Owner가 일괄 체크 의도 불일치를 정정함. 아래 B56이 최신 요구다.
 
 [B56](app-candidate-b-device-web-qa-20261103.md#b56-owner-정정전체-내용-체크--2026-11-03): Owner 정정에 따라 읽힌 모든 영역(uncertain 표시 포함)을 한 번에 체크하고 미인식/빈 영역만 제외·번호 안내. 모두 읽혔으면 최종 체크 및 답안 입력 완료 활성화, 자동 저장/평가 없음. 관련25PASS·Analyze/Wiki PASS·TEST56 signed Release iPhone 설치 확인(A48 보존). Owner iPhone12ProMax “확인 완료 pass”: 전체 체크·미인식 부분 안내·완료 활성화 요청 범위 실기기 PASS. 신규 평가/전체 루프·OCR 정확도/출시 승인은 별도.
+
+[답안 근거 가독성 Owner PASS](app-candidate-b-device-web-qa-20261103.md#b56-답안-근거-가독성-owner-pass점진-개선-확정): TEST56 Q1 근거 전체 보기→끝까지 읽기→접기·문단/수식 구분·개선 과제 복귀 확인. 현재 표시 구조로 이 부분 검수 마감, 추가 데이터 축적에 따른 점진 개선 확정. OCR/평가 품질·실기기 전체 루프/진행 바·출시 판정은 별도.
 
 B51 일반 LAB 복귀 시 한양대 `서비스 확인 중` 정체: 두 상태조회 API가 TEST gate에서 HTML401을 반환함을 확인. TEST WEB `8939034`/Pages `626fa92d`로 정확한 인증 GET 경로만 연결, 실제 두 조회200·익명/잘못된 JWT 거절·환경 설정 보존 확인. Native 실패 자동 재시도 대신 기존 오류/재시도 표시, 관련29PASS·WEB31PASS·Analyze/type/build PASS. TEST52 signed Release·iPhone 설치/실행 확인(A48 보존), 일반 LAB→한양대→기존 Q2 결과 조회 Owner PASS. 제출 버튼 간격·동작도 Owner PASS, 단독 입력 화면 문제 원문 표시 연결은 보완 필요. [상세](app-candidate-b-device-web-qa-20261103.md#b51-lab-대학-진입-실패test-연결-수정--2026-11-03).
 
