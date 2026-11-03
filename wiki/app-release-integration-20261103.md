@@ -248,3 +248,23 @@ iPhone12ProMax Release1.0.1(42), 기존 이메일 계정으로 로그아웃→�
 ### 후보 A 이메일 세션·오입력 재시도 Owner 확인 — 2026-11-03
 
 iPhone12ProMax Release1.0.1(42), 이메일 로그인 후 앱 완전 종료/재실행 시 동일 계정 유지, 로그아웃 후 비밀번호 1회 오입력 시 로그인 차단·오류 안내, 올바른 비밀번호 재시도를 요청했다. Owner 응답 “세션 유지·오류 안내·정상 재시도 모두 확인”에 따라 해당 흐름을 **Owner 관찰 PASS**로 기록한다. 신규 이메일 가입·비밀번호 재설정·장시간 토큰 갱신·rate limit 검증으로 확대하지 않는다. 다음 검수는 기존 Google/Apple 계정의 취소·재시도·로그인·홈/MY 확인이다. 비밀번호/계정 원문 수집, 코드·운영 설정·Store 변경 없음.
+
+
+## Apple 신규 온보딩 학교 단계 이탈 보고 — 2026-11-03
+
+Owner는 Google/Apple 질문에 “1) 정상, 애플로그인 새로 가입으로 온보딩 '학교 입력' 했는데, 학교 검색 누르고 나니까 그냥 화면이 넘어가버리네?”라고 보고했다. Apple 인증 후 신규 온보딩 진입은 관찰됐으나 학교 단계는 **FAIL(Owner 보고)/원인 조사 중**이다. “1) 정상”만으로 Google·Apple 각각의 모든 취소/재시도 흐름을 PASS 처리하지 않는다. 기존 MY 검색 PASS는 신규 온보딩 PASS가 아니다. 학교 누락 통계 전체의 원인이 이 사건이라고 단정하지 않는다.
+
+### 재현·방어 수정
+
+- 검색 자체는 `_search`에서 탐색/저장을 호출하지 않는다. router도 현재 `/onboarding`을 profile 갱신으로 이동시키지 않는다.
+- 검색어 입력 후 학교를 확정하지 않아도 하단 `다음`이 활성되어 다음 단계로 이동하는 경로를 실패 테스트로 재현했다. 이는 검색 버튼 자체 이동과 동일한 재현이라고 주장하지 않는다.
+- 공용 picker에 선택적 pending callback 추가. 온보딩만 이를 사용해 검색어 입력·검색 중·빈 결과·검색 오류에서 앞으로 이동을 차단한다. 결과 임시 선택 후 기존 학교명 확인 CTA로 저장한다.
+- 미입력/입력 삭제 시 선택 정보 없이 진행 및 명시적 건너뛰기 정책 유지. 이전 이동·계정 변경 시 pending 초기화. MY 저장/API 계약 변경 없음.
+- 새 테스트: 미확정 검색어 이동 차단(수정 전 FAIL), pending/빈 결과 및 명시적 skip, iPhone428×926/keyboard336 조건의 키보드 검색·화면 검색 버튼 후 확인 전 저장0/학교 단계 유지.
+- 전체1359PASS/7SKIP(추가 화면 버튼 테스트 이전 실행), 최종 집중30PASS, Analyze PASS. 화면 버튼 테스트 최초 실패는 lazy ListView에서 스크롤된 제목을 조회한 테스트 문제였으며 viewport 복원 후 확인하도록 정정했다. 실제 검색 버튼에 의한 단계 이탈은 자동 검사에서 미재현.
+- 로그 `/tmp/app-review-school-{repro,focused-final,full,analyze}.log`. 신규 회원 생성/기존 profile 초기화/운영 SQL 없이 fake repository widget 검사.
+- Owner에게 이동 목적지(홈/다음 온보딩/검색창 닫힘)와 검색어 입력·선택 여부를 질문했다. 답변 및 수정본 실기기 검수 전 incident 해결 PASS 금지. Release 수정본 준비, Store HOLD.
+
+### 보존 검토
+
+기존 [상위 전략](longitudinal-learning-admissions-data-strategy.md#preservation-and-architecture-review) 및 V2 정책 유지: (1) 새 시점/사실 수집 없음, (2) 기존 답안·학습 원본 불변, (3) UI 임시 상태만 추가하며 프로필 UPDATE payload/history 변경 없음, (4) 기존 owner guard 유지, (5) 자기보고 프로필을 학습/입시 결과와 합치지 않음, (6) 새 개인정보/권한/retention 없음, (7) 미설정 학교 추정·backfill 및 미확정 결과 자동 저장 없음.

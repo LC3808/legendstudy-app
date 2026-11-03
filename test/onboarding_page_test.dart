@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -93,6 +95,12 @@ class _OneSchool implements SchoolRepository {
       _fixtureSchool;
   @override
   Future<List<Meal>> meals(School school, String date) async => const [];
+}
+
+class _PendingSchool extends _OneSchool {
+  final result = Completer<List<School>>();
+  @override
+  Future<List<School>> search(String query) => result.future;
 }
 
 Future<GoRouter> _mount(
@@ -384,6 +392,102 @@ void main() {
     expect(repo.upserts, 1);
     expect(router.routeInformationProvider.value.uri.path, '/onboarding');
   });
+  testWidgets('school query cannot advance before result confirmation', (
+    tester,
+  ) async {
+    final (repo, _) = await toSchoolStep(tester, schools: _NoSchools());
+    await tester.tap(find.text('2학년'));
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(repo.schoolWrites, 0);
+    expect(repo.completed, isFalse);
+  });
+
+  testWidgets('pending and empty school search never advance or save', (
+    tester,
+  ) async {
+    final schools = _PendingSchool();
+    final (repo, _) = await toSchoolStep(tester, schools: schools);
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.tap(find.widgetWithText(OutlinedButton, '검색'));
+    await tester.pump();
+    await tester.tap(find.text('다음'));
+    await tester.pump();
+    expect(find.text('학년과 학교'), findsOneWidget);
+    schools.result.complete(const []);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('다음'));
+    await tester.pumpAndSettle();
+    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(repo.schoolWrites, 0);
+    expect(repo.completed, isFalse);
+    // Optional profile remains optional via the explicit skip action.
+    await tester.tap(find.text('건너뛰기'));
+    await tester.pumpAndSettle();
+    expect(repo.completed, isTrue);
+    expect(repo.schoolWrites, 0);
+  });
+
+  testWidgets(
+    'iPhone keyboard search stays until explicit school confirmation',
+    (tester) async {
+      final (repo, _) = await toSchoolStep(tester, schools: _OneSchool());
+      tester.view.physicalSize = const Size(428, 926);
+      tester.view.viewInsets = const FakeViewPadding(bottom: 336);
+      addTearDown(tester.view.resetViewInsets);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.byType(TextField));
+      await tester.enterText(find.byType(TextField), '레전드');
+      await tester.pumpAndSettle();
+      await tester.testTextInput.receiveAction(TextInputAction.search);
+      await tester.pumpAndSettle();
+      tester.view.viewInsets = const FakeViewPadding();
+      await tester.pumpAndSettle();
+      expect(find.text('학년과 학교'), findsOneWidget);
+      expect(repo.schoolWrites, 0);
+      expect(repo.completed, isFalse);
+      expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
+      await tester.tap(find.text('레전드고등학교로 설정하기'));
+      await tester.pumpAndSettle();
+      expect(repo.schoolWrites, 1);
+      expect(find.text('관심 있는 대학을 선택해 주세요'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('iPhone on-screen search button never advances school step', (
+    tester,
+  ) async {
+    final (repo, _) = await toSchoolStep(tester, schools: _OneSchool());
+    tester.view.physicalSize = const Size(428, 926);
+    tester.view.viewInsets = const FakeViewPadding(bottom: 336);
+    addTearDown(tester.view.resetViewInsets);
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byType(TextField));
+    await tester.enterText(find.byType(TextField), '레전드');
+    await tester.pumpAndSettle();
+    final search = find.widgetWithText(OutlinedButton, '검색');
+    await tester.ensureVisible(search);
+    await tester.pumpAndSettle();
+    await tester.tap(search);
+    await tester.pumpAndSettle();
+    tester.view.viewInsets = const FakeViewPadding();
+    await tester.pumpAndSettle();
+    tester
+        .state<ScrollableState>(find.byType(Scrollable).first)
+        .position
+        .jumpTo(0);
+    await tester.pumpAndSettle();
+    expect(find.text('학년과 학교'), findsOneWidget);
+    expect(find.text('레전드고등학교로 설정하기'), findsOneWidget);
+    expect(repo.schoolWrites, 0);
+    expect(repo.completed, isFalse);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('skip saves chosen status and grade but never temporary school', (
     tester,
   ) async {

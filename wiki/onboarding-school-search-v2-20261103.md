@@ -225,3 +225,8 @@ Owner가 Claude의 d00ec696 리뷰를 확인한 후 승인한 세 가지 보완�
 - 학교 pair repository/API/NEIS 검색 정책/플랫폼·의존성·버전 파일 변경 없음.
 - 실제 운영 회원 데이터 읽기/쓰기 없이 fake repository 및 기존 transport tests 검증.
   앱 강제종료 후 실계정 복원은 PARTIAL: Owner 검수 항목이다.
+
+
+## Release42 실기기 학교 단계 이탈 후속
+
+2026-11-03 Owner Apple 신규 가입 검수에서 학교 검색 후 이탈 보고. 기존 자동/MY PASS를 신규 온보딩 PASS로 확대하지 않는다. [릴리스 후보의 재현·방어 수정·남은 확인](app-release-integration-20261103.md#apple-신규-온보딩-학교-단계-이탈-보고--2026-11-03)을 우선한다. 검색어 미확정 상태는 다음 진행을 차단하고 명시적 건너뛰기는 유지한다. 실제 이탈 원인은 조사 중이다.

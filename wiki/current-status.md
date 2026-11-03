@@ -13,6 +13,10 @@ APP41 소스/IPA/기존 작업 폴더 미커밋 Xcode 설정 보존. 별도 `cod
 - TEST Auth: email만 활성; Kakao/Google/Apple 비활성. 운영 Auth 설정 변경 없음. Owner 후속 지시로 A42 Release 설치·실행 및 Kakao 기본 흐름 검수 완료. B 실기기 검수 대기.
 - 베타 종료 2026-11-11 00:00 KST, 하루1회/이월 없음/사이클당 재첨삭1회·14일 정책 유지.
 
+## P0 실기기 신규 발견
+
+Apple 신규 가입 후 학교 검색을 누르자 학교 확정 없이 화면 이동했다는 Owner 보고. 신규 온보딩 FAIL/원인 조사 중. 미확정 검색어의 다음 이동 경로는 재현·방어 수정; 전체1359PASS/7SKIP·최종집중30PASS·Analyze PASS. 검색 버튼 자체 이동은 미재현, 이동 목적지 답변·수정본 실기기 재검수 대기. 기존 MY 검색 PASS와 구분. [상세](app-release-integration-20261103.md#apple-신규-온보딩-학교-단계-이탈-보고--2026-11-03).
+
 ## 재개 경로
 
 1. [Kakao 구현·검수 항목](kakao-ios-system-auth-20261103.md), [온보딩 V2](onboarding-v2-final-integration-20261103.md).

@@ -12,9 +12,13 @@ class SchoolSearchPicker extends ConsumerStatefulWidget {
     super.key,
     required this.onChanged,
     this.enabled = true,
+    this.onSearchPendingChanged,
   });
   final ValueChanged<School?> onChanged;
   final bool enabled;
+
+  /// An entered query must be resolved before the parent can confirm a school.
+  final ValueChanged<bool>? onSearchPendingChanged;
   @override
   ConsumerState<SchoolSearchPicker> createState() => _SchoolSearchPickerState();
 }
@@ -57,6 +61,7 @@ class _SchoolSearchPickerState extends ConsumerState<SchoolSearchPicker> {
       _loading = _searched = _failed = false;
     });
     widget.onChanged(null);
+    widget.onSearchPendingChanged?.call(_input.text.trim().isNotEmpty);
   }
 
   Future<void> _search() async {
@@ -72,6 +77,7 @@ class _SchoolSearchPickerState extends ConsumerState<SchoolSearchPicker> {
       _schools = [];
     });
     widget.onChanged(null);
+    widget.onSearchPendingChanged?.call(true);
     try {
       // Use the existing repository/API; no persistent catalogue or new endpoint.
       final schools = await ref.read(schoolRepositoryProvider).search(query);
@@ -82,6 +88,7 @@ class _SchoolSearchPickerState extends ConsumerState<SchoolSearchPicker> {
         _searched = true;
       });
       widget.onChanged(_selected);
+      widget.onSearchPendingChanged?.call(_selected == null);
     } catch (_) {
       if (!mounted || generation != _generation) return;
       setState(() {

@@ -5561,3 +5561,8 @@ Release42/iPhone12ProMax 기존 이메일 로그인·홈·MY 정상 응답 기�
 ## 2026-11-03 — 후보 A 이메일 세션·오입력 재시도 Owner PASS
 
 Release42/iPhone12ProMax 재실행 동일 계정·잘못된 비밀번호 차단/오류 안내·정상 비밀번호 재시도 확인. [근거](app-release-integration-20261103.md#후보-a-이메일-세션오입력-재시도-owner-확인--2026-11-03). Google/Apple 등 잔여 검수 및 Store HOLD 유지.
+
+
+## 2026-11-03 — 신규 Apple 온보딩 학교 이탈 P0
+
+Owner 신규 온보딩 학교 검색 후 화면 이동 보고. 검색어 미확정 상태의 다음 이동은 재현 후 차단; 검색 버튼 자체 이탈은 미재현. 전체1359PASS/7SKIP·집중30PASS·Analyze PASS. [범위·미해결](app-release-integration-20261103.md#apple-신규-온보딩-학교-단계-이탈-보고--2026-11-03). 운영 수정/Store 제출 없음.
