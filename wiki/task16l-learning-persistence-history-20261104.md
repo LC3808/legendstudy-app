@@ -88,3 +88,6 @@ SQL 후보: `supabase/candidates/task16l_learning_persistence/`. 운영 DB/WEB �
 읽기 전용 Native 캡처(원본/학생 비공개 자료는 Git 미추가): `/Users/woojinchang/.codex/legendstudy-task16l-test/native-captures/mixed-revision-learning.png`, `mixed-revision-history.png`.
 
 검증 스크립트: `tool/test_task16l_learning.py`, `integration_test/task16l_history_test.dart`; 수학/인문 Provider 성공 사례를 이 테스트의 전체 PASS로 재분류하지 않는다.
+
+## Git 인계
+APP/SQL/검증 구현 커밋 `9d29f3b`, WEB/Worker 구현 커밋 `5375334`. 기존 개발 브랜치에 커밋·푸시하며 운영 릴리스 브랜치/APP58 산출물은 보존한다. 이 문서의 후속 문서 커밋은 소스 변경과 구분한다.
