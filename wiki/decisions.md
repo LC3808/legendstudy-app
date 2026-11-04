@@ -957,3 +957,9 @@ Owner는 [기존 종합 수치 금지](final-feedback-ux-refinement-20261031.md)
 
 ## 2026-11-04 — TASK16-L 학습 완성도 저장·비교
 [기존 5단계 정책](learning-completeness-policy-20261104.md)을 새 평가 저장·History까지 연결한다. 과거 소급 생성 금지, 같은 공식 기준/정책의 실제 최초·재첨삭 관계만 비교. 관리자 전면 UI는 후속. [검증·운영 승인 경계](task16l-learning-persistence-history-20261104.md).
+
+## 2026-11-04 — 인기 게시글 PDF 다운로드 시범
+
+기존 [무료 Guest 자료 열람](product-scope.md#core-content-experience)과 [자료 Viewer](day-9-c-resource-detail.md)를 계승하여 후속 APP에 파일별 다운로드를 추가한다. 제공순위18게시글 우선·추가2개 실제 순위 확인, 파일별 ALLOWED/VIEW_ONLY/OFFICIAL_LINK/PENDING, 기본 차단. 기관 무응답은 허가가 아니며 정확한 권리 근거·Owner 파일별 승인과 서버 검증 필요. 다운로드 무료·로그인/이용권 강제 없음, 학습엔진 분리. APP58 보존, 운영 DB/배포·스토어 제출은 별도 승인. [TASK18 상세](task18-popular-pdf-20261104.md).
+
+TASK18 후속 Owner 정정: “18개만해”. 대상은 조사한18게시글로 최종 확정하고 추가2개 선정은 하지 않는다. 권리·운영 승인 경계는 그대로 유지한다.

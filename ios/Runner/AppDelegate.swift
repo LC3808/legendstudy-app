@@ -7,8 +7,31 @@ import Darwin
 import UserNotifications
 
 @main
-@objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
+@objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate, UIDocumentPickerDelegate {
   private let kakaoWebAuth = KakaoWebAuthSession()
+  private var pdfReply: FlutterResult?
+  private var pdfFolder: URL?
+  private var pdfBytes: Data?
+
+  private func finishPdf(_ value: Any) {
+    let reply = pdfReply
+    if let folder = pdfFolder { try? FileManager.default.removeItem(at: folder) }
+    pdfReply = nil; pdfFolder = nil; pdfBytes = nil
+    reply?(value)
+  }
+  func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) { finishPdf(false) }
+  func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    guard let url = urls.first, let expected = pdfBytes else {
+      finishPdf(FlutterError(code: "SAVE_FAILED", message: "Unable to verify saved PDF", details: nil)); return
+    }
+    let scoped = url.startAccessingSecurityScopedResource()
+    defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+    do {
+      guard try Data(contentsOf: url) == expected else { throw NSError(domain: "PdfSave", code: 1) }
+      finishPdf(true)
+    } catch { finishPdf(FlutterError(code: "SAVE_FAILED", message: "Unable to verify saved PDF", details: nil)) }
+  }
+
   private let processClockIdentity = "process:" + UUID().uuidString
 
   override func application(
@@ -65,6 +88,30 @@ import UserNotifications
           DispatchQueue.main.async { result(FlutterError(code: "OCR_FAILED", message: "Unable to recognize image", details: nil)) }
         }
       }
+    }
+    let pdfChannel = FlutterMethodChannel(name: "com.legendstudy.app/pdf-download", binaryMessenger: binaryMessenger)
+    pdfChannel.setMethodCallHandler { [weak self] call, result in
+      guard let self = self else { return }
+      guard call.method == "save" else { result(FlutterMethodNotImplemented); return }
+      guard self.pdfReply == nil else { result(FlutterError(code: "BUSY", message: "A save is in progress", details: nil)); return }
+      guard let args = call.arguments as? [String: Any], let data = (args["bytes"] as? FlutterStandardTypedData)?.data,
+            let name = args["name"] as? String, name.range(of: "^[a-zA-Z0-9가-힣_() .-]{1,150}\\.pdf$", options: .regularExpression) != nil,
+            data.count >= 5, data.count <= 33554432, data.prefix(5) == Data("%PDF-".utf8) else {
+        result(FlutterError(code: "INVALID_PDF", message: "Invalid PDF", details: nil)); return
+      }
+      self.pdfReply = result; self.pdfBytes = data
+      do {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("pdf-download-" + UUID().uuidString, isDirectory: true)
+        self.pdfFolder = folder
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let file = folder.appendingPathComponent(name)
+        try data.write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+        guard var presenter = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).flatMap({ $0.windows }).first(where: { $0.isKeyWindow })?.rootViewController else { throw NSError(domain: "PdfSave", code: 2) }
+        while let current = presenter.presentedViewController { presenter = current }
+        let picker = UIDocumentPickerViewController(forExporting: [file], asCopy: true)
+        picker.delegate = self
+        presenter.present(picker, animated: true)
+      } catch { self.finishPdf(FlutterError(code: "SAVE_FAILED", message: "Unable to save PDF", details: nil)) }
     }
     let export = FlutterMethodChannel(name: "com.legendstudy.app/export", binaryMessenger: binaryMessenger)
     export.setMethodCallHandler { call, result in

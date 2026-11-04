@@ -210,3 +210,7 @@ Owner 후속 작업:
 ## TASK08 aggregation candidate correction
 
 Modern exam-level scope, KRW revenue/refund and separate Credit recovery, USD ACTUAL/ESTIMATED/UNKNOWN corrected and tested in isolation; no production apply. [Details and remaining gates](essay-beta-integration-task08-20261101.md).
+
+## TASK18 후속 PDF 다운로드 후보
+
+기존 계약을 유지한 [TASK18 구현·검증·공개 게이트](task18-popular-pdf-20261104.md). 운영 다운로드 미개방, 실제 GA4 수신 미검증.

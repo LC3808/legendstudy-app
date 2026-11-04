@@ -840,3 +840,7 @@ registered identities covered by mapping/inventory validation. Not a claim that 
 PDFs were individually opened. Earlier2026PASS preserved. No additional onboarding/splash,
 listening,Store or payment acceptance inferred. Code unchanged;existing Analyze56tests and
 signed build results reused. Public HOLD;no new purchase/Provider/Credit/DB operation.
+
+## TASK18 후속 PDF 다운로드 후보
+
+기존 계약을 유지한 [TASK18 구현·검증·공개 게이트](task18-popular-pdf-20261104.md). 운영 다운로드 미개방, 실제 GA4 수신 미검증.

@@ -18,6 +18,10 @@ String analyticsPlatform() {
 /// platform is a parameter. These are behaviour events — official completion,
 /// credit and revenue counts come from PostgreSQL, not from these.
 abstract final class AnalyticsEvents {
+  static const pdfDownloadClick = 'pdf_download_click';
+  static const pdfDownloadSuccess = 'pdf_download_success';
+  static const pdfDownloadFailure = 'pdf_download_failure';
+  static const pdfDownloadCancel = 'pdf_download_cancel';
   // App / auth
   static const appOpen = 'app_open';
   static const signUp = 'sign_up';

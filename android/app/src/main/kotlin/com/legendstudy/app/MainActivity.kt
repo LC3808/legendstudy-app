@@ -10,11 +10,41 @@ import java.io.File
 import java.util.UUID
 
 class MainActivity : FlutterActivity() {
+    private var pdfBytes: ByteArray? = null
+    private var pdfResult: MethodChannel.Result? = null
+    private fun finishPdfSave(resultCode: Int, data: android.content.Intent?) {
+        val reply = pdfResult ?: return
+        val bytes = pdfBytes
+        pdfResult = null; pdfBytes = null
+        val uri = data?.data
+        if (resultCode != RESULT_OK || uri == null || bytes == null) { reply.success(false); return }
+        Thread {
+            try {
+                checkNotNull(contentResolver.openOutputStream(uri, "wt")).use { it.write(bytes); it.flush() }
+                val digest = java.security.MessageDigest.getInstance("SHA-256")
+                checkNotNull(contentResolver.openInputStream(uri)).use { input ->
+                    val buffer = ByteArray(8192)
+                    var count = 0
+                    while (true) {
+                        val n = input.read(buffer); if (n < 0) break
+                        count += n; check(count <= bytes.size); digest.update(buffer, 0, n)
+                    }
+                    check(count == bytes.size)
+                }
+                check(digest.digest().contentEquals(java.security.MessageDigest.getInstance("SHA-256").digest(bytes)))
+                runOnUiThread { reply.success(true) }
+            } catch (_: Exception) {
+                try { android.provider.DocumentsContract.deleteDocument(contentResolver, uri) } catch (_: Exception) { }
+                runOnUiThread { reply.error("SAVE_FAILED", "Unable to save PDF", null) }
+            }
+        }.start()
+    }
     private var exportBytes: ByteArray? = null
     private var exportResult: MethodChannel.Result? = null
     @Deprecated("Android activity result callback")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 9262) { finishPdfSave(resultCode, data); return }
         if (requestCode != 9261) return
         val reply = exportResult ?: return
         val bytes = exportBytes
@@ -38,6 +68,22 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         AnswerOcrBridge(flutterEngine.dartExecutor.binaryMessenger)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/pdf-download").setMethodCallHandler { call, result ->
+            if (call.method != "save") { result.notImplemented(); return@setMethodCallHandler }
+            if (pdfResult != null) { result.error("BUSY", "A save is in progress", null); return@setMethodCallHandler }
+            try {
+                val args = call.arguments as Map<*, *>
+                val bytes = args["bytes"] as ByteArray
+                val name = args["name"] as String
+                require(bytes.size in 5..33554432 && String(bytes.copyOfRange(0, 5), Charsets.US_ASCII) == "%PDF-")
+                require(name.matches(Regex("[a-zA-Z0-9가-힣_() .-]{1,150}\\.pdf")))
+                pdfBytes = bytes; pdfResult = result
+                startActivityForResult(android.content.Intent(android.content.Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(android.content.Intent.CATEGORY_OPENABLE); type = "application/pdf"
+                    putExtra(android.content.Intent.EXTRA_TITLE, name)
+                }, 9262)
+            } catch (_: Exception) { pdfBytes = null; pdfResult = null; result.error("SAVE_FAILED", "Unable to save PDF", null) }
+        }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.legendstudy.app/export").setMethodCallHandler { call, result ->
             if (call.method != "save") { result.notImplemented(); return@setMethodCallHandler }
             if (exportResult != null) { result.error("BUSY", "A save is in progress", null); return@setMethodCallHandler }

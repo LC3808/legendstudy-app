@@ -1,12 +1,12 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
+[TASK18 PDF Pilot](task18-popular-pdf-20261104.md): 18게시글/846첨부 Registry 연결·전체PENDING. Owner18개 확정. 전체1505PASS/7SKIP·양OS빌드PASS, 권리·실기기·GA4·운영승인 대기. APP58 보존.
+
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL
 [실제 검증·품질 P0](task16m-evaluation-finalization-20261104.md): 신규 수리5→4/혼합4→4 저장·비교·History 및 WEB RPC↔Simulator 4결과 PASS. 수리 동일 표준화 표현의 판정 중요도 불일치 발견, 품질 마감 불가. 과거 INVALID_OUTPUT 원본 부재로 실제 원인 미확정; 검증 유지·고정 진단 보완. TEST 이용권 이전1+승인추가1 사용/무료0/예약0·과거27평가29원장 해시 동일. WEB260PASS/1SKIP·TypeScript·Simulator PASS, 실기기/새 WEB UI E2E 미검증. Math12호출162,026토큰, 비용/동일입력 절감률 미확인. TEST6b25e1bf/WEB432ab37, 운영·APP58 변경0. [이전L](task16l-learning-persistence-history-20261104.md).
 
-## 최신 평가 품질 검증 — 2026-11-04
-[실제 TEST 품질 마감](task16-evaluation-quality-closeout-20261104.md): 최초 확정 전사10영역이 있었으나 candidate-3가 미제출로 오판한 원인 확인. 기존 수정으로 새 최초 Provider7단계 정상 평가. 최종값8/9→9/8 대조군의 허위 정답을 발견하고 독립 검산 거절·candidate-5 계산오류 분류 재검증. 실제7호출/65,884토큰, 비용 미확인. 5단계 생성/독립 검토 성공하나 저장·History·비교 미연결. Math147/인문21 회귀 PASS. 중앙 공식 Q2 새 실평가·저장 E2E·후속 실기기 미완료. 운영 변경0, TEST 기존 배포 복원, 전체 PARTIAL. 아래는 기존 연결/검수 이력이며 최신 판정은 이 문서를 따른다.
-
+[기존 평가 품질 체크포인트](history/task18-input-quality-checkpoint-20261104.md) 보존.
 
 ## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 

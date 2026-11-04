@@ -7,3 +7,7 @@ verify_jwt = false
 # No claim of gateway invocation/DB-cost DoS protection (Owner-accepted MVP risk).
 [functions.resource-resolver]
 verify_jwt = false
+
+# TASK18 candidate, not deployed. Same public Guest access, independent policy gate.
+[functions.resource-download]
+verify_jwt = false

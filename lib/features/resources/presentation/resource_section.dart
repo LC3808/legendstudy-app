@@ -1,3 +1,5 @@
+import 'pdf_download_action.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -109,6 +111,30 @@ class ResourceSection extends ConsumerWidget {
                                         true &&
                                     item.sourceLabel != item.displayTitle)
                                   Text(item.sourceLabel!),
+                                if (const {
+                                  '1700',
+                                  '1574',
+                                  '1649',
+                                  '1706',
+                                  '1710',
+                                  '1509',
+                                  '1618',
+                                  '1487',
+                                  '1686',
+                                  '1516',
+                                  '1634',
+                                  '1507',
+                                  '1501',
+                                  '1525',
+                                  '1483',
+                                  '1665',
+                                  '1485',
+                                  '1435',
+                                }.contains(
+                                  Uri.tryParse(contentSourceUrl)?.path
+                                      .replaceAll('/', ''),
+                                ))
+                                  PdfDownloadAction(resourceId: item.id),
                                 _ResourceDeliveryActions(
                                   key: ValueKey(item.id),
                                   contentSlug: contentSlug,
