@@ -1,6 +1,6 @@
 # WEB Toss LIVE + fixed reviewer TEST — 2026-11-04
 
-Status: IMPLEMENTED candidate / isolated TEST_VERIFIED; Production NOT_APPLIED; LIVE_VERIFIED NO.
+Status: IMPLEMENTED candidate / isolated TEST_VERIFIED; Production prepare APPLIED (20261104021443), activation NOT_APPLIED; LIVE_VERIFIED NO.
 
 Owner approved WEB LIVE activation; review@ remains TEST. Unexpected DB changes must be reported first. Existing payment_order selects one global mode; payment_process rejects any order of another mode. Therefore Cloudflare-only activation cannot satisfy the requested coexistence.
 
@@ -21,13 +21,13 @@ No Order/Payment/Credit/Ledger schema or row changes. Existing TEST creation rem
 
 ## Evidence and open gates
 
-Production read-only: configuration TEST;18 TEST orders (9 PAID/TEST_RECORDED,9 ORDER_CREATED),TEST grants0,LIVE0. Confirmed reviewer UID verified. Current Cloudflare deployment `1e842209-74a6-478c-846c-ebea8779fcf4`, source metadata `0e735c6fbf74d3351cbb8eca9915b1c650c37251`; mode REVIEW/enabled true. TEST keys/Finance registered; LIVE keys and PAYMENT_SUPPORT_SUBJECTS absent at initial audit. Existing support-cancel API therefore needs an explicitly authorized operator allowlist before operational refund acceptance. The source metadata SHA is absent from the current local/origin Git object set; establish current worker/source preservation before deployment.
+Production read-only: configuration TEST;18 TEST orders (9 PAID/TEST_RECORDED,9 ORDER_CREATED),TEST grants0,LIVE0. Confirmed reviewer UID verified. Current Cloudflare deployment `1e842209-74a6-478c-846c-ebea8779fcf4`, source metadata `0e735c6fbf74d3351cbb8eca9915b1c650c37251`; mode REVIEW/enabled true. TEST keys/Finance registered; LIVE keys and PAYMENT_SUPPORT_SUBJECTS absent at initial audit. Existing support-cancel API therefore needs an explicitly authorized operator allowlist before operational refund acceptance. The current source was located in /tmp/legendstudy-feedback-web-20261104 and integrated; preserve other API inputs and unrelated static assets.
 
 Local WEB1563 tests PASS (4 skipped), final admin/payment201 tests PASS; typecheck/build/lint PASS. Disposable PostgreSQL runs existing payment and Math regressions and added21 checks in [validation.json](validation.json): fixed identity, email changes, recreated email, TEST+0, LIVE3 grant once, duplicate confirmations/cancellations, legacy TEST recovery, private ACL, historical order preservation. No remote provider calls or Production DB writes. Run `python tool/test_payment_live_activation.py --pg-bin /opt/homebrew/opt/postgresql@17/bin` with psycopg installed. Local Auth shim is not hosted Auth E2E.
 
 Admin UI already distinguishes mode per transaction and TEST amounts are explicitly not revenue. Existing analytics parser requires LIVE/KRW. Production admin_payment_orders still has a historical hard-coded LIVE_OFF runtime label. The WEB candidate now reads the actual payment runtime for status and labels historical mode as recorded order environment; per-order TEST/LIVE reporting stays unchanged.
 
-Missing: Owner DB approval, LIVE keys/merchant approval, current deployment-source preservation, Finance runtime validity/renewal, hosted TEST regression, approved LIVE charge/refund E2E. No new APP path, StoreKit/Play change, bonus/beta policy change, or student data mutation.
+Prepared SQL approved/applied with unchanged row hashes; LIVE keys now registered. Missing: merchant approval, runtime key validation, Finance runtime validity/renewal, hosted TEST regression, approved LIVE charge/refund E2E. No new APP path, StoreKit/Play change, bonus/beta policy change, or student data mutation.
 
 ## Seven preservation answers
 

@@ -1,6 +1,6 @@
 # Toss WEB LIVE activation — 2026-11-04
 
-Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/schema/config/deployment unchanged; LIVE_VERIFIED NO / PRODUCTION_ACTIVE NO.
+Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB preparation and WEB REVIEW preparation deployed; LIVE activation pending; LIVE_VERIFIED NO / PRODUCTION_ACTIVE NO.
 
 This supersedes the previous [TASK17 HOLD decision](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후) for WEB only. Fixed confirmed Auth UID ddc5ae63-acbb-490b-a423-c996b811dea8 AND exact review@legendstudy.com remains TEST. Other authenticated users use LIVE. Server checks current Supabase Auth; client email/mode/is_test never selects environment. Existing order mode determines confirm/reconcile/refund credentials even after identity/config changes. No APP58/StoreKit/Play/bonus/beta/price/refund-policy changes.
 
@@ -8,7 +8,7 @@ This supersedes the previous [TASK17 HOLD decision](payment-app-foundation.md#ta
 
 - Production stlhijzpjfgwwdgunlsd: configuration TEST;18 TEST orders,9 PAID/TEST_RECORDED,9 ORDER_CREATED;TEST grant0/LIVE order0. Latest TEST paid2026-11-02 16:27:47KST; historical successful TEST evidence preserved.
 - Existing payment_order selects global mode; payment_process rejects a different global mode. Cloudflare-only LIVE switching cannot retain review TEST. Existing grant/cancel/compensation logic already supports LIVE and atomic ledger/idempotency.
-- Cloudflare legendstudy-lab Production: REVIEW, enabled true; TEST keys/Finance registered, LIVE keys와 환불담당 PAYMENT_SUPPORT_SUBJECTS initially absent. Values never printed. Current deployment1e842209-74a6-478c-846c-ebea8779fcf4/source metadata0e735c6fbf74d3351cbb8eca9915b1c650c37251 differs from previous TASK17 deployment. Source object absent in fetched LAB repository and local LegendStudy checkouts; preserve actual current deployment before shipping.
+- Cloudflare legendstudy-lab Production: REVIEW, enabled true; TEST keys/Finance registered, LIVE keys와 환불담당 PAYMENT_SUPPORT_SUBJECTS initially absent. Values never printed. Current deployment1e842209-74a6-478c-846c-ebea8779fcf4/source metadata0e735c6fbf74d3351cbb8eca9915b1c650c37251 differs from previous TASK17 deployment. Source found in /tmp/legendstudy-feedback-web-20261104 and integrated into TASK17; only deployed0e735c6 imported, later unrelated changes excluded.
 - Admin rows and paid totals distinguish modes; revenue parser accepts LIVE/KRW only. Old DB runtime label LIVE_OFF is hard-coded; candidate WEB fetches actual runtime instead.
 
 ## Implementation and verification
@@ -21,6 +21,12 @@ Local WEB1563 PASS/4 skipped; final admin/payment201 PASS; typecheck/build/lint 
 
 ## Remaining gates
 
-Owner asked to add TOSS_LIVE_CLIENT_KEY/TOSS_LIVE_SECRET_KEY as Production Secrets and confirm merchant LIVE/card/domain approval, retaining TEST keys and REVIEW until verified. Owner DB preparation approval is pending. Existing Finance JWT previously expired11/3; current runtime validity must be verified/renewed safely through existing signer (registered binding alone is not proof). Establish current deployment source/worker preservation. Then hosted reviewer TEST regression, staged LIVE activation and Owner-approved1c/4,900KRW smoke on named ordinary account; announce target and amount before charge/cancel. Verify exactly one purchase grant/ledger entry and permitted refund; do not touch existing customer orders. Until actual approval/grant success, never report LIVE_VERIFIED.
+Owner asked to add TOSS_LIVE_CLIENT_KEY/TOSS_LIVE_SECRET_KEY as Production Secrets and confirm merchant LIVE/card/domain approval, retaining TEST keys and REVIEW until verified. Owner approved preparation; hosted migration20261104021443 applied. Existing Finance JWT previously expired11/3; current runtime validity must be verified/renewed safely through existing signer (registered binding alone is not proof). Establish current deployment source/worker preservation. Then hosted reviewer TEST regression, staged LIVE activation and Owner-approved1c/4,900KRW smoke on named ordinary account; announce target and amount before charge/cancel. Verify exactly one purchase grant/ledger entry and permitted refund; do not touch existing customer orders. Until actual approval/grant success, never report LIVE_VERIFIED.
 
 Recovery after LIVE history: PAYMENT_ENABLED=false pauses new orders/confirm while keeping DONE reconciliation and refunds. Keep dual-mode DB/handler; do not set DB back to TEST or delete/mutate historical modes. New signing key/role/schema redesign is unnecessary. Full guide is in the linked review package.
+
+## Owner 승인 준비 SQL 적용 — 2026-11-04
+
+[운영 영수증](../supabase/verification/payments/live-20261104/production-prepare.json): hosted migration20261104021443,원문을동일버전repository migration으로보존. 적용전후주문18/지급167/거래262전체행hash동일,helper EXECUTE postgres/essay_executor만허용,임시SET/CREATE회수PASS. DB TEST/WEB REVIEW유지. Owner입력완료후LIVE두키/기존TEST두키등록확인(원문미출력),실제키인증/상점승인미확인. 최신운영소스통합후결제/관리자242PASS/1opt-in skip.
+
+준비WEB 배포617be5aa-2f7f-43bd-bf9c-0937b721119f/source a901568fa7b0acc752061d6fd7361ad5772875c8. 운영canonical success/manifest일치/환경설정전체동일. 요금·결제·관리자결제·문의·논술6URL HTTP200,runtime REVIEW/TEST/비로그인consumer_purchase=false. 기존라우팅동일,결제외API입력불변. LIVE키등록은존재확인이며실제키유효성/상점승인/Finance갱신/환불담당권한/새TEST·LIVE E2E는남아있다. 실제청구/취소0.

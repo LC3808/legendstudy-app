@@ -5072,3 +5072,5 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 건국 합성사진/재첨삭·한양 계산오류 성공 재사용. WEB512e06f/Nativea9921bb 수식·원문·불확실확인·힌트/접힌참고풀이 연결, Previewa591fefb. 신규 정답·개념오류 Provider2회PASS/33,383tokens, 실제 손글씨·전체 학습E2E 미완료. WEB1550+영향24/Native29+신규2+최종영향24검사PASS, 운영/DB/Credit변경0. [범위·증거·차단](task16c-math-recognition-scaffolding-20261102.md).
 
 - 2026-11-04 TASK17 LIVE: 일반LIVE/review TEST 후보구현. WEB1563+관리자201/PG혼합21·기존회귀/build PASS. 운영TEST18·지급0보존;LIVE키없음/DB준비승인대기/최신배포소스확인필요. 운영쓰기·실결제0. [상태](payment-live-activation-20261104.md).
+
+- 2026-11-04 TASK17 후속: Owner LIVE키입력·준비SQL승인. migration20261104021443 적용,주문18/지급167/거래262해시동일·임시권한회수. DB TEST/WEB REVIEW유지. 최신운영소스발견·통합,242회귀/163페이지빌드PASS. [영수증](payment-live-activation-20261104.md#owner-승인-준비-sql-적용--2026-11-04).

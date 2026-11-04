@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-04",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "migration_version": "20261104021443",
+  "migration_name": "payment_live_review_prepare",
+  "applied": true,
+  "mode_after": "TEST",
+  "before_equals_after": {
+    "orders": {
+      "count": 18,
+      "md5": "4f74e8c145b42ea1648d2bbcc55af346"
+    },
+    "credit_grants": {
+      "count": 167,
+      "md5": "4c24c463cda7af5804e08e9f791e9d90"
+    },
+    "credit_transactions": {
+      "count": 262,
+      "md5": "b8c5ba4b3290db1725a8e3d1e3af7c7b"
+    }
+  },
+  "helper_execute_roles": [
+    "postgres",
+    "essay_executor"
+  ],
+  "temporary_set_removed": true,
+  "temporary_create_removed": true,
+  "cloudflare_mode": "REVIEW",
+  "live_keys_registered": true,
+  "live_keys_runtime_verified": false,
+  "live_activation": false,
+  "web_deployment": "617be5aa-2f7f-43bd-bf9c-0937b721119f",
+  "web_source": "a901568fa7b0acc752061d6fd7361ad5772875c8",
+  "web_configuration_unchanged": true,
+  "web_manifest_exact": true,
+  "public_route_checks": 6,
+  "public_route_http": 200,
+  "anonymous_runtime": {
+    "state": "REVIEW",
+    "mode": "TEST",
+    "consumer_purchase": false
+  }
+}
