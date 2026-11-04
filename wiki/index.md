@@ -35,7 +35,7 @@ TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 
-무료 베타 Credit: [일일 지급 DB설치·비활성/클라이언트](essay-beta-credit-design-20261027.md) — 캠페인 비활성.
+무료 베타 Credit: [11-04 운영 원장 감사·일일1 활성·표시/통계 한계](beta-credit-ledger-audit-20261104.md) → [초기 설계 이력](essay-beta-credit-design-20261027.md).
 
 WEB MY 프로필·관심 대학·지원 현황: [대학 관리 통합·배포·복구](my-college-management-20261026.md).
 

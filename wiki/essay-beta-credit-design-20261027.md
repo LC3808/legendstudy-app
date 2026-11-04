@@ -1,5 +1,7 @@
 # 논술 LAB 무료 베타 Credit — 계약 분석·최소 변경안
 
+**2026-11-04 현재 운영은 일일1 활성. [읽기 전용 원장 감사](beta-credit-ledger-audit-20261104.md)를 우선한다. 아래 비활성/초기 수량·우선순위는 당시 이력이다.**
+
 2026-10-27 Owner P1. **현재: DB·출처확인 WEB 운영 확인 완료, APP 개발검증 완료. 캠페인 비활성·활성화 별도 승인. 아래 초기 설계 기록은 역사적 근거이며 최신 상태는 마지막 절을 따른다.** 새 지갑을 만들지 않는다. 지급·예약·사용·반환·무료 재첨삭은 기존 원장을 사용한다. 본 문서는 기존 [Credit 운영](admin-credit-operations-20261027.md), [결제 계약](payment-app-foundation.md), [쿠폰 설계](school-history-and-coupon-design-v1.md), [학습 이력 보존](longitudinal-learning-admissions-data-strategy.md)을 확장한다. 이전 운영 SQL을 재실행하지 않는다.
 
 ## 확인 근거 — 운영 읽기 전용
