@@ -1,0 +1,114 @@
+{
+  "math_calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 6871,
+      "output_tokens": 2877,
+      "flow": "math-initial",
+      "stage": "evaluation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 5183,
+      "output_tokens": 825,
+      "flow": "math-initial",
+      "stage": "learning-generation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 5444,
+      "output_tokens": 235,
+      "flow": "math-initial",
+      "stage": "learning-review"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 6579,
+      "output_tokens": 6068,
+      "flow": "math-revision",
+      "stage": "evaluation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 6667,
+      "output_tokens": 1081,
+      "flow": "math-revision",
+      "stage": "learning-generation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 7058,
+      "output_tokens": 718,
+      "flow": "math-revision",
+      "stage": "learning-review"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 14163,
+      "output_tokens": 3921,
+      "flow": "mixed-initial",
+      "stage": "evaluation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 14441,
+      "output_tokens": 1040,
+      "flow": "mixed-initial",
+      "stage": "learning-generation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 14875,
+      "output_tokens": 374,
+      "flow": "mixed-initial",
+      "stage": "learning-review"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 19143,
+      "output_tokens": 3976,
+      "flow": "mixed-revision",
+      "stage": "evaluation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 19564,
+      "output_tokens": 771,
+      "flow": "mixed-revision",
+      "stage": "learning-generation"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "input_tokens": 19958,
+      "output_tokens": 194,
+      "flow": "mixed-revision",
+      "stage": "learning-review"
+    }
+  ],
+  "math_input_tokens": 139946,
+  "math_output_tokens": 22080,
+  "essay_usage_checkpoints": [
+    {
+      "run_id": "2bb84c9f-9d7d-4f0d-bc6b-d7c6fefd45f5",
+      "key": "q1-usage",
+      "usage": {
+        "input_tokens": 15192,
+        "total_tokens": 17473,
+        "output_tokens": 2281
+      }
+    },
+    {
+      "run_id": "df5d19d2-352a-41ca-b28c-89bbd3ffcade",
+      "key": "q1-usage",
+      "usage": {
+        "input_tokens": 16094,
+        "total_tokens": 18815,
+        "output_tokens": 2721
+      }
+    }
+  ],
+  "actual_cost": null,
+  "ocr_new_calls": 0,
+  "image_transmission_bytes": "NOT_VERIFIED",
+  "same_input_before_after_comparison": false
+}
