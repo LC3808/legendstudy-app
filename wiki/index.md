@@ -35,7 +35,7 @@ TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 
-이용권 유형·통계: [조회/표시 구현·검증·운영승인대기](credit-classification-20261104.md).
+이용권 유형·통계: [SQL/WEB 운영 적용·원본거래 검증·APP별도](credit-classification-20261104.md).
 
 무료 베타 Credit: [11-04 운영 원장 감사·일일1 활성·표시/통계 한계](beta-credit-ledger-audit-20261104.md) → [초기 설계 이력](essay-beta-credit-design-20261027.md).
 

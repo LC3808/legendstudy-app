@@ -1,6 +1,6 @@
 # 이용권 지급 유형·관리자 통계 조회 후보
 
-상태: **IMPLEMENTED / ISOLATED TEST PASS / PRODUCTION NOT APPLIED**. Owner의 별도 운영 SQL·WEB 배포 승인 필요. 기존 원장·청구 RPC·결제·환불·우선순위·만료 정책 변경 없음.
+상태: **PRODUCTION APPLIED / READ-ONLY VERIFIED**. 2026-11-04 Owner가 조회 SQL·WEB 배포를 명시 승인하여 15:28 KST 적용했다. [운영 영수증](production-receipt.json) 참조. 이미 적용한 SQL 재실행 금지. 기존 원장·청구 RPC·결제·환불·우선순위·만료 정책 변경 없음.
 
 ## 보존 검토 7항목
 
@@ -19,7 +19,7 @@
 - 기존 `public.admin_member_credit`: 지급 행에 `display_kind` 1필드 추가. 기존 응답·잔액 계산·권한 그대로.
 - 기존 `admin_release_report`와 지급·예약·정산·환불 함수는 교체하지 않는다. WEB의 이용권 분기만 새 조회로 연결. 결제/대시보드 분기는 기존 RPC 유지.
 
-## 적용 순서 (이번에 실행하지 않음)
+## 적용 절차 이력 (완료; 재실행 금지)
 
 1. 최신 운영 `admin_member_credit` 정의·권한을 별도 백업. `precheck.sql`의 baseline hash 및 새 이름 미존재 확인. 동일 파일 재실행 금지.
 2. 별도 Owner 승인 후 `apply.sql` 단일 트랜잭션 적용. DDL만 있고 운영 DML 없음. baseline drift/기존 이름 충돌은 시작 단계에서 중단.
@@ -42,3 +42,5 @@ grant_stats는 신규 grant 동작만 합산. action_stats의 restore는 신규 
 복구는 이전 WEB으로 되돌린 뒤, 이번에 추가한 읽기 함수만 사용하는 상태인지 확인하고 `rollback.sql`. member-baseline.sql은 감사 당시 운영 읽기 함수 원문. 후속 타 작업이 같은 함수를 수정했다면 rollback을 실행하지 말고 diff를 재검토한다. 원장 복구/역분개는 필요 없고 실행해서는 안 된다.
 
 주의: 읽기 SQL은 현재 전체 원장 기반 집계를 사용한다. 대규모 데이터의 부하 성능 인증은 별도이며 새 인덱스/캐시는 추가하지 않았다. UI 브라우저 실기기 및 운영 인증 세션 확인은 적용 후 단계이다.
+
+운영 hosted version20261104062802와 저장소 기록20261104063113은 동일 SQL이다. 저장소 마이그레이션은 적용 후 CLI로 생성해 보존한 이력이며 중복 push하지 않는다. APP58/앱 빌드는 미실행.

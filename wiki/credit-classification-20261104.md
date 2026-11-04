@@ -1,6 +1,20 @@
 # 이용권 지급 유형 세분화·관리자 통계 개선 — 2026-11-04
 
-**구현·격리 검증 PASS / 운영 미적용 / 전체 출시 상태 PARTIAL.** Owner의 [원장 감사](beta-credit-ledger-audit-20261104.md) 승인 후 조회·표시·통계만 개선했다. 신규 원장/운영 UPDATE·백필/지급·차감/결제·환불/Provider/배포 실행0. 기존 지급·예약·정산 RPC와 베타 정책은 변경하지 않았다.
+**SQL·WEB 운영 적용 및 읽기 검증 PASS / APP58·앱 빌드 별도.** 아래 구현 기록 뒤 Owner가 운영 적용을 별도 승인했다. Owner의 [원장 감사](beta-credit-ledger-audit-20261104.md) 승인 후 조회·표시·통계만 개선했다. 신규 원장/운영 UPDATE·백필/지급·차감/결제·환불/Provider/배포 실행0. 기존 지급·예약·정산 RPC와 베타 정책은 변경하지 않았다.
+
+## 운영 적용 완료 — 2026-11-04 15:28~15:31 KST
+
+- Owner 명시 승인 범위: 조회 SQL→WEB 순서, 운영 원장 읽기 검증. 실제 지급·예약·차감·결제·환불 실행0. APP58 통합/앱 빌드0.
+- 사전 운영본은 `a901568fa7b0acc752061d6fd7361ad5772875c8`, Pages `98e2b121-22d8-4bb5-8f78-a7db72c3a587`로 변경돼 있었다. 최신본에 이용권 커밋만 충돌 없이 선택 통합. 기존 결제 emergency-pause 포함 운영설정49개·API 입력138개·대상 외 페이지 보존.
+- SQL hosted migration **20261104062802 / credit_classification_read_reporting**. 기존 member 함수 hash 검사 후 단일 트랜잭션 적용. 저장소 이력 [SQL](../supabase/migrations/20261104063113_credit_classification_read_reporting.sql)은 동일 내용이며 재실행/중복 push 금지.
+- WEB 배포 SHA **61c75caf8b2ef90b5b0392defb91ab1d9d078abc**, Pages **8209d68d-8769-4788-a254-8db4494d63ac**, production/success/canonical 및 전체 manifest 일치 확인. `/admin/*`, `/account/credits/*` 및 새 hashed assets만 교체. 다른 정적 경로 보존.
+- SQL 전후/WEB 검증 후 전체 원장273행 digest `14254691e3d30000dce360a60c6e0bbc` 동일. 기존 private 거래함수 digest `15538db2c0459895a71b168647f7fee0` 동일. 새 읽기 helper는 비교에서 제외. authenticated EXECUTE=true, anon/service_role=false, 실제 관리자 세션으로 새 RPC 조회 성공.
+- 실제 Chrome 관리자 화면: 베타 필터 전체5기록, 지급3개·예약1개·소비1개. 기존 01:20 지급/예약 및 01:21 소비 **원본 ID3개와 grant ID 일치**, 인하2027모의 자연계열 시험/완료 상태 확인. 예약/사용 중복 소비 없음.
+- 전체 기간 UI 및 운영 SELECT 일치: 가입165건495개, 베타3건3개, 관리자7건325개, 구매3건5개, 기타 유형0. 신규 지급178건828개·소비37개·예약49기록·해제9기록. 이는 아래 오전 감사 스냅샷과 시점이 다르며 그 사이 서비스에서 발생한 가입 지급을 이번 작업이 만든 것으로 오해하지 않는다.
+- 최신 운영 통합본 WEB163경로 빌드/타입 검사 PASS. 관련284테스트는 만료 명칭 기대값1개를 정정해 해당34개 재실행 PASS; 기존 문의 DB opt-in1 SKIP. 디스크 ENOSPC는 이 작업의 재생성 가능한 build cache만 정리 후 해결.
+- [운영 영수증·롤백 기준](../supabase/candidates/credit_classification_20261104/production-receipt.json). 롤백은 위 이전 Pages로 복귀 후 기존 조회 함수 변경 여부를 검토하고 rollback.sql. 원장 역분개 불필요.
+
+아래는 오전 구현/격리 검증 당시 이력이다. 완료표의 운영 SQL·WEB 항목은 이 절의 PASS가 최신이며 APP 빌드는 계속 별도이다.
 
 ## 실제 운영 지급과 매핑
 

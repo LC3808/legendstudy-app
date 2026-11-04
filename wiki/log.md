@@ -1,3 +1,7 @@
+## 2026-11-04 — 이용권 유형·통계 운영 적용 PASS
+
+Owner 승인 후 SQL20261104062802→WEB61c75ca/Pages8209d68d 적용. 최신 결제중지 설정49개·API138입력 보존. 원장273행/거래함수 hash 불변, 실제 관리자 베타3거래 ID·전체유형 통계 읽기 검증 PASS. 실제 거래0·APP미진행. [영수증·검수·복구](credit-classification-20261104.md).
+
 ## 2026-11-04 — 이용권 지급 유형·관리자 통계 구현
 
 기존 원장 SELECT 기반8출처·거래구분 필터/합계, WEB·APP 명칭 통일. 신규 SQL 격리PASS·기존 첨삭18·WEB284·Flutter34 PASS. SQL/WEB/앱 운영 미적용. [변경·매핑·검증한계·승인패키지](credit-classification-20261104.md).
