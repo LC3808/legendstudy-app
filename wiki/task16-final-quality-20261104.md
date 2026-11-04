@@ -1,6 +1,6 @@
 # TASK16 최종 품질 — 후속 구현 및 검증
 
-2026-11-04. **PARTIAL / 운영 미반영 / APP58 보존**.
+2026-11-04. **PARTIAL / 인하 공식 해설만 운영 적용 / APP58 보존**.
 
 [운영 연결·실제 검수](app58-expanded-production-connection-20261104.md), [학습용 5단계 Owner 정책](learning-completeness-policy-20261104.md), [APP58 산출물](app58-store-handoff-20261104.md)을 계승한다. 현재 운영 표시 소스9a8fb9f와 후속 로컬 구현을 구분한다. 기존 15대학202시험464문항을 재구축하지 않는다.
 
@@ -13,7 +13,7 @@
 | 학습 완성도 | PARTIAL | 서버 검증 계약·APP/WEB 선택적 표시 구현. 실제 Provider 산출·독립 검토·영속 저장·coaching/History 연결은 아직 미구현, 운영 별점 없음 |
 | 학습 변화 비교 | PARTIAL | 동일 문항/기준/정책 및 소유 lineage의 이전 평가만 비교하는 순수 계약 검사. 실제 새 평가·무료 재첨삭 UI E2E 없음 |
 | 중앙대 Q2 | PARTIAL | Q2는 Essay, Q3가 Math. 기존 independent review 실패의 재시도 안내 보완은13ef69a. Worker 배포·새 실제 재시도 아직 미실행. 기존 예약/성공 Q1·Q3 보존 |
-| 인하 공식 해설 | PARTIAL | 공식 PDF 해시와 문항카드3쪽 예시답안 확인; 연결 SQL·원복 로컬 PASS. 운영 적용 승인 대기 |
+| 인하 공식 해설 | PARTIAL | 공식 PDF 해시와 문항카드3쪽 예시답안 확인; 권한 변경 없는 공개 래퍼 연결·원복25+131 PASS. 승인 후 운영 RPC 공개 전/후 PASS, APP/WEB 화면은 별도 검수 |
 | 인문논술 보존 | PASS(집중 회귀) | 기존 History·계정별 조회·무료 연결 회귀 포함. 새 실제 인문 Provider 호출 없음 |
 | 실제 E2E | NOT_VERIFIED(이번 변경) | 과거 인하 사진 무료 재첨삭 PASS 재사용. 새 기능을 포함한 기기·WEB 전체루프는 아직 없음 |
 
@@ -32,13 +32,13 @@ APP/WEB은 유효한 선택적 계약만 표시하고 임의 평균·오류 수 
 후보: `supabase/candidates/task16_final_quality_20261104/README.md`.
 원본은 Owner materials의 2027 인하 모의 자연계(일반) 해설·답안 PDF이며 SHA256 `05a33c9d47d91710ea1215b535b20036f054762d2b382c967e5b932103872522`가 기존 DB artifact와 정확히 일치한다. 문항카드1–2쪽 신원·평가기준,3쪽 예시답안을 원본 이미지로 확인했다. 수식·소문항별 표시 전사이며 새 AI 풀이가 아니다. 원본 이미지/PDF는 Git에 추가하지 않았다.
 
-공식 canonical solution1건 연결과 기존 `if disclosed` 분기만 변경하는 후보다. 이전 평가의 authority/considered refs는 바꾸지 않고 `SUPPLEMENTAL_AFTER_ASSESSMENT`로 표시한다. APP/WEB에 “추가 연결 공식 자료 · 평가 당시 참고자료와 구분” 및 출처 쪽수를 표시한다. 별도 정답 우회 API는 만들지 않는다. 원복은 정확한 함수 원상복구+새 solution RETIRED이며 기존 ID/공개 이력은 삭제하지 않는다.
+공식 canonical solution1건 연결과 기존 공개 래퍼의 `disclosed=true` 응답만 보완하는 후보다. 이전 평가의 authority/considered refs는 바꾸지 않고 `SUPPLEMENTAL_AFTER_ASSESSMENT`로 표시한다. APP/WEB에 “추가 연결 공식 자료 · 평가 당시 참고자료와 구분” 및 출처 쪽수를 표시한다. 별도 정답 우회 API는 만들지 않는다. 원복은 정확한 함수 원상복구+새 solution RETIRED이며 기존 ID/공개 이력은 삭제하지 않는다.
 
-운영 적용은 최종 지시10항에 따라 Owner에게 이 구체적 후보 범위로 요청했다. 승인 전 적용하지 않는다.
+Owner가 해당 연결만 승인하여 운영 migration20261104011942를 적용했다. 상세 postflight는 아래에 기록한다.
 
 ## 테스트
 
-- 임시 Unix-only PostgreSQL17: 공식 해설23검사 + 기존 runtime131회귀 PASS. 공개 전 응답, 다른 소유자·익명 거절, 최대5과제, 공개 멱등성, evaluation/pin/credit 불변, 정확한 원복·solution ID 보존 포함.
+- 임시 Unix-only PostgreSQL17: 공식 해설25검사 + 기존 runtime131회귀 PASS. 공개 전 응답, 다른 소유자·익명 거절, 최대5과제, 공개 멱등성, evaluation/pin/credit 불변, 정확한 원복·solution ID 보존 포함.
 - APP 전체1,489 PASS / 기존7 SKIP, 집중30검사 PASS; Flutter Analyze0.
 - WEB 계약/표시/공개 제어28검사 PASS; TypeScript 검사 PASS.
 - 중앙 Q2 retry/session 집중9검사 PASS. 고정 Wrangler4.150.0/workers-py1.17.7 dry-run PASS(70 modules/530.64KiB); 운영 Worker 실제 version d03763e8와14개 binding 이름/유형을 읽기 확인. 배포/재호출 없음. 빌드 방식은 [Cloudflare Python 패키징 문서](https://developers.cloudflare.com/workers/languages/python/packages/)를 확인했다.
@@ -46,10 +46,20 @@ APP/WEB은 유효한 선택적 계약만 표시하고 임의 평균·오류 수 
 
 ## 후속 P0 및 빌드
 
-1. 승인 후 인하 후보 preflight→적용→공개 전/후 실제 응답·원장 보존 postflight.
+1. 인하 운영 RPC 연결·postflight 완료. 후속 APP/WEB 실제 화면 검수는 남음.
 2. 중앙 Q2 재시도 안내의 Worker 패키징/배포와 기존 예약을 이용한 최소 재검증. 독립 검토 거절을 우회하지 않는다.
 3. 학습 완성도 신규 Provider 산출·판단 자체 검토·저장·RPC/History 계약 및 실제 사례 검증. 기존 결과 backfill 금지.
 4. 최초/재첨삭/History 본문·전체 해설의 실제 iPhone/WEB 교차 검수.
 5. APP58과 별개 후속 빌드가 필요하다. 최종 통합/빌드번호 확정 전 스토어 제출 후보로 취급하지 않는다. 기본 store config가 이 checkout에 없어 검증된 기존 설정 경로를 연결해야 한다. 누락 설정으로 빌드하지 않는다.
 
 완료 판정은 PARTIAL이다. 운영 연결 완료, 로컬 코드 완료, 서비스 품질 검증을 구분한다.
+
+## Owner 승인 후 공식 해설 운영 적용
+
+승인 범위는 인하 Q1 공식 해설1건뿐이다. 자동 승인 검토가 내부 함수 교체를 위한 임시 public CREATE 권한 부여를 거절하여 해당안은 미적용했다. 권한을 전혀 변경하지 않는 공개 래퍼 보완으로 수정하고25+131 로컬 검사를 재통과한 뒤 적용했다. 내부 함수·공개 ACL·소유자·인증 구조는 그대로다.
+
+Hosted migration `20261104011942`. 공개 wrapper MD5 `e05c492620a5e7120050fcd1e995691c`→`8d758a455bd76391f4c0537ad3a3c7f4`; 내부 hash `4bab7b41ef9e1f68b275d62ca4edd496` 불변. 원본 최초 결과의 authenticated read는 full_solution 없음, 기존 공개 요청된 무료 재첨삭 read는 공식 reference1건/본문894자/추가 연결 표시를 반환한다. 검증은 DB의 실제 RPC를 기존 Owner identity·authenticated 역할로 읽고 rollback한 것이며, 브라우저/iPhone 화면 E2E는 아니다.
+
+평가·답안·참조·공개이력·Credit transactions 전체 hash가 변경 전후 동일하다. 새 Provider 호출·공개 이벤트·이용권 사용0. 운영 solution1건 및 wrapper1개만 변경했으며 APP58/WEB/Worker 재배포0. `supabase/candidates/task16_final_quality_20261104/production-receipt.json`에 안전한 영수증을 저장했다. 초기 보고의 운영 쓰기0은 승인 전 단계 기록이며 이번 한정 적용으로 대체한다.
+
+보안 advisor는 조회했으며 기존 RLS/no-policy·authenticated definer·extension/Auth 관련 안내가 있다. 이번 함수는 익명 실행 거절·기존 소유권검사 유지이며 프로젝트 전체 보안 PASS로 확대 보고하지 않는다. [Supabase definer 점검 설명](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).

@@ -1,0 +1,35 @@
+{
+  "status": "APPLIED",
+  "project": "stlhijzpjfgwwdgunlsd",
+  "migration_version": "20261104011942",
+  "migration_name": "task16_final_inha_official_solution",
+  "scope": "Inha 2027 natural Q1 official solution only",
+  "function_before": "e05c492620a5e7120050fcd1e995691c",
+  "function_after": "8d758a455bd76391f4c0537ad3a3c7f4",
+  "inner_function_unchanged": "4bab7b41ef9e1f68b275d62ca4edd496",
+  "owner_acl_unchanged": true,
+  "schema_create_granted": false,
+  "anon_execute": false,
+  "protected_hashes_before_equal_after": {
+    "ledger": "46724634dc66d8147a9807a955b80521",
+    "attempts": "f35acd59358bd721060d1e3e7b819c44",
+    "references": "4d4f3aae6e345412df677aa1950d0def",
+    "disclosures": "97742798fbd58979313c73c9620a4e3c",
+    "evaluations": "0432bccf0425ff58f3afe7277ee5f37c"
+  },
+  "undisclosed_read": {
+    "full_solution": false,
+    "references": 0
+  },
+  "previously_disclosed_read": {
+    "references": 1,
+    "body_chars": 894,
+    "relationship": "SUPPLEMENTAL_AFTER_ASSESSMENT"
+  },
+  "rpc_validation": "authenticated role with existing owner claims; read only; rolled back",
+  "local_tests": 25,
+  "local_runtime_regressions": 131,
+  "provider_calls": 0,
+  "new_disclosure_events": 0,
+  "client_e2e": "NOT_VERIFIED"
+}
