@@ -52,3 +52,9 @@ Owner TEST 결제 완료 후 운영 주문 c5c516c9-c801-4d92-9de6-900251cec874�
 admin@의1회4,900원 주문662851a3-77ec-4a17-b83e-7707d41c5ac3이13:38:41KST FAILED/PROVIDER_REJECTED,grant NONE/paid_at null로확인됐다. 현재handler에서이결과는인증된Toss조회상태ABORTED또는EXPIRED에만기록된다. 구체Toss오류는DB에없어Owner에게LIVE confirm로그의오류코드·메시지만요청했다. 브라우저는‘결제 상태를 확인해 주세요/주문 상태를 확인했습니다’로불명확하게표시한다. 결제원장수동수정·재승인·새결제0. 실제카드청구여부는Toss확인전단정하지않는다.
 
 신규결제만PAYMENT_ENABLED=false로중지,DB/WEB mode LIVE와기존조회·환불경로보존. 배포98e2b121-22d8-4bb5-8f78-a7db72c3a587/source a901568fa7b0acc752061d6fd7361ad5772875c8,1463자산보존,운영runtime PAUSED/LIVE/consumer_purchase=false. **현재PRODUCTION_ACTIVE PAUSED / LIVE_VERIFIED NO / PARTIAL**. 원인수정후Owner대상으로검증재개,원래실패주문기록은보존한다.
+
+### Toss 원문 오류 확인 — 13:42 Owner 증빙
+
+Owner LIVE API로그의동일주문/13:38:34 confirm은HTTP400 `INVALID_UNREGISTERED_SUBMALL`,MID leglabn24k. [공식오류문서](https://docs.tosspayments.com/reference/error-codes)는미등록서브몰또는안심클릭/ISP필요를설명한다. Finance누락/키오류와다른결제승인단계의거절. 현재WEB은일반CARD창을열고confirm에paymentKey/orderId/amount만전달,직접서브몰ID/간편결제강제설정없음. 가맹점등록·선택결제수단·인증방식중정확원인은미확정으로Owner에게선택수단을질문했다. 임의submall값추가·키교체·신규청구없이PAUSED유지.
+
+Toss 문의안: “MID leglabn24k / lab.legendstudy.com / 2026-11-04 13:38:34KST / LIVE confirm 4,900원 / INVALID_UNREGISTERED_SUBMALL. 카드사 및 간편결제별 하위가맹점 등록·사용승인과 해당 거래 인증방식 적합 여부를 확인해 주세요.” 주문번호는Owner로그에서제공,키/카드정보제외. Agent는외부문의를발송하지않았다.

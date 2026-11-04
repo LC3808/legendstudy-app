@@ -16,6 +16,11 @@
   "order_state": "FAILED",
   "operation_error_code": "PROVIDER_REJECTED",
   "grant_created": false,
-  "provider_exact_error": "PENDING_OWNER_LOG",
-  "live_verified": false
+  "provider_exact_error": "INVALID_UNREGISTERED_SUBMALL",
+  "live_verified": false,
+  "provider_http": 400,
+  "evidence": "Owner Toss LIVE API log screenshot 2026-11-04 13:42",
+  "provider_request_at": "2026-11-04T13:38:34+09:00",
+  "merchant_mid": "leglabn24k",
+  "diagnosis": "Merchant/submall registration or required issuer authentication; exact cause awaiting chosen payment method/provider confirmation"
 }
