@@ -1,6 +1,6 @@
 # Current Status
 
-[대시보드 개편](admin-dashboard-refresh-20261104.md): 로컬 검증, 운영 미반영.
+[대시보드 개편](admin-dashboard-refresh-20261104.md): SQL·WEB 운영 적용·조회 PASS.
 
 [문의 통합 P0](feedback-admin-integration-20261104.md): 승인 후 DB·Edge·WEB 운영적용. 실제 목록/상세·미처리3 PASS, 원본보존/시험답변0. 앱 릴리스 별도.
 

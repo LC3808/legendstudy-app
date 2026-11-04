@@ -5099,3 +5099,7 @@ Owner SQL/RPC·기존worker·WEB 승인 후 순차적용. DB20261104004950/Edgev
 ## 2026-11-04 — 운영 대시보드 개편
 
 회원·학교/학년 상단, 작은 카드·명확한 경계, 기록 공부시간/평균·학년 조회 후보 구현. WEB189PASS/1기존SKIP·163routes build·격리PG PASS. 운영SELECT 총3시간44분/7명/평균32분, 학년 표본보호 확인. DB/WEB운영 변경0. [근거·검수·다음 적용](admin-dashboard-refresh-20261104.md).
+
+## 2026-11-04 — 대시보드 운영 배포
+
+Owner 승인 후 조회SQL/WEB 적용. Pages4b089f75·실제 관리자 필터/3시간44분·7명·평균32분 PASS. 원본22건hash·API138입력·설정49개·타페이지 보존. [배포 근거](admin-dashboard-refresh-20261104.md#운영-적용--2026-11-04-16251626-kst).

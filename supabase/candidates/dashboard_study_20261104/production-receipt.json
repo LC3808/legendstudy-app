@@ -1,0 +1,15 @@
+{
+  "deployment": "4b089f75-b118-48a9-92d6-77a5ce1ed584",
+  "status": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-04T07:25:36.103864Z",
+    "status": "success"
+  },
+  "sha": "b0ed2b5eed6ab50c426e92e7d29b890399eafb1c",
+  "configuration_unchanged": true,
+  "manifest_exact": true,
+  "previous": "8209d68d-8769-4788-a254-8db4494d63ac",
+  "binding_count": 49,
+  "api_bundle_sha256": "8c3d6268c63e9dd1c29759d696abd80ec4bca665e86e6d96fb9e2f84ca5b55d7"
+}

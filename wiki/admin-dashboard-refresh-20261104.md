@@ -3,7 +3,7 @@
 Owner 요청: 대시보드만 재구성. 작은 카드·명확한 경계, 회원/활성 회원/학년/학교 우선,
 학습 시간의 정의·기록자 평균·학년별 분석, 시험/문항 검수 지표는 전용 화면으로 연결.
 이전 이용권 SQL/WEB 배포 승인은 이 신규 화면의 운영 배포 승인이 아니다.
-**구현·로컬 검증 완료 / 운영 SQL·WEB 미반영 / APP 변경 없음.**
+**Owner 배포 승인 후 운영 SQL·WEB 적용 및 실제 관리자 조회 PASS / APP 변경 없음.**
 
 ## 현재 구현
 
@@ -113,3 +113,22 @@ APP checkout은 후보 SQL4개·로컬 PG 테스트·canonical Wiki만 변경. F
 `/Users/woojinchang/.codex/visualizations/2026/11/04/01a1a3e0-e3df-7dd3-b013-1c9e9fd65314/dashboard-refresh/`
 의 `index.html`, `dashboard-desktop.jpg`, `dashboard-mobile.jpg`.
 정적 예시는 필터를 조작하는 E2E 화면이 아니다. 실제 운영 배포 상태로 해석하지 않는다.
+
+
+## 운영 적용 — 2026-11-04 16:25–16:26 KST
+
+Owner의 “배포해” 승인으로 SQL → WEB 순서 적용. 위 미반영/승인대기 문구는 최초 구현 당시 기록이다.
+- Hosted migration `20261104072455 admin_dashboard_study_read` 성공.
+  저장소 CLI 기록 `20261104072513_admin_dashboard_study_read.sql`은 동일 SQL이며 재실행 금지.
+- STABLE/search_path/8초 제한, authenticated=true, anon/service_role=false 확인.
+- study_sessions22건 및 원본 hash `ccd4b6290456e54fef31d204ec3ee6e1` 적용 전후 동일.
+- Pages `4b089f75-b118-48a9-92d6-77a5ce1ed584`, WEB SHA `b0ed2b5eed6ab50c426e92e7d29b890399eafb1c`, success.
+- 이전 Pages `8209d68d-8769-4788-a254-8db4494d63ac`. 기존 API138 입력/49 설정 보존,
+  대시보드 root5파일 + 정적자산만 반영, 다른 페이지 전체 manifest 보존 검증 PASS.
+- 실제 운영 관리자 로그인: 회원171/프로필166/활동7/학교입력40, 학교명 표시 확인.
+  최근30일3시간44분/7명/평균32분, 학년 표본보호 확인. 오늘 필터는 표본부족 표시,
+  운영 집계 갱신 후 최근30일로 복원. 새 조회 함수 미설치 fallback이 아닌 정상 함수 결과 확인.
+- 실제 지급·차감·결제·환불·평가·답변 실행0. APP58/앱 빌드0.
+- [비밀정보 없는 배포 영수증](../supabase/candidates/dashboard_study_20261104/production-receipt.json).
+  운영 화면 증거는 로컬 검수 산출물 폴더 `production-dashboard.jpg`.
+- 운영 rollback: 이전 Pages 배포 복원 후 필요 시 새 조회 함수만 rollback.sql로 제거.
