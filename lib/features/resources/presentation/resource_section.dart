@@ -134,7 +134,12 @@ class ResourceSection extends ConsumerWidget {
                                   Uri.tryParse(contentSourceUrl)?.path
                                       .replaceAll('/', ''),
                                 ))
-                                  PdfDownloadAction(resourceId: item.id),
+                                  PdfDownloadAction(
+                                    resourceId: item.id,
+                                    postId: Uri.parse(contentSourceUrl).path
+                                        .replaceAll('/', ''),
+                                    resourceType: item.resourceType,
+                                  ),
                                 _ResourceDeliveryActions(
                                   key: ValueKey(item.id),
                                   contentSlug: contentSlug,

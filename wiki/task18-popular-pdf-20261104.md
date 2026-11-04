@@ -94,7 +94,7 @@ Owner 후속 “18개만해”: 최종 대상18개, 추가2개 불필요. 집계
 
 IMPLEMENTED: YES (후속 앱 후보). TEST_VERIFIED: LOCAL_AUTOMATED_ONLY.
 OWNER_REVIEW_REQUIRED: YES. RELEASE_READY: NO (권리·실기기·운영승인·GA4 게이트).
-소스 변경은 전용 작업 트리에 미커밋으로 보존; 기준 Git SHA `92d8110` (APP58 이후 앱 브랜치의 시작점).
+초기 마감 시 소스 변경은 미커밋이었다. TASK18-B에서8f83f3f Commit/Push 완료([후속 검증](task18b-pdf-validation-release-20261104.md)); 기준 Git SHA `92d8110` (APP58 이후 앱 브랜치의 시작점).
 새 정식 앱 버전/서명 산출물/스토어 제출은 만들지 않았다. 디버그 검증 산출물은 전용 작업 공간 build 아래에만 존재한다.
 
 ## 변경 파일
@@ -106,4 +106,4 @@ OWNER_REVIEW_REQUIRED: YES. RELEASE_READY: NO (권리·실기기·운영승인·
 - 검증 도구: `test/pdf_download_test.dart`, `test/pdf_download_action_test.dart`, `tool/audit_popular_pdf_task18.py`, `tool/check_analytics_contract.py`.
 - Wiki: 본 문서, 목록 문서, evidence JSON, current-status/index/decisions/log, 기존 resource-detail/analytics-v1 후속 링크, history 입력 스냅샷.
 
-원래 checkout의 미커밋 변경을 이동하거나 덮어쓰지 않았다. 작업 branch `codex/popular-pdf-task18`, 기준 전체 SHA `92d8110ecd66891debff6528d0287858b7a2dc1e`, 새 커밋/Push 없음.
+원래 checkout의 미커밋 변경을 이동하거나 덮어쓰지 않았다. 작업 branch `codex/popular-pdf-task18`, 기준 전체 SHA `92d8110ecd66891debff6528d0287858b7a2dc1e`, 초기 시점의 새 커밋/Push 없음은 후속8f83f3f 보존 완료로 대체한다.

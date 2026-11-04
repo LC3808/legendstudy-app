@@ -7,8 +7,13 @@ import '../../analytics/domain/analytics_events.dart';
 import '../data/pdf_download.dart';
 
 class PdfDownloadAction extends ConsumerStatefulWidget {
-  const PdfDownloadAction({required this.resourceId, super.key});
-  final String resourceId;
+  const PdfDownloadAction({
+    required this.resourceId,
+    required this.postId,
+    required this.resourceType,
+    super.key,
+  });
+  final String resourceId, postId, resourceType;
   @override
   ConsumerState<PdfDownloadAction> createState() => _PdfDownloadActionState();
 }
@@ -19,6 +24,9 @@ class _PdfDownloadActionState extends ConsumerState<PdfDownloadAction> {
   void event(String name, String status) =>
       ref.read(analyticsServiceProvider).logEvent(name, {
         'platform': analyticsPlatform(),
+        'post_id': widget.postId,
+        'resource_id': widget.resourceId,
+        'resource_type': widget.resourceType,
         'screen': 'material_detail',
         'source': 'popular_pdf_pilot',
         'status': status,

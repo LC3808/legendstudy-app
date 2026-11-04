@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK18-B / PDF 검증·릴리스 준비: [Git·정합성·실기기·GA4·충돌 계획](task18b-pdf-validation-release-20261104.md).
+
 TASK18 / PDF 다운로드 / 인기 TOP20: [구현·권한·검증·Owner 게이트](task18-popular-pdf-20261104.md) → [18게시글·846 PDF 목록](task18-popular-pdf-inventory-20261104.md).
 
 평가 정확도/최초 보류/최종 산술 검산/실제 TEST: [11/4 품질 검증·새 오판·수정·미완료](task16-evaluation-quality-closeout-20261104.md).

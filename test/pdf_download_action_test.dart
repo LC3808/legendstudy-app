@@ -15,9 +15,20 @@ class Recording implements AnalyticsService {
   @override
   void logEvent(String name, [Map<String, Object?>? params]) {
     names.add(name);
+    expect(params?['post_id'], '1700');
+    expect(params?['resource_id'], '11111111-1111-4111-8111-111111111111');
+    expect(params?['resource_type'], 'question');
     expect(
       params?.keys,
-      unorderedEquals(['platform', 'screen', 'source', 'status']),
+      unorderedEquals([
+        'platform',
+        'screen',
+        'source',
+        'status',
+        'post_id',
+        'resource_id',
+        'resource_type',
+      ]),
     );
   }
 
@@ -38,7 +49,13 @@ void main() {
                 .overrideWith((ref) async => PdfDownloadPolicy(state)),
           ],
           child: const MaterialApp(
-            home: Scaffold(body: PdfDownloadAction(resourceId: id)),
+            home: Scaffold(
+              body: PdfDownloadAction(
+                resourceId: id,
+                postId: '1700',
+                resourceType: 'question',
+              ),
+            ),
           ),
         ),
       );
@@ -58,7 +75,13 @@ void main() {
           ),
         ],
         child: const MaterialApp(
-          home: Scaffold(body: PdfDownloadAction(resourceId: id)),
+          home: Scaffold(
+            body: PdfDownloadAction(
+              resourceId: id,
+              postId: '1700',
+              resourceType: 'question',
+            ),
+          ),
         ),
       ),
     );
@@ -95,7 +118,13 @@ void main() {
           pdfDownloadServiceProvider.overrideWithValue(service),
         ],
         child: const MaterialApp(
-          home: Scaffold(body: PdfDownloadAction(resourceId: id)),
+          home: Scaffold(
+            body: PdfDownloadAction(
+              resourceId: id,
+              postId: '1700',
+              resourceType: 'question',
+            ),
+          ),
         ),
       ),
     );

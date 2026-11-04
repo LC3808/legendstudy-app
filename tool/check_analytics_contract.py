@@ -18,5 +18,7 @@ web_params = set(json.loads(re.search(r'analyticsParamKeys = (\[.*?\]) as const'
 native_only = {'pdfDownloadClick', 'pdfDownloadSuccess', 'pdfDownloadFailure', 'pdfDownloadCancel'}
 assert {k: v for k, v in events.items() if k not in native_only} == web_events, 'Shared APP/WEB event names differ'
 assert all(events.get(k, '').startswith('pdf_download_') for k in native_only), 'Native PDF events missing'
-assert params == web_params, 'APP/WEB parameter allowlists differ'
-print(f'PASS: {len(events)} event names and {len(params)} allowed parameters match')
+native_params = {'post_id', 'resource_id', 'resource_type'}
+assert native_params <= params, 'Native PDF context missing'
+assert params - native_params == web_params, 'Shared APP/WEB parameter allowlists differ'
+print(f'PASS: {len(events)} event names and {len(params)} parameters validated (shared + native PDF extension)')

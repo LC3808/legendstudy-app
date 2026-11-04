@@ -67,6 +67,9 @@ abstract final class AnalyticsEvents {
 /// dropped before sending. No answer body, evaluation text, name, email,
 /// phone, token, API key, payment instrument or student PII.
 abstract final class AnalyticsParamKeys {
+  static const postId = 'post_id';
+  static const resourceId = 'resource_id';
+  static const resourceType = 'resource_type';
   static const platform = 'platform';
   static const appVersion = 'app_version';
   static const screen = 'screen';
@@ -83,6 +86,9 @@ abstract final class AnalyticsParamKeys {
   static const source = 'source';
 
   static const allowed = <String>{
+    postId,
+    resourceId,
+    resourceType,
     platform,
     appVersion,
     screen,
@@ -130,6 +136,29 @@ Map<String, Object> sanitizeAnalyticsParams(Map<String, Object?>? params) {
     if (!AnalyticsParamKeys.allowed.contains(key)) continue;
     final value = entry.value;
     if (value == null) continue;
+    // Public content identifiers only; reject arbitrary text in PDF context.
+    if (key == AnalyticsParamKeys.postId &&
+        (value is! String || !RegExp(r'^[0-9]{1,10}$').hasMatch(value))) {
+      continue;
+    }
+    if (key == AnalyticsParamKeys.resourceId &&
+        (value is! String ||
+            !RegExp(
+              r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+            ).hasMatch(value))) {
+      continue;
+    }
+    if (key == AnalyticsParamKeys.resourceType &&
+        !const {
+          'question',
+          'answer',
+          'explanation',
+          'answer_explanation',
+          'listening_script',
+          'other',
+        }.contains(value)) {
+      continue;
+    }
     if (value is bool) {
       out[key] = value ? 1 : 0;
     } else if (value is num && value.isFinite) {

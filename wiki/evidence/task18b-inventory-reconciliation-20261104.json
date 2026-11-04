@@ -1,0 +1,38 @@
+{
+  "observed_date": "2026-11-04",
+  "source_evidence": "task18-popular-pdf-inventory.json",
+  "posts": 18,
+  "post_pdf_connections": 846,
+  "unique_source_keys": 846,
+  "unique_unsigned_urls": 846,
+  "unique_registry_ids": 846,
+  "duplicate_source_references": 0,
+  "registry_missing": 0,
+  "types": {
+    "question": 420,
+    "answer_explanation": 416,
+    "listening_script": 10
+  },
+  "binary_content_unique_count": null,
+  "binary_status": "NOT_VERIFIED_NO_SOURCE_BINARY_FETCH",
+  "duplicate_filenames": [
+    {
+      "post_id": "1618",
+      "name": "2025학년도 6월 s_생활과윤리 문제.pdf",
+      "source_key": "7hOKZ/btsH1DtW933",
+      "resource_ids": [
+        "9a50b598-df2f-5573-aaad-4d81921d0a31"
+      ]
+    },
+    {
+      "post_id": "1618",
+      "name": "2025학년도 6월 s_생활과윤리 문제.pdf",
+      "source_key": "upcYM/dJMcafBoTJm",
+      "resource_ids": [
+        "78960745-ee6a-5045-842f-08738ac1fe44"
+      ]
+    }
+  ],
+  "registry_mutations": 0,
+  "public_downloads_enabled": 0
+}

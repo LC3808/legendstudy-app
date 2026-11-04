@@ -963,3 +963,5 @@ Owner는 [기존 종합 수치 금지](final-feedback-ux-refinement-20261031.md)
 기존 [무료 Guest 자료 열람](product-scope.md#core-content-experience)과 [자료 Viewer](day-9-c-resource-detail.md)를 계승하여 후속 APP에 파일별 다운로드를 추가한다. 제공순위18게시글 우선·추가2개 실제 순위 확인, 파일별 ALLOWED/VIEW_ONLY/OFFICIAL_LINK/PENDING, 기본 차단. 기관 무응답은 허가가 아니며 정확한 권리 근거·Owner 파일별 승인과 서버 검증 필요. 다운로드 무료·로그인/이용권 강제 없음, 학습엔진 분리. APP58 보존, 운영 DB/배포·스토어 제출은 별도 승인. [TASK18 상세](task18-popular-pdf-20261104.md).
 
 TASK18 후속 Owner 정정: “18개만해”. 대상은 조사한18게시글로 최종 확정하고 추가2개 선정은 하지 않는다. 권리·운영 승인 경계는 그대로 유지한다.
+
+TASK18-B Owner 결정(2026-11-04): 위18개 구현 승인·독립 Commit/Push·격리 합성PDF 실기기 검증·후속 통합 준비. 전체PENDING/공개0 유지, 운영DB 변경·전체브랜치 병합·스토어 제출 금지, APP58 보존. 기존 AnalyticsService에 공개 post/resource/type 컨텍스트만 추가하며 실제 GA4 수신은 별도 확인한다. [검증 후속](task18b-pdf-validation-release-20261104.md).

@@ -5720,3 +5720,7 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 APP58 후속92d8110에서 분리 작업. 공개18게시글846 PDF 링크와 기존 Registry 전부 연결, 바이너리/권리 미확정·PENDING 유지. 기존 resolver·Analytics 재사용, Native 저장/무결성·취소/재시도, private 정책 SQL 후보. 운영 미적용·배포/스토어0. [검증·남은 게이트](task18-popular-pdf-20261104.md).
 
 TASK18 Owner 후속18개 확정. 전체1505PASS/7SKIP·Analyze0·iOS Simulator/Android debug 빌드PASS. 공개 시험 metadata18/18일치·운영 정책RPC미설치 확인. 권리/실기기/GA4미검증·운영변경0.
+
+## 2026-11-04 TASK18-B 검증·릴리스 준비
+
+기존TASK18 30파일8f83f3f Commit/Push. 846연결=846고유원본키/Registry, 중복참조0·동일파일명1쌍·바이너리중복 미검증. Analytics 공개 컨텍스트3키 보완, 전체1506PASS/7SKIP·Analyze0·서버46PASS. 별도 합성 iOS TEST 설치/실행, Android연결0, GA4 DebugView기기/이벤트0. 관리자 후보 merge-tree 충돌7파일 기록, 실제병합0. 운영DB/공개다운로드/스토어변경0. [상세와 최종상태](task18b-pdf-validation-release-20261104.md).

@@ -214,3 +214,5 @@ Modern exam-level scope, KRW revenue/refund and separate Credit recovery, USD AC
 ## TASK18 후속 PDF 다운로드 후보
 
 기존 계약을 유지한 [TASK18 구현·검증·공개 게이트](task18-popular-pdf-20261104.md). 운영 다운로드 미개방, 실제 GA4 수신 미검증.
+
+TASK18-B Native 확장: `post_id`(공개 숫자경로), `resource_id`(Registry UUID), `resource_type`(열거형)을 형식 검증 후 허용한다. WEB 공통14키는 유지한다. [기기·실제 GA4 검증](task18b-pdf-validation-release-20261104.md).
