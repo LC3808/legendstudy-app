@@ -34,6 +34,8 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
   final keys = <String, String>{};
   final sources = <String, Uint8List>{};
   String? initialOwner;
+  String? submittedAnswer;
+  bool submissionReadFailed = false;
 
   Future<CoachingSnapshot> load() async {
     final identity = owner;
@@ -41,6 +43,43 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
       await request('read', {'evaluation_id': widget.evaluationId}),
     );
     final gateway = ref.read(mathGatewayProvider(identity!));
+    String? answer;
+    var answerReadFailed = false;
+    final attemptId = snapshot.data['attempt_id'];
+    if (widget.runId == null && attemptId is String && attemptId.isNotEmpty) {
+      try {
+        if (gateway == null) throw StateError('UNAVAILABLE');
+        final input = await gateway.call('math_input', 'read_input', {
+          'attempt_id': attemptId,
+        });
+        final attempt = object(input['attempt']);
+        if (attempt['attempt_id'] != attemptId ||
+            input['input_state'] != 'INPUT_FROZEN') {
+          throw StateError('SUBMISSION_MISMATCH');
+        }
+        final typed = attempt['typed_answer'];
+        final recognized = objects(input['confirmed_regions'])
+            .map(
+              (r) => (r['raw_text'] as String? ?? '').trim().isNotEmpty
+                  ? r['raw_text']
+                  : r['normalized_math'] ?? '',
+            )
+            .whereType<String>()
+            .where((text) => text.trim().isNotEmpty)
+            .join('\n\n');
+        answer = [
+          if (typed is String && typed.trim().isNotEmpty) typed,
+          if (attempt['input_kind'] != 'TYPED' && recognized.isNotEmpty)
+            recognized,
+        ].join('\n\n');
+      } catch (_) {
+        // Submission lookup must not hide the independently stored evaluation.
+        answerReadFailed = true;
+      }
+      if (!mounted || ref.read(authStateProvider).value?.userId != identity) {
+        throw StateError('ACCOUNT_CHANGED');
+      }
+    }
     final loaded = <String, Uint8List>{
       if (initialOwner == identity) ...widget.sources,
     };
@@ -63,6 +102,8 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
     if (!mounted || ref.read(authStateProvider).value?.userId != identity) {
       throw StateError('ACCOUNT_CHANGED');
     }
+    submittedAnswer = answer;
+    submissionReadFailed = answerReadFailed;
     sources
       ..clear()
       ..addAll(loaded);
@@ -199,6 +240,8 @@ class _MathCoachingPageState extends ConsumerState<MathCoachingPage> {
             key: ValueKey('$owner/${widget.evaluationId}'),
             snapshot: state.data!,
             sources: sources,
+            submittedAnswer: submittedAnswer,
+            submissionReadFailed: submissionReadFailed,
             request: request,
             onRewrite: (paid) => openSessionWriter(state.data!, paid),
           );

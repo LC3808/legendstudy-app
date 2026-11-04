@@ -17,6 +17,8 @@ class MathCoachingScreen extends StatefulWidget {
     required this.request,
     required this.onRewrite,
     this.embedded = false,
+    this.submittedAnswer,
+    this.submissionReadFailed = false,
     this.sources = const {},
     super.key,
   });
@@ -24,6 +26,8 @@ class MathCoachingScreen extends StatefulWidget {
   final MathCoachingRequest request;
   final Future<void> Function(bool paid) onRewrite;
   final bool embedded;
+  final String? submittedAnswer;
+  final bool submissionReadFailed;
   final Map<String, Uint8List> sources;
   @override
   State<MathCoachingScreen> createState() => _MathCoachingScreenState();
@@ -184,6 +188,22 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
         value: snapshot.data['learning_completeness'],
         evaluationId: snapshot.id,
       ),
+      if (widget.submittedAnswer?.isNotEmpty == true) ...[
+        heading('제출한 답안'),
+        MathCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text('이 첨삭에 제출한 답안입니다. 평가 보류 여부와 별도로 확인할 수 있습니다.'),
+              const SizedBox(height: 12),
+              MathAnswerEvidence(widget.submittedAnswer!),
+            ],
+          ),
+        ),
+      ] else if (widget.submissionReadFailed)
+        const MathCard(
+          child: Text('제출한 답안을 불러오지 못했습니다. 저장된 첨삭 결과는 아래에서 확인할 수 있습니다.'),
+        ),
       heading('잘한 점'),
       if (objects(snapshot.data['strengths']).isEmpty)
         const MathCard(child: Text('검증된 강점 근거가 아직 제공되지 않았습니다.')),

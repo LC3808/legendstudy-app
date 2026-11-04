@@ -23,14 +23,34 @@ class _Gateway extends MathGateway {
   final image = Completer<Uint8List>();
   bool disposed = false;
   int reads = 0;
+  bool held = false;
+  bool failInput = false;
   @override
   Future<Map<String, dynamic>> call(
     String fn,
     String action,
     Map<String, dynamic> payload,
   ) async {
+    if (action == 'read_input') {
+      expect(payload['attempt_id'], 'original-attempt');
+      if (failInput) throw StateError('network');
+      return {
+        'attempt': {
+          'attempt_id': 'original-attempt',
+          'input_kind': 'TYPED',
+          'typed_answer': 'original submitted answer',
+        },
+        'input_state': 'INPUT_FROZEN',
+      };
+    }
     if (action == 'history') return {'attempts': <Object>[]};
     final data = mathMobilePreviewSnapshot();
+    if (held) {
+      data['attempt_id'] = 'original-attempt';
+      data['tasks'] = <Object>[];
+      data['strengths'] = <Object>[];
+      data['diagnosis'] = '판정 보류';
+    }
     for (final task in data['tasks'] as List) {
       (task as Map)['source_regions'] = [
         {
@@ -62,6 +82,41 @@ class _Gateway extends MathGateway {
 }
 
 void main() {
+  for (final fails in [false, true]) {
+    testWidgets(
+      'held original retains submission independently; input failure=$fails',
+      (tester) async {
+        final gateway = _Gateway(_UnusedClient())
+          ..held = true
+          ..failInput = fails;
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              authStateProvider.overrideWith(
+                (ref) => Stream.value(const AuthStatus('owner')),
+              ),
+              mathGatewayProvider('owner').overrideWith((ref) => gateway),
+            ],
+            child: const MaterialApp(
+              home: MathCoachingPage(evaluationId: 'preview-only'),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final screen = tester.widget<MathCoachingScreen>(
+          find.byType(MathCoachingScreen),
+        );
+        expect(screen.snapshot.diagnosis, '판정 보류');
+        expect(screen.snapshot.tasks, isEmpty);
+        expect(
+          screen.submittedAnswer,
+          fails ? isNull : 'original submitted answer',
+        );
+        expect(screen.submissionReadFailed, fails);
+        expect(gateway.reads, 0);
+      },
+    );
+  }
   testWidgets(
     'History loads shared original once and keeps gateway alive until route closes',
     (tester) async {

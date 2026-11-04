@@ -12,7 +12,7 @@
 | 문장·소문항·수식 | PASS(로컬) | 13ef69a 경계 처리 재사용. indexed root `√[4]{u}`/`⁴√3` 표시 보완; `x⁴√3`의 지수를 루트 차수로 오인하지 않음. 실패 수식은 경고와 원문 유지 |
 | 학습 완성도 | PARTIAL | 서버 검증 계약·APP/WEB 선택적 표시 구현. 실제 Provider 산출·독립 검토·영속 저장·coaching/History 연결은 아직 미구현, 운영 별점 없음 |
 | 학습 변화 비교 | PARTIAL | 동일 문항/기준/정책 및 소유 lineage의 이전 평가만 비교하는 순수 계약 검사. 실제 새 평가·무료 재첨삭 UI E2E 없음 |
-| 중앙대 Q2 | PARTIAL | Q2는 Essay, Q3가 Math. 기존 independent review 실패의 재시도 안내 보완은13ef69a. Worker 배포·새 실제 재시도 아직 미실행. 기존 예약/성공 Q1·Q3 보존 |
+| 중앙대 Q2 | PARTIAL | 운영 재확인: 실제 문제2(q0)는 기존 검토 PASS. 실패했던 내부 q1은 실제 문제1이며 a2 검토 PASS·전체 completed/settled. 이번 추가 호출0. 아래 번호 정정과 한계 참조 |
 | 인하 공식 해설 | PARTIAL | 공식 PDF 해시와 문항카드3쪽 예시답안 확인; 권한 변경 없는 공개 래퍼 연결·원복25+131 PASS. 승인 후 운영 RPC 공개 전/후 PASS, APP/WEB 화면은 별도 검수 |
 | 인문논술 보존 | PASS(집중 회귀) | 기존 History·계정별 조회·무료 연결 회귀 포함. 새 실제 인문 Provider 호출 없음 |
 | 실제 E2E | NOT_VERIFIED(이번 변경) | 과거 인하 사진 무료 재첨삭 PASS 재사용. 새 기능을 포함한 기기·WEB 전체루프는 아직 없음 |
@@ -47,7 +47,7 @@ Owner가 해당 연결만 승인하여 운영 migration20261104011942를 적용�
 ## 후속 P0 및 빌드
 
 1. 인하 운영 RPC 연결·postflight 완료. 후속 APP/WEB 실제 화면 검수는 남음.
-2. 중앙 Q2 재시도 안내의 Worker 패키징/배포와 기존 예약을 이용한 최소 재검증. 독립 검토 거절을 우회하지 않는다.
+2. 중앙 문항 번호 혼동을 정정했다. 저장된 독립 검토 통과 결과를 재사용하고 혼합형 APP/무료 재첨삭 및 해설 UI 검증을 이어간다. 이미 완료된 회차를 재호출하지 않는다.
 3. 학습 완성도 신규 Provider 산출·판단 자체 검토·저장·RPC/History 계약 및 실제 사례 검증. 기존 결과 backfill 금지.
 4. 최초/재첨삭/History 본문·전체 해설의 실제 iPhone/WEB 교차 검수.
 5. APP58과 별개 후속 빌드가 필요하다. 최종 통합/빌드번호 확정 전 스토어 제출 후보로 취급하지 않는다. 기본 store config가 이 checkout에 없어 검증된 기존 설정 경로를 연결해야 한다. 누락 설정으로 빌드하지 않는다.
@@ -63,3 +63,41 @@ Hosted migration `20261104011942`. 공개 wrapper MD5 `e05c492620a5e7120050fcd1e
 평가·답안·참조·공개이력·Credit transactions 전체 hash가 변경 전후 동일하다. 새 Provider 호출·공개 이벤트·이용권 사용0. 운영 solution1건 및 wrapper1개만 변경했으며 APP58/WEB/Worker 재배포0. `supabase/candidates/task16_final_quality_20261104/production-receipt.json`에 안전한 영수증을 저장했다. 초기 보고의 운영 쓰기0은 승인 전 단계 기록이며 이번 한정 적용으로 대체한다.
 
 보안 advisor는 조회했으며 기존 RLS/no-policy·authenticated definer·extension/Auth 관련 안내가 있다. 이번 함수는 익명 실행 거절·기존 소유권검사 유지이며 프로젝트 전체 보안 PASS로 확대 보고하지 않는다. [Supabase definer 점검 설명](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
+
+
+## FINAL CLOSEOUT 운영 재확인 — 2026-11-04
+
+새 지시의 미완료 목록을 실제 운영 상태와 대조했다. 이번 세션은 읽기 검증이며 Provider 호출0, DB 변경0, 이용권/History 변경0이다.
+
+### 중앙 문항 번호 정정 및 기존 성공 결과 재사용
+
+기존 보고서의 “Q2 실패”는 내부 배열 인덱스 `q1`을 문제 번호로 해석한 오류였다. 현재 Registry·저장 결과·WEB을 교차 대조하면 다음과 같다. Registry ID와 원래 결과를 수정하지 않았다.
+
+| 실제 문항 | Registry ID | 내부 키 | 현재 검증 |
+|---|---|---|---|
+| 문제1 Essay | 82ce8195-821c-5a3e-be9e-d6c7cefa4da5 | q1 / q1-retry-2 | a2 독립 검토8항목 true, evaluation44a8f9bd-815c-5e8b-a614-b007e8b9f1c2 |
+| 문제2 Essay | 6dd7b23e-7ffc-562e-8bc0-2c19c76391b1 | q0 | a0 독립 검토8항목 true, evaluationff325f59-b5f1-5e93-a4b2-d66a95f0e282 |
+| 문제3 Math | fb4072f0-054a-5ae0-bbdc-f21cf71bf865 | q2 | 저장된 Math 결과 및 WEB 종합 진단 표시 |
+
+기존 run7b3b724a-6c90-4bcd-95c0-9f894d934c44는 2026-11-04 06:38:34 KST completed. 같은 billing6ce59fa8-8ca6-4649-9ad0-370c3b3d2e63은 settled/paid_cycle/required1, reserve1·consume1이다. 별도 새 회차를 만들거나 추가 차감하지 않았다. WEB은 문제1·2 본문과 문제3 Math 결과를 모두 표시한다. 문제1의 내용상 오류를 표현 문제로 혼동하지 않고 (나)의 반항 이유만 수정하도록 한 결과가 검토 통과했다. 실제 문제2는 개념→사례 적용 및 대안의 근거를 인정하고 불필요한 재작성 과제를 만들지 않았다.
+
+현재 receipt8건의 평가/검토 토큰181,368 + 별도 Math usage37,315 = 누적218,683토큰이다. q1-a2 평가25,089·검토20,943토큰은 이미 저장된 기록이며 이번 호출이 아니다. 비용 필드는 NULL이라 금액 미확인이다. 해당 작업의 실행 주체/배포 원인을 추정하지 않는다. 이전 예약 상태 기록은 당시 상태로 보존하고 현재 완료 상태와 구분한다. 실제 무료 재첨삭/APP 통합 결과는 아직 별도 검증 대상이므로 혼합형 전체 PASS로 확대하지 않는다.
+
+### 인하 공식 해설 WEB 실화면
+
+기존 무료 재첨삭 db53f246-75ba-4099-8b50-550c8e8d7f33 → evaluation28c7e1db-8255-4474-92d8-81b4a1bdd01c를 실제 로그인 WEB에서 조회했다. 기존 공개 상태의 ‘공식 예시답안’을 펼쳐 (1-1)/(1-2), 접선, 분수, 4제곱근, 최솟값8/9 표시를 확인했다. 새 공개 요청이나 SQL 재적용은 없다. 현재 운영 UI에는 후속 소스의 ‘추가 연결 공식 자료’ 구분 문구가 아직 없어 배포/화면 검증이 남는다.
+
+WEB의 MathDocument가 인라인 수식 전후의 prose chunk를 block으로 감싸 불필요한 개행을 만들던 원인을 수정했다. 명시적 줄바꿈·빈 문단·display math·표는 보존하고 인라인 수식 주변 문장은 이어 표시한다. 원문 값/DB/평가를 변경하지 않는다. 회귀16 PASS, tsc --noEmit --incremental false PASS. 최초 일반 typecheck는 tsbuildinfo 쓰기 권한 오류였으며 코드 타입 오류가 아니었다. 이 수정은 아직 운영 미배포다.
+
+### 기기·빌드 및 남은 차단
+
+CoreDevice 읽기에서 iPhone12ProMax available(paired)를 확인했다. Mac 미러링은 별도17ProMax를 대상으로 하여 실제12ProMax 화면 증거로 사용하지 않았다. Owner에게 최초 첨삭/재첨삭을 구분한 재조회 확인을 요청했다. 원래 빈 화면은 아직 원인 확정/PASS 아님.
+
+App Store Connect 읽기에서 iOS1.0.1(58) 심사 대기 중을 확인했다. 심사 취소/빌드 교체/업로드/게시를 하지 않았다. 계정의 Apple Developer Program 계약 검토 안내가 표시되어 필요 시 Owner가 직접 처리해야 한다. Android 최신 업로드 번호는 확인 중이며 후속 버전을 임의로 확정하지 않는다. APP58 산출물 보존. 학습5단계 Provider 생성·독립 검토·신규 저장/RPC/비교는 여전히 미연결이며 운영 DB 후보 승인 전에 활성화하지 않는다.
+
+### 최초 첨삭 답안 조회 보완 — Owner 10:58 화면 확인
+
+- Owner 실제 화면: 최초 첨삭은 빈 위젯이 아니라 판정 보류·강점 없음·과제 없음 상태이며, 재첨삭은 답안 근거가 표시된다. 최초 결과를 정상 평가로 소급 변경하지 않는다.
+- APP은 기존 `math_coaching.attempt_id`로 본인 소유 `math_input/read_input`을 조회하고, 동결된 동일 제출의 답안을 평가 근거와 별도 표시한다. 조회 실패가 기존 피드백을 숨기지 않는다. 확정 전사의 설명문 보존을 위해 기존 인식 화면처럼 raw_text를 우선한다. 기존 평가·이용권·History 변경 없음, 추가 Provider 호출 없음.
+- 관련 Flutter 테스트 22개 PASS. 실기기 반영은 후속 빌드 검수 전이므로 미완료. Owner 확인: 양쪽 스토어 최고 빌드 58, 후속 후보는 59.
+- WEB `aef2fe9`: 인라인 수식/문장 경계 개선 및 학습 완성도 독립 검토 오케스트레이션 후보. 관련 42개 검사·타입 검사 PASS. 실제 Worker 연결·신규 저장·운영 적용은 아직 미완료이며 별점 완료로 판정하지 않는다.
