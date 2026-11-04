@@ -1,0 +1,27 @@
+{
+  "checks": [
+    "prepare_keeps_test_configuration",
+    "prepare_preserves_all_order_rows",
+    "review_uid_email_test",
+    "ordinary_buyer_live",
+    "changed_review_email_live",
+    "same_email_different_uid_live",
+    "unconfirmed_review_live",
+    "legacy_TEST_one_grant_or_test_zero",
+    "legacy_TEST_record_state",
+    "legacy_TEST_cancel_idempotent",
+    "review_TEST_one_grant_or_test_zero",
+    "review_TEST_record_state",
+    "review_TEST_cancel_idempotent",
+    "LIVE_one_grant_or_test_zero",
+    "LIVE_record_state",
+    "live_quantity_matches_ledger",
+    "LIVE_cancel_idempotent",
+    "private_helper_denied_anon",
+    "private_helper_denied_authenticated",
+    "private_helper_denied_service_role",
+    "private_helper_denied_essay_finance"
+  ],
+  "production_writes": 0,
+  "provider_calls": 0
+}

@@ -29,7 +29,7 @@ TASK16-C / 수학 인식·스캐폴딩·수식: [재사용·Preview·품질 검�
 
 TASK16-B / 상경·사회 실제 첨삭 통합: [격리 Preview·대표 시험·검증·차단 요소](task16b-commerce-social-integration-20261102.md).
 
-TASK17 Toss TEST 복구: [전용 심사권한·Finance 복구대기](payment-app-foundation.md#task17--2026-11-02-test-결제-복구).
+TASK17 Toss: [LIVE 전환 승인·격리검증·남은 게이트](payment-live-activation-20261104.md).
 
 건국 APP 첨삭 정체 / Worker claim·checkpoint P0: [원인·수정·운영 승인/복구](essay-worker-incident-20261028.md).
 

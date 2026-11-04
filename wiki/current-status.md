@@ -30,7 +30,7 @@ Owner normal-batch-01 적용·독립사후14true. 건국·성균·숭실6시험7
 
 ## Product state
 
-[Payment](payment-app-foundation.md): code PASS; LIVE OFF.
+[결제](payment-live-activation-20261104.md): 대기;운영 REVIEW.
 
 [MATH-2E](math-essay-learning-runtime.md): C/D/E installed per Oct08 Owner inventory; live Web activation unverified.
 
