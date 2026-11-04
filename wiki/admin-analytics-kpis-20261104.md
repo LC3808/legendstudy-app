@@ -1,5 +1,6 @@
 # 관리자 핵심 KPI 정의서 — Phase 2 계약 후보
 
+2026-11-04 후속: Owner 구현·운영 적용 승인. [Phase 2 실제 적용 범위·검증·잔여 GAP](admin-analytics-phase2-20261104.md)을 먼저 확인한다. 아래 설계 전체가 구현됐다는 뜻은 아니다.
 [Phase 1](admin-analytics-phase1-20261104.md) · [현재 RPC/화면](admin-analytics-inventory-20261104.md). **아래 신규 산식은 설계 후보이며 기존 RPC 의미를 이미 변경했다는 뜻이 아니다.** [기존 NSM 계약](analytics-p0-launch-contract.md#kpi-calculability-against-the-real-schema)의 학생 제출→평가→재작성→재평가를 계승한다. 서버 사실과 GA 행동을 섞지 않는다.
 
 ## 모든 행에 적용되는 공통 계약

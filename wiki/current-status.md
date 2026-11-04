@@ -1,6 +1,6 @@
 # Current Status
 
-[관리자 분석 Phase 1](admin-analytics-phase1-20261104.md): 30메뉴 감사·4영역/품질/KPI 설계 완료, Owner 검수 대기. Wiki만 변경; 운영 변경0.
+[관리자 분석 Phase 2](admin-analytics-phase2-20261104.md): 핵심 SQL/WEB 운영 적용·원본 보존 PASS. 회차85문항 조회/검토 연결. 전체 설계는 PARTIAL, 잔여 GAP 명시.
 
 [대시보드 개편](admin-dashboard-refresh-20261104.md): SQL·WEB 운영 적용·조회 PASS.
 

@@ -1,0 +1,406 @@
+From 2d63679ff0ec73ba800518b07ea7e3f9f6f6e65c Mon Sep 17 00:00:00 2001
+From: LC3808 <youngsook600405@gmail.com>
+Date: Wed, 4 Nov 2026 18:16:37 +0900
+Subject: [PATCH 1/2] Unify admin analysis entries and extend exam quality
+ review UI
+
+---
+ src/app/admin/analytics/page.tsx              |  8 ++---
+ src/components/admin/admin-analytics.css      |  2 ++
+ src/components/admin/admin-analytics.tsx      |  4 +--
+ src/components/admin/admin-data-page.tsx      | 18 +++++++----
+ src/components/admin/admin-learning-hub.tsx   | 19 +++++++++++
+ src/components/quality/exam-quality.test.tsx  | 21 ++++++++++++
+ src/components/quality/exam-quality.tsx       | 32 +++++++++++++++++++
+ src/components/quality/math-quality-read.tsx  | 11 +++----
+ .../quality/quality-additions.test.tsx        |  6 ++--
+ src/components/quality/quality-console.tsx    |  5 +--
+ src/lib/admin/navigation.ts                   | 18 +++++------
+ 11 files changed, 110 insertions(+), 34 deletions(-)
+ create mode 100644 src/components/admin/admin-learning-hub.tsx
+ create mode 100644 src/components/quality/exam-quality.test.tsx
+ create mode 100644 src/components/quality/exam-quality.tsx
+
+diff --git a/src/app/admin/analytics/page.tsx b/src/app/admin/analytics/page.tsx
+index 12a7d37..d575806 100644
+--- a/src/app/admin/analytics/page.tsx
++++ b/src/app/admin/analytics/page.tsx
+@@ -1,13 +1,13 @@
+ import type { Metadata } from "next";
+ import { AdminSurface } from "@/components/admin/admin-surface";
+ 
+-import { AdminAnalytics } from "@/components/admin/admin-analytics";
++import { AdminFinanceHub } from "@/components/admin/admin-learning-hub";
+ 
+ export const metadata: Metadata = {
+-  title: "사용자 행동 분석",
++  title: "이용권·매출·비용",
+   robots: { index: false, follow: false },
+ };
+ 
+-export default function AdminAnalyticsPage() {
+- return <AdminSurface active="analytics" eyebrow="논술 LAB 운영" title="통합 분석"><AdminAnalytics /></AdminSurface>;
++export default function AdminFinanceHubPage() {
++ return <AdminSurface active="analytics" eyebrow="논술 LAB 운영" title="이용권·매출·비용"><AdminFinanceHub /></AdminSurface>;
+ }
+diff --git a/src/components/admin/admin-analytics.css b/src/components/admin/admin-analytics.css
+index 3a78e62..84bddea 100644
+--- a/src/components/admin/admin-analytics.css
++++ b/src/components/admin/admin-analytics.css
+@@ -1,3 +1,5 @@
+ .analytics-dashboard{display:grid;gap:20px;min-width:0}.analytics-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:end}.analytics-filter label{display:grid;gap:6px}.analytics-filter input,.analytics-filter select,.analytics-filter button{min-height:44px;max-width:100%;border:1px solid #a8b6c8;border-radius:8px;padding:8px;background:white;color:#1b2a49}.analytics-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px}.analytics-metrics>div{background:#f5f7fa;border:1px solid #dae1eb;border-radius:12px;padding:16px;min-width:0;overflow-wrap:anywhere}.analytics-metrics dt{font-size:14px}.analytics-metrics dd{font-size:24px;font-weight:700;margin:12px 0 0}.analytics-links{display:flex;flex-wrap:wrap;gap:12px}.analytics-links a{border:1px solid #dae1eb;border-radius:8px;padding:12px;color:#1b2a49;min-height:44px}.analytics-dashboard p{overflow-wrap:anywhere;line-height:1.7}
+ .analytics-table{max-width:100%;overflow:auto}.analytics-table table{width:100%;border-collapse:collapse}.analytics-table th,.analytics-table td{padding:12px;border-bottom:1px solid #dae1eb;text-align:left;overflow-wrap:anywhere}.analytics-table caption{text-align:left;padding:12px}
+ .admin-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1rem}.admin-shortcuts li{margin-block:.6rem}.admin-stack{display:grid;gap:1rem;min-width:0}.admin-stack li,.admin-stack p{overflow-wrap:anywhere}.admin-stack .admin-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:1rem}
++/* Phase 2: clear boundaries and compact reading surfaces. */
++.analytics-metrics>div{background:#fff;border-color:#8da2b8;border-radius:6px;padding:12px}.analytics-metrics dd{font-size:22px;margin-top:5px}.analytics-links a{border-color:#8da2b8;background:#fff}.analytics-table th{background:#edf3f8;color:#152b44;border-bottom:2px solid #68829b}.analytics-table td{border-bottom-color:#9dafbf}.analytics-table th,.analytics-table td{font-size:14px;padding:10px}.analytics-table button{min-height:40px;border:1px solid #68829b;border-radius:5px;padding:6px 10px;background:white;color:#152b44}.analytics-filter :focus-visible,.analytics-table :focus-visible{outline:3px solid #d86718;outline-offset:3px}
+diff --git a/src/components/admin/admin-analytics.tsx b/src/components/admin/admin-analytics.tsx
+index 2c85c45..860d029 100644
+--- a/src/components/admin/admin-analytics.tsx
++++ b/src/components/admin/admin-analytics.tsx
+@@ -27,8 +27,8 @@ export function AdminAnalytics({focus='all'}:{focus?:'all'|'ga4'|'conversion'|'e
+  return <div className="analytics-dashboard">
+  <form className="analytics-filter" onSubmit={e=>{e.preventDefault();setNow(new Date());}}><label>집계 기간 (KST)<select value={period} onChange={e=>setPeriod(e.target.value as AdminPeriod)}><option value="today">오늘</option><option value="d7">최근 7일</option><option value="d30">최근 30일</option><option value="custom">사용자 지정</option></select></label>{period==='custom'?<><label>시작일<input type="date" value={from} onChange={e=>setFrom(e.target.value)}/></label><label>종료일<input type="date" value={to} onChange={e=>setTo(e.target.value)}/></label></>:null}<button type="submit">새로고침</button></form>
+  {!window?<p role="alert">400일 이내의 올바른 기간을 선택해 주세요.</p>:window?<>{((focus==='ga4'?[]:focus==='conversion'?['kpi','funnel','revenue']:focus==='essay'?['university','cost']:['kpi','funnel','revenue','cost','university',...(process.env.NEXT_PUBLIC_ESSAY_SATISFACTION_V2_ENABLED==='true'?['satisfaction']:[])]) as ReportKind[]).map(kind=><Report key={kind+now.toISOString()} kind={kind} window={window}/>)}</>:null}
+- {window&&<Ga4Report window={window} refresh={now.toISOString()}/>}
+- <AdminPanel title="방문·유입·참여 분석" tone="warning"><p>수집 설정과 보고서 읽기 연결은 별개입니다. 기존 사이트의 실제 조회 결과는 위 GA4 보고서에서 확인합니다. LAB 미연결 지표를 서버 학습 기록으로 대체하지 않습니다.</p><dl><dt>레전드스터디닷컴</dt><dd>속성 396674471 · 위 보고서의 조회 상태 참조</dd><dt>LAB 이벤트 수집 설정</dt><dd>{collectionReadiness(ga4Config)}</dd><dt>레전드스터디 LAB</dt><dd>기존 속성 396674471 · LAB 스트림 16254992877 · 보고서 미연결</dd></dl><p>사이트별 스트림은 별도로 집계합니다. 서비스 간 사용자 연결이 검증되기 전에는 방문자 합계나 교차 서비스 전환율을 계산하지 않습니다.</p><ul>{['LAB 방문·유입·페이지뷰','실시간·기기·지역','교차 서비스 가입·구매 전환','D1·D7·D30 유지율'].map(label=><li key={label}>{label} — 미연결</li>)}</ul><p>스토어 이동 클릭과 설치 완료는 별개입니다. 설치 완료: NOT_AVAILABLE.</p></AdminPanel>
++ {focus==='ga4'&&window&&<Ga4Report window={window} refresh={now.toISOString()}/>}
++ {focus==='ga4'&&<AdminPanel title="방문·유입·참여 분석" tone="warning"><p>수집 설정과 보고서 읽기 연결은 별개입니다. 기존 사이트의 실제 조회 결과는 위 GA4 보고서에서 확인합니다. LAB 미연결 지표를 서버 학습 기록으로 대체하지 않습니다.</p><dl><dt>레전드스터디닷컴</dt><dd>속성 396674471 · 위 보고서의 조회 상태 참조</dd><dt>LAB 이벤트 수집 설정</dt><dd>{collectionReadiness(ga4Config)}</dd><dt>레전드스터디 LAB</dt><dd>기존 속성 396674471 · LAB 스트림 16254992877 · 보고서 미연결</dd></dl><p>사이트별 스트림은 별도로 집계합니다. 서비스 간 사용자 연결이 검증되기 전에는 방문자 합계나 교차 서비스 전환율을 계산하지 않습니다.</p><ul>{['LAB 방문·유입·페이지뷰','실시간·기기·지역','교차 서비스 가입·구매 전환','D1·D7·D30 유지율'].map(label=><li key={label}>{label} — 미연결</li>)}</ul><p>스토어 이동 클릭과 설치 완료는 별개입니다. 설치 완료: NOT_AVAILABLE.</p></AdminPanel>}
+  <AdminPanel title="베타·품질·만족도 상세 분석"><nav className="analytics-links" aria-label="분석 상세 페이지">{links.map(([label,href])=><Link key={href} href={href}>{label} →</Link>)}</nav><p>기존 운영·검수 원장을 그대로 조회합니다. 1~5점 만족도는 별도 SQL 승인·설치 후 기능 플래그로 활성화합니다. 기존 품질 검수와 신규 6개 수치 기준의 호환성은 추가 검증 대상입니다.</p></AdminPanel>
+  </div>;
+ }
+diff --git a/src/components/admin/admin-data-page.tsx b/src/components/admin/admin-data-page.tsx
+index 3d50fad..1e30565 100644
+--- a/src/components/admin/admin-data-page.tsx
++++ b/src/components/admin/admin-data-page.tsx
+@@ -1,11 +1,10 @@
+ 'use client';
+ import Link from 'next/link';
++import {AdminLearningHub} from './admin-learning-hub';
+ import {AdminDataTable} from './admin-data-table';
+ import {useEffect,useMemo,useState} from 'react';
+ import {useAuth} from '@/components/auth-context';
+ import {AdminAnalytics} from './admin-analytics';
+-import {AdminMembersView} from './admin-members-view';
+-import {AdminEssayFeedback} from './admin-essay-feedback';
+ import {AdminPanel,AdminLoading,AdminErrorPanel} from './admin-surface';
+ import {adminErrorKind,mapRpcError,type AdminErrorKind} from '@/lib/admin/errors';
+ import {analyticsWindow} from '@/lib/admin/analytics';
+@@ -19,7 +18,7 @@ function Learning({section}:{section:string}){
+  const [result,setResult]=useState<{key:string;data?:LearningAnalytics;error?:AdminErrorKind}|null>(null);
+  useEffect(()=>{let active=true;if(!client||!user||!window)return;void Promise.resolve(client.rpc('admin_learning_analytics',window)).then(({data,error})=>{if(error)throw mapRpcError(error);const parsed=parseLearningAnalytics(data);if(active)setResult({key,data:parsed});}).catch(error=>{if(active)setResult({key,error:adminErrorKind(error)});});return()=>{active=false;};},[client,user,key,window]);
+  const current=result?.key===key?result:null;
+- const kinds=section==='universities'?['targets']:section==='materials-data'?['saved','recent']:section==='applications'?['applications']:['targets','saved','recent','applications'];
++ const kinds=section==='study'?[]:section==='universities'?['targets']:section==='materials-data'?['saved','recent']:section==='applications'?['applications']:['targets','saved','recent','applications'];
+  return <div className="admin-stack">
+  <form onSubmit={e=>{e.preventDefault();setNow(new Date());}} className="analytics-filter"><label>집계 기간 (KST)<select value={period} onChange={e=>setPeriod(e.target.value as AdminPeriod)}><option value="today">오늘</option><option value="d7">최근 7일</option><option value="d30">최근 30일</option><option value="custom">사용자 지정 (최대 400일)</option></select></label>{period==='custom'&&<><label>시작일<input type="date" value={from} onChange={e=>setFrom(e.target.value)}/></label><label>종료일<input type="date" value={to} onChange={e=>setTo(e.target.value)}/></label></>}<button type="submit">조회</button></form>
+  {!window?<AdminPanel title="올바른 기간을 선택해 주세요"/>:!current?<AdminLoading/>:current.error?<AdminErrorPanel kind={current.error}/>:current.data?<>
+@@ -32,11 +31,18 @@ function Learning({section}:{section:string}){
+  <AdminPanel title="집계 해석"><p>{learningDefinitions.study}</p><p>성적 분포·인과 분석·희망 대학 변경 추이·검색 횟수는 기존 데이터만으로 복원하지 않습니다. 개인별 기록은 권한이 확인된 회원 상세에서 확인하세요.</p><Link href="/admin/members/">회원 상세 / Student 360</Link></AdminPanel>
+  </div>;
+ }
++function MergedEntry({href,label}:{href:string;label:string}){return <AdminPanel title="통합된 분석 화면"><p>기존 주소를 유지합니다. 같은 조회 기능은 아래 화면에서 확인하세요.</p><a href={href} onClick={e=>{e.preventDefault();window.location.assign(href+window.location.search);}}>{label} →</a></AdminPanel>;}
+ export function AdminDataPage({section}:{section:string}){
++ if(section==='overview')return <MergedEntry href="/admin/" label="서비스 현황"/>;
++ if(section==='installs')return <MergedEntry href="/admin/data/visitors/" label="방문자·유입 (설치 클릭과 설치 완료 구분)"/>;
++ if(section==='students')return <MergedEntry href="/admin/members/" label="회원 / Student 360"/>;
++ if(section==='satisfaction')return <MergedEntry href="/admin/essay-feedback/" label="만족도·신고"/>;
++
++ if(section==='essay-usage')return <AdminLearningHub/>;
+  if(['overview','conversion','essay-usage','visitors','installs'].includes(section))return <AdminAnalytics focus={['visitors','installs'].includes(section)?'ga4':section==='conversion'?'conversion':section==='essay-usage'?'essay':'all'}/>;
+- if(section==='students')return <AdminMembersView/>;
+- if(section==='satisfaction')return <AdminEssayFeedback/>;
+- if(section==='samples')return <AdminPanel title="기존 첨삭 품질 검수"><p>원본 답안과 평가 결과는 기존 검수 전용 권한으로 조회합니다. 일반 운영자 권한을 품질 열람 권한으로 확대하지 않습니다.</p><Link href="/owner-review/essay/">실제 답안·재첨삭 비교 검수 →</Link><p><Link href="/ql/">품질 판정 기록 →</Link></p></AdminPanel>;
++
++
++ if(section==='samples')return <AdminPanel title="기존 첨삭 품질 검수"><p>원본 답안과 평가 결과는 기존 검수 전용 권한으로 조회합니다. 일반 운영자 권한을 품질 열람 권한으로 확대하지 않습니다.</p><Link href="/ql/">실제 답안·재첨삭 비교 검수 →</Link><p><Link href="/ql/">품질 판정 기록 →</Link></p></AdminPanel>;
+  if(section==='scores')return <AdminPanel title="성적·학습 분석 — NOT_IMPLEMENTED"><p>Student 360의 academic_performance는 현재 null 계약입니다. 개인 연습 점수를 공식 성적으로 환산하지 않습니다. 비교 가능한 성적 집계와 별도 권한·조회 감사 계약이 필요합니다.</p></AdminPanel>;
+  if(section==='verification')return <AdminPanel title="베타 검증 — NOT_TESTED"><p>자동 테스트 결과와 실제 사용자 평가 E2E는 다릅니다. TEST Gateway·Provider 승인·실기기 검수를 완료하기 전에는 출시 PASS로 표시하지 않습니다.</p><Link href="/admin/beta/">베타 설정 확인</Link><p><Link href="/admin/beta/failures/">실패·복구 기록 확인</Link></p></AdminPanel>;
+  return <Learning section={section}/>;
+diff --git a/src/components/admin/admin-learning-hub.tsx b/src/components/admin/admin-learning-hub.tsx
+new file mode 100644
+index 0000000..ba2ca0c
+--- /dev/null
++++ b/src/components/admin/admin-learning-hub.tsx
+@@ -0,0 +1,19 @@
++'use client';
++import {useEffect,useMemo,useState} from 'react';
++import Link from 'next/link';
++import {useAuth} from '@/components/auth-context';
++import {analyticsWindow} from '@/lib/admin/analytics';
++import './admin-analytics.css';
++import {AdminPanel} from './admin-surface';
++type Report={state:string;formula_version:string;as_of:string;metrics:Record<string,number>|null;weekly_state:string;weekly:{week:string;users:number;partial:boolean}[];exams_state:string;exams:{exam_id:string;exam_name:string;university:string;users:number;runs:number;questions:number}[]};
++export function AdminLearningHub(){
++ const {client,user}=useAuth();const [now,setNow]=useState(()=>new Date());const [period,setPeriod]=useState<'d7'|'d30'>('d30');const range=useMemo(()=>analyticsWindow(period,'','',now)!,[period,now]);const key=JSON.stringify([user?.id,range,now]);
++ const [result,setResult]=useState<{key:string;data?:Report;error?:boolean}|null>(null);
++ useEffect(()=>{let active=true;if(!client||!user)return;void client.rpc('admin_exam_learning',range).then(({data,error})=>{if(active)setResult(error?{key,error:true}:{key,data});});return()=>{active=false;};},[client,user,range,key]);const data=result?.key===key?result.data:undefined;
++ return <div className="admin-stack"><form className="analytics-filter" onSubmit={e=>{e.preventDefault();setNow(new Date());}}><label>기간 (KST)<select value={period} onChange={e=>setPeriod(e.target.value as 'd7'|'d30')}><option value="d7">최근 7일</option><option value="d30">최근 30일</option></select></label><button>새로고침</button></form>
++ <nav className="analytics-links" aria-label="학습 분석 연결"><Link href="/admin/data/study/">기록 공부 시간</Link><Link href="/admin/data/learning/">기타 학습·진학</Link><Link href="/ql/">평가 품질 검수</Link></nav>
++ <AdminPanel title="회차 기반 논술 학습 흐름"><p>요청 회차와 완료 회차는 각각 요청일·완료일 기준입니다. 인문·혼합형 회차 원본만 집계하며 별도 수리 평가·legacy는 더하지 않습니다. 과거 TEST/LIVE 구분: 미확인.</p>{result?.key===key&&result.error?<p role="alert">조회 실패 — 권한 또는 RPC 연결 상태를 확인하세요.</p>:!data?<p role="status">조회 중…</p>:<><p>{data.state} · {new Date(data.as_of).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})} KST · {data.formula_version}</p>{data.metrics?<dl className="analytics-metrics">{Object.entries({users:'제출 회원',runs:'요청 회차',completed:'완료 회차',free_rewrites:'무료 재첨삭 완료 회차',loop_users:'연결된 학습 루프 완료 회원'}).map(([k,label])=><div key={k}><dt>{label}</dt><dd>{data.metrics![k]?.toLocaleString()??'미확인'}</dd></div>)}</dl>:<p>{data.state==='EMPTY'?'선택 기간에 요청 기록이 없습니다.':'최소 표본 보호로 수치를 표시하지 않습니다.'}</p>}<p>무료 재첨삭은 원본 과금 결정의 included_revision·0개 근거가 있는 완료만 포함합니다. 원장 소비를 추가 실행하지 않습니다.</p></>}</AdminPanel>
++ {data&&<><AdminPanel title="주간 전체 학습 루프"><p>같은 회원·시험·문항 집합에서 이전 완료 후 재작성 완료한 회원을 KST 월요일 주간으로 중복 제거합니다. 이전 완료는 이전 주일 수 있습니다. 선택 기간으로 잘린 주·이번 주는 미완결입니다.</p><p>{data.weekly_state}</p><div className="analytics-table"><table><thead><tr><th>주 시작</th><th>완료 회원</th><th>관측 범위</th></tr></thead><tbody>{data.weekly.map(w=><tr key={w.week}><td>{w.week}</td><td>{w.users}</td><td>{w.partial?'미완결 / 부분 기간':'완결 주'}</td></tr>)}</tbody></table></div></AdminPanel><AdminPanel title="대학·시험별 요청"><p>{data.exams_state} · 최대 100개 시험. 소표본 시험이 있으면 역산 방지를 위해 전체 표를 보호합니다.</p><div className="analytics-table"><table><thead><tr><th>대학</th><th>시험</th><th>회원</th><th>회차</th><th>제출 문항</th></tr></thead><tbody>{data.exams.map(e=><tr key={e.exam_id}><td>{e.university??'미확인'}</td><td>{e.exam_name??e.exam_id}</td><td>{e.users}</td><td>{e.runs}</td><td>{e.questions}</td></tr>)}</tbody></table></div></AdminPanel></>}
++ <AdminPanel title="학습 5단계·변화"><p>NOT_CONNECTED — 운영 저장 계약 통합 전입니다. TASK16-L의 저장된 판단만 연결하며 기존 평가 요소 점수로 학습 단계를 추정하지 않습니다. 이전 평가 없음·기준 다름·판단 보류는 성장 수치로 환산하지 않습니다.</p></AdminPanel></div>;
++}
++export function AdminFinanceHub(){return <div className="admin-stack"><AdminPanel title="이용권·매출·비용"><nav className="analytics-links"><Link href="/admin/credit/">지급 유형·예약·사용·복구 원장</Link><Link href="/admin/payment/">WEB 결제·환불 / 모바일 구매 지급</Link><Link href="/admin/operations/">Provider 비용·처리 내역</Link></nav><p>기존 원장과 각 화면의 기간·유형 필터를 재사용합니다. WEB LIVE KRW, TEST, IAP 금액 미확인, Provider USD 비용은 서로 합산하지 않습니다.</p><p>예약은 소비 확정과 다릅니다. UNKNOWN 비용은 0원으로 표시하지 않습니다.</p></AdminPanel></div>;}
+diff --git a/src/components/quality/exam-quality.test.tsx b/src/components/quality/exam-quality.test.tsx
+new file mode 100644
+index 0000000..1b3b280
+--- /dev/null
++++ b/src/components/quality/exam-quality.test.tsx
+@@ -0,0 +1,21 @@
++// @vitest-environment jsdom
++import {render,screen,fireEvent,waitFor} from '@testing-library/react';
++import {it,expect,vi} from 'vitest';
++import type {SupabaseClient} from '@supabase/supabase-js';
++import {ExamQuality} from './exam-quality';
++const row={run_id:'run',question_id:'question',official_label:'공식 문제 2',state:'completed',created_at:'2026-11-04T00:00:00Z',reviewed:false,parent_id:null};
++it('reads list without original bodies, loads only selected subject and records no review on navigation',async()=>{
++ const rpc=vi.fn(async(fn:string)=>({error:null,data:fn==='ql_exam_cases'?{rows:[row],total:1,coverage:{subjects:1,reviewed:0}}:{subject:{...row,snapshot_sha256:'a'.repeat(64),answer:{body:'synthetic original'},result:{evaluation:'synthetic output'},result_available:true},history:[]}}));
++ render(<ExamQuality client={{rpc} as unknown as SupabaseClient}/>);
++ fireEvent.click(await screen.findByRole('button',{name:'검토 시작'}));
++ await screen.findByText('synthetic original');
++ expect(rpc.mock.calls.map(c=>c[0])).toEqual(['ql_exam_cases','ql_exam_detail']);
++ expect(screen.getByRole('button',{name:'검토 기록 저장'})).toBeDisabled();
++ fireEvent.click(screen.getByRole('button',{name:'새로고침'}));
++ await waitFor(()=>expect(screen.queryByText('synthetic original')).toBeNull());
++ expect(rpc.mock.calls.some(c=>c[0]==='ql_exam_submit')).toBe(false);
++});
++it('permission error is not represented as zero subjects',async()=>{
++ const rpc=vi.fn(async()=>({data:null,error:{code:'42501'}}));render(<ExamQuality client={{rpc} as unknown as SupabaseClient}/>);
++ await screen.findByRole('alert');expect(screen.queryByText('조건에 맞는 기록이 없습니다.')).toBeNull();
++});
+diff --git a/src/components/quality/exam-quality.tsx b/src/components/quality/exam-quality.tsx
+new file mode 100644
+index 0000000..a9c8693
+--- /dev/null
++++ b/src/components/quality/exam-quality.tsx
+@@ -0,0 +1,32 @@
++'use client';
++import {useEffect,useRef,useState} from 'react';
++import type {SupabaseClient} from '@supabase/supabase-js';
++import '../admin/admin-analytics.css';
++import {QlStructuredValue,QlSection} from './quality-primitives';
++type Row={run_id:string;question_id:string;official_label:string|null;state:string;created_at:string;reviewed:boolean;parent_id:string|null};
++type Subject=Row&{snapshot_sha256:string;answer:unknown;result:unknown;result_available:boolean};
++type Review={id:string;is_active:boolean;overall_disposition:string;created_at:string;summary_note:string|null;review_evidence:unknown};
++type Detail={subject:Subject;history:Review[]};
++const dimensions={diagnosis:'진단의 정확성',core_priority:'핵심 문제의 우선순위',actionability:'개선 조언의 실행 가능성',evidence_adherence:'당시 근거 준수',stance_preservation:'학생 논지 보존',hallucination_absence:'없는 내용·오류 생성 없음'};
++export function ExamQuality({client}:{client:SupabaseClient}){
++ const [period,setPeriod]=useState(30),[offset,setOffset]=useState(0),[unreviewed,setUnreviewed]=useState(false),[reload,setReload]=useState(0);
++ const [list,setList]=useState<{rows:Row[];total:number;coverage:{subjects:number;reviewed:number}}|null>(null),[detail,setDetail]=useState<Detail|null>(null),[error,setError]=useState('');
++ const [loading,setLoading]=useState(true);const request=useRef(0);
++ useEffect(()=>{let live=true;const requests=request;const to=new Date();const from=new Date(to.getTime()-period*86400000);void client.rpc('ql_exam_cases',{p_from:from.toISOString(),p_to:to.toISOString(),p_offset:offset,p_unreviewed:unreviewed}).then(({data,error})=>{if(!live)return;if(error){setError('목록 조회 실패: 권한·RPC 연결 상태를 확인하세요.');setList(null);}else{setList(data);setError('');}setLoading(false);});return()=>{live=false;requests.current++;};},[client,period,offset,unreviewed,reload]);
++ async function select(row:Row){const id=++request.current;setDetail(null);setError('');const {data,error}=await client.rpc('ql_exam_detail',{p_run_id:row.run_id,p_question_id:row.question_id});if(id!==request.current)return;if(error)setError('상세 조회 실패: 접근 제한 또는 원본을 확인할 수 없습니다.');else setDetail(data);}
++ function refresh(){request.current++;setDetail(null);setList(null);setLoading(true);setReload(x=>x+1);}
++ return <main className="content-wrap content-wrap--wide"><h1>회차·혼합형 품질 검수</h1><p>저장된 원본을 검토합니다. 사람 검토는 학생 결과·이용권에 영향을 주지 않습니다.</p>
++ <div className="analytics-filter"><label>요청 기간<select value={period} onChange={e=>{setPeriod(Number(e.target.value));setOffset(0);refresh();}}><option value={7}>최근 7일</option><option value={30}>최근 30일</option><option value={400}>최근 400일</option></select></label><label><input type="checkbox" checked={unreviewed} onChange={e=>{setUnreviewed(e.target.checked);setOffset(0);refresh();}}/>미검토만</label><button onClick={refresh}>새로고침</button></div>
++ {error&&<p role="alert">{error}</p>}{loading&&<p role="status">목록 조회 중…</p>}
++ {list&&<><p>회차 내 문항 {list.coverage.subjects}건 · 검토 기록 보유 {list.coverage.reviewed}건 · 현재 조건 {list.total}건. 처리 완료는 품질 통과를 뜻하지 않습니다.</p><div className="analytics-table"><table><caption>원본 회차·문항별 검토 후보</caption><thead><tr><th>공식 문항</th><th>요청일 (KST)</th><th>회차</th><th>처리 상태</th><th>검토</th></tr></thead><tbody>{list.rows.map(r=><tr key={r.run_id+r.question_id}><td>{r.official_label??'공식 번호 미확인'}</td><td>{new Date(r.created_at).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})}</td><td>{r.parent_id?'재첨삭':'최초/후속 유료'}</td><td>{r.state}</td><td><button onClick={()=>void select(r)}>{r.reviewed?'검토 이력':'검토 시작'}</button></td></tr>)}</tbody></table></div>{!list.rows.length&&<p>조건에 맞는 기록이 없습니다.</p>}<button disabled={!offset} onClick={()=>{setOffset(Math.max(0,offset-50));refresh();}}>이전</button> <span>{offset+1}–{offset+list.rows.length} / {list.total}</span> <button disabled={offset+50>=list.total} onClick={()=>{setOffset(offset+50);refresh();}}>다음</button></>}
++ {detail&&<section key={detail.subject.run_id+detail.subject.question_id}><h2>{detail.subject.official_label??'공식 번호 미확인'} 검토</h2><p>원본 ID: {detail.subject.run_id} / {detail.subject.question_id}</p><div className="ql-workspace__grid"><QlSection title="당시 저장 답안·입력 참조"><QlStructuredValue value={detail.subject.answer}/><p>사진·OCR이 없는 기록은 추정하여 복원하지 않습니다.</p></QlSection><QlSection title="당시 평가·기준·근거 버전"><QlStructuredValue value={detail.subject.result}/></QlSection></div><ExamReview client={client} detail={detail} onSaved={()=>void select(detail.subject)}/><QlSection title="불변 검토 이력 (최근 100건)">{detail.history.map(h=><article key={h.id}><h3>{h.overall_disposition} · {h.is_active?'현재 판정':'정정 전 판정'}</h3><p>{new Date(h.created_at).toLocaleString('ko-KR')} · {h.summary_note}</p><QlStructuredValue value={h.review_evidence}/></article>)}</QlSection></section>}
++ </main>;
++}
++function ExamReview({client,detail,onSaved}:{client:SupabaseClient;detail:Detail;onSaved:()=>void}){
++ const [values,setValues]=useState<Record<string,string>>({}),[disposition,setDisposition]=useState('NEEDS_REVIEW'),[note,setNote]=useState(''),[confirmed,setConfirmed]=useState(false),[issue,setIssue]=useState(''),[regression,setRegression]=useState(''),[parent,setParent]=useState(''),[busy,setBusy]=useState(false),[status,setStatus]=useState('');
++ const pending=useRef<{fingerprint:string;id:string}|null>(null);
++ async function save(){setBusy(true);setStatus('');const evidence:Record<string,string>={};if(issue)evidence.issue_url=issue;if(regression)evidence.regression_url=regression;
++ const payload={run_id:detail.subject.run_id,question_id:detail.subject.question_id,expected_snapshot_sha256:detail.subject.snapshot_sha256,rubric_result:{...values,sentence_feedback:'NA',progression:'NA',generated_rewrite:'NA'},overall_disposition:disposition,summary_note:note,findings:[],review_evidence:evidence,official_source_reviewed:confirmed,supersedes_judgment_id:parent||null};const fingerprint=JSON.stringify(payload);if(pending.current?.fingerprint!==fingerprint)pending.current={fingerprint,id:crypto.randomUUID()};
++ try{const {error}=await client.rpc('ql_exam_submit',{p_payload:{...payload,client_submission_id:pending.current.id}});if(error)throw error;setStatus('검토 기록이 저장되었습니다.');onSaved();}catch{setStatus('저장 실패: 원본 변경·정정 충돌·권한·입력값을 확인하세요. 같은 입력으로 재시도하면 중복 저장되지 않습니다.');}finally{setBusy(false);}}
++ return <QlSection title="사람 품질 판단"><p>각 항목: OK = 근거와 일치 · CONCERN = 추가 확인 필요 · FAIL = 근거로 오류 확인. 학습 5단계·학생 점수와 별개입니다.</p><form onSubmit={e=>{e.preventDefault();void save();}}>{Object.entries(dimensions).map(([key,label])=><label key={key} style={{display:'block',margin:'8px 0'}}>{label} <select required value={values[key]??''} onChange={e=>setValues({...values,[key]:e.target.value})}><option value="">판단 선택</option><option>OK</option><option>CONCERN</option><option>FAIL</option></select></label>)}<p>문장별·성장·모범 재작성 검토: 이 문항 검토 양식의 범위 밖(NA).</p><label>종합 판단 <select value={disposition} onChange={e=>setDisposition(e.target.value)}><option value="NEEDS_REVIEW">판단 보류</option>{detail.subject.state==='completed'&&detail.subject.result_available&&<><option value="PASS">이상 없음</option><option value="PASS_WITH_NOTES">참고 사항 있음</option><option value="FAIL">확정 오류</option></>}</select></label><label style={{display:'block'}}>판단 근거·오류 분류<textarea required maxLength={2000} value={note} onChange={e=>setNote(e.target.value)}/></label><label>개선 과제 URL<input type="url" maxLength={1000} value={issue} onChange={e=>setIssue(e.target.value)}/></label><label>격리 회귀 증거 URL<input type="url" maxLength={1000} value={regression} onChange={e=>setRegression(e.target.value)}/></label><p>외부 과제에 학생 원문을 복사하지 마세요. URL 연결은 회귀 통과·운영 적용을 의미하지 않습니다.</p><label>정정 대상<select value={parent} onChange={e=>setParent(e.target.value)}><option value="">독립 검토 추가</option>{detail.history.filter(h=>h.is_active).map(h=><option key={h.id} value={h.id}>{h.overall_disposition} · {h.created_at}</option>)}</select></label><label style={{display:'block'}}><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/>원본과 당시 기준·근거의 유무를 확인했습니다.</label><button disabled={busy||!confirmed}>{busy?'저장 중…':'검토 기록 저장'}</button><p role="status">{status}</p></form></QlSection>;
++}
+diff --git a/src/components/quality/math-quality-read.tsx b/src/components/quality/math-quality-read.tsx
+index c339971..6c7a8f5 100644
+--- a/src/components/quality/math-quality-read.tsx
++++ b/src/components/quality/math-quality-read.tsx
+@@ -4,7 +4,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
+ import { StoredMathQualityReader, type StoredMathCase, type StoredMathDetail, type StoredMathReview } from '@/lib/math-quality/runtime/quality-client';
+ import { mathReport, object, text } from '@/lib/my/evaluation-report';
+ import { EvaluationReport, EvaluationComparison } from '@/components/my/evaluation-report';
+-import { traceGroups, answerChanges } from '@/lib/math-quality/traceability';
++import { answerChanges } from '@/lib/math-quality/traceability';
+ import { qualityMetadata, sameTraceEdge } from '@/lib/math-quality/metadata';
+ import { MathReviewHistory } from './math-review-history';
+ import { QlSection, QlStructuredValue } from './quality-primitives';
+@@ -17,10 +17,9 @@ export function MathQualityRead({ client }: {
+     const [cases, setCases] = useState<StoredMathCase[]>([]), [reviews, setReviews] = useState<StoredMathReview[]>([]);
+     const [busy, setBusy] = useState(true), [error, setError] = useState(false), [more, setMore] = useState(false), [reload, setReload] = useState(0), [unreviewed, setUnreviewed] = useState(false);
+     const [selected, setSelected] = useState<string | null>(null), [detail, setDetail] = useState<StoredMathDetail | null>(null), [prior, setPrior] = useState<StoredMathDetail | null>(null), [detailError, setDetailError] = useState(false);
+-    const [details, setDetails] = useState<Record<string, StoredMathDetail>>({});
+     const generation = useRef(0), selection = useRef(0);
+-    useEffect(() => { const generations = generation, selections = selection; const g = ++generations.current; reader.list().then(async (rows) => ({ rows, states: rows.length ? await reader.reviewState(rows.map(r => r.evaluation_id)) : [], loaded: await Promise.all(rows.map(r => reader.detail(r.evaluation_id))) })).then(({ rows, states, loaded }) => { if (g !== generation.current)
+-        return; setDetails(Object.fromEntries(loaded.map(d => [d.evaluation_id,d]))); setCases(rows); setReviews(states); setMore(rows.length === 50); setBusy(false); }).catch(() => { if (g === generation.current) {
++    useEffect(() => { const generations = generation, selections = selection; const g = ++generations.current; reader.list().then(async (rows) => ({ rows, states: rows.length ? await reader.reviewState(rows.map(r => r.evaluation_id)) : [] })).then(({ rows, states }) => { if (g !== generation.current)
++        return; setCases(rows); setReviews(states); setMore(rows.length === 50); setBusy(false); }).catch(() => { if (g === generation.current) {
+         setError(true);
+         setBusy(false);
+     } }); return () => { generations.current++; selections.current++; }; }, [reader, reload]);
+@@ -28,12 +27,10 @@ export function MathQualityRead({ client }: {
+     const loadMore = async () => { const g = generation.current; setBusy(true); try {
+         const rows = await reader.list(cases.at(-1));
+         const states = rows.length ? await reader.reviewState(rows.map(r => r.evaluation_id)) : [];
+-        const loaded = await Promise.all(rows.map(r => reader.detail(r.evaluation_id)));
+         if (g !== generation.current)
+             return;
+         setCases(v => [...v, ...rows.filter(r => !v.some(c => c.evaluation_id === r.evaluation_id))]);
+         setReviews(v => [...v, ...states]);
+-        setDetails(v => ({...v,...Object.fromEntries(loaded.map(d=>[d.evaluation_id,d]))}));
+         setMore(rows.length === 50);
+     }
+     catch {
+@@ -66,7 +63,7 @@ export function MathQualityRead({ client }: {
+  {busy && <p role="status">목록을 확인하고 있습니다.</p>}{error && <p role="alert">수리논술 기록을 불러오지 못했습니다. 권한과 연결 상태를 확인해 주세요.</p>}
+  {!busy && !error && !visible.length && <p className="ql-state">현재 조건에 맞는 수리논술 평가가 없습니다.</p>}
+  <p className="ql-privacy-note">가명 사용자는 관리자 검수용 참조입니다. 답안 과정은 확인된 연결 관계로 구분하며, 확인되지 않은 대학·학년도는 표시하지 않습니다.</p>
+- {traceGroups(cases.filter(c=>details[c.evaluation_id]).map(c=>({...c,detail:details[c.evaluation_id]}))).map(g=><section key={g.key}><h2>{g.label}</h2><p>수리논술 · {g.rubric}</p>{g.users.map(u=><section key={u.id}><h3>{u.reference?`가명 사용자 ${u.reference.slice(4,16)}`:'사용자: 확인되지 않음'}</h3>{u.processes.map(p=><section key={p.id}><h3>답안 과정 {p.id.slice(0,8)}</h3>{p.reason&&<p role="status">{p.reason}</p>}<ul className="ql-list__items">{p.records.filter(c=>visible.some(v=>v.evaluation_id===c.evaluation_id)).map(c=><li key={c.evaluation_id}><button className={`ql-case ${selected===c.evaluation_id?'ql-case--selected':''}`} onClick={()=>void select(c.evaluation_id)} aria-pressed={selected===c.evaluation_id}><strong>{text(c.detail.prior_evaluation_id)?'재첨삭':'최초 첨삭'} · {new Date(c.completed_at).toLocaleString('ko-KR')}</strong><span>{isUnreviewed(c.evaluation_id)?'미검토':'검수 상태 확인'}</span><span className="ql-case__meta">평가 {c.evaluation_id.slice(0,8)}</span></button></li>)}</ul></section>)}</section>)}</section>)}{more && <button className="button button--outline ql-list__more" onClick={() => void loadMore()} disabled={busy}>더 불러오기</button>}</div></aside>
++ <ul className="ql-list__items">{visible.map(c=><li key={c.evaluation_id}><button className={`ql-case ${selected===c.evaluation_id?'ql-case--selected':''}`} onClick={()=>void select(c.evaluation_id)} aria-pressed={selected===c.evaluation_id}><strong>{new Date(c.completed_at).toLocaleString('ko-KR')}</strong><span>{isUnreviewed(c.evaluation_id)?'미검토':'검수 상태 확인'}</span><span>평가 {c.evaluation_id.slice(0,8)} · 대학·문항은 선택 후 확인</span></button></li>)}</ul>{more && <button className="button button--outline ql-list__more" onClick={() => void loadMore()} disabled={busy}>더 불러오기</button>}</div></aside>
+  <main className="ql-workspace__detail" aria-label="수리논술 평가 상세"><div className="ql-detail"><p className="eyebrow">CASE DETAIL</p>{detailError ? <p role="alert">평가 상세를 불러오지 못했습니다.</p> : !detail ? <p>{selected ? '평가를 확인하고 있습니다.' : '왼쪽에서 평가를 선택하세요.'}</p> : <>
+  <h2>{text(object(detail.problem).title) || '수리논술'} · {text(object(detail.leaf).label) || '문항'}</h2>
+  <p>{text(detail.prior_evaluation_id) ? '재첨삭' : '최초 첨삭'} · {cases.find(c => c.evaluation_id === detail.evaluation_id)?.completed_at ? new Date(cases.find(c => c.evaluation_id === detail.evaluation_id)!.completed_at).toLocaleString('ko-KR') : ''}</p>
+diff --git a/src/components/quality/quality-additions.test.tsx b/src/components/quality/quality-additions.test.tsx
+index fa54b55..114ba9c 100644
+--- a/src/components/quality/quality-additions.test.tsx
++++ b/src/components/quality/quality-additions.test.tsx
+@@ -58,7 +58,7 @@ describe('stored Math quality read-only integration', () => {
+         const c = fakeClient();
+         render(<MathQualityRead client={c as unknown as SupabaseClient}/>);
+         await screen.findByRole('button', { name: /평가 revised/ });
+-        expect(screen.getAllByRole('heading',{name:'사용자: 확인되지 않음'}).length).toBeGreaterThan(0);
++        expect(c.rpc.mock.calls.some(([, {p_request}])=>p_request.action==='detail')).toBe(false);
+         expect(screen.queryByText(/가명 사용자 [a-f0-9]{12}/)).toBeNull();
+         fireEvent.click(screen.getByRole('checkbox'));
+         expect(screen.queryByRole('button', { name: /평가 first/ })).toBeNull();
+@@ -87,8 +87,8 @@ describe('stored Math quality read-only integration', () => {
+ 
+ it('renders server pseudonym, independent lineage and unverified exam state',async()=>{
+  const c=fakeClient(true);render(<MathQualityRead client={c as unknown as SupabaseClient}/>);
+- await screen.findByRole('heading',{name:'가명 사용자 aaaaaaaaaaaa'});
+- expect(screen.getAllByRole('heading',{name:/답안 과정/})).toHaveLength(1);
++ await screen.findByRole('button',{name:/평가 revised/});
++ expect(c.rpc.mock.calls.some(([, {p_request}])=>p_request.action==='detail')).toBe(false);
+  fireEvent.click(screen.getByRole('button',{name:/평가 revised/}));
+  await screen.findAllByText('정답 포함 상세 평가 공개');screen.getAllByText('정답 포함 상세 평가 공개').forEach(b=>fireEvent.click(b));
+  await screen.findByRole('heading',{name:'최초 답안과 첨삭'});
+diff --git a/src/components/quality/quality-console.tsx b/src/components/quality/quality-console.tsx
+index 15d5db7..5cbd533 100644
+--- a/src/components/quality/quality-console.tsx
++++ b/src/components/quality/quality-console.tsx
+@@ -2,6 +2,7 @@
+ 
+ import Link from "next/link";
+ import {QualityBack} from "./quality-back";
++import {ExamQuality} from './exam-quality';
+ import {MathQualityRead} from "./math-quality-read";
+ import { useEffect, useMemo, useRef, useState } from "react";
+ 
+@@ -66,7 +67,7 @@ function OperatorGateView({ auth }: { auth: ReturnType<typeof useAuth> }) {
+     () => (auth.client ? createHumanReviewClient(auth.client) : null),
+     [auth.client],
+   );
+-  const [source,setSource]=useState<"general"|"math">("general");
++  const [source,setSource]=useState<"general"|"math"|"exam">("general");
+   const [gate, setGate] = useState<OperatorGate>("checking");
+   const [errorKind, setErrorKind] = useState<QualityErrorKind | null>(null);
+   const [reloadToken, setReloadToken] = useState(0);
+@@ -133,7 +134,7 @@ function OperatorGateView({ auth }: { auth: ReturnType<typeof useAuth> }) {
+     );
+   }
+ 
+-  return <><div className="content-wrap content-wrap--wide ql-source-controls"><QualityBack/><div role="group" aria-label="논술 유형"><button className="button button--outline button--small" aria-pressed={source==='general'} onClick={()=>setSource('general')}>일반 논술</button><button className="button button--outline button--small" aria-pressed={source==='math'} onClick={()=>setSource('math')}>수리논술</button></div></div>{source==='math'&&auth.client?<MathQualityRead client={auth.client}/>:<QualityWorkspace quality={quality as QualityClient} humanReview={humanReview as HumanReviewClient}/>}</>;
++  return <><div className="content-wrap content-wrap--wide ql-source-controls"><QualityBack/><p>일반 논술은 이전 단일 평가 기록입니다. 현재 시험 회차는 회차·혼합형에서 확인하세요. 소스별 건수는 서로 다른 단위입니다.</p><div role="group" aria-label="논술 유형"><button className="button button--outline button--small" aria-pressed={source==='exam'} onClick={()=>setSource('exam')}>회차·혼합형</button><button className="button button--outline button--small" aria-pressed={source==='general'} onClick={()=>setSource('general')}>일반 논술</button><button className="button button--outline button--small" aria-pressed={source==='math'} onClick={()=>setSource('math')}>수리논술</button></div></div>{source==='exam'&&auth.client?<ExamQuality client={auth.client}/>:source==='math'&&auth.client?<MathQualityRead client={auth.client}/>:<QualityWorkspace quality={quality as QualityClient} humanReview={humanReview as HumanReviewClient}/>}</>;
+ }
+ 
+ function GateShell({ children }: { children: React.ReactNode }) {
+diff --git a/src/lib/admin/navigation.ts b/src/lib/admin/navigation.ts
+index a0b4eac..5f1a2ae 100644
+--- a/src/lib/admin/navigation.ts
++++ b/src/lib/admin/navigation.ts
+@@ -5,11 +5,11 @@ export type NavEntry = { key: string; label: string; href: string | null };
+  * rather than reimplemented: it keeps its own authorization and its own route.
+  */
+ const EXISTING_NAV: readonly NavEntry[] = [
+-  { key: "dashboard", label: "대시보드", href: "/admin/" },
++  { key: "dashboard", label: "서비스 현황", href: "/admin/" },
+   { key: "members", label: "회원", href: "/admin/members/" },
+   { key: "credit", label: "이용권", href: "/admin/credit/" },
+   { key: "payment", label: "결제", href: "/admin/payment/" },
+-  { key: "analytics", label: "사용자 행동 분석", href: "/admin/analytics/" },
++  { key: "analytics", label: "이용권·매출·비용", href: "/admin/analytics/" },
+   { key: "essay", label: "평가·비용 모니터링", href: "/admin/operations/" },
+   { key: "beta", label: "베타 테스트 관리", href: "/admin/beta/" },
+   { key: "beta-usage", label: "베타 이용 현황", href: "/admin/beta/usage/" },
+@@ -20,22 +20,20 @@ const EXISTING_NAV: readonly NavEntry[] = [
+   // The quality console is the existing /ql surface, imported unchanged. Its
+   // own authorization (quality_operators) is what guards it; this link grants
+   // nothing and the two roles are deliberately not merged.
+-  { key: "quality", label: "첨삭 품질", href: "/ql/" },
++  { key: "quality", label: "평가 품질 관리", href: "/ql/" },
+   { key: "materials", label: "논술 자료 검수", href: "/admin/materials/" },
+ ] as const;
+ 
+ export const ADMIN_GROUPS = [
+- {title:'기본 운영',keys:['dashboard','members','credit','payment','inquiries','quality','materials']},
+- {title:'서비스 분석',keys:['overview','visitors','analytics','conversion','installs']},
+- {title:'학습·입시 빅데이터',keys:['learning','universities','materials-data','study','scores','applications','students','insights']},
+- {title:'논술 LAB 분석',keys:['essay-usage','samples','satisfaction','essay']},
+- {title:'베타 운영',keys:['beta','beta-usage','verification','essay-feedback','notices']},
+- {title:'관련 운영 내역',keys:['beta-failures']},
++ {title:'기본 운영',keys:['members','credit','payment','inquiries','notices','beta','materials']},
++ {title:'분석·품질',keys:['dashboard','essay-usage','quality','analytics']},
++ {title:'운영 점검',keys:['essay','essay-feedback']},
++ {title:'유입·행동 (GA4)',keys:['visitors']},
+ ] as const;
+ const EXTRA_NAV = [
+  ['overview','통합 분석 대시보드'],['visitors','방문자·유입 분석'],['conversion','가입·전환 분석'],['installs','앱 설치 유입 분석'],
+  ['learning','학습·입시 종합 현황'],['universities','대학 선호도 분석'],['materials-data','인기 시험·학습자료 분석'],['study','공부 시간 분석'],['scores','성적·학습 분석'],['applications','입시 지원 분석'],['students','학생 통합 분석 (Student 360)'],['insights','개인화 인사이트 관리'],
+- ['essay-usage','논술 LAB 이용 현황'],['samples','사용자 답안 샘플 검수'],['satisfaction','만족도·피드백 분석'],['verification','베타 검증 결과'],
++ ['essay-usage','논술 학습 분석'],['samples','사용자 답안 샘플 검수'],['satisfaction','만족도·피드백 분석'],['verification','베타 검증 결과'],
+ ] as const;
+ export const ADMIN_NAV = [...EXISTING_NAV,...EXTRA_NAV.map(([key,label])=>({key,label,href:`/admin/data/${key}/`}))];
+ 
+-- 
+2.51.0
+
+
+From 119caeadfe9057a666169ec9e4ce21cf5364b73e Mon Sep 17 00:00:00 2001
+From: LC3808 <youngsook600405@gmail.com>
+Date: Wed, 4 Nov 2026 18:19:56 +0900
+Subject: [PATCH 2/2] Preserve live assets and API baseline for scoped
+ analytics deployment
+
+---
+ .../deployment/analytics-phase2-preserved.mjs | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 scripts/deployment/analytics-phase2-preserved.mjs
+
+diff --git a/scripts/deployment/analytics-phase2-preserved.mjs b/scripts/deployment/analytics-phase2-preserved.mjs
+new file mode 100644
+index 0000000..3450f34
+--- /dev/null
++++ b/scripts/deployment/analytics-phase2-preserved.mjs
+@@ -0,0 +1,25 @@
++/** Scoped Phase 2 upload. Retains live student/finance/support/dashboard assets and settings. */
++import {isDeepStrictEqual} from 'node:util';import fs from 'node:fs';import path from 'node:path';import {createRequire} from 'node:module';import {execFileSync} from 'node:child_process';import crypto from 'node:crypto';
++const [backup,mode='plan']=process.argv.slice(2);if(!backup||!['plan','preview','production'].includes(mode))throw Error('PRIVATE_BACKUP [plan|preview|production] required');
++const read=n=>JSON.parse(fs.readFileSync(path.join(backup,n),'utf8'));
++const project=read('project.json'),previous=read('files').result;
++if(previous.id!==project.canonical_deployment.id||project.name!=='legendstudy-lab')throw Error('Invalid baseline');
++const require=createRequire(import.meta.url);const {hash}=require(process.env.WRANGLER_MODULE_ROOT+'/blake3-wasm');
++const manifest={...previous.files},assets=new Map(),changed=[];
++const scoped=u=>u.startsWith('/admin/data/')||u.startsWith('/admin/analytics/')||u==='/admin/analytics.txt'||u.startsWith('/ql/')||u==='/ql.txt';
++const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
++for(const f of walk('out')){const u='/'+path.relative('out',f).split(path.sep).join('/');if(!scoped(u)&&!u.startsWith('/_next/static/'))continue;const b=fs.readFileSync(f),ext=path.extname(f).slice(1),key=hash(b.toString('base64')+ext).toString('hex').slice(0,32);if(u.startsWith('/_next/')&&manifest[u]&&manifest[u]!==key)throw Error('Shared asset collision '+u);if(manifest[u]===key)continue;manifest[u]=key;changed.push(u);assets.set(key,{key,value:b.toString('base64'),metadata:{contentType:({html:'text/html; charset=utf-8',txt:'text/plain; charset=utf-8',js:'application/javascript',css:'text/css',woff2:'font/woff2'})[ext]??'application/octet-stream'},base64:true});}
++for(const [u,h] of Object.entries(previous.files))if(!scoped(u)&&manifest[u]!==h)throw Error('Preservation failure '+u);
++if(execFileSync('git',['diff','a901568fa7b0acc752061d6fd7361ad5772875c8','--','functions','cloudflare','pnpm-lock.yaml'],{encoding:'utf8'}))throw Error('API baseline source changed');
++const routes=read('routes.json'),deployedRoutes=JSON.parse(read('functions').result.config);if(!isDeepStrictEqual(routes,deployedRoutes))throw Error('Function routing drift');
++const worker=fs.readFileSync(path.join(backup,'compiled136/index.js'));const sha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
++const plan={sha,previous:previous.id,scope:'admin/data, admin/analytics, ql; other assets preserved',changed,api_source:'a901568fa7b0acc752061d6fd7361ad5772875c8',api_inputs:Object.keys(read('meta136.json').inputs).length,worker_sha256:crypto.createHash('sha256').update(worker).digest('hex'),settings_unchanged:true};fs.writeFileSync(path.join(backup,'plan.json'),JSON.stringify(plan,null,2));fs.writeFileSync(path.join(backup,'manifest.json'),JSON.stringify(manifest));console.log({...plan,changed:changed.length});if(mode==='plan')process.exit(0);
++const token=process.env.CLOUDFLARE_API_TOKEN;if(!token)throw Error('Missing token');const base='https://api.cloudflare.com/client/v4',p='/accounts/b9d221b20fdf8b9a9a8df0971a6b2347/pages/projects/legendstudy-lab';
++async function api(route,init={},bearer=token){const r=await fetch(base+route,{...init,headers:{...init.headers,Authorization:'Bearer '+bearer}});const j=await r.json();if(!r.ok||!j.success)throw Error(JSON.stringify({status:r.status,errors:j.errors}));return j.result;}
++const current=await api(p);if(current.canonical_deployment.id!==previous.id||JSON.stringify(current.deployment_configs.production)!==JSON.stringify(project.deployment_configs.production))throw Error('Production drift');
++const {jwt}=await api(p+'/upload-token');const list=[...assets.values()];for(let i=0;i<list.length;i+=30)await api('/pages/assets/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(list.slice(i,i+30))},jwt);
++await api('/pages/assets/upsert-hashes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hashes:list.map(x=>x.key)})},jwt);
++const missing=await api('/pages/assets/check-missing',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hashes:[...new Set(Object.values(manifest))]})},jwt);if(missing.length)throw Error('Baseline assets unavailable');
++const bundle=new FormData();bundle.set('metadata',JSON.stringify({main_module:'index.js'}));bundle.set('index.js',new File([worker],'index.js',{type:'application/javascript+module'}));
++const form=new FormData();form.set('manifest',JSON.stringify(manifest));form.set('branch',mode==='production'?'main':'admin-analytics-phase2');form.set('commit_hash',sha);form.set('commit_message','Phase 2 admin analysis and quality; existing data and other pages preserved');form.set('commit_dirty','false');for(const n of ['_headers','_redirects','_routes.json'])form.set(n,new File([fs.readFileSync('public/'+n)],n));form.set('_worker.bundle',new File([await new Response(bundle).blob()],'_worker.bundle'));form.set('functions-filepath-routing-config.json',new File([JSON.stringify(routes)],'functions-filepath-routing-config.json'));
++const deployed=await api(p+'/deployments',{method:'POST',body:form});fs.writeFileSync(path.join(backup,mode+'-deployment.json'),JSON.stringify(deployed,null,2));console.log({deployment:deployed.id,url:deployed.url,sha});
+-- 
+2.51.0
+

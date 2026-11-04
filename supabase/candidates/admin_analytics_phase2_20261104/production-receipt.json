@@ -1,0 +1,41 @@
+{
+  "deployment": "1312670e-30c4-4c58-b4cd-a375ca2b6668",
+  "status": {
+    "name": "deploy",
+    "started_on": null,
+    "ended_on": "2026-11-04T09:20:33.173655Z",
+    "status": "success"
+  },
+  "source": "119caeadfe9057a666169ec9e4ce21cf5364b73e",
+  "configuration_unchanged": true,
+  "manifest_exact": true,
+  "binding_count": 49,
+  "previous": "4b089f75-b118-48a9-92d6-77a5ce1ed584",
+  "sql_hosted_versions": [
+    "20261104091805",
+    "20261104091837"
+  ],
+  "preservation": {
+    "credit_transactions": {
+      "rows": 284,
+      "digest": "73cb5604029fcec6289537e25e3f939f"
+    },
+    "exam_runs": {
+      "rows": 56,
+      "digest": "600880b2a5f3394c010e5f753a102ee5"
+    },
+    "human_quality_judgments": {
+      "rows": 0
+    }
+  },
+  "checks": {
+    "isolated_postgres": "PASS",
+    "quality_web_tests": 36,
+    "static_routes": 163,
+    "production_quality_subjects": 85,
+    "production_review_write_executed": false,
+    "financial_actions_executed": false,
+    "app_build_executed": false
+  },
+  "overall_design_status": "PARTIAL"
+}

@@ -259,3 +259,5 @@ There must be only one canonical `current-status.md` for the repository. Notion,
 - 인하 다중 사진 추출 장애/재개/사진 UI: [운영 복구](inha-photo-extraction-20261026.md).
 
 WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](essay-growth-history-ui-20261026.md).
+
+- [관리자 분석 Phase 2 — 핵심 운영 적용 / 전체 설계 PARTIAL](admin-analytics-phase2-20261104.md)
