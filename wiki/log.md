@@ -5079,3 +5079,7 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 ## 2026-11-04 — APP·WEB 문의 통합 구현 (운영 미적용)
 
 Owner 구현 승인에 따라 원본2종 통합 조회/답변/내역/집계 및 기존 이메일 큐 연결. DB34+업그레이드보존7, WEB58+실제로컬DB연동1, Native31, Edge8 PASS. WEB 타입/lint/webpack build PASS. WEB82a4aea6, 패치 보존. 실제 문의 읽기전용 재확인, 실사용자 답변0/운영변경0. 실기기·JWT gateway·실제메일 E2E는 미실행. [상세·Owner 적용/검수](feedback-admin-integration-20261104.md).
+
+## 2026-11-04 — 문의 통합 운영 적용·실제 관리자 확인 PASS
+
+Owner SQL/RPC·기존worker·WEB 승인 후 순차적용. DB20261104004950/Edgev40 cron200/WEB0e735c6 Pages1e842209 production success. 최신 운영9a8fb9f 기준 문의 overlay, 기타 페이지hash/API입력156/설정46binding 보존. 실제 관리자 전체3·미처리3·대상 상세/원문/답변영역 PASS, 대시보드/배지3. 원본hash동일·상태new·답변/시험메일0. 최신 관리자176PASS/build PASS. 앱릴리스0. [영수증·검수·복구](feedback-admin-integration-20261104.md).

@@ -1,6 +1,11 @@
 # Unified support deployment package
 
-**NOT APPLIED / NO PRODUCTION SEND.** Canonical status and decisions live in
+**APPLIED 2026-11-04 with explicit Owner approval / NO CUSTOMER TEST REPLY.**
+See [production receipt](production-receipt.json). SQL hosted version `20261104004950`,
+existing worker v40, WEB `0e735c6` / Pages `1e842209` verified. App release excluded.
+The numbered procedure below is the historical apply plan, not an instruction to reapply.
+Use [web-production.patch](web-production.patch) for the actual latest-production-base integration;
+`web.patch` remains the original implementation patch. Canonical status and decisions live in
 [Wiki](../../../wiki/feedback-admin-integration-20261104.md).
 
 1. Owner confirms `stlhijzpjfgwwdgunlsd` and captures `preflight.sql` privately.

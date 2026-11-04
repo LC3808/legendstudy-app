@@ -1,6 +1,6 @@
 # Current Status
 
-[문의 통합 P0](feedback-admin-integration-20261104.md): APP·WEB 조회/답변/회원내역/배지 구현, 격리TEST PASS. 원본보존 확인. 운영 DB·Edge·WEB/앱 릴리스 승인대기.
+[문의 통합 P0](feedback-admin-integration-20261104.md): 승인 후 DB·Edge·WEB 운영적용. 실제 목록/상세·미처리3 PASS, 원본보존/시험답변0. 앱 릴리스 별도.
 
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
 

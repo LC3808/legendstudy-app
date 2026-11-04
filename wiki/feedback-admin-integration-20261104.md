@@ -1,6 +1,23 @@
 # 사용자 문의·피드백 관리자 연결 조사 — 2026-11-04
 
-## 2026-11-04 Owner 승인 후 구현 결과
+## 2026-11-04 운영 적용 완료 — Owner 별도 승인
+
+Owner의 SQL·RPC/기존 Edge worker/WEB 배포 승인을 받아 사전 검사 후 순서대로 적용했다. **실제 운영 관리자 목록·상세 확인 PASS. 앱 릴리스는 제외했다.**
+
+- 사전: LegendStudy ACTIVE_HEALTHY, 원본 APP3/WEB0, 답변·답변대기열0. 기존 문의 함수8개가 검증 baseline과 일치, 기존 RLS/제약/cron 확인.
+- DB: 저장소 `20261104002306_unified_support_inquiries.sql` 그대로 적용. hosted migration entry `20261104004950_unified_support_inquiries` (MCP 실행 시각으로 등록됨). 신규 RPC9개/원본 FK/상태 projection 반영.
+- 원본 전체 hash `00353b1d46899e04d19a77c5d88a9411` 적용 전후 동일. 대상 raw `new`, 신규 처리상태0, 답변0, 답변 알림0, WEB 복제0. 기존 접수 알림 sent3 유지.
+- Edge: 기존 `process-feedback-notifications` **v39 → v40**, 기존 verify_jwt=false + 자체 secret 검사/cron/secret 유지. 기존 cron의 v40 POST200 확인(2026-11-04 09:51 KST). 실제 메일 발송 테스트는 하지 않았다.
+- WEB: 최신 운영 `9a8fb9f`에 문의 patch를 통합한 전용 브랜치. 배포 source **`0e735c6fbf74d3351cbb8eca9915b1c650c37251`**, Pages **`1e842209-74a6-478c-846c-ebea8779fcf4`**, 09:56 KST production/success/canonical 확인. rollback 기준 `bfb80aef-8d88-4bbe-91c0-03b376fc856f` 보존.
+- 관리자/support 화면과 신규 hashed asset만 overlay. 기타 기존 경로 hash 보존, API 입력156개에 코드 변경0, 전체 Pages 설정·46 binding 동일. API는 동일 운영 소스에서 재컴파일했으며 live byte-identical 다운로드 검증으로 표현하지 않는다.
+- 로그인된 실제 관리자 세션: **전체3·미처리3**, 사이드바3, 대시보드 미답변3. 대상 제목/APP/기능제안/2026-11-02 10:29 표시, 상세 원문·회원 연결·답변0·답변 입력영역 확인. reply textarea ID가 Owner 제공 원본 ID와 일치. 답변 작성/등록/상태변경0.
+- 최신 운영 기준 관리자 영향176PASS/로컬DB opt-in1SKIP, Node22 production build163pages/타입검사/Pages Functions 컴파일 PASS. 이전 격리 TEST 결과를 운영 사용자 발송 E2E로 대체하지 않는다.
+- 사후 권한: 신규 public RPC anon 실행0, worker RPC authenticated 실행0, private schema anon/auth usage0, private 상태 RLS true. Advisors 증분은 의도된 회원/관리자 gate 포함 SECURITY DEFINER7 및 접근 불가 private 상태 테이블의 no-policy INFO1. 기존 타 영역 경고는 변경하지 않았다.
+
+[운영 영수증](../supabase/verification/support_integration/production-receipt.json), [최신 운영 기준 패치](../supabase/verification/support_integration/web-production.patch), [적용/복구 패키지](../supabase/verification/support_integration/README.md).
+Owner는 [운영 1:1 문의](https://lab.legendstudy.com/admin/inquiries/)에서 대상 제목의 상세를 열어 검수할 수 있다. 실제 답변을 작성하면 사용자 이메일 알림이 발송되는 운영 경로다. 이번 작업에서는 고객 테스트 답변0이며 APP MY 답변 내역 배포는 별도 앱 릴리스로 남긴다.
+
+## 2026-11-04 Owner 승인 후 구현 결과 (운영 적용 이전 기록)
 
 **코드 구현·격리 TEST 완료, 운영 DB/Edge/WEB/APP 배포 미적용.** 실제 사용자 답변/메일 발송0.
 Owner는 원인 조사를 인정하고 두 원본을 유지하는 통합 구현을 승인했다. 운영 적용은 별도 승인이다.
