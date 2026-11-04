@@ -1,0 +1,32 @@
+{
+  "stage": "enable-live",
+  "deployment": "3fe9639c-bdc3-4a44-aff5-d0effb005147",
+  "previous": "ef90001e-88ae-4b68-bd59-f879324f22ae",
+  "sha": "a901568fa7b0acc752061d6fd7361ad5772875c8",
+  "assets_preserved": 1463,
+  "mode": "LIVE",
+  "enabled": true,
+  "support_subject_configured": true,
+  "canonical_success": true,
+  "manifest_equal": true,
+  "test_e2e": {
+    "order_id": "c5c516c9-c801-4d92-9de6-900251cec874",
+    "state": "PAID",
+    "grant_state": "TEST_RECORDED",
+    "grant_id_null": true,
+    "amount": 4900,
+    "paid_at": "2026-11-04T04:16:46Z",
+    "balance_before_after": 95
+  },
+  "db_mode": "LIVE",
+  "review_test_banner_after_activation": true,
+  "historical_test_success_after_activation": true,
+  "anonymous_runtime": {
+    "state": "LIVE",
+    "mode": "LIVE",
+    "consumer_purchase": true
+  },
+  "live_verified": false,
+  "live_smoke_account": "admin@legendstudy.com",
+  "live_smoke_status": "WAITING_OWNER_LOGIN"
+}

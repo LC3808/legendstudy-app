@@ -1,6 +1,6 @@
 # WEB Toss LIVE + fixed reviewer TEST — 2026-11-04
 
-Status: IMPLEMENTED candidate / isolated TEST_VERIFIED; Production prepare APPLIED (20261104021443), activation NOT_APPLIED; LIVE_VERIFIED NO.
+Status: IMPLEMENTED candidate / isolated TEST_VERIFIED; Production prepare APPLIED (20261104021443), activation APPLIED; PRODUCTION_ACTIVE YES; LIVE_VERIFIED NO.
 
 Owner approved WEB LIVE activation; review@ remains TEST. Unexpected DB changes must be reported first. Existing payment_order selects one global mode; payment_process rejects any order of another mode. Therefore Cloudflare-only activation cannot satisfy the requested coexistence.
 
@@ -38,3 +38,5 @@ Prepared SQL approved/applied with unchanged row hashes; LIVE keys now registere
 5. Financial transactions remain separate from learning/decision/outcome records.
 6. No new buyer data collection; private Auth lookup only, no raw key/token logging.
 7. Revenue derives from LIVE orders only; TEST amounts never become revenue facts.
+
+Current hosted activation/TEST evidence: [activation-validation.json](activation-validation.json). LIVE charge/refund acceptance still pending Owner admin login; preparation-gate descriptions above are historical.

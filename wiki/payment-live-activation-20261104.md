@@ -1,6 +1,6 @@
 # Toss WEB LIVE activation — 2026-11-04
 
-Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB preparation and WEB REVIEW preparation deployed; LIVE activation pending; LIVE_VERIFIED NO / PRODUCTION_ACTIVE NO.
+Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/WEB LIVE activated; reviewer hosted TEST verified; LIVE_VERIFIED NO / PRODUCTION_ACTIVE YES. Owner LIVE charge/refund acceptance pending.
 
 This supersedes the previous [TASK17 HOLD decision](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후) for WEB only. Fixed confirmed Auth UID ddc5ae63-acbb-490b-a423-c996b811dea8 AND exact review@legendstudy.com remains TEST. Other authenticated users use LIVE. Server checks current Supabase Auth; client email/mode/is_test never selects environment. Existing order mode determines confirm/reconcile/refund credentials even after identity/config changes. No APP58/StoreKit/Play/bonus/beta/price/refund-policy changes.
 
@@ -19,7 +19,7 @@ WEB branch codex/toss-test-task17: account-specific server selection, both key f
 
 Local WEB1563 PASS/4 skipped; final admin/payment201 PASS; typecheck/build/lint PASS. Disposable PG existing payment/Math regressions and21 new mixed-mode checks PASS: TEST+0, LIVE grant3 once, duplicates, refunds, identity changes, legacy TEST recovery, private ACL, history preservation. [Evidence](../supabase/verification/payments/live-20261104/validation.json). Synthetic provider/isolated DB validation is not hosted TEST or LIVE E2E. No actual payment/cancellation performed.
 
-## Remaining gates
+## Preparation gates (historical; current follow-up below)
 
 Owner asked to add TOSS_LIVE_CLIENT_KEY/TOSS_LIVE_SECRET_KEY as Production Secrets and confirm merchant LIVE/card/domain approval, retaining TEST keys and REVIEW until verified. Owner approved preparation; hosted migration20261104021443 applied. Existing Finance JWT previously expired11/3; current runtime validity must be verified/renewed safely through existing signer (registered binding alone is not proof). Establish current deployment source/worker preservation. Then hosted reviewer TEST regression, staged LIVE activation and Owner-approved1c/4,900KRW smoke on named ordinary account; announce target and amount before charge/cancel. Verify exactly one purchase grant/ledger entry and permitted refund; do not touch existing customer orders. Until actual approval/grant success, never report LIVE_VERIFIED.
 
@@ -38,3 +38,11 @@ Owner가 LIVE 카드 사용 승인과 lab.legendstudy.com 도메인 등록 완�
 배포1f83e03e-cc84-4fdd-a627-35d8798dd4f5/source a901568fa7b0acc752061d6fd7361ad5772875c8, 기존1463자산 모두동일. 주요6URL200, 익명runtime REVIEW/TEST. Finance 검증은 직접 RPC까지이며 배포후 인증사용자 E2E는 로그인 대기. [영수증](../supabase/verification/payments/live-20261104/finance-recovery.json).
 
 원래 주문18·지급167·거래262의 hash는 보존됐다. 검증 사이 정상 signup_bonus 1건(11:22:01KST)이 추가되어 현재 지급168/거래263이며 결제 지급이 아니다. TEST 지급0/LIVE주문0, DB TEST 유지. Owner 지정 실결제·환불 담당 admin@legendstudy.com은 기존 관리자임을 확인했다. 대상1회4,900원; support allowlist 설정/실제 TEST 회귀/LIVE 활성화·청구·환불은 미완료.
+
+## LIVE 운영 활성화·TEST 회귀 — 2026-11-04
+
+Owner TEST 결제 완료 후 운영 주문 c5c516c9-c801-4d92-9de6-900251cec874의 PAID/TEST_RECORDED/grant_id null 확인(13:16:46KST,1회4,900원). 화면 잔액95→95, 실제 TEST승인 E2E PASS. 기존18건을 보존하고 이번 준비주문2건이 추가되어 TEST20(완료10/준비10), TEST실제지급0.
+
+신규결제중지(PAUSED/LIVE) 배포 ef90001e-88ae-4b68-bd59-f879324f22ae → 승인된 activate.sql 운영적용(DB configuration만LIVE) → WEB 활성화3fe9639c-bdc3-4a44-aff5-d0effb005147. source a901568fa7b0acc752061d6fd7361ad5772875c8,1463정적자산동일/canonical success. admin@의기존UID를 PAYMENT_SUPPORT_SUBJECTS로지정,기존TEST/LIVE키와다른설정보존. [활성화 영수증](../supabase/verification/payments/live-20261104/activation-validation.json).
+
+운영 /api/payments/runtime LIVE/LIVE/consumer_purchase=true. review인증화면 TEST배너 유지,이전TEST완료조회정상. LIVE 주문0/TEST지급0 확인. **PRODUCTION_ACTIVE YES, LIVE_VERIFIED NO, overall PARTIAL**. admin@ 로그인후4,900원 실제승인·1회지급·중복방지·환불·매출검증을 계속한다. 신규결제정지는PAYMENT_ENABLED=false,기존LIVE주문이생긴후DB TEST복귀금지. Finance만료11/11 11:25:53KST/자동갱신없음.
