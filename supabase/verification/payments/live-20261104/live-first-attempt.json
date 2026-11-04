@@ -1,0 +1,21 @@
+{
+  "stage": "emergency-pause",
+  "deployment": "98e2b121-22d8-4bb5-8f78-a7db72c3a587",
+  "previous": "3fe9639c-bdc3-4a44-aff5-d0effb005147",
+  "sha": "a901568fa7b0acc752061d6fd7361ad5772875c8",
+  "assets_preserved": 1463,
+  "mode": "LIVE",
+  "enabled": false,
+  "support_subject_configured": true,
+  "runtime": {
+    "state": "PAUSED",
+    "mode": "LIVE",
+    "consumer_purchase": false
+  },
+  "failed_order_id": "662851a3-77ec-4a17-b83e-7707d41c5ac3",
+  "order_state": "FAILED",
+  "operation_error_code": "PROVIDER_REJECTED",
+  "grant_created": false,
+  "provider_exact_error": "PENDING_OWNER_LOG",
+  "live_verified": false
+}

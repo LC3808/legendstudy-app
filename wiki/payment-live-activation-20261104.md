@@ -1,6 +1,6 @@
 # Toss WEB LIVE activation — 2026-11-04
 
-Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/WEB LIVE activated; reviewer hosted TEST verified; LIVE_VERIFIED NO / PRODUCTION_ACTIVE YES. Owner LIVE charge/refund acceptance pending.
+Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/WEB LIVE activated; reviewer hosted TEST verified; LIVE_VERIFIED NO / PRODUCTION_ACTIVE PAUSED. First LIVE provider rejection under investigation.
 
 This supersedes the previous [TASK17 HOLD decision](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후) for WEB only. Fixed confirmed Auth UID ddc5ae63-acbb-490b-a423-c996b811dea8 AND exact review@legendstudy.com remains TEST. Other authenticated users use LIVE. Server checks current Supabase Auth; client email/mode/is_test never selects environment. Existing order mode determines confirm/reconcile/refund credentials even after identity/config changes. No APP58/StoreKit/Play/bonus/beta/price/refund-policy changes.
 
@@ -46,3 +46,9 @@ Owner TEST 결제 완료 후 운영 주문 c5c516c9-c801-4d92-9de6-900251cec874�
 신규결제중지(PAUSED/LIVE) 배포 ef90001e-88ae-4b68-bd59-f879324f22ae → 승인된 activate.sql 운영적용(DB configuration만LIVE) → WEB 활성화3fe9639c-bdc3-4a44-aff5-d0effb005147. source a901568fa7b0acc752061d6fd7361ad5772875c8,1463정적자산동일/canonical success. admin@의기존UID를 PAYMENT_SUPPORT_SUBJECTS로지정,기존TEST/LIVE키와다른설정보존. [활성화 영수증](../supabase/verification/payments/live-20261104/activation-validation.json).
 
 운영 /api/payments/runtime LIVE/LIVE/consumer_purchase=true. review인증화면 TEST배너 유지,이전TEST완료조회정상. LIVE 주문0/TEST지급0 확인. **PRODUCTION_ACTIVE YES, LIVE_VERIFIED NO, overall PARTIAL**. admin@ 로그인후4,900원 실제승인·1회지급·중복방지·환불·매출검증을 계속한다. 신규결제정지는PAYMENT_ENABLED=false,기존LIVE주문이생긴후DB TEST복귀금지. Finance만료11/11 11:25:53KST/자동갱신없음.
+
+## 첫 LIVE 거절·신규결제 일시중지 — 2026-11-04
+
+admin@의1회4,900원 주문662851a3-77ec-4a17-b83e-7707d41c5ac3이13:38:41KST FAILED/PROVIDER_REJECTED,grant NONE/paid_at null로확인됐다. 현재handler에서이결과는인증된Toss조회상태ABORTED또는EXPIRED에만기록된다. 구체Toss오류는DB에없어Owner에게LIVE confirm로그의오류코드·메시지만요청했다. 브라우저는‘결제 상태를 확인해 주세요/주문 상태를 확인했습니다’로불명확하게표시한다. 결제원장수동수정·재승인·새결제0. 실제카드청구여부는Toss확인전단정하지않는다.
+
+신규결제만PAYMENT_ENABLED=false로중지,DB/WEB mode LIVE와기존조회·환불경로보존. 배포98e2b121-22d8-4bb5-8f78-a7db72c3a587/source a901568fa7b0acc752061d6fd7361ad5772875c8,1463자산보존,운영runtime PAUSED/LIVE/consumer_purchase=false. **현재PRODUCTION_ACTIVE PAUSED / LIVE_VERIFIED NO / PARTIAL**. 원인수정후Owner대상으로검증재개,원래실패주문기록은보존한다.
