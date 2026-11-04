@@ -1,0 +1,15 @@
+{
+  "task": "TASK16-L",
+  "observed_math_calls": 7,
+  "observed_input_tokens": 322106,
+  "observed_output_tokens": 13201,
+  "observed_total_tokens": 335307,
+  "complete_usage_accounting": false,
+  "cost_usd": null,
+  "model": "gpt-5.6-sol",
+  "test_granted": 2,
+  "test_consumed": 1,
+  "test_remaining": 1,
+  "test_reserved": 0,
+  "production_writes": 0
+}

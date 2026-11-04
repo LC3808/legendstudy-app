@@ -66,4 +66,40 @@ void main() {
     expect(find.text('학습 완성도 · 판단 보류'), findsOneWidget);
     expect(find.byIcon(Icons.star), findsNothing);
   });
+  testWidgets('server comparison preserves evidence and policy boundaries', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: LearningComparison(
+            value: {
+              'comparable': true,
+              'before': 2,
+              'after': 4,
+              'delta': 2,
+              'prior_rationale': '이전 조건 누락',
+              'current_rationale': '현재 조건 확인',
+              'improved_criterion_ids': ['criterion'],
+              'remaining_criterion_ids': <String>[],
+            },
+          ),
+        ),
+      ),
+    );
+    expect(find.text('2단계 → 4단계 (+2)'), findsOneWidget);
+    expect(find.text('이전 근거: 이전 조건 누락'), findsOneWidget);
+    expect(find.text('현재 근거: 현재 조건 확인'), findsOneWidget);
+    await t.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: LearningComparison(
+            value: {'comparable': false, 'reason': 'CRITERIA_CHANGED'},
+          ),
+        ),
+      ),
+    );
+    expect(find.textContaining('직접 비교하지 않습니다'), findsOneWidget);
+    expect(find.textContaining('2단계 →'), findsNothing);
+  });
 }

@@ -34,6 +34,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 평가 정확도/최초 보류/최종 산술 검산/실제 TEST: [11/4 품질 검증·새 오판·수정·미완료](task16-evaluation-quality-closeout-20261104.md).
 
+TASK16-L / 학습 완성도 저장·재첨삭 비교·History: [구현·TEST 검증·운영 승인 경계](task16l-learning-persistence-history-20261104.md).
+
 수리·상경 최종 품질/공식 해설/후속 APP: [TASK16 구현·검증·잔여 P0](task16-final-quality-20261104.md).
 
 학습용 5단계·종합 별점·최초/재첨삭 비교: [Owner 승인·근거 계약·구현 전 검증](learning-completeness-policy-20261104.md).

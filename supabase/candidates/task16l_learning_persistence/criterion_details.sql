@@ -1,0 +1,71 @@
+-- TEST followup: optional reviewed per-criterion notes; no existing record updates.
+begin;
+create or replace function math_private.finalize_with_learning(eid uuid, token uuid, output jsonb, packet jsonb) returns uuid
+language plpgsql security invoker set search_path='' as $$
+declare e public.math_evaluations; v jsonb; refs jsonb; observations jsonb; result uuid;
+begin
+ perform math_private.lock_evaluation(eid);
+ select * into strict e from public.math_evaluations where id=eid;
+ if packet is not null then
+  if e.state='COMPLETED' then
+   if e.learning_judgement is null or e.learning_judgement->'submitted' is distinct from packet then
+    raise invalid_parameter_value using message='LEARNING_BACKFILL_OR_REPLAY_CONFLICT';
+   end if;
+  else
+   if e.state<>'PROCESSING' or e.lease_token is distinct from token or e.lease_until<=clock_timestamp() then raise invalid_parameter_value using message='STALE_FINALIZE';end if;
+   v=packet->'value';
+   if jsonb_typeof(packet) is distinct from 'object' or octet_length(packet::text)>32000
+    or packet-array['value','review']<>'{}' or jsonb_typeof(v) is distinct from 'object'
+    or v-array['version','evaluation_id','question_id','rubric_version','assessed_at','status','level','rationale','criterion_refs','observation_refs','strengths','improvements','next_direction','criterion_evidence']<>'{}'
+    or jsonb_typeof(v->'level') is distinct from 'number'
+    or v->>'version' is distinct from 'learning-completeness-v1'
+    or v->>'status' is distinct from 'ASSESSED' or coalesce(v->>'level','') !~ '^[1-5]$'
+    or v->>'evaluation_id' is distinct from eid::text or v->>'question_id' is distinct from e.leaf_id::text
+    or coalesce(v->>'rubric_version','') !~ '^pinned-[a-f0-9]{64}$'
+    or coalesce(length(v->>'rationale'),0) not between 1 and 1200
+    or coalesce(length(v->>'next_direction'),0) not between 1 and 1200
+    or jsonb_typeof(v->'strengths') is distinct from 'array' or jsonb_typeof(v->'improvements') is distinct from 'array'
+    or jsonb_typeof(v->'criterion_refs') is distinct from 'array' or jsonb_typeof(v->'observation_refs') is distinct from 'array'
+    or packet->'review'->>'version' is distinct from 'learning-independent-review-v1'
+    or packet->'review'->'accepted' is distinct from 'true'::jsonb
+    or coalesce(packet->'review'->>'candidate_sha256','') !~ '^[a-f0-9]{64}$'
+    or output->'overall'->>'review_status' is distinct from 'NOT_REQUIRED'
+    or output->'overall'->>'status'='NOT_DETERMINABLE' then raise invalid_parameter_value using message='LEARNING_INVALID';end if;
+   if (v->>'assessed_at')::timestamptz is null or (v->>'assessed_at')::timestamptz<e.requested_at or (v->>'assessed_at')::timestamptz>clock_timestamp()+interval '5 minutes'
+    or jsonb_array_length(v->'improvements')>5 or jsonb_array_length(v->'strengths')>20
+    or exists(select 1 from jsonb_array_elements((v->'strengths')||(v->'improvements')) x where jsonb_typeof(x)<>'string' or length(x#>>'{}') not between 1 and 1200)
+    then raise invalid_parameter_value using message='LEARNING_INVALID';end if;
+   select coalesce(jsonb_agg(criterion_id::text order by criterion_id),'[]') into refs from public.math_evaluation_criteria where evaluation_id=eid;
+   if jsonb_array_length(refs)=0 or jsonb_array_length(refs)<>jsonb_array_length(v->'criterion_refs') or not (refs @> (v->'criterion_refs') and refs <@ (v->'criterion_refs')) then raise invalid_parameter_value using message='LEARNING_CRITERIA_MISMATCH';end if;
+   select coalesce(jsonb_agg(x->>'id'),'[]') into observations from jsonb_array_elements(output->'steps') x;
+   if jsonb_array_length(v->'observation_refs')=0 or not observations @> (v->'observation_refs') then raise invalid_parameter_value using message='LEARNING_OBSERVATION_MISMATCH';end if;
+  end if;
+ end if;
+ -- Canonical validation, ownership/lifecycle, fencing and replay remain authoritative.
+ result=public.math_finalize_evaluation(eid,token,output);
+ if packet is not null and e.state='PROCESSING' then
+  update public.math_evaluations set learning_judgement=jsonb_build_object(
+   'submitted',packet,'value',packet->'value','review',packet->'review',
+   'criterion_outcomes',(select jsonb_agg(jsonb_build_object('criterion_id',x->>'criterion_id','verdict',x->>'verdict') order by x->>'criterion_id') from jsonb_array_elements(output->'criteria') x),
+   'metadata',jsonb_build_object('assessment',output->'provenance','selected_extraction_id',e.selected_extraction_id,'profile_id',e.profile_id,'attempt_id',e.attempt_id,
+    'exam_id',(select to_jsonb(ps)->>'essay_exam_id' from public.math_subproblems s join public.math_problems p on p.id=s.problem_id join public.math_problem_sets ps on ps.id=p.problem_set_id where s.id=e.leaf_id),
+    'essay_question_id',(select to_jsonb(s)->>'essay_question_id' from public.math_subproblems s where s.id=e.leaf_id))) where id=eid;
+ end if;
+ return result;
+end$$;
+create or replace function math_private.learning_comparison(current_packet jsonb, prior_packet jsonb) returns jsonb
+language plpgsql immutable set search_path='' as $$
+declare cur jsonb=current_packet->'value'; prev jsonb=prior_packet->'value'; improved jsonb; remaining jsonb;
+begin
+ if cur is null then return null;end if;
+ if prev is null then return jsonb_build_object('comparable',false,'reason','NO_PREVIOUS_ASSESSMENT');end if;
+ if cur->>'question_id' is distinct from prev->>'question_id' or cur->>'version' is distinct from prev->>'version' or cur->>'rubric_version' is distinct from prev->>'rubric_version'
+ or current_packet->'metadata'->'assessment'->>'prompt_version' is distinct from prior_packet->'metadata'->'assessment'->>'prompt_version'
+ or current_packet->'metadata'->'assessment'->>'model' is distinct from prior_packet->'metadata'->'assessment'->>'model'
+ then return jsonb_build_object('comparable',false,'reason','CRITERIA_CHANGED');end if;
+ select coalesce(jsonb_agg(c->>'criterion_id'),'[]') into improved from jsonb_array_elements(current_packet->'criterion_outcomes') c join jsonb_array_elements(prior_packet->'criterion_outcomes') p on c->>'criterion_id'=p->>'criterion_id'
+ where (case c->>'verdict' when 'satisfied' then 3 when 'partially_satisfied' then 2 when 'not_satisfied' then 1 end)>(case p->>'verdict' when 'satisfied' then 3 when 'partially_satisfied' then 2 when 'not_satisfied' then 1 end);
+ select coalesce(jsonb_agg(c->>'criterion_id'),'[]') into remaining from jsonb_array_elements(current_packet->'criterion_outcomes') c where c->>'verdict' in ('partially_satisfied','not_satisfied');
+ return jsonb_build_object('comparable',true,'before',(prev->>'level')::integer,'after',(cur->>'level')::integer,'delta',(cur->>'level')::integer-(prev->>'level')::integer,'prior_evaluation_id',prev->>'evaluation_id','improved_criterion_ids',improved,'remaining_criterion_ids',remaining,'improved_elements',(select coalesce(jsonb_agg(x),'[]') from jsonb_array_elements(coalesce(cur->'criterion_evidence','[]')) x where improved ? (x->>'criterion_id')),'remaining_elements',(select coalesce(jsonb_agg(x),'[]') from jsonb_array_elements(coalesce(cur->'criterion_evidence','[]')) x where remaining ? (x->>'criterion_id')),'prior_rationale',prev->>'rationale','current_rationale',cur->>'rationale');
+end$$;
+commit;

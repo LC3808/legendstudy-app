@@ -1,6 +1,9 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
+## TASK16-L 학습 완성도 저장 — PARTIAL
+[저장·비교·History](task16l-learning-persistence-history-20261104.md): 신규 혼합 무료 재첨삭4단계 DB/History·WEB RPC↔iOS Simulator 실제 조회 PASS. 최초 단계가 없어 변화값 생성 안 함. 단독 Math 권한 수정 후 추가 승인1회 INVALID_OUTPUT, 실제 최초→무료 단계 비교 미완료. SQL48+runtime131/WEB223/APP8·Analyze·Wiki PASS. 승인 TEST 지급2/실소비1/잔여1·예약0, 과거24평가/20원장 해시 동일. TEST43aad34c, 운영 미적용·APP58 보존. 이미지 base64 텍스트 토큰 과다 수정, 절감 실호출 미측정.
+
 ## 최신 평가 품질 검증 — 2026-11-04
 [실제 TEST 품질 마감](task16-evaluation-quality-closeout-20261104.md): 최초 확정 전사10영역이 있었으나 candidate-3가 미제출로 오판한 원인 확인. 기존 수정으로 새 최초 Provider7단계 정상 평가. 최종값8/9→9/8 대조군의 허위 정답을 발견하고 독립 검산 거절·candidate-5 계산오류 분류 재검증. 실제7호출/65,884토큰, 비용 미확인. 5단계 생성/독립 검토 성공하나 저장·History·비교 미연결. Math147/인문21 회귀 PASS. 중앙 공식 Q2 새 실평가·저장 E2E·후속 실기기 미완료. 운영 변경0, TEST 기존 배포 복원, 전체 PARTIAL. 아래는 기존 연결/검수 이력이며 최신 판정은 이 문서를 따른다.
 

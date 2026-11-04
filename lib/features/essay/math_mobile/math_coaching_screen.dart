@@ -186,6 +186,7 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
       const SizedBox(height: 8),
       LearningCompletenessCard(
         value: snapshot.data['learning_completeness'],
+        comparison: snapshot.data['learning_comparison'],
         evaluationId: snapshot.id,
       ),
       if (widget.submittedAnswer?.isNotEmpty == true) ...[
@@ -845,6 +846,10 @@ class _MathCoachingHistoryState extends State<MathCoachingHistory> {
                       height: 1.5,
                       color: AcademicPurple.secondary,
                     ),
+                  ),
+                  LearningCompletenessCard(
+                    value: row['learning_completeness'],
+                    evaluationId: row['evaluation_id'] as String? ?? '',
                   ),
                   const Divider(),
                   MathContentSection(

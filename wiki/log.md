@@ -5708,3 +5708,7 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 - 최초 보류 첨삭에도 해당 제출 답안을 독립 조회하도록 APP 보완. Owner 화면 기준 원인 구분, 관련 22개 Flutter 검사 PASS, 기존 결과·이용권 보존. 상세: [최종 품질](task16-final-quality-20261104.md).
 
 - 2026-11-04 평가 품질: 최초 보류 원인 확인·TEST 정상/산술오류 대조군·독립 검산 7호출, 65,884토큰. 실제 오판 FAIL 및 수정 후 대조군 PASS를 구분. Math147/인문21 검사. 학습 저장·중앙Q2 새 검증 미완료. [보고서](task16-evaluation-quality-closeout-20261104.md).
+
+- 2026-11-04 TASK16-L: 신규 학습 완성도 atomic save/동일 기준 재첨삭 비교/APP·WEB History 구현, 격리 TEST 적용·실제 E2E 진행. Owner 승인 TEST 이용권2개 지급, 기존/운영 보존. [상세](task16l-learning-persistence-history-20261104.md).
+
+- 2026-11-04 TASK16-L 종료 판정 PARTIAL: 혼합 무료 재첨삭 학습4단계 저장/History·Native 공통 조회 PASS, 단독 Math 추가승인1회 INVALID_OUTPUT·실제 전후 비교 미완료. TEST 지급2/소비1/잔여1, 과거 해시 동일. TEST43aad34c, 운영·Store0. [상세](task16l-learning-persistence-history-20261104.md).
