@@ -5724,3 +5724,5 @@ TASK18 Owner 후속18개 확정. 전체1505PASS/7SKIP·Analyze0·iOS Simulator/A
 ## 2026-11-04 TASK18-B 검증·릴리스 준비
 
 기존TASK18 30파일8f83f3f Commit/Push. 846연결=846고유원본키/Registry, 중복참조0·동일파일명1쌍·바이너리중복 미검증. Analytics 공개 컨텍스트3키 보완, 전체1506PASS/7SKIP·Analyze0·서버46PASS. 별도 합성 iOS TEST 설치/실행, Android연결0, GA4 DebugView기기/이벤트0. 관리자 후보 merge-tree 충돌7파일 기록, 실제병합0. 운영DB/공개다운로드/스토어변경0. [상세와 최종상태](task18b-pdf-validation-release-20261104.md).
+
+TASK18-B iOS 후속: Owner가 합성PDF 실기기6개 묶음 검수 “모두 성공” 확인. 위치선택·파일앱저장·완료·열람·파일명·중복·모의실패/재시도·기존Viewer·권한별버튼 PASS. 실제 통신단절/Android기기/GA4실수신은 미검증 유지. 전체 PARTIAL·릴리스HOLD. [판정표](task18b-pdf-validation-release-20261104.md).

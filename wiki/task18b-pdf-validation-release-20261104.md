@@ -42,7 +42,37 @@ iPhone12ProMax 연결·개발모드·설치 목록 조회 성공. 본앱1.0.1(58
 
 `tool/qa/pdf_download_main.dart`는 기존 다운로드 위젯·서비스·Native MethodChannel·PDF Viewer를 재사용한다. Supabase/Firebase 초기화가 없고 네트워크 loader/권한은 fixture로 대체한다. OFFICIAL_LINK 버튼만 사용자 선택 시 공개 페이지로 이동한다. 실패 스위치는 모의 loader 오류이며 실제 통신 단절 시험이 아니다. GA4는 Noop이므로 이 앱의 클릭을 GA4 실수신 증거로 사용하지 않는다.
 
-iOS 실제 UI 결과는 아래 후속 기록으로 확정한다. Simulator 빌드(기존 TASK18)·이번 device Release 컴파일과 실제 파일 앱 저장 검증을 구분한다. Android adb 연결 기기0: 실제10항목 모두 **NOT_VERIFIED**. 불필요한 저장소 권한을 추가하지 않았다.
+Owner가 실제 iPhone12ProMax에서 아래6개 검수 묶음에 “모두 성공”으로 응답했다. 관측 주체는 Owner이며 에이전트가 화면을 직접 관측했다고 기록하지 않는다. Simulator 빌드(기존 TASK18)·이번 device Release 컴파일과 실제 파일 앱 저장 검증을 구분한다. Android adb 연결 기기0: 실제10항목 모두 **NOT_VERIFIED**. 불필요한 저장소 권한을 추가하지 않았다.
+
+### iOS Owner 실제 기기 결과
+
+| 요청 검증 항목 | 결과 |
+|---|---|
+| 다운로드 버튼 표시 | PASS — ALLOWED |
+| 저장 위치 선택 | PASS — Native 파일 저장 UI |
+| 파일 앱 저장 | PASS — 합성 PDF |
+| 저장 완료 안내 | PASS |
+| PDF 정상 열람 | PASS — 파일 앱에서 합성 문구 확인 |
+| 파일명 확인 | PASS — `레전드스터디_합성_검수.pdf` |
+| 중복 다운로드 | PASS — 동일 PDF 다시 저장·중복 처리 확인 |
+| 네트워크 실패 | 모의 loader 오류 안내 PASS / 실제 통신 단절 NOT_VERIFIED |
+| 재시도 | PASS — 실패 스위치 해제 후 저장 |
+| 기존 PDF Viewer | PASS — 합성 PDF 표시 |
+
+추가: PENDING·VIEW_ONLY에서 다운로드 버튼 없음, OFFICIAL_LINK에서 공식 페이지 버튼 표시도 Owner PASS. 서버 권한은 별도 자동 검사로 검증했으며 이 fixture UI를 실제 운영 서버 ALLOWED E2E로 간주하지 않는다. OFFICIAL_LINK 실제 외부 페이지 도착은 버튼 표시 확인과 구분해 NOT_VERIFIED다.
+
+### 완료 기준별 판정
+
+| 기준 | 판정 |
+|---|---|
+| A Git Commit·Push | PASS — 기존8f83f3f, 검증후속38062bc 및 최종 문서 커밋 |
+| B 인벤토리 정합성 | PASS(원본 식별/연결), 바이너리 내용 고유성 NOT_VERIFIED |
+| C iOS 실제 다운로드 | PASS(합성 PDF Owner 검수), 실제 통신단절 제외 |
+| D Android 실제 다운로드 | NOT_VERIFIED — 연결 기기 없음 |
+| E 다운로드 권한 | PASS(격리 SQL/서버/클라이언트), 운영 E2E NOT_VERIFIED |
+| F GA4 실제 수신 | NOT_VERIFIED |
+| G 기존 Viewer 회귀 | PASS(전체 자동검사 + iOS 합성 PDF Owner 확인), Android 실기기 제외 |
+| H 후속 병합 계획 | PASS(계획), 실제 전체 통합은 충돌 해결 필요 |
 
 ## Analytics v1 및 실제 수신
 
@@ -73,7 +103,7 @@ iOS 실제 UI 결과는 아래 후속 기록으로 확정한다. Simulator 빌�
 
 ## 판정·남은 차단 요소
 
-현재 **PARTIAL / RELEASE_READY: NO**. Git 보존·정합성·자동 권한/Viewer 검사와 통합 계획은 완료했다. 실제 기기 저장 E2E, GA4 Native 실제 수신, 원본 내용 고유성, 파일별 권리/배포 승인은 별도 증거가 필요하다. Android 실기기 미연결과 관리자 후보 충돌도 후속 조건이다. 운영 DB 변경0, 공개 다운로드0, 스토어 제출0.
+현재 **PARTIAL / RELEASE_READY: NO**. Git 보존·정합성·자동 권한/Viewer 검사와 통합 계획은 완료했다. Android 실제 기기 저장 E2E·실제 네트워크 단절, GA4 Native 실제 수신, 원본 내용 고유성, 파일별 권리/배포 승인은 별도 증거가 필요하다. Android 실기기 미연결과 관리자 후보 충돌도 후속 조건이다. 운영 DB 변경0, 공개 다운로드0, 스토어 제출0.
 
 
 ## TASK18-B 변경 파일

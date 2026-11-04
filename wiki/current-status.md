@@ -1,7 +1,7 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
-[TASK18-B 검증·릴리스 준비](task18b-pdf-validation-release-20261104.md): 기존30파일8f83f3f Commit/Push. 18게시글/846고유원본·연결, 내용중복 미검증. 전체1506PASS/7SKIP·서버46PASS. iOS 별도합성TEST 설치, 실저장 검수중; Android·GA4실수신 미검증. 전체PENDING/공개0·APP58보존·릴리스HOLD.
+[TASK18-B 검증·릴리스 준비](task18b-pdf-validation-release-20261104.md): 기존30파일8f83f3f Commit/Push. 18게시글/846고유원본·연결, 내용중복 미검증. 전체1506PASS/7SKIP·서버46PASS. iOS 합성PDF 저장·열람·재시도·Viewer Owner PASS; Android·GA4실수신 미검증. 전체PENDING/공개0·APP58보존·릴리스HOLD.
 
 ## TASK16-M 최초·무료 성장 비교 — PARTIAL
 [실제 검증·품질 P0](task16m-evaluation-finalization-20261104.md): 신규 수리5→4/혼합4→4 저장·비교·History 및 WEB RPC↔Simulator 4결과 PASS. 수리 동일 표준화 표현의 판정 중요도 불일치 발견, 품질 마감 불가. 과거 INVALID_OUTPUT 원본 부재로 실제 원인 미확정; 검증 유지·고정 진단 보완. TEST 이용권 이전1+승인추가1 사용/무료0/예약0·과거27평가29원장 해시 동일. WEB260PASS/1SKIP·TypeScript·Simulator PASS, 실기기/새 WEB UI E2E 미검증. Math12호출162,026토큰, 비용/동일입력 절감률 미확인. TEST6b25e1bf/WEB432ab37, 운영·APP58 변경0. [이전L](task16l-learning-persistence-history-20261104.md).
