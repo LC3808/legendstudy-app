@@ -86,6 +86,34 @@ P(X=x) | 1/3 | 2/3
     expect(find.text('공식 예시답안'), findsNothing);
     expect(t.takeException(), isNull);
   });
+  testWidgets(
+    'supplemental official solution preserves provenance and indexed roots',
+    (t) async {
+      await t.pumpWidget(
+        const MaterialApp(
+          home: MathSolutionPage(
+            solution: {
+              'references': [
+                {
+                  'origin': 'OFFICIAL',
+                  'relationship': 'SUPPLEMENTAL_AFTER_ASSESSMENT',
+                  'source_locator': '공식 문항카드 3쪽 · 예시답안',
+                  'body': r'(1-2) 치환과 최솟값 \(T(u)=S(\sqrt[4]{u})\)',
+                },
+              ],
+              'steps': <Map<String, dynamic>>[],
+            },
+          ),
+        ),
+      );
+      expect(find.text('공식 예시답안'), findsOneWidget);
+      expect(find.text('추가 연결 공식 자료 · 평가 당시 참고자료와 구분'), findsOneWidget);
+      expect(find.text('공식 문항카드 3쪽 · 예시답안'), findsOneWidget);
+      expect(find.byType(Math), findsOneWidget);
+      expect(find.text('수식 표시 오류 · 원문'), findsNothing);
+      expect(t.takeException(), isNull);
+    },
+  );
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'multiline formula, table and full evidence remain reachable at $scale',

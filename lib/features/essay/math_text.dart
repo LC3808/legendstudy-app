@@ -2,13 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
 /// Lossless glyph spelling for the renderer; never modifies stored evidence.
-String displayMathSource(String source) => source
-    .replaceAll('′', "'")
-    .replaceAllMapped(
-      RegExp(r'√([A-Za-zα-ωΑ-Ω]|[0-9]+)'),
-      (m) => '\\sqrt{${m[1]}}',
-    )
-    .replaceAllMapped(RegExp('([A-Za-z])\u0304'), (m) => '\\bar{${m[1]}}');
+String displayMathSource(String source) {
+  const superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+  final indexed = source.replaceAllMapped(
+    RegExp(r'(^|[\s(,=<>≤≥+*/-])([⁰¹²³⁴⁵⁶⁷⁸⁹]+)√(\{|[A-Za-zα-ωΑ-Ω]|[0-9]+)'),
+    (m) {
+      final index = m[2]!.split('').map(superscripts.indexOf).join();
+      final operand = m[3] == '{' ? '{' : '{${m[3]}}';
+      return '${m[1]}\\sqrt[$index]$operand';
+    },
+  );
+  return indexed
+      .replaceAll('′', "'")
+      .replaceAll(RegExp(r'√(?=(?:\[[0-9]+\])?\{)'), r'\sqrt')
+      .replaceAllMapped(
+        RegExp(r'√([A-Za-zα-ωΑ-Ω]|[0-9]+)'),
+        (m) => '\\sqrt{${m[1]}}',
+      )
+      .replaceAllMapped(RegExp('([A-Za-z])\u0304'), (m) => '\\bar{${m[1]}}');
+}
+
+Widget _mathSourceFallback(String source) => Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Text('수식 표시 오류 · 원문', style: TextStyle(fontSize: 12)),
+    SelectableText(source),
+  ],
+);
 
 /// Rendering is a projection only; malformed TeX remains selectable source text.
 class MathText extends StatelessWidget {
@@ -38,10 +58,11 @@ class MathText extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Math.tex(
                     displayMathSource(source),
-                    onErrorFallback: (_) => SelectableText(match.group(0)!),
+                    onErrorFallback: (_) =>
+                        _mathSourceFallback(match.group(0)!),
                   ),
                 )
-              : SelectableText(match.group(0)!),
+              : _mathSourceFallback(match.group(0)!),
         ),
       );
       end = match.end;

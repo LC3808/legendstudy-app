@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+수리·상경 최종 품질/공식 해설/후속 APP: [TASK16 구현·검증·잔여 P0](task16-final-quality-20261104.md).
+
 학습용 5단계·종합 별점·최초/재첨삭 비교: [Owner 승인·근거 계약·구현 전 검증](learning-completeness-policy-20261104.md).
 
 APP58 운영 Registry 전체 조사·수리/상경 확대: [363시험 감사](app58-expanded-registry-audit-20261104.md), [운영 증분·배포·실제 검수](app58-expanded-production-connection-20261104.md).

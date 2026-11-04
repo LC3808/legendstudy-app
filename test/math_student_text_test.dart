@@ -3,6 +3,28 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/math_text.dart';
 
 void main() {
+  test(
+    'explicit indexed roots match WEB without inventing operand boundaries',
+    () {
+      expect(displayMathSource('1/⁴√3'), r'1/\sqrt[4]{3}');
+      expect(displayMathSource('√[4]{u}'), r'\sqrt[4]{u}');
+      expect(displayMathSource('x⁴√3'), r'x⁴\sqrt{3}');
+      expect(displayMathSource('√[4]'), '√[4]');
+      expect(displayMathSource('⁴√{x+1}'), r'\sqrt[4]{x+1}');
+    },
+  );
+  testWidgets('invalid formula has visible warning and unchanged source', (
+    tester,
+  ) async {
+    const source = r'\[\frac{1}{\]';
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: MathText(source))),
+    );
+    expect(find.text('수식 표시 오류 · 원문'), findsOneWidget);
+    expect(find.text(source), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'rectangular source table preserves values; malformed rows stay source',
     (tester) async {

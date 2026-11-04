@@ -1,3 +1,4 @@
+import 'learning_completeness.dart';
 import 'math_answer_evidence.dart';
 
 import 'dart:typed_data';
@@ -179,6 +180,10 @@ class _MathCoachingScreenState extends State<MathCoachingScreen> {
         ),
       ),
       const SizedBox(height: 8),
+      LearningCompletenessCard(
+        value: snapshot.data['learning_completeness'],
+        evaluationId: snapshot.id,
+      ),
       heading('잘한 점'),
       if (objects(snapshot.data['strengths']).isEmpty)
         const MathCard(child: Text('검증된 강점 근거가 아직 제공되지 않았습니다.')),
@@ -669,6 +674,15 @@ class MathSolutionPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  if (reference['relationship'] ==
+                      'SUPPLEMENTAL_AFTER_ASSESSMENT') ...[
+                    const Text('추가 연결 공식 자료 · 평가 당시 참고자료와 구분'),
+                    const SizedBox(height: 8),
+                  ],
+                  if (reference['source_locator'] is String) ...[
+                    Text(reference['source_locator'] as String),
+                    const SizedBox(height: 8),
+                  ],
                   MathStudentText(reference['body'] as String? ?? ''),
                 ],
               ),
