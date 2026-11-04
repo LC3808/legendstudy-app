@@ -820,3 +820,9 @@ Owner 승인: 기존 feedback_submissions/inquiries와 ID·회원·답변을 보
 ## 2026-11-04 — 운영 대시보드의 회원·학습 중심 구성
 
 Owner 요청: 회원/활성 회원/학년/학교를 상단에, 작은 카드와 명확한 경계를 사용한다. 공부 시간은 기록 기반 총시간·고유 기록자 평균·현재 학년별로 정의하고 시간·분으로 표시한다. 자료 실행 승인 지표는 전용 검수에 연결한다. 기존 longitudinal 파생 지표/원본 보존 원칙을 계승하며 화면 개편이 운영 배포나 신규 개인정보 수집 승인은 아니다. [구현·검증](admin-dashboard-refresh-20261104.md).
+
+## 2026-11-04 — 관리자 분석 역할 분리·품질 검수 우선
+
+Owner 확정: GA4는 유입·행동·전환, Supabase는 회원·학습·평가·거래의 기준, 관리자 WEB은 운영·학습·품질·이용권·매출·비용을 담당한다. 기존 Analytics v1/Data API/HQP/Registry/Evidence/History/TASK16-L을 재사용하며 새 Analytics 시스템을 만들지 않는다. [장기 데이터 보존](longitudinal-learning-admissions-data-strategy.md), [기존 NSM](analytics-p0-launch-contract.md), [대시보드 결정](admin-dashboard-refresh-20261104.md)을 계승한다.
+
+이번 승인은 전수 감사·4영역 설계·Wiki Commit/Push다. 기존 URL/권한/학생 결과/원장을 보존하고 의심 후보와 확정 오류, 처리 완료와 품질 정확성을 구분한다. 운영 DB/WEB/APP/GA4 변경은 금지한다. 구체 메뉴·KPI·품질 subject 확장 및 Phase2는 [설계 검수](admin-analytics-design-20261104.md) 후 별도 구현·운영 승인한다.

@@ -256,3 +256,7 @@ Apple/Google IAP product setup for the credit packs (IAP track, separate); conse
   (L2_SHARED_CONTRACT), (3) minors/privacy legal gate.
 - L2_CONFLICT: **NO** — no L2/worker/processing/evaluation-schema files touched;
   requirements handed off as L2_SHARED_CONTRACT for Owner/ChatGPT review.
+
+## 2026-11-04 — 관리자 분석 Phase 1 재검증
+
+[운영 감사와 KPI 설계](admin-analytics-kpis-20261104.md)가 현재 source별 coverage를 보완한다. 위 legacy NSM의 학생 학습 루프 정의는 보존한다. 현재 운영 analytics_private는 legacy+exam 회차를 읽지만 별도 Math 평가를 포함하지 않으며, analytics_funnel은 가입코호트 이후전체기간이다. 이를 주간 NSM으로 단순 명칭 변경하지 않는다. IAP/매출·비용의 역사적 미구현 상태와 현재 부분연결은 [실제 페이지/RPC표](admin-analytics-inventory-20261104.md)로 구분한다. 이번은 문서 감사이며 RPC 변경 없음.

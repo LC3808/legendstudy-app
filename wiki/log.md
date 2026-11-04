@@ -5103,3 +5103,7 @@ Owner SQL/RPC·기존worker·WEB 승인 후 순차적용. DB20261104004950/Edgev
 ## 2026-11-04 — 대시보드 운영 배포
 
 Owner 승인 후 조회SQL/WEB 적용. Pages4b089f75·실제 관리자 필터/3시간44분·7명·평균32분 PASS. 원본22건hash·API138입력·설정49개·타페이지 보존. [배포 근거](admin-dashboard-refresh-20261104.md#운영-적용--2026-11-04-16251626-kst).
+
+## 2026-11-04 — 관리자 분석 Phase 1 감사·개편 설계
+
+전용 codex/admin-analytics-phase1-20261104. 메뉴30(분석/품질/베타24+운영6) 소스 전수·운영 RPC/대표 로그인 화면 대조. 완전중복4쌍/GA4본문6곳, 베타·평가신고RPC 누락, QL일반legacy0 vs 회차56, 비용185행UNKNOWN 확인. 12산출물을6개Wiki로 작성: 4영역·30URL보존·품질HQP/TASK16-L재사용·KPI·Phase2. AUDIT_COMPLETE/DESIGN_READY/OWNER_REVIEW_REQUIRED. 운영변경/Provider/거래/GA설정0. [근거·설계·검수](admin-analytics-phase1-20261104.md).

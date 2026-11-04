@@ -1789,3 +1789,13 @@ PHASE2 기본체계28/387상속/125보완 유지. 신규3문항 운영검수와1
 Owner 지시에 따라 안정화·Claude인수인계 완료. 운영DB171시험512문항(2022이후509), 일반공개12=Essay11+Math1, 기존E2E9. WEB e67a0d37/f1a9e27·Worker c3fb54be 100% 확인, Secret/배포/DB쓰기변경0. 17호환후보 미반영, 서울여Q2무료재첨삭 품질보류/0해제. [인수인계·정확한 재개순서](../essay-lab-claude-handoff-20261024.md).
 
 성균 Q1 일반계정 최초/재첨삭1/0Credit·WEB/GalaxyS8 History PASS 유지. History 복귀/재활성화/주기갱신 및 저장된 기준별 판단근거 표시 수정, WEB a8796fb4·GalaxyS8 build2026102303 실제표시PASS. WEB4·Native26검사/빌드PASS. 기존ID/정책/두평가기록·Ledger 보존검증PASS, 추가Provider/차감0. [배포·증거·검증범위](../essay-p0-direct-execution-20261023.md).
+
+## 2026-11-04 관리자 분석 감사 시작 시 TASK16 복원 체크포인트
+
+다음은 분기 시작 당시의 이전 상태다. 최신 TASK16-L TEST 및 운영 데이터 대조는 [Phase 1 감사](../admin-analytics-phase1-20261104.md)를 참조한다.
+
+[TASK16-E](../task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
+
+[TASK16-C](../task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.
+
+[TASK16-B 격리 Preview](../task16b-commerce-social-integration-20261102.md): 수학전용 Provider 1회 PASS·17,227tokens/$0.1395 추정. 전체 제출·재첨삭 E2E 미완료·운영미활성.

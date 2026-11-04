@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+관리자 분석 개편 / ADMIN ANALYTICS PHASE 1 / 평가 품질 / GA4 역할: [전수 감사·12산출물·Owner 검수](admin-analytics-phase1-20261104.md) → [30메뉴 보존표](admin-analytics-inventory-20261104.md) → [품질 계약](admin-analytics-quality-20261104.md) → [KPI](admin-analytics-kpis-20261104.md) → [정보 구조·Phase 2](admin-analytics-design-20261104.md). 설계만이며 운영 적용 승인 아님.
+
 운영 대시보드 / 학습시간 집계: [회원 우선 개편·정의·SQL 후보·로컬 검증](admin-dashboard-refresh-20261104.md).
 
 문의 / FEEDBACK / INQUIRY / 관리자 문의: [2026-11-04 통합구현·운영적용·실제문의 검증](feedback-admin-integration-20261104.md) → [기존 Inbox](day-11-b3-admin-inbox.md) → [이메일](day-11-b4-feedback-email.md).

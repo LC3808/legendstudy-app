@@ -1,14 +1,12 @@
 # Current Status
 
+[관리자 분석 Phase 1](admin-analytics-phase1-20261104.md): 30메뉴 감사·4영역/품질/KPI 설계 완료, Owner 검수 대기. Wiki만 변경; 운영 변경0.
+
 [대시보드 개편](admin-dashboard-refresh-20261104.md): SQL·WEB 운영 적용·조회 PASS.
 
 [문의 통합 P0](feedback-admin-integration-20261104.md): 승인 후 DB·Edge·WEB 운영적용. 실제 목록/상세·미처리3 PASS, 원본보존/시험답변0. 앱 릴리스 별도.
 
-[TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
-
-[TASK16-C](task16c-math-recognition-scaffolding-20261102.md): 수식·힌트/정답·개념 PASS. 실필기/E2E 미완료.
-
-[TASK16-B 격리 Preview](task16b-commerce-social-integration-20261102.md): 수학전용 Provider 1회 PASS·17,227tokens/$0.1395 추정. 전체 제출·재첨삭 E2E 미완료·운영미활성.
+[TASK16 이전 체크포인트](history/status-checkpoints.md#2026-11-04-관리자-분석-감사-시작-시-task16-복원-체크포인트) 보존. 최신 TASK16-L은 분석 감사의 고정 소스 참조.
 
 [10/28 건국 Worker P0](essay-worker-incident-20261028.md#production-적용--owner-승인-2026-10-28): Owner승인 입력검증만451b8cae100%배포·65회귀PASS. 기존run reserved/checkpoint0/1예약 보존·재실행0. 기존run복구·APP통합 별도승인.
 

@@ -74,3 +74,7 @@ Schema snapshot covers existing public/private definitions, ownership, RLS/polic
 Seven preservation answers: server created_at/explicit correction separates events; evaluation/hash/rubric/rewrite pin retained subject; no correction UPDATE; canonical auth identity reused; human operational judgment distinct from Learning/Outcome; explicit E1/E2 erasure and operator-only notes; review state/metrics derived, never stored as model ground truth. Hard erasure deliberately ends per-student QA reproducibility. Future analytics retention cannot quietly restore it.
 
 Historical isolated closeout: READY_FOR_OWNER_MIGRATION_REVIEW=YES; apply/gateway were then pending. Superseded by the Production gateway closeout above; READY_FOR_HUMAN_REVIEW_WRITE_UI=YES with normal write NOT_ASSESSABLE; READY_FOR_REAL_STUDENT_PILOT=NO. AI OFF; model NOT_SELECTED. Stop after source/doc closeout; no HQP runtime apply or LAB work authorized here.
+
+## 2026-11-04 — 운영 카탈로그 및 통합 검수 재확인
+
+이 문서의 이전 미적용 기록은 당시 상태다. [Phase 1 읽기 감사](admin-analytics-quality-20261104.md)에서 운영 human_quality_judgments/findings 및 ql/qlm RPC 설치를 확인했다(판단/사유 행0). 현재 QL 일반은 legacy 평가만 읽어 회차형 평가를 누락하며, Math 목록은 실제 조회되나 대학·문항 메타데이터 일부 미연결이다. 설치/조회 확인을 실제 검토쓰기 E2E나 전체품질 PASS로 확대하지 않는다. 기존 불변 검토·멱등·정정 계약을 보존하는 subject 확장을 설계했고 이번 DB/학생결과/검토 기록 변경은 없다.
