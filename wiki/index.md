@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+운영 대시보드 / 학습시간 집계: [회원 우선 개편·정의·SQL 후보·로컬 검증](admin-dashboard-refresh-20261104.md).
+
 문의 / FEEDBACK / INQUIRY / 관리자 문의: [2026-11-04 통합구현·운영적용·실제문의 검증](feedback-admin-integration-20261104.md) → [기존 Inbox](day-11-b3-admin-inbox.md) → [이메일](day-11-b4-feedback-email.md).
 
 TASK16-E: [손글씨·정답 공개 P0 수정/검증/잔여 차단](task16e-recognition-disclosure-p0-20261102.md).

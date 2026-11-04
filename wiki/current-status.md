@@ -1,5 +1,7 @@
 # Current Status
 
+[대시보드 개편](admin-dashboard-refresh-20261104.md): 로컬 검증, 운영 미반영.
+
 [문의 통합 P0](feedback-admin-integration-20261104.md): 승인 후 DB·Edge·WEB 운영적용. 실제 목록/상세·미처리3 PASS, 원본보존/시험답변0. 앱 릴리스 별도.
 
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.

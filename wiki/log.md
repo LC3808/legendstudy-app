@@ -5095,3 +5095,7 @@ Owner 구현 승인에 따라 원본2종 통합 조회/답변/내역/집계 및 
 ## 2026-11-04 — 문의 통합 운영 적용·실제 관리자 확인 PASS
 
 Owner SQL/RPC·기존worker·WEB 승인 후 순차적용. DB20261104004950/Edgev40 cron200/WEB0e735c6 Pages1e842209 production success. 최신 운영9a8fb9f 기준 문의 overlay, 기타 페이지hash/API입력156/설정46binding 보존. 실제 관리자 전체3·미처리3·대상 상세/원문/답변영역 PASS, 대시보드/배지3. 원본hash동일·상태new·답변/시험메일0. 최신 관리자176PASS/build PASS. 앱릴리스0. [영수증·검수·복구](feedback-admin-integration-20261104.md).
+
+## 2026-11-04 — 운영 대시보드 개편
+
+회원·학교/학년 상단, 작은 카드·명확한 경계, 기록 공부시간/평균·학년 조회 후보 구현. WEB189PASS/1기존SKIP·163routes build·격리PG PASS. 운영SELECT 총3시간44분/7명/평균32분, 학년 표본보호 확인. DB/WEB운영 변경0. [근거·검수·다음 적용](admin-dashboard-refresh-20261104.md).
