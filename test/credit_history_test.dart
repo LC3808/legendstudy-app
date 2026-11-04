@@ -68,10 +68,10 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('논술 첨삭 · -1 크레딧'), findsOneWidget);
+      expect(find.text('첨삭 이용권 사용 완료 · -1개'), findsOneWidget);
       expect(find.textContaining('사용 대기'), findsNothing);
-      expect(find.text('환불 · +1 크레딧'), findsOneWidget);
-      expect(find.text('크레딧 회수 · -1 크레딧'), findsOneWidget);
+      expect(find.text('이용권 복구 · +1개'), findsOneWidget);
+      expect(find.text('이용권 조정 · -1개'), findsOneWidget);
     },
   );
   testWidgets(
@@ -108,7 +108,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.text('사용 가능 4 크레딧'), findsOneWidget);
-      expect(find.text('크레딧 내역이 없어요.'), findsOneWidget);
+      expect(find.text('이용권 내역이 없어요.'), findsOneWidget);
       expect(find.textContaining('사용 대기'), findsNothing);
     },
   );
@@ -141,7 +141,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('크레딧 구매 · +1 크레딧'), findsOneWidget);
+    expect(find.text('이용권 구매 · +1개'), findsOneWidget);
     expect(find.textContaining('만료일 2027.01.23'), findsOneWidget);
     expect(find.textContaining('만료 없음'), findsOneWidget);
     expect(find.textContaining('14:59'), findsNothing);

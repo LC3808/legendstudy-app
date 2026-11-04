@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/supabase/supabase_providers.dart';
+import 'credit_display.dart';
 
 /// Calendar dates follow the Korean Credit policy, regardless of device zone.
 String creditDate(String value) {
   final date = DateTime.parse(value).toUtc().add(const Duration(hours: 9));
   String two(int value) => value.toString().padLeft(2, '0');
   return '${date.year}.${two(date.month)}.${two(date.day)}';
+}
+
+String creditDateTime(String value) {
+  final date = DateTime.parse(value).toUtc().add(const Duration(hours: 9));
+  String two(int n) => n.toString().padLeft(2, '0');
+  return '${creditDate(value)} ${two(date.hour)}:${two(date.minute)}';
 }
 
 /// User-facing projection only; never used to calculate the wallet balance.
@@ -51,7 +58,7 @@ final creditHistoryProvider =
       final rows = await client
           .from('credit_transactions')
           .select(
-            'id,decision_id,created_at,transaction_type,balance_delta,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)',
+            'id,decision_id,created_at,transaction_type,reason_code,balance_delta,credit_grants!credit_transactions_grant_id_account_id_fkey(expires_at)',
           )
           .eq('account_id', account['id'] as String)
           .not('transaction_type', 'in', '(reserve,release)')
@@ -75,7 +82,7 @@ final creditHistoryProvider =
           : await client
                 .from('credit_transactions')
                 .select(
-                  'id,decision_id,created_at,transaction_type,balance_delta',
+                  'id,decision_id,created_at,transaction_type,reason_code,balance_delta',
                 )
                 .eq('account_id', account['id'] as String)
                 .eq('transaction_type', 'consume')
@@ -102,8 +109,8 @@ class CreditHistory extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        const Text('충전·지급·사용 내역 · 최근 50건'),
-        const Text('만료일은 한국시간 기준이에요.'),
+        const Text('구매·지급·사용 내역 · 최근 50건'),
+        const Text('지급·사용 시각과 만료일은 한국시간 기준이에요.'),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton.icon(
@@ -116,9 +123,9 @@ class CreditHistory extends ConsumerWidget {
         ),
         history.when(
           loading: () => const LinearProgressIndicator(),
-          error: (_, _) => const Text('크레딧 내역을 불러오지 못했어요. 새로고침해 주세요.'),
+          error: (_, _) => const Text('이용권 내역을 불러오지 못했어요. 새로고침해 주세요.'),
           data: (rows) => userCreditHistory(rows).isEmpty
-              ? const Text('크레딧 내역이 없어요.')
+              ? const Text('이용권 내역이 없어요.')
               : Column(
                   children: [
                     for (final row in userCreditHistory(rows)) _entry(row),
@@ -131,25 +138,21 @@ class CreditHistory extends ConsumerWidget {
 
   Widget _entry(Map<String, dynamic> row) {
     final type = row['transaction_type'];
-    final label = switch (type) {
-      'purchase' => '크레딧 구매',
-      'signup_bonus' => '신규가입 무료',
-      'consume' => '논술 첨삭',
-      'refund' => '환불',
-      'expiration' => '만료',
-      'adjustment' => (row['balance_delta'] as num) < 0 ? '크레딧 회수' : '크레딧 지급',
-      _ => '크레딧 지급',
-    };
+    final label = creditEntryLabel(
+      type as String,
+      row['reason_code'] as String?,
+      row['balance_delta'] as num,
+    );
     final amount = row['balance_delta'] as num;
     final grant = row['credit_grants'] as Map<String, dynamic>?;
     final expiry = grant?['expires_at'] as String?;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Text('$label · ${amount > 0 ? '+' : ''}$amount 크레딧'),
+      title: Text('$label · ${amount > 0 ? '+' : ''}$amount개'),
       subtitle: type == 'consume'
-          ? Text(creditDate(row['created_at'] as String))
+          ? Text(creditDateTime(row['created_at'] as String))
           : Text(
-              '${creditDate(row['created_at'] as String)}\n'
+              '${creditDateTime(row['created_at'] as String)}\n'
               '${grant == null
                   ? '만료 정보 확인 불가'
                   : expiry == null

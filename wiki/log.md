@@ -1,3 +1,7 @@
+## 2026-11-04 — 이용권 지급 유형·관리자 통계 구현
+
+기존 원장 SELECT 기반8출처·거래구분 필터/합계, WEB·APP 명칭 통일. 신규 SQL 격리PASS·기존 첨삭18·WEB284·Flutter34 PASS. SQL/WEB/앱 운영 미적용. [변경·매핑·검증한계·승인패키지](credit-classification-20261104.md).
+
 ## 2026-11-04 — 베타 이용권 원장 읽기 전용 감사
 
 01:20 인하 자연 Math 요청의 beta 지급1→예약1→사용1 연결 PASS. 전체 판정 PARTIAL: 관리자 beta/이벤트 분류 통합 및 Math 실패 예약유지 계약 구분 필요. 운영 변경0·로컬61검사 PASS. [거래 ID·정책·통계·수정 범위](beta-credit-ledger-audit-20261104.md).

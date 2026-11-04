@@ -12,7 +12,7 @@
 
 [전체1,014문항 입력유형 검사·불일치0/미확정0·WEB 배포](essay-web-studio-ui-20261026.md#2026-10-27--전체-registry-입력-유형-전수-보완). 숙명 추가 연결 미완료/광운 자연 Registry1회차.
 
-[베타 일일1 운영 원장 감사 PARTIAL: 지급정상·분류/실패정책 검토](beta-credit-ledger-audit-20261104.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
+[이용권 유형·통계 구현/격리PASS·운영승인대기](credit-classification-20261104.md). [MY 라디오5·학교독립·5개안내 확인](my-college-management-20261026.md). 성장그래프 배포·537검수/50건한계 유지. [범위·복구](essay-growth-history-ui-20261026.md#2026-10-27--공통-성장-그래프-이력표시명).
 
 [광운 인문16 공개·자연1 목록/첨삭보류, APP 대기](essay-kwangwoon-standby-20261027.md). [현황·SQL·복구·재개](essay-all-university-standby-20261026.md).
 
