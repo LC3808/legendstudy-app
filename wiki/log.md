@@ -5082,3 +5082,5 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 - 2026-11-04 TASK17 첫LIVE: admin@4,900원 FAILED/PROVIDER_REJECTED·지급0. Toss정확오류조회대기,신규결제중지배포98e2b121/runtime PAUSED. DB LIVE·기록·조회·환불보존,실결제PASS아님. [진단](payment-live-activation-20261104.md#첫-live-거절신규결제-일시중지--2026-11-04).
 
 - 2026-11-04 TASK17 Owner Toss로그: LIVE confirm400 INVALID_UNREGISTERED_SUBMALL확정. 공식문서상가맹점등록/인증방식문제후보,선택결제수단확인대기. PAUSED유지·키/코드/원장변경0. [근거](payment-live-activation-20261104.md#toss-원문-오류-확인--1342-owner-증빙).
+
+- 2026-11-04 TASK17 작업명세서: WEB/DB반영완료·신규결제PAUSED·LIVE검증미완료 구분. Owner 앱카드/ISP·카드사승인최대약2주안내 확인,Finance11/11만료·재개/환불검증절차명시. 이번문서작업은운영변경0. [명세서](task17-payment-work-spec-20261104.md).

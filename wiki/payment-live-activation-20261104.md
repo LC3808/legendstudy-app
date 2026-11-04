@@ -1,6 +1,6 @@
 # Toss WEB LIVE activation — 2026-11-04
 
-Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/WEB LIVE activated; reviewer hosted TEST verified; LIVE_VERIFIED NO / PRODUCTION_ACTIVE PAUSED. First LIVE provider rejection under investigation.
+Status **PARTIAL**. Owner LIVE activation approved; implementation and isolated verification completed. Production DB/WEB LIVE activated; reviewer hosted TEST verified; LIVE_VERIFIED NO / PRODUCTION_ACTIVE PAUSED. First LIVE provider rejection; card-issuer registration/approval confirmation pending.
 
 This supersedes the previous [TASK17 HOLD decision](payment-app-foundation.md#task17-toss-최종심사-준비--2026-11-02-오후) for WEB only. Fixed confirmed Auth UID ddc5ae63-acbb-490b-a423-c996b811dea8 AND exact review@legendstudy.com remains TEST. Other authenticated users use LIVE. Server checks current Supabase Auth; client email/mode/is_test never selects environment. Existing order mode determines confirm/reconcile/refund credentials even after identity/config changes. No APP58/StoreKit/Play/bonus/beta/price/refund-policy changes.
 
@@ -58,3 +58,7 @@ admin@의1회4,900원 주문662851a3-77ec-4a17-b83e-7707d41c5ac3이13:38:41KST F
 Owner LIVE API로그의동일주문/13:38:34 confirm은HTTP400 `INVALID_UNREGISTERED_SUBMALL`,MID leglabn24k. [공식오류문서](https://docs.tosspayments.com/reference/error-codes)는미등록서브몰또는안심클릭/ISP필요를설명한다. Finance누락/키오류와다른결제승인단계의거절. 현재WEB은일반CARD창을열고confirm에paymentKey/orderId/amount만전달,직접서브몰ID/간편결제강제설정없음. 가맹점등록·선택결제수단·인증방식중정확원인은미확정으로Owner에게선택수단을질문했다. 임의submall값추가·키교체·신규청구없이PAUSED유지.
 
 Toss 문의안: “MID leglabn24k / lab.legendstudy.com / 2026-11-04 13:38:34KST / LIVE confirm 4,900원 / INVALID_UNREGISTERED_SUBMALL. 카드사 및 간편결제별 하위가맹점 등록·사용승인과 해당 거래 인증방식 적합 여부를 확인해 주세요.” 주문번호는Owner로그에서제공,키/카드정보제외. Agent는외부문의를발송하지않았다.
+
+## Owner 후속 확인·작업 명세서
+
+Owner는 카드사 선택 후 앱카드·ISP 인증을 진행했으며, 카드사별 승인은 순차적으로 최대 약2주 소요될 수 있다고 사전 안내받았음을 확인했다. 해당 카드사의 실제 승인 완료는 미확정. 현재 PAUSED 유지. [구축 범위·배포·검증·재개 작업 명세서](task17-payment-work-spec-20261104.md)에 통합했으며 Finance 만료 전 갱신과 LIVE 실승인·지급·환불 검증은 남아있다.
