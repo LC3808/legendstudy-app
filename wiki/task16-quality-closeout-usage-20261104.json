@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-04",
+  "environment": "isolated TEST",
+  "provider_calls": 7,
+  "input_tokens": 55218,
+  "output_tokens": 10666,
+  "total_tokens": 65884,
+  "cost_amount": null,
+  "cost_status": "NOT_VERIFIED; provider usage did not report price",
+  "production_writes": 0,
+  "test_db_writes": 0,
+  "provider_evaluation_initial": "PASS_IN_MEMORY_NOT_PERSISTED",
+  "calculation_negative_before": "FAIL_FALSE_CORRECT",
+  "independent_review_negative": "REJECTED",
+  "calculation_negative_after": "PASS_IN_MEMORY_NOT_PERSISTED",
+  "learning_generation_review": "PASS_NOT_PERSISTED",
+  "restored_test_deployment": "626fa92d-84f9-41d4-8f2b-5c15cc0b2308"
+}

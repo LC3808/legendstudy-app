@@ -1,6 +1,10 @@
 <!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
+## 최신 평가 품질 검증 — 2026-11-04
+[실제 TEST 품질 마감](task16-evaluation-quality-closeout-20261104.md): 최초 확정 전사10영역이 있었으나 candidate-3가 미제출로 오판한 원인 확인. 기존 수정으로 새 최초 Provider7단계 정상 평가. 최종값8/9→9/8 대조군의 허위 정답을 발견하고 독립 검산 거절·candidate-5 계산오류 분류 재검증. 실제7호출/65,884토큰, 비용 미확인. 5단계 생성/독립 검토 성공하나 저장·History·비교 미연결. Math147/인문21 회귀 PASS. 중앙 공식 Q2 새 실평가·저장 E2E·후속 실기기 미완료. 운영 변경0, TEST 기존 배포 복원, 전체 PARTIAL. 아래는 기존 연결/검수 이력이며 최신 판정은 이 문서를 따른다.
+
+
 ## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 
 현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험으로 제한하지 않고 전체363시험을 조사했다. [확대 감사](app58-expanded-registry-audit-20261104.md), [운영 연결 실행](app58-expanded-production-connection-20261104.md)이 최신 근거다.
