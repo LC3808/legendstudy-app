@@ -157,3 +157,18 @@ APP58 source5b5e5a8·버전58·IPA/AAB는 그대로다. 이번 마감은 Wiki만
 ### 컴퓨터 종료 시도 결과
 
 Owner가 승인한 종료 전 검사·Git push·Wiki 기록과 중요 빌드/배포 종료 확인은 완료했다. 정상 종료는 완료하지 못했다. `sudo -n /sbin/shutdown -h +1`은 macOS 관리자 비밀번호 요구로 실행되지 않았고, Finder/SystemUIServer 경유 종료 메뉴도 자동화 도구에서 정상 제어되지 않았다. 비밀번호 추측·인증 우회·강제 종료는 하지 않았다. 마지막 프로세스 재확인에서도 빌드·배포 실행은 없었다. 다음 기기 사용 시 이 상태를 확인하며 자동 종료 예약이 설정되었다고 간주하지 않는다.
+
+
+## 11/4 Owner 화면 및 P0 후속 — 새 빌드/운영 배포 전
+
+Owner IMG_1352~1355에서 인하2027 자연 Q1 재첨삭의 본문·학생 답안 근거·History가 실제 표시된다. 기존의 제목만 나온 항목과 동일 evaluation인지 확인되지 않아 원래 공백 원인을 해결했다고 보고하지 않는다. 기본 개념 미연결도 그대로 남아 있다.
+
+Native 표시 수정: `(1-2)` 소문항을 수식 뺄셈으로 해석하지 않고, 문장 끝과 소문항 경계를 분리한다. OCR 물리 줄바꿈마다 큰 문단 간격을 주던 표현을 줄이며 명시 문장/빈 문단은 구분한다. 모든 블록을 다시 합치면 원문과 동일하고 TeX 환경·표·소수·부호를 보존한다. 원문에 없는 글자·수식을 복원하지 않는다. 실제 OCR 단어 자체가 분리되거나 틀린 경우는 아직 별도 전사 검토 대상이다.
+
+APP의 MathSolutionPage가 서버의 `generated_solution.body`를 무시하던 표시 누락을 수정했다. 공식 참고답안은 기존 경로를 유지하고 생성 해설은 `AI 생성 참고 해설 · 공식 예시답안 아님`으로 표시한다. 공개 이전 응답 차단은 유지한다. 인하 기존 evaluation에는 generated_solution도 canonical reference도 없어 이 UI 수정만으로 해당 본문을 복구하지 못한다. 운영 읽기 확인에서 해당 leaf의 source는 OFFICIAL/HASH_VERIFIED SCORING 1개이며 canonical solution0, considered reference0이다. 평가 당시 참고하지 않은 해설을 평가 근거로 소급 삽입하지 않는다.
+
+중앙2026 경영경제 Q2의 기존 두 독립 검토 거절은 명료한 내용 오독을 unclear_meaning으로 분류한 문제와 공식 기준과 같은 표현을 독자적 표현으로 칭찬한 grounding 문제다. 기존 동일 문항 재시도 진단 안내에 이 구분을 보완했다. 인용·원문·공식 기준은 고정하고 독립 검토를 우회하지 않으며 자동 재호출하지 않는다. 운영 Worker 배포·실제 Q2 재검증 전이므로 혼합형은 계속 PARTIAL이다.
+
+로컬 수식/소문항/해설/공개/History/Native 30PASS, Python 재시도·semantic review·live worker26PASS. 기존 실제 결과 재사용, 이번 Provider 호출0, 운영 데이터·이용권 변경0. APP58 원본은 보존하며 새 빌드/실기기 설치 전이다. [학습용 5단계](learning-completeness-policy-20261104.md)는 Owner 도입 승인·계약 설계 단계이며 실제 등급 생성·표시 전이다.
+
+추가 검증: 기존 인문 결과·공통 History9PASS/기존4SKIP, Flutter Analyze0, Wiki handoff PASS(current-status 8,968bytes). SKIP은 실제 검수 PASS로 포함하지 않는다.

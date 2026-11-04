@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:legendstudy_app/features/essay/math_text.dart';
+import 'package:legendstudy_app/features/essay/math_mobile/math_coaching_screen.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/academic_purple.dart';
 import 'package:legendstudy_app/features/essay/math_mobile/math_answer_evidence.dart';
 
@@ -41,6 +42,50 @@ P(X=x) | 1/3 | 2/3
       expect(mathAnswerBlocks(malformed).join(), malformed);
     },
   );
+  test('sentence boundaries preserve decimals and explicit math source', () {
+    const source = r'값은 $x = 1.25$이다. 다음은 조건이다. (1-2) u = t^4이라 하자.';
+    final blocks = mathAnswerBlocks(source);
+    expect(blocks.join(), source);
+    expect(blocks.length, 3);
+    expect(blocks.first, contains(r'$x = 1.25$'));
+    expect(blocks.last, startsWith('(1-2)'));
+    const formula = r'\[\text{이다. 다음} + 1.25\]';
+    expect(mathAnswerBlocks(formula), [formula]);
+  });
+  testWidgets('subquestion labels remain prose rather than subtraction', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: MathStudentText('(1-2) u = t^4이라 하고')),
+      ),
+    );
+    expect(find.text('(1-2) '), findsOneWidget);
+    expect(t.takeException(), isNull);
+  });
+  testWidgets('revealed generated solution is visible with explicit AI label', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      const MaterialApp(
+        home: MathSolutionPage(
+          solution: {
+            'generated_solution': {
+              'origin': 'AI_GENERATED',
+              'body': r'확인된 풀이 \(x=2\)',
+            },
+            'references': <Map<String, dynamic>>[],
+            'steps': <Map<String, dynamic>>[],
+            'paths': <Map<String, dynamic>>[],
+          },
+        ),
+      ),
+    );
+    expect(find.text('AI 생성 참고 해설 · 공식 예시답안 아님'), findsOneWidget);
+    expect(find.byType(Math), findsOneWidget);
+    expect(find.text('공식 예시답안'), findsNothing);
+    expect(t.takeException(), isNull);
+  });
   for (final scale in [1.0, 2.0]) {
     testWidgets(
       'multiline formula, table and full evidence remain reachable at $scale',

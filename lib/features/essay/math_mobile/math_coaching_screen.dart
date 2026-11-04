@@ -669,7 +669,26 @@ class MathSolutionPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  MathText(reference['body'] as String? ?? ''),
+                  MathStudentText(reference['body'] as String? ?? ''),
+                ],
+              ),
+            ),
+          if (object(solution['generated_solution'])['body'] is String &&
+              (object(solution['generated_solution'])['body'] as String)
+                  .trim()
+                  .isNotEmpty)
+            MathCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'AI 생성 참고 해설 · 공식 예시답안 아님',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 12),
+                  MathStudentText(
+                    object(solution['generated_solution'])['body'] as String,
+                  ),
                 ],
               ),
             ),

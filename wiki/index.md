@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+학습용 5단계·종합 별점·최초/재첨삭 비교: [Owner 승인·근거 계약·구현 전 검증](learning-completeness-policy-20261104.md).
+
 APP58 운영 Registry 전체 조사·수리/상경 확대: [363시험 감사](app58-expanded-registry-audit-20261104.md), [운영 증분·배포·실제 검수](app58-expanded-production-connection-20261104.md).
 
 APP58 IPA/AAB / Owner Store 업로드·심사·게시 인계: [최종 산출물·서명/설정·절차·미실행 범위](app58-store-handoff-20261104.md).

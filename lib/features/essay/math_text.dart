@@ -57,7 +57,7 @@ class MathText extends StatelessWidget {
 List<String> mathAnswerBlocks(String text) {
   final blocks = <String>[];
   final token = RegExp(
-    r'\\\[|\\\]|\\\(|\\\)|(?<!\\)\$\$|(?<!\\)\$|\\begin\{[^}]+\}|\\end\{[^}]+\}|\n',
+    r'\\\[|\\\]|\\\(|\\\)|(?<!\\)\$\$|(?<!\\)\$|\\begin\{[^}]+\}|\\end\{[^}]+\}|(?<=[다요]\.)[ \t]+|[ \t]+(?=\(\d+-\d+\)[ \t])|\n',
   );
   String? delimiter;
   var environments = 0, start = 0;
@@ -74,7 +74,7 @@ List<String> mathAnswerBlocks(String text) {
       if (environments > 0) environments--;
       continue;
     }
-    if (value == '\n') {
+    if (value == '\n' || value.trim().isEmpty) {
       if (delimiter != null || environments > 0) continue;
       final nextEnd = text.indexOf('\n', m.end);
       final next = text.substring(m.end, nextEnd < 0 ? text.length : nextEnd);
@@ -150,14 +150,21 @@ class MathStudentText extends StatelessWidget {
         children: [
           for (final block in blocks)
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              // A physical OCR line is not automatically a paragraph.
+              padding: EdgeInsets.only(
+                bottom: block.trim().isEmpty
+                    ? 12
+                    : RegExp(r'[다요]\.[ \t\r\n]*$').hasMatch(block)
+                    ? 10
+                    : 2,
+              ),
               child: MathStudentText(block.replaceFirst(RegExp(r'\r?\n$'), '')),
             ),
         ],
       );
     }
     final marker = RegExp(
-      r'^(\s*(?:\([ivx]+\)|[ivx]+\)|\(?\d+\)|\d+\.(?=\s))\s*)([\s\S]+)$',
+      r'^(\s*(?:\([ivx]+\)|[ivx]+\)|\(\d+-\d+\)|\(?\d+\)|\d+\.(?=\s))\s*)([\s\S]+)$',
     ).firstMatch(text);
     if (marker != null) {
       return Row(
