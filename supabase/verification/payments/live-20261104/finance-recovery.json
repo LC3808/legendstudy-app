@@ -1,0 +1,44 @@
+{
+  "deployment": "1f83e03e-cc84-4fdd-a627-35d8798dd4f5",
+  "source_sha": "a901568fa7b0acc752061d6fd7361ad5772875c8",
+  "all_static_assets_preserved": true,
+  "config_preserved_after_finance_binding": true,
+  "routes": {
+    "/pricing/": 200,
+    "/payments/checkout/": 200,
+    "/payments/success/": 200,
+    "/admin/payment/": 200,
+    "/support/": 200,
+    "/essay-lab/": 200
+  },
+  "anonymous_runtime": {
+    "state": "REVIEW",
+    "mode": "TEST",
+    "consumer_purchase": false
+  },
+  "finance_validation": {
+    "existing_signer_matches_current_jwks": true,
+    "existing_subject_preserved": true,
+    "read_only_finance_rpc": "PT404",
+    "expires_at": "2026-11-11T02:25:53+00:00",
+    "ledger_writes": 0,
+    "cloudflare_writes": 0
+  },
+  "merchant_card_domain_approved_by_owner": true,
+  "live_active": false,
+  "hosted_authenticated_e2e": "PENDING_OWNER_LOGIN",
+  "preservation": {
+    "orders": 18,
+    "orders_hash": "4f74e8c145b42ea1648d2bbcc55af346",
+    "original_grants_hash": "4c24c463cda7af5804e08e9f791e9d90",
+    "original_transactions_hash": "b8c5ba4b3290db1725a8e3d1e3af7c7b",
+    "concurrent_new_grant": "signup_bonus at 2026-11-04T02:22:01.968035Z",
+    "current_grants": 168,
+    "current_transactions": 263,
+    "test_purchase_grants": 0,
+    "live_orders": 0
+  },
+  "smoke_account": "admin@legendstudy.com",
+  "existing_admin_verified": true,
+  "support_allowlist_applied": false
+}
