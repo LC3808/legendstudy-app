@@ -1,6 +1,6 @@
 # Current Status
 
-[문의 연동 P0 조사](feedback-admin-integration-20261104.md): 앱 feedback 미처리3/WEB inquiries0. 조회모델 분리 원인확정, DB·메일 정상. 읽기전용, 복구·운영미적용.
+[문의 통합 P0](feedback-admin-integration-20261104.md): APP·WEB 조회/답변/회원내역/배지 구현, 격리TEST PASS. 원본보존 확인. 운영 DB·Edge·WEB/앱 릴리스 승인대기.
 
 [TASK16-E](task16e-recognition-disclosure-p0-20261102.md): 원본 확인·정답 공개 TEST 검수, 운영 보류.
 

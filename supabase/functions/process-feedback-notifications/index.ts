@@ -1,4 +1,5 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { deliverReplies, type ReplyQueue } from "./support_replies.ts";
 import { ResendEmailProvider } from "./resend_provider.ts";
 import type {
   ClaimedNotification,
@@ -126,6 +127,7 @@ export type WorkerDependencies = {
   database: WorkerDatabase;
   provider: EmailProvider;
   batchSize?: number;
+  replyQueue?: ReplyQueue;
 };
 
 export const processNotifications = async (
@@ -175,11 +177,25 @@ export const createHandler = (dependencies: WorkerDependencies) =>
       return json(503, { error: "configuration_unavailable" });
     }
     try {
-      return json(200, await processNotifications(dependencies));
+      // Independent queues: an intake delivery outage must not starve replies.
+      const intake = await processNotifications(dependencies).catch(() => null);
+      const replies = dependencies.replyQueue
+        ? await deliverReplies(dependencies.replyQueue, dependencies.provider, dependencies.sender).catch(() => null)
+        : undefined;
+      if (intake === null || replies === null) return json(500, {error:"worker_failed"});
+      return json(200, replies ? {...intake, replies} : intake);
     } catch (_) {
       return json(500, { error: "worker_failed" });
     }
   };
+
+export function createReplyQueue(url:string,key:string):ReplyQueue {
+  const client=createClient(url,key,{auth:{autoRefreshToken:false,persistSession:false}});
+  return {
+    async claim(){const {data,error}=await client.rpc("claim_support_notifications",{p_batch_size:10});if(error) throw new Error("reply_claim_failed");return data??[];},
+    async finish(id,token,code){const {data,error}=await client.rpc("finish_support_notification",{p_id:id,p_token:token,p_error:code});if(error) throw new Error("reply_finish_failed");return data===true;}
+  };
+}
 
 const secret = Deno.env.get("FEEDBACK_WORKER_SECRET");
 const recipient = Deno.env.get("LEGENDSTUDY_ADMIN_EMAIL");
@@ -198,6 +214,7 @@ if (import.meta.main) {
       sender,
       database: createSupabaseDatabase(supabaseUrl, serviceRoleKey),
       provider: new ResendEmailProvider(resendKey),
+      replyQueue: createReplyQueue(supabaseUrl, serviceRoleKey),
     }));
   }
 }

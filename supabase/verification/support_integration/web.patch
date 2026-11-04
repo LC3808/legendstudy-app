@@ -1,0 +1,627 @@
+From 82a4aea6a0f604bfef5c5a853921d361ac8e9b02 Mon Sep 17 00:00:00 2001
+From: LC3808 <youngsook600405@gmail.com>
+Date: Wed, 4 Nov 2026 09:40:03 +0900
+Subject: [PATCH] fix: unify APP and WEB support inbox and reply workflows
+
+---
+ src/app/support/page.tsx                      |  2 +
+ src/components/admin/admin-dashboard-view.tsx |  6 +-
+ src/components/admin/admin-inquiries-view.tsx | 62 +++++++++++++------
+ src/components/admin/admin-surface.tsx        | 18 +++++-
+ .../admin/support-integration.test.tsx        | 32 ++++++++++
+ .../admin/support-postgres.test.tsx           | 25 ++++++++
+ src/components/support-inquiries.tsx          | 30 +++++++++
+ src/lib/admin/client.ts                       | 30 +++++----
+ src/lib/admin/contract.ts                     | 10 ++-
+ src/lib/admin/format.ts                       |  3 +
+ 10 files changed, 181 insertions(+), 37 deletions(-)
+ create mode 100644 src/components/admin/support-integration.test.tsx
+ create mode 100644 src/components/admin/support-postgres.test.tsx
+ create mode 100644 src/components/support-inquiries.tsx
+
+diff --git a/src/app/support/page.tsx b/src/app/support/page.tsx
+index 1b2ee4a..cf7d2de 100644
+--- a/src/app/support/page.tsx
++++ b/src/app/support/page.tsx
+@@ -1,3 +1,4 @@
++import {SupportInquiries} from '@/components/support-inquiries';
+ import {EssayFeedback} from '@/components/essay-feedback';
+ import Link from "next/link";
+ 
+@@ -31,6 +32,7 @@ export default function SupportPage() {
+       </p>
+ 
+       <ContactList />
++      <SupportInquiries />
+       <EssayFeedback bugOnly />
+ 
+       <section className="policy-section" aria-labelledby="support-refund-rules">
+diff --git a/src/components/admin/admin-dashboard-view.tsx b/src/components/admin/admin-dashboard-view.tsx
+index f25c4f0..590229d 100644
+--- a/src/components/admin/admin-dashboard-view.tsx
++++ b/src/components/admin/admin-dashboard-view.tsx
+@@ -1,4 +1,5 @@
+ "use client";
++import Link from "next/link";
+ import {AdminLearningSummary,AdminPublicAvailability} from './admin-learning-summary';
+ import {AdminReleaseReport} from './admin-release-report';
+ 
+@@ -14,7 +15,7 @@ import {
+ import type { AdminDashboard, AdminSupportMetrics } from "@/lib/admin/contract";
+ import { formatDateTime, formatDuration } from "@/lib/admin/format";
+ 
+-import { AdminErrorPanel, AdminLoading, useAdminQuery } from "./admin-surface";
++import { AdminErrorPanel, AdminLoading, useAdminQuery, useSupportRefresh } from "./admin-surface";
+ 
+ function Metric({ label, value, note }: { label: string; value: string; note?: string }) {
+   return (
+@@ -124,11 +125,13 @@ function SupportSection() {
+     (client) => client.supportMetrics(),
+     "support-metrics",
+   );
++  useSupportRefresh(reload);
+   if (state.status === "loading") return <AdminLoading label="고객지원 현황을 불러오는 중입니다" />;
+   if (state.status === "error") return <AdminErrorPanel kind={state.kind} onRetry={reload} />;
+   const data = state.data;
+   return (
+     <Section title="고객지원" note="1:1 문의 접수와 답변 발송 상태입니다. (누적)">
++      <Link href="/admin/inquiries/">APP·WEB 문의 목록 열기</Link>
+       <div className="admin-metrics">
+         <Metric label="미처리" value={formatNumber(data.open)} note="접수 및 처리 중" />
+         <Metric label="오늘 접수" value={formatNumber(data.newToday)} />
+@@ -150,6 +153,7 @@ function SupportSection() {
+ export function AdminDashboardView() {
+   const dashboard = useAdminQuery<AdminDashboard>((client) => client.dashboard(), "dashboard");
+   const support = useAdminQuery<AdminSupportMetrics>((client) => client.supportMetrics(), "dashboard-support");
++  useSupportRefresh(support.reload);
+ 
+   if (dashboard.state.status === "loading") return <AdminLoading />;
+   if (dashboard.state.status === "error") return <AdminErrorPanel kind={dashboard.state.kind} onRetry={dashboard.reload} />;
+diff --git a/src/components/admin/admin-inquiries-view.tsx b/src/components/admin/admin-inquiries-view.tsx
+index bb67463..b142a1e 100644
+--- a/src/components/admin/admin-inquiries-view.tsx
++++ b/src/components/admin/admin-inquiries-view.tsx
+@@ -1,6 +1,6 @@
+ "use client";
+ 
+-import { useState } from "react";
++import { useState, useRef } from "react";
+ 
+ import { ADMIN_MIN_QUERY, INQUIRY_MAX_REPLY } from "@/lib/admin/client";
+ import type { AdminInquiryDetail, AdminInquiryPage } from "@/lib/admin/contract";
+@@ -22,6 +22,7 @@ import {
+   AdminLoading,
+   useAdminClient,
+   useAdminQuery,
++  useSupportRefresh,
+ } from "./admin-surface";
+ 
+ const STATUS_FILTERS = [
+@@ -42,6 +43,9 @@ const REPLY_MIN = 2;
+  * 상태를 표시할 뿐 직접 메일을 보내지 않습니다.
+  */
+ export function AdminInquiriesView() {
++  const [offset, setOffset] = useState(0);
++  const [source, setSource] = useState("");
++  const [category, setCategory] = useState("");
+   const [input, setInput] = useState("");
+   const [query, setQuery] = useState("");
+   const [status, setStatus] = useState("");
+@@ -49,10 +53,12 @@ export function AdminInquiriesView() {
+   const [openId, setOpenId] = useState<string | null>(null);
+ 
+   const list = useAdminQuery<AdminInquiryPage>(
+-    (client) => client.inquiryList({ query: query || undefined, status: status || undefined }),
+-    `inquiries:${query}:${status}`,
++    (client) => client.inquiryList({ offset, source: source || undefined, category: category || undefined, query: query || undefined, status: status || undefined }),
++    `inquiries:${query}:${status}:${source}:${category}:${offset}`,
+   );
+ 
++  useSupportRefresh(list.reload, openId === null);
++
+   function submit(event: React.FormEvent) {
+     event.preventDefault();
+     const trimmed = input.trim();
+@@ -61,7 +67,7 @@ export function AdminInquiriesView() {
+       return;
+     }
+     setHint(null);
+-    setQuery(trimmed);
++    setQuery(trimmed); setOffset(0); setOpenId(null);
+   }
+ 
+   return (
+@@ -69,8 +75,7 @@ export function AdminInquiriesView() {
+       <section className="admin-section">
+         <h2>1:1 문의</h2>
+         <p className="admin-section__note">
+-          제목 또는 회원 식별자로 조회합니다. 회원에게는 답변이 등록될 때 알림 메일이
+-          발송됩니다.
++          제목 또는 회원 식별자로 조회합니다. 회원 답변은 내 문의에서 확인하며 알림 메일은 비동기로 발송됩니다. 비회원은 답변 알림을 받을 수 없습니다.
+         </p>
+         <form className="admin-search" onSubmit={submit} role="search">
+           <label className="admin-search__label" htmlFor="admin-inquiry-query">
+@@ -98,7 +103,7 @@ export function AdminInquiriesView() {
+               id="admin-inquiry-status"
+               className="admin-search__input"
+               value={status}
+-              onChange={(event) => setStatus(event.target.value)}
++              onChange={(event) => {setStatus(event.target.value); setOffset(0); setOpenId(null);}}
+             >
+               {STATUS_FILTERS.map((option) => (
+                 <option key={option.value || "all"} value={option.value}>
+@@ -107,6 +112,8 @@ export function AdminInquiriesView() {
+               ))}
+             </select>
+           </div>
++          <label>출처<select aria-label="문의 출처" value={source} onChange={e=>{setSource(e.target.value);setOffset(0);setOpenId(null);}}><option value="">전체</option><option>APP</option><option>WEB</option></select></label>
++          <label>유형<select aria-label="문의 유형" value={category} onChange={e=>{setCategory(e.target.value);setOffset(0);setOpenId(null);}}>{["","inquiry","suggestion","bug","other","account","material","essay_humanities","essay_math","credit","payment","deletion","technical"].map(c=><option key={c} value={c}>{c?inquiryCategoryLabel(c):"전체"}</option>)}</select></label>
+           {hint ? (
+             <p className="admin-search__hint" role="status">
+               {hint}
+@@ -140,31 +147,33 @@ export function AdminInquiriesView() {
+             <ul className="admin-inquiries">
+               {list.state.data.items.map((row) => {
+                 const badge = inquiryStatusLabel(row.status);
+-                const expanded = openId === row.inquiryId;
++                const rowKey = `${row.source ?? "WEB"}:${row.inquiryId}`;
++                const expanded = openId === rowKey;
+                 return (
+-                  <li key={row.inquiryId} className="admin-inquiry">
++                  <li key={rowKey} className="admin-inquiry">
+                     <div className="admin-inquiry__head">
+                       <p className="admin-inquiry__title">{row.title}</p>
+                       <p className={`admin-tag admin-tag--${badge.tone}`}>{badge.label}</p>
+                     </div>
+                     <p className="admin-inquiry__meta">
+-                      {inquiryCategoryLabel(row.category)} · {formatDateTime(row.createdAt)} ·
+-                      답변 {formatNumber(row.replyCount)}건
++                      {row.source ?? "WEB"} · {row.status === "RECEIVED" ? "신규 · " : ""}{inquiryCategoryLabel(row.category)} · {formatDateTime(row.createdAt)} ·
++                      회원 {row.userId} · 답변 {formatNumber(row.replyCount)}건
+                     </p>
+                     <p className="admin-inquiry__preview">{row.preview}</p>
+                     <button
+                       className="button button--quiet"
+                       type="button"
+                       aria-expanded={expanded}
+-                      onClick={() => setOpenId(expanded ? null : row.inquiryId)}
++                      onClick={() => setOpenId(expanded ? null : rowKey)}
+                     >
+                       {expanded ? "상세 닫기" : "상세 열기"}
+                     </button>
+                     {expanded ? (
+                       <AdminInquiryDetailPanel
++                        source={row.source ?? "WEB"}
+                         inquiryId={row.inquiryId}
+                         onChanged={() => {
+-                          list.reload();
++                          list.reload(); window.dispatchEvent(new Event("support-changed"));
+                         }}
+                       />
+                     ) : null}
+@@ -173,6 +182,7 @@ export function AdminInquiriesView() {
+               })}
+             </ul>
+           )}
++          <div><button type="button" disabled={offset===0} onClick={()=>{setOffset(Math.max(0,offset-25));setOpenId(null);}}>이전</button> <button type="button" disabled={offset+list.state.data.items.length>=list.state.data.total} onClick={()=>{setOffset(offset+25);setOpenId(null);}}>다음</button></div>
+         </section>
+       )}
+     </div>
+@@ -180,17 +190,21 @@ export function AdminInquiriesView() {
+ }
+ 
+ function AdminInquiryDetailPanel({
++  source,
+   inquiryId,
+   onChanged,
+ }: {
++  source: string;
+   inquiryId: string;
+   onChanged: () => void;
+ }) {
+   const detail = useAdminQuery<AdminInquiryDetail>(
+-    (client) => client.inquiryDetail(inquiryId),
+-    `inquiry-detail:${inquiryId}`,
++    (client) => client.inquiryDetail(inquiryId, source),
++    `inquiry-detail:${source}:${inquiryId}`,
+   );
+   const client = useAdminClient();
++  const pendingReply = useRef<{body:string;key:string}|null>(null);
++  const inFlight = useRef(false);
+   const [body, setBody] = useState("");
+   const [busy, setBusy] = useState(false);
+   const [notice, setNotice] = useState<string | null>(null);
+@@ -206,6 +220,7 @@ function AdminInquiryDetailPanel({
+ 
+   async function submitReply(event: React.FormEvent) {
+     event.preventDefault();
++    if(inFlight.current) return;
+     const trimmed = body.trim();
+     if (trimmed.length < REPLY_MIN) {
+       setFailure("답변 내용을 입력해 주세요.");
+@@ -215,18 +230,20 @@ function AdminInquiryDetailPanel({
+       setFailure(`답변은 ${formatNumber(INQUIRY_MAX_REPLY)}자 이내로 입력해 주세요.`);
+       return;
+     }
++    inFlight.current = true;
+     setBusy(true);
+     setFailure(null);
+     setNotice(null);
+     try {
+       if (!client) throw new AdminError("NETWORK", "client unavailable");
+-      // A fresh request key per submission makes a double-click idempotent at the
+-      // database rather than a second reply.
++      // Retain the key across uncertain network failures and retries.
++      if(!pendingReply.current || pendingReply.current.body!==trimmed) pendingReply.current={body:trimmed,key:crypto.randomUUID()};
+       const result = await client.replyInquiry({
+-        inquiryId,
++        inquiryId, source,
+         body: trimmed,
+-        requestKey: crypto.randomUUID(),
++        requestKey: pendingReply.current.key,
+       });
++      pendingReply.current=null;
+       setBody("");
+       setNotice(
+         result.created
+@@ -238,23 +255,27 @@ function AdminInquiryDetailPanel({
+     } catch (error) {
+       setFailure(describeError(error));
+     } finally {
++      inFlight.current=false;
+       setBusy(false);
+     }
+   }
+ 
+   async function changeStatus(next: string) {
++    if(inFlight.current) return;
++    inFlight.current = true;
+     setBusy(true);
+     setFailure(null);
+     setNotice(null);
+     try {
+       if (!client) throw new AdminError("NETWORK", "client unavailable");
+-      const result = await client.setInquiryStatus({ inquiryId, status: next });
++      const result = await client.setInquiryStatus({ inquiryId, source, status: next });
+       setNotice(result.changed ? "처리 상태를 변경했습니다." : "이미 같은 상태입니다.");
+       detail.reload();
+       onChanged();
+     } catch (error) {
+       setFailure(describeError(error));
+     } finally {
++      inFlight.current=false;
+       setBusy(false);
+     }
+   }
+@@ -262,6 +283,7 @@ function AdminInquiryDetailPanel({
+   return (
+     <div className="admin-inquiry__detail">
+       <dl className="admin-order__facts">
++        <div><dt>출처 · 회원</dt><dd>{source} · {data.member.accountId}</dd></div>
+         <div>
+           <dt>문의 유형</dt>
+           <dd>{inquiryCategoryLabel(data.inquiry.category)}</dd>
+diff --git a/src/components/admin/admin-surface.tsx b/src/components/admin/admin-surface.tsx
+index f2da55f..18ff0b2 100644
+--- a/src/components/admin/admin-surface.tsx
++++ b/src/components/admin/admin-surface.tsx
+@@ -238,6 +238,8 @@ export function AdminSurface({
+ 
+ function AdminNavigation({ active, onNavigate }: { active: AdminNavKey; onNavigate: () => void }) {
+   const pathname = usePathname();
++  const support = useAdminQuery(client => client.supportMetrics(), "support-badge");
++  useSupportRefresh(support.reload);
+   const selected = (entry: {key:string;href:string|null}) => entry.key === active || (active === "data" && pathname?.replace(/\/$/, "") === entry.href?.replace(/\/$/, ""));
+   const groups = ADMIN_GROUPS.map(group=>({title:group.title,entries:group.keys.map(key=>ADMIN_NAV.find(entry=>entry.key===key)!)}));
+   return <nav className="admin-nav" aria-label="운영 콘솔">
+@@ -246,8 +248,22 @@ function AdminNavigation({ active, onNavigate }: { active: AdminNavKey; onNaviga
+       <details open><summary className="admin-nav__heading">{group.title}</summary>
+       <ul className="admin-nav__list">{group.entries.map((entry) => <li key={entry.key}>
+         <Link className={`admin-nav__link${selected(entry) ? " admin-nav__link--active" : ""}`}
+-          href={entry.href!} onClick={onNavigate} aria-current={selected(entry) ? "page" : undefined}>{entry.label}</Link>
++          href={entry.href!} onClick={onNavigate} aria-current={selected(entry) ? "page" : undefined}>{entry.label}{entry.key === "inquiries" && <span aria-label="미처리 문의"> · {support.state.status==="ready" ? support.state.data.open : support.state.status==="error" ? "확인 필요" : "…"}</span>}</Link>
+       </li>)}</ul>
+     </details></section>)}
+   </nav>;
+ }
++
++/** Refresh support counts without replacing an open reply draft. */
++export function useSupportRefresh(reload:()=>void, enabled=true) {
++  const latest=useRef(reload);
++  useEffect(()=>{latest.current=reload;});
++  useEffect(()=>{
++    if(!enabled) return;
++    const refresh=()=>latest.current();
++    const timer=setInterval(refresh,30000);
++    window.addEventListener("support-changed",refresh);
++    window.addEventListener("focus",refresh);
++    return()=>{clearInterval(timer);window.removeEventListener("support-changed",refresh);window.removeEventListener("focus",refresh);};
++  },[enabled]);
++}
+diff --git a/src/components/admin/support-integration.test.tsx b/src/components/admin/support-integration.test.tsx
+new file mode 100644
+index 0000000..af30275
+--- /dev/null
++++ b/src/components/admin/support-integration.test.tsx
+@@ -0,0 +1,32 @@
++// @vitest-environment jsdom
++import {render,screen,cleanup,waitFor} from '@testing-library/react';
++import userEvent from '@testing-library/user-event';
++import {afterEach,it,expect,vi} from 'vitest';
++const mocks=vi.hoisted(()=>({auth:vi.fn()}));
++vi.mock('@/components/auth-context',()=>({useAuth:mocks.auth}));
++import {AdminInquiriesView} from './admin-inquiries-view';
++import {SupportInquiries} from '../support-inquiries';
++afterEach(cleanup);
++const time='2026-11-04T01:00:00Z';
++function setup(){let replyAttempts=0;const calls:{name:string;p:Record<string,unknown>}[]=[];
++ const rpc=vi.fn(async(name:string,args?:{p:Record<string,unknown>})=>{const p=args?.p??{};calls.push({name,p});let data:unknown;
++ if(name==='support_admin_list')data={dto_version:'admin-v1',as_of:time,total:26,open:3,limit:25,offset:p.offset,items:[{source:'APP',inquiry_id:'f',category:'suggestion',title:'합성 앱 제안',user_id:null,status:'RECEIVED',created_at:time,updated_at:time,reply_count:0,preview:'합성 원문'}]};
++ else if(name==='support_admin_detail')data={dto_version:'admin-v1',as_of:time,source:'APP',inquiry:{inquiry_id:'f',category:'suggestion',title:'합성 앱 제안',body:'합성 원문',status:'RECEIVED',submitted_at:time,updated_at:time,answered_at:null,closed_at:null},member:{account_id:null,grade_level:null,account_state:null,spendable:null},related:{essay_evaluations:null,payment_orders:null},status_events:[],replies:[]};
++ else if(name==='support_admin_reply'){replyAttempts++;if(replyAttempts===1)return {data:null,error:{message:'network',code:'NETWORK'}};data={reply_id:'r',created:true};}
++ else if(name==='support_mine')data={items:[{source:'APP',inquiry_id:'f',title:'내 합성 문의',status:'ANSWERED',created_at:time,answered:true}]};
++ else if(name==='support_detail')data={title:'내 합성 문의',body:'내 원본',replies:[{reply_id:'r',body:'저장된 합성 답변',created_at:time}]};
++ else throw new Error(name);
++ return {data,error:null};});
++ mocks.auth.mockReturnValue({client:{rpc,auth:{getSession:async()=>({data:{session:{user:{id:'operator'}}},error:null})}},user:{id:'operator'},status:'authenticated'});return {rpc,calls};}
++it('APP source/detail, guest member, reply retry idempotency and global paging',async()=>{
++ const {calls}=setup();const user=userEvent.setup();render(<AdminInquiriesView/>);
++ expect(await screen.findByText('합성 앱 제안')).toBeInTheDocument();expect(screen.getByText(/회원 비회원/)).toBeInTheDocument();
++ await user.click(screen.getByRole('button',{name:'상세 열기'}));await screen.findByText('문의 내용');
++ expect(calls.find(c=>c.name==='support_admin_detail')?.p.source).toBe('APP');
++ const textbox=screen.getByRole('textbox',{name:/답변/});await user.type(textbox,'합성 답변입니다');
++ const send=screen.getByRole('button',{name:/답변 등록/});await user.click(send);await waitFor(()=>expect(send).not.toBeDisabled());await user.click(send);
++ await waitFor(()=>expect(calls.filter(c=>c.name==='support_admin_reply')).toHaveLength(2));const replies=calls.filter(c=>c.name==='support_admin_reply');expect(replies[0].p.request_key).toBe(replies[1].p.request_key);expect(replies[1].p.source).toBe('APP');
++ await user.click(screen.getByRole('button',{name:'다음'}));await waitFor(()=>expect(calls.some(c=>c.name==='support_admin_list'&&c.p.offset===25)).toBe(true));
++});
++it('member follows existing support route to saved reply',async()=>{setup();const user=userEvent.setup();render(<SupportInquiries/>);await user.click(await screen.findByRole('button',{name:/내 합성 문의/}));expect(await screen.findByText('저장된 합성 답변')).toBeInTheDocument();});
++it('sign out does not retain prior member content',async()=>{setup();const view=render(<SupportInquiries/>);await screen.findByText(/내 합성 문의/);mocks.auth.mockReturnValue({status:'anonymous',client:null,user:null});view.rerender(<SupportInquiries/>);expect(screen.queryByText(/내 합성 문의/)).not.toBeInTheDocument();});
+diff --git a/src/components/admin/support-postgres.test.tsx b/src/components/admin/support-postgres.test.tsx
+new file mode 100644
+index 0000000..fa9ef71
+--- /dev/null
++++ b/src/components/admin/support-postgres.test.tsx
+@@ -0,0 +1,25 @@
++// @vitest-environment jsdom
++// Explicit opt-in, synthetic local PostgreSQL only. Not a gateway JWT test.
++import {execFileSync} from 'node:child_process';
++import {render,screen,cleanup,waitFor} from '@testing-library/react';
++import userEvent from '@testing-library/user-event';
++import {it,expect,vi,afterEach} from 'vitest';
++const mocks=vi.hoisted(()=>({auth:vi.fn()}));
++vi.mock('@/components/auth-context',()=>({useAuth:mocks.auth}));
++import {AdminInquiriesView} from './admin-inquiries-view';
++import {SupportInquiries} from '../support-inquiries';
++const admin='00000000-0000-4000-8000-000000000001',member='00000000-0000-4000-8000-000000000002';
++const quote=(s:string)=>`'${s.replaceAll("'","''")}'`;
++function sql(q:string,user=member,asUser=true){const claims=JSON.stringify({sub:user,role:'authenticated',exp:Math.floor(Date.now()/1000)+3600});return execFileSync('/opt/homebrew/opt/postgresql@17/bin/psql',['-h','127.0.0.1','-p','55441','-d','legendstudy_support_upgrade_20261104','-qAt','-v','ON_ERROR_STOP=1','-c',`set request.jwt.claim.sub=${quote(user)};set request.jwt.claims=${quote(claims)};${asUser?'set role authenticated;':''}${q}`],{encoding:'utf8'}).trim();}
++function identity(user:string){const rpc=async(name:string,args?:{p?:unknown})=>{try{return {data:JSON.parse(sql(`select public.${name}(${args?.p?quote(JSON.stringify(args.p))+'::jsonb':''})`,user)),error:null};}catch{return {data:null,error:{message:'synthetic local RPC failure'}};}};mocks.auth.mockReturnValue({status:'authenticated',user:{id:user},client:{rpc,auth:{getSession:async()=>({data:{session:{user:{id:user}}},error:null})}}});}
++afterEach(cleanup);
++it.skipIf(process.env.LEGENDSTUDY_SUPPORT_LOCAL_TEST!=='1')('component → real SQL → APP answer → owner detail and queued email',async()=>{
++ sql("insert into feedback_submissions(category,title,body,app_version,build_number,platform,os_version) values('suggestion','UI E2E APP','Synthetic original','1','1','ios','test')");
++ identity(admin);const user=userEvent.setup();render(<AdminInquiriesView/>);
++ await screen.findByText('UI E2E APP');await user.type(screen.getByRole('textbox',{name:'제목 또는 회원 식별자'}),'UI E2E APP');await user.click(screen.getByRole('button',{name:'조회'}));await waitFor(()=>expect(screen.getAllByRole('button',{name:'상세 열기'})).toHaveLength(1));await user.click(screen.getByRole('button',{name:'상세 열기'}));await user.type(await screen.findByRole('textbox',{name:'답변 작성'}),'SQL에 저장되는 합성 답변');await user.click(screen.getByRole('button',{name:'답변 등록'}));
++ await screen.findByText('SQL에 저장되는 합성 답변');expect(sql("select count(*) from inquiry_notifications n join feedback_submissions f on f.id=n.feedback_id where f.title='UI E2E APP'",admin,false)).toBe('1');
++ cleanup();identity(member);render(<SupportInquiries/>);await user.click(await screen.findByRole('button',{name:/UI E2E APP/}));expect(await screen.findByText('SQL에 저장되는 합성 답변')).toBeInTheDocument();
++ await user.type(screen.getByRole('textbox',{name:'제목'}),'UI E2E WEB');await user.type(screen.getByRole('textbox',{name:'내용'}),'WEB 합성 문의');await user.click(screen.getByRole('button',{name:'문의 접수'}));await screen.findByText('문의가 접수되었습니다.');expect(sql("select count(*) from inquiries where title='UI E2E WEB'",admin,false)).toBe('1');
++ cleanup();identity(admin);render(<AdminInquiriesView/>);await screen.findByText('UI E2E WEB');await user.type(screen.getByRole('textbox',{name:'제목 또는 회원 식별자'}),'UI E2E WEB');await user.click(screen.getByRole('button',{name:'조회'}));await waitFor(()=>expect(screen.getAllByRole('button',{name:'상세 열기'})).toHaveLength(1));await user.click(screen.getByRole('button',{name:'상세 열기'}));await user.type(await screen.findByRole('textbox',{name:'답변 작성'}),'WEB SQL 합성 답변');await user.click(screen.getByRole('button',{name:'답변 등록'}));await screen.findByText('WEB SQL 합성 답변');
++ cleanup();identity(member);render(<SupportInquiries/>);await user.click(await screen.findByRole('button',{name:/UI E2E WEB/}));expect(await screen.findByText('WEB SQL 합성 답변')).toBeInTheDocument();
++});
+diff --git a/src/components/support-inquiries.tsx b/src/components/support-inquiries.tsx
+new file mode 100644
+index 0000000..dd6a726
+--- /dev/null
++++ b/src/components/support-inquiries.tsx
+@@ -0,0 +1,30 @@
++'use client';
++import {useEffect,useRef,useState} from 'react';
++import {useAuth} from './auth-context';
++import type {SupabaseClient} from '@supabase/supabase-js';
++import {inquiryStatusLabel,formatDateTime} from '@/lib/admin/format';
++type Item={source:string;inquiry_id:string;title:string;status:string;created_at:string;answered:boolean};
++type Detail={title:string;body:string;replies:{reply_id:string;body:string;created_at:string}[]};
++export function SupportInquiries(){
++ const {client,user,status}=useAuth();
++ if(status!=='authenticated'||!client||!user) return <section><h2>내 문의·답변</h2><p>로그인 후 문의를 접수하고 답변을 확인할 수 있습니다.</p></section>;
++ return <MemberSupport key={user.id} client={client}/>;
++}
++function MemberSupport({client}:{client:SupabaseClient}){
++ const [items,setItems]=useState<Item[]>([]),[offset,setOffset]=useState(0),[reload,setReload]=useState(0),[loading,setLoading]=useState(true),[error,setError]=useState('');
++ const [title,setTitle]=useState(''),[body,setBody]=useState(''),[category,setCategory]=useState('other'),[busy,setBusy]=useState(false),[notice,setNotice]=useState('');
++ const [selected,setSelected]=useState<Item|null>(null);
++ const pending=useRef<{payload:string;key:string}|null>(null),inFlight=useRef(false);
++ useEffect(()=>{let active=true;client.rpc('support_mine',{p:{dto_version:'inquiry-v1',offset,limit:20}}).then(({data,error})=>{if(!active)return;setLoading(false);if(error)setError('문의 내역을 불러오지 못했습니다.');else{setItems(data.items);setError('');}});return()=>{active=false;};},[client,offset,reload]);
++ async function submit(e:React.FormEvent){e.preventDefault();if(inFlight.current)return;inFlight.current=true;setBusy(true);setNotice('');const payload=JSON.stringify([category,title.trim(),body.trim()]);if(pending.current?.payload!==payload)pending.current={payload,key:crypto.randomUUID()};try{const {error}=await client.rpc('inquiry_submit',{p:{dto_version:'inquiry-v1',category,title:title.trim(),body:body.trim(),request_key:pending.current.key}});if(error)throw error;pending.current=null;setTitle('');setBody('');setOffset(0);setReload(x=>x+1);setNotice('문의가 접수되었습니다.');}catch{setNotice('접수 결과를 확인하지 못했습니다. 다시 시도해 주세요.');}finally{inFlight.current=false;setBusy(false);}}
++ return <section className="policy-section"><h2>내 문의·답변</h2><button type="button" onClick={()=>{setLoading(true);setReload(x=>x+1);}}>새로고침</button>{loading?<p>불러오는 중…</p>:error?<p role="alert">{error}</p>:<><ul>{items.map(i=><li key={`${i.source}:${i.inquiry_id}`}><button type="button" onClick={()=>setSelected(i)}>{i.title} · {i.source} · {inquiryStatusLabel(i.status).label} · {i.answered?'답변 있음':'답변 대기'} · {formatDateTime(i.created_at)}</button></li>)}</ul>{!items.length&&<p>접수한 문의가 없습니다.</p>}<button disabled={!offset} onClick={()=>{setLoading(true);setOffset(x=>Math.max(0,x-20));}}>이전</button><button disabled={items.length<20} onClick={()=>{setLoading(true);setOffset(x=>x+20);}}>다음</button></>}
++ {selected&&<MemberDetail key={`${selected.source}:${selected.inquiry_id}`} item={selected} client={client}/>}
++ <h3>1:1 문의 접수</h3><form onSubmit={submit}><label>문의 유형<select value={category} onChange={e=>setCategory(e.target.value)}><option value="other">기타</option><option value="material">학습자료</option><option value="technical">오류 신고</option><option value="account">계정</option></select></label><label>제목<input required maxLength={120} value={title} onChange={e=>setTitle(e.target.value)}/></label><label>내용<textarea required maxLength={4000} value={body} onChange={e=>setBody(e.target.value)}/></label><button disabled={busy} type="submit">{busy?'접수 중…':'문의 접수'}</button><p role="status">{notice}</p></form></section>;
++}
++function MemberDetail({client,item}:{client:SupabaseClient;item:Item}){
++ const [detail,setDetail]=useState<Detail|null>(null),[failed,setFailed]=useState(false),[retry,setRetry]=useState(0);
++ useEffect(()=>{let active=true;client.rpc('support_detail',{p:{dto_version:'inquiry-v1',source:item.source,id:item.inquiry_id}}).then(({data,error})=>{if(active){setFailed(!!error);if(!error)setDetail(data);}});return()=>{active=false;};},[client,item,retry]);
++ if(failed)return <button onClick={()=>setRetry(x=>x+1)}>답변을 불러오지 못했습니다. 다시 시도</button>;
++ if(!detail)return <p>답변 불러오는 중…</p>;
++ return <article><h3>{detail.title}</h3><p className="admin-prose">{detail.body}</p><h4>관리자 답변</h4>{detail.replies.length?detail.replies.map(r=><div key={r.reply_id}><p>{formatDateTime(r.created_at)}</p><p className="admin-prose">{r.body}</p></div>):<p>아직 답변이 없습니다.</p>}</article>;
++}
+diff --git a/src/lib/admin/client.ts b/src/lib/admin/client.ts
+index f2dac8a..ba16a74 100644
+--- a/src/lib/admin/client.ts
++++ b/src/lib/admin/client.ts
+@@ -59,7 +59,7 @@ export interface AdminClient {
+   paymentOrders(options?: AdminOrderOptions): Promise<AdminPaymentPage>;
+   supportMetrics(): Promise<AdminSupportMetrics>;
+   inquiryList(options?: AdminInquiryOptions): Promise<AdminInquiryPage>;
+-  inquiryDetail(inquiryId: string): Promise<AdminInquiryDetail>;
++  inquiryDetail(inquiryId: string, source?: string): Promise<AdminInquiryDetail>;
+   replyInquiry(input: InquiryReplyInput): Promise<{ replyId: string; created: boolean }>;
+   setInquiryStatus(input: InquiryStatusInput): Promise<{ status: string; changed: boolean }>;
+   submitInquiry(input: InquirySubmitInput): Promise<{ inquiryId: string; created: boolean }>;
+@@ -88,17 +88,21 @@ export interface AdminOrderOptions extends AdminPageOptions {
+ }
+ 
+ export interface AdminInquiryOptions extends AdminPageOptions {
++  source?: string;
++  category?: string;
+   query?: string;
+   status?: string;
+ }
+ 
+ export interface InquiryReplyInput {
++  source?: string;
+   inquiryId: string;
+   body: string;
+   requestKey: string;
+ }
+ 
+ export interface InquiryStatusInput {
++  source?: string;
+   inquiryId: string;
+   status: string;
+ }
+@@ -269,7 +273,7 @@ export function createAdminClient(client: AdminRpcClient): AdminClient {
+ 
+     async supportMetrics(): Promise<AdminSupportMetrics> {
+       await requireSession();
+-      return parseSupportMetrics(await callRpc<unknown>("admin_support_metrics", undefined));
++      return parseSupportMetrics(await callRpc<unknown>("support_metrics", undefined));
+     },
+ 
+     async inquiryList(options: AdminInquiryOptions = {}): Promise<AdminInquiryPage> {
+@@ -282,15 +286,17 @@ export function createAdminClient(client: AdminRpcClient): AdminClient {
+       const query = optionalQuery(options.query);
+       if (query) payload.query = query;
+       if (options.status) payload.status = options.status;
+-      return parseInquiryPage(await callRpc<unknown>("admin_inquiry_list", { p: payload }));
++      if (options.source) payload.source = options.source;
++      if (options.category) payload.category = options.category;
++      return parseInquiryPage(await callRpc<unknown>("support_admin_list", { p: payload }));
+     },
+ 
+-    async inquiryDetail(inquiryId: string): Promise<AdminInquiryDetail> {
++    async inquiryDetail(inquiryId: string, source = "WEB"): Promise<AdminInquiryDetail> {
+       await requireSession();
+       if (!inquiryId) throw new AdminError("INVALID_REQUEST", "invalid inquiry");
+       return parseInquiryDetail(
+-        await callRpc<unknown>("admin_inquiry_detail", {
+-          p: { dto_version: "admin-v1", id: inquiryId },
++        await callRpc<unknown>("support_admin_detail", {
++          p: { dto_version: "admin-v1", source, id: inquiryId },
+         }),
+       );
+     },
+@@ -300,15 +306,15 @@ export function createAdminClient(client: AdminRpcClient): AdminClient {
+       const body = typeof input.body === "string" ? input.body.trim() : "";
+       if (!input.inquiryId || !body) throw new AdminError("INVALID_REQUEST", "invalid reply");
+       if (body.length > INQUIRY_MAX_REPLY) throw new AdminError("INVALID_REQUEST", "invalid reply");
+-      const data = await callRpc<Record<string, unknown>>("admin_inquiry_reply", {
++      const data = await callRpc<Record<string, unknown>>("support_admin_reply", {
+         p: {
+           dto_version: "admin-v1",
+-          id: input.inquiryId,
++          id: input.inquiryId, source: input.source ?? "WEB",
+           body,
+           request_key: input.requestKey,
+         },
+       });
+-      return { replyId: String(data.reply_id ?? ""), created: data.created === true };
++      return { replyId: String(data.reply_id ?? ""), created: data.created === true || data.duplicate === false };
+     },
+ 
+     async setInquiryStatus(input: InquiryStatusInput): Promise<{ status: string; changed: boolean }> {
+@@ -316,8 +322,8 @@ export function createAdminClient(client: AdminRpcClient): AdminClient {
+       if (!input.inquiryId || !input.status) {
+         throw new AdminError("INVALID_REQUEST", "invalid status");
+       }
+-      const data = await callRpc<Record<string, unknown>>("admin_inquiry_set_status", {
+-        p: { dto_version: "admin-v1", id: input.inquiryId, status: input.status },
++      const data = await callRpc<Record<string, unknown>>("support_admin_status", {
++        p: { dto_version: "admin-v1", id: input.inquiryId, source: input.source ?? "WEB", status: input.status },
+       });
+       return { status: String(data.status ?? ""), changed: data.changed === true };
+     },
+@@ -341,7 +347,7 @@ export function createAdminClient(client: AdminRpcClient): AdminClient {
+           request_key: input.requestKey,
+         },
+       });
+-      return { inquiryId: String(data.inquiry_id ?? ""), created: data.created === true };
++      return { inquiryId: String(data.inquiry_id ?? ""), created: data.created === true || data.duplicate === false };
+     },
+ 
+     async myInquiries(): Promise<MyInquiryRow[]> {
+diff --git a/src/lib/admin/contract.ts b/src/lib/admin/contract.ts
+index bb199c0..918a88e 100644
+--- a/src/lib/admin/contract.ts
++++ b/src/lib/admin/contract.ts
+@@ -344,7 +344,7 @@ export function parseMemberDetail(raw: unknown): AdminMemberDetail {
+ 
+   return {
+     member: {
+-      accountId: str(member.account_id, "member.account_id"),
++      accountId: strOrNull(member.account_id, "member.account_id") ?? "비회원",
+       email: strOrNull(member.email, "member.email"),
+       createdAt: str(member.created_at, "member.created_at"),
+       displayName: strOrNull(member.display_name, "member.display_name"),
+@@ -545,6 +545,7 @@ export const INQUIRY_STATUSES = ["RECEIVED", "IN_PROGRESS", "ANSWERED", "CLOSED"
+ export type InquiryStatus = (typeof INQUIRY_STATUSES)[number];
+ 
+ export type InquiryRow = {
++  source?: string;
+   inquiryId: string;
+   status: string;
+   category: string;
+@@ -575,6 +576,7 @@ export type AdminInquiryReply = {
+ };
+ 
+ export type AdminInquiryDetail = {
++  source?: string;
+   asOf: string;
+   inquiry: {
+     inquiryId: string;
+@@ -613,11 +615,12 @@ export type AdminSupportMetrics = {
+ function inquiryRow(value: unknown, path: string): InquiryRow {
+   const row = record(value, path);
+   return {
++    source: str(row.source ?? "WEB", `${path}.source`),
+     inquiryId: str(row.inquiry_id, `${path}.inquiry_id`),
+     status: str(row.status, `${path}.status`),
+     category: str(row.category, `${path}.category`),
+     title: str(row.title, `${path}.title`),
+-    userId: str(row.user_id, `${path}.user_id`),
++    userId: strOrNull(row.user_id, `${path}.user_id`) ?? "비회원",
+     createdAt: str(row.created_at, `${path}.created_at`),
+     updatedAt: str(row.updated_at, `${path}.updated_at`),
+     replyCount: num(row.reply_count, `${path}.reply_count`),
+@@ -645,6 +648,7 @@ export function parseInquiryDetail(raw: unknown): AdminInquiryDetail {
+   const member = record(root.member, "inquiryDetail.member");
+   const related = record(root.related, "inquiryDetail.related");
+   return {
++    source: str(root.source ?? "WEB", "inquiryDetail.source"),
+     asOf: str(root.as_of, "inquiryDetail.as_of"),
+     inquiry: {
+       inquiryId: str(inquiry.inquiry_id, "inquiry.inquiry_id"),
+@@ -658,7 +662,7 @@ export function parseInquiryDetail(raw: unknown): AdminInquiryDetail {
+       closedAt: strOrNull(inquiry.closed_at, "inquiry.closed_at"),
+     },
+     member: {
+-      accountId: str(member.account_id, "member.account_id"),
++      accountId: strOrNull(member.account_id, "member.account_id") ?? "비회원",
+       gradeLevel: strOrNull(member.grade_level, "member.grade_level"),
+       accountState: strOrNull(member.account_state, "member.account_state"),
+       spendable: numOrNull(member.spendable, "member.spendable"),
+diff --git a/src/lib/admin/format.ts b/src/lib/admin/format.ts
+index c23f8e2..6c32b7b 100644
+--- a/src/lib/admin/format.ts
++++ b/src/lib/admin/format.ts
+@@ -143,6 +143,9 @@ export function inquiryCategoryLabel(category: string): string {
+     payment: "결제·환불",
+     deletion: "회원 탈퇴·계정 삭제",
+     technical: "오류·기술 문제",
++    inquiry: "일반 문의",
++    bug: "오류 신고",
++    suggestion: "기능 제안",
+     other: "기타",
+   };
+   return map[category] ?? category;
+-- 
+2.51.0
+

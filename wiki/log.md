@@ -5075,3 +5075,7 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 ## 2026-11-04 — 사용자 문의 관리자 연결 P0 읽기전용 조사
 
 운영 문의행·outbox·Edge log·실제 Gmail과 WEB0 대조. feedback3/inquiries0, 목록/집계/답변 원본 분리 확인. 기존 오프라인23 PASS. 운영변경0, 복구미구현. [원인·보존7·검증·후속](feedback-admin-integration-20261104.md).
+
+## 2026-11-04 — APP·WEB 문의 통합 구현 (운영 미적용)
+
+Owner 구현 승인에 따라 원본2종 통합 조회/답변/내역/집계 및 기존 이메일 큐 연결. DB34+업그레이드보존7, WEB58+실제로컬DB연동1, Native31, Edge8 PASS. WEB 타입/lint/webpack build PASS. WEB82a4aea6, 패치 보존. 실제 문의 읽기전용 재확인, 실사용자 답변0/운영변경0. 실기기·JWT gateway·실제메일 E2E는 미실행. [상세·Owner 적용/검수](feedback-admin-integration-20261104.md).

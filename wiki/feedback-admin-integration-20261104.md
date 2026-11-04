@@ -1,6 +1,58 @@
 # 사용자 문의·피드백 관리자 연결 조사 — 2026-11-04
 
-상태: 원인 조사 완료 / 복구 구현·운영 적용 미실행. 운영 DB 쓰기0, 배포0, 메일 발송0, 실제 문의 복제0.
+## 2026-11-04 Owner 승인 후 구현 결과
+
+**코드 구현·격리 TEST 완료, 운영 DB/Edge/WEB/APP 배포 미적용.** 실제 사용자 답변/메일 발송0.
+Owner는 원인 조사를 인정하고 두 원본을 유지하는 통합 구현을 승인했다. 운영 적용은 별도 승인이다.
+
+### 통합 목록·답변·보존
+
+- 기존 WEB `/admin/inquiries` UI에서 APP/WEB 출처, 유형, 회원(비회원 구분), 접수일, 상태, 답변 수를 표시한다. 검색·상태/유형/출처 필터와 전체 통합 정렬·페이지네이션을 구현했다.
+- 기존 `feedback_submissions`와 `inquiries`를 UNION 조회한다. APP 원본 상태/내용을 덮어쓰지 않고 private 상태 projection을 사용한다. 원본 ID와 회원 연결은 그대로다.
+- 기존 `inquiry_replies`/알림/상태이력에 APP 원본 FK를 추가하고 WEB/APP 중 하나만 참조하도록 제약한다. 가짜 WEB 문의 생성과 데이터 이관은 없다.
+- APP/WEB 상세·답변·상태 변경을 source+ID로 연결한다. 기존 WEB RPC는 보존한다. 잠금과 요청 키로 동시/재시도 중복을 방지하며 같은 키의 다른 본문은 거절한다.
+- 기존 admin_operator 권한, 회원 소유권, 기존 account_service_allowed 검사 재사용. Auth/Credit/Ledger/결제 구현 변경은 없다.
+
+### 회원 확인·알림·관리자 집계
+
+- APP: MY → 문의·건의사항 → 내 문의·답변 → 상세. 설치된 기존 앱에 제공하려면 Native 릴리스가 필요하다.
+- WEB: 기존 `/support` 경로에 본인 문의 작성·내역·답변 상세를 연결했다. 로그아웃/계정 전환 시 이전 회원 화면을 제거한다.
+- 기존 이메일 outbox와 `process-feedback-notifications`/Resend 어댑터를 확장한다. 답변 저장과 발송은 분리하며 실패 재시도·lease fencing·provider idempotency를 적용한다. 비회원은 식별 가능한 수신자가 없으면 발송하지 않는다.
+- 운영에는 사용자 알림센터 서버가 배포되어 있지 않다. 이번 범위는 기존 이메일 + 회원 문의 내역이며 새로운 푸시/알림센터 백엔드는 만들지 않았다.
+- 대시보드·사이드바 미처리 배지를 통합 집계한다. 30초/포커스/답변 처리 후 갱신하며 답변 작성 중에는 목록 자동 갱신을 멈춘다.
+
+### 실제 문의 읽기전용 재확인
+
+Owner 제공 ID `65f48fbf-c386-4491-aef0-b697b6952356`의 원본은 기능 제안/2026-11-02 10:29:51 KST/상태 new로 존재한다. 운영 읽기전용 UNION으로 APP 출처·기존 제목·통합 전체3을 확인했다. WEB 복제0/기존 답변0. 신규 RPC와 새 관리자 UI는 미배포이므로 **운영 새 화면 표시 검증은 승인 후 남아 있다.** 실제 문의에 답변/상태 변경을 하지 않았다.
+
+### TEST 결과와 한계
+
+| 검증 | 결과 |
+|---|---|
+| 로컬 PostgreSQL17 실제 migration 업그레이드 | 7 PASS: 기존 원본·답변·outbox·이력 행 hash 보존 |
+| SQL 권한/접수/상세/답변/집계/큐/동시성 | 34 PASS: APP+WEB, 회원/관리자/anon/service_role, 중복/충돌/만료 권한 포함 |
+| WEB 영향 테스트 | 58 PASS + 실제 로컬 PostgreSQL UI 연결 1 PASS |
+| WEB 타입/변경파일 lint/production webpack build | PASS (160 pages) |
+| Native 영향 테스트/분석 | 31 PASS / feedback analyze PASS |
+| Edge 기존 intake+답변 adapter | 8 PASS, 실제 이메일 전송 없음 |
+
+로컬 컴포넌트→실제 PostgreSQL 연동은 APP/WEB 답변과 회원 조회를 검증했다. 실제 Supabase HTTP JWT gateway, 실기기, 실제 메일함 수신 E2E는 미실행이다. TEST claim은 합성 값이며 실제 운영 관리자 JWT를 위조해 조회하지 않았다. Node20 경고와 /tmp node_modules symlink의 Turbopack 제약으로 공식 webpack 빌드를 사용했다.
+
+### 적용 패키지·변경 파일·검수
+
+[배포/롤백 순서](../supabase/verification/support_integration/README.md), [정확한 SQL](../supabase/migrations/20261104002306_unified_support_inquiries.sql), [읽기전용 사전 검사](../supabase/verification/support_integration/preflight.sql), [사후 검사](../supabase/verification/support_integration/postflight.sql), [WEB 패치](../supabase/verification/support_integration/web.patch).
+
+APP 변경: `lib/features/feedback/presentation/{feedback_page,feedback_history}.dart`, `test/support_history_test.dart`, 위 migration, `supabase/functions/process-feedback-notifications/{index,support_replies,support_replies_test}.ts`, `supabase/verification/support_integration/*` 및 Wiki.
+WEB 변경: `src/lib/admin/{client,contract,format}.ts`, `src/components/admin/{admin-inquiries-view,admin-dashboard-view,admin-surface}.tsx`, `src/components/support-inquiries.tsx`, `src/app/support/page.tsx`, `src/components/admin/{support-integration,support-postgres}.test.tsx` (정확한 경로는 패치 참조).
+WEB commit `82a4aea6a0f604bfef5c5a853921d361ac8e9b02` (base `ce86e5c47144aae5f9adff9f6ab4fad4148d38db`). 전용 clone의 commit을 패치로 이 저장소에 보존하여 동시 WEB 작업에 선택 적용할 수 있다. APP SHA는 완료 보고의 commit을 따른다.
+
+Owner 검수: 격리 TEST에서 두 출처 접수 → 관리자 필터/상세 → 답변 → 회원 내역 → 미처리 감소 → 재시도 중복0 순서로 확인한다. 운영은 승인 후 SQL → 기존 Edge worker → WEB 순으로 적용하고 실제 대상은 목록/상세만 읽는다. Native는 APP58과 통합 검토 및 실기기 QA 후 별도 릴리스한다. 실제 메일 E2E는 통제된 TEST 계정으로만 수행한다.
+
+Wiki handoff: task routing/current-status budget/본 작업 링크는 검증한다. 격리 checkout에서 기존 TASK16 문서의 저장소 밖 상대링크20개 오류는 기존과 동일하며 전체 checker PASS로 보고하지 않는다.
+
+## 최초 읽기전용 조사 기록
+
+최초 조사 상태(아래 구현 승인 이전): 원인 조사 완료 / 복구 구현·운영 적용 미실행. 운영 DB 쓰기0, 배포0, 메일 발송0, 실제 문의 복제0.
 Owner는 먼저 읽기 전용 원인 보고를 요청했다. 운영 변경은 별도 승인 대상이다.
 전용 브랜치 `codex/feedback-admin-audit-20261104`, APP 조사 기준 `8a1498359bbcd0899f8321e5589028d40440b632`.
 기존 작업 디렉터리의 미커밋 APP58·수리·상경 작업은 이동하거나 수정하지 않았다.

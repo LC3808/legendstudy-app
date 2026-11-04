@@ -808,3 +808,7 @@ Owner는 신규 엔진 대신 손글씨·수식 인식/학생확인, 단계별 �
 ## 2026-11-02 — TASK16-E 원본 확인과 정답 공개
 
 Owner 확정: 높은 인식 신뢰도는 원문 일치 보장이 아니다. UNCERTAIN을 임의 보충하지 않고 기존 Math 확인본 구조로 학생 확인을 거친다. 정답·완성 풀이 포함 출력은 학생의 명시적 공개 요청 뒤 표시한다. 기존 엔진/History를 재사용한다. [TASK16-E 구현과 남은 서버 공개 계약](task16e-recognition-disclosure-p0-20261102.md), [기존 수학 코칭 정책](math-technical-review-20261026.md). 운영 활성화 승인은 포함하지 않는다.
+
+## 2026-11-04 — APP·WEB 문의 원본 유지 통합
+
+Owner 승인: 기존 feedback_submissions/inquiries와 ID·회원·답변을 보존하고 관리자 목록/답변/집계 및 회원 확인을 통합한다. 문의 복제/이관 없이 원본 FK로 답변을 연결하고 기존 이메일을 재사용한다. APP 원본 대신 private 처리상태를 분리한다. [기존 Inbox](day-11-b3-admin-inbox.md)·[이메일 정책](day-11-b4-feedback-email.md)을 계승한다. [구현·보존 검토·검증·적용 패키지](feedback-admin-integration-20261104.md). 운영 DB·WEB 배포는 별도 승인이다.
