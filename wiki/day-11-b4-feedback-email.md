@@ -1,5 +1,7 @@
 # Day 11-B4-A — Feedback Email Notification Design
 
+2026-11-04 후속: [운영 WEB 통합 누락 조사](feedback-admin-integration-20261104.md). Native Inbox/메일의 과거 PASS는 WEB 1:1 문의 통합을 의미하지 않는다.
+
 Status: B4-A DESIGN COMPLETE; B4-B IMPLEMENTED / REVIEWED / PRODUCTION
 DEPLOYED; B4-C **COMPLETE / PRODUCTION DELIVERY E2E PASS / CRON ENABLED**.
 

@@ -23,6 +23,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+문의 / FEEDBACK / INQUIRY / 관리자 문의: [2026-11-04 원인·증거·복구범위](feedback-admin-integration-20261104.md) → [기존 Inbox](day-11-b3-admin-inbox.md) → [이메일](day-11-b4-feedback-email.md).
+
 TASK16-E: [손글씨·정답 공개 P0 수정/검증/잔여 차단](task16e-recognition-disclosure-p0-20261102.md).
 
 TASK16-C / 수학 인식·스캐폴딩·수식: [재사용·Preview·품질 검증과 미완료](task16c-math-recognition-scaffolding-20261102.md).

@@ -5070,3 +5070,8 @@ TEST Worker ESSAY_PROVIDER_KEY·Pages 양환경 MATH_PROVIDER_API_KEY 미등록 
 ## 2026-11-02 — TASK16-C 수학 인식·스캐폴딩 PARTIAL
 
 건국 합성사진/재첨삭·한양 계산오류 성공 재사용. WEB512e06f/Nativea9921bb 수식·원문·불확실확인·힌트/접힌참고풀이 연결, Previewa591fefb. 신규 정답·개념오류 Provider2회PASS/33,383tokens, 실제 손글씨·전체 학습E2E 미완료. WEB1550+영향24/Native29+신규2+최종영향24검사PASS, 운영/DB/Credit변경0. [범위·증거·차단](task16c-math-recognition-scaffolding-20261102.md).
+
+
+## 2026-11-04 — 사용자 문의 관리자 연결 P0 읽기전용 조사
+
+운영 문의행·outbox·Edge log·실제 Gmail과 WEB0 대조. feedback3/inquiries0, 목록/집계/답변 원본 분리 확인. 기존 오프라인23 PASS. 운영변경0, 복구미구현. [원인·보존7·검증·후속](feedback-admin-integration-20261104.md).
