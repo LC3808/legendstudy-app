@@ -1,0 +1,10 @@
+{
+  "app_source": "e34af75",
+  "ios_main_unsigned_release": "PASS",
+  "android_main_arm64_debug": "PASS",
+  "apk_sha256": "b1b7a2b93010d89d2e96a978610b89a475b9947320ff36ebdb8744536c2c9213",
+  "ios_debugview": "PASS",
+  "android_debugview": "NOT_VERIFIED",
+  "store_upload": false,
+  "web_production_deployed": false
+}

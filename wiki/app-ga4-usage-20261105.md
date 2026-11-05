@@ -50,3 +50,7 @@ WEB server settings: GA4_APP_PROPERTY_ID=562560908, GA4_APP_STREAM_IDS=162784862
 - No production DB/evaluation/credit/payment/refund actions. No Store change. Android actual receipt and signed Store artifacts require separate evidence.
 
 22:07 KST main lib/main.dart iOS Release build PASS (unsigned compile artifact43.4MB). Compiled defines verified ANALYTICS_ENABLED=true/projectlegendstudyplus/iOSapp identity; automatic screen reporting false. Version0.1.0+1 is repository-default compile verification, NOT a Store upload artifact. Final release version/signing must come from the coordinated candidate. Local complete config preserved existing12 fields and passed store-release --check. Android Kotlin daemon encountered disk-full logging deadlock; recovery tracked separately.
+
+Android arm64 debug smoke buildPASS after recovering the disk-full Kotlin daemon. Build warnings about existing Flutter/AGP/Kotlin versions are not source regressions; versions unchanged. Android device/DebugView receipt has not been observed. WEB Functions compilePASS.
+
+Final Android lib/main.dart arm64 debug APK buildPASS (23.8s). APK kernel verified project and menu/material/Registry event markers. This is QA debug signing, not Store AAB. iOS unsigned Release and Android debug are compile artifacts only. No device install/upload was performed after isolated iOS transport QA.
