@@ -1,6 +1,8 @@
 # 대학별 논술 LAB 홍보 배너 (게시글 삽입) — 2026-11-05
 
-상태: **템플릿·프레임워크 완료 / 공개 대학 확정 대기(Owner·Codex)**. 담당: Claude(디자인·코드·검증설계). 대상: `legendstudy.com`(티스토리) 대학별 논술 기출 게시글. 운영 반영·게시글 수정 = Owner 수동.
+상태: **템플릿 v2·프레임워크 완료 / Codex STEP1(공개 대학 목록) 대기**. 담당: Claude(디자인·코드·검증설계), 데이터검증=Codex, 승인·삽입=Owner. 대상: `legendstudy.com`(티스토리) 대학별 논술 기출 게시글. 운영 반영·게시글 수정 = Owner 수동.
+
+> 2026-11-05 최종 통합 지시 반영: 홍보 훅 = **"온라인 무료 논술 첨삭" + "신규가입 무료 첨삭 3회"(상시정책, 베타와 구분)** + 웹·앱 공통. 역할분담 = Codex가 공개대학 추출(STEP1) → Claude가 매핑·문구·HTML·검증(STEP2~7) → Owner 승인·삽입. 템플릿 v2: 혜택 pill 내장, 계열 chip, 서비스상태 분류(AVAILABLE/PARTIAL/PREPARING/BLOCKED) 중 AVAILABLE·PARTIAL만 배너화.
 산출물: `assets/marketing/essay-lab-banner/` — [`essay-lab-banner-template.html`](../assets/marketing/essay-lab-banner/essay-lab-banner-template.html), [`README.md`](../assets/marketing/essay-lab-banner/README.md).
 
 ## 1. Phase 1 — 실제 공개 레지스트리 확인 (읽기전용 실측)
