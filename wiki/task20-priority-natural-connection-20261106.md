@@ -78,3 +78,17 @@ Owner는 이번 턴에 공식 문제·채점 기준·예시풀이와 합성 정�
 5. 공식 평가자료와 학생 Learning History, AI 판단을 분리한다. 지원/합격 사실을 생성하지 않는다.
 6. 공식 원문은 private, 학생정보는 TEST 미사용; 기존 RLS·권한·삭제/retention 계약을 유지한다.
 7. 수식 정규화/파생 단계와 공식 원문을 구분한다. 모델 TEST 판정을 운영 완료나 학생 능력 사실로 간주하지 않는다.
+
+
+## 2026-11-06 승인 후 운영 적용
+
+Owner가 운영 SQL·공개 연결·WEB 반영을 승인했다. 다른 TASK20-C의 동일6문항은 공식 출처/Registry는 같지만 별도 내부 ID이며 TEST에만 등록되어 있었다. 운영 사전 조회에서6문항 기존 binding 없음 및 함수2개 baseline hash 일치를 확인하고, 이 문서의12회 검증 완료 후보 하나만 적용했다. 다른 TASK20-C 후보/TEST/신규86시험에는 변경하지 않았다.
+
+- 승인한 SHA256 일치 등록 SQL96행 적용, `task20_priority_six_natural_release_20261106` 활성화 migration 성공. Catalog72→78, 기존72 tuple 전부 보존.
+- 기존11테이블(Registry2·평가/시도3·이용권3·결제3)의 count/hash는 적용 직후와 WEB 확인 후 모두 동일. RPC owner/ACL 유지. Auth/RLS/금융 정책 변경0.
+- 실제 운영 WEB `23a03b0`에서 별도 브랜치로 승인3파일 패치를 반영. WEB 소스 `8c05fd12c21b0400cda7bcf1baeb5f536bcf4af8`, Pages `c6b969ee-d858-4b1f-bf8c-cab752de8525`, 운영 deploy success 확인.
+- public exams212→214 / expansion42→44 / Math72→78. 숨겨진 secret 값을 다시 쓰지 않고 명시한3변수만 증분 PATCH, 나머지 config 동일. 기존1972개 정적파일 hash와 전체 함수 라우팅 그대로 유지; 공통 API만 갱신. APP65 재빌드/교체 없음.
+- 실제 운영 기준 재검사51PASS, Pages Functions build PASS. 로그인된 WEB에서 건국Q1·Q2·Q3·Q4와 경희Q1·Q2·Q3의 각 수식/텍스트 작성 영역을 펼쳐 진입 확인. 건국Q4 문제PDF4/4쪽, 경희Q3 PDF2/2쪽 정상 열람. 답안 입력/저장·추출·평가 요청은 실행하지 않았다.
+- APP65는 동일API 연결 반영, 물리기기7문항 진입은 Owner 확인 대기다. WEB PASS를 APP 실기기 PASS로 대체하지 않는다. 전체 최종 판정 PARTIAL(실기기 확인 대기).
+
+운영 근거: [적용·보존·WEB 검증 영수증](../supabase/candidates/task20_priority_20261106/production-receipt.json). 위 운영 미적용 표는 승인 이전 이력이다. 현재 각7문항 운영 연결/WEB 진입 PASS, APP 실기기 NOT_VERIFIED. 실제 지급/차감/결제/환불/Provider 추가 호출/스토어 제출0. APP58·APP65 원본 보존.

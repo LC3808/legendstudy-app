@@ -5779,3 +5779,5 @@ Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/
 - Owner는 Q1만 공개된 상태가 최종 의도와 다르다고 정정. 표시 PASS와 전체 문항 서비스 복구를 분리하고65 출시 확정 보류. TASK20의 자료/Package 연결 미완료를 재확인했다. 운영 변경0.
 
 - APP65 전체1555PASS/7SKIP·Analyze0, iOS 설치/서명 및 Android AAB 서명 PASS. Android 별도 합성PDF 저장/열기 Owner PASS. 건국/경희 운영 SELECT로 실제 Math 연결 부족 재확인, RELEASE_READY=NO 유지.
+
+- 2026-11-06 TASK20 Owner 운영 승인 후6문항96행·RPC2개 적용, Catalog72→78/기존72·보호11테이블 해시 보존. WEB8c05fd1/Pagesc6b969ee, 로그인7문항 작성/PDF PASS, APP65 실기기 확인 대기. [상세](task20-priority-natural-connection-20261106.md). 금융 실행·스토어0.

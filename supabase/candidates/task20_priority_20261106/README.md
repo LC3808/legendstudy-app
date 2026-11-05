@@ -1,7 +1,7 @@
 # TASK20 priority natural questions — Owner application candidate
 
 2026-11-06: isolated contracts / 12 approved real-provider tests PASS.
-Production NOT_APPLIED. APP65 unchanged. No store submission.
+Production APPLIED after explicit Owner approval. WEB seven-question entry PASS; APP65 physical verification pending. APP65 unchanged. No store submission. See `production-receipt.json`.
 
 ## Exact scope
 
@@ -22,7 +22,7 @@ Official text must not be committed. Exact files under repository `.local/task20
 
 Hashes are in `private-artifact-sha256.json`. These files have been executed only in disposable PostgreSQL17.
 
-## Apply sequence — requires separate Owner approval
+## Approved apply sequence — executed 2026-11-06
 
 1. Resolve overlapping TASK20-C work: inspect both current function hashes and all six question bindings. Reuse an already reviewed equivalent package; **do not apply two competing packages**. Candidate fails closed if another binding already exists.
 2. Re-run `preflight.sql`; require current reviewed function hashes and all existing72 mappings unchanged. Save protected table counts/hashes and function ownership/ACL, current WEB manifest/environment/deployment.

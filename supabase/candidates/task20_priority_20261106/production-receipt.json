@@ -1,0 +1,200 @@
+{
+  "production_applied": true,
+  "catalog_before": 72,
+  "catalog_after": 78,
+  "existing_72_preserved": true,
+  "functions_acl_owner_preserved": true,
+  "protected": {
+    "essay_exams": {
+      "before": {
+        "hash": "fbe55526cc655e09b98d342ac5aae32e",
+        "count": 449
+      },
+      "after": {
+        "hash": "fbe55526cc655e09b98d342ac5aae32e",
+        "count": 449
+      },
+      "equal": true
+    },
+    "credit_grants": {
+      "before": {
+        "hash": "cdd3791fa5b07e8db4d3dfc34b1785e3",
+        "count": 254
+      },
+      "after": {
+        "hash": "cdd3791fa5b07e8db4d3dfc34b1785e3",
+        "count": 254
+      },
+      "equal": true
+    },
+    "math_attempts": {
+      "before": {
+        "hash": "2bdc0fc8f30f9a3b9b7da95a4727df44",
+        "count": 23
+      },
+      "after": {
+        "hash": "2bdc0fc8f30f9a3b9b7da95a4727df44",
+        "count": 23
+      },
+      "equal": true
+    },
+    "essay_attempts": {
+      "before": {
+        "hash": "d751713988987e9331980363e24189ce",
+        "count": 0
+      },
+      "after": {
+        "hash": "d751713988987e9331980363e24189ce",
+        "count": 0
+      },
+      "equal": true
+    },
+    "payment_events": {
+      "before": {
+        "hash": "863c2d9d097faa0b1a7648dc7ce95e30",
+        "count": 44
+      },
+      "after": {
+        "hash": "863c2d9d097faa0b1a7648dc7ce95e30",
+        "count": 44
+      },
+      "equal": true
+    },
+    "payment_orders": {
+      "before": {
+        "hash": "c547083d91b7b8b2d5d007d084e52a83",
+        "count": 21
+      },
+      "after": {
+        "hash": "c547083d91b7b8b2d5d007d084e52a83",
+        "count": 21
+      },
+      "equal": true
+    },
+    "credit_accounts": {
+      "before": {
+        "hash": "7df36dfba38487c7fe764f39a01d06b4",
+        "count": 243
+      },
+      "after": {
+        "hash": "7df36dfba38487c7fe764f39a01d06b4",
+        "count": 243
+      },
+      "equal": true
+    },
+    "essay_questions": {
+      "before": {
+        "hash": "df88fb2550c9bac0fccbc1da5b8832f9",
+        "count": 1230
+      },
+      "after": {
+        "hash": "df88fb2550c9bac0fccbc1da5b8832f9",
+        "count": 1230
+      },
+      "equal": true
+    },
+    "essay_evaluations": {
+      "before": {
+        "hash": "d751713988987e9331980363e24189ce",
+        "count": 0
+      },
+      "after": {
+        "hash": "d751713988987e9331980363e24189ce",
+        "count": 0
+      },
+      "equal": true
+    },
+    "payment_operations": {
+      "before": {
+        "hash": "456eaac9b3c1043670699f24a263ad8d",
+        "count": 11
+      },
+      "after": {
+        "hash": "456eaac9b3c1043670699f24a263ad8d",
+        "count": 11
+      },
+      "equal": true
+    },
+    "credit_transactions": {
+      "before": {
+        "hash": "bb79a8daa7b6bc2c3b2cd7fff707da2c",
+        "count": 349
+      },
+      "after": {
+        "hash": "bb79a8daa7b6bc2c3b2cd7fff707da2c",
+        "count": 349
+      },
+      "equal": true
+    }
+  },
+  "question_bindings": [
+    {
+      "leaf_id": "873c9757-2fcb-515f-b611-c78545d7a838",
+      "essay_exam_id": "0a331c3e-d46b-5af3-b787-e3342e8a1ae8",
+      "essay_question_id": "4df1296d-abe4-5499-af35-20ba573fd6ae"
+    },
+    {
+      "leaf_id": "746b66ff-064c-5498-9cf7-7c44067909c1",
+      "essay_exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+      "essay_question_id": "a7d06546-9d61-5317-afff-e656c25964f7"
+    },
+    {
+      "leaf_id": "9caa0c67-a6d8-59c8-b5d6-68a24d7f3e5a",
+      "essay_exam_id": "0a331c3e-d46b-5af3-b787-e3342e8a1ae8",
+      "essay_question_id": "ed63c506-ee9b-5ce7-967f-a1d53b9feac6"
+    },
+    {
+      "leaf_id": "9552766f-0785-54f6-86d4-c8c70c5da1b8",
+      "essay_exam_id": "0a331c3e-d46b-5af3-b787-e3342e8a1ae8",
+      "essay_question_id": "101a7dcc-1c05-5c1d-b926-3f5729158f54"
+    },
+    {
+      "leaf_id": "3bab07d3-c047-53c2-89ad-9fa20ec7b3f3",
+      "essay_exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+      "essay_question_id": "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb"
+    },
+    {
+      "leaf_id": "6b655a53-7b90-5f83-aed4-58a7d3cbeaae",
+      "essay_exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+      "essay_question_id": "40290efd-36af-55a9-beb7-8c90bbb04ee4"
+    },
+    {
+      "leaf_id": "11b0d01b-c247-54a5-88b5-368440f68c6f",
+      "essay_exam_id": "25dc068b-4672-56e1-b8df-08ee8800e2f6",
+      "essay_question_id": "7c112225-51cc-59d8-a985-6c459a1e0a0a"
+    }
+  ],
+  "web": {
+    "deployment": "c6b969ee-d858-4b1f-bf8c-cab752de8525",
+    "sha": "8c05fd12c21b0400cda7bcf1baeb5f536bcf4af8",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-11-05T21:43:11.760321Z",
+      "status": "success"
+    },
+    "all_static_assets_preserved": 1972,
+    "routes_preserved": true,
+    "configuration_verified": true
+  },
+  "web_authenticated_entry": {
+    "konkuk": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4"
+    ],
+    "kyunghee": [
+      "Q1",
+      "Q2",
+      "Q3"
+    ],
+    "pdf_open": "Konkuk Q4 page4/4 and Kyunghee Q3 page2/2 verified in browser",
+    "evaluation_submitted": false
+  },
+  "app65_physical_entry": "OWNER_CONFIRMATION_PENDING",
+  "concurrent_task20c": "Distinct TEST-only IDs; absent in production preflight; not applied",
+  "financial_actions_executed": 0,
+  "app65_changed": false,
+  "store_submission": false
+}
