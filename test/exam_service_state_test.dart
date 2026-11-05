@@ -3,6 +3,53 @@ import 'package:legendstudy_app/features/essay/exam_service_state.dart';
 
 void main() {
   test(
+    'partial availability explains the allowed question without opening others',
+    () {
+      final ids = availableExamQuestionIds(
+        admission: {'ready': false, 'code': 'ACCESS_DENIED'},
+        standaloneMathQuestions: {'q1'},
+      );
+      expect(ids, {'q1'});
+      final message = examServiceNoticeMessage(
+        ExamServiceState.blocked,
+        availableLabels: ['문제 1'],
+        partialRelease: true,
+      );
+      expect(message, contains('현재 첨삭 가능: 문제 1'));
+      expect(message, contains('가능한 문항만 선택'));
+      expect(
+        examServiceNoticeMessage(
+          ExamServiceState.available,
+          availableLabels: ['문제 1'],
+          partialRelease: true,
+        ),
+        contains('다른 문항은 아직'),
+      );
+      expect(
+        examServiceNoticeMessage(
+          ExamServiceState.error,
+          availableLabels: ['문제 1'],
+          partialRelease: true,
+        ),
+        examServiceMessage(ExamServiceState.error),
+      );
+      expect(
+        availableExamQuestionIds(
+          admission: {'ready': false, 'code': 'MIXED_QA_PENDING'},
+          standaloneMathQuestions: {'q1'},
+        ),
+        isEmpty,
+      );
+      expect(
+        availableExamQuestionIds(
+          policyBlocked: true,
+          standaloneMathQuestions: {'q1'},
+        ),
+        isEmpty,
+      );
+    },
+  );
+  test(
     'mixed and changed scope holds cannot be overridden by standalone data',
     () {
       for (final code in ['MIXED_QA_PENDING', 'RELEASE_SCOPE_CHANGED']) {

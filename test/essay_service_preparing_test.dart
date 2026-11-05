@@ -125,4 +125,29 @@ void main() {
     expect(find.text('선택한 문항은 첨삭을 이용할 수 있어요.'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+  testWidgets(
+    'partial release labels individual questions and explains a mixed selection',
+    (tester) async {
+      final catalog = catalogFor();
+      (catalog.exams.single['questions'] as List).add({
+        'key': 'q2',
+        'dbQuestionId': 'canonical-q2',
+        'label': '문제 2',
+        'inputMode': 'image',
+      });
+      await tester.pumpWidget(host(catalog, const {'exam-db-1'}));
+      await openSelection(tester);
+      expect(find.textContaining('현재 첨삭 가능: 문제 1'), findsOneWidget);
+      expect(find.text('첨삭 가능'), findsOneWidget);
+      expect(find.text('문제 열람·답안 작성만 가능'), findsOneWidget);
+      for (final label in ['문제 1', '문제 2']) {
+        await tester.ensureVisible(find.text(label));
+        await tester.tap(find.text(label));
+        await tester.pumpAndSettle();
+      }
+      expect(find.textContaining('가능한 문항만 선택해 주세요'), findsOneWidget);
+      expect(find.textContaining('운영 공개 범위'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
 }

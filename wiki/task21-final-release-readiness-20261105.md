@@ -68,3 +68,14 @@ TASK20 운영 상태를 재확인한 문서는 WEB23a03b0/배포858e369c이며 �
 - Android는 Owner가 AAB를 Play 내부 테스트에 직접 업로드하기로 응답. Agent Store 제출0.
 
 빌드 환경 경고: Flutter TTS의 iOS Swift Package Manager 미지원은 현 버전에서 경고이며 빌드 성공. Android CupertinoIcons 폰트 경고도 빌드 성공과 구분하여 기록한다. UI 시각 검수는 별도다.
+
+
+## APP64 Owner 검수·후속65 (2026-11-06)
+
+Owner는 iPhone 주요 기능 정상 작동을 확인했다. 건국2026수시자연에서 문항2개를 선택하면 전체시험 제한처럼 보이는 안내가 나온다고 추가 보고했다. 경희2026수시자연은 선택 전에도 제한 안내. 실제 공개 Q1과 비공개 문항을 함께 선택한 경우의 제출 차단은 유지하되, 부분 공개 시험에서는 현재 가능한 문항 목록과 문항별 표시를 제공한다. 전체 미공개 시험에는 내부 용어 '운영 공개 범위' 대신 '현재 이 시험·문항은 첨삭을 제공하지 않습니다'를 사용한다. 자료/초안 작성과 실제 첨삭 요청의 차이를 설명하며 서버 공개·원장 변경0. 집중15PASS; 후속65 전체검사/빌드 진행.
+
+GA4는 최초 미수신 화면 이후 지연 반영됐다. 00:32~00:34 KST DebugView에서 APP64 설치 이후 Owner 조작 시각(00:17~00:26)의 screen_view/menu_view/material_open/grade_cutoff_view 및 기존 History/MY 등 메뉴 ID 확인. material_open의 platform=ios, content_item_id=`c3686e6b-eee1-522a-92ee-278c81bf513e`, entry_source=home을 직접 열어 확인했다. 이전 합성 smoke ID와 다르며 앱 Registry ID 전달 경로를 확인했다. 00:31 iPhone SDK 로그에서도 Analytics 시작·collection enabled 확인. 수집 초기화 실패로 확정하거나 코드를 수정하지 않았다.
+
+비공개 스크린샷 `/tmp/task21-ios64-ga4-material.png`, `/tmp/task21-ios64-ga4-menu.png` 보관. 이 증거는 iOS64 실제 수신 PASS이며 Android 수신 및 관리자 운영 집계 화면 PASS를 의미하지 않는다. DebugView의 상단 기기 수0과 실제 수신 이벤트 목록이 함께 보였으므로 상단 숫자만으로 미수신 판정하지 않는다. 이전 초기 미수신 관측은 당시 시점 기록으로 보존한다.
+
+Owner는 Android AAB 준비 후 Play 내부 테스트 직접 업로드 예정. 추가 안내 수정 때문에 최종 후속 버전은1.0.2(65), 64 산출물 유지. 앱 Analytics 수집 코드·SDK설정은64와 동일하다. Android본앱58 삭제0, 새평가/지급/차감/결제/환불0.

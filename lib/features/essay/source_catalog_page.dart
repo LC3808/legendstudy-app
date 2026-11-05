@@ -700,6 +700,18 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                 mathRows.isLoading ||
                 mathEnabled.isLoading,
           );
+          final availableIds = availableExamQuestionIds(
+            admission: admissionState.asData?.value,
+            standaloneMathQuestions: standalone,
+            policyBlocked: !ownedHistory && isUniversityServicePreparing(uni),
+          );
+          final availableLabels = questions
+              .where((q) => availableIds.contains(q['dbQuestionId']))
+              .map((q) => q['label'].toString())
+              .toList();
+          final partialRelease =
+              availableLabels.isNotEmpty &&
+              availableLabels.length < questions.length;
           if (serviceState == ExamServiceState.available &&
               !isUniversityServicePreparing(uni)) {
             writingBlocked = false;
@@ -767,6 +779,8 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                 Text(essayServiceAreaLabel(exam)),
                 _ExamServiceNotice(
                   state: serviceState,
+                  availableLabels: availableLabels,
+                  partialRelease: partialRelease,
                   onRetry: () {
                     ref.invalidate(examAvailabilityProvider(scope));
                     ref.invalidate(releasedMathQuestionsProvider(widget.owner));
@@ -790,9 +804,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                   CheckboxListTile(
                     title: Text(q['label'] as String),
                     secondary: _BrowseQuestionPdfButton(question: q),
-                    subtitle: q['lengthLabel'] == null
-                        ? null
-                        : Text(q['lengthLabel'] as String),
+                    subtitle: Text(
+                      [
+                        if (q['lengthLabel'] != null)
+                          q['lengthLabel'].toString(),
+                        if (partialRelease)
+                          availableIds.contains(q['dbQuestionId'])
+                              ? '첨삭 가능'
+                              : '문제 열람·답안 작성만 가능',
+                      ].join(' · '),
+                    ),
                     controlAffinity: ListTileControlAffinity.leading,
                     activeColor: AppTokens.textPrimary,
                     checkColor: Colors.white,
@@ -1112,7 +1133,14 @@ String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
     : '$question:${run['_additional'] == true ? 'additional' : 'rewrite'}:${run['id']}';
 
 class _ExamServiceNotice extends StatelessWidget {
-  const _ExamServiceNotice({required this.state, required this.onRetry});
+  const _ExamServiceNotice({
+    required this.state,
+    required this.onRetry,
+    this.availableLabels = const [],
+    this.partialRelease = false,
+  });
+  final List<String> availableLabels;
+  final bool partialRelease;
   final ExamServiceState state;
   final VoidCallback onRetry;
   @override
@@ -1130,7 +1158,13 @@ class _ExamServiceNotice extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(examServiceMessage(state)),
+          Text(
+            examServiceNoticeMessage(
+              state,
+              availableLabels: availableLabels,
+              partialRelease: partialRelease,
+            ),
+          ),
           if (state == ExamServiceState.error)
             TextButton(onPressed: onRetry, child: const Text('다시 조회')),
         ],
@@ -3218,12 +3252,31 @@ class _RoundSubmitRouter extends ConsumerWidget {
       loading:
           admissionState.isLoading || catalog.isLoading || mathState.isLoading,
     );
+    final availableIds = availableExamQuestionIds(
+      admission: admission,
+      standaloneMathQuestions: mathState.asData?.value == true
+          ? leaves.keys.toSet()
+          : {},
+      policyBlocked:
+          rewriteRun == null &&
+          isUniversityServicePreparing(exam['sourceUniversityId']),
+    );
+    final allQuestions = (exam['questions'] as List)
+        .cast<Map<String, dynamic>>();
+    final availableLabels = allQuestions
+        .where((q) => availableIds.contains(q['dbQuestionId']))
+        .map((q) => q['label'].toString())
+        .toList();
     if (status != ExamServiceState.available) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _ExamServiceNotice(
             state: status,
+            availableLabels: availableLabels,
+            partialRelease:
+                availableLabels.isNotEmpty &&
+                availableLabels.length < allQuestions.length,
             onRetry: () {
               ref.invalidate(examAvailabilityProvider(scope));
               ref.invalidate(releasedMathQuestionsProvider(owner));

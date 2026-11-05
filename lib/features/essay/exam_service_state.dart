@@ -38,7 +38,46 @@ ExamServiceState resolveExamServiceState({
 String examServiceMessage(ExamServiceState state) => switch (state) {
   ExamServiceState.available => '선택한 문항은 첨삭을 이용할 수 있어요.',
   ExamServiceState.preparing => '선택한 시험·문항의 평가자료 또는 첨삭 기능을 준비 중입니다.',
-  ExamServiceState.blocked => '현재 운영 공개 범위에 포함되지 않은 시험·문항입니다.',
+  ExamServiceState.blocked =>
+    '현재 이 시험·문항은 첨삭을 제공하지 않습니다. 문제 열람과 답안 작성은 첨삭 가능 여부와 별개입니다.',
   ExamServiceState.error => '첨삭 가능 여부를 확인하지 못했어요. 다시 조회해 주세요.',
   ExamServiceState.loading => '첨삭 가능 여부를 확인하고 있어요.',
 };
+
+/// Only server-confirmed individual questions may be advertised as available.
+Set<String> availableExamQuestionIds({
+  Map<String, dynamic>? admission,
+  Set<String> standaloneMathQuestions = const {},
+  bool policyBlocked = false,
+}) {
+  if (policyBlocked ||
+      [
+        'MIXED_QA_PENDING',
+        'RELEASE_SCOPE_CHANGED',
+      ].contains(admission?['code'])) {
+    return {};
+  }
+  return {
+    if (admission?['ready'] == true)
+      ...(admission?['questionIds'] as List? ?? []).whereType<String>(),
+    ...standaloneMathQuestions,
+  };
+}
+
+String examServiceNoticeMessage(
+  ExamServiceState state, {
+  List<String> availableLabels = const [],
+  bool partialRelease = false,
+}) {
+  if (partialRelease &&
+      availableLabels.isNotEmpty &&
+      state != ExamServiceState.error &&
+      state != ExamServiceState.loading) {
+    final available =
+        '현재 첨삭 가능: ${availableLabels.join(', ')}. 다른 문항은 아직 첨삭을 제공하지 않습니다.';
+    return state == ExamServiceState.available
+        ? available
+        : '$available 첨삭을 요청하려면 가능한 문항만 선택해 주세요. 다른 문항도 문제 열람과 답안 작성은 가능합니다.';
+  }
+  return examServiceMessage(state);
+}

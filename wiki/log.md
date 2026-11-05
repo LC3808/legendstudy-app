@@ -5769,3 +5769,5 @@ Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/
 - 소스 b9f6e1a: 1,553 PASS/7 SKIP, analyze0; signed iOS IPA/Archive·Android AAB/APK 생성·백업.
 - iPhone63→64 유지설치/실행. Android Play 서명58은 로컬 업로드키 APK64와 달라 설치 거절; 삭제0, Owner 내부 테스트 업로드 후 검수.
 - 최종 실기기·GA4 및 TASK20 공개 범위 검증 대기, RELEASE_READY=NO. [근거·해시](task21-final-release-readiness-20261105.md).
+
+- APP64 iOS Owner 주요기능 PASS, GA4 실수신(menu/screen/material·Registry ID) 지연 후 확인. 건국 복수문항/경희 제한 안내 후속 정정15검사PASS; 65로 분리, 64 보존.
