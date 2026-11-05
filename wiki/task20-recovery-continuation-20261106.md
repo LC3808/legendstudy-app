@@ -1,6 +1,6 @@
 # TASK20 잔여 P0 복구 진행 — 2026-11-06
 
-상태: 진행 중. 운영 DB/공개 설정 변경 없음. 기존 배포 `858e369c-2efa-44f6-8d5a-840eae49f0e8` / `23a03b0` 유지.
+상태: PARTIAL. 아래 승인된 Registry 등록 및 Catalog 비공개 보완 적용 완료. 평가 공개 확대 미실시. 기존 배포 `858e369c-2efa-44f6-8d5a-840eae49f0e8` / `23a03b0` 유지.
 
 WEB 개발 저장소: `/Users/woojinchang/.codex/worktrees/task20-web-availability/legendstudy-service-lab-20261022`. 아래 후보/도구/증거 경로는 이 저장소 기준이다.
 
@@ -72,3 +72,15 @@ Owner 승인으로 미등록 30시험·70상위문항을 비공개·검수 대�
 숙명여대 기존 2026 자연 일반·약학부 2시험의 Q1~Q3 채점표를 6개 문항별 검수 입력으로 분리했다. 페이지를 넘는 1~9등급 기준 보존, 다른 문항 혼입, 예시답안 경계 검사와 원본 채점표 시각 대조를 수행했다. 공식 9등급을 학습용 5단계로 환산하지 않는다. 원문 전문은 비공개 로컬 파일에만 보관한다. 기준 분리 6건은 전체 Package 검수 완료를 뜻하지 않는다.
 
 복구 도구 자동 검사 18개 PASS, 세 대학 등록 로컬 PostgreSQL 검사 PASS. 공개·평가 연결과 실제 운영 화면 검증은 아직 남아 있어 TASK20 전체 PASS로 보고하지 않는다.
+
+## 신규86 Package 전수 감사 및 Catalog 비공개 보완
+
+Owner 승인 완료 등록은 숙명30/70·한양19/38·중앙17/68·광운20/40, 총86시험216문항이다. 중복 등록 없이 실제ID를 전수 대조했다. 원본 SHA-256 전부 일치. 신규범위 Package/review/resource link/runtime policy/Math leaf 연결0, 검수완료0·신규공개가능0이다. 문항별 공식 문제·기준 제목과 페이지 후보를 기록했으나, 후보 위치는 검수 완료 근거가 아니다. 195문항은 후보 페이지의 PDF 전용 글리프 때문에 수식 이미지 대조가 필요하다.
+
+비활성·미게시 행도 기존 browse RPC가 시험/문항명을 반환하는 문제가 발견됐다. ‘비공개 등록’은 평가/PDF 차단만 충족했고 Catalog 이름 비공개는 미충족이었다. Owner의 별도86시험 Catalog 비공개 보완 승인 후 정확한86 ID를 일반 Catalog에서 제외했다. Registry 삭제/수정0, 기존42대학 Catalog·전체 Registry 행 해시·함수 ACL 보존 PASS. 최초 SQL 실행은 문장 종료 누락으로 실패·원래 해시 유지, 수정 후 실제 apply/rollback 파일 전체 로컬 검증 및 운영 재적용 PASS.
+
+Migration `task20_private_catalog_guard_20261106`, 함수해시 `6b8f759c777c6ff5e6e5b3868428017e`. 운영 WEB 재배포 없음. 실제 로그인 WEB에서 한양 자연20→1회차/인문13/상경8, 숙명8·중앙26·광운17 기존 목록 유지 확인. 한양 기존2027 인문 답안 작성 진입 확인. Provider/평가 요청/이용권 차감0. 216문항 전체 실평가 PASS 아님.
+
+WEB 저장소 `docs/evidence/task20-20261106/new86-audit-report.md`에 전체86시험 목록과 미완료 사유, `new86-package-source-audit.json`에216문항 원본 후보 매핑을 기록했다. SQL/원복/운영사후검증은 `supabase/candidates/task20_private_catalog_guard_20261106/` 참조. 관련Python21검사 및 Catalog 격리PostgreSQL PASS. 기존1460경로 보존 검증은 재사용한다.
+
+신규86은 Claude 배너에서 제외한다. 문항별 수식/채점경계/권리 검수→기존Package 계약 연결 후보→TEST 실행→정확한 공개 범위 승인 단계가 남았다. 자료가 없는 것으로 단정하거나 가상 평가 기준을 생성하지 않는다.
