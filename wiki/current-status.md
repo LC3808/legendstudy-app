@@ -3,7 +3,7 @@
 
 ## TASK20 운영 공개 복구 — PARTIAL
 
-[TASK20-C](task20c-package-connection-20261106.md): 6문항 TEST DRAFT. 실제 평가 승인 대기.
+[TASK20-C](task20c-live-test-20261106.md): 6평가 PASS·Q3 등급누락, TEST1개 승인 대기.
 [운영 WEB](task20-production-availability-20261105.md): 23a03b0/92회귀·1460경로 보존. [잔여 P0](task20-recovery-continuation-20261106.md): 승인86시험216문항 등록·후보매핑 완료. Package검수0/공개확대0. 승인 Catalog비공개 보완·기존42목록/Registry/ACL 보존 PASS. APP58 변경0.
 
 ## TASK19 후속 업데이트 — PARTIAL
