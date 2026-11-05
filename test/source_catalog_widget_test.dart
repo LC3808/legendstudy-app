@@ -1,3 +1,5 @@
+import 'package:legendstudy_app/features/essay/exam_submission.dart';
+
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -82,6 +84,13 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
+          examAvailabilityProvider.overrideWith(
+            (ref, scope) async => {
+              'ready': false,
+              'questionIds': <String>[],
+              'mathQuestions': <String, String>{},
+            },
+          ),
           publicServiceUniversitiesProvider.overrideWith(
             (ref, owner) async => {'fixture'},
           ),
@@ -190,6 +199,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {'fixture'},
             ),
@@ -284,6 +300,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',
@@ -301,9 +324,8 @@ void main() {
           ],
           child: MaterialApp(
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: TextScaler.linear(scale)),
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
               child: child!,
             ),
             home: SourceCatalogPage(catalog: Future.value(data)),
@@ -321,6 +343,11 @@ void main() {
             )
             .onPressed,
         isNotNull,
+      );
+      await tester.scrollUntilVisible(
+        find.text('답안 작성하기'),
+        150,
+        scrollable: find.byType(Scrollable).last,
       );
       expect(
         tester
@@ -346,7 +373,7 @@ void main() {
       await tester.tap(find.text('답안 확인'));
       await tester.pumpAndSettle();
       expect(
-        find.textContaining('현재 이 수리 문항은 첨삭을 이용할 수 없어요. 작성한 답안은 보존됩니다.'),
+        find.textContaining('작성한 답안은 보존됩니다.'),
         findsOneWidget,
       );
       expect(find.text('첨삭 요청 · 1 이용권'), findsNothing);
@@ -382,6 +409,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',
@@ -451,6 +485,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',
@@ -533,6 +574,13 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
+              examAvailabilityProvider.overrideWith(
+                (ref, scope) async => {
+                  'ready': false,
+                  'questionIds': <String>[],
+                  'mathQuestions': <String, String>{},
+                },
+              ),
               publicServiceUniversitiesProvider.overrideWith(
                 (ref, owner) async => {
                   'konkuk',
@@ -550,9 +598,8 @@ void main() {
             ],
             child: MaterialApp(
               builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(
-                  context,
-                ).copyWith(textScaler: TextScaler.linear(scale)),
+                data: MediaQuery.of(context)
+                    .copyWith(textScaler: TextScaler.linear(scale)),
                 child: child!,
               ),
               home: SourceCatalogPage(catalog: Future.value(data)),
@@ -634,6 +681,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',
@@ -651,9 +705,8 @@ void main() {
           ],
           child: MaterialApp(
             builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: TextScaler.linear(scale)),
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(scale)),
               child: child!,
             ),
             home: RepaintBoundary(
@@ -696,9 +749,8 @@ void main() {
                       as RenderRepaintBoundary)
                   .toImage();
           final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-          await File(
-            '/private/tmp/essay-owner-logos-$scale.png',
-          ).writeAsBytes(bytes!.buffer.asUint8List());
+          await File('/private/tmp/essay-owner-logos-$scale.png')
+              .writeAsBytes(bytes!.buffer.asUint8List());
           image.dispose();
         });
       }
@@ -760,6 +812,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',
@@ -857,6 +916,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            examAvailabilityProvider.overrideWith(
+              (ref, scope) async => {
+                'ready': false,
+                'questionIds': <String>[],
+                'mathQuestions': <String, String>{},
+              },
+            ),
             publicServiceUniversitiesProvider.overrideWith(
               (ref, owner) async => {
                 'konkuk',

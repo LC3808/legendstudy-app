@@ -1,3 +1,4 @@
+import 'exam_service_state.dart';
 import '../credits/essay_beta_credit.dart';
 import '../analytics/analytics_guard.dart';
 import '../analytics/analytics_providers.dart';
@@ -654,45 +655,55 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
           final ownedHistory =
               widget.rewriteRun != null &&
               exam?['historyRunId'] == widget.rewriteRun!['id'];
-          final writingBlocked =
+          var writingBlocked =
               !ownedHistory &&
               (isUniversityServicePreparing(uni) ||
                   (exam?['verification'] == 'REVIEW_REQUIRED' &&
                       !reviewDraftAvailable));
-          // 첨삭 공개 보류(준비 중) 판정은 대학·계열 이름이나 inputMode(browse 투영에
-          // 없어 누락됨)가 아니라, 서버의 서비스 가능 시험 집합(service-status)을
-          // 기준으로 한다. 들어갈 수 있는(대학 보류·REVIEW_REQUIRED 아님) 시험인데
-          // 서비스 가능 집합에 없으면 아직 첨삭이 공개되지 않은 것이므로, 문항 선택·
-          // 작성 전에 준비 중 안내를 표시한다. 집합을 아직 받지 못했으면(로딩/오류)
-          // 거짓양성을 피하려 표시하지 않는다. 안내는 비차단 정보이므로 공개된 TEXT
-          // 문항의 작성·제출을 막지 않는다.
-          final serviceExams = ref.watch(serviceExamIdsProvider(widget.owner));
-          final mathRows = ref.watch(mathCatalogProvider(widget.owner));
+          final scope = (
+            owner: widget.owner,
+            examId: '${exam?['dbExamId'] ?? ''}',
+          );
+          final admissionState = exam?['dbExamId'] is String
+              ? ref.watch(examAvailabilityProvider(scope))
+              : const AsyncValue<Map<String, dynamic>>.data({});
+          final mathRows = ref.watch(
+            releasedMathQuestionsProvider(widget.owner),
+          );
           final mathEnabled = ref.watch(
             mathEvaluationAvailableProvider(widget.owner),
           );
-          final standaloneMathReady =
-              exam != null &&
-              essayServiceArea(exam) == EssayServiceArea.science &&
-              mathEnabled.asData?.value == true &&
-              hasReleasedMathQuestion(
-                mathRows.asData?.value ?? [],
-                exam['dbExamId'] as String?,
-                questions
-                    .where(
-                      (q) => selection.isEmpty || selection.contains(q['key']),
-                    )
-                    .map((q) => q['dbQuestionId'])
-                    .whereType<String>()
-                    .toList(),
-              );
-          final feedbackPreparing =
-              exam != null &&
-              !writingBlocked &&
-              !standaloneMathReady &&
-              exam['dbExamId'] is String &&
-              serviceExams.hasValue &&
-              !serviceExams.value!.contains(exam['dbExamId']);
+          final standalone = <String>{
+            if (mathEnabled.asData?.value == true)
+              for (final row
+                  in mathRows.asData?.value ?? <Map<String, dynamic>>[])
+                if (row['essay_exam_id'] == exam?['dbExamId'] &&
+                    row['leaf_id'] is String &&
+                    row['essay_question_id'] is String)
+                  row['essay_question_id'] as String,
+          };
+          final serviceState = resolveExamServiceState(
+            questions: questions
+                .where((q) => selection.contains(q['key']))
+                .map((q) => q['dbQuestionId'])
+                .whereType<String>()
+                .toSet(),
+            admission: admissionState.asData?.value,
+            standaloneMathQuestions: standalone,
+            policyBlocked: !ownedHistory && isUniversityServicePreparing(uni),
+            failed:
+                admissionState.hasError ||
+                mathRows.hasError ||
+                mathEnabled.hasError,
+            loading:
+                admissionState.isLoading ||
+                mathRows.isLoading ||
+                mathEnabled.isLoading,
+          );
+          if (serviceState == ExamServiceState.available &&
+              !isUniversityServicePreparing(uni)) {
+            writingBlocked = false;
+          }
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
@@ -754,7 +765,16 @@ class _SourceSelectionState extends ConsumerState<_SourceSelection>
                 ),
               if (exam != null) ...[
                 Text(essayServiceAreaLabel(exam)),
-                if (feedbackPreparing) const _ServicePreparingNotice(),
+                _ExamServiceNotice(
+                  state: serviceState,
+                  onRetry: () {
+                    ref.invalidate(examAvailabilityProvider(scope));
+                    ref.invalidate(releasedMathQuestionsProvider(widget.owner));
+                    ref.invalidate(
+                      mathEvaluationAvailableProvider(widget.owner),
+                    );
+                  },
+                ),
                 if (isUniversityServicePreparing(uni) ||
                     exam['verification'] == 'REVIEW_REQUIRED')
                   for (final u in c.universities.where(
@@ -1091,49 +1111,28 @@ String essayWritingDraftKey(String question, Map<String, dynamic>? run) =>
     ? question
     : '$question:${run['_additional'] == true ? 'additional' : 'rewrite'}:${run['id']}';
 
-/// Calm red "service preparing" banner shown above the answer area when a
-/// photo/math (수리·자연논술) question's feedback is not yet published. Keeps the
-/// existing navy/grey system; red is reserved for this held-service notice.
-class _ServicePreparingNotice extends StatelessWidget {
-  const _ServicePreparingNotice();
+class _ExamServiceNotice extends StatelessWidget {
+  const _ExamServiceNotice({required this.state, required this.onRetry});
+  final ExamServiceState state;
+  final VoidCallback onRetry;
   @override
   Widget build(BuildContext context) => Semantics(
-    container: true,
-    label: '첨삭 서비스 준비 중 안내',
+    liveRegion: true,
     child: Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: AppTokens.space8),
+      margin: const EdgeInsets.symmetric(vertical: AppTokens.space8),
       padding: const EdgeInsets.all(AppTokens.space16),
       decoration: BoxDecoration(
-        color: const Color(0xFFFDECEE),
-        border: Border.all(color: AppTokens.danger),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(AppTokens.radiusSm),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: const [
-              Icon(Icons.schedule, size: 18, color: AppTokens.dangerInk),
-              SizedBox(width: AppTokens.space8),
-              Expanded(
-                child: Text(
-                  '첨삭 서비스 준비 중',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: AppTokens.dangerInk,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppTokens.space8),
-          Text(
-            '선택한 시험의 첨삭 공개 상태를 준비하고 있습니다. '
-            '첨삭 서비스는 준비가 완료되면 제공됩니다.',
-            style: AppTokens.body.copyWith(color: AppTokens.textSecondary),
-          ),
+          Text(examServiceMessage(state)),
+          if (state == ExamServiceState.error)
+            TextButton(onPressed: onRetry, child: const Text('다시 조회')),
         ],
       ),
     ),
@@ -3157,19 +3156,22 @@ class _RoundSubmitRouter extends ConsumerWidget {
   final ValueChanged<bool>? onSubmittedChanged;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final admission = exam['dbExamId'] is String
-        ? ref
-              .watch(
-                examAvailabilityProvider((
-                  owner: owner,
-                  examId: exam['dbExamId'] as String,
-                )),
-              )
-              .asData
-              ?.value
-        : null;
-    final catalog = ref.watch(mathCatalogProvider(owner));
+    final scope = (owner: owner, examId: '${exam['dbExamId'] ?? ''}');
+    final admissionState = exam['dbExamId'] is String
+        ? ref.watch(examAvailabilityProvider(scope))
+        : const AsyncValue<Map<String, dynamic>>.data({});
+    final admission = admissionState.asData?.value;
+    final mathState = ref.watch(mathEvaluationAvailableProvider(owner));
+    final catalog = ref.watch(releasedMathQuestionsProvider(owner));
     final leaves = <String, String>{
+      // Per-exam admission carries the same canonical Math bindings used by WEB.
+      // Do not infer absence from the catalog's bounded first page.
+      if (admission?['ready'] == true)
+        for (final entry in (admission?['mathQuestions'] as Map? ?? {}).entries)
+          if (entry.key is String &&
+              entry.value is String &&
+              (admission?['questionIds'] as List? ?? []).contains(entry.key))
+            entry.key as String: entry.value as String,
       for (final row in catalog.value ?? <Map<String, dynamic>>[])
         if (row['essay_exam_id'] == exam['dbExamId'] &&
             row['essay_question_id'] is String &&
@@ -3200,6 +3202,41 @@ class _RoundSubmitRouter extends ConsumerWidget {
           OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
       ],
     );
+    final status = resolveExamServiceState(
+      questions: selected
+          .map((q) => q['dbQuestionId'])
+          .whereType<String>()
+          .toSet(),
+      admission: admission,
+      standaloneMathQuestions: mathState.asData?.value == true
+          ? leaves.keys.toSet()
+          : {},
+      policyBlocked:
+          rewriteRun == null &&
+          isUniversityServicePreparing(exam['sourceUniversityId']),
+      failed: admissionState.hasError || catalog.hasError || mathState.hasError,
+      loading:
+          admissionState.isLoading || catalog.isLoading || mathState.isLoading,
+    );
+    if (status != ExamServiceState.available) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _ExamServiceNotice(
+            state: status,
+            onRetry: () {
+              ref.invalidate(examAvailabilityProvider(scope));
+              ref.invalidate(releasedMathQuestionsProvider(owner));
+              ref.invalidate(mathEvaluationAvailableProvider(owner));
+            },
+          ),
+          const Text('작성한 답안은 보존됩니다.'),
+          const FilledButton(onPressed: null, child: Text('첨삭 요청 불가')),
+          if (onEdit != null)
+            OutlinedButton(onPressed: onEdit, child: const Text('답안 수정')),
+        ],
+      );
+    }
     if (area == EssayServiceArea.science &&
         (selected.isEmpty ||
             !selected.every((q) => leaves.containsKey(q['dbQuestionId'])))) {

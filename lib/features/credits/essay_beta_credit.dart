@@ -69,19 +69,12 @@ class EssayBetaCredit {
 }
 
 String betaEndDate(DateTime end) {
-  final lastDay = end
-      .toUtc()
-      .add(const Duration(hours: 9))
-      .subtract(const Duration(milliseconds: 1));
-  if (lastDay.hour != 23 || lastDay.minute != 59) {
-    final exact = end.toUtc().add(const Duration(hours: 9));
-    return '${exact.year}년 ${exact.month}월 ${exact.day}일 ${exact.hour.toString().padLeft(2, '0')}:${exact.minute.toString().padLeft(2, '0')} KST';
-  }
-  return '${lastDay.year}년 ${lastDay.month}월 ${lastDay.day}일 23:59';
+  final exact = end.toUtc().add(const Duration(hours: 9));
+  return '${exact.year}년 ${exact.month}월 ${exact.day}일 ${exact.hour.toString().padLeft(2, '0')}:${exact.minute.toString().padLeft(2, '0')} KST';
 }
 
 String betaPolicyText(DateTime end, [int limit = 1]) =>
-    '논술 LAB에서는 인문·사회·상경·자연계열 논술 첨삭 서비스를 이용할 수 있습니다.\n\n'
+    '논술 LAB에서는 인문·사회·상경·자연·수리논술 중 실제 공개된 시험에서 첨삭 서비스를 이용할 수 있습니다.\n\n'
     '베타 기간에는 매일 무료 첨삭 $limit회를 제공합니다.\n\n'
     '무료 이용 횟수는 매일 00시(자정, 한국 시간)에 갱신되며, 사용하지 않은 횟수는 이월되지 않습니다.\n\n'
     '베타 서비스는 ${betaEndDate(end)}까지 운영됩니다.\n\n'

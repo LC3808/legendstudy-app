@@ -87,12 +87,57 @@ class MathGateway {
     final value = jsonDecode(response.body);
     if (value is! Map ||
         value['version'] != 'essay-web-v1' ||
-        value['types'] is! Map) {
+        value['types'] is! Map ||
+        value['checked'] == false) {
       throw const FormatException('INVALID_RESPONSE');
     }
     final catalog = value['catalog'];
     final canBrowse = catalog is Map && catalog['math'] == true;
     return value['types']['math'] == true || (browsing && canBrowse);
+  }
+
+  /// Server-filtered standalone bindings; raw catalog rows do not authorize use.
+  Future<List<Map<String, dynamic>>> releasedQuestions() async {
+    checkOwner();
+    final request =
+        http.Request('GET', Uri.parse('$mathOrigin/api/essay/availability'))
+          ..followRedirects = false
+          ..headers['Authorization'] =
+              'Bearer ${client.auth.currentSession!.accessToken}';
+    final response = await transport
+        .send(request)
+        .then(http.Response.fromStream)
+        .timeout(const Duration(seconds: 25));
+    checkOwner();
+    if (response.statusCode != 200) throw StateError('UNAVAILABLE');
+    final value = jsonDecode(response.body);
+    if (value is! Map ||
+        value['version'] != 'essay-web-v1' ||
+        value['checked'] != true ||
+        value['types'] is! Map) {
+      throw const FormatException('INVALID_RESPONSE');
+    }
+    if (value['types']['math'] != true) return [];
+    if (value['mathQuestions'] is! List) {
+      throw const FormatException('INVALID_BINDINGS');
+    }
+    final uuid = RegExp(
+      r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      caseSensitive: false,
+    );
+    return (value['mathQuestions'] as List).map((row) {
+      if (row is! Map ||
+          !['examId', 'questionId', 'leafId'].every(
+            (key) => row[key] is String && uuid.hasMatch(row[key] as String),
+          )) {
+        throw const FormatException('INVALID_BINDINGS');
+      }
+      return <String, dynamic>{
+        'essay_exam_id': row['examId'],
+        'essay_question_id': row['questionId'],
+        'leaf_id': row['leafId'],
+      };
+    }).toList();
   }
 
   Future<Set<String>> publicServiceUniversities() async =>
@@ -457,3 +502,9 @@ final publicServiceUniversitiesProvider = FutureProvider.autoDispose
               .toSet(),
       retry: (_, _) => null,
     );
+
+final releasedMathQuestionsProvider = FutureProvider.autoDispose
+    .family<List<Map<String, dynamic>>, String>((ref, owner) async {
+      final gateway = ref.watch(mathGatewayProvider(owner));
+      return gateway == null ? [] : gateway.releasedQuestions();
+    });

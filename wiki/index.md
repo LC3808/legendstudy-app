@@ -362,3 +362,5 @@ WEB 성장 대시보드·통합 History/결과: [정책·배포·검증범위](e
 2026-11-05 [후속 앱 최종 통합 감사·1.0.2(63)](app-update-final-audit-20261105.md): APP58 보존, 누락 PDF/문의/이용권 통합, 운영·Store 변경 없음.
 
 [APP63 출시 전 점검·TASK18 적용·TASK19 권한 차이·실기기](app63-prelaunch-readiness-20261105.md).
+
+[TASK21 자연계 상태·최종 빌드/기기 검수](task21-final-release-readiness-20261105.md).

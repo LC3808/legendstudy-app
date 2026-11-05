@@ -105,6 +105,17 @@ class ExamSubmissionGateway {
         status: response.statusCode,
         code: value['code'] is String ? value['code'] as String : null,
       );
+      if (payload['action'] == 'availability' &&
+          ((response.statusCode == 403 && value['code'] == 'ACCESS_DENIED') ||
+              (response.statusCode == 503 &&
+                  value['code'] == 'EVALUATION_UNAVAILABLE'))) {
+        return {
+          'ready': false,
+          'questionIds': <String>[],
+          'mathQuestions': <String, String>{},
+          'code': value['code'],
+        };
+      }
       if (response.statusCode < 200 || response.statusCode >= 300) {
         if (response.statusCode == 402 ||
             response.statusCode == 422 ||

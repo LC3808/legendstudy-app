@@ -5760,3 +5760,6 @@ Owner 승인 TASK18 기반 운영 적용/PENDING PASS, APP63 iPhone 설치·실�
 
 ### APP63 TASK19 운영 후속
 Owner 수정SQL 승인 후 scoped RPC 설치·2457행 등록/공개, 역할2종/11시험 및 실제HTTP2457행 원본대조 PASS. 기존16테이블 변경통계 동일. Owner 기존 조회 PASS, 자연계 모든 연결대학 준비중 배너 불일치 보고로 RELEASE_READY=NO 유지.9fb4ea3 제품코드 불변. [근거](app63-prelaunch-readiness-20261105.md).
+
+## TASK21 시작
+시험별 backend admission+서버필터 Math binding으로 APP 상태/제출일치 보완. 오류/미공개 구분, 부분공개·mixed hold 유지. 집중42PASS, 후속1.0.2(64) 준비. PDF18/846모두PENDING 읽기확인, 운영변경0. [상세](task21-final-release-readiness-20261105.md).

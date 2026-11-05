@@ -169,8 +169,8 @@ void main() {
       'ends_at': '2026-11-10T15:00:00Z',
     })!;
     expect(value.ended, true);
-    expect(betaEndDate(value.endsAt!), '2026년 11월 10일 23:59');
-    expect(betaPolicyText(value.endsAt!), contains('인문·사회·상경·자연계열'));
+    expect(betaEndDate(value.endsAt!), '2026년 11월 11일 00:00 KST');
+    expect(betaPolicyText(value.endsAt!), contains('인문·사회·상경·자연·수리논술'));
     expect(betaPolicyText(value.endsAt!), contains('가입 축하 무료 이용권 3개'));
   });
   test('invalid balance and expiry never displayed', () {
