@@ -3,7 +3,6 @@
 <!-- 삽입 위치: 게시글 도입부 아래 · 기출 PDF 안내 "위"              -->
 <!-- 치환: {{...}} 토큰만 교체. 구조/CSS/혜택문구는 통일 유지.       -->
 <!--   {{UNIV_NAME}}   예: 한양대학교                                -->
-<!--   {{TRACK}}       계열. 예: 인문계열 (공개 계열만)              -->
 <!--   {{HEADLINE}}    ≤2줄. 예: 한양대 논술, 온라인에서 무료로 첨삭받으세요. -->
 <!--   {{SUBCOPY}}     1줄 간결 설명. 예: 대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요. -->
 <!--   {{CTA_LABEL}}   예: 한양대 논술 첨삭받기 →                     -->
@@ -39,7 +38,7 @@
   </style>
   <div class="lseb-card">
     <div class="lseb-main">
-      <span class="lseb-univ">{{UNIV_NAME}} 논술 LAB · {{TRACK}}</span>
+      <span class="lseb-univ">{{UNIV_NAME}} 논술 LAB</span>
       <p class="lseb-head">{{HEADLINE}}</p>
       <p class="lseb-sub">{{SUBCOPY}}</p>
       <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
@@ -47,7 +46,7 @@
     <a class="lseb-cta"
        href="{{LAB_URL}}?utm_source=tistory&utm_medium=post_banner&utm_campaign={{CAMPAIGN_ID}}&utm_content={{UNIV_ID}}_{{POST_ID}}"
        rel="noopener"
-       data-lseb-univ="{{UNIV_ID}}" data-lseb-track="{{TRACK}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
+       data-lseb-univ="{{UNIV_ID}}" data-lseb-post="{{POST_ID}}" data-lseb-campaign="{{CAMPAIGN_ID}}">{{CTA_LABEL}}</a>
   </div>
   <script>
   (function(){
@@ -58,7 +57,6 @@
       try{
         var p = {send_to:"G-295EQHYTCK",
           university_id: cta.getAttribute('data-lseb-univ'),
-          track: cta.getAttribute('data-lseb-track'),
           post_id: cta.getAttribute('data-lseb-post'),
           placement: "post_top_above_pdf",
           campaign_id: cta.getAttribute('data-lseb-campaign')};
