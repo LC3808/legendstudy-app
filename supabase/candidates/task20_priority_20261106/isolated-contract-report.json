@@ -1,0 +1,181 @@
+{
+  "scope": "isolated PostgreSQL17 canonical contract; NOT Production E2E",
+  "checks": [
+    "registration_replay_no_duplicates",
+    "existing_humanities_answers_results_ledger_preserved",
+    "concurrent_duplicate_question_binding_rejected",
+    "all_private_table_acls_preserved",
+    "exact_activation_sql",
+    "seven_question_catalog",
+    "legacy_q1_binding_preserved",
+    "exact_rollback_sql",
+    "rollback_preserves_results_and_ledger",
+    "rollback_keeps_legacy_q1"
+  ],
+  "questions": [
+    {
+      "question_id": "7c112225-51cc-59d8-a985-6c459a1e0a0a",
+      "leaf_id": "11b0d01b-c247-54a5-88b5-368440f68c6f",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "40290efd-36af-55a9-beb7-8c90bbb04ee4",
+      "leaf_id": "6b655a53-7b90-5f83-aed4-58a7d3cbeaae",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "a7d06546-9d61-5317-afff-e656c25964f7",
+      "leaf_id": "746b66ff-064c-5498-9cf7-7c44067909c1",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "ed63c506-ee9b-5ce7-967f-a1d53b9feac6",
+      "leaf_id": "9caa0c67-a6d8-59c8-b5d6-68a24d7f3e5a",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "4df1296d-abe4-5499-af35-20ba573fd6ae",
+      "leaf_id": "873c9757-2fcb-515f-b611-c78545d7a838",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "101a7dcc-1c05-5c1d-b926-3f5729158f54",
+      "leaf_id": "9552766f-0785-54f6-86d4-c8c70c5da1b8",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    },
+    {
+      "question_id": "cea40cf3-dc05-507a-a6eb-fd5e1e1847bb",
+      "leaf_id": "3bab07d3-c047-53c2-89ad-9fa20ec7b3f3",
+      "status": "PASS",
+      "checks": [
+        "draft_denied",
+        "registry_link",
+        "submission_replay",
+        "evaluation_replay",
+        "criteria_finalize",
+        "result_read",
+        "foreign_read_denied",
+        "free_rewrite_zero_credit",
+        "rewrite_result_read"
+      ]
+    }
+  ],
+  "provider_result_replays": [
+    {
+      "case": "konkuk-q2.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "konkuk-q2.private.json.wrong.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "konkuk-q3.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "konkuk-q3.private.json.wrong.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "konkuk-q4.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "konkuk-q4.private.json.wrong.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q1.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q1.private.json.wrong.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q2.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q2.private.json.wrong.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q3.private.json.complete.result.json",
+      "status": "PASS"
+    },
+    {
+      "case": "kyunghee-q3.private.json.wrong.result.json",
+      "status": "PASS"
+    }
+  ],
+  "production_writes": 0,
+  "provider_calls": 0
+}

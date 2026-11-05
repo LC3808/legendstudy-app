@@ -32,6 +32,8 @@ not an inferred promotion of a whole roadmap. Current is not historical evidence
 
 ## Task Routing Map
 
+TASK20 건국·경희 자연 전체 문항 복구: [공식자료·실제12회·격리 적용/원복·운영 승인안](task20-priority-natural-connection-20261106.md).
+
 TASK19 / LAB 베타 안내·건국 자연 상태·평가원 등급컷 / 자료·학습 공통 조회: [구현·데이터·검증·운영 승인 경계](task19-lab-ux-grade-cutoff-20261105.md).
 
 평가 정확도/최초 보류/최종 산술 검산/실제 TEST: [11/4 품질 검증·새 오판·수정·미완료](task16-evaluation-quality-closeout-20261104.md).

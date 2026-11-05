@@ -1,0 +1,6 @@
+{
+  "packages/register.private.sql": "f3520859d0ea95f011422b7ed74f17e4f1e4b1a567b809251c3c63775b5c84a4",
+  "activate.private.sql": "a169223fe429e08ddddd6a7f09efa2d48c393e76c47873ec671d3f95bc66ec52",
+  "rollback-release.sql": "3ef342f4ea2e977284b691592a92a63fab6f09f8fd17dc25f0c87cc7272e2f5b",
+  "normalized.json": "6961467b36ae675a4be053ffeaf55b8a7c64e53cf93fdd5a315bd696c653f901"
+}

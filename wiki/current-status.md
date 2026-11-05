@@ -1,7 +1,6 @@
-<!-- FINAL CLOSEOUT: actual runtime correction, not whole TASK16 completion -->
 # Current Status
 
-[TASK21](task21-final-release-readiness-20261105.md): 65검수·연결미완료.
+[TASK20](task20-priority-natural-connection-20261106.md): 6문항 TEST12회 PASS·운영 승인 대기. [APP65](task21-final-release-readiness-20261105.md) 보존.
 
 ## TASK19 후속 업데이트 — PARTIAL
 [TASK19-C TEST60 실기기](task19c-device-verification-20261105.md): TEST60 iOS 설치·Android APK PASS. iPhone12ProMax26.6.1 베타 문구 Owner PASS. TEST11시험2,457행 실제 HTTP 대조 PASS·보호5테이블 동일. 2시험 표시·TEST61 비교 UI Owner PASS, 건국 TEST scope PARTIAL, Android 없음. 운영SQL/Store0. [UI 정정](task19-owner-ui-followup-20261105.md), [A/B 데이터·기존 회귀](task19-lab-ux-grade-cutoff-20261105.md), [운영 승인 후보](../supabase/candidates/task19_grade_cutoff/README.md). 출처 추정값 미확보; 승인된 과거 시험 참고범위120행 별도 표시 구현·9검사PASS/TEST62 참고표·자료/학습 대표 비교 PASS. APP58 보존. PDF TEST 복구·2026·9월 목록/열기/복귀 Owner PASS.
@@ -11,7 +10,7 @@
 
 ## APP·수리·상경 기존 서비스 통합 — 2026-11-04
 
-현재 작업 기준은 [Owner/ChatGPT 종합 보고서](app-math-commerce-integration-report-20261103.md)다. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험으로 제한하지 않고 전체363시험을 조사했다. [확대 감사](app58-expanded-registry-audit-20261104.md), [운영 연결 실행](app58-expanded-production-connection-20261104.md)이 최신 근거다.
+[통합 보고서](app-math-commerce-integration-report-20261103.md) 기준. Owner는 보고서 작성·기존 서비스 통합·수리/상경 차단 해제·배포용 빌드 진행을 지시했다. 과거 HOLD는 당시 이력으로 보존하며, 최신 승인과 실제 배포/적용 완료를 구분한다. 스토어 업로드·제출·게시는 Owner 직접 실행으로 역할이 정정됐다. [APP58 산출물·절차 인계](app58-store-handoff-20261104.md), Codex 업로드/제출/게시0. 기존16시험으로 제한하지 않고 전체363시험을 조사했다. [확대 감사](app58-expanded-registry-audit-20261104.md), [운영 연결 실행](app58-expanded-production-connection-20261104.md)이 최신 근거다.
 
 - APP `codex/app-review-candidate-b-20261103`: 후보 A 인증·온보딩·MY·선택형 닉네임 + B 수리 UX 통합. 자연계 일괄 차단 대신 정확한 공개 Catalog와 서버 실행 상태를 확인한다. 혼합형 사진은 기존 Math 인식/확인 후 Essay 시험 회차 하나에 제출한다. 입력이 바뀌면 확인본 재사용 차단.
 - WEB `codex/math-commerce-release-20261103`: 실제 운영 `c9bda913`을 기준으로 Math 후속23개 커밋을 통합. 기존 운영 관리/Analytics/결제 변경 보존. TEST 브랜치를 운영에 그대로 덮어쓰지 않는다.

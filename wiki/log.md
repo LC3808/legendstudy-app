@@ -1,5 +1,9 @@
 ## 2026-11-04 — 인하 Q1 공식 해설 한정 운영 적용
 
+## 2026-11-06 — TASK20 건국·경희 우선6문항
+
+[공식자료 복구·검증·승인안](task20-priority-natural-connection-20261106.md): DRAFT96행 후보/기존Q1 보존. Owner 승인 OpenAI12회와 실제결과 격리저장12회 PASS,7문항 무료재첨삭·중복·권한·원복 PASS. APP31/WEB74/후보7 PASS. 운영DB·WEB·APP65·스토어 변경0. 다른TASK20-C 중복 작업 확인, 적용 전 후보 단일화 필요.
+
 ## 2026-11-05 — TASK19-B 등급컷 초안·Native 공통 조회
 [상세·한계](task19-lab-ux-grade-cutoff-20261105.md): 11기존시험/273과목선택 조합, 2,212점수행+245미확인NULL. 원점수2,092/표준대체120. 자료·학습 동일 RPC/UI, 공개값 불변revision, 기존 grading 보존. 전체1,500 PASS7SKIP, 로컬DB/Widget 검증. 운영 적용·실기기·GA4 수신 미검증. A/B 독립 커밋, APP58·스토어·다른PDF브랜치 보존.
 

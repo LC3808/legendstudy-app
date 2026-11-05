@@ -1,0 +1,225 @@
+{
+  "approval": "Owner explicitly approved 12 isolated external transfers/calls",
+  "scope": "synthetic answers; existing Math provider adapter; no DB",
+  "maxCalls": 12,
+  "productionWrites": 0,
+  "finished": true,
+  "cases": [
+    {
+      "file": "konkuk-q2.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4594,
+        "output_tokens": 1729,
+        "total_tokens": 6323
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "konkuk-q2.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4190,
+        "output_tokens": 2724,
+        "total_tokens": 6914
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "konkuk-q3.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4681,
+        "output_tokens": 2274,
+        "total_tokens": 6955
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "konkuk-q3.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4199,
+        "output_tokens": 2338,
+        "total_tokens": 6537
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "PARTIAL_ATTEMPT"
+      }
+    },
+    {
+      "file": "konkuk-q4.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4669,
+        "output_tokens": 2292,
+        "total_tokens": 6961
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "konkuk-q4.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4220,
+        "output_tokens": 2193,
+        "total_tokens": 6413
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "kyunghee-q1.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 5277,
+        "output_tokens": 2578,
+        "total_tokens": 7855
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "kyunghee-q1.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4844,
+        "output_tokens": 2644,
+        "total_tokens": 7488
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "PARTIAL_ATTEMPT"
+      }
+    },
+    {
+      "file": "kyunghee-q2.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 5192,
+        "output_tokens": 2094,
+        "total_tokens": 7286
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "kyunghee-q2.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4717,
+        "output_tokens": 2472,
+        "total_tokens": 7189
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "PARTIAL_ATTEMPT"
+      }
+    },
+    {
+      "file": "kyunghee-q3.private.json",
+      "mode": "complete",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 5637,
+        "output_tokens": 2705,
+        "total_tokens": 8342
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "ANSWER_CORRECT_AND_REASONING_SUFFICIENT",
+        "answer": "CORRECT",
+        "coverage": "ATTEMPTED"
+      }
+    },
+    {
+      "file": "kyunghee-q3.private.json",
+      "mode": "wrong",
+      "state": "completed",
+      "contract": true,
+      "semanticExpected": true,
+      "usage": {
+        "input_tokens": 4986,
+        "output_tokens": 3202,
+        "total_tokens": 8188
+      },
+      "overall": {
+        "status": "COMPLETE",
+        "diagnostic": "FUNDAMENTAL_APPROACH_ERROR",
+        "answer": "INCORRECT",
+        "coverage": "PARTIAL_ATTEMPT"
+      }
+    }
+  ]
+}
