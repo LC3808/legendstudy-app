@@ -192,7 +192,11 @@
     "pdf_open": "Konkuk Q4 page4/4 and Kyunghee Q3 page2/2 verified in browser",
     "evaluation_submitted": false
   },
-  "app65_physical_entry": "OWNER_CONFIRMATION_PENDING",
+  "app65_physical_entry": {
+    "status": "PASS",
+    "evidence": "Owner report 2026-11-06: Konkuk Q1-Q4 and Kyunghee Q1-Q3 all enter normally; unavailable notice gone",
+    "evaluation_executed": false
+  },
   "concurrent_task20c": "Distinct TEST-only IDs; absent in production preflight; not applied",
   "financial_actions_executed": 0,
   "app65_changed": false,
