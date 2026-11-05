@@ -5735,3 +5735,6 @@ Owner 실제 화면에서 인하 재첨삭 본문·History 표시 확인(원래 
 
 ### 2026-11-05 — TASK19 참고 범위 표시
 Owner 승인에 따라 이전 동일시기·선택과목·등급의 최소~최대 원점수120행 생성·별도 표 연결. 대상시험 추정값/채점과 분리, 기준·출처 표시. Flutter9검사·analyze PASS. 새 빌드/실기기 전, 운영 변경0. [상세](task19-owner-ui-followup-20261105.md).
+
+### 2026-11-05 — TEST62 iPhone 설치
+6ea7055 소스 Xcode Release·서명·TEST ID/버전62 검증 PASS. iPhone12ProMax LS Math TEST62 설치/실행, 본앱58 보존. 참고 원점수 Owner 검수 대기, 운영DB/Store0. [영수증](task19c-device-verification-20261105.md#test62-참고-원점수-검수-빌드).

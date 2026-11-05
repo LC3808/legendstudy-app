@@ -74,3 +74,10 @@ Owner는 과목군 비교·인라인 조회에 “잘 확인했어. 훨씬 좋�
 Owner는 추정 원점수 계산·기입을 요청했다. 기존 전사본 검증 결과 미확보 대상은 2026학년도9월/수능, 2027학년도6월 국어·수학 각40행, 총120행이다. 저장 자료에는 표준점수 경계만 있으며 공통·선택 점수 분포와 조정 계수가 없다. [평가원 Q&A의 공식 학교 배포본](https://bbh-h.goebc.kr/upload/bbh-h/na/bbs_4418/2025/04/B6DF413B-63A8-D885-7FA7-E3F265825A35.pdf)에 따르면 공통과목을 활용한 선택과목 조정 이후 표준점수를 산출한다. 현재 표준점수 경계만으로 원점수를 유일하게 역산할 수 없으므로 계산값을 만들어 저장하지 않았다.
 
 EBSi/메가스터디 원출처 검색은 수행했으나 대상120행의 검수 가능한 수치표는 확보하지 못했다. **추정 원점수 입력은 미완료**. 출처별 예상 원점수 또는 재현 가능한 분포/환산 자료 확보 후 별도 추정 필드·근거·revision을 연결해야 한다. 기존 원점수/표준점수/학생 성적은 변경하지 않는다. 데이터 검증기 2,457행/11시험 PASS, 이번 코드·DB·빌드 변경0.
+
+### TEST62 참고 원점수 검수 빌드
+소스 `6ea70552cc272bab6bc0177e6b77a2c40a4f7b39`의 iOS Xcode Release/codesign deep·strict PASS. 별도 `com.legendstudy.app.task16f` / LS Math TEST **1.0.1(62)**를 iPhone12ProMax에 설치·실행했다. 운영 본앱 `com.legendstudy.app`은 설치 전후1.0.1(58) 유지. TEST61 산출물 보존, 운영 앱/DB/Store 변경0.
+
+산출물·로그·receipt: `/Users/woojinchang/development/legendstudy-private-backups/task19c-20261105/test62/`. AOT SHA256 `0cc48db5ee38ece99a11dee060f4c43f7b9f5bb9d0127b6bbc47bf8694491b17`. 기존 참고값9검사/analyze PASS 재사용. Android 재빌드 없음(이번 요청 iPhone).
+
+Owner에게2026학년도9월 국어 화작91~98/언매87~96, 기준2024·2025학년도9월 및 수학·출처 확인을 요청했다. **참고표 실기기 UI 판정은 응답 대기**이며 이전TEST61 PASS로 대체하지 않는다.
