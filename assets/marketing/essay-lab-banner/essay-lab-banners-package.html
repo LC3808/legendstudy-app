@@ -1,0 +1,983 @@
+<!-- =============================================================
+     논술 LAB 대학별 홍보 배너 패키지 (15개 공개 대학 · 2026-11-05)
+     사용법: 해당 대학 게시글 HTML 편집에서 그 대학 블록(START~END)만
+     복사·붙여넣기. 위치=도입부 아래·기출 PDF 안내 위. 게시글당 1개.
+     공개 근거: 로그인 LAB에서 "첨삭 시작하기" 노출(Owner 확인 2026-11-05).
+     딥링크 미지원 시 href를 https://lab.legendstudy.com/essay-lab/ 로 교체.
+     ============================================================= -->
+
+<!-- ========== 한양대학교 (hanyang) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="한양대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">한양대학교 논술 LAB</span>
+      <p class="lseb-head">한양대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/hanyang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hanyang_hanyang"
+       rel="noopener"
+       data-lseb-univ="hanyang" data-lseb-post="hanyang" data-lseb-campaign="essaylab_2026">한양대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 고려대학교 (korea) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="고려대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">고려대학교 논술 LAB</span>
+      <p class="lseb-head">고려대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/korea/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=korea_korea"
+       rel="noopener"
+       data-lseb-univ="korea" data-lseb-post="korea" data-lseb-campaign="essaylab_2026">고려대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 성균관대학교 (sungkyunkwan) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="성균관대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">성균관대학교 논술 LAB</span>
+      <p class="lseb-head">성균관대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/sungkyunkwan/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sungkyunkwan_sungkyunkwan"
+       rel="noopener"
+       data-lseb-univ="sungkyunkwan" data-lseb-post="sungkyunkwan" data-lseb-campaign="essaylab_2026">성균관대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 서강대학교 (sogang) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="서강대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">서강대학교 논술 LAB</span>
+      <p class="lseb-head">서강대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/sogang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sogang_sogang"
+       rel="noopener"
+       data-lseb-univ="sogang" data-lseb-post="sogang" data-lseb-campaign="essaylab_2026">서강대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 중앙대학교 (chungang) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="중앙대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">중앙대학교 논술 LAB</span>
+      <p class="lseb-head">중앙대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/chungang/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=chungang_chungang"
+       rel="noopener"
+       data-lseb-univ="chungang" data-lseb-post="chungang" data-lseb-campaign="essaylab_2026">중앙대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 경희대학교 (kyunghee) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="경희대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">경희대학교 논술 LAB</span>
+      <p class="lseb-head">경희대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/kyunghee/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kyunghee_kyunghee"
+       rel="noopener"
+       data-lseb-univ="kyunghee" data-lseb-post="kyunghee" data-lseb-campaign="essaylab_2026">경희대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 건국대학교 (konkuk) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="건국대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">건국대학교 논술 LAB</span>
+      <p class="lseb-head">건국대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/konkuk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=konkuk_konkuk"
+       rel="noopener"
+       data-lseb-univ="konkuk" data-lseb-post="konkuk" data-lseb-campaign="essaylab_2026">건국대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 인하대학교 (inha) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="인하대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">인하대학교 논술 LAB</span>
+      <p class="lseb-head">인하대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/inha/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=inha_inha"
+       rel="noopener"
+       data-lseb-univ="inha" data-lseb-post="inha" data-lseb-campaign="essaylab_2026">인하대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 동국대학교 (dongguk) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="동국대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">동국대학교 논술 LAB</span>
+      <p class="lseb-head">동국대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/dongguk/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=dongguk_dongguk"
+       rel="noopener"
+       data-lseb-univ="dongguk" data-lseb-post="dongguk" data-lseb-campaign="essaylab_2026">동국대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 숭실대학교 (soongsil) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="숭실대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">숭실대학교 논술 LAB</span>
+      <p class="lseb-head">숭실대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/soongsil/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=soongsil_soongsil"
+       rel="noopener"
+       data-lseb-univ="soongsil" data-lseb-post="soongsil" data-lseb-campaign="essaylab_2026">숭실대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 광운대학교 (kwangwoon) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="광운대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">광운대학교 논술 LAB</span>
+      <p class="lseb-head">광운대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/kwangwoon/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kwangwoon_kwangwoon"
+       rel="noopener"
+       data-lseb-univ="kwangwoon" data-lseb-post="kwangwoon" data-lseb-campaign="essaylab_2026">광운대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 한국외국어대학교 (hufs) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="한국외국어대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">한국외국어대학교 논술 LAB</span>
+      <p class="lseb-head">한국외대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/hufs/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=hufs_hufs"
+       rel="noopener"
+       data-lseb-univ="hufs" data-lseb-post="hufs" data-lseb-campaign="essaylab_2026">한국외대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 숙명여자대학교 (sookmyung) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="숙명여자대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">숙명여자대학교 논술 LAB</span>
+      <p class="lseb-head">숙명여대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/sookmyung/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=sookmyung_sookmyung"
+       rel="noopener"
+       data-lseb-univ="sookmyung" data-lseb-post="sookmyung" data-lseb-campaign="essaylab_2026">숙명여대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 서울여자대학교 (swu) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="서울여자대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">서울여자대학교 논술 LAB</span>
+      <p class="lseb-head">서울여대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/swu/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=swu_swu"
+       rel="noopener"
+       data-lseb-univ="swu" data-lseb-post="swu" data-lseb-campaign="essaylab_2026">서울여대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+
+<!-- ========== 한국항공대학교 (kau) ========== -->
+<!-- LS-ESSAY-BANNER:START -->
+<section class="lseb-wrap" role="complementary" aria-label="한국항공대학교 논술 LAB 안내">
+  <style>
+  .lseb-wrap{all:initial;display:block;margin:18px 0;font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-text-size-adjust:100%}
+  .lseb-wrap *{box-sizing:border-box;margin:0;padding:0}
+  .lseb-card{position:relative;display:flex;align-items:center;gap:18px;background:#FFFFFF;border:1px solid #E7EBF0;border-left:4px solid #FFAC14;border-radius:14px;box-shadow:0 6px 20px rgba(31,58,95,.08);padding:16px 18px;max-width:700px}
+  .lseb-main{flex:1 1 auto;min-width:0}
+  .lseb-univ{display:inline-block;font-size:12px;font-weight:800;color:#1F3A5F;background:#F3F6FA;border-radius:999px;padding:3px 10px;letter-spacing:-.01em;margin-bottom:9px}
+  .lseb-head{font-size:16px;font-weight:800;color:#1F3A5F;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .lseb-sub{margin-top:6px;font-size:13px;font-weight:500;color:#5B6676;line-height:1.5;word-break:keep-all}
+  .lseb-benefit{margin-top:10px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:#C8780A;background:#FFF6E4;border:1px solid #FCE3B3;border-radius:8px;padding:6px 10px;line-height:1.3;word-break:keep-all}
+  .lseb-benefit .dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#FFAC14}
+  .lseb-cta{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#FFAC14;color:#1F3A5F;font-size:14px;font-weight:800;line-height:1.2;letter-spacing:-.01em;border-radius:10px;padding:13px 18px;white-space:nowrap;transition:filter .15s}
+  .lseb-cta:link,.lseb-cta:visited{color:#1F3A5F;text-decoration:none}
+  .lseb-cta:hover{filter:brightness(.96)}
+  .lseb-cta:focus-visible{outline:2px solid #1F3A5F;outline-offset:2px}
+  @media (max-width:560px){
+    .lseb-card{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+    .lseb-benefit{width:100%;justify-content:center}
+    .lseb-cta{width:100%;padding:13px 16px;font-size:15px}
+    .lseb-head{font-size:15px}
+  }
+  </style>
+  <div class="lseb-card">
+    <div class="lseb-main">
+      <span class="lseb-univ">한국항공대학교 논술 LAB</span>
+      <p class="lseb-head">한국항공대 논술, 온라인에서 무료로 첨삭받으세요.</p>
+      <p class="lseb-sub">대학별 평가 기준으로 내 답안의 부족한 부분을 확인하세요.</p>
+      <span class="lseb-benefit"><span class="dot"></span>신규가입 무료 첨삭 3회 · 웹·앱 모두 이용</span>
+    </div>
+    <a class="lseb-cta"
+       href="https://lab.legendstudy.com/essay-lab/universities/kau/?utm_source=tistory&utm_medium=post_banner&utm_campaign=essaylab_2026&utm_content=kau_kau"
+       rel="noopener"
+       data-lseb-univ="kau" data-lseb-post="kau" data-lseb-campaign="essaylab_2026">한국항공대 논술 첨삭받기 →</a>
+  </div>
+  <script>
+  (function(){
+    var root = document.currentScript && document.currentScript.closest('.lseb-wrap');
+    if(!root || root.__lsebInit) return; root.__lsebInit = true;
+    var cta = root.querySelector('.lseb-cta');
+    function track(name, extra){
+      try{
+        var p = {send_to:"G-295EQHYTCK",
+          university_id: cta.getAttribute('data-lseb-univ'),
+          post_id: cta.getAttribute('data-lseb-post'),
+          placement: "post_top_above_pdf",
+          campaign_id: cta.getAttribute('data-lseb-campaign')};
+        if(extra) for(var k in extra) p[k]=extra[k];
+        if(typeof window.gtag==="function"){ window.gtag("event", name, p); }
+        else { window.dataLayer=window.dataLayer||[]; (function(){window.dataLayer.push(arguments);})("event", name, p); }
+      }catch(e){}
+    }
+    var fired=false;
+    function impress(){ if(fired) return; fired=true; track("lab_banner_impression"); }
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ impress(); io.disconnect(); }});},{threshold:.5});
+      io.observe(root);
+    } else { impress(); }
+    if(cta) cta.addEventListener("click", function(){ track("lab_banner_click"); });
+  })();
+  </script>
+</section>
+<!-- LS-ESSAY-BANNER:END -->
+

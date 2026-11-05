@@ -42,3 +42,27 @@
 - 홍보 대상 게시글 URL↔대학/학년도/계열 매핑, 대학별 LAB URL/딥링크 지원.
 - 베타(11-10) 이후 "무료" 문구 정책, 대학 로고 사용 가부.
 - 위 확정 후: Claude가 템플릿을 대학별로 치환해 최종 코드 패키지 + PC/모바일 검증 + GA4 실수신 검증.
+
+## 6. 확정 공개 대학 15 (2026-11-05, Owner 로그인 LAB 화면 근거 — 전 대학 "첨삭 시작하기")
+정렬 "서비스 가능 대학 우선" 상위 = 첨삭 시작하기 노출 15개. 운영연결 "15개 대학" 수치와 일치. **테이블 `is_active`는 비신뢰**(swu·kau는 false이나 로그인 화면 첨삭 가능) → 라이브 로그인 상태가 진실원천.
+산출물: [`essay-lab-banners-package.html`](../assets/marketing/essay-lab-banner/essay-lab-banners-package.html) — 대학별 블록 15개(복사·붙여넣기용). LAB URL = `…/essay-lab/universities/{slug}/`.
+
+| 대학 | slug | 대학 LAB URL | 상태 |
+|---|---|---|---|
+| 한양대학교 | hanyang | /essay-lab/universities/hanyang/ | 첨삭 시작하기 |
+| 고려대학교 | korea | …/korea/ | 첨삭 시작하기 |
+| 성균관대학교 | sungkyunkwan | …/sungkyunkwan/ | 첨삭 시작하기 |
+| 서강대학교 | sogang | …/sogang/ | 첨삭 시작하기 |
+| 중앙대학교 | chungang | …/chungang/ | 첨삭 시작하기 |
+| 경희대학교 | kyunghee | …/kyunghee/ | 첨삭 시작하기 |
+| 건국대학교 | konkuk | …/konkuk/ | 첨삭 시작하기 |
+| 인하대학교 | inha | …/inha/ | 첨삭 시작하기 |
+| 동국대학교 | dongguk | …/dongguk/ | 첨삭 시작하기 |
+| 숭실대학교 | soongsil | …/soongsil/ | 첨삭 시작하기 |
+| 광운대학교 | kwangwoon | …/kwangwoon/ | 첨삭 시작하기 |
+| 한국외국어대학교 | hufs | …/hufs/ | 첨삭 시작하기 |
+| 숙명여자대학교 | sookmyung | …/sookmyung/ | 첨삭 시작하기 |
+| 서울여자대학교 | swu | …/swu/ | 첨삭 시작하기(table inactive) |
+| 한국항공대학교 | kau | …/kau/ | 첨삭 시작하기(table inactive) |
+
+> 미확인: LAB 목록 3~4페이지(미열람)에 "첨삭 시작하기"가 더 있는지 → 있으면 Owner 확인 후 동일 방식 추가. 딥링크(대학·시험 선택) 지원 여부 → 미지원 시 base `/essay-lab/`로. GA4 `lab_banner_impression/click` 실수신은 운영 적용 후 Realtime 검증 필요.
