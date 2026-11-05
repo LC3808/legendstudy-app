@@ -2,7 +2,7 @@
 # Current Status
 
 ## TASK20 운영 공개 복구 — PARTIAL
-[조사·수정·공개 후보·차단 요소](task20-production-availability-20261105.md): Registry363/패키지213/allowlist212/베타scope202/Math72 재확인. WEB 계열 일괄 hold 제거·부분 공개·오류 구분·베타 문구 수정, 92회귀/빌드 PASS. 건국Q1·경희 제한 안내·한양 인문/상경·인하 자연 운영 진입 확인. DB·공개설정·APP58 변경0. 배너 범위 별도 인계.
+[운영 WEB 복구](task20-production-availability-20261105.md): 23a03b0 배포·92회귀 PASS, 기존1460경로 보존. [잔여 P0](task20-recovery-continuation-20261106.md): 13대학258시험·원본979개 대조. 숙명30시험70문항 검수용 등록/원복 로컬 PASS·운영 승인 대기. Package 정밀 분리 진행. DB·APP58 변경0.
 
 ## TASK19 후속 업데이트 — PARTIAL
 [TASK19-C](task19c-device-verification-20261105.md): TEST62 참고 원점수·자료/학습 일치·PDF 목록/열기/복귀 Owner PASS. 운영 SQL/Store0, APP58 보존. [정정](task19-owner-ui-followup-20261105.md), [기존검증](task19-lab-ux-grade-cutoff-20261105.md), [운영승인후보](../supabase/candidates/task19_grade_cutoff/README.md). Android 실기기 미검증.
